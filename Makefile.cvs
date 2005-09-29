@@ -1,0 +1,20 @@
+## ##################################################
+## Makefile.cvs
+## ##################################################
+
+.PHONY: default init configure reconf
+
+PREFIX = /usr
+
+default: configure
+
+configure: init
+	./configure --prefix=$(PREFIX)
+
+init:
+	rm -rf autom4te.cache
+	autoreconf --force --install --symlink --verbose
+
+reconf: init
+	./config.status --recheck
+	./config.status
