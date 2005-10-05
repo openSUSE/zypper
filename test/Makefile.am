@@ -30,3 +30,6 @@ $(top_srcdir)/zypp/lib@PACKAGE@.la:     always
 	$(MAKE) -C $(top_srcdir)/zypp
 
 ## ##################################################
+
+misc: genclass always
+	chmod 750 genclass

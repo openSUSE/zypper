@@ -4,12 +4,21 @@
 
 .PHONY: default init configure reconf
 
+# Try to detect if this is a lib or lib64 system
+LIB = $(shell gcc -v 2>&1 				\
+	| awk ' BEGIN{ lib="lib" }			\
+		match( $$0, "--libdir=/usr/([^ ]*)" ) {	\
+			lib=substr($$0,RSTART,RLENGTH);	\
+			sub("--libdir=/usr/","",lib)	\
+		}					\
+		END{print lib} ' )
+
 PREFIX = /usr
 
 default: configure
 
 configure: init
-	./configure --prefix=$(PREFIX)
+	./configure --prefix=$(PREFIX) --libdir=$(PREFIX)/$(LIB)
 
 init:
 	rm -rf autom4te.cache

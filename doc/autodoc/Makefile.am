@@ -1,13 +1,22 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_DATA = 	html
+htmldir =	@pkgdocdir@/autodocs
+
+html_DATA = 	@PACKAGE@.doxytag $(wildcard html/*)
 
 ## ##################################################
 
-.PHONY:		html
+.PHONY:	always
 
-html:
+@PACKAGE@.doxytag: Doxyfile always
 	@DOCGEN@
+
+## ##################################################
+
+CLEANFILES = $(html_DATA)
+
+clean-local:
+	-rmdir html
 
 ## ##################################################

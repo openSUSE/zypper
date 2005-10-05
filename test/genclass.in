@@ -1,0 +1,227 @@
+#! /bin/bash
+
+function usage() {
+   echo $@ >&2
+   echo <<EOF >&2
+Usage: genclass [path/]stem
+EOF
+   exit 1
+}
+
+test -z "$1" && usage "Missing name!"
+
+TOPSRCDIR=$( cd @abs_top_srcdir@ && pwd )
+test -z "$TOPSRCDIR" && {
+   echo "Dir does not exist '@abs_top_srcdir@'" >&2
+   exit 1
+}
+
+OUTDIR=$(dirname $1)
+STEM=$(basename $1)
+STEMDIR=$( cd $OUTDIR && pwd )
+test -z "$STEMDIR" && {
+   echo "Dir does not exist '$(dirname $1)'" >&2
+   exit 1
+}
+STEMDIR=${STEMDIR#$TOPSRCDIR/}
+
+CLASS=$STEM
+CLASS_H=$STEMDIR/$STEM.h
+CLASS_CC=$STEMDIR/$STEM.cc
+
+OUT_CLASS_H=$OUTDIR/$STEM.h
+OUT_CLASS_CC=$OUTDIR/$STEM.cc
+test -e $OUT_CLASS_H -o -e $OUT_CLASS_CC && {
+   test -e $OUT_CLASS_H && echo "File exists '$OUT_CLASS_H' using '$OUT_CLASS_H.new'" >&2
+   test -e $OUT_CLASS_CC && echo "File exists '$OUT_CLASS_CC' using '$OUT_CLASS_CC.new'" >&2
+   OUT_CLASS_H="$OUT_CLASS_H.new"
+   OUT_CLASS_CC="$OUT_CLASS_CC.new"
+}
+
+INCLUDE_H=$CLASS_H
+INCLUDE_DEF=$(echo $INCLUDE_H | sed 's/[./]/_/g' | awk '{print toupper($0)}')
+NSLIST=$(echo $(dirname $INCLUDE_H) | sed 's/[/]/ /g')
+SNLIST=
+INDENT=
+for N in $NSLIST; do
+   SNLIST="$N $SNLIST"
+   INDENT="$INDENT  "
+done
+
+######################################################################
+function intro() {
+######################################################################
+   local FILE=$1
+cat <<EOF
+/*---------------------------------------------------------------------\\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+\---------------------------------------------------------------------*/
+/**
+ \file	${FILE}
+
+ \brief	.
+
+*/
+EOF
+}
+
+######################################################################
+function nsopen() {
+######################################################################
+   local I=
+   for N in $NSLIST; do
+      echo "${I}///////////////////////////////////////////////////////////////////"
+      echo "${I}namespace $N"
+      echo "${I}{ /////////////////////////////////////////////////////////////////"
+      I="$I  "
+   done
+}
+
+######################################################################
+function nsclose() {
+######################################################################
+   local I=${INDENT}
+   for N in $SNLIST; do
+      echo "${I}/////////////////////////////////////////////////////////////////"
+      I=${I#  }
+      echo "${I}} // namespace $N"
+      echo "${I}///////////////////////////////////////////////////////////////////"
+   done
+}
+
+######################################################################
+function genH() {
+######################################################################
+cat <<EOF
+$(intro $CLASS_H)
+#ifndef $INCLUDE_DEF
+#define $INCLUDE_DEF
+
+#include <iosfwd>
+
+#include "zypp/base/PtrTypes.h"
+
+$(nsopen)
+
+${INDENT}///////////////////////////////////////////////////////////////////
+${INDENT}//
+${INDENT}//	CLASS NAME : ${CLASS}
+${INDENT}//
+${INDENT}/** */
+${INDENT}class ${CLASS}
+${INDENT}{
+${INDENT}public:
+${INDENT}  /** Default ctor */
+${INDENT}  ${CLASS}();
+
+${INDENT}  /** Dtor */
+${INDENT}  ~${CLASS}();
+
+${INDENT}  /** Stream output */
+${INDENT}  friend std::ostream & operator<<( std::ostream & str, const ${CLASS} & obj );
+
+${INDENT}private:
+${INDENT}  /** Hides implementation */
+${INDENT}  struct Impl;
+${INDENT}  /** Pointer to implementation */
+${INDENT}  base::shared_ptr<Impl> _pimpl;
+${INDENT}};
+${INDENT}///////////////////////////////////////////////////////////////////
+
+$(nsclose)
+#endif // $INCLUDE_DEF
+EOF
+}
+
+######################################################################
+function genCC() {
+######################################################################
+cat <<EOF
+$(intro $CLASS_CC)
+#include <iostream>
+
+#include "zypp/base/Logger.h"
+#include "zypp/base/BaseTypes.h"
+#include "${INCLUDE_H}"
+
+using namespace std;
+
+$(nsopen)
+
+${INDENT}///////////////////////////////////////////////////////////////////
+${INDENT}//
+${INDENT}//	CLASS NAME : ${CLASS}::Impl
+${INDENT}//
+${INDENT}/** ${CLASS} implementation */
+${INDENT}struct ${CLASS}::Impl : private zypp::base::noncopyable
+${INDENT}{
+${INDENT}  /** Default ctor*/
+${INDENT}  Impl();
+
+${INDENT}  /** Dtor */
+${INDENT}  ~Impl();
+
+${INDENT}  /** Stream output */
+${INDENT}  friend std::ostream & operator<<( std::ostream & str, const Impl & obj );
+
+${INDENT}};
+${INDENT}///////////////////////////////////////////////////////////////////
+
+${INDENT}/******************************************************************
+${INDENT}**
+${INDENT}**	FUNCTION NAME : operator<<
+${INDENT}**	FUNCTION TYPE : std::ostream &
+${INDENT}*/
+${INDENT}std::ostream & operator<<( std::ostream & str, const ${CLASS}::Impl & obj )
+${INDENT}{
+${INDENT}  return str << "${CLASS}::Impl";
+${INDENT}}
+
+
+${INDENT}///////////////////////////////////////////////////////////////////
+${INDENT}//
+${INDENT}//	CLASS NAME : ${CLASS}
+${INDENT}//
+${INDENT}///////////////////////////////////////////////////////////////////
+
+${INDENT}///////////////////////////////////////////////////////////////////
+${INDENT}//
+${INDENT}//	METHOD NAME : ${CLASS}::${CLASS}
+${INDENT}//	METHOD TYPE : Ctor
+${INDENT}//
+${INDENT}${CLASS}::${CLASS}()
+${INDENT}{}
+
+${INDENT}///////////////////////////////////////////////////////////////////
+${INDENT}//
+${INDENT}//	METHOD NAME : ${CLASS}::~${CLASS}
+${INDENT}//	METHOD TYPE : Dtor
+${INDENT}//
+${INDENT}${CLASS}::~${CLASS}()
+${INDENT}{}
+
+${INDENT}/******************************************************************
+${INDENT}**
+${INDENT}**	FUNCTION NAME : operator<<
+${INDENT}**	FUNCTION TYPE : std::ostream &
+${INDENT}*/
+${INDENT}std::ostream & operator<<( std::ostream & str, const ${CLASS} & obj )
+${INDENT}{
+${INDENT}  return str << obj._pimpl;
+${INDENT}}
+
+$(nsclose)
+EOF
+}
+
+######################################################################
+######################################################################
+######################################################################
+
+genH >$OUT_CLASS_H
+genCC >$OUT_CLASS_CC

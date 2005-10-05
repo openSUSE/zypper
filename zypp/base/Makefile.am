@@ -5,12 +5,16 @@ SUBDIRS =
 
 ## ##################################################
 
-include_HEADERS =
+include_HEADERS =	\
+	Logger.h
+
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_base.la
 
 ## ##################################################
 
-lib@PACKAGE@_base_la_SOURCES =
+lib@PACKAGE@_base_la_SOURCES =	\
+	Logger.cc
+
 
 ## ##################################################
