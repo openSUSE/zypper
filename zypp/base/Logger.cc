@@ -15,6 +15,7 @@
 #include <iostream>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
 
 using namespace std;
 
@@ -29,9 +30,16 @@ namespace zypp
     namespace logger
     { /////////////////////////////////////////////////////////////////
 
-      std::ostream & getStream( LogLevel level_r )
+      std::ostream & getStream( const char * group_r,
+                                LogLevel     level_r,
+                                const char * file_r,
+                                const char * func_r,
+                                const int    line_r )
       {
-        return level_r == E_DBG ? std::cout : std::cerr;
+        return (level_r < 0 ? std::cout : std::cerr)
+               << string::form( "<%d> [%s] %s(%s):%d ",
+                                level_r, group_r,
+                                file_r, func_r, line_r );
       }
 
       /////////////////////////////////////////////////////////////////
