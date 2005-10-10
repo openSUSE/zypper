@@ -7,8 +7,8 @@ Purpose
 -------
 
 The Storage System is responsible for persistently storing and
-loading Patches and Atoms for the packagemanager. Other object types
-might be added in future.
+loading Patches, Atoms and similar objects for the packagemanager. 
+Other object kinds might be added in future.
 
 ----------
 Operations
@@ -16,8 +16,9 @@ Operations
 
 Required operations are:
 
-- read all objects of a given type
-- read in an object identified by a given attribute
+- read all objects of a given kind
+- read in objects identified by a list of 
+  tuples (attribute name, match criteria, value)
 - change status
 - save a new object
 - delete an object (only for cleanup after update, does not need to
@@ -47,9 +48,9 @@ In order of relevance:
 - It should try to cut down on memory usage, since it will be in use at
   install time, at least when updating. 
 
-- We'll probably get something in the order of 100-1000 of these objects.
+- We'll probably get something in the order of 1000-5000 of these objects.
 
-- It should be possible to use different backends for the actual low
+- It must be possible to use different backends for the actual low
   level storage, i.e. Berkley db, postgres, mysql, flat file. 
 
 
@@ -67,7 +68,7 @@ figures indicate APIs::
  +-------------------(2)-------------+
  | Persistent Storage Core           |
  +--------(3)---------+------(4)-----+
- | Backend plugin     | Type plugin  |
+ | Backend plugin     | Kind plugin  |
  +--------------------+--------------+
  | Backend            | Parser       |
  | (e.g., Berkley DB) |              |
@@ -85,7 +86,7 @@ APIs:
 
 3) Backend Plugin API
 
-4) Type Plugin API
+4) Kind Plugin API
 
 
 These components are described below, the APIs are subject to a later,
@@ -99,12 +100,16 @@ Query Interface
 This implements the rpm-like query operation by using general and
 simpler search operations within the Core API.
 
+FIXME: Insert list of operations.
+
 
 Persistent Storage Core
 =======================
 
 The Core is the "main contact" for the layers above and breaks down
 the complete functionality for the simpler modules in the lower layer.
+
+FIXME: Insert list of operations.
 
 
 Backend Plugin
@@ -120,7 +125,7 @@ for the backend, i.e. a data record is represented by:
 The following operations are available:
 
 - create the storage database
-- find a record by a given attribute and return a handle
+- find records by attributes and return a list of handles.
 - insert a new record and return a handle to it
 
 These operations affect the record that is referenced by a handle:
@@ -130,10 +135,10 @@ These operations affect the record that is referenced by a handle:
 - remove it (delete it)
 
 
-Type plugins
+Kind plugins
 ============
 
-These are responsible for dealing with the specifics of the type of
+These are responsible for dealing with the specifics of the kind of
 objects that are stored. This includes:
 
 - knowing about the path names of the database
@@ -145,7 +150,9 @@ objects that are stored. This includes:
 Parser
 ======
 
-The parser creates simple structure-like objects from the XML string.
+In the backend, only XML strings are stored as contents, and additionally
+indexes for fast access. For this, we need a parser which creates simple 
+structure-like objects from the XML string.
 This is derived from the already implemented XMLNodeIterator class.
 
 
@@ -162,7 +169,7 @@ Plain Files
 Basic idea: Store the data for each object as an XML element in a flat
 file, store the status separately and add indices for fast access.
 
-For each type there is 
+For each kind there is 
 
 - a master file, which contains:
 
@@ -184,6 +191,8 @@ For each type there is
 Advantage: More direct control over everything, can be tailored to our
 needs, probably the efficients way to do it.
 
+Disadvantage: Needs a lot of effort to do it right and get a good performance.
+
 
 Berkley DB
 ==========
@@ -203,10 +212,10 @@ Another option: Instead of saving the XML string, serialize the
 ParserData structure and save this one directly. Faster, but more
 difficult to access for debugging.
 
-Advantage: Everything's there. 
+Advantage: Everything's there for queries with a single index.
 
-Disadvantage: Berkley DB had some issues in the past time. We'll
-depend on it.
+Disadvantage: Not so good on multiple indexes. This needs some 
+effort.
 
 Side note: xmldb cannot be used since it needs a lot of special libraries with
 specific versions. For this reason, it hasn't made it on the SUSE 
@@ -228,7 +237,8 @@ data field, add another attribute.
 Disadvantage: We don't really need the relational aspects if SQLite,
 and we don't have many people with knowledge of this topic in the
 theme. Not much experience with it. Additional library in the install
-system. Probably worst performance (but SQLite claims being fast for SQL)
+system. Probably worst performance (but SQLite claims being fast for SQL).
+
 
 Advantage: Maximum flexibility, especially in queries. Easy changes in
 the structure.
