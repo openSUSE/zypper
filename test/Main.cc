@@ -13,78 +13,116 @@
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
 
-using namespace std;
-using __gnu_cxx::hash_set;
-
-/******************************************************************
-**
-*/
-inline void memusage()
+namespace zypp
 {
-  system( zypp::base::string::form( "ps v %d", getpid() ).c_str() );
+  namespace base
+  {
+    class StringVal
+    {
+    public:
+      operator const std::string &() const
+      { return _value; }
+    protected:
+      StringVal()
+      {}
+      explicit
+      StringVal( const std::string & rhs )
+      : _value( rhs )
+      {}
+      StringVal( const StringVal & rhs )
+      : _value( rhs._value )
+      {}
+      ~StringVal()
+      {}
+      const StringVal & operator=( const std::string & rhs )
+      { _value = rhs; return *this; }
+      const StringVal & operator=( const StringVal & rhs )
+      { _value = rhs._value; return *this; }
+    private:
+      std::string _value;
+    };
+
+    inline std::ostream & operator<<( std::ostream & str, const StringVal & obj )
+    { return str << static_cast<const std::string &>(obj); }
+
+  }
+
+  class ResKind : public base::StringVal
+  {
+  public:
+    ResKind()
+    {}
+    explicit
+    ResKind( const std::string & rhs )
+    : base::StringVal( rhs )
+    {}
+    ResKind( const ResKind & rhs )
+    : base::StringVal( rhs )
+    {}
+    ~ResKind()
+    {}
+  };
+  class ResName : public base::StringVal
+  {
+  public:
+    ResName()
+    {}
+    explicit
+    ResName( const std::string & rhs )
+    : base::StringVal( rhs )
+    {}
+    ResName( const ResName & rhs )
+    : base::StringVal( rhs )
+    {}
+    ~ResName()
+    {}
+  };
+  class ResEdition
+  {
+  public:
+    typedef unsigned epoch_t;
+    ResEdition()
+    {}
+    ResEdition( const ResEdition & rhs )
+    {}
+    ~ResEdition()
+    {}
+  public:
+    epoch_t epoch() const
+    { return 0; }
+    const std::string & version() const
+    { return std::string(); }
+    const std::string & release() const
+    { return std::string(); }
+  private:
+
+  };
+  class ResArch : public base::StringVal
+  {
+  public:
+    ResArch()
+    {}
+    explicit
+    ResArch( const std::string & rhs )
+    : base::StringVal( rhs )
+    {}
+    ResArch( const ResArch & rhs )
+    : base::StringVal( rhs )
+    {}
+    ~ResArch()
+    {}
+  };
+
 }
 
-/******************************************************************
-**
-*/
-struct StringHashFnc
+using namespace std;
+using namespace zypp;
+
+void tt ( const string & s )
 {
-  size_t operator()( const string & str ) const
-  {
-    unsigned long __h = 0;
-    for ( const char* __s = str.c_str(); *__s; ++__s)
-      __h = 5*__h + *__s;
-
-    return size_t(__h);
-    //return str.size();
-  }
-};
-
-/******************************************************************
-**
-*/
-template<typename Cont>
-  struct lookupKey
-  {
-    const Cont & _cont;
-    lookupKey( const Cont & cont )
-    : _cont( cont )
-    {}
-    void operator()( const string & key ) const
-    {
-      typename Cont::const_iterator it = _cont.find( key );
-    }
-  };
-
-template<typename Cont>
-  struct lookupNoKey
-  {
-    const Cont & _cont;
-    lookupNoKey( const Cont & cont )
-    : _cont( cont )
-    {}
-    void operator()( const string & key )
-    {
-      typename Cont::const_iterator it = _cont.find( key+'x' );
-    }
-  };
-
-template<typename Cont>
-  void lookup( const Cont & unames )
-  {
-    for ( unsigned i = 0; i < 1000; ++i ) {
-      for_each( unames.begin(), unames.end(), lookupKey<Cont>( unames ) );
-      for_each( unames.begin(), unames.end(), lookupNoKey<Cont>( unames ) );
-    }
-  }
-
-template<typename Cont>
-  void lookupTest( const vector<string> & names )
-  {
-    Cont unames( names.begin(), names.end() );
-    MIL << "Unique names: " << unames.size() << endl;
-    lookup( unames );
-  }
+  string t( s );
+  t = string();
+}
 
 /******************************************************************
 **
@@ -98,18 +136,18 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  ifstream f( "./NameList" );
-  vector<string> names( (istream_iterator<string>(f)), istream_iterator<string>() );
-  MIL << "Total names: " << names.size() << endl;
-  memusage();
+  ResKind a( "fool" );
+  ResName b;
+  DBG << a << endl;
+  DBG << b << endl;
 
-  INT << ">===[lookupTest<set<string> >]" << endl;
-  lookupTest<set<string> >( names );
-  memusage();
+  //b=a;
 
-  INT << ">===[lookupTest<hash_set<string> >]" << endl;
-  lookupTest<hash_set<string,StringHashFnc> >( names );
-  memusage();
+  DBG << a << endl;
+  DBG << b << endl;
+
+  tt( a );
+  tt( b );
 
   INT << "===[END]============================================" << endl;
   return 0;

@@ -6,20 +6,14 @@ SUBDIRS =
 ## ##################################################
 
 include_HEADERS =	\
-	PtrTypes.h	\
-	String.h	\
-	Logger.h	\
-	StringVal.h
+	ResolvableImpl.h
 
 
-noinst_LTLIBRARIES =	lib@PACKAGE@_base.la
+noinst_LTLIBRARIES =	lib@PACKAGE@_detail.la
 
 ## ##################################################
 
-lib@PACKAGE@_base_la_SOURCES =	\
-	String.cc	\
-	Logger.cc	\
-	StringVal.cc
-
+lib@PACKAGE@_detail_la_SOURCES =	\
+	ResolvableImpl.cc
 
 ## ##################################################
