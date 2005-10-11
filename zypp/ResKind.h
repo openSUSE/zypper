@@ -6,11 +6,8 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/**
- \file	zypp/ResKind.h
-
- \brief	.
-
+/** \file zypp/ResKind.h
+ *
 */
 #ifndef ZYPP_RESKIND_H
 #define ZYPP_RESKIND_H

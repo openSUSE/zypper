@@ -6,11 +6,8 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/**
- \file	zypp/base/Logger.cc
-
- \brief	.
-
+/** \file zypp/base/Logger.cc
+ *
 */
 #include <iostream>
 

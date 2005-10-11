@@ -6,11 +6,8 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/**
- \file	zypp/ResArch.h
-
- \brief	.
-
+/** \file zypp/ResArch.h
+ *
 */
 #ifndef ZYPP_RESARCH_H
 #define ZYPP_RESARCH_H

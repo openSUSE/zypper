@@ -6,11 +6,8 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/**
- \file	zypp/ResEdition.h
-
- \brief	.
-
+/** \file zypp/ResEdition.h
+ *
 */
 #ifndef ZYPP_RESEDITION_H
 #define ZYPP_RESEDITION_H

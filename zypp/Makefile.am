@@ -9,7 +9,8 @@ include_HEADERS = \
 	ResKind.h	\
 	ResName.h	\
 	ResArch.h	\
-	ResEdition.h
+	ResEdition.h	\
+	Resolvable.h
 
 ## ##################################################
 
@@ -21,7 +22,8 @@ lib@PACKAGE@_la_SOURCES = \
 	ResKind.cc	\
 	ResName.cc	\
 	ResArch.cc	\
-	ResEdition.cc
+	ResEdition.cc	\
+	Resolvable.cc
 
 lib@PACKAGE@_la_LDFLAGS =	@LIB_VERSION_INFO@
 

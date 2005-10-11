@@ -6,18 +6,15 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/**
- \file	zypp/base/Logger.h
-
- \brief	.
-
+/** \file zypp/base/Logger.h
+ *
 */
 #ifndef ZYPP_BASE_LOGGER_H
 #define ZYPP_BASE_LOGGER_H
 
 #include <iosfwd>
 
-/** \defgroup ZYPP_BASE_LOGGER_MACROS
+/** \defgroup ZYPP_BASE_LOGGER_MACROS ZYPP_BASE_LOGGER_MACROS
  *  Convenience macros for logging.
  *
  * The macros finaly call @ref getStream, providing appropriate arguments,

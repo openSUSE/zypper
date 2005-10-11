@@ -6,11 +6,8 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/**
- \file	zypp/base/StringVal.cc
-
- \brief	.
-
+/** \file zypp/base/StringVal.cc
+ *
 */
 #include "zypp/base/StringVal.h"
 

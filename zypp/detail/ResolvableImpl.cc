@@ -6,11 +6,8 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/**
- \file	zypp/detail/ResolvableImpl.cc
-
- \brief	.
-
+/** \file zypp/detail/ResolvableImpl.cc
+ *
 */
 #include <iostream>
 
@@ -28,19 +25,9 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : ResolvableImpl::ResolvableImpl
-    //	METHOD TYPE : Ctor
+    //	CLASS NAME : ResolvableImpl
     //
-    ResolvableImpl::ResolvableImpl()
-    {}
-
     ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : ResolvableImpl::~ResolvableImpl
-    //	METHOD TYPE : Dtor
-    //
-    ResolvableImpl::~ResolvableImpl()
-    {}
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

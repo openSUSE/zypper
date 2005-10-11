@@ -13,116 +13,68 @@
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
 
+///////////////////////////////////////////////////////////////////
+
+#include <zypp/Resolvable.h>
+
 namespace zypp
 {
-  namespace base
+  namespace detail
   {
-    class StringVal
-    {
-    public:
-      operator const std::string &() const
-      { return _value; }
-    protected:
-      StringVal()
-      {}
-      explicit
-      StringVal( const std::string & rhs )
-      : _value( rhs )
-      {}
-      StringVal( const StringVal & rhs )
-      : _value( rhs._value )
-      {}
-      ~StringVal()
-      {}
-      const StringVal & operator=( const std::string & rhs )
-      { _value = rhs; return *this; }
-      const StringVal & operator=( const StringVal & rhs )
-      { _value = rhs._value; return *this; }
-    private:
-      std::string _value;
-    };
-
-    inline std::ostream & operator<<( std::ostream & str, const StringVal & obj )
-    { return str << static_cast<const std::string &>(obj); }
-
+    class PackageImpl;
+    typedef base::shared_ptr<PackageImpl> PackageImplPtr;
   }
 
-  class ResKind : public base::StringVal
+  class Package : public Resolvable
   {
   public:
-    ResKind()
-    {}
-    explicit
-    ResKind( const std::string & rhs )
-    : base::StringVal( rhs )
-    {}
-    ResKind( const ResKind & rhs )
-    : base::StringVal( rhs )
-    {}
-    ~ResKind()
-    {}
-  };
-  class ResName : public base::StringVal
-  {
-  public:
-    ResName()
-    {}
-    explicit
-    ResName( const std::string & rhs )
-    : base::StringVal( rhs )
-    {}
-    ResName( const ResName & rhs )
-    : base::StringVal( rhs )
-    {}
-    ~ResName()
-    {}
-  };
-  class ResEdition
-  {
-  public:
-    typedef unsigned epoch_t;
-    ResEdition()
-    {}
-    ResEdition( const ResEdition & rhs )
-    {}
-    ~ResEdition()
-    {}
-  public:
-    epoch_t epoch() const
-    { return 0; }
-    const std::string & version() const
-    { return std::string(); }
-    const std::string & release() const
-    { return std::string(); }
+    Package();
+    Package( detail::PackageImplPtr impl_r );
+    ~Package();
+    const std::string & label() const;
   private:
+    /** Pointer to implementation */
+    detail::PackageImplPtr _pimpl;
+  };
+}
 
-  };
-  class ResArch : public base::StringVal
+///////////////////////////////////////////////////////////////////
+
+#include <zypp/detail/ResolvableImpl.h>
+
+namespace zypp
+{
+  namespace detail
   {
-  public:
-    ResArch()
-    {}
-    explicit
-    ResArch( const std::string & rhs )
-    : base::StringVal( rhs )
-    {}
-    ResArch( const ResArch & rhs )
-    : base::StringVal( rhs )
-    {}
-    ~ResArch()
-    {}
-  };
+    class PackageImpl
+    {
+    public:
+      PackageImpl()
+      {}
+
+      ResolvableImplPtr _resolvable;
+      std::string       _label;
+    };
+  }
+
+  Package::Package()
+  : _pimpl( new detail::PackageImpl )
+  {}
+  Package::Package( detail::PackageImplPtr impl_r )
+  : Resolvable( impl_r->_resolvable )
+  , _pimpl( impl_r )
+  {}
+  Package::~Package()
+  {}
+  const std::string & Package::label() const
+  { return _pimpl->_label; }
 
 }
+
+///////////////////////////////////////////////////////////////////
 
 using namespace std;
 using namespace zypp;
-
-void tt ( const string & s )
-{
-  string t( s );
-  t = string();
-}
 
 /******************************************************************
 **
@@ -136,18 +88,17 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  ResKind a( "fool" );
-  ResName b;
-  DBG << a << endl;
-  DBG << b << endl;
+  detail::PackageImplPtr pi( new detail::PackageImpl );
+  pi->_resolvable.reset( new detail::ResolvableImpl( ResKind("PKG"),
+                                                     ResName("foo"),
+                                                     ResEdition("1.0","42"),
+                                                     ResArch("noarch") ) );
+  pi->_label = "label for foo";
 
-  //b=a;
+  Package p( pi );
 
-  DBG << a << endl;
-  DBG << b << endl;
-
-  tt( a );
-  tt( b );
+  DBG << p << endl;
+  DBG << "  \"" << p.label() << "\"" << endl;
 
   INT << "===[END]============================================" << endl;
   return 0;

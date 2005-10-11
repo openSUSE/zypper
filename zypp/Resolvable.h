@@ -6,11 +6,8 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/**
- \file	zypp/Resolvable.h
-
- \brief	.
-
+/** \file zypp/Resolvable.h
+ *
 */
 #ifndef ZYPP_RESOLVABLE_H
 #define ZYPP_RESOLVABLE_H
@@ -33,6 +30,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
     /** Hides implementation */
     class ResolvableImpl;
+    typedef base::shared_ptr<ResolvableImpl> ResolvableImplPtr;
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////
@@ -47,6 +45,8 @@ namespace zypp
   public:
     /** Default ctor */
     Resolvable();
+    /** ctor */
+    Resolvable( detail::ResolvableImplPtr impl_r );
     /** Dtor */
     ~Resolvable();
   public:
@@ -58,10 +58,9 @@ namespace zypp
     const ResEdition & edition() const;
     /**  */
     const ResArch & arch() const;
-
   private:
     /** Pointer to implementation */
-    base::shared_ptr<detail::ResolvableImpl> _pimpl;
+    detail::ResolvableImplPtr _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 

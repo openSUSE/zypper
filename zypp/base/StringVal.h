@@ -6,11 +6,8 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/**
- \file	zypp/base/StringVal.h
-
- \brief	.
-
+/** \file zypp/base/StringVal.h
+ *
 */
 #ifndef ZYPP_BASE_STRINGVAL_H
 #define ZYPP_BASE_STRINGVAL_H

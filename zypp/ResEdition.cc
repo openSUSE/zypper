@@ -6,11 +6,8 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/**
- \file	zypp/ResEdition.cc
-
- \brief	.
-
+/** \file zypp/ResEdition.cc
+ *
 */
 #include <iostream>
 

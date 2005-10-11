@@ -6,11 +6,8 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/**
- \file	zypp/ResName.h
-
- \brief	.
-
+/** \file zypp/ResName.h
+ *
 */
 #ifndef ZYPP_RESNAME_H
 #define ZYPP_RESNAME_H

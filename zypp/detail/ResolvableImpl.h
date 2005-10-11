@@ -6,11 +6,8 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/**
- \file	zypp/detail/ResolvableImpl.h
-
- \brief	.
-
+/** \file zypp/detail/ResolvableImpl.h
+ *
 */
 #ifndef ZYPP_DETAIL_RESOLVABLEIMPL_H
 #define ZYPP_DETAIL_RESOLVABLEIMPL_H
@@ -38,11 +35,21 @@ namespace zypp
     {
     public:
       /** Default ctor */
-      ResolvableImpl();
-
+      ResolvableImpl()
+      {}
+      /** ctor */
+      ResolvableImpl( const ResKind & kind_r,
+                      const ResName & name_r,
+                      const ResEdition & edition_r,
+                      const ResArch & arch_r )
+      : _kind( kind_r )
+      , _name( name_r )
+      , _edition( edition_r )
+      , _arch( arch_r )
+      {}
       /** Dtor */
-      ~ResolvableImpl();
-
+      ~ResolvableImpl()
+      {}
     public:
       /**  */
       const ResKind & kind() const
@@ -56,7 +63,6 @@ namespace zypp
       /**  */
       const ResArch & arch() const
       { return _arch; }
-
     private:
       ResKind    _kind;
       ResName    _name;
