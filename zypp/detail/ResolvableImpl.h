@@ -12,7 +12,8 @@
 #ifndef ZYPP_DETAIL_RESOLVABLEIMPL_H
 #define ZYPP_DETAIL_RESOLVABLEIMPL_H
 
-#include <iosfwd>
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
 
 #include "zypp/ResKind.h"
 #include "zypp/ResName.h"
@@ -25,31 +26,24 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
+    DEFINE_PTR_TYPE(ResolvableImpl)
 
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : ResolvableImpl
     //
     /** */
-    class ResolvableImpl
+    class ResolvableImpl : public base::ReferenceCounted, private base::NonCopyable
     {
     public:
-      /** Default ctor */
-      ResolvableImpl()
-      {}
       /** ctor */
       ResolvableImpl( const ResKind & kind_r,
                       const ResName & name_r,
                       const ResEdition & edition_r,
-                      const ResArch & arch_r )
-      : _kind( kind_r )
-      , _name( name_r )
-      , _edition( edition_r )
-      , _arch( arch_r )
-      {}
+                      const ResArch & arch_r );
       /** Dtor */
-      ~ResolvableImpl()
-      {}
+      virtual ~ResolvableImpl();
+
     public:
       /**  */
       const ResKind & kind() const
@@ -63,13 +57,21 @@ namespace zypp
       /**  */
       const ResArch & arch() const
       { return _arch; }
+
     private:
+      /**  */
       ResKind    _kind;
+      /**  */
       ResName    _name;
+      /**  */
       ResEdition _edition;
+      /**  */
       ResArch    _arch;
     };
     ///////////////////////////////////////////////////////////////////
+
+    /** \relates ResolvableImpl Stream output */
+    extern std::ostream & operator<<( std::ostream & str, const ResolvableImpl & obj );
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

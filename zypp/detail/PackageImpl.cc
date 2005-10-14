@@ -6,12 +6,12 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/ResolvableImpl.cc
+/** \file	zypp/detail/PackageImpl.cc
  *
 */
 #include <iostream>
 
-#include "zypp/detail/ResolvableImpl.h"
+#include "zypp/detail/PackageImpl.h"
 
 using namespace std;
 
@@ -24,37 +24,28 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : ResolvableImpl::ResolvableImpl
+    //	METHOD NAME : PackageImpl::PackageImpl
     //	METHOD TYPE : Ctor
     //
-    ResolvableImpl::ResolvableImpl( const ResKind & kind_r,
-                                    const ResName & name_r,
-                                    const ResEdition & edition_r,
-                                    const ResArch & arch_r )
-    : _kind( kind_r )
-    , _name( name_r )
-    , _edition( edition_r )
-    , _arch( arch_r )
+    PackageImpl::PackageImpl( const ResName & name_r,
+                              const ResEdition & edition_r,
+                              const ResArch & arch_r )
+    : ResolvableImpl( ResKind("package"), name_r, edition_r, arch_r )
     {}
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : ResolvableImpl::~ResolvableImpl
+    //	METHOD NAME : PackageImpl::~PackageImpl
     //	METHOD TYPE : Dtor
     //
-    ResolvableImpl::~ResolvableImpl()
+    PackageImpl::~PackageImpl()
     {}
 
-    /******************************************************************
-     **
-     **	FUNCTION NAME : operator<<
-     **	FUNCTION TYPE : std::ostream &
-    */
-    std::ostream & operator<<( std::ostream & str, const ResolvableImpl & obj )
-    {
-      str << '[' << obj.kind() << ']' << obj.name() << '-' << obj.edition() << '.' << obj.arch();
-      return str;
-    }
+    std::string PackageImpl::summary() const
+    { return std::string(); }
+
+    std::list<std::string> PackageImpl::description() const
+    { return std::list<std::string>(); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

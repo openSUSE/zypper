@@ -10,7 +10,9 @@ include_HEADERS = \
 	ResName.h	\
 	ResArch.h	\
 	ResEdition.h	\
-	Resolvable.h
+	Resolvable.h	\
+	Package.h	\
+	Selection.h
 
 ## ##################################################
 
@@ -23,7 +25,9 @@ lib@PACKAGE@_la_SOURCES = \
 	ResName.cc	\
 	ResArch.cc	\
 	ResEdition.cc	\
-	Resolvable.cc
+	Resolvable.cc	\
+	Package.cc	\
+	Selection.cc
 
 lib@PACKAGE@_la_LDFLAGS =	@LIB_VERSION_INFO@
 

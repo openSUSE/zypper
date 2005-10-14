@@ -5,15 +5,19 @@ SUBDIRS =
 
 ## ##################################################
 
-include_HEADERS =	\
-	ResolvableImpl.h
+include_HEADERS = \
+	ResolvableImpl.h	\
+	PackageImpl.h		\
+	SelectionImpl.h
 
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_detail.la
 
 ## ##################################################
 
-lib@PACKAGE@_detail_la_SOURCES =	\
-	ResolvableImpl.cc
+lib@PACKAGE@_detail_la_SOURCES = \
+	ResolvableImpl.cc	\
+	PackageImpl.cc		\
+	SelectionImpl.cc
 
 ## ##################################################

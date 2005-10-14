@@ -6,13 +6,13 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/Resolvable.cc
+/** \file	zypp/Selection.cc
  *
 */
 #include <iostream>
 
-#include "zypp/Resolvable.h"
-#include "zypp/detail/ResolvableImpl.h"
+#include "zypp/Selection.h"
+#include "zypp/detail/SelectionImpl.h"
 
 using namespace std;
 
@@ -22,50 +22,27 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Resolvable::Resolvable
+  //	METHOD NAME : Selection::Selection
   //	METHOD TYPE : Ctor
   //
-  Resolvable::Resolvable( detail::ResolvableImplPtr impl_r )
-  : _pimpl( impl_r )
+  Selection::Selection( detail::SelectionImplPtr impl_r )
+  :  Resolvable( impl_r )
+  , _pimpl( impl_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Resolvable::~Resolvable
+  //	METHOD NAME : Selection::~Selection
   //	METHOD TYPE : Dtor
   //
-  Resolvable::~Resolvable()
+  Selection::~Selection()
   {}
 
-  const ResKind & Resolvable::kind() const
-  { return _pimpl->kind(); }
+  std::string Selection::summary() const
+  { return _pimpl->summary(); }
 
-  const ResName & Resolvable::name() const
-  { return _pimpl->name(); }
-
-  const ResEdition & Resolvable::edition() const
-  { return _pimpl->edition(); }
-
-  const ResArch & Resolvable::arch() const
-  { return _pimpl->arch(); }
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Resolvable::~Resolvable
-  //	METHOD TYPE : Dtor
-  //
-  detail::constResolvableImplPtr Resolvable::sayFriend() const
-  { return _pimpl; }
-
-  /******************************************************************
-  **
-  **	FUNCTION NAME : operator<<
-  **	FUNCTION TYPE : std::ostream &
-  */
-  std::ostream & operator<<( std::ostream & str, const Resolvable & obj )
-  {
-    return str << *obj.sayFriend();
-  }
+  std::list<std::string> Selection::description() const
+  { return _pimpl->description(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

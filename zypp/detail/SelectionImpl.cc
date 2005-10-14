@@ -6,12 +6,12 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/ResolvableImpl.cc
+/** \file	zypp/detail/SelectionImpl.cc
  *
 */
 #include <iostream>
 
-#include "zypp/detail/ResolvableImpl.h"
+#include "zypp/detail/SelectionImpl.h"
 
 using namespace std;
 
@@ -24,37 +24,28 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : ResolvableImpl::ResolvableImpl
+    //	METHOD NAME : SelectionImpl::SelectionImpl
     //	METHOD TYPE : Ctor
     //
-    ResolvableImpl::ResolvableImpl( const ResKind & kind_r,
-                                    const ResName & name_r,
-                                    const ResEdition & edition_r,
-                                    const ResArch & arch_r )
-    : _kind( kind_r )
-    , _name( name_r )
-    , _edition( edition_r )
-    , _arch( arch_r )
+    SelectionImpl::SelectionImpl( const ResName & name_r,
+                                  const ResEdition & edition_r,
+                                  const ResArch & arch_r )
+    : ResolvableImpl( ResKind("selection"), name_r, edition_r, arch_r )
     {}
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : ResolvableImpl::~ResolvableImpl
+    //	METHOD NAME : SelectionImpl::~SelectionImpl
     //	METHOD TYPE : Dtor
     //
-    ResolvableImpl::~ResolvableImpl()
+    SelectionImpl::~SelectionImpl()
     {}
 
-    /******************************************************************
-     **
-     **	FUNCTION NAME : operator<<
-     **	FUNCTION TYPE : std::ostream &
-    */
-    std::ostream & operator<<( std::ostream & str, const ResolvableImpl & obj )
-    {
-      str << '[' << obj.kind() << ']' << obj.name() << '-' << obj.edition() << '.' << obj.arch();
-      return str;
-    }
+    std::string SelectionImpl::summary() const
+    { return std::string(); }
+
+    std::list<std::string> SelectionImpl::description() const
+    { return std::list<std::string>(); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

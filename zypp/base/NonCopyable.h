@@ -6,16 +6,12 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/base/PtrTypes.h
- *  \ingroup ZYPP_BASE_SMART_PTR
- *  \see ZYPP_BASE_SMART_PTR
+/** \file zypp/base/NonCopyable.h
 */
-#ifndef ZYPP_BASE_PTRTYPES_H
-#define ZYPP_BASE_PTRTYPES_H
+#ifndef ZYPP_BASE_NONCOPYABLE_H
+#define ZYPP_BASE_NONCOPYABLE_H
 
-#include <boost/scoped_ptr.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
+#include <boost/noncopyable.hpp>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -24,30 +20,10 @@ namespace zypp
   namespace base
   { /////////////////////////////////////////////////////////////////
 
-    /** \defgroup ZYPP_BASE_SMART_PTR ZYPP_BASE_SMART_PTR
-     *  Smart pointer types.
-     *
-     * Namespace zypp::base provides 3 smart pointer types \b using the
-     * boostsmart pointer library.
-     *
-     * \li \c scoped_ptr Simple sole ownership of single objects. Noncopyable.
-     *
-     * \li \c shared_ptr Object ownership shared among multiple pointers
-     *
-     * \li \c weak_ptr Non-owning observers of an object owned by shared_ptr.
+    /** Ensure derived classes cannot be copied.
+     * Use private inheritance.
     */
-    /*@{*/
-
-    /** */
-    using boost::scoped_ptr;
-
-    /** */
-    using boost::shared_ptr;
-
-    /** */
-    using boost::weak_ptr;
-
-    /*@}*/
+    typedef boost::noncopyable NonCopyable;
 
     /////////////////////////////////////////////////////////////////
   } // namespace base
@@ -55,4 +31,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_BASE_PTRTYPES_H
+#endif // ZYPP_BASE_NONCOPYABLE_H

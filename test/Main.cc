@@ -1,80 +1,12 @@
 #include <iostream>
-#include <fstream>
-#include <iterator>
-#include <algorithm>
-#include <set>
-#include <map>
-#include <list>
-#include <vector>
-#include <ext/hash_set>
-#include <ext/hash_map>
-#include <ext/rope>
-
+#include <string>
 #include <zypp/base/Logger.h>
-#include <zypp/base/String.h>
-
-///////////////////////////////////////////////////////////////////
-
-#include <zypp/Resolvable.h>
-
-namespace zypp
-{
-  namespace detail
-  {
-    class PackageImpl;
-    typedef base::shared_ptr<PackageImpl> PackageImplPtr;
-  }
-
-  class Package : public Resolvable
-  {
-  public:
-    Package();
-    Package( detail::PackageImplPtr impl_r );
-    ~Package();
-    const std::string & label() const;
-  private:
-    /** Pointer to implementation */
-    detail::PackageImplPtr _pimpl;
-  };
-}
-
-///////////////////////////////////////////////////////////////////
-
-#include <zypp/detail/ResolvableImpl.h>
-
-namespace zypp
-{
-  namespace detail
-  {
-    class PackageImpl
-    {
-    public:
-      PackageImpl()
-      {}
-
-      ResolvableImplPtr _resolvable;
-      std::string       _label;
-    };
-  }
-
-  Package::Package()
-  : _pimpl( new detail::PackageImpl )
-  {}
-  Package::Package( detail::PackageImplPtr impl_r )
-  : Resolvable( impl_r->_resolvable )
-  , _pimpl( impl_r )
-  {}
-  Package::~Package()
-  {}
-  const std::string & Package::label() const
-  { return _pimpl->_label; }
-
-}
-
-///////////////////////////////////////////////////////////////////
+#include <zypp/detail/PackageImpl.h>
+#include <zypp/Package.h>
 
 using namespace std;
 using namespace zypp;
+using namespace base;
 
 /******************************************************************
 **
@@ -88,17 +20,22 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  detail::PackageImplPtr pi( new detail::PackageImpl );
-  pi->_resolvable.reset( new detail::ResolvableImpl( ResKind("PKG"),
-                                                     ResName("foo"),
-                                                     ResEdition("1.0","42"),
-                                                     ResArch("noarch") ) );
-  pi->_label = "label for foo";
+  ResName    _name( "foo" );
+  ResEdition _edition( "1.0", "42" );
+  ResArch    _arch( "i386" );
 
-  Package p( pi );
 
-  DBG << p << endl;
-  DBG << "  \"" << p.label() << "\"" << endl;
+  detail::PackageImplPtr pi( new detail::PackageImpl(_name,_edition,_arch) );
+  DBG << pi << endl;
+  DBG << *pi << endl;
+  constPackagePtr foo( new Package( pi ) );
+  DBG << foo << endl;
+  DBG << *foo << endl;
+
+
+  detail::constPackageImplPtr c( pi );
+  detail::PackageImplPtr cc( const_pointer_cast<detail::PackageImpl>(c) );
+
 
   INT << "===[END]============================================" << endl;
   return 0;

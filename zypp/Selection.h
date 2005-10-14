@@ -6,14 +6,18 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/ResolvableImpl.cc
+/** \file	zypp/Selection.h
  *
 */
-#include <iostream>
+#ifndef ZYPP_SELECTION_H
+#define ZYPP_SELECTION_H
 
-#include "zypp/detail/ResolvableImpl.h"
+#include <list>
 
-using namespace std;
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
+
+#include "zypp/Resolvable.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -21,44 +25,39 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : ResolvableImpl::ResolvableImpl
-    //	METHOD TYPE : Ctor
-    //
-    ResolvableImpl::ResolvableImpl( const ResKind & kind_r,
-                                    const ResName & name_r,
-                                    const ResEdition & edition_r,
-                                    const ResArch & arch_r )
-    : _kind( kind_r )
-    , _name( name_r )
-    , _edition( edition_r )
-    , _arch( arch_r )
-    {}
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : ResolvableImpl::~ResolvableImpl
-    //	METHOD TYPE : Dtor
-    //
-    ResolvableImpl::~ResolvableImpl()
-    {}
-
-    /******************************************************************
-     **
-     **	FUNCTION NAME : operator<<
-     **	FUNCTION TYPE : std::ostream &
-    */
-    std::ostream & operator<<( std::ostream & str, const ResolvableImpl & obj )
-    {
-      str << '[' << obj.kind() << ']' << obj.name() << '-' << obj.edition() << '.' << obj.arch();
-      return str;
-    }
-
+    DEFINE_PTR_TYPE(SelectionImpl)
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////
+  DEFINE_PTR_TYPE(Selection)
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : Selection
+  //
+  /** */
+  class Selection : public Resolvable
+  {
+  public:
+    /** Default ctor */
+    Selection( detail::SelectionImplPtr impl_r );
+    /** Dtor */
+    virtual ~Selection();
+
+  public:
+
+    /** */
+    std::string summary() const;
+    /** */
+    std::list<std::string> description() const;
+
+  private:
+    /** Pointer to implementation */
+    detail::SelectionImplPtr _pimpl;
+  };
+  ///////////////////////////////////////////////////////////////////
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_SELECTION_H

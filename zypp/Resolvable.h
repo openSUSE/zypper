@@ -14,11 +14,20 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
+  namespace detail
+  { /////////////////////////////////////////////////////////////////
+    DEFINE_PTR_TYPE(ResolvableImpl)
+    /////////////////////////////////////////////////////////////////
+  } // namespace detail
+  ///////////////////////////////////////////////////////////////////
+  DEFINE_PTR_TYPE(Resolvable)
 
   class ResKind;
   class ResName;
@@ -26,29 +35,18 @@ namespace zypp
   class ResArch;
 
   ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
-    /** Hides implementation */
-    class ResolvableImpl;
-    typedef base::shared_ptr<ResolvableImpl> ResolvableImplPtr;
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
-  ///////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Resolvable
   //
   /** */
-  class Resolvable
+  class Resolvable : public base::ReferenceCounted, private base::NonCopyable
   {
   public:
-    /** Default ctor */
-    Resolvable();
     /** ctor */
     Resolvable( detail::ResolvableImplPtr impl_r );
     /** Dtor */
-    ~Resolvable();
+    virtual ~Resolvable();
+
   public:
     /**  */
     const ResKind & kind() const;
@@ -58,9 +56,13 @@ namespace zypp
     const ResEdition & edition() const;
     /**  */
     const ResArch & arch() const;
+
   private:
     /** Pointer to implementation */
     detail::ResolvableImplPtr _pimpl;
+  public:
+    /** Avoid a bunch of friend decl. */
+    detail::constResolvableImplPtr sayFriend() const;
   };
   ///////////////////////////////////////////////////////////////////
 

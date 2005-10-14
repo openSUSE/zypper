@@ -6,9 +6,11 @@ SUBDIRS =
 ## ##################################################
 
 include_HEADERS =	\
-	PtrTypes.h	\
-	String.h	\
 	Logger.h	\
+	NonCopyable.h	\
+	PtrTypes.h	\
+	ReferenceCounted.h	\
+	String.h	\
 	StringVal.h
 
 
@@ -17,8 +19,8 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_base.la
 ## ##################################################
 
 lib@PACKAGE@_base_la_SOURCES =	\
-	String.cc	\
 	Logger.cc	\
+	String.cc	\
 	StringVal.cc
 
 
