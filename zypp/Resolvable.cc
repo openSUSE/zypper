@@ -43,10 +43,10 @@ namespace zypp
   const ResName & Resolvable::name() const
   { return _pimpl->name(); }
 
-  const ResEdition & Resolvable::edition() const
+  const Edition & Resolvable::edition() const
   { return _pimpl->edition(); }
 
-  const ResArch & Resolvable::arch() const
+  const Arch & Resolvable::arch() const
   { return _pimpl->arch(); }
 
   ///////////////////////////////////////////////////////////////////

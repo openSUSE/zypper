@@ -6,15 +6,14 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/ResArch.h
+/** \file zypp/Arch.cc
  *
 */
-#ifndef ZYPP_RESARCH_H
-#define ZYPP_RESARCH_H
+#include <iostream>
 
-#include <iosfwd>
+#include "zypp/Arch.h"
 
-#include "zypp/base/StringVal.h"
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -22,25 +21,38 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : ResArch
+  //	METHOD NAME : Arch::Arch
+  //	METHOD TYPE : Ctor
   //
-  /** */
-  class ResArch : public base::StringVal
-  {
-  public:
-    /** Default ctor */
-    ResArch();
-    /** */
-    explicit
-    ResArch( const std::string & rhs );
-    /** */
-    ResArch( const ResArch & rhs );
-    /** Dtor */
-    ~ResArch();
-  };
+  Arch::Arch()
+  {}
+
   ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Arch::Arch
+  //	METHOD TYPE : Ctor
+  //
+  Arch::Arch( const std::string & rhs )
+  : base::StringVal( rhs )
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Arch::Arch
+  //	METHOD TYPE : Ctor
+  //
+  Arch::Arch( const Arch & rhs )
+  : base::StringVal( rhs )
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Arch::~Arch
+  //	METHOD TYPE : Dtor
+  //
+  Arch::~Arch()
+  {}
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_RESARCH_H

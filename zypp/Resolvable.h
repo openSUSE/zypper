@@ -31,8 +31,8 @@ namespace zypp
 
   class ResKind;
   class ResName;
-  class ResEdition;
-  class ResArch;
+  class Edition;
+  class Arch;
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -53,9 +53,9 @@ namespace zypp
     /**  */
     const ResName & name() const;
     /**  */
-    const ResEdition & edition() const;
+    const Edition & edition() const;
     /**  */
-    const ResArch & arch() const;
+    const Arch & arch() const;
 
   private:
     /** Pointer to implementation */

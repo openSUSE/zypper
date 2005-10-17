@@ -28,8 +28,8 @@ namespace zypp
     //	METHOD TYPE : Ctor
     //
     SelectionImpl::SelectionImpl( const ResName & name_r,
-                                  const ResEdition & edition_r,
-                                  const ResArch & arch_r )
+                                  const Edition & edition_r,
+                                  const Arch & arch_r )
     : ResolvableImpl( ResKind("selection"), name_r, edition_r, arch_r )
     {}
 

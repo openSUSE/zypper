@@ -29,8 +29,8 @@ namespace zypp
     //
     ResolvableImpl::ResolvableImpl( const ResKind & kind_r,
                                     const ResName & name_r,
-                                    const ResEdition & edition_r,
-                                    const ResArch & arch_r )
+                                    const Edition & edition_r,
+                                    const Arch & arch_r )
     : _kind( kind_r )
     , _name( name_r )
     , _edition( edition_r )

@@ -6,13 +6,13 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/ResEdition.cc
+/** \file zypp/Edition.cc
  *
 */
 #include <iostream>
 
 #include "zypp/base/Logger.h"
-#include "zypp/ResEdition.h"
+#include "zypp/Edition.h"
 
 using namespace std;
 
@@ -22,10 +22,10 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : ResEdition::Impl
+  //	CLASS NAME : Edition::Impl
   //
-  /** ResEdition implementation */
-  struct ResEdition::Impl
+  /** Edition implementation */
+  struct Edition::Impl
   {
     /** Default ctor*/
     Impl()
@@ -52,30 +52,30 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : ResEdition
+  //	CLASS NAME : Edition
   //
   ///////////////////////////////////////////////////////////////////
 
-  ResEdition::ResEdition()
+  Edition::Edition()
   : _pimpl( new Impl )
   {}
 
-  ResEdition::ResEdition( const std::string & version_r,
-                          const std::string & release_r,
-                          epoch_t epoch_r )
+  Edition::Edition( const std::string & version_r,
+                    const std::string & release_r,
+                    epoch_t epoch_r )
   : _pimpl( new Impl( version_r, release_r, epoch_r ) )
   {}
 
-  ResEdition::~ResEdition()
+  Edition::~Edition()
   {}
 
-  ResEdition::epoch_t ResEdition::epoch() const
+  Edition::epoch_t Edition::epoch() const
   { return _pimpl->_epoch; }
 
-  const std::string & ResEdition::version() const
+  const std::string & Edition::version() const
   { return _pimpl->_version; }
 
-  const std::string & ResEdition::release() const
+  const std::string & Edition::release() const
   { return _pimpl->_release; }
 
   /******************************************************************
@@ -83,7 +83,7 @@ namespace zypp
   **	FUNCTION NAME : operator<<
   **	FUNCTION TYPE : std::ostream &
   */
-  std::ostream & operator<<( std::ostream & str, const ResEdition & obj )
+  std::ostream & operator<<( std::ostream & str, const Edition & obj )
   {
     return str << obj.version() << '-' << obj.release();
   }

@@ -6,11 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/ResEdition.h
+/** \file zypp/Edition.h
  *
 */
-#ifndef ZYPP_RESEDITION_H
-#define ZYPP_RESEDITION_H
+#ifndef ZYPP_EDITION_H
+#define ZYPP_EDITION_H
 
 #include <iosfwd>
 #include <string>
@@ -23,22 +23,22 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : ResEdition
+  //	CLASS NAME : Edition
   //
   /** */
-  class ResEdition
+  class Edition
   {
   public:
     typedef unsigned epoch_t;
   public:
     /** Default ctor */
-    ResEdition();
+    Edition();
     /** */
-    ResEdition( const std::string & version_r,
-                const std::string & release_r,
-                epoch_t epoch = 0 );
+    Edition( const std::string & version_r,
+             const std::string & release_r,
+             epoch_t epoch = 0 );
     /** Dtor */
-    ~ResEdition();
+    ~Edition();
   public:
     /** */
     epoch_t epoch() const;
@@ -55,9 +55,9 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   /** \relates ResEdition Stream output */
-  extern std::ostream & operator<<( std::ostream & str, const ResEdition & obj );
+  extern std::ostream & operator<<( std::ostream & str, const Edition & obj );
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_RESEDITION_H
+#endif // ZYPP_EDITION_H

@@ -17,8 +17,8 @@
 
 #include "zypp/ResKind.h"
 #include "zypp/ResName.h"
-#include "zypp/ResEdition.h"
-#include "zypp/ResArch.h"
+#include "zypp/Edition.h"
+#include "zypp/Arch.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -39,8 +39,8 @@ namespace zypp
       /** ctor */
       ResolvableImpl( const ResKind & kind_r,
                       const ResName & name_r,
-                      const ResEdition & edition_r,
-                      const ResArch & arch_r );
+                      const Edition & edition_r,
+                      const Arch & arch_r );
       /** Dtor */
       virtual ~ResolvableImpl();
 
@@ -52,10 +52,10 @@ namespace zypp
       const ResName & name() const
       { return _name; }
       /**  */
-      const ResEdition & edition() const
+      const Edition & edition() const
       { return _edition; }
       /**  */
-      const ResArch & arch() const
+      const Arch & arch() const
       { return _arch; }
 
     private:
@@ -64,9 +64,9 @@ namespace zypp
       /**  */
       ResName    _name;
       /**  */
-      ResEdition _edition;
+      Edition _edition;
       /**  */
-      ResArch    _arch;
+      Arch    _arch;
     };
     ///////////////////////////////////////////////////////////////////
 

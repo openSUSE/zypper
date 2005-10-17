@@ -21,8 +21,8 @@ int main( int argc, char * argv[] )
   INT << "===[START]==========================================" << endl;
 
   ResName    _name( "foo" );
-  ResEdition _edition( "1.0", "42" );
-  ResArch    _arch( "i386" );
+  Edition    _edition( "1.0", "42" );
+  Arch       _arch( "i386" );
 
 
   detail::PackageImplPtr pi( new detail::PackageImpl(_name,_edition,_arch) );

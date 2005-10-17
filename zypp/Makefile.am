@@ -6,10 +6,10 @@ SUBDIRS = base detail
 ## ##################################################
 
 include_HEADERS = \
+	Arch.h		\
+	Edition.h	\
 	ResKind.h	\
 	ResName.h	\
-	ResArch.h	\
-	ResEdition.h	\
 	Resolvable.h	\
 	Package.h	\
 	Selection.h
@@ -21,10 +21,10 @@ lib_LTLIBRARIES =	lib@PACKAGE@.la
 ## ##################################################
 
 lib@PACKAGE@_la_SOURCES = \
+	Arch.cc		\
+	Edition.cc	\
 	ResKind.cc	\
 	ResName.cc	\
-	ResArch.cc	\
-	ResEdition.cc	\
 	Resolvable.cc	\
 	Package.cc	\
 	Selection.cc
