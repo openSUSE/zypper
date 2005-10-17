@@ -12,7 +12,10 @@ include_HEADERS = \
 	ResName.h	\
 	Resolvable.h	\
 	Package.h	\
-	Selection.h
+	Selection.h	\
+	Message.h	\
+	Script.h	\
+	Patch.h
 
 ## ##################################################
 
@@ -27,7 +30,10 @@ lib@PACKAGE@_la_SOURCES = \
 	ResName.cc	\
 	Resolvable.cc	\
 	Package.cc	\
-	Selection.cc
+	Selection.cc	\
+	Message.cc	\
+	Script.cc	\
+	Patch.cc
 
 lib@PACKAGE@_la_LDFLAGS =	@LIB_VERSION_INFO@
 
