@@ -13,8 +13,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/Patch.h"
-#include "zypp/detail/ResolvableImpl.h"
-#include "zypp//Resolvable.h"
+#include "zypp/detail/PatchImpl.h"
 
 using namespace std;
 

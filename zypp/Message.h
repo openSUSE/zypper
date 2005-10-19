@@ -14,7 +14,6 @@
 
 #include <iosfwd>
 
-#include "zypp/detail/MessageImpl.h"
 #include "zypp/Resolvable.h"
 
 ///////////////////////////////////////////////////////////////////

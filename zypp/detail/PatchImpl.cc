@@ -14,6 +14,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/detail/PatchImpl.h"
 #include "zypp/Patch.h"
+#include "zypp/Package.h"
 
 using namespace std;
 
@@ -48,16 +49,30 @@ namespace zypp
 
     bool PatchImpl::interactive () {
       if (_reboot_needed)
+      {
+	DBG << "Patch needs reboot" << endl;
 	return true;
+      }
       atom_list not_installed = not_installed_atoms ();
       for (atom_list::iterator it = not_installed.begin ();
 	it != not_installed.end ();
 	it++)
       {
 	if ((std::string)((*it)->kind ()) == "message")
-	// FIXME package with license
 	{
+	  DBG << "Patch contains a message" << endl;
 	  return true;
+	}
+	if ((std::string)((*it)->kind ()) == "package")
+	{
+	  ResolvablePtr r = *it;
+	  // FIXME package with license
+//	  if (r->licenseToConfirm() != "")
+	  if (false)
+	  {
+	    DBG << "Package has a license to be shown to user" << endl;
+	    return true;
+	  }
 	}
       }
       return false;
@@ -69,7 +84,7 @@ namespace zypp
 	it != _atoms.end ();
 	it++)
       {
-	if (false) // FIXME check if atom/resolvable is not installed
+	if (true) // FIXME check if atom/resolvable is not installed
 	{
 	  ret.push_back (*it);
 	}

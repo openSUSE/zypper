@@ -13,8 +13,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/Message.h"
-#include "zypp/detail/ResolvableImpl.h"
-#include "zypp//Resolvable.h"
+#include "zypp/detail/MessageImpl.h"
 
 using namespace std;
 

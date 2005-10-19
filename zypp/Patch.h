@@ -14,7 +14,6 @@
 
 #include <iosfwd>
 
-#include "zypp/detail/PatchImpl.h"
 #include "zypp/Resolvable.h"
 
 ///////////////////////////////////////////////////////////////////

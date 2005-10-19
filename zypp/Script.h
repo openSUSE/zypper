@@ -14,7 +14,6 @@
 
 #include <iosfwd>
 
-#include "zypp/detail/ScriptImpl.h"
 #include "zypp/Resolvable.h"
 
 ///////////////////////////////////////////////////////////////////
