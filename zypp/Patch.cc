@@ -43,22 +43,22 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Patch::interactive
-  //	Check whether patch can be applied only interactivly
+  //	METHOD NAME : Patch::id
+  //	Get the patch id
   //
-  bool Patch::interactive ()
+  std::string Patch::id () const
   {
-    return _pimpl->interactive ();
+    return _pimpl->id ();
   }
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Patch::category
-  //	Get the category of the patch
+  //	METHOD NAME : Patch::id
+  //	Get the patch id
   //
-  std::string Patch::category ()
+  unsigned int Patch::timestamp () const
   {
-    return _pimpl->_category;
+    return _pimpl->timestamp ();
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -66,9 +66,9 @@ namespace zypp
   //	METHOD NAME : Patch::summary
   //	Get the patch summary
   //
-  std::string Patch::summary ()
+  std::string Patch::summary () const
   {
-    return _pimpl->_summary["en"];
+    return _pimpl->summary ();
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -76,9 +76,56 @@ namespace zypp
   //	METHOD NAME : Patch::description
   //	Get the patch description
   //
-  std::string Patch::description ()
+  std::list<std::string> Patch::description () const
   {
-    return _pimpl->_description["en"];
+    return _pimpl->description ();
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Patch::category
+  //	Get the category of the patch
+  //
+  std::string Patch::category () const
+  {
+    return _pimpl->category ();
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Patch::reboot_needed
+  //	Check whether reboot is needed to finish the patch installation
+  //
+  bool Patch::reboot_needed () const {
+    return _pimpl->reboot_needed ();
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Patch::affects_pkg_manager
+  //	Check whether the patch installation affects package manager
+  //    (and it should be restarted after patch installation)
+  //
+  bool Patch::affects_pkg_manager () const {
+    return _pimpl->affects_pkg_manager ();
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Patch::atoms
+  //    Get the list of all atoms building the patch
+  //
+  atom_list Patch::atoms () const {
+    return _pimpl->all_atoms ();
+  }
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Patch::interactive
+  //	Check whether patch can be applied only interactivly
+  //
+  bool Patch::interactive ()
+  {
+    return _pimpl->interactive ();
   }
 
   void Patch::mark_atoms_to_freshen (bool freshen)

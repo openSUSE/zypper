@@ -30,7 +30,7 @@ namespace zypp
     //
     //	CLASS NAME : ScriptImpl
     //
-    /** */
+    /** Class representing an update script */
     class ScriptImpl : public ResolvableImpl
     {
     public:
@@ -42,11 +42,16 @@ namespace zypp
       ~ScriptImpl();
 
     public:
+      /** Get the script to perform the change */
       std::string do_script () const;
+      /** Get the script to undo the change */
       std::string undo_script () const;
-      bool undo_available () const;
+      /** Check whether script to undo the change is available */
+      virtual bool undo_available () const;
     protected:
+      /** The script to perform the change */
       std::string _do_script;
+      /** The script to undo the change */
       std::string _undo_script;
     };
     ///////////////////////////////////////////////////////////////////

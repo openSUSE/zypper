@@ -33,7 +33,7 @@ namespace zypp
   //
   //	CLASS NAME : Script
   //
-  /** */
+  /** Class representing an update script */
   class Script : public Resolvable
   {
   public:
@@ -42,8 +42,11 @@ namespace zypp
     /** Dtor */
     ~Script();
   public:
+    /** Get the script to perform the change */
     std::string do_script ();
+    /** Get the script to undo the change */
     std::string undo_script ();
+    /** Check whether script to undo the change is available */
     bool undo_available ();
   private:
     /** Pointer to implementation */

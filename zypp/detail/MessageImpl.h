@@ -30,7 +30,7 @@ namespace zypp
     //
     //	CLASS NAME : MessageImpl
     //
-    /** */
+    /** Class representing the message to be shown during update */
     class MessageImpl : public ResolvableImpl
     {
     public:
@@ -42,10 +42,14 @@ namespace zypp
       ~MessageImpl();
 
     public:
+      /** Get the text of the message */
       virtual std::string text () const;
+      /** Get the type of the message (YesNo / OK) */
       virtual std::string type () const;
     protected:
+      /** The text of the message */
       std::string _text;
+      /** The type of the message (YesNo / OK) */
       std::string _type;
     };
     ///////////////////////////////////////////////////////////////////

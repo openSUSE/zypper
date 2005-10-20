@@ -47,6 +47,40 @@ namespace zypp
     {
     }
 
+    std::string PatchImpl::id () const
+    {
+      return _patch_id;
+    }
+    unsigned int PatchImpl::timestamp () const
+    {
+      return _timestamp;
+    }
+
+    std::string PatchImpl::summary () const
+    {
+      return _summary;
+    }
+
+    std::list<std::string> PatchImpl::description () const
+    {
+      return _description;
+    }
+
+    std::string PatchImpl::category () const
+    {
+      return _category;
+    }
+
+    bool PatchImpl::reboot_needed () const
+    {
+      return _reboot_needed;
+    }
+
+    bool PatchImpl::affects_pkg_manager () const
+    {
+      return _affects_pkg_manager;
+    }
+
     bool PatchImpl::interactive () {
       if (_reboot_needed)
       {
@@ -60,22 +94,29 @@ namespace zypp
       {
 	if ((std::string)((*it)->kind ()) == "message")
 	{
-	  DBG << "Patch contains a message" << endl;
+//	  DBG << "Patch contains a message" << endl;
 	  return true;
 	}
 	if ((std::string)((*it)->kind ()) == "package")
 	{
-	  ResolvablePtr r = *it;
-	  // FIXME package with license
-//	  if (r->licenseToConfirm() != "")
+				 // Resolvable*
+				  // Resolvable
+				   // ResolvablePtr
+	  Package* p = (Package*)&**it;
+	  // FIXME use the condition
+//	  if (p->licenseToConfirm() != "")
 	  if (false)
 	  {
-	    DBG << "Package has a license to be shown to user" << endl;
+//	    DBG << "Package has a license to be shown to user" << endl;
 	    return true;
 	  }
 	}
       }
       return false;
+    }
+
+    atom_list PatchImpl::all_atoms () {
+      return _atoms;
     }
 
     atom_list PatchImpl::not_installed_atoms () {
@@ -91,6 +132,8 @@ namespace zypp
       }
       return ret;
     }
+
+// TODO check necessarity of functions below
 
     bool PatchImpl::any_atom_selected () {
       for (atom_list::iterator it = _atoms.begin ();
