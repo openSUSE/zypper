@@ -51,7 +51,7 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  std::list<ResolvablePtr> atoms;
+  atom_list atoms;
 
   ResName _name( "foo" );
   Edition _edition( "1.0", "42" );
@@ -63,25 +63,35 @@ int main( int argc, char * argv[] )
   ResName _name2( "bar" );
   Edition _edition2( "1.0", "43" );
   Arch    _arch2( "noarch" );
-  detail::PackageImplPtr pi2( new detail::PackageImpl(_name,_edition,_arch) );
+  detail::PackageImplPtr pi2(new detail::PackageImpl(_name2,_edition2,_arch2));
   PackagePtr p2 (new Package (pi2));
   atoms.push_back (p2);
 
   MyPatchImpl q ("patch1", atoms);
   DBG << q << endl;
-  DBG << q.interactive () << endl;
+  DBG << "  Interactive: " << q.interactive () << endl;
+  atom_list a = q.all_atoms ();
+  for (atom_list::iterator it = a.begin (); it != a.end (); it++)
+  {
+    DBG << "  " << **it << endl;
+  }
 
   INT << "====================================================" << endl;
 
   ResName _name3( "msg" );
   Arch    _arch3( "noarch" );
-  detail::MessageImplPtr mi( new detail::MessageImpl(_name,Edition (),_arch3));
+  detail::MessageImplPtr mi(new detail::MessageImpl(_name3,Edition (),_arch3));
   MessagePtr m (new Message (mi));
   atoms.push_back (m);
 
   MyPatchImpl q2 ("patch2", atoms);
   DBG << q2 << endl;
-  DBG << q2.interactive () << endl;
+  DBG << "  Interactive: " << q2.interactive () << endl;
+  a = q2.all_atoms ();
+  for (atom_list::iterator it = a.begin (); it != a.end (); it++)
+  {
+    DBG << "  " << **it << endl;
+  }
 
   INT << "===[END]============================================" << endl;
   return 0;
