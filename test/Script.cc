@@ -26,7 +26,7 @@ class MyScriptImpl : public detail::ScriptImpl
 {
   public:
     MyScriptImpl (std::string do_script, std::string undo_script = "") 
-    : ScriptImpl (ResName ("script1"),
+    : ScriptImpl ("script1",
 		  Edition (),
 		  Arch ("noarch"))
     {

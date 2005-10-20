@@ -20,9 +20,9 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  ResName    _name( "foo" );
-  Edition    _edition( "1.0", "42" );
-  Arch       _arch( "i386" );
+  std::string _name( "foo" );
+  Edition     _edition( "1.0", "42" );
+  Arch        _arch( "i386" );
 
 
   detail::PackageImplPtr pi( new detail::PackageImpl(_name,_edition,_arch) );

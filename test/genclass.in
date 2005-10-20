@@ -40,7 +40,7 @@ test -e $OUT_CLASS_H -o -e $OUT_CLASS_CC && {
 
 INCLUDE_H=$CLASS_H
 INCLUDE_DEF=$(echo $INCLUDE_H | sed 's/[./]/_/g' | awk '{print toupper($0)}')
-NSLIST=$(echo $(dirname $INCLUDE_H) | sed 's/[/]/ /g')
+NSLIST=$(echo $(dirname $INCLUDE_H) | awk '{l=tolower($0);gsub("/"," ",l);print l}')
 SNLIST=
 INDENT=
 for N in $NSLIST; do

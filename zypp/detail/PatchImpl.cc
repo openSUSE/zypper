@@ -32,11 +32,11 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     /** Default ctor */
-    PatchImpl::PatchImpl( const ResName & name_r,
+    PatchImpl::PatchImpl( const std::string & name_r,
 			  const Edition & edition_r,
 			  const Arch & arch_r )
     : ResolvableImpl (ResKind ("patch"),
-		      ResName (name_r),
+		      name_r,
 		      Edition (edition_r),
 		      Arch (arch_r))
     {

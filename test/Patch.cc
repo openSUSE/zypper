@@ -29,8 +29,8 @@ using namespace zypp;
 class MyPatchImpl : public detail::PatchImpl
 {
   public:
-    MyPatchImpl (std::string name, std::list<ResolvablePtr> atoms) 
-    : PatchImpl (ResName (name),
+    MyPatchImpl (std::string name, std::list<ResolvablePtr> atoms)
+    : PatchImpl (name,
 		 Edition (),
 		 Arch ("noarch"))
     {
@@ -53,14 +53,14 @@ int main( int argc, char * argv[] )
 
   atom_list atoms;
 
-  ResName _name( "foo" );
+  std::string _name( "foo" );
   Edition _edition( "1.0", "42" );
   Arch    _arch( "i386" );
   detail::PackageImplPtr pi( new detail::PackageImpl(_name,_edition,_arch) );
   PackagePtr p (new Package (pi));
   atoms.push_back (p);
 
-  ResName _name2( "bar" );
+  std::string _name2( "bar" );
   Edition _edition2( "1.0", "43" );
   Arch    _arch2( "noarch" );
   detail::PackageImplPtr pi2(new detail::PackageImpl(_name2,_edition2,_arch2));
@@ -78,7 +78,7 @@ int main( int argc, char * argv[] )
 
   INT << "====================================================" << endl;
 
-  ResName _name3( "msg" );
+  std::string _name3( "msg" );
   Arch    _arch3( "noarch" );
   detail::MessageImplPtr mi(new detail::MessageImpl(_name3,Edition (),_arch3));
   MessagePtr m (new Message (mi));

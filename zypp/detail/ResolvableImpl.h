@@ -12,11 +12,12 @@
 #ifndef ZYPP_DETAIL_RESOLVABLEIMPL_H
 #define ZYPP_DETAIL_RESOLVABLEIMPL_H
 
+#include <string>
+
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 
 #include "zypp/ResKind.h"
-#include "zypp/ResName.h"
 #include "zypp/Edition.h"
 #include "zypp/Arch.h"
 
@@ -38,7 +39,7 @@ namespace zypp
     public:
       /** ctor */
       ResolvableImpl( const ResKind & kind_r,
-                      const ResName & name_r,
+                      const std::string & name_r,
                       const Edition & edition_r,
                       const Arch & arch_r );
       /** Dtor */
@@ -49,7 +50,7 @@ namespace zypp
       const ResKind & kind() const
       { return _kind; }
       /**  */
-      const ResName & name() const
+      const std::string & name() const
       { return _name; }
       /**  */
       const Edition & edition() const
@@ -60,13 +61,13 @@ namespace zypp
 
     private:
       /**  */
-      ResKind    _kind;
+      ResKind _kind;
       /**  */
-      ResName    _name;
+      std::string _name;
       /**  */
       Edition _edition;
       /**  */
-      Arch    _arch;
+      Arch _arch;
     };
     ///////////////////////////////////////////////////////////////////
 

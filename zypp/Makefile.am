@@ -9,7 +9,6 @@ include_HEADERS = \
 	Arch.h		\
 	Edition.h	\
 	ResKind.h	\
-	ResName.h	\
 	Resolvable.h	\
 	Package.h	\
 	Selection.h	\
@@ -27,7 +26,6 @@ lib@PACKAGE@_la_SOURCES = \
 	Arch.cc		\
 	Edition.cc	\
 	ResKind.cc	\
-	ResName.cc	\
 	Resolvable.cc	\
 	Package.cc	\
 	Selection.cc	\

@@ -31,11 +31,11 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     /** Default ctor */
-    ScriptImpl::ScriptImpl( const ResName & name_r,
+    ScriptImpl::ScriptImpl( const std::string & name_r,
 			    const Edition & edition_r,
 			    const Arch & arch_r )
     : ResolvableImpl (ResKind ("script"),
-		      ResName (name_r),
+		      name_r,
 		      Edition (edition_r),
 		      Arch (arch_r))
     {

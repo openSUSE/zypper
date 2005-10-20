@@ -28,7 +28,7 @@ namespace zypp
     //	METHOD TYPE : Ctor
     //
     ResolvableImpl::ResolvableImpl( const ResKind & kind_r,
-                                    const ResName & name_r,
+                                    const std::string & name_r,
                                     const Edition & edition_r,
                                     const Arch & arch_r )
     : _kind( kind_r )

@@ -25,8 +25,8 @@ using namespace zypp;
 class MyMessageImpl : public detail::MessageImpl
 {
   public:
-    MyMessageImpl (std::string text) 
-    : MessageImpl (ResName ("message1"),
+    MyMessageImpl (std::string text)
+    : MessageImpl ("message1",
 		   Edition (),
 		   Arch ("noarch"))
     {

@@ -27,7 +27,7 @@ namespace zypp
     //	METHOD NAME : PackageImpl::PackageImpl
     //	METHOD TYPE : Ctor
     //
-    PackageImpl::PackageImpl( const ResName & name_r,
+    PackageImpl::PackageImpl( const std::string & name_r,
                               const Edition & edition_r,
                               const Arch & arch_r )
     : ResolvableImpl( ResKind("package"), name_r, edition_r, arch_r )

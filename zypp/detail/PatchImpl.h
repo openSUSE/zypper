@@ -35,7 +35,7 @@ namespace zypp
     {
     public:
       /** Default ctor */
-      PatchImpl( const ResName & name_r,
+      PatchImpl( const std::string & name_r,
 		 const Edition & edition_r,
 		 const Arch & arch_r );
       /** Dtor */

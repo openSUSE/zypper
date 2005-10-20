@@ -13,6 +13,7 @@
 #define ZYPP_RESOLVABLE_H
 
 #include <iosfwd>
+#include <string>
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
@@ -30,7 +31,6 @@ namespace zypp
   DEFINE_PTR_TYPE(Resolvable)
 
   class ResKind;
-  class ResName;
   class Edition;
   class Arch;
 
@@ -51,7 +51,7 @@ namespace zypp
     /**  */
     const ResKind & kind() const;
     /**  */
-    const ResName & name() const;
+    const std::string & name() const;
     /**  */
     const Edition & edition() const;
     /**  */

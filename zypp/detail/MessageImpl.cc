@@ -13,7 +13,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/detail/MessageImpl.h"
-#include "zypp/Message.h"
+//#include "zypp/Message.h"
 
 using namespace std;
 
@@ -31,13 +31,13 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     /** Default ctor */
-    MessageImpl::MessageImpl( const ResName & name_r,
+    MessageImpl::MessageImpl( const std::string & name_r,
 			      const Edition & edition_r,
 			      const Arch & arch_r )
     : ResolvableImpl (ResKind ("message"),
-		      ResName (name_r),
-		      Edition (edition_r),
-		      Arch (arch_r))
+		      name_r,
+		      edition_r,
+		      arch_r)
     {
     }
     /** Dtor */

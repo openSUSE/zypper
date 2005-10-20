@@ -9,8 +9,6 @@
 /** \file zypp/Resolvable.cc
  *
 */
-#include <iostream>
-
 #include "zypp/Resolvable.h"
 #include "zypp/detail/ResolvableImpl.h"
 
@@ -40,7 +38,7 @@ namespace zypp
   const ResKind & Resolvable::kind() const
   { return _pimpl->kind(); }
 
-  const ResName & Resolvable::name() const
+  const std::string & Resolvable::name() const
   { return _pimpl->name(); }
 
   const Edition & Resolvable::edition() const

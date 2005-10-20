@@ -33,7 +33,7 @@ namespace zypp
     {
     public:
       /** */
-      SelectionImpl( const ResName & name_r,
+      SelectionImpl( const std::string & name_r,
                      const Edition & edition_r,
                      const Arch & arch_r );
       /** Dtor */
