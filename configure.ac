@@ -100,6 +100,8 @@ AC_OUTPUT(	\
 	doc/autodoc/Doxyfile	\
 	test/Makefile		\
 	test/genclass		\
+	test/devel.jsrain/Makefile	\
+	test/devel.ma/Makefile		\
 	zypp/Makefile		\
 	zypp/base/Makefile	\
 	zypp/detail/Makefile
