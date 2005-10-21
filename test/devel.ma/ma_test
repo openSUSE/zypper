@@ -1,0 +1,35 @@
+#! /bin/bash
+#
+#export LD_LIBRARY_PATH=/usr/local/lib64
+
+PRG=Main
+
+if [ -n "$1" ]; then
+       PRG=$1
+       shift
+fi
+
+if [ ! -x ~ma/bin/sy2l.tcl ]; then
+	exec ./$PRG
+fi
+
+LPIPE=LOGFILE
+
+test -p "$LPIPE" || {
+        test -e "$LPIPE" && { echo "No pipe '$LPIPE' exists"; exit 1; }
+        mkfifo $LPIPE
+}
+if ! fuser $LPIPE >/dev/null; then
+        ~ma/bin/sy2l.tcl $LPIPE &
+fi
+
+if ps axl | grep -q '[/]usr/sbin/iceczc'; then
+	MAKE=make
+else
+	MAKE="make -j 15"
+fi
+
+$MAKE -C ../zypp || exit 1
+$MAKE $PRG || exit 1
+
+./$PRG "$@" 2> $LPIPE
