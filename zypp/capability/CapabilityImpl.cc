@@ -6,12 +6,12 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/detail/SelectionImpl.cc
+/** \file zypp/capability/CapabilityImpl.cc
  *
 */
 #include <iostream>
 
-#include "zypp/detail/SelectionImpl.h"
+#include "zypp/capability/CapabilityImpl.h"
 
 using namespace std;
 
@@ -19,37 +19,30 @@ using namespace std;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace detail
+  namespace capability
   { /////////////////////////////////////////////////////////////////
-    IMPL_PTR_TYPE(SelectionImpl)
+    IMPL_PTR_TYPE(CapabilityImpl)
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : SelectionImpl::SelectionImpl
-    //	METHOD TYPE : Ctor
-    //
-    SelectionImpl::SelectionImpl( const std::string & name_r,
-                                  const Edition & edition_r,
-                                  const Arch & arch_r )
-    : ResolvableImpl( ResKind("selection"), name_r, edition_r, arch_r )
-    {}
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : SelectionImpl::~SelectionImpl
+    //	METHOD NAME : CapabilityImpl::~CapabilityImpl
     //	METHOD TYPE : Dtor
     //
-    SelectionImpl::~SelectionImpl()
+    CapabilityImpl::~CapabilityImpl()
     {}
 
-    std::string SelectionImpl::summary() const
-    { return std::string(); }
-
-    std::list<std::string> SelectionImpl::description() const
-    { return std::list<std::string>(); }
+    /******************************************************************
+     **
+     **	FUNCTION NAME : operator<<
+     **	FUNCTION TYPE : std::ostream &
+    */
+    std::ostream & operator<<( std::ostream & str, const CapabilityImpl & obj )
+    {
+      return str << "CapabilityImpl";
+    }
 
     /////////////////////////////////////////////////////////////////
-  } // namespace detail
+  } // namespace capability
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

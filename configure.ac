@@ -104,7 +104,8 @@ AC_OUTPUT(	\
 	test/devel.ma/Makefile		\
 	zypp/Makefile		\
 	zypp/base/Makefile	\
-	zypp/detail/Makefile
+	zypp/detail/Makefile	\
+	zypp/capability/Makefile
 )
 dnl ==================================================
 

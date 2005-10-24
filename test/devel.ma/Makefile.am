@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS =	Main Main.debug
+noinst_PROGRAMS =	Main Main.debug PtrTest
 
 ## ##################################################
 
@@ -19,6 +19,10 @@ Main_SOURCES = 		Main.cc
 
 Main_debug_SOURCES = 	$(Main_SOURCES)
 Main_debug_LDFLAGS =	-static
+
+## ##################################################
+
+PtrTest_SOURCES = 	PtrTest.cc
 
 ## ##################################################
 

@@ -13,7 +13,8 @@
 #define ZYPP_BASE_REFERENCECOUNTED_H
 
 #include <iosfwd>
-#include <boost/intrusive_ptr.hpp>
+
+#include "zypp/base/PtrTypes.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -77,31 +78,23 @@ namespace zypp
           delete this;
       }
 
+      /** Called by zypp::base::intrusive_ptr to add a reference.
+       * \see ZYPP_BASE_SMART_PTR
+      */
+      static void add_ref( const ReferenceCounted * ptr_r )
+      { if( ptr_r ) ptr_r->ref(); }
+
+      /** Called by zypp::base::intrusive_ptr to add a reference.
+       * \see ZYPP_BASE_SMART_PTR
+      */
+      static void release( const ReferenceCounted * ptr_r )
+      { if( ptr_r ) ptr_r->unref(); }
+
     private:
       /** The reference counter. */
       mutable unsigned _counter;
     };
     ///////////////////////////////////////////////////////////////////
-
-    /** Use boost::intrusive_ptr as Ptr type*/
-    using boost::intrusive_ptr;
-    using boost::static_pointer_cast;
-    using boost::const_pointer_cast;
-    using boost::dynamic_pointer_cast;
-
-    /** Called by zypp::base::intrusive_ptr to add a reference.
-     * \relates ReferenceCounted
-     * \see ZYPP_BASE_SMART_PTR
-    */
-    inline void intrusive_ptr_add_ref( const ReferenceCounted * ptr_r )
-    { if( ptr_r ) ptr_r->ref(); }
-
-    /** Called by zypp::base::intrusive_ptr to add a reference.
-     * \relates ReferenceCounted
-     * \see ZYPP_BASE_SMART_PTR
-    */
-    inline void intrusive_ptr_release( const ReferenceCounted * ptr_r  )
-    { if( ptr_r ) ptr_r->unref(); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace base
@@ -110,11 +103,11 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
-/** Forward declaration of Ptr types */
-#define DEFINE_PTR_TYPE(NAME) \
-class NAME;                                                      \
-typedef zypp::base::intrusive_ptr<NAME>       NAME##Ptr;         \
-typedef zypp::base::intrusive_ptr<const NAME> const##NAME##Ptr;
+#define IMPL_PTR_TYPE(NAME) \
+void intrusive_ptr_add_ref( const NAME * ptr_r )               \
+{ zypp::base::ReferenceCounted::add_ref( ptr_r ); }                  \
+void intrusive_ptr_release( const NAME * ptr_r )               \
+{ zypp::base::ReferenceCounted::release( ptr_r ); }
 
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_BASE_REFERENCECOUNTED_H

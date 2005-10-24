@@ -1,0 +1,23 @@
+## Process this file with automake to produce Makefile.in
+## ##################################################
+
+SUBDIRS =
+
+## ##################################################
+
+include_HEADERS = CapabilityImpl.h \
+	\
+	ConditionalCap.h\
+	FileCap.h	\
+	NamedCap.h	\
+	OrCap.h		\
+	VersionedCap.h
+
+noinst_LTLIBRARIES =	lib@PACKAGE@_capability.la
+
+## ##################################################
+
+lib@PACKAGE@_capability_la_SOURCES = \
+	CapabilityImpl.cc
+
+## ##################################################

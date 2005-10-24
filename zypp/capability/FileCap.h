@@ -6,51 +6,40 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/detail/SelectionImpl.cc
+/** \file zypp/capability/FileCap.h
  *
 */
-#include <iostream>
+#ifndef ZYPP_CAPABILITY_FILECAP_H
+#define ZYPP_CAPABILITY_FILECAP_H
 
-#include "zypp/detail/SelectionImpl.h"
-
-using namespace std;
+#include "zypp/capability/CapabilityImpl.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace detail
+  namespace capability
   { /////////////////////////////////////////////////////////////////
-    IMPL_PTR_TYPE(SelectionImpl)
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : SelectionImpl::SelectionImpl
-    //	METHOD TYPE : Ctor
+    //	CLASS NAME : FileCap
     //
-    SelectionImpl::SelectionImpl( const std::string & name_r,
-                                  const Edition & edition_r,
-                                  const Arch & arch_r )
-    : ResolvableImpl( ResKind("selection"), name_r, edition_r, arch_r )
-    {}
-
+    /** */
+    class FileCap : public CapabilityImpl
+    {
+    public:
+      /**  */
+      bool matches( constResolvablePtr resolvable_r,
+                    const SolverContext & colverContext_r )
+      { return false; }
+    };
     ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : SelectionImpl::~SelectionImpl
-    //	METHOD TYPE : Dtor
-    //
-    SelectionImpl::~SelectionImpl()
-    {}
-
-    std::string SelectionImpl::summary() const
-    { return std::string(); }
-
-    std::list<std::string> SelectionImpl::description() const
-    { return std::list<std::string>(); }
 
     /////////////////////////////////////////////////////////////////
-  } // namespace detail
+  } // namespace capability
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_CAPABILITY_FILECAP_H

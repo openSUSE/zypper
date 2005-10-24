@@ -6,62 +6,60 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/Resolvable.cc
+/** \file zypp/Capability.cc
  *
 */
-#include "zypp/Resolvable.h"
-#include "zypp/detail/ResolvableImpl.h"
+#include <iostream>
+
+#include "zypp/Capability.h"
+#include "zypp/capability/CapabilityImpl.h"
+
+#include "zypp/SolverContext.h"
 
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  IMPL_PTR_TYPE(Resolvable)
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Resolvable::Resolvable
+  //	METHOD NAME : Capability::Capability
   //	METHOD TYPE : Ctor
   //
-  Resolvable::Resolvable( detail::ResolvableImplPtr impl_r )
+  Capability::Capability( ImplPtr impl_r )
   : _pimpl( impl_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Resolvable::~Resolvable
+  //	METHOD NAME : Capability::~Capability
   //	METHOD TYPE : Dtor
   //
-  Resolvable::~Resolvable()
+  Capability::~Capability()
   {}
-
-  const ResKind & Resolvable::kind() const
-  { return _pimpl->kind(); }
-
-  const std::string & Resolvable::name() const
-  { return _pimpl->name(); }
-
-  const Edition & Resolvable::edition() const
-  { return _pimpl->edition(); }
-
-  const Arch & Resolvable::arch() const
-  { return _pimpl->arch(); }
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Resolvable::~Resolvable
-  //	METHOD TYPE : Dtor
+  //	METHOD NAME : Capability::sayFriend
+  //	METHOD TYPE : capability::constCapabilityImplPtr
   //
-  detail::constResolvableImplPtr Resolvable::sayFriend() const
+  Capability::constImplPtr Capability::sayFriend() const
   { return _pimpl; }
+
+  bool Capability::matches( constResolvablePtr resolvable_r,
+                            const SolverContext & solverContext_r )
+  { return _pimpl->matches( resolvable_r, solverContext_r ); }
+
+  bool Capability::matches( constResolvablePtr resolvable_r )
+  { return _pimpl->matches( resolvable_r, SolverContext() ); }
 
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<
   **	FUNCTION TYPE : std::ostream &
   */
-  std::ostream & operator<<( std::ostream & str, const Resolvable & obj )
+  std::ostream & operator<<( std::ostream & str, const Capability & obj )
   {
     return str << *obj.sayFriend();
   }

@@ -29,7 +29,7 @@ else
 	MAKE="make -j 15"
 fi
 
-$MAKE -C ../zypp || exit 1
+$MAKE -C ../../zypp || exit 1
 $MAKE $PRG || exit 1
 
 ./$PRG "$@" 2> $LPIPE

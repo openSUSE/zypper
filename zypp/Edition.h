@@ -16,6 +16,7 @@
 #include <string>
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/RelOp.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -29,7 +30,9 @@ namespace zypp
   class Edition
   {
   public:
+    /** */
     typedef unsigned epoch_t;
+
   public:
     /** Default ctor */
     Edition();
@@ -39,6 +42,7 @@ namespace zypp
              epoch_t epoch = 0 );
     /** Dtor */
     ~Edition();
+
   public:
     /** */
     epoch_t epoch() const;
@@ -46,6 +50,7 @@ namespace zypp
     const std::string & version() const;
     /** */
     const std::string & release() const;
+
   private:
     /** Hides implementation */
     struct Impl;
@@ -54,7 +59,7 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
-  /** \relates ResEdition Stream output */
+  /** \relates Edition Stream output */
   extern std::ostream & operator<<( std::ostream & str, const Edition & obj );
 
   /////////////////////////////////////////////////////////////////

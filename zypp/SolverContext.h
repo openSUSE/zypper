@@ -6,14 +6,15 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/detail/SelectionImpl.cc
+/** \file	zypp/SolverContext.h
  *
 */
-#include <iostream>
+#ifndef ZYPP_SOLVERCONTEXT_H
+#define ZYPP_SOLVERCONTEXT_H
 
-#include "zypp/detail/SelectionImpl.h"
+#include <iosfwd>
 
-using namespace std;
+#include "zypp/base/PtrTypes.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -21,36 +22,40 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
-    IMPL_PTR_TYPE(SelectionImpl)
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : SelectionImpl::SelectionImpl
-    //	METHOD TYPE : Ctor
-    //
-    SelectionImpl::SelectionImpl( const std::string & name_r,
-                                  const Edition & edition_r,
-                                  const Arch & arch_r )
-    : ResolvableImpl( ResKind("selection"), name_r, edition_r, arch_r )
-    {}
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : SelectionImpl::~SelectionImpl
-    //	METHOD TYPE : Dtor
-    //
-    SelectionImpl::~SelectionImpl()
-    {}
-
-    std::string SelectionImpl::summary() const
-    { return std::string(); }
-
-    std::list<std::string> SelectionImpl::description() const
-    { return std::list<std::string>(); }
-
+    DEFINE_PTR_TYPE(SolverContextImpl)
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : SolverContext
+  //
+  /** */
+  class SolverContext
+  {
+  public:
+    /** Default ctor */
+    SolverContext();
+    /** Factory ctor */
+    explicit
+    SolverContext( detail::SolverContextImplPtr impl_r );
+    /** Dtor */
+    ~SolverContext();
+
+  private:
+    /** Pointer to implementation */
+    detail::SolverContextImplPtr _pimpl;
+  public:
+    /** Avoid a bunch of friend decl. */
+    detail::constSolverContextImplPtr sayFriend() const;
+  };
+  ///////////////////////////////////////////////////////////////////
+
+  /** \relates SolverContext Stream output */
+  extern std::ostream & operator<<( std::ostream & str, const SolverContext & obj );
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_SOLVERCONTEXT_H

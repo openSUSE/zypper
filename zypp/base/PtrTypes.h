@@ -16,6 +16,7 @@
 #include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/weak_ptr.hpp>
+#include <boost/intrusive_ptr.hpp>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -47,6 +48,12 @@ namespace zypp
     /** */
     using boost::weak_ptr;
 
+    /** Use boost::intrusive_ptr as Ptr type*/
+    using boost::intrusive_ptr;
+    using boost::static_pointer_cast;
+    using boost::const_pointer_cast;
+    using boost::dynamic_pointer_cast;
+
     /*@}*/
 
     /////////////////////////////////////////////////////////////////
@@ -54,5 +61,15 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
+///////////////////////////////////////////////////////////////////
+
+/** Forward declaration of Ptr types */
+#define DEFINE_PTR_TYPE(NAME) \
+class NAME;                                                      \
+extern void intrusive_ptr_add_ref( const NAME * );               \
+extern void intrusive_ptr_release( const NAME * );               \
+typedef zypp::base::intrusive_ptr<NAME>       NAME##Ptr;         \
+typedef zypp::base::intrusive_ptr<const NAME> const##NAME##Ptr;
+
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_BASE_PTRTYPES_H

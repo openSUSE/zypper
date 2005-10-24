@@ -104,6 +104,13 @@ $(intro $CLASS_H)
 #include "zypp/base/PtrTypes.h"
 
 $(nsopen)
+${INDENT}///////////////////////////////////////////////////////////////////
+${INDENT}namespace detail
+${INDENT}{ /////////////////////////////////////////////////////////////////
+${INDENT}  DEFINE_PTR_TYPE(${CLASS}Impl)
+${INDENT}  /////////////////////////////////////////////////////////////////
+${INDENT}} // namespace detail
+${INDENT}///////////////////////////////////////////////////////////////////
 
 ${INDENT}///////////////////////////////////////////////////////////////////
 ${INDENT}//
@@ -115,20 +122,23 @@ ${INDENT}{
 ${INDENT}public:
 ${INDENT}  /** Default ctor */
 ${INDENT}  ${CLASS}();
-
+${INDENT}  /** Factory ctor */
+${INDENT}  explicit
+${INDENT}  ${CLASS}( detail::${CLASS}ImplPtr impl_r );
 ${INDENT}  /** Dtor */
 ${INDENT}  ~${CLASS}();
 
-${INDENT}  /** Stream output */
-${INDENT}  friend std::ostream & operator<<( std::ostream & str, const ${CLASS} & obj );
-
 ${INDENT}private:
-${INDENT}  /** Hides implementation */
-${INDENT}  struct Impl;
 ${INDENT}  /** Pointer to implementation */
-${INDENT}  base::shared_ptr<Impl> _pimpl;
+${INDENT}  detail::${CLASS}ImplPtr _pimpl;
+${INDENT}public:
+${INDENT}  /** Avoid a bunch of friend decl. */
+${INDENT}  detail::const${CLASS}ImplPtr sayFriend() const;
 ${INDENT}};
 ${INDENT}///////////////////////////////////////////////////////////////////
+
+${INDENT}/** \relates ${CLASS} Stream output */
+${INDENT}extern std::ostream & operator<<( std::ostream & str, const ${CLASS} & obj );
 
 $(nsclose)
 #endif // $INCLUDE_DEF
@@ -142,8 +152,8 @@ cat <<EOF
 $(intro $CLASS_CC)
 #include <iostream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/BaseTypes.h"
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
 #include "${INCLUDE_H}"
 
 using namespace std;
@@ -151,34 +161,32 @@ using namespace std;
 $(nsopen)
 
 ${INDENT}///////////////////////////////////////////////////////////////////
-${INDENT}//
-${INDENT}//	CLASS NAME : ${CLASS}::Impl
-${INDENT}//
-${INDENT}/** ${CLASS} implementation */
-${INDENT}struct ${CLASS}::Impl : private zypp::base::noncopyable
-${INDENT}{
-${INDENT}  /** Default ctor*/
-${INDENT}  Impl();
+${INDENT}namespace detail
+${INDENT}{ /////////////////////////////////////////////////////////////////
 
-${INDENT}  /** Dtor */
-${INDENT}  ~Impl();
+${INDENT}  ///////////////////////////////////////////////////////////////////
+${INDENT}  //
+${INDENT}  //	CLASS NAME : ${CLASS}Impl
+${INDENT}  //
+${INDENT}  /** ${CLASS} implementation */
+${INDENT}  struct ${CLASS}Impl : public base::ReferenceCounted, private base::NonCopyable
+${INDENT}  {
+${INDENT}    /** Default ctor*/
+${INDENT}    ${CLASS}Impl();
+${INDENT}    /** Dtor */
+${INDENT}    ~${CLASS}Impl();
+${INDENT}  };
+${INDENT}  ///////////////////////////////////////////////////////////////////
 
-${INDENT}  /** Stream output */
-${INDENT}  friend std::ostream & operator<<( std::ostream & str, const Impl & obj );
+${INDENT}  /** \relates ${CLASS}Impl Stream output */
+${INDENT}  inline std::ostream & operator<<( std::ostream & str, const ${CLASS}Impl & obj )
+${INDENT}  {
+${INDENT}    return str << "${CLASS}Impl";
+${INDENT}  }
 
-${INDENT}};
+${INDENT}  /////////////////////////////////////////////////////////////////
+${INDENT}} // namespace detail
 ${INDENT}///////////////////////////////////////////////////////////////////
-
-${INDENT}/******************************************************************
-${INDENT}**
-${INDENT}**	FUNCTION NAME : operator<<
-${INDENT}**	FUNCTION TYPE : std::ostream &
-${INDENT}*/
-${INDENT}std::ostream & operator<<( std::ostream & str, const ${CLASS}::Impl & obj )
-${INDENT}{
-${INDENT}  return str << "${CLASS}::Impl";
-${INDENT}}
-
 
 ${INDENT}///////////////////////////////////////////////////////////////////
 ${INDENT}//
@@ -196,11 +204,28 @@ ${INDENT}{}
 
 ${INDENT}///////////////////////////////////////////////////////////////////
 ${INDENT}//
+${INDENT}//	METHOD NAME : ${CLASS}::${CLASS}
+${INDENT}//	METHOD TYPE : Ctor
+${INDENT}//
+${INDENT}${CLASS}::${CLASS}( detail::${CLASS}ImplPtr impl_r )
+${INDENT}: _pimpl( impl_r )
+${INDENT}{}
+
+${INDENT}///////////////////////////////////////////////////////////////////
+${INDENT}//
 ${INDENT}//	METHOD NAME : ${CLASS}::~${CLASS}
 ${INDENT}//	METHOD TYPE : Dtor
 ${INDENT}//
 ${INDENT}${CLASS}::~${CLASS}()
 ${INDENT}{}
+
+${INDENT}///////////////////////////////////////////////////////////////////
+${INDENT}//
+${INDENT}//	METHOD NAME : ${CLASS}::sayFriend
+${INDENT}//	METHOD TYPE : detail::const${CLASS}ImplPtr
+${INDENT}//
+${INDENT}detail::const${CLASS}ImplPtr ${CLASS}::sayFriend() const
+${INDENT}{ return _pimpl; }
 
 ${INDENT}/******************************************************************
 ${INDENT}**
@@ -209,7 +234,7 @@ ${INDENT}**	FUNCTION TYPE : std::ostream &
 ${INDENT}*/
 ${INDENT}std::ostream & operator<<( std::ostream & str, const ${CLASS} & obj )
 ${INDENT}{
-${INDENT}  return str << obj._pimpl;
+${INDENT}  return str << *obj.sayFriend();
 ${INDENT}}
 
 $(nsclose)

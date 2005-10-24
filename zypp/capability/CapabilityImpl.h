@@ -6,51 +6,51 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/detail/SelectionImpl.cc
+/** \file zypp/capability/CapabilityImpl.h
  *
 */
-#include <iostream>
+#ifndef ZYPP_CAPABILITY_CAPABILITYIMPL_H
+#define ZYPP_CAPABILITY_CAPABILITYIMPL_H
 
-#include "zypp/detail/SelectionImpl.h"
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
 
-using namespace std;
+#include "zypp/ResolvableFwd.h"
+#include "zypp/SolverContextFwd.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace detail
+  namespace capability
   { /////////////////////////////////////////////////////////////////
-    IMPL_PTR_TYPE(SelectionImpl)
+    DEFINE_PTR_TYPE(CapabilityImpl)
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : SelectionImpl::SelectionImpl
-    //	METHOD TYPE : Ctor
+    //	CLASS NAME : CapabilityImpl
     //
-    SelectionImpl::SelectionImpl( const std::string & name_r,
-                                  const Edition & edition_r,
-                                  const Arch & arch_r )
-    : ResolvableImpl( ResKind("selection"), name_r, edition_r, arch_r )
-    {}
+    /** */
+    class CapabilityImpl : public base::ReferenceCounted, private base::NonCopyable
+    {
+    public:
+      /** Dtor */
+      virtual ~CapabilityImpl();
 
+    public:
+      /**  */
+      virtual bool matches( constResolvablePtr resolvable_r,
+                            const SolverContext & colverContext_r ) = 0;
+    };
     ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : SelectionImpl::~SelectionImpl
-    //	METHOD TYPE : Dtor
-    //
-    SelectionImpl::~SelectionImpl()
-    {}
 
-    std::string SelectionImpl::summary() const
-    { return std::string(); }
-
-    std::list<std::string> SelectionImpl::description() const
-    { return std::list<std::string>(); }
+    /** \relates CapabilityImpl Stream output */
+    extern std::ostream & operator<<( std::ostream & str, const CapabilityImpl & obj );
 
     /////////////////////////////////////////////////////////////////
-  } // namespace detail
+  } // namespace capability
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_CAPABILITY_CAPABILITYIMPL_H
