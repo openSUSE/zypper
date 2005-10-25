@@ -10,14 +10,38 @@
  *
 */
 #include <iostream>
+#include <functional>
+#include <set>
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/CapFactory.h"
 
-#include "zypp/capability/FileCap.h"
+#include "zypp/capability/Capabilities.h"
 
 using namespace std;
+
+///////////////////////////////////////////////////////////////////
+namespace
+{ /////////////////////////////////////////////////////////////////
+
+  typedef zypp::capability::CapabilityImplPtr CapabilityImplPtr;
+
+  /** \todo check set ordering to assert no dups */
+  struct USetOrder : public std::binary_function<CapabilityImplPtr, CapabilityImplPtr, bool>
+  {
+    bool operator()( const CapabilityImplPtr & lhs,
+                     const CapabilityImplPtr & rhs ) const
+    { return lhs->asString() < rhs->asString(); }
+  };
+
+  typedef std::set<CapabilityImplPtr,USetOrder> USet;
+
+  USet _uset;
+
+  /////////////////////////////////////////////////////////////////
+} // namespace
+///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -97,10 +121,13 @@ namespace zypp
   //	METHOD NAME : CapFactory::parse
   //	METHOD TYPE : Capability
   //
-  Capability CapFactory::parse( const std::string & strval_r ) const
+  /** \todo fix it */
+  Capability CapFactory::parse( const ResKind & refers_r, const std::string & strval_r ) const
   {
     // fix
-    return Capability( new capability::FileCap );
+    CapabilityImplPtr newcap( new capability::NamedCap( refers_r, strval_r ) );
+    USet::iterator in( _uset.insert( newcap ).first );
+    return Capability( *in );
   }
 
   /******************************************************************

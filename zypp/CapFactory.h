@@ -46,9 +46,13 @@ namespace zypp
     ~CapFactory();
 
   public:
-    /**  */
-    Capability parse( const std::string & strval_r ) const;
-
+    /** */
+    Capability parse( const ResKind & refers_r, const std::string & strval_r ) const;
+    /*
+    template<typename _Res>
+      Capability parse( const std::string & strval_r ) const
+      { return parse( _Res::kind(), strval_r ); }
+    */
   private:
     /** Pointer to implementation */
     detail::CapFactoryImplPtr _pimpl;

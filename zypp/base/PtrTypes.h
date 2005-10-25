@@ -36,6 +36,10 @@ namespace zypp
      * \li \c shared_ptr Object ownership shared among multiple pointers
      *
      * \li \c weak_ptr Non-owning observers of an object owned by shared_ptr.
+     *
+     * \todo Intrusive Ptr class which supports constness. Used as PIMPL.
+     * Offers 'const Impl *' in const context, otherwise 'Impl *'. to
+     * prevent const classes from calling nonconst Impl methods.
     */
     /*@{*/
 

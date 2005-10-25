@@ -36,7 +36,9 @@ namespace zypp
   //
   //	CLASS NAME : Capability
   //
-  /** */
+  /** Resolvable capabilitiy.
+   * \invariant Nonzero \c _pimpl
+  */
   class Capability
   {
   private:
@@ -54,10 +56,14 @@ namespace zypp
 
   public:
     /**  */
-    bool matches( constResolvablePtr resolvable_r,
-                  const SolverContext & colverContext_r );
+    const ResKind & refers() const;
     /**  */
-    bool matches( constResolvablePtr resolvable_r );
+    std::string asString() const;
+    /**  */
+    bool matches( constResolvablePtr resolvable_r,
+                  const SolverContext & colverContext_r ) const;
+    /**  */
+    bool matches( constResolvablePtr resolvable_r ) const;
 
   private:
     /** Pointer to implementation */

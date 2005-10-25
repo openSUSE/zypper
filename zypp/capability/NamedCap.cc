@@ -6,13 +6,12 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/capability/NamedCap.h
+/** \file zypp/capability/NamedCap.cc
  *
 */
-#ifndef ZYPP_CAPABILITY_NAMEDCAP_H
-#define ZYPP_CAPABILITY_NAMEDCAP_H
+#include "zypp/capability/NamedCap.h"
 
-#include "zypp/capability/CapabilityImpl.h"
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -21,37 +20,7 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : NamedCap
-    //
-    /** */
-    class NamedCap : public CapabilityImpl
-    {
-    public:
-      /** Ctor */
-      NamedCap( const ResKind & refers_r, const std::string & name_r )
-      : CapabilityImpl( refers_r )
-      , _name( name_r )
-      {}
-    public:
-      /**  */
-      virtual const CapKind & kind() const
-      { return _kind; }
-      /**  */
-      virtual std::string asString() const
-      { return _name; }
-      /**  */
-      virtual bool matches( constResolvablePtr resolvable_r,
-                            const SolverContext & colverContext_r ) const
-      { return false; }
-    private:
-      /**  */
-      static const CapKind _kind;
-      /**  */
-      std::string _name;
-    };
-    ///////////////////////////////////////////////////////////////////
+    const CapKind NamedCap::_kind( "NamedCap" );
 
     /////////////////////////////////////////////////////////////////
   } // namespace capability
@@ -59,4 +28,3 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_CAPABILITY_NAMEDCAP_H

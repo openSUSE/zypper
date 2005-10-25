@@ -15,7 +15,7 @@ LDADD =		$(top_srcdir)/zypp/lib@PACKAGE@.la
 
 ## ##################################################
 
-Main_SOURCES = 		Main.cc
+Main_SOURCES = 		Main.cc main.cc
 
 Main_debug_SOURCES = 	$(Main_SOURCES)
 Main_debug_LDFLAGS =	-static

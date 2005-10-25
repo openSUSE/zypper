@@ -6,26 +6,13 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/ResolvableFwd.h
+/** \file	zypp/capability/Capabilities.h
  *
 */
-#ifndef ZYPP_RESOLVABLEFWD_H
-#define ZYPP_RESOLVABLEFWD_H
+#ifndef ZYPP_CAPABILITY_CAPABILITIES_H
+#define ZYPP_CAPABILITY_CAPABILITIES_H
 
-#include "zypp/base/PtrTypes.h"
+#include "zypp/capability/CapabilityImpl.h"
+#include "zypp/capability/NamedCap.h"
 
-///////////////////////////////////////////////////////////////////
-namespace zypp
-{ /////////////////////////////////////////////////////////////////
-
-  class ResKind;
-  class Edition;
-  class Arch;
-  class Capability;
-
-  DEFINE_PTR_TYPE(Resolvable)
-
-  /////////////////////////////////////////////////////////////////
-} // namespace zypp
-///////////////////////////////////////////////////////////////////
-#endif // ZYPP_RESOLVABLEFWD_H
+#endif // ZYPP_CAPABILITY_CAPABILITIES_H

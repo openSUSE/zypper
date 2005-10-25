@@ -25,10 +25,11 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : CapabilityImpl::~CapabilityImpl
-    //	METHOD TYPE : Dtor
+    //	METHOD NAME : CapabilityImpl::CapabilityImpl
+    //	METHOD TYPE : Ctor
     //
-    CapabilityImpl::~CapabilityImpl()
+    CapabilityImpl::CapabilityImpl( const ResKind & refers_r )
+    : _refers( refers_r )
     {}
 
     /******************************************************************
@@ -38,7 +39,7 @@ namespace zypp
     */
     std::ostream & operator<<( std::ostream & str, const CapabilityImpl & obj )
     {
-      return str << "CapabilityImpl";
+      return str << '[' << obj.refers() << "] " << obj.asString();
     }
 
     /////////////////////////////////////////////////////////////////

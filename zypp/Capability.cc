@@ -47,11 +47,17 @@ namespace zypp
   Capability::constImplPtr Capability::sayFriend() const
   { return _pimpl; }
 
+  const ResKind & Capability::refers() const
+  { return _pimpl->refers(); }
+
+  std::string Capability::asString() const
+  { return _pimpl->asString(); }
+
   bool Capability::matches( constResolvablePtr resolvable_r,
-                            const SolverContext & solverContext_r )
+                            const SolverContext & solverContext_r ) const
   { return _pimpl->matches( resolvable_r, solverContext_r ); }
 
-  bool Capability::matches( constResolvablePtr resolvable_r )
+  bool Capability::matches( constResolvablePtr resolvable_r ) const
   { return _pimpl->matches( resolvable_r, SolverContext() ); }
 
   /******************************************************************

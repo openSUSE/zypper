@@ -5,7 +5,9 @@ SUBDIRS =
 
 ## ##################################################
 
-include_HEADERS = CapabilityImpl.h \
+include_HEADERS = \
+	CapabilityImpl.h\
+	Capabilities.h	\
 	\
 	ConditionalCap.h\
 	FileCap.h	\
@@ -18,6 +20,8 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_capability.la
 ## ##################################################
 
 lib@PACKAGE@_capability_la_SOURCES = \
-	CapabilityImpl.cc
+	CapabilityImpl.cc	\
+	\
+	NamedCap.cc
 
 ## ##################################################

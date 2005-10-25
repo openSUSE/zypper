@@ -7,6 +7,7 @@
 #include <zypp/Capability.h>
 #include <zypp/CapFactory.h>
 #include <zypp/CapSet.h>
+#include "main.h"
 
 #define TAG INT << __PRETTY_FUNCTION__ << std::endl
 
@@ -16,7 +17,7 @@ namespace zypp
 
 using namespace std;
 using namespace zypp;
-
+#include <zypp/ResKind.h>
 /******************************************************************
 **
 **
@@ -30,7 +31,7 @@ struct CapSetInsert : public std::unary_function<const char *, void> {
     CapFactory _f;
     CapSetInsert( CapSet & x ) : _x(x) {}
     void operator()( const char * v )
-    { _x.insert( _f.parse( v ) ); }
+    { _x.insert( _f.parse( ResKind(), v ) ); }
 };
 
 int main( int argc, char * argv[] )

@@ -17,6 +17,7 @@
 
 #include "zypp/ResolvableFwd.h"
 #include "zypp/SolverContextFwd.h"
+#include "zypp/ResKind.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -26,6 +27,9 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
     DEFINE_PTR_TYPE(CapabilityImpl)
 
+    /** \todo Check implementation */
+    typedef std::string CapKind;
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : CapabilityImpl
@@ -34,13 +38,24 @@ namespace zypp
     class CapabilityImpl : public base::ReferenceCounted, private base::NonCopyable
     {
     public:
-      /** Dtor */
-      virtual ~CapabilityImpl();
+      /** Ctor */
+      CapabilityImpl( const ResKind & refers_r );
 
     public:
       /**  */
+      virtual const CapKind & kind() const = 0;
+      /**  */
+      const ResKind & refers() const
+      { return _refers; }
+      /**  */
+      virtual std::string asString() const = 0;
+      /**  */
       virtual bool matches( constResolvablePtr resolvable_r,
-                            const SolverContext & colverContext_r ) = 0;
+                            const SolverContext & colverContext_r ) const = 0;
+
+    private:
+      /**  */
+      ResKind _refers;
     };
     ///////////////////////////////////////////////////////////////////
 
