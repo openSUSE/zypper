@@ -18,7 +18,8 @@ include_HEADERS = \
 	Message.h	\
 	Script.h	\
 	SolverContext.h	\
-	Patch.h
+	Patch.h		\
+	Product.h
 
 ## ##################################################
 
@@ -39,7 +40,8 @@ lib@PACKAGE@_la_SOURCES = \
 	Message.cc	\
 	Script.cc	\
 	SolverContext.cc\
-	Patch.cc
+	Patch.cc	\
+	Product.cc
 
 lib@PACKAGE@_la_LDFLAGS =	@LIB_VERSION_INFO@
 

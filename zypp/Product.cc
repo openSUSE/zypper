@@ -6,13 +6,13 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/Message.cc
+/** \file zypp/Product.cc
  *
 */
 #include <iostream>
 
-#include "zypp/Message.h"
-#include "zypp/detail/MessageImpl.h"
+#include "zypp/Product.h"
+#include "zypp/detail/ProductImpl.h"
 
 using namespace std;
 
@@ -22,40 +22,34 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Message::Message
+  //	METHOD NAME : Product::Product
   //	METHOD TYPE : Ctor
   //
-  Message::Message( detail::MessageImplPtr impl_r )
+  Product::Product( detail::ProductImplPtr impl_r )
   : Resolvable( impl_r )
   , _pimpl( impl_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Message::~Message
+  //	METHOD NAME : Product::~Product
   //	METHOD TYPE : Dtor
   //
-  Message::~Message()
+  Product::~Product()
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Message::text
-  //	Get the text of the message
-  //
-  std::string Message::text()
+  std::list<std::string> Product::description() const
   {
-    return _pimpl->text();
+    return _pimpl->description();
   }
-
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Message::text
-  //	Get the type of the message ("OK", "YesNo")
+  //	METHOD NAME : Product::do_script
+  //	Get the product category
   //
-  std::string Message::type()
+  std::string Product::category()
   {
-    return _pimpl->type();
+    return _pimpl->category();
   }
 
   /////////////////////////////////////////////////////////////////

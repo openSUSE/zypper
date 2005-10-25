@@ -17,7 +17,7 @@
 
 #include "zypp/detail/ResolvableImpl.h"
 #include "zypp/Resolvable.h"
-#include "zypp/Patch.h"
+#include "zypp/Patch.h"  // contains atom_list macro
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -44,30 +44,30 @@ namespace zypp
 
     public:
       /** Patch ID */
-      std::string id () const;
+      std::string id() const;
       /** Patch time stamp */
-      unsigned int timestamp () const;
+      unsigned int timestamp() const;
       /** Patch summary */
-      std::string summary () const;
+      std::string summary() const;
       /** Patch description */
-      std::list<std::string> description () const;
+      std::list<std::string> description() const;
       /** Patch category (recommended, security,...) */
-      std::string category () const;
+      std::string category() const;
       /** Does the system need to reboot to finish the update process? */
-      bool reboot_needed () const;
+      bool reboot_needed() const;
       /** Does the patch affect the package manager itself? */
-      bool affects_pkg_manager () const;
+      bool affects_pkg_manager() const;
 
       /** Is the patch installation interactive? (does it need user input?) */
-      bool interactive ();
+      bool interactive();
       /** The list of all atoms building the patch */
-      atom_list all_atoms ();
+      atom_list all_atoms();
       /** The list of those atoms which have not been installed */
-      atom_list not_installed_atoms ();
+      atom_list not_installed_atoms();
 
 // TODO check necessarity of functions below
-      bool any_atom_selected ();
-      void mark_atoms_to_freshen (bool freshen);
+      bool any_atom_selected();
+      void mark_atoms_to_freshen(bool freshen);
     protected:
       /** Patch ID */
       std::string _patch_id;

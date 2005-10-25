@@ -12,11 +12,7 @@
 #ifndef ZYPP_DETAIL_MESSAGEIMPL_H
 #define ZYPP_DETAIL_MESSAGEIMPL_H
 
-#include <iosfwd>
-
 #include "zypp/detail/ResolvableImpl.h"
-//#include "zypp/Resolvable.h"
-//#include "zypp/Message.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -43,9 +39,9 @@ namespace zypp
 
     public:
       /** Get the text of the message */
-      virtual std::string text () const;
+      virtual std::string text() const;
       /** Get the type of the message (YesNo / OK) */
-      virtual std::string type () const;
+      virtual std::string type() const;
     protected:
       /** The text of the message */
       std::string _text;

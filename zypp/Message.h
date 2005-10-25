@@ -12,8 +12,6 @@
 #ifndef ZYPP_MESSAGE_H
 #define ZYPP_MESSAGE_H
 
-#include <iosfwd>
-
 #include "zypp/Resolvable.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -43,9 +41,9 @@ namespace zypp
     ~Message();
   public:
     /** Get the text of the message */
-    std::string text ();
+    std::string text();
     /** Get the type of the message (YesNo / OK) */
-    std::string type ();
+    std::string type();
   private:
     /** Pointer to implementation */
     detail::MessageImplPtr _pimpl;

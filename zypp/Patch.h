@@ -12,7 +12,6 @@
 #ifndef ZYPP_PATCH_H
 #define ZYPP_PATCH_H
 
-#include <iosfwd>
 #include <list>
 
 #include "zypp/Resolvable.h"
@@ -46,27 +45,27 @@ namespace zypp
     ~Patch();
   public:
     /** Patch ID */
-    std::string id () const;
+    std::string id() const;
     /** Patch time stamp */
-    unsigned int timestamp () const;
+    unsigned int timestamp() const;
     /** Patch summary */
-    std::string summary () const;
+    std::string summary() const;
     /** Patch description */
     std::list<std::string> description() const;
     /** Patch category (recommended, security,...) */
-    std::string category () const;
+    std::string category() const;
     /** Does the system need to reboot to finish the update process? */
-    bool reboot_needed () const;
+    bool reboot_needed() const;
     /** Does the patch affect the package manager itself? */
-    bool affects_pkg_manager () const;
+    bool affects_pkg_manager() const;
     /** The list of all atoms building the patch */
-    atom_list atoms () const;
+    atom_list atoms() const;
     /** Is the patch installation interactive? (does it need user input?) */
-    bool interactive ();
+    bool interactive();
     // TODO add comments and reevaluate the need for functions below
-    void mark_atoms_to_freshen (bool freshen);
-    bool any_atom_selected ();
-    void select (); // TODO parameter to specify select/unselect or another function
+    void mark_atoms_to_freshen(bool freshen);
+    bool any_atom_selected();
+    void select(); // TODO parameter to specify select/unselect or another function
   private:
     /** Pointer to implementation */
     detail::PatchImplPtr _pimpl;

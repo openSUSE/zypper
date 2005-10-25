@@ -12,11 +12,7 @@
 #ifndef ZYPP_DETAIL_SCRIPTIMPL_H
 #define ZYPP_DETAIL_SCRIPTIMPL_H
 
-#include <iosfwd>
-
 #include "zypp/detail/ResolvableImpl.h"
-#include "zypp/Resolvable.h"
-#include "zypp/Script.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -43,11 +39,11 @@ namespace zypp
 
     public:
       /** Get the script to perform the change */
-      std::string do_script () const;
+      std::string do_script() const;
       /** Get the script to undo the change */
-      std::string undo_script () const;
+      std::string undo_script() const;
       /** Check whether script to undo the change is available */
-      virtual bool undo_available () const;
+      virtual bool undo_available() const;
     protected:
       /** The script to perform the change */
       std::string _do_script;

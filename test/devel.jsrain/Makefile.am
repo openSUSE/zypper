@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS =	Main Main.debug Msg Msg.debug Patch Patch.debug Script Script.debug
+noinst_PROGRAMS =	Main Main.debug Msg Msg.debug Patch Patch.debug Script Script.debug PatchSelect PatchSelect.debug
 
 ## ##################################################
 
@@ -34,6 +34,11 @@ Script_SOURCES = 	Script.cc
 
 Script_debug_SOURCES = 	$(Script_SOURCES)
 Script_debug_LDFLAGS =	-static
+
+PatchSelect_SOURCES = 	PatchSelect.cc
+
+PatchSelect_debug_SOURCES = 	$(PatchSelect_SOURCES)
+PatchSelect_debug_LDFLAGS =	-static
 
 ## ##################################################
 

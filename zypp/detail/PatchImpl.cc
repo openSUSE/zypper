@@ -13,7 +13,6 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/detail/PatchImpl.h"
-#include "zypp/Patch.h"
 #include "zypp/Package.h"
 
 using namespace std;
@@ -36,10 +35,10 @@ namespace zypp
     PatchImpl::PatchImpl( const std::string & name_r,
 			  const Edition & edition_r,
 			  const Arch & arch_r )
-    : ResolvableImpl (ResKind ("patch"),
+    : ResolvableImpl( ResKind( "patch" ),
 		      name_r,
-		      Edition (edition_r),
-		      Arch (arch_r))
+		      edition_r,
+		      arch_r )
     {
     }
 
@@ -48,57 +47,57 @@ namespace zypp
     {
     }
 
-    std::string PatchImpl::id () const
+    std::string PatchImpl::id() const
     {
       return _patch_id;
     }
-    unsigned int PatchImpl::timestamp () const
+    unsigned int PatchImpl::timestamp() const
     {
       return _timestamp;
     }
 
-    std::string PatchImpl::summary () const
+    std::string PatchImpl::summary() const
     {
       return _summary;
     }
 
-    std::list<std::string> PatchImpl::description () const
+    std::list<std::string> PatchImpl::description() const
     {
       return _description;
     }
 
-    std::string PatchImpl::category () const
+    std::string PatchImpl::category() const
     {
       return _category;
     }
 
-    bool PatchImpl::reboot_needed () const
+    bool PatchImpl::reboot_needed() const
     {
       return _reboot_needed;
     }
 
-    bool PatchImpl::affects_pkg_manager () const
+    bool PatchImpl::affects_pkg_manager() const
     {
       return _affects_pkg_manager;
     }
 
-    bool PatchImpl::interactive () {
+    bool PatchImpl::interactive() {
       if (_reboot_needed)
       {
 	DBG << "Patch needs reboot" << endl;
 	return true;
       }
-      atom_list not_installed = not_installed_atoms ();
-      for (atom_list::iterator it = not_installed.begin ();
-	it != not_installed.end ();
+      atom_list not_installed = not_installed_atoms();
+      for (atom_list::iterator it = not_installed.begin();
+	it != not_installed.end();
 	it++)
       {
-	if ((std::string)((*it)->kind ()) == "message")
+	if ((std::string)((*it)->kind()) == "message")
 	{
 //	  DBG << "Patch contains a message" << endl;
 	  return true;
 	}
-	if ((std::string)((*it)->kind ()) == "package")
+	if ((std::string)((*it)->kind()) == "package")
 	{
 				 // Resolvable*
 				  // Resolvable
@@ -116,19 +115,19 @@ namespace zypp
       return false;
     }
 
-    atom_list PatchImpl::all_atoms () {
+    atom_list PatchImpl::all_atoms() {
       return _atoms;
     }
 
-    atom_list PatchImpl::not_installed_atoms () {
+    atom_list PatchImpl::not_installed_atoms() {
       atom_list ret;
-      for (atom_list::iterator it = _atoms.begin ();
-	it != _atoms.end ();
+      for (atom_list::iterator it = _atoms.begin();
+	it != _atoms.end();
 	it++)
       {
 	if (true) // FIXME check if atom/resolvable is not installed
 	{
-	  ret.push_back (*it);
+	  ret.push_back(*it);
 	}
       }
       return ret;
@@ -136,9 +135,9 @@ namespace zypp
 
 // TODO check necessarity of functions below
 
-    bool PatchImpl::any_atom_selected () {
-      for (atom_list::iterator it = _atoms.begin ();
-	it != _atoms.end ();
+    bool PatchImpl::any_atom_selected() {
+      for (atom_list::iterator it = _atoms.begin();
+	it != _atoms.end();
 	it++)
       {
 	if (false) // FIXME check if atom/resolvable is selected
@@ -149,9 +148,9 @@ namespace zypp
       return false;
     }
 
-    void PatchImpl::mark_atoms_to_freshen (bool freshen) {
-      for (atom_list::iterator it = _atoms.begin ();
-	it != _atoms.end ();
+    void PatchImpl::mark_atoms_to_freshen( bool freshen ) {
+      for (atom_list::iterator it = _atoms.begin();
+	it != _atoms.end();
 	it++)
       {
 	// TODO mark the resolvable to be or not to be freshed

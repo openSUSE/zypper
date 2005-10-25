@@ -1,23 +1,10 @@
 #include <iostream>
-#include <fstream>
-#include <iterator>
-#include <algorithm>
-#include <set>
-#include <map>
-#include <list>
-#include <vector>
-#include <ext/hash_set>
-#include <ext/hash_map>
-#include <ext/rope>
-
 #include <zypp/base/Logger.h>
-#include <zypp/base/String.h>
 
 ///////////////////////////////////////////////////////////////////
 
 #include <zypp/Message.h>
 #include <zypp/detail/MessageImpl.h>
-#include <zypp/Patch.h>
 #include <zypp/detail/PatchImpl.h>
 #include <zypp/Package.h>
 #include <zypp/detail/PackageImpl.h>

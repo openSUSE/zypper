@@ -11,7 +11,6 @@
 */
 #include <iostream>
 
-#include "zypp/base/Logger.h"
 #include "zypp/Script.h"
 #include "zypp/detail/ScriptImpl.h"
 
@@ -27,7 +26,7 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   Script::Script( detail::ScriptImplPtr impl_r )
-  : Resolvable (impl_r)
+  : Resolvable( impl_r )
   , _pimpl( impl_r )
   {}
 
@@ -44,9 +43,9 @@ namespace zypp
   //	METHOD NAME : Script::do_script
   //	Get the script to perform the action
   //
-  std::string Script::do_script ()
+  std::string Script::do_script()
   {
-    return _pimpl->do_script ();
+    return _pimpl->do_script();
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -54,9 +53,9 @@ namespace zypp
   //	METHOD NAME : Script::undo_script
   //	Get the script to revert the action
   //
-  std::string Script::undo_script ()
+  std::string Script::undo_script()
   {
-    return _pimpl->undo_script ();
+    return _pimpl->undo_script();
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -64,9 +63,9 @@ namespace zypp
   //	METHOD NAME : Script::undo_available
   //	Check whether the action can be reverted
   //
-  bool Script::undo_available ()
+  bool Script::undo_available()
   {
-    return _pimpl->undo_available ();
+    return _pimpl->undo_available();
   }
 
   /////////////////////////////////////////////////////////////////

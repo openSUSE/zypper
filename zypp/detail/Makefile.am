@@ -11,7 +11,8 @@ include_HEADERS = \
 	SelectionImpl.h		\
 	MessageImpl.h		\
 	ScriptImpl.h		\
-	PatchImpl.h
+	PatchImpl.h		\
+	ProductImpl.h
 
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_detail.la
@@ -24,6 +25,7 @@ lib@PACKAGE@_detail_la_SOURCES = \
 	SelectionImpl.cc	\
 	MessageImpl.cc		\
 	ScriptImpl.cc		\
-	PatchImpl.cc
+	PatchImpl.cc		\
+	ProductImpl.cc
 
 ## ##################################################

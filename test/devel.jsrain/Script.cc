@@ -1,21 +1,5 @@
 #include <iostream>
-#include <fstream>
-#include <iterator>
-#include <algorithm>
-#include <set>
-#include <map>
-#include <list>
-#include <vector>
-#include <ext/hash_set>
-#include <ext/hash_map>
-#include <ext/rope>
-
 #include <zypp/base/Logger.h>
-#include <zypp/base/String.h>
-
-///////////////////////////////////////////////////////////////////
-
-#include <zypp/Script.h>
 #include <zypp/detail/ScriptImpl.h>
 
 

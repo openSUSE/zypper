@@ -6,58 +6,55 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/Message.cc
+/** \file zypp/detail/ProductImpl.cc
  *
 */
-#include <iostream>
 
-#include "zypp/Message.h"
-#include "zypp/detail/MessageImpl.h"
+#include "zypp/detail/ProductImpl.h"
 
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
   ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Message::Message
-  //	METHOD TYPE : Ctor
-  //
-  Message::Message( detail::MessageImplPtr impl_r )
-  : Resolvable( impl_r )
-  , _pimpl( impl_r )
-  {}
+  namespace detail
+  { /////////////////////////////////////////////////////////////////
+    IMPL_PTR_TYPE(ProductImpl)
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : ProductImpl
+    //
+    ///////////////////////////////////////////////////////////////////
+
+    /** Default ctor */
+    ProductImpl::ProductImpl( const std::string & name_r,
+			    const Edition & edition_r,
+			    const Arch & arch_r )
+    : ResolvableImpl( ResKind( "script"),
+		      name_r,
+		      edition_r,
+		      arch_r )
+    {
+    }
+    /** Dtor */
+    ProductImpl::~ProductImpl()
+    {
+    }
+
+    std::list<std::string> ProductImpl::description() const
+    {
+      return _description;
+    }
+
+    std::string ProductImpl::category() const {
+      return _category;
+    }
+
+    /////////////////////////////////////////////////////////////////
+  } // namespace detail
   ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Message::~Message
-  //	METHOD TYPE : Dtor
-  //
-  Message::~Message()
-  {}
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Message::text
-  //	Get the text of the message
-  //
-  std::string Message::text()
-  {
-    return _pimpl->text();
-  }
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Message::text
-  //	Get the type of the message ("OK", "YesNo")
-  //
-  std::string Message::type()
-  {
-    return _pimpl->type();
-  }
-
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

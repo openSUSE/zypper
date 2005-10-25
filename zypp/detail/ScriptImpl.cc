@@ -9,11 +9,8 @@
 /** \file zypp/detail/ScriptImpl.cc
  *
 */
-#include <iostream>
 
-#include "zypp/base/Logger.h"
 #include "zypp/detail/ScriptImpl.h"
-#include "zypp/Script.h"
 
 using namespace std;
 
@@ -35,10 +32,10 @@ namespace zypp
     ScriptImpl::ScriptImpl( const std::string & name_r,
 			    const Edition & edition_r,
 			    const Arch & arch_r )
-    : ResolvableImpl (ResKind ("script"),
+    : ResolvableImpl( ResKind( "script"),
 		      name_r,
-		      Edition (edition_r),
-		      Arch (arch_r))
+		      edition_r,
+		      arch_r )
     {
     }
     /** Dtor */
@@ -46,15 +43,15 @@ namespace zypp
     {
     }
 
-    std::string ScriptImpl::do_script () const {
+    std::string ScriptImpl::do_script() const {
       return _do_script;
     }
 
-    std::string ScriptImpl::undo_script () const {
+    std::string ScriptImpl::undo_script() const {
       return _undo_script;
     }
 
-    bool ScriptImpl::undo_available () const {
+    bool ScriptImpl::undo_available() const {
       return _undo_script != "";
     }
 

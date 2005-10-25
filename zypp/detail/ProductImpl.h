@@ -6,13 +6,16 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/MessageImpl.cc
+/** \file zypp/detail/ProductImpl.h
  *
 */
+#ifndef ZYPP_DETAIL_PRODUCTIMPL_H
+#define ZYPP_DETAIL_PRODUCTIMPL_H
 
-#include "zypp/detail/MessageImpl.h"
+#include <list>
+#include <string>
 
-using namespace std;
+#include "zypp/detail/ResolvableImpl.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -20,36 +23,35 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
-    IMPL_PTR_TYPE(MessageImpl)
+    DEFINE_PTR_TYPE(ProductImpl)
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : MessageImpl
+    //	CLASS NAME : ProductImpl
     //
+    /** Class representing an update script */
+    class ProductImpl : public ResolvableImpl
+    {
+    public:
+      /** Default ctor */
+      ProductImpl( const std::string & name_r,
+		  const Edition & edition_r,
+		  const Arch & arch_r );
+      /** Dtor */
+      ~ProductImpl();
+
+    public:
+      /** Get the product description */
+      std::list<std::string> description() const;
+      /** Get the category of the product */
+      std::string category() const;
+    protected:
+      /** Product description */
+      std::list<std::string> _description;
+      /** The category of the product */
+      std::string _category;
+    };
     ///////////////////////////////////////////////////////////////////
-
-    /** Default ctor */
-    MessageImpl::MessageImpl( const std::string & name_r,
-			      const Edition & edition_r,
-			      const Arch & arch_r )
-    : ResolvableImpl( ResKind( "message" ),
-		      name_r,
-		      edition_r,
-		      arch_r )
-    {
-    }
-    /** Dtor */
-    MessageImpl::~MessageImpl()
-    {
-    }
-
-    std::string MessageImpl::type() const {
-      return _type;
-    }
-
-    std::string MessageImpl::text() const {
-      return _text;
-    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail
@@ -57,3 +59,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_DETAIL_PRODUCTIMPL_H

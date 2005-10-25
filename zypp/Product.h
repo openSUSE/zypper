@@ -6,58 +6,52 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/Message.cc
+/** \file zypp/Product.h
  *
 */
-#include <iostream>
+#ifndef ZYPP_PRODUCT_H
+#define ZYPP_PRODUCT_H
 
-#include "zypp/Message.h"
-#include "zypp/detail/MessageImpl.h"
-
-using namespace std;
+#include "zypp/Resolvable.h"
+#include <list>
+#include <string>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Message::Message
-  //	METHOD TYPE : Ctor
-  //
-  Message::Message( detail::MessageImplPtr impl_r )
-  : Resolvable( impl_r )
-  , _pimpl( impl_r )
-  {}
+  namespace detail
+  { /////////////////////////////////////////////////////////////////
+    DEFINE_PTR_TYPE(ProductImpl)
+    /////////////////////////////////////////////////////////////////
+  } // namespace detail
+  ///////////////////////////////////////////////////////////////////
+  DEFINE_PTR_TYPE(Product)
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Message::~Message
-  //	METHOD TYPE : Dtor
+  //	CLASS NAME : Product
   //
-  Message::~Message()
-  {}
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Message::text
-  //	Get the text of the message
-  //
-  std::string Message::text()
+  /** Class representing an update script */
+  class Product : public Resolvable
   {
-    return _pimpl->text();
-  }
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Message::text
-  //	Get the type of the message ("OK", "YesNo")
-  //
-  std::string Message::type()
-  {
-    return _pimpl->type();
-  }
+  public:
+    /** Default ctor */
+    Product( detail::ProductImplPtr impl_r );
+    /** Dtor */
+    ~Product();
+  public:
+    /** Get the product description */
+    std::list<std::string> description() const;
+    /** Get the product categoty (base, add-on) */
+    std::string category();
+  private:
+    /** Pointer to implementation */
+    detail::ProductImplPtr _pimpl;
+  };
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_PRODUCT_H
