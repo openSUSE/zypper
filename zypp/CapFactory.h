@@ -6,72 +6,62 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/Capability.h
+/** \file	zypp/CapFactory.h
  *
 */
-#ifndef ZYPP_CAPABILITY_H
-#define ZYPP_CAPABILITY_H
+#ifndef ZYPP_CAPFACTORY_H
+#define ZYPP_CAPFACTORY_H
 
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
 
-#include "zypp/ResolvableFwd.h"
-#include "zypp/SolverContextFwd.h"
+#include "zypp/Capability.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace capability
+  namespace detail
   { /////////////////////////////////////////////////////////////////
-    DEFINE_PTR_TYPE(CapabilityImpl);
+    DEFINE_PTR_TYPE(CapFactoryImpl)
     /////////////////////////////////////////////////////////////////
-  } // namespace capability
+  } // namespace detail
   ///////////////////////////////////////////////////////////////////
-
-  class CapFactory;
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : Capability
+  //	CLASS NAME : CapFactory
   //
   /** */
-  class Capability
+  class CapFactory
   {
-  private:
-    typedef capability::CapabilityImplPtr      ImplPtr;
-    typedef capability::constCapabilityImplPtr constImplPtr;
-    friend class CapFactory;
+  public:
+    /** Default ctor */
+    CapFactory();
     /** Factory ctor */
     explicit
-    Capability( ImplPtr impl_r );
-  public:
-    /** Factory */
-    typedef CapFactory Factory;
+    CapFactory( detail::CapFactoryImplPtr impl_r );
     /** Dtor */
-    virtual ~Capability();
+    ~CapFactory();
 
   public:
     /**  */
-    bool matches( constResolvablePtr resolvable_r,
-                  const SolverContext & colverContext_r );
-    /**  */
-    bool matches( constResolvablePtr resolvable_r );
+    Capability parse( const std::string & strval_r ) const;
 
   private:
     /** Pointer to implementation */
-    ImplPtr _pimpl;
+    detail::CapFactoryImplPtr _pimpl;
   public:
     /** Avoid a bunch of friend decl. */
-    constImplPtr sayFriend() const;
+    detail::constCapFactoryImplPtr sayFriend() const;
   };
   ///////////////////////////////////////////////////////////////////
 
-  /** \relates Capability Stream output */
-  extern std::ostream & operator<<( std::ostream & str, const Capability & obj );
+  /** \relates CapFactory Stream output */
+  extern std::ostream & operator<<( std::ostream & str, const CapFactory & obj );
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_CAPABILITY_H
+#endif // ZYPP_CAPFACTORY_H

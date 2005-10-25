@@ -8,6 +8,8 @@ SUBDIRS = base detail capability
 include_HEADERS = \
 	Arch.h		\
 	Capability.h	\
+	CapFactory.h	\
+	CapSet.h	\
 	Edition.h	\
 	ResKind.h	\
 	Resolvable.h	\
@@ -27,6 +29,8 @@ lib_LTLIBRARIES =	lib@PACKAGE@.la
 lib@PACKAGE@_la_SOURCES = \
 	Arch.cc		\
 	Capability.cc	\
+	CapFactory.cc	\
+	CapSet.cc	\
 	Edition.cc	\
 	ResKind.cc	\
 	Resolvable.cc	\
