@@ -6,3 +6,24 @@
 SUBDIRS =
 
 ## ##################################################
+
+noinst_PROGRAMS = Example.createResolvable
+
+## ##################################################
+
+LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
+
+## ##################################################
+
+Example_createResolvable_SOURCES = Example.createResolvable.cc
+
+## ##################################################
+
+.PHONY:        always
+
+$(noinst_PROGRAMS):    $(top_srcdir)/zypp/lib@PACKAGE@.la
+
+$(top_srcdir)/zypp/lib@PACKAGE@.la:     always
+	$(MAKE) -C $(top_srcdir)/zypp
+
+## ##################################################
