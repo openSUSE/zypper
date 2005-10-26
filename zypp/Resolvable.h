@@ -36,7 +36,7 @@ namespace zypp
   //	CLASS NAME : Resolvable
   //
   /**
-   * \todo Think about standalone class Dependencies keeping the CapSets
+   * \todo Solve ResKind problems via traits template?
   */
   class Resolvable : public base::ReferenceCounted, private base::NonCopyable
   {

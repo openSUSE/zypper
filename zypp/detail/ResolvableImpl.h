@@ -34,7 +34,9 @@ namespace zypp
     //
     //	CLASS NAME : ResolvableImpl
     //
-    /** */
+    /**
+     * \todo Assert \c deps provide 'name=edition'.
+    */
     class ResolvableImpl : public base::ReferenceCounted, private base::NonCopyable
     {
     public:

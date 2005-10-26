@@ -33,7 +33,9 @@ namespace zypp
   //
   //	CLASS NAME : CapFactory
   //
-  /** */
+  /**
+   * \todo define EXCEPTIONS
+  */
   class CapFactory
   {
   public:
@@ -46,13 +48,19 @@ namespace zypp
     ~CapFactory();
 
   public:
-    /** */
-    Capability parse( const ResKind & refers_r, const std::string & strval_r ) const;
-    /*
-    template<typename _Res>
-      Capability parse( const std::string & strval_r ) const
-      { return parse( _Res::kind(), strval_r ); }
+    /** Parse Capability from string (incl. ResKind).
+     * \c strval_r is expected to define a valid Capability \em including
+     * the ResKind.
+     * \throw EXCEPTION on parse error.
     */
+    Capability parse( const std::string & strval_r ) const;
+    /** Parse Capability from string (default ResKind).
+     * \c strval_r is expected to define a valid Capability. If it does
+     * not define the ResKind, \c defaultRefers_r is used instead.
+     * \throw EXCEPTION on parse error.
+    */
+    Capability parse( const std::string & strval_r, const ResKind & defaultRefers_r ) const;
+
   private:
     /** Pointer to implementation */
     detail::CapFactoryImplPtr _pimpl;

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <list>
+#include <string>
 #include <zypp/base/Logger.h>
 
 #include <zypp/detail/PackageImpl.h>
@@ -10,24 +12,27 @@ using namespace zypp;
 
 // refine parsing and add it to lib
 //
-struct CapSetInsert : public std::unary_function<const char *, void>
+struct CapSetInsert : public std::unary_function<const std::string &, void>
 {
   CapSet &   _x;
+  ResKind    _r;
   CapFactory _f;
-  CapSetInsert( CapSet & x )
+  CapSetInsert( CapSet & x, const ResKind & defaultRefers_r )
   : _x(x)
+  , _r(defaultRefers_r)
   {}
-  void operator()( const char * v )
-  { _x.insert( _f.parse( ResKind(), v ) ); }
+  void operator()( const std::string & v )
+  { _x.insert( _f.parse( v, _r ) ); }
 };
 
-inline CapSet parseDeps()
+inline std::list<std::string> parseDeps()
 {
   const char * init[] = {
     "/bin/sh",
     "rpmlib(PayloadFilesHavePrefix) <= 4.0-1",
     "rpmlib(CompressedFileNames) <= 3.0.4-1",
     "/bin/sh",
+    "",
     "libc.so.6",
     "libc.so.6(GLIBC_2.0)",
     "libc.so.6(GLIBC_2.3.4)",
@@ -38,8 +43,7 @@ inline CapSet parseDeps()
   const char ** begin = init;
   const char ** end   = init + ( sizeof(init) / sizeof(const char *) );
 
-  CapSet ret;
-  for_each( begin, end, CapSetInsert(ret) );
+  std::list<std::string> ret( begin, end );
   return ret;
 }
 
@@ -60,16 +64,32 @@ int main( int argc, char * argv[] )
   Edition     _edition( "1.0", "42" );
   Arch        _arch( "i386" );
 
-  // create implementation class
+  // create the implementation class
   detail::PackageImplPtr pkgImpl( new detail::PackageImpl(_name,_edition,_arch) );
+  DBG << *pkgImpl << endl;
+  DBG << pkgImpl->deps() << endl;
 
-  // finalize construction
+  // finalize implementation class construction
   Dependencies _deps;
-  _deps.setProvides( parseDeps() );
+
+  std::list<std::string> depList( parseDeps() );
+  CapSet prv;
+  try
+    {
+      for_each( depList.begin(), depList.end(), CapSetInsert(prv,ResKind("Package")) );
+    }
+  catch(...)
+    {
+      INT << _deps << endl;
+    }
+  _deps.setProvides( prv );
+
+  // ...parse other deps
   pkgImpl->setDeps( _deps );
+
   // ... aditional data if...
 
-  // create Package
+  // create the Package
   constPackagePtr foo( new Package( pkgImpl ) );
   DBG << foo << endl;
   DBG << *foo << endl;
