@@ -10,6 +10,7 @@ include_HEADERS = \
 	Capability.h	\
 	CapFactory.h	\
 	CapSet.h	\
+	Dependencies.h	\
 	Edition.h	\
 	ResKind.h	\
 	Resolvable.h	\
@@ -32,6 +33,7 @@ lib@PACKAGE@_la_SOURCES = \
 	Capability.cc	\
 	CapFactory.cc	\
 	CapSet.cc	\
+	Dependencies.cc	\
 	Edition.cc	\
 	ResKind.cc	\
 	Resolvable.cc	\

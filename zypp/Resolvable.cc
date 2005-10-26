@@ -48,6 +48,9 @@ namespace zypp
   const Arch & Resolvable::arch() const
   { return _pimpl->arch(); }
 
+  const Dependencies & Resolvable::deps() const
+  { return _pimpl->deps(); }
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Resolvable::~Resolvable

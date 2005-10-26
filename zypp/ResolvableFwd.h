@@ -21,7 +21,7 @@ namespace zypp
   class ResKind;
   class Edition;
   class Arch;
-  class Capability;
+  class Dependencies;
 
   DEFINE_PTR_TYPE(Resolvable)
 

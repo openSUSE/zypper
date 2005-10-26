@@ -6,19 +6,17 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/Resolvable.h
+/** \file	zypp/Dependencies.h
  *
 */
-#ifndef ZYPP_RESOLVABLE_H
-#define ZYPP_RESOLVABLE_H
+#ifndef ZYPP_DEPENDENCIES_H
+#define ZYPP_DEPENDENCIES_H
 
 #include <iosfwd>
-#include <string>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
+#include "zypp/base/PtrTypes.h"
 
-#include "zypp/ResolvableFwd.h"
+#include "zypp/CapSetFwd.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -26,51 +24,71 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
-    DEFINE_PTR_TYPE(ResolvableImpl)
+    DEFINE_PTR_TYPE(DependenciesImpl)
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : Resolvable
+  //	CLASS NAME : Dependencies
   //
-  /**
-   * \todo Think about standalone class Dependencies keeping the CapSets
-  */
-  class Resolvable : public base::ReferenceCounted, private base::NonCopyable
+  /** */
+  class Dependencies
   {
   public:
-    /** Ctor */
-    Resolvable( detail::ResolvableImplPtr impl_r );
+    /** Default ctor */
+    Dependencies();
+    /** Factory ctor */
+    explicit
+    Dependencies( detail::DependenciesImplPtr impl_r );
     /** Dtor */
-    virtual ~Resolvable();
+    ~Dependencies();
 
   public:
     /**  */
-    const ResKind & kind() const;
+    const CapSet & provides() const;
     /**  */
-    const std::string & name() const;
+    const CapSet & prerequires() const;
     /**  */
-    const Edition & edition() const;
+    const CapSet & requires() const;
     /**  */
-    const Arch & arch() const;
+    const CapSet & conflicts() const;
     /**  */
-    const Dependencies & deps() const;
+    const CapSet & obsoletes() const;
+    /**  */
+    const CapSet & recommends() const;
+    /**  */
+    const CapSet & suggests() const;
+
+    /**  */
+    void setProvides( const CapSet & val_r );
+    /**  */
+    void setPrerequires( const CapSet & val_r );
+    /**  */
+    void setRequires( const CapSet & val_r );
+    /**  */
+    void setConflicts( const CapSet & val_r );
+    /**  */
+    void setObsoletes( const CapSet & val_r );
+    /**  */
+    void setRecommends( const CapSet & val_r );
+    /**  */
+    void setSuggests( const CapSet & val_r );
 
   private:
     /** Pointer to implementation */
-    detail::ResolvableImplPtr _pimpl;
+    detail::DependenciesImplPtr _pimpl;
   public:
     /** Avoid a bunch of friend decl. */
-    detail::constResolvableImplPtr sayFriend() const;
+    detail::constDependenciesImplPtr sayFriend() const;
   };
   ///////////////////////////////////////////////////////////////////
 
-  /** \relates Resolvable Stream output */
-  extern std::ostream & operator<<( std::ostream & str, const Resolvable & obj );
+  /** \relates Dependencies Stream output */
+  extern std::ostream & operator<<( std::ostream & str, const Dependencies & obj );
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_RESOLVABLE_H
+#endif // ZYPP_DEPENDENCIES_H

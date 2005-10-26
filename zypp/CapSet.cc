@@ -13,19 +13,12 @@
 #include <iterator>
 
 #include "zypp/CapSet.h"
-#include "zypp/Capability.h"
 
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
-  bool CapOrder::operator()( const Capability & lhs, const Capability & rhs ) const
-  {
-    // fix
-    return lhs.sayFriend() < rhs.sayFriend();
-  }
 
   /******************************************************************
   **

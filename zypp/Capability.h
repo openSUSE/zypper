@@ -13,6 +13,7 @@
 #define ZYPP_CAPABILITY_H
 
 #include <iosfwd>
+#include <functional>
 
 #include "zypp/base/PtrTypes.h"
 
@@ -38,14 +39,19 @@ namespace zypp
   //
   /** Resolvable capabilitiy.
    * \invariant Nonzero \c _pimpl
+   * \invariant Unified \c _pimpl asserted by CapFactory
   */
   class Capability
   {
+    /** Factory */
+    friend class CapFactory;
+    /** Ordering for use in std::container */
+    friend class CapOrder;
+    friend bool operator==( const Capability & lhs, const Capability & rhs );
   private:
     typedef capability::CapabilityImplPtr      ImplPtr;
     typedef capability::constCapabilityImplPtr constImplPtr;
-    friend class CapFactory;
-    /** Factory ctor */
+   /** Factory ctor */
     explicit
     Capability( ImplPtr impl_r );
   public:
@@ -73,6 +79,22 @@ namespace zypp
     constImplPtr sayFriend() const;
   };
   ///////////////////////////////////////////////////////////////////
+
+  struct CapOrder : public std::binary_function<Capability, Capability, bool>
+  {
+    bool operator()( const Capability & lhs, const Capability & rhs ) const
+    { return lhs._pimpl < rhs._pimpl; }
+  };
+
+  ///////////////////////////////////////////////////////////////////
+
+  /** \relates Capability  */
+  inline bool operator==( const Capability & lhs, const Capability & rhs )
+  { return lhs._pimpl == rhs._pimpl; }
+
+  /** \relates Capability  */
+  inline bool operator!=( const Capability & lhs, const Capability & rhs )
+  { return ! (lhs == rhs); }
 
   /** \relates Capability Stream output */
   extern std::ostream & operator<<( std::ostream & str, const Capability & obj );

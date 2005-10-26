@@ -13,21 +13,13 @@
 #define ZYPP_CAPSET_H
 
 #include <iosfwd>
-#include <functional>
-#include <set>
+
+#include "zypp/Capability.h"
+#include "zypp/CapSetFwd.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
-  class Capability;
-
-  struct CapOrder : public std::binary_function<Capability, Capability, bool>
-  {
-    bool operator()( const Capability & lhs, const Capability & rhs ) const;
-  };
-
-  typedef std::set<Capability,CapOrder> CapSet;
 
   extern std::ostream & operator<<( std::ostream & str, const CapSet & obj );
 

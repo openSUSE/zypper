@@ -6,45 +6,23 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/Selection.cc
+/** \file	zypp/CapSetFwd.h
  *
 */
-#include <iostream>
+#ifndef ZYPP_CAPSETFWD_H
+#define ZYPP_CAPSETFWD_H
 
-#include "zypp/Selection.h"
-#include "zypp/detail/SelectionImpl.h"
-
-using namespace std;
+#include <set>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  IMPL_PTR_TYPE(Selection)
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Selection::Selection
-  //	METHOD TYPE : Ctor
-  //
-  Selection::Selection( detail::SelectionImplPtr impl_r )
-  :  Resolvable( impl_r )
-  , _pimpl( impl_r )
-  {}
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Selection::~Selection
-  //	METHOD TYPE : Dtor
-  //
-  Selection::~Selection()
-  {}
-
-  std::string Selection::summary() const
-  { return _pimpl->summary(); }
-
-  std::list<std::string> Selection::description() const
-  { return _pimpl->description(); }
+  class Capability;
+  class CapOrder;
+  typedef std::set<Capability,CapOrder> CapSet;
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_CAPSETFWD_H

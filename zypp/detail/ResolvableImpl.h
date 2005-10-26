@@ -20,6 +20,7 @@
 #include "zypp/ResKind.h"
 #include "zypp/Edition.h"
 #include "zypp/Arch.h"
+#include "zypp/Dependencies.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -37,7 +38,7 @@ namespace zypp
     class ResolvableImpl : public base::ReferenceCounted, private base::NonCopyable
     {
     public:
-      /** ctor */
+      /** Ctor */
       ResolvableImpl( const ResKind & kind_r,
                       const std::string & name_r,
                       const Edition & edition_r,
@@ -58,6 +59,15 @@ namespace zypp
       /**  */
       const Arch & arch() const
       { return _arch; }
+      /**  */
+      const Dependencies & deps() const
+      { return _deps; }
+
+      /** Set Dependencies.
+       * \todo Check whether we can allow changes after final construction
+      */
+      void setDeps( const Dependencies & val_r )
+      { _deps = val_r; }
 
     private:
       /**  */
@@ -68,6 +78,8 @@ namespace zypp
       Edition _edition;
       /**  */
       Arch _arch;
+      /**  */
+      Dependencies _deps;
     };
     ///////////////////////////////////////////////////////////////////
 

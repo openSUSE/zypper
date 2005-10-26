@@ -62,6 +62,10 @@ namespace zypp
       { return *this; }
 
     public:
+      /** Reurn reference counter value. */
+      unsigned refCount() const
+      { return _counter; }
+
       /** Add a reference. */
       void ref() const
       { ++_counter; }
