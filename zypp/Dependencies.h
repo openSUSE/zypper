@@ -60,6 +60,8 @@ namespace zypp
     const CapSet & recommends() const;
     /**  */
     const CapSet & suggests() const;
+    /**  */
+    const CapSet & freshens() const;
 
     /**  */
     void setProvides( const CapSet & val_r );
@@ -75,6 +77,8 @@ namespace zypp
     void setRecommends( const CapSet & val_r );
     /**  */
     void setSuggests( const CapSet & val_r );
+    /**  */
+    void setFreshens( const CapSet & val_r );
 
   private:
     /** Pointer to implementation */

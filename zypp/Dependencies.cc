@@ -47,6 +47,8 @@ namespace zypp
       CapSet _recommends;
       /**  */
       CapSet _suggests;
+      /**  */
+      CapSet _freshens;
 
       static DependenciesImplPtr nodeps()
       {
@@ -72,6 +74,7 @@ namespace zypp
       str << "OBSOLETES:" << endl << obj._obsoletes;
       str << "RECOMMENDS:" << endl << obj._recommends;
       str << "SUGGESTS:" << endl << obj._suggests;
+      str << "FRESHENS:" << endl << obj._freshens;
       return str;
     }
 
@@ -140,6 +143,9 @@ namespace zypp
   const CapSet & Dependencies::suggests() const
   { return _pimpl->_suggests; }
 
+  const CapSet & Dependencies::freshens() const
+  { return _pimpl->_freshens; }
+
   // fix it
 #define ZYPP_DEPENDENCIES_COW if(_pimpl->refCount()>1){_pimpl= new detail::DependenciesImpl;}
   void Dependencies::setProvides( const CapSet & val_r )
@@ -162,6 +168,9 @@ namespace zypp
 
   void Dependencies::setSuggests( const CapSet & val_r )
   { ZYPP_DEPENDENCIES_COW; _pimpl->_suggests = val_r; }
+
+  void Dependencies::setFreshens( const CapSet & val_r )
+  { ZYPP_DEPENDENCIES_COW; _pimpl->_freshens = val_r; }
 
   /******************************************************************
   **
