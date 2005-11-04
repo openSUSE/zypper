@@ -34,6 +34,9 @@ class MyPatchImpl : public detail::PatchImpl
     }
 };
 
+IMPL_PTR_TYPE(MyPatchImpl)
+
+
 /******************************************************************
 **
 **
