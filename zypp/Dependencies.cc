@@ -146,8 +146,21 @@ namespace zypp
   const CapSet & Dependencies::freshens() const
   { return _pimpl->_freshens; }
 
-  // fix it
-#define ZYPP_DEPENDENCIES_COW if(_pimpl->refCount()>1){_pimpl= new detail::DependenciesImpl;}
+#define ZYPP_DEPENDENCIES_COW \
+if(_pimpl->refCount()>1) \
+{ \
+  detail::DependenciesImplPtr _cow_tmp = new detail::DependenciesImpl; \
+  _cow_tmp->_provides = _pimpl->_provides; \
+  _cow_tmp->_prerequires = _pimpl->_prerequires; \
+  _cow_tmp->_requires = _pimpl->_requires; \
+  _cow_tmp->_conflicts = _pimpl->_conflicts; \
+  _cow_tmp->_obsoletes = _pimpl->_obsoletes; \
+  _cow_tmp->_recommends = _pimpl->_recommends; \
+  _cow_tmp->_suggests = _pimpl->_suggests; \
+  _cow_tmp->_freshens = _pimpl->_freshens; \
+  _pimpl= _cow_tmp;\
+}
+
   void Dependencies::setProvides( const CapSet & val_r )
   { ZYPP_DEPENDENCIES_COW; _pimpl->_provides = val_r; }
 

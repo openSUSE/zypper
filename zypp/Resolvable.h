@@ -57,6 +57,8 @@ namespace zypp
     const Arch & arch() const;
     /**  */
     const Dependencies & deps() const;
+    /** */
+    void setDeps( const Dependencies & val_r );
 
   private:
     /** Pointer to implementation */

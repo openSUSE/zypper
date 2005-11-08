@@ -51,6 +51,9 @@ namespace zypp
   const Dependencies & Resolvable::deps() const
   { return _pimpl->deps(); }
 
+  void Resolvable::setDeps( const Dependencies & val_r )
+  { _pimpl->setDeps( val_r ); }
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Resolvable::~Resolvable
