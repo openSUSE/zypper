@@ -29,17 +29,13 @@ namespace zypp
      *  Smart pointer types.
      *
      * Namespace zypp::base provides 3 smart pointer types \b using the
-     * boostsmart pointer library.
+     * boost smart pointer library.
      *
      * \li \c scoped_ptr Simple sole ownership of single objects. Noncopyable.
      *
      * \li \c shared_ptr Object ownership shared among multiple pointers
      *
      * \li \c weak_ptr Non-owning observers of an object owned by shared_ptr.
-     *
-     * \todo Intrusive Ptr class which supports constness. Used as PIMPL.
-     * Offers 'const Impl *' in const context, otherwise 'Impl *'. to
-     * prevent const classes from calling nonconst Impl methods.
     */
     /*@{*/
 
@@ -57,6 +53,78 @@ namespace zypp
     using boost::static_pointer_cast;
     using boost::const_pointer_cast;
     using boost::dynamic_pointer_cast;
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : ImplPtr
+    //
+    /** Wrapper for \c const correct access via \ref ZYPP_BASE_SMART_PTR.
+     *
+     * zypp::base::ImplPtr<tt>\<_D,_Ptr></tt> stores a \ref ZYPP_BASE_SMART_PTR
+     * of type \c _Ptr, which must be convertible into a <tt>_D *</tt>. Pointer
+     * style access (via \c -> and \c *) offers a <tt>const _D *</tt> in const
+     * a context, otherwise a <tt>_D *</tt>.
+     *
+     * Forwarding access from an interface to an implemantation class, an
+     * ImplPtr prevents const interface methods from accidentally calling
+     * nonconst implementation methods. In case you have to do so, call
+     * unconst to get the <tt>_D *</tt>.
+     *
+     * The second template argument defaults to <tt>_Ptr = scoped_ptr<_D></tt>.
+     *
+     * \todo refine ctor and assign.
+    */
+    template<class _D, class _Ptr = scoped_ptr<_D> >
+      struct ImplPtr
+      {
+        typedef _D element_type;
+
+        explicit
+        ImplPtr( typename _Ptr::element_type * dptr = 0 )
+        : _dptr( dptr )
+        {}
+
+        _D & operator*() { return *_dptr; }
+        const _D & operator*() const { return *_dptr; };
+        _D * operator->() { return _dptr.get(); }
+        const _D * operator->() const { return _dptr.get(); }
+
+        _D * unconst() const { return _dptr.get(); }
+
+
+        _Ptr _dptr;
+      };
+    ///////////////////////////////////////////////////////////////////
+    /** Wrapper for \c const correct access via pointer.
+     *
+     * Template specialization of ImplPtr, storing a raw <tt>_P *</tt>,
+     * which must be convertible into a <tt>_D *</tt>.
+     *
+     * \note The object pointed to will \b not be deleted. If you need
+     * automatic cleanup, use a \ref ZYPP_BASE_SMART_PTR instead of a
+     * raw pointer.
+    */
+    template<class _D,class _P>
+      struct ImplPtr<_D,_P*>
+      {
+        typedef _D element_type;
+
+        explicit
+        ImplPtr( _P * dptr = 0 )
+        : _dptr( dptr )
+        {}
+
+        _D & operator*() { return *_dptr; }
+        const _D & operator*() const { return *_dptr; };
+        _D * operator->() { return _dptr; }
+        const _D * operator->() const { return _dptr; }
+
+        _D * unconst() const { return _dptr; }
+
+
+        _P * _dptr;
+      };
+    /////////////////////////////////////////////////////////////////
 
     /*@}*/
 
