@@ -70,11 +70,33 @@ namespace zypp
      * nonconst implementation methods. In case you have to do so, call
      * unconst to get the <tt>_D *</tt>.
      *
-     * The second template argument defaults to <tt>_Ptr = scoped_ptr<_D></tt>.
+     * The second template argument defaults to <tt>_Ptr = shared__ptr<_D></tt>.
      *
      * \todo refine ctor and assign.
+     * \todo check whether scoped_ptr's refusal to handle an incomplete type
+     * is a compiler bug. Introducing ~CI does not help, although I is complete
+     * when ~CI is called. This renders scoped_ptr less usefull.
+     * \code
+     * #include <boost/scoped_ptr.hpp>
+     * struct I;
+     * struct CI
+     * {
+     *   ~CI();
+     *   private:
+     *   zypp::base::scoped_ptr<I> i;
+     * };
+     * int main( int argc, char * argv[] )
+     * {
+     *   CI c;
+     *   return 0;
+     * }
+     * struct I {};
+     * CI::~CI()
+     * {
+     * }
+     * \endcode
     */
-    template<class _D, class _Ptr = scoped_ptr<_D> >
+    template<class _D, class _Ptr = shared_ptr<_D> >
       struct ImplPtr
       {
         typedef _D element_type;
