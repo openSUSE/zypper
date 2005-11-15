@@ -1,0 +1,32 @@
+contents
+--------
+
+This is a collection of testcases for the YUM Parser. 
+
+Each testcase contains:
+
+- the input file, <number>-<mode>-<description>.test.xml
+  mode is the first argument to YUMtest, describing the type 
+  of file
+
+- the output file, <number>-<mode>-<description>.test.xml.ref
+
+- the error output (with all syntax warnings),
+  <number>-<mode>-<description>.test.xml.err.ref
+  Here, the first characters have been cut away to remove time
+  and hostname
+
+testit.sh walks through all testcases ("*.test.xml"), creates
+.out and .err.out files and compares them with the reference files.
+If everything matches, it outputs "pass", else it outputs "fail".
+
+
+
+testcase descriptions
+---------------------
+
+001-005: Correct, full xml files
+006-   : full xml files with additional elements
+       : not well-formed files
+       : just a bunch of zeroes
+       : just an empty input file

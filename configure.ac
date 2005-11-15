@@ -101,12 +101,14 @@ AC_OUTPUT(	\
 	test/Makefile		\
 	test/genclass		\
 	test/devel.jsrain/Makefile	\
+	test/devel.jsrain/yum/Makefile	\
 	test/devel.ma/Makefile		\
 	zypp/Makefile		\
 	zypp/base/Makefile	\
 	zypp/detail/Makefile	\
 	zypp/capability/Makefile	\
-	zypp/parser/Makefile
+	zypp/parser/Makefile		\
+	zypp/parser/yum/Makefile
 )
 dnl ==================================================
 

@@ -1,6 +1,8 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
+SUBDIRS = yum
+
 noinst_PROGRAMS =	Main Main.debug Msg Msg.debug Patch Patch.debug Script Script.debug PatchSelect PatchSelect.debug PatchRead PatchRead.debug
 
 
