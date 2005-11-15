@@ -11,7 +11,7 @@ noinst_PROGRAMS = Example.createResolvable
 
 ## ##################################################
 
-LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
+LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la /usr/lib/libxml2.a /usr/lib/libz.a
 
 ## ##################################################
 

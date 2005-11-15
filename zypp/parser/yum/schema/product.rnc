@@ -1,0 +1,67 @@
+default namespace = "http://linux.duke.edu/metadata/rpm"
+namespace ns1 = "http://novell.com/package/metadata/suse/product"
+
+element ns1:product {
+  attribute type { text },
+  element ns1:vendor { text },
+  element ns1:name { text },
+  element ns1:version {
+    attribute epoch { xsd:nonNegativeInteger },
+    attribute ver { text },
+    attribute rel { text }
+  },
+  element ns1:displayname {
+    attribute lang { text },
+    text
+  }+,
+  element ns1:description {
+    attribute lang { text },
+    text
+  }+,
+  element ns1:version {
+    attribute epoch { xsd:nonNegativeInteger },
+    attribute ver { text },
+    attribute rel { text }
+  },
+  element provides {
+    element entry {
+      attribute name { text },
+      (attribute flags { "EQ" | "LE" | "GE" },
+       attribute epoch { xsd:nonNegativeInteger },
+       attribute ver { text },
+       attribute rel { text }?)?,
+      empty
+    }+
+  },
+  element conflicts {
+    element entry {
+      attribute name { text },
+      (attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" },
+       attribute epoch { xsd:nonNegativeInteger },
+       attribute ver { text },
+       attribute rel { text }?)?,
+      empty
+    }+
+  }?,
+  element obsoletes {
+    element entry {
+      attribute name { text },
+      (attribute flags { "EQ" | "LE" | "GE" | "LT" },
+       attribute epoch { xsd:nonNegativeInteger },
+       attribute ver { text },
+       attribute rel { text }?)?,
+      empty
+    }+
+  }?,
+  element requires {
+    element entry {
+      attribute name { text },
+      (attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" },
+       attribute epoch { xsd:nonNegativeInteger },
+       attribute ver { text },
+       attribute rel { text }?)?,
+      attribute pre { "1" | "0" }?,
+      empty
+    }*
+  }
+}

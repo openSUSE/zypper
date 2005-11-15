@@ -1,0 +1,108 @@
+default namespace = "http://novell.com/package/metadata/suse/patch"
+namespace ns1 = "http://novell.com/package/metadata/suse/common"
+namespace yum = "http://linux.duke.edu/metadata/common"
+
+include "suse-primary.rnc" {
+  start = element-patch
+  # patches use localized summary and description fields
+  element-summary = element summary { localized-string }+
+  element-description = element description { localized-string }+
+  # packages in patches have an additional rpmfiles element
+  element-package = element yum:package { package, element-pkgfiles }
+  # names in dependencies can include a "kind". Should not be used for packages.
+  attribute-name =
+    attribute kind { "package" | "patch" | "script" | "message" | "product" }?,
+    attribute name { text }
+}
+
+element-patch = element patch { patch }
+
+localized-string =
+  attribute lang { text },
+  text
+
+patch =
+  attribute engine { text },
+  attribute patchid { text },
+  attribute timestamp { xsd:nonNegativeInteger },
+  element-name,
+  element-summary,
+  element-description,
+  element-version,
+  dependency-block,
+  element-category,
+  element reboot_needed { empty }?,
+  element package_manager { empty }?,
+  element-update_script?,
+  element atoms { element-package | element-script | element-message }+
+
+dependency-block =
+  # shortcut since all atoms have the same dependency section
+  element-provides?,
+  element-conflicts?,
+  element-obsoletes?,
+  element-freshen?,
+  element-requires?
+
+element-category =
+  element category { "youfix" | "security" | "recommended" | "bonus" | "beta" }
+
+element-update_script = element update_script { text }
+
+element-script =
+  element script {
+    element-name,
+    element-version,    
+    element do { xsd:string },
+    element undo { xsd:string }?,
+    dependency-block
+  }
+
+element-message =
+  element message {
+    element-name,
+    element-version,    
+    attribute type { "OK" | "YesNo" },
+    element text { xsd:string },
+    dependency-block
+  }
+
+element-pkgfiles =
+  element pkgfiles {  ( element-deltarpm | element-patchrpm | element-plainrpm ) * }
+
+element-plainrpm =
+  element plainrpm {
+    shared-rpmfile-attributes
+  }
+
+element-patchrpm =
+  element patchrpm {
+    shared-rpmfile-attributes,
+    element-base_version +
+  }
+
+
+element-deltarpm =
+  element deltarpm {
+    shared-rpmfile-attributes,
+    element-delta-base_version
+  }
+
+shared-rpmfile-attributes =
+  attribute arch { arch },
+  attribute filename { text },
+  attribute downloadsize { text } ,
+  attribute md5sum { text } ?,
+  attribute buildtime { text } ?
+
+element-base_version = 
+  element base_version { version }
+
+element-delta-base_version =
+  element base_version {
+    version,
+    attribute md5sum { text },
+    attribute buildtime { text },
+    attribute sequence_info { text }
+  }
+

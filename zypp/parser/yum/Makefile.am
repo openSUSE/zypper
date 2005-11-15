@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-SUBDIRS =
+SUBDIRS = schema
 
 INCLUDES = -I$(oldincludedir)/libxml2 -I..
 

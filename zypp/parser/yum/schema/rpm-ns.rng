@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns:ns1="http://linux.duke.edu/metadata/common" ns="http://linux.duke.edu/metadata/rpm" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <define name="element-format">
+    <element name="ns1:format">
+      <ref name="format"/>
+    </element>
+  </define>
+  <define name="format">
+    <ref name="element-license"/>
+    <ref name="element-vendor"/>
+    <ref name="element-group"/>
+    <ref name="element-buildhost"/>
+    <ref name="element-sourcerpm"/>
+    <ref name="element-header-range"/>
+    <optional>
+      <ref name="element-provides"/>
+    </optional>
+    <optional>
+      <ref name="element-conflicts"/>
+    </optional>
+    <optional>
+      <ref name="element-obsoletes"/>
+    </optional>
+    <optional>
+      <ref name="element-requires"/>
+    </optional>
+    <zeroOrMore>
+      <ref name="element-file"/>
+    </zeroOrMore>
+  </define>
+  <define name="element-license">
+    <element name="license">
+      <text/>
+    </element>
+  </define>
+  <define name="element-vendor">
+    <element name="vendor">
+      <text/>
+    </element>
+  </define>
+  <define name="element-group">
+    <element name="group">
+      <text/>
+    </element>
+  </define>
+  <define name="element-buildhost">
+    <element name="buildhost">
+      <text/>
+    </element>
+  </define>
+  <define name="element-sourcerpm">
+    <element name="sourcerpm">
+      <text/>
+    </element>
+  </define>
+  <define name="element-header-range">
+    <element name="header-range">
+      <ref name="header-range"/>
+    </element>
+  </define>
+  <define name="header-range">
+    <attribute name="start">
+      <data type="nonNegativeInteger"/>
+    </attribute>
+    <attribute name="end">
+      <data type="nonNegativeInteger"/>
+    </attribute>
+    <empty/>
+  </define>
+  <define name="element-provides">
+    <element name="provides">
+      <ref name="provides"/>
+    </element>
+  </define>
+  <define name="shared-entry-attributes">
+    <attribute name="epoch">
+      <data type="nonNegativeInteger"/>
+    </attribute>
+    <attribute name="ver"/>
+    <optional>
+      <attribute name="rel"/>
+    </optional>
+  </define>
+  <define name="attribute-name">
+    <attribute name="name"/>
+  </define>
+  <define name="provides">
+    <oneOrMore>
+      <element name="entry">
+        <ref name="attribute-name"/>
+        <optional>
+          <ref name="shared-entry-attributes"/>
+          <attribute name="flags">
+            <choice>
+              <value>EQ</value>
+              <value>LE</value>
+              <value>GE</value>
+            </choice>
+          </attribute>
+        </optional>
+        <empty/>
+      </element>
+    </oneOrMore>
+  </define>
+  <define name="element-conflicts">
+    <element name="conflicts">
+      <ref name="conflicts"/>
+    </element>
+  </define>
+  <define name="conflicts">
+    <oneOrMore>
+      <element name="entry">
+        <ref name="attribute-name"/>
+        <optional>
+          <ref name="shared-entry-attributes"/>
+          <attribute name="flags">
+            <choice>
+              <value>EQ</value>
+              <value>LE</value>
+              <value>GE</value>
+              <value>LT</value>
+              <value>GT</value>
+            </choice>
+          </attribute>
+        </optional>
+        <empty/>
+      </element>
+    </oneOrMore>
+  </define>
+  <define name="element-obsoletes">
+    <element name="obsoletes">
+      <ref name="obsoletes"/>
+    </element>
+  </define>
+  <define name="obsoletes">
+    <oneOrMore>
+      <element name="entry">
+        <ref name="attribute-name"/>
+        <optional>
+          <ref name="shared-entry-attributes"/>
+          <attribute name="flags">
+            <choice>
+              <value>EQ</value>
+              <value>LE</value>
+              <value>GE</value>
+              <value>LT</value>
+            </choice>
+          </attribute>
+        </optional>
+        <empty/>
+      </element>
+    </oneOrMore>
+  </define>
+  <define name="element-requires">
+    <element name="requires">
+      <ref name="requires"/>
+    </element>
+  </define>
+  <define name="requires">
+    <zeroOrMore>
+      <element name="entry">
+        <ref name="attribute-name"/>
+        <optional>
+          <ref name="shared-entry-attributes"/>
+          <attribute name="flags">
+            <choice>
+              <value>EQ</value>
+              <value>LE</value>
+              <value>GE</value>
+              <value>LT</value>
+              <value>GT</value>
+            </choice>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="pre">
+            <choice>
+              <value>1</value>
+              <value>0</value>
+            </choice>
+          </attribute>
+        </optional>
+        <empty/>
+      </element>
+    </zeroOrMore>
+  </define>
+  <define name="element-file">
+    <element name="ns1:file">
+      <ref name="file"/>
+    </element>
+  </define>
+  <define name="file">
+    <optional>
+      <attribute name="type">
+        <choice>
+          <value>dir</value>
+          <value>ghost</value>
+        </choice>
+      </attribute>
+    </optional>
+    <text/>
+  </define>
+</grammar>

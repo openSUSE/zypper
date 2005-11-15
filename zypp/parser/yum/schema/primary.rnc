@@ -1,0 +1,113 @@
+default namespace = "http://linux.duke.edu/metadata/common"
+
+grammar {
+
+# defines element-format and format
+include "rpm-ns.rnc"
+
+start = element-metadata
+element-metadata = 
+  element metadata { metadata }
+
+metadata =
+  (
+    attribute packages { xsd:nonNegativeInteger }?,
+    element-package+
+  )
+
+element-package = 
+  element package { package }
+
+package = 
+    attribute type { "rpm" },
+    element-name,
+    element-arch,
+    element-version,
+    element-checksum,
+    element-summary,
+    element-description,
+    element-packager,
+    element-url,
+    element-time,
+    element-size,
+    element-location,
+    element-format
+
+element-name =
+    element name { text }
+
+element-arch =
+    element arch { arch }
+
+arch =      
+    "noarch"
+    | "athlon"
+    | "i386"
+    | "i486"
+    | "i586"
+    | "i686"
+    | "ia64"
+    | "ppc"
+    | "ppc64"
+    | "s390"
+    | "s390x"
+    | "x86_64"
+    | "src"
+
+element-version =
+    element version { version }
+
+version =
+    attribute epoch { xsd:nonNegativeInteger },
+    attribute ver { text },
+    attribute rel { text },
+    empty
+
+element-checksum =
+    element checksum { checksum }
+
+checksum =
+    attribute type { "md5" | "sha" },
+    attribute pkgid { "YES" | "NO" },
+    text
+    
+element-summary =
+    element summary { text }
+
+element-description =
+    element description { text }
+
+element-packager =
+    element packager { text }
+
+element-url =
+    element url { xsd:anyURI }
+
+element-time =
+    element time { time }
+
+time =
+    attribute file { xsd:nonNegativeInteger },
+    attribute build { xsd:nonNegativeInteger },
+    empty
+
+
+element-size =
+    element size { size }
+
+size =
+    attribute package { xsd:nonNegativeInteger },
+    attribute installed { xsd:nonNegativeInteger },
+    attribute archive { xsd:nonNegativeInteger },
+    empty
+
+element-location =
+    element location { location }
+
+location =
+    attribute xml:base { xsd:anyURI }?,
+    attribute href { xsd:anyURI },
+    empty
+
+}
+

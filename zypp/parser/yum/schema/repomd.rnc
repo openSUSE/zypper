@@ -1,0 +1,22 @@
+default namespace = "http://linux.duke.edu/metadata/repo"
+
+element repomd {
+  element data {
+    attribute type { "other" | "filelists" | "primary" }&
+    element location {
+      attribute xml:base { xsd:anyURI }?,
+      attribute href { xsd:anyURI },
+      empty
+    }&
+    element checksum {
+      attribute type { "md5" | "sha" },
+      text
+    }&
+    element timestamp { xsd:integer }&
+    element open-checksum {
+      attribute type { "md5" | "sha" },
+      text
+    }?
+  }+&
+  text
+}

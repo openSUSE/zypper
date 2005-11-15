@@ -1,0 +1,72 @@
+default namespace = "http://novell.com/package/metadata/suse/common"
+namespace ns1 = "http://linux.duke.edu/metadata/common"
+
+
+include "primary.rnc" {
+  element-format = 
+    element ns1:format { suse-format }
+}
+
+suse-format =
+    format&
+    suse-additional-format?
+
+suse-additional-format =
+    element-authors,
+    element-keywords?,
+    element-media?,
+    element-dirsizes?,
+    element-freshen?,
+    element-install_only?
+
+element-authors =
+  element authors { authors }
+
+authors =
+    element author { text }+,
+    empty
+
+element-keywords =
+    element keywords { keywords }
+
+keywords =
+    element keyword { text }+,
+    empty
+
+element-media =
+    element media { media }
+
+media =
+    attribute mediaid { text },
+    empty
+
+element-dirsizes =
+    element dirsizes { dirsizes }
+
+dirsizes =
+    element-dirsize+
+
+element-dirsize =
+    element dirsize { dirsize }
+
+dirsize =
+    attribute path { text },
+    attribute size-kbyte { text },
+    attribute filecount { text },
+    empty
+
+element-freshen =
+    element freshen { freshen }
+
+freshen =
+    element entry {
+      attribute-name,
+      (
+        shared-entry-attributes,
+        attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" }
+      )?,
+      empty
+    }+
+
+element-install_only =
+    element install_only { empty }

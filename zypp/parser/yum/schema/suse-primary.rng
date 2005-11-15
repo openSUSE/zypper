@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns:ns1="http://linux.duke.edu/metadata/common" ns="http://novell.com/package/metadata/suse/common" xmlns="http://relaxng.org/ns/structure/1.0">
+  <include href="primary.rng">
+    <define name="element-format">
+      <element name="ns1:format">
+        <ref name="suse-format"/>
+      </element>
+    </define>
+  </include>
+  <define name="suse-format">
+    <interleave>
+      <ref name="format"/>
+      <optional>
+        <ref name="suse-additional-format"/>
+      </optional>
+    </interleave>
+  </define>
+  <define name="suse-additional-format">
+    <ref name="element-authors"/>
+    <optional>
+      <ref name="element-keywords"/>
+    </optional>
+    <optional>
+      <ref name="element-media"/>
+    </optional>
+    <optional>
+      <ref name="element-dirsizes"/>
+    </optional>
+    <optional>
+      <ref name="element-freshen"/>
+    </optional>
+    <optional>
+      <ref name="element-install_only"/>
+    </optional>
+  </define>
+  <define name="element-authors">
+    <element name="authors">
+      <ref name="authors"/>
+    </element>
+  </define>
+  <define name="authors">
+    <oneOrMore>
+      <element name="author">
+        <text/>
+      </element>
+    </oneOrMore>
+    <empty/>
+  </define>
+  <define name="element-keywords">
+    <element name="keywords">
+      <ref name="keywords"/>
+    </element>
+  </define>
+  <define name="keywords">
+    <oneOrMore>
+      <element name="keyword">
+        <text/>
+      </element>
+    </oneOrMore>
+    <empty/>
+  </define>
+  <define name="element-media">
+    <element name="media">
+      <ref name="media"/>
+    </element>
+  </define>
+  <define name="media">
+    <attribute name="mediaid"/>
+    <empty/>
+  </define>
+  <define name="element-dirsizes">
+    <element name="dirsizes">
+      <ref name="dirsizes"/>
+    </element>
+  </define>
+  <define name="dirsizes">
+    <oneOrMore>
+      <ref name="element-dirsize"/>
+    </oneOrMore>
+  </define>
+  <define name="element-dirsize">
+    <element name="dirsize">
+      <ref name="dirsize"/>
+    </element>
+  </define>
+  <define name="dirsize">
+    <attribute name="path"/>
+    <attribute name="size-kbyte"/>
+    <attribute name="filecount"/>
+    <empty/>
+  </define>
+  <define name="element-freshen">
+    <element name="freshen">
+      <ref name="freshen"/>
+    </element>
+  </define>
+  <define name="freshen">
+    <oneOrMore>
+      <element name="entry">
+        <ref name="attribute-name"/>
+        <optional>
+          <ref name="shared-entry-attributes"/>
+          <attribute name="flags">
+            <choice>
+              <value>EQ</value>
+              <value>LE</value>
+              <value>GE</value>
+              <value>LT</value>
+              <value>GT</value>
+            </choice>
+          </attribute>
+        </optional>
+        <empty/>
+      </element>
+    </oneOrMore>
+  </define>
+  <define name="element-install_only">
+    <element name="install_only">
+      <empty/>
+    </element>
+  </define>
+</grammar>

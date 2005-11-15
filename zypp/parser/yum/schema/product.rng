@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<element name="ns1:product" xmlns:ns1="http://novell.com/package/metadata/suse/product" ns="http://linux.duke.edu/metadata/rpm" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <attribute name="type"/>
+  <element name="ns1:vendor">
+    <text/>
+  </element>
+  <element name="ns1:name">
+    <text/>
+  </element>
+  <element name="ns1:version">
+    <attribute name="epoch">
+      <data type="nonNegativeInteger"/>
+    </attribute>
+    <attribute name="ver"/>
+    <attribute name="rel"/>
+  </element>
+  <oneOrMore>
+    <element name="ns1:displayname">
+      <attribute name="lang"/>
+      <text/>
+    </element>
+  </oneOrMore>
+  <oneOrMore>
+    <element name="ns1:description">
+      <attribute name="lang"/>
+      <text/>
+    </element>
+  </oneOrMore>
+  <element name="ns1:version">
+    <attribute name="epoch">
+      <data type="nonNegativeInteger"/>
+    </attribute>
+    <attribute name="ver"/>
+    <attribute name="rel"/>
+  </element>
+  <element name="provides">
+    <oneOrMore>
+      <element name="entry">
+        <attribute name="name"/>
+        <optional>
+          <attribute name="flags">
+            <choice>
+              <value>EQ</value>
+              <value>LE</value>
+              <value>GE</value>
+            </choice>
+          </attribute>
+          <attribute name="epoch">
+            <data type="nonNegativeInteger"/>
+          </attribute>
+          <attribute name="ver"/>
+          <optional>
+            <attribute name="rel"/>
+          </optional>
+        </optional>
+        <empty/>
+      </element>
+    </oneOrMore>
+  </element>
+  <optional>
+    <element name="conflicts">
+      <oneOrMore>
+        <element name="entry">
+          <attribute name="name"/>
+          <optional>
+            <attribute name="flags">
+              <choice>
+                <value>EQ</value>
+                <value>LE</value>
+                <value>GE</value>
+                <value>LT</value>
+                <value>GT</value>
+              </choice>
+            </attribute>
+            <attribute name="epoch">
+              <data type="nonNegativeInteger"/>
+            </attribute>
+            <attribute name="ver"/>
+            <optional>
+              <attribute name="rel"/>
+            </optional>
+          </optional>
+          <empty/>
+        </element>
+      </oneOrMore>
+    </element>
+  </optional>
+  <optional>
+    <element name="obsoletes">
+      <oneOrMore>
+        <element name="entry">
+          <attribute name="name"/>
+          <optional>
+            <attribute name="flags">
+              <choice>
+                <value>EQ</value>
+                <value>LE</value>
+                <value>GE</value>
+                <value>LT</value>
+              </choice>
+            </attribute>
+            <attribute name="epoch">
+              <data type="nonNegativeInteger"/>
+            </attribute>
+            <attribute name="ver"/>
+            <optional>
+              <attribute name="rel"/>
+            </optional>
+          </optional>
+          <empty/>
+        </element>
+      </oneOrMore>
+    </element>
+  </optional>
+  <element name="requires">
+    <zeroOrMore>
+      <element name="entry">
+        <attribute name="name"/>
+        <optional>
+          <attribute name="flags">
+            <choice>
+              <value>EQ</value>
+              <value>LE</value>
+              <value>GE</value>
+              <value>LT</value>
+              <value>GT</value>
+            </choice>
+          </attribute>
+          <attribute name="epoch">
+            <data type="nonNegativeInteger"/>
+          </attribute>
+          <attribute name="ver"/>
+          <optional>
+            <attribute name="rel"/>
+          </optional>
+        </optional>
+        <optional>
+          <attribute name="pre">
+            <choice>
+              <value>1</value>
+              <value>0</value>
+            </choice>
+          </attribute>
+        </optional>
+        <empty/>
+      </element>
+    </zeroOrMore>
+  </element>
+</element>
