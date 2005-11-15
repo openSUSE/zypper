@@ -165,22 +165,21 @@ class MyPatchImpl : public detail::PatchImpl
 
       // FIXME mve this piece of code after solutions are selected
       // this orders the atoms of a patch
-      ResolvablePtr previous( new Patch( MyPatchImplPtr( this )));
+      ResolvablePtr previous;
+      bool first = true;
       for (atom_list::iterator it = atoms.begin();
            it != atoms.end();
 	   it++)
       {
-	DBG << previous->kind() << endl;
-	if ((string)(previous->kind()) != "patch")
+	if (! first)
 	{
 	  Dependencies deps = (*it)->deps();
-	  CapSet req = deps.requires();
-	  req.insert( Capability( _f.parse( "foo", ResKind( "package" ))));
-	  deps.setRequires( req );
-//	  res->setDeps( deps );
-  
+	  CapSet req = deps.prerequires();
+	  req.insert( Capability( _f.parse( previous->name(), previous->kind())));
+	  deps.setPrerequires( req );
+	  (*it)->setDeps( deps );
 	}
-
+	first = false;
 	previous = *it;
       }
 
@@ -259,6 +258,14 @@ PatchPtr patch1 (new Patch (q));
 
 DBG << patch1 << endl;
 DBG << *patch1 << endl;
+atom_list at = patch1->atoms();
+for (atom_list::iterator it = at.begin();
+     it != at.end();
+     it++)
+{
+  DBG << **it << endl;
+  DBG << (**it).deps() << endl;
+}
 
   INT << "===[END]============================================" << endl;
   return 0;
