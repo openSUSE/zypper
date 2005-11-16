@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-SUBDIRS = base detail capability parser
+SUBDIRS = base parser capability source detail
 
 ## ##################################################
 
@@ -14,6 +14,7 @@ include_HEADERS = \
 	Edition.h	\
 	ResKind.h	\
 	Resolvable.h	\
+	ResTraits.h	\
 	Package.h	\
 	Selection.h	\
 	Message.h	\
@@ -37,6 +38,7 @@ lib@PACKAGE@_la_SOURCES = \
 	Edition.cc	\
 	ResKind.cc	\
 	Resolvable.cc	\
+	ResTraits.cc	\
 	Package.cc	\
 	Selection.cc	\
 	Message.cc	\
