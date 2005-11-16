@@ -20,4 +20,8 @@ lib@PACKAGE@_parser_la_SOURCES = \
 	XMLNodeIterator.cc	\
 	LibXMLHelper.cc
 
+lib@PACKAGE@_parser_la_LIBADD =	yum/lib@PACKAGE@_parser_yum.la	\
+				-lxml2		\
+				-lz
+
 ## ##################################################

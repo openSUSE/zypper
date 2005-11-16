@@ -109,7 +109,9 @@ AC_OUTPUT(	\
 	zypp/capability/Makefile	\
 	zypp/parser/Makefile		\
 	zypp/parser/yum/Makefile	\
-	zypp/parser/yum/schema/Makefile
+	zypp/parser/yum/schema/Makefile	\
+	zypp/source/Makefile		\
+	zypp/source/yum/Makefile
 )
 dnl ==================================================
 

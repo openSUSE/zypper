@@ -51,6 +51,6 @@ lib@PACKAGE@_la_LIBADD =        base/lib@PACKAGE@_base.la	\
 				detail/lib@PACKAGE@_detail.la	\
 				capability/lib@PACKAGE@_capability.la	\
 				parser/lib@PACKAGE@_parser.la	\
-				parser/yum/lib@PACKAGE@_parser_yum.la
+				source/lib@PACKAGE@_source.la
 
 ## ##################################################

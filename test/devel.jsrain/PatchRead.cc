@@ -15,45 +15,23 @@
 #include <zypp/Capability.h>
 #include <zypp/capability/CapabilityImpl.h>
 
+#include <zypp/parser/yum/YUMParser.h>
+#include <zypp/base/Logger.h>
+#include <zypp/source/yum/YUMScriptImpl.h>
+
 
 #include <map>
 #include <set>
 
 #include <zypp/CapFactory.h>
 
+using namespace zypp::detail;
+
 using namespace std;
 using namespace zypp;
+using namespace zypp::parser::YUM;
+using namespace zypp::source::YUM;
 
-class PACKAGE {
-  public:
-    string name;
-    string version;
-    string release;
-    string arch;
-    list<Capability> requires;
-};
-
-class MESSAGE {
-  public:
-    string name;
-    string type;
-    string text;
-};
-
-class SCRIPT {
-  public:
-    string name;
-    string do_script;
-    string undo_script;
-};
-
-class PATCH {
-  public:
-    string name;
-    list<PACKAGE> pack;
-    list<MESSAGE> msg;
-    list<SCRIPT> scr;
-};
 
 CapFactory _f;
 
@@ -71,21 +49,6 @@ class MyMessageImpl : public detail::MessageImpl
     }
 };
 IMPL_PTR_TYPE(MyMessageImpl)
-
-DEFINE_PTR_TYPE(MyScriptImpl)
-class MyScriptImpl : public detail::ScriptImpl
-{
-  public:
-    MyScriptImpl (string name, std::string do_script, std::string undo_script = "") 
-    : ScriptImpl (name,
-		  Edition (),
-		  Arch ("noarch"))
-    {
-      _do_script = do_script;
-      _undo_script = undo_script;
-    }
-};
-IMPL_PTR_TYPE(MyScriptImpl)
 
 void AddDependency (detail::ResolvableImplPtr res, Capability& cap) {
   Dependencies deps = res->deps();
@@ -109,7 +72,7 @@ DEFINE_PTR_TYPE(MyPatchImpl)
 class MyPatchImpl : public detail::PatchImpl
 {
   public:
-    MyPatchImpl( PATCH & p )
+    MyPatchImpl( YUMPatchData & p )
     : PatchImpl (p.name,
 		 Edition (),
 		 Arch ("noarch"))
@@ -119,7 +82,23 @@ class MyPatchImpl : public detail::PatchImpl
 
       // Process atoms
       atom_list atoms;
-      for (list<PACKAGE>::iterator it = p.pack.begin();
+
+      for (std::list<YUMPatchAtom>::iterator it = p.atoms.begin();
+	it != p.atoms.end();
+	it++)
+      {
+	if (it->type == "script")
+	{
+	  ScriptImplPtr impl = new YUMScriptImpl( *it->script );
+	  AddDependency(impl, cap);
+	  ScriptPtr script = new Script(impl);
+	  cout << *script << endl;
+	  cout << script->deps() << endl;
+	  atoms.push_back(script);
+	}
+      }
+
+/*      for (list<PACKAGE>::iterator it = p.pack.begin();
            it != p.pack.end();
            it++)
       {
@@ -148,21 +127,7 @@ class MyPatchImpl : public detail::PatchImpl
 	DBG << p->deps() << endl;
 	atoms.push_back( p );
       }
-      for (list<SCRIPT>::iterator it = p.scr.begin();
-           it != p.scr.end();
-           it++)
-      {
-	detail::ScriptImplPtr pi( new MyScriptImpl(
-	  it->name,
-	  it->do_script,
-	  it->undo_script));
-	AddDependency( pi, cap );
-	ScriptPtr p( new Script( pi ));
-	DBG << *p << endl;
-	DBG << p->deps() << endl;
-	atoms.push_back( p );
-      }
-
+*/
       // FIXME mve this piece of code after solutions are selected
       // this orders the atoms of a patch
       ResolvablePtr previous;
@@ -205,7 +170,7 @@ int main( int argc, char * argv[] )
   INT << "===[START]==========================================" << endl;
 
 // filling structures
-
+/*
 PACKAGE foo;
 foo.name = "foo";
 foo.version = "3.0";
@@ -250,11 +215,21 @@ ptch.name = "patch";
 ptch.pack = pkgs;
 ptch.msg = msgs;
 ptch.scr = scrs;
+*/
+PatchPtr patch1;
+YUMPatchParser iter(cin,"");
+for (;
+     !iter.atEnd();
+     ++iter) {
+       MyPatchImplPtr q(new MyPatchImpl(**iter));
+	patch1 = new Patch (q);
+     }
+if (iter.errorStatus())
+  throw *iter.errorStatus();
+
+
 
 // process the patch
-
-MyPatchImplPtr q (new MyPatchImpl (ptch));
-PatchPtr patch1 (new Patch (q));
 
 DBG << patch1 << endl;
 DBG << *patch1 << endl;
