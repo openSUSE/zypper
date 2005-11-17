@@ -9,7 +9,7 @@
 
 using namespace std;
 using namespace zypp;
-
+#if 0
 namespace zypp
 {
   template<>
@@ -52,7 +52,7 @@ inline std::list<std::string> parseDeps()
   std::list<std::string> ret( begin, end );
   return ret;
 }
-
+#endif
 /******************************************************************
 **
 **
@@ -69,7 +69,7 @@ int main( int argc, char * argv[] )
   std::string _name( "foo" );
   Edition     _edition( "1.0", "42" );
   Arch        _arch( "i386" );
-
+#if 0
   // create the implementation class
   detail::PackageImplPtr pkgImpl( new detail::PackageImpl(_name,_edition,_arch) );
   DBG << *pkgImpl << endl;
@@ -100,7 +100,7 @@ int main( int argc, char * argv[] )
   DBG << foo << endl;
   DBG << *foo << endl;
   DBG << foo->deps() << endl;
-
+#endif
 
   INT << "===[END]============================================" << endl;
   return 0;

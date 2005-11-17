@@ -12,16 +12,17 @@
 #ifndef ZYPP_DETAIL_RESOBJECTIMPLIF_H
 #define ZYPP_DETAIL_RESOBJECTIMPLIF_H
 
-#include<list>
-#include<string>
+#include <list>
+#include <string>
+
+#include "zypp/detail/ResObjectFactory.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   class Resolvable;
-  template<class _Res>
-    class ResImplConnect;
+
   typedef std::string            line;
   typedef std::list<std::string> text;
 
@@ -39,10 +40,10 @@ namespace zypp
     {
     public:
       /** */
-      const Resolvable * self() const
+      const Resolvable *const self() const
       { return _backRef; }
       /** */
-      Resolvable * self()
+      Resolvable *const self()
       { return _backRef; }
       /** */
       virtual line summary() const
@@ -56,17 +57,21 @@ namespace zypp
       ResObjectImplIf()
       : _backRef( 0 )
       {}
-      /** Dtor */
+      /** Dtor. Makes this an abstract class. */
       virtual ~ResObjectImplIf() = 0;
 
     private:
       /** */
       template<class _Res>
-        friend class ResImplConnect;
+        friend class _resobjectfactory_detail::ResImplConnect;
       /** */
       Resolvable * _backRef;
     };
     /////////////////////////////////////////////////////////////////
+
+    /* Implementation of pure virtual dtor is required! */
+    inline ResObjectImplIf::~ResObjectImplIf()
+    {}
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

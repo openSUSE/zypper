@@ -18,74 +18,22 @@ inline void OUT( zypp::Resolvable::constPtr p )
     MIL << "NULL" << endl;
 }
 
-
-namespace zypp
-{
-  namespace detail {
-    ResObjectImplIf::~ResObjectImplIf()
-    {}
-  }
-
-
-// connect resolvables interface and implementation.
-template<class _Res>
-  class ResImplConnect : public _Res
-  {
-  public:
-    typedef ResImplConnect                  Self;
-    typedef typename _Res::Impl             Impl;
-    typedef base::shared_ptr<Impl>          ImplPtr;
-    typedef base::intrusive_ptr<Self>       Ptr;
-    typedef base::intrusive_ptr<const Self> constPtr;
-  public:
-    /** \todo protect against NULL Impl. */
-    ResImplConnect( const std::string & name_r,
-                    const Edition & edition_r,
-                    const Arch & arch_r,
-                    ImplPtr impl_r )
-    : _Res( name_r, edition_r, arch_r )
-    , _impl( impl_r )
-    { _impl->_backRef = this; }
-    virtual ~ResImplConnect() {}
-  private:
-    ImplPtr _impl;
-    virtual Impl &       pimpl()       { return *_impl; }
-    virtual const Impl & pimpl() const { return *_impl; }
-  };
-
-
-template<class _Impl>
-  typename _Impl::ResType::Ptr
-  makeResolvable( const std::string & name_r,
-                  const Edition & edition_r,
-                  const Arch & arch_r,
-                  base::shared_ptr<_Impl> & impl_r )
-  {
-    impl_r.reset( new _Impl );
-    return new ResImplConnect<typename _Impl::ResType>( name_r,
-                                                        edition_r,
-                                                        arch_r,
-                                                        impl_r );
-  }
-template<class _Impl>
-  typename _Impl::ResType::Ptr
-  makeResolvable( base::shared_ptr<_Impl> & impl_r )
-  {
-    impl_r.reset( new _Impl );
-    return new ResImplConnect<typename _Impl::ResType>( "n",
-                                                        Edition("v","r"),
-                                                        Arch(),
-                                                        impl_r );
-  }
-
-}//ns
-
 struct PI : public zypp::detail::MessageImplIf
 {
   virtual std::string text() const { return "message text"; }
   virtual std::string type() const { return "message type"; }
   virtual ~PI(){}
 };
+
+template<class _Impl>
+  typename _Impl::ResType::Ptr
+  makeResolvable( zypp::base::shared_ptr<_Impl> & impl_r )
+  {
+    return zypp::detail::makeResolvableAndImpl( "n",
+                                                zypp::Edition("v","r"),
+                                                zypp::Arch(),
+                                                impl_r );
+  }
 
 
 /******************************************************************
@@ -101,7 +49,7 @@ int main( int argc, char * argv[] )
   INT << "===[START]==========================================" << endl;
 
   zypp::base::shared_ptr<PI> pi;
-  OUT( zypp::makeResolvable( pi ) );
+  OUT( makeResolvable( pi ) );
 
 
 

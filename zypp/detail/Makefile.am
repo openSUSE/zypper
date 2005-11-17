@@ -8,6 +8,7 @@ SUBDIRS =
 include_HEADERS = \
 	ResolvableImpl.h	\
 	ResObjectImplIf.h	\
+	ResObjectFactory.h	\
 	PackageImplIf.h		\
 	PackageImpl.h		\
 	SelectionImplIf.h	\
