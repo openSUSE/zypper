@@ -12,33 +12,27 @@
 #ifndef ZYPP_SCRIPT_H
 #define ZYPP_SCRIPT_H
 
-#include "zypp/Resolvable.h"
+#include "zypp/ResObject.h"
+#include "zypp/detail/ScriptImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
-    DEFINE_PTR_TYPE(ScriptImpl)
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
-  ///////////////////////////////////////////////////////////////////
-  DEFINE_PTR_TYPE(Script)
-
-  ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Script
   //
-  /** Class representing an update script */
-  class Script : public Resolvable
+  /** Class representing an update script.
+  */
+  class Script : public ResObject
   {
   public:
-    /** Default ctor */
-    Script( detail::ScriptImplPtr impl_r );
-    /** Dtor */
-    ~Script();
+    typedef Script                          Self;
+    typedef detail::ScriptImplIf            Impl;
+    typedef base::intrusive_ptr<Self>       Ptr;
+    typedef base::intrusive_ptr<const Self> constPtr;
+
   public:
     /** Get the script to perform the change */
     std::string do_script();
@@ -46,9 +40,20 @@ namespace zypp
     std::string undo_script();
     /** Check whether script to undo the change is available */
     bool undo_available();
+
+  protected:
+    /** Ctor */
+    Script( const std::string & name_r,
+            const Edition & edition_r,
+            const Arch & arch_r );
+    /** Dtor */
+    virtual ~Script();
+
   private:
-    /** Pointer to implementation */
-    detail::ScriptImplPtr _pimpl;
+    /** Access implementation */
+    virtual Impl & pimpl() = 0;
+    /** Access implementation */
+    virtual const Impl & pimpl() const = 0;
   };
 
   /////////////////////////////////////////////////////////////////

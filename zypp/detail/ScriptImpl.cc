@@ -20,7 +20,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
-    IMPL_PTR_TYPE(ScriptImpl)
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -29,19 +28,11 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     /** Default ctor */
-    ScriptImpl::ScriptImpl( const std::string & name_r,
-			    const Edition & edition_r,
-			    const Arch & arch_r )
-    : ResolvableImpl( ResKind( "script"),
-		      name_r,
-		      edition_r,
-		      arch_r )
-    {
-    }
+    ScriptImpl::ScriptImpl()
+    {}
     /** Dtor */
     ScriptImpl::~ScriptImpl()
-    {
-    }
+    {}
 
     std::string ScriptImpl::do_script() const {
       return _do_script;

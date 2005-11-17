@@ -12,23 +12,22 @@
 #include <iostream>
 
 #include "zypp/Selection.h"
-#include "zypp/detail/SelectionImpl.h"
 
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  IMPL_PTR_TYPE(Selection)
 
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Selection::Selection
   //	METHOD TYPE : Ctor
   //
-  Selection::Selection( detail::SelectionImplPtr impl_r )
-  :  Resolvable( impl_r )
-  , _pimpl( impl_r )
+  Selection::Selection( const std::string & name_r,
+                        const Edition & edition_r,
+                        const Arch & arch_r )
+  : ResObject( ResKind("Selection"), name_r, edition_r, arch_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -39,11 +38,12 @@ namespace zypp
   Selection::~Selection()
   {}
 
-  std::string Selection::summary() const
-  { return _pimpl->summary(); }
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	Selection interface forwarded to implementation
+  //
+  ///////////////////////////////////////////////////////////////////
 
-  std::list<std::string> Selection::description() const
-  { return _pimpl->description(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

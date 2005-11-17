@@ -12,48 +12,44 @@
 #ifndef ZYPP_SELECTION_H
 #define ZYPP_SELECTION_H
 
-#include <list>
-
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-
-#include "zypp/Resolvable.h"
+#include "zypp/ResObject.h"
+#include "zypp/detail/SelectionImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
-    DEFINE_PTR_TYPE(SelectionImpl)
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
-  ///////////////////////////////////////////////////////////////////
-  DEFINE_PTR_TYPE(Selection)
 
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Selection
   //
-  /** */
-  class Selection : public Resolvable
+  /** Selection interface.
+  */
+  class Selection : public ResObject
   {
   public:
-    /** Default ctor */
-    Selection( detail::SelectionImplPtr impl_r );
+    typedef Selection                       Self;
+    typedef detail::SelectionImplIf         Impl;
+    typedef base::intrusive_ptr<Self>       Ptr;
+    typedef base::intrusive_ptr<const Self> constPtr;
+
+  public:
+    /** */
+    // data here:
+
+  protected:
+    /** Ctor */
+    Selection( const std::string & name_r,
+               const Edition & edition_r,
+               const Arch & arch_r );
     /** Dtor */
     virtual ~Selection();
 
-  public:
-
-    /** */
-    std::string summary() const;
-    /** */
-    std::list<std::string> description() const;
-
   private:
-    /** Pointer to implementation */
-    detail::SelectionImplPtr _pimpl;
+    /** Access implementation */
+    virtual Impl & pimpl() = 0;
+    /** Access implementation */
+    virtual const Impl & pimpl() const = 0;
   };
   ///////////////////////////////////////////////////////////////////
 

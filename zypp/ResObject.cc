@@ -6,41 +6,49 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/ProductImpl.cc
+/** \file	zypp/ResObject.cc
  *
 */
-
-#include "zypp/detail/ProductImpl.h"
+#include "zypp/ResObject.h"
 
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
   ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : ResObject::ResObject
+  //	METHOD TYPE : Ctor
+  //
+  ResObject::ResObject( const ResKind & kind_r,
+                        const std::string & name_r,
+                        const Edition & edition_r,
+                        const Arch & arch_r )
+  : Resolvable( kind_r, name_r, edition_r, arch_r )
+  {}
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : ProductImpl
-    //
-    ///////////////////////////////////////////////////////////////////
-
-    /** Default ctor */
-    ProductImpl::ProductImpl()
-    {}
-    /** Dtor */
-    ProductImpl::~ProductImpl()
-    {}
-
-    std::string ProductImpl::category() const {
-      return _category;
-    }
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
   ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : ResObject::~ResObject
+  //	METHOD TYPE : Dtor
+  //
+  ResObject::~ResObject()
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	ResObject interface forwarded to implementation
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  string ResObject::summary() const
+  { return pimpl().summary(); }
+
+  text ResObject::description() const
+  { return pimpl().description(); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

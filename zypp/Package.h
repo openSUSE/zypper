@@ -12,48 +12,44 @@
 #ifndef ZYPP_PACKAGE_H
 #define ZYPP_PACKAGE_H
 
-#include <list>
-
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-
-#include "zypp/Resolvable.h"
+#include "zypp/ResObject.h"
+#include "zypp/detail/PackageImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
-    DEFINE_PTR_TYPE(PackageImpl)
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
-  ///////////////////////////////////////////////////////////////////
-  DEFINE_PTR_TYPE(Package)
 
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Package
   //
-  /** */
-  class Package : public Resolvable
+  /** Package interface.
+  */
+  class Package : public ResObject
   {
   public:
-    /** Default ctor */
-    Package( detail::PackageImplPtr impl_r );
+    typedef Package                         Self;
+    typedef detail::PackageImplIf           Impl;
+    typedef base::intrusive_ptr<Self>       Ptr;
+    typedef base::intrusive_ptr<const Self> constPtr;
+
+  public:
+    /** */
+    // data here:
+
+  protected:
+    /** Ctor */
+    Package( const std::string & name_r,
+             const Edition & edition_r,
+             const Arch & arch_r );
     /** Dtor */
     virtual ~Package();
 
-  public:
-
-    /** */
-    std::string summary() const;
-    /** */
-    std::list<std::string> description() const;
-
   private:
-    /** Pointer to implementation */
-    detail::PackageImplPtr _pimpl;
+    /** Access implementation */
+    virtual Impl & pimpl() = 0;
+    /** Access implementation */
+    virtual const Impl & pimpl() const = 0;
   };
   ///////////////////////////////////////////////////////////////////
 

@@ -6,37 +6,65 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/ProductImpl.cc
+/** \file	zypp/detail/ResObjectImplIf.h
  *
 */
+#ifndef ZYPP_DETAIL_RESOBJECTIMPLIF_H
+#define ZYPP_DETAIL_RESOBJECTIMPLIF_H
 
-#include "zypp/detail/ProductImpl.h"
-
-using namespace std;
+#include<list>
+#include<string>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  class Resolvable;
+  typedef std::string            line;
+  typedef std::list<std::string> text;
+
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : ProductImpl
+    //	CLASS NAME : ResObjectImplIf
     //
-    ///////////////////////////////////////////////////////////////////
+    /** Abstact ResObject implementation interface.
+    */
+    class ResObjectImplIf
+    {
+    public:
+      /** */
+      const Resolvable * self() const
+      { return _backRef; }
+      /** */
+      Resolvable * self()
+      { return _backRef; }
+      /** */
+      virtual line summary() const
+      { return line(); }
+      /** */
+      virtual text description() const
+      { return text(); }
 
-    /** Default ctor */
-    ProductImpl::ProductImpl()
-    {}
-    /** Dtor */
-    ProductImpl::~ProductImpl()
-    {}
+    public:
+      /** Ctor */
+      ResObjectImplIf()
+      : _backRef( 0 )
+      {}
+      /** Dtor */
+      virtual ~ResObjectImplIf() = 0;
 
-    std::string ProductImpl::category() const {
-      return _category;
-    }
+    private:
+      /** */
+      template<class _Res>
+        friend class ResImplConnect;
+      /** */
+      Resolvable * _backRef;
+    };
+    /////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail
@@ -44,3 +72,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_DETAIL_RESOBJECTIMPLIF_H

@@ -23,7 +23,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
-    IMPL_PTR_TYPE(PatchImpl)
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -32,20 +31,12 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     /** Default ctor */
-    PatchImpl::PatchImpl( const std::string & name_r,
-			  const Edition & edition_r,
-			  const Arch & arch_r )
-    : ResolvableImpl( ResKind( "patch" ),
-		      name_r,
-		      edition_r,
-		      arch_r )
-    {
-    }
+    PatchImpl::PatchImpl()
+    {}
 
     /** Dtor */
     PatchImpl::~PatchImpl()
-    {
-    }
+    {}
 
     std::string PatchImpl::id() const
     {
@@ -87,8 +78,8 @@ namespace zypp
 	DBG << "Patch needs reboot" << endl;
 	return true;
       }
-      atom_list not_installed = not_installed_atoms();
-      for (atom_list::iterator it = not_installed.begin();
+      AtomList not_installed = not_installed_atoms();
+      for (AtomList::iterator it = not_installed.begin();
 	it != not_installed.end();
 	it++)
       {
@@ -102,7 +93,16 @@ namespace zypp
 				 // Resolvable*
 				  // Resolvable
 				   // ResolvablePtr
-	  Package* p = (Package*)&**it;
+
+
+          // <ma> never do somthing like this!!!
+//	  Package* p = (Package*)&**it;
+          //
+          // (*it) is a ResolvablePtr
+
+
+
+
 	  // FIXME use the condition
 //	  if (p->licenseToConfirm() != "")
 	  if (false)
@@ -115,13 +115,13 @@ namespace zypp
       return false;
     }
 
-    atom_list PatchImpl::all_atoms() {
+    PatchImpl::AtomList PatchImpl::all_atoms() {
       return _atoms;
     }
 
-    atom_list PatchImpl::not_installed_atoms() {
-      atom_list ret;
-      for (atom_list::iterator it = _atoms.begin();
+    PatchImpl::AtomList PatchImpl::not_installed_atoms() {
+      AtomList ret;
+      for (AtomList::iterator it = _atoms.begin();
 	it != _atoms.end();
 	it++)
       {
@@ -136,7 +136,7 @@ namespace zypp
 // TODO check necessarity of functions below
 
     bool PatchImpl::any_atom_selected() {
-      for (atom_list::iterator it = _atoms.begin();
+      for (AtomList::iterator it = _atoms.begin();
 	it != _atoms.end();
 	it++)
       {
@@ -149,7 +149,7 @@ namespace zypp
     }
 
     void PatchImpl::mark_atoms_to_freshen( bool freshen ) {
-      for (atom_list::iterator it = _atoms.begin();
+      for (AtomList::iterator it = _atoms.begin();
 	it != _atoms.end();
 	it++)
       {

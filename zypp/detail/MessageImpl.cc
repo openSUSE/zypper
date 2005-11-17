@@ -20,7 +20,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
-    IMPL_PTR_TYPE(MessageImpl)
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -29,19 +28,11 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     /** Default ctor */
-    MessageImpl::MessageImpl( const std::string & name_r,
-			      const Edition & edition_r,
-			      const Arch & arch_r )
-    : ResolvableImpl( ResKind( "message" ),
-		      name_r,
-		      edition_r,
-		      arch_r )
-    {
-    }
+    MessageImpl::MessageImpl()
+    {}
     /** Dtor */
     MessageImpl::~MessageImpl()
-    {
-    }
+    {}
 
     std::string MessageImpl::type() const {
       return _type;

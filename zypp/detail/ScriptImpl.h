@@ -12,7 +12,7 @@
 #ifndef ZYPP_DETAIL_SCRIPTIMPL_H
 #define ZYPP_DETAIL_SCRIPTIMPL_H
 
-#include "zypp/detail/ResolvableImpl.h"
+#include "zypp/detail/ScriptImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -20,20 +20,17 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
-    DEFINE_PTR_TYPE(ScriptImpl)
 
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : ScriptImpl
     //
     /** Class representing an update script */
-    class ScriptImpl : public ResolvableImpl
+    class ScriptImpl : public ScriptImplIf
     {
     public:
       /** Default ctor */
-      ScriptImpl( const std::string & name_r,
-		  const Edition & edition_r,
-		  const Arch & arch_r );
+      ScriptImpl();
       /** Dtor */
       ~ScriptImpl();
 

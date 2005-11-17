@@ -23,23 +23,26 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
     namespace YUM
     {
-      IMPL_PTR_TYPE(YUMScriptImpl)
-  
+
       ///////////////////////////////////////////////////////////////////
       //
       //        CLASS NAME : YUMScriptImpl
       //
       ///////////////////////////////////////////////////////////////////
-  
+
       /** Default ctor */
       YUMScriptImpl::YUMScriptImpl(
 	const zypp::parser::YUM::YUMPatchScript & parsed
       )
+#warning MA: CANT BE CONSTUCTED THAT WAY ANYMORE
+#if 0
       : ScriptImpl(
 	parsed.name,
 	Edition(parsed.ver, parsed.rel, strtol(parsed.epoch.c_str(), NULL, 10)),
 	Arch("noarch")
+
       )
+#endif
       {
 	_do_script = parsed.do_script;
 	_undo_script = parsed.undo_script;
@@ -53,7 +56,7 @@ namespace zypp
 
 */
       }
-    } // namespace YUM 
+    } // namespace YUM
     /////////////////////////////////////////////////////////////////
   } // namespace source
   ///////////////////////////////////////////////////////////////////

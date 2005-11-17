@@ -9,6 +9,8 @@
 /** \file zypp/Resolvable.cc
  *
 */
+#include <iostream>
+
 #include "zypp/Resolvable.h"
 #include "zypp/detail/ResolvableImpl.h"
 
@@ -17,15 +19,17 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  IMPL_PTR_TYPE(Resolvable)
 
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Resolvable::Resolvable
   //	METHOD TYPE : Ctor
   //
-  Resolvable::Resolvable( detail::ResolvableImplPtr impl_r )
-  : _pimpl( impl_r )
+  Resolvable::Resolvable( const ResKind & kind_r,
+                          const std::string & name_r,
+                          const Edition & edition_r,
+                          const Arch & arch_r )
+  : _pimpl( new Impl( kind_r, name_r, edition_r, arch_r ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -35,6 +39,23 @@ namespace zypp
   //
   Resolvable::~Resolvable()
   {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Resolvable::dumpOn
+  //	METHOD TYPE : std::ostream
+  //
+  std::ostream & Resolvable::dumpOn( std::ostream & str ) const
+  {
+    return str << '[' << kind() << ']'
+    << name() << '-' << edition() << '.' << arch();
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	Resolvable interface forwarded to implementation
+  //
+  ///////////////////////////////////////////////////////////////////
 
   const ResKind & Resolvable::kind() const
   { return _pimpl->kind(); }
@@ -53,24 +74,6 @@ namespace zypp
 
   void Resolvable::setDeps( const Dependencies & val_r )
   { _pimpl->setDeps( val_r ); }
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Resolvable::~Resolvable
-  //	METHOD TYPE : Dtor
-  //
-  detail::constResolvableImplPtr Resolvable::sayFriend() const
-  { return _pimpl; }
-
-  /******************************************************************
-  **
-  **	FUNCTION NAME : operator<<
-  **	FUNCTION TYPE : std::ostream &
-  */
-  std::ostream & operator<<( std::ostream & str, const Resolvable & obj )
-  {
-    return str << *obj.sayFriend();
-  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

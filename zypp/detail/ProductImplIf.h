@@ -6,37 +6,41 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/ProductImpl.cc
+/** \file zypp/detail/ProductImplIf.h
  *
 */
+#ifndef ZYPP_DETAIL_PRODUCTIMPLIF_H
+#define ZYPP_DETAIL_PRODUCTIMPLIF_H
 
-#include "zypp/detail/ProductImpl.h"
-
-using namespace std;
+#include "zypp/detail/ResObjectImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  class Product;
+
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : ProductImpl
+    //	CLASS NAME : ProductImplIf
     //
+    /** Abstact Product implementation interface.
+    */
+    class ProductImplIf : public ResObjectImplIf
+    {
+    public:
+      typedef Product ResType;
+
+    public:
+      /** Get the category of the product */
+      virtual std::string category() const
+      { return std::string(); }
+    };
     ///////////////////////////////////////////////////////////////////
-
-    /** Default ctor */
-    ProductImpl::ProductImpl()
-    {}
-    /** Dtor */
-    ProductImpl::~ProductImpl()
-    {}
-
-    std::string ProductImpl::category() const {
-      return _category;
-    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail
@@ -44,3 +48,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_DETAIL_PRODUCTIMPLIF_H

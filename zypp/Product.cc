@@ -12,23 +12,22 @@
 #include <iostream>
 
 #include "zypp/Product.h"
-#include "zypp/detail/ProductImpl.h"
 
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  IMPL_PTR_TYPE(Product)
 
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Product::Product
   //	METHOD TYPE : Ctor
   //
-  Product::Product( detail::ProductImplPtr impl_r )
-  : Resolvable( impl_r )
-  , _pimpl( impl_r )
+  Product::Product( const std::string & name_r,
+                    const Edition & edition_r,
+                    const Arch & arch_r )
+  : ResObject( ResKind("Product"), name_r, edition_r, arch_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -39,19 +38,14 @@ namespace zypp
   Product::~Product()
   {}
 
-  std::list<std::string> Product::description() const
-  {
-    return _pimpl->description();
-  }
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Product::do_script
-  //	Get the product category
+  //	Package interface forwarded to implementation
   //
-  std::string Product::category()
-  {
-    return _pimpl->category();
-  }
+  ///////////////////////////////////////////////////////////////////
+
+  std::string Product::category() const
+  { return pimpl().category(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

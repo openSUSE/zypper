@@ -12,12 +12,7 @@
 #ifndef ZYPP_DETAIL_PATCHIMPL_H
 #define ZYPP_DETAIL_PATCHIMPL_H
 
-#include <list>
-#include <string>
-
-#include "zypp/detail/ResolvableImpl.h"
-#include "zypp/Resolvable.h"
-#include "zypp/Patch.h"  // contains atom_list macro
+#include "zypp/detail/PatchImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -25,20 +20,20 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
-    DEFINE_PTR_TYPE(PatchImpl)
 
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : PatchImpl
     //
-    /** Class representing a patch */
-    class PatchImpl : public ResolvableImpl
+    /** Class representing a patch
+     * \todo Get rid of string based ResKind detection in e.g.
+     * PatchImpl::interactive. Esp. DO NOT CAST ResKind to std::string.
+    */
+    class PatchImpl : public PatchImplIf
     {
     public:
       /** Default ctor */
-      PatchImpl( const std::string & name_r,
-		 const Edition & edition_r,
-		 const Arch & arch_r );
+      PatchImpl();
       /** Dtor */
       ~PatchImpl();
 
@@ -61,9 +56,9 @@ namespace zypp
       /** Is the patch installation interactive? (does it need user input?) */
       bool interactive();
       /** The list of all atoms building the patch */
-      atom_list all_atoms();
+      AtomList all_atoms();
       /** The list of those atoms which have not been installed */
-      atom_list not_installed_atoms();
+      AtomList not_installed_atoms();
 
 // TODO check necessarity of functions below
       bool any_atom_selected();
@@ -84,7 +79,7 @@ namespace zypp
       /** Does the patch affect the package manager itself? */
       bool _affects_pkg_manager;
       /** The list of all atoms building the patch */
-      atom_list _atoms;
+      AtomList _atoms;
     };
     ///////////////////////////////////////////////////////////////////
 

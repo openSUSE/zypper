@@ -9,26 +9,23 @@
 /** \file zypp/Message.cc
  *
 */
-#include <iostream>
-
 #include "zypp/Message.h"
-#include "zypp/detail/MessageImpl.h"
 
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  IMPL_PTR_TYPE(Message)
 
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Message::Message
   //	METHOD TYPE : Ctor
   //
-  Message::Message( detail::MessageImplPtr impl_r )
-  : Resolvable( impl_r )
-  , _pimpl( impl_r )
+  Message::Message( const std::string & name_r,
+                    const Edition & edition_r,
+                    const Arch & arch_r )
+  : ResObject( ResKind("Message"), name_r, edition_r, arch_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -41,23 +38,15 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Message::text
-  //	Get the text of the message
+  //	Message interface forwarded to implementation
   //
-  std::string Message::text()
-  {
-    return _pimpl->text();
-  }
-
   ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Message::text
-  //	Get the type of the message ("OK", "YesNo")
-  //
+
+  std::string Message::text()
+  { return pimpl().text(); }
+
   std::string Message::type()
-  {
-    return _pimpl->type();
-  }
+  { return pimpl().type(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

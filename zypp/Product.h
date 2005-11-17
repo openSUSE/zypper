@@ -12,43 +12,44 @@
 #ifndef ZYPP_PRODUCT_H
 #define ZYPP_PRODUCT_H
 
-#include "zypp/Resolvable.h"
-#include <list>
-#include <string>
+#include "zypp/ResObject.h"
+#include "zypp/detail/ProductImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
-    DEFINE_PTR_TYPE(ProductImpl)
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
-  ///////////////////////////////////////////////////////////////////
-  DEFINE_PTR_TYPE(Product)
-
-  ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : Product
+  //	CLASS NAME : ResObject
   //
-  /** Class representing an update script */
-  class Product : public Resolvable
+  /** Product interface.
+  */
+  class Product : public ResObject
   {
   public:
-    /** Default ctor */
-    Product( detail::ProductImplPtr impl_r );
-    /** Dtor */
-    ~Product();
+    typedef Product                         Self;
+    typedef detail::ProductImplIf           Impl;
+    typedef base::intrusive_ptr<Self>       Ptr;
+    typedef base::intrusive_ptr<const Self> constPtr;
+
   public:
-    /** Get the product description */
-    std::list<std::string> description() const;
     /** Get the product categoty (base, add-on) */
-    std::string category();
+    std::string category() const;
+
+  protected:
+    /** Ctor */
+    Product( const std::string & name_r,
+             const Edition & edition_r,
+             const Arch & arch_r );
+    /** Dtor */
+    virtual ~Product();
+
   private:
-    /** Pointer to implementation */
-    detail::ProductImplPtr _pimpl;
+    /** Access implementation */
+    virtual Impl & pimpl() = 0;
+    /** Access implementation */
+    virtual const Impl & pimpl() const = 0;
   };
 
   /////////////////////////////////////////////////////////////////

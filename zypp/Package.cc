@@ -9,26 +9,23 @@
 /** \file	zypp/Package.cc
  *
 */
-#include <iostream>
-
 #include "zypp/Package.h"
-#include "zypp/detail/PackageImpl.h"
 
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  IMPL_PTR_TYPE(Package)
 
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Package::Package
   //	METHOD TYPE : Ctor
   //
-  Package::Package( detail::PackageImplPtr impl_r )
-  :  Resolvable( impl_r )
-  , _pimpl( impl_r )
+  Package::Package( const std::string & name_r,
+                    const Edition & edition_r,
+                    const Arch & arch_r )
+  : ResObject( ResKind("Package"), name_r, edition_r, arch_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -39,11 +36,13 @@ namespace zypp
   Package::~Package()
   {}
 
-  std::string Package::summary() const
-  { return _pimpl->summary(); }
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	Package interface forwarded to implementation
+  //
+  ///////////////////////////////////////////////////////////////////
 
-  std::list<std::string> Package::description() const
-  { return _pimpl->description(); }
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

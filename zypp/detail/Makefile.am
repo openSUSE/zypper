@@ -7,11 +7,18 @@ SUBDIRS =
 
 include_HEADERS = \
 	ResolvableImpl.h	\
+	ResObjectImplIf.h	\
+	PackageImplIf.h		\
 	PackageImpl.h		\
+	SelectionImplIf.h	\
 	SelectionImpl.h		\
+	MessageImplIf.h		\
 	MessageImpl.h		\
+	ScriptImplIf.h		\
 	ScriptImpl.h		\
+	PatchImplIf.h		\
 	PatchImpl.h		\
+	ProductImplIf.h		\
 	ProductImpl.h
 
 

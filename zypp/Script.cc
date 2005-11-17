@@ -9,26 +9,23 @@
 /** \file zypp/Script.cc
  *
 */
-#include <iostream>
-
 #include "zypp/Script.h"
-#include "zypp/detail/ScriptImpl.h"
 
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  IMPL_PTR_TYPE(Script)
 
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Script::Script
   //	METHOD TYPE : Ctor
   //
-  Script::Script( detail::ScriptImplPtr impl_r )
-  : Resolvable( impl_r )
-  , _pimpl( impl_r )
+  Script::Script( const std::string & name_r,
+                  const Edition & edition_r,
+                  const Arch & arch_r )
+  : ResObject( ResKind("Script"), name_r, edition_r, arch_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -41,33 +38,18 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Script::do_script
-  //	Get the script to perform the action
+  //	Script interface forwarded to implementation
   //
+  ///////////////////////////////////////////////////////////////////
+
   std::string Script::do_script()
-  {
-    return _pimpl->do_script();
-  }
+  { return pimpl().do_script(); }
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Script::undo_script
-  //	Get the script to revert the action
-  //
   std::string Script::undo_script()
-  {
-    return _pimpl->undo_script();
-  }
+  { return pimpl().undo_script(); }
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Script::undo_available
-  //	Check whether the action can be reverted
-  //
   bool Script::undo_available()
-  {
-    return _pimpl->undo_available();
-  }
+  { return pimpl().undo_available(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

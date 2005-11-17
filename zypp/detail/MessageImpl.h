@@ -12,7 +12,7 @@
 #ifndef ZYPP_DETAIL_MESSAGEIMPL_H
 #define ZYPP_DETAIL_MESSAGEIMPL_H
 
-#include "zypp/detail/ResolvableImpl.h"
+#include "zypp/detail/MessageImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -20,22 +20,19 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
-    DEFINE_PTR_TYPE(MessageImpl)
 
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : MessageImpl
     //
     /** Class representing the message to be shown during update */
-    class MessageImpl : public ResolvableImpl
+    class MessageImpl : public MessageImplIf
     {
     public:
       /** Default ctor */
-      MessageImpl( const std::string & name_r,
-		   const Edition & edition_r,
-		   const Arch & arch_r );
+      MessageImpl();
       /** Dtor */
-      ~MessageImpl();
+      virtual ~MessageImpl();
 
     public:
       /** Get the text of the message */

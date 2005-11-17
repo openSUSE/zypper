@@ -12,14 +12,14 @@
 #ifndef ZYPP_RESTRAITS_H
 #define ZYPP_RESTRAITS_H
 
-#include "zypp/ResKind.h"
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  class ResKind;
+
   template<typename _Res>
-    class ResTraits;
+    class ResTraits {};
 
   class Package;
   template<>

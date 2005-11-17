@@ -18,48 +18,9 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
-    IMPL_PTR_TYPE(ResolvableImpl)
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : ResolvableImpl::ResolvableImpl
-    //	METHOD TYPE : Ctor
-    //
-    ResolvableImpl::ResolvableImpl( const ResKind & kind_r,
-                                    const std::string & name_r,
-                                    const Edition & edition_r,
-                                    const Arch & arch_r )
-    : _kind( kind_r )
-    , _name( name_r )
-    , _edition( edition_r )
-    , _arch( arch_r )
-    {}
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : ResolvableImpl::~ResolvableImpl
-    //	METHOD TYPE : Dtor
-    //
-    ResolvableImpl::~ResolvableImpl()
-    {}
 
-    /******************************************************************
-     **
-     **	FUNCTION NAME : operator<<
-     **	FUNCTION TYPE : std::ostream &
-    */
-    std::ostream & operator<<( std::ostream & str, const ResolvableImpl & obj )
-    {
-      str << '[' << obj.kind() << ']' << obj.name() << '-' << obj.edition() << '.' << obj.arch();
-      return str;
-    }
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
-  ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

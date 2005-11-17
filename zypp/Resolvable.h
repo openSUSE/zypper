@@ -17,34 +17,31 @@
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
+#include <zypp/base/PtrTypes.h>
 
-#include "zypp/ResolvableFwd.h"
+#include "zypp/ResKind.h"
+#include "zypp/Edition.h"
+#include "zypp/Arch.h"
+#include "zypp/Dependencies.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
-    DEFINE_PTR_TYPE(ResolvableImpl)
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
-  ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Resolvable
   //
-  /**
+  /** Interface base for resolvable objects (identification and depndencies).
    * \todo Solve ResKind problems via traits template?
   */
   class Resolvable : public base::ReferenceCounted, private base::NonCopyable
   {
   public:
-    /** Ctor */
-    Resolvable( detail::ResolvableImplPtr impl_r );
-    /** Dtor */
-    virtual ~Resolvable();
+    typedef Resolvable                      Self;
+    typedef base::intrusive_ptr<Self>       Ptr;
+    typedef base::intrusive_ptr<const Self> constPtr;
+    friend std::ostream & operator<<( std::ostream & str, const Resolvable & obj );
 
   public:
     /**  */
@@ -60,17 +57,36 @@ namespace zypp
     /** */
     void setDeps( const Dependencies & val_r );
 
+  protected:
+    /** Ctor */
+    Resolvable( const ResKind & kind_r,
+                const std::string & name_r,
+                const Edition & edition_r,
+                const Arch & arch_r );
+    /** Dtor */
+    virtual ~Resolvable();
+    /** Helper for stream output */
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+
   private:
+    /** Implementation */
+    struct Impl;
     /** Pointer to implementation */
-    detail::ResolvableImplPtr _pimpl;
-  public:
-    /** Avoid a bunch of friend decl. */
-    detail::constResolvableImplPtr sayFriend() const;
+    base::ImplPtr<Impl> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 
-  /** \relates Resolvable Stream output */
-  extern std::ostream & operator<<( std::ostream & str, const Resolvable & obj );
+  /** Required by base::intrusive_ptr to add a reference. */
+  inline void intrusive_ptr_add_ref( const Resolvable * ptr_r )
+  { base::ReferenceCounted::add_ref( ptr_r ); }
+
+  /** Required by base::intrusive_ptr to release a reference. */
+  inline void intrusive_ptr_release( const Resolvable * ptr_r )
+  { base::ReferenceCounted::release( ptr_r ); }
+
+  /** \relates Resolvable Stream output via Resolvable::dumpOn */
+  inline std::ostream & operator<<( std::ostream & str, const Resolvable & obj )
+  { return obj.dumpOn( str ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

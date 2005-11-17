@@ -12,46 +12,37 @@
 #ifndef ZYPP_PATCH_H
 #define ZYPP_PATCH_H
 
-#include <list>
-
-#include "zypp/Resolvable.h"
+#include "zypp/ResObject.h"
+#include "zypp/detail/PatchImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
-    DEFINE_PTR_TYPE(PatchImpl)
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
-  ///////////////////////////////////////////////////////////////////
-  DEFINE_PTR_TYPE(Patch)
-
-  #define atom_list std::list<ResolvablePtr>
-
-  ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Patch
   //
-  /** Class representing a patch */
-  class Patch : public Resolvable
+  /** Class representing a patch.
+   * \todo Patch::atoms can't be const, if Impl does not
+   * provide a const method. Check it.
+  */
+  class Patch : public ResObject
   {
   public:
-    /** Default ctor */
-    Patch( detail::PatchImplPtr impl_r );
-    /** Dtor */
-    ~Patch();
+    typedef Patch                           Self;
+    typedef detail::PatchImplIf             Impl;
+    typedef base::intrusive_ptr<Self>       Ptr;
+    typedef base::intrusive_ptr<const Self> constPtr;
+
+  public:
+    typedef Impl::AtomList AtomList;
+
   public:
     /** Patch ID */
     std::string id() const;
     /** Patch time stamp */
     unsigned int timestamp() const;
-    /** Patch summary */
-    std::string summary() const;
-    /** Patch description */
-    std::list<std::string> description() const;
     /** Patch category (recommended, security,...) */
     std::string category() const;
     /** Does the system need to reboot to finish the update process? */
@@ -59,16 +50,27 @@ namespace zypp
     /** Does the patch affect the package manager itself? */
     bool affects_pkg_manager() const;
     /** The list of all atoms building the patch */
-    atom_list atoms() const;
+    AtomList atoms();
     /** Is the patch installation interactive? (does it need user input?) */
     bool interactive();
     // TODO add comments and reevaluate the need for functions below
     void mark_atoms_to_freshen(bool freshen);
     bool any_atom_selected();
     void select(); // TODO parameter to specify select/unselect or another function
+
+  protected:
+    /** Ctor */
+    Patch( const std::string & name_r,
+           const Edition & edition_r,
+           const Arch & arch_r );
+    /** Dtor */
+    virtual ~Patch();
+
   private:
-    /** Pointer to implementation */
-    detail::PatchImplPtr _pimpl;
+    /** Access implementation */
+    virtual Impl & pimpl() = 0;
+    /** Access implementation */
+    virtual const Impl & pimpl() const = 0;
   };
 
   /////////////////////////////////////////////////////////////////
