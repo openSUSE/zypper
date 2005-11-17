@@ -27,7 +27,7 @@ namespace zypp
     //
     /** Class representing a patch
      * \todo Get rid of string based ResKind detection in e.g.
-     * PatchImpl::interactive. Esp. DO NOT CAST ResKind to std::string.
+     * PatchImpl::interactive.
     */
     class PatchImpl : public PatchImplIf
     {

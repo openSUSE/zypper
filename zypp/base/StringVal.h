@@ -30,7 +30,11 @@ namespace zypp
     class StringVal
     {
     public:
+      /** */
       operator const std::string &() const
+      { return _value; }
+      /** */
+      const std::string & asString() const
       { return _value; }
     protected:
       /** */
@@ -53,6 +57,27 @@ namespace zypp
 
     inline std::ostream & operator<<( std::ostream & str, const StringVal & obj )
     { return str << static_cast<const std::string &>(obj); }
+
+    ///////////////////////////////////////////////////////////////////
+
+    inline bool operator==( const StringVal & lhs, const StringVal & rhs )
+    { return lhs.asString() == rhs.asString(); }
+
+    inline bool operator==( const StringVal & lhs, const std::string & rhs )
+    { return lhs.asString() == rhs; }
+
+    inline bool operator==( const std::string & lhs, const StringVal & rhs )
+    { return lhs == rhs.asString(); }
+
+
+    inline bool operator!=( const StringVal & lhs, const StringVal & rhs )
+    { return !( lhs == rhs ); }
+
+    inline bool operator!=( const StringVal & lhs, const std::string & rhs )
+    { return !( lhs == rhs ); }
+
+    inline bool operator!=( const std::string & lhs, const StringVal & rhs )
+    { return !( lhs == rhs ); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace base
