@@ -33,7 +33,7 @@ namespace zypp
   //
   //	CLASS NAME : Resolvable
   //
-  /** Interface base for resolvable objects (identification and depndencies).
+  /** Interface base for resolvable objects (identification and dependencies).
    * \todo Solve ResKind problems via traits template?
   */
   class Resolvable : public base::ReferenceCounted, private base::NonCopyable
