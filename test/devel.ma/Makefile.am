@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS =	Main Main.debug PtrTest Main2
+noinst_PROGRAMS =	Main Main.debug PtrTest
 
 ## ##################################################
 
@@ -15,8 +15,7 @@ LDADD =		$(top_srcdir)/zypp/lib@PACKAGE@.la
 
 ## ##################################################
 
-Main_SOURCES = 		Main.cc main.cc
-Main2_SOURCES = 	main.cc Main.cc
+Main_SOURCES = 		Main.cc
 
 Main_debug_SOURCES = 	$(Main_SOURCES)
 Main_debug_LDFLAGS =	-static

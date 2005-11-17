@@ -17,7 +17,8 @@
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
-#include <zypp/base/PtrTypes.h>
+#include "zypp/base/PtrTypes.h"
+#include "zypp/ResTraits.h"
 
 #include "zypp/ResKind.h"
 #include "zypp/Edition.h"
@@ -74,6 +75,11 @@ namespace zypp
     /** Pointer to implementation */
     base::ImplPtr<Impl> _pimpl;
   };
+  ///////////////////////////////////////////////////////////////////
+
+
+
+
   ///////////////////////////////////////////////////////////////////
 
   /** Required by base::intrusive_ptr to add a reference. */

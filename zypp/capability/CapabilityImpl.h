@@ -15,7 +15,7 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 
-#include "zypp/ResolvableFwd.h"
+#include "zypp/Resolvable.h"
 #include "zypp/SolverContextFwd.h"
 #include "zypp/ResKind.h"
 
@@ -50,7 +50,7 @@ namespace zypp
       /**  */
       virtual std::string asString() const = 0;
       /**  */
-      virtual bool matches( constResolvablePtr resolvable_r,
+      virtual bool matches( Resolvable::constPtr resolvable_r,
                             const SolverContext & colverContext_r ) const = 0;
 
     private:

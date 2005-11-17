@@ -20,6 +20,8 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   class Resolvable;
+  template<class _Res>
+    class ResImplConnect;
   typedef std::string            line;
   typedef std::list<std::string> text;
 

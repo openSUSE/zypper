@@ -42,7 +42,7 @@ namespace zypp
       virtual std::string asString() const
       { return _name; }
       /**  */
-      virtual bool matches( constResolvablePtr resolvable_r,
+      virtual bool matches( Resolvable::constPtr resolvable_r,
                             const SolverContext & colverContext_r ) const
       { return false; }
     private:

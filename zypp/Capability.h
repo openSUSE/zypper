@@ -17,7 +17,7 @@
 
 #include "zypp/base/PtrTypes.h"
 
-#include "zypp/ResolvableFwd.h"
+#include "zypp/Resolvable.h"
 #include "zypp/SolverContextFwd.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -66,10 +66,10 @@ namespace zypp
     /**  */
     std::string asString() const;
     /**  */
-    bool matches( constResolvablePtr resolvable_r,
+    bool matches( Resolvable::constPtr resolvable_r,
                   const SolverContext & colverContext_r ) const;
     /**  */
-    bool matches( constResolvablePtr resolvable_r ) const;
+    bool matches( Resolvable::constPtr resolvable_r ) const;
 
   private:
     /** Pointer to implementation */
