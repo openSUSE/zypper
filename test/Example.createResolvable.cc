@@ -10,19 +10,25 @@
 using namespace std;
 using namespace zypp;
 
+namespace zypp
+{
+  template<>
+    Capability CapFactory::parse<Package>( const std::string & strval_r ) const
+    { throw; return parse( strval_r, ResTraits<Package>::_kind ); }
+}
+
 // refine parsing and add it to lib
 //
-struct CapSetInsert : public std::unary_function<const std::string &, void>
+template<typename _Res>
+  struct CapSetInsert : public std::unary_function<const std::string &, void>
 {
   CapSet &   _x;
-  ResKind    _r;
   CapFactory _f;
-  CapSetInsert( CapSet & x, const ResKind & defaultRefers_r )
+  CapSetInsert( CapSet & x )
   : _x(x)
-  , _r(defaultRefers_r)
   {}
   void operator()( const std::string & v )
-  { _x.insert( _f.parse( v, _r ) ); }
+  { _x.insert( _f.parse<_Res>( v ) ); }
 };
 
 inline std::list<std::string> parseDeps()
@@ -76,7 +82,7 @@ int main( int argc, char * argv[] )
   CapSet prv;
   try
     {
-      for_each( depList.begin(), depList.end(), CapSetInsert(prv,ResKind("Package")) );
+      for_each( depList.begin(), depList.end(), CapSetInsert<Package>(prv) );
     }
   catch(...)
     {

@@ -2,22 +2,43 @@
 #include <iterator>
 #include <functional>
 #include <algorithm>
-#include <set>
 #include <zypp/base/Logger.h>
-#include <zypp/Capability.h>
-#include <zypp/CapFactory.h>
-#include <zypp/CapSet.h>
+#include <zypp/base/PtrTypes.h>
 #include "main.h"
+//#include "main2.h"
 
 #define TAG INT << __PRETTY_FUNCTION__ << std::endl
 
-namespace zypp
+using namespace std;
+
+inline void OUT( Resolvable::constPtr p )
 {
+  if ( p )
+    MIL << *p << endl;
+  else
+    MIL << "NULL" << endl;
 }
 
-using namespace std;
-using namespace zypp;
-#include <zypp/ResKind.h>
+inline void OUT( Package::constPtr p )
+{
+  if ( p ) {
+    MIL << *p << ' ' << p->packagedata() << endl;
+  }
+  else
+    MIL << "NULL" << endl;
+}
+inline void OUT( Package::Ptr p )
+{
+  OUT( Package::constPtr( p ) );
+}
+
+
+struct PI : public PackageImpl
+{
+  virtual string packagedata() const { return "PI::packagedata"; }
+};
+
+
 /******************************************************************
 **
 **
@@ -26,39 +47,17 @@ using namespace zypp;
 **
 **	DESCRIPTION :
 */
-struct CapSetInsert : public std::unary_function<const char *, void> {
-    CapSet &   _x;
-    CapFactory _f;
-    CapSetInsert( CapSet & x ) : _x(x) {}
-    void operator()( const char * v )
-    { _x.insert( _f.parse( ResKind(), v ) ); }
-};
-
 int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  const char * init[] = {
-    "/bin/sh",
-    "rpmlib(PayloadFilesHavePrefix) <= 4.0-1",
-    "rpmlib(CompressedFileNames) <= 3.0.4-1",
-    "/bin/sh",
-    "libc.so.6",
-    "libc.so.6(GLIBC_2.0)",
-    "libc.so.6(GLIBC_2.3.4)",
-    "libhd.so.11",
-    "libsysfs.so.1",
-    "rpmlib(PayloadIsBzip2) <= 3.0.5-1",
-  };
-  const char ** begin = init;
-  const char ** end   = init + ( sizeof(init) / sizeof(const char *) );
+  /* NVRA */
+  zypp::base::shared_ptr<PI> pi;
+  Package::Ptr p( makeResolvable( /*NVRA*/ pi ) );
+  OUT( p );
 
-  CapSet x;
-  CapSetInsert a( x );
-
-  for_each( begin, end, CapSetInsert(x) );
-
-  copy( x.begin(), x.end(), ostream_iterator<Capability>(SEC,"\n") );
+  p = makeResolvable( /*NVRA*/ pi );
+  OUT( p );
 
   INT << "===[END]============================================" << endl;
   return 0;
