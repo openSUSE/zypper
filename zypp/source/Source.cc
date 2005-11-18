@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/ResolvableImpl.cc
+/** \file zypp/source/Source.cc
  *
 */
 #include <iostream>

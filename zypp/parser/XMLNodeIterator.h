@@ -1,22 +1,13 @@
 /*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
 |                                                                      |
-|                      __   __    ____ _____ ____                      |
-|                      \ \ / /_ _/ ___|_   _|___ \                     |
-|                       \ V / _` \___ \ | |   __) |                    |
-|                        | | (_| |___) || |  / __/                     |
-|                        |_|\__,_|____/ |_| |_____|                    |
-|                                                                      |
-|                               core system                            |
-|                                                        (C) SuSE GmbH |
-\----------------------------------------------------------------------/
-
-  File:       XMLNodeIterator.h
-
-  Author:     Michael Radziej <mir@suse.de>
-  Maintainer: Michael Radziej <mir@suse.de>
-
-  Purpose: Provides an iterator interface for XML files
-
+\---------------------------------------------------------------------*/
+/** \file zypp/parser/XMLNodeIterator.h
+ *
 */
 
 #ifndef XMLNodeIterator_h

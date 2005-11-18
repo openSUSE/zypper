@@ -1,23 +1,14 @@
 /*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
 |                                                                      |
-|                      __   __    ____ _____ ____                      |
-|                      \ \ / /_ _/ ___|_   _|___ \                     |
-|                       \ V / _` \___ \ | |   __) |                    |
-|                        | | (_| |___) || |  / __/                     |
-|                        |_|\__,_|____/ |_| |_____|                    |
-|                                                                      |
-|                               core system                            |
-|                                                        (C) SuSE GmbH |
-\----------------------------------------------------------------------/
-
-File:       LibXMLHelper.h
-
-Author:     Michael Radziej <mir@suse.de>
-Maintainer: Michael Radziej <mir@suse.de>
-
-Purpose:    Helper class to deal with libxml2 with C++
-
-/-*/
+\---------------------------------------------------------------------*/
+/** \file zypp/parser/LibXMLHelper.h
+ *
+*/
 #ifndef LibXMLHelper_h
 #define LibXMLHelper_h
 #include <string>

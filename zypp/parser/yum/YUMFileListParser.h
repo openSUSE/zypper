@@ -1,23 +1,15 @@
 /*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
 |                                                                      |
-|                      __   __    ____ _____ ____                      |
-|                      \ \ / /_ _/ ___|_   _|___ \                     |
-|                       \ V / _` \___ \ | |   __) |                    |
-|                        | | (_| |___) || |  / __/                     |
-|                        |_|\__,_|____/ |_| |_____|                    |
-|                                                                      |
-|                               core system                            |
-|                                                        (C) SuSE GmbH |
-\----------------------------------------------------------------------/
+\---------------------------------------------------------------------*/
+/** \file zypp/parser/yum/YUMFileListParser.h
+ *
+*/
 
-File:       YUMFileListParser.h
-
-Author:     Michael Radziej <mir@suse.de>
-Maintainer: Michael Radziej <mir@suse.de>
-
-Purpose: Parses file list files in a YUM repository
-
-/-*/
 
 #ifndef YUMFileListParser_h
 #define YUMFileListParser_h

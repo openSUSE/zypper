@@ -1,25 +1,19 @@
 /*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
 |                                                                      |
-|                      __   __    ____ _____ ____                      |
-|                      \ \ / /_ _/ ___|_   _|___ \                     |
-|                       \ V / _` \___ \ | |   __) |                    |
-|                        | | (_| |___) || |  / __/                     |
-|                        |_|\__,_|____/ |_| |_____|                    |
-|                                                                      |
-|                               core system                            |
-|                                                        (C) SuSE GmbH |
-\----------------------------------------------------------------------/
-
-File:       YUMParserData.h
-
-Author:     Michael Radziej <mir@suse.de>
-Maintainer: Michael Radziej <mir@suse.de>
-
-Purpose: Declares the various YUMData classes, which are rather dumb
-         structure-like classes that hold the data of specific YUM
-         repository files. The parsers (YUM...Parser) create these objects,
-         and the YUM installation source use them to build more sophisticated
-         objects.
+\---------------------------------------------------------------------*/
+/** \file zypp/parser/yum/YUMParserData.h
+ *
+ * 
+ * Purpose: Declares the various YUMData classes, which are rather dumb
+ *          structure-like classes that hold the data of specific YUM
+ *          repository files. The parsers (YUM...Parser) create these objects,
+ *          and the YUM installation source use them to build more
+ *          sophisticated objects.
 /-*/
 
 #ifndef YUMParserData_h
