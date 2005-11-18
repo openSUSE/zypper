@@ -1,6 +1,7 @@
 #include <iostream>
 #include <zypp/base/Logger.h>
 #include <zypp/detail/MessageImpl.h>
+#include <zypp/Message.h>
 
 
 using namespace std;
@@ -10,9 +11,6 @@ class MyMessageImpl : public detail::MessageImpl
 {
   public:
     MyMessageImpl (std::string text)
-    : MessageImpl ("message1",
-		   Edition (),
-		   Arch ("noarch"))
     {
       _text = text;
     }
@@ -30,10 +28,15 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  MyMessageImpl p ("My message to be shown to user");
+  std::string text = "My message to be shown to user";
+  std::string _name( "msg1" );
+  Edition _edition( "1.0", "42" );
+  Arch    _arch( "noarch" );
+  base::shared_ptr<detail::MessageImpl> mp1(new MyMessageImpl(text));
+  Message::Ptr m( detail::makeResolvableFromImpl( _name, _edition, _arch, mp1));
 
-  DBG << p << endl;
-  DBG << "  \"" << p.text() << "\"" << endl;
+  DBG << *m << endl;
+  DBG << "  \"" << m->text() << "\"" << endl;
 
   INT << "===[END]============================================" << endl;
   return 0;

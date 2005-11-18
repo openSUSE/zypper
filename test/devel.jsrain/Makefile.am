@@ -3,7 +3,7 @@
 
 SUBDIRS = yum
 
-noinst_PROGRAMS =	Main Main.debug Msg Msg.debug Patch Patch.debug Script Script.debug PatchSelect PatchSelect.debug PatchRead PatchRead.debug
+noinst_PROGRAMS =	Msg Msg.debug Patch Patch.debug Script Script.debug PatchSelect PatchSelect.debug PatchRead PatchRead.debug
 
 
 ## ##################################################
@@ -17,11 +17,6 @@ AM_CXXFLAGS =	-pg
 LDADD =		$(top_srcdir)/zypp/lib@PACKAGE@.la
 
 ## ##################################################
-
-Main_SOURCES = 		Main.cc
-
-Main_debug_SOURCES = 	$(Main_SOURCES)
-Main_debug_LDFLAGS =	-static
 
 Msg_SOURCES = 		Msg.cc
 

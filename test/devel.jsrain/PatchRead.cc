@@ -18,6 +18,8 @@
 #include <zypp/parser/yum/YUMParser.h>
 #include <zypp/base/Logger.h>
 #include <zypp/source/yum/YUMScriptImpl.h>
+#include <zypp/source/yum/YUMMessageImpl.h>
+#include <zypp/source/yum/YUMPackageImpl.h>
 
 
 #include <map>
@@ -34,21 +36,6 @@ using namespace zypp::source::YUM;
 
 
 CapFactory _f;
-
-DEFINE_PTR_TYPE(MyMessageImpl)
-class MyMessageImpl : public detail::MessageImpl
-{
-  public:
-    MyMessageImpl (string name, string type, std::string text)
-    : MessageImpl (name,
-		   Edition (),
-		   Arch ("noarch"))
-    {
-      _text = text;
-      _type = type;
-    }
-};
-IMPL_PTR_TYPE(MyMessageImpl)
 
 void AddDependency (detail::ResolvableImplPtr res, Capability& cap) {
   Dependencies deps = res->deps();
@@ -81,7 +68,7 @@ class MyPatchImpl : public detail::PatchImpl
       Capability cap( _f.parse( p.name, ResKind( "patch" )));
 
       // Process atoms
-      atom_list atoms;
+      detail::PatchImpl::AtomList atoms;
 
       for (std::list<YUMPatchAtom>::iterator it = p.atoms.begin();
 	it != p.atoms.end();
@@ -96,43 +83,31 @@ class MyPatchImpl : public detail::PatchImpl
 	  cout << script->deps() << endl;
 	  atoms.push_back(script);
 	}
+	else if (it->type == "message")
+	{
+	  MessageImplPtr impl = new YUMMessageImpl( *it->message );
+	  AddDependency(impl, cap);
+	  MessagePtr message = new Message(impl);
+	  cout << *message << endl;
+	  cout << message->deps() << endl;
+	  atoms.push_back(message);
+	}
+	else if (it->type == "package")
+	{
+	  PackageImplPtr impl = new YUMPackageImpl( *it->package );
+	  AddDependency(impl, cap);
+	  PackagePtr package = new Package(impl);
+	  cout << *package << endl;
+	  cout << package->deps() << endl;
+	  atoms.push_back(package);
+	}
       }
 
-/*      for (list<PACKAGE>::iterator it = p.pack.begin();
-           it != p.pack.end();
-           it++)
-      {
-	detail::PackageImplPtr pi( new detail::PackageImpl(
-	  it->name,
-	  Edition( it->version, it->release ),
-	  Arch( it->arch )));
-	AddDependency( pi, cap );
-	AddAllRequires( pi, it->requires );
-	PackagePtr p( new Package( pi ));
-	DBG << *p << endl;
-	DBG << p->deps() << endl;
-	atoms.push_back( p );
-      }
-      for (list<MESSAGE>::iterator it = p.msg.begin();
-           it != p.msg.end();
-           it++)
-      {
-	detail::MessageImplPtr pi( new MyMessageImpl(
-	  it->name,
-	  it->type,
-	  it->text));
-	AddDependency( pi, cap );
-	MessagePtr p( new Message( pi ));
-	DBG << *p << endl;
-	DBG << p->deps() << endl;
-	atoms.push_back( p );
-      }
-*/
       // FIXME mve this piece of code after solutions are selected
       // this orders the atoms of a patch
       ResolvablePtr previous;
       bool first = true;
-      for (atom_list::iterator it = atoms.begin();
+      for (detail::PatchImpl::AtomList::iterator it = atoms.begin();
            it != atoms.end();
 	   it++)
       {
@@ -169,53 +144,6 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-// filling structures
-/*
-PACKAGE foo;
-foo.name = "foo";
-foo.version = "3.0";
-foo.release = "5";
-foo.arch = "noarch";
-
-PACKAGE foocomp;
-foocomp.name = "foo-compat";
-foocomp.version = "3.0";
-foocomp.release = "5";
-foocomp.arch = "noarch";
-foocomp.requires.push_back( Capability( _f.parse( "foo", ResKind( "package" ))));
-
-PACKAGE bar;
-bar.name = "bar";
-bar.version = "2.8";
-bar.release = "2";
-bar.arch = "noarch";
-
-MESSAGE msg;
-msg.name = "msg";
-msg.type = "OK";
-msg.text = "Hello World";
-
-SCRIPT scr;
-scr.name = "scr";
-scr.do_script = "/bin/bash";
-scr.undo_script = "/bin/unbash";
-
-list<PACKAGE> pkgs;
-list<MESSAGE> msgs;
-list<SCRIPT> scrs;
-
-pkgs.push_back( foo );
-pkgs.push_back( foocomp );
-pkgs.push_back( bar );
-msgs.push_back( msg );
-scrs.push_back( scr );
-
-PATCH ptch;
-ptch.name = "patch";
-ptch.pack = pkgs;
-ptch.msg = msgs;
-ptch.scr = scrs;
-*/
 PatchPtr patch1;
 YUMPatchParser iter(cin,"");
 for (;
@@ -233,8 +161,8 @@ if (iter.errorStatus())
 
 DBG << patch1 << endl;
 DBG << *patch1 << endl;
-atom_list at = patch1->atoms();
-for (atom_list::iterator it = at.begin();
+Patch::AtomList at = patch1->atoms();
+for (Patch::AtomList::iterator it = at.begin();
      it != at.end();
      it++)
 {

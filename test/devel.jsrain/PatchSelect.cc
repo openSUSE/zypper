@@ -49,7 +49,7 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  atom_list atoms;
+  PatchImpl::AtomList atoms;
 
   std::string _name( "foo" );
   Edition _edition( "1.0", "42" );
@@ -68,7 +68,7 @@ int main( int argc, char * argv[] )
   MyPatchImplPtr q (new MyPatchImpl ("patch1", atoms, "recommended"));
   PatchPtr patch1 (new Patch (q));
 
-  atom_list atoms2;
+  PatchImpl::AtomList atoms2;
   std::string _name3( "msg" );
   Arch    _arch3( "noarch" );
   detail::MessageImplPtr mi(new detail::MessageImpl(_name3,Edition (),_arch3));
