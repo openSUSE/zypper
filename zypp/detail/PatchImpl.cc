@@ -83,12 +83,12 @@ namespace zypp
 	it != not_installed.end();
 	it++)
       {
-	if ((*it)->kind() == "message")
+	if ((*it)->kind() == "Message")
 	{
 //	  DBG << "Patch contains a message" << endl;
 	  return true;
 	}
-	if ((*it)->kind() == "package")
+	if ((*it)->kind() == "Package")
 	{
 				 // Resolvable*
 				  // Resolvable
