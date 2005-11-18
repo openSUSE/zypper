@@ -5,8 +5,10 @@ SUBDIRS =
 
 ## ##################################################
 
-include_HEADERS =	\
-	YUMScriptImpl.h
+include_HEADERS =		\
+	YUMScriptImpl.h		\
+	YUMMessageImpl.h		\
+	YUMPackageImpl.h
 
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_source_yum.la
@@ -14,6 +16,8 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_source_yum.la
 ## ##################################################
 
 lib@PACKAGE@_source_yum_la_SOURCES =	\
-	YUMScriptImpl.cc
+	YUMScriptImpl.cc		\
+	YUMMessageImpl.cc		\
+	YUMPackageImpl.cc
 
 ## ##################################################
