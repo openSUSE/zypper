@@ -46,7 +46,8 @@ namespace zypp
           : _Res( name_r, edition_r, arch_r )
           , _impl( impl_r )
           { _impl->_backRef = this; }
-          virtual ~ResImplConnect() {}
+          virtual ~ResImplConnect()
+          { _impl->_backRef = 0; }
         private:
           ImplPtr _impl;
           virtual Impl &       pimpl()       { return *_impl; }
