@@ -32,77 +32,81 @@ Purpose:    Parses other.xml files in a YUM repository
 #include <schemanames.h>
 
 using namespace std;
-namespace zypp { namespace parser { namespace YUM {
+namespace zypp {
+  namespace parser {
+    namespace yum {
 
 
-YUMOtherParser::YUMOtherParser(istream &is, const string& baseUrl)
-: XMLNodeIterator<YUMOtherDataPtr>(is, baseUrl,OTHERSCHEMA)
-{
-  fetchNext();
-}
-
-YUMOtherParser::YUMOtherParser()
-{ }
-
-YUMOtherParser::YUMOtherParser(YUMOtherDataPtr& entry)
-: XMLNodeIterator<YUMOtherDataPtr>(entry)
-{ }
-
-
-
-YUMOtherParser::~YUMOtherParser()
-{
-}
-
-
-
-
-// select for which elements process() will be called
-bool 
-YUMOtherParser::isInterested(const xmlNodePtr nodePtr)
-{
-  bool result = (_helper.isElement(nodePtr)
-                 && _helper.name(nodePtr) == "package");
-  return result;
-}
-
-
-// do the actual processing
-YUMOtherDataPtr
-YUMOtherParser::process(const xmlTextReaderPtr reader)
-{
-  assert(reader);
-  YUMOtherDataPtr dataPtr = new YUMOtherData;
-  xmlNodePtr dataNode = xmlTextReaderExpand(reader);
-  assert(dataNode);
-
-  dataPtr->pkgId = _helper.attribute(dataNode,"pkgid");
-  dataPtr->name = _helper.attribute(dataNode,"name");
-  dataPtr->arch = _helper.attribute(dataNode,"arch");
-
-  for (xmlNodePtr child = dataNode->children;
-       child != 0;
-       child = child->next) {
-         if (_helper.isElement(child)) {
-           string name = _helper.name(child);
-           if (name == "version") {
-             dataPtr->epoch = _helper.attribute(child,"epoch");
-             dataPtr->ver = _helper.attribute(child,"ver");
-             dataPtr->rel = _helper.attribute(child,"rel");
-           }
-           else if (name == "file") {
-             dataPtr->changelog.push_back
-               (ChangelogEntry(_helper.attribute(child,"author"),
-                               _helper.attribute(child,"date"),
-                               _helper.content(child)));
-           }
-           else {
-             WAR << "YUM <otherdata> contains the unknown element <" << name << "> "
-               << _helper.positionInfo(child) << ", skipping" << endl;
-           }
-         }
-       }
-  return dataPtr;
-}
-
-}}}
+      YUMOtherParser::YUMOtherParser(istream &is, const string& baseUrl)
+      : XMLNodeIterator<YUMOtherDataPtr>(is, baseUrl,OTHERSCHEMA)
+      {
+        fetchNext();
+      }
+      
+      YUMOtherParser::YUMOtherParser()
+      { }
+      
+      YUMOtherParser::YUMOtherParser(YUMOtherDataPtr& entry)
+      : XMLNodeIterator<YUMOtherDataPtr>(entry)
+      { }
+      
+      
+      
+      YUMOtherParser::~YUMOtherParser()
+      {
+      }
+      
+      
+      
+      
+      // select for which elements process() will be called
+      bool 
+      YUMOtherParser::isInterested(const xmlNodePtr nodePtr)
+      {
+        bool result = (_helper.isElement(nodePtr)
+                       && _helper.name(nodePtr) == "package");
+        return result;
+      }
+      
+      
+      // do the actual processing
+      YUMOtherDataPtr
+      YUMOtherParser::process(const xmlTextReaderPtr reader)
+      {
+        assert(reader);
+        YUMOtherDataPtr dataPtr = new YUMOtherData;
+        xmlNodePtr dataNode = xmlTextReaderExpand(reader);
+        assert(dataNode);
+      
+        dataPtr->pkgId = _helper.attribute(dataNode,"pkgid");
+        dataPtr->name = _helper.attribute(dataNode,"name");
+        dataPtr->arch = _helper.attribute(dataNode,"arch");
+      
+        for (xmlNodePtr child = dataNode->children;
+             child != 0;
+             child = child->next) {
+               if (_helper.isElement(child)) {
+                 string name = _helper.name(child);
+                 if (name == "version") {
+                   dataPtr->epoch = _helper.attribute(child,"epoch");
+                   dataPtr->ver = _helper.attribute(child,"ver");
+                   dataPtr->rel = _helper.attribute(child,"rel");
+                 }
+                 else if (name == "file") {
+                   dataPtr->changelog.push_back
+                     (ChangelogEntry(_helper.attribute(child,"author"),
+                                     _helper.attribute(child,"date"),
+                                     _helper.content(child)));
+                 }
+                 else {
+                   WAR << "YUM <otherdata> contains the unknown element <" << name << "> "
+                     << _helper.positionInfo(child) << ", skipping" << endl;
+                 }
+               }
+             }
+        return dataPtr;
+      }
+      
+    } // namespace yum
+  } // namespace parser
+} // namespace zypp

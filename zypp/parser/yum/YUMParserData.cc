@@ -24,159 +24,163 @@ Purpose:    Boring constructors of YUM repository data structures
 #include <YUMParserData.h>
 
 using namespace std;
-namespace zypp { namespace parser { namespace YUM {
+namespace zypp {
+  namespace parser {
+    namespace yum {
 
-YUMDependency::YUMDependency()
-{ }
-
-YUMDependency::YUMDependency(const std::string& name,
-                             const std::string& flags,
+      YUMDependency::YUMDependency()
+      { }
+      
+      YUMDependency::YUMDependency(const std::string& name,
+                                   const std::string& flags,
+                                   const std::string& epoch,
+                                   const std::string& ver,
+                                   const std::string& rel,
+                                   const std::string& pre)
+      : name(name),
+      flags(flags),
+      epoch(epoch),
+      ver(ver),
+      rel(rel),
+      pre(pre)
+      { };
+      
+      YUMDirSize::YUMDirSize()
+      { }
+      
+      YUMDirSize::YUMDirSize(const std::string& path,
+                             const std::string& sizeKByte,
+                             const std::string& fileCount)
+      : path(path), sizeKByte(sizeKByte), fileCount(fileCount)
+      { }
+      
+      YUMRepomdData::YUMRepomdData()
+      { }
+      
+      YUMPrimaryData::YUMPrimaryData()
+      { }
+      
+      FileData::FileData()
+      { }
+      
+      YUMPatchData::YUMPatchData()
+      { }
+      
+      FileData::FileData(const std::string &name,
+                         const std::string &type)
+      : name(name), type(type)
+      { }
+      
+      
+      YUMGroupData::YUMGroupData()
+      { }
+      
+      MultiLang::MultiLang()
+      { }
+      
+      MultiLang::MultiLang(const std::string& language,
+                           const std::string& text)
+      : language(language), text(text)
+      { }
+      
+      
+      MetaPkg::MetaPkg()
+      { }
+      
+      MetaPkg::MetaPkg(const std::string& type,
+                       const std::string& name)
+      : type(type), name(name)
+      { }
+      
+      PackageReq::PackageReq()
+      { }
+      
+      PackageReq::PackageReq(const std::string& type,
                              const std::string& epoch,
                              const std::string& ver,
                              const std::string& rel,
-                             const std::string& pre)
-: name(name),
-flags(flags),
-epoch(epoch),
-ver(ver),
-rel(rel),
-pre(pre)
-{ };
-
-YUMDirSize::YUMDirSize()
-{ }
-
-YUMDirSize::YUMDirSize(const std::string& path,
-                       const std::string& sizeKByte,
-                       const std::string& fileCount)
-: path(path), sizeKByte(sizeKByte), fileCount(fileCount)
-{ }
-
-YUMRepomdData::YUMRepomdData()
-{ }
-
-YUMPrimaryData::YUMPrimaryData()
-{ }
-
-FileData::FileData()
-{ }
-
-YUMPatchData::YUMPatchData()
-{ }
-
-FileData::FileData(const std::string &name,
-                   const std::string &type)
-: name(name), type(type)
-{ }
-
-
-YUMGroupData::YUMGroupData()
-{ }
-
-MultiLang::MultiLang()
-{ }
-
-MultiLang::MultiLang(const std::string& language,
-                     const std::string& text)
-: language(language), text(text)
-{ }
-
-
-MetaPkg::MetaPkg()
-{ }
-
-MetaPkg::MetaPkg(const std::string& type,
-                 const std::string& name)
-: type(type), name(name)
-{ }
-
-PackageReq::PackageReq()
-{ }
-
-PackageReq::PackageReq(const std::string& type,
-                       const std::string& epoch,
-                       const std::string& ver,
-                       const std::string& rel,
-                       const std::string& name)
-: type(type), epoch(epoch), ver(ver), rel(rel), name(name)
-{ }
-
-ChangelogEntry::ChangelogEntry()
-{ }
-
-ChangelogEntry::ChangelogEntry(const std::string& author,
-                               const std::string& date,
-                               const std::string& entry)
-: author(author), date(date), entry(entry)
-{ }
-
-                
-YUMFileListData::YUMFileListData()
-{ }
-
-YUMOtherData::YUMOtherData()
-{ }
-
-
-/* Define pointer classes */
-
-IMPL_PTR_TYPE(YUMRepomdData);
-IMPL_PTR_TYPE(YUMPrimaryData);
-IMPL_PTR_TYPE(YUMGroupData);
-IMPL_PTR_TYPE(YUMFileListData);
-IMPL_PTR_TYPE(YUMOtherData);
-IMPL_PTR_TYPE(YUMPatchData);
-IMPL_PTR_TYPE(YUMPatchPackage);
-IMPL_PTR_TYPE(YUMPatchScript);
-IMPL_PTR_TYPE(YUMPatchMessage);
-
-/* output operators */
-
-namespace {
-  /**
-   * @short Generic stream output for lists of Ptrs
-   * @param out the ostream where the output goes to
-   * @param aList the list to output
-   * @return is out
-   */
-  template<class T>
-  ostream& operator<<(ostream &out, const list<T>& aList)
-  {
-    typedef typename list<T>::const_iterator IterType;
-    for (IterType iter = aList.begin();
-        iter != aList.end();
-        ++iter) {
-          if (iter != aList.begin())
-            out << endl;
-          ::operator<<(out,*iter);
+                             const std::string& name)
+      : type(type), epoch(epoch), ver(ver), rel(rel), name(name)
+      { }
+      
+      ChangelogEntry::ChangelogEntry()
+      { }
+      
+      ChangelogEntry::ChangelogEntry(const std::string& author,
+                                     const std::string& date,
+                                     const std::string& entry)
+      : author(author), date(date), entry(entry)
+      { }
+      
+                      
+      YUMFileListData::YUMFileListData()
+      { }
+      
+      YUMOtherData::YUMOtherData()
+      { }
+      
+      
+      /* Define pointer classes */
+      
+      IMPL_PTR_TYPE(YUMRepomdData);
+      IMPL_PTR_TYPE(YUMPrimaryData);
+      IMPL_PTR_TYPE(YUMGroupData);
+      IMPL_PTR_TYPE(YUMFileListData);
+      IMPL_PTR_TYPE(YUMOtherData);
+      IMPL_PTR_TYPE(YUMPatchData);
+      IMPL_PTR_TYPE(YUMPatchPackage);
+      IMPL_PTR_TYPE(YUMPatchScript);
+      IMPL_PTR_TYPE(YUMPatchMessage);
+      
+      /* output operators */
+      
+      namespace {
+        /**
+         * @short Generic stream output for lists of Ptrs
+         * @param out the ostream where the output goes to
+         * @param aList the list to output
+         * @return is out
+         */
+        template<class T>
+        ostream& operator<<(ostream &out, const list<T>& aList)
+        {
+          typedef typename list<T>::const_iterator IterType;
+          for (IterType iter = aList.begin();
+              iter != aList.end();
+              ++iter) {
+                if (iter != aList.begin())
+                  out << endl;
+                ::operator<<(out,*iter);
+              }
+          return out;
         }
-    return out;
-  }
-}
+      }
+      
+      /**
+       * Join a list of strings into a single string
+       * @param aList the list of strings
+       * @param joiner what to put between the list elements
+       * @return the joined string
+       */
+      string join(const list<string>& aList,
+                  const string& joiner)
+      {
+        string res;
+        for (list<string>::const_iterator iter = aList.begin();
+            iter != aList.end();
+            ++ iter) {
+              if (iter != aList.begin())
+                res += joiner;
+              res += *iter;
+            }
+        return res;
+      }
 
-  /**
-   * Join a list of strings into a single string
-   * @param aList the list of strings
-   * @param joiner what to put between the list elements
-   * @return the joined string
-   */
-  string join(const list<string>& aList,
-              const string& joiner)
-  {
-    string res;
-    for (list<string>::const_iterator iter = aList.begin();
-        iter != aList.end();
-        ++ iter) {
-          if (iter != aList.begin())
-            res += joiner;
-          res += *iter;
-        }
-    return res;
-  }
+    } // namespace yum
+  } // namespace parser
+} // namespace zypp
 
-}}} // namespaces
-
-using namespace zypp::parser::YUM;
+using namespace zypp::parser::yum;
   
 ostream& operator<<(ostream &out, const YUMDependency& data)
 {

@@ -21,7 +21,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace source
   { /////////////////////////////////////////////////////////////////
-    namespace YUM
+    namespace yum
     {
       ///////////////////////////////////////////////////////////////////
       //
@@ -31,7 +31,7 @@ namespace zypp
   
       /** Default ctor */
       YUMPackageImpl::YUMPackageImpl(
-	const zypp::parser::YUM::YUMPatchPackage & parsed
+	const zypp::parser::yum::YUMPatchPackage & parsed
       )
 #warning MA cannot be constructed that way
 #if 0
@@ -110,7 +110,7 @@ namespace zypp
 
 */
       }
-    } // namespace YUM 
+    } // namespace yum 
     /////////////////////////////////////////////////////////////////
   } // namespace source
   ///////////////////////////////////////////////////////////////////
