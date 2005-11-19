@@ -4,17 +4,6 @@ dnl ==================================================
 AC_INIT(zypp,0.0.0)
 AC_CONFIG_SRCDIR(zypp/Makefile.am)
 
-dnl ==================================================
-dnl check for c++ compiler and tools
-AC_PROG_CXX
-AC_PROG_CXXCPP
-#AC_PROG_CC
-AC_PROG_RANLIB
-AC_PROG_INSTALL
-dnl ==================================================
-dnl do AC_CHECK_* tests using c++ (e.g. boost header)
-AC_LANG([C++])
-
 AC_PREFIX_DEFAULT(/usr)
 AC_CANONICAL_TARGET
 AC_ARG_PROGRAM
@@ -78,16 +67,35 @@ AC_SUBST(pkgdocdir)
 
 dnl ==================================================
 dnl checks for programs
+
+dnl   check for c++ compiler and tools
 AC_PROG_CXX
+AC_PROG_CXX
+AC_PROG_CXXCPP
+#AC_PROG_CC
+#AC_PROG_RANLIB
+AC_PROG_INSTALL
 AM_PROG_LIBTOOL
+
+dnl   do AC_CHECK_* tests using c++ (e.g. boost header)
+AC_LANG([C++])
+
+
 AC_PATH_PROG(DOCGEN, doxygen)
 if test -z "$DOCGEN" ; then
     AC_MSG_ERROR(doxygen is missing; please install doxygen.)
 fi
+
 AC_PATH_PROG(XGETTEXT, xgettext)
 if test -z "$XGETTEXT" ; then
     AC_MSG_ERROR(xgettext is missing; please install gettext-devel.)
 fi
+
+AC_PATH_PROG(MYRUNTEST, runtest)
+if test -z "$MYRUNTEST" ; then
+    AC_MSG_ERROR(runtest is missing; please install dejagnu.)
+fi
+
 dnl ==================================================
 dnl checks for libraries
 AC_CHECK_LIB([z], [gzopen],
@@ -118,11 +126,15 @@ AC_OUTPUT(	\
 	doc/Makefile		\
 	doc/autodoc/Makefile	\
 	doc/autodoc/Doxyfile	\
-	test/Makefile		\
-	test/genclass		\
-	test/devel.jsrain/Makefile	\
-	test/devel.jsrain/yum/Makefile	\
-	test/devel.ma/Makefile		\
+	testsuite/Makefile			\
+	testsuite/lib/Makefile			\
+	testsuite/config/Makefile		\
+	testsuite/libzypp.test/Makefile		\
+	testsuite/tests/Makefile		\
+	testsuite/genclass			\
+	testsuite/devel.jsrain/Makefile		\
+	testsuite/devel.jsrain/yum/Makefile	\
+	testsuite/devel.ma/Makefile		\
 	zypp/Makefile		\
 	zypp/base/Makefile	\
 	zypp/detail/Makefile	\
