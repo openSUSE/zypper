@@ -4,6 +4,17 @@ dnl ==================================================
 AC_INIT(zypp,0.0.0)
 AC_CONFIG_SRCDIR(zypp/Makefile.am)
 
+dnl ==================================================
+dnl check for c++ compiler and tools
+AC_PROG_CXX
+AC_PROG_CXXCPP
+#AC_PROG_CC
+AC_PROG_RANLIB
+AC_PROG_INSTALL
+dnl ==================================================
+dnl do AC_CHECK_* tests using c++ (e.g. boost header)
+AC_LANG([C++])
+
 AC_PREFIX_DEFAULT(/usr)
 AC_CANONICAL_TARGET
 AC_ARG_PROGRAM
@@ -87,6 +98,9 @@ AC_CHECK_LIB([xml2], [xmlNewTextReader],
         AC_MSG_ERROR([libxml2 not found. please install libxml2-devel]))
 dnl ==================================================
 dnl checks for header files
+AC_CHECK_HEADERS([boost/scoped_ptr.hpp],
+        [],
+        AC_MSG_ERROR([boost header not found. please install boost-devel]))
 dnl ==================================================
 dnl checks for typedefs
 dnl ==================================================
