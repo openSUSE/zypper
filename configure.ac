@@ -80,7 +80,7 @@ dnl ==================================================
 dnl checks for programs
 AC_PROG_CXX
 AM_PROG_LIBTOOL
-AC_PATH_PROG(DOCGEN, doxygen, doxygen)
+AC_PATH_PROG(DOCGEN, doxygen)
 if test -z "$DOCGEN" ; then
     AC_MSG_ERROR(doxygen is missing; please install doxygen.)
 fi
