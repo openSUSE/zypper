@@ -3,14 +3,11 @@
 
 # Do NOT list devel.* in subdirs. It's developers playgound and
 # must not prevent anything from building.
-SUBDIRS = config lib libzypp.test tests
-
-PACKAGE=libzypp
-AUTOMAKE_OPTIONS = dejagnu
+SUBDIRS = 
 
 ## ##################################################
 
-noinst_PROGRAMS = Example.createResolvable
+noinst_PROGRAMS = Arch
 
 ## ##################################################
 
@@ -18,7 +15,7 @@ LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
 
 ## ##################################################
 
-Example_createResolvable_SOURCES = Example.createResolvable.cc
+Arch_SOURCES = Arch.cc
 
 ## ##################################################
 

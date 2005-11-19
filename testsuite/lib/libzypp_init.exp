@@ -1,0 +1,28 @@
+# libzypp_init.exp
+
+proc run-binary { prog {path ""} } {
+
+  if { $path == "" } { set path "tests" }
+
+  set result ""
+  set oops [catch { set result [exec "$path/$prog"] } catched]
+
+  if {$oops != 0} {
+    puts ""
+    fail "test case failed for $prog: $catched"
+    return -1
+  }
+
+  # check return code from $prog
+
+  if {$result != ""} {
+    puts ""
+    warning "Running of $prog results in '$result'"
+    return -1
+  }
+
+  pass $prog
+
+  return 0
+}
+
