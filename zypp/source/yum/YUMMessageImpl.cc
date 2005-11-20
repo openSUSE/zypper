@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/MessageImpl.cc
+/** \file zypp/source/yum/YUMMessageImpl.cc
  *
 */
 
@@ -28,8 +28,10 @@ namespace zypp
       //        CLASS NAME : YUMMessageImpl
       //
       ///////////////////////////////////////////////////////////////////
-  
-      /** Default ctor */
+
+      /** Default ctor
+       * \bug CANT BE CONSTUCTED THAT WAY ANYMORE
+      */
       YUMMessageImpl::YUMMessageImpl(
 	const zypp::parser::yum::YUMPatchMessage & parsed
       )
@@ -51,7 +53,7 @@ namespace zypp
     std::list<YUMDependency> requires;
 */
       }
-    } // namespace yum 
+    } // namespace yum
     /////////////////////////////////////////////////////////////////
   } // namespace source
   ///////////////////////////////////////////////////////////////////

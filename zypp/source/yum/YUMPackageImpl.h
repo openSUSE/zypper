@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/PackageImpl.h
+/** \file zypp/source/yum/YUMPackageImpl.h
  *
 */
 #ifndef ZYPP_SOURCE_YUM_YUMPACKAGEIMPL_H
@@ -28,7 +28,10 @@ namespace zypp
       //
       //        CLASS NAME : YUMPackageImpl
       //
-      /** Class representing an update script */
+      /** Class representing an update script
+       * \todo Fix brief descriptions, or delete them. This is not an update
+       * script, It's implementation of zypp::Package for YUM source.
+      */
       class YUMPackageImpl : public detail::PackageImpl
       {
       public:

@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/PackageImpl.cc
+/** \file zypp/source/yum/YUMPackageImpl.cc
  *
 */
 
@@ -28,8 +28,10 @@ namespace zypp
       //        CLASS NAME : YUMPackageImpl
       //
       ///////////////////////////////////////////////////////////////////
-  
-      /** Default ctor */
+
+      /** Default ctor
+       * \bug CANT BE CONSTUCTED THAT WAY ANYMORE
+      */
       YUMPackageImpl::YUMPackageImpl(
 	const zypp::parser::yum::YUMPatchPackage & parsed
       )
@@ -110,7 +112,7 @@ namespace zypp
 
 */
       }
-    } // namespace yum 
+    } // namespace yum
     /////////////////////////////////////////////////////////////////
   } // namespace source
   ///////////////////////////////////////////////////////////////////

@@ -6,7 +6,8 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/ScriptImpl.cc
+/** \file zypp/source/yum/YUM
+ ScriptImpl.cc
  *
 */
 
@@ -30,7 +31,9 @@ namespace zypp
       //
       ///////////////////////////////////////////////////////////////////
 
-      /** Default ctor */
+      /** Default ctor
+       * \bug CANT BE CONSTUCTED THAT WAY ANYMORE
+      */
       YUMScriptImpl::YUMScriptImpl(
 	const zypp::parser::yum::YUMPatchScript & parsed
       )

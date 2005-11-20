@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/MessageImpl.h
+/** \file zypp/source/yum/YUMMessageImpl.h
  *
 */
 #ifndef ZYPP_SOURCE_YUM_YUMMESSAGEIMPL_H
@@ -28,7 +28,10 @@ namespace zypp
       //
       //        CLASS NAME : YUMMessageImpl
       //
-      /** Class representing an update script */
+      /** Class representing an update script
+       * \todo Fix brief descriptions, or delete them. This is not an update
+       * script, It's implementation of zypp::Message for YUM source.
+      */
       class YUMMessageImpl : public detail::MessageImpl
       {
       public:
