@@ -29,8 +29,17 @@ namespace zypp
       //        CLASS NAME : YUMPackageImpl
       //
       /** Class representing an update script
+       *
        * \todo Fix brief descriptions, or delete them. This is not an update
        * script, It's implementation of zypp::Package for YUM source.
+       *
+       * \todo Deriving from detail::PackageImpl is useless here. PackageImpl
+       * is dumb, i.e. it provides nothing, but the dtor needed to instanciate
+       * detail::PackageImplIf. All values returned are the PackageImplIf
+       * defaults. We should rename the detail::*Impl classes, and classify
+       * them into Dumb (holding no real data, provided the ImplIf dtor is
+       * the only prure virtual) and FullStore (providing a protected variable
+       * and interface methods returning them for each datum),
       */
       class YUMPackageImpl : public detail::PackageImpl
       {

@@ -35,6 +35,12 @@ namespace zypp
     //	CLASS NAME : ResObjectImplIf
     //
     /** Abstact ResObject implementation interface.
+     *
+     * \todo We should rename the detail::*Impl classes, and classify
+     * them into Dumb (holding no real data, provided the ImplIf dtor is
+     * the only prure virtual) and FullStore (providing a protected variable
+     * and interface methods returning them for each datum). The todo hook is
+     * here, because it#s the common base of the *Impl classes.
     */
     class ResObjectImplIf
     {
