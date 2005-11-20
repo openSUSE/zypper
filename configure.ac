@@ -122,22 +122,23 @@ dnl checks for system services
 dnl ==================================================
 dnl AC_CONFIG_FILES([FILE...])
 AC_OUTPUT(	\
-	Makefile		\
-	doc/Makefile		\
-	doc/autodoc/Makefile	\
-	doc/autodoc/Doxyfile	\
-	testsuite/Makefile			\
-	testsuite/lib/Makefile			\
-	testsuite/config/Makefile		\
-	testsuite/libzypp.test/Makefile		\
-	testsuite/tests/Makefile		\
-	testsuite/genclass			\
-	testsuite/devel.jsrain/Makefile		\
-	testsuite/devel.jsrain/yum/Makefile	\
-	testsuite/devel.ma/Makefile		\
-	zypp/Makefile		\
-	zypp/base/Makefile	\
-	zypp/detail/Makefile	\
+	Makefile			\
+	devel/Makefile			\
+	devel/genclass			\
+	devel/devel.jsrain/Makefile	\
+	devel/devel.jsrain/yum/Makefile	\
+	devel/devel.ma/Makefile		\
+	doc/Makefile			\
+	doc/autodoc/Makefile		\
+	doc/autodoc/Doxyfile		\
+	testsuite/Makefile		\
+	testsuite/lib/Makefile		\
+	testsuite/config/Makefile	\
+	testsuite/libzypp.test/Makefile	\
+	testsuite/tests/Makefile	\
+	zypp/Makefile			\
+	zypp/base/Makefile		\
+	zypp/detail/Makefile		\
 	zypp/capability/Makefile	\
 	zypp/parser/Makefile		\
 	zypp/parser/yum/Makefile	\

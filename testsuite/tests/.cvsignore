@@ -6,3 +6,4 @@ Makefile
 *.lo
 *.a
 *.la
+Arch

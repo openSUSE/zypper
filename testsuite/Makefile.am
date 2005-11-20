@@ -1,8 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-# Do NOT list devel.* in subdirs. It's developers playgound and
-# must not prevent anything from building.
 SUBDIRS = config lib libzypp.test tests
 
 PACKAGE=libzypp
@@ -10,23 +8,6 @@ AUTOMAKE_OPTIONS = dejagnu
 
 ## ##################################################
 
-noinst_PROGRAMS = Example.createResolvable
-
-## ##################################################
-
-LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
-
-## ##################################################
-
-Example_createResolvable_SOURCES = Example.createResolvable.cc
-
-## ##################################################
-
-.PHONY:        always
-
-$(noinst_PROGRAMS):    $(top_srcdir)/zypp/lib@PACKAGE@.la
-
-$(top_srcdir)/zypp/lib@PACKAGE@.la:     always
-	$(MAKE) -C $(top_srcdir)/zypp
+#LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
 
 ## ##################################################
