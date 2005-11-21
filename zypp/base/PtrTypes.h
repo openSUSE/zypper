@@ -70,31 +70,9 @@ namespace zypp
      * nonconst implementation methods. In case you have to do so, call
      * unconst to get the <tt>_D *</tt>.
      *
-     * The second template argument defaults to <tt>_Ptr = shared__ptr<_D></tt>.
+     * The second template argument defaults to <tt>_Ptr = shared_ptr<_D></tt>.
      *
      * \todo refine ctor and assign.
-     * \todo check whether scoped_ptr's refusal to handle an incomplete type
-     * is a compiler bug. Introducing ~CI does not help, although I is complete
-     * when ~CI is called. This renders scoped_ptr less usefull.
-     * \code
-     * #include <boost/scoped_ptr.hpp>
-     * struct I;
-     * struct CI
-     * {
-     *   ~CI();
-     *   private:
-     *   zypp::base::scoped_ptr<I> i;
-     * };
-     * int main( int argc, char * argv[] )
-     * {
-     *   CI c;
-     *   return 0;
-     * }
-     * struct I {};
-     * CI::~CI()
-     * {
-     * }
-     * \endcode
     */
     template<class _D, class _Ptr = shared_ptr<_D> >
       struct ImplPtr
@@ -110,10 +88,12 @@ namespace zypp
         const _D & operator*() const { return *_dptr; };
         _D * operator->() { return _dptr.get(); }
         const _D * operator->() const { return _dptr.get(); }
+        _D * get() { return _dptr.get(); }
+        const _D * get() const { return _dptr.get(); }
 
         _D * unconst() const { return _dptr.get(); }
 
-
+      private:
         _Ptr _dptr;
       };
     ///////////////////////////////////////////////////////////////////
@@ -140,10 +120,12 @@ namespace zypp
         const _D & operator*() const { return *_dptr; };
         _D * operator->() { return _dptr; }
         const _D * operator->() const { return _dptr; }
+        _D * get() { return _dptr; }
+        const _D * get() const { return _dptr; }
 
         _D * unconst() const { return _dptr; }
 
-
+      private:
         _P * _dptr;
       };
     /////////////////////////////////////////////////////////////////
@@ -163,7 +145,9 @@ class NAME;                                                      \
 extern void intrusive_ptr_add_ref( const NAME * );               \
 extern void intrusive_ptr_release( const NAME * );               \
 typedef zypp::base::intrusive_ptr<NAME>       NAME##Ptr;         \
-typedef zypp::base::intrusive_ptr<const NAME> const##NAME##Ptr;
+typedef zypp::base::intrusive_ptr<const NAME> const##NAME##Ptr;  \
+typedef zypp::base::intrusive_ptr<NAME>       NAME##_Ptr;        \
+typedef zypp::base::intrusive_ptr<const NAME> NAME##_constPtr;
 
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_BASE_PTRTYPES_H
