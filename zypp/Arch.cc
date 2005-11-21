@@ -10,22 +10,104 @@
  *
 */
 #include <iostream>
+#include <set>
 
 #include "zypp/Arch.h"
 
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////
+namespace
+{ /////////////////////////////////////////////////////////////////
+
+  /** Dumb Arch compat table
+   * \todo improve
+  */
+  struct CompatTable
+  {
+    static set<string> _compatTable;
+
+    /** \return Whether \a lhs is compatible with \a rhs. */
+    static bool compatible( const zypp::Arch & lhs, const zypp::Arch & rhs )
+    {
+      if ( lhs == zypp::Arch_noarch )
+        return true;
+
+      if ( _compatTable.empty() )
+        {
+          // initialize
+#define DEF_COMPAT(L,R) _compatTable.insert( #L "|" #R )
+          DEF_COMPAT( noarch,	i386 );
+          DEF_COMPAT( noarch,	i486 );
+          DEF_COMPAT( i386,	i486 );
+          DEF_COMPAT( noarch,	i586 );
+          DEF_COMPAT( i386,	i586 );
+          DEF_COMPAT( i486,	i586 );
+          DEF_COMPAT( noarch,	i686 );
+          DEF_COMPAT( i386,	i686 );
+          DEF_COMPAT( i486,	i686 );
+          DEF_COMPAT( i586,	i686 );
+          DEF_COMPAT( noarch,	athlon );
+          DEF_COMPAT( i386,	athlon );
+          DEF_COMPAT( i486,	athlon );
+          DEF_COMPAT( i586,	athlon );
+          DEF_COMPAT( i686,	athlon );
+          DEF_COMPAT( noarch,	x86_64 );
+          DEF_COMPAT( i386,	x86_64 );
+          DEF_COMPAT( i486,	x86_64 );
+          DEF_COMPAT( i586,	x86_64 );
+          DEF_COMPAT( i686,	x86_64 );
+          DEF_COMPAT( athlon,	x86_64 );
+
+          DEF_COMPAT( noarch,	s390 );
+          DEF_COMPAT( noarch,	s390x );
+          DEF_COMPAT( s390,	s390x );
+
+          DEF_COMPAT( noarch,	ppc );
+          DEF_COMPAT( noarch,	ppc64 );
+          DEF_COMPAT( ppc,	ppc64 );
+
+          DEF_COMPAT( noarch,	ia64 );
+#undef DEF_COMPAT
+        }
+
+      return _compatTable.find( lhs.asString()+"|"+rhs.asString() )
+             != _compatTable.end();
+    }
+  };
+
+  set<string> CompatTable::_compatTable;
+
+  /////////////////////////////////////////////////////////////////
+} // namespace
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Arch::Arch
-  //	METHOD TYPE : Ctor
-  //
-  Arch::Arch()
-  {}
+#define DEF_BUILTIN(A) const Arch Arch_##A( #A )
+
+  DEF_BUILTIN( noarch );
+
+  DEF_BUILTIN( x86_64 );
+  DEF_BUILTIN( athlon );
+  DEF_BUILTIN( i686 );
+  DEF_BUILTIN( i586 );
+  DEF_BUILTIN( i486 );
+  DEF_BUILTIN( i386 );
+
+  DEF_BUILTIN( s390x );
+  DEF_BUILTIN( s390 );
+
+  DEF_BUILTIN( ppc64 );
+  DEF_BUILTIN( ppc );
+
+  DEF_BUILTIN( ia64 );
+
+#undef DEF_BUILTIN
+  ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -33,25 +115,18 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   Arch::Arch( const std::string & rhs )
-  : base::StringVal( rhs )
+  : _value( rhs )
   {}
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Arch::Arch
-  //	METHOD TYPE : Ctor
+  //	METHOD NAME : Arch::compatibleWith
+  //	METHOD TYPE : bool
   //
-  Arch::Arch( const Arch & rhs )
-  : base::StringVal( rhs )
-  {}
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Arch::~Arch
-  //	METHOD TYPE : Dtor
-  //
-  Arch::~Arch()
-  {}
+  bool Arch::compatibleWith( const Arch & rhs ) const
+  {
+    return CompatTable::compatible( *this, rhs );
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
