@@ -25,7 +25,7 @@ namespace zypp
   //	METHOD NAME : Resolvable::Resolvable
   //	METHOD TYPE : Ctor
   //
-  Resolvable::Resolvable( const ResKind & kind_r,
+  Resolvable::Resolvable( const Kind & kind_r,
                           const std::string & name_r,
                           const Edition & edition_r,
                           const Arch & arch_r )
@@ -57,7 +57,7 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  const ResKind & Resolvable::kind() const
+  const Resolvable::Kind & Resolvable::kind() const
   { return _pimpl->kind(); }
 
   const std::string & Resolvable::name() const

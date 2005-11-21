@@ -48,18 +48,18 @@ namespace zypp
     ~CapFactory();
 
   public:
-    /** Parse Capability from string (incl. ResKind).
+    /** Parse Capability from string (incl. Resolvable::Kind).
      * \c strval_r is expected to define a valid Capability \em including
-     * the ResKind.
+     * the Resolvable::Kind.
      * \throw EXCEPTION on parse error.
     */
     Capability parse( const std::string & strval_r ) const;
-    /** Parse Capability from string (default ResKind).
+    /** Parse Capability from string (default Resolvable::Kind).
      * \c strval_r is expected to define a valid Capability. If it does
-     * not define the ResKind, \c defaultRefers_r is used instead.
+     * not define the Resolvable::Kind, \c defaultRefers_r is used instead.
      * \throw EXCEPTION on parse error.
     */
-    Capability parse( const std::string & strval_r, const ResKind & defaultRefers_r ) const;
+    Capability parse( const std::string & strval_r, const Resolvable::Kind & defaultRefers_r ) const;
 
   private:
     /** Pointer to implementation */

@@ -30,10 +30,11 @@ namespace zypp
   class Patch : public ResObject
   {
   public:
-    typedef Patch                           Self;
-    typedef detail::PatchImplIf             Impl;
-    typedef base::intrusive_ptr<Self>       Ptr;
-    typedef base::intrusive_ptr<const Self> constPtr;
+    typedef detail::PatchImplIf      Impl;
+    typedef Patch                    Self;
+    typedef ResTraits<Self>          TraitsType;
+    typedef TraitsType::PtrType      Ptr;
+    typedef TraitsType::constPtrType constPtr;
 
   public:
     typedef Impl::AtomList AtomList;

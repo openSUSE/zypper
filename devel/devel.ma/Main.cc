@@ -3,8 +3,8 @@
 #include <functional>
 #include <algorithm>
 #include <zypp/base/Logger.h>
-#include <zypp/Message.h>
 #include <zypp/Package.h>
+#include <zypp/detail/PackageImpl.h>
 
 #define TAG INT << __PRETTY_FUNCTION__ << std::endl
 
@@ -18,6 +18,7 @@ inline void OUT( zypp::Resolvable::constPtr p )
     MIL << "NULL" << endl;
 }
 
+#if 0
 struct PI : public zypp::detail::MessageImplIf
 {
   virtual std::string text() const { return "message text"; }
@@ -34,8 +35,23 @@ template<class _Impl>
                                                 zypp::Arch(),
                                                 impl_r );
   }
+{
+  zypp::base::shared_ptr<PI> pi;
+  OUT( makeResolvable( pi ) );
+}
+#endif
 
+template<class _Impl>
+  typename _Impl::ResType::Ptr
+  makeResolvable( zypp::base::shared_ptr<_Impl> & impl_r )
+  {
+    return zypp::detail::makeResolvableAndImpl( "n",
+                                                zypp::Edition("v","r"),
+                                                zypp::Arch(),
+                                                impl_r );
+  }
 
+using namespace zypp;
 /******************************************************************
 **
 **
@@ -48,20 +64,8 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  zypp::base::shared_ptr<PI> pi;
+  base::shared_ptr<detail::PackageImpl> pi;
   OUT( makeResolvable( pi ) );
-
-
-
-#if 0
-  /* NVRA */
-  zypp::base::shared_ptr<PI> pi;
-  Package::Ptr p( makeResolvable( /*NVRA*/ pi ) );
-  OUT( p );
-
-  p = makeResolvable( /*NVRA*/ pi );
-  OUT( p );
-#endif
 
   INT << "===[END]============================================" << endl;
   return 0;

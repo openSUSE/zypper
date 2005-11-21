@@ -15,9 +15,8 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 
-#include "zypp/Resolvable.h"
+#include "zypp/Resolvable.h" // maybe ResTraits are sufficient?
 #include "zypp/SolverContextFwd.h"
-#include "zypp/ResKind.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -27,7 +26,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
     DEFINE_PTR_TYPE(CapabilityImpl)
 
-    /** \todo Check implementation */
+    /** \todo Check implementation, use base::KindOf */
     typedef std::string CapKind;
 
     ///////////////////////////////////////////////////////////////////
@@ -39,13 +38,13 @@ namespace zypp
     {
     public:
       /** Ctor */
-      CapabilityImpl( const ResKind & refers_r );
+      CapabilityImpl( const Resolvable::Kind & refers_r );
 
     public:
       /**  */
       virtual const CapKind & kind() const = 0;
       /**  */
-      const ResKind & refers() const
+      const Resolvable::Kind & refers() const
       { return _refers; }
       /**  */
       virtual std::string asString() const = 0;
@@ -55,7 +54,7 @@ namespace zypp
 
     private:
       /**  */
-      ResKind _refers;
+      Resolvable::Kind _refers;
     };
     ///////////////////////////////////////////////////////////////////
 

@@ -9,7 +9,8 @@ INCLUDES =
 
 AM_LDFLAGS =
 
-AM_CXXFLAGS =	-pg
+AM_CXXFLAGS =
+# gperf:	-pg
 
 LDADD =		$(top_srcdir)/zypp/lib@PACKAGE@.la
 

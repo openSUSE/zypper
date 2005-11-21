@@ -28,10 +28,11 @@ namespace zypp
   class Package : public ResObject
   {
   public:
-    typedef Package                         Self;
-    typedef detail::PackageImplIf           Impl;
-    typedef base::intrusive_ptr<Self>       Ptr;
-    typedef base::intrusive_ptr<const Self> constPtr;
+    typedef detail::PackageImplIf    Impl;
+    typedef Package                  Self;
+    typedef ResTraits<Self>          TraitsType;
+    typedef TraitsType::PtrType      Ptr;
+    typedef TraitsType::constPtrType constPtr;
 
   public:
     /** */

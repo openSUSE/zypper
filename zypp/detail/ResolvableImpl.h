@@ -28,7 +28,7 @@ namespace zypp
   struct Resolvable::Impl
   {
     /** Ctor */
-    Impl( const ResKind & kind_r,
+    Impl( const Kind & kind_r,
           const std::string & name_r,
           const Edition & edition_r,
           const Arch & arch_r )
@@ -40,7 +40,7 @@ namespace zypp
 
   public:
     /**  */
-    const ResKind & kind() const
+    const Kind & kind() const
     { return _kind; }
     /**  */
     const std::string & name() const
@@ -63,7 +63,7 @@ namespace zypp
 
   private:
     /**  */
-    ResKind _kind;
+    Kind _kind;
     /**  */
     std::string _name;
     /**  */

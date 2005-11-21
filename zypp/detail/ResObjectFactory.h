@@ -35,8 +35,9 @@ namespace zypp
           typedef ResImplConnect                  Self;
           typedef typename _Res::Impl             Impl;
           typedef base::shared_ptr<Impl>          ImplPtr;
-          typedef base::intrusive_ptr<Self>       Ptr;
-          typedef base::intrusive_ptr<const Self> constPtr;
+          // Ptr typed not needed
+          // typedef base::intrusive_ptr<Self>       Ptr;
+          // typedef base::intrusive_ptr<const Self> constPtr;
         public:
           /** \todo protect against NULL Impl. */
           ResImplConnect( const std::string & name_r,

@@ -28,10 +28,11 @@ namespace zypp
   class Selection : public ResObject
   {
   public:
-    typedef Selection                       Self;
-    typedef detail::SelectionImplIf         Impl;
-    typedef base::intrusive_ptr<Self>       Ptr;
-    typedef base::intrusive_ptr<const Self> constPtr;
+    typedef detail::SelectionImplIf  Impl;
+    typedef Selection                Self;
+    typedef ResTraits<Self>          TraitsType;
+    typedef TraitsType::PtrType      Ptr;
+    typedef TraitsType::constPtrType constPtr;
 
   public:
     /** */

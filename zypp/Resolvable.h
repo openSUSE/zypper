@@ -20,7 +20,6 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/ResTraits.h"
 
-#include "zypp/ResKind.h"
 #include "zypp/Edition.h"
 #include "zypp/Arch.h"
 #include "zypp/Dependencies.h"
@@ -34,19 +33,20 @@ namespace zypp
   //	CLASS NAME : Resolvable
   //
   /** Interface base for resolvable objects (identification and dependencies).
-   * \todo Solve ResKind problems via traits template?
   */
   class Resolvable : public base::ReferenceCounted, private base::NonCopyable
   {
   public:
-    typedef Resolvable                      Self;
-    typedef base::intrusive_ptr<Self>       Ptr;
-    typedef base::intrusive_ptr<const Self> constPtr;
+    typedef Resolvable               Self;
+    typedef ResTraits<Self>          TraitsType;
+    typedef TraitsType::KindType     Kind;
+    typedef TraitsType::PtrType      Ptr;
+    typedef TraitsType::constPtrType constPtr;
     friend std::ostream & operator<<( std::ostream & str, const Resolvable & obj );
 
   public:
     /**  */
-    const ResKind & kind() const;
+    const Kind & kind() const;
     /**  */
     const std::string & name() const;
     /**  */
@@ -60,7 +60,7 @@ namespace zypp
 
   protected:
     /** Ctor */
-    Resolvable( const ResKind & kind_r,
+    Resolvable( const Kind & kind_r,
                 const std::string & name_r,
                 const Edition & edition_r,
                 const Arch & arch_r );

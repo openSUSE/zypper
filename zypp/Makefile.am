@@ -12,7 +12,6 @@ include_HEADERS = \
 	CapSet.h	\
 	Dependencies.h	\
 	Edition.h	\
-	ResKind.h	\
 	ResObject.h	\
 	Resolvable.h	\
 	ResTraits.h	\
@@ -37,7 +36,6 @@ lib@PACKAGE@_la_SOURCES = \
 	CapSet.cc	\
 	Dependencies.cc	\
 	Edition.cc	\
-	ResKind.cc	\
 	ResObject.cc	\
 	Resolvable.cc	\
 	ResTraits.cc	\

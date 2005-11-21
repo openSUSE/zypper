@@ -22,7 +22,7 @@ namespace zypp
   //	METHOD NAME : ResObject::ResObject
   //	METHOD TYPE : Ctor
   //
-  ResObject::ResObject( const ResKind & kind_r,
+  ResObject::ResObject( const Kind & kind_r,
                         const std::string & name_r,
                         const Edition & edition_r,
                         const Arch & arch_r )

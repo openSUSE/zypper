@@ -62,7 +62,7 @@ namespace zypp
 
   public:
     /**  */
-    const ResKind & refers() const;
+    const Resolvable::Kind & refers() const;
     /**  */
     std::string asString() const;
     /**  */

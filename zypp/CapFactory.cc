@@ -123,7 +123,7 @@ namespace zypp
   //
   Capability CapFactory::parse( const std::string & strval_r ) const
   {
-    return parse( strval_r, ResKind() );
+    return parse( strval_r, Resolvable::Kind() );
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -132,12 +132,14 @@ namespace zypp
   //	METHOD TYPE : Capability
   //
   /** \todo fix it */
-  Capability CapFactory::parse( const std::string & strval_r, const ResKind & defaultRefers_r ) const
+  Capability CapFactory::parse( const std::string & strval_r,
+                                const Resolvable::Kind & defaultRefers_r ) const
   {
-    // (defaultRefers_r==ResKind()) ==> throw on missing ResKind in strval
-    // fix
+    // (defaultRefers_r==Resolvable::Kind()) ==> throw on
+    // missing Resolvable::Kind in strval
+    // fix it!
     if ( strval_r.empty() )
-      throw "no ResKind";
+      throw "no Resolvable::Kind";
     CapabilityImplPtr newcap( new capability::NamedCap( defaultRefers_r, strval_r ) );
     USet::iterator in( _uset.insert( newcap ).first );
     return Capability( *in );

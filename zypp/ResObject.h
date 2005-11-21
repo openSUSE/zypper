@@ -28,10 +28,11 @@ namespace zypp
   class ResObject : public Resolvable
   {
   public:
-    typedef ResObject                       Self;
-    typedef detail::ResObjectImplIf         Impl;
-    typedef base::intrusive_ptr<Self>       Ptr;
-    typedef base::intrusive_ptr<const Self> constPtr;
+    typedef detail::ResObjectImplIf  Impl;
+    typedef ResObject                Self;
+    typedef ResTraits<Self>          TraitsType;
+    typedef TraitsType::PtrType      Ptr;
+    typedef TraitsType::constPtrType constPtr;
 
   public:
     /** */
@@ -41,7 +42,7 @@ namespace zypp
 
   protected:
     /** Ctor */
-    ResObject( const ResKind & kind_r,
+    ResObject( const Kind & kind_r,
                const std::string & name_r,
                const Edition & edition_r,
                const Arch & arch_r );

@@ -28,10 +28,11 @@ namespace zypp
   class Script : public ResObject
   {
   public:
-    typedef Script                          Self;
-    typedef detail::ScriptImplIf            Impl;
-    typedef base::intrusive_ptr<Self>       Ptr;
-    typedef base::intrusive_ptr<const Self> constPtr;
+    typedef detail::ScriptImplIf     Impl;
+    typedef Script                   Self;
+    typedef ResTraits<Self>          TraitsType;
+    typedef TraitsType::PtrType      Ptr;
+    typedef TraitsType::constPtrType constPtr;
 
   public:
     /** Get the script to perform the change */

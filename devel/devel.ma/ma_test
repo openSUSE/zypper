@@ -24,9 +24,9 @@ if ! fuser $LPIPE >/dev/null; then
 fi
 
 if ps axl | grep -q '[/]usr/sbin/iceczc'; then
-	MAKE=make
-else
 	MAKE="make -j 15"
+else
+	MAKE=make
 fi
 
 $MAKE -C ../../zypp || exit 1

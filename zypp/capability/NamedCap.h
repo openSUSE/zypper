@@ -30,7 +30,7 @@ namespace zypp
     {
     public:
       /** Ctor */
-      NamedCap( const ResKind & refers_r, const std::string & name_r )
+      NamedCap( const Resolvable::Kind & refers_r, const std::string & name_r )
       : CapabilityImpl( refers_r )
       , _name( name_r )
       {}

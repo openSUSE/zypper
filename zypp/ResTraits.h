@@ -12,61 +12,57 @@
 #ifndef ZYPP_RESTRAITS_H
 #define ZYPP_RESTRAITS_H
 
+#include "zypp/base/PtrTypes.h"
+#include "zypp/base/KindOf.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  class ResKind;
-
-  template<typename _Res>
-    class ResTraits {};
+  class Resolvable;
+  class ResObject;
 
   class Package;
-  template<>
-    class ResTraits<Package>
-    {
-    public:
-      static const ResKind _kind;
-    };
-
   class Selection;
-  template<>
-    class ResTraits<Selection>
-    {
-    public:
-      static const ResKind _kind;
-    };
-
   class Product;
-  template<>
-    class ResTraits<Product>
-    {
-    public:
-      static const ResKind _kind;
-    };
-
   class Patch;
-  template<>
-    class ResTraits<Patch>
-    {
-    public:
-      static const ResKind _kind;
-    };
-
   class Script;
-  template<>
-    class ResTraits<Script>
+  class Message;
+
+  /** Base of ResTraits. Defines the Resolvable::Kind type. */
+  struct ResolvableTraits
+  {
+    typedef base::KindOf<Resolvable>  KindType;
+  };
+
+  /** ResTraits. Defines common types and the Kind value. */
+  template<typename _Res>
+    struct ResTraits : public ResolvableTraits
     {
-    public:
-      static const ResKind _kind;
+      typedef base::intrusive_ptr<_Res>       PtrType;
+      typedef base::intrusive_ptr<const _Res> constPtrType;
+
+      static const KindType _kind;
     };
 
-  class Message;
+  /** ResTraits specialisation for Resolvable.
+   * Resolvable is common base and has no Kind value.
+  */
   template<>
-    class ResTraits<Message>
+    struct ResTraits<Resolvable> : public ResolvableTraits
     {
-    public:
-      static const ResKind _kind;
+      typedef base::intrusive_ptr<Resolvable>       PtrType;
+      typedef base::intrusive_ptr<const Resolvable> constPtrType;
+    };
+
+  /** ResTraits specialisation for ResObject.
+   * ResObject is common base and has no Kind value.
+  */
+  template<>
+    struct ResTraits<ResObject> : public ResolvableTraits
+    {
+      typedef base::intrusive_ptr<Resolvable>       PtrType;
+      typedef base::intrusive_ptr<const Resolvable> constPtrType;
     };
 
   /////////////////////////////////////////////////////////////////

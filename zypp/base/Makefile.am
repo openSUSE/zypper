@@ -6,6 +6,7 @@ SUBDIRS =
 ## ##################################################
 
 include_HEADERS =	\
+	KindOf.h	\
 	Logger.h	\
 	NonCopyable.h	\
 	PtrTypes.h	\

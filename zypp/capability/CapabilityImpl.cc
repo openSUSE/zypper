@@ -28,7 +28,7 @@ namespace zypp
     //	METHOD NAME : CapabilityImpl::CapabilityImpl
     //	METHOD TYPE : Ctor
     //
-    CapabilityImpl::CapabilityImpl( const ResKind & refers_r )
+    CapabilityImpl::CapabilityImpl( const Resolvable::Kind & refers_r )
     : _refers( refers_r )
     {}
 

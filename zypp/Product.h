@@ -28,10 +28,11 @@ namespace zypp
   class Product : public ResObject
   {
   public:
-    typedef Product                         Self;
-    typedef detail::ProductImplIf           Impl;
-    typedef base::intrusive_ptr<Self>       Ptr;
-    typedef base::intrusive_ptr<const Self> constPtr;
+    typedef detail::ProductImplIf    Impl;
+    typedef Product                  Self;
+    typedef ResTraits<Self>          TraitsType;
+    typedef TraitsType::PtrType      Ptr;
+    typedef TraitsType::constPtrType constPtr;
 
   public:
     /** Get the product categoty (base, add-on) */

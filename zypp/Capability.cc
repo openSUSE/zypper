@@ -47,7 +47,7 @@ namespace zypp
   Capability::constImplPtr Capability::sayFriend() const
   { return _pimpl; }
 
-  const ResKind & Capability::refers() const
+  const Resolvable::Kind & Capability::refers() const
   { return _pimpl->refers(); }
 
   std::string Capability::asString() const
