@@ -3,33 +3,27 @@
 #include <string>
 #include <zypp/base/Logger.h>
 
-#include <zypp/detail/PackageImpl.h>
 #include <zypp/Package.h>
+#include <zypp/detail/PackageImpl.h>
 #include <zypp/CapFactory.h>
+#include <zypp/CapSet.h>
 
 using namespace std;
 using namespace zypp;
-#if 0
-namespace zypp
-{
-  template<>
-    Capability CapFactory::parse<Package>( const std::string & strval_r ) const
-    { throw; return parse( strval_r, ResTraits<Package>::_kind ); }
-}
 
 // refine parsing and add it to lib
 //
 template<typename _Res>
   struct CapSetInsert : public std::unary_function<const std::string &, void>
-{
-  CapSet &   _x;
-  CapFactory _f;
-  CapSetInsert( CapSet & x )
-  : _x(x)
-  {}
-  void operator()( const std::string & v )
-  { _x.insert( _f.parse<_Res>( v ) ); }
-};
+  {
+    CapSet &   _x;
+    CapFactory _f;
+    CapSetInsert( CapSet & x )
+    : _x(x)
+    {}
+    void operator()( const std::string & v )
+    { _x.insert( _f.parse<_Res>( v ) ); }
+  };
 
 inline std::list<std::string> parseDeps()
 {
@@ -38,7 +32,6 @@ inline std::list<std::string> parseDeps()
     "rpmlib(PayloadFilesHavePrefix) <= 4.0-1",
     "rpmlib(CompressedFileNames) <= 3.0.4-1",
     "/bin/sh",
-    "",
     "libc.so.6",
     "libc.so.6(GLIBC_2.0)",
     "libc.so.6(GLIBC_2.3.4)",
@@ -52,7 +45,7 @@ inline std::list<std::string> parseDeps()
   std::list<std::string> ret( begin, end );
   return ret;
 }
-#endif
+
 /******************************************************************
 **
 **
@@ -69,11 +62,13 @@ int main( int argc, char * argv[] )
   std::string _name( "foo" );
   Edition     _edition( "1.0", "42" );
   Arch        _arch( "i386" );
-#if 0
-  // create the implementation class
-  detail::PackageImplPtr pkgImpl( new detail::PackageImpl(_name,_edition,_arch) );
-  DBG << *pkgImpl << endl;
-  DBG << pkgImpl->deps() << endl;
+
+  // create the object
+  base::shared_ptr<detail::PackageImpl> pkgImpl;
+  Package::Ptr pkg( detail::makeResolvableAndImpl( _name, _edition, _arch,
+                                                   pkgImpl ) );
+  DBG << *pkg << endl;
+  DBG << pkg->deps() << endl;
 
   // finalize implementation class construction
   Dependencies _deps;
@@ -86,21 +81,19 @@ int main( int argc, char * argv[] )
     }
   catch(...)
     {
-      INT << _deps << endl;
+      INT << prv << endl;
     }
   _deps.setProvides( prv );
 
   // ...parse other deps
-  pkgImpl->setDeps( _deps );
+  pkgImpl->self()->setDeps( _deps );
 
   // ... aditional data if...
 
-  // create the Package
-  constPackagePtr foo( new Package( pkgImpl ) );
-  DBG << foo << endl;
-  DBG << *foo << endl;
-  DBG << foo->deps() << endl;
-#endif
+  DBG << pkg << endl;
+  DBG << *pkg << endl;
+  DBG << pkg->deps() << endl;
+
 
   INT << "===[END]============================================" << endl;
   return 0;
