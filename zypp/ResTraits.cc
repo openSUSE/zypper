@@ -16,12 +16,18 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  const ResolvableTraits::KindType ResTraits<Package>  ::_kind( "Package" );
-  const ResolvableTraits::KindType ResTraits<Selection>::_kind( "Selection" );
-  const ResolvableTraits::KindType ResTraits<Product>  ::_kind( "Product" );
-  const ResolvableTraits::KindType ResTraits<Patch>    ::_kind( "Patch" );
-  const ResolvableTraits::KindType ResTraits<Script>   ::_kind( "Script" );
-  const ResolvableTraits::KindType ResTraits<Message>  ::_kind( "Message" );
+  template<>
+    const ResolvableTraits::KindType ResTraits<Package>  ::_kind( "Package" );
+  template<>
+    const ResolvableTraits::KindType ResTraits<Selection>::_kind( "Selection" );
+  template<>
+    const ResolvableTraits::KindType ResTraits<Product>  ::_kind( "Product" );
+  template<>
+    const ResolvableTraits::KindType ResTraits<Patch>    ::_kind( "Patch" );
+  template<>
+    const ResolvableTraits::KindType ResTraits<Script>   ::_kind( "Script" );
+  template<>
+    const ResolvableTraits::KindType ResTraits<Message>  ::_kind( "Message" );
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
