@@ -361,22 +361,38 @@ ostream& operator<<(ostream &out, const YUMPatchData& data)
     << "  affects package manager: " << data.packageManager << endl
     << "  update script: " << data.updateScript << endl
     << "  atoms:" << endl
+/*  for (std::list<shared_ptr<YUMPatchAtom> >::const_iterator it = data.atoms.begin();
+       it != data.atoms.end();
+       it++)
+  {
+    out << *it;
+  }*/
+// FIXME here
     << data.atoms;
   return out;
 }
 
-std::ostream& operator<<(std::ostream& out, const YUMPatchAtom& data)
+std::ostream& operator<<(std::ostream& out, const shared_ptr<YUMPatchAtom> data)
 {
-  out << "Atom data" << endl
-    << "  atom type: " << data.type << endl;
-  if (data.type == "message")
-    out << *data.message;
-  else if (data.type == "script")
-    out << *data.script;
-  else if (data.type == "package")
-    out << *data.package;
-  else
-    out << "Unknown atom type" << endl;
+  out << "Atom data" << endl;
+//  out << "  atom type: " << data->atomType() << endl;
+  switch (data->atomType())
+  {
+    case YUMPatchAtom::Package:
+      out << "  atom type: " << "package" << endl
+        << *dynamic_pointer_cast<YUMPatchPackage>(data);
+      break;
+    case YUMPatchAtom::Message:
+      out << "  atom type: " << "message" << endl
+        << *dynamic_pointer_cast<YUMPatchMessage>(data);
+      break;
+    case YUMPatchAtom::Script:
+      out << "  atom type: " << "script" << endl
+        << *dynamic_pointer_cast<YUMPatchScript>(data);
+      break;
+    default:
+      out << "Unknown atom type" << endl;
+  }
   return out;
 }
 

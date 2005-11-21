@@ -365,11 +365,9 @@ namespace zypp {
       YUMPatchParser::parsePackageNode(YUMPatchDataPtr dataPtr,
                                      xmlNodePtr formatNode)
       {
-        YUMPatchAtom at;
-        at.type = "package";
-        at.package = new YUMPatchPackage;
-        at.package->type = _helper.attribute(formatNode,"type");
-        at.package->installOnly = false;
+	shared_ptr<YUMPatchPackage> package(new YUMPatchPackage);
+        package->type = _helper.attribute(formatNode,"type");
+        package->installOnly = false;
       
         // FIXME move the respective method to a common class, inherit it  
         YUMPrimaryParser prim;
@@ -380,51 +378,51 @@ namespace zypp {
           if (_helper.isElement(child)) {
             string name = _helper.name(child);
             if (name == "name") {
-      	at.package->name = _helper.content(child);
+      	package->name = _helper.content(child);
             }
             else if (name == "arch") {
-              at.package->arch = _helper.content(child);
+              package->arch = _helper.content(child);
             }
             else if (name == "version") {
-              at.package->epoch = _helper.attribute(child,"epoch");
-              at.package->ver = _helper.attribute(child,"ver");
-              at.package->rel = _helper.attribute(child,"rel");
+              package->epoch = _helper.attribute(child,"epoch");
+              package->ver = _helper.attribute(child,"ver");
+              package->rel = _helper.attribute(child,"rel");
             }
             else if (name == "checksum") {
-              at.package->checksumType = _helper.attribute(child,"type");
-              at.package->checksumPkgid = _helper.attribute(child,"pkgid");
-              at.package->checksum = _helper.content(child);
+              package->checksumType = _helper.attribute(child,"type");
+              package->checksumPkgid = _helper.attribute(child,"pkgid");
+              package->checksum = _helper.content(child);
             }
             else if (name == "summary") {
-              at.package->summary = _helper.content(child);
+              package->summary = _helper.content(child);
             }
             else if (name == "description") {
-              at.package->description = _helper.content(child);
+              package->description = _helper.content(child);
             }
             else if (name == "packager") {
-              at.package->packager = _helper.content(child);
+              package->packager = _helper.content(child);
             }
             else if (name == "url") {
-              at.package->url = _helper.content(child);
+              package->url = _helper.content(child);
             }
             else if (name == "time") {
-              at.package->timeFile = _helper.attribute(child,"file");
-              at.package->timeBuild = _helper.attribute(child,"build");
+              package->timeFile = _helper.attribute(child,"file");
+              package->timeBuild = _helper.attribute(child,"build");
             }
             else if (name == "size") {
-              at.package->sizePackage = _helper.attribute(child,"package");
-              at.package->sizeInstalled = _helper.attribute(child,"installed");
-              at.package->sizeArchive = _helper.attribute(child,"archive");
+              package->sizePackage = _helper.attribute(child,"package");
+              package->sizeInstalled = _helper.attribute(child,"installed");
+              package->sizeArchive = _helper.attribute(child,"archive");
             }
             else if (name == "location") {
-              at.package->location = _helper.attribute(child,"href");
+              package->location = _helper.attribute(child,"href");
             }
             else if (name == "format") {
-      	parseFormatNode (&*at.package, child);
+      	parseFormatNode (&*package, child);
             }
             else if (name == "pkgfiles")
             {
-      	parsePkgFilesNode (&*at.package, child);
+      	parsePkgFilesNode (&*package, child);
             }
             else {
               WAR << "YUM <atoms/package> contains the unknown element <"
@@ -433,16 +431,14 @@ namespace zypp {
             }
           }
         }
-        dataPtr->atoms.push_back(at);
+        dataPtr->atoms.push_back(package);
       }
       
       void
       YUMPatchParser::parseScriptNode(YUMPatchDataPtr dataPtr,
                                      xmlNodePtr formatNode)
       {
-        YUMPatchAtom at;
-        at.type = "script";
-        at.script = new YUMPatchScript;
+	shared_ptr<YUMPatchScript> script(new YUMPatchScript);
       
         // FIXME move the respective method to a common class, inherit it  
         YUMPrimaryParser prim;
@@ -453,33 +449,33 @@ namespace zypp {
           if (_helper.isElement(child)) {
             string name = _helper.name(child);
             if (name == "name") {
-      	at.script->name = _helper.content(child);
+      	script->name = _helper.content(child);
             }
             else if (name == "version") {
-              at.script->epoch = _helper.attribute(child,"epoch");
-              at.script->ver = _helper.attribute(child,"ver");
-              at.script->rel = _helper.attribute(child,"rel");
+              script->epoch = _helper.attribute(child,"epoch");
+              script->ver = _helper.attribute(child,"ver");
+              script->rel = _helper.attribute(child,"rel");
             }
             else if (name == "do") {
-      	at.script->do_script = _helper.content(child);
+      	script->do_script = _helper.content(child);
             }
             else if (name == "undo") {
-      	at.script->undo_script = _helper.content(child);
+      	script->undo_script = _helper.content(child);
             }
             else if (name == "provides") {
-              prim.parseDependencyEntries(& at.script->provides, child);
+              prim.parseDependencyEntries(& script->provides, child);
             }
             else if (name == "conflicts") {
-              prim.parseDependencyEntries(& at.script->conflicts, child);
+              prim.parseDependencyEntries(& script->conflicts, child);
             }
             else if (name == "obsoletes") {
-              prim.parseDependencyEntries(& at.script->obsoletes, child);
+              prim.parseDependencyEntries(& script->obsoletes, child);
             }
             else if (name == "requires") {
-              prim.parseDependencyEntries(& at.script->requires, child);
+              prim.parseDependencyEntries(& script->requires, child);
             }
             else if (name == "freshen") {
-              prim.parseDependencyEntries(& at.script->requires, child);
+              prim.parseDependencyEntries(& script->requires, child);
             }
             else {
               WAR << "YUM <atoms/script> contains the unknown element <"
@@ -488,17 +484,15 @@ namespace zypp {
             }
           }
         }
-        dataPtr->atoms.push_back(at);
+        dataPtr->atoms.push_back(script);
       }
       
       void
       YUMPatchParser::parseMessageNode(YUMPatchDataPtr dataPtr,
                                      xmlNodePtr formatNode)
       {
-        YUMPatchAtom at;
-        at.type = "message";
-        at.message = new YUMPatchMessage;
-        at.message->type = _helper.attribute(formatNode,"type");
+	shared_ptr<YUMPatchMessage> message(new YUMPatchMessage);
+        message->type = _helper.attribute(formatNode,"type");
       
         // FIXME move the respective method to a common class, inherit it  
         YUMPrimaryParser prim;
@@ -509,30 +503,30 @@ namespace zypp {
           if (_helper.isElement(child)) {
             string name = _helper.name(child);
             if (name == "name") {
-      	at.message->name = _helper.content(child);
+      	message->name = _helper.content(child);
             }
             else if (name == "version") {
-              at.message->epoch = _helper.attribute(child,"epoch");
-              at.message->ver = _helper.attribute(child,"ver");
-              at.message->rel = _helper.attribute(child,"rel");
+              message->epoch = _helper.attribute(child,"epoch");
+              message->ver = _helper.attribute(child,"ver");
+              message->rel = _helper.attribute(child,"rel");
             }
             else if (name == "text") {
-      	at.message->text = _helper.content(child);
+      	message->text = _helper.content(child);
             }
             else if (name == "provides") {
-              prim.parseDependencyEntries(& at.message->provides, child);
+              prim.parseDependencyEntries(& message->provides, child);
             }
             else if (name == "conflicts") {
-              prim.parseDependencyEntries(& at.message->conflicts, child);
+              prim.parseDependencyEntries(& message->conflicts, child);
             }
             else if (name == "obsoletes") {
-              prim.parseDependencyEntries(& at.message->obsoletes, child);
+              prim.parseDependencyEntries(& message->obsoletes, child);
             }
             else if (name == "requires") {
-              prim.parseDependencyEntries(& at.message->requires, child);
+              prim.parseDependencyEntries(& message->requires, child);
             }
             else if (name == "freshen") {
-              prim.parseDependencyEntries(& at.message->requires, child);
+              prim.parseDependencyEntries(& message->requires, child);
             }
             else {
               WAR << "YUM <atoms/message> contains the unknown element <"
@@ -541,7 +535,7 @@ namespace zypp {
             }
           }
         }
-        dataPtr->atoms.push_back(at);
+        dataPtr->atoms.push_back(message);
       }
 
     } // namespace yum

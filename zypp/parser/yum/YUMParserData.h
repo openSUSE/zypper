@@ -24,6 +24,10 @@
 #include <string>
 #include <list>
 #include <iostream>
+#include <zypp/base/PtrTypes.h>
+
+using namespace zypp::base;
+
 
 namespace zypp {
   namespace parser {
@@ -156,16 +160,31 @@ namespace zypp {
         std::string source_info;
       };
     
-      class YUMPatchPackage : public base::ReferenceCounted, private base::NonCopyable {
+      class YUMPatchAtom : public base::ReferenceCounted, private base::NonCopyable {
       public:
-        YUMPatchPackage() {};
-        // data for primary
-        std::string type;
+
+	enum AtomType { Package, Script, Message };
+
+        virtual AtomType atomType() = 0;
         std::string name;
-        std::string arch;
+        std::string type;
         std::string epoch;
         std::string ver;
         std::string rel;
+        std::string arch;
+        std::list<YUMDependency> provides;
+        std::list<YUMDependency> conflicts;
+        std::list<YUMDependency> obsoletes;
+        std::list<YUMDependency> freshen;
+        std::list<YUMDependency> requires;
+      };
+
+      class YUMPatchPackage : public YUMPatchAtom {
+      public:
+        YUMPatchPackage() {};
+        virtual AtomType atomType() { return Package; };
+        // data for primary
+        std::string type;
         std::string checksumType;
         std::string checksumPkgid;
         std::string checksum;
@@ -186,17 +205,12 @@ namespace zypp {
         std::string sourcerpm;
         std::string headerStart;
         std::string headerEnd;
-        std::list<YUMDependency> provides;
-        std::list<YUMDependency> conflicts;
-        std::list<YUMDependency> obsoletes;
-        std::list<YUMDependency> requires;
         std::list<FileData> files;
         // SuSE specific data
         std::list<std::string> authors;
         std::list<std::string> keywords;
         std::string  media;
         std::list<YUMDirSize> dirSizes;
-        std::list<YUMDependency> freshen;
         bool installOnly;
         // Change Log
         std::list<ChangelogEntry> changelog;
@@ -226,48 +240,23 @@ namespace zypp {
         } deltaRpm;
       };
     
-      class YUMPatchScript : public base::ReferenceCounted, private base::NonCopyable {
+      class YUMPatchScript : public YUMPatchAtom {
       public:
         YUMPatchScript() {};
-        std::string name;
-        std::string epoch;
-        std::string ver;
-        std::string rel;
+        virtual AtomType atomType() { return Script; };
         std::string do_script;
         std::string undo_script;
-        std::list<YUMDependency> provides;
-        std::list<YUMDependency> conflicts;
-        std::list<YUMDependency> obsoletes;
-        std::list<YUMDependency> freshen;
-        std::list<YUMDependency> requires;
       };
     
-      class YUMPatchMessage : public base::ReferenceCounted, private base::NonCopyable {
+      class YUMPatchMessage : public YUMPatchAtom {
       public:
         YUMPatchMessage() {};
-        std::string name;
+        virtual AtomType atomType() { return Message; };
         std::string type;
-        std::string epoch;
-        std::string ver;
-        std::string rel;
-        std::list<YUMDependency> provides;
-        std::list<YUMDependency> conflicts;
-        std::list<YUMDependency> obsoletes;
-        std::list<YUMDependency> freshen;
-        std::list<YUMDependency> requires;
         std::string text;
       };
     
-      class YUMPatchAtom {
-      public:
-        std::string type;
-        // union not possibel due to constructors
-        // there is no common parent
-        YUMPatchPackagePtr package;
-        YUMPatchScriptPtr script;
-        YUMPatchMessagePtr message;
-      };
-    
+   
       /**
        * @short Holds the metadata about a YUM repository
        **/
@@ -407,7 +396,7 @@ namespace zypp {
         bool packageManager;
         std::string updateScript;
         // FIXME this copying of structures is inefective
-        std::list<YUMPatchAtom> atoms;
+        std::list<shared_ptr<YUMPatchAtom> > atoms;
       };
 
 
@@ -432,7 +421,7 @@ std::ostream& operator<<(std::ostream &out, const zypp::parser::yum::YUMGroupDat
 std::ostream& operator<<(std::ostream &out, const zypp::parser::yum::YUMFileListData& data);
 std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMOtherData& data);
 std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMPatchData& data);
-std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMPatchAtom& data);
+std::ostream& operator<<(std::ostream& out, const shared_ptr<zypp::parser::yum::YUMPatchAtom> data);
 std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMPatchMessage& data);
 std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMPatchScript& data);
 std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMPatchPackage& data);
