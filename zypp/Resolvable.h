@@ -77,8 +77,44 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
+  /** Test whether a Resolvable::Ptr is of a certain Kind.
+   * \return \c Ture iff \a p is not \c NULL and points to a Resolvable
+   * of the specified Kind.
+   * \relates Resolvable
+   * \code
+   * isKind<Package>(resPtr);
+   * \endcode
+  */
+  template<class _Res>
+    inline bool isKind( const Resolvable::constPtr & p )
+    { return p && p->kind() == ResTraits<_Res>::_kind; }
+
+  // Specialization for Resolvable: Always true.
+  template<>
+    inline bool isKind<Resolvable>( const Resolvable::constPtr & p )
+    { return p; }
+
+  // Specialization for ResObject: Always true.
+  template<>
+    inline bool isKind<ResObject>( const Resolvable::constPtr & p )
+    { return p; }
 
 
+  /** Convert Resolvable::Ptr into Ptr of a certain Kind.
+   * \return \c NULL iff \a p is \c NULL or points to a Resolvable
+   * not of the specified Kind.
+   * \relates Resolvable
+   * \code
+   * asKind<Package>(resPtr);
+   * \endcode
+  */
+  template<class _Res>
+    inline typename ResTraits<_Res>::PtrType asKind( const Resolvable::Ptr & p )
+    { return base::dynamic_pointer_cast<_Res>(p); }
+
+  template<class _Res>
+    inline typename ResTraits<_Res>::constPtrType asKind( const Resolvable::constPtr & p )
+    { return base::dynamic_pointer_cast<const _Res>(p); }
 
   ///////////////////////////////////////////////////////////////////
 

@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <zypp/base/Logger.h>
 #include <zypp/Package.h>
+#include <zypp/Selection.h>
 #include <zypp/detail/PackageImpl.h>
 
 #define TAG INT << __PRETTY_FUNCTION__ << std::endl
@@ -51,7 +52,9 @@ template<class _Impl>
                                                 impl_r );
   }
 
+
 using namespace zypp;
+
 /******************************************************************
 **
 **
@@ -65,7 +68,23 @@ int main( int argc, char * argv[] )
   INT << "===[START]==========================================" << endl;
 
   base::shared_ptr<detail::PackageImpl> pi;
-  OUT( makeResolvable( pi ) );
+  Package::Ptr p( makeResolvable( pi ) );
+  OUT( p );
+
+  DBG << isKind<Resolvable>(p) << endl;
+  DBG << isKind<Package>(p) << endl;
+  DBG << isKind<Selection>(p) << endl;
+
+  Resolvable::constPtr r( p );
+  DBG << isKind<Resolvable>(r) << endl;
+  DBG << isKind<Package>(r) << endl;
+  DBG << isKind<Selection>(r) << endl;
+
+  Package::constPtr pp = asKind<Package>(r);
+
+  MIL << asKind<Resolvable>(r) << endl;
+  MIL << asKind<ResObject>(r) << endl;
+
 
   INT << "===[END]============================================" << endl;
   return 0;
