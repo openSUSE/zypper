@@ -45,13 +45,17 @@ namespace zypp
   {
     /** Factory */
     friend class CapFactory;
-    /** Ordering for use in std::container */
+
+    /** Ordering for use in CapSet */
     friend class CapOrder;
     friend bool operator==( const Capability & lhs, const Capability & rhs );
+    friend std::ostream & operator<<( std::ostream & str, const Capability & obj );
+
   private:
-    typedef capability::CapabilityImplPtr      ImplPtr;
-    typedef capability::constCapabilityImplPtr constImplPtr;
-   /** Factory ctor */
+    typedef capability::CapabilityImpl          Impl;
+    typedef capability::CapabilityImpl_Ptr      ImplPtr ;
+    typedef capability::CapabilityImpl_constPtr ImplconstPtr;
+    /** Factory ctor */
     explicit
     Capability( ImplPtr impl_r );
   public:
@@ -61,11 +65,11 @@ namespace zypp
     virtual ~Capability();
 
   public:
-    /**  */
+    /** Kind of Resolvable the Capability refers to. */
     const Resolvable::Kind & refers() const;
-    /**  */
+    /** More or less human readable representation as string. */
     std::string asString() const;
-    /**  */
+    /** */
     bool matches( Resolvable::constPtr resolvable_r,
                   const SolverContext & colverContext_r ) const;
     /**  */
@@ -73,24 +77,22 @@ namespace zypp
 
   private:
     /** Pointer to implementation */
-    ImplPtr _pimpl;
-  public:
-    /** Avoid a bunch of friend decl. */
-    constImplPtr sayFriend() const;
+    base::ImplPtr<Impl,ImplPtr> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 
+  /** Ordering relation used by ::CapSet. */
   struct CapOrder : public std::binary_function<Capability, Capability, bool>
   {
     bool operator()( const Capability & lhs, const Capability & rhs ) const
-    { return lhs._pimpl < rhs._pimpl; }
+    { return lhs._pimpl.get() < rhs._pimpl.get(); }
   };
 
   ///////////////////////////////////////////////////////////////////
 
   /** \relates Capability  */
   inline bool operator==( const Capability & lhs, const Capability & rhs )
-  { return lhs._pimpl == rhs._pimpl; }
+  { return lhs._pimpl.get() == rhs._pimpl.get(); }
 
   /** \relates Capability  */
   inline bool operator!=( const Capability & lhs, const Capability & rhs )

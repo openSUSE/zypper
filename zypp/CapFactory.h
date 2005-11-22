@@ -21,13 +21,6 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
-    DEFINE_PTR_TYPE(CapFactoryImpl)
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
-  ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -38,43 +31,41 @@ namespace zypp
   */
   class CapFactory
   {
+    friend std::ostream & operator<<( std::ostream & str, const CapFactory & obj );
+
   public:
     /** Default ctor */
     CapFactory();
-    /** Factory ctor */
-    explicit
-    CapFactory( detail::CapFactoryImplPtr impl_r );
     /** Dtor */
     ~CapFactory();
 
   public:
     /** Parse Capability from string (incl. Resolvable::Kind).
-     * \c strval_r is expected to define a valid Capability \em including
+     * \a strval_r is expected to define a valid Capability \em including
      * the Resolvable::Kind.
      * \throw EXCEPTION on parse error.
     */
     Capability parse( const std::string & strval_r ) const;
     /** Parse Capability from string (providing default Resolvable::Kind).
-     * \c strval_r is expected to define a valid Capability. If it does
-     * not define the Resolvable::Kind, \c defaultRefers_r is used instead.
+     * \a strval_r is expected to define a valid Capability. If it does
+     * not define the Resolvable::Kind, \a defaultRefers_r is used instead.
      * \throw EXCEPTION on parse error.
     */
     Capability parse( const std::string & strval_r, const Resolvable::Kind & defaultRefers_r ) const;
 
-    /** Parse Capability providing Resolvable::Kind, name, Edition and Arch.
+    /** Parse Capability providing Resolvable::Kind, name, RelOp and Edition.
      * \throw EXCEPTION on parse error.
     */
     Capability parse( const Resolvable::Kind & refers_r,
                       const std::string & name_r,
-                      const Edition & edition_r,
-                      const Arch & arch_r ) const;
+                      RelOp op_r,
+                      const Edition & edition_r ) const;
 
   private:
+    /** Implementation */
+    struct Impl;
     /** Pointer to implementation */
-    detail::CapFactoryImplPtr _pimpl;
-  public:
-    /** Avoid a bunch of friend decl. */
-    detail::constCapFactoryImplPtr sayFriend() const;
+    base::ImplPtr<Impl> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 

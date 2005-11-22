@@ -61,7 +61,7 @@ namespace zypp
     };
     ///////////////////////////////////////////////////////////////////
     IMPL_PTR_TYPE(DependenciesImpl)
-    DependenciesImplPtr DependenciesImpl::_nodeps;
+    DependenciesImpl_Ptr DependenciesImpl::_nodeps;
     ///////////////////////////////////////////////////////////////////
 
     /** \relates DependenciesImpl Stream output */
@@ -102,7 +102,7 @@ namespace zypp
   //	METHOD NAME : Dependencies::Dependencies
   //	METHOD TYPE : Ctor
   //
-  Dependencies::Dependencies( detail::DependenciesImplPtr impl_r )
+  Dependencies::Dependencies( detail::DependenciesImpl_Ptr impl_r )
   : _pimpl( impl_r ? impl_r : detail::DependenciesImpl::nodeps() )
   {}
 
@@ -117,9 +117,9 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Dependencies::sayFriend
-  //	METHOD TYPE : detail::constDependenciesImplPtr
+  //	METHOD TYPE : detail::DependenciesImplconstPtr
   //
-  detail::constDependenciesImplPtr Dependencies::sayFriend() const
+  detail::DependenciesImpl_constPtr Dependencies::sayFriend() const
   { return _pimpl; }
 
   const CapSet & Dependencies::provides() const

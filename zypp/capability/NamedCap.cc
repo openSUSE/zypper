@@ -20,7 +20,7 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
-    const CapKind NamedCap::_kind( "NamedCap" );
+    const CapabilityImpl::Kind NamedCap::_kind( "NamedCap" );
 
     /////////////////////////////////////////////////////////////////
   } // namespace capability

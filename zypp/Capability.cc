@@ -39,14 +39,6 @@ namespace zypp
   Capability::~Capability()
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Capability::sayFriend
-  //	METHOD TYPE : capability::constCapabilityImplPtr
-  //
-  Capability::constImplPtr Capability::sayFriend() const
-  { return _pimpl; }
-
   const Resolvable::Kind & Capability::refers() const
   { return _pimpl->refers(); }
 
@@ -67,7 +59,7 @@ namespace zypp
   */
   std::ostream & operator<<( std::ostream & str, const Capability & obj )
   {
-    return str << *obj.sayFriend();
+    return str << obj._pimpl._dptr;
   }
 
   /////////////////////////////////////////////////////////////////

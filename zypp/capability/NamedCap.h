@@ -25,7 +25,9 @@ namespace zypp
     //
     //	CLASS NAME : NamedCap
     //
-    /** */
+    /**
+     * \todo implement matches().
+    */
     class NamedCap : public CapabilityImpl
     {
     public:
@@ -36,7 +38,7 @@ namespace zypp
       {}
     public:
       /**  */
-      virtual const CapKind & kind() const
+      virtual const Kind & kind() const
       { return _kind; }
       /**  */
       virtual std::string asString() const
@@ -47,7 +49,7 @@ namespace zypp
       { return false; }
     private:
       /**  */
-      static const CapKind _kind;
+      static const Kind _kind;
       /**  */
       std::string _name;
     };

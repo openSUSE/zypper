@@ -41,7 +41,7 @@ namespace zypp
     Dependencies();
     /** Factory ctor */
     explicit
-    Dependencies( detail::DependenciesImplPtr impl_r );
+    Dependencies( detail::DependenciesImpl_Ptr impl_r );
     /** Dtor */
     ~Dependencies();
 
@@ -82,10 +82,10 @@ namespace zypp
 
   private:
     /** Pointer to implementation */
-    detail::DependenciesImplPtr _pimpl;
+    detail::DependenciesImpl_Ptr _pimpl;
   public:
     /** Avoid a bunch of friend decl. */
-    detail::constDependenciesImplPtr sayFriend() const;
+    detail::DependenciesImpl_constPtr sayFriend() const;
   };
   ///////////////////////////////////////////////////////////////////
 

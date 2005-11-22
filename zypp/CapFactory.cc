@@ -48,33 +48,12 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : CapFactoryImpl
-    //
-    /** CapFactory implementation */
-    struct CapFactoryImpl : public base::ReferenceCounted, private base::NonCopyable
-    {
-      /** Default ctor*/
-      CapFactoryImpl();
-      /** Dtor */
-      ~CapFactoryImpl();
-    };
-    ///////////////////////////////////////////////////////////////////
-    IMPL_PTR_TYPE(CapFactoryImpl)
-    ///////////////////////////////////////////////////////////////////
-
-    /** \relates CapFactoryImpl Stream output */
-    inline std::ostream & operator<<( std::ostream & str, const CapFactoryImpl & obj )
-    {
-      return str << "CapFactoryImpl";
-    }
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
+  //
+  //	CLASS NAME : CapFactoryImpl
+  //
+  /** CapFactory implementation (UNUSED) */
+  struct CapFactory::Impl
+  {};
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
@@ -93,28 +72,11 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : CapFactory::CapFactory
-  //	METHOD TYPE : Ctor
-  //
-  CapFactory::CapFactory( detail::CapFactoryImplPtr impl_r )
-  : _pimpl( impl_r )
-  {}
-
-  ///////////////////////////////////////////////////////////////////
-  //
   //	METHOD NAME : CapFactory::~CapFactory
   //	METHOD TYPE : Dtor
   //
   CapFactory::~CapFactory()
   {}
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : CapFactory::sayFriend
-  //	METHOD TYPE : detail::constCapFactoryImplPtr
-  //
-  detail::constCapFactoryImplPtr CapFactory::sayFriend() const
-  { return _pimpl; }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -153,8 +115,8 @@ namespace zypp
   /** \todo fix it */
   Capability CapFactory::parse( const Resolvable::Kind & refers_r,
                                 const std::string & name_r,
-                                const Edition & edition_r,
-                                const Arch & arch_r ) const
+                                RelOp op_r,
+                                const Edition & edition_r ) const
   {
     CapabilityImplPtr newcap( new capability::NamedCap( refers_r, name_r ) );
     USet::iterator in( _uset.insert( newcap ).first );
@@ -168,7 +130,7 @@ namespace zypp
   */
   std::ostream & operator<<( std::ostream & str, const CapFactory & obj )
   {
-    return str << *obj.sayFriend();
+    return str << "No CapFactory stats implemented";
   }
 
   /////////////////////////////////////////////////////////////////
