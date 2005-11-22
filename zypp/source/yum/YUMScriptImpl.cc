@@ -6,9 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/source/yum/YUM
- ScriptImpl.cc
- *
+/** \file zypp/source/yum/YUMScriptImpl.cc
 */
 
 #include "zypp/source/yum/YUMScriptImpl.h"
