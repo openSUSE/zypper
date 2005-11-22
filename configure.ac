@@ -72,18 +72,23 @@ dnl   check for c++ compiler and tools
 AC_PROG_CXX
 AC_PROG_CXX
 AC_PROG_CXXCPP
-#AC_PROG_CC
-#AC_PROG_RANLIB
 AC_PROG_INSTALL
 AM_PROG_LIBTOOL
 
 dnl   do AC_CHECK_* tests using c++ (e.g. boost header)
 AC_LANG([C++])
 
-
 AC_PATH_PROG(DOCGEN, doxygen)
 if test -z "$DOCGEN" ; then
     AC_MSG_ERROR(doxygen is missing; please install doxygen.)
+fi
+
+AC_PATH_PROG(HAVE_DOT, dot)
+if test -z "$HAVE_DOT" ; then
+    AC_MSG_WARN(dot not found; you should install graphviz.)
+    HAVE_DOT=NO
+else
+    HAVE_DOT=YES
 fi
 
 AC_PATH_PROG(XGETTEXT, xgettext)
