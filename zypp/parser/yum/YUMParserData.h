@@ -160,18 +160,13 @@ namespace zypp {
         std::string source_info;
       };
     
-      class YUMPatchAtom : public base::ReferenceCounted, private base::NonCopyable {
+      class YUMObjectData : public base::ReferenceCounted, private base::NonCopyable {
       public:
 
-	enum AtomType { Package, Script, Message };
-
-        virtual AtomType atomType() = 0;
         std::string name;
-        std::string type;
         std::string epoch;
         std::string ver;
         std::string rel;
-        std::string arch;
         std::list<YUMDependency> provides;
         std::list<YUMDependency> conflicts;
         std::list<YUMDependency> obsoletes;
@@ -179,11 +174,18 @@ namespace zypp {
         std::list<YUMDependency> requires;
       };
 
+      class YUMPatchAtom : public YUMObjectData {
+      public:
+	enum AtomType { Package, Script, Message };
+        virtual AtomType atomType() = 0;
+      };
+
       class YUMPatchPackage : public YUMPatchAtom {
       public:
         YUMPatchPackage() {};
         virtual AtomType atomType() { return Package; };
         // data for primary
+        std::string arch;
         std::string type;
         std::string checksumType;
         std::string checksumPkgid;
@@ -275,15 +277,11 @@ namespace zypp {
       /**
        * @short Describes a package in a YUM repository
        **/
-      class YUMPrimaryData : public base::ReferenceCounted, private base::NonCopyable {
+      class YUMPrimaryData : public YUMObjectData {
       public:
         YUMPrimaryData();
         std::string type;
-        std::string name;
         std::string arch;
-        std::string epoch;
-        std::string ver;
-        std::string rel;
         std::string checksumType;
         std::string checksumPkgid;
         std::string checksum;
@@ -304,10 +302,6 @@ namespace zypp {
         std::string sourcerpm;
         std::string headerStart;
         std::string headerEnd;
-        std::list<YUMDependency> provides;
-        std::list<YUMDependency> conflicts;
-        std::list<YUMDependency> obsoletes;
-        std::list<YUMDependency> requires;
         std::list<FileData> files;
     
         // SuSE specific data
@@ -315,7 +309,6 @@ namespace zypp {
         std::list<std::string> keywords;
         std::string  media;
         std::list<YUMDirSize> dirSizes;
-        std::list<YUMDependency> freshen;
         bool installOnly;
       };
     
@@ -370,7 +363,7 @@ namespace zypp {
     
     /* ** YUMPatchData not yet finalized **/
     
-      class YUMPatchData : public base::ReferenceCounted, private base::NonCopyable {
+      class YUMPatchData : public YUMObjectData {
       public:
         YUMPatchData();
         ~YUMPatchData() {
@@ -380,22 +373,12 @@ namespace zypp {
         std::string patchId;
         std::string timestamp;
         std::string engine;
-        std::string name;
         MultiLang summary;
         MultiLang description;
-        std::string epoch;
-        std::string ver;
-        std::string rel;
-        std::list<YUMDependency> provides;
-        std::list<YUMDependency> conflicts;
-        std::list<YUMDependency> obsoletes;
-        std::list<YUMDependency> freshen;
-        std::list<YUMDependency> requires;
         std::string category;
         bool rebootNeeded;
         bool packageManager;
         std::string updateScript;
-        // FIXME this copying of structures is inefective
         std::list<shared_ptr<YUMPatchAtom> > atoms;
       };
 

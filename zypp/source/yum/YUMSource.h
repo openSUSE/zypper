@@ -55,7 +55,7 @@ namespace zypp
 
 
 	Dependencies createDependencies(
-	  const zypp::parser::yum::YUMPatchAtom & parsed
+	  const zypp::parser::yum::YUMObjectData & parsed
 	);
 
 

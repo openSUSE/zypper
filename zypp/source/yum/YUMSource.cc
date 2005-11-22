@@ -94,19 +94,19 @@ namespace zypp
 	)
 	{
 	  shared_ptr<YUMPatchImpl> impl(new YUMPatchImpl(parsed, this));
-//	  Dependencies _deps = createDependencies(parsed);
+	  Dependencies _deps = createDependencies(parsed);
 	  Patch::Ptr patch = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel ),
 	    Arch( "noarch" ),
 	    impl
 	  );
-//	  patch->setDeps(_deps);
+	  patch->setDeps(_deps);
 	  return patch;
 	}
 
 	Dependencies YUMSource::createDependencies(
-	  const zypp::parser::yum::YUMPatchAtom & parsed
+	  const zypp::parser::yum::YUMObjectData & parsed
 	)
 	{
 	  CapFactory _f;
