@@ -34,7 +34,7 @@ namespace zypp
       public:
         /** Default ctor */
         YUMScriptImpl( const zypp::parser::yum::YUMPatchScript & parsed );
-       };
+      };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum
     /////////////////////////////////////////////////////////////////

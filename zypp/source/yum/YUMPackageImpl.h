@@ -28,10 +28,7 @@ namespace zypp
       //
       //        CLASS NAME : YUMPackageImpl
       //
-      /** Class representing an update script
-       *
-       * \todo Fix brief descriptions, or delete them. This is not an update
-       * script, It's implementation of zypp::Package for YUM source.
+      /** Class representing a package
        *
        * \todo Deriving from detail::PackageImpl is useless here. PackageImpl
        * is dumb, i.e. it provides nothing, but the dtor needed to instanciate

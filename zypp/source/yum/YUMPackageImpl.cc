@@ -35,14 +35,6 @@ namespace zypp
       YUMPackageImpl::YUMPackageImpl(
 	const zypp::parser::yum::YUMPatchPackage & parsed
       )
-#warning MA cannot be constructed that way
-#if 0
-      : PackageImpl(
-	parsed.name,
-	Edition(parsed.ver, parsed.rel, strtol(parsed.epoch.c_str(), NULL, 10)),
-	Arch(parsed.arch)
-      )
-#endif
       {
 /*
     std::string type;
@@ -66,17 +58,12 @@ namespace zypp
     std::string sourcerpm;
     std::string headerStart;
     std::string headerEnd;
-    std::list<YUMDependency> provides;
-    std::list<YUMDependency> conflicts;
-    std::list<YUMDependency> obsoletes;
-    std::list<YUMDependency> requires;
     std::list<FileData> files;
     // SuSE specific data
     std::list<std::string> authors;
     std::list<std::string> keywords;
     std::string  media;
     std::list<YUMDirSize> dirSizes;
-    std::list<YUMDependency> freshen;
     bool installOnly;
     // Change Log
     std::list<ChangelogEntry> changelog;

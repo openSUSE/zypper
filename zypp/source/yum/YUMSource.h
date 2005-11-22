@@ -6,14 +6,18 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/source/yum/YUMMessageImpl.cc
+/** \file zypp/source/yum/YUMSource.h
  *
 */
+#ifndef ZYPP_SOURCE_YUM_YUMSOURCE_H
+#define ZYPP_SOURCE_YUM_YUMSOURCE_H
 
-#include "zypp/source/yum/YUMMessageImpl.h"
-
-using namespace std;
-using namespace zypp::detail;
+#include "zypp/source/Source.h"
+#include "zypp/parser/yum/YUMParserData.h"
+#include "zypp/Package.h"
+#include "zypp/Message.h"
+#include "zypp/Script.h"
+#include "zypp/Patch.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -22,22 +26,42 @@ namespace zypp
   namespace source
   { /////////////////////////////////////////////////////////////////
     namespace yum
-    {
-      ///////////////////////////////////////////////////////////////////
-      //
-      //        CLASS NAME : YUMMessageImpl
-      //
-      ///////////////////////////////////////////////////////////////////
+    { //////////////////////////////////////////////////////////////
 
-      /** Default ctor
-       * \bug CANT BE CONSTUCTED THAT WAY ANYMORE
+      ///////////////////////////////////////////////////////////////////
+      //
+      //        CLASS NAME : YUMSource
+      //
+      /** Class representing a YUM installation source
       */
-      YUMMessageImpl::YUMMessageImpl(
-	const zypp::parser::yum::YUMPatchMessage & parsed
-      )
+      class YUMSource : public source::Source
       {
-	_text = parsed.text;
-      }
+      public:
+        /** Default ctor */
+        YUMSource();
+
+	Package::Ptr createPackage(
+	  const zypp::parser::yum::YUMPatchPackage & parsed
+	);
+	Message::Ptr createMessage(
+	  const zypp::parser::yum::YUMPatchMessage & parsed
+	);
+	Script::Ptr createScript(
+	  const zypp::parser::yum::YUMPatchScript & parsed
+	);
+	Patch::Ptr createPatch(
+	  const zypp::parser::yum::YUMPatchData & parsed
+	);
+
+
+	Dependencies createDependencies(
+	  const zypp::parser::yum::YUMPatchAtom & parsed
+	);
+
+
+
+       };
+      ///////////////////////////////////////////////////////////////////
     } // namespace yum
     /////////////////////////////////////////////////////////////////
   } // namespace source
@@ -45,3 +69,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_SOURCE_YUM_YUMSOURCE_H

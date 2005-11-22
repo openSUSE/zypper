@@ -23,7 +23,7 @@ Purpose:    main() to test the YUM parsers
 
 using namespace zypp;
 using namespace zypp::parser;
-using namespace zypp::parser::YUM;
+using namespace zypp::parser::yum;
 using namespace std;
 
 namespace {

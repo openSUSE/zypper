@@ -6,14 +6,15 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/source/yum/YUMMessageImpl.cc
+/** \file zypp/source/yum/YUMPatchImpl.h
  *
 */
+#ifndef ZYPP_SOURCE_YUM_YUMPATCHIMPL_H
+#define ZYPP_SOURCE_YUM_YUMPATCHIMPL_H
 
-#include "zypp/source/yum/YUMMessageImpl.h"
-
-using namespace std;
-using namespace zypp::detail;
+#include "zypp/detail/PatchImpl.h"
+#include "zypp/parser/yum/YUMParserData.h"
+#include "zypp/source/yum/YUMSource.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -22,22 +23,24 @@ namespace zypp
   namespace source
   { /////////////////////////////////////////////////////////////////
     namespace yum
-    {
-      ///////////////////////////////////////////////////////////////////
-      //
-      //        CLASS NAME : YUMMessageImpl
-      //
-      ///////////////////////////////////////////////////////////////////
+    { //////////////////////////////////////////////////////////////
 
-      /** Default ctor
-       * \bug CANT BE CONSTUCTED THAT WAY ANYMORE
+      ///////////////////////////////////////////////////////////////////
+      //
+      //        CLASS NAME : YUMPatchImpl
+      //
+      /** Class representing a patch
       */
-      YUMMessageImpl::YUMMessageImpl(
-	const zypp::parser::yum::YUMPatchMessage & parsed
-      )
+      class YUMPatchImpl : public detail::PatchImpl
       {
-	_text = parsed.text;
-      }
+      public:
+        /** Default ctor */
+        YUMPatchImpl(
+	  const zypp::parser::yum::YUMPatchData & parsed,
+	  YUMSource * src
+	);
+       };
+      ///////////////////////////////////////////////////////////////////
     } // namespace yum
     /////////////////////////////////////////////////////////////////
   } // namespace source
@@ -45,3 +48,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_SOURCE_YUM_YUMPATCHIMPL_H

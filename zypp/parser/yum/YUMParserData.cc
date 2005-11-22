@@ -361,13 +361,6 @@ ostream& operator<<(ostream &out, const YUMPatchData& data)
     << "  affects package manager: " << data.packageManager << endl
     << "  update script: " << data.updateScript << endl
     << "  atoms:" << endl
-/*  for (std::list<shared_ptr<YUMPatchAtom> >::const_iterator it = data.atoms.begin();
-       it != data.atoms.end();
-       it++)
-  {
-    out << *it;
-  }*/
-// FIXME here
     << data.atoms;
   return out;
 }
@@ -375,7 +368,6 @@ ostream& operator<<(ostream &out, const YUMPatchData& data)
 std::ostream& operator<<(std::ostream& out, const shared_ptr<YUMPatchAtom> data)
 {
   out << "Atom data" << endl;
-//  out << "  atom type: " << data->atomType() << endl;
   switch (data->atomType())
   {
     case YUMPatchAtom::Package:

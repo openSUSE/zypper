@@ -28,16 +28,14 @@ namespace zypp
       //
       //        CLASS NAME : YUMMessageImpl
       //
-      /** Class representing an update script
-       * \todo Fix brief descriptions, or delete them. This is not an update
-       * script, It's implementation of zypp::Message for YUM source.
+      /** Class representing a message
       */
       class YUMMessageImpl : public detail::MessageImpl
       {
       public:
         /** Default ctor */
         YUMMessageImpl( const zypp::parser::yum::YUMPatchMessage & parsed );
-       };
+      };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum
     /////////////////////////////////////////////////////////////////
