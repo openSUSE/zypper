@@ -84,6 +84,11 @@ namespace zypp
         : _dptr( dptr )
         {}
 
+        explicit
+        ImplPtr( _Ptr dptr )
+        : _dptr( dptr )
+        {}
+
         _D & operator*() { return *_dptr; }
         const _D & operator*() const { return *_dptr; };
         _D * operator->() { return _dptr.get(); }
@@ -93,7 +98,7 @@ namespace zypp
 
         _D * unconst() const { return _dptr.get(); }
 
-      private:
+
         _Ptr _dptr;
       };
     ///////////////////////////////////////////////////////////////////
@@ -125,7 +130,7 @@ namespace zypp
 
         _D * unconst() const { return _dptr; }
 
-      private:
+
         _P * _dptr;
       };
     /////////////////////////////////////////////////////////////////

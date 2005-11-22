@@ -55,26 +55,40 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
-  //@{
-  /** \relates Arch Builtin architecture.
-   * Outside Arch, because some names, like \c i388, are used
-   * as \c #define, thus unusable as identifier.
+  /** \name Builtin architecture constants.
+   *
+   * Defined outside Arch as e.g. \c Arch_i386, because some names,
+   * like \c i388, are used as \c #define, thus unusable as identifier
+   * like \c Arch::i386.
   */
+  //@{
+  /** \relates Arch */
   extern const Arch Arch_noarch;
 
+  /** \relates Arch */
   extern const Arch Arch_x86_64;
+  /** \relates Arch */
   extern const Arch Arch_athlon;
+  /** \relates Arch */
   extern const Arch Arch_i686;
+  /** \relates Arch */
   extern const Arch Arch_i586;
+  /** \relates Arch */
   extern const Arch Arch_i486;
+  /** \relates Arch */
   extern const Arch Arch_i386;
 
+  /** \relates Arch */
   extern const Arch Arch_s390x;
+  /** \relates Arch */
   extern const Arch Arch_s390;
 
+  /** \relates Arch */
   extern const Arch Arch_ppc64;
+  /** \relates Arch */
   extern const Arch Arch_ppc;
 
+  /** \relates Arch */
   extern const Arch Arch_ia64;
   //@}
 
@@ -86,31 +100,35 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
 
-  //@{
-  /** \relates Arch */
+  /** \relates Arch stream output. */
   inline std::ostream & operator<<( std::ostream & str, const Arch & obj )
   { return str << obj.asString(); }
 
-
+  /** \name Comparison based on string value. */
+  //@{
+  /** \relates Arch */
   inline bool operator==( const Arch & lhs, const Arch & rhs )
   { return lhs.asString() == rhs.asString(); }
 
+  /** \relates Arch */
   inline bool operator==( const Arch & lhs, const std::string & rhs )
   { return lhs.asString() == rhs; }
 
+  /** \relates Arch */
   inline bool operator==( const std::string & lhs, const Arch & rhs )
   { return lhs == rhs.asString(); }
 
-
+  /** \relates Arch */
   inline bool operator!=( const Arch & lhs, const Arch & rhs )
   { return !( lhs == rhs ); }
 
+  /** \relates Arch */
   inline bool operator!=( const Arch & lhs, const std::string & rhs )
   { return !( lhs == rhs ); }
 
+  /** \relates Arch */
   inline bool operator!=( const std::string & lhs, const Arch & rhs )
   { return !( lhs == rhs ); }
-
   //@}
 
   ///////////////////////////////////////////////////////////////////
@@ -138,7 +156,7 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 namespace std
 { /////////////////////////////////////////////////////////////////
-  /** \relates Arch Order relation for std::container classes. */
+  /** \relates Arch Default order for std::container based on string value.*/
   template<>
     inline bool less<zypp::Arch>::operator()( const zypp::Arch & lhs, const zypp::Arch & rhs ) const
     { return lhs.asString() < rhs.asString(); }

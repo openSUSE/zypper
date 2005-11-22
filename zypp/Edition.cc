@@ -69,6 +69,10 @@ namespace zypp
   Edition::~Edition()
   {}
 
+  /** \todo Beautyfy */
+  std::string Edition::asString() const
+  { return _pimpl->_version + "-" + _pimpl->_release; }
+
   Edition::epoch_t Edition::epoch() const
   { return _pimpl->_epoch; }
 
@@ -78,16 +82,11 @@ namespace zypp
   const std::string & Edition::release() const
   { return _pimpl->_release; }
 
-  /******************************************************************
-  **
-  **	FUNCTION NAME : operator<<
-  **	FUNCTION TYPE : std::ostream &
-  */
-  std::ostream & operator<<( std::ostream & str, const Edition & obj )
+  /** \todo implement */
+  bool Edition::compare( RelOp op, const Edition & lhs, const Edition & rhs )
   {
-    return str << obj.version() << '-' << obj.release();
+    return false;
   }
-
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
