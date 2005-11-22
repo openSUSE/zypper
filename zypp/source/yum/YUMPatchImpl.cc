@@ -14,7 +14,8 @@
 #include "zypp/source/yum/YUMSource.h"
 #include <zypp/CapFactory.h>
 #include "zypp/parser/yum/YUMParserData.h"
-#include <zypp/parser/yum/YUMParser.h>
+#warning DISBALED INCLUDE BELOW AS IT DOES NOT COMPILE
+//#include <zypp/parser/yum/YUMParser.h>
 #include "zypp/Package.h"
 #include "zypp/Script.h"
 #include "zypp/Message.h"
@@ -48,12 +49,17 @@ namespace zypp
       )
       {
 	CapFactory _f;
+#warning ORIGINAL CODE DISABLED AS IT DOES NOT COMPILE
+	Capability cap( _f.parse(
+	  parsed.name, Resolvable::Kind("Patch")
+	  ) );
+#if 0
 	Capability cap( _f.parse(
 	  Resolvable::Kind("Patch"),
 	  parsed.name,
 	  Edition(),
 	  Arch("noarch")));
-
+#endif
 	for (std::list<shared_ptr<YUMPatchAtom> >::const_iterator it
 					= parsed.atoms.begin();
 	     it != parsed.atoms.end();
@@ -95,7 +101,7 @@ namespace zypp
 	    _deps.setRequires(_req);
 	    (*it)->setDeps(_deps);
 	  }
-	  
+
 	}
       }
 
