@@ -54,12 +54,20 @@ namespace zypp
      * \throw EXCEPTION on parse error.
     */
     Capability parse( const std::string & strval_r ) const;
-    /** Parse Capability from string (default Resolvable::Kind).
+    /** Parse Capability from string (providing default Resolvable::Kind).
      * \c strval_r is expected to define a valid Capability. If it does
      * not define the Resolvable::Kind, \c defaultRefers_r is used instead.
      * \throw EXCEPTION on parse error.
     */
     Capability parse( const std::string & strval_r, const Resolvable::Kind & defaultRefers_r ) const;
+
+    /** Parse Capability providing Resolvable::Kind, name, Edition and Arch.
+     * \throw EXCEPTION on parse error.
+    */
+    Capability parse( const Resolvable::Kind & refers_r,
+                      const std::string & name_r,
+                      const Edition & edition_r,
+                      const Arch & arch_r ) const;
 
   private:
     /** Pointer to implementation */

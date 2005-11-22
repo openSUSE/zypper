@@ -145,6 +145,22 @@ namespace zypp
     return Capability( *in );
   }
 
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : CapFactory::parse
+  //	METHOD TYPE : Capability
+  //
+  /** \todo fix it */
+  Capability CapFactory::parse( const Resolvable::Kind & refers_r,
+                                const std::string & name_r,
+                                const Edition & edition_r,
+                                const Arch & arch_r ) const
+  {
+    CapabilityImplPtr newcap( new capability::NamedCap( refers_r, name_r ) );
+    USet::iterator in( _uset.insert( newcap ).first );
+    return Capability( *in );
+  }
+
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<
