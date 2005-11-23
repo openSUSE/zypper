@@ -475,26 +475,9 @@ std::ostream& operator<<(std::ostream& out, const YUMPatchPackage& data)
     << data.files << endl
     << "  Changelog:" << endl
     << data.changelog << endl
-    << "  Plain RPM:" << endl
-    << "    arch: " << data.plainRpm.arch << endl
-    << "    filename: " << data.plainRpm.filename << endl
-    << "    download size: " << data.plainRpm.downloadsize << endl
-    << "    MD5: " << data.plainRpm.md5sum << endl
-    << "    build time: " << data.plainRpm.buildtime << endl
-    << "  Patch RPM:" << endl
-    << "    arch: " << data.patchRpm.arch << endl
-    << "    filename: " << data.patchRpm.filename << endl
-    << "    download size: " << data.patchRpm.downloadsize << endl
-    << "    MD5: " << data.patchRpm.md5sum << endl
-    << "    build time: " << data.patchRpm.buildtime << endl
-    << data.patchRpm.baseVersions
-    << "  Delta RPM:" << endl
-    << "    arch: " << data.deltaRpm.arch << endl
-    << "    filename: " << data.deltaRpm.filename << endl
-    << "    download size: " << data.deltaRpm.downloadsize << endl
-    << "    MD5: " << data.deltaRpm.md5sum << endl
-    << "    build time: " << data.deltaRpm.buildtime << endl
-    << data.deltaRpm.baseVersion;
+    << data.plainRpms
+    << data.patchRpms
+    << data.deltaRpms;
   return out;
 }
 
@@ -507,5 +490,40 @@ std::ostream& operator<<(std::ostream& out, const YUMBaseVersion& data)
     << "      MD5: " << data.md5sum << endl
     << "      build time: " << data.buildtime << endl
     << "      source info: " << data.source_info << endl;
+  return out;
+}
+
+std::ostream& operator<<(std::ostream& out, const PlainRpm& data)
+{
+  out << "  Plain RPM:" << endl
+    << "    arch: " << data.arch << endl
+    << "    filename: " << data.filename << endl
+    << "    download size: " << data.downloadsize << endl
+    << "    MD5: " << data.md5sum << endl
+    << "    build time: " << data.buildtime << endl;
+  return out;
+}
+
+std::ostream& operator<<(std::ostream& out, const PatchRpm& data)
+{
+  out << "  Patch RPM:" << endl
+    << "    arch: " << data.arch << endl
+    << "    filename: " << data.filename << endl
+    << "    download size: " << data.downloadsize << endl
+    << "    MD5: " << data.md5sum << endl
+    << "    build time: " << data.buildtime << endl
+    << data.baseVersions;
+  return out;
+}
+
+std::ostream& operator<<(std::ostream& out, const DeltaRpm& data)
+{
+  out << "  Delta RPM:" << endl
+    << "    arch: " << data.arch << endl
+    << "    filename: " << data.filename << endl
+    << "    download size: " << data.downloadsize << endl
+    << "    MD5: " << data.md5sum << endl
+    << "    build time: " << data.buildtime << endl
+    << data.baseVersion << endl;
   return out;
 }

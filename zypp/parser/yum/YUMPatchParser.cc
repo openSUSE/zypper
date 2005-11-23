@@ -78,14 +78,14 @@ namespace zypp {
       	patchPtr->name = _helper.content(child);
             }
             else if (name == "summary") {
-              patchPtr->summary = MultiLang(
-      	  _helper.attribute(child,"lang"),
-      	  _helper.content(child));
+              patchPtr->summary.push_back(MultiLang(
+      	                               _helper.attribute(child,"lang"),
+                                       _helper.content(child)));
             }
             else if (name == "description") {
-              patchPtr->description = MultiLang(
-      	  _helper.attribute(child,"lang"),
-      	  _helper.content(child));
+              patchPtr->description.push_back(MultiLang(
+                                       _helper.attribute(child,"lang"),
+                                       _helper.content(child)));
             }
             else if (name == "version") {
               patchPtr->epoch = _helper.attribute(child,"epoch");
@@ -245,11 +245,12 @@ namespace zypp {
       YUMPatchParser::parsePkgPlainRpmNode(YUMPatchPackage *dataPtr,
       				xmlNodePtr formatNode)
       {
-        dataPtr->plainRpm.arch = _helper.attribute( formatNode, "arch" );
-        dataPtr->plainRpm.filename = _helper.attribute( formatNode, "filename" );
-        dataPtr->plainRpm.downloadsize = _helper.attribute( formatNode, "downloadsize" );
-        dataPtr->plainRpm.md5sum = _helper.attribute( formatNode, "md5sum" );
-        dataPtr->plainRpm.buildtime = _helper.attribute( formatNode, "buildtime" );
+	PlainRpm plainRpm;
+        plainRpm.arch = _helper.attribute( formatNode, "arch" );
+        plainRpm.filename = _helper.attribute( formatNode, "filename" );
+        plainRpm.downloadsize = _helper.attribute( formatNode, "downloadsize" );
+        plainRpm.md5sum = _helper.attribute( formatNode, "md5sum" );
+        plainRpm.buildtime = _helper.attribute( formatNode, "buildtime" );
         for (xmlNodePtr child = formatNode->children; 
              child != 0;
              child = child ->next) {
@@ -260,26 +261,28 @@ namespace zypp {
               << _helper.positionInfo(child) << ", skipping" << endl;
           }
         }
+	dataPtr->plainRpms.push_back(plainRpm);
       }
       
       void
       YUMPatchParser::parsePkgPatchRpmNode(YUMPatchPackage *dataPtr,
       				xmlNodePtr formatNode)
       {
-        dataPtr->patchRpm.arch = _helper.attribute( formatNode, "arch" );
-        dataPtr->patchRpm.filename = _helper.attribute( formatNode, "filename" );
-        dataPtr->patchRpm.downloadsize = _helper.attribute( formatNode, "downloadsize" );
-        dataPtr->patchRpm.md5sum = _helper.attribute( formatNode, "md5sum" );
-        dataPtr->patchRpm.buildtime = _helper.attribute( formatNode, "buildtime" );
+	PatchRpm patchRpm;
+        patchRpm.arch = _helper.attribute( formatNode, "arch" );
+        patchRpm.filename = _helper.attribute( formatNode, "filename" );
+        patchRpm.downloadsize = _helper.attribute( formatNode, "downloadsize" );
+        patchRpm.md5sum = _helper.attribute( formatNode, "md5sum" );
+        patchRpm.buildtime = _helper.attribute( formatNode, "buildtime" );
         for (xmlNodePtr child = formatNode->children; 
              child != 0;
              child = child ->next) {
           if (_helper.isElement(child)) {
             string name = _helper.name(child);
             if (name == "base_version") {
-      	YUMBaseVersion base_version;
-      	parsePkgBaseVersionNode( &base_version, child);
-              dataPtr->patchRpm.baseVersions.push_back( base_version );
+	      YUMBaseVersion base_version;
+	      parsePkgBaseVersionNode( &base_version, child);
+              patchRpm.baseVersions.push_back( base_version );
             }
             else {
               WAR << "YUM <atom/package/pkgfiles/patch> contains the unknown element <"
@@ -288,24 +291,26 @@ namespace zypp {
             }
           }
         }
+	dataPtr->patchRpms.push_back(patchRpm);
       }
       
       void
       YUMPatchParser::parsePkgDeltaRpmNode(YUMPatchPackage *dataPtr,
       				xmlNodePtr formatNode)
       {
-        dataPtr->deltaRpm.arch = _helper.attribute( formatNode, "arch" );
-        dataPtr->deltaRpm.filename = _helper.attribute( formatNode, "filename" );
-        dataPtr->deltaRpm.downloadsize = _helper.attribute( formatNode, "downloadsize" );
-        dataPtr->deltaRpm.md5sum = _helper.attribute( formatNode, "md5sum" );
-        dataPtr->deltaRpm.buildtime = _helper.attribute( formatNode, "buildtime" );
+	DeltaRpm deltaRpm;
+        deltaRpm.arch = _helper.attribute( formatNode, "arch" );
+        deltaRpm.filename = _helper.attribute( formatNode, "filename" );
+        deltaRpm.downloadsize = _helper.attribute( formatNode, "downloadsize" );
+        deltaRpm.md5sum = _helper.attribute( formatNode, "md5sum" );
+        deltaRpm.buildtime = _helper.attribute( formatNode, "buildtime" );
         for (xmlNodePtr child = formatNode->children; 
              child != 0;
              child = child ->next) {
           if (_helper.isElement(child)) {
             string name = _helper.name(child);
             if (name == "base_version") {
-      	parsePkgBaseVersionNode( &(dataPtr->deltaRpm.baseVersion), child);
+	      parsePkgBaseVersionNode( &(deltaRpm.baseVersion), child);
             }
             else {
               WAR << "YUM <atom/package/pkgfiles/delta> contains the unknown element <"
@@ -314,6 +319,7 @@ namespace zypp {
             }
           }
         }
+        dataPtr->deltaRpms.push_back(deltaRpm);
       }
       
       

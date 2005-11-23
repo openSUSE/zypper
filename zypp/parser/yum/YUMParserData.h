@@ -182,6 +182,36 @@ namespace zypp {
         virtual AtomType atomType() = 0;
       };
 
+      class PlainRpm {
+      public:
+	std::string arch;
+	std::string filename;
+	std::string downloadsize;
+	std::string md5sum;
+	std::string buildtime;
+      };
+
+      class PatchRpm {
+      public:
+	std::string arch;
+	std::string filename;
+	std::string downloadsize;
+	std::string md5sum;
+	std::string buildtime;
+	std::list<YUMBaseVersion> baseVersions;
+      };
+
+      class DeltaRpm {
+      public:
+	std::string arch;
+	std::string filename;
+	std::string downloadsize;
+	std::string md5sum;
+	std::string buildtime;
+	YUMBaseVersion baseVersion;
+      };
+
+
       class YUMPatchPackage : public YUMPatchAtom {
       public:
         YUMPatchPackage() {};
@@ -219,29 +249,9 @@ namespace zypp {
         // Change Log
         std::list<ChangelogEntry> changelog;
         // Package Files
-        struct {
-          std::string arch;
-          std::string filename;
-          std::string downloadsize;
-          std::string md5sum;
-          std::string buildtime;
-        } plainRpm;
-        struct {
-          std::string arch;
-          std::string filename;
-          std::string downloadsize;
-          std::string md5sum;
-          std::string buildtime;
-          std::list<YUMBaseVersion> baseVersions;
-        } patchRpm;
-        struct {
-          std::string arch;
-          std::string filename;
-          std::string downloadsize;
-          std::string md5sum;
-          std::string buildtime;
-          YUMBaseVersion baseVersion;
-        } deltaRpm;
+	std::list<PlainRpm> plainRpms;
+	std::list<PatchRpm> patchRpms;
+	std::list<DeltaRpm> deltaRpms;
       };
     
       class YUMPatchScript : public YUMPatchAtom {
@@ -375,8 +385,8 @@ namespace zypp {
         std::string patchId;
         std::string timestamp;
         std::string engine;
-        MultiLang summary;
-        MultiLang description;
+        std::list<MultiLang> summary;
+        std::list<MultiLang> description;
         std::string category;
         bool rebootNeeded;
         bool packageManager;
@@ -411,6 +421,9 @@ std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMPatchMes
 std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMPatchScript& data);
 std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMPatchPackage& data);
 std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMBaseVersion& data);
+std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::PlainRpm& data);
+std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::PatchRpm& data);
+std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::DeltaRpm& data);
 
 
 
