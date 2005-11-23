@@ -27,12 +27,19 @@ namespace zypp
   //
   //	CLASS NAME : Edition
   //
-  /** */
+  /** Edition
+   \todo doc
+   \todo optimize implementation
+   \todo implement debian comparison and make choice backend specific
+  */
   class Edition
   {
   public:
     /** Type of an epoch. */
     typedef unsigned epoch_t;
+
+    /** Value representing \c noepoch. */
+    static const epoch_t noepoch = 0;
 
   public:
     /** Default ctor. */
@@ -40,26 +47,36 @@ namespace zypp
     /** Ctor taking \a version_r, \a release_r and optional \a epoch_r */
     Edition( const std::string & version_r,
              const std::string & release_r,
-             epoch_t epoch_r = 0 );
+             epoch_t epoch_r = noepoch );
     /** Dtor */
     ~Edition();
 
   public:
-    /** */
+    /** Epoch */
     epoch_t epoch() const;
-    /** */
+    /** Version */
     const std::string & version() const;
-    /** */
+    /** Release */
     const std::string & release() const;
 
     /** String representation of Edition. */
     std::string asString() const;
 
   public:
-    /** Compare Editions by relationam operator \a op.
-     * \see Rel.
+    /** Compare two Editions using relational operator \a op.
+     * \return Result of expression \t ( \a lhs \a op \a rhs \t ).<BR>
+     * If \a op is Rel::ANY, the expression is always \c true.<BR>
+     * If \a op is Rel::NONE, the expression is always \c false.
+     *
+     * \todo optimize impementation. currently a full compare( lhs, rhs )
+     * is done and the result evaluated. But step by step would be faster.
     */
     static bool compare( Rel op, const Edition & lhs, const Edition & rhs );
+
+    /** Compare two Editions returning <tt>-1,0,1</tt>.
+     * \return <tt>-1,0,1</tt> if editions are <tt>\<,==,\></tt>
+    */
+    static int compare( const Edition & lhs, const Edition & rhs );
 
   private:
     /** Hides implementation */
@@ -99,10 +116,6 @@ namespace zypp
   /** \relates Edition */
   inline bool operator>=( const Edition & lhs, const Edition & rhs )
   { return Edition::compare( Rel::GE, lhs, rhs ); }
-
-  /** \relates Edition */
-  inline int compare( const Edition & lhs, const Edition & rhs )
-  { return lhs == rhs ? 0 : ( lhs < rhs ? -1 : 1 ); }
 
   //@}
 
