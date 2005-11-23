@@ -13,6 +13,8 @@
 #ifndef ZYPP_BASE_PTRTYPES_H
 #define ZYPP_BASE_PTRTYPES_H
 
+#include <string>
+
 #include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/weak_ptr.hpp>
@@ -101,6 +103,21 @@ namespace zypp
 
         _Ptr _dptr;
       };
+
+    /** \relates ImplPtr Stream output.
+     *
+     * Print the \r _D object the ImplPtr refers, or \c "NULL"
+     * if the pointer is \c NULL.
+    */
+    template<class _D, class _Ptr>
+      inline std::ostream &
+      operator<<( std::ostream & str, const ImplPtr<_D, _Ptr> & obj )
+      {
+        if ( obj.get() )
+          return str << *obj.get();
+        return str << std::string("NULL");
+      }
+
     ///////////////////////////////////////////////////////////////////
     /** Wrapper for \c const correct access via pointer.
      *
@@ -133,6 +150,7 @@ namespace zypp
 
         _P * _dptr;
       };
+
     /////////////////////////////////////////////////////////////////
 
     /*@}*/

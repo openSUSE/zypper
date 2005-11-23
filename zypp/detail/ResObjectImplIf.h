@@ -17,14 +17,13 @@
 
 #include "zypp/detail/ResObjectFactory.h"
 
+#include "zypp/NeedAType.h" // volatile include propagating type drafts
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   class Resolvable;
-
-  typedef std::string            line;
-  typedef std::list<std::string> text;
 
   ///////////////////////////////////////////////////////////////////
   namespace detail
@@ -52,11 +51,11 @@ namespace zypp
       Resolvable *const self()
       { return _backRef; }
       /** */
-      virtual line summary() const
-      { return line(); }
+      virtual Label summary() const
+      { return Label(); }
       /** */
-      virtual text description() const
-      { return text(); }
+      virtual Text description() const
+      { return Text(); }
 
     public:
       /** Ctor */

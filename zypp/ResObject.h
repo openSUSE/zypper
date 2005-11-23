@@ -36,9 +36,9 @@ namespace zypp
 
   public:
     /** */
-    line summary() const;
+    Label summary() const;
     /** */
-    text description() const;
+    Text description() const;
 
   protected:
     /** Ctor */

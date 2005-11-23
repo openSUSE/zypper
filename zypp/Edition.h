@@ -64,7 +64,7 @@ namespace zypp
 
   public:
     /** Compare two Editions using relational operator \a op.
-     * \return Result of expression \t ( \a lhs \a op \a rhs \t ).<BR>
+     * \return Result of expression \c ( \a lhs \a op \a rhs \c ).<BR>
      * If \a op is Rel::ANY, the expression is always \c true.<BR>
      * If \a op is Rel::NONE, the expression is always \c false.
      *

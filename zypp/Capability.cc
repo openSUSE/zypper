@@ -59,7 +59,7 @@ namespace zypp
   */
   std::ostream & operator<<( std::ostream & str, const Capability & obj )
   {
-    return str << obj._pimpl._dptr;
+    return str << obj._pimpl;
   }
 
   /////////////////////////////////////////////////////////////////

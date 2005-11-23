@@ -41,7 +41,7 @@ namespace zypp
   struct Rel
   {
     /** \name Relational operators
-     * These are the \en real relational operator contants to
+     * These are the \em real relational operator contants to
      * use. Don't mind that it's not an enum. See also: \ref inSwitch
     */
     //@{

@@ -5,7 +5,7 @@ SUBDIRS = base parser capability source detail
 
 ## ##################################################
 
-include_HEADERS = \
+include_HEADERS = NeedAType.h \
 	Arch.h		\
 	Capability.h	\
 	CapFactory.h	\
