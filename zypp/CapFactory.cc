@@ -25,17 +25,17 @@ using namespace std;
 namespace
 { /////////////////////////////////////////////////////////////////
 
-  typedef zypp::capability::CapabilityImplPtr CapabilityImplPtr;
+  typedef zypp::capability::CapabilityImpl_Ptr CapabilityImpl_Ptr;
 
   /** \todo check set ordering to assert no dups */
-  struct USetOrder : public std::binary_function<CapabilityImplPtr, CapabilityImplPtr, bool>
+  struct USetOrder : public std::binary_function<CapabilityImpl_Ptr, CapabilityImpl_Ptr, bool>
   {
-    bool operator()( const CapabilityImplPtr & lhs,
-                     const CapabilityImplPtr & rhs ) const
+    bool operator()( const CapabilityImpl_Ptr & lhs,
+                     const CapabilityImpl_Ptr & rhs ) const
     { return lhs->asString() < rhs->asString(); }
   };
 
-  typedef std::set<CapabilityImplPtr,USetOrder> USet;
+  typedef std::set<CapabilityImpl_Ptr,USetOrder> USet;
 
   USet _uset;
 
@@ -102,7 +102,7 @@ namespace zypp
     // fix it!
     if ( strval_r.empty() )
       throw "no Resolvable::Kind";
-    CapabilityImplPtr newcap( new capability::NamedCap( defaultRefers_r, strval_r ) );
+    CapabilityImpl_Ptr newcap( new capability::NamedCap( defaultRefers_r, strval_r ) );
     USet::iterator in( _uset.insert( newcap ).first );
     return Capability( *in );
   }
@@ -118,7 +118,7 @@ namespace zypp
                                 Rel op_r,
                                 const Edition & edition_r ) const
   {
-    CapabilityImplPtr newcap( new capability::NamedCap( refers_r, name_r ) );
+    CapabilityImpl_Ptr newcap( new capability::NamedCap( refers_r, name_r ) );
     USet::iterator in( _uset.insert( newcap ).first );
     return Capability( *in );
   }

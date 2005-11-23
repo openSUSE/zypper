@@ -30,7 +30,7 @@ namespace zypp {
       { }
       
       YUMPatchParser::YUMPatchParser(istream &is, const string& baseUrl)
-      : XMLNodeIterator<YUMPatchDataPtr>(is, baseUrl,PATCHSCHEMA)
+      : XMLNodeIterator<YUMPatchData_Ptr>(is, baseUrl,PATCHSCHEMA)
       {
         fetchNext();
       }
@@ -38,8 +38,8 @@ namespace zypp {
       YUMPatchParser::YUMPatchParser()
       { }
       
-      YUMPatchParser::YUMPatchParser(YUMPatchDataPtr& entry)
-      : XMLNodeIterator<YUMPatchDataPtr>(entry)
+      YUMPatchParser::YUMPatchParser(YUMPatchData_Ptr& entry)
+      : XMLNodeIterator<YUMPatchData_Ptr>(entry)
       { }
       
       
@@ -51,11 +51,11 @@ namespace zypp {
       }
       
       // do the actual processing
-      YUMPatchDataPtr
+      YUMPatchData_Ptr
       YUMPatchParser::process(const xmlTextReaderPtr reader)
       {
         assert(reader);
-        YUMPatchDataPtr patchPtr = new YUMPatchData;
+        YUMPatchData_Ptr patchPtr = new YUMPatchData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         assert(dataNode);
         patchPtr->timestamp = _helper.attribute(dataNode,"timestamp");
@@ -133,7 +133,7 @@ namespace zypp {
       
       
       void 
-      YUMPatchParser::parseAtomsNode(YUMPatchDataPtr dataPtr,
+      YUMPatchParser::parseAtomsNode(YUMPatchData_Ptr dataPtr,
                                      xmlNodePtr formatNode)
       {
         assert(formatNode);
@@ -368,7 +368,7 @@ namespace zypp {
       
       
       void
-      YUMPatchParser::parsePackageNode(YUMPatchDataPtr dataPtr,
+      YUMPatchParser::parsePackageNode(YUMPatchData_Ptr dataPtr,
                                      xmlNodePtr formatNode)
       {
 	shared_ptr<YUMPatchPackage> package(new YUMPatchPackage);
@@ -441,7 +441,7 @@ namespace zypp {
       }
       
       void
-      YUMPatchParser::parseScriptNode(YUMPatchDataPtr dataPtr,
+      YUMPatchParser::parseScriptNode(YUMPatchData_Ptr dataPtr,
                                      xmlNodePtr formatNode)
       {
 	shared_ptr<YUMPatchScript> script(new YUMPatchScript);
@@ -494,7 +494,7 @@ namespace zypp {
       }
       
       void
-      YUMPatchParser::parseMessageNode(YUMPatchDataPtr dataPtr,
+      YUMPatchParser::parseMessageNode(YUMPatchData_Ptr dataPtr,
                                      xmlNodePtr formatNode)
       {
 	shared_ptr<YUMPatchMessage> message(new YUMPatchMessage);

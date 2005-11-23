@@ -34,8 +34,8 @@ namespace zypp
         public:
           typedef ResImplConnect                  Self;
           typedef typename _Res::Impl             Impl;
-          typedef base::shared_ptr<Impl>          ImplPtr;
-          // Ptr typed not needed
+          typedef base::shared_ptr<Impl>          Impl_Ptr;
+          // Ptr types not needed
           // typedef base::intrusive_ptr<Self>       Ptr;
           // typedef base::intrusive_ptr<const Self> constPtr;
         public:
@@ -43,14 +43,14 @@ namespace zypp
           ResImplConnect( const std::string & name_r,
                           const Edition & edition_r,
                           const Arch & arch_r,
-                          ImplPtr impl_r )
+                          Impl_Ptr impl_r )
           : _Res( name_r, edition_r, arch_r )
           , _impl( impl_r )
           { _impl->_backRef = this; }
           virtual ~ResImplConnect()
           { _impl->_backRef = 0; }
         private:
-          ImplPtr _impl;
+          Impl_Ptr _impl;
           virtual Impl &       pimpl()       { return *_impl; }
           virtual const Impl & pimpl() const { return *_impl; }
         };

@@ -29,7 +29,7 @@ namespace zypp {
       
       
       YUMPrimaryParser::YUMPrimaryParser(istream &is, const string& baseUrl)
-        : XMLNodeIterator<YUMPrimaryDataPtr>(is, baseUrl,PRIMARYSCHEMA)
+        : XMLNodeIterator<YUMPrimaryData_Ptr>(is, baseUrl,PRIMARYSCHEMA)
       {
         fetchNext();
       }
@@ -37,8 +37,8 @@ namespace zypp {
       YUMPrimaryParser::YUMPrimaryParser()
       { }
       
-      YUMPrimaryParser::YUMPrimaryParser(YUMPrimaryDataPtr& entry)
-      : XMLNodeIterator<YUMPrimaryDataPtr>(entry)
+      YUMPrimaryParser::YUMPrimaryParser(YUMPrimaryData_Ptr& entry)
+      : XMLNodeIterator<YUMPrimaryData_Ptr>(entry)
       { }
       
       
@@ -60,11 +60,11 @@ namespace zypp {
       
       
       // do the actual processing
-      YUMPrimaryDataPtr
+      YUMPrimaryData_Ptr
       YUMPrimaryParser::process(const xmlTextReaderPtr reader)
       {
         assert(reader);
-        YUMPrimaryDataPtr dataPtr = new YUMPrimaryData;
+        YUMPrimaryData_Ptr dataPtr = new YUMPrimaryData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         assert(dataNode);
       
@@ -131,7 +131,7 @@ namespace zypp {
       
       
       void 
-      YUMPrimaryParser::parseFormatNode(YUMPrimaryDataPtr dataPtr,
+      YUMPrimaryParser::parseFormatNode(YUMPrimaryData_Ptr dataPtr,
                                               xmlNodePtr formatNode)
       {
         assert(formatNode);

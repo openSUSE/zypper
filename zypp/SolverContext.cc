@@ -70,7 +70,7 @@ namespace zypp
   //	METHOD NAME : SolverContext::SolverContext
   //	METHOD TYPE : Ctor
   //
-  SolverContext::SolverContext( detail::SolverContextImplPtr impl_r )
+  SolverContext::SolverContext( detail::SolverContextImpl_Ptr impl_r )
   : _pimpl( impl_r )
   {}
 
@@ -85,9 +85,9 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : SolverContext::sayFriend
-  //	METHOD TYPE : detail::constSolverContextImplPtr
+  //	METHOD TYPE : detail::constSolverContextImpl_Ptr
   //
-  detail::constSolverContextImplPtr SolverContext::sayFriend() const
+  detail::SolverContextImpl_constPtr SolverContext::sayFriend() const
   { return _pimpl; }
 
   /******************************************************************

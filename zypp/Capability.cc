@@ -27,7 +27,7 @@ namespace zypp
   //	METHOD NAME : Capability::Capability
   //	METHOD TYPE : Ctor
   //
-  Capability::Capability( ImplPtr impl_r )
+  Capability::Capability( Impl_Ptr impl_r )
   : _pimpl( impl_r )
   {}
 

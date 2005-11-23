@@ -27,7 +27,7 @@ namespace zypp {
       /**
       * @short Parser for YUM other.xml files
       * Use this class as an iterator that produces, one after one,
-      * YUMOtherDataPtr(s) for the XML package elements.
+      * YUMOtherData_Ptr(s) for the XML package elements.
       * Here's an example:
       * 
       * for (YUMOtherParser iter(anIstream, baseUrl),
@@ -44,7 +44,7 @@ namespace zypp {
       * continue parsing, XMLNodeIterator will log it and consider the input as finished.
       * You can query the exit status with errorStatus().
       */
-      class YUMOtherParser : public XMLNodeIterator<YUMOtherDataPtr>
+      class YUMOtherParser : public XMLNodeIterator<YUMOtherData_Ptr>
       {
       public:
         /**
@@ -55,7 +55,7 @@ namespace zypp {
         YUMOtherParser(std::istream &is, const std::string &baseUrl);
     
         YUMOtherParser();
-        YUMOtherParser(YUMOtherDataPtr& entry);
+        YUMOtherParser(YUMOtherData_Ptr& entry);
         
         /**
          * Destructor.
@@ -75,7 +75,7 @@ namespace zypp {
          * @param reader 
          * @return 
          */
-        virtual YUMOtherDataPtr process(const xmlTextReaderPtr reader);
+        virtual YUMOtherData_Ptr process(const xmlTextReaderPtr reader);
     
         /**
          * converts the xml stuff to c++ stuff and filters the right namespaces

@@ -39,16 +39,16 @@ namespace zypp
     SolverContext();
     /** Factory ctor */
     explicit
-    SolverContext( detail::SolverContextImplPtr impl_r );
+    SolverContext( detail::SolverContextImpl_Ptr impl_r );
     /** Dtor */
     ~SolverContext();
 
   private:
     /** Pointer to implementation */
-    detail::SolverContextImplPtr _pimpl;
+    detail::SolverContextImpl_Ptr _pimpl;
   public:
     /** Avoid a bunch of friend decl. */
-    detail::constSolverContextImplPtr sayFriend() const;
+    detail::SolverContextImpl_constPtr sayFriend() const;
   };
   ///////////////////////////////////////////////////////////////////
 

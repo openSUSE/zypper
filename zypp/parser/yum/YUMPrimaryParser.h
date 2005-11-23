@@ -27,7 +27,7 @@ namespace zypp {
       /**
       * @short Parser for YUM primary.xml files (containing package metadata)
       * Use this class as an iterator that produces, one after one,
-      * YUMPrimaryDataPtr(s) for the XML package elements in the input.
+      * YUMPrimaryData_Ptr(s) for the XML package elements in the input.
       * Here's an example:
       *
       * for (YUMPrimaryParser iter(anIstream, baseUrl),
@@ -44,20 +44,20 @@ namespace zypp {
       * continue parsing, XMLNodeIterator will log it and consider the input as finished.
       * You can query the exit status with errorStatus().
       */
-      class YUMPrimaryParser : public XMLNodeIterator<YUMPrimaryDataPtr>
+      class YUMPrimaryParser : public XMLNodeIterator<YUMPrimaryData_Ptr>
       {
       public:
         YUMPrimaryParser(std::istream &is, const std::string &baseUrl);
         YUMPrimaryParser();
-        YUMPrimaryParser(YUMPrimaryDataPtr& entry);
+        YUMPrimaryParser(YUMPrimaryData_Ptr& entry);
         virtual ~YUMPrimaryParser();
     
       private:
         // FIXME move needed method to a common class, inherit it
         friend class YUMPatchParser;
         virtual bool isInterested(const xmlNodePtr nodePtr);
-        virtual YUMPrimaryDataPtr process(const xmlTextReaderPtr reader);
-        void parseFormatNode(YUMPrimaryDataPtr dataPtr,
+        virtual YUMPrimaryData_Ptr process(const xmlTextReaderPtr reader);
+        void parseFormatNode(YUMPrimaryData_Ptr dataPtr,
                              xmlNodePtr formatNode);
         void parseDependencyEntries(std::list<YUMDependency> *depList, 
                                     xmlNodePtr depNode);

@@ -29,7 +29,7 @@ namespace zypp {
       * @short Parser for YUM group files.
       *
       * Use this class as an iterator that produces, one after one,
-      * YUMGroupDataPtr(s) for the XML group elements.
+      * YUMGroupData_Ptr(s) for the XML group elements.
       * Here's an example:
       *
       * for (YUMGroupParser iter(anIstream, baseUrl),
@@ -46,20 +46,20 @@ namespace zypp {
       * continue parsing, XMLNodeIterator will log it and consider the input as finished.
       * You can query the exit status with errorStatus().
       */
-      class YUMGroupParser : public XMLNodeIterator<YUMGroupDataPtr>
+      class YUMGroupParser : public XMLNodeIterator<YUMGroupData_Ptr>
       {
       public:
         YUMGroupParser(std::istream &is, const std::string &baseUrl);
         YUMGroupParser();
-        YUMGroupParser(YUMGroupDataPtr& entry);
+        YUMGroupParser(YUMGroupData_Ptr& entry);
         virtual ~YUMGroupParser();
         
       private:
         virtual bool isInterested(const xmlNodePtr nodePtr);
-        virtual YUMGroupDataPtr process(const xmlTextReaderPtr reader);
-        void parseGrouplist(YUMGroupDataPtr dataPtr,
+        virtual YUMGroupData_Ptr process(const xmlTextReaderPtr reader);
+        void parseGrouplist(YUMGroupData_Ptr dataPtr,
                             xmlNodePtr node);
-        void parsePackageList(YUMGroupDataPtr dataPtr,
+        void parsePackageList(YUMGroupData_Ptr dataPtr,
                               xmlNodePtr node);
         
         LibXMLHelper _helper;

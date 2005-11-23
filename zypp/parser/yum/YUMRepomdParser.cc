@@ -31,8 +31,8 @@ namespace zypp {
       YUMRepomdParser::YUMRepomdParser()
       { }
       
-      YUMRepomdParser::YUMRepomdParser(YUMRepomdDataPtr& entry)
-      : XMLNodeIterator<YUMRepomdDataPtr>(entry)
+      YUMRepomdParser::YUMRepomdParser(YUMRepomdData_Ptr& entry)
+      : XMLNodeIterator<YUMRepomdData_Ptr>(entry)
       { }
       
       
@@ -44,11 +44,11 @@ namespace zypp {
       }
       
       // do the actual processing
-      YUMRepomdDataPtr
+      YUMRepomdData_Ptr
       YUMRepomdParser::process(const xmlTextReaderPtr reader)
       {
         assert(reader);
-        YUMRepomdDataPtr repoPtr = new YUMRepomdData;
+        YUMRepomdData_Ptr repoPtr = new YUMRepomdData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         assert(dataNode);
         repoPtr->type = _helper.attribute(dataNode,"type");
@@ -83,7 +83,7 @@ namespace zypp {
       
         
       YUMRepomdParser::YUMRepomdParser(istream &is, const string &baseUrl)
-      : XMLNodeIterator<YUMRepomdDataPtr>(is, baseUrl,REPOMDSCHEMA)
+      : XMLNodeIterator<YUMRepomdData_Ptr>(is, baseUrl,REPOMDSCHEMA)
       {
         fetchNext();
       }

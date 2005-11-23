@@ -42,7 +42,7 @@ namespace zypp
   {
     /** \name Relational operators
      * These are the \em real relational operator contants to
-     * use. Don't mind that it's not an enum. See also: \ref inSwitch
+     * use. Don't mind that it's not an enum. See also: \ref zypp::Rel::inSwitch
     */
     //@{
     static const Rel EQ;

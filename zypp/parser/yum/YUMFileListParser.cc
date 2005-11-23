@@ -33,7 +33,7 @@ namespace zypp {
 
 
       YUMFileListParser::YUMFileListParser(istream &is, const string& baseUrl)
-      : XMLNodeIterator<YUMFileListDataPtr>(is, baseUrl,FILELISTSCHEMA)
+      : XMLNodeIterator<YUMFileListData_Ptr>(is, baseUrl,FILELISTSCHEMA)
       {
         fetchNext();
       }
@@ -41,8 +41,8 @@ namespace zypp {
       YUMFileListParser::YUMFileListParser()
       { }
       
-      YUMFileListParser::YUMFileListParser(YUMFileListDataPtr& entry)
-      : XMLNodeIterator<YUMFileListDataPtr>(entry)
+      YUMFileListParser::YUMFileListParser(YUMFileListData_Ptr& entry)
+      : XMLNodeIterator<YUMFileListData_Ptr>(entry)
       { }
       
       
@@ -65,11 +65,11 @@ namespace zypp {
       
       
       // do the actual processing
-      YUMFileListDataPtr
+      YUMFileListData_Ptr
       YUMFileListParser::process(const xmlTextReaderPtr reader)
       {
         assert(reader);
-        YUMFileListDataPtr dataPtr = new YUMFileListData;
+        YUMFileListData_Ptr dataPtr = new YUMFileListData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         assert(dataNode);
       

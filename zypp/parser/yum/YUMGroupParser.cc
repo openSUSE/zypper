@@ -28,8 +28,8 @@ namespace zypp {
       YUMGroupParser::YUMGroupParser()
       { }
       
-      YUMGroupParser::YUMGroupParser(YUMGroupDataPtr& entry)
-      : XMLNodeIterator<YUMGroupDataPtr>(entry)
+      YUMGroupParser::YUMGroupParser(YUMGroupData_Ptr& entry)
+      : XMLNodeIterator<YUMGroupData_Ptr>(entry)
       { }
       
       
@@ -45,11 +45,11 @@ namespace zypp {
       }
       
       // do the actual processing
-      YUMGroupDataPtr
+      YUMGroupData_Ptr
       YUMGroupParser::process(const xmlTextReaderPtr reader)
       {
         assert(reader);
-        YUMGroupDataPtr dataPtr = new YUMGroupData;
+        YUMGroupData_Ptr dataPtr = new YUMGroupData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         assert(dataNode);
         
@@ -92,7 +92,7 @@ namespace zypp {
         return dataPtr;
       } /* end process */
       
-      void YUMGroupParser::parseGrouplist(YUMGroupDataPtr dataPtr,
+      void YUMGroupParser::parseGrouplist(YUMGroupData_Ptr dataPtr,
                                                 xmlNodePtr node)
       {
         assert(dataPtr);
@@ -117,7 +117,7 @@ namespace zypp {
       }
       
       
-      void YUMGroupParser::parsePackageList(YUMGroupDataPtr dataPtr,
+      void YUMGroupParser::parsePackageList(YUMGroupData_Ptr dataPtr,
                                                   xmlNodePtr node)
       {
         assert(dataPtr);
@@ -147,7 +147,7 @@ namespace zypp {
       
       
       YUMGroupParser::YUMGroupParser(istream &is, const string &baseUrl)
-      : XMLNodeIterator<YUMGroupDataPtr>(is, baseUrl,GROUPSCHEMA)
+      : XMLNodeIterator<YUMGroupData_Ptr>(is, baseUrl,GROUPSCHEMA)
       { 
         fetchNext();
       }

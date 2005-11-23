@@ -50,14 +50,14 @@ namespace zypp
       /**  */
       CapSet _freshens;
 
-      static DependenciesImplPtr nodeps()
+      static DependenciesImpl_Ptr nodeps()
       {
         if ( !_nodeps ) { _nodeps = new DependenciesImpl; _nodeps->ref(); }
         return _nodeps;
       }
 
     private:
-      static DependenciesImplPtr _nodeps;
+      static DependenciesImpl_Ptr _nodeps;
     };
     ///////////////////////////////////////////////////////////////////
     IMPL_PTR_TYPE(DependenciesImpl)
@@ -149,7 +149,7 @@ namespace zypp
 #define ZYPP_DEPENDENCIES_COW \
 if(_pimpl->refCount()>1) \
 { \
-  detail::DependenciesImplPtr _cow_tmp = new detail::DependenciesImpl; \
+  detail::DependenciesImpl_Ptr _cow_tmp = new detail::DependenciesImpl; \
   _cow_tmp->_provides = _pimpl->_provides; \
   _cow_tmp->_prerequires = _pimpl->_prerequires; \
   _cow_tmp->_requires = _pimpl->_requires; \

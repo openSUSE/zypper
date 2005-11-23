@@ -26,7 +26,7 @@ namespace zypp {
       /**
       * @short Parser for YUM repomd.xml files (describing the repository)
       * Use this class as an iterator that produces, one after one,
-      * YUMRepomdDataPtr(s) for the XML package elements.
+      * YUMRepomdData_Ptr(s) for the XML package elements.
       * Here's an example:
       *
       * for (YUMRepomdParser iter(anIstream, baseUrl),
@@ -43,17 +43,17 @@ namespace zypp {
       * continue parsing, XMLNodeIterator will log it and consider the input as finished.
       * You can query the exit status with errorStatus().
       */
-      class YUMRepomdParser : public XMLNodeIterator<YUMRepomdDataPtr>
+      class YUMRepomdParser : public XMLNodeIterator<YUMRepomdData_Ptr>
       {
       public:
         YUMRepomdParser(std::istream &is, const std::string &baseUrl);
         YUMRepomdParser();
-        YUMRepomdParser(YUMRepomdDataPtr& entry);
+        YUMRepomdParser(YUMRepomdData_Ptr& entry);
         virtual ~YUMRepomdParser();
     
       private:
         virtual bool isInterested(const xmlNodePtr nodePtr);
-        virtual YUMRepomdDataPtr process(const xmlTextReaderPtr reader);
+        virtual YUMRepomdData_Ptr process(const xmlTextReaderPtr reader);
     
         LibXMLHelper _helper;
       };

@@ -30,7 +30,7 @@ namespace zypp {
 
 
       YUMOtherParser::YUMOtherParser(istream &is, const string& baseUrl)
-      : XMLNodeIterator<YUMOtherDataPtr>(is, baseUrl,OTHERSCHEMA)
+      : XMLNodeIterator<YUMOtherData_Ptr>(is, baseUrl,OTHERSCHEMA)
       {
         fetchNext();
       }
@@ -38,8 +38,8 @@ namespace zypp {
       YUMOtherParser::YUMOtherParser()
       { }
       
-      YUMOtherParser::YUMOtherParser(YUMOtherDataPtr& entry)
-      : XMLNodeIterator<YUMOtherDataPtr>(entry)
+      YUMOtherParser::YUMOtherParser(YUMOtherData_Ptr& entry)
+      : XMLNodeIterator<YUMOtherData_Ptr>(entry)
       { }
       
       
@@ -62,11 +62,11 @@ namespace zypp {
       
       
       // do the actual processing
-      YUMOtherDataPtr
+      YUMOtherData_Ptr
       YUMOtherParser::process(const xmlTextReaderPtr reader)
       {
         assert(reader);
-        YUMOtherDataPtr dataPtr = new YUMOtherData;
+        YUMOtherData_Ptr dataPtr = new YUMOtherData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         assert(dataNode);
       

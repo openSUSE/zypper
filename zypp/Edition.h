@@ -82,7 +82,7 @@ namespace zypp
     /** Hides implementation */
     struct Impl;
     /** Pointer to implementation */
-    base::ImplPtr<Impl> _pimpl;
+    base::RW_pointer<Impl> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 

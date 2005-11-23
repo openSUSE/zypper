@@ -27,7 +27,7 @@ namespace zypp {
       /**
       * @short Parser for YUM primary.xml files (containing package metadata)
       * Use this class as an iterator that produces, one after one,
-      * YUMPatchDataPtr(s) for the XML package elements in the input.
+      * YUMPatchData_Ptr(s) for the XML package elements in the input.
       * Here's an example:
       *
       * for (YUMPatchParser iter(anIstream, baseUrl),
@@ -44,21 +44,21 @@ namespace zypp {
       * continue parsing, XMLNodeIterator will log it and consider the input as finished.
       * You can query the exit status with errorStatus().
       */
-      class YUMPatchParser : public XMLNodeIterator<YUMPatchDataPtr>
+      class YUMPatchParser : public XMLNodeIterator<YUMPatchData_Ptr>
       {
       public:
         YUMPatchParser(std::istream &is, const std::string &baseUrl);
         YUMPatchParser();
-        YUMPatchParser(YUMPatchDataPtr& entry);
+        YUMPatchParser(YUMPatchData_Ptr& entry);
         virtual ~YUMPatchParser();
     
       private:
         virtual bool isInterested(const xmlNodePtr nodePtr);
-        virtual YUMPatchDataPtr process(const xmlTextReaderPtr reader);
-        void parseAtomsNode(YUMPatchDataPtr dataPtr, xmlNodePtr formatNode);
-        void parsePackageNode(YUMPatchDataPtr dataPtr, xmlNodePtr formatNode);
-        void parseMessageNode(YUMPatchDataPtr dataPtr, xmlNodePtr formatNode);
-        void parseScriptNode(YUMPatchDataPtr dataPtr, xmlNodePtr formatNode);
+        virtual YUMPatchData_Ptr process(const xmlTextReaderPtr reader);
+        void parseAtomsNode(YUMPatchData_Ptr dataPtr, xmlNodePtr formatNode);
+        void parsePackageNode(YUMPatchData_Ptr dataPtr, xmlNodePtr formatNode);
+        void parseMessageNode(YUMPatchData_Ptr dataPtr, xmlNodePtr formatNode);
+        void parseScriptNode(YUMPatchData_Ptr dataPtr, xmlNodePtr formatNode);
         void parseFormatNode(YUMPatchPackage *dataPtr, xmlNodePtr formatNode);
         void parsePkgFilesNode(YUMPatchPackage *dataPtr, xmlNodePtr formatNode);
         void parsePkgPlainRpmNode(YUMPatchPackage *dataPtr, xmlNodePtr formatNode);

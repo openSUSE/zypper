@@ -53,11 +53,11 @@ namespace zypp
 
   private:
     typedef capability::CapabilityImpl          Impl;
-    typedef capability::CapabilityImpl_Ptr      ImplPtr ;
-    typedef capability::CapabilityImpl_constPtr ImplconstPtr;
+    typedef capability::CapabilityImpl_Ptr      Impl_Ptr ;
+    typedef capability::CapabilityImpl_constPtr Impl_constPtr;
     /** Factory ctor */
     explicit
-    Capability( ImplPtr impl_r );
+    Capability( Impl_Ptr impl_r );
   public:
     /** Factory */
     typedef CapFactory Factory;
@@ -77,7 +77,7 @@ namespace zypp
 
   private:
     /** Pointer to implementation */
-    base::ImplPtr<Impl,ImplPtr> _pimpl;
+    base::RW_pointer<Impl,Impl_Ptr> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 
