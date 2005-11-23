@@ -219,7 +219,8 @@ namespace zypp {
             string name = _helper.name(child);
             if (name == "entry") { 
               depList->push_back
-                (YUMDependency(_helper.attribute(child,"name"),
+                (YUMDependency(_helper.attribute(child,"kind"),
+                               _helper.attribute(child,"name"),
                                _helper.attribute(child,"flags"),
                                _helper.attribute(child,"epoch"),
                                _helper.attribute(child,"ver"),

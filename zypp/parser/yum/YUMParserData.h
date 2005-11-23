@@ -49,12 +49,14 @@ namespace zypp {
       class YUMDependency {
       public:
         YUMDependency();
-        YUMDependency(const std::string& name,
+        YUMDependency(const std::string& kind,
+                      const std::string& name,
                       const std::string& flags,
                       const std::string& epoch,
                       const std::string& ver,
                       const std::string& rel,
                       const std::string& pre);
+        std::string kind;
         std::string name;
         std::string flags;
         std::string epoch;

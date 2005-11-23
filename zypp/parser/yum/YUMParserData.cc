@@ -22,13 +22,15 @@ namespace zypp {
       YUMDependency::YUMDependency()
       { }
       
-      YUMDependency::YUMDependency(const std::string& name,
+      YUMDependency::YUMDependency(const std::string& kind,
+                                   const std::string& name,
                                    const std::string& flags,
                                    const std::string& epoch,
                                    const std::string& ver,
                                    const std::string& rel,
                                    const std::string& pre)
-      : name(name),
+      : kind(kind),
+      name(name),
       flags(flags),
       epoch(epoch),
       ver(ver),
@@ -175,6 +177,8 @@ using namespace zypp::parser::yum;
   
 ostream& operator<<(ostream &out, const YUMDependency& data)
 {
+  if (! data.kind.empty())
+    out << "[" << data.kind << "] ";
   out << data.name << " " << data.flags << " ";
   if (! data.epoch.empty())
     out << data.epoch << "-";
