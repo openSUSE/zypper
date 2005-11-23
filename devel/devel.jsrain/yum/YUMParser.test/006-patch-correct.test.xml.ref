@@ -9,13 +9,13 @@ Patch Data:
   epoch: 0
   version: 1
   release: 2
-  provides: foo-patch-fitzefatze  -
-  conflicts: foo-oldpatch EQ 1-1-2
+  provides: [patch] foo-patch-fitzefatze  -
+  conflicts: [package] foo-oldpatch EQ 1-1-2
   obsoletes: 
   freshen: 
-  requires: foo LE 2-3-4
-foo-devel LE 3-4-5
-blah-234 EQ 4-5-6
+  requires: [package] foo LE 2-3-4
+[package] foo-devel LE 3-4-5
+[patch] blah-234 EQ 4-5-6
   category: security
   reboot needed: 1
   affects package manager: 1
@@ -36,8 +36,8 @@ Script Data:
   conflicts: 
   obsoletes: 
   freshen: 
-  requires: foo LE 2-3-4
-foo-devel LE 3-4-5
+  requires: [package] foo LE 2-3-4
+[package] foo-devel LE 3-4-5
   do script: #!/bin/bash
   undo script: #!/bin/unbash
 
@@ -53,8 +53,8 @@ Message Data:
   conflicts: 
   obsoletes: 
   freshen: 
-  requires: foo LE 2-3-4
-foo-devel LE 3-4-5
+  requires: [package] foo LE 2-3-4
+[package] foo-devel LE 3-4-5
   text: Just note that the very critical package foo will be installed just now
 
 Atom data
