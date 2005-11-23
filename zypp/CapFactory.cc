@@ -115,7 +115,7 @@ namespace zypp
   /** \todo fix it */
   Capability CapFactory::parse( const Resolvable::Kind & refers_r,
                                 const std::string & name_r,
-                                RelOp op_r,
+                                Rel op_r,
                                 const Edition & edition_r ) const
   {
     CapabilityImplPtr newcap( new capability::NamedCap( refers_r, name_r ) );

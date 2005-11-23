@@ -82,8 +82,8 @@ namespace zypp
   const std::string & Edition::release() const
   { return _pimpl->_release; }
 
-  /** \todo implement */
-  bool Edition::compare( RelOp op, const Edition & lhs, const Edition & rhs )
+  /** \todo copy implementation from Y2PM */
+  bool Edition::compare( Rel op, const Edition & lhs, const Edition & rhs )
   {
     return false;
   }

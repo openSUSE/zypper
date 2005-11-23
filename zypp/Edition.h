@@ -17,7 +17,7 @@
 
 #include "zypp/base/PtrTypes.h"
 
-#include "zypp/RelOp.h"
+#include "zypp/Rel.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -57,9 +57,9 @@ namespace zypp
 
   public:
     /** Compare Editions by relationam operator \a op.
-     * \see RelOp.
+     * \see Rel.
     */
-    static bool compare( RelOp op, const Edition & lhs, const Edition & rhs );
+    static bool compare( Rel op, const Edition & lhs, const Edition & rhs );
 
   private:
     /** Hides implementation */
@@ -78,27 +78,27 @@ namespace zypp
 
   /** \relates Edition */
   inline bool operator==( const Edition & lhs, const Edition & rhs )
-  { return Edition::compare( EQ, lhs, rhs ); }
+  { return Edition::compare( Rel::EQ, lhs, rhs ); }
 
   /** \relates Edition */
   inline bool operator!=( const Edition & lhs, const Edition & rhs )
-  { return Edition::compare( NE, lhs, rhs );; }
+  { return Edition::compare( Rel::NE, lhs, rhs );; }
 
   /** \relates Edition */
   inline bool operator<( const Edition & lhs, const Edition & rhs )
-  { return Edition::compare( LT, lhs, rhs ); }
+  { return Edition::compare( Rel::LT, lhs, rhs ); }
 
   /** \relates Edition */
   inline bool operator<=( const Edition & lhs, const Edition & rhs )
-  { return Edition::compare( LE, lhs, rhs ); }
+  { return Edition::compare( Rel::LE, lhs, rhs ); }
 
   /** \relates Edition */
   inline bool operator>( const Edition & lhs, const Edition & rhs )
-  { return Edition::compare( GT, lhs, rhs ); }
+  { return Edition::compare( Rel::GT, lhs, rhs ); }
 
   /** \relates Edition */
   inline bool operator>=( const Edition & lhs, const Edition & rhs )
-  { return Edition::compare( GE, lhs, rhs ); }
+  { return Edition::compare( Rel::GE, lhs, rhs ); }
 
   /** \relates Edition */
   inline int compare( const Edition & lhs, const Edition & rhs )
