@@ -37,6 +37,8 @@ namespace zypp
    * to \c false. While \ref ANY should always resolve to \c true, and
    * may be handy in queries when you're looking for a Resolvable in
    * \c ANY Edition.
+   *
+   * \ingroup g_EnumerationClass
   */
   struct Rel
   {

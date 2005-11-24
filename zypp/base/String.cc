@@ -27,6 +27,11 @@ namespace zypp
     namespace string
     { /////////////////////////////////////////////////////////////////
 
+      /******************************************************************
+       **
+       **      FUNCTION NAME : form
+       **      FUNCTION TYPE : std::string
+      */
       std::string form( const char * format, ... )
       {
         struct SafeBuf
@@ -46,6 +51,43 @@ namespace zypp
 
         return safe.asString();
       }
+
+      /******************************************************************
+       **
+       **      FUNCTION NAME : toLower
+       **      FUNCTION TYPE : std::string
+      */
+      std::string toLower( const std::string & s )
+      {
+        if ( s.empty() )
+          return s;
+
+        std::string ret( s );
+        for ( std::string::size_type i = 0; i < ret.length(); ++i ) {
+          if ( isupper( ret[i] ) )
+            ret[i] = static_cast<char>(tolower( ret[i] ));
+        }
+        return ret;
+      }
+
+      /******************************************************************
+       **
+       **      FUNCTION NAME : toUpper
+       **      FUNCTION TYPE : std::string
+      */
+      std::string toUpper( const std::string & s )
+      {
+        if ( s.empty() )
+          return s;
+
+        std::string ret( s );
+        for ( std::string::size_type i = 0; i < ret.length(); ++i ) {
+          if ( islower( ret[i] ) )
+            ret[i] = static_cast<char>(toupper( ret[i] ));
+        }
+        return ret;
+      }
+
 
     /////////////////////////////////////////////////////////////////
     } // namespace string
