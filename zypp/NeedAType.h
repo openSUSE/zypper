@@ -81,6 +81,21 @@ namespace zypp
    Text, while a a packages file list would be list<string> */
   typedef std::list<std::string> Text;
 
+  /** Offer a License text and methods to remember confirmation. */
+  typedef std::list<std::string> License;
+
+  /** An rpm package group value. Also provide acces to a
+   * (singleton) tree like group hierarchy which contains
+   * all existing groups. No more need to fiddle with YStringTreeItem
+   * classes and forgetting to add parsed groups there for use in the UI.
+   * PackageGroup can be selforganizing.
+  */
+  typedef std::string PackageGroup;
+
+  /**
+   */
+  typedef std::list<std::string> PackageKeywords;
+
   /** Class representing a Date (time_t). Basically store a time_t and offer
   conversions into formated strings. */
   typedef time_t Date;

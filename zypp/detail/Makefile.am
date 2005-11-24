@@ -33,6 +33,7 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_detail.la
 lib@PACKAGE@_detail_la_SOURCES = \
 	ResolvableImpl.cc	\
 	ResObjectImplIf.cc	\
+	PackageImplIf.cc	\
 	\
 	\
 	\

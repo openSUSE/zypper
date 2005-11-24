@@ -36,104 +36,92 @@ namespace zypp
       typedef Package ResType;
 
     public:
+      /** \name Rpm Package Attributes. */
+      //@{
+      /** */
+      virtual Date buildtime() const PURE_VIRTUAL;
+      /** */
+      virtual std::string buildhost() const PURE_VIRTUAL;
+      /** */
+      virtual Date installtime() const PURE_VIRTUAL;
+      /** */
+      virtual std::string distribution() const PURE_VIRTUAL;
+      /** */
+      virtual Vendor vendor() const PURE_VIRTUAL;
+      /** */
+      virtual Label license() const PURE_VIRTUAL;
+      /** */
+      virtual std::string packager() const PURE_VIRTUAL;
+      /** */
+      virtual PackageGroup group() const PURE_VIRTUAL;
+      /** */
+      virtual Text changelog() const PURE_VIRTUAL;
+      /** Don't ship it as class Url, because it might be
+       * in fact anything but a legal Url. */
+      virtual std::string url() const PURE_VIRTUAL;
+      /** */
+      virtual std::string os() const PURE_VIRTUAL;
+      /** */
+      virtual std::list<std::string> prein() const PURE_VIRTUAL;
+      /** */
+      virtual std::list<std::string> postin() const PURE_VIRTUAL;
+      /** */
+      virtual std::list<std::string> preun() const PURE_VIRTUAL;
+      /** */
+      virtual std::list<std::string> postun() const PURE_VIRTUAL;
+      /** */
+      virtual FSize sourcesize() const PURE_VIRTUAL;
+      /** */
+      virtual FSize archivesize() const PURE_VIRTUAL;
+      /** */
+      virtual std::list<std::string> authors() const PURE_VIRTUAL;
+      /** */
+      virtual std::list<std::string> filenames() const PURE_VIRTUAL;
+      //@}
+
+      /** \name Additional Package Attributes.
+       * \todo review what's actually needed here. Maybe worth grouping
+       * all the package rertieval related stuff in a class. Easier to ship
+       * and handle it.
+      */
+      //@{
+      /** */
+      virtual License licenseToConfirm() const PURE_VIRTUAL;
 #if 0
       /** */
-      virtual std::list<std::string> insnotify() const;
+      virtual std::string sourceloc() const PURE_VIRTUAL;
       /** */
-      virtual std::list<std::string> delnotify() const;
+      virtual void du( PkgDu & dudata_r ) const PURE_VIRTUAL;
       /** */
-      virtual FSize size() const;
+      virtual std::string location() const PURE_VIRTUAL;
       /** */
-      virtual bool providesSources() const;
+      virtual unsigned int medianr() const PURE_VIRTUAL;
       /** */
-      virtual std::string instSrcLabel() const;
+      virtual PackageKeywords keywords() const PURE_VIRTUAL;
       /** */
-      virtual Vendor instSrcVendor() const;
+      virtual std::string md5sum() const PURE_VIRTUAL;
       /** */
-      virtual unsigned instSrcRank() const;
+      virtual std::string externalUrl() const PURE_VIRTUAL;
       /** */
-      virtual PkgSplitSet splitprovides() const;
+      virtual std::list<Edition> patchRpmBaseVersions() const PURE_VIRTUAL;
       /** */
-      virtual Date buildtime() const;
+      virtual FSize patchRpmSize() const PURE_VIRTUAL;
       /** */
-      virtual std::string buildhost() const;
+      virtual bool forceInstall() const PURE_VIRTUAL;
       /** */
-      virtual Date installtime() const;
+      virtual std::string patchRpmMD5() const PURE_VIRTUAL;
       /** */
-      virtual std::string distribution() const;
+      virtual bool isRemote() const PURE_VIRTUAL;
       /** */
-      virtual Vendor vendor() const;
+      virtual PMError providePkgToInstall( Pathname& path_r ) const PURE_VIRTUAL;
       /** */
-      virtual std::string license() const;
+      virtual PMError provideSrcPkgToInstall( Pathname& path_r ) const PURE_VIRTUAL;
       /** */
-      virtual std::list<std::string> licenseToConfirm() const;
+      virtual constInstSrcPtr source() const PURE_VIRTUAL;
       /** */
-      virtual std::string packager() const;
-      /** */
-      virtual std::string group() const;
-      /** */
-      virtual YStringTreeItem * group_ptr() const;
-      /** */
-      virtual std::list<std::string> changelog() const;
-      /** */
-      virtual std::string url() const;
-      /** */
-      virtual std::string os() const;
-      /** */
-      virtual std::list<std::string> prein() const;
-      /** */
-      virtual std::list<std::string> postin() const;
-      /** */
-      virtual std::list<std::string> preun() const;
-      /** */
-      virtual std::list<std::string> postun() const;
-      /** */
-      virtual std::string sourceloc() const;
-      /** */
-      virtual FSize sourcesize() const;
-      /** */
-      virtual FSize archivesize() const;
-      /** */
-      virtual std::list<std::string> authors() const;
-      /** */
-      virtual std::list<std::string> filenames() const;
-      /** */
-      virtual std::list<std::string> recommends() const;
-      /** */
-      virtual std::list<std::string> suggests() const;
-      /** */
-      virtual std::string location() const;
-      /** */
-      virtual unsigned int medianr() const;
-      /** */
-      virtual std::list<std::string> keywords() const;
-      /** */
-      virtual std::string md5sum() const;
-      /** */
-      virtual std::string externalUrl() const;
-      /** */
-      virtual std::list<PkgEdition> patchRpmBaseVersions() const;
-      /** */
-      virtual FSize patchRpmSize() const;
-      /** */
-      virtual bool forceInstall() const;
-      /** */
-      virtual std::string patchRpmMD5() const;
-      /** */
-      virtual bool isRemote() const;
-      /** */
-      virtual PMError providePkgToInstall( Pathname& path_r ) const;
-      /** */
-      virtual PMError provideSrcPkgToInstall( Pathname& path_r ) const;
-      /** */
-      virtual constInstSrcPtr source() const;
-      /** */
-      virtual bool prefererCandidate() const;
-      /** */
-      virtual void du( PkgDu & dudata_r ) const;
-      /** */
-      virtual std::list<PMPackageDelta> deltas() const;
+      virtual std::list<PMPackageDelta> deltas() const PURE_VIRTUAL;
 #endif
+      //@}
     };
     ///////////////////////////////////////////////////////////////////
 
