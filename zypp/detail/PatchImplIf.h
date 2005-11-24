@@ -50,6 +50,8 @@ namespace zypp
       virtual bool reboot_needed() const = 0;
       /** Does the patch affect the package manager itself? */
       virtual bool affects_pkg_manager() const = 0;
+      /** */
+      virtual FSize size() const;
 
       /** Is the patch installation interactive? (does it need user input?) */
       virtual bool interactive() = 0;

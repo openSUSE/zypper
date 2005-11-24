@@ -45,7 +45,6 @@ namespace zypp
 	virtual Text description() const;
 	virtual Text insnotify() const;
 	virtual Text delnotify() const;
-	virtual FSize size() const;
 	virtual bool providesSources() const;
 	virtual Label instSrcLabel() const;
 	virtual Vendor instSrcVendor() const;

@@ -58,9 +58,6 @@ namespace zypp
       Text YUMMessageImpl::delnotify() const
       { return ResObjectImplIf::delnotify(); }
 
-      FSize YUMMessageImpl::size() const
-      { return ResObjectImplIf::size(); }
-
       bool YUMMessageImpl::providesSources() const
       { return ResObjectImplIf::providesSources(); }
 

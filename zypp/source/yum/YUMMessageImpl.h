@@ -48,8 +48,6 @@ namespace zypp
 	/** */
 	virtual Text delnotify() const;
 	/** */
-	virtual FSize size() const;
-	/** */
 	virtual bool providesSources() const;
 	/** */
 	virtual Label instSrcLabel() const;

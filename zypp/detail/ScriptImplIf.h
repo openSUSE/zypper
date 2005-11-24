@@ -42,6 +42,8 @@ namespace zypp
       virtual std::string undo_script() const = 0;
       /** Check whether script to undo the change is available */
       virtual bool undo_available() const = 0;
+      /** */
+      virtual FSize size() const;
     };
     ///////////////////////////////////////////////////////////////////
 

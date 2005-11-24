@@ -65,9 +65,6 @@ namespace zypp
       Text YUMScriptImpl::delnotify() const
       { return ResObjectImplIf::delnotify(); }
 
-      FSize YUMScriptImpl::size() const
-      { return ResObjectImplIf::size(); }
-
       bool YUMScriptImpl::providesSources() const
       { return ResObjectImplIf::providesSources(); }
 
