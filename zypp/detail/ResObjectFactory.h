@@ -81,7 +81,7 @@ namespace zypp
       {
         if ( ! impl_r )
           throw ( "makeResolvableFromImpl: NULL Impl " );
-        if ( impl_r->self() )
+        if ( impl_r->hasBackRef() )
           throw ( "makeResolvableFromImpl: Impl already managed" );
         return new
                _resobjectfactory_detail::ResImplConnect<typename _Impl::ResType>

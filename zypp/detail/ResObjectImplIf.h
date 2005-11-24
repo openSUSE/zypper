@@ -19,6 +19,9 @@
 
 #include "zypp/NeedAType.h" // volatile include propagating type drafts
 
+// will be defined =0 later
+#define PURE_VIRTUAL
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -34,7 +37,6 @@ namespace zypp
     //	CLASS NAME : ResObjectImplIf
     //
     /** Abstact ResObject implementation interface.
-     *
      * \todo We should rename the detail::*Impl classes, and classify
      * them into Dumb (holding no real data, provided the ImplIf dtor is
      * the only prure virtual) and FullStore (providing a protected variable
@@ -44,19 +46,48 @@ namespace zypp
     class ResObjectImplIf
     {
     public:
-      /** */
-      const Resolvable *const self() const
-      { return _backRef; }
-      /** */
-      Resolvable *const self()
-      { return _backRef; }
-      /** */
-      virtual Label summary() const
-      { return Label(); }
-      /** */
-      virtual Text description() const
-      { return Text(); }
+      /** \name Common Attributes.
+       * These should be provided by each kind of Resolvable. Call the
+       * default implementation if you don't have a value for it.
+       * \todo The UI likes to work on ResObject level, but some of
+       * the values actually make no sense for several kinds of Resolvable,
+       * or may have completely different semantics. See wheter we can get
+       * rid of ome stuff.
+       * \todo Some of these are actually tranlated or translatable.
+       * offer some concept to express it.
+       * \todo LICENSE HANDLING!
+      */
+      //@{
+      /** Short label. */
+      virtual Label summary() const PURE_VIRTUAL;
 
+      /** Long description */
+      virtual Text description() const PURE_VIRTUAL;
+
+      /** \todo well define! */
+      virtual Text insnotify() const PURE_VIRTUAL;
+
+      /** \todo well define! */
+      virtual Text delnotify() const PURE_VIRTUAL;
+
+      /** Size.  \todo well define which size. */
+      virtual FSize size() const PURE_VIRTUAL;
+
+      /** Wheter there are src.rpm available too. */
+      virtual bool providesSources() const PURE_VIRTUAL;
+
+      /** \name deprecated
+       * \todo These should be replaced by a offering a
+       * Ptr to the Source.
+      */
+      //@{
+      /** \deprecated */
+      virtual Label instSrcLabel() const PURE_VIRTUAL;
+      /** \deprecated */
+      virtual Vendor instSrcVendor() const PURE_VIRTUAL;
+      //@}
+
+      //@}
     public:
       /** Ctor */
       ResObjectImplIf()
@@ -65,11 +96,23 @@ namespace zypp
       /** Dtor. Makes this an abstract class. */
       virtual ~ResObjectImplIf() = 0;
 
+      /** Test wheter \c this is already connected to Resolvable. */
+      bool hasBackRef() const
+      { return _backRef; }
+
+    protected:
+      /** Access to Resolvable data if connected. */
+      const Resolvable *const self() const
+      { return _backRef; }
+      /** Access to Resolvable data if connected. */
+      Resolvable *const self()
+      { return _backRef; }
+
     private:
-      /** */
+      /** Manages _backRef when glued to a Resolvable. */
       template<class _Res>
         friend class _resobjectfactory_detail::ResImplConnect;
-      /** */
+      /** Backlink to Resolvable.*/
       Resolvable * _backRef;
     };
     /////////////////////////////////////////////////////////////////

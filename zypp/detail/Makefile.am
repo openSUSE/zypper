@@ -10,18 +10,21 @@ include_HEADERS = \
 	ResObjectImplIf.h	\
 	ResObjectFactory.h	\
 	PackageImplIf.h		\
-	PackageImpl.h		\
 	SelectionImplIf.h	\
-	SelectionImpl.h		\
 	MessageImplIf.h		\
-	MessageImpl.h		\
 	ScriptImplIf.h		\
-	ScriptImpl.h		\
 	PatchImplIf.h		\
-	PatchImpl.h		\
 	ProductImplIf.h		\
+	\
+	\
+	\
+	PackageImpl.h		\
+	SelectionImpl.h		\
+	MessageImpl.h		\
+	ScriptImpl.h		\
+	PatchImpl.h		\
 	ProductImpl.h
-
+## last group might be removed.
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_detail.la
 
@@ -29,11 +32,16 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_detail.la
 
 lib@PACKAGE@_detail_la_SOURCES = \
 	ResolvableImpl.cc	\
+	ResObjectImplIf.cc	\
+	\
+	\
+	\
 	PackageImpl.cc		\
 	SelectionImpl.cc	\
 	MessageImpl.cc		\
 	ScriptImpl.cc		\
 	PatchImpl.cc		\
 	ProductImpl.cc
+## last group might be removed.
 
 ## ##################################################
