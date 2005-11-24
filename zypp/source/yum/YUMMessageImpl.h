@@ -30,11 +30,38 @@ namespace zypp
       //
       /** Class representing a message
       */
-      class YUMMessageImpl : public detail::MessageImpl
+      class YUMMessageImpl : public detail::MessageImplIf
       {
       public:
         /** Default ctor */
         YUMMessageImpl( const zypp::parser::yum::YUMPatchMessage & parsed );
+	/** Get the text of the message */
+	virtual std::string text() const;
+	/** Get the type of the message (YesNo / OK) */
+	virtual std::string type() const;
+	/** */
+	virtual Label summary() const;
+	/** */
+	virtual Text description() const;
+	/** */
+	virtual Text insnotify() const;
+	/** */
+	virtual Text delnotify() const;
+	/** */
+	virtual FSize size() const;
+	/** */
+	virtual bool providesSources() const;
+	/** */
+	virtual Label instSrcLabel() const;
+	/** */
+	virtual Vendor instSrcVendor() const;
+
+
+      protected:
+	/** The text of the message */
+	std::string _text;
+	/** The type of the message (YesNo / OK) */
+	std::string _type;
       };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum

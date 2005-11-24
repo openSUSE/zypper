@@ -29,11 +29,33 @@ namespace zypp
       //        CLASS NAME : YUMScriptImpl
       //
       /** Class representing an update script */
-      class YUMScriptImpl : public detail::ScriptImpl
+      class YUMScriptImpl : public detail::ScriptImplIf
       {
       public:
         /** Default ctor */
         YUMScriptImpl( const zypp::parser::yum::YUMPatchScript & parsed );
+	/** Get the script to perform the change */
+	virtual std::string do_script() const;
+	/** Get the script to undo the change */
+	virtual std::string undo_script() const;
+	/** Check whether script to undo the change is available */
+	virtual bool undo_available() const;
+
+	virtual Label summary() const;
+	virtual Text description() const;
+	virtual Text insnotify() const;
+	virtual Text delnotify() const;
+	virtual FSize size() const;
+	virtual bool providesSources() const;
+	virtual Label instSrcLabel() const;
+	virtual Vendor instSrcVendor() const;
+
+
+      protected:
+	/** The script to perform the change */
+	std::string _do_script;
+	/** The script to undo the change */
+	std::string _undo_script;
       };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum

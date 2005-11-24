@@ -30,14 +30,48 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
 
       /** Default ctor
-       * \bug CANT BE CONSTUCTED THAT WAY ANYMORE
       */
       YUMMessageImpl::YUMMessageImpl(
 	const zypp::parser::yum::YUMPatchMessage & parsed
       )
       {
 	_text = parsed.text;
+	_type = parsed.type;
       }
+      /** Get the text of the message */
+      std::string YUMMessageImpl::text() const {
+	return _text;
+      }
+      /** Get the type of the message (YesNo / OK) */
+      std::string YUMMessageImpl::type() const {
+	return _type;
+      }
+      Label YUMMessageImpl::summary() const
+      { return ResObjectImplIf::summary(); }
+
+      Text YUMMessageImpl::description() const
+      { return ResObjectImplIf::description(); }
+
+      Text YUMMessageImpl::insnotify() const
+      { return ResObjectImplIf::insnotify(); }
+
+      Text YUMMessageImpl::delnotify() const
+      { return ResObjectImplIf::delnotify(); }
+
+      FSize YUMMessageImpl::size() const
+      { return ResObjectImplIf::size(); }
+
+      bool YUMMessageImpl::providesSources() const
+      { return ResObjectImplIf::providesSources(); }
+
+      Label YUMMessageImpl::instSrcLabel() const
+      { return ResObjectImplIf::instSrcLabel(); }
+
+      Vendor YUMMessageImpl::instSrcVendor() const
+      { return ResObjectImplIf::instSrcVendor(); }
+
+
+
     } // namespace yum
     /////////////////////////////////////////////////////////////////
   } // namespace source

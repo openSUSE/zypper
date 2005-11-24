@@ -22,6 +22,6 @@ lib@PACKAGE@_source_yum_la_SOURCES =	\
 	YUMScriptImpl.cc		\
 	YUMMessageImpl.cc		\
 	YUMPackageImpl.cc		\
-	YUMPatchImpl.cc
+	YUMPatchImpl.cc	
 
 ## ##################################################

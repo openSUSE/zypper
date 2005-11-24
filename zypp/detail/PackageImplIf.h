@@ -34,6 +34,52 @@ namespace zypp
     {
     public:
       typedef Package ResType;
+#if 0
+      class CheckSum
+      {
+      public:
+        CheckSum(std::string type, bool pkgid, std::string checksum) {
+          _type = type; _pkgid = pkgid; _checksum = checksum;
+        }
+        std::string type() { return _type; }
+        bool pkgid() { return _pkgid; }
+        std::string checksum() { return _checksum; }
+      private:
+        std::string _type;
+        bool _pkgid;
+        std::string _checksum;
+      };
+      /**
+      * @short Holds data about how much space will be needed per directory
+      **/
+      class DirSize {
+      public:
+        DirSize();
+        DirSize(const std::string& path,
+                const std::string& size,
+                const std::string& fileCount)
+	: path(path), sizeKByte(size), fileCount(fileCount)
+	{}
+        const std::string path;
+        const std::string sizeKByte;
+        const std::string fileCount;
+      };
+    
+      /**
+       * @short Holds Data about file and file type
+       *  (directory, plain)
+       **/
+      class FileData {
+      public:
+        std::string name;
+        std::string type;
+        FileData();
+        FileData(const std::string &name,
+                 const std::string &type)
+	: name(name), type(type)
+	{}
+      };
+#endif
 
     public:
       /** \name Rpm Package Attributes. */
@@ -62,21 +108,21 @@ namespace zypp
       /** */
       virtual std::string os() const PURE_VIRTUAL;
       /** */
-      virtual std::list<std::string> prein() const PURE_VIRTUAL;
+      virtual Text prein() const PURE_VIRTUAL;
       /** */
-      virtual std::list<std::string> postin() const PURE_VIRTUAL;
+      virtual Text postin() const PURE_VIRTUAL;
       /** */
-      virtual std::list<std::string> preun() const PURE_VIRTUAL;
+      virtual Text preun() const PURE_VIRTUAL;
       /** */
-      virtual std::list<std::string> postun() const PURE_VIRTUAL;
+      virtual Text postun() const PURE_VIRTUAL;
       /** */
       virtual FSize sourcesize() const PURE_VIRTUAL;
       /** */
       virtual FSize archivesize() const PURE_VIRTUAL;
       /** */
-      virtual std::list<std::string> authors() const PURE_VIRTUAL;
+      virtual Text authors() const PURE_VIRTUAL;
       /** */
-      virtual std::list<std::string> filenames() const PURE_VIRTUAL;
+      virtual Text filenames() const PURE_VIRTUAL;
       //@}
 
       /** \name Additional Package Attributes.

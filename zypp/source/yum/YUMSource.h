@@ -19,6 +19,8 @@
 #include "zypp/Script.h"
 #include "zypp/Patch.h"
 
+using namespace zypp::parser::yum;
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -55,9 +57,12 @@ namespace zypp
 
 
 	Dependencies createDependencies(
-	  const zypp::parser::yum::YUMObjectData & parsed
+	  const zypp::parser::yum::YUMObjectData & parsed,
+	  const Resolvable::Kind my_kind
 	);
 
+	Capability createCapability(const YUMDependency & dep,
+				    const Resolvable::Kind & my_kind);
 
 
        };

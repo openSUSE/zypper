@@ -31,7 +31,7 @@ namespace zypp
       //
       /** Class representing a patch
       */
-      class YUMPatchImpl : public detail::PatchImpl
+      class YUMPatchImpl : public detail::PatchImplIf
       {
       public:
         /** Default ctor */
@@ -39,6 +39,54 @@ namespace zypp
 	  const zypp::parser::yum::YUMPatchData & parsed,
 	  YUMSource * src
 	);
+	/** Patch ID */
+	std::string id() const;
+	/** Patch time stamp */
+	unsigned int timestamp() const;
+	/** Patch category (recommended, security,...) */
+	std::string category() const;
+	/** Does the system need to reboot to finish the update process? */
+	bool reboot_needed() const;
+	/** Does the patch affect the package manager itself? */
+	bool affects_pkg_manager() const;
+	/** Is the patch installation interactive? (does it need user input?) */
+	bool interactive();
+	/** The list of all atoms building the patch */
+	AtomList all_atoms();
+	/** The list of those atoms which have not been installed */
+	AtomList not_installed_atoms();
+
+	/** Patch summary */
+	virtual Label summary() const;
+	/** Patch description */
+	virtual Text description() const;
+	virtual Text insnotify() const;
+	virtual Text delnotify() const;
+	virtual FSize size() const;
+	virtual bool providesSources() const;
+	virtual Label instSrcLabel() const;
+	virtual Vendor instSrcVendor() const;
+
+// TODO check necessarity of functions below
+	bool any_atom_selected();
+	void mark_atoms_to_freshen(bool freshen);
+      protected:
+	/** Patch ID */
+	std::string _patch_id;
+	/** Patch time stamp */
+	int _timestamp;
+	/** Patch summary */
+	Label _summary;
+	/** Patch description */
+	Text _description;
+	/** Patch category (recommended, security,...) */
+	std::string _category;
+	/** Does the system need to reboot to finish the update process? */
+	bool _reboot_needed;
+	/** Does the patch affect the package manager itself? */
+	bool _affects_pkg_manager;
+	/** The list of all atoms building the patch */
+	AtomList _atoms;
        };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum

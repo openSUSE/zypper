@@ -16,6 +16,8 @@
 #include "zypp/source/yum/YUMMessageImpl.h"
 #include "zypp/source/yum/YUMPatchImpl.h"
 
+#include <zypp/base/Logger.h>
+
 #include <zypp/CapFactory.h>
 
 using namespace std;
@@ -38,8 +40,8 @@ namespace zypp
 
       /** Default ctor
       */
-        YUMSource::YUMSource()
-	{}
+      YUMSource::YUMSource()
+      {}
 
 
 	Package::Ptr YUMSource::createPackage(
@@ -47,7 +49,8 @@ namespace zypp
 	)
 	{
 	  shared_ptr<YUMPackageImpl> impl(new YUMPackageImpl(parsed));
-	  Dependencies _deps = createDependencies(parsed);
+	  Dependencies _deps = createDependencies(parsed,
+						  Resolvable::Kind("Package"));
 	  Package::Ptr package = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel ),
@@ -62,7 +65,8 @@ namespace zypp
 	)
 	{
 	  shared_ptr<YUMMessageImpl> impl(new YUMMessageImpl(parsed));
-	  Dependencies _deps = createDependencies(parsed);
+	  Dependencies _deps = createDependencies(parsed,
+						  Resolvable::Kind("Message"));
 	  Message::Ptr message = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel ),
@@ -78,7 +82,8 @@ namespace zypp
 	)
 	{
 	  shared_ptr<YUMScriptImpl> impl(new YUMScriptImpl(parsed));
-	  Dependencies _deps = createDependencies(parsed);
+	  Dependencies _deps = createDependencies(parsed,
+						  Resolvable::Kind("Script"));
 	  Script::Ptr script = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel ),
@@ -94,7 +99,8 @@ namespace zypp
 	)
 	{
 	  shared_ptr<YUMPatchImpl> impl(new YUMPatchImpl(parsed, this));
-	  Dependencies _deps = createDependencies(parsed);
+	  Dependencies _deps = createDependencies(parsed,
+						  Resolvable::Kind("Patch"));
 	  Patch::Ptr patch = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel ),
@@ -106,10 +112,10 @@ namespace zypp
 	}
 
 	Dependencies YUMSource::createDependencies(
-	  const zypp::parser::yum::YUMObjectData & parsed
+	  const zypp::parser::yum::YUMObjectData & parsed,
+	  const Resolvable::Kind my_kind
 	)
 	{
-	  CapFactory _f;
 	  CapSet _provides;
 	  CapSet _conflicts;
 	  CapSet _obsoletes;
@@ -121,40 +127,28 @@ namespace zypp
 	       it != parsed.provides.end();
 	       it++)
 	  {
-	    // FIXME do not create the string this way
-	    // FIXME other types than only packages
-	    // FIXME use also the flags
-	    _provides.insert (_f.parse(it->name + " = " + it->ver + "-" + it->rel));
+	    _provides.insert(createCapability(*it, my_kind));
 	  }
   
 	  for (std::list<YUMDependency>::const_iterator it = parsed.conflicts.begin();
 	       it != parsed.conflicts.end();
 	       it++)
 	  {
-	    // FIXME do not create the string this way
-	    // FIXME other types than only packages
-	    // FIXME use also the flags
-	    _conflicts.insert (_f.parse(it->name + " = " + it->ver + "-" + it->rel));
+	    _conflicts.insert(createCapability(*it, my_kind));
 	  }
   
 	  for (std::list<YUMDependency>::const_iterator it = parsed.obsoletes.begin();
 	       it != parsed.obsoletes.end();
 	       it++)
 	  {
-	    // FIXME do not create the string this way
-	    // FIXME other types than only packages
-	    // FIXME use also the flags
-	    _obsoletes.insert (_f.parse(it->name + " = " + it->ver + "-" + it->rel));
+	    _obsoletes.insert(createCapability(*it, my_kind));
 	  }
   
 	  for (std::list<YUMDependency>::const_iterator it = parsed.freshen.begin();
 	       it != parsed.freshen.end();
 	       it++)
 	  {
-	    // FIXME do not create the string this way
-	    // FIXME other types than only packages
-	    // FIXME use also the flags
-	    _freshens.insert (_f.parse(it->name + " = " + it->ver + "-" + it->rel));
+	    _freshens.insert(createCapability(*it, my_kind));
 	  }
   
 	  for (std::list<YUMDependency>::const_iterator it = parsed.requires.begin();
@@ -165,9 +159,9 @@ namespace zypp
 	    // FIXME other types than only packages
 	    // FIXME use also the flags
 	    if (it->pre == "1")
-	      _prerequires.insert (_f.parse(it->name + " = " + it->ver + "-" + it->rel));
+	      _prerequires.insert(createCapability(*it, my_kind));
 	    else
-	      _requires.insert (_f.parse(it->name + " = " + it->ver + "-" + it->rel));
+	      _requires.insert(createCapability(*it, my_kind));
 	  }
   
 	  _deps.setProvides(_provides);
@@ -178,10 +172,25 @@ namespace zypp
 	  _deps.setPrerequires(_prerequires);
 	  return _deps;
 	}
+
+	Capability YUMSource::createCapability(const YUMDependency & dep,
+					       const Resolvable::Kind & my_kind)
+	{
+	  CapFactory _f;
+	  Resolvable::Kind _kind = dep.kind == ""
+	    ? my_kind
+	    : Resolvable::Kind(dep.kind);
+	  Capability cap = _f.parse(
+	    _kind,
+	    dep.name,
+	    Rel(dep.flags),
+	    Edition(dep.ver,
+		    dep.rel,
+		    strtol(dep.epoch.c_str(), 0, 10))
+	  );
+	  return cap;
+	}
   
-
-
-
     } // namespace yum
     /////////////////////////////////////////////////////////////////
   } // namespace source
