@@ -8,10 +8,24 @@
 #include <zypp/Edition.h>
 #include <zypp/Rel.h>
 
+#include <boost/regex.hpp>
+
+
 using namespace std;
+template<class _C>
+  void outc( const _C & cont, ostream & str )
+  {
+    copy( cont.begin(), cont.end(),
+          ostream_iterator<typename _C::value_type>(str,"\n") );
+  }
 
+namespace zypp
+{
 
+}
 using namespace zypp;
+
+
 /******************************************************************
 **
 **
@@ -23,12 +37,6 @@ using namespace zypp;
 int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
-
-  DBG << Edition( "1.0", "1a" ) << endl;
-  DBG << Edition( "2.0", "13" ) << endl;
-  DBG << Edition( "2_0", "13" ) << endl;
-  DBG << Edition( "3.0", "13.4" ) << endl;
-
 
 
   INT << "===[END]============================================" << endl;

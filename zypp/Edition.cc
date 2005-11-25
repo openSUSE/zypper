@@ -192,7 +192,7 @@ namespace zypp
     string ret;
 
     if ( _pimpl->_epoch )
-      ret += base::string::form(  "%d:", _pimpl->_epoch );
+      ret += str::form(  "%d:", _pimpl->_epoch );
 
     ret += _pimpl->_version;
 

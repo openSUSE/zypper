@@ -92,8 +92,7 @@ namespace zypp
   */
   typedef std::string PackageGroup;
 
-  /**
-   */
+  /** Candidate for string unification? */
   typedef std::list<std::string> PackageKeywords;
 
   /** Class representing a Date (time_t). Basically store a time_t and offer

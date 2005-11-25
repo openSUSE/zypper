@@ -13,6 +13,7 @@
 #define ZYPP_EDITION_H
 
 #include <iosfwd>
+#include <functional>
 #include <string>
 
 #include "zypp/base/PtrTypes.h"
@@ -27,10 +28,35 @@ namespace zypp
   //
   //	CLASS NAME : Edition
   //
-  /** Edition
-   \todo doc
-   \todo optimize implementation
-   \todo implement debian comparison and make choice backend specific
+  /** Edition represents <code>[epoch:]version[-release]</code>
+   *
+   * \li \c epoch   (optional) number, Edition::noepoch if not supplied
+   * \li \c version (required) string, may not contain '-'
+   * \li \c release (optional) string, may not contain '-'
+   *
+   * Comparison is actually \reg g_BackendSpecific.
+   *
+   * \li \b RPM: Edition are ordered according to \c epoch, then \c version,
+   * then \c release. Version and release strings are compared by splitting
+   * them into segments of alpha or digit sequences. Segments are compared
+   * according to their type. On mixed types a string compares less than a
+   * number.
+   * \code
+   *   compare( 1.a, 1.0 ) == -1 (<)
+   *   compare( 1.0, 1.a ) ==  1 (>)
+   *   compare( 1.0, 1_0 ) ==  0 (==)
+   * \endcode
+   *
+   * \attention operator< defines equivalence classes of version strings, as non
+   * alphanumeric chars are ignored. That' why \c 1.0 and \c 1_0 compare equal
+   * in the example.<BR>
+   * If Edition is used as key in a std::container, per default
+   * <em>plain string comparison</em> is used. If you want to compare by
+   * version, let the container use Edition::Less to compare.
+   *
+   * \ingroup g_BackendSpecific
+   * \todo optimize implementation
+   * \todo implement debian comparison and make choice backend specific
   */
   class Edition
   {
@@ -44,18 +70,22 @@ namespace zypp
   public:
     /** Default ctor. */
     Edition();
+
     /** Ctor taking \a version_r, \a release_r and optional \a epoch_r */
     Edition( const std::string & version_r,
              const std::string & release_r,
              epoch_t epoch_r = noepoch );
+
     /** Dtor */
     ~Edition();
 
   public:
     /** Epoch */
     epoch_t epoch() const;
+
     /** Version */
     const std::string & version() const;
+
     /** Release */
     const std::string & release() const;
 
@@ -78,6 +108,9 @@ namespace zypp
     */
     static int compare( const Edition & lhs, const Edition & rhs );
 
+    /* Binary operator functor comparing Edition. */
+    struct Less;
+
   private:
     /** Hides implementation */
     struct Impl;
@@ -92,7 +125,6 @@ namespace zypp
 
   /** \name Comaprison based on epoch, version, and release. */
   //@{
-
   /** \relates Edition */
   inline bool operator==( const Edition & lhs, const Edition & rhs )
   { return Edition::compare( Rel::EQ, lhs, rhs ); }
@@ -116,8 +148,36 @@ namespace zypp
   /** \relates Edition */
   inline bool operator>=( const Edition & lhs, const Edition & rhs )
   { return Edition::compare( Rel::GE, lhs, rhs ); }
-
   //@}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : Edition::Less
+  //
+  /** Binary operator functor comparing Edition.
+   * Default order for std::container using Edition as key is based
+   * on <em>plain string comparison</em>. Use Less to compare, if
+   * real version comparison is desired.
+   * \code
+   * set<Edition> eset;
+   * eset.insert( Edition("1.0","") );
+   * eset.insert( Edition("1_0","") );
+   * // Now: eset.size() == 2
+   * \endcode
+   * \code
+   * set<Edition,Edition::Less> eset;
+   * eset.insert( Edition("1.0","") );
+   * eset.insert( Edition("1_0","") );
+   * // Now: eset.size() == 1
+   * \endcode
+  */
+  struct Edition::Less : public std::binary_function<Edition,Edition,bool>
+  {
+    /** \return <tt>lhs < rhs</tt> */
+    bool operator()(const Edition & lhs, const Edition & rhs ) const
+    { return lhs < rhs; }
+  };
+  ///////////////////////////////////////////////////////////////////
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
@@ -126,14 +186,17 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 namespace std
 { /////////////////////////////////////////////////////////////////
-  /** \relates Edition Default order for std::container based on string value.*/
+
+  /** \relates Edition Default to lexicographical order in std::container.*/
   template<>
     inline bool less<zypp::Edition>::operator()( const zypp::Edition & lhs, const zypp::Edition & rhs ) const
     { return lhs.asString() < rhs.asString(); }
-  /** \relates Edition Equality for std::container classes based on string value. */
+
+  /** \relates Edition Lexicographical equal for std::container. */
   template<>
     inline bool equal_to<zypp::Edition>::operator()( const zypp::Edition & lhs, const zypp::Edition & rhs ) const
     { return lhs.asString() == rhs.asString(); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

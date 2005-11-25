@@ -34,9 +34,9 @@ namespace zypp
                                 const int    line_r )
       {
         return (level_r < 0 ? std::cout : std::cerr)
-               << string::form( "<%d> [%s] %s(%s):%d ",
-                                level_r, group_r,
-                                file_r, func_r, line_r );
+               << str::form( "<%d> [%s] %s(%s):%d ",
+                             level_r, group_r,
+                             file_r, func_r, line_r );
       }
 
       /////////////////////////////////////////////////////////////////

@@ -19,34 +19,25 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace base
+  namespace str
   { /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    namespace string
-    { /////////////////////////////////////////////////////////////////
+    /** Printf style construction of std::string. */
+    std::string form( const char * format, ... )
+    __attribute__ ((format (printf, 1, 2)));
 
-      /** Printf style construction of std::string. */
-      std::string form( const char * format, ... )
-      __attribute__ ((format (printf, 1, 2)));
+    /** Return lowercase version of \a s
+     * \todo improve
+    */
+    std::string toLower( const std::string & s );
 
-
-      /** Return lowercase version of \a s
-       * \todo improve
-      */
-      std::string toLower( const std::string & s );
-
-      /** Return uppercase version of \a s
-       * \todo improve
-      */
-      std::string toUpper( const std::string & s );
-
-      /////////////////////////////////////////////////////////////////
-    } // namespace string
-    ///////////////////////////////////////////////////////////////////
+    /** Return uppercase version of \a s
+     * \todo improve
+    */
+    std::string toUpper( const std::string & s );
 
     /////////////////////////////////////////////////////////////////
-  } // namespace base
+  } // namespace str
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
