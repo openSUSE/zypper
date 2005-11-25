@@ -91,7 +91,18 @@ namespace zypp
 	virtual Text authors() const;
 	/** */
 	virtual Text filenames() const;
+        /** */
         virtual License licenseToConfirm() const;
+        /** */
+        virtual std::string type() const;
+        /** */
+        virtual std::list<std::string> keywords() const;
+        /** */
+	virtual bool installOnly() const;
+        /** */
+	virtual unsigned mediaId() const;
+        /** */
+	virtual PackageImplIf::CheckSum checksum() const;
 
 #if 0
         /** */
@@ -143,8 +154,6 @@ namespace zypp
         /** */
         virtual std::string sourcepkg() const;
         /** */
-        virtual std::string type() const;
-        /** */
         virtual std::list<std::string> authors() const;
         /** */
         virtual std::list<std::string> filenames() const;
@@ -156,8 +165,6 @@ namespace zypp
         virtual std::string location() const;
         /** */
         virtual unsigned int medianr() const;
-        /** */
-        virtual std::list<std::string> keywords() const;
         /** */
         virtual std::string md5sum() const;
         /** */
@@ -174,33 +181,36 @@ namespace zypp
         virtual bool isRemote() const;
         /** */
         virtual bool prefererCandidate() const;
+#endif
       protected:
+	Label _summary;
+	Text _description;
+	Date _buildtime;
+	std::string _buildhost;
+	std::string _url;
+	Vendor _vendor;
+	Label _license;
+	std::string _packager;
+	PackageGroup _group;
+	Text _changelog;
+	std::string _type;
+	License _license_to_confirm;
+	Text _authors;
+	std::list<std::string>_keywords;
+	unsigned _mediaid;
+	PackageImplIf::CheckSum _checksum;
+	Text _filenames;
+	std::string _location;
+
+	bool _install_only;
+/*
 	unsigned _size_package;
 	unsigned _size_installed;
 	unsigned _size_archive;
-	std::list<std::string> _authors;
-	std::list<std::string>_keywords;
-	std::string _packager;
-	std::string _url;
-	std::string _buildhost;
-	std::string _vendor;
-	std::string _group;
-	std::string _license;
 	std::string _sourcepkg;
-	std::string _type;
-	CheckSum _checksum;
-	std::string _media;
-	unsigned _time_file;
-	unsigned _time_build;
-	std::string _location;
-	std::list<FileData> _files;
 	std::list<DirSize> _dir_sizes;
-	bool _install_only;
+*/
 /*
-	std::string summary;
-	std::list<std::string> description;
-	// SuSE specific data
-	// Change Log
 	std::list<ChangelogEntry> changelog;
 	// Package Files
 	struct {
@@ -225,7 +235,7 @@ namespace zypp
 
 
 */
-#endif
+
 
        };
       ///////////////////////////////////////////////////////////////////

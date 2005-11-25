@@ -13,6 +13,8 @@
 #define ZYPP_DETAIL_PACKAGEIMPLIF_H
 
 #include "zypp/detail/ResObjectImplIf.h"
+#include "zypp/Edition.h"
+#include "zypp/Arch.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -34,21 +36,99 @@ namespace zypp
     {
     public:
       typedef Package ResType;
-#if 0
       class CheckSum
       {
       public:
-        CheckSum(std::string type, bool pkgid, std::string checksum) {
-          _type = type; _pkgid = pkgid; _checksum = checksum;
-        }
+        CheckSum(const std::string & type, const std::string & checksum)
+	: _type(type)
+	, _checksum(checksum)
+	{}
         std::string type() { return _type; }
-        bool pkgid() { return _pkgid; }
         std::string checksum() { return _checksum; }
       private:
         std::string _type;
-        bool _pkgid;
         std::string _checksum;
       };
+      class BaseVersion
+      {
+      public:
+	BaseVersion(const Edition & edition,
+	            const CheckSum & checksum,
+		    const Date & buildtime)
+	: _edition(edition)
+	, _checksum(checksum)
+	, _buildtime(buildtime)
+        {}
+	Edition edition() const { return _edition; }
+	CheckSum checksum() const { return _checksum; }
+	Date buildtime() const { return _buildtime; }
+      private:
+	Edition _edition;
+        PackageImplIf::CheckSum _checksum;
+        Date _buildtime;
+      };
+      class DeltaRpm
+      {
+      public:
+	DeltaRpm(const Arch & arch,
+	         const std::string & filename, 
+		 const FSize & downloadsize,
+		 const CheckSum & checksum,
+		 const Date & buildtime,
+		 const BaseVersion & base_version)
+	: _arch(arch)
+	, _filename(filename)
+	, _downloadsize(downloadsize)
+	, _checksum(checksum)
+	, _buildtime(buildtime)
+	, _base_version(base_version)
+	{}
+	Arch arch() { return _arch; }
+	std::string filename() { return _filename; }
+	FSize downloadsize() { return _downloadsize; }
+	CheckSum checksum() { return _checksum; }
+	Date buildtime() { return _buildtime; }
+	BaseVersion baseVersion() { return _base_version; }
+      private:
+	Arch _arch;
+	std::string _filename;
+	FSize _downloadsize;
+	CheckSum _checksum;
+	Date _buildtime;
+	BaseVersion _base_version;
+      };
+      class PatchRpm
+      {
+      public:
+	PatchRpm(const Arch & arch,
+	         const std::string & filename, 
+		 const FSize & downloadsize,
+		 const CheckSum & checksum,
+		 const Date & buildtime,
+		 const std::list<BaseVersion> & base_versions)
+	: _arch(arch)
+	, _filename(filename)
+	, _downloadsize(downloadsize)
+	, _checksum(checksum)
+	, _buildtime(buildtime)
+	, _base_versions(base_versions)
+	{}
+	Arch arch() { return _arch; }
+	std::string filename() { return _filename; }
+	FSize downloadsize() { return _downloadsize; }
+	CheckSum checksum() { return _checksum; }
+	Date buildtime() { return _buildtime; }
+	std::list<BaseVersion> baseVersions() { return _base_versions; }
+      private:
+	Arch _arch;
+	std::string _filename;
+	FSize _downloadsize;
+	CheckSum _checksum;
+	Date _buildtime;
+	std::list<BaseVersion> _base_versions;
+      };
+
+#if 0
       /**
       * @short Holds data about how much space will be needed per directory
       **/
