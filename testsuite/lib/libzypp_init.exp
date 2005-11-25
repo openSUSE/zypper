@@ -1,21 +1,34 @@
 # libzypp_init.exp
 
-proc run-binary { prog {path ""} } {
+#
+# run binary $path/$prog
+# and expect $expected_result as a result
+#  (expected_result == 0  ==> program should pass)
+#  (expected_result == 1  ==> program should fail)
+#
+
+proc runBinary { prog {path ""} {expected_result 0} } {
 
   if { $path == "" } { set path "tests" }
 
-  set result ""
+  set result 0
   set oops [catch { set result [exec "$path/$prog"] } catched]
+
+  # check if the program crashed
 
   if {$oops != 0} {
     puts ""
-    fail "test case failed for $prog: $catched"
+    fail "$prog crashed with: $catched"
     return -1
   }
 
   # check return code from $prog
 
   if {$result != ""} {
+    if {$expected_result != 0} {
+      xfail $prog			# expected failure
+      return 0
+    }
     puts ""
     warning "Running of $prog results in '$result'"
     return -1
@@ -24,5 +37,17 @@ proc run-binary { prog {path ""} } {
   pass $prog
 
   return 0
+}
+
+# expect prog to pass
+
+proc shouldPass { prog {path ""} } {
+  return [runBinary $prog $path 0]
+}
+
+# expect prog to fail
+
+proc shouldFail { prog {path ""} } {
+  return [runBinary $prog $path 1]
 }
 
