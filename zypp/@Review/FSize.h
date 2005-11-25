@@ -93,7 +93,7 @@ class FSize {
 
     /**
      * Construct from size in certain unit.
-     * E.g. <code>FSize( 1, FSize::K )<code> makes 1024 Byte.
+     * E.g. <code>FSize( 1, FSize::K )</code> makes 1024 Byte.
      **/
     FSize( const long long size_r, const Unit unit_r )
       : _size( size_r * factor( unit_r ) )
@@ -152,7 +152,7 @@ class FSize {
      * format string. Avalue of <code>bestPrec</code> automatically picks an
      * appropriate precision depending on the unit.
      * If <code>showunit</code> ist true, the string representaion
-     * of Unit is <em>appended<em> separated by a single blank.
+     * of Unit is <em>appended</em> separated by a single blank.
      *
      * If Unit is <b>B</b>yte, precision is set to zero.
      **/
