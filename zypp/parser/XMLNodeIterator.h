@@ -13,7 +13,7 @@
 #ifndef XMLNodeIterator_h
 #define XMLNodeIterator_h
 
-#include <LibXMLHelper.h>
+#include <zypp/parser/LibXMLHelper.h>
 #include <iostream>
 #include <ostream>
 #include <sstream>

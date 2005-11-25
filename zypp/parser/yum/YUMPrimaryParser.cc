@@ -10,7 +10,7 @@
  *
 */
 
-#include <YUMPrimaryParser.h>
+#include <zypp/parser/yum/YUMPrimaryParser.h>
 #include <istream>
 #include <string>
 #include <cassert>
@@ -19,7 +19,7 @@
 #include <libxml/tree.h>
 #include <zypp/parser/LibXMLHelper.h>
 #include <zypp/base/Logger.h>
-#include <schemanames.h>
+#include <zypp/parser/yum/schemanames.h>
 
 
 using namespace std;

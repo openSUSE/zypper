@@ -10,8 +10,8 @@
  *
 */
 
-#include <XMLNodeIterator.h>
-#include <../base/Logger.h>
+#include <zypp/parser/XMLNodeIterator.h>
+#include <zypp/base/Logger.h>
 #include <libxml2/libxml/xmlreader.h>
 #include <libxml2/libxml/xmlerror.h>
 

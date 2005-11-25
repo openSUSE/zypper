@@ -9,7 +9,7 @@
 /** \file zypp/parser/LibXMLHelper.cc
  *
 */
-#include <LibXMLHelper.h>
+#include <zypp/parser/LibXMLHelper.h>
 #include <libxml/tree.h>
 #include <libxml/xmlstring.h>
 #include <cassert>

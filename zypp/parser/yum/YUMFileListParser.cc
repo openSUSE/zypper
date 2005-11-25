@@ -12,15 +12,15 @@
 
 
 
-#include <YUMFileListParser.h>
+#include <zypp/parser/yum/YUMFileListParser.h>
 #include <istream>
 #include <string>
 #include <cassert>
 #include <libxml/xmlstring.h>
 #include <libxml/xmlreader.h>
 #include <libxml/tree.h>
-#include <LibXMLHelper.h>
-#include <schemanames.h>
+#include <zypp/parser/LibXMLHelper.h>
+#include <zypp/parser/yum/schemanames.h>
 #include <iostream>
 #include <zypp/base/Logger.h>
 

@@ -15,9 +15,9 @@
 #ifndef YUMGroupParser_h
 #define YUMGroupParser_h
 
-#include <YUMParserData.h>
-#include <XMLNodeIterator.h>
-#include <LibXMLHelper.h>
+#include <zypp/parser/yum/YUMParserData.h>
+#include <zypp/parser/XMLNodeIterator.h>
+#include <zypp/parser/LibXMLHelper.h>
 #include <list>
 
 namespace zypp {

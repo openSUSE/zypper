@@ -12,7 +12,7 @@
 
 
 
-#include <YUMParserData.h>
+#include <zypp/parser/yum/YUMParserData.h>
 
 using namespace std;
 namespace zypp {

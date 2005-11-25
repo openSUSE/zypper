@@ -14,12 +14,12 @@
 #ifndef YUMParser_h
 #define YUMParser_h
 
-#include <YUMParserData.h>
-#include <YUMRepomdParser.h>
-#include <YUMPrimaryParser.h>
-#include <YUMGroupParser.h>
-#include <YUMFileListParser.h>
-#include <YUMOtherParser.h>
-#include <YUMPatchParser.h>
+#include <zypp/parser/yum/YUMParserData.h>
+#include <zypp/parser/yum/YUMRepomdParser.h>
+#include <zypp/parser/yum/YUMPrimaryParser.h>
+#include <zypp/parser/yum/YUMGroupParser.h>
+#include <zypp/parser/yum/YUMFileListParser.h>
+#include <zypp/parser/yum/YUMOtherParser.h>
+#include <zypp/parser/yum/YUMPatchParser.h>
 
 #endif
