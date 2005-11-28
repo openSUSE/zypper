@@ -6,21 +6,15 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/source/yum/YUMSource.h
+/** \file zypp/source/yum/YUMProductImpl.h
  *
 */
-#ifndef ZYPP_SOURCE_YUM_YUMSOURCE_H
-#define ZYPP_SOURCE_YUM_YUMSOURCE_H
+#ifndef ZYPP_SOURCE_YUM_YUMPRODUCTIMPL_H
+#define ZYPP_SOURCE_YUM_YUMPRODUCTIMPL_H
 
-#include "zypp/source/Source.h"
+#include "zypp/detail/ProductImpl.h"
 #include "zypp/parser/yum/YUMParserData.h"
-#include "zypp/Package.h"
-#include "zypp/Message.h"
-#include "zypp/Script.h"
-#include "zypp/Patch.h"
-#include "zypp/Product.h"
-
-using namespace zypp::parser::yum;
+#include "zypp/source/yum/YUMSource.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -33,40 +27,35 @@ namespace zypp
 
       ///////////////////////////////////////////////////////////////////
       //
-      //        CLASS NAME : YUMSource
+      //        CLASS NAME : YUMProductImpl
       //
-      /** Class representing a YUM installation source
+      /** Class representing a patch
       */
-      class YUMSource : public source::Source
+      class YUMProductImpl : public detail::ProductImplIf
       {
       public:
         /** Default ctor */
-        YUMSource();
+        YUMProductImpl(
+	  const zypp::parser::yum::YUMProductData & parsed,
+	  YUMSource * src
+	);
+	std::string category() const;
+	Label vendor() const;
+	Label displayName() const;
+	Label summary() const;
+	Text description() const;
+	Text insnotify() const;
+	Text delnotify() const;
+	FSize size() const;
+	bool providesSources() const;
+	Label instSrcLabel() const;
+	Vendor instSrcVendor() const;
+      protected:
+	std::string _category;
+	Label _vendor;
+	Label _displayname;
+	Text _description;
 
-	Package::Ptr createPackage(
-	  const zypp::parser::yum::YUMPatchPackage & parsed
-	);
-	Message::Ptr createMessage(
-	  const zypp::parser::yum::YUMPatchMessage & parsed
-	);
-	Script::Ptr createScript(
-	  const zypp::parser::yum::YUMPatchScript & parsed
-	);
-	Patch::Ptr createPatch(
-	  const zypp::parser::yum::YUMPatchData & parsed
-	);
-	Product::Ptr createProduct(
-	  const zypp::parser::yum::YUMProductData & parsed
-	);
-
-
-	Dependencies createDependencies(
-	  const zypp::parser::yum::YUMObjectData & parsed,
-	  const Resolvable::Kind my_kind
-	);
-
-	Capability createCapability(const YUMDependency & dep,
-				    const Resolvable::Kind & my_kind);
 
 
        };
@@ -78,4 +67,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SOURCE_YUM_YUMSOURCE_H
+#endif // ZYPP_SOURCE_YUM_YUMPRODUCTIMPL_H

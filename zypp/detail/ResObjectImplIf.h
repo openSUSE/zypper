@@ -20,7 +20,7 @@
 #include "zypp/NeedAType.h" // volatile include propagating type drafts
 
 // will be defined =0 later
-#define PURE_VIRTUAL
+#define PURE_VIRTUAL =0
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

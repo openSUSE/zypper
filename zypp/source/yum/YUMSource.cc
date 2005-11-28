@@ -15,10 +15,10 @@
 #include "zypp/source/yum/YUMScriptImpl.h"
 #include "zypp/source/yum/YUMMessageImpl.h"
 #include "zypp/source/yum/YUMPatchImpl.h"
+#include "zypp/source/yum/YUMProductImpl.h"
 
-#include <zypp/base/Logger.h>
-
-#include <zypp/CapFactory.h>
+#include "zypp/base/Logger.h"
+#include "zypp/CapFactory.h"
 
 using namespace std;
 using namespace zypp::detail;
@@ -94,6 +94,23 @@ namespace zypp
 	  return script;
 	}
 
+	Product::Ptr YUMSource::createProduct(
+	  const zypp::parser::yum::YUMProductData & parsed
+	)
+	{
+	  shared_ptr<YUMProductImpl> impl(new YUMProductImpl(parsed, this));
+	  Dependencies _deps = createDependencies(parsed,
+						  Resolvable::Kind("Product"));
+	  Product::Ptr product = detail::makeResolvableFromImpl(
+	    parsed.name,
+	    Edition( parsed.ver, parsed.rel ),
+	    Arch( "noarch" ),
+	    impl
+	  );
+	  product->setDeps(_deps);
+	  return product;
+	}
+
 	Patch::Ptr YUMSource::createPatch(
 	  const zypp::parser::yum::YUMPatchData & parsed
 	)
@@ -155,9 +172,6 @@ namespace zypp
 	       it != parsed.requires.end();
 	       it++)
 	  {
-	    // FIXME do not create the string this way
-	    // FIXME other types than only packages
-	    // FIXME use also the flags
 	    if (it->pre == "1")
 	      _prerequires.insert(createCapability(*it, my_kind));
 	    else
