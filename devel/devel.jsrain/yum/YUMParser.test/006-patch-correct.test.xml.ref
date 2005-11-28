@@ -12,10 +12,9 @@ Patch Data:
   provides: [patch] foo-patch-fitzefatze  -
   conflicts: [package] foo-oldpatch EQ 1-1-2
   obsoletes: 
-  freshen: 
-  requires: [package] foo LE 2-3-4
+  freshen: [package] foo LE 2-3-4
 [package] foo-devel LE 3-4-5
-[patch] blah-234 EQ 4-5-6
+  requires: [patch] blah-234 EQ 4-5-6
   category: security
   reboot needed: 1
   affects package manager: 1
