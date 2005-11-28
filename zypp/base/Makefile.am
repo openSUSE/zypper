@@ -26,5 +26,6 @@ lib@PACKAGE@_base_la_SOURCES =	\
 	String.cc	\
 	StringVal.cc
 
+lib@PACKAGE@_base_la_LIBADD = -lboost_regex
 
 ## ##################################################
