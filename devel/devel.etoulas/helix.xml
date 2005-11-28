@@ -36,7 +36,7 @@
       <filename>foo.bar</filename>
       <filesize>123</filesize>
       <installedsize>234</installedsize>
-      <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+      <md5sum>820f1595e3ee235d10c76bdc322dedc9ef4efaca</md5sum>
       <importance>suggested</importance>
       <description>Yggdrasil Linux</description>
     </update>
@@ -62,7 +62,7 @@
       <filename>foo.bar</filename>
       <filesize>123</filesize>
       <installedsize>234</installedsize>
-      <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+      <md5sum>19bec77adb2239f7119a8344b370b5394f0a612b</md5sum>
       <importance>suggested</importance>
       <description>Yggdrasil Linux</description>
     </update>
@@ -91,7 +91,7 @@
       <filename>foo.bar</filename>
       <filesize>123</filesize>
       <installedsize>234</installedsize>
-      <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+      <md5sum>06cd8090cd152b040d60d1273cba96a17d6a9ecc</md5sum>
       <importance>suggested</importance>
       <description>Yggdrasil Linux</description>
     </update>
@@ -114,7 +114,7 @@
       <filename>foo.bar</filename>
       <filesize>123</filesize>
       <installedsize>234</installedsize>
-      <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+      <md5sum>4068e284e3ef4f7722c221c2c205e822ab0e4d5a</md5sum>
       <importance>suggested</importance>
       <description>Yggdrasil Linux</description>
     </update>
@@ -138,7 +138,7 @@
       <filename>foo.bar</filename>
       <filesize>123</filesize>
       <installedsize>234</installedsize>
-      <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+      <md5sum>b97216c5d6cdbba41cb51036fce3030967209fea</md5sum>
       <importance>suggested</importance>
       <description>Yggdrasil Linux</description>
     </update>
