@@ -8,6 +8,7 @@ SUBDIRS =
 include_HEADERS =	\
 	KindOf.h	\
 	Logger.h	\
+	Exception.h	\
 	NonCopyable.h	\
 	PtrTypes.h	\
 	ReferenceCounted.h	\
@@ -21,6 +22,7 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_base.la
 
 lib@PACKAGE@_base_la_SOURCES =	\
 	Logger.cc	\
+	Exception.cc	\
 	String.cc	\
 	StringVal.cc
 

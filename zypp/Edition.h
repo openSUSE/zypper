@@ -55,7 +55,8 @@ namespace zypp
    * version, let the container use Edition::Less to compare.
    *
    * \ingroup g_BackendSpecific
-   * \todo optimize implementation
+   * \todo Define exceptions.
+   * \todo optimize implementation(e.g don't store epoch if noepoch)
    * \todo implement debian comparison and make choice backend specific
   */
   class Edition
@@ -71,10 +72,25 @@ namespace zypp
     /** Default ctor. */
     Edition();
 
-    /** Ctor taking \a version_r, \a release_r and optional \a epoch_r */
+    /** Ctor taking edition as string.
+     * \throw INTERNAL if \a edition_r does not make a valid Edition.
+    */
+    Edition( const std::string & edition_r );
+
+    /** Ctor taking \a version_r, \a release_r and optional \a epoch_r
+     * \throw INTERNAL if \a version_r or \a release_r are not valid.
+    */
     Edition( const std::string & version_r,
              const std::string & release_r,
              epoch_t epoch_r = noepoch );
+
+    /** Ctor taking \a version_r, \a release_r and optional \a epoch_r as string.
+     * \throw INTERNAL if \a version_r or \a release_r \a epoch_r are
+     * not valid.
+    */
+    Edition( const std::string & version_r,
+             const std::string & release_r,
+             const std::string & epoch_r );
 
     /** Dtor */
     ~Edition();

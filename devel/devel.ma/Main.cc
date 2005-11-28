@@ -4,12 +4,11 @@
 #include <set>
 #include <algorithm>
 #include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/base/ReferenceCounted.h>
 #include <zypp/Arch.h>
 #include <zypp/Edition.h>
 #include <zypp/Rel.h>
-
-#include <boost/regex.hpp>
-
 
 using namespace std;
 template<class _C>
@@ -21,10 +20,14 @@ template<class _C>
 
 namespace zypp
 {
-
 }
 using namespace zypp;
 
+void chk( const std::string & ed )
+{
+  Edition e( ed );
+  MIL << e << endl;
+}
 
 /******************************************************************
 **
@@ -37,6 +40,16 @@ using namespace zypp;
 int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
+
+  DBG << Edition() << endl;
+  DBG << Edition("") << endl;
+
+  DBG << Edition("","","") << endl;
+
+  chk( "1.2.3-4.5.6" );
+  chk( "3:1.2.3-4.5.6" );
+
+  chk( "3:1.2.3-4.5.6-3" );
 
 
   INT << "===[END]============================================" << endl;

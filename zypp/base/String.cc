@@ -53,6 +53,16 @@ namespace zypp
      **      FUNCTION NAME : toLower
      **      FUNCTION TYPE : std::string
     */
+    std::string strerror( int errno_r )
+    {
+      return form( "(%d)%s", errno_r, ::strerror( errno_r ) );
+    }
+
+    /******************************************************************
+     **
+     **      FUNCTION NAME : toLower
+     **      FUNCTION TYPE : std::string
+    */
     std::string toLower( const std::string & s )
     {
       if ( s.empty() )

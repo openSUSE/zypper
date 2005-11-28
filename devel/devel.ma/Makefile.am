@@ -12,7 +12,7 @@ AM_LDFLAGS =
 AM_CXXFLAGS =
 # gperf:	-pg
 
-LDADD =		$(top_srcdir)/zypp/lib@PACKAGE@.la
+LDADD =		$(top_srcdir)/zypp/lib@PACKAGE@.la  -lboost_regex
 
 ## ##################################################
 

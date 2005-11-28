@@ -14,6 +14,7 @@
 
 #include <iosfwd>
 
+#include "zypp/base/Exception.h"
 #include "zypp/base/PtrTypes.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -53,7 +54,7 @@ namespace zypp
        * \throw INTERNAL if reference count is not zero.
       */
       virtual ~ReferenceCounted()
-      { if ( _counter ) throw( "~ReferenceCounted: nonzero reference count" ); }
+      { if ( _counter ) ZYPP_THROW( "~ReferenceCounted: nonzero reference count" ); }
 
       /** Assignment.
        * Reference count remains untouched.
@@ -77,7 +78,7 @@ namespace zypp
       void unref() const
       {
         if ( !_counter )
-          throw( "ReferenceCounted::unref: zero reference count" );
+          ZYPP_THROW( "ReferenceCounted::unref: zero reference count" );
         if ( --_counter == 0 )
           delete this;
       }
