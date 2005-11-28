@@ -18,24 +18,21 @@ element ns1:product {
     attribute lang { text },
     text
   }+,
-  element ns1:version {
-    attribute epoch { xsd:nonNegativeInteger },
-    attribute ver { text },
-    attribute rel { text }
-  },
   element provides {
     element entry {
       attribute name { text },
+      attribute kind { "package" | "patch" | "script" | "message" | "product"}?,
       (attribute flags { "EQ" | "LE" | "GE" },
        attribute epoch { xsd:nonNegativeInteger },
        attribute ver { text },
        attribute rel { text }?)?,
       empty
     }+
-  },
+  }?,
   element conflicts {
     element entry {
       attribute name { text },
+      attribute kind { "package" | "patch" | "script" | "message" | "product"}?,
       (attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" },
        attribute epoch { xsd:nonNegativeInteger },
        attribute ver { text },
@@ -46,6 +43,7 @@ element ns1:product {
   element obsoletes {
     element entry {
       attribute name { text },
+      attribute kind { "package" | "patch" | "script" | "message" | "product"}?,
       (attribute flags { "EQ" | "LE" | "GE" | "LT" },
        attribute epoch { xsd:nonNegativeInteger },
        attribute ver { text },
@@ -56,6 +54,7 @@ element ns1:product {
   element requires {
     element entry {
       attribute name { text },
+      attribute kind { "package" | "patch" | "script" | "message" | "product"}?,
       (attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" },
        attribute epoch { xsd:nonNegativeInteger },
        attribute ver { text },
@@ -63,5 +62,5 @@ element ns1:product {
       attribute pre { "1" | "0" }?,
       empty
     }*
-  }
+  }?
 }

@@ -105,7 +105,7 @@ namespace zypp {
               prim.parseDependencyEntries(& patchPtr->requires, child);
             }
             else if (name == "freshen") {
-              prim.parseDependencyEntries(& patchPtr->requires, child);
+              prim.parseDependencyEntries(& patchPtr->freshen, child);
             }
             else if (name == "category") {
       	patchPtr->category = _helper.content(child);

@@ -6,18 +6,18 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/parser/yum/YUMPrimaryParser.h
+/** \file zypp/parser/yum/YUMProductParser.h
  *
 */
 
 
 
-#ifndef YUMPrimaryParser_h
-#define YUMPrimaryParser_h
+#ifndef YUMProductParser_h
+#define YUMProductParser_h
 
-#include <zypp/parser/yum/YUMParserData.h>
-#include <zypp/parser/XMLNodeIterator.h>
-#include <zypp/parser/LibXMLHelper.h>
+#include "zypp/parser/yum/YUMParserData.h"
+#include "zypp/parser/XMLNodeIterator.h"
+#include "zypp/parser/LibXMLHelper.h"
 #include <list>
 
 namespace zypp {
@@ -27,10 +27,10 @@ namespace zypp {
       /**
       * @short Parser for YUM primary.xml files (containing package metadata)
       * Use this class as an iterator that produces, one after one,
-      * YUMPrimaryData_Ptr(s) for the XML package elements in the input.
+      * YUMProductData_Ptr(s) for the XML package elements in the input.
       * Here's an example:
       *
-      * for (YUMPrimaryParser iter(anIstream, baseUrl),
+      * for (YUMProductParser iter(anIstream, baseUrl),
       *      iter != YUMOtherParser.end(),     // or: iter() != 0, or ! iter.atEnd()
       *      ++iter) {
       *    doSomething(*iter)
@@ -44,31 +44,17 @@ namespace zypp {
       * continue parsing, XMLNodeIterator will log it and consider the input as finished.
       * You can query the exit status with errorStatus().
       */
-      class YUMPrimaryParser : public XMLNodeIterator<YUMPrimaryData_Ptr>
+      class YUMProductParser : public XMLNodeIterator<YUMProductData_Ptr>
       {
       public:
-        YUMPrimaryParser(std::istream &is, const std::string &baseUrl);
-        YUMPrimaryParser();
-        YUMPrimaryParser(YUMPrimaryData_Ptr& entry);
-        virtual ~YUMPrimaryParser();
+        YUMProductParser(std::istream &is, const std::string &baseUrl);
+        YUMProductParser();
+        YUMProductParser(YUMProductData_Ptr& entry);
+        virtual ~YUMProductParser();
     
       private:
-        // FIXME move needed method to a common class, inherit it
-        friend class YUMPatchParser;
-        friend class YUMProductParser;
         virtual bool isInterested(const xmlNodePtr nodePtr);
-        virtual YUMPrimaryData_Ptr process(const xmlTextReaderPtr reader);
-        void parseFormatNode(YUMPrimaryData_Ptr dataPtr,
-                             xmlNodePtr formatNode);
-        void parseDependencyEntries(std::list<YUMDependency> *depList, 
-                                    xmlNodePtr depNode);
-        void parseAuthorEntries(std::list<std::string> *authors,
-                                xmlNodePtr node);
-        void parseKeywordEntries(std::list<std::string> *keywords,
-                                 xmlNodePtr node);
-        void parseDirsizeEntries(std::list<YUMDirSize> *sizes,
-                                 xmlNodePtr node);
-    
+        virtual YUMProductData_Ptr process(const xmlTextReaderPtr reader);
         LibXMLHelper _helper;
       };
     } // namespace yum
