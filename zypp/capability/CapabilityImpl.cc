@@ -39,7 +39,9 @@ namespace zypp
     */
     std::ostream & operator<<( std::ostream & str, const CapabilityImpl & obj )
     {
-      return str << '[' << obj.refers() << "] " << obj.asString();
+      return str << '[' << obj.refers() << "] "
+      << '(' << obj.kind() << ") "
+      << obj.asString();
     }
 
     /////////////////////////////////////////////////////////////////

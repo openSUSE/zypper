@@ -29,10 +29,36 @@ namespace zypp
     class VersionedCap : public CapabilityImpl
     {
     public:
+      /** Ctor */
+      VersionedCap( const Resolvable::Kind & refers_r,
+                    const std::string & name_r,
+                    Rel op_r,
+                    const Edition & edition_r )
+      : CapabilityImpl( refers_r )
+      , _name( name_r )
+      , _op( op_r )
+      , _edition( edition_r )
+      {}
+    public:
       /**  */
-      bool matches( constResolvablePtr resolvable_r,
-                    const SolverContext & colverContext_r )
-      { return false; }
+      virtual const Kind & kind() const;
+
+      /**  */
+      virtual std::string asString() const;
+
+      /**  */
+      bool matches( Resolvable::constPtr resolvable_r,
+                    const SolverContext & colverContext_r ) const;
+
+    private:
+      /**  */
+      static const Kind _kind;
+      /**  */
+      std::string _name;
+      /**  */
+      Rel _op;
+      /**  */
+      Edition _edition;
     };
     ///////////////////////////////////////////////////////////////////
 

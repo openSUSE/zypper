@@ -22,6 +22,8 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_capability.la
 lib@PACKAGE@_capability_la_SOURCES = \
 	CapabilityImpl.cc	\
 	\
-	NamedCap.cc
+	FileCap.cc	\
+	NamedCap.cc	\
+	VersionedCap.cc
 
 ## ##################################################

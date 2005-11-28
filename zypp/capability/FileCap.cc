@@ -6,13 +6,12 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/capability/FileCap.h
+/** \file zypp/capability/FileCap.cc
  *
 */
-#ifndef ZYPP_CAPABILITY_FILECAP_H
-#define ZYPP_CAPABILITY_FILECAP_H
+#include "zypp/capability/FileCap.h"
 
-#include "zypp/capability/CapabilityImpl.h"
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -21,41 +20,19 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : FileCap
-    //
-    /** A \c filename matching if some Resolvable provides it.
-     *
-     * \todo Actually we have to look into the Resolable filelist as well.
-    */
-    class FileCap : public CapabilityImpl
+    const CapabilityImpl::Kind FileCap::_kind( "FileCap" );
+
+    const CapabilityImpl::Kind & FileCap::kind() const
+    { return _kind; }
+
+    std::string FileCap::asString() const
+    { return _fname; }
+
+    bool FileCap::matches( Resolvable::constPtr resolvable_r,
+                           const SolverContext & colverContext_r ) const
     {
-    public:
-      /** Ctor */
-      FileCap( const Resolvable::Kind & refers_r, const std::string & fname_r )
-      : CapabilityImpl( refers_r )
-      , _fname( fname_r )
-      {}
-
-    public:
-      /**  */
-      virtual const Kind & kind() const;
-
-      /**  */
-      virtual std::string asString() const;
-
-      /**  */
-      bool matches( Resolvable::constPtr resolvable_r,
-                    const SolverContext & colverContext_r ) const;
-
-    private:
-      /**  */
-      static const Kind _kind;
-      /**  */
-      std::string _fname;
-    };
-    ///////////////////////////////////////////////////////////////////
+      return false;
+    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace capability
@@ -63,4 +40,3 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_CAPABILITY_FILECAP_H

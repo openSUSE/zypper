@@ -6,13 +6,12 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/capability/FileCap.h
+/** \file zypp/capability/VersionedCap.cc
  *
 */
-#ifndef ZYPP_CAPABILITY_FILECAP_H
-#define ZYPP_CAPABILITY_FILECAP_H
+#include "zypp/capability/VersionedCap.h"
 
-#include "zypp/capability/CapabilityImpl.h"
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -21,41 +20,25 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : FileCap
-    //
-    /** A \c filename matching if some Resolvable provides it.
-     *
-     * \todo Actually we have to look into the Resolable filelist as well.
-    */
-    class FileCap : public CapabilityImpl
+    const CapabilityImpl::Kind VersionedCap::_kind( "VersionedCap" );
+
+    const CapabilityImpl::Kind & VersionedCap::kind() const
+    { return _kind; }
+
+    std::string VersionedCap::asString() const
     {
-    public:
-      /** Ctor */
-      FileCap( const Resolvable::Kind & refers_r, const std::string & fname_r )
-      : CapabilityImpl( refers_r )
-      , _fname( fname_r )
-      {}
+      std::string ret( _name );
+      ret += " ";
+      ret += _op.asString();
+      ret += " ";
+      return ret += _edition.asString();
+    }
 
-    public:
-      /**  */
-      virtual const Kind & kind() const;
-
-      /**  */
-      virtual std::string asString() const;
-
-      /**  */
-      bool matches( Resolvable::constPtr resolvable_r,
-                    const SolverContext & colverContext_r ) const;
-
-    private:
-      /**  */
-      static const Kind _kind;
-      /**  */
-      std::string _fname;
-    };
-    ///////////////////////////////////////////////////////////////////
+    bool VersionedCap::matches( Resolvable::constPtr resolvable_r,
+                                const SolverContext & colverContext_r ) const
+    {
+      return false;
+    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace capability
@@ -63,4 +46,3 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_CAPABILITY_FILECAP_H

@@ -36,6 +36,7 @@ namespace zypp
   public:
     /** Default ctor */
     CapFactory();
+
     /** Dtor */
     ~CapFactory();
 
@@ -46,12 +47,14 @@ namespace zypp
      * \throw EXCEPTION on parse error.
     */
     Capability parse( const std::string & strval_r ) const;
+
     /** Parse Capability from string (providing default Resolvable::Kind).
      * \a strval_r is expected to define a valid Capability. If it does
      * not define the Resolvable::Kind, \a defaultRefers_r is used instead.
      * \throw EXCEPTION on parse error.
     */
     Capability parse( const std::string & strval_r, const Resolvable::Kind & defaultRefers_r ) const;
+
 
     /** Parse Capability providing Resolvable::Kind, name, Rel and Edition.
      * \throw EXCEPTION on parse error.
@@ -60,6 +63,14 @@ namespace zypp
                       const std::string & name_r,
                       Rel op_r,
                       const Edition & edition_r ) const;
+
+    /** Parse Capability providing Resolvable::Kind, name, Rel and Edition as strings.
+     * \throw EXCEPTION on parse error.
+    */
+    Capability parse( const Resolvable::Kind & refers_r,
+                      const std::string & name_r,
+                      const std::string & op_r,
+                      const std::string & edition_r );
 
   private:
     /** Implementation */

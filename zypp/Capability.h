@@ -38,6 +38,9 @@ namespace zypp
   //	CLASS NAME : Capability
   //
   /** Resolvable capabilitiy.
+   *
+   * \see CapFactory: Factory creating Capability.
+   *
    * \invariant Nonzero \c _pimpl
    * \invariant Unified \c _pimpl asserted by CapFactory
   */
@@ -55,23 +58,29 @@ namespace zypp
     typedef capability::CapabilityImpl          Impl;
     typedef capability::CapabilityImpl_Ptr      Impl_Ptr ;
     typedef capability::CapabilityImpl_constPtr Impl_constPtr;
+
     /** Factory ctor */
     explicit
     Capability( Impl_Ptr impl_r );
+
   public:
     /** Factory */
     typedef CapFactory Factory;
+
     /** Dtor */
     virtual ~Capability();
 
   public:
     /** Kind of Resolvable the Capability refers to. */
     const Resolvable::Kind & refers() const;
+
     /** More or less human readable representation as string. */
     std::string asString() const;
+
     /** */
     bool matches( Resolvable::constPtr resolvable_r,
                   const SolverContext & colverContext_r ) const;
+
     /**  */
     bool matches( Resolvable::constPtr resolvable_r ) const;
 

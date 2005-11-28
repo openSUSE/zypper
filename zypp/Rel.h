@@ -29,14 +29,14 @@ namespace zypp
    * Except for use in a \c switch statement; see \ref inSwitch for this.
    *
    * But we want to construct them from a string representation, as well as
-   * providing one. Anf this way they are wrapped into a namespace, which is
+   * providing one. And this way they are wrapped into a namespace, which is
    * a good idea anyway.
    *
-   * \ref ANY and \ref NONE are somewhat special. \ref NONE is the
+   * \ref ANY and \ref NONE are somewhat special. \ref ANY is the
    * operator created by the default ctor, and it should always resolve
-   * to \c false. While \ref ANY should always resolve to \c true, and
-   * may be handy in queries when you're looking for a Resolvable in
-   * \c ANY Edition.
+   * to \c true. This may be handy in queries when you're looking for a
+   * Resolvable in \c ANY Edition if no operator was specified.
+   * While \ref NONE should always resolve to \c false.
    *
    * \ingroup g_EnumerationClass
   */
@@ -62,15 +62,15 @@ namespace zypp
     */
     enum for_use_in_switch { EQ_e, NE_e, LT_e, LE_e, GT_e, GE_e, ANY_e, NONE_e };
 
-    /** DefaultCtor NONE. */
+    /** DefaultCtor ANY. */
     Rel()
-    : _op( NONE_e )
+    : _op( ANY_e )
     {}
 
     /** Ctor from string.
      * Legal values for \a strval_r are: "==", "!=", "<", "<=", ">", ">=",<BR>
      * as well as "EQ", "NE", "LT", "LE", "GT", "GE", "ANY", "NONE"<BR>
-     * and "" (empty string resolves to NONE).
+     * and "" (empty string resolves to ANY).
      *
      * Lower case names are accepted as well.
      *

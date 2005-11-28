@@ -31,30 +31,33 @@ namespace zypp
     //
     //	CLASS NAME : CapabilityImpl
     //
-    /** */
+    /** Abstract base for Capability implementations. */
     class CapabilityImpl : public base::ReferenceCounted, private base::NonCopyable
     {
     public:
       typedef base::KindOf<Capability> Kind;
 
     public:
-      /** Ctor */
+      /** Ctor taking the kind of Resolvable \c this refers to.*/
       CapabilityImpl( const Resolvable::Kind & refers_r );
 
     public:
-      /**  */
+      /** Kind of capabiliy.  */
       virtual const Kind & kind() const = 0;
-      /**  */
+
+      /** Kind of Resolvable \c this refers to. */
       const Resolvable::Kind & refers() const
       { return _refers; }
-      /**  */
+
+      /** More or less human readable representation as string. */
       virtual std::string asString() const = 0;
+
       /**  */
       virtual bool matches( Resolvable::constPtr resolvable_r,
                             const SolverContext & colverContext_r ) const = 0;
 
     private:
-      /**  */
+      /** Kind of Resolvable \c this refers to. */
       Resolvable::Kind _refers;
     };
     ///////////////////////////////////////////////////////////////////

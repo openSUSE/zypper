@@ -22,6 +22,18 @@ namespace zypp
 
     const CapabilityImpl::Kind NamedCap::_kind( "NamedCap" );
 
+    const CapabilityImpl::Kind & NamedCap::kind() const
+    { return _kind; }
+
+    std::string NamedCap::asString() const
+    { return _name; }
+
+    bool NamedCap::matches( Resolvable::constPtr resolvable_r,
+                            const SolverContext & colverContext_r ) const
+    {
+      return false;
+    }
+
     /////////////////////////////////////////////////////////////////
   } // namespace capability
   ///////////////////////////////////////////////////////////////////

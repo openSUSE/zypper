@@ -137,13 +137,12 @@ namespace zypp
   /** Edition implementation */
   struct Edition::Impl
   {
-    /** Default ctor*/
     Impl()
-    : _epoch( 0 )
+    : _epoch( noepoch )
     {}
 
     Impl( const std::string & edition_r )
-    : _epoch( 0 )
+    : _epoch( noepoch )
     {
       str::smatch what;
       if( str::regex_match( edition_r.begin(), edition_r.end(),
@@ -169,39 +168,56 @@ namespace zypp
           const std::string & release_r,
           epoch_t epoch_r )
     : _epoch( epoch_r )
-    , _version( version_r )
-    , _release( release_r )
+    , _version( validateVR(version_r) )
+    , _release( validateVR(release_r) )
     {}
 
     Impl( const std::string & version_r,
           const std::string & release_r,
           const std::string & epoch_r )
-    : _epoch( strtoul( epoch_r.c_str(), NULL, 10 ) )
-    , _version( version_r )
-    , _release( release_r )
-    {
-#warning check legal VR
-    }
+    : _epoch( validateE(epoch_r) )
+    , _version( validateVR(version_r) )
+    , _release( validateVR(release_r) )
+    {}
 
     /** Dtor */
     ~Impl()
     {}
 
+    /** return validated epoch ([0-9]*) or throw */
+    static epoch_t validateE( const std::string & epoch_r )
+    {
+      if ( epoch_r.empty() )
+        return noepoch;
+
+      char * endptr = NULL;
+      epoch_t ret = strtoul( epoch_r.c_str(), &endptr, 10 );
+      if ( *endptr != '\0' )
+        ZYPP_THROW( string("Invalid eopch: ")+epoch_r );
+      return ret;
+    }
+
+    /** return validated version/release or throw */
+    static const std::string & validateVR( const std::string & vr_r )
+    {
+      str::smatch what;
+      if( ! str::regex_match( vr_r.begin(), vr_r.end(), what, _rxVR ) )
+        ZYPP_THROW( string("Invalid version/release: ")+vr_r );
+      return vr_r;
+    }
+
     epoch_t      _epoch;
     std::string _version;
     std::string _release;
 
-    static const std::string _rxE;
-    static const std::string _rxVR;
+    static const str::regex _rxVR;
     static const str::regex _rxEdition;
   };
   ///////////////////////////////////////////////////////////////////
 
-  const std::string Edition::Impl::_rxE( "([0-9]+):" );
-  const std::string Edition::Impl::_rxVR( "([^-]*)" );
-  const str::regex Edition::Impl::_rxEdition( str::form( "(%s)?%s(-%s)?",
-                                                         _rxE.c_str(),
-                                                         _rxVR.c_str(), _rxVR.c_str() ) );
+  const str::regex Edition::Impl::_rxVR( "([^-]*)" );
+
+  const str::regex Edition::Impl::_rxEdition( "(([0-9]+):)?([^-]*)(-([^-]*))?" );
 
   ///////////////////////////////////////////////////////////////////
 

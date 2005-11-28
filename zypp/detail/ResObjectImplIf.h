@@ -100,7 +100,7 @@ namespace zypp
       bool hasBackRef() const
       { return _backRef; }
 
-    protected:
+    public:
       /** Access to Resolvable data if connected. */
       const Resolvable *const self() const
       { return _backRef; }

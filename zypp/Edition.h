@@ -147,7 +147,7 @@ namespace zypp
 
   /** \relates Edition */
   inline bool operator!=( const Edition & lhs, const Edition & rhs )
-  { return Edition::compare( Rel::NE, lhs, rhs );; }
+  { return Edition::compare( Rel::NE, lhs, rhs ); }
 
   /** \relates Edition */
   inline bool operator<( const Edition & lhs, const Edition & rhs )

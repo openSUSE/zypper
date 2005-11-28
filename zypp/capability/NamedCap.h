@@ -25,7 +25,8 @@ namespace zypp
     //
     //	CLASS NAME : NamedCap
     //
-    /**
+    /** A \c name matching if some Resolvable provides it.
+     *
      * \todo implement matches().
     */
     class NamedCap : public CapabilityImpl
@@ -38,15 +39,15 @@ namespace zypp
       {}
     public:
       /**  */
-      virtual const Kind & kind() const
-      { return _kind; }
+      virtual const Kind & kind() const;
+
       /**  */
-      virtual std::string asString() const
-      { return _name; }
+      virtual std::string asString() const;
+
       /**  */
       virtual bool matches( Resolvable::constPtr resolvable_r,
-                            const SolverContext & colverContext_r ) const
-      { return false; }
+                            const SolverContext & colverContext_r ) const;
+
     private:
       /**  */
       static const Kind _kind;

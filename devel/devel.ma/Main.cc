@@ -11,6 +11,9 @@
 #include <zypp/Rel.h>
 
 using namespace std;
+
+#define TAG INT << __PRETTY_FUNCTION__ << endl
+
 template<class _C>
   void outc( const _C & cont, ostream & str )
   {
@@ -44,13 +47,12 @@ int main( int argc, char * argv[] )
   DBG << Edition() << endl;
   DBG << Edition("") << endl;
 
-  DBG << Edition("","","") << endl;
+  DBG << Edition("-","","") << endl;
 
   chk( "1.2.3-4.5.6" );
   chk( "3:1.2.3-4.5.6" );
 
   chk( "3:1.2.3-4.5.6-3" );
-
 
   INT << "===[END]============================================" << endl;
   return 0;
