@@ -72,7 +72,7 @@ namespace zypp
 	// now process the atoms
 	CapFactory _f;
 	Capability cap( _f.parse(
-	  Resolvable::Kind("Patch"),
+	  ResType::TraitsType::_kind,
 	  parsed.name,
 	  Rel(Rel::EQ),
 	  Edition(parsed.ver, parsed.rel, parsed.epoch)

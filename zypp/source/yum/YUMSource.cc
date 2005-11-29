@@ -50,7 +50,7 @@ namespace zypp
 	{
 	  shared_ptr<YUMPackageImpl> impl(new YUMPackageImpl(parsed));
 	  Dependencies _deps = createDependencies(parsed,
-						  Resolvable::Kind("Package"));
+						  ResTraits<Package>::_kind);
 	  Package::Ptr package = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
@@ -66,11 +66,11 @@ namespace zypp
 	{
 	  shared_ptr<YUMMessageImpl> impl(new YUMMessageImpl(parsed));
 	  Dependencies _deps = createDependencies(parsed,
-						  Resolvable::Kind("Message"));
+						  ResTraits<Message>::_kind);
 	  Message::Ptr message = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	    Arch( Arch_noarch ),
+	    Arch_noarch,
 	    impl
 	  );
 	  message->setDeps(_deps);
@@ -83,11 +83,11 @@ namespace zypp
 	{
 	  shared_ptr<YUMScriptImpl> impl(new YUMScriptImpl(parsed));
 	  Dependencies _deps = createDependencies(parsed,
-						  Resolvable::Kind("Script"));
+						  ResTraits<Script>::_kind);
 	  Script::Ptr script = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	    Arch( Arch_noarch ),
+	    Arch_noarch,
 	    impl
 	  );
 	  script->setDeps(_deps);
@@ -100,11 +100,11 @@ namespace zypp
 	{
 	  shared_ptr<YUMProductImpl> impl(new YUMProductImpl(parsed, this));
 	  Dependencies _deps = createDependencies(parsed,
-						  Resolvable::Kind("Product"));
+						  ResTraits<Product>::_kind);
 	  Product::Ptr product = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	    Arch( Arch_noarch ),
+	    Arch_noarch,
 	    impl
 	  );
 	  product->setDeps(_deps);
@@ -117,11 +117,11 @@ namespace zypp
 	{
 	  shared_ptr<YUMPatchImpl> impl(new YUMPatchImpl(parsed, this));
 	  Dependencies _deps = createDependencies(parsed,
-						  Resolvable::Kind("Patch"));
+						  ResTraits<Patch>::_kind);
 	  Patch::Ptr patch = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	    Arch( Arch_noarch ),
+	    Arch_noarch,
 	    impl
 	  );
 	  patch->setDeps(_deps);
