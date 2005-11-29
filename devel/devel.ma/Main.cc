@@ -9,6 +9,7 @@
 #include <zypp/Arch.h>
 #include <zypp/Edition.h>
 #include <zypp/Rel.h>
+#include <zypp/Capability.h>
 
 using namespace std;
 
@@ -44,15 +45,8 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  DBG << Edition() << endl;
-  DBG << Edition("") << endl;
-
-  DBG << Edition("-","","") << endl;
-
-  chk( "1.2.3-4.5.6" );
-  chk( "3:1.2.3-4.5.6" );
-
-  chk( "3:1.2.3-4.5.6-3" );
+  MIL << Capability() << Capability() << endl;
+  MIL << Capability() << Capability() << endl;
 
   INT << "===[END]============================================" << endl;
   return 0;

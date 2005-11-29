@@ -39,10 +39,34 @@ namespace zypp
   //
   /** Resolvable capabilitiy.
    *
+   * Capability is created by a Factory class. Only a default ctor
+   * creating a dummy capability is provided.
+   * \code
+   *   Capability cap;
+   *   try
+   *     {
+   *       cap = CapFactory().parse( ResTraits<Patch>::_kind,
+   *                                 parsed.name,
+   *                                 parsed.op,
+   *                                 Edition( parsed.ver,
+   *                                          parsed.rel,
+   *                                          parsed.epoch ) );
+   *     }
+   *   catch ( const Exception & excpt_r )
+   *     {
+   *       ERR << excpt_r << endl;
+   *       ... Or maybe just WAR, or ?
+   *     }
+   * \endcode
    * \see CapFactory: Factory creating Capability.
    *
    * \invariant Nonzero \c _pimpl
    * \invariant Unified \c _pimpl asserted by CapFactory
+   *
+   * \todo Need a trival return from matches. E.g. Conditional
+   * cpabilities must be able to indicate that they should be
+   * treated as if they were not present at all, if the precondition
+   * does no apply. Same for the defaut Capability.
   */
   class Capability
   {
@@ -66,6 +90,9 @@ namespace zypp
   public:
     /** Factory */
     typedef CapFactory Factory;
+
+    /** DefaultCtor creating a dummy Capability. */
+    Capability();
 
     /** Dtor */
     virtual ~Capability();

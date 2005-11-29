@@ -12,6 +12,7 @@ include_HEADERS = \
 	ConditionalCap.h\
 	FileCap.h	\
 	NamedCap.h	\
+	NullCap.h	\
 	OrCap.h		\
 	VersionedCap.h
 
@@ -24,6 +25,7 @@ lib@PACKAGE@_capability_la_SOURCES = \
 	\
 	FileCap.cc	\
 	NamedCap.cc	\
+	NullCap.cc	\
 	VersionedCap.cc
 
 ## ##################################################

@@ -12,7 +12,6 @@
 #include "zypp/source/yum/YUMScriptImpl.h"
 #include "zypp/Arch.h"
 #include "zypp/Edition.h"
-#include <zypp/detail/ResObjectFactory.h>
 
 
 using namespace std;
