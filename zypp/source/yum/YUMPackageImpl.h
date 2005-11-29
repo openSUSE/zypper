@@ -103,6 +103,10 @@ namespace zypp
 	virtual unsigned mediaId() const;
         /** */
 	virtual PackageImplIf::CheckSum checksum() const;
+        /** */
+	virtual std::list<PackageImplIf::DeltaRpm> deltaRpms() const;
+        /** */
+	virtual std::list<PackageImplIf::PatchRpm> patchRpms() const;
 
 #if 0
         /** */
@@ -201,6 +205,8 @@ namespace zypp
 	PackageImplIf::CheckSum _checksum;
 	Text _filenames;
 	std::string _location;
+	std::list<DeltaRpm> _delta_rpms;
+	std::list<PatchRpm> _patch_rpms;
 
 	bool _install_only;
 /*
@@ -212,28 +218,6 @@ namespace zypp
 */
 /*
 	std::list<ChangelogEntry> changelog;
-	// Package Files
-	struct {
-	  std::string arch;
-	  std::string filename;
-	  std::string downloadsize;
-	  std::string md5sum;
-	  std::string buildtime;
-	} plainRpm;
-	struct {
-	  std::string arch;
-	  std::string filename;
-	  std::string downloadsize;
-	  std::string md5sum;
-	  std::string buildtime;
-	  std::list<YUMBaseVersion> baseVersions;
-	} patchRpm;
-	struct {
-	  std::string arch;
-	  std::string filename;
-	  std::string downloadsize;
-
-
 */
 
 

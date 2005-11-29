@@ -53,7 +53,7 @@ namespace zypp
 						  Resolvable::Kind("Package"));
 	  Package::Ptr package = detail::makeResolvableFromImpl(
 	    parsed.name,
-	    Edition( parsed.ver, parsed.rel ),
+	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
 	    Arch( parsed.arch ),
 	    impl
 	  );
@@ -69,7 +69,7 @@ namespace zypp
 						  Resolvable::Kind("Message"));
 	  Message::Ptr message = detail::makeResolvableFromImpl(
 	    parsed.name,
-	    Edition( parsed.ver, parsed.rel ),
+	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
 	    Arch( "noarch" ),
 	    impl
 	  );
@@ -86,7 +86,7 @@ namespace zypp
 						  Resolvable::Kind("Script"));
 	  Script::Ptr script = detail::makeResolvableFromImpl(
 	    parsed.name,
-	    Edition( parsed.ver, parsed.rel ),
+	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
 	    Arch( "noarch" ),
 	    impl
 	  );
@@ -103,7 +103,7 @@ namespace zypp
 						  Resolvable::Kind("Product"));
 	  Product::Ptr product = detail::makeResolvableFromImpl(
 	    parsed.name,
-	    Edition( parsed.ver, parsed.rel ),
+	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
 	    Arch( "noarch" ),
 	    impl
 	  );
@@ -120,7 +120,7 @@ namespace zypp
 						  Resolvable::Kind("Patch"));
 	  Patch::Ptr patch = detail::makeResolvableFromImpl(
 	    parsed.name,
-	    Edition( parsed.ver, parsed.rel ),
+	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
 	    Arch( "noarch" ),
 	    impl
 	  );
@@ -198,9 +198,7 @@ namespace zypp
 	    _kind,
 	    dep.name,
 	    Rel(dep.flags),
-	    Edition(dep.ver,
-		    dep.rel,
-		    strtol(dep.epoch.c_str(), 0, 10))
+	    Edition(dep.ver, dep.rel, dep.epoch)
 	  );
 	  return cap;
 	}

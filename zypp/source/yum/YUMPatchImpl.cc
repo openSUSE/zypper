@@ -75,7 +75,7 @@ namespace zypp
 	  Resolvable::Kind("Patch"),
 	  parsed.name,
 	  Rel(Rel::EQ),
-	  Edition(parsed.ver, parsed.rel, strtol(parsed.epoch.c_str(), 0, 10))
+	  Edition(parsed.ver, parsed.rel, parsed.epoch)
 	  ));
 	for (std::list<shared_ptr<YUMPatchAtom> >::const_iterator it
 					= parsed.atoms.begin();

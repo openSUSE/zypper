@@ -55,6 +55,8 @@ namespace zypp
 		  parsed.checksum),
 	_filenames(),
 	_location(parsed.location),
+	_delta_rpms(),
+	_patch_rpms(),
 
 	_install_only(parsed.installOnly)
 #if 0
@@ -67,6 +69,7 @@ namespace zypp
       {
 	_description.push_back(parsed.description);
 // TODO files
+// TODO changelog
       }
 
       YUMPackageImpl::YUMPackageImpl(
@@ -90,7 +93,9 @@ namespace zypp
 	_checksum(parsed.checksumType,
 		  parsed.checksum),
 	_filenames(),
-	_location(parsed.location),
+	_location(parsed.plainRpms.begin()->filename)
+	_delta_rpms(),
+	_patch_rpms(),
 
 	_install_only(parsed.installOnly)
 #if 0
@@ -108,34 +113,55 @@ namespace zypp
 	{
 	  _filenames.push_back(it->name);
 	}
-	
-/*
-    std::list<ChangelogEntry> changelog;
-    // Package Files
-    struct {
-      std::string arch;
-      std::string filename;
-      std::string downloadsize;
-      std::string md5sum;
-      std::string buildtime;
-    } plainRpm;
-    struct {
-      std::string arch;
-      std::string filename;
-      std::string downloadsize;
-      std::string md5sum;
-      std::string buildtime;
-      std::list<YUMBaseVersion> baseVersions;
-    } patchRpm;
-    struct {
-      std::string arch;
-      std::string filename;
-      std::string downloadsize;
-      std::string md5sum;
-      std::string buildtime;
-      YUMBaseVersion baseVersion;
-    } deltaRpm;
-*/
+	for (std::list<zypp::parser::yum::PatchRpm>::const_iterator it
+		= parsed.patchRpms.begin();
+	     it != parsed.patchRpms.end();
+	     it++)
+	{
+	  std::list<BaseVersion> base_versions;
+	  for (std::list<YUMBaseVersion>::const_iterator bit
+			= it->baseVersions.begin();
+	       bit != it->baseVersions.end();
+	       bit++)
+	  {
+	    Edition base_edition(bit->ver, bit->rel, bit->epoch);
+	    BaseVersion base_version(base_edition,
+				     CheckSum("md5", bit->md5sum),
+				     strtol(bit->buildtime.c_str(), 0, 10));
+	    base_versions.push_back(base_version);
+	  }
+	  PatchRpm patch(Arch(it->arch),
+			 it->filename,
+			 strtol(it->downloadsize.c_str(), 0, 10),
+			 CheckSum("md5", it->md5sum),
+			 strtol(it->buildtime.c_str(), 0, 10),
+			 base_versions
+	  );
+	  _patch_rpms.push_back(patch);
+	  
+	}
+	for (std::list<zypp::parser::yum::DeltaRpm>::const_iterator it
+		= parsed.deltaRpms.begin();
+	     it != parsed.deltaRpms.end();
+	     it++)
+	{
+	  Edition base_edition(it->baseVersion.ver,
+			       it->baseVersion.rel,
+			       it->baseVersion.epoch);
+	  BaseVersion base_version(base_edition,
+				   CheckSum("md5", it->baseVersion.md5sum),
+				   strtol(it->baseVersion.buildtime.c_str(),
+					0, 10));
+	  DeltaRpm delta(Arch(it->arch),
+			 it->filename,
+			 strtol(it->downloadsize.c_str(), 0, 10),
+			 CheckSum("md5", it->md5sum),
+			 strtol(it->buildtime.c_str(), 0, 10),
+			 base_version
+	  );
+	  _delta_rpms.push_back(delta);
+	}
+// TODO changelog
       }
 
 
@@ -269,6 +295,11 @@ namespace zypp
       PackageImplIf::CheckSum YUMPackageImpl::checksum() const
       { return _checksum; }
 
+      std::list<PackageImplIf::DeltaRpm> YUMPackageImpl::deltaRpms() const
+      { return _delta_rpms; }
+
+      std::list<PackageImplIf::PatchRpm> YUMPackageImpl::patchRpms() const
+      { return _patch_rpms; }
 
 #if 0
       /** */
