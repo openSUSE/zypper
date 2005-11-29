@@ -41,9 +41,7 @@ namespace zypp
 
   Exception::Exception( const CodeLocation & where_r, const std::string & msg_r )
   : _where( where_r ), _msg( msg_r )
-  {
-    INT << asString() << endl;
-  }
+  {}
 
   Exception::~Exception() throw()
   {}
@@ -67,9 +65,15 @@ namespace zypp
     return ret += strErrno( errno_r );
   }
 
-  void Exception::caught() const
+  void Exception::relocate( Exception & excpt_r, const CodeLocation & where_r )
   {
-    INT << "Caught: " << asString() << endl;
+    excpt_r._where = where_r;
+  }
+
+  void Exception::log( const Exception & excpt_r, const CodeLocation & where_r,
+                       const char *const prefix_r )
+  {
+    INT << where_r << " " << prefix_r << " " << excpt_r << endl;
   }
 
   std::ostream & operator<<( std::ostream & str, const Exception & obj )

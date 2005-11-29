@@ -61,15 +61,38 @@ namespace zypp
   //	CLASS NAME : Exception
   /** Exception stores message and \ref CodeLocation.
    *
-   * Use \ref ZYPP_THROW to throw exceptions. Assuming this,
-   * the ctor logs it's creation, as it't the point where the
-   * exception is thrown. If you catch the Excetion, you may
-   * call \ref caught, to drop a logling telling so.
+   * Use \ref ZYPP_THROW to throw exceptions.
+   * \code
+   *  43   try
+   *  44     {
+   *  45       try
+   *  46         {
+   *  47           ZYPP_THROW( "Something bad happened." );
+   *  48         }
+   *  49       catch ( Exception & excpt )
+   *  50         {
+   *  51           ZYPP_RETHROW( excpt );
+   *  52         }
+   *  53
+   *  54     }
+   *  55   catch ( Exception & excpt )
+   *  56     {
+   *  57       ZYPP_CAUGHT( excpt );
+   *  58     }
+   * \endcode
+   * The above produces the following log lines:
+   * \code
+   *  Main.cc(main):47 THROW:    Main.cc(main):47: Something bad happened.
+   *  Main.cc(main):51 RETHROW:  Main.cc(main):47: Something bad happened.
+   *  Main.cc(main):57 CAUGHT:   Main.cc(main):51: Something bad happened.
+   * \endcode
    *
    * \todo That's a draft to have a common way of throwing exceptions.
    * Most probabely we'll finally use blocxx exceptions. Here, but not
    * in the remaining code of zypp. If we can we should try to wrap
    * the blocxx macros and typedef the classes in here.
+   *
+   * \todo maybe location and message stack.
    **/
   class Exception : public std::exception
   {
@@ -100,14 +123,19 @@ namespace zypp
     /** Exception as string */
     std::string asString() const;
 
-    /** Simply drops a log line. */
-    void caught() const;
-
   public:
      /** Make a string from \a errno_r. */
     static std::string strErrno( int errno_r );
      /** Make a string from \a errno_r and \a msg_r. */
     static std::string strErrno( int errno_r, const std::string & msg_r );
+
+  public:
+    /** Exchange location on rethrow. */
+    static void relocate( Exception & excpt_r, const CodeLocation & where_r );
+
+    /** Drop a logline. */
+    static void log( const Exception & excpt_r, const CodeLocation & where_r,
+                     const char *const prefix_r );
 
   private:
     CodeLocation _where;
@@ -120,13 +148,50 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
 
-  /** Actually throw an Exception. */
-#define ZYPP_DOTHROW(EXCPT) throw( EXCPT )
+  /** Helper for \ref ZYPP_THROW. */
+  template<class _Excpt>
+    void _ZYPP_THROW( const _Excpt & excpt_r, const exceptinon_detail::CodeLocation & where_r )
+    {
+      Exception::log( excpt_r, where_r, "THROW:   " );
+      throw( excpt_r );
+    }
+
+  /** Helper for \ref ZYPP_THROW. */
+  template<class _Excpt>
+    void _ZYPP_CAUGHT( const _Excpt & excpt_r, const exceptinon_detail::CodeLocation & where_r )
+    {
+      Exception::log( excpt_r, where_r, "CAUGHT:  " );
+    }
+
+  /** Helper for \ref ZYPP_THROW. */
+  template<class _Excpt>
+    void _ZYPP_RETHROW( _Excpt & excpt_r, const exceptinon_detail::CodeLocation & where_r )
+    {
+      Exception::log( excpt_r, where_r, "RETHROW: " );
+      excpt_r.relocate( excpt_r, where_r );
+      throw excpt_r;
+    }
+
+  /** Helper for \ref ZYPP_THROW. */
+#define ZYPP_DOTHROW(EXCPT) _ZYPP_THROW( EXCPT, ZYPP_EX_CODELOCATION )
+
+  ///////////////////////////////////////////////////////////////////
 
   /** \defgroup ZYPP_THROW ZYPP_THROW macros
    * Macros for throwing Exception.
+   * \see \ref zypp::Exception for an example.
   */
   //@{
+  /** Drops a logline telling the Exception was caught (in order to handle it). */
+#define ZYPP_CAUGHT(EXCPT)\
+  _ZYPP_CAUGHT( EXCPT, ZYPP_EX_CODELOCATION )
+
+  /** Drops a logline and rethrows, updating the CodeLocation. */
+#define ZYPP_RETHROW(EXCPT)\
+  _ZYPP_RETHROW( EXCPT, ZYPP_EX_CODELOCATION )
+
+
+
   /** Throw a message string. */
 #define ZYPP_THROW(MSG)\
   ZYPP_DOTHROW( ::zypp::Exception( ZYPP_EX_CODELOCATION, MSG ) )
