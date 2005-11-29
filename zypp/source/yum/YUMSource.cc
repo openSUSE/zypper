@@ -70,7 +70,7 @@ namespace zypp
 	  Message::Ptr message = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	    Arch( "noarch" ),
+	    Arch( Arch_noarch ),
 	    impl
 	  );
 	  message->setDeps(_deps);
@@ -87,7 +87,7 @@ namespace zypp
 	  Script::Ptr script = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	    Arch( "noarch" ),
+	    Arch( Arch_noarch ),
 	    impl
 	  );
 	  script->setDeps(_deps);
@@ -104,7 +104,7 @@ namespace zypp
 	  Product::Ptr product = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	    Arch( "noarch" ),
+	    Arch( Arch_noarch ),
 	    impl
 	  );
 	  product->setDeps(_deps);
@@ -121,7 +121,7 @@ namespace zypp
 	  Patch::Ptr patch = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	    Arch( "noarch" ),
+	    Arch( Arch_noarch ),
 	    impl
 	  );
 	  patch->setDeps(_deps);
