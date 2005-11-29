@@ -93,7 +93,7 @@ namespace zypp
 	_checksum(parsed.checksumType,
 		  parsed.checksum),
 	_filenames(),
-	_location(parsed.plainRpms.begin()->filename)
+	_location(parsed.plainRpms.begin()->filename),
 	_delta_rpms(),
 	_patch_rpms(),
 
