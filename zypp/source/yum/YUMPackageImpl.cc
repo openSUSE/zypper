@@ -12,6 +12,7 @@
 
 #include "zypp/source/yum/YUMPackageImpl.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Logger.h"
 
 using namespace std;
 using namespace zypp::detail;
@@ -34,7 +35,9 @@ namespace zypp
       /** Default ctor
       */
       YUMPackageImpl::YUMPackageImpl(
-	const zypp::parser::yum::YUMPrimaryData & parsed
+	const zypp::parser::yum::YUMPrimaryData & parsed,
+	const zypp::parser::yum::YUMFileListData & filelist,
+	const zypp::parser::yum::YUMOtherData & other
       )
       : _summary(parsed.summary),
 	_description(),
@@ -68,7 +71,12 @@ namespace zypp
 #endif
       {
 	_description.push_back(parsed.description);
-// TODO files
+	for (std::list<FileData>::const_iterator it = filelist.files.begin();
+	     it != filelist.files.end();
+	     it++)
+	{
+	  _filenames.push_back(it->name);
+	}
 // TODO changelog
       }
 

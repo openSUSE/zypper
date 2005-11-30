@@ -45,87 +45,156 @@ namespace zypp
 
 
 	Package::Ptr YUMSource::createPackage(
+	  const zypp::parser::yum::YUMPrimaryData & parsed,
+	  const zypp::parser::yum::YUMFileListData & filelist,
+	  const zypp::parser::yum::YUMOtherData & other
+	)
+	{
+	  try
+	  {
+	    shared_ptr<YUMPackageImpl> impl(
+	      new YUMPackageImpl(parsed, filelist, other));
+	    Dependencies _deps = createDependencies(parsed,
+	  					  ResTraits<Package>::kind);
+	    Package::Ptr package = detail::makeResolvableFromImpl(
+	      parsed.name,
+	      Edition( parsed.ver, parsed.rel, parsed.epoch ),
+	      Arch( parsed.arch ),
+	      impl
+	    );
+	    package->setDeps(_deps);
+	    return package;
+	  }
+	  catch (const Exception & excpt_r)
+	  {
+	    ERR << excpt_r << endl;
+	    throw "Cannot create package object";
+	  }
+	}
+
+	Package::Ptr YUMSource::createPackage(
 	  const zypp::parser::yum::YUMPatchPackage & parsed
 	)
 	{
-	  shared_ptr<YUMPackageImpl> impl(new YUMPackageImpl(parsed));
-	  Dependencies _deps = createDependencies(parsed,
-						  ResTraits<Package>::kind);
-	  Package::Ptr package = detail::makeResolvableFromImpl(
-	    parsed.name,
-	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	    Arch( parsed.arch ),
-	    impl
-	  );
-	  package->setDeps(_deps);
-	  return package;
+	  try
+	  {
+	    shared_ptr<YUMPackageImpl> impl(new YUMPackageImpl(parsed));
+	    Dependencies _deps = createDependencies(parsed,
+	  					  ResTraits<Package>::kind);
+	    Package::Ptr package = detail::makeResolvableFromImpl(
+	      parsed.name,
+	      Edition( parsed.ver, parsed.rel, parsed.epoch ),
+	      Arch( parsed.arch ),
+	      impl
+	    );
+	    package->setDeps(_deps);
+	    return package;
+	  }
+	  catch (const Exception & excpt_r)
+	  {
+	    ERR << excpt_r << endl;
+	    throw "Cannot create package object";
+	  }
 	}
+
 	Message::Ptr YUMSource::createMessage(
 	  const zypp::parser::yum::YUMPatchMessage & parsed
 	)
 	{
-	  shared_ptr<YUMMessageImpl> impl(new YUMMessageImpl(parsed));
-	  Dependencies _deps = createDependencies(parsed,
-						  ResTraits<Message>::kind);
-	  Message::Ptr message = detail::makeResolvableFromImpl(
-	    parsed.name,
-	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	    Arch_noarch,
-	    impl
-	  );
-	  message->setDeps(_deps);
-	  return message;
+	  try
+	  {
+	    shared_ptr<YUMMessageImpl> impl(new YUMMessageImpl(parsed));
+	    Dependencies _deps = createDependencies(parsed,
+						    ResTraits<Message>::kind);
+	    Message::Ptr message = detail::makeResolvableFromImpl(
+	      parsed.name,
+	      Edition( parsed.ver, parsed.rel, parsed.epoch ),
+	      Arch_noarch,
+	      impl
+	    );
+	    message->setDeps(_deps);
+	    return message;
+	  }
+	  catch (const Exception & excpt_r)
+	  {
+	    ERR << excpt_r << endl;
+	    throw "Cannot create message object";
+	  }
 	}
 
 	Script::Ptr YUMSource::createScript(
 	  const zypp::parser::yum::YUMPatchScript & parsed
 	)
 	{
-	  shared_ptr<YUMScriptImpl> impl(new YUMScriptImpl(parsed));
-	  Dependencies _deps = createDependencies(parsed,
-						  ResTraits<Script>::kind);
-	  Script::Ptr script = detail::makeResolvableFromImpl(
-	    parsed.name,
-	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	    Arch_noarch,
-	    impl
-	  );
-	  script->setDeps(_deps);
-	  return script;
+	  try
+	  {
+	    shared_ptr<YUMScriptImpl> impl(new YUMScriptImpl(parsed));
+	    Dependencies _deps = createDependencies(parsed,
+						    ResTraits<Script>::kind);
+	    Script::Ptr script = detail::makeResolvableFromImpl(
+	      parsed.name,
+	      Edition( parsed.ver, parsed.rel, parsed.epoch ),
+	      Arch_noarch,
+	      impl
+	    );
+	    script->setDeps(_deps);
+	    return script;
+	  }
+	  catch (const Exception & excpt_r)
+	  {
+	    ERR << excpt_r << endl;
+	    throw "Cannot create script object";
+	  }
 	}
 
 	Product::Ptr YUMSource::createProduct(
 	  const zypp::parser::yum::YUMProductData & parsed
 	)
 	{
-	  shared_ptr<YUMProductImpl> impl(new YUMProductImpl(parsed, this));
-	  Dependencies _deps = createDependencies(parsed,
-						  ResTraits<Product>::kind);
-	  Product::Ptr product = detail::makeResolvableFromImpl(
-	    parsed.name,
-	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	    Arch_noarch,
-	    impl
-	  );
-	  product->setDeps(_deps);
-	  return product;
+	  try
+	  {
+	    shared_ptr<YUMProductImpl> impl(new YUMProductImpl(parsed, this));
+	    Dependencies _deps = createDependencies(parsed,
+						    ResTraits<Product>::kind);
+	    Product::Ptr product = detail::makeResolvableFromImpl(
+	      parsed.name,
+	      Edition( parsed.ver, parsed.rel, parsed.epoch ),
+	      Arch_noarch,
+	      impl
+	    );
+	    product->setDeps(_deps);
+	    return product;
+	  }
+	  catch (const Exception & excpt_r)
+	  {
+	    ERR << excpt_r << endl;
+	    throw "Cannot create product object";
+	  }
 	}
 
 	Patch::Ptr YUMSource::createPatch(
 	  const zypp::parser::yum::YUMPatchData & parsed
 	)
 	{
-	  shared_ptr<YUMPatchImpl> impl(new YUMPatchImpl(parsed, this));
-	  Dependencies _deps = createDependencies(parsed,
-						  ResTraits<Patch>::kind);
-	  Patch::Ptr patch = detail::makeResolvableFromImpl(
-	    parsed.name,
-	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	    Arch_noarch,
-	    impl
-	  );
-	  patch->setDeps(_deps);
-	  return patch;
+	  try
+	  {
+	    shared_ptr<YUMPatchImpl> impl(new YUMPatchImpl(parsed, this));
+	    Dependencies _deps = createDependencies(parsed,
+						    ResTraits<Patch>::kind);
+	    Patch::Ptr patch = detail::makeResolvableFromImpl(
+	      parsed.name,
+	      Edition( parsed.ver, parsed.rel, parsed.epoch ),
+	      Arch_noarch,
+	      impl
+	    );
+	    patch->setDeps(_deps);
+	    return patch;
+	  }
+	  catch (const Exception & excpt_r)
+	  {
+	    ERR << excpt_r << endl;
+	    throw "Cannot create patch object";
+	  }
 	}
 
 	Dependencies YUMSource::createDependencies(

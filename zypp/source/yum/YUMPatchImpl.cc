@@ -74,7 +74,7 @@ namespace zypp
 	Capability cap( _f.parse(
 	  ResType::TraitsType::kind,
 	  parsed.name,
-	  Rel(Rel::EQ),
+	  Rel::EQ,
 	  Edition(parsed.ver, parsed.rel, parsed.epoch)
 	  ));
 	for (std::list<shared_ptr<YUMPatchAtom> >::const_iterator it

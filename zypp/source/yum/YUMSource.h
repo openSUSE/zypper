@@ -44,6 +44,11 @@ namespace zypp
         YUMSource();
 
 	Package::Ptr createPackage(
+	  const zypp::parser::yum::YUMPrimaryData & parsed,
+	  const zypp::parser::yum::YUMFileListData & filelist,
+	  const zypp::parser::yum::YUMOtherData & other
+	);
+	Package::Ptr createPackage(
 	  const zypp::parser::yum::YUMPatchPackage & parsed
 	);
 	Message::Ptr createMessage(
