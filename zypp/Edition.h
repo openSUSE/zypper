@@ -58,6 +58,7 @@ namespace zypp
    * \todo Define exceptions.
    * \todo optimize implementation(e.g don't store epoch if noepoch)
    * \todo implement debian comparison and make choice backend specific
+   * \todo optimize noedition. unified Impl and quick check in compare.
   */
   class Edition
   {
@@ -68,8 +69,14 @@ namespace zypp
     /** Value representing \c noepoch. */
     static const epoch_t noepoch = 0;
 
+    /** Value representing \c noedition.
+     * This is in fact a valid Edition. It's what the default ctor
+     * creates or will be parsed from an empty string.
+    */
+    static const Edition noedition;
+
   public:
-    /** Default ctor. */
+    /** Default ctor: \ref noedition. */
     Edition();
 
     /** Ctor taking edition as string.

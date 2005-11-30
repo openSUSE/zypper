@@ -42,7 +42,7 @@ namespace zypp
       typedef base::intrusive_ptr<_Res>       PtrType;
       typedef base::intrusive_ptr<const _Res> constPtrType;
 
-      static const KindType _kind;
+      static const KindType kind;
     };
 
   /** ResTraits specialisation for Resolvable.

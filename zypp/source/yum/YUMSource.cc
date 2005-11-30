@@ -50,7 +50,7 @@ namespace zypp
 	{
 	  shared_ptr<YUMPackageImpl> impl(new YUMPackageImpl(parsed));
 	  Dependencies _deps = createDependencies(parsed,
-						  ResTraits<Package>::_kind);
+						  ResTraits<Package>::kind);
 	  Package::Ptr package = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
@@ -66,7 +66,7 @@ namespace zypp
 	{
 	  shared_ptr<YUMMessageImpl> impl(new YUMMessageImpl(parsed));
 	  Dependencies _deps = createDependencies(parsed,
-						  ResTraits<Message>::_kind);
+						  ResTraits<Message>::kind);
 	  Message::Ptr message = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
@@ -83,7 +83,7 @@ namespace zypp
 	{
 	  shared_ptr<YUMScriptImpl> impl(new YUMScriptImpl(parsed));
 	  Dependencies _deps = createDependencies(parsed,
-						  ResTraits<Script>::_kind);
+						  ResTraits<Script>::kind);
 	  Script::Ptr script = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
@@ -100,7 +100,7 @@ namespace zypp
 	{
 	  shared_ptr<YUMProductImpl> impl(new YUMProductImpl(parsed, this));
 	  Dependencies _deps = createDependencies(parsed,
-						  ResTraits<Product>::_kind);
+						  ResTraits<Product>::kind);
 	  Product::Ptr product = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
@@ -117,7 +117,7 @@ namespace zypp
 	{
 	  shared_ptr<YUMPatchImpl> impl(new YUMPatchImpl(parsed, this));
 	  Dependencies _deps = createDependencies(parsed,
-						  ResTraits<Patch>::_kind);
+						  ResTraits<Patch>::kind);
 	  Patch::Ptr patch = detail::makeResolvableFromImpl(
 	    parsed.name,
 	    Edition( parsed.ver, parsed.rel, parsed.epoch ),
@@ -146,28 +146,28 @@ namespace zypp
 	  {
 	    _provides.insert(createCapability(*it, my_kind));
 	  }
-  
+
 	  for (std::list<YUMDependency>::const_iterator it = parsed.conflicts.begin();
 	       it != parsed.conflicts.end();
 	       it++)
 	  {
 	    _conflicts.insert(createCapability(*it, my_kind));
 	  }
-  
+
 	  for (std::list<YUMDependency>::const_iterator it = parsed.obsoletes.begin();
 	       it != parsed.obsoletes.end();
 	       it++)
 	  {
 	    _obsoletes.insert(createCapability(*it, my_kind));
 	  }
-  
+
 	  for (std::list<YUMDependency>::const_iterator it = parsed.freshen.begin();
 	       it != parsed.freshen.end();
 	       it++)
 	  {
 	    _freshens.insert(createCapability(*it, my_kind));
 	  }
-  
+
 	  for (std::list<YUMDependency>::const_iterator it = parsed.requires.begin();
 	       it != parsed.requires.end();
 	       it++)
@@ -177,7 +177,7 @@ namespace zypp
 	    else
 	      _requires.insert(createCapability(*it, my_kind));
 	  }
-  
+
 	  _deps.setProvides(_provides);
 	  _deps.setConflicts(_conflicts);
 	  _deps.setObsoletes(_obsoletes);
@@ -202,7 +202,7 @@ namespace zypp
 	  );
 	  return cap;
 	}
-  
+
     } // namespace yum
     /////////////////////////////////////////////////////////////////
   } // namespace source

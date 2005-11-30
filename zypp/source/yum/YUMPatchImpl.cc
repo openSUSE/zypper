@@ -72,7 +72,7 @@ namespace zypp
 	// now process the atoms
 	CapFactory _f;
 	Capability cap( _f.parse(
-	  ResType::TraitsType::_kind,
+	  ResType::TraitsType::kind,
 	  parsed.name,
 	  Rel(Rel::EQ),
 	  Edition(parsed.ver, parsed.rel, parsed.epoch)
@@ -159,17 +159,17 @@ namespace zypp
       {
         return _category;
       }
-  
+
       bool YUMPatchImpl::reboot_needed() const
       {
         return _reboot_needed;
       }
-  
+
       bool YUMPatchImpl::affects_pkg_manager() const
       {
         return _affects_pkg_manager;
       }
-  
+
       bool YUMPatchImpl::interactive() {
         if (_reboot_needed)
         {
@@ -191,16 +191,16 @@ namespace zypp
                                    // Resolvable*
                                     // Resolvable
                                      // ResolvablePtr
-  
-  
+
+
             // <ma> never do somthing like this!!!
   //          Package* p = (Package*)&**it;
             //
             // (*it) is a ResolvablePtr
-  
-  
-  
-  
+
+
+
+
             // FIXME use the condition
   //          if (p->licenseToConfirm() != "")
             if (false)
@@ -212,11 +212,11 @@ namespace zypp
         }
         return false;
       }
-  
+
       YUMPatchImpl::AtomList YUMPatchImpl::all_atoms() {
         return _atoms;
       }
-  
+
       YUMPatchImpl::AtomList YUMPatchImpl::not_installed_atoms() {
         AtomList ret;
         for (AtomList::iterator it = _atoms.begin();
@@ -230,9 +230,9 @@ namespace zypp
         }
         return ret;
       }
-  
+
   // TODO check necessarity of functions below
-  
+
       bool YUMPatchImpl::any_atom_selected() {
         for (AtomList::iterator it = _atoms.begin();
           it != _atoms.end();
@@ -245,7 +245,7 @@ namespace zypp
         }
         return false;
       }
-  
+
       void YUMPatchImpl::mark_atoms_to_freshen( bool freshen ) {
         for (AtomList::iterator it = _atoms.begin();
           it != _atoms.end();
@@ -254,7 +254,7 @@ namespace zypp
           // TODO mark the resolvable to be or not to be freshed
         }
       }
-  
+
     } // namespace yum
     /////////////////////////////////////////////////////////////////
   } // namespace source

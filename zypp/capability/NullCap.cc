@@ -27,7 +27,7 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     NullCap::NullCap()
-    : CapabilityImpl( Resolvable::Kind() ) // Resolvable::Kind ANY
+    : CapabilityImpl( Resolvable::Kind() ) // no Kind!
     {}
 
     CapabilityImpl_Ptr NullCap::instance()

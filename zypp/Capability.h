@@ -45,7 +45,7 @@ namespace zypp
    *   Capability cap;
    *   try
    *     {
-   *       cap = CapFactory().parse( ResTraits<Patch>::_kind,
+   *       cap = CapFactory().parse( ResTraits<Patch>::kind,
    *                                 parsed.name,
    *                                 parsed.op,
    *                                 Edition( parsed.ver,

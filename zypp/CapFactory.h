@@ -41,28 +41,22 @@ namespace zypp
     ~CapFactory();
 
   public:
+#if 0
     /** Parse Capability from string (incl. Resolvable::Kind).
      * \a strval_r is expected to define a valid Capability \em including
      * the Resolvable::Kind.
      * \throw EXCEPTION on parse error.
     */
     Capability parse( const std::string & strval_r ) const;
+#endif
 
-    /** Parse Capability from string (providing default Resolvable::Kind).
-     * \a strval_r is expected to define a valid Capability. If it does
-     * not define the Resolvable::Kind, \a defaultRefers_r is used instead.
-     * \throw EXCEPTION on parse error.
-    */
-    Capability parse( const std::string & strval_r, const Resolvable::Kind & defaultRefers_r ) const;
-
-
-    /** Parse Capability providing Resolvable::Kind, name, Rel and Edition.
+    /** Parse Capability from string providing Resolvable::Kind.
+     * \a strval_r is expected to define a valid Capability.
      * \throw EXCEPTION on parse error.
     */
     Capability parse( const Resolvable::Kind & refers_r,
-                      const std::string & name_r,
-                      Rel op_r,
-                      const Edition & edition_r ) const;
+                      const std::string & strval_r ) const;
+
 
     /** Parse Capability providing Resolvable::Kind, name, Rel and Edition as strings.
      * \throw EXCEPTION on parse error.
@@ -71,6 +65,14 @@ namespace zypp
                       const std::string & name_r,
                       const std::string & op_r,
                       const std::string & edition_r );
+
+    /** Parse Capability providing Resolvable::Kind, name, Rel and Edition.
+     * \throw EXCEPTION on parse error.
+    */
+    Capability parse( const Resolvable::Kind & refers_r,
+                      const std::string & name_r,
+                      Rel op_r,
+                      const Edition & edition_r ) const;
 
   private:
     /** Implementation */

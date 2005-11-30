@@ -87,7 +87,7 @@ namespace zypp
   */
   template<class _Res>
     inline bool isKind( const Resolvable::constPtr & p )
-    { return p && p->kind() == ResTraits<_Res>::_kind; }
+    { return p && p->kind() == ResTraits<_Res>::kind; }
 
   // Specialization for Resolvable: Always true.
   template<>

@@ -41,8 +41,6 @@ namespace zypp
     private:
       /** Private Ctor.
        * Call \ref instance to get a CapabilityImpl_Ptr to the NullCap.
-       *
-       * \todo Resolvable::Kind ANY would be desirable.
       */
       NullCap();
 
