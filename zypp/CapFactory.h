@@ -26,8 +26,13 @@ namespace zypp
   //
   //	CLASS NAME : CapFactory
   //
-  /**
+  /** Factory for creating Capability.
+   *
+   * Besides parsing, CapFactory asserts that equal capabilites
+   * share the same implementation.
+   *
    * \todo define EXCEPTIONS
+   * \todo Parser needs improvement in speed and accuracy.
   */
   class CapFactory
   {

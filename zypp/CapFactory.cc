@@ -87,13 +87,11 @@ namespace zypp
         ZYPP_THROW( "Missing or empty  Resolvable::Kind in Capability." );
     }
 
-    /** Test for a FileCap. \a name_r starts with \c /. */
-    static bool isFileSpec( const std::string & name_r )
-    {
-      return *name_r.c_str() == '/';
-    }
-
-    /** Check whether \a op_r and \a edition_r are valid.
+    /** Check whether \a op_r and \a edition_r make a valid edition spec.
+     *
+     * Rel::NONE is not usefull thus forbidden. Rel::ANY can be ignored,
+     * so no VersionedCap is needed for this. Everything else requires
+     * a VersionedCap.
      *
      * \return Whether to build a VersionedCap (i.e. \a op_r
      * is not Rel::ANY.
@@ -125,6 +123,75 @@ namespace zypp
       // SHOULD NOT GET HERE
       ZYPP_THROW( "Unknow Operator NONE is not allowed in Capability " );
       return false; // not reached
+    }
+
+    /** Test for a FileCap. \a name_r starts with \c "/". */
+    static bool isFileSpec( const std::string & name_r )
+    {
+      return *name_r.c_str() == '/';
+    }
+
+    /** Test for a SplitCap. \a name_r constains \c ":/". */
+    static bool isSplitSpec( const std::string & name_r )
+    {
+      return name_r.find( ":/" ) != std::string::npos;
+    }
+
+    /** Try to build a non versioned cap from \a name_r .
+     *
+     * The CapabilityImpl is built here and inserted into _uset.
+     * The final Capability must be created by CapFactory, as it
+     * is a friend of Capability. Here we can't access the ctor.
+    */
+    static CapabilityImpl::Ptr buildNamed( const Resolvable::Kind & refers_r,
+                                           const std::string & name_r )
+    {
+      assertResKind( refers_r );
+
+      // file:    /absolute/path
+      if ( isFileSpec( name_r ) )
+        return usetInsert
+        ( new capability::FileCap( refers_r, name_r ) );
+
+      //split:   name:/absolute/path
+      str::regex  rx( "([^/]*):(/.*)" );
+      str::smatch what;
+      if( str::regex_match( name_r.begin(), name_r.end(), what, rx ) )
+        {
+          return usetInsert
+          ( new capability::SplitCap( refers_r, what[1].str(), what[2].str() ) );
+        }
+
+      //name:    name
+      return usetInsert
+      ( new capability::NamedCap( refers_r, name_r ) );
+    }
+
+    /** Try to build a versioned cap from \a name_r .
+     *
+     * The CapabilityImpl is built here and inserted into _uset.
+     * The final Capability must be created by CapFactory, as it
+     * is a friend of Capability. Here we can't access the ctor.
+     *
+     * \todo Quick check for name not being filename or split.
+    */
+    static CapabilityImpl::Ptr buildVersioned( const Resolvable::Kind & refers_r,
+                                               const std::string & name_r,
+                                               Rel op_r,
+                                               const Edition & edition_r )
+    {
+      if ( Impl::isEditionSpec( op_r, edition_r ) )
+        {
+          assertResKind( refers_r );
+
+          // build a VersionedCap
+          return usetInsert
+          ( new capability::VersionedCap( refers_r, name_r, op_r, edition_r ) );
+        }
+      //else
+      // build a NamedCap
+
+      return buildNamed( refers_r, name_r );
     }
   };
   ///////////////////////////////////////////////////////////////////
@@ -175,19 +242,34 @@ namespace zypp
 
   try
     {
+      // strval_r has at least two words which could make 'op edition'?
       str::regex  rx( "(.*[^ \t])([ \t]+)([^ \t]+)([ \t]+)([^ \t]+)" );
       str::smatch what;
       if( str::regex_match( strval_r.begin(), strval_r.end(),what, rx ) )
         {
-          // name op edition
-          return parse( refers_r,
-                        what[1].str(), what[3].str(), what[5].str() );
+          Rel op;
+          Edition edition;
+          try
+            {
+              op = Rel(what[3].str());
+              edition = Edition(what[5].str());
+            }
+          catch ( Exception & excpt )
+            {
+              // So they don't make valid 'op edition'
+              ZYPP_CAUGHT( excpt );
+              // See whether it makes a named cap.
+              return Capability( Impl::buildNamed( refers_r, strval_r ) );
+            }
+
+          // Valid 'op edition'
+          return Capability ( Impl::buildVersioned( refers_r,
+                                                    what[1].str(), op, edition ) );
         }
       //else
-      // not VersionedCap
+      // not a VersionedCap
 
-      return parse( refers_r,
-                    strval_r, Rel::ANY, Edition::noedition );
+      return Capability( Impl::buildNamed( refers_r, strval_r ) );
     }
   catch ( Exception & excpt )
     {
@@ -227,30 +309,8 @@ namespace zypp
                                 const Edition & edition_r ) const
   try
     {
-      Impl::assertResKind( refers_r );
-
-      if ( Impl::isEditionSpec( op_r, edition_r ) )
-        {
-          // build a VersionedCap
-          return Capability
-          ( usetInsert
-            ( new capability::VersionedCap( refers_r, name_r, op_r, edition_r ) ) );
-        }
-      //else
-      // op_r is Rel::ANY so build a NamedCap or FileCap
-
-      if ( Impl::isFileSpec( name_r ) )
-        {
-          return Capability
-          ( usetInsert
-            ( new capability::FileCap( refers_r, name_r ) ) );
-        }
-      //else
-      // build a NamedCap
-
       return Capability
-      ( usetInsert
-        ( new capability::NamedCap( refers_r, name_r ) ) );
+      ( Impl::buildVersioned( refers_r, name_r, op_r, edition_r ) );
     }
   catch ( Exception & excpt )
     {

@@ -14,6 +14,7 @@ include_HEADERS = \
 	NamedCap.h	\
 	NullCap.h	\
 	OrCap.h		\
+	SplitCap.h	\
 	VersionedCap.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_capability.la
@@ -26,6 +27,7 @@ lib@PACKAGE@_capability_la_SOURCES = \
 	FileCap.cc	\
 	NamedCap.cc	\
 	NullCap.cc	\
+	SplitCap.cc	\
 	VersionedCap.cc
 
 ## ##################################################
