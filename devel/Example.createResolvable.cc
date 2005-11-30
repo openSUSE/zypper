@@ -22,7 +22,7 @@ template<typename _Res>
     : _x(x)
     {}
     void operator()( const std::string & v )
-    { _x.insert( _f.parse( v, ResTraits<_Res>::_kind ) ); }
+    { _x.insert( _f.parse( ResTraits<_Res>::kind, v ) ); }
   };
 
 inline std::list<std::string> parseDeps()

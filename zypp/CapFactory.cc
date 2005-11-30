@@ -13,13 +13,11 @@
 #include <functional>
 #include <set>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
+#include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 #include "zypp/base/String.h"
 
 #include "zypp/CapFactory.h"
-
 #include "zypp/capability/Capabilities.h"
 
 using namespace std;
@@ -28,40 +26,34 @@ using namespace std;
 namespace
 { /////////////////////////////////////////////////////////////////
 
-  typedef zypp::capability::CapabilityImpl_Ptr CapabilityImpl_Ptr;
+  using ::zypp::capability::CapabilityImpl;
 
   /** \ref USet order.
    * \todo check set ordering to assert no dups
   */
-  struct USetOrder : public std::binary_function<CapabilityImpl_Ptr, CapabilityImpl_Ptr, bool>
+  struct USetOrder : public std::binary_function<CapabilityImpl::Ptr, CapabilityImpl::Ptr, bool>
   {
     /** */
-    bool operator()( const CapabilityImpl_Ptr & lhs,
-                     const CapabilityImpl_Ptr & rhs ) const
+    bool operator()( const CapabilityImpl::Ptr & lhs,
+                     const CapabilityImpl::Ptr & rhs ) const
     { return lhs->asString() < rhs->asString(); }
   };
 
   /** */
-  typedef std::set<CapabilityImpl_Ptr,USetOrder> USet;
+  typedef std::set<CapabilityImpl::Ptr,USetOrder> USet;
 
   /** Set to unify created capabilities. */
   USet _uset;
 
-  /*
-   NoCap: empty string
-
-   NamedCap: name; string not starting with '/'
-
-   FileCap: filename; string starting with '/'
-
-   VersionedCap: name op edition;
-
-
-
-   filename
-   name op edition
+  /** Immediately wrap \a allocated_r and unify by inserting
+   * it into \c _uset.
+   * \return CapabilityImpl_Ptr referencing \a allocated_r (or an
+   * eqal representation, allocated is deleted then).
   */
-
+  CapabilityImpl::Ptr usetInsert( CapabilityImpl * allocated_r )
+  {
+    return *(_uset.insert( CapabilityImpl::Ptr(allocated_r) ).first);
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace
@@ -75,23 +67,65 @@ namespace zypp
   //
   //	CLASS NAME : CapFactoryImpl
   //
-  /** CapFactory implementation (UNUSED) */
+  /** CapFactory implementation.
+   *
+   * Provides various functions doing checks and log and \c throw.
+   * CapFactory::parse usually combines them, and if nothing fails,
+   * finaly builds the Capability.
+   *
+   * \li \c file:    /absolute/path
+   * \li \c split:   name:/absolute/path
+   * \li \c name:    name
+   * \li \c vers:    name op edition
+  */
   struct CapFactory::Impl
   {
-    template<typename _Tp>
-      static bool tryMake( const std::string & str_r, _Tp & ret_r )
-      {
-        try
-          {
-            ret_r = _Tp( str_r );
-          }
-        catch (...)
-          {
-            return false;
-          }
-        return true;
-      }
+    /** Assert a valid Resolvable::Kind. */
+    static void assertResKind( const Resolvable::Kind & refers_r )
+    {
+      if ( refers_r == Resolvable::Kind() )
+        ZYPP_THROW( "Missing or empty  Resolvable::Kind in Capability." );
+    }
 
+    /** Test for a FileCap. \a name_r starts with \c /. */
+    static bool isFileSpec( const std::string & name_r )
+    {
+      return *name_r.c_str() == '/';
+    }
+
+    /** Check whether \a op_r and \a edition_r are valid.
+     *
+     * \return Whether to build a VersionedCap (i.e. \a op_r
+     * is not Rel::ANY.
+    */
+    static bool isEditionSpec( Rel op_r, const Edition & edition_r )
+    {
+      switch ( op_r.inSwitch() )
+        {
+        case Rel::ANY_e:
+          if ( edition_r != Edition::noedition )
+            WAR << "Operator " << op_r << " causes Edition "
+            << edition_r << " to be ignored." << endl;
+          return false;
+          break;
+
+        case Rel::NONE_e:
+          ZYPP_THROW( "Operator NONE is not allowed in Capability " );
+          break;
+
+        case Rel::EQ_e:
+        case Rel::NE_e:
+        case Rel::LT_e:
+        case Rel::LE_e:
+        case Rel::GT_e:
+        case Rel::GE_e:
+          return true;
+          break;
+        }
+      // SHOULD NOT GET HERE
+      ZYPP_THROW( "Unknow Operator NONE is not allowed in Capability " );
+      return false; // not reached
+    }
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -136,37 +170,31 @@ namespace zypp
   //	METHOD NAME : CapFactory::parse
   //	METHOD TYPE : Capability
   //
-  /** \todo fix it */
   Capability CapFactory::parse( const Resolvable::Kind & refers_r,
                                 const std::string & strval_r ) const
-  {
-    // (defaultRefers_r==Resolvable::Kind()) ==> throw on
-    // missing Resolvable::Kind in strval
-    // fix it!
 
-    if ( strval_r.empty() )
-      throw "no Resolvable::Kind";
-    CapabilityImpl_Ptr newcap( new capability::NamedCap( refers_r, strval_r ) );
-    USet::iterator in( _uset.insert( newcap ).first );
-    return Capability( *in );
-  }
+  try
+    {
+      str::regex  rx( "(.*[^ \t])([ \t]+)([^ \t]+)([ \t]+)([^ \t]+)" );
+      str::smatch what;
+      if( str::regex_match( strval_r.begin(), strval_r.end(),what, rx ) )
+        {
+          // name op edition
+          return parse( refers_r,
+                        what[1].str(), what[3].str(), what[5].str() );
+        }
+      //else
+      // not VersionedCap
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : CapFactory::parse
-  //	METHOD TYPE : Capability
-  //
-  /** \todo fix it */
-  Capability CapFactory::parse( const Resolvable::Kind & refers_r,
-                                const std::string & name_r,
-                                Rel op_r,
-                                const Edition & edition_r ) const
-  {
-    string fake = name_r + " " + op_r.asString() + " " + edition_r.asString();
-    CapabilityImpl_Ptr newcap( new capability::NamedCap( refers_r, fake ) );
-    USet::iterator in( _uset.insert( newcap ).first );
-    return Capability( *in );
-  }
+      return parse( refers_r,
+                    strval_r, Rel::ANY, Edition::noedition );
+    }
+  catch ( Exception & excpt )
+    {
+      ZYPP_RETHROW( excpt );
+      return Capability(); // not reached
+    }
+
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -176,13 +204,59 @@ namespace zypp
   Capability CapFactory::parse( const Resolvable::Kind & refers_r,
                                 const std::string & name_r,
                                 const std::string & op_r,
-                                const std::string & edition_r )
-  {
-    string fake = name_r + " " + op_r + " " + edition_r;
-    CapabilityImpl_Ptr newcap( new capability::NamedCap( refers_r, fake ) );
-    USet::iterator in( _uset.insert( newcap ).first );
-    return Capability( *in );
-  }
+                                const std::string & edition_r ) const
+  try
+    {
+      // Try creating Rel and Edition, then parse
+      return parse( refers_r, name_r, Rel(op_r), Edition(edition_r) );
+    }
+  catch ( Exception & excpt )
+    {
+      ZYPP_RETHROW( excpt );
+      return Capability(); // not reached
+    }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : CapFactory::parse
+  //	METHOD TYPE : Capability
+  //
+  Capability CapFactory::parse( const Resolvable::Kind & refers_r,
+                                const std::string & name_r,
+                                Rel op_r,
+                                const Edition & edition_r ) const
+  try
+    {
+      Impl::assertResKind( refers_r );
+
+      if ( Impl::isEditionSpec( op_r, edition_r ) )
+        {
+          // build a VersionedCap
+          return Capability
+          ( usetInsert
+            ( new capability::VersionedCap( refers_r, name_r, op_r, edition_r ) ) );
+        }
+      //else
+      // op_r is Rel::ANY so build a NamedCap or FileCap
+
+      if ( Impl::isFileSpec( name_r ) )
+        {
+          return Capability
+          ( usetInsert
+            ( new capability::FileCap( refers_r, name_r ) ) );
+        }
+      //else
+      // build a NamedCap
+
+      return Capability
+      ( usetInsert
+        ( new capability::NamedCap( refers_r, name_r ) ) );
+    }
+  catch ( Exception & excpt )
+    {
+      ZYPP_RETHROW( excpt );
+      return Capability(); // not reached
+    }
 
   /******************************************************************
   **

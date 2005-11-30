@@ -35,6 +35,10 @@ namespace zypp
     class CapabilityImpl : public base::ReferenceCounted, private base::NonCopyable
     {
     public:
+      typedef CapabilityImpl           Self;
+      typedef CapabilityImpl_Ptr       Ptr;
+      typedef CapabilityImpl_constPtr  constPtr;
+
       typedef base::KindOf<Capability> Kind;
 
     public:

@@ -40,22 +40,16 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  try
-    {
-      try
-        {
-          ZYPP_THROW( "Something bad happened." );
-        }
-      catch ( Exception & excpt )
-        {
-          ZYPP_RETHROW( excpt );
-        }
-
-    }
-  catch ( Exception & excpt )
-    {
-      ZYPP_CAUGHT( excpt );
-    }
+  for ( int i = 1; i < 10; ++i )
+    try
+      {
+        ZYPP_THROW( "Something bad happened." );
+      }
+    catch ( Exception & excpt )
+      {
+        ZYPP_CAUGHT( excpt );
+        break;
+      }
 
   INT << "===[END]============================================" << endl;
   return 0;

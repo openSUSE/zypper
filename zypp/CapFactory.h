@@ -64,7 +64,7 @@ namespace zypp
     Capability parse( const Resolvable::Kind & refers_r,
                       const std::string & name_r,
                       const std::string & op_r,
-                      const std::string & edition_r );
+                      const std::string & edition_r ) const;
 
     /** Parse Capability providing Resolvable::Kind, name, Rel and Edition.
      * \throw EXCEPTION on parse error.
