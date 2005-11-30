@@ -148,6 +148,7 @@ AC_OUTPUT(	\
 	zypp/parser/Makefile		\
 	zypp/parser/yum/Makefile	\
 	zypp/parser/yum/schema/Makefile	\
+	zypp/solver/Makefile		\
 	zypp/source/Makefile		\
 	zypp/source/yum/Makefile
 )

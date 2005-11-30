@@ -25,13 +25,8 @@ template<class _C>
 namespace zypp
 {
 }
-using namespace zypp;
 
-void chk( const std::string & ed )
-{
-  Edition e( ed );
-  MIL << e << endl;
-}
+using namespace zypp;
 
 /******************************************************************
 **
@@ -45,8 +40,22 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  MIL << Capability() << Capability() << endl;
-  MIL << Capability() << Capability() << endl;
+  try
+    {
+      try
+        {
+          ZYPP_THROW( "Something bad happened." );
+        }
+      catch ( Exception & excpt )
+        {
+          ZYPP_RETHROW( excpt );
+        }
+
+    }
+  catch ( Exception & excpt )
+    {
+      ZYPP_CAUGHT( excpt );
+    }
 
   INT << "===[END]============================================" << endl;
   return 0;
