@@ -16,6 +16,7 @@
 #include "zypp/source/yum/YUMMessageImpl.h"
 #include "zypp/source/yum/YUMPatchImpl.h"
 #include "zypp/source/yum/YUMProductImpl.h"
+#include "zypp/source/yum/YUMGroupImpl.h"
 
 #include "zypp/base/Logger.h"
 #include "zypp/CapFactory.h"
@@ -94,6 +95,28 @@ namespace zypp
 	  {
 	    ERR << excpt_r << endl;
 	    throw "Cannot create package object";
+	  }
+	}
+
+	Selection::Ptr createGroup(
+	  const zypp::parser::yum::YUMGroupData & parsed
+	)
+	{
+	  try
+	  {
+	    shared_ptr<YUMGroupImpl> impl(new YUMGroupImpl(parsed));
+	    Selection::Ptr group = detail::makeResolvableFromImpl(
+	      parsed.groupId,
+	      Edition::noedition,
+	      Arch_noarch,
+	      impl
+	    );
+	    return group;
+	  }
+	  catch (const Exception & excpt_r)
+	  {
+	    ERR << excpt_r << endl;
+	    throw "Cannot create package group object";
 	  }
 	}
 

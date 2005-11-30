@@ -11,6 +11,7 @@ include_HEADERS =			\
 	YUMMessageImpl.h		\
 	YUMPackageImpl.h		\
 	YUMPatchImpl.h			\
+	YUMGroupImpl.h			\
 	YUMProductImpl.h
 
 
@@ -24,6 +25,7 @@ lib@PACKAGE@_source_yum_la_SOURCES =	\
 	YUMMessageImpl.cc		\
 	YUMPackageImpl.cc		\
 	YUMPatchImpl.cc			\
+	YUMGroupImpl.cc			\
 	YUMProductImpl.cc	
 
 ## ##################################################

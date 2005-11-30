@@ -19,6 +19,7 @@
 #include "zypp/Script.h"
 #include "zypp/Patch.h"
 #include "zypp/Product.h"
+#include "zypp/Selection.h"
 
 using namespace zypp::parser::yum;
 
@@ -50,6 +51,9 @@ namespace zypp
 	);
 	Package::Ptr createPackage(
 	  const zypp::parser::yum::YUMPatchPackage & parsed
+	);
+	Selection::Ptr createGroup(
+	  const zypp::parser::yum::YUMGroupData & parsed
 	);
 	Message::Ptr createMessage(
 	  const zypp::parser::yum::YUMPatchMessage & parsed
