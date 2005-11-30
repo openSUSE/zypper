@@ -31,7 +31,7 @@ namespace zypp
     public:
       /**  */
       bool matches( constResolvablePtr resolvable_r,
-                    const SolverContext & colverContext_r )
+                    solver::Context_constPtr solverContext_r )
       { return false; }
     };
     ///////////////////////////////////////////////////////////////////

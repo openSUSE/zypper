@@ -6,60 +6,56 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/capability/NamedCap.h
+/** \file	zypp/solver/Context.h
  *
 */
-#ifndef ZYPP_CAPABILITY_NAMEDCAP_H
-#define ZYPP_CAPABILITY_NAMEDCAP_H
+#ifndef ZYPP_SOLVER_CONTEXT_H
+#define ZYPP_SOLVER_CONTEXT_H
 
-#include "zypp/capability/CapabilityImpl.h"
+#include <iosfwd>
+
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
+#include "zypp/base/PtrTypes.h"
+
+#include "zypp/solver/SolverFwd.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace capability
+  namespace solver
   { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : NamedCap
+    //	CLASS NAME : Context
     //
-    /** A \c name matching if some Resolvable provides it.
-     *
-     * \todo implement matches().
+    /** Solver context.
     */
-    class NamedCap : public CapabilityImpl
+    class Context : public base::ReferenceCounted, private base::NonCopyable
     {
     public:
-      /** Ctor */
-      NamedCap( const Resolvable::Kind & refers_r, const std::string & name_r )
-      : CapabilityImpl( refers_r )
-      , _name( name_r )
-      {}
+      typedef Context            Self;
+      typedef Context_Ptr        Ptr;
+      typedef Context_constPtr   constPtr;
+      friend std::ostream & operator<<( std::ostream & str, const Context & obj );
+
     public:
-      /**  */
-      virtual const Kind & kind() const;
-
-      /**  */
-      virtual std::string asString() const;
-
-      /**  */
-      virtual bool matches( Resolvable::constPtr resolvable_r,
-                            solver::Context_constPtr solverContext_r ) const;
-
-    private:
-      /**  */
-      static const Kind _kind;
-      /**  */
-      std::string _name;
+      /** Default ctor */
+      Context();
+      /** Dtor */
+      ~Context();
     };
     ///////////////////////////////////////////////////////////////////
 
+    /** \relates Context Stream output */
+    extern std::ostream & operator<<( std::ostream & str, const Context & obj );
+
     /////////////////////////////////////////////////////////////////
-  } // namespace capability
+  } // namespace solver
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_CAPABILITY_NAMEDCAP_H
+#endif // ZYPP_SOLVER_CONTEXT_H

@@ -17,7 +17,7 @@
 #include "zypp/base/KindOf.h"
 
 #include "zypp/Resolvable.h" // maybe ResTraits are sufficient?
-#include "zypp/SolverContextFwd.h"
+#include "zypp/solver/SolverFwd.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -54,7 +54,7 @@ namespace zypp
 
       /**  */
       virtual bool matches( Resolvable::constPtr resolvable_r,
-                            const SolverContext & colverContext_r ) const = 0;
+                            solver::Context_constPtr solverContext_r ) const = 0;
 
     private:
       /** Kind of Resolvable \c this refers to. */

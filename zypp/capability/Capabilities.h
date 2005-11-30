@@ -14,5 +14,7 @@
 
 #include "zypp/capability/CapabilityImpl.h"
 #include "zypp/capability/NamedCap.h"
+#include "zypp/capability/VersionedCap.h"
+#include "zypp/capability/FileCap.h"
 
 #endif // ZYPP_CAPABILITY_CAPABILITIES_H

@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-SUBDIRS = base parser capability source detail
+SUBDIRS = base parser capability solver source detail
 
 ## ##################################################
 
@@ -20,7 +20,6 @@ include_HEADERS = NeedAType.h \
 	Selection.h	\
 	Message.h	\
 	Script.h	\
-	SolverContext.h	\
 	Patch.h		\
 	Product.h
 
@@ -45,7 +44,6 @@ lib@PACKAGE@_la_SOURCES = \
 	Selection.cc	\
 	Message.cc	\
 	Script.cc	\
-	SolverContext.cc\
 	Patch.cc	\
 	Product.cc
 
@@ -54,6 +52,7 @@ lib@PACKAGE@_la_LDFLAGS =	@LIB_VERSION_INFO@
 lib@PACKAGE@_la_LIBADD =        base/lib@PACKAGE@_base.la	\
 				detail/lib@PACKAGE@_detail.la	\
 				capability/lib@PACKAGE@_capability.la	\
+				solver/lib@PACKAGE@_solver.la	\
 				parser/lib@PACKAGE@_parser.la	\
 				source/lib@PACKAGE@_source.la
 

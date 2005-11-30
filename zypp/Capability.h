@@ -18,7 +18,7 @@
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/Resolvable.h"
-#include "zypp/SolverContextFwd.h"
+#include "zypp/solver/SolverFwd.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -106,9 +106,9 @@ namespace zypp
 
     /** */
     bool matches( Resolvable::constPtr resolvable_r,
-                  const SolverContext & colverContext_r ) const;
+                  solver::Context_constPtr solverContext_r ) const;
 
-    /**  */
+    /**  \todo this does not make sense until ther's a default context available*/
     bool matches( Resolvable::constPtr resolvable_r ) const;
 
   private:

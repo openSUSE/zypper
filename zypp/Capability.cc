@@ -15,8 +15,6 @@
 #include "zypp/capability/CapabilityImpl.h"
 #include "zypp/capability/NullCap.h"
 
-#include "zypp/SolverContext.h"
-
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////
@@ -56,11 +54,14 @@ namespace zypp
   { return _pimpl->asString(); }
 
   bool Capability::matches( Resolvable::constPtr resolvable_r,
-                            const SolverContext & solverContext_r ) const
+                            solver::Context_constPtr solverContext_r ) const
   { return _pimpl->matches( resolvable_r, solverContext_r ); }
 
   bool Capability::matches( Resolvable::constPtr resolvable_r ) const
-  { return _pimpl->matches( resolvable_r, SolverContext() ); }
+  {
+    // NULL: actually a default context needed
+    return _pimpl->matches( resolvable_r, NULL );
+  }
 
   /******************************************************************
   **

@@ -35,7 +35,7 @@ namespace zypp
     }
 
     bool VersionedCap::matches( Resolvable::constPtr resolvable_r,
-                                const SolverContext & colverContext_r ) const
+                                solver::Context_constPtr solverContext_r ) const
     {
       return false;
     }

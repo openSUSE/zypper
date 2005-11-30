@@ -6,60 +6,55 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/capability/NamedCap.h
+/** \file	zypp/solver/Context.cc
  *
 */
-#ifndef ZYPP_CAPABILITY_NAMEDCAP_H
-#define ZYPP_CAPABILITY_NAMEDCAP_H
+#include <iostream>
 
-#include "zypp/capability/CapabilityImpl.h"
+#include "zypp/base/Logger.h"
+
+#include "zypp/solver/Context.h"
+
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace capability
+  namespace solver
   { /////////////////////////////////////////////////////////////////
 
+    IMPL_PTR_TYPE(Context);
+
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : NamedCap
+    //	METHOD NAME : Context::Context
+    //	METHOD TYPE : Ctor
     //
-    /** A \c name matching if some Resolvable provides it.
-     *
-     * \todo implement matches().
+    Context::Context()
+    {}
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : Context::~Context
+    //	METHOD TYPE : Dtor
+    //
+    Context::~Context()
+    {}
+
+    /******************************************************************
+     **
+     **	FUNCTION NAME : operator<<
+     **	FUNCTION TYPE : std::ostream &
     */
-    class NamedCap : public CapabilityImpl
+    std::ostream & operator<<( std::ostream & str, const Context & obj )
     {
-    public:
-      /** Ctor */
-      NamedCap( const Resolvable::Kind & refers_r, const std::string & name_r )
-      : CapabilityImpl( refers_r )
-      , _name( name_r )
-      {}
-    public:
-      /**  */
-      virtual const Kind & kind() const;
+      return str;
+    }
 
-      /**  */
-      virtual std::string asString() const;
-
-      /**  */
-      virtual bool matches( Resolvable::constPtr resolvable_r,
-                            solver::Context_constPtr solverContext_r ) const;
-
-    private:
-      /**  */
-      static const Kind _kind;
-      /**  */
-      std::string _name;
-    };
-    ///////////////////////////////////////////////////////////////////
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace capability
+  /////////////////////////////////////////////////////////////////
+  } // namespace solver
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_CAPABILITY_NAMEDCAP_H
