@@ -19,7 +19,7 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace exceptinon_detail
+  namespace exception_detail
   { /////////////////////////////////////////////////////////////////
 
     /** Keep _FILE_, _FUNCTION_ and _LINE_.
@@ -47,13 +47,13 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     /** Create CodeLocation object storing the current location. */
-    #define ZYPP_EX_CODELOCATION ::zypp::exceptinon_detail::CodeLocation(__FILE__,__FUNCTION__,__LINE__)
+    #define ZYPP_EX_CODELOCATION ::zypp::exception_detail::CodeLocation(__FILE__,__FUNCTION__,__LINE__)
 
     /** \relates CodeLocation Stream output */
     std::ostream & operator<<( std::ostream & str, const CodeLocation & obj );
 
     /////////////////////////////////////////////////////////////////
-  } // namespace exceptinon_detail
+  } // namespace exception_detail
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
@@ -97,7 +97,7 @@ namespace zypp
   class Exception : public std::exception
   {
     friend std::ostream & operator<<( std::ostream & str, const Exception & obj );
-    typedef exceptinon_detail::CodeLocation CodeLocation;
+    typedef exception_detail::CodeLocation CodeLocation;
   public:
 
     /** Ctor taking CodeLocation and message.
@@ -150,7 +150,7 @@ namespace zypp
 
   /** Helper for \ref ZYPP_THROW. */
   template<class _Excpt>
-    void _ZYPP_THROW( const _Excpt & excpt_r, const exceptinon_detail::CodeLocation & where_r )
+    void _ZYPP_THROW( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r )
     {
       Exception::log( excpt_r, where_r, "THROW:   " );
       throw( excpt_r );
@@ -158,14 +158,14 @@ namespace zypp
 
   /** Helper for \ref ZYPP_THROW. */
   template<class _Excpt>
-    void _ZYPP_CAUGHT( const _Excpt & excpt_r, const exceptinon_detail::CodeLocation & where_r )
+    void _ZYPP_CAUGHT( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r )
     {
       Exception::log( excpt_r, where_r, "CAUGHT:  " );
     }
 
   /** Helper for \ref ZYPP_THROW. */
   template<class _Excpt>
-    void _ZYPP_RETHROW( _Excpt & excpt_r, const exceptinon_detail::CodeLocation & where_r )
+    void _ZYPP_RETHROW( _Excpt & excpt_r, const exception_detail::CodeLocation & where_r )
     {
       Exception::log( excpt_r, where_r, "RETHROW: " );
       excpt_r.relocate( excpt_r, where_r );
