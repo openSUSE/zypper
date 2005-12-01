@@ -15,6 +15,7 @@ include_HEADERS = \
 	YUMGroupParser.h	\
 	YUMParserData.h		\
 	YUMPatchParser.h	\
+	YUMPatchesParser.h	\
 	YUMProductParser.h	\
 	YUMRepomdParser.h	\
 	schemanames.h
@@ -30,6 +31,7 @@ lib@PACKAGE@_parser_yum_la_SOURCES = \
 	YUMRepomdParser.cc	\
 	YUMGroupParser.cc	\
 	YUMPatchParser.cc	\
+	YUMPatchesParser.cc	\
 	YUMOtherParser.cc	\
 	YUMPrimaryParser.cc	\
 	YUMProductParser.cc

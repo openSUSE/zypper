@@ -121,6 +121,7 @@ namespace zypp {
       IMPL_PTR_TYPE(YUMFileListData);
       IMPL_PTR_TYPE(YUMOtherData);
       IMPL_PTR_TYPE(YUMPatchData);
+      IMPL_PTR_TYPE(YUMPatchesData);
       IMPL_PTR_TYPE(YUMProductData);
       IMPL_PTR_TYPE(YUMPatchPackage);
       IMPL_PTR_TYPE(YUMPatchScript);
@@ -367,6 +368,17 @@ ostream& operator<<(ostream &out, const YUMPatchData& data)
     << "  update script: " << data.updateScript << endl
     << "  atoms:" << endl
     << data.atoms;
+  return out;
+}
+
+ostream& operator<<(ostream &out, const YUMPatchesData& data)
+{
+  out << "-------------------------------------------------" << endl
+    << "Patches Entry Data: " << endl
+    << "  patch ID: " << data.id << endl
+    << "  location: " << data.location << endl
+    << "  checksumType: '" << data.checksumType << "'" << endl
+    << "  checksum: '" << data.checksum << "'" << endl;
   return out;
 }
 

@@ -9,6 +9,9 @@
               <value>other</value>
               <value>filelists</value>
               <value>primary</value>
+              <value>group</value>
+              <value>product</value>
+              <value>patches</value>
             </choice>
           </attribute>
           <element name="location">

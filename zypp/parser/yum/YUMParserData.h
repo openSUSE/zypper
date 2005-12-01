@@ -39,6 +39,7 @@ namespace zypp {
       DEFINE_PTR_TYPE( YUMFileListData );
       DEFINE_PTR_TYPE( YUMOtherData );
       DEFINE_PTR_TYPE( YUMPatchData );
+      DEFINE_PTR_TYPE( YUMPatchesData );
       DEFINE_PTR_TYPE( YUMProductData );
       DEFINE_PTR_TYPE( YUMPatchPackage );
       DEFINE_PTR_TYPE( YUMPatchScript );
@@ -395,6 +396,17 @@ namespace zypp {
         std::list<shared_ptr<YUMPatchAtom> > atoms;
       };
 
+      class YUMPatchesData : public base::ReferenceCounted, private base::NonCopyable {
+      public:
+	YUMPatchesData() {};
+	~YUMPatchesData() {};
+
+	std::string location;
+	std::string id;
+        std::string checksumType;
+        std::string checksum;
+      };
+
       class YUMProductData : public YUMObjectData {
       public:
 	YUMProductData() {};
@@ -429,6 +441,7 @@ std::ostream& operator<<(std::ostream &out, const zypp::parser::yum::YUMGroupDat
 std::ostream& operator<<(std::ostream &out, const zypp::parser::yum::YUMFileListData& data);
 std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMOtherData& data);
 std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMPatchData& data);
+std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMPatchesData& data);
 std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMProductData& data);
 std::ostream& operator<<(std::ostream& out, const shared_ptr<zypp::parser::yum::YUMPatchAtom> data);
 std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMPatchMessage& data);

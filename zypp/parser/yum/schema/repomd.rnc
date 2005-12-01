@@ -2,7 +2,7 @@ default namespace = "http://linux.duke.edu/metadata/repo"
 
 element repomd {
   element data {
-    attribute type { "other" | "filelists" | "primary" }&
+    attribute type { "other" | "filelists" | "primary" | "group" | "product" | "patches" }&
     element location {
       attribute xml:base { xsd:anyURI }?,
       attribute href { xsd:anyURI },

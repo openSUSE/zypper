@@ -21,6 +21,7 @@
 #include "zypp/parser/yum/YUMFileListParser.h"
 #include "zypp/parser/yum/YUMOtherParser.h"
 #include "zypp/parser/yum/YUMPatchParser.h"
+#include "zypp/parser/yum/YUMPatchesParser.h"
 #include "zypp/parser/yum/YUMProductParser.h"
 
 #endif

@@ -25,6 +25,7 @@ namespace zypp {
     #define FILELISTSCHEMA (SCHEMABASE "filelists.rng")
     #define OTHERSCHEMA (SCHEMABASE "other.rng")
     #define PATCHSCHEMA (SCHEMABASE "patch.rng")
+    #define PATCHESSCHEMA (SCHEMABASE "patches.rng")
     #define PRODUCTSCHEMA (SCHEMABASE "product.rng")
     } // namespace yum
   } // namespace parser

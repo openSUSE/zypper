@@ -69,6 +69,17 @@
         <element name="entry">
           <attribute name="name"/>
           <optional>
+            <attribute name="kind">
+              <choice>
+                <value>package</value>
+                <value>patch</value>
+                <value>script</value>
+                <value>message</value>
+                <value>product</value>
+              </choice>
+            </attribute>
+          </optional>
+          <optional>
             <attribute name="flags">
               <choice>
                 <value>EQ</value>
@@ -97,6 +108,17 @@
         <element name="entry">
           <attribute name="name"/>
           <optional>
+            <attribute name="kind">
+              <choice>
+                <value>package</value>
+                <value>patch</value>
+                <value>script</value>
+                <value>message</value>
+                <value>product</value>
+              </choice>
+            </attribute>
+          </optional>
+          <optional>
             <attribute name="flags">
               <choice>
                 <value>EQ</value>
@@ -123,6 +145,17 @@
       <zeroOrMore>
         <element name="entry">
           <attribute name="name"/>
+          <optional>
+            <attribute name="kind">
+              <choice>
+                <value>package</value>
+                <value>patch</value>
+                <value>script</value>
+                <value>message</value>
+                <value>product</value>
+              </choice>
+            </attribute>
+          </optional>
           <optional>
             <attribute name="flags">
               <choice>

@@ -1,0 +1,16 @@
+default namespace = "http://novell.com/package/metadata/suse/patches"
+
+element patches
+  {
+  element patch {
+    attribute id { text }&
+    element location {
+      attribute xml:base { xsd:anyURI }?,
+      attribute href { xsd:anyURI }
+    }&
+    element checksum {
+      attribute type { "md5" | "sha" },
+      text
+    }
+  }*
+}
