@@ -16,6 +16,7 @@
 
 #include "zypp/capability/FileCap.h"
 #include "zypp/capability/NamedCap.h"
+#include "zypp/capability/NullCap.h"
 #include "zypp/capability/SplitCap.h"
 #include "zypp/capability/VersionedCap.h"
 

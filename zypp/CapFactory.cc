@@ -146,6 +146,13 @@ namespace zypp
     static CapabilityImpl::Ptr buildNamed( const Resolvable::Kind & refers_r,
                                            const std::string & name_r )
     {
+      // NullCap check first:
+      if ( name_r.empty() )
+        {
+          // Singleton, so no need to put it into _uset !?
+          return capability::NullCap::instance();
+        }
+
       assertResKind( refers_r );
 
       // file:    /absolute/path
@@ -243,6 +250,7 @@ namespace zypp
   try
     {
       // strval_r has at least two words which could make 'op edition'?
+      // improve regex!
       str::regex  rx( "(.*[^ \t])([ \t]+)([^ \t]+)([ \t]+)([^ \t]+)" );
       str::smatch what;
       if( str::regex_match( strval_r.begin(), strval_r.end(),what, rx ) )
@@ -258,6 +266,7 @@ namespace zypp
             {
               // So they don't make valid 'op edition'
               ZYPP_CAUGHT( excpt );
+              DBG << "Trying named cap for: " << strval_r << endl;
               // See whether it makes a named cap.
               return Capability( Impl::buildNamed( refers_r, strval_r ) );
             }

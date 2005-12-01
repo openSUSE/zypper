@@ -28,6 +28,7 @@ template<typename _Res>
 inline std::list<std::string> parseDeps()
 {
   const char * init[] = {
+    "xextra:/usr/X11R6/bin/Xvfb"
     "/bin/sh",
     "rpmlib(PayloadFilesHavePrefix) <= 4.0-1",
     "rpmlib(CompressedFileNames) <= 3.0.4-1",

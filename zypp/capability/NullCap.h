@@ -9,8 +9,8 @@
 /** \file zypp/capability/NullCap.h
  *
 */
-#ifndef ZYPP_CAPABILITY_NAMEDCAP_H
-#define ZYPP_CAPABILITY_NAMEDCAP_H
+#ifndef ZYPP_CAPABILITY_NULLCAP_H
+#define ZYPP_CAPABILITY_NULLCAP_H
 
 #include "zypp/capability/CapabilityImpl.h"
 
@@ -69,4 +69,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_CAPABILITY_NAMEDCAP_H
+#endif // ZYPP_CAPABILITY_NULLCAP_H

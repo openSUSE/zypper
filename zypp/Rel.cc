@@ -31,7 +31,7 @@ namespace
     if ( _table.empty() )
       {
         // initialize it
-        _table["EQ"] = _table["eq"] = _table["=="] = Rel::EQ_e;
+        _table["EQ"] = _table["eq"] = _table["=="] = _table["="] = Rel::EQ_e;
         _table["NE"] = _table["ne"] = _table["!="] = Rel::NE_e;
         _table["LT"] = _table["lt"] = _table["<"]  = Rel::LT_e;
         _table["LE"] = _table["le"] = _table["<="] = Rel::LE_e;
