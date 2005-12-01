@@ -44,6 +44,8 @@ namespace zypp
         /** Default ctor */
         YUMSource();
 
+	void parseSourceMetadata(std::string path);
+
 	Package::Ptr createPackage(
 	  const zypp::parser::yum::YUMPrimaryData & parsed,
 	  const zypp::parser::yum::YUMFileListData & filelist,
@@ -77,8 +79,52 @@ namespace zypp
 	Capability createCapability(const YUMDependency & dep,
 				    const Resolvable::Kind & my_kind);
 
+	class PackageID {
+	public:
+	  PackageID(std::string name,
+		    std::string ver,
+		    std::string rel,
+		    std::string arch)
+	  : _name(name)
+	  , _ver(ver)
+	  , _rel(rel)
+	  , _arch(arch)
+	  {};
+	  static int compare( const PackageID & lhs, const PackageID & rhs )
+	  {
+	    if (lhs._name < rhs._name)
+	      return 1;
+	    if (lhs._name > rhs._name)
+	      return -1;
+	    if (lhs._ver < rhs._ver)
+	      return 1;
+	    if (lhs._ver > rhs._ver)
+	      return -1;
+	    if (lhs._rel < rhs._rel)
+	      return 1;
+	    if (lhs._rel > rhs._rel)
+	      return -1;
+	    if (lhs._arch < rhs._arch)
+	      return 1;
+	    if (lhs._arch > rhs._arch)
+	      return -1;
+	    return 0;
+	  }
+	  std::string name() { return _name; }
+	  std::string ver() { return _ver; }
+	  std::string rel() { return _rel; }
+	  std::string arch() { return _arch; }
+	private:
+	  std::string _name;
+	  std::string _ver;
+	  std::string _rel;
+	  std::string _arch;
+	};
 
-       };
+      };
+      inline bool operator<( const YUMSource::PackageID & lhs, const YUMSource::PackageID & rhs )
+      { return YUMSource::PackageID::compare( lhs, rhs ) == -1; }
+
       ///////////////////////////////////////////////////////////////////
     } // namespace yum
     /////////////////////////////////////////////////////////////////
