@@ -1,30 +1,50 @@
 #!/usr/bin/ruby -w
 
+require 'optparse'
 require 'rexml/document'
 include REXML
 
-FILENAME = 'helix.xml'
 OUTFILE = 'foobar.xml'
 
-if !File.exists?( FILENAME )
-  puts 'File not found.'
-  exit 1
-elsif !File.readable?( FILENAME )
-  puts 'File not readable.'
-  exit 1
-elsif File.zero?( FILENAME )
-  puts 'Nothing to do.'
-  exit 0
+# parse command-line options
+ARGV.options do |o|
+  o.banner = 'Usage: ' + File.basename($0) + ' FILE [-o YUMFILE]'
+  o.separator 'Options:'
+  o.on( '-s', '--show', 'output will be printed to stdout' ) { |s| $show = true }   # not good
+  o.on( '-o YUMFILE', '--outfile', 'specify the outputfile' ) { |of| $of = of }
+  o.separator '    without this parameter given, the outputfile is named <Helixfile>.yum.xml'
+  o.separator ''
+  o.on_tail( '-h', '--help', 'show this screen' ) { puts o; exit 0 }
 end
 
-# puts "Opening file #{FILENAME} (#{FILENAME.size} bytes)"
-printf( "-- Opening file %s (%d bytes) --\n", FILENAME, FILENAME.size )
-infile = File.open( FILENAME )
+# start exception-block
+begin
+ARGV.parse!
+
+filename = ARGV[0] || raise( 'No Helixfile given.' )
+puts "filename is #{filename}"
+puts "show is #{$show}"
+if true
+end
+puts "outfile is #{$of}"
+
+if !File.exists?( filename )
+  raise( 'File not found.' )
+elsif !File.readable?( filename )
+  raise( 'File not readable.' )
+elsif File.zero?( filename )
+  puts 'Nothing to do.'; exit 0
+end
+
+# puts "Opening file #{filename} (#{filename.size} bytes)"
+printf( "-- Opening file %s (%d bytes) --\n", filename, filename.size )
+infile = File.open( filename )
 
 ### use file to instanciate an XML-Object
 input = Document.new infile
 
 output = Document.new
+
 pkg_name = Array.new
 md5sum = Array.new
 epoch = Array.new
@@ -72,42 +92,12 @@ while !pkg_name.empty?
   output.root << pkg
 end
 
-output.write( $stdout, 0 )
+#output.write( $stdout, 0 )
 puts " "
 
 infile.close
 
-### provides
-#input.elements.each("*/*/package") { |elem| puts elem.elements["provides"] }
-
-### Finds and returns the first node that matches the supplied xpath
-# puts XPath.first( doc, '//name' )
-
-### Iterates over nodes that match the given path, calling the supplied block with the match.
-#a = XPath.each( input, '//name' ) { |elem| puts elem.text }
-
-### Returns an array of nodes matching a given XPath
-#a = XPath.match( doc, '//name' )
-#printf( "%d elements matching.\n", a.length )
-#puts a   # <name>G</name> ...
-
-# get Attributes
-# doc.elements.each( 'channel/subchannel/package' ) { |element| puts element.attributes['name'] }
-
-#===============================================================================
-
-# file2 = File.new( OUTFILE, 'w+' )
-# doc2 = Document.new
-# 
-# elem = Element.new "foo"
-# 
-# elem2 = elem.add_element "bar", { "attrib"=>"2" }
-# elem2.text = "this is my text"
-# 
-# elem2 = elem.add_element "hola"
-# elem2.text = "amigo"
-# 
-# doc2.add_element elem
-# doc2.write( file2, 0 )
-# 
-# file2.close
+rescue => exc
+  STDERR.puts "E: #{exc.message}"
+  exit 1
+end
