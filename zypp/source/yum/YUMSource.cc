@@ -98,7 +98,7 @@ namespace zypp
 	  }
 	}
 
-	Selection::Ptr createGroup(
+	Selection::Ptr YUMSource::createGroup(
 	  const zypp::parser::yum::YUMGroupData & parsed
 	)
 	{
