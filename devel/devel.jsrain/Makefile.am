@@ -3,7 +3,7 @@
 
 SUBDIRS = yum
 
-noinst_PROGRAMS =	Msg Msg.debug Patch Patch.debug Script Script.debug PatchSelect PatchSelect.debug PatchRead PatchRead.debug
+noinst_PROGRAMS =	Msg Msg.debug Patch Patch.debug Script Script.debug PatchSelect PatchSelect.debug PatchRead PatchRead.debug SourceRead SourceRead.debug
 
 
 ## ##################################################
@@ -42,6 +42,12 @@ PatchRead_SOURCES = 	PatchRead.cc
 
 PatchRead_debug_SOURCES = 	$(PatchRead_SOURCES)
 PatchRead_debug_LDFLAGS =	-static
+
+SourceRead_SOURCES = 		SourceRead.cc
+
+SourceRead_debug_SOURCES = 	$(SourceRead_SOURCES)
+SourceRead_debug_LDFLAGS =	-static
+
 
 ## ##################################################
 
