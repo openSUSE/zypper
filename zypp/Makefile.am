@@ -46,7 +46,8 @@ lib@PACKAGE@_la_SOURCES = \
 	Message.cc	\
 	Script.cc	\
 	Patch.cc	\
-	Product.cc
+	Product.cc	\
+	Changelog.cc
 
 lib@PACKAGE@_la_LDFLAGS =	@LIB_VERSION_INFO@
 

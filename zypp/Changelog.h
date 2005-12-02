@@ -14,9 +14,7 @@
 
 #include <string>
 #include <list>
-#include <iostream>
-
-using namespace std;
+#include "zypp/NeedAType.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -52,13 +50,7 @@ namespace zypp
 
   typedef std::list<ChangelogEntry> Changelog;
 
-  inline std::ostream & operator<<( std::ostream & out,
-				    const ChangelogEntry & obj )
-  { 
-    out << obj.date() << " " << obj.author() << endl << obj.text() << endl;
-    return out;
-  }
-
+  std::ostream & operator<<( std::ostream & out, const ChangelogEntry & obj );
  
   ///////////////////////////////////////////////////////////////////
 } // namespace zypp
