@@ -21,7 +21,8 @@ include_HEADERS = NeedAType.h \
 	Message.h	\
 	Script.h	\
 	Patch.h		\
-	Product.h
+	Product.h	\
+	Changelog.h
 
 ## ##################################################
 

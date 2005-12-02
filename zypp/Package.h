@@ -45,6 +45,8 @@ namespace zypp
              const Arch & arch_r );
     /** Dtor */
     virtual ~Package();
+    /** Get the package change log */
+    Changelog changelog();
 
   private:
     /** Access implementation */

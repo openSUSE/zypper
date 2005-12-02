@@ -77,7 +77,15 @@ namespace zypp
 	{
 	  _filenames.push_back(it->name);
 	}
-// TODO changelog
+	for (std::list<zypp::parser::yum::ChangelogEntry>::const_iterator
+		it = other.changelog.begin();
+	     it != other.changelog.end();
+	     it++)
+	{
+	  _changelog.push_back(ChangelogEntry(strtol(it->date.c_str(), 0, 10),
+					      it->author,
+					      it->entry));
+	}
       }
 
       YUMPackageImpl::YUMPackageImpl(
@@ -169,7 +177,15 @@ namespace zypp
 	  );
 	  _delta_rpms.push_back(delta);
 	}
-// TODO changelog
+	for (std::list<zypp::parser::yum::ChangelogEntry>::const_iterator
+		it = parsed.changelog.begin();
+	     it != parsed.changelog.end();
+	     it++)
+	{
+	  _changelog.push_back(ChangelogEntry(strtol(it->date.c_str(), 0, 10),
+					      it->author,
+					      it->entry));
+	}
       }
 
 
@@ -234,7 +250,7 @@ namespace zypp
       { return _group; }
 
       /** */
-      Text YUMPackageImpl::changelog() const
+      Changelog YUMPackageImpl::changelog() const
       { return _changelog; }
 
       /** Don't ship it as class Url, because it might be

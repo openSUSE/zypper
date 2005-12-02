@@ -14,6 +14,7 @@
 
 #include "zypp/detail/PackageImpl.h"
 #include "zypp/parser/yum/YUMParserData.h"
+#include "zypp/Changelog.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -71,7 +72,7 @@ namespace zypp
 	/** */
 	virtual PackageGroup group() const;
 	/** */
-	virtual Text changelog() const;
+	virtual Changelog changelog() const;
 	/** Don't ship it as class Url, because it might be
 	 * in fact anything but a legal Url. */
 	virtual std::string url() const;
@@ -198,7 +199,7 @@ namespace zypp
 	Label _license;
 	std::string _packager;
 	PackageGroup _group;
-	Text _changelog;
+	Changelog _changelog;
 	std::string _type;
 	License _license_to_confirm;
 	Text _authors;

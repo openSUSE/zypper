@@ -15,6 +15,7 @@
 #include "zypp/detail/ResObjectImplIf.h"
 #include "zypp/Edition.h"
 #include "zypp/Arch.h"
+#include "zypp/Changelog.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -181,7 +182,7 @@ namespace zypp
       /** */
       virtual PackageGroup group() const PURE_VIRTUAL;
       /** */
-      virtual Text changelog() const PURE_VIRTUAL;
+      virtual Changelog changelog() const PURE_VIRTUAL;
       /** Don't ship it as class Url, because it might be
        * in fact anything but a legal Url. */
       virtual std::string url() const PURE_VIRTUAL;

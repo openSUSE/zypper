@@ -47,8 +47,8 @@ namespace zypp
       PackageGroup PackageImplIf::group() const
       { return PackageGroup(); }
 
-      Text PackageImplIf::changelog() const
-      { return Text(); }
+      Changelog PackageImplIf::changelog() const
+      { return Changelog(); }
 
       std::string PackageImplIf::url() const
       { return std::string(); }
