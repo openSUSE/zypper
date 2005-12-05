@@ -83,14 +83,14 @@ namespace zypp
           delete this;
       }
 
-      /** Called by zypp::base::intrusive_ptr to add a reference.
-       * \see ZYPP_BASE_SMART_PTR
+      /** Called by zypp::intrusive_ptr to add a reference.
+       * \see ZYPP_SMART_PTR
       */
       static void add_ref( const ReferenceCounted * ptr_r )
       { if( ptr_r ) ptr_r->ref(); }
 
-      /** Called by zypp::base::intrusive_ptr to add a reference.
-       * \see ZYPP_BASE_SMART_PTR
+      /** Called by zypp::intrusive_ptr to add a reference.
+       * \see ZYPP_SMART_PTR
       */
       static void release( const ReferenceCounted * ptr_r )
       { if( ptr_r ) ptr_r->unref(); }

@@ -32,12 +32,12 @@ namespace zypp
         class ResImplConnect : public _Res
         {
         public:
-          typedef ResImplConnect                  Self;
-          typedef typename _Res::Impl             Impl;
-          typedef base::shared_ptr<Impl>          Impl_Ptr;
+          typedef ResImplConnect      Self;
+          typedef typename _Res::Impl Impl;
+          typedef shared_ptr<Impl>    Impl_Ptr;
           // Ptr types not needed
-          // typedef base::intrusive_ptr<Self>       Ptr;
-          // typedef base::intrusive_ptr<const Self> constPtr;
+          // typedef intrusive_ptr<Self>       Ptr;
+          // typedef intrusive_ptr<const Self> constPtr;
         public:
           /** \todo protect against NULL Impl. */
           ResImplConnect( const std::string & name_r,
@@ -64,7 +64,7 @@ namespace zypp
       makeResolvableAndImpl( const std::string & name_r,
                              const Edition & edition_r,
                              const Arch & arch_r,
-                             base::shared_ptr<_Impl> & impl_r )
+                             shared_ptr<_Impl> & impl_r )
       {
         impl_r.reset( new _Impl );
         return new
@@ -77,7 +77,7 @@ namespace zypp
       makeResolvableFromImpl( const std::string & name_r,
                               const Edition & edition_r,
                               const Arch & arch_r,
-                              base::shared_ptr<_Impl> impl_r )
+                              shared_ptr<_Impl> impl_r )
       {
         if ( ! impl_r )
           throw ( "makeResolvableFromImpl: NULL Impl " );

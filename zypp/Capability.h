@@ -113,7 +113,7 @@ namespace zypp
 
   private:
     /** Pointer to implementation */
-    base::RW_pointer<Impl,Impl_Ptr> _pimpl;
+    RW_pointer<Impl,Impl_Ptr> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 

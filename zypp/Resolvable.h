@@ -73,7 +73,7 @@ namespace zypp
     /** Implementation */
     struct Impl;
     /** Pointer to implementation */
-    base::RW_pointer<Impl> _pimpl;
+    RW_pointer<Impl> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -110,19 +110,19 @@ namespace zypp
   */
   template<class _Res>
     inline typename ResTraits<_Res>::PtrType asKind( const Resolvable::Ptr & p )
-    { return base::dynamic_pointer_cast<_Res>(p); }
+    { return dynamic_pointer_cast<_Res>(p); }
 
   template<class _Res>
     inline typename ResTraits<_Res>::constPtrType asKind( const Resolvable::constPtr & p )
-    { return base::dynamic_pointer_cast<const _Res>(p); }
+    { return dynamic_pointer_cast<const _Res>(p); }
 
   ///////////////////////////////////////////////////////////////////
 
-  /** Required by base::intrusive_ptr to add a reference. */
+  /** Required by intrusive_ptr to add a reference. */
   inline void intrusive_ptr_add_ref( const Resolvable * ptr_r )
   { base::ReferenceCounted::add_ref( ptr_r ); }
 
-  /** Required by base::intrusive_ptr to release a reference. */
+  /** Required by intrusive_ptr to release a reference. */
   inline void intrusive_ptr_release( const Resolvable * ptr_r )
   { base::ReferenceCounted::release( ptr_r ); }
 

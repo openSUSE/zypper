@@ -21,7 +21,7 @@ namespace zypp {
 
       YUMDependency::YUMDependency()
       { }
-      
+
       YUMDependency::YUMDependency(const std::string& kind,
                                    const std::string& name,
                                    const std::string& flags,
@@ -37,57 +37,57 @@ namespace zypp {
       rel(rel),
       pre(pre)
       { };
-      
+
       YUMDirSize::YUMDirSize()
       { }
-      
+
       YUMDirSize::YUMDirSize(const std::string& path,
                              const std::string& sizeKByte,
                              const std::string& fileCount)
       : path(path), sizeKByte(sizeKByte), fileCount(fileCount)
       { }
-      
+
       YUMRepomdData::YUMRepomdData()
       { }
-      
+
       YUMPrimaryData::YUMPrimaryData()
       { }
-      
+
       FileData::FileData()
       { }
-      
+
       YUMPatchData::YUMPatchData()
       { }
-      
+
       FileData::FileData(const std::string &name,
                          const std::string &type)
       : name(name), type(type)
       { }
-      
-      
+
+
       YUMGroupData::YUMGroupData()
       { }
-      
+
       MultiLang::MultiLang()
       { }
-      
+
       MultiLang::MultiLang(const std::string& language,
                            const std::string& text)
       : language(language), text(text)
       { }
-      
-      
+
+
       MetaPkg::MetaPkg()
       { }
-      
+
       MetaPkg::MetaPkg(const std::string& type,
                        const std::string& name)
       : type(type), name(name)
       { }
-      
+
       PackageReq::PackageReq()
       { }
-      
+
       PackageReq::PackageReq(const std::string& type,
                              const std::string& epoch,
                              const std::string& ver,
@@ -95,26 +95,26 @@ namespace zypp {
                              const std::string& name)
       : type(type), epoch(epoch), ver(ver), rel(rel), name(name)
       { }
-      
+
       ChangelogEntry::ChangelogEntry()
       { }
-      
+
       ChangelogEntry::ChangelogEntry(const std::string& author,
                                      const std::string& date,
                                      const std::string& entry)
       : author(author), date(date), entry(entry)
       { }
-      
-                      
+
+
       YUMFileListData::YUMFileListData()
       { }
-      
+
       YUMOtherData::YUMOtherData()
       { }
-      
-      
+
+
       /* Define pointer classes */
-      
+
       IMPL_PTR_TYPE(YUMRepomdData);
       IMPL_PTR_TYPE(YUMPrimaryData);
       IMPL_PTR_TYPE(YUMGroupData);
@@ -126,9 +126,9 @@ namespace zypp {
       IMPL_PTR_TYPE(YUMPatchPackage);
       IMPL_PTR_TYPE(YUMPatchScript);
       IMPL_PTR_TYPE(YUMPatchMessage);
-      
+
       /* output operators */
-      
+
       namespace {
         /**
          * @short Generic stream output for lists of Ptrs
@@ -150,7 +150,7 @@ namespace zypp {
           return out;
         }
       }
-      
+
       /**
        * Join a list of strings into a single string
        * @param aList the list of strings
@@ -176,7 +176,7 @@ namespace zypp {
 } // namespace zypp
 
 using namespace zypp::parser::yum;
-  
+
 ostream& operator<<(ostream &out, const YUMDependency& data)
 {
   if (! data.kind.empty())
@@ -189,7 +189,7 @@ ostream& operator<<(ostream &out, const YUMDependency& data)
     out << " (pre=" << data.pre << ")";
   return out;
 }
-  
+
 ostream& operator<<(ostream &out, const YUMDirSize& data)
 {
   out << data.path
@@ -197,7 +197,7 @@ ostream& operator<<(ostream &out, const YUMDirSize& data)
     << data.fileCount << " files";
   return out;
 }
-    
+
 ostream& operator<<(ostream &out, const FileData& data)
 {
   out << data.name;
@@ -402,22 +402,22 @@ ostream& operator<<(ostream &out, const YUMProductData& data)
   return out;
 }
 
-std::ostream& operator<<(std::ostream& out, const shared_ptr<YUMPatchAtom> data)
+std::ostream& operator<<(std::ostream& out, const zypp::shared_ptr<YUMPatchAtom> data)
 {
   out << "Atom data" << endl;
   switch (data->atomType())
   {
     case YUMPatchAtom::Package:
       out << "  atom type: " << "package" << endl
-        << *dynamic_pointer_cast<YUMPatchPackage>(data);
+        << *zypp::dynamic_pointer_cast<YUMPatchPackage>(data);
       break;
     case YUMPatchAtom::Message:
       out << "  atom type: " << "message" << endl
-        << *dynamic_pointer_cast<YUMPatchMessage>(data);
+        << *zypp::dynamic_pointer_cast<YUMPatchMessage>(data);
       break;
     case YUMPatchAtom::Script:
       out << "  atom type: " << "script" << endl
-        << *dynamic_pointer_cast<YUMPatchScript>(data);
+        << *zypp::dynamic_pointer_cast<YUMPatchScript>(data);
       break;
     default:
       out << "Unknown atom type" << endl;

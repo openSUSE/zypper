@@ -32,15 +32,15 @@ namespace zypp
   /** Base of ResTraits. Defines the Resolvable::Kind type. */
   struct ResolvableTraits
   {
-    typedef base::KindOf<Resolvable>  KindType;
+    typedef KindOf<Resolvable>  KindType;
   };
 
   /** ResTraits. Defines common types and the Kind value. */
   template<typename _Res>
     struct ResTraits : public ResolvableTraits
     {
-      typedef base::intrusive_ptr<_Res>       PtrType;
-      typedef base::intrusive_ptr<const _Res> constPtrType;
+      typedef intrusive_ptr<_Res>       PtrType;
+      typedef intrusive_ptr<const _Res> constPtrType;
 
       static const KindType kind;
     };
@@ -51,8 +51,8 @@ namespace zypp
   template<>
     struct ResTraits<Resolvable> : public ResolvableTraits
     {
-      typedef base::intrusive_ptr<Resolvable>       PtrType;
-      typedef base::intrusive_ptr<const Resolvable> constPtrType;
+      typedef intrusive_ptr<Resolvable>       PtrType;
+      typedef intrusive_ptr<const Resolvable> constPtrType;
     };
 
   /** ResTraits specialisation for ResObject.
@@ -61,8 +61,8 @@ namespace zypp
   template<>
     struct ResTraits<ResObject> : public ResolvableTraits
     {
-      typedef base::intrusive_ptr<Resolvable>       PtrType;
-      typedef base::intrusive_ptr<const Resolvable> constPtrType;
+      typedef intrusive_ptr<Resolvable>       PtrType;
+      typedef intrusive_ptr<const Resolvable> constPtrType;
     };
 
   /////////////////////////////////////////////////////////////////

@@ -39,7 +39,7 @@ namespace zypp
       typedef CapabilityImpl_Ptr       Ptr;
       typedef CapabilityImpl_constPtr  constPtr;
 
-      typedef base::KindOf<Capability> Kind;
+      typedef KindOf<Capability> Kind;
 
     public:
       /** Ctor taking the kind of Resolvable \c this refers to.*/

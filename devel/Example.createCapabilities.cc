@@ -13,7 +13,6 @@
 
 using namespace std;
 using namespace zypp;
-using zypp::base::shared_ptr;
 
 // work around flaw in y2logview
 template<class _Tp>

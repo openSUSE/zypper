@@ -65,7 +65,7 @@ int main( int argc, char * argv[] )
   Arch        _arch( "i386" );
 
   // create the object
-  base::shared_ptr<detail::PackageImpl> pkgImpl;
+  shared_ptr<detail::PackageImpl> pkgImpl;
   Package::Ptr pkg( detail::makeResolvableAndImpl( _name, _edition, _arch,
                                                    pkgImpl ) );
   DBG << *pkg << endl;

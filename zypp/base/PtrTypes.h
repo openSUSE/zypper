@@ -7,8 +7,8 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 /** \file zypp/base/PtrTypes.h
- *  \ingroup ZYPP_BASE_SMART_PTR
- *  \see ZYPP_BASE_SMART_PTR
+ *  \ingroup ZYPP_SMART_PTR
+ *  \see ZYPP_SMART_PTR
 */
 #ifndef ZYPP_BASE_PTRTYPES_H
 #define ZYPP_BASE_PTRTYPES_H
@@ -23,14 +23,11 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace base
-  { /////////////////////////////////////////////////////////////////
 
-    /** \defgroup ZYPP_BASE_SMART_PTR ZYPP_BASE_SMART_PTR
+    /** \defgroup ZYPP_SMART_PTR Smart pointer types
      *  Smart pointer types.
      *
-     * Namespace zypp::base provides 3 smart pointer types \b using the
+     * Namespace zypp provides 3 smart pointer types \b using the
      * boost smart pointer library.
      *
      * \li \c scoped_ptr Simple sole ownership of single objects. Noncopyable.
@@ -39,7 +36,7 @@ namespace zypp
      *
      * \li \c weak_ptr Non-owning observers of an object owned by shared_ptr.
      *
-     * And \ref zypp::base::RW_pointer, as wrapper around a smart pointer,
+     * And \ref zypp::RW_pointer, as wrapper around a smart pointer,
      * poviding \c const correct read/write access to the object it refers.
     */
     /*@{*/
@@ -64,9 +61,9 @@ namespace zypp
     //
     //	CLASS NAME : RW_pointer
     //
-    /** Wrapper for \c const correct access via \ref ZYPP_BASE_SMART_PTR.
+    /** Wrapper for \c const correct access via \ref ZYPP_SMART_PTR.
      *
-     * zypp::base::RW_pointer<tt>\<_D,_Ptr></tt> stores a \ref ZYPP_BASE_SMART_PTR
+     * zypp::RW_pointer<tt>\<_D,_Ptr></tt> stores a \ref ZYPP_SMART_PTR
      * of type \c _Ptr, which must be convertible into a <tt>_D *</tt>. Pointer
      * style access (via \c -> and \c *) offers a <tt>const _D *</tt> in const
      * a context, otherwise a <tt>_D *</tt>. Thus \em RW_ means \em read/write,
@@ -89,7 +86,7 @@ namespace zypp
      *     // Implementation class
      *     struct Impl;
      *     // Pointer to implementation; actually a shared_ptr<Impl>
-     *     base::RW_pointer<Impl> _pimpl;
+     *     RW_pointer<Impl> _pimpl;
      *
      *     void baa()       { _pimpl->... } // is Impl *
      *     void baa() const { _pimpl->... } // is Impl const *
@@ -145,7 +142,7 @@ namespace zypp
      * which must be convertible into a <tt>_D *</tt>.
      *
      * \note The object pointed to will \b not be deleted. If you need
-     * automatic cleanup, use a \ref ZYPP_BASE_SMART_PTR instead of a
+     * automatic cleanup, use a \ref ZYPP_SMART_PTR instead of a
      * raw pointer.
     */
     template<class _D,class _P>
@@ -174,9 +171,6 @@ namespace zypp
 
     /*@}*/
 
-    /////////////////////////////////////////////////////////////////
-  } // namespace base
-  ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
@@ -186,8 +180,8 @@ namespace zypp
 class NAME;                                                      \
 extern void intrusive_ptr_add_ref( const NAME * );               \
 extern void intrusive_ptr_release( const NAME * );               \
-typedef zypp::base::intrusive_ptr<NAME>       NAME##_Ptr;        \
-typedef zypp::base::intrusive_ptr<const NAME> NAME##_constPtr;
+typedef zypp::intrusive_ptr<NAME>       NAME##_Ptr;        \
+typedef zypp::intrusive_ptr<const NAME> NAME##_constPtr;
 
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_BASE_PTRTYPES_H
