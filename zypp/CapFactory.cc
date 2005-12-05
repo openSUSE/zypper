@@ -12,6 +12,7 @@
 #include <iostream>
 #include <functional>
 #include <set>
+#include <map>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
@@ -20,12 +21,12 @@
 #include "zypp/CapFactory.h"
 #include "zypp/capability/Capabilities.h"
 
-using namespace std;
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace
 { /////////////////////////////////////////////////////////////////
-
+  using ::zypp::Resolvable;
   using ::zypp::capability::CapabilityImpl;
   using ::zypp::capability::CapImplOrder;
 
@@ -53,6 +54,49 @@ namespace
   {
     return *(_uset.insert( CapabilityImpl::Ptr(allocated_r) ).first);
   }
+
+  /** Collect USet statistics.
+   * \ingroup DEBUG
+  */
+  struct USetStatsCollect : public std::unary_function<CapabilityImpl::constPtr, void>
+  {
+    struct Counter
+    {
+      unsigned _count;
+      Counter() : _count( 0 ) {}
+      void incr() { ++_count; }
+    };
+
+    Counter _caps;
+    std::map<CapabilityImpl::Kind,Counter> _capKind;
+    std::map<Resolvable::Kind,Counter>     _capRefers;
+
+    void operator()( const CapabilityImpl::constPtr & cap_r )
+    {
+      //DBG << *cap_r << endl;
+      _caps.incr();
+      _capKind[cap_r->kind()].incr();
+      _capRefers[cap_r->refers()].incr();
+    }
+
+    std::ostream & dumpOn( std::ostream & str ) const
+    {
+      str << "  Capabilities total: " << _caps._count << endl;
+      str << "  Capability kinds:" << endl;
+      for ( std::map<CapabilityImpl::Kind,Counter>::const_iterator it = _capKind.begin();
+            it != _capKind.end(); ++it )
+        {
+          str << "    " << it->first << '\t' << it->second._count << endl;
+        }
+      str << "  Capability refers:" << endl;
+      for ( std::map<Resolvable::Kind,Counter>::const_iterator it = _capRefers.begin();
+            it != _capRefers.end(); ++it )
+        {
+          str << "    " << it->first << '\t' << it->second._count << endl;
+        }
+      return str;
+    }
+  };
 
   /////////////////////////////////////////////////////////////////
 } // namespace
@@ -337,7 +381,9 @@ namespace zypp
   */
   std::ostream & operator<<( std::ostream & str, const CapFactory & obj )
   {
-    return str << "No CapFactory stats implemented";
+    str << "CapFactory stats:" << endl;
+
+    return for_each( _uset.begin(), _uset.end(), USetStatsCollect() ).dumpOn( str );
   }
 
   /////////////////////////////////////////////////////////////////

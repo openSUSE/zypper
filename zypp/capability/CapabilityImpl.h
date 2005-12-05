@@ -71,7 +71,7 @@ namespace zypp
        * and \c kind values are equal to \c this. Implementation
        * may concentrate on the remaining values.
        *
-       * \todo make it pure virt.
+       * \todo make it pure virt?
       */
       virtual bool capImplOrderLess( const CapabilityImpl::constPtr & rhs ) const; // = 0;
     };
