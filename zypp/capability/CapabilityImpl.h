@@ -63,7 +63,35 @@ namespace zypp
     private:
       /** Kind of Resolvable \c this refers to. */
       Resolvable::Kind _refers;
+
+    private:
+      friend struct CapImplOrder;
+      /** Helper for CapImplOrder to define an order relation.
+       * \invariant CapImplOrder asserts that \a rhs \c refers
+       * and \c kind values are equal to \c this. Implementation
+       * may concentrate on the remaining values.
+       *
+       * \todo make it pure virt.
+      */
+      virtual bool capImplOrderLess( const CapabilityImpl::constPtr & rhs ) const; // = 0;
     };
+    ///////////////////////////////////////////////////////////////////
+
+    /** Ordering relation used by ::CapFactory to unify CapabilityImpl. */
+    struct CapImplOrder : public std::binary_function<CapabilityImpl::constPtr, CapabilityImpl::constPtr, bool>
+    {
+      /** */
+      bool operator()( const CapabilityImpl::constPtr & lhs,
+                       const CapabilityImpl::constPtr & rhs ) const
+      {
+        if ( lhs->refers() != rhs->refers() )
+          return lhs->refers() < rhs->refers();
+        if ( lhs->kind() != rhs->kind() )
+          return lhs->kind() < rhs->kind();
+        return lhs->capImplOrderLess( rhs );
+      }
+    };
+
     ///////////////////////////////////////////////////////////////////
 
     /** \relates CapabilityImpl Stream output */

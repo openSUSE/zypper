@@ -27,26 +27,25 @@ namespace
 { /////////////////////////////////////////////////////////////////
 
   using ::zypp::capability::CapabilityImpl;
+  using ::zypp::capability::CapImplOrder;
 
-  /** \ref USet order.
-   * \todo check set ordering to assert no dups
+  /** Set of unique CapabilityImpl. */
+  typedef std::set<CapabilityImpl::Ptr,CapImplOrder> USet;
+
+  /** Set to unify created capabilities.
+   *
+   * This is to unify capabilities. Each CapabilityImpl created
+   * by CapFactory, must be inserted into _uset, and the returned
+   * CapabilityImpl::Ptr has to be uset to create the Capability.
   */
-  struct USetOrder : public std::binary_function<CapabilityImpl::Ptr, CapabilityImpl::Ptr, bool>
-  {
-    /** */
-    bool operator()( const CapabilityImpl::Ptr & lhs,
-                     const CapabilityImpl::Ptr & rhs ) const
-    { return lhs->asString() < rhs->asString(); }
-  };
-
-  /** */
-  typedef std::set<CapabilityImpl::Ptr,USetOrder> USet;
-
-  /** Set to unify created capabilities. */
   USet _uset;
 
-  /** Immediately wrap \a allocated_r and unify by inserting
-   * it into \c _uset.
+  /** Each CapabilityImpl created in CapFactory \b must be warpped.
+   *
+   * Immediately wrap \a allocated_r, and unified by inserting it into
+   * \c _uset. Each CapabilityImpl created by CapFactory, \b must be
+   * inserted into _uset, by calling usetInsert.
+   *
    * \return CapabilityImpl_Ptr referencing \a allocated_r (or an
    * eqal representation, allocated is deleted then).
   */
@@ -72,6 +71,10 @@ namespace zypp
    * Provides various functions doing checks and log and \c throw.
    * CapFactory::parse usually combines them, and if nothing fails,
    * finaly builds the Capability.
+   *
+   * \attention Each CapabilityImpl created by CapFactory, \b must
+   * be inserted into ::_uset, by calling ::usetInsert, \b before
+   * the Capability is created.
    *
    * \li \c file:    /absolute/path
    * \li \c split:   name:/absolute/path

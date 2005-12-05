@@ -32,6 +32,16 @@ namespace zypp
     : _refers( refers_r )
     {}
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : CapabilityImpl::capImplOrderLess
+    //	METHOD TYPE : bool
+    //
+    bool CapabilityImpl::capImplOrderLess( const CapabilityImpl::constPtr & rhs ) const
+    {
+      return asString() < rhs->asString();
+    }
+
     /******************************************************************
      **
      **	FUNCTION NAME : operator<<

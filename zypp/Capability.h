@@ -61,7 +61,7 @@ namespace zypp
    * \see CapFactory: Factory creating Capability.
    *
    * \invariant Nonzero \c _pimpl
-   * \invariant Unified \c _pimpl asserted by CapFactory
+   * \invariant Unified \c _pimpl asserted by CapFactory.
    *
    * \todo Need a trival return from matches. E.g. Conditional
    * cpabilities must be able to indicate that they should be
