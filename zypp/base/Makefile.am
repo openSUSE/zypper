@@ -6,6 +6,7 @@ SUBDIRS =
 ## ##################################################
 
 include_HEADERS =	\
+	Debug.h		\
 	KindOf.h	\
 	Logger.h	\
 	Exception.h	\

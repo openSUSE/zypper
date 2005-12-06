@@ -1,326 +1,162 @@
-#include <iostream>
-#include <ctime>
+#include <iosfwd>
+#include "zypp/base/PtrTypes.h"
 
-#include <fstream>
-#include <list>
-#include <string>
-#include <zypp/base/Logger.h>
-#include <zypp/base/String.h>
-#include <zypp/base/PtrTypes.h>
-
-#include <zypp/CapFactory.h>
-#include <zypp/CapSet.h>
-
-using namespace std;
-using namespace zypp;
-
-// work around flaw in y2logview
-template<class _Tp>
-  void printOnHack( const _Tp & obj )
+///////////////////////////////////////////////////////////////////
+// MyClass.h
+///////////////////////////////////////////////////////////////////
+namespace zypp
+{
+  ///////////////////////////////////////////////////////////////////
+  class MyClass
+  ///////////////////////////////////////////////////////////////////
   {
-    MIL << obj << endl;
+  public:
+    /** Implementation */
+    struct Impl;
+
+  public:
+    MyClass( int val = 0 );
+
+    int get() const;
+
+    void set( int val );
+
+  private:
+    /** Pointer to implementation */
+    RWCOW_pointer<Impl> _pimpl;
   };
-
-///////////////////////////////////////////////////////////////////
-// Just for the stats
-struct Measure
-{
-  time_t _begin;
-  Measure()
-  : _begin( time(NULL) )
-  {
-    USR << "START MEASURE..." << endl;
-  }
-  ~Measure()
-  {
-    USR << "DURATION: " << (time(NULL)-_begin) << " sec." << endl;
-  }
-};
-
-///////////////////////////////////////////////////////////////////
-// Print stream status
-ostream & operator<<( ostream & str, const istream & obj ) {
-  return str
-  << (obj.good() ? 'g' : '_')
-  << (obj.eof()  ? 'e' : '_')
-  << (obj.fail() ? 'F' : '_')
-  << (obj.bad()  ? 'B' : '_');
-}
-
-///////////////////////////////////////////////////////////////////
-// Return one line from stream
-std::string getline( std::istream & str )
-{
-  static const unsigned tmpBuffLen = 1024;
-  static char           tmpBuff[tmpBuffLen];
-  string ret;
-  do {
-    str.clear();
-    str.getline( tmpBuff, tmpBuffLen ); // always writes '\0' terminated
-    ret += tmpBuff;
-  } while( str.rdstate() == ios::failbit );
-
-  return ret;
-}
-
-///////////////////////////////////////////////////////////////////
-// Simple lineparser: Call function do_r for each line.
-template<class _Function>
-  _Function & forEachLine( std::istream & str_r, _Function & do_r )
-  {
-    while ( str_r )
-      {
-        std::string l = getline( str_r );
-        if ( ! (str_r.fail() || str_r.bad()) )
-          {
-            // l contains valid data to be consumed.
-            do_r( l );
-          }
-      }
-    return do_r;
-  }
-
-///////////////////////////////////////////////////////////////////
-// Fits forEachLine. A simple 'do' function
-void collect( const std::string & linre_r )
-{
-  DBG << linre_r << endl;
+  ///////////////////////////////////////////////////////////////////
 }
 ///////////////////////////////////////////////////////////////////
-// Fits forEachLine. A simple 'do' functor counting lines as base.
-/*
- Line processing is prepared by providing 'virtual void doConsume(std::string)'.
- That's what a derived Collector will overload.
- */
-struct Collector : public std::unary_function<const std::string &, void>
-{
-  unsigned _lineNo;
-  Collector()
-  : _lineNo( 0 )
-  {}
-  virtual ~Collector()
-  {}
-  virtual void doConsume( const std::string & line_r )
-  {}
-  void operator()( const std::string & line_r )
-  {
-    ++_lineNo;
-    if ( ! (_lineNo % 10000) )
-      DBG << "Got " << _lineNo << " lines..." << endl;
-    doConsume( line_r );
-  }
-};
+
+
+
 ///////////////////////////////////////////////////////////////////
-// Fits forEachLine. An impatient collector ;)
-struct ImpatientCollector : public Collector
-{
-  virtual void doConsume( const std::string & line_r )
-  {
-    if ( _lineNo == 1234 )
-      ZYPP_THROW( "takes to long" );
-  }
-};
+// MyClass.cc
 ///////////////////////////////////////////////////////////////////
-// Fits forEachLine. Almost usefull collector.
-/*
- Note that it's still a functor 'void operator()( const std::string & )'.
+#include <zypp/base/Debug.h>
 
- On every invocation the string is parsed into a Capability, and the
- Capability is stored in a CapSet.
+using std::endl;
 
- Exceptions building the Capability are caught and collected in a
- Failure list. It's a matter of taste whether to immediately abort,
- or to parse to the end check for collected errors then. Room for
- improvement.
-
- see enhacedCollectorUsage().
-*/
-struct EnhacedCollector : public Collector
+namespace zypp
 {
-  // Stores line number, original string and Exception
-  struct Failure
+  ///////////////////////////////////////////////////////////////////
+  struct MyClass::Impl : public debug::TraceCAD<Impl>
+  ///////////////////////////////////////////////////////////////////
   {
-    unsigned _lineNo;
-    std::string _line;
-    Exception _excpt;
-    Failure( unsigned lineNo_r,
-             const std::string & line_r, const Exception & excpt_r )
-    : _lineNo( lineNo_r ), _line( line_r ), _excpt( excpt_r )
+    Impl( int val = 0 )
+    : _value( val )
     {}
+
+    int _value;
+
+  private:
+    friend Impl * rwcowClone<Impl>( const Impl * rhs );
+    /** clone for RWCOW_pointer */
+    Impl * clone() const
+    { return new Impl( *this ); }
   };
+  ///////////////////////////////////////////////////////////////////
 
-  typedef std::list<Failure> FailedList;
+  ///////////////////////////////////////////////////////////////////
+  // class MyClass
+  ///////////////////////////////////////////////////////////////////
 
-  CapFactory  _factory;
-  unsigned    _capLines;
-  CapSet      _caps;
-  FailedList  _failures;
-
-
-  EnhacedCollector()
-  : _capLines( 0 )
+  MyClass::MyClass( int val )
+  : _pimpl( new Impl( val ) )
   {}
 
-  void makeCap( const string & line_r )
-  {
-    ++_capLines; // count attempts
-    try
-      {
-        // bulid Package deps.
-        _caps.insert( _factory.parse( ResTraits<Package>::kind, line_r ) );
-      }
-    catch( Exception & excpt_r )
-      {
-        _failures.push_back( Failure(_lineNo, line_r, excpt_r) );
-      }
-  }
+  int MyClass::get() const
+  { return _pimpl->_value; }
 
-  virtual void doConsume( const std::string & line_r )
-  {
-    makeCap( line_r );
-  }
-};
+  void MyClass::set( int val )
+  { _pimpl->_value = val; }
 
-// Print a Failure
-ostream & operator<<( ostream & str, const EnhacedCollector::Failure & obj )
-{
-  return str << str::form( "[%u] \"%s\" ==> %s",
-                           obj._lineNo,
-                           obj._line.c_str(),
-                           obj._excpt.asString().c_str() );
 }
-
-// Print EnhacedCollector stats
-ostream & operator<<( ostream & str, const EnhacedCollector & obj )
-{
-  str << "Lines parsed : " << obj._lineNo << endl;
-  str << "Cap lines    : " << obj._capLines << endl;
-  str << "Capabilites  : " << obj._caps.size() << endl;
-  str << "Parse errors : " << obj._failures.size() << endl;
-  if ( obj._failures.size() )
-    {
-      copy( obj._failures.begin(), obj._failures.end(),
-            ostream_iterator<EnhacedCollector::Failure>(ERR,"\n") );
-      //-something-we-should-not-do-unless-....---------^^^
-    }
-  return str;
-}
-
 ///////////////////////////////////////////////////////////////////
-// Fits forEachLine.
-/*
- Within a packages file, not every line defines a Capability. So
- EnhacedCollector is refined to turn Capability collection on and
- off, as appropriate. A dumb version simply storing all Capabilities
- defined somewhere in the packages file.
-*/
-struct PackageParseCollector : public EnhacedCollector
-{
-  static std::string _rxStrDeps;
-  static str::regex  _rxDepOn;
-  static str::regex  _rxDepOff;
-
-  str::smatch _what;
-  bool        _consume;
-
-  PackageParseCollector()
-  : _consume( false )
-  {}
-
-  bool matches( const string & line_r, const str::regex & rx_r )
-  {
-    return str::regex_match( line_r.begin(), line_r.end(), rx_r );
-  }
-
-  virtual void doConsume( const std::string & line_r )
-  {
-    if ( _consume )
-      {
-        if ( matches( line_r, _rxDepOff ) )
-          {
-            _consume = false;
-          }
-        else
-          {
-            EnhacedCollector::doConsume( line_r );
-          }
-      }
-    else if ( matches( line_r, _rxDepOn ) )
-      {
-        _consume = true;
-      }
-  }
-};
-
-std::string PackageParseCollector::_rxStrDeps( "(Req|Prq|Prv|Con|Obs)" );
-str::regex  PackageParseCollector::_rxDepOn ( str::form( "\\+%s:", _rxStrDeps.c_str() ) );
-str::regex  PackageParseCollector::_rxDepOff( str::form( "-%s:", _rxStrDeps.c_str() ) );
 
 /******************************************************************
 **
-**      FUNCTION NAME : enhacedCollectorUsage
-**      FUNCTION TYPE :
-*/
-void enhacedCollectorUsage()
-{
-  // EnhacedCollector: Simply collect strings which are expected to
-  // be Capabilities. Error handling is delayed by collecting failures.
-  EnhacedCollector collector;
-  collector( "" );
-  collector( "foo baa kaa" );
-  collector( "/bin/sh" );
-  collector( "/bin/sh" );
-  collector( "/bin/sh" );
-  collector( "/bin/sh" );
-
-  MIL << collector << endl;
-  MIL << "Capabilities found:" << endl;
-  for_each( collector._caps.begin(), collector._caps.end(),
-            printOnHack<Capability> );
-}
-
-/******************************************************************
 **
 **      FUNCTION NAME : main
 **      FUNCTION TYPE : int
+**
+**      DESCRIPTION :
 */
 int main( int argc, char * argv[] )
 {
-  string file( "packages" );
-
   INT << "===[START]==========================================" << endl;
+  using zypp::MyClass;
 
-  // dump PackageParseCollector: open the file, and build Capabilities
-  // from each appropriate line. Collecting failures.
+  MyClass c;
+  MyClass d( c );
+  MyClass e( d );
 
-  ifstream str( file.c_str() );
-  (str?DBG:ERR) << file << ": " << str << endl;
-  shared_ptr<Measure> duration( new Measure );
+  MIL << "c.get" << c.get() << endl;
+  MIL << "d.get" << d.get() << endl;
+  MIL << "e.get" << e.get() << endl;
 
-  PackageParseCollector datacollect;
-  try
-    {
-      forEachLine( str, datacollect );
-    }
-  catch ( Exception & excpt_r )
-    {
-      // Note: Exceptions building a Capability are caught. So this is
-      // something different. Maybe a bored ImpatientCollector.
-      ZYPP_CAUGHT( excpt_r );
-      ERR << "Parse error at line " << datacollect._lineNo << ": " << excpt_r << endl;
-      return 1;
-    }
+  DBG << "will d.set( 4 )..." << endl;
+  d.set( 4 );
+  DBG << "done d.set( 4 )" << endl;
 
-  duration.reset();
-  DBG << file << ": " << str << endl;
+  MIL << "c.get" << c.get() << endl;
+  MIL << "d.get" << d.get() << endl;
+  MIL << "e.get" << e.get() << endl;
 
-  MIL << datacollect << endl;
-  MIL << CapFactory() << endl;
+  DBG << "will d.set( 5 )..." << endl;
+  d.set( 5 );
+  DBG << "done d.set( 5 )" << endl;
 
-  //MIL << "Capabilities found:" << endl;
-  //for_each( datacollect._caps.begin(), datacollect._caps.end(),
-  //          printOnHack<Capability> );
+  MIL << "c.get" << c.get() << endl;
+  MIL << "d.get" << d.get() << endl;
+  MIL << "e.get" << e.get() << endl;
+
+  DBG << "will c.set( 1 )..." << endl;
+  c.set( 5 );
+  DBG << "done c.set( c )" << endl;
+
+  MIL << "c.get" << c.get() << endl;
+  MIL << "d.get" << d.get() << endl;
+  MIL << "e.get" << e.get() << endl;
 
   INT << "===[END]============================================" << endl;
   return 0;
 }
+
+#if 0
+
+///////////////////////////////////////////////////////////////////
+namespace zypp
+{ /////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
+  namespace debug
+  { /////////////////////////////////////////////////////////////////
+
+    template<>
+      void watchCAD( WatchCADBase::What what_r,
+                     const WatchCAD<Dependencies::Impl> & self_r,
+                     const WatchCAD<Dependencies::Impl> & rhs_r )
+      {
+        switch( what_r )
+          {
+          case WatchCADBase::CTOR:
+          case WatchCADBase::DTOR:
+            SEC << self_r << what_r << std::endl;
+            break;
+          case WatchCADBase::COPYCTOR:
+          case WatchCADBase::ASSIGN:
+            SEC << self_r << what_r << "( "
+            << dynamic_cast<const Dependencies::Impl &>(rhs_r)
+            << ")" << std::endl;
+            break;
+          }
+      }
+
+    /////////////////////////////////////////////////////////////////
+  } // namespace debug
+  ///////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////
+} // namespace zypp
+///////////////////////////////////////////////////////////////////
+#endif

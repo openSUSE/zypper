@@ -134,7 +134,9 @@ namespace zypp
   //
   //	CLASS NAME : Edition::Impl
   //
-  /** Edition implementation */
+  /** Edition implementation.
+   * \todo Unifiy Impl in Edition::noedition and Edition::Edition()
+  */
   struct Edition::Impl
   {
     Impl()

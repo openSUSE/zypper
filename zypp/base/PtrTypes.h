@@ -50,7 +50,7 @@ namespace zypp
     /** */
     using boost::weak_ptr;
 
-    /** Use boost::intrusive_ptr as Ptr type*/
+    /** Use boost::intrusive_ptr as Ptr type */
     using boost::intrusive_ptr;
 
     using boost::static_pointer_cast;
@@ -72,10 +72,12 @@ namespace zypp
      *
      * Forwarding access from an interface to an implemantation class, an
      * RW_pointer prevents const interface methods from accidentally calling
-     * nonconst implementation methods. In case you have to do so, call
-     * unconst to get the <tt>_D *</tt>.
+     * nonconst implementation methods.
      *
      * The second template argument defaults to <tt>_Ptr = shared_ptr<_D></tt>.
+     *
+     * \see zypp::RWCOW_pointer for 'copy on write' functionality.
+     *
      * \code
      * #include "zypp/base/PtrTypes.h"
      *
@@ -92,7 +94,6 @@ namespace zypp
      *     void baa() const { _pimpl->... } // is Impl const *
      * };
      * \endcode
-     * \todo refine ctor and assign.
     */
     template<class _D, class _Ptr = shared_ptr<_D> >
       struct RW_pointer
@@ -109,17 +110,40 @@ namespace zypp
         : _dptr( dptr )
         {}
 
-        _D & operator*() { return *_dptr; }
-        const _D & operator*() const { return *_dptr; };
-        _D * operator->() { return _dptr.get(); }
-        const _D * operator->() const { return _dptr.get(); }
-        _D * get() { return _dptr.get(); }
-        const _D * get() const { return _dptr.get(); }
+        void reset()
+        { _dptr.reset(); }
 
-        _D * unconst() const { return _dptr.get(); }
+        void reset( typename _Ptr::element_type * dptr )
+        { _dptr.reset( dptr ); }
 
+        void swap( RW_pointer & rhs )
+        { _dptr.swap( rhs._dptr ); }
+
+        void swap( _Ptr & rhs )
+        { _dptr.swap( rhs ); }
+
+        const _D & operator*() const
+        { return *_dptr; };
+
+        const _D * operator->() const
+        { return _dptr.get(); }
+
+        const _D * get() const
+        { return _dptr.get(); }
+
+        _D & operator*()
+        { return *_dptr; }
+
+        _D * operator->()
+        { return _dptr.get(); }
+
+        _D * get()
+        { return _dptr.get(); }
+
+      private:
         _Ptr _dptr;
       };
+    ///////////////////////////////////////////////////////////////////
 
     /** \relates RW_pointer Stream output.
      *
@@ -136,38 +160,121 @@ namespace zypp
       }
 
     ///////////////////////////////////////////////////////////////////
-    /** Wrapper for \c const correct access via pointer.
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : RWCOW_pointer
+    //
+    /** \ref RW_pointer supporting 'copy on write' functionality.
      *
-     * Template specialization of RW_pointer, storing a raw <tt>_P *</tt>,
-     * which must be convertible into a <tt>_D *</tt>.
+     * \em Write access to the underlying object creates a copy, iff
+     * the object is shared.
      *
-     * \note The object pointed to will \b not be deleted. If you need
-     * automatic cleanup, use a \ref ZYPP_SMART_PTR instead of a
-     * raw pointer.
+     * See \ref RW_pointer.
     */
-    template<class _D,class _P>
-      struct RW_pointer<_D,_P*>
+    template<class _D, class _Ptr = shared_ptr<_D> >
+      struct RWCOW_pointer
       {
         typedef _D element_type;
+        typedef typename _Ptr::unspecified_bool_type unspecified_bool_type;
 
         explicit
-        RW_pointer( _P * dptr = 0 )
+        RWCOW_pointer( typename _Ptr::element_type * dptr = 0 )
         : _dptr( dptr )
         {}
 
-        _D & operator*() { return *_dptr; }
-        const _D & operator*() const { return *_dptr; };
-        _D * operator->() { return _dptr; }
-        const _D * operator->() const { return _dptr; }
-        _D * get() { return _dptr; }
-        const _D * get() const { return _dptr; }
+        explicit
+        RWCOW_pointer( _Ptr dptr )
+        : _dptr( dptr )
+        {}
 
-        _D * unconst() const { return _dptr; }
+        void reset()
+        { _dptr.reset(); }
 
-        _P * _dptr;
+        void reset( typename _Ptr::element_type * dptr )
+        { _dptr.reset( dptr ); }
+
+        void swap( RWCOW_pointer & rhs )
+        { _dptr.swap( rhs._dptr ); }
+
+        void swap( _Ptr & rhs )
+        { _dptr.swap( rhs ); }
+
+        operator unspecified_bool_type() const
+        { return _dptr; }
+
+        const _D & operator*() const
+        { return *_dptr; };
+
+        const _D * operator->() const
+        { return _dptr.get(); }
+
+        const _D * get() const
+        { return _dptr.get(); }
+
+        _D & operator*()
+        { assertUnshared(); return *_dptr; }
+
+        _D * operator->()
+        { assertUnshared(); return _dptr.get(); }
+
+        _D * get()
+        { assertUnshared(); return _dptr.get(); }
+
+      private:
+
+        void assertUnshared()
+        {
+          if ( rwcowIsShared( _dptr ) )
+            {
+              _dptr.reset( rwcowClone( _dptr.get() ) );
+            }
+        }
+
+      private:
+        _Ptr _dptr;
       };
+    ///////////////////////////////////////////////////////////////////
 
-    /////////////////////////////////////////////////////////////////
+    /** \relates RWCOW_pointer Check whether pointer is shared. */
+    template<class _D>
+      inline bool rwcowIsShared( const shared_ptr<_D> & ptr_r )
+      { return ptr_r.use_count() > 1; }
+
+    /** \relates RWCOW_pointer Check whether pointer is shared.
+     * \todo Quite zypp specific assumption that intrusive_ptr
+     * is derived from zypp::base::ReferenceCounted.
+    */
+    template<class _D>
+      inline bool rwcowIsShared( const intrusive_ptr<_D> & ptr_r )
+      { return ptr_r && (ptr_r->refCount() > 1); }
+
+    /** \relates RWCOW_pointer Clone the underlying object.
+     * Calls \a rhs <tt>-\>clone()</tt>. Being defined as a
+     * function outside \ref RWCOW_pointer allows to overload
+     * it, in case a specific \a _D does not have <tt>clone()</tt>.
+    */
+    template<class _D>
+      inline _D * rwcowClone( const _D * rhs )
+      { return rhs->clone(); }
+
+    ///////////////////////////////////////////////////////////////////
+
+    /** \relates RWCOW_pointer Stream output.
+     *
+     * Print the \c _D object the RWCOW_pointer refers, or \c "NULL"
+     * if the pointer is \c NULL.
+    */
+    template<class _D, class _Ptr>
+      inline std::ostream &
+      operator<<( std::ostream & str, const RWCOW_pointer<_D, _Ptr> & obj )
+      {
+        if ( obj.get() )
+          return str << *obj.get();
+        return str << std::string("NULL");
+      }
+
+    ///////////////////////////////////////////////////////////////////
 
     /*@}*/
 

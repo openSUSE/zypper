@@ -16,70 +16,70 @@
 #include "zypp/Dependencies.h"
 #include "zypp/CapSet.h"
 
-using namespace std;
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : Dependencies::Impl
+  //
+  /** Dependencies implementation. */
+  struct Dependencies::Impl
+  {
+    /**  */
+    CapSet _provides;
+    /**  */
+    CapSet _prerequires;
+    /**  */
+    CapSet _requires;
+    /**  */
+    CapSet _conflicts;
+    /**  */
+    CapSet _obsoletes;
+    /**  */
+    CapSet _recommends;
+    /**  */
+    CapSet _suggests;
+    /**  */
+    CapSet _freshens;
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : DependenciesImpl
-    //
-    /** Dependencies implementation */
-    struct DependenciesImpl : public base::ReferenceCounted, private base::NonCopyable
-    {
-      /**  */
-      CapSet _provides;
-      /**  */
-      CapSet _prerequires;
-      /**  */
-      CapSet _requires;
-      /**  */
-      CapSet _conflicts;
-      /**  */
-      CapSet _obsoletes;
-      /**  */
-      CapSet _recommends;
-      /**  */
-      CapSet _suggests;
-      /**  */
-      CapSet _freshens;
+  public:
+    /** Offer default Impl. */
+    static shared_ptr<Impl> nullimpl()
+    { if ( ! _nullimpl ) _nullimpl.reset( new Impl ); return _nullimpl; }
 
-      static DependenciesImpl_Ptr nodeps()
-      {
-        if ( !_nodeps ) { _nodeps = new DependenciesImpl; _nodeps->ref(); }
-        return _nodeps;
-      }
+  private:
+    /** Default Impl: empty sets. */
+    static shared_ptr<Impl> _nullimpl;
 
-    private:
-      static DependenciesImpl_Ptr _nodeps;
-    };
-    ///////////////////////////////////////////////////////////////////
-    IMPL_PTR_TYPE(DependenciesImpl)
-    DependenciesImpl_Ptr DependenciesImpl::_nodeps;
-    ///////////////////////////////////////////////////////////////////
+  private:
+    friend Impl * rwcowClone<Impl>( const Impl * rhs );
+    /** clone for RWCOW_pointer */
+    Impl * clone() const
+    { return new Impl( *this ); }
+  };
+  ///////////////////////////////////////////////////////////////////
 
-    /** \relates DependenciesImpl Stream output */
-    inline std::ostream & operator<<( std::ostream & str, const DependenciesImpl & obj )
-    {
-      str << "PROVIDES:" << endl << obj._provides;
-      str << "PREREQUIRES:" << endl << obj._prerequires;
-      str << "REQUIRES:" << endl << obj._requires;
-      str << "CONFLICTS:" << endl << obj._conflicts;
-      str << "OBSOLETES:" << endl << obj._obsoletes;
-      str << "RECOMMENDS:" << endl << obj._recommends;
-      str << "SUGGESTS:" << endl << obj._suggests;
-      str << "FRESHENS:" << endl << obj._freshens;
-      return str;
-    }
+  shared_ptr<Dependencies::Impl> Dependencies::Impl::_nullimpl;
 
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
+  ///////////////////////////////////////////////////////////////////
+
+  /** \relates DependenciesImpl Stream output */
+  inline std::ostream & operator<<( std::ostream & str, const Dependencies::Impl & obj )
+  {
+    str << "PROVIDES:"    << endl << obj._provides;
+    str << "PREREQUIRES:" << endl << obj._prerequires;
+    str << "REQUIRES:"    << endl << obj._requires;
+    str << "CONFLICTS:"   << endl << obj._conflicts;
+    str << "OBSOLETES:"   << endl << obj._obsoletes;
+    str << "RECOMMENDS:"  << endl << obj._recommends;
+    str << "SUGGESTS:"    << endl << obj._suggests;
+    str << "FRESHENS:"    << endl << obj._freshens;
+    return str;
+  }
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
@@ -94,16 +94,7 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   Dependencies::Dependencies()
-  : _pimpl( detail::DependenciesImpl::nodeps() )
-  {}
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Dependencies::Dependencies
-  //	METHOD TYPE : Ctor
-  //
-  Dependencies::Dependencies( detail::DependenciesImpl_Ptr impl_r )
-  : _pimpl( impl_r ? impl_r : detail::DependenciesImpl::nodeps() )
+  : _pimpl( Impl::nullimpl() )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -113,14 +104,6 @@ namespace zypp
   //
   Dependencies::~Dependencies()
   {}
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Dependencies::sayFriend
-  //	METHOD TYPE : detail::DependenciesImplconstPtr
-  //
-  detail::DependenciesImpl_constPtr Dependencies::sayFriend() const
-  { return _pimpl; }
 
   const CapSet & Dependencies::provides() const
   { return _pimpl->_provides; }
@@ -146,44 +129,29 @@ namespace zypp
   const CapSet & Dependencies::freshens() const
   { return _pimpl->_freshens; }
 
-#define ZYPP_DEPENDENCIES_COW \
-if(_pimpl->refCount()>1) \
-{ \
-  detail::DependenciesImpl_Ptr _cow_tmp = new detail::DependenciesImpl; \
-  _cow_tmp->_provides = _pimpl->_provides; \
-  _cow_tmp->_prerequires = _pimpl->_prerequires; \
-  _cow_tmp->_requires = _pimpl->_requires; \
-  _cow_tmp->_conflicts = _pimpl->_conflicts; \
-  _cow_tmp->_obsoletes = _pimpl->_obsoletes; \
-  _cow_tmp->_recommends = _pimpl->_recommends; \
-  _cow_tmp->_suggests = _pimpl->_suggests; \
-  _cow_tmp->_freshens = _pimpl->_freshens; \
-  _pimpl= _cow_tmp;\
-}
-
   void Dependencies::setProvides( const CapSet & val_r )
-  { ZYPP_DEPENDENCIES_COW; _pimpl->_provides = val_r; }
+  { _pimpl->_provides = val_r; }
 
   void Dependencies::setPrerequires( const CapSet & val_r )
-  { ZYPP_DEPENDENCIES_COW; _pimpl->_prerequires = val_r; }
+  { _pimpl->_prerequires = val_r; }
 
   void Dependencies::setRequires( const CapSet & val_r )
-  { ZYPP_DEPENDENCIES_COW; _pimpl->_requires = val_r; }
+  { _pimpl->_requires = val_r; }
 
   void Dependencies::setConflicts( const CapSet & val_r )
-  { ZYPP_DEPENDENCIES_COW; _pimpl->_conflicts = val_r; }
+  { _pimpl->_conflicts = val_r; }
 
   void Dependencies::setObsoletes( const CapSet & val_r )
-  { ZYPP_DEPENDENCIES_COW; _pimpl->_obsoletes = val_r; }
+  { _pimpl->_obsoletes = val_r; }
 
   void Dependencies::setRecommends( const CapSet & val_r )
-  { ZYPP_DEPENDENCIES_COW; _pimpl->_recommends = val_r; }
+  { _pimpl->_recommends = val_r; }
 
   void Dependencies::setSuggests( const CapSet & val_r )
-  { ZYPP_DEPENDENCIES_COW; _pimpl->_suggests = val_r; }
+  { _pimpl->_suggests = val_r; }
 
   void Dependencies::setFreshens( const CapSet & val_r )
-  { ZYPP_DEPENDENCIES_COW; _pimpl->_freshens = val_r; }
+  { _pimpl->_freshens = val_r; }
 
   /******************************************************************
   **
@@ -192,7 +160,7 @@ if(_pimpl->refCount()>1) \
   */
   std::ostream & operator<<( std::ostream & str, const Dependencies & obj )
   {
-    return str << *obj.sayFriend();
+    return str << *obj._pimpl;
   }
 
   /////////////////////////////////////////////////////////////////

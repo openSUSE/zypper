@@ -21,27 +21,25 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
-    DEFINE_PTR_TYPE(DependenciesImpl)
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
-  ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Dependencies
   //
-  /** */
+  /**
+   * \invariant No NULL _pimpl.
+  */
   class Dependencies
   {
+    friend std::ostream & operator<<( std::ostream & str, const Dependencies & obj );
+  public:
+
+    /** Implementation */
+    struct Impl;
+
   public:
     /** Default ctor */
     Dependencies();
-    /** Factory ctor */
-    explicit
-    Dependencies( detail::DependenciesImpl_Ptr impl_r );
     /** Dtor */
     ~Dependencies();
 
@@ -82,10 +80,7 @@ namespace zypp
 
   private:
     /** Pointer to implementation */
-    detail::DependenciesImpl_Ptr _pimpl;
-  public:
-    /** Avoid a bunch of friend decl. */
-    detail::DependenciesImpl_constPtr sayFriend() const;
+    RWCOW_pointer<Impl> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 
