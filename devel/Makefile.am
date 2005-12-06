@@ -10,7 +10,8 @@ SUBDIRS =
 
 noinst_PROGRAMS = \
 	Example.createResolvable	\
-	Example.createCapabilities
+	Example.createCapabilities	\
+	Example.COW_debug
 
 ## ##################################################
 
@@ -20,6 +21,7 @@ LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
 
 Example_createResolvable_SOURCES = Example.createResolvable.cc
 Example_createCapabilities_SOURCES = Example.createCapabilities.cc
+Example_COW_debug_SOURCES = Example.COW_debug.cc
 
 ## ##################################################
 
