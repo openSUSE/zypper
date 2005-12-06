@@ -419,38 +419,37 @@ namespace zypp {
         std::list<MultiLang> description;
       };
 
+      /* Easy output */
+      std::ostream& operator<<(std::ostream &out, const YUMDependency& data);
+      std::ostream& operator<<(std::ostream &out, const YUMDirSize& data);
+      std::ostream& operator<<(std::ostream &out, const YUMRepomdData& data);
+      std::ostream& operator<<(std::ostream &out, const FileData& data);
+      std::ostream& operator<<(std::ostream &out, const MultiLang& data);
+      std::ostream& operator<<(std::ostream &out, const MetaPkg& data);
+      std::ostream& operator<<(std::ostream &out, const PackageReq& data);
+      std::ostream& operator<<(std::ostream &out, const ChangelogEntry& data);
+      std::ostream& operator<<(std::ostream &out, const YUMRepomdData& data);
+      std::ostream& operator<<(std::ostream &out, const YUMPrimaryData& data);
+      std::ostream& operator<<(std::ostream &out, const YUMGroupData& data);
+      std::ostream& operator<<(std::ostream &out, const YUMFileListData& data);
+      std::ostream& operator<<(std::ostream& out, const YUMOtherData& data);
+      std::ostream& operator<<(std::ostream& out, const YUMPatchData& data);
+      std::ostream& operator<<(std::ostream& out, const YUMPatchesData& data);
+      std::ostream& operator<<(std::ostream& out, const YUMProductData& data);
+      std::ostream& operator<<(std::ostream& out, const zypp::shared_ptr<YUMPatchAtom> data);
+      std::ostream& operator<<(std::ostream& out, const YUMPatchMessage& data);
+      std::ostream& operator<<(std::ostream& out, const YUMPatchScript& data);
+      std::ostream& operator<<(std::ostream& out, const YUMPatchPackage& data);
+      std::ostream& operator<<(std::ostream& out, const YUMBaseVersion& data);
+      std::ostream& operator<<(std::ostream& out, const PlainRpm& data);
+      std::ostream& operator<<(std::ostream& out, const PatchRpm& data);
+      std::ostream& operator<<(std::ostream& out, const DeltaRpm& data);
 
     } // namespace yum
   } // namespace parser
 } // namespace zypp
 
 
-  /* Easy output */
-
-std::ostream& operator<<(std::ostream &out, const zypp::parser::yum::YUMDependency& data);
-std::ostream& operator<<(std::ostream &out, const zypp::parser::yum::YUMDirSize& data);
-std::ostream& operator<<(std::ostream &out, const zypp::parser::yum::YUMRepomdData& data);
-std::ostream& operator<<(std::ostream &out, const zypp::parser::yum::FileData& data);
-std::ostream& operator<<(std::ostream &out, const zypp::parser::yum::MultiLang& data);
-std::ostream& operator<<(std::ostream &out, const zypp::parser::yum::MetaPkg& data);
-std::ostream& operator<<(std::ostream &out, const zypp::parser::yum::PackageReq& data);
-std::ostream& operator<<(std::ostream &out, const zypp::parser::yum::ChangelogEntry& data);
-std::ostream& operator<<(std::ostream &out, const zypp::parser::yum::YUMRepomdData& data);
-std::ostream& operator<<(std::ostream &out, const zypp::parser::yum::YUMPrimaryData& data);
-std::ostream& operator<<(std::ostream &out, const zypp::parser::yum::YUMGroupData& data);
-std::ostream& operator<<(std::ostream &out, const zypp::parser::yum::YUMFileListData& data);
-std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMOtherData& data);
-std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMPatchData& data);
-std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMPatchesData& data);
-std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMProductData& data);
-std::ostream& operator<<(std::ostream& out, const zypp::shared_ptr<zypp::parser::yum::YUMPatchAtom> data);
-std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMPatchMessage& data);
-std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMPatchScript& data);
-std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMPatchPackage& data);
-std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::YUMBaseVersion& data);
-std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::PlainRpm& data);
-std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::PatchRpm& data);
-std::ostream& operator<<(std::ostream& out, const zypp::parser::yum::DeltaRpm& data);
 
 
 
