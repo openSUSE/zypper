@@ -114,6 +114,9 @@ dnl checks for header files
 AC_CHECK_HEADERS([boost/scoped_ptr.hpp],
         [],
         AC_MSG_ERROR([boost header not found. please install boost-devel]))
+AC_CHECK_HEADERS([curl/curl.h],
+        [],
+        AC_MSG_ERROR([libcurl header not found. please install curl-devel.]))
 dnl ==================================================
 dnl checks for typedefs
 dnl ==================================================
@@ -150,7 +153,8 @@ AC_OUTPUT(	\
 	zypp/parser/yum/schema/Makefile	\
 	zypp/solver/Makefile		\
 	zypp/source/Makefile		\
-	zypp/source/yum/Makefile
+	zypp/source/yum/Makefile	\
+	zypp/media/Makefile		\
 )
 dnl ==================================================
 
