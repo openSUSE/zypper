@@ -22,7 +22,12 @@ include_HEADERS = NeedAType.h \
 	Script.h	\
 	Patch.h		\
 	Product.h	\
-	Changelog.h
+	Changelog.h	\
+			\
+	ExternalProgram.h	\
+	Pathname.cc	\
+	PathInfo.cc	\
+	Digest.cc
 
 ## ##################################################
 
@@ -47,7 +52,12 @@ lib@PACKAGE@_la_SOURCES = \
 	Script.cc	\
 	Patch.cc	\
 	Product.cc	\
-	Changelog.cc
+	Changelog.cc	\
+			\
+	ExternalProgram.cc	\
+	Pathname.cc	\
+	PathInfo.cc	\
+	Digest.cc
 
 lib@PACKAGE@_la_LDFLAGS =	@LIB_VERSION_INFO@
 

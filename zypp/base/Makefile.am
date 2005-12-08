@@ -14,7 +14,11 @@ include_HEADERS =	\
 	PtrTypes.h	\
 	ReferenceCounted.h	\
 	String.h	\
-	StringVal.h
+	StringVal.h		\
+				\
+				\
+	ExternalDataSource.h	\
+	stringutil.h
 
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_base.la
@@ -25,7 +29,11 @@ lib@PACKAGE@_base_la_SOURCES =	\
 	Logger.cc	\
 	Exception.cc	\
 	String.cc	\
-	StringVal.cc
+	StringVal.cc	\
+			\
+			\
+	ExternalDataSource.cc	\
+	stringutil.cc
 
 lib@PACKAGE@_base_la_LIBADD = -lboost_regex
 
