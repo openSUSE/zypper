@@ -17,6 +17,7 @@ include_HEADERS = NeedAType.h \
 	Resolvable.h	\
 	ResTraits.h	\
 	Package.h	\
+	Pathname.h	\
 	Selection.h	\
 	Message.h	\
 	Script.h	\
@@ -47,6 +48,7 @@ lib@PACKAGE@_la_SOURCES = \
 	Resolvable.cc	\
 	ResTraits.cc	\
 	Package.cc	\
+	Pathname.cc	\
 	Selection.cc	\
 	Message.cc	\
 	Script.cc	\
@@ -55,7 +57,6 @@ lib@PACKAGE@_la_SOURCES = \
 	Changelog.cc	\
 			\
 	ExternalProgram.cc	\
-	Pathname.cc	\
 	PathInfo.cc	\
 	Digest.cc
 

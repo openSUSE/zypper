@@ -68,9 +68,6 @@ namespace zypp
   */
   typedef std::string Url;
 
-  /** Convenient handling of pathnmes.  */
-  typedef std::string Pathname;
-
   /** Single line of (human readable) text.
   probabely sufficient as typedef. we may use it to classify the
   various strings and string lists within resolvable and other classes.
