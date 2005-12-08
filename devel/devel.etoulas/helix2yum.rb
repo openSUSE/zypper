@@ -4,6 +4,7 @@ require 'optparse'
 require 'rexml/document'
 include REXML
 
+
 class Pkginfo
   @@count = 0
   attr_accessor :name, :op, :version
@@ -22,66 +23,86 @@ class Pkginfo
 end
 
 class Provides < Pkginfo
+  def to_s
+    '[provides] ' + super
+  end
 end
 
 class Conflicts < Pkginfo
+  def to_s
+    '[conflicts] ' + super
+  end
 end
 
 class Requires < Pkginfo
+  def to_s
+    '[requires] ' + super
+  end
 end
 
-OUTFILE = 'foobar.xml'
+
 # global defaults
 $show = false
 $of = nil
 
+
 # parse command-line options
 ARGV.options do |o|
-  o.banner = 'Usage: ' + File.basename($0) + ' FILE [-s] [-o YUMFILE]'
+  o.banner = 'Usage: ' + File.basename($0) + ' FILE [-s|-o YUMFILE]'
   o.separator 'Options:'
   o.on( '-s', '--show', 'output will be printed to stdout' ) { |s| $show = true }
-  # TODO outfile
   o.on( '-o YUMFILE', '--outfile', 'specify the outputfile' ) { |of| $of = of }
   o.separator '    without this parameter given, the outputfile is named <Helixfile>.yum.xml'
   o.separator ''
   o.on_tail( '-h', '--help', 'show this screen' ) { puts o; exit 0 }
 end
 
+
 # start exception-block
 begin
+
 ARGV.parse!
 
 filename = ARGV[0] || raise( 'No Helixfile given.' )
 
-    # some debug-info
-    puts "filename is #{filename}"
-    puts "show is #{$show}"
-    puts "outfile is #{$of}"
-
-
-if !File.exists?( filename )
+if not File.exists?( filename )
   raise( 'File not found.' )
-elsif !File.readable?( filename )
+elsif not File.readable?( filename )
   raise( 'File not readable.' )
 elsif File.zero?( filename )
   puts 'Nothing to do.'; exit 0
 end
 
-puts "Open file:  #{filename} (" + File.size(filename).to_s + " bytes)"
+puts "[file] #{filename} (" + File.size(filename).to_s + " bytes)"
+# use file to instanciate an XML-Object and close filehandle immediate
 infile = File.open( filename )
-
-### use file to instanciate an XML-Object
 input = Document.new infile
+infile.close
+
+# without -o the output file is named like the inputfile with the ending .yum.xml
+if not $show and $of.nil?
+  outfile = filename.sub(/(^.*)(\.xml)/, '\1.yum.xml')
+  outfile = File.new( outfile, 'w+' )
+elsif not $show and not $of.nil?
+  outfile = $of
+  outfile = File.new( outfile, 'w+' )
+else
+  outfile = $stdout
+end
+
 
 output = Document.new
 
-pkg_name = Array.new
-md5sum   = Array.new
-epoch    = Array.new
-version  = Array.new
-release  = Array.new
-provides = Array.new
+pkg_name  = Array.new
+md5sum    = Array.new
+epoch     = Array.new
+version   = Array.new
+release   = Array.new
+provides  = Array.new
+requires  = Array.new
+conflicts = Array.new
 
+# get all needed elements
 XPath.each( input, '//name'     ) { |elem| pkg_name.push elem.text }
 XPath.each( input, '//md5sum'   ) { |elem| md5sum.push   elem.text }
 XPath.each( input, '//epoch'    ) { |elem| epoch.push    elem.text }
@@ -112,7 +133,9 @@ md5sum.reverse!
 epoch.reverse!
 version.reverse!
 release.reverse!
-provides.reverse!
+#provides.reverse!
+#requires.reverse!
+#conflicts.reverse!
 
     # debug
     puts provides
@@ -140,16 +163,16 @@ while !pkg_name.empty?
   pkg << name
   pkg << arch
   pkg << ver
-#  pkg << csum
+#  pkg << csum   # not needed at the moment; helix uses md5, yum uses sha-1
 
   output.root << pkg
 end
 
 
-#output.write( $stdout, 0 )
+# write formated xml into file or stdout
+output.write( outfile, 0 )
 puts " "
 
-infile.close
 
 rescue => exc
   STDERR.puts "E: #{exc.message}"
