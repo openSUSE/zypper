@@ -6,35 +6,54 @@ include REXML
 
 
 class Pkginfo
-  @@count = 0
   attr_accessor :name, :op, :version
-  def initialize( name=nil, op=nil, version=nil )
+  def initialize name=nil, op=nil, version=nil
     @name    = name
     @op      = op
     @version = version
-    @@count += 1
   end
   def to_s
     "name=#{@name} op=#{@op} version=#{@version}"
   end
-  def Pkginfo.get_count
-    @@count
-  end
 end
 
 class Provides < Pkginfo
+  @@count = 0
+  def initialize name=nil, op=nil, version=nil
+    super
+    @@count += 1
+  end
+  def Provides.count
+    @@count
+  end
   def to_s
     '[provides] ' + super
   end
 end
 
 class Conflicts < Pkginfo
+  @@count = 0
+  def initialize name=nil, op=nil, version=nil
+    super
+    @@count += 1
+  end
+  def Conflicts.count
+    @@count
+  end
   def to_s
     '[conflicts] ' + super
   end
 end
 
 class Requires < Pkginfo
+  @@count = 0
+  def initialize name=nil, op=nil, version=nil
+    super
+    @@count += 1
+  end
+  def Requires.count
+    @@count
+  end
   def to_s
     '[requires] ' + super
   end
@@ -42,16 +61,17 @@ end
 
 
 # global defaults
-$show = false
-$of = nil
+show = false
+of = nil
+filename = nil
 
 
 # parse command-line options
 ARGV.options do |o|
   o.banner = 'Usage: ' + File.basename($0) + ' FILE [-s|-o YUMFILE]'
   o.separator 'Options:'
-  o.on( '-s', '--show', 'output will be printed to stdout' ) { |s| $show = true }
-  o.on( '-o YUMFILE', '--outfile', 'specify the outputfile' ) { |of| $of = of }
+  o.on( '-s', '--show', 'output will be printed to stdout' ) { |s| show = true }
+  o.on( '-o YUMFILE', '--outfile', 'specify the outputfile' ) { |out| of = out }
   o.separator '    without this parameter given, the outputfile is named <Helixfile>.yum.xml'
   o.separator ''
   o.on_tail( '-h', '--help', 'show this screen' ) { puts o; exit 0 }
@@ -77,17 +97,16 @@ puts "[file] #{filename} (" + File.size(filename).to_s + " bytes)"
 # use file to instanciate an XML-Object and close filehandle immediate
 infile = File.open( filename )
 input = Document.new infile
-infile.close
 
 # without -o the output file is named like the inputfile with the ending .yum.xml
-if not $show and $of.nil?
+if not show and of.nil?
   outfile = filename.sub(/(^.*)(\.xml)/, '\1.yum.xml')
   outfile = File.new( outfile, 'w+' )
-elsif not $show and not $of.nil?
-  outfile = $of
+elsif not show and not of.nil?
+  outfile = of
   outfile = File.new( outfile, 'w+' )
 else
-  outfile = $stdout
+  outfile = nil
 end
 
 
@@ -170,11 +189,18 @@ end
 
 
 # write formated xml into file or stdout
-output.write( outfile, 0 )
+if not outfile.nil?
+  output.write( outfile, 0 )
+else
+  output.write( $stdout, 0 )
+end
 puts " "
 
 
 rescue => exc
   STDERR.puts "E: #{exc.message}"
   exit 1
+ensure
+  infile.close
+  outfile.close
 end
