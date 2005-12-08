@@ -131,7 +131,7 @@ namespace zypp
     static void assertResKind( const Resolvable::Kind & refers_r )
     {
       if ( refers_r == Resolvable::Kind() )
-        ZYPP_THROW( "Missing or empty  Resolvable::Kind in Capability." );
+        ZYPP_THROW( Exception, "Missing or empty  Resolvable::Kind in Capability." );
     }
 
     /** Check whether \a op_r and \a edition_r make a valid edition spec.
@@ -155,7 +155,7 @@ namespace zypp
           break;
 
         case Rel::NONE_e:
-          ZYPP_THROW( "Operator NONE is not allowed in Capability " );
+          ZYPP_THROW( Exception, "Operator NONE is not allowed in Capability " );
           break;
 
         case Rel::EQ_e:
@@ -168,7 +168,7 @@ namespace zypp
           break;
         }
       // SHOULD NOT GET HERE
-      ZYPP_THROW( "Unknow Operator NONE is not allowed in Capability " );
+      ZYPP_THROW( Exception, "Unknow Operator NONE is not allowed in Capability " );
       return false; // not reached
     }
 

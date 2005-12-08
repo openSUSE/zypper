@@ -162,7 +162,7 @@ namespace zypp
         }
       else
         {
-          ZYPP_THROW( string("Invalid Edition: ")+edition_r );
+          ZYPP_THROW( Exception, string("Invalid Edition: ")+edition_r );
         }
     }
 
@@ -195,7 +195,7 @@ namespace zypp
       char * endptr = NULL;
       epoch_t ret = strtoul( epoch_r.c_str(), &endptr, 10 );
       if ( *endptr != '\0' )
-        ZYPP_THROW( string("Invalid eopch: ")+epoch_r );
+        ZYPP_THROW( Exception, string("Invalid eopch: ")+epoch_r );
       return ret;
     }
 
@@ -204,7 +204,7 @@ namespace zypp
     {
       str::smatch what;
       if( ! str::regex_match( vr_r.begin(), vr_r.end(), what, _rxVR ) )
-        ZYPP_THROW( string("Invalid version/release: ")+vr_r );
+        ZYPP_THROW( Exception, string("Invalid version/release: ")+vr_r );
       return vr_r;
     }
 

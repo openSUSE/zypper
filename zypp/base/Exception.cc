@@ -39,8 +39,8 @@ namespace zypp
   } // namespace exception_detail
   ///////////////////////////////////////////////////////////////////
 
-  Exception::Exception( const CodeLocation & where_r, const std::string & msg_r )
-  : _where( where_r ), _msg( msg_r )
+  Exception::Exception( const std::string & msg_r )
+  : _msg( msg_r )
   {}
 
   Exception::~Exception() throw()
@@ -63,11 +63,6 @@ namespace zypp
     std::string ret( msg_r );
     ret += ": ";
     return ret += strErrno( errno_r );
-  }
-
-  void Exception::relocate( Exception & excpt_r, const CodeLocation & where_r )
-  {
-    excpt_r._where = where_r;
   }
 
   void Exception::log( const Exception & excpt_r, const CodeLocation & where_r,

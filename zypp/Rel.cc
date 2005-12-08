@@ -45,7 +45,7 @@ namespace
       = _table.find( strval_r );
     if ( it == _table.end() )
       {
-        ZYPP_THROW( "Rel parse: illegal string value" );
+        ZYPP_THROW( Exception, "Rel parse: illegal string value" );
       }
     return it->second;
   }

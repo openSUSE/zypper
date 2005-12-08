@@ -30,6 +30,11 @@ namespace zypp
       friend std::ostream & operator<<( std::ostream & str, const CodeLocation & obj );
 
       /** Ctor */
+      CodeLocation()
+      : _line( 0 )
+      {}
+
+      /** Ctor */
       CodeLocation( const std::string & file_r,
                     const std::string & func_r,
                     unsigned            line_r )
@@ -97,13 +102,13 @@ namespace zypp
   class Exception : public std::exception
   {
     friend std::ostream & operator<<( std::ostream & str, const Exception & obj );
-    typedef exception_detail::CodeLocation CodeLocation;
   public:
+    typedef exception_detail::CodeLocation CodeLocation;
 
-    /** Ctor taking CodeLocation and message.
+    /** Ctor taking a message.
      * Use \ref ZYPP_THROW to throw exceptions.
     */
-    Exception( const CodeLocation & where_r, const std::string & msg_r );
+    Exception( const std::string & msg_r );
 
     /** Dtor. */
     virtual ~Exception() throw();
@@ -111,6 +116,10 @@ namespace zypp
     /** Return CodeLocation. */
     const CodeLocation & where() const
     { return _where; }
+
+    /** Exchange location on rethrow. */
+    void relocate( const CodeLocation & where_r ) const
+    { _where = where_r; }
 
     /** Return message string. */
     const std::string & msg() const
@@ -130,15 +139,12 @@ namespace zypp
     static std::string strErrno( int errno_r, const std::string & msg_r );
 
   public:
-    /** Exchange location on rethrow. */
-    static void relocate( Exception & excpt_r, const CodeLocation & where_r );
-
     /** Drop a logline. */
     static void log( const Exception & excpt_r, const CodeLocation & where_r,
                      const char *const prefix_r );
 
   private:
-    CodeLocation _where;
+    mutable CodeLocation _where;
     std::string _msg;
   };
   ///////////////////////////////////////////////////////////////////
@@ -152,6 +158,7 @@ namespace zypp
   template<class _Excpt>
     void _ZYPP_THROW( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r )
     {
+      excpt_r.relocate( where_r );
       Exception::log( excpt_r, where_r, "THROW:   " );
       throw( excpt_r );
     }
@@ -165,15 +172,12 @@ namespace zypp
 
   /** Helper for \ref ZYPP_THROW. */
   template<class _Excpt>
-    void _ZYPP_RETHROW( _Excpt & excpt_r, const exception_detail::CodeLocation & where_r )
+    void _ZYPP_RETHROW( const _Excpt & excpt_r, const exception_detail::CodeLocation & where_r )
     {
       Exception::log( excpt_r, where_r, "RETHROW: " );
-      excpt_r.relocate( excpt_r, where_r );
+      excpt_r.relocate( where_r );
       throw excpt_r;
     }
-
-  /** Helper for \ref ZYPP_THROW. */
-#define ZYPP_DOTHROW(EXCPT) _ZYPP_THROW( EXCPT, ZYPP_EX_CODELOCATION )
 
   ///////////////////////////////////////////////////////////////////
 
@@ -182,6 +186,10 @@ namespace zypp
    * \see \ref zypp::Exception for an example.
   */
   //@{
+  /** Drops a logline and throws the Exception. */
+#define ZYPP_DOTHROW(EXCPT)\
+  _ZYPP_THROW( EXCPT, ZYPP_EX_CODELOCATION )
+
   /** Drops a logline telling the Exception was caught (in order to handle it). */
 #define ZYPP_CAUGHT(EXCPT)\
   _ZYPP_CAUGHT( EXCPT, ZYPP_EX_CODELOCATION )
@@ -191,26 +199,25 @@ namespace zypp
   _ZYPP_RETHROW( EXCPT, ZYPP_EX_CODELOCATION )
 
 
+  /** Throw Exception built from a message string. */
+#define ZYPP_THROW(EXCPTTYPE, MSG)\
+  ZYPP_DOTHROW( EXCPTTYPE( MSG ) )
 
-  /** Throw a message string. */
-#define ZYPP_THROW(MSG)\
-  ZYPP_DOTHROW( ::zypp::Exception( ZYPP_EX_CODELOCATION, MSG ) )
+  /** Throw Exception built from errno. */
+#define ZYPP_THROW_ERRNO(EXCPTTYPE)\
+  ZYPP_DOTHROW( EXCPTTYPE( ::zypp::Exception::strErrno(errno) ) )
 
-  /** Throw errno. */
-#define ZYPP_THROW_ERRNO\
-  ZYPP_DOTHROW( ::zypp::Exception( ZYPP_EX_CODELOCATION, ::zypp::Exception::strErrno(errno) ) )
+  /** Throw Exception built from errno provided as argument. */
+#define ZYPP_THROW_ERRNO1(EXCPTTYPE, ERRNO)\
+  ZYPP_DOTHROW( EXCPTTYPE( ::zypp::Exception::strErrno(ERRNO) ) )
 
-  /** Throw errno provided as argument. */
-#define ZYPP_THROW_ERRNO1(ERRNO)\
-  ZYPP_DOTHROW( ::zypp::Exception( ZYPP_EX_CODELOCATION, ::zypp::Exception::strErrno(ERRNO) ) )
+  /** Throw Exception built from errno and a message string. */
+#define ZYPP_THROW_ERRNO_MSG(EXCPTTYPE, MSG)\
+  ZYPP_DOTHROW( EXCPTTYPE( ::zypp::Exception::strErrno(errno,MSG) ) )
 
-  /** Throw errno and a message string. */
-#define ZYPP_THROW_ERRNO_MSG(MSG)\
-  ZYPP_DOTHROW( ::zypp::Exception( ZYPP_EX_CODELOCATION, ::zypp::Exception::strErrno(errno,MSG) ) )
-
-  /** Throw errno provided as argument and a message string */
-#define ZYPP_THROW_ERRNO_MSG1(ERRNO,MSG)\
-  ZYPP_DOTHROW( ::zypp::Exception( ZYPP_EX_CODELOCATION, ::zypp::Exception::strErrno(ERRNO,MSG) ) )
+  /** Throw Exception built from errno provided as argument and a message string */
+#define ZYPP_THROW_ERRNO_MSG1(EXCPTTYPE, ERRNO,MSG)\
+  ZYPP_DOTHROW( EXCPTTYPE( ::zypp::Exception::strErrno(ERRNO,MSG) ) )
   //@}
 
   /////////////////////////////////////////////////////////////////
