@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-SUBDIRS = base parser capability solver source detail media
+SUBDIRS = base parser capability solver source detail media url
 
 ## ##################################################
 
@@ -24,11 +24,11 @@ include_HEADERS = NeedAType.h \
 	Patch.h		\
 	Product.h	\
 	Changelog.h	\
-			\
-	ExternalProgram.h	\
+	ExternalProgram.h\
 	Pathname.h	\
 	PathInfo.h	\
-	Digest.h
+	Digest.h	\
+	Url.h
 
 ## ##################################################
 
@@ -55,10 +55,10 @@ lib@PACKAGE@_la_SOURCES = \
 	Patch.cc	\
 	Product.cc	\
 	Changelog.cc	\
-			\
-	ExternalProgram.cc	\
+	ExternalProgram.cc\
 	PathInfo.cc	\
-	Digest.cc
+	Digest.cc	\
+	Url.cc
 
 lib@PACKAGE@_la_LDFLAGS =	@LIB_VERSION_INFO@
 
@@ -69,6 +69,7 @@ lib@PACKAGE@_la_LIBADD =        base/lib@PACKAGE@_base.la	\
 				parser/lib@PACKAGE@_parser.la	\
 				source/lib@PACKAGE@_source.la	\
 				media/lib@PACKAGE@_media.la	\
+				url/lib@PACKAGE@_url.la	\
 				-lutil
 
 ## ##################################################

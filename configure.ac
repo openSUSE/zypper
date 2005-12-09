@@ -155,6 +155,8 @@ AC_OUTPUT(	\
 	zypp/source/Makefile		\
 	zypp/source/yum/Makefile	\
 	zypp/media/Makefile		\
+	zypp/url/Makefile		\
+
 )
 dnl ==================================================
 
