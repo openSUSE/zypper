@@ -118,14 +118,6 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
 
-  /** Required by intrusive_ptr to add a reference. */
-  inline void intrusive_ptr_add_ref( const Resolvable * ptr_r )
-  { base::ReferenceCounted::add_ref( ptr_r ); }
-
-  /** Required by intrusive_ptr to release a reference. */
-  inline void intrusive_ptr_release( const Resolvable * ptr_r )
-  { base::ReferenceCounted::release( ptr_r ); }
-
   /** \relates Resolvable Stream output via Resolvable::dumpOn */
   inline std::ostream & operator<<( std::ostream & str, const Resolvable & obj )
   { return obj.dumpOn( str ); }

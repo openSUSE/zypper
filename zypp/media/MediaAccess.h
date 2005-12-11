@@ -50,8 +50,8 @@ namespace zypp {
     class MediaAccess : public base::ReferenceCounted, private base::NonCopyable
     {
     public:
-	typedef shared_ptr<MediaAccess> Ptr;
-	typedef shared_ptr<const MediaAccess> constPtr;
+	typedef intrusive_ptr<MediaAccess> Ptr;
+	typedef intrusive_ptr<const MediaAccess> constPtr;
 
     private:
 
@@ -264,7 +264,7 @@ namespace zypp {
 
 	/**
 	 * Basically the same as dirInfo above. The content is returned as
-	 * PathInfo::dircontent, which includes name and filetype of each directory
+	 * filesystem::DirContent, which includes name and filetype of each directory
 	 * entry. Retrieving the filetype usg. requires an additional ::stat call for
 	 * each entry, thus it's more expensive than a simple readdir.
 	 *
@@ -274,8 +274,8 @@ namespace zypp {
 	 * \throws MediaException
 	 *
 	 **/
-	void dirInfo( PathInfo::dircontent & retlist,
-			 const Pathname & dirname, bool dots = true ) const;
+	void dirInfo( filesystem::DirContent & retlist,
+                      const Pathname & dirname, bool dots = true ) const;
 
 	/**
 	 * Destructor
@@ -337,7 +337,7 @@ namespace zypp {
 	    , _local_file( "" )
 	  {
 	    if ( _file.empty() ) {
-	      throw MediaException(ZYPP_EX_CODELOCATION, "E_bad_filename");
+	      ZYPP_THROW( MediaException, "E_bad_filename");
 	    } else if ( _media ) {
 	      try {
 		_media->provideFile( _file );
@@ -345,7 +345,7 @@ namespace zypp {
 	      }
 	      catch (const MediaException & excpt_r)
               {
-		_media.reset();
+		_media = NULL;
 #warning FIXME rethrow the exception
 #if 0
 		ZYPP_RETHROW(excpt_r);

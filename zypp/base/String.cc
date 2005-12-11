@@ -30,14 +30,6 @@ namespace zypp
     */
     std::string form( const char * format, ... )
     {
-      struct SafeBuf
-      {
-        char * _buf;
-        SafeBuf() : _buf( 0 ) {}
-        ~SafeBuf() { if ( _buf ) free( _buf ); }
-        std::string asString() const
-        { return _buf ? std::string(_buf) : std::string(); }
-      };
       SafeBuf safe;
 
       va_list ap;
@@ -50,7 +42,7 @@ namespace zypp
 
     /******************************************************************
      **
-     **      FUNCTION NAME : toLower
+     **      FUNCTION NAME : strerror
      **      FUNCTION TYPE : std::string
     */
     std::string strerror( int errno_r )
@@ -96,6 +88,38 @@ namespace zypp
       return ret;
     }
 
+    /******************************************************************
+     **
+     **      FUNCTION NAME : trim
+     **      FUNCTION TYPE : std::string
+    */
+    std::string trim( const std::string & s, const Trim trim_r )
+    {
+      if ( s.empty() || trim_r == NO_TRIM )
+        return s;
+
+      std::string ret( s );
+
+      if ( trim_r && L_TRIM )
+        {
+          std::string::size_type p = ret.find_first_not_of( " \t\n" );
+          if ( p == std::string::npos )
+            return std::string();
+
+          ret = ret.substr( p );
+        }
+
+      if ( trim_r && R_TRIM )
+        {
+          std::string::size_type p = ret.find_last_not_of( " \t\n" );
+          if ( p == std::string::npos )
+            return std::string();
+
+          ret = ret.substr( 0, p+1 );
+        }
+
+      return ret;
+    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace str

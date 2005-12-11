@@ -18,122 +18,135 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : Pathname
-  //
-  /** Pathname.
-   *
-   * Always stores normalized paths (no inner '.' or '..' components
-   * and no consecutive '/'es). Concatenation automatically adds
-   * the path separator '/'.
-   *
-   * \todo Add support for handling extensions incl. stripping
-   * extensions from basename (basename("/path/foo.baa", ".baa") ==> "foo")
-   * \todo Review. Maybe use COW pimpl, ckeck storage.
-  */
-  class Pathname
-  {
-  public:
-    /** Default ctor: an empty path. */
-    Pathname()
-    : prfx_i( 0 )
-    {}
+  namespace filesystem
+  { /////////////////////////////////////////////////////////////////
 
-    /** Ctor from string. */
-    Pathname( const std::string & name_tv )
-    { _assign( name_tv ); }
-
-    /** Ctor from char*. */
-    Pathname( const char * name_tv )
-    { _assign( name_tv ? name_tv : "" ); }
-
-    /** Assign */
-    Pathname & operator=( const Pathname & path_tv )
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : Pathname
+    //
+    /** Pathname.
+     *
+     * \note For convenience Pathname is available as zypp::Pathname too.
+     *
+     * Always stores normalized paths (no inner '.' or '..' components
+     * and no consecutive '/'es). Concatenation automatically adds
+     * the path separator '/'.
+     *
+     * \todo Add support for handling extensions incl. stripping
+     * extensions from basename (basename("/path/foo.baa", ".baa") ==> "foo")
+     * \todo Review. Maybe use COW pimpl, ckeck storage.
+     * \todo \b EXPLICIT ctors.
+    */
+    class Pathname
     {
-      prfx_i = path_tv.prfx_i;
-      name_t = path_tv.name_t;
-      return *this;
-    }
+    public:
+      /** Default ctor: an empty path. */
+      Pathname()
+      : prfx_i( 0 )
+      {}
 
-    /** Concatenate and assing. \see cat */
-    Pathname & operator+=( const Pathname & path_tv )
-    { return( *this = cat( *this, path_tv ) ); }
+      /** Ctor from string. */
+      Pathname( const std::string & name_tv )
+      { _assign( name_tv ); }
 
-    /** String representation. */
-    const std::string & asString() const
-    { return name_t; }
+      /** Ctor from char*. */
+      Pathname( const char * name_tv )
+      { _assign( name_tv ? name_tv : "" ); }
 
-    /** Test for an empty path. */
-    bool empty()    const { return name_t.empty(); }
-    /** Test for an absolute path. */
-    bool absolute() const { return !empty() && name_t[prfx_i] == '/'; }
-    /** Test for a relative path. */
-    bool relative() const { return !empty() && name_t[prfx_i] != '/'; }
+      /** Assign */
+      Pathname & operator=( const Pathname & path_tv )
+      {
+        prfx_i = path_tv.prfx_i;
+        name_t = path_tv.name_t;
+        return *this;
+      }
 
-    /** Return all but the last component od this path. */
-    Pathname dirname() const { return dirname( *this ); }
-    static Pathname dirname( const Pathname & name_tv );
+      /** Concatenate and assing. \see cat */
+      Pathname & operator+=( const Pathname & path_tv )
+      { return( *this = cat( *this, path_tv ) ); }
 
-    /** Return the last component of this path. */
-    std::string basename() const { return basename( *this ); }
-    static std::string basename( const Pathname & name_tv );
+      /** String representation. */
+      const std::string & asString() const
+      { return name_t; }
 
-    /** Return this path, adding a leading '/' if relative. */
-    Pathname absolutename() const { return absolutename( *this ); }
-    static Pathname absolutename( const Pathname & name_tv )
-    { return name_tv.relative() ? cat( "/", name_tv ) : name_tv; }
+      /** Test for an empty path. */
+      bool empty()    const { return name_t.empty(); }
+      /** Test for an absolute path. */
+      bool absolute() const { return !empty() && name_t[prfx_i] == '/'; }
+      /** Test for a relative path. */
+      bool relative() const { return !empty() && name_t[prfx_i] != '/'; }
 
-    /** Return this path, removing a leading '/' if absolute.*/
-    Pathname relativename() const { return relativename( *this ); }
-    static Pathname relativename( const Pathname & name_tv )
-    { return name_tv.absolute() ? cat( ".", name_tv ) : name_tv; }
+      /** Return all but the last component od this path. */
+      Pathname dirname() const { return dirname( *this ); }
+      static Pathname dirname( const Pathname & name_tv );
 
-    /** Concatenation of pathnames.
-     * \code
-     *   "foo"  + "baa"  ==> "foo/baa"
-     *   "foo/" + "baa"  ==> "foo/baa"
-     *   "foo"  + "/baa" ==> "foo/baa"
-     *   "foo/" + "/baa" ==> "foo/baa"
-     * \endcode
-    */
-    Pathname cat( const Pathname & r ) const { return cat( *this, r ); }
-    static Pathname cat( const Pathname & l, const Pathname & r );
+      /** Return the last component of this path. */
+      std::string basename() const { return basename( *this ); }
+      static std::string basename( const Pathname & name_tv );
 
-    /** Append string \a r to the last component of the path.
-     * \code
-     *   "foo/baa".extend( ".h" ) ==> "foo/baa.h"
-     * \endcode
-    */
-    Pathname extend( const std::string & r ) const { return extend( *this, r ); }
-    static Pathname extend( const Pathname & l, const std::string & r );
+      /** Return this path, adding a leading '/' if relative. */
+      Pathname absolutename() const { return absolutename( *this ); }
+      static Pathname absolutename( const Pathname & name_tv )
+      { return name_tv.relative() ? cat( "/", name_tv ) : name_tv; }
 
-  private:
-    std::string::size_type prfx_i;
-    std::string            name_t;
+      /** Return this path, removing a leading '/' if absolute.*/
+      Pathname relativename() const { return relativename( *this ); }
+      static Pathname relativename( const Pathname & name_tv )
+      { return name_tv.absolute() ? cat( ".", name_tv ) : name_tv; }
 
-    void _assign( const std::string & name_tv );
-  };
+      /** Concatenation of pathnames.
+       * \code
+       *   "foo"  + "baa"  ==> "foo/baa"
+       *   "foo/" + "baa"  ==> "foo/baa"
+       *   "foo"  + "/baa" ==> "foo/baa"
+       *   "foo/" + "/baa" ==> "foo/baa"
+       * \endcode
+      */
+      Pathname cat( const Pathname & r ) const { return cat( *this, r ); }
+      static Pathname cat( const Pathname & l, const Pathname & r );
+
+      /** Append string \a r to the last component of the path.
+       * \code
+       *   "foo/baa".extend( ".h" ) ==> "foo/baa.h"
+       * \endcode
+      */
+      Pathname extend( const std::string & r ) const { return extend( *this, r ); }
+      static Pathname extend( const Pathname & l, const std::string & r );
+
+    private:
+      std::string::size_type prfx_i;
+      std::string            name_t;
+
+      void _assign( const std::string & name_tv );
+    };
+    ///////////////////////////////////////////////////////////////////
+
+    /** \relates Pathname */
+    inline bool operator==( const Pathname & l, const Pathname & r )
+    { return l.asString() == r.asString(); }
+
+    /** \relates Pathname */
+    inline bool operator!=( const Pathname & l, const Pathname & r )
+    { return l.asString() != r.asString(); }
+
+    /** \relates Pathname Concatenate two Pathname. */
+    inline Pathname operator+( const Pathname & l, const Pathname & r )
+    { return Pathname::cat( l, r ); }
+
+    ///////////////////////////////////////////////////////////////////
+
+    /** \relates Pathname Stream output */
+    inline std::ostream & operator<<( std::ostream & str, const Pathname & obj )
+    { return str << obj.asString(); }
+
+    /////////////////////////////////////////////////////////////////
+  } // namespace filesystem
   ///////////////////////////////////////////////////////////////////
 
-  /** \relates Pathname */
-  inline bool operator==( const Pathname & l, const Pathname & r )
-  { return l.asString() == r.asString(); }
-
-  /** \relates Pathname */
-  inline bool operator!=( const Pathname & l, const Pathname & r )
-  { return l.asString() != r.asString(); }
-
-  /** \relates Pathname Concatenate two Pathname. */
-  inline Pathname operator+( const Pathname & l, const Pathname & r )
-  { return Pathname::cat( l, r ); }
-
-  ///////////////////////////////////////////////////////////////////
-
-  /** \relates Pathname Stream output */
-  inline std::ostream & operator<<( std::ostream & str, const Pathname & obj )
-  { return str << obj.asString(); }
+  /** Dragged into namespace zypp. */
+  using filesystem::Pathname;
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

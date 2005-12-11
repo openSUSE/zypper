@@ -176,7 +176,7 @@ void MediaAccess::attach (bool next)
 {
   if ( !_handler ) {
     INT << "Error::E_not_open" << endl;
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_open");
+    ZYPP_THROW( MediaException, "Error::E_not_open");
   }
   _handler->attach(next);
 }
@@ -214,7 +214,7 @@ void
 MediaAccess::disconnect()
 {
   if ( !_handler )
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_open");
+    ZYPP_THROW( MediaException, "Error::E_not_open");
 
   _handler->disconnect();
 }
@@ -244,11 +244,11 @@ MediaAccess::provideFile( const Pathname & filename, bool cached, bool checkonly
   }
 
   if(checkonly)
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_error");
+    ZYPP_THROW( MediaException, "Error::E_error");
 
   if ( !_handler ) {
     INT << "Error::E_not_open" << " on provideFile(" << filename << ")" << endl;
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_open");
+    ZYPP_THROW( MediaException, "Error::E_not_open");
   }
 
   _handler->provideFile( filename );
@@ -272,7 +272,7 @@ MediaAccess::provideDir( const Pathname & dirname ) const
 {
   if ( !_handler ) {
     INT << "Error::E_not_open" << " on provideDir(" << dirname << ")" << endl;
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_open");
+    ZYPP_THROW( MediaException, "Error::E_not_open");
   }
 
   _handler->provideDir( dirname );
@@ -283,7 +283,7 @@ MediaAccess::provideDirTree( const Pathname & dirname ) const
 {
   if ( !_handler ) {
     INT << "Error::E_not_open" << " on provideDirTree(" << dirname << ")" << endl;
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_open");
+    ZYPP_THROW( MediaException, "Error::E_not_open");
   }
 
   _handler->provideDirTree( dirname );
@@ -315,7 +315,7 @@ MediaAccess::dirInfo( list<string> & retlist, const Pathname & dirname, bool dot
 
   if ( !_handler ) {
     INT << "Error::E_not_open" << " on dirInfo(" << dirname << ")" << endl;
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_open");
+    ZYPP_THROW( MediaException, "Error::E_not_open");
   }
 
   _handler->dirInfo( retlist, dirname, dots );
@@ -323,13 +323,13 @@ MediaAccess::dirInfo( list<string> & retlist, const Pathname & dirname, bool dot
 
 // Return content of directory on media
 void
-MediaAccess::dirInfo( PathInfo::dircontent & retlist, const Pathname & dirname, bool dots ) const
+MediaAccess::dirInfo( filesystem::DirContent & retlist, const Pathname & dirname, bool dots ) const
 {
   retlist.clear();
 
   if ( !_handler ) {
     INT << "Error::E_not_open" << " on dirInfo(" << dirname << ")" << endl;
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_open");
+    ZYPP_THROW( MediaException, "Error::E_not_open");
   }
 
   _handler->dirInfo( retlist, dirname, dots );

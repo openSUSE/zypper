@@ -15,11 +15,10 @@
 #include <sstream>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
 #include "zypp/media/MediaHandler.h"
-#include "zypp/base/stringutil.h"
 
 using namespace std;
-using namespace zypp::base;
 
 // use directory.yast on every media (not just via ftp/http)
 #define NONREMOTE_DIRECTORY_YAST 1
@@ -75,8 +74,8 @@ MediaHandler::MediaHandler ( const Url &      url_r,
     Pathname apoint;
 
     for ( unsigned i = 1; i < 1000; ++i ) {
-      adir( Pathname::extend( abase, stringutil::hexstring( i ) ) );
-      if ( ! adir.isExist() && PathInfo::mkdir( adir.path() ) == 0 ) {
+      adir( Pathname::extend( abase, str::hexstring( i ) ) );
+      if ( ! adir.isExist() && mkdir( adir.path() ) == 0 ) {
 	apoint = adir.path();
 	break;
       }
@@ -129,7 +128,7 @@ MediaHandler::~MediaHandler()
   }
 
   if ( _tmp_attachPoint ) {
-    int res = PathInfo::recursive_rmdir( _attachPoint );
+    int res = recursive_rmdir( _attachPoint );
     if ( res == 0 ) {
       MIL << "Deleted default attach point " << _attachPoint << endl;
     } else {
@@ -154,7 +153,7 @@ void MediaHandler::attach( bool next )
 
   if ( _attachPoint.empty() ) {
     ERR << "Error::E_bad_attachpoint" << endl;
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_bad_attachpoint");
+    ZYPP_THROW( MediaException, "Error::E_bad_attachpoint");
   }
 
   try {
@@ -264,9 +263,9 @@ void MediaHandler::provideFileCopy( Pathname srcFilename,
                                        Pathname targetFilename ) const
 {
   if ( !_isAttached ) {
-    INT << "Error::E_not_attached" << " on provideFileCopy(" << srcFilename 
+    INT << "Error::E_not_attached" << " on provideFileCopy(" << srcFilename
         << "," << targetFilename << ")" << endl;
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_attached");
+    ZYPP_THROW( MediaException, "Error::E_not_attached");
   }
 
   try {
@@ -287,9 +286,9 @@ void MediaHandler::provideFile( Pathname filename ) const
 {
   if ( !_isAttached ) {
     INT << "Error::E_not_attached" << " on provideFile(" << filename << ")" << endl;
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_attached");
+    ZYPP_THROW( MediaException, "Error::E_not_attached");
   }
-  
+
   try {
     getFile( filename ); // pass to concrete handler
   }
@@ -317,7 +316,7 @@ void MediaHandler::provideDir( Pathname dirname ) const
 {
   if ( !_isAttached ) {
     INT << "Error::E_not_attached" << " on provideDir(" << dirname << ")" << endl;
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_attached");
+    ZYPP_THROW( MediaException, "Error::E_not_attached");
   }
   try {
     getDir( dirname, /*recursive*/false ); // pass to concrete handler
@@ -345,7 +344,7 @@ void MediaHandler::provideDirTree( Pathname dirname ) const
 {
   if ( !_isAttached ) {
     INT << "Error::E_not_attached" << " on provideDirTree(" << dirname << ")" << endl;
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_attached");
+    ZYPP_THROW( MediaException, "Error::E_not_attached");
   }
 
   try {
@@ -379,12 +378,12 @@ void MediaHandler::releasePath( Pathname pathname ) const
   PathInfo info( localPath( pathname ) );
 
   if ( info.isFile() ) {
-    PathInfo::unlink( info.path() );
+    unlink( info.path() );
   } else if ( info.isDir() ) {
     if ( info.path() != _localRoot ) {
-      PathInfo::recursive_rmdir( info.path() );
+      recursive_rmdir( info.path() );
     } else {
-      PathInfo::clean_dir( info.path() );
+      clean_dir( info.path() );
     }
   }
 }
@@ -404,7 +403,7 @@ void MediaHandler::dirInfo( list<string> & retlist,
 
   if ( !_isAttached ) {
     INT << "Error::E_not_attached" << " on dirInfo(" << dirname << ")" << endl;
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_attached");
+    ZYPP_THROW( MediaException, "Error::E_not_attached");
   }
 
   try {
@@ -429,14 +428,14 @@ void MediaHandler::dirInfo( list<string> & retlist,
 //
 //	DESCRIPTION :
 //
-void MediaHandler::dirInfo( PathInfo::dircontent & retlist,
-			       const Pathname & dirname, bool dots ) const
+void MediaHandler::dirInfo( filesystem::DirContent & retlist,
+                            const Pathname & dirname, bool dots ) const
 {
   retlist.clear();
 
   if ( !_isAttached ) {
     INT << "Error::E_not_attached" << " on dirInfo(" << dirname << ")" << endl;
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_attached");
+    ZYPP_THROW( MediaException, "Error::E_not_attached");
   }
 
   try {
@@ -464,7 +463,7 @@ void MediaHandler::getDirectoryYast( std::list<std::string> & retlist,
 {
   retlist.clear();
 
-  PathInfo::dircontent content;
+  filesystem::DirContent content;
   try {
     getDirectoryYast( content, dirname, dots );
   }
@@ -477,7 +476,7 @@ void MediaHandler::getDirectoryYast( std::list<std::string> & retlist,
   }
 
   // convert to std::list<std::string>
-  for ( PathInfo::dircontent::const_iterator it = content.begin(); it != content.end(); ++it ) {
+  for ( filesystem::DirContent::const_iterator it = content.begin(); it != content.end(); ++it ) {
     retlist.push_back( it->name );
   }
 }
@@ -488,8 +487,8 @@ void MediaHandler::getDirectoryYast( std::list<std::string> & retlist,
 //	METHOD NAME : MediaHandler::getDirectoryYast
 //	METHOD TYPE : PMError
 //
-void MediaHandler::getDirectoryYast( PathInfo::dircontent & retlist,
-					const Pathname & dirname, bool dots ) const
+void MediaHandler::getDirectoryYast( filesystem::DirContent & retlist,
+                                     const Pathname & dirname, bool dots ) const
 {
   retlist.clear();
 
@@ -512,7 +511,7 @@ void MediaHandler::getDirectoryYast( PathInfo::dircontent & retlist,
   ifstream dir( localPath( dirFile ).asString().c_str() );
   if ( dir.fail() ) {
     ERR << "Unable to load '" << localPath( dirFile ) << "'" << endl;
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_system");
+    ZYPP_THROW( MediaException, "Error::E_system");
   }
 
   string line;
@@ -522,10 +521,10 @@ void MediaHandler::getDirectoryYast( PathInfo::dircontent & retlist,
 
     // Newer directory.yast append '/' to directory names
     // Remaining entries are unspecified, although most probabely files.
-    PathInfo::file_type type = PathInfo::NOT_AVAIL;
+    filesystem::FileType type = filesystem::FT_NOT_AVAIL;
     if ( *line.rbegin() == '/' ) {
       line.erase( line.end()-1 );
-      type = PathInfo::T_DIR;
+      type = filesystem::FT_DIR;
     }
 
     if ( dots ) {
@@ -534,7 +533,7 @@ void MediaHandler::getDirectoryYast( PathInfo::dircontent & retlist,
       if ( *line.begin() == '.' ) continue;
     }
 
-    retlist.push_back( PathInfo::direntry( line, type ) );
+    retlist.push_back( filesystem::DirEntry( line, type ) );
   }
 }
 
@@ -568,9 +567,9 @@ void MediaHandler::getFile( const Pathname & filename ) const
     }
 
     if (info.isExist())
-      throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_a_file");
+      ZYPP_THROW( MediaException, "Error::E_not_a_file");
     else
-      throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_file_not_found");
+      ZYPP_THROW( MediaException, "Error::E_file_not_found");
 }
 
 
@@ -586,9 +585,9 @@ void MediaHandler::getFileCopy ( const Pathname & srcFilename, const Pathname & 
     ZYPP_RETHROW(excpt_r);
 #endif
   }
-  
-  if ( PathInfo::copy( localPath( srcFilename ), targetFilename ) != 0 ) {
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_write_error");
+
+  if ( copy( localPath( srcFilename ), targetFilename ) != 0 ) {
+    ZYPP_THROW( MediaException, "Error::E_write_error");
   }
 }
 
@@ -611,9 +610,9 @@ void MediaHandler::getDir( const Pathname & dirname, bool recurse_r ) const
   }
 
   if (info.isExist())
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_a_file");
+    ZYPP_THROW( MediaException, "Error::E_not_a_file");
   else
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_file_not_found");
+    ZYPP_THROW( MediaException, "Error::E_file_not_found");
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -626,11 +625,11 @@ void MediaHandler::getDir( const Pathname & dirname, bool recurse_r ) const
 //                    Default implementation of pure virtual.
 //
 void MediaHandler::getDirInfo( std::list<std::string> & retlist,
-				  const Pathname & dirname, bool dots ) const
+                               const Pathname & dirname, bool dots ) const
 {
   PathInfo info( localPath( dirname ) );
   if( ! info.isDir() ) {
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_a_directory");
+    ZYPP_THROW( MediaException, "Error::E_not_a_directory");
   }
 
 #if NONREMOTE_DIRECTORY_YAST
@@ -643,9 +642,9 @@ void MediaHandler::getDirInfo( std::list<std::string> & retlist,
 #endif
 
   // readdir
-  int res = PathInfo::readdir( retlist, info.path(), dots );
+    int res = readdir( retlist, info.path(), dots );
   if ( res )
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_system");
+    ZYPP_THROW( MediaException, "Error::E_system");
 
 #if NONREMOTE_DIRECTORY_YAST
   }
@@ -663,12 +662,12 @@ void MediaHandler::getDirInfo( std::list<std::string> & retlist,
 //	DESCRIPTION : Asserted that media is attached and retlist is empty.
 //                    Default implementation of pure virtual.
 //
-void MediaHandler::getDirInfo( PathInfo::dircontent & retlist,
-				  const Pathname & dirname, bool dots ) const
+void MediaHandler::getDirInfo( filesystem::DirContent & retlist,
+                               const Pathname & dirname, bool dots ) const
 {
   PathInfo info( localPath( dirname ) );
   if( ! info.isDir() ) {
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_not_a_directory");
+    ZYPP_THROW( MediaException, "Error::E_not_a_directory");
   }
 
 #if NONREMOTE_DIRECTORY_YAST
@@ -681,9 +680,9 @@ void MediaHandler::getDirInfo( PathInfo::dircontent & retlist,
 #endif
 
   // readdir
-  int res = PathInfo::readdir( retlist, info.path(), dots );
+  int res = readdir( retlist, info.path(), dots );
   if ( res )
-    throw MediaException(ZYPP_EX_CODELOCATION, "Error::E_system");
+    ZYPP_THROW( MediaException, "Error::E_system");
 #if NONREMOTE_DIRECTORY_YAST
   }
 #endif

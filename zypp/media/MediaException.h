@@ -13,7 +13,6 @@
 #define ZYPP_MEDIA_MEDIAEXCEPTION_H
 
 #include <iosfwd>
-#include <stdexcept>
 
 #include "zypp/base/Exception.h"
 
@@ -29,16 +28,13 @@ namespace zypp
      **/
     class MediaException : public Exception
     {
-      typedef exception_detail::CodeLocation CodeLocation;
     public:
-      /** Ctor taking CodeLocation and message.
-       * Use \ref ZYPP_THROW to throw exceptions.
-      */
-      MediaException( const CodeLocation & where_r, const std::string & msg_r )
+      /** Ctor taking message. */
+      MediaException( const std::string & msg_r )
       : Exception( msg_r )
       {}
     };
-  
+
   /////////////////////////////////////////////////////////////////
   } // namespace media
 } // namespace zypp

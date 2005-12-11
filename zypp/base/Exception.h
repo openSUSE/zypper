@@ -12,6 +12,7 @@
 #ifndef ZYPP_BASE_EXCEPTION_H
 #define ZYPP_BASE_EXCEPTION_H
 
+#include <cerrno>
 #include <iosfwd>
 #include <stdexcept>
 

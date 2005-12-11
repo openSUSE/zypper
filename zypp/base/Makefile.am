@@ -7,9 +7,11 @@ SUBDIRS =
 
 include_HEADERS =	\
 	Debug.h		\
+	Fd.h		\
 	KindOf.h	\
 	Logger.h	\
 	Exception.h	\
+	IOStream.h	\
 	NonCopyable.h	\
 	PtrTypes.h	\
 	ReferenceCounted.h	\
@@ -17,8 +19,7 @@ include_HEADERS =	\
 	StringVal.h		\
 				\
 				\
-	ExternalDataSource.h	\
-	stringutil.h
+	ExternalDataSource.h
 
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_base.la
@@ -28,12 +29,13 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_base.la
 lib@PACKAGE@_base_la_SOURCES =	\
 	Logger.cc	\
 	Exception.cc	\
+	Fd.cc		\
+	IOStream.cc	\
 	String.cc	\
 	StringVal.cc	\
 			\
 			\
-	ExternalDataSource.cc	\
-	stringutil.cc
+	ExternalDataSource.cc
 
 lib@PACKAGE@_base_la_LIBADD = -lboost_regex
 

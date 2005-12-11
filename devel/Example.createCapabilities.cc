@@ -6,6 +6,7 @@
 #include <string>
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
+#include <zypp/base/IOStream.h>
 #include <zypp/base/PtrTypes.h>
 
 #include <zypp/CapFactory.h>
@@ -48,39 +49,6 @@ ostream & operator<<( ostream & str, const istream & obj ) {
 }
 
 ///////////////////////////////////////////////////////////////////
-// Return one line from stream
-std::string getline( std::istream & str )
-{
-  static const unsigned tmpBuffLen = 1024;
-  static char           tmpBuff[tmpBuffLen];
-  string ret;
-  do {
-    str.clear();
-    str.getline( tmpBuff, tmpBuffLen ); // always writes '\0' terminated
-    ret += tmpBuff;
-  } while( str.rdstate() == ios::failbit );
-
-  return ret;
-}
-
-///////////////////////////////////////////////////////////////////
-// Simple lineparser: Call function do_r for each line.
-template<class _Function>
-  _Function & forEachLine( std::istream & str_r, _Function & do_r )
-  {
-    while ( str_r )
-      {
-        std::string l = getline( str_r );
-        if ( ! (str_r.fail() || str_r.bad()) )
-          {
-            // l contains valid data to be consumed.
-            do_r( l );
-          }
-      }
-    return do_r;
-  }
-
-///////////////////////////////////////////////////////////////////
 // Fits forEachLine. A simple 'do' function
 void collect( const std::string & linre_r )
 {
@@ -117,7 +85,7 @@ struct ImpatientCollector : public Collector
   virtual void doConsume( const std::string & line_r )
   {
     if ( _lineNo == 1234 )
-      ZYPP_THROW( "takes to long" );
+      ZYPP_THROW( Exception, "takes to long" );
   }
 };
 ///////////////////////////////////////////////////////////////////
@@ -307,7 +275,7 @@ int main( int argc, char * argv[] )
   PackageParseCollector datacollect;
   try
     {
-      forEachLine( str, datacollect );
+      iostr::forEachLine( str, datacollect );
     }
   catch ( Exception & excpt_r )
     {

@@ -164,7 +164,7 @@ class MediaHandler {
 	virtual void getFile( const Pathname & filename ) const = 0;
 
         /**
-         * Call concrete handler to provide a file under a different place 
+         * Call concrete handler to provide a file under a different place
          * in the file system (usually not under attach point) as a copy.
          * Media must be attached before by callee.
          *
@@ -175,7 +175,7 @@ class MediaHandler {
 	 *
          **/
         virtual void getFileCopy( const Pathname & srcFilename, const Pathname & targetFilename ) const;
-                         
+
 
 	/**
 	 * Call concrete handler to provide directory content (not recursive!)
@@ -210,11 +210,11 @@ class MediaHandler {
 	 *
 	 **/
         virtual void getDirInfo( std::list<std::string> & retlist,
-			            const Pathname & dirname, bool dots = true ) const = 0;
+                                 const Pathname & dirname, bool dots = true ) const = 0;
 
 	/**
 	 * Basically the same as getDirInfo above. The content list is returned as
-	 * PathInfo::dircontent, which includes name and filetype of each directory
+	 * filesystem::DirContent, which includes name and filetype of each directory
 	 * entry. Retrieving the filetype usg. requires an additional ::stat call for
 	 * each entry, thus it's more expensive than a simple readdir.
 	 *
@@ -223,8 +223,8 @@ class MediaHandler {
 	 * \throws MediaException
 	 *
 	 **/
-        virtual void getDirInfo( PathInfo::dircontent & retlist,
-			            const Pathname & dirname, bool dots = true ) const = 0;
+        virtual void getDirInfo( filesystem::DirContent & retlist,
+                                 const Pathname & dirname, bool dots = true ) const = 0;
 
   protected:
 
@@ -237,7 +237,7 @@ class MediaHandler {
 	 *
 	 **/
         void getDirectoryYast( std::list<std::string> & retlist,
-			          const Pathname & dirname, bool dots = true ) const;
+                               const Pathname & dirname, bool dots = true ) const;
 
         /**
 	 * Retrieve and if available scan dirname/directory.yast.
@@ -247,8 +247,8 @@ class MediaHandler {
 	 * \throws MediaException
 	 *
 	 **/
-        void getDirectoryYast( PathInfo::dircontent & retlist,
-			          const Pathname & dirname, bool dots = true ) const;
+        void getDirectoryYast( filesystem::DirContent & retlist,
+                               const Pathname & dirname, bool dots = true ) const;
 
   public:
 
@@ -363,9 +363,9 @@ class MediaHandler {
 	 *
 	 **/
 	void provideFile( Pathname filename ) const;
-    
+
 	/**
-	 * Call concrete handler to provide a copy of a file under a different place 
+	 * Call concrete handler to provide a copy of a file under a different place
          * in the file system (usually not under attach point) as a copy.
          * Media must be attached before by callee.
          *
@@ -376,7 +376,7 @@ class MediaHandler {
 	 *
 	 **/
         void provideFileCopy( Pathname srcFilename, Pathname targetFilename) const;
-    
+
 	/**
 	 * Use concrete handler to provide directory denoted
 	 * by path below 'localRoot' (not recursive!).
@@ -447,11 +447,11 @@ class MediaHandler {
 	 *
 	 **/
         void dirInfo( std::list<std::string> & retlist,
-			 const Pathname & dirname, bool dots = true ) const;
+                      const Pathname & dirname, bool dots = true ) const;
 
 	/**
 	 * Basically the same as dirInfo above. The content is returned as
-	 * PathInfo::dircontent, which includes name and filetype of each directory
+	 * filesystem::DirContent, which includes name and filetype of each directory
 	 * entry. Retrieving the filetype usg. requires an additional ::stat call for
 	 * each entry, thus it's more expensive than a simple readdir.
 	 *
@@ -461,8 +461,8 @@ class MediaHandler {
 	 * \throws MediaException
 	 *
 	 **/
-	void dirInfo( PathInfo::dircontent & retlist,
-			 const Pathname & dirname, bool dots = true ) const;
+	void dirInfo( filesystem::DirContent & retlist,
+                      const Pathname & dirname, bool dots = true ) const;
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -475,7 +475,7 @@ class MediaHandler {
 	virtual void getDir( const Pathname & dirname, bool recurse_r ) const;	\
         virtual void getDirInfo( std::list<std::string> & retlist,	\
 			            const Pathname & dirname, bool dots = true ) const;	\
-        virtual void getDirInfo( PathInfo::dircontent & retlist,	\
+        virtual void getDirInfo( filesystem::DirContent & retlist,	\
 			            const Pathname & dirname, bool dots = true ) const;
 
   } // namespace media

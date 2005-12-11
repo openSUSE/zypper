@@ -101,6 +101,12 @@ namespace zypp
     };
     ///////////////////////////////////////////////////////////////////
 
+    inline void intrusive_ptr_add_ref( const ReferenceCounted * ptr_r )
+    { ReferenceCounted::add_ref( ptr_r ); }
+
+    inline void intrusive_ptr_release( const ReferenceCounted * ptr_r )
+    { ReferenceCounted::release( ptr_r ); }
+
     /////////////////////////////////////////////////////////////////
   } // namespace base
   ///////////////////////////////////////////////////////////////////

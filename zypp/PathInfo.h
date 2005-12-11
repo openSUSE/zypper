@@ -8,8 +8,6 @@
 \---------------------------------------------------------------------*/
 /** \file zypp/PathInfo.h
  *
- * \todo replace by Blocxx
- *
 */
 #ifndef ZYPP_PATHINFO_H
 #define ZYPP_PATHINFO_H
@@ -31,169 +29,361 @@ extern "C"
 
 #include "zypp/Pathname.h"
 
-namespace zypp {
-
 ///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : PathInfo
-/**
- * @short Wrapper class for ::stat/::lstat and other file/directory related operations.
- **/
-class PathInfo {
+namespace zypp
+{ /////////////////////////////////////////////////////////////////
 
-  friend std::ostream & operator<<( std::ostream & str, const PathInfo & obj );
+  ///////////////////////////////////////////////////////////////////
+  /** Types and functions for filesystem operations.
+   * \todo move zypp::filesystem stuff into separate header
+   * \todo Add tmpfile and tmpdir handling.
+   * \todo think about using Exceptions in zypp::filesystem
+   * \todo provide a readdir iterator; at least provide an interface
+   * using an insert_iterator to be independent from std::container.
+  */
+  namespace filesystem
+  { /////////////////////////////////////////////////////////////////
 
-  public:
+    ///////////////////////////////////////////////////////////////////
+    /** File type information.
+     * \todo Think about an \ref g_EnumerationClass
+    */
+    enum FileType
+      {
+        FT_NOT_AVAIL = 0x00, // no typeinfo available
+        FT_NOT_EXIST = 0x01, // file does not exist
+        FT_FILE      = 0x02,
+        FT_DIR       = 0x04,
+        FT_CHARDEV   = 0x08,
+        FT_BLOCKDEV  = 0x10,
+        FT_FIFO      = 0x20,
+        FT_LINK      = 0x40,
+        FT_SOCKET    = 0x80
+      };
+    ///////////////////////////////////////////////////////////////////
 
-    enum Mode { STAT, LSTAT };
+    /** \relates FileType Stram output. */
+    extern std::ostream & operator<<( std::ostream & str, FileType obj );
 
-    enum file_type {
-      NOT_AVAIL  = 0x00, // no typeinfo available
-      NOT_EXIST  = 0x01, // file does not exist
-      T_FILE     = 0x02,
-      T_DIR      = 0x04,
-      T_CHARDEV  = 0x08,
-      T_BLOCKDEV = 0x10,
-      T_FIFO     = 0x20,
-      T_LINK     = 0x40,
-      T_SOCKET   = 0x80
+    ///////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : StatMode
+    /**
+     * @short Wrapper class for mode_t values as derived from ::stat
+     **/
+    class StatMode
+    {
+      friend std::ostream & operator<<( std::ostream & str, const StatMode & obj );
+
+    public:
+      /** Ctor taking  mode_t value from ::stat. */
+      StatMode( const mode_t & mode_r = 0 )
+      : _mode( mode_r )
+      {}
+
+    public:
+
+      /** \name Query FileType. */
+      //@{
+      FileType fileType() const;
+
+      bool   isFile()  const { return S_ISREG( _mode ); }
+      bool   isDir ()  const { return S_ISDIR( _mode ); }
+      bool   isLink()  const { return S_ISLNK( _mode ); }
+      bool   isChr()   const { return S_ISCHR( _mode ); }
+      bool   isBlk()   const { return S_ISBLK( _mode ); }
+      bool   isFifo()  const { return S_ISFIFO( _mode ); }
+      bool   isSock()  const { return S_ISSOCK( _mode ); }
+      //@}
+
+      /** \name Query user permissions. */
+      //@{
+      bool   isRUsr()  const { return (_mode & S_IRUSR); }
+      bool   isWUsr()  const { return (_mode & S_IWUSR); }
+      bool   isXUsr()  const { return (_mode & S_IXUSR); }
+
+      /** Short for isRUsr().*/
+      bool   isR()     const { return isRUsr(); }
+      /** Short for isWUsr().*/
+      bool   isW()     const { return isWUsr(); }
+      /** Short for isXUsr().*/
+      bool   isX()     const { return isXUsr(); }
+      //@}
+
+      /** \name Query group permissions. */
+      //@{
+      bool   isRGrp()  const { return (_mode & S_IRGRP); }
+      bool   isWGrp()  const { return (_mode & S_IWGRP); }
+      bool   isXGrp()  const { return (_mode & S_IXGRP); }
+      //@}
+
+      /** \name Query others permissions. */
+      //@{
+      bool   isROth()  const { return (_mode & S_IROTH); }
+      bool   isWOth()  const { return (_mode & S_IWOTH); }
+      bool   isXOth()  const { return (_mode & S_IXOTH); }
+      //@}
+
+      /** \name Query special permissions. */
+      //@{
+      /** Set UID bit. */
+      bool   isUid()   const { return (_mode & S_ISUID); }
+      /** Set GID bit. */
+      bool   isGid()   const { return (_mode & S_ISGID); }
+      /** Sticky bit. */
+      bool   isVtx()   const { return (_mode & S_ISVTX); }
+      //@}
+
+      /** \name Query permission */
+      //@{
+      /** Test for equal permission bits. */
+      bool   isPerm ( mode_t m ) const { return (m == perm()); }
+      /** Test for set permission bits. */
+      bool   hasPerm( mode_t m ) const { return (m == (m & perm())); }
+      //@}
+
+      /** \name Extract permission bits only. */
+      //@{
+      mode_t uperm()   const { return (_mode & S_IRWXU); }
+      mode_t gperm()   const { return (_mode & S_IRWXG); }
+      mode_t operm()   const { return (_mode & S_IRWXO); }
+      mode_t perm()    const { return (_mode & (S_IRWXU|S_IRWXG|S_IRWXO|S_ISUID|S_ISGID|S_ISVTX)); }
+      //@}
+
+      /** Return the mode_t value. */
+      mode_t st_mode() const { return _mode; }
+
+    private:
+      mode_t _mode;
     };
-    friend std::ostream & operator<<( std::ostream & str, file_type obj );
+    ///////////////////////////////////////////////////////////////////
 
-    /**
-     * Wrapper class for mode_t values as derived from ::stat
+    /** \relates StatMode Stream output. */
+    extern std::ostream & operator<<( std::ostream & str, const StatMode & obj );
+
+    ///////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : DevInoCache
+    /** Simple cache remembering device/inode to detect hardlinks.
+     * \code
+     *     DevInoCache trace;
+     *     for ( all files ) {
+     *       if ( trace.insert( file.device, file.inode ) ) {
+     *         // 1st occurance of file
+     *       }
+     *         // else: hardlink; already counted this device/inode
+     *       }
+     *     }
+     * \endcode
      **/
-    class stat_mode;
+    class DevInoCache
+    {
+    public:
+      /** Ctor */
+      DevInoCache() {}
 
-    /**
-     * Simple cache remembering device/inode to detect hardlinks.
+      /** Clear cache. */
+      void clear() { _devino.clear(); }
+
+      /** Remember dev/ino.
+       * \Return <code>true</code> if it's inserted the first
+       * time, <code>false</code> if alredy present in cache
+       * (a hardlink to a previously remembered file).
+       **/
+      bool insert( const dev_t & dev_r, const ino_t & ino_r ) {
+        return _devino[dev_r].insert( ino_r ).second;
+      }
+
+    private:
+      std::map<dev_t,std::set<ino_t> > _devino;
+    };
+    ///////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : PathInfo
+    /** Wrapper class for ::stat/::lstat.
+     *
+     * \note All attribute quieries test for isExist(), and return \c false or
+     * \c 0, if stat was not successful.
+     *
+     * \note For convenience PathInfo is available as zypp::PathInfo too.
      **/
-    class devino_cache;
+    class PathInfo
+    {
+      friend std::ostream & operator<<( std::ostream & str, const PathInfo & obj );
 
-  private:
+    public:
+      /** stat() or lstat() */
+      enum Mode { STAT, LSTAT };
 
-    Pathname    path_t;
+    public:
+      /** \name Construct from Pathname.
+       * Default mode is \c STAT.
+      */
+      //@{
+      PathInfo();
+      explicit
+      PathInfo( const Pathname & path, Mode initial = STAT );
+      explicit
+      PathInfo( const std::string & path, Mode initial = STAT );
+      explicit
+      PathInfo( const char * path, Mode initial = STAT );
+      //@}
 
-    struct stat statbuf_C;
-    Mode        mode_e;
-    int         error_i;
+      /**Dtor */
+      ~PathInfo();
 
-  public:
+      /** Return current Pathname. */
+      const Pathname &    path()     const { return path_t; }
+      /** Return current Pathname as String. */
+      const std::string & asString() const { return path_t.asString(); }
+      /** Return current stat Mode. */
+      Mode                mode()     const { return mode_e; }
+      /** Return error returned from last stat/lstat call. */
+      int                 error()    const { return error_i; }
 
-    PathInfo( const Pathname & path = "", Mode initial = STAT );
-    PathInfo( const std::string & path, Mode initial = STAT );
-    PathInfo( const char * path, Mode initial = STAT );
-    virtual ~PathInfo();
+      /** Set a new Pathname. */
+      void setPath( const Pathname & path ) { if ( path != path_t ) error_i = -1; path_t = path; }
+      /** Set a new Mode . */
+      void setMode( Mode mode )             { if ( mode != mode_e ) error_i = -1; mode_e = mode; }
 
-    const Pathname &    path()     const { return path_t; }
-    const std::string & asString() const { return path_t.asString(); }
-    Mode                mode()     const { return mode_e; }
-    int                 error()    const { return error_i; }
+      /** STAT \a path. */
+      bool stat      ( const Pathname & path ) { setPath( path ); setMode( STAT );  return operator()(); }
+      /** LSTAT \a path. */
+      bool lstat     ( const Pathname & path ) { setPath( path ); setMode( LSTAT ); return operator()(); }
+      /** Restat \a path using current mode. */
+      bool operator()( const Pathname & path ) { setPath( path ); return operator()(); }
 
-    void setPath( const Pathname & path ) { if ( path != path_t ) error_i = -1; path_t = path; }
-    void setMode( Mode mode )             { if ( mode != mode_e ) error_i = -1; mode_e = mode; }
+      /** STAT current path. */
+      bool stat()   { setMode( STAT );  return operator()(); }
+      /** LSTAT current path. */
+      bool lstat()  { setMode( LSTAT ); return operator()(); }
+      /** Restat current path using current mode. */
+      bool operator()();
 
-    bool stat      ( const Pathname & path ) { setPath( path ); setMode( STAT );  return operator()(); }
-    bool lstat     ( const Pathname & path ) { setPath( path ); setMode( LSTAT ); return operator()(); }
-    bool operator()( const Pathname & path ) { setPath( path ); return operator()(); }
+    public:
 
-    bool stat()   { setMode( STAT );  return operator()(); }
-    bool lstat()  { setMode( LSTAT ); return operator()(); }
-    bool operator()();
+      /** Return whether valid stat info exists.
+       * That's usg. whether the file exist and you had permission to
+       * stat it.
+      */
+      bool   isExist() const { return !error_i; }
 
-  public:
+      /** \name Query StatMode attibutes.
+       * Combines \ref zypp::PathInfo::isExist and \ref zypp::filesystem::StatMode query.
+      */
+      //@{
+      FileType fileType() const;
 
-    bool   isExist() const { return !error_i; }
+      bool   isFile()  const { return isExist() && S_ISREG( statbuf_C.st_mode ); }
+      bool   isDir ()  const { return isExist() && S_ISDIR( statbuf_C.st_mode ); }
+      bool   isLink()  const { return isExist() && S_ISLNK( statbuf_C.st_mode ); }
+      bool   isChr()   const { return isExist() && S_ISCHR( statbuf_C.st_mode ); }
+      bool   isBlk()   const { return isExist() && S_ISBLK( statbuf_C.st_mode ); }
+      bool   isFifo()  const { return isExist() && S_ISFIFO( statbuf_C.st_mode ); }
+      bool   isSock()  const { return isExist() && S_ISSOCK( statbuf_C.st_mode ); }
 
-    // file type
-    file_type fileType() const;
+      // permission
+      bool   isRUsr()  const { return isExist() && (statbuf_C.st_mode & S_IRUSR); }
+      bool   isWUsr()  const { return isExist() && (statbuf_C.st_mode & S_IWUSR); }
+      bool   isXUsr()  const { return isExist() && (statbuf_C.st_mode & S_IXUSR); }
 
-    bool   isFile()  const { return isExist() && S_ISREG( statbuf_C.st_mode ); }
-    bool   isDir ()  const { return isExist() && S_ISDIR( statbuf_C.st_mode ); }
-    bool   isLink()  const { return isExist() && S_ISLNK( statbuf_C.st_mode ); }
-    bool   isChr()   const { return isExist() && S_ISCHR( statbuf_C.st_mode ); }
-    bool   isBlk()   const { return isExist() && S_ISBLK( statbuf_C.st_mode ); }
-    bool   isFifo()  const { return isExist() && S_ISFIFO( statbuf_C.st_mode ); }
-    bool   isSock()  const { return isExist() && S_ISSOCK( statbuf_C.st_mode ); }
+      bool   isR()     const { return isRUsr(); }
+      bool   isW()     const { return isWUsr(); }
+      bool   isX()     const { return isXUsr(); }
 
-    nlink_t nlink()  const { return isExist() ? statbuf_C.st_nlink : 0; }
+      bool   isRGrp()  const { return isExist() && (statbuf_C.st_mode & S_IRGRP); }
+      bool   isWGrp()  const { return isExist() && (statbuf_C.st_mode & S_IWGRP); }
+      bool   isXGrp()  const { return isExist() && (statbuf_C.st_mode & S_IXGRP); }
 
-    // owner
-    uid_t  owner()   const { return isExist() ? statbuf_C.st_uid : 0; }
-    gid_t  group()   const { return isExist() ? statbuf_C.st_gid : 0; }
+      bool   isROth()  const { return isExist() && (statbuf_C.st_mode & S_IROTH); }
+      bool   isWOth()  const { return isExist() && (statbuf_C.st_mode & S_IWOTH); }
+      bool   isXOth()  const { return isExist() && (statbuf_C.st_mode & S_IXOTH); }
 
-    // permission
-    bool   isRUsr()  const { return isExist() && (statbuf_C.st_mode & S_IRUSR); }
-    bool   isWUsr()  const { return isExist() && (statbuf_C.st_mode & S_IWUSR); }
-    bool   isXUsr()  const { return isExist() && (statbuf_C.st_mode & S_IXUSR); }
+      bool   isUid()   const { return isExist() && (statbuf_C.st_mode & S_ISUID); }
+      bool   isGid()   const { return isExist() && (statbuf_C.st_mode & S_ISGID); }
+      bool   isVtx()   const { return isExist() && (statbuf_C.st_mode & S_ISVTX); }
 
-    bool   isR()     const { return isRUsr(); }
-    bool   isW()     const { return isWUsr(); }
-    bool   isX()     const { return isXUsr(); }
+      bool   isPerm ( mode_t m ) const { return isExist() && (m == perm()); }
+      bool   hasPerm( mode_t m ) const { return isExist() && (m == (m & perm())); }
 
-    bool   isRGrp()  const { return isExist() && (statbuf_C.st_mode & S_IRGRP); }
-    bool   isWGrp()  const { return isExist() && (statbuf_C.st_mode & S_IWGRP); }
-    bool   isXGrp()  const { return isExist() && (statbuf_C.st_mode & S_IXGRP); }
+      mode_t uperm()   const { return isExist() ? (statbuf_C.st_mode & S_IRWXU) : 0; }
+      mode_t gperm()   const { return isExist() ? (statbuf_C.st_mode & S_IRWXG) : 0; }
+      mode_t operm()   const { return isExist() ? (statbuf_C.st_mode & S_IRWXO) : 0; }
+      mode_t perm()    const { return isExist() ? (statbuf_C.st_mode & (S_IRWXU|S_IRWXG|S_IRWXO|S_ISUID|S_ISGID|S_ISVTX)) : 0; }
 
-    bool   isROth()  const { return isExist() && (statbuf_C.st_mode & S_IROTH); }
-    bool   isWOth()  const { return isExist() && (statbuf_C.st_mode & S_IWOTH); }
-    bool   isXOth()  const { return isExist() && (statbuf_C.st_mode & S_IXOTH); }
+      mode_t st_mode() const { return isExist() ? statbuf_C.st_mode : 0; }
+      //@}
 
-    bool   isUid()   const { return isExist() && (statbuf_C.st_mode & S_ISUID); }
-    bool   isGid()   const { return isExist() && (statbuf_C.st_mode & S_ISGID); }
-    bool   isVtx()   const { return isExist() && (statbuf_C.st_mode & S_ISVTX); }
+      /** Return st_mode() as filesystem::StatMode. */
+      StatMode asStatMode() const { return st_mode(); }
 
-    mode_t uperm()   const { return isExist() ? (statbuf_C.st_mode & S_IRWXU) : 0; }
-    mode_t gperm()   const { return isExist() ? (statbuf_C.st_mode & S_IRWXG) : 0; }
-    mode_t operm()   const { return isExist() ? (statbuf_C.st_mode & S_IRWXO) : 0; }
-    mode_t perm()    const { return isExist() ? (statbuf_C.st_mode & (S_IRWXU|S_IRWXG|S_IRWXO|S_ISUID|S_ISGID|S_ISVTX)) : 0; }
+      nlink_t nlink()  const { return isExist() ? statbuf_C.st_nlink : 0; }
 
-    bool   isPerm ( mode_t m ) const { return (m == perm()); }
-    bool   hasPerm( mode_t m ) const { return (m == (m & perm())); }
+      /** \name Owner and group */
+      //@{
+      uid_t  owner()   const { return isExist() ? statbuf_C.st_uid : 0; }
+      gid_t  group()   const { return isExist() ? statbuf_C.st_gid : 0; }
+      //@}
 
-    mode_t st_mode() const { return isExist() ? statbuf_C.st_mode : 0; }
+      /** \name Permission according to current uid/gid. */
+      //@{
+      /** Returns current users permission (<tt>[0-7]</tt>)*/
+      mode_t userMay() const;
 
-    // permission according to current uid/gid (returns [0-7])
-    mode_t userMay() const;
+      bool   userMayR() const { return( userMay() & 01 ); }
+      bool   userMayW() const { return( userMay() & 02 ); }
+      bool   userMayX() const { return( userMay() & 04 ); }
 
-    bool   userMayR() const { return( userMay() & 01 ); }
-    bool   userMayW() const { return( userMay() & 02 ); }
-    bool   userMayX() const { return( userMay() & 04 ); }
+      bool   userMayRW()  const { return( (userMay() & 03) == 03 ); }
+      bool   userMayRX()  const { return( (userMay() & 05) == 05 ); }
+      bool   userMayWX()  const { return( (userMay() & 06) == 06 ); }
 
-    bool   userMayRW()  const { return( (userMay() & 03) == 03 ); }
-    bool   userMayRX()  const { return( (userMay() & 05) == 05 ); }
-    bool   userMayWX()  const { return( (userMay() & 06) == 06 ); }
+      bool   userMayRWX() const { return( userMay() == 07 ); }
+      //@}
 
-    bool   userMayRWX() const { return( userMay() == 07 ); }
+      /** \name Device and inode info. */
+      //@{
+      dev_t  dev()     const { return isExist() ? statbuf_C.st_dev  : 0; }
+      dev_t  rdev()    const { return isExist() ? statbuf_C.st_rdev : 0; }
+      ino_t  ino()     const { return isExist() ? statbuf_C.st_ino  : 0; }
+      //@}
 
-    // device
-    dev_t  dev()     const { return isExist() ? statbuf_C.st_dev  : 0; }
-    dev_t  rdev()    const { return isExist() ? statbuf_C.st_rdev : 0; }
-    ino_t  ino()     const { return isExist() ? statbuf_C.st_ino  : 0; }
+      /** \name Size info. */
+      //@{
+      off_t         size()    const { return isExist() ? statbuf_C.st_size : 0; }
+      unsigned long blksize() const { return isExist() ? statbuf_C.st_blksize : 0; }
+      unsigned long blocks()  const { return isExist() ? statbuf_C.st_blocks  : 0; }
+      //@}
 
-    // size
-    off_t         size()    const { return isExist() ? statbuf_C.st_size : 0; }
-    unsigned long blksize() const { return isExist() ? statbuf_C.st_blksize : 0; }
-    unsigned long blocks()  const { return isExist() ? statbuf_C.st_blocks  : 0; }
+      /** \name Time stamps. */
+      //@{
+      time_t atime()   const { return isExist() ? statbuf_C.st_atime : 0; } /* time of last access */
+      time_t mtime()   const { return isExist() ? statbuf_C.st_mtime : 0; } /* time of last modification */
+      time_t ctime()   const { return isExist() ? statbuf_C.st_ctime : 0; }
+      //@}
 
-    // time
-    time_t atime()   const { return isExist() ? statbuf_C.st_atime : 0; } /* time of last access */
-    time_t mtime()   const { return isExist() ? statbuf_C.st_mtime : 0; } /* time of last modification */
-    time_t ctime()   const { return isExist() ? statbuf_C.st_ctime : 0; }
+    private:
+      Pathname    path_t;
+      struct stat statbuf_C;
+      Mode        mode_e;
+      int         error_i;
+    };
+    ///////////////////////////////////////////////////////////////////
 
-  public:
+    /** \relates PathInfo Stream output. */
+    extern std::ostream & operator<<( std::ostream & str, const PathInfo & obj );
 
     ///////////////////////////////////////////////////////////////////
-    // convenience stuff
-    ///////////////////////////////////////////////////////////////////
-    // static functions as they may or may not invalidate any stat info
-    // stored by a PathiInfo.
-    ///////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
-    // Directories
-    ///////////////////////////////////////////////////////////////////
-
+    /** \name Directory related functions. */
+    //@{
     /**
      * Like '::mkdir'. Attempt to create a new directory named path. mode
      * specifies the permissions to use. It is modified by the process's
@@ -201,7 +391,7 @@ class PathInfo {
      *
      * @return 0 on success, errno on failure
      **/
-    static int mkdir( const Pathname & path, unsigned mode = 0755 );
+    int mkdir( const Pathname & path, unsigned mode = 0755 );
 
     /**
      * Like 'mkdir -p'. No error if directory exists. Make parent directories
@@ -210,14 +400,14 @@ class PathInfo {
      *
      * @return 0 on success, errno on failure
      **/
-    static int assert_dir( const Pathname & path, unsigned mode = 0755 );
+    int assert_dir( const Pathname & path, unsigned mode = 0755 );
 
     /**
      * Like '::rmdir'. Delete a directory, which must be empty.
      *
      * @return 0 on success, errno on failure
      **/
-    static int rmdir( const Pathname & path );
+    int rmdir( const Pathname & path );
 
     /**
      * Like 'rm -r DIR'. Delete a directory, recursively removing its contents.
@@ -225,7 +415,7 @@ class PathInfo {
      * @return 0 on success, ENOTDIR if path is not a directory, otherwise the
      * commands return value.
      **/
-    static int recursive_rmdir( const Pathname & path );
+    int recursive_rmdir( const Pathname & path );
 
     /**
      * Like 'rm -r DIR/ *'. Delete directory contents, but keep the directory itself.
@@ -233,7 +423,7 @@ class PathInfo {
      * @return 0 on success, ENOTDIR if path is not a directory, otherwise the
      * commands return value.
      **/
-    static int clean_dir( const Pathname & path );
+    int clean_dir( const Pathname & path );
 
     /**
      * Like 'cp -a srcpath destpath'. Copy directory tree. srcpath/destpath must be
@@ -242,28 +432,50 @@ class PathInfo {
      * @return 0 on success, ENOTDIR if srcpath/destpath is not a directory, EEXIST if
      * 'basename srcpath' exists in destpath, otherwise the commands return value.
      **/
-    static int copy_dir( const Pathname & srcpath, const Pathname & destpath );
+    int copy_dir( const Pathname & srcpath, const Pathname & destpath );
 
     /**
      * Return content of directory via retlist. If dots is false
      * entries starting with '.' are not reported. "." and ".."
      * are never reported.
      *
+     * Returns just the directory entries as string.
+     *
      * @return 0 on success, errno on failure.
+     *
+     * \todo provide some readdirIterator.
      **/
-    static int readdir( std::list<std::string> & retlist,
-			const Pathname & path, bool dots = true );
 
-    struct direntry {
+    int readdir( std::list<std::string> & retlist,
+                 const Pathname & path, bool dots = true );
+
+    /**
+     * Return content of directory via retlist. If dots is false
+     * entries starting with '.' are not reported. "." and ".."
+     * are never reported.
+     *
+     * Returns the directory entries prefixed with \a path.
+     *
+     * @return 0 on success, errno on failure.
+     *
+     * \todo provide some readdirIterator.
+     **/
+
+    int readdir( std::list<Pathname> & retlist,
+                 const Pathname & path, bool dots = true );
+
+    /** Listentry returned by readdir. */
+    struct DirEntry {
       std::string name;
-      file_type   type;
-      direntry( const std::string & name_r = std::string(), file_type type_r = NOT_AVAIL )
-	: name( name_r )
-	, type( type_r )
+      FileType    type;
+      DirEntry( const std::string & name_r = std::string(), FileType type_r = FT_NOT_AVAIL )
+      : name( name_r )
+      , type( type_r )
       {}
     };
 
-    typedef std::list<direntry> dircontent;
+    /** Returned by readdir. */
+    typedef std::list<DirEntry> DirContent;
 
     /**
      * Return content of directory via retlist. If dots is false
@@ -275,26 +487,26 @@ class PathInfo {
      *
      * @return 0 on success, errno on failure.
      **/
-    static int readdir( dircontent & retlist, const Pathname & path,
-			bool dots = true, Mode statmode = STAT );
+    int readdir( DirContent & retlist, const Pathname & path,
+                 bool dots = true, PathInfo::Mode statmode = PathInfo::STAT );
+    //@}
 
     ///////////////////////////////////////////////////////////////////
-    // Files
-    ///////////////////////////////////////////////////////////////////
-
+    /** \name File related functions. */
+    //@{
     /**
      * Like '::unlink'. Delete a file (symbolic link, socket, fifo or device).
      *
      * @return 0 on success, errno on failure
      **/
-    static int unlink( const Pathname & path );
+    int unlink( const Pathname & path );
 
     /**
      * Like '::rename'. Renames a file, moving it between directories if required.
      *
      * @return 0 on success, errno on failure
      **/
-    static int rename( const Pathname & oldpath, const Pathname & newpath );
+    int rename( const Pathname & oldpath, const Pathname & newpath );
 
     /**
      * Like 'cp file dest'. Copy file to destination file.
@@ -302,7 +514,7 @@ class PathInfo {
      * @return 0 on success, EINVAL if file is not a file, EISDIR if
      * destiantion is a directory, otherwise the commands return value.
      **/
-    static int copy( const Pathname & file, const Pathname & dest );
+    int copy( const Pathname & file, const Pathname & dest );
 
     /**
      * Like '::symlink'. Creates a symbolic link named newpath which contains
@@ -310,7 +522,7 @@ class PathInfo {
      *
      * @return 0 on success, errno on failure.
      **/
-    static int symlink( const Pathname & oldpath, const Pathname & newpath );
+    int symlink( const Pathname & oldpath, const Pathname & newpath );
 
     /**
      * Like '::link'. Creates a hard link named newpath to an existing file
@@ -318,7 +530,7 @@ class PathInfo {
      *
      * @return 0 on success, errno on failure.
      **/
-    static int hardlink( const Pathname & oldpath, const Pathname & newpath );
+    int hardlink( const Pathname & oldpath, const Pathname & newpath );
 
     /**
      * Like 'cp file dest'. Copy file to dest dir.
@@ -326,48 +538,43 @@ class PathInfo {
      * @return 0 on success, EINVAL if file is not a file, ENOTDIR if dest
      * is no directory, otherwise the commands return value.
      **/
-    static int copy_file2dir( const Pathname & file, const Pathname & dest );
+    int copy_file2dir( const Pathname & file, const Pathname & dest );
+    //@}
 
+    ///////////////////////////////////////////////////////////////////
+    /** \name Digest computaion.
+     * \todo check cooperation with zypp::Digest
+    */
+    //@{
     /**
      * Compute a files md5sum.
      *
      * @return the files md5sum on success, otherwise an empty string..
      **/
-    static std::string md5sum( const Pathname & file );
+    std::string md5sum( const Pathname & file );
 
     /**
      * Compute a files sha1sum.
      *
      * @return the files sha1sum on success, otherwise an empty string..
      **/
-    static std::string sha1sum( const Pathname & file );
+    std::string sha1sum( const Pathname & file );
+    //@}
 
     ///////////////////////////////////////////////////////////////////
-    //
-    ///////////////////////////////////////////////////////////////////
-
-    /**
-     * Erase whatever happens to be located at path (file or directory).
-     *
-     * @return 0 on success.
-     **/
-    static int erase( const Pathname & path );
-
-    ///////////////////////////////////////////////////////////////////
-    // permissions
-    ///////////////////////////////////////////////////////////////////
-
+    /** \name Changing permissions. */
+    //@{
     /**
      * Like '::chmod'. The mode of the file given by path is changed.
      *
      * @return 0 on success, errno on failure
      **/
-    static int chmod( const Pathname & path, mode_t mode );
+    int chmod( const Pathname & path, mode_t mode );
+    //@}
 
     ///////////////////////////////////////////////////////////////////
-    // magic
-    ///////////////////////////////////////////////////////////////////
-
+    /** \name Misc. */
+    //@{
     /**
      * Test whether a file is compressed (gzip/bzip2).
      *
@@ -375,115 +582,26 @@ class PathInfo {
      **/
     enum ZIP_TYPE { ZT_NONE, ZT_GZ, ZT_BZ2 };
 
-    static ZIP_TYPE zipType( const Pathname & file );
-};
-
-///////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : PathInfo::stat_mode
-/**
- * @short Wrapper class for mode_t values as derived from ::stat
- **/
-class PathInfo::stat_mode {
-  friend std::ostream & operator<<( std::ostream & str, const stat_mode & obj );
-  private:
-    mode_t _mode;
-  public:
-    stat_mode( const mode_t & mode_r = 0 ) : _mode( mode_r ) {}
-  public:
-    // file type
-    file_type fileType() const;
-
-    bool   isFile()  const { return S_ISREG( _mode ); }
-    bool   isDir ()  const { return S_ISDIR( _mode ); }
-    bool   isLink()  const { return S_ISLNK( _mode ); }
-    bool   isChr()   const { return S_ISCHR( _mode ); }
-    bool   isBlk()   const { return S_ISBLK( _mode ); }
-    bool   isFifo()  const { return S_ISFIFO( _mode ); }
-    bool   isSock()  const { return S_ISSOCK( _mode ); }
-
-    // permission
-    bool   isRUsr()  const { return (_mode & S_IRUSR); }
-    bool   isWUsr()  const { return (_mode & S_IWUSR); }
-    bool   isXUsr()  const { return (_mode & S_IXUSR); }
-
-    bool   isR()     const { return isRUsr(); }
-    bool   isW()     const { return isWUsr(); }
-    bool   isX()     const { return isXUsr(); }
-
-    bool   isRGrp()  const { return (_mode & S_IRGRP); }
-    bool   isWGrp()  const { return (_mode & S_IWGRP); }
-    bool   isXGrp()  const { return (_mode & S_IXGRP); }
-
-    bool   isROth()  const { return (_mode & S_IROTH); }
-    bool   isWOth()  const { return (_mode & S_IWOTH); }
-    bool   isXOth()  const { return (_mode & S_IXOTH); }
-
-    bool   isUid()   const { return (_mode & S_ISUID); }
-    bool   isGid()   const { return (_mode & S_ISGID); }
-    bool   isVtx()   const { return (_mode & S_ISVTX); }
-
-    mode_t uperm()   const { return (_mode & S_IRWXU); }
-    mode_t gperm()   const { return (_mode & S_IRWXG); }
-    mode_t operm()   const { return (_mode & S_IRWXO); }
-    mode_t perm()    const { return (_mode & (S_IRWXU|S_IRWXG|S_IRWXO|S_ISUID|S_ISGID|S_ISVTX)); }
-
-    bool   isPerm ( mode_t m ) const { return (m == perm()); }
-    bool   hasPerm( mode_t m ) const { return (m == (m & perm())); }
-
-    mode_t st_mode() const { return _mode; }
-};
-
-///////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : PathInfo::devino_cache
-/**
- * @short Simple cache remembering device/inode to detect hardlinks.
- * <pre>
- *     PathInfo::devino_cache trace;
- *     for ( all files ) {
- *       if ( trace.insert( file.device, file.inode ) ) {
- *         // 1st occurance of file
- *       }
- *         // else: hardlink; already counted this device/inode
- *       }
- *     }
- * </pre>
- **/
-class PathInfo::devino_cache {
-
-  private:
-
-    std::map<dev_t,std::set<ino_t> > _devino;
-
-  public:
-    /**
-     * Constructor
-     **/
-    devino_cache() {}
+    ZIP_TYPE zipType( const Pathname & file );
 
     /**
-     * Clear cache
+     * Erase whatever happens to be located at path (file or directory).
+     *
+     * @return 0 on success.
+     *
+     * \todo check cooperation with zypp::TmpFile and zypp::TmpDir
      **/
-    void clear() { _devino.clear(); }
+    int erase( const Pathname & path );
+    //@}
 
-    /**
-     * Remember dev/ino. Return <code>true</code> if it's inserted the first
-     * time, <code>false</code> if alredy present in cache (a hardlink to a
-     * previously remembered file.
-     **/
-    bool insert( const dev_t & dev_r, const ino_t & ino_r ) {
-      return _devino[dev_r].insert( ino_r ).second;
-    }
-};
+    /////////////////////////////////////////////////////////////////
+  } // namespace filesystem
+  ///////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////
+  /** Dragged into namespace zypp. */
+  using filesystem::PathInfo;
 
-///////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////
 } // namespace zypp
-
+///////////////////////////////////////////////////////////////////
 #endif // ZYPP_PATHINFO_H
