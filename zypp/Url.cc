@@ -103,17 +103,18 @@ namespace zypp
       addUrlByScheme("ldap", ref);
       addUrlByScheme("ldaps", ref);
 
-      // FIXME: ok?
       ref.reset( new UrlBase());
+      // don't show empty authority
       ref->setViewOptions( ref->getViewOptions() -
                            zypp::url::ViewOption::EMPTY_AUTHORITY);
-      ref->config("rx_username",      "");
-      ref->config("rx_password",      "");
+      ref->config("rx_username",      "");  // disallow username
+      ref->config("rx_password",      "");  // disallow password
+      // FIXME: hmm... also host+port?
       addUrlByScheme("nfs",    ref);
 
-      ref->config("safe_pathname",    "@");
-      ref->config("rx_hostname",      "");
-      ref->config("rx_port",          "");
+      ref->config("safe_pathname",    "@"); // don't encode @ in path
+      ref->config("rx_hostname",      "");  // disallow hostname
+      ref->config("rx_port",          "");  // disallow port
       addUrlByScheme("mailto", ref);
     }
 
@@ -546,8 +547,9 @@ namespace zypp
 
   // -----------------------------------------------------------------
   std::ostream & operator<<( std::ostream & str, const Url & url )
-  { return str << url.toString(); }
-
+  {
+    return str << url.toString();
+  }
 
 
   ////////////////////////////////////////////////////////////////////
