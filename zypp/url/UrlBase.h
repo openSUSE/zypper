@@ -193,6 +193,13 @@ namespace zypp
 
       /**
        * FIXME:
+       */
+      virtual bool
+      isValid() const;
+
+
+      /**
+       * FIXME:
        * TODO: hide pass, ...
        */
       virtual std::string

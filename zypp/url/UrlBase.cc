@@ -279,6 +279,14 @@ namespace zypp
 
 
     // ---------------------------------------------------------------
+    bool
+    UrlBase::isValid() const
+    {
+      return !getScheme().empty();
+    }
+
+
+    // ---------------------------------------------------------------
     std::string
     UrlBase::toString() const
     {

@@ -90,6 +90,10 @@ namespace zypp
     bool
     isValidScheme(const std::string &scheme) const;
 
+    bool
+    isValid() const;
+
+
     // -----------------
     std::string
     toString() const;
