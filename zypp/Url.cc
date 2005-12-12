@@ -535,6 +535,11 @@ namespace zypp
     m_impl->setQueryStringMap(pmap);
   }
 
+  // -----------------------------------------------------------------
+  std::ostream & operator<<( std::ostream & str, const Url & url )
+  { return str << url.toString(); }
+
+
 
   ////////////////////////////////////////////////////////////////////
 } // namespace zypp

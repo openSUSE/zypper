@@ -200,6 +200,7 @@ namespace zypp
     url::UrlRef m_impl;
   };
 
+  std::ostream & operator<<( std::ostream & str, const Url & url );
 
   ////////////////////////////////////////////////////////////////////
 } // namespace zypp
