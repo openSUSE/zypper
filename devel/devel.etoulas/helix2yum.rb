@@ -69,14 +69,14 @@ class Package
     @name      = pkg.elements['name'] == nil ? raise( 'Missing package-name in Helix sourcefile.' ) : pkg.elements['name'].text
     @type      = 'rpm'
     @arch      = 'i386'
-    @epoch     = pkg.elements['history/update/epoch']   == nil ? '0' : pkg.elements['history/update/epoch'].text
-    @ver       = pkg.elements['history/update/version'] == nil ? '1.0' : pkg.elements['history/update/version'].text     # Version
-    @rel       = pkg.elements['history/update/release'] == nil ? '1' : pkg.elements['history/update/release'].text       # Release
-    @chksum    = pkg.elements['history/update/md5sum']  == nil ? '0' : pkg.elements['history/update/md5sum'].text        # Checksum
+    @epoch     = validate_input( pkg, 'history/update/epoch',   '0'   )     # Epoch
+    @ver       = validate_input( pkg, 'history/update/version', '1.0' )     # Version
+    @rel       = validate_input( pkg, 'history/update/release', '1'   )     # Release
+    @chksum    = validate_input( pkg, 'history/update/md5sum',  '0'   )     # Checksum
     @chktype   = 'md5sum'   # Checksum type; not needed for now; helix uses md5, yum uses sha-1
     @pkgid     = 'NO'       # YES if chksum exists
-    @summary   = pkg.elements['summary']     == nil ? 'n/a' : pkg.elements['summary'].text
-    @descr     = pkg.elements['description'] == nil ? 'n/a' : pkg.elements['description'].text   # Package description
+    @summary   = validate_input( pkg, 'summary', 'n/a' )
+    @descr     = validate_input( pkg, 'description', 'n/a' )   # Package description
     # dependencies
     @provides  = Array.new
     @conflicts = Array.new
@@ -117,10 +117,15 @@ class Package
            \n#{@provides}#{@conflicts}#{@requires}"
   end
 
+  private
+  def validate_input( pkg, xpath, default_val )
+    pkg.elements[xpath] == nil || pkg.elements[xpath].text == nil ? default_val : pkg.elements[xpath].text
+  end
+
 end
 
 
-# global defaults
+# command-line options defaults
 show = false
 of = nil
 filename = nil
@@ -191,6 +196,7 @@ output.root.add_attribute( 'xmlns:rpm', 'http://linux.duke.edu/metadata/rpm' )
 output.root.add_attribute( 'packages', Package.count )
 
 
+# TODO
 # while !pkg_name.empty?
 #   pkg  = Element.new( 'package' )
 #    pkg.add_attribute( 'type', 'rpm' )
