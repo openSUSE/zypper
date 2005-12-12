@@ -73,7 +73,7 @@ namespace zypp
    *  44     {
    *  45       try
    *  46         {
-   *  47           ZYPP_THROW( Exception, "Something bad happened." );
+   *  47           ZYPP_THROW_MSG( Exception, "Something bad happened." );
    *  48         }
    *  49       catch ( Exception & excpt )
    *  50         {
@@ -128,15 +128,11 @@ namespace zypp
     void relocate( const CodeLocation & where_r ) const
     { _where = where_r; }
 
-    /** Return the provided message string. */
+    /** Return the message string provided to the ctor. */
     const std::string & msg() const
     { return _msg; }
 
-    /** Return message string. */
-    virtual const char * what() const throw()
-    { return _msg.c_str(); }
-
-    /** Exception as string */
+    /** A proper error message. */
     std::string asString() const;
 
   protected:
@@ -153,13 +149,19 @@ namespace zypp
     static std::string strErrno( int errno_r, const std::string & msg_r );
 
   public:
-    /** Drop a logline. */
+    /** Drop a logline on throw, catch or rethrow.
+     * Used by \ref ZYPP_THROW macros.
+    */
     static void log( const Exception & excpt_r, const CodeLocation & where_r,
                      const char *const prefix_r );
 
   private:
     mutable CodeLocation _where;
     std::string _msg;
+
+    /** Return message string. */
+    virtual const char * what() const throw()
+    { return _msg.c_str(); }
 
     /** Called by <tt>std::ostream & operator\<\<</tt> */
     std::ostream & dumpError( std::ostream & str ) const;

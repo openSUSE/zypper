@@ -5,6 +5,7 @@
 #include <list>
 #include <string>
 #include <zypp/base/Logger.h>
+#include <zypp/base/Exception.h>
 #include <zypp/base/String.h>
 #include <zypp/base/IOStream.h>
 #include <zypp/base/PtrTypes.h>

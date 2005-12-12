@@ -42,7 +42,6 @@ namespace zypp
     typedef TraitsType::KindType     Kind;
     typedef TraitsType::PtrType      Ptr;
     typedef TraitsType::constPtrType constPtr;
-    friend std::ostream & operator<<( std::ostream & str, const Resolvable & obj );
 
   public:
     /**  */
@@ -115,12 +114,6 @@ namespace zypp
   template<class _Res>
     inline typename ResTraits<_Res>::constPtrType asKind( const Resolvable::constPtr & p )
     { return dynamic_pointer_cast<const _Res>(p); }
-
-  ///////////////////////////////////////////////////////////////////
-
-  /** \relates Resolvable Stream output via Resolvable::dumpOn */
-  inline std::ostream & operator<<( std::ostream & str, const Resolvable & obj )
-  { return obj.dumpOn( str ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

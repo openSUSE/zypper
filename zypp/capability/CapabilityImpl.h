@@ -60,6 +60,10 @@ namespace zypp
       virtual bool matches( Resolvable::constPtr resolvable_r,
                             solver::Context_constPtr solverContext_r ) const = 0;
 
+    protected:
+      /** Helper for stream output. */
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+
     private:
       /** Kind of Resolvable \c this refers to. */
       Resolvable::Kind _refers;
@@ -91,11 +95,6 @@ namespace zypp
         return lhs->capImplOrderLess( rhs );
       }
     };
-
-    ///////////////////////////////////////////////////////////////////
-
-    /** \relates CapabilityImpl Stream output */
-    extern std::ostream & operator<<( std::ostream & str, const CapabilityImpl & obj );
 
     /////////////////////////////////////////////////////////////////
   } // namespace capability

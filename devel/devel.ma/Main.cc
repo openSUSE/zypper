@@ -1,31 +1,38 @@
 #include <iostream>
-#include "zypp/base/Logger.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Exception.h"
-#include "zypp/base/Fd.h"
-#include "zypp/Pathname.h"
+#include <ctime>
+
+#include <fstream>
+#include <list>
+#include <string>
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/base/PtrTypes.h>
+
+#include <zypp/CapFactory.h>
+#include <zypp/CapSet.h>
 
 using namespace std;
 using namespace zypp;
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-
+namespace zypp
+{
+  struct foo : public base::ReferenceCounted
+  {
+  };
+}
 
 /******************************************************************
 **
-**
 **      FUNCTION NAME : main
 **      FUNCTION TYPE : int
-**
-**      DESCRIPTION :
 */
 int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  base::Fd( "packages", O_RDONLY );
+  foo f;
+  SEC << f << endl;
 
   INT << "===[END]============================================" << endl;
   return 0;

@@ -42,16 +42,16 @@ namespace zypp
       return asString() < rhs->asString();
     }
 
-    /******************************************************************
-     **
-     **	FUNCTION NAME : operator<<
-     **	FUNCTION TYPE : std::ostream &
-    */
-    std::ostream & operator<<( std::ostream & str, const CapabilityImpl & obj )
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : CapabilityImpl::capImplOrderLess
+    //	METHOD TYPE : bool
+    //
+    std::ostream & CapabilityImpl::dumpOn( std::ostream & str ) const
     {
-      return str << '[' << obj.refers() << "] "
-      << '(' << obj.kind() << ") "
-      << obj.asString();
+      return str << '[' << refers() << "] "
+                 << '(' << kind() << ") "
+                 << asString();
     }
 
     /////////////////////////////////////////////////////////////////

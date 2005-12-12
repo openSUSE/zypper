@@ -10,6 +10,7 @@
  *
 */
 #include <iostream>
+#include <sstream>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
@@ -49,14 +50,12 @@ namespace zypp
   Exception::~Exception() throw()
   {}
 
-#if 0
   std::string Exception::asString() const
   {
-    std::string ret( _where.asString() );
-    ret += ": ";
-    return ret += _msg;
+    std::ostringstream str;
+    dumpOn( str );
+    return str.str();
   }
-#endif
 
   std::ostream & Exception::dumpOn( std::ostream & str ) const
   {
