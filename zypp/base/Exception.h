@@ -73,7 +73,7 @@ namespace zypp
    *  44     {
    *  45       try
    *  46         {
-   *  47           ZYPP_THROW( "Something bad happened." );
+   *  47           ZYPP_THROW( Exception, "Something bad happened." );
    *  48         }
    *  49       catch ( Exception & excpt )
    *  50         {
@@ -107,6 +107,11 @@ namespace zypp
   public:
     typedef exception_detail::CodeLocation CodeLocation;
 
+    /** Default ctor.
+     * Use \ref ZYPP_THROW to throw exceptions.
+    */
+    Exception();
+
     /** Ctor taking a message.
      * Use \ref ZYPP_THROW to throw exceptions.
     */
@@ -123,7 +128,7 @@ namespace zypp
     void relocate( const CodeLocation & where_r ) const
     { _where = where_r; }
 
-    /** Return message string. */
+    /** Return the provided message string. */
     const std::string & msg() const
     { return _msg; }
 
@@ -213,6 +218,10 @@ namespace zypp
 
   /** Throw Exception built from a message string. */
 #define ZYPP_THROW(EXCPTTYPE, MSG)\
+  ZYPP_DOTHROW( EXCPTTYPE( MSG ) )
+
+  /** Throw Exception built from a message string. */
+#define ZYPP_THROW_MSG(EXCPTTYPE, MSG)\
   ZYPP_DOTHROW( EXCPTTYPE( MSG ) )
 
   /** Throw Exception built from errno. */

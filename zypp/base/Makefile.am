@@ -16,9 +16,9 @@ include_HEADERS =	\
 	PtrTypes.h	\
 	ReferenceCounted.h	\
 	String.h	\
-	StringVal.h		\
-				\
-				\
+	StringVal.h	\
+		\
+		\
 	ExternalDataSource.h
 
 
@@ -31,10 +31,11 @@ lib@PACKAGE@_base_la_SOURCES =	\
 	Exception.cc	\
 	Fd.cc		\
 	IOStream.cc	\
+	ReferenceCounted.cc	\
 	String.cc	\
 	StringVal.cc	\
-			\
-			\
+		\
+		\
 	ExternalDataSource.cc
 
 lib@PACKAGE@_base_la_LIBADD = -lboost_regex

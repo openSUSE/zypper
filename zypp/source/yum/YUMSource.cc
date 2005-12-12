@@ -19,6 +19,7 @@
 #include "zypp/source/yum/YUMGroupImpl.h"
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/Exception.h"
 #include "zypp/CapFactory.h"
 
 #include "zypp/parser/yum/YUMParser.h"

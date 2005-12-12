@@ -39,6 +39,9 @@ namespace zypp
   } // namespace exception_detail
   ///////////////////////////////////////////////////////////////////
 
+  Exception::Exception()
+  {}
+
   Exception::Exception( const std::string & msg_r )
   : _msg( msg_r )
   {}
@@ -46,12 +49,27 @@ namespace zypp
   Exception::~Exception() throw()
   {}
 
+#if 0
   std::string Exception::asString() const
   {
     std::string ret( _where.asString() );
     ret += ": ";
     return ret += _msg;
   }
+#endif
+
+  std::ostream & Exception::dumpOn( std::ostream & str ) const
+  {
+    return str << _msg;
+  }
+
+  std::ostream & Exception::dumpError( std::ostream & str ) const
+  {
+    return dumpOn( str << _where << ": " );
+  }
+
+  std::ostream & operator<<( std::ostream & str, const Exception & obj )
+  { return obj.dumpError( str ); }
 
   std::string Exception::strErrno( int errno_r )
   {
@@ -70,19 +88,6 @@ namespace zypp
   {
     INT << where_r << " " << prefix_r << " " << excpt_r << endl;
   }
-
-  std::ostream & Exception::dumpOn( std::ostream & str ) const
-  {
-    return str << asString(); // fix it!
-  }
-
-  std::ostream & Exception::dumpError( std::ostream & str ) const
-  {
-    return dumpOn( str ); // fix it! prepend location info
-  }
-
-  std::ostream & operator<<( std::ostream & str, const Exception & obj )
-  { return obj.dumpError( str ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

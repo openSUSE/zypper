@@ -14,7 +14,6 @@
 
 #include <iosfwd>
 
-#include "zypp/base/Exception.h"
 #include "zypp/base/PtrTypes.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -29,32 +28,28 @@ namespace zypp
     //	CLASS NAME : ReferenceCounted
     //
     /** Base class for reference counted objects.
-     * \todo Define exceptions.
      * \todo Make counter thread safe.
-     * \todo get rid of base namesapace.
     */
     class ReferenceCounted
     {
+      /** Stream output via dumpOn. */
+      friend std::ostream & operator<<( std::ostream & str, const ReferenceCounted & obj );
+
     public:
       /** Default ctor.
        * Initial reference count is zero.
       */
-      ReferenceCounted()
-      : _counter( 0 )
-      {}
+      ReferenceCounted();
 
       /** Copy ctor.
        * Initial reference count is zero.
       */
-      ReferenceCounted( const ReferenceCounted & rhs )
-      : _counter( 0 )
-      {}
+      ReferenceCounted( const ReferenceCounted & rhs );
 
       /** Dtor.
-       * \throw INTERNAL if reference count is not zero.
+       * \throw std::out_of_range if reference count is not zero.
       */
-      virtual ~ReferenceCounted()
-      { if ( _counter ) ZYPP_THROW( Exception, "~ReferenceCounted: nonzero reference count" ); }
+      virtual ~ReferenceCounted();
 
       /** Assignment.
        * Reference count remains untouched.
@@ -73,12 +68,12 @@ namespace zypp
 
       /** Release a reference.
        * Deletes the object if reference count gets zero.
-       * \throw INTERNAL if reference count is zero.
+       * \throw std::out_of_range if reference count is zero.
       */
       void unref() const
       {
         if ( !_counter )
-          ZYPP_THROW( Exception, "ReferenceCounted::unref: zero reference count" );
+          unrefException(); // will throw!
         if ( --_counter == 0 )
           delete this;
       }
@@ -95,17 +90,30 @@ namespace zypp
       static void release( const ReferenceCounted * ptr_r )
       { if( ptr_r ) ptr_r->unref(); }
 
+    protected:
+      /** Overload to realize std::ostream & operator\<\<. */
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+
     private:
       /** The reference counter. */
       mutable unsigned _counter;
+
+      /** Throws Exception on unref. */
+      void unrefException() const;
     };
     ///////////////////////////////////////////////////////////////////
 
+    /** \relates ReferenceCounted intrusive_ptr hook to add_ref. */
     inline void intrusive_ptr_add_ref( const ReferenceCounted * ptr_r )
     { ReferenceCounted::add_ref( ptr_r ); }
 
+    /** \relates ReferenceCounted intrusive_ptr hook to release. */
     inline void intrusive_ptr_release( const ReferenceCounted * ptr_r )
     { ReferenceCounted::release( ptr_r ); }
+
+    /** \relates ReferenceCounted Stream output. */
+    inline std::ostream & operator<<( std::ostream & str, const ReferenceCounted & obj )
+    { return obj.dumpOn( str ); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace base
