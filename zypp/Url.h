@@ -65,7 +65,8 @@ namespace zypp
   class Url
   {
   public:
-    typedef zypp::url::EEncoding  EEncoding;
+    typedef zypp::url::EEncoding    EEncoding;
+    typedef zypp::url::ViewOptions  ViewOptions;
 
     Url();
     Url(const Url &url);
@@ -90,9 +91,11 @@ namespace zypp
     isValidScheme(const std::string &scheme) const;
 
     // -----------------
-    // TODO: hide pass, ...
     std::string
     toString() const;
+
+    std::string
+    toString(const ViewOptions &opts) const;
 
 
     // -----------------

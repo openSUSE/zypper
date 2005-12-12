@@ -105,7 +105,8 @@ namespace zypp
 
       // FIXME: ok?
       ref.reset( new UrlBase());
-      ref->config("empty_authority",  "n");
+      ref->setViewOptions( ref->getViewOptions() -
+                           zypp::url::ViewOption::EMPTY_AUTHORITY);
       ref->config("rx_username",      "");
       ref->config("rx_password",      "");
       addUrlByScheme("nfs",    ref);
@@ -279,6 +280,14 @@ namespace zypp
   Url::toString() const
   {
     return m_impl->toString();
+  }
+
+
+  // -----------------------------------------------------------------
+  std::string
+  Url::toString(const ViewOptions &opts) const
+  {
+    return m_impl->toString(opts);
   }
 
 

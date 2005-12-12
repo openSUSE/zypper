@@ -33,6 +33,50 @@ namespace zypp
 
 
     // ---------------------------------------------------------------
+    struct ViewOption
+    {
+      static const ViewOption WITH_SCHEME;
+      static const ViewOption WITH_USERNAME;
+      static const ViewOption WITH_PASSWORD;
+      static const ViewOption WITH_HOST;
+      static const ViewOption WITH_PORT;
+      static const ViewOption WITH_PATH_NAME;
+      static const ViewOption WITH_PATH_PARAMS;
+      static const ViewOption WITH_QUERY_STR;
+      static const ViewOption WITH_FRAGMENT;
+      static const ViewOption EMPTY_AUTHORITY;
+      static const ViewOption EMPTY_PATH_NAME;
+      static const ViewOption EMPTY_PATH_PARAMS;
+      static const ViewOption EMPTY_QUERY_STR;
+      static const ViewOption EMPTY_FRAGMENT;
+      static const ViewOption DEFAULTS;
+
+      ViewOption(): opt(DEFAULTS.opt)
+      {}
+
+      friend inline ViewOption
+      operator + (const ViewOption &l, const ViewOption &r)
+      { return ViewOption(l.opt |  r.opt); }
+
+      friend inline ViewOption
+      operator - (const ViewOption &l, const ViewOption &r)
+      { return ViewOption(l.opt & ~r.opt); }
+
+      inline bool
+      has(const ViewOption &o) const
+      { return o.opt & opt; }
+
+    private:
+      ViewOption(int o): opt(o) {}
+      int opt;
+    };
+
+
+    // ---------------------------------------------------------------
+    typedef ViewOption ViewOptions;
+
+
+    // ---------------------------------------------------------------
     /**
      * FIXME:
      */
@@ -56,6 +100,7 @@ namespace zypp
        * FIXME:
        */
       UrlConfig       config;
+      ViewOptions     vopts;
 
       std::string     scheme;
       std::string     user;
@@ -152,6 +197,9 @@ namespace zypp
        */
       virtual std::string
       toString() const;
+
+      virtual std::string
+      toString(const zypp::url::ViewOptions &opts) const;
 
 
       // -----------------
@@ -258,6 +306,9 @@ namespace zypp
 
 
       // -----------------
+      virtual void
+      configure();
+
       std::string
       config(const std::string &opt) const;
 
@@ -266,8 +317,11 @@ namespace zypp
       void
       config(const std::string &opt, const std::string &val);
 
-      virtual void
-      configure();
+      ViewOptions
+      getViewOptions() const;
+
+      void
+      setViewOptions(const ViewOptions &vopts);
 
     private:
       UrlData        *m_data;

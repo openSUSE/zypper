@@ -28,6 +28,33 @@ namespace zypp
 
 
     // ---------------------------------------------------------------
+    const ViewOptions ViewOptions::WITH_SCHEME       = 0x0001;
+    const ViewOptions ViewOptions::WITH_USERNAME     = 0x0002;
+    const ViewOptions ViewOptions::WITH_PASSWORD     = 0x0004;
+    const ViewOptions ViewOptions::WITH_HOST         = 0x0008;
+    const ViewOptions ViewOptions::WITH_PORT         = 0x0010;
+    const ViewOptions ViewOptions::WITH_PATH_NAME    = 0x0020;
+    const ViewOptions ViewOptions::WITH_PATH_PARAMS  = 0x0040;
+    const ViewOptions ViewOptions::WITH_QUERY_STR    = 0x0080;
+    const ViewOptions ViewOptions::WITH_FRAGMENT     = 0x0100;
+    const ViewOptions ViewOptions::EMPTY_AUTHORITY   = 0x0200;
+    const ViewOptions ViewOptions::EMPTY_PATH_NAME   = 0x0400;
+    const ViewOptions ViewOptions::EMPTY_PATH_PARAMS = 0x0800;
+    const ViewOptions ViewOptions::EMPTY_QUERY_STR   = 0x1000;
+    const ViewOptions ViewOptions::EMPTY_FRAGMENT    = 0x2000;
+    const ViewOptions ViewOptions::DEFAULTS          = //0x07bb;
+                      ViewOptions::WITH_SCHEME       +
+                      ViewOptions::WITH_USERNAME     +
+                      ViewOptions::WITH_HOST         +
+                      ViewOptions::WITH_PORT         +
+                      ViewOptions::WITH_PATH_NAME    +
+                      ViewOptions::WITH_QUERY_STR    +
+                      ViewOptions::WITH_FRAGMENT     +
+                      ViewOptions::EMPTY_AUTHORITY   +
+                      ViewOptions::EMPTY_PATH_NAME;
+
+
+    // ---------------------------------------------------------------
     /**
      * authority = //[user [:password] @ ] host [:port]
      *
@@ -146,14 +173,6 @@ namespace zypp
       config("rx_pathparams",   ".*");
       config("rx_querystr",     ".*");
       config("rx_fragment",     ".*");
-
-      config("show_password",   "n");
-
-      config("empty_authority", "y");
-      config("empty_pathname",  "y");
-      config("empty_pathparms", "n");
-      config("empty_querystr",  "n");
-      config("empty_fragment",  "n");
     }
 
 
@@ -178,12 +197,30 @@ namespace zypp
 
 
     // ---------------------------------------------------------------
+    ViewOptions
+    UrlBase::getViewOptions() const
+    {
+      return m_data->vopts;
+    }
+
+
+    // ---------------------------------------------------------------
+    void
+    UrlBase::setViewOptions(const ViewOptions &vopts)
+    {
+        m_data->vopts = vopts;
+    }
+
+
+    // ---------------------------------------------------------------
     void
     UrlBase::clear()
     {
-      url::UrlConfig config(m_data->config);
+      zypp::url::UrlConfig   config(m_data->config);
+      zypp::url::ViewOptions vopts(m_data->vopts);
       *m_data = UrlData();
       m_data->config = config;
+      m_data->vopts  = vopts;
     }
 
 
@@ -245,95 +282,127 @@ namespace zypp
     std::string
     UrlBase::toString() const
     {
+      return toString(getViewOptions());
+    }
+
+
+    // ---------------------------------------------------------------
+    std::string
+    UrlBase::toString(const zypp::url::ViewOptions &opts) const
+    {
       std::string url;
       UrlData     tmp;
 
-      tmp.scheme = getScheme();
-      if( !tmp.scheme.empty())
+      if( opts.has(ViewOptions::WITH_SCHEME))
       {
-        url += tmp.scheme + ":";
-
-        tmp.host = getHost(zypp::url::E_ENCODED);
-        if( !tmp.host.empty())
+        tmp.scheme = getScheme();
+        if( !tmp.scheme.empty())
         {
-          url += "//";
+          url += tmp.scheme + ":";
 
-          tmp.user = getUsername(zypp::url::E_ENCODED);
-          if( !tmp.user.empty())
+          if( opts.has(ViewOptions::WITH_HOST))
           {
-            url += tmp.user;
-
-            tmp.pass = getPassword(zypp::url::E_ENCODED);
-            if( !tmp.pass.empty())
+            tmp.host = getHost(zypp::url::E_ENCODED);
+            if( !tmp.host.empty())
             {
-              if(config("show_password") == "y")
+              url += "//";
+
+              if( opts.has(ViewOptions::WITH_USERNAME))
               {
-                url += ":" + tmp.pass;
+                tmp.user = getUsername(zypp::url::E_ENCODED);
+                if( !tmp.user.empty())
+                {
+                  url += tmp.user;
+
+                  if( opts.has(ViewOptions::WITH_PASSWORD))
+                  {
+                    tmp.pass = getPassword(zypp::url::E_ENCODED);
+                    if( !tmp.pass.empty())
+                    {
+                      url += ":" + tmp.pass;
+                    }
+                  }
+                  url += "@";
+                }
+              }
+
+              url += tmp.host;
+
+              if( opts.has(ViewOptions::WITH_PORT))
+              {
+                tmp.port = getPort();
+                if( !tmp.port.empty())
+                {
+                  url += ":" + tmp.port;
+                }
               }
             }
-            url += "@";
           }
-
-          url += tmp.host;
-
-          tmp.port = getPort();
-          if( !tmp.port.empty())
+          else if( opts.has(ViewOptions::EMPTY_AUTHORITY))
           {
-            url += ":" + tmp.port;
+            url += "//";
           }
-        }
-        else if(config("empty_authority") == "y")
-        {
-          url += "//";
         }
       }
 
-      tmp.pathname = getPathName(zypp::url::E_ENCODED);
-      if( !tmp.pathname.empty())
+      if( opts.has(ViewOptions::WITH_PATH_NAME))
       {
-        if( !tmp.host.empty() && tmp.pathname.at(0) != '/')
+        tmp.pathname = getPathName(zypp::url::E_ENCODED);
+        if( !tmp.pathname.empty())
+        {
+          if( !tmp.host.empty() && tmp.pathname.at(0) != '/')
+          {
+            url += "/";
+          }
+          url += tmp.pathname;
+
+          if( opts.has(ViewOptions::WITH_PATH_PARAMS))
+          {
+            tmp.pathparams = getPathParams();
+            if( !tmp.pathparams.empty())
+            {
+              url += ";" + tmp.pathparams;
+            }
+            else if( opts.has(ViewOptions::EMPTY_PATH_PARAMS))
+            {
+              url += ";";
+            }
+          }
+        }
+        else if( opts.has(ViewOptions::EMPTY_PATH_NAME))
         {
           url += "/";
-        }
-        url += tmp.pathname;
-
-        tmp.pathparams = getPathParams();
-        if( !tmp.pathparams.empty())
-        {
-          url += ";" + tmp.pathparams;
-        }
-        else if(config("empty_pathparams") == "y")
-        {
-          url += ";";
-        }
-      }
-      else if(config("empty_pathname") == "y")
-      {
-        url += "/";
-        if(config("empty_pathparams") == "y")
-        {
-          url += ";";
+          if( opts.has(ViewOptions::EMPTY_PATH_PARAMS))
+          {
+            url += ";";
+          }
         }
       }
 
-      tmp.querystr = getQueryString();
-      if( !tmp.querystr.empty())
+      if( opts.has(ViewOptions::WITH_QUERY_STR))
       {
-        url += "?" + tmp.querystr;
-      }
-      else if(config("empty_querystr") == "y")
-      {
-        url += "?";
+        tmp.querystr = getQueryString();
+        if( !tmp.querystr.empty())
+        {
+          url += "?" + tmp.querystr;
+        }
+        else if( opts.has(ViewOptions::EMPTY_QUERY_STR))
+        {
+          url += "?";
+        }
       }
 
-      tmp.fragment = getFragment(zypp::url::E_ENCODED);
-      if( !tmp.fragment.empty())
+      if( opts.has(ViewOptions::WITH_FRAGMENT))
       {
-        url += "#" + tmp.fragment;
-      }
-      else if(config("empty_fragment") == "y")
-      {
-        url += "#";
+        tmp.fragment = getFragment(zypp::url::E_ENCODED);
+        if( !tmp.fragment.empty())
+        {
+          url += "#" + tmp.fragment;
+        }
+        else if( opts.has(ViewOptions::EMPTY_FRAGMENT))
+        {
+          url += "#";
+        }
       }
 
       return url;
