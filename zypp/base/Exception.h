@@ -103,6 +103,7 @@ namespace zypp
   class Exception : public std::exception
   {
     friend std::ostream & operator<<( std::ostream & str, const Exception & obj );
+
   public:
     typedef exception_detail::CodeLocation CodeLocation;
 
@@ -133,6 +134,13 @@ namespace zypp
     /** Exception as string */
     std::string asString() const;
 
+  protected:
+
+    /** Overload this to print a proper error message.
+     * CodeLocation is prepended automatically.
+    */
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+
   public:
      /** Make a string from \a errno_r. */
     static std::string strErrno( int errno_r );
@@ -147,6 +155,9 @@ namespace zypp
   private:
     mutable CodeLocation _where;
     std::string _msg;
+
+    /** Called by <tt>std::ostream & operator\<\<</tt> */
+    std::ostream & dumpError( std::ostream & str ) const;
   };
   ///////////////////////////////////////////////////////////////////
 

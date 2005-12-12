@@ -71,8 +71,18 @@ namespace zypp
     INT << where_r << " " << prefix_r << " " << excpt_r << endl;
   }
 
+  std::ostream & Exception::dumpOn( std::ostream & str ) const
+  {
+    return str << asString(); // fix it!
+  }
+
+  std::ostream & Exception::dumpError( std::ostream & str ) const
+  {
+    return dumpOn( str ); // fix it! prepend location info
+  }
+
   std::ostream & operator<<( std::ostream & str, const Exception & obj )
-  { return str << obj.asString(); }
+  { return obj.dumpError( str ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
