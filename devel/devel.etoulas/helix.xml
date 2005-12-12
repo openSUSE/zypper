@@ -1,7 +1,6 @@
 <channel><subchannel>
 <package>
   <name>G</name>
-  <summary>A fake package</summary>
   <description>A fake package</description>
   <section>misc</section>
   <history>

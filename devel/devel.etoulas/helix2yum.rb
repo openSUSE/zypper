@@ -13,13 +13,13 @@ class Dependency
     @version = version
   end
   def to_s
-    "<name>=#{@name} <op>=#{@op} <version>=#{@version}\n"
+    "name=#{@name} op=#{@op} version=#{@version}\n"
   end
 end
 
 class Provides < Dependency
   @@count = 0
-  def initialize( name=nil, op=nil, version=nil )
+  def initialize( name, op, version )
     super
     @@count += 1
   end
@@ -33,7 +33,7 @@ end
 
 class Conflicts < Dependency
   @@count = 0
-  def initialize( name=nil, op=nil, version=nil )
+  def initialize( name, op, version )
     super
     @@count += 1
   end
@@ -47,7 +47,7 @@ end
 
 class Requires < Dependency
   @@count = 0
-  def initialize( name=nil, op=nil, version=nil )
+  def initialize( name, op, version )
     super
     @@count += 1
   end
@@ -64,22 +64,32 @@ class Package
 
   @@count = 0
 
-  def initialize( name )
-    @name      = name
+  def initialize( pkg )   # accepts a <package> section of Helix-XML
+    @@count   += 1
+    @name      = pkg.elements['name'] == nil ? raise( 'Missing package-name in Helix sourcefile.' ) : pkg.elements['name'].text
     @type      = 'rpm'
     @arch      = 'i386'
-    @epoch     = 0
-    @ver       = 1       # Version
-    @rel       = 1       # Release
-    @chksum    = 0       # Checksum
-    @chktype   = 'md5'   # Checksum type; not needed for now; helix uses md5, yum uses sha-1
-    @pkgid     = 'NO'    # YES if chksum exists
-    @summary   = 'Summary n/a'
-    @descr     = 'Description n/a'   # Package description
+    @epoch     = pkg.elements['history/update/epoch']   == nil ? '0' : pkg.elements['history/update/epoch'].text
+    @ver       = pkg.elements['history/update/version'] == nil ? '1.0' : pkg.elements['history/update/version'].text     # Version
+    @rel       = pkg.elements['history/update/release'] == nil ? '1' : pkg.elements['history/update/release'].text       # Release
+    @chksum    = pkg.elements['history/update/md5sum']  == nil ? '0' : pkg.elements['history/update/md5sum'].text        # Checksum
+    @chktype   = 'md5sum'   # Checksum type; not needed for now; helix uses md5, yum uses sha-1
+    @pkgid     = 'NO'       # YES if chksum exists
+    @summary   = pkg.elements['summary']     == nil ? 'n/a' : pkg.elements['summary'].text
+    @descr     = pkg.elements['description'] == nil ? 'n/a' : pkg.elements['description'].text   # Package description
+    # dependencies
     @provides  = Array.new
     @conflicts = Array.new
     @requires  = Array.new
-    @@count   += 1
+    XPath.each( pkg, 'provides/dep'  ) do |p|
+      add_provides(  p.attributes['name'], p.attributes['op'], p.attributes['version'] )
+    end
+    XPath.each( pkg, 'conflicts/dep' ) do |c|
+      add_conflicts( c.attributes['name'], c.attributes['op'], c.attributes['version'] )
+    end
+    XPath.each( pkg, 'requires/dep'  ) do |r|
+      add_requires(  r.attributes['name'], r.attributes['op'], r.attributes['version'] )
+    end
   end
 
   def Package.count
@@ -99,7 +109,12 @@ class Package
   end
 
   def to_s
-    "[Package]  <name>=#{@name}\n#{@provides}#{@conflicts}#{@requires}"
+    "[Package]  name=#{@name} \
+    epoch=#{@epoch} version=#{@ver} release=#{@rel} \
+    #{@chktype}=#{@chksum}
+           summary:     #{@summary}
+           description: #{@descr}\
+           \n#{@provides}#{@conflicts}#{@requires}"
   end
 
 end
@@ -160,34 +175,13 @@ output = Document.new
 packages  = Array.new
 
 
-# get all needed elements
+# get the first package
 current = XPath.first( input, '/channel/subchannel/package' )
+# and add it to  the packages-array - add every following package
 while current != nil
-  pkg = Package.new( current.elements['name'].text )
-
-  # get dependencies
-  XPath.each( current, 'provides/dep'  ) do |p|
-    pkg.add_provides(  p.attributes['name'], p.attributes['op'], p.attributes['version'] )
-  end
-  XPath.each( current, 'conflicts/dep' ) do |c|
-    pkg.add_conflicts( c.attributes['name'], c.attributes['op'], c.attributes['version'] )
-  end
-  XPath.each( current, 'requires/dep'  ) do |r|
-    pkg.add_requires(  r.attributes['name'], r.attributes['op'], r.attributes['version'] )
-  end
-
-  # add current package to packages-array
-  packages << pkg
-
+  packages << Package.new( current )
   current = current.next_element
 end
-
-puts packages
-
-#XPath.each( input, '//md5sum'   ) { |elem| md5sum.push   elem.text }
-#XPath.each( input, '//epoch'    ) { |elem| epoch.push    elem.text }
-#XPath.each( input, '//version'  ) { |elem| version.push  elem.text }
-#XPath.each( input, '//release'  ) { |elem| release.push  elem.text }
 
 
 output << XMLDecl.new
@@ -213,7 +207,7 @@ output.root.add_attribute( 'packages', Package.count )
 #   pkg << name
 #   pkg << arch
 #   pkg << ver
-# #  pkg << csum   
+# #  pkg << csum   # not needed at the moment; helix uses md5, yum uses sha-1
 #
 #   output.root << pkg
 # end
@@ -226,8 +220,8 @@ if not outfile.nil?
 else
   output.write( $stdout, 0 )
 end
-puts ';-)'
-
+puts packages
+puts Package.count.to_s + ' packages processed.'
 
 rescue => exc
   STDERR.puts "E: #{exc.message}"
