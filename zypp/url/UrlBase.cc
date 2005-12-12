@@ -564,6 +564,17 @@ namespace zypp
 
 
     // ---------------------------------------------------------------
+    std::string
+    UrlBase::getPathParam(const std::string &param, EEncoding eflag) const
+    {
+      zypp::url::ParamMap pmap( getPathParamsMap( eflag));
+      zypp::url::ParamMap::const_iterator i( pmap.find(param));
+
+      return i != pmap.end() ? i->second : std::string();
+    }
+
+
+    // ---------------------------------------------------------------
     zypp::url::ParamVec
     UrlBase::getQueryStringVec() const
     {
@@ -590,6 +601,17 @@ namespace zypp
         eflag
       );
       return pmap;
+    }
+
+
+    // ---------------------------------------------------------------
+    std::string
+    UrlBase::getQueryParam(const std::string &param, EEncoding eflag) const
+    {
+      zypp::url::ParamMap pmap( getQueryStringMap( eflag));
+      zypp::url::ParamMap::const_iterator i( pmap.find(param));
+
+      return i != pmap.end() ? i->second : std::string();
     }
 
 
@@ -854,6 +876,20 @@ namespace zypp
 
     // ---------------------------------------------------------------
     void
+    UrlBase::setPathParam(const std::string &param, const std::string &value)
+    {
+          std::string raw_param( zypp::url::decode(param));
+          std::string raw_value( zypp::url::decode(value));
+
+          zypp::url::ParamMap pmap( getPathParamsMap(zypp::url::E_DECODED));
+          pmap[raw_param] = raw_value;
+
+          setPathParamsMap(pmap);
+    }
+
+
+    // ---------------------------------------------------------------
+    void
     UrlBase::setQueryStringVec(const zypp::url::ParamVec &pvec)
     {
       setQueryString(
@@ -877,6 +913,19 @@ namespace zypp
           config("safe_querystr")
         )
       );
+    }
+
+    // ---------------------------------------------------------------
+    void
+    UrlBase::setQueryParam(const std::string &param, const std::string &value)
+    {
+          std::string raw_param( zypp::url::decode(param));
+          std::string raw_value( zypp::url::decode(value));
+
+          zypp::url::ParamMap pmap( getQueryStringMap(zypp::url::E_DECODED));
+          pmap[raw_param] = raw_value;
+
+          setQueryStringMap(pmap);
     }
 
 

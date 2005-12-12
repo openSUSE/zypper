@@ -7,7 +7,7 @@ SUBDIRS =
 
 ## ##################################################
 
-noinst_PROGRAMS = Arch Url1 Url2
+noinst_PROGRAMS = Arch Url1 Url2 Url3
 
 ## ##################################################
 
@@ -18,6 +18,7 @@ LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
 Arch_SOURCES = Arch.cc
 Url1_SOURCES = Url1.cc
 Url2_SOURCES = Url2.cc
+Url3_SOURCES = Url3.cc
 
 ## ##################################################
 

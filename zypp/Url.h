@@ -142,11 +142,20 @@ namespace zypp
     zypp::url::ParamMap
     getPathParamsMap(EEncoding eflag = zypp::url::E_DECODED) const;
 
+    std::string
+    getPathParam(const std::string &param,
+                 EEncoding eflag = zypp::url::E_DECODED) const;
+
+
     zypp::url::ParamVec
     getQueryStringVec() const;
 
     zypp::url::ParamMap
     getQueryStringMap(EEncoding eflag = zypp::url::E_DECODED) const;
+
+    std::string
+    getQueryParam(const std::string &param,
+                  EEncoding eflag = zypp::url::E_DECODED) const;
 
 
     // -----------------
@@ -188,10 +197,16 @@ namespace zypp
 
     // -----------------
     void
+    setPathParam(const std::string &param, const std::string &value);
+
+    void
     setPathParamsVec(const zypp::url::ParamVec &pvec);
 
     void
     setPathParamsMap(const zypp::url::ParamMap &pmap);
+
+    void
+    setQueryParam(const std::string &param, const std::string &value);
 
     void
     setQueryStringVec(const zypp::url::ParamVec &pvec);

@@ -314,12 +314,14 @@ namespace zypp
     return m_impl->getPathData();
   }
 
+
   // -----------------------------------------------------------------
   std::string
   Url::getQueryString() const
   {
     return m_impl->getQueryString();
   }
+
 
   // -----------------------------------------------------------------
   std::string
@@ -336,12 +338,14 @@ namespace zypp
     return m_impl->getUsername(eflag);
   }
 
+
   // -----------------------------------------------------------------
   std::string
   Url::getPassword(EEncoding eflag) const
   {
     return m_impl->getPassword(eflag);
   }
+
 
   // -----------------------------------------------------------------
   std::string
@@ -350,6 +354,7 @@ namespace zypp
     return m_impl->getHost(eflag);
   }
 
+
   // -----------------------------------------------------------------
   std::string
   Url::getPort() const
@@ -357,12 +362,14 @@ namespace zypp
     return m_impl->getPort();
   }
 
+
   // -----------------------------------------------------------------
   std::string
   Url::getPathName(EEncoding eflag) const
   {
     return m_impl->getPathName(eflag);
   }
+
 
   // -----------------------------------------------------------------
   std::string
@@ -389,6 +396,14 @@ namespace zypp
 
 
   // -----------------------------------------------------------------
+  std::string
+  Url::getPathParam(const std::string &param, EEncoding eflag) const
+  {
+    return m_impl->getPathParam(param, eflag);
+  }
+
+
+  // -----------------------------------------------------------------
   zypp::url::ParamVec
   Url::getQueryStringVec() const
   {
@@ -401,6 +416,14 @@ namespace zypp
   Url::getQueryStringMap(EEncoding eflag) const
   {
     return m_impl->getQueryStringMap(eflag);
+  }
+
+
+  // -----------------------------------------------------------------
+  std::string
+  Url::getQueryParam(const std::string &param, EEncoding eflag) const
+  {
+    return m_impl->getQueryParam(param, eflag);
   }
 
 
@@ -532,6 +555,14 @@ namespace zypp
 
   // -----------------------------------------------------------------
   void
+  Url::setPathParam(const std::string &param, const std::string &value)
+  {
+    m_impl->setPathParam(param, value);
+  }
+
+
+  // -----------------------------------------------------------------
+  void
   Url::setQueryStringVec(const zypp::url::ParamVec &pvec)
   {
     m_impl->setQueryStringVec(pvec);
@@ -544,6 +575,14 @@ namespace zypp
   {
     m_impl->setQueryStringMap(pmap);
   }
+
+  // -----------------------------------------------------------------
+  void
+  Url::setQueryParam(const std::string &param, const std::string &value)
+  {
+    m_impl->setQueryParam(param, value);
+  }
+
 
   // -----------------------------------------------------------------
   std::ostream & operator<<( std::ostream & str, const Url & url )
