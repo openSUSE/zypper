@@ -14,6 +14,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/ExternalProgram.h"
+#include "zypp/base/String.h"
 //#include <y2util/SysConfig.h>
 
 #include "zypp/media/MediaCurl.h"
@@ -101,8 +102,11 @@ void MediaCurl::attachTo (bool next)
   if ( next )
     ZYPP_THROW( MediaException, "Error::E_not_supported_by_media");
 
+#warning FIXME implement check for URL validity
+#if 0
   if ( !_url.isValid() )
     ZYPP_THROW( MediaException, "Error::E_bad_url");
+#endif
 
   _curl = curl_easy_init();
   if ( !_curl ) {
@@ -124,7 +128,7 @@ void MediaCurl::attachTo (bool next)
     ZYPP_THROW( MediaException, "Error::E_curl_setopt_failed");
   }
 
-  if ( _url.protocol() == Url::http ) {
+  if ( _url.getScheme() == "http" ) {
     // follow any Location: header that the server sends as part of
     // an HTTP header (#113275)
     ret = curl_easy_setopt ( _curl, CURLOPT_FOLLOWLOCATION, true );
@@ -141,7 +145,7 @@ void MediaCurl::attachTo (bool next)
 
   // XXX: wasn't that the wrong fix for some problem? this should be
   // removed
-  if ( _url.protocol() == Url::https ) {
+  if ( _url.getScheme() == "https" ) {
     WAR << "Disable certificate verification for https." << endl;
     ret = curl_easy_setopt( _curl, CURLOPT_SSL_VERIFYPEER, 0 );
     if ( ret != 0 ) {
@@ -164,17 +168,17 @@ void MediaCurl::attachTo (bool next)
    If not provided, anonymous FTP identification
    *---------------------------------------------------------------*/
 
-  if ( _url.username().empty() ) {
-    if ( _url.protocol() == Url::ftp ) {
+  if ( _url.getUsername().empty() ) {
+    if ( _url.getScheme() == "ftp" ) {
       string id = "yast2@";
       id += VERSION;
       DBG << "Anonymous FTP identification: '" << id << "'" << endl;
       _userpwd = "anonymous:" + id;
     }
   } else {
-    _userpwd = _url.username();
-    if ( _url.password().size() ) {
-      _userpwd += ":" + _url.password();
+    _userpwd = _url.getUsername();
+    if ( _url.getPassword().size() ) {
+      _userpwd += ":" + _url.getPassword();
     }
   }
 
@@ -194,6 +198,9 @@ void MediaCurl::attachTo (bool next)
    If not provided, /etc/sysconfig/proxy is evaluated
    *---------------------------------------------------------------*/
 
+#warning FIX once I understand how to get this info
+#warning FIXME enable proxy via sysconfig somehow
+#if 0
   _proxy = _url.option( "proxy" );
 
   if ( ! _proxy.empty() ) {
@@ -201,9 +208,6 @@ void MediaCurl::attachTo (bool next)
     if ( ! proxyport.empty() ) {
       _proxy += ":" + proxyport;
     }
-
-#warning FIXME enable proxy via sysconfig somehow
-#if 0
   } else {
 
     SysConfig cfg( "proxy" );
@@ -216,28 +220,28 @@ void MediaCurl::attachTo (bool next)
       for ( unsigned i = 0; i < nope.size(); ++i ) {
 	// no proxy: if nope equals host,
 	// or is a suffix preceeded by a '.'
-	string::size_type pos = _url.host().find( nope[i] );
+	string::size_type pos = _url.getHost().find( nope[i] );
 	if ( pos != string::npos
-	     && ( pos + nope[i].size() == _url.host().size() )
-	     && ( pos == 0 || _url.host()[pos -1] == '.' ) ) {
-	  DBG << "NO_PROXY: " << nope[i] << " matches host " << _url.host() << endl;
+	     && ( pos + nope[i].size() == _url.getHost().size() )
+	     && ( pos == 0 || _url.getHost()[pos -1] == '.' ) ) {
+	  DBG << "NO_PROXY: " << nope[i] << " matches host " << _url.getHost() << endl;
 	  useproxy = false;
 	  break;
 	}
       }
 
       if ( useproxy ) {
-	if ( _url.protocol() == Url::ftp ) {
+	if ( _url.getScheme() == Url::ftp ) {
 	  _proxy = cfg.readEntry( "FTP_PROXY" );
-	} else if ( _url.protocol() == Url::http ) {
+	} else if ( _url.getScheme() == Url::http ) {
 	  _proxy = cfg.readEntry( "HTTP_PROXY" );
-	} else if ( _url.protocol() == Url::https ) {
+	} else if ( _url.getScheme() == Url::https ) {
 	  _proxy = cfg.readEntry( "HTTPS_PROXY" );
 	}
       }
     }
-#endif
   }
+#endif
 
 
   DBG << "Proxy: " << _proxy << endl;
@@ -257,6 +261,9 @@ void MediaCurl::attachTo (bool next)
      If not provided, $HOME/.curlrc is evaluated
      *---------------------------------------------------------------*/
 
+#warning FIXME once I know how to get this info
+#warning FIXME enable proxy via sysconfig somehow
+#if 0
     _proxyuserpwd = _url.option( "proxyuser" );
 
     if ( ! _proxyuserpwd.empty() ) {
@@ -266,16 +273,14 @@ void MediaCurl::attachTo (bool next)
 	_proxyuserpwd += ":" + proxypassword;
       }
 
-#warning FIXME enable proxy via sysconfig somehow
-#if 0
     } else {
 
       string curlrcFile = string( getenv("HOME") ) + string( "/.curlrc" );
       SysConfig curlrc( curlrcFile );
       _proxyuserpwd = curlrc.readEntry( "proxy-user" );
 
-#endif
     }
+#endif
 
     _proxyuserpwd = unEscape( _proxyuserpwd );
     ret = curl_easy_setopt( _curl, CURLOPT_PROXYUSERPWD, _proxyuserpwd.c_str() );
@@ -363,13 +368,16 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
 {
     DBG << filename.asString() << endl;
 
+#warning FIXME implement check for URL validity
+#if 0
     if(!_url.isValid())
-      ZYPP_THROW( MediaException, string("Error::E_bad_url") + " " + _url.asString());
+      ZYPP_THROW( MediaException, string("Error::E_bad_url") + " " + _url.toString());
+#endif
 
-    if(_url.host().empty())
+    if(_url.getHost().empty())
       ZYPP_THROW( MediaException, "Error::E_no_host_specified");
 
-    string path = _url.path();
+    string path = _url.getPathName();
     if ( !path.empty() && path != "/" && *path.rbegin() == '/' &&
          filename.absolute() ) {
       // If url has a path with trailing slash, remove the leading slash from
@@ -385,7 +393,7 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
     }
 
     Url url( _url );
-    url.setPath( escapedPath(path) );
+    url.setPathName( escapedPath(path) );
 
     Pathname dest = target.absolutename();
     string destNew = target.asString() + ".new.yast.37456";
@@ -399,14 +407,16 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
       ZYPP_THROW( MediaException, string("Error::E_system") + string(" ") + dest.dirname().asString());
     }
 
-    DBG << "URL: " << url.asString().c_str() << endl;
+    DBG << "URL: " << url.toString().c_str() << endl;
     // Use URL without options (not RFC conform) and without
     // username and passwd (some proxies dislike them in the URL.
     // Curloptions for these were set in attachTo().
     Url curlUrl( url );
     curlUrl.setUsername( "" );
     curlUrl.setPassword( "" );
-    string urlBuffer = curlUrl.asString(true,false,true); // without options
+#warning Check whether the call is correct
+//    string urlBuffer = curlUrl.toString(true,false,true); // without options
+    string urlBuffer = curlUrl.toString(); // without options
 
     CURLcode ret = curl_easy_setopt( _curl, CURLOPT_URL,
                                      urlBuffer.c_str() );
@@ -446,7 +456,7 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
     }
 
     if ( ret != 0 ) {
-      unlink( destNew );
+      filesystem::unlink( destNew );
 
       ERR << "curl error: " << ret << ": " << _curlError << endl;
       std::string err;
@@ -463,12 +473,12 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
                                                   &httpReturnCode );
             if ( infoRet == CURLE_OK ) {
               string msg = "HTTP return code: " +
-                           stringutil::numstring( httpReturnCode ) +
-                           " (URL: " + url.asString() + ")";
+                           str::numstring( httpReturnCode ) +
+                           " (URL: " + url.toString() + ")";
               DBG << msg << endl;
               if ( httpReturnCode == 401 )
 	      {
-		msg = "URL: " + url.asString();
+		msg = "URL: " + url.toString();
                 err = "Error::E_login_failed";
 	      }
               else

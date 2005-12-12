@@ -24,11 +24,11 @@
 #include "zypp/media/MediaCD.h"
 #include "zypp/media/MediaDIR.h"
 #include "zypp/media/MediaDISK.h"
-#include "zypp/media/MediaNFS.h"
 #include "zypp/media/MediaSMB.h"
 #include "zypp/media/MediaCIFS.h"
+#include "zypp/media/MediaNFS.h"
 */
-//#include "zypp/media/MediaCurl.h"
+#include "zypp/media/MediaCurl.h"
 
 using namespace std;
 
@@ -53,10 +53,7 @@ MediaAccess::MediaAccess ()
 // destructor
 MediaAccess::~MediaAccess()
 {
-#warning FIXME uncomment
-#if 0
   DBG << *this << endl;
-#endif
   close(); // !!! make sure handler gets properly deleted.
 }
 
@@ -64,15 +61,14 @@ MediaAccess::~MediaAccess()
 void
 MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
 {
-#warning FIXME uncomment once media backends get ready
-#if 0
     if(!url.isValid()) {
-        ERR << Error::E_bad_url << " opening " << url << endl;
-	return Error::E_bad_url;
+        ZYPP_DOTHROW(MediaBadUrlException(url));
     }
 
     close();
 
+#warning FIXME uncomment once media backends get ready
+#if 0
     switch ( url.protocol() ) {
       case Url::cd:
       case Url::dvd:
@@ -115,17 +111,14 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
 }
 
 // Type of media if open, otherwise NONE.
-#warning FIXME uncomment once real Url class is implemented
-#if 0
-Url::Protocol
+std::string
 MediaAccess::protocol() const
 {
   if ( !_handler )
-    return Url::unknown;
+    return "unknown";
 
   return _handler->protocol();
 }
-#endif
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -155,16 +148,11 @@ MediaAccess::close ()
     }
     catch (const MediaException & excpt_r)
     {
-#warning FIXME uncomment, rethrow
-#if 0
-      WAR << "Close: " << *this << " (" << err << ")" << endl;
+      ZYPP_CAUGHT(excpt_r);
+      WAR << "Close: " << *this << " (" << excpt_r << ")" << endl;
       ZYPP_RETHROW(excpt_r);
-#endif
     }
-#warning FIXME uncomment
-#if 0
-    MIL << "Close: " << *this << " (" << err << ")" << endl;
-#endif
+    MIL << "Close: " << *this << " (OK)" << endl;
     delete _handler;
     _handler = 0;
   }
@@ -175,8 +163,8 @@ MediaAccess::close ()
 void MediaAccess::attach (bool next)
 {
   if ( !_handler ) {
-    INT << "Error::E_not_open" << endl;
-    ZYPP_THROW( MediaException, "Error::E_not_open");
+    INT << "Error::E_media_not_open" << endl;
+    ZYPP_DOTHROW(MediaNotOpenException());
   }
   _handler->attach(next);
 }
@@ -214,7 +202,7 @@ void
 MediaAccess::disconnect()
 {
   if ( !_handler )
-    ZYPP_THROW( MediaException, "Error::E_not_open");
+    ZYPP_DOTHROW(MediaNotOpenException());
 
   _handler->disconnect();
 }
@@ -244,11 +232,11 @@ MediaAccess::provideFile( const Pathname & filename, bool cached, bool checkonly
   }
 
   if(checkonly)
-    ZYPP_THROW( MediaException, "Error::E_error");
+    ZYPP_DOTHROW(MediaFileNotFoundException(url(), filename));
 
   if ( !_handler ) {
-    INT << "Error::E_not_open" << " on provideFile(" << filename << ")" << endl;
-    ZYPP_THROW( MediaException, "Error::E_not_open");
+    INT << "Error::E_media_not_open" << " on provideFile(" << filename << ")" << endl;
+    ZYPP_DOTHROW(MediaNotOpenException());
   }
 
   _handler->provideFile( filename );
@@ -271,8 +259,8 @@ void
 MediaAccess::provideDir( const Pathname & dirname ) const
 {
   if ( !_handler ) {
-    INT << "Error::E_not_open" << " on provideDir(" << dirname << ")" << endl;
-    ZYPP_THROW( MediaException, "Error::E_not_open");
+    INT << "Error::E_media_not_open" << " on provideDir(" << dirname << ")" << endl;
+    ZYPP_DOTHROW(MediaNotOpenException());
   }
 
   _handler->provideDir( dirname );
@@ -282,8 +270,8 @@ void
 MediaAccess::provideDirTree( const Pathname & dirname ) const
 {
   if ( !_handler ) {
-    INT << "Error::E_not_open" << " on provideDirTree(" << dirname << ")" << endl;
-    ZYPP_THROW( MediaException, "Error::E_not_open");
+    INT << "Error::E_media_not_open" << " on provideDirTree(" << dirname << ")" << endl;
+    ZYPP_DOTHROW(MediaNotOpenException());
   }
 
   _handler->provideDirTree( dirname );
@@ -314,8 +302,8 @@ MediaAccess::dirInfo( list<string> & retlist, const Pathname & dirname, bool dot
   retlist.clear();
 
   if ( !_handler ) {
-    INT << "Error::E_not_open" << " on dirInfo(" << dirname << ")" << endl;
-    ZYPP_THROW( MediaException, "Error::E_not_open");
+    INT << "Error::E_media_not_open" << " on dirInfo(" << dirname << ")" << endl;
+    ZYPP_DOTHROW(MediaNotOpenException());
   }
 
   _handler->dirInfo( retlist, dirname, dots );
@@ -328,8 +316,8 @@ MediaAccess::dirInfo( filesystem::DirContent & retlist, const Pathname & dirname
   retlist.clear();
 
   if ( !_handler ) {
-    INT << "Error::E_not_open" << " on dirInfo(" << dirname << ")" << endl;
-    ZYPP_THROW( MediaException, "Error::E_not_open");
+    INT << "Error::E_media_not_open" << " on dirInfo(" << dirname << ")" << endl;
+    ZYPP_DOTHROW(MediaNotOpenException());
   }
 
   _handler->dirInfo( retlist, dirname, dots );
@@ -341,11 +329,7 @@ MediaAccess::dumpOn( std::ostream & str ) const
   if ( !_handler )
     return str << "MediaAccess( closed )";
 
-#warning FIXME uncomment once real Url class is implemented
-#if 0
-  string tstr = Url::protocolToString( _handler->protocol() );
-  str << tstr << "(" << *_handler << ")";
-#endif
+  str << _handler->protocol() << "(" << *_handler << ")";
   return str;
 }
 
@@ -353,20 +337,12 @@ void MediaAccess::getFile( const Url &from, const Pathname &to )
 {
   DBG << "From: " << from << endl << "To: " << to << endl;
 
-  Pathname path
-#warning FIXME uncomment once real Url class is implemented
-#if 0
- = from.path()
-#endif
-;
+  Pathname path = from.getPathData();
   Pathname dir = path.dirname();
   string base = path.basename();
 
   Url u = from;
-#warning FIXME uncomment once real Url class is implemented
-#if 0
-  u.setPath( dir.asString() );
-#endif
+  u.setPathData( dir.asString() );
 
   MediaAccess media;
 
@@ -378,12 +354,11 @@ void MediaAccess::getFile( const Url &from, const Pathname &to )
   }
   catch (const MediaException & excpt_r)
   {
-#warning FIXME uncomment, add message into log
-#if 0
     ZYPP_RETHROW(excpt_r);
-#endif
   }
 }
+    std::ostream & operator<<( std::ostream & str, const MediaAccess & obj )
+    { return obj.dumpOn( str ); }
 
 ///////////////////////////////////////////////////////////////////
   } // namespace media

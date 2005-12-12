@@ -11,21 +11,23 @@ include_HEADERS = 		\
 	MediaException.h	\
 	MediaAccess.h		\
 	MediaHandler.h		\
-	Mount.h
+	Mount.h			\
+	MediaCurl.h
 
-#	MediaCurl.h
-
+#	MediaNFS.h		
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_media.la
 
 ## ##################################################
 
 lib@PACKAGE@_media_la_SOURCES = \
+	MediaException.cc	\
 	MediaAccess.cc		\
 	MediaHandler.cc		\
-	Mount.cc
+	Mount.cc		\
+	MediaCurl.cc
 
-#	MediaCurl.cc
+#	MediaNFS.cc		
 
 lib@PACKAGE@_media_la_LIBADD =	-lcurl
 

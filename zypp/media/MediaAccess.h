@@ -25,10 +25,7 @@
 #include "zypp/PathInfo.h"
 
 #include "zypp/media/MediaException.h"
-
-#warning FIXME use real Url class
-// #include "zypp/@Review/Url.h"
-typedef std::string Url;
+#include "zypp/Url.h"
 
 namespace zypp {
   namespace media {
@@ -90,10 +87,7 @@ namespace zypp {
 	/**
 	 * Used Protocol if media is opened, otherwise 'unknown'.
 	 **/
-#warning FIXME uncomment once real Url class is implemented
-#if 0
-        Url::Protocol protocol() const;
-#endif
+        std::string protocol() const;
 
 	/**
 	 * Url if media is opened, otherwise empty.
@@ -318,6 +312,7 @@ namespace zypp {
        * Currently we can not releaseFile after the media was closed
        * (it's passed to the handler, which is deleted on close).
        *
+       * \throws MediaBadFilenameException
        * \throws MediaException
        **/
       class FileProvider {
@@ -337,7 +332,7 @@ namespace zypp {
 	    , _local_file( "" )
 	  {
 	    if ( _file.empty() ) {
-	      ZYPP_THROW( MediaException, "E_bad_filename");
+	      ZYPP_DOTHROW(MediaBadFilenameException(_file.asString()));
 	    } else if ( _media ) {
 	      try {
 		_media->provideFile( _file );
@@ -345,11 +340,9 @@ namespace zypp {
 	      }
 	      catch (const MediaException & excpt_r)
               {
+		ZYPP_CAUGHT(excpt_r);
 		_media = NULL;
-#warning FIXME rethrow the exception
-#if 0
 		ZYPP_RETHROW(excpt_r);
-#endif
 	      }
 	    }
 	  }
@@ -362,6 +355,7 @@ namespace zypp {
 	      }
 	      catch (const MediaException &excpt_r)
 	      {
+		ZYPP_CAUGHT(excpt_r);
 		INT << "Exception raised while releasing file" << std::endl;
 	      }
 	    }
@@ -386,6 +380,8 @@ namespace zypp {
 	  }
       };
     };
+
+    std::ostream & operator<<( std::ostream & str, const MediaAccess & obj );
 
 ///////////////////////////////////////////////////////////////////
 

@@ -19,9 +19,7 @@
 #include "zypp/Pathname.h"
 #include "zypp/PathInfo.h"
 
-#warning FIXME use real Url class
-// #include "zypp/@Review/Url.h"
-typedef std::string Url;
+#include "zypp/Url.h"
 
 #include "zypp/media/MediaAccess.h"
 
@@ -286,10 +284,7 @@ class MediaHandler {
         /**
 	 * Protocol hint for MediaAccess.
 	 **/
-#warning FIXME uncomment once real Url class is implemented
-#if 0
-        Url::Protocol protocol() const { return _url.protocol(); }
-#endif
+        std::string protocol() const { return _url.getScheme(); }
 
 	/**
 	 * Url used.

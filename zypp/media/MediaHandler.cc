@@ -162,10 +162,7 @@ void MediaHandler::attach( bool next )
   catch (const MediaException & excpt_r)
   {
     WAR << "Attach failed: " << excpt_r << " " << *this << endl;
-#warning FIXME rethrow
-#if 0
     ZYPP_RETHROW(excpt_r);
-#endif
   }
   _isAttached = true;
   MIL << "Attached: " << *this << endl;
@@ -212,10 +209,7 @@ void MediaHandler::disconnect()
   catch (const MediaException & excpt_r)
   {
     WAR << "Disconnect failed: " << excpt_r << " " << *this << endl;
-#warning FIXME rethrow
-#if 0
     ZYPP_RETHROW(excpt_r);
-#endif
   }
   MIL << "Disconnected: " << *this << endl;
 }
@@ -242,10 +236,7 @@ void MediaHandler::release( bool eject )
   catch (const MediaException & excpt_r)
   {
     WAR << "Release failed: " << excpt_r << " " << *this << endl;
-#warning FIXME rethrow
-#if 0
     ZYPP_RETHROW(excpt_r);
-#endif
   }
   _isAttached = false;
   MIL << "Released: " << *this << endl;
@@ -265,7 +256,7 @@ void MediaHandler::provideFileCopy( Pathname srcFilename,
   if ( !_isAttached ) {
     INT << "Error::E_not_attached" << " on provideFileCopy(" << srcFilename
         << "," << targetFilename << ")" << endl;
-    ZYPP_THROW( MediaException, "Error::E_not_attached");
+    ZYPP_DOTHROW(MediaNotAttachedException(url()));
   }
 
   try {
@@ -274,10 +265,7 @@ void MediaHandler::provideFileCopy( Pathname srcFilename,
   catch (const MediaException & excpt_r)
   {
     WAR << "provideFileCopy(" << srcFilename << "," << targetFilename << "): " << excpt_r << endl;
-#warning FIXME rethrow
-#if 0
     ZYPP_RETHROW(excpt_r);
-#endif
   }
   DBG << "provideFileCopy(" << srcFilename << "," << targetFilename  << ")" << endl;
 }
@@ -285,8 +273,8 @@ void MediaHandler::provideFileCopy( Pathname srcFilename,
 void MediaHandler::provideFile( Pathname filename ) const
 {
   if ( !_isAttached ) {
-    INT << "Error::E_not_attached" << " on provideFile(" << filename << ")" << endl;
-    ZYPP_THROW( MediaException, "Error::E_not_attached");
+    INT << "Error: Not attached on provideFile(" << filename << ")" << endl;
+    ZYPP_DOTHROW(MediaNotAttachedException(url()));
   }
 
   try {
@@ -295,10 +283,7 @@ void MediaHandler::provideFile( Pathname filename ) const
   catch (const MediaException & excpt_r)
   {
     WAR << "provideFile(" << filename << "): " << excpt_r << endl;
-#warning FIXME rethrow
-#if 0
     ZYPP_RETHROW(excpt_r);
-#endif
   }
   DBG << "provideFile(" << filename << ")" << endl;
 }
@@ -315,8 +300,8 @@ void MediaHandler::provideFile( Pathname filename ) const
 void MediaHandler::provideDir( Pathname dirname ) const
 {
   if ( !_isAttached ) {
-    INT << "Error::E_not_attached" << " on provideDir(" << dirname << ")" << endl;
-    ZYPP_THROW( MediaException, "Error::E_not_attached");
+    INT << "Error: Not attached on provideDir(" << dirname << ")" << endl;
+    ZYPP_DOTHROW(MediaNotAttachedException(url()));
   }
   try {
     getDir( dirname, /*recursive*/false ); // pass to concrete handler
@@ -324,10 +309,7 @@ void MediaHandler::provideDir( Pathname dirname ) const
   catch (const MediaException & excpt_r)
   {
     WAR << "provideDir(" << dirname << "): " << excpt_r << endl;
-#warning FIXME rethrow
-#if 0
     ZYPP_RETHROW(excpt_r);
-#endif
   }
   MIL << "provideDir(" << dirname << ")" << endl;
 }
@@ -343,8 +325,8 @@ void MediaHandler::provideDir( Pathname dirname ) const
 void MediaHandler::provideDirTree( Pathname dirname ) const
 {
   if ( !_isAttached ) {
-    INT << "Error::E_not_attached" << " on provideDirTree(" << dirname << ")" << endl;
-    ZYPP_THROW( MediaException, "Error::E_not_attached");
+    INT << "Error Not attached on provideDirTree(" << dirname << ")" << endl;
+    ZYPP_DOTHROW(MediaNotAttachedException(url()));
   }
 
   try {
@@ -353,10 +335,7 @@ void MediaHandler::provideDirTree( Pathname dirname ) const
   catch (const MediaException & excpt_r)
   {
     WAR << "provideDirTree(" << dirname << "): " << excpt_r << endl;
-#warning FIXME rethrow
-#if 0
     ZYPP_RETHROW(excpt_r);
-#endif
   }
 
   MIL << "provideDirTree(" << dirname << ")" << endl;
@@ -402,8 +381,8 @@ void MediaHandler::dirInfo( list<string> & retlist,
   retlist.clear();
 
   if ( !_isAttached ) {
-    INT << "Error::E_not_attached" << " on dirInfo(" << dirname << ")" << endl;
-    ZYPP_THROW( MediaException, "Error::E_not_attached");
+    INT << "Error: Not attached on dirInfo(" << dirname << ")" << endl;
+    ZYPP_DOTHROW(MediaNotAttachedException(url()));
   }
 
   try {
@@ -412,10 +391,7 @@ void MediaHandler::dirInfo( list<string> & retlist,
   catch (const MediaException & excpt_r)
   {
     WAR << "dirInfo(" << dirname << "): " << excpt_r << endl;
-#warning FIXME rethrow
-#if 0
     ZYPP_RETHROW(excpt_r);
-#endif
   }
   MIL << "dirInfo(" << dirname << ")" << endl;
 }
@@ -434,8 +410,8 @@ void MediaHandler::dirInfo( filesystem::DirContent & retlist,
   retlist.clear();
 
   if ( !_isAttached ) {
-    INT << "Error::E_not_attached" << " on dirInfo(" << dirname << ")" << endl;
-    ZYPP_THROW( MediaException, "Error::E_not_attached");
+    INT << "Error: Not attached on dirInfo(" << dirname << ")" << endl;
+    ZYPP_DOTHROW(MediaNotAttachedException(url()));
   }
 
   try {
@@ -444,10 +420,7 @@ void MediaHandler::dirInfo( filesystem::DirContent & retlist,
   catch (const MediaException & excpt_r)
   {
     WAR << "dirInfo(" << dirname << "): " << excpt_r << endl;
-#warning FIXME rethrow
-#if 0
     ZYPP_RETHROW(excpt_r);
-#endif
   }
   MIL << "dirInfo(" << dirname << ")" << endl;
 }
@@ -469,10 +442,7 @@ void MediaHandler::getDirectoryYast( std::list<std::string> & retlist,
   }
   catch (const MediaException & excpt_r)
   {
-#warning FIXME rethrow
-#if 0
     ZYPP_RETHROW(excpt_r);
-#endif
   }
 
   // convert to std::list<std::string>
@@ -499,11 +469,8 @@ void MediaHandler::getDirectoryYast( filesystem::DirContent & retlist,
   }
   catch (const MediaException & excpt_r)
   {
-#warning FIXME rethrow
-#if 0
     ERR << "provideFile(" << dirFile << "): " << excpt_r << endl;
     ZYPP_RETHROW(excpt_r);
-#endif
   }
   DBG << "provideFile(" << dirFile << "): " << "OK" << endl;
 
@@ -511,7 +478,8 @@ void MediaHandler::getDirectoryYast( filesystem::DirContent & retlist,
   ifstream dir( localPath( dirFile ).asString().c_str() );
   if ( dir.fail() ) {
     ERR << "Unable to load '" << localPath( dirFile ) << "'" << endl;
-    ZYPP_THROW( MediaException, "Error::E_system");
+    ZYPP_DOTHROW(MediaSystemException(url(),
+      "Unable to load '" + localPath( dirFile ).asString() + "'"));
   }
 
   string line;
@@ -567,9 +535,9 @@ void MediaHandler::getFile( const Pathname & filename ) const
     }
 
     if (info.isExist())
-      ZYPP_THROW( MediaException, "Error::E_not_a_file");
+      ZYPP_DOTHROW(MediaNotAFileException(url(), localPath(filename)));
     else
-      ZYPP_THROW( MediaException, "Error::E_file_not_found");
+      ZYPP_DOTHROW(MediaFileNotFoundException(url(), filename));
 }
 
 
@@ -580,14 +548,11 @@ void MediaHandler::getFileCopy ( const Pathname & srcFilename, const Pathname & 
   }
   catch (const MediaException & excpt_r)
   {
-#warning FIXME rethrow
-#if 0
     ZYPP_RETHROW(excpt_r);
-#endif
   }
 
   if ( copy( localPath( srcFilename ), targetFilename ) != 0 ) {
-    ZYPP_THROW( MediaException, "Error::E_write_error");
+    ZYPP_DOTHROW(MediaWriteException(targetFilename));
   }
 }
 
@@ -610,9 +575,9 @@ void MediaHandler::getDir( const Pathname & dirname, bool recurse_r ) const
   }
 
   if (info.isExist())
-    ZYPP_THROW( MediaException, "Error::E_not_a_file");
+    ZYPP_DOTHROW(MediaNotADirException(url(), localPath(dirname)));
   else
-    ZYPP_THROW( MediaException, "Error::E_file_not_found");
+    ZYPP_DOTHROW(MediaFileNotFoundException(url(), dirname));
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -629,7 +594,7 @@ void MediaHandler::getDirInfo( std::list<std::string> & retlist,
 {
   PathInfo info( localPath( dirname ) );
   if( ! info.isDir() ) {
-    ZYPP_THROW( MediaException, "Error::E_not_a_directory");
+    ZYPP_DOTHROW(MediaNotADirException(url(), localPath(dirname)));
   }
 
 #if NONREMOTE_DIRECTORY_YAST
@@ -644,7 +609,7 @@ void MediaHandler::getDirInfo( std::list<std::string> & retlist,
   // readdir
     int res = readdir( retlist, info.path(), dots );
   if ( res )
-    ZYPP_THROW( MediaException, "Error::E_system");
+    ZYPP_DOTHROW(MediaSystemException(url(), "readdir failed"));
 
 #if NONREMOTE_DIRECTORY_YAST
   }
@@ -667,7 +632,7 @@ void MediaHandler::getDirInfo( filesystem::DirContent & retlist,
 {
   PathInfo info( localPath( dirname ) );
   if( ! info.isDir() ) {
-    ZYPP_THROW( MediaException, "Error::E_not_a_directory");
+    ZYPP_DOTHROW(MediaNotADirException(url(), localPath(dirname)));
   }
 
 #if NONREMOTE_DIRECTORY_YAST
@@ -682,7 +647,7 @@ void MediaHandler::getDirInfo( filesystem::DirContent & retlist,
   // readdir
   int res = readdir( retlist, info.path(), dots );
   if ( res )
-    ZYPP_THROW( MediaException, "Error::E_system");
+    ZYPP_DOTHROW(MediaSystemException(url(), "readdir failed"));
 #if NONREMOTE_DIRECTORY_YAST
   }
 #endif
