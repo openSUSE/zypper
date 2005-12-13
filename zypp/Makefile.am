@@ -28,7 +28,10 @@ include_HEADERS = NeedAType.h \
 	Pathname.h	\
 	PathInfo.h	\
 	Digest.h	\
-	Url.h
+	Url.h		\
+	TmpPath.h	\
+	KVMap.h		\
+	Callback.h	
 
 ## ##################################################
 
@@ -58,7 +61,8 @@ lib@PACKAGE@_la_SOURCES = \
 	ExternalProgram.cc\
 	PathInfo.cc	\
 	Digest.cc	\
-	Url.cc
+	Url.cc		\
+	TmpPath.cc
 
 lib@PACKAGE@_la_LDFLAGS =	@LIB_VERSION_INFO@
 

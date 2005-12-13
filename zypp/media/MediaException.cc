@@ -86,6 +86,31 @@ namespace zypp
       return str << "Malformed URL: " << _url << endl;
     }
 
+    std::ostream & MediaBadUrlEmptyHostException::dumpOn( std::ostream & str) const
+    {
+      return str << "Empty host name in URL: " << _url << endl;
+    }
+
+    std::ostream & MediaBadUrlEmptyFilesystemException::dumpOn( std::ostream & str) const
+    {
+      return str << "Empty filesystem in URL: " << _url << endl;
+    }
+
+    std::ostream & MediaBadUrlEmptyDestinationException::dumpOn( std::ostream & str) const
+    {
+      return str << "Empty destination in URL: " << _url << endl;
+    }
+
+    std::ostream & MediaUnsupportedUrlSchemeException::dumpOn( std::ostream & str) const
+    {
+      return str << "Unsupported URL scheme in URL: " << _url << endl;
+    }
+
+    std::ostream & MediaNotSupportedException::dumpOn( std::ostream & str) const
+    {
+      return str << "Operation not supported by media: " << _url << endl;
+    }
+
 
   /////////////////////////////////////////////////////////////////
   } // namespace media

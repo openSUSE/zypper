@@ -18,7 +18,7 @@
 //#include <y2util/SysConfig.h>
 
 #include "zypp/media/MediaCurl.h"
-//#include "zypp/media/MediaCallbacks.h"
+#include "zypp/media/MediaCallbacks.h"
 
 #include <sys/types.h>
 #include <sys/mount.h>
@@ -29,7 +29,6 @@
 
 using namespace std;
 using namespace zypp::base;
-//using namespace MediaCallbacks;
 
 namespace zypp {
   namespace media {
@@ -102,11 +101,8 @@ void MediaCurl::attachTo (bool next)
   if ( next )
     ZYPP_THROW( MediaException("Error::E_not_supported_by_media") );
 
-#warning FIXME implement check for URL validity
-#if 0
   if ( !_url.isValid() )
-    ZYPP_THROW( MediaException("Error::E_bad_url") );
-#endif
+    ZYPP_THROW(MediaBadUrlException(_url));
 
   _curl = curl_easy_init();
   if ( !_curl ) {
@@ -368,11 +364,8 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
 {
     DBG << filename.asString() << endl;
 
-#warning FIXME implement check for URL validity
-#if 0
     if(!_url.isValid())
-      ZYPP_THROW( MediaException(string("Error::E_bad_url") + " " + _url.toString()) );
-#endif
+      ZYPP_THROW(MediaBadUrlException(_url));
 
     if(_url.getHost().empty())
       ZYPP_THROW( MediaException("Error::E_no_host_specified") );
@@ -553,19 +546,9 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
 void MediaCurl::getDir( const Pathname & dirname, bool recurse_r ) const
 {
   filesystem::DirContent content;
-  try {
-    getDirInfo( content, dirname, /*dots*/false );
-  }
-  catch (const MediaException & excpt_r)
-  {
-#warning FIXME rethrow
-#if 0
-    ZYPP_RETHROW(excpt_r);
-#endif
-  }
+  getDirInfo( content, dirname, /*dots*/false );
 
   for ( filesystem::DirContent::const_iterator it = content.begin(); it != content.end(); ++it ) {
-    try {
       Pathname filename = dirname + it->name;
       int res = 0;
 
@@ -588,14 +571,6 @@ void MediaCurl::getDir( const Pathname & dirname, bool recurse_r ) const
 	// don't provide devices, sockets, etc.
 	break;
       }
-    }
-    catch (const MediaException & excpt_r)
-    {
-#warning FIXME rethrow
-#if 0
-      ZYPP_RETHROW(excpt_r);
-#endif
-    }
   }
 }
 
@@ -610,13 +585,7 @@ void MediaCurl::getDir( const Pathname & dirname, bool recurse_r ) const
 void MediaCurl::getDirInfo( std::list<std::string> & retlist,
 			       const Pathname & dirname, bool dots ) const
 {
-  try {
-    getDirectoryYast( retlist, dirname, dots );
-  }
-  catch (const MediaException & excpt_r)
-  {
-    ZYPP_THROW( MediaException("Error::E_not_supported_by_media") );
-  }
+  getDirectoryYast( retlist, dirname, dots );
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -630,13 +599,7 @@ void MediaCurl::getDirInfo( std::list<std::string> & retlist,
 void MediaCurl::getDirInfo( filesystem::DirContent & retlist,
                             const Pathname & dirname, bool dots ) const
 {
-  try {
-    getDirectoryYast( retlist, dirname, dots );
-  }
-  catch (const MediaException & excpt_r)
-  {
-    ZYPP_THROW( MediaException("Error::E_not_supported_by_media") );
-  }
+  getDirectoryYast( retlist, dirname, dots );
 }
 
 ///////////////////////////////////////////////////////////////////

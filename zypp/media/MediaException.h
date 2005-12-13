@@ -227,11 +227,65 @@ namespace zypp
       virtual ~MediaBadUrlException() throw() {};
     protected:
       virtual std::ostream & dumpOn( std::ostream & str ) const;
-    private:
       std::string _url;
     };
 
+    class MediaBadUrlEmptyHostException : public MediaBadUrlException
+    {
+    public:
+      MediaBadUrlEmptyHostException(const Url & url_r)
+      : MediaBadUrlException(url_r)
+      {}
+      virtual ~MediaBadUrlEmptyHostException() throw() {};
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+    };
 
+    class MediaBadUrlEmptyFilesystemException : public MediaBadUrlException
+    {
+    public:
+      MediaBadUrlEmptyFilesystemException(const Url & url_r)
+      : MediaBadUrlException(url_r)
+      {}
+      virtual ~MediaBadUrlEmptyFilesystemException() throw() {};
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+    };
+
+    class MediaBadUrlEmptyDestinationException : public MediaBadUrlException
+    {
+    public:
+      MediaBadUrlEmptyDestinationException(const Url & url_r)
+      : MediaBadUrlException(url_r)
+      {}
+      virtual ~MediaBadUrlEmptyDestinationException() throw() {};
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+    };
+
+    class MediaUnsupportedUrlSchemeException : public MediaBadUrlException
+    {
+    public:
+      MediaUnsupportedUrlSchemeException(const Url & url_r)
+      : MediaBadUrlException(url_r)
+      {}
+      virtual ~MediaUnsupportedUrlSchemeException() throw() {};
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+    };
+
+    class MediaNotSupportedException : public MediaException
+    {
+    public:
+      MediaNotSupportedException(const Url & url_r)
+      : MediaException()
+      , _url(url_r.toString())
+      {}
+      virtual ~MediaNotSupportedException() throw() {};
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+      std::string _url;
+    };
 
   /////////////////////////////////////////////////////////////////
   } // namespace media

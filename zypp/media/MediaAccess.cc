@@ -20,14 +20,12 @@
 #include "zypp/media/MediaAccess.h"
 #include "zypp/media/MediaHandler.h"
 
-/*
+#include "zypp/media/MediaNFS.h"
 #include "zypp/media/MediaCD.h"
 #include "zypp/media/MediaDIR.h"
 #include "zypp/media/MediaDISK.h"
 #include "zypp/media/MediaSMB.h"
 #include "zypp/media/MediaCIFS.h"
-#include "zypp/media/MediaNFS.h"
-*/
 #include "zypp/media/MediaCurl.h"
 
 using namespace std;
@@ -67,47 +65,36 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
 
     close();
 
-#warning FIXME uncomment once media backends get ready
-#if 0
-    switch ( url.protocol() ) {
-      case Url::cd:
-      case Url::dvd:
+    std::string scheme = url.getScheme();
+    if (scheme == "cd" || scheme == "dvd")
         _handler = new MediaCD (url,preferred_attach_point);
-        break;
-      case Url::nfs:
+    else if (scheme == "nfs")
         _handler = new MediaNFS (url,preferred_attach_point);
-        break;
-      case Url::file:
-      case Url::dir:
+//    else if (scheme == "iso")
+//        _handler = new MediaISO (url,preferred_attach_point);
+    else if (scheme == "file" || scheme == "dir")
         _handler = new MediaDIR (url,preferred_attach_point);
-        break;
-      case Url::hd:
+    else if (scheme == "hd")
         _handler = new MediaDISK (url,preferred_attach_point);
-        break;
-      case Url::smb:
-      case Url::cifs:
+    else if (scheme == "smb")
+	_handler = new MediaSMB (url,preferred_attach_point);
+    else if (scheme == "cifs")
         _handler = new MediaCIFS (url,preferred_attach_point);
-        break;
-      case Url::ftp:
-      case Url::http:
-      case Url::https:
+    else if (scheme == "ftp" || scheme == "http" || scheme == "https")
         _handler = new MediaCurl (url,preferred_attach_point);
-        break;
-      case Url::unknown:
-	ERR << Error::E_bad_media_type << " opening " << url << endl;
-	return Error::E_bad_media_type;
-	break;
+    else
+    {
+	ERR << "Error::E_bad_media_type opening " << url << endl;
+	ZYPP_THROW(MediaUnsupportedUrlSchemeException(url));
     }
 
     // check created handler
     if ( !_handler ){
       ERR << "Failed to create media handler" << endl;
-      return Error::E_system;
+      ZYPP_THROW(MediaSystemException(url, "Failed to create media handler"));
     }
 
     MIL << "Opened: " << *this << endl;
-    return Error::E_ok;
-#endif
 }
 
 // Type of media if open, otherwise NONE.

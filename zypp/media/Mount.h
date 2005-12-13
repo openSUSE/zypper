@@ -1,22 +1,14 @@
 /*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
 |                                                                      |
-|                      __   __    ____ _____ ____                      |
-|                      \ \ / /_ _/ ___|_   _|___ \                     |
-|                       \ V / _` \___ \ | |   __) |                    |
-|                        | | (_| |___) || |  / __/                     |
-|                        |_|\__,_|____/ |_| |_____|                    |
-|                                                                      |
-|                               core system                            |
-|                                                     (C) 2002 SuSE AG |
-\----------------------------------------------------------------------/
-
-   File:       Wget.h
-   Purpose:    Declare interface to mount program
-   Author:     Ludwig Nussel <lnussel@suse.de>
-   Maintainer: Ludwig Nussel <lnussel@suse.de>
-
-/-*/
-
+\---------------------------------------------------------------------*/
+/** \file zypp/media/Mount.h
+ *
+*/
 
 // -*- C++ -*-
 
@@ -27,6 +19,7 @@
 #include <string>
 
 #include "zypp/ExternalProgram.h"
+#include "zypp/KVMap.h"
 
 namespace zypp {
   namespace media {
@@ -47,10 +40,7 @@ namespace zypp {
 	/**
 	 * Mount options. 'key' or 'key=value' pairs, separated by ','
 	 **/
-#warning Uncomment Options type if it is needed
-#if 0
-	typedef KVMap<_KVMap::CharSep<'=',','> > Options;
-#endif
+	typedef KVMap<kvmap::KVMapBase::CharSep<'=',','> > Options;
 
     public:
 
