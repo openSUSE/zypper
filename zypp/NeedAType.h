@@ -45,29 +45,6 @@ namespace zypp
   //@{
 
 
-  /** Class representing an URL.
-   something like liby2utils Url class. But we
-   need clearly documented rules for parsing, and the way the broken down
-   URL parts are stored withtin the class. This addresses especially
-   the escaping and deescaping of special characters. It must be obvious to
-   the user of the class, wheter an interface funtion deals with
-   escaped, deescaped or hidden (in case of password) representation of the
-   value.
-
-   These rule may depend on the kind of URL protocol. The same for the
-   recognized set of URL options we support. User/Passwd can be given
-   in the URL or as option.
-
-   There could be a common URL interface class which forwards all requests
-   to an implementation class which may be specialized dependent on the URL
-   protocol.
-
-   There should be no obvious difference between known and unknown protocols.
-   It should be possible to register an implementation class factory (or
-   prototype) for a certain protocol at runtime.
-  */
-  typedef std::string Url;
-
   /** Single line of (human readable) text.
   probabely sufficient as typedef. we may use it to classify the
   various strings and string lists within resolvable and other classes.
@@ -91,10 +68,6 @@ namespace zypp
 
   /** Candidate for string unification? */
   typedef std::list<std::string> PackageKeywords;
-
-  /** Class representing a Date (time_t). Basically store a time_t and offer
-  conversions into formated strings. */
-  typedef time_t Date;
 
   /** Vendor. Worth a typedef. Maybe a class unifying the strings. */
   typedef std::string Vendor;

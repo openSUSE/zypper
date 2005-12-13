@@ -14,7 +14,8 @@
 
 #include <string>
 #include <list>
-#include "zypp/NeedAType.h"
+
+#include "zypp/Date.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -30,8 +31,8 @@ namespace zypp
   {
   public:
     /** Default ctor */
-    ChangelogEntry( const Date & d, 
-                    const std::string & a, 
+    ChangelogEntry( const Date & d,
+                    const std::string & a,
                     const std::string & t )
     : _date( d ), _author( a ), _text( t )
     {};
@@ -48,11 +49,12 @@ namespace zypp
     std::string _text;
   };
 
+  /** List of ChangelogEntry. */
   typedef std::list<ChangelogEntry> Changelog;
 
   /** \relates ChangelogEntry */
   std::ostream & operator<<( std::ostream & out, const ChangelogEntry & obj );
- 
+
   ///////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

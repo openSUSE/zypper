@@ -17,6 +17,7 @@
 
 #include "zypp/detail/ResObjectFactory.h"
 #include "zypp/ByteCount.h"
+#include "zypp/Date.h"
 
 #include "zypp/NeedAType.h" // volatile include propagating type drafts
 
