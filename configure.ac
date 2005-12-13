@@ -152,6 +152,12 @@ AC_OUTPUT(	\
 	zypp/parser/yum/Makefile	\
 	zypp/parser/yum/schema/Makefile	\
 	zypp/solver/Makefile		\
+	zypp/solver/testsuite/Makefile	\
+	zypp/solver/testsuite/lib/Makefile	\
+	zypp/solver/testsuite/config/Makefile	\
+	zypp/solver/testsuite/single.out/Makefile	\
+	zypp/solver/testsuite/libzypp_solver.test/Makefile	\
+	zypp/solver/detail/Makefile	\
 	zypp/source/Makefile		\
 	zypp/source/yum/Makefile	\
 	zypp/media/Makefile		\
