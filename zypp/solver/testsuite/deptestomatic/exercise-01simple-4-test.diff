@@ -1,0 +1,4 @@
+--- exercise-01simple-4-test.solution	2005-11-04 12:51:43.000000000 +0100
++++ exercise-01simple-4-test.mistake	2005-11-30 10:37:36.000000000 +0100
+@@ -1 +0,0 @@
+->!> Installing foo2 from channel test

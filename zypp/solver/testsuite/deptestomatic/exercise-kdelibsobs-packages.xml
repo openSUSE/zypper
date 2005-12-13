@@ -1,0 +1,53 @@
+<channel>
+  <subchannel>
+    <package>
+      <name>kdelibs3</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>3.1</version>
+          <release>73</release>
+          <filename>kdelibs3.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='kdelibs'/>
+      </provides>
+      <obsoletes>
+        <dep name='kdesupport'/>
+      </obsoletes>
+    </package>
+    <package>
+      <name>kdelibs3-devel</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>3.1</version>
+          <release>73</release>
+          <filename>kdelibs3-devel.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='kdelibs-devel'/>
+      </provides>
+      <requires>
+        <dep name='kdelibs3' op='=' version='3.1'/>
+      </requires>
+      <obsoletes>
+        <dep name='kdesupport-devel'/>
+      </obsoletes>
+    </package>
+  </subchannel>
+</channel>

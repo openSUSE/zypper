@@ -1,0 +1,9 @@
+--- exercise-02conflict-04-test.solution	2005-11-04 22:55:36.000000000 +0100
++++ exercise-02conflict-04-test.mistake	2005-11-30 10:37:36.000000000 +0100
+@@ -1,6 +0,0 @@
+->!> Installing libident-dev from channel test
+->!> Solution #1:
+->!> install libident-dev-2.0-1[test]
+->!> remove  smail-1.0-1
+->!> upgrade libident-1.9-1 => libident-2.0-1[test]
+->!> installs=1, upgrades=1, uninstalls=1

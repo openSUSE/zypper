@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-02conflict-system.xml"/>
+  <channel name="test" file="exercise-02conflict-packages.xml"/>
+</setup>
+
+
+<!-- solve conflict by upgrade (4): now an conflict-by-upgrade must be solved:
+     installed requirerer depends on required < 2.0 and this should be updated
+     to 2.0-1. But if also upgrading requirerer, the conflict vanishes. -->
+<trial>
+  <install channel="test" package="required"/>
+</trial>
+
+</test>

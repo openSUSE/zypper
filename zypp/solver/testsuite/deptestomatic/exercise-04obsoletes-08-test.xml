@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-04obsoletes-system.xml"/>
+  <channel name="test" file="exercise-04obsoletes-packages.xml"/>
+</setup>
+
+<!-- 
+# should also work in different order
+# see exercise-04obsoletes-07-test.xml
+B C
+ -->
+<trial>
+  <install channel="test" package="B"/>
+  <install channel="test" package="C"/>
+</trial>
+
+</test>

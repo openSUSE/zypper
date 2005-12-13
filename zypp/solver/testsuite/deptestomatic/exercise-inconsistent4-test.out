@@ -1,0 +1,30 @@
+Loaded 2 packages from deptestomatic/exercise-inconsistent4-system.xml
+Loaded 2 packages from deptestomatic/exercise-inconsistent4-packages.xml
+
+------------------------------------------------
+
+
+Completed solutions: 1
+Pruned solutions: 0
+Deferred solutions: 0
+Invalid solutions: 0
+
+Best Solution:
+
+>!> Solution #1:
+Checksum = 50b4172d
+>!> remove  at-1-1
+>!> remove  shadow-1.0-1
+>!> installs=0, upgrades=0, uninstalls=2
+download size=0.0k, install size=0.0k
+total priority=0, min priority=2147483647, max priority=0
+other penalties=0
+- - - - - - - - - -
+There are no installable providers of libsomething.so.0 for shadow-1.0-1
+shadow-1.0-1: missing requirement libsomething.so.0
+There are no installable providers of shadow for at-1-1
+shadow provides shadow-1.0-1, but is scheduled to be uninstalled.
+shadow provides shadow-1.0-1, but it is uninstallable.  Try installing it on its own for more details.
+at-1-1: depended on  [shadow-1.0-1]
+at-1-1: missing requirement shadow
+

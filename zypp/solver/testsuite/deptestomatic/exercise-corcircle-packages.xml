@@ -1,0 +1,47 @@
+<channel>
+  <subchannel>
+    <package>
+      <name>B</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>B.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <conflicts>
+        <dep name='A'/>
+      </conflicts>
+    </package>
+    <package>
+      <name>C</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>C.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='B'/>
+      </requires>
+      <obsoletes>
+        <dep name='A'/>
+      </obsoletes>
+    </package>
+  </subchannel>
+</channel>

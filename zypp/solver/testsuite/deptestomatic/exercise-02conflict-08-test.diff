@@ -1,0 +1,13 @@
+--- exercise-02conflict-08-test.solution	2005-11-05 17:15:57.000000000 +0100
++++ exercise-02conflict-08-test.mistake	2005-11-30 10:37:37.000000000 +0100
+@@ -1,10 +0,0 @@
+->!> Installing baz from channel test
+->!> Solution #1:
+->!> install baz-1.0-1[test]
+->!> upgrade foo-1.0-1 => foo-2.0-1[test]
+->!> |unflag bar-2.0-1[test]
+->!> installs=1, upgrades=1, uninstalls=0
+->!> Solution #2:
+->!> install baz-1.0-1[test]
+->!> remove  foo-1.0-1
+->!> installs=1, upgrades=0, uninstalls=1

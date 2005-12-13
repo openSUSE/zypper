@@ -1,0 +1,6 @@
+>!> Installing libident-dev from channel test
+>!> Solution #1:
+>!> install libident-dev-2.0-1[test]
+>!> remove  smail-1.0-1
+>!> upgrade libident-1.9-1 => libident-2.0-1[test]
+>!> installs=1, upgrades=1, uninstalls=1

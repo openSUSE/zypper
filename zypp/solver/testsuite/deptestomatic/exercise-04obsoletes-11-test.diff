@@ -1,0 +1,7 @@
+--- exercise-04obsoletes-11-test.solution	2005-11-06 10:51:59.000000000 +0100
++++ exercise-04obsoletes-11-test.mistake	2005-11-30 10:37:37.000000000 +0100
+@@ -1,4 +0,0 @@
+->!> Installing D2 from channel test
+->!> Solution #1:
+->!> install D2-2.0-1[test]
+->!> installs=1, upgrades=0, uninstalls=0

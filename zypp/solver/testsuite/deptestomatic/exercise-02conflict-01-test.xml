@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-02conflict-system.xml"/>
+  <channel name="test" file="exercise-02conflict-packages.xml"/>
+</setup>
+
+
+<!-- installed p1 directly conflicts with candidate p2 -->
+<trial>
+  <install channel="test" package="p2"/>
+</trial>
+
+</test>

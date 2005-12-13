@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-obscureobsoletes-system.xml"/>
+  <channel name="test" file="exercise-obscureobsoletes-packages.xml"/>
+</setup>
+
+<!-- 
+# 4 barold replaces bar via provides. bar-devel gets broken
+barold
+ -->
+<trial>
+  <install channel="test" package="barold"/>
+</trial>
+
+</test>

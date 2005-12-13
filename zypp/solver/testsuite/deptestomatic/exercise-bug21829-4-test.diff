@@ -1,0 +1,11 @@
+--- exercise-bug21829-4-test.solution	2005-11-05 21:04:25.000000000 +0100
++++ exercise-bug21829-4-test.mistake	2005-11-30 10:37:36.000000000 +0100
+@@ -1,8 +0,0 @@
+->!> Installing lsb from channel test
+->!> Installing cups from channel test
+->!> Solution #1:
+->!> install cups-1.0-1[test]
+->!> install cups-client-1.0-1[test]
+->!> install lsb-1.0-1[test]
+->!> |unflag lprng-1.0-1[test]
+->!> installs=3, upgrades=0, uninstalls=0

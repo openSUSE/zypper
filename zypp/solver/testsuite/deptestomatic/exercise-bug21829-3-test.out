@@ -1,0 +1,30 @@
+Loaded 1 package from deptestomatic/exercise-bug21829-system.xml
+Loaded 4 packages from deptestomatic/exercise-bug21829-packages.xml
+
+------------------------------------------------
+
+>!> Installing lsb from channel test
+>!> Installing lprng from channel test
+Can't find rcd 1.x subscription file '/var/lib/rcd/subscriptions.xml'
+
+Completed solutions: 1
+Pruned solutions: 0
+Deferred solutions: 0
+Invalid solutions: 0
+
+Best Solution:
+
+>!> Solution #1:
+Checksum = de4da918
+>!> install lprng-1.0-1[test]
+>!> install lsb-1.0-1[test]
+>!> |unflag cups-client-1.0-1[test]
+>!> installs=2, upgrades=0, uninstalls=0
+download size=0.2k, install size=0.9k
+total priority=0, min priority=800, max priority=800
+other penalties=0
+- - - - - - - - - -
+Installing lsb-1.0-1[test]
+Installing lprng-1.0-1[test]
+Marking resolvable cups-client-1.0-1 as uninstallable
+

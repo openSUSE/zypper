@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-inconsistent2-system.xml"/>
+  <channel name="test" file="exercise-inconsistent2-packages.xml"/>
+</setup>
+
+<!-- 
+# installed shadow has an open dependeny but there is no replacement available
+JUST_SOLVE
+ -->
+<trial>
+  <verify/>
+</trial>
+
+</test>

@@ -1,0 +1,84 @@
+<channel>
+  <subchannel>
+    <package>
+      <name>mod_php4</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>4.3.4</version>
+          <release>43.4</release>
+          <filename>mod_php4.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='apache-mod_php4'/>
+      </requires>
+    </package>
+    <package>
+      <name>horde</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>horde.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='mod_php'/>
+      </requires>
+    </package>
+    <package>
+      <name>apache-mod_php4</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>4.3.4</version>
+          <release>43.4</release>
+          <filename>apache-mod_php4.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='mod_php'/>
+      </provides>
+    </package>
+    <package>
+      <name>apache2-mod_php4</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>4.3.4</version>
+          <release>43.4</release>
+          <filename>apache2-mod_php4.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='mod_php'/>
+      </provides>
+    </package>
+  </subchannel>
+</channel>

@@ -1,0 +1,87 @@
+Loaded 1 package from deptestomatic/exercise-alternatives-system.xml
+Loaded 8 packages from deptestomatic/exercise-alternatives-packages.xml
+
+------------------------------------------------
+
+>!> Installing alt-conflict from channel test
+Can't find rcd 1.x subscription file '/var/lib/rcd/subscriptions.xml'
+
+Completed solutions: 4
+Pruned solutions: 0
+Deferred solutions: 0
+Invalid solutions: 0
+
+Best Solution:
+
+>!> Solution #1:
+Checksum = 1d401a79
+>!> install alt-conflict-1.0-1[test]
+>!> install icewm-1.0-1[test]
+>!> install postfix-1.0-1[test]
+>!> remove  foo-1.0-1
+>!> installs=3, upgrades=0, uninstalls=1
+download size=0.4k, install size=1.3k
+total priority=0, min priority=800, max priority=800
+other penalties=-1600
+- - - - - - - - - -
+postfix-1.0-1[test]:  needed by  [alt-conflict-1.0-1]
+Installing postfix-1.0-1[test]
+icewm-1.0-1[test]:  needed by  [alt-conflict-1.0-1]
+Installing icewm-1.0-1[test]
+Installing alt-conflict-1.0-1[test]
+foo-1.0-1: conflicts with  [alt-conflict-1.0-1]
+
+Other Valid Solutions:
+
+>!> Solution #2:
+Checksum = 8e51c99c
+>!> install WindowMaker-1.0-1[test]
+>!> install alt-conflict-1.0-1[test]
+>!> install sendmail-1.0-1[test]
+>!> remove  foo-1.0-1
+>!> installs=3, upgrades=0, uninstalls=1
+download size=0.4k, install size=1.3k
+total priority=0, min priority=800, max priority=800
+other penalties=-1600
+- - - - - - - - - -
+sendmail-1.0-1[test]:  needed by  [alt-conflict-1.0-1]
+Installing sendmail-1.0-1[test]
+WindowMaker-1.0-1[test]:  needed by  [alt-conflict-1.0-1]
+Installing WindowMaker-1.0-1[test]
+Installing alt-conflict-1.0-1[test]
+foo-1.0-1: conflicts with  [alt-conflict-1.0-1]
+>!> Solution #3:
+Checksum = c852b21c
+>!> install WindowMaker-1.0-1[test]
+>!> install alt-conflict-1.0-1[test]
+>!> install postfix-1.0-1[test]
+>!> remove  foo-1.0-1
+>!> installs=3, upgrades=0, uninstalls=1
+download size=0.4k, install size=1.3k
+total priority=0, min priority=800, max priority=800
+other penalties=-1600
+- - - - - - - - - -
+postfix-1.0-1[test]:  needed by  [alt-conflict-1.0-1]
+Installing postfix-1.0-1[test]
+WindowMaker-1.0-1[test]:  needed by  [alt-conflict-1.0-1]
+Installing WindowMaker-1.0-1[test]
+Installing alt-conflict-1.0-1[test]
+foo-1.0-1: conflicts with  [alt-conflict-1.0-1]
+>!> Solution #4:
+Checksum = 3215b7c9
+>!> install alt-conflict-1.0-1[test]
+>!> install icewm-1.0-1[test]
+>!> install sendmail-1.0-1[test]
+>!> remove  foo-1.0-1
+>!> installs=3, upgrades=0, uninstalls=1
+download size=0.4k, install size=1.3k
+total priority=0, min priority=800, max priority=800
+other penalties=-1600
+- - - - - - - - - -
+sendmail-1.0-1[test]:  needed by  [alt-conflict-1.0-1]
+Installing sendmail-1.0-1[test]
+icewm-1.0-1[test]:  needed by  [alt-conflict-1.0-1]
+Installing icewm-1.0-1[test]
+Installing alt-conflict-1.0-1[test]
+foo-1.0-1: conflicts with  [alt-conflict-1.0-1]
+

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-obscureobsoletes-system.xml"/>
+  <channel name="test" file="exercise-obscureobsoletes-packages.xml"/>
+</setup>
+
+<!-- 
+# 11 same but via deps
+ggg hhh
+ -->
+<trial>
+  <install channel="test" package="ggg"/>
+  <install channel="test" package="hhh"/>
+</trial>
+
+</test>

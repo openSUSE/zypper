@@ -1,0 +1,296 @@
+<channel>
+  <subchannel>
+    <package>
+      <name>libc6</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.0.7</version>
+          <release>1</release>
+          <filename>libc6.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='libc.so.6'/>
+        <dep name='libm.so.6'/>
+      </provides>
+    </package>
+    <package>
+      <name>libgdbm</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.17</version>
+          <release>1</release>
+          <filename>libgdbm.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='libc6' op='&gt;=' version='2.0.7'/>
+      </requires>
+    </package>
+    <package>
+      <name>bash</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.0.2</version>
+          <release>1</release>
+          <filename>bash.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='/bin/sh'/>
+        <dep name='/bin/bash'/>
+      </provides>
+      <requires>
+        <dep name='libc6'/>
+      </requires>
+    </package>
+    <package>
+      <name>amd</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>upl102</version>
+          <release>11</release>
+          <filename>amd.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='libc.so.6'/>
+        <dep name='libm.so.6'/>
+        <dep name='libgdbm'/>
+      </requires>
+    </package>
+    <package>
+      <name>foo1</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>foo1.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='libc6' op='&gt;=' version='2.0.6'/>
+        <dep name='bar1'/>
+      </requires>
+    </package>
+    <package>
+      <name>foo2</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>foo2.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='bar2' op='&gt;=' version='1.0'/>
+      </requires>
+    </package>
+    <package>
+      <name>foo2a</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>foo2a.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='bar2' op='&gt;=' version='1.0'/>
+        <dep name='bar3' op='=' version='2.0'/>
+      </requires>
+    </package>
+    <package>
+      <name>foo2b</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>foo2b.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='bar2' op='&lt;=' version='1.1'/>
+      </requires>
+    </package>
+    <package>
+      <name>foo2c</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>foo2c.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='bar2' op='&gt;' version='1.0'/>
+      </requires>
+    </package>
+    <package>
+      <name>foo2d</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>foo2d.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='bar2' op='&gt;' version='2.0'/>
+      </requires>
+    </package>
+    <package>
+      <name>foo2e</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>foo2e.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='bar2' op='&lt;=' version='1.0'/>
+      </requires>
+    </package>
+    <package>
+      <name>foo3</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>foo3.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='/usr/bin/bar'/>
+      </provides>
+      <requires>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>foo4</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>foo4.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='/usr/bin/bar'/>
+      </requires>
+    </package>
+    <package>
+      <name>foo5</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>foo5.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='/sbin/unusual'/>
+      </requires>
+    </package>
+  </subchannel>
+</channel>

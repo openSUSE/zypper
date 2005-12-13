@@ -1,0 +1,28 @@
+#
+# multi_test.exp
+# 'main' file for all solver tests
+#
+# Runs all tests with the extention "multi" for several times.
+# Each testprogram <programname>.multi has an own subdirectory
+# <programmname> in which several testcases are defined for this program
+# Each testcase has 3 files:
+#
+#             <programname>.in
+#             <programname>.out
+#             <programname>.err
+#
+# The program "<programname>.multi" will be called with the argument
+# "<programname>.in". The standard output will be compared with the 
+# files "<programname>.out" and "<programname>.err".
+# The testcase is successful if the program returns 0 AND the outputs
+# are identically equal to the files "<programname>.out" and 
+# "<programname>.err".
+
+
+if { [catch {  set filenames [glob $srcdir/*.multi] } ] } {
+    puts "No .multi files found"
+} else {
+    # foreach file, call multi-run (from testsuite/lib)
+
+    foreach file $filenames { multi-run $file }
+}

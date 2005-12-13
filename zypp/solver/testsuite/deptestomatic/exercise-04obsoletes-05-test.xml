@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-04obsoletes-system.xml"/>
+  <channel name="test" file="exercise-04obsoletes-packages.xml"/>
+</setup>
+
+<!-- 
+# libbar2 obsoletes and provides libbar, so someother's dependency (though
+# versioned) is still ok
+libbar2
+ -->
+<trial>
+  <install channel="test" package="libbar2"/>
+</trial>
+
+</test>

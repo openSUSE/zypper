@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-02conflict-system.xml"/>
+  <channel name="test" file="exercise-02conflict-packages.xml"/>
+</setup>
+
+
+<!-- solve conflict by upgrade (3): same as above, but upgrade of foo3 still
+     conflicts, so this should fail -->
+<trial>
+  <install channel="test" package="baz3"/>
+</trial>
+
+</test>

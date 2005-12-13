@@ -1,0 +1,25 @@
+Loaded 1 package from deptestomatic/exercise-01simple-system.xml
+Loaded 14 packages from deptestomatic/exercise-01simple-packages.xml
+
+------------------------------------------------
+
+>!> Installing foo2a from channel test
+>!> Installing foo2b from channel test
+>!> Installing foo2c from channel test
+Can't find rcd 1.x subscription file '/var/lib/rcd/subscriptions.xml'
+
+Pruned solutions: 0
+Deferred solutions: 0
+
+Failed Solution: 
+Download Size: 369, Install Size: 1368, Total Priority: 0, Min Priority: 800, Max Priority: 800, Other Penalties: 0, Invalid
+- - - - - - - - - -
+Installing foo2a-1.0-1[test]
+Installing foo2b-1.0-1[test]
+Installing foo2c-1.0-1[test]
+There are no installable providers of bar2 > 1.0 for foo2c-1.0-1[test]
+There are no installable providers of bar2 <= 1.1 for foo2b-1.0-1[test]
+There are no installable providers of bar3 == 2.0 for foo2a-1.0-1[test]
+There are no installable providers of bar2 >= 1.0 for foo2a-1.0-1[test]
+[ERROR] foo2a-1.0-1 is scheduled to be installed, but this is not possible because of dependency problems.
+[ERROR] Marking this resolution attempt as invalid.

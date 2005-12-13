@@ -1,0 +1,28 @@
+Loaded 20 packages from deptestomatic/exercise-02conflict-system.xml
+Loaded 25 packages from deptestomatic/exercise-02conflict-packages.xml
+
+------------------------------------------------
+
+>!> Installing libident-dev from channel test
+Can't find rcd 1.x subscription file '/var/lib/rcd/subscriptions.xml'
+
+Completed solutions: 1
+Pruned solutions: 0
+Deferred solutions: 0
+Invalid solutions: 0
+
+Best Solution:
+
+>!> Solution #1:
+Checksum = 8ca0c580
+>!> install libident-dev-2.0-1[test]
+>!> upgrade libident-1.9-1 => libident-2.0-1[test]
+>!> installs=1, upgrades=1, uninstalls=0
+download size=0.2k, install size=0.4k
+total priority=0, min priority=800, max priority=800
+other penalties=0
+- - - - - - - - - -
+Installing libident-dev-2.0-1[test]
+libident-2.0-1[test]:  needed by  [libident-dev-2.0-1]
+Upgrading libident-1.9-1 => libident-2.0-1[test]
+

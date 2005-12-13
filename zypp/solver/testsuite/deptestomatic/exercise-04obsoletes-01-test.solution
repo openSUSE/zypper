@@ -1,0 +1,7 @@
+>!> Installing foonew from channel test
+>!> Installing fooc from channel test
+>!> Solution #1:
+>!> install fooc-1.0-1[test]
+>!> install foonew-2.0-1[test]
+>!> remove  foo-1.0-1
+>!> installs=2, upgrades=0, uninstalls=1

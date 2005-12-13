@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-05reallive-system.xml"/>
+  <channel name="test" file="exercise-05reallive-packages.xml"/>
+</setup>
+
+<!-- 
+CLEAR_DEFAULTS
+DEFINE_DEFAULTS jdk-runtime jdk-shared jdk-static
+# these two conflict with each other
+ALTHANDLING=auto-no-default jdk-shared jdk-static
+ -->
+<trial>
+  <install channel="test" package="jdk-shared"/>
+  <install channel="test" package="jdk-static"/>
+</trial>
+
+</test>

@@ -1,0 +1,34 @@
+Loaded 2 packages from deptestomatic/exercise-xfree-system.xml
+Loaded 2 packages from deptestomatic/exercise-xfree-packages.xml
+
+------------------------------------------------
+
+>!> Installing XFree86 from channel test
+>!> Installing XFree86-libs from channel test
+Can't find rcd 1.x subscription file '/var/lib/rcd/subscriptions.xml'
+
+Completed solutions: 1
+Pruned solutions: 0
+Deferred solutions: 0
+Invalid solutions: 0
+
+Best Solution:
+
+>!> Solution #1:
+Checksum = 22a93a1c
+>!> install XFree86-4.3.0-1[test]
+>!> install XFree86-libs-4.3.0-1[test]
+>!> remove  xf86-4.2.0-176
+>!> remove  xshared-4.2.0-176
+>!> installs=2, upgrades=0, uninstalls=2
+download size=0.2k, install size=0.9k
+total priority=0, min priority=800, max priority=800
+other penalties=0
+- - - - - - - - - -
+Installing XFree86-4.3.0-1[test]
+Installing XFree86-libs-4.3.0-1[test]
+xshared-4.2.0-176: replaced by  [XFree86-libs-4.3.0-1]
+xf86-4.2.0-176: replaced by  [XFree86-4.3.0-1]
+There are no installable providers of libXrandr.so.1 for xf86-4.2.0-176
+xshared provides libXrandr.so.1, but is scheduled to be uninstalled.
+

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-obscureobsoletes-system.xml"/>
+  <channel name="test" file="exercise-obscureobsoletes-packages.xml"/>
+</setup>
+
+<!-- 
+# 2 same thing but lets see what happens if packages are protected
+foo2 @foo @foo-devel
+ -->
+<trial>
+  <lock package="foo" channel="test"/>
+  <lock package="foo-devel" channel="test"/>
+  <install channel="test" package="foo2"/>
+</trial>
+
+</test>

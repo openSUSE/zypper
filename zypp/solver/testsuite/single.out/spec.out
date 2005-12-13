@@ -1,0 +1,6 @@
+emptySpec        PASS
+epochSpec        PASS
+versionSpec      PASS
+releaseSpec      PASS
+archSpec         FAIL
+fullSpec         FAIL

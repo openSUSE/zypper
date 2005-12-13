@@ -1,0 +1,20 @@
+Loaded 13 packages from deptestomatic/exercise-04obsoletes-system.xml
+Loaded 16 packages from deptestomatic/exercise-04obsoletes-packages.xml
+
+------------------------------------------------
+
+>!> Installing A from channel test
+>!> Installing B from channel test
+Can't find rcd 1.x subscription file '/var/lib/rcd/subscriptions.xml'
+
+Pruned solutions: 0
+Deferred solutions: 0
+
+Failed Solution: 
+Download Size: 246, Install Size: 912, Total Priority: 0, Min Priority: 800, Max Priority: 800, Other Penalties: 0, Invalid
+- - - - - - - - - -
+Installing A-1.0-1[test]
+Installing B-1.0-1[test]
+Marking C-1.0-1[test] as uninstallable due to conflicts over  C (C-1.0-1) from B-1.0-1[test] [B-1.0-1, C-1.0-1]
+[ERROR] A conflict over  A (A-1.0-1) requires the removal of the to-be-installed resolvable A-1.0-1[test] [B-1.0-1]
+[ERROR] Marking this resolution attempt as invalid.

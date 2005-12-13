@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-obscureobsoletes-system.xml"/>
+  <channel name="test" file="exercise-obscureobsoletes-packages.xml"/>
+</setup>
+
+<!-- 
+# 1 foo2 obsoletes foo and foo-devel. foo-devel requires foo. No problem since
+# foo-devel is obsoleted
+foo2
+ -->
+<trial>
+  <install channel="test" package="foo2"/>
+</trial>
+
+</test>

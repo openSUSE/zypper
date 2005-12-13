@@ -1,0 +1,67 @@
+Loaded 75 packages from deptestomatic/exercise-05reallive-system.xml
+Loaded 591 packages from deptestomatic/exercise-05reallive-packages.xml
+
+------------------------------------------------
+
+>!> Installing dosemu from channel test
+>!> Installing dviutils from channel test
+>!> Installing fetchmail from channel test
+>!> Installing freeciv from channel test
+>!> Installing ghostscript from channel test
+Can't find rcd 1.x subscription file '/var/lib/rcd/subscriptions.xml'
+
+Completed solutions: 1
+Pruned solutions: 0
+Deferred solutions: 0
+Invalid solutions: 0
+
+Best Solution:
+
+>!> Solution #1:
+Checksum = 8557ab48
+>!> install XFree86-libs-3.3.5-1[test]
+>!> install Xaw3d-1.5-2[test]
+>!> install dosemu-0.98.5-3[test]
+>!> install dviutils-1.0-8[test]
+>!> install fetchmail-5.0.4-0[test]
+>!> install freeciv-1.8.0-1[test]
+>!> install ghostscript-5.10-2[test]
+>!> install sed-3.02-1[test]
+>!> install teTeX-1.0.5-1[test]
+>!> install xpm-4.11-1[test]
+>!> upgrade tcsh-6.08.00-1 => tcsh-6.08.00-2[test]
+>!> installs=10, upgrades=1, uninstalls=0
+download size=1.3k, install size=4.5k
+total priority=0, min priority=800, max priority=800
+other penalties=0
+- - - - - - - - - -
+Installing dosemu-0.98.5-3[test]
+Installing dviutils-1.0-8[test]
+Installing fetchmail-5.0.4-0[test]
+Installing freeciv-1.8.0-1[test]
+Installing ghostscript-5.10-2[test]
+XFree86-libs-3.3.5-1[test]:  needed by  [dosemu-0.98.5-3]
+Installing XFree86-libs-3.3.5-1[test]
+XFree86-libs-3.3.5-1[test]:  needed by  [dosemu-0.98.5-3]
+teTeX-1.0.5-1[test]:  needed by  [dviutils-1.0-8]
+Installing teTeX-1.0.5-1[test]
+tcsh-6.08.00-2[test]:  needed by  [dviutils-1.0-8]
+Upgrading tcsh-6.08.00-1 => tcsh-6.08.00-2[test]
+XFree86-libs-3.3.5-1[test]:  needed by  [freeciv-1.8.0-1]
+XFree86-libs-3.3.5-1[test]:  needed by  [freeciv-1.8.0-1]
+XFree86-libs-3.3.5-1[test]:  needed by  [freeciv-1.8.0-1]
+Xaw3d-1.5-2[test]:  needed by  [freeciv-1.8.0-1]
+Installing Xaw3d-1.5-2[test]
+XFree86-libs-3.3.5-1[test]:  needed by  [freeciv-1.8.0-1]
+XFree86-libs-3.3.5-1[test]:  needed by  [freeciv-1.8.0-1]
+xpm-4.11-1[test]:  needed by  [freeciv-1.8.0-1]
+Installing xpm-4.11-1[test]
+XFree86-libs-3.3.5-1[test]:  needed by  [freeciv-1.8.0-1]
+XFree86-libs-3.3.5-1[test]:  needed by  [ghostscript-5.10-2]
+XFree86-libs-3.3.5-1[test]:  needed by  [ghostscript-5.10-2]
+XFree86-libs-3.3.5-1[test]:  needed by  [ghostscript-5.10-2]
+XFree86-libs-3.3.5-1[test]:  needed by  [ghostscript-5.10-2]
+XFree86-libs-3.3.5-1[test]:  needed by  [ghostscript-5.10-2]
+sed-3.02-1[test]:  needed by  [teTeX-1.0.5-1]
+Installing sed-3.02-1[test]
+

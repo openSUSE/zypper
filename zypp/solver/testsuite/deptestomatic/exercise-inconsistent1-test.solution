@@ -1,0 +1,3 @@
+>!> Solution #1:
+>!> upgrade shadow-1.0-1 => shadow-1.1-1[test]
+>!> installs=0, upgrades=1, uninstalls=0

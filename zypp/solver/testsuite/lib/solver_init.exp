@@ -1,0 +1,194 @@
+#
+# run a prg file for single-time used testcases
+#
+proc single-run { src } {
+
+  set path [split $src "/"]
+  set filename [lindex $path [expr [llength $path]-1]]
+
+  # extract basename and check extension
+
+  set fname [split $filename "."]
+
+  if {[llength $fname] < 2} {
+    fail "Bad filename syntax '$src'"
+    return -1
+  }
+  if {[lindex $fname [expr [llength $fname]-1]] != "single"} {
+    fail "Not .single extension '$src'"
+    return -1
+  }
+
+  # setup filenames
+
+  # $src is the name of the original testfile with absolute path
+  # tests/$filename is the name of the original testfile with relative path,
+  #                 relative to the testsuite directory
+  set test_prg  "$filename"
+
+  set base_name [lindex $fname 0]
+
+  puts "Running $base_name..."
+
+  #generate output directory
+
+  exec mkdir -p ./single.out/out
+  set outfile ./single.out/out/$base_name.out
+  set refoutfile ./single.out/$base_name.out
+  set errfile ./single.out/out/$base_name.err
+  set referrfile ./single.out/$base_name.err
+
+  # run the test
+
+  set command "LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:../src/.libs\" $src >$outfile 2>$errfile"
+  set result ""
+  set oops [catch { set result [exec sh -c $command] } catched]
+
+  if {$oops != 0} {
+    fail "test case failed for $base_name: $catched"
+    return -1
+  }
+
+  # check return code from runprg
+
+  if {$result != ""} {
+    warning "Run of $base_name results in '$result'"
+    return -1
+  }
+
+  if { [ file exists $refoutfile ] == 0 } {
+      perror "Missing file $refoutfile" 0
+  } else {
+      if { [ diff $refoutfile $outfile ] != 1 } {
+	  puts "Output doesn't match expected data:"
+	  puts [ exec sh -c "diff -u $refoutfile $outfile || true" ]
+	  fail $base_name
+	  return -1
+      }
+  }
+
+  if { [ file exists $referrfile ] == 0 } {
+      perror "Missing file $referrfile" 0
+  } else {
+      if { [ diff $referrfile $errfile ] != 1 } {
+	  puts "Output doesn't match expected data:"
+	  puts [ exec sh -c "diff -u $referrfile $errfile || true" ]
+	  fail $base_name
+	  return -1
+      }
+  }
+
+  # ok, all is fine
+
+  pass $base_name
+
+  return 0
+}
+
+
+#
+# run a prg file for several times ( defined in subdirectory <programname> )
+#
+proc multi-run { src } {
+  
+  set errorOccured 0
+  set path [split $src "/"]
+  set filename [lindex $path [expr [llength $path]-1]]
+
+  # extract basename and check extension
+
+  set fname [split $filename "."]
+
+  if {[llength $fname] < 2} {
+    fail "Bad filename syntax '$src'"
+    return -1
+  }
+  if {[lindex $fname [expr [llength $fname]-1]] != "multi"} {
+    fail "Not .multi extension '$src'"
+    return -1
+  }
+
+  # setup filenames
+
+  # $src is the name of the original testfile with absolute path
+  # tests/$filename is the name of the original testfile with relative path,
+  #                 relative to the testsuite directory
+  set test_prg  "$filename"
+
+  set base_name [lindex $fname 0]
+
+  puts "Running $base_name..."
+
+  set testcases [glob $base_name/*.xml ]
+
+  foreach testcase $testcases { 
+      set testPath [split $testcase "/"]
+      set testFilename [lindex $testPath [expr [llength $testPath]-1]]
+      set testFname [split $testFilename "."]
+      set testBase_name [lindex $testFname 0]
+      puts "   ... $testBase_name" 
+
+      #generate output directory
+
+      exec mkdir -p ./$base_name/out
+      set errfile ./$base_name/out/$testBase_name.err
+      set referrfile ./$base_name/$testBase_name.err
+      set outfile ./$base_name/out/$testBase_name.out
+      set refoutfile ./$base_name/$testBase_name.out
+
+      # run the test
+
+      set command "LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:../src/.libs\" $src $testcase >$outfile 2>$errfile"
+      set result ""
+      set oops [catch { set result [exec sh -c $command] } catched]
+
+      if {$oops != 0} {
+	  fail "test case failed for $testBase_name: $catched"
+	  set errorOccured 0
+	  continue
+      }
+
+      # check return code from runprg
+      
+      if {$result != ""} {
+	  warning "Run of $testBase_name results in '$result'"
+	  set errorOccured 0
+	  continue
+      }
+
+      if { [ file exists $refoutfile ] == 0 } {
+	  perror "Missing file $refoutfile" 0
+      } else {
+	  if { [ diff $refoutfile $outfile ] != 1 } {
+	      puts "Output doesn't match expected data:"
+	      puts [ exec sh -c "diff -u $refoutfile $outfile || true" ]
+	      fail $testBase_name
+	      set errorOccured 0
+	      continue
+	  }
+      }
+
+      if { [ file exists $referrfile ] == 0 } {
+	  perror "Missing file $referrfile" 0
+      } else {
+	  if { [ diff $referrfile $errfile ] != 1 } {
+	      puts "Output doesn't match expected data:"
+	      puts [ exec sh -c "diff -u $referrfile $errfile || true" ]
+	      fail $testBase_name
+	      set errorOccured 0
+	      continue
+	  }
+      }
+
+      # ok, all is fine
+      pass $testBase_name
+  }
+
+  if { $errorOccured == 0 } {
+      return 0
+  } else {
+      return -1
+  }
+
+}
+

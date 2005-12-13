@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-04obsoletes-system.xml"/>
+  <channel name="test" file="exercise-04obsoletes-packages.xml"/>
+</setup>
+
+<!-- 
+# libD provides D. now D is going to be installed so libD has to go with rpm4
+D
+ -->
+<trial>
+  <install channel="test" package="D"/>
+</trial>
+
+</test>

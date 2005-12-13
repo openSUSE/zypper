@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-corcircle-system.xml"/>
+  <channel name="test" file="exercise-corcircle-packages.xml"/>
+</setup>
+
+<!-- 
+# B conflicts with installed A which however is obsoleted by C. So this is
+# solvable but not installable as C requires B. Therefore B would be installed
+# a time when A is still there.
+B C
+ -->
+<trial>
+  <install channel="test" package="B"/>
+  <install channel="test" package="C"/>
+</trial>
+
+</test>

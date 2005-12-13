@@ -1,0 +1,13 @@
+--- exercise-02conflict-14-test.solution	2005-11-04 23:24:16.000000000 +0100
++++ exercise-02conflict-14-test.mistake	2005-11-30 10:37:37.000000000 +0100
+@@ -1,10 +0,0 @@
+->!> Installing foouser from channel test
+->!> Installing libfoo from channel test
+->!> Installing libfoo-dev from channel test
+->!> Installing libfoog from channel test
+->!> Solution #1:
+->!> install libfoog-1.1-1[test]
+->!> upgrade foouser-1.0-1 => foouser-1.0-2[test]
+->!> upgrade libfoo-1.0-1 => libfoo-1.1-1[test]
+->!> upgrade libfoo-dev-1.0-1 => libfoo-dev-1.1-1[test]
+->!> installs=1, upgrades=3, uninstalls=0

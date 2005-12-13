@@ -1,0 +1,127 @@
+<channel>
+  <subchannel>
+    <package>
+      <name>foo</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>foo.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='fooold'/>
+      </provides>
+    </package>
+    <package>
+      <name>foo-devel</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.1</version>
+          <release>1</release>
+          <filename>foo-devel.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='fooold'/>
+      </provides>
+      <requires>
+        <dep name='foo' op='=' version='1.0' release='1'/>
+      </requires>
+    </package>
+    <package>
+      <name>bar</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>bar.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='barold'/>
+      </provides>
+    </package>
+    <package>
+      <name>bar-devel</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.1</version>
+          <release>1</release>
+          <filename>bar-devel.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='bar' op='=' version='1.0' release='1'/>
+      </requires>
+    </package>
+    <package>
+      <name>bar2</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>bar2.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+    </package>
+    <package>
+      <name>bar2-devel</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.1</version>
+          <release>1</release>
+          <filename>bar2-devel.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='barold2'/>
+      </provides>
+      <requires>
+        <dep name='bar2' op='=' version='1.0' release='1'/>
+      </requires>
+    </package>
+  </subchannel>
+</channel>

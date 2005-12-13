@@ -1,0 +1,176 @@
+<channel>
+  <subchannel>
+    <package>
+      <name>alt</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>alt.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='windowmanager'/>
+        <dep name='smtp_daemon'/>
+      </requires>
+    </package>
+    <package>
+      <name>alt-unresolvable</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>alt-unresolvable.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='windowmanager'/>
+        <dep name='smtp_daemon'/>
+        <dep name='something' op='=' version='4.0' release='1'/>
+      </requires>
+    </package>
+    <package>
+      <name>alt-conflict</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>alt-conflict.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='windowmanager'/>
+        <dep name='smtp_daemon'/>
+      </requires>
+      <conflicts>
+        <dep name='foo'/>
+      </conflicts>
+    </package>
+    <package>
+      <name>alt-conflict-unresolvable</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>alt-conflict-unresolvable.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='windowmanager'/>
+        <dep name='smtp_daemon'/>
+        <dep name='something' op='=' version='4.0' release='1'/>
+      </requires>
+      <conflicts>
+        <dep name='foo'/>
+      </conflicts>
+    </package>
+    <package>
+      <name>WindowMaker</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>WindowMaker.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='windowmanager'/>
+      </provides>
+    </package>
+    <package>
+      <name>icewm</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>icewm.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='windowmanager'/>
+      </provides>
+    </package>
+    <package>
+      <name>postfix</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>postfix.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='smtp_daemon'/>
+      </provides>
+    </package>
+    <package>
+      <name>sendmail</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>1</release>
+          <filename>sendmail.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='smtp_daemon'/>
+      </provides>
+    </package>
+  </subchannel>
+</channel>

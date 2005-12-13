@@ -1,0 +1,18 @@
+>!> Installing dosemu from channel test
+>!> Installing dviutils from channel test
+>!> Installing fetchmail from channel test
+>!> Installing freeciv from channel test
+>!> Installing ghostscript from channel test
+>!> Solution #1:
+>!> install XFree86-libs-3.3.5-1[test]
+>!> install Xaw3d-1.5-2[test]
+>!> install dosemu-0.98.5-3[test]
+>!> install dviutils-1.0-8[test]
+>!> install fetchmail-5.0.4-0[test]
+>!> install freeciv-1.8.0-1[test]
+>!> install ghostscript-5.10-2[test]
+>!> install sed-3.02-1[test]
+>!> install teTeX-1.0.5-1[test]
+>!> install xpm-4.11-1[test]
+>!> upgrade tcsh-6.08.00-1 => tcsh-6.08.00-2[test]
+>!> installs=10, upgrades=1, uninstalls=0

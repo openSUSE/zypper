@@ -1,0 +1,79 @@
+<channel>
+  <subchannel>
+    <package>
+      <name>kdelibs-devel</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.0.1</version>
+          <release>4</release>
+          <filename>kdelibs-devel.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='kdelibs'/>
+        <dep name='kdesupport-devel'/>
+      </requires>
+    </package>
+    <package>
+      <name>kdesupport-devel</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.0.1</version>
+          <release>5</release>
+          <filename>kdesupport-devel.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='kdesupport'/>
+      </requires>
+    </package>
+    <package>
+      <name>kdesupport</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.0.1</version>
+          <release>5</release>
+          <filename>kdesupport.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+    </package>
+    <package>
+      <name>kdelibs</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.0.1</version>
+          <release>4</release>
+          <filename>kdelibs.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+    </package>
+  </subchannel>
+</channel>

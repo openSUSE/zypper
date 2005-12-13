@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-alternatives-system.xml"/>
+  <channel name="test" file="exercise-alternatives-packages.xml"/>
+</setup>
+
+<!-- 
+# double alternatives but otherwise good
+alt
+ -->
+<trial>
+  <install channel="test" package="alt"/>
+</trial>
+
+</test>

@@ -1,0 +1,8 @@
+>!> Installing lsb from channel test
+>!> Installing cups from channel test
+>!> Solution #1:
+>!> install cups-1.0-1[test]
+>!> install cups-client-1.0-1[test]
+>!> install lsb-1.0-1[test]
+>!> |unflag lprng-1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0

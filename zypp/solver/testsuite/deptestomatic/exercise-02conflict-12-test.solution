@@ -1,0 +1,4 @@
+>!> Installing required2 from channel test
+>!> Solution #1:
+>!> upgrade required2-1.0-1 => required2-2.0-1[test]
+>!> installs=0, upgrades=1, uninstalls=0

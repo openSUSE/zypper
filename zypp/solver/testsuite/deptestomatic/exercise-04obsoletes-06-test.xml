@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-04obsoletes-system.xml"/>
+  <channel name="test" file="exercise-04obsoletes-packages.xml"/>
+</setup>
+
+<!-- 
+# libbaz2 obsoletes and provides libbaz, so it breaks the dependency of
+# somemore.; however, somemore can be upgraded so that the conflict is solved
+libbaz2
+ -->
+<trial>
+  <install channel="test" package="libbaz2"/>
+</trial>
+
+</test>

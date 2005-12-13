@@ -1,0 +1,6 @@
+>!> Installing libbaz2 from channel test
+>!> Solution #1:
+>!> install libbaz2-2.0-1[test]
+>!> remove  libbaz-1.2-1
+>!> remove  somemore-1.0-1
+>!> installs=1, upgrades=0, uninstalls=2

@@ -1,0 +1,49 @@
+Loaded 17 packages from deptestomatic/exercise-06upgrade-system.xml
+Loaded 23 packages from deptestomatic/exercise-06upgrade-packages.xml
+
+------------------------------------------------
+
+Can't find rcd 1.x subscription file '/var/lib/rcd/subscriptions.xml'
+Unable to save subscription data to '/var/adm/zypp/subscriptions.xml'
+Subscription will not be saved!
+>!> Checking for upgrades...
+>!> Upgrading p2-1.0-1 => p2-2.0-1[test]
+>!> Upgrading p3-1.0-1 => p3-2.0-1[test]
+>!> Upgrading p4-1.0-1 => p4-2.0-1[test]
+>!> Upgrading p4a-1.0-1 => p4a-2.0-1[test]
+>!> Upgrading p5-1.0-1 => p5-2.0-1[test]
+>!> Upgrading p6-1.0-1 => p6-2.0-1[test]
+>!> Upgrading p8-1.0-1 => p8-2.0-1[test]
+>!> Upgrading p8a-1.0-1 => p8a-2.0-1[test]
+>!> Upgrading p9-1.0-1 => p9-2.0-1[test]
+>!> Upgrading 9 packages
+
+Pruned solutions: 0
+Deferred solutions: 0
+
+Failed Solution: 
+Download Size: 1353, Install Size: 912, Total Priority: 0, Min Priority: 1600, Max Priority: 1600, Other Penalties: 0, Invalid
+- - - - - - - - - -
+Upgrading p2-1.0-1 => p2-2.0-1[test]
+Upgrading p3-1.0-1 => p3-2.0-1[test]
+Upgrading p4-1.0-1 => p4-2.0-1[test]
+Upgrading p4a-1.0-1 => p4a-2.0-1[test]
+Upgrading p5-1.0-1 => p5-2.0-1[test]
+Upgrading p6-1.0-1 => p6-2.0-1[test]
+Upgrading p8-1.0-1 => p8-2.0-1[test]
+Upgrading p8a-1.0-1 => p8a-2.0-1[test]
+Upgrading p9-1.0-1 => p9-2.0-1[test]
+Marking resolvable p6b-2.0-1 as uninstallable
+p3a-2.0-1[test]:  needed by  [p3-2.0-1]
+Installing p3a-2.0-1[test]
+p9a-2.0-1[test]:  needed by  [p9-2.0-1]
+Installing p9a-2.0-1[test]
+p5a-1.0-1: conflicts with  [p5-2.0-1]
+There are no installable providers of p5a for p5b-1.0-1
+p5a provides p5a-1.0-1, but is scheduled to be uninstalled.
+There are no installable providers of p9c for p9a-2.0-1[test]
+p9c provides p9c-2.0-1, but it is uninstallable.  Try installing it on its own for more details.
+There are no installable providers of p9b for p9a-2.0-1[test]
+p9b provides p9b-2.0-1, but it is uninstallable.  Try installing it on its own for more details.
+[ERROR] p9a-2.0-1 is scheduled to be installed, but this is not possible because of dependency problems.
+[ERROR] Marking this resolution attempt as invalid.

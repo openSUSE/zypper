@@ -1,0 +1,21 @@
+<channel>
+  <subchannel>
+    <package>
+      <name>shadow</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.1</version>
+          <release>1</release>
+          <filename>shadow.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+    </package>
+  </subchannel>
+</channel>

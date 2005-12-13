@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-02conflict-system.xml"/>
+  <channel name="test" file="exercise-02conflict-packages.xml"/>
+</setup>
+
+
+<!-- solve conflict by upgrade (2): installed foo2 conflicts with baz21 provided
+     by candidate baz2; there's an upgrade for foo2 that doesn't conflict with
+     baz21 anymore (only with baz22 still) -->
+<trial>
+  <install channel="test" package="baz2"/>
+</trial>
+
+</test>

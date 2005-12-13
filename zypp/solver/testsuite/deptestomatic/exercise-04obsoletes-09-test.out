@@ -1,0 +1,27 @@
+Loaded 13 packages from deptestomatic/exercise-04obsoletes-system.xml
+Loaded 16 packages from deptestomatic/exercise-04obsoletes-packages.xml
+
+------------------------------------------------
+
+>!> Installing G from channel test
+Can't find rcd 1.x subscription file '/var/lib/rcd/subscriptions.xml'
+
+Completed solutions: 1
+Pruned solutions: 0
+Deferred solutions: 0
+Invalid solutions: 0
+
+Best Solution:
+
+>!> Solution #1:
+Checksum = 77adee7f
+>!> install G-1.0-1[test]
+>!> |unflag D-1.0-1[test]
+>!> installs=1, upgrades=0, uninstalls=0
+download size=0.1k, install size=0.4k
+total priority=0, min priority=800, max priority=800
+other penalties=0
+- - - - - - - - - -
+Installing G-1.0-1[test]
+Marking D-1.0-1[test] as uninstallable due to conflicts over  D (D-1.0-1) from G-1.0-1[test] [G-1.0-1, D-1.0-1]
+

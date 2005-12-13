@@ -1,0 +1,6 @@
+>!> Installing amd from channel test
+>!> Solution #1:
+>!> install amd-upl102-11[test]
+>!> install libgdbm-1.17-1[test]
+>!> upgrade libc6-2.0.5-1 => libc6-2.0.7-1[test]
+>!> installs=2, upgrades=1, uninstalls=0

@@ -1,0 +1,7 @@
+--- exercise-01simple-1-test.solution	2005-11-04 12:09:56.000000000 +0100
++++ exercise-01simple-1-test.mistake	2005-11-30 10:37:36.000000000 +0100
+@@ -1,4 +0,0 @@
+->!> Installing bash from channel test
+->!> Solution #1:
+->!> install bash-2.0.2-1[test]
+->!> installs=1, upgrades=0, uninstalls=0

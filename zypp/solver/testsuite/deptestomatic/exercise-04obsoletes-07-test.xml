@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-04obsoletes-system.xml"/>
+  <channel name="test" file="exercise-04obsoletes-packages.xml"/>
+</setup>
+
+<!--
+# Aiee... candidate B obsoletes candidate A;
+# PHI installsB and A shouldn't appear in the output list 
+# Zypp, being transaction based, installs neither (invalid solution)
+A B
+  -->
+<trial>
+  <install channel="test" package="A"/>
+  <install channel="test" package="B"/>
+</trial>
+
+</test>

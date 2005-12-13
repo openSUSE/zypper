@@ -1,0 +1,28 @@
+Loaded 1 package from deptestomatic/exercise-01simple-system.xml
+Loaded 14 packages from deptestomatic/exercise-01simple-packages.xml
+
+------------------------------------------------
+
+>!> Installing foo3 from channel test
+Can't find rcd 1.x subscription file '/var/lib/rcd/subscriptions.xml'
+
+Completed solutions: 1
+Pruned solutions: 0
+Deferred solutions: 0
+Invalid solutions: 0
+
+Best Solution:
+
+>!> Solution #1:
+Checksum = b0401108
+>!> install bash-2.0.2-1[test]
+>!> install foo3-1.0-1[test]
+>!> installs=2, upgrades=0, uninstalls=0
+download size=0.2k, install size=0.9k
+total priority=0, min priority=800, max priority=800
+other penalties=0
+- - - - - - - - - -
+Installing foo3-1.0-1[test]
+bash-2.0.2-1[test]:  needed by  [foo3-1.0-1]
+Installing bash-2.0.2-1[test]
+

@@ -1,0 +1,7 @@
+--- exercise-02conflict-12-test.solution	2005-11-04 23:21:05.000000000 +0100
++++ exercise-02conflict-12-test.mistake	2005-11-30 10:37:37.000000000 +0100
+@@ -1,4 +0,0 @@
+->!> Installing required2 from channel test
+->!> Solution #1:
+->!> upgrade required2-1.0-1 => required2-2.0-1[test]
+->!> installs=0, upgrades=1, uninstalls=0

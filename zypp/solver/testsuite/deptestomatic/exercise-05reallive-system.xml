@@ -1,0 +1,1978 @@
+<channel>
+  <subchannel>
+    <package>
+      <name>ncurses</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>4.2</version>
+          <release>1</release>
+          <filename>ncurses.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='curses'/>
+        <dep name='libform.so.4'/>
+        <dep name='libmenu.so.4'/>
+        <dep name='libncurses.so.4'/>
+        <dep name='libpanel.so.4'/>
+      </provides>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libncurses.so.4'/>
+      </requires>
+    </package>
+    <package>
+      <name>ld.so</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.9.9</version>
+          <release>2</release>
+          <filename>ld.so.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='/sbin/ldconfig'/>
+      </provides>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+      </requires>
+    </package>
+    <package>
+      <name>lisa</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>3.1</version>
+          <release>0</release>
+          <filename>lisa.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libncurses.so.4'/>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>procmail</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>3.10</version>
+          <release>8</release>
+          <filename>procmail.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libm.so.6'/>
+        <dep name='libnsl.so.1'/>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>DEV</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>3.3</version>
+          <release>0</release>
+          <filename>DEV.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='/usr/bin/perl'/>
+      </requires>
+    </package>
+    <package>
+      <name>tcsh</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>6.08.00</version>
+          <release>1</release>
+          <filename>tcsh.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='/usr/bin/perl'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libcrypt.so.1'/>
+        <dep name='libncurses.so.4'/>
+      </requires>
+    </package>
+    <package>
+      <name>patch</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.5</version>
+          <release>1</release>
+          <filename>patch.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+      </requires>
+    </package>
+    <package>
+      <name>libz</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0.2</version>
+          <release>1</release>
+          <filename>libz.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='libz.so.1'/>
+      </provides>
+      <requires>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+      </requires>
+    </package>
+    <package>
+      <name>SysVinit-scripts</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.04</version>
+          <release>0</release>
+          <filename>SysVinit-scripts.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='SysVinit' op='&gt;=' version='2.76'/>
+        <dep name='lisa' op='&gt;=' version='3.1'/>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='/bin/bash'/>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>sh-utils</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.16</version>
+          <release>3</release>
+          <filename>sh-utils.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='/usr/bin/env'/>
+      </provides>
+      <requires>
+        <dep name='libpam' op='&gt;=' version='0.58'/>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libcrypt.so.1'/>
+        <dep name='libdl.so.2'/>
+        <dep name='libm.so.6'/>
+        <dep name='libpam.so.0'/>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>kbd</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>0.96</version>
+          <release>1</release>
+          <filename>kbd.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>util-linux</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.7.1</version>
+          <release>5</release>
+          <filename>util-linux.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='lisa' op='&gt;=' version='3.0'/>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libcrypt.so.1'/>
+        <dep name='libdl.so.2'/>
+        <dep name='libm.so.6'/>
+        <dep name='libncurses.so.4'/>
+        <dep name='libpam.so.0'/>
+        <dep name='libpam_misc.so.0'/>
+        <dep name='/usr/bin/perl'/>
+      </requires>
+    </package>
+    <package>
+      <name>bool</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.0</version>
+          <release>1</release>
+          <filename>bool.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+    </package>
+    <package>
+      <name>autoconf</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.13</version>
+          <release>0</release>
+          <filename>autoconf.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='awk'/>
+        <dep name='m4'/>
+        <dep name='mktemp'/>
+        <dep name='/bin/sh'/>
+        <dep name='/bin/sh'/>
+        <dep name='/usr/bin/perl'/>
+      </requires>
+    </package>
+    <package>
+      <name>ed</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>0.2</version>
+          <release>5</release>
+          <filename>ed.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+      </requires>
+    </package>
+    <package>
+      <name>bash</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.14.7</version>
+          <release>9</release>
+          <filename>bash.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='/bin/bash'/>
+        <dep name='/bin/sh'/>
+      </provides>
+      <requires>
+        <dep name='mktemp'/>
+        <dep name='/usr/bin/perl'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libncurses.so.4'/>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>findutils</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>4.1</version>
+          <release>9</release>
+          <filename>findutils.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>perl</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>5.005_02</version>
+          <release>0</release>
+          <filename>perl.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='/usr/bin/perl'/>
+      </provides>
+      <requires>
+        <dep name='tcsh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libcrypt.so.1'/>
+        <dep name='libdb.so.3'/>
+        <dep name='libdl.so.2'/>
+        <dep name='libm.so.6'/>
+        <dep name='libnsl.so.1'/>
+        <dep name='libpthread.so.0'/>
+      </requires>
+    </package>
+    <package>
+      <name>gawk</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>3.0.3</version>
+          <release>3</release>
+          <filename>gawk.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='awk'/>
+      </provides>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libm.so.6'/>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>libpwdb</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>0.54</version>
+          <release>7</release>
+          <filename>libpwdb.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='libpwdb.so.0'/>
+      </provides>
+      <requires>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>rpm</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.5.5</version>
+          <release>2</release>
+          <filename>rpm.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libdb.so.2'/>
+        <dep name='libz.so.1'/>
+        <dep name='/bin/bash'/>
+        <dep name='/bin/sh'/>
+        <dep name='/usr/bin/perl'/>
+      </requires>
+      <conflicts>
+        <dep name='patch' op='&lt;' version='2.5'/>
+      </conflicts>
+    </package>
+    <package>
+      <name>ncurses-termcap-devel</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>4.2</version>
+          <release>1</release>
+          <filename>ncurses-termcap-devel.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='ncurses-devel' op='=' version='4.2'/>
+      </requires>
+      <conflicts>
+        <dep name='libtermcap-devel'/>
+      </conflicts>
+    </package>
+    <package>
+      <name>strace</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>3.1</version>
+          <release>3</release>
+          <filename>strace.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libnsl.so.1'/>
+      </requires>
+    </package>
+    <package>
+      <name>vixie-cron</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>3.0.1</version>
+          <release>18</release>
+          <filename>vixie-cron.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='cron'/>
+      </provides>
+      <requires>
+        <dep name='syslog'/>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>pciutils</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.99.4</version>
+          <release>1</release>
+          <filename>pciutils.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+      </requires>
+    </package>
+    <package>
+      <name>crontabs</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.10</version>
+          <release>2</release>
+          <filename>crontabs.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='cron'/>
+        <dep name='/bin/bash'/>
+      </requires>
+    </package>
+    <package>
+      <name>info</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>3.12</version>
+          <release>3</release>
+          <filename>info.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libncurses.so.4'/>
+        <dep name='libz.so.1'/>
+      </requires>
+    </package>
+    <package>
+      <name>egcs-c++</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.91.60</version>
+          <release>3</release>
+          <filename>egcs-c++.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='libstdc++.so.2.9'/>
+      </provides>
+      <requires>
+        <dep name='gcc'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libm.so.6'/>
+      </requires>
+    </package>
+    <package>
+      <name>egcs</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.91.60</version>
+          <release>3</release>
+          <filename>egcs.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='gcc'/>
+      </provides>
+      <requires>
+        <dep name='binutils'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+      </requires>
+    </package>
+    <package>
+      <name>SysVinit</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.76</version>
+          <release>0</release>
+          <filename>SysVinit.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='SysVinit-scripts' op='&gt;=' version='1.04'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libcrypt.so.1'/>
+      </requires>
+    </package>
+    <package>
+      <name>python-eclass</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.2</version>
+          <release>0</release>
+          <filename>python-eclass.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='Acquisition.so'/>
+        <dep name='ExtensionClass.so'/>
+        <dep name='MethodObject.so'/>
+        <dep name='Missing.so'/>
+        <dep name='MultiMapping.so'/>
+        <dep name='Sync.so'/>
+        <dep name='ThreadLock.so'/>
+      </provides>
+      <requires>
+        <dep name='python' op='&gt;=' version='1.5'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+      </requires>
+    </package>
+    <package>
+      <name>binutils</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.9.1.0.19a</version>
+          <release>0</release>
+          <filename>binutils.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='libbfd-2.9.1.0.19.so.0'/>
+        <dep name='libopcodes-2.9.1.0.19.so.0'/>
+      </provides>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libbfd-2.9.1.0.19.so.0'/>
+        <dep name='libc.so.6'/>
+        <dep name='libopcodes-2.9.1.0.19.so.0'/>
+      </requires>
+    </package>
+    <package>
+      <name>linux-kernel-binary</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.2.1</version>
+          <release>0a</release>
+          <filename>linux-kernel-binary.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>shadow-misc</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.1</version>
+          <release>3</release>
+          <filename>shadow-misc.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='libshadow.so.0'/>
+        <dep name='pam_dialup.so'/>
+      </provides>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libcrypt.so.1'/>
+        <dep name='libshadow.so.0'/>
+        <dep name='/bin/bash'/>
+      </requires>
+    </package>
+    <package>
+      <name>libgr</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.0.13</version>
+          <release>1</release>
+          <filename>libgr.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='libfbm.so.1'/>
+        <dep name='libjpeg.so.6'/>
+        <dep name='libpbm.so.1'/>
+        <dep name='libpgm.so.1'/>
+        <dep name='libpng.so.1'/>
+        <dep name='libpnm.so.1'/>
+        <dep name='libppm.so.1'/>
+        <dep name='libtiff.so.3'/>
+      </provides>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+      </requires>
+    </package>
+    <package>
+      <name>copyrights</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.2</version>
+          <release>1</release>
+          <filename>copyrights.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+    </package>
+    <package>
+      <name>man</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.5f</version>
+          <release>1</release>
+          <filename>man.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='groff'/>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='/bin/sh'/>
+      </requires>
+      <conflicts>
+        <dep name='man_db'/>
+      </conflicts>
+    </package>
+    <package>
+      <name>perl-add</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>5.005_02</version>
+          <release>0</release>
+          <filename>perl-add.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='B.so'/>
+        <dep name='DB_File.so'/>
+        <dep name='Dumper.so'/>
+        <dep name='Fcntl.so'/>
+        <dep name='IO.so'/>
+        <dep name='Opcode.so'/>
+        <dep name='POSIX.so'/>
+        <dep name='SDBM_File.so'/>
+        <dep name='Socket.so'/>
+        <dep name='SysV.so'/>
+        <dep name='Thread.so'/>
+        <dep name='attrs.so'/>
+        <dep name='re.so'/>
+      </provides>
+      <requires>
+        <dep name='perl' op='=' version='5.005_02'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libcrypt.so.1'/>
+        <dep name='libdb.so.3'/>
+        <dep name='libdl.so.2'/>
+        <dep name='libm.so.6'/>
+        <dep name='libnsl.so.1'/>
+        <dep name='libpthread.so.0'/>
+        <dep name='/usr/bin/perl'/>
+      </requires>
+    </package>
+    <package>
+      <name>cracklib</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.7</version>
+          <release>1</release>
+          <filename>cracklib.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>ncurses-devel</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>4.2</version>
+          <release>1</release>
+          <filename>ncurses-devel.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='ncurses' op='=' version='4.2'/>
+      </requires>
+      <obsoletes>
+        <dep name='ncurses-devel-compat'/>
+      </obsoletes>
+    </package>
+    <package>
+      <name>ncurses-devel-static</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>4.2</version>
+          <release>1</release>
+          <filename>ncurses-devel-static.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='ncurses-devel' op='=' version='4.2'/>
+      </requires>
+      <obsoletes>
+        <dep name='ncurses-devel-compat-static'/>
+      </obsoletes>
+    </package>
+    <package>
+      <name>ncurses-termcap-devel-static</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>4.2</version>
+          <release>1</release>
+          <filename>ncurses-termcap-devel-static.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='ncurses-devel-static' op='=' version='4.2'/>
+      </requires>
+      <conflicts>
+        <dep name='libtermcap-devel-static'/>
+      </conflicts>
+    </package>
+    <package>
+      <name>procps</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.2.9</version>
+          <release>2</release>
+          <filename>procps.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='libproc.so.1.2.6'/>
+      </provides>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libncurses.so.4'/>
+        <dep name='libproc.so.1.2.6'/>
+      </requires>
+    </package>
+    <package>
+      <name>automake</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.4</version>
+          <release>0</release>
+          <filename>automake.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='autoconf' op='&gt;=' version='2.13'/>
+        <dep name='/bin/sh'/>
+        <dep name='/bin/sh'/>
+        <dep name='/usr/bin/perl'/>
+      </requires>
+    </package>
+    <package>
+      <name>isapnptools</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.16</version>
+          <release>1</release>
+          <filename>isapnptools.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+      </requires>
+    </package>
+    <package>
+      <name>qt</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.4.2</version>
+          <release>1</release>
+          <filename>qt.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='libqt.so.1'/>
+      </provides>
+      <requires>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>qt-devel</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.4.2</version>
+          <release>1</release>
+          <filename>qt-devel.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='qt' op='=' version='1.4.2'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libm.so.6'/>
+        <dep name='libstdc++.so.2.9'/>
+      </requires>
+    </package>
+    <package>
+      <name>pam-apps</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>0.55</version>
+          <release>6</release>
+          <filename>pam-apps.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libdl.so.2'/>
+        <dep name='libnsl.so.1'/>
+        <dep name='libpam.so.0'/>
+        <dep name='libpam_misc.so.0'/>
+        <dep name='libpwdb.so.0'/>
+      </requires>
+    </package>
+    <package>
+      <name>LPRng</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>3.5.3</version>
+          <release>1</release>
+          <filename>LPRng.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='lpr'/>
+      </provides>
+      <requires>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libncurses.so.4'/>
+        <dep name='libnsl.so.1'/>
+      </requires>
+    </package>
+    <package>
+      <name>rcs</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>5.7</version>
+          <release>5</release>
+          <filename>rcs.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='diffutils'/>
+        <dep name='ed'/>
+        <dep name='mktemp'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>nis-client</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.0</version>
+          <release>0</release>
+          <filename>nis-client.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libcrypt.so.1'/>
+        <dep name='libnsl.so.1'/>
+        <dep name='libresolv.so.2'/>
+        <dep name='/bin/bash'/>
+      </requires>
+    </package>
+    <package>
+      <name>tcl</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>8.0.4</version>
+          <release>1</release>
+          <filename>tcl.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='libtcl8.0.so'/>
+      </provides>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libdl.so.2'/>
+        <dep name='libm.so.6'/>
+        <dep name='libtcl8.0.so'/>
+      </requires>
+    </package>
+    <package>
+      <name>LPRng-lpd</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>3.5.3</version>
+          <release>1</release>
+          <filename>LPRng-lpd.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='lpd'/>
+      </provides>
+      <requires>
+        <dep name='SysVinit-scripts' op='&gt;=' version='1.03' release='2'/>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libnsl.so.1'/>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>readline</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.2.1</version>
+          <release>0</release>
+          <filename>readline.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='libhistory.so.3'/>
+        <dep name='libreadline.so.3'/>
+      </provides>
+      <requires>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>slang</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.2.2</version>
+          <release>0</release>
+          <filename>slang.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='libslang.so.1'/>
+      </provides>
+      <requires>
+        <dep name='ncurses'/>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libm.so.6'/>
+      </requires>
+    </package>
+    <package>
+      <name>sysklogd</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.3.26</version>
+          <release>3</release>
+          <filename>sysklogd.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='syslog'/>
+      </provides>
+      <requires>
+        <dep name='SysVinit-scripts' op='&gt;=' version='1.03'/>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>groff</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.11a</version>
+          <release>3</release>
+          <filename>groff.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='libdriver.so.1.11'/>
+        <dep name='libgroff.so.1.11'/>
+      </provides>
+      <requires>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libdriver.so.1.11'/>
+        <dep name='libgroff.so.1.11'/>
+        <dep name='libm.so.6'/>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>groff-ps</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.11a</version>
+          <release>3</release>
+          <filename>groff-ps.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libdriver.so.1.11'/>
+        <dep name='libgroff.so.1.11'/>
+        <dep name='libm.so.6'/>
+      </requires>
+    </package>
+    <package>
+      <name>less</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>332</version>
+          <release>3</release>
+          <filename>less.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libncurses.so.4'/>
+      </requires>
+    </package>
+    <package>
+      <name>gdb</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>4.17</version>
+          <release>2</release>
+          <filename>gdb.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='debugger'/>
+      </provides>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libm.so.6'/>
+        <dep name='libncurses.so.4'/>
+      </requires>
+    </package>
+    <package>
+      <name>linux-kernel-include</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.2.1</version>
+          <release>0a</release>
+          <filename>linux-kernel-include.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+    </package>
+    <package>
+      <name>libpam</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>0.66</version>
+          <release>1</release>
+          <filename>libpam.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='libpam.so.0'/>
+        <dep name='libpam_misc.so.0'/>
+        <dep name='pam_access.so'/>
+        <dep name='pam_cracklib.so'/>
+        <dep name='pam_deny.so'/>
+        <dep name='pam_env.so'/>
+        <dep name='pam_ftp.so'/>
+        <dep name='pam_group.so'/>
+        <dep name='pam_lastlog.so'/>
+        <dep name='pam_limits.so'/>
+        <dep name='pam_listfile.so'/>
+        <dep name='pam_mail.so'/>
+        <dep name='pam_nologin.so'/>
+        <dep name='pam_permit.so'/>
+        <dep name='pam_pwdb.so'/>
+        <dep name='pam_radius.so'/>
+        <dep name='pam_rhosts_auth.so'/>
+        <dep name='pam_rootok.so'/>
+        <dep name='pam_securetty.so'/>
+        <dep name='pam_shells.so'/>
+        <dep name='pam_stress.so'/>
+        <dep name='pam_tally.so'/>
+        <dep name='pam_time.so'/>
+        <dep name='pam_unix_acct.so'/>
+        <dep name='pam_unix_auth.so'/>
+        <dep name='pam_unix_passwd.so'/>
+        <dep name='pam_unix_session.so'/>
+        <dep name='pam_warn.so'/>
+        <dep name='pam_wheel.so'/>
+      </provides>
+      <requires>
+        <dep name='libpwdb' op='&gt;=' version='0.54'/>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libcrypt.so.1'/>
+        <dep name='libnsl.so.1'/>
+        <dep name='libpwdb.so.0'/>
+      </requires>
+    </package>
+    <package>
+      <name>diffutils</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.7b</version>
+          <release>0</release>
+          <filename>diffutils.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+      </requires>
+    </package>
+    <package>
+      <name>setup</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.0</version>
+          <release>0a</release>
+          <filename>setup.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>m4</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.4</version>
+          <release>6</release>
+          <filename>m4.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+      </requires>
+    </package>
+    <package>
+      <name>e2fsprogs</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.14</version>
+          <release>0</release>
+          <filename>e2fsprogs.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='libcom_err.so.2'/>
+        <dep name='libe2p.so.2'/>
+        <dep name='libext2fs.so.2'/>
+        <dep name='libss.so.2'/>
+        <dep name='libuuid.so.1'/>
+      </provides>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libcom_err.so.2'/>
+        <dep name='libe2p.so.2'/>
+        <dep name='libext2fs.so.2'/>
+        <dep name='libss.so.2'/>
+        <dep name='libuuid.so.1'/>
+      </requires>
+    </package>
+    <package>
+      <name>glibc</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>2.1</version>
+          <release>1</release>
+          <filename>glibc.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libBrokenLocale.so.1'/>
+        <dep name='libSegFault.so'/>
+        <dep name='libc.so.6'/>
+        <dep name='libcrypt.so.1'/>
+        <dep name='libdb.so.2'/>
+        <dep name='libdb.so.3'/>
+        <dep name='libdl.so.2'/>
+        <dep name='libm.so.6'/>
+        <dep name='libnsl.so.1'/>
+        <dep name='libnss_compat.so.2'/>
+        <dep name='libnss_db.so.2'/>
+        <dep name='libnss_dns.so.2'/>
+        <dep name='libnss_files.so.2'/>
+        <dep name='libnss_hesiod.so.2'/>
+        <dep name='libnss_nis.so.2'/>
+        <dep name='libnss_nisplus.so.2'/>
+        <dep name='libpthread.so.0'/>
+        <dep name='libresolv.so.2'/>
+        <dep name='librt.so.1'/>
+        <dep name='libutil.so.1'/>
+      </provides>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libdb.so.3'/>
+        <dep name='libnsl.so.1'/>
+        <dep name='libnss_files.so.2'/>
+        <dep name='libpthread.so.0'/>
+        <dep name='libresolv.so.2'/>
+      </requires>
+    </package>
+    <package>
+      <name>tcl-devel</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>8.0.4</version>
+          <release>1</release>
+          <filename>tcl-devel.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='tcl' op='=' version='8.0.4'/>
+      </requires>
+    </package>
+    <package>
+      <name>svgalib</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.3.1</version>
+          <release>1</release>
+          <filename>svgalib.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='libvga.so.1'/>
+        <dep name='libvgagl.so.1'/>
+      </provides>
+      <requires>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libm.so.6'/>
+        <dep name='libvga.so.1'/>
+        <dep name='/bin/sh'/>
+        <dep name='/usr/bin/perl'/>
+      </requires>
+    </package>
+    <package>
+      <name>python</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.5.1</version>
+          <release>0a</release>
+          <filename>python.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='arraymodule.so'/>
+        <dep name='audioop.so'/>
+        <dep name='binascii.so'/>
+        <dep name='bsddbmodule.so'/>
+        <dep name='cPickle.so'/>
+        <dep name='cStringIO.so'/>
+        <dep name='cmathmodule.so'/>
+        <dep name='cryptmodule.so'/>
+        <dep name='cursesmodule.so'/>
+        <dep name='errnomodule.so'/>
+        <dep name='fcntlmodule.so'/>
+        <dep name='grpmodule.so'/>
+        <dep name='imageop.so'/>
+        <dep name='mathmodule.so'/>
+        <dep name='md5module.so'/>
+        <dep name='newmodule.so'/>
+        <dep name='nismodule.so'/>
+        <dep name='operator.so'/>
+        <dep name='parsermodule.so'/>
+        <dep name='pwdmodule.so'/>
+        <dep name='readline.so'/>
+        <dep name='resource.so'/>
+        <dep name='rgbimgmodule.so'/>
+        <dep name='rotormodule.so'/>
+        <dep name='selectmodule.so'/>
+        <dep name='socketmodule.so'/>
+        <dep name='stropmodule.so'/>
+        <dep name='structmodule.so'/>
+        <dep name='syslogmodule.so'/>
+        <dep name='termios.so'/>
+        <dep name='timemodule.so'/>
+        <dep name='timingmodule.so'/>
+        <dep name='zlibmodule.so'/>
+        <dep name='/usr/bin/python'/>
+      </provides>
+      <requires>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libdl.so.2'/>
+        <dep name='libm.so.6'/>
+        <dep name='libpthread.so.0'/>
+        <dep name='libcrypt.so.1'/>
+        <dep name='libdb.so.2'/>
+        <dep name='libncurses.so.4'/>
+        <dep name='libreadline.so.3'/>
+        <dep name='libz.so.1'/>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>python-devel</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.5.1</version>
+          <release>0a</release>
+          <filename>python-devel.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='python' op='=' version='1.5.1'/>
+        <dep name='/bin/sh'/>
+        <dep name='/usr/bin/env'/>
+        <dep name='/usr/bin/python'/>
+      </requires>
+    </package>
+    <package>
+      <name>dialog</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>0.6</version>
+          <release>6</release>
+          <filename>dialog.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libncurses.so.4'/>
+        <dep name='/bin/sh'/>
+      </requires>
+    </package>
+    <package>
+      <name>mtabase</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.0</version>
+          <release>5</release>
+          <filename>mtabase.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <requires>
+        <dep name='SysVinit-scripts' op='&gt;=' version='1.02' release='4'/>
+        <dep name='/bin/sh'/>
+        <dep name='/bin/bash'/>
+      </requires>
+    </package>
+    <package>
+      <name>sendmail</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>8.8.7</version>
+          <release>7</release>
+          <filename>sendmail.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='MTA'/>
+      </provides>
+      <requires>
+        <dep name='mtabase'/>
+        <dep name='procmail'/>
+        <dep name='/bin/sh'/>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+        <dep name='libdb.so.3'/>
+        <dep name='libnsl.so.1'/>
+        <dep name='libresolv.so.2'/>
+        <dep name='/bin/bash'/>
+      </requires>
+    </package>
+    <package>
+      <name>mktemp</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>1.4</version>
+          <release>2</release>
+          <filename>mktemp.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='/bin/mktemp'/>
+      </provides>
+      <requires>
+        <dep name='ld-linux.so.2'/>
+        <dep name='libc.so.6'/>
+      </requires>
+    </package>
+  </subchannel>
+</channel>

@@ -1,0 +1,8 @@
+--- exercise-01simple-7-test.solution	2005-11-04 12:53:41.000000000 +0100
++++ exercise-01simple-7-test.mistake	2005-11-30 10:37:36.000000000 +0100
+@@ -1,5 +0,0 @@
+->!> Installing foo3 from channel test
+->!> Solution #1:
+->!> install bash-2.0.2-1[test]
+->!> install foo3-1.0-1[test]
+->!> installs=2, upgrades=0, uninstalls=0

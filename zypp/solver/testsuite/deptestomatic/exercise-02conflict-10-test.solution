@@ -1,0 +1,6 @@
+>!> Installing baz3 from channel test
+>!> Solution #1:
+>!> install baz3-1.0-1[test]
+>!> remove  foo3-1.0-1
+>!> |unflag foo3-2.0-1[test]
+>!> installs=1, upgrades=0, uninstalls=1

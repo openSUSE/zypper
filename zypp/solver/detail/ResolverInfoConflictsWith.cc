@@ -1,0 +1,100 @@
+/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+/* ResolverInfoConflictsWith.cc
+ *
+ * Copyright (C) 2000-2002 Ximian, Inc.
+ * Copyright (C) 2005 SUSE Linux Products GmbH
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License,
+ * version 2, as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+ * 02111-1307, USA.
+ */
+
+#include <map>
+
+#include <zypp/solver/detail/ResolverInfo.h>
+#include <zypp/solver/detail/ResolverInfoConflictsWith.h>
+
+///////////////////////////////////////////////////////////////////
+namespace ZYPP {
+//////////////////////////////////////////////////////////////////
+
+using namespace std;
+
+IMPL_DERIVED_POINTER(ResolverInfoConflictsWith, ResolverInfo);
+
+//---------------------------------------------------------------------------
+
+
+string
+ResolverInfoConflictsWith::asString ( void ) const
+{
+    return toString (*this);
+}
+
+
+string
+ResolverInfoConflictsWith::toString ( const ResolverInfoConflictsWith & with)
+{
+    string res;
+
+    res += ResolverInfo::toString (with);
+    res += string ("conflicts with ") + with.resolvablesToString(false);
+
+    return res;
+}
+
+
+ostream &
+ResolverInfoConflictsWith::dumpOn( ostream & str ) const
+{
+    str << asString();
+    return str;
+}
+
+
+ostream&
+operator<<( ostream& os, const ResolverInfoConflictsWith & with)
+{
+    return os << with.asString();
+}
+
+//---------------------------------------------------------------------------
+
+ResolverInfoConflictsWith::ResolverInfoConflictsWith (constResolvablePtr resolvable, constResolvablePtr with)
+    : ResolverInfoContainer (RESOLVER_INFO_TYPE_CONFLICTS_WITH, resolvable, RESOLVER_INFO_PRIORITY_USER, with)
+{
+}
+
+
+ResolverInfoConflictsWith::~ResolverInfoConflictsWith ()
+{
+}
+
+
+//---------------------------------------------------------------------------
+
+ResolverInfoPtr
+ResolverInfoConflictsWith::copy (void) const
+{
+    ResolverInfoConflictsWithPtr cpy = new ResolverInfoConflictsWith(resolvable(), NULL);
+
+    ((ResolverInfoContainerPtr)cpy)->copy (this);
+
+    return cpy;
+}
+
+
+///////////////////////////////////////////////////////////////////
+}; // namespace ZYPP
+///////////////////////////////////////////////////////////////////
+

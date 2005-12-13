@@ -1,0 +1,19 @@
+Loaded 6 packages from deptestomatic/exercise-obscureobsoletes-system.xml
+Loaded 12 packages from deptestomatic/exercise-obscureobsoletes-packages.xml
+
+------------------------------------------------
+
+>!> Installing aaa from channel test
+>!> Installing bbb from channel test
+Can't find rcd 1.x subscription file '/var/lib/rcd/subscriptions.xml'
+
+Pruned solutions: 0
+Deferred solutions: 0
+
+Failed Solution: 
+Download Size: 246, Install Size: 912, Total Priority: 0, Min Priority: 800, Max Priority: 800, Other Penalties: 0, Invalid
+- - - - - - - - - -
+Installing aaa-1.0-1[test]
+Installing bbb-2.0-1[test]
+[ERROR] A conflict over  bbb (bbb-2.0-1) requires the removal of the to-be-installed resolvable bbb-2.0-1[test] [aaa-1.0-1]
+[ERROR] Marking this resolution attempt as invalid.

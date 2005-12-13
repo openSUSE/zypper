@@ -1,0 +1,8 @@
+--- exercise-02conflict-01-test.solution	2005-11-04 17:39:38.000000000 +0100
++++ exercise-02conflict-01-test.mistake	2005-11-30 10:37:36.000000000 +0100
+@@ -1,5 +0,0 @@
+->!> Installing p2 from channel test
+->!> Solution #1:
+->!> install p2-1.0-1[test]
+->!> remove  p1-1.0-1
+->!> installs=1, upgrades=0, uninstalls=1

@@ -1,0 +1,5 @@
+>!> Installing p2 from channel test
+>!> Solution #1:
+>!> install p2-1.0-1[test]
+>!> remove  p1-1.0-1
+>!> installs=1, upgrades=0, uninstalls=1

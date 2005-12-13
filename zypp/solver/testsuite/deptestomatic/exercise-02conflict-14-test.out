@@ -1,0 +1,34 @@
+Loaded 20 packages from deptestomatic/exercise-02conflict-system.xml
+Loaded 25 packages from deptestomatic/exercise-02conflict-packages.xml
+
+------------------------------------------------
+
+>!> Installing foouser from channel test
+>!> Installing libfoo from channel test
+>!> Installing libfoo-dev from channel test
+>!> Installing libfoog from channel test
+Can't find rcd 1.x subscription file '/var/lib/rcd/subscriptions.xml'
+
+Completed solutions: 1
+Pruned solutions: 0
+Deferred solutions: 0
+Invalid solutions: 0
+
+Best Solution:
+
+>!> Solution #1:
+Checksum = 2eebdb86
+>!> install libfoog-1.1-1[test]
+>!> upgrade foouser-1.0-1 => foouser-1.0-2[test]
+>!> upgrade libfoo-1.0-1 => libfoo-1.1-1[test]
+>!> upgrade libfoo-dev-1.0-1 => libfoo-dev-1.1-1[test]
+>!> installs=1, upgrades=3, uninstalls=0
+download size=0.5k, install size=0.4k
+total priority=0, min priority=800, max priority=800
+other penalties=0
+- - - - - - - - - -
+Upgrading foouser-1.0-1 => foouser-1.0-2[test]
+Upgrading libfoo-1.0-1 => libfoo-1.1-1[test]
+Upgrading libfoo-dev-1.0-1 => libfoo-dev-1.1-1[test]
+Installing libfoog-1.1-1[test]
+

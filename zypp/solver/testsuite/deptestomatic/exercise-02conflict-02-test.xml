@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-02conflict-system.xml"/>
+  <channel name="test" file="exercise-02conflict-packages.xml"/>
+</setup>
+
+
+<!-- installed smail conflicts with candidate sendmail via provided MTA -->
+<trial>
+  <install channel="test" package="sendmail"/>
+</trial>
+
+</test>

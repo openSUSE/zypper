@@ -1,0 +1,32 @@
+Loaded 6 packages from deptestomatic/exercise-obscureobsoletes-system.xml
+Loaded 12 packages from deptestomatic/exercise-obscureobsoletes-packages.xml
+
+------------------------------------------------
+
+>!> Installing barold2 from channel test
+Can't find rcd 1.x subscription file '/var/lib/rcd/subscriptions.xml'
+
+Completed solutions: 1
+Pruned solutions: 0
+Deferred solutions: 0
+Invalid solutions: 0
+
+Best Solution:
+
+>!> Solution #1:
+Checksum = 5000cfde
+>!> install barold2-4.0-1[test]
+>!> remove  bar2-1.0-1
+>!> remove  bar2-devel-1.1-1
+>!> installs=1, upgrades=0, uninstalls=2
+download size=0.1k, install size=0.4k
+total priority=0, min priority=800, max priority=800
+other penalties=0
+- - - - - - - - - -
+Installing barold2-4.0-1[test]
+bar2-1.0-1: replaced by  [barold2-4.0-1]
+There are no installable providers of bar2 == 1.0-1 for bar2-devel-1.1-1
+bar2 provides bar2-1.0-1, but is scheduled to be uninstalled.
+bar2-devel-1.1-1: depended on  [bar2-1.0-1]
+bar2-devel-1.1-1: missing requirement bar2 == 1.0-1
+

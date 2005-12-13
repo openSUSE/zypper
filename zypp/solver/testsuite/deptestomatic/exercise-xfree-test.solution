@@ -1,0 +1,8 @@
+>!> Installing XFree86 from channel test
+>!> Installing XFree86-libs from channel test
+>!> Solution #1:
+>!> install XFree86-4.3.0-1[test]
+>!> install XFree86-libs-4.3.0-1[test]
+>!> remove  xf86-4.2.0-176
+>!> remove  xshared-4.2.0-176
+>!> installs=2, upgrades=0, uninstalls=2

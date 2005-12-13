@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-01simple-system.xml"/>
+  <channel name="test" file="exercise-01simple-packages.xml"/>
+</setup>
+
+
+<!-- test with non-available dependency (4): with contradicting version relations -->
+<trial>
+  <install channel="test" package="foo2d"/>
+  <install channel="test" package="foo2e"/>
+</trial>
+
+</test>

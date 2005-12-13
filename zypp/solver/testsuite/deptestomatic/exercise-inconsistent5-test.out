@@ -1,0 +1,25 @@
+Loaded 2 packages from deptestomatic/exercise-inconsistent5-system.xml
+Loaded 3 packages from deptestomatic/exercise-inconsistent5-packages.xml
+
+------------------------------------------------
+
+Can't find rcd 1.x subscription file '/var/lib/rcd/subscriptions.xml'
+
+Completed solutions: 1
+Pruned solutions: 0
+Deferred solutions: 0
+Invalid solutions: 0
+
+Best Solution:
+
+>!> Solution #1:
+Checksum = c98a7280
+>!> install libsomething-1-1[test]
+>!> installs=1, upgrades=0, uninstalls=0
+download size=0.1k, install size=0.4k
+total priority=0, min priority=800, max priority=800
+other penalties=0
+- - - - - - - - - -
+libsomething-1-1[test]:  needed by  [shadow-1.0-1]
+Installing libsomething-1-1[test]
+

@@ -1,0 +1,8 @@
+--- exercise-04obsoletes-05-test.solution	2005-11-05 08:04:57.000000000 +0100
++++ exercise-04obsoletes-05-test.mistake	2005-11-30 10:37:37.000000000 +0100
+@@ -1,5 +0,0 @@
+->!> Installing libbar2 from channel test
+->!> Solution #1:
+->!> install libbar2-2.0-1[test]
+->!> remove  libbar-1.2-1
+->!> installs=1, upgrades=0, uninstalls=1

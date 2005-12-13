@@ -1,0 +1,47 @@
+<channel>
+  <subchannel>
+    <package>
+      <name>XFree86-libs</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>4.3.0</version>
+          <release>1</release>
+          <filename>XFree86-libs.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <provides>
+        <dep name='xshared'/>
+      </provides>
+      <obsoletes>
+        <dep name='xshared'/>
+      </obsoletes>
+    </package>
+    <package>
+      <name>XFree86</name>
+      <summary>A fake summary</summary>
+      <description>A fake description</description>
+      <section>misc</section>
+      <history>
+        <update>
+          <hid>12345</hid>
+          <version>4.3.0</version>
+          <release>1</release>
+          <filename>XFree86.rpm</filename>
+          <filesize>123</filesize>
+          <installedsize>456</installedsize>
+          <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+        </update>
+      </history>
+      <obsoletes>
+        <dep name='xf86'/>
+      </obsoletes>
+    </package>
+  </subchannel>
+</channel>

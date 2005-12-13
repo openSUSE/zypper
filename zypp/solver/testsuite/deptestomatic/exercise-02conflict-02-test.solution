@@ -1,0 +1,5 @@
+>!> Installing sendmail from channel test
+>!> Solution #1:
+>!> install sendmail-2.0-1[test]
+>!> remove  smail-1.0-1
+>!> installs=1, upgrades=0, uninstalls=1

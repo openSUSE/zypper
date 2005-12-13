@@ -1,0 +1,4 @@
+>!> Installing D2 from channel test
+>!> Solution #1:
+>!> install D2-2.0-1[test]
+>!> installs=1, upgrades=0, uninstalls=0

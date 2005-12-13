@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-01simple-system.xml"/>
+  <channel name="test" file="exercise-01simple-packages.xml"/>
+</setup>
+
+
+<!-- test with required file (1): pulls in bash for /bin/sh -->
+<trial>
+  <install channel="test" package="foo3"/>
+</trial>
+
+
+</test>

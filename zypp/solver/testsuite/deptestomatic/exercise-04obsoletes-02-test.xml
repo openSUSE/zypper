@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-04obsoletes-system.xml"/>
+  <channel name="test" file="exercise-04obsoletes-packages.xml"/>
+</setup>
+
+<!--
+# same with bar* packages: now barnew provides bar (in version MAX_VERS), so
+# now the conflict target is provided
+ -->
+<trial>
+  <install channel="test" package="barnew"/>
+  <install channel="test" package="barc"/>
+</trial>
+
+</test>

@@ -1,0 +1,7 @@
+--- exercise-01simple-9-test.solution	2005-11-04 12:54:19.000000000 +0100
++++ exercise-01simple-9-test.mistake	2005-11-30 10:37:36.000000000 +0100
+@@ -1,4 +0,0 @@
+->!> Installing foo5 from channel test
+->!> Solution #1:
+->!> install foo5-1.0-1[test]
+->!> installs=1, upgrades=0, uninstalls=0

@@ -1,0 +1,19 @@
+Loaded 13 packages from deptestomatic/exercise-04obsoletes-system.xml
+Loaded 16 packages from deptestomatic/exercise-04obsoletes-packages.xml
+
+------------------------------------------------
+
+>!> Installing barnew from channel test
+>!> Installing barc from channel test
+Can't find rcd 1.x subscription file '/var/lib/rcd/subscriptions.xml'
+
+Pruned solutions: 0
+Deferred solutions: 0
+
+Failed Solution: 
+Download Size: 246, Install Size: 912, Total Priority: 0, Min Priority: 800, Max Priority: 800, Other Penalties: 0, Invalid
+- - - - - - - - - -
+Installing barnew-2.0-1[test]
+Installing barc-1.0-1[test]
+[ERROR] A conflict over  bar (bar) requires the removal of the to-be-installed resolvable barnew-2.0-1[test] [barc-1.0-1]
+[ERROR] Marking this resolution attempt as invalid.

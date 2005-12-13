@@ -1,0 +1,25 @@
+Loaded 6 packages from deptestomatic/exercise-obscureobsoletes-system.xml
+Loaded 12 packages from deptestomatic/exercise-obscureobsoletes-packages.xml
+
+------------------------------------------------
+
+>!> Installing barold from channel test
+Can't find rcd 1.x subscription file '/var/lib/rcd/subscriptions.xml'
+
+Completed solutions: 1
+Pruned solutions: 0
+Deferred solutions: 0
+Invalid solutions: 0
+
+Best Solution:
+
+>!> Solution #1:
+Checksum = c44b95d0
+>!> install barold-4.0-1[test]
+>!> installs=1, upgrades=0, uninstalls=0
+download size=0.1k, install size=0.4k
+total priority=0, min priority=800, max priority=800
+other penalties=0
+- - - - - - - - - -
+Installing barold-4.0-1[test]
+

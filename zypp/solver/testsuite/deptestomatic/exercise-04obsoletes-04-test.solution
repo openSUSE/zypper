@@ -1,0 +1,6 @@
+>!> Installing libfoo2 from channel test
+>!> Solution #1:
+>!> install libfoo2-2.0-1[test]
+>!> remove  libfoo-1.2-1
+>!> remove  something-1.0-1
+>!> installs=1, upgrades=0, uninstalls=2

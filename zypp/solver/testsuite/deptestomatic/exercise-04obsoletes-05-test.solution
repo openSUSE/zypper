@@ -1,0 +1,5 @@
+>!> Installing libbar2 from channel test
+>!> Solution #1:
+>!> install libbar2-2.0-1[test]
+>!> remove  libbar-1.2-1
+>!> installs=1, upgrades=0, uninstalls=1
