@@ -86,7 +86,7 @@ struct ImpatientCollector : public Collector
   virtual void doConsume( const std::string & line_r )
   {
     if ( _lineNo == 1234 )
-      ZYPP_THROW( Exception, "takes to long" );
+      ZYPP_THROW( Exception("takes to long") );
   }
 };
 ///////////////////////////////////////////////////////////////////
