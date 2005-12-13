@@ -7,6 +7,7 @@ SUBDIRS = base parser capability solver source detail media url
 
 include_HEADERS = NeedAType.h \
 	Arch.h		\
+	ByteCount.h	\
 	Capability.h	\
 	CapFactory.h	\
 	CapSet.h	\
@@ -41,6 +42,7 @@ lib_LTLIBRARIES =	lib@PACKAGE@.la
 
 lib@PACKAGE@_la_SOURCES = \
 	Arch.cc		\
+	ByteCount.cc	\
 	Capability.cc	\
 	CapFactory.cc	\
 	CapSet.cc	\

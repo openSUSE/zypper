@@ -20,6 +20,7 @@
   functions.
 
 /-*/
+
 #ifndef stringutil_h
 #define stringutil_h
 

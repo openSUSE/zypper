@@ -16,7 +16,7 @@ include_HEADERS =	\
 	PtrTypes.h	\
 	ReferenceCounted.h	\
 	String.h	\
-	StringVal.h	\
+	Unit.h		\
 		\
 		\
 	ExternalDataSource.h
@@ -33,7 +33,7 @@ lib@PACKAGE@_base_la_SOURCES =	\
 	IOStream.cc	\
 	ReferenceCounted.cc	\
 	String.cc	\
-	StringVal.cc	\
+	Unit.cc		\
 		\
 		\
 	ExternalDataSource.cc
