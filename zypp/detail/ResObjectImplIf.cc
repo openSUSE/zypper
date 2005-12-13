@@ -35,7 +35,7 @@ namespace zypp
       Text ResObjectImplIf::delnotify() const
       { return Text(); }
 
-      FSize ResObjectImplIf::size() const
+      ByteCount ResObjectImplIf::size() const
       { return 0; }
 
       bool ResObjectImplIf::providesSources() const

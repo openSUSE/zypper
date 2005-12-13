@@ -51,7 +51,7 @@ namespace zypp
       /** Does the patch affect the package manager itself? */
       virtual bool affects_pkg_manager() const = 0;
       /** */
-      virtual FSize size() const;
+      virtual ByteCount size() const;
 
       /** Is the patch installation interactive? (does it need user input?) */
       virtual bool interactive() = 0;

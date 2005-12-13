@@ -16,6 +16,7 @@
 #include <string>
 
 #include "zypp/detail/ResObjectFactory.h"
+#include "zypp/ByteCount.h"
 
 #include "zypp/NeedAType.h" // volatile include propagating type drafts
 
@@ -71,7 +72,7 @@ namespace zypp
       virtual Text delnotify() const PURE_VIRTUAL;
 
       /** Size.  \todo well define which size. */
-      virtual FSize size() const PURE_VIRTUAL;
+      virtual ByteCount size() const PURE_VIRTUAL;
 
       /** Wheter there are src.rpm available too. */
       virtual bool providesSources() const PURE_VIRTUAL;

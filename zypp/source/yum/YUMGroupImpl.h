@@ -88,7 +88,7 @@ namespace zypp
 	/** */
 	virtual Vendor instSrcVendor() const;
         /** */
-        virtual FSize size() const;
+        virtual ByteCount size() const;
 
 
       protected:

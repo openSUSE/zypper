@@ -96,13 +96,6 @@ namespace zypp
   conversions into formated strings. */
   typedef time_t Date;
 
-  /** Class representing a F(ile)Size, or ammount of byte. arithmetic
-   operations needed e.g. for disk usage calculation. conversions into
-   formated strings. Interface supports specifying FSize in (ammount,unit)
-   KB MB GB....
-  */
-  typedef long long FSize;
-
   /** Vendor. Worth a typedef. Maybe a class unifying the strings. */
   typedef std::string Vendor;
 

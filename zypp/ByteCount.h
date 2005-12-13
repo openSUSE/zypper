@@ -64,6 +64,10 @@ namespace zypp
     ByteCount()
     : _count( 0 )
     {}
+    /** Ctor taking 1 Unit. */
+    ByteCount( const Unit & unit_r )
+    : _count( unit_r.factor() )
+    {}
     /** Ctor taking a count and optinal Unit. */
     ByteCount( const SizeType count_r, const Unit & unit_r = B )
     : _count( count_r * unit_r.factor() )
@@ -74,7 +78,6 @@ namespace zypp
     /** Conversion to SizeType. */
     operator SizeType() const
     { return _count; }
-
 
     /** \name Arithmetic operations.
      * \c + \c - \c * \c / are provided via conversion to SizeType.
@@ -100,6 +103,10 @@ namespace zypp
     /** Return count adjusted to multiple of \a blocksize_r (default 1K). */
     ByteCount fullBlocks( ByteCount blocksize_r = K ) const
     { return ByteCount(*this).fillBlock( blocksize_r ); }
+
+    /** Return number of blocks of size \a blocksize_r (default 1K). */
+    SizeType blocks( ByteCount blocksize_r = K ) const
+    { return fullBlocks( blocksize_r ) / blocksize_r; }
 
   public:
 

@@ -143,7 +143,7 @@ namespace zypp
       Text YUMPatchImpl::delnotify() const
       { return ResObjectImplIf::delnotify(); }
 
-      FSize YUMPatchImpl::size() const
+      ByteCount YUMPatchImpl::size() const
       { return ResObjectImplIf::size(); }
 
       bool YUMPatchImpl::providesSources() const

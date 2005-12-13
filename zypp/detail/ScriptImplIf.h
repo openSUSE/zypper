@@ -43,7 +43,7 @@ namespace zypp
       /** Check whether script to undo the change is available */
       virtual bool undo_available() const = 0;
       /** */
-      virtual FSize size() const;
+      virtual ByteCount size() const;
     };
     ///////////////////////////////////////////////////////////////////
 

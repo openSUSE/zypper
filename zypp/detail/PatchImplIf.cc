@@ -23,7 +23,7 @@ namespace zypp
     // as far as resonable.
     /////////////////////////////////////////////////////////////////
 
-      FSize PatchImplIf::size() const
+      ByteCount PatchImplIf::size() const
       { return ResObjectImplIf::size(); }
 
     /////////////////////////////////////////////////////////////////

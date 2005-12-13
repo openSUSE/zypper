@@ -68,11 +68,11 @@ namespace zypp
       std::list<std::string> PackageImplIf::postun() const
       { return std::list<std::string>(); }
 
-      FSize PackageImplIf::sourcesize() const
-      { return FSize(); }
+      ByteCount PackageImplIf::sourcesize() const
+      { return ByteCount(); }
 
-      FSize PackageImplIf::archivesize() const
-      { return FSize(); }
+      ByteCount PackageImplIf::archivesize() const
+      { return ByteCount(); }
 
       std::list<std::string> PackageImplIf::authors() const
       { return std::list<std::string>(); }

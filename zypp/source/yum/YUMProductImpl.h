@@ -46,7 +46,7 @@ namespace zypp
 	Text description() const;
 	Text insnotify() const;
 	Text delnotify() const;
-	FSize size() const;
+	ByteCount size() const;
 	bool providesSources() const;
 	Label instSrcLabel() const;
 	Vendor instSrcVendor() const;

@@ -32,7 +32,7 @@ include_HEADERS = NeedAType.h \
 	Url.h		\
 	TmpPath.h	\
 	KVMap.h		\
-	Callback.h	
+	Callback.h
 
 ## ##################################################
 

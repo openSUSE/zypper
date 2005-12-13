@@ -41,7 +41,7 @@ namespace zypp
       /** Get the type of the message (YesNo / OK) */
       virtual std::string type() const = 0;
       /** */
-      virtual FSize size() const;
+      virtual ByteCount size() const;
     };
     ///////////////////////////////////////////////////////////////////
 

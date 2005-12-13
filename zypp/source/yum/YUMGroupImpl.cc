@@ -88,7 +88,7 @@ namespace zypp
       Vendor YUMGroupImpl::instSrcVendor() const
       { return ResObjectImplIf::instSrcVendor(); }
 
-      FSize YUMGroupImpl::size() const
+      ByteCount YUMGroupImpl::size() const
       { return ResObjectImplIf::size(); }
 
 

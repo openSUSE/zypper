@@ -73,7 +73,7 @@ namespace zypp
       public:
 	DeltaRpm(const Arch & arch,
 	         const std::string & filename, 
-		 const FSize & downloadsize,
+		 const ByteCount & downloadsize,
 		 const CheckSum & checksum,
 		 const Date & buildtime,
 		 const BaseVersion & base_version)
@@ -86,14 +86,14 @@ namespace zypp
 	{}
 	Arch arch() { return _arch; }
 	std::string filename() { return _filename; }
-	FSize downloadsize() { return _downloadsize; }
+	ByteCount downloadsize() { return _downloadsize; }
 	CheckSum checksum() { return _checksum; }
 	Date buildtime() { return _buildtime; }
 	BaseVersion baseVersion() { return _base_version; }
       private:
 	Arch _arch;
 	std::string _filename;
-	FSize _downloadsize;
+	ByteCount _downloadsize;
 	CheckSum _checksum;
 	Date _buildtime;
 	BaseVersion _base_version;
@@ -103,7 +103,7 @@ namespace zypp
       public:
 	PatchRpm(const Arch & arch,
 	         const std::string & filename, 
-		 const FSize & downloadsize,
+		 const ByteCount & downloadsize,
 		 const CheckSum & checksum,
 		 const Date & buildtime,
 		 const std::list<BaseVersion> & base_versions)
@@ -116,14 +116,14 @@ namespace zypp
 	{}
 	Arch arch() { return _arch; }
 	std::string filename() { return _filename; }
-	FSize downloadsize() { return _downloadsize; }
+	ByteCount downloadsize() { return _downloadsize; }
 	CheckSum checksum() { return _checksum; }
 	Date buildtime() { return _buildtime; }
 	std::list<BaseVersion> baseVersions() { return _base_versions; }
       private:
 	Arch _arch;
 	std::string _filename;
-	FSize _downloadsize;
+	ByteCount _downloadsize;
 	CheckSum _checksum;
 	Date _buildtime;
 	std::list<BaseVersion> _base_versions;
@@ -197,9 +197,9 @@ namespace zypp
       /** */
       virtual Text postun() const PURE_VIRTUAL;
       /** */
-      virtual FSize sourcesize() const PURE_VIRTUAL;
+      virtual ByteCount sourcesize() const PURE_VIRTUAL;
       /** */
-      virtual FSize archivesize() const PURE_VIRTUAL;
+      virtual ByteCount archivesize() const PURE_VIRTUAL;
       /** */
       virtual Text authors() const PURE_VIRTUAL;
       /** */
@@ -232,7 +232,7 @@ namespace zypp
       /** */
       virtual std::list<Edition> patchRpmBaseVersions() const PURE_VIRTUAL;
       /** */
-      virtual FSize patchRpmSize() const PURE_VIRTUAL;
+      virtual ByteCount patchRpmSize() const PURE_VIRTUAL;
       /** */
       virtual bool forceInstall() const PURE_VIRTUAL;
       /** */

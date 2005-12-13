@@ -19,16 +19,16 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  const ByteCount::Unit ByteCount::B( 1, "B", 0 );
-  const ByteCount::Unit ByteCount::K( 1024, "K", 1 );
-  const ByteCount::Unit ByteCount::M( 1048576, "M", 1 );
-  const ByteCount::Unit ByteCount::G( 1073741824, "G", 2 );
-  const ByteCount::Unit ByteCount::T( 1099511627776, "T", 3 );
+  const ByteCount::Unit ByteCount::B( 1LL, "B", 0 );
+  const ByteCount::Unit ByteCount::K( 1024LL, "K", 1 );
+  const ByteCount::Unit ByteCount::M( 1048576LL, "M", 1 );
+  const ByteCount::Unit ByteCount::G( 1073741824LL, "G", 2 );
+  const ByteCount::Unit ByteCount::T( 1099511627776LL, "T", 3 );
 
-  const ByteCount::Unit ByteCount::kB( 1000, "kB", 1 );
-  const ByteCount::Unit ByteCount::MB( 1000000, "MB", 1 );
-  const ByteCount::Unit ByteCount::GB( 1000000000, "GB", 2 );
-  const ByteCount::Unit ByteCount::TB( 1000000000000, "TB", 3 );
+  const ByteCount::Unit ByteCount::kB( 1000LL, "kB", 1 );
+  const ByteCount::Unit ByteCount::MB( 1000000LL, "MB", 1 );
+  const ByteCount::Unit ByteCount::GB( 1000000000LL, "GB", 2 );
+  const ByteCount::Unit ByteCount::TB( 1000000000000LL, "TB", 3 );
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -43,8 +43,15 @@ namespace zypp
         if ( diff )
           {
             if ( _count > 0 )
-              _count += blocksize_r;
-            _count -= diff;
+              {
+                _count += blocksize_r;
+                _count -= diff;
+              }
+            else
+              {
+                _count -= blocksize_r;
+                _count += diff;
+              }
           }
       }
     return *this;

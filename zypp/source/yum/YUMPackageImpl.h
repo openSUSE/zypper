@@ -51,7 +51,7 @@ namespace zypp
 	virtual Text description() const;
 	virtual Text insnotify() const;
 	virtual Text delnotify() const;
-	virtual FSize size() const;
+	virtual ByteCount size() const;
 	virtual bool providesSources() const;
 	virtual Label instSrcLabel() const;
 	virtual Vendor instSrcVendor() const;
@@ -87,9 +87,9 @@ namespace zypp
 	/** */
 	virtual Text postun() const;
 	/** */
-	virtual FSize sourcesize() const;
+	virtual ByteCount sourcesize() const;
 	/** */
-	virtual FSize archivesize() const;
+	virtual ByteCount archivesize() const;
 	/** */
 	virtual Text authors() const;
 	/** */

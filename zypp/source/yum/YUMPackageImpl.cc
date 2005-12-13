@@ -205,7 +205,7 @@ namespace zypp
       // metadata doesn't priovide this attribute
       { return ResObjectImplIf::delnotify(); }
 
-      FSize YUMPackageImpl::size() const
+      ByteCount YUMPackageImpl::size() const
       { }
 
       bool YUMPackageImpl::providesSources() const
@@ -284,11 +284,11 @@ namespace zypp
       { return PackageImplIf::postun(); }
 
       /** */
-      FSize YUMPackageImpl::sourcesize() const
+      ByteCount YUMPackageImpl::sourcesize() const
       { }
 
       /** */
-      FSize YUMPackageImpl::archivesize() const
+      ByteCount YUMPackageImpl::archivesize() const
       { }
 
       /** */
