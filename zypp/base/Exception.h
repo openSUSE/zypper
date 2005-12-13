@@ -65,15 +65,26 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Exception
-  /** Exception stores message and \ref CodeLocation.
+  /** Base class for Exception.
    *
-   * Use \ref ZYPP_THROW to throw exceptions.
+   * Exception offers to store a message string passed to the ctor.
+   * Derived classes may provide additional information. Overload
+   * \ref dumpOn to provide a proper error text.
+   *
+   * \li Use \ref ZYPP_THROW to throw exceptions.
+   * \li Use \ref ZYPP_CAUGHT If you caught an exceptions in order to handle it.
+   * \li Use \ref ZYPP_RETHROW to rethrow a caught exception.
+   *
+   * The use of these macros is not mandatory. but \c ZYPP_THROW and
+   * \c ZYPP_RETHROW will adjust the code location information stored in
+   * the Exception. All three macros will drop a line in the logfile.
+
    * \code
    *  43   try
    *  44     {
    *  45       try
    *  46         {
-   *  47           ZYPP_THROW_MSG( Exception, "Something bad happened." );
+   *  47           ZYPP_THROW( Exception("Something bad happened.") );
    *  48         }
    *  49       catch ( Exception & excpt )
    *  50         {
@@ -128,18 +139,20 @@ namespace zypp
     void relocate( const CodeLocation & where_r ) const
     { _where = where_r; }
 
-    /** Return the message string provided to the ctor. */
+    /** Return the message string provided to the ctor.
+     * \note This is not neccessarily the complete error message.
+     * The whole error message is provided by \ref asString or
+     * \ref dumpOn.
+    */
     const std::string & msg() const
     { return _msg; }
 
-    /** A proper error message. */
+    /** Error message provided by \ref dumpOn as string. */
     std::string asString() const;
 
   protected:
 
-    /** Overload this to print a proper error message.
-     * CodeLocation is prepended automatically.
-    */
+    /** Overload this to print a proper error message. */
     virtual std::ostream & dumpOn( std::ostream & str ) const;
 
   public:
@@ -163,7 +176,10 @@ namespace zypp
     virtual const char * what() const throw()
     { return _msg.c_str(); }
 
-    /** Called by <tt>std::ostream & operator\<\<</tt> */
+    /** Called by <tt>std::ostream & operator\<\<</tt>.
+     * Prints \ref CodeLocation and the error message provided by
+     * \ref dumpOn.
+    */
     std::ostream & dumpError( std::ostream & str ) const;
   };
   ///////////////////////////////////////////////////////////////////
@@ -206,7 +222,7 @@ namespace zypp
   */
   //@{
   /** Drops a logline and throws the Exception. */
-#define ZYPP_DOTHROW(EXCPT)\
+#define ZYPP_THROW(EXCPT)\
   _ZYPP_THROW( EXCPT, ZYPP_EX_CODELOCATION )
 
   /** Drops a logline telling the Exception was caught (in order to handle it). */
@@ -219,28 +235,24 @@ namespace zypp
 
 
   /** Throw Exception built from a message string. */
-#define ZYPP_THROW(EXCPTTYPE, MSG)\
-  ZYPP_DOTHROW( EXCPTTYPE( MSG ) )
-
-  /** Throw Exception built from a message string. */
 #define ZYPP_THROW_MSG(EXCPTTYPE, MSG)\
-  ZYPP_DOTHROW( EXCPTTYPE( MSG ) )
+  ZYPP_THROW( EXCPTTYPE( MSG ) )
 
   /** Throw Exception built from errno. */
 #define ZYPP_THROW_ERRNO(EXCPTTYPE)\
-  ZYPP_DOTHROW( EXCPTTYPE( ::zypp::Exception::strErrno(errno) ) )
+  ZYPP_THROW( EXCPTTYPE( ::zypp::Exception::strErrno(errno) ) )
 
   /** Throw Exception built from errno provided as argument. */
 #define ZYPP_THROW_ERRNO1(EXCPTTYPE, ERRNO)\
-  ZYPP_DOTHROW( EXCPTTYPE( ::zypp::Exception::strErrno(ERRNO) ) )
+  ZYPP_THROW( EXCPTTYPE( ::zypp::Exception::strErrno(ERRNO) ) )
 
   /** Throw Exception built from errno and a message string. */
 #define ZYPP_THROW_ERRNO_MSG(EXCPTTYPE, MSG)\
-  ZYPP_DOTHROW( EXCPTTYPE( ::zypp::Exception::strErrno(errno,MSG) ) )
+  ZYPP_THROW( EXCPTTYPE( ::zypp::Exception::strErrno(errno,MSG) ) )
 
   /** Throw Exception built from errno provided as argument and a message string */
 #define ZYPP_THROW_ERRNO_MSG1(EXCPTTYPE, ERRNO,MSG)\
-  ZYPP_DOTHROW( EXCPTTYPE( ::zypp::Exception::strErrno(ERRNO,MSG) ) )
+  ZYPP_THROW( EXCPTTYPE( ::zypp::Exception::strErrno(ERRNO,MSG) ) )
   //@}
 
   /////////////////////////////////////////////////////////////////

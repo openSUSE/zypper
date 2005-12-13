@@ -53,7 +53,7 @@ namespace zypp
     {
     public:
       /** Ctor taking message.
-       * Use \ref ZYPP_DOTHROW to throw exceptions.
+       * Use \ref ZYPP_THROW to throw exceptions.
       */
       MediaMountException( const std::string & error_r,
 			   const std::string & source_r,
@@ -77,7 +77,7 @@ namespace zypp
     {
     public:
       /** Ctor taking message.
-       * Use \ref ZYPP_DOTHROW to throw exceptions.
+       * Use \ref ZYPP_THROW to throw exceptions.
       */
       MediaUnmountException( const std::string & error_r,
 			     const std::string & path_r )
@@ -231,7 +231,7 @@ namespace zypp
       std::string _url;
     };
 
-    
+
 
   /////////////////////////////////////////////////////////////////
   } // namespace media

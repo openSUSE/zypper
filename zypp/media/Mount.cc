@@ -78,7 +78,7 @@ void Mount::mount ( const string& source,
 
     if ( process == NULL )
     {
-      ZYPP_DOTHROW(MediaMountException(source, target, "Error::E_mount_failed"));
+      ZYPP_THROW(MediaMountException(source, target, "Error::E_mount_failed"));
     }
 
     string value;
@@ -132,7 +132,7 @@ void Mount::mount ( const string& source,
 
     if ( err != "" ) {
       WAR << "mount " << source << " " << target << ": " << err << endl;
-      ZYPP_DOTHROW(MediaMountException(source, target, err));
+      ZYPP_THROW(MediaMountException(source, target, err));
     } else {
       MIL << "mounted " << source << " " << target << endl;
     }
@@ -152,7 +152,7 @@ void Mount::umount (const string& path)
 
     if ( process == NULL )
     {
-        ZYPP_DOTHROW(MediaUnmountException("E_mount_failed", path));
+        ZYPP_THROW(MediaUnmountException("E_mount_failed", path));
     }
 
     string value;
@@ -203,7 +203,7 @@ void Mount::umount (const string& path)
 
     if ( err != "") {
       WAR << "umount " << path << ": " << err << endl;
-      ZYPP_DOTHROW(MediaUnmountException(err, path));
+      ZYPP_THROW(MediaUnmountException(err, path));
     } else {
       MIL << "unmounted " << path << endl;
     }

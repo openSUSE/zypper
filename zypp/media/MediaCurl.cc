@@ -100,18 +100,18 @@ void MediaCurl::setCookieFile( const Pathname &fileName )
 void MediaCurl::attachTo (bool next)
 {
   if ( next )
-    ZYPP_THROW( MediaException, "Error::E_not_supported_by_media");
+    ZYPP_THROW( MediaException("Error::E_not_supported_by_media") );
 
 #warning FIXME implement check for URL validity
 #if 0
   if ( !_url.isValid() )
-    ZYPP_THROW( MediaException, "Error::E_bad_url");
+    ZYPP_THROW( MediaException("Error::E_bad_url") );
 #endif
 
   _curl = curl_easy_init();
   if ( !_curl ) {
     ERR << "curl easy init failed" << endl;
-    ZYPP_THROW( MediaException, "Error::E_error");
+    ZYPP_THROW( MediaException("Error::E_error") );
   }
 
   _connected = true;
@@ -119,13 +119,13 @@ void MediaCurl::attachTo (bool next)
   CURLcode ret = curl_easy_setopt( _curl, CURLOPT_ERRORBUFFER, _curlError );
   if ( ret != 0 ) {
     ERR << "Error setting error buffer" << endl;
-    ZYPP_THROW( MediaException, "Error::E_curl_setopt_failed");
+    ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
   }
 
   ret = curl_easy_setopt( _curl, CURLOPT_FAILONERROR, true );
   if ( ret != 0 ) {
     ERR << _curlError << endl;
-    ZYPP_THROW( MediaException, "Error::E_curl_setopt_failed");
+    ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
   }
 
   if ( _url.getScheme() == "http" ) {
@@ -134,12 +134,12 @@ void MediaCurl::attachTo (bool next)
     ret = curl_easy_setopt ( _curl, CURLOPT_FOLLOWLOCATION, true );
     if ( ret != 0) {
       ERR << _curlError << endl;
-      ZYPP_THROW( MediaException, "Error::E_curl_setopt_failed");
+      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
     }
     ret = curl_easy_setopt ( _curl, CURLOPT_MAXREDIRS, 3L );
     if ( ret != 0) {
       ERR << _curlError << endl;
-      ZYPP_THROW( MediaException, "Error::E_curl_setopt_failed");
+      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
     }
   }
 
@@ -150,13 +150,13 @@ void MediaCurl::attachTo (bool next)
     ret = curl_easy_setopt( _curl, CURLOPT_SSL_VERIFYPEER, 0 );
     if ( ret != 0 ) {
       ERR << _curlError << endl;
-      ZYPP_THROW( MediaException, "Error::E_curl_setopt_failed");
+      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
     }
 
     ret = curl_easy_setopt( _curl, CURLOPT_SSL_VERIFYHOST, 0 );
     if ( ret != 0 ) {
       ERR << _curlError << endl;
-      ZYPP_THROW( MediaException, "Error::E_curl_setopt_failed");
+      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
     }
   }
 
@@ -187,7 +187,7 @@ void MediaCurl::attachTo (bool next)
     ret = curl_easy_setopt( _curl, CURLOPT_USERPWD, _userpwd.c_str() );
     if ( ret != 0 ) {
       ERR << _curlError << endl;
-      ZYPP_THROW( MediaException, "Error::E_curl_setopt_failed");
+      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
     }
   }
 
@@ -251,7 +251,7 @@ void MediaCurl::attachTo (bool next)
     ret = curl_easy_setopt( _curl, CURLOPT_PROXY, _proxy.c_str() );
     if ( ret != 0 ) {
       ERR << _curlError << endl;
-      ZYPP_THROW( MediaException, "Error::E_curl_setopt_failed");
+      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
     }
 
     /*---------------------------------------------------------------*
@@ -286,7 +286,7 @@ void MediaCurl::attachTo (bool next)
     ret = curl_easy_setopt( _curl, CURLOPT_PROXYUSERPWD, _proxyuserpwd.c_str() );
     if ( ret != 0 ) {
       ERR << _curlError << endl;
-      ZYPP_THROW( MediaException, "Error::E_curl_setopt_failed");
+      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
     }
 
   }
@@ -300,27 +300,27 @@ void MediaCurl::attachTo (bool next)
                           _currentCookieFile.c_str() );
   if ( ret != 0 ) {
     ERR << _curlError << endl;
-    ZYPP_THROW( MediaException, "Error::E_curl_setopt_failed");
+    ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
   }
 
   ret = curl_easy_setopt( _curl, CURLOPT_COOKIEJAR,
                           _currentCookieFile.c_str() );
   if ( ret != 0 ) {
     ERR << _curlError << endl;
-    ZYPP_THROW( MediaException, "Error::E_curl_setopt_failed");
+    ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
   }
 
   ret = curl_easy_setopt( _curl, CURLOPT_PROGRESSFUNCTION,
                           &MediaCurl::progressCallback );
   if ( ret != 0 ) {
     ERR << _curlError << endl;
-    ZYPP_THROW( MediaException, "Error::E_curl_setopt_failed");
+    ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
   }
 
   ret = curl_easy_setopt( _curl, CURLOPT_NOPROGRESS, false );
   if ( ret != 0 ) {
     ERR << _curlError << endl;
-    ZYPP_THROW( MediaException, "Error::E_curl_setopt_failed");
+    ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
   }
 }
 
@@ -371,11 +371,11 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
 #warning FIXME implement check for URL validity
 #if 0
     if(!_url.isValid())
-      ZYPP_THROW( MediaException, string("Error::E_bad_url") + " " + _url.toString());
+      ZYPP_THROW( MediaException(string("Error::E_bad_url") + " " + _url.toString()) );
 #endif
 
     if(_url.getHost().empty())
-      ZYPP_THROW( MediaException, "Error::E_no_host_specified");
+      ZYPP_THROW( MediaException("Error::E_no_host_specified") );
 
     string path = _url.getPathName();
     if ( !path.empty() && path != "/" && *path.rbegin() == '/' &&
@@ -404,7 +404,7 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
     if( assert_dir( dest.dirname() ) )
     {
       DBG << "assert_dir " << dest.dirname() << " failed" << endl;
-      ZYPP_THROW( MediaException, string("Error::E_system") + string(" ") + dest.dirname().asString());
+      ZYPP_THROW( MediaException(string("Error::E_system") + string(" ") + dest.dirname().asString()) );
     }
 
     DBG << "URL: " << url.toString().c_str() << endl;
@@ -422,20 +422,20 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
                                      urlBuffer.c_str() );
     if ( ret != 0 ) {
       ERR << _curlError << endl;
-      ZYPP_THROW( MediaException, "Error::E_curl_setopt_failed");
+      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
     }
 
     FILE *file = fopen( destNew.c_str(), "w" );
     if ( !file ) {
       ERR << "fopen failed for file '" << destNew << "'" << endl;
-      ZYPP_THROW( MediaException, string("Error::E_write_error") + string(" ") + destNew);
+      ZYPP_THROW( MediaException(string("Error::E_write_error") + string(" ") + destNew) );
     }
 
     ret = curl_easy_setopt( _curl, CURLOPT_WRITEDATA, file );
     if ( ret != 0 ) {
       fclose( file );
       ERR << _curlError << endl;
-      ZYPP_THROW( MediaException, "Error::E_curl_setopt_failed");
+      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
     }
 
     // Set callback and perform.
@@ -489,7 +489,7 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
 #if 0
 	      report->stop( err );
 #endif
-	      ZYPP_THROW( MediaException, err + string(" ") + _curlError);
+	      ZYPP_THROW( MediaException(err + string(" ") + _curlError) );
             }
           }
           break;
@@ -523,7 +523,7 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
 #if 0
       report->stop( err );
 #endif
-      ZYPP_THROW( MediaException, err + string(" ") + _curlError);
+      ZYPP_THROW( MediaException(err + string(" ") + _curlError) );
     }
 
     if ( rename( destNew, dest ) != 0 ) {
@@ -532,7 +532,7 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
 #if 0
       report->stop( Error::E_write_error );
 #endif
-      ZYPP_THROW( MediaException, "Error::E_write_error");
+      ZYPP_THROW( MediaException("Error::E_write_error") );
     }
 
 #warning FIXME reenable change report
@@ -615,7 +615,7 @@ void MediaCurl::getDirInfo( std::list<std::string> & retlist,
   }
   catch (const MediaException & excpt_r)
   {
-    ZYPP_THROW( MediaException, "Error::E_not_supported_by_media");
+    ZYPP_THROW( MediaException("Error::E_not_supported_by_media") );
   }
 }
 
@@ -635,7 +635,7 @@ void MediaCurl::getDirInfo( filesystem::DirContent & retlist,
   }
   catch (const MediaException & excpt_r)
   {
-    ZYPP_THROW( MediaException, "Error::E_not_supported_by_media");
+    ZYPP_THROW( MediaException("Error::E_not_supported_by_media") );
   }
 }
 

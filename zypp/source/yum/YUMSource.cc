@@ -88,7 +88,7 @@ namespace zypp
        catch (...)
        {
 	ERR << "Cannot read repomd file, cannot initialize source" << endl;
-//	ZYPP_THROW( Exception, "Cannot read repomd file, cannot initialize source" );
+//	ZYPP_THROW( Exception("Cannot read repomd file, cannot initialize source") );
        }
        try {
 	// now put other and filelist data to structures for easier find

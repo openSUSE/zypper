@@ -332,7 +332,7 @@ namespace zypp {
 	    , _local_file( "" )
 	  {
 	    if ( _file.empty() ) {
-	      ZYPP_DOTHROW(MediaBadFilenameException(_file.asString()));
+	      ZYPP_THROW(MediaBadFilenameException(_file.asString()));
 	    } else if ( _media ) {
 	      try {
 		_media->provideFile( _file );

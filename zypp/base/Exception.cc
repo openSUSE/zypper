@@ -58,22 +58,17 @@ namespace zypp
   }
 
   std::ostream & Exception::dumpOn( std::ostream & str ) const
-  {
-    return str << _msg;
-  }
+  { return str << _msg; }
 
   std::ostream & Exception::dumpError( std::ostream & str ) const
-  {
-    return dumpOn( str << _where << ": " );
-  }
+  { return dumpOn( str << _where << ": " ); }
 
   std::ostream & operator<<( std::ostream & str, const Exception & obj )
   { return obj.dumpError( str ); }
 
+
   std::string Exception::strErrno( int errno_r )
-  {
-    return str::strerror( errno_r );
-  }
+  { return str::strerror( errno_r ); }
 
   std::string Exception::strErrno( int errno_r, const std::string & msg_r )
   {
