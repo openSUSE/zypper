@@ -33,7 +33,7 @@ Upgrading p6-1.0-1 => p6-2.0-1[test]
 Upgrading p8-1.0-1 => p8-2.0-1[test]
 Upgrading p8a-1.0-1 => p8a-2.0-1[test]
 Upgrading p9-1.0-1 => p9-2.0-1[test]
-Marking resolvable p6b-2.0-1 as uninstallable
+Marking resItem p6b-2.0-1 as uninstallable
 p3a-2.0-1[test]:  needed by  [p3-2.0-1]
 Installing p3a-2.0-1[test]
 p9a-2.0-1[test]:  needed by  [p9-2.0-1]

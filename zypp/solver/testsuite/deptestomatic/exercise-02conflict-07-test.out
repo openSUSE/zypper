@@ -24,6 +24,6 @@ total priority=0, min priority=800, max priority=800
 other penalties=0
 - - - - - - - - - -
 Installing test4-1.0-1[test]
-Marking resolvable test3-1.0-1 as uninstallable
+Marking resItem test3-1.0-1 as uninstallable
 test2-1.0-1: conflicts with  [test4-1.0-1]
 
