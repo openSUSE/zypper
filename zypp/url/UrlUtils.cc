@@ -254,6 +254,17 @@ namespace zypp
          const std::string &vsep,
          const std::string &safe)
     {
+      for(std::string::size_type i=0; i<safe.size(); i++)
+      {
+        if( psep.find(safe[i]) != std::string::npos ||
+            vsep.find(safe[i]) != std::string::npos)
+        {
+          throw std::invalid_argument(
+            "The encoding safe character list contains a separator character."
+          );
+        }
+      }
+
       std::string    str;
       ParamMap::const_iterator i( pmap.begin());
 
