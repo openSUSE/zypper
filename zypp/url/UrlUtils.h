@@ -22,17 +22,37 @@ namespace zypp
 { ////////////////////////////////////////////////////////////////////
 
   ////////////////////////////////////////////////////////////////////
+  /** Url details namespace. */
   namespace url
   { //////////////////////////////////////////////////////////////////
 
+
     // ---------------------------------------------------------------
+    /** A parameter vector container.
+     * A string vector containing splited PathParam- or Query-String.
+     * Each string in the vector is allways URL percent encoded and
+     * usually contains a "key=value" pair.
+     */
     typedef std::vector < std::string >             ParamVec;
+
+
+    /** A parameter map container.
+     * A map containing key and value pairs parsed from a PathParam-
+     * or Query-String.
+     */
     typedef std::map < std::string, std::string >   ParamMap;
 
-    typedef enum { E_ENCODED, E_DECODED }           EEncoding;
 
-    /**
-     * \brief Encodes a string using URL percent encoding.
+    /** Encoding flags.
+     */
+    typedef enum {
+        E_ENCODED, //!< Flag to request encoded string(s).
+        E_DECODED  //!< Flag to request decoded string(s).
+    } EEncoding;
+
+
+    // ---------------------------------------------------------------
+    /** Encodes a string using URL percent encoding.
      *
      * Already encoded characters are detected and will be not encoded a
      * second time. By default, all characters except of "a-zA-Z0-9_.-"
@@ -41,9 +61,9 @@ namespace zypp
      *
      * The following function call will encode the "@" character as "%40",
      * but skip encoding of the "%" character:
-     * @code
+     * \code
      *   zypp::url::encode("foo%bar@localhost", "%");
-     * @endcode
+     * \endcode
      *
      * \param str      A string to encode (binary data).
      * \param safe     Characters safe to skip in encoding,
@@ -53,43 +73,110 @@ namespace zypp
     std::string
     encode(const std::string &str, const std::string &safe = "");
 
-    /**
-     * @param str      A string to decode.
-     * @param allowNUL If %00 (binary NUL) is allowed or not.
-     * @return A decoded (binary data) string.
-     * @throws A std::invalid_argument exception if allowNUL
-     *         is false and a %00 was found.
+
+    // ---------------------------------------------------------------
+    /** Decodes a URL percent encoded string.
+     * Replaces all occurences of \c "%<hex><hex>" in the \p str string
+     * with the character encoded using the two hexadecimal digits that
+     * follows the "%" character.
+     *
+     * For example, the encoded string "%40%3F%3D%26%25" will be decoded
+     * to "@?=&%".
+     *
+     * \param str      A string to decode.
+     * \param allowNUL A flag, if \c "%00" (encoded \c '\\0')
+     *                 is allowed or not.
+     * \return A decoded strig (may contain binary data).
+     * \throws A std::invalid_argument exception if \p allowNUL
+     *         is false and a \c "%00" was found in \p str.
      */
     std::string
     decode(const std::string &str, bool allowNUL = false);
 
-    /**
-     * @param c        A octet / character to encode.
-     * @return A percent encoded representation of the octet,
-     *         e.g. %20 for space.
+
+    // ---------------------------------------------------------------
+    /** Encode one character.
+     *
+     * Encode the specified character \p c into its \c "%<hex><hex>"
+     * representation.
+     *
+     * \param c        A character to encode.
+     * \return A percent encoded representation of the character,
+     *         e.g. %20 for a ' ' (space).
      */
     std::string
     encode_octet(const unsigned char c);
 
-    /**
-     * @param hex     Pointer to two hex characters representing
-     *                the octet value in percent-encoded strings.
-     * @return The octet value 0-255 or -1 for invalid hex argument.
+
+    // ---------------------------------------------------------------
+    /** Decode one character.
+     *
+     * Decode the \p hex parameter pointing to (at least) two hexadecimal
+     * digits into its character value and return it.
+     *
+     * Example:
+     * \code
+     *   char *str = "%40";
+     *   char *pct = strchr(str, '%');
+     *   int   chr = pct ? decode_octet(pct+1) : -1;
+     *      // chr is set to the '@' ASCII character now.
+     * \endcode
+     *
+     * \param hex     Pointer to two hex characters representing
+     *                the character value in percent-encoded strings.
+     * \return The value (0-255) encoded in the \p hex characters or -1
+     *         if \p hex does not point to two hexadecimal characters.
      */
     int
     decode_octet(const char *hex);
 
 
-    /**
-     * FIXME: split vec
+    // ---------------------------------------------------------------
+    /** Split into a parameter vector.
+     *
+     * Splits a parameter string \p pstr into substrings using \p psep
+     * as separator and appends the resulting substrings to \p pvec.
+     *
+     * Usual parameter separators are \c '&' for Query- and \c ',' for
+     * PathParam-Strings.
+     *
+     * \param pvec    Reference to a result parameter vector.
+     * \param pstr    Reference to the PathParam- or Query-String to split.
+     * \param psep    Parameter separator character to split at.
      */
     void
     split(ParamVec          &pvec,
           const std::string &pstr,
           const std::string &psep);
 
-    /**
-     * FIXME: split map
+
+    // ---------------------------------------------------------------
+    /** Split into a parameter map.
+     *
+     * Splits a parameter string \p pstr into substrings using \p psep as
+     * separator and then, each substring into key and value pair using
+     * \p vsep as separator between parameter key and value and adds them
+     * to the parameter map \p pmap.
+     *
+     * If a parameter substring doesn't contain any value separator \p vsep,
+     * the substring is used as a parameter key and value is set to an empty
+     * string.
+     *
+     * Usual parameter separators are \c '&' for Query- and \c ',' for
+     * PathParam-Strings. A usual parameter-value separator is \c '=' for
+     * both, Query- and PathParam-Strings.
+     *
+     * If the encoding flag \p eflag is set to \p E_DECODED, then the key
+     * and values are dedcoded before they are stored in the map.
+     *
+     * \param pmap    Reference to a result parameter map.
+     * \param pstr    Reference to the PathParam- or Query-String to split.
+     * \param psep    Separator character to split key-value pairs.
+     * \param vsep    Separator character to split key and value.
+     * \param eflag   Flag if the key and value strings should be URL percent
+     *                decoded before they're stored in the map.
+     * \throws A std::invalid_argument exception if the eflag is set to
+     * E_DECODED and the \p pstr contains a \c "%00" (encoded \c '\\0').
      */
     void
     split(ParamMap          &pmap,
@@ -98,15 +185,47 @@ namespace zypp
           const std::string &vsep,
           EEncoding         eflag = E_ENCODED);
 
-    /**
-     * FIXME: join vec
+
+    // ---------------------------------------------------------------
+    /** Join parameter vector to a string.
+     *
+     * Creates a string containing all substrings from the \p pvec separated
+     * by \p psep separator character. The substrings in \p pvec should be
+     * already URL percent encoded and should't contain \p psep characters.
+     *
+     * Usual parameter separators are \c '&' for Query- and \c ',' for
+     * PathParam-Strings.
+     *
+     * \param pvec    Reference to encoded parameter vector.
+     * \param psep    Parameter separator character to use.
+     * \return A parameter string.
      */
     std::string
     join(const ParamVec     &pvec,
          const std::string  &psep);
 
-    /**
-     * FIXME: join map
+
+    // ---------------------------------------------------------------
+    /** Join parameter map to a string.
+     *
+     * Creates a string containing all parameter key-value pairs from the
+     * parameter map \p pmap, that will be joined using the \p psep character
+     * and the parameter key is separated from the parameter value using the
+     * \p vsep character. Both, key and value will be automatically encoded.
+     *
+     * Usual parameter separators are \c '&' for Query- and \c ',' for
+     * PathParam-Strings. A usual parameter-value separator is \c '=' for
+     * both, Query- and PathParam-Strings.
+     *
+     * See encode() function from details about the \p safe characters.
+     *
+     * \param pmap    Reference to a parameter map.
+     * \param psep    Separator character to use between key-value pairs.
+     * \param vsep    Separator character to use between keys and values.
+     * \param safe    List of characters to accept without encoding.
+     * \return A URL percend-encoded parameter string.
+     * \throws A std::invalid_argument exception, if the \p safe character
+     * list contains characters used in \p psep or \p vsep.
      */
     std::string
     join(const ParamMap     &pmap,
