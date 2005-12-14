@@ -182,6 +182,20 @@ namespace zypp
       std::string _url;
     };
 
+    class MediaCurlInitException : public MediaException
+    {
+    public:
+      MediaCurlInitException(const Url & url_r)
+      : MediaException()
+      , _url(url_r.toString())
+      {}
+      virtual ~MediaCurlInitException() throw() {};
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+    private:
+      std::string _url;
+    };
+
     class MediaSystemException : public MediaException
     {
     public:
@@ -301,6 +315,40 @@ namespace zypp
     protected:
       virtual std::ostream & dumpOn( std::ostream & str ) const;
       std::string _url;
+    };
+
+    class MediaCurlException : public MediaException
+    {
+    public:
+      MediaCurlException(const Url & url_r,
+			 const std::string & err_r,
+			 const std::string & msg_r)
+      : MediaException()
+      , _url(url_r.toString())
+      , _err(err_r)
+      , _msg(msg_r)
+      {}
+      virtual ~MediaCurlException() throw() {};
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+      std::string _url;
+      std::string _err;
+      std::string _msg;
+    };
+
+    class MediaCurlSetOptException : public MediaException
+    {
+    public:
+      MediaCurlSetOptException(const Url & url_r, const std::string & msg_r)
+      : MediaException()
+      , _url(url_r.toString())
+      , _msg(msg_r)
+      {}
+      virtual ~MediaCurlSetOptException() throw() {};
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+      std::string _url;
+      std::string _msg;
     };
 
   /////////////////////////////////////////////////////////////////

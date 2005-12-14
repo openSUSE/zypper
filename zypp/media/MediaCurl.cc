@@ -15,10 +15,10 @@
 #include "zypp/base/Logger.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/base/String.h"
-//#include <y2util/SysConfig.h>
 
 #include "zypp/media/MediaCurl.h"
 #include "zypp/media/MediaCallbacks.h"
+#include "zypp/media/ProxyInfo.h"
 
 #include <sys/types.h>
 #include <sys/mount.h>
@@ -99,29 +99,26 @@ void MediaCurl::setCookieFile( const Pathname &fileName )
 void MediaCurl::attachTo (bool next)
 {
   if ( next )
-    ZYPP_THROW( MediaException("Error::E_not_supported_by_media") );
+    ZYPP_THROW(MediaNotSupportedException(_url));
 
   if ( !_url.isValid() )
     ZYPP_THROW(MediaBadUrlException(_url));
 
   _curl = curl_easy_init();
   if ( !_curl ) {
-    ERR << "curl easy init failed" << endl;
-    ZYPP_THROW( MediaException("Error::E_error") );
+    ZYPP_THROW(MediaCurlInitException(_url));
   }
 
   _connected = true;
 
   CURLcode ret = curl_easy_setopt( _curl, CURLOPT_ERRORBUFFER, _curlError );
   if ( ret != 0 ) {
-    ERR << "Error setting error buffer" << endl;
-    ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
+    ZYPP_THROW(MediaCurlSetOptException(_url, "Error setting error buffer"));
   }
 
   ret = curl_easy_setopt( _curl, CURLOPT_FAILONERROR, true );
   if ( ret != 0 ) {
-    ERR << _curlError << endl;
-    ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
+    ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
 
   if ( _url.getScheme() == "http" ) {
@@ -129,13 +126,11 @@ void MediaCurl::attachTo (bool next)
     // an HTTP header (#113275)
     ret = curl_easy_setopt ( _curl, CURLOPT_FOLLOWLOCATION, true );
     if ( ret != 0) {
-      ERR << _curlError << endl;
-      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
+      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
     ret = curl_easy_setopt ( _curl, CURLOPT_MAXREDIRS, 3L );
     if ( ret != 0) {
-      ERR << _curlError << endl;
-      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
+      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
   }
 
@@ -145,14 +140,12 @@ void MediaCurl::attachTo (bool next)
     WAR << "Disable certificate verification for https." << endl;
     ret = curl_easy_setopt( _curl, CURLOPT_SSL_VERIFYPEER, 0 );
     if ( ret != 0 ) {
-      ERR << _curlError << endl;
-      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
+      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
 
     ret = curl_easy_setopt( _curl, CURLOPT_SSL_VERIFYHOST, 0 );
     if ( ret != 0 ) {
-      ERR << _curlError << endl;
-      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
+      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
   }
 
@@ -182,8 +175,7 @@ void MediaCurl::attachTo (bool next)
     _userpwd = unEscape( _userpwd );
     ret = curl_easy_setopt( _curl, CURLOPT_USERPWD, _userpwd.c_str() );
     if ( ret != 0 ) {
-      ERR << _curlError << endl;
-      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
+      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
   }
 
@@ -194,50 +186,49 @@ void MediaCurl::attachTo (bool next)
    If not provided, /etc/sysconfig/proxy is evaluated
    *---------------------------------------------------------------*/
 
-#warning FIX once I understand how to get this info
-#warning FIXME enable proxy via sysconfig somehow
-#if 0
-  _proxy = _url.option( "proxy" );
+  _proxy = _url.getQueryParam( "proxy" );
 
   if ( ! _proxy.empty() ) {
-    string proxyport( _url.option( "proxyport" ) );
+    string proxyport( _url.getQueryParam( "proxyport" ) );
     if ( ! proxyport.empty() ) {
       _proxy += ":" + proxyport;
     }
   } else {
 
-    SysConfig cfg( "proxy" );
+    ProxyInfo proxy_info (RW_pointer<ProxyInfo::Impl>(new ProxyInfo_sysconfig("proxy")));
 
-    if ( cfg.readBoolEntry( "PROXY_ENABLED", false ) ) {
+    if ( proxy_info.enabled())
+    {
       bool useproxy = true;
 
-      std::vector<std::string> nope;
-      stringutil::split( cfg.readEntry( "NO_PROXY" ), nope, ", \t" );
-      for ( unsigned i = 0; i < nope.size(); ++i ) {
+      std::list<std::string> nope = proxy_info.noProxy();
+      for (std::list<std::string>::const_iterator it = nope.begin();
+           it != nope.end();
+           it++)
+      {
 	// no proxy: if nope equals host,
 	// or is a suffix preceeded by a '.'
-	string::size_type pos = _url.getHost().find( nope[i] );
+	string::size_type pos = _url.getHost().find( *it );
 	if ( pos != string::npos
-	     && ( pos + nope[i].size() == _url.getHost().size() )
+	     && ( pos + it->size() == _url.getHost().size() )
 	     && ( pos == 0 || _url.getHost()[pos -1] == '.' ) ) {
-	  DBG << "NO_PROXY: " << nope[i] << " matches host " << _url.getHost() << endl;
+	  DBG << "NO_PROXY: " << *it << " matches host " << _url.getHost() << endl;
 	  useproxy = false;
 	  break;
 	}
       }
 
       if ( useproxy ) {
-	if ( _url.getScheme() == Url::ftp ) {
-	  _proxy = cfg.readEntry( "FTP_PROXY" );
-	} else if ( _url.getScheme() == Url::http ) {
-	  _proxy = cfg.readEntry( "HTTP_PROXY" );
-	} else if ( _url.getScheme() == Url::https ) {
-	  _proxy = cfg.readEntry( "HTTPS_PROXY" );
+	if ( _url.getScheme() == "ftp" ) {
+	  _proxy = proxy_info.ftp();
+	} else if ( _url.getScheme() == "http" ) {
+	  _proxy = proxy_info.http();
+	} else if ( _url.getScheme() == "https" ) {
+	  _proxy = proxy_info.https();
 	}
       }
     }
   }
-#endif
 
 
   DBG << "Proxy: " << _proxy << endl;
@@ -246,8 +237,7 @@ void MediaCurl::attachTo (bool next)
 
     ret = curl_easy_setopt( _curl, CURLOPT_PROXY, _proxy.c_str() );
     if ( ret != 0 ) {
-      ERR << _curlError << endl;
-      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
+      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
 
     /*---------------------------------------------------------------*
@@ -257,14 +247,11 @@ void MediaCurl::attachTo (bool next)
      If not provided, $HOME/.curlrc is evaluated
      *---------------------------------------------------------------*/
 
-#warning FIXME once I know how to get this info
-#warning FIXME enable proxy via sysconfig somehow
-#if 0
-    _proxyuserpwd = _url.option( "proxyuser" );
+    _proxyuserpwd = _url.getQueryParam( "proxyuser" );
 
     if ( ! _proxyuserpwd.empty() ) {
 
-      string proxypassword( _url.option( "proxypassword" ) );
+      string proxypassword( _url.getQueryParam( "proxypassword" ) );
       if ( ! proxypassword.empty() ) {
 	_proxyuserpwd += ":" + proxypassword;
       }
@@ -272,17 +259,17 @@ void MediaCurl::attachTo (bool next)
     } else {
 
       string curlrcFile = string( getenv("HOME") ) + string( "/.curlrc" );
-      SysConfig curlrc( curlrcFile );
-      _proxyuserpwd = curlrc.readEntry( "proxy-user" );
-
+      map<string,string> rc_data
+	= proxyinfo::sysconfigRead(Pathname(curlrcFile));
+      map<string,string>::const_iterator it = rc_data.find("proxy-user");
+      if (it != rc_data.end())
+	_proxyuserpwd = it->second;
     }
-#endif
 
     _proxyuserpwd = unEscape( _proxyuserpwd );
     ret = curl_easy_setopt( _curl, CURLOPT_PROXYUSERPWD, _proxyuserpwd.c_str() );
     if ( ret != 0 ) {
-      ERR << _curlError << endl;
-      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
+      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
 
   }
@@ -295,28 +282,24 @@ void MediaCurl::attachTo (bool next)
   ret = curl_easy_setopt( _curl, CURLOPT_COOKIEFILE,
                           _currentCookieFile.c_str() );
   if ( ret != 0 ) {
-    ERR << _curlError << endl;
-    ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
+    ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
 
   ret = curl_easy_setopt( _curl, CURLOPT_COOKIEJAR,
                           _currentCookieFile.c_str() );
   if ( ret != 0 ) {
-    ERR << _curlError << endl;
-    ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
+    ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
 
   ret = curl_easy_setopt( _curl, CURLOPT_PROGRESSFUNCTION,
                           &MediaCurl::progressCallback );
   if ( ret != 0 ) {
-    ERR << _curlError << endl;
-    ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
+    ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
 
   ret = curl_easy_setopt( _curl, CURLOPT_NOPROGRESS, false );
   if ( ret != 0 ) {
-    ERR << _curlError << endl;
-    ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
+    ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
 }
 
@@ -368,7 +351,7 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
       ZYPP_THROW(MediaBadUrlException(_url));
 
     if(_url.getHost().empty())
-      ZYPP_THROW( MediaException("Error::E_no_host_specified") );
+      ZYPP_THROW(MediaBadUrlEmptyHostException(_url));
 
     string path = _url.getPathName();
     if ( !path.empty() && path != "/" && *path.rbegin() == '/' &&
@@ -397,7 +380,7 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
     if( assert_dir( dest.dirname() ) )
     {
       DBG << "assert_dir " << dest.dirname() << " failed" << endl;
-      ZYPP_THROW( MediaException(string("Error::E_system") + string(" ") + dest.dirname().asString()) );
+      ZYPP_THROW( MediaSystemException(_url, "System error on " + dest.dirname().asString()) );
     }
 
     DBG << "URL: " << url.toString().c_str() << endl;
@@ -414,21 +397,19 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
     CURLcode ret = curl_easy_setopt( _curl, CURLOPT_URL,
                                      urlBuffer.c_str() );
     if ( ret != 0 ) {
-      ERR << _curlError << endl;
-      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
+      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
 
     FILE *file = fopen( destNew.c_str(), "w" );
     if ( !file ) {
       ERR << "fopen failed for file '" << destNew << "'" << endl;
-      ZYPP_THROW( MediaException(string("Error::E_write_error") + string(" ") + destNew) );
+      ZYPP_THROW(MediaWriteException(destNew));
     }
 
     ret = curl_easy_setopt( _curl, CURLOPT_WRITEDATA, file );
     if ( ret != 0 ) {
       fclose( file );
-      ERR << _curlError << endl;
-      ZYPP_THROW( MediaException("Error::E_curl_setopt_failed") );
+      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
 
     // Set callback and perform.
@@ -453,12 +434,12 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
 
       ERR << "curl error: " << ret << ": " << _curlError << endl;
       std::string err;
-      switch ( ret ) {
+      try {
+       switch ( ret ) {
         case CURLE_UNSUPPORTED_PROTOCOL:
         case CURLE_URL_MALFORMAT:
         case CURLE_URL_MALFORMAT_USER:
-          err = "Error::E_bad_url";
-          break;
+	  err = "Bad URL";
         case CURLE_HTTP_NOT_FOUND:
           {
             long httpReturnCode;
@@ -472,51 +453,51 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
               if ( httpReturnCode == 401 )
 	      {
 		msg = "URL: " + url.toString();
-                err = "Error::E_login_failed";
+                err = "Login failed";
 	      }
               else
 	      {
-		err = "Error::E_file_not_found";
+		err = "File not found";
 	      }
-#warning FIXME reenable change report
-#if 0
-	      report->stop( err );
-#endif
-	      ZYPP_THROW( MediaException(err + string(" ") + _curlError) );
+	      ZYPP_THROW( MediaCurlException(_url, err, _curlError));
             }
           }
           break;
         case CURLE_FTP_COULDNT_RETR_FILE:
         case CURLE_FTP_ACCESS_DENIED:
-          err = "Error::E_file_not_found";
+          err = "File not found";
           break;
         case CURLE_BAD_PASSWORD_ENTERED:
         case CURLE_FTP_USER_PASSWORD_INCORRECT:
-          err = "Error::E_login_failed";
+          err = "Login failed";
           break;
         case CURLE_COULDNT_RESOLVE_PROXY:
         case CURLE_COULDNT_RESOLVE_HOST:
         case CURLE_COULDNT_CONNECT:
         case CURLE_FTP_CANT_GET_HOST:
-          err = "Error::E_connection_failed";
+          err = "Connection failed";
           break;
         case CURLE_WRITE_ERROR:
-          err = "Error::E_write_error";
+          err = "Write error";
           break;
         case CURLE_ABORTED_BY_CALLBACK:
-          err = "Error::E_user_abort";
+          err = "User abort";
           break;
         case CURLE_SSL_PEER_CERTIFICATE:
         default:
-          err = "Error::E_error";
+          err = "Unrecognized error";
           break;
+       }
+       ZYPP_THROW(MediaCurlException(_url, err, _curlError));
       }
-
+      catch (const MediaException & excpt_r)
+      {
 #warning FIXME reenable change report
 #if 0
-      report->stop( err );
+	report->stop( err );
 #endif
-      ZYPP_THROW( MediaException(err + string(" ") + _curlError) );
+	ZYPP_RETHROW(excpt_r);
+      }
     }
 
     if ( rename( destNew, dest ) != 0 ) {
@@ -525,7 +506,7 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
 #if 0
       report->stop( Error::E_write_error );
 #endif
-      ZYPP_THROW( MediaException("Error::E_write_error") );
+      ZYPP_THROW(MediaWriteException(dest));
     }
 
 #warning FIXME reenable change report

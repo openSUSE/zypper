@@ -66,6 +66,11 @@ namespace zypp
       return str << "Bad media attach point: " << _url << endl;
     }
 
+    std::ostream & MediaCurlInitException::dumpOn( std::ostream & str) const
+    {
+      return str << "Curl init failed for: " << _url << endl;
+    }
+
     std::ostream & MediaSystemException::dumpOn( std::ostream & str) const
     {
       return str << "System exception: " << _message
@@ -116,6 +121,18 @@ namespace zypp
       return str << "Operation not supported by media: " << _url << endl;
     }
 
+    std::ostream & MediaCurlException::dumpOn( std::ostream & str) const
+    {
+      return str << "Curl error for: " << _url
+	<< ": Error code: " << _err
+	<< " Error message: " << _msg << endl;
+    }
+
+    std::ostream & MediaCurlSetOptException::dumpOn( std::ostream & str) const
+    {
+      return str << "Error occurred while setting CURL options for " << _url
+	<< ": " << _msg << endl;
+    }
 
   /////////////////////////////////////////////////////////////////
   } // namespace media

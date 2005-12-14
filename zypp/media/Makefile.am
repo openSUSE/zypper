@@ -18,6 +18,7 @@ include_HEADERS = 		\
 	MediaDISK.h		\
 	MediaSMB.h		\
 	MediaCIFS.h		\
+	ProxyInfo.h		\
 	MediaCurl.h
 
 
@@ -36,6 +37,7 @@ lib@PACKAGE@_media_la_SOURCES = \
 	MediaDISK.cc		\
 	MediaSMB.cc		\
 	MediaCIFS.cc		\
+	ProxyInfo.cc		\
 	MediaCurl.cc
 
 

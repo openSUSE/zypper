@@ -17,6 +17,7 @@
 
 #include "zypp/Url.h"
 #include "zypp/Callback.h"
+#include "zypp/base/Exception.h"
 
 namespace zypp {
   namespace media {
