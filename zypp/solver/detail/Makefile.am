@@ -24,12 +24,12 @@ include_HEADERS = \
 	Channel.h			\
 	ChannelPtr.h			\
 	Subscription.h			\
-	Resolvable.h			\
-	ResolvablePtr.h			\
+	ResItem.h			\
+	ResItemPtr.h			\
 	Dependency.h			\
 	DependencyPtr.h			\
-	ResolvableAndDependency.h	\
-	ResolvableAndDependencyPtr.h	\
+	ResItemAndDependency.h	\
+	ResItemAndDependencyPtr.h	\
 	OrDependency.h			\
 	OrDependencyPtr.h		\
 	Package.h			\
@@ -106,9 +106,9 @@ lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	Spec.cc						\
 	Channel.cc					\
 	Subscription.cc					\
-	Resolvable.cc					\
+	ResItem.cc					\
 	Dependency.cc					\
-	ResolvableAndDependency.cc			\
+	ResItemAndDependency.cc			\
 	OrDependency.cc					\
 	XmlNode.cc					\
 	Importance.cc					\

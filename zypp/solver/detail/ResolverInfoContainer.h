@@ -44,11 +44,11 @@ class ResolverInfoContainer : public ResolverInfo {
 
   private:
 
-    CResolvableList _resolvable_list;
+    CResItemList _resItem_list;
 
   protected:
 
-    ResolverInfoContainer (ResolverInfoType type, constResolvablePtr resolvable, int priority, constResolvablePtr child = NULL);
+    ResolverInfoContainer (ResolverInfoType type, constResItemPtr resItem, int priority, constResItemPtr child = NULL);
 
   public:
     virtual ~ResolverInfoContainer();
@@ -64,18 +64,18 @@ class ResolverInfoContainer : public ResolverInfo {
 
     // ---------------------------------- accessors
 
-    CResolvableList resolvables (void) const { return _resolvable_list; }
+    CResItemList resItems (void) const { return _resItem_list; }
 
     // ---------------------------------- methods
 
     virtual bool merge (ResolverInfoContainerPtr to_be_merged);
     virtual ResolverInfoPtr copy (void) const;
 
-    std::string resolvablesToString (bool names_only) const;
+    std::string resItemsToString (bool names_only) const;
 
-    bool mentions (constResolvablePtr resolvable) const;
-    void addRelatedResolvable (constResolvablePtr resolvable);
-    void addRelatedResolvableList (const CResolvableList & resolvables);
+    bool mentions (constResItemPtr resItem) const;
+    void addRelatedResItem (constResItemPtr resItem);
+    void addRelatedResItemList (const CResItemList & resItems);
 
 };
  

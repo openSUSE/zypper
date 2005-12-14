@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
-/* ResolvableAndDependencyPtr.h
+/* ResItemPtr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,24 +18,24 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ResolvableAndDependencyPtr_h
-#define _ResolvableAndDependencyPtr_h
+#ifndef _ResItemPtr_h
+#define _ResItemPtr_h
 
 #include <y2util/RepDef.h>
-#include <zypp/solver/detail/WorldPtr.h>
+#include <zypp/solver/detail/SpecPtr.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace ZYPP {
-//////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
-//	CLASS NAME : ResolvableAndDependencyPtr
-//	CLASS NAME : constResolvableAndDependencyPtr
+//	CLASS NAME : ResItemPtr
+//	CLASS NAME : constResItemPtr
 ///////////////////////////////////////////////////////////////////
-DEFINE_BASE_POINTER(ResolvableAndDependency);
+DEFINE_DERIVED_POINTER(ResItem,Spec);
 
 ///////////////////////////////////////////////////////////////////
 }; // namespace ZYPP
 ///////////////////////////////////////////////////////////////////
 
-#endif // _ResolvableAndDependencyPtr_h
+#endif // _ResItemPtr_h

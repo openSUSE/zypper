@@ -130,10 +130,10 @@ Match::equals ( const Match & lock ) const {
 
 
 bool
-Match::test (constResolvablePtr resolvable, WorldPtr world) const
+Match::test (constResItemPtr resItem, WorldPtr world) const
 {
     string name;
-    constChannelPtr channel = resolvable->channel ();
+    constChannelPtr channel = resItem->channel ();
   
     if (channel != NULL && !_channel_id.empty()) {
 	if (! channel->hasEqualId (_channel_id)) {
@@ -141,7 +141,7 @@ Match::test (constResolvablePtr resolvable, WorldPtr world) const
 	}
     }
 
-    name = resolvable->name ();
+    name = resItem->name ();
 
 // FIXME, implement regexp
 #if 0
@@ -151,10 +151,10 @@ Match::test (constResolvablePtr resolvable, WorldPtr world) const
     }
 #endif
 
-  /* FIXME: Resolvables don't have ResolvableUpdate right now */
+  /* FIXME: ResItems don't have ResItemUpdate right now */
 /*   if (match->importance != RC_IMPORTANCE_INVALID && */
-/* 	  !rc_resolvable_is_installed (resolvable)) { */
-/* 	  RCResolvableUpdate *up = rc_resolvable_get_latest_update (pkg); */
+/* 	  !rc_resItem_is_installed (resItem)) { */
+/* 	  RCResItemUpdate *up = rc_resItem_get_latest_update (pkg); */
 /* 	  if (up) { */
 /* 		  if (match->importance_gteq ? up->importance > match->importance */
 /* 			  : up->importance < match->importance) */
@@ -166,7 +166,7 @@ Match::test (constResolvablePtr resolvable, WorldPtr world) const
 	DependencyPtr dependency;
 	bool check;
 
-	dependency = new Dependency (resolvable->name(), Relation::Equal, Kind::Package, resolvable->channel(), resolvable->edition());
+	dependency = new Dependency (resItem->name(), Relation::Equal, Kind::Package, resItem->channel(), resItem->edition());
 	check = _dependency->verifyRelation (dependency);
 	return check;
     }

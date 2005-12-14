@@ -31,7 +31,7 @@
 #include <zypp/solver/detail/XmlNode.h>
 #include <zypp/solver/detail/Channel.h>
 #include <zypp/solver/detail/Pending.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Package.h>
 #include <zypp/solver/detail/Match.h>
 #include <zypp/solver/detail/StoreWorldPtr.h>
@@ -42,23 +42,23 @@ namespace ZYPP {
 //////////////////////////////////////////////////////////////////
 
 
-int extract_packages_from_helix_buffer (const char data[], size_t len, ChannelPtr channel, CResolvableFn callback, void *data);
-int extract_packages_from_helix_file (const std::string & filename, ChannelPtr channel, CResolvableFn callback, void *data);
+int extract_packages_from_helix_buffer (const char data[], size_t len, ChannelPtr channel, CResItemFn callback, void *data);
+int extract_packages_from_helix_file (const std::string & filename, ChannelPtr channel, CResItemFn callback, void *data);
 
-int extract_packages_from_xml_node (constXmlNodePtr node, ChannelPtr channel, ResolvableFn callback, void *data);
+int extract_packages_from_xml_node (constXmlNodePtr node, ChannelPtr channel, ResItemFn callback, void *data);
 
-int extract_packages_from_debian_buffer (const char *data, size_t len, ChannelPtr channel, CResolvableFn callback, void *data);
-int extract_packages_from_debian_file (const std::string & filename, ChannelPtr channel, CResolvableFn callback, void *data);
+int extract_packages_from_debian_buffer (const char *data, size_t len, ChannelPtr channel, CResItemFn callback, void *data);
+int extract_packages_from_debian_file (const std::string & filename, ChannelPtr channel, CResItemFn callback, void *data);
 
 PackagePtr extract_yum_package (const char *data, size_t len, PackmanPtr packman, const std::string & url);
 
-int extract_packages_from_aptrpm_buffer (const char *data, size_t len, PackmanPtr packman, ChannelPtr channel, ResolvableFn callback, void *data);
-int extract_packages_from_aptrpm_file (const std::string & filename, PackmanPtr packman, ChannelPtr channel, ResolvableFn callback, void *data);
+int extract_packages_from_aptrpm_buffer (const char *data, size_t len, PackmanPtr packman, ChannelPtr channel, ResItemFn callback, void *data);
+int extract_packages_from_aptrpm_file (const std::string & filename, PackmanPtr packman, ChannelPtr channel, ResItemFn callback, void *data);
 
-int extract_packages_from_undump_buffer (const char *data, size_t len, ChannelAndSubscribedFn channel_callback, CResolvableFn package_callback, MatchFn lock_callback, void *data);
-int extract_packages_from_undump_file (const std::string & filename, ChannelAndSubscribedFn channel_callback, CResolvableFn package_callback, MatchFn lock_callback, void *data);
+int extract_packages_from_undump_buffer (const char *data, size_t len, ChannelAndSubscribedFn channel_callback, CResItemFn package_callback, MatchFn lock_callback, void *data);
+int extract_packages_from_undump_file (const std::string & filename, ChannelAndSubscribedFn channel_callback, CResItemFn package_callback, MatchFn lock_callback, void *data);
 
-int extract_packages_from_directory (const std::string & path, ChannelPtr channel, PackmanPtr packman, bool recursive, ResolvableFn callback, void *data);
+int extract_packages_from_directory (const std::string & path, ChannelPtr channel, PackmanPtr packman, bool recursive, ResItemFn callback, void *data);
 
 ///////////////////////////////////////////////////////////////////
 }; // namespace ZYPP

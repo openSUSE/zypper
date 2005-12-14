@@ -60,41 +60,41 @@ typedef list<unsigned int> ChecksumList;
 
 #if 0
 static void
-lock_resolvable (ResolvablePtr resolvable)
+lock_resItem (ResItemPtr resItem)
 {
-    RCResolvableDep *dep;
-    RCResolvableMatch *match;
+    RCResItemDep *dep;
+    RCResItemMatch *match;
 
-    dep = rc_resolvable_dep_new_from_spec (RC_RESOLVABLE_SPEC (resolvable),
+    dep = rc_resItem_dep_new_from_spec (RC_RESOLVABLE_SPEC (resItem),
 					RC_RELATION_EQUAL, RC_TYPE_RESOLVABLE,
 					RC_CHANNEL_ANY, false, false);
 
-    match = rc_resolvable_match_new ();
-    rc_resolvable_match_set_dep (match, dep);
+    match = rc_resItem_match_new ();
+    rc_resItem_match_set_dep (match, dep);
 
-    rc_resolvable_dep_unref (dep);
+    rc_resItem_dep_unref (dep);
 
     rc_world_add_lock (rc_get_world (), match);
 }
 
 
 static bool
-remove_resolvable_cb (RCWorld *world, gpointer user_data)
+remove_resItem_cb (RCWorld *world, gpointer user_data)
 {
-    ResolvablePtr resolvable = user_data;
+    ResItemPtr resItem = user_data;
 
-    rc_world_store_remove_resolvable (RC_WORLD_STORE (world), resolvable);
+    rc_world_store_remove_resItem (RC_WORLD_STORE (world), resItem);
 
     return true;
 }
 
 
 static void
-remove_resolvable (ResolvablePtr resolvable)
+remove_resItem (ResItemPtr resItem)
 {
     rc_world_multi_foreach_subworld_by_type (RC_WORLD_MULTI (world),
 					     RC_TYPE_WORLD_STORE,
-					     remove_resolvable_cb, resolvable);
+					     remove_resItem_cb, resItem);
 }
 
 /* ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** */
@@ -110,36 +110,36 @@ remove_resolvable (ResolvablePtr resolvable)
 typedef list<string> StringList;
 
 static void
-assemble_install_cb (constResolvablePtr resolvable,
-		     ResolvableStatus status,
+assemble_install_cb (constResItemPtr resItem,
+		     ResItemStatus status,
 		     void *data)
 {
     StringList *slist = (StringList *)data;
-    string str = stringutil::form ("%-7s ",  resolvable->isInstalled() ? "|flag" : "install");
-    str += resolvable->asString();
+    string str = stringutil::form ("%-7s ",  resItem->isInstalled() ? "|flag" : "install");
+    str += resItem->asString();
 
     slist->push_back (str);
 }
 
 
 static void
-assemble_uninstall_cb (constResolvablePtr resolvable,
-		       ResolvableStatus status,
+assemble_uninstall_cb (constResItemPtr resItem,
+		       ResItemStatus status,
 		       void *data)
 {
     StringList *slist = (StringList *)data;
-    string str = stringutil::form ("%-7s ",  resolvable->isInstalled() ? "remove" : "|unflag");
-    str += resolvable->asString();
+    string str = stringutil::form ("%-7s ",  resItem->isInstalled() ? "remove" : "|unflag");
+    str += resItem->asString();
 
     slist->push_back (str);
 }
 
 
 static void
-assemble_upgrade_cb (constResolvablePtr res1,
-		     ResolvableStatus status1,
-		     constResolvablePtr res2,
-		     ResolvableStatus status2,
+assemble_upgrade_cb (constResItemPtr res1,
+		     ResItemStatus status1,
+		     constResItemPtr res2,
+		     ResItemStatus status2,
 		     void *data)
 {
     StringList *slist = (StringList *)data;
@@ -235,9 +235,9 @@ print_solution (ResolverContextPtr context, int *count, ChecksumList & checksum_
 
 //---------------------------------------------------------------------------------------------------------------------
 static bool
-mark_as_system_cb (constResolvablePtr resolvable, void *unused)
+mark_as_system_cb (constResItemPtr resItem, void *unused)
 {
-    ResolvablePtr r = ResolvablePtr::cast_away_const(resolvable);
+    ResItemPtr r = ResItemPtr::cast_away_const(resItem);
     r->setInstalled (true);
 
     return true;
@@ -275,11 +275,11 @@ get_channel (const char *channel_name)
 }
 
 
-static constResolvablePtr
-get_resolvable (const char *channel_name, const char *package_name)
+static constResItemPtr
+get_resItem (const char *channel_name, const char *package_name)
 {
     constChannelPtr channel;
-    constResolvablePtr resolvable;
+    constResItemPtr resItem;
 
     channel = get_channel (channel_name);
 
@@ -288,24 +288,24 @@ get_resolvable (const char *channel_name, const char *package_name)
 	return NULL;
     }
 
-    resolvable = world->findResolvable (channel, package_name);
+    resItem = world->findResItem (channel, package_name);
 
-    if (resolvable == NULL) {
+    if (resItem == NULL) {
 	fprintf (stderr, "Can't find package '%s' in channel '%s': no such package\n", package_name, channel_name);
 	return NULL;
     }
 
-    return resolvable;
+    return resItem;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // setup related functions
 
 static bool
-add_to_world_cb (constResolvablePtr resolvable, void *data)
+add_to_world_cb (constResItemPtr resItem, void *data)
 {
     WorldPtr world = *((WorldPtr *)data);
-    ((StoreWorldPtr)world)->addResolvable (resolvable);
+    ((StoreWorldPtr)world)->addResItem (resItem);
 
     return true;
 }
@@ -356,7 +356,7 @@ load_channel (const string & name, const string & filename, const string & type,
     }
 
     if (system_packages) {
-	store->foreachResolvable (channel, mark_as_system_cb, NULL);
+	store->foreachResItem (channel, mark_as_system_cb, NULL);
     }
 
     printf ("Loaded %d package%s from %s\n", count, count == 1 ? "" : "s", pathname.c_str()); fflush (stdout);
@@ -403,14 +403,14 @@ parse_xml_setup (XmlNodePtr node)
 	} else if (node->equals ("force-install")) {
 	    const char *channel_name = node->getProp ("channel");
 	    const char *package_name = node->getProp ("package");
-	    constResolvablePtr resolvable;
+	    constResItemPtr resItem;
 	    constChannelPtr system_channel;
 
 	    assertExit (channel_name);
 	    assertExit (package_name);
 
-	    resolvable = get_resolvable (channel_name, package_name);
-	    if (resolvable) {
+	    resItem = get_resItem (channel_name, package_name);
+	    if (resItem) {
 		printf (">!> Force-installing %s from channel %s\n", package_name, channel_name);
 
 		system_channel = world->getChannelById ("@system");
@@ -418,7 +418,7 @@ parse_xml_setup (XmlNodePtr node)
 		if (!system_channel)
 		    fprintf (stderr, "No system channel available!\n");
 
-		ResolvablePtr r = ResolvablePtr::cast_away_const(resolvable);
+		ResItemPtr r = ResItemPtr::cast_away_const(resItem);
 		r->setChannel (system_channel);
 		r->setInstalled (true);
 	    } else {
@@ -429,12 +429,12 @@ parse_xml_setup (XmlNodePtr node)
 	    free ((void *)package_name);
 	} else if (node->equals ("force-uninstall")) {
 	    const char *package_name = node->getProp ("package");
-	    constResolvablePtr resolvable;
+	    constResItemPtr resItem;
 
 	    assertExit (package_name);
-	    resolvable = get_resolvable ("@system", package_name);
+	    resItem = get_resItem ("@system", package_name);
 	    
-	    if (! resolvable) {
+	    if (! resItem) {
 		fprintf (stderr, "Can't force-uninstall installed package '%s'\n", package_name);
 	    } else {
 		printf (">!> Force-uninstalling '%s'\n", package_name);
@@ -444,15 +444,15 @@ parse_xml_setup (XmlNodePtr node)
 	} else if (node->equals ("lock")) {
 	    const char *channel_name = node->getProp ("channel");
 	    const char *package_name = node->getProp ("package");
-	    constResolvablePtr resolvable;
+	    constResItemPtr resItem;
 
 	    assertExit (channel_name);
 	    assertExit (package_name);
 
-	    resolvable = get_resolvable (channel_name, package_name);
-	    if (resolvable) {
+	    resItem = get_resItem (channel_name, package_name);
+	    if (resItem) {
 		printf (">!> Locking %s from channel %s\n", package_name, channel_name);
-		ResolvablePtr r = ResolvablePtr::cast_away_const(resolvable);
+		ResItemPtr r = ResItemPtr::cast_away_const(resItem);
 		r->setLocked (true);
 	    } else {
 		fprintf (stderr, "Unknown package %s::%s\n", channel_name, package_name);
@@ -532,11 +532,11 @@ report_solutions (Resolver & resolver)
 
 
 static bool
-trial_upgrade_cb (constResolvablePtr original, constResolvablePtr upgrade, void *user_data)
+trial_upgrade_cb (constResItemPtr original, constResItemPtr upgrade, void *user_data)
 {
     Resolver *resolver = (Resolver *)user_data;
 
-    resolver->addResolvableToInstall (upgrade);
+    resolver->addResItemToInstall (upgrade);
 
     printf (">!> Upgrading %s => %s\n", original->asString().c_str(), upgrade->asString().c_str());
 
@@ -610,15 +610,15 @@ parse_xml_trial (XmlNodePtr node)
 
 	    const char *channel_name = node->getProp ("channel");
 	    const char *package_name = node->getProp ("package");
-	    constResolvablePtr resolvable;
+	    constResItemPtr resItem;
 
 	    assertExit (channel_name);
 	    assertExit (package_name);
 
-	    resolvable = get_resolvable (channel_name, package_name);
-	    if (resolvable) {
+	    resItem = get_resItem (channel_name, package_name);
+	    if (resItem) {
 		printf (">!> Installing %s from channel %s\n", package_name, channel_name);
-		resolver.addResolvableToInstall (resolvable);
+		resolver.addResItemToInstall (resItem);
 	    } else {
 		fprintf (stderr, "Unknown package %s::%s\n", channel_name, package_name);
 	    }
@@ -629,14 +629,14 @@ parse_xml_trial (XmlNodePtr node)
 	} else if (node->equals ("uninstall")) {
 
 	    const char *package_name = node->getProp ("package");
-	    constResolvablePtr resolvable;
+	    constResItemPtr resItem;
 
 	    assertExit (package_name);
 
-	    resolvable = get_resolvable ("@system", package_name);
-	    if (resolvable) {
+	    resItem = get_resItem ("@system", package_name);
+	    if (resItem) {
 		printf (">!> Uninstalling %s\n", package_name);
-		resolver.addResolvableToRemove (resolvable);
+		resolver.addResItemToRemove (resItem);
 	    } else {
 		fprintf (stderr, "Unknown system package %s\n", package_name);
 	    }

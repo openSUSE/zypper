@@ -47,8 +47,8 @@ ResolverInfoContainer::toString ( const ResolverInfoContainer & container )
     string res = "<resolverinfocontainer '";
 
     res += ResolverInfo::toString (container);
-    for (CResolvableList::const_iterator iter = container._resolvable_list.begin(); iter != container._resolvable_list.end(); iter++) {
-	if (iter != container._resolvable_list.begin()) res += ", ";
+    for (CResItemList::const_iterator iter = container._resItem_list.begin(); iter != container._resItem_list.end(); iter++) {
+	if (iter != container._resItem_list.begin()) res += ", ";
 	res += ((constSpecPtr)(*iter))->asString();
     }
     res += "'>";
@@ -73,11 +73,11 @@ operator<<( ostream& os, const ResolverInfoContainer & container)
 
 //---------------------------------------------------------------------------
 
-ResolverInfoContainer::ResolverInfoContainer (ResolverInfoType type, constResolvablePtr resolvable, int priority, constResolvablePtr child)
-    : ResolverInfo (type, resolvable, priority)
+ResolverInfoContainer::ResolverInfoContainer (ResolverInfoType type, constResItemPtr resItem, int priority, constResItemPtr child)
+    : ResolverInfo (type, resItem, priority)
 {
     if (child != NULL)
-	_resolvable_list.push_back (child);
+	_resItem_list.push_back (child);
 }
 
 
@@ -95,18 +95,18 @@ ResolverInfoContainer::merge (ResolverInfoContainerPtr to_be_merged)
     res = ((ResolverInfoPtr)this)->merge ((ResolverInfoPtr)to_be_merged);
     if (!res) return res;
 
-    typedef std::map<constResolvablePtr, bool> SeenTable;
+    typedef std::map<constResItemPtr, bool> SeenTable;
     SeenTable seen_packages;
 
-    for (CResolvableList::const_iterator iter = _resolvable_list.begin(); iter != _resolvable_list.end(); iter++) {
+    for (CResItemList::const_iterator iter = _resItem_list.begin(); iter != _resItem_list.end(); iter++) {
 	seen_packages[*iter] = true;
     }
 
-    CResolvableList rl = to_be_merged->resolvables();
-    for (CResolvableList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
+    CResItemList rl = to_be_merged->resItems();
+    for (CResItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
 	SeenTable::const_iterator pos = seen_packages.find(*iter);
 	if (pos == seen_packages.end()) {
-	    _resolvable_list.push_front (*iter);
+	    _resItem_list.push_front (*iter);
 	    seen_packages[*iter] = true;
 	}
     }
@@ -120,8 +120,8 @@ ResolverInfoContainer::copy (constResolverInfoContainerPtr from)
 {
     ((ResolverInfoPtr)this)->copy(from);
 
-    for (CResolvableList::const_iterator iter = from->_resolvable_list.begin(); iter != from->_resolvable_list.end(); iter++) {
-	_resolvable_list.push_back (*iter);
+    for (CResItemList::const_iterator iter = from->_resItem_list.begin(); iter != from->_resItem_list.end(); iter++) {
+	_resItem_list.push_back (*iter);
     }
 }
 
@@ -129,7 +129,7 @@ ResolverInfoContainer::copy (constResolverInfoContainerPtr from)
 ResolverInfoPtr
 ResolverInfoContainer::copy (void) const
 {
-    ResolverInfoContainerPtr cpy = new ResolverInfoContainer(type(), resolvable(), priority());
+    ResolverInfoContainerPtr cpy = new ResolverInfoContainer(type(), resItem(), priority());
 
     cpy->copy (this);
 
@@ -139,16 +139,16 @@ ResolverInfoContainer::copy (void) const
 //---------------------------------------------------------------------------
 
 string
-ResolverInfoContainer::resolvablesToString (bool names_only) const
+ResolverInfoContainer::resItemsToString (bool names_only) const
 {
     string res;
 
-    if (_resolvable_list.empty())
+    if (_resItem_list.empty())
 	return res;
 
     res += " [";
-    for (CResolvableList::const_iterator iter = _resolvable_list.begin(); iter != _resolvable_list.end(); iter++) {
-	if (iter != _resolvable_list.begin())
+    for (CResItemList::const_iterator iter = _resItem_list.begin(); iter != _resItem_list.end(); iter++) {
+	if (iter != _resItem_list.begin())
 	    res += ", ";
 
 	res += (names_only ? (*iter)->name() : ((constSpecPtr)(*iter))->asString());
@@ -160,15 +160,15 @@ ResolverInfoContainer::resolvablesToString (bool names_only) const
 
 
 bool
-ResolverInfoContainer::mentions (constResolvablePtr resolvable) const
+ResolverInfoContainer::mentions (constResItemPtr resItem) const
 {
-    if (isAbout(resolvable))
+    if (isAbout(resItem))
 	return true;
 
-    // Search resolvable_list for any mention of the resolvable.
+    // Search resItem_list for any mention of the resItem.
 
-    for (CResolvableList::const_iterator iter = _resolvable_list.begin(); iter != _resolvable_list.end(); iter++) {
-	if ((*iter)->name() == resolvable->name()) {
+    for (CResItemList::const_iterator iter = _resItem_list.begin(); iter != _resItem_list.end(); iter++) {
+	if ((*iter)->name() == resItem->name()) {
 	    return true;
 	}
     }
@@ -178,19 +178,19 @@ ResolverInfoContainer::mentions (constResolvablePtr resolvable) const
 
 
 void
-ResolverInfoContainer::addRelatedResolvable (constResolvablePtr resolvable)
+ResolverInfoContainer::addRelatedResItem (constResItemPtr resItem)
 {
-    if (!mentions(resolvable)) {
-	_resolvable_list.push_front (resolvable);
+    if (!mentions(resItem)) {
+	_resItem_list.push_front (resItem);
     }
 }
 
 
 void
-ResolverInfoContainer::addRelatedResolvableList (const CResolvableList & resolvables)
+ResolverInfoContainer::addRelatedResItemList (const CResItemList & resItems)
 {
-    for (CResolvableList::const_iterator iter = resolvables.begin(); iter != resolvables.end(); iter++) {
-	_resolvable_list.push_front (*iter);
+    for (CResItemList::const_iterator iter = resItems.begin(); iter != resItems.end(); iter++) {
+	_resItem_list.push_front (*iter);
     }
 }
 

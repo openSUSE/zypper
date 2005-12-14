@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
-/* ResolvableAndDependency.cc
+/* ResItemAndDependency.cc
  *
  * Copyright (C) 2000-2002 Ximian, Inc.
  * Copyright (C) 2005 SUSE Linux Products GmbH
@@ -23,7 +23,7 @@
 
 #include <y2util/stringutil.h>
 
-#include <zypp/solver/detail/ResolvableAndDependency.h>
+#include <zypp/solver/detail/ResItemAndDependency.h>
 #include <zypp/solver/detail/debug.h>
 
 ///////////////////////////////////////////////////////////////////
@@ -32,12 +32,12 @@ namespace ZYPP {
 
 using namespace std;
 
-IMPL_BASE_POINTER(ResolvableAndDependency);
+IMPL_BASE_POINTER(ResItemAndDependency);
 
 //---------------------------------------------------------------------------
 
-ResolvableAndDependency::ResolvableAndDependency (constResolvablePtr resolvable, constDependencyPtr dependency)
-    : _resolvable(resolvable)
+ResItemAndDependency::ResItemAndDependency (constResItemPtr resItem, constDependencyPtr dependency)
+    : _resItem(resItem)
     , _dependency(dependency)
 {
 }
@@ -45,17 +45,17 @@ ResolvableAndDependency::ResolvableAndDependency (constResolvablePtr resolvable,
 //---------------------------------------------------------------------------
 
 string
-ResolvableAndDependency::asString (bool full) const
+ResItemAndDependency::asString (bool full) const
 {
     return toString (*this, full);
 }
 
 
 string
-ResolvableAndDependency::toString ( const ResolvableAndDependency & r_and_d, bool full )
+ResItemAndDependency::toString ( const ResItemAndDependency & r_and_d, bool full )
 {
     string res ("{");
-    res += r_and_d._resolvable->asString(full);
+    res += r_and_d._resItem->asString(full);
     res += ", ";
     res += r_and_d._dependency->asString();
     res += "}";
@@ -64,7 +64,7 @@ ResolvableAndDependency::toString ( const ResolvableAndDependency & r_and_d, boo
 
 
 ostream &
-ResolvableAndDependency::dumpOn (ostream & str) const
+ResItemAndDependency::dumpOn (ostream & str) const
 {
     str << asString();
     return str;
@@ -72,7 +72,7 @@ ResolvableAndDependency::dumpOn (ostream & str) const
 
 
 ostream &
-operator<< (ostream & os, const ResolvableAndDependency & r_and_d)
+operator<< (ostream & os, const ResItemAndDependency & r_and_d)
 {
     return os << r_and_d.asString();
 }
@@ -80,20 +80,20 @@ operator<< (ostream & os, const ResolvableAndDependency & r_and_d)
 //---------------------------------------------------------------------------
 
 /* This function also checks channels in addition to just dep relations */
-/* FIXME: rc_resolvable_dep_verify_relation already checks the channel */
+/* FIXME: rc_resItem_dep_verify_relation already checks the channel */
 
 bool
-ResolvableAndDependency::verifyRelation (constDependencyPtr dep) const
+ResItemAndDependency::verifyRelation (constDependencyPtr dep) const
 {
 #if PHI
-    // don't check the channel, thereby honoring conflicts from installed resolvables to to-be-installed resolvables
+    // don't check the channel, thereby honoring conflicts from installed resItems to to-be-installed resItems
     return dep->verifyRelation (_dependency);
 #else
     if (!dep->verifyRelation (_dependency)) {
 	return false;
     }
-    if (getenv ("SPEW_DEP")) fprintf (stderr, "ResolvableAndDependency::verifyRelation _resolvable->channel() %s, dep->channel() %s\n", _resolvable->channel()->asString().c_str(), dep->channel()->asString().c_str());
-    return _resolvable->channel()->equals (dep->channel());
+    if (getenv ("SPEW_DEP")) fprintf (stderr, "ResItemAndDependency::verifyRelation _resItem->channel() %s, dep->channel() %s\n", _resItem->channel()->asString().c_str(), dep->channel()->asString().c_str());
+    return _resItem->channel()->equals (dep->channel());
 #endif
 }
 

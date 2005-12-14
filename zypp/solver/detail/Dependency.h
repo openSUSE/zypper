@@ -142,15 +142,15 @@ class Dependency : public Spec {
 	  bool or_dep = false,
 	  bool pre_dep = false);
 
-    Dependency (OrDependencyPtr or_dep);	//RCResolvableDep *rc_dep_or_new_provide (RCDepOr *dor);
+    Dependency (OrDependencyPtr or_dep);	//RCResItemDep *rc_dep_or_new_provide (RCDepOr *dor);
 
-    Dependency (constXmlNodePtr node);		//RCResolvableDep *rc_xml_node_to_resolvable_dep (const xmlNode *node);
+    Dependency (constXmlNodePtr node);		//RCResItemDep *rc_xml_node_to_resItem_dep (const xmlNode *node);
 
     virtual ~Dependency();
 
     // ---------------------------------- I/O
 
-    const xmlNodePtr asXmlNode (void) const;		// xmlNode *rc_resolvable_dep_to_xml_node (RCResolvableDep *dep_item);
+    const xmlNodePtr asXmlNode (void) const;		// xmlNode *rc_resItem_dep_to_xml_node (RCResItemDep *dep_item);
 
     static std::string toString ( const Dependency & dep );
 
@@ -179,7 +179,7 @@ class Dependency : public Spec {
     bool verifyRelation (constDependencyPtr prov) const;
 };
 
-// xmlNode *rc_resolvable_dep_or_slist_to_xml_node (RCResolvableDepSList *dep);
+// xmlNode *rc_resItem_dep_or_slist_to_xml_node (RCResItemDepSList *dep);
 
 ///////////////////////////////////////////////////////////////////
 }; // namespace ZYPP

@@ -41,7 +41,7 @@ class ResolverInfoConflictsWith : public ResolverInfoContainer {
 
   public:
 
-    ResolverInfoConflictsWith (constResolvablePtr resolvable, constResolvablePtr with);
+    ResolverInfoConflictsWith (constResItemPtr resItem, constResItemPtr with);
     virtual ~ResolverInfoConflictsWith();
 
     // ---------------------------------- I/O

@@ -93,11 +93,11 @@ add_channel_cb (ChannelPtr channel, bool subscribed, void *data)
 
 
 static bool
-add_resolvable_cb (constResolvablePtr res, void *data)
+add_resItem_cb (constResItemPtr res, void *data)
 {
     UndumpWorld *undump = (UndumpWorld *)data;
 
-    undump->addResolvable (res);
+    undump->addResItem (res);
 
     return true;
 }
@@ -118,7 +118,7 @@ void
 UndumpWorld::load (const char *filename)
 {
     if (filename) {
-	extract_packages_from_undump_file (filename, add_channel_cb, add_resolvable_cb, add_lock_cb, (void *)this);
+	extract_packages_from_undump_file (filename, add_channel_cb, add_resItem_cb, add_lock_cb, (void *)this);
     }
 }
 

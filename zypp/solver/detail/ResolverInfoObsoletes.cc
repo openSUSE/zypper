@@ -48,7 +48,7 @@ ResolverInfoObsoletes::toString ( const ResolverInfoObsoletes & obsoletes)
     string res;
 
     res += ResolverInfo::toString (obsoletes);
-    res += string ("replaced by ") + obsoletes.resolvablesToString(false);
+    res += string ("replaced by ") + obsoletes.resItemsToString(false);
 
     return res;
 }
@@ -70,8 +70,8 @@ operator<<( ostream& os, const ResolverInfoObsoletes & obsoletes)
 
 //---------------------------------------------------------------------------
 
-ResolverInfoObsoletes::ResolverInfoObsoletes (constResolvablePtr resolvable, constResolvablePtr obsoletes)
-    : ResolverInfoContainer (RESOLVER_INFO_TYPE_OBSOLETES, resolvable, RESOLVER_INFO_PRIORITY_USER, obsoletes)
+ResolverInfoObsoletes::ResolverInfoObsoletes (constResItemPtr resItem, constResItemPtr obsoletes)
+    : ResolverInfoContainer (RESOLVER_INFO_TYPE_OBSOLETES, resItem, RESOLVER_INFO_PRIORITY_USER, obsoletes)
 {
 }
 
@@ -85,7 +85,7 @@ ResolverInfoObsoletes::~ResolverInfoObsoletes ()
 ResolverInfoPtr
 ResolverInfoObsoletes::copy (void) const
 {
-    ResolverInfoObsoletesPtr cpy = new ResolverInfoObsoletes(resolvable(), NULL);
+    ResolverInfoObsoletesPtr cpy = new ResolverInfoObsoletes(resItem(), NULL);
 
     ((ResolverInfoContainerPtr)cpy)->copy (this);
 

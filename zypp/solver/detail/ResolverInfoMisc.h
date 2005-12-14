@@ -46,7 +46,7 @@ class ResolverInfoMisc : public ResolverInfoContainer {
 
   public:
 
-    ResolverInfoMisc (constResolvablePtr resolvable, int priority, const std::string & msg);
+    ResolverInfoMisc (constResItemPtr resItem, int priority, const std::string & msg);
     virtual ~ResolverInfoMisc();
 
     // ---------------------------------- I/O

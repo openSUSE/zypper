@@ -207,7 +207,7 @@ string
 Package::toString ( const Package & package, bool full )
 {
     string ret;
-    ret += Resolvable::toString(package, full);
+    ret += ResItem::toString(package, full);
     if (full) {
 //	if (package._section != NULL) ret += (string ("<section '") + package._section->asString() + "'/>");
 //	if (!package._pretty_name.empty()) ret += (string ("<pretty_name '") + package._pretty_name + "'/>");
@@ -236,7 +236,7 @@ operator<<( ostream& os, const Package& package)
 //---------------------------------------------------------------------------
 
 Package::Package (constChannelPtr channel)
-    : Resolvable (Kind::Package, "")
+    : ResItem (Kind::Package, "")
     , _section (NULL)
     , _pretty_name ("")
     , _summary ("")
@@ -252,7 +252,7 @@ Package::Package (constChannelPtr channel)
 
 
 Package::Package (constXmlNodePtr node, constChannelPtr channel)
-    : Resolvable (Kind::Package, "")
+    : ResItem (Kind::Package, "")
     , _section (NULL)
     , _pretty_name ("")
     , _summary ("")
@@ -478,7 +478,7 @@ Package::getLatestUpdate (void) const
 
     for (PackageUpdateList::const_iterator l = _history.begin(); l != _history.end(); l++) {
 	PackageUpdatePtr update = *l;
-	constResolvablePtr installed;
+	constResItemPtr installed;
 	
 	if (!update->equals (latest)) {
 	    return NULL;
@@ -490,7 +490,7 @@ Package::getLatestUpdate (void) const
 	}
 
 	/* see if the required parent for this patch is installed */
-	installed = world->findInstalledResolvable (update->parent());
+	installed = world->findInstalledResItem (update->parent());
 
 	if (installed != NULL &&
 	    installed->equals(update->parent()))
@@ -509,19 +509,19 @@ rc_package_to_xml_node (RCPackage *package)
     xmlNode *package_node;
     xmlNode *tmp_node;
     xmlNode *deps_node;
-    RCResolvable *r;
-    RCResolvableSpec *spec;
+    RCResItem *r;
+    RCResItemSpec *spec;
     RCPackageUpdateSList *history_iter;
     int i;
     char buffer[128];
     char *tmp_str;
 
     r = RC_RESOLVABLE (package);
-    spec = rc_resolvable_get_spec (r);
+    spec = rc_resItem_get_spec (r);
 
     package_node = xmlNewNode (NULL, "package");
 
-    xmlNewTextChild (package_node, NULL, "name", rc_resolvable_get_name (r));
+    xmlNewTextChild (package_node, NULL, "name", rc_resItem_get_name (r));
 
     if (spec->has_epoch) {
 	g_snprintf (buffer, 128, "%d", spec->epoch);
@@ -548,10 +548,10 @@ rc_package_to_xml_node (RCPackage *package)
     xmlNewTextChild (package_node, NULL, "section",
 		     rc_package_section_to_string (package->section));
 
-    g_snprintf (buffer, 128, "%u", rc_resolvable_get_file_size (r));
+    g_snprintf (buffer, 128, "%u", rc_resItem_get_file_size (r));
     xmlNewTextChild (package_node, NULL, "filesize", buffer);
 
-    g_snprintf (buffer, 128, "%u", rc_resolvable_get_installed_size (r));
+    g_snprintf (buffer, 128, "%u", rc_resItem_get_installed_size (r));
     xmlNewTextChild (package_node, NULL, "installedsize", buffer);
 
     if (package->install_only) {
@@ -577,54 +577,54 @@ rc_package_to_xml_node (RCPackage *package)
     if (r->requires_a) {
 	tmp_node = xmlNewChild (deps_node, NULL, "requires", NULL);
 	for (i = 0; i < r->requires_a->len; i++) {
-	    RCResolvableDep *dep = r->requires_a->data[i];
+	    RCResItemDep *dep = r->requires_a->data[i];
 
-	    xmlAddChild (tmp_node, rc_resolvable_dep_to_xml_node (dep));
+	    xmlAddChild (tmp_node, rc_resItem_dep_to_xml_node (dep));
 	}
     }
 
     if (r->recommends_a) {
 	tmp_node = xmlNewChild (deps_node, NULL, "recommends", NULL);
 	for (i = 0; i < r->recommends_a->len; i++) {
-	    RCResolvableDep *dep = r->recommends_a->data[i];
+	    RCResItemDep *dep = r->recommends_a->data[i];
 
-	    xmlAddChild (tmp_node, rc_resolvable_dep_to_xml_node (dep));
+	    xmlAddChild (tmp_node, rc_resItem_dep_to_xml_node (dep));
 	}
     }
 
     if (r->suggests_a) {
 	tmp_node = xmlNewChild (deps_node, NULL, "suggests", NULL);
 	for (i = 0; i < r->suggests_a->len; i++) {
-	    RCResolvableDep *dep = r->suggests_a->data[i];
+	    RCResItemDep *dep = r->suggests_a->data[i];
 
-	    xmlAddChild (tmp_node, rc_resolvable_dep_to_xml_node (dep));
+	    xmlAddChild (tmp_node, rc_resItem_dep_to_xml_node (dep));
 	}
     }
 
     if (r->conflicts_a) {
 	tmp_node = xmlNewChild (deps_node, NULL, "conflicts", NULL);
 	for (i = 0; i < r->conflicts_a->len; i++) {
-	    RCResolvableDep *dep = r->conflicts_a->data[i];
+	    RCResItemDep *dep = r->conflicts_a->data[i];
 
-	    xmlAddChild (tmp_node, rc_resolvable_dep_to_xml_node (dep));
+	    xmlAddChild (tmp_node, rc_resItem_dep_to_xml_node (dep));
 	}
     }
 
     if (r->obsoletes_a) {
 	tmp_node = xmlNewChild (deps_node, NULL, "obsoletes", NULL);
 	for (i = 0; i < r->obsoletes_a->len; i++) {
-	    RCResolvableDep *dep = r->obsoletes_a->data[i];
+	    RCResItemDep *dep = r->obsoletes_a->data[i];
 
-	    xmlAddChild (tmp_node, rc_resolvable_dep_to_xml_node (dep));
+	    xmlAddChild (tmp_node, rc_resItem_dep_to_xml_node (dep));
 	}
     }
 
     if (r->provides_a) {
 	tmp_node = xmlNewChild (deps_node, NULL, "provides", NULL);
 	for (i = 0; i < r->provides_a->len; i++) {
-	    RCResolvableDep *dep = r->provides_a->data[i];
+	    RCResItemDep *dep = r->provides_a->data[i];
 
-	    xmlAddChild (tmp_node, rc_resolvable_dep_to_xml_node (dep));
+	    xmlAddChild (tmp_node, rc_resItem_dep_to_xml_node (dep));
 	}
     }
 

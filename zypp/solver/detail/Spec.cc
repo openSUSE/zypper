@@ -133,7 +133,7 @@ Spec::copy (void) const
 
 #if 0
 xmlNode *
-rc_resolvable_spec_to_xml_node (RCResolvableSpec *spec)
+rc_resItem_spec_to_xml_node (RCResItemSpec *spec)
 {
     xmlNode *spec_node;
     char buffer[128];

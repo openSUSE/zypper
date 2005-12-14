@@ -52,7 +52,7 @@ ResolverInfoMisc::toString ( const ResolverInfoMisc & misc)
     res += ResolverInfo::toString (misc, false);
     res += "]";
 #endif
-    res += misc.resolvablesToString(false);
+    res += misc.resItemsToString(false);
     if (!misc._action.empty()) {
 	res += string (", Action: ") + misc._action + "\n";
     }
@@ -80,8 +80,8 @@ operator<<( ostream& os, const ResolverInfoMisc & misc)
 
 //---------------------------------------------------------------------------
 
-ResolverInfoMisc::ResolverInfoMisc (constResolvablePtr resolvable, int priority, const string & msg)
-    : ResolverInfoContainer (RESOLVER_INFO_TYPE_MISC, resolvable, priority)
+ResolverInfoMisc::ResolverInfoMisc (constResItemPtr resItem, int priority, const string & msg)
+    : ResolverInfoContainer (RESOLVER_INFO_TYPE_MISC, resItem, priority)
     , _msg (msg)
 {
 }
@@ -115,7 +115,7 @@ ResolverInfoMisc::merge (ResolverInfoPtr info)
 ResolverInfoPtr
 ResolverInfoMisc::copy (void) const
 {
-    ResolverInfoMiscPtr cpy = new ResolverInfoMisc(resolvable(), priority(), _msg);
+    ResolverInfoMiscPtr cpy = new ResolverInfoMisc(resItem(), priority(), _msg);
 
     ((ResolverInfoContainerPtr)cpy)->copy (this);
 

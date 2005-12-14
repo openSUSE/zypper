@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
-/* Spec.h  resolvable specification: name + edition
+/* Spec.h  resItem specification: name + edition
  *
  * Copyright (C) 2000-2002 Ximian, Inc.
  * Copyright (C) 2005 SUSE Linux Products GmbH
@@ -41,7 +41,7 @@ namespace ZYPP {
 //
 //      CLASS NAME : Name
 /**
- * A resolvable name
+ * A resItem name
  **/
 
 class Name : public Ustring {

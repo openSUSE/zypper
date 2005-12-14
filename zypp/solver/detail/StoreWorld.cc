@@ -26,7 +26,7 @@
 #include <zypp/solver/detail/Version.h>
 #include <zypp/solver/detail/Packman.h>
 #include <zypp/solver/detail/StoreWorld.h>
-#include <zypp/solver/detail/ResolvableAndDependency.h>
+#include <zypp/solver/detail/ResItemAndDependency.h>
 #include <zypp/solver/detail/debug.h>
 
 ///////////////////////////////////////////////////////////////////
@@ -73,7 +73,7 @@ operator<< (ostream & os, const StoreWorld & storeworld)
 
 StoreWorld::StoreWorld (WorldType type)
     : World (type)
-    , _resolvable_kind(Kind::Unknown)
+    , _resItem_kind(Kind::Unknown)
 {
 }
 
@@ -86,138 +86,138 @@ StoreWorld::~StoreWorld()
 
 //---------------------------------------------------------------------------
 
-// Add/remove resolvables
+// Add/remove resItems
 
 bool
-StoreWorld::addResolvable (constResolvablePtr resolvable)
+StoreWorld::addResItem (constResItemPtr resItem)
 {
     ArchList compat_arch_list;
-    ResolvableAndDependencyPtr r_and_d;
+    ResItemAndDependencyPtr r_and_d;
     const char *package_name;
     constChannelPtr channel;
     int arch_score;
     bool actually_added_package = false;
 
-    if (resolvable == NULL) return false;
+    if (resItem == NULL) return false;
 
     compat_arch_list = Arch::System->getCompatList();
 //fprintf (stderr, "Arch::System '%s' -> %d compats\n", Arch::System->asString().c_str(), (int) compat_arch_list.size());
-    channel = resolvable->channel ();
+    channel = resItem->channel ();
 
-//    fprintf (stderr, "StoreWorld[%p]::addResolvable(%s) [%s]\n", this, ((constSpecPtr)resolvable)->asString().c_str(), channel?channel->name():"?");
+//    fprintf (stderr, "StoreWorld[%p]::addResItem(%s) [%s]\n", this, ((constSpecPtr)resItem)->asString().c_str(), channel?channel->name():"?");
 
-    arch_score = resolvable->arch()->getCompatScore(compat_arch_list);
+    arch_score = resItem->arch()->getCompatScore(compat_arch_list);
 
-    /* Before we do anything, check to make sure that a resolvable of the
+    /* Before we do anything, check to make sure that a resItem of the
        same name isn't already in that channel.  If there is a
        duplicate, we keep the one with the most recent version number
        and drop the other.
 
-       This check only applies to resolvables in a channel.  We have
+       This check only applies to resItems in a channel.  We have
        to allow for multiple installs.  Grrrr...
     */
 
-    if (!resolvable->isInstalled ()) {			// its not a system package
+    if (!resItem->isInstalled ()) {			// its not a system package
 
-	constResolvablePtr dup_res;
+	constResItemPtr dup_res;
 	int dup_arch_score;
 
-	/* Filter out resolvables with totally incompatible arches */
+	/* Filter out resItems with totally incompatible arches */
 	if (arch_score < 0) {
-	    rc_debug (RC_DEBUG_LEVEL_DEBUG, "Ignoring resolvable with incompatible arch: Arch '%s', %s",  resolvable->arch()->asString().c_str(), resolvable->asString(true).c_str());
+	    rc_debug (RC_DEBUG_LEVEL_DEBUG, "Ignoring resItem with incompatible arch: Arch '%s', %s",  resItem->arch()->asString().c_str(), resItem->asString(true).c_str());
 	    goto finished;
 	}
 
-	package_name = resolvable->name().c_str();
-	dup_res = findResolvable (channel, package_name);
+	package_name = resItem->name().c_str();
+	dup_res = findResItem (channel, package_name);
 
 	/* This shouldn't happen (and would be caught by the check
 	   below, because cmp will equal 0), but it never hurts to
 	   check and produce a more explicit warning message. */
 
-	if (resolvable == dup_res) {
-	    rc_debug (RC_DEBUG_LEVEL_WARNING, "Ignoring re-add of resolvable '%s'", package_name);
+	if (resItem == dup_res) {
+	    rc_debug (RC_DEBUG_LEVEL_WARNING, "Ignoring re-add of resItem '%s'", package_name);
 	    goto finished;
 	}
 
 	if (dup_res != NULL) {
 	    int cmp;
 
-	    cmp = GVersion.compare (resolvable, dup_res);
-//fprintf (stderr, "res: %s, dup_res %s, cmp %d\n", resolvable->asString().c_str(), dup_res->asString().c_str(), cmp);
+	    cmp = GVersion.compare (resItem, dup_res);
+//fprintf (stderr, "res: %s, dup_res %s, cmp %d\n", resItem->asString().c_str(), dup_res->asString().c_str(), cmp);
 	    dup_arch_score = dup_res->arch()->getCompatScore(compat_arch_list);
 	
 
-	    /* If the resolvable we are trying to add has a lower 
+	    /* If the resItem we are trying to add has a lower 
 	       version number, just ignore it. */
 
 	    if (cmp < 0) {
-		rc_debug (RC_DEBUG_LEVEL_INFO, "Not adding resolvable '%s'.\n\tA newer version is already in the channel.", resolvable->asString().c_str());
+		rc_debug (RC_DEBUG_LEVEL_INFO, "Not adding resItem '%s'.\n\tA newer version is already in the channel.", resItem->asString().c_str());
 		rc_debug (RC_DEBUG_LEVEL_INFO, "\t%s", dup_res->asString().c_str());
 		goto finished;
 	    }
 
 
-	    /* If the version numbers are equal, we ignore the resolvable to
+	    /* If the version numbers are equal, we ignore the resItem to
 	       add if it has a less-preferable arch.  If both
-	       resolvables have the same version # and arch, we favor the
-	       first resolvable and just return. */
+	       resItems have the same version # and arch, we favor the
+	       first resItem and just return. */
 
 	    if (cmp == 0 && arch_score > dup_arch_score) {
-		rc_debug (RC_DEBUG_LEVEL_INFO, "Not adding resolvable '%s'.\n\tAnother resolvable with the same version but with a preferred arch is already in the channel.", resolvable->asString().c_str());
+		rc_debug (RC_DEBUG_LEVEL_INFO, "Not adding resItem '%s'.\n\tAnother resItem with the same version but with a preferred arch is already in the channel.", resItem->asString().c_str());
 		rc_debug (RC_DEBUG_LEVEL_INFO, "\t%s", dup_res->asString().c_str());
 		goto finished;
 	    }
 
 
-	    /* Otherwise we throw out the old resolvable and proceed with
+	    /* Otherwise we throw out the old resItem and proceed with
 	       adding the newer one. */
 
-	    rc_debug (RC_DEBUG_LEVEL_INFO, "Replacing resolvable '%s'.\n\tAnother resolvable in the channel has the same name and a superior %s.",  dup_res->asString().c_str(), cmp ? "version" : "arch");
-	    rc_debug (RC_DEBUG_LEVEL_INFO, "\t%s", resolvable->asString().c_str());
+	    rc_debug (RC_DEBUG_LEVEL_INFO, "Replacing resItem '%s'.\n\tAnother resItem in the channel has the same name and a superior %s.",  dup_res->asString().c_str(), cmp ? "version" : "arch");
+	    rc_debug (RC_DEBUG_LEVEL_INFO, "\t%s", resItem->asString().c_str());
 
-	    removeResolvable (dup_res);
+	    removeResItem (dup_res);
 	}
     }
 
     actually_added_package = true;
 
     if (channel && !channel->hidden()) {
-	touchResolvableSequenceNumber ();
+	touchResItemSequenceNumber ();
     }
 
-    /* StoreWorld all of our resolvables in a hash by name. */
-    _resolvables_by_name.insert (ResolvableTable::value_type (resolvable->name(), resolvable));
+    /* StoreWorld all of our resItems in a hash by name. */
+    _resItems_by_name.insert (ResItemTable::value_type (resItem->name(), resItem));
 
-    /* StoreWorld all of the resolvable's provides in a hash by name. */
-    for (CDependencyList::const_iterator i = resolvable->provides().begin(); i != resolvable->provides().end(); i++) {
-	r_and_d = new ResolvableAndDependency (resolvable, *i);
+    /* StoreWorld all of the resItem's provides in a hash by name. */
+    for (CDependencyList::const_iterator i = resItem->provides().begin(); i != resItem->provides().end(); i++) {
+	r_and_d = new ResItemAndDependency (resItem, *i);
 
-	_provides_by_name.insert (ResolvableAndDependencyTable::value_type (r_and_d->dependency()->name(), r_and_d));
+	_provides_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency()->name(), r_and_d));
     }
 
-    /* StoreWorld all of the resolvable's requires in a hash by name. */
+    /* StoreWorld all of the resItem's requires in a hash by name. */
 
-    for (CDependencyList::const_iterator i = resolvable->requires().begin(); i != resolvable->requires().end(); i++) {
-	r_and_d = new ResolvableAndDependency (resolvable, *i);
+    for (CDependencyList::const_iterator i = resItem->requires().begin(); i != resItem->requires().end(); i++) {
+	r_and_d = new ResItemAndDependency (resItem, *i);
 
-	_requires_by_name.insert (ResolvableAndDependencyTable::value_type (r_and_d->dependency()->name(), r_and_d));
+	_requires_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency()->name(), r_and_d));
     }
 
     /* "Recommends" are treated as requirements. */
 #warning Recommends are treated as requirements
 
-    for (CDependencyList::const_iterator i = resolvable->recommends().begin(); i != resolvable->recommends().end(); i++) {
-	r_and_d = new ResolvableAndDependency (resolvable, *i);
+    for (CDependencyList::const_iterator i = resItem->recommends().begin(); i != resItem->recommends().end(); i++) {
+	r_and_d = new ResItemAndDependency (resItem, *i);
 
-	_requires_by_name.insert (ResolvableAndDependencyTable::value_type (r_and_d->dependency()->name(), r_and_d));
+	_requires_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency()->name(), r_and_d));
     }
 
-    /* StoreWorld all of the resolvable's conflicts in a hash by name. */
+    /* StoreWorld all of the resItem's conflicts in a hash by name. */
 
-    for (CDependencyList::const_iterator i = resolvable->conflicts().begin(); i != resolvable->conflicts().end(); i++) {
-	r_and_d = new ResolvableAndDependency (resolvable, *i);
-	_conflicts_by_name.insert (ResolvableAndDependencyTable::value_type (r_and_d->dependency()->name(), r_and_d));
+    for (CDependencyList::const_iterator i = resItem->conflicts().begin(); i != resItem->conflicts().end(); i++) {
+	r_and_d = new ResItemAndDependency (resItem, *i);
+	_conflicts_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency()->name(), r_and_d));
     }
     
  finished:
@@ -227,11 +227,11 @@ StoreWorld::addResolvable (constResolvablePtr resolvable)
 
 
 void
-StoreWorld::addResolvablesFromList (const CResolvableList & slist)
+StoreWorld::addResItemsFromList (const CResItemList & slist)
 {
-    for (CResolvableList::const_iterator i = slist.begin(); i != slist.end(); i++) {
-	if (!addResolvable (*i)) {
-	    fprintf (stderr, "addResolvable failed\n");
+    for (CResItemList::const_iterator i = slist.begin(); i != slist.end(); i++) {
+	if (!addResItem (*i)) {
+	    fprintf (stderr, "addResItem failed\n");
 	    break;
 	}
     }
@@ -241,12 +241,12 @@ StoreWorld::addResolvablesFromList (const CResolvableList & slist)
 //---------------------------------------------------------------------------
 
 static void
-resolvable_table_remove (ResolvableTable & table, constResolvablePtr resolvable)
+resItem_table_remove (ResItemTable & table, constResItemPtr resItem)
 {
-    const string name = resolvable->name();
-    for (ResolvableTable::iterator pos = table.lower_bound(name); pos != table.upper_bound(name); pos++) {
-	constResolvablePtr res = pos->second;
-	if (res == resolvable) {
+    const string name = resItem->name();
+    for (ResItemTable::iterator pos = table.lower_bound(name); pos != table.upper_bound(name); pos++) {
+	constResItemPtr res = pos->second;
+	if (res == resItem) {
 	    table.erase (pos);
 	    break;
 	}
@@ -256,14 +256,14 @@ resolvable_table_remove (ResolvableTable & table, constResolvablePtr resolvable)
 
 
 static void
-resolvable_and_dependency_table_remove (ResolvableAndDependencyTable & table, constResolvablePtr resolvable)
+resItem_and_dependency_table_remove (ResItemAndDependencyTable & table, constResItemPtr resItem)
 {
-    const string name = resolvable->name();
+    const string name = resItem->name();
 // FIXME: this is inefficient but lower_bound can't to strcasecmp :-(
-//    for (ResolvableAndDependencyTable::iterator pos = table.lower_bound(name); pos != table.upper_bound(name); pos++) {
-    for (ResolvableAndDependencyTable::iterator pos = table.begin(); pos != table.end(); pos++) {
-	constResolvableAndDependencyPtr r_and_d = pos->second;
-	if (r_and_d->resolvable() == resolvable) {
+//    for (ResItemAndDependencyTable::iterator pos = table.lower_bound(name); pos != table.upper_bound(name); pos++) {
+    for (ResItemAndDependencyTable::iterator pos = table.begin(); pos != table.end(); pos++) {
+	constResItemAndDependencyPtr r_and_d = pos->second;
+	if (r_and_d->resItem() == resItem) {
 	    table.erase (pos);
 	    break;
 	}
@@ -272,29 +272,29 @@ resolvable_and_dependency_table_remove (ResolvableAndDependencyTable & table, co
 }
 
 void
-StoreWorld::removeResolvable (constResolvablePtr resolvable)
+StoreWorld::removeResItem (constResItemPtr resItem)
 {
-    if (getenv("RC_SPEW")) fprintf (stderr, "StoreWorld::removeResolvable (%s)\n", resolvable->asString().c_str());
+    if (getenv("RC_SPEW")) fprintf (stderr, "StoreWorld::removeResItem (%s)\n", resItem->asString().c_str());
 
-    constChannelPtr channel = resolvable->channel ();
+    constChannelPtr channel = resItem->channel ();
 
     if (! (channel && channel->hidden ()))
-	touchResolvableSequenceNumber ();
+	touchResItemSequenceNumber ();
 
-    resolvable_and_dependency_table_remove (_provides_by_name, resolvable);
-    resolvable_and_dependency_table_remove (_requires_by_name, resolvable);
-    resolvable_and_dependency_table_remove (_conflicts_by_name, resolvable);
+    resItem_and_dependency_table_remove (_provides_by_name, resItem);
+    resItem_and_dependency_table_remove (_requires_by_name, resItem);
+    resItem_and_dependency_table_remove (_conflicts_by_name, resItem);
 
-    resolvable_table_remove (_resolvables_by_name, resolvable);
+    resItem_table_remove (_resItems_by_name, resItem);
 
     return;
 }
 
 
 void
-StoreWorld::removeResolvables (constChannelPtr channel)
+StoreWorld::removeResItems (constChannelPtr channel)
 {
-	fprintf (stderr, "StoreWorld::removeResolvables(%s) not implemented\n", channel->asString().c_str());
+	fprintf (stderr, "StoreWorld::removeResItems(%s) not implemented\n", channel->asString().c_str());
 }
 
 
@@ -305,52 +305,52 @@ StoreWorld::clear ()
 }
 
 //---------------------------------------------------------------------------
-// Single resolvable queries
+// Single resItem queries
 
 static bool
-installed_version_cb (constResolvablePtr resolvable, void *data)
+installed_version_cb (constResItemPtr resItem, void *data)
 {
-    constResolvablePtr *installed = (constResolvablePtr *)data;
+    constResItemPtr *installed = (constResItemPtr *)data;
 
-    if (resolvable->isInstalled ()) {
-	*installed = resolvable;
+    if (resItem->isInstalled ()) {
+	*installed = resItem;
 	return false;
     }
     return true;
 }
 
 
-constResolvablePtr
-StoreWorld::findInstalledResolvable (constResolvablePtr resolvable)
+constResItemPtr
+StoreWorld::findInstalledResItem (constResItemPtr resItem)
 {
-    constResolvablePtr installed;
+    constResItemPtr installed;
     sync ();
 
-    foreachResolvableByName (resolvable->name(), new Channel(CHANNEL_TYPE_ANY) /* is this right? */, installed_version_cb, &installed);
+    foreachResItemByName (resItem->name(), new Channel(CHANNEL_TYPE_ANY) /* is this right? */, installed_version_cb, &installed);
 
     return installed;
 }
 
 
 //
-// findResolvable 
+// findResItem 
 // @channel: A non-wildcard #Channel.
-// @name: The name of a resolvable.
+// @name: The name of a resItem.
 //
-// Searches the world for a resolvable in the specified channel
+// Searches the world for a resItem in the specified channel
 // with the specified name.  @channel must be an actual
 // channel, not a wildcard.
 //
-// Return value: The matching resolvable, or %NULL if no such
-// resolvable exists.
+// Return value: The matching resItem, or %NULL if no such
+// resItem exists.
 //
 
-constResolvablePtr
-StoreWorld::findResolvable (constChannelPtr channel, const char *name) const
+constResItemPtr
+StoreWorld::findResItem (constChannelPtr channel, const char *name) const
 {
     syncConditional (channel);
-    for (ResolvableTable::const_iterator pos = _resolvables_by_name.lower_bound(name); pos != _resolvables_by_name.upper_bound(name); pos++) {
-	constResolvablePtr res = pos->second;
+    for (ResItemTable::const_iterator pos = _resItems_by_name.lower_bound(name); pos != _resItems_by_name.upper_bound(name); pos++) {
+	constResItemPtr res = pos->second;
 	if (res->channel() == channel) {
 	    return res;
 	}
@@ -359,47 +359,47 @@ StoreWorld::findResolvable (constChannelPtr channel, const char *name) const
 }
 
 
-constResolvablePtr
-StoreWorld::findResolvableWithConstraint (constChannelPtr channel, const char *name, constDependencyPtr constraint, bool is_and) const
+constResItemPtr
+StoreWorld::findResItemWithConstraint (constChannelPtr channel, const char *name, constDependencyPtr constraint, bool is_and) const
 {
-	fprintf (stderr, "StoreWorld::findResolvableWithConstraint() not implemented\n");
+	fprintf (stderr, "StoreWorld::findResItemWithConstraint() not implemented\n");
     return 0;
 }
 
 
 ChannelPtr
-StoreWorld::guessResolvableChannel (constResolvablePtr resolvable) const
+StoreWorld::guessResItemChannel (constResItemPtr resItem) const
 {
-	fprintf (stderr, "StoreWorld::guessResolvableChannel(%s) not implemented\n", ((constSpecPtr)resolvable)->asString().c_str());
+	fprintf (stderr, "StoreWorld::guessResItemChannel(%s) not implemented\n", ((constSpecPtr)resItem)->asString().c_str());
     return 0;
 }
 
 
 //-----------------------------------------------------------------------------
-// foreach resolvable
+// foreach resItem
 
 typedef struct {
     ChannelPtr channel;
-    CResolvableFn callback;
+    CResItemFn callback;
     void *data;
     int count;
     bool short_circuit;
-} ForeachResolvableInfo;
+} ForeachResItemInfo;
 
 
 static void
-foreach_resolvable_cb (const string &name, constResolvablePtr resolvable, void *data)
+foreach_resItem_cb (const string &name, constResItemPtr resItem, void *data)
 {
-    ForeachResolvableInfo *info = (ForeachResolvableInfo *)data;
+    ForeachResItemInfo *info = (ForeachResItemInfo *)data;
 
     if (info->short_circuit)
 	return;
 
-    /* FIXME: we should filter out dup uninstalled resolvables. */
+    /* FIXME: we should filter out dup uninstalled resItems. */
 
-    if (resolvable && info->channel->equals(resolvable->channel ())) {
+    if (resItem && info->channel->equals(resItem->channel ())) {
 	if (info->callback) {
-	    if (! info->callback (resolvable, info->data))
+	    if (! info->callback (resItem, info->data))
 		info->short_circuit = true;
 	}
 	++info->count;
@@ -408,18 +408,18 @@ foreach_resolvable_cb (const string &name, constResolvablePtr resolvable, void *
 
 
 int
-StoreWorld::foreachResolvable (ChannelPtr channel, CResolvableFn fn, void *data)
+StoreWorld::foreachResItem (ChannelPtr channel, CResItemFn fn, void *data)
 {
-    return foreachResolvableByName ("", channel, fn, data);
+    return foreachResItemByName ("", channel, fn, data);
 }
 
 
 int
-StoreWorld::foreachResolvableByName (const std::string & name, ChannelPtr channel, CResolvableFn fn, void *data)
+StoreWorld::foreachResItemByName (const std::string & name, ChannelPtr channel, CResItemFn fn, void *data)
 {
     if (name.empty()) {
 
-	ForeachResolvableInfo info;
+	ForeachResItemInfo info;
 
 	info.channel = channel;
 	info.callback = fn;
@@ -427,32 +427,32 @@ StoreWorld::foreachResolvableByName (const std::string & name, ChannelPtr channe
 	info.count = 0;
 	info.short_circuit = false;
 
-	for (ResolvableTable::const_iterator iter = _resolvables_by_name.begin(); iter != _resolvables_by_name.end(); iter++) {
-	    foreach_resolvable_cb (iter->first, iter->second, (void *)&info);
+	for (ResItemTable::const_iterator iter = _resItems_by_name.begin(); iter != _resItems_by_name.end(); iter++) {
+	    foreach_resItem_cb (iter->first, iter->second, (void *)&info);
 	}
 
 	return info.short_circuit ? -1 : info.count;
     }
 
 	
-    ResolvableTable installed;			// FIXME: <Spec, Resolvable> rc_resolvable_spec_equal
+    ResItemTable installed;			// FIXME: <Spec, resItem> rc_resItem_spec_equal
     int count = 0;
 
-    for (ResolvableTable::const_iterator iter = _resolvables_by_name.lower_bound(name); iter != _resolvables_by_name.upper_bound(name); iter++) {
-	constResolvablePtr resolvable = iter->second;
-	if (resolvable->isInstalled()) {
-	    const string str = ((constSpecPtr)resolvable)->asString();
-	    installed.insert (ResolvableTable::value_type(str,resolvable));
+    for (ResItemTable::const_iterator iter = _resItems_by_name.lower_bound(name); iter != _resItems_by_name.upper_bound(name); iter++) {
+	constResItemPtr resItem = iter->second;
+	if (resItem->isInstalled()) {
+	    const string str = ((constSpecPtr)resItem)->asString();
+	    installed.insert (ResItemTable::value_type(str,resItem));
 	}
     }    
 
-    for (ResolvableTable::const_iterator iter = _resolvables_by_name.lower_bound(name); iter != _resolvables_by_name.upper_bound(name); iter++) {
-	constResolvablePtr resolvable = iter->second;
-	if (channel->equals (resolvable->channel())) {
-	    if (resolvable->isInstalled()
-		|| installed.find(((constSpecPtr)resolvable)->asString()) == installed.end()) {
+    for (ResItemTable::const_iterator iter = _resItems_by_name.lower_bound(name); iter != _resItems_by_name.upper_bound(name); iter++) {
+	constResItemPtr resItem = iter->second;
+	if (channel->equals (resItem->channel())) {
+	    if (resItem->isInstalled()
+		|| installed.find(((constSpecPtr)resItem)->asString()) == installed.end()) {
 		if (fn) {
-		    if (! fn(resolvable, data)) {
+		    if (! fn(resItem, data)) {
 			count = -1;
 			goto finished;
 		    }
@@ -469,46 +469,46 @@ finished:
 
 
 int
-StoreWorld::foreachResolvableByMatch (constMatchPtr match, CResolvableFn fn, void *data)
+StoreWorld::foreachResItemByMatch (constMatchPtr match, CResItemFn fn, void *data)
 {
-	fprintf (stderr, "StoreWorld::foreachResolvableByMatch () not implemented\n");
+	fprintf (stderr, "StoreWorld::foreachResItemByMatch () not implemented\n");
     return 0;
 }
 
 
 //-----------------------------------------------------------------------------
-// iterater over resolvables with dependency
+// iterater over resItems with dependency
 
-typedef std::map<constSpecPtr, constResolvableAndDependencyPtr> InstalledTable;
+typedef std::map<constSpecPtr, constResItemAndDependencyPtr> InstalledTable;
 
 int
-StoreWorld::foreachProvidingResolvable (constDependencyPtr dep, ResolvableAndSpecFn fn, void *data)
+StoreWorld::foreachProvidingResItem (constDependencyPtr dep, ResItemAndSpecFn fn, void *data)
 {
     int count = 0;
     InstalledTable installed;
-//fprintf (stderr, "StoreWorld::foreachProvidingResolvable(%s)\n", dep->asString().c_str());
-    for (ResolvableAndDependencyTable::const_iterator iter = _provides_by_name.lower_bound(dep->name()); iter != _provides_by_name.upper_bound(dep->name()); iter++) {
-	constResolvableAndDependencyPtr r_and_d = iter->second;
-	constResolvablePtr res = r_and_d->resolvable();
-//fprintf (stderr, "StoreWorld::foreachProvidingResolvable(): %s\n", res->asString(true).c_str());
+//fprintf (stderr, "StoreWorld::foreachProvidingResItem(%s)\n", dep->asString().c_str());
+    for (ResItemAndDependencyTable::const_iterator iter = _provides_by_name.lower_bound(dep->name()); iter != _provides_by_name.upper_bound(dep->name()); iter++) {
+	constResItemAndDependencyPtr r_and_d = iter->second;
+	constResItemPtr res = r_and_d->resItem();
+//fprintf (stderr, "StoreWorld::foreachProvidingResItem(): %s\n", res->asString(true).c_str());
 	if (res != NULL && res->isInstalled ()) {
 	    installed[res] = r_and_d;
 	}
     }
 
-    for (ResolvableAndDependencyTable::const_iterator iter = _provides_by_name.lower_bound(dep->name()); iter != _provides_by_name.upper_bound(dep->name()); iter++) {
-	constResolvableAndDependencyPtr r_and_d = iter->second;
+    for (ResItemAndDependencyTable::const_iterator iter = _provides_by_name.lower_bound(dep->name()); iter != _provides_by_name.upper_bound(dep->name()); iter++) {
+	constResItemAndDependencyPtr r_and_d = iter->second;
 
 	if (r_and_d && r_and_d->verifyRelation (dep)) {
-//fprintf (stderr, "found: %s\n", r_and_d->resolvable()->asString(true).c_str());
-	    /* If we have multiple identical resolvables in RCWorld,
-	       we want to only include the resolvable that is installed and
+//fprintf (stderr, "found: %s\n", r_and_d->resItem()->asString(true).c_str());
+	    /* If we have multiple identical resItems in RCWorld,
+	       we want to only include the resItem that is installed and
 	       skip the rest. */
-	    if (r_and_d->resolvable()->isInstalled()
-		|| installed.find(r_and_d->resolvable()) == installed.end()) {
+	    if (r_and_d->resItem()->isInstalled()
+		|| installed.find(r_and_d->resItem()) == installed.end()) {
 
 		if (fn) {
-		    if (! fn(r_and_d->resolvable(), r_and_d->dependency(), data)) {
+		    if (! fn(r_and_d->resItem(), r_and_d->dependency(), data)) {
 			count = -1;
 			goto finished;
 		    }
@@ -524,32 +524,32 @@ StoreWorld::foreachProvidingResolvable (constDependencyPtr dep, ResolvableAndSpe
 }
 
 int
-StoreWorld::foreachRequiringResolvable (constDependencyPtr dep, ResolvableAndDepFn fn, void *data)
+StoreWorld::foreachRequiringResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data)
 {
     int count = 0;
     InstalledTable installed;
 
 
-    for (ResolvableAndDependencyTable::const_iterator iter = _requires_by_name.lower_bound(dep->name()); iter != _requires_by_name.upper_bound(dep->name()); iter++) {
-	constResolvableAndDependencyPtr r_and_d = iter->second;
-	constResolvablePtr res = r_and_d->resolvable();
+    for (ResItemAndDependencyTable::const_iterator iter = _requires_by_name.lower_bound(dep->name()); iter != _requires_by_name.upper_bound(dep->name()); iter++) {
+	constResItemAndDependencyPtr r_and_d = iter->second;
+	constResItemPtr res = r_and_d->resItem();
 	if (res != NULL && res->isInstalled ()) {
 //fprintf (stderr, "is installed: %s\n", res->asString(true).c_str());
 	    installed[res] = r_and_d;
 	}
     }
 
-    for (ResolvableAndDependencyTable::const_iterator iter = _requires_by_name.lower_bound(dep->name()); iter != _requires_by_name.upper_bound(dep->name()); iter++) {
-	constResolvableAndDependencyPtr r_and_d = iter->second;
+    for (ResItemAndDependencyTable::const_iterator iter = _requires_by_name.lower_bound(dep->name()); iter != _requires_by_name.upper_bound(dep->name()); iter++) {
+	constResItemAndDependencyPtr r_and_d = iter->second;
 
 	if (r_and_d && r_and_d->dependency()->verifyRelation (dep)) {
 
 	    /* Skip dups if one of them in installed. */
-	    if (r_and_d->resolvable()->isInstalled()
-		|| installed.find(r_and_d->resolvable()) == installed.end()) {
+	    if (r_and_d->resItem()->isInstalled()
+		|| installed.find(r_and_d->resItem()) == installed.end()) {
 
 		if (fn) {
-		    if (! fn(r_and_d->resolvable(), r_and_d->dependency(), data)) {
+		    if (! fn(r_and_d->resItem(), r_and_d->dependency(), data)) {
 			count = -1;
 			goto finished;
 		    }
@@ -566,33 +566,33 @@ StoreWorld::foreachRequiringResolvable (constDependencyPtr dep, ResolvableAndDep
 
 
 int
-StoreWorld::foreachConflictingResolvable (constDependencyPtr dep, ResolvableAndDepFn fn, void *data)
+StoreWorld::foreachConflictingResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data)
 {
     int count = 0;
     InstalledTable installed;
-//fprintf (stderr, "StoreWorld::foreachConflictingResolvable (%s)\n", dep->name().c_str());
-    for (ResolvableAndDependencyTable::const_iterator iter = _conflicts_by_name.lower_bound(dep->name()); iter != _conflicts_by_name.upper_bound(dep->name()); iter++) {
-	constResolvableAndDependencyPtr r_and_d = iter->second;
-	constResolvablePtr res = r_and_d->resolvable();
+//fprintf (stderr, "StoreWorld::foreachConflictingResItem (%s)\n", dep->name().c_str());
+    for (ResItemAndDependencyTable::const_iterator iter = _conflicts_by_name.lower_bound(dep->name()); iter != _conflicts_by_name.upper_bound(dep->name()); iter++) {
+	constResItemAndDependencyPtr r_and_d = iter->second;
+	constResItemPtr res = r_and_d->resItem();
 //fprintf (stderr, "==> %s\n", res->asString().c_str());
 	if (res != NULL && res->isInstalled ()) {
 	    installed[res] = r_and_d;
 	}
     }
 
-    for (ResolvableAndDependencyTable::const_iterator iter = _conflicts_by_name.lower_bound(dep->name()); iter != _conflicts_by_name.upper_bound(dep->name()); iter++) {
-	constResolvableAndDependencyPtr r_and_d = iter->second;
+    for (ResItemAndDependencyTable::const_iterator iter = _conflicts_by_name.lower_bound(dep->name()); iter != _conflicts_by_name.upper_bound(dep->name()); iter++) {
+	constResItemAndDependencyPtr r_and_d = iter->second;
 
 	if (r_and_d)
 //fprintf (stderr, "==> %s verify %s ? %s\n", r_and_d->asString().c_str(), dep->asString().c_str(), r_and_d->verifyRelation (dep) ? "Y" : "N");
 	if (r_and_d && r_and_d->verifyRelation (dep)) {
 
 	    /* Skip dups if one of them in installed. */
-	    if (r_and_d->resolvable()->isInstalled()
-		|| installed.find(r_and_d->resolvable()) == installed.end()) {
+	    if (r_and_d->resItem()->isInstalled()
+		|| installed.find(r_and_d->resItem()) == installed.end()) {
 
 		if (fn) {
-		    if (! fn(r_and_d->resolvable(), r_and_d->dependency(), data)) {
+		    if (! fn(r_and_d->resItem(), r_and_d->dependency(), data)) {
 			count = -1;
 			goto finished;
 		    }
@@ -631,7 +631,7 @@ StoreWorld::removeChannel (constChannelPtr channel)
 	|| ! containsChannel (channel))
 	return;
 
-    removeResolvables (channel);
+    removeResItems (channel);
 
     for (ChannelList::iterator iter = _channels.begin(); iter != _channels.end(); iter++) {
 	if ((*iter)->equals (channel)) {

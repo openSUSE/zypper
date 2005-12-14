@@ -27,7 +27,7 @@
 #include <string.h>
 
 #include <zypp/solver/detail/QueueItemBranchPtr.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
 

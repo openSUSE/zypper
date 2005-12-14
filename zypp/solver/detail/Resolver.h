@@ -28,7 +28,7 @@
 
 #include <zypp/solver/detail/ResolverPtr.h>
 #include <zypp/solver/detail/ResolverQueue.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
 
@@ -54,9 +54,9 @@ class Resolver : public CountedRep {
     bool _verifying;
 
     QueueItemList _initial_items;
-    CResolvableList _resolvables_to_install;
-    CResolvableList _resolvables_to_remove;
-    CResolvableList _resolvables_to_verify;
+    CResItemList _resItems_to_install;
+    CResItemList _resItems_to_remove;
+    CResItemList _resItems_to_verify;
 
     CDependencyList _extra_deps;
     CDependencyList _extra_conflicts;
@@ -109,13 +109,13 @@ class Resolver : public CountedRep {
     void setCurrentChannel (constChannelPtr channel) { _current_channel = channel; }
     void addSubscribedChannel (constChannelPtr channel);
 
-    void addResolvableToInstall (constResolvablePtr resolvable);
-    void addResolvablesToInstallFromList (CResolvableList & rl);
+    void addResItemToInstall (constResItemPtr resItem);
+    void addResItemsToInstallFromList (CResItemList & rl);
 
-    void addResolvableToRemove (constResolvablePtr resolvable);
-    void addResolvablesToRemoveFromList (CResolvableList & rl);
+    void addResItemToRemove (constResItemPtr resItem);
+    void addResItemsToRemoveFromList (CResItemList & rl);
 
-    void addResolvableToVerify (constResolvablePtr resolvable);
+    void addResItemToVerify (constResItemPtr resItem);
 
     void addExtraDependency (constDependencyPtr dependency);
     void addExtraConflict (constDependencyPtr dependency);

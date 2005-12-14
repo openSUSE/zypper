@@ -29,7 +29,7 @@
 
 #include <zypp/solver/detail/ResolverContextPtr.h>
 #include <zypp/solver/detail/ResolverInfo.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Channel.h>
 
 ///////////////////////////////////////////////////////////////////
@@ -45,18 +45,18 @@ typedef enum {
     RESOLVABLE_STATUS_TO_BE_UNINSTALLED,
     RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE,
     RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK
-} ResolvableStatus;
+} ResItemStatus;
 
-#define resolvable_status_is_to_be_installed(x) (((x) == RESOLVABLE_STATUS_TO_BE_INSTALLED) || ((x) == RESOLVABLE_STATUS_TO_BE_INSTALLED_SOFT))
-#define resolvable_status_is_to_be_uninstalled(x) (((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED) || ((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE) || ((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK))
+#define resItem_status_is_to_be_installed(x) (((x) == RESOLVABLE_STATUS_TO_BE_INSTALLED) || ((x) == RESOLVABLE_STATUS_TO_BE_INSTALLED_SOFT))
+#define resItem_status_is_to_be_uninstalled(x) (((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED) || ((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE) || ((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK))
 
-typedef std::map<constResolvablePtr, ResolvableStatus> StatusTable;
+typedef std::map<constResItemPtr, ResItemStatus> StatusTable;
 typedef std::list<ResolverInfoPtr> InfoList;
 
 
 typedef void (*ResolverContextFn) (ResolverContextPtr ctx, void * data);
-typedef void (*MarkedResolvableFn) (constResolvablePtr res, ResolvableStatus status, void *data);
-typedef void (*MarkedResolvablePairFn) (constResolvablePtr res1, ResolvableStatus status1, constResolvablePtr res2, ResolvableStatus status2, void *data);
+typedef void (*MarkedResItemFn) (constResItemPtr res, ResItemStatus status, void *data);
+typedef void (*MarkedResItemPairFn) (constResItemPtr res1, ResItemStatus status1, constResItemPtr res2, ResItemStatus status2, void *data);
 
 
 ///////////////////////////////////////////////////////////////////
@@ -75,8 +75,8 @@ class ResolverContext : public CountedRep {
     StatusTable _status;
 
     // just a caching mechanism
-    constResolvablePtr _last_checked_resolvable;
-    ResolvableStatus _last_checked_status;
+    constResItemPtr _last_checked_resItem;
+    ResItemStatus _last_checked_status;
 
     InfoList _log;
     unsigned long long _download_size;
@@ -100,7 +100,7 @@ class ResolverContext : public CountedRep {
     friend std::ostream& operator<<(std::ostream&, const ResolverContext & context);
     std::string asString (void ) const;
 
-    static std::string toString (const ResolvableStatus & status);
+    static std::string toString (const ResItemStatus & status);
 
     // ---------------------------------- accessors
 
@@ -125,36 +125,36 @@ class ResolverContext : public CountedRep {
 
     // ---------------------------------- methods
 
-    ResolvableStatus getStatus (constResolvablePtr res);			// non-const, because its caching
-    void setStatus (constResolvablePtr res, ResolvableStatus status);
+    ResItemStatus getStatus (constResItemPtr res);			// non-const, because its caching
+    void setStatus (constResItemPtr res, ResItemStatus status);
 
-    bool installResolvable (constResolvablePtr resolvable, bool is_soft, int other_penalty);
-    bool upgradeResolvable (constResolvablePtr new_resolvable, constResolvablePtr old_resolvable, bool is_soft, int other_penalty);
-    bool uninstallResolvable (constResolvablePtr resolvable, bool part_of_upgrade, bool due_to_obsolete, bool due_to_unlink);
+    bool installResItem (constResItemPtr resItem, bool is_soft, int other_penalty);
+    bool upgradeResItem (constResItemPtr new_resItem, constResItemPtr old_resItem, bool is_soft, int other_penalty);
+    bool uninstallResItem (constResItemPtr resItem, bool part_of_upgrade, bool due_to_obsolete, bool due_to_unlink);
 
-    bool resolvableIsPresent (constResolvablePtr resolvable);
-    bool resolvableIsAbsent (constResolvablePtr resolvable);
+    bool resItemIsPresent (constResItemPtr resItem);
+    bool resItemIsAbsent (constResItemPtr resItem);
 
-    void foreachMarkedResolvable (MarkedResolvableFn fn, void *data) const;
-    CResolvableList getMarkedResolvables (void) const;
+    void foreachMarkedResItem (MarkedResItemFn fn, void *data) const;
+    CResItemList getMarkedResItems (void) const;
 
-    int foreachInstall (MarkedResolvableFn fn, void *data) const;
-    CResolvableList getInstalls (void) const;
+    int foreachInstall (MarkedResItemFn fn, void *data) const;
+    CResItemList getInstalls (void) const;
     int installCount (void) const;
 
-    int foreachUninstall (MarkedResolvableFn fn, void *data);			// non-const, calls foreachUpgrade
-    CResolvableList getUninstalls (void);
+    int foreachUninstall (MarkedResItemFn fn, void *data);			// non-const, calls foreachUpgrade
+    CResItemList getUninstalls (void);
     int uninstallCount (void);
 
-    int foreachUpgrade (MarkedResolvablePairFn fn, void *data);			// non-const, calls getStatus
-    CResolvableList getUpgrades (void);
+    int foreachUpgrade (MarkedResItemPairFn fn, void *data);			// non-const, calls getStatus
+    CResItemList getUpgrades (void);
     int upgradeCount (void);
 
     void addInfo (ResolverInfoPtr info);
-    void addInfoString (constResolvablePtr resolvable, int priority, std::string str);
-    void addErrorString (constResolvablePtr resolvable, std::string str);
+    void addInfoString (constResItemPtr resItem, int priority, std::string str);
+    void addErrorString (constResItemPtr resItem, std::string str);
 
-    void foreachInfo (ResolvablePtr resolvable, int priority, ResolverInfoFn fn, void *data);
+    void foreachInfo (ResItemPtr resItem, int priority, ResolverInfoFn fn, void *data);
     InfoList getInfo (void);
 
     void spew (void);
@@ -162,8 +162,8 @@ class ResolverContext : public CountedRep {
 
     bool requirementIsMet (constDependencyPtr dep, bool is_child);
     bool requirementIsPossible (constDependencyPtr dep);
-    bool resolvableIsPossible (constResolvablePtr resolvable);
-    bool isParallelInstall (constResolvablePtr resolvable);
+    bool resItemIsPossible (constResItemPtr resItem);
+    bool isParallelInstall (constResItemPtr resItem);
 
     int getChannelPriority (constChannelPtr channel) const;
 

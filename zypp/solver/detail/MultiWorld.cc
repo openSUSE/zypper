@@ -43,7 +43,7 @@ class SubWorldInfo {
 
     bool _refreshed_ready;
 
-    unsigned int _changed_resolvables_id;
+    unsigned int _changed_resItems_id;
     unsigned int _changed_channels_id;
     unsigned int _changed_subscriptions_id;
     unsigned int _changed_locks_id;
@@ -105,17 +105,17 @@ operator<<( ostream& os, const SubWorldInfo & subworldinfo)
 
 SubWorldInfo::SubWorldInfo (WorldPtr subworld, MultiWorldPtr multiworld)
     : _subworld (subworld)
-    , _changed_resolvables_id (0)
+    , _changed_resItems_id (0)
     , _changed_channels_id (0)
     , _changed_subscriptions_id (0)
     , _changed_locks_id (0)
 
 {
 #if 0
-    _changed_resolvables_id =
+    _changed_resItems_id =
         g_signal_connect (G_OBJECT (subworld),
-                          "changed_resolvables",
-                          (GCallback) changed_resolvables_cb,
+                          "changed_resItems",
+                          (GCallback) changed_resItems_cb,
                           world);
 
     _changed_channels_id =
@@ -508,14 +508,14 @@ MultiWorld::foreachChannel (ChannelFn fn, void *data) const
 
 
 //---------------------------------------------------------------------------
-// Single resolvable queries
+// Single resItem queries
 
-constResolvablePtr
-MultiWorld::findInstalledResolvable (constResolvablePtr resolvable)
+constResItemPtr
+MultiWorld::findInstalledResItem (constResItemPtr resItem)
 {
-    constResolvablePtr installed;
+    constResItemPtr installed;
     for (SubWorldInfoList::const_iterator iter = _subworlds.begin(); iter != _subworlds.end(); iter++) {
-	installed = (*iter)->subworld()->findInstalledResolvable(resolvable);
+	installed = (*iter)->subworld()->findInstalledResItem(resItem);
 	if (installed != NULL)
 	    return installed;
     }
@@ -523,38 +523,38 @@ MultiWorld::findInstalledResolvable (constResolvablePtr resolvable)
 }
 
 
-constResolvablePtr
-MultiWorld::findResolvable (constChannelPtr channel, const char *name) const
+constResItemPtr
+MultiWorld::findResItem (constChannelPtr channel, const char *name) const
 {
-    constResolvablePtr resolvable;
+    constResItemPtr resItem;
     for (SubWorldInfoList::const_iterator iter = _subworlds.begin(); iter != _subworlds.end(); iter++) {
-	resolvable = (*iter)->subworld()->findResolvable(channel, name);
-	if (resolvable != NULL)
-	    return resolvable;
+	resItem = (*iter)->subworld()->findResItem(channel, name);
+	if (resItem != NULL)
+	    return resItem;
     }
     return NULL;
 }
 
 
-constResolvablePtr
-MultiWorld::findResolvableWithConstraint (constChannelPtr channel, const char *name, constDependencyPtr constraint, bool is_and) const
+constResItemPtr
+MultiWorld::findResItemWithConstraint (constChannelPtr channel, const char *name, constDependencyPtr constraint, bool is_and) const
 {
-    constResolvablePtr resolvable;
+    constResItemPtr resItem;
     for (SubWorldInfoList::const_iterator iter = _subworlds.begin(); iter != _subworlds.end(); iter++) {
-	resolvable = (*iter)->subworld()->findResolvableWithConstraint(channel, name, constraint, is_and);
-	if (resolvable != NULL)
-	    return resolvable;
+	resItem = (*iter)->subworld()->findResItemWithConstraint(channel, name, constraint, is_and);
+	if (resItem != NULL)
+	    return resItem;
     }
     return NULL;
 }
 
 
 ChannelPtr
-MultiWorld::guessResolvableChannel (constResolvablePtr resolvable) const
+MultiWorld::guessResItemChannel (constResItemPtr resItem) const
 {
     ChannelPtr channel;
     for (SubWorldInfoList::const_iterator iter = _subworlds.begin(); iter != _subworlds.end(); iter++) {
-	channel = (*iter)->subworld()->guessResolvableChannel(resolvable);
+	channel = (*iter)->subworld()->guessResItemChannel(resItem);
 	if (channel != NULL)
 	    return channel;
     }
@@ -562,22 +562,22 @@ MultiWorld::guessResolvableChannel (constResolvablePtr resolvable) const
 }
 
 //---------------------------------------------------------------------------
-// iterate over resolvables
+// iterate over resItems
 
 int
-MultiWorld::foreachResolvable (ChannelPtr channel, CResolvableFn fn, void *data)
+MultiWorld::foreachResItem (ChannelPtr channel, CResItemFn fn, void *data)
 {
-    return foreachResolvableByName ("", channel, fn, data);
+    return foreachResItemByName ("", channel, fn, data);
 }
 
 
 int
-MultiWorld::foreachResolvableByName (const std::string & name, ChannelPtr channel, CResolvableFn fn, void *data)
+MultiWorld::foreachResItemByName (const std::string & name, ChannelPtr channel, CResItemFn fn, void *data)
 {
     int count = 0;
     for (SubWorldInfoList::const_iterator iter = _subworlds.begin(); iter != _subworlds.end(); iter++) {
 	int this_count;
-	this_count = (*iter)->subworld()->foreachResolvableByName(name, channel, fn, data);
+	this_count = (*iter)->subworld()->foreachResItemByName(name, channel, fn, data);
 	if (this_count < 0)
 	    return -1;
 	count += this_count;
@@ -587,23 +587,23 @@ MultiWorld::foreachResolvableByName (const std::string & name, ChannelPtr channe
 
 
 int
-MultiWorld::foreachResolvableByMatch (constMatchPtr match, CResolvableFn fn, void *data)
+MultiWorld::foreachResItemByMatch (constMatchPtr match, CResItemFn fn, void *data)
 {
-    fprintf (stderr, "MultiWorld::foreachResolvableByMatch not implemented\n");
+    fprintf (stderr, "MultiWorld::foreachResItemByMatch not implemented\n");
     return 0;
 }
 
 
 //-----------------------------------------------------------------------------
-// iterater over resolvables with dependency
+// iterater over resItems with dependency
 
 int
-MultiWorld::foreachProvidingResolvable (constDependencyPtr dep, ResolvableAndSpecFn fn, void *data)
+MultiWorld::foreachProvidingResItem (constDependencyPtr dep, ResItemAndSpecFn fn, void *data)
 {
     int count = 0;
     for (SubWorldInfoList::const_iterator iter = _subworlds.begin(); iter != _subworlds.end(); iter++) {
 	int this_count;
-	this_count = (*iter)->subworld()->foreachProvidingResolvable (dep, fn, data);
+	this_count = (*iter)->subworld()->foreachProvidingResItem (dep, fn, data);
 	if (this_count < 0)
 	    return -1;
 	count += this_count;
@@ -612,12 +612,12 @@ MultiWorld::foreachProvidingResolvable (constDependencyPtr dep, ResolvableAndSpe
 }
 
 int
-MultiWorld::foreachRequiringResolvable (constDependencyPtr dep, ResolvableAndDepFn fn, void *data)
+MultiWorld::foreachRequiringResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data)
 {
     int count = 0;
     for (SubWorldInfoList::const_iterator iter = _subworlds.begin(); iter != _subworlds.end(); iter++) {
 	int this_count;
-	this_count = (*iter)->subworld()->foreachRequiringResolvable (dep, fn, data);
+	this_count = (*iter)->subworld()->foreachRequiringResItem (dep, fn, data);
 	if (this_count < 0)
 	    return -1;
 	count += this_count;
@@ -626,12 +626,12 @@ MultiWorld::foreachRequiringResolvable (constDependencyPtr dep, ResolvableAndDep
 }
 
 int
-MultiWorld::foreachConflictingResolvable (constDependencyPtr dep, ResolvableAndDepFn fn, void *data)
+MultiWorld::foreachConflictingResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data)
 {
     int count = 0;
     for (SubWorldInfoList::const_iterator iter = _subworlds.begin(); iter != _subworlds.end(); iter++) {
 	int this_count;
-	this_count = (*iter)->subworld()->foreachConflictingResolvable (dep, fn, data);
+	this_count = (*iter)->subworld()->foreachConflictingResItem (dep, fn, data);
 	if (this_count < 0)
 	    return -1;
 	count += this_count;
@@ -641,7 +641,7 @@ MultiWorld::foreachConflictingResolvable (constDependencyPtr dep, ResolvableAndD
 
 
 //-----------------------------------------------------------------------------
-// iterater over resolvables with locks
+// iterater over resItems with locks
 
 int
 MultiWorld::foreachLock (MatchFn fn, void *data) const

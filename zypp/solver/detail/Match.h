@@ -30,7 +30,7 @@
 #include <zypp/solver/detail/MatchPtr.h>
 #include <zypp/solver/detail/Channel.h>
 #include <zypp/solver/detail/Importance.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/WorldPtr.h>
 #include <zypp/solver/detail/XmlNode.h>
 
@@ -104,7 +104,7 @@ class Match : public CountedRep {
     // equality
     bool equals (const Match & match) const;
 
-    bool test (constResolvablePtr resolvable, WorldPtr world) const;
+    bool test (constResItemPtr resItem, WorldPtr world) const;
 };
 
 ///////////////////////////////////////////////////////////////////

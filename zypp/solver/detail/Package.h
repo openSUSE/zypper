@@ -30,7 +30,7 @@
 #include <zypp/solver/detail/PackagePtr.h>
 #include <zypp/solver/detail/PackageUpdatePtr.h>
 #include <zypp/solver/detail/Section.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/XmlNode.h>
 
 ///////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ typedef PackageUpdateList * PackageUpdateListPtr;
  *
  **/
 
-class Package : public Resolvable {
+class Package : public ResItem {
     REP_BODY(Package);
 
   private:

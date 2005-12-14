@@ -38,7 +38,7 @@ IMPL_BASE_POINTER(ResolverContext);
 //---------------------------------------------------------------------------
 
 string
-ResolverContext::toString (const ResolvableStatus & status)
+ResolverContext::toString (const ResItemStatus & status)
 {
     string ret;
     switch (status) {
@@ -112,7 +112,7 @@ ResolverContext::ResolverContext (ResolverContextPtr parent)
     : _parent (parent)
     , _refs (0)
     , _world (NULL)
-    , _last_checked_resolvable (NULL)
+    , _last_checked_resItem (NULL)
     , _last_checked_status (RESOLVABLE_STATUS_UNKNOWN)
     , _download_size (0)
     , _install_size (0)
@@ -156,34 +156,34 @@ ResolverContext::world (void) const
 
 
 void
-ResolverContext::setStatus (constResolvablePtr resolvable, ResolvableStatus status)
+ResolverContext::setStatus (constResItemPtr resItem, ResItemStatus status)
 {
     if (_invalid) return;
 
-    ResolvableStatus old_status = getStatus (resolvable);
+    ResItemStatus old_status = getStatus (resItem);
 
     if (status != old_status) {
-	_status[resolvable] = status;
+	_status[resItem] = status;
     }
 
-    // Update our cache if we changed the status of the last checked resolvable.
+    // Update our cache if we changed the status of the last checked resItem.
 
-    if (_last_checked_resolvable == resolvable)
+    if (_last_checked_resItem == resItem)
 	_last_checked_status = status;
 }
 
 
-ResolvableStatus
-ResolverContext::getStatus (constResolvablePtr resolvable)
+ResItemStatus
+ResolverContext::getStatus (constResItemPtr resItem)
 {
-    ResolvableStatus status = RESOLVABLE_STATUS_UNKNOWN;
+    ResItemStatus status = RESOLVABLE_STATUS_UNKNOWN;
 
-    // We often end up getting the status of the same resolvable several times
-    // in a row.  By caching the status of the last checked resolvable, we can
+    // We often end up getting the status of the same resItem several times
+    // in a row.  By caching the status of the last checked resItem, we can
     // in practice eliminate the need for any hash table lookups in about
     // 50% of our calls to get_status.
 
-    if (resolvable == _last_checked_resolvable)
+    if (resItem == _last_checked_resItem)
     {
 	return _last_checked_status;
     }
@@ -192,7 +192,7 @@ ResolverContext::getStatus (constResolvablePtr resolvable)
 
     while (status == RESOLVABLE_STATUS_UNKNOWN
 	   && context != NULL) {
-	StatusTable::const_iterator pos = context->_status.find (resolvable);
+	StatusTable::const_iterator pos = context->_status.find (resItem);
 	if (pos != context->_status.end()) {
 	    status = (*pos).second;
 	}
@@ -200,10 +200,10 @@ ResolverContext::getStatus (constResolvablePtr resolvable)
     }
 
     if (status == RESOLVABLE_STATUS_UNKNOWN) {
-	status = resolvable->isInstalled() ? RESOLVABLE_STATUS_INSTALLED : RESOLVABLE_STATUS_UNINSTALLED;
+	status = resItem->isInstalled() ? RESOLVABLE_STATUS_INSTALLED : RESOLVABLE_STATUS_UNINSTALLED;
     }
 
-    _last_checked_resolvable = resolvable;
+    _last_checked_resItem = resItem;
     _last_checked_status = status;
 
     return status;
@@ -211,30 +211,30 @@ ResolverContext::getStatus (constResolvablePtr resolvable)
 
 
 bool
-ResolverContext::installResolvable (constResolvablePtr resolvable, bool is_soft, int other_penalty)
+ResolverContext::installResItem (constResItemPtr resItem, bool is_soft, int other_penalty)
 {
-    ResolvableStatus status, new_status;
+    ResItemStatus status, new_status;
     int priority;
     std::string msg;
 
-    status = getStatus (resolvable);
-    if (getenv ("RC_SPEW")) fprintf (stderr, "ResolverContext[%p]::installResolvable(<%s>%s)\n", this, ResolverContext::toString(status).c_str(), resolvable->asString().c_str());
+    status = getStatus (resItem);
+    if (getenv ("RC_SPEW")) fprintf (stderr, "ResolverContext[%p]::installResItem(<%s>%s)\n", this, ResolverContext::toString(status).c_str(), resItem->asString().c_str());
 
-    if (resolvable_status_is_to_be_uninstalled (status)
+    if (resItem_status_is_to_be_uninstalled (status)
 	&& status != RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK) {
-	msg = string ("Can't install ") + ((constSpecPtr)resolvable)->asString() + " since it is already marked as needing to be uninstalled";
+	msg = string ("Can't install ") + ((constSpecPtr)resItem)->asString() + " since it is already marked as needing to be uninstalled";
 
-	addErrorString (resolvable, msg);
+	addErrorString (resItem, msg);
 	return false;
     }
 
-    if (resolvable_status_is_to_be_installed (status)) {
+    if (resItem_status_is_to_be_installed (status)) {
 	return true;
     }
 
-    if (isParallelInstall (resolvable)) {
-	msg = string ("Can't install ") + ((constSpecPtr)resolvable)->asString() + ", since a resolvable of the same name is already marked as needing to be installed";
-	addErrorString (resolvable, msg);
+    if (isParallelInstall (resItem)) {
+	msg = string ("Can't install ") + ((constSpecPtr)resItem)->asString() + ", since a resItem of the same name is already marked as needing to be installed";
+	addErrorString (resItem, msg);
 	return false;
     }
 
@@ -245,17 +245,17 @@ ResolverContext::installResolvable (constResolvablePtr resolvable, bool is_soft,
     else
 	new_status = RESOLVABLE_STATUS_TO_BE_INSTALLED;
 
-    setStatus (resolvable, new_status);
+    setStatus (resItem, new_status);
 
     if (status == RESOLVABLE_STATUS_UNINSTALLED) {
 	/* FIXME: Incomplete */
-	_download_size += resolvable->fileSize();
-	_install_size += resolvable->installedSize();
+	_download_size += resItem->fileSize();
+	_install_size += resItem->installedSize();
 
-	if (resolvable->local())
+	if (resItem->local())
 	    priority = 0;
 	else {
-	    priority = getChannelPriority (resolvable->channel ());
+	    priority = getChannelPriority (resItem->channel ());
 	}
 
 	if (priority < _min_priority) _min_priority = priority;
@@ -270,35 +270,35 @@ ResolverContext::installResolvable (constResolvablePtr resolvable, bool is_soft,
 
 
 bool
-ResolverContext::upgradeResolvable (constResolvablePtr resolvable, constResolvablePtr old_resolvable, bool is_soft, int other_penalty)
+ResolverContext::upgradeResItem (constResItemPtr resItem, constResItemPtr old_resItem, bool is_soft, int other_penalty)
 {
-    ResolvableStatus status;
+    ResItemStatus status;
     int priority;
 
-    if (getenv ("RC_SPEW")) fprintf (stderr, "ResolverContext[%p]::upgradeResolvable(%s upgrades %s)\n", this, resolvable->asString().c_str(), old_resolvable->asString().c_str());
+    if (getenv ("RC_SPEW")) fprintf (stderr, "ResolverContext[%p]::upgradeResItem(%s upgrades %s)\n", this, resItem->asString().c_str(), old_resItem->asString().c_str());
 
-    status = getStatus (resolvable);
+    status = getStatus (resItem);
 
-    if (resolvable_status_is_to_be_uninstalled (status))
+    if (resItem_status_is_to_be_uninstalled (status))
 	return false;
 
-    if (resolvable_status_is_to_be_installed (status))
+    if (resItem_status_is_to_be_installed (status))
 	return true;
 
-    setStatus (resolvable, is_soft ? RESOLVABLE_STATUS_TO_BE_INSTALLED_SOFT : RESOLVABLE_STATUS_TO_BE_INSTALLED);
+    setStatus (resItem, is_soft ? RESOLVABLE_STATUS_TO_BE_INSTALLED_SOFT : RESOLVABLE_STATUS_TO_BE_INSTALLED);
 
     if (status == RESOLVABLE_STATUS_UNINSTALLED) {
       
-	_download_size += resolvable->fileSize();
+	_download_size += resItem->fileSize();
 
 	// FIXME: Incomplete
 	// We should change installed_size to reflect the difference in
 	//   installed size between the old and new versions.
 
-	if (resolvable->local())
+	if (resItem->local())
 	    priority = 0;
 	else {
-	    priority = getChannelPriority (resolvable->channel());
+	    priority = getChannelPriority (resItem->channel());
 	}
 
 	if (priority < _min_priority) _min_priority = priority;
@@ -312,32 +312,32 @@ ResolverContext::upgradeResolvable (constResolvablePtr resolvable, constResolvab
 
 
 bool
-ResolverContext::uninstallResolvable (constResolvablePtr resolvable, bool part_of_upgrade, bool due_to_obsolete, bool due_to_unlink)
+ResolverContext::uninstallResItem (constResItemPtr resItem, bool part_of_upgrade, bool due_to_obsolete, bool due_to_unlink)
 {
-    ResolvableStatus status, new_status;
+    ResItemStatus status, new_status;
     std::string msg;
 
-    if (getenv ("RC_SPEW")) fprintf (stderr, "ResolverContext[%p]::uninstallResolvable(%s %s %s %s)\n", this, resolvable->asString().c_str(), part_of_upgrade ? "part_of_upgrade" : "", due_to_obsolete ? "due_to_obsolete": "", due_to_unlink ? "due_to_unlink" : "");
+    if (getenv ("RC_SPEW")) fprintf (stderr, "ResolverContext[%p]::uninstallResItem(%s %s %s %s)\n", this, resItem->asString().c_str(), part_of_upgrade ? "part_of_upgrade" : "", due_to_obsolete ? "due_to_obsolete": "", due_to_unlink ? "due_to_unlink" : "");
 
     assert (! (due_to_obsolete && due_to_unlink));
 
-    status = getStatus (resolvable);
+    status = getStatus (resItem);
 
     if (status == RESOLVABLE_STATUS_TO_BE_INSTALLED) {
-	msg = ((constSpecPtr)resolvable)->asString() + " is scheduled to be installed, but this is not possible because of dependency problems.";
-	addErrorString (resolvable, msg);
+	msg = ((constSpecPtr)resItem)->asString() + " is scheduled to be installed, but this is not possible because of dependency problems.";
+	addErrorString (resItem, msg);
 	return false;
     }
 
-    if (resolvable_status_is_to_be_uninstalled (status)
+    if (resItem_status_is_to_be_uninstalled (status)
 	&& status != RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK) {
 	return true;
     }
     
     if (status == RESOLVABLE_STATUS_UNINSTALLED
 	|| status == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK) {
-	msg = string ("Marking resolvable ") + ((constSpecPtr)resolvable)->asString() + " as uninstallable";
-	addInfoString (resolvable, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
+	msg = string ("Marking resItem ") + ((constSpecPtr)resItem)->asString() + " as uninstallable";
+	addInfoString (resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
     }
 
 
@@ -345,7 +345,7 @@ ResolverContext::uninstallResolvable (constResolvablePtr resolvable, bool part_o
     else if (due_to_unlink)	new_status = RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK;
     else			new_status = RESOLVABLE_STATUS_TO_BE_UNINSTALLED;
 
-    setStatus (resolvable, new_status);
+    setStatus (resItem, new_status);
     
     if (status == RESOLVABLE_STATUS_INSTALLED) {
 	/* FIXME: incomplete */
@@ -356,29 +356,29 @@ ResolverContext::uninstallResolvable (constResolvablePtr resolvable, bool part_o
 
 
 bool
-ResolverContext::resolvableIsPresent (constResolvablePtr resolvable)
+ResolverContext::resItemIsPresent (constResItemPtr resItem)
 {
-    ResolvableStatus status;
+    ResItemStatus status;
 
-    status = getStatus (resolvable);
-//fprintf (stderr, "ResolverContext::resolvableIsPresent(<%s>%s)\n", ResolverContext::toString(status).c_str(), resolvable->asString().c_str());
+    status = getStatus (resItem);
+//fprintf (stderr, "ResolverContext::resItemIsPresent(<%s>%s)\n", ResolverContext::toString(status).c_str(), resItem->asString().c_str());
     if (status == RESOLVABLE_STATUS_UNKNOWN)
 	return false;
 
-    return (status == RESOLVABLE_STATUS_INSTALLED) || resolvable_status_is_to_be_installed (status);
+    return (status == RESOLVABLE_STATUS_INSTALLED) || resItem_status_is_to_be_installed (status);
 }
 
 
 bool
-ResolverContext::resolvableIsAbsent (constResolvablePtr resolvable)
+ResolverContext::resItemIsAbsent (constResItemPtr resItem)
 {
-    ResolvableStatus status;
+    ResItemStatus status;
 
-    status = getStatus (resolvable);
+    status = getStatus (resItem);
     if (status == RESOLVABLE_STATUS_UNKNOWN)
 	return false;
 
-    return status == RESOLVABLE_STATUS_UNINSTALLED || resolvable_status_is_to_be_uninstalled (status);
+    return status == RESOLVABLE_STATUS_UNINSTALLED || resItem_status_is_to_be_uninstalled (status);
 }
 
 
@@ -386,7 +386,7 @@ ResolverContext::resolvableIsAbsent (constResolvablePtr resolvable)
 // marked
 
 void
-ResolverContext::foreachMarkedResolvable (MarkedResolvableFn fn, void *data) const
+ResolverContext::foreachMarkedResItem (MarkedResItemFn fn, void *data) const
 {
     constResolverContextPtr context = this;
     while (context) {
@@ -402,19 +402,19 @@ ResolverContext::foreachMarkedResolvable (MarkedResolvableFn fn, void *data) con
 // collect
 
 static void
-marked_resolvable_collector (constResolvablePtr resolvable, ResolvableStatus status, void *data)
+marked_resItem_collector (constResItemPtr resItem, ResItemStatus status, void *data)
 {
-    CResolvableList *rl = (CResolvableList *)data;
-    rl->push_back (resolvable);
+    CResItemList *rl = (CResItemList *)data;
+    rl->push_back (resItem);
 }
 
 
-CResolvableList
-ResolverContext::getMarkedResolvables (void) const
+CResItemList
+ResolverContext::getMarkedResItems (void) const
 {
-    CResolvableList rl;
+    CResItemList rl;
 
-    foreachMarkedResolvable (marked_resolvable_collector, &rl);
+    foreachMarkedResItem (marked_resItem_collector, &rl);
 
     return rl;
 }
@@ -424,54 +424,54 @@ ResolverContext::getMarkedResolvables (void) const
 
 typedef struct {
     WorldPtr world;
-    MarkedResolvableFn fn;
-    CResolvableList *rl;
+    MarkedResItemFn fn;
+    CResItemList *rl;
     int count;
 } InstallInfo;
 
 static void
-install_pkg_cb (constResolvablePtr resolvable, ResolvableStatus status, void *data)
+install_pkg_cb (constResItemPtr resItem, ResItemStatus status, void *data)
 {
     InstallInfo *info = (InstallInfo *)data;
-    if (resolvable_status_is_to_be_installed (status)
-	&& ! resolvable->isInstalled ()
-	&& info->world->findInstalledResolvable (resolvable) == NULL) {
+    if (resItem_status_is_to_be_installed (status)
+	&& ! resItem->isInstalled ()
+	&& info->world->findInstalledResItem (resItem) == NULL) {
 
-	if (info->fn) info->fn (resolvable, status, info->rl);
+	if (info->fn) info->fn (resItem, status, info->rl);
 	++info->count;
     }
 }
 
 
 int
-ResolverContext::foreachInstall (MarkedResolvableFn fn, void *data) const
+ResolverContext::foreachInstall (MarkedResItemFn fn, void *data) const
 {
-    CResolvableList *rl = (CResolvableList *)data;
+    CResItemList *rl = (CResItemList *)data;
     InstallInfo info = { world(), fn, rl, 0 };
 
-    foreachMarkedResolvable (install_pkg_cb, (void *)&info);
+    foreachMarkedResItem (install_pkg_cb, (void *)&info);
 
     return info.count;
 }
 
 
 static void
-context_resolvable_collector (constResolvablePtr resolvable, ResolvableStatus status, void *data)
+context_resItem_collector (constResItemPtr resItem, ResItemStatus status, void *data)
 {
-    CResolvableList *rl = (CResolvableList *)data;
-    if (resolvable_status_is_to_be_installed (status)
-	|| (resolvable_status_is_to_be_uninstalled (status) && resolvable->isInstalled ())) {
-	rl->push_front (resolvable);
+    CResItemList *rl = (CResItemList *)data;
+    if (resItem_status_is_to_be_installed (status)
+	|| (resItem_status_is_to_be_uninstalled (status) && resItem->isInstalled ())) {
+	rl->push_front (resItem);
     } 
 }
 
 
-CResolvableList
+CResItemList
 ResolverContext::getInstalls (void) const
 {
-    CResolvableList rl;
+    CResItemList rl;
 
-    foreachInstall (context_resolvable_collector, (void *)&rl);
+    foreachInstall (context_resItem_collector, (void *)&rl);
 
     return rl;
 }
@@ -482,28 +482,28 @@ ResolverContext::getInstalls (void) const
 
 typedef struct {
     WorldPtr world;
-    MarkedResolvablePairFn fn;
+    MarkedResItemPairFn fn;
     void *data;
     ResolverContextPtr context;
     int count;
 } UpgradeInfo;
 
 static void
-upgrade_pkg_cb (constResolvablePtr resolvable, ResolvableStatus status, void *data)
+upgrade_pkg_cb (constResItemPtr resItem, ResItemStatus status, void *data)
 {
     UpgradeInfo *info = (UpgradeInfo *)data;
 
-    constResolvablePtr to_be_upgraded;
-    ResolvableStatus tbu_status;
+    constResItemPtr to_be_upgraded;
+    ResItemStatus tbu_status;
 
-    if (resolvable_status_is_to_be_installed (status)
-	&& ! resolvable->isInstalled ()) {
+    if (resItem_status_is_to_be_installed (status)
+	&& ! resItem->isInstalled ()) {
 	
-	to_be_upgraded = info->world->findInstalledResolvable (resolvable);
+	to_be_upgraded = info->world->findInstalledResItem (resItem);
 	if (to_be_upgraded) {
 	    tbu_status = info->context->getStatus (to_be_upgraded);
 	    if (info->fn) {
-		info->fn (resolvable, status, to_be_upgraded, tbu_status, info->data);
+		info->fn (resItem, status, to_be_upgraded, tbu_status, info->data);
 	    }
 	    ++info->count;
 	}
@@ -512,30 +512,30 @@ upgrade_pkg_cb (constResolvablePtr resolvable, ResolvableStatus status, void *da
 
 
 int
-ResolverContext::foreachUpgrade (MarkedResolvablePairFn fn, void *data)
+ResolverContext::foreachUpgrade (MarkedResItemPairFn fn, void *data)
 {
     UpgradeInfo info = { world(), fn, data, this, 0 };
 
-    foreachMarkedResolvable (upgrade_pkg_cb, (void *)&info);
+    foreachMarkedResItem (upgrade_pkg_cb, (void *)&info);
 
     return info.count;
 }
 
 
 static void
-pair_resolvable_collector (constResolvablePtr resolvable, ResolvableStatus status, constResolvablePtr old, ResolvableStatus old_status, void *data)
+pair_resItem_collector (constResItemPtr resItem, ResItemStatus status, constResItemPtr old, ResItemStatus old_status, void *data)
 {
-    CResolvableList *rl = (CResolvableList *)data;
-    rl->push_back (resolvable);
+    CResItemList *rl = (CResItemList *)data;
+    rl->push_back (resItem);
 }
 
 
-CResolvableList
+CResItemList
 ResolverContext::getUpgrades (void)
 {
-    CResolvableList rl;
+    CResItemList rl;
 
-    foreachUpgrade (pair_resolvable_collector, (void *)&rl);
+    foreachUpgrade (pair_resItem_collector, (void *)&rl);
 
     return rl;
 }
@@ -544,60 +544,60 @@ ResolverContext::getUpgrades (void)
 //---------------------------------------------------------------------------
 // uninstall
 
-typedef std::map<std::string,constResolvablePtr> UpgradeTable;
+typedef std::map<std::string,constResItemPtr> UpgradeTable;
 
 typedef struct {
-    MarkedResolvableFn fn;
-    CResolvableList *rl;
+    MarkedResItemFn fn;
+    CResItemList *rl;
     UpgradeTable upgrade_hash;
     int count;
 } UninstallInfo;
 
 static void
-uninstall_pkg_cb (constResolvablePtr resolvable, ResolvableStatus status, void *data)
+uninstall_pkg_cb (constResItemPtr resItem, ResItemStatus status, void *data)
 {
     UninstallInfo *info = (UninstallInfo *)data;
 
-    UpgradeTable::const_iterator pos = info->upgrade_hash.find(resolvable->name());
+    UpgradeTable::const_iterator pos = info->upgrade_hash.find(resItem->name());
 
-    if (resolvable_status_is_to_be_uninstalled (status)
+    if (resItem_status_is_to_be_uninstalled (status)
 	&& pos == info->upgrade_hash.end()) {
 	if (info->fn)
-	    info->fn (resolvable, status, info->rl);
+	    info->fn (resItem, status, info->rl);
 	++info->count;
     }
 }
 
 static void
-build_upgrade_hash_cb (constResolvablePtr resolvable_add, ResolvableStatus status_add, constResolvablePtr resolvable_del, ResolvableStatus status_del, void *data)
+build_upgrade_hash_cb (constResItemPtr resItem_add, ResItemStatus status_add, constResItemPtr resItem_del, ResItemStatus status_del, void *data)
 {
     UpgradeTable *upgrade_hash = (UpgradeTable *)data;
-    (*upgrade_hash)[resolvable_del->name()] = resolvable_del;
+    (*upgrade_hash)[resItem_del->name()] = resItem_del;
 }
 
 
 int
-ResolverContext::foreachUninstall (MarkedResolvableFn fn, void *data)
+ResolverContext::foreachUninstall (MarkedResItemFn fn, void *data)
 {
     UninstallInfo info;		// inits upgrade_hash
 
     info.fn = fn;
-    info.rl = (CResolvableList *)data;
+    info.rl = (CResItemList *)data;
     info.count = 0;
 
     foreachUpgrade (build_upgrade_hash_cb, (void *)&(info.upgrade_hash));
-    foreachMarkedResolvable (uninstall_pkg_cb, (void *)&info);
+    foreachMarkedResItem (uninstall_pkg_cb, (void *)&info);
 
     return info.count;
 }
 
 
-CResolvableList
+CResItemList
 ResolverContext::getUninstalls (void)
 {
-    CResolvableList rl;
+    CResItemList rl;
 
-    foreachUninstall (context_resolvable_collector, (void *)&rl);
+    foreachUninstall (context_resItem_collector, (void *)&rl);
 
     return rl;
 }
@@ -606,10 +606,10 @@ ResolverContext::getUninstalls (void)
 //---------------------------------------------------------------------------
 
 static void
-install_count_cb (constResolvablePtr resolvable, ResolvableStatus status, void *data)
+install_count_cb (constResItemPtr resItem, ResItemStatus status, void *data)
 {
     int *count = (int *)data;
-    if (! resolvable->isInstalled ()) {
+    if (! resItem->isInstalled ()) {
 	++*count;
     }
 }
@@ -626,10 +626,10 @@ ResolverContext::installCount (void) const
 
 
 static void
-uninstall_count_cb (constResolvablePtr resolvable, ResolvableStatus status, void *data)
+uninstall_count_cb (constResItemPtr resItem, ResItemStatus status, void *data)
 {
     int *count = (int *)data;
-    if (resolvable->isInstalled ()) {
+    if (resItem->isInstalled ()) {
 	++*count;
     }
 }
@@ -649,7 +649,7 @@ ResolverContext::uninstallCount (void)
 int
 ResolverContext::upgradeCount (void)
 {
-    return foreachUpgrade ((MarkedResolvablePairFn)NULL, (void *)NULL);
+    return foreachUpgrade ((MarkedResItemPairFn)NULL, (void *)NULL);
 }
 
 
@@ -678,18 +678,18 @@ ResolverContext::addInfo (ResolverInfoPtr info)
 
 
 void
-ResolverContext::addInfoString (constResolvablePtr resolvable, int priority, string msg)
+ResolverContext::addInfoString (constResItemPtr resItem, int priority, string msg)
 {
-//    if (getenv ("RC_SPEW")) fprintf (stderr, "ResolverContext::addInfoString(%s) %s\n", resolvable ? resolvable->asString().c_str() : "", msg.c_str());
-    ResolverInfoPtr info = new ResolverInfoMisc (resolvable, priority, msg);
+//    if (getenv ("RC_SPEW")) fprintf (stderr, "ResolverContext::addInfoString(%s) %s\n", resItem ? resItem->asString().c_str() : "", msg.c_str());
+    ResolverInfoPtr info = new ResolverInfoMisc (resItem, priority, msg);
     addInfo (info);
 }
 
 
 void
-ResolverContext::addErrorString (constResolvablePtr resolvable, string msg)
+ResolverContext::addErrorString (constResItemPtr resItem, string msg)
 {
-    ResolverInfoPtr info = new ResolverInfoMisc (resolvable, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
+    ResolverInfoPtr info = new ResolverInfoMisc (resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
     info->flagAsError ();
     addInfo (info);
 }
@@ -698,45 +698,45 @@ ResolverContext::addErrorString (constResolvablePtr resolvable, string msg)
 //---------------------------------------------------------------------------
 // foreach info
 
-//  We call a resolvable mentioned by an error info an "error-resolvable".
-//  We call a resolvable mentioned by an important info an "important-resolvable".
+//  We call a resItem mentioned by an error info an "error-resItem".
+//  We call a resItem mentioned by an important info an "important-resItem".
 //
 //  The rules:
-//  (1) An info item that mentions an error-resolvable is important.
-//  (2) An info item is about an important-resolvable is important.
+//  (1) An info item that mentions an error-resItem is important.
+//  (2) An info item is about an important-resItem is important.
 
 static void
 mark_important_info (InfoList & il)
 {
-    CResolvableList error_list;		// FIXME, a map is faster
+    CResItemList error_list;		// FIXME, a map is faster
 
     bool did_something;
     int pass_num = 1;
 
-    /* First of all, store all error-resolvables in a list. */
+    /* First of all, store all error-resItems in a list. */
 
     for (InfoList::iterator iter = il.begin(); iter != il.end(); iter++) {
 	if ((*iter) != NULL					// list items might be set to NULL
 	    && (*iter)->error ()) {
-	    constResolvablePtr resolvable = (*iter)->resolvable();
-	    if (resolvable != NULL) {
-		CResolvableList::iterator pos;
+	    constResItemPtr resItem = (*iter)->resItem();
+	    if (resItem != NULL) {
+		CResItemList::iterator pos;
 		for (pos = error_list.begin(); pos != error_list.end(); pos++) {
-		    if (*pos == resolvable)
+		    if (*pos == resItem)
 			break;
 		}
 		if (pos == error_list.end()) {
-		    error_list.push_front (resolvable);
+		    error_list.push_front (resItem);
 		}
 	    }
 
-	    CResolvableList resolvables;
+	    CResItemList resItems;
 
 	    constResolverInfoContainerPtr c = *iter;			// check if it really is a container
-	    if (c != NULL) resolvables = c->resolvables();
+	    if (c != NULL) resItems = c->resItems();
 
-	    for (CResolvableList::iterator res_iter = resolvables.begin(); res_iter != resolvables.end(); res_iter++) {
-		CResolvableList::iterator pos;
+	    for (CResItemList::iterator res_iter = resItems.begin(); res_iter != resItems.end(); res_iter++) {
+		CResItemList::iterator pos;
 		for (pos = error_list.begin(); pos != error_list.end(); pos++) {
 		    if (*pos == *iter)
 			break;
@@ -748,7 +748,7 @@ mark_important_info (InfoList & il)
 	}
     }
 
-    CResolvableList important_list;	// FIXME, hash is faster
+    CResItemList important_list;	// FIXME, hash is faster
 
     do {
 	++pass_num;
@@ -761,7 +761,7 @@ mark_important_info (InfoList & il)
 		&& (*iter)->important ()) {
 		bool should_be_important = false;
 
-		for (CResolvableList::const_iterator res_iter = error_list.begin(); res_iter != error_list.end() && ! should_be_important; res_iter++) {
+		for (CResItemList::const_iterator res_iter = error_list.begin(); res_iter != error_list.end() && ! should_be_important; res_iter++) {
 		    constResolverInfoContainerPtr c = *iter;
 		    if (c != NULL					// check if it really is a container
 			&& c->mentions (*res_iter)) {
@@ -769,7 +769,7 @@ mark_important_info (InfoList & il)
 		    }
 		}
 
-		for (CResolvableList::const_iterator res_iter = important_list.begin(); res_iter != important_list.end() && ! should_be_important; res_iter++) {
+		for (CResItemList::const_iterator res_iter = important_list.begin(); res_iter != important_list.end() && ! should_be_important; res_iter++) {
 		    if ((*iter)->isAbout (*res_iter)) {
 			should_be_important = true;
 			break;
@@ -779,11 +779,11 @@ mark_important_info (InfoList & il)
 		if (should_be_important) {
 		    did_something = true;
 		    (*iter)->flagAsImportant ();
-		    CResolvableList resolvables;
+		    CResItemList resItems;
 		    constResolverInfoContainerPtr c = *iter;		// check if it really is a container
-		    if (c != NULL) resolvables = c->resolvables();
-		    for (CResolvableList::iterator res_iter = resolvables.begin(); res_iter != resolvables.end(); res_iter++) {
-			CResolvableList::iterator pos;
+		    if (c != NULL) resItems = c->resItems();
+		    for (CResItemList::iterator res_iter = resItems.begin(); res_iter != resItems.end(); res_iter++) {
+			CResItemList::iterator pos;
 			for (pos = important_list.begin(); pos != important_list.end(); pos++) {
 			    if (*pos == *res_iter)
 				break;
@@ -802,7 +802,7 @@ mark_important_info (InfoList & il)
 
 
 void
-ResolverContext::foreachInfo (ResolvablePtr resolvable, int priority, ResolverInfoFn fn, void *data)
+ResolverContext::foreachInfo (ResItemPtr resItem, int priority, ResolverInfoFn fn, void *data)
 {
     InfoList info_list;
 
@@ -812,7 +812,7 @@ ResolverContext::foreachInfo (ResolvablePtr resolvable, int priority, ResolverIn
     // Assemble a list of copies of all of the info objects
     while (context != NULL) {
 	for (InfoList::iterator iter = context->_log.begin(); iter != context->_log.end(); iter++) {
-	    if ((resolvable == NULL || (*iter)->resolvable() == resolvable)
+	    if ((resItem == NULL || (*iter)->resItem() == resItem)
 		&& (*iter)->priority() >= priority) {
 		info_list.push_back ((*iter)->copy());
 	    }
@@ -873,19 +873,19 @@ ResolverContext::getInfo (void)
 // spew
 
 static void
-spew_pkg_cb (constResolvablePtr resolvable, ResolvableStatus status, void *unused)
+spew_pkg_cb (constResItemPtr resItem, ResItemStatus status, void *unused)
 {
-    printf ("  %s (%s)\n", resolvable->asString().c_str(), ResolverContext::toString(status).c_str());
+    printf ("  %s (%s)\n", resItem->asString().c_str(), ResolverContext::toString(status).c_str());
 }
 
 
 void
-spew_pkg2_cb (constResolvablePtr resolvable1, ResolvableStatus status1, constResolvablePtr resolvable2, ResolvableStatus status2, void *unused)
+spew_pkg2_cb (constResItemPtr resItem1, ResItemStatus status1, constResItemPtr resItem2, ResItemStatus status2, void *unused)
 {
     const char *s1, *s2;
 
-    s1 = resolvable1->asString().c_str();
-    s2 = resolvable2->asString().c_str();
+    s1 = resItem1->asString().c_str();
+    s2 = resItem2->asString().c_str();
 
     printf ("  %s (%s) => %s (%s)\n", s2, ResolverContext::toString(status2).c_str(), s1, ResolverContext::toString(status1).c_str());
 }
@@ -936,19 +936,19 @@ typedef struct {
 
 
 static bool
-requirement_met_cb (constResolvablePtr resolvable, constSpecPtr spec, void *data)
+requirement_met_cb (constResItemPtr resItem, constSpecPtr spec, void *data)
 {
     RequirementMetInfo *info = (RequirementMetInfo *)data;
 
-    // info->dep is set for resolvable set children. If it is set, query the
+    // info->dep is set for resItem set children. If it is set, query the
     //   exact version only.
     if ((info->dep == NULL || info->dep->equals(spec))
-	&& info->context->resolvableIsPresent (resolvable))
+	&& info->context->resItemIsPresent (resItem))
     {
 	info->flag = true;
     }
 
-//fprintf (stderr, "requirement_met_cb(%s, %s) [info->dep %s] -> %s\n", resolvable->asString().c_str(), spec->asString().c_str(), info->dep != NULL ? info->dep->asString().c_str() : "(none)", info->flag ? "true" : "false");
+//fprintf (stderr, "requirement_met_cb(%s, %s) [info->dep %s] -> %s\n", resItem->asString().c_str(), spec->asString().c_str(), info->dep != NULL ? info->dep->asString().c_str() : "(none)", info->flag ? "true" : "false");
     return ! info->flag;
 }
 
@@ -962,7 +962,7 @@ ResolverContext::requirementIsMet (constDependencyPtr dependency, bool is_child)
     info.dep = is_child ? dependency : NULL;
     info.flag = false;
 
-    world()->foreachProvidingResolvable (dependency, requirement_met_cb, (void *)&info);
+    world()->foreachProvidingResItem (dependency, requirement_met_cb, (void *)&info);
 
     return info.flag;
 }
@@ -971,13 +971,13 @@ ResolverContext::requirementIsMet (constDependencyPtr dependency, bool is_child)
 //---------------------------------------------------------------------------
 
 static bool
-requirement_possible_cb (constResolvablePtr resolvable, constSpecPtr spec, void *data)
+requirement_possible_cb (constResItemPtr resItem, constSpecPtr spec, void *data)
 {
     RequirementMetInfo *info = (RequirementMetInfo *)data;
 
-    ResolvableStatus status = info->context->getStatus (resolvable);
+    ResItemStatus status = info->context->getStatus (resItem);
 
-    if (! resolvable_status_is_to_be_uninstalled (status)
+    if (! resItem_status_is_to_be_uninstalled (status)
 	|| status == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK) {
 	info->flag = true;
     }
@@ -994,16 +994,16 @@ ResolverContext::requirementIsPossible (constDependencyPtr dep)
     info.context = this;
     info.flag = false;
 
-    world()->foreachProvidingResolvable (dep, requirement_possible_cb, (void *)&info);
+    world()->foreachProvidingResItem (dep, requirement_possible_cb, (void *)&info);
     
     return info.flag;
 }
 
 
 bool
-ResolverContext::resolvableIsPossible (constResolvablePtr resolvable)
+ResolverContext::resItemIsPossible (constResItemPtr resItem)
 {
-    CDependencyList requires = resolvable->requires();
+    CDependencyList requires = resItem->requires();
     for (CDependencyList::iterator iter = requires.begin(); iter !=  requires.end(); iter++) {
 	    if (! requirementIsPossible (*iter)) {
 		return false;
@@ -1021,25 +1021,25 @@ typedef struct {
 } DupNameCheckInfo;
 
 static void
-dup_name_check_cb (constResolvablePtr resolvable, ResolvableStatus status, void *data)
+dup_name_check_cb (constResItemPtr resItem, ResItemStatus status, void *data)
 {
     DupNameCheckInfo *info = (DupNameCheckInfo *)data;
     if (! info->flag
-	&& resolvable_status_is_to_be_installed (status)
-	&& info->spec->name() == resolvable->name()
-	&& !info->spec->equals(resolvable)) {
+	&& resItem_status_is_to_be_installed (status)
+	&& info->spec->name() == resItem->name()
+	&& !info->spec->equals(resItem)) {
 	info->flag = true;
     }
 }
 
 bool
-ResolverContext::isParallelInstall (constResolvablePtr resolvable)
+ResolverContext::isParallelInstall (constResItemPtr resItem)
 {
     DupNameCheckInfo info;
 
-    info.spec = resolvable;
+    info.spec = resItem;
     info.flag = false;
-    foreachMarkedResolvable (dup_name_check_cb, (void *)&info);
+    foreachMarkedResItem (dup_name_check_cb, (void *)&info);
 
     return info.flag;
 }

@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
-/* Resolvable.h
+/* ResItem.h
  * Copyright (C) 2000-2002 Ximian, Inc.
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,15 +18,15 @@
  * 02111-1307, USA.
  */
 
-#ifndef _Resolvable_h
-#define _Resolvable_h
+#ifndef _ResItem_h
+#define _ResItem_h
 
 #include <list>
 #include <iosfwd>
 #include <string.h>
 #include <sys/types.h>
 
-#include <zypp/solver/detail/ResolvablePtr.h>
+#include <zypp/solver/detail/ResItemPtr.h>
 #include <zypp/solver/detail/StoreWorldPtr.h>
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
@@ -35,24 +35,24 @@
 namespace ZYPP {
 //////////////////////////////////////////////////////////////////
 
-typedef std::list<ResolvablePtr> ResolvableList;
-typedef std::list<constResolvablePtr> CResolvableList;
+typedef std::list<ResItemPtr> ResItemList;
+typedef std::list<constResItemPtr> CResItemList;
 
-typedef bool (*ResolvableFn) (ResolvablePtr r, void *data);
-typedef bool (*CResolvableFn) (constResolvablePtr r, void *data);
-typedef bool (*ResolvablePairFn) (constResolvablePtr r1, constResolvablePtr r2, void *data);
-typedef bool (*ResolvableAndSpecFn) (constResolvablePtr r, constSpecPtr spec, void *data);
-typedef bool (*ResolvableAndDepFn) (constResolvablePtr r, constDependencyPtr dep, void *data);
+typedef bool (*ResItemFn) (ResItemPtr r, void *data);
+typedef bool (*CResItemFn) (constResItemPtr r, void *data);
+typedef bool (*ResItemPairFn) (constResItemPtr r1, constResItemPtr r2, void *data);
+typedef bool (*ResItemAndSpecFn) (constResItemPtr r, constSpecPtr spec, void *data);
+typedef bool (*ResItemAndDepFn) (constResItemPtr r, constDependencyPtr dep, void *data);
 
 ///////////////////////////////////////////////////////////////////
 //
-//	CLASS NAME : Resolvable
+//	CLASS NAME : ResItem
 /**
  *
  **/
 
-class Resolvable : public Spec {
-    REP_BODY(Resolvable);
+class ResItem : public Spec {
+    REP_BODY(ResItem);
 
   private:
     constChannelPtr _channel;
@@ -81,23 +81,23 @@ class Resolvable : public Spec {
 
   public:
 
-    Resolvable(const Kind & kind, const std::string & name, int epoch = -1, const std::string & version = "", const std::string & release = "", const Arch * arch = Arch::Unknown);
+    ResItem(const Kind & kind, const std::string & name, int epoch = -1, const std::string & version = "", const std::string & release = "", const Arch * arch = Arch::Unknown);
 
-    Resolvable(const XmlNodePtr node);
+    ResItem(const XmlNodePtr node);
 
-    virtual ~Resolvable();
+    virtual ~ResItem();
 
     // ---------------------------------- I/O
 
     const XmlNodePtr asXmlNode (void) const;
 
-    static std::string toString ( const Resolvable & res, bool full = false );
+    static std::string toString ( const ResItem & res, bool full = false );
 
-    static std::string toString ( const CResolvableList & reslist, bool full = false );
+    static std::string toString ( const CResItemList & reslist, bool full = false );
 
     virtual std::ostream & dumpOn( std::ostream & str ) const;
 
-    friend std::ostream& operator<<( std::ostream & str, const Resolvable & str);
+    friend std::ostream& operator<<( std::ostream & str, const ResItem & str);
 
     std::string asString ( bool full = false ) const;
 
@@ -147,4 +147,4 @@ class Resolvable : public Spec {
 }; // namespace ZYPP
 ///////////////////////////////////////////////////////////////////
 
-#endif // _Resolvable_h
+#endif // _ResItem_h

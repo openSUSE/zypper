@@ -196,10 +196,10 @@ World::isSubscribed (constChannelPtr channel) const
 
 
 //---------------------------------------------------------------------------
-// Resolvable Locks
+// ResItem Locks
 
 typedef struct {
-    constResolvablePtr resolvable;
+    constResItemPtr resItem;
     WorldPtr world;
     bool is_locked;
 } IsLockedInfo;
@@ -210,7 +210,7 @@ is_locked_cb (constMatchPtr match, void *data)
 {
     IsLockedInfo *info = (IsLockedInfo *)data;
 
-    if (match->test (info->resolvable, info->world)) {
+    if (match->test (info->resItem, info->world)) {
 	info->is_locked = true;
 	return false;
     }
@@ -220,11 +220,11 @@ is_locked_cb (constMatchPtr match, void *data)
 
 
 bool
-World::resolvableIsLocked (constResolvablePtr resolvable)
+World::resItemIsLocked (constResItemPtr resItem)
 {
     IsLockedInfo info;
 
-    info.resolvable = resolvable;
+    info.resItem = resItem;
     info.world = this;
     info.is_locked = false;
 
@@ -238,14 +238,14 @@ World::resolvableIsLocked (constResolvablePtr resolvable)
 // Transacting
 
 bool
-World::canTransactResolvable (constResolvablePtr resolvable)
+World::canTransactResItem (constResItemPtr resItem)
 {
-  if (getenv("FIXME"))      fprintf (stderr, "World::canTransactResolvable() not implemented\n");
+  if (getenv("FIXME"))      fprintf (stderr, "World::canTransactResItem() not implemented\n");
   return false;
 }
 
 bool
-World::transact (const ResolvableList & installResolvables, const ResolvableList & remove_resolvables, int flags)
+World::transact (const ResItemList & installResItems, const ResItemList & remove_resItems, int flags)
 {
   if (getenv("FIXME"))      fprintf (stderr, "World::transact() not implemented\n");
   return false;
@@ -297,29 +297,29 @@ World::setRefreshFunction (WorldRefreshFn refresh_fn)
 // Upgrades
 
 typedef struct  {
-    constResolvablePtr original_resolvable;
-    CResolvableFn fn;
+    constResItemPtr original_resItem;
+    CResItemFn fn;
     void *data;
     int count;
     WorldPtr world;
 } ForeachUpgradeInfo;
 
 static bool
-foreach_upgrade_cb (constResolvablePtr resolvable, void *data)
+foreach_upgrade_cb (constResItemPtr resItem, void *data)
 {
     ForeachUpgradeInfo *info = (ForeachUpgradeInfo *)data;
     int cmp;
 
-    cmp = GVersion.compare (info->original_resolvable, resolvable);
+    cmp = GVersion.compare (info->original_resItem, resItem);
 
     if (cmp >= 0)				// original is already better
 	return true;
 
-    if (info->world->resolvableIsLocked (resolvable))
+    if (info->world->resItemIsLocked (resItem))
 	return true;
 
     if (info->fn)
-	info->fn (resolvable, info->data);
+	info->fn (resItem, info->data);
     ++info->count;
 
     return true;
@@ -328,34 +328,34 @@ foreach_upgrade_cb (constResolvablePtr resolvable, void *data)
 
 // rc_world_foreach_upgrade:
 // @world: An #RCWorld.
-// @resolvable: An #RCResolvable.
+// @resItem: An #RCResItem.
 // @channel: An #RCChannel or channel wildcard.
 // @fn: A callback function.
 // @user_data: Pointer passed to the callback function.
 //
-// Searchs @world for all resolvables whose channel matches
-// @channel and that are an upgrade for @resolvable.
-// (To be precise, an upgrade is a resolvable with the same
-// name as @resolvable but with a greater version number.)
+// Searchs @world for all resItems whose channel matches
+// @channel and that are an upgrade for @resItem.
+// (To be precise, an upgrade is a resItem with the same
+// name as @resItem but with a greater version number.)
 //
-// Return value: The number of matching resolvables
+// Return value: The number of matching resItems
 // that the callback functions was invoked on, or
 // -1 in the case of an error.
 
 int
-World::foreachUpgrade (constResolvablePtr resolvable, ChannelPtr channel, CResolvableFn fn, void *data)
+World::foreachUpgrade (constResItemPtr resItem, ChannelPtr channel, CResItemFn fn, void *data)
 {
     ForeachUpgradeInfo info;
 
     syncConditional (channel);
 
-    info.original_resolvable = resolvable;
+    info.original_resItem = resItem;
     info.fn = fn;
     info.data = data;
     info.count = 0;
     info.world = this;
 
-    foreachResolvableByName (resolvable->name(), channel, foreach_upgrade_cb, (void *)&info);
+    foreachResItemByName (resItem->name(), channel, foreach_upgrade_cb, (void *)&info);
 
     return info.count;
 }
@@ -364,17 +364,17 @@ World::foreachUpgrade (constResolvablePtr resolvable, ChannelPtr channel, CResol
 
 typedef struct {
     WorldPtr world;
-    constResolvablePtr system_resolvable;
-    CResolvableList best_upgrades;
+    constResItemPtr system_resItem;
+    CResItemList best_upgrades;
     bool subscribed_only;
-    ResolvablePairFn fn;
+    ResItemPairFn fn;
     void *data;
     int count;
 } SystemUpgradeInfo;
 
 
 static bool
-foreach_system_upgrade_cb (constResolvablePtr upgrade, void *data)
+foreach_system_upgrade_cb (constResItemPtr upgrade, void *data)
 {
     SystemUpgradeInfo *info = (SystemUpgradeInfo *)data;
     constChannelPtr channel = upgrade->channel();
@@ -385,7 +385,7 @@ foreach_system_upgrade_cb (constResolvablePtr upgrade, void *data)
 	    return true;
     }
 
-    if (info->world->resolvableIsLocked (upgrade))
+    if (info->world->resItemIsLocked (upgrade))
 	return true;
 
     if (info->best_upgrades.empty()) {
@@ -393,12 +393,12 @@ foreach_system_upgrade_cb (constResolvablePtr upgrade, void *data)
     }
     else {
 	/* All the versions are equal, so picking the first is fine */
-	constResolvablePtr best_up = info->best_upgrades.front();
+	constResItemPtr best_up = info->best_upgrades.front();
 
 	cmp = GVersion.compare (best_up, upgrade);
 
 	if (cmp <= 0) {
-	    /* We have a new best resolvable... */
+	    /* We have a new best resItem... */
 	    info->best_upgrades.pop_front();
 	    info->best_upgrades.push_back (upgrade);
 	}
@@ -409,22 +409,22 @@ foreach_system_upgrade_cb (constResolvablePtr upgrade, void *data)
 
 
 static void
-foreach_system_resolvable_cb (const string & name, constResolvablePtr resolvable, SystemUpgradeInfo *info)
+foreach_system_resItem_cb (const string & name, constResItemPtr resItem, SystemUpgradeInfo *info)
 {
-    info->system_resolvable = resolvable;
+    info->system_resItem = resItem;
     info->best_upgrades.clear();
 
-    /* If the resolvable is excluded, skip it. */
-    if (info->world->resolvableIsLocked (info->system_resolvable))
+    /* If the resItem is excluded, skip it. */
+    if (info->world->resItemIsLocked (info->system_resItem))
 	return;
 
-    info->world->foreachUpgrade (info->system_resolvable, new Channel (CHANNEL_TYPE_NONSYSTEM), foreach_system_upgrade_cb, info);
+    info->world->foreachUpgrade (info->system_resItem, new Channel (CHANNEL_TYPE_NONSYSTEM), foreach_system_upgrade_cb, info);
 
-    for (CResolvableList::const_iterator iter = info->best_upgrades.begin(); iter != info->best_upgrades.end(); iter++) {
-	constResolvablePtr upgrade = *iter;
+    for (CResItemList::const_iterator iter = info->best_upgrades.begin(); iter != info->best_upgrades.end(); iter++) {
+	constResItemPtr upgrade = *iter;
 
 	if (info->fn)
-	    info->fn (info->system_resolvable, upgrade, info->data);
+	    info->fn (info->system_resItem, upgrade, info->data);
 
 	++info->count;
     }
@@ -432,21 +432,21 @@ foreach_system_resolvable_cb (const string & name, constResolvablePtr resolvable
     info->best_upgrades.clear();
 }
 
-typedef map<const string,constResolvablePtr> UniqueTable;
+typedef map<const string,constResItemPtr> UniqueTable;
 
 static bool
-build_unique_table_cb (constResolvablePtr resolvable, void *data)
+build_unique_table_cb (constResItemPtr resItem, void *data)
 {
     UniqueTable *unique_table = (UniqueTable *)data;
 
-    UniqueTable::const_iterator pos = unique_table->find (resolvable->name());
+    UniqueTable::const_iterator pos = unique_table->find (resItem->name());
 
     if (pos != unique_table->end()) {
-	if (GVersion.compare (resolvable, pos->second) <= 0)
+	if (GVersion.compare (resItem, pos->second) <= 0)
 	    return true;
     }
 
-    (*unique_table)[resolvable->name()] = resolvable;
+    (*unique_table)[resItem->name()] = resItem;
 
     return true;
 }
@@ -459,23 +459,23 @@ build_unique_table_cb (constResolvablePtr resolvable, void *data)
  * @fn: A callback function.
  * @user_data: Pointer to be passed to the callback function.
  *
- * Iterates across all system resolvables in @world for which there
- * exists an upgrade, and passes both the original resolvable and
- * the upgrade resolvable to the callback function.
+ * Iterates across all system resItems in @world for which there
+ * exists an upgrade, and passes both the original resItem and
+ * the upgrade resItem to the callback function.
  *
- * Return value: The number of matching resolvables that the callback
+ * Return value: The number of matching resItems that the callback
  * function was invoked on, or -1 in case of an error.
  **/
 
 int
-World::foreachSystemUpgrade (bool subscribed_only, ResolvablePairFn fn, void *data)
+World::foreachSystemUpgrade (bool subscribed_only, ResItemPairFn fn, void *data)
 {
     SystemUpgradeInfo info;
     UniqueTable unique_table;
 
-    /* rc_world_foreach_resolvable calls rc_world_sync */
+    /* rc_world_foreach_resItem calls rc_world_sync */
 
-    foreachResolvable (new Channel (CHANNEL_TYPE_SYSTEM), build_unique_table_cb, &unique_table);
+    foreachResItem (new Channel (CHANNEL_TYPE_SYSTEM), build_unique_table_cb, &unique_table);
 
     info.world = this;
     info.subscribed_only = subscribed_only;
@@ -484,7 +484,7 @@ World::foreachSystemUpgrade (bool subscribed_only, ResolvablePairFn fn, void *da
     info.count = 0;
 
     for (UniqueTable::const_iterator iter = unique_table.begin(); iter != unique_table.end(); iter++) {
-	foreach_system_resolvable_cb (iter->first, iter->second, &info);
+	foreach_system_resItem_cb (iter->first, iter->second, &info);
     }
 
     return info.count;
@@ -492,14 +492,14 @@ World::foreachSystemUpgrade (bool subscribed_only, ResolvablePairFn fn, void *da
 
 
 PackageUpdateList
-World::getUpgrades (constResolvablePtr resolvable, constChannelPtr channel)
+World::getUpgrades (constResItemPtr resItem, constChannelPtr channel)
 {
     fprintf (stderr, "World::getUpgrades not implemented\n");
   return PackageUpdateList();
 }
 
-constResolvablePtr
-World::getBestUpgrade (constResolvablePtr resolvable, bool subscribed_only)
+constResItemPtr
+World::getBestUpgrade (constResItemPtr resItem, bool subscribed_only)
 {
     fprintf (stderr, "World::getBestUpgrade not implemented\n");
   return 0;

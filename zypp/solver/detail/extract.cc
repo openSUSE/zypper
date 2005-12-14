@@ -37,7 +37,7 @@ using namespace std;
 
 
 int
-extract_packages_from_xml_node (XmlNodePtr node, ChannelPtr channel, CResolvableFn callback, void *data)
+extract_packages_from_xml_node (XmlNodePtr node, ChannelPtr channel, CResItemFn callback, void *data)
 {
     PackagePtr package;
     int count = 0;
@@ -77,7 +77,7 @@ extract_packages_from_xml_node (XmlNodePtr node, ChannelPtr channel, CResolvable
 
 
 int 
-extract_packages_from_helix_buffer (const char *buf, size_t len, ChannelPtr channel, CResolvableFn callback, void *data)
+extract_packages_from_helix_buffer (const char *buf, size_t len, ChannelPtr channel, CResItemFn callback, void *data)
 {
     unsigned int count = 0;
     PackageList packages;
@@ -109,7 +109,7 @@ extract_packages_from_helix_buffer (const char *buf, size_t len, ChannelPtr chan
 
 
 int
-extract_packages_from_helix_file (const string & filename, ChannelPtr channel, CResolvableFn callback, void *data)
+extract_packages_from_helix_file (const string & filename, ChannelPtr channel, CResItemFn callback, void *data)
 {
     Buffer *buf;
     int count;
@@ -130,7 +130,7 @@ extract_packages_from_helix_file (const string & filename, ChannelPtr channel, C
 
 
 int
-extract_packages_from_undump_buffer (const char *buf, size_t len, ChannelAndSubscribedFn channel_callback, CResolvableFn resolvable_callback, MatchFn lock_callback, void *data)
+extract_packages_from_undump_buffer (const char *buf, size_t len, ChannelAndSubscribedFn channel_callback, CResItemFn resItem_callback, MatchFn lock_callback, void *data)
 {
     xmlDoc *doc;
     XmlNodePtr dump_node;
@@ -184,7 +184,7 @@ extract_packages_from_undump_buffer (const char *buf, size_t len, ChannelAndSubs
 		channel_callback (system_channel, false, data);
 	    }
 	    
-	    subcount = extract_packages_from_xml_node (channel_node, system_channel, resolvable_callback, data);
+	    subcount = extract_packages_from_xml_node (channel_node, system_channel, resItem_callback, data);
 
 	    if (subcount < 0) {
 		/* Do something clever */
@@ -203,9 +203,9 @@ extract_packages_from_undump_buffer (const char *buf, size_t len, ChannelAndSubs
 		channel_callback (current_channel, subscribed != 0, data);
 	    }
 
-	    if (resolvable_callback) {
+	    if (resItem_callback) {
 		int subcount;
-		subcount = extract_packages_from_xml_node (channel_node, current_channel, resolvable_callback, data);
+		subcount = extract_packages_from_xml_node (channel_node, current_channel, resItem_callback, data);
 		if (subcount < 0) {
 		    /* FIXME: do something clever */
 		    fprintf (stderr, "No packages found\n");
@@ -225,7 +225,7 @@ extract_packages_from_undump_buffer (const char *buf, size_t len, ChannelAndSubs
 
 
 int
-extract_packages_from_undump_file (const string & filename, ChannelAndSubscribedFn channel_callback, CResolvableFn resolvable_callback, MatchFn lock_callback, void *data)
+extract_packages_from_undump_file (const string & filename, ChannelAndSubscribedFn channel_callback, CResItemFn resItem_callback, MatchFn lock_callback, void *data)
 {
     Buffer *buf;
     int count;
@@ -237,7 +237,7 @@ extract_packages_from_undump_file (const string & filename, ChannelAndSubscribed
     if (buf == NULL)
 	return -1;
 
-    count = extract_packages_from_undump_buffer ((const char *)(buf->data), buf->size, channel_callback, resolvable_callback, lock_callback, data);
+    count = extract_packages_from_undump_buffer ((const char *)(buf->data), buf->size, channel_callback, resItem_callback, lock_callback, data);
 
     buffer_unmap_file (buf);
 
@@ -247,13 +247,13 @@ extract_packages_from_undump_file (const string & filename, ChannelAndSubscribed
 #if 0
 /* ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** */
 
-static ResolvablePtr
+static ResItemPtr
 fill_debian_package (const char *buf, const char *url_prefix, int *off)
 {
     const char *ibuf;
     RCPackageUpdate *up = NULL;
-    ResolvablePtr r;
-    ResolvableList requires, provides, conflicts, suggests, recommends;
+    ResItemPtr r;
+    ResItemList requires, provides, conflicts, suggests, recommends;
 
     up = rc_package_update_new ();
 
@@ -323,7 +323,7 @@ fill_debian_package (const char *buf, const char *url_prefix, int *off)
 	}
 
 	if (!strncmp (key, "package", strlen ("package"))) {
-	    rc_resolvable_spec_set_name (RC_RESOLVABLE_SPEC (pkg), value->str);
+	    rc_resItem_spec_set_name (RC_RESOLVABLE_SPEC (pkg), value->str);
 	} else if (!strncmp (key, "installed-size",
 			     strlen ("installed-size"))) {
 	    up->installed_size = strtoul (value->str, NULL, 10) * 1024;
@@ -347,7 +347,7 @@ fill_debian_package (const char *buf, const char *url_prefix, int *off)
 		pkg->description = g_strconcat (newline + 1, "\n", NULL);
 	    }
 	} else if (!strncmp (key, "version", strlen ("version"))) {
-	    RCResolvableSpec *spec = RC_RESOLVABLE_SPEC (pkg);
+	    RCResItemSpec *spec = RC_RESOLVABLE_SPEC (pkg);
 	    rc_version_parse (value->str, spec);
 	} else if (!strncmp (key, "section", strlen ("section"))) {
 	    pkg->section = rc_debman_section_to_package_section (value->str);
@@ -387,7 +387,7 @@ fill_debian_package (const char *buf, const char *url_prefix, int *off)
 	} else if (!strncmp (key, "md5sum", strlen ("md5sum"))) {
 	    up->md5sum = strdup (value->str);
 	} else if (!strncmp (key, "architecture", strlen ("architecture"))) {
-	    rc_resolvable_spec_set_arch (RC_RESOLVABLE_SPEC (pkg), rc_arch_from_string (value->str));
+	    rc_resItem_spec_set_arch (RC_RESOLVABLE_SPEC (pkg), rc_arch_from_string (value->str));
 	}
 
 	g_string_free (value, true);
@@ -395,25 +395,25 @@ fill_debian_package (const char *buf, const char *url_prefix, int *off)
 
     up->importance = RC_IMPORTANCE_SUGGESTED;
     up->description = strdup ("Upstream Debian release");
-    rc_resolvable_spec_copy (rc_package_update_get_spec(up), RC_RESOLVABLE_SPEC (pkg));
+    rc_resItem_spec_copy (rc_package_update_get_spec(up), RC_RESOLVABLE_SPEC (pkg));
     rc_package_add_update (pkg, up);
 
     r = RC_RESOLVABLE (pkg);
 
     /* Make sure to provide myself, for the dep code! */
-    provides = g_slist_append (provides, rc_resolvable_dep_new_from_spec
+    provides = g_slist_append (provides, rc_resItem_dep_new_from_spec
 			       (RC_RESOLVABLE_SPEC (pkg),
 				RC_RELATION_EQUAL,
 				RC_TYPE_PACKAGE,
-				rc_resolvable_get_channel (r),
+				rc_resItem_get_channel (r),
 				false, false));
 
-    rc_resolvable_set_requires  (r, requires);
-    rc_resolvable_set_provides  (r, provides);
-    rc_resolvable_set_conflicts (r, conflicts);
-    rc_resolvable_set_obsoletes (r, NULL);
-    rc_resolvable_set_suggests  (r, suggests);
-    rc_resolvable_set_recommends(r, recommends);
+    rc_resItem_set_requires  (r, requires);
+    rc_resItem_set_provides  (r, provides);
+    rc_resItem_set_conflicts (r, conflicts);
+    rc_resItem_set_obsoletes (r, NULL);
+    rc_resItem_set_suggests  (r, suggests);
+    rc_resItem_set_recommends(r, recommends);
     /* returns the number of characters we processed */
     return ibuf - buf;
 }
@@ -421,7 +421,7 @@ fill_debian_package (const char *buf, const char *url_prefix, int *off)
 #endif
 
 int 
-extract_packages_from_debian_buffer (const char *buf, size_t len, ChannelPtr channel, CResolvableFn callback, void *data)
+extract_packages_from_debian_buffer (const char *buf, size_t len, ChannelPtr channel, CResItemFn callback, void *data)
 {
     const char *pos;
     int count = 0;
@@ -433,14 +433,14 @@ extract_packages_from_debian_buffer (const char *buf, size_t len, ChannelPtr cha
 	int off;
 
 	/* All debian packages "have" epochs */
-	ResolvablePtr resolvable = fill_debian_package (iter, channel->getFilePath (), &off);
+	ResItemPtr resItem = fill_debian_package (iter, channel->getFilePath (), &off);
 
-	resolvable->setEpoch (0);
-	resolvable->setArch (Arch::Noarch);
-	resolvable->setChannel (channel);
+	resItem->setEpoch (0);
+	resItem->setArch (Arch::Noarch);
+	resItem->setChannel (channel);
 
 	if (callback)
-	    callback (resolvable, data);
+	    callback (resItem, data);
 
 	++count;
 
@@ -452,7 +452,7 @@ extract_packages_from_debian_buffer (const char *buf, size_t len, ChannelPtr cha
 
 
 int
-extract_packages_from_debian_file (const string & filename, ChannelPtr channel, CResolvableFn callback, void *data)
+extract_packages_from_debian_file (const string & filename, ChannelPtr channel, CResItemFn callback, void *data)
 {
     Buffer *buf;
     int count;
@@ -515,7 +515,7 @@ extract_yum_package (const guint8 *data, size_t len,
     rc_rpmman_depends_fill (rpmman, h, p, true);
 
     pu = rc_package_update_new ();
-    rc_resolvable_spec_copy (rc_package_update_get_spec (pu), RC_RESOLVABLE_SPEC (p));
+    rc_resItem_spec_copy (rc_package_update_get_spec (pu), RC_RESOLVABLE_SPEC (p));
     pu->importance = RC_IMPORTANCE_SUGGESTED;
     pu->description = strdup ("No information available.");
     pu->package_url = url;
@@ -532,7 +532,7 @@ int
 extract_packages_from_aptrpm_buffer (const guint8 *data, size_t len,
 					RCPackman *packman,
 					ChannelPtr channel,
-					CResolvableFn callback,
+					CResItemFn callback,
 					void * user_data)
 {
 #ifndef ENABLE_RPM
@@ -545,7 +545,7 @@ extract_packages_from_aptrpm_buffer (const guint8 *data, size_t len,
     const int hdrmagic_len = 8;
     const char *hdrmagic;
     const guint8 *cur_ptr;
-    RCResolvableSpec *spec;
+    RCResItemSpec *spec;
 
 
     g_return_val_if_fail (packman != NULL, -1);
@@ -609,10 +609,10 @@ extract_packages_from_aptrpm_buffer (const guint8 *data, size_t len,
 	rc_rpmman_read_header (rpmman, h, p);
 	rc_rpmman_depends_fill (rpmman, h, p, true);
 
-	rc_resolvable_set_channel (RC_RESOLVABLE (p), channel);
+	rc_resItem_set_channel (RC_RESOLVABLE (p), channel);
 
 	pu = rc_package_update_new ();
-	rc_resolvable_spec_copy (rc_package_update_get_spec (pu), RC_RESOLVABLE_SPEC (p));
+	rc_resItem_spec_copy (rc_package_update_get_spec (pu), RC_RESOLVABLE_SPEC (p));
 	pu->importance = RC_IMPORTANCE_SUGGESTED;
 	pu->description = strdup ("No information available.");
 
@@ -620,15 +620,15 @@ extract_packages_from_aptrpm_buffer (const guint8 *data, size_t len,
 	spec = RC_RESOLVABLE_SPEC (p);
 	pu->package_url = strdup_printf ("%s/%s-%s-%s.%s.rpm",
 					   rc_channel_get_file_path (channel),
-					   rc_resolvable_spec_get_name (spec),
-					   rc_resolvable_spec_get_version (spec),
-					   rc_resolvable_spec_get_release (spec),
+					   rc_resItem_spec_get_name (spec),
+					   rc_resItem_spec_get_version (spec),
+					   rc_resItem_spec_get_release (spec),
 					   archstr);
 
 	p->history = g_slist_append (p->history, pu);
 
 	if (callback)
-	    callback ((RCResolvable *) p, user_data);
+	    callback ((RCResItem *) p, user_data);
 
 	g_object_unref (p);
 
@@ -664,7 +664,7 @@ int
 extract_packages_from_aptrpm_file (const char *filename,
 				      RCPackman *packman,
 				      ChannelPtr channel,
-				      CResolvableFn callback,
+				      CResItemFn callback,
 				      void * user_data)
 {
     WorldPtr world = *((WorldPtr *)data);
@@ -715,7 +715,7 @@ hash_recurse_cb (PackagePtr pkg, void * user_data)
 }
 
 struct HashIterInfo {
-    CResolvableFn callback;
+    CResItemFn callback;
     void * user_data;
     int count;
 };
@@ -723,7 +723,7 @@ struct HashIterInfo {
 static void
 hash_iter_cb (void * key, void * val, void * user_data)
 {
-    RCResolvable *r = val;
+    RCResItem *r = val;
     struct HashIterInfo *info = user_data;
 
     if (info->callback)
@@ -740,14 +740,14 @@ add_fake_history (PackagePtr pkg)
     RCPackageUpdate *up;
 
     up = rc_package_update_new ();
-    rc_resolvable_spec_copy ((RCResolvableSpec *) up,
+    rc_resItem_spec_copy ((RCResItemSpec *) up,
 			     RC_RESOLVABLE_SPEC (pkg));
     up->importance = RC_IMPORTANCE_SUGGESTED;
     rc_package_add_update (pkg, up);
 }
 
 typedef struct {
-    CResolvableFn user_callback;
+    CResItemFn user_callback;
     void *    user_data;
     const gchar *path;
 } PackagesFromDirInfo;
@@ -766,7 +766,7 @@ packages_from_dir_cb (PackagePtr package, void * user_data)
 						  update->package_url,
 						  NULL);
     if (info->user_callback)
-	return info->user_callback ((RCResolvable *)package, info->user_data);
+	return info->user_callback ((RCResItem *)package, info->user_data);
 
     return true;
 }
@@ -776,7 +776,7 @@ extract_packages_from_directory (const char *path,
 				    ChannelPtr channel,
 				    RCPackman *packman,
 				    bool recursive,
-				    CResolvableFn callback,
+				    CResItemFn callback,
 				    void * user_data)
 {
     WorldPtr world = *((WorldPtr *)data);
@@ -913,7 +913,7 @@ extract_packages_from_directory (const char *path,
 
 	    pkg = rc_packman_query_file (packman, file_path, true);
 	    if (pkg != NULL) {
-		rc_resolvable_set_channel (RC_RESOLVABLE (pkg), channel);
+		rc_resItem_set_channel (RC_RESOLVABLE (pkg), channel);
 		pkg->package_filename = strdup (file_path);
 		pkg->local_package = false;
 		add_fake_history (pkg);

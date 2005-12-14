@@ -22,7 +22,7 @@
 #include <zypp/solver/detail/Resolver.h>
 #include <zypp/solver/detail/ResolverContext.h>
 #include <zypp/solver/detail/ResolverQueue.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Version.h>
 #include <zypp/solver/detail/World.h>
 #include <zypp/solver/detail/StoreWorld.h>
@@ -104,38 +104,38 @@ Resolver::addSubscribedChannel (constChannelPtr channel)
 }
 
 void
-Resolver::addResolvableToInstall (constResolvablePtr resolvable)
+Resolver::addResItemToInstall (constResItemPtr resItem)
 {
-    _resolvables_to_install.push_front (resolvable);
+    _resItems_to_install.push_front (resItem);
 }
 
 void
-Resolver::addResolvablesToInstallFromList (CResolvableList & rl)
+Resolver::addResItemsToInstallFromList (CResItemList & rl)
 {
-    for (CResolvableList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
-	addResolvableToInstall (*iter);
+    for (CResItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
+	addResItemToInstall (*iter);
     }
 }
 
 void
-Resolver::addResolvableToRemove (constResolvablePtr resolvable)
+Resolver::addResItemToRemove (constResItemPtr resItem)
 {
-    _resolvables_to_remove.push_front (resolvable);
+    _resItems_to_remove.push_front (resItem);
 }
 
 void
-Resolver::addResolvablesToRemoveFromList (CResolvableList & rl)
+Resolver::addResItemsToRemoveFromList (CResItemList & rl)
 {
-    for (CResolvableList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
-	addResolvableToRemove (*iter);
+    for (CResItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
+	addResItemToRemove (*iter);
     }
 }
 
 void
-Resolver::addResolvableToVerify (constResolvablePtr resolvable)
+Resolver::addResItemToVerify (constResItemPtr resItem)
 {
-    _resolvables_to_verify.push_front (resolvable);
-    _resolvables_to_verify.sort ();			//(GCompareFunc) rc_resolvable_compare_name);
+    _resItems_to_verify.push_front (resItem);
+    _resItems_to_verify.sort ();			//(GCompareFunc) rc_resItem_compare_name);
 }
 
 void
@@ -154,11 +154,11 @@ Resolver::addExtraConflict (constDependencyPtr dependency)
 //---------------------------------------------------------------------------
 
 static bool
-verify_system_cb (constResolvablePtr resolvable, void *data)
+verify_system_cb (constResItemPtr resItem, void *data)
 {
     Resolver *resolver  = (Resolver *)data;
 
-    resolver->addResolvableToVerify (resolvable);
+    resolver->addResItemToVerify (resItem);
 
     return true;
 }
@@ -168,7 +168,7 @@ void
 Resolver::verifySystem (void)
 {
     if (getenv ("RC_SPEW")) fprintf (stderr, "Resolver::verifySystem()\n");
-    world()->foreachResolvable (new Channel(CHANNEL_TYPE_SYSTEM), verify_system_cb, this);
+    world()->foreachResItem (new Channel(CHANNEL_TYPE_SYSTEM), verify_system_cb, this);
 
     _verifying = true;
 
@@ -180,11 +180,11 @@ Resolver::verifySystem (void)
       all but one of the duplicates.
     */
 
-    for (CResolvableList::const_iterator i0 = _resolvables_to_verify.begin(); i0 != _resolvables_to_verify.end();) {
-	CResolvableList::const_iterator i1 = i0;
+    for (CResItemList::const_iterator i0 = _resItems_to_verify.begin(); i0 != _resItems_to_verify.end();) {
+	CResItemList::const_iterator i1 = i0;
 	i1++;
-	CResolvableList::const_iterator i2 = i1;
-	for (; i1 != _resolvables_to_verify.end()&& ! (*i0)->compareName (*i1); i1++) {
+	CResItemList::const_iterator i2 = i1;
+	for (; i1 != _resItems_to_verify.end()&& ! (*i0)->compareName (*i1); i1++) {
 	    //empty
 	}
 
@@ -193,11 +193,11 @@ Resolver::verifySystem (void)
 
 	    branch_item = new QueueItemBranch(world());
 
-	    for (CResolvableList::const_iterator i = i0; i != i1; i++) {
+	    for (CResItemList::const_iterator i = i0; i != i1; i++) {
 
 		QueueItemGroupPtr grp_item = new QueueItemGroup(world());
 
-		for (CResolvableList::const_iterator j = i0; j != i1; j++) {
+		for (CResItemList::const_iterator j = i0; j != i1; j++) {
 		    constPackagePtr dup_pkg = *j;
 		    QueueItemUninstallPtr uninstall_item;
 
@@ -234,15 +234,15 @@ Resolver::resolveDependencies (void)
 
     time_t t_start, t_now;
     bool extremely_noisy = getenv ("RC_SPEW") != NULL;
-    bool have_local_resolvables = false;
+    bool have_local_resItems = false;
 
     if (extremely_noisy) fprintf (stderr, "Resolver::resolveDependencies()\n");
 
     /* Walk through are list of to-be-installed packages and see if any of them are local. */
 
-    for (CResolvableList::const_iterator iter = _resolvables_to_install.begin(); iter != _resolvables_to_install.end(); iter++) {
+    for (CResItemList::const_iterator iter = _resItems_to_install.begin(); iter != _resItems_to_install.end(); iter++) {
 	if ((*iter)->local()) {
-	    have_local_resolvables = true;
+	    have_local_resItems = true;
 	    break;
 	}
     }
@@ -253,11 +253,11 @@ Resolver::resolveDependencies (void)
 
     ChannelPtr local_channel = NULL;
 
-    if (have_local_resolvables) {
+    if (have_local_resItems) {
 	local_multiworld = new MultiWorld();
 	local_world = new StoreWorld();
 
-	local_channel = new Channel ("", "Local Resolvables", "@local", "");
+	local_channel = new Channel ("", "Local ResItems", "@local", "");
 
 	local_world->addChannel (local_channel);
 
@@ -288,26 +288,26 @@ Resolver::resolveDependencies (void)
     }
     _initial_items.clear();
 
-    for (CResolvableList::const_iterator iter = _resolvables_to_install.begin(); iter != _resolvables_to_install.end(); iter++) {
-	constResolvablePtr r = *iter;
+    for (CResItemList::const_iterator iter = _resItems_to_install.begin(); iter != _resItems_to_install.end(); iter++) {
+	constResItemPtr r = *iter;
 
 	/* Add local packages to our dummy channel. */
 	if (r->local()) {
 	    assert (local_channel != NULL);
-	    ResolvablePtr r1 = ResolvablePtr::cast_away_const (r);
+	    ResItemPtr r1 = ResItemPtr::cast_away_const (r);
 	    r1->setChannel (local_channel);
-	    local_world->addResolvable (r);
+	    local_world->addResItem (r);
 	}
 
-	initial_queue->addResolvableToInstall (r);
+	initial_queue->addResItemToInstall (r);
     }
 
-    for (CResolvableList::const_iterator iter = _resolvables_to_remove.begin(); iter != _resolvables_to_remove.end(); iter++) {
-	initial_queue->addResolvableToRemove (*iter, true /* remove-only mode */);
+    for (CResItemList::const_iterator iter = _resItems_to_remove.begin(); iter != _resItems_to_remove.end(); iter++) {
+	initial_queue->addResItemToRemove (*iter, true /* remove-only mode */);
     }
 
-    for (CResolvableList::const_iterator iter = _resolvables_to_verify.begin(); iter != _resolvables_to_verify.end(); iter++) {
-	initial_queue->addResolvableToVerify (*iter);
+    for (CResItemList::const_iterator iter = _resItems_to_verify.begin(); iter != _resItems_to_verify.end(); iter++) {
+	initial_queue->addResItemToVerify (*iter);
     }
 
     for (CDependencyList::const_iterator iter = _extra_deps.begin(); iter != _extra_deps.end(); iter++) {

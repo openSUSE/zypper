@@ -27,7 +27,7 @@
 #include <string.h>
 
 #include <zypp/solver/detail/QueueItemUninstallPtr.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
 
@@ -46,10 +46,10 @@ class QueueItemUninstall : public QueueItem {
     REP_BODY(QueueItemUninstall);
 
   private:
-    constResolvablePtr _resolvable;
+    constResItemPtr _resItem;
     const std::string _reason;
     constDependencyPtr _dep_leading_to_uninstall;
-    constResolvablePtr _upgraded_to;
+    constResItemPtr _upgraded_to;
 
     bool _explicitly_requested;
     bool _remove_only;
@@ -59,7 +59,7 @@ class QueueItemUninstall : public QueueItem {
 
   public:
 
-    QueueItemUninstall (WorldPtr world, constResolvablePtr resolvable, const std::string & reason);
+    QueueItemUninstall (WorldPtr world, constResItemPtr resItem, const std::string & reason);
     virtual ~QueueItemUninstall();
 
     // ---------------------------------- I/O
@@ -77,7 +77,7 @@ class QueueItemUninstall : public QueueItem {
     void setDependency (constDependencyPtr dep) { _dep_leading_to_uninstall = dep; }
     void setExplicitlyRequested (void) { _explicitly_requested = true; }
     void setRemoveOnly (void) { _remove_only = true; }
-    void setUpgradedTo (constResolvablePtr resolvable) { _upgraded_to = resolvable; }
+    void setUpgradedTo (constResItemPtr resItem) { _upgraded_to = resItem; }
     void setDueToConflict (void) { _due_to_conflict = true; }
     void setDueToObsolete (void) { _due_to_obsolete = true; }
     void setUnlink (void);

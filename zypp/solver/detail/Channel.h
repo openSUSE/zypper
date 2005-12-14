@@ -185,7 +185,7 @@ class Channel : public CountedRep {
     bool hasEqualId (const Channel & channel) const;
     bool hasEqualId (constChannelPtr channel) const;
 
-	//RCResolvableSList *rc_channel_get_resolvables (RCChannel *channel);
+	//RCResItemSList *rc_channel_get_resItems (RCChannel *channel);
 
     // Distro target functions
 

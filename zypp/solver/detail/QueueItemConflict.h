@@ -27,7 +27,7 @@
 #include <string.h>
 
 #include <zypp/solver/detail/QueueItemConflictPtr.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
 
@@ -47,13 +47,13 @@ class QueueItemConflict : public QueueItem {
 
   private:
     constDependencyPtr _dep;
-    constResolvablePtr _conflicting_resolvable;
+    constResItemPtr _conflicting_resItem;
 
     bool _actually_an_obsolete;
 
   public:
 
-    QueueItemConflict (WorldPtr world, constDependencyPtr dep, constResolvablePtr resolvable);
+    QueueItemConflict (WorldPtr world, constDependencyPtr dep, constResItemPtr resItem);
     virtual ~QueueItemConflict();
 
     // ---------------------------------- I/O

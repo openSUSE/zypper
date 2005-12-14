@@ -42,7 +42,7 @@ class ResolverInfoDependsOn : public ResolverInfoContainer {
 
   public:
 
-    ResolverInfoDependsOn (constResolvablePtr resolvable, constResolvablePtr on);
+    ResolverInfoDependsOn (constResItemPtr resItem, constResItemPtr on);
     virtual ~ResolverInfoDependsOn();
 
     // ---------------------------------- I/O

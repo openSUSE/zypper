@@ -30,7 +30,7 @@
 #include <zypp/solver/detail/ResolverQueuePtr.h>
 #include <zypp/solver/detail/ResolverContextPtr.h>
 #include <zypp/solver/detail/QueueItem.h>
-#include <zypp/solver/detail/ResolvablePtr.h>
+#include <zypp/solver/detail/ResItemPtr.h>
 #include <zypp/solver/detail/DependencyPtr.h>
 
 ///////////////////////////////////////////////////////////////////
@@ -71,9 +71,9 @@ class ResolverQueue : public CountedRep {
     // ---------------------------------- methods
 
 
-    void addResolvableToInstall (constResolvablePtr resolvable);
-    void addResolvableToRemove (constResolvablePtr resolvable, bool remove_only_mode);
-    void addResolvableToVerify (constResolvablePtr resolvable);
+    void addResItemToInstall (constResItemPtr resItem);
+    void addResItemToRemove (constResItemPtr resItem, bool remove_only_mode);
+    void addResItemToVerify (constResItemPtr resItem);
     void addExtraDependency (constDependencyPtr dep);
     void addExtraConflict (constDependencyPtr dep);
     void addItem (QueueItemPtr item);

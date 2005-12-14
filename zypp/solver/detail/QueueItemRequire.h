@@ -27,7 +27,7 @@
 #include <string.h>
 
 #include <zypp/solver/detail/QueueItemRequirePtr.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
 
@@ -47,9 +47,9 @@ class QueueItemRequire : public QueueItem {
 
   private:
     constDependencyPtr _dep;
-    constResolvablePtr _requiring_resolvable;
-    constResolvablePtr _upgraded_resolvable;
-    constResolvablePtr _lost_resolvable;
+    constResItemPtr _requiring_resItem;
+    constResItemPtr _upgraded_resItem;
+    constResItemPtr _lost_resItem;
     bool _remove_only;
     bool _is_child;
 
@@ -73,8 +73,8 @@ class QueueItemRequire : public QueueItem {
     constDependencyPtr dependency (void) const { return _dep; }
 
     void setRemoveOnly (void) { _remove_only = true; }
-    void setUpgradedResolvable (constResolvablePtr upgraded_resolvable) { _upgraded_resolvable = upgraded_resolvable; }
-    void setLostResolvable (constResolvablePtr lost_resolvable) { _lost_resolvable = lost_resolvable; }
+    void setUpgradedResItem (constResItemPtr upgraded_resItem) { _upgraded_resItem = upgraded_resItem; }
+    void setLostResItem (constResItemPtr lost_resItem) { _lost_resItem = lost_resItem; }
 
     // ---------------------------------- methods
 
@@ -84,7 +84,7 @@ class QueueItemRequire : public QueueItem {
     virtual bool isRedundant (ResolverContextPtr context) const { return false; }
     virtual bool isSatisfied (ResolverContextPtr context) const { return false; }
 
-    void addResolvable (constResolvablePtr resolvable);
+    void addResItem (constResItemPtr resItem);
 
 
 };

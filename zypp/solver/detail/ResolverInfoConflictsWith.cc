@@ -48,7 +48,7 @@ ResolverInfoConflictsWith::toString ( const ResolverInfoConflictsWith & with)
     string res;
 
     res += ResolverInfo::toString (with);
-    res += string ("conflicts with ") + with.resolvablesToString(false);
+    res += string ("conflicts with ") + with.resItemsToString(false);
 
     return res;
 }
@@ -70,8 +70,8 @@ operator<<( ostream& os, const ResolverInfoConflictsWith & with)
 
 //---------------------------------------------------------------------------
 
-ResolverInfoConflictsWith::ResolverInfoConflictsWith (constResolvablePtr resolvable, constResolvablePtr with)
-    : ResolverInfoContainer (RESOLVER_INFO_TYPE_CONFLICTS_WITH, resolvable, RESOLVER_INFO_PRIORITY_USER, with)
+ResolverInfoConflictsWith::ResolverInfoConflictsWith (constResItemPtr resItem, constResItemPtr with)
+    : ResolverInfoContainer (RESOLVER_INFO_TYPE_CONFLICTS_WITH, resItem, RESOLVER_INFO_PRIORITY_USER, with)
 {
 }
 
@@ -86,7 +86,7 @@ ResolverInfoConflictsWith::~ResolverInfoConflictsWith ()
 ResolverInfoPtr
 ResolverInfoConflictsWith::copy (void) const
 {
-    ResolverInfoConflictsWithPtr cpy = new ResolverInfoConflictsWith(resolvable(), NULL);
+    ResolverInfoConflictsWithPtr cpy = new ResolverInfoConflictsWith(resItem(), NULL);
 
     ((ResolverInfoContainerPtr)cpy)->copy (this);
 

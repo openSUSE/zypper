@@ -43,7 +43,7 @@ class ResolverInfoMissingReq : public ResolverInfo {
 
   public:
 
-    ResolverInfoMissingReq (constResolvablePtr resolvable, constDependencyPtr missing_req);
+    ResolverInfoMissingReq (constResItemPtr resItem, constDependencyPtr missing_req);
     virtual ~ResolverInfoMissingReq();
 
     // ---------------------------------- I/O

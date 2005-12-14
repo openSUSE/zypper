@@ -42,7 +42,7 @@ class ResolverInfoChildOf : public ResolverInfoContainer {
 
   public:
 
-    ResolverInfoChildOf (constResolvablePtr resolvable, constResolvablePtr dependency);
+    ResolverInfoChildOf (constResItemPtr resItem, constResItemPtr dependency);
     virtual ~ResolverInfoChildOf();
 
     // ---------------------------------- I/O

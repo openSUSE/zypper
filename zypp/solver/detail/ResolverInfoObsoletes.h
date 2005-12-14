@@ -42,7 +42,7 @@ class ResolverInfoObsoletes : public ResolverInfoContainer {
 
   public:
 
-    ResolverInfoObsoletes (constResolvablePtr resolvable, constResolvablePtr obsoletes);
+    ResolverInfoObsoletes (constResItemPtr resItem, constResItemPtr obsoletes);
     virtual ~ResolverInfoObsoletes();
 
     // ---------------------------------- I/O

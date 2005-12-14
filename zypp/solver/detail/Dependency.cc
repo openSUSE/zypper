@@ -448,51 +448,51 @@ if (getenv ("SPEW_DEP")) fprintf (stderr, " -> false\n");
 
 #if 0
 xmlNode *
-rc_resolvable_dep_or_slist_to_xml_node (RCResolvableDepSList *dep)
+rc_resItem_dep_or_slist_to_xml_node (RCResItemDepSList *dep)
 {
     xmlNode *or_node;
-    const RCResolvableDepSList *dep_iter;
+    const RCResItemDepSList *dep_iter;
 
     or_node = xmlNewNode (NULL, "or");
 
     dep_iter = dep;
     while (dep_iter) {
-	RCResolvableDep *dep_item = (RCResolvableDep *)(dep_iter->data);
-	xmlAddChild (or_node, rc_resolvable_dep_to_xml_node (dep_item));
+	RCResItemDep *dep_item = (RCResItemDep *)(dep_iter->data);
+	xmlAddChild (or_node, rc_resItem_dep_to_xml_node (dep_item));
 	dep_iter = dep_iter->next;
     }
 
     return or_node;
-} /* rc_resolvable_dep_or_slist_to_xml_node */
+} /* rc_resItem_dep_or_slist_to_xml_node */
 
 xmlNode *
-rc_resolvable_dep_to_xml_node (RCResolvableDep *dep_item)
+rc_resItem_dep_to_xml_node (RCResItemDep *dep_item)
 {
-    RCResolvableSpec *spec = (RCResolvableSpec *) dep_item;
+    RCResItemSpec *spec = (RCResItemSpec *) dep_item;
     xmlNode *dep_node;
 
-    if (rc_resolvable_dep_is_or (dep_item)) {
-	RCResolvableDepSList *dep_or_slist;
+    if (rc_resItem_dep_is_or (dep_item)) {
+	RCResItemDepSList *dep_or_slist;
 	dep_or_slist = rc_dep_string_to_or_dep_slist
-	    (rc_resolvable_spec_get_name (spec));
-	dep_node = rc_resolvable_dep_or_slist_to_xml_node (dep_or_slist);
-	rc_resolvable_dep_slist_free (dep_or_slist);
+	    (rc_resItem_spec_get_name (spec));
+	dep_node = rc_resItem_dep_or_slist_to_xml_node (dep_or_slist);
+	rc_resItem_dep_slist_free (dep_or_slist);
 	return dep_node;
     }
 
     dep_node = xmlNewNode (NULL, "dep");
 
-    xmlSetProp (dep_node, "name", rc_resolvable_spec_get_name (spec));
+    xmlSetProp (dep_node, "name", rc_resItem_spec_get_name (spec));
 
-    if (rc_resolvable_dep_get_relation (dep_item) != Relation::Any) {
+    if (rc_resItem_dep_get_relation (dep_item) != Relation::Any) {
 	xmlSetProp (dep_node, "op",
-		    rc_resolvable_relation_to_string (
-			rc_resolvable_dep_get_relation (dep_item), false));
+		    rc_resItem_relation_to_string (
+			rc_resItem_dep_get_relation (dep_item), false));
 
-	if (rc_resolvable_spec_has_epoch (spec)) {
+	if (rc_resItem_spec_has_epoch (spec)) {
 	    gchar *tmp;
 
-	    tmp = g_strdup_printf ("%d", rc_resolvable_spec_get_epoch (spec));
+	    tmp = g_strdup_printf ("%d", rc_resItem_spec_get_epoch (spec));
 	    xmlSetProp (dep_node, "epoch", tmp);
 	    g_free (tmp);
 	}
@@ -507,7 +507,7 @@ rc_resolvable_dep_to_xml_node (RCResolvableDep *dep_item)
     }
 
     return (dep_node);
-} /* rc_resolvable_dep_to_xml_node */
+} /* rc_resItem_dep_to_xml_node */
 
 #endif
 

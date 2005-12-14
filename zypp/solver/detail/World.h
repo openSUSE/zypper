@@ -28,7 +28,7 @@
 
 #include <zypp/solver/detail/WorldPtr.h>
 #include <zypp/solver/detail/MultiWorldPtr.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Channel.h>
 #include <zypp/solver/detail/Match.h>
 #include <zypp/solver/detail/Pending.h>
@@ -64,8 +64,8 @@ typedef PackmanPtr	(*WorldPackmanFn) (constWorldPtr world, const Kind & kind);
 typedef void		(*WorldSpewFn)	  (constWorldPtr world, FILE *out);
 typedef constWorldPtr	(*WorldDupFn)	  (constWorldPtr world);
 
-typedef bool		(*WorldCanTransactResolvableFn) (constWorldPtr world, constResolvablePtr resolvable);
-typedef bool		(*WorldTransactFn) (constWorldPtr world, const ResolvableList & install_resolvables, const ResolvableList & remove_resolvables, int flags);
+typedef bool		(*WorldCanTransactResItemFn) (constWorldPtr world, constResItemPtr resItem);
+typedef bool		(*WorldTransactFn) (constWorldPtr world, const ResItemList & install_resItems, const ResItemList & remove_resItems, int flags);
 
 typedef bool		(*WorldGetSubscribedFn) (const World *world, constChannelPtr channel);
 typedef void		(*WorldSetSubscribedFn) (World *world, ChannelPtr channel, bool subs_status);
@@ -77,9 +77,9 @@ typedef void		(*WorldAddLockFn) (constWorldPtr world, constMatchPtr lock);
 typedef void		(*WorldRemoveLockFn) (constWorldPtr world, constMatchPtr lock);
 typedef void		(*WorldClearLockFn) (constWorldPtr world);
 
-typedef int		(*WorldForeachResolvableFn) (constWorldPtr world, const char *name, constChannelPtr channel, ResolvableFn callback, void *user_data);
-typedef int		(*WorldForeachPackageSpecFn) (constWorldPtr world, constDependencyPtr dep, ResolvableAndSpecFn callback, void *user_data);
-typedef int		(*WorldForeachPackageDepFn) (constWorldPtr world, constDependencyPtr dep, ResolvableAndDepFn callback, void *user_data);
+typedef int		(*WorldForeachResItemFn) (constWorldPtr world, const char *name, constChannelPtr channel, ResItemFn callback, void *user_data);
+typedef int		(*WorldForeachPackageSpecFn) (constWorldPtr world, constDependencyPtr dep, ResItemAndSpecFn callback, void *user_data);
+typedef int		(*WorldForeachPackageDepFn) (constWorldPtr world, constDependencyPtr dep, ResItemAndDepFn callback, void *user_data);
 
 typedef void		(*WorldSerializeFn) (constWorldPtr world, constXmlNodePtr root);
 typedef void		(*WorldUnserializeFn) (constWorldPtr world, constXmlNodePtr node);
@@ -101,7 +101,7 @@ class World : public CountedRep {
     /* The sequence numbers gets incremented every
        time the RCWorld is changed. */
 
-    unsigned int _seq_no_resolvables;
+    unsigned int _seq_no_resItems;
     unsigned int _seq_no_channels;
     unsigned int _seq_no_subscriptions;
     unsigned int _seq_no_locks;
@@ -148,12 +148,12 @@ class World : public CountedRep {
     bool isMultiWorld () const { return _type == MULTI_WORLD; }
     bool isServiceWorld () const { return _type == SERVICE_WORLD; }
 
-    unsigned int resolvableSequenceNumber (void) const { return _seq_no_resolvables; }
+    unsigned int resItemSequenceNumber (void) const { return _seq_no_resItems; }
     unsigned int channelSequenceNumber (void) const { return _seq_no_channels; }
     unsigned int subscriptionSequenceNumber (void) const { return _seq_no_subscriptions; }
     unsigned int lockSequenceNumber (void) const { return _seq_no_locks; }
 
-    void touchResolvableSequenceNumber (void) { _seq_no_resolvables++; }
+    void touchResItemSequenceNumber (void) { _seq_no_resItems++; }
     void touchChannelSequenceNumber (void) { _seq_no_channels++; }
     void touchSubscriptionSequenceNumber (void) { _seq_no_subscriptions++; }
     void touchLockSequenceNumber (void) { _seq_no_locks++; }
@@ -189,7 +189,7 @@ class World : public CountedRep {
     virtual ChannelPtr getChannelByAlias (const char *alias) const = 0;
     virtual ChannelPtr getChannelById (const char *channel_id) const = 0;
 
-    // Resolvable Locks
+    // ResItem Locks
 
     virtual int foreachLock (MatchFn fn, void *data) const;
 
@@ -197,42 +197,42 @@ class World : public CountedRep {
     void removeLock (constMatchPtr lock);
     void clearLocks ();
 
-    bool resolvableIsLocked (constResolvablePtr resolvable);
+    bool resItemIsLocked (constResItemPtr resItem);
 
-    // Single resolvable queries
+    // Single resItem queries
 
-    virtual constResolvablePtr findInstalledResolvable (constResolvablePtr resolvable) = 0;
-    virtual constResolvablePtr findResolvable (constChannelPtr channel, const char *name) const = 0;
-    virtual constResolvablePtr findResolvableWithConstraint (constChannelPtr channel, const char *name, constDependencyPtr constraint, bool is_and) const = 0;
-    virtual ChannelPtr guessResolvableChannel (constResolvablePtr resolvable) const = 0;
+    virtual constResItemPtr findInstalledResItem (constResItemPtr resItem) = 0;
+    virtual constResItemPtr findResItem (constChannelPtr channel, const char *name) const = 0;
+    virtual constResItemPtr findResItemWithConstraint (constChannelPtr channel, const char *name, constDependencyPtr constraint, bool is_and) const = 0;
+    virtual ChannelPtr guessResItemChannel (constResItemPtr resItem) const = 0;
 
-    // Iterate across resolvables
+    // Iterate across resItems
 
-    virtual int foreachResolvable (ChannelPtr channel, CResolvableFn fn, void *data) = 0;
-    virtual int foreachResolvableByName (const std::string & name, ChannelPtr channel, CResolvableFn fn, void *user_data) = 0;
-    virtual int foreachResolvableByMatch (constMatchPtr match, CResolvableFn fn, void *user_data) = 0;
+    virtual int foreachResItem (ChannelPtr channel, CResItemFn fn, void *data) = 0;
+    virtual int foreachResItemByName (const std::string & name, ChannelPtr channel, CResItemFn fn, void *user_data) = 0;
+    virtual int foreachResItemByMatch (constMatchPtr match, CResItemFn fn, void *user_data) = 0;
 
     // Iterate across provides or requirement
 
-    virtual int foreachProvidingResolvable (constDependencyPtr dep, ResolvableAndSpecFn fn, void *user_data) = 0;
-    virtual int foreachRequiringResolvable (constDependencyPtr dep, ResolvableAndDepFn fn, void *user_data) = 0;
-    virtual int foreachConflictingResolvable (constDependencyPtr dep, ResolvableAndDepFn fn, void *user_data) = 0;
+    virtual int foreachProvidingResItem (constDependencyPtr dep, ResItemAndSpecFn fn, void *user_data) = 0;
+    virtual int foreachRequiringResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *user_data) = 0;
+    virtual int foreachConflictingResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *user_data) = 0;
 
     // upgrades
 
-    int foreachUpgrade (constResolvablePtr resolvable, ChannelPtr channel, CResolvableFn fn, void *data);
-    PackageUpdateList getUpgrades (constResolvablePtr resolvable, constChannelPtr channel);
-    constResolvablePtr getBestUpgrade (constResolvablePtr resolvable, bool subscribed_only);
-    int foreachSystemUpgrade (bool subscribed_only, ResolvablePairFn fn, void *data);
+    int foreachUpgrade (constResItemPtr resItem, ChannelPtr channel, CResItemFn fn, void *data);
+    PackageUpdateList getUpgrades (constResItemPtr resItem, constChannelPtr channel);
+    constResItemPtr getBestUpgrade (constResItemPtr resItem, bool subscribed_only);
+    int foreachSystemUpgrade (bool subscribed_only, ResItemPairFn fn, void *data);
 
     // provider
 
-    bool getSingleProvider (constDependencyPtr dep, constChannelPtr channel, constResolvablePtr *resolvable);
+    bool getSingleProvider (constDependencyPtr dep, constChannelPtr channel, constResItemPtr *resItem);
 
     // Transacting
 
-    bool  canTransactResolvable (constResolvablePtr resolvable);
-    bool  transact (const ResolvableList & installResolvables, const ResolvableList & remove_resolvables, int flags);
+    bool  canTransactResItem (constResItemPtr resItem);
+    bool  transact (const ResItemList & installResItems, const ResItemList & remove_resItems, int flags);
 
     // XML serialization
 

@@ -96,8 +96,8 @@ ResolverInfo::toString ( const ResolverInfo & resolverinfo, bool full )
 	res += info_type_to_string (resolverinfo._type);
 	res += "> ";
     }
-    if (resolverinfo._resolvable != NULL) {
-	res += resolverinfo._resolvable->asString();
+    if (resolverinfo._resItem != NULL) {
+	res += resolverinfo._resItem->asString();
 	res += ": ";
     }
 
@@ -124,9 +124,9 @@ operator<<( ostream& os, const ResolverInfo & resolver)
 
 //---------------------------------------------------------------------------
 
-ResolverInfo::ResolverInfo (ResolverInfoType type, constResolvablePtr resolvable, int priority)
+ResolverInfo::ResolverInfo (ResolverInfoType type, constResItemPtr resItem, int priority)
     : _type (type)
-    , _resolvable (resolvable)
+    , _resItem (resItem)
     , _priority (priority)
     , _error (false)
     , _important (false)
@@ -146,7 +146,7 @@ ResolverInfo::merge (ResolverInfoPtr to_be_merged)
     if (to_be_merged == NULL) return false;
 
     if (_type != to_be_merged->_type
-	|| _resolvable != to_be_merged->_resolvable) {
+	|| _resItem != to_be_merged->_resItem) {
 	return false;
     }
 
@@ -164,7 +164,7 @@ ResolverInfo::copy (constResolverInfoPtr from)
 ResolverInfoPtr
 ResolverInfo::copy (void) const
 {
-    ResolverInfoPtr cpy = new ResolverInfo(_type, _resolvable, _priority);
+    ResolverInfoPtr cpy = new ResolverInfo(_type, _resItem, _priority);
 
     cpy->copy (this);
  
@@ -175,12 +175,12 @@ ResolverInfo::copy (void) const
 //---------------------------------------------------------------------------
 
 bool
-ResolverInfo::isAbout (constResolvablePtr resolvable) const
+ResolverInfo::isAbout (constResItemPtr resItem) const
 {
-    if (_resolvable == NULL)
+    if (_resItem == NULL)
 	return false;
 
-    return _resolvable->name() == resolvable->name();
+    return _resItem->name() == resItem->name();
 }
 
 ///////////////////////////////////////////////////////////////////

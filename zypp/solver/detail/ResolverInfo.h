@@ -27,7 +27,7 @@
 #include <map>
 #include <string.h>
 #include <zypp/solver/detail/ResolverInfoPtr.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Channel.h>
 
 ///////////////////////////////////////////////////////////////////
@@ -65,7 +65,7 @@ class ResolverInfo : public CountedRep {
   private:
 
     ResolverInfoType _type;
-    constResolvablePtr _resolvable;
+    constResItemPtr _resItem;
     int _priority;
 
     bool _error;
@@ -73,7 +73,7 @@ class ResolverInfo : public CountedRep {
 
   protected:
 
-    ResolverInfo (ResolverInfoType type, constResolvablePtr resolvable, int priority);
+    ResolverInfo (ResolverInfoType type, constResItemPtr resItem, int priority);
 
   public:
 
@@ -91,7 +91,7 @@ class ResolverInfo : public CountedRep {
     // ---------------------------------- accessors
 
     ResolverInfoType type (void) const { return _type; }
-    constResolvablePtr resolvable (void) const { return _resolvable; }
+    constResItemPtr resItem (void) const { return _resItem; }
     int priority (void) const { return _priority; }
 
     int error (void) const { return _error; }
@@ -104,7 +104,7 @@ class ResolverInfo : public CountedRep {
     bool merge (ResolverInfoPtr to_be_merged);
     virtual ResolverInfoPtr copy (void) const;
 
-    bool isAbout (constResolvablePtr resolvable) const;
+    bool isAbout (constResItemPtr resItem) const;
 };
  
 ///////////////////////////////////////////////////////////////////

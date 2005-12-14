@@ -1,9 +1,9 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
-/* Resolvable.cc
+/* ResItem.cc
  * Copyright (C) 2000-2002 Ximian, Inc.
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
- * Definition of 'resolvable'
+ * Definition of 'resItem'
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License,
@@ -22,7 +22,7 @@
 
 #include <y2util/stringutil.h>
 
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace ZYPP {
@@ -31,77 +31,77 @@ namespace ZYPP {
 using namespace std;
 
 
-IMPL_DERIVED_POINTER(Resolvable,Spec);
+IMPL_DERIVED_POINTER(ResItem,Spec);
 
 //---------------------------------------------------------------------------
 
 string
-Resolvable::asString ( bool full ) const
+ResItem::asString ( bool full ) const
 {
     return toString (*this, full);
 }
 
 
 string
-Resolvable::toString ( const Resolvable & resolvable, bool full )
+ResItem::toString ( const ResItem & resItem, bool full )
 {
     string res;
 
-    res += Spec::toString(resolvable);
-    if (!resolvable.channel()->system()) {
+    res += Spec::toString(resItem);
+    if (!resItem.channel()->system()) {
 	res += "[";
-	res += (resolvable.channel() == NULL) ? "(channel?)" : resolvable.channel()->name();
+	res += (resItem.channel() == NULL) ? "(channel?)" : resItem.channel()->name();
 	res += "]";
     }
     if (!full) return res;
 
-    if (resolvable.isInstalled()) res += "<installed>";
-    if (resolvable.local()) res += "<local>";
+    if (resItem.isInstalled()) res += "<installed>";
+    if (resItem.local()) res += "<local>";
 
     res += "FileSize ";
-    res += stringutil::numstring (resolvable.fileSize());
+    res += stringutil::numstring (resItem.fileSize());
     res += ", InstalledSize ";
-    res += stringutil::numstring (resolvable.installedSize());
+    res += stringutil::numstring (resItem.installedSize());
 
-    if (!resolvable.requires().empty()) {
+    if (!resItem.requires().empty()) {
 	res += ", Requires: ";
-	res += Dependency::toString(resolvable.requires());
+	res += Dependency::toString(resItem.requires());
     }
 
-    if (!resolvable.provides().empty()) {
+    if (!resItem.provides().empty()) {
 	res += ", Provides: ";
-	res += Dependency::toString(resolvable.provides());
+	res += Dependency::toString(resItem.provides());
     }
-    if (!resolvable.conflicts().empty()) {
+    if (!resItem.conflicts().empty()) {
 	res += ", Conflicts: ";
-	res += Dependency::toString(resolvable.conflicts());
+	res += Dependency::toString(resItem.conflicts());
     }
-    if (!resolvable.obsoletes().empty()) {
+    if (!resItem.obsoletes().empty()) {
 	res += ", Obsoletes: ";
-	res += Dependency::toString(resolvable.obsoletes());
+	res += Dependency::toString(resItem.obsoletes());
     }
 
-    if (!resolvable.suggests().empty()) {
+    if (!resItem.suggests().empty()) {
 	res += ", Suggests: ";
-	res += Dependency::toString(resolvable.suggests());
+	res += Dependency::toString(resItem.suggests());
     }
-    if (!resolvable.recommends().empty()) {
+    if (!resItem.recommends().empty()) {
 	res += ", Recommends: ";
-	res += Dependency::toString(resolvable.recommends());
+	res += Dependency::toString(resItem.recommends());
     }
-    if (!resolvable.freshens().empty()) {
+    if (!resItem.freshens().empty()) {
 	res += ", Freshens: ";
-	res += Dependency::toString(resolvable.freshens());
+	res += Dependency::toString(resItem.freshens());
     }
     return res;
 }
 
 
 string
-Resolvable::toString ( const CResolvableList & rl, bool full )
+ResItem::toString ( const CResItemList & rl, bool full )
 {
     string res("[");
-    for (CResolvableList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
+    for (CResItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
 	if (iter != rl.begin()) res += ", ";
 	res += (*iter)->asString(full);
     }
@@ -110,7 +110,7 @@ Resolvable::toString ( const CResolvableList & rl, bool full )
 
 
 ostream &
-Resolvable::dumpOn( ostream & str ) const
+ResItem::dumpOn( ostream & str ) const
 {
     str << asString();
     return str;
@@ -118,14 +118,14 @@ Resolvable::dumpOn( ostream & str ) const
 
 
 ostream&
-operator<<( ostream& os, const Resolvable& edition)
+operator<<( ostream& os, const ResItem& edition)
 {
     return os << edition.asString();
 }
 
 //---------------------------------------------------------------------------
 
-Resolvable::Resolvable (const Kind & kind, const string & name, int epoch, const string & version, const string & release, const Arch * arch)
+ResItem::ResItem (const Kind & kind, const string & name, int epoch, const string & version, const string & release, const Arch * arch)
     :Spec (kind, name, epoch, version, release, arch)
     , _channel (false)
     , _installed (false)
@@ -138,14 +138,14 @@ Resolvable::Resolvable (const Kind & kind, const string & name, int epoch, const
 }
 
 
-Resolvable::~Resolvable()
+ResItem::~ResItem()
 {
 }
 
 //---------------------------------------------------------------------------
 
 bool
-Resolvable::isInstalled () const
+ResItem::isInstalled () const
 {
     if (_channel != NULL
 	&& _channel->system()) {

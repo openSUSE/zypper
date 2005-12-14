@@ -41,7 +41,7 @@ class ResolverInfoNeededBy : public ResolverInfoContainer {
 
   public:
 
-    ResolverInfoNeededBy (constResolvablePtr resolvable);
+    ResolverInfoNeededBy (constResItemPtr resItem);
     virtual ~ResolverInfoNeededBy();
 
     // ---------------------------------- I/O

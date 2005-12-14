@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
-/* ResolvableAndDependency.h
+/* ResItemAndDependency.h
  *
  * Copyright (C) 2000-2002 Ximian, Inc.
  * Copyright (C) 2005 SUSE Linux Products GmbH
@@ -19,58 +19,58 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ResolvableAndDependency_h
-#define _ResolvableAndDependency_h
+#ifndef _ResItemAndDependency_h
+#define _ResItemAndDependency_h
 
 #include <iosfwd>
 #include <string>
 #include <list>
 #include <map>
 
-#include <zypp/solver/detail/ResolvableAndDependencyPtr.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItemAndDependencyPtr.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Dependency.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace ZYPP {
 //////////////////////////////////////////////////////////////////
 
-typedef std::multimap<const std::string, constResolvablePtr> ResolvableTable;
-typedef std::multimap<const std::string, constResolvableAndDependencyPtr> ResolvableAndDependencyTable;
+typedef std::multimap<const std::string, constResItemPtr> ResItemTable;
+typedef std::multimap<const std::string, constResItemAndDependencyPtr> ResItemAndDependencyTable;
 
 #if PHI
-typedef std::list <constResolvableAndDependencyPtr> CResolvableAndDependencyList;
+typedef std::list <constResItemAndDependencyPtr> CResItemAndDependencyList;
 #endif
 
 ///////////////////////////////////////////////////////////////////
 //
-//	CLASS NAME : ResolvableAndDependency
+//	CLASS NAME : ResItemAndDependency
 
-class ResolvableAndDependency: public CountedRep {
-    REP_BODY(ResolvableAndDependency);
+class ResItemAndDependency: public CountedRep {
+    REP_BODY(ResItemAndDependency);
 
   private:
-    constResolvablePtr _resolvable;
+    constResItemPtr _resItem;
     constDependencyPtr _dependency;
 
   public:
 
-    ResolvableAndDependency (constResolvablePtr resolvable, constDependencyPtr dependency);
-    ~ResolvableAndDependency () {}
+    ResItemAndDependency (constResItemPtr resItem, constDependencyPtr dependency);
+    ~ResItemAndDependency () {}
 
     // ---------------------------------- I/O
 
-    static std::string toString (const ResolvableAndDependency & r_and_d, bool full = false);
+    static std::string toString (const ResItemAndDependency & r_and_d, bool full = false);
 
     virtual std::ostream & dumpOn(std::ostream & str ) const;
 
-    friend std::ostream& operator<<(std::ostream&, const ResolvableAndDependency & r_and_d);
+    friend std::ostream& operator<<(std::ostream&, const ResItemAndDependency & r_and_d);
 
     std::string asString (bool full = false) const;
 
     // ---------------------------------- accessors
 
-    constResolvablePtr resolvable() const { return _resolvable; }
+    constResItemPtr resItem() const { return _resItem; }
     constDependencyPtr dependency() const { return _dependency; }
 
     // ---------------------------------- methods
@@ -82,4 +82,4 @@ class ResolvableAndDependency: public CountedRep {
 }; // namespace ZYPP
 ///////////////////////////////////////////////////////////////////
 
-#endif // _ResolvableAndDependency_h
+#endif // _ResItemAndDependency_h

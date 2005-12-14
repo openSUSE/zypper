@@ -55,17 +55,17 @@ QueueItemRequire::toString ( const QueueItemRequire & item)
 {
     string ret = "[Require: ";
     ret += item._dep->asString();
-    if (item._requiring_resolvable != NULL) {
+    if (item._requiring_resItem != NULL) {
 	ret += ", Required by ";
-	ret += item._requiring_resolvable->asString();
+	ret += item._requiring_resItem->asString();
     }
-    if (item._upgraded_resolvable != NULL) {
+    if (item._upgraded_resItem != NULL) {
 	ret += ", Upgrades ";
-	ret += item._upgraded_resolvable->asString();
+	ret += item._upgraded_resItem->asString();
     }
-    if (item._lost_resolvable != NULL) {
+    if (item._lost_resItem != NULL) {
 	ret += ", Lost ";
-	ret += item._lost_resolvable->asString();
+	ret += item._lost_resItem->asString();
     }
     if (item._remove_only) ret += ", Remove Only";
     if (item._is_child) ret += ", Child";
@@ -94,9 +94,9 @@ operator<<( ostream& os, const QueueItemRequire & item)
 QueueItemRequire::QueueItemRequire (WorldPtr world, constDependencyPtr dep)
     : QueueItem (QUEUE_ITEM_TYPE_REQUIRE, world)
     , _dep (dep)
-    , _requiring_resolvable (NULL)
-    , _upgraded_resolvable (NULL)
-    , _lost_resolvable (NULL)
+    , _requiring_resItem (NULL)
+    , _upgraded_resItem (NULL)
+    , _lost_resItem (NULL)
     , _remove_only (false)
     , _is_child (false)
 {
@@ -110,10 +110,10 @@ QueueItemRequire::~QueueItemRequire()
 //---------------------------------------------------------------------------
 
 void
-QueueItemRequire::addResolvable (constResolvablePtr resolvable)
+QueueItemRequire::addResItem (constResItemPtr resItem)
 {
-    assert (_requiring_resolvable == NULL);
-    _requiring_resolvable = resolvable;
+    assert (_requiring_resItem == NULL);
+    _requiring_resItem = resItem;
 }
 
 
@@ -122,40 +122,40 @@ QueueItemRequire::addResolvable (constResolvablePtr resolvable)
 typedef std::map <constSpecPtr, bool> UniqTable;
 
 typedef struct {
-    constResolvablePtr resolvable;
+    constResItemPtr resItem;
     constSpecPtr dep;
     ResolverContextPtr context;
     WorldPtr world;
-    CResolvableList providers;
+    CResItemList providers;
     UniqTable *uniq;
 } RequireProcessInfo;
 
 
 static bool
-require_process_cb (constResolvablePtr resolvable, constSpecPtr spec, void *data)
+require_process_cb (constResItemPtr resItem, constSpecPtr spec, void *data)
 {
     RequireProcessInfo *info = (RequireProcessInfo *)data;
-    ResolvableStatus status;
+    ResItemStatus status;
 
-    status = info->context->getStatus (resolvable);
-//fprintf (stderr, "require_process_cb(res: %s, spec %s, status %s)\n", resolvable->asString().c_str(), spec->asString().c_str(), ResolverContext::toString(status).c_str());
+    status = info->context->getStatus (resItem);
+//fprintf (stderr, "require_process_cb(res: %s, spec %s, status %s)\n", resItem->asString().c_str(), spec->asString().c_str(), ResolverContext::toString(status).c_str());
 //fprintf (stderr, "require_process_cb(info->dep: %s)\n", info->dep ? info->dep->asString().c_str() : "(null)");
-//fprintf (stderr, "require_process_cb(resolvableIsPossible -> %d)\n", info->context->resolvableIsPossible (resolvable));
-    /* info->dep is set for resolvable set childern only. If it is set
+//fprintf (stderr, "require_process_cb(resItemIsPossible -> %d)\n", info->context->resItemIsPossible (resItem));
+    /* info->dep is set for resItem set childern only. If it is set
        allow only exactly required version */
     if (info->dep != NULL
 	&& !info->dep->equals(spec)) {
 	return true;
     }
 
-    if ((! resolvable_status_is_to_be_uninstalled (status))
-	&& ! info->context->isParallelInstall (resolvable)
-	&& info->uniq->find((constSpecPtr)resolvable) == info->uniq->end()
-	&& info->context->resolvableIsPossible (resolvable)
-	&& ! info->world->resolvableIsLocked (resolvable)) {
+    if ((! resItem_status_is_to_be_uninstalled (status))
+	&& ! info->context->isParallelInstall (resItem)
+	&& info->uniq->find((constSpecPtr)resItem) == info->uniq->end()
+	&& info->context->resItemIsPossible (resItem)
+	&& ! info->world->resItemIsLocked (resItem)) {
 
-	info->providers.push_front (resolvable);
-	(*(info->uniq))[resolvable] = true;
+	info->providers.push_front (resItem);
+	(*(info->uniq))[resItem] = true;
     }
 
     return true;
@@ -163,26 +163,26 @@ require_process_cb (constResolvablePtr resolvable, constSpecPtr spec, void *data
 
 
 static bool
-no_installable_providers_info_cb (constResolvablePtr resolvable, constSpecPtr spec, void *data)
+no_installable_providers_info_cb (constResItemPtr resItem, constSpecPtr spec, void *data)
 {
     RequireProcessInfo *info = (RequireProcessInfo *)data;
-    ResolvableStatus status;
+    ResItemStatus status;
     string msg_str;
 
-    status = info->context->getStatus (resolvable);
+    status = info->context->getStatus (resItem);
 
-    if (resolvable_status_is_to_be_uninstalled (status)) {
-	msg_str = resolvable->name() + " provides " + spec->asString() + ", but is scheduled to be uninstalled.";
-    } else if (info->context->isParallelInstall (resolvable)) {
-	msg_str = resolvable->name() + " provides " + spec->asString() + ", but another version of that resolvable is already installed.";
-    } else if (! info->context->resolvableIsPossible (resolvable)) {
-	msg_str = resolvable->name() + " provides " + spec->asString() + ", but it is uninstallable.  Try installing it on its own for more details.";
-    } else if (info->world->resolvableIsLocked (resolvable)) {
-	msg_str = resolvable->name() + " provides " + spec->asString() + ", but it is locked.";
+    if (resItem_status_is_to_be_uninstalled (status)) {
+	msg_str = resItem->name() + " provides " + spec->asString() + ", but is scheduled to be uninstalled.";
+    } else if (info->context->isParallelInstall (resItem)) {
+	msg_str = resItem->name() + " provides " + spec->asString() + ", but another version of that resItem is already installed.";
+    } else if (! info->context->resItemIsPossible (resItem)) {
+	msg_str = resItem->name() + " provides " + spec->asString() + ", but it is uninstallable.  Try installing it on its own for more details.";
+    } else if (info->world->resItemIsLocked (resItem)) {
+	msg_str = resItem->name() + " provides " + spec->asString() + ", but it is locked.";
     }
 
     if (!msg_str.empty()) {
-	info->context->addInfoString (info->resolvable, RESOLVER_INFO_PRIORITY_VERBOSE, msg_str);
+	info->context->addInfoString (info->resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg_str);
     }
     
     return true;
@@ -190,16 +190,16 @@ no_installable_providers_info_cb (constResolvablePtr resolvable, constSpecPtr sp
 
 
 static bool
-look_for_upgrades_cb (constResolvablePtr resolvable, void *data)
+look_for_upgrades_cb (constResItemPtr resItem, void *data)
 {
-    CResolvableList *rl = (CResolvableList *)data;
-    rl->push_front (resolvable);
+    CResItemList *rl = (CResItemList *)data;
+    rl->push_front (resItem);
     return true;
 }
 
 
 static bool
-codependent_resolvables (constResolvablePtr r1, constResolvablePtr r2)
+codependent_resItems (constResItemPtr r1, constResItemPtr r2)
 {
     string name1 = r1->name();
     string name2 = r2->name();
@@ -239,21 +239,21 @@ QueueItemRequire::process (ResolverContextPtr context, QueueItemList & new_items
 
     RequireProcessInfo info;
 
-    info.resolvable = _requiring_resolvable;
+    info.resItem = _requiring_resItem;
     info.dep = _is_child ? _dep : NULL;
     info.context = context;
     info.world = world();
-    info.uniq = new UniqTable();		//FIXME: op: g_hash_table_new (rc_resolvable_spec_hash, rc_resolvable_spec_equal);
+    info.uniq = new UniqTable();		//FIXME: op: g_hash_table_new (rc_resItem_spec_hash, rc_resItem_spec_equal);
 
     int num_providers = 0;
 
     if (! _remove_only) {
 
-	world()->foreachProvidingResolvable (_dep, require_process_cb, &info);
+	world()->foreachProvidingResItem (_dep, require_process_cb, &info);
 	
 	num_providers = info.providers.size();
 
-	if (getenv ("RC_SPEW")) fprintf (stderr, "requirement is met by %d resolvables\n", num_providers);
+	if (getenv ("RC_SPEW")) fprintf (stderr, "requirement is met by %d resItems\n", num_providers);
     }
 
     std::string msg;
@@ -266,61 +266,61 @@ QueueItemRequire::process (ResolverContextPtr context, QueueItemList & new_items
 	QueueItemBranchPtr branch_item = NULL;
 	bool explore_uninstall_branch = true;
 
-	if (_upgraded_resolvable == NULL) {
+	if (_upgraded_resItem == NULL) {
 	    ResolverInfoPtr err_info;
 
 	    msg = string ("There are no ") + (_remove_only ? "alternative installed" : "installable") + " providers of " + _dep->asString();
-	    if (_requiring_resolvable != NULL) {
+	    if (_requiring_resItem != NULL) {
 		msg += " for ";
-		msg += _requiring_resolvable->asString();
+		msg += _requiring_resItem->asString();
 	    }
 
-	    err_info = new ResolverInfoMisc (_requiring_resolvable, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
+	    err_info = new ResolverInfoMisc (_requiring_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
 
 	    context->addInfo (err_info);
 
 	    // Maybe we can add some extra info on why none of the providers are suitable.
-	    world()->foreachProvidingResolvable (_dep, no_installable_providers_info_cb, (void *)&info);
+	    world()->foreachProvidingResItem (_dep, no_installable_providers_info_cb, (void *)&info);
 	}
 	
 	// If this is an upgrade, we might be able to avoid removing stuff by upgrading it instead.
-	if (_upgraded_resolvable != NULL
-	    && _requiring_resolvable != NULL) {
+	if (_upgraded_resItem != NULL
+	    && _requiring_resItem != NULL) {
 
-	    CResolvableList upgrade_list;
+	    CResItemList upgrade_list;
 
-	    world()->foreachUpgrade (_requiring_resolvable, new Channel(CHANNEL_TYPE_ANY), look_for_upgrades_cb, (void *)&upgrade_list);
+	    world()->foreachUpgrade (_requiring_resItem, new Channel(CHANNEL_TYPE_ANY), look_for_upgrades_cb, (void *)&upgrade_list);
 
 	    if (!upgrade_list.empty()) {
 		string label, req_str, up_str;
 
 		branch_item = new QueueItemBranch (world());
 
-		req_str = _requiring_resolvable->asString();
-		up_str  = _upgraded_resolvable->asString();
+		req_str = _requiring_resItem->asString();
+		up_str  = _upgraded_resItem->asString();
 
 		label = string ("for requiring ") + _dep->asString() + " for " + req_str + " when upgrading " + up_str;
 		branch_item->setLabel (label);
 //fprintf (stderr, "Branching: %s\n", label.c_str());
-		for (CResolvableList::const_iterator iter = upgrade_list.begin(); iter != upgrade_list.end(); iter++) {
-		    constResolvablePtr upgrade_resolvable = *iter;
+		for (CResItemList::const_iterator iter = upgrade_list.begin(); iter != upgrade_list.end(); iter++) {
+		    constResItemPtr upgrade_resItem = *iter;
 		    QueueItemInstallPtr install_item;
 
-		    if (context->resolvableIsPossible (upgrade_resolvable)) {
+		    if (context->resItemIsPossible (upgrade_resItem)) {
 		    
-			install_item = new QueueItemInstall (world(), upgrade_resolvable);
-		    	install_item->setUpgrades (_requiring_resolvable);
+			install_item = new QueueItemInstall (world(), upgrade_resItem);
+		    	install_item->setUpgrades (_requiring_resItem);
 			branch_item->addItem (install_item);
 
-			ResolverInfoNeededByPtr upgrade_info = new ResolverInfoNeededBy (upgrade_resolvable);
-			upgrade_info->addRelatedResolvable (_upgraded_resolvable);
+			ResolverInfoNeededByPtr upgrade_info = new ResolverInfoNeededBy (upgrade_resItem);
+			upgrade_info->addRelatedResItem (_upgraded_resItem);
 			install_item->addInfo (upgrade_info);
 
-			// If an upgrade resolvable has its requirements met, don't do the uninstall branch.
+			// If an upgrade resItem has its requirements met, don't do the uninstall branch.
 			//   FIXME: should we also look at conflicts here?
 
 			if (explore_uninstall_branch) {
-			    CDependencyList requires = upgrade_resolvable->requires();
+			    CDependencyList requires = upgrade_resItem->requires();
 			    CDependencyList::const_iterator iter = requires.begin();
 			    for (; iter != requires.end(); iter++) {
 				constDependencyPtr req = *iter;
@@ -333,24 +333,24 @@ QueueItemRequire::process (ResolverContextPtr context, QueueItemList & new_items
 			    }
 			}
 			
-		    } /* if (context->resolvableIsPossible ( ... */
+		    } /* if (context->resItemIsPossible ( ... */
 		} /* for (iter = upgrade_list; ... */
 	    } /* if (upgrade_list) ... */
 
 	    if (!upgrade_list.empty()
 		&& branch_item->isEmpty ()) {
 
-		for (CResolvableList::const_iterator iter = upgrade_list.begin(); iter != upgrade_list.end(); iter++) {
+		for (CResItemList::const_iterator iter = upgrade_list.begin(); iter != upgrade_list.end(); iter++) {
 		    string str;
 		    string p1, p2;
 
-		    p1 = _requiring_resolvable->asString();
+		    p1 = _requiring_resItem->asString();
 		    p2 = (*iter)->asString();
 		    str = string ("Upgrade to ") + p2 + " to avoid removing " + p1 + " is not possible.";
 
 		    ResolverInfoMiscPtr misc_info = new ResolverInfoMisc (NULL, RESOLVER_INFO_PRIORITY_VERBOSE, str);
-		    misc_info->addRelatedResolvable (_requiring_resolvable);
-		    misc_info->addRelatedResolvable (*iter);
+		    misc_info->addRelatedResItem (_requiring_resItem);
+		    misc_info->addRelatedResItem (*iter);
 		    context->addInfo (misc_info);
 
 		    explore_uninstall_branch = true;
@@ -358,17 +358,17 @@ QueueItemRequire::process (ResolverContextPtr context, QueueItemList & new_items
 
 		//
 		//  The exception: we always want to consider uninstalling
-		//  when the requirement has resulted from a resolvable losing
+		//  when the requirement has resulted from a resItem losing
 		//  one of it's provides.
 		
 	    } else if (!upgrade_list.empty()
 		       && explore_uninstall_branch
-		       && codependent_resolvables (_requiring_resolvable, _upgraded_resolvable)
-		       && _lost_resolvable == NULL) {
+		       && codependent_resItems (_requiring_resItem, _upgraded_resItem)
+		       && _lost_resItem == NULL) {
 		explore_uninstall_branch = false;
 	    }
 
-	} /* if (_upgrade_resolvable && _requiring_resolvable) ... */
+	} /* if (_upgrade_resItem && _requiring_resItem) ... */
 
 	// We always consider uninstalling when in verification mode.
 
@@ -376,13 +376,13 @@ QueueItemRequire::process (ResolverContextPtr context, QueueItemList & new_items
 	    explore_uninstall_branch = true;
 	}
 
-	if (explore_uninstall_branch && _requiring_resolvable) {
+	if (explore_uninstall_branch && _requiring_resItem) {
 	    ResolverInfoPtr log_info;
-	    uninstall_item = new QueueItemUninstall (world(),_requiring_resolvable, "unsatisfied requirements");
+	    uninstall_item = new QueueItemUninstall (world(),_requiring_resItem, "unsatisfied requirements");
 	    uninstall_item->setDependency (_dep);
 	    
-	    if (_lost_resolvable) {
-		log_info = new ResolverInfoDependsOn (_requiring_resolvable, _lost_resolvable);
+	    if (_lost_resItem) {
+		log_info = new ResolverInfoDependsOn (_requiring_resItem, _lost_resItem);
 		uninstall_item->addInfo (log_info);
 	    }
 	    
@@ -406,32 +406,32 @@ QueueItemRequire::process (ResolverContextPtr context, QueueItemList & new_items
 	
     } else if (num_providers == 1) {
 
-	if (getenv ("RC_SPEW")) fprintf (stderr, "Found exactly one resolvable, installing it.\n");
+	if (getenv ("RC_SPEW")) fprintf (stderr, "Found exactly one resItem, installing it.\n");
 
 	QueueItemInstallPtr install_item = new QueueItemInstall (world(), info.providers.front());
 	install_item->addDependency (_dep);
 
-	// The requiring resolvable could be NULL if the requirement was added as an extra dependency.
-	if (_requiring_resolvable) {
-	    install_item->addNeededBy (_requiring_resolvable);
+	// The requiring resItem could be NULL if the requirement was added as an extra dependency.
+	if (_requiring_resItem) {
+	    install_item->addNeededBy (_requiring_resItem);
 	}
 	new_items.push_front (install_item);
 
     } else if (num_providers > 1) {
 
-	if (getenv ("RC_SPEW")) fprintf (stderr, "Found more than one resolvable, branching.\n");
+	if (getenv ("RC_SPEW")) fprintf (stderr, "Found more than one resItem, branching.\n");
 
-//fprintf (stderr, "Found more than one resolvable, branching.\n");
+//fprintf (stderr, "Found more than one resItem, branching.\n");
 	QueueItemBranchPtr branch_item = new QueueItemBranch (world());
 
-	for (CResolvableList::const_iterator iter = info.providers.begin(); iter != info.providers.end(); iter++) {
+	for (CResItemList::const_iterator iter = info.providers.begin(); iter != info.providers.end(); iter++) {
 	    QueueItemInstallPtr install_item = new QueueItemInstall (world(), *iter);
 	    install_item->addDependency (_dep);
 	    branch_item->addItem (install_item);
 
-	    // The requiring resolvable could be NULL if the requirement was added as an extra dependency.
-	    if (_requiring_resolvable) {
-		install_item->addNeededBy (_requiring_resolvable);
+	    // The requiring resItem could be NULL if the requirement was added as an extra dependency.
+	    if (_requiring_resItem) {
+		install_item->addNeededBy (_requiring_resItem);
 	    }
 	}
 
@@ -454,8 +454,8 @@ QueueItemRequire::copy (void) const
     QueueItemRequirePtr new_require = new QueueItemRequire (world(), _dep);
     ((QueueItemPtr)new_require)->copy((constQueueItemPtr)this);
 
-    new_require->_requiring_resolvable = _requiring_resolvable;
-    new_require->_upgraded_resolvable  = _upgraded_resolvable;
+    new_require->_requiring_resItem = _requiring_resItem;
+    new_require->_upgraded_resItem  = _upgraded_resItem;
     new_require->_remove_only          = _remove_only;
 
     return new_require;

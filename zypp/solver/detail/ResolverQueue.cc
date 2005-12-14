@@ -97,16 +97,16 @@ ResolverQueue::~ResolverQueue()
 //---------------------------------------------------------------------------
 
 void
-ResolverQueue::addResolvableToInstall (constResolvablePtr resolvable)
+ResolverQueue::addResItemToInstall (constResItemPtr resItem)
 {
     QueueItemInstallPtr item;
 
-    if (_context->resolvableIsPresent (resolvable)) {
-	printf ("%s is already installed", ((constSpecPtr)resolvable)->asString().c_str());
+    if (_context->resItemIsPresent (resItem)) {
+	printf ("%s is already installed", ((constSpecPtr)resItem)->asString().c_str());
 	return;
     }
 
-    item = new QueueItemInstall (_context->world(), resolvable);
+    item = new QueueItemInstall (_context->world(), resItem);
     item->setExplicitlyRequested ();
 
     addItem (item);
@@ -114,14 +114,14 @@ ResolverQueue::addResolvableToInstall (constResolvablePtr resolvable)
 
 
 void
-ResolverQueue::addResolvableToRemove (constResolvablePtr resolvable, bool remove_only_mode)
+ResolverQueue::addResItemToRemove (constResItemPtr resItem, bool remove_only_mode)
 {
     QueueItemUninstallPtr item;
 
-    if (_context->resolvableIsAbsent (resolvable))
+    if (_context->resItemIsAbsent (resItem))
 	return;
 
-    item = new QueueItemUninstall (_context->world(), resolvable, "user request");
+    item = new QueueItemUninstall (_context->world(), resItem, "user request");
     if (remove_only_mode)
 	item->setRemoveOnly ();
 
@@ -132,22 +132,22 @@ ResolverQueue::addResolvableToRemove (constResolvablePtr resolvable, bool remove
 
 
 void
-ResolverQueue::addResolvableToVerify (constResolvablePtr resolvable)
+ResolverQueue::addResItemToVerify (constResItemPtr resItem)
 {
     WorldPtr world;
     
     world = _context->world ();
 
-    CDependencyList requires = resolvable->requires();
+    CDependencyList requires = resItem->requires();
     for (CDependencyList::const_iterator iter = requires.begin(); iter != requires.end(); iter++) {
 	QueueItemRequirePtr item = new QueueItemRequire (world, *iter);
-	item->addResolvable (resolvable);
+	item->addResItem (resItem);
 	addItem (item);
     }
 
-    CDependencyList conflicts = resolvable->conflicts();
+    CDependencyList conflicts = resItem->conflicts();
     for (CDependencyList::const_iterator iter = conflicts.begin(); iter != conflicts.end(); iter++) {
-	QueueItemConflictPtr item = new QueueItemConflict (world, *iter, resolvable);
+	QueueItemConflictPtr item = new QueueItemConflict (world, *iter, resItem);
 	addItem (item);
     }
 }
@@ -326,7 +326,7 @@ copy_queue_except_for_branch (ResolverQueuePtr queue, QueueItemPtr branch_item, 
 
 		/* Penalties are negative priorities */
 		int penalty;
-		penalty = - queue->context()->getChannelPriority (install_item->resolvable()->channel());
+		penalty = - queue->context()->getChannelPriority (install_item->resItem()->channel());
 		
 		install_item->setOtherPenalty (penalty);
 	    }
@@ -363,9 +363,9 @@ ResolverQueue::splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueLi
 
     /* 
        Check for deferrable items: if we have two install items where the to-be-installed
-       resolvables have the same name, then we will defer the lower-priority install if
+       resItems have the same name, then we will defer the lower-priority install if
        one of the following is true:
-       (1) Both resolvables have the same version
+       (1) Both resItems have the same version
        (2) The lower-priority channel is a previous version.
     */
 
@@ -377,8 +377,8 @@ ResolverQueue::splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueLi
 	    QueueItemPtr item2 = *iter2;
 
 	    if (item->isInstall() && item2->isInstall()) {
-		constResolvablePtr r = ((QueueItemInstallPtr) item)->resolvable();
-		constResolvablePtr r2 = ((QueueItemInstallPtr) item2)->resolvable();
+		constResItemPtr r = ((QueueItemInstallPtr) item)->resItem();
+		constResItemPtr r2 = ((QueueItemInstallPtr) item2)->resItem();
 		constChannelPtr channel = r->channel();
 		constChannelPtr channel2 = r2->channel();
 		int priority, priority2;

@@ -731,14 +731,14 @@ XmlParser::dependencyEnd(const char *name)
 /* ------ */
 
 
-static RCResolvableDep *
-rc_xml_node_to_resolvable_dep_internal (const xmlNode *node)
+static RCResItemDep *
+rc_xml_node_to_resItem_dep_internal (const xmlNode *node)
 {
     gchar *name = NULL, *version = NULL, *release = NULL;
     gboolean has_epoch = false;
     guint32 epoch = 0;
-    RCResolvableRelation relation;
-    RCResolvableDep *dep;
+    RCResItemRelation relation;
+    RCResItemDep *dep;
     
     gchar *tmp;
 
@@ -749,7 +749,7 @@ rc_xml_node_to_resolvable_dep_internal (const xmlNode *node)
     name = xml_get_prop (node, "name");
     tmp = xml_get_prop (node, "op");
     if (tmp) {
-	relation = rc_resolvable_relation_from_string (tmp);
+	relation = rc_resItem_relation_from_string (tmp);
 	
 	has_epoch = xml_get_guint32_value (node, "epoch", &epoch);
 
@@ -760,7 +760,7 @@ rc_xml_node_to_resolvable_dep_internal (const xmlNode *node)
     }
 
     /* FIXME: should get channel from XML */
-    dep = rc_resolvable_dep_new (name, has_epoch, epoch, version, release,
+    dep = rc_resItem_dep_new (name, has_epoch, epoch, version, release,
 				 relation, RC_TYPE_RESOLVABLE, RC_CHANNEL_ANY,
 				 false, false);
 
@@ -770,18 +770,18 @@ rc_xml_node_to_resolvable_dep_internal (const xmlNode *node)
     g_free (release);
 
     return dep;
-} /* rc_xml_node_to_resolvable_dep_internal */
+} /* rc_xml_node_to_resItem_dep_internal */
 
-RCResolvableDep *
-rc_xml_node_to_resolvable_dep (const xmlNode *node)
+RCResItemDep *
+rc_xml_node_to_resItem_dep (const xmlNode *node)
 {
-    RCResolvableDep *dep = NULL;
+    RCResItemDep *dep = NULL;
 
     if (!g_strcasecmp (node->name, "dep")) {
-	dep = rc_xml_node_to_resolvable_dep_internal (node);
+	dep = rc_xml_node_to_resItem_dep_internal (node);
 	return (dep);
     } else if (!g_strcasecmp (node->name, "or")) {
-	RCResolvableDepSList *or_dep_slist = NULL;
+	RCResItemDepSList *or_dep_slist = NULL;
 	RCDepOr *or;
 	xmlNode *iter = node->xmlChildrenNode;
 
@@ -789,7 +789,7 @@ rc_xml_node_to_resolvable_dep (const xmlNode *node)
 	    if (iter->type == XML_ELEMENT_NODE) {
 		or_dep_slist = g_slist_append(
 		    or_dep_slist,
-		    rc_xml_node_to_resolvable_dep_internal (iter));
+		    rc_xml_node_to_resItem_dep_internal (iter));
 	    }
 
 	    iter = iter->next;
@@ -800,7 +800,7 @@ rc_xml_node_to_resolvable_dep (const xmlNode *node)
     }
 
     return (dep);
-} /* rc_xml_node_to_resolvable_dep */
+} /* rc_xml_node_to_resItem_dep */
 
 /* ------ */
 

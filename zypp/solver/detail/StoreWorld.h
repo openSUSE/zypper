@@ -28,10 +28,10 @@
 #include <map>
 
 #include <zypp/solver/detail/StoreWorldPtr.h>
-#include <zypp/solver/detail/ResolvableAndDependency.h>
+#include <zypp/solver/detail/ResItemAndDependency.h>
 #include <zypp/solver/detail/PackmanPtr.h>
 #include <zypp/solver/detail/World.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Match.h>
 
 ///////////////////////////////////////////////////////////////////
@@ -50,13 +50,13 @@ class StoreWorld : public World {
 
     int _freeze_count;
 
-    ResolvableTable _resolvables_by_name;
-    ResolvableAndDependencyTable _provides_by_name;
-    ResolvableAndDependencyTable _requires_by_name;
-    ResolvableAndDependencyTable _conflicts_by_name;
+    ResItemTable _resItems_by_name;
+    ResItemAndDependencyTable _provides_by_name;
+    ResItemAndDependencyTable _requires_by_name;
+    ResItemAndDependencyTable _conflicts_by_name;
 
     PackmanPtr _packman;
-    Kind _resolvable_kind;
+    Kind _resItem_kind;
 
     ChannelList _channels;
 
@@ -81,25 +81,25 @@ class StoreWorld : public World {
 
     // ---------------------------------- methods
 
-    // Add/remove resolvables
+    // Add/remove resItems
 
-    bool addResolvable (constResolvablePtr resolvable);
-    void addResolvablesFromList (const CResolvableList & slist);
-    void removeResolvable (constResolvablePtr resolvable);
-    void removeResolvables (constChannelPtr channel);
+    bool addResItem (constResItemPtr resItem);
+    void addResItemsFromList (const CResItemList & slist);
+    void removeResItem (constResItemPtr resItem);
+    void removeResItems (constChannelPtr channel);
     void clear ();
 
-    // Iterate over resolvables
+    // Iterate over resItems
 
-    virtual int foreachResolvable (ChannelPtr channel, CResolvableFn fn, void *data);
-    virtual int foreachResolvableByName (const std::string & name, ChannelPtr channel, CResolvableFn fn, void *data);
-    virtual int foreachResolvableByMatch (constMatchPtr match, CResolvableFn fn, void *data);
+    virtual int foreachResItem (ChannelPtr channel, CResItemFn fn, void *data);
+    virtual int foreachResItemByName (const std::string & name, ChannelPtr channel, CResItemFn fn, void *data);
+    virtual int foreachResItemByMatch (constMatchPtr match, CResItemFn fn, void *data);
 
     // Iterate across provides or requirement
 
-    virtual int foreachProvidingResolvable (constDependencyPtr dep, ResolvableAndSpecFn fn, void *data);
-    virtual int foreachRequiringResolvable (constDependencyPtr dep, ResolvableAndDepFn fn, void *data);
-    virtual int foreachConflictingResolvable (constDependencyPtr dep, ResolvableAndDepFn fn, void *data);
+    virtual int foreachProvidingResItem (constDependencyPtr dep, ResItemAndSpecFn fn, void *data);
+    virtual int foreachRequiringResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data);
+    virtual int foreachConflictingResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data);
 
     // Channels
 
@@ -114,12 +114,12 @@ class StoreWorld : public World {
 
     virtual int foreachChannel (ChannelFn fn, void *data) const;
 
-    // Single resolvable queries
+    // Single resItem queries
 
-    virtual constResolvablePtr findInstalledResolvable (constResolvablePtr resolvable);
-    virtual constResolvablePtr findResolvable (constChannelPtr channel, const char *name) const;
-    virtual constResolvablePtr findResolvableWithConstraint (constChannelPtr channel, const char *name, constDependencyPtr constraint, bool is_and) const;
-    virtual ChannelPtr guessResolvableChannel (constResolvablePtr resolvable) const;
+    virtual constResItemPtr findInstalledResItem (constResItemPtr resItem);
+    virtual constResItemPtr findResItem (constChannelPtr channel, const char *name) const;
+    virtual constResItemPtr findResItemWithConstraint (constChannelPtr channel, const char *name, constDependencyPtr constraint, bool is_and) const;
+    virtual ChannelPtr guessResItemChannel (constResItemPtr resItem) const;
 
 };
     

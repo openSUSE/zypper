@@ -27,7 +27,7 @@
 #include <string.h>
 
 #include <zypp/solver/detail/QueueItemInstallPtr.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
 
@@ -46,10 +46,10 @@ class QueueItemInstall : public QueueItem {
     REP_BODY(QueueItemInstall);
 
   private:
-    constResolvablePtr _resolvable;
-    constResolvablePtr _upgrades;
+    constResItemPtr _resItem;
+    constResItemPtr _upgrades;
     CDependencyList _deps_satisfied_by_this_install;
-    CResolvableList _needed_by;
+    CResItemList _needed_by;
     int _channel_priority;
     int _other_penalty;
 
@@ -57,7 +57,7 @@ class QueueItemInstall : public QueueItem {
 
   public:
 
-    QueueItemInstall (WorldPtr world, constResolvablePtr resolvable);
+    QueueItemInstall (WorldPtr world, constResItemPtr resItem);
     virtual ~QueueItemInstall();
 
     // ---------------------------------- I/O
@@ -72,10 +72,10 @@ class QueueItemInstall : public QueueItem {
 
     // ---------------------------------- accessors
 
-    constResolvablePtr resolvable (void) const { return _resolvable; }
+    constResItemPtr resItem (void) const { return _resItem; }
 
-    constResolvablePtr upgrades (void) const { return _upgrades; }
-    void setUpgrades (constResolvablePtr upgrades) { _upgrades = upgrades; }
+    constResItemPtr upgrades (void) const { return _upgrades; }
+    void setUpgrades (constResItemPtr upgrades) { _upgrades = upgrades; }
 
     int channelPriority (void) const { return _channel_priority; }
     void setChannelPriority (int channel_priority) { _channel_priority = channel_priority; }
@@ -95,7 +95,7 @@ class QueueItemInstall : public QueueItem {
     virtual bool isSatisfied (ResolverContextPtr context) const;
 
     void addDependency (constDependencyPtr dep);
-    void addNeededBy (constResolvablePtr resolvable);
+    void addNeededBy (constResItemPtr resItem);
 
 };
 

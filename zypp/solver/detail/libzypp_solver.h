@@ -25,7 +25,7 @@
 #include <zypp/solver/detail/Channel.h>
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Match.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Spec.h>
 #include <zypp/solver/detail/Version.h>
 #include <zypp/solver/detail/World.h>

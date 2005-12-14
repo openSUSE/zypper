@@ -48,7 +48,7 @@ ResolverInfoDependsOn::toString ( const ResolverInfoDependsOn & on)
     string res;
 
     res += ResolverInfo::toString (on);
-    res += string ("depended on ") + on.resolvablesToString(false);
+    res += string ("depended on ") + on.resItemsToString(false);
 
     return res;
 }
@@ -70,8 +70,8 @@ operator<<( ostream& os, const ResolverInfoDependsOn & on)
 
 //---------------------------------------------------------------------------
 
-ResolverInfoDependsOn::ResolverInfoDependsOn (constResolvablePtr resolvable, constResolvablePtr on)
-    : ResolverInfoContainer (RESOLVER_INFO_TYPE_DEPENDS_ON, resolvable, RESOLVER_INFO_PRIORITY_USER, on)
+ResolverInfoDependsOn::ResolverInfoDependsOn (constResItemPtr resItem, constResItemPtr on)
+    : ResolverInfoContainer (RESOLVER_INFO_TYPE_DEPENDS_ON, resItem, RESOLVER_INFO_PRIORITY_USER, on)
 {
 }
 
@@ -85,7 +85,7 @@ ResolverInfoDependsOn::~ResolverInfoDependsOn ()
 ResolverInfoPtr
 ResolverInfoDependsOn::copy (void) const
 {
-    ResolverInfoDependsOnPtr cpy = new ResolverInfoDependsOn(resolvable(), NULL);
+    ResolverInfoDependsOnPtr cpy = new ResolverInfoDependsOn(resItem(), NULL);
 
     ((ResolverInfoContainerPtr)cpy)->copy (this);
 

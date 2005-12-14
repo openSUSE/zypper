@@ -70,8 +70,8 @@ operator<<( ostream& os, const ResolverInfoMissingReq & missing)
 
 //---------------------------------------------------------------------------
 
-ResolverInfoMissingReq::ResolverInfoMissingReq (constResolvablePtr resolvable, constDependencyPtr missing_req)
-    : ResolverInfo (RESOLVER_INFO_TYPE_MISSING_REQ, resolvable, RESOLVER_INFO_PRIORITY_USER)
+ResolverInfoMissingReq::ResolverInfoMissingReq (constResItemPtr resItem, constDependencyPtr missing_req)
+    : ResolverInfo (RESOLVER_INFO_TYPE_MISSING_REQ, resItem, RESOLVER_INFO_PRIORITY_USER)
     , _missing_req (missing_req)
 {
 }
@@ -86,7 +86,7 @@ ResolverInfoMissingReq::~ResolverInfoMissingReq ()
 ResolverInfoPtr
 ResolverInfoMissingReq::copy (void) const
 {
-    ResolverInfoMissingReqPtr cpy = new ResolverInfoMissingReq(resolvable(), _missing_req);
+    ResolverInfoMissingReqPtr cpy = new ResolverInfoMissingReq(resItem(), _missing_req);
 
     ((ResolverInfoPtr)cpy)->copy (this);
 

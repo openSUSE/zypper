@@ -48,7 +48,7 @@ ResolverInfoNeededBy::toString ( const ResolverInfoNeededBy & by)
     string res;
 
     res += ResolverInfo::toString (by, false);
-    res += string (" needed by ") + by.resolvablesToString(false);
+    res += string (" needed by ") + by.resItemsToString(false);
 
     return res;
 }
@@ -70,8 +70,8 @@ operator<<( ostream& os, const ResolverInfoNeededBy & by)
 
 //---------------------------------------------------------------------------
 
-ResolverInfoNeededBy::ResolverInfoNeededBy (constResolvablePtr resolvable)
-    : ResolverInfoContainer (RESOLVER_INFO_TYPE_NEEDED_BY, resolvable, RESOLVER_INFO_PRIORITY_USER, NULL)
+ResolverInfoNeededBy::ResolverInfoNeededBy (constResItemPtr resItem)
+    : ResolverInfoContainer (RESOLVER_INFO_TYPE_NEEDED_BY, resItem, RESOLVER_INFO_PRIORITY_USER, NULL)
 {
 }
 
@@ -85,7 +85,7 @@ ResolverInfoNeededBy::~ResolverInfoNeededBy ()
 ResolverInfoPtr
 ResolverInfoNeededBy::copy (void) const
 {
-    ResolverInfoNeededByPtr cpy = new ResolverInfoNeededBy(resolvable());
+    ResolverInfoNeededByPtr cpy = new ResolverInfoNeededBy(resItem());
 
     ((ResolverInfoContainerPtr)cpy)->copy (this);
 

@@ -86,7 +86,7 @@ class MultiWorld : public World {
     virtual ChannelPtr getChannelByName (const char *channel_name) const;
     virtual ChannelPtr getChannelByAlias (const char *alias) const;
     virtual ChannelPtr getChannelById (const char *channel_id) const;
-    virtual ChannelPtr guessResolvableChannel (constResolvablePtr resolvable) const;
+    virtual ChannelPtr guessResItemChannel (constResItemPtr resItem) const;
     virtual int foreachChannel (ChannelFn fn, void *data) const;
 
     int foreachSubworld (WorldFn callback, void *user_data);
@@ -96,23 +96,23 @@ class MultiWorld : public World {
     ServiceWorldPtr lookupServiceById (const char *id);
     bool mountService (const char *url, void *error);			// GError **error);
 
-    // Single resolvable queries
+    // Single resItem queries
 
-    virtual constResolvablePtr findInstalledResolvable (constResolvablePtr resolvable);
-    virtual constResolvablePtr findResolvable (constChannelPtr channel, const char *name) const;
-    virtual constResolvablePtr findResolvableWithConstraint (constChannelPtr channel, const char *name, constDependencyPtr constraint, bool is_and) const;
+    virtual constResItemPtr findInstalledResItem (constResItemPtr resItem);
+    virtual constResItemPtr findResItem (constChannelPtr channel, const char *name) const;
+    virtual constResItemPtr findResItemWithConstraint (constChannelPtr channel, const char *name, constDependencyPtr constraint, bool is_and) const;
 
-    // Iterate over resolvables
+    // Iterate over resItems
 
-    virtual int foreachResolvable (ChannelPtr channel, CResolvableFn fn, void *data);
-    virtual int foreachResolvableByName (const std::string & name, ChannelPtr channel, CResolvableFn fn, void *data);
-    virtual int foreachResolvableByMatch (constMatchPtr match, CResolvableFn fn, void *data);
+    virtual int foreachResItem (ChannelPtr channel, CResItemFn fn, void *data);
+    virtual int foreachResItemByName (const std::string & name, ChannelPtr channel, CResItemFn fn, void *data);
+    virtual int foreachResItemByMatch (constMatchPtr match, CResItemFn fn, void *data);
 
     // Iterate across provides or requirement
 
-    virtual int foreachProvidingResolvable (constDependencyPtr dep, ResolvableAndSpecFn fn, void *data);
-    virtual int foreachRequiringResolvable (constDependencyPtr dep, ResolvableAndDepFn fn, void *data);
-    virtual int foreachConflictingResolvable (constDependencyPtr dep, ResolvableAndDepFn fn, void *data);
+    virtual int foreachProvidingResItem (constDependencyPtr dep, ResItemAndSpecFn fn, void *data);
+    virtual int foreachRequiringResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data);
+    virtual int foreachConflictingResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data);
 
     // locks
 

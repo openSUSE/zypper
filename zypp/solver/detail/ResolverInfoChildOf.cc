@@ -47,7 +47,7 @@ ResolverInfoChildOf::toString ( const ResolverInfoChildOf & child)
     string res = "<resolverinfochildof '";
 
     res += ResolverInfo::toString (child);
-    res += string ("part of ") + child.resolvablesToString(false);
+    res += string ("part of ") + child.resItemsToString(false);
     res += "'>";
 
     return res;
@@ -70,8 +70,8 @@ operator<<( ostream& os, const ResolverInfoChildOf & child)
 
 //---------------------------------------------------------------------------
 
-ResolverInfoChildOf::ResolverInfoChildOf (constResolvablePtr resolvable, constResolvablePtr dependency)
-    : ResolverInfoContainer (RESOLVER_INFO_TYPE_CHILD_OF, resolvable, RESOLVER_INFO_PRIORITY_USER, dependency)
+ResolverInfoChildOf::ResolverInfoChildOf (constResItemPtr resItem, constResItemPtr dependency)
+    : ResolverInfoContainer (RESOLVER_INFO_TYPE_CHILD_OF, resItem, RESOLVER_INFO_PRIORITY_USER, dependency)
 {
 }
 
@@ -86,7 +86,7 @@ ResolverInfoChildOf::~ResolverInfoChildOf ()
 ResolverInfoPtr
 ResolverInfoChildOf::copy (void) const
 {
-    ResolverInfoChildOfPtr cpy = new ResolverInfoChildOf(resolvable(), NULL);
+    ResolverInfoChildOfPtr cpy = new ResolverInfoChildOf(resItem(), NULL);
 
     ((ResolverInfoContainerPtr)cpy)->copy (this);
 

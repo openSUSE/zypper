@@ -30,10 +30,10 @@
 #include <zypp/solver/detail/ResolverInfoConflictsWith.h>
 #include <zypp/solver/detail/ResolverInfoMisc.h>
 #include <zypp/solver/detail/ResolverInfoNeededBy.h>
-#include <zypp/solver/detail/Resolvable.h>
+#include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Version.h>
 #include <zypp/solver/detail/World.h>
-#include <zypp/solver/detail/ResolvableAndDependency.h>
+#include <zypp/solver/detail/ResItemAndDependency.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace ZYPP {
@@ -56,7 +56,7 @@ string
 QueueItemInstall::toString ( const QueueItemInstall & item)
 {
     string ret = "[Install: ";
-    ret += item._resolvable->asString();
+    ret += item._resItem->asString();
     if (item._upgrades != NULL) {
 	ret += ", Upgrades ";
 	ret += item._upgrades->asString();
@@ -67,7 +67,7 @@ QueueItemInstall::toString ( const QueueItemInstall & item)
     }
     if (!item._needed_by.empty()) {
 	ret += ", Needed by ";
-	ret += Resolvable::toString(item._needed_by);
+	ret += ResItem::toString(item._needed_by);
     }
     if (item._explicitly_requested) ret += ", Explicit !";
     ret += "]";
@@ -91,17 +91,17 @@ operator<<( ostream& os, const QueueItemInstall & item)
 
 //---------------------------------------------------------------------------
 
-QueueItemInstall::QueueItemInstall (WorldPtr world, constResolvablePtr resolvable)
+QueueItemInstall::QueueItemInstall (WorldPtr world, constResItemPtr resItem)
     : QueueItem (QUEUE_ITEM_TYPE_INSTALL, world)
-    , _resolvable (resolvable)
+    , _resItem (resItem)
     , _channel_priority (0)
     , _other_penalty (0)
     , _explicitly_requested (false)
 {
-    constResolvablePtr upgrades = world->findInstalledResolvable (resolvable);
-    if (getenv("RC_SPEW")) fprintf (stderr, "QueueItemInstall::QueueItemInstall(%s) upgrades %s\n", resolvable->asString().c_str(), upgrades!=NULL?upgrades->asString().c_str():"nothing");
+    constResItemPtr upgrades = world->findInstalledResItem (resItem);
+    if (getenv("RC_SPEW")) fprintf (stderr, "QueueItemInstall::QueueItemInstall(%s) upgrades %s\n", resItem->asString().c_str(), upgrades!=NULL?upgrades->asString().c_str():"nothing");
     if (upgrades
-	&& ! (((constSpecPtr)upgrades)->equals (resolvable))) {
+	&& ! (((constSpecPtr)upgrades)->equals (resItem))) {
         setUpgrades(upgrades);
     }
 }
@@ -116,19 +116,19 @@ QueueItemInstall::~QueueItemInstall()
 bool
 QueueItemInstall::isSatisfied (ResolverContextPtr context) const
 {
-    return context->resolvableIsPresent (_resolvable);
+    return context->resItemIsPresent (_resItem);
 }
 
 
 //---------------------------------------------------------------------------
 
-// Handle system resolvable's that conflict with us -> uninstall them
+// Handle system resItem's that conflict with us -> uninstall them
 
 static bool
-build_conflict_list (constResolvablePtr resolvable, constDependencyPtr dep, void *data)
+build_conflict_list (constResItemPtr resItem, constDependencyPtr dep, void *data)
 {
-    CResolvableList *rl = (CResolvableList *)data;
-    rl->push_front (resolvable);
+    CResItemList *rl = (CResItemList *)data;
+    rl->push_front (resItem);
     return true;
 }
 
@@ -137,26 +137,26 @@ QueueItemInstall::process (ResolverContextPtr context, QueueItemList & qil)
 {
     if (getenv ("RC_SPEW")) fprintf (stderr, "QueueItemInstall::process(%s)\n", this->asString().c_str());
 
-    constResolvablePtr resolvable = _resolvable;
-    string pkg_name = resolvable->asString();
+    constResItemPtr resItem = _resItem;
+    string pkg_name = resItem->asString();
     string msg;
-    ResolvableStatus status = context->getStatus (resolvable);
+    ResItemStatus status = context->getStatus (resItem);
 
     CDependencyList deps;
-    CResolvableList conflicts;
+    CResItemList conflicts;
 
-    /* If we are trying to upgrade resolvable A with resolvable B and they both have the
+    /* If we are trying to upgrade resItem A with resItem B and they both have the
        same version number, do nothing.  This shouldn't happen in general with
        red-carpet, but can come up with the installer & autopull. */
 
     if (_upgrades
-	&& ((constSpecPtr)_resolvable)->equals (_upgrades)) {
+	&& ((constSpecPtr)_resItem)->equals (_upgrades)) {
 	ResolverInfoPtr info;
 
-	if (getenv ("RC_SPEW")) fprintf (stderr, "upgrades equal resolvable, skipping\n");
+	if (getenv ("RC_SPEW")) fprintf (stderr, "upgrades equal resItem, skipping\n");
 
 	msg = string("Skipping ") + pkg_name + (": already installed");
-	info = new ResolverInfoMisc (_resolvable, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
+	info = new ResolverInfoMisc (_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
 	context->addInfo (info);
 	goto finished;
     }
@@ -166,10 +166,10 @@ QueueItemInstall::process (ResolverContextPtr context, QueueItemList & qil)
 
 	if (getenv ("RC_SPEW")) fprintf (stderr, "still needed ");
 
-	for (CResolvableList::const_iterator iter = _needed_by.begin(); iter != _needed_by.end() && !still_needed; iter++) {
-	    ResolvableStatus status = context->getStatus (*iter);
+	for (CResItemList::const_iterator iter = _needed_by.begin(); iter != _needed_by.end() && !still_needed; iter++) {
+	    ResItemStatus status = context->getStatus (*iter);
 	    if (getenv ("RC_SPEW")) fprintf (stderr, "by: [status: %s] %s\n", ResolverContext::toString(status).c_str(), (*iter)->asString().c_str());
-	    if (! resolvable_status_is_to_be_uninstalled (status)) {
+	    if (! resItem_status_is_to_be_uninstalled (status)) {
 		still_needed = true;
 	    }
 	}
@@ -183,13 +183,13 @@ QueueItemInstall::process (ResolverContextPtr context, QueueItemList & qil)
        needed this. */
 
     if (context->verifying()
-	&& resolvable_status_is_to_be_uninstalled (context->getStatus (resolvable))
+	&& resItem_status_is_to_be_uninstalled (context->getStatus (resItem))
 	&& !_needed_by.empty()) {
 
 	QueueItemUninstallPtr uninstall_item;
 
-	for (CResolvableList::const_iterator iter = _needed_by.begin(); iter != _needed_by.end(); iter++) {
-	    uninstall_item = new QueueItemUninstall (world(), *iter, "uninstallable resolvable");
+	for (CResItemList::const_iterator iter = _needed_by.begin(); iter != _needed_by.end(); iter++) {
+	    uninstall_item = new QueueItemUninstall (world(), *iter, "uninstallable resItem");
 	    qil.push_front (uninstall_item);
 	}
 	
@@ -198,20 +198,20 @@ QueueItemInstall::process (ResolverContextPtr context, QueueItemList & qil)
 
     if (_upgrades == NULL) {
 
-	if (getenv ("RC_SPEW")) fprintf (stderr, "simple install of %s\n", resolvable->asString(true).c_str());
+	if (getenv ("RC_SPEW")) fprintf (stderr, "simple install of %s\n", resItem->asString(true).c_str());
 
-	context->installResolvable (resolvable, context->verifying(), /* is_soft */ _other_penalty);
+	context->installResItem (resItem, context->verifying(), /* is_soft */ _other_penalty);
 
     } else {
 
 	QueueItemUninstallPtr uninstall_item;
 
-	if (getenv ("RC_SPEW")) fprintf (stderr, "upgrade install of %s\n", resolvable->asString().c_str());
+	if (getenv ("RC_SPEW")) fprintf (stderr, "upgrade install of %s\n", resItem->asString().c_str());
 
-	context->upgradeResolvable (resolvable, _upgrades, context->verifying(), /* is_soft */ _other_penalty);
+	context->upgradeResItem (resItem, _upgrades, context->verifying(), /* is_soft */ _other_penalty);
 
 	uninstall_item = new QueueItemUninstall (world(), _upgrades, "upgrade");
-	uninstall_item->setUpgradedTo (resolvable);
+	uninstall_item->setUpgradedTo (resItem);
 
 	if (_explicitly_requested)
 	    uninstall_item->setExplicitlyRequested ();
@@ -219,13 +219,13 @@ QueueItemInstall::process (ResolverContextPtr context, QueueItemList & qil)
 	qil.push_front (uninstall_item);
     }
 
-    /* Log which resolvable need this install */
+    /* Log which resItem need this install */
 
     if (!_needed_by.empty()) {
 	ResolverInfoNeededByPtr info;
 
-	info = new ResolverInfoNeededBy (resolvable);
-	info->addRelatedResolvableList (_needed_by);
+	info = new ResolverInfoNeededBy (resItem);
+	info->addRelatedResItemList (_needed_by);
 	context->addInfo (info);
     }
 
@@ -240,71 +240,71 @@ QueueItemInstall::process (ResolverContextPtr context, QueueItemList & qil)
 	msg = string ("Installing ") + pkg_name;
     }
 
-    context->addInfoString (resolvable, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
+    context->addInfoString (resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
 
     logInfo (context);
 
-    /* Construct require items for each of the resolvable's requires that is still unsatisfied. */
+    /* Construct require items for each of the resItem's requires that is still unsatisfied. */
 
-    deps = resolvable->requires();
+    deps = resItem->requires();
     for (CDependencyList::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
 	constDependencyPtr dep = *iter;
 	if (!context->requirementIsMet (dep, false)) {
 	    if (getenv("RC_SPEW")) fprintf (stderr, "this requires %s\n", dep->asString().c_str());
 	    QueueItemRequirePtr req_item = new QueueItemRequire (world(), dep);
-	    req_item->addResolvable (resolvable);
+	    req_item->addResItem (resItem);
 	    qil.push_front (req_item);
 	}
     }
 
-    /* Construct conflict items for each of the resolvable's conflicts. */
+    /* Construct conflict items for each of the resItem's conflicts. */
 
-    deps = resolvable->conflicts();
+    deps = resItem->conflicts();
     for (CDependencyList::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
 	constDependencyPtr dep = *iter;
 	if (getenv("RC_SPEW")) fprintf (stderr, "this conflicts with '%s'\n", dep->asString().c_str());
-	QueueItemConflictPtr conflict_item = new QueueItemConflict (world(), dep, resolvable);
+	QueueItemConflictPtr conflict_item = new QueueItemConflict (world(), dep, resItem);
 	qil.push_front (conflict_item);
     }
 
-    /* Construct conflict items for each of the resolvable's obsoletes. */
+    /* Construct conflict items for each of the resItem's obsoletes. */
 
-    deps = resolvable->obsoletes();
+    deps = resItem->obsoletes();
     for (CDependencyList::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
 	constDependencyPtr dep = *iter;
 	if (getenv("RC_SPEW")) fprintf (stderr, "this obsoletes %s\n", dep->asString().c_str());
-	QueueItemConflictPtr conflict_item = new QueueItemConflict (world(), dep, resolvable);
+	QueueItemConflictPtr conflict_item = new QueueItemConflict (world(), dep, resItem);
 	conflict_item->setActuallyAnObsolete();
 	qil.push_front (conflict_item);
     }
 
-    /* Construct uninstall items for system resolvable's that conflict with us. */
+    /* Construct uninstall items for system resItem's that conflict with us. */
 
-    deps = resolvable->provides();
+    deps = resItem->provides();
     for (CDependencyList::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
 	constDependencyPtr dep = *iter;
-	world()->foreachConflictingResolvable (dep, build_conflict_list, &conflicts);
+	world()->foreachConflictingResItem (dep, build_conflict_list, &conflicts);
     }
 
-    for (CResolvableList::const_iterator iter = conflicts.begin(); iter != conflicts.end(); iter++) {
-	constResolvablePtr conflicting_resolvable = *iter;
+    for (CResItemList::const_iterator iter = conflicts.begin(); iter != conflicts.end(); iter++) {
+	constResItemPtr conflicting_resItem = *iter;
 	ResolverInfoPtr log_info;
 	QueueItemUninstallPtr uninstall_item;
 
 	/* Check to see if we conflict with ourself and don't create
 	 * an uninstall item for it if we do.  This is Debian's way of
-	 * saying that one and only one resolvable with this provide may
+	 * saying that one and only one resItem with this provide may
 	 * exist on the system at a time.
 	 */
-	if (((constSpecPtr)conflicting_resolvable)->equals (resolvable)) {
+	if (((constSpecPtr)conflicting_resItem)->equals (resItem)) {
 	    continue;
 	}
 
-	if (getenv("RC_SPEW")) fprintf (stderr, "because: '%s'\n", conflicting_resolvable->asString(true).c_str());
+	if (getenv("RC_SPEW")) fprintf (stderr, "because: '%s'\n", conflicting_resItem->asString(true).c_str());
 
-	uninstall_item = new QueueItemUninstall (world(), conflicting_resolvable, "conflict");
+	uninstall_item = new QueueItemUninstall (world(), conflicting_resItem, "conflict");
 	uninstall_item->setDueToConflict ();
-	log_info = new ResolverInfoConflictsWith (conflicting_resolvable, resolvable);
+	log_info = new ResolverInfoConflictsWith (conflicting_resItem, resItem);
 	uninstall_item->addInfo (log_info);
 	qil.push_front (uninstall_item);
     }
@@ -319,12 +319,12 @@ QueueItemInstall::process (ResolverContextPtr context, QueueItemList & qil)
 QueueItemPtr
 QueueItemInstall::copy (void) const
 {
-    QueueItemInstallPtr new_install = new QueueItemInstall (world(), _resolvable);
+    QueueItemInstallPtr new_install = new QueueItemInstall (world(), _resItem);
     ((QueueItemPtr)new_install)->copy((constQueueItemPtr)this);
 
     new_install->_upgrades = _upgrades;
     new_install->_deps_satisfied_by_this_install = CDependencyList(_deps_satisfied_by_this_install.begin(), _deps_satisfied_by_this_install.end());
-    new_install->_needed_by = CResolvableList (_needed_by.begin(), _needed_by.end());
+    new_install->_needed_by = CResItemList (_needed_by.begin(), _needed_by.end());
     new_install->_channel_priority = _channel_priority;
     new_install->_other_penalty = _other_penalty;
     new_install->_explicitly_requested = _explicitly_requested;
@@ -340,7 +340,7 @@ QueueItemInstall::cmp (constQueueItemPtr item) const
     if (cmp != 0)
 	return cmp;
     constQueueItemInstallPtr install = item;
-    return GVersion.compare (_resolvable, install->_resolvable);
+    return GVersion.compare (_resItem, install->_resItem);
 }
 
 //---------------------------------------------------------------------------
@@ -353,9 +353,9 @@ QueueItemInstall::addDependency (constDependencyPtr dep)
 
 
 void 
-QueueItemInstall::addNeededBy (constResolvablePtr resolvable)
+QueueItemInstall::addNeededBy (constResItemPtr resItem)
 {
-    _needed_by.push_front (resolvable);
+    _needed_by.push_front (resItem);
 }
 
 ///////////////////////////////////////////////////////////////////
