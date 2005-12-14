@@ -16,6 +16,7 @@
 #include "zypp/ExternalProgram.h"
 #include "zypp/media/Mount.h"
 #include "zypp/media/MediaCD.h"
+#include "zypp/Url.h"
 
 #include <cstring> // strerror
 
@@ -145,7 +146,7 @@ namespace zypp {
     void MediaCD::attachTo(bool next)
     {
       Mount mount;
-      const char *mountpoint = attachPoint().asString().c_str();
+      string mountpoint = attachPoint().asString();
       bool mountsucceeded = false;
       int count = 0;
     
@@ -190,7 +191,7 @@ namespace zypp {
     	    ; ++fsit)
     	{
 	  try {
-    	    mount.mount (*it, mountpoint, *fsit, options);
+    	    mount.mount (*it, mountpoint.c_str(), *fsit, options);
 	    _mounteddevice = *it;
 	    _lastdev = count;
 	    mountsucceeded = true;
@@ -206,10 +207,7 @@ namespace zypp {
       {
     	_mounteddevice.erase();
     	_lastdev = -1;
-	// FIXME not suitable for MediaMountExeption, as device cannot be
-	// specified here
-	// errors might be different as well
-	ZYPP_THROW(MediaException("Error::E_mount_failed"));
+        ZYPP_THROW(MediaMountException(_url.toString(), mountpoint, "Mounting media failed"));
       }
       DBG << _lastdev << " " << count << endl;
     }

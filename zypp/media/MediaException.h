@@ -112,13 +112,15 @@ namespace zypp
     class MediaNotOpenException : public MediaException
     {
     public:
-      MediaNotOpenException()
+      MediaNotOpenException(const std::string & action_r)
       : MediaException()
+      , _action(action_r)
       {}
       virtual ~MediaNotOpenException() throw() {};
     protected:
       virtual std::ostream & dumpOn( std::ostream & str ) const;
     private:
+      std::string _action;
     };
 
     class MediaFileNotFoundException : public MediaException
@@ -160,6 +162,20 @@ namespace zypp
       , _url(url_r.toString())
       {}
       virtual ~MediaNotAttachedException() throw() {};
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+    private:
+      std::string _url;
+    };
+
+    class MediaBadAttachPointException : public MediaException
+    {
+    public:
+      MediaBadAttachPointException(const Url & url_r)
+      : MediaException()
+      , _url(url_r.toString())
+      {}
+      virtual ~MediaBadAttachPointException() throw() {};
     protected:
       virtual std::ostream & dumpOn( std::ostream & str ) const;
     private:

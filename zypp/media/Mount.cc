@@ -70,7 +70,7 @@ void Mount::mount ( const string& source,
 
     if ( process == NULL )
     {
-      ZYPP_THROW(MediaMountException(source, target, "Error::E_mount_failed"));
+      ZYPP_THROW(MediaMountException(source, target, "Mounting media failed"));
     }
 
     string value;
@@ -96,15 +96,15 @@ void Mount::mount ( const string& source,
 
 	if  ( value.find ( "is already mounted on" ) != string::npos )
 	{
-	    err = "Error::E_already_mounted";
+	    err = "Media already mounted";
 	}
 	else if  ( value.find ( "ermission denied" ) != string::npos )
 	{
-	    err = "Error::E_no_permission";
+	    err = "Permission denied";
 	}
 	else if  ( value.find ( "wrong fs type" ) != string::npos )
 	{
-	    err = "Error::E_invalid_filesystem";
+	    err = "Invalid filesystem on media";
 	}
 
 	output = process->receiveLine();
@@ -119,7 +119,7 @@ void Mount::mount ( const string& source,
     }
     else if ( status != 0 && err == "" )
     {
-        err = "Error::E_mount_failed";
+        err = "Mounting media failed";
     }
 
     if ( err != "" ) {
@@ -175,7 +175,7 @@ void Mount::umount (const string& path)
 
 	if  ( value.find ( "device is busy" ) != string::npos )
 	{
-	    err = "Error::E_busy";
+	    err = "Device is busy";
 	}
 
 	output = process->receiveLine();
@@ -190,7 +190,7 @@ void Mount::umount (const string& path)
     }
     else if ( status != 0 && err == "" )
     {
-	err = "Error::E_umount_failed";
+	err = "Unmounting media failed";
     }
 
     if ( err != "") {

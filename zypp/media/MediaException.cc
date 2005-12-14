@@ -42,7 +42,7 @@ namespace zypp
 
     std::ostream & MediaNotOpenException::dumpOn( std::ostream & str ) const
     {
-      return str << "Media not opened." << endl;
+      return str << "Media not opened while performing action " << _action << endl;
     }
 
     std::ostream & MediaFileNotFoundException::dumpOn( std::ostream & str) const
@@ -59,6 +59,11 @@ namespace zypp
     std::ostream & MediaNotAttachedException::dumpOn( std::ostream & str) const
     {
       return str << "Media not attached: " << _url << endl;
+    }
+
+    std::ostream & MediaBadAttachPointException::dumpOn( std::ostream & str) const
+    {
+      return str << "Bad media attach point: " << _url << endl;
     }
 
     std::ostream & MediaSystemException::dumpOn( std::ostream & str) const

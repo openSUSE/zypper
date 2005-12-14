@@ -152,18 +152,11 @@ void MediaHandler::attach( bool next )
     return;
 
   if ( _attachPoint.empty() ) {
-    ERR << "Error::E_bad_attachpoint" << endl;
-    ZYPP_THROW( MediaException("Error::E_bad_attachpoint") );
+    ERR << "Bad Attachpoint" << endl;
+    ZYPP_THROW( MediaBadAttachPointException(url()));
   }
 
-  try {
-    attachTo( next ); // pass to concrete handler
-  }
-  catch (const MediaException & excpt_r)
-  {
-    WAR << "Attach failed: " << excpt_r << " " << *this << endl;
-    ZYPP_RETHROW(excpt_r);
-  }
+  attachTo( next ); // pass to concrete handler
   _isAttached = true;
   MIL << "Attached: " << *this << endl;
 }
@@ -203,14 +196,7 @@ void MediaHandler::disconnect()
   if ( !_isAttached )
     return;
 
-  try {
-    disconnectFrom(); // pass to concrete handler
-  }
-  catch (const MediaException & excpt_r)
-  {
-    WAR << "Disconnect failed: " << excpt_r << " " << *this << endl;
-    ZYPP_RETHROW(excpt_r);
-  }
+  disconnectFrom(); // pass to concrete handler
   MIL << "Disconnected: " << *this << endl;
 }
 
@@ -230,14 +216,7 @@ void MediaHandler::release( bool eject )
     return;
   }
 
-  try {
-    releaseFrom( eject ); // pass to concrete handler
-  }
-  catch (const MediaException & excpt_r)
-  {
-    WAR << "Release failed: " << excpt_r << " " << *this << endl;
-    ZYPP_RETHROW(excpt_r);
-  }
+  releaseFrom( eject ); // pass to concrete handler
   _isAttached = false;
   MIL << "Released: " << *this << endl;
 }
@@ -254,19 +233,12 @@ void MediaHandler::provideFileCopy( Pathname srcFilename,
                                        Pathname targetFilename ) const
 {
   if ( !_isAttached ) {
-    INT << "Error::E_not_attached" << " on provideFileCopy(" << srcFilename
+    INT << "Media not_attached on provideFileCopy(" << srcFilename
         << "," << targetFilename << ")" << endl;
     ZYPP_THROW(MediaNotAttachedException(url()));
   }
 
-  try {
-    getFileCopy( srcFilename, targetFilename ); // pass to concrete handler
-  }
-  catch (const MediaException & excpt_r)
-  {
-    WAR << "provideFileCopy(" << srcFilename << "," << targetFilename << "): " << excpt_r << endl;
-    ZYPP_RETHROW(excpt_r);
-  }
+  getFileCopy( srcFilename, targetFilename ); // pass to concrete handler
   DBG << "provideFileCopy(" << srcFilename << "," << targetFilename  << ")" << endl;
 }
 
@@ -277,14 +249,7 @@ void MediaHandler::provideFile( Pathname filename ) const
     ZYPP_THROW(MediaNotAttachedException(url()));
   }
 
-  try {
-    getFile( filename ); // pass to concrete handler
-  }
-  catch (const MediaException & excpt_r)
-  {
-    WAR << "provideFile(" << filename << "): " << excpt_r << endl;
-    ZYPP_RETHROW(excpt_r);
-  }
+  getFile( filename ); // pass to concrete handler
   DBG << "provideFile(" << filename << ")" << endl;
 }
 
@@ -303,14 +268,8 @@ void MediaHandler::provideDir( Pathname dirname ) const
     INT << "Error: Not attached on provideDir(" << dirname << ")" << endl;
     ZYPP_THROW(MediaNotAttachedException(url()));
   }
-  try {
-    getDir( dirname, /*recursive*/false ); // pass to concrete handler
-  }
-  catch (const MediaException & excpt_r)
-  {
-    WAR << "provideDir(" << dirname << "): " << excpt_r << endl;
-    ZYPP_RETHROW(excpt_r);
-  }
+
+  getDir( dirname, /*recursive*/false ); // pass to concrete handler
   MIL << "provideDir(" << dirname << ")" << endl;
 }
 
@@ -329,15 +288,7 @@ void MediaHandler::provideDirTree( Pathname dirname ) const
     ZYPP_THROW(MediaNotAttachedException(url()));
   }
 
-  try {
-    getDir( dirname, /*recursive*/true ); // pass to concrete handler
-  }
-  catch (const MediaException & excpt_r)
-  {
-    WAR << "provideDirTree(" << dirname << "): " << excpt_r << endl;
-    ZYPP_RETHROW(excpt_r);
-  }
-
+  getDir( dirname, /*recursive*/true ); // pass to concrete handler
   MIL << "provideDirTree(" << dirname << ")" << endl;
 }
 
@@ -385,14 +336,7 @@ void MediaHandler::dirInfo( list<string> & retlist,
     ZYPP_THROW(MediaNotAttachedException(url()));
   }
 
-  try {
-    getDirInfo( retlist, dirname, dots ); // pass to concrete handler
-  }
-  catch (const MediaException & excpt_r)
-  {
-    WAR << "dirInfo(" << dirname << "): " << excpt_r << endl;
-    ZYPP_RETHROW(excpt_r);
-  }
+  getDirInfo( retlist, dirname, dots ); // pass to concrete handler
   MIL << "dirInfo(" << dirname << ")" << endl;
 }
 
@@ -414,14 +358,7 @@ void MediaHandler::dirInfo( filesystem::DirContent & retlist,
     ZYPP_THROW(MediaNotAttachedException(url()));
   }
 
-  try {
-    getDirInfo( retlist, dirname, dots ); // pass to concrete handler
-  }
-  catch (const MediaException & excpt_r)
-  {
-    WAR << "dirInfo(" << dirname << "): " << excpt_r << endl;
-    ZYPP_RETHROW(excpt_r);
-  }
+  getDirInfo( retlist, dirname, dots ); // pass to concrete handler
   MIL << "dirInfo(" << dirname << ")" << endl;
 }
 
@@ -437,13 +374,7 @@ void MediaHandler::getDirectoryYast( std::list<std::string> & retlist,
   retlist.clear();
 
   filesystem::DirContent content;
-  try {
-    getDirectoryYast( content, dirname, dots );
-  }
-  catch (const MediaException & excpt_r)
-  {
-    ZYPP_RETHROW(excpt_r);
-  }
+  getDirectoryYast( content, dirname, dots );
 
   // convert to std::list<std::string>
   for ( filesystem::DirContent::const_iterator it = content.begin(); it != content.end(); ++it ) {
@@ -464,14 +395,7 @@ void MediaHandler::getDirectoryYast( filesystem::DirContent & retlist,
 
   // look for directory.yast
   Pathname dirFile = dirname + "directory.yast";
-  try {
-    getFile( dirFile );
-  }
-  catch (const MediaException & excpt_r)
-  {
-    ERR << "provideFile(" << dirFile << "): " << excpt_r << endl;
-    ZYPP_RETHROW(excpt_r);
-  }
+  getFile( dirFile );
   DBG << "provideFile(" << dirFile << "): " << "OK" << endl;
 
   // using directory.yast
@@ -543,13 +467,7 @@ void MediaHandler::getFile( const Pathname & filename ) const
 
 void MediaHandler::getFileCopy ( const Pathname & srcFilename, const Pathname & targetFilename ) const
 {
-  try {
-    getFile(srcFilename);
-  }
-  catch (const MediaException & excpt_r)
-  {
-    ZYPP_RETHROW(excpt_r);
-  }
+  getFile(srcFilename);
 
   if ( copy( localPath( srcFilename ), targetFilename ) != 0 ) {
     ZYPP_THROW(MediaWriteException(targetFilename));
