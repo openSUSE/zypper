@@ -28,8 +28,8 @@ namespace zypp {
     ProxyInfo::ProxyInfo()
     : _pimpl( Impl::_nullimpl )
     {}
-    ProxyInfo::ProxyInfo(RW_pointer<Impl> impl)
-    : _pimpl(impl)
+    ProxyInfo::ProxyInfo(ProxyInfo::ImplPtr pimpl_r)
+    : _pimpl(pimpl_r)
     {}
 
     bool ProxyInfo::enabled() const

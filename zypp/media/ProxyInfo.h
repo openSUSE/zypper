@@ -33,10 +33,11 @@ namespace zypp {
       
       /** Implementation */
       struct Impl;
+      typedef shared_ptr<Impl> ImplPtr;
       /** Ctor */
       ProxyInfo();
       /** Ctor */
-      ProxyInfo(RW_pointer<Impl> impl);
+      ProxyInfo(ProxyInfo::ImplPtr pimpl_r);
       bool enabled() const;
       std::string proxy(const std::string & protocol_r) const;
       NoProxyList noProxy() const;

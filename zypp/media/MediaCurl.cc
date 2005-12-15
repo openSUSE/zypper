@@ -196,7 +196,7 @@ void MediaCurl::attachTo (bool next)
     }
   } else {
 
-    ProxyInfo proxy_info (RW_pointer<ProxyInfo::Impl>(new ProxyInfoSysconfig("proxy")));
+    ProxyInfo proxy_info (ProxyInfo::ImplPtr(new ProxyInfoSysconfig("proxy")));
 
     if ( proxy_info.enabled())
     {
