@@ -13,7 +13,7 @@
 #define ZYPP_MEDIA_PROXYINFO_PROXYINFOSYSCONFIG_H
 
 #include <string>
-#include <list>
+#include <map>
 
 #include "zypp/media/ProxyInfo.h"
 #include "zypp/media/proxyinfo/ProxyInfoImpl.h"
@@ -22,21 +22,26 @@ namespace zypp {
   namespace media {
 
 
-    class ProxyInfo_sysconfig : public ProxyInfo::Impl
+    class ProxyInfoSysconfig : public ProxyInfo::Impl
     {
     public:
-      ProxyInfo_sysconfig(const Pathname & path);
+      ProxyInfoSysconfig(const Pathname & path);
       /**  */
       bool enabled() const
       { return _enabled; }
       /**  */
       std::string proxy(const std::string & protocol_r) const;
       /**  */
-      std::list<std::string> noProxy() const
+      ProxyInfo::NoProxyList noProxy() const
       { return _no_proxy; }
+      /**  */
+      virtual ProxyInfo::NoProxyIterator noProxyBegin() const;
+      /**  */
+      virtual ProxyInfo::NoProxyIterator noProxyEnd() const;
     private:
       bool _enabled;
-      std::list<std::string> _no_proxy;
+      ProxyInfo::NoProxyList _no_proxy;
+      std::map<std::string,std::string> _proxies;
     };
 
     namespace proxyinfo {

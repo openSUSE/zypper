@@ -18,6 +18,7 @@
 
 #include "zypp/media/MediaCurl.h"
 #include "zypp/media/MediaCallbacks.h"
+#include "zypp/media/proxyinfo/ProxyInfos.h"
 #include "zypp/media/ProxyInfo.h"
 
 #include <sys/types.h>
@@ -195,15 +196,15 @@ void MediaCurl::attachTo (bool next)
     }
   } else {
 
-    ProxyInfo proxy_info (RW_pointer<ProxyInfo::Impl>(new ProxyInfo_sysconfig("proxy")));
+    ProxyInfo proxy_info (RW_pointer<ProxyInfo::Impl>(new ProxyInfoSysconfig("proxy")));
 
     if ( proxy_info.enabled())
     {
       bool useproxy = true;
 
       std::list<std::string> nope = proxy_info.noProxy();
-      for (std::list<std::string>::const_iterator it = nope.begin();
-           it != nope.end();
+      for (ProxyInfo::NoProxyIterator it = proxy_info.noProxyBegin();
+           it != proxy_info.noProxyEnd();
            it++)
       {
 	// no proxy: if nope equals host,
@@ -219,13 +220,7 @@ void MediaCurl::attachTo (bool next)
       }
 
       if ( useproxy ) {
-	if ( _url.getScheme() == "ftp" ) {
-	  _proxy = proxy_info.ftp();
-	} else if ( _url.getScheme() == "http" ) {
-	  _proxy = proxy_info.http();
-	} else if ( _url.getScheme() == "https" ) {
-	  _proxy = proxy_info.https();
-	}
+	_proxy = proxy_info.proxy(_url.getScheme());
       }
     }
   }

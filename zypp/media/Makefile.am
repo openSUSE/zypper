@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-SUBDIRS =
+SUBDIRS = proxyinfo
 
 INCLUDES = -I$(oldincludedir)/libxml2
 
@@ -41,6 +41,7 @@ lib@PACKAGE@_media_la_SOURCES = \
 	MediaCurl.cc
 
 
-lib@PACKAGE@_media_la_LIBADD =	-lcurl
+lib@PACKAGE@_media_la_LIBADD =	proxyinfo/lib@PACKAGE@_media_proxyinfo.la \
+				-lcurl
 
 ## ##################################################

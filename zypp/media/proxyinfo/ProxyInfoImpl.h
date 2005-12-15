@@ -36,7 +36,11 @@ namespace zypp {
       /**  */
       virtual std::string proxy(const std::string & prorocol_r) const = 0;
       /**  */
-      virtual std::list<std::string> noProxy() const = 0;
+      virtual ProxyInfo::NoProxyList noProxy() const = 0;
+      /**  */
+      virtual ProxyInfo::NoProxyIterator noProxyBegin() const = 0;
+      /**  */
+      virtual ProxyInfo::NoProxyIterator noProxyEnd() const = 0;
   
     public:
       /** Default Impl: empty sets. */

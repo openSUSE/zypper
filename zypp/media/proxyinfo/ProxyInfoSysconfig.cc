@@ -61,7 +61,7 @@ namespace zypp {
       }
     } // namespace proxyinfo
 
-    ProxyInfo_sysconfig::ProxyInfo_sysconfig(const Pathname & path)
+    ProxyInfoSysconfig::ProxyInfoSysconfig(const Pathname & path)
     : ProxyInfo::Impl()
     {
       map<string,string> data = proxyinfo::sysconfigRead(
@@ -71,24 +71,34 @@ namespace zypp {
       map<string,string>::const_iterator it = data.find("PROXY_ENABLED");
       if (it != data.end())
 	_enabled = it->second != "no";
-/*      it = data.find("HTTP_PROXY");
+      it = data.find("HTTP_PROXY");
       if (it != data.end())
-	_http = it->second;
+	_proxies["http"] = it->second;
       it = data.find("HTTPS_PROXY");
       if (it != data.end())
-	_https = it->second;
+	_proxies["https"] = it->second;
       it = data.find("FTP_PROXY");
       if (it != data.end())
-	_ftp = it->second;*/
+	_proxies["ftp"] = it->second;
       it = data.find("NO_PROXY");
       if (it != data.end())
 	_no_proxy.push_back(it->second);
 #warning FIXME once splitting a string is in str:: namespace
     }
 
-    std::string ProxyInfo_sysconfig::proxy(const std::string & protocol_r) const
-    { return ""; }
+    std::string ProxyInfoSysconfig::proxy(const std::string & protocol_r) const
+    { 
+      map<string,string>::const_iterator it = _proxies.find(protocol_r);
+      if (it != _proxies.end())
+	return it->second;
+      return "";
+    }
 
+    ProxyInfo::NoProxyIterator ProxyInfoSysconfig::noProxyBegin() const
+    { return _no_proxy.begin(); }
+
+    ProxyInfo::NoProxyIterator ProxyInfoSysconfig::noProxyEnd() const
+    { return _no_proxy.end(); }
 
   } // namespace media
 } // namespace zypp

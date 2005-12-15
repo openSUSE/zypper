@@ -9,17 +9,17 @@ INCLUDES = -I$(oldincludedir)/libxml2
 
 include_HEADERS = 		\
 	ProxyInfoImpl.h		\
+	ProxyInfos.h		\
 	ProxyInfoSysconfig.h
 
 
-noinst_LTLIBRARIES =	lib@PACKAGE@_media.la
+noinst_LTLIBRARIES =	lib@PACKAGE@_media_proxyinfo.la
 
 ## ##################################################
 
-lib@PACKAGE@_media_la_SOURCES = \
+lib@PACKAGE@_media_proxyinfo_la_SOURCES = \
 	ProxyInfoSysconfig.cc
 
-
-lib@PACKAGE@_media_la_LIBADD =	-lcurl
+lib@PACKAGE@_media_proxyinfo_la_LIBADD =
 
 ## ##################################################
