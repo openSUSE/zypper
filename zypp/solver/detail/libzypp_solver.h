@@ -18,8 +18,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _LIBZYPP_H
-#define _LIBZYPP_H
+#ifndef _LIBzypp_H
+#define _LIBzypp_H
 
 #include <zypp/solver/detail/Arch.h>
 #include <zypp/solver/detail/Channel.h>
@@ -39,4 +39,4 @@
 #include <zypp/solver/detail/utils.h>
 #include <zypp/solver/detail/extract.h>
 
-#endif	// _LIBZYPP_H
+#endif	// _LIBzypp_H

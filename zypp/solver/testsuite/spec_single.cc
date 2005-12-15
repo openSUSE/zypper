@@ -24,7 +24,7 @@
 #include <zypp/solver/detail/Spec.h>
 
 using namespace std;
-using namespace ZYPP;
+using namespace zypp;
 
 bool
 emptySpec (void)

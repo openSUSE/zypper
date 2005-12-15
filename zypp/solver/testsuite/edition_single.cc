@@ -24,7 +24,7 @@
 #include <zypp/solver/detail/Edition.h>
 
 using namespace std;
-using namespace ZYPP;
+using namespace zypp;
 
 //---------------------------------------------------------------------------
 

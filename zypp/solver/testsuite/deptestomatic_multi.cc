@@ -50,7 +50,7 @@ int assertOutput( const char* output)
 
 
 using namespace std;
-using namespace ZYPP;
+using namespace zypp;
 
 static MultiWorldPtr world = NULL;
 

@@ -38,7 +38,7 @@
 #include <zypp/solver/detail/PackmanPtr.h>
 
 ///////////////////////////////////////////////////////////////////
-namespace ZYPP {
+namespace zypp {
 //////////////////////////////////////////////////////////////////
 
 
@@ -61,7 +61,7 @@ int extract_packages_from_undump_file (const std::string & filename, ChannelAndS
 int extract_packages_from_directory (const std::string & path, ChannelPtr channel, PackmanPtr packman, bool recursive, ResItemFn callback, void *data);
 
 ///////////////////////////////////////////////////////////////////
-}; // namespace ZYPP
+}; // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
 #endif /* __EXTRACT_H__ */
