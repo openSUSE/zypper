@@ -233,7 +233,7 @@ ResolverContext::installResItem (constResItemPtr resItem, bool is_soft, int othe
     }
 
     if (isParallelInstall (resItem)) {
-	msg = string ("Can't install ") + ((constSpecPtr)resItem)->asString() + ", since a resItem of the same name is already marked as needing to be installed";
+	msg = string ("Can't install ") + ((constSpecPtr)resItem)->asString() + ", since a resolvable of the same name is already marked as needing to be installed";
 	addErrorString (resItem, msg);
 	return false;
     }
@@ -336,7 +336,7 @@ ResolverContext::uninstallResItem (constResItemPtr resItem, bool part_of_upgrade
     
     if (status == RESOLVABLE_STATUS_UNINSTALLED
 	|| status == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK) {
-	msg = string ("Marking resItem ") + ((constSpecPtr)resItem)->asString() + " as uninstallable";
+	msg = string ("Marking resolvable ") + ((constSpecPtr)resItem)->asString() + " as uninstallable";
 	addInfoString (resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
     }
 

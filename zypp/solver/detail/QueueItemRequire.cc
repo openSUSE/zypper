@@ -253,7 +253,7 @@ QueueItemRequire::process (ResolverContextPtr context, QueueItemList & new_items
 	
 	num_providers = info.providers.size();
 
-	if (getenv ("RC_SPEW")) fprintf (stderr, "requirement is met by %d resItems\n", num_providers);
+	if (getenv ("RC_SPEW")) fprintf (stderr, "requirement is met by %d resolvable\n", num_providers);
     }
 
     std::string msg;
@@ -406,7 +406,7 @@ QueueItemRequire::process (ResolverContextPtr context, QueueItemList & new_items
 	
     } else if (num_providers == 1) {
 
-	if (getenv ("RC_SPEW")) fprintf (stderr, "Found exactly one resItem, installing it.\n");
+	if (getenv ("RC_SPEW")) fprintf (stderr, "Found exactly one resolvable, installing it.\n");
 
 	QueueItemInstallPtr install_item = new QueueItemInstall (world(), info.providers.front());
 	install_item->addDependency (_dep);
@@ -419,7 +419,7 @@ QueueItemRequire::process (ResolverContextPtr context, QueueItemList & new_items
 
     } else if (num_providers > 1) {
 
-	if (getenv ("RC_SPEW")) fprintf (stderr, "Found more than one resItem, branching.\n");
+	if (getenv ("RC_SPEW")) fprintf (stderr, "Found more than one resolvable, branching.\n");
 
 //fprintf (stderr, "Found more than one resItem, branching.\n");
 	QueueItemBranchPtr branch_item = new QueueItemBranch (world());

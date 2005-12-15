@@ -144,8 +144,8 @@ conflict_process_cb (constResItemPtr resItem, constSpecPtr spec, void *data)
     string pkg_str, spec_str, msg;
     ResolverInfoPtr log_info;
 
-    if (getenv ("RC_SPEW")) fprintf (stderr, "conflict_process_cb (resItem[%s], spec[%s], info [%s]\n", resItem->asString().c_str(), spec->asString().c_str(), info->conflicting_resItem->asString().c_str());
-    if (getenv ("RC_SPEW")) fprintf (stderr, "conflict_process_cb (resItem equals spec: %s, info->dep [%s]\n", resItem->equals(spec) ? "YES" : "NO", info->dep->asString().c_str());
+    if (getenv ("RC_SPEW")) fprintf (stderr, "conflict_process_cb (resolvable[%s], spec[%s], info [%s]\n", resItem->asString().c_str(), spec->asString().c_str(), info->conflicting_resItem->asString().c_str());
+    if (getenv ("RC_SPEW")) fprintf (stderr, "conflict_process_cb (resolvable equals spec: %s, info->dep [%s]\n", resItem->equals(spec) ? "YES" : "NO", info->dep->asString().c_str());
 
     /* We conflict with ourself.  For the purpose of installing ourself, we
      * just ignore it, but it's Debian's way of saying that one and only one
@@ -174,7 +174,7 @@ conflict_process_cb (constResItemPtr resItem, constSpecPtr spec, void *data)
 
     status = info->context->getStatus (resItem);
 
-    if (getenv ("RC_SPEW")) fprintf (stderr, "conflict_process_cb (resItem[%s]<%s>\n", resItem->asString().c_str(), ResolverContext::toString(status).c_str());
+    if (getenv ("RC_SPEW")) fprintf (stderr, "conflict_process_cb (resolvable[%s]<%s>\n", resItem->asString().c_str(), ResolverContext::toString(status).c_str());
 
     switch (status) {
 	
@@ -239,7 +239,7 @@ conflict_process_cb (constResItemPtr resItem, constSpecPtr spec, void *data)
     }
 
     case RESOLVABLE_STATUS_TO_BE_INSTALLED: {
-	msg = string ("A conflict over ") + info->dep_str + " (" + spec_str + ") requires the removal of the to-be-installed resItem " + pkg_str;
+	msg = string ("A conflict over ") + info->dep_str + " (" + spec_str + ") requires the removal of the to-be-installed resolvable " + pkg_str;
 
 	ResolverInfoMiscPtr misc_info = new ResolverInfoMisc (resItem,RESOLVER_INFO_PRIORITY_VERBOSE, msg);
 

@@ -15,5 +15,5 @@ Download Size: 246, Install Size: 912, Total Priority: 0, Min Priority: 800, Max
 - - - - - - - - - -
 Installing eee-1.0-1[test]
 Installing fff-1.0-1[test]
-[ERROR] A conflict over  eee (eee-1.0-1) requires the removal of the to-be-installed resItem eee-1.0-1[test] [fff-1.0-1]
+[ERROR] A conflict over  eee (eee-1.0-1) requires the removal of the to-be-installed resolvable eee-1.0-1[test] [fff-1.0-1]
 [ERROR] Marking this resolution attempt as invalid.

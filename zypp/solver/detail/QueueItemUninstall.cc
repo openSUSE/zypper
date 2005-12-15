@@ -234,7 +234,7 @@ QueueItemUninstall::process (ResolverContextPtr context, QueueItemList & qil)
 	}
 
 	if (unlink_cancelled) {
-	    string msg = pkg_str + " is required by other installed resItems, so it won't be unlinked.";
+	    string msg = pkg_str + " is required by other installed resolvable, so it won't be unlinked.";
 	    context->addInfoString (_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
 	    goto finished;
 	}

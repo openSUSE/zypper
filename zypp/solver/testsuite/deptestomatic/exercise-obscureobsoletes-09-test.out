@@ -19,5 +19,5 @@ aaa-1.0-1[test]:  needed by  [ddd-1.0-1]
 Installing aaa-1.0-1[test]
 bbb-2.0-1[test]:  needed by  [ccc-1.0-1]
 Installing bbb-2.0-1[test]
-[ERROR] A conflict over  bbb (bbb-2.0-1) requires the removal of the to-be-installed resItem bbb-2.0-1[test] [aaa-1.0-1]
+[ERROR] A conflict over  bbb (bbb-2.0-1) requires the removal of the to-be-installed resolvable bbb-2.0-1[test] [aaa-1.0-1]
 [ERROR] Marking this resolution attempt as invalid.

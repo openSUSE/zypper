@@ -25,7 +25,7 @@ other penalties=-800
 - - - - - - - - - -
 lprng-1.0-1[test]:  needed by  [lsb-1.0-1]
 Installing lprng-1.0-1[test]
-Marking resItem cups-client-1.0-1 as uninstallable
+Marking resolvable cups-client-1.0-1 as uninstallable
 Installing lsb-1.0-1[test]
 
 Other Valid Solutions:
@@ -42,6 +42,6 @@ other penalties=-800
 - - - - - - - - - -
 cups-client-1.0-1[test]:  needed by  [lsb-1.0-1]
 Installing cups-client-1.0-1[test]
-Marking resItem lprng-1.0-1 as uninstallable
+Marking resolvable lprng-1.0-1 as uninstallable
 Installing lsb-1.0-1[test]
 

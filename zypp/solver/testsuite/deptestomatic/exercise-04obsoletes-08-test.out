@@ -15,5 +15,5 @@ Download Size: 246, Install Size: 912, Total Priority: 0, Min Priority: 800, Max
 - - - - - - - - - -
 Installing B-1.0-1[test]
 Installing C-1.0-1[test]
-[ERROR] A conflict over  C (C-1.0-1) requires the removal of the to-be-installed resItem C-1.0-1[test] [B-1.0-1]
+[ERROR] A conflict over  C (C-1.0-1) requires the removal of the to-be-installed resolvable C-1.0-1[test] [B-1.0-1]
 [ERROR] Marking this resolution attempt as invalid.

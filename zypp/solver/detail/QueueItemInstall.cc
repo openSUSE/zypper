@@ -189,7 +189,7 @@ QueueItemInstall::process (ResolverContextPtr context, QueueItemList & qil)
 	QueueItemUninstallPtr uninstall_item;
 
 	for (CResItemList::const_iterator iter = _needed_by.begin(); iter != _needed_by.end(); iter++) {
-	    uninstall_item = new QueueItemUninstall (world(), *iter, "uninstallable resItem");
+	    uninstall_item = new QueueItemUninstall (world(), *iter, "uninstallable resolvable");
 	    qil.push_front (uninstall_item);
 	}
 	
