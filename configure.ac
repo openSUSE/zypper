@@ -65,6 +65,19 @@ pkgdocdir=\${docdir}/$PACKAGE
 AC_SUBST(docdir)
 AC_SUBST(pkgdocdir)
 
+zyppdir=${prefix}/share/$PACKAGE
+localedir=${zyppdir}/locale
+schemadir=${zyppdir}/schema
+
+AC_SUBST(zyppdir)
+AC_SUBST(localedir)
+AC_SUBST(schemadir)
+
+AH_TEMPLATE([LOCALEDIR],[gettext localedir])
+AC_DEFINE_UNQUOTED([LOCALEDIR], ["${localedir}"])
+AH_TEMPLATE([TEXTDOMAIN],[gettext textdomain])
+AC_DEFINE_UNQUOTED([TEXTDOMAIN], ["$PACKAGE"])
+
 dnl ==================================================
 dnl checks for programs
 
@@ -95,6 +108,7 @@ AC_PATH_PROG(XGETTEXT, xgettext)
 if test -z "$XGETTEXT" ; then
     AC_MSG_ERROR(xgettext is missing; please install gettext-devel.)
 fi
+
 
 AC_PATH_PROG(MYRUNTEST, runtest)
 if test -z "$MYRUNTEST" ; then
