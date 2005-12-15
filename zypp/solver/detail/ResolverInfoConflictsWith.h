@@ -25,42 +25,54 @@
 #include <zypp/solver/detail/ResolverInfoConflictsWithPtr.h>
 #include <zypp/solver/detail/ResolverInfoContainer.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : ResolverInfoConflictsWith
+      
+      class ResolverInfoConflictsWith : public ResolverInfoContainer {
+      
+          REP_BODY(ResolverInfoConflictsWith);
+      
+        private:
+      
+        public:
+      
+          ResolverInfoConflictsWith (constResItemPtr resItem, constResItemPtr with);
+          virtual ~ResolverInfoConflictsWith();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const ResolverInfoConflictsWith & context);
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+          friend std::ostream& operator<<(std::ostream&, const ResolverInfoConflictsWith & context);
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+      
+          // ---------------------------------- methods
+      
+          virtual ResolverInfoPtr copy (void) const;
+      };
 
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : ResolverInfoConflictsWith
-
-class ResolverInfoConflictsWith : public ResolverInfoContainer {
-
-    REP_BODY(ResolverInfoConflictsWith);
-
-  private:
-
-  public:
-
-    ResolverInfoConflictsWith (constResItemPtr resItem, constResItemPtr with);
-    virtual ~ResolverInfoConflictsWith();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const ResolverInfoConflictsWith & context);
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-    friend std::ostream& operator<<(std::ostream&, const ResolverInfoConflictsWith & context);
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-
-    // ---------------------------------- methods
-
-    virtual ResolverInfoPtr copy (void) const;
-};
- 
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////        
 #endif // _ResolverInfoConflictsWith_h
  

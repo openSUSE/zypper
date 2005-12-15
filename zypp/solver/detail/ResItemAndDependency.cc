@@ -26,78 +26,90 @@
 #include <zypp/solver/detail/ResItemAndDependency.h>
 #include <zypp/solver/detail/debug.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
-
-using namespace std;
-
-IMPL_BASE_POINTER(ResItemAndDependency);
-
-//---------------------------------------------------------------------------
-
-ResItemAndDependency::ResItemAndDependency (constResItemPtr resItem, constDependencyPtr dependency)
-    : _resItem(resItem)
-    , _dependency(dependency)
-{
-}
-
-//---------------------------------------------------------------------------
-
-string
-ResItemAndDependency::asString (bool full) const
-{
-    return toString (*this, full);
-}
-
-
-string
-ResItemAndDependency::toString ( const ResItemAndDependency & r_and_d, bool full )
-{
-    string res ("{");
-    res += r_and_d._resItem->asString(full);
-    res += ", ";
-    res += r_and_d._dependency->asString();
-    res += "}";
-    return res;
-}
-
-
-ostream &
-ResItemAndDependency::dumpOn (ostream & str) const
-{
-    str << asString();
-    return str;
-}
-
-
-ostream &
-operator<< (ostream & os, const ResItemAndDependency & r_and_d)
-{
-    return os << r_and_d.asString();
-}
-
-//---------------------------------------------------------------------------
-
-/* This function also checks channels in addition to just dep relations */
-/* FIXME: rc_resItem_dep_verify_relation already checks the channel */
-
-bool
-ResItemAndDependency::verifyRelation (constDependencyPtr dep) const
-{
-#if PHI
-    // don't check the channel, thereby honoring conflicts from installed resItems to to-be-installed resItems
-    return dep->verifyRelation (_dependency);
-#else
-    if (!dep->verifyRelation (_dependency)) {
-	return false;
-    }
-    if (getenv ("SPEW_DEP")) fprintf (stderr, "ResItemAndDependency::verifyRelation _resItem->channel() %s, dep->channel() %s\n", _resItem->channel()->asString().c_str(), dep->channel()->asString().c_str());
-    return _resItem->channel()->equals (dep->channel());
-#endif
-}
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      using namespace std;
+      
+      IMPL_BASE_POINTER(ResItemAndDependency);
+      
+      //---------------------------------------------------------------------------
+      
+      ResItemAndDependency::ResItemAndDependency (constResItemPtr resItem, constDependencyPtr dependency)
+          : _resItem(resItem)
+          , _dependency(dependency)
+      {
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      string
+      ResItemAndDependency::asString (bool full) const
+      {
+          return toString (*this, full);
+      }
+      
+      
+      string
+      ResItemAndDependency::toString ( const ResItemAndDependency & r_and_d, bool full )
+      {
+          string res ("{");
+          res += r_and_d._resItem->asString(full);
+          res += ", ";
+          res += r_and_d._dependency->asString();
+          res += "}";
+          return res;
+      }
+      
+      
+      ostream &
+      ResItemAndDependency::dumpOn (ostream & str) const
+      {
+          str << asString();
+          return str;
+      }
+      
+      
+      ostream &
+      operator<< (ostream & os, const ResItemAndDependency & r_and_d)
+      {
+          return os << r_and_d.asString();
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      /* This function also checks channels in addition to just dep relations */
+      /* FIXME: rc_resItem_dep_verify_relation already checks the channel */
+      
+      bool
+      ResItemAndDependency::verifyRelation (constDependencyPtr dep) const
+      {
+      #if PHI
+          // don't check the channel, thereby honoring conflicts from installed resItems to to-be-installed resItems
+          return dep->verifyRelation (_dependency);
+      #else
+          if (!dep->verifyRelation (_dependency)) {
+      	return false;
+          }
+          if (getenv ("SPEW_DEP")) fprintf (stderr, "ResItemAndDependency::verifyRelation _resItem->channel() %s, dep->channel() %s\n", _resItem->channel()->asString().c_str(), dep->channel()->asString().c_str());
+          return _resItem->channel()->equals (dep->channel());
+      #endif
+      }
+        
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 

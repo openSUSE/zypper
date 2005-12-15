@@ -24,121 +24,132 @@
 #include <zypp/solver/detail/ResolverInfo.h>
 #include <zypp/solver/detail/ResolverInfoMisc.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
 
-using namespace std;
-
-IMPL_DERIVED_POINTER(ResolverInfoMisc, ResolverInfo);
-
-//---------------------------------------------------------------------------
-
-
-string
-ResolverInfoMisc::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-ResolverInfoMisc::toString ( const ResolverInfoMisc & misc)
-{
-    string res;
-    res += misc._msg;
-#if 0
-    res += " [";
-    res += ResolverInfo::toString (misc, false);
-    res += "]";
-#endif
-    res += misc.resItemsToString(false);
-    if (!misc._action.empty()) {
-	res += string (", Action: ") + misc._action + "\n";
-    }
-    if (!misc._trigger.empty()) {
-	res += string (", Trigger: ") + misc._trigger + "\n";
-    }
-
-    return res;
-}
-
-
-ostream &
-ResolverInfoMisc::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
-ostream&
-operator<<( ostream& os, const ResolverInfoMisc & misc)
-{
-    return os << misc.asString();
-}
-
-//---------------------------------------------------------------------------
-
-ResolverInfoMisc::ResolverInfoMisc (constResItemPtr resItem, int priority, const string & msg)
-    : ResolverInfoContainer (RESOLVER_INFO_TYPE_MISC, resItem, priority)
-    , _msg (msg)
-{
-}
-
-
-ResolverInfoMisc::~ResolverInfoMisc ()
-{
-}
-
-//---------------------------------------------------------------------------
-
-bool
-ResolverInfoMisc::merge (ResolverInfoPtr info)
-{
-    bool res;
-    ResolverInfoMiscPtr to_be_merged = info;
-
-    res = ((ResolverInfoPtr)this)->merge ((ResolverInfoPtr)to_be_merged);
-    if (!res) return res;
-
-    if (!_msg.empty()
-        && !to_be_merged->_msg.empty()
-	&& _msg == to_be_merged->_msg) {
-            return true;
-    }
-
-    return false;
-}
-
-
-ResolverInfoPtr
-ResolverInfoMisc::copy (void) const
-{
-    ResolverInfoMiscPtr cpy = new ResolverInfoMisc(resItem(), priority(), _msg);
-
-    ((ResolverInfoContainerPtr)cpy)->copy (this);
-
-    return cpy;
-}
-
-//---------------------------------------------------------------------------
-
-void
-ResolverInfoMisc::addAction (const std::string & action_msg)
-{
-    _action = action_msg;
-}
-
-
-void
-ResolverInfoMisc::addTrigger (const std::string & trigger_msg)
-{
-    _trigger = trigger_msg;
-}
-
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+      using namespace std;
+      
+      IMPL_DERIVED_POINTER(ResolverInfoMisc, ResolverInfo);
+      
+      //---------------------------------------------------------------------------
+      
+      
+      string
+      ResolverInfoMisc::asString ( void ) const
+      {
+          return toString (*this);
+      }
+      
+      
+      string
+      ResolverInfoMisc::toString ( const ResolverInfoMisc & misc)
+      {
+          string res;
+          res += misc._msg;
+      #if 0
+          res += " [";
+          res += ResolverInfo::toString (misc, false);
+          res += "]";
+      #endif
+          res += misc.resItemsToString(false);
+          if (!misc._action.empty()) {
+      	res += string (", Action: ") + misc._action + "\n";
+          }
+          if (!misc._trigger.empty()) {
+      	res += string (", Trigger: ") + misc._trigger + "\n";
+          }
+      
+          return res;
+      }
+      
+      
+      ostream &
+      ResolverInfoMisc::dumpOn( ostream & str ) const
+      {
+          str << asString();
+          return str;
+      }
+      
+      
+      ostream&
+      operator<<( ostream& os, const ResolverInfoMisc & misc)
+      {
+          return os << misc.asString();
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      ResolverInfoMisc::ResolverInfoMisc (constResItemPtr resItem, int priority, const string & msg)
+          : ResolverInfoContainer (RESOLVER_INFO_TYPE_MISC, resItem, priority)
+          , _msg (msg)
+      {
+      }
+      
+      
+      ResolverInfoMisc::~ResolverInfoMisc ()
+      {
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      bool
+      ResolverInfoMisc::merge (ResolverInfoPtr info)
+      {
+          bool res;
+          ResolverInfoMiscPtr to_be_merged = info;
+      
+          res = ((ResolverInfoPtr)this)->merge ((ResolverInfoPtr)to_be_merged);
+          if (!res) return res;
+      
+          if (!_msg.empty()
+              && !to_be_merged->_msg.empty()
+      	&& _msg == to_be_merged->_msg) {
+                  return true;
+          }
+      
+          return false;
+      }
+      
+      
+      ResolverInfoPtr
+      ResolverInfoMisc::copy (void) const
+      {
+          ResolverInfoMiscPtr cpy = new ResolverInfoMisc(resItem(), priority(), _msg);
+      
+          ((ResolverInfoContainerPtr)cpy)->copy (this);
+      
+          return cpy;
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      void
+      ResolverInfoMisc::addAction (const std::string & action_msg)
+      {
+          _action = action_msg;
+      }
+      
+      
+      void
+      ResolverInfoMisc::addTrigger (const std::string & trigger_msg)
+      {
+          _trigger = trigger_msg;
+      }
+      
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 

@@ -1,7 +1,7 @@
 #include <string.h>
 #include <zypp/solver/detail/utils.h>
 
-using namespace zypp;
+using namespace zypp::solver::detail;
 
 int
 main (int argc, char *argv[])

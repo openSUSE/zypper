@@ -24,76 +24,87 @@
 #include <zypp/solver/detail/ResolverInfo.h>
 #include <zypp/solver/detail/ResolverInfoObsoletes.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
-
-using namespace std;
-
-IMPL_DERIVED_POINTER(ResolverInfoObsoletes, ResolverInfo);
-
-//---------------------------------------------------------------------------
-
-
-string
-ResolverInfoObsoletes::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-ResolverInfoObsoletes::toString ( const ResolverInfoObsoletes & obsoletes)
-{
-    string res;
-
-    res += ResolverInfo::toString (obsoletes);
-    res += string ("replaced by ") + obsoletes.resItemsToString(false);
-
-    return res;
-}
-
-
-ostream &
-ResolverInfoObsoletes::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
-ostream&
-operator<<( ostream& os, const ResolverInfoObsoletes & obsoletes)
-{
-    return os << obsoletes.asString();
-}
-
-//---------------------------------------------------------------------------
-
-ResolverInfoObsoletes::ResolverInfoObsoletes (constResItemPtr resItem, constResItemPtr obsoletes)
-    : ResolverInfoContainer (RESOLVER_INFO_TYPE_OBSOLETES, resItem, RESOLVER_INFO_PRIORITY_USER, obsoletes)
-{
-}
-
-
-ResolverInfoObsoletes::~ResolverInfoObsoletes ()
-{
-}
-
-//---------------------------------------------------------------------------
-
-ResolverInfoPtr
-ResolverInfoObsoletes::copy (void) const
-{
-    ResolverInfoObsoletesPtr cpy = new ResolverInfoObsoletes(resItem(), NULL);
-
-    ((ResolverInfoContainerPtr)cpy)->copy (this);
-
-    return cpy;
-}
-
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      using namespace std;
+      
+      IMPL_DERIVED_POINTER(ResolverInfoObsoletes, ResolverInfo);
+      
+      //---------------------------------------------------------------------------
+      
+      
+      string
+      ResolverInfoObsoletes::asString ( void ) const
+      {
+          return toString (*this);
+      }
+      
+      
+      string
+      ResolverInfoObsoletes::toString ( const ResolverInfoObsoletes & obsoletes)
+      {
+          string res;
+      
+          res += ResolverInfo::toString (obsoletes);
+          res += string ("replaced by ") + obsoletes.resItemsToString(false);
+      
+          return res;
+      }
+      
+      
+      ostream &
+      ResolverInfoObsoletes::dumpOn( ostream & str ) const
+      {
+          str << asString();
+          return str;
+      }
+      
+      
+      ostream&
+      operator<<( ostream& os, const ResolverInfoObsoletes & obsoletes)
+      {
+          return os << obsoletes.asString();
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      ResolverInfoObsoletes::ResolverInfoObsoletes (constResItemPtr resItem, constResItemPtr obsoletes)
+          : ResolverInfoContainer (RESOLVER_INFO_TYPE_OBSOLETES, resItem, RESOLVER_INFO_PRIORITY_USER, obsoletes)
+      {
+      }
+      
+      
+      ResolverInfoObsoletes::~ResolverInfoObsoletes ()
+      {
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      ResolverInfoPtr
+      ResolverInfoObsoletes::copy (void) const
+      {
+          ResolverInfoObsoletesPtr cpy = new ResolverInfoObsoletes(resItem(), NULL);
+      
+          ((ResolverInfoContainerPtr)cpy)->copy (this);
+      
+          return cpy;
+      }
+      
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 

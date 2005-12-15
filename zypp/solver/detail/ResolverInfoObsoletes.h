@@ -25,42 +25,52 @@
 #include <zypp/solver/detail/ResolverInfoObsoletesPtr.h>
 #include <zypp/solver/detail/ResolverInfoContainer.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : ResolverInfoObsoletes
-
-class ResolverInfoObsoletes : public ResolverInfoContainer {
-
-    REP_BODY(ResolverInfoObsoletes);
-
-  private:
-
-  public:
-
-    ResolverInfoObsoletes (constResItemPtr resItem, constResItemPtr obsoletes);
-    virtual ~ResolverInfoObsoletes();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const ResolverInfoObsoletes & context);
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-    friend std::ostream& operator<<(std::ostream&, const ResolverInfoObsoletes & context);
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-    // ---------------------------------- methods
-
-    virtual ResolverInfoPtr copy (void) const;
-};
- 
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : ResolverInfoObsoletes
+      
+      class ResolverInfoObsoletes : public ResolverInfoContainer {
+      
+          REP_BODY(ResolverInfoObsoletes);
+      
+        private:
+      
+        public:
+      
+          ResolverInfoObsoletes (constResItemPtr resItem, constResItemPtr obsoletes);
+          virtual ~ResolverInfoObsoletes();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const ResolverInfoObsoletes & context);
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+          friend std::ostream& operator<<(std::ostream&, const ResolverInfoObsoletes & context);
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+          // ---------------------------------- methods
+      
+          virtual ResolverInfoPtr copy (void) const;
+      };
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 #endif // _ResolverInfoObsoletes_h
  

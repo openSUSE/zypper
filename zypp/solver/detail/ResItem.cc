@@ -24,136 +24,147 @@
 
 #include <zypp/solver/detail/ResItem.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
-
-using namespace std;
-
-
-IMPL_DERIVED_POINTER(ResItem,Spec);
-
-//---------------------------------------------------------------------------
-
-string
-ResItem::asString ( bool full ) const
-{
-    return toString (*this, full);
-}
-
-
-string
-ResItem::toString ( const ResItem & resItem, bool full )
-{
-    string res;
-
-    res += Spec::toString(resItem);
-    if (!resItem.channel()->system()) {
-	res += "[";
-	res += (resItem.channel() == NULL) ? "(channel?)" : resItem.channel()->name();
-	res += "]";
-    }
-    if (!full) return res;
-
-    if (resItem.isInstalled()) res += "<installed>";
-    if (resItem.local()) res += "<local>";
-
-    res += "FileSize ";
-    res += stringutil::numstring (resItem.fileSize());
-    res += ", InstalledSize ";
-    res += stringutil::numstring (resItem.installedSize());
-
-    if (!resItem.requires().empty()) {
-	res += ", Requires: ";
-	res += Dependency::toString(resItem.requires());
-    }
-
-    if (!resItem.provides().empty()) {
-	res += ", Provides: ";
-	res += Dependency::toString(resItem.provides());
-    }
-    if (!resItem.conflicts().empty()) {
-	res += ", Conflicts: ";
-	res += Dependency::toString(resItem.conflicts());
-    }
-    if (!resItem.obsoletes().empty()) {
-	res += ", Obsoletes: ";
-	res += Dependency::toString(resItem.obsoletes());
-    }
-
-    if (!resItem.suggests().empty()) {
-	res += ", Suggests: ";
-	res += Dependency::toString(resItem.suggests());
-    }
-    if (!resItem.recommends().empty()) {
-	res += ", Recommends: ";
-	res += Dependency::toString(resItem.recommends());
-    }
-    if (!resItem.freshens().empty()) {
-	res += ", Freshens: ";
-	res += Dependency::toString(resItem.freshens());
-    }
-    return res;
-}
-
-
-string
-ResItem::toString ( const CResItemList & rl, bool full )
-{
-    string res("[");
-    for (CResItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
-	if (iter != rl.begin()) res += ", ";
-	res += (*iter)->asString(full);
-    }
-    return res + "]";
-}
-
-
-ostream &
-ResItem::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
-ostream&
-operator<<( ostream& os, const ResItem& edition)
-{
-    return os << edition.asString();
-}
-
-//---------------------------------------------------------------------------
-
-ResItem::ResItem (const Kind & kind, const string & name, int epoch, const string & version, const string & release, const Arch * arch)
-    :Spec (kind, name, epoch, version, release, arch)
-    , _channel (false)
-    , _installed (false)
-    , _local (false)
-    , _locked (false)
-    , _file_size (0)
-    , _installed_size (0)
-
-{
-}
-
-
-ResItem::~ResItem()
-{
-}
-
-//---------------------------------------------------------------------------
-
-bool
-ResItem::isInstalled () const
-{
-    if (_channel != NULL
-	&& _channel->system()) {
-	return true;
-    }
-    return false;
-}
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      using namespace std;
+      
+      
+      IMPL_DERIVED_POINTER(ResItem,Spec);
+      
+      //---------------------------------------------------------------------------
+      
+      string
+      ResItem::asString ( bool full ) const
+      {
+          return toString (*this, full);
+      }
+      
+      
+      string
+      ResItem::toString ( const ResItem & resItem, bool full )
+      {
+          string res;
+      
+          res += Spec::toString(resItem);
+          if (!resItem.channel()->system()) {
+      	res += "[";
+      	res += (resItem.channel() == NULL) ? "(channel?)" : resItem.channel()->name();
+      	res += "]";
+          }
+          if (!full) return res;
+      
+          if (resItem.isInstalled()) res += "<installed>";
+          if (resItem.local()) res += "<local>";
+      
+          res += "FileSize ";
+          res += stringutil::numstring (resItem.fileSize());
+          res += ", InstalledSize ";
+          res += stringutil::numstring (resItem.installedSize());
+      
+          if (!resItem.requires().empty()) {
+      	res += ", Requires: ";
+      	res += Dependency::toString(resItem.requires());
+          }
+      
+          if (!resItem.provides().empty()) {
+      	res += ", Provides: ";
+      	res += Dependency::toString(resItem.provides());
+          }
+          if (!resItem.conflicts().empty()) {
+      	res += ", Conflicts: ";
+      	res += Dependency::toString(resItem.conflicts());
+          }
+          if (!resItem.obsoletes().empty()) {
+      	res += ", Obsoletes: ";
+      	res += Dependency::toString(resItem.obsoletes());
+          }
+      
+          if (!resItem.suggests().empty()) {
+      	res += ", Suggests: ";
+      	res += Dependency::toString(resItem.suggests());
+          }
+          if (!resItem.recommends().empty()) {
+      	res += ", Recommends: ";
+      	res += Dependency::toString(resItem.recommends());
+          }
+          if (!resItem.freshens().empty()) {
+      	res += ", Freshens: ";
+      	res += Dependency::toString(resItem.freshens());
+          }
+          return res;
+      }
+      
+      
+      string
+      ResItem::toString ( const CResItemList & rl, bool full )
+      {
+          string res("[");
+          for (CResItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
+      	if (iter != rl.begin()) res += ", ";
+      	res += (*iter)->asString(full);
+          }
+          return res + "]";
+      }
+      
+      
+      ostream &
+      ResItem::dumpOn( ostream & str ) const
+      {
+          str << asString();
+          return str;
+      }
+      
+      
+      ostream&
+      operator<<( ostream& os, const ResItem& edition)
+      {
+          return os << edition.asString();
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      ResItem::ResItem (const Kind & kind, const string & name, int epoch, const string & version, const string & release, const Arch * arch)
+          :Spec (kind, name, epoch, version, release, arch)
+          , _channel (false)
+          , _installed (false)
+          , _local (false)
+          , _locked (false)
+          , _file_size (0)
+          , _installed_size (0)
+      
+      {
+      }
+      
+      
+      ResItem::~ResItem()
+      {
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      bool
+      ResItem::isInstalled () const
+      {
+          if (_channel != NULL
+      	&& _channel->system()) {
+      	return true;
+          }
+          return false;
+      }
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////

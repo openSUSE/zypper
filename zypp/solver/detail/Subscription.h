@@ -30,62 +30,75 @@
 #include <y2util/Ustring.h>
 #include <zypp/solver/detail/ChannelPtr.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : Subscription
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
 
-
-class Subscription;
-typedef std::list<Subscription *> SubscriptionList;
-
-class Subscription {
-
-  private:
-
-    static SubscriptionList subscriptions;
-    static bool subscriptions_changed;
-    static const char *subscription_file;
-
-    std::string _channel_id;
-    time_t _last_seen;
-    bool _old;		// subscription imported from an old-style subs file
-
-    bool match (constChannelPtr channel);
-    static void save (void);
-    static void load (void);
-    static void load_old_subscriptions (void);
-
-  public:
-
-    Subscription (const char *id);
-    virtual ~Subscription();
-
-    // ---------------------------------- I/O
-
-    static std::string toString ( const Subscription & section);
-
-    virtual std::ostream & dumpOn( std::ostream & str ) const;
-
-    friend std::ostream& operator<<( std::ostream&, const Subscription & section);
-
-    std::string asString ( void ) const;
-
-    // ---------------------------------- accessors
-
-    // ---------------------------------- methods
-
-    void  setFile (const char *file);
-    static bool status (constChannelPtr channel);
-    static void setStatus (constChannelPtr channel, bool channel_is_subscribed);
-
-};
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : Subscription
+      
+      
+      class Subscription;
+      typedef std::list<Subscription *> SubscriptionList;
+      
+      class Subscription {
+      
+        private:
+      
+          static SubscriptionList subscriptions;
+          static bool subscriptions_changed;
+          static const char *subscription_file;
+      
+          std::string _channel_id;
+          time_t _last_seen;
+          bool _old;		// subscription imported from an old-style subs file
+      
+          bool match (constChannelPtr channel);
+          static void save (void);
+          static void load (void);
+          static void load_old_subscriptions (void);
+      
+        public:
+      
+          Subscription (const char *id);
+          virtual ~Subscription();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString ( const Subscription & section);
+      
+          virtual std::ostream & dumpOn( std::ostream & str ) const;
+      
+          friend std::ostream& operator<<( std::ostream&, const Subscription & section);
+      
+          std::string asString ( void ) const;
+      
+          // ---------------------------------- accessors
+      
+          // ---------------------------------- methods
+      
+          void  setFile (const char *file);
+          static bool status (constChannelPtr channel);
+          static void setStatus (constChannelPtr channel, bool channel_is_subscribed);
+      
+      };
+        
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 
 #endif // _Subscription_h

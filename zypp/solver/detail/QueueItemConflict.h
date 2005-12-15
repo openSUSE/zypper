@@ -31,60 +31,67 @@
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-
-
-//////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : QueueItemConflict
-
-class QueueItemConflict : public QueueItem {
-    REP_BODY(QueueItemConflict);
-
-  private:
-    constDependencyPtr _dep;
-    constResItemPtr _conflicting_resItem;
-
-    bool _actually_an_obsolete;
-
-  public:
-
-    QueueItemConflict (WorldPtr world, constDependencyPtr dep, constResItemPtr resItem);
-    virtual ~QueueItemConflict();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const QueueItemConflict & item);
-
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-
-    friend std::ostream& operator<<(std::ostream&, const QueueItemConflict & item);
-
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-    constDependencyPtr dependency (void) const { return _dep; }
-    bool actuallyAnObsolete (void) const { return _actually_an_obsolete; }
-    void setActuallyAnObsolete (void) { _actually_an_obsolete = true; }
-
-    // ---------------------------------- methods
-
-    virtual bool process (ResolverContextPtr context, QueueItemList & qil);
-    virtual QueueItemPtr copy (void) const;
-    virtual int cmp (constQueueItemPtr item) const;
-    virtual bool isRedundant (ResolverContextPtr context) const { return false; }
-    virtual bool isSatisfied (ResolverContextPtr context) const { return false; }
-
-};
-
-    
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
-
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+        
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : QueueItemConflict
+      
+      class QueueItemConflict : public QueueItem {
+          REP_BODY(QueueItemConflict);
+      
+        private:
+          constDependencyPtr _dep;
+          constResItemPtr _conflicting_resItem;
+      
+          bool _actually_an_obsolete;
+      
+        public:
+      
+          QueueItemConflict (WorldPtr world, constDependencyPtr dep, constResItemPtr resItem);
+          virtual ~QueueItemConflict();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const QueueItemConflict & item);
+      
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+      
+          friend std::ostream& operator<<(std::ostream&, const QueueItemConflict & item);
+      
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+          constDependencyPtr dependency (void) const { return _dep; }
+          bool actuallyAnObsolete (void) const { return _actually_an_obsolete; }
+          void setActuallyAnObsolete (void) { _actually_an_obsolete = true; }
+      
+          // ---------------------------------- methods
+      
+          virtual bool process (ResolverContextPtr context, QueueItemList & qil);
+          virtual QueueItemPtr copy (void) const;
+          virtual int cmp (constQueueItemPtr item) const;
+          virtual bool isRedundant (ResolverContextPtr context) const { return false; }
+          virtual bool isSatisfied (ResolverContextPtr context) const { return false; }
+      
+      };
+      
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 #endif // _QueueItemConflict_h

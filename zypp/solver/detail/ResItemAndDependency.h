@@ -31,55 +31,67 @@
 #include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Dependency.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
 
 typedef std::multimap<const std::string, constResItemPtr> ResItemTable;
-typedef std::multimap<const std::string, constResItemAndDependencyPtr> ResItemAndDependencyTable;
-
-#if PHI
-typedef std::list <constResItemAndDependencyPtr> CResItemAndDependencyList;
-#endif
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : ResItemAndDependency
-
-class ResItemAndDependency: public CountedRep {
-    REP_BODY(ResItemAndDependency);
-
-  private:
-    constResItemPtr _resItem;
-    constDependencyPtr _dependency;
-
-  public:
-
-    ResItemAndDependency (constResItemPtr resItem, constDependencyPtr dependency);
-    ~ResItemAndDependency () {}
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const ResItemAndDependency & r_and_d, bool full = false);
-
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-
-    friend std::ostream& operator<<(std::ostream&, const ResItemAndDependency & r_and_d);
-
-    std::string asString (bool full = false) const;
-
-    // ---------------------------------- accessors
-
-    constResItemPtr resItem() const { return _resItem; }
-    constDependencyPtr dependency() const { return _dependency; }
-
-    // ---------------------------------- methods
-
-    bool verifyRelation (constDependencyPtr dep) const;
-};
-    
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+      typedef std::multimap<const std::string, constResItemAndDependencyPtr> ResItemAndDependencyTable;
+      
+      #if PHI
+      typedef std::list <constResItemAndDependencyPtr> CResItemAndDependencyList;
+      #endif
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : ResItemAndDependency
+      
+      class ResItemAndDependency: public CountedRep {
+          REP_BODY(ResItemAndDependency);
+      
+        private:
+          constResItemPtr _resItem;
+          constDependencyPtr _dependency;
+      
+        public:
+      
+          ResItemAndDependency (constResItemPtr resItem, constDependencyPtr dependency);
+          ~ResItemAndDependency () {}
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const ResItemAndDependency & r_and_d, bool full = false);
+      
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+      
+          friend std::ostream& operator<<(std::ostream&, const ResItemAndDependency & r_and_d);
+      
+          std::string asString (bool full = false) const;
+      
+          // ---------------------------------- accessors
+      
+          constResItemPtr resItem() const { return _resItem; }
+          constDependencyPtr dependency() const { return _dependency; }
+      
+          // ---------------------------------- methods
+      
+          bool verifyRelation (constDependencyPtr dep) const;
+      };
+        
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 
 #endif // _ResItemAndDependency_h

@@ -32,101 +32,111 @@
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-
-
-//////////////////////////////////////////////////////////////////
-
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+        
 ///////////////////////////////////////////////////////////////////
 //
 //	CLASS NAME : Resolver
 
-class Resolver : public CountedRep {
-    REP_BODY(Resolver);
-
-  private:
-    constChannelPtr _current_channel;
-    
-    WorldPtr _world;
-
-    int _timeout_seconds;
-    bool _verifying;
-
-    QueueItemList _initial_items;
-    CResItemList _resItems_to_install;
-    CResItemList _resItems_to_remove;
-    CResItemList _resItems_to_verify;
-
-    CDependencyList _extra_deps;
-    CDependencyList _extra_conflicts;
-
-    ResolverQueueList _pending_queues;
-    ResolverQueueList _pruned_queues;
-    ResolverQueueList _complete_queues;
-    ResolverQueueList _deferred_queues;
-    ResolverQueueList _invalid_queues;
-    
-    int _valid_solution_count;
-
-    ResolverContextPtr _best_context;
-    bool _timed_out;
-
-  public:
-
-    Resolver (WorldPtr world = NULL);
-    virtual ~Resolver();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const Resolver & resolver);
-
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-
-    friend std::ostream& operator<<(std::ostream&, const Resolver & resolver);
-
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-    QueueItemList initialItems () const { return _initial_items; }
-
-    ResolverQueueList pendingQueues () const { return _pending_queues; }
-    ResolverQueueList prunedQueues () const { return _pruned_queues; }
-    ResolverQueueList completeQueues () const { return _complete_queues; }
-    ResolverQueueList deferredQueues () const { return _deferred_queues; }
-    ResolverQueueList invalidQueues () const { return _invalid_queues; }
-
-    ResolverContextPtr bestContext (void) const { return _best_context; }
-
-    // ---------------------------------- methods
-
-    void setTimeout (int seconds) { _timeout_seconds = seconds; }
-
-    WorldPtr world (void) const;			// returns global world if _world == NULL
-    void setWorld (WorldPtr world) { _world = world; }
-
-    void setCurrentChannel (constChannelPtr channel) { _current_channel = channel; }
-    void addSubscribedChannel (constChannelPtr channel);
-
-    void addResItemToInstall (constResItemPtr resItem);
-    void addResItemsToInstallFromList (CResItemList & rl);
-
-    void addResItemToRemove (constResItemPtr resItem);
-    void addResItemsToRemoveFromList (CResItemList & rl);
-
-    void addResItemToVerify (constResItemPtr resItem);
-
-    void addExtraDependency (constDependencyPtr dependency);
-    void addExtraConflict (constDependencyPtr dependency);
-
-    void verifySystem (void);
-    void resolveDependencies (void);
-
-};
-    
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+      class Resolver : public CountedRep {
+          REP_BODY(Resolver);
+      
+        private:
+          constChannelPtr _current_channel;
+          
+          WorldPtr _world;
+      
+          int _timeout_seconds;
+          bool _verifying;
+      
+          QueueItemList _initial_items;
+          CResItemList _resItems_to_install;
+          CResItemList _resItems_to_remove;
+          CResItemList _resItems_to_verify;
+      
+          CDependencyList _extra_deps;
+          CDependencyList _extra_conflicts;
+      
+          ResolverQueueList _pending_queues;
+          ResolverQueueList _pruned_queues;
+          ResolverQueueList _complete_queues;
+          ResolverQueueList _deferred_queues;
+          ResolverQueueList _invalid_queues;
+          
+          int _valid_solution_count;
+      
+          ResolverContextPtr _best_context;
+          bool _timed_out;
+      
+        public:
+      
+          Resolver (WorldPtr world = NULL);
+          virtual ~Resolver();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const Resolver & resolver);
+      
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+      
+          friend std::ostream& operator<<(std::ostream&, const Resolver & resolver);
+      
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+          QueueItemList initialItems () const { return _initial_items; }
+      
+          ResolverQueueList pendingQueues () const { return _pending_queues; }
+          ResolverQueueList prunedQueues () const { return _pruned_queues; }
+          ResolverQueueList completeQueues () const { return _complete_queues; }
+          ResolverQueueList deferredQueues () const { return _deferred_queues; }
+          ResolverQueueList invalidQueues () const { return _invalid_queues; }
+      
+          ResolverContextPtr bestContext (void) const { return _best_context; }
+      
+          // ---------------------------------- methods
+      
+          void setTimeout (int seconds) { _timeout_seconds = seconds; }
+      
+          WorldPtr world (void) const;			// returns global world if _world == NULL
+          void setWorld (WorldPtr world) { _world = world; }
+      
+          void setCurrentChannel (constChannelPtr channel) { _current_channel = channel; }
+          void addSubscribedChannel (constChannelPtr channel);
+      
+          void addResItemToInstall (constResItemPtr resItem);
+          void addResItemsToInstallFromList (CResItemList & rl);
+      
+          void addResItemToRemove (constResItemPtr resItem);
+          void addResItemsToRemoveFromList (CResItemList & rl);
+      
+          void addResItemToVerify (constResItemPtr resItem);
+      
+          void addExtraDependency (constDependencyPtr dependency);
+          void addExtraConflict (constDependencyPtr dependency);
+      
+          void verifySystem (void);
+          void resolveDependencies (void);
+      
+      };
+        
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 
 #endif // _Resolver_h

@@ -24,77 +24,88 @@
 #include <zypp/solver/detail/ResolverInfo.h>
 #include <zypp/solver/detail/ResolverInfoDependsOn.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
-
-using namespace std;
-
-IMPL_DERIVED_POINTER(ResolverInfoDependsOn, ResolverInfo);
-
-//---------------------------------------------------------------------------
-
-
-string
-ResolverInfoDependsOn::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-ResolverInfoDependsOn::toString ( const ResolverInfoDependsOn & on)
-{
-    string res;
-
-    res += ResolverInfo::toString (on);
-    res += string ("depended on ") + on.resItemsToString(false);
-
-    return res;
-}
-
-
-ostream &
-ResolverInfoDependsOn::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
-ostream&
-operator<<( ostream& os, const ResolverInfoDependsOn & on)
-{
-    return os << on.asString();
-}
-
-//---------------------------------------------------------------------------
-
-ResolverInfoDependsOn::ResolverInfoDependsOn (constResItemPtr resItem, constResItemPtr on)
-    : ResolverInfoContainer (RESOLVER_INFO_TYPE_DEPENDS_ON, resItem, RESOLVER_INFO_PRIORITY_USER, on)
-{
-}
-
-
-ResolverInfoDependsOn::~ResolverInfoDependsOn ()
-{
-}
-
-//---------------------------------------------------------------------------
-
-ResolverInfoPtr
-ResolverInfoDependsOn::copy (void) const
-{
-    ResolverInfoDependsOnPtr cpy = new ResolverInfoDependsOn(resItem(), NULL);
-
-    ((ResolverInfoContainerPtr)cpy)->copy (this);
-
-    return cpy;
-}
-
-//---------------------------------------------------------------------------
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      using namespace std;
+      
+      IMPL_DERIVED_POINTER(ResolverInfoDependsOn, ResolverInfo);
+      
+      //---------------------------------------------------------------------------
+      
+      
+      string
+      ResolverInfoDependsOn::asString ( void ) const
+      {
+          return toString (*this);
+      }
+      
+      
+      string
+      ResolverInfoDependsOn::toString ( const ResolverInfoDependsOn & on)
+      {
+          string res;
+      
+          res += ResolverInfo::toString (on);
+          res += string ("depended on ") + on.resItemsToString(false);
+      
+          return res;
+      }
+      
+      
+      ostream &
+      ResolverInfoDependsOn::dumpOn( ostream & str ) const
+      {
+          str << asString();
+          return str;
+      }
+      
+      
+      ostream&
+      operator<<( ostream& os, const ResolverInfoDependsOn & on)
+      {
+          return os << on.asString();
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      ResolverInfoDependsOn::ResolverInfoDependsOn (constResItemPtr resItem, constResItemPtr on)
+          : ResolverInfoContainer (RESOLVER_INFO_TYPE_DEPENDS_ON, resItem, RESOLVER_INFO_PRIORITY_USER, on)
+      {
+      }
+      
+      
+      ResolverInfoDependsOn::~ResolverInfoDependsOn ()
+      {
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      ResolverInfoPtr
+      ResolverInfoDependsOn::copy (void) const
+      {
+          ResolverInfoDependsOnPtr cpy = new ResolverInfoDependsOn(resItem(), NULL);
+      
+          ((ResolverInfoContainerPtr)cpy)->copy (this);
+      
+          return cpy;
+      }
+      
+      //---------------------------------------------------------------------------
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 

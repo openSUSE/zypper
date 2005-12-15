@@ -26,42 +26,55 @@
 #include <zypp/solver/detail/ResolverInfoDependsOnPtr.h>
 #include <zypp/solver/detail/ResolverInfoContainer.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : ResolverInfoDependsOn
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : ResolverInfoDependsOn
+      
+      class ResolverInfoDependsOn : public ResolverInfoContainer {
+      
+          REP_BODY(ResolverInfoDependsOn);
+      
+        private:
+      
+        public:
+      
+          ResolverInfoDependsOn (constResItemPtr resItem, constResItemPtr on);
+          virtual ~ResolverInfoDependsOn();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const ResolverInfoDependsOn & context);
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+          friend std::ostream& operator<<(std::ostream&, const ResolverInfoDependsOn & context);
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+          // ---------------------------------- methods
+      
+          virtual ResolverInfoPtr copy (void) const;
+      
+      };
+        
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 
-class ResolverInfoDependsOn : public ResolverInfoContainer {
-
-    REP_BODY(ResolverInfoDependsOn);
-
-  private:
-
-  public:
-
-    ResolverInfoDependsOn (constResItemPtr resItem, constResItemPtr on);
-    virtual ~ResolverInfoDependsOn();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const ResolverInfoDependsOn & context);
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-    friend std::ostream& operator<<(std::ostream&, const ResolverInfoDependsOn & context);
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-    // ---------------------------------- methods
-
-    virtual ResolverInfoPtr copy (void) const;
-
-};
- 
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
 #endif // _ResolverInfoDependsOn_h
  

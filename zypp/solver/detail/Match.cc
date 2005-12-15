@@ -24,157 +24,169 @@
 #include <zypp/solver/detail/Match.h>
 #include <zypp/solver/detail/World.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      using namespace std;
+      
+      IMPL_BASE_POINTER(Match);
+      
+      //---------------------------------------------------------------------------
+      
+      string
+      Match::asString ( void ) const
+      {
+          return toString (*this);
+      }
+      
+      
+      string
+      Match::toString ( const Match & lock )
+      {
+          return "<lock/>";
+      }
+      
+      
+      ostream &
+      Match::dumpOn( ostream & str ) const
+      {
+          str << asString();
+          return str;
+      }
+      
+      
+      ostream&
+      operator<<( ostream& os, const Match& edition)
+      {
+          return os << edition.asString();
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      Match::Match()
+          : _importance (Importance::Undefined)
+      {
+      }
+      
+      Match::Match (XmlNodePtr node)
+          : _importance (Importance::Undefined)
+      {
+      }
+      
+      Match::~Match()
+      {
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      XmlNodePtr
+      Match::asXmlNode (void) const
+      {
+          return new XmlNode("match");
+      }
+      
+      
+      // equality
+      bool
+      Match::equals ( const Match & lock ) const {
+      
+          // Check the name glob
+      
+          if ((_name_glob.empty()) ^ (lock._name_glob.empty()))
+      	return false;
+          if (_name_glob != lock._name_glob)
+      	return false;
+      
+          // Check the channel
+      
+          if ((_channel_id.empty()) ^ (lock._channel_id.empty()))
+      	return false;
+          if (_channel_id != lock._channel_id)
+      	return false;
+      
+          // Check the importance
+      
+          if (_importance != lock._importance
+      	|| _importance_gteq != lock._importance_gteq)
+          {
+      	return false;
+          }
+      
+          // Check the dep
+          if ((_dependency == NULL) ^ (lock._dependency == NULL))
+      	return false;
+          if (_dependency && lock._dependency) {
+      	if (!( ((constSpecPtr) _dependency)->equals((constSpecPtr) lock._dependency))
+      	    || (_dependency->relation() != lock._dependency->relation())
+      	    || (_dependency->kind() != lock._dependency->kind()))
+      	{
+          	return false;
+      	}
+          }
+      
+          return true;
+      }
+      
+      
+      bool
+      Match::test (constResItemPtr resItem, WorldPtr world) const
+      {
+          string name;
+          constChannelPtr channel = resItem->channel ();
+        
+          if (channel != NULL && !_channel_id.empty()) {
+      	if (! channel->hasEqualId (_channel_id)) {
+      	    return false;
+      	}
+          }
+      
+          name = resItem->name ();
+      
+      // FIXME, implement regexp
+      #if 0
+          if (match->_pattern_spec
+      	&& ! g_pattern_match_string (match->pattern_spec, name)) {
+      	return false;
+          }
+      #endif
+      
+        /* FIXME: ResItems don't have ResItemUpdate right now */
+      /*   if (match->importance != RC_IMPORTANCE_INVALID && */
+      /* 	  !rc_resItem_is_installed (resItem)) { */
+      /* 	  RCResItemUpdate *up = rc_resItem_get_latest_update (pkg); */
+      /* 	  if (up) { */
+      /* 		  if (match->importance_gteq ? up->importance > match->importance */
+      /* 			  : up->importance < match->importance) */
+      /* 			  return FALSE; */
+      /* 	  } */
+      /*   } */
+      
+          if (_dependency) {
+      	DependencyPtr dependency;
+      	bool check;
+      
+      	dependency = new Dependency (resItem->name(), Relation::Equal, Kind::Package, resItem->channel(), resItem->edition());
+      	check = _dependency->verifyRelation (dependency);
+      	return check;
+          }
+      
+          return true;
+      }
 
-using namespace std;
-
-IMPL_BASE_POINTER(Match);
-
-//---------------------------------------------------------------------------
-
-string
-Match::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-Match::toString ( const Match & lock )
-{
-    return "<lock/>";
-}
-
-
-ostream &
-Match::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
-ostream&
-operator<<( ostream& os, const Match& edition)
-{
-    return os << edition.asString();
-}
-
-//---------------------------------------------------------------------------
-
-Match::Match()
-    : _importance (Importance::Undefined)
-{
-}
-
-Match::Match (XmlNodePtr node)
-    : _importance (Importance::Undefined)
-{
-}
-
-Match::~Match()
-{
-}
-
-//---------------------------------------------------------------------------
-
-XmlNodePtr
-Match::asXmlNode (void) const
-{
-    return new XmlNode("match");
-}
-
-
-// equality
-bool
-Match::equals ( const Match & lock ) const {
-
-    // Check the name glob
-
-    if ((_name_glob.empty()) ^ (lock._name_glob.empty()))
-	return false;
-    if (_name_glob != lock._name_glob)
-	return false;
-
-    // Check the channel
-
-    if ((_channel_id.empty()) ^ (lock._channel_id.empty()))
-	return false;
-    if (_channel_id != lock._channel_id)
-	return false;
-
-    // Check the importance
-
-    if (_importance != lock._importance
-	|| _importance_gteq != lock._importance_gteq)
-    {
-	return false;
-    }
-
-    // Check the dep
-    if ((_dependency == NULL) ^ (lock._dependency == NULL))
-	return false;
-    if (_dependency && lock._dependency) {
-	if (!( ((constSpecPtr) _dependency)->equals((constSpecPtr) lock._dependency))
-	    || (_dependency->relation() != lock._dependency->relation())
-	    || (_dependency->kind() != lock._dependency->kind()))
-	{
-    	return false;
-	}
-    }
-
-    return true;
-}
-
-
-bool
-Match::test (constResItemPtr resItem, WorldPtr world) const
-{
-    string name;
-    constChannelPtr channel = resItem->channel ();
-  
-    if (channel != NULL && !_channel_id.empty()) {
-	if (! channel->hasEqualId (_channel_id)) {
-	    return false;
-	}
-    }
-
-    name = resItem->name ();
-
-// FIXME, implement regexp
-#if 0
-    if (match->_pattern_spec
-	&& ! g_pattern_match_string (match->pattern_spec, name)) {
-	return false;
-    }
-#endif
-
-  /* FIXME: ResItems don't have ResItemUpdate right now */
-/*   if (match->importance != RC_IMPORTANCE_INVALID && */
-/* 	  !rc_resItem_is_installed (resItem)) { */
-/* 	  RCResItemUpdate *up = rc_resItem_get_latest_update (pkg); */
-/* 	  if (up) { */
-/* 		  if (match->importance_gteq ? up->importance > match->importance */
-/* 			  : up->importance < match->importance) */
-/* 			  return FALSE; */
-/* 	  } */
-/*   } */
-
-    if (_dependency) {
-	DependencyPtr dependency;
-	bool check;
-
-	dependency = new Dependency (resItem->name(), Relation::Equal, Kind::Package, resItem->channel(), resItem->edition());
-	check = _dependency->verifyRelation (dependency);
-	return check;
-    }
-
-    return true;
-}
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////        
 

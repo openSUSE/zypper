@@ -25,42 +25,53 @@
 #include <zypp/solver/detail/ResolverInfoChildOfPtr.h>
 #include <zypp/solver/detail/ResolverInfoContainer.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : ResolverInfoChildOf
-
-class ResolverInfoChildOf : public ResolverInfoContainer {
-
-    REP_BODY(ResolverInfoChildOf);
-
-  private:
-
-  public:
-
-    ResolverInfoChildOf (constResItemPtr resItem, constResItemPtr dependency);
-    virtual ~ResolverInfoChildOf();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const ResolverInfoChildOf & context);
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-    friend std::ostream& operator<<(std::ostream&, const ResolverInfoChildOf & context);
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-    // ---------------------------------- methods
-
-    virtual ResolverInfoPtr copy (void) const;
-};
- 
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      //////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : ResolverInfoChildOf
+      
+      class ResolverInfoChildOf : public ResolverInfoContainer {
+      
+          REP_BODY(ResolverInfoChildOf);
+      
+        private:
+      
+        public:
+      
+          ResolverInfoChildOf (constResItemPtr resItem, constResItemPtr dependency);
+          virtual ~ResolverInfoChildOf();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const ResolverInfoChildOf & context);
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+          friend std::ostream& operator<<(std::ostream&, const ResolverInfoChildOf & context);
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+          // ---------------------------------- methods
+      
+          virtual ResolverInfoPtr copy (void) const;
+      };
+        
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 #endif // _ResolverInfoChildOf_h
  

@@ -24,77 +24,88 @@
 #include <zypp/solver/detail/ResolverInfo.h>
 #include <zypp/solver/detail/ResolverInfoConflictsWith.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
-
-using namespace std;
-
-IMPL_DERIVED_POINTER(ResolverInfoConflictsWith, ResolverInfo);
-
-//---------------------------------------------------------------------------
-
-
-string
-ResolverInfoConflictsWith::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-ResolverInfoConflictsWith::toString ( const ResolverInfoConflictsWith & with)
-{
-    string res;
-
-    res += ResolverInfo::toString (with);
-    res += string ("conflicts with ") + with.resItemsToString(false);
-
-    return res;
-}
-
-
-ostream &
-ResolverInfoConflictsWith::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
-ostream&
-operator<<( ostream& os, const ResolverInfoConflictsWith & with)
-{
-    return os << with.asString();
-}
-
-//---------------------------------------------------------------------------
-
-ResolverInfoConflictsWith::ResolverInfoConflictsWith (constResItemPtr resItem, constResItemPtr with)
-    : ResolverInfoContainer (RESOLVER_INFO_TYPE_CONFLICTS_WITH, resItem, RESOLVER_INFO_PRIORITY_USER, with)
-{
-}
-
-
-ResolverInfoConflictsWith::~ResolverInfoConflictsWith ()
-{
-}
-
-
-//---------------------------------------------------------------------------
-
-ResolverInfoPtr
-ResolverInfoConflictsWith::copy (void) const
-{
-    ResolverInfoConflictsWithPtr cpy = new ResolverInfoConflictsWith(resItem(), NULL);
-
-    ((ResolverInfoContainerPtr)cpy)->copy (this);
-
-    return cpy;
-}
-
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      using namespace std;
+      
+      IMPL_DERIVED_POINTER(ResolverInfoConflictsWith, ResolverInfo);
+      
+      //---------------------------------------------------------------------------
+      
+      
+      string
+      ResolverInfoConflictsWith::asString ( void ) const
+      {
+          return toString (*this);
+      }
+      
+      
+      string
+      ResolverInfoConflictsWith::toString ( const ResolverInfoConflictsWith & with)
+      {
+          string res;
+      
+          res += ResolverInfo::toString (with);
+          res += string ("conflicts with ") + with.resItemsToString(false);
+      
+          return res;
+      }
+      
+      
+      ostream &
+      ResolverInfoConflictsWith::dumpOn( ostream & str ) const
+      {
+          str << asString();
+          return str;
+      }
+      
+      
+      ostream&
+      operator<<( ostream& os, const ResolverInfoConflictsWith & with)
+      {
+          return os << with.asString();
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      ResolverInfoConflictsWith::ResolverInfoConflictsWith (constResItemPtr resItem, constResItemPtr with)
+          : ResolverInfoContainer (RESOLVER_INFO_TYPE_CONFLICTS_WITH, resItem, RESOLVER_INFO_PRIORITY_USER, with)
+      {
+      }
+      
+      
+      ResolverInfoConflictsWith::~ResolverInfoConflictsWith ()
+      {
+      }
+      
+      
+      //---------------------------------------------------------------------------
+      
+      ResolverInfoPtr
+      ResolverInfoConflictsWith::copy (void) const
+      {
+          ResolverInfoConflictsWithPtr cpy = new ResolverInfoConflictsWith(resItem(), NULL);
+      
+          ((ResolverInfoContainerPtr)cpy)->copy (this);
+      
+          return cpy;
+      }
+      
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 

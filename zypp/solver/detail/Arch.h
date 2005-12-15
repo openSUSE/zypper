@@ -31,61 +31,72 @@
 #include <map>
 #include <string>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
 
-class Arch;
-typedef std::list<const Arch *> ArchList;
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : Arch
-/**
- *
- **/
-class Arch {
-
-  private:
-
-    std::string _arch;
-
-    explicit Arch( const std::string & a = "" );
-
-  public:
-    static const Arch *Any;
-    static const Arch *Unknown;
-    static const Arch *Noarch;
-    static const Arch *System;
-
-    static const Arch *create ( const std::string & arch );		// factory
-    virtual ~Arch() {};
-
-    // ---------------------------------- I/O
-
-    static const std::string toString ( const Arch & arch );
-
-    virtual std::ostream & dumpOn( std::ostream & str ) const;
-
-    friend std::ostream& operator<< ( std::ostream &, const Arch & arch);
-
-    const std::string asString ( void ) const;
-
-    // ---------------------------------- accessors
-
-    // ---------------------------------- methods
-
-    bool isAny (void) const { return this == Any; }
-    bool isUnknown (void) const { return this == Unknown; }
-    bool isNoarch (void) const { return this == Noarch; }
-
-    ArchList getCompatList () const;
-    int getCompatScore (const ArchList & archlist) const;
-
-};
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
-
+      class Arch;
+      typedef std::list<const Arch *> ArchList;
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : Arch
+      /**
+       *
+       **/
+      class Arch {
+      
+        private:
+      
+          std::string _arch;
+      
+          explicit Arch( const std::string & a = "" );
+      
+        public:
+          static const Arch *Any;
+          static const Arch *Unknown;
+          static const Arch *Noarch;
+          static const Arch *System;
+      
+          static const Arch *create ( const std::string & arch );		// factory
+          virtual ~Arch() {};
+      
+          // ---------------------------------- I/O
+      
+          static const std::string toString ( const Arch & arch );
+      
+          virtual std::ostream & dumpOn( std::ostream & str ) const;
+      
+          friend std::ostream& operator<< ( std::ostream &, const Arch & arch);
+      
+          const std::string asString ( void ) const;
+      
+          // ---------------------------------- accessors
+      
+          // ---------------------------------- methods
+      
+          bool isAny (void) const { return this == Any; }
+          bool isUnknown (void) const { return this == Unknown; }
+          bool isNoarch (void) const { return this == Noarch; }
+      
+          ArchList getCompatList () const;
+          int getCompatScore (const ArchList & archlist) const;
+      
+      };
+      
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 #endif // _Arch_h

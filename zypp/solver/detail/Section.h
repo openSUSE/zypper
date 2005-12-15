@@ -27,77 +27,89 @@
 
 #include <y2util/Ustring.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : Section
-/**
- *
- **/
-class Section {
-
-  private:
-
-    typedef enum {
-	SECTION_OFFICE = 0,
-	SECTION_IMAGING,
-	SECTION_PIM,
-	SECTION_XAPP,
-	SECTION_GAME,
-	SECTION_MULTIMEDIA,
-	SECTION_INTERNET,
-	SECTION_UTIL,
-	SECTION_SYSTEM,
-	SECTION_DOC,
-	SECTION_LIBRARY,
-	SECTION_DEVEL,
-	SECTION_DEVELUTIL,
-	SECTION_MISC,
-	SECTION_LAST
-    } section_t;
-
-    section_t _section;
-
-  private:
-    section_t section () const { return _section; }
-
-  public:
-
-    Section(const char *section_str);
-    virtual ~Section();
-
-    // ---------------------------------- I/O
-
-    static std::string toString ( const Section & section);
-    static std::string toUserString ( const Section & section);
-
-    virtual std::ostream & dumpOn( std::ostream & str ) const;
-
-    friend std::ostream& operator<<( std::ostream&, const Section & section);
-
-    std::string asString ( void ) const;
-    std::string asUserString ( void ) const;
-
-    // ---------------------------------- accessors
-
-    // equality
-    bool operator==( const Section & section) const {
-	return _section == section.section();
-    }
-
-    // inequality
-    bool operator!=( const Section & section) const {
-	return !(*this == section);
-    }
-
-};
-
-typedef Section * SectionPtr;
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
-
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : Section
+      /**
+       *
+       **/
+      class Section {
+      
+        private:
+      
+          typedef enum {
+      	SECTION_OFFICE = 0,
+      	SECTION_IMAGING,
+      	SECTION_PIM,
+      	SECTION_XAPP,
+      	SECTION_GAME,
+      	SECTION_MULTIMEDIA,
+      	SECTION_INTERNET,
+      	SECTION_UTIL,
+      	SECTION_SYSTEM,
+      	SECTION_DOC,
+      	SECTION_LIBRARY,
+      	SECTION_DEVEL,
+      	SECTION_DEVELUTIL,
+      	SECTION_MISC,
+      	SECTION_LAST
+          } section_t;
+      
+          section_t _section;
+      
+        private:
+          section_t section () const { return _section; }
+      
+        public:
+      
+          Section(const char *section_str);
+          virtual ~Section();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString ( const Section & section);
+          static std::string toUserString ( const Section & section);
+      
+          virtual std::ostream & dumpOn( std::ostream & str ) const;
+      
+          friend std::ostream& operator<<( std::ostream&, const Section & section);
+      
+          std::string asString ( void ) const;
+          std::string asUserString ( void ) const;
+      
+          // ---------------------------------- accessors
+      
+          // equality
+          bool operator==( const Section & section) const {
+      	return _section == section.section();
+          }
+      
+          // inequality
+          bool operator!=( const Section & section) const {
+      	return !(*this == section);
+          }
+      
+      };
+      
+      typedef Section * SectionPtr;
+      
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 #endif // _Section_h

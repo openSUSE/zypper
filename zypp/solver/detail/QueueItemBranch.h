@@ -31,63 +31,70 @@
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+              
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : QueueItemBranch
+      
+      class QueueItemBranch : public QueueItem {
+          REP_BODY(QueueItemBranch);
+      
+        private:
+          std::string _label;
+          QueueItemList _possible_items;
+      
+        public:
+      
+          QueueItemBranch (WorldPtr world);
+          virtual ~QueueItemBranch();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const QueueItemBranch & item);
+      
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+      
+          friend std::ostream& operator<<(std::ostream&, const QueueItemBranch & item);
+      
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+          QueueItemList possibleItems (void) const { return _possible_items; }
+      
+          const std::string & label (void) const { return _label; }
+          void setLabel (const std::string & label) { _label = label; }
+      
+          bool isEmpty (void) const { return _possible_items.empty(); }
+      
+          // ---------------------------------- methods
+      
+          virtual bool process (ResolverContextPtr context, QueueItemList & qil);
+          virtual QueueItemPtr copy (void) const;
+          virtual int cmp (constQueueItemPtr item) const;
+          virtual bool isRedundant (ResolverContextPtr context) const { return false; }
+          virtual bool isSatisfied (ResolverContextPtr context) const { return false; }
+      
+          void addItem (QueueItemPtr subitem);
+          bool contains (QueueItemPtr possible_subbranch);
+      };
 
-
-//////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : QueueItemBranch
-
-class QueueItemBranch : public QueueItem {
-    REP_BODY(QueueItemBranch);
-
-  private:
-    std::string _label;
-    QueueItemList _possible_items;
-
-  public:
-
-    QueueItemBranch (WorldPtr world);
-    virtual ~QueueItemBranch();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const QueueItemBranch & item);
-
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-
-    friend std::ostream& operator<<(std::ostream&, const QueueItemBranch & item);
-
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-    QueueItemList possibleItems (void) const { return _possible_items; }
-
-    const std::string & label (void) const { return _label; }
-    void setLabel (const std::string & label) { _label = label; }
-
-    bool isEmpty (void) const { return _possible_items.empty(); }
-
-    // ---------------------------------- methods
-
-    virtual bool process (ResolverContextPtr context, QueueItemList & qil);
-    virtual QueueItemPtr copy (void) const;
-    virtual int cmp (constQueueItemPtr item) const;
-    virtual bool isRedundant (ResolverContextPtr context) const { return false; }
-    virtual bool isSatisfied (ResolverContextPtr context) const { return false; }
-
-    void addItem (QueueItemPtr subitem);
-    bool contains (QueueItemPtr possible_subbranch);
-};
-
-    
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
-
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////        
 #endif // _QueueItemBranch_h

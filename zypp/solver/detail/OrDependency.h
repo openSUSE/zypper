@@ -32,70 +32,81 @@
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/XmlNode.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : OrDependency
-/**
- *
- **/
-
-class OrDependency : public CountedRep {
-    REP_BODY(OrDependency);
-
-  private:
-    typedef std::map<std::string, OrDependencyPtr> OrDependencyTable;
-
-    static OrDependencyTable _or_dep_table;
-
-    std::string _or_dep;
-    CDependencyList _split_ors;
-    CDependencyList _created_provides;
-    int _ref;
-
-    OrDependency (std::string & dep, const CDependencyList & split_ors);
-
-    static std::string dependencyListToString (const CDependencyList & deplist);
-    static CDependencyList stringToDependencyList (const char *s);
-
-    void incRef() { _ref++; }
-    void decRef() { _ref--; }
-
-  public:
-
-    OrDependency (constXmlNodePtr node);
-
-    virtual ~OrDependency();
-
-    // ---------------------------------- I/O
-
-    const xmlNodePtr asXmlNode (void) const;
-
-    static std::string toString ( const OrDependency & ordep );
-
-    virtual std::ostream & dumpOn( std::ostream & str ) const;
-
-    friend std::ostream& operator<<( std::ostream&, const OrDependency & ordep );
-
-    std::string asString ( void ) const;
-
-    // ---------------------------------- accessors
-
-    const char *name (void) const { return _or_dep.c_str(); }
-    void addCreatedProvide (constDependencyPtr dep);
-
-    // ---------------------------------- methods
-
-    static OrDependencyPtr fromDependencyList (const CDependencyList & deplist);
-    static OrDependencyPtr fromString (const char *dep);
-    static constDependencyPtr find (const char *dep);
-};
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
-
+      //
+      //	CLASS NAME : OrDependency
+      /**
+       *
+       **/
+      
+      class OrDependency : public CountedRep {
+          REP_BODY(OrDependency);
+      
+        private:
+          typedef std::map<std::string, OrDependencyPtr> OrDependencyTable;
+      
+          static OrDependencyTable _or_dep_table;
+      
+          std::string _or_dep;
+          CDependencyList _split_ors;
+          CDependencyList _created_provides;
+          int _ref;
+      
+          OrDependency (std::string & dep, const CDependencyList & split_ors);
+      
+          static std::string dependencyListToString (const CDependencyList & deplist);
+          static CDependencyList stringToDependencyList (const char *s);
+      
+          void incRef() { _ref++; }
+          void decRef() { _ref--; }
+      
+        public:
+      
+          OrDependency (constXmlNodePtr node);
+      
+          virtual ~OrDependency();
+      
+          // ---------------------------------- I/O
+      
+          const xmlNodePtr asXmlNode (void) const;
+      
+          static std::string toString ( const OrDependency & ordep );
+      
+          virtual std::ostream & dumpOn( std::ostream & str ) const;
+      
+          friend std::ostream& operator<<( std::ostream&, const OrDependency & ordep );
+      
+          std::string asString ( void ) const;
+      
+          // ---------------------------------- accessors
+      
+          const char *name (void) const { return _or_dep.c_str(); }
+          void addCreatedProvide (constDependencyPtr dep);
+      
+          // ---------------------------------- methods
+      
+          static OrDependencyPtr fromDependencyList (const CDependencyList & deplist);
+          static OrDependencyPtr fromString (const char *dep);
+          static constDependencyPtr find (const char *dep);
+      };
+      
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 #endif // _OrDependency_h

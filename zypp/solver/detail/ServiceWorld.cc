@@ -21,61 +21,72 @@
 
 #include <zypp/solver/detail/ServiceWorld.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
-
-using namespace std;
-
-IMPL_DERIVED_POINTER(ServiceWorld, World);
-
-//---------------------------------------------------------------------------
-
-string
-ServiceWorld::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-ServiceWorld::toString ( const ServiceWorld & service )
-{
-    return "<serviceworld/>";
-}
-
-
-ostream &
-ServiceWorld::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
-ostream&
-operator<<( ostream& os, const ServiceWorld & service)
-{
-    return os << service.asString();
-}
-
-//---------------------------------------------------------------------------
-
-ServiceWorld::ServiceWorld ()
-    : StoreWorld (SERVICE_WORLD)
-{
-}
-
-
-ServiceWorld::~ServiceWorld()
-{
-    fprintf (stderr, "*** deleting service world[%p]: %s\n", this, World::toString(type()).c_str());
-}
-
-//---------------------------------------------------------------------------
-
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      using namespace std;
+      
+      IMPL_DERIVED_POINTER(ServiceWorld, World);
+      
+      //---------------------------------------------------------------------------
+      
+      string
+      ServiceWorld::asString ( void ) const
+      {
+          return toString (*this);
+      }
+      
+      
+      string
+      ServiceWorld::toString ( const ServiceWorld & service )
+      {
+          return "<serviceworld/>";
+      }
+      
+      
+      ostream &
+      ServiceWorld::dumpOn( ostream & str ) const
+      {
+          str << asString();
+          return str;
+      }
+      
+      
+      ostream&
+      operator<<( ostream& os, const ServiceWorld & service)
+      {
+          return os << service.asString();
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      ServiceWorld::ServiceWorld ()
+          : StoreWorld (SERVICE_WORLD)
+      {
+      }
+      
+      
+      ServiceWorld::~ServiceWorld()
+      {
+          fprintf (stderr, "*** deleting service world[%p]: %s\n", this, World::toString(type()).c_str());
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 

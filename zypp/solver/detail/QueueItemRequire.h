@@ -31,66 +31,75 @@
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-
-
-//////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : QueueItemRequire
-
-class QueueItemRequire : public QueueItem {
-    REP_BODY(QueueItemRequire);
-
-  private:
-    constDependencyPtr _dep;
-    constResItemPtr _requiring_resItem;
-    constResItemPtr _upgraded_resItem;
-    constResItemPtr _lost_resItem;
-    bool _remove_only;
-    bool _is_child;
-
-  public:
-
-    QueueItemRequire (WorldPtr world, constDependencyPtr dep);
-    virtual ~QueueItemRequire();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const QueueItemRequire & item);
-
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-
-    friend std::ostream& operator<<(std::ostream&, const QueueItemRequire & item);
-
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-    constDependencyPtr dependency (void) const { return _dep; }
-
-    void setRemoveOnly (void) { _remove_only = true; }
-    void setUpgradedResItem (constResItemPtr upgraded_resItem) { _upgraded_resItem = upgraded_resItem; }
-    void setLostResItem (constResItemPtr lost_resItem) { _lost_resItem = lost_resItem; }
-
-    // ---------------------------------- methods
-
-    virtual bool process (ResolverContextPtr context, QueueItemList & qil);
-    virtual QueueItemPtr copy (void) const;
-    virtual int cmp (constQueueItemPtr item) const;
-    virtual bool isRedundant (ResolverContextPtr context) const { return false; }
-    virtual bool isSatisfied (ResolverContextPtr context) const { return false; }
-
-    void addResItem (constResItemPtr resItem);
-
-
-};
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+        
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : QueueItemRequire
+      
+      class QueueItemRequire : public QueueItem {
+          REP_BODY(QueueItemRequire);
+      
+        private:
+          constDependencyPtr _dep;
+          constResItemPtr _requiring_resItem;
+          constResItemPtr _upgraded_resItem;
+          constResItemPtr _lost_resItem;
+          bool _remove_only;
+          bool _is_child;
+      
+        public:
+      
+          QueueItemRequire (WorldPtr world, constDependencyPtr dep);
+          virtual ~QueueItemRequire();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const QueueItemRequire & item);
+      
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+      
+          friend std::ostream& operator<<(std::ostream&, const QueueItemRequire & item);
+      
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+          constDependencyPtr dependency (void) const { return _dep; }
+      
+          void setRemoveOnly (void) { _remove_only = true; }
+          void setUpgradedResItem (constResItemPtr upgraded_resItem) { _upgraded_resItem = upgraded_resItem; }
+          void setLostResItem (constResItemPtr lost_resItem) { _lost_resItem = lost_resItem; }
+      
+          // ---------------------------------- methods
+      
+          virtual bool process (ResolverContextPtr context, QueueItemList & qil);
+          virtual QueueItemPtr copy (void) const;
+          virtual int cmp (constQueueItemPtr item) const;
+          virtual bool isRedundant (ResolverContextPtr context) const { return false; }
+          virtual bool isSatisfied (ResolverContextPtr context) const { return false; }
+      
+          void addResItem (constResItemPtr resItem);
+      
+      
+      };
+        
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 
 #endif // _QueueItemRequire_h

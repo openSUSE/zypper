@@ -33,9 +33,15 @@
 #include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/XmlNode.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
 
 typedef std::list<PackagePtr> PackageList;
 typedef PackageList * PackageListPtr;
@@ -53,98 +59,103 @@ typedef PackageUpdateList * PackageUpdateListPtr;
 
 class Package : public ResItem {
     REP_BODY(Package);
+      
+        private:
+          SectionPtr _section;
+          
+          // Filled in by package info XML
+          std::string _pretty_name;
+          std::string _summary;
+          std::string _description;
+      
+          PackageUpdateList _history;
+      
+          // After downloading this package, fill in the local file name,
+          //   and signature, if appropriate
+          std::string _package_filename;
+          std::string _signature_filename;
+      
+          bool _install_only;		// Only install, don't upgrade this package
+          bool _package_set;
+      
+          std::string _id;
+      
+        public:
+      
+          Package(constChannelPtr channel);
+          Package(constXmlNodePtr node, constChannelPtr channel);	//RCPackage *rc_xml_node_to_package (const xmlNode *node, const RCChannel *channel);
+          virtual ~Package();
+      
+          // ---------------------------------- I/O
+      
+          const xmlNodePtr asXmlNode (void) const;				// xmlNode *rc_package_to_xml_node (RCPackage *package);
+      
+          static std::string toString ( const Package & spec, bool full = false );
+      
+          static std::string toString ( const PackageUpdateList & l, bool full = false );
+      
+          virtual std::ostream & dumpOn( std::ostream & str ) const;
+      
+          friend std::ostream& operator<<( std::ostream&, const Package& );
+      
+          std::string asString ( bool full = false ) const;
+      
+          // ---------------------------------- accessors
+      
+          // accessor for _section
+          const SectionPtr section() const { return _section; }
+          void setSection (const SectionPtr section) { _section = section; }
+      
+          // accessor for _pretty_name
+          const std::string prettyName() const { return _pretty_name; }
+          void setPrettyName(const std::string & pretty_name) { _pretty_name = pretty_name; }
+      
+          // accessor for _summary
+          const std::string summary() const { return _summary; }
+          void setSummary (const std::string & summary) { _summary = summary; }
+      
+          // accessor for _description
+          const std::string description() const { return _description; }
+          void setDescription(const std::string & description) { _description = description; }
+      
+          // accessor for _package_filename
+          const PackageUpdateList & history() const { return _history; }
+          void setHistory(const PackageUpdateList & history) { _history = history; }
+      
+          // accessor for _package_filename
+          const std::string packageFilename() const { return _package_filename; }
+          void setPackageFilename(const std::string & package_filename) { _package_filename = package_filename; }
+      
+          // accessor for _signature_filename
+          const std::string signatureFilename() const { return _signature_filename; }
+          void setSignatureFilename(const std::string & signature_filename) { _signature_filename = signature_filename; }
+      
+          // accessor for _install_only
+          bool installOnly() const { return _install_only; }
+          void setInstallOnly(bool install_only) { _install_only = install_only; }
+      
+          // accessor for _package_set
+          bool packageSet() const { return _package_set; }
+          void setPackageSet(bool package_set) { _package_set = package_set; }
+      
+          // accessor for id
+          const std::string id() const { return _id; }
+          void setId (const std::string & id) { _id = id; }
+      
+          // ---------------------------------- methods
+      
+          void addUpdate (PackageUpdatePtr update);
+      
+          PackageUpdatePtr getLatestUpdate (void) const;
+      };
 
-  private:
-    SectionPtr _section;
-    
-    // Filled in by package info XML
-    std::string _pretty_name;
-    std::string _summary;
-    std::string _description;
-
-    PackageUpdateList _history;
-
-    // After downloading this package, fill in the local file name,
-    //   and signature, if appropriate
-    std::string _package_filename;
-    std::string _signature_filename;
-
-    bool _install_only;		// Only install, don't upgrade this package
-    bool _package_set;
-
-    std::string _id;
-
-  public:
-
-    Package(constChannelPtr channel);
-    Package(constXmlNodePtr node, constChannelPtr channel);	//RCPackage *rc_xml_node_to_package (const xmlNode *node, const RCChannel *channel);
-    virtual ~Package();
-
-    // ---------------------------------- I/O
-
-    const xmlNodePtr asXmlNode (void) const;				// xmlNode *rc_package_to_xml_node (RCPackage *package);
-
-    static std::string toString ( const Package & spec, bool full = false );
-
-    static std::string toString ( const PackageUpdateList & l, bool full = false );
-
-    virtual std::ostream & dumpOn( std::ostream & str ) const;
-
-    friend std::ostream& operator<<( std::ostream&, const Package& );
-
-    std::string asString ( bool full = false ) const;
-
-    // ---------------------------------- accessors
-
-    // accessor for _section
-    const SectionPtr section() const { return _section; }
-    void setSection (const SectionPtr section) { _section = section; }
-
-    // accessor for _pretty_name
-    const std::string prettyName() const { return _pretty_name; }
-    void setPrettyName(const std::string & pretty_name) { _pretty_name = pretty_name; }
-
-    // accessor for _summary
-    const std::string summary() const { return _summary; }
-    void setSummary (const std::string & summary) { _summary = summary; }
-
-    // accessor for _description
-    const std::string description() const { return _description; }
-    void setDescription(const std::string & description) { _description = description; }
-
-    // accessor for _package_filename
-    const PackageUpdateList & history() const { return _history; }
-    void setHistory(const PackageUpdateList & history) { _history = history; }
-
-    // accessor for _package_filename
-    const std::string packageFilename() const { return _package_filename; }
-    void setPackageFilename(const std::string & package_filename) { _package_filename = package_filename; }
-
-    // accessor for _signature_filename
-    const std::string signatureFilename() const { return _signature_filename; }
-    void setSignatureFilename(const std::string & signature_filename) { _signature_filename = signature_filename; }
-
-    // accessor for _install_only
-    bool installOnly() const { return _install_only; }
-    void setInstallOnly(bool install_only) { _install_only = install_only; }
-
-    // accessor for _package_set
-    bool packageSet() const { return _package_set; }
-    void setPackageSet(bool package_set) { _package_set = package_set; }
-
-    // accessor for id
-    const std::string id() const { return _id; }
-    void setId (const std::string & id) { _id = id; }
-
-    // ---------------------------------- methods
-
-    void addUpdate (PackageUpdatePtr update);
-
-    PackageUpdatePtr getLatestUpdate (void) const;
-};
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
-
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 #endif // _Package_h

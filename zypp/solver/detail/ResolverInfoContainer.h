@@ -29,58 +29,69 @@
 #include <zypp/solver/detail/ResolverInfoContainerPtr.h>
 #include <zypp/solver/detail/ResolverInfo.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
 
-
-//////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : ResolverInfoContainer
-
-class ResolverInfoContainer : public ResolverInfo {
-
-    REP_BODY(ResolverInfoContainer);
-
-  private:
-
-    CResItemList _resItem_list;
-
-  protected:
-
-    ResolverInfoContainer (ResolverInfoType type, constResItemPtr resItem, int priority, constResItemPtr child = NULL);
-
-  public:
-    virtual ~ResolverInfoContainer();
-
-    void copy (constResolverInfoContainerPtr from);
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const ResolverInfoContainer & context);
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-    friend std::ostream& operator<<(std::ostream&, const ResolverInfoContainer & context);
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-    CResItemList resItems (void) const { return _resItem_list; }
-
-    // ---------------------------------- methods
-
-    virtual bool merge (ResolverInfoContainerPtr to_be_merged);
-    virtual ResolverInfoPtr copy (void) const;
-
-    std::string resItemsToString (bool names_only) const;
-
-    bool mentions (constResItemPtr resItem) const;
-    void addRelatedResItem (constResItemPtr resItem);
-    void addRelatedResItemList (const CResItemList & resItems);
-
-};
- 
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : ResolverInfoContainer
+      
+      class ResolverInfoContainer : public ResolverInfo {
+      
+          REP_BODY(ResolverInfoContainer);
+      
+        private:
+      
+          CResItemList _resItem_list;
+      
+        protected:
+      
+          ResolverInfoContainer (ResolverInfoType type, constResItemPtr resItem, int priority, constResItemPtr child = NULL);
+      
+        public:
+          virtual ~ResolverInfoContainer();
+      
+          void copy (constResolverInfoContainerPtr from);
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const ResolverInfoContainer & context);
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+          friend std::ostream& operator<<(std::ostream&, const ResolverInfoContainer & context);
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+          CResItemList resItems (void) const { return _resItem_list; }
+      
+          // ---------------------------------- methods
+      
+          virtual bool merge (ResolverInfoContainerPtr to_be_merged);
+          virtual ResolverInfoPtr copy (void) const;
+      
+          std::string resItemsToString (bool names_only) const;
+      
+          bool mentions (constResItemPtr resItem) const;
+          void addRelatedResItem (constResItemPtr resItem);
+          void addRelatedResItemList (const CResItemList & resItems);
+      
+      };
+        
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 #endif // _ResolverInfoContainer_h
  

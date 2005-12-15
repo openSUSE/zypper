@@ -33,66 +33,78 @@
 #include <zypp/solver/detail/ResItemPtr.h>
 #include <zypp/solver/detail/DependencyPtr.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      typedef std::list <ResolverQueuePtr> ResolverQueueList;
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : ResolverQueue
+      
+      class ResolverQueue : public CountedRep {
+      
+          REP_BODY(ResolverQueue);
+      
+        private:
+      
+          ResolverContextPtr _context;
+          QueueItemList _items;
+      
+        public:
+          ResolverQueue (ResolverContextPtr context = NULL);
+          virtual ~ResolverQueue();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const ResolverQueue & context);
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+          friend std::ostream& operator<<(std::ostream&, const ResolverQueue & context);
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+          ResolverContextPtr context (void) const { return _context; }
+          QueueItemList items(void) const { return _items; }
+      
+          // ---------------------------------- methods
+      
+      
+          void addResItemToInstall (constResItemPtr resItem);
+          void addResItemToRemove (constResItemPtr resItem, bool remove_only_mode);
+          void addResItemToVerify (constResItemPtr resItem);
+          void addExtraDependency (constDependencyPtr dep);
+          void addExtraConflict (constDependencyPtr dep);
+          void addItem (QueueItemPtr item);
+      
+          bool isEmpty () const { return _items.empty(); }
+          bool isInvalid ();
+          bool containsOnlyBranches ();
+      
+          bool processOnce ();
+          void process ();
+      
+          void splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueList & deferred_queues);
+      
+          void spew ();
+      
+      };
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 
-typedef std::list <ResolverQueuePtr> ResolverQueueList;
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : ResolverQueue
-
-class ResolverQueue : public CountedRep {
-
-    REP_BODY(ResolverQueue);
-
-  private:
-
-    ResolverContextPtr _context;
-    QueueItemList _items;
-
-  public:
-    ResolverQueue (ResolverContextPtr context = NULL);
-    virtual ~ResolverQueue();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const ResolverQueue & context);
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-    friend std::ostream& operator<<(std::ostream&, const ResolverQueue & context);
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-    ResolverContextPtr context (void) const { return _context; }
-    QueueItemList items(void) const { return _items; }
-
-    // ---------------------------------- methods
-
-
-    void addResItemToInstall (constResItemPtr resItem);
-    void addResItemToRemove (constResItemPtr resItem, bool remove_only_mode);
-    void addResItemToVerify (constResItemPtr resItem);
-    void addExtraDependency (constDependencyPtr dep);
-    void addExtraConflict (constDependencyPtr dep);
-    void addItem (QueueItemPtr item);
-
-    bool isEmpty () const { return _items.empty(); }
-    bool isInvalid ();
-    bool containsOnlyBranches ();
-
-    bool processOnce ();
-    void process ();
-
-    void splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueList & deferred_queues);
-
-    void spew ();
-
-};
- 
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
 #endif // _ResolverQueue_h
  

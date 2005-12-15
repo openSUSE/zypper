@@ -29,60 +29,74 @@
 #include <zypp/solver/detail/StoreWorld.h>
 #include <zypp/solver/detail/Channel.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
 
-typedef bool (*ServiceWorldAssembleFn) (ServiceWorldPtr service, void *error);	// GError **error
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      typedef bool (*ServiceWorldAssembleFn) (ServiceWorldPtr service, void *error);	// GError **error
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : ServiceWorld
+      
+      class ServiceWorld : public StoreWorld {
+          REP_BODY(ServiceWorld);
+      
+        private:
+      
+          char *_url;
+          char *_name;
+          char *_unique_id;
+      
+          bool _is_sticky;		// if true, can't be unmounted
+          bool _is_invisible;		// ... to users
+          bool _is_unsaved;		// Never save into the services.xml file
+          bool _is_singleton;		// only one such service at a time.  FIXME: broken
+      
+          ServiceWorldAssembleFn _assemble_fn;
+      
+        public:
+      
+          ServiceWorld ();
+          virtual ~ServiceWorld();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const ServiceWorld & section);
+      
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+      
+          friend std::ostream& operator<<(std::ostream&, const ServiceWorld & section);
+      
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+          char *url () const { return _url; }
+          char *name () const { return _name; }
+          void setName (const char *name) { _name = strdup (name); }
+          char *unique_id () const { return _unique_id; }
+      
+          // ---------------------------------- methods
+      
+      };
+        
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : ServiceWorld
-
-class ServiceWorld : public StoreWorld {
-    REP_BODY(ServiceWorld);
-
-  private:
-
-    char *_url;
-    char *_name;
-    char *_unique_id;
-
-    bool _is_sticky;		// if true, can't be unmounted
-    bool _is_invisible;		// ... to users
-    bool _is_unsaved;		// Never save into the services.xml file
-    bool _is_singleton;		// only one such service at a time.  FIXME: broken
-
-    ServiceWorldAssembleFn _assemble_fn;
-
-  public:
-
-    ServiceWorld ();
-    virtual ~ServiceWorld();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const ServiceWorld & section);
-
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-
-    friend std::ostream& operator<<(std::ostream&, const ServiceWorld & section);
-
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-    char *url () const { return _url; }
-    char *name () const { return _name; }
-    void setName (const char *name) { _name = strdup (name); }
-    char *unique_id () const { return _unique_id; }
-
-    // ---------------------------------- methods
-
-};
-    
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
 
 #endif // _ServiceWorld_h

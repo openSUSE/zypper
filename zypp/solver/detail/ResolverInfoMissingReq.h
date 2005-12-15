@@ -25,44 +25,56 @@
 #include <zypp/solver/detail/ResolverInfoMissingReqPtr.h>
 #include <zypp/solver/detail/ResolverInfo.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : ResolverInfoMissingReq
-
-class ResolverInfoMissingReq : public ResolverInfo {
-
-    REP_BODY(ResolverInfoMissingReq);
-
-  private:
-
-    constDependencyPtr _missing_req;
-
-  public:
-
-    ResolverInfoMissingReq (constResItemPtr resItem, constDependencyPtr missing_req);
-    virtual ~ResolverInfoMissingReq();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const ResolverInfoMissingReq & context);
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-    friend std::ostream& operator<<(std::ostream&, const ResolverInfoMissingReq & context);
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-    // ---------------------------------- methods
-
-    virtual ResolverInfoPtr copy (void) const;
-
-};
- 
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : ResolverInfoMissingReq
+      
+      class ResolverInfoMissingReq : public ResolverInfo {
+      
+          REP_BODY(ResolverInfoMissingReq);
+      
+        private:
+      
+          constDependencyPtr _missing_req;
+      
+        public:
+      
+          ResolverInfoMissingReq (constResItemPtr resItem, constDependencyPtr missing_req);
+          virtual ~ResolverInfoMissingReq();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const ResolverInfoMissingReq & context);
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+          friend std::ostream& operator<<(std::ostream&, const ResolverInfoMissingReq & context);
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+          // ---------------------------------- methods
+      
+          virtual ResolverInfoPtr copy (void) const;
+      
+      };
+        
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 #endif // _ResolverInfoMissingReq_h
  

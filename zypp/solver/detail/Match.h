@@ -34,81 +34,93 @@
 #include <zypp/solver/detail/WorldPtr.h>
 #include <zypp/solver/detail/XmlNode.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
 
-class Match;
-typedef std::list<constMatchPtr> MatchList;
-
-class World;
-typedef bool (*MatchFn) (constMatchPtr match, void *data);
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : Match
-/**
- *
- **/
-class Match : public CountedRep {
-    REP_BODY(Match);
-
-  private:
-    std::string _channel_id;
-
-    constDependencyPtr _dependency;
-
-    std::string _name_glob;
-//    GPatternSpec *_pattern_spec;
-
-    Importance _importance;
-    bool _importance_gteq;
-
-  public:
-
-    Match();
-    Match(XmlNodePtr node);
-    virtual ~Match();
-
-    // ---------------------------------- I/O
-
-    static std::string toString ( const Match & lock );
-
-    virtual std::ostream & dumpOn( std::ostream & str ) const;
-
-    friend std::ostream& operator<<( std::ostream&, const Match & lock );
-
-    std::string asString ( void ) const;
-
-    XmlNodePtr asXmlNode (void) const;
-
-    // ---------------------------------- accessors
-
-    const std::string & channelId () const { return _channel_id; }
-    void setChannel (constChannelPtr channel) { _channel_id = channel->id(); }
-    void setChannelId (const std::string & channel_id) { _channel_id = channel_id; }
-
-    constDependencyPtr dependency () const { return _dependency; }
-    void setDependency (constDependencyPtr dependency) { _dependency = dependency; }
-
-    const std::string & glob () const { return _name_glob; }
-    void setGlob (const std::string & glob_str) { _name_glob = glob_str; }
-
-    const Importance & importance (bool *match_gteq) const { *match_gteq = _importance_gteq; return _importance; }
-    void setImportance (const Importance & importance, bool match_gteq) { _importance = importance; _importance_gteq = match_gteq; }
-
-    // ---------------------------------- methods
-
-    typedef bool (*MatchFn) (constMatchPtr, void *data);
-
-    // equality
-    bool equals (const Match & match) const;
-
-    bool test (constResItemPtr resItem, WorldPtr world) const;
-};
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+      class Match;
+      typedef std::list<constMatchPtr> MatchList;
+      
+      class World;
+      typedef bool (*MatchFn) (constMatchPtr match, void *data);
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : Match
+      /**
+       *
+       **/
+      class Match : public CountedRep {
+          REP_BODY(Match);
+      
+        private:
+          std::string _channel_id;
+      
+          constDependencyPtr _dependency;
+      
+          std::string _name_glob;
+      //    GPatternSpec *_pattern_spec;
+      
+          Importance _importance;
+          bool _importance_gteq;
+      
+        public:
+      
+          Match();
+          Match(XmlNodePtr node);
+          virtual ~Match();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString ( const Match & lock );
+      
+          virtual std::ostream & dumpOn( std::ostream & str ) const;
+      
+          friend std::ostream& operator<<( std::ostream&, const Match & lock );
+      
+          std::string asString ( void ) const;
+      
+          XmlNodePtr asXmlNode (void) const;
+      
+          // ---------------------------------- accessors
+      
+          const std::string & channelId () const { return _channel_id; }
+          void setChannel (constChannelPtr channel) { _channel_id = channel->id(); }
+          void setChannelId (const std::string & channel_id) { _channel_id = channel_id; }
+      
+          constDependencyPtr dependency () const { return _dependency; }
+          void setDependency (constDependencyPtr dependency) { _dependency = dependency; }
+      
+          const std::string & glob () const { return _name_glob; }
+          void setGlob (const std::string & glob_str) { _name_glob = glob_str; }
+      
+          const Importance & importance (bool *match_gteq) const { *match_gteq = _importance_gteq; return _importance; }
+          void setImportance (const Importance & importance, bool match_gteq) { _importance = importance; _importance_gteq = match_gteq; }
+      
+          // ---------------------------------- methods
+      
+          typedef bool (*MatchFn) (constMatchPtr, void *data);
+      
+          // equality
+          bool equals (const Match & match) const;
+      
+          bool test (constResItemPtr resItem, WorldPtr world) const;
+      };
+      
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 
 #endif // _Match_h

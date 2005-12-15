@@ -24,59 +24,70 @@
 #include <zypp/solver/detail/Packman.h>
 #include <zypp/solver/detail/debug.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
-
-using namespace std;
-
-IMPL_BASE_POINTER(Packman);
-
-//---------------------------------------------------------------------------
-
-string
-Packman::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-Packman::toString ( const Packman & store )
-{
-    string res ("<packman/>");
-
-    return res;
-}
-
-
-ostream &
-Packman::dumpOn (ostream & str) const
-{
-    str << asString();
-    return str;
-}
-
-
-ostream &
-operator<< (ostream & os, const Packman & store)
-{
-    return os << store.asString();
-}
-
-//---------------------------------------------------------------------------
-
-Packman::Packman ()
-{
-}
-
-
-Packman::~Packman()
-{
-}
-
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      using namespace std;
+      
+      IMPL_BASE_POINTER(Packman);
+      
+      //---------------------------------------------------------------------------
+      
+      string
+      Packman::asString ( void ) const
+      {
+          return toString (*this);
+      }
+      
+      
+      string
+      Packman::toString ( const Packman & store )
+      {
+          string res ("<packman/>");
+      
+          return res;
+      }
+      
+      
+      ostream &
+      Packman::dumpOn (ostream & str) const
+      {
+          str << asString();
+          return str;
+      }
+      
+      
+      ostream &
+      operator<< (ostream & os, const Packman & store)
+      {
+          return os << store.asString();
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      Packman::Packman ()
+      {
+      }
+      
+      
+      Packman::~Packman()
+      {
+      }
+      
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 

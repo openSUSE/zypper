@@ -30,49 +30,60 @@
 #include <zypp/solver/detail/Channel.h>
 #include <zypp/solver/detail/World.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : UndumpWorld
-
-class UndumpWorld : public StoreWorld {
-    REP_BODY(UndumpWorld);
-
-  private:
-
-    typedef std::list<constChannelPtr> ChannelSubscriptions;
-    ChannelSubscriptions _subscriptions;
-
-  public:
-
-    UndumpWorld (const char *filename);
-    virtual ~UndumpWorld();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const UndumpWorld & section);
-
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-
-    friend std::ostream& operator<<(std::ostream&, const UndumpWorld & section);
-
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-    // ---------------------------------- methods
-
-    void load (const char *filename);
-    virtual bool isSubscribed (constChannelPtr channel) const;
-    virtual void setSubscription (constChannelPtr channel, bool is_subscribed);
-
-};
-    
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+              
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : UndumpWorld
+      
+      class UndumpWorld : public StoreWorld {
+          REP_BODY(UndumpWorld);
+      
+        private:
+      
+          typedef std::list<constChannelPtr> ChannelSubscriptions;
+          ChannelSubscriptions _subscriptions;
+      
+        public:
+      
+          UndumpWorld (const char *filename);
+          virtual ~UndumpWorld();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const UndumpWorld & section);
+      
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+      
+          friend std::ostream& operator<<(std::ostream&, const UndumpWorld & section);
+      
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+          // ---------------------------------- methods
+      
+          void load (const char *filename);
+          virtual bool isSubscribed (constChannelPtr channel) const;
+          virtual void setSubscription (constChannelPtr channel, bool is_subscribed);
+      
+      };
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 
 #endif // _UndumpWorld_h

@@ -24,76 +24,87 @@
 #include <zypp/solver/detail/ResolverInfo.h>
 #include <zypp/solver/detail/ResolverInfoNeededBy.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
-
-using namespace std;
-
-IMPL_DERIVED_POINTER(ResolverInfoNeededBy, ResolverInfo);
-
-//---------------------------------------------------------------------------
-
-
-string
-ResolverInfoNeededBy::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-ResolverInfoNeededBy::toString ( const ResolverInfoNeededBy & by)
-{
-    string res;
-
-    res += ResolverInfo::toString (by, false);
-    res += string (" needed by ") + by.resItemsToString(false);
-
-    return res;
-}
-
-
-ostream &
-ResolverInfoNeededBy::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
-ostream&
-operator<<( ostream& os, const ResolverInfoNeededBy & by)
-{
-    return os << by.asString();
-}
-
-//---------------------------------------------------------------------------
-
-ResolverInfoNeededBy::ResolverInfoNeededBy (constResItemPtr resItem)
-    : ResolverInfoContainer (RESOLVER_INFO_TYPE_NEEDED_BY, resItem, RESOLVER_INFO_PRIORITY_USER, NULL)
-{
-}
-
-
-ResolverInfoNeededBy::~ResolverInfoNeededBy ()
-{
-}
-
-//---------------------------------------------------------------------------
-
-ResolverInfoPtr
-ResolverInfoNeededBy::copy (void) const
-{
-    ResolverInfoNeededByPtr cpy = new ResolverInfoNeededBy(resItem());
-
-    ((ResolverInfoContainerPtr)cpy)->copy (this);
-
-    return cpy;
-}
-
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      using namespace std;
+      
+      IMPL_DERIVED_POINTER(ResolverInfoNeededBy, ResolverInfo);
+      
+      //---------------------------------------------------------------------------
+      
+      
+      string
+      ResolverInfoNeededBy::asString ( void ) const
+      {
+          return toString (*this);
+      }
+      
+      
+      string
+      ResolverInfoNeededBy::toString ( const ResolverInfoNeededBy & by)
+      {
+          string res;
+      
+          res += ResolverInfo::toString (by, false);
+          res += string (" needed by ") + by.resItemsToString(false);
+      
+          return res;
+      }
+      
+      
+      ostream &
+      ResolverInfoNeededBy::dumpOn( ostream & str ) const
+      {
+          str << asString();
+          return str;
+      }
+      
+      
+      ostream&
+      operator<<( ostream& os, const ResolverInfoNeededBy & by)
+      {
+          return os << by.asString();
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      ResolverInfoNeededBy::ResolverInfoNeededBy (constResItemPtr resItem)
+          : ResolverInfoContainer (RESOLVER_INFO_TYPE_NEEDED_BY, resItem, RESOLVER_INFO_PRIORITY_USER, NULL)
+      {
+      }
+      
+      
+      ResolverInfoNeededBy::~ResolverInfoNeededBy ()
+      {
+      }
+      
+      //---------------------------------------------------------------------------
+      
+      ResolverInfoPtr
+      ResolverInfoNeededBy::copy (void) const
+      {
+          ResolverInfoNeededByPtr cpy = new ResolverInfoNeededBy(resItem());
+      
+          ((ResolverInfoContainerPtr)cpy)->copy (this);
+      
+          return cpy;
+      }
+      
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 

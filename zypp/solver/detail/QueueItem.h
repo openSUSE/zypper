@@ -33,100 +33,110 @@
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
 
-
-//////////////////////////////////////////////////////////////////
-
-typedef enum {
-    QUEUE_ITEM_TYPE_UNKNOWN = 0,			// ordering is important !
-    QUEUE_ITEM_TYPE_INSTALL,
-    QUEUE_ITEM_TYPE_REQUIRE,
-    QUEUE_ITEM_TYPE_BRANCH,
-    QUEUE_ITEM_TYPE_GROUP,
-    QUEUE_ITEM_TYPE_CONFLICT,
-    QUEUE_ITEM_TYPE_UNINSTALL,
-    QUEUE_ITEM_TYPE_LAST
-} QueueItemType;
-
-
-typedef std::list<QueueItemPtr> QueueItemList;
-
-#define CMP(a,b) (((a) < (b)) - ((b) < (a)))
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : QueueItem
-
-class QueueItem : public CountedRep {
-    REP_BODY(QueueItem);
-
-  private:
-
-    QueueItemType _type;
-    WorldPtr _world;
-
-    int _priority;
-    size_t _size;
-    ResolverInfoList _pending_info;
-
-  protected:
-
-    QueueItem (QueueItemType type, WorldPtr world);
-
-  public:
-
-    virtual ~QueueItem();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const QueueItem & item);
-
-    static std::string toString (const QueueItemList & itemlist, const std::string & sep = ", ");
-
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-
-    friend std::ostream& operator<<(std::ostream&, const QueueItem & item);
-
-    virtual std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-    WorldPtr world (void) const { return _world; }
-    int priority (void) const { return _priority; }
-    void setPriority (int priority) { _priority = priority; }
-    int size (void) const { return _size; }
-
-    // ---------------------------------- methods
-
-    void copy (constQueueItemPtr from);
-
-    bool isBranch (void) const { return _type == QUEUE_ITEM_TYPE_BRANCH; }
-    bool isConflict (void) const { return _type == QUEUE_ITEM_TYPE_CONFLICT; }
-    bool isGroup (void) const { return _type == QUEUE_ITEM_TYPE_GROUP; }
-    bool isInstall (void) const { return _type == QUEUE_ITEM_TYPE_INSTALL; }
-    bool isRequire (void) const { return _type == QUEUE_ITEM_TYPE_REQUIRE; }
-    bool isUninstall (void) const { return _type == QUEUE_ITEM_TYPE_UNINSTALL; }
-
-    virtual bool process (ResolverContextPtr context, QueueItemList & qil) = 0;
-    virtual QueueItemPtr copy (void) const = 0;
-    virtual int cmp (constQueueItemPtr item) const = 0;
-    int compare (constQueueItemPtr item) const { return CMP(_type, item->_type); }
-
-    //   isRedundant true == can be dropped from any branch
-    virtual bool isRedundant (ResolverContextPtr context) const = 0;
-
-    //   isSatisfied true == can be dropped from any queue, and any
-    //   branch containing it can also be dropped
-    virtual bool isSatisfied (ResolverContextPtr context) const = 0;
-
-    void addInfo (ResolverInfoPtr);
-    void logInfo (ResolverContextPtr);
-};
-    
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+      typedef enum {
+          QUEUE_ITEM_TYPE_UNKNOWN = 0,			// ordering is important !
+          QUEUE_ITEM_TYPE_INSTALL,
+          QUEUE_ITEM_TYPE_REQUIRE,
+          QUEUE_ITEM_TYPE_BRANCH,
+          QUEUE_ITEM_TYPE_GROUP,
+          QUEUE_ITEM_TYPE_CONFLICT,
+          QUEUE_ITEM_TYPE_UNINSTALL,
+          QUEUE_ITEM_TYPE_LAST
+      } QueueItemType;
+      
+      
+      typedef std::list<QueueItemPtr> QueueItemList;
+      
+      #define CMP(a,b) (((a) < (b)) - ((b) < (a)))
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : QueueItem
+      
+      class QueueItem : public CountedRep {
+          REP_BODY(QueueItem);
+      
+        private:
+      
+          QueueItemType _type;
+          WorldPtr _world;
+      
+          int _priority;
+          size_t _size;
+          ResolverInfoList _pending_info;
+      
+        protected:
+      
+          QueueItem (QueueItemType type, WorldPtr world);
+      
+        public:
+      
+          virtual ~QueueItem();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const QueueItem & item);
+      
+          static std::string toString (const QueueItemList & itemlist, const std::string & sep = ", ");
+      
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+      
+          friend std::ostream& operator<<(std::ostream&, const QueueItem & item);
+      
+          virtual std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+          WorldPtr world (void) const { return _world; }
+          int priority (void) const { return _priority; }
+          void setPriority (int priority) { _priority = priority; }
+          int size (void) const { return _size; }
+      
+          // ---------------------------------- methods
+      
+          void copy (constQueueItemPtr from);
+      
+          bool isBranch (void) const { return _type == QUEUE_ITEM_TYPE_BRANCH; }
+          bool isConflict (void) const { return _type == QUEUE_ITEM_TYPE_CONFLICT; }
+          bool isGroup (void) const { return _type == QUEUE_ITEM_TYPE_GROUP; }
+          bool isInstall (void) const { return _type == QUEUE_ITEM_TYPE_INSTALL; }
+          bool isRequire (void) const { return _type == QUEUE_ITEM_TYPE_REQUIRE; }
+          bool isUninstall (void) const { return _type == QUEUE_ITEM_TYPE_UNINSTALL; }
+      
+          virtual bool process (ResolverContextPtr context, QueueItemList & qil) = 0;
+          virtual QueueItemPtr copy (void) const = 0;
+          virtual int cmp (constQueueItemPtr item) const = 0;
+          int compare (constQueueItemPtr item) const { return CMP(_type, item->_type); }
+      
+          //   isRedundant true == can be dropped from any branch
+          virtual bool isRedundant (ResolverContextPtr context) const = 0;
+      
+          //   isSatisfied true == can be dropped from any queue, and any
+          //   branch containing it can also be dropped
+          virtual bool isSatisfied (ResolverContextPtr context) const = 0;
+      
+          void addInfo (ResolverInfoPtr);
+          void logInfo (ResolverContextPtr);
+      };
+          
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 
 #endif // _QueueItem_h

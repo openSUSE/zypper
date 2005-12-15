@@ -25,41 +25,53 @@
 #include <zypp/solver/detail/ResolverInfoNeededByPtr.h>
 #include <zypp/solver/detail/ResolverInfoContainer.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : ResolverInfoNeededBy
+      
+      class ResolverInfoNeededBy : public ResolverInfoContainer {
+      
+          REP_BODY(ResolverInfoNeededBy);
+      
+        private:
+      
+        public:
+      
+          ResolverInfoNeededBy (constResItemPtr resItem);
+          virtual ~ResolverInfoNeededBy();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const ResolverInfoNeededBy & context);
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+          friend std::ostream& operator<<(std::ostream&, const ResolverInfoNeededBy & context);
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+          // ---------------------------------- methods
+      
+          virtual ResolverInfoPtr copy (void) const;
+      };
 
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : ResolverInfoNeededBy
-
-class ResolverInfoNeededBy : public ResolverInfoContainer {
-
-    REP_BODY(ResolverInfoNeededBy);
-
-  private:
-
-  public:
-
-    ResolverInfoNeededBy (constResItemPtr resItem);
-    virtual ~ResolverInfoNeededBy();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const ResolverInfoNeededBy & context);
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-    friend std::ostream& operator<<(std::ostream&, const ResolverInfoNeededBy & context);
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-    // ---------------------------------- methods
-
-    virtual ResolverInfoPtr copy (void) const;
-};
- 
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+       ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////       
 #endif // _ResolverInfoNeededBy_h
  

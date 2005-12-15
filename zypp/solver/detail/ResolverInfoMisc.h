@@ -26,50 +26,62 @@
 #include <zypp/solver/detail/ResolverInfoMiscPtr.h>
 #include <zypp/solver/detail/ResolverInfoContainer.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : ResolverInfoMisc
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : ResolverInfoMisc
+      
+      class ResolverInfoMisc : public ResolverInfoContainer {
+      
+          REP_BODY(ResolverInfoMisc);
+      
+        private:
+      
+          std::string _msg;
+          std::string _action;
+          std::string _trigger;
+      
+        public:
+      
+          ResolverInfoMisc (constResItemPtr resItem, int priority, const std::string & msg);
+          virtual ~ResolverInfoMisc();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const ResolverInfoMisc & context);
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+          friend std::ostream& operator<<(std::ostream&, const ResolverInfoMisc & context);
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+          // ---------------------------------- methods
+      
+          virtual bool merge (ResolverInfoPtr to_be_merged);
+          virtual ResolverInfoPtr copy (void) const;
+      
+          void addAction (const std::string & action_msg);
+          void addTrigger (const std::string & trigger_msg);
+      
+      };
 
-class ResolverInfoMisc : public ResolverInfoContainer {
-
-    REP_BODY(ResolverInfoMisc);
-
-  private:
-
-    std::string _msg;
-    std::string _action;
-    std::string _trigger;
-
-  public:
-
-    ResolverInfoMisc (constResItemPtr resItem, int priority, const std::string & msg);
-    virtual ~ResolverInfoMisc();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const ResolverInfoMisc & context);
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-    friend std::ostream& operator<<(std::ostream&, const ResolverInfoMisc & context);
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-    // ---------------------------------- methods
-
-    virtual bool merge (ResolverInfoPtr to_be_merged);
-    virtual ResolverInfoPtr copy (void) const;
-
-    void addAction (const std::string & action_msg);
-    void addTrigger (const std::string & trigger_msg);
-
-};
- 
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////        
 #endif // _ResolverInfoMisc_h
  

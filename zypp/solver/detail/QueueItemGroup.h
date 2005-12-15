@@ -31,54 +31,62 @@
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
 
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : QueueItemGroup
+      
+      class QueueItemGroup : public QueueItem {
+          REP_BODY(QueueItemGroup);
+      
+        private:
+          QueueItemList _subitems;
+      
+        public:
+      
+          QueueItemGroup (WorldPtr world);
+          virtual ~QueueItemGroup();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const QueueItemGroup & item);
+      
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+      
+          friend std::ostream& operator<<(std::ostream&, const QueueItemGroup & item);
+      
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+      
+          // ---------------------------------- methods
+      
+          virtual bool process (ResolverContextPtr context, QueueItemList & qil);
+          virtual QueueItemPtr copy (void) const;
+          virtual int cmp (constQueueItemPtr item) const;
+          virtual bool isRedundant (ResolverContextPtr context) const { return false; }
+          virtual bool isSatisfied (ResolverContextPtr context) const { return false; }
+      
+          void addItem (QueueItemPtr subitem);
+      };
 
-//////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : QueueItemGroup
-
-class QueueItemGroup : public QueueItem {
-    REP_BODY(QueueItemGroup);
-
-  private:
-    QueueItemList _subitems;
-
-  public:
-
-    QueueItemGroup (WorldPtr world);
-    virtual ~QueueItemGroup();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const QueueItemGroup & item);
-
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-
-    friend std::ostream& operator<<(std::ostream&, const QueueItemGroup & item);
-
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-
-    // ---------------------------------- methods
-
-    virtual bool process (ResolverContextPtr context, QueueItemList & qil);
-    virtual QueueItemPtr copy (void) const;
-    virtual int cmp (constQueueItemPtr item) const;
-    virtual bool isRedundant (ResolverContextPtr context) const { return false; }
-    virtual bool isSatisfied (ResolverContextPtr context) const { return false; }
-
-    void addItem (QueueItemPtr subitem);
-};
-
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
-
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 #endif // _QueueItemGroup_h

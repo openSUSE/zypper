@@ -34,97 +34,107 @@
 #include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Match.h>
 
-///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+namespace zypp 
+{ ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+  namespace solver
+  { /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+    namespace detail
+    { ///////////////////////////////////////////////////////////////////
 
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : StoreWorld
-
-class StoreWorld : public World {
-    REP_BODY(StoreWorld);
-
-  private:
-
-    int _freeze_count;
-
-    ResItemTable _resItems_by_name;
-    ResItemAndDependencyTable _provides_by_name;
-    ResItemAndDependencyTable _requires_by_name;
-    ResItemAndDependencyTable _conflicts_by_name;
-
-    PackmanPtr _packman;
-    Kind _resItem_kind;
-
-    ChannelList _channels;
-
-  public:
-
-    StoreWorld (WorldType type = STORE_WORLD);
-    virtual ~StoreWorld();
-
-    // ---------------------------------- I/O
-
-    static std::string toString (const StoreWorld & storeworld);
-
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-
-    friend std::ostream& operator<<(std::ostream&, const StoreWorld & storeworld);
-
-    std::string asString (void ) const;
-
-    // ---------------------------------- accessors
-
-    virtual ChannelList channels () const { return _channels; }
-
-    // ---------------------------------- methods
-
-    // Add/remove resItems
-
-    bool addResItem (constResItemPtr resItem);
-    void addResItemsFromList (const CResItemList & slist);
-    void removeResItem (constResItemPtr resItem);
-    void removeResItems (constChannelPtr channel);
-    void clear ();
-
-    // Iterate over resItems
-
-    virtual int foreachResItem (ChannelPtr channel, CResItemFn fn, void *data);
-    virtual int foreachResItemByName (const std::string & name, ChannelPtr channel, CResItemFn fn, void *data);
-    virtual int foreachResItemByMatch (constMatchPtr match, CResItemFn fn, void *data);
-
-    // Iterate across provides or requirement
-
-    virtual int foreachProvidingResItem (constDependencyPtr dep, ResItemAndSpecFn fn, void *data);
-    virtual int foreachRequiringResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data);
-    virtual int foreachConflictingResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data);
-
-    // Channels
-
-    void addChannel (ChannelPtr channel);
-    void removeChannel (constChannelPtr channel);
-
-    virtual bool containsChannel (constChannelPtr channel) const;
-
-    virtual ChannelPtr getChannelByName (const char *channel_name) const;
-    virtual ChannelPtr getChannelByAlias (const char *alias) const;
-    virtual ChannelPtr getChannelById (const char *channel_id) const;
-
-    virtual int foreachChannel (ChannelFn fn, void *data) const;
-
-    // Single resItem queries
-
-    virtual constResItemPtr findInstalledResItem (constResItemPtr resItem);
-    virtual constResItemPtr findResItem (constChannelPtr channel, const char *name) const;
-    virtual constResItemPtr findResItemWithConstraint (constChannelPtr channel, const char *name, constDependencyPtr constraint, bool is_and) const;
-    virtual ChannelPtr guessResItemChannel (constResItemPtr resItem) const;
-
-};
-    
-///////////////////////////////////////////////////////////////////
-}; // namespace zypp
-///////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : StoreWorld
+      
+      class StoreWorld : public World {
+          REP_BODY(StoreWorld);
+      
+        private:
+      
+          int _freeze_count;
+      
+          ResItemTable _resItems_by_name;
+          ResItemAndDependencyTable _provides_by_name;
+          ResItemAndDependencyTable _requires_by_name;
+          ResItemAndDependencyTable _conflicts_by_name;
+      
+          PackmanPtr _packman;
+          Kind _resItem_kind;
+      
+          ChannelList _channels;
+      
+        public:
+      
+          StoreWorld (WorldType type = STORE_WORLD);
+          virtual ~StoreWorld();
+      
+          // ---------------------------------- I/O
+      
+          static std::string toString (const StoreWorld & storeworld);
+      
+          virtual std::ostream & dumpOn(std::ostream & str ) const;
+      
+          friend std::ostream& operator<<(std::ostream&, const StoreWorld & storeworld);
+      
+          std::string asString (void ) const;
+      
+          // ---------------------------------- accessors
+      
+          virtual ChannelList channels () const { return _channels; }
+      
+          // ---------------------------------- methods
+      
+          // Add/remove resItems
+      
+          bool addResItem (constResItemPtr resItem);
+          void addResItemsFromList (const CResItemList & slist);
+          void removeResItem (constResItemPtr resItem);
+          void removeResItems (constChannelPtr channel);
+          void clear ();
+      
+          // Iterate over resItems
+      
+          virtual int foreachResItem (ChannelPtr channel, CResItemFn fn, void *data);
+          virtual int foreachResItemByName (const std::string & name, ChannelPtr channel, CResItemFn fn, void *data);
+          virtual int foreachResItemByMatch (constMatchPtr match, CResItemFn fn, void *data);
+      
+          // Iterate across provides or requirement
+      
+          virtual int foreachProvidingResItem (constDependencyPtr dep, ResItemAndSpecFn fn, void *data);
+          virtual int foreachRequiringResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data);
+          virtual int foreachConflictingResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data);
+      
+          // Channels
+      
+          void addChannel (ChannelPtr channel);
+          void removeChannel (constChannelPtr channel);
+      
+          virtual bool containsChannel (constChannelPtr channel) const;
+      
+          virtual ChannelPtr getChannelByName (const char *channel_name) const;
+          virtual ChannelPtr getChannelByAlias (const char *alias) const;
+          virtual ChannelPtr getChannelById (const char *channel_id) const;
+      
+          virtual int foreachChannel (ChannelFn fn, void *data) const;
+      
+          // Single resItem queries
+      
+          virtual constResItemPtr findInstalledResItem (constResItemPtr resItem);
+          virtual constResItemPtr findResItem (constChannelPtr channel, const char *name) const;
+          virtual constResItemPtr findResItemWithConstraint (constChannelPtr channel, const char *name, constDependencyPtr constraint, bool is_and) const;
+          virtual ChannelPtr guessResItemChannel (constResItemPtr resItem) const;
+      
+      };
+      ///////////////////////////////////////////////////////////////////
+    };// namespace detail
+    /////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////
+  };// namespace solver
+  ///////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////
+};// namespace zypp
+/////////////////////////////////////////////////////////////////////////
 
 #endif // _StoreWorld_h
