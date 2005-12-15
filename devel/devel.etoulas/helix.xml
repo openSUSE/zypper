@@ -1,7 +1,7 @@
 <channel><subchannel>
 <package>
   <name>G</name>
-  <summary>A fake package</summary>
+  <summary>A kake package</summary>
   <description>A fake package</description>
   <section>misc</section>
   <history>
@@ -21,6 +21,9 @@
   <provides>
     <dep name="x" op="(any)" version="1.0"/>
   </provides>
+  <conflicts>
+    <dep name="mytest" op="=" version="3.14"/>
+  </conflicts>
 </package>
 <package>
   <name>A</name>
