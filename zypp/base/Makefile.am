@@ -11,6 +11,7 @@ include_HEADERS =	\
 	KindOf.h	\
 	Logger.h	\
 	Exception.h	\
+	Gettext.h	\
 	IOStream.h	\
 	NonCopyable.h	\
 	PtrTypes.h	\
@@ -30,6 +31,7 @@ lib@PACKAGE@_base_la_SOURCES =	\
 	Logger.cc	\
 	Exception.cc	\
 	Fd.cc		\
+	Gettext.cc	\
 	IOStream.cc	\
 	ReferenceCounted.cc	\
 	String.cc	\

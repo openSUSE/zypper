@@ -14,6 +14,7 @@
 
 #include <string>
 #include <map>
+#include <list>
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
@@ -67,7 +68,7 @@ namespace zypp {
       , _https( https_r )
       , _no_proxy( no_proxy_r )
       {}
-  
+
     public:
       /**  */
       const bool & enabled() const
@@ -84,7 +85,7 @@ namespace zypp {
       /**  */
       const std::list<std::string> & noProxy() const
       { return _no_proxy; }
-  
+
      protected:
       bool _enabled;
       std::string _http;

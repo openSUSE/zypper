@@ -11,9 +11,11 @@ include_HEADERS = NeedAType.h \
 	Capability.h	\
 	CapFactory.h	\
 	CapSet.h	\
+	CountryCode.h	\
 	Date.h		\
 	Dependencies.h	\
 	Edition.h	\
+	LanguageCode.h	\
 	Rel.h		\
 	ResObject.h	\
 	Resolvable.h	\
@@ -47,9 +49,11 @@ lib@PACKAGE@_la_SOURCES = \
 	Capability.cc	\
 	CapFactory.cc	\
 	CapSet.cc	\
+	CountryCode.cc	\
 	Date.cc		\
 	Dependencies.cc	\
 	Edition.cc	\
+	LanguageCode.cc	\
 	Rel.cc		\
 	ResObject.cc	\
 	Resolvable.cc	\
