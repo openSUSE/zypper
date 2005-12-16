@@ -175,6 +175,7 @@ AC_OUTPUT(	\
 	zypp/source/Makefile		\
 	zypp/source/yum/Makefile	\
 	zypp/media/Makefile		\
+	zypp/media/proxyinfo/Makefile	\
 	zypp/url/Makefile		\
 
 )
