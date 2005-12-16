@@ -32,6 +32,7 @@
 #include <zypp/solver/detail/OrDependencyPtr.h>
 #include <zypp/solver/detail/Spec.h>
 #include <zypp/solver/detail/XmlNode.h>
+#include <zypp/ResObject.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -131,7 +132,7 @@ namespace zypp
       
           Dependency (const std::string & name,
       	  const Relation & relation,
-      	  const Kind & kind = Kind::Package,
+      	  const Resolvable::Kind & kind = ResTraits<zypp::Package>::kind,
       	  constChannelPtr channel = NULL,
       	  int epoch = -1,
       	  const std::string & version = "",
@@ -142,7 +143,7 @@ namespace zypp
       
           Dependency (const std::string & name,
       	  const Relation & relation,
-      	  const Kind & kind = Kind::Package,
+                      const Resolvable::Kind & kind = ResTraits<zypp::Package>::kind,
       	  constChannelPtr channel = NULL,
       	  constEditionPtr edition = NULL,
       	  bool or_dep = false,

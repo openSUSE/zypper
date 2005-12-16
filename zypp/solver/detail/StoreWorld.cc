@@ -79,7 +79,6 @@ namespace zypp
       
       StoreWorld::StoreWorld (WorldType type)
           : World (type)
-          , _resItem_kind(Kind::Unknown)
       {
       }
       

@@ -241,7 +241,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      Dependency::Dependency (const string & name, const Relation & relation, const Kind & kind,
+      Dependency::Dependency (const string & name, const Relation & relation, const Resolvable::Kind & kind,
       	constChannelPtr channel,
       	int epoch, const string & version, const string & release, const Arch * arch,
       	bool or_dep, bool pre_dep)
@@ -254,7 +254,7 @@ namespace zypp
       }
       
       
-      Dependency::Dependency (const string & name, const Relation & relation, const Kind & kind,
+      Dependency::Dependency (const string & name, const Relation & relation, const Resolvable::Kind & kind,
       	constChannelPtr channel, constEditionPtr edition, bool or_dep, bool pre_dep)
           : Spec (kind, name, edition)
           , _relation (relation)
@@ -266,7 +266,7 @@ namespace zypp
       
       
       Dependency::Dependency (OrDependencyPtr or_dep)
-          : Spec (Kind::Package, or_dep->name())
+          : Spec (ResTraits<zypp::Package>::kind, or_dep->name())
           , _relation (Relation::Any)
           , _channel (NULL)
           , _or_dep (false)
@@ -277,7 +277,7 @@ namespace zypp
       
       
       Dependency::Dependency (constXmlNodePtr node)
-          : Spec (Kind::Package, "")
+          : Spec (ResTraits<zypp::Package>::kind, "")
           , _relation (Relation::Any)
           , _channel (new Channel(CHANNEL_TYPE_ANY))
           , _or_dep (false)

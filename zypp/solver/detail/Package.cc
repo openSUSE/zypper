@@ -242,7 +242,7 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       Package::Package (constChannelPtr channel)
-          : ResItem (Kind::Package, "")
+          : ResItem (ResTraits<zypp::Package>::kind, "")
           , _section (NULL)
           , _pretty_name ("")
           , _summary ("")
@@ -258,7 +258,7 @@ namespace zypp
       
       
       Package::Package (constXmlNodePtr node, constChannelPtr channel)
-          : ResItem (Kind::Package, "")
+          : ResItem (ResTraits<zypp::Package>::kind, "")
           , _section (NULL)
           , _pretty_name ("")
           , _summary ("")

@@ -24,6 +24,7 @@
 #include <zypp/solver/detail/Match.h>
 #include <zypp/solver/detail/World.h>
 
+
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
 { ///////////////////////////////////////////////////////////////////////
@@ -172,7 +173,7 @@ namespace zypp
       	DependencyPtr dependency;
       	bool check;
       
-      	dependency = new Dependency (resItem->name(), Relation::Equal, Kind::Package, resItem->channel(), resItem->edition());
+      	dependency = new Dependency (resItem->name(), Relation::Equal, ResTraits<zypp::Package>::kind, resItem->channel(), resItem->edition());
       	check = _dependency->verifyRelation (dependency);
       	return check;
           }

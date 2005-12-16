@@ -248,7 +248,7 @@ namespace zypp
       
       	}
       
-      	DependencyPtr dep = new Dependency (name, relation, Kind::Package, NULL, edition);
+      	DependencyPtr dep = new Dependency (name, relation, ResTraits<zypp::Package>::kind, NULL, edition);
       
       	out_dep.push_back (dep);
       	free ((void *)name);

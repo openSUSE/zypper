@@ -67,7 +67,7 @@ namespace zypp
       
       #if 0
       typedef bool		(*WorldSyncFn)    (constWorldPtr world, constChannelPtr channel);
-      typedef PackmanPtr	(*WorldPackmanFn) (constWorldPtr world, const Kind & kind);
+      typedef PackmanPtr	(*WorldPackmanFn) (constWorldPtr world, const Resolvable::Kind & kind);
       typedef void		(*WorldSpewFn)	  (constWorldPtr world, FILE *out);
       typedef constWorldPtr	(*WorldDupFn)	  (constWorldPtr world);
       

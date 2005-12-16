@@ -29,6 +29,7 @@
 #include <zypp/solver/detail/utils.h>
 
 #include <zypp/solver/detail/debug.h>
+#include <zypp/ResObject.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -78,7 +79,7 @@ namespace zypp
       
           /* FIXME: should get Channel from XML */
           /* FIXME: should get Kind from XML */
-          return new Dependency (name, relation, Kind::Package, new Channel(CHANNEL_TYPE_ANY), epoch, version, release, Arch::create(arch));
+          return new Dependency (name, relation, ResTraits<zypp::Package>::kind, new Channel(CHANNEL_TYPE_ANY), epoch, version, release, Arch::create(arch));
       }
       
       

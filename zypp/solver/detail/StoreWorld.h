@@ -34,6 +34,7 @@
 #include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Match.h>
 
+
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
 { ///////////////////////////////////////////////////////////////////////
@@ -61,7 +62,6 @@ namespace zypp
           ResItemAndDependencyTable _conflicts_by_name;
       
           PackmanPtr _packman;
-          Kind _resItem_kind;
       
           ChannelList _channels;
       

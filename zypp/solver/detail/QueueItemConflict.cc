@@ -198,7 +198,7 @@ namespace zypp
       	UpgradeCandidateInfo upgrade_info;
       	upgrade_info.context = info->context;
       
-      	DependencyPtr maybe_upgrade_dep = new Dependency (resItem->name(), Relation::Any, Kind::Package, new Channel (CHANNEL_TYPE_NONSYSTEM), -1);
+      	DependencyPtr maybe_upgrade_dep = new Dependency (resItem->name(), Relation::Any, ResTraits<zypp::Package>::kind, new Channel (CHANNEL_TYPE_NONSYSTEM), -1);
       	info->world->foreachProvidingResItem (maybe_upgrade_dep, upgrade_candidates_cb, (void *)&upgrade_info);
       
       #endif

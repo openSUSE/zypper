@@ -134,7 +134,7 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       PackageUpdate::PackageUpdate (const string & name)
-          : Spec (Kind::Package, name)
+          : Spec (ResTraits<zypp::Package>::kind, name)
           , _package (NULL)
           , _package_url (NULL)
           , _package_size (0)
@@ -152,7 +152,7 @@ namespace zypp
       
       
       PackageUpdate::PackageUpdate (constXmlNodePtr node, PackagePtr package)
-          : Spec (Kind::Package, package->name())
+          : Spec (ResTraits<zypp::Package>::kind, package->name())
           , _package (NULL)
           , _package_url (NULL)
           , _package_size (0)

@@ -23,6 +23,13 @@
 #include <y2util/stringutil.h>
 
 #include <zypp/solver/detail/ResItem.h>
+#include <zypp/ResObject.h>
+#include <zypp/detail/ResObjectImplIf.h>
+#include <zypp/detail/ResObjectFactory.h>
+#include <zypp/Package.h>
+#include <zypp/detail/PackageImpl.h>
+#include <zypp/base/String.h>
+
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -131,7 +138,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      ResItem::ResItem (const Kind & kind, const string & name, int epoch, const string & version, const string & release, const Arch * arch)
+      ResItem::ResItem (const Resolvable::Kind & kind, const string & name, int epoch, const string & version, const string & release, const Arch * arch)
           :Spec (kind, name, epoch, version, release, arch)
           , _channel (false)
           , _installed (false)
@@ -141,8 +148,50 @@ namespace zypp
           , _installed_size (0)
       
       {
+          string archString = "i386";
+          
+          if (arch != NULL)
+          {
+              archString = arch->asString();
+          }
+          zypp::Edition     _edition( version, release, zypp::str::numstring(epoch) );
+          zypp::Arch        _arch( archString );
+
+          // create the ResObject
+          shared_ptr<zypp::detail::PackageImpl> pkgImpl;
+          zypp::Package::Ptr pkg( zypp::detail::makeResolvableAndImpl( name, _edition, _arch,
+                                                   pkgImpl ) );
+          _resObject = pkg;
+
+//          shared_ptr<zypp::detail::ResObjectImplIf> resObjectImpl;
+//          ResObject::Ptr resObject( zypp::detail::makeResolvableAndImpl( _name, _edition, _arch,
+//                                                   resObjectImpl ) );
+//          
+//        _resObject = resObject;
+          
+          
       }
-      
+
+      ResItem::ResItem(const ResObject::Ptr & resObject)
+          :Spec (ResTraits<Package>::kind, "")
+          ,_channel (false)
+          , _installed (false)
+          , _local (false)
+          , _locked (false)
+          , _file_size (0)
+          , _installed_size (0)
+      {
+          _resObject = resObject;
+          if (_resObject != NULL)
+          {
+              setVersion(resObject->edition().version());
+              setArch(resObject->arch().asString());
+              setEpoch(resObject->edition().epoch());
+              setRelease(resObject->edition().release());
+              setKind(resObject->kind());
+              setName(resObject->name());    
+          }
+      }
       
       ResItem::~ResItem()
       {

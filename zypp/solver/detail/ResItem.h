@@ -62,6 +62,7 @@ namespace zypp
           REP_BODY(ResItem);
       
         private:
+          ResObject::Ptr _resObject;
           constChannelPtr _channel;
       
           bool _installed;
@@ -88,8 +89,9 @@ namespace zypp
       
         public:
       
-          ResItem(const Kind & kind, const std::string & name, int epoch = -1, const std::string & version = "", const std::string & release = "", const Arch * arch = Arch::Unknown);
-      
+          ResItem(const Resolvable::Kind & kind, const std::string & name, int epoch = -1, const std::string & version = "", const std::string & release = "", const Arch * arch = Arch::Unknown);
+
+          ResItem(const ResObject::Ptr & resObject);
           ResItem(const XmlNodePtr node);
       
           virtual ~ResItem();

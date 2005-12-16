@@ -41,14 +41,6 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       UstringHash Name::_nameHash;
-      UstringHash Kind::_kindHash;
-      const Kind & Kind::Unknown = Kind("");
-      const Kind & Kind::Package = Kind("package");
-      const Kind & Kind::Patch = Kind("patch");
-      const Kind & Kind::Script = Kind("script");
-      const Kind & Kind::Message = Kind("message");
-      const Kind & Kind::Selection = Kind("selection");
-      const Kind & Kind::Product = Kind("product");
       
       //---------------------------------------------------------------------------
       
@@ -65,8 +57,8 @@ namespace zypp
           string res;
       
           if (full
-      	|| (spec.kind() != Kind::Package
-      	    && spec.kind() != Kind::Unknown)) {
+      	|| (spec.kind() != "Package"
+      	    && spec.kind() != "ResObject")) {
       	res += spec.kind().asString();
       	res += ":";
           }
@@ -99,7 +91,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      Spec::Spec (const Kind & kind, const string & name, constEditionPtr edition)
+      Spec::Spec (const Resolvable::Kind & kind, const string & name, constEditionPtr edition)
           : _kind (kind)
           , _name (Name (name))
           , _edition (edition == NULL ? new Edition() : edition->copy())
@@ -107,7 +99,7 @@ namespace zypp
       }
       
       
-      Spec::Spec ( const Kind & kind, const string & name, int epoch, const string & version, const string & release, const Arch * arch)
+      Spec::Spec ( const Resolvable::Kind & kind, const string & name, int epoch, const string & version, const string & release, const Arch * arch)
           : _kind (kind)
           , _name (Name (name))
           , _edition (new Edition (epoch, version, release, arch))
@@ -116,7 +108,7 @@ namespace zypp
       
       
       Spec::Spec (constXmlNodePtr node)
-          : _kind (Kind::Unknown)
+          : _kind (ResTraits<zypp::Package>::kind) // Fixme: should be type like unknown
       {
           fprintf (stderr, "Spec::Spec (constXmlNodePtr node)\nNot implemented\n");
           abort();

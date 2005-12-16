@@ -32,6 +32,7 @@
 #include <zypp/solver/detail/SpecPtr.h>
 #include <zypp/solver/detail/XmlNode.h>
 #include <zypp/solver/detail/Edition.h>
+#include <zypp/ResObject.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -61,36 +62,6 @@ class Name : public Ustring {
     explicit Name( const std::string & n = "" ) : Ustring( _nameHash, n ) {}
 };
 
-///////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////
-//
-//      CLASS NAME : Kind
-/**
- * A spec kind (package, patch, ...)
- **/
-
-class Kind : public Ustring {
-
-  private:
-
-    static UstringHash _kindHash;
-
-    explicit Kind( const std::string & t = "" ) : Ustring( _kindHash, t ) {}
-
-  public:
-
-    static const Kind & Unknown;
-    static const Kind & Package;
-    static const Kind & Patch;
-    static const Kind & Script;
-    static const Kind & Message;
-    static const Kind & Selection;
-    static const Kind & Product;
-};
-
-///////////////////////////////////////////////////////////////////
 
 
 ///////////////////////////////////////////////////////////////////
@@ -104,21 +75,21 @@ class Kind : public Ustring {
           REP_BODY(Spec);
       
         private:
-          Kind _kind;
+          Resolvable::Kind _kind;
           Name _name;
           EditionPtr _edition;
       
         public:
           typedef std::list<Spec> SpecList;
       
-          Spec( const Kind & kind,
+          Spec( const Resolvable::Kind & kind,
       	  const std::string & name,
       	  int epoch = -1,
       	  const std::string & version = "",
       	  const std::string & release = "",
       	  const Arch * arch = Arch::Unknown);
       
-          Spec (const Kind & kind, const std::string & name, constEditionPtr edition);
+          Spec (const Resolvable::Kind & kind, const std::string & name, constEditionPtr edition);
       
           Spec (constXmlNodePtr node);
       
@@ -152,8 +123,8 @@ class Kind : public Ustring {
           void setArch (const Arch * arch) { _edition->setArch (arch); }
           void setArch (const std::string & arch) { _edition->setArch (arch); }
       
-          const Kind & kind() const { return _kind; }
-          void setKind (const Kind & kind) { _kind = kind; }
+          const Resolvable::Kind & kind() const { return _kind; }
+          void setKind (const Resolvable::Kind & kind) { _kind = kind; }
       
           const std::string name() const { return _name; }
           void setName (const std::string & name) { _name = Name(name.c_str()); }
