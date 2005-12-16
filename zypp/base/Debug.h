@@ -15,8 +15,10 @@
 #define ZYPP_BASE_DEBUG_H
 
 #include <iostream>
+#include <sstream>
 #include "zypp/base/Logger.h"
 #include "zypp/base/PtrTypes.h"
+#include "zypp/ResObject.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -33,7 +35,7 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     /** \defgroup DBG_TRACER Tracer
      * \ingroup DEBUG
-     */
+    */
     //@{
     /** Base for a simple tracer. Provides an enum indicating which
      * traced functions were called.
@@ -120,6 +122,65 @@ namespace zypp
             INT << self_r << what_r << "( " << rhs_r << ")" << std::endl;
             break;
           }
+      }
+    //@}
+    ///////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    /** \defgroup DBG_FAKED_RESOLVABLES Faked Resolvables
+     * \ingroup DEBUG
+     * \code
+     *   // parse or fill in the values:
+     *   std::string  _name;
+     *   Edition      _edition;
+     *   Arch         _arch;
+     *   Dependencies _deps;
+     *   // Create a faked ResObject claiming to be a Package:
+     *   ResObject::Ptr ptr( debug::fakeResObject<Package>( _name, _edition, _arch, Dependencies() ) );
+     * \endcode
+    */
+    //@{
+    /** Implementation of faked Resolvable. */
+    class ResObjectFakeImpl : public detail::ResObjectImplIf
+    {
+      virtual Label summary() const
+      {
+          std::ostringstream str;
+          str << "FAKED " << *self();
+          return str.str();
+      }
+    };
+
+    /** Faked Resolvable.
+     * Template argument defines the kind of Resolvable.
+    */
+    template<class _Res>
+      class ResObjectFake : public ResObject
+      {
+      public:
+        ResObjectFake( const std::string & name_r,
+                       const Edition & edition_r,
+                       const Arch & arch_r )
+        : ResObject( ResTraits<_Res>::kind, name_r, edition_r, arch_r )
+        {}
+      };
+
+    /** Faked Resolvable factory function.
+     * Provide ready to use NVRA and Dependencies.
+    */
+    template<class _Res>
+      ResObject::Ptr fakeResObject( const std::string & name_r,
+                                    const Edition & edition_r,
+                                    const Arch & arch_r,
+                                    const Dependencies & deps_r )
+      {
+        using detail::_resobjectfactory_detail::ResImplConnect;
+
+        shared_ptr<ResObjectFakeImpl> impl( new ResObjectFakeImpl );
+        ResObject::Ptr ret( new ResImplConnect<ResObjectFake<_Res> >
+                            ( name_r, edition_r, arch_r, impl ) );
+        ret->setDeps( deps_r );
+        return ret;
       }
     //@}
     ///////////////////////////////////////////////////////////////////

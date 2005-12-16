@@ -61,8 +61,8 @@ namespace zypp
   template<>
     struct ResTraits<ResObject> : public ResolvableTraits
     {
-      typedef intrusive_ptr<Resolvable>       PtrType;
-      typedef intrusive_ptr<const Resolvable> constPtrType;
+      typedef intrusive_ptr<ResObject>       PtrType;
+      typedef intrusive_ptr<const ResObject> constPtrType;
     };
 
   /////////////////////////////////////////////////////////////////
