@@ -45,19 +45,23 @@ namespace zypp
     /** Simple lineparser: Call functor \a consume_r for each line.
      *
      * \param str_r The istream to read from.
-     * \param consume_r A reference to a function or functor.
+     * \param consume_r A reference to a function or functor. The loop is
+     * aborted if the function returns \c false.
      * \code
-     * void consume( const std::string & )
+     * bool consume( const std::string & )
      * { ... }
      *
-     * struct Consume : public std::unary_function<const std::string &, void>
+     * struct Consume : public std::unary_function<const std::string &, bool>
      * {
-     *   void operator()( const std::string & line_r )
+     *   bool operator()( const std::string & line_r )
      *   { ... }
      * };
      * \endcode
      *
      * \return A reference to \a consume_r.
+     *
+     * \todo Should be templated and specialized according to the
+     * functors return type, to allow \c void consumer.
     */
     template<class _Function>
       _Function & forEachLine( std::istream & str_r, _Function & consume_r )
@@ -68,7 +72,8 @@ namespace zypp
             if ( ! (str_r.fail() || str_r.bad()) )
               {
                 // l contains valid data to be consumed.
-                consume_r( l );
+                if ( ! consume_r( l ) )
+                  break;
               }
           }
         return consume_r;
