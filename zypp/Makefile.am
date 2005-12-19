@@ -16,6 +16,7 @@ include_HEADERS = NeedAType.h \
 	Dependencies.h	\
 	Edition.h	\
 	LanguageCode.h	\
+	Locale.h	\
 	Rel.h		\
 	ResObject.h	\
 	Resolvable.h	\
@@ -54,6 +55,7 @@ lib@PACKAGE@_la_SOURCES = \
 	Dependencies.cc	\
 	Edition.cc	\
 	LanguageCode.cc	\
+	Locale.cc	\
 	Rel.cc		\
 	ResObject.cc	\
 	Resolvable.cc	\

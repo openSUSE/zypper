@@ -16,6 +16,7 @@
 #include <map>
 #include <list>
 #include <string>
+#include "zypp/Locale.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -71,16 +72,6 @@ namespace zypp
 
   /** Vendor. Worth a typedef. Maybe a class unifying the strings. */
   typedef std::string Vendor;
-
-  /** Handle Strings like "en_US". Offerrs their CountryCode and
-   LanguageCode parts. */
-  typedef std::string Locale;
-
-  /** CountryCode of locale (from libutil incl. translations) */
-  typedef std::string CountryCode;
-
-  /** LanguageCode of locale (from libutil incl. translations) */
-  typedef std::string LanguageCode;
 
   /** Handle data depending on a locale. Translated strings, maybe
    other too. */

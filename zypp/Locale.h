@@ -6,37 +6,31 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/CountryCode.h
+/** \file	zypp/Locale.h
  *
 */
-#ifndef ZYPP_COUNTRYCODE_H
-#define ZYPP_COUNTRYCODE_H
+#ifndef ZYPP_LOCALE_H
+#define ZYPP_LOCALE_H
 
 #include <iosfwd>
-#include <string>
 
 #include "zypp/base/PtrTypes.h"
+
+#include "zypp/LanguageCode.h"
+#include "zypp/CountryCode.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  class CountryCode;
-  inline bool operator==( const CountryCode & lhs, const CountryCode & rhs );
-  inline bool operator!=( const CountryCode & lhs, const CountryCode & rhs );
-
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : CountryCode
+  //	CLASS NAME : Locale
   //
-  /** Country codes (iso3166-1-alpha-2).
-   *
-   * In fact the class will not prevent to use a non iso country code.
-   * Just a warning will appear in the log.
-  */
-  class CountryCode
+  /** */
+  class Locale
   {
-    friend std::ostream & operator<<( std::ostream & str, const CountryCode & obj );
+    friend std::ostream & operator<<( std::ostream & str, const Locale & obj );
 
   public:
     /** Implementation  */
@@ -44,33 +38,37 @@ namespace zypp
 
   public:
     /** Default ctor */
-    CountryCode();
+    Locale();
 
     /** Ctor taking a string. */
     explicit
-    CountryCode( const std::string & code_r );
+    Locale( const std::string & code_r );
+
+    /** Ctor taking LanguageCode and optional CountryCode. */
+    Locale( const LanguageCode & language_r,
+            const CountryCode & country_r = CountryCode() );
 
     /** Dtor */
-    ~CountryCode();
+    ~Locale();
 
   public:
-
-    /** \name CountryCode constants. */
+    /** \name Locale constants. */
     //@{
     /** No or empty code. */
-    static const CountryCode noCode;
+    static const Locale noCode;
     //@}
 
   public:
-    /** Return the country code. */
+    /** */
+    const LanguageCode & language() const;
+    /** */
+    const CountryCode & country() const;
+
+    /** Return the locale code. */
     std::string code() const;
 
-    /** Return the country name; if not available the country code. */
+    /** Return the name made of language and country name. */
     std::string name() const;
-
-    /** <tt>*this != noCode</tt>. */
-    bool hasCode() const
-    { return *this != noCode; }
 
   private:
     /** Pointer to implementation */
@@ -78,35 +76,35 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
-  /** \relates CountryCode Stream output */
-  inline std::ostream & operator<<( std::ostream & str, const CountryCode & obj )
+  /** \relates Locale Stream output */
+  inline std::ostream & operator<<( std::ostream & str, const Locale & obj )
   { return str << obj.code(); }
 
   /** Comparison based on string value. */
   //@{
-  /** \relates CountryCode */
-  inline bool operator==( const CountryCode & lhs, const CountryCode & rhs ) {
+  /** \relates Locale */
+  inline bool operator==( const Locale & lhs, const Locale & rhs ) {
     return( lhs.code() == rhs.code() );
   }
-  /** \relates CountryCode */
-  inline bool operator==( const std::string & lhs, const CountryCode & rhs ) {
+  /** \relates Locale */
+  inline bool operator==( const std::string & lhs, const Locale & rhs ) {
     return( lhs == rhs.code() );
   }
-  /** \relates CountryCode */
-  inline bool operator==( const CountryCode & lhs, const std::string & rhs ) {
+  /** \relates Locale */
+  inline bool operator==( const Locale & lhs, const std::string & rhs ) {
     return( lhs.code() == rhs );
   }
 
-  /** \relates CountryCode */
-  inline bool operator!=( const CountryCode & lhs, const CountryCode & rhs ) {
+  /** \relates Locale */
+  inline bool operator!=( const Locale & lhs, const Locale & rhs ) {
     return( ! operator==( lhs, rhs ) );
   }
-  /** \relates CountryCode */
-  inline bool operator!=( const std::string & lhs, const CountryCode & rhs ) {
+  /** \relates Locale */
+  inline bool operator!=( const std::string & lhs, const Locale & rhs ) {
     return( ! operator==( lhs, rhs ) );
   }
-  /** \relates CountryCode */
-  inline bool operator!=( const CountryCode & lhs, const std::string & rhs ) {
+  /** \relates Locale */
+  inline bool operator!=( const Locale & lhs, const std::string & rhs ) {
     return( ! operator==( lhs, rhs ) );
   }
   //@}
@@ -118,11 +116,11 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 namespace std
 { /////////////////////////////////////////////////////////////////
-  /** \relates CountryCode Default order for std::container based on code string value.*/
+  /** \relates Locale Default order for std::container based on code string value.*/
   template<>
-    inline bool less<zypp::CountryCode>::operator()( const zypp::CountryCode & lhs, const zypp::CountryCode & rhs ) const
+    inline bool less<zypp::Locale>::operator()( const zypp::Locale & lhs, const zypp::Locale & rhs ) const
     { return lhs.code() < rhs.code(); }
   /////////////////////////////////////////////////////////////////
 } // namespace std
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_COUNTRYCODE_H
+#endif // ZYPP_LOCALE_H

@@ -21,6 +21,10 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  class LanguageCode;
+  inline bool operator==( const LanguageCode & lhs, const LanguageCode & rhs );
+  inline bool operator!=( const LanguageCode & lhs, const LanguageCode & rhs );
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : LanguageCode
@@ -50,7 +54,6 @@ namespace zypp
     ~LanguageCode();
 
   public:
-
     /** \name LanguageCode constants. */
     //@{
     /** No or empty code. */
@@ -65,6 +68,14 @@ namespace zypp
 
     /** Return the language name; if not available the language code. */
     std::string name() const;
+
+    /** <tt>*this != noCode</tt>. */
+    inline bool hasCode() const
+    { return *this != noCode; }
+
+    /** <tt>*this == useDefault</tt>. */
+    bool useDefaultCode() const
+    { return *this == useDefault; }
 
   private:
     /** Pointer to implementation */

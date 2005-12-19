@@ -16,6 +16,7 @@
 #include <string>
 
 #include "zypp/detail/ResObjectFactory.h"
+#include "zypp/Locale.h"
 #include "zypp/ByteCount.h"
 #include "zypp/Date.h"
 
