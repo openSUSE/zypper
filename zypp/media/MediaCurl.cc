@@ -17,7 +17,6 @@
 #include "zypp/base/String.h"
 
 #include "zypp/media/MediaCurl.h"
-#include "zypp/media/MediaCallbacks.h"
 #include "zypp/media/proxyinfo/ProxyInfos.h"
 #include "zypp/media/ProxyInfo.h"
 
@@ -35,8 +34,6 @@ namespace zypp {
   namespace media {
 
 Pathname MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
-
-MediaCurl::Callbacks *MediaCurl::_callbacks = 0;
 
 bool MediaCurl::_globalInit = false;
 
@@ -287,7 +284,7 @@ void MediaCurl::attachTo (bool next)
   }
 
   ret = curl_easy_setopt( _curl, CURLOPT_PROGRESSFUNCTION,
-                          &MediaCurl::progressCallback );
+                          &progressCallback );
   if ( ret != 0 ) {
     ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
@@ -339,6 +336,20 @@ void MediaCurl::getFile( const Pathname & filename ) const
 
 
 void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target) const
+{
+  DownloadProgressReport report;
+  try {
+    doGetFileCopy(filename, target, report);
+  }
+  catch (MediaException & excpt_r)
+  {
+    report.end(excpt_r);
+    ZYPP_RETHROW(excpt_r);
+  }
+  report.end();
+}
+
+void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & target, DownloadProgressReport & report) const
 {
     DBG << filename.asString() << endl;
 
@@ -408,14 +419,10 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
     }
 
     // Set callback and perform.
-#warning FIXME reenable callback
-#if 0
-    DownloadProgressReport::Send report( downloadProgressReport );
-    report->start( url, dest );
+    report.start(url, dest);
     if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, &report ) != 0 ) {
       WAR << "Can't set CURLOPT_PROGRESSDATA: " << _curlError << endl;;
     }
-#endif
 
     ret = curl_easy_perform( _curl );
     fclose( file );
@@ -487,27 +494,14 @@ void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target
       }
       catch (const MediaException & excpt_r)
       {
-#warning FIXME reenable change report
-#if 0
-	report->stop( err );
-#endif
 	ZYPP_RETHROW(excpt_r);
       }
     }
 
     if ( rename( destNew, dest ) != 0 ) {
       ERR << "Rename failed" << endl;
-#warning FIXME reenable change report
-#if 0
-      report->stop( Error::E_write_error );
-#endif
       ZYPP_THROW(MediaWriteException(dest));
     }
-
-#warning FIXME reenable change report
-#if 0
-    report->stop( Error::E_ok );
-#endif
 }
 
 
@@ -589,21 +583,12 @@ void MediaCurl::getDirInfo( filesystem::DirContent & retlist,
 int MediaCurl::progressCallback( void *clientp, double dltotal, double dlnow,
                                  double ultotal, double ulnow )
 {
-#warning FIXME this function
-#if 0
-  DownloadProgressReport::Send * reportP = reinterpret_cast<DownloadProgressReport::Send*>( clientp );
-  if ( reportP ) {
-    ProgressData pd( 0, int(dltotal), int(dlnow) );
-    if ( (*reportP)->progress( pd ) == false )
-      return 1; // abort requested by user
+  DownloadProgressReport *report = reinterpret_cast<DownloadProgressReport*>( clientp );
+  if (report)
+  {
+    if (report->progress(int( dlnow * 100 / dltotal )))
+      return 1;
   }
-
-#warning YOU callbacks still active
-  if ( _callbacks ) {
-    if ( _callbacks->progress( int( dlnow * 100 / dltotal ) ) ) return 0;
-    else return 1;
-  }
-#endif
   return 0;
 }
 

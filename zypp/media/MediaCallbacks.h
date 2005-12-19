@@ -26,13 +26,23 @@ namespace zypp {
     // Reporting progress of download
     ///////////////////////////////////////////////////////////////////
     class DownloadProgressReport : public HACK::Callback {
+    public:
       virtual ~DownloadProgressReport()
       {}
-      virtual void start( const Url & url_r, const Pathname & localpath_r )
+      /** Start the operation */
+      virtual void start( const Url & url_r, const Pathname & localpath_r ) 
       { }
-      virtual bool progress( /*const ProgressData & prg*/ )
+      /**
+       * Inform about progress
+       * Return true on abort
+       */
+      virtual bool progress( unsigned percent )
       { return false; }
-      virtual void stop( Exception & excpt_r )
+      /** Finish operation in case of success */
+      virtual void end()
+      { }
+      /** Finish operatino in case of fail, report fail exception */
+      virtual void end( Exception & excpt_r )
       { }
     };
   

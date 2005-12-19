@@ -13,6 +13,7 @@
 #define ZYPP_MEDIA_MEDIACURL_H
 
 #include "zypp/media/MediaHandler.h"
+#include "zypp/media/MediaCallbacks.h"
 
 #include <curl/curl.h>
 
@@ -44,6 +45,14 @@ class MediaCurl : public MediaHandler {
      */
     virtual void getFileCopy( const Pathname & srcFilename, const Pathname & targetFilename) const;
 
+    /**
+     *
+     * \throws MediaException
+     *
+     */
+    virtual void doGetFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, DownloadProgressReport & _report) const;
+
+
 
   public:
 
@@ -61,8 +70,6 @@ class MediaCurl : public MediaHandler {
         virtual bool progress( int percent ) = 0;
     };
 
-    static void setCallbacks( Callbacks *c ) { _callbacks = c; }
-
   protected:
 
     static int progressCallback( void *clientp, double dltotal, double dlnow,
@@ -78,8 +85,6 @@ class MediaCurl : public MediaHandler {
     std::string _currentCookieFile;
 
     static Pathname _cookieFile;
-
-    static Callbacks *_callbacks;
 
     bool _connected;
 
