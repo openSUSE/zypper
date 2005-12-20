@@ -422,9 +422,9 @@ namespace zypp
           if (version) free ((void *)version);
           if (release) free ((void *)release);
       
-          /* Hack for no archs in the XML yet */
-          if (arch()->isUnknown())
-      	setArch (Arch::System);
+//          /* Hack for no archs in the XML yet */
+//          if (arch()->isUnknown())
+//      	setArch (Arch::System);
       }
       
       Package::~Package()

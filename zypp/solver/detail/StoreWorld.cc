@@ -28,6 +28,7 @@
 #include <zypp/solver/detail/StoreWorld.h>
 #include <zypp/solver/detail/ResItemAndDependency.h>
 #include <zypp/solver/detail/debug.h>
+#include <zypp/Arch.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -96,22 +97,17 @@ namespace zypp
       bool
       StoreWorld::addResItem (constResItemPtr resItem)
       {
-          ArchList compat_arch_list;
           ResItemAndDependencyPtr r_and_d;
           const char *package_name;
           constChannelPtr channel;
-          int arch_score;
           bool actually_added_package = false;
       
           if (resItem == NULL) return false;
       
-          compat_arch_list = Arch::System->getCompatList();
-      //fprintf (stderr, "Arch::System '%s' -> %d compats\n", Arch::System->asString().c_str(), (int) compat_arch_list.size());
           channel = resItem->channel ();
       
-      //    fprintf (stderr, "StoreWorld[%p]::addResItem(%s) [%s]\n", this, ((constSpecPtr)resItem)->asString().c_str(), channel?channel->name():"?");
+//          fprintf (stderr, "StoreWorld[%p]::addResItem(%s) [%s]\n", this, ((constSpecPtr)resItem)->asString().c_str(), channel?channel->name():"?");
       
-          arch_score = resItem->arch()->getCompatScore(compat_arch_list);
       
           /* Before we do anything, check to make sure that a resItem of the
              same name isn't already in that channel.  If there is a
@@ -125,10 +121,9 @@ namespace zypp
           if (!resItem->isInstalled ()) {			// its not a system package
       
       	constResItemPtr dup_res;
-      	int dup_arch_score;
       
       	/* Filter out resItems with totally incompatible arches */
-      	if (arch_score < 0) {
+      	if ( !resItem->arch()->compatibleWith(zypp::Arch::System)) {
       	    rc_debug (RC_DEBUG_LEVEL_DEBUG, "Ignoring resItem with incompatible arch: Arch '%s', %s",  resItem->arch()->asString().c_str(), resItem->asString(true).c_str());
       	    goto finished;
       	}
@@ -150,8 +145,6 @@ namespace zypp
       
       	    cmp = GVersion.compare (resItem, dup_res);
       //fprintf (stderr, "res: %s, dup_res %s, cmp %d\n", resItem->asString().c_str(), dup_res->asString().c_str(), cmp);
-      	    dup_arch_score = dup_res->arch()->getCompatScore(compat_arch_list);
-      	
       
       	    /* If the resItem we are trying to add has a lower 
       	       version number, just ignore it. */
@@ -162,7 +155,7 @@ namespace zypp
       		goto finished;
       	    }
       
-      
+#if 0
       	    /* If the version numbers are equal, we ignore the resItem to
       	       add if it has a less-preferable arch.  If both
       	       resItems have the same version # and arch, we favor the
@@ -173,7 +166,7 @@ namespace zypp
       		rc_debug (RC_DEBUG_LEVEL_INFO, "\t%s", dup_res->asString().c_str());
       		goto finished;
       	    }
-      
+#endif
       
       	    /* Otherwise we throw out the old resItem and proceed with
       	       adding the newer one. */

@@ -27,6 +27,7 @@
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/OrDependency.h>
 #include <zypp/solver/detail/Version.h>
+#include <zypp/Arch.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -243,7 +244,7 @@ namespace zypp
       
       Dependency::Dependency (const string & name, const Relation & relation, const Resolvable::Kind & kind,
       	constChannelPtr channel,
-      	int epoch, const string & version, const string & release, const Arch * arch,
+      	int epoch, const string & version, const string & release, const zypp::Arch * arch,
       	bool or_dep, bool pre_dep)
           : Spec (kind, name, epoch, version, release, arch)
           , _relation (relation)
@@ -301,9 +302,9 @@ namespace zypp
       
           tmp = node->getProp ("arch", NULL);
           if (tmp) {
-      	setArch (Arch::create (node->getProp ("arch")));
+      	setArch (new Arch(node->getProp ("arch")));
           } else {
-      	setArch (Arch::Unknown);
+      	setArch (new Arch());
           }
       #if 0
           tmp = node->getProp ("kind", NULL);

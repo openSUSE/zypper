@@ -24,6 +24,7 @@
 #include <zypp/solver/detail/Version.h>
 
 #include <zypp/solver/detail/debug.h>
+#include <zypp/Arch.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -107,7 +108,7 @@ namespace zypp
       	release = NULL;
           }
       
-          EditionPtr edition = new Edition(epoch, version, release, Arch::create(arch));
+          EditionPtr edition = new Edition(epoch, version, release, new zypp::Arch());
       
           return edition;
       }

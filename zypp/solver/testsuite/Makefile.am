@@ -13,7 +13,7 @@ INCLUDES=					\
 	-DG_LOG_DOMAIN=\"testsuite\"		\
 	-Wall
 
-LIBZYPP_LIBS = -lxml2 -lz -lm -ly2util -lpthread -lrt -lz -lbz2
+LIBZYPP_LIBS = -lxml2 -lz -lm -ly2util -lpthread -lrt -lz -lbz2 -lzypp
 
 # We're not ready for this yet.
 #check_PROGRAMS = deptestomatic
@@ -26,7 +26,8 @@ edition_single_SOURCES =			\
 	edition_single.cc
 
 edition_single_LDFLAGS =			\
-	-L$(top_srcdir)/zypp/solver/detail/.libs
+	-L$(top_srcdir)/zypp/solver/detail/.libs	\
+	-L$(top_srcdir)/zypp
 
 edition_single_LDADD =			\
 	-lzypp_solver_detail			\
@@ -36,7 +37,8 @@ spec_single_SOURCES =			\
 	spec_single.cc
 
 spec_single_LDFLAGS =			\
-	-L$(top_srcdir)/zypp/solver/detail/.libs
+	-L$(top_srcdir)/zypp/solver/detail/.libs	\
+	-L$(top_srcdir)/zypp
 
 spec_single_LDADD =			\
 	-lzypp_solver_detail			\
@@ -46,7 +48,8 @@ utils_single_SOURCES =			\
 	utils_single.cc
 
 utils_single_LDFLAGS =			\
-	-L$(top_srcdir)/zypp/solver/detail/.libs
+	-L$(top_srcdir)/zypp/solver/detail/.libs	\
+	-L$(top_srcdir)/zypp
 
 utils_single_LDADD =			\
 	-lzypp_solver_detail			\
@@ -57,7 +60,8 @@ deptestomatic_multi_SOURCES =		\
 	deptestomatic_multi.cc
 
 deptestomatic_multi_LDFLAGS =		\
-	-L$(top_srcdir)/zypp/solver/detail/.libs
+	-L$(top_srcdir)/zypp/solver/detail/.libs	\
+	-L$(top_srcdir)/zypp
 
 deptestomatic_multi_LDADD =		\
 	-lzypp_solver_detail			\

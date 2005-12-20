@@ -42,15 +42,31 @@ namespace zypp
     /**  */
     const Kind & kind() const
     { return _kind; }
+    /**  */      
+    void setKind( const Kind & val_r )
+    { _kind = val_r; }
+      
     /**  */
     const std::string & name() const
     { return _name; }
     /**  */
+    void setName( const std::string & val_r )
+    { _name = val_r; }
+      
+    /**  */
     const Edition & edition() const
     { return _edition; }
     /**  */
+    void setEdition( const Edition & val_r )
+    { _edition = val_r; }
+      
+    /**  */
     const Arch & arch() const
     { return _arch; }
+    /**  */
+    void setArch( const Arch & val_r )
+    { _arch = val_r; }
+      
     /**  */
     const Dependencies & deps() const
     { return _deps; }
@@ -60,6 +76,8 @@ namespace zypp
     */
     void setDeps( const Dependencies & val_r )
     { _deps = val_r; }
+
+      
 
   private:
     /**  */

@@ -49,6 +49,11 @@ namespace zypp
     */
     bool compatibleWith( const Arch & rhs ) const;
 
+    /** Architecture of the current working system
+     * \return \c Arch.
+    */      
+    static const Arch System; 
+
   private:
     /** String representation of Arch. */
     std::string _value;

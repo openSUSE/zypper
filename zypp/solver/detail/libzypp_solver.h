@@ -21,7 +21,6 @@
 #ifndef _LIBzypp_H
 #define _LIBzypp_H
 
-#include <zypp/solver/detail/Arch.h>
 #include <zypp/solver/detail/Channel.h>
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Match.h>

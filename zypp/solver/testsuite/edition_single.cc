@@ -22,6 +22,7 @@
  */
 
 #include <zypp/solver/detail/Edition.h>
+#include <zypp/Arch.h>
 
 using namespace std;
 using namespace zypp::solver::detail;
@@ -31,17 +32,17 @@ using namespace zypp::solver::detail;
 bool
 defaultarch(void)
 {
-   const Arch *arch = Arch::create("");		// the default should be 'unknown'
+   const zypp::Arch arch;		// the default should be 'noarch'
 
-   return arch == Arch::Any;
+   return arch == zypp::Arch_noarch;
 }
 
 bool
 x86arch(void)
 {
-   const Arch *arch = Arch::create("x86");
+   const zypp::Arch arch("x86");
 
-   return arch != Arch::Any;
+   return arch != zypp::Arch_noarch;
 }
 
 //---------------------------------------------------------------------------
@@ -80,7 +81,7 @@ releaseEdition(void)
 bool
 archEdition(void)
 {
-    Edition edition(0, "42", "47.11", Arch::create("x86_64"));
+    Edition edition(0, "42", "47.11", new zypp::Arch("x86_64"));
 
     return (edition.asString() == "0:42-47.11.x86_64");
 }
@@ -88,7 +89,7 @@ archEdition(void)
 bool
 fullEdition(void)
 {
-    Edition edition(1, "42", "47.11", Arch::create("x86_64"));
+    Edition edition(1, "42", "47.11", new zypp::Arch("x86_64"));
 
     return (edition.asString() == "1:42-47.11.x86_64");
 }

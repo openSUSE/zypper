@@ -92,7 +92,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      Edition::Edition( int epoch, const string & version, const string & release, const Arch * arch)
+      Edition::Edition( int epoch, const string & version, const string & release, const zypp::Arch * arch)
           : _epoch (epoch)
           , _version (version)
           , _release (release)

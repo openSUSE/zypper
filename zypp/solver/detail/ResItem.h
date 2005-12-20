@@ -89,7 +89,7 @@ namespace zypp
       
         public:
       
-          ResItem(const Resolvable::Kind & kind, const std::string & name, int epoch = -1, const std::string & version = "", const std::string & release = "", const Arch * arch = Arch::Unknown);
+          ResItem(const Resolvable::Kind & kind, const std::string & name, int epoch = -1, const std::string & version = "", const std::string & release = "", const zypp::Arch * arch = new zypp::Arch());
 
           ResItem(const ResObject::Ptr & resObject);
           ResItem(const XmlNodePtr node);
@@ -149,6 +149,32 @@ namespace zypp
       
           const CDependencyList & freshens() const { return _freshens; }
           void setFreshens (const CDependencyList & freshens) { _freshens = freshens; }
+
+          // Spec definitions
+#if 0
+          const std::string & version() const { return _edition->version(); }
+          void setVersion (const std::string & version) { _edition->setVersion (version); }
+      
+          const std::string & release() const { return _edition->release(); }
+          void setRelease (const std::string & release) { _edition->setRelease (release); }
+      
+          const int epoch() const { return _edition->epoch(); }
+          void setEpoch (int epoch) { _edition->setEpoch (epoch); }
+          bool hasEpoch() const { return _edition->hasEpoch(); }
+      
+          const zypp::Arch * arch() const { return _edition->arch(); }
+          void setArch (const zypp::Arch * arch) { _edition->setArch (arch); }
+          void setArch (const std::string & arch) { _edition->setArch (arch); }
+      
+          const Resolvable::Kind & kind() const { return _kind; }
+          void setKind (const Resolvable::Kind & kind) { _kind = kind; }
+      
+          const std::string name() const { return _name; }
+          void setName (const std::string & name) { _name = Name(name.c_str()); }
+      
+          constEditionPtr edition() const { return _edition; }
+          void setEdition (constEditionPtr edition) { _edition = edition->copy(); }
+#endif
       
       };
 

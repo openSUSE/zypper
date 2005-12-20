@@ -79,7 +79,7 @@ namespace zypp
       
           /* FIXME: should get Channel from XML */
           /* FIXME: should get Kind from XML */
-          return new Dependency (name, relation, ResTraits<zypp::Package>::kind, new Channel(CHANNEL_TYPE_ANY), epoch, version, release, Arch::create(arch));
+          return new Dependency (name, relation, ResTraits<zypp::Package>::kind, new Channel(CHANNEL_TYPE_ANY), epoch, version, release, new zypp::Arch(arch));
       }
       
       
@@ -568,12 +568,15 @@ namespace zypp
       		}
       	    }
       	}
-      
+
+#if 0
       	/* Hack for the old XML */
       	if (_current_package->arch()->isUnknown()) {
-      	    _current_package->setArch (Arch::System);
+      	    _current_package->setArch (zypp::Arch::System);
       	}
-      
+#endif
+
+        
       	// check if we provide ourselfs properly
       
       	CDependencyList::const_iterator piter;

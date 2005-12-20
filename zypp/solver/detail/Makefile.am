@@ -14,7 +14,6 @@ include_HEADERS = \
 	debug.h				\
 	utils.h				\
 	extract.h			\
-	Arch.h				\
 	Edition.h			\
 	EditionPtr.h			\
 	Hash.h				\
@@ -101,7 +100,6 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_solver_detail.la
 lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	utils.cc					\
 	debug.cc					\
-	Arch.cc						\
 	Edition.cc					\
 	Spec.cc						\
 	Channel.cc					\

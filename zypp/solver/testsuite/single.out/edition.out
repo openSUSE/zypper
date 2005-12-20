@@ -1,4 +1,4 @@
-defaultarch      FAIL
+defaultarch      PASS
 x86arch          PASS
 emptyEdition     PASS
 epochEdition     PASS

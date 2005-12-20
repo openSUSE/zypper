@@ -138,7 +138,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      ResItem::ResItem (const Resolvable::Kind & kind, const string & name, int epoch, const string & version, const string & release, const Arch * arch)
+      ResItem::ResItem (const Resolvable::Kind & kind, const string & name, int epoch, const string & version, const string & release, const zypp::Arch * arch)
           :Spec (kind, name, epoch, version, release, arch)
           , _channel (false)
           , _installed (false)
@@ -148,18 +148,11 @@ namespace zypp
           , _installed_size (0)
       
       {
-          string archString = "i386";
-          
-          if (arch != NULL)
-          {
-              archString = arch->asString();
-          }
           zypp::Edition     _edition( version, release, zypp::str::numstring(epoch) );
-          zypp::Arch        _arch( archString );
 
           // create the ResObject
           shared_ptr<zypp::detail::PackageImpl> pkgImpl;
-          zypp::Package::Ptr pkg( zypp::detail::makeResolvableAndImpl( name, _edition, _arch,
+          zypp::Package::Ptr pkg( zypp::detail::makeResolvableAndImpl( name, _edition, *arch,
                                                    pkgImpl ) );
           _resObject = pkg;
 

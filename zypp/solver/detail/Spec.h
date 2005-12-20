@@ -87,7 +87,7 @@ class Name : public Ustring {
       	  int epoch = -1,
       	  const std::string & version = "",
       	  const std::string & release = "",
-      	  const Arch * arch = Arch::Unknown);
+      	  const zypp::Arch * arch = new zypp::Arch());
       
           Spec (const Resolvable::Kind & kind, const std::string & name, constEditionPtr edition);
       
@@ -119,7 +119,7 @@ class Name : public Ustring {
           void setEpoch (int epoch) { _edition->setEpoch (epoch); }
           bool hasEpoch() const { return _edition->hasEpoch(); }
       
-          const Arch * arch() const { return _edition->arch(); }
+          const zypp::Arch * arch() const { return _edition->arch(); }
           void setArch (const Arch * arch) { _edition->setArch (arch); }
           void setArch (const std::string & arch) { _edition->setArch (arch); }
       
