@@ -57,7 +57,7 @@ namespace zypp
           int _epoch;
           std::string _version;
           std::string _release;
-          const zypp::Arch *_arch;
+          zypp::Arch _arch;
       
         public:
       
@@ -65,7 +65,7 @@ namespace zypp
           // -1 resp. NULL values are treated as 'any'
           //
       
-          Edition( int epoch = -1, const std::string & version = "", const std::string & release = "", const Arch * arch = new zypp::Arch());
+          Edition( int epoch = -1, const std::string & version = "", const std::string & release = "", const Arch & arch = zypp::Arch());
           virtual ~Edition();
       
           // ---------------------------------- I/O
@@ -85,14 +85,14 @@ namespace zypp
           void setVersion (const std::string & version) { _version = version; }
           void setRelease (const std::string & release) { _release = release; }
           void setEpoch (int epoch) { _epoch = epoch; }
-          void setArch (const std::string & arch) { _arch = new zypp::Arch(arch); }
-          void setArch (const zypp::Arch * arch) { _arch = arch; }
+          void setArch (const std::string & arch) { _arch = zypp::Arch(arch); }
+          void setArch (const zypp::Arch & arch) { _arch = arch; }
       
           const std::string & version() const { return _version; }
           const std::string & release() const { return _release; }
           const int epoch() const { return _epoch; }
           bool hasEpoch() const { return _epoch >= 0; }
-          const zypp::Arch * arch() const { return _arch; }
+          const zypp::Arch & arch() const { return _arch; }
       
           bool match( constEditionPtr edition ) const;
           bool equals( constEditionPtr edition ) const;

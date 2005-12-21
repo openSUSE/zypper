@@ -442,7 +442,7 @@ namespace zypp
       	ResItemPtr resItem = fill_debian_package (iter, channel->getFilePath (), &off);
       
       	resItem->setEpoch (0);
-      	resItem->setArch (new Arch());
+      	resItem->setArch ( Arch());
       	resItem->setChannel (channel);
       
       	if (callback)

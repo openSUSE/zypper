@@ -69,7 +69,7 @@ namespace zypp
       
           if (full) {
       	res += ".";
-      	res += edition._arch->asString();
+      	res += edition._arch.asString();
           }
       
           return res;
@@ -92,7 +92,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      Edition::Edition( int epoch, const string & version, const string & release, const zypp::Arch * arch)
+      Edition::Edition( int epoch, const string & version, const string & release, const zypp::Arch & arch)
           : _epoch (epoch)
           , _version (version)
           , _release (release)

@@ -80,7 +80,6 @@ namespace zypp
           int epoch = -1;
           const char *version;
           const char *release;
-          const char *arch = "";
       
           if ((vptr = strchr (input, ':'))) {
       	/* We -might- have an epoch here */
@@ -108,7 +107,7 @@ namespace zypp
       	release = NULL;
           }
       
-          EditionPtr edition = new Edition(epoch, version, release, new zypp::Arch());
+          EditionPtr edition = new Edition(epoch, version, release, zypp::Arch());
       
           return edition;
       }

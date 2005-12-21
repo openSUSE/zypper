@@ -244,7 +244,7 @@ namespace zypp
       
       Dependency::Dependency (const string & name, const Relation & relation, const Resolvable::Kind & kind,
       	constChannelPtr channel,
-      	int epoch, const string & version, const string & release, const zypp::Arch * arch,
+      	int epoch, const string & version, const string & release, const zypp::Arch & arch,
       	bool or_dep, bool pre_dep)
           : Spec (kind, name, epoch, version, release, arch)
           , _relation (relation)
@@ -302,9 +302,9 @@ namespace zypp
       
           tmp = node->getProp ("arch", NULL);
           if (tmp) {
-      	setArch (new Arch(node->getProp ("arch")));
+      	setArch ( Arch(node->getProp ("arch")));
           } else {
-      	setArch (new Arch());
+      	setArch ( Arch());
           }
       #if 0
           tmp = node->getProp ("kind", NULL);

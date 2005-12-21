@@ -137,7 +137,7 @@ namespace zypp
       	  int epoch = -1,
       	  const std::string & version = "",
       	  const std::string & release = "",
-          const zypp::Arch * arch = new zypp::Arch(),
+          const zypp::Arch & arch = zypp::Arch(),
       	  bool or_dep = false,
       	  bool pre_dep = false);
       

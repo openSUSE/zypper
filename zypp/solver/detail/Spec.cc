@@ -99,7 +99,7 @@ namespace zypp
       }
       
       
-      Spec::Spec ( const Resolvable::Kind & kind, const string & name, int epoch, const string & version, const string & release, const zypp::Arch * arch)
+      Spec::Spec ( const Resolvable::Kind & kind, const string & name, int epoch, const string & version, const string & release, const zypp::Arch & arch)
           : _kind (kind)
           , _name (Name (name))
           , _edition (new Edition (epoch, version, release, arch))

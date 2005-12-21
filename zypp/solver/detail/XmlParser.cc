@@ -79,7 +79,7 @@ namespace zypp
       
           /* FIXME: should get Channel from XML */
           /* FIXME: should get Kind from XML */
-          return new Dependency (name, relation, ResTraits<zypp::Package>::kind, new Channel(CHANNEL_TYPE_ANY), epoch, version, release, new zypp::Arch(arch));
+          return new Dependency (name, relation, ResTraits<zypp::Package>::kind, new Channel(CHANNEL_TYPE_ANY), epoch, version, release, zypp::Arch(arch));
       }
       
       

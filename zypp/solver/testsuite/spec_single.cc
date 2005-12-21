@@ -61,7 +61,7 @@ bool
 archSpec(void)
 {
     Spec spec(zypp::ResTraits<zypp::Package>::kind, "arch", 0, "42", "47.11",
-              new zypp::Arch("x86_64"));
+              zypp::Arch("x86_64"));
 
     return (spec.asString() == "arch-0:42-47.11.x86_64");
 }
@@ -70,7 +70,7 @@ bool
 fullSpec(void)
 {
     Spec spec(zypp::ResTraits<zypp::Package>::kind, "full", 1, "42", "47.11",
-              new zypp::Arch("x86_64"));
+              zypp::Arch("x86_64"));
 
     return (spec.asString() == "full-1:42-47.11.x86_64");
 }

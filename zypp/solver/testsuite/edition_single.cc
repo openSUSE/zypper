@@ -81,7 +81,7 @@ releaseEdition(void)
 bool
 archEdition(void)
 {
-    Edition edition(0, "42", "47.11", new zypp::Arch("x86_64"));
+    Edition edition(0, "42", "47.11", zypp::Arch("x86_64"));
 
     return (edition.asString() == "0:42-47.11.x86_64");
 }
@@ -89,7 +89,7 @@ archEdition(void)
 bool
 fullEdition(void)
 {
-    Edition edition(1, "42", "47.11", new zypp::Arch("x86_64"));
+    Edition edition(1, "42", "47.11", zypp::Arch("x86_64"));
 
     return (edition.asString() == "1:42-47.11.x86_64");
 }

@@ -89,7 +89,7 @@ namespace zypp
       
         public:
       
-          ResItem(const Resolvable::Kind & kind, const std::string & name, int epoch = -1, const std::string & version = "", const std::string & release = "", const zypp::Arch * arch = new zypp::Arch());
+          ResItem(const Resolvable::Kind & kind, const std::string & name, int epoch = -1, const std::string & version = "", const std::string & release = "", const zypp::Arch & arch = zypp::Arch());
 
           ResItem(const ResObject::Ptr & resObject);
           ResItem(const XmlNodePtr node);
@@ -162,8 +162,8 @@ namespace zypp
           void setEpoch (int epoch) { _edition->setEpoch (epoch); }
           bool hasEpoch() const { return _edition->hasEpoch(); }
       
-          const zypp::Arch * arch() const { return _edition->arch(); }
-          void setArch (const zypp::Arch * arch) { _edition->setArch (arch); }
+          const zypp::Arch & arch() const { return _edition->arch(); }
+          void setArch (const zypp::Arch & arch) { _edition->setArch (arch); }
           void setArch (const std::string & arch) { _edition->setArch (arch); }
       
           const Resolvable::Kind & kind() const { return _kind; }
