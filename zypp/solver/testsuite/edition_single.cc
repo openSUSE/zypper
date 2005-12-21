@@ -21,11 +21,11 @@
  * 02111-1307, USA.
  */
 
-#include <zypp/solver/detail/Edition.h>
+#include <zypp/Edition.h>
 #include <zypp/Arch.h>
 
 using namespace std;
-using namespace zypp::solver::detail;
+using namespace zypp;
 
 //---------------------------------------------------------------------------
 
@@ -51,47 +51,30 @@ bool
 emptyEdition(void)
 {
     Edition edition;
-    return (edition.asString() == "");
+    return (edition.asString() == "EDITION-UNSPEC");
 }
 
-bool
-epochEdition(void)
-{
-    Edition edition(1);
-
-    return (edition.asString() == "1:");
-}
 
 bool
 versionEdition(void)
 {
-    Edition edition(0,"42");
-
-    return (edition.asString() == "0:42");
+    Edition edition("42");
+    return (edition.asString() == "42");
 }
 
 bool
 releaseEdition(void)
 {
-    Edition edition(-1,"42","47.11");
-
+    Edition edition("42","47.11");
     return (edition.asString() == "42-47.11");
-}
-
-bool
-archEdition(void)
-{
-    Edition edition(0, "42", "47.11", zypp::Arch("x86_64"));
-
-    return (edition.asString() == "0:42-47.11.x86_64");
 }
 
 bool
 fullEdition(void)
 {
-    Edition edition(1, "42", "47.11", zypp::Arch("x86_64"));
-
-    return (edition.asString() == "1:42-47.11.x86_64");
+    Edition edition( "42", "47.11", 1);
+    return (edition.asString() == "1:42-47.11");
+    
 }
 
 //---------------------------------------------------------------------------
@@ -107,7 +90,8 @@ main (int argc, char *argv[])
 #define FUN(name)	{ #name, name }
 
 	FUN(defaultarch), FUN(x86arch),
-	FUN(emptyEdition), FUN(epochEdition), FUN(versionEdition), FUN(releaseEdition), FUN(archEdition), FUN(fullEdition), 
+	FUN(emptyEdition),  FUN(versionEdition), FUN(releaseEdition),
+        FUN(fullEdition),
 	NULL, NULL
 
     };

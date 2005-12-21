@@ -1,8 +1,6 @@
 defaultarch      PASS
 x86arch          PASS
 emptyEdition     PASS
-epochEdition     PASS
 versionEdition   PASS
 releaseEdition   PASS
-archEdition      FAIL
-fullEdition      FAIL
+fullEdition      PASS

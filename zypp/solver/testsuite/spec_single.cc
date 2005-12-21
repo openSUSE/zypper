@@ -23,6 +23,7 @@
 
 #include <zypp/solver/detail/Spec.h>
 #include "zypp/ResObject.h"
+#include "zypp/Edition.h"
 
 using namespace std;
 using namespace zypp::solver::detail;
@@ -38,32 +39,29 @@ bool
 epochSpec(void)
 {
     Spec spec(zypp::ResTraits<zypp::Package>::kind, "foo", 1);
-
     return (spec.asString() == "foo-1:");
 }
 
 bool
 versionSpec(void)
 {
-    Spec spec(zypp::ResTraits<zypp::Patch>::kind, "bar", 0,"42");
-    return (spec.asString() == "patch:bar-0:42");
+    Spec spec(zypp::ResTraits<zypp::Patch>::kind, "bar", 1,"42");
+    return (spec.asString() == "patch:bar-1:42");
 }
 
 bool
 releaseSpec(void)
 {
-    Spec spec(zypp::ResTraits<zypp::Package>::kind, "foobar", -1,"42","47.11");
-
+    Spec spec(zypp::ResTraits<zypp::Package>::kind, "foobar", zypp::Edition::noepoch,"42","47.11");
     return (spec.asString() == "foobar-42-47.11");
 }
 
 bool
 archSpec(void)
 {
-    Spec spec(zypp::ResTraits<zypp::Package>::kind, "arch", 0, "42", "47.11",
+    Spec spec(zypp::ResTraits<zypp::Package>::kind, "arch", 1, "42", "47.11",
               zypp::Arch("x86_64"));
-
-    return (spec.asString() == "arch-0:42-47.11.x86_64");
+    return (spec.asString() == "arch-1:42-47.11.x86_64");
 }
 
 bool
@@ -71,7 +69,6 @@ fullSpec(void)
 {
     Spec spec(zypp::ResTraits<zypp::Package>::kind, "full", 1, "42", "47.11",
               zypp::Arch("x86_64"));
-
     return (spec.asString() == "full-1:42-47.11.x86_64");
 }
 
