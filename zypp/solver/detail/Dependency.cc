@@ -28,6 +28,7 @@
 #include <zypp/solver/detail/OrDependency.h>
 #include <zypp/solver/detail/Version.h>
 #include <zypp/Arch.h>
+#include <zypp/Edition.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -203,7 +204,7 @@ namespace zypp
       	res += dependency.relation().asString();
       	res += " ";
       
-      	res += dependency.edition()->asString();
+      	res += dependency.edition().asString();
           }
           if (dependency.orDep()) res += " [OR]";
           if (dependency.preDep()) res += " [PRE]";
@@ -256,7 +257,7 @@ namespace zypp
       
       
       Dependency::Dependency (const string & name, const Relation & relation, const Resolvable::Kind & kind,
-      	constChannelPtr channel, constEditionPtr edition, bool or_dep, bool pre_dep)
+      	constChannelPtr channel, const Edition & edition, bool or_dep, bool pre_dep)
           : Spec (kind, name, edition)
           , _relation (relation)
           , _channel (channel)
@@ -295,7 +296,7 @@ namespace zypp
           tmp = node->getProp ("op", NULL);
           if (tmp) {
       	_relation = Relation::parse(tmp);
-      	setEpoch (node->getIntValueDefault ("epoch", -1));
+      	setEpoch (node->getIntValueDefault ("epoch", Edition::noepoch));
       	setVersion (node->getProp ("version"));
       	setRelease (node->getProp ("release"));
           }
@@ -410,17 +411,17 @@ namespace zypp
       	    compare_ret = 1;
       	}
           } else if (epoch() > 0 ) {
-      	compare_ret = -1;
+      	compare_ret = Edition::noepoch;
           }
       if (getenv ("SPEW_DEP")) fprintf (stderr, "epoch(%d), prov->epoch(%d) -> compare_ret %d\n", epoch(), prov->epoch(), compare_ret);
           if (compare_ret == 0) {
       	if (GVersion.hasProperty (VERSION_PROP_ALWAYS_VERIFY_RELEASE)
       	    || (!(release().empty() || prov->release().empty()))) {
-      	    newdepspec = new Spec(kind(), "", -1, version(), release());
-      	    newprovspec = new Spec(prov->kind(), "", -1, prov->version(), prov->release());
+      	    newdepspec = new Spec(kind(), "", Edition::noepoch, version(), release());
+      	    newprovspec = new Spec(prov->kind(), "", Edition::noepoch, prov->version(), prov->release());
       	} else {
-      	    newdepspec = new Spec(kind(), "", -1, version());
-      	    newprovspec = new Spec(prov->kind(), "", -1, prov->version());
+      	    newdepspec = new Spec(kind(), "", Edition::noepoch, version());
+      	    newprovspec = new Spec(prov->kind(), "", Edition::noepoch, prov->version());
       	}
       	compare_ret = GVersion.compare (newprovspec, newdepspec);
           }

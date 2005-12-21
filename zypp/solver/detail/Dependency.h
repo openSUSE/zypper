@@ -129,23 +129,23 @@ namespace zypp
           bool _pre_dep;
       
         public:
-      
+
           Dependency (const std::string & name,
       	  const Relation & relation,
       	  const Resolvable::Kind & kind = ResTraits<zypp::Package>::kind,
       	  constChannelPtr channel = NULL,
-      	  int epoch = -1,
+      	  int epoch = Edition::noepoch,
       	  const std::string & version = "",
       	  const std::string & release = "",
           const zypp::Arch & arch = zypp::Arch(),
       	  bool or_dep = false,
       	  bool pre_dep = false);
-      
+
           Dependency (const std::string & name,
       	  const Relation & relation,
-                      const Resolvable::Kind & kind = ResTraits<zypp::Package>::kind,
+          const Resolvable::Kind & kind = ResTraits<zypp::Package>::kind,
       	  constChannelPtr channel = NULL,
-      	  constEditionPtr edition = NULL,
+      	  const zypp::Edition & edition = zypp::Edition(),
       	  bool or_dep = false,
       	  bool pre_dep = false);
       
@@ -154,7 +154,7 @@ namespace zypp
           Dependency (constXmlNodePtr node);		//RCResItemDep *rc_xml_node_to_resItem_dep (const xmlNode *node);
       
           virtual ~Dependency();
-      
+       
           // ---------------------------------- I/O
       
           const xmlNodePtr asXmlNode (void) const;		// xmlNode *rc_resItem_dep_to_xml_node (RCResItemDep *dep_item);

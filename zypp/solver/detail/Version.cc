@@ -69,15 +69,17 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      static EditionPtr
+      static Edition 
       rpm_parse (const char *input)
       {
           const char *vptr = NULL, *rptr = NULL;
       
           if (input == NULL || *input == 0)
-      	return NULL;
+          {
+              return Edition();
+          }
       
-          int epoch = -1;
+          int epoch = Edition::noepoch;
           const char *version;
           const char *release;
       
@@ -89,7 +91,7 @@ namespace zypp
       
       	if (endptr != vptr) {
       	    /* No epoch here, just a : in the version string */
-      	    epoch = -1;
+      	    epoch = Edition::noepoch;
       	    vptr = input;
       	} else {
       	    vptr++;
@@ -107,7 +109,7 @@ namespace zypp
       	release = NULL;
           }
       
-          EditionPtr edition = new Edition(epoch, version, release, zypp::Arch());
+          Edition edition( version, release, epoch);
       
           return edition;
       }

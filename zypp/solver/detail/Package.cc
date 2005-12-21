@@ -380,7 +380,7 @@ namespace zypp
       
           if (version) {
       
-      	setEpoch (epoch ? atoi (epoch) : -1);
+      	setEpoch (epoch ? atoi (epoch) : Edition::noepoch);
       	setVersion (version);
       	setRelease (release);
       

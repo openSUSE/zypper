@@ -27,6 +27,7 @@
 
 #include <y2util/Ustring.h>
 #include <zypp/solver/detail/Spec.h>
+#include <zypp/Edition.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -78,7 +79,7 @@ namespace zypp
       
           unsigned int _properties;
       
-          EditionPtr (*_parse)(const char *input);
+          Edition  (*_parse)(const char *input);
       
           // compare uses SpecPtr and takes name into account
           int (*_compare)(constSpecPtr a, constSpecPtr b);
@@ -105,7 +106,7 @@ namespace zypp
           // compare uses SpecPtr and takes name into account
           int compare (constSpecPtr a, constSpecPtr b) const { return (*_compare) (a, b); }
       
-          EditionPtr parse (const char *input) const { return (*_parse)(input); }
+          Edition  parse (const char *input) const { return (*_parse)(input); }
       
           bool hasProperty (unsigned int property) const { return (_properties & property) != 0; }
       

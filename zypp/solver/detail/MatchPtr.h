@@ -22,7 +22,6 @@
 #define _MatchPtr_h
 
 #include <y2util/RepDef.h>
-#include <zypp/solver/detail/Edition.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

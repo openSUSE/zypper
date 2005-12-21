@@ -31,7 +31,7 @@
 #include <zypp/solver/detail/Hash.h>
 #include <zypp/solver/detail/SpecPtr.h>
 #include <zypp/solver/detail/XmlNode.h>
-#include <zypp/solver/detail/Edition.h>
+#include <zypp/Edition.h>
 #include <zypp/ResObject.h>
 
 /////////////////////////////////////////////////////////////////////////
@@ -77,19 +77,20 @@ class Name : public Ustring {
         private:
           Resolvable::Kind _kind;
           Name _name;
-          EditionPtr _edition;
+          Edition _edition;
+          Arch _arch;
       
         public:
           typedef std::list<Spec> SpecList;
       
           Spec( const Resolvable::Kind & kind,
       	  const std::string & name,
-      	  int epoch = -1,
+      	  int epoch = Edition::noepoch,
       	  const std::string & version = "",
       	  const std::string & release = "",
       	  const zypp::Arch & arch = Arch());
       
-          Spec (const Resolvable::Kind & kind, const std::string & name, constEditionPtr edition);
+          Spec (const Resolvable::Kind & kind, const std::string & name, const Edition & edition, const zypp::Arch & arch = Arch());
       
           Spec (constXmlNodePtr node);
       
@@ -109,19 +110,19 @@ class Name : public Ustring {
       
           // ---------------------------------- accessors
       
-          const std::string & version() const { return _edition->version(); }
-          void setVersion (const std::string & version) { _edition->setVersion (version); }
+          const std::string & version() const { return _edition.version(); }
+          void setVersion (const std::string & version);
       
-          const std::string & release() const { return _edition->release(); }
-          void setRelease (const std::string & release) { _edition->setRelease (release); }
+          const std::string & release() const { return _edition.release(); }
+          void setRelease (const std::string & release);
       
-          const int epoch() const { return _edition->epoch(); }
-          void setEpoch (int epoch) { _edition->setEpoch (epoch); }
-          bool hasEpoch() const { return _edition->hasEpoch(); }
+          const int epoch() const { return _edition.epoch(); }
+          void setEpoch (int epoch);
+          bool hasEpoch() const { return _edition.epoch() > 0; }
       
-          const zypp::Arch & arch() const { return _edition->arch(); }
-          void setArch (const Arch & arch) { _edition->setArch (arch); }
-          void setArch (const std::string & arch) { _edition->setArch (arch); }
+          const zypp::Arch & arch() const { return _arch; }
+          void setArch (const Arch & arch) { _arch = arch; }
+          void setArch (const std::string & arch) { _arch = Arch(arch); }
       
           const Resolvable::Kind & kind() const { return _kind; }
           void setKind (const Resolvable::Kind & kind) { _kind = kind; }
@@ -129,8 +130,8 @@ class Name : public Ustring {
           const std::string name() const { return _name; }
           void setName (const std::string & name) { _name = Name(name.c_str()); }
       
-          constEditionPtr edition() const { return _edition; }
-          void setEdition (constEditionPtr edition) { _edition = edition->copy(); }
+          const Edition & edition() const { return _edition; }
+          void setEdition (const Edition & edition) { _edition = edition; }
       
           // calculate hash
           HashValue hash (void) const;

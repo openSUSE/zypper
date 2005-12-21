@@ -31,6 +31,7 @@
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
 #include <zypp/ResObject.h>
+#include <zypp/Edition.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -89,7 +90,7 @@ namespace zypp
       
         public:
       
-          ResItem(const Resolvable::Kind & kind, const std::string & name, int epoch = -1, const std::string & version = "", const std::string & release = "", const zypp::Arch & arch = zypp::Arch());
+          ResItem(const Resolvable::Kind & kind, const std::string & name, int epoch = Edition::noepoch, const std::string & version = "", const std::string & release = "", const zypp::Arch & arch = zypp::Arch());
 
           ResItem(const ResObject::Ptr & resObject);
           ResItem(const XmlNodePtr node);
@@ -172,8 +173,8 @@ namespace zypp
           const std::string name() const { return _name; }
           void setName (const std::string & name) { _name = Name(name.c_str()); }
       
-          constEditionPtr edition() const { return _edition; }
-          void setEdition (constEditionPtr edition) { _edition = edition->copy(); }
+          const Edition & edition() const { return _edition; }
+          void setEdition (const Edition & edition) { _edition = edition }
 #endif
       
       };

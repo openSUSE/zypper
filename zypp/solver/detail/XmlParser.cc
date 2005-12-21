@@ -52,10 +52,10 @@ namespace zypp
           bool op_present = false;
           /* Temporary variables dependent upon the presense of an 'op' attribute */
           const char *name = NULL;
-          int epoch = -1;
+          int epoch = Edition::noepoch;
           string version;
           string release;
-          string arch;
+          string arch = "";
           Relation relation = Relation::Any;
       
           *is_obsolete = false;
@@ -79,7 +79,14 @@ namespace zypp
       
           /* FIXME: should get Channel from XML */
           /* FIXME: should get Kind from XML */
-          return new Dependency (name, relation, ResTraits<zypp::Package>::kind, new Channel(CHANNEL_TYPE_ANY), epoch, version, release, zypp::Arch(arch));
+          if ( std::strlen(arch.c_str()) > 0)
+          {
+              return new Dependency (name, relation, ResTraits<zypp::Package>::kind, new Channel(CHANNEL_TYPE_ANY), epoch, version, release, zypp::Arch(arch));
+          }
+          else
+          {
+              return new Dependency (name, relation, ResTraits<zypp::Package>::kind, new Channel(CHANNEL_TYPE_ANY), epoch, version, release, zypp::Arch_noarch);
+          }              
       }
       
       

@@ -65,12 +65,19 @@ namespace zypp
       
           res += spec.name();
       
-          string ed = spec.edition()->asString (full);
-          if (!ed.empty()) {
+          string ed = spec.edition().asString();
+          if (!ed.empty() &&
+              ed != "EDITION-UNSPEC") {
       	res += "-";
       	res += ed;
           }
-      
+
+          if (spec.arch() != zypp::Arch_noarch) {
+              res += ".";
+              res += spec.arch().asString();
+          }
+          
+
           return res;
       }
       
@@ -91,10 +98,11 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      Spec::Spec (const Resolvable::Kind & kind, const string & name, constEditionPtr edition)
+      Spec::Spec (const Resolvable::Kind & kind, const string & name, const Edition & edition, const zypp::Arch & arch)
           : _kind (kind)
           , _name (Name (name))
-          , _edition (edition == NULL ? new Edition() : edition->copy())
+          , _edition (edition)
+          , _arch (arch)
       {
       }
       
@@ -102,7 +110,8 @@ namespace zypp
       Spec::Spec ( const Resolvable::Kind & kind, const string & name, int epoch, const string & version, const string & release, const zypp::Arch & arch)
           : _kind (kind)
           , _name (Name (name))
-          , _edition (new Edition (epoch, version, release, arch))
+          , _edition (Edition (version, release, epoch))
+          , _arch(arch)
       {
       }
       
@@ -165,13 +174,13 @@ namespace zypp
       HashValue
       Spec::hash (void) const
       {
-          HashValue ret = _edition->epoch() + 1;
+          HashValue ret = _edition.epoch() + 1;
           const char *spec_strs[3], *p;
           int i;
       
           spec_strs[0] = _name.asString().c_str();
-          spec_strs[1] = _edition->version().c_str();
-          spec_strs[2] = _edition->release().c_str();
+          spec_strs[1] = _edition.version().c_str();
+          spec_strs[2] = _edition.release().c_str();
       
           for (i = 0; i < 3; ++i) {
       	p = spec_strs[i];
@@ -206,7 +215,7 @@ namespace zypp
       Spec::match(constSpecPtr spec) const {
           return ((_kind == spec->kind())
         	&& (_name == spec->name())
-      	&& _edition->match (spec->edition()));
+      	&& Edition::compare( _edition, spec->edition()) == 0);
       }
       
       
@@ -215,8 +224,30 @@ namespace zypp
       //fprintf (stderr, "<%s> equals <%s>\n", asString(true).c_str(), spec->asString(true).c_str());
           return ((_kind == spec->kind())
         	&& (_name == spec->name())
-      	&& _edition->equals(spec->edition()));
+      	&& Edition::compare( _edition, spec->edition()) == 0);
       }
+
+      void Spec::setVersion (const std::string & version) {
+          Edition newEdition(version,
+                             _edition.release(),
+                             _edition.epoch());
+          _edition = newEdition;
+      }
+
+      void Spec::setRelease (const std::string & release) {
+          Edition newEdition(_edition.version(),
+                             release,
+                             _edition.epoch());
+          _edition = newEdition;
+      }
+
+      void Spec::setEpoch (int epoch) {
+          Edition newEdition(_edition.version(),
+                             _edition.release(),
+                             epoch);
+          _edition = newEdition;
+      }            
+        
       
       ///////////////////////////////////////////////////////////////////
     };// namespace detail

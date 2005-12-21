@@ -25,6 +25,8 @@
 
 #include <zypp/solver/detail/OrDependency.h>
 #include <zypp/solver/detail/Dependency.h>
+#include <zypp/solver/detail/Version.h>
+
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -196,7 +198,7 @@ namespace zypp
       	SpecPtr spec;
       	char *name;
       	Relation relation = Relation::Any;
-      	EditionPtr edition = NULL;
+      	zypp::Edition edition;
       
       	/* grab the name */
       
@@ -242,14 +244,15 @@ namespace zypp
       	    /* e .. p is the epoch:version-release */
       	    vstr = strndup (e, p - e);
       
-      	    EditionPtr edition = Edition::fromString (vstr);
+      	    zypp::Edition edition = GVersion.parse (vstr);
       
       	    free ((void *)vstr);
       
       	}
-      
-      	DependencyPtr dep = new Dependency (name, relation, ResTraits<zypp::Package>::kind, NULL, edition);
-      
+
+        
+      	DependencyPtr dep = new Dependency (name, relation, ResTraits<zypp::Package>::kind, NULL, edition );
+
       	out_dep.push_back (dep);
       	free ((void *)name);
       
