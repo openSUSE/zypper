@@ -4,11 +4,13 @@
 #
 # ToDos:
 # - find out wether the operator != exists in Yum-dependencies or not
-# - read and write checksum and type correct and set the flag to YES or NO
+# - all capitalized strings are placeholder and need a valid input
 #
 ###
+
 require 'optparse'
 require 'rexml/document'
+
 include REXML
 
 
@@ -66,6 +68,7 @@ class Requires < Dependency
   end
 end
 
+
 class Package
   attr_accessor :type, :name, :arch, :epoch, :ver, :rel, :chksum, :chktype, :pkgid, :summary, :descr, :provides, :conflicts, :requires
 
@@ -80,8 +83,8 @@ class Package
     @ver       = validate_input( pkg, 'history/update/version', '1.0' )     # Version
     @rel       = validate_input( pkg, 'history/update/release', '1'   )     # Release
     @chksum    = validate_input( pkg, 'history/update/md5sum',  '0'   )     # Checksum
-    @chktype   = 'md5sum'   # Checksum type; not needed for now; helix uses md5, yum uses sha-1 TODO
-    @pkgid     = 'NO'       # YES if chksum exists TODO
+    @chktype   = 'md5sum'   # Checksum type; not needed for now; helix uses md5, yum uses sha-1
+    @pkgid     = @chksum == '0' ? 'NO' : 'YES'
     @summary   = validate_input( pkg, 'summary', 'n/a' )
     @descr     = validate_input( pkg, 'description', 'n/a' )   # Package description
     # dependencies
@@ -97,8 +100,8 @@ class Package
     @@count
   end
 
-  def Package.to_yum
-  end
+  #def Package.to_yum
+  #end
 
   def to_s
     "[Package]  name=#{@name} \
@@ -122,6 +125,7 @@ class Package
         when '='
           dep_array[1] = 'EQ'
         when '!='
+          #raise( "Operator != bug in conv_dependency() found." )
           dep_array[1] = 'TODO'  # Have to check if this operator exists in yum TODO
         when '&gt;'
           dep_array[1] = 'GT'
@@ -213,54 +217,68 @@ output.root.add_namespace( 'rpm', 'http://linux.duke.edu/metadata/rpm' )
 output.root.add_attribute( 'packages', Package.count )
 
 
-# generate the Yum document
+# generate the Yum document ####################################################
 packages.each do |p|
+  ### Main information for testcases ###
   pkg  = Element.new( 'package' )
    pkg.add_attribute( 'type', p.type )
+
   name = Element.new( 'name' ).add_text p.name
   arch = Element.new( 'arch' ).add_text p.arch
+
   ver  = Element.new( 'version' )
    ver.add_attribute( 'epoch', p.epoch )
    ver.add_attribute( 'ver', p.ver )
    ver.add_attribute( 'rel', p.rel )
+
   csum = Element.new( 'checksum' ).add_text p.chksum
    csum.add_attribute( 'pkgid', p.pkgid )
    csum.add_attribute( 'type', p.chktype )
-  sum  = Element.new( 'summary' ).add_text p.summary
-  desc = Element.new( 'description' ).add_text p.descr
-  pker = Element.new( 'packager' ).add_text 'SUSE LINUX Products GmbH. &lt;http://bugzilla.novell.com&gt;'
-  url  = Element.new( 'url' )
-  time = Element.new( 'time' )
-   time.add_attribute( 'file', 'TIMESTAMP' )
-   time.add_attribute( 'build', 'TIMESTAMP' )
-  size = Element.new( 'size' )
-   size.add_attribute( 'package', 'SIZE' )
-   size.add_attribute( 'installed', 'SIZE' )
-   size.add_attribute( 'archive', 'SIZE' )
-  loc  = Element.new( 'location' )
-   loc.add_attribute( 'href', 'PATH/TO/PACKAGE-VERSION.rpm' )
-  form = Element.new( 'format' )
-    licence = Element.new( 'rpm:license' ).add_text 'GPL'
-    vendor  = Element.new( 'rpm:vendor' ) .add_text 'Novell, Inc.'
-    group = Element.new( 'rpm:group' )    .add_text 'SYSTEM/PACKAGEMANAGER'
-    bhost = Element.new( 'rpm:buildhost' ).add_text 'BUILDHOST'
-    srpm = Element.new( 'rpm:sourcerpm' ) .add_text 'PACKAGE-VERSION.src.rpm'
-    hrange = Element.new( 'rpm:header-range' )
-     hrange.add_attribute( 'start', 'VALUE' )
-     hrange.add_attribute( 'end', 'VALUE' )
 
-  # dependencies
-   # provides
+  sum  = Element.new( 'summary' )    .add_text p.summary
+  desc = Element.new( 'description' ).add_text p.descr
+  pker = Element.new( 'packager' )   .add_text 'SUSE LINUX Products GmbH. &lt;http://bugzilla.novell.com&gt;'
+  url  = Element.new( 'url' )
+
+   ### TODO ###
+#  time = Element.new( 'time' )
+#   time.add_attribute( 'file', 'TIMESTAMP' )
+#   time.add_attribute( 'build', 'TIMESTAMP' )
+#  size = Element.new( 'size' )
+#   size.add_attribute( 'package', 'SIZE' )
+#   size.add_attribute( 'installed', 'SIZE' )
+#   size.add_attribute( 'archive', 'SIZE' )
+
+  ### Path on installation-source ###
+#  loc  = Element.new( 'location' )
+#   loc.add_attribute( 'href', 'PATH/TO/PACKAGE-VERSION.rpm' )
+
+  ### <format> section ###
+  form = Element.new( 'format' )
+    # additional package information
+#    licence = Element.new( 'rpm:license' ).add_text 'GPL'
+#    vendor  = Element.new( 'rpm:vendor' ) .add_text 'Novell, Inc.'
+#    group = Element.new( 'rpm:group' )    .add_text 'SYSTEM/PACKAGEMANAGER'
+#    bhost = Element.new( 'rpm:buildhost' ).add_text 'BUILDHOST'
+#    srpm = Element.new( 'rpm:sourcerpm' ) .add_text 'PACKAGE-VERSION.src.rpm'
+
+#    hrange = Element.new( 'rpm:header-range' )
+#     hrange.add_attribute( 'start', 'VALUE' )
+#     hrange.add_attribute( 'end', 'VALUE' )
+
+  ### Dependencies ###
+    # provides
     prov = Element.new( 'rpm:provides' )
     p.provides.each do |provides|
-       prov.add_element( 'rpm:entry', {
-                                       'name'=>provides.name,
-                                       'flags'=>provides.op,
-                                       'ver'=>provides.version
-                                      }
-                       )
+      prov.add_element( 'rpm:entry', {
+                                      'name'=>provides.name,
+                                      'flags'=>provides.op,
+                                      'ver'=>provides.version
+                                     }
+                      )
     end
-   # conflicts
+
+    # conflicts
     conf = Element.new( 'rpm:conflicts' )
     p.conflicts.each do |conflicts|
       conf.add_element( 'rpm:entry', {
@@ -270,7 +288,8 @@ packages.each do |p|
                                      }
                       )
     end
-   # requires
+
+    # requires
     requ = Element.new( 'rpm:requires' )
     p.requires.each do |requires|
       requ.add_element( 'rpm:entry', {
@@ -281,18 +300,19 @@ packages.each do |p|
                       )
     end
 
-    file = Element.new( 'file' ).add_text '/PATH/FILE'
+    # location of the installed file
+    #file = Element.new( 'file' ).add_text '/PATH/FILE'
 
-    form << licence
-    form << vendor
-    form << group
-    form << bhost
-    form << srpm
-    form << hrange
+    #form << licence
+    #form << vendor
+    #form << group
+    #form << bhost
+    #form << srpm
+    #form << hrange
     form << prov
-    form << conf
-    form << requ
-    form << file
+    form << conf if conf.has_elements?
+    form << requ if requ.has_elements?
+    #form << file
 
   pkg << name
   pkg << arch
@@ -302,22 +322,13 @@ packages.each do |p|
   pkg << desc
   pkg << pker
   pkg << url
-  pkg << time
-  pkg << size
-  pkg << loc
+#  pkg << time
+#  pkg << size
+#  pkg << loc
   pkg << form
 
   output.root << pkg
-end
-
-# 
-#   pkg << name
-#   pkg << arch
-#   pkg << ver
-# #  pkg << csum   # not needed at the moment; helix uses md5, yum uses sha-1
-# 
-#   output.root << pkg
-# end
+end  # generate the Yum document ###############################################
 
 
 # write formated xml into file or stdout
@@ -328,11 +339,11 @@ else
   output.write( $stdout, 0 )
   puts ''
 end
-#puts packages
 
-# rescue => exc
-#   STDERR.puts "E: #{exc.message}"
-#   exit 1
+
+rescue => exc
+   STDERR.puts "E: #{exc.message}"
+   exit 1
 ensure
   infile.close
 end
