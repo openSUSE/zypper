@@ -90,7 +90,7 @@ class Name : public Ustring {
       	  const std::string & release = "",
       	  const zypp::Arch & arch = Arch());
       
-          Spec (const Resolvable::Kind & kind, const std::string & name, const Edition & edition, const zypp::Arch & arch = Arch());
+          Spec (const Resolvable::Kind & kind, const std::string & name, const Edition & edition, const Arch & arch = Arch());
       
           Spec (constXmlNodePtr node);
       
@@ -120,7 +120,7 @@ class Name : public Ustring {
           void setEpoch (int epoch);
           bool hasEpoch() const { return _edition.epoch() > 0; }
       
-          const zypp::Arch & arch() const { return _arch; }
+          const Arch & arch() const { return _arch; }
           void setArch (const Arch & arch) { _arch = arch; }
           void setArch (const std::string & arch) { _arch = Arch(arch); }
       

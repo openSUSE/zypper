@@ -75,7 +75,7 @@ namespace zypp
       	  int epoch = Edition::noepoch,
       	  const std::string & version = "",
       	  const std::string & release = "",
-          const zypp::Arch & arch = zypp::Arch(),
+          const Arch & arch = Arch(),
       	  bool or_dep = false,
       	  bool pre_dep = false);
 

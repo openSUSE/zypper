@@ -138,7 +138,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      ResItem::ResItem (const Resolvable::Kind & kind, const string & name, int epoch, const string & version, const string & release, const zypp::Arch & arch)
+      ResItem::ResItem (const Resolvable::Kind & kind, const string & name, int epoch, const string & version, const string & release, const Arch & arch)
           :Spec (kind, name, epoch, version, release, arch)
           , _channel (false)
           , _installed (false)

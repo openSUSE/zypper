@@ -104,7 +104,7 @@ namespace zypp
       
       Dependency::Dependency (const string & name, const Rel & relation, const Resolvable::Kind & kind,
       	constChannelPtr channel,
-      	int epoch, const string & version, const string & release, const zypp::Arch & arch,
+      	int epoch, const string & version, const string & release, const Arch & arch,
       	bool or_dep, bool pre_dep)
           : Spec (kind, name, epoch, version, release, arch)
           , _relation (relation)

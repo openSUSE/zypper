@@ -72,7 +72,7 @@ namespace zypp
       	res += ed;
           }
 
-          if (spec.arch() != zypp::Arch_noarch) {
+          if (spec.arch() != Arch_noarch) {
               res += ".";
               res += spec.arch().asString();
           }
@@ -98,7 +98,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      Spec::Spec (const Resolvable::Kind & kind, const string & name, const Edition & edition, const zypp::Arch & arch)
+      Spec::Spec (const Resolvable::Kind & kind, const string & name, const Edition & edition, const Arch & arch)
           : _kind (kind)
           , _name (Name (name))
           , _edition (edition)
@@ -107,7 +107,7 @@ namespace zypp
       }
       
       
-      Spec::Spec ( const Resolvable::Kind & kind, const string & name, int epoch, const string & version, const string & release, const zypp::Arch & arch)
+      Spec::Spec ( const Resolvable::Kind & kind, const string & name, int epoch, const string & version, const string & release, const Arch & arch)
           : _kind (kind)
           , _name (Name (name))
           , _edition (Edition (version, release, epoch))

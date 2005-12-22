@@ -81,11 +81,11 @@ namespace zypp
           /* FIXME: should get Kind from XML */
           if ( std::strlen(arch.c_str()) > 0)
           {
-              return new Dependency (name, relation, ResTraits<zypp::Package>::kind, new Channel(CHANNEL_TYPE_ANY), epoch, version, release, zypp::Arch(arch));
+              return new Dependency (name, relation, ResTraits<zypp::Package>::kind, new Channel(CHANNEL_TYPE_ANY), epoch, version, release, Arch(arch));
           }
           else
           {
-              return new Dependency (name, relation, ResTraits<zypp::Package>::kind, new Channel(CHANNEL_TYPE_ANY), epoch, version, release, zypp::Arch_noarch);
+              return new Dependency (name, relation, ResTraits<zypp::Package>::kind, new Channel(CHANNEL_TYPE_ANY), epoch, version, release, Arch_noarch);
           }              
       }
       
@@ -579,7 +579,7 @@ namespace zypp
 #if 0
       	/* Hack for the old XML */
       	if (_current_package->arch()->isUnknown()) {
-      	    _current_package->setArch (zypp::Arch::System);
+      	    _current_package->setArch (Arch::System);
       	}
 #endif
 

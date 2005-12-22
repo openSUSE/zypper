@@ -123,7 +123,7 @@ namespace zypp
       	constResItemPtr dup_res;
       
       	/* Filter out resItems with totally incompatible arches */
-      	if ( !resItem->arch().compatibleWith(zypp::Arch::System)) {
+      	if ( !resItem->arch().compatibleWith(Arch::System)) {
       	    rc_debug (RC_DEBUG_LEVEL_DEBUG, "Ignoring resItem with incompatible arch: Arch '%s', %s",  resItem->arch().asString().c_str(), resItem->asString(true).c_str());
       	    goto finished;
       	}
