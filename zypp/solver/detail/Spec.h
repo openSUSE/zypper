@@ -142,6 +142,7 @@ class Name : public Ustring {
       
           // find spec in SpecList by name
           const Spec * findByName (const SpecList &speclist, const Name & name) const;
+          static int compare (constSpecPtr spec1, constSpecPtr spec2);
       
           // copy
       

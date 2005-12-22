@@ -26,7 +26,6 @@
 #include <zypp/solver/detail/QueueItemInstall.h>
 #include <zypp/solver/detail/QueueItemUninstall.h>
 #include <zypp/solver/detail/QueueItem.h>
-#include <zypp/solver/detail/Version.h>
 #include <zypp/solver/detail/World.h>
 #include <zypp/solver/detail/ResolverContext.h>
 #include <zypp/solver/detail/ResolverInfoConflictsWith.h>
@@ -340,7 +339,7 @@ namespace zypp
       	return cmp;
       
           constQueueItemConflictPtr conflict = item;
-          cmp = GVersion.compare ((constSpecPtr) _dep, ((constSpecPtr)(conflict->dependency())));
+          cmp = Spec::compare ((constSpecPtr) _dep, ((constSpecPtr)(conflict->dependency())));
           if (cmp)
       	return cmp;
       

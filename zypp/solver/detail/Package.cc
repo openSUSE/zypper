@@ -20,7 +20,6 @@
  */
 
 #include <zypp/solver/detail/utils.h>
-#include <zypp/solver/detail/Version.h>
 #include <zypp/solver/detail/Package.h>
 #include <zypp/solver/detail/PackageUpdate.h>
 #include <zypp/solver/detail/Dependency.h>
@@ -449,7 +448,7 @@ namespace zypp
       #warning addUpdate incomplete
       #if 1
       	for (PackageUpdateList::iterator iter = _history.begin(); iter != _history.end(); iter++) {
-      	    int result = GVersion.compare ((SpecPtr)update, (SpecPtr)(*iter));
+      	    int result = Spec::compare ((SpecPtr)update, (SpecPtr)(*iter));
       
       	    if (result > 0 || (result == 0 && update->parent() != NULL)) {
       		_history.insert (iter, update);					// = g_slist_insert_before (package->history, l, update);

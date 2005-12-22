@@ -246,7 +246,26 @@ namespace zypp
                              _edition.release(),
                              epoch);
           _edition = newEdition;
-      }            
+      }
+        
+
+      int  Spec::compare (constSpecPtr spec1, constSpecPtr spec2) {
+          int rc = 0;
+
+          const string name1 = spec1->name();
+          const string name2 = spec2->name();
+          if (! (name1.empty() && name2.empty()))
+          {
+              rc = name1.compare (name2);
+          }
+          if (rc) return rc;
+
+          rc = Edition::compare (spec1->edition(),
+                                 spec2->edition());
+
+          return rc;
+      }
+
         
       
       ///////////////////////////////////////////////////////////////////

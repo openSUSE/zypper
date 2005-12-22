@@ -29,7 +29,6 @@
 #include <zypp/solver/detail/QueueItemRequire.h>
 #include <zypp/solver/detail/QueueItemUninstall.h>
 #include <zypp/solver/detail/ResolverContext.h>
-#include <zypp/solver/detail/Version.h>
 
 #include <y2util/stringutil.h>
 
@@ -394,8 +393,8 @@ namespace zypp
       
       		if (priority != priority2 && r->name() == r2->name()) {
       		    if (r->version() == r2->version()
-      			|| (priority < priority2 && GVersion.compare (r, r2) < 0)
-      			|| (priority > priority2 && GVersion.compare (r, r2) > 0)) {
+      			|| (priority < priority2 && Spec::compare (r, r2) < 0)
+      			|| (priority > priority2 && Spec::compare (r, r2) > 0)) {
       
       			if (priority < priority2)
       			    to_defer[item] = item;

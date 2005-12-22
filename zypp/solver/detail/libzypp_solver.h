@@ -26,7 +26,6 @@
 #include <zypp/solver/detail/Match.h>
 #include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Spec.h>
-#include <zypp/solver/detail/Version.h>
 #include <zypp/solver/detail/World.h>
 #include <zypp/solver/detail/UndumpWorld.h>
 #include <zypp/solver/detail/StoreWorld.h>

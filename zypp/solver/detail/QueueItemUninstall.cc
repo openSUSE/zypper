@@ -25,7 +25,6 @@
 #include <zypp/solver/detail/ResolverContext.h>
 #include <zypp/solver/detail/ResolverInfoMissingReq.h>
 #include <zypp/solver/detail/World.h>
-#include <zypp/solver/detail/Version.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -298,7 +297,7 @@ namespace zypp
       	return cmp;
       
           constQueueItemUninstallPtr uninstall = item;
-          return GVersion.compare (_resItem, uninstall->_resItem);
+          return Spec::compare (_resItem, uninstall->_resItem);
       }
       
       

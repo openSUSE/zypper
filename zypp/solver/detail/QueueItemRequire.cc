@@ -30,7 +30,6 @@
 #include <zypp/solver/detail/ResolverInfoDependsOn.h>
 #include <zypp/solver/detail/ResolverInfoMisc.h>
 #include <zypp/solver/detail/ResolverInfoNeededBy.h>
-#include <zypp/solver/detail/Version.h>
 #include <zypp/solver/detail/World.h>
 
 /////////////////////////////////////////////////////////////////////////
@@ -477,7 +476,7 @@ namespace zypp
       
           constQueueItemRequirePtr require = item;
       
-          cmp = GVersion.compare ((constSpecPtr) _dep, ((constSpecPtr)(require->dependency())));
+          cmp = Spec::compare ((constSpecPtr) _dep, ((constSpecPtr)(require->dependency())));
           if (cmp)
       	return cmp;
       

@@ -26,7 +26,6 @@
 
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/OrDependency.h>
-#include <zypp/solver/detail/Version.h>
 #include <zypp/Arch.h>
 #include <zypp/Edition.h>
 
@@ -238,14 +237,8 @@ namespace zypp
           /* No specific version in the prov.  In RPM this means it will satisfy
            * any version, but debian it will not satisfy a versioned dep */
           if (prov->relation() == Rel::ANY) {
-              if (GVersion.hasProperty (VERSION_PROP_PROVIDE_ANY)) {
-                  if (getenv ("SPEW_DEP")) fprintf (stderr, " provides (any) matches GVersion -> true\n");
-                  return true;
-              }
-              else {
-                  if (getenv ("SPEW_DEP")) fprintf (stderr, " provides (any) does not match GVersion -> false\n");
-                  return false;
-              }
+              if (getenv ("SPEW_DEP")) fprintf (stderr, " provides (any) matches GVersion -> true\n");
+              return true;
           }
       
           if (!channel()->equals (prov->channel()))
@@ -261,28 +254,23 @@ namespace zypp
               /* HACK: This sucks, but I don't know a better way to compare elements one at a time */
               newdepspec = new Spec(kind(), "", epoch());
               newprovspec = new Spec(prov->kind(), "", prov->epoch());
-              compare_ret = GVersion.compare (newprovspec, newdepspec);
+              compare_ret = Spec::compare (newprovspec, newdepspec);
           } else if (prov->epoch() > 0 ) {
-              if (GVersion.hasProperty (VERSION_PROP_IGNORE_ABSENT_EPOCHS)) {
-                  compare_ret = 0;
-              }
-              else {
-                  compare_ret = 1;
-              }
+              //VERSION_PROP_IGNORE_ABSENT_EPOCHS
+              compare_ret = 0;
           } else if (epoch() > 0 ) {
               compare_ret = Edition::noepoch;
           }
           if (getenv ("SPEW_DEP")) fprintf (stderr, "epoch(%d), prov->epoch(%d) -> compare_ret %d\n", epoch(), prov->epoch(), compare_ret);
           if (compare_ret == 0) {
-              if (GVersion.hasProperty (VERSION_PROP_ALWAYS_VERIFY_RELEASE)
-                  || (!(release().empty() || prov->release().empty()))) {
+              if (!(release().empty() || prov->release().empty())) {
                   newdepspec = new Spec(kind(), "", Edition::noepoch, version(), release());
                   newprovspec = new Spec(prov->kind(), "", Edition::noepoch, prov->version(), prov->release());
               } else {
                   newdepspec = new Spec(kind(), "", Edition::noepoch, version());
                   newprovspec = new Spec(prov->kind(), "", Edition::noepoch, prov->version());
               }
-              compare_ret = GVersion.compare (newprovspec, newdepspec);
+              compare_ret = Spec::compare (newprovspec, newdepspec);
           }
           if (getenv ("SPEW_DEP")) fprintf (stderr, " (compare result -> %d)", compare_ret);
       

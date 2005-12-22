@@ -23,7 +23,6 @@
 
 #include <y2util/stringutil.h>
 
-#include <zypp/solver/detail/Version.h>
 #include <zypp/solver/detail/Packman.h>
 #include <zypp/solver/detail/StoreWorld.h>
 #include <zypp/solver/detail/ResItemAndDependency.h>
@@ -143,7 +142,7 @@ namespace zypp
       	if (dup_res != NULL) {
       	    int cmp;
       
-      	    cmp = GVersion.compare (resItem, dup_res);
+      	    cmp = Spec::compare (resItem, dup_res);
       //fprintf (stderr, "res: %s, dup_res %s, cmp %d\n", resItem->asString().c_str(), dup_res->asString().c_str(), cmp);
       
       	    /* If the resItem we are trying to add has a lower 

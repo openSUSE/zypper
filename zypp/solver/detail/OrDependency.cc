@@ -25,7 +25,6 @@
 
 #include <zypp/solver/detail/OrDependency.h>
 #include <zypp/solver/detail/Dependency.h>
-#include <zypp/solver/detail/Version.h>
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -244,7 +243,7 @@ namespace zypp
       	    /* e .. p is the epoch:version-release */
       	    vstr = strndup (e, p - e);
       
-      	    zypp::Edition edition = GVersion.parse (vstr);
+      	    Edition edition(vstr);
       
       	    free ((void *)vstr);
       

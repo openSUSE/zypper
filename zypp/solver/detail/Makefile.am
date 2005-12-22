@@ -37,7 +37,6 @@ include_HEADERS = \
 	XmlNodePtr.h			\
 	XmlParser.h			\
 	Importance.h			\
-	Version.h			\
 	Match.h				\
 	MatchPtr.h			\
 	Pending.h			\
@@ -111,7 +110,6 @@ lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	Package.cc					\
 	PackageUpdate.cc				\
 	XmlParser.cc					\
-	Version.cc					\
 	Match.cc					\
 	Pending.cc					\
 	Packman.cc					\

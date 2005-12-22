@@ -31,7 +31,6 @@
 #include <zypp/solver/detail/ResolverInfoMisc.h>
 #include <zypp/solver/detail/ResolverInfoNeededBy.h>
 #include <zypp/solver/detail/ResItem.h>
-#include <zypp/solver/detail/Version.h>
 #include <zypp/solver/detail/World.h>
 #include <zypp/solver/detail/ResItemAndDependency.h>
 
@@ -346,7 +345,7 @@ namespace zypp
           if (cmp != 0)
       	return cmp;
           constQueueItemInstallPtr install = item;
-          return GVersion.compare (_resItem, install->_resItem);
+          return Spec::compare (_resItem, install->_resItem);
       }
       
       //---------------------------------------------------------------------------
