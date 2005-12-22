@@ -481,7 +481,7 @@ namespace zypp
           if (cmp)
       	return cmp;
       
-          return CMP ((int) _dep->relation().op(), (int) (require->dependency()->relation().op()));
+          return _dep->relation() == require->dependency()->relation();
       }
         
       ///////////////////////////////////////////////////////////////////

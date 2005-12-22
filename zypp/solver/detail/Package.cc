@@ -359,14 +359,14 @@ namespace zypp
       
           CDependencyList::const_iterator piter;
           for (piter = dep_table.provides.begin(); piter != dep_table.provides.end(); piter++) {
-      	if ((*piter)->relation().isEqual()
+              if ((*piter)->relation() == Rel::EQ
       	    && ((*piter)->name() == name()))
       	{
       	    break;
       	}
           }
           if (piter == dep_table.provides.end()) {			// no self provide found, construct one
-      	constDependencyPtr selfdep = new Dependency (name(), Relation::Equal, kind(), this->channel(), edition());
+      	constDependencyPtr selfdep = new Dependency (name(), Rel::EQ, kind(), this->channel(), edition());
       if (getenv ("RC_SPEW")) fprintf (stderr, "Adding self-provide [%s]\n", selfdep->asString().c_str());
       	dep_table.provides.push_front (selfdep);
           }
@@ -406,7 +406,7 @@ namespace zypp
       	
       	if (!provides().empty())
       	    for (CDependencyList::const_iterator iter = provides().begin(); iter != provides().end(); iter++) {	    
-      		if ((*iter)->relation() == Relation::Equal &&
+      		if ((*iter)->relation() == Rel::EQ &&
       		    ((*iter)->name() == name()))
       		{
       		    setEpoch ((*iter)->epoch());

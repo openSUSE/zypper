@@ -44,147 +44,6 @@ namespace zypp
       
       IMPL_DERIVED_POINTER(Dependency,Spec);
       
-      //---------------------------------------------------------------------------
-      
-      #define RELATION_INVALID -1
-      #define RELATION_ANY 0
-      #define RELATION_EQUAL (1 << 0)
-      #define RELATION_LESS (1 << 1)
-      #define RELATION_GREATER (1 << 2)
-      #define RELATION_NONE (1 << 3)
-      
-      const Relation & Relation::Invalid = Relation (RELATION_INVALID);
-      const Relation & Relation::Any = Relation (RELATION_ANY);
-      const Relation & Relation::Equal = Relation (RELATION_EQUAL);
-      const Relation & Relation::NotEqual = Relation (RELATION_LESS|RELATION_GREATER);
-      const Relation & Relation::Less = Relation (RELATION_LESS);
-      const Relation & Relation::LessEqual = Relation (RELATION_LESS|RELATION_EQUAL);
-      const Relation & Relation::Greater = Relation (RELATION_GREATER);
-      const Relation & Relation::GreaterEqual = Relation (RELATION_GREATER|RELATION_EQUAL);
-      const Relation & Relation::None = Relation (RELATION_NONE);
-      
-      
-      const Relation &
-      Relation::parse(const char *relation)
-      {
-          if (!strcmp (relation, "(any)"))
-      	return Any;
-          else if (!strcmp (relation, "=") || !strcmp (relation, "eq"))
-      	return Equal;
-          else if (!strcmp (relation, "<") || !strcmp(relation, "lt") || !strcmp(relation, "&lt;"))
-      	return Less;
-          else if (!strcmp (relation, "<=") || !strcmp(relation, "lte") || !strcmp(relation, "&lt;="))
-      	return LessEqual;
-          else if (!strcmp (relation, ">") || !strcmp(relation, "gt") || !strcmp(relation, "&gt;"))
-      	return Greater;
-          else if (!strcmp (relation, ">=") || !strcmp(relation, "gte") || !strcmp(relation, "&gt;="))
-      	return GreaterEqual;
-          else if (!strcmp (relation, "!=") || !strcmp(relation, "ne"))
-      	return NotEqual;
-          else if (!strcmp (relation, "!!") || !strcmp(relation, "none"))
-      	return None;
-          else
-      	return Invalid;
-      }
-      
-      
-      bool
-      Relation::isEqual () const
-      {
-          return _op == RELATION_EQUAL;
-      }
-      
-      
-      string
-      Relation::asString ( void ) const
-      {
-          return toString (*this);
-      }
-      
-      
-      string
-      Relation::toString ( const Relation & relation )
-      {
-          string res;
-      
-          switch (relation.op()) {
-      	case RELATION_INVALID: res = "(invalid)";
-      	break;
-      	case RELATION_ANY: res = "";
-      	break;
-      	case RELATION_EQUAL: res = "==";
-      	break;
-      	case RELATION_LESS|RELATION_GREATER: res = "!=";
-      	break;
-      	case RELATION_LESS: res = "<";
-      	break;
-      	case RELATION_LESS|RELATION_EQUAL: res = "<=";
-      	break;
-      	case RELATION_GREATER: res = ">";
-      	break;
-      	case RELATION_GREATER|RELATION_EQUAL: res = ">=";
-      	break;
-      	case RELATION_NONE: res = "!!";
-      	break;
-      	default:
-      	    res = "??";
-      	    res += stringutil::numstring (relation.op());
-      	    res += "??";
-      	break;
-          }
-          return res;
-      }
-      
-      
-      string
-      Relation::toWord ( const Relation & relation )
-      {
-          string res;
-      
-          switch (relation.op()) {
-      	case RELATION_INVALID: res = "(invalid)";
-      	break;
-      	case RELATION_ANY: res = "(any)";
-      	break;
-      	case RELATION_EQUAL: res = "equal to";
-      	break;
-      	case RELATION_LESS|RELATION_GREATER: res = "not equal to";
-      	break;
-      	case RELATION_LESS: res = "less than";
-      	break;
-      	case RELATION_LESS|RELATION_EQUAL: res = "less than or equal to";
-      	break;
-      	case RELATION_GREATER: res = "greater than";
-      	break;
-      	case RELATION_GREATER|RELATION_EQUAL: res = "greater than or equal to";
-      	break;
-      	case RELATION_NONE: res = "not installed";
-      	break;
-      	default:
-      	    res = "??";
-      	    res += stringutil::numstring (relation.op());
-      	    res += "??";
-      	break;
-          }
-          return res;
-      }
-      
-      
-      ostream &
-      Relation::dumpOn( ostream & str ) const
-      {
-          str << asString();
-          return str;
-      }
-      
-      
-      ostream&
-      operator<<( ostream & os, const Relation & relation)
-      {
-          return os << relation.asString();
-      }
-      
-      //---------------------------------------------------------------------------
       
       string
       Dependency::asString ( void ) const
@@ -199,7 +58,7 @@ namespace zypp
           string res;
       
           res += dependency.name();
-          if (dependency.relation() != Relation::Any) {
+          if (dependency.relation() != Rel::ANY) {
       	res += " ";
       	res += dependency.relation().asString();
       	res += " ";
@@ -243,7 +102,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      Dependency::Dependency (const string & name, const Relation & relation, const Resolvable::Kind & kind,
+      Dependency::Dependency (const string & name, const Rel & relation, const Resolvable::Kind & kind,
       	constChannelPtr channel,
       	int epoch, const string & version, const string & release, const zypp::Arch & arch,
       	bool or_dep, bool pre_dep)
@@ -256,7 +115,7 @@ namespace zypp
       }
       
       
-      Dependency::Dependency (const string & name, const Relation & relation, const Resolvable::Kind & kind,
+      Dependency::Dependency (const string & name, const Rel & relation, const Resolvable::Kind & kind,
       	constChannelPtr channel, const Edition & edition, bool or_dep, bool pre_dep)
           : Spec (kind, name, edition)
           , _relation (relation)
@@ -269,7 +128,7 @@ namespace zypp
       
       Dependency::Dependency (OrDependencyPtr or_dep)
           : Spec (ResTraits<zypp::Package>::kind, or_dep->name())
-          , _relation (Relation::Any)
+          , _relation (Rel::ANY)
           , _channel (NULL)
           , _or_dep (false)
           , _pre_dep (true)
@@ -280,7 +139,7 @@ namespace zypp
       
       Dependency::Dependency (constXmlNodePtr node)
           : Spec (ResTraits<zypp::Package>::kind, "")
-          , _relation (Relation::Any)
+          , _relation (Rel::ANY)
           , _channel (new Channel(CHANNEL_TYPE_ANY))
           , _or_dep (false)
           , _pre_dep (false)
@@ -295,7 +154,7 @@ namespace zypp
           setName(node->getProp ("name"));
           tmp = node->getProp ("op", NULL);
           if (tmp) {
-      	_relation = Relation::parse(tmp);
+      	_relation = Rel(tmp);
       	setEpoch (node->getIntValueDefault ("epoch", Edition::noepoch));
       	setVersion (node->getProp ("version"));
       	setRelease (node->getProp ("release"));
@@ -327,22 +186,22 @@ namespace zypp
       DependencyPtr parseXml (constXmlNodePtr node)
       {
           if (node->equals("dep")) {
-      	return new Dependency (node);
+              return new Dependency (node);
           } else if (node->equals("or")) {
-      	CDependencyList or_dep_list;
+              CDependencyList or_dep_list;
       
-      	node = node->children();
+              node = node->children();
       
-      	while (node) {
-      	    if (node->isElement()) {
-      		or_dep_list.push_back (new Dependency (node));
-      	    }
+              while (node) {
+                  if (node->isElement()) {
+                      or_dep_list.push_back (new Dependency (node));
+                  }
       
-      	    node = node->next();
-      	}
+                  node = node->next();
+              }
       
-      	OrDependencyPtr or_dep = OrDependency::fromDependencyList(or_dep_list);
-      	return new Dependency (or_dep);
+              OrDependencyPtr or_dep = OrDependency::fromDependencyList(or_dep_list);
+              return new Dependency (or_dep);
           }
       
           fprintf (stderr, "Unhandled dependency [%s]\n", node->name());
@@ -355,100 +214,100 @@ namespace zypp
       Dependency::verifyRelation (constDependencyPtr prov) const
       {
           int compare_ret = 0;
-      if (getenv ("SPEW_DEP")) fprintf (stderr, "Dependency::verifyRelation(dep: %s, prov: %s)", asString().c_str(), prov->asString().c_str());
+          if (getenv ("SPEW_DEP")) fprintf (stderr, "Dependency::verifyRelation(dep: %s, prov: %s)", asString().c_str(), prov->asString().c_str());
           /* No dependency can be met by a different token name */
           if (name() != prov->name()) {
-      if (getenv ("SPEW_DEP")) fprintf (stderr, "-> wrong name\n");
-      	return false;
+              if (getenv ("SPEW_DEP")) fprintf (stderr, "-> wrong name\n");
+              return false;
           }
       
           /* No dependency can be met by a different type */
           if (kind() != prov->kind()) {
-      if (getenv ("SPEW_DEP")) fprintf (stderr, "-> wrong kind(dep: %s, prov: %s)\n", kind().asString().c_str(), prov->kind().asString().c_str());
-      	return false;
+              if (getenv ("SPEW_DEP")) fprintf (stderr, "-> wrong kind(dep: %s, prov: %s)\n", kind().asString().c_str(), prov->kind().asString().c_str());
+              return false;
           }
       
           /* WARNING: RC_RELATION_NONE is NOT handled */
       
           /* No specific version in the req, so return */
-          if (_relation == Relation::Any) {
-      if (getenv ("SPEW_DEP")) fprintf (stderr, " (any) -> true\n");
-      	return true;
+          if (_relation == Rel::ANY) {
+              if (getenv ("SPEW_DEP")) fprintf (stderr, " (any) -> true\n");
+              return true;
           }
       
           /* No specific version in the prov.  In RPM this means it will satisfy
            * any version, but debian it will not satisfy a versioned dep */
-          if (prov->relation() == Relation::Any) {
-      	if (GVersion.hasProperty (VERSION_PROP_PROVIDE_ANY)) {
-      if (getenv ("SPEW_DEP")) fprintf (stderr, " provides (any) matches GVersion -> true\n");
-      	    return true;
-      	}
-      	else {
-      if (getenv ("SPEW_DEP")) fprintf (stderr, " provides (any) does not match GVersion -> false\n");
-      	    return false;
-      	}
+          if (prov->relation() == Rel::ANY) {
+              if (GVersion.hasProperty (VERSION_PROP_PROVIDE_ANY)) {
+                  if (getenv ("SPEW_DEP")) fprintf (stderr, " provides (any) matches GVersion -> true\n");
+                  return true;
+              }
+              else {
+                  if (getenv ("SPEW_DEP")) fprintf (stderr, " provides (any) does not match GVersion -> false\n");
+                  return false;
+              }
           }
       
           if (!channel()->equals (prov->channel()))
           {
-      if (getenv ("SPEW_DEP")) fprintf (stderr, " wrong channel -> false\n");
-      	return false;
+              if (getenv ("SPEW_DEP")) fprintf (stderr, " wrong channel -> false\n");
+              return false;
           }
       
           SpecPtr newdepspec;
           SpecPtr newprovspec;
       
           if (epoch() >= 0 && prov->epoch() >= 0) {
-      	/* HACK: This sucks, but I don't know a better way to compare elements one at a time */
-      	newdepspec = new Spec(kind(), "", epoch());
-      	newprovspec = new Spec(prov->kind(), "", prov->epoch());
-      	compare_ret = GVersion.compare (newprovspec, newdepspec);
+              /* HACK: This sucks, but I don't know a better way to compare elements one at a time */
+              newdepspec = new Spec(kind(), "", epoch());
+              newprovspec = new Spec(prov->kind(), "", prov->epoch());
+              compare_ret = GVersion.compare (newprovspec, newdepspec);
           } else if (prov->epoch() > 0 ) {
-      	if (GVersion.hasProperty (VERSION_PROP_IGNORE_ABSENT_EPOCHS)) {
-      	    compare_ret = 0;
-      	}
-      	else {
-      	    compare_ret = 1;
-      	}
+              if (GVersion.hasProperty (VERSION_PROP_IGNORE_ABSENT_EPOCHS)) {
+                  compare_ret = 0;
+              }
+              else {
+                  compare_ret = 1;
+              }
           } else if (epoch() > 0 ) {
-      	compare_ret = Edition::noepoch;
+              compare_ret = Edition::noepoch;
           }
-      if (getenv ("SPEW_DEP")) fprintf (stderr, "epoch(%d), prov->epoch(%d) -> compare_ret %d\n", epoch(), prov->epoch(), compare_ret);
+          if (getenv ("SPEW_DEP")) fprintf (stderr, "epoch(%d), prov->epoch(%d) -> compare_ret %d\n", epoch(), prov->epoch(), compare_ret);
           if (compare_ret == 0) {
-      	if (GVersion.hasProperty (VERSION_PROP_ALWAYS_VERIFY_RELEASE)
-      	    || (!(release().empty() || prov->release().empty()))) {
-      	    newdepspec = new Spec(kind(), "", Edition::noepoch, version(), release());
-      	    newprovspec = new Spec(prov->kind(), "", Edition::noepoch, prov->version(), prov->release());
-      	} else {
-      	    newdepspec = new Spec(kind(), "", Edition::noepoch, version());
-      	    newprovspec = new Spec(prov->kind(), "", Edition::noepoch, prov->version());
-      	}
-      	compare_ret = GVersion.compare (newprovspec, newdepspec);
+              if (GVersion.hasProperty (VERSION_PROP_ALWAYS_VERIFY_RELEASE)
+                  || (!(release().empty() || prov->release().empty()))) {
+                  newdepspec = new Spec(kind(), "", Edition::noepoch, version(), release());
+                  newprovspec = new Spec(prov->kind(), "", Edition::noepoch, prov->version(), prov->release());
+              } else {
+                  newdepspec = new Spec(kind(), "", Edition::noepoch, version());
+                  newprovspec = new Spec(prov->kind(), "", Edition::noepoch, prov->version());
+              }
+              compare_ret = GVersion.compare (newprovspec, newdepspec);
           }
-      if (getenv ("SPEW_DEP")) fprintf (stderr, " (compare result -> %d)", compare_ret);
+          if (getenv ("SPEW_DEP")) fprintf (stderr, " (compare result -> %d)", compare_ret);
       
           if (compare_ret < 0
-      	&& ((prov->relation().op() & Relation::Greater.op())
-      	    || (_relation.op() & Relation::Less.op())))
+              && ((prov->relation() == Rel::GT || prov->relation() == Rel::GE )
+                  || (_relation == Rel::LT || _relation == Rel::LE )))
           {
-      if (getenv ("SPEW_DEP")) fprintf (stderr, " -> true\n");
-      	return true;
+              if (getenv ("SPEW_DEP")) fprintf (stderr, " -> true\n");
+              return true;
           } else if (compare_ret > 0 
-      		&& ((prov->relation().op() & Relation::Less.op())
-      		    || (_relation.op() & Relation::Greater.op())))
+                     && ((prov->relation() == Rel::LT || prov->relation() == Rel::LE )
+                         || (_relation == Rel::GT || _relation == Rel::GE )))
           {
-      if (getenv ("SPEW_DEP")) fprintf (stderr, " -> true\n");
-      	return true;
+              if (getenv ("SPEW_DEP")) fprintf (stderr, " -> true\n");
+              return true;
           } else if (compare_ret == 0
-      	       && (((prov->relation().op() & Relation::Equal.op()) && (_relation.op() & Relation::Equal.op()))
-      		   || ((prov->relation().op() & Relation::Less.op()) && (_relation.op() & Relation::Less.op()))
-      		   || ((prov->relation().op() & Relation::Greater.op()) && (_relation.op() & Relation::Greater.op()))))
+                     && (((prov->relation() == Rel::EQ || prov->relation() == Rel::GE || prov->relation() == Rel::LE)
+                          && (_relation == Rel::EQ || _relation == Rel::GE || _relation == Rel::LE))
+                         || ((prov->relation() == Rel::LT) && (_relation == Rel::LT))
+                         || ((prov->relation() == Rel::GT) && (_relation == Rel::GT))))
           {
-      if (getenv ("SPEW_DEP")) fprintf (stderr, " -> true\n");
-      	return true;
+              if (getenv ("SPEW_DEP")) fprintf (stderr, " -> true\n");
+              return true;
           }
-          
-      if (getenv ("SPEW_DEP")) fprintf (stderr, " -> false\n");
+          if (getenv ("SPEW_DEP")) fprintf (stderr, " -> false\n");
           return false;
       }
       

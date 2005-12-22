@@ -145,9 +145,9 @@ namespace zypp
       
       	str += (*dep)->name();
       
-      	Relation relation = (*dep)->relation();
+      	Rel relation = (*dep)->relation();
       
-      	if (relation != Relation::Any) {
+      	if (relation != Rel::ANY) {
       	    str += "&";
       	    str += relation.asString();
       	    str += "&";
@@ -197,7 +197,7 @@ namespace zypp
       	char *z;
       	SpecPtr spec;
       	char *name;
-      	Relation relation = Relation::Any;
+      	Rel relation = Rel::ANY;
       	zypp::Edition edition;
       
       	/* grab the name */
@@ -232,7 +232,7 @@ namespace zypp
       	    /* text between p and e is an operator */
       	    strncpy (op, p, e - p);
       	    op[e - p] = 0;
-      	    relation = Relation::parse (op);
+      	    relation = Rel(op);
       
       	    e++;
       	    if (z) {

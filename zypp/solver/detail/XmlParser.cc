@@ -56,7 +56,7 @@ namespace zypp
           string version;
           string release;
           string arch = "";
-          Relation relation = Relation::Any;
+          Rel relation = Rel::ANY;
       
           *is_obsolete = false;
       
@@ -65,7 +65,7 @@ namespace zypp
       	const char *value = (const char *)attrs[i];
       
       	if (!strcasecmp(attr, "name"))		    name = value;
-      	else if (!strcasecmp(attr, "op")) {	    op_present = true; relation = Relation::parse(value); }
+      	else if (!strcasecmp(attr, "op")) {	    op_present = true; relation = Rel(value); }
       	else if (!strcasecmp(attr, "epoch"))	    epoch = atoi (value);
       	else if (!strcasecmp(attr, "version"))      version = value;
       	else if (!strcasecmp(attr, "release"))	    release = value;
@@ -566,7 +566,7 @@ namespace zypp
       	}
       	else {
       	    for (CDependencyList::const_iterator iter = _current_provides.begin(); iter != _current_provides.end(); iter++) {
-      		if ((*iter)->relation().isEqual()
+      		if ((*iter)->relation() == Rel::EQ
       		    && ((*iter)->name() == _current_package->name()))
       		{
       		    _current_package->setKind ((*iter)->kind());
@@ -588,7 +588,7 @@ namespace zypp
       
       	CDependencyList::const_iterator piter;
       	for (piter = _current_provides.begin(); piter != _current_provides.end(); piter++) {
-      	    if ((*piter)->relation().isEqual()
+      	    if ((*piter)->relation() == Rel::EQ
       		&& ((*piter)->name() == _current_package->name()))
       	    {
       		break;
@@ -596,7 +596,7 @@ namespace zypp
       	}
       
       	if (piter == _current_provides.end()) {			// no self provide found, construct one
-      	    constDependencyPtr selfdep = new Dependency (_current_package->name(), Relation::Equal, _current_package->kind(), _current_package->channel(), _current_package->edition());
+      	    constDependencyPtr selfdep = new Dependency (_current_package->name(), Rel::EQ, _current_package->kind(), _current_package->channel(), _current_package->edition());
       //if (getenv ("RC_SPEW")) fprintf (stderr, "Adding self-provide [%s]\n", selfdep->asString().c_str());
       	    _current_provides.push_front (selfdep);
       	}

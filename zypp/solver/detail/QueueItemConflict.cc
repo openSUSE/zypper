@@ -198,7 +198,7 @@ namespace zypp
       	UpgradeCandidateInfo upgrade_info;
       	upgrade_info.context = info->context;
       
-      	DependencyPtr maybe_upgrade_dep = new Dependency (resItem->name(), Relation::Any, ResTraits<zypp::Package>::kind, new Channel (CHANNEL_TYPE_NONSYSTEM), Edition::noepoch);
+      	DependencyPtr maybe_upgrade_dep = new Dependency (resItem->name(), Rel::ANY, ResTraits<zypp::Package>::kind, new Channel (CHANNEL_TYPE_NONSYSTEM), Edition::noepoch);
       	info->world->foreachProvidingResItem (maybe_upgrade_dep, upgrade_candidates_cb, (void *)&upgrade_info);
       
       #endif
@@ -300,8 +300,15 @@ namespace zypp
           if (_conflicting_resItem) {
       	info.pkg_str = _conflicting_resItem->asString();
           }
-      
-          info.dep_str = _dep->relation().asString() + " " + ((constSpecPtr)_dep)->asString();
+
+          if (_dep->relation().asString() != "ANY")
+          {
+              info.dep_str = _dep->relation().asString() + " " + ((constSpecPtr)_dep)->asString();
+          }
+          else
+          {
+              info.dep_str = " " + ((constSpecPtr)_dep)->asString();              
+          }
       
           world()->foreachProvidingResItem (_dep, conflict_process_cb, (void *)&info);
       					
@@ -337,7 +344,7 @@ namespace zypp
           if (cmp)
       	return cmp;
       
-          return CMP ((int) _dep->relation().op(), (int) (conflict->dependency()->relation().op()));
+          return _dep->relation() == conflict->dependency()->relation();
       }
 
       ///////////////////////////////////////////////////////////////////

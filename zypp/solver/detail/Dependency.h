@@ -33,6 +33,7 @@
 #include <zypp/solver/detail/Spec.h>
 #include <zypp/solver/detail/XmlNode.h>
 #include <zypp/ResObject.h>
+#include <zypp/Rel.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -43,69 +44,6 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-
-      ///////////////////////////////////////////////////////////////////
-      //
-      //      CLASS NAME : Relation
-      /**
-       * A dependency relation
-       **/
-      
-      class Relation {
-      
-        private:
-      
-          int _op;
-      
-          Relation (int op) { _op = op; }
-      
-        public:
-      
-          virtual ~Relation() {}
-      
-          // ---------------------------------- I/O
-      
-          static std::string toString ( const Relation & relation );
-      
-          static std::string toWord ( const Relation & relation );
-      
-          virtual std::ostream & dumpOn( std::ostream & str ) const;
-      
-          friend std::ostream& operator<<( std::ostream & str, const Relation & relation );
-      
-          std::string asString ( void ) const;
-      
-          // ---------------------------------- consts
-      
-          static const Relation & Invalid;
-          static const Relation & Any;
-          static const Relation & Equal;
-          static const Relation & NotEqual;
-          static const Relation & Less;
-          static const Relation & LessEqual;
-          static const Relation & Greater;
-          static const Relation & GreaterEqual;
-          static const Relation & None;
-      
-          static const Relation & parse (const char *relation);
-      
-          // ---------------------------------- accessors
-      
-          int op (void) const { return _op; }
-      
-          bool isEqual () const;
-      
-          // equality operator
-          bool operator==( const Relation & rel ) const {
-      	return (_op == rel.op());
-          }
-      
-          // inequality
-          bool operator!=( const Relation & rel ) const {
-      	return !(*this == rel);
-          }
-      
-      };
       
       ///////////////////////////////////////////////////////////////////
       
@@ -123,7 +61,7 @@ namespace zypp
           REP_BODY(Dependency);
       
         private:
-          Relation _relation;
+          Rel _relation;
           constChannelPtr _channel;
           bool _or_dep;
           bool _pre_dep;
@@ -131,7 +69,7 @@ namespace zypp
         public:
 
           Dependency (const std::string & name,
-      	  const Relation & relation,
+      	  const Rel & relation,
       	  const Resolvable::Kind & kind = ResTraits<zypp::Package>::kind,
       	  constChannelPtr channel = NULL,
       	  int epoch = Edition::noepoch,
@@ -142,7 +80,7 @@ namespace zypp
       	  bool pre_dep = false);
 
           Dependency (const std::string & name,
-      	  const Relation & relation,
+      	  const Rel & relation,
           const Resolvable::Kind & kind = ResTraits<zypp::Package>::kind,
       	  constChannelPtr channel = NULL,
       	  const zypp::Edition & edition = zypp::Edition(),
@@ -171,7 +109,7 @@ namespace zypp
       
           // ---------------------------------- accessors
       
-          const Relation & relation() const { return _relation; }
+          const Rel & relation() const { return _relation; }
           constChannelPtr channel (void) const { return _channel; }
       
           bool orDep (void) const { return _or_dep; }
