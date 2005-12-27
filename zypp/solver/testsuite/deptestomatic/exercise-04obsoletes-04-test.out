@@ -24,7 +24,7 @@ total priority=0, min priority=800, max priority=800
 other penalties=0
 - - - - - - - - - -
 Installing libfoo2-2.0-1[test]
-libfoo-1.2-1: replaced by  [libfoo2-2.0-1]
+libfoo-1.2-1: replaced by  [libfoo2-2.0-1[test]]
 There are no installable providers of libfoo for something-1.0-1
 libfoo provides libfoo-1.2-1, but is scheduled to be uninstalled.
 something-1.0-1: depended on  [libfoo-1.2-1]

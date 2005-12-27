@@ -83,6 +83,10 @@ class Package : public ResItem {
         public:
       
           Package(constChannelPtr channel);
+          Package(constChannelPtr channel,
+                  const std::string & name = "",
+                  const Edition & edition = Edition::noedition,
+                  const Arch arch = Arch_noarch);
           Package(constXmlNodePtr node, constChannelPtr channel);	//RCPackage *rc_xml_node_to_package (const xmlNode *node, const RCChannel *channel);
           virtual ~Package();
       

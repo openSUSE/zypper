@@ -315,7 +315,7 @@ namespace zypp
           ForeachUpgradeInfo *info = (ForeachUpgradeInfo *)data;
           int cmp;
       
-          cmp = Spec::compare (info->original_resItem, resItem);
+          cmp = ResItem::compare (info->original_resItem, resItem);
       
           if (cmp >= 0)				// original is already better
       	return true;
@@ -400,7 +400,7 @@ namespace zypp
       	/* All the versions are equal, so picking the first is fine */
       	constResItemPtr best_up = info->best_upgrades.front();
       
-      	cmp = Spec::compare (best_up, upgrade);
+      	cmp = ResItem::compare (best_up, upgrade);
       
       	if (cmp <= 0) {
       	    /* We have a new best resItem... */
@@ -447,7 +447,7 @@ namespace zypp
           UniqueTable::const_iterator pos = unique_table->find (resItem->name());
       
           if (pos != unique_table->end()) {
-      	if (Spec::compare (resItem, pos->second) <= 0)
+      	if (ResItem::compare (resItem, pos->second) <= 0)
       	    return true;
           }
       

@@ -233,7 +233,7 @@ namespace zypp
           , _processing (false)
           , _xml_context (NULL)
           , _state (PARSER_TOPLEVEL)
-          , _current_package (NULL)
+          , _current_package_stored(true)
           , _current_update (NULL)
           , _toplevel_dep_list (NULL)
           , _current_dep_list (NULL)
@@ -330,7 +330,7 @@ namespace zypp
           if (_xml_context)
       	xmlFreeParserCtxt(_xml_context);
           
-          if (_current_package) {
+          if (!_current_package_stored) {
       	fprintf (stderr, "Incomplete package lost\n");
           }
       
@@ -404,25 +404,38 @@ namespace zypp
       void
       XmlParser::toplevelStart(const char * name, const xmlChar **attrs)
       {
-      //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::toplevelStart(%s)\n", name);
+          //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::toplevelStart(%s)\n", name);
       
           if (!strcmp(name, "package")) {
-      	assert(_current_package == NULL);
+            
+              _state = PARSER_PACKAGE;
       
-      	_state = PARSER_PACKAGE;
-      
-      	_current_package = new Package(_channel);
-      	_current_requires.clear();
-      	_current_provides.clear();
-      	_current_conflicts.clear();
-      	_current_children.clear();
-      	_current_recommends.clear();
-      	_current_suggests.clear();
-      	_current_obsoletes.clear();
+              _current_package_stored = false;
+              _current_package_name = "";
+              _current_package_prettyName = "";
+              _current_package_summary = "";
+              _current_package_description = "";
+              _current_package_section = "";
+              _current_package_kind = ResTraits<zypp::Package>::kind;
+              _current_package_arch = Arch_noarch;
+              _current_package_edition = Edition::noedition;
+              _current_package_fileSize = 0;
+              _current_package_installedSize = 0;
+              _current_package_installOnly = false;
+              _current_package_packageSet = false;
+              _current_package_packageUpdateList.clear();
+              
+              _current_requires.clear();
+              _current_provides.clear();
+              _current_conflicts.clear();
+              _current_children.clear();
+              _current_recommends.clear();
+              _current_suggests.clear();
+              _current_obsoletes.clear();
       
           }
           else {
-      	if (getenv ("RC_SPEW_XML")) rc_debug (RC_DEBUG_LEVEL_ALWAYS, "! Not handling %s at toplevel", (const char *)name);
+              if (getenv ("RC_SPEW_XML")) rc_debug (RC_DEBUG_LEVEL_ALWAYS, "! Not handling %s at toplevel", (const char *)name);
           }
       }
       
@@ -431,8 +444,6 @@ namespace zypp
       XmlParser::packageStart(const char * name, const xmlChar **attrs)
       {
       //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageStart(%s)\n", name);
-      
-          assert(_current_package != NULL);
       
           /* Only care about the containers here */
           if (!strcmp((const char *)name, "history")) {
@@ -498,12 +509,10 @@ namespace zypp
       {
       //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::historyStart(%s)\n", name);
       
-          assert(_current_package != NULL);
-      
           if (!strcmp(name, "update")) {
       	assert(_current_update == NULL);
       
-      	_current_update = new PackageUpdate(_current_package->name());
+      	_current_update = new PackageUpdate(_current_package_name);
       
       	_state = PARSER_UPDATE;
           }
@@ -544,93 +553,102 @@ namespace zypp
       void
       XmlParser::packageEnd(const char *name)
       {
-      //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageEnd(%s)\n", name);
-      
-          assert(_current_package != NULL);
+          //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageEnd(%s)\n", name);
       
           if (!strcmp(name, "package")) {
-      	PackageUpdatePtr update;
+              PackageUpdatePtr update = NULL;
       
-      	/* If possible, grab the version info from the most recent update.
-      	 * Otherwise, try to find where the package provides itself and use
-      	 * that version info.
-      	 */
-      	update = _current_package->getLatestUpdate();
+              /* If possible, grab the version info from the most recent update.
+               * Otherwise, try to find where the package provides itself and use
+               * that version info.
+               */
+              if (!_current_package_packageUpdateList.empty())
+                  update = _current_package_packageUpdateList.back();
       
-      	if (update) {
-      	    _current_package->setName (update->name());
-      	    _current_package->setKind (update->kind());
-      	    _current_package->setEdition (update->edition());
-      	    _current_package->setFileSize (update->packageSize());
-      	    _current_package->setInstalledSize (update->installedSize());
-      	}
-      	else {
-      	    for (CDependencyList::const_iterator iter = _current_provides.begin(); iter != _current_provides.end(); iter++) {
-      		if ((*iter)->relation() == Rel::EQ
-      		    && ((*iter)->name() == _current_package->name()))
-      		{
-      		    _current_package->setKind ((*iter)->kind());
-      		    _current_package->setEdition ((*iter)->edition());
-      		    break;
-      		}
-      	    }
-      	}
+              if (update) {
+                  _current_package_name = update->name();
+                  _current_package_kind = update->kind();
+                  _current_package_edition = update->edition();
+                  _current_package_fileSize = update->packageSize();
+                  _current_package_installedSize = update->installedSize();
+              }
+              else {
+                  for (CDependencyList::const_iterator iter = _current_provides.begin(); iter != _current_provides.end(); iter++) {
+                      if ((*iter)->relation() == Rel::EQ
+                          && ((*iter)->name() == _current_package_name))
+                      {
+                          _current_package_kind = (*iter)->kind();
+                          _current_package_edition = (*iter)->edition();
+                          break;
+                      }
+                  }
+              }
 
-#if 0
-      	/* Hack for the old XML */
-      	if (_current_package->arch()->isUnknown()) {
-      	    _current_package->setArch (Arch::System);
-      	}
-#endif
+              // check if we provide ourselfs properly
+      
+              CDependencyList::const_iterator piter;
+              for (piter = _current_provides.begin(); piter != _current_provides.end(); piter++) {
+                  if ((*piter)->relation() == Rel::EQ
+                      && ((*piter)->name() == _current_package_name))
+                  {
+                      break;
+                  }
+              }
+      
+              if (piter == _current_provides.end()) {			// no self provide found, construct one
+                  constDependencyPtr selfdep = new Dependency (_current_package_name, Rel::EQ, _current_package_kind, _channel, _current_package_edition);
+                  //if (getenv ("RC_SPEW")) fprintf (stderr, "Adding self-provide [%s]\n", selfdep->asString().c_str());
+                  _current_provides.push_front (selfdep);
+              }
 
-        
-      	// check if we provide ourselfs properly
-      
-      	CDependencyList::const_iterator piter;
-      	for (piter = _current_provides.begin(); piter != _current_provides.end(); piter++) {
-      	    if ((*piter)->relation() == Rel::EQ
-      		&& ((*piter)->name() == _current_package->name()))
-      	    {
-      		break;
-      	    }
-      	}
-      
-      	if (piter == _current_provides.end()) {			// no self provide found, construct one
-      	    constDependencyPtr selfdep = new Dependency (_current_package->name(), Rel::EQ, _current_package->kind(), _current_package->channel(), _current_package->edition());
-      //if (getenv ("RC_SPEW")) fprintf (stderr, "Adding self-provide [%s]\n", selfdep->asString().c_str());
-      	    _current_provides.push_front (selfdep);
-      	}
-      
-      	_current_package->setRequires   (_current_requires);
-      	_current_package->setProvides   (_current_provides);
-      	_current_package->setConflicts  (_current_conflicts);
-      	_current_package->setObsoletes  (_current_obsoletes);
-      	_current_package->setSuggests   (_current_suggests);
-      	_current_package->setRecommends (_current_recommends);
-      
-      	_all_packages.push_back (_current_package);
+              PackagePtr package = new Package ( _channel,
+                                                 _current_package_name,
+                                                 _current_package_edition,
+                                                 _current_package_arch);
+              package->setRequires      (_current_requires);
+              package->setProvides      (_current_provides);
+              package->setConflicts     (_current_conflicts);
+              package->setObsoletes     (_current_obsoletes);
+              package->setSuggests      (_current_suggests);
+              package->setRecommends    (_current_recommends);
+              package->setPrettyName    (_current_package_prettyName);
+              package->setSummary       (_current_package_summary);
+              package->setDescription   (_current_package_description);
+              package->setSection       (new Section(_current_package_section.c_str()));
+              package->setFileSize      (_current_package_fileSize);
+              package->setInstalledSize (_current_package_installedSize);
+              package->setInstallOnly   (_current_package_installOnly);
+              package->setPackageSet    (_current_package_packageSet);
+              for (PackageUpdateList::iterator iter = _current_package_packageUpdateList.begin();
+                   iter != _current_package_packageUpdateList.end();
+                   iter++) {
+                  PackageUpdatePtr update = *iter;
+                  update->setPackage (package);
+                  package->addUpdate (update);
+              }
+              _all_packages.push_back (package);
       	
-      	if (getenv ("RC_SPEW")) fprintf (stderr, "%s\n", _current_package->asString(true).c_str());
-      	if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageEnd done: '%s'\n", _current_package->asString(true).c_str());
-      //	if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageEnd now %ld packages\n", _all_packages.size());
-      	_current_package = NULL;
-      	_state = PARSER_TOPLEVEL;
+              if (getenv ("RC_SPEW")) fprintf (stderr, "%s\n", package->asString(true).c_str());
+              if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageEnd done: '%s'\n", package->asString(true).c_str());
+              //	if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageEnd now %ld packages\n", _all_packages.size());
+              _current_package_stored = true;
+              _state = PARSER_TOPLEVEL;
           }
-          else if (!strcmp(name, "name")) {			_current_package->setName (strstrip (_text_buffer));
-          } else if (!strcmp(name, "pretty_name")) {		_current_package->setPrettyName (strstrip (_text_buffer));
-          } else if (!strcmp(name, "summary")) {		_current_package->setSummary (strstrip (_text_buffer));
-          } else if (!strcmp(name, "description")) {		_current_package->setDescription (strstrip (_text_buffer));
-          } else if (!strcmp(name, "section")) {		_current_package->setSection (new Section(strstrip (_text_buffer)));
-          } else if (!strcmp(name, "arch")) {			_current_package->setArch (strstrip (_text_buffer));
-          } else if (!strcmp(name, "filesize")) {		_current_package->setFileSize (atoi(_text_buffer));
-          } else if (!strcmp(name, "installedsize")) {	_current_package->setInstalledSize (atoi(_text_buffer));
-          } else if (!strcmp(name, "install_only")) {		_current_package->setInstallOnly (true);
-          } else if (!strcmp(name, "package_set")) {		_current_package->setPackageSet (true);
+          else if (!strcmp(name, "name")) {			_current_package_name = strstrip (_text_buffer);
+          } else if (!strcmp(name, "pretty_name")) {		_current_package_prettyName = strstrip (_text_buffer);
+          } else if (!strcmp(name, "summary")) {		_current_package_summary = strstrip (_text_buffer);
+          } else if (!strcmp(name, "description")) {		_current_package_description = strstrip (_text_buffer);
+          } else if (!strcmp(name, "section")) {		_current_package_section = strstrip (_text_buffer);
+          } else if (!strcmp(name, "arch")) {			_current_package_arch = Arch(strstrip (_text_buffer));
+          } else if (!strcmp(name, "filesize")) {		_current_package_fileSize = atoi(_text_buffer);
+          } else if (!strcmp(name, "installedsize")) {	        _current_package_installedSize = atoi(_text_buffer);
+          } else if (!strcmp(name, "install_only")) {		_current_package_installOnly = true;
+          } else if (!strcmp(name, "package_set")) {		_current_package_packageSet = true;
           } else {
-      	if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageEnd(%s) unknown\n", name);
+              if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageEnd(%s) unknown\n", name);
           }
       
-      //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageEnd(%s) done\n", name);
+          //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageEnd(%s) done\n", name);
       
           releaseBuffer();
       }
@@ -640,7 +658,6 @@ namespace zypp
       XmlParser::historyEnd(const char *name)
       {
       //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::historyEnd(%s)\n", name);
-          assert(_current_package != NULL);
       
           if (!strcmp(name, "history")) {
       	assert(_current_update == NULL);
@@ -653,48 +670,45 @@ namespace zypp
       void
       XmlParser::updateEnd(const char *name)
       {
-      //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::updateEnd(%s)\n", name);
+          //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::updateEnd(%s)\n", name);
       
           constChannelPtr channel;
           const char *url_prefix = NULL;
       
-          assert(_current_package != NULL);
           assert(_current_update != NULL);
       
-          channel = _current_package->channel();
-      
-          if (channel != NULL) {
-      	url_prefix = channel->filePath ();
+          if (_channel != NULL) {
+              url_prefix = _channel->filePath ();
           }
       
           if (!strcmp(name, "update")) {
-      	_current_package->addUpdate(_current_update);
+              _current_package_packageUpdateList.push_back(_current_update);
       
-      	_current_update = NULL;
-      	_state = PARSER_HISTORY;
+              _current_update = NULL;
+              _state = PARSER_HISTORY;
       
           } else if (!strcmp(name, "epoch")) {		_current_update->setEpoch (atoi(_text_buffer));
           } else if (!strcmp(name, "version")) {		_current_update->setVersion (strstrip (_text_buffer));
           } else if (!strcmp(name, "release")) {		_current_update->setRelease (strstrip (_text_buffer));
           } else if (!strcmp(name, "arch")) {			_current_update->setArch (strstrip (_text_buffer));
           } else if (!strcmp(name, "filename")) {
-      	strstrip (_text_buffer);
-      	if (url_prefix) {
-      	    _current_update->setPackageUrl (maybe_merge_paths(url_prefix, _text_buffer));
-      	}
-      	else {
-      	    _current_update->setPackageUrl (_text_buffer);
-      	}
+              strstrip (_text_buffer);
+              if (url_prefix) {
+                  _current_update->setPackageUrl (maybe_merge_paths(url_prefix, _text_buffer));
+              }
+              else {
+                  _current_update->setPackageUrl (_text_buffer);
+              }
           } else if (!strcmp(name, "filesize")) {		_current_update->setPackageSize (atoi(_text_buffer));
           } else if (!strcmp(name, "installedsize")) {	_current_update->setInstalledSize (atoi (_text_buffer));
           } else if (!strcmp(name, "signaturename")) {
-      	strstrip (_text_buffer);
-      	if (url_prefix) {
-      	    _current_update->setSignatureUrl (maybe_merge_paths(url_prefix, _text_buffer));
-      	}
-      	else {
-      	    _current_update->setSignatureUrl (_text_buffer);
-      	}
+              strstrip (_text_buffer);
+              if (url_prefix) {
+                  _current_update->setSignatureUrl (maybe_merge_paths(url_prefix, _text_buffer));
+              }
+              else {
+                  _current_update->setSignatureUrl (_text_buffer);
+              }
           } else if (!strcmp(name, "signaturesize")) {	_current_update->setSignatureSize (atoi (_text_buffer));
           } else if (!strcmp(name, "md5sum")) {		_current_update->setMd5sum (strstrip (_text_buffer));
           } else if (!strcmp(name, "importance")) {		_current_update->setImportance (new Importance (strstrip (_text_buffer)));
@@ -702,10 +716,10 @@ namespace zypp
           } else if (!strcmp(name, "hid")) {			_current_update->setHid (atoi(_text_buffer));
           } else if (!strcmp (name, "license")) {		_current_update->setLicense (strstrip (_text_buffer));
           } else {
-      	fprintf (stderr, "XmlParser::updateEnd(%s) unknown\n", name);
+              fprintf (stderr, "XmlParser::updateEnd(%s) unknown\n", name);
           }
       
-      //    if (_current_update != NULL && getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::updateEnd(%s) => '%s'\n", name, _current_update->asString().c_str());
+          //    if (_current_update != NULL && getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::updateEnd(%s) => '%s'\n", name, _current_update->asString().c_str());
       
           releaseBuffer();
       

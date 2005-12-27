@@ -68,7 +68,21 @@ namespace zypp
           PackageList _all_packages;
       
           /* Temporary state */
-          PackagePtr _current_package;
+          bool _current_package_stored;
+          std::string _current_package_name;
+          std::string _current_package_prettyName;
+          std::string _current_package_summary;
+          std::string _current_package_description;
+          std::string _current_package_section;
+          Arch _current_package_arch;
+          Resolvable::Kind _current_package_kind;
+          Edition _current_package_edition;
+          int _current_package_fileSize;
+          int _current_package_installedSize;
+          bool _current_package_installOnly;
+          bool _current_package_packageSet;
+          PackageUpdateList _current_package_packageUpdateList;
+          
           CDependencyList _current_requires;
           CDependencyList _current_provides;
           CDependencyList _current_conflicts;

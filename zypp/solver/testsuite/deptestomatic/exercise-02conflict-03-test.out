@@ -24,6 +24,6 @@ total priority=0, min priority=800, max priority=800
 other penalties=0
 - - - - - - - - - -
 Installing bar-2.0-1[test]
-Marking foo-2.0-1[test] as uninstallable due to conflicts over  foo (foo-2.0-1) from bar-2.0-1[test] [bar-2.0-1, foo-2.0-1]
-foo-1.0-1: conflicts with  [bar-2.0-1]
+Marking foo-2.0-1[test] as uninstallable due to conflicts over  foo (foo-2.0-1) from bar-2.0-1[test] [bar-2.0-1[test], foo-2.0-1[test]]
+foo-1.0-1: conflicts with  [bar-2.0-1[test]]
 

@@ -23,6 +23,6 @@ total priority=0, min priority=800, max priority=800
 other penalties=0
 - - - - - - - - - -
 Installing libident-dev-2.0-1[test]
-libident-2.0-1[test]:  needed by  [libident-dev-2.0-1]
+libident-2.0-1[test]:  needed by  [libident-dev-2.0-1[test]]P
 Upgrading libident-1.9-1 => libident-2.0-1[test]
 

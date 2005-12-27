@@ -23,9 +23,9 @@ download size=0.4k, install size=1.3k
 total priority=0, min priority=800, max priority=800
 other penalties=-1600
 - - - - - - - - - -
-WindowMaker-1.0-1[test]:  needed by  [alt-1.0-1]
+WindowMaker-1.0-1[test]:  needed by  [alt-1.0-1[test]]
 Installing WindowMaker-1.0-1[test]
-sendmail-1.0-1[test]:  needed by  [alt-1.0-1]
+sendmail-1.0-1[test]:  needed by  [alt-1.0-1[test]]
 Installing sendmail-1.0-1[test]
 Installing alt-1.0-1[test]
 
@@ -41,9 +41,9 @@ download size=0.4k, install size=1.3k
 total priority=0, min priority=800, max priority=800
 other penalties=-1600
 - - - - - - - - - -
-icewm-1.0-1[test]:  needed by  [alt-1.0-1]
+icewm-1.0-1[test]:  needed by  [alt-1.0-1[test]]
 Installing icewm-1.0-1[test]
-postfix-1.0-1[test]:  needed by  [alt-1.0-1]
+postfix-1.0-1[test]:  needed by  [alt-1.0-1[test]]
 Installing postfix-1.0-1[test]
 Installing alt-1.0-1[test]
 >!> Solution #3:
@@ -56,9 +56,9 @@ download size=0.4k, install size=1.3k
 total priority=0, min priority=800, max priority=800
 other penalties=-1600
 - - - - - - - - - -
-WindowMaker-1.0-1[test]:  needed by  [alt-1.0-1]
+WindowMaker-1.0-1[test]:  needed by  [alt-1.0-1[test]]
 Installing WindowMaker-1.0-1[test]
-postfix-1.0-1[test]:  needed by  [alt-1.0-1]
+postfix-1.0-1[test]:  needed by  [alt-1.0-1[test]]
 Installing postfix-1.0-1[test]
 Installing alt-1.0-1[test]
 >!> Solution #4:
@@ -71,9 +71,9 @@ download size=0.4k, install size=1.3k
 total priority=0, min priority=800, max priority=800
 other penalties=-1600
 - - - - - - - - - -
-icewm-1.0-1[test]:  needed by  [alt-1.0-1]
+icewm-1.0-1[test]:  needed by  [alt-1.0-1[test]]
 Installing icewm-1.0-1[test]
-sendmail-1.0-1[test]:  needed by  [alt-1.0-1]
+sendmail-1.0-1[test]:  needed by  [alt-1.0-1[test]]
 Installing sendmail-1.0-1[test]
 Installing alt-1.0-1[test]
 

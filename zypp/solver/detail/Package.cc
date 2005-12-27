@@ -21,6 +21,8 @@
 
 #include <zypp/solver/detail/utils.h>
 #include <zypp/solver/detail/Package.h>
+#include <zypp/Package.h>
+#include <zypp/detail/PackageImpl.h>
 #include <zypp/solver/detail/PackageUpdate.h>
 #include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/World.h>
@@ -38,7 +40,7 @@ namespace zypp
       
       using namespace std;
       
-      IMPL_DERIVED_POINTER(Package,Spec);
+      IMPL_DERIVED_POINTER(Package,ResItem);
       
       struct DepTable {
           CDependencyList requires;
@@ -239,7 +241,7 @@ namespace zypp
       }
       
       //---------------------------------------------------------------------------
-      
+        
       Package::Package (constChannelPtr channel)
           : ResItem (ResTraits<zypp::Package>::kind, "")
           , _section (NULL)
@@ -254,7 +256,33 @@ namespace zypp
       {
           setChannel (channel);
       }
-      
+
+
+      Package::Package (constChannelPtr channel,
+                        const string & name,
+                        const Edition & edition,
+                        const Arch arch)
+
+          : ResItem (ResTraits<zypp::Package>::kind, "")
+          , _section (NULL)
+          , _pretty_name ("")
+          , _summary ("")
+          , _description ("")
+          , _package_filename ("")
+          , _signature_filename ("")
+          , _install_only (false)
+          , _package_set (false)
+          , _id ("")
+      {
+
+          setChannel (channel);
+
+          shared_ptr<zypp::detail::PackageImpl> pkgImpl;
+          zypp::Package::Ptr pkg( zypp::detail::makeResolvableAndImpl( name, edition, arch,
+                                                                       pkgImpl ) );
+          _resObject = pkg;
+      }
+                  
       
       Package::Package (constXmlNodePtr node, constChannelPtr channel)
           : ResItem (ResTraits<zypp::Package>::kind, "")
@@ -268,12 +296,17 @@ namespace zypp
           , _package_set (false)
           , _id ("")
       {
+          string name = "";
+          int epoch = Edition::noepoch;
+          string version = "";
+          string release = "";
+          Arch arch = Arch_noarch;
+          
           if (!node->equals("package")) {
-      	fprintf (stderr, "Package::Package() not a package node\n");
-      	exit (1);
+              fprintf (stderr, "Package::Package() not a package node\n");
+              exit (1);
           }
       
-          const char *epoch = NULL, *version = NULL, *release = NULL;
           struct DepTable dep_table;
       
           setChannel (channel);
@@ -281,75 +314,75 @@ namespace zypp
           constXmlNodePtr iter = node->children();
       
           while (iter) {
-      	bool extracted_deps = false;
+              bool extracted_deps = false;
       
-      	if (iter->equals("name")) {	  		setName (iter->getContent());
-      	} else if (iter->equals("epoch")) {		setEpoch (atoi (iter->getContent()));
-      	} else if (iter->equals("version")) {		setVersion (iter->getContent());
-      	} else if (iter->equals("release")) {		setRelease (iter->getContent());
-      	} else if (iter->equals("summary")) {		_summary = strdup (iter->getContent());
-      	} else if (iter->equals("description")) {	_description = strdup (iter->getContent());
-      	} else if (iter->equals("section")) {		_section = new Section (iter->getContent());
-      	} else if (iter->equals("arch")) {		setArch (iter->getContent());
-      	} else if (iter->equals("filesize")) {	
-      	    const char *tmp = iter->getContent();
-      	    setFileSize (tmp && *tmp ? atoi (tmp) : 0);
-      	    free ((void *)tmp);
-      	} else if (iter->equals("installedsize")) {
-      	    const char *tmp = iter->getContent();
-      	    setInstalledSize (tmp && *tmp ? atoi (tmp) : 0);
-      	    free ((void *)tmp);
-      	} else if (iter->equals("install_only")) {	_install_only = true;
-      	} else if (iter->equals("package_set")) {	_package_set = true;
-      	} else if (iter->equals("history")) {
-      	    constXmlNodePtr iter2;
+              if (iter->equals("name")) {	  		name = iter->getContent();
+              } else if (iter->equals("epoch")) {		epoch = atoi (iter->getContent());
+              } else if (iter->equals("version")) {		version = iter->getContent();
+              } else if (iter->equals("release")) {		release = iter->getContent();
+              } else if (iter->equals("summary")) {		_summary = strdup (iter->getContent());
+              } else if (iter->equals("description")) {	_description = strdup (iter->getContent());
+              } else if (iter->equals("section")) {		_section = new Section (iter->getContent());
+              } else if (iter->equals("arch")) {		arch = Arch(iter->getContent());
+              } else if (iter->equals("filesize")) {	
+                  const char *tmp = iter->getContent();
+                  setFileSize (tmp && *tmp ? atoi (tmp) : 0);
+                  free ((void *)tmp);
+              } else if (iter->equals("installedsize")) {
+                  const char *tmp = iter->getContent();
+                  setInstalledSize (tmp && *tmp ? atoi (tmp) : 0);
+                  free ((void *)tmp);
+              } else if (iter->equals("install_only")) {	_install_only = true;
+              } else if (iter->equals("package_set")) {	_package_set = true;
+              } else if (iter->equals("history")) {
+                  constXmlNodePtr iter2;
       
-      	    iter2 = iter->children();
+                  iter2 = iter->children();
       
-      	    while (iter2) {
-      		if (!iter2->isElement()) {
-      		    iter2 = iter2->next();
-      		    continue;
-      		}
+                  while (iter2) {
+                      if (!iter2->isElement()) {
+                          iter2 = iter2->next();
+                          continue;
+                      }
       
-      		PackageUpdatePtr update = new PackageUpdate (iter2, this);
-      		addUpdate (update);
+                      PackageUpdatePtr update = new PackageUpdate (iter2, this);
+                      addUpdate (update);
       
-      		iter2 = iter2->next();
-      	    }
-      	} else if (iter->equals("deps")) {
-      	    constXmlNodePtr iter2;
+                      iter2 = iter2->next();
+                  }
+              } else if (iter->equals("deps")) {
+                  constXmlNodePtr iter2;
       
-      	    for (iter2 = iter->children(); iter2; iter2 = iter2->next()) {
-      		if (!iter2->isElement())
-      		    continue;
+                  for (iter2 = iter->children(); iter2; iter2 = iter2->next()) {
+                      if (!iter2->isElement())
+                          continue;
       
-      		extract_dep_info (iter2, dep_table);
-      	    }
+                      extract_dep_info (iter2, dep_table);
+                  }
       
-      	    extracted_deps = true;
-      	}
-      	else {
-      	    if (!extracted_deps)
-      		extract_dep_info (iter, dep_table);
-      	    else {
-      		/* FIXME: Bitch to the user here? */
-      	    }
-      	}
+                  extracted_deps = true;
+              }
+              else {
+                  if (!extracted_deps)
+                      extract_dep_info (iter, dep_table);
+                  else {
+                      /* FIXME: Bitch to the user here? */
+                  }
+              }
       
-      	iter = iter->next();
+              iter = iter->next();
           }
       
           if (!dep_table.children.empty()) {
-      	// children are used in package sets
-      	// treat them as normal requires
-      	//
-      #warning Children are handled as requires
-      	CDependencyList::const_iterator iter;
-      	for (iter = dep_table.children.begin(); iter != dep_table.children.end(); iter++)
-      	{
-      	    dep_table.requires.push_back (*iter);
-      	}
+              // children are used in package sets
+              // treat them as normal requires
+              //
+#warning Children are handled as requires
+              CDependencyList::const_iterator iter;
+              for (iter = dep_table.children.begin(); iter != dep_table.children.end(); iter++)
+              {
+                  dep_table.requires.push_back (*iter);
+              }
           }
       
       
@@ -359,15 +392,15 @@ namespace zypp
           CDependencyList::const_iterator piter;
           for (piter = dep_table.provides.begin(); piter != dep_table.provides.end(); piter++) {
               if ((*piter)->relation() == Rel::EQ
-      	    && ((*piter)->name() == name()))
-      	{
-      	    break;
-      	}
+                  && ((*piter)->name() == name))
+              {
+                  break;
+              }
           }
           if (piter == dep_table.provides.end()) {			// no self provide found, construct one
-      	constDependencyPtr selfdep = new Dependency (name(), Rel::EQ, kind(), this->channel(), edition());
-      if (getenv ("RC_SPEW")) fprintf (stderr, "Adding self-provide [%s]\n", selfdep->asString().c_str());
-      	dep_table.provides.push_front (selfdep);
+              constDependencyPtr selfdep = new Dependency (name, Rel::EQ, ResTraits<zypp::Package>::kind, this->channel(), Edition( version, release, zypp::str::numstring(epoch) ));
+              if (getenv ("RC_SPEW")) fprintf (stderr, "Adding self-provide [%s]\n", selfdep->asString().c_str());
+              dep_table.provides.push_front (selfdep);
           }
       
           setRequires (dep_table.requires);
@@ -377,53 +410,40 @@ namespace zypp
           setSuggests (dep_table.suggests);
           setRecommends (dep_table.recommends);
       
-          if (version) {
+          if (!_history.empty()) {
       
-      	setEpoch (epoch ? atoi (epoch) : Edition::noepoch);
-      	setVersion (version);
-      	setRelease (release);
+              /* If possible, we grab the version info from the most
+                 recent update. */
       
-      	/* We set these to NULL so that they won't get freed when we
-      	   clean up before returning. */
-      	version = release = NULL;
+              PackageUpdatePtr update = _history.front();
       
-          } else if (!_history.empty()) {
-      
-      	/* If possible, we grab the version info from the most
-      	   recent update. */
-      
-      	PackageUpdatePtr update = _history.front();
-      
-      	setEpoch (update->package()->epoch());
-      	setVersion (update->package()->version());
-      	setRelease (update->package()->release());
+              epoch = update->package()->epoch();
+              version = update->package()->version();
+              release = update->package()->release();
       
           } else {
       	
-      	/* Otherwise, try to find where the package provides itself,
-      	   and use that version info. */
+              /* Otherwise, try to find where the package provides itself,
+                 and use that version info. */
       	
-      	if (!provides().empty())
-      	    for (CDependencyList::const_iterator iter = provides().begin(); iter != provides().end(); iter++) {	    
-      		if ((*iter)->relation() == Rel::EQ &&
-      		    ((*iter)->name() == name()))
-      		{
-      		    setEpoch ((*iter)->epoch());
-      		    setVersion ((*iter)->version());
-      		    setRelease ((*iter)->release());
-      		    break;
-      		}
-      	    }
+              if (!provides().empty())
+                  for (CDependencyList::const_iterator iter = provides().begin(); iter != provides().end(); iter++) {	    
+                      if ((*iter)->relation() == Rel::EQ &&
+                          ((*iter)->name() == name))
+                      {
+                          epoch = (*iter)->epoch();
+                          version = (*iter)->version();
+                          release = (*iter)->release();
+                          break;
+                      }
+                  }
           }
-      
-          /* clean-up */
-          if (epoch) free ((void *)epoch);
-          if (version) free ((void *)version);
-          if (release) free ((void *)release);
-      
-//          /* Hack for no archs in the XML yet */
-//          if (arch()->isUnknown())
-//      	setArch (Arch::System);
+          
+          Edition     _edition( version, release, zypp::str::numstring(epoch) );
+          shared_ptr<zypp::detail::PackageImpl> pkgImpl;
+          zypp::Package::Ptr pkg( zypp::detail::makeResolvableAndImpl( name, _edition, arch,
+                                                                       pkgImpl ) );
+          _resObject = pkg;
       }
       
       Package::~Package()
@@ -495,6 +515,7 @@ namespace zypp
       	}
       
       	/* see if the required parent for this patch is installed */
+        
       	installed = world->findInstalledResItem (update->parent());
       
       	if (installed != NULL &&

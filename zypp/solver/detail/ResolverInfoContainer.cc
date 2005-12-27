@@ -55,7 +55,7 @@ namespace zypp
           res += ResolverInfo::toString (container);
           for (CResItemList::const_iterator iter = container._resItem_list.begin(); iter != container._resItem_list.end(); iter++) {
       	if (iter != container._resItem_list.begin()) res += ", ";
-      	res += ((constSpecPtr)(*iter))->asString();
+      	res += (*iter)->asString();
           }
           res += "'>";
       
@@ -157,7 +157,7 @@ namespace zypp
       	if (iter != _resItem_list.begin())
       	    res += ", ";
       
-      	res += (names_only ? (*iter)->name() : ((constSpecPtr)(*iter))->asString());
+      	res += (names_only ? (*iter)->name() : (*iter)->asString());
           }
           res += "]";
       

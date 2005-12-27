@@ -26,6 +26,6 @@ other penalties=0
 - - - - - - - - - -
 Installing horde-1.0-1[test]
 Upgrading mod_php4-4.2.2-82 => mod_php4-4.3.4-43.4[test]
-apache-mod_php4-4.3.4-43.4[test]:  needed by  [mod_php4-4.3.4-43.4]
+apache-mod_php4-4.3.4-43.4[test]:  needed by  [mod_php4-4.3.4-43.4[test]]
 Installing apache-mod_php4-4.3.4-43.4[test]
 

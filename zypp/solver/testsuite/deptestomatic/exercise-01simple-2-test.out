@@ -24,8 +24,8 @@ total priority=0, min priority=800, max priority=800
 other penalties=0
 - - - - - - - - - -
 Installing amd-upl102-11[test]
-libgdbm-1.17-1[test]:  needed by  [amd-upl102-11]
+libgdbm-1.17-1[test]:  needed by  [amd-upl102-11[test]]
 Installing libgdbm-1.17-1[test]
-libc6-2.0.7-1[test]:  needed by  [libgdbm-1.17-1]
+libc6-2.0.7-1[test]:  needed by  [libgdbm-1.17-1[test]]
 Upgrading libc6-2.0.5-1 => libc6-2.0.7-1[test]
 

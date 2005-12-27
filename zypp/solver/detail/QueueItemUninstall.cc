@@ -192,7 +192,7 @@ namespace zypp
           ResItemStatus status;
           string pkg_str;
       
-          pkg_str = ((constSpecPtr)_resItem)->asString();
+          pkg_str = _resItem->asString();
       
           status = context->getStatus (_resItem);
       
@@ -297,7 +297,7 @@ namespace zypp
       	return cmp;
       
           constQueueItemUninstallPtr uninstall = item;
-          return Spec::compare (_resItem, uninstall->_resItem);
+          return ResItem::compare (_resItem, uninstall->_resItem);
       }
       
       

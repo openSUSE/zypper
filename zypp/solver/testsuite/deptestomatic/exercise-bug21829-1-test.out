@@ -17,5 +17,5 @@ Download Size: 369, Install Size: 1368, Total Priority: 0, Min Priority: 800, Ma
 Installing lsb-1.0-1[test]
 Installing lprng-1.0-1[test]
 Installing cups-client-1.0-1[test]
-[ERROR] lprng-1.0-1 is scheduled to be installed, but this is not possible because of dependency problems.
+[ERROR] lprng-1.0-1[test] is scheduled to be installed, but this is not possible because of dependency problems.
 [ERROR] Marking this resolution attempt as invalid.

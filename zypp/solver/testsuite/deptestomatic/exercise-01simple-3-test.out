@@ -14,7 +14,7 @@ Download Size: 246, Install Size: 456, Total Priority: 0, Min Priority: 800, Max
 - - - - - - - - - -
 Installing foo1-1.0-1[test]
 There are no installable providers of bar1 for foo1-1.0-1[test]
-libc6-2.0.7-1[test]:  needed by  [foo1-1.0-1]
+libc6-2.0.7-1[test]:  needed by  [foo1-1.0-1[test]]
 Upgrading libc6-2.0.5-1 => libc6-2.0.7-1[test]
-[ERROR] foo1-1.0-1 is scheduled to be installed, but this is not possible because of dependency problems.
+[ERROR] foo1-1.0-1[test] is scheduled to be installed, but this is not possible because of dependency problems.
 [ERROR] Marking this resolution attempt as invalid.

@@ -23,5 +23,5 @@ total priority=0, min priority=800, max priority=800
 other penalties=0
 - - - - - - - - - -
 Installing libbar2-2.0-1[test]
-libbar-1.2-1: replaced by  [libbar2-2.0-1]
+libbar-1.2-1: replaced by  [libbar2-2.0-1[test]]
 

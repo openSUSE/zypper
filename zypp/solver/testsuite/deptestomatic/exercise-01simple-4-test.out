@@ -14,5 +14,5 @@ Download Size: 123, Install Size: 456, Total Priority: 0, Min Priority: 800, Max
 - - - - - - - - - -
 Installing foo2-1.0-1[test]
 There are no installable providers of bar2 >= 1.0 for foo2-1.0-1[test]
-[ERROR] foo2-1.0-1 is scheduled to be installed, but this is not possible because of dependency problems.
+[ERROR] foo2-1.0-1[test] is scheduled to be installed, but this is not possible because of dependency problems.
 [ERROR] Marking this resolution attempt as invalid.

@@ -24,7 +24,7 @@ total priority=0, min priority=800, max priority=800
 other penalties=0
 - - - - - - - - - -
 Installing libbaz2-2.0-1[test]
-libbaz-1.2-1: replaced by  [libbaz2-2.0-1]
+libbaz-1.2-1: replaced by  [libbaz2-2.0-1[test]]
 There are no installable providers of libbaz for somemore-1.0-1
 libbaz provides libbaz-1.2-1, but is scheduled to be uninstalled.
 somemore-1.0-1: depended on  [libbaz-1.2-1]

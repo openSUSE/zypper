@@ -26,5 +26,5 @@ other penalties=0
 - - - - - - - - - -
 Installing B-1.0-1[test]
 Installing C-1.0-1[test]
-A-1.0-1: replaced by  [C-1.0-1]
+A-1.0-1: replaced by  [C-1.0-1[test]]
 

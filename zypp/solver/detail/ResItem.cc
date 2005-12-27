@@ -21,13 +21,21 @@
  */
 
 #include <y2util/stringutil.h>
-
+#include <assert.h>
 #include <zypp/solver/detail/ResItem.h>
 #include <zypp/ResObject.h>
-#include <zypp/detail/ResObjectImplIf.h>
-#include <zypp/detail/ResObjectFactory.h>
 #include <zypp/Package.h>
+#include <zypp/Selection.h>
+#include <zypp/Patch.h>
+#include <zypp/Message.h>
+#include <zypp/Script.h>
+#include <zypp/Product.h>
 #include <zypp/detail/PackageImpl.h>
+#include <zypp/detail/SelectionImpl.h>
+#include <zypp/detail/PatchImpl.h>
+#include <zypp/detail/MessageImpl.h>
+#include <zypp/detail/ScriptImpl.h>
+#include <zypp/detail/ProductImpl.h>
 #include <zypp/base/String.h>
 
 
@@ -44,7 +52,7 @@ namespace zypp
       using namespace std;
       
       
-      IMPL_DERIVED_POINTER(ResItem,Spec);
+      IMPL_BASE_POINTER(ResItem);
       
       //---------------------------------------------------------------------------
       
@@ -59,8 +67,30 @@ namespace zypp
       ResItem::toString ( const ResItem & resItem, bool full )
       {
           string res;
+
+          if (full
+              || (resItem.kind() != "Package"
+                  && resItem.kind() != "ResObject"))
+          {
+              res += resItem.kind().asString();
+              res += ":";
+          }
       
-          res += Spec::toString(resItem);
+          res += resItem.name();
+      
+          string ed = resItem.edition().asString();
+          if (!ed.empty() &&
+              ed != "EDITION-UNSPEC")
+          {
+              res += "-";
+              res += ed;
+          }
+
+          if (resItem.arch() != Arch_noarch) {
+              res += ".";
+              res += resItem.arch().asString();
+          }
+          
           if (!resItem.channel()->system()) {
       	res += "[";
       	res += (resItem.channel() == NULL) ? "(channel?)" : resItem.channel()->name();
@@ -139,8 +169,7 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       ResItem::ResItem (const Resolvable::Kind & kind, const string & name, int epoch, const string & version, const string & release, const Arch & arch)
-          :Spec (kind, name, epoch, version, release, arch)
-          , _channel (false)
+          : _channel (false)
           , _installed (false)
           , _local (false)
           , _locked (false)
@@ -148,42 +177,59 @@ namespace zypp
           , _installed_size (0)
       
       {
-          zypp::Edition     _edition( version, release, zypp::str::numstring(epoch) );
+          Edition     _edition( version, release, zypp::str::numstring(epoch) );
 
           // create the ResObject
-          shared_ptr<zypp::detail::PackageImpl> pkgImpl;
-          zypp::Package::Ptr pkg( zypp::detail::makeResolvableAndImpl( name, _edition, arch,
-                                                   pkgImpl ) );
-          _resObject = pkg;
-
-//          shared_ptr<zypp::detail::ResObjectImplIf> resObjectImpl;
-//          ResObject::Ptr resObject( zypp::detail::makeResolvableAndImpl( _name, _edition, _arch,
-//                                                   resObjectImpl ) );
-//          
-//        _resObject = resObject;
-          
+          if (kind == "Package")
+          {
+              shared_ptr<zypp::detail::PackageImpl> pkgImpl;
+              zypp::Package::Ptr pkg( zypp::detail::makeResolvableAndImpl( name, _edition, arch,
+                                                                           pkgImpl ) );
+              _resObject = pkg;
+          } else if (kind == "Selection")
+          {
+              shared_ptr<zypp::detail::SelectionImpl> selImpl;
+              zypp::Selection::Ptr sel( zypp::detail::makeResolvableAndImpl( name, _edition, arch,
+                                                                             selImpl ) );
+              _resObject = sel;              
+          } else if (kind == "Product")              
+          {
+//              shared_ptr<zypp::detail::ProductImpl> proImpl;
+//              zypp::Product::Ptr pro( zypp::detail::makeResolvableAndImpl( name, _edition, arch,
+//                                                                           proImpl ) );
+//              _resObject = pro;                            
+          } else if (kind == "Patch")
+          {
+              shared_ptr<zypp::detail::PatchImpl> patchImpl;
+              zypp::Patch::Ptr patch( zypp::detail::makeResolvableAndImpl( name, _edition, arch,
+                                                                           patchImpl ) );
+              _resObject = patch;                                          
+          } else if (kind == "Script")
+          {
+              shared_ptr<zypp::detail::ScriptImpl> scriptImpl;
+              zypp::Script::Ptr script( zypp::detail::makeResolvableAndImpl( name, _edition, arch,
+                                                                             scriptImpl ) );
+              _resObject = script;   
+          } else if (kind == "Message")
+          {
+              shared_ptr<zypp::detail::MessageImpl> messageImpl;
+              zypp::Message::Ptr message( zypp::detail::makeResolvableAndImpl( name, _edition, arch,
+                                                                               messageImpl ) );
+              _resObject = message;                 
+          }
           
       }
 
       ResItem::ResItem(const ResObject::Ptr & resObject)
-          :Spec (ResTraits<Package>::kind, "")
-          ,_channel (false)
+          : _channel (false)
           , _installed (false)
           , _local (false)
           , _locked (false)
           , _file_size (0)
           , _installed_size (0)
       {
+          assert (resObject);
           _resObject = resObject;
-          if (_resObject != NULL)
-          {
-              setVersion(resObject->edition().version());
-              setArch(resObject->arch().asString());
-              setEpoch(resObject->edition().epoch());
-              setRelease(resObject->edition().release());
-              setKind(resObject->kind());
-              setName(resObject->name());    
-          }
       }
       
       ResItem::~ResItem()
@@ -201,6 +247,40 @@ namespace zypp
           }
           return false;
       }
+
+      bool
+      ResItem::equals(constResItemPtr item) const {
+          return ((kind() == item->kind())
+        	&& (name() == item->name())
+      	&& Edition::compare( edition(), item->edition()) == 0);
+      }
+
+      bool ResItem::equals(const  Resolvable::Kind & compKind,
+                           const string & compName,
+                      const Edition & compEdition) const {
+          return ((compKind == kind())
+        	&& (compName == name())
+      	&& Edition::compare( compEdition, edition()) == 0);
+      }        
+        
+      int  ResItem::compare (constResItemPtr res1, constResItemPtr res2) {
+          int rc = 0;
+
+          const string name1 = res1->name();
+          const string name2 = res2->name();
+          if (! (name1.empty() && name2.empty()))
+          {
+              rc = name1.compare (name2);
+          }
+          if (rc) return rc;
+
+          rc = Edition::compare (res1->edition(),
+                                 res2->edition());
+
+          return rc;
+      }
+
+        
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

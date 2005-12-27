@@ -17,5 +17,5 @@ Installing foo2d-1.0-1[test]
 Installing foo2e-1.0-1[test]
 There are no installable providers of bar2 <= 1.0 for foo2e-1.0-1[test]
 There are no installable providers of bar2 > 2.0 for foo2d-1.0-1[test]
-[ERROR] foo2d-1.0-1 is scheduled to be installed, but this is not possible because of dependency problems.
+[ERROR] foo2d-1.0-1[test] is scheduled to be installed, but this is not possible because of dependency problems.
 [ERROR] Marking this resolution attempt as invalid.

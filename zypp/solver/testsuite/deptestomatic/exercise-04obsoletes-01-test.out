@@ -26,5 +26,5 @@ other penalties=0
 - - - - - - - - - -
 Installing foonew-2.0-1[test]
 Installing fooc-1.0-1[test]
-foo-1.0-1: conflicts with  [fooc-1.0-1]
+foo-1.0-1: conflicts with  [fooc-1.0-1[test]]
 

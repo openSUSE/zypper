@@ -23,5 +23,5 @@ total priority=0, min priority=800, max priority=800
 other penalties=0
 - - - - - - - - - -
 Installing G-1.0-1[test]
-Marking D-1.0-1[test] as uninstallable due to conflicts over  D (D-1.0-1) from G-1.0-1[test] [G-1.0-1, D-1.0-1]
+Marking D-1.0-1[test] as uninstallable due to conflicts over  D (D-1.0-1) from G-1.0-1[test] [G-1.0-1[test], D-1.0-1[test]]
 

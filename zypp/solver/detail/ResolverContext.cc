@@ -228,7 +228,7 @@ namespace zypp
       
           if (resItem_status_is_to_be_uninstalled (status)
       	&& status != RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK) {
-      	msg = string ("Can't install ") + ((constSpecPtr)resItem)->asString() + " since it is already marked as needing to be uninstalled";
+      	msg = string ("Can't install ") + resItem->asString() + " since it is already marked as needing to be uninstalled";
       
       	addErrorString (resItem, msg);
       	return false;
@@ -239,7 +239,7 @@ namespace zypp
           }
       
           if (isParallelInstall (resItem)) {
-      	msg = string ("Can't install ") + ((constSpecPtr)resItem)->asString() + ", since a resolvable of the same name is already marked as needing to be installed";
+      	msg = string ("Can't install ") + resItem->asString() + ", since a resolvable of the same name is already marked as needing to be installed";
       	addErrorString (resItem, msg);
       	return false;
           }
@@ -330,7 +330,7 @@ namespace zypp
           status = getStatus (resItem);
       
           if (status == RESOLVABLE_STATUS_TO_BE_INSTALLED) {
-      	msg = ((constSpecPtr)resItem)->asString() + " is scheduled to be installed, but this is not possible because of dependency problems.";
+      	msg = resItem->asString() + " is scheduled to be installed, but this is not possible because of dependency problems.";
       	addErrorString (resItem, msg);
       	return false;
           }
@@ -342,7 +342,7 @@ namespace zypp
           
           if (status == RESOLVABLE_STATUS_UNINSTALLED
       	|| status == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK) {
-      	msg = string ("Marking resolvable ") + ((constSpecPtr)resItem)->asString() + " as uninstallable";
+      	msg = string ("Marking resolvable ") + resItem->asString() + " as uninstallable";
       	addInfoString (resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
           }
       
@@ -1022,7 +1022,7 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       typedef struct {
-          constSpecPtr spec;
+          constResItemPtr res;
           bool flag;
       } DupNameCheckInfo;
       
@@ -1032,8 +1032,8 @@ namespace zypp
           DupNameCheckInfo *info = (DupNameCheckInfo *)data;
           if (! info->flag
       	&& resItem_status_is_to_be_installed (status)
-      	&& info->spec->name() == resItem->name()
-      	&& !info->spec->equals(resItem)) {
+      	&& info->res->name() == resItem->name()
+              && !resItem->equals(info->res)) {
       	info->flag = true;
           }
       }
@@ -1043,7 +1043,7 @@ namespace zypp
       {
           DupNameCheckInfo info;
       
-          info.spec = resItem;
+          info.res = resItem;
           info.flag = false;
           foreachMarkedResItem (dup_name_check_cb, (void *)&info);
       

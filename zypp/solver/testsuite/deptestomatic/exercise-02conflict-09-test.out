@@ -23,5 +23,5 @@ total priority=0, min priority=800, max priority=800
 other penalties=0
 - - - - - - - - - -
 Installing baz2-1.0-1[test]
-foo2-1.0-1: conflicts with  [baz2-1.0-1]
+foo2-1.0-1: conflicts with  [baz2-1.0-1[test]]
 

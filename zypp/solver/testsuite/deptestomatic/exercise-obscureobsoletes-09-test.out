@@ -15,9 +15,9 @@ Download Size: 492, Install Size: 1824, Total Priority: 0, Min Priority: 800, Ma
 - - - - - - - - - -
 Installing ddd-1.0-1[test]
 Installing ccc-1.0-1[test]
-aaa-1.0-1[test]:  needed by  [ddd-1.0-1]
+aaa-1.0-1[test]:  needed by  [ddd-1.0-1[test]]
 Installing aaa-1.0-1[test]
-bbb-2.0-1[test]:  needed by  [ccc-1.0-1]
+bbb-2.0-1[test]:  needed by  [ccc-1.0-1[test]]
 Installing bbb-2.0-1[test]
-[ERROR] A conflict over  bbb (bbb-2.0-1) requires the removal of the to-be-installed resolvable bbb-2.0-1[test] [aaa-1.0-1]
+[ERROR] A conflict over  bbb (bbb-2.0-1) requires the removal of the to-be-installed resolvable bbb-2.0-1[test] [aaa-1.0-1[test]]
 [ERROR] Marking this resolution attempt as invalid.

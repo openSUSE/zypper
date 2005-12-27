@@ -142,7 +142,7 @@ namespace zypp
           const char *legacyId (void) const { return _legacy_id.c_str(); }			// Old ID for RCE servers
           void setLegacyId (const char *legacy_id) { _legacy_id = std::string (legacy_id); }
       
-          const char *name (void) const { return _name.c_str(); }
+          const char * name (void) const { return _name.c_str(); }
           void setName (const char *name) { _name = std::string (name); }
       
           const char *alias (void) const { return _alias.c_str(); }

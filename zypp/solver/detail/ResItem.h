@@ -59,11 +59,10 @@ namespace zypp
        *
        **/
       
-      class ResItem : public Spec {
+      class ResItem : public CountedRep {
           REP_BODY(ResItem);
       
         private:
-          ResObject::Ptr _resObject;
           constChannelPtr _channel;
       
           bool _installed;
@@ -87,6 +86,7 @@ namespace zypp
           // ---------------------------------- accessors
       
           void setLocal (bool local) { _local = local; }
+          ResObject::Ptr _resObject;
       
         public:
       
@@ -152,30 +152,20 @@ namespace zypp
           void setFreshens (const CDependencyList & freshens) { _freshens = freshens; }
 
           // Spec definitions
-#if 0
-          const std::string & version() const { return _edition->version(); }
-          void setVersion (const std::string & version) { _edition->setVersion (version); }
-      
-          const std::string & release() const { return _edition->release(); }
-          void setRelease (const std::string & release) { _edition->setRelease (release); }
-      
-          const int epoch() const { return _edition->epoch(); }
-          void setEpoch (int epoch) { _edition->setEpoch (epoch); }
-          bool hasEpoch() const { return _edition->hasEpoch(); }
-      
-          const Arch & arch() const { return _edition->arch(); }
-          void setArch (const zypp::Arch & arch) { _edition->setArch (arch); }
-          void setArch (const std::string & arch) { _edition->setArch (arch); }
-      
-          const Resolvable::Kind & kind() const { return _kind; }
-          void setKind (const Resolvable::Kind & kind) { _kind = kind; }
-      
-          const std::string name() const { return _name; }
-          void setName (const std::string & name) { _name = Name(name.c_str()); }
-      
-          const Edition & edition() const { return _edition; }
-          void setEdition (const Edition & edition) { _edition = edition }
-#endif
+          
+          const Edition & edition() const { return _resObject->edition(); }
+          const std::string & version() const { return edition().version(); }
+          const std::string & release() const { return edition().release(); }
+          const int epoch() const { return edition().epoch(); }
+          bool hasEpoch() const { return edition().epoch() != Edition::noepoch; }
+          const Arch & arch() const { return _resObject->arch(); }
+          const Resolvable::Kind & kind() const { return _resObject->kind(); }
+          const std::string name() const { return _resObject->name(); }
+          bool equals(constResItemPtr item) const;
+          bool equals(const  Resolvable::Kind & kind, const std::string & name,
+                      const Edition & edition) const;
+          
+          static int compare (constResItemPtr res1, constResItemPtr res2);
       
       };
 

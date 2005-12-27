@@ -24,6 +24,6 @@ total priority=0, min priority=800, max priority=800
 other penalties=0
 - - - - - - - - - -
 Installing foo2-2.0-1[test]
-foo-devel-1.1-1: replaced by  [foo2-2.0-1]
-foo-1.0-1: replaced by  [foo2-2.0-1]
+foo-devel-1.1-1: replaced by  [foo2-2.0-1[test]]
+foo-1.0-1: replaced by  [foo2-2.0-1[test]]
 

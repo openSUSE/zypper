@@ -21,5 +21,5 @@ There are no installable providers of bar2 > 1.0 for foo2c-1.0-1[test]
 There are no installable providers of bar2 <= 1.1 for foo2b-1.0-1[test]
 There are no installable providers of bar3 == 2.0 for foo2a-1.0-1[test]
 There are no installable providers of bar2 >= 1.0 for foo2a-1.0-1[test]
-[ERROR] foo2a-1.0-1 is scheduled to be installed, but this is not possible because of dependency problems.
+[ERROR] foo2a-1.0-1[test] is scheduled to be installed, but this is not possible because of dependency problems.
 [ERROR] Marking this resolution attempt as invalid.

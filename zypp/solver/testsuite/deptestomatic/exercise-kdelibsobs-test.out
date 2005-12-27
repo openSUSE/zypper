@@ -28,8 +28,8 @@ other penalties=0
 - - - - - - - - - -
 Installing kdelibs3-devel-3.1-73[test]
 Installing kdelibs3-3.1-73[test]
-kdesupport-2.0.1-5: replaced by  [kdelibs3-3.1-73]
-kdesupport-devel-2.0.1-5: replaced by  [kdelibs3-devel-3.1-73]
+kdesupport-2.0.1-5: replaced by  [kdelibs3-3.1-73[test]]
+kdesupport-devel-2.0.1-5: replaced by  [kdelibs3-devel-3.1-73[test]]
 There are no installable providers of kdesupport-devel for kdelibs-devel-2.0.1-4
 kdesupport-devel provides kdesupport-devel-2.0.1-5, but is scheduled to be uninstalled.
 There are no installable providers of kdesupport for kdesupport-devel-2.0.1-5

@@ -24,7 +24,7 @@ total priority=0, min priority=800, max priority=800
 other penalties=0
 - - - - - - - - - -
 Installing barold2-4.0-1[test]
-bar2-1.0-1: replaced by  [barold2-4.0-1]
+bar2-1.0-1: replaced by  [barold2-4.0-1[test]]
 There are no installable providers of bar2 == 1.0-1 for bar2-devel-1.1-1
 bar2 provides bar2-1.0-1, but is scheduled to be uninstalled.
 bar2-devel-1.1-1: depended on  [bar2-1.0-1]

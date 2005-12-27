@@ -107,7 +107,7 @@ namespace zypp
           QueueItemInstallPtr item;
       
           if (_context->resItemIsPresent (resItem)) {
-      	printf ("%s is already installed", ((constSpecPtr)resItem)->asString().c_str());
+      	printf ("%s is already installed", resItem->asString().c_str());
       	return;
           }
       
@@ -393,8 +393,8 @@ namespace zypp
       
       		if (priority != priority2 && r->name() == r2->name()) {
       		    if (r->version() == r2->version()
-      			|| (priority < priority2 && Spec::compare (r, r2) < 0)
-      			|| (priority > priority2 && Spec::compare (r, r2) > 0)) {
+      			|| (priority < priority2 && ResItem::compare (r, r2) < 0)
+      			|| (priority > priority2 && ResItem::compare (r, r2) > 0)) {
       
       			if (priority < priority2)
       			    to_defer[item] = item;

@@ -22,7 +22,7 @@
 #define _PackagePtr_h
 
 #include <y2util/RepDef.h>
-#include <zypp/solver/detail/SpecPtr.h>
+#include <zypp/solver/detail/ResItemPtr.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -38,7 +38,7 @@ namespace zypp
       //	CLASS NAME : PackagePtr
       //	CLASS NAME : constPackagePtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_DERIVED_POINTER(Package,Spec);
+      DEFINE_DERIVED_POINTER(Package,ResItem);
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

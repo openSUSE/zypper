@@ -142,7 +142,7 @@ namespace zypp
       	if (dup_res != NULL) {
       	    int cmp;
       
-      	    cmp = Spec::compare (resItem, dup_res);
+      	    cmp = ResItem::compare (resItem, dup_res);
       //fprintf (stderr, "res: %s, dup_res %s, cmp %d\n", resItem->asString().c_str(), dup_res->asString().c_str(), cmp);
       
       	    /* If the resItem we are trying to add has a lower 
@@ -367,7 +367,7 @@ namespace zypp
       ChannelPtr
       StoreWorld::guessResItemChannel (constResItemPtr resItem) const
       {
-      	fprintf (stderr, "StoreWorld::guessResItemChannel(%s) not implemented\n", ((constSpecPtr)resItem)->asString().c_str());
+      	fprintf (stderr, "StoreWorld::guessResItemChannel(%s) not implemented\n", resItem->asString().c_str());
           return 0;
       }
       
@@ -438,7 +438,7 @@ namespace zypp
           for (ResItemTable::const_iterator iter = _resItems_by_name.lower_bound(name); iter != _resItems_by_name.upper_bound(name); iter++) {
       	constResItemPtr resItem = iter->second;
       	if (resItem->isInstalled()) {
-      	    const string str = ((constSpecPtr)resItem)->asString();
+      	    const string str = resItem->asString();
       	    installed.insert (ResItemTable::value_type(str,resItem));
       	}
           }    
@@ -447,7 +447,7 @@ namespace zypp
       	constResItemPtr resItem = iter->second;
       	if (channel->equals (resItem->channel())) {
       	    if (resItem->isInstalled()
-      		|| installed.find(((constSpecPtr)resItem)->asString()) == installed.end()) {
+      		|| installed.find(resItem->asString()) == installed.end()) {
       		if (fn) {
       		    if (! fn(resItem, data)) {
       			count = -1;
@@ -476,7 +476,7 @@ namespace zypp
       //-----------------------------------------------------------------------------
       // iterater over resItems with dependency
       
-      typedef std::map<constSpecPtr, constResItemAndDependencyPtr> InstalledTable;
+      typedef std::map<constResItemPtr, constResItemAndDependencyPtr> InstalledTable;
       
       int
       StoreWorld::foreachProvidingResItem (constDependencyPtr dep, ResItemAndSpecFn fn, void *data)

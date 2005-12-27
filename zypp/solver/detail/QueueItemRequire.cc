@@ -124,7 +124,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      typedef std::map <constSpecPtr, bool> UniqTable;
+      typedef std::map <constResItemPtr, bool> UniqTable;
       
       typedef struct {
           constResItemPtr resItem;
@@ -155,7 +155,7 @@ namespace zypp
       
           if ((! resItem_status_is_to_be_uninstalled (status))
       	&& ! info->context->isParallelInstall (resItem)
-      	&& info->uniq->find((constSpecPtr)resItem) == info->uniq->end()
+      	&& info->uniq->find(resItem) == info->uniq->end()
       	&& info->context->resItemIsPossible (resItem)
       	&& ! info->world->resItemIsLocked (resItem)) {
       

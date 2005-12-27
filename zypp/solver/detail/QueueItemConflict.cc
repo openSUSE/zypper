@@ -150,7 +150,7 @@ namespace zypp
           ResolverInfoPtr log_info;
       
           if (getenv ("RC_SPEW")) fprintf (stderr, "conflict_process_cb (resolvable[%s], spec[%s], info [%s]\n", resItem->asString().c_str(), spec->asString().c_str(), info->conflicting_resItem->asString().c_str());
-          if (getenv ("RC_SPEW")) fprintf (stderr, "conflict_process_cb (resolvable equals spec: %s, info->dep [%s]\n", resItem->equals(spec) ? "YES" : "NO", info->dep->asString().c_str());
+          if (getenv ("RC_SPEW")) fprintf (stderr, "conflict_process_cb (resolvable equals spec: %s, info->dep [%s]\n", resItem->equals(spec->kind(), spec->name(), spec->edition()) ? "YES" : "NO", info->dep->asString().c_str());
       
           /* We conflict with ourself.  For the purpose of installing ourself, we
            * just ignore it, but it's Debian's way of saying that one and only one
@@ -169,7 +169,7 @@ namespace zypp
            * now. */
       
           if (info->actually_an_obsolete
-      	&& !(resItem->equals(spec)))
+      	&& !(resItem->equals(spec->kind(), spec->name(), spec->edition())))
           {
       	return true;
           }

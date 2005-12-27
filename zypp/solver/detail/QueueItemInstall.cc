@@ -106,7 +106,7 @@ namespace zypp
           constResItemPtr upgrades = world->findInstalledResItem (resItem);
           if (getenv("RC_SPEW")) fprintf (stderr, "QueueItemInstall::QueueItemInstall(%s) upgrades %s\n", resItem->asString().c_str(), upgrades!=NULL?upgrades->asString().c_str():"nothing");
           if (upgrades
-      	&& ! (((constSpecPtr)upgrades)->equals (resItem))) {
+      	&& ! (upgrades->equals (resItem))) {
               setUpgrades(upgrades);
           }
       }
@@ -155,7 +155,7 @@ namespace zypp
              red-carpet, but can come up with the installer & autopull. */
       
           if (_upgrades
-      	&& ((constSpecPtr)_resItem)->equals (_upgrades)) {
+      	&& _resItem->equals (_upgrades)) {
       	ResolverInfoPtr info;
       
       	if (getenv ("RC_SPEW")) fprintf (stderr, "upgrades equal resItem, skipping\n");
@@ -301,7 +301,7 @@ namespace zypp
       	 * saying that one and only one resItem with this provide may
       	 * exist on the system at a time.
       	 */
-      	if (((constSpecPtr)conflicting_resItem)->equals (resItem)) {
+      	if (conflicting_resItem->equals (resItem)) {
       	    continue;
       	}
       
@@ -345,7 +345,7 @@ namespace zypp
           if (cmp != 0)
       	return cmp;
           constQueueItemInstallPtr install = item;
-          return Spec::compare (_resItem, install->_resItem);
+          return ResItem::compare (_resItem, install->_resItem);
       }
       
       //---------------------------------------------------------------------------

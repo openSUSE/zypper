@@ -23,6 +23,6 @@ total priority=0, min priority=800, max priority=800
 other penalties=0
 - - - - - - - - - -
 Installing foo3-1.0-1[test]
-bash-2.0.2-1[test]:  needed by  [foo3-1.0-1]
+bash-2.0.2-1[test]:  needed by  [foo3-1.0-1[test]]
 Installing bash-2.0.2-1[test]
 

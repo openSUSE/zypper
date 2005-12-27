@@ -15,5 +15,5 @@ Download Size: 246, Install Size: 912, Total Priority: 0, Min Priority: 800, Max
 - - - - - - - - - -
 Installing jdk-shared-1.0.2-8[test]
 Installing jdk-static-1.0.2-8[test]
-[ERROR] jdk-shared-1.0.2-8 is scheduled to be installed, but this is not possible because of dependency problems.
+[ERROR] jdk-shared-1.0.2-8[test] is scheduled to be installed, but this is not possible because of dependency proble€
 [ERROR] Marking this resolution attempt as invalid.

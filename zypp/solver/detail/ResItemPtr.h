@@ -38,7 +38,7 @@ namespace zypp
       //	CLASS NAME : ResItemPtr
       //	CLASS NAME : constResItemPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_DERIVED_POINTER(ResItem,Spec);
+      DEFINE_BASE_POINTER(ResItem);
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail

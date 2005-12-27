@@ -25,8 +25,8 @@ total priority=0, min priority=800, max priority=800
 other penalties=0
 - - - - - - - - - -
 Installing test3-1.0-1[test]
-Marking test4-1.0-1[test] as uninstallable due to conflicts over  test2 (test2) from test3-1.0-1[test] [test3-1.0-1, test4-1.0-1]
-test2-1.0-1: conflicts with  [test3-1.0-1]
+Marking test4-1.0-1[test] as uninstallable due to conflicts over  test2 (test2) from test3-1.0-1[test] [test3-1.0-1[test], test4-1.0-1[test]]
+test2-1.0-1: conflicts with  [test3-1.0-1[test]]
 There are no installable providers of test2 for test1-1.0-1
 test2 provides test2-1.0-1, but is scheduled to be uninstalled.
 test4 provides test2, but is scheduled to be uninstalled.

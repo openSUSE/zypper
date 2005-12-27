@@ -15,5 +15,5 @@ Download Size: 246, Install Size: 912, Total Priority: 0, Min Priority: 800, Max
 - - - - - - - - - -
 Installing barnew-2.0-1[test]
 Installing barc-1.0-1[test]
-[ERROR] A conflict over  bar (bar) requires the removal of the to-be-installed resolvable barnew-2.0-1[test] [barc-1.0-1]
+[ERROR] A conflict over  bar (bar) requires the removal of the to-be-installed resolvable barnew-2.0-1[test] [barc-1.0-1[test]]
 [ERROR] Marking this resolution attempt as invalid.

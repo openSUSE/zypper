@@ -27,8 +27,8 @@ other penalties=0
 - - - - - - - - - -
 Installing XFree86-4.3.0-1[test]
 Installing XFree86-libs-4.3.0-1[test]
-xshared-4.2.0-176: replaced by  [XFree86-libs-4.3.0-1]
-xf86-4.2.0-176: replaced by  [XFree86-4.3.0-1]
+xshared-4.2.0-176: replaced by  [XFree86-libs-4.3.0-1[test]]
+xf86-4.2.0-176: replaced by  [XFree86-4.3.0-1[test]]
 There are no installable providers of libXrandr.so.1 for xf86-4.2.0-176
 xshared provides libXrandr.so.1, but is scheduled to be uninstalled.
 
