@@ -30,7 +30,6 @@
 #include <zypp/solver/detail/ResolverContextPtr.h>
 #include <zypp/solver/detail/ResolverInfo.h>
 #include <zypp/solver/detail/ResItem.h>
-#include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
 
 /////////////////////////////////////////////////////////////////////////

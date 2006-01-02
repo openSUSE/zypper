@@ -28,7 +28,7 @@
 
 #include <zypp/solver/detail/QueueItemRequirePtr.h>
 #include <zypp/solver/detail/ResItem.h>
-#include <zypp/solver/detail/Dependency.h>
+#include <zypp/Capability.h>
 #include <zypp/solver/detail/Channel.h>
 
 /////////////////////////////////////////////////////////////////////////
@@ -49,7 +49,7 @@ namespace zypp
           REP_BODY(QueueItemRequire);
       
         private:
-          constDependencyPtr _dep;
+          const Capability _dep;
           constResItemPtr _requiring_resItem;
           constResItemPtr _upgraded_resItem;
           constResItemPtr _lost_resItem;
@@ -58,7 +58,7 @@ namespace zypp
       
         public:
       
-          QueueItemRequire (WorldPtr world, constDependencyPtr dep);
+          QueueItemRequire (WorldPtr world, const Capability & dep);
           virtual ~QueueItemRequire();
       
           // ---------------------------------- I/O
@@ -73,7 +73,7 @@ namespace zypp
       
           // ---------------------------------- accessors
       
-          constDependencyPtr dependency (void) const { return _dep; }
+          const Capability & dependency (void) const { return _dep; }
       
           void setRemoveOnly (void) { _remove_only = true; }
           void setUpgradedResItem (constResItemPtr upgraded_resItem) { _upgraded_resItem = upgraded_resItem; }

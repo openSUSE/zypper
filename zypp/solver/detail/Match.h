@@ -62,7 +62,7 @@ namespace zypp
         private:
           std::string _channel_id;
       
-          constDependencyPtr _dependency;
+          Capability _dependency;
       
           std::string _name_glob;
       //    GPatternSpec *_pattern_spec;
@@ -94,8 +94,8 @@ namespace zypp
           void setChannel (constChannelPtr channel) { _channel_id = channel->id(); }
           void setChannelId (const std::string & channel_id) { _channel_id = channel_id; }
       
-          constDependencyPtr dependency () const { return _dependency; }
-          void setDependency (constDependencyPtr dependency) { _dependency = dependency; }
+          const Capability & dependency () const { return _dependency; }
+          void setDependency (const Capability & dependency) { _dependency = dependency; }
       
           const std::string & glob () const { return _name_glob; }
           void setGlob (const std::string & glob_str) { _name_glob = glob_str; }

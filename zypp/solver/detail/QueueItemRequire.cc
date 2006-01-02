@@ -31,6 +31,7 @@
 #include <zypp/solver/detail/ResolverInfoMisc.h>
 #include <zypp/solver/detail/ResolverInfoNeededBy.h>
 #include <zypp/solver/detail/World.h>
+#include <zypp/CapSet.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -59,7 +60,7 @@ namespace zypp
       QueueItemRequire::toString ( const QueueItemRequire & item)
       {
           string ret = "[Require: ";
-          ret += item._dep->asString();
+          ret += item._dep.asString();
           if (item._requiring_resItem != NULL) {
       	ret += ", Required by ";
       	ret += item._requiring_resItem->asString();
@@ -96,7 +97,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      QueueItemRequire::QueueItemRequire (WorldPtr world, constDependencyPtr dep)
+      QueueItemRequire::QueueItemRequire (WorldPtr world, const Capability & dep)
           : QueueItem (QUEUE_ITEM_TYPE_REQUIRE, world)
           , _dep (dep)
           , _requiring_resItem (NULL)
@@ -128,7 +129,7 @@ namespace zypp
       
       typedef struct {
           constResItemPtr resItem;
-          constSpecPtr dep;
+          const Capability *dep;
           ResolverContextPtr context;
           WorldPtr world;
           CResItemList providers;
@@ -137,19 +138,19 @@ namespace zypp
       
       
       static bool
-      require_process_cb (constResItemPtr resItem, constSpecPtr spec, void *data)
+      require_process_cb (constResItemPtr resItem, const Capability & cap, void *data)
       {
           RequireProcessInfo *info = (RequireProcessInfo *)data;
           ResItemStatus status;
       
           status = info->context->getStatus (resItem);
-      //fprintf (stderr, "require_process_cb(res: %s, spec %s, status %s)\n", resItem->asString().c_str(), spec->asString().c_str(), ResolverContext::toString(status).c_str());
+      //fprintf (stderr, "require_process_cb(res: %s, spec %s, status %s)\n", resItem->asString().c_str(), cap.asString().c_str(), ResolverContext::toString(status).c_str());
       //fprintf (stderr, "require_process_cb(info->dep: %s)\n", info->dep ? info->dep->asString().c_str() : "(null)");
       //fprintf (stderr, "require_process_cb(resItemIsPossible -> %d)\n", info->context->resItemIsPossible (resItem));
           /* info->dep is set for resItem set childern only. If it is set
              allow only exactly required version */
           if (info->dep != NULL
-      	&& !info->dep->equals(spec)) {
+              && *(info->dep) != cap) {
       	return true;
           }
       
@@ -168,7 +169,7 @@ namespace zypp
       
       
       static bool
-      no_installable_providers_info_cb (constResItemPtr resItem, constSpecPtr spec, void *data)
+      no_installable_providers_info_cb (constResItemPtr resItem, const Capability & cap, void *data)
       {
           RequireProcessInfo *info = (RequireProcessInfo *)data;
           ResItemStatus status;
@@ -177,13 +178,13 @@ namespace zypp
           status = info->context->getStatus (resItem);
       
           if (resItem_status_is_to_be_uninstalled (status)) {
-      	msg_str = resItem->name() + " provides " + spec->asString() + ", but is scheduled to be uninstalled.";
+      	msg_str = resItem->name() + " provides " + cap.asString() + ", but is scheduled to be uninstalled.";
           } else if (info->context->isParallelInstall (resItem)) {
-      	msg_str = resItem->name() + " provides " + spec->asString() + ", but another version of that resItem is already installed.";
+      	msg_str = resItem->name() + " provides " + cap.asString() + ", but another version of that resItem is already installed.";
           } else if (! info->context->resItemIsPossible (resItem)) {
-      	msg_str = resItem->name() + " provides " + spec->asString() + ", but it is uninstallable.  Try installing it on its own for more details.";
+      	msg_str = resItem->name() + " provides " + cap.asString() + ", but it is uninstallable.  Try installing it on its own for more details.";
           } else if (info->world->resItemIsLocked (resItem)) {
-      	msg_str = resItem->name() + " provides " + spec->asString() + ", but it is locked.";
+      	msg_str = resItem->name() + " provides " + cap.asString() + ", but it is locked.";
           }
       
           if (!msg_str.empty()) {
@@ -245,7 +246,7 @@ namespace zypp
           RequireProcessInfo info;
       
           info.resItem = _requiring_resItem;
-          info.dep = _is_child ? _dep : NULL;
+          info.dep = _is_child ? &_dep : NULL;
           info.context = context;
           info.world = world();
           info.uniq = new UniqTable();		//FIXME: op: g_hash_table_new (rc_resItem_spec_hash, rc_resItem_spec_equal);
@@ -274,7 +275,7 @@ namespace zypp
       	if (_upgraded_resItem == NULL) {
       	    ResolverInfoPtr err_info;
       
-      	    msg = string ("There are no ") + (_remove_only ? "alternative installed" : "installable") + " providers of " + _dep->asString();
+      	    msg = string ("There are no ") + (_remove_only ? "alternative installed" : "installable") + " providers of " + _dep.asString();
       	    if (_requiring_resItem != NULL) {
       		msg += " for ";
       		msg += _requiring_resItem->asString();
@@ -304,7 +305,7 @@ namespace zypp
       		req_str = _requiring_resItem->asString();
       		up_str  = _upgraded_resItem->asString();
       
-      		label = string ("for requiring ") + _dep->asString() + " for " + req_str + " when upgrading " + up_str;
+      		label = string ("for requiring ") + _dep.asString() + " for " + req_str + " when upgrading " + up_str;
       		branch_item->setLabel (label);
       //fprintf (stderr, "Branching: %s\n", label.c_str());
       		for (CResItemList::const_iterator iter = upgrade_list.begin(); iter != upgrade_list.end(); iter++) {
@@ -325,10 +326,10 @@ namespace zypp
       			//   FIXME: should we also look at conflicts here?
       
       			if (explore_uninstall_branch) {
-      			    CDependencyList requires = upgrade_resItem->requires();
-      			    CDependencyList::const_iterator iter = requires.begin();
+      			    CapSet requires = upgrade_resItem->requires();
+      			    CapSet::const_iterator iter = requires.begin();
       			    for (; iter != requires.end(); iter++) {
-      				constDependencyPtr req = *iter;
+      				const Capability req = *iter;
       				if (! context->requirementIsMet (req, false)) {
       					break;
       				}
@@ -404,7 +405,7 @@ namespace zypp
       	    new_items.push_front (branch_item);
       	} else {
       	    // We can't do anything to resolve the missing requirement, so we fail.
-      	    string msg = string ("Can't satisfy requirement '") + _dep->asString() + "'";
+      	    string msg = string ("Can't satisfy requirement '") + _dep.asString() + "'";
       	    
       	    context->addErrorString (NULL, msg);
       	}
@@ -472,15 +473,15 @@ namespace zypp
       {
           int cmp = this->compare (item);		// assures equal type
           if (cmp != 0)
-      	return cmp;
+              return cmp;
       
           constQueueItemRequirePtr require = item;
-      
-          cmp = Spec::compare ((constSpecPtr) _dep, ((constSpecPtr)(require->dependency())));
-          if (cmp)
-      	return cmp;
-      
-          return _dep->relation() == require->dependency()->relation();
+
+          if (_dep != require->dependency())
+          {
+              cmp = -1;
+          }
+          return cmp;
       }
         
       ///////////////////////////////////////////////////////////////////

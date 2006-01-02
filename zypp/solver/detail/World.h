@@ -35,6 +35,7 @@
 #include <zypp/solver/detail/Packman.h>
 #include <zypp/solver/detail/Package.h>
 #include <zypp/solver/detail/PackageUpdate.h>
+#include <zypp/Capability.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -85,8 +86,7 @@ namespace zypp
       typedef void		(*WorldClearLockFn) (constWorldPtr world);
       
       typedef int		(*WorldForeachResItemFn) (constWorldPtr world, const char *name, constChannelPtr channel, ResItemFn callback, void *user_data);
-      typedef int		(*WorldForeachPackageSpecFn) (constWorldPtr world, constDependencyPtr dep, ResItemAndSpecFn callback, void *user_data);
-      typedef int		(*WorldForeachPackageDepFn) (constWorldPtr world, constDependencyPtr dep, ResItemAndDepFn callback, void *user_data);
+      typedef int		(*WorldForeachPackageDepFn) (constWorldPtr world, const Capability & dep, ResItemAndDepFn callback, void *user_data);
       
       typedef void		(*WorldSerializeFn) (constWorldPtr world, constXmlNodePtr root);
       typedef void		(*WorldUnserializeFn) (constWorldPtr world, constXmlNodePtr node);
@@ -210,7 +210,7 @@ namespace zypp
       
           virtual constResItemPtr findInstalledResItem (constResItemPtr resItem) = 0;
           virtual constResItemPtr findResItem (constChannelPtr channel, const char *name) const = 0;
-          virtual constResItemPtr findResItemWithConstraint (constChannelPtr channel, const char *name, constDependencyPtr constraint, bool is_and) const = 0;
+          virtual constResItemPtr findResItemWithConstraint (constChannelPtr channel, const char *name, const Capability &  constraint, bool is_and) const = 0;
           virtual ChannelPtr guessResItemChannel (constResItemPtr resItem) const = 0;
       
           // Iterate across resItems
@@ -221,9 +221,9 @@ namespace zypp
       
           // Iterate across provides or requirement
       
-          virtual int foreachProvidingResItem (constDependencyPtr dep, ResItemAndSpecFn fn, void *user_data) = 0;
-          virtual int foreachRequiringResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *user_data) = 0;
-          virtual int foreachConflictingResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *user_data) = 0;
+          virtual int foreachProvidingResItem (const Capability & dep, ResItemAndDepFn fn, void *user_data) = 0;
+          virtual int foreachRequiringResItem (const Capability & dep, ResItemAndDepFn fn, void *user_data) = 0;
+          virtual int foreachConflictingResItem (const Capability & dep, ResItemAndDepFn fn, void *user_data) = 0;
       
           // upgrades
       
@@ -234,7 +234,7 @@ namespace zypp
       
           // provider
       
-          bool getSingleProvider (constDependencyPtr dep, constChannelPtr channel, constResItemPtr *resItem);
+          bool getSingleProvider (const Capability & dep, constChannelPtr channel, constResItemPtr *resItem);
       
           // Transacting
       

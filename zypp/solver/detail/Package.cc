@@ -24,9 +24,12 @@
 #include <zypp/Package.h>
 #include <zypp/detail/PackageImpl.h>
 #include <zypp/solver/detail/PackageUpdate.h>
-#include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/World.h>
 #include <zypp/solver/detail/XmlNode.h>
+
+#include <zypp/CapFactory.h>
+#include <zypp/CapSet.h>
+
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -43,17 +46,53 @@ namespace zypp
       IMPL_DERIVED_POINTER(Package,ResItem);
       
       struct DepTable {
-          CDependencyList requires;
-          CDependencyList provides;
-          CDependencyList conflicts;
-          CDependencyList obsoletes;
-          CDependencyList children;
-          CDependencyList suggests;
-          CDependencyList recommends;
+          CapSet requires;
+          CapSet provides;
+          CapSet conflicts;
+          CapSet obsoletes;
+          CapSet children;
+          CapSet suggests;
+          CapSet recommends;
       };
       
       //---------------------------------------------------------------------------
+
+      static Capability 
+      parseXmlDep (constXmlNodePtr node) {
+          const char *tmp;
+          string epoch,version,release,name = "";
+          Arch arch = Arch_noarch;
+          Rel relation;
+          CapFactory  factory;                          
       
+          if (!node->equals("dep")) {
+              fprintf (stderr, "parseXmlDep bad node\n");
+              abort();
+          }
+      
+          name = node->getProp ("name");
+          tmp = node->getProp ("op", NULL);
+          if (tmp) {
+              relation = Rel(tmp);
+              epoch = node->getIntValueDefault ("epoch", Edition::noepoch);
+              version = node->getProp ("version");
+              release = node->getProp ("release");
+          }
+      
+          tmp = node->getProp ("arch", NULL);
+          if (tmp) {
+              arch = Arch(node->getProp ("arch"));
+          } else {
+              arch =  Arch();
+          }
+          
+          return  factory.parse ( ResTraits<zypp::Package>::kind,
+                                  name,
+                                  relation,
+                                  Edition (version, release, epoch),
+                                  arch);
+      }
+        
       static void
       extract_dep_info (constXmlNodePtr iter, struct DepTable & dep_table)
       {
@@ -68,7 +107,7 @@ namespace zypp
       		continue;
       	    }
       
-      	    dep_table.requires.push_back(new Dependency (iter2));
+      	    dep_table.requires.insert(parseXmlDep (iter2));
       	    iter2 = iter2->next();
       	}
       
@@ -83,7 +122,7 @@ namespace zypp
       		continue;
       	    }
       
-      	    dep_table.recommends.push_back (new Dependency (iter2));
+      	    dep_table.recommends.insert (parseXmlDep (iter2));
       	    iter2 = iter2->next();
       	}
       
@@ -98,7 +137,7 @@ namespace zypp
       		continue;
       	    }
       
-      	    dep_table.suggests.push_back (new Dependency (iter2));
+      	    dep_table.suggests.insert (parseXmlDep (iter2));
       	    iter2 = iter2->next();
       	}
       
@@ -122,7 +161,7 @@ namespace zypp
       		continue;
       	    }
       
-      	    DependencyPtr dep = new Dependency (iter2);
+      	    Capability dep = parseXmlDep(iter2);
       
       	    if (! all_are_obs) {
       		this_is_obs = false;
@@ -134,9 +173,9 @@ namespace zypp
       	    }
       		
       	    if (all_are_obs || this_is_obs) {
-      		dep_table.obsoletes.push_back (dep);
+      		dep_table.obsoletes.insert (dep);
       	    } else {
-      		dep_table.conflicts.push_back (dep);
+      		dep_table.conflicts.insert (dep);
       	    }
       		
       	    iter2 = iter2->next();
@@ -153,7 +192,7 @@ namespace zypp
       		continue;
       	    }
       
-      	    dep_table.obsoletes.push_back (new Dependency (iter2));
+      	    dep_table.obsoletes.insert (parseXmlDep (iter2));
       	    iter2 = iter2->next();
       	}
       
@@ -168,7 +207,7 @@ namespace zypp
       		continue;
       	    }
       
-      	    dep_table.provides.push_back (new Dependency (iter2));
+      	    dep_table.provides.insert (parseXmlDep (iter2));
       	    iter2 = iter2->next();
       	}
       
@@ -183,7 +222,7 @@ namespace zypp
       		continue;
       	    }
       
-      	    dep_table.children.push_back (new Dependency (iter2));
+      	    dep_table.children.insert (parseXmlDep (iter2));
       	    iter2 = iter2->next();
       	}
           }
@@ -378,38 +417,45 @@ namespace zypp
               // treat them as normal requires
               //
 #warning Children are handled as requires
-              CDependencyList::const_iterator iter;
+              CapSet::const_iterator iter;
               for (iter = dep_table.children.begin(); iter != dep_table.children.end(); iter++)
               {
-                  dep_table.requires.push_back (*iter);
+                  dep_table.requires.insert (*iter);
               }
           }
       
       
           // check if we're already listed in the provides
           // if not, provide ourself
-      
-          CDependencyList::const_iterator piter;
+          CapFactory  factory;                                    
+          Capability selfdep = factory.parse ( ResTraits<zypp::Package>::kind,
+                                             name,
+                                             Rel::EQ,
+                                             Edition( version, release, zypp::str::numstring(epoch)),
+                                             arch);      
+
+          
+          CapSet::const_iterator piter;
           for (piter = dep_table.provides.begin(); piter != dep_table.provides.end(); piter++) {
-              if ((*piter)->relation() == Rel::EQ
-                  && ((*piter)->name() == name))
+              if ((*piter) == selfdep)
               {
                   break;
               }
           }
           if (piter == dep_table.provides.end()) {			// no self provide found, construct one
-              constDependencyPtr selfdep = new Dependency (name, Rel::EQ, ResTraits<zypp::Package>::kind, this->channel(), Edition( version, release, zypp::str::numstring(epoch) ));
-              if (getenv ("RC_SPEW")) fprintf (stderr, "Adding self-provide [%s]\n", selfdep->asString().c_str());
-              dep_table.provides.push_front (selfdep);
+              if (getenv ("RC_SPEW")) fprintf (stderr, "Adding self-provide [%s]\n", selfdep.asString().c_str());
+              dep_table.provides.insert (selfdep);
           }
       
-          setRequires (dep_table.requires);
-          setProvides (dep_table.provides);
-          setConflicts (dep_table.conflicts);
-          setObsoletes (dep_table.obsoletes);
-          setSuggests (dep_table.suggests);
-          setRecommends (dep_table.recommends);
-      
+          Dependencies deps;
+          deps.setRequires          (dep_table.requires);
+          deps.setProvides          (dep_table.provides);
+          deps.setConflicts         (dep_table.conflicts);
+          deps.setObsoletes         (dep_table.obsoletes);
+          deps.setSuggests          (dep_table.suggests);
+          deps.setRecommends        (dep_table.recommends);
+          setDependencies (deps);
+          
           if (!_history.empty()) {
       
               /* If possible, we grab the version info from the most
@@ -421,13 +467,15 @@ namespace zypp
               version = update->package()->version();
               release = update->package()->release();
       
-          } else {
+          }
+#if 0 //Is this really needed ?          
+          else {
       	
               /* Otherwise, try to find where the package provides itself,
                  and use that version info. */
       	
               if (!provides().empty())
-                  for (CDependencyList::const_iterator iter = provides().begin(); iter != provides().end(); iter++) {	    
+                  for (CapSet::const_iterator iter = provides().begin(); iter != provides().end(); iter++) {	    
                       if ((*iter)->relation() == Rel::EQ &&
                           ((*iter)->name() == name))
                       {
@@ -438,6 +486,7 @@ namespace zypp
                       }
                   }
           }
+#endif
           
           Edition     _edition( version, release, zypp::str::numstring(epoch) );
           shared_ptr<zypp::detail::PackageImpl> pkgImpl;

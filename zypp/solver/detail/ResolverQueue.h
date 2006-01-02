@@ -31,7 +31,7 @@
 #include <zypp/solver/detail/ResolverContextPtr.h>
 #include <zypp/solver/detail/QueueItem.h>
 #include <zypp/solver/detail/ResItemPtr.h>
-#include <zypp/solver/detail/DependencyPtr.h>
+#include <zypp/Capability.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -80,8 +80,8 @@ namespace zypp
           void addResItemToInstall (constResItemPtr resItem);
           void addResItemToRemove (constResItemPtr resItem, bool remove_only_mode);
           void addResItemToVerify (constResItemPtr resItem);
-          void addExtraDependency (constDependencyPtr dep);
-          void addExtraConflict (constDependencyPtr dep);
+          void addExtraDependency (const Capability & dep);
+          void addExtraConflict (const Capability & dep);
           void addItem (QueueItemPtr item);
       
           bool isEmpty () const { return _items.empty(); }

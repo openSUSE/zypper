@@ -22,7 +22,6 @@
 #define _LIBzypp_H
 
 #include <zypp/solver/detail/Channel.h>
-#include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Match.h>
 #include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Spec.h>

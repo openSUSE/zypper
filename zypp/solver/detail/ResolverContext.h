@@ -31,6 +31,7 @@
 #include <zypp/solver/detail/ResolverInfo.h>
 #include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Channel.h>
+#include <zypp/Capability.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -166,8 +167,8 @@ namespace zypp
           void spew (void);
           void spewInfo (void);
       
-          bool requirementIsMet (constDependencyPtr dep, bool is_child);
-          bool requirementIsPossible (constDependencyPtr dep);
+          bool requirementIsMet (const Capability & dep, bool is_child);
+          bool requirementIsPossible (const Capability & dep);
           bool resItemIsPossible (constResItemPtr resItem);
           bool isParallelInstall (constResItemPtr resItem);
       

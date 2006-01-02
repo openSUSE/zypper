@@ -29,8 +29,8 @@
 #include <zypp/solver/detail/ResolverPtr.h>
 #include <zypp/solver/detail/ResolverQueue.h>
 #include <zypp/solver/detail/ResItem.h>
-#include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
+#include <zypp/CapSet.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -62,8 +62,8 @@ namespace zypp
           CResItemList _resItems_to_remove;
           CResItemList _resItems_to_verify;
       
-          CDependencyList _extra_deps;
-          CDependencyList _extra_conflicts;
+          CapSet _extra_deps;
+          CapSet _extra_conflicts;
       
           ResolverQueueList _pending_queues;
           ResolverQueueList _pruned_queues;
@@ -121,8 +121,8 @@ namespace zypp
       
           void addResItemToVerify (constResItemPtr resItem);
       
-          void addExtraDependency (constDependencyPtr dependency);
-          void addExtraConflict (constDependencyPtr dependency);
+          void addExtraDependency (const CapSet & dependency);
+          void addExtraConflict (const CapSet & dependency);
       
           void verifySystem (void);
           void resolveDependencies (void);

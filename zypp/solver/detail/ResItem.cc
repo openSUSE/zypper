@@ -55,7 +55,19 @@ namespace zypp
       IMPL_BASE_POINTER(ResItem);
       
       //---------------------------------------------------------------------------
-      
+
+      string
+      capSetToString (const CapSet & dl)
+      {
+          string res("[");
+          for (CapSet::const_iterator iter = dl.begin(); iter != dl.end(); iter++) {
+              if (iter != dl.begin()) res += ", ";
+              res += (*iter).asString();
+          }
+          return res + "]";
+      }
+
+        
       string
       ResItem::asString ( bool full ) const
       {
@@ -108,33 +120,33 @@ namespace zypp
       
           if (!resItem.requires().empty()) {
       	res += ", Requires: ";
-      	res += Dependency::toString(resItem.requires());
+      	res += capSetToString(resItem.requires());
           }
       
           if (!resItem.provides().empty()) {
       	res += ", Provides: ";
-      	res += Dependency::toString(resItem.provides());
+      	res += capSetToString(resItem.provides());
           }
           if (!resItem.conflicts().empty()) {
       	res += ", Conflicts: ";
-      	res += Dependency::toString(resItem.conflicts());
+      	res += capSetToString(resItem.conflicts());
           }
           if (!resItem.obsoletes().empty()) {
       	res += ", Obsoletes: ";
-      	res += Dependency::toString(resItem.obsoletes());
+      	res += capSetToString(resItem.obsoletes());
           }
       
           if (!resItem.suggests().empty()) {
       	res += ", Suggests: ";
-      	res += Dependency::toString(resItem.suggests());
+      	res += capSetToString(resItem.suggests());
           }
           if (!resItem.recommends().empty()) {
       	res += ", Recommends: ";
-      	res += Dependency::toString(resItem.recommends());
+      	res += capSetToString(resItem.recommends());
           }
           if (!resItem.freshens().empty()) {
       	res += ", Freshens: ";
-      	res += Dependency::toString(resItem.freshens());
+      	res += capSetToString(resItem.freshens());
           }
           return res;
       }

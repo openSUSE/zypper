@@ -25,6 +25,7 @@
 #include <zypp/solver/detail/ResolverContext.h>
 #include <zypp/solver/detail/ResolverInfoMissingReq.h>
 #include <zypp/solver/detail/World.h>
+#include <zypp/CapSet.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -133,7 +134,7 @@ namespace zypp
       
       
       static bool
-      unlink_check_cb (constResItemPtr resItem, constDependencyPtr dep, void *data)
+      unlink_check_cb (constResItemPtr resItem, const Capability & dep, void *data)
       {
           UnlinkCheckInfo *info = (UnlinkCheckInfo *)data;
       
@@ -162,7 +163,7 @@ namespace zypp
       
       
       static bool
-      uninstall_process_cb (constResItemPtr resItem, constDependencyPtr dep, void *data)
+      uninstall_process_cb (constResItemPtr resItem, const Capability & dep, void *data)
       {
           UninstallProcessInfo *info = (UninstallProcessInfo *)data;
       
@@ -226,8 +227,8 @@ namespace zypp
       	    info.context = context;
       	    info.cancel_unlink = false;
       
-      	    CDependencyList provides = _resItem->provides();
-      	    for (CDependencyList::const_iterator iter = provides.begin(); iter != provides.end() && ! info.cancel_unlink; iter++) {
+      	    CapSet provides = _resItem->provides();
+      	    for (Capset::const_iterator iter = provides.begin(); iter != provides.end() && ! info.cancel_unlink; iter++) {
       		world()->foreachRequiringResItem (*iter, unlink_check_cb, &info);
       	    }
       
@@ -266,8 +267,8 @@ namespace zypp
       	    context->addInfo (info);
       	}
       
-      	CDependencyList provides = _resItem->provides();
-      	for (CDependencyList::const_iterator iter = provides.begin(); iter != provides.end(); iter++) {
+      	CapSet provides = _resItem->provides();
+      	for (CapSet::const_iterator iter = provides.begin(); iter != provides.end(); iter++) {
       	    UninstallProcessInfo info;
       
       	    info.world = world();

@@ -26,6 +26,7 @@
 #include <zypp/solver/detail/ResolverContext.h>
 #include <zypp/solver/detail/ResolverInfoMisc.h>
 #include <zypp/solver/detail/World.h>
+#include <zypp/CapSet.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -960,7 +961,7 @@ namespace zypp
       
       
       bool
-      ResolverContext::requirementIsMet (constDependencyPtr dependency, bool is_child)
+      ResolverContext::requirementIsMet (const Capability & dependency, bool is_child)
       {
           RequirementMetInfo info;
       
@@ -993,7 +994,7 @@ namespace zypp
       
       
       bool
-      ResolverContext::requirementIsPossible (constDependencyPtr dep)
+      ResolverContext::requirementIsPossible (const Capability & dep)
       {
           RequirementMetInfo info;
       
@@ -1009,8 +1010,8 @@ namespace zypp
       bool
       ResolverContext::resItemIsPossible (constResItemPtr resItem)
       {
-          CDependencyList requires = resItem->requires();
-          for (CDependencyList::iterator iter = requires.begin(); iter !=  requires.end(); iter++) {
+          CapSet requires = resItem->requires();
+          for (CapSet::iterator iter = requires.begin(); iter !=  requires.end(); iter++) {
       	    if (! requirementIsPossible (*iter)) {
       		return false;
       	    }

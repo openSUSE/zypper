@@ -28,8 +28,8 @@
 
 #include <zypp/solver/detail/QueueItemConflictPtr.h>
 #include <zypp/solver/detail/ResItem.h>
-#include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
+#include <zypp/Capability.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -49,14 +49,14 @@ namespace zypp
           REP_BODY(QueueItemConflict);
       
         private:
-          constDependencyPtr _dep;
+          const Capability  _dep;
           constResItemPtr _conflicting_resItem;
       
           bool _actually_an_obsolete;
       
         public:
       
-          QueueItemConflict (WorldPtr world, constDependencyPtr dep, constResItemPtr resItem);
+          QueueItemConflict (WorldPtr world, const Capability & dep, constResItemPtr resItem);
           virtual ~QueueItemConflict();
       
           // ---------------------------------- I/O
@@ -71,7 +71,7 @@ namespace zypp
       
           // ---------------------------------- accessors
       
-          constDependencyPtr dependency (void) const { return _dep; }
+          const Capability & dependency (void) const { return _dep; }
           bool actuallyAnObsolete (void) const { return _actually_an_obsolete; }
           void setActuallyAnObsolete (void) { _actually_an_obsolete = true; }
       

@@ -29,6 +29,7 @@
 #include <zypp/solver/detail/QueueItemRequire.h>
 #include <zypp/solver/detail/QueueItemUninstall.h>
 #include <zypp/solver/detail/ResolverContext.h>
+#include <zypp/CapSet.h>
 
 #include <y2util/stringutil.h>
 
@@ -143,15 +144,15 @@ namespace zypp
           
           world = _context->world ();
       
-          CDependencyList requires = resItem->requires();
-          for (CDependencyList::const_iterator iter = requires.begin(); iter != requires.end(); iter++) {
+          CapSet requires = resItem->requires();
+          for (CapSet::const_iterator iter = requires.begin(); iter != requires.end(); iter++) {
       	QueueItemRequirePtr item = new QueueItemRequire (world, *iter);
       	item->addResItem (resItem);
       	addItem (item);
           }
       
-          CDependencyList conflicts = resItem->conflicts();
-          for (CDependencyList::const_iterator iter = conflicts.begin(); iter != conflicts.end(); iter++) {
+          CapSet conflicts = resItem->conflicts();
+          for (CapSet::const_iterator iter = conflicts.begin(); iter != conflicts.end(); iter++) {
       	QueueItemConflictPtr item = new QueueItemConflict (world, *iter, resItem);
       	addItem (item);
           }
@@ -159,7 +160,7 @@ namespace zypp
       
       
       void
-      ResolverQueue::addExtraDependency (constDependencyPtr dep)
+      ResolverQueue::addExtraDependency (const Capability & dep)
       {
           QueueItemRequirePtr item = new QueueItemRequire (_context->world(), dep);
           addItem (item);
@@ -167,7 +168,7 @@ namespace zypp
       
       
       void
-      ResolverQueue::addExtraConflict (constDependencyPtr dep)
+      ResolverQueue::addExtraConflict (const Capability & dep)
       {
           QueueItemConflictPtr item = new QueueItemConflict (_context->world(), dep, NULL);
           addItem (item);

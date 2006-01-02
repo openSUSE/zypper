@@ -29,7 +29,7 @@
 
 #include <zypp/solver/detail/Channel.h>
 #include <zypp/solver/detail/Package.h>
-#include <zypp/solver/detail/Dependency.h>
+#include <zypp/CapSet.h>
 #include <zypp/solver/detail/XmlNode.h>
 
 /////////////////////////////////////////////////////////////////////////
@@ -83,18 +83,18 @@ namespace zypp
           bool _current_package_packageSet;
           PackageUpdateList _current_package_packageUpdateList;
           
-          CDependencyList _current_requires;
-          CDependencyList _current_provides;
-          CDependencyList _current_conflicts;
-          CDependencyList _current_children;
-          CDependencyList _current_recommends;
-          CDependencyList _current_suggests;
-          CDependencyList _current_obsoletes;
+          CapSet _current_requires;
+          CapSet _current_provides;
+          CapSet _current_conflicts;
+          CapSet _current_children;
+          CapSet _current_recommends;
+          CapSet _current_suggests;
+          CapSet _current_obsoletes;
           PackageUpdatePtr _current_update;
       
           // these point to one of the above lists during dependency parsing
-          CDependencyList *_toplevel_dep_list;
-          CDependencyList *_current_dep_list;
+          CapSet *_toplevel_dep_list;
+          CapSet *_current_dep_list;
       
           char *_text_buffer;
           size_t _text_buffer_size;

@@ -28,8 +28,8 @@
 
 #include <zypp/solver/detail/QueueItemInstallPtr.h>
 #include <zypp/solver/detail/ResItem.h>
-#include <zypp/solver/detail/Dependency.h>
 #include <zypp/solver/detail/Channel.h>
+#include <zypp/CapSet.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -51,7 +51,7 @@ namespace zypp
         private:
           constResItemPtr _resItem;
           constResItemPtr _upgrades;
-          CDependencyList _deps_satisfied_by_this_install;
+          CapSet _deps_satisfied_by_this_install;
           CResItemList _needed_by;
           int _channel_priority;
           int _other_penalty;
@@ -97,8 +97,8 @@ namespace zypp
           virtual bool isRedundant (ResolverContextPtr context) const { return false; }
           virtual bool isSatisfied (ResolverContextPtr context) const;
       
-          void addDependency (constDependencyPtr dep);
-          void addNeededBy (constResItemPtr resItem);
+          void addDependency (const Capability & dep);
+          void addNeededBy (const constResItemPtr resItem);
       
       };
       

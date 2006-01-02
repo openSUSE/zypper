@@ -28,10 +28,11 @@
 
 #include <zypp/solver/detail/ResItemPtr.h>
 #include <zypp/solver/detail/StoreWorldPtr.h>
-#include <zypp/solver/detail/Dependency.h>
+#include <zypp/CapSet.h>
 #include <zypp/solver/detail/Channel.h>
 #include <zypp/ResObject.h>
 #include <zypp/Edition.h>
+#include <zypp/Dependencies.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -49,8 +50,7 @@ namespace zypp
       typedef bool (*ResItemFn) (ResItemPtr r, void *data);
       typedef bool (*CResItemFn) (constResItemPtr r, void *data);
       typedef bool (*ResItemPairFn) (constResItemPtr r1, constResItemPtr r2, void *data);
-      typedef bool (*ResItemAndSpecFn) (constResItemPtr r, constSpecPtr spec, void *data);
-      typedef bool (*ResItemAndDepFn) (constResItemPtr r, constDependencyPtr dep, void *data);
+      typedef bool (*ResItemAndDepFn) (constResItemPtr r, const Capability & dep, void *data);
       
       ///////////////////////////////////////////////////////////////////
       //
@@ -71,15 +71,6 @@ namespace zypp
       
           size_t _file_size;
           size_t _installed_size;
-      
-          CDependencyList _requires;
-          CDependencyList _provides;
-          CDependencyList _conflicts;
-          CDependencyList _obsoletes;
-      
-          CDependencyList _suggests;
-          CDependencyList _recommends;
-          CDependencyList _freshens;
       
         protected:
       
@@ -130,26 +121,16 @@ namespace zypp
           size_t installedSize() const { return _installed_size; }
           void setInstalledSize (size_t installed_size) { _installed_size = installed_size; }
       
-          const CDependencyList & requires() const { return _requires; }
-          void setRequires (const CDependencyList & requires) { _requires = requires; }
-      
-          const CDependencyList & provides() const { return _provides; }
-          void setProvides (const CDependencyList & provides) { _provides = provides; }
-      
-          const CDependencyList & conflicts() const { return _conflicts; }
-          void setConflicts (const CDependencyList & conflicts) { _conflicts = conflicts; }
-      
-          const CDependencyList & obsoletes() const { return _obsoletes; }
-          void setObsoletes (const CDependencyList & obsoletes) { _obsoletes = obsoletes; }
-      
-          const CDependencyList & suggests() const { return _suggests; }
-          void setSuggests (const CDependencyList & suggests) { _suggests = suggests; }
-      
-          const CDependencyList & recommends() const { return _recommends; }
-          void setRecommends (const CDependencyList & recommends) { _recommends = recommends; }
-      
-          const CDependencyList & freshens() const { return _freshens; }
-          void setFreshens (const CDependencyList & freshens) { _freshens = freshens; }
+          const CapSet & requires() const { return _resObject->deps().requires(); }
+          const CapSet & provides() const { return _resObject->deps().provides(); }
+          const CapSet & conflicts() const { return _resObject->deps().conflicts(); }
+          const CapSet & obsoletes() const { return _resObject->deps().obsoletes(); }
+          const CapSet & suggests() const { return _resObject->deps().suggests(); }
+          const CapSet & recommends() const { return _resObject->deps().recommends(); }
+          const CapSet & freshens() const { return _resObject->deps().freshens(); }
+
+          void setDependencies (const Dependencies & dependencies) { _resObject->setDeps(dependencies); }
+          
 
           // Spec definitions
           

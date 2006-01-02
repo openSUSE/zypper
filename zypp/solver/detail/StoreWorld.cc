@@ -28,6 +28,7 @@
 #include <zypp/solver/detail/ResItemAndDependency.h>
 #include <zypp/solver/detail/debug.h>
 #include <zypp/Arch.h>
+#include <zypp/CapSet.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -187,34 +188,34 @@ namespace zypp
           _resItems_by_name.insert (ResItemTable::value_type (resItem->name(), resItem));
       
           /* StoreWorld all of the resItem's provides in a hash by name. */
-          for (CDependencyList::const_iterator i = resItem->provides().begin(); i != resItem->provides().end(); i++) {
+          for (CapSet::const_iterator i = resItem->provides().begin(); i != resItem->provides().end(); i++) {
       	r_and_d = new ResItemAndDependency (resItem, *i);
       
-      	_provides_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency()->name(), r_and_d));
+      	_provides_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency().name(), r_and_d));
           }
       
           /* StoreWorld all of the resItem's requires in a hash by name. */
       
-          for (CDependencyList::const_iterator i = resItem->requires().begin(); i != resItem->requires().end(); i++) {
+          for (CapSet::const_iterator i = resItem->requires().begin(); i != resItem->requires().end(); i++) {
       	r_and_d = new ResItemAndDependency (resItem, *i);
       
-      	_requires_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency()->name(), r_and_d));
+      	_requires_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency().name(), r_and_d));
           }
       
           /* "Recommends" are treated as requirements. */
       #warning Recommends are treated as requirements
       
-          for (CDependencyList::const_iterator i = resItem->recommends().begin(); i != resItem->recommends().end(); i++) {
+          for (CapSet::const_iterator i = resItem->recommends().begin(); i != resItem->recommends().end(); i++) {
       	r_and_d = new ResItemAndDependency (resItem, *i);
       
-      	_requires_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency()->name(), r_and_d));
+      	_requires_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency().name(), r_and_d));
           }
       
           /* StoreWorld all of the resItem's conflicts in a hash by name. */
       
-          for (CDependencyList::const_iterator i = resItem->conflicts().begin(); i != resItem->conflicts().end(); i++) {
+          for (CapSet::const_iterator i = resItem->conflicts().begin(); i != resItem->conflicts().end(); i++) {
       	r_and_d = new ResItemAndDependency (resItem, *i);
-      	_conflicts_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency()->name(), r_and_d));
+      	_conflicts_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency().name(), r_and_d));
           }
           
        finished:
@@ -357,7 +358,7 @@ namespace zypp
       
       
       constResItemPtr
-      StoreWorld::findResItemWithConstraint (constChannelPtr channel, const char *name, constDependencyPtr constraint, bool is_and) const
+      StoreWorld::findResItemWithConstraint (constChannelPtr channel, const char *name, const Capability & constraint, bool is_and) const
       {
       	fprintf (stderr, "StoreWorld::findResItemWithConstraint() not implemented\n");
           return 0;
@@ -479,12 +480,12 @@ namespace zypp
       typedef std::map<constResItemPtr, constResItemAndDependencyPtr> InstalledTable;
       
       int
-      StoreWorld::foreachProvidingResItem (constDependencyPtr dep, ResItemAndSpecFn fn, void *data)
+      StoreWorld::foreachProvidingResItem (const Capability & dep, ResItemAndDepFn fn, void *data)
       {
           int count = 0;
           InstalledTable installed;
       //fprintf (stderr, "StoreWorld::foreachProvidingResItem(%s)\n", dep->asString().c_str());
-          for (ResItemAndDependencyTable::const_iterator iter = _provides_by_name.lower_bound(dep->name()); iter != _provides_by_name.upper_bound(dep->name()); iter++) {
+          for (ResItemAndDependencyTable::const_iterator iter = _provides_by_name.lower_bound(dep.name()); iter != _provides_by_name.upper_bound(dep.name()); iter++) {
       	constResItemAndDependencyPtr r_and_d = iter->second;
       	constResItemPtr res = r_and_d->resItem();
       //fprintf (stderr, "StoreWorld::foreachProvidingResItem(): %s\n", res->asString(true).c_str());
@@ -493,7 +494,7 @@ namespace zypp
       	}
           }
       
-          for (ResItemAndDependencyTable::const_iterator iter = _provides_by_name.lower_bound(dep->name()); iter != _provides_by_name.upper_bound(dep->name()); iter++) {
+          for (ResItemAndDependencyTable::const_iterator iter = _provides_by_name.lower_bound(dep.name()); iter != _provides_by_name.upper_bound(dep.name()); iter++) {
       	constResItemAndDependencyPtr r_and_d = iter->second;
       
       	if (r_and_d && r_and_d->verifyRelation (dep)) {
@@ -521,13 +522,13 @@ namespace zypp
       }
       
       int
-      StoreWorld::foreachRequiringResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data)
+      StoreWorld::foreachRequiringResItem (const Capability & dep, ResItemAndDepFn fn, void *data)
       {
           int count = 0;
           InstalledTable installed;
       
       
-          for (ResItemAndDependencyTable::const_iterator iter = _requires_by_name.lower_bound(dep->name()); iter != _requires_by_name.upper_bound(dep->name()); iter++) {
+          for (ResItemAndDependencyTable::const_iterator iter = _requires_by_name.lower_bound(dep.name()); iter != _requires_by_name.upper_bound(dep.name()); iter++) {
       	constResItemAndDependencyPtr r_and_d = iter->second;
       	constResItemPtr res = r_and_d->resItem();
       	if (res != NULL && res->isInstalled ()) {
@@ -536,10 +537,10 @@ namespace zypp
       	}
           }
       
-          for (ResItemAndDependencyTable::const_iterator iter = _requires_by_name.lower_bound(dep->name()); iter != _requires_by_name.upper_bound(dep->name()); iter++) {
+          for (ResItemAndDependencyTable::const_iterator iter = _requires_by_name.lower_bound(dep.name()); iter != _requires_by_name.upper_bound(dep.name()); iter++) {
       	constResItemAndDependencyPtr r_and_d = iter->second;
       
-      	if (r_and_d && r_and_d->dependency()->verifyRelation (dep)) {
+      	if (r_and_d && r_and_d->dependency().matches (dep)) {
       
       	    /* Skip dups if one of them in installed. */
       	    if (r_and_d->resItem()->isInstalled()
@@ -563,12 +564,12 @@ namespace zypp
       
       
       int
-      StoreWorld::foreachConflictingResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data)
+      StoreWorld::foreachConflictingResItem (const Capability & dep, ResItemAndDepFn fn, void *data)
       {
           int count = 0;
           InstalledTable installed;
       //fprintf (stderr, "StoreWorld::foreachConflictingResItem (%s)\n", dep->name().c_str());
-          for (ResItemAndDependencyTable::const_iterator iter = _conflicts_by_name.lower_bound(dep->name()); iter != _conflicts_by_name.upper_bound(dep->name()); iter++) {
+          for (ResItemAndDependencyTable::const_iterator iter = _conflicts_by_name.lower_bound(dep.name()); iter != _conflicts_by_name.upper_bound(dep.name()); iter++) {
       	constResItemAndDependencyPtr r_and_d = iter->second;
       	constResItemPtr res = r_and_d->resItem();
       //fprintf (stderr, "==> %s\n", res->asString().c_str());
@@ -577,7 +578,7 @@ namespace zypp
       	}
           }
       
-          for (ResItemAndDependencyTable::const_iterator iter = _conflicts_by_name.lower_bound(dep->name()); iter != _conflicts_by_name.upper_bound(dep->name()); iter++) {
+          for (ResItemAndDependencyTable::const_iterator iter = _conflicts_by_name.lower_bound(dep.name()); iter != _conflicts_by_name.upper_bound(dep.name()); iter++) {
       	constResItemAndDependencyPtr r_and_d = iter->second;
       
       	if (r_and_d)

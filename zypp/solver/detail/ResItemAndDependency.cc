@@ -42,7 +42,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      ResItemAndDependency::ResItemAndDependency (constResItemPtr resItem, constDependencyPtr dependency)
+      ResItemAndDependency::ResItemAndDependency (constResItemPtr resItem, const Capability & dependency)
           : _resItem(resItem)
           , _dependency(dependency)
       {
@@ -63,7 +63,7 @@ namespace zypp
           string res ("{");
           res += r_and_d._resItem->asString(full);
           res += ", ";
-          res += r_and_d._dependency->asString();
+          res += r_and_d._dependency.asString();
           res += "}";
           return res;
       }
@@ -89,17 +89,21 @@ namespace zypp
       /* FIXME: rc_resItem_dep_verify_relation already checks the channel */
       
       bool
-      ResItemAndDependency::verifyRelation (constDependencyPtr dep) const
+      ResItemAndDependency::verifyRelation (const Capability & dep) const
       {
       #if PHI
           // don't check the channel, thereby honoring conflicts from installed resItems to to-be-installed resItems
-          return dep->verifyRelation (_dependency);
+          return dep.matches (_dependency);
       #else
-          if (!dep->verifyRelation (_dependency)) {
+          if (!dep.matches (_dependency)) {
       	return false;
           }
+#if 0
           if (getenv ("SPEW_DEP")) fprintf (stderr, "ResItemAndDependency::verifyRelation _resItem->channel() %s, dep->channel() %s\n", _resItem->channel()->asString().c_str(), dep->channel()->asString().c_str());
           return _resItem->channel()->equals (dep->channel());
+#else
+          return true;
+#endif
       #endif
       }
         

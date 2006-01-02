@@ -28,7 +28,7 @@
 
 #include <zypp/solver/detail/QueueItemUninstallPtr.h>
 #include <zypp/solver/detail/ResItem.h>
-#include <zypp/solver/detail/Dependency.h>
+#include <zypp/Capability.h>
 #include <zypp/solver/detail/Channel.h>
 
 /////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ namespace zypp
         private:
           constResItemPtr _resItem;
           const std::string _reason;
-          constDependencyPtr _dep_leading_to_uninstall;
+          Capability _dep_leading_to_uninstall;
           constResItemPtr _upgraded_to;
       
           bool _explicitly_requested;
@@ -77,7 +77,7 @@ namespace zypp
       
           // ---------------------------------- accessors
       
-          void setDependency (constDependencyPtr dep) { _dep_leading_to_uninstall = dep; }
+          void setDependency (const Capability & dep) { _dep_leading_to_uninstall = dep; }
           void setExplicitlyRequested (void) { _explicitly_requested = true; }
           void setRemoveOnly (void) { _remove_only = true; }
           void setUpgradedTo (constResItemPtr resItem) { _upgraded_to = resItem; }

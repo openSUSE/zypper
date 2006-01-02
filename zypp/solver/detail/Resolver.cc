@@ -144,13 +144,13 @@ namespace zypp
       }
       
       void
-      Resolver::addExtraDependency (constDependencyPtr dependency)
+      Resolver::addExtraDependency (const Capability & dependency)
       {
           _extra_deps.push_front (dependency);
       }
       
       void
-      Resolver::addExtraConflict (constDependencyPtr dependency)
+      Resolver::addExtraConflict (const Capability & dependency)
       {
           _extra_conflicts.push_front (dependency);
       }
@@ -315,11 +315,11 @@ namespace zypp
       	initial_queue->addResItemToVerify (*iter);
           }
       
-          for (CDependencyList::const_iterator iter = _extra_deps.begin(); iter != _extra_deps.end(); iter++) {
+          for (CapSet::const_iterator iter = _extra_deps.begin(); iter != _extra_deps.end(); iter++) {
       	initial_queue->addExtraDependency (*iter);
           }
       
-          for (CDependencyList::const_iterator iter = _extra_conflicts.begin(); iter != _extra_conflicts.end(); iter++) {
+          for (CapSet::const_iterator iter = _extra_conflicts.begin(); iter != _extra_conflicts.end(); iter++) {
       	initial_queue->addExtraConflict (*iter);
           }
       

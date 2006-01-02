@@ -25,6 +25,9 @@
 #include <zypp/solver/detail/World.h>
 #include <zypp/Rel.h>
 
+#include <zypp/CapFactory.h>
+#include <zypp/CapSet.h>
+
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -122,16 +125,8 @@ namespace zypp
           }
       
           // Check the dep
-          if ((_dependency == NULL) ^ (lock._dependency == NULL))
-      	return false;
-          if (_dependency && lock._dependency) {
-      	if (!( ((constSpecPtr) _dependency)->equals((constSpecPtr) lock._dependency))
-      	    || (_dependency->relation() != lock._dependency->relation())
-      	    || (_dependency->kind() != lock._dependency->kind()))
-      	{
-          	return false;
-      	}
-          }
+          if ( _dependency != lock._dependency)
+              return false;
       
           return true;
       }
@@ -144,42 +139,42 @@ namespace zypp
           constChannelPtr channel = resItem->channel ();
         
           if (channel != NULL && !_channel_id.empty()) {
-      	if (! channel->hasEqualId (_channel_id)) {
-      	    return false;
-      	}
+              if (! channel->hasEqualId (_channel_id)) {
+                  return false;
+              }
           }
       
           name = resItem->name ();
       
-      // FIXME, implement regexp
-      #if 0
+          // FIXME, implement regexp
+#if 0
           if (match->_pattern_spec
-      	&& ! g_pattern_match_string (match->pattern_spec, name)) {
-      	return false;
+              && ! g_pattern_match_string (match->pattern_spec, name)) {
+              return false;
           }
-      #endif
+#endif
       
-        /* FIXME: ResItems don't have ResItemUpdate right now */
-      /*   if (match->importance != RC_IMPORTANCE_INVALID && */
-      /* 	  !rc_resItem_is_installed (resItem)) { */
-      /* 	  RCResItemUpdate *up = rc_resItem_get_latest_update (pkg); */
-      /* 	  if (up) { */
-      /* 		  if (match->importance_gteq ? up->importance > match->importance */
-      /* 			  : up->importance < match->importance) */
-      /* 			  return FALSE; */
-      /* 	  } */
-      /*   } */
+          /* FIXME: ResItems don't have ResItemUpdate right now */
+          /*   if (match->importance != RC_IMPORTANCE_INVALID && */
+          /* 	  !rc_resItem_is_installed (resItem)) { */
+          /* 	  RCResItemUpdate *up = rc_resItem_get_latest_update (pkg); */
+          /* 	  if (up) { */
+          /* 		  if (match->importance_gteq ? up->importance > match->importance */
+          /* 			  : up->importance < match->importance) */
+          /* 			  return FALSE; */
+          /* 	  } */
+          /*   } */
+          CapFactory  factory;                      
+          Capability dependency;
+          bool check;
       
-          if (_dependency) {
-      	DependencyPtr dependency;
-      	bool check;
-      
-      	dependency = new Dependency (resItem->name(), Rel::EQ, ResTraits<zypp::Package>::kind, resItem->channel(), resItem->edition());
-      	check = _dependency->verifyRelation (dependency);
-      	return check;
-          }
-      
-          return true;
+          dependency = factory.parse ( resItem->kind(),
+                                       resItem->name(),
+                                       Rel::EQ,
+                                       resItem->edition(),
+                                       resItem->arch());
+          check = _dependency.matches (dependency);
+          return check;
       }
 
       ///////////////////////////////////////////////////////////////////

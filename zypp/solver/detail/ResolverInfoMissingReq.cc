@@ -76,7 +76,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      ResolverInfoMissingReq::ResolverInfoMissingReq (constResItemPtr resItem, constDependencyPtr missing_req)
+      ResolverInfoMissingReq::ResolverInfoMissingReq (constResItemPtr resItem, const Capability & missing_req)
           : ResolverInfo (RESOLVER_INFO_TYPE_MISSING_REQ, resItem, RESOLVER_INFO_PRIORITY_USER)
           , _missing_req (missing_req)
       {

@@ -543,7 +543,7 @@ namespace zypp
       
       
       constResItemPtr
-      MultiWorld::findResItemWithConstraint (constChannelPtr channel, const char *name, constDependencyPtr constraint, bool is_and) const
+      MultiWorld::findResItemWithConstraint (constChannelPtr channel, const char *name, const Capability & constraint, bool is_and) const
       {
           constResItemPtr resItem;
           for (SubWorldInfoList::const_iterator iter = _subworlds.begin(); iter != _subworlds.end(); iter++) {
@@ -604,7 +604,7 @@ namespace zypp
       // iterater over resItems with dependency
       
       int
-      MultiWorld::foreachProvidingResItem (constDependencyPtr dep, ResItemAndSpecFn fn, void *data)
+      MultiWorld::foreachProvidingResItem (const Capability & dep, ResItemAndDepFn fn, void *data)
       {
           int count = 0;
           for (SubWorldInfoList::const_iterator iter = _subworlds.begin(); iter != _subworlds.end(); iter++) {
@@ -618,7 +618,7 @@ namespace zypp
       }
       
       int
-      MultiWorld::foreachRequiringResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data)
+      MultiWorld::foreachRequiringResItem (const Capability & dep, ResItemAndDepFn fn, void *data)
       {
           int count = 0;
           for (SubWorldInfoList::const_iterator iter = _subworlds.begin(); iter != _subworlds.end(); iter++) {
@@ -632,7 +632,7 @@ namespace zypp
       }
       
       int
-      MultiWorld::foreachConflictingResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data)
+      MultiWorld::foreachConflictingResItem (const Capability & dep, ResItemAndDepFn fn, void *data)
       {
           int count = 0;
           for (SubWorldInfoList::const_iterator iter = _subworlds.begin(); iter != _subworlds.end(); iter++) {

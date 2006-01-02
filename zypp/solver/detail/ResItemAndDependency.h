@@ -29,7 +29,7 @@
 
 #include <zypp/solver/detail/ResItemAndDependencyPtr.h>
 #include <zypp/solver/detail/ResItem.h>
-#include <zypp/solver/detail/Dependency.h>
+#include <zypp/Capability.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -57,11 +57,11 @@ typedef std::multimap<const std::string, constResItemPtr> ResItemTable;
       
         private:
           constResItemPtr _resItem;
-          constDependencyPtr _dependency;
+          const Capability _dependency;
       
         public:
       
-          ResItemAndDependency (constResItemPtr resItem, constDependencyPtr dependency);
+          ResItemAndDependency (constResItemPtr resItem, const Capability & dependency);
           ~ResItemAndDependency () {}
       
           // ---------------------------------- I/O
@@ -77,11 +77,11 @@ typedef std::multimap<const std::string, constResItemPtr> ResItemTable;
           // ---------------------------------- accessors
       
           constResItemPtr resItem() const { return _resItem; }
-          constDependencyPtr dependency() const { return _dependency; }
+          const Capability & dependency() const { return _dependency; }
       
           // ---------------------------------- methods
       
-          bool verifyRelation (constDependencyPtr dep) const;
+          bool verifyRelation (const Capability & dep) const;
       };
         
       ///////////////////////////////////////////////////////////////////

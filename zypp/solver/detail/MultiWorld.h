@@ -29,6 +29,7 @@
 #include <zypp/solver/detail/ServiceWorldPtr.h>
 #include <zypp/solver/detail/World.h>
 #include <zypp/solver/detail/Pending.h>
+#include <zypp/Capability.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -106,7 +107,7 @@ class MultiWorld : public World {
       
           virtual constResItemPtr findInstalledResItem (constResItemPtr resItem);
           virtual constResItemPtr findResItem (constChannelPtr channel, const char *name) const;
-          virtual constResItemPtr findResItemWithConstraint (constChannelPtr channel, const char *name, constDependencyPtr constraint, bool is_and) const;
+          virtual constResItemPtr findResItemWithConstraint (constChannelPtr channel, const char *name, const Capability & constraint, bool is_and) const;
       
           // Iterate over resItems
       
@@ -116,9 +117,9 @@ class MultiWorld : public World {
       
           // Iterate across provides or requirement
       
-          virtual int foreachProvidingResItem (constDependencyPtr dep, ResItemAndSpecFn fn, void *data);
-          virtual int foreachRequiringResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data);
-          virtual int foreachConflictingResItem (constDependencyPtr dep, ResItemAndDepFn fn, void *data);
+          virtual int foreachProvidingResItem (const Capability & dep, ResItemAndDepFn fn, void *data);
+          virtual int foreachRequiringResItem (const Capability & dep, ResItemAndDepFn fn, void *data);
+          virtual int foreachConflictingResItem (const Capability & dep, ResItemAndDepFn fn, void *data);
       
           // locks
       

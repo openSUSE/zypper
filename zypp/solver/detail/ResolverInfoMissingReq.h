@@ -24,6 +24,7 @@
 
 #include <zypp/solver/detail/ResolverInfoMissingReqPtr.h>
 #include <zypp/solver/detail/ResolverInfo.h>
+#include <zypp/Capability.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -45,11 +46,11 @@ namespace zypp
       
         private:
       
-          constDependencyPtr _missing_req;
+          const Capability  _missing_req;
       
         public:
       
-          ResolverInfoMissingReq (constResItemPtr resItem, constDependencyPtr missing_req);
+          ResolverInfoMissingReq (constResItemPtr resItem, const Capability & missing_req);
           virtual ~ResolverInfoMissingReq();
       
           // ---------------------------------- I/O

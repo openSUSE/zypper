@@ -23,12 +23,8 @@ include_HEADERS = \
 	Subscription.h			\
 	ResItem.h			\
 	ResItemPtr.h			\
-	Dependency.h			\
-	DependencyPtr.h			\
 	ResItemAndDependency.h	\
 	ResItemAndDependencyPtr.h	\
-	OrDependency.h			\
-	OrDependencyPtr.h		\
 	Package.h			\
 	PackagePtr.h			\
 	PackageUpdate.h			\
@@ -101,9 +97,7 @@ lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	Channel.cc					\
 	Subscription.cc					\
 	ResItem.cc					\
-	Dependency.cc					\
 	ResItemAndDependency.cc			\
-	OrDependency.cc					\
 	XmlNode.cc					\
 	Importance.cc					\
 	Section.cc					\

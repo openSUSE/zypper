@@ -33,6 +33,7 @@
 #include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/World.h>
 #include <zypp/solver/detail/ResItemAndDependency.h>
+#include <zypp/CapSet.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -63,16 +64,21 @@ namespace zypp
           string ret = "[Install: ";
           ret += item._resItem->asString();
           if (item._upgrades != NULL) {
-      	ret += ", Upgrades ";
-      	ret += item._upgrades->asString();
+              ret += ", Upgrades ";
+              ret += item._upgrades->asString();
           }
           if (!item._deps_satisfied_by_this_install.empty()) {
-      	ret += ", Satisfies ";
-      	ret += Dependency::toString(item._deps_satisfied_by_this_install);
+              ret += ", Satisfies [";
+              for (CapSet::const_iterator iter = item._deps_satisfied_by_this_install.begin();
+                   iter != item._deps_satisfied_by_this_install.end(); iter++) {
+                  if (iter != item._deps_satisfied_by_this_install.begin()) ret += ", ";
+                  ret += (*iter).asString();
+              }        
+              ret += "]";
           }
           if (!item._needed_by.empty()) {
-      	ret += ", Needed by ";
-      	ret += ResItem::toString(item._needed_by);
+              ret += ", Needed by ";
+              ret += ResItem::toString(item._needed_by);
           }
           if (item._explicitly_requested) ret += ", Explicit !";
           ret += "]";
@@ -130,7 +136,7 @@ namespace zypp
       // Handle system resItem's that conflict with us -> uninstall them
       
       static bool
-      build_conflict_list (constResItemPtr resItem, constDependencyPtr dep, void *data)
+      build_conflict_list (constResItemPtr resItem, const Capability & dep, void *data)
       {
           CResItemList *rl = (CResItemList *)data;
           rl->push_front (resItem);
@@ -147,7 +153,7 @@ namespace zypp
           string msg;
           ResItemStatus status = context->getStatus (resItem);
       
-          CDependencyList deps;
+          CapSet deps;
           CResItemList conflicts;
       
           /* If we are trying to upgrade resItem A with resItem B and they both have the
@@ -252,10 +258,10 @@ namespace zypp
           /* Construct require items for each of the resItem's requires that is still unsatisfied. */
       
           deps = resItem->requires();
-          for (CDependencyList::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
-      	constDependencyPtr dep = *iter;
+          for (CapSet::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
+      	const Capability dep = *iter;
       	if (!context->requirementIsMet (dep, false)) {
-      	    if (getenv("RC_SPEW")) fprintf (stderr, "this requires %s\n", dep->asString().c_str());
+      	    if (getenv("RC_SPEW")) fprintf (stderr, "this requires %s\n", dep.asString().c_str());
       	    QueueItemRequirePtr req_item = new QueueItemRequire (world(), dep);
       	    req_item->addResItem (resItem);
       	    qil.push_front (req_item);
@@ -265,9 +271,9 @@ namespace zypp
           /* Construct conflict items for each of the resItem's conflicts. */
       
           deps = resItem->conflicts();
-          for (CDependencyList::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
-      	constDependencyPtr dep = *iter;
-      	if (getenv("RC_SPEW")) fprintf (stderr, "this conflicts with '%s'\n", dep->asString().c_str());
+          for (CapSet::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
+      	const Capability dep = *iter;
+      	if (getenv("RC_SPEW")) fprintf (stderr, "this conflicts with '%s'\n", dep.asString().c_str());
       	QueueItemConflictPtr conflict_item = new QueueItemConflict (world(), dep, resItem);
       	qil.push_front (conflict_item);
           }
@@ -275,9 +281,9 @@ namespace zypp
           /* Construct conflict items for each of the resItem's obsoletes. */
       
           deps = resItem->obsoletes();
-          for (CDependencyList::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
-      	constDependencyPtr dep = *iter;
-      	if (getenv("RC_SPEW")) fprintf (stderr, "this obsoletes %s\n", dep->asString().c_str());
+          for (CapSet::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
+      	const Capability dep = *iter;
+      	if (getenv("RC_SPEW")) fprintf (stderr, "this obsoletes %s\n", dep.asString().c_str());
       	QueueItemConflictPtr conflict_item = new QueueItemConflict (world(), dep, resItem);
       	conflict_item->setActuallyAnObsolete();
       	qil.push_front (conflict_item);
@@ -286,8 +292,8 @@ namespace zypp
           /* Construct uninstall items for system resItem's that conflict with us. */
       
           deps = resItem->provides();
-          for (CDependencyList::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
-      	constDependencyPtr dep = *iter;
+          for (CapSet::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
+      	const Capability dep = *iter;
       	world()->foreachConflictingResItem (dep, build_conflict_list, &conflicts);
           }
       
@@ -328,7 +334,7 @@ namespace zypp
           ((QueueItemPtr)new_install)->copy((constQueueItemPtr)this);
       
           new_install->_upgrades = _upgrades;
-          new_install->_deps_satisfied_by_this_install = CDependencyList(_deps_satisfied_by_this_install.begin(), _deps_satisfied_by_this_install.end());
+          new_install->_deps_satisfied_by_this_install = CapSet(_deps_satisfied_by_this_install.begin(), _deps_satisfied_by_this_install.end());
           new_install->_needed_by = CResItemList (_needed_by.begin(), _needed_by.end());
           new_install->_channel_priority = _channel_priority;
           new_install->_other_penalty = _other_penalty;
@@ -351,9 +357,9 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       void 
-      QueueItemInstall::addDependency (constDependencyPtr dep)
+      QueueItemInstall::addDependency (const Capability & dep)
       {
-          _deps_satisfied_by_this_install.push_front (dep);
+          _deps_satisfied_by_this_install.insert (dep);
       }
       
       
