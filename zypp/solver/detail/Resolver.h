@@ -121,8 +121,8 @@ namespace zypp
       
           void addResItemToVerify (constResItemPtr resItem);
       
-          void addExtraDependency (const CapSet & dependency);
-          void addExtraConflict (const CapSet & dependency);
+          void addExtraDependency (const Capability & dependency);
+          void addExtraConflict (const Capability & dependency);
       
           void verifySystem (void);
           void resolveDependencies (void);

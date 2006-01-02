@@ -57,9 +57,9 @@ namespace zypp
       
           ret += item._resItem->asString();
           ret += " ("; ret += item._reason; ret += ")";
-          if (item._dep_leading_to_uninstall != NULL) {
+          if (item._dep_leading_to_uninstall != Capability()) {
       	ret += ", Triggered By ";
-      	ret += item._dep_leading_to_uninstall->asString();
+      	ret += item._dep_leading_to_uninstall.asString();
           }
           if (item._upgraded_to != NULL) {
       	ret += ", Upgraded To ";
@@ -96,7 +96,7 @@ namespace zypp
           : QueueItem (QUEUE_ITEM_TYPE_UNINSTALL, world)
           , _resItem (resItem)
           , _reason (reason)
-          , _dep_leading_to_uninstall (NULL)
+          , _dep_leading_to_uninstall (Capability())
           , _upgraded_to (NULL)
           , _explicitly_requested (false)
           , _remove_only (false)
@@ -228,7 +228,7 @@ namespace zypp
       	    info.cancel_unlink = false;
       
       	    CapSet provides = _resItem->provides();
-      	    for (Capset::const_iterator iter = provides.begin(); iter != provides.end() && ! info.cancel_unlink; iter++) {
+      	    for (CapSet::const_iterator iter = provides.begin(); iter != provides.end() && ! info.cancel_unlink; iter++) {
       		world()->foreachRequiringResItem (*iter, unlink_check_cb, &info);
       	    }
       
@@ -259,7 +259,7 @@ namespace zypp
       
       	this->logInfo (context);
       
-      	if (_dep_leading_to_uninstall
+      	if (_dep_leading_to_uninstall != Capability()
       	    && !_due_to_conflict
       	    && !_due_to_obsolete)
       	{

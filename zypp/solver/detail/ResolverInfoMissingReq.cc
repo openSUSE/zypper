@@ -54,7 +54,7 @@ namespace zypp
           string res;
       
           res += ResolverInfo::toString (missing);
-          res += string ("missing requirement ") + missing._missing_req->asString();
+          res += string ("missing requirement ") + missing._missing_req.asString();
       
           return res;
       }

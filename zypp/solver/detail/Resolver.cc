@@ -146,13 +146,13 @@ namespace zypp
       void
       Resolver::addExtraDependency (const Capability & dependency)
       {
-          _extra_deps.push_front (dependency);
+          _extra_deps.insert (dependency);
       }
       
       void
       Resolver::addExtraConflict (const Capability & dependency)
       {
-          _extra_conflicts.push_front (dependency);
+          _extra_conflicts.insert (dependency);
       }
       
       
