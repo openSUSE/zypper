@@ -53,15 +53,7 @@ namespace zypp
   std::string Capability::asString() const
   { return _pimpl->asString(); }
 
-  bool Capability::matches( Resolvable::constPtr resolvable_r,
-                            solver::Context_constPtr solverContext_r ) const
-  { return _pimpl->matches( resolvable_r, solverContext_r ); }
 
-  bool Capability::matches( Resolvable::constPtr resolvable_r ) const
-  {
-    // NULL: actually a default context needed
-    return _pimpl->matches( resolvable_r, NULL );
-  }
 
   /******************************************************************
   **

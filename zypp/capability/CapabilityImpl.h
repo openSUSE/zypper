@@ -17,7 +17,6 @@
 #include "zypp/base/KindOf.h"
 
 #include "zypp/Resolvable.h" // maybe ResTraits are sufficient?
-#include "zypp/solver/SolverFwd.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -26,6 +25,12 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
     DEFINE_PTR_TYPE(CapabilityImpl)
+
+    namespace solver
+    {
+      typedef void * Context_constPtr;
+    }
+
 
     ///////////////////////////////////////////////////////////////////
     //

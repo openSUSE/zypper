@@ -6,15 +6,12 @@ SUBDIRS =
 
 ## ##################################################
 
-include_HEADERS = \
-	SolverFwd.h	\
-	Context.h
+include_HEADERS =
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_solver.la
 
 ## ##################################################
 
-lib@PACKAGE@_solver_la_SOURCES = \
-	Context.cc
+lib@PACKAGE@_solver_la_SOURCES =
 
 ## ##################################################

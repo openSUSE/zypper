@@ -8,6 +8,8 @@
 #include <zypp/base/PtrTypes.h>
 #include <zypp/parser/tagfile/Tags.h>
 
+#include <zypp/NVRA.h>
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -33,6 +35,10 @@ namespace zypp
       void echo( iterator_t first, const iterator_t last, const char* s = "" )
       {
         echoOn( DBG, first, last, s );
+      }
+      void xecho( const char * first, const char *const last, const char* s = "" )
+      {
+        DBG << ">>" << std::string(first,last) << "<< " << std::endl;
       }
       void mecho( iterator_t first, const iterator_t last, const char* s = "" )
       {
@@ -79,6 +85,88 @@ struct Measure
   }
 };
 ////////////////////////////////////////////////////////////////////////////
+
+NVRA parseNVRA( const std::string & value )
+{
+  std::string n;
+  std::string v;
+  std::string r;
+  std::string a;
+  parse_info<> info = parse( value.c_str(),
+
+       lexeme_d[(+~space_p)]                    [assign_a(n)]
+       >> lexeme_d[(+(~space_p & ~ch_p('-')))]  [assign_a(v)]
+       >> lexeme_d[(+(~space_p & ~ch_p('-')))]  [assign_a(r)]
+       >> lexeme_d[(+~space_p)]                 [assign_a(a)]
+       ,
+                             space_p );
+
+  NVRA data;
+  if ( info.full )
+    {
+      data = NVRA( n, Edition(v,r), Arch(a) );
+    }
+  else
+    {
+      ERR << "parseNVRA failed on " << value << std::endl;
+    }
+  INT << data << endl;
+  return data;
+}
+
+
+struct PConsume
+{
+  static bool isTag( const Tag & tag_r, const std::string & ident_r )
+  {
+    return tag_r.ident == ident_r && tag_r.ext.empty();
+  }
+  static bool isLangTag( const Tag & tag_r, const std::string & ident_r )
+  {
+    return tag_r.ident == ident_r && ! tag_r.ext.empty();
+  }
+
+  bool newPkg( const std::string & value )
+  {
+    NVRA data( parseNVRA( value ) );
+    return true;
+  }
+
+
+  PConsume & operator=( const STag & stag_r )
+  {
+    if ( isTag( stag_r.stag, "Pkg" ) )
+      {
+        newPkg( stag_r.value );
+        MIL << stag_r << endl;
+      }
+    return *this;
+  }
+  PConsume & operator=( const MTag & mtag_r )
+  {
+    return *this;
+  }
+
+  scoped_ptr<NVRA> _nvra;
+};
+
+struct X
+{
+  template <typename Item>
+    struct result
+    {
+      typedef rule_t type;
+    };
+
+  template <typename Item>
+    rule_t operator<<(  const Item & stag_r ) const
+    {
+      return eps_p;//error_report_p( "neither empty nor comment" );
+    }
+};
+//const phoenix::function<X_impl> XX = X_impl();
+
+////////////////////////////////////////////////////////////////////////////
 //
 //  Main
 //
@@ -110,16 +198,22 @@ int main( int argc, char* argv[] )
   STag      stagData;
   MTag      mtagData;
 
+  PConsume  consume;
+  rule_t c = eps_p;
+  rule_t a = nothing_p;
+  rule_t x = error_report_p( "abort" );
+
   rule_t file =   end_p
-                | ( stag
-                  | mtag
+                | ( stag //[var(consume)=arg1]
+                    >> lazy_p(var(x))
+                  | mtag [var(consume)=arg1]
                   | ( *blank_p
                       >> !( ch_p('#')
                             >> *(anychar_p - eol_p)
                           )
                       >> (eol_p|end_p)
-                    | error_report_p( "neither empty nor comment" )
                     )
+                  | error_report_p( "neither empty nor comment" )
                   )
                   >> file;
 

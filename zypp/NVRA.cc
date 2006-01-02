@@ -6,27 +6,36 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/solver/SolverFwd.h
- *
- * Forward declaration of Solver related public types.
+/** \file	zypp/NVRA.cc
  *
 */
-#ifndef ZYPP_SOLVER_SOLVERFWD_H
-#define ZYPP_SOLVER_SOLVERFWD_H
+#include <iostream>
+//#include "zypp/base/Logger.h"
+
+#include "zypp/NVRA.h"
+
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace solver
-  { /////////////////////////////////////////////////////////////////
 
-    DEFINE_PTR_TYPE(Context);
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace solver
   ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : NVRA
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  /******************************************************************
+  **
+  **	FUNCTION NAME : operator<<
+  **	FUNCTION TYPE : std::ostream &
+  */
+  std::ostream & operator<<( std::ostream & str, const NVRA & obj )
+  {
+    return str << obj.name << '-' << obj.edition << '.' << obj.arch;
+  }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SOLVER_SOLVERFWD_H

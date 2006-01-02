@@ -6,55 +6,57 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/solver/Context.cc
+/** \file	zypp/NVRA.h
  *
 */
-#include <iostream>
+#ifndef ZYPP_NVRA_H
+#define ZYPP_NVRA_H
 
-#include "zypp/base/Logger.h"
+#include <iosfwd>
+#include <string>
 
-#include "zypp/solver/Context.h"
-
-using namespace std;
+#include "zypp/base/PtrTypes.h"
+#include "zypp/Edition.h"
+#include "zypp/Arch.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
   ///////////////////////////////////////////////////////////////////
-  namespace solver
-  { /////////////////////////////////////////////////////////////////
-
-    IMPL_PTR_TYPE(Context);
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : Context::Context
-    //	METHOD TYPE : Ctor
-    //
-    Context::Context()
+  //
+  //	CLASS NAME : NVRA
+  //
+  /** */
+  struct NVRA
+  {
+    /** Default ctor */
+    NVRA()
     {}
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : Context::~Context
-    //	METHOD TYPE : Dtor
-    //
-    Context::~Context()
+    /** Ctor */
+    explicit
+    NVRA( const std::string & name_r,
+          const Edition & edition_r = Edition(),
+          const Arch & arch_r = Arch() )
+    : name( name_r )
+    , edition( edition_r )
+    , arch( arch_r )
     {}
 
-    /******************************************************************
-     **
-     **	FUNCTION NAME : operator<<
-     **	FUNCTION TYPE : std::ostream &
-    */
-    std::ostream & operator<<( std::ostream & str, const Context & obj )
-    {
-      return str;
-    }
-
-  /////////////////////////////////////////////////////////////////
-  } // namespace solver
+    /**  */
+    std::string name;
+    /**  */
+    Edition edition;
+    /**  */
+    Arch arch;
+  };
   ///////////////////////////////////////////////////////////////////
+
+  /** \relates NVRA Stream output */
+  std::ostream & operator<<( std::ostream & str, const NVRA & obj );
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_NVRA_H
