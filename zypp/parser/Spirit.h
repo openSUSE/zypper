@@ -21,6 +21,8 @@
 #include <boost/spirit/utility.hpp>
 
 #include <boost/spirit/phoenix.hpp>
+
+#include "zypp/base/Logger.h"
 ///////////////////////////////////////////////////////////////////
 namespace boost
 { /////////////////////////////////////////////////////////////////
@@ -177,7 +179,7 @@ namespace zypp
         template <typename C>
           void operator()( const C & item ) const
           {
-            DBG << item << endl;
+            DBG << item << std::endl;
           }
       };
       const phoenix::function<ddump_impl> ddump = ddump_impl();
@@ -193,7 +195,7 @@ namespace zypp
         template <typename C>
           void operator()( const C & item ) const
           {
-            MIL << item << endl;
+            MIL << item << std::endl;
           }
       };
       const phoenix::function<mdump_impl> mdump = mdump_impl();
