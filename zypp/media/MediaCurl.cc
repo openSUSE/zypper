@@ -132,16 +132,16 @@ void MediaCurl::attachTo (bool next)
     }
   }
 
-  // XXX: wasn't that the wrong fix for some problem? this should be
-  // removed
   if ( _url.getScheme() == "https" ) {
-    WAR << "Disable certificate verification for https." << endl;
-    ret = curl_easy_setopt( _curl, CURLOPT_SSL_VERIFYPEER, 0 );
+    ret = curl_easy_setopt( _curl, CURLOPT_SSL_VERIFYPEER, 1 );
     if ( ret != 0 ) {
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
-
-    ret = curl_easy_setopt( _curl, CURLOPT_SSL_VERIFYHOST, 0 );
+    ret = curl_easy_setopt( _curl, CURLOPT_CAPATH, "/etc/ssl/certs/" );
+    if ( ret != 0 ) {
+      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+    }
+    ret = curl_easy_setopt( _curl, CURLOPT_SSL_VERIFYHOST, 2 );
     if ( ret != 0 ) {
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
