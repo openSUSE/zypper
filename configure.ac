@@ -165,6 +165,7 @@ AC_OUTPUT(	\
 	zypp/parser/Makefile		\
 	zypp/parser/yum/Makefile	\
 	zypp/parser/yum/schema/Makefile	\
+	zypp/parser/tagfile/Makefile	\
 	zypp/solver/Makefile		\
 	zypp/solver/testsuite/Makefile	\
 	zypp/solver/testsuite/lib/Makefile	\

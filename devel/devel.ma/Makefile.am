@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS =	Main Main.debug PtrTest
+noinst_PROGRAMS =	Main Main.debug Parse
 
 ## ##################################################
 
@@ -12,7 +12,7 @@ AM_LDFLAGS =
 AM_CXXFLAGS =
 # gperf:	-pg
 
-LDADD =		$(top_srcdir)/zypp/lib@PACKAGE@.la  -lboost_regex
+LDADD =		$(top_srcdir)/zypp/lib@PACKAGE@.la -lboost_regex
 
 ## ##################################################
 
@@ -23,7 +23,8 @@ Main_debug_LDFLAGS =	-static
 
 ## ##################################################
 
-PtrTest_SOURCES = 	PtrTest.cc
+Parse_SOURCES = 	Parse.cc
+Parse_LDFLAGS =		-static
 
 ## ##################################################
 
