@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /* XmlNode.h  wrapper for xmlNode* from libxml2
  *
  * Copyright (C) 2000-2003 Ximian, Inc.
