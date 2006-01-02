@@ -50,6 +50,12 @@ namespace zypp
       std::ostream & error_report_parser::errstream()
       { return ERR; }
 
+      std::ostream & ddump_impl::onStream()
+      { return DBG; }
+
+      std::ostream & mdump_impl::onStream()
+      { return MIL; }
+
       /////////////////////////////////////////////////////////////////
     } // namespace spirit
     ///////////////////////////////////////////////////////////////////

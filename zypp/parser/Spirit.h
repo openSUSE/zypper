@@ -22,7 +22,6 @@
 
 #include <boost/spirit/phoenix.hpp>
 
-#include "zypp/base/Logger.h"
 ///////////////////////////////////////////////////////////////////
 namespace boost
 { /////////////////////////////////////////////////////////////////
@@ -170,6 +169,8 @@ namespace zypp
 
       struct ddump_impl
       {
+        static std::ostream & onStream();
+
         template <typename C>
           struct result
           {
@@ -179,13 +180,15 @@ namespace zypp
         template <typename C>
           void operator()( const C & item ) const
           {
-            DBG << item << std::endl;
+            onStream() << item << std::endl;
           }
       };
       const phoenix::function<ddump_impl> ddump = ddump_impl();
 
       struct mdump_impl
       {
+        static std::ostream & onStream();
+
         template <typename C>
           struct result
           {
@@ -195,7 +198,7 @@ namespace zypp
         template <typename C>
           void operator()( const C & item ) const
           {
-            MIL << item << std::endl;
+            onStream() << item << std::endl;
           }
       };
       const phoenix::function<mdump_impl> mdump = mdump_impl();
