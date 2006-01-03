@@ -192,7 +192,10 @@ librpmDb * librpmDb::newLibrpmDb( Pathname root_r, Pathname dbPath_r, bool reado
   if ( err_r ) {
     delete ret;
     ret = 0;
+#warning FIXME uncomment
+#if 0
     ZYPP_THROW(ret->_d._error);
+#endif
   }
   return ret;
 }
@@ -407,6 +410,8 @@ const Pathname & librpmDb::dbPath() const
   return _d._dbPath;
 }
 
+#warning uncomment thsi function
+#if 0
 ///////////////////////////////////////////////////////////////////
 //
 //
@@ -428,6 +433,7 @@ bool librpmDb::empty() const
 {
   return( valid() && ! *db_const_iterator( this ) );
 }
+#endif
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -541,7 +547,10 @@ class librpmDb::db_const_iterator::D {
     {
       if ( !_dbptr ) {
 	// try to get librpmDb's default db
+#warning FIXME uncomment
+#if 0
 	_dberr = librpmDb::dbAccess( _dbptr );
+#endif
 	if ( !_dbptr ) {
 	  WAR << "No database access: " << _dberr << endl;
 	}
@@ -577,11 +586,14 @@ class librpmDb::db_const_iterator::D {
 	_mi = ::rpmdbFreeIterator( _mi );
 	_hptr = 0;
       }
+#warning uncomment
+#if 0
       if ( _dbptr && _dbptr->error() ) {
 	_dberr = _dbptr->error();
 	WAR << "Lost database access: " << _dberr << endl;
 	_dbptr = 0;
       }
+#endif
       return false;
     }
 

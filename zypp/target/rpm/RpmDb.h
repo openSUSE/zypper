@@ -23,7 +23,9 @@
 #include "zypp/Pathname.h"
 #include "zypp/ExternalProgram.h"
 
-#include "zypp/PMPackagePtr.h"
+#include "zypp/Package.h"
+
+#include "zypp/target/rpm/RpmHeader.h"
 
 namespace zypp {
   namespace target {
@@ -38,8 +40,6 @@ namespace zypp {
        **/
       class RpmDb : public base::ReferenceCounted, private base::NonCopyable
       {
-        REP_BODY(RpmDb);
-      
         public:
       
           /**
@@ -93,8 +93,11 @@ namespace zypp {
       
           /**
            * Internal helper for @ref initDatabase.
+           *
+           * \throws Exception
+           *
            **/
-          PMError internal_initDatabase( const Pathname & root_r, const Pathname & dbPath_r,
+          void internal_initDatabase( const Pathname & root_r, const Pathname & dbPath_r,
       				   DbStateInfoBits & info_r );
       
           /**
@@ -161,36 +164,51 @@ namespace zypp {
            * database will be removed by @ref closeDatabase, if it was not modified
            * (no packages were installed or deleted). Otherwise the new database
            * is kept, and the old one is removed.
+           *
+           * \throws Exception
+           *
            **/
-          PMError initDatabase( Pathname root_r = Pathname(),
+          void initDatabase( Pathname root_r = Pathname(),
       			  Pathname dbPath_r = Pathname() );
       
           /**
            * Block further access to the rpm database and go back to uninitialized
            * state. On update: Decides what to do with any converted database
            * (see @ref initDatabase).
+           *
+           * \throws Exception
+           *
            **/
-          PMError closeDatabase();
+          void closeDatabase();
       
           /**
            * Rebuild the rpm database (rpm --rebuilddb).
+           *
+           * \throws Exception
+           *
            **/
-          PMError rebuildDatabase();
+          void rebuildDatabase();
       
           /**
            * Import ascii armored public key in file pubkey_r.
+           *
+           * \throws Exception
+           *
            **/
-          PMError importPubkey( const Pathname & pubkey_r );
+          void importPubkey( const Pathname & pubkey_r );
       
           /**
            * Import ascii armored public key keyname_r exported by keyring_r.
+           *
+           * \throws Exception
+           *
            **/
-          PMError importPubkey( const Pathname & keyring_r, const std::string & keyname_r );
+          void importPubkey( const Pathname & keyring_r, const std::string & keyname_r );
       
           /**
            * Return the editions of all installed public keys.
            **/
-          std::set<PkgEdition> pubkeys() const;
+          std::set<Edition> pubkeys() const;
       
           ///////////////////////////////////////////////////////////////////
           //
@@ -203,7 +221,7 @@ namespace zypp {
       
           Packages & _packages;
       
-          FileDeps::FileNames _filerequires;
+          std::set<std::string> _filerequires;
       
         public:
       
@@ -217,13 +235,15 @@ namespace zypp {
           /**
            * If necessary build, and return the list of all installed packages.
            **/
-          const std::list<PMPackagePtr> & getPackages();
+          const std::list<Package::Ptr> & getPackages();
       
-      
+     #warning uncomment
+#if 0 
           /**
            * Hack to lookup required and conflicting file relations.
            **/
           void traceFileRel( const PkgRelation & rel_r );
+#endif
       
           ///////////////////////////////////////////////////////////////////
           //
@@ -255,25 +275,33 @@ namespace zypp {
           /**
            * Return true if package is installed.
            **/
-          bool hasPackage( const PkgName & name_r ) const;
+          bool hasPackage( const std::string & name_r ) const;
       
           /**
            * Get an installed packages data from rpmdb. Package is
            * identified by name. Data returned via result are NULL,
            * if packge is not installed (PMError is not set), or RPM database
            * could not be read (PMError is set).
+           *
+           * \throws Exception
+           *
+           * FIXME this and following comment
+           *
            **/
-          PMError getData( const PkgName & name_r,
-      		     constRpmHeaderPtr & result_r ) const;
+          void getData( const std::string & name_r,
+      		     RpmHeader::constPtr & result_r ) const;
       
           /**
            * Get an installed packages data from rpmdb. Package is
            * identified by name and edition. Data returned via result are NULL,
            * if packge is not installed (PMError is not set), or RPM database
            * could not be read (PMError is set).
+           *
+           * \throws Exception
+           *
            **/
-          PMError getData( const PkgName & name_r, const PkgEdition & ed_r,
-      		     constRpmHeaderPtr & result_r ) const;
+          void getData( const std::string & name_r, const Edition & ed_r,
+      		     RpmHeader::constPtr & result_r ) const;
       
           ///////////////////////////////////////////////////////////////////
           //
@@ -403,8 +431,11 @@ namespace zypp {
            * @param flags which rpm options to use
            *
            * @return success
+           *
+           * \throws Exception
+           *
            * */
-          PMError installPackage (const Pathname& filename, unsigned flags = 0 );
+          void installPackage (const Pathname& filename, unsigned flags = 0 );
       
           /** remove rpm package
            *
@@ -412,9 +443,12 @@ namespace zypp {
            * @param iflags which rpm options to use
            *
            * @return success
+           *
+           * \throws Exception
+           *
            * */
-          PMError removePackage(const std::string & name_r, unsigned flags = 0);
-          PMError removePackage(constPMPackagePtr package, unsigned flags = 0);
+          void removePackage(const std::string & name_r, unsigned flags = 0);
+          void removePackage(Package::constPtr package, unsigned flags = 0);
       
           /**
            * get backup dir for rpm config files

@@ -20,6 +20,7 @@
 #include "zypp/Package.h"
 #include "zypp/Changelog.h"
 #include "zypp/CapSetFwd.h"
+#include "zypp/Pathname.h"
 
 namespace zypp {
   namespace target {

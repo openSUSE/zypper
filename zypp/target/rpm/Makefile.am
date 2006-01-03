@@ -8,10 +8,10 @@ SUBDIRS =
 include_HEADERS = 		\
 	librpm.h		\
 	BinHeader.h		\
-	BinHeaderCache.h	\
 	RpmHeader.h		\
-	RpmHeaderCache.h	\
 	librpmDb.h		\
+	RpmCallbacks.h		\
+	RpmPackageImpl.h	\
 	RpmDb.h
 
 
@@ -21,10 +21,10 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_target_rpm.la
 
 lib@PACKAGE@_target_rpm_la_SOURCES = \
 	BinHeader.cc		\
-	BinHeaderCache.cc	\
 	RpmHeader.cc		\
-	RpmHeaderCache.cc	\
 	librpmDb.cc		\
+	RpmCallbacks.cc		\
+	RpmPackageImpl.cc	\
 	RpmDb.cc
 
 
