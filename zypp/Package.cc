@@ -45,6 +45,9 @@ namespace zypp
   Changelog Package::changelog()
   { return pimpl().changelog(); }
 
+  /** Time of package installation */
+  Date Package::installtime()
+  { return pimpl().installtime(); }
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

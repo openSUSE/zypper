@@ -35,7 +35,10 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
-    /** */
+    /** Time of package installation */
+    Date installtime();
+    /** Get the package change log */
+    Changelog changelog();
     // data here:
 
   protected:
@@ -45,8 +48,6 @@ namespace zypp
              const Arch & arch_r );
     /** Dtor */
     virtual ~Package();
-    /** Get the package change log */
-    Changelog changelog();
 
   private:
     /** Access implementation */
