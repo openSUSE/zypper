@@ -54,7 +54,9 @@ namespace zypp
   { return _pimpl->asString(); }
 
 
-
+  std::string Capability::name() const
+  { return "CapabilityName"; }//return _pimpl->name(); }
+    
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<

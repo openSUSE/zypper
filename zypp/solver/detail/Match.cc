@@ -166,14 +166,13 @@ namespace zypp
           /*   } */
           CapFactory  factory;                      
           Capability dependency;
-          bool check;
+          bool check = false;
       
           dependency = factory.parse ( resItem->kind(),
                                        resItem->name(),
                                        Rel::EQ,
-                                       resItem->edition(),
-                                       resItem->arch());
-          check = _dependency.matches (dependency);
+                                       resItem->edition());
+//          check = _dependency.matches (dependency);
           return check;
       }
 

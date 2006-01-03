@@ -540,7 +540,7 @@ namespace zypp
           for (ResItemAndDependencyTable::const_iterator iter = _requires_by_name.lower_bound(dep.name()); iter != _requires_by_name.upper_bound(dep.name()); iter++) {
       	constResItemAndDependencyPtr r_and_d = iter->second;
       
-      	if (r_and_d && r_and_d->dependency().matches (dep)) {
+      	if (r_and_d ) {//&& r_and_d->dependency().matches (dep)) {
       
       	    /* Skip dups if one of them in installed. */
       	    if (r_and_d->resItem()->isInstalled()

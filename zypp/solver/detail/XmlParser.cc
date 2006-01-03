@@ -82,22 +82,10 @@ namespace zypp
       
                 /* FIXME: should get Channel from XML */
                 /* FIXME: should get Kind from XML */
-                if ( std::strlen(arch.c_str()) > 0)
-                {
-                    return  factory.parse ( ResTraits<zypp::Package>::kind,
-                                            name,
-                                            relation,
-                                            Edition (version, release, epoch),
-                                            Arch(arch));
-                }
-                else
-                {
-                    return  factory.parse ( ResTraits<zypp::Package>::kind,
-                                            name,
-                                            relation,
-                                            Edition (version, release, epoch),
-                                            Arch_noarch);                    
-                }              
+		return  factory.parse ( ResTraits<zypp::Package>::kind,
+					name,
+					relation,
+					Edition (version, release, epoch));
             }
       
       
@@ -602,8 +590,7 @@ namespace zypp
                     Capability selfdep = factory.parse ( ResTraits<zypp::Package>::kind,
                                                        _current_package_name,
                                                        Rel::EQ,
-                                                       _current_package_edition,
-                                                       _current_package_arch);      
+							 _current_package_edition);
                     CapSet::const_iterator piter;
                     for (piter = _current_provides.begin(); piter != _current_provides.end(); piter++) {
                         if ((*piter) == selfdep)

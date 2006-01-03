@@ -34,6 +34,7 @@
 #include <zypp/solver/detail/World.h>
 #include <zypp/solver/detail/ResItemAndDependency.h>
 #include <zypp/CapSet.h>
+#include <zypp/base/Logger.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -110,7 +111,15 @@ namespace zypp
 	  , _explicitly_requested (false)
       {
 	  constResItemPtr upgrades = world->findInstalledResItem (resItem);
-	  if (getenv("RC_SPEW")) fprintf (stderr, "QueueItemInstall::QueueItemInstall(%s) upgrades %s\n", resItem->asString().c_str(), upgrades!=NULL?upgrades->asString().c_str():"nothing");
+	  _DBG("RC_SPEW") << "QueueItemInstall::QueueItemInstall(" << resItem->asString() << ") upgrades ";
+	  if (upgrades!=NULL)
+	  {
+	      _DBG("RC_SPEW") << upgrades->asString() << endl;
+	  }
+	  else
+	  {
+	      _DBG("RC_SPEW") << "nothing" << endl;
+	  }
 	  if (upgrades
 	      && ! (upgrades->equals (resItem))) {
 	      setUpgrades(upgrades);
@@ -146,7 +155,7 @@ namespace zypp
       bool
       QueueItemInstall::process (ResolverContextPtr context, QueueItemList & qil)
       {
-	  if (getenv ("RC_SPEW")) fprintf (stderr, "QueueItemInstall::process(%s)\n", this->asString().c_str());
+	  _DBG("RC_SPEW") <<  "QueueItemInstall::process(" << this->asString() << ")" << endl;
 
 	  constResItemPtr resItem = _resItem;
 	  string res_name = resItem->asString();
@@ -161,7 +170,7 @@ namespace zypp
 	      && _resItem->equals (_upgrades)) {
 	      ResolverInfoPtr info;
 
-	      if (getenv ("RC_SPEW")) fprintf (stderr, "upgrades equal resItem, skipping\n");
+	      _DBG("RC_SPEW") << "upgrades equal resItem, skipping" << endl;
 
 	      msg = string("Skipping ") + res_name + (": already installed");
 	      info = new ResolverInfoMisc (_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
@@ -175,11 +184,11 @@ namespace zypp
 	  if (!_needed_by.empty()) {
 	      bool still_needed = false;
 
-	      if (getenv ("RC_SPEW")) fprintf (stderr, "still needed ");
+	      _DBG("RC_SPEW") <<  "still needed " << endl;
 
 	      for (CResItemList::const_iterator iter = _needed_by.begin(); iter != _needed_by.end() && !still_needed; iter++) {
 	          ResItemStatus status = context->getStatus (*iter);
-	          if (getenv ("RC_SPEW")) fprintf (stderr, "by: [status: %s] %s\n", ResolverContext::toString(status).c_str(), (*iter)->asString().c_str());
+	          _DBG("RC_SPEW") << "by: [status: " << ResolverContext::toString(status) << "] " << (*iter)->asString() << endl;
 	          if (! resItem_status_is_to_be_uninstalled (status)) {
 		      still_needed = true;
 	          }
@@ -212,7 +221,7 @@ namespace zypp
 
 	  if (_upgrades == NULL) {
 
-	      if (getenv ("RC_SPEW")) fprintf (stderr, "simple install of %s\n", resItem->asString(true).c_str());
+	      _DBG("RC_SPEW")  << "simple install of " <<  resItem->asString(true) << endl;
 
 	      context->installResItem (resItem, context->verifying(), /* is_soft */ _other_penalty);
 
@@ -220,7 +229,7 @@ namespace zypp
 
 	      QueueItemUninstallPtr uninstall_item;
 
-	      if (getenv ("RC_SPEW")) fprintf (stderr, "upgrade install of %s\n", resItem->asString().c_str());
+	      _DBG("RC_SPEW") << "upgrade install of " << resItem->asString() << endl;
 
 	      context->upgradeResItem (resItem, _upgrades, context->verifying(), /* is_soft */ _other_penalty);
 
@@ -268,7 +277,7 @@ namespace zypp
 	  for (CapSet::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
 	      const Capability dep = *iter;
 	      if (!context->requirementIsMet (dep, false)) {
-	          if (getenv("RC_SPEW")) fprintf (stderr, "this requires %s\n", dep.asString().c_str());
+	          _DBG("RC_SPEW") << "this requires " << dep.asString() << endl;
 	          QueueItemRequirePtr req_item = new QueueItemRequire (world(), dep);
 	          req_item->addResItem (resItem);
 	          qil.push_front (req_item);
@@ -280,7 +289,7 @@ namespace zypp
 	  deps = resItem->conflicts();
 	  for (CapSet::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
 	      const Capability dep = *iter;
-	      if (getenv("RC_SPEW")) fprintf (stderr, "this conflicts with '%s'\n", dep.asString().c_str());
+	      _DBG("RC_SPEW") << "this conflicts with '" << dep.asString() << "'" << endl;
 	      QueueItemConflictPtr conflict_item = new QueueItemConflict (world(), dep, resItem);
 	      qil.push_front (conflict_item);
 	  }
@@ -290,7 +299,7 @@ namespace zypp
 	  deps = resItem->obsoletes();
 	  for (CapSet::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
 	      const Capability dep = *iter;
-	      if (getenv("RC_SPEW")) fprintf (stderr, "this obsoletes %s\n", dep.asString().c_str());
+	      _DBG("RC_SPEW") << "this obsoletes " <<  dep.asString() << endl;
 	      QueueItemConflictPtr conflict_item = new QueueItemConflict (world(), dep, resItem);
 	      conflict_item->setActuallyAnObsolete();
 	      qil.push_front (conflict_item);
@@ -319,7 +328,7 @@ namespace zypp
 	          continue;
 	      }
 
-	      if (getenv("RC_SPEW")) fprintf (stderr, "because: '%s'\n", conflicting_resItem->asString(true).c_str());
+	      _DBG("RC_SPEW") << "because: '" << conflicting_resItem->asString(true) << "'" << endl;
 
 	      uninstall_item = new QueueItemUninstall (world(), conflicting_resItem, "conflict");
 	      uninstall_item->setDueToConflict ();

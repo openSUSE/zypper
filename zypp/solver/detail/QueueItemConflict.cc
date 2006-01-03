@@ -33,7 +33,7 @@
 #include <zypp/solver/detail/ResolverInfoObsoletes.h>
 #include <zypp/CapFactory.h>
 #include <zypp/CapSet.h>
-
+#include <zypp/base/Logger.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -153,8 +153,9 @@ namespace zypp
           ResolverInfoPtr log_info;
           CapFactory  factory;                              
       
-          if (getenv ("RC_SPEW")) fprintf (stderr, "conflict_process_cb (resolvable[%s], cap[%s], info [%s]\n", resItem->asString().c_str(), cap.asString().c_str(), info->conflicting_resItem->asString().c_str());
-          if (getenv ("RC_SPEW")) fprintf (stderr, "conflict_process_cb (info->dep [%s]\n", info->dep.asString().c_str());
+          _DBG("RC_SPEW") << "conflict_process_cb (resolvable[" << resItem->asString() <<"], cap[" << cap.asString() << "], info [" <<
+	      info->conflicting_resItem->asString() << "]" << endl;
+	  _DBG("RC_SPEW") << "conflict_process_cb (info->dep [" << info->dep.asString() << "]" << endl;
       
           /* We conflict with ourself.  For the purpose of installing ourself, we
            * just ignore it, but it's Debian's way of saying that one and only one
@@ -174,8 +175,7 @@ namespace zypp
           Capability capTest =  factory.parse ( resItem->kind(),
                                                 resItem->name(),
                                                 Rel::EQ,
-                                                resItem->edition(),
-                                                resItem->arch());
+                                                resItem->edition());
       
           if (info->actually_an_obsolete
               && capTest != cap)
@@ -188,7 +188,7 @@ namespace zypp
       
           status = info->context->getStatus (resItem);
       
-          if (getenv ("RC_SPEW")) fprintf (stderr, "conflict_process_cb (resolvable[%s]<%s>\n", resItem->asString().c_str(), ResolverContext::toString(status).c_str());
+          _DBG("RC_SPEW") << "conflict_process_cb (resolvable[" << resItem->asString() << "]<" << ResolverContext::toString(status) << ">" << endl;
       
           switch (status) {
       	
@@ -209,8 +209,7 @@ namespace zypp
                   Capability maybe_upgrade_dep =  factory.parse ( resItem->kind(),
                                                                   resItem->name(),
                                                                   Rel::ANY,
-                                                                  Edition::noepoch,
-                                                                  resItem->arch());
+                                                                  Edition::noepoch);
 
                   info->world->foreachProvidingResItem (maybe_upgrade_dep, upgrade_candidates_cb, (void *)&upgrade_info);
       
@@ -306,7 +305,7 @@ namespace zypp
       bool
       QueueItemConflict::process (ResolverContextPtr context, QueueItemList & new_items)
       {
-          if (getenv ("RC_SPEW")) fprintf (stderr, "QueueItemConflict::process(%s)\n", this->asString().c_str());
+          _DBG("RC_SPEW") << "QueueItemConflict::process(" << this->asString() << ")" << endl;
       
           ConflictProcessInfo info = { world(), _conflicting_resItem, _dep, context, new_items, "", "", _actually_an_obsolete };
       

@@ -26,7 +26,7 @@
 #include <zypp/solver/detail/PackageUpdate.h>
 #include <zypp/solver/detail/World.h>
 #include <zypp/solver/detail/XmlNode.h>
-
+#include <zypp/base/Logger.h>
 #include <zypp/CapFactory.h>
 #include <zypp/CapSet.h>
 
@@ -89,8 +89,7 @@ namespace zypp
           return  factory.parse ( ResTraits<zypp::Package>::kind,
                                   name,
                                   relation,
-                                  Edition (version, release, epoch),
-                                  arch);
+                                  Edition (version, release, epoch));
       }
         
       static void
@@ -431,8 +430,7 @@ namespace zypp
           Capability selfdep = factory.parse ( ResTraits<zypp::Package>::kind,
                                              name,
                                              Rel::EQ,
-                                             Edition( version, release, zypp::str::numstring(epoch)),
-                                             arch);      
+					       Edition( version, release, zypp::str::numstring(epoch)));
 
           
           CapSet::const_iterator piter;
@@ -443,7 +441,7 @@ namespace zypp
               }
           }
           if (piter == dep_table.provides.end()) {			// no self provide found, construct one
-              if (getenv ("RC_SPEW")) fprintf (stderr, "Adding self-provide [%s]\n", selfdep.asString().c_str());
+              _DBG("RC_SPEW") << "Adding self-provide [" << selfdep.asString() << "]" << endl;
               dep_table.provides.insert (selfdep);
           }
       

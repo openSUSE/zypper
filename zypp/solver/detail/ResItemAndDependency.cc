@@ -91,6 +91,7 @@ namespace zypp
       bool
       ResItemAndDependency::verifyRelation (const Capability & dep) const
       {
+#if 0
       #if PHI
           // don't check the channel, thereby honoring conflicts from installed resItems to to-be-installed resItems
           return dep.matches (_dependency);
@@ -98,6 +99,7 @@ namespace zypp
           if (!dep.matches (_dependency)) {
       	return false;
           }
+#endif
 #if 0
           if (getenv ("SPEW_DEP")) fprintf (stderr, "ResItemAndDependency::verifyRelation _resItem->channel() %s, dep->channel() %s\n", _resItem->channel()->asString().c_str(), dep->channel()->asString().c_str());
           return _resItem->channel()->equals (dep->channel());

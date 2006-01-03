@@ -103,7 +103,8 @@ namespace zypp
     /** More or less human readable representation as string. */
     std::string asString() const;
 
-    /** */
+    /** More or less humal readable name of the dependency */
+    std::string name() const;
 
 
   private:

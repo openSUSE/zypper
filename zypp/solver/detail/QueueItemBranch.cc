@@ -22,6 +22,7 @@
 #include <zypp/solver/detail/QueueItemBranch.h>
 #include <zypp/solver/detail/QueueItem.h>
 #include <zypp/solver/detail/Resolver.h>
+#include <zypp/base/Logger.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -152,7 +153,7 @@ namespace zypp
       bool
       QueueItemBranch::process (ResolverContextPtr context, QueueItemList & qil)
       {
-          if (getenv ("RC_SPEW")) fprintf (stderr, "QueueItemBranch::process(%s)\n", asString().c_str());
+          _DBG("RC_SPEW") << "QueueItemBranch::process(" << asString() << ")" << endl;
       
           QueueItemList live_branches;
           unsigned int branch_count;

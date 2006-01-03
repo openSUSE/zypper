@@ -25,6 +25,7 @@
 
 #include <zypp/solver/detail/Channel.h>
 #include <zypp/solver/detail/World.h>
+#include <zypp/base/Logger.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -180,7 +181,7 @@ namespace zypp
           _priority = -1;
           _priority_unsubscribed = -1;
       
-      //    if (getenv ("RC_SPEW")) fprintf (stderr, "Channel() [%p] (%s)\n", this, asString().c_str());
+	  _DBG("RC_SPEW") << "Channel() [" << this << "] (" << asString() << ")" << endl ;
       }
       
       
@@ -220,7 +221,7 @@ namespace zypp
           free ((void *)priority_str);
           free ((void *)priority_unsubscribed_str);
       
-      //    if (getenv ("RC_SPEW")) fprintf (stderr, "Channel(xml) [%p] (%s)\n", this, asString().c_str());
+	  _DBG("RC_SPEW") << "Channel(xml) [" << this << "] (" << asString() << ")" << endl;
       }
       
       

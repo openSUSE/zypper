@@ -26,7 +26,7 @@
 #include <zypp/solver/detail/extract.h>
 #include <zypp/solver/detail/XmlParser.h>
 #include <zypp/solver/detail/utils.h>
-
+#include <zypp/base/Logger.h>
 #include <zypp/solver/detail/debug.h>
 
 /////////////////////////////////////////////////////////////////////////
@@ -48,7 +48,7 @@ namespace zypp
           PackagePtr package;
           int count = 0;
       
-          if (getenv ("RC_SPEW_XML")) fprintf (stderr, "extract_packages_from_xml_node ()\n");
+          _DBG("RC_SPEW_XML") << "extract_packages_from_xml_node ()" << endl;
           // search the 'package' node
       
           while (node && !node->equals("package")) {
@@ -66,7 +66,7 @@ namespace zypp
       	if (node->equals("package")) {
       	    package = new Package (node, channel);
       	    if (package) {
-      		if (getenv ("RC_SPEW")) fprintf (stderr, "%s\n", package->asString(true).c_str());
+				_DBG("RC_SPEW") << package->asString(true) << endl;
       		bool ok = true;
       		if (callback)
       		    ok = callback (package, data);
@@ -88,7 +88,7 @@ namespace zypp
           unsigned int count = 0;
           PackageList packages;
       
-          if (getenv ("RC_SPEW_XML")) fprintf (stderr, "extract_packages_from_helix_buffer(%.32s...,%ld,...)\n", buf, (long)len);
+          _DBG("RC_SPEW_XML") << "extract_packages_from_helix_buffer(" << buf << "...," << (long)len << ",...)" << endl;
       
           if (buf == NULL || len == 0)
       	return 0;
@@ -102,7 +102,7 @@ namespace zypp
       
           count = packages.size();
       
-          if (getenv ("RC_SPEW_XML")) fprintf (stderr, "extract_packages_from_helix_buffer: parsed %d packages\n", count);
+          _DBG("RC_SPEW_XML") << "extract_packages_from_helix_buffer: parsed " << count << "packages" << endl;
       
           if (callback != NULL) {
       	for (PackageList::iterator iter = packages.begin(); iter != packages.end(); iter++) {

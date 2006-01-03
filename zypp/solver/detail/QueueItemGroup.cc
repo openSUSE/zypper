@@ -21,6 +21,7 @@
 
 #include <zypp/solver/detail/QueueItemGroup.h>
 #include <zypp/solver/detail/QueueItem.h>
+#include <zypp/base/Logger.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -86,7 +87,7 @@ namespace zypp
       bool
       QueueItemGroup::process (ResolverContextPtr context, QueueItemList & new_items)
       {
-          if (getenv ("RC_SPEW")) fprintf (stderr, "QueueItemGroup::process\n");
+          _DBG("RC_SPEW") << "QueueItemGroup::process" << endl;
       
           bool did_something = false;
       
