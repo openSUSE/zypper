@@ -130,7 +130,8 @@ namespace zypp
           const CapSet & freshens() const { return _resObject->deps().freshens(); }
 
           void setDependencies (const Dependencies & dependencies) { _resObject->setDeps(dependencies); }
-          
+
+          ResObject::constPtr resObject() { return _resObject; }
 
           // Spec definitions
           

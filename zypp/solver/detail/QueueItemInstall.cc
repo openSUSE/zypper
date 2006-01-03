@@ -166,7 +166,7 @@ namespace zypp
 	      msg = string("Skipping ") + res_name + (": already installed");
 	      info = new ResolverInfoMisc (_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
 	      context->addInfo (info);
-	      goto finished;
+	      return true; //exit
 	  }
 
 	  // check if this install is still needed
@@ -186,7 +186,7 @@ namespace zypp
 	      }
 
 	      if (! still_needed)
-	          goto finished;
+	          return true; //exit
 	  }
 
 	  /* If we are in verify mode and this install is about to fail, don't let it happen...
@@ -204,7 +204,7 @@ namespace zypp
 	          qil.push_front (uninstall_item);
 	      }
 	
-	      goto finished;
+	      return true; //exit
 	  }
 
 	  // if this install upgrades an installed resolvable, explicitly uninstall this one
@@ -247,7 +247,7 @@ namespace zypp
 
 	  if (! (status == RESOLVABLE_STATUS_UNINSTALLED
 	         || status == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK)) {
-	      goto finished;
+	      return true; //exit
 	  }
 
 	  if (_upgrades != NULL) {
@@ -327,8 +327,6 @@ namespace zypp
 	      uninstall_item->addInfo (log_info);
 	      qil.push_front (uninstall_item);
 	  }
-	
-       finished:
 	
 	  return true;
       }
