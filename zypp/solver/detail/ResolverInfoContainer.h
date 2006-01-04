@@ -30,7 +30,7 @@
 #include <zypp/solver/detail/ResolverInfo.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -39,52 +39,50 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      //////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : ResolverInfoContainer
-      
-      class ResolverInfoContainer : public ResolverInfo {
-      
-          
-      
-        private:
-      
-          CResItemList _resItem_list;
-      
-        protected:
-      
-          ResolverInfoContainer (ResolverInfoType type, ResItem_constPtr resItem, int priority, ResItem_constPtr child = NULL);
-      
-        public:
-          virtual ~ResolverInfoContainer();
-      
-          void copy (ResolverInfoContainer_constPtr from);
-      
-          // ---------------------------------- I/O
-      
-          static std::string toString (const ResolverInfoContainer & context);
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
-          friend std::ostream& operator<<(std::ostream&, const ResolverInfoContainer & context);
-          std::string asString (void ) const;
-      
-          // ---------------------------------- accessors
-      
-          CResItemList resItems (void) const { return _resItem_list; }
-      
-          // ---------------------------------- methods
-      
-          virtual bool merge (ResolverInfoContainer_Ptr to_be_merged);
-          virtual ResolverInfo_Ptr copy (void) const;
-      
-          std::string resItemsToString (bool names_only) const;
-      
-          bool mentions (ResItem_constPtr resItem) const;
-          void addRelatedResItem (ResItem_constPtr resItem);
-          void addRelatedResItemList (const CResItemList & resItems);
-      
-      };
-        
-      ///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : ResolverInfoContainer
+
+class ResolverInfoContainer : public ResolverInfo {
+
+  private:
+
+    CResItemList _resItem_list;
+
+  protected:
+
+    ResolverInfoContainer (ResolverInfoType type, ResItem_constPtr resItem, int priority, ResItem_constPtr child = NULL);
+
+  public:
+    virtual ~ResolverInfoContainer();
+
+    void copy (ResolverInfoContainer_constPtr from);
+
+    // ---------------------------------- I/O
+
+    static std::string toString (const ResolverInfoContainer & context);
+    virtual std::ostream & dumpOn(std::ostream & str ) const;
+    friend std::ostream& operator<<(std::ostream&, const ResolverInfoContainer & context);
+    std::string asString (void ) const;
+
+    // ---------------------------------- accessors
+
+    CResItemList resItems (void) const { return _resItem_list; }
+
+    // ---------------------------------- methods
+
+    virtual bool merge (ResolverInfoContainer_Ptr to_be_merged);
+    virtual ResolverInfo_Ptr copy (void) const;
+
+    std::string resItemsToString (bool names_only) const;
+
+    bool mentions (ResItem_constPtr resItem) const;
+    void addRelatedResItem (ResItem_constPtr resItem);
+    void addRelatedResItemList (const CResItemList & resItems);
+
+};
+
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////
@@ -94,4 +92,3 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 #endif // _ResolverInfoContainer_h
- 
