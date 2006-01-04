@@ -85,7 +85,8 @@ lib@PACKAGE@_la_LIBADD =        base/lib@PACKAGE@_base.la	\
 				parser/lib@PACKAGE@_parser.la	\
 				source/lib@PACKAGE@_source.la	\
 				media/lib@PACKAGE@_media.la	\
-				url/lib@PACKAGE@_url.la	\
+				url/lib@PACKAGE@_url.la		\
+				\
 				-lutil
 
 ## ##################################################
