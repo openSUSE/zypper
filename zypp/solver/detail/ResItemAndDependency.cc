@@ -23,6 +23,7 @@
 
 #include <zypp/solver/detail/ResItemAndDependency.h>
 #include <zypp/solver/detail/debug.h>
+#include <zypp/base/Logger.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -97,7 +98,7 @@ namespace zypp
           //if (!dep.matches (_dependency)) {
       	return false;
           //}
-          if (getenv ("SPEW_DEP")) fprintf (stderr, "ResItemAndDependency::verifyRelation _resItem->channel() %s, dep->channel() %s\n", _resItem->channel()->asString().c_str(), dep->channel()->asString().c_str());
+          _DBG("SPEW_DEP") << "ResItemAndDependency::verifyRelation _resItem->channel() " << _resItem->channel()->asString() << ", dep->channel()" << dep->channel()->asString() << endl;
           return _resItem->channel()->equals (dep->channel());
       #endif
 #else

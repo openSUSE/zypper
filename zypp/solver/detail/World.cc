@@ -23,6 +23,7 @@
 
 #include <zypp/solver/detail/MultiWorld.h>
 #include <zypp/solver/detail/Subscription.h>
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -178,7 +179,8 @@ namespace zypp
 
           if (channel == NULL) return;
 
-      //    if (getenv("RC_SPEW")) fprintf (stderr, "World::setSubscription (%s, %s)\n", channel->asString().c_str(), is_subscribed?"subscribe":"unsubscribe");
+	  _XXX("RC_SPEW") << "World::setSubscription (" << channel->asString() << ", " <<
+	      (is_subscribed?"subscribe":"unsubscribe") << ")" << endl;
 
           if (channel->system ()) {
       	fprintf (stderr, "Can't subscribe to system channel '%s'\n",  channel->name ());
@@ -200,7 +202,7 @@ namespace zypp
       World::isSubscribed (Channel_constPtr channel) const
       {
           if (channel == NULL) return false;
-      //    if (getenv("RC_SPEW")) fprintf (stderr, "World::isSubscribed (%s)\n", channel->asString().c_str());
+	  _XXX("RC_SPEW") <<  "World::isSubscribed (" << channel->asString() << ")" << endl;
 
           if (channel->system ())
       	return false;

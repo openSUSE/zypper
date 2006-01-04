@@ -26,6 +26,7 @@
 #include <zypp/solver/detail/ResolverInfoMissingReq.h>
 #include <zypp/solver/detail/World.h>
 #include <zypp/CapSet.h>
+#include <zypp/base/Logger.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -197,7 +198,10 @@ namespace zypp
 
           status = context->getStatus (_resItem);
 
-          if (getenv ("RC_SPEW")) fprintf (stderr, "QueueItemUninstall::process(<%s>%s)%s\n", ResolverContext::toString(status).c_str(), _resItem->asString().c_str(), _unlink ? "[unlink]" : "");
+          _DBG("RC_SPEW") << "QueueItemUninstall::process(<" << ResolverContext::toString(status) << ">" << _resItem->asString() << ")";
+	  if (_unlink)
+	      _DBG("RC_SPEW") << "[unlink]";
+	  _DBG("RC_SPEW") << endl;
 
           /* In the case of an unlink, we only want to uninstall the resItem if it is
              being used by something else.  We can't really determine this with 100%

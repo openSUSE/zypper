@@ -30,6 +30,7 @@
 #include <zypp/solver/detail/ResolverInfoNeededBy.h>
 #include <zypp/solver/detail/World.h>
 #include <zypp/CapSet.h>
+#include <zypp/base/Logger.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -233,10 +234,10 @@ namespace zypp
       bool
       QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_items)
       {
-          if (getenv ("RC_SPEW")) fprintf (stderr, "QueueItemRequire::process(%s)\n", this->asString().c_str());
+          _DBG("RC_SPEW") << "QueueItemRequire::process(" << this->asString() << ")" << endl;
 
           if (context->requirementIsMet (_dep, _is_child)) {
-      	if (getenv ("RC_SPEW")) fprintf (stderr, "requirement is already met in current context\n");
+	      _DBG("RC_SPEW") <<  "requirement is already met in current context" << endl;
       //    rc_queue_item_free (item);
       	return true;
           }
@@ -257,14 +258,14 @@ namespace zypp
 
       	num_providers = info.providers.size();
 
-      	if (getenv ("RC_SPEW")) fprintf (stderr, "requirement is met by %d resolvable\n", num_providers);
+      	_DBG("RC_SPEW") << "requirement is met by " << num_providers << " resolvable";
           }
 
           std::string msg;
 
           if (num_providers == 0) {
 
-      	if (getenv ("RC_SPEW")) fprintf (stderr, "Unfulfilled requirement, try different solution\n");
+	      _DBG("RC_SPEW") << "Unfulfilled requirement, try different solution" << endl;
 
       	QueueItemUninstall_Ptr uninstall_item = NULL;
       	QueueItemBranch_Ptr branch_item = NULL;
@@ -410,7 +411,7 @@ namespace zypp
 
           } else if (num_providers == 1) {
 
-      	if (getenv ("RC_SPEW")) fprintf (stderr, "Found exactly one resolvable, installing it.\n");
+	      _DBG("RC_SPEW") << "Found exactly one resolvable, installing it." << endl;
 
       	QueueItemInstall_Ptr install_item = new QueueItemInstall (world(), info.providers.front());
       	install_item->addDependency (_dep);
@@ -423,7 +424,7 @@ namespace zypp
 
           } else if (num_providers > 1) {
 
-      	if (getenv ("RC_SPEW")) fprintf (stderr, "Found more than one resolvable, branching.\n");
+	      _DBG("RC_SPEW") << "Found more than one resolvable, branching." << endl;
 
       //fprintf (stderr, "Found more than one resItem, branching.\n");
       	QueueItemBranch_Ptr branch_item = new QueueItemBranch (world());

@@ -26,6 +26,7 @@
 #include <zypp/solver/detail/World.h>
 #include <zypp/solver/detail/StoreWorld.h>
 #include <zypp/solver/detail/MultiWorld.h>
+#include <zypp/base/Logger.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -172,7 +173,7 @@ namespace zypp
       void
       Resolver::verifySystem (void)
       {
-          if (getenv ("RC_SPEW")) fprintf (stderr, "Resolver::verifySystem()\n");
+          _XXX("RC_SPEW") <<  "Resolver::verifySystem()" << endl;
           world()->foreachResItem (new Channel(CHANNEL_TYPE_SYSTEM), verify_system_cb, this);
 
           _verifying = true;
@@ -238,10 +239,9 @@ namespace zypp
       {
 
           time_t t_start, t_now;
-          bool extremely_noisy = getenv ("RC_SPEW") != NULL;
           bool have_local_resItems = false;
 
-          if (extremely_noisy) fprintf (stderr, "Resolver::resolveDependencies()\n");
+          _XXX("RC_SPEW") << "Resolver::resolveDependencies()" << endl;
 
           /* Walk through are list of to-be-installed packages and see if any of them are local. */
 
@@ -323,7 +323,7 @@ namespace zypp
       	initial_queue->addExtraConflict (*iter);
           }
 
-          if (extremely_noisy) fprintf (stderr, "Initial Queue: [%s]\n", initial_queue->asString().c_str());
+          _XXX("RC_SPEW") << "Initial Queue: [" << initial_queue->asString() << "]" << endl;
 
           _pending_queues.push_front (initial_queue);
 
@@ -331,30 +331,32 @@ namespace zypp
 
           while (!_pending_queues.empty()) {
 
-      	if (extremely_noisy) {
-      	    printf ("Pend %ld / Cmpl %ld / Prun %ld / Defr %ld / Invl %ld\n\n", (long) _pending_queues.size(), (long) _complete_queues.size(), (long) _pruned_queues.size(), (long) _deferred_queues.size(), (long) _invalid_queues.size());
-      	}
+	      _XXX("RC_SPEW") << "Pend " << (long) _pending_queues.size()
+			      << " / Cmpl " << (long) _complete_queues.size()
+			      << " / Prun " << (long) _pruned_queues.size()
+			      << " / Defr " << (long) _deferred_queues.size()
+			      << " / Invl " << (long) _invalid_queues.size() << endl;
 
-      	if (_timeout_seconds > 0) {
-      	    time (&t_now);
-      	    if (difftime (t_now, t_start) > _timeout_seconds) {
-      		_timed_out = true;
-      		break;
-      	    }
-      	}
+	      if (_timeout_seconds > 0) {
+		  time (&t_now);
+		  if (difftime (t_now, t_start) > _timeout_seconds) {
+		      _timed_out = true;
+		      break;
+		  }
+	      }
 
-      	ResolverQueue_Ptr queue = _pending_queues.front();
-      	_pending_queues.pop_front();
-      	ResolverContext_Ptr context = queue->context();
+	      ResolverQueue_Ptr queue = _pending_queues.front();
+	      _pending_queues.pop_front();
+	      ResolverContext_Ptr context = queue->context();
 
-      	queue->process();
+	      queue->process();
 
-      	if (queue->isInvalid ()) {
-      	    if (extremely_noisy) printf ("Invalid Queue\n");
-      	    _invalid_queues.push_front (queue);
+	      if (queue->isInvalid ()) {
+		  _XXX("RC_SPEW") << "Invalid Queue\n" << endl;;
+	      _invalid_queues.push_front (queue);
 
-      	} else if (queue->isEmpty ()) {
-      	    if (extremely_noisy) printf ("Empty Queue\n");
+	  } else if (queue->isEmpty ()) {
+	      _XXX("RC_SPEW") <<"Empty Queue\n" << endl;
 
       	    _complete_queues.push_front (queue);
 
@@ -376,7 +378,7 @@ namespace zypp
       	    /* If we aren't currently as good as our previous best complete solution,
       	       this solution gets pruned. */
 
-      	    if (extremely_noisy) printf ("PRUNED!\n");
+      	    _XXX("RC_SPEW") << "PRUNED!" << endl;
 
       	    _pruned_queues.push_front(queue);
 
@@ -397,12 +399,12 @@ namespace zypp
       	    && !_deferred_queues.empty()) {
       	    _pending_queues.push_front (_deferred_queues.front());
       	}
-          }
-
-          if (extremely_noisy) {
-      	printf ("Pend %ld / Cmpl %ld / Prun %ld / Defr %ld / Invl %ld\n--------\n", (long) _pending_queues.size(), (long) _complete_queues.size(), (long) _pruned_queues.size(), (long) _deferred_queues.size(), (long) _invalid_queues.size());
-          }
-
+	  }
+	_XXX("RC_SPEW") << "Pend " << (long) _pending_queues.size()
+			<< " / Cmpl " << (long) _complete_queues.size()
+			<< " / Prun " << (long) _pruned_queues.size()
+			<< " / Defr " << (long) _deferred_queues.size()
+			<< " / Invl " << (long) _invalid_queues.size() << endl;
           return;
       }
 

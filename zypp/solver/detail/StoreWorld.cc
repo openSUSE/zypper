@@ -27,6 +27,7 @@
 #include <zypp/solver/detail/debug.h>
 #include <zypp/Arch.h>
 #include <zypp/CapSet.h>
+#include <zypp/base/Logger.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -270,7 +271,8 @@ namespace zypp
       void
       StoreWorld::removeResItem (ResItem_constPtr resItem)
       {
-          if (getenv("RC_SPEW")) fprintf (stderr, "StoreWorld::removeResItem (%s)\n", resItem->asString().c_str());
+          _DBG("RC_SPEW") << "StoreWorld::removeResItem ("
+			  << resItem->asString() << ")" << endl;
 
           Channel_constPtr channel = resItem->channel ();
 
@@ -581,8 +583,7 @@ namespace zypp
 
       	if (r_and_d)
       //fprintf (stderr, "==> %s verify %s ? %s\n", r_and_d->asString().c_str(), dep->asString().c_str(), r_and_d->verifyRelation (dep) ? "Y" : "N");
-      	if (r_and_d {//&& r_and_d->dependency().matches (dep)) {
-
+      	if (r_and_d) {//&& r_and_d->dependency().matches (dep)) {
       	    /* Skip dups if one of them in installed. */
       	    if (r_and_d->resItem()->isInstalled()
       		|| installed.find(r_and_d->resItem()) == installed.end()) {

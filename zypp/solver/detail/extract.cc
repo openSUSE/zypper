@@ -23,11 +23,10 @@
  * USA.
  */
 
-#include <zypp/solver/detail/extract.h>
-#include <zypp/solver/detail/XmlParser.h>
-#include <zypp/solver/detail/utils.h>
-#include <zypp/base/Logger.h>
-#include <zypp/solver/detail/debug.h>
+#include "zypp/solver/detail/extract.h"
+#include "zypp/solver/detail/XmlParser.h"
+#include "zypp/solver/detail/utils.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -154,7 +153,7 @@ namespace zypp
       	return -1;
       
           if (!dump_node->equals("world")) {
-      	debug (DEBUG_LEVEL_WARNING, "Unrecognized top-level node for undump: '%s'", dump_node->name());
+			  WAR << "Unrecognized top-level node for undump: '" << dump_node->name() << "'" << endl;
       	return -1;
           }
       
@@ -485,7 +484,7 @@ namespace zypp
       {
       #ifndef  ENABLE_RPM
           /* We can't support yum without rpm support */
-          debug (RC_DEBUG_LEVEL_ERROR, "RPM support is not enabled");
+          ERR << "RPM support is not enabled" << endl;
           return NULL;
       #else
           RCRpmman *rpmman;
@@ -498,8 +497,7 @@ namespace zypp
           g_return_val_if_fail (packman != NULL, NULL);
       
           if (!g_type_is_a (G_TYPE_FROM_INSTANCE (packman), RC_TYPE_RPMMAN)) {
-      	debug (RC_DEBUG_LEVEL_ERROR,
-      		  "yum support is not available on non-RPM systems");
+			  DBG << "yum support is not available on non-RPM systems" << endl;
       	return NULL;
           }
       
@@ -508,8 +506,7 @@ namespace zypp
           h = rpmman->headerLoad (data);
       
           if (h == NULL) {
-      	debug (RC_DEBUG_LEVEL_ERROR,
-      		  "Unable to get header from headerCopyLoad!");
+			  DBG << "Unable to get header from headerCopyLoad!" << endl;
       	return NULL;
           }
       
@@ -543,7 +540,7 @@ namespace zypp
       {
       #ifndef ENABLE_RPM
           /* We can't support apt-rpm without rpm support */
-          debug (RC_DEBUG_LEVEL_ERROR, "RPM support is not enabled");
+          ERR << "RPM support is not enabled" << endl;
           return -1;
       #else
           RCRpmman *rpmman;
@@ -557,16 +554,14 @@ namespace zypp
           g_return_val_if_fail (packman != NULL, -1);
       
           if (!g_type_is_a (G_TYPE_FROM_INSTANCE (packman), RC_TYPE_RPMMAN)) {
-      	debug (RC_DEBUG_LEVEL_ERROR,
-      		  "apt-rpm support is not available on non-RPM systems");
+			  ERR << "apt-rpm support is not available on non-RPM systems" << endl;
       	return -1;
           }
       
           rpmman = RC_RPMMAN (packman);
       
           if (len < hdrmagic_len) {
-      	debug (RC_DEBUG_LEVEL_ERROR,
-      		  "Data is too small to possibly be correct");
+			  ERR << "Data is too small to possibly be correct" << endl;
       	return 0;
           }
       
@@ -596,8 +591,7 @@ namespace zypp
       	h = rpmman->headerLoad (cur_ptr);
       
       	if (h == NULL) {
-      	    debug (RC_DEBUG_LEVEL_ERROR,
-      		      "Unable to get header from headerCopyLoad!");
+      	    ERR << "Unable to get header from headerCopyLoad!" << endl;
       	    return 0;
       	}
       
@@ -606,7 +600,7 @@ namespace zypp
       	if (n && typ == RPM_STRING_TYPE)
       	    archstr = tmpc;
       	else {
-      	    debug (RC_DEBUG_LEVEL_WARNING, "No arch available!");
+      	    WAR << "No arch available!" << endl;
       	    goto cleanup;
       	}
       

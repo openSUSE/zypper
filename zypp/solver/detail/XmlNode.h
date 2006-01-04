@@ -23,7 +23,7 @@
 #define _XmlNode_h
 
 #include <list>
-
+#include <iostream>
 #include <iosfwd>
 #include <string>
 #include <libxml/parser.h>

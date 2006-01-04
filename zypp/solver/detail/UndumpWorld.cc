@@ -21,6 +21,7 @@
 
 #include <zypp/solver/detail/UndumpWorld.h>
 #include <zypp/solver/detail/extract.h>
+#include <zypp/base/Logger.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -132,7 +133,8 @@ namespace zypp
       void
       UndumpWorld::setSubscription (Channel_constPtr channel, bool subscribe)
       {
-      //    if (getenv("RC_SPEW")) fprintf (stderr, "UndumpWorld::setSubscription (%s, %s)\n", channel->asString().c_str(), subscribe?"subscribe":"unsubscribe");
+	  _XXX("RC_SPEW") << "UndumpWorld::setSubscription (" << channel->asString() << " , " <<  (subscribe?"subscribe":"unsubscribe")
+			  << ")" << endl;
           for (ChannelSubscriptions::iterator i = _subscriptions.begin(); i != _subscriptions.end(); i++) {
       	if (*i == channel) {
       	    if (!subscribe) {
@@ -155,12 +157,12 @@ namespace zypp
       {
           for (ChannelSubscriptions::const_iterator i = _subscriptions.begin(); i != _subscriptions.end(); i++) {
       	if (*i == channel) {
-      	    if (getenv("RC_SPEW")) fprintf (stderr, "UndumpWorld::isSubscribed (%s) YES\n", channel->asString().c_str());
+      	    _DBG("RC_SPEW") << "UndumpWorld::isSubscribed (" << channel->asString() <<") YES" << endl;
       	    return true;
       	}
           }
       
-          if (getenv("RC_SPEW")) fprintf (stderr, "UndumpWorld::isSubscribed (%s) NO\n", channel->asString().c_str());
+          _DBG("RC_SPEW") << "UndumpWorld::isSubscribed (" << channel->asString() << ") NO" << endl;
           return false;
       }
       

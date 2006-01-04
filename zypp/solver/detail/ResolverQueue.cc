@@ -31,6 +31,7 @@
 #include <zypp/solver/detail/QueueItemUninstall.h>
 #include <zypp/solver/detail/ResolverContext.h>
 #include <zypp/CapSet.h>
+#include <zypp/base/Logger.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -223,16 +224,16 @@ namespace zypp
           int max_priority;
           bool did_something = false;
 
-          if (getenv ("QUEUE_SPEW")) fprintf (stderr, "ResolverQueue::processOnce(%s), %d items\n", asString().c_str(), (int) _items.size());
+          _DBG("QUEUE_SPEW") << "ResolverQueue::processOnce(" << asString() <<", " << (int) _items.size() << " items" << endl;
           while ( (max_priority = itemlist_max_priority (_items)) >= 0
       	    && _context->isValid () ) {
 
       	bool did_something_recently = false;
 
-          if (getenv ("QUEUE_SPEW")) fprintf (stderr, "ResolverQueue::processOnce() inside loop\n");
+	_DBG("QUEUE_SPEW") << "ResolverQueue::processOnce() inside loop" << endl;
       	for (QueueItemList::iterator iter = _items.begin(); iter != _items.end() && _context->isValid();) {
       	    QueueItem_Ptr item = *iter;
-      	    if (getenv ("QUEUE_SPEW")) fprintf (stderr, "=====> 1st pass: [%s]\n", item->asString().c_str());
+      	    _DBG("QUEUE_SPEW") <<  "=====> 1st pass: [" << item->asString() << "]" << endl;
       	    QueueItemList::iterator next = iter; next++;
       	    if (item && item->priority() == max_priority) {
       		if (item->process (_context, new_items)) {
@@ -249,7 +250,7 @@ namespace zypp
           }
 
           _items = new_items;
-          if (getenv ("QUEUE_SPEW")) fprintf (stderr, "%d items after first pass\n", (int) _items.size());
+          _DBG("QUEUE_SPEW") <<  (int) _items.size() << " items after first pass" << endl;
 
           /*
              Now make a second pass over the queue, removing any super-branches.
@@ -257,20 +258,20 @@ namespace zypp
              the larger branch can be dropped.
           */
 
-      //    if (getenv ("QUEUE_SPEW")) fprintf (stderr, "ResolverQueue::processOnce() second pass\n");
+          _XXX("QUEUE_SPEW") <<  "ResolverQueue::processOnce() second pass" << endl;
           for (QueueItemList::iterator iter = _items.begin(); iter != _items.end();) {
       	QueueItemList::iterator next = iter; next++;
       	QueueItem_Ptr item = *iter;
 
-      	if (getenv ("QUEUE_SPEW")) fprintf (stderr, "=====> 2nd pass: [%s]\n", item->asString().c_str());
+      	_DBG("QUEUE_SPEW") <<  "=====> 2nd pass: [" << item->asString() << "]" << endl;
       	if (item->isBranch()) {
-      	    if (getenv ("QUEUE_SPEW")) fprintf (stderr, "ResolverQueue::processOnce() is branch\n");
+      	    _DBG("QUEUE_SPEW") << "ResolverQueue::processOnce() is branch" << endl;
       	    QueueItemBranch_Ptr branch = dynamic_pointer_cast<QueueItemBranch>(item);
       	    for (QueueItemList::const_iterator iter2 = _items.begin(); iter2 != _items.end(); iter2++) {
-      		if (getenv ("QUEUE_SPEW")) fprintf (stderr, "Compare branch with [%s]\n", (*iter2)->asString().c_str());
+      		_DBG("QUEUE_SPEW") << "Compare branch with [" << (*iter2)->asString() << "]" << endl;
       		if (iter != iter2
       		    && branch->contains (*iter2)) {
-      		    if (getenv ("QUEUE_SPEW")) fprintf (stderr, "Contained within, removing\n");
+      		    _DBG("QUEUE_SPEW") << "Contained within, removing" << endl;
       		    _items.erase (iter);
       		    break;
       		}
@@ -278,7 +279,10 @@ namespace zypp
       	}
       	iter = next;
           }
-          if (getenv ("QUEUE_SPEW")) fprintf (stderr, "did %sthing: %d items\n", did_something ? "some" : "no", (int)_items.size());
+	  if (did_something)
+	      _DBG("QUEUE_SPEW") <<  "did somesthing: " << (int)_items.size() << " items" << endl;
+	  else
+	      _DBG("QUEUE_SPEW") <<  "did nothing: " << (int)_items.size() << " items" << endl;	      
 
           return did_something;
       }
@@ -287,22 +291,14 @@ namespace zypp
       void
       ResolverQueue::process ()
       {
-          bool very_noisy;
-
-          very_noisy = getenv ("RC_SPEW") != NULL;
-
-          if (very_noisy) {
-      	printf ("----- Processing -----\n");
-      	spew ();
-          }
+	  _DBG("RC_SPEW") << "----- Processing -----" << endl;
+	  spew ();
 
           while (_context->isValid ()
-      	   && ! isEmpty ()
-      	   && processOnce ()) {
-      	/* all of the work is in the conditional! */
-      	if (very_noisy) {
-      	    spew ();
-      	}
+		 && ! isEmpty ()
+		 && processOnce ()) {
+	      /* all of the work is in the conditional! */
+	      spew ();
           }
       }
 
@@ -427,21 +423,20 @@ namespace zypp
       void
       ResolverQueue::spew ()
       {
-          printf ("Resolver Queue: %s\n", _context->isInvalid() ? "INVALID" : "");
+          _DBG("RC_SPEW") << "Resolver Queue: " << (_context->isInvalid() ? "INVALID" : "") << endl;
 
           if (_items.empty()) {
 
-      	printf ("  (empty)\n");
+	      _DBG("RC_SPEW") <<  "  (empty)" << endl;
 
           } else {
-
-      	for (QueueItemList::const_iterator iter = _items.begin(); iter != _items.end(); iter++) {
-      	    printf ("  %s\n", (*iter)->asString().c_str());
-      	}
+	      for (QueueItemList::const_iterator iter = _items.begin(); iter != _items.end(); iter++) {
+		  _DBG("RC_SPEW") << "  " << (*iter)->asString() << endl;
+	      }
 
           }
 
-          printf ("\n");
+          _DBG("RC_SPEW") << endl;
           fflush (stdout);
       }
 

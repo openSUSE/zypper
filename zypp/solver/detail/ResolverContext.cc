@@ -22,12 +22,13 @@
 
 #include <values.h>
 
-#include <zypp/base/String.h>
-#include <zypp/solver/detail/ResolverContext.h>
-#include <zypp/solver/detail/ResolverInfoMisc.h>
-#include <zypp/solver/detail/MultiWorld.h>
-#include <zypp/solver/detail/World.h>
-#include <zypp/CapSet.h>
+#include "zypp/base/String.h"
+#include "zypp/solver/detail/ResolverContext.h"
+#include "zypp/solver/detail/ResolverInfoMisc.h"
+#include "zypp/solver/detail/MultiWorld.h"
+#include "zypp/solver/detail/World.h"
+#include "zypp/CapSet.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -226,7 +227,8 @@ ResolverContext::installResItem (ResItem_constPtr resItem, bool is_soft, int oth
     std::string msg;
 
     status = getStatus (resItem);
-    if (getenv ("RC_SPEW")) fprintf (stderr, "ResolverContext[%p]::installResItem(<%s>%s)\n", this, ResolverContext::toString(status).c_str(), resItem->asString().c_str());
+    _DBG("RC_SPEW") << "ResolverContext[" << this << "]::installResItem(<" << ResolverContext::toString(status)
+		    << "> " << resItem->asString() << ")" << endl;
 
     if (resItem_status_is_to_be_uninstalled (status)
 	&& status != RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK) {
@@ -283,7 +285,8 @@ ResolverContext::upgradeResItem (ResItem_constPtr resItem, ResItem_constPtr old_
     ResItemStatus status;
     int priority;
 
-    if (getenv ("RC_SPEW")) fprintf (stderr, "ResolverContext[%p]::upgradeResItem(%s upgrades %s)\n", this, resItem->asString().c_str(), old_resItem->asString().c_str());
+    _DBG("RC_SPEW") << "ResolverContext[" << this << "]::upgradeResItem(" << resItem->asString() << " upgrades "
+		    << old_resItem->asString() << ")" << endl;
 
     status = getStatus (resItem);
 
@@ -325,7 +328,10 @@ ResolverContext::uninstallResItem (ResItem_constPtr resItem, bool part_of_upgrad
     ResItemStatus status, new_status;
     std::string msg;
 
-    if (getenv ("RC_SPEW")) fprintf (stderr, "ResolverContext[%p]::uninstallResItem(%s %s %s %s)\n", this, resItem->asString().c_str(), part_of_upgrade ? "part_of_upgrade" : "", due_to_obsolete ? "due_to_obsolete": "", due_to_unlink ? "due_to_unlink" : "");
+    _DBG("RC_SPEW") << "ResolverContext[" << this << "]::uninstallResItem("
+		    << resItem->asString() << " " << (part_of_upgrade ? "part_of_upgrade" : "") << " "
+		    << (due_to_obsolete ? "due_to_obsolete": "") << " "
+		    << (due_to_unlink ? "due_to_unlink" : "") << ")" << endl;
 
     assert (! (due_to_obsolete && due_to_unlink));
 
@@ -667,7 +673,7 @@ ResolverContext::upgradeCount (void)
 void
 ResolverContext::addInfo (ResolverInfo_Ptr info)
 {
-    if (getenv ("RC_SPEW")) fprintf (stderr, "ResolverContext[%p]::addInfo(%s)\n", this, info->asString().c_str());
+    _DBG("RC_SPEW") << "ResolverContext[" << this << "]::addInfo(" << info->asString() << ")" << endl;
     _log.push_back (info);
 
     // _propagated_importance = false;
@@ -688,7 +694,7 @@ ResolverContext::addInfo (ResolverInfo_Ptr info)
 void
 ResolverContext::addInfoString (ResItem_constPtr resItem, int priority, string msg)
 {
-//    if (getenv ("RC_SPEW")) fprintf (stderr, "ResolverContext::addInfoString(%s) %s\n", resItem ? resItem->asString().c_str() : "", msg.c_str());
+    _XXX("RC_SPEW") << "ResolverContext::addInfoString(" << (resItem ? resItem->asString().c_str() : "") << ") " << msg << endl;
     ResolverInfo_Ptr info = new ResolverInfoMisc (resItem, priority, msg);
     addInfo (info);
 }
@@ -934,7 +940,7 @@ spew_info_cb (ResolverInfo_Ptr info, void *unused)
 void
 ResolverContext::spewInfo (void)
 {
-    if (getenv ("RC_SPEW")) fprintf (stderr, "ResolverContext[%p]::spewInfo()\n", this);
+    _DBG("RC_SPEW") << "ResolverContext[" << this << "]::spewInfo" << endl;
     foreachInfo (NULL, -1, spew_info_cb, NULL);
 }
 

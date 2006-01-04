@@ -24,6 +24,7 @@
  */
 
 #include <zypp/solver/detail/XmlNode.h>
+#include <zypp/base/Logger.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -95,7 +96,7 @@ namespace zypp
           xmlNode *child;
       
           xml_s = xmlGetProp(_node, (const xmlChar *)name);
-      //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlNode::getValue(%s) xmlGetProp '%s'\n", name, (char *)xml_s);
+	  _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") xmlGetProp '" << (char *)xml_s << "'" << endl;
       
           if (xml_s) {
       	ret = strdup ((const char *)xml_s);
@@ -106,10 +107,12 @@ namespace zypp
           child = _node->xmlChildrenNode;
       
           while (child) {
-      //	if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlNode::getValue(%s) child '%s'\n", name, (const char *)(child->name));
+	      _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") child '" << (const char *)(child->name) << "'" 
+				  << endl;
       	if (strcasecmp((const char *)(child->name), name) == 0) {
       	    xml_s = xmlNodeGetContent(child);
-      //	    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlNode::getValue(%s) xmlNodeGetContent '%s'\n", name, (char *)xml_s);
+	    _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") xmlNodeGetContent '" << (char *)xml_s << "'"
+				<< endl;
       	    if (xml_s) {
       		ret = strdup ((const char *)xml_s);
       		xmlFree (xml_s);
@@ -119,7 +122,7 @@ namespace zypp
       	child = child->next;
           }
       
-      //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlNode::getValue(%s) NULL\n", name);
+	  _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") NULL" << endl;
           return deflt;
       }
       
@@ -131,7 +134,8 @@ namespace zypp
           char *gs;
       
           ret = xmlGetProp (_node, (const xmlChar *)name);
-      //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlNode::getProp(%s) xmlGetProp '%s'\n", name, (char *)ret);
+	  _XXX("RC_SPEW_XML") << "XmlNode::getProp(" << name << ") xmlGetProp '" << (char *)ret << "'"
+			      << endl;
           if (ret) {
       	gs = strdup ((const char *)ret);
       	xmlFree (ret);

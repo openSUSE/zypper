@@ -22,16 +22,15 @@
 #include <config.h>
 #include <ctype.h>
 #include <assert.h>
-#include <zypp/solver/detail/XmlParser.h>
-#include <zypp/solver/detail/PackageUpdate.h>
-#include <zypp/solver/detail/utils.h>
-
-#include <zypp/solver/detail/debug.h>
-#include <zypp/ResObject.h>
-
-#include <zypp/CapFactory.h>
-#include <zypp/CapSet.h>
-#include <zypp/Dependencies.h>
+#include "zypp/solver/detail/XmlParser.h"
+#include "zypp/solver/detail/PackageUpdate.h"
+#include "zypp/solver/detail/utils.h"
+#include "zypp/solver/detail/debug.h"
+#include "zypp/ResObject.h"
+#include "zypp/CapFactory.h"
+#include "zypp/CapSet.h"
+#include "zypp/Dependencies.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -75,7 +74,7 @@ namespace zypp
                     else if (!strcasecmp(attr, "arch"))	    arch = value;
                     else if (!strcasecmp (attr, "obsoletes"))   *is_obsolete = true;
                     else {
-                        if (getenv ("RC_SPEW_XML"))	rc_debug (RC_DEBUG_LEVEL_ALWAYS, "! Unknown attribute: %s = %s", attr, value);
+                        _DBG("RC_SPEW_XML") << "! Unknown attribute: " << attr << " = " << value << endl;
                     }
       
                 }
@@ -98,7 +97,7 @@ namespace zypp
                 XmlParser *ctx = (XmlParser *)ptr;
                 if (ctx->processing()) return;
       
-                //    if (getenv ("RC_SPEW_XML")) rc_debug (RC_DEBUG_LEVEL_ALWAYS, "* Start document");
+                _XXX("RC_SPEW_XML") << "* Start document" << endl;
       
                 ctx->setProcessing (true);
             }
@@ -110,7 +109,7 @@ namespace zypp
                 XmlParser *ctx = (XmlParser *)ptr;
                 if (!ctx->processing()) return;
       
-                //    if (getenv ("RC_SPEW_XML")) rc_debug (RC_DEBUG_LEVEL_ALWAYS, "* End document");
+                _XXX("RC_SPEW_XML") << "* End document" << endl;
       
                 ctx->setProcessing (false);
             }
@@ -124,11 +123,11 @@ namespace zypp
                 ctx->releaseBuffer();
       
 #if 0
-                //    if (getenv ("RC_SPEW_XML"))	rc_debug (RC_DEBUG_LEVEL_ALWAYS, "* Start element (%s)", (const char *)name);
+                _XXX("RC_SPEW_XML") <<  "* Start element (" << (const char *)name << ")";
       
                 if (attrs) {
                     for (int i = 0; attrs[i]; i += 2) {
-                        if (getenv ("RC_SPEW_XML")) rc_debug (RC_DEBUG_LEVEL_ALWAYS, "   - Attribute (%s=%s)", (const char *)attrs[i], (const char *)attrs[i+1]);
+                        _DBG("RC_SPEW_XML") <<  "   - Attribute (" << (const char *)attrs[i] << "=" << (const char *)attrs[i+1] << ")" << endl;
                     }
                 }
 #endif
@@ -147,7 +146,7 @@ namespace zypp
             {
                 XmlParser *ctx = (XmlParser *)ptr;
       
-                //    if (getenv ("RC_SPEW_XML"))	rc_debug (RC_DEBUG_LEVEL_ALWAYS, "* End element (%s)", (const char *)name);
+                _XXX("RC_SPEW_XML") << "* End element (" << (const char *)name << ")" << endl;
           
                 if (!strcmp((const char *)name, "channel") || !strcmp((const char *)name, "subchannel")) {
                     /* Unneeded container tags.  Ignore */
@@ -239,7 +238,7 @@ namespace zypp
                 , _text_buffer (NULL)
                 , _text_buffer_size (0)
             {
-                //    if (getenv ("RC_SPEW_XML")) rc_debug (RC_DEBUG_LEVEL_ALWAYS, "* Context created (%p)", this);
+                _XXX("RC_SPEW_XML") <<  "* Context created (" << this << ")" << endl;
             }
       
       
@@ -288,7 +287,7 @@ namespace zypp
                 _text_buffer_size += size;
                 _text_buffer[_text_buffer_size] = 0;
       
-                //    if (getenv ("RC_SPEW_XML"))	fprintf (stderr, "XmlParser[%p]::toBuffer(%.32s...,%ld)\n", this, data, (long)size);
+                _XXX("RC_SPEW_XML") << "XmlParser[" << this << "]::toBuffer(" << data << "...," << (long)size << ")" << endl;
             }
       
       
@@ -299,14 +298,14 @@ namespace zypp
                     free (_text_buffer);
                 _text_buffer = NULL;
                 _text_buffer_size = 0;
-                //    if (getenv ("RC_SPEW_XML"))	fprintf (stderr, "XmlParser[%p]::releaseBuffer()\n", this);
+                _XXX("RC_SPEW_XML") <<  "XmlParser[" << this << "]::releaseBuffer()" << endl;
             }
       
       
             void
             XmlParser::parseChunk(const char *xmlbuf, size_t size)
             {
-                if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::parseChunk(%.32s...,%ld)\n", xmlbuf, (long)size);
+                _DBG("RC_SPEW_XML") << "XmlParser::parseChunk(" << xmlbuf << "...," << (long)size << ")" << endl;
       
                 xmlSubstituteEntitiesDefault(true);
           
@@ -321,7 +320,7 @@ namespace zypp
             PackageList
             XmlParser::done()
             {
-                //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::done()\n");
+                _XXX("RC_SPEW_XML") << "XmlParser::done()" << endl;
       
                 if (_processing)
                     xmlParseChunk(_xml_context, NULL, 0, 1);
@@ -347,7 +346,7 @@ namespace zypp
             void
             XmlParser::startElement(const char *name, const xmlChar **attrs)
             {
-                //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::startElement(%s)\n", name);
+                _XXX("RC_SPEW_XML") << "XmlParser::startElement(" << name << ")" << endl;
       
                 switch (_state) {
                     case PARSER_TOPLEVEL:
@@ -373,7 +372,7 @@ namespace zypp
             void
             XmlParser::endElement(const char *name)
             {
-                //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::endElement(%s)\n", name);
+                _XXX("RC_SPEW_XML") <<  "XmlParser::endElement(" << name << ")" << endl;
       
                 if (name != NULL) {			// sax_end_element might set name to NULL
                     switch (_state) {
@@ -403,7 +402,7 @@ namespace zypp
             void
             XmlParser::toplevelStart(const char * name, const xmlChar **attrs)
             {
-                //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::toplevelStart(%s)\n", name);
+                _XXX("RC_SPEW_XML") << "XmlParser::toplevelStart(" << name << ")" << endl;
       
                 if (!strcmp(name, "package")) {
             
@@ -434,7 +433,7 @@ namespace zypp
       
                 }
                 else {
-                    if (getenv ("RC_SPEW_XML")) rc_debug (RC_DEBUG_LEVEL_ALWAYS, "! Not handling %s at toplevel", (const char *)name);
+                    _DBG("RC_SPEW_XML") << "! Not handling " << (const char *)name << " at toplevel" << endl;
                 }
             }
       
@@ -442,7 +441,7 @@ namespace zypp
             void
             XmlParser::packageStart(const char * name, const xmlChar **attrs)
             {
-                //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageStart(%s)\n", name);
+                _XXX("RC_SPEW_XML") << "XmlParser::packageStart(" << name << ")" << endl;
       
                 /* Only care about the containers here */
                 if (!strcmp((const char *)name, "history")) {
@@ -498,7 +497,7 @@ namespace zypp
                     _current_dep_list = _toplevel_dep_list = &_current_children;
                 } 
                 else {
-                    //	if (getenv ("RC_SPEW_XML")) rc_debug (RC_DEBUG_LEVEL_ALWAYS, "! Not handling %s in package start", name);
+                    _XXX("RC_SPEW_XML") << "! Not handling " << name << " in package start" << endl;
                 }
             }
       
@@ -506,7 +505,7 @@ namespace zypp
             void
             XmlParser::historyStart(const char * name, const xmlChar **attrs)
             {
-                //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::historyStart(%s)\n", name);
+                _XXX("RC_SPEW_XML") << "XmlParser::historyStart(" << name << ")" << endl;
       
                 if (!strcmp(name, "update")) {
                     assert(_current_update == NULL);
@@ -516,7 +515,7 @@ namespace zypp
                     _state = PARSER_UPDATE;
                 }
                 else {
-                    if (getenv ("RC_SPEW_XML")) rc_debug (RC_DEBUG_LEVEL_ALWAYS, "! Not handling %s in history", name);
+                    _XXX("RC_SPEW_XML") << "! Not handling " << name << " in history" << endl;
                 }
             }
       
@@ -524,7 +523,7 @@ namespace zypp
             void
             XmlParser::dependencyStart(const char *name, const xmlChar **attrs)
             {
-                //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::dependencyStart(%s)\n", name);
+                _XXX("RC_SPEW_XML") << "XmlParser::dependencyStart(" << name << ")" << endl;
       
                 if (!strcmp(name, "dep")) {
                     Capability dep;
@@ -541,7 +540,7 @@ namespace zypp
                 else if (!strcmp(name, "or"))
                     _current_dep_list->clear();
                 else {
-                    if (getenv ("RC_SPEW_XML")) rc_debug (RC_DEBUG_LEVEL_ALWAYS, "! Not handling %s in dependency", name);
+                    _DBG("RC_SPEW_XML") <<  "! Not handling " << name << " in dependency" << endl;
                 }
             }
       
@@ -552,7 +551,7 @@ namespace zypp
             void
             XmlParser::packageEnd(const char *name)
             {
-                //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageEnd(%s)\n", name);
+                _XXX("RC_SPEW_XML") << "XmlParser::packageEnd(" << name << ")" << endl;
       
                 if (!strcmp(name, "package")) {
                     PackageUpdate_Ptr update = NULL;
@@ -600,7 +599,7 @@ namespace zypp
                     }
       
                     if (piter == _current_provides.end()) {			// no self provide found, construct one
-                        //if (getenv ("RC_SPEW")) fprintf (stderr, "Adding self-provide [%s]\n", selfdep->asString().c_str());
+                        _XXX("RC_SPEW") << "Adding self-provide [" << selfdep.asString() << "]" << endl;
                         _current_provides.insert (selfdep);
                     }
 
@@ -634,9 +633,9 @@ namespace zypp
                     }
                     _all_packages.push_back (package);
       	
-                    if (getenv ("RC_SPEW")) fprintf (stderr, "%s\n", package->asString(true).c_str());
-                    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageEnd done: '%s'\n", package->asString(true).c_str());
-                    //	if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageEnd now %ld packages\n", _all_packages.size());
+                    _DBG("RC_SPEW") << package->asString(true) << endl;
+                    _DBG("RC_SPEW_XML") << "XmlParser::packageEnd done: '" << package->asString(true) << "'" << endl;
+                    _XXX("RC_SPEW_XML") << "XmlParser::packageEnd now " << _all_packages.size() << " packages" << endl;
                     _current_package_stored = true;
                     _state = PARSER_TOPLEVEL;
                 }
@@ -651,10 +650,10 @@ namespace zypp
                 } else if (!strcmp(name, "install_only")) {		_current_package_installOnly = true;
                 } else if (!strcmp(name, "package_set")) {		_current_package_packageSet = true;
                 } else {
-                    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageEnd(%s) unknown\n", name);
+                    _DBG("RC_SPEW_XML") << "XmlParser::packageEnd(" << name << ") unknown" << endl;
                 }
       
-                //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageEnd(%s) done\n", name);
+                _XXX("RC_SPEW_XML") << "XmlParser::packageEnd(" << name << ") done" << endl;
       
                 releaseBuffer();
             }
@@ -663,7 +662,7 @@ namespace zypp
             void
             XmlParser::historyEnd(const char *name)
             {
-                //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::historyEnd(%s)\n", name);
+                _XXX("RC_SPEW_XML") << "XmlParser::historyEnd(" << name << ")" << endl;
       
                 if (!strcmp(name, "history")) {
                     assert(_current_update == NULL);
@@ -676,7 +675,7 @@ namespace zypp
             void
             XmlParser::updateEnd(const char *name)
             {
-                //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::updateEnd(%s)\n", name);
+                _XXX("RC_SPEW_XML") << "XmlParser::updateEnd(" << name << ")" << endl;
       
                 Channel_constPtr channel;
                 const char *url_prefix = NULL;
@@ -725,7 +724,8 @@ namespace zypp
                     fprintf (stderr, "XmlParser::updateEnd(%s) unknown\n", name);
                 }
       
-                //    if (_current_update != NULL && getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::updateEnd(%s) => '%s'\n", name, _current_update->asString().c_str());
+                if (_current_update != NULL )
+		    _DBG("RC_SPEW_XML") << "XmlParser::updateEnd(" << name << ") => '" << _current_update->asString() << "'" << endl;
       
                 releaseBuffer();
       
@@ -735,7 +735,7 @@ namespace zypp
             void
             XmlParser::dependencyEnd(const char *name)
             {
-                //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::dependencyEnd(%s)\n", name);
+                _XXX("RC_SPEW_XML") << "XmlParser::dependencyEnd(" << name << ")" << endl;
       
                 if (!strcmp(name, "or")) {
 #if 0 
