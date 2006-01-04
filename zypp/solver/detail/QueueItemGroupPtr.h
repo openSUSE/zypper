@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* QueueItemGroupPtr.h
+/* QueueItemGroup_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,14 +18,14 @@
  * 02111-1307, USA.
  */
 
-#ifndef _QueueItemGroupPtr_h
-#define _QueueItemGroupPtr_h
+#ifndef _QueueItemGroup_Ptr_h
+#define _QueueItemGroup_Ptr_h
 
-#include <y2util/RepDef.h>
-#include <zypp/solver/detail/QueueItem.h>
+#include "zypp/base/PtrTypes.h"
+#include <zypp/solver/detail/QueueItemPtr.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -35,11 +35,11 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : QueueItemGroupPtr
-      //	CLASS NAME : constQueueItemGroupPtr
+      //	CLASS NAME : QueueItemGroup_Ptr
+      //	CLASS NAME : QueueItemGroup_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_DERIVED_POINTER(QueueItemGroup,QueueItem);
-      
+      DEFINE_PTR_TYPE(QueueItemGroup);
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
@@ -50,4 +50,4 @@ namespace zypp
 };// namespace zypp
 ////////////////////////////////////////////////////////////////////////
 
-#endif // _QueueItemGroupPtr_h
+#endif // _QueueItemGroup_Ptr_h

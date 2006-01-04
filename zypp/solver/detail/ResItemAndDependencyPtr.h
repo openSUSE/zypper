@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* ResItemAndDependencyPtr.h
+/* ResItemAndDependency_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ResItemAndDependencyPtr_h
-#define _ResItemAndDependencyPtr_h
+#ifndef _ResItemAndDependency_Ptr_h
+#define _ResItemAndDependency_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 #include <zypp/solver/detail/WorldPtr.h>
 
 /////////////////////////////////////////////////////////////////////////
@@ -35,10 +35,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
       
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : ResItemAndDependencyPtr
-      //	CLASS NAME : constResItemAndDependencyPtr
+      //	CLASS NAME : ResItemAndDependency_Ptr
+      //	CLASS NAME : ResItemAndDependency_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_BASE_POINTER(ResItemAndDependency);
+      DEFINE_PTR_TYPE(ResItemAndDependency);
       
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -49,4 +49,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _ResItemAndDependencyPtr_h
+#endif // _ResItemAndDependency_Ptr_h

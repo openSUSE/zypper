@@ -25,7 +25,11 @@
 #include <iosfwd>
 #include <list>
 #include <map>
-#include <string.h>
+#include <string>
+
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
+#include "zypp/base/PtrTypes.h"
 
 #include <zypp/solver/detail/ResolverQueuePtr.h>
 #include <zypp/solver/detail/ResolverContextPtr.h>
@@ -34,7 +38,7 @@
 #include <zypp/Capability.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -42,59 +46,59 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
-      typedef std::list <ResolverQueuePtr> ResolverQueueList;
-      
+
+      typedef std::list <ResolverQueue_Ptr> ResolverQueueList;
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : ResolverQueue
-      
-      class ResolverQueue : public CountedRep {
-      
-          REP_BODY(ResolverQueue);
-      
+
+      class ResolverQueue : public base::ReferenceCounted, private base::NonCopyable {
+
+          
+
         private:
-      
-          ResolverContextPtr _context;
+
+          ResolverContext_Ptr _context;
           QueueItemList _items;
-      
+
         public:
-          ResolverQueue (ResolverContextPtr context = NULL);
+          ResolverQueue (ResolverContext_Ptr context = NULL);
           virtual ~ResolverQueue();
-      
+
           // ---------------------------------- I/O
-      
+
           static std::string toString (const ResolverQueue & context);
           virtual std::ostream & dumpOn(std::ostream & str ) const;
           friend std::ostream& operator<<(std::ostream&, const ResolverQueue & context);
           std::string asString (void ) const;
-      
+
           // ---------------------------------- accessors
-      
-          ResolverContextPtr context (void) const { return _context; }
+
+          ResolverContext_Ptr context (void) const { return _context; }
           QueueItemList items(void) const { return _items; }
-      
+
           // ---------------------------------- methods
-      
-      
-          void addResItemToInstall (constResItemPtr resItem);
-          void addResItemToRemove (constResItemPtr resItem, bool remove_only_mode);
-          void addResItemToVerify (constResItemPtr resItem);
+
+
+          void addResItemToInstall (ResItem_constPtr resItem);
+          void addResItemToRemove (ResItem_constPtr resItem, bool remove_only_mode);
+          void addResItemToVerify (ResItem_constPtr resItem);
           void addExtraDependency (const Capability & dep);
           void addExtraConflict (const Capability & dep);
-          void addItem (QueueItemPtr item);
-      
+          void addItem (QueueItem_Ptr item);
+
           bool isEmpty () const { return _items.empty(); }
           bool isInvalid ();
           bool containsOnlyBranches ();
-      
+
           bool processOnce ();
           void process ();
-      
+
           void splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueList & deferred_queues);
-      
+
           void spew ();
-      
+
       };
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -107,4 +111,4 @@ namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
 #endif // _ResolverQueue_h
- 
+

@@ -35,7 +35,7 @@ namespace zypp
       
       using namespace std;
       
-      IMPL_DERIVED_POINTER(ResolverInfoChildOf, ResolverInfo);
+      IMPL_PTR_TYPE(ResolverInfoChildOf);
       
       //---------------------------------------------------------------------------
       
@@ -76,7 +76,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      ResolverInfoChildOf::ResolverInfoChildOf (constResItemPtr resItem, constResItemPtr dependency)
+      ResolverInfoChildOf::ResolverInfoChildOf (ResItem_constPtr resItem, ResItem_constPtr dependency)
           : ResolverInfoContainer (RESOLVER_INFO_TYPE_CHILD_OF, resItem, RESOLVER_INFO_PRIORITY_USER, dependency)
       {
       }
@@ -89,12 +89,12 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       
-      ResolverInfoPtr
+      ResolverInfo_Ptr
       ResolverInfoChildOf::copy (void) const
       {
-          ResolverInfoChildOfPtr cpy = new ResolverInfoChildOf(resItem(), NULL);
+          ResolverInfoChildOf_Ptr cpy = new ResolverInfoChildOf(resItem(), NULL);
       
-          ((ResolverInfoContainerPtr)cpy)->copy (this);
+          ((ResolverInfoContainer_Ptr)cpy)->copy (this);
       
           return cpy;
       }

@@ -41,13 +41,13 @@ namespace zypp
       
       class ResolverInfoObsoletes : public ResolverInfoContainer {
       
-          REP_BODY(ResolverInfoObsoletes);
+          
       
         private:
       
         public:
       
-          ResolverInfoObsoletes (constResItemPtr resItem, constResItemPtr obsoletes);
+          ResolverInfoObsoletes (ResItem_constPtr resItem, ResItem_constPtr obsoletes);
           virtual ~ResolverInfoObsoletes();
       
           // ---------------------------------- I/O
@@ -61,7 +61,7 @@ namespace zypp
       
           // ---------------------------------- methods
       
-          virtual ResolverInfoPtr copy (void) const;
+          virtual ResolverInfo_Ptr copy (void) const;
       };
       ///////////////////////////////////////////////////////////////////
     };// namespace detail

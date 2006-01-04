@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* PackagePtr.h
+/* Package_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _PackagePtr_h
-#define _PackagePtr_h
+#ifndef _Package_Ptr_h
+#define _Package_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 #include <zypp/solver/detail/ResItemPtr.h>
 
 /////////////////////////////////////////////////////////////////////////
@@ -35,10 +35,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : PackagePtr
-      //	CLASS NAME : constPackagePtr
+      //	CLASS NAME : Package_Ptr
+      //	CLASS NAME : Package_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_DERIVED_POINTER(Package,ResItem);
+      DEFINE_PTR_TYPE(Package);
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
@@ -50,4 +50,4 @@ namespace zypp
 /////////////////////////////////////////////////////////////////////////      
 
 
-#endif // _PackagePtr_h
+#endif // _Package_Ptr_h

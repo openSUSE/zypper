@@ -25,7 +25,7 @@
 #include <zypp/base/Logger.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -33,20 +33,20 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
+
       using namespace std;
-      
-      IMPL_DERIVED_POINTER(QueueItemBranch,QueueItem);
-      
+
+      IMPL_PTR_TYPE(QueueItemBranch);
+
       //---------------------------------------------------------------------------
-      
+
       string
       QueueItemBranch::asString ( void ) const
       {
           return toString (*this);
       }
-      
-      
+
+
       string
       QueueItemBranch::toString ( const QueueItemBranch & item)
       {
@@ -59,44 +59,44 @@ namespace zypp
           res += "]";
           return res;
       }
-      
-      
+
+
       ostream &
       QueueItemBranch::dumpOn( ostream & str ) const
       {
           str << asString();
           return str;
       }
-      
-      
+
+
       ostream&
       operator<<( ostream& os, const QueueItemBranch & item)
       {
           return os << item.asString();
       }
-      
+
       //---------------------------------------------------------------------------
-      
-      QueueItemBranch::QueueItemBranch (WorldPtr world)
+
+      QueueItemBranch::QueueItemBranch (World_Ptr world)
           : QueueItem (QUEUE_ITEM_TYPE_BRANCH, world)
       {
       }
-      
-      
+
+
       QueueItemBranch::~QueueItemBranch()
       {
       }
-      
+
       //---------------------------------------------------------------------------
-      
+
       void
-      QueueItemBranch::addItem (QueueItemPtr subitem)
+      QueueItemBranch::addItem (QueueItem_Ptr subitem)
       {
-          assert (this != subitem);
+          assert (static_cast<QueueItem*>(this) != subitem);
       #if 0
           // We want to keep the list of possible items sorted for easy comparison later.
           for (QueueItemList::iterator pos = _possible_items.begin(); pos != _possible_items.end(); pos++) {
-      
+
       	if ((*pos)->cmp(subitem) >= 0) {			// found a larger one
       	    _possible_items.insert (pos, subitem);		// insert before
       	    return;
@@ -104,141 +104,141 @@ namespace zypp
           }
       #endif
           _possible_items.push_back (subitem);			// no larger found, subitem must be largest
-      
+
           return;
       }
-      
-      
+
+
       bool
-      QueueItemBranch::contains (QueueItemPtr possible_subbranch)
+      QueueItemBranch::contains (QueueItem_Ptr possible_subbranch)
       {
-          QueueItemBranchPtr branch = (QueueItemBranchPtr)possible_subbranch;
-      
+          QueueItemBranch_Ptr branch = dynamic_pointer_cast<QueueItemBranch>(possible_subbranch);
+
           if (branch == NULL
       	|| !branch->isBranch()) {
       	return false;
           }
-      
-      
+
+
           if (_possible_items.size() < branch->_possible_items.size()) {
       	return false;
           }
-      
+
           QueueItemList::iterator iter = _possible_items.begin();
           QueueItemList::iterator iter_sub = branch->_possible_items.begin();
-      
+
           /* For every item inside the possible sub-branch, look for a matching item
              in the branch.  If we can't find a match, fail.  (We can do this in one
              pass since the possible_items lists are sorted)
           */
           while (iter_sub != branch->_possible_items.end()) {
-      
+
       	while (iter != _possible_items.end()
       	       && (*iter)->cmp (*iter_sub)) {
       	    iter++;
       	}
-      
+
       	if (iter == _possible_items.end())
       	    return false;
-      
+
       	iter++;
       	iter_sub++;
           }
-      
+
           return true;
       }
-      
+
       //---------------------------------------------------------------------------
-      
+
       bool
-      QueueItemBranch::process (ResolverContextPtr context, QueueItemList & qil)
+      QueueItemBranch::process (ResolverContext_Ptr context, QueueItemList & qil)
       {
           _DBG("RC_SPEW") << "QueueItemBranch::process(" << asString() << ")" << endl;
-      
+
           QueueItemList live_branches;
           unsigned int branch_count;
           bool did_something = true;
-      
+
           for (QueueItemList::const_iterator iter = _possible_items.begin(); iter != _possible_items.end(); iter++) {
-      
-      	QueueItemPtr item = *iter;
-      
+
+      	QueueItem_Ptr item = *iter;
+
       	if (item->isSatisfied (context))
       	    goto finished;
-      
+
       	/* Drop any useless branch items */
       	if (! item->isRedundant (context)) {
       	    live_branches.push_front (item);
       	}
           }
-      
+
           branch_count = live_branches.size();
-      
+
           if (branch_count == 0) {
-      
+
       	/* Do nothing */
-      
+
           } else if (branch_count == 1) {
-      
+
       	/* If we just have one possible item, process it. */
-      
-      	QueueItemPtr item = live_branches.front();
+
+      	QueueItem_Ptr item = live_branches.front();
       	did_something = item->process (context, qil);
-      	
+
       	/* Set the item pointer to NULL inside of our original branch
       	   item, since our call to rc_queue_item_process is now
       	   responsible for freeing it. */
-      
+
       	for (QueueItemList::iterator iter = _possible_items.begin(); iter != _possible_items.end(); iter++) {
       	    if (*iter == item) {
       		_possible_items.erase (iter);
       		break;
       	    }
       	}
-      
+
           } else if (branch_count == _possible_items.size()) {
-      
+
       	/* Nothing was eliminated, so just pass the branch through (and set it to
       	   NULL so that it won't get freed when we exit. */
-      
+
       	qil.push_front (this);
       // FIXME: dont free	item = NULL;
       	did_something = false;
-      
+
           } else {
       //fprintf (stderr, "QueueItemBranch::process rebranching\n");
-      	QueueItemBranchPtr new_branch = new QueueItemBranch (world());
+      	QueueItemBranch_Ptr new_branch = new QueueItemBranch (world());
       	for (QueueItemList::const_iterator iter = live_branches.begin(); iter != live_branches.end(); iter++) {
       	    new_branch->addItem ((*iter)->copy());
       	}
       	qil.push_front (new_branch);
           }
-          
+
        finished:
       //FIXME    rc_queue_item_free (item);
-      
+
           return did_something;
       }
-      
-      
+
+
       int
-      QueueItemBranch::cmp (constQueueItemPtr item) const
+      QueueItemBranch::cmp (QueueItem_constPtr item) const
       {
           int cmp = this->compare (item);		// assures equal type
           if (cmp != 0)
       	return cmp;
-      
-          constQueueItemBranchPtr branch = item;
-      
+
+          QueueItemBranch_constPtr branch = dynamic_pointer_cast<const QueueItemBranch>(item);
+
           /* First, sort by # of possible items. */
           cmp = CMP(_possible_items.size(), branch->_possible_items.size());
           if (cmp != 0)
               return cmp;
-      
+
           /* We can do a by-item cmp since the possible items are kept in sorted order. */
           QueueItemList::const_iterator ia = _possible_items.begin();
           QueueItemList::const_iterator ib = branch->_possible_items.begin();
-      
+
           while (ia != _possible_items.end() && ib != branch->_possible_items.end()) {
               if (*ia && *ib) {
                   cmp = (*ia)->cmp (*ib);
@@ -249,28 +249,33 @@ namespace zypp
               ia++;
               ib++;
           }
-      
+
           /* Both lists should end at the same time, since we initially sorted on length. */
           assert (ia == _possible_items.end() && ib == branch->_possible_items.end());
-      
+
           return 0;
       }
-      
-      
-      QueueItemPtr
+
+      /***/
+      QueueItem_Ptr
       QueueItemBranch::copy (void) const
       {
-          QueueItemBranchPtr new_branch = new QueueItemBranch (world());
-          ((QueueItemPtr)new_branch)->copy((constQueueItemPtr)this);
-      
+          QueueItemBranch_Ptr new_branch = new QueueItemBranch (world());
+#if 0
+          //original code
+          ((QueueItem_Ptr)new_branch)->copy((QueueItem_constPtr)this);
+#else
+#warning Check whether this is the intended behaviour
+          new_branch->QueueItem::copy(this);
+#endif
           for (QueueItemList::const_iterator iter = _possible_items.begin(); iter != _possible_items.end(); iter++) {
-      	QueueItemPtr cpy = (*iter)->copy();
+      	QueueItem_Ptr cpy = (*iter)->copy();
               new_branch->_possible_items.push_front (cpy);
           }
-      
+
           return new_branch;
       }
-      
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

@@ -26,10 +26,14 @@
 #include <list>
 #include <string>
 
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
+#include "zypp/base/PtrTypes.h"
+
 #include <zypp/solver/detail/PendingPtr.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -39,16 +43,16 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
       class Pending;
-      typedef std::list <PendingPtr> PendingList;
-      typedef PendingList * PendingListPtr;
-      
+      typedef std::list <Pending_Ptr> PendingList;
+      typedef PendingList * PendingList_Ptr;
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : Pending
-      
-      class Pending : public CountedRep {
-          REP_BODY(Pending);
-      
+
+      class Pending : public base::ReferenceCounted, private base::NonCopyable {
+          
+
       typedef enum {
           PENDING_STATUS_INVALID = 0,
           PENDING_STATUS_PRE_BEGIN,
@@ -58,54 +62,54 @@ namespace zypp
           PENDING_STATUS_FAILED,
           PENDING_STATUS_FINISHED
       } PendingStatus;
-      
+
       const char *pendingStatusToString (PendingStatus status);
-      
+
       #define INVALID_PENDING_ID 0
-      
-      
+
+
         private:
-      
+
           char *_description;
           int _id;
-      
+
           PendingStatus _status;
-      
+
           double _percent_complete;
-      
+
           size_t _completed_size;
           size_t _total_size;
-      
+
           time_t _start_time;
           time_t _last_time;
           time_t _poll_time;
-      
+
           int _retval;
           char *_error_msg;
-      
+
           std::list<const char *> _messages;
-      
-          void (*_update) (PendingPtr);
-          void (*_complete) (PendingPtr);
-          void (*_message) (PendingPtr);
-      
+
+          void (*_update) (Pending_Ptr);
+          void (*_complete) (Pending_Ptr);
+          void (*_message) (Pending_Ptr);
+
         public:
-      
+
           Pending (const char *description);
           virtual ~Pending();
-      
+
           // ---------------------------------- I/O
-      
+
           static std::string toString (const Pending & section);
-      
+
           virtual std::ostream & dumpOn(std::ostream & str ) const;
-      
+
           friend std::ostream& operator<<(std::ostream&, const Pending & section);
-      
+
           std::string asString (void) const;
-      
+
           // ---------------------------------- accessors
-      
+
           const char *description (void) const { return _description; }
           void setDescription (const char *description) { _description = strdup (description); }
           int id (void) const { return _id; }
@@ -116,35 +120,35 @@ namespace zypp
           time_t startTime (void) const { return _start_time; }
           time_t lastTime (void) const { return _last_time; }
           time_t pollTime (void) const { return _poll_time; }
-      
+
           int elapsedSecs (void) const { return 0; }
           int expectedSecs (void) const { return 0; }
           int remainingSecs (void) const { return 0; }
-      
+
           std::list<const char *> messages (void) const { return _messages; }
           const char *latestMessage (void) const { return _error_msg; }
-      
+
           // ---------------------------------- methods
-      
-          PendingPtr lookupById (int id);
-          std::list<PendingPtr> getAllActiveIds (void);
-      
+
+          Pending_Ptr lookupById (int id);
+          std::list<Pending_Ptr> getAllActiveIds (void);
+
           void begin (void);
           void update (double percent_complete);
           void updateBySize (size_t size, size_t total_size);
-      
+
           void finished (int retval);
           void abort (int retval);
           void fail (int retval, const char *error_msg);
-      
+
           bool isActive (void);
-      
+
           const char *errorMsg (void);
-      
+
           void addMessage (const char *message);
-      
+
       };
-          
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

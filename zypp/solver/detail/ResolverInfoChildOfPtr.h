@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* ResolverInfoChildOfPtr.h
+/* ResolverInfoChildOf_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ResolverInfoChildOfPtr_h
-#define _ResolverInfoChildOfPtr_h
+#ifndef _ResolverInfoChildOf_Ptr_h
+#define _ResolverInfoChildOf_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 #include <zypp/solver/detail/ResolverInfoPtr.h>
 
 /////////////////////////////////////////////////////////////////////////
@@ -35,10 +35,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : ResolverInfoChildOfPtr
-      //	CLASS NAME : constResolverInfoChildOfPtr
+      //	CLASS NAME : ResolverInfoChildOf_Ptr
+      //	CLASS NAME : ResolverInfoChildOf_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_DERIVED_POINTER(ResolverInfoChildOf, ResolverInfo);
+      DEFINE_PTR_TYPE(ResolverInfoChildOf);
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -49,4 +49,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _ResolverInfoChildOfPtr_h
+#endif // _ResolverInfoChildOf_Ptr_h

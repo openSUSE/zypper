@@ -23,7 +23,7 @@
 #define _MultiWorld_h
 
 #include <iosfwd>
-#include <string.h>
+#include <string>
 
 #include <zypp/solver/detail/MultiWorldPtr.h>
 #include <zypp/solver/detail/ServiceWorldPtr.h>
@@ -52,22 +52,22 @@ typedef std::list <SubWorldInfo *> SubWorldInfoList;
 //	CLASS NAME : MultiWorld
 
 class MultiWorld : public World {
-    REP_BODY(MultiWorld);
+    
 
         private:
       
           SubWorldInfoList _subworlds;
       
-          PendingPtr _multi_pending;
+          Pending_Ptr _multi_pending;
           PendingList _subworld_pendings;
       
-          void (*_subworld_added)   (WorldPtr subworld);
-          void (*_subworld_removed) (WorldPtr subworld);
+          void (*_subworld_added)   (World_Ptr subworld);
+          void (*_subworld_removed) (World_Ptr subworld);
       
         public:
       
           MultiWorld ();
-          MultiWorld (XmlNodePtr node);
+          MultiWorld (XmlNode_Ptr node);
           MultiWorld (const char *filename);
           virtual ~MultiWorld();
       
@@ -83,37 +83,37 @@ class MultiWorld : public World {
       
           // ---------------------------------- accessors
       
-          void addSubworld (WorldPtr subworld);
-          void removeSubworld (WorldPtr subworld);
+          void addSubworld (World_Ptr subworld);
+          void removeSubworld (World_Ptr subworld);
       
           // ---------------------------------- methods
       
           virtual ChannelList channels () const;
-          virtual bool containsChannel (constChannelPtr channel) const;
-          virtual ChannelPtr getChannelByName (const char *channel_name) const;
-          virtual ChannelPtr getChannelByAlias (const char *alias) const;
-          virtual ChannelPtr getChannelById (const char *channel_id) const;
-          virtual ChannelPtr guessResItemChannel (constResItemPtr resItem) const;
+          virtual bool containsChannel (Channel_constPtr channel) const;
+          virtual Channel_Ptr getChannelByName (const char *channel_name) const;
+          virtual Channel_Ptr getChannelByAlias (const char *alias) const;
+          virtual Channel_Ptr getChannelById (const char *channel_id) const;
+          virtual Channel_Ptr guessResItemChannel (ResItem_constPtr resItem) const;
           virtual int foreachChannel (ChannelFn fn, void *data) const;
       
           int foreachSubworld (WorldFn callback, void *user_data);
           int foreachSubworldByType (WorldType type, WorldFn callback, NameConflictInfo *info);
           WorldList getSubworlds ();
-          ServiceWorldPtr lookupService (const char *url);
-          ServiceWorldPtr lookupServiceById (const char *id);
+          ServiceWorld_Ptr lookupService (const char *url);
+          ServiceWorld_Ptr lookupServiceById (const char *id);
           bool mountService (const char *url, void *error);			// GError **error);
       
           // Single resItem queries
       
-          virtual constResItemPtr findInstalledResItem (constResItemPtr resItem);
-          virtual constResItemPtr findResItem (constChannelPtr channel, const char *name) const;
-          virtual constResItemPtr findResItemWithConstraint (constChannelPtr channel, const char *name, const Capability & constraint, bool is_and) const;
+          virtual ResItem_constPtr findInstalledResItem (ResItem_constPtr resItem);
+          virtual ResItem_constPtr findResItem (Channel_constPtr channel, const char *name) const;
+          virtual ResItem_constPtr findResItemWithConstraint (Channel_constPtr channel, const char *name, const Capability & constraint, bool is_and) const;
       
           // Iterate over resItems
       
-          virtual int foreachResItem (ChannelPtr channel, CResItemFn fn, void *data);
-          virtual int foreachResItemByName (const std::string & name, ChannelPtr channel, CResItemFn fn, void *data);
-          virtual int foreachResItemByMatch (constMatchPtr match, CResItemFn fn, void *data);
+          virtual int foreachResItem (Channel_Ptr channel, CResItemFn fn, void *data);
+          virtual int foreachResItemByName (const std::string & name, Channel_Ptr channel, CResItemFn fn, void *data);
+          virtual int foreachResItemByMatch (Match_constPtr match, CResItemFn fn, void *data);
       
           // Iterate across provides or requirement
       

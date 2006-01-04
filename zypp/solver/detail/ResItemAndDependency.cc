@@ -21,13 +21,11 @@
 
 #include "config.h"
 
-#include <y2util/stringutil.h>
-
 #include <zypp/solver/detail/ResItemAndDependency.h>
 #include <zypp/solver/detail/debug.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -35,28 +33,28 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
+
       using namespace std;
-      
-      IMPL_BASE_POINTER(ResItemAndDependency);
-      
+
+      IMPL_PTR_TYPE(ResItemAndDependency);
+
       //---------------------------------------------------------------------------
-      
-      ResItemAndDependency::ResItemAndDependency (constResItemPtr resItem, const Capability & dependency)
+
+      ResItemAndDependency::ResItemAndDependency (ResItem_constPtr resItem, const Capability & dependency)
           : _resItem(resItem)
           , _dependency(dependency)
       {
       }
-      
+
       //---------------------------------------------------------------------------
-      
+
       string
       ResItemAndDependency::asString (bool full) const
       {
           return toString (*this, full);
       }
-      
-      
+
+
       string
       ResItemAndDependency::toString ( const ResItemAndDependency & r_and_d, bool full )
       {
@@ -67,27 +65,27 @@ namespace zypp
           res += "}";
           return res;
       }
-      
-      
+
+
       ostream &
       ResItemAndDependency::dumpOn (ostream & str) const
       {
           str << asString();
           return str;
       }
-      
-      
+
+
       ostream &
       operator<< (ostream & os, const ResItemAndDependency & r_and_d)
       {
           return os << r_and_d.asString();
       }
-      
+
       //---------------------------------------------------------------------------
-      
+
       /* This function also checks channels in addition to just dep relations */
       /* FIXME: rc_resItem_dep_verify_relation already checks the channel */
-      
+
       bool
       ResItemAndDependency::verifyRelation (const Capability & dep) const
       {
@@ -96,19 +94,17 @@ namespace zypp
           // don't check the channel, thereby honoring conflicts from installed resItems to to-be-installed resItems
           return dep.matches (_dependency);
       #else
-          if (!dep.matches (_dependency)) {
+          //if (!dep.matches (_dependency)) {
       	return false;
-          }
-#endif
-#if 0
+          //}
           if (getenv ("SPEW_DEP")) fprintf (stderr, "ResItemAndDependency::verifyRelation _resItem->channel() %s, dep->channel() %s\n", _resItem->channel()->asString().c_str(), dep->channel()->asString().c_str());
           return _resItem->channel()->equals (dep->channel());
+      #endif
 #else
           return true;
 #endif
-      #endif
       }
-        
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

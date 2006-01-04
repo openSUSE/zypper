@@ -25,7 +25,7 @@
 #include <iosfwd>
 #include <list>
 #include <map>
-#include <string.h>
+#include <string>
 #include <zypp/solver/detail/ResolverInfoContainerPtr.h>
 #include <zypp/solver/detail/ResolverInfo.h>
 
@@ -45,7 +45,7 @@ namespace zypp
       
       class ResolverInfoContainer : public ResolverInfo {
       
-          REP_BODY(ResolverInfoContainer);
+          
       
         private:
       
@@ -53,12 +53,12 @@ namespace zypp
       
         protected:
       
-          ResolverInfoContainer (ResolverInfoType type, constResItemPtr resItem, int priority, constResItemPtr child = NULL);
+          ResolverInfoContainer (ResolverInfoType type, ResItem_constPtr resItem, int priority, ResItem_constPtr child = NULL);
       
         public:
           virtual ~ResolverInfoContainer();
       
-          void copy (constResolverInfoContainerPtr from);
+          void copy (ResolverInfoContainer_constPtr from);
       
           // ---------------------------------- I/O
       
@@ -73,13 +73,13 @@ namespace zypp
       
           // ---------------------------------- methods
       
-          virtual bool merge (ResolverInfoContainerPtr to_be_merged);
-          virtual ResolverInfoPtr copy (void) const;
+          virtual bool merge (ResolverInfoContainer_Ptr to_be_merged);
+          virtual ResolverInfo_Ptr copy (void) const;
       
           std::string resItemsToString (bool names_only) const;
       
-          bool mentions (constResItemPtr resItem) const;
-          void addRelatedResItem (constResItemPtr resItem);
+          bool mentions (ResItem_constPtr resItem) const;
+          void addRelatedResItem (ResItem_constPtr resItem);
           void addRelatedResItemList (const CResItemList & resItems);
       
       };

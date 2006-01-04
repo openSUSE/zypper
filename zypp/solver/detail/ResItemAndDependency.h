@@ -27,12 +27,16 @@
 #include <list>
 #include <map>
 
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
+#include "zypp/base/PtrTypes.h"
+
 #include <zypp/solver/detail/ResItemAndDependencyPtr.h>
 #include <zypp/solver/detail/ResItem.h>
 #include <zypp/Capability.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -41,49 +45,49 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-typedef std::multimap<const std::string, constResItemPtr> ResItemTable;
-      typedef std::multimap<const std::string, constResItemAndDependencyPtr> ResItemAndDependencyTable;
-      
+typedef std::multimap<const std::string, ResItem_constPtr> ResItemTable;
+      typedef std::multimap<const std::string, ResItemAndDependency_constPtr> ResItemAndDependencyTable;
+
       #if PHI
-      typedef std::list <constResItemAndDependencyPtr> CResItemAndDependencyList;
+      typedef std::list <ResItemAndDependency_constPtr> CResItemAndDependencyList;
       #endif
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : ResItemAndDependency
-      
-      class ResItemAndDependency: public CountedRep {
-          REP_BODY(ResItemAndDependency);
-      
+
+      class ResItemAndDependency: public base::ReferenceCounted, private base::NonCopyable {
+          
+
         private:
-          constResItemPtr _resItem;
+          ResItem_constPtr _resItem;
           const Capability _dependency;
-      
+
         public:
-      
-          ResItemAndDependency (constResItemPtr resItem, const Capability & dependency);
+
+          ResItemAndDependency (ResItem_constPtr resItem, const Capability & dependency);
           ~ResItemAndDependency () {}
-      
+
           // ---------------------------------- I/O
-      
+
           static std::string toString (const ResItemAndDependency & r_and_d, bool full = false);
-      
+
           virtual std::ostream & dumpOn(std::ostream & str ) const;
-      
+
           friend std::ostream& operator<<(std::ostream&, const ResItemAndDependency & r_and_d);
-      
+
           std::string asString (bool full = false) const;
-      
+
           // ---------------------------------- accessors
-      
-          constResItemPtr resItem() const { return _resItem; }
+
+          ResItem_constPtr resItem() const { return _resItem; }
           const Capability & dependency() const { return _dependency; }
-      
+
           // ---------------------------------- methods
-      
+
           bool verifyRelation (const Capability & dep) const;
       };
-        
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

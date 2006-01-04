@@ -26,10 +26,14 @@
 #include <list>
 #include <string>
 
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
+#include "zypp/base/PtrTypes.h"
+
 #include <zypp/solver/detail/PackmanPtr.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -41,34 +45,34 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : Packman
-      
-      class Packman : public CountedRep {
-          REP_BODY(Packman);
-      
+
+      class Packman : public base::ReferenceCounted, private base::NonCopyable {
+          
+
         private:
-      
-      
+
+
         public:
-      
+
           Packman ();
           virtual ~Packman();
-      
+
           // ---------------------------------- I/O
-      
+
           static std::string toString (const Packman & section);
-      
+
           virtual std::ostream & dumpOn(std::ostream & str ) const;
-      
+
           friend std::ostream& operator<<(std::ostream&, const Packman & section);
-      
+
           std::string asString (void) const;
-      
+
           // ---------------------------------- accessors
-      
-      
+
+
           // ---------------------------------- methods
-      
-      
+
+
       };
 
       ///////////////////////////////////////////////////////////////////

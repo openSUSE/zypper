@@ -36,7 +36,7 @@ namespace zypp
       
       using namespace std;
       
-      IMPL_BASE_POINTER(QueueItem);
+      IMPL_PTR_TYPE(QueueItem);
       
       //---------------------------------------------------------------------------
       
@@ -83,7 +83,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      QueueItem::QueueItem (QueueItemType type, WorldPtr world)
+      QueueItem::QueueItem (QueueItemType type, World_Ptr world)
           : _type (type)
           , _world (world)
           , _priority (0)
@@ -99,7 +99,7 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       void
-      QueueItem::copy (constQueueItemPtr from)
+      QueueItem::copy (QueueItem_constPtr from)
       {
           _priority = from->_priority;
           _size = from->_size;
@@ -110,14 +110,14 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       void
-      QueueItem::addInfo (ResolverInfoPtr info)
+      QueueItem::addInfo (ResolverInfo_Ptr info)
       {
           _pending_info.push_back (info);
       }
       
       
       void
-      QueueItem::logInfo (ResolverContextPtr context)
+      QueueItem::logInfo (ResolverContext_Ptr context)
       {
           for (ResolverInfoList::const_iterator iter = _pending_info.begin(); iter != _pending_info.end(); iter++) {
       	context->addInfo (*iter);

@@ -19,18 +19,17 @@
  * 02111-1307, USA.
  */
 
-#include <y2util/stringutil.h>
-
 #include <stdio.h>
-#include <string.h>
+#include <string>
 #include <libgen.h>
 
+#include <zypp/base/String.h>
 #include <zypp/solver/detail/utils.h>
 #include <zypp/solver/detail/PackageUpdate.h>
 #include <zypp/solver/detail/Package.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -38,101 +37,101 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
+
       using namespace std;
-      
-      IMPL_DERIVED_POINTER(PackageUpdate, Spec);
-      
+
+      IMPL_PTR_TYPE(PackageUpdate);
+
       //---------------------------------------------------------------------------
-      
+
       string
       PackageUpdate::asString ( bool full ) const
       {
           return toString (*this);
       }
-      
-      
+
+
       string
       PackageUpdate::toString ( const PackageUpdate & package_update, bool full )
       {
           string ret;
           ret += ((const Spec &)package_update).asString(full);
-      
+
           return ret;
       }
-      
-      
+
+
       ostream &
       PackageUpdate::dumpOn( ostream & str ) const
       {
           str << asString();
           return str;
       }
-      
-      
+
+
       ostream&
       operator<<( ostream& os, const PackageUpdate& package_update)
       {
           return os << package_update.asString();
       }
-      
-      
-      const XmlNodePtr
+
+
+      const XmlNode_Ptr
       PackageUpdate::asXmlNode (void) const
       {
-          XmlNodePtr update_node = new XmlNode("update");
+          XmlNode_Ptr update_node = new XmlNode("update");
           string tmp;
-      
+
           if (hasEpoch()) {
-      	tmp = stringutil::form("%d", epoch());
+      	tmp = str::form("%d", epoch());
       	update_node->addTextChild ("epoch", tmp.c_str());
           }
-      
+
           update_node->addTextChild ("version", version().c_str());
-      
+
           if (!release().empty()) {
       	update_node->addTextChild ("release", release().c_str());
           }
-      
+
           if (_package_url && *_package_url) {
       	update_node->addTextChild ("filename", basename (strdup (_package_url)));
           }
-      
-          tmp = stringutil::form ("%ld", (unsigned long)_package_size);
+
+          tmp = str::form ("%ld", (unsigned long)_package_size);
           update_node->addTextChild ("filesize", tmp.c_str());
-      
-          tmp = stringutil::form ("%ld", (unsigned long)_installed_size);
+
+          tmp = str::form ("%ld", (unsigned long)_installed_size);
           update_node->addTextChild ("installedsize", tmp.c_str());
-      
+
           if (_signature_url) {
       	update_node->addTextChild ("signaturename", _signature_url);
-      
-      	tmp = stringutil::form ("%ld", (unsigned long)_signature_size);
+
+      	tmp = str::form ("%ld", (unsigned long)_signature_size);
       	update_node->addTextChild ("signaturesize", tmp.c_str());
           }
-      
+
           if (_md5sum) {
       	update_node->addTextChild ("md5sum", _md5sum);
           }
-      
+
           update_node->addTextChild ("importance", _importance->asString().c_str());
-      
+
           update_node->addTextChild ("description", _description);
-      
+
           if (_hid) {
-      	tmp = stringutil::form ("%d", _hid);
+      	tmp = str::form ("%d", _hid);
       	update_node->addTextChild ("hid", tmp.c_str());
           }
-      
+
           if (_license) {
       	update_node->addTextChild ("license", _license);
           }
-      
+
           return update_node;
       }
-      
+
       //---------------------------------------------------------------------------
-      
+
       PackageUpdate::PackageUpdate (const string & name)
           : Spec (ResTraits<zypp::Package>::kind, name)
           , _package (NULL)
@@ -149,9 +148,9 @@ namespace zypp
           , _parent (NULL)
       {
       }
-      
-      
-      PackageUpdate::PackageUpdate (constXmlNodePtr node, PackagePtr package)
+
+
+      PackageUpdate::PackageUpdate (XmlNode_constPtr node, Package_Ptr package)
           : Spec (ResTraits<zypp::Package>::kind, package->name())
           , _package (NULL)
           , _package_url (NULL)
@@ -166,31 +165,31 @@ namespace zypp
           , _license (NULL)
           , _parent (NULL)
       {
-          constChannelPtr channel;
+          Channel_constPtr channel;
           const char *url_prefix = NULL;
-      
+
           if (node == NULL) {
       	fprintf (stderr, "PackageUpdate::PackageUpdate(NULL)\n");
       	exit (1);
           }
-      
+
           /* Make sure this is an update node */
           if (strcasecmp (node->name(), "update")) {
       	fprintf (stderr, "PackageUpdate::PackageUpdate() wrong node (%s)\n", node->name());
       	exit (1);
           }
-      
+
           channel = package->channel();
-      
+
           _package = package;
-      
+
           if (channel) {
       	url_prefix = channel->filePath();
           }
-      
-          XmlNodePtr iter = node->children();
-      
-          while (iter) { 
+
+          XmlNode_Ptr iter = node->children();
+
+          while (iter) {
       	if (iter->equals ("epoch")) {			setEpoch (iter->getUnsignedIntContentDefault (0));
       	} else if (iter->equals ("version")) {		setVersion (iter->getContent());
       	} else if (iter->equals ("release")) {		setRelease (iter->getContent());
@@ -218,12 +217,12 @@ namespace zypp
       	} else if (iter->equals ("hid")) {		_hid = iter->getUnsignedIntContentDefault (0);
       	} else if (iter->equals ("license")) {		_license = iter->getContent();
       	}
-      
+
       	iter = iter->next();
           }
       }
-      
-      
+
+
       PackageUpdate::~PackageUpdate()
       {
           if (_package != NULL) _package = NULL;
@@ -234,7 +233,7 @@ namespace zypp
           if (_license != NULL) free ((void *)_license);
           if (_parent != NULL) _parent = NULL;
       }
-        
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

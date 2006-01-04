@@ -34,7 +34,7 @@ namespace zypp
         
       using namespace std;
       
-      IMPL_DERIVED_POINTER(UndumpWorld, World);
+      IMPL_PTR_TYPE(UndumpWorld);
       
       //---------------------------------------------------------------------------
       
@@ -84,7 +84,7 @@ namespace zypp
       
       
       static bool
-      add_channel_cb (ChannelPtr channel, bool subscribed, void *data)
+      add_channel_cb (Channel_Ptr channel, bool subscribed, void *data)
       {
           UndumpWorld *undump = (UndumpWorld *)data;
       
@@ -99,7 +99,7 @@ namespace zypp
       
       
       static bool
-      add_resItem_cb (constResItemPtr res, void *data)
+      add_resItem_cb (ResItem_constPtr res, void *data)
       {
           UndumpWorld *undump = (UndumpWorld *)data;
       
@@ -110,7 +110,7 @@ namespace zypp
       
       
       static bool
-      add_lock_cb (constMatchPtr lock, void *data)
+      add_lock_cb (Match_constPtr lock, void *data)
       {
           UndumpWorld *undump = (UndumpWorld *)data;
       
@@ -130,7 +130,7 @@ namespace zypp
       
       
       void
-      UndumpWorld::setSubscription (constChannelPtr channel, bool subscribe)
+      UndumpWorld::setSubscription (Channel_constPtr channel, bool subscribe)
       {
       //    if (getenv("RC_SPEW")) fprintf (stderr, "UndumpWorld::setSubscription (%s, %s)\n", channel->asString().c_str(), subscribe?"subscribe":"unsubscribe");
           for (ChannelSubscriptions::iterator i = _subscriptions.begin(); i != _subscriptions.end(); i++) {
@@ -151,7 +151,7 @@ namespace zypp
       
       
       bool
-      UndumpWorld::isSubscribed (constChannelPtr channel) const
+      UndumpWorld::isSubscribed (Channel_constPtr channel) const
       {
           for (ChannelSubscriptions::const_iterator i = _subscriptions.begin(); i != _subscriptions.end(); i++) {
       	if (*i == channel) {

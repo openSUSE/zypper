@@ -22,12 +22,15 @@
 #ifndef _Spec_h
 #define _Spec_h
 
-#include <list>
 #include <iosfwd>
-#include <string.h>
+#include <list>
+#include <string>
 
-#include <y2util/Ustring.h>
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
+#include "zypp/base/PtrTypes.h"
 
+#include <zypp/solver/detail/Ustring.h>
 #include <zypp/solver/detail/Hash.h>
 #include <zypp/solver/detail/SpecPtr.h>
 #include <zypp/solver/detail/XmlNode.h>
@@ -35,7 +38,7 @@
 #include <zypp/ResObject.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -70,83 +73,83 @@ class Name : public Ustring {
       /**
        *
        **/
-      
-      class Spec : public CountedRep {
-          REP_BODY(Spec);
-      
+
+      class Spec : public base::ReferenceCounted, private base::NonCopyable {
+
+
         private:
           Resolvable::Kind _kind;
           Name _name;
           Edition _edition;
           Arch _arch;
-      
+
         public:
           typedef std::list<Spec> SpecList;
-      
+
           Spec( const Resolvable::Kind & kind,
       	  const std::string & name,
       	  int epoch = Edition::noepoch,
       	  const std::string & version = "",
       	  const std::string & release = "",
       	  const zypp::Arch & arch = Arch());
-      
+
           Spec (const Resolvable::Kind & kind, const std::string & name, const Edition & edition, const Arch & arch = Arch());
-      
-          Spec (constXmlNodePtr node);
-      
+
+          Spec (XmlNode_constPtr node);
+
           virtual ~Spec();
-      
+
           // ---------------------------------- I/O
-      
+
           const xmlNodePtr asXmlNode (const char *name) const;
-      
+
           static std::string toString ( const Spec & spec, bool full = false );
-      
+
           virtual std::ostream & dumpOn( std::ostream & str ) const;
-      
+
           friend std::ostream& operator<<( std::ostream&, const Spec& );
-      
+
           std::string asString ( bool full = false ) const;
-      
+
           // ---------------------------------- accessors
-      
+
           const std::string & version() const { return _edition.version(); }
           void setVersion (const std::string & version);
-      
+
           const std::string & release() const { return _edition.release(); }
           void setRelease (const std::string & release);
-      
+
           const int epoch() const { return _edition.epoch(); }
           void setEpoch (int epoch);
           bool hasEpoch() const { return _edition.epoch() > 0; }
-      
+
           const Arch & arch() const { return _arch; }
           void setArch (const Arch & arch) { _arch = arch; }
           void setArch (const std::string & arch) { _arch = Arch(arch); }
-      
+
           const Resolvable::Kind & kind() const { return _kind; }
           void setKind (const Resolvable::Kind & kind) { _kind = kind; }
-      
+
           const std::string name() const { return _name; }
           void setName (const std::string & name) { _name = Name(name.c_str()); }
-      
+
           const Edition & edition() const { return _edition; }
           void setEdition (const Edition & edition) { _edition = edition; }
-      
+
           // calculate hash
           HashValue hash (void) const;
-      
+
           // match operator
-          bool match(constSpecPtr spec) const;
-          bool equals (constSpecPtr spec) const;
-      
+          bool match(Spec_constPtr spec) const;
+          bool equals (Spec_constPtr spec) const;
+
           // find spec in SpecList by name
           const Spec * findByName (const SpecList &speclist, const Name & name) const;
-          static int compare (constSpecPtr spec1, constSpecPtr spec2);
-      
+          static int compare (Spec_constPtr spec1, Spec_constPtr spec2);
+
           // copy
-      
-          constSpecPtr copy (void) const;
+
+          Spec_constPtr copy (void) const;
       };
       ///////////////////////////////////////////////////////////////////
     };// namespace detail

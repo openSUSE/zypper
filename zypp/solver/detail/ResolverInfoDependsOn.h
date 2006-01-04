@@ -42,13 +42,13 @@ namespace zypp
       
       class ResolverInfoDependsOn : public ResolverInfoContainer {
       
-          REP_BODY(ResolverInfoDependsOn);
+          
       
         private:
       
         public:
       
-          ResolverInfoDependsOn (constResItemPtr resItem, constResItemPtr on);
+          ResolverInfoDependsOn (ResItem_constPtr resItem, ResItem_constPtr on);
           virtual ~ResolverInfoDependsOn();
       
           // ---------------------------------- I/O
@@ -62,7 +62,7 @@ namespace zypp
       
           // ---------------------------------- methods
       
-          virtual ResolverInfoPtr copy (void) const;
+          virtual ResolverInfo_Ptr copy (void) const;
       
       };
         

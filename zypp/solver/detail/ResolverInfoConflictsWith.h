@@ -41,13 +41,13 @@ namespace zypp
       
       class ResolverInfoConflictsWith : public ResolverInfoContainer {
       
-          REP_BODY(ResolverInfoConflictsWith);
+          
       
         private:
       
         public:
       
-          ResolverInfoConflictsWith (constResItemPtr resItem, constResItemPtr with);
+          ResolverInfoConflictsWith (ResItem_constPtr resItem, ResItem_constPtr with);
           virtual ~ResolverInfoConflictsWith();
       
           // ---------------------------------- I/O
@@ -62,7 +62,7 @@ namespace zypp
       
           // ---------------------------------- methods
       
-          virtual ResolverInfoPtr copy (void) const;
+          virtual ResolverInfo_Ptr copy (void) const;
       };
 
       ///////////////////////////////////////////////////////////////////

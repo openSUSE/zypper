@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* ServiceWorldPtr.h
+/* ServiceWorld_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ServiceWorldPtr_h
-#define _ServiceWorldPtr_h
+#ifndef _ServiceWorld_Ptr_h
+#define _ServiceWorld_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 #include <zypp/solver/detail/WorldPtr.h>
 
 /////////////////////////////////////////////////////////////////////////
@@ -35,10 +35,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
       
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : ServiceWorldPtr
-      //	CLASS NAME : constServiceWorldPtr
+      //	CLASS NAME : ServiceWorld_Ptr
+      //	CLASS NAME : ServiceWorld_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_DERIVED_POINTER(ServiceWorld, World);
+      DEFINE_PTR_TYPE(ServiceWorld);
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
@@ -50,4 +50,4 @@ namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
 
-#endif // _ServiceWorldPtr_h
+#endif // _ServiceWorld_Ptr_h

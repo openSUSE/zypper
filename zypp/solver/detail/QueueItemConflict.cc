@@ -36,7 +36,7 @@
 #include <zypp/base/Logger.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -46,18 +46,18 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
       using namespace std;
-      
-      IMPL_DERIVED_POINTER(QueueItemConflict,QueueItem);
-      
+
+      IMPL_PTR_TYPE(QueueItemConflict);
+
       //---------------------------------------------------------------------------
-      
+
       string
       QueueItemConflict::asString ( void ) const
       {
           return toString (*this);
       }
-      
-      
+
+
       string
       QueueItemConflict::toString ( const QueueItemConflict & item)
       {
@@ -69,55 +69,55 @@ namespace zypp
           res += "]";
           return res;
       }
-      
-      
+
+
       ostream &
       QueueItemConflict::dumpOn( ostream & str ) const
       {
           str << asString();
           return str;
       }
-      
-      
+
+
       ostream&
       operator<<( ostream& os, const QueueItemConflict & item)
       {
           return os << item.asString();
       }
-      
+
       //---------------------------------------------------------------------------
-      
-      QueueItemConflict::QueueItemConflict (WorldPtr world, const Capability & dep, constResItemPtr resItem)
+
+      QueueItemConflict::QueueItemConflict (World_Ptr world, const Capability & dep, ResItem_constPtr resItem)
           : QueueItem (QUEUE_ITEM_TYPE_CONFLICT, world)
           , _dep (dep)
           , _conflicting_resItem (resItem)
           , _actually_an_obsolete (false)
       {
       }
-      
-      
+
+
       QueueItemConflict::~QueueItemConflict()
       {
       }
-      
+
       //---------------------------------------------------------------------------
-      
+
       #if PHI
-      
+
       // on conflict, try to find upgrade candidates for the installed resItem triggering the conflict
       // there are cases where upgrading prevents the conflict
       // rc tends to uninstall the resItem
       // phi tends to upgrade the resItem
       // testcases: exercise-02conflict-08-test.xml, exercise-02conflict-09-test.xml
-      
+
       typedef struct {
-          ResolverContextPtr context;
+          ResolverContext_Ptr context;
           CResItemList upgrades;
       } UpgradeCandidateInfo;
-      
-      
+
+
       static bool
-      upgrade_candidates_cb (constResItemPtr resItem, const Capability & cap, void *data)
+      upgrade_candidates_cb (ResItem_constPtr resItem, const Capability & cap, void *data)
       {
       //fprintf (stderr, "upgrade_candidates_cb(%s,%s)\n", resItem->asString().c_str(), cap.asString().c_str());
           UpgradeCandidateInfo *info = (UpgradeCandidateInfo *)data;
@@ -126,46 +126,46 @@ namespace zypp
           }
           return true;
       }
-      
+
       #endif  // PHI
-      
-      
+
+
       typedef struct {
-          WorldPtr world;
-          constResItemPtr conflicting_resItem;
+          World_Ptr world;
+          ResItem_constPtr conflicting_resItem;
           const Capability dep;
-          ResolverContextPtr context;
+          ResolverContext_Ptr context;
           QueueItemList & new_items;
-      
+
           string pkg_str;
           string dep_str;
-      
+
           bool actually_an_obsolete;
       } ConflictProcessInfo;
-      
-      
+
+
       static bool
-      conflict_process_cb (constResItemPtr resItem, const Capability & cap, void *data)
+      conflict_process_cb (ResItem_constPtr resItem, const Capability & cap, void *data)
       {
           ConflictProcessInfo *info = (ConflictProcessInfo *)data;
           ResItemStatus status;
           string pkg_str, cap_str, msg;
-          ResolverInfoPtr log_info;
-          CapFactory  factory;                              
-      
+          ResolverInfo_Ptr log_info;
+          CapFactory  factory;
+
           _DBG("RC_SPEW") << "conflict_process_cb (resolvable[" << resItem->asString() <<"], cap[" << cap.asString() << "], info [" <<
 	      info->conflicting_resItem->asString() << "]" << endl;
 	  _DBG("RC_SPEW") << "conflict_process_cb (info->dep [" << info->dep.asString() << "]" << endl;
-      
+
           /* We conflict with ourself.  For the purpose of installing ourself, we
            * just ignore it, but it's Debian's way of saying that one and only one
            * resItem with this provide may exist on the system at a time. */
-      
+
           if (info->conflicting_resItem
               && resItem->equals (info->conflicting_resItem)) {
               return true;
           }
-      
+
           /* FIXME: This should probably be a GVersion capability. */
           /* Obsoletes don't apply to virtual provides, only the resItems
            * themselves.  A provide is "virtual" if it's not the same spec
@@ -176,48 +176,48 @@ namespace zypp
                                                 resItem->name(),
                                                 Rel::EQ,
                                                 resItem->edition());
-      
+
           if (info->actually_an_obsolete
               && capTest != cap)
           {
               return true;
           }
-      
+
           pkg_str = resItem->asString();
           cap_str = cap.asString();
-      
+
           status = info->context->getStatus (resItem);
-      
+
           _DBG("RC_SPEW") << "conflict_process_cb (resolvable[" << resItem->asString() << "]<" << ResolverContext::toString(status) << ">" << endl;
-      
+
           switch (status) {
-      	
+
               case RESOLVABLE_STATUS_INSTALLED:
               case RESOLVABLE_STATUS_TO_BE_INSTALLED_SOFT: {
-                  QueueItemUninstallPtr uninstall;
-                  ResolverInfoPtr log_info;
-      
+                  QueueItemUninstall_Ptr uninstall;
+                  ResolverInfo_Ptr log_info;
+
 #if PHI
                   // maybe an upgrade can resolve the conflict ?
                   //        check if other resItem is available which upgrades
-      
+
                   // find non-installed packages which provide the conflicting name
-      
+
                   UpgradeCandidateInfo upgrade_info;
                   upgrade_info.context = info->context;
-      
+
                   Capability maybe_upgrade_dep =  factory.parse ( resItem->kind(),
                                                                   resItem->name(),
                                                                   Rel::ANY,
                                                                   Edition::noepoch);
 
                   info->world->foreachProvidingResItem (maybe_upgrade_dep, upgrade_candidates_cb, (void *)&upgrade_info);
-      
+
 #endif
-      
+
                   uninstall = new QueueItemUninstall (info->world, resItem, "conflict");
                   uninstall->setDependency (info->dep);
-      
+
                   if (info->actually_an_obsolete) {
                       uninstall->setDueToObsolete ();
                       log_info = new ResolverInfoObsoletes (resItem, info->conflicting_resItem);
@@ -225,51 +225,51 @@ namespace zypp
                       uninstall->setDueToConflict ();
                       log_info = new ResolverInfoConflictsWith (resItem, info->conflicting_resItem);
                   }
-      
+
                   uninstall->addInfo (log_info);
-      
+
 #if PHI
                   if (upgrade_info.upgrades.empty ()) {
 #endif
-      
+
                       info->new_items.push_back (uninstall);
-      
+
 #if PHI
                   }
                   else {
                       // there are upgrade candidates for the conflicting resItem
                       // branch to: 1. uninstall, 2. upgrade (for each upgrading resItem)
-      
-                      QueueItemBranchPtr branch = new QueueItemBranch (info->world);
-      
+
+                      QueueItemBranch_Ptr branch = new QueueItemBranch (info->world);
+
                       branch->addItem (uninstall);			// try uninstall
-      
+
                       for (CResItemList::const_iterator iter = upgrade_info.upgrades.begin(); iter != upgrade_info.upgrades.end(); iter++) {
-                          QueueItemInstallPtr upgrade = new QueueItemInstall (info->world, *iter);
+                          QueueItemInstall_Ptr upgrade = new QueueItemInstall (info->world, *iter);
                           upgrade->setUpgrades (resItem);
                           branch->addItem (upgrade);			// try upgrade
                       }
                       info->new_items.push_back (branch);
                   }
 #endif
-      
+
                   break;
               }
-      
+
               case RESOLVABLE_STATUS_TO_BE_INSTALLED: {
                   msg = string ("A conflict over ") + info->dep_str + " (" + cap_str + ") requires the removal of the to-be-installed resolvable " + pkg_str;
-      
-                  ResolverInfoMiscPtr misc_info = new ResolverInfoMisc (resItem,RESOLVER_INFO_PRIORITY_VERBOSE, msg);
-      
+
+                  ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (resItem,RESOLVER_INFO_PRIORITY_VERBOSE, msg);
+
                   misc_info->flagAsError ();
                   if (info->conflicting_resItem) {
                       misc_info->addRelatedResItem (info->conflicting_resItem);
                   }
                   info->context->addInfo (misc_info);
-      
+
                   break;
               }
-      
+
               case RESOLVABLE_STATUS_UNINSTALLED: {
                   info->context->setStatus (resItem, RESOLVABLE_STATUS_TO_BE_UNINSTALLED);
                   msg = string ("Marking ") + pkg_str + " as uninstallable due to conflicts over " + info->dep_str + " (" + cap_str + ")";
@@ -277,74 +277,74 @@ namespace zypp
                       msg += " from ";
                       msg += info->pkg_str;
                   }
-      
-                  ResolverInfoMiscPtr misc_info = new ResolverInfoMisc (NULL, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
-      
+
+                  ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (NULL, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
+
                   misc_info->addRelatedResItem (resItem);
                   if (info->conflicting_resItem) {
                       misc_info->addRelatedResItem(info->conflicting_resItem);
                   }
                   info->context->addInfo (misc_info);
-      
+
                   break;
               }
-      
+
               case RESOLVABLE_STATUS_TO_BE_UNINSTALLED:
               case RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE:
                   /* This is the easy case -- we do nothing. */
                   break;
-      
+
               default:
                   abort();
           }
-      
+
           return true;
       }
-      
-      
+
+
       bool
-      QueueItemConflict::process (ResolverContextPtr context, QueueItemList & new_items)
+      QueueItemConflict::process (ResolverContext_Ptr context, QueueItemList & new_items)
       {
           _DBG("RC_SPEW") << "QueueItemConflict::process(" << this->asString() << ")" << endl;
-      
+
           ConflictProcessInfo info = { world(), _conflicting_resItem, _dep, context, new_items, "", "", _actually_an_obsolete };
-      
+
           if (_conflicting_resItem) {
       	info.pkg_str = _conflicting_resItem->asString();
           }
 
           info.dep_str = _dep.asString();
-      
+
           world()->foreachProvidingResItem (_dep, conflict_process_cb, (void *)&info);
-      					
+
       // FIXME: free self
-      
+
           return true;
       }
-      
-      
+
+
       //---------------------------------------------------------------------------
-      
-      QueueItemPtr
+
+      QueueItem_Ptr
       QueueItemConflict::copy (void) const
       {
-          QueueItemConflictPtr new_conflict = new QueueItemConflict (world(), _dep, _conflicting_resItem);
-          ((QueueItemPtr)new_conflict)->copy((constQueueItemPtr)this);
-      
+          QueueItemConflict_Ptr new_conflict = new QueueItemConflict (world(), _dep, _conflicting_resItem);
+          ((QueueItem_Ptr)new_conflict)->copy((QueueItem_constPtr)this);
+
           // _actually_an_obsolete is not being copied !
-      
+
           return new_conflict;
       }
-      
-      
+
+
       int
-      QueueItemConflict::cmp (constQueueItemPtr item) const
+      QueueItemConflict::cmp (QueueItem_constPtr item) const
       {
           int cmp = this->compare (item);		// assures equal type
           if (cmp != 0)
               return cmp;
-      
-          constQueueItemConflictPtr conflict = item;
+
+          QueueItemConflict_constPtr conflict = dynamic_pointer_cast<const QueueItemConflict>(item);
           if ( _dep != conflict->dependency())
               cmp = -1;
 

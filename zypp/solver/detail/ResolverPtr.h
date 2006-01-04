@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* ResolverPtr.h
+/* Resolver_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ResolverPtr_h
-#define _ResolverPtr_h
+#ifndef _Resolver_Ptr_h
+#define _Resolver_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -34,10 +34,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
       
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : ResolverPtr
-      //	CLASS NAME : constResolverPtr
+      //	CLASS NAME : Resolver_Ptr
+      //	CLASS NAME : Resolver_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_BASE_POINTER(Resolver);
+      DEFINE_PTR_TYPE(Resolver);
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
@@ -49,4 +49,4 @@ namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
 
-#endif // _ResolverPtr_h
+#endif // _Resolver_Ptr_h

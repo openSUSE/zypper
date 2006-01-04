@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* WorldPtr.h
+/* World_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _WorldPtr_h
-#define _WorldPtr_h
+#ifndef _World_Ptr_h
+#define _World_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -34,10 +34,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
           
 ///////////////////////////////////////////////////////////////////
-//	CLASS NAME : WorldPtr
-//	CLASS NAME : constWorldPtr
+//	CLASS NAME : World_Ptr
+//	CLASS NAME : World_constPtr
 ///////////////////////////////////////////////////////////////////
-DEFINE_BASE_POINTER(World);
+DEFINE_PTR_TYPE(World);
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -49,4 +49,4 @@ DEFINE_BASE_POINTER(World);
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _WorldPtr_h
+#endif // _World_Ptr_h

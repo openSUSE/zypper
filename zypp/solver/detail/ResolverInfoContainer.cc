@@ -35,7 +35,7 @@ namespace zypp
       
       using namespace std;
       
-      IMPL_DERIVED_POINTER(ResolverInfoContainer, ResolverInfo);
+      IMPL_PTR_TYPE(ResolverInfoContainer);
       
       //---------------------------------------------------------------------------
       
@@ -79,7 +79,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      ResolverInfoContainer::ResolverInfoContainer (ResolverInfoType type, constResItemPtr resItem, int priority, constResItemPtr child)
+      ResolverInfoContainer::ResolverInfoContainer (ResolverInfoType type, ResItem_constPtr resItem, int priority, ResItem_constPtr child)
           : ResolverInfo (type, resItem, priority)
       {
           if (child != NULL)
@@ -94,14 +94,14 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       bool
-      ResolverInfoContainer::merge (ResolverInfoContainerPtr to_be_merged)
+      ResolverInfoContainer::merge (ResolverInfoContainer_Ptr to_be_merged)
       {
           bool res;
       
-          res = ((ResolverInfoPtr)this)->merge ((ResolverInfoPtr)to_be_merged);
+          res = ((ResolverInfo_Ptr)this)->merge ((ResolverInfo_Ptr)to_be_merged);
           if (!res) return res;
       
-          typedef std::map<constResItemPtr, bool> SeenTable;
+          typedef std::map<ResItem_constPtr, bool> SeenTable;
           SeenTable seen_packages;
       
           for (CResItemList::const_iterator iter = _resItem_list.begin(); iter != _resItem_list.end(); iter++) {
@@ -122,9 +122,9 @@ namespace zypp
       
       
       void
-      ResolverInfoContainer::copy (constResolverInfoContainerPtr from)
+      ResolverInfoContainer::copy (ResolverInfoContainer_constPtr from)
       {
-          ((ResolverInfoPtr)this)->copy(from);
+          ((ResolverInfo_Ptr)this)->copy(from);
       
           for (CResItemList::const_iterator iter = from->_resItem_list.begin(); iter != from->_resItem_list.end(); iter++) {
       	_resItem_list.push_back (*iter);
@@ -132,10 +132,10 @@ namespace zypp
       }
       
       
-      ResolverInfoPtr
+      ResolverInfo_Ptr
       ResolverInfoContainer::copy (void) const
       {
-          ResolverInfoContainerPtr cpy = new ResolverInfoContainer(type(), resItem(), priority());
+          ResolverInfoContainer_Ptr cpy = new ResolverInfoContainer(type(), resItem(), priority());
       
           cpy->copy (this);
       
@@ -166,7 +166,7 @@ namespace zypp
       
       
       bool
-      ResolverInfoContainer::mentions (constResItemPtr resItem) const
+      ResolverInfoContainer::mentions (ResItem_constPtr resItem) const
       {
           if (isAbout(resItem))
       	return true;
@@ -184,7 +184,7 @@ namespace zypp
       
       
       void
-      ResolverInfoContainer::addRelatedResItem (constResItemPtr resItem)
+      ResolverInfoContainer::addRelatedResItem (ResItem_constPtr resItem)
       {
           if (!mentions(resItem)) {
       	_resItem_list.push_front (resItem);

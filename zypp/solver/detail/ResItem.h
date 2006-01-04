@@ -23,8 +23,12 @@
 
 #include <list>
 #include <iosfwd>
-#include <string.h>
+#include <string>
 #include <sys/types.h>
+
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
+#include "zypp/base/PtrTypes.h"
 
 #include <zypp/solver/detail/ResItemPtr.h>
 #include <zypp/solver/detail/StoreWorldPtr.h>
@@ -35,7 +39,7 @@
 #include <zypp/Dependencies.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -44,83 +48,83 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      typedef std::list<ResItemPtr> ResItemList;
-      typedef std::list<constResItemPtr> CResItemList;
-      
-      typedef bool (*ResItemFn) (ResItemPtr r, void *data);
-      typedef bool (*CResItemFn) (constResItemPtr r, void *data);
-      typedef bool (*ResItemPairFn) (constResItemPtr r1, constResItemPtr r2, void *data);
-      typedef bool (*ResItemAndDepFn) (constResItemPtr r, const Capability & dep, void *data);
-      
+      typedef std::list<ResItem_Ptr> ResItemList;
+      typedef std::list<ResItem_constPtr> CResItemList;
+
+      typedef bool (*ResItemFn) (ResItem_Ptr r, void *data);
+      typedef bool (*CResItemFn) (ResItem_constPtr r, void *data);
+      typedef bool (*ResItemPairFn) (ResItem_constPtr r1, ResItem_constPtr r2, void *data);
+      typedef bool (*ResItemAndDepFn) (ResItem_constPtr r, const Capability & dep, void *data);
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : ResItem
       /**
        *
        **/
-      
-      class ResItem : public CountedRep {
-          REP_BODY(ResItem);
-      
+
+      class ResItem : public base::ReferenceCounted, private base::NonCopyable {
+          
+
         private:
-          constChannelPtr _channel;
-      
+          Channel_constPtr _channel;
+
           bool _installed;
           bool _local;
           bool _locked;
-      
+
           size_t _file_size;
           size_t _installed_size;
-      
+
         protected:
-      
+
           // ---------------------------------- accessors
-      
+
           void setLocal (bool local) { _local = local; }
           ResObject::Ptr _resObject;
-      
+
         public:
-      
+
           ResItem(const Resolvable::Kind & kind, const std::string & name, int epoch = Edition::noepoch, const std::string & version = "", const std::string & release = "", const Arch & arch = Arch());
 
           ResItem(const ResObject::Ptr & resObject);
-          ResItem(const XmlNodePtr node);
-      
+          ResItem(const XmlNode_Ptr node);
+
           virtual ~ResItem();
-      
+
           // ---------------------------------- I/O
-      
-          const XmlNodePtr asXmlNode (void) const;
-      
+
+          const XmlNode_Ptr asXmlNode (void) const;
+
           static std::string toString ( const ResItem & res, bool full = false );
-      
+
           static std::string toString ( const CResItemList & reslist, bool full = false );
-      
+
           virtual std::ostream & dumpOn( std::ostream & str ) const;
-      
+
           friend std::ostream& operator<<( std::ostream & str, const ResItem & str);
-      
+
           std::string asString ( bool full = false ) const;
-      
+
           // ---------------------------------- accessors
-      
-          constChannelPtr channel() const { return _channel; }
-          void setChannel (constChannelPtr channel) { _channel = channel; }
-      
+
+          Channel_constPtr channel() const { return _channel; }
+          void setChannel (Channel_constPtr channel) { _channel = channel; }
+
           bool locked () const { return _locked; }
           void setLocked (bool locked) { _locked = locked; }
-      
+
           bool isInstalled() const;				// does *not* reflect _installed
           void setInstalled (bool installed) { _installed = installed; }
-      
+
           bool local() const { return _local; }
-      
+
           size_t fileSize() const { return _file_size; }
           void setFileSize (size_t file_size) { _file_size = file_size; }
-      
+
           size_t installedSize() const { return _installed_size; }
           void setInstalledSize (size_t installed_size) { _installed_size = installed_size; }
-      
+
           const CapSet & requires() const { return _resObject->deps().requires(); }
           const CapSet & provides() const { return _resObject->deps().provides(); }
           const CapSet & conflicts() const { return _resObject->deps().conflicts(); }
@@ -134,7 +138,7 @@ namespace zypp
           ResObject::constPtr resObject() { return _resObject; }
 
           // Spec definitions
-          
+
           const Edition & edition() const { return _resObject->edition(); }
           const std::string & version() const { return edition().version(); }
           const std::string & release() const { return edition().release(); }
@@ -143,12 +147,12 @@ namespace zypp
           const Arch & arch() const { return _resObject->arch(); }
           const Resolvable::Kind & kind() const { return _resObject->kind(); }
           const std::string name() const { return _resObject->name(); }
-          bool equals(constResItemPtr item) const;
+          bool equals(ResItem_constPtr item) const;
           bool equals(const  Resolvable::Kind & kind, const std::string & name,
                       const Edition & edition) const;
-          
-          static int compare (constResItemPtr res1, constResItemPtr res2);
-      
+
+          static int compare (ResItem_constPtr res1, ResItem_constPtr res2);
+
       };
 
       ///////////////////////////////////////////////////////////////////

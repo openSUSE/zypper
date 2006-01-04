@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* QueueItemUninstallPtr.h
+/* QueueItemUninstall_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,14 +18,14 @@
  * 02111-1307, USA.
  */
 
-#ifndef _QueueItemUninstallPtr_h
-#define _QueueItemUninstallPtr_h
+#ifndef _QueueItemUninstall_Ptr_h
+#define _QueueItemUninstall_Ptr_h
 
-#include <y2util/RepDef.h>
-#include <zypp/solver/detail/QueueItem.h>
+#include "zypp/base/PtrTypes.h"
+#include <zypp/solver/detail/QueueItemPtr.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -35,10 +35,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
      ///////////////////////////////////////////////////////////////////
-     //	CLASS NAME : QueueItemUninstallPtr
-     //	CLASS NAME : constQueueItemUninstallPtr
+     //	CLASS NAME : QueueItemUninstall_Ptr
+     //	CLASS NAME : QueueItemUninstall_constPtr
      ///////////////////////////////////////////////////////////////////
-     DEFINE_DERIVED_POINTER(QueueItemUninstall,QueueItem);
+     DEFINE_PTR_TYPE(QueueItemUninstall);
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -49,4 +49,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _QueueItemUninstallPtr_h
+#endif // _QueueItemUninstall_Ptr_h

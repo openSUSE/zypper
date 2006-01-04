@@ -24,15 +24,16 @@
 
 #include <iosfwd>
 #include <list>
-#include <string.h>
+#include <string>
 
+#include <zypp/solver/detail/QueueItem.h>
 #include <zypp/solver/detail/QueueItemInstallPtr.h>
 #include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Channel.h>
 #include <zypp/CapSet.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -44,64 +45,64 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : QueueItemInstall
-      
+
       class QueueItemInstall : public QueueItem {
-          REP_BODY(QueueItemInstall);
-      
+
+
         private:
-          constResItemPtr _resItem;
-          constResItemPtr _upgrades;
+          ResItem_constPtr _resItem;
+          ResItem_constPtr _upgrades;
           CapSet _deps_satisfied_by_this_install;
           CResItemList _needed_by;
           int _channel_priority;
           int _other_penalty;
-      
+
           bool _explicitly_requested;
-      
+
         public:
-      
-          QueueItemInstall (WorldPtr world, constResItemPtr resItem);
+
+          QueueItemInstall (World_Ptr world, ResItem_constPtr resItem);
           virtual ~QueueItemInstall();
-      
+
           // ---------------------------------- I/O
-      
+
           static std::string toString (const QueueItemInstall & item);
-      
+
           virtual std::ostream & dumpOn(std::ostream & str ) const;
-      
+
           friend std::ostream& operator<<(std::ostream&, const QueueItemInstall & item);
-      
+
           std::string asString (void ) const;
-      
+
           // ---------------------------------- accessors
-      
-          constResItemPtr resItem (void) const { return _resItem; }
-      
-          constResItemPtr upgrades (void) const { return _upgrades; }
-          void setUpgrades (constResItemPtr upgrades) { _upgrades = upgrades; }
-      
+
+          ResItem_constPtr resItem (void) const { return _resItem; }
+
+          ResItem_constPtr upgrades (void) const { return _upgrades; }
+          void setUpgrades (ResItem_constPtr upgrades) { _upgrades = upgrades; }
+
           int channelPriority (void) const { return _channel_priority; }
           void setChannelPriority (int channel_priority) { _channel_priority = channel_priority; }
-      
+
           int otherPenalty (void) { return _other_penalty; }
           void setOtherPenalty (int other_penalty) { _other_penalty = other_penalty; }
-      
+
           void setExplicitlyRequested (void) { _explicitly_requested = true; }
-      
+
           // ---------------------------------- methods
-      
-          virtual bool process (ResolverContextPtr context, QueueItemList & qil);
-          virtual QueueItemPtr copy (void) const;
-          virtual int cmp (constQueueItemPtr item) const;
-      
-          virtual bool isRedundant (ResolverContextPtr context) const { return false; }
-          virtual bool isSatisfied (ResolverContextPtr context) const;
-      
+
+          virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
+          virtual QueueItem_Ptr copy (void) const;
+          virtual int cmp (QueueItem_constPtr item) const;
+
+          virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
+          virtual bool isSatisfied (ResolverContext_Ptr context) const;
+
           void addDependency (const Capability & dep);
-          void addNeededBy (const constResItemPtr resItem);
-      
+          void addNeededBy (const ResItem_constPtr resItem);
+
       };
-      
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

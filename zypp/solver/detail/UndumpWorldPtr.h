@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* UndumpWorldPtr.h
+/* UndumpWorld_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _UndumpWorldPtr_h
-#define _UndumpWorldPtr_h
+#ifndef _UndumpWorld_Ptr_h
+#define _UndumpWorld_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 #include <zypp/solver/detail/WorldPtr.h>
 
 
@@ -36,10 +36,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
       
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : UndumpWorldPtr
-      //	CLASS NAME : constUndumpWorldPtr
+      //	CLASS NAME : UndumpWorld_Ptr
+      //	CLASS NAME : UndumpWorld_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_DERIVED_POINTER(UndumpWorld, World);
+      DEFINE_PTR_TYPE(UndumpWorld);
       
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -50,4 +50,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _UndumpWorldPtr_h
+#endif // _UndumpWorld_Ptr_h

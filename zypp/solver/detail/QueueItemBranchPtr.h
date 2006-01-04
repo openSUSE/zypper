@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* QueueItemBranchPtr.h
+/* QueueItemBranch_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,14 +18,14 @@
  * 02111-1307, USA.
  */
 
-#ifndef _QueueItemBranchPtr_h
-#define _QueueItemBranchPtr_h
+#ifndef _QueueItemBranch_Ptr_h
+#define _QueueItemBranch_Ptr_h
 
-#include <y2util/RepDef.h>
-#include <zypp/solver/detail/QueueItem.h>
+#include "zypp/base/PtrTypes.h"
+#include <zypp/solver/detail/QueueItemPtr.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -33,12 +33,12 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
+
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : QueueItemBranchPtr
-      //	CLASS NAME : constQueueItemBranchPtr
+      //	CLASS NAME : QueueItemBranch_Ptr
+      //	CLASS NAME : QueueItemBranch_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_DERIVED_POINTER(QueueItemBranch,QueueItem);
+      DEFINE_PTR_TYPE(QueueItemBranch);
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -49,4 +49,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _QueueItemBranchPtr_h
+#endif // _QueueItemBranch_Ptr_h

@@ -24,7 +24,7 @@
 
 #include <list>
 #include <iosfwd>
-#include <string.h>
+#include <string>
 #include <sys/types.h>
 
 #include <zypp/solver/detail/PackageUpdatePtr.h>
@@ -51,10 +51,10 @@ namespace zypp
  **/
 
 class PackageUpdate : public Spec {
-          REP_BODY(PackageUpdate);
+          
       
         private:
-          PackagePtr _package;
+          Package_Ptr _package;
       
           const char *_package_url;
           size_t _package_size;
@@ -74,18 +74,18 @@ class PackageUpdate : public Spec {
           const char *_license;
       
           // refers to the parent package for SuSE patch RPMs
-          constPackagePtr _parent;
+          Package_constPtr _parent;
       
         public:
       
           PackageUpdate(const std::string & name);
-          PackageUpdate(constXmlNodePtr node, PackagePtr package);
+          PackageUpdate(XmlNode_constPtr node, Package_Ptr package);
       
           virtual ~PackageUpdate();
       
           // ---------------------------------- I/O
       
-          const XmlNodePtr asXmlNode (void) const;
+          const XmlNode_Ptr asXmlNode (void) const;
       
           static std::string toString ( const PackageUpdate & packageupdate, bool full = false );
       
@@ -97,8 +97,8 @@ class PackageUpdate : public Spec {
       
           // ---------------------------------- accessors
       
-          constPackagePtr package() const { return _package; }
-          void setPackage (PackagePtr package) { _package = package; }
+          Package_constPtr package() const { return _package; }
+          void setPackage (Package_Ptr package) { _package = package; }
       
           const char *packageUrl() const { return _package_url; }
           void setPackageUrl (const char *package_url) { _package_url = package_url; }
@@ -131,8 +131,8 @@ class PackageUpdate : public Spec {
           void setLicense (const char *license) { _license = license; }
       
           // refers to the parent package for SuSE patch RPMs
-          constPackagePtr parent() const { return _parent; }
-          void setParent (constPackagePtr parent) { _parent = parent; }
+          Package_constPtr parent() const { return _parent; }
+          void setParent (Package_constPtr parent) { _parent = parent; }
       
           // ---------------------------------- methods
       

@@ -19,14 +19,11 @@
  * 02111-1307, USA.
  */
 
-#include <y2util/stringutil.h>
-
 #include <zypp/solver/detail/Section.h>
-
 #include <zypp/solver/detail/debug.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -34,23 +31,23 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-        
+
       using namespace std;
-      
+
       string
       Section::asString ( void ) const
       {
           return toString (*this);
       }
-      
-      
+
+
       string
       Section::asUserString ( void ) const
       {
           return toUserString (*this);
       }
-      
-      
+
+
       string
       Section::toString ( const Section & section )
       {
@@ -74,7 +71,7 @@ namespace zypp
           }
           return ("misc");
       }
-      
+
       string
       Section::toUserString ( const Section & section )
       {
@@ -96,30 +93,30 @@ namespace zypp
           default:
       	rc_debug (RC_DEBUG_LEVEL_WARNING, "invalid section number %d\n", section.section());
           }
-      
+
           return ("Miscellaneous");
       }
-      
+
       ostream &
       Section::dumpOn( ostream & str ) const
       {
           str << asString();
           return str;
       }
-      
-      
+
+
       ostream&
       operator<<( ostream& os, const Section& section)
       {
           return os << section.asString();
       }
-      
+
       //---------------------------------------------------------------------------
-      
+
       Section::Section(const char *section_str)
       {
           _section = SECTION_MISC;
-      
+
           if (section_str != NULL) {
           switch (*section_str) {
           case 'd':
@@ -189,14 +186,14 @@ namespace zypp
       	break;
           }
           } // if != NULL
-      
+
       }
-      
-      
+
+
       Section::~Section()
       {
       }
-      
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

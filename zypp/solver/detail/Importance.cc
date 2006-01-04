@@ -19,14 +19,11 @@
  * 02111-1307, USA.
  */
 
-#include <y2util/stringutil.h>
-
 #include <zypp/solver/detail/Importance.h>
-
 #include <zypp/solver/detail/debug.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -34,24 +31,24 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
+
       using namespace std;
-      
+
       const Importance & Importance::Undefined= Importance("undefined");
-      
+
       //---------------------------------------------------------------------------
       string
       Importance::asString ( void ) const
       {
           return toString (*this);
       }
-      
-      
+
+
       string
       Importance::toString ( const Importance & importance )
       {
           string res;
-      
+
           switch (importance.importance()) {
       	case IMPORTANCE_UNDEFINED:	res = "undefined"; break;
       	case IMPORTANCE_INVALID:	res = "invalid"; break;
@@ -66,24 +63,24 @@ namespace zypp
           }
           return res;
       }
-      
-      
+
+
       ostream &
       Importance::dumpOn( ostream & str ) const
       {
           str << asString();
           return str;
       }
-      
-      
+
+
       ostream&
       operator<<( ostream& os, const Importance& importance)
       {
           return os << importance.asString();
       }
-      
+
       //---------------------------------------------------------------------------
-      
+
       Importance::Importance(const char *importance_str)
       {
           _importance = IMPORTANCE_INVALID;
@@ -122,14 +119,14 @@ namespace zypp
           }
           if (_importance == IMPORTANCE_INVALID)
       	rc_debug (RC_DEBUG_LEVEL_WARNING, "invalid importance '%s'\n", importance_str ? importance_str : "<null>");
-      
+
       }
-      
-      
+
+
       Importance::~Importance()
       {
       }
-      
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
@@ -139,5 +136,5 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-        
+
 

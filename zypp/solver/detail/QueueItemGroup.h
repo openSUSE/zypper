@@ -24,14 +24,15 @@
 
 #include <iosfwd>
 #include <list>
-#include <string.h>
+#include <string>
 
+#include <zypp/solver/detail/QueueItem.h>
 #include <zypp/solver/detail/QueueItemGroupPtr.h>
 #include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Channel.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -43,40 +44,40 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : QueueItemGroup
-      
+
       class QueueItemGroup : public QueueItem {
-          REP_BODY(QueueItemGroup);
-      
+
+
         private:
           QueueItemList _subitems;
-      
+
         public:
-      
-          QueueItemGroup (WorldPtr world);
+
+          QueueItemGroup (World_Ptr world);
           virtual ~QueueItemGroup();
-      
+
           // ---------------------------------- I/O
-      
+
           static std::string toString (const QueueItemGroup & item);
-      
+
           virtual std::ostream & dumpOn(std::ostream & str ) const;
-      
+
           friend std::ostream& operator<<(std::ostream&, const QueueItemGroup & item);
-      
+
           std::string asString (void ) const;
-      
+
           // ---------------------------------- accessors
-      
-      
+
+
           // ---------------------------------- methods
-      
-          virtual bool process (ResolverContextPtr context, QueueItemList & qil);
-          virtual QueueItemPtr copy (void) const;
-          virtual int cmp (constQueueItemPtr item) const;
-          virtual bool isRedundant (ResolverContextPtr context) const { return false; }
-          virtual bool isSatisfied (ResolverContextPtr context) const { return false; }
-      
-          void addItem (QueueItemPtr subitem);
+
+          virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
+          virtual QueueItem_Ptr copy (void) const;
+          virtual int cmp (QueueItem_constPtr item) const;
+          virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
+          virtual bool isSatisfied (ResolverContext_Ptr context) const { return false; }
+
+          void addItem (QueueItem_Ptr subitem);
       };
 
       ///////////////////////////////////////////////////////////////////

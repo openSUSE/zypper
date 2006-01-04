@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* PendingPtr.h
+/* Pending_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _PendingPtr_h
-#define _PendingPtr_h
+#ifndef _Pending_Ptr_h
+#define _Pending_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
 { ///////////////////////////////////////////////////////////////////////
@@ -33,10 +33,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : PendingPtr
-      //	CLASS NAME : constPendingPtr
+      //	CLASS NAME : Pending_Ptr
+      //	CLASS NAME : Pending_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_BASE_POINTER(Pending);
+      DEFINE_PTR_TYPE(Pending);
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -48,4 +48,4 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////        
 
-#endif // _PendingPtr_h
+#endif // _Pending_Ptr_h

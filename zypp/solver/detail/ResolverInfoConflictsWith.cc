@@ -36,7 +36,7 @@ namespace zypp
       
       using namespace std;
       
-      IMPL_DERIVED_POINTER(ResolverInfoConflictsWith, ResolverInfo);
+      IMPL_PTR_TYPE(ResolverInfoConflictsWith);
       
       //---------------------------------------------------------------------------
       
@@ -76,7 +76,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      ResolverInfoConflictsWith::ResolverInfoConflictsWith (constResItemPtr resItem, constResItemPtr with)
+      ResolverInfoConflictsWith::ResolverInfoConflictsWith (ResItem_constPtr resItem, ResItem_constPtr with)
           : ResolverInfoContainer (RESOLVER_INFO_TYPE_CONFLICTS_WITH, resItem, RESOLVER_INFO_PRIORITY_USER, with)
       {
       }
@@ -89,12 +89,12 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      ResolverInfoPtr
+      ResolverInfo_Ptr
       ResolverInfoConflictsWith::copy (void) const
       {
-          ResolverInfoConflictsWithPtr cpy = new ResolverInfoConflictsWith(resItem(), NULL);
+          ResolverInfoConflictsWith_Ptr cpy = new ResolverInfoConflictsWith(resItem(), NULL);
       
-          ((ResolverInfoContainerPtr)cpy)->copy (this);
+          ((ResolverInfoContainer_Ptr)cpy)->copy (this);
       
           return cpy;
       }

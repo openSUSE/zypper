@@ -43,9 +43,9 @@ namespace zypp
       
       
       int
-      extract_packages_from_xml_node (XmlNodePtr node, ChannelPtr channel, CResItemFn callback, void *data)
+      extract_packages_from_xml_node (XmlNode_Ptr node, Channel_Ptr channel, CResItemFn callback, void *data)
       {
-          PackagePtr package;
+          Package_Ptr package;
           int count = 0;
       
           _DBG("RC_SPEW_XML") << "extract_packages_from_xml_node ()" << endl;
@@ -83,7 +83,7 @@ namespace zypp
       
       
       int 
-      extract_packages_from_helix_buffer (const char *buf, size_t len, ChannelPtr channel, CResItemFn callback, void *data)
+      extract_packages_from_helix_buffer (const char *buf, size_t len, Channel_Ptr channel, CResItemFn callback, void *data)
       {
           unsigned int count = 0;
           PackageList packages;
@@ -115,7 +115,7 @@ namespace zypp
       
       
       int
-      extract_packages_from_helix_file (const string & filename, ChannelPtr channel, CResItemFn callback, void *data)
+      extract_packages_from_helix_file (const string & filename, Channel_Ptr channel, CResItemFn callback, void *data)
       {
           Buffer *buf;
           int count;
@@ -139,10 +139,10 @@ namespace zypp
       extract_packages_from_undump_buffer (const char *buf, size_t len, ChannelAndSubscribedFn channel_callback, CResItemFn resItem_callback, MatchFn lock_callback, void *data)
       {
           xmlDoc *doc;
-          XmlNodePtr dump_node;
-          ChannelPtr system_channel = NULL;
-          ChannelPtr current_channel = NULL;
-          XmlNodePtr channel_node;
+          XmlNode_Ptr dump_node;
+          Channel_Ptr system_channel = NULL;
+          Channel_Ptr current_channel = NULL;
+          XmlNode_Ptr channel_node;
           int count = 0;
       
           doc = parse_xml_from_buffer (buf, len);
@@ -163,10 +163,10 @@ namespace zypp
           while (channel_node != NULL) {
       
       	if (channel_node->equals("locks")) {
-      	    XmlNodePtr lock_node = channel_node->children();
+      	    XmlNode_Ptr lock_node = channel_node->children();
       
       	    while (lock_node) {
-      		MatchPtr lock;
+      		Match_Ptr lock;
       
       		lock = new Match (lock_node);
       
@@ -253,12 +253,12 @@ namespace zypp
       #if 0
       /* ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** */
       
-      static ResItemPtr
+      static ResItem_Ptr
       fill_debian_package (const char *buf, const char *url_prefix, int *off)
       {
           const char *ibuf;
           RCPackageUpdate *up = NULL;
-          ResItemPtr r;
+          ResItem_Ptr r;
           ResItemList requires, provides, conflicts, suggests, recommends;
       
           up = rc_package_update_new ();
@@ -427,7 +427,7 @@ namespace zypp
       #endif
       
       int 
-      extract_packages_from_debian_buffer (const char *buf, size_t len, ChannelPtr channel, CResItemFn callback, void *data)
+      extract_packages_from_debian_buffer (const char *buf, size_t len, Channel_Ptr channel, CResItemFn callback, void *data)
       {
           const char *pos;
           int count = 0;
@@ -439,7 +439,7 @@ namespace zypp
       	int off;
       
       	/* All debian packages "have" epochs */
-      	ResItemPtr resItem = fill_debian_package (iter, channel->getFilePath (), &off);
+      	ResItem_Ptr resItem = fill_debian_package (iter, channel->getFilePath (), &off);
       
       	resItem->setEpoch (0);
       	resItem->setArch ( Arch());
@@ -458,7 +458,7 @@ namespace zypp
       
       
       int
-      extract_packages_from_debian_file (const string & filename, ChannelPtr channel, CResItemFn callback, void *data)
+      extract_packages_from_debian_file (const string & filename, Channel_Ptr channel, CResItemFn callback, void *data)
       {
           Buffer *buf;
           int count;
@@ -479,7 +479,7 @@ namespace zypp
       #if 0
       /* ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** */
       
-      PackagePtr 
+      Package_Ptr 
       extract_yum_package (const guint8 *data, size_t len,
       			RCPackman *packman, char *url)
       {
@@ -490,7 +490,7 @@ namespace zypp
       #else
           RCRpmman *rpmman;
           Header h;
-          PackagePtr p;
+          Package_Ptr p;
           RCPackageUpdate *pu;
           char *tmpc;
           int typ, n;
@@ -537,7 +537,7 @@ namespace zypp
       int
       extract_packages_from_aptrpm_buffer (const guint8 *data, size_t len,
       					RCPackman *packman,
-      					ChannelPtr channel,
+      					Channel_Ptr channel,
       					CResItemFn callback,
       					void * user_data)
       {
@@ -586,7 +586,7 @@ namespace zypp
       
           while (cur_ptr != NULL) {
       	Header h;
-      	PackagePtr p;
+      	Package_Ptr p;
       	RCPackageUpdate *pu;
       	int bytesleft, i;
       	char *tmpc;
@@ -669,11 +669,11 @@ namespace zypp
       int
       extract_packages_from_aptrpm_file (const char *filename,
       				      RCPackman *packman,
-      				      ChannelPtr channel,
+      				      Channel_Ptr channel,
       				      CResItemFn callback,
       				      void * user_data)
       {
-          WorldPtr world = *((WorldPtr *)data);
+          World_Ptr world = *((World_Ptr *)data);
           RCBuffer *buf;
           int count;
       
@@ -696,10 +696,10 @@ namespace zypp
       /* ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** */
       
       static void
-      package_into_hash (PackagePtr pkg, GHashTable *hash)
+      package_into_hash (Package_Ptr pkg, GHashTable *hash)
       {
           void * nameq;
-          PackagePtr hashed_pkg;
+          Package_Ptr hashed_pkg;
       
           nameq = GINT_TO_POINTER (RC_RESOLVABLE_SPEC (pkg)->nameq);
           hashed_pkg = g_hash_table_lookup (hash, nameq);
@@ -713,7 +713,7 @@ namespace zypp
       }
       
       static bool
-      hash_recurse_cb (PackagePtr pkg, void * user_data)
+      hash_recurse_cb (Package_Ptr pkg, void * user_data)
       {
           GHashTable *hash = user_data;
           package_into_hash (pkg, hash);
@@ -741,7 +741,7 @@ namespace zypp
       
       
       static void
-      add_fake_history (PackagePtr pkg)
+      add_fake_history (Package_Ptr pkg)
       {
           RCPackageUpdate *up;
       
@@ -759,7 +759,7 @@ namespace zypp
       } PackagesFromDirInfo;
       
       static bool
-      packages_from_dir_cb (PackagePtr package, void * user_data)
+      packages_from_dir_cb (Package_Ptr package, void * user_data)
       {
           PackagesFromDirInfo *info = user_data;
           RCPackageUpdate *update;
@@ -779,13 +779,13 @@ namespace zypp
       
       int
       extract_packages_from_directory (const char *path,
-      				    ChannelPtr channel,
+      				    Channel_Ptr channel,
       				    RCPackman *packman,
       				    bool recursive,
       				    CResItemFn callback,
       				    void * user_data)
       {
-          WorldPtr world = *((WorldPtr *)data);
+          World_Ptr world = *((World_Ptr *)data);
           GDir *dir;
           GHashTable *hash;
           struct HashIterInfo info;
@@ -915,7 +915,7 @@ namespace zypp
       						hash_recurse_cb,
       						hash);
       	} else if (g_file_test (file_path, G_FILE_TEST_IS_REGULAR)) {
-      	    PackagePtr pkg;
+      	    Package_Ptr pkg;
       
       	    pkg = rc_packman_query_file (packman, file_path, true);
       	    if (pkg != NULL) {

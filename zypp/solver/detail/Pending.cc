@@ -36,7 +36,7 @@ namespace zypp
       
       using namespace std;
       
-      IMPL_BASE_POINTER(Pending);
+      IMPL_PTR_TYPE(Pending);
       
       //---------------------------------------------------------------------------
       

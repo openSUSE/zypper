@@ -24,15 +24,16 @@
 
 #include <iosfwd>
 #include <list>
-#include <string.h>
+#include <string>
 
+#include <zypp/solver/detail/QueueItem.h>
 #include <zypp/solver/detail/QueueItemRequirePtr.h>
 #include <zypp/solver/detail/ResItem.h>
 #include <zypp/Capability.h>
 #include <zypp/solver/detail/Channel.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -40,58 +41,58 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-        
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : QueueItemRequire
-      
+
       class QueueItemRequire : public QueueItem {
-          REP_BODY(QueueItemRequire);
-      
+
+
         private:
           const Capability _dep;
-          constResItemPtr _requiring_resItem;
-          constResItemPtr _upgraded_resItem;
-          constResItemPtr _lost_resItem;
+          ResItem_constPtr _requiring_resItem;
+          ResItem_constPtr _upgraded_resItem;
+          ResItem_constPtr _lost_resItem;
           bool _remove_only;
           bool _is_child;
-      
+
         public:
-      
-          QueueItemRequire (WorldPtr world, const Capability & dep);
+
+          QueueItemRequire (World_Ptr world, const Capability & dep);
           virtual ~QueueItemRequire();
-      
+
           // ---------------------------------- I/O
-      
+
           static std::string toString (const QueueItemRequire & item);
-      
+
           virtual std::ostream & dumpOn(std::ostream & str ) const;
-      
+
           friend std::ostream& operator<<(std::ostream&, const QueueItemRequire & item);
-      
+
           std::string asString (void ) const;
-      
+
           // ---------------------------------- accessors
-      
+
           const Capability & dependency (void) const { return _dep; }
-      
+
           void setRemoveOnly (void) { _remove_only = true; }
-          void setUpgradedResItem (constResItemPtr upgraded_resItem) { _upgraded_resItem = upgraded_resItem; }
-          void setLostResItem (constResItemPtr lost_resItem) { _lost_resItem = lost_resItem; }
-      
+          void setUpgradedResItem (ResItem_constPtr upgraded_resItem) { _upgraded_resItem = upgraded_resItem; }
+          void setLostResItem (ResItem_constPtr lost_resItem) { _lost_resItem = lost_resItem; }
+
           // ---------------------------------- methods
-      
-          virtual bool process (ResolverContextPtr context, QueueItemList & qil);
-          virtual QueueItemPtr copy (void) const;
-          virtual int cmp (constQueueItemPtr item) const;
-          virtual bool isRedundant (ResolverContextPtr context) const { return false; }
-          virtual bool isSatisfied (ResolverContextPtr context) const { return false; }
-      
-          void addResItem (constResItemPtr resItem);
-      
-      
+
+          virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
+          virtual QueueItem_Ptr copy (void) const;
+          virtual int cmp (QueueItem_constPtr item) const;
+          virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
+          virtual bool isSatisfied (ResolverContext_Ptr context) const { return false; }
+
+          void addResItem (ResItem_constPtr resItem);
+
+
       };
-        
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

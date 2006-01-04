@@ -48,7 +48,7 @@ namespace zypp
 
       using namespace std;
 
-      IMPL_DERIVED_POINTER(QueueItemInstall,QueueItem);
+      IMPL_PTR_TYPE(QueueItemInstall);
 
       //---------------------------------------------------------------------------
 
@@ -103,14 +103,14 @@ namespace zypp
 
       //---------------------------------------------------------------------------
 
-      QueueItemInstall::QueueItemInstall (WorldPtr world, constResItemPtr resItem)
+      QueueItemInstall::QueueItemInstall (World_Ptr world, ResItem_constPtr resItem)
 	  : QueueItem (QUEUE_ITEM_TYPE_INSTALL, world)
 	  , _resItem (resItem)
 	  , _channel_priority (0)
 	  , _other_penalty (0)
 	  , _explicitly_requested (false)
       {
-	  constResItemPtr upgrades = world->findInstalledResItem (resItem);
+	  ResItem_constPtr upgrades = world->findInstalledResItem (resItem);
 	  _DBG("RC_SPEW") << "QueueItemInstall::QueueItemInstall(" << resItem->asString() << ") upgrades ";
 	  if (upgrades!=NULL)
 	  {
@@ -134,7 +134,7 @@ namespace zypp
       //---------------------------------------------------------------------------
 
       bool
-      QueueItemInstall::isSatisfied (ResolverContextPtr context) const
+      QueueItemInstall::isSatisfied (ResolverContext_Ptr context) const
       {
 	  return context->resItemIsPresent (_resItem);
       }
@@ -145,7 +145,7 @@ namespace zypp
       // Handle system resItem's that conflict with us -> uninstall them
 
       static bool
-      build_conflict_list (constResItemPtr resItem, const Capability & dep, void *data)
+      build_conflict_list (ResItem_constPtr resItem, const Capability & dep, void *data)
       {
 	  CResItemList *rl = (CResItemList *)data;
 	  rl->push_front (resItem);
@@ -153,11 +153,11 @@ namespace zypp
       }
 
       bool
-      QueueItemInstall::process (ResolverContextPtr context, QueueItemList & qil)
+      QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
       {
 	  _DBG("RC_SPEW") <<  "QueueItemInstall::process(" << this->asString() << ")" << endl;
 
-	  constResItemPtr resItem = _resItem;
+	  ResItem_constPtr resItem = _resItem;
 	  string res_name = resItem->asString();
 	  string msg;
 	  ResItemStatus status = context->getStatus (resItem);
@@ -168,7 +168,7 @@ namespace zypp
 
 	  if (_upgrades
 	      && _resItem->equals (_upgrades)) {
-	      ResolverInfoPtr info;
+	      ResolverInfo_Ptr info;
 
 	      _DBG("RC_SPEW") << "upgrades equal resItem, skipping" << endl;
 
@@ -206,13 +206,13 @@ namespace zypp
 	      && resItem_status_is_to_be_uninstalled (context->getStatus (resItem))
 	      && !_needed_by.empty()) {
 
-	      QueueItemUninstallPtr uninstall_item;
+	      QueueItemUninstall_Ptr uninstall_item;
 
 	      for (CResItemList::const_iterator iter = _needed_by.begin(); iter != _needed_by.end(); iter++) {
 	          uninstall_item = new QueueItemUninstall (world(), *iter, "uninstallable resolvable");
 	          qil.push_front (uninstall_item);
 	      }
-	
+
 	      goto finished;
 	  }
 
@@ -227,7 +227,7 @@ namespace zypp
 
 	  } else {
 
-	      QueueItemUninstallPtr uninstall_item;
+	      QueueItemUninstall_Ptr uninstall_item;
 
 	      _DBG("RC_SPEW") << "upgrade install of " << resItem->asString() << endl;
 
@@ -245,7 +245,7 @@ namespace zypp
 	  /* Log which resItem need this install */
 
 	  if (!_needed_by.empty()) {
-	      ResolverInfoNeededByPtr info;
+	      ResolverInfoNeededBy_Ptr info;
 
 	      info = new ResolverInfoNeededBy (resItem);
 	      info->addRelatedResItemList (_needed_by);
@@ -278,7 +278,7 @@ namespace zypp
 	      const Capability dep = *iter;
 	      if (!context->requirementIsMet (dep, false)) {
 	          _DBG("RC_SPEW") << "this requires " << dep.asString() << endl;
-	          QueueItemRequirePtr req_item = new QueueItemRequire (world(), dep);
+	          QueueItemRequire_Ptr req_item = new QueueItemRequire (world(), dep);
 	          req_item->addResItem (resItem);
 	          qil.push_front (req_item);
 	      }
@@ -290,7 +290,7 @@ namespace zypp
 	  for (CapSet::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
 	      const Capability dep = *iter;
 	      _DBG("RC_SPEW") << "this conflicts with '" << dep.asString() << "'" << endl;
-	      QueueItemConflictPtr conflict_item = new QueueItemConflict (world(), dep, resItem);
+	      QueueItemConflict_Ptr conflict_item = new QueueItemConflict (world(), dep, resItem);
 	      qil.push_front (conflict_item);
 	  }
 
@@ -300,7 +300,7 @@ namespace zypp
 	  for (CapSet::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
 	      const Capability dep = *iter;
 	      _DBG("RC_SPEW") << "this obsoletes " <<  dep.asString() << endl;
-	      QueueItemConflictPtr conflict_item = new QueueItemConflict (world(), dep, resItem);
+	      QueueItemConflict_Ptr conflict_item = new QueueItemConflict (world(), dep, resItem);
 	      conflict_item->setActuallyAnObsolete();
 	      qil.push_front (conflict_item);
 	  }
@@ -315,9 +315,9 @@ namespace zypp
 	  }
 
 	  for (CResItemList::const_iterator iter = conflicts.begin(); iter != conflicts.end(); iter++) {
-	      constResItemPtr conflicting_resItem = *iter;
-	      ResolverInfoPtr log_info;
-	      QueueItemUninstallPtr uninstall_item;
+	      ResItem_constPtr conflicting_resItem = *iter;
+	      ResolverInfo_Ptr log_info;
+	      QueueItemUninstall_Ptr uninstall_item;
 
 	      /* Check to see if we conflict with ourself and don't create
 	       * an uninstall item for it if we do.  This is Debian's way of
@@ -337,18 +337,18 @@ namespace zypp
 	      qil.push_front (uninstall_item);
 	  }
 	  }
-	
+
        finished:
-	
+
 	  return true;
       }
 
 
-      QueueItemPtr
+      QueueItem_Ptr
       QueueItemInstall::copy (void) const
       {
-	  QueueItemInstallPtr new_install = new QueueItemInstall (world(), _resItem);
-	  ((QueueItemPtr)new_install)->copy((constQueueItemPtr)this);
+	  QueueItemInstall_Ptr new_install = new QueueItemInstall (world(), _resItem);
+	  ((QueueItem_Ptr)new_install)->copy((QueueItem_constPtr)this);
 
 	  new_install->_upgrades = _upgrades;
 	  new_install->_deps_satisfied_by_this_install = CapSet(_deps_satisfied_by_this_install.begin(), _deps_satisfied_by_this_install.end());
@@ -362,12 +362,12 @@ namespace zypp
 
 
       int
-      QueueItemInstall::cmp (constQueueItemPtr item) const
+      QueueItemInstall::cmp (QueueItem_constPtr item) const
       {
 	  int cmp = this->compare (item);
 	  if (cmp != 0)
 	      return cmp;
-	  constQueueItemInstallPtr install = item;
+	  QueueItemInstall_constPtr install = dynamic_pointer_cast<const QueueItemInstall>(item);
 	  return ResItem::compare (_resItem, install->_resItem);
       }
 
@@ -381,7 +381,7 @@ namespace zypp
 
 
       void
-      QueueItemInstall::addNeededBy (constResItemPtr resItem)
+      QueueItemInstall::addNeededBy (ResItem_constPtr resItem)
       {
 	  _needed_by.push_front (resItem);
       }

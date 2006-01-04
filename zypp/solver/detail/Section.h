@@ -23,12 +23,10 @@
 #define _Section_h
 
 #include <iosfwd>
-#include <string.h>
-
-#include <y2util/Ustring.h>
+#include <string>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -36,7 +34,7 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : Section
@@ -44,9 +42,9 @@ namespace zypp
        *
        **/
       class Section {
-      
+
         private:
-      
+
           typedef enum {
       	SECTION_OFFICE = 0,
       	SECTION_IMAGING,
@@ -64,45 +62,45 @@ namespace zypp
       	SECTION_MISC,
       	SECTION_LAST
           } section_t;
-      
+
           section_t _section;
-      
+
         private:
           section_t section () const { return _section; }
-      
+
         public:
-      
+
           Section(const char *section_str);
           virtual ~Section();
-      
+
           // ---------------------------------- I/O
-      
+
           static std::string toString ( const Section & section);
           static std::string toUserString ( const Section & section);
-      
+
           virtual std::ostream & dumpOn( std::ostream & str ) const;
-      
+
           friend std::ostream& operator<<( std::ostream&, const Section & section);
-      
+
           std::string asString ( void ) const;
           std::string asUserString ( void ) const;
-      
+
           // ---------------------------------- accessors
-      
+
           // equality
           bool operator==( const Section & section) const {
       	return _section == section.section();
           }
-      
+
           // inequality
           bool operator!=( const Section & section) const {
       	return !(*this == section);
           }
-      
+
       };
-      
-      typedef Section * SectionPtr;
-      
+
+      typedef Section * Section_Ptr;
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* ResolverQueuePtr.h
+/* ResolverQueue_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ResolverQueuePtr_h
-#define _ResolverQueuePtr_h
+#ifndef _ResolverQueue_Ptr_h
+#define _ResolverQueue_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -34,10 +34,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
       
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : ResolverQueuePtr
-      //	CLASS NAME : constResolverQueuePtr
+      //	CLASS NAME : ResolverQueue_Ptr
+      //	CLASS NAME : ResolverQueue_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_BASE_POINTER(ResolverQueue);
+      DEFINE_PTR_TYPE(ResolverQueue);
         
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -50,4 +50,4 @@ namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
 
-#endif // _ResolverQueuePtr_h
+#endif // _ResolverQueue_Ptr_h

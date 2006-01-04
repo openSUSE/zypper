@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* ChannelPtr.h
+/* Channel_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ChannelPtr_h
-#define _ChannelPtr_h
+#ifndef _Channel_Ptr_h
+#define _Channel_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -34,10 +34,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : ChannelPtr
-      //	CLASS NAME : constChannelPtr
+      //	CLASS NAME : Channel_Ptr
+      //	CLASS NAME : Channel_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_BASE_POINTER(Channel);
+      DEFINE_PTR_TYPE(Channel);
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -48,4 +48,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 ////////////////////////////////////////////////////////////////////////
-#endif // _ChannelPtr_h
+#endif // _Channel_Ptr_h

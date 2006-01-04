@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* QueueItemInstallPtr.h
+/* QueueItemInstall_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,14 +18,14 @@
  * 02111-1307, USA.
  */
 
-#ifndef _QueueItemInstallPtr_h
-#define _QueueItemInstallPtr_h
+#ifndef _QueueItemInstall_Ptr_h
+#define _QueueItemInstall_Ptr_h
 
-#include <y2util/RepDef.h>
-#include <zypp/solver/detail/QueueItem.h>
+#include "zypp/base/PtrTypes.h"
+#include <zypp/solver/detail/QueueItemPtr.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -35,10 +35,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : QueueItemInstallPtr
-      //	CLASS NAME : constQueueItemInstallPtr
+      //	CLASS NAME : QueueItemInstall_Ptr
+      //	CLASS NAME : QueueItemInstall_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_DERIVED_POINTER(QueueItemInstall,QueueItem);
+      DEFINE_PTR_TYPE(QueueItemInstall);
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -49,4 +49,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _QueueItemInstallPtr_h
+#endif // _QueueItemInstall_Ptr_h

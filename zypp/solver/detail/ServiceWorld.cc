@@ -33,7 +33,7 @@ namespace zypp
       
       using namespace std;
       
-      IMPL_DERIVED_POINTER(ServiceWorld, World);
+      IMPL_PTR_TYPE(ServiceWorld);
       
       //---------------------------------------------------------------------------
       

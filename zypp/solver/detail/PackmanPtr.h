@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* PackmanPtr.h
+/* Packman_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _PackmanPtr_h
-#define _PackmanPtr_h
+#ifndef _Packman_Ptr_h
+#define _Packman_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -34,10 +34,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : PackmanPtr
-      //	CLASS NAME : constPackmanPtr
+      //	CLASS NAME : Packman_Ptr
+      //	CLASS NAME : Packman_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_BASE_POINTER(Packman);
+      DEFINE_PTR_TYPE(Packman);
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -48,4 +48,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _PackmanPtr_h
+#endif // _Packman_Ptr_h

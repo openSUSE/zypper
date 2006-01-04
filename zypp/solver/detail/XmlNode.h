@@ -29,10 +29,14 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
+#include "zypp/base/PtrTypes.h"
+
 #include <zypp/solver/detail/XmlNodePtr.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -45,9 +49,9 @@ namespace zypp
 //
 //      CLASS NAME : XmlNode
 
-class XmlNode : public CountedRep 
+class XmlNode : public base::ReferenceCounted, private base::NonCopyable
 {
-    REP_BODY(XmlNode);
+    
 
   private:
     const xmlNodePtr _node;
@@ -71,8 +75,8 @@ class XmlNode : public CountedRep
 
     const char *name() const { return ((const char *)(_node->name)); }
     xmlNodePtr node() const { return (_node); }
-    XmlNodePtr next() const { return (_node->next == NULL ? NULL : new XmlNode (_node->next)); }
-    XmlNodePtr children() const { return (_node->xmlChildrenNode == NULL ? NULL : new XmlNode (_node->xmlChildrenNode)); }
+    XmlNode_Ptr next() const { return (_node->next == NULL ? NULL : new XmlNode (_node->next)); }
+    XmlNode_Ptr children() const { return (_node->xmlChildrenNode == NULL ? NULL : new XmlNode (_node->xmlChildrenNode)); }
     xmlElementType type() const { return (_node->type); }
 
     // ---------------------------------- methods
@@ -86,7 +90,7 @@ class XmlNode : public CountedRep
 
     bool match (const char *str) const { return (! strcasecmp ((const char *)(_node->name), str)); }
 
-    const XmlNodePtr getNode (const char *name) const;
+    const XmlNode_Ptr getNode (const char *name) const;
 
     // The former will get either a property or a tag, whereas the latter will
     //   get only a property

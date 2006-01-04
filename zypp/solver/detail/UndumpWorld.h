@@ -23,7 +23,7 @@
 #define _UndumpWorld_h
 
 #include <iosfwd>
-#include <string.h>
+#include <string>
 
 #include <zypp/solver/detail/UndumpWorldPtr.h>
 #include <zypp/solver/detail/StoreWorld.h>
@@ -45,11 +45,11 @@ namespace zypp
       //	CLASS NAME : UndumpWorld
       
       class UndumpWorld : public StoreWorld {
-          REP_BODY(UndumpWorld);
+          
       
         private:
       
-          typedef std::list<constChannelPtr> ChannelSubscriptions;
+          typedef std::list<Channel_constPtr> ChannelSubscriptions;
           ChannelSubscriptions _subscriptions;
       
         public:
@@ -72,8 +72,8 @@ namespace zypp
           // ---------------------------------- methods
       
           void load (const char *filename);
-          virtual bool isSubscribed (constChannelPtr channel) const;
-          virtual void setSubscription (constChannelPtr channel, bool is_subscribed);
+          virtual bool isSubscribed (Channel_constPtr channel) const;
+          virtual void setSubscription (Channel_constPtr channel, bool is_subscribed);
       
       };
       ///////////////////////////////////////////////////////////////////

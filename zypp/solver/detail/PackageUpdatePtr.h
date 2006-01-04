@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* PackageUpdatePtr.h
+/* PackageUpdate_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,14 +18,13 @@
  * 02111-1307, USA.
  */
 
-#ifndef _PackageUpdatePtr_h
-#define _PackageUpdatePtr_h
+#ifndef _PackageUpdate_Ptr_h
+#define _PackageUpdate_Ptr_h
 
-#include <y2util/RepDef.h>
-#include <zypp/solver/detail/Spec.h>
+#include "zypp/base/PtrTypes.h"
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -35,10 +34,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : PackageUpdatePtr
-      //	CLASS NAME : constPackageUpdatePtr
+      //	CLASS NAME : PackageUpdate_Ptr
+      //	CLASS NAME : PackageUpdate_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_DERIVED_POINTER(PackageUpdate,Spec);
+      DEFINE_PTR_TYPE(PackageUpdate);
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -49,4 +48,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _PackageUpdatePtr_h
+#endif // _PackageUpdate_Ptr_h

@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* XmlNodePtr.h
+/* XmlNode_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _XmlNodePtr_h
-#define _XmlNodePtr_h
+#ifndef _XmlNode_Ptr_h
+#define _XmlNode_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -35,10 +35,10 @@ namespace zypp
       
       
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : XmlNodePtr
-      //	CLASS NAME : constXmlNodePtr
+      //	CLASS NAME : XmlNode_Ptr
+      //	CLASS NAME : XmlNode_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_BASE_POINTER(XmlNode);
+      DEFINE_PTR_TYPE(XmlNode);
       
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -50,4 +50,4 @@ namespace zypp
 };// namespace zypp
 ///////////////////////////////////////////////////////////////////
 
-#endif // _XmlNodePtr_h
+#endif // _XmlNode_Ptr_h

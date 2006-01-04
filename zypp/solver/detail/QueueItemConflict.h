@@ -24,15 +24,16 @@
 
 #include <iosfwd>
 #include <list>
-#include <string.h>
+#include <string>
 
+#include <zypp/solver/detail/QueueItem.h>
 #include <zypp/solver/detail/QueueItemConflictPtr.h>
 #include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Channel.h>
 #include <zypp/Capability.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -40,51 +41,51 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-        
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : QueueItemConflict
-      
+
       class QueueItemConflict : public QueueItem {
-          REP_BODY(QueueItemConflict);
-      
+
+
         private:
           const Capability  _dep;
-          constResItemPtr _conflicting_resItem;
-      
+          ResItem_constPtr _conflicting_resItem;
+
           bool _actually_an_obsolete;
-      
+
         public:
-      
-          QueueItemConflict (WorldPtr world, const Capability & dep, constResItemPtr resItem);
+
+          QueueItemConflict (World_Ptr world, const Capability & dep, ResItem_constPtr resItem);
           virtual ~QueueItemConflict();
-      
+
           // ---------------------------------- I/O
-      
+
           static std::string toString (const QueueItemConflict & item);
-      
+
           virtual std::ostream & dumpOn(std::ostream & str ) const;
-      
+
           friend std::ostream& operator<<(std::ostream&, const QueueItemConflict & item);
-      
+
           std::string asString (void ) const;
-      
+
           // ---------------------------------- accessors
-      
+
           const Capability & dependency (void) const { return _dep; }
           bool actuallyAnObsolete (void) const { return _actually_an_obsolete; }
           void setActuallyAnObsolete (void) { _actually_an_obsolete = true; }
-      
+
           // ---------------------------------- methods
-      
-          virtual bool process (ResolverContextPtr context, QueueItemList & qil);
-          virtual QueueItemPtr copy (void) const;
-          virtual int cmp (constQueueItemPtr item) const;
-          virtual bool isRedundant (ResolverContextPtr context) const { return false; }
-          virtual bool isSatisfied (ResolverContextPtr context) const { return false; }
-      
+
+          virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
+          virtual QueueItem_Ptr copy (void) const;
+          virtual int cmp (QueueItem_constPtr item) const;
+          virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
+          virtual bool isSatisfied (ResolverContext_Ptr context) const { return false; }
+
       };
-      
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

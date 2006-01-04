@@ -6,7 +6,6 @@ SUBDIRS =
 
 INCLUDES = 						\
 	-I$(top_srcdir) -Wall -fno-strict-aliasing	\
-	-I/usr/include/YaST2				\
 	-I/usr/include/libxml2 -I/usr/include/rpm	\
 	-DG_LOG_DOMAIN=\"solver_detail\"
 
@@ -14,6 +13,7 @@ include_HEADERS = \
 	debug.h				\
 	utils.h				\
 	extract.h			\
+	Ustring.h 			\
 	Hash.h				\
 	Spec.h				\
 	SpecPtr.h			\

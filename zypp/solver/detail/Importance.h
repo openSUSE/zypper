@@ -23,12 +23,10 @@
 #define _Importance_h
 
 #include <iosfwd>
-#include <string.h>
-
-#include <y2util/Ustring.h>
+#include <string>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -44,59 +42,59 @@ namespace zypp
        *
        **/
       class Importance {
-      
+
         private:
-      
+
           typedef enum {
       	IMPORTANCE_INVALID = -1,
-      
+
       	IMPORTANCE_NECESSARY,
       	IMPORTANCE_URGENT,
       	IMPORTANCE_SUGGESTED,
       	IMPORTANCE_FEATURE,
       	IMPORTANCE_MINOR,
       	IMPORTANCE_UNDEFINED,
-      
+
       	// Not a real importance
       	IMPORTANCE_LAST
           } importance_t;
-      
+
           importance_t _importance;
-      
+
         private:
           importance_t importance () const { return _importance; }
-      
+
         public:
-      
+
           Importance(const char *importance_str);
           virtual ~Importance();
-      
+
           static const Importance & Undefined;
-      
+
           // ---------------------------------- I/O
-      
+
           static std::string toString ( const Importance & importance);
-      
+
           virtual std::ostream & dumpOn( std::ostream & str ) const;
-      
+
           friend std::ostream& operator<<( std::ostream&, const Importance & importance);
-      
+
           std::string asString ( void ) const;
-      
+
           // ---------------------------------- accessors
-      
+
           // equality
           bool operator==( const Importance & importance) const {
       	return _importance == importance.importance();
           }
-      
+
           // inequality
           bool operator!=( const Importance & importance) const {
       	return !(*this == importance);
           }
-      
+
       };
-      
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

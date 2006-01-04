@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* QueueItemConflictPtr.h
+/* QueueItemConflict_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,14 +18,14 @@
  * 02111-1307, USA.
  */
 
-#ifndef _QueueItemConflictPtr_h
-#define _QueueItemConflictPtr_h
+#ifndef _QueueItemConflict_Ptr_h
+#define _QueueItemConflict_Ptr_h
 
-#include <y2util/RepDef.h>
-#include <zypp/solver/detail/QueueItem.h>
+#include "zypp/base/PtrTypes.h"
+#include <zypp/solver/detail/QueueItemPtr.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -35,10 +35,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : QueueItemConflictPtr
-      //	CLASS NAME : constQueueItemConflictPtr
+      //	CLASS NAME : QueueItemConflict_Ptr
+      //	CLASS NAME : QueueItemConflict_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_DERIVED_POINTER(QueueItemConflict,QueueItem);
+      DEFINE_PTR_TYPE(QueueItemConflict);
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -49,4 +49,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _QueueItemConflictPtr_h
+#endif // _QueueItemConflict_Ptr_h

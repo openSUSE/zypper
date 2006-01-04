@@ -50,7 +50,7 @@ namespace zypp
       //	CLASS NAME : StoreWorld
       
       class StoreWorld : public World {
-          REP_BODY(StoreWorld);
+          
       
         private:
       
@@ -61,7 +61,7 @@ namespace zypp
           ResItemAndDependencyTable _requires_by_name;
           ResItemAndDependencyTable _conflicts_by_name;
       
-          PackmanPtr _packman;
+          Packman_Ptr _packman;
       
           ChannelList _channels;
       
@@ -88,17 +88,17 @@ namespace zypp
       
           // Add/remove resItems
       
-          bool addResItem (constResItemPtr resItem);
+          bool addResItem (ResItem_constPtr resItem);
           void addResItemsFromList (const CResItemList & slist);
-          void removeResItem (constResItemPtr resItem);
-          void removeResItems (constChannelPtr channel);
+          void removeResItem (ResItem_constPtr resItem);
+          void removeResItems (Channel_constPtr channel);
           void clear ();
       
           // Iterate over resItems
       
-          virtual int foreachResItem (ChannelPtr channel, CResItemFn fn, void *data);
-          virtual int foreachResItemByName (const std::string & name, ChannelPtr channel, CResItemFn fn, void *data);
-          virtual int foreachResItemByMatch (constMatchPtr match, CResItemFn fn, void *data);
+          virtual int foreachResItem (Channel_Ptr channel, CResItemFn fn, void *data);
+          virtual int foreachResItemByName (const std::string & name, Channel_Ptr channel, CResItemFn fn, void *data);
+          virtual int foreachResItemByMatch (Match_constPtr match, CResItemFn fn, void *data);
       
           // Iterate across provides or requirement
       
@@ -108,23 +108,23 @@ namespace zypp
       
           // Channels
       
-          void addChannel (ChannelPtr channel);
-          void removeChannel (constChannelPtr channel);
+          void addChannel (Channel_Ptr channel);
+          void removeChannel (Channel_constPtr channel);
       
-          virtual bool containsChannel (constChannelPtr channel) const;
+          virtual bool containsChannel (Channel_constPtr channel) const;
       
-          virtual ChannelPtr getChannelByName (const char *channel_name) const;
-          virtual ChannelPtr getChannelByAlias (const char *alias) const;
-          virtual ChannelPtr getChannelById (const char *channel_id) const;
+          virtual Channel_Ptr getChannelByName (const char *channel_name) const;
+          virtual Channel_Ptr getChannelByAlias (const char *alias) const;
+          virtual Channel_Ptr getChannelById (const char *channel_id) const;
       
           virtual int foreachChannel (ChannelFn fn, void *data) const;
       
           // Single resItem queries
       
-          virtual constResItemPtr findInstalledResItem (constResItemPtr resItem);
-          virtual constResItemPtr findResItem (constChannelPtr channel, const char *name) const;
-          virtual constResItemPtr findResItemWithConstraint (constChannelPtr channel, const char *name, const Capability & constraint, bool is_and) const;
-          virtual ChannelPtr guessResItemChannel (constResItemPtr resItem) const;
+          virtual ResItem_constPtr findInstalledResItem (ResItem_constPtr resItem);
+          virtual ResItem_constPtr findResItem (Channel_constPtr channel, const char *name) const;
+          virtual ResItem_constPtr findResItemWithConstraint (Channel_constPtr channel, const char *name, const Capability & constraint, bool is_and) const;
+          virtual Channel_Ptr guessResItemChannel (ResItem_constPtr resItem) const;
       
       };
       ///////////////////////////////////////////////////////////////////

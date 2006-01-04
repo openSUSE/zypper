@@ -25,13 +25,18 @@
 #include <iosfwd>
 #include <list>
 #include <map>
-#include <string.h>
+#include <string>
+
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
+#include "zypp/base/PtrTypes.h"
+
 #include <zypp/solver/detail/ResolverInfoPtr.h>
 #include <zypp/solver/detail/ResItem.h>
 #include <zypp/solver/detail/Channel.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -39,7 +44,7 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
+
       typedef enum {
           RESOLVER_INFO_TYPE_INVALID = 0,
           RESOLVER_INFO_TYPE_NEEDED_BY,
@@ -50,68 +55,68 @@ namespace zypp
           RESOLVER_INFO_TYPE_MISSING_REQ,
           RESOLVER_INFO_TYPE_MISC
       } ResolverInfoType;
-      
+
       #define RESOLVER_INFO_PRIORITY_USER      500
       #define RESOLVER_INFO_PRIORITY_VERBOSE   100
       #define RESOLVER_INFO_PRIORITY_DEBUGGING   0
-      
-      typedef void (*ResolverInfoFn) (ResolverInfoPtr info, void *data);
-      
-      typedef std::list <ResolverInfoPtr> ResolverInfoList;
-      
+
+      typedef void (*ResolverInfoFn) (ResolverInfo_Ptr info, void *data);
+
+      typedef std::list <ResolverInfo_Ptr> ResolverInfoList;
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : ResolverInfo
-      
-      class ResolverInfo : public CountedRep {
-      
-          REP_BODY(ResolverInfo);
-      
+
+      class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
+
+          
+
         private:
-      
+
           ResolverInfoType _type;
-          constResItemPtr _resItem;
+          ResItem_constPtr _resItem;
           int _priority;
-      
+
           bool _error;
           bool _important;
-      
+
         protected:
-      
-          ResolverInfo (ResolverInfoType type, constResItemPtr resItem, int priority);
-      
+
+          ResolverInfo (ResolverInfoType type, ResItem_constPtr resItem, int priority);
+
         public:
-      
+
           virtual ~ResolverInfo();
-      
-          void copy (constResolverInfoPtr from);
-      
+
+          void copy (ResolverInfo_constPtr from);
+
           // ---------------------------------- I/O
-      
+
           static std::string toString (const ResolverInfo & context, bool full = false);
           virtual std::ostream & dumpOn(std::ostream & str ) const;
           friend std::ostream& operator<<(std::ostream&, const ResolverInfo & context);
           virtual std::string asString (void ) const;
-      
+
           // ---------------------------------- accessors
-      
+
           ResolverInfoType type (void) const { return _type; }
-          constResItemPtr resItem (void) const { return _resItem; }
+          ResItem_constPtr resItem (void) const { return _resItem; }
           int priority (void) const { return _priority; }
-      
+
           int error (void) const { return _error; }
           void flagAsError (void) { _error = true; }
           int important (void) const { return _important; }
           void flagAsImportant (void) { _important = true; }
-      
+
           // ---------------------------------- methods
-      
-          bool merge (ResolverInfoPtr to_be_merged);
-          virtual ResolverInfoPtr copy (void) const;
-      
-          bool isAbout (constResItemPtr resItem) const;
+
+          bool merge (ResolverInfo_Ptr to_be_merged);
+          virtual ResolverInfo_Ptr copy (void) const;
+
+          bool isAbout (ResItem_constPtr resItem) const;
       };
-        
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
@@ -122,4 +127,4 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 #endif // _ResolverInfo_h
- 
+

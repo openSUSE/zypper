@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* ResolverContextPtr.h
+/* ResolverContext_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ResolverContextPtr_h
-#define _ResolverContextPtr_h
+#ifndef _ResolverContext_Ptr_h
+#define _ResolverContext_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -34,10 +34,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
       
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : ResolverContextPtr
-      //	CLASS NAME : constResolverContextPtr
+      //	CLASS NAME : ResolverContext_Ptr
+      //	CLASS NAME : ResolverContext_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_BASE_POINTER(ResolverContext);
+      DEFINE_PTR_TYPE(ResolverContext);
       
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -49,4 +49,4 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _ResolverContextPtr_h
+#endif // _ResolverContext_Ptr_h

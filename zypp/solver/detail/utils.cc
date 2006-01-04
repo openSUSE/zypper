@@ -26,7 +26,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <ctype.h>
-#include <string.h>
+#include <string>
 
 #include <libxml/parser.h>
 #include <libxml/tree.h>

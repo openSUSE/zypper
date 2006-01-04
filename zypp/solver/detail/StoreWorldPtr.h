@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* StoreWorldPtr.h
+/* StoreWorld_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _StoreWorldPtr_h
-#define _StoreWorldPtr_h
+#ifndef _StoreWorld_Ptr_h
+#define _StoreWorld_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 #include <zypp/solver/detail/WorldPtr.h>
 
 
@@ -36,10 +36,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
       
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : StoreWorldPtr
-      //	CLASS NAME : constStoreWorldPtr
+      //	CLASS NAME : StoreWorld_Ptr
+      //	CLASS NAME : StoreWorld_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_DERIVED_POINTER(StoreWorld, World);
+      DEFINE_PTR_TYPE(StoreWorld);
       
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -51,4 +51,4 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _StoreWorldPtr_h
+#endif // _StoreWorld_Ptr_h

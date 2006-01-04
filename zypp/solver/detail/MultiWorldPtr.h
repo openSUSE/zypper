@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* MultiWorldPtr.h
+/* MultiWorld_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _MultiWorldPtr_h
-#define _MultiWorldPtr_h
+#ifndef _MultiWorld_Ptr_h
+#define _MultiWorld_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 #include <zypp/solver/detail/WorldPtr.h>
 
 /////////////////////////////////////////////////////////////////////////
@@ -35,10 +35,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : MultiWorldPtr
-      //	CLASS NAME : constMultiWorldPtr
+      //	CLASS NAME : MultiWorld_Ptr
+      //	CLASS NAME : MultiWorld_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_DERIVED_POINTER(MultiWorld, World);
+      DEFINE_PTR_TYPE(MultiWorld);
       
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -50,4 +50,4 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _MultiWorldPtr_h
+#endif // _MultiWorld_Ptr_h

@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* ResolverInfoContainerPtr.h
+/* ResolverInfoContainer_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,14 +18,14 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ResolverInfoContainerPtr_h
-#define _ResolverInfoContainerPtr_h
+#ifndef _ResolverInfoContainer_Ptr_h
+#define _ResolverInfoContainer_Ptr_h
 
-#include <y2util/RepDef.h>
-#include <zypp/solver/detail/ResolverInfo.h>
+#include "zypp/base/PtrTypes.h"
+#include <zypp/solver/detail/ResolverInfoPtr.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -35,11 +35,11 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : ResolverInfoContainerPtr
-      //	CLASS NAME : constResolverInfoContainerPtr
+      //	CLASS NAME : ResolverInfoContainer_Ptr
+      //	CLASS NAME : ResolverInfoContainer_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_DERIVED_POINTER(ResolverInfoContainer,ResolverInfo);
-        
+      DEFINE_PTR_TYPE(ResolverInfoContainer);
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
@@ -49,4 +49,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _ResolverInfoContainerPtr_h
+#endif // _ResolverInfoContainer_Ptr_h

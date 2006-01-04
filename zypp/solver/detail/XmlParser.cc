@@ -227,7 +227,7 @@ namespace zypp
       
             //---------------------------------------------------------------------------
       
-            XmlParser::XmlParser (constChannelPtr channel)
+            XmlParser::XmlParser (Channel_constPtr channel)
                 : _channel (channel)
                 , _processing (false)
                 , _xml_context (NULL)
@@ -555,7 +555,7 @@ namespace zypp
                 //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::packageEnd(%s)\n", name);
       
                 if (!strcmp(name, "package")) {
-                    PackageUpdatePtr update = NULL;
+                    PackageUpdate_Ptr update = NULL;
       
                     /* If possible, grab the version info from the most recent update.
                      * Otherwise, try to find where the package provides itself and use
@@ -604,7 +604,7 @@ namespace zypp
                         _current_provides.insert (selfdep);
                     }
 
-                    PackagePtr package = new Package ( _channel,
+                    Package_Ptr package = new Package ( _channel,
                                                        _current_package_name,
                                                        _current_package_edition,
                                                        _current_package_arch);
@@ -628,7 +628,7 @@ namespace zypp
                     for (PackageUpdateList::iterator iter = _current_package_packageUpdateList.begin();
                          iter != _current_package_packageUpdateList.end();
                          iter++) {
-                        PackageUpdatePtr update = *iter;
+                        PackageUpdate_Ptr update = *iter;
                         update->setPackage (package);
                         package->addUpdate (update);
                     }
@@ -678,7 +678,7 @@ namespace zypp
             {
                 //    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "XmlParser::updateEnd(%s)\n", name);
       
-                constChannelPtr channel;
+                Channel_constPtr channel;
                 const char *url_prefix = NULL;
       
                 assert(_current_update != NULL);
@@ -739,8 +739,8 @@ namespace zypp
       
                 if (!strcmp(name, "or")) {
 #if 0 
-                    OrDependencyPtr or_dep = OrDependency::fromDependencyList (*_current_dep_list);
-                    DependencyPtr dep = new Dependency (or_dep);
+                    OrDependency_Ptr or_dep = OrDependency::fromDependencyList (*_current_dep_list);
+                    Dependency_Ptr dep = new Dependency (or_dep);
       
                     (*_current_dep_list).clear();
       

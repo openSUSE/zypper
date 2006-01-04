@@ -42,7 +42,7 @@ namespace zypp
       
       class ResolverInfoMisc : public ResolverInfoContainer {
       
-          REP_BODY(ResolverInfoMisc);
+          
       
         private:
       
@@ -52,7 +52,7 @@ namespace zypp
       
         public:
       
-          ResolverInfoMisc (constResItemPtr resItem, int priority, const std::string & msg);
+          ResolverInfoMisc (ResItem_constPtr resItem, int priority, const std::string & msg);
           virtual ~ResolverInfoMisc();
       
           // ---------------------------------- I/O
@@ -66,8 +66,8 @@ namespace zypp
       
           // ---------------------------------- methods
       
-          virtual bool merge (ResolverInfoPtr to_be_merged);
-          virtual ResolverInfoPtr copy (void) const;
+          virtual bool merge (ResolverInfo_Ptr to_be_merged);
+          virtual ResolverInfo_Ptr copy (void) const;
       
           void addAction (const std::string & action_msg);
           void addTrigger (const std::string & trigger_msg);

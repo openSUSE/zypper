@@ -37,7 +37,7 @@ namespace zypp
 
       using namespace std;
       
-      IMPL_BASE_POINTER(XmlNode);
+      IMPL_PTR_TYPE(XmlNode);
       
       //---------------------------------------------------------------------------
       
@@ -263,7 +263,7 @@ namespace zypp
       }
       
       
-      const XmlNodePtr
+      const XmlNode_Ptr
       XmlNode::getNode (const char *name) const
       {
           xmlNodePtr iter;

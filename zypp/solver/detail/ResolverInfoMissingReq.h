@@ -42,7 +42,7 @@ namespace zypp
       
       class ResolverInfoMissingReq : public ResolverInfo {
       
-          REP_BODY(ResolverInfoMissingReq);
+          
       
         private:
       
@@ -50,7 +50,7 @@ namespace zypp
       
         public:
       
-          ResolverInfoMissingReq (constResItemPtr resItem, const Capability & missing_req);
+          ResolverInfoMissingReq (ResItem_constPtr resItem, const Capability & missing_req);
           virtual ~ResolverInfoMissingReq();
       
           // ---------------------------------- I/O
@@ -64,7 +64,7 @@ namespace zypp
       
           // ---------------------------------- methods
       
-          virtual ResolverInfoPtr copy (void) const;
+          virtual ResolverInfo_Ptr copy (void) const;
       
       };
         

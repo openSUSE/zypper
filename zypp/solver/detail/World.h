@@ -24,7 +24,11 @@
 
 #include <iosfwd>
 #include <list>
-#include <string.h>
+#include <string>
+
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
+#include "zypp/base/PtrTypes.h"
 
 #include <zypp/solver/detail/WorldPtr.h>
 #include <zypp/solver/detail/MultiWorldPtr.h>
@@ -38,7 +42,7 @@
 #include <zypp/Capability.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -46,13 +50,13 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-          
-      typedef std::list <constWorldPtr> WorldList;
-      
+
+      typedef std::list <World_constPtr> WorldList;
+
       class NameConflictInfo;
-      
+
       //////////////////////////////////////////////////////////////////
-      
+
       typedef enum {
           PLAIN_WORLD = 0,
           STORE_WORLD,
@@ -62,198 +66,198 @@ namespace zypp
           LOCALDIR_WORLD,
           SYSTEM_WORLD
       } WorldType;
-      
-      typedef bool		(*WorldFn)	  (constWorldPtr world, void *user_data);
-      typedef PendingPtr	(*WorldRefreshFn) (constWorldPtr world);
-      
+
+      typedef bool		(*WorldFn)	  (World_constPtr world, void *user_data);
+      typedef Pending_Ptr	(*WorldRefreshFn) (World_constPtr world);
+
       #if 0
-      typedef bool		(*WorldSyncFn)    (constWorldPtr world, constChannelPtr channel);
-      typedef PackmanPtr	(*WorldPackmanFn) (constWorldPtr world, const Resolvable::Kind & kind);
-      typedef void		(*WorldSpewFn)	  (constWorldPtr world, FILE *out);
-      typedef constWorldPtr	(*WorldDupFn)	  (constWorldPtr world);
-      
-      typedef bool		(*WorldCanTransactResItemFn) (constWorldPtr world, constResItemPtr resItem);
-      typedef bool		(*WorldTransactFn) (constWorldPtr world, const ResItemList & install_resItems, const ResItemList & remove_resItems, int flags);
-      
-      typedef bool		(*WorldGetSubscribedFn) (const World *world, constChannelPtr channel);
-      typedef void		(*WorldSetSubscribedFn) (World *world, ChannelPtr channel, bool subs_status);
-      
+      typedef bool		(*WorldSyncFn)    (World_constPtr world, Channel_constPtr channel);
+      typedef Packman_Ptr	(*WorldPackmanFn) (World_constPtr world, const Resolvable::Kind & kind);
+      typedef void		(*WorldSpewFn)	  (World_constPtr world, FILE *out);
+      typedef World_constPtr	(*WorldDupFn)	  (World_constPtr world);
+
+      typedef bool		(*WorldCanTransactResItemFn) (World_constPtr world, ResItem_constPtr resItem);
+      typedef bool		(*WorldTransactFn) (World_constPtr world, const ResItemList & install_resItems, const ResItemList & remove_resItems, int flags);
+
+      typedef bool		(*WorldGetSubscribedFn) (const World *world, Channel_constPtr channel);
+      typedef void		(*WorldSetSubscribedFn) (World *world, Channel_Ptr channel, bool subs_status);
+
       typedef int		(*WorldForeachChannelFn) (const World *world, ChannelFn callback, void *user_data);
-      typedef int		(*WorldForeachLockFn)    (constWorldPtr world, MatchFn callback, void *user_data);
-      
-      typedef void		(*WorldAddLockFn) (constWorldPtr world, constMatchPtr lock);
-      typedef void		(*WorldRemoveLockFn) (constWorldPtr world, constMatchPtr lock);
-      typedef void		(*WorldClearLockFn) (constWorldPtr world);
-      
-      typedef int		(*WorldForeachResItemFn) (constWorldPtr world, const char *name, constChannelPtr channel, ResItemFn callback, void *user_data);
-      typedef int		(*WorldForeachPackageDepFn) (constWorldPtr world, const Capability & dep, ResItemAndDepFn callback, void *user_data);
-      
-      typedef void		(*WorldSerializeFn) (constWorldPtr world, constXmlNodePtr root);
-      typedef void		(*WorldUnserializeFn) (constWorldPtr world, constXmlNodePtr node);
-      
+      typedef int		(*WorldForeachLockFn)    (World_constPtr world, MatchFn callback, void *user_data);
+
+      typedef void		(*WorldAddLockFn) (World_constPtr world, Match_constPtr lock);
+      typedef void		(*WorldRemoveLockFn) (World_constPtr world, Match_constPtr lock);
+      typedef void		(*WorldClearLockFn) (World_constPtr world);
+
+      typedef int		(*WorldForeachResItemFn) (World_constPtr world, const char *name, Channel_constPtr channel, ResItemFn callback, void *user_data);
+      typedef int		(*WorldForeachPackageDepFn) (World_constPtr world, const Capability & dep, ResItemAndDepFn callback, void *user_data);
+
+      typedef void		(*WorldSerializeFn) (World_constPtr world, XmlNode_constPtr root);
+      typedef void		(*WorldUnserializeFn) (World_constPtr world, XmlNode_constPtr node);
+
       #endif
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : World
-      
-      class World : public CountedRep {
-          REP_BODY(World);
-      
+
+      class World : public base::ReferenceCounted, private base::NonCopyable {
+
+
         private:
-          static WorldPtr GlobalWorld;
-      
+          static World_Ptr GlobalWorld;
+
           WorldType _type;
-      
+
           /* The sequence numbers gets incremented every
              time the RCWorld is changed. */
-      
+
           unsigned int _seq_no_resItems;
           unsigned int _seq_no_channels;
           unsigned int _seq_no_subscriptions;
           unsigned int _seq_no_locks;
-      
+
           /* Every world needs to be able to store locks, so we provide a
              place for that.  Of course, derived classes are allowed to
              provide their own exotic lock semantics by providing their
              own *_lock_fn methods. */
           MatchList _lock_store;
-      
+
           bool _refresh_pending;
-      
+
           /* a bad hack to keep us from emitting signals while finalizing */
           bool _no_changed_signals;
-      
+
           /* For unserialized worlds currently. If a world is read only,
              you can not refresh or transact on it. */
           bool _read_only;
-      
+
           MatchList _locks;
-      
+
         public:
-      
+
           World (WorldType type = PLAIN_WORLD);
           virtual ~World();
-      
+
           // ---------------------------------- I/O
-      
+
           static std::string toString (const World & section);
-      
+
           static std::string toString (WorldType type);
-      
+
           virtual std::ostream & dumpOn(std::ostream & str ) const;
-      
+
           friend std::ostream& operator<<(std::ostream&, const World & section);
-      
+
           std::string asString (void ) const;
-      
+
           // ---------------------------------- accessors
-      
+
           WorldType type() const { return _type; }
           bool isPlainWorld () const { return _type == PLAIN_WORLD; }
           bool isUndumpWorld () const { return _type == UNDUMP_WORLD; }
           bool isMultiWorld () const { return _type == MULTI_WORLD; }
           bool isServiceWorld () const { return _type == SERVICE_WORLD; }
-      
+
           unsigned int resItemSequenceNumber (void) const { return _seq_no_resItems; }
           unsigned int channelSequenceNumber (void) const { return _seq_no_channels; }
           unsigned int subscriptionSequenceNumber (void) const { return _seq_no_subscriptions; }
           unsigned int lockSequenceNumber (void) const { return _seq_no_locks; }
-      
+
           void touchResItemSequenceNumber (void) { _seq_no_resItems++; }
           void touchChannelSequenceNumber (void) { _seq_no_channels++; }
           void touchSubscriptionSequenceNumber (void) { _seq_no_subscriptions++; }
           void touchLockSequenceNumber (void) { _seq_no_locks++; }
-      
+
           MatchList locks (void) const { return _lock_store; }
-      
+
           // ---------------------------------- methods
-      
-          static void setGlobalWorld (MultiWorldPtr world) { GlobalWorld = world; }
-          static MultiWorldPtr globalWorld (void) { return GlobalWorld; }
-      
+
+          static void setGlobalWorld (MultiWorld_Ptr world);
+          static MultiWorld_Ptr globalWorld (void);
+
       	//RCPackman *get_packman      (GType);
-      
+
           bool sync (void) const;
-          virtual bool syncConditional (constChannelPtr channel) const;
-          PendingPtr refresh (void);
+          virtual bool syncConditional (Channel_constPtr channel) const;
+          Pending_Ptr refresh (void);
           bool hasRefresh (void);
           bool isRefreshing (void);
-      
+
       	/* These functions are for World-implementers only!  Don't call them! */
           void refreshBegin (void);
           void refreshComplete (void);
-      
+
           virtual int foreachChannel (ChannelFn fn, void *user_data) const = 0;
-      
-          virtual void setSubscription (ChannelPtr channel, bool is_subscribed);
-          virtual bool isSubscribed (constChannelPtr channel) const;
-      
+
+          virtual void setSubscription (Channel_Ptr channel, bool is_subscribed);
+          virtual bool isSubscribed (Channel_constPtr channel) const;
+
           virtual ChannelList channels () const = 0;
-          virtual bool containsChannel (constChannelPtr channel) const = 0;
-      
-          virtual ChannelPtr getChannelByName (const char *channel_name) const = 0;
-          virtual ChannelPtr getChannelByAlias (const char *alias) const = 0;
-          virtual ChannelPtr getChannelById (const char *channel_id) const = 0;
-      
+          virtual bool containsChannel (Channel_constPtr channel) const = 0;
+
+          virtual Channel_Ptr getChannelByName (const char *channel_name) const = 0;
+          virtual Channel_Ptr getChannelByAlias (const char *alias) const = 0;
+          virtual Channel_Ptr getChannelById (const char *channel_id) const = 0;
+
           // ResItem Locks
-      
+
           virtual int foreachLock (MatchFn fn, void *data) const;
-      
-          void addLock (constMatchPtr lock);
-          void removeLock (constMatchPtr lock);
+
+          void addLock (Match_constPtr lock);
+          void removeLock (Match_constPtr lock);
           void clearLocks ();
-      
-          bool resItemIsLocked (constResItemPtr resItem);
-      
+
+          bool resItemIsLocked (ResItem_constPtr resItem);
+
           // Single resItem queries
-      
-          virtual constResItemPtr findInstalledResItem (constResItemPtr resItem) = 0;
-          virtual constResItemPtr findResItem (constChannelPtr channel, const char *name) const = 0;
-          virtual constResItemPtr findResItemWithConstraint (constChannelPtr channel, const char *name, const Capability &  constraint, bool is_and) const = 0;
-          virtual ChannelPtr guessResItemChannel (constResItemPtr resItem) const = 0;
-      
+
+          virtual ResItem_constPtr findInstalledResItem (ResItem_constPtr resItem) = 0;
+          virtual ResItem_constPtr findResItem (Channel_constPtr channel, const char *name) const = 0;
+          virtual ResItem_constPtr findResItemWithConstraint (Channel_constPtr channel, const char *name, const Capability &  constraint, bool is_and) const = 0;
+          virtual Channel_Ptr guessResItemChannel (ResItem_constPtr resItem) const = 0;
+
           // Iterate across resItems
-      
-          virtual int foreachResItem (ChannelPtr channel, CResItemFn fn, void *data) = 0;
-          virtual int foreachResItemByName (const std::string & name, ChannelPtr channel, CResItemFn fn, void *user_data) = 0;
-          virtual int foreachResItemByMatch (constMatchPtr match, CResItemFn fn, void *user_data) = 0;
-      
+
+          virtual int foreachResItem (Channel_Ptr channel, CResItemFn fn, void *data) = 0;
+          virtual int foreachResItemByName (const std::string & name, Channel_Ptr channel, CResItemFn fn, void *user_data) = 0;
+          virtual int foreachResItemByMatch (Match_constPtr match, CResItemFn fn, void *user_data) = 0;
+
           // Iterate across provides or requirement
-      
+
           virtual int foreachProvidingResItem (const Capability & dep, ResItemAndDepFn fn, void *user_data) = 0;
           virtual int foreachRequiringResItem (const Capability & dep, ResItemAndDepFn fn, void *user_data) = 0;
           virtual int foreachConflictingResItem (const Capability & dep, ResItemAndDepFn fn, void *user_data) = 0;
-      
+
           // upgrades
-      
-          int foreachUpgrade (constResItemPtr resItem, ChannelPtr channel, CResItemFn fn, void *data);
-          PackageUpdateList getUpgrades (constResItemPtr resItem, constChannelPtr channel);
-          constResItemPtr getBestUpgrade (constResItemPtr resItem, bool subscribed_only);
+
+          int foreachUpgrade (ResItem_constPtr resItem, Channel_Ptr channel, CResItemFn fn, void *data);
+          PackageUpdateList getUpgrades (ResItem_constPtr resItem, Channel_constPtr channel);
+          ResItem_constPtr getBestUpgrade (ResItem_constPtr resItem, bool subscribed_only);
           int foreachSystemUpgrade (bool subscribed_only, ResItemPairFn fn, void *data);
-      
+
           // provider
-      
-          bool getSingleProvider (const Capability & dep, constChannelPtr channel, constResItemPtr *resItem);
-      
+
+          bool getSingleProvider (const Capability & dep, Channel_constPtr channel, ResItem_constPtr *resItem);
+
           // Transacting
-      
-          bool  canTransactResItem (constResItemPtr resItem);
+
+          bool  canTransactResItem (ResItem_constPtr resItem);
           bool  transact (const ResItemList & installResItems, const ResItemList & remove_resItems, int flags);
-      
+
           // XML serialization
-      
-          void serialize (XmlNodePtr parent);
+
+          void serialize (XmlNode_Ptr parent);
           void toFile (const char *filename);
-      
+
           // Duplicating (primarily for atomic refreshes)
-          WorldPtr dup (void);
-      
+          World_Ptr dup (void);
+
           // only used for bindings
           void setRefreshFunction (WorldRefreshFn refresh_fn);
-      
+
       };
-      
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

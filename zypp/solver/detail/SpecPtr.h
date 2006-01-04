@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* SpecPtr.h
+/* Spec_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _SpecPtr_h
-#define _SpecPtr_h
+#ifndef _Spec_Ptr_h
+#define _Spec_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -35,10 +35,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
       
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : SpecPtr
-      //	CLASS NAME : constSpecPtr
+      //	CLASS NAME : Spec_Ptr
+      //	CLASS NAME : Spec_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_BASE_POINTER(Spec);
+      DEFINE_PTR_TYPE(Spec);
         
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -51,4 +51,4 @@ namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
 
-#endif // _SpecPtr_h
+#endif // _Spec_Ptr_h

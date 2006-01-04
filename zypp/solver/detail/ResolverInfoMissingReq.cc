@@ -36,7 +36,7 @@ namespace zypp
       
       using namespace std;
       
-      IMPL_DERIVED_POINTER(ResolverInfoMissingReq, ResolverInfo);
+      IMPL_PTR_TYPE(ResolverInfoMissingReq);
       
       //---------------------------------------------------------------------------
       
@@ -76,7 +76,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      ResolverInfoMissingReq::ResolverInfoMissingReq (constResItemPtr resItem, const Capability & missing_req)
+      ResolverInfoMissingReq::ResolverInfoMissingReq (ResItem_constPtr resItem, const Capability & missing_req)
           : ResolverInfo (RESOLVER_INFO_TYPE_MISSING_REQ, resItem, RESOLVER_INFO_PRIORITY_USER)
           , _missing_req (missing_req)
       {
@@ -89,12 +89,12 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      ResolverInfoPtr
+      ResolverInfo_Ptr
       ResolverInfoMissingReq::copy (void) const
       {
-          ResolverInfoMissingReqPtr cpy = new ResolverInfoMissingReq(resItem(), _missing_req);
+          ResolverInfoMissingReq_Ptr cpy = new ResolverInfoMissingReq(resItem(), _missing_req);
       
-          ((ResolverInfoPtr)cpy)->copy (this);
+          ((ResolverInfo_Ptr)cpy)->copy (this);
       
           return cpy;
       }

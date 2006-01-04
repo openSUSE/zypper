@@ -24,15 +24,16 @@
 
 #include <iosfwd>
 #include <list>
-#include <string.h>
+#include <string>
 
+#include <zypp/solver/detail/QueueItem.h>
 #include <zypp/solver/detail/QueueItemUninstallPtr.h>
 #include <zypp/solver/detail/ResItem.h>
 #include <zypp/Capability.h>
 #include <zypp/solver/detail/Channel.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -40,61 +41,61 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : QueueItemUninstall
-      
+
       class QueueItemUninstall : public QueueItem {
-          REP_BODY(QueueItemUninstall);
-      
+
+
         private:
-          constResItemPtr _resItem;
+          ResItem_constPtr _resItem;
           const std::string _reason;
           Capability _dep_leading_to_uninstall;
-          constResItemPtr _upgraded_to;
-      
+          ResItem_constPtr _upgraded_to;
+
           bool _explicitly_requested;
           bool _remove_only;
           bool _due_to_conflict;
           bool _due_to_obsolete;
           bool _unlink;
-      
+
         public:
-      
-          QueueItemUninstall (WorldPtr world, constResItemPtr resItem, const std::string & reason);
+
+          QueueItemUninstall (World_Ptr world, ResItem_constPtr resItem, const std::string & reason);
           virtual ~QueueItemUninstall();
-      
+
           // ---------------------------------- I/O
-      
+
           static std::string toString (const QueueItemUninstall & item);
-      
+
           virtual std::ostream & dumpOn(std::ostream & str ) const;
-      
+
           friend std::ostream& operator<<(std::ostream&, const QueueItemUninstall & item);
-      
+
           std::string asString (void ) const;
-      
+
           // ---------------------------------- accessors
-      
+
           void setDependency (const Capability & dep) { _dep_leading_to_uninstall = dep; }
           void setExplicitlyRequested (void) { _explicitly_requested = true; }
           void setRemoveOnly (void) { _remove_only = true; }
-          void setUpgradedTo (constResItemPtr resItem) { _upgraded_to = resItem; }
+          void setUpgradedTo (ResItem_constPtr resItem) { _upgraded_to = resItem; }
           void setDueToConflict (void) { _due_to_conflict = true; }
           void setDueToObsolete (void) { _due_to_obsolete = true; }
           void setUnlink (void);
-      
+
           // ---------------------------------- methods
-      
-          virtual bool process (ResolverContextPtr context, QueueItemList & qil);
-          virtual QueueItemPtr copy (void) const;
-          virtual int cmp (constQueueItemPtr item) const;
-          virtual bool isRedundant (ResolverContextPtr context) const { return false; }
-          virtual bool isSatisfied (ResolverContextPtr context) const { return false; }
-      
+
+          virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
+          virtual QueueItem_Ptr copy (void) const;
+          virtual int cmp (QueueItem_constPtr item) const;
+          virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
+          virtual bool isSatisfied (ResolverContext_Ptr context) const { return false; }
+
       };
-      
+
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

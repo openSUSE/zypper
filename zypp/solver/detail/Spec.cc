@@ -36,7 +36,7 @@ namespace zypp
       
       using namespace std;
       
-      IMPL_BASE_POINTER(Spec);
+      IMPL_PTR_TYPE(Spec);
       
       //---------------------------------------------------------------------------
       
@@ -116,10 +116,10 @@ namespace zypp
       }
       
       
-      Spec::Spec (constXmlNodePtr node)
+      Spec::Spec (XmlNode_constPtr node)
           : _kind (ResTraits<zypp::Package>::kind) // Fixme: should be type like unknown
       {
-          fprintf (stderr, "Spec::Spec (constXmlNodePtr node)\nNot implemented\n");
+          fprintf (stderr, "Spec::Spec (XmlNode_constPtr node)\nNot implemented\n");
           abort();
       }
       
@@ -131,7 +131,7 @@ namespace zypp
       
       // needed during xml parsing (-> XmlParser)
       
-      constSpecPtr
+      Spec_constPtr
       Spec::copy (void) const
       {
           return new Spec (_kind, _name, _edition);
@@ -212,7 +212,7 @@ namespace zypp
       
       
       bool
-      Spec::match(constSpecPtr spec) const {
+      Spec::match(Spec_constPtr spec) const {
           return ((_kind == spec->kind())
         	&& (_name == spec->name())
       	&& Edition::compare( _edition, spec->edition()) == 0);
@@ -220,7 +220,7 @@ namespace zypp
       
       
       bool
-      Spec::equals(constSpecPtr spec) const {
+      Spec::equals(Spec_constPtr spec) const {
       //fprintf (stderr, "<%s> equals <%s>\n", asString(true).c_str(), spec->asString(true).c_str());
           return ((_kind == spec->kind())
         	&& (_name == spec->name())
@@ -249,7 +249,7 @@ namespace zypp
       }
         
 
-      int  Spec::compare (constSpecPtr spec1, constSpecPtr spec2) {
+      int  Spec::compare (Spec_constPtr spec1, Spec_constPtr spec2) {
           int rc = 0;
 
           const string name1 = spec1->name();

@@ -36,7 +36,7 @@ namespace zypp
       
       using namespace std;
       
-      IMPL_DERIVED_POINTER(ResolverInfoObsoletes, ResolverInfo);
+      IMPL_PTR_TYPE(ResolverInfoObsoletes);
       
       //---------------------------------------------------------------------------
       
@@ -76,7 +76,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      ResolverInfoObsoletes::ResolverInfoObsoletes (constResItemPtr resItem, constResItemPtr obsoletes)
+      ResolverInfoObsoletes::ResolverInfoObsoletes (ResItem_constPtr resItem, ResItem_constPtr obsoletes)
           : ResolverInfoContainer (RESOLVER_INFO_TYPE_OBSOLETES, resItem, RESOLVER_INFO_PRIORITY_USER, obsoletes)
       {
       }
@@ -88,12 +88,12 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      ResolverInfoPtr
+      ResolverInfo_Ptr
       ResolverInfoObsoletes::copy (void) const
       {
-          ResolverInfoObsoletesPtr cpy = new ResolverInfoObsoletes(resItem(), NULL);
+          ResolverInfoObsoletes_Ptr cpy = new ResolverInfoObsoletes(resItem(), NULL);
       
-          ((ResolverInfoContainerPtr)cpy)->copy (this);
+          ((ResolverInfoContainer_Ptr)cpy)->copy (this);
       
           return cpy;
       }

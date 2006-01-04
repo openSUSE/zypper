@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* QueueItemPtr.h
+/* QueueItem_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _QueueItemPtr_h
-#define _QueueItemPtr_h
+#ifndef _QueueItem_Ptr_h
+#define _QueueItem_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -34,10 +34,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : QueueItemPtr
-      //	CLASS NAME : constQueueItemPtr
+      //	CLASS NAME : QueueItem_Ptr
+      //	CLASS NAME : QueueItem_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_BASE_POINTER(QueueItem);
+      DEFINE_PTR_TYPE(QueueItem);
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -48,4 +48,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _QueueItemPtr_h
+#endif // _QueueItem_Ptr_h

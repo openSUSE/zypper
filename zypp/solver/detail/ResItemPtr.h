@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* ResItemPtr.h
+/* ResItem_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ResItemPtr_h
-#define _ResItemPtr_h
+#ifndef _ResItem_Ptr_h
+#define _ResItem_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 #include <zypp/solver/detail/SpecPtr.h>
 
 /////////////////////////////////////////////////////////////////////////
@@ -35,10 +35,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : ResItemPtr
-      //	CLASS NAME : constResItemPtr
+      //	CLASS NAME : ResItem_Ptr
+      //	CLASS NAME : ResItem_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_BASE_POINTER(ResItem);
+      DEFINE_PTR_TYPE(ResItem);
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -49,4 +49,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _ResItemPtr_h
+#endif // _ResItem_Ptr_h

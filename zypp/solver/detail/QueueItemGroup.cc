@@ -24,7 +24,7 @@
 #include <zypp/base/Logger.h>
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -32,20 +32,20 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
+
       using namespace std;
-      
-      IMPL_DERIVED_POINTER(QueueItemGroup,QueueItem);
-      
+
+      IMPL_PTR_TYPE(QueueItemGroup);
+
       //---------------------------------------------------------------------------
-      
+
       string
       QueueItemGroup::asString ( void ) const
       {
           return toString (*this);
       }
-      
-      
+
+
       string
       QueueItemGroup::toString ( const QueueItemGroup & item)
       {
@@ -54,86 +54,86 @@ namespace zypp
           ret += "]";
           return ret;
       }
-      
-      
+
+
       ostream &
       QueueItemGroup::dumpOn( ostream & str ) const
       {
           str << asString();
           return str;
       }
-      
-      
+
+
       ostream&
       operator<<( ostream& os, const QueueItemGroup & item)
       {
           return os << item.asString();
       }
-      
+
       //---------------------------------------------------------------------------
-      
-      QueueItemGroup::QueueItemGroup (WorldPtr world)
+
+      QueueItemGroup::QueueItemGroup (World_Ptr world)
           : QueueItem (QUEUE_ITEM_TYPE_GROUP, world)
       {
       }
-      
-      
+
+
       QueueItemGroup::~QueueItemGroup()
       {
       }
-      
+
       //---------------------------------------------------------------------------
-      
+
       bool
-      QueueItemGroup::process (ResolverContextPtr context, QueueItemList & new_items)
+      QueueItemGroup::process (ResolverContext_Ptr context, QueueItemList & new_items)
       {
           _DBG("RC_SPEW") << "QueueItemGroup::process" << endl;
-      
+
           bool did_something = false;
-      
+
           // Just move all of the group's subitems onto the new_items list.
-      
+
           for (QueueItemList::const_iterator iter = _subitems.begin(); iter != _subitems.end(); iter++) {
       	new_items.push_front (*iter);
       	did_something = true;
           }
-      
+
           _subitems.clear();
-      
+
       // FIXME: delete self
-      
+
           return did_something;
       }
-      
-      
-      QueueItemPtr
+
+
+      QueueItem_Ptr
       QueueItemGroup::copy (void) const
       {
-          QueueItemGroupPtr new_group = new QueueItemGroup (world());
-          ((QueueItemPtr)new_group)->copy((constQueueItemPtr)this);
-      
+          QueueItemGroup_Ptr new_group = new QueueItemGroup (world());
+          ((QueueItem_Ptr)new_group)->copy((QueueItem_constPtr)this);
+
           for (QueueItemList::const_iterator iter = _subitems.begin(); iter != _subitems.end(); iter++) {
       	new_group->_subitems.push_back ((*iter)->copy());
           }
           return new_group;
       }
-      
-      
+
+
       int
-      QueueItemGroup::cmp (constQueueItemPtr item) const
+      QueueItemGroup::cmp (QueueItem_constPtr item) const
       {
           int cmp = this->compare (item);		// assures equal type
           if (cmp != 0)
       	return cmp;
-      
-          constQueueItemGroupPtr group = item;
-      
+
+          QueueItemGroup_constPtr group = dynamic_pointer_cast<const QueueItemGroup>(item);
+
           // First, sort by # of subitems
-      
+
           cmp = CMP(_subitems.size(), group->_subitems.size());
           if (cmp)
               return cmp;
-      
+
           // We can do a by-item cmp since the possible items are kept in sorted order.
           QueueItemList::const_iterator iter2;
           for (QueueItemList::const_iterator iter = _subitems.begin(), iter2 = group->_subitems.begin();
@@ -143,13 +143,13 @@ namespace zypp
       	    return cmp;
       	}
           }
-      
+
           return 0;
       }
-      
-      
+
+
       void
-      QueueItemGroup::addItem (QueueItemPtr subitem)
+      QueueItemGroup::addItem (QueueItem_Ptr subitem)
       {
           // We need to keep the list sorted for comparison purposes.
           _subitems.push_back (subitem);
@@ -164,5 +164,5 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
-/////////////////////////////////////////////////////////////////////////        
+/////////////////////////////////////////////////////////////////////////
 

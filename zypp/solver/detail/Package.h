@@ -24,7 +24,7 @@
 
 #include <list>
 #include <iosfwd>
-#include <string.h>
+#include <string>
 #include <sys/types.h>
 
 #include <zypp/solver/detail/PackagePtr.h>
@@ -43,11 +43,11 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-typedef std::list<PackagePtr> PackageList;
-typedef PackageList * PackageListPtr;
+typedef std::list<Package_Ptr> PackageList;
+typedef PackageList * PackageList_Ptr;
 
-typedef std::list<PackageUpdatePtr> PackageUpdateList;
-typedef PackageUpdateList * PackageUpdateListPtr;
+typedef std::list<PackageUpdate_Ptr> PackageUpdateList;
+typedef PackageUpdateList * PackageUpdateList_Ptr;
 
 
 ///////////////////////////////////////////////////////////////////
@@ -58,10 +58,10 @@ typedef PackageUpdateList * PackageUpdateListPtr;
  **/
 
 class Package : public ResItem {
-    REP_BODY(Package);
+    
       
         private:
-          SectionPtr _section;
+          Section_Ptr _section;
           
           // Filled in by package info XML
           std::string _pretty_name;
@@ -82,12 +82,12 @@ class Package : public ResItem {
       
         public:
       
-          Package(constChannelPtr channel);
-          Package(constChannelPtr channel,
+          Package(Channel_constPtr channel);
+          Package(Channel_constPtr channel,
                   const std::string & name = "",
                   const Edition & edition = Edition::noedition,
                   const Arch arch = Arch_noarch);
-          Package(constXmlNodePtr node, constChannelPtr channel);	//RCPackage *rc_xml_node_to_package (const xmlNode *node, const RCChannel *channel);
+          Package(XmlNode_constPtr node, Channel_constPtr channel);	//RCPackage *rc_xml_node_to_package (const xmlNode *node, const RCChannel *channel);
           virtual ~Package();
       
           // ---------------------------------- I/O
@@ -107,8 +107,8 @@ class Package : public ResItem {
           // ---------------------------------- accessors
       
           // accessor for _section
-          const SectionPtr section() const { return _section; }
-          void setSection (const SectionPtr section) { _section = section; }
+          const Section_Ptr section() const { return _section; }
+          void setSection (const Section_Ptr section) { _section = section; }
       
           // accessor for _pretty_name
           const std::string prettyName() const { return _pretty_name; }
@@ -148,9 +148,9 @@ class Package : public ResItem {
       
           // ---------------------------------- methods
       
-          void addUpdate (PackageUpdatePtr update);
+          void addUpdate (PackageUpdate_Ptr update);
       
-          PackageUpdatePtr getLatestUpdate (void) const;
+          PackageUpdate_Ptr getLatestUpdate (void) const;
       };
 
       ///////////////////////////////////////////////////////////////////

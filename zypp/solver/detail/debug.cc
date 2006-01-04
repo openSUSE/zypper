@@ -17,7 +17,6 @@
  */
 
 
-#include <y2util/stringutil.h>
 #include <zypp/solver/detail/debug.h>
 
 #include <string>

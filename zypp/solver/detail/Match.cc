@@ -19,8 +19,6 @@
  * 02111-1307, USA.
  */
 
-#include <y2util/stringutil.h>
-
 #include <zypp/solver/detail/Match.h>
 #include <zypp/solver/detail/World.h>
 #include <zypp/Rel.h>
@@ -30,7 +28,7 @@
 
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
   namespace solver
@@ -38,114 +36,114 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
+
       using namespace std;
-      
-      IMPL_BASE_POINTER(Match);
-      
+
+      IMPL_PTR_TYPE(Match);
+
       //---------------------------------------------------------------------------
-      
+
       string
       Match::asString ( void ) const
       {
           return toString (*this);
       }
-      
-      
+
+
       string
       Match::toString ( const Match & lock )
       {
           return "<lock/>";
       }
-      
-      
+
+
       ostream &
       Match::dumpOn( ostream & str ) const
       {
           str << asString();
           return str;
       }
-      
-      
+
+
       ostream&
       operator<<( ostream& os, const Match& edition)
       {
           return os << edition.asString();
       }
-      
+
       //---------------------------------------------------------------------------
-      
+
       Match::Match()
           : _importance (Importance::Undefined)
       {
       }
-      
-      Match::Match (XmlNodePtr node)
+
+      Match::Match (XmlNode_Ptr node)
           : _importance (Importance::Undefined)
       {
       }
-      
+
       Match::~Match()
       {
       }
-      
+
       //---------------------------------------------------------------------------
-      
-      XmlNodePtr
+
+      XmlNode_Ptr
       Match::asXmlNode (void) const
       {
           return new XmlNode("match");
       }
-      
-      
+
+
       // equality
       bool
       Match::equals ( const Match & lock ) const {
-      
+
           // Check the name glob
-      
+
           if ((_name_glob.empty()) ^ (lock._name_glob.empty()))
       	return false;
           if (_name_glob != lock._name_glob)
       	return false;
-      
+
           // Check the channel
-      
+
           if ((_channel_id.empty()) ^ (lock._channel_id.empty()))
       	return false;
           if (_channel_id != lock._channel_id)
       	return false;
-      
+
           // Check the importance
-      
+
           if (_importance != lock._importance
       	|| _importance_gteq != lock._importance_gteq)
           {
       	return false;
           }
-      
+
           // Check the dep
           if ( _dependency != lock._dependency)
               return false;
-      
+
           return true;
       }
-      
-      
+
+
       bool
-      Match::test (constResItemPtr resItem, WorldPtr world) const
+      Match::test (ResItem_constPtr resItem, World_Ptr world) const
       {
           string name;
-          constChannelPtr channel = resItem->channel ();
-        
+          Channel_constPtr channel = resItem->channel ();
+
           if (channel != NULL && !_channel_id.empty()) {
               if (! channel->hasEqualId (_channel_id)) {
                   return false;
               }
           }
-      
+
           name = resItem->name ();
-      
+
           // FIXME, implement regexp
 #if 0
           if (match->_pattern_spec
@@ -153,7 +151,7 @@ namespace zypp
               return false;
           }
 #endif
-      
+
           /* FIXME: ResItems don't have ResItemUpdate right now */
           /*   if (match->importance != RC_IMPORTANCE_INVALID && */
           /* 	  !rc_resItem_is_installed (resItem)) { */
@@ -164,10 +162,10 @@ namespace zypp
           /* 			  return FALSE; */
           /* 	  } */
           /*   } */
-          CapFactory  factory;                      
+          CapFactory  factory;
           Capability dependency;
           bool check = false;
-      
+
           dependency = factory.parse ( resItem->kind(),
                                        resItem->name(),
                                        Rel::EQ,
@@ -184,5 +182,5 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
-/////////////////////////////////////////////////////////////////////////        
+/////////////////////////////////////////////////////////////////////////
 

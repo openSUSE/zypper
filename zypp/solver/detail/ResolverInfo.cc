@@ -35,7 +35,7 @@ namespace zypp
       
       using namespace std;
       
-      IMPL_BASE_POINTER(ResolverInfo);
+      IMPL_PTR_TYPE(ResolverInfo);
       
       //---------------------------------------------------------------------------
       
@@ -130,7 +130,7 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      ResolverInfo::ResolverInfo (ResolverInfoType type, constResItemPtr resItem, int priority)
+      ResolverInfo::ResolverInfo (ResolverInfoType type, ResItem_constPtr resItem, int priority)
           : _type (type)
           , _resItem (resItem)
           , _priority (priority)
@@ -147,7 +147,7 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       bool
-      ResolverInfo::merge (ResolverInfoPtr to_be_merged)
+      ResolverInfo::merge (ResolverInfo_Ptr to_be_merged)
       {
           if (to_be_merged == NULL) return false;
       
@@ -160,17 +160,17 @@ namespace zypp
       }
       
       void
-      ResolverInfo::copy (constResolverInfoPtr from)
+      ResolverInfo::copy (ResolverInfo_constPtr from)
       {
           _error = from->_error;
           _important = from->_important;
       }
       
       
-      ResolverInfoPtr
+      ResolverInfo_Ptr
       ResolverInfo::copy (void) const
       {
-          ResolverInfoPtr cpy = new ResolverInfo(_type, _resItem, _priority);
+          ResolverInfo_Ptr cpy = new ResolverInfo(_type, _resItem, _priority);
       
           cpy->copy (this);
        
@@ -181,7 +181,7 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       bool
-      ResolverInfo::isAbout (constResItemPtr resItem) const
+      ResolverInfo::isAbout (ResItem_constPtr resItem) const
       {
           if (_resItem == NULL)
       	return false;

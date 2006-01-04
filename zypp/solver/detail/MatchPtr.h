@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* MatchPtr.h
+/* Match_Ptr.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
@@ -18,10 +18,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef _MatchPtr_h
-#define _MatchPtr_h
+#ifndef _Match_Ptr_h
+#define _Match_Ptr_h
 
-#include <y2util/RepDef.h>
+#include "zypp/base/PtrTypes.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -34,10 +34,10 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
       ///////////////////////////////////////////////////////////////////
-      //	CLASS NAME : MatchPtr
-      //	CLASS NAME : constMatchPtr
+      //	CLASS NAME : Match_Ptr
+      //	CLASS NAME : Match_constPtr
       ///////////////////////////////////////////////////////////////////
-      DEFINE_BASE_POINTER(Match);
+      DEFINE_PTR_TYPE(Match);
       
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -49,4 +49,4 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _MatchPtr_h
+#endif // _Match_Ptr_h

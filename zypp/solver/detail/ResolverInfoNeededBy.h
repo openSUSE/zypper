@@ -41,13 +41,13 @@ namespace zypp
       
       class ResolverInfoNeededBy : public ResolverInfoContainer {
       
-          REP_BODY(ResolverInfoNeededBy);
+          
       
         private:
       
         public:
       
-          ResolverInfoNeededBy (constResItemPtr resItem);
+          ResolverInfoNeededBy (ResItem_constPtr resItem);
           virtual ~ResolverInfoNeededBy();
       
           // ---------------------------------- I/O
@@ -61,7 +61,7 @@ namespace zypp
       
           // ---------------------------------- methods
       
-          virtual ResolverInfoPtr copy (void) const;
+          virtual ResolverInfo_Ptr copy (void) const;
       };
 
        ///////////////////////////////////////////////////////////////////

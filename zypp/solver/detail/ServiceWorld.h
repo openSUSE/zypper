@@ -23,7 +23,7 @@
 #define _ServiceWorld_h
 
 #include <iosfwd>
-#include <string.h>
+#include <string>
 
 #include <zypp/solver/detail/ServiceWorldPtr.h>
 #include <zypp/solver/detail/StoreWorld.h>
@@ -40,14 +40,14 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
       
-      typedef bool (*ServiceWorldAssembleFn) (ServiceWorldPtr service, void *error);	// GError **error
+      typedef bool (*ServiceWorldAssembleFn) (ServiceWorld_Ptr service, void *error);	// GError **error
       
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : ServiceWorld
       
       class ServiceWorld : public StoreWorld {
-          REP_BODY(ServiceWorld);
+          
       
         private:
       
