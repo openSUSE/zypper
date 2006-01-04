@@ -12,13 +12,13 @@ proc runBinary { prog {path ""} {expected_result 0} } {
   if { $path == "" } { set path "tests" }
 
   set result 0
-  set oops [catch { set result [exec "$path/$prog"] } catched]
+  set oops [catch { set result [exec "$path/$prog" ">" "/dev/null" "2>/dev/null"] } catched]
 
   # check if the program crashed
 
-  if {$oops != 0} {
+  if {$oops != 0 && $result != 0} {
     puts ""
-    fail "$prog crashed with: $catched"
+    fail "$prog crashed ($oops) with: $catched"
     return -1
   }
 

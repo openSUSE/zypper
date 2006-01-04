@@ -34,11 +34,15 @@ arch_exception ()
 */
 int main( int argc, char * argv[] )
 {
-  Arch        _arch( "i386" );
+  Arch _arch32( "i386" );
 
-  if (_arch != Arch_i386) return 1;
+  if (_arch32 != Arch_i386) return 1;
 
-  if (arch_exception() != 0) return 1;
+  if (_arch32.asString() != string("i386")) return 2;
+
+  if (!_arch32.compatibleWith (Arch_x86_64)) return 3;
+
+  if (arch_exception() != 0) return 4;
 
   return 0;
 }
