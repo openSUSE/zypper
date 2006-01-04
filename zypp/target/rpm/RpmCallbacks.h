@@ -27,9 +27,9 @@ namespace zypp {
       ///////////////////////////////////////////////////////////////////
       // Reporting progress of package removing
       ///////////////////////////////////////////////////////////////////
-      class RemovePkgReport : public HACK::Callback {
+      class RpmRemoveReport : public HACK::Callback {
       public:
-        virtual ~RemovePkgReport()
+        virtual ~RpmRemoveReport()
         {}
         /** Start the operation */
         virtual void start( const std::string & name )
@@ -48,7 +48,7 @@ namespace zypp {
         { }
       };
 
-      extern RemovePkgReport removePkgReport;
+      extern RpmRemoveReport rpmRemoveReport;
   
       ///////////////////////////////////////////////////////////////////
       // Reporting progress of package installation
@@ -127,6 +127,32 @@ namespace zypp {
       };
   
       extern RebuildDbReport rebuildDbReport;
+
+      ///////////////////////////////////////////////////////////////////
+      // Reporting progress of database rebuild
+      ///////////////////////////////////////////////////////////////////
+      class ConvertDbReport : public HACK::Callback {
+      public:
+        virtual ~ConvertDbReport()
+        {}
+        /** Start the operation */
+        virtual void start() 
+        { }
+        /**
+         * Inform about progress
+         * Return true on abort
+         */
+        virtual bool progress( unsigned percent )
+        { return false; }
+        /** Finish operation in case of success */
+        virtual void end()
+        { }
+        /** Finish operatino in case of fail, report fail exception */
+        virtual void end( Exception & excpt_r )
+        { }
+      };
+  
+      extern ConvertDbReport convertDbReport;
 
     } // namespace rpm
   } // namespace target

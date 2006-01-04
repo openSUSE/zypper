@@ -1,23 +1,14 @@
 /*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
 |                                                                      |
-|                      __   __    ____ _____ ____                      |
-|                      \ \ / /_ _/ ___|_   _|___ \                     |
-|                       \ V / _` \___ \ | |   __) |                    |
-|                        | | (_| |___) || |  / __/                     |
-|                        |_|\__,_|____/ |_| |_____|                    |
-|                                                                      |
-|                            Package Management                        |
-|                                                     (C) 2002 SuSE AG |
-\----------------------------------------------------------------------/
-
-   File:       RpmDb.cc
-   Purpose:    Interface to installed RPM system
-   Author:     Stefan Schubert <schubi@suse.de>
-   Maintainer: Ludwig Nussel <lnussel@suse.de>
-
-   Copied and adapted from agent-targetpkg
-
-/-*/
+\---------------------------------------------------------------------*/
+/** \file zypp/target/rpm/RpmDb.h
+ *
+*/
 #include "librpm.h"
 
 #include <cstdlib>
@@ -43,6 +34,7 @@
 
 #include "zypp/target/rpm/librpmDb.h"
 #include "zypp/target/rpm/RpmPackageImpl.h"
+#include "zypp/target/rpm/RpmException.h"
 #include "zypp/CapSet.h"
 
 #ifndef _
@@ -247,7 +239,7 @@ class RpmDb::Packages {
 //
 ///////////////////////////////////////////////////////////////////
 
-#define FAILIFNOTINITIALIZED if( ! initialized() ) { ZYPP_THROW(Exception("Error::E_RpmDB_not_open")); }
+#define FAILIFNOTINITIALIZED if( ! initialized() ) { ZYPP_THROW(RpmDbNotOpenException()); }
 
 ///////////////////////////////////////////////////////////////////
 
@@ -336,7 +328,7 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
 
   if ( ! (root_r.absolute() && dbPath_r.absolute()) ) {
     ERR << "Illegal root or dbPath: " << stringPath( root_r, dbPath_r ) << endl;
-    ZYPP_THROW(Exception("Error::E_invalid_argument"));
+    ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
   }
 
   MIL << "Calling initDatabase: " << stringPath( root_r, dbPath_r ) << endl;
@@ -348,9 +340,7 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
     if ( root_r == _root && dbPath_r == _dbPath ) {
       return;
     } else {
-      ERR << "Can't switch to " << stringPath( root_r, dbPath_r )
-	<< " while accessing " << stringPath( _root, _dbPath ) << endl;
-      ZYPP_THROW(Exception("Error::E_RpmDB_already_open"));
+      ZYPP_THROW(RpmDbAlreadyOpenException(_root, _dbPath, root_r, dbPath_r));
     }
   }
 
@@ -362,8 +352,9 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
   try {
     internal_initDatabase( root_r, dbPath_r, info );
   }
-  catch (...)
+  catch (const RpmException & excpt_r)
   {
+    ZYPP_CAUGHT(excpt_r);
     librpmDb::blockAccess();
     ERR << "Cleanup on error: state " << info << endl;
 
@@ -372,44 +363,43 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
       // any backup created on conversion.
       removeV4( root_r + dbPath_r, dbsi_has( info, DbSI_MADE_V3TOV4 ) );
     }
-    #warning FIXME rethrow
-
+    ZYPP_RETHROW(excpt_r);
   }
-    if ( dbsi_has( info, DbSI_HAVE_V3 ) ) {
-      if ( root_r == "/" || dbsi_has( info, DbSI_MODIFIED_V4 ) ) {
-	// Move obsolete rpm3 database beside.
-	MIL << "Cleanup: state " << info << endl;
-	removeV3( root_r + dbPath_r, dbsi_has( info, DbSI_MADE_V3TOV4 ) );
-	dbsi_clr( info, DbSI_HAVE_V3 );
-      } else {
+  if ( dbsi_has( info, DbSI_HAVE_V3 ) ) {
+    if ( root_r == "/" || dbsi_has( info, DbSI_MODIFIED_V4 ) ) {
+      // Move obsolete rpm3 database beside.
+      MIL << "Cleanup: state " << info << endl;
+      removeV3( root_r + dbPath_r, dbsi_has( info, DbSI_MADE_V3TOV4 ) );
+      dbsi_clr( info, DbSI_HAVE_V3 );
+    } else {
 	// Performing an update: Keep the original rpm3 database
 	// and wait if the rpm4 database gets modified by installing
 	// or removing packages. Cleanup in modifyDatabase or closeDatabase.
 	MIL << "Update mode: Cleanup delayed until closeOldDatabase." << endl;
-      }
     }
+  }
 #warning CHECK: notify root about conversion backup.
 
-    _root   = root_r;
-    _dbPath = dbPath_r;
-    _dbStateInfo = info;
+  _root   = root_r;
+  _dbPath = dbPath_r;
+  _dbStateInfo = info;
 
-#warning FIXME uncomment code below
+#warning Add rebuild database once have the info about context
 #if 0
-    if ( ! ( err || Y2PM::runningFromSystem() ) ) {
-      if (      dbsi_has( info, DbSI_HAVE_V4 )
-	   && ! dbsi_has( info, DbSI_MADE_V4 ) ) {
-	err = rebuildDatabase();
-      }
+  if ( ! ( Y2PM::runningFromSystem() ) ) {
+    if (      dbsi_has( info, DbSI_HAVE_V4 )
+	&& ! dbsi_has( info, DbSI_MADE_V4 ) ) {
+      err = rebuildDatabase();
     }
+  }
 #endif
 
-    // Close the database in case any write acces (create/convert)
-    // happened during init. This should drop any lock acquired
-    // by librpm. On demand it will be reopened readonly and should
-    // not hold any lock.
-    librpmDb::dbRelease( true );
-    MIL << "InitDatabase: " << *this << endl;
+  // Close the database in case any write acces (create/convert)
+  // happened during init. This should drop any lock acquired
+  // by librpm. On demand it will be reopened readonly and should
+  // not hold any lock.
+  librpmDb::dbRelease( true );
+  MIL << "InitDatabase: " << *this << endl;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -429,11 +419,12 @@ void RpmDb::internal_initDatabase( const Pathname & root_r, const Pathname & dbP
   librpmDb::DbDirInfo dbInfo( root_r, dbPath_r );
 
   if ( dbInfo.illegalArgs() ) {
-    ZYPP_THROW(Exception("Error::E_invalid_argument")); // should not happen (checked in initDatabase)
+    // should not happen (checked in initDatabase)
+    ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
   }
   if ( ! dbInfo.usableArgs() ) {
     ERR << "Bad database directory: " << dbInfo.dbDir() << endl;
-    ZYPP_THROW(Exception("Error::E_invalid_argument"));
+    ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
   }
 
   if ( dbInfo.hasDbV4() ) {
@@ -485,8 +476,8 @@ void RpmDb::internal_initDatabase( const Pathname & root_r, const Pathname & dbP
     MIL << "Found rpm3 database " << dbInfo.dbV3() << endl;
 
     if ( dbEmpty ) {
-      extern void convertV3toV4( const Pathname & v3db_r, const librpmDb::constPtr & v4db_r );
-
+      extern void convertV3toV4( const Pathname & v3db_r, const constlibrpmDbPtr & v4db_r );
+#warning FIXME exception handling for following function
       convertV3toV4( dbInfo.dbV3().path(), dbptr );
 
       // create a backup copy
@@ -715,6 +706,20 @@ void RpmDb::closeDatabase()
 //
 void RpmDb::rebuildDatabase()
 {
+  RebuildDbReport report;
+  try {
+    doRebuildDatabase(report);
+  }
+  catch (RpmException & excpt_r)
+  {
+    report.end(excpt_r);
+    ZYPP_RETHROW(excpt_r);
+  }
+  report.end();
+}
+
+void RpmDb::doRebuildDatabase(RebuildDbReport & report)
+{
   FAILIFNOTINITIALIZED;
 
   MIL << "RpmDb::rebuildDatabase" << *this << endl;
@@ -722,10 +727,6 @@ void RpmDb::rebuildDatabase()
 
   PathInfo dbMaster( root() + dbPath() + "Packages" );
   PathInfo dbMasterBackup( dbMaster.path().extend( ".y2backup" ) );
-
-  // report
-  RebuildDbReport report;
-  report.start();
 
   // run rpm
   RpmArgVec opts;
@@ -763,14 +764,9 @@ void RpmDb::rebuildDatabase()
   int rpm_status = systemStatus();
 
   if ( rpm_status != 0 ) {
-    ERR << "rpm failed, message was:" << endl << errmsg; // has trailing NL
-#warning FIXME error report
-//    err.setDetails(errmsg);
-//    report.end(err);
-    ZYPP_THROW(Exception("Error::E_RpmDB_subprocess_failed"));
+    ZYPP_THROW(RpmSubprocessException(string("rpm failed with message: ") + errmsg));
   } else {
     report.progress( 100 ); // 100%
-    report.end();
   }
 }
 
@@ -807,8 +803,7 @@ void RpmDb::importPubkey( const Pathname & pubkey_r )
   int rpm_status = systemStatus();
 
   if ( rpm_status != 0 ) {
-    ERR << "Failed to import public key from file " << pubkey_r << ": rpm returned  " << rpm_status << endl;
-    ZYPP_THROW(Exception("Error::E_RpmDB_subprocess_failed"));
+    ZYPP_THROW(RpmSubprocessException(string("Failed to import public key from file ") + pubkey_r.asString() + string(": rpm returned  ") + str::numstring(rpm_status)));
   } else {
     MIL << "Imported public key from file " << pubkey_r << endl;
   }
@@ -825,11 +820,10 @@ void RpmDb::importPubkey( const Pathname & keyring_r, const string & keyname_r )
   FAILIFNOTINITIALIZED;
 
   // create tempfile
-  char tmpname[] = "/tmp/y2.pubkey.XXXXXX";
+  char tmpname[] = "/tmp/zypp.pubkey.XXXXXX";
   int tmpfd = mkstemp( tmpname );
   if ( tmpfd == -1 ) {
-    ERR << "Unable to create a unique temporary file for pubkey" << endl;
-    ZYPP_THROW(Exception("Error::E_RpmDB_subprocess_failed"));
+    ZYPP_THROW(RpmSubprocessException("Unable to create a unique temporary file for pubkey"));
   }
 
   // export keyname from keyring
@@ -849,43 +843,43 @@ void RpmDb::importPubkey( const Pathname & keyring_r, const string & keyname_r )
 
   // launch gpg
   ExternalProgram prg( argv, ExternalProgram::Discard_Stderr, false, -1, true );
-  string err;
   int res = 0;
 
   // read key
-  for ( string line( prg.receiveLine() ); line.length(); line = prg.receiveLine() ) {
-    ssize_t written = write( tmpfd, line.c_str(), line.length() );
-    if ( written == -1 || unsigned(written) != line.length() ) {
-      ERR << "Error writing pubkey to " << tmpname << endl;
-      err = "Error::E_RpmDB_subprocess_failed";
-      break;
+
+  try {
+    for ( string line( prg.receiveLine() ); line.length(); line = prg.receiveLine() ) {
+      ssize_t written = write( tmpfd, line.c_str(), line.length() );
+      if ( written == -1 || unsigned(written) != line.length() ) {
+        ZYPP_THROW(RpmSubprocessException(string("Error writing pubkey to ") + tmpname));
+      }
+      res += written; // empty file indicates key not found
     }
-    res += written; // empty file indicates key not found
+  }
+  catch (RpmException & excpt_r)
+  {
+    close( tmpfd );
+    filesystem::unlink( tmpname );
+    ZYPP_RETHROW(excpt_r);
   }
   close( tmpfd );
 
   if ( ! res ) {
-    WAR << "gpg: no key '" << keyname_r << "' found in  '" << keyring_r << "'" << endl;
-    err = "Error::E_RpmDB_subprocess_failed";
+    ZYPP_THROW(RpmSubprocessException(string("gpg: no key '") + keyname_r + string("' found in  '") + keyring_r.asString() + string("'")));
   }
 
   // check gpg returncode
   res = prg.close();
   if ( res ) {
-    ERR << "gpg: export '" << keyname_r << "' from '" << keyring_r << "' returned " << res << endl;
-    err = "Error::E_RpmDB_subprocess_failed";
+    // remove tempfile
+    filesystem::unlink( tmpname );
+    ZYPP_THROW(RpmSubprocessException(string("gpg: export '") + keyname_r + string("' from '") + keyring_r.asString() + "' returned " + str::numstring(res)));
   }
 
-  if ( err == "" ) {
-    MIL << "Exported '" << keyname_r << "' from '" << keyring_r << "' to " << tmpname << endl;
+  MIL << "Exported '" << keyname_r << "' from '" << keyring_r << "' to " << tmpname << endl;
 #warning FIXME handle exception from line below
-    importPubkey( tmpname );
-  }
-
-  // remove tempfile
+  importPubkey( tmpname );
   filesystem::unlink( tmpname );
-
-  ZYPP_THROW(Exception(err));
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -927,14 +921,27 @@ bool RpmDb::packagesValid() const
 //
 const std::list<Package::Ptr> & RpmDb::getPackages()
 {
+  ScanDbReport report;
+  try {
+    const std::list<Package::Ptr> & ret = doGetPackages(report);
+    report.end();
+    return ret;
+  }
+  catch (RpmException & excpt_r)
+  {
+    report.end(excpt_r);
+    ZYPP_RETHROW(excpt_r);
+  }
+}
+
+
+const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
+{
   if ( packagesValid() ) {
     return _packages._list;
   }
 
-  // report
 // FIXME  Timecount _t( "RpmDb::getPackages" );
-  ScanDbReport report;
-  report.start();
 
 #warning how to detect corrupt db while reading.
 
@@ -945,27 +952,21 @@ const std::list<Package::Ptr> & RpmDb::getPackages()
   // multiple entries for the same string. If so we consider the last
   // one installed to be the one we're interesed in.
   ///////////////////////////////////////////////////////////////////
+  unsigned expect = 0;
   librpmDb::db_const_iterator iter; // findAll
   {
     // quick check
-    unsigned expect = 0;
     for ( ; *iter; ++iter ) {
       ++expect;
     }
-#warning report error
-#if 0
     if ( iter.dbError() ) {
       ERR << "No database access: " << iter.dbError() << endl;
-      report.end( iter.dbError() );
-      return _packages._list;
+      ZYPP_THROW(*(iter.dbError()));
     }
-#endif
-#warning progress update
-//    report->progress( pd.init( expect ) );
   }
+  unsigned current = 0;
 
-#warning progress update
-  for ( iter.findAll(); *iter; ++iter/*, report.progress( pd.incr() )*/ ) {
+  for ( iter.findAll(); *iter; ++iter, ++current, report.progress( (100*current)/expect)) {
 
     string name = iter->tag_name();
     if ( name == string( "gpg-pubkey" ) ) {
@@ -1008,7 +1009,7 @@ const std::list<Package::Ptr> & RpmDb::getPackages()
     for ( iter.findByFile( *it ); *iter; ++iter ) {
       Package::Ptr pptr = _packages.lookup( iter->tag_name() );
       if ( !pptr ) {
-	WAR << "rpmdb.findByFile returned unpknown package " << *iter << endl;
+	WAR << "rpmdb.findByFile returned unknown package " << *iter << endl;
 	continue;
       }
       Dependencies _deps = pptr->deps();
@@ -1024,7 +1025,6 @@ const std::list<Package::Ptr> & RpmDb::getPackages()
   ///////////////////////////////////////////////////////////////////
   _packages.buildList();
   DBG << "Found installed packages: " << _packages._list.size() << endl;
-  report.end();
   return _packages._list;
 }
 
@@ -1153,8 +1153,8 @@ void RpmDb::getData( const string & name_r,
   librpmDb::db_const_iterator it;
   it.findPackage( name_r );
   result_r = *it;
-#warning FIXME error handling
-//  return it.dbError();
+  if (it.dbError())
+    ZYPP_THROW(*(it.dbError()));
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -1171,8 +1171,8 @@ void RpmDb::getData( const std::string & name_r, const Edition & ed_r,
   librpmDb::db_const_iterator it;
   it.findPackage( name_r, ed_r  );
   result_r = *it;
-#warning FIXME error handling
-//  return it.dbError();
+  if (it.dbError())
+    ZYPP_THROW(*(it.dbError()));
 }
 
 /*--------------------------------------------------------------*/
@@ -1379,8 +1379,7 @@ RpmDb::run_rpm (const RpmArgVec& opts,
     exit_code = -1;
 
     if ( ! initialized() ) {
-	ERR << "Attempt to run rpm: " << "Error::E_RpmDB_not_open" << endl;
-	return;
+	ZYPP_THROW(RpmDbNotOpenException());
     }
 
     RpmArgVec args;
@@ -1563,14 +1562,24 @@ void RpmDb::processConfigFiles(const string& line, const string& name, const cha
 //
 void RpmDb::installPackage( const Pathname & filename, unsigned flags )
 {
+  RpmInstallReport report;
+  try {
+    doInstallPackage(filename, flags, report);
+  }
+  catch (RpmException & excpt_r)
+  {
+    report.end(excpt_r);
+    ZYPP_RETHROW(excpt_r);
+  }
+  report.end();
+
+}
+void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, RpmInstallReport & report )
+{
     FAILIFNOTINITIALIZED;
     Logfile progresslog;
 
     MIL << "RpmDb::installPackage(" << filename << "," << flags << ")" << endl;
-
-    // report
-    RpmInstallReport report;
-    report.start( filename );
 
     // backup
     if ( _packagebackups ) {
@@ -1654,16 +1663,11 @@ void RpmDb::installPackage( const Pathname & filename, unsigned flags )
 		_("rpm created %s as %s.\nHere are the first 25 lines of difference:\n"));
     }
 
-    string err;
-
     if ( rpm_status != 0 )  {
       // %s = filename of rpm package
       progresslog(/*timestamp*/true) << str::form(_("%s install failed"), Pathname::basename(filename).c_str()) << endl;
       progresslog() << _("rpm output:") << endl << rpmmsg << endl;
-      ERR << "rpm failed, message was: " << rpmmsg << endl;
-      err = "Error::E_RpmDB_subprocess_failed";
-// TODO      err.setDetails( rpmmsg );
-#warning TODO throw exception
+      ZYPP_THROW(RpmSubprocessException(string("RPM failed: ") + rpmmsg));
     } else {
       // %s = filename of rpm package
       progresslog(/*timestamp*/true) << str::form(_("%s installed ok"), Pathname::basename(filename).c_str()) << endl;
@@ -1671,8 +1675,6 @@ void RpmDb::installPackage( const Pathname & filename, unsigned flags )
 	progresslog() << _("Additional rpm output:") << endl << rpmmsg << endl;
       }
     }
-
-    report.end();
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -1694,14 +1696,25 @@ void RpmDb::removePackage( Package::constPtr package, unsigned flags )
 //
 void RpmDb::removePackage( const string & name_r, unsigned flags )
 {
+  RpmRemoveReport report;
+  try {
+    doRemovePackage(name_r, flags, report);
+  }
+  catch (RpmException & excpt_r)
+  {
+    report.end(excpt_r);
+    ZYPP_RETHROW(excpt_r);
+  }
+  report.end();
+}
+
+
+void RpmDb::doRemovePackage( const string & name_r, unsigned flags, RpmRemoveReport & report )
+{
     FAILIFNOTINITIALIZED;
     Logfile progresslog;
 
     MIL << "RpmDb::removePackage(" << name_r << "," << flags << ")" << endl;
-
-    // report
-    RemovePkgReport report;
-    report.start( name_r );
 
     // backup
     if ( _packagebackups ) {
@@ -1751,23 +1764,17 @@ void RpmDb::removePackage( const string & name_r, unsigned flags )
     report.progress( 50 );
     int rpm_status = systemStatus();
 
-    string err;
-
     if ( rpm_status != 0 ) {
       // %s = name of rpm package
       progresslog(/*timestamp*/true) << str::form(_("%s remove failed"), name_r.c_str()) << endl;
       progresslog() << _("rpm output:") << endl << rpmmsg << endl;
-      ERR << "rpm failed, message was: " << rpmmsg << endl;
-// FIXME      err =  string("Error::E_RpmDB_subprocess_failed") + endl + rpmmsg;
-#warning Add report->stop(Exception) here
+      ZYPP_THROW(RpmSubprocessException(string("RPM failed: ") + rpmmsg));
     } else {
       progresslog(/*timestamp*/true) << str::form(_("%s remove ok"), name_r.c_str()) << endl;
       if( ! rpmmsg.empty() ) {
 	progresslog() << _("Additional rpm output:") << endl << rpmmsg << endl;
       }
     }
-
-    report.end();
 }
 
 string

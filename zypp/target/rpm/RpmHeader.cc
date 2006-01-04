@@ -168,9 +168,9 @@ namespace zypp {
       //
       Edition RpmHeader::tag_edition() const
       {
-        return Edition( string_val   ( RPMTAG_EPOCH ),
-              	     string_val( RPMTAG_VERSION ),
-              	     string_val( RPMTAG_RELEASE ) );
+        return Edition( string_val( RPMTAG_VERSION ),
+              	     string_val( RPMTAG_RELEASE ),
+		     string_val   ( RPMTAG_EPOCH ));
       }
       
       ///////////////////////////////////////////////////////////////////

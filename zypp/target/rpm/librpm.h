@@ -1,25 +1,16 @@
 /*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
 |                                                                      |
-|                      __   __    ____ _____ ____                      |
-|                      \ \ / /_ _/ ___|_   _|___ \                     |
-|                       \ V / _` \___ \ | |   __) |                    |
-|                        | | (_| |___) || |  / __/                     |
-|                        |_|\__,_|____/ |_| |_____|                    |
-|                                                                      |
-|                               core system                            |
-|                                                        (C) SuSE GmbH |
-\----------------------------------------------------------------------/
-
-  File:       librpm.h
-
-  Author:     Michael Andres <ma@suse.de>
-  Maintainer: Michael Andres <ma@suse.de>
-
-  Purpose:
-
-/-*/
-#ifndef librpm_h
-#define librpm_h
+\---------------------------------------------------------------------*/
+/** \file zypp/target/rpm/librpm.h
+ *
+*/
+#ifndef ZYPP_TARGET_RPM_LIBRPM_H
+#define ZYPP_TARGET_RPM_LIBRPM_H
 
 extern "C" {
 #include <rpm/rpmlib.h>
@@ -29,4 +20,4 @@ extern "C" {
 #include <fcntl.h>
 }
 
-#endif // librpm_h
+#endif // ZYPP_TARGET_RPM_LIBRPM_H

@@ -12,8 +12,8 @@
 
 // -*- C++ -*-
 
-#ifndef RpmDb_h
-#define RpmDb_h
+#ifndef ZYPP_TARGET_RPM_RPMDB_H
+#define ZYPP_TARGET_RPM_RPMDB_H
 
 #include <iosfwd>
 #include <list>
@@ -26,6 +26,7 @@
 #include "zypp/Package.h"
 
 #include "zypp/target/rpm/RpmHeader.h"
+#include "zypp/target/rpm/RpmCallbacks.h"
 
 namespace zypp {
   namespace target {
@@ -94,7 +95,7 @@ namespace zypp {
           /**
            * Internal helper for @ref initDatabase.
            *
-           * \throws Exception
+           * \throws RpmException
            *
            **/
           void internal_initDatabase( const Pathname & root_r, const Pathname & dbPath_r,
@@ -165,7 +166,7 @@ namespace zypp {
            * (no packages were installed or deleted). Otherwise the new database
            * is kept, and the old one is removed.
            *
-           * \throws Exception
+           * \throws RpmException
            *
            **/
           void initDatabase( Pathname root_r = Pathname(),
@@ -176,7 +177,7 @@ namespace zypp {
            * state. On update: Decides what to do with any converted database
            * (see @ref initDatabase).
            *
-           * \throws Exception
+           * \throws RpmException
            *
            **/
           void closeDatabase();
@@ -184,7 +185,7 @@ namespace zypp {
           /**
            * Rebuild the rpm database (rpm --rebuilddb).
            *
-           * \throws Exception
+           * \throws RpmException
            *
            **/
           void rebuildDatabase();
@@ -192,7 +193,7 @@ namespace zypp {
           /**
            * Import ascii armored public key in file pubkey_r.
            *
-           * \throws Exception
+           * \throws RpmException
            *
            **/
           void importPubkey( const Pathname & pubkey_r );
@@ -200,7 +201,7 @@ namespace zypp {
           /**
            * Import ascii armored public key keyname_r exported by keyring_r.
            *
-           * \throws Exception
+           * \throws RpmException
            *
            **/
           void importPubkey( const Pathname & keyring_r, const std::string & keyname_r );
@@ -283,7 +284,7 @@ namespace zypp {
            * if packge is not installed (PMError is not set), or RPM database
            * could not be read (PMError is set).
            *
-           * \throws Exception
+           * \throws RpmException
            *
            * FIXME this and following comment
            *
@@ -297,7 +298,7 @@ namespace zypp {
            * if packge is not installed (PMError is not set), or RPM database
            * could not be read (PMError is set).
            *
-           * \throws Exception
+           * \throws RpmException
            *
            **/
           void getData( const std::string & name_r, const Edition & ed_r,
@@ -320,7 +321,10 @@ namespace zypp {
            * @param n_opts The number of arguments
            * @param options Array of the arguments, @ref n_opts elements
            * @param stderr_disp How to handle stderr, merged with stdout by default
-          */
+           *
+           * \throws RpmException
+           *
+           **/
           void run_rpm( const RpmArgVec& options,
       		  ExternalProgram::Stderr_Disposition stderr_disp =
       		  ExternalProgram::Stderr_To_Stdout);
@@ -432,7 +436,7 @@ namespace zypp {
            *
            * @return success
            *
-           * \throws Exception
+           * \throws RpmException
            *
            * */
           void installPackage (const Pathname& filename, unsigned flags = 0 );
@@ -444,7 +448,7 @@ namespace zypp {
            *
            * @return success
            *
-           * \throws Exception
+           * \throws RpmException
            *
            * */
           void removePackage(const std::string & name_r, unsigned flags = 0);
@@ -532,6 +536,13 @@ namespace zypp {
            * Set logfile for progress log. Empty filename to disable logging.
            **/
           static bool setInstallationLogfile( const Pathname & filename );
+
+	protected:
+	  void doRemovePackage( const std::string & name_r, unsigned flags, RpmRemoveReport & report );
+	  void doInstallPackage( const Pathname & filename, unsigned flags, RpmInstallReport & report );
+	  const std::list<Package::Ptr> & doGetPackages(ScanDbReport & report);
+	  void doRebuildDatabase(RebuildDbReport & report);
+	  
       
       };
 
@@ -539,4 +550,4 @@ namespace zypp {
   } // namespace target
 } // namespace zypp
 
-#endif // RpmDb_h
+#endif // ZYPP_TARGET_RPM_RPMDB_H

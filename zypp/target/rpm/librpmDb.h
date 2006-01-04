@@ -6,29 +6,9 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/target/rpm/
+/** \file zypp/target/rpm/librpmDb.h
  *
 */
-/*---------------------------------------------------------------------\
-|                                                                      |
-|                      __   __    ____ _____ ____                      |
-|                      \ \ / /_ _/ ___|_   _|___ \                     |
-|                       \ V / _` \___ \ | |   __) |                    |
-|                        | | (_| |___) || |  / __/                     |
-|                        |_|\__,_|____/ |_| |_____|                    |
-|                                                                      |
-|                               core system                            |
-|                                                        (C) SuSE GmbH |
-\----------------------------------------------------------------------/
-
-  File:       librpmDb.h
-
-  Author:     Michael Andres <ma@suse.de>
-  Maintainer: Michael Andres <ma@suse.de>
-
-  Purpose: Manage access to librpm database.
-
-/-*/
 #ifndef librpmDb_h
 #define librpmDb_h
 
@@ -40,6 +20,7 @@
 #include "zypp/PathInfo.h"
 #include "zypp/Package.h"
 #include "zypp/target/rpm/RpmHeader.h"
+#include "zypp/target/rpm/RpmException.h"
 
 namespace zypp {
   namespace target {
@@ -63,7 +44,7 @@ namespace zypp {
          * librpmDb::constPtr. Currently we don't want to provide non const
          * handles, as the database is opened READONLY.
 	 *
-         * \throws Exception
+         * \throws RpmException
          *
          **/
         static void dbAccess( librpmDb::Ptr & ptr_r );
@@ -103,7 +84,7 @@ namespace zypp {
            * For internal use. Pointer returned should immediately be
            * wrapped into librpmDb::Ptr.
 	   *
-           * \throws Exception
+           * \throws RpmException
            *
            **/
           static librpmDb * newLibrpmDb( Pathname root_r, Pathname dbPath_r, bool readonly_r );
@@ -117,7 +98,7 @@ namespace zypp {
            * created, you'll have to explicitly call @ref dbRelease to close the
            * database.
 	   *
-           * \throws Exception
+           * \throws RpmException
            *
            **/
           static void dbAccess();
@@ -167,7 +148,7 @@ namespace zypp {
            * It's not allowed to switch to another location while a database
            * is accessed. Use @ref dbRelease to force releasing the database first.
 	   *
-           * \throws Exception
+           * \throws RpmException
            *
            **/
           static void dbAccess( const Pathname & root_r, const Pathname & dbPath_r );
@@ -178,7 +159,7 @@ namespace zypp {
            * it should not be used longer than necessary. Be prepared that the
            * handle might become invalid (see @ref dbRelease) later.
            *
-           * \throws Exception
+           * \throws RpmException
            *
            **/
           static void dbAccess( librpmDb::constPtr & ptr_r );
@@ -283,20 +264,17 @@ namespace zypp {
            * @return This handles directory that contains the rpmdb.
            **/
           const Pathname & dbPath() const;
-#warning uncomment
-#if 0
       
           /**
            * Return any database error. Usg. if the database was
            * blocked by calling @ref dbRelease(true) or @ref blockAccess.
            **/
-          PMError error() const;
+          shared_ptr<RpmException> error() const;
       
           /**
            * @return Whether
            **/
           bool valid() const { return( ! error() ); }
-#endif
       
           /**
            * @return True if handle is valid and database is empty.
@@ -480,8 +458,6 @@ namespace zypp {
            **/
           ~db_const_iterator();
       
-#warning FIXME this function
-#if 0
           /**
            * Return any database error.
            *
@@ -489,8 +465,7 @@ namespace zypp {
            * dbError will immediately report this, but an already running
            * iteration will proceed to its end. Then the database is dropped.
            **/
-          PMError dbError() const;
-#endif
+          shared_ptr<RpmException> dbError() const;
       
           /**
            * Advance to next RpmHeader::constPtr.
@@ -576,15 +551,7 @@ namespace zypp {
            * Commonly used by PMRpmPackageDataProvider.
            **/
           bool findPackage( const std::string & name_r, const Edition & ed_r );
-#warning define if eneded
-#if 0
-          /**
-           * Abbr. for <code>findPackage( which_r.name, which_r.edition );</code>
-           **/
-          bool findPackage( const PkgNameEd & which_r ) {
-            return findPackage( which_r.name, which_r.edition );
-          }
-#endif
+
           /**
            * Abbr. for <code>findPackage( which_r->name(), which_r->edition() );</code>
            **/

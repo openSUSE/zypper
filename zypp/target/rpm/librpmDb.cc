@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/target/rpm/BinHeader.h
+/** \file zypp/target/rpm/librpmDb.cc
  *
 */
 #include "librpm.h"
@@ -16,7 +16,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/target/rpm/librpmDb.h"
 #include "zypp/target/rpm/RpmHeader.h"
-#include "zypp/base/Exception.h"
+#include "zypp/target/rpm/RpmException.h"
 
 using namespace std;
 
@@ -37,8 +37,7 @@ class librpmDb::D {
     const Pathname _root;   // root directory for all operations
     const Pathname _dbPath; // directory (below root) that contains the rpmdb
     rpmdb          _db;     // database handle
-#warning fix string representation of the error
-    shared_ptr<Exception> _error;  // database error
+    shared_ptr<RpmException> _error;  // database error
 
     friend ostream & operator<<( ostream & str, const D & obj ) {
       str << "{" << obj._error  << "(" << obj._root << ")" << obj._dbPath << "}";
@@ -62,21 +61,22 @@ class librpmDb::D {
 	// init database
 	int res = ::rpmdbInit( root, perms );
 	if ( res ) {
-	  _error = shared_ptr<Exception>(new Exception("Error::E_RpmDB_init_failed"));
 	  ERR << "rpmdbInit error(" << res << "): " << *this << endl;
-	  return;
+	  _error = shared_ptr<RpmInitException>(new RpmInitException(_root, _dbPath));
+	  ZYPP_THROW(*_error);
 	}
       }
 
       // open database
       int res = ::rpmdbOpen( root, &_db, (readonly_r ? O_RDONLY : O_RDWR ), perms );
       if ( res || !_db ) {
-	_error = shared_ptr<Exception>(new Exception("Error::E_RpmDB_open_failed"));
 	if ( _db ) {
 	  ::rpmdbClose( _db );
 	  _db = 0;
 	}
 	ERR << "rpmdbOpen error(" << res << "): " << *this << endl;
+	_error = shared_ptr<RpmDbOpenException>(new RpmDbOpenException(_root, _dbPath));
+	ZYPP_THROW(*_error);
 	return;
       }
 
@@ -177,25 +177,25 @@ librpmDb * librpmDb::newLibrpmDb( Pathname root_r, Pathname dbPath_r, bool reado
 {
   // check arguments
   if ( ! (root_r.absolute() && dbPath_r.absolute()) ) {
-    ERR << "Illegal root or dbPath: " << stringPath( root_r, dbPath_r ) << endl;
-    ZYPP_THROW(Exception("Error::E_invalid_argument"));
+    ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
   }
 
   // initialize librpm
   if ( ! globalInit() ) {
-    ZYPP_THROW(Exception("Error::E_RpmDB_global_init_failed"));
+    ZYPP_THROW(GlobalRpmInitException());
   }
 
   // open rpmdb
-  librpmDb * ret = new librpmDb( root_r, dbPath_r, readonly_r );
-  shared_ptr<Exception> err_r = ret->_d._error;
-  if ( err_r ) {
+  librpmDb * ret = 0;
+  try {
+    ret = new librpmDb( root_r, dbPath_r, readonly_r );
+  }
+  catch (const RpmException & excpt_r)
+  {
+    ZYPP_CAUGHT(excpt_r);
     delete ret;
     ret = 0;
-#warning FIXME uncomment
-#if 0
-    ZYPP_THROW(ret->_d._error);
-#endif
+    ZYPP_RETHROW(excpt_r);
   }
   return ret;
 }
@@ -210,8 +210,7 @@ void librpmDb::dbAccess( const Pathname & root_r, const Pathname & dbPath_r )
 {
   // check arguments
   if ( ! (root_r.absolute() && dbPath_r.absolute()) ) {
-    ERR << "Illegal root or dbPath: " << stringPath( root_r, dbPath_r ) << endl;
-    ZYPP_THROW(Exception("Error::E_invalid_argument"));
+    ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
   }
 
   if ( _defaultDb ) {
@@ -219,9 +218,7 @@ void librpmDb::dbAccess( const Pathname & root_r, const Pathname & dbPath_r )
     if ( _defaultRoot == root_r && _defaultDbPath == dbPath_r )
       return;
     else {
-      ERR << "Can't switch to " << stringPath( root_r, dbPath_r )
-	<< " while accessing " << stringPath( _defaultRoot, _defaultDbPath ) << endl;
-      ZYPP_THROW(Exception("Error::E_RpmDB_already_open"));
+      ZYPP_THROW(RpmDbAlreadyOpenException(_defaultRoot, _defaultDbPath, root_r, dbPath_r));
     }
   }
 
@@ -242,8 +239,7 @@ void librpmDb::dbAccess( const Pathname & root_r, const Pathname & dbPath_r )
 void librpmDb::dbAccess()
 {
   if ( _dbBlocked ) {
-    WAR << "Access is blocked: " << stringPath( _defaultRoot, _defaultDbPath ) << endl;
-    ZYPP_THROW(Exception("Error::E_RpmDB_access_blocked"));
+    ZYPP_THROW(RpmAccessBlockedException(_defaultRoot, _defaultDbPath));
   }
 
   if ( !_defaultDb ) {
@@ -263,8 +259,9 @@ void librpmDb::dbAccess( librpmDb::constPtr & ptr_r )
   try {
     dbAccess();
   }
-  catch (Exception & excpt_r)
+  catch (const RpmException & excpt_r)
   {
+    ZYPP_CAUGHT(excpt_r);
     ptr_r = 0;
     ZYPP_RETHROW(excpt_r);
   }
@@ -296,7 +293,8 @@ unsigned librpmDb::dbRelease( bool force_r )
     DBG << "dbRelease: release" << (force_r && outstanding ? "(forced)" : "")
       << ", outstanding " << outstanding << endl;
 
-    _defaultDb->_d._error = shared_ptr<Exception>(new Exception("Error::E_RpmDB_access_blocked")); // tag handle invalid
+    _defaultDb->_d._error = shared_ptr<RpmAccessBlockedException>(new RpmAccessBlockedException(_defaultDb->_d._root, _defaultDb->_d._dbPath));
+    // tag handle invalid
     _defaultDb = 0;
     break;
   }
@@ -410,15 +408,13 @@ const Pathname & librpmDb::dbPath() const
   return _d._dbPath;
 }
 
-#warning uncomment thsi function
-#if 0
 ///////////////////////////////////////////////////////////////////
 //
 //
 //	METHOD NAME : librpmDb::error
 //	METHOD TYPE : PMError
 //
-PMError librpmDb::error() const
+shared_ptr<RpmException> librpmDb::error() const
 {
   return _d._error;
 }
@@ -433,7 +429,6 @@ bool librpmDb::empty() const
 {
   return( valid() && ! *db_const_iterator( this ) );
 }
-#endif
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -535,8 +530,7 @@ class librpmDb::db_const_iterator::D {
   public:
 
     librpmDb::constPtr     _dbptr;
-#warning use better type
-    string              _dberr;
+    shared_ptr<RpmException> _dberr;
 
     RpmHeader::constPtr _hptr;
     rpmdbMatchIterator   _mi;
@@ -546,11 +540,13 @@ class librpmDb::db_const_iterator::D {
       , _mi( 0 )
     {
       if ( !_dbptr ) {
-	// try to get librpmDb's default db
-#warning FIXME uncomment
-#if 0
-	_dberr = librpmDb::dbAccess( _dbptr );
-#endif
+	try {
+	  librpmDb::dbAccess( _dbptr );
+	}
+        catch (const RpmException & excpt_r)
+	{
+	  ZYPP_CAUGHT(excpt_r);
+	}
 	if ( !_dbptr ) {
 	  WAR << "No database access: " << _dberr << endl;
 	}
@@ -586,14 +582,11 @@ class librpmDb::db_const_iterator::D {
 	_mi = ::rpmdbFreeIterator( _mi );
 	_hptr = 0;
       }
-#warning uncomment
-#if 0
       if ( _dbptr && _dbptr->error() ) {
 	_dberr = _dbptr->error();
 	WAR << "Lost database access: " << _dberr << endl;
 	_dbptr = 0;
       }
-#endif
       return false;
     }
 
@@ -711,22 +704,19 @@ const RpmHeader::constPtr & librpmDb::db_const_iterator::operator*() const
   return _d._hptr;
 }
 
-#warning FIXME this function
-#if 0
 ///////////////////////////////////////////////////////////////////
 //
 //
 //	METHOD NAME : librpmDb::db_const_iterator::dbError
 //	METHOD TYPE : PMError
 //
-PMError librpmDb::db_const_iterator::dbError() const
+shared_ptr<RpmException> librpmDb::db_const_iterator::dbError() const
 {
   if ( _d._dbptr )
     return _d._dbptr->error();
 
   return _d._dberr;
 }
-#endif
 
 /******************************************************************
 **
