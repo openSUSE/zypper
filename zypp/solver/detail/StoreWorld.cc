@@ -581,7 +581,7 @@ namespace zypp
 
       	if (r_and_d)
       //fprintf (stderr, "==> %s verify %s ? %s\n", r_and_d->asString().c_str(), dep->asString().c_str(), r_and_d->verifyRelation (dep) ? "Y" : "N");
-      	if (r_and_d && r_and_d->verifyRelation (dep)) {
+      	if (r_and_d && r_and_d->dependency()->verifyRelation (dep)) {
 
       	    /* Skip dups if one of them in installed. */
       	    if (r_and_d->resItem()->isInstalled()
