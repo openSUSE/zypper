@@ -45,79 +45,79 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      typedef enum {
-          RESOLVER_INFO_TYPE_INVALID = 0,
-          RESOLVER_INFO_TYPE_NEEDED_BY,
-          RESOLVER_INFO_TYPE_CONFLICTS_WITH,
-          RESOLVER_INFO_TYPE_OBSOLETES,
-          RESOLVER_INFO_TYPE_DEPENDS_ON,
-          RESOLVER_INFO_TYPE_CHILD_OF,
-          RESOLVER_INFO_TYPE_MISSING_REQ,
-          RESOLVER_INFO_TYPE_MISC
-      } ResolverInfoType;
+typedef enum {
+    RESOLVER_INFO_TYPE_INVALID = 0,
+    RESOLVER_INFO_TYPE_NEEDED_BY,
+    RESOLVER_INFO_TYPE_CONFLICTS_WITH,
+    RESOLVER_INFO_TYPE_OBSOLETES,
+    RESOLVER_INFO_TYPE_DEPENDS_ON,
+    RESOLVER_INFO_TYPE_CHILD_OF,
+    RESOLVER_INFO_TYPE_MISSING_REQ,
+    RESOLVER_INFO_TYPE_MISC
+} ResolverInfoType;
 
-      #define RESOLVER_INFO_PRIORITY_USER      500
-      #define RESOLVER_INFO_PRIORITY_VERBOSE   100
-      #define RESOLVER_INFO_PRIORITY_DEBUGGING   0
+#define RESOLVER_INFO_PRIORITY_USER      500
+#define RESOLVER_INFO_PRIORITY_VERBOSE   100
+#define RESOLVER_INFO_PRIORITY_DEBUGGING   0
 
-      typedef void (*ResolverInfoFn) (ResolverInfo_Ptr info, void *data);
+typedef void (*ResolverInfoFn) (ResolverInfo_Ptr info, void *data);
 
-      typedef std::list <ResolverInfo_Ptr> ResolverInfoList;
+typedef std::list <ResolverInfo_Ptr> ResolverInfoList;
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : ResolverInfo
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : ResolverInfo
 
-      class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
+class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
 
-          
+    
 
-        private:
+  private:
 
-          ResolverInfoType _type;
-          ResItem_constPtr _resItem;
-          int _priority;
+    ResolverInfoType _type;
+    ResItem_constPtr _resItem;
+    int _priority;
 
-          bool _error;
-          bool _important;
+    bool _error;
+    bool _important;
 
-        protected:
+  protected:
 
-          ResolverInfo (ResolverInfoType type, ResItem_constPtr resItem, int priority);
+    ResolverInfo (ResolverInfoType type, ResItem_constPtr resItem, int priority);
 
-        public:
+  public:
 
-          virtual ~ResolverInfo();
+    virtual ~ResolverInfo();
 
-          void copy (ResolverInfo_constPtr from);
+    void copy (ResolverInfo_constPtr from);
 
-          // ---------------------------------- I/O
+    // ---------------------------------- I/O
 
-          static std::string toString (const ResolverInfo & context, bool full = false);
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
-          friend std::ostream& operator<<(std::ostream&, const ResolverInfo & context);
-          virtual std::string asString (void ) const;
+    static std::string toString (const ResolverInfo & context, bool full = false);
+    virtual std::ostream & dumpOn(std::ostream & str ) const;
+    friend std::ostream& operator<<(std::ostream&, const ResolverInfo & context);
+    virtual std::string asString (void ) const;
 
-          // ---------------------------------- accessors
+    // ---------------------------------- accessors
 
-          ResolverInfoType type (void) const { return _type; }
-          ResItem_constPtr resItem (void) const { return _resItem; }
-          int priority (void) const { return _priority; }
+    ResolverInfoType type (void) const { return _type; }
+    ResItem_constPtr resItem (void) const { return _resItem; }
+    int priority (void) const { return _priority; }
 
-          int error (void) const { return _error; }
-          void flagAsError (void) { _error = true; }
-          int important (void) const { return _important; }
-          void flagAsImportant (void) { _important = true; }
+    int error (void) const { return _error; }
+    void flagAsError (void) { _error = true; }
+    int important (void) const { return _important; }
+    void flagAsImportant (void) { _important = true; }
 
-          // ---------------------------------- methods
+    // ---------------------------------- methods
 
-          bool merge (ResolverInfo_Ptr to_be_merged);
-          virtual ResolverInfo_Ptr copy (void) const;
+    bool merge (ResolverInfo_Ptr to_be_merged);
+    virtual ResolverInfo_Ptr copy (void) const;
 
-          bool isAbout (ResItem_constPtr resItem) const;
-      };
+    bool isAbout (ResItem_constPtr resItem) const;
+};
 
-      ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////
