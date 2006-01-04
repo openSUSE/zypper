@@ -27,7 +27,7 @@
 #include <list>
 #include <sys/time.h>
 
-#include <zypp/solver/detail/ChannelPtr.h>
+#include "zypp/solver/detail/ChannelPtr.h"
 
 
 /////////////////////////////////////////////////////////////////////////

@@ -22,8 +22,8 @@
 #ifndef _ResolverInfoChildOf_h
 #define _ResolverInfoChildOf_h
 
-#include <zypp/solver/detail/ResolverInfoChildOfPtr.h>
-#include <zypp/solver/detail/ResolverInfoContainer.h>
+#include "zypp/solver/detail/ResolverInfoChildOfPtr.h"
+#include "zypp/solver/detail/ResolverInfoContainer.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

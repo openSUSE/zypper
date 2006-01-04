@@ -25,9 +25,9 @@
 #include <iosfwd>
 #include <string>
 
-#include <zypp/solver/detail/ServiceWorldPtr.h>
-#include <zypp/solver/detail/StoreWorld.h>
-#include <zypp/solver/detail/Channel.h>
+#include "zypp/solver/detail/ServiceWorldPtr.h"
+#include "zypp/solver/detail/StoreWorld.h"
+#include "zypp/solver/detail/Channel.h"
 
 
 /////////////////////////////////////////////////////////////////////////

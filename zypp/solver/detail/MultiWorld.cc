@@ -19,9 +19,9 @@
  * 02111-1307, USA.
  */
 
-#include <zypp/base/String.h>
-#include <zypp/solver/detail/MultiWorld.h>
-#include <zypp/solver/detail/ServiceWorld.h>
+#include "zypp/base/String.h"
+#include "zypp/solver/detail/MultiWorld.h"
+#include "zypp/solver/detail/ServiceWorld.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

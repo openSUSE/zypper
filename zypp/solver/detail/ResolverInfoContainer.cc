@@ -21,7 +21,7 @@
 
 #include <map>
 
-#include <zypp/solver/detail/ResolverInfoContainer.h>
+#include "zypp/solver/detail/ResolverInfoContainer.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

@@ -30,7 +30,7 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
-#include <zypp/solver/detail/PackmanPtr.h>
+#include "zypp/solver/detail/PackmanPtr.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

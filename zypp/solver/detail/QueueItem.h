@@ -30,11 +30,11 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
-#include <zypp/solver/detail/QueueItemPtr.h>
-#include <zypp/solver/detail/ResolverContextPtr.h>
-#include <zypp/solver/detail/ResolverInfo.h>
-#include <zypp/solver/detail/ResItem.h>
-#include <zypp/solver/detail/Channel.h>
+#include "zypp/solver/detail/QueueItemPtr.h"
+#include "zypp/solver/detail/ResolverContextPtr.h"
+#include "zypp/solver/detail/ResolverInfo.h"
+#include "zypp/solver/detail/ResItem.h"
+#include "zypp/solver/detail/Channel.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

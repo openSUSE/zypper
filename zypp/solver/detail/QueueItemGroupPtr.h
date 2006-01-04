@@ -22,7 +22,7 @@
 #define _QueueItemGroup_Ptr_h
 
 #include "zypp/base/PtrTypes.h"
-#include <zypp/solver/detail/QueueItemPtr.h>
+#include "zypp/solver/detail/QueueItemPtr.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

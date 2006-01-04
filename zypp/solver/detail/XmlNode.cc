@@ -23,8 +23,8 @@
  * 02111-1307, USA.
  */
 
-#include <zypp/solver/detail/XmlNode.h>
-#include <zypp/base/Logger.h>
+#include "zypp/solver/detail/XmlNode.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

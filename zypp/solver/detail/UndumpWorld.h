@@ -25,10 +25,10 @@
 #include <iosfwd>
 #include <string>
 
-#include <zypp/solver/detail/UndumpWorldPtr.h>
-#include <zypp/solver/detail/StoreWorld.h>
-#include <zypp/solver/detail/Channel.h>
-#include <zypp/solver/detail/World.h>
+#include "zypp/solver/detail/UndumpWorldPtr.h"
+#include "zypp/solver/detail/StoreWorld.h"
+#include "zypp/solver/detail/Channel.h"
+#include "zypp/solver/detail/World.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

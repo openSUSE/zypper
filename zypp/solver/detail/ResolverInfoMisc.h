@@ -23,8 +23,8 @@
 #define _ResolverInfoMisc_h
 
 #include <string>
-#include <zypp/solver/detail/ResolverInfoMiscPtr.h>
-#include <zypp/solver/detail/ResolverInfoContainer.h>
+#include "zypp/solver/detail/ResolverInfoMiscPtr.h"
+#include "zypp/solver/detail/ResolverInfoContainer.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

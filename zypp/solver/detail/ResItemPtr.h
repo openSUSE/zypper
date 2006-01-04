@@ -22,7 +22,7 @@
 #define _ResItem_Ptr_h
 
 #include "zypp/base/PtrTypes.h"
-#include <zypp/solver/detail/SpecPtr.h>
+#include "zypp/solver/detail/SpecPtr.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

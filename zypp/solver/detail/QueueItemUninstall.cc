@@ -19,14 +19,14 @@
  * 02111-1307, USA.
  */
 
-#include <zypp/solver/detail/QueueItemUninstall.h>
-#include <zypp/solver/detail/QueueItemRequire.h>
-#include <zypp/solver/detail/QueueItem.h>
-#include <zypp/solver/detail/ResolverContext.h>
-#include <zypp/solver/detail/ResolverInfoMissingReq.h>
-#include <zypp/solver/detail/World.h>
-#include <zypp/CapSet.h>
-#include <zypp/base/Logger.h>
+#include "zypp/solver/detail/QueueItemUninstall.h"
+#include "zypp/solver/detail/QueueItemRequire.h"
+#include "zypp/solver/detail/QueueItem.h"
+#include "zypp/solver/detail/ResolverContext.h"
+#include "zypp/solver/detail/ResolverInfoMissingReq.h"
+#include "zypp/solver/detail/World.h"
+#include "zypp/CapSet.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

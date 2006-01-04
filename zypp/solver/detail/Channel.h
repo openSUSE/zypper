@@ -33,9 +33,9 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
-#include <zypp/solver/detail/ChannelPtr.h>
-#include <zypp/solver/detail/WorldPtr.h>
-#include <zypp/solver/detail/XmlNode.h>
+#include "zypp/solver/detail/ChannelPtr.h"
+#include "zypp/solver/detail/WorldPtr.h"
+#include "zypp/solver/detail/XmlNode.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

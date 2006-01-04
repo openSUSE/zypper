@@ -22,7 +22,7 @@
  * 02111-1307, USA.
  */
 
-#include <zypp/solver/detail/Spec.h>
+#include "zypp/solver/detail/Spec.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

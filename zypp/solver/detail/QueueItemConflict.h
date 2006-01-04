@@ -26,11 +26,11 @@
 #include <list>
 #include <string>
 
-#include <zypp/solver/detail/QueueItem.h>
-#include <zypp/solver/detail/QueueItemConflictPtr.h>
-#include <zypp/solver/detail/ResItem.h>
-#include <zypp/solver/detail/Channel.h>
-#include <zypp/Capability.h>
+#include "zypp/solver/detail/QueueItem.h"
+#include "zypp/solver/detail/QueueItemConflictPtr.h"
+#include "zypp/solver/detail/ResItem.h"
+#include "zypp/solver/detail/Channel.h"
+#include "zypp/Capability.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

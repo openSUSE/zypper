@@ -23,8 +23,8 @@
 #define _ResolverInfoDependsOn_h
 
 #include <string>
-#include <zypp/solver/detail/ResolverInfoDependsOnPtr.h>
-#include <zypp/solver/detail/ResolverInfoContainer.h>
+#include "zypp/solver/detail/ResolverInfoDependsOnPtr.h"
+#include "zypp/solver/detail/ResolverInfoContainer.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

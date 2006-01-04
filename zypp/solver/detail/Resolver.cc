@@ -19,14 +19,14 @@
  * 02111-1307, USA.
  */
 
-#include <zypp/solver/detail/Resolver.h>
-#include <zypp/solver/detail/ResolverContext.h>
-#include <zypp/solver/detail/ResolverQueue.h>
-#include <zypp/solver/detail/ResItem.h>
-#include <zypp/solver/detail/World.h>
-#include <zypp/solver/detail/StoreWorld.h>
-#include <zypp/solver/detail/MultiWorld.h>
-#include <zypp/base/Logger.h>
+#include "zypp/solver/detail/Resolver.h"
+#include "zypp/solver/detail/ResolverContext.h"
+#include "zypp/solver/detail/ResolverQueue.h"
+#include "zypp/solver/detail/ResItem.h"
+#include "zypp/solver/detail/World.h"
+#include "zypp/solver/detail/StoreWorld.h"
+#include "zypp/solver/detail/MultiWorld.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

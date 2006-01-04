@@ -22,7 +22,7 @@
  * 02111-1307, USA.
  */
 
-#include <zypp/solver/detail/Pending.h>
+#include "zypp/solver/detail/Pending.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

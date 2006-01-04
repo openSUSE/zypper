@@ -22,8 +22,8 @@
 #ifndef _ResolverInfoConflictsWith_h
 #define _ResolverInfoConflictsWith_h
 
-#include <zypp/solver/detail/ResolverInfoConflictsWithPtr.h>
-#include <zypp/solver/detail/ResolverInfoContainer.h>
+#include "zypp/solver/detail/ResolverInfoConflictsWithPtr.h"
+#include "zypp/solver/detail/ResolverInfoContainer.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

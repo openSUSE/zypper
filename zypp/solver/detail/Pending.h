@@ -30,7 +30,7 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
-#include <zypp/solver/detail/PendingPtr.h>
+#include "zypp/solver/detail/PendingPtr.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

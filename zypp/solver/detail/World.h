@@ -30,16 +30,16 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
-#include <zypp/solver/detail/WorldPtr.h>
-#include <zypp/solver/detail/MultiWorldPtr.h>
-#include <zypp/solver/detail/ResItem.h>
-#include <zypp/solver/detail/Channel.h>
-#include <zypp/solver/detail/Match.h>
-#include <zypp/solver/detail/Pending.h>
-#include <zypp/solver/detail/Packman.h>
-#include <zypp/solver/detail/Package.h>
-#include <zypp/solver/detail/PackageUpdate.h>
-#include <zypp/Capability.h>
+#include "zypp/solver/detail/WorldPtr.h"
+#include "zypp/solver/detail/MultiWorldPtr.h"
+#include "zypp/solver/detail/ResItem.h"
+#include "zypp/solver/detail/Channel.h"
+#include "zypp/solver/detail/Match.h"
+#include "zypp/solver/detail/Pending.h"
+#include "zypp/solver/detail/Packman.h"
+#include "zypp/solver/detail/Package.h"
+#include "zypp/solver/detail/PackageUpdate.h"
+#include "zypp/Capability.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

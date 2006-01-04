@@ -22,8 +22,8 @@
 #ifndef _ResolverInfoNeededBy_h
 #define _ResolverInfoNeededBy_h
 
-#include <zypp/solver/detail/ResolverInfoNeededByPtr.h>
-#include <zypp/solver/detail/ResolverInfoContainer.h>
+#include "zypp/solver/detail/ResolverInfoNeededByPtr.h"
+#include "zypp/solver/detail/ResolverInfoContainer.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

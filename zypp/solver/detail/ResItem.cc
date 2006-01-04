@@ -21,21 +21,21 @@
  */
 
 #include <assert.h>
-#include <zypp/solver/detail/ResItem.h>
-#include <zypp/ResObject.h>
-#include <zypp/Package.h>
-#include <zypp/Selection.h>
-#include <zypp/Patch.h>
-#include <zypp/Message.h>
-#include <zypp/Script.h>
-#include <zypp/Product.h>
-#include <zypp/detail/PackageImpl.h>
-#include <zypp/detail/SelectionImpl.h>
-#include <zypp/detail/PatchImpl.h>
-#include <zypp/detail/MessageImpl.h>
-#include <zypp/detail/ScriptImpl.h>
-#include <zypp/detail/ProductImpl.h>
-#include <zypp/base/String.h>
+#include "zypp/solver/detail/ResItem.h"
+#include "zypp/ResObject.h"
+#include "zypp/Package.h"
+#include "zypp/Selection.h"
+#include "zypp/Patch.h"
+#include "zypp/Message.h"
+#include "zypp/Script.h"
+#include "zypp/Product.h"
+#include "zypp/detail/PackageImpl.h"
+#include "zypp/detail/SelectionImpl.h"
+#include "zypp/detail/PatchImpl.h"
+#include "zypp/detail/MessageImpl.h"
+#include "zypp/detail/ScriptImpl.h"
+#include "zypp/detail/ProductImpl.h"
+#include "zypp/base/String.h"
 
 
 /////////////////////////////////////////////////////////////////////////

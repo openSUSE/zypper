@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#include <zypp/solver/detail/QueueItem.h>
-#include <zypp/solver/detail/ResolverContext.h>
+#include "zypp/solver/detail/QueueItem.h"
+#include "zypp/solver/detail/ResolverContext.h"
 
 
 /////////////////////////////////////////////////////////////////////////

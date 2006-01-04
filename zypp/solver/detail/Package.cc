@@ -19,16 +19,16 @@
  * 02111-1307, USA.
  */
 
-#include <zypp/solver/detail/utils.h>
-#include <zypp/solver/detail/Package.h>
-#include <zypp/Package.h>
-#include <zypp/detail/PackageImpl.h>
-#include <zypp/solver/detail/PackageUpdate.h>
-#include <zypp/solver/detail/MultiWorld.h>
-#include <zypp/solver/detail/XmlNode.h>
-#include <zypp/base/Logger.h>
-#include <zypp/CapFactory.h>
-#include <zypp/CapSet.h>
+#include "zypp/solver/detail/utils.h"
+#include "zypp/solver/detail/Package.h"
+#include "zypp/Package.h"
+#include "zypp/detail/PackageImpl.h"
+#include "zypp/solver/detail/PackageUpdate.h"
+#include "zypp/solver/detail/MultiWorld.h"
+#include "zypp/solver/detail/XmlNode.h"
+#include "zypp/base/Logger.h"
+#include "zypp/CapFactory.h"
+#include "zypp/CapSet.h"
 
 
 /////////////////////////////////////////////////////////////////////////

@@ -21,17 +21,17 @@
 
 #include <map>
 
-#include <zypp/base/String.h>
-#include <zypp/solver/detail/ResolverQueue.h>
-#include <zypp/solver/detail/QueueItemBranch.h>
-#include <zypp/solver/detail/QueueItemConflict.h>
-#include <zypp/solver/detail/QueueItemGroup.h>
-#include <zypp/solver/detail/QueueItemInstall.h>
-#include <zypp/solver/detail/QueueItemRequire.h>
-#include <zypp/solver/detail/QueueItemUninstall.h>
-#include <zypp/solver/detail/ResolverContext.h>
-#include <zypp/CapSet.h>
-#include <zypp/base/Logger.h>
+#include "zypp/base/String.h"
+#include "zypp/solver/detail/ResolverQueue.h"
+#include "zypp/solver/detail/QueueItemBranch.h"
+#include "zypp/solver/detail/QueueItemConflict.h"
+#include "zypp/solver/detail/QueueItemGroup.h"
+#include "zypp/solver/detail/QueueItemInstall.h"
+#include "zypp/solver/detail/QueueItemRequire.h"
+#include "zypp/solver/detail/QueueItemUninstall.h"
+#include "zypp/solver/detail/ResolverContext.h"
+#include "zypp/CapSet.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

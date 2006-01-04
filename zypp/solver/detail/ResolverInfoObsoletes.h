@@ -22,8 +22,8 @@
 #ifndef _ResolverInfoObsoletes_h
 #define _ResolverInfoObsoletes_h
 
-#include <zypp/solver/detail/ResolverInfoObsoletesPtr.h>
-#include <zypp/solver/detail/ResolverInfoContainer.h>
+#include "zypp/solver/detail/ResolverInfoObsoletesPtr.h"
+#include "zypp/solver/detail/ResolverInfoContainer.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

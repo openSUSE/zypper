@@ -19,12 +19,12 @@
  * 02111-1307, USA.
  */
 
-#include <zypp/solver/detail/Match.h>
-#include <zypp/solver/detail/World.h>
-#include <zypp/Rel.h>
+#include "zypp/solver/detail/Match.h"
+#include "zypp/solver/detail/World.h"
+#include "zypp/Rel.h"
 
-#include <zypp/CapFactory.h>
-#include <zypp/CapSet.h>
+#include "zypp/CapFactory.h"
+#include "zypp/CapSet.h"
 
 
 /////////////////////////////////////////////////////////////////////////

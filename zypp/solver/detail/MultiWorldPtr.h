@@ -22,7 +22,7 @@
 #define _MultiWorld_Ptr_h
 
 #include "zypp/base/PtrTypes.h"
-#include <zypp/solver/detail/WorldPtr.h>
+#include "zypp/solver/detail/WorldPtr.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

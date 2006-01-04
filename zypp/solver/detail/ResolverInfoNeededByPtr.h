@@ -22,7 +22,7 @@
 #define _ResolverInfoNeededBy_Ptr_h
 
 #include "zypp/base/PtrTypes.h"
-#include <zypp/solver/detail/ResolverInfoPtr.h>
+#include "zypp/solver/detail/ResolverInfoPtr.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

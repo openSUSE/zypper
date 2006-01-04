@@ -22,7 +22,7 @@
 #define _Package_Ptr_h
 
 #include "zypp/base/PtrTypes.h"
-#include <zypp/solver/detail/ResItemPtr.h>
+#include "zypp/solver/detail/ResItemPtr.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

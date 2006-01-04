@@ -27,15 +27,15 @@
 #ifndef __EXTRACT_H__
 #define __EXTRACT_H__
 
-#include <zypp/solver/detail/Channel.h>
-#include <zypp/solver/detail/XmlNode.h>
-#include <zypp/solver/detail/Channel.h>
-#include <zypp/solver/detail/Pending.h>
-#include <zypp/solver/detail/ResItem.h>
-#include <zypp/solver/detail/Package.h>
-#include <zypp/solver/detail/Match.h>
-#include <zypp/solver/detail/StoreWorldPtr.h>
-#include <zypp/solver/detail/PackmanPtr.h>
+#include "zypp/solver/detail/Channel.h"
+#include "zypp/solver/detail/XmlNode.h"
+#include "zypp/solver/detail/Channel.h"
+#include "zypp/solver/detail/Pending.h"
+#include "zypp/solver/detail/ResItem.h"
+#include "zypp/solver/detail/Package.h"
+#include "zypp/solver/detail/Match.h"
+#include "zypp/solver/detail/StoreWorldPtr.h"
+#include "zypp/solver/detail/PackmanPtr.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

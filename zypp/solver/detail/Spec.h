@@ -30,12 +30,12 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
-#include <zypp/solver/detail/Ustring.h>
-#include <zypp/solver/detail/Hash.h>
-#include <zypp/solver/detail/SpecPtr.h>
-#include <zypp/solver/detail/XmlNode.h>
-#include <zypp/Edition.h>
-#include <zypp/ResObject.h>
+#include "zypp/solver/detail/Ustring.h"
+#include "zypp/solver/detail/Hash.h"
+#include "zypp/solver/detail/SpecPtr.h"
+#include "zypp/solver/detail/XmlNode.h"
+#include "zypp/Edition.h"
+#include "zypp/ResObject.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

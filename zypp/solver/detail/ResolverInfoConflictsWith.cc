@@ -21,8 +21,8 @@
 
 #include <map>
 
-#include <zypp/solver/detail/ResolverInfo.h>
-#include <zypp/solver/detail/ResolverInfoConflictsWith.h>
+#include "zypp/solver/detail/ResolverInfo.h"
+#include "zypp/solver/detail/ResolverInfoConflictsWith.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

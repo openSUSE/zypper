@@ -27,13 +27,13 @@
 #include <list>
 #include <map>
 
-#include <zypp/solver/detail/StoreWorldPtr.h>
-#include <zypp/solver/detail/ResItemAndDependency.h>
-#include <zypp/solver/detail/PackmanPtr.h>
-#include <zypp/solver/detail/World.h>
-#include <zypp/solver/detail/ResItem.h>
-#include <zypp/solver/detail/Match.h>
-#include <zypp/Capability.h>
+#include "zypp/solver/detail/StoreWorldPtr.h"
+#include "zypp/solver/detail/ResItemAndDependency.h"
+#include "zypp/solver/detail/PackmanPtr.h"
+#include "zypp/solver/detail/World.h"
+#include "zypp/solver/detail/ResItem.h"
+#include "zypp/solver/detail/Match.h"
+#include "zypp/Capability.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

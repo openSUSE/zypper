@@ -23,11 +23,11 @@
 
 #include <iostream>
 
-#include <zypp/base/Logger.h>
-#include <zypp/base/String.h>
+#include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
 
-#include <zypp/solver/detail/Channel.h>
-#include <zypp/solver/detail/World.h>
+#include "zypp/solver/detail/Channel.h"
+#include "zypp/solver/detail/World.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

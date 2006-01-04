@@ -27,10 +27,10 @@
 #include <iosfwd>
 #include <string>
 
-#include <zypp/solver/detail/Channel.h>
-#include <zypp/solver/detail/Package.h>
-#include <zypp/CapSet.h>
-#include <zypp/solver/detail/XmlNode.h>
+#include "zypp/solver/detail/Channel.h"
+#include "zypp/solver/detail/Package.h"
+#include "zypp/CapSet.h"
+#include "zypp/solver/detail/XmlNode.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

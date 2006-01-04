@@ -21,19 +21,19 @@
 #ifndef _LIBzypp_H
 #define _LIBzypp_H
 
-#include <zypp/solver/detail/Channel.h>
-#include <zypp/solver/detail/Match.h>
-#include <zypp/solver/detail/ResItem.h>
-#include <zypp/solver/detail/Spec.h>
-#include <zypp/solver/detail/World.h>
-#include <zypp/solver/detail/UndumpWorld.h>
-#include <zypp/solver/detail/StoreWorld.h>
-#include <zypp/solver/detail/MultiWorld.h>
-#include <zypp/solver/detail/Resolver.h>
-#include <zypp/solver/detail/ResolverContext.h>
-#include <zypp/solver/detail/XmlNode.h>
+#include "zypp/solver/detail/Channel.h"
+#include "zypp/solver/detail/Match.h"
+#include "zypp/solver/detail/ResItem.h"
+#include "zypp/solver/detail/Spec.h"
+#include "zypp/solver/detail/World.h"
+#include "zypp/solver/detail/UndumpWorld.h"
+#include "zypp/solver/detail/StoreWorld.h"
+#include "zypp/solver/detail/MultiWorld.h"
+#include "zypp/solver/detail/Resolver.h"
+#include "zypp/solver/detail/ResolverContext.h"
+#include "zypp/solver/detail/XmlNode.h"
 
-#include <zypp/solver/detail/utils.h>
-#include <zypp/solver/detail/extract.h>
+#include "zypp/solver/detail/utils.h"
+#include "zypp/solver/detail/extract.h"
 
 #endif	// _LIBzypp_H

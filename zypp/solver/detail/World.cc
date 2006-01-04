@@ -21,8 +21,8 @@
 
 #include <map>
 
-#include <zypp/solver/detail/MultiWorld.h>
-#include <zypp/solver/detail/Subscription.h>
+#include "zypp/solver/detail/MultiWorld.h"
+#include "zypp/solver/detail/Subscription.h"
 #include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////

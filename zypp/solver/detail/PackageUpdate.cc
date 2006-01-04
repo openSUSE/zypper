@@ -23,10 +23,10 @@
 #include <string>
 #include <libgen.h>
 
-#include <zypp/base/String.h>
-#include <zypp/solver/detail/utils.h>
-#include <zypp/solver/detail/PackageUpdate.h>
-#include <zypp/solver/detail/Package.h>
+#include "zypp/base/String.h"
+#include "zypp/solver/detail/utils.h"
+#include "zypp/solver/detail/PackageUpdate.h"
+#include "zypp/solver/detail/Package.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

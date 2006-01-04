@@ -19,10 +19,10 @@
  * 02111-1307, USA.
  */
 
-#include <zypp/solver/detail/QueueItemBranch.h>
-#include <zypp/solver/detail/QueueItem.h>
-#include <zypp/solver/detail/Resolver.h>
-#include <zypp/base/Logger.h>
+#include "zypp/solver/detail/QueueItemBranch.h"
+#include "zypp/solver/detail/QueueItem.h"
+#include "zypp/solver/detail/Resolver.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

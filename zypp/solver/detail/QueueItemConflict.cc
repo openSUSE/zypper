@@ -21,19 +21,19 @@
 
 #include "config.h"
 
-#include <zypp/solver/detail/QueueItemConflict.h>
-#include <zypp/solver/detail/QueueItemBranch.h>
-#include <zypp/solver/detail/QueueItemInstall.h>
-#include <zypp/solver/detail/QueueItemUninstall.h>
-#include <zypp/solver/detail/QueueItem.h>
-#include <zypp/solver/detail/World.h>
-#include <zypp/solver/detail/ResolverContext.h>
-#include <zypp/solver/detail/ResolverInfoConflictsWith.h>
-#include <zypp/solver/detail/ResolverInfoMisc.h>
-#include <zypp/solver/detail/ResolverInfoObsoletes.h>
-#include <zypp/CapFactory.h>
-#include <zypp/CapSet.h>
-#include <zypp/base/Logger.h>
+#include "zypp/solver/detail/QueueItemConflict.h"
+#include "zypp/solver/detail/QueueItemBranch.h"
+#include "zypp/solver/detail/QueueItemInstall.h"
+#include "zypp/solver/detail/QueueItemUninstall.h"
+#include "zypp/solver/detail/QueueItem.h"
+#include "zypp/solver/detail/World.h"
+#include "zypp/solver/detail/ResolverContext.h"
+#include "zypp/solver/detail/ResolverInfoConflictsWith.h"
+#include "zypp/solver/detail/ResolverInfoMisc.h"
+#include "zypp/solver/detail/ResolverInfoObsoletes.h"
+#include "zypp/CapFactory.h"
+#include "zypp/CapSet.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

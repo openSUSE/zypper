@@ -27,11 +27,11 @@
 #include <string>
 #include <sys/types.h>
 
-#include <zypp/solver/detail/PackageUpdatePtr.h>
-#include <zypp/solver/detail/PackagePtr.h>
-#include <zypp/solver/detail/Spec.h>
-#include <zypp/solver/detail/Importance.h>
-#include <zypp/solver/detail/XmlNode.h>
+#include "zypp/solver/detail/PackageUpdatePtr.h"
+#include "zypp/solver/detail/PackagePtr.h"
+#include "zypp/solver/detail/Spec.h"
+#include "zypp/solver/detail/Importance.h"
+#include "zypp/solver/detail/XmlNode.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

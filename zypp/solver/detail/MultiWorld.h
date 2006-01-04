@@ -25,11 +25,11 @@
 #include <iosfwd>
 #include <string>
 
-#include <zypp/solver/detail/MultiWorldPtr.h>
-#include <zypp/solver/detail/ServiceWorldPtr.h>
-#include <zypp/solver/detail/World.h>
-#include <zypp/solver/detail/Pending.h>
-#include <zypp/Capability.h>
+#include "zypp/solver/detail/MultiWorldPtr.h"
+#include "zypp/solver/detail/ServiceWorldPtr.h"
+#include "zypp/solver/detail/World.h"
+#include "zypp/solver/detail/Pending.h"
+#include "zypp/Capability.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

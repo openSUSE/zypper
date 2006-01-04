@@ -33,7 +33,7 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
-#include <zypp/solver/detail/XmlNodePtr.h>
+#include "zypp/solver/detail/XmlNodePtr.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

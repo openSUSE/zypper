@@ -31,13 +31,13 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
-#include <zypp/solver/detail/ResItemPtr.h>
-#include <zypp/solver/detail/StoreWorldPtr.h>
-#include <zypp/CapSet.h>
-#include <zypp/solver/detail/Channel.h>
-#include <zypp/ResObject.h>
-#include <zypp/Edition.h>
-#include <zypp/Dependencies.h>
+#include "zypp/solver/detail/ResItemPtr.h"
+#include "zypp/solver/detail/StoreWorldPtr.h"
+#include "zypp/CapSet.h"
+#include "zypp/solver/detail/Channel.h"
+#include "zypp/ResObject.h"
+#include "zypp/Edition.h"
+#include "zypp/Dependencies.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

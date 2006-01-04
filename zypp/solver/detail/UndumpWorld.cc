@@ -19,9 +19,9 @@
  * 02111-1307, USA.
  */
 
-#include <zypp/solver/detail/UndumpWorld.h>
-#include <zypp/solver/detail/extract.h>
-#include <zypp/base/Logger.h>
+#include "zypp/solver/detail/UndumpWorld.h"
+#include "zypp/solver/detail/extract.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

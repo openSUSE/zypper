@@ -26,8 +26,8 @@
 #include <list>
 #include <map>
 #include <string>
-#include <zypp/solver/detail/ResolverInfoContainerPtr.h>
-#include <zypp/solver/detail/ResolverInfo.h>
+#include "zypp/solver/detail/ResolverInfoContainerPtr.h"
+#include "zypp/solver/detail/ResolverInfo.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

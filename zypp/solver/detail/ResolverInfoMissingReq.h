@@ -22,9 +22,9 @@
 #ifndef _ResolverInfoMissingReq_h
 #define _ResolverInfoMissingReq_h
 
-#include <zypp/solver/detail/ResolverInfoMissingReqPtr.h>
-#include <zypp/solver/detail/ResolverInfo.h>
-#include <zypp/Capability.h>
+#include "zypp/solver/detail/ResolverInfoMissingReqPtr.h"
+#include "zypp/solver/detail/ResolverInfo.h"
+#include "zypp/Capability.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

@@ -29,12 +29,12 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
-#include <zypp/solver/detail/MatchPtr.h>
-#include <zypp/solver/detail/Channel.h>
-#include <zypp/solver/detail/Importance.h>
-#include <zypp/solver/detail/ResItem.h>
-#include <zypp/solver/detail/WorldPtr.h>
-#include <zypp/solver/detail/XmlNode.h>
+#include "zypp/solver/detail/MatchPtr.h"
+#include "zypp/solver/detail/Channel.h"
+#include "zypp/solver/detail/Importance.h"
+#include "zypp/solver/detail/ResItem.h"
+#include "zypp/solver/detail/WorldPtr.h"
+#include "zypp/solver/detail/XmlNode.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
