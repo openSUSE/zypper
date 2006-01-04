@@ -22,6 +22,7 @@
 #define _ResItem_h
 
 #include <list>
+#include <set>
 #include <iosfwd>
 #include <string>
 #include <sys/types.h>
@@ -50,6 +51,8 @@ namespace zypp
 
       typedef std::list<ResItem_Ptr> ResItemList;
       typedef std::list<ResItem_constPtr> CResItemList;
+
+      typedef std::set<ResItem_constPtr> CResItemSet;
 
       typedef bool (*ResItemFn) (ResItem_Ptr r, void *data);
       typedef bool (*CResItemFn) (ResItem_constPtr r, void *data);

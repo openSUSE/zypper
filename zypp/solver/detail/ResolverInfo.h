@@ -70,8 +70,6 @@ typedef std::list <ResolverInfo_Ptr> ResolverInfoList;
 
 class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
 
-    
-
   private:
 
     ResolverInfoType _type;

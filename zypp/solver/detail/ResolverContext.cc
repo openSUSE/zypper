@@ -722,52 +722,44 @@ ResolverContext::addErrorString (ResItem_constPtr resItem, string msg)
 static void
 mark_important_info (InfoList & il)
 {
-    CResItemList error_list;		// FIXME, a map is faster
+    // set of all resItems mentioned in the InfoList
+    CResItemSet error_set;
 
     bool did_something;
     int pass_num = 1;
 
-    /* First of all, store all error-resItems in a list. */
+    /* First of all, store all error-resItems in a set. */
 
-    for (InfoList::iterator iter = il.begin(); iter != il.end(); iter++) {
-	if ((*iter) != NULL					// list items might be set to NULL
-	    && (*iter)->error ()) {
-	    ResItem_constPtr resItem = (*iter)->resItem();
+    for (InfoList::iterator info_iter = il.begin(); info_iter != il.end(); ++info_iter) {
+	ResolverInfo_Ptr info = (*info_iter);
+	if (info != NULL						// list items might be NULL
+	    && info->error ()) {					// only look at error infos
+
+	    ResItem_constPtr resItem = info->resItem();			// get resItem from InfoList
 	    if (resItem != NULL) {
-		CResItemList::iterator pos;
-		for (pos = error_list.begin(); pos != error_list.end(); pos++) {
-		    if (*pos == resItem)
-			break;
-		}
-		if (pos == error_list.end()) {
-		    error_list.push_front (resItem);
-		}
+		error_set.insert (resItem);
 	    }
 
-	    CResItemList resItems;
+	    // the info might be a container, check it by doing a dynamic cast
 
-	    ResolverInfoContainer_constPtr c = dynamic_pointer_cast<const ResolverInfoContainer>(*iter);			// check if it really is a container
-	    if (c != NULL) resItems = c->resItems();
+	    CResItemList containerItems;
+	    ResolverInfoContainer_constPtr c = dynamic_pointer_cast<const ResolverInfoContainer>(*info_iter);
+	    if (c != NULL) containerItems = c->resItems();
 
-	    for (CResItemList::iterator res_iter = resItems.begin(); res_iter != resItems.end(); res_iter++) {
-		CResItemList::iterator pos;
-		for (pos = error_list.begin(); pos != error_list.end(); pos++) {
-#if 0
-#warning FIXIT FIXIT FIXIT FIXIT FIXIT FIXIT FIXIT FIXIT FIXIT FIXIT FIXIT FIXIT
-            // compares ResItem* and ResolverInfo*
-            // What is this supposed to do?
-		    if (*pos == *iter)
-			break;
-#endif
-		}
-		if (pos == error_list.end()) {
-		    error_list.push_front (*res_iter);
+	    // containerItems is non-empty if info is really a ResolverInfoContainer
+
+	    for (CResItemList::iterator res_iter = containerItems.begin(); res_iter != containerItems.end(); res_iter++) {
+		ResItem_constPtr resItem = (*res_iter);
+		if (resItem != NULL) {
+		    error_set.insert (resItem);
 		}
 	    }
 	}
     }
 
-    CResItemList important_list;	// FIXME, hash is faster
+    // now collect all important ones
+
+    CResItemSet important_set;
 
     do {
 	++pass_num;
@@ -775,21 +767,22 @@ mark_important_info (InfoList & il)
 
 	did_something = false;
 
-	for (InfoList::iterator iter = il.begin(); iter != il.end(); iter++) {
-	    if ((*iter) != NULL					// list items might be set to NULL
-		&& (*iter)->important ()) {
+	for (InfoList::iterator info_iter = il.begin(); info_iter != il.end(); ++info_iter) {
+	    ResolverInfo_Ptr info = (*info_iter);
+	    if (info != NULL						// list items might be set to NULL
+		&& info->important ()) {				// only look at important ones
 		bool should_be_important = false;
 
-		for (CResItemList::const_iterator res_iter = error_list.begin(); res_iter != error_list.end() && ! should_be_important; res_iter++) {
-		    ResolverInfoContainer_constPtr c = dynamic_pointer_cast<const ResolverInfoContainer>(*iter);
+		for (CResItemSet::const_iterator res_iter = error_set.begin(); res_iter != error_set.end() && ! should_be_important; ++res_iter) {
+		    ResolverInfoContainer_constPtr c = dynamic_pointer_cast<const ResolverInfoContainer>(*info_iter);
 		    if (c != NULL					// check if it really is a container
 			&& c->mentions (*res_iter)) {
 			should_be_important = true;
 		    }
 		}
 
-		for (CResItemList::const_iterator res_iter = important_list.begin(); res_iter != important_list.end() && ! should_be_important; res_iter++) {
-		    if ((*iter)->isAbout (*res_iter)) {
+		for (CResItemSet::const_iterator res_iter = important_set.begin(); res_iter != important_set.end() && ! should_be_important; ++res_iter) {
+		    if (info->isAbout (*res_iter)) {
 			should_be_important = true;
 			break;
 		    }
@@ -797,19 +790,12 @@ mark_important_info (InfoList & il)
 
 		if (should_be_important) {
 		    did_something = true;
-		    (*iter)->flagAsImportant ();
+		    info->flagAsImportant ();
 		    CResItemList resItems;
-		    ResolverInfoContainer_constPtr c = dynamic_pointer_cast<const ResolverInfoContainer>(*iter);		// check if it really is a container
+		    ResolverInfoContainer_constPtr c = dynamic_pointer_cast<const ResolverInfoContainer>(*info_iter);		// check if it really is a container
 		    if (c != NULL) resItems = c->resItems();
 		    for (CResItemList::iterator res_iter = resItems.begin(); res_iter != resItems.end(); res_iter++) {
-			CResItemList::iterator pos;
-			for (pos = important_list.begin(); pos != important_list.end(); pos++) {
-			    if (*pos == *res_iter)
-				break;
-			}
-			if (pos == important_list.end()) {
-			    important_list.push_front (*res_iter);
-			}
+			important_set.insert (*res_iter);
 		    }
 		}
 	    }
@@ -826,7 +812,6 @@ ResolverContext::foreachInfo (ResItem_Ptr resItem, int priority, ResolverInfoFn 
     InfoList info_list;
 
     ResolverContext_Ptr context = this;
-
 
     // Assemble a list of copies of all of the info objects
     while (context != NULL) {
@@ -1047,7 +1032,7 @@ dup_name_check_cb (ResItem_constPtr resItem, ResItemStatus status, void *data)
     if (! info->flag
 	&& resItem_status_is_to_be_installed (status)
 	&& info->res->name() == resItem->name()
-        && !resItem->equals(info->res)) {
+	&& !resItem->equals(info->res)) {
 	info->flag = true;
     }
 }
@@ -1128,21 +1113,21 @@ ResolverContext::compare (ResolverContext_Ptr context)
     int cmp;
 
     if (this == context)
-        return 0;
+	return 0;
 
     cmp = partialCompare (context);
     if (cmp)
-        return cmp;
+	return cmp;
 
     /* High numbers are bad.  Smaller downloads are best. */
     cmp = rev_num_cmp (_download_size, context->_download_size);
     if (cmp)
-        return cmp;
+	return cmp;
 
     /* High numbers are bad.  Less disk space consumed is good. */
     cmp = rev_num_cmp (_install_size, context->_install_size);
     if (cmp)
-        return cmp;
+	return cmp;
 
     return 0;
 }
