@@ -21,13 +21,13 @@
 
 #include "config.h"
 
-#include <zypp/solver/detail/Packman.h>
-#include <zypp/solver/detail/StoreWorld.h>
-#include <zypp/solver/detail/ResItemAndDependency.h>
-#include <zypp/solver/detail/debug.h>
-#include <zypp/Arch.h>
-#include <zypp/CapSet.h>
-#include <zypp/base/Logger.h>
+#include "zypp/solver/detail/Packman.h"
+#include "zypp/solver/detail/StoreWorld.h"
+#include "zypp/solver/detail/ResItemAndDependency.h"
+#include "zypp/base/Logger.h"
+#include "zypp/Arch.h"
+#include "zypp/CapSet.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -123,8 +123,9 @@ namespace zypp
 
       	/* Filter out resItems with totally incompatible arches */
       	if ( !resItem->arch().compatibleWith(Arch::System)) {
-      	    rc_debug (RC_DEBUG_LEVEL_DEBUG, "Ignoring resItem with incompatible arch: Arch '%s', %s",  resItem->arch().asString().c_str(), resItem->asString(true).c_str());
-      	    goto finished;
+      	    DBG << "Ignoring resItem with incompatible arch: Arch '" << resItem->arch().asString()
+		<< "', " << resItem->asString(true) << endl;
+       	    goto finished;
       	}
 
       	package_name = resItem->name().c_str();
@@ -135,7 +136,7 @@ namespace zypp
       	   check and produce a more explicit warning message. */
 
       	if (resItem == dup_res) {
-      	    rc_debug (RC_DEBUG_LEVEL_WARNING, "Ignoring re-add of resItem '%s'", package_name);
+      	    WAR << "Ignoring re-add of resItem '" << package_name << "'" << endl;
       	    goto finished;
       	}
 
@@ -149,8 +150,9 @@ namespace zypp
       	       version number, just ignore it. */
 
       	    if (cmp < 0) {
-      		rc_debug (RC_DEBUG_LEVEL_INFO, "Not adding resItem '%s'.\n\tA newer version is already in the channel.", resItem->asString().c_str());
-      		rc_debug (RC_DEBUG_LEVEL_INFO, "\t%s", dup_res->asString().c_str());
+      		MIL << "Not adding resItem '" << resItem->asString() << "'." << endl << "\tA newer version is already in the channel."
+		    << endl;
+      		MIL << "\t" <<  dup_res->asString() << endl;
       		goto finished;
       	    }
 
@@ -161,17 +163,20 @@ namespace zypp
       	       first resItem and just return. */
 
       	    if (cmp == 0 && arch_score > dup_arch_score) {
-      		rc_debug (RC_DEBUG_LEVEL_INFO, "Not adding resItem '%s'.\n\tAnother resItem with the same version but with a preferred arch is already in the channel.", resItem->asString().c_str());
-      		rc_debug (RC_DEBUG_LEVEL_INFO, "\t%s", dup_res->asString().c_str());
+      		MIL << "Not adding resItem '" << resItem->asString() << "'." << endl
+		    << "\tAnother resItem with the same version but with a preferred arch is already in the channel." << endl;
+      		MIL << "\t" <<  dup_res->asString() << endl;
       		goto finished;
-      	    }
+	     }
 #endif
 
       	    /* Otherwise we throw out the old resItem and proceed with
       	       adding the newer one. */
 
-      	    rc_debug (RC_DEBUG_LEVEL_INFO, "Replacing resItem '%s'.\n\tAnother resItem in the channel has the same name and a superior %s.",  dup_res->asString().c_str(), cmp ? "version" : "arch");
-      	    rc_debug (RC_DEBUG_LEVEL_INFO, "\t%s", resItem->asString().c_str());
+	    MIL << "Replacing resItem '" << dup_res->asString() << "'." << endl
+		<< "\tAnother resItem in the channel has the same name and a superior "
+		<< (cmp ? "version" : "arch") <<  "." << endl;
+      	    MIL << "\t" << resItem->asString() << endl;
 
       	    removeResItem (dup_res);
       	}

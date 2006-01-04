@@ -25,21 +25,22 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <iostream>
 #include <ctype.h>
 #include <string>
 
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
-#include <zypp/solver/detail/utils.h>
+#include "zypp/solver/detail/utils.h"
 
-#include <zlib.h>
+#include "zlib.h"
 #ifdef HAVE_BZ2
 /* Older bzlib didn't icnlude stdio.h */
 #  include <bzlib.h>
 #endif
 
-#include <zypp/solver/detail/debug.h>
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -602,7 +603,8 @@ namespace zypp
       	ByteArray *byte_array = NULL;
       
       	if (uncompress_memory (data, s.st_size, &byte_array)) {
-      	    debug (RC_DEBUG_LEVEL_WARNING, "Uncompression of '%s' failed", filename.c_str());
+      	    WAR << "Uncompression of '" << filename
+		<< "' failed" << endl;
       	} else {
       	    buf = (Buffer *)malloc(sizeof (Buffer));
       	    buf->data       = byte_array->data;

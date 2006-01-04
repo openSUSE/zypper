@@ -10,7 +10,6 @@ INCLUDES = 						\
 	-DG_LOG_DOMAIN=\"solver_detail\"
 
 include_HEADERS = \
-	debug.h				\
 	utils.h				\
 	extract.h			\
 	Ustring.h 			\
@@ -92,7 +91,6 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_solver_detail.la
 
 lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	utils.cc					\
-	debug.cc					\
 	Spec.cc						\
 	Channel.cc					\
 	Subscription.cc					\

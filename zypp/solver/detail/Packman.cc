@@ -19,8 +19,7 @@
  * 02111-1307, USA.
  */
 
-#include <zypp/solver/detail/Packman.h>
-#include <zypp/solver/detail/debug.h>
+#include "zypp/solver/detail/Packman.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

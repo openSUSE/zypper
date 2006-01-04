@@ -18,9 +18,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
-#include <zypp/solver/detail/Importance.h>
-#include <zypp/solver/detail/debug.h>
+#include <iostream>
+#include "zypp/solver/detail/Importance.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -58,7 +58,7 @@ namespace zypp
       	case IMPORTANCE_FEATURE:	res = "feature"; break;
       	case IMPORTANCE_MINOR:		res = "minor"; break;
       	default:
-      	    rc_debug (RC_DEBUG_LEVEL_WARNING, "invalid importance %d\n",  importance.importance());
+      	    WAR << "invalid importance "<< importance.importance() << endl;
       	    res = "invalid";
           }
           return res;
@@ -118,7 +118,9 @@ namespace zypp
       	}
           }
           if (_importance == IMPORTANCE_INVALID)
-      	rc_debug (RC_DEBUG_LEVEL_WARNING, "invalid importance '%s'\n", importance_str ? importance_str : "<null>");
+	      WAR << "invalid importance '"
+		  << (importance_str ? importance_str : "<null>")
+		  << "'" << endl;
 
       }
 

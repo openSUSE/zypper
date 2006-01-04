@@ -19,8 +19,9 @@
  * 02111-1307, USA.
  */
 
-#include <zypp/solver/detail/Section.h>
-#include <zypp/solver/detail/debug.h>
+#include <iostream>
+#include "zypp/solver/detail/Section.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -67,7 +68,7 @@ namespace zypp
           case SECTION_LIBRARY:	return ("library");
           case SECTION_XAPP:		return ("xapp");
           default:
-      	rc_debug (RC_DEBUG_LEVEL_WARNING, "invalid section number %d\n", section.section());
+	      WAR << "invalid section number " << section.section() << endl;
           }
           return ("misc");
       }
@@ -91,7 +92,7 @@ namespace zypp
           case SECTION_LIBRARY:	return ("Libraries");
           case SECTION_XAPP:		return ("X Applications");
           default:
-      	rc_debug (RC_DEBUG_LEVEL_WARNING, "invalid section number %d\n", section.section());
+	      WAR << "invalid section number " << section.section() << endl;
           }
 
           return ("Miscellaneous");
@@ -182,7 +183,7 @@ namespace zypp
       	}
       	break;
           default:
-      	rc_debug (RC_DEBUG_LEVEL_WARNING, "invalid section name %s\n", section_str);
+	      WAR << "invalid section name " << section_str << endl;
       	break;
           }
           } // if != NULL

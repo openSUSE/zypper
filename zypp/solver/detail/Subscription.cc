@@ -24,11 +24,10 @@
 
 #include <libxml/parser.h>
 #include <libxml/tree.h>
-
-#include <zypp/solver/detail/Subscription.h>
-#include <zypp/solver/detail/Channel.h>
-#include <zypp/solver/detail/XmlNode.h>
-#include <zypp/solver/detail/debug.h>
+#include "zypp/solver/detail/Subscription.h"
+#include "zypp/solver/detail/Channel.h"
+#include "zypp/solver/detail/XmlNode.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -139,8 +138,9 @@ namespace zypp
       	/* Writing out the subscription file succeeded. */
       	subscriptions_changed = false;
           } else {
-      	rc_debug (RC_DEBUG_LEVEL_WARNING, "Unable to save subscription data to '%s'", subscription_file);
-      	rc_debug (RC_DEBUG_LEVEL_WARNING, "Subscription will not be saved!");
+	      WAR << "Unable to save subscription data to '"
+		  << subscription_file << "'" << endl;
+	      WAR << "Subscription will not be saved!" << endl;
           }
       }
 
@@ -157,24 +157,27 @@ namespace zypp
           tried_to_do_this_already = true;
 
           if (access (OLD_SUBSCRIPTION_FILE, R_OK) != 0) {
-      	rc_debug (RC_DEBUG_LEVEL_WARNING, "Can't find rcd 1.x subscription file '%s'", OLD_SUBSCRIPTION_FILE);
+	      WAR << "Can't find rcd 1.x subscription file '"
+		  << OLD_SUBSCRIPTION_FILE << "'" << endl;
       	return;
           }
 
           doc = xmlParseFile (OLD_SUBSCRIPTION_FILE);
           if (doc == NULL) {
-      	rc_debug (RC_DEBUG_LEVEL_ERROR, "Can't parse rcd 1.x subscription file '%s'", OLD_SUBSCRIPTION_FILE);
+	      ERR << "Can't parse rcd 1.x subscription file '"
+		  << OLD_SUBSCRIPTION_FILE << "'" << endl;
       	return;
           }
 
           node = new XmlNode (xmlDocGetRootElement (doc));
 
           if (!node->equals("subscriptions")) {
-      	rc_debug (RC_DEBUG_LEVEL_ERROR, "rcd 1.x subscription file '%s' is malformed", OLD_SUBSCRIPTION_FILE);
+	      ERR << "rcd 1.x subscription file '"
+		  << OLD_SUBSCRIPTION_FILE << "' is malformed" << endl;
       	return;
           }
 
-          rc_debug (RC_DEBUG_LEVEL_INFO, "Importing rcd 1.x subscriptions.");
+          MIL << "Importing rcd 1.x subscriptions." << endl;
 
           node = node->children();
 
@@ -217,14 +220,16 @@ namespace zypp
 
           doc = xmlParseFile (subscription_file);
           if (doc == NULL) {
-      	rc_debug (RC_DEBUG_LEVEL_ERROR, "Can't parse subscription file '%s'", subscription_file);
+	      ERR << "Can't parse subscription file '"
+		  << subscription_file << "'" << endl;
       	return;
           }
 
           node = new XmlNode (xmlDocGetRootElement (doc));
 
           if (! node->equals ("subscriptions")) {
-      	rc_debug (RC_DEBUG_LEVEL_ERROR, "Subscription file '%s' is malformed", subscription_file);
+	      ERR << "Subscription file '"
+		  << subscription_file << "' is malformed" << endl;
       	return;
           }
 

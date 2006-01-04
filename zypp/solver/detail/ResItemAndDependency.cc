@@ -21,9 +21,8 @@
 
 #include "config.h"
 
-#include <zypp/solver/detail/ResItemAndDependency.h>
-#include <zypp/solver/detail/debug.h>
-#include <zypp/base/Logger.h>
+#include "zypp/solver/detail/ResItemAndDependency.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

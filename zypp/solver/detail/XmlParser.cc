@@ -25,7 +25,6 @@
 #include "zypp/solver/detail/XmlParser.h"
 #include "zypp/solver/detail/PackageUpdate.h"
 #include "zypp/solver/detail/utils.h"
-#include "zypp/solver/detail/debug.h"
 #include "zypp/ResObject.h"
 #include "zypp/CapFactory.h"
 #include "zypp/CapSet.h"
@@ -176,7 +175,7 @@ namespace zypp
                 va_start(args, msg);
       
                 if (vsnprintf(tmp, 2048, msg, args) >= 2048) fprintf (stderr, "vsnprintf overflow\n");
-                rc_debug (RC_DEBUG_LEVEL_WARNING, "* SAX Warning: %s", tmp);
+                WAR << "* SAX Warning: " << tmp << endl;
       
                 va_end(args);
             }
@@ -191,7 +190,7 @@ namespace zypp
                 va_start(args, msg);
       
                 if (vsnprintf(tmp, 2048, msg, args) >= 2048) fprintf (stderr, "vsnprintf overflow\n");
-                rc_debug (RC_DEBUG_LEVEL_ERROR, "* SAX Error: %s", tmp);
+                ERR << "* SAX Error: " <<  tmp <<endl;
       
                 va_end(args);
             }
