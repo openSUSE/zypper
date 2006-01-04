@@ -45,6 +45,36 @@ namespace zypp
         echoOn( MIL, first, last, s );
       }
 
+      ////////////////////////////////////////////////////////////////////////////
+      //
+      //  SingleTag Grammar
+      //
+      ////////////////////////////////////////////////////////////////////////////
+
+
+      struct Merror_report_parser
+      {
+        Merror_report_parser( const char * msg_r )
+        : msg( msg_r )
+        {}
+
+        typedef spirit::nil_t result_t;
+
+        template <typename ScannerT>
+          int operator()( const ScannerT & scan, result_t & /*result*/ ) const
+          {
+            SEC << scan.first.get_position() << ' ' << msg << std::endl;
+            return -1; // Fail.
+          }
+
+        const char * msg;
+      };
+
+      typedef functor_parser<Merror_report_parser> Merror_report_p;
+
+
+
+
       /////////////////////////////////////////////////////////////////
     } // namespace tagfile
     ///////////////////////////////////////////////////////////////////
@@ -92,6 +122,7 @@ NVRA parseNVRA( const std::string & value )
   std::string v;
   std::string r;
   std::string a;
+
   parse_info<> info = parse( value.c_str(),
 
        lexeme_d[(+~space_p)]                    [assign_a(n)]
@@ -150,22 +181,6 @@ struct PConsume
   scoped_ptr<NVRA> _nvra;
 };
 
-struct X
-{
-  template <typename Item>
-    struct result
-    {
-      typedef rule_t type;
-    };
-
-  template <typename Item>
-    rule_t operator<<(  const Item & stag_r ) const
-    {
-      return eps_p;//error_report_p( "neither empty nor comment" );
-    }
-};
-//const phoenix::function<X_impl> XX = X_impl();
-
 ////////////////////////////////////////////////////////////////////////////
 //
 //  Main
@@ -199,13 +214,10 @@ int main( int argc, char* argv[] )
   MTag      mtagData;
 
   PConsume  consume;
-  rule_t c = eps_p;
-  rule_t a = nothing_p;
-  rule_t x = error_report_p( "abort" );
 
+#if 1
   rule_t file =   end_p
-                | ( stag //[var(consume)=arg1]
-                    >> lazy_p(var(x))
+                | ( stag [var(consume)=arg1]
                   | mtag [var(consume)=arg1]
                   | ( *blank_p
                       >> !( ch_p('#')
@@ -213,14 +225,29 @@ int main( int argc, char* argv[] )
                           )
                       >> (eol_p|end_p)
                     )
-                  | error_report_p( "neither empty nor comment" )
+                    | error_report_p( "illegal line" )
                   )
-                  >> file;
+                  >> file
+                  ;
+#else
+  rule_t file =
+            end_p
+          | (+~space_p) [&echo]
+            >> ( lazy_p(var(skip))
+               | Merror_report_p( "lazy failed" )
+               )
+            >> file
+          ;
+#endif
 
   // Parse
   shared_ptr<Measure> duration( new Measure );
   parse_info<iterator_t> info
-    = parse( begin, end, file );
+    = parse( begin, end,
+
+             file
+
+           );
   duration.reset();
 
   // Check for fail...

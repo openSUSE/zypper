@@ -49,11 +49,10 @@ namespace zypp
   public:
     /** Offer default Impl. */
     static shared_ptr<Impl> nullimpl()
-    { if ( ! _nullimpl ) _nullimpl.reset( new Impl ); return _nullimpl; }
-
-  private:
-    /** Default Impl: empty sets. */
-    static shared_ptr<Impl> _nullimpl;
+    {
+      static shared_ptr<Impl> _nullimpl( new Impl );
+      return _nullimpl;
+    }
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -61,10 +60,6 @@ namespace zypp
     Impl * clone() const
     { return new Impl( *this ); }
   };
-  ///////////////////////////////////////////////////////////////////
-
-  shared_ptr<Dependencies::Impl> Dependencies::Impl::_nullimpl;
-
   ///////////////////////////////////////////////////////////////////
 
   /** \relates DependenciesImpl Stream output */

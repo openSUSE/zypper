@@ -28,62 +28,69 @@ namespace zypp
   namespace
   { /////////////////////////////////////////////////////////////////
 
-    typedef std::map<std::string,std::string> CodeMap;
-    typedef CodeMap::const_iterator Index;
-
-    // CodeMap[code] = untranslated language name
-    // Translation is done in name().
-    CodeMap _iso639_1_CodeMap;
-    CodeMap _iso639_2_CodeMap;
-    CodeMap _others_CodeMap;
-
-    void setDefaultCodeMaps( CodeMap & iso639_1,
-                             CodeMap & iso639_2,
-                             CodeMap & others );
-
-    /** Assert code maps are initialized. */
-    void assertInitCodemaps()
+    /** Wrap static codemap data. */
+    struct CodeMaps // singleton
     {
-      if ( _others_CodeMap.empty() )
-        setDefaultCodeMaps( _iso639_1_CodeMap,
-                            _iso639_2_CodeMap,
-                            _others_CodeMap );
-    }
+      typedef std::map<std::string,std::string> CodeMap;
+      typedef CodeMap::const_iterator Index;
 
-    /** Return index of \a code_r, if it's in the code maps. */
-    Index lookupCode( const std::string & code_r )
+      /** Return the CodeMap Index for \a code_r. */
+      static Index getIndex( const std::string & code_r )
+      {
+        static CodeMaps _maps; // the singleton instance
+        return _maps.lookup( code_r );
+      }
+
+    private:
+      /** Ctor initializes the code maps.
+       * http://www.loc.gov/standards/iso639-2/ISO-639-2_values_8bits.txt
+      */
+      CodeMaps();
+
+      /** Make shure the code is in the code maps and return it's index. */
+      inline Index lookup( const std::string & code_r );
+
+      /** Return index of \a code_r, if it's in the code maps. */
+      inline Index lookupCode( const std::string & code_r );
+
+    private:
+      /** Two letter codes. */
+      CodeMap iso639_1;
+      /** Three letter codes. */
+      CodeMap iso639_2;
+      /** All the stuff the application injects. */
+      CodeMap others;
+    };
+
+    inline CodeMaps::Index CodeMaps::lookupCode( const std::string & code_r )
     {
-      assertInitCodemaps();
       switch ( code_r.size() )
         {
         case 2:
           {
-            Index it = _iso639_1_CodeMap.find( code_r );
-            if ( it != _iso639_1_CodeMap.end() )
+            Index it = iso639_1.find( code_r );
+            if ( it != iso639_1.end() )
               return it;
           }
           break;
 
         case 3:
           {
-            Index it = _iso639_2_CodeMap.find( code_r );
-            if ( it != _iso639_2_CodeMap.end() )
+            Index it = iso639_2.find( code_r );
+            if ( it != iso639_2.end() )
               return it;
           }
           break;
         }
-      // not found: check _others_CodeMap
-      // !!! not found at all returns _others_CodeMap.end()
-      return _others_CodeMap.find( code_r );
+      // not found: check others
+      // !!! not found at all returns others.end()
+      return others.find( code_r );
     }
 
-    /** Assert \a code_r is in the code maps and return it's index.
-     * That's what LanguageCode::Impl calls.
-    */
-    Index getIndex( const std::string & code_r )
+    inline CodeMaps::Index CodeMaps::lookup( const std::string & code_r )
     {
       Index it = lookupCode( code_r );
-      if ( it != _others_CodeMap.end() )
+      if ( it != others.end() )
         return it;
 
       // not found: Remember a new code
@@ -99,12 +106,12 @@ namespace zypp
           // but maybe we're lucky with the lower case code
           // and find a language name.
           it = lookupCode( lcode );
-          if ( it != _others_CodeMap.end() )
+          if ( it != others.end() )
             nval.second = it->second;
         }
 
       MIL << "Remember LanguageCode '" << code_r << "': '" << nval.second << "'" << endl;
-      return _others_CodeMap.insert( nval ).first;
+      return others.insert( nval ).first;
     }
 
     /////////////////////////////////////////////////////////////////
@@ -122,11 +129,11 @@ namespace zypp
   struct LanguageCode::Impl
   {
     Impl()
-    : _index( getIndex( std::string() ) )
+    : _index( CodeMaps::getIndex( std::string() ) )
     {}
 
     Impl( const std::string & code_r )
-    : _index( getIndex( code_r ) )
+    : _index( CodeMaps::getIndex( code_r ) )
     {}
 
     std::string code() const
@@ -146,21 +153,16 @@ namespace zypp
 
   private:
     /** index into code map. */
-    Index _index;
+    CodeMaps::Index _index;
 
   public:
     /** Offer default Impl. */
     static shared_ptr<Impl> nullimpl()
-    { if ( ! _nullimpl ) _nullimpl.reset( new Impl ); return _nullimpl; }
-
-  private:
-    /** Default Impl. */
-    static shared_ptr<Impl> _nullimpl;
+    {
+      static shared_ptr<Impl> _nullimpl( new Impl );
+      return _nullimpl;
+    }
   };
-  ///////////////////////////////////////////////////////////////////
-
-  shared_ptr<LanguageCode::Impl> LanguageCode::Impl::_nullimpl;
-
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
@@ -218,12 +220,7 @@ namespace zypp
   namespace
   { /////////////////////////////////////////////////////////////////
 
-    /** Initialize the code maps.
-     * http://www.loc.gov/standards/iso639-2/ISO-639-2_values_8bits.txt
-    */
-    void setDefaultCodeMaps( CodeMap & iso639_1,
-                             CodeMap & iso639_2,
-                             CodeMap & others )
+    CodeMaps::CodeMaps()
     {
       // Defined LanguageCode constants
       others[""]        = N_( "noCode" );

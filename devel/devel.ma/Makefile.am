@@ -12,11 +12,11 @@ AM_LDFLAGS =
 AM_CXXFLAGS =
 # gperf:	-pg
 
-LDADD =		$(top_srcdir)/zypp/lib@PACKAGE@.la -lboost_regex
+LDADD =		-L$(top_srcdir)/zypp/.libs -lzypp -lboost_regex
 
 ## ##################################################
 
-Main_SOURCES = 		Main.cc Packages.cc
+Main_SOURCES = 		Main.cc
 
 Main_debug_SOURCES = 	$(Main_SOURCES)
 Main_debug_LDFLAGS =	-static

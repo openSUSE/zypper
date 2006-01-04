@@ -55,7 +55,7 @@ namespace zypp
     /** \name Locale constants. */
     //@{
     /** No or empty code. */
-//    static const Locale noCode;
+    static const Locale noCode;
     //@}
 
   public:

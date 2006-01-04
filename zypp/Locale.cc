@@ -85,16 +85,11 @@ namespace zypp
   public:
     /** Offer default Impl. */
     static shared_ptr<Impl> nullimpl()
-    { if ( ! _nullimpl ) _nullimpl.reset( new Impl ); return _nullimpl; }
-
-  private:
-    /** Default Impl. */
-    static shared_ptr<Impl> _nullimpl;
+    {
+      static shared_ptr<Impl> _nullimpl( new Impl );
+      return _nullimpl;
+    }
   };
-  ///////////////////////////////////////////////////////////////////
-
-  shared_ptr<Locale::Impl> Locale::Impl::_nullimpl;
-
   ///////////////////////////////////////////////////////////////////
 
   /** \relates Locale::Impl Stream output */
@@ -109,8 +104,7 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-#warning NO STATIC VARIABLES
-//  const Locale Locale::noCode;
+  const Locale Locale::noCode;
 
   ///////////////////////////////////////////////////////////////////
   //

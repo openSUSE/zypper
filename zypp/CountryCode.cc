@@ -28,51 +28,59 @@ namespace zypp
   namespace
   { /////////////////////////////////////////////////////////////////
 
-    typedef std::map<std::string,std::string> CodeMap;
-    typedef CodeMap::const_iterator Index;
-
-    // CodeMap[code] = untranslated country name
-    // Translation is done in name().
-    CodeMap _iso3166_CodeMap;
-    CodeMap _others_CodeMap;
-
-    void setDefaultCodeMaps( CodeMap & iso3166,
-                             CodeMap & others );
-
-    /** Assert code maps are initialized. */
-    void assertInitCodemaps()
+    /** Wrap static codemap data. */
+    struct CodeMaps // singleton
     {
-      if ( _others_CodeMap.empty() )
-        setDefaultCodeMaps( _iso3166_CodeMap,
-                            _others_CodeMap );
-    }
+      typedef std::map<std::string,std::string> CodeMap;
+      typedef CodeMap::const_iterator Index;
 
-    /** Return index of \a code_r, if it's in the code maps. */
-    Index lookupCode( const std::string & code_r )
+      /** Return the CodeMap Index for \a code_r. */
+      static Index getIndex( const std::string & code_r )
+      {
+        static CodeMaps _maps; // the singleton instance
+        return _maps.lookup( code_r );
+      }
+
+    private:
+      /** Ctor initializes the code maps.
+       * http://www.iso.org/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html
+      */
+      CodeMaps();
+
+      /** Make shure the code is in the code maps and return it's index. */
+      inline Index lookup( const std::string & code_r );
+
+      /** Return index of \a code_r, if it's in the code maps. */
+      inline Index lookupCode( const std::string & code_r );
+
+    private:
+      /** Two letter codes. */
+      CodeMap iso3166;
+      /** All the stuff the application injects. */
+      CodeMap others;
+    };
+
+    inline CodeMaps::Index CodeMaps::lookupCode( const std::string & code_r )
     {
-      assertInitCodemaps();
       switch ( code_r.size() )
         {
         case 2:
           {
-            Index it = _iso3166_CodeMap.find( code_r );
-            if ( it != _iso3166_CodeMap.end() )
+            Index it = iso3166.find( code_r );
+            if ( it != iso3166.end() )
               return it;
           }
           break;
         }
-      // not found: check _others_CodeMap
-      // !!! not found at all returns _others_CodeMap.end()
-      return _others_CodeMap.find( code_r );
+      // not found: check others
+      // !!! not found at all returns others.end()
+      return others.find( code_r );
     }
 
-    /** Assert \a code_r is in the code maps and return it's index.
-     * That's what CountryCode::Impl calls.
-    */
-    Index getIndex( const std::string & code_r )
+    inline CodeMaps::Index CodeMaps::lookup( const std::string & code_r )
     {
       Index it = lookupCode( code_r );
-      if ( it != _others_CodeMap.end() )
+      if ( it != others.end() )
         return it;
 
       // not found: Remember a new code
@@ -88,12 +96,12 @@ namespace zypp
           // but maybe we're lucky with the upper case code
           // and find a country name.
           it = lookupCode( lcode );
-          if ( it != _others_CodeMap.end() )
+          if ( it != others.end() )
             nval.second = it->second;
         }
 
       MIL << "Remember CountryCode '" << code_r << "': '" << nval.second << "'" << endl;
-      return _others_CodeMap.insert( nval ).first;
+      return others.insert( nval ).first;
     }
 
     /////////////////////////////////////////////////////////////////
@@ -111,11 +119,11 @@ namespace zypp
   struct CountryCode::Impl
   {
     Impl()
-    : _index( getIndex( std::string() ) )
+    : _index( CodeMaps::getIndex( std::string() ) )
     {}
 
     Impl( const std::string & code_r )
-    : _index( getIndex( code_r ) )
+    : _index( CodeMaps::getIndex( code_r ) )
     {}
 
     std::string code() const
@@ -135,21 +143,16 @@ namespace zypp
 
   private:
     /** index into code map. */
-    Index _index;
+    CodeMaps::Index _index;
 
   public:
     /** Offer default Impl. */
     static shared_ptr<Impl> nullimpl()
-    { if ( ! _nullimpl ) _nullimpl.reset( new Impl ); return _nullimpl; }
-
-  private:
-    /** Default Impl. */
-    static shared_ptr<Impl> _nullimpl;
+    {
+      static shared_ptr<Impl> _nullimpl( new Impl );
+      return _nullimpl;
+    }
   };
-  ///////////////////////////////////////////////////////////////////
-
-  shared_ptr<CountryCode::Impl> CountryCode::Impl::_nullimpl;
-
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
@@ -206,11 +209,7 @@ namespace zypp
   namespace
   { /////////////////////////////////////////////////////////////////
 
-    /** Initialize the code maps.
-     * http://www.iso.org/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html
-    */
-    void setDefaultCodeMaps( CodeMap & iso3166,
-                             CodeMap & others )
+    CodeMaps::CodeMaps()
     {
       // Defined CountryCode constants
       others[""]        = N_( "noCode" );

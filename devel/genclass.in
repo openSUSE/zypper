@@ -165,11 +165,10 @@ ${INDENT}{
 ${INDENT}public:
 ${INDENT}  /** Offer default Impl. */
 ${INDENT}  static shared_ptr<Impl> nullimpl()
-${INDENT}  { if ( ! _nullimpl ) _nullimpl.reset( new Impl ); return _nullimpl; }
-
-${INDENT}private:
-${INDENT}  /** Default Impl. */
-${INDENT}  static shared_ptr<Impl> _nullimpl;
+${INDENT}  {
+${INDENT}    static shared_ptr<Impl> _nullimpl( new Impl );
+${INDENT}    return _nullimpl;
+${INDENT}  }
 
 ${INDENT}private:
 ${INDENT}  friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -177,10 +176,6 @@ ${INDENT}  /** clone for RWCOW_pointer */
 ${INDENT}  Impl * clone() const
 ${INDENT}  { return new Impl( *this ); }
 ${INDENT}};
-${INDENT}///////////////////////////////////////////////////////////////////
-
-${INDENT}shared_ptr<${CLASS}::Impl> ${CLASS}::Impl::_nullimpl;
-
 ${INDENT}///////////////////////////////////////////////////////////////////
 
 ${INDENT}/** \relates ${CLASS}::Impl Stream output */
