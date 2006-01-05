@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ResolverInfo_h
-#define _ResolverInfo_h
+#ifndef ZYPP_SOLVER_DETAIL_RESOLVER_INFO_H
+#define ZYPP_SOLVER_DETAIL_RESOLVER_INFO_H
 
 #include <iosfwd>
 #include <list>
@@ -123,5 +123,5 @@ class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _ResolverInfo_h
+#endif // ZYPP_SOLVER_DETAIL_RESOLVER_INFO_H
 

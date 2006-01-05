@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ResolverInfoDependsOn_h
-#define _ResolverInfoDependsOn_h
+#ifndef ZYPP_SOLVER_DETAIL_RESOLVERINFODEPENDSON_H
+#define ZYPP_SOLVER_DETAIL_RESOLVERINFODEPENDSON_H
 
 #include <string>
 #include "zypp/solver/detail/ResolverInfoDependsOnPtr.h"
@@ -76,5 +76,5 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _ResolverInfoDependsOn_h
+#endif // ZYPP_SOLVER_DETAIL_RESOLVERINFODEPENDSON_H
  

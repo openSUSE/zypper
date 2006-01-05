@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _Pending_h
-#define _Pending_h
+#ifndef ZYPP_SOLVER_DETAIL_PENDING_H
+#define ZYPP_SOLVER_DETAIL_PENDING_H
 
 #include <iosfwd>
 #include <list>
@@ -159,4 +159,4 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _Pending_h
+#endif // ZYPP_SOLVER_DETAIL_PENDING_H

@@ -18,8 +18,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _Match_Ptr_h
-#define _Match_Ptr_h
+#ifndef ZYPP_SOLVER_DETAIL_MATCH_PTR_H
+#define ZYPP_SOLVER_DETAIL_MATCH_PTR_H
 
 #include "zypp/base/PtrTypes.h"
 
@@ -49,4 +49,4 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _Match_Ptr_h
+#endif // ZYPP_SOLVER_DETAIL_MATCH_PTR_H

@@ -24,8 +24,8 @@
  * USA.
  */
 
-#ifndef __EXTRACT_H__
-#define __EXTRACT_H__
+#ifndef ZYPP_SOLVER_DETAIL_EXTRACT_H
+#define ZYPP_SOLVER_DETAIL_EXTRACT_H
 
 #include "zypp/solver/detail/Channel.h"
 #include "zypp/solver/detail/XmlNode.h"
@@ -74,5 +74,5 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif /* __EXTRACT_H__ */
+#endif /* ZYPP_SOLVER_DETAIL_EXTRACT_H */
 

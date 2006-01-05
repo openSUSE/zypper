@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ResolverQueue_h
-#define _ResolverQueue_h
+#ifndef ZYPP_SOLVER_DETAIL_RESOLVERQUEUE_H
+#define ZYPP_SOLVER_DETAIL_RESOLVERQUEUE_H
 
 #include <iosfwd>
 #include <list>
@@ -110,5 +110,5 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _ResolverQueue_h
+#endif // ZYPP_SOLVER_DETAIL_RESOLVERQUEUE_H
 

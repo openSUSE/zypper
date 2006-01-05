@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _Section_h
-#define _Section_h
+#ifndef ZYPP_SOLVER_DETAIL_SECTION_H
+#define ZYPP_SOLVER_DETAIL_SECTION_H
 
 #include <iosfwd>
 #include <string>
@@ -110,4 +110,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _Section_h
+#endif // ZYPP_SOLVER_DETAIL_SECTION_H

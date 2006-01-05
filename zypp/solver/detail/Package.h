@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _Package_h
-#define _Package_h
+#ifndef ZYPP_SOLVER_DETAIL_PACKAGE_H
+#define ZYPP_SOLVER_DETAIL_PACKAGE_H
 
 #include <list>
 #include <iosfwd>
@@ -162,4 +162,4 @@ class Package : public ResItem {
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _Package_h
+#endif // ZYPP_SOLVER_DETAIL_PACKAGE_H

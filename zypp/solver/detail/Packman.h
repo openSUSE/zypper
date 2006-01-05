@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _Packman_h
-#define _Packman_h
+#ifndef ZYPP_SOLVER_DETAIL_PACKMAN_H
+#define ZYPP_SOLVER_DETAIL_PACKMAN_H
 
 #include <iosfwd>
 #include <list>
@@ -84,4 +84,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _Packman_h
+#endif // ZYPP_SOLVER_DETAIL_PACKMAN_H

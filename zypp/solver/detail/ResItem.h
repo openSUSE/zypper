@@ -18,8 +18,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ResItem_h
-#define _ResItem_h
+#ifndef ZYPP_SOLVER_DETAIL_RESITEM_H
+#define ZYPP_SOLVER_DETAIL_RESITEM_H
 
 #include <list>
 #include <set>
@@ -168,4 +168,4 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _ResItem_h
+#endif // ZYPP_SOLVER_DETAIL_RESITEM_H

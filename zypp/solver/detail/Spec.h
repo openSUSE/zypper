@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _Spec_h
-#define _Spec_h
+#ifndef ZYPP_SOLVER_DETAIL_SPEC_H
+#define ZYPP_SOLVER_DETAIL_SPEC_H
 
 #include <iosfwd>
 #include <list>
@@ -161,4 +161,4 @@ class Name : public Ustring {
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _Spec_h
+#endif // ZYPP_SOLVER_DETAIL_SPEC_H

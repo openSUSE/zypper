@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _PackageUpdate_h
-#define _PackageUpdate_h
+#ifndef ZYPP_SOLVER_DETAIL_PACKAGEUPDATE_H
+#define ZYPP_SOLVER_DETAIL_PACKAGEUPDATE_H
 
 #include <list>
 #include <iosfwd>
@@ -147,4 +147,4 @@ class PackageUpdate : public Spec {
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _PackageUpdate_h
+#endif // ZYPP_SOLVER_DETAIL_PACKAGEUPDATE_H

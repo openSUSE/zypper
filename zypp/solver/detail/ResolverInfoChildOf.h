@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ResolverInfoChildOf_h
-#define _ResolverInfoChildOf_h
+#ifndef ZYPP_SOLVER_DETAIL_RESOLVERINFOCHILDOF_H
+#define ZYPP_SOLVER_DETAIL_RESOLVERINFOCHILDOF_H
 
 #include "zypp/solver/detail/ResolverInfoChildOfPtr.h"
 #include "zypp/solver/detail/ResolverInfoContainer.h"
@@ -73,5 +73,5 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _ResolverInfoChildOf_h
+#endif // ZYPP_SOLVER_DETAIL_RESOLVERINFOCHILDOF_H
  

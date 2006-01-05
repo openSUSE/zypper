@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ResItemAndDependency_h
-#define _ResItemAndDependency_h
+#ifndef ZYPP_SOLVER_DETAIL_RESITEMANDDEPENDENCY_H
+#define ZYPP_SOLVER_DETAIL_RESITEMANDDEPENDENCY_H
 
 #include <iosfwd>
 #include <string>
@@ -98,4 +98,4 @@ typedef std::multimap<const std::string, ResItem_constPtr> ResItemTable;
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _ResItemAndDependency_h
+#endif // ZYPP_SOLVER_DETAIL_RESITEMANDDEPENDENCY_H

@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _QueueItemInstall_h
-#define _QueueItemInstall_h
+#ifndef ZYPP_SOLVER_DETAIL_QUEUEITEMINSTALL_H
+#define ZYPP_SOLVER_DETAIL_QUEUEITEMINSTALL_H
 
 #include <iosfwd>
 #include <list>
@@ -113,4 +113,4 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _QueueItem_h
+#endif // ZYPP_SOLVER_DETAIL_QUEUEITEMINSTALL_H

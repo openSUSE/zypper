@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _MultiWorld_h
-#define _MultiWorld_h
+#ifndef ZYPP_SOLVER_DETAIL_MULTIWORLD_H
+#define ZYPP_SOLVER_DETAIL_MULTIWORLD_H
 
 #include <iosfwd>
 #include <string>
@@ -137,4 +137,4 @@ class MultiWorld : public World {
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _MultiWorld_h
+#endif // ZYPP_SOLVER_DETAIL_MULTIWORLD_H

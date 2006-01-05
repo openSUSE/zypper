@@ -178,8 +178,8 @@ namespace zypp
                                                 Rel::EQ,
                                                 resItem->edition());
 
-          if (info->actually_an_obsolete
-              && capTest != cap)
+          if (info->actually_an_obsolete)
+//              && !capTest.matches (cap))
           {
               return true;
           }

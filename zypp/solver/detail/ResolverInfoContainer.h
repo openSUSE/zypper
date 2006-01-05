@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _ResolverInfoContainer_h
-#define _ResolverInfoContainer_h
+#ifndef ZYPP_SOLVER_DETAIL_RESOLVERINFOCONTAINER_H
+#define ZYPP_SOLVER_DETAIL_RESOLVERINFOCONTAINER_H
 
 #include <iosfwd>
 #include <list>
@@ -91,4 +91,4 @@ class ResolverInfoContainer : public ResolverInfo {
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _ResolverInfoContainer_h
+#endif // ZYPP_SOLVER_DETAIL_RESOLVERINFOCONTAINER_H

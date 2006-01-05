@@ -18,8 +18,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _QueueItem_Ptr_h
-#define _QueueItem_Ptr_h
+#ifndef ZYPP_SOLVER_DETAIL_QUEUEITEM_PTR_H
+#define ZYPP_SOLVER_DETAIL_QUEUEITEM_PTR_H
 
 #include "zypp/base/PtrTypes.h"
 
@@ -48,4 +48,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _QueueItem_Ptr_h
+#endif // ZYPP_SOLVER_DETAIL_QUEUEITEM_PTR_H

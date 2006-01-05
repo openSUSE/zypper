@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _QueueItemBranch_h
-#define _QueueItemBranch_h
+#ifndef ZYPP_SOLVER_DETAIL_QUEUEITEMBRANCH_H
+#define ZYPP_SOLVER_DETAIL_QUEUEITEMBRANCH_H
 
 #include <iosfwd>
 #include <list>
@@ -97,4 +97,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _QueueItemBranch_h
+#endif // ZYPP_SOLVER_DETAIL_QUEUEITEMBRANCH_H

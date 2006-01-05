@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _StoreWorld_h
-#define _StoreWorld_h
+#ifndef ZYPP_SOLVER_DETAIL_STOREWORLD_H
+#define ZYPP_SOLVER_DETAIL_STOREWORLD_H
 
 #include <iosfwd>
 #include <string>
@@ -137,4 +137,4 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _StoreWorld_h
+#endif // ZYPP_SOLVER_DETAIL_STOREWORLD_H

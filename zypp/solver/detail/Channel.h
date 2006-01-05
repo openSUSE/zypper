@@ -22,8 +22,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _Channel_h
-#define _Channel_h
+#ifndef ZYPP_SOLVER_DETAIL_CHANNEL_H
+#define ZYPP_SOLVER_DETAIL_CHANNEL_H
 
 #include <iosfwd>
 #include <string>
@@ -219,4 +219,4 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-#endif // _Channel_h
+#endif // ZYPP_SOLVER_DETAIL_CHANNEL_H

@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _XmlNode_h
-#define _XmlNode_h
+#ifndef ZYPP_SOLVER_DETAIL_XMLNODE_H
+#define ZYPP_SOLVER_DETAIL_XMLNODE_H
 
 #include <list>
 #include <iostream>
@@ -120,4 +120,4 @@ class XmlNode : public base::ReferenceCounted, private base::NonCopyable
 
 
 
-#endif  // _XmlNode_h
+#endif  // ZYPP_SOLVER_DETAIL_XMLNODE_H

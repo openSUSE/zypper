@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _Importance_h
-#define _Importance_h
+#ifndef ZYPP_SOLVER_DETAIL_IMPORTANCE_H
+#define ZYPP_SOLVER_DETAIL_IMPORTANCE_H
 
 #include <iosfwd>
 #include <string>
@@ -105,4 +105,4 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _Importance_h
+#endif // ZYPP_SOLVER_DETAIL_IMPORTANCE_H

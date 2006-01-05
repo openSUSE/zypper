@@ -17,8 +17,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _Hash_h
-#define _Hash_h
+#ifndef ZYPP_SOLVER_DETAIL_HASH_H
+#define ZYPP_SOLVER_DETAIL_HASH_H
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -42,4 +42,4 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _Hash_h
+#endif // ZYPP_SOLVER_DETAIL_HASH_H

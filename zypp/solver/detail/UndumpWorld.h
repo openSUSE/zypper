@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _UndumpWorld_h
-#define _UndumpWorld_h
+#ifndef ZYPP_SOLVER_DETAIL_UNDUMPWORLD_H
+#define ZYPP_SOLVER_DETAIL_UNDUMPWORLD_H
 
 #include <iosfwd>
 #include <string>
@@ -86,4 +86,4 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // _UndumpWorld_h
+#endif // ZYPP_SOLVER_DETAIL_UNDUMPWORLD_H

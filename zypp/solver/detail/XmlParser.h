@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef _XmlParser_h
-#define _XmlParser_h
+#ifndef ZYPP_SOLVER_DETAIL_XMLPARSER_H
+#define ZYPP_SOLVER_DETAIL_XMLPARSER_H
 
 #include <list>
 
@@ -164,4 +164,4 @@ namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
 
-#endif  // _XmlParser_h
+#endif  // ZYPP_SOLVER_DETAIL_XMLPARSER_H
