@@ -190,7 +190,33 @@ namespace zypp
       private:
       };
   
-    /////////////////////////////////////////////////////////////////
+      class RpmDbConvertException : public RpmException
+      {
+      public:
+        RpmDbConvertException()
+        : RpmException()
+        {}
+        virtual ~RpmDbConvertException() throw() {};
+      protected:
+        virtual std::ostream & dumpOn( std::ostream & str ) const;
+      private:
+      };
+
+      class RpmNullDatabaseException : public RpmException
+      {
+      public:
+        RpmNullDatabaseException()
+        : RpmException()
+        {}
+        virtual ~RpmNullDatabaseException() throw() {};
+      protected:
+        virtual std::ostream & dumpOn( std::ostream & str ) const;
+      private:
+      };
+
+
+
+     /////////////////////////////////////////////////////////////////
     } // namespace rpm
   } // namespace target
 } // namespace zypp

@@ -64,10 +64,15 @@ namespace zypp
       {
         return str << "RPM database not open" << endl;
       }
-  
-      std::ostream & MediaCurlInitException::dumpOn( std::ostream & str) const
+
+      std::ostream & RpmDbConvertException::dumpOn( std::ostream & str) const
       {
-        return str << "Curl init failed for: " << _url << endl;
+        return str << "RPM database conversion failed" << endl;
+      }
+
+      std::ostream & RpmNullDatabaseException::dumpOn( std::ostream & str) const
+      {
+        return str << "NULL rpmV4 database passed as argument!" << endl;
       }
   
     /////////////////////////////////////////////////////////////////

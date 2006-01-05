@@ -476,8 +476,7 @@ void RpmDb::internal_initDatabase( const Pathname & root_r, const Pathname & dbP
     MIL << "Found rpm3 database " << dbInfo.dbV3() << endl;
 
     if ( dbEmpty ) {
-      extern void convertV3toV4( const Pathname & v3db_r, const constlibrpmDbPtr & v4db_r );
-#warning FIXME exception handling for following function
+      extern void convertV3toV4( const Pathname & v3db_r, const librpmDb::constPtr & v4db_r );
       convertV3toV4( dbInfo.dbV3().path(), dbptr );
 
       // create a backup copy
@@ -858,6 +857,7 @@ void RpmDb::importPubkey( const Pathname & keyring_r, const string & keyname_r )
   }
   catch (RpmException & excpt_r)
   {
+    ZYPP_CAUGHT(excpt_r);
     close( tmpfd );
     filesystem::unlink( tmpname );
     ZYPP_RETHROW(excpt_r);
@@ -877,8 +877,15 @@ void RpmDb::importPubkey( const Pathname & keyring_r, const string & keyname_r )
   }
 
   MIL << "Exported '" << keyname_r << "' from '" << keyring_r << "' to " << tmpname << endl;
-#warning FIXME handle exception from line below
-  importPubkey( tmpname );
+  try {
+    importPubkey( tmpname );
+  }
+  catch (RpmException & excpt_r)
+  {
+    ZYPP_CAUGHT(excpt_r);
+    filesystem::unlink( tmpname );
+    ZYPP_RETHROW(excpt_r);
+  }
   filesystem::unlink( tmpname );
 }
 
