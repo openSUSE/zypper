@@ -25,7 +25,7 @@
 #include <iosfwd>
 #include <string>
 #include <list>
-#include <sys/time.h>
+#include <ctime>
 
 #include "zypp/solver/detail/ChannelPtr.h"
 

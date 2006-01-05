@@ -21,9 +21,9 @@
 
 #include <sys/mman.h>
 
-#include <stdio.h>
+#include <cstdio>
 #include <fcntl.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <unistd.h>
 #include <iostream>
 #include <ctype.h>
