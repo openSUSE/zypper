@@ -378,7 +378,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     url.setPathName( escapedPath(path) );
 
     Pathname dest = target.absolutename();
-    string destNew = target.asString() + ".new.yast.37456";
+    string destNew = target.asString() + ".new.zypp.37456";
 
     DBG << "dest: " << dest << endl;
     DBG << "destNew: " << destNew << endl;
