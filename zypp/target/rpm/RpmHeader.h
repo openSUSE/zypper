@@ -26,9 +26,6 @@ namespace zypp {
   namespace target {
     namespace rpm {
 
-#if 0
-      class PkgDu;
-#endif
       
       ///////////////////////////////////////////////////////////////////
       //
@@ -124,13 +121,10 @@ namespace zypp {
       
           Changelog tag_changelog() const;
      
-#warning FIXME disk usage data
-#if 0 
           /**
            * Returns reference to arg <code>dudata_r</code>.
            **/
-          PkgDu & tag_du( PkgDu & dudata_r ) const;
-#endif
+          Package::DiskUsage & tag_du( Package::DiskUsage & dudata_r ) const;
       
         public:
       

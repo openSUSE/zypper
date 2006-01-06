@@ -14,6 +14,7 @@
 #include <iostream>
 #include <map>
 #include <set>
+#include <vector>
 
 #include "zypp/base/Logger.h"
 #include "zypp/PathInfo.h"
@@ -21,10 +22,7 @@
 #include "zypp/target/rpm/RpmHeader.h"
 #include "zypp/CapFactory.h"
 #include "zypp/Rel.h"
-#warning FIXME this include
-#if 0
-#include <y2pm/PkgDu.h>
-#endif
+#include "zypp/Package.h"
 
 using namespace std;
 
@@ -649,8 +647,6 @@ namespace zypp {
         return ret;
       }
      
-#warning FIXME disk usage data
-#if 0 
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -659,7 +655,7 @@ namespace zypp {
       //
       //        DESCRIPTION :
       //
-      PkgDu & RpmHeader::tag_du( PkgDu & dudata_r ) const
+      Package::DiskUsage & RpmHeader::tag_du( Package::DiskUsage & dudata_r ) const
       {
         dudata_r.clear();
         stringList basenames;
@@ -682,15 +678,15 @@ namespace zypp {
           // Create and collect Entries by index. devino_cache is used to
           // filter out hardliks ( different name but same device and inode ).
           ///////////////////////////////////////////////////////////////////
-          PathInfo::devino_cache trace;
-          vector<PkgDu::Entry> entries;
+          filesystem::DevInoCache trace;
+          vector<Package::DiskUsage::Entry> entries;
           entries.resize( dirnames.size() );
           for ( unsigned i = 0; i < dirnames.size(); ++i ) {
-            entries[i] = dirnames[i];
+            entries[i] = Package::DiskUsage::Entry(dirnames[i]);
           }
       
           for ( unsigned i = 0; i < basenames.size(); ++ i ) {
-            PathInfo::stat_mode mode( filemodes[i] );
+            filesystem::StatMode mode( filemodes[i] );
             if ( mode.isFile() ) {
               if ( trace.insert( filedevices[i], fileinodes[i] ) ) {
                 // Count full 1K blocks
@@ -713,7 +709,6 @@ namespace zypp {
         }
         return dudata_r;
       }
-#endif
 
     } // namespace rpm
   } // namespace target

@@ -95,6 +95,8 @@ namespace zypp
         virtual std::string type() const;
         /** */
         virtual std::list<std::string> keywords() const;
+        /** */
+        virtual DiskUsage diskUsage() const;
 
       protected:
 	Label _summary;
@@ -112,6 +114,7 @@ namespace zypp
 	Text _authors;
 	std::list<std::string>_keywords;
 	Text _filenames;
+	DiskUsage _disk_usage;
        };
       ///////////////////////////////////////////////////////////////////
     } // namespace rpm

@@ -33,6 +33,7 @@ namespace zypp
     typedef ResTraits<Self>          TraitsType;
     typedef TraitsType::PtrType      Ptr;
     typedef TraitsType::constPtrType constPtr;
+    typedef Impl::DiskUsage	     DiskUsage;
 
   public:
     /** Time of package installation */

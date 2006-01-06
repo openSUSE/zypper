@@ -322,6 +322,9 @@ namespace zypp
       /** */
       bool RPMPackageImpl::prefererCandidate() const
       {}
+      /** */
+      DiskUsage RPMPackageImpl::diskUsage() const
+      { return _disk_usage; }
 
 #endif
 
