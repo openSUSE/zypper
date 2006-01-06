@@ -36,6 +36,7 @@
 #include "zypp/target/rpm/RpmPackageImpl.h"
 #include "zypp/target/rpm/RpmException.h"
 #include "zypp/CapSet.h"
+#include "zypp/CapFactory.h"
 
 #ifndef _
 #define _(X) X
@@ -973,6 +974,7 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
   }
   unsigned current = 0;
 
+  CapFactory _f;
   for ( iter.findAll(); *iter; ++iter, ++current, report.progress( (100*current)/expect)) {
 
     string name = iter->tag_name();
@@ -999,8 +1001,28 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
       iter->tag_arch(),
       impl);
 
+    list<string> filenames = impl->filenames();
+    CapSet provides = iter->tag_provides ( & _filerequires );
+    for (list<string>::const_iterator filename = filenames.begin();
+         filename != filenames.end();
+         filename++)
+    {
+      if (filename->find("/bin/")
+	|| filename->find("/sbin/")
+	|| filename->find("/lib/")
+	|| filename->find("/lib64/")
+	|| filename->find("/etc/")
+        || filename->find("/usr/games/")
+        || filename->find("/usr/share/dict/words")
+        || filename->find("/usr/share/magic.mime")
+        || filename->find("/opt/gnome/games"))
+      {
+	provides.insert(_f.parse(ResTraits<Package>::kind, *filename));
+      }
+    }
+
     Dependencies _deps;
-    _deps.setProvides(iter->tag_provides ( & _filerequires ) );
+    _deps.setProvides( provides );
     _deps.setRequires ( iter->tag_requires ( &_filerequires ) );
     _deps.setPrerequires ( iter->tag_prerequires ( &_filerequires ) );
     _deps.setConflicts( iter->tag_conflicts( &_filerequires ) );
@@ -1020,8 +1042,9 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
 	continue;
       }
       Dependencies _deps = pptr->deps();
-#warning Add FileDeps
-//      pptr->addProvides( *it );
+      CapSet _provides = _deps.provides();
+      _provides.insert(_f.parse(ResTraits<Package>::kind, *it));
+      _deps.setProvides(_provides);
       pptr->setDeps(_deps);
     }
 
