@@ -52,7 +52,7 @@ int assertOutput( const char* output)
 using namespace std;
 using namespace zypp::solver::detail;
 
-static MultiWorldPtr world = NULL;
+static MultiWorld_Ptr world = NULL;
 
 typedef list<unsigned int> ChecksumList;
 
@@ -60,7 +60,7 @@ typedef list<unsigned int> ChecksumList;
 
 #if 0
 static void
-lock_resItem (ResItemPtr resItem)
+lock_resItem (ResItem_Ptr resItem)
 {
     RCResItemDep *dep;
     RCResItemMatch *match;
@@ -81,7 +81,7 @@ lock_resItem (ResItemPtr resItem)
 static bool
 remove_resItem_cb (RCWorld *world, gpointer user_data)
 {
-    ResItemPtr resItem = user_data;
+    ResItem_Ptr resItem = user_data;
 
     rc_world_store_remove_resItem (RC_WORLD_STORE (world), resItem);
 
@@ -90,7 +90,7 @@ remove_resItem_cb (RCWorld *world, gpointer user_data)
 
 
 static void
-remove_resItem (ResItemPtr resItem)
+remove_resItem (ResItem_Ptr resItem)
 {
     rc_world_multi_foreach_subworld_by_type (RC_WORLD_MULTI (world),
 					     RC_TYPE_WORLD_STORE,
@@ -110,7 +110,7 @@ remove_resItem (ResItemPtr resItem)
 typedef list<string> StringList;
 
 static void
-assemble_install_cb (constResItemPtr resItem,
+assemble_install_cb (ResItem_constPtr resItem,
 		     ResItemStatus status,
 		     void *data)
 {
@@ -123,7 +123,7 @@ assemble_install_cb (constResItemPtr resItem,
 
 
 static void
-assemble_uninstall_cb (constResItemPtr resItem,
+assemble_uninstall_cb (ResItem_constPtr resItem,
 		       ResItemStatus status,
 		       void *data)
 {
@@ -136,9 +136,9 @@ assemble_uninstall_cb (constResItemPtr resItem,
 
 
 static void
-assemble_upgrade_cb (constResItemPtr res1,
+assemble_upgrade_cb (ResItem_constPtr res1,
 		     ResItemStatus status1,
-		     constResItemPtr res2,
+		     ResItem_constPtr res2,
 		     ResItemStatus status2,
 		     void *data)
 {
@@ -169,7 +169,7 @@ print_important (const string & str)
 
 
 static void
-print_solution (ResolverContextPtr context, int *count, ChecksumList & checksum_list)
+print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum_list)
 {
     if (context->isValid ()) {
 
@@ -235,9 +235,9 @@ print_solution (ResolverContextPtr context, int *count, ChecksumList & checksum_
 
 //---------------------------------------------------------------------------------------------------------------------
 static bool
-mark_as_system_cb (constResItemPtr resItem, void *unused)
+mark_as_system_cb (ResItem_constPtr resItem, void *unused)
 {
-    ResItemPtr r = ResItemPtr::cast_away_const(resItem);
+    ResItem_Ptr r = ResItem_Ptr::cast_away_const(resItem);
     r->setInstalled (true);
 
     return true;
@@ -246,7 +246,7 @@ mark_as_system_cb (constResItemPtr resItem, void *unused)
 static void
 undump (const char *filename)
 {
-    UndumpWorldPtr undump_world;
+    UndumpWorld_Ptr undump_world;
 
     undump_world = new UndumpWorld (filename);
     if (undump_world == NULL) {
@@ -258,10 +258,10 @@ undump (const char *filename)
 }
 
 
-static ChannelPtr
+static Channel_Ptr
 get_channel (const char *channel_name)
 {
-    ChannelPtr channel;
+    Channel_Ptr channel;
 
     channel = world->getChannelById (channel_name);
 
@@ -275,11 +275,11 @@ get_channel (const char *channel_name)
 }
 
 
-static constResItemPtr
+static ResItem_constPtr
 get_resItem (const char *channel_name, const char *package_name)
 {
-    constChannelPtr channel;
-    constResItemPtr resItem;
+    Channel_constPtr channel;
+    ResItem_constPtr resItem;
 
     channel = get_channel (channel_name);
 
@@ -302,10 +302,10 @@ get_resItem (const char *channel_name, const char *package_name)
 // setup related functions
 
 static bool
-add_to_world_cb (constResItemPtr resItem, void *data)
+add_to_world_cb (ResItem_constPtr resItem, void *data)
 {
-    WorldPtr world = *((WorldPtr *)data);
-    ((StoreWorldPtr)world)->addResItem (resItem);
+    World_Ptr world = *((World_Ptr *)data);
+    ((StoreWorld_Ptr)world)->addResItem (resItem);
 
     return true;
 }
@@ -319,9 +319,9 @@ load_channel (const string & name, const string & filename, const string & type,
     if (getenv ("RC_SPEW")) fprintf (stderr, "load_channel(%s,%s,%s,%s)\n", name.c_str(), pathname.c_str(), type.c_str(), system_packages?"system":"non-system");
 
     ChannelType chan_type = system_packages ? CHANNEL_TYPE_SYSTEM : CHANNEL_TYPE_UNKNOWN;
-    ChannelPtr channel;
+    Channel_Ptr channel;
     unsigned int count;
-    StoreWorldPtr store = new StoreWorld();
+    StoreWorld_Ptr store = new StoreWorld();
 
     World::globalWorld()->addSubworld (store);
 
@@ -366,7 +366,7 @@ load_channel (const string & name, const string & filename, const string & type,
 static bool done_setup = false;
 
 static void
-parse_xml_setup (XmlNodePtr node)
+parse_xml_setup (XmlNode_Ptr node)
 {
     assertExit (node->equals("setup"));
 
@@ -403,8 +403,8 @@ parse_xml_setup (XmlNodePtr node)
 	} else if (node->equals ("force-install")) {
 	    const char *channel_name = node->getProp ("channel");
 	    const char *package_name = node->getProp ("package");
-	    constResItemPtr resItem;
-	    constChannelPtr system_channel;
+	    ResItem_constPtr resItem;
+	    Channel_constPtr system_channel;
 
 	    assertExit (channel_name);
 	    assertExit (package_name);
@@ -418,7 +418,7 @@ parse_xml_setup (XmlNodePtr node)
 		if (!system_channel)
 		    fprintf (stderr, "No system channel available!\n");
 
-		ResItemPtr r = ResItemPtr::cast_away_const(resItem);
+		ResItem_Ptr r = ResItem_Ptr::cast_away_const(resItem);
 		r->setChannel (system_channel);
 		r->setInstalled (true);
 	    } else {
@@ -429,7 +429,7 @@ parse_xml_setup (XmlNodePtr node)
 	    free ((void *)package_name);
 	} else if (node->equals ("force-uninstall")) {
 	    const char *package_name = node->getProp ("package");
-	    constResItemPtr resItem;
+	    ResItem_constPtr resItem;
 
 	    assertExit (package_name);
 	    resItem = get_resItem ("@system", package_name);
@@ -444,7 +444,7 @@ parse_xml_setup (XmlNodePtr node)
 	} else if (node->equals ("lock")) {
 	    const char *channel_name = node->getProp ("channel");
 	    const char *package_name = node->getProp ("package");
-	    constResItemPtr resItem;
+	    ResItem_constPtr resItem;
 
 	    assertExit (channel_name);
 	    assertExit (package_name);
@@ -452,7 +452,7 @@ parse_xml_setup (XmlNodePtr node)
 	    resItem = get_resItem (channel_name, package_name);
 	    if (resItem) {
 		printf (">!> Locking %s from channel %s\n", package_name, channel_name);
-		ResItemPtr r = ResItemPtr::cast_away_const(resItem);
+		ResItem_Ptr r = ResItem_Ptr::cast_away_const(resItem);
 		r->setLocked (true);
 	    } else {
 		fprintf (stderr, "Unknown package %s::%s\n", channel_name, package_name);
@@ -506,7 +506,7 @@ report_solutions (Resolver & resolver)
 
 	if (complete.size() < 20) {
 	    for (ResolverQueueList::const_iterator iter = complete.begin(); iter != complete.end(); iter++) {
-		ResolverQueuePtr queue = (*iter);
+		ResolverQueue_Ptr queue = (*iter);
 		if (queue->context() != resolver.bestContext()) 
 		    print_solution (queue->context(), &count, checksum_list);
 	    }
@@ -518,7 +518,7 @@ report_solutions (Resolver & resolver)
 	printf ("\n");
 
 	for (ResolverQueueList::const_iterator iter = invalid.begin(); iter != invalid.end(); iter++) {
-	    ResolverQueuePtr queue = (*iter);
+	    ResolverQueue_Ptr queue = (*iter);
 	    printf ("Failed Solution: \n%s\n", queue->context()->asString().c_str());
 	    printf ("- - - - - - - - - -\n");
 	    queue->context()->spewInfo ();
@@ -532,7 +532,7 @@ report_solutions (Resolver & resolver)
 
 
 static bool
-trial_upgrade_cb (constResItemPtr original, constResItemPtr upgrade, void *user_data)
+trial_upgrade_cb (ResItem_constPtr original, ResItem_constPtr upgrade, void *user_data)
 {
     Resolver *resolver = (Resolver *)user_data;
 
@@ -545,7 +545,7 @@ trial_upgrade_cb (constResItemPtr original, constResItemPtr upgrade, void *user_
 
 
 static void
-parse_xml_trial (XmlNodePtr node)
+parse_xml_trial (XmlNode_Ptr node)
 {
     bool verify = false;
 
@@ -583,7 +583,7 @@ parse_xml_trial (XmlNodePtr node)
 	} else if (node->equals ("current")) {
 
 	    const char *channel_name = node->getProp ("channel");
-	    constChannelPtr channel = get_channel (channel_name);
+	    Channel_constPtr channel = get_channel (channel_name);
 
 	    if (channel != NULL) {
 		resolver.setCurrentChannel (channel);
@@ -596,7 +596,7 @@ parse_xml_trial (XmlNodePtr node)
 	} else if (node->equals ("subscribe")) {
 
 	    const char *channel_name = node->getProp ("channel");
-	    ChannelPtr channel = get_channel (channel_name);
+	    Channel_Ptr channel = get_channel (channel_name);
 
 	    if (channel != NULL) {
 		channel->setSubscription (true);
@@ -610,7 +610,7 @@ parse_xml_trial (XmlNodePtr node)
 
 	    const char *channel_name = node->getProp ("channel");
 	    const char *package_name = node->getProp ("package");
-	    constResItemPtr resItem;
+	    ResItem_constPtr resItem;
 
 	    assertExit (channel_name);
 	    assertExit (package_name);
@@ -629,7 +629,7 @@ parse_xml_trial (XmlNodePtr node)
 	} else if (node->equals ("uninstall")) {
 
 	    const char *package_name = node->getProp ("package");
-	    constResItemPtr resItem;
+	    ResItem_constPtr resItem;
 
 	    assertExit (package_name);
 
@@ -657,10 +657,10 @@ parse_xml_trial (XmlNodePtr node)
 
 	} else if (node->equals ("solvedeps")) {
 
-	    XmlNodePtr iter = node->children();
+	    XmlNode_Ptr iter = node->children();
 
 	    while (iter != NULL) {
-		DependencyPtr dep = new Dependency (iter);
+		Dependency_Ptr dep = new Dependency (iter);
 
 		/* We just skip over anything that doesn't look like a dependency. */
 
@@ -700,7 +700,7 @@ parse_xml_trial (XmlNodePtr node)
 //---------------------------------------------------------------------------------------------------------------------
 
 static void
-parse_xml_test (XmlNodePtr node)
+parse_xml_test (XmlNode_Ptr node)
 {
     assertExit (node->equals("test"));
 
@@ -725,8 +725,8 @@ parse_xml_test (XmlNodePtr node)
 static void
 process_xml_test_file (const char *filename)
 {
-    xmlDocPtr xml_doc;
-    XmlNodePtr root;
+    xmlDoc_Ptr xml_doc;
+    XmlNode_Ptr root;
 
     xml_doc = xmlParseFile (filename);
     if (xml_doc == NULL) {
