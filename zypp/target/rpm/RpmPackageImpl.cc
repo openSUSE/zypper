@@ -186,6 +186,9 @@ namespace zypp
       std::list<std::string> RPMPackageImpl::keywords() const
       { return _keywords; }
 
+      /** */
+      Package::DiskUsage RPMPackageImpl::diskUsage() const
+      { return _disk_usage; }
 #if 0
       /** */
       std::list<std::string> RPMPackageImpl::insnotify() const
@@ -323,9 +326,6 @@ namespace zypp
       /** */
       bool RPMPackageImpl::prefererCandidate() const
       {}
-      /** */
-      DiskUsage RPMPackageImpl::diskUsage() const
-      { return _disk_usage; }
 
 #endif
 
