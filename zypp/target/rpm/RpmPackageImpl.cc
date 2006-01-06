@@ -61,6 +61,7 @@ namespace zypp
 #endif
       {
 	_description.push_back(data->tag_description());
+	data->tag_du(_disk_usage);
       }
 
 
