@@ -234,15 +234,6 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 
 
 //---------------------------------------------------------------------------------------------------------------------
-static bool
-mark_as_system_cb (ResItem_constPtr resItem, void *unused)
-{
-    ResItem_Ptr r = ResItem_Ptr::cast_away_const(resItem);
-    r->setInstalled (true);
-
-    return true;
-}
-
 static void
 undump (const char *filename)
 {
@@ -304,8 +295,8 @@ get_resItem (const char *channel_name, const char *package_name)
 static bool
 add_to_world_cb (ResItem_constPtr resItem, void *data)
 {
-    World_Ptr world = *((World_Ptr *)data);
-    ((StoreWorld_Ptr)world)->addResItem (resItem);
+    StoreWorld_Ptr world = *((StoreWorld_Ptr *)data);
+    world->addResItem (resItem);
 
     return true;
 }
@@ -353,10 +344,6 @@ load_channel (const string & name, const string & filename, const string & type,
     } else {
 	fprintf (stderr, "Unsupported channel type\n");
 	return;
-    }
-
-    if (system_packages) {
-	store->foreachResItem (channel, mark_as_system_cb, NULL);
     }
 
     printf ("Loaded %d package%s from %s\n", count, count == 1 ? "" : "s", pathname.c_str()); fflush (stdout);
@@ -417,10 +404,10 @@ parse_xml_setup (XmlNode_Ptr node)
 
 		if (!system_channel)
 		    fprintf (stderr, "No system channel available!\n");
-
-		ResItem_Ptr r = ResItem_Ptr::cast_away_const(resItem);
-		r->setChannel (system_channel);
-		r->setInstalled (true);
+#warning force-install disabled
+//		ResItem_Ptr r = ResItem_Ptr::cast_away_const(resItem);
+//		r->setChannel (system_channel);
+//		r->setInstalled (true);
 	    } else {
 		fprintf (stderr, "Unknown package %s::%s\n", channel_name, package_name);
 	    }
@@ -452,8 +439,9 @@ parse_xml_setup (XmlNode_Ptr node)
 	    resItem = get_resItem (channel_name, package_name);
 	    if (resItem) {
 		printf (">!> Locking %s from channel %s\n", package_name, channel_name);
-		ResItem_Ptr r = ResItem_Ptr::cast_away_const(resItem);
-		r->setLocked (true);
+#warning lock disabled
+//		ResItem_Ptr r = ResItem_Ptr::cast_away_const(resItem);
+//		r->setLocked (true);
 	    } else {
 		fprintf (stderr, "Unknown package %s::%s\n", channel_name, package_name);
 	    }
@@ -656,7 +644,7 @@ parse_xml_trial (XmlNode_Ptr node)
 		printf (">!> Upgrading %d package%s\n", count, count > 1 ? "s" : "");
 
 	} else if (node->equals ("solvedeps")) {
-
+#if 0
 	    XmlNode_Ptr iter = node->children();
 
 	    while (iter != NULL) {
@@ -675,7 +663,9 @@ parse_xml_trial (XmlNode_Ptr node)
 		}
 		iter = iter->next();
 	    }
-
+#else
+#warning solvedeps disabled
+#endif
 	} else {
 	    fprintf (stderr, "Unknown tag '%s' in trial\n", node->name());
 	}
@@ -725,7 +715,7 @@ parse_xml_test (XmlNode_Ptr node)
 static void
 process_xml_test_file (const char *filename)
 {
-    xmlDoc_Ptr xml_doc;
+    xmlDocPtr xml_doc;
     XmlNode_Ptr root;
 
     xml_doc = xmlParseFile (filename);
