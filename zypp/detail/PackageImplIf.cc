@@ -90,7 +90,7 @@ namespace zypp
 
       std::ostream & operator<<( std::ostream & str, const PackageImplIf::DiskUsage::Entry & obj )
       {
-        return str << obj.path << '\t' << obj._size << "; files " << obj.files;
+        return str << obj.path << '\t' << obj._size << "; files " << obj._files;
       }
 
       PackageImplIf::DiskUsage::Entry PackageImplIf::DiskUsage::extract( const std::string & dirname_r )
