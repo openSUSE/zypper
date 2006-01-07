@@ -12,7 +12,6 @@ INCLUDES = 						\
 include_HEADERS = \
 	utils.h				\
 	extract.h			\
-	Ustring.h 			\
 	Hash.h				\
 	Spec.h				\
 	SpecPtr.h			\
