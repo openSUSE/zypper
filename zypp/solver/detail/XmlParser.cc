@@ -610,7 +610,7 @@ XmlParser::packageEnd(const char *name)
 
 
 	if (_channel->system())				// simulate system channel by loading xml file
-	    package->setInstalled ();
+	    package->setInstalled (true);
 
         Dependencies deps;
         deps.setRequires          (_current_requires);
