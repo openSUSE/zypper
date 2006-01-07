@@ -29,7 +29,6 @@
 
 #include "zypp/solver/detail/PackagePtr.h"
 #include "zypp/solver/detail/PackageUpdatePtr.h"
-#include "zypp/solver/detail/Section.h"
 #include "zypp/solver/detail/ResItem.h"
 #include "zypp/solver/detail/XmlNode.h"
 
@@ -61,8 +60,7 @@ class Package : public ResItem {
     
       
         private:
-          Section_Ptr _section;
-          
+         
           // Filled in by package info XML
           std::string _pretty_name;
           std::string _summary;
@@ -105,10 +103,6 @@ class Package : public ResItem {
           std::string asString ( bool full = false ) const;
       
           // ---------------------------------- accessors
-      
-          // accessor for _section
-          const Section_Ptr section() const { return _section; }
-          void setSection (const Section_Ptr section) { _section = section; }
       
           // accessor for _pretty_name
           const std::string prettyName() const { return _pretty_name; }

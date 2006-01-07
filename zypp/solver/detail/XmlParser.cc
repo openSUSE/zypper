@@ -623,7 +623,6 @@ XmlParser::packageEnd(const char *name)
         package->setPrettyName    (_current_package_prettyName);
         package->setSummary       (_current_package_summary);
         package->setDescription   (_current_package_description);
-        package->setSection       (new Section(_current_package_section.c_str()));
         package->setFileSize      (_current_package_fileSize);
         package->setInstalledSize (_current_package_installedSize);
         package->setInstallOnly   (_current_package_installOnly);

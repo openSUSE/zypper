@@ -29,7 +29,6 @@
 
 #include "zypp/solver/detail/StoreWorldPtr.h"
 #include "zypp/solver/detail/ResItemAndDependency.h"
-#include "zypp/solver/detail/PackmanPtr.h"
 #include "zypp/solver/detail/World.h"
 #include "zypp/solver/detail/ResItem.h"
 #include "zypp/solver/detail/Match.h"
@@ -60,8 +59,6 @@ class StoreWorld : public World {
     ResItemAndDependencyTable _provides_by_name;
     ResItemAndDependencyTable _requires_by_name;
     ResItemAndDependencyTable _conflicts_by_name;
-
-    Packman_Ptr _packman;
 
     ChannelList _channels;
 

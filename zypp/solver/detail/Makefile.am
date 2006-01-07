@@ -15,7 +15,6 @@ include_HEADERS = \
 	Hash.h				\
 	Spec.h				\
 	SpecPtr.h			\
-	Section.h			\
 	Channel.h			\
 	ChannelPtr.h			\
 	Subscription.h			\
@@ -95,13 +94,11 @@ lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	ResItemAndDependency.cc			\
 	XmlNode.cc					\
 	Importance.cc					\
-	Section.cc					\
 	Package.cc					\
 	PackageUpdate.cc				\
 	XmlParser.cc					\
 	Match.cc					\
 	Pending.cc					\
-	Packman.cc					\
 	World.cc					\
 	UndumpWorld.cc					\
 	StoreWorld.cc					\

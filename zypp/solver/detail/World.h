@@ -36,7 +36,6 @@
 #include "zypp/solver/detail/Channel.h"
 #include "zypp/solver/detail/Match.h"
 #include "zypp/solver/detail/Pending.h"
-#include "zypp/solver/detail/Packman.h"
 #include "zypp/solver/detail/Package.h"
 #include "zypp/solver/detail/PackageUpdate.h"
 #include "zypp/Capability.h"
@@ -72,7 +71,6 @@ namespace zypp
 
       #if 0
       typedef bool		(*WorldSyncFn)    (World_constPtr world, Channel_constPtr channel);
-      typedef Packman_Ptr	(*WorldPackmanFn) (World_constPtr world, const Resolvable::Kind & kind);
       typedef void		(*WorldSpewFn)	  (World_constPtr world, FILE *out);
       typedef World_constPtr	(*WorldDupFn)	  (World_constPtr world);
 
@@ -175,8 +173,6 @@ namespace zypp
 
           static void setGlobalWorld (MultiWorld_Ptr world);
           static MultiWorld_Ptr globalWorld (void);
-
-      	//RCPackman *get_packman      (GType);
 
           bool sync (void) const;
           virtual bool syncConditional (Channel_constPtr channel) const;

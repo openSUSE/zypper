@@ -22,7 +22,6 @@
 #include "config.h"
 #endif
 
-#include "zypp/solver/detail/Packman.h"
 #include "zypp/solver/detail/StoreWorld.h"
 #include "zypp/solver/detail/ResItemAndDependency.h"
 #include "zypp/base/Logger.h"
