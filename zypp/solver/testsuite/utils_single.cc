@@ -1,5 +1,5 @@
 #include <string.h>
-#include <zypp/solver/detail/utils.h>
+#include <zypp/solver/temporary/utils.h>
 
 using namespace zypp::solver::detail;
 

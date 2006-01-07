@@ -32,8 +32,8 @@
 
 #include "zypp/solver/detail/ResolverPtr.h"
 #include "zypp/solver/detail/ResolverQueue.h"
-#include "zypp/solver/detail/ResItem.h"
-#include "zypp/solver/detail/Channel.h"
+#include "zypp/solver/temporary/ResItem.h"
+#include "zypp/solver/temporary/Channel.h"
 #include "zypp/CapSet.h"
 
 /////////////////////////////////////////////////////////////////////////

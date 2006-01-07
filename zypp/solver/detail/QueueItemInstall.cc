@@ -22,6 +22,9 @@
 #include "config.h"
 #endif
 
+#include "zypp/solver/temporary/ResItem.h"
+#include "zypp/solver/temporary/World.h"
+
 #include "zypp/solver/detail/QueueItemInstall.h"
 #include "zypp/solver/detail/QueueItemUninstall.h"
 #include "zypp/solver/detail/QueueItemRequire.h"
@@ -31,8 +34,6 @@
 #include "zypp/solver/detail/ResolverInfoConflictsWith.h"
 #include "zypp/solver/detail/ResolverInfoMisc.h"
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
-#include "zypp/solver/detail/ResItem.h"
-#include "zypp/solver/detail/World.h"
 #include "zypp/solver/detail/ResItemAndDependency.h"
 #include "zypp/CapSet.h"
 #include "zypp/base/Logger.h"
@@ -47,22 +48,22 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      using namespace std;
+using namespace std;
 
-      IMPL_PTR_TYPE(QueueItemInstall);
+IMPL_PTR_TYPE(QueueItemInstall);
 
-      //---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 
-      string
-      QueueItemInstall::asString ( void ) const
-      {
+string
+QueueItemInstall::asString ( void ) const
+{
 	  return toString (*this);
-      }
+}
 
 
-      string
-      QueueItemInstall::toString ( const QueueItemInstall & item)
-      {
+string
+QueueItemInstall::toString ( const QueueItemInstall & item)
+{
 	  string ret = "[Install: ";
 	  ret += item._resItem->asString();
 	  if (item._upgrades != NULL) {
@@ -85,32 +86,32 @@ namespace zypp
 	  if (item._explicitly_requested) ret += ", Explicit !";
 	  ret += "]";
 	  return ret;
-      }
+}
 
 
-      ostream &
-      QueueItemInstall::dumpOn( ostream & str ) const
-      {
+ostream &
+QueueItemInstall::dumpOn( ostream & str ) const
+{
 	  str << asString();
 	  return str;
-      }
+}
 
 
-      ostream&
-      operator<<( ostream& os, const QueueItemInstall & item)
-      {
+ostream&
+operator<<( ostream& os, const QueueItemInstall & item)
+{
 	  return os << item.asString();
-      }
+}
 
-      //---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 
-      QueueItemInstall::QueueItemInstall (World_Ptr world, ResItem_constPtr resItem)
+QueueItemInstall::QueueItemInstall (World_Ptr world, ResItem_constPtr resItem)
 	  : QueueItem (QUEUE_ITEM_TYPE_INSTALL, world)
 	  , _resItem (resItem)
 	  , _channel_priority (0)
 	  , _other_penalty (0)
 	  , _explicitly_requested (false)
-      {
+{
 	  ResItem_constPtr upgrades = world->findInstalledResItem (resItem);
 	  _DBG("RC_SPEW") << "QueueItemInstall::QueueItemInstall(" << resItem->asString() << ") upgrades ";
 	  if (upgrades!=NULL)
@@ -125,37 +126,37 @@ namespace zypp
 	      && ! (upgrades->equals (resItem))) {
 	      setUpgrades(upgrades);
 	  }
-      }
+}
 
 
-      QueueItemInstall::~QueueItemInstall()
-      {
-      }
+QueueItemInstall::~QueueItemInstall()
+{
+}
 
-      //---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 
-      bool
-      QueueItemInstall::isSatisfied (ResolverContext_Ptr context) const
-      {
+bool
+QueueItemInstall::isSatisfied (ResolverContext_Ptr context) const
+{
 	  return context->resItemIsPresent (_resItem);
-      }
+}
 
 
-      //---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 
-      // Handle system resItem's that conflict with us -> uninstall them
+// Handle system resItem's that conflict with us -> uninstall them
 
-      static bool
-      build_conflict_list (ResItem_constPtr resItem, const Capability & dep, void *data)
-      {
+static bool
+build_conflict_list (ResItem_constPtr resItem, const Capability & dep, void *data)
+{
 	  CResItemList *rl = (CResItemList *)data;
 	  rl->push_front (resItem);
 	  return true;
-      }
+}
 
-      bool
-      QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
-      {
+bool
+QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
+{
 	  _DBG("RC_SPEW") <<  "QueueItemInstall::process(" << this->asString() << ")" << endl;
 
 	  ResItem_constPtr resItem = _resItem;
@@ -339,15 +340,15 @@ namespace zypp
 	  }
 	  }
 
-       finished:
+ finished:
 
 	  return true;
-      }
+}
 
 
-      QueueItem_Ptr
-      QueueItemInstall::copy (void) const
-      {
+QueueItem_Ptr
+QueueItemInstall::copy (void) const
+{
 	  QueueItemInstall_Ptr new_install = new QueueItemInstall (world(), _resItem);
 	  ((QueueItem_Ptr)new_install)->copy((QueueItem_constPtr)this);
 
@@ -359,35 +360,35 @@ namespace zypp
 	  new_install->_explicitly_requested = _explicitly_requested;
 
 	  return new_install;
-      }
+}
 
 
-      int
-      QueueItemInstall::cmp (QueueItem_constPtr item) const
-      {
+int
+QueueItemInstall::cmp (QueueItem_constPtr item) const
+{
 	  int cmp = this->compare (item);
 	  if (cmp != 0)
 	      return cmp;
 	  QueueItemInstall_constPtr install = dynamic_pointer_cast<const QueueItemInstall>(item);
 	  return ResItem::compare (_resItem, install->_resItem);
-      }
+}
 
-      //---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 
-      void
-      QueueItemInstall::addDependency (const Capability & dep)
-      {
+void
+QueueItemInstall::addDependency (const Capability & dep)
+{
 	  _deps_satisfied_by_this_install.insert (dep);
-      }
+}
 
 
-      void
-      QueueItemInstall::addNeededBy (ResItem_constPtr resItem)
-      {
+void
+QueueItemInstall::addNeededBy (ResItem_constPtr resItem)
+{
 	  _needed_by.push_front (resItem);
-      }
+}
 
-      ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

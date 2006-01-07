@@ -22,7 +22,6 @@
 #define ZYPP_SOLVER_DETAIL_QUEUEITEMINSTALL_PTR_H
 
 #include "zypp/base/PtrTypes.h"
-#include "zypp/solver/detail/QueueItemPtr.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

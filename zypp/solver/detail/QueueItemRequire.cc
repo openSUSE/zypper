@@ -19,6 +19,8 @@
  * 02111-1307, USA.
  */
 
+#include "zypp/solver/temporary/World.h"
+
 #include "zypp/solver/detail/QueueItemRequire.h"
 #include "zypp/solver/detail/QueueItemBranch.h"
 #include "zypp/solver/detail/QueueItemUninstall.h"
@@ -28,7 +30,6 @@
 #include "zypp/solver/detail/ResolverInfoDependsOn.h"
 #include "zypp/solver/detail/ResolverInfoMisc.h"
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
-#include "zypp/solver/detail/World.h"
 #include "zypp/CapSet.h"
 #include "zypp/base/Logger.h"
 
@@ -42,449 +43,449 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      using namespace std;
+using namespace std;
 
-      IMPL_PTR_TYPE(QueueItemRequire);
+IMPL_PTR_TYPE(QueueItemRequire);
 
-      //---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 
-      string
-      QueueItemRequire::asString ( void ) const
-      {
-          return toString (*this);
-      }
-
-
-      string
-      QueueItemRequire::toString ( const QueueItemRequire & item)
-      {
-          string ret = "[Require: ";
-          ret += item._dep.asString();
-          if (item._requiring_resItem != NULL) {
-      	ret += ", Required by ";
-      	ret += item._requiring_resItem->asString();
-          }
-          if (item._upgraded_resItem != NULL) {
-      	ret += ", Upgrades ";
-      	ret += item._upgraded_resItem->asString();
-          }
-          if (item._lost_resItem != NULL) {
-      	ret += ", Lost ";
-      	ret += item._lost_resItem->asString();
-          }
-          if (item._remove_only) ret += ", Remove Only";
-          if (item._is_child) ret += ", Child";
-          ret += "]";
-
-          return ret;
-      }
+string
+QueueItemRequire::asString ( void ) const
+{
+    return toString (*this);
+}
 
 
-      ostream &
-      QueueItemRequire::dumpOn( ostream & str ) const
-      {
-          str << asString();
-          return str;
-      }
+string
+QueueItemRequire::toString ( const QueueItemRequire & item)
+{
+    string ret = "[Require: ";
+    ret += item._dep.asString();
+    if (item._requiring_resItem != NULL) {
+	ret += ", Required by ";
+	ret += item._requiring_resItem->asString();
+    }
+    if (item._upgraded_resItem != NULL) {
+	ret += ", Upgrades ";
+	ret += item._upgraded_resItem->asString();
+    }
+    if (item._lost_resItem != NULL) {
+	ret += ", Lost ";
+	ret += item._lost_resItem->asString();
+    }
+    if (item._remove_only) ret += ", Remove Only";
+    if (item._is_child) ret += ", Child";
+    ret += "]";
+
+    return ret;
+}
 
 
-      ostream&
-      operator<<( ostream& os, const QueueItemRequire & item)
-      {
-          return os << item.asString();
-      }
-
-      //---------------------------------------------------------------------------
-
-      QueueItemRequire::QueueItemRequire (World_Ptr world, const Capability & dep)
-          : QueueItem (QUEUE_ITEM_TYPE_REQUIRE, world)
-          , _dep (dep)
-          , _requiring_resItem (NULL)
-          , _upgraded_resItem (NULL)
-          , _lost_resItem (NULL)
-          , _remove_only (false)
-          , _is_child (false)
-      {
-      }
+ostream &
+QueueItemRequire::dumpOn( ostream & str ) const
+{
+    str << asString();
+    return str;
+}
 
 
-      QueueItemRequire::~QueueItemRequire()
-      {
-      }
+ostream&
+operator<<( ostream& os, const QueueItemRequire & item)
+{
+    return os << item.asString();
+}
 
-      //---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 
-      void
-      QueueItemRequire::addResItem (ResItem_constPtr resItem)
-      {
-          assert (_requiring_resItem == NULL);
-          _requiring_resItem = resItem;
-      }
-
-
-      //---------------------------------------------------------------------------
-
-      typedef std::map <ResItem_constPtr, bool> UniqTable;
-
-      typedef struct {
-          ResItem_constPtr resItem;
-          const Capability *dep;
-          ResolverContext_Ptr context;
-          World_Ptr world;
-          CResItemList providers;
-          UniqTable *uniq;
-      } RequireProcessInfo;
+QueueItemRequire::QueueItemRequire (World_Ptr world, const Capability & dep)
+    : QueueItem (QUEUE_ITEM_TYPE_REQUIRE, world)
+    , _dep (dep)
+    , _requiring_resItem (NULL)
+    , _upgraded_resItem (NULL)
+    , _lost_resItem (NULL)
+    , _remove_only (false)
+    , _is_child (false)
+{
+}
 
 
-      static bool
-      require_process_cb (ResItem_constPtr resItem, const Capability & cap, void *data)
-      {
-          RequireProcessInfo *info = (RequireProcessInfo *)data;
-          ResItemStatus status;
+QueueItemRequire::~QueueItemRequire()
+{
+}
 
-          status = info->context->getStatus (resItem);
-      //fprintf (stderr, "require_process_cb(res: %s, spec %s, status %s)\n", resItem->asString().c_str(), cap.asString().c_str(), ResolverContext::toString(status).c_str());
-      //fprintf (stderr, "require_process_cb(info->dep: %s)\n", info->dep ? info->dep->asString().c_str() : "(null)");
-      //fprintf (stderr, "require_process_cb(resItemIsPossible -> %d)\n", info->context->resItemIsPossible (resItem));
-          /* info->dep is set for resItem set childern only. If it is set
-             allow only exactly required version */
-          if (info->dep != NULL
-              && *(info->dep) != cap) {
-      	return true;
-          }
+//---------------------------------------------------------------------------
 
-          if ((! resItem_status_is_to_be_uninstalled (status))
-      	&& ! info->context->isParallelInstall (resItem)
-      	&& info->uniq->find(resItem) == info->uniq->end()
-      	&& info->context->resItemIsPossible (resItem)
-      	&& ! info->world->resItemIsLocked (resItem)) {
-
-      	info->providers.push_front (resItem);
-      	(*(info->uniq))[resItem] = true;
-          }
-
-          return true;
-      }
+void
+QueueItemRequire::addResItem (ResItem_constPtr resItem)
+{
+    assert (_requiring_resItem == NULL);
+    _requiring_resItem = resItem;
+}
 
 
-      static bool
-      no_installable_providers_info_cb (ResItem_constPtr resItem, const Capability & cap, void *data)
-      {
-          RequireProcessInfo *info = (RequireProcessInfo *)data;
-          ResItemStatus status;
-          string msg_str;
+//---------------------------------------------------------------------------
 
-          status = info->context->getStatus (resItem);
+typedef std::map <ResItem_constPtr, bool> UniqTable;
 
-          if (resItem_status_is_to_be_uninstalled (status)) {
-      	msg_str = resItem->name() + " provides " + cap.asString() + ", but is scheduled to be uninstalled.";
-          } else if (info->context->isParallelInstall (resItem)) {
-      	msg_str = resItem->name() + " provides " + cap.asString() + ", but another version of that resItem is already installed.";
-          } else if (! info->context->resItemIsPossible (resItem)) {
-      	msg_str = resItem->name() + " provides " + cap.asString() + ", but it is uninstallable.  Try installing it on its own for more details.";
-          } else if (info->world->resItemIsLocked (resItem)) {
-      	msg_str = resItem->name() + " provides " + cap.asString() + ", but it is locked.";
-          }
-
-          if (!msg_str.empty()) {
-      	info->context->addInfoString (info->resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg_str);
-          }
-
-          return true;
-      }
+typedef struct {
+    ResItem_constPtr resItem;
+    const Capability *dep;
+    ResolverContext_Ptr context;
+    World_Ptr world;
+    CResItemList providers;
+    UniqTable *uniq;
+} RequireProcessInfo;
 
 
-      static bool
-      look_for_upgrades_cb (ResItem_constPtr resItem, void *data)
-      {
-          CResItemList *rl = (CResItemList *)data;
-          rl->push_front (resItem);
-          return true;
-      }
+static bool
+require_process_cb (ResItem_constPtr resItem, const Capability & cap, void *data)
+{
+    RequireProcessInfo *info = (RequireProcessInfo *)data;
+    ResItemStatus status;
+
+    status = info->context->getStatus (resItem);
+//fprintf (stderr, "require_process_cb(res: %s, spec %s, status %s)\n", resItem->asString().c_str(), cap.asString().c_str(), ResolverContext::toString(status).c_str());
+//fprintf (stderr, "require_process_cb(info->dep: %s)\n", info->dep ? info->dep->asString().c_str() : "(null)");
+//fprintf (stderr, "require_process_cb(resItemIsPossible -> %d)\n", info->context->resItemIsPossible (resItem));
+    /* info->dep is set for resItem set childern only. If it is set
+       allow only exactly required version */
+    if (info->dep != NULL
+        && *(info->dep) != cap) {
+	return true;
+    }
+
+    if ((! resItem_status_is_to_be_uninstalled (status))
+	&& ! info->context->isParallelInstall (resItem)
+	&& info->uniq->find(resItem) == info->uniq->end()
+	&& info->context->resItemIsPossible (resItem)
+	&& ! info->world->resItemIsLocked (resItem)) {
+
+	info->providers.push_front (resItem);
+	(*(info->uniq))[resItem] = true;
+    }
+
+    return true;
+}
 
 
-      static bool
-      codependent_resItems (ResItem_constPtr r1, ResItem_constPtr r2)
-      {
-          string name1 = r1->name();
-          string name2 = r2->name();
-          int len1 = name1.size();
-          int len2 = name2.size();
+static bool
+no_installable_providers_info_cb (ResItem_constPtr resItem, const Capability & cap, void *data)
+{
+    RequireProcessInfo *info = (RequireProcessInfo *)data;
+    ResItemStatus status;
+    string msg_str;
 
-          if (len2 < len1) {
-      	string swap = name1;
-      	int swap_len = len1;
-      	name1 = name2;
-      	name2 = swap;
-      	len1 = len2;
-      	len2 = swap_len;
-          }
+    status = info->context->getStatus (resItem);
 
-          // foo and foo-bar are automatically co-dependent
-          if (len1 < len2
-      	&& strncmp (name1.c_str(), name2.c_str(), len1) == 0
-      	&& name2[len1] == '-') {
-      	return true;
-          }
+    if (resItem_status_is_to_be_uninstalled (status)) {
+	msg_str = resItem->name() + " provides " + cap.asString() + ", but is scheduled to be uninstalled.";
+    } else if (info->context->isParallelInstall (resItem)) {
+	msg_str = resItem->name() + " provides " + cap.asString() + ", but another version of that resItem is already installed.";
+    } else if (! info->context->resItemIsPossible (resItem)) {
+	msg_str = resItem->name() + " provides " + cap.asString() + ", but it is uninstallable.  Try installing it on its own for more details.";
+    } else if (info->world->resItemIsLocked (resItem)) {
+	msg_str = resItem->name() + " provides " + cap.asString() + ", but it is locked.";
+    }
 
-          return false;
-      }
+    if (!msg_str.empty()) {
+	info->context->addInfoString (info->resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg_str);
+    }
+
+    return true;
+}
 
 
-      bool
-      QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_items)
-      {
-          _DBG("RC_SPEW") << "QueueItemRequire::process(" << this->asString() << ")" << endl;
+static bool
+look_for_upgrades_cb (ResItem_constPtr resItem, void *data)
+{
+    CResItemList *rl = (CResItemList *)data;
+    rl->push_front (resItem);
+    return true;
+}
 
-          if (context->requirementIsMet (_dep, _is_child)) {
+
+static bool
+codependent_resItems (ResItem_constPtr r1, ResItem_constPtr r2)
+{
+    string name1 = r1->name();
+    string name2 = r2->name();
+    int len1 = name1.size();
+    int len2 = name2.size();
+
+    if (len2 < len1) {
+	string swap = name1;
+	int swap_len = len1;
+	name1 = name2;
+	name2 = swap;
+	len1 = len2;
+	len2 = swap_len;
+    }
+
+    // foo and foo-bar are automatically co-dependent
+    if (len1 < len2
+	&& strncmp (name1.c_str(), name2.c_str(), len1) == 0
+	&& name2[len1] == '-') {
+	return true;
+    }
+
+    return false;
+}
+
+
+bool
+QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_items)
+{
+    _DBG("RC_SPEW") << "QueueItemRequire::process(" << this->asString() << ")" << endl;
+
+    if (context->requirementIsMet (_dep, _is_child)) {
 	      _DBG("RC_SPEW") <<  "requirement is already met in current context" << endl;
-      //    rc_queue_item_free (item);
-      	return true;
-          }
+//    rc_queue_item_free (item);
+	return true;
+    }
 
-          RequireProcessInfo info;
+    RequireProcessInfo info;
 
-          info.resItem = _requiring_resItem;
-          info.dep = _is_child ? &_dep : NULL;
-          info.context = context;
-          info.world = world();
-          info.uniq = new UniqTable();		//FIXME: op: g_hash_table_new (rc_resItem_spec_hash, rc_resItem_spec_equal);
+    info.resItem = _requiring_resItem;
+    info.dep = _is_child ? &_dep : NULL;
+    info.context = context;
+    info.world = world();
+    info.uniq = new UniqTable();		//FIXME: op: g_hash_table_new (rc_resItem_spec_hash, rc_resItem_spec_equal);
 
-          int num_providers = 0;
+    int num_providers = 0;
 
-          if (! _remove_only) {
+    if (! _remove_only) {
 
-      	world()->foreachProvidingResItem (_dep, require_process_cb, &info);
+	world()->foreachProvidingResItem (_dep, require_process_cb, &info);
 
-      	num_providers = info.providers.size();
+	num_providers = info.providers.size();
 
-      	_DBG("RC_SPEW") << "requirement is met by " << num_providers << " resolvable";
-          }
+	_DBG("RC_SPEW") << "requirement is met by " << num_providers << " resolvable";
+    }
 
-          std::string msg;
+    std::string msg;
 
-          if (num_providers == 0) {
+    if (num_providers == 0) {
 
 	      _DBG("RC_SPEW") << "Unfulfilled requirement, try different solution" << endl;
 
-      	QueueItemUninstall_Ptr uninstall_item = NULL;
-      	QueueItemBranch_Ptr branch_item = NULL;
-      	bool explore_uninstall_branch = true;
+	QueueItemUninstall_Ptr uninstall_item = NULL;
+	QueueItemBranch_Ptr branch_item = NULL;
+	bool explore_uninstall_branch = true;
 
-      	if (_upgraded_resItem == NULL) {
-      	    ResolverInfo_Ptr err_info;
+	if (_upgraded_resItem == NULL) {
+	    ResolverInfo_Ptr err_info;
 
-      	    msg = string ("There are no ") + (_remove_only ? "alternative installed" : "installable") + " providers of " + _dep.asString();
-      	    if (_requiring_resItem != NULL) {
-      		msg += " for ";
-      		msg += _requiring_resItem->asString();
-      	    }
+	    msg = string ("There are no ") + (_remove_only ? "alternative installed" : "installable") + " providers of " + _dep.asString();
+	    if (_requiring_resItem != NULL) {
+		msg += " for ";
+		msg += _requiring_resItem->asString();
+	    }
 
-      	    err_info = new ResolverInfoMisc (_requiring_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
+	    err_info = new ResolverInfoMisc (_requiring_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
 
-      	    context->addInfo (err_info);
+	    context->addInfo (err_info);
 
-      	    // Maybe we can add some extra info on why none of the providers are suitable.
-      	    world()->foreachProvidingResItem (_dep, no_installable_providers_info_cb, (void *)&info);
-      	}
+	    // Maybe we can add some extra info on why none of the providers are suitable.
+	    world()->foreachProvidingResItem (_dep, no_installable_providers_info_cb, (void *)&info);
+	}
 
-      	// If this is an upgrade, we might be able to avoid removing stuff by upgrading it instead.
-      	if (_upgraded_resItem != NULL
-      	    && _requiring_resItem != NULL) {
+	// If this is an upgrade, we might be able to avoid removing stuff by upgrading it instead.
+	if (_upgraded_resItem != NULL
+	    && _requiring_resItem != NULL) {
 
-      	    CResItemList upgrade_list;
+	    CResItemList upgrade_list;
 
-      	    world()->foreachUpgrade (_requiring_resItem, new Channel(CHANNEL_TYPE_ANY), look_for_upgrades_cb, (void *)&upgrade_list);
+	    world()->foreachUpgrade (_requiring_resItem, new Channel(CHANNEL_TYPE_ANY), look_for_upgrades_cb, (void *)&upgrade_list);
 
-      	    if (!upgrade_list.empty()) {
-      		string label, req_str, up_str;
+	    if (!upgrade_list.empty()) {
+		string label, req_str, up_str;
 
-      		branch_item = new QueueItemBranch (world());
+		branch_item = new QueueItemBranch (world());
 
-      		req_str = _requiring_resItem->asString();
-      		up_str  = _upgraded_resItem->asString();
+		req_str = _requiring_resItem->asString();
+		up_str  = _upgraded_resItem->asString();
 
-      		label = string ("for requiring ") + _dep.asString() + " for " + req_str + " when upgrading " + up_str;
-      		branch_item->setLabel (label);
-      //fprintf (stderr, "Branching: %s\n", label.c_str());
-      		for (CResItemList::const_iterator iter = upgrade_list.begin(); iter != upgrade_list.end(); iter++) {
-      		    ResItem_constPtr upgrade_resItem = *iter;
-      		    QueueItemInstall_Ptr install_item;
+		label = string ("for requiring ") + _dep.asString() + " for " + req_str + " when upgrading " + up_str;
+		branch_item->setLabel (label);
+//fprintf (stderr, "Branching: %s\n", label.c_str());
+		for (CResItemList::const_iterator iter = upgrade_list.begin(); iter != upgrade_list.end(); iter++) {
+		    ResItem_constPtr upgrade_resItem = *iter;
+		    QueueItemInstall_Ptr install_item;
 
-      		    if (context->resItemIsPossible (upgrade_resItem)) {
+		    if (context->resItemIsPossible (upgrade_resItem)) {
 
-      			install_item = new QueueItemInstall (world(), upgrade_resItem);
-      		    	install_item->setUpgrades (_requiring_resItem);
-      			branch_item->addItem (install_item);
+			install_item = new QueueItemInstall (world(), upgrade_resItem);
+		    	install_item->setUpgrades (_requiring_resItem);
+			branch_item->addItem (install_item);
 
-      			ResolverInfoNeededBy_Ptr upgrade_info = new ResolverInfoNeededBy (upgrade_resItem);
-      			upgrade_info->addRelatedResItem (_upgraded_resItem);
-      			install_item->addInfo (upgrade_info);
+			ResolverInfoNeededBy_Ptr upgrade_info = new ResolverInfoNeededBy (upgrade_resItem);
+			upgrade_info->addRelatedResItem (_upgraded_resItem);
+			install_item->addInfo (upgrade_info);
 
-      			// If an upgrade resItem has its requirements met, don't do the uninstall branch.
-      			//   FIXME: should we also look at conflicts here?
+			// If an upgrade resItem has its requirements met, don't do the uninstall branch.
+			//   FIXME: should we also look at conflicts here?
 
-      			if (explore_uninstall_branch) {
-      			    CapSet requires = upgrade_resItem->requires();
-      			    CapSet::const_iterator iter = requires.begin();
-      			    for (; iter != requires.end(); iter++) {
-      				const Capability req = *iter;
-      				if (! context->requirementIsMet (req, false)) {
-      					break;
-      				}
-      			    }
-      			    if (iter == requires.end()) {
-      				explore_uninstall_branch = false;
-      			    }
-      			}
+			if (explore_uninstall_branch) {
+			    CapSet requires = upgrade_resItem->requires();
+			    CapSet::const_iterator iter = requires.begin();
+			    for (; iter != requires.end(); iter++) {
+				const Capability req = *iter;
+				if (! context->requirementIsMet (req, false)) {
+					break;
+				}
+			    }
+			    if (iter == requires.end()) {
+				explore_uninstall_branch = false;
+			    }
+			}
 
-      		    } /* if (context->resItemIsPossible ( ... */
-      		} /* for (iter = upgrade_list; ... */
-      	    } /* if (upgrade_list) ... */
+		    } /* if (context->resItemIsPossible ( ... */
+		} /* for (iter = upgrade_list; ... */
+	    } /* if (upgrade_list) ... */
 
-      	    if (!upgrade_list.empty()
-      		&& branch_item->isEmpty ()) {
+	    if (!upgrade_list.empty()
+		&& branch_item->isEmpty ()) {
 
-      		for (CResItemList::const_iterator iter = upgrade_list.begin(); iter != upgrade_list.end(); iter++) {
-      		    string str;
-      		    string p1, p2;
+		for (CResItemList::const_iterator iter = upgrade_list.begin(); iter != upgrade_list.end(); iter++) {
+		    string str;
+		    string p1, p2;
 
-      		    p1 = _requiring_resItem->asString();
-      		    p2 = (*iter)->asString();
-      		    str = string ("Upgrade to ") + p2 + " to avoid removing " + p1 + " is not possible.";
+		    p1 = _requiring_resItem->asString();
+		    p2 = (*iter)->asString();
+		    str = string ("Upgrade to ") + p2 + " to avoid removing " + p1 + " is not possible.";
 
-      		    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (NULL, RESOLVER_INFO_PRIORITY_VERBOSE, str);
-      		    misc_info->addRelatedResItem (_requiring_resItem);
-      		    misc_info->addRelatedResItem (*iter);
-      		    context->addInfo (misc_info);
+		    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (NULL, RESOLVER_INFO_PRIORITY_VERBOSE, str);
+		    misc_info->addRelatedResItem (_requiring_resItem);
+		    misc_info->addRelatedResItem (*iter);
+		    context->addInfo (misc_info);
 
-      		    explore_uninstall_branch = true;
-      		}
+		    explore_uninstall_branch = true;
+		}
 
-      		//
-      		//  The exception: we always want to consider uninstalling
-      		//  when the requirement has resulted from a resItem losing
-      		//  one of it's provides.
+		//
+		//  The exception: we always want to consider uninstalling
+		//  when the requirement has resulted from a resItem losing
+		//  one of it's provides.
 
-      	    } else if (!upgrade_list.empty()
-      		       && explore_uninstall_branch
-      		       && codependent_resItems (_requiring_resItem, _upgraded_resItem)
-      		       && _lost_resItem == NULL) {
-      		explore_uninstall_branch = false;
-      	    }
+	    } else if (!upgrade_list.empty()
+		       && explore_uninstall_branch
+		       && codependent_resItems (_requiring_resItem, _upgraded_resItem)
+		       && _lost_resItem == NULL) {
+		explore_uninstall_branch = false;
+	    }
 
-      	} /* if (_upgrade_resItem && _requiring_resItem) ... */
+	} /* if (_upgrade_resItem && _requiring_resItem) ... */
 
-      	// We always consider uninstalling when in verification mode.
+	// We always consider uninstalling when in verification mode.
 
-      	if (context->verifying()) {
-      	    explore_uninstall_branch = true;
-      	}
+	if (context->verifying()) {
+	    explore_uninstall_branch = true;
+	}
 
-      	if (explore_uninstall_branch && _requiring_resItem) {
-      	    ResolverInfo_Ptr log_info;
-      	    uninstall_item = new QueueItemUninstall (world(),_requiring_resItem, "unsatisfied requirements");
-      	    uninstall_item->setDependency (_dep);
+	if (explore_uninstall_branch && _requiring_resItem) {
+	    ResolverInfo_Ptr log_info;
+	    uninstall_item = new QueueItemUninstall (world(),_requiring_resItem, "unsatisfied requirements");
+	    uninstall_item->setDependency (_dep);
 
-      	    if (_lost_resItem) {
-      		log_info = new ResolverInfoDependsOn (_requiring_resItem, _lost_resItem);
-      		uninstall_item->addInfo (log_info);
-      	    }
+	    if (_lost_resItem) {
+		log_info = new ResolverInfoDependsOn (_requiring_resItem, _lost_resItem);
+		uninstall_item->addInfo (log_info);
+	    }
 
-      	    if (_remove_only)
-      		uninstall_item->setRemoveOnly ();
-      	}
+	    if (_remove_only)
+		uninstall_item->setRemoveOnly ();
+	}
 
-      	if (uninstall_item && branch_item) {
-      	    branch_item->addItem (uninstall_item);
-      	    new_items.push_front (branch_item);
-      	} else if (uninstall_item) {
-      	    new_items.push_front (uninstall_item);
-      	} else if (branch_item) {
-      	    new_items.push_front (branch_item);
-      	} else {
-      	    // We can't do anything to resolve the missing requirement, so we fail.
-      	    string msg = string ("Can't satisfy requirement '") + _dep.asString() + "'";
+	if (uninstall_item && branch_item) {
+	    branch_item->addItem (uninstall_item);
+	    new_items.push_front (branch_item);
+	} else if (uninstall_item) {
+	    new_items.push_front (uninstall_item);
+	} else if (branch_item) {
+	    new_items.push_front (branch_item);
+	} else {
+	    // We can't do anything to resolve the missing requirement, so we fail.
+	    string msg = string ("Can't satisfy requirement '") + _dep.asString() + "'";
 
-      	    context->addErrorString (NULL, msg);
-      	}
+	    context->addErrorString (NULL, msg);
+	}
 
-          } else if (num_providers == 1) {
+    } else if (num_providers == 1) {
 
 	      _DBG("RC_SPEW") << "Found exactly one resolvable, installing it." << endl;
 
-      	QueueItemInstall_Ptr install_item = new QueueItemInstall (world(), info.providers.front());
-      	install_item->addDependency (_dep);
+	QueueItemInstall_Ptr install_item = new QueueItemInstall (world(), info.providers.front());
+	install_item->addDependency (_dep);
 
-      	// The requiring resItem could be NULL if the requirement was added as an extra dependency.
-      	if (_requiring_resItem) {
-      	    install_item->addNeededBy (_requiring_resItem);
-      	}
-      	new_items.push_front (install_item);
+	// The requiring resItem could be NULL if the requirement was added as an extra dependency.
+	if (_requiring_resItem) {
+	    install_item->addNeededBy (_requiring_resItem);
+	}
+	new_items.push_front (install_item);
 
-          } else if (num_providers > 1) {
+    } else if (num_providers > 1) {
 
 	      _DBG("RC_SPEW") << "Found more than one resolvable, branching." << endl;
 
-      //fprintf (stderr, "Found more than one resItem, branching.\n");
-      	QueueItemBranch_Ptr branch_item = new QueueItemBranch (world());
+//fprintf (stderr, "Found more than one resItem, branching.\n");
+	QueueItemBranch_Ptr branch_item = new QueueItemBranch (world());
 
-      	for (CResItemList::const_iterator iter = info.providers.begin(); iter != info.providers.end(); iter++) {
-      	    QueueItemInstall_Ptr install_item = new QueueItemInstall (world(), *iter);
-      	    install_item->addDependency (_dep);
-      	    branch_item->addItem (install_item);
+	for (CResItemList::const_iterator iter = info.providers.begin(); iter != info.providers.end(); iter++) {
+	    QueueItemInstall_Ptr install_item = new QueueItemInstall (world(), *iter);
+	    install_item->addDependency (_dep);
+	    branch_item->addItem (install_item);
 
-      	    // The requiring resItem could be NULL if the requirement was added as an extra dependency.
-      	    if (_requiring_resItem) {
-      		install_item->addNeededBy (_requiring_resItem);
-      	    }
-      	}
+	    // The requiring resItem could be NULL if the requirement was added as an extra dependency.
+	    if (_requiring_resItem) {
+		install_item->addNeededBy (_requiring_resItem);
+	    }
+	}
 
-      	new_items.push_front (branch_item);
+	new_items.push_front (branch_item);
 
-          } else {
-      	abort ();
-          }
+    } else {
+	abort ();
+    }
 
 
-      //    rc_queue_item_free (item);
-          return true;
-      }
+//    rc_queue_item_free (item);
+    return true;
+}
 
-      //---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 
-      QueueItem_Ptr
-      QueueItemRequire::copy (void) const
-      {
-          QueueItemRequire_Ptr new_require = new QueueItemRequire (world(), _dep);
+QueueItem_Ptr
+QueueItemRequire::copy (void) const
+{
+    QueueItemRequire_Ptr new_require = new QueueItemRequire (world(), _dep);
 #warning wrong casts
-          ((QueueItem_Ptr)new_require)->copy((QueueItem_constPtr)this);
+    ((QueueItem_Ptr)new_require)->copy((QueueItem_constPtr)this);
 
-          new_require->_requiring_resItem = _requiring_resItem;
-          new_require->_upgraded_resItem  = _upgraded_resItem;
-          new_require->_remove_only          = _remove_only;
+    new_require->_requiring_resItem = _requiring_resItem;
+    new_require->_upgraded_resItem  = _upgraded_resItem;
+    new_require->_remove_only          = _remove_only;
 
-          return new_require;
-      }
+    return new_require;
+}
 
 
-      int
-      QueueItemRequire::cmp (QueueItem_constPtr item) const
-      {
-          int cmp = this->compare (item);		// assures equal type
-          if (cmp != 0)
-              return cmp;
+int
+QueueItemRequire::cmp (QueueItem_constPtr item) const
+{
+    int cmp = this->compare (item);		// assures equal type
+    if (cmp != 0)
+        return cmp;
 
-          QueueItemRequire_constPtr require = dynamic_pointer_cast<const QueueItemRequire>(item);
+    QueueItemRequire_constPtr require = dynamic_pointer_cast<const QueueItemRequire>(item);
 
-          if (_dep != require->dependency())
-          {
-              cmp = -1;
-          }
-          return cmp;
-      }
+    if (_dep != require->dependency())
+    {
+        cmp = -1;
+    }
+    return cmp;
+}
 
-      ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

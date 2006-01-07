@@ -22,11 +22,12 @@
 
 #include <values.h>
 
+#include "zypp/solver/temporary/MultiWorld.h"
+#include "zypp/solver/temporary/World.h"
+
 #include "zypp/base/String.h"
 #include "zypp/solver/detail/ResolverContext.h"
 #include "zypp/solver/detail/ResolverInfoMisc.h"
-#include "zypp/solver/detail/MultiWorld.h"
-#include "zypp/solver/detail/World.h"
 #include "zypp/CapSet.h"
 #include "zypp/base/Logger.h"
 

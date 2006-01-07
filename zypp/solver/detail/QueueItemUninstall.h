@@ -28,9 +28,9 @@
 
 #include "zypp/solver/detail/QueueItem.h"
 #include "zypp/solver/detail/QueueItemUninstallPtr.h"
-#include "zypp/solver/detail/ResItem.h"
+#include "zypp/solver/temporary/ResItem.h"
+#include "zypp/solver/temporary/Channel.h"
 #include "zypp/Capability.h"
-#include "zypp/solver/detail/Channel.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

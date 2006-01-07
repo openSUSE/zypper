@@ -24,11 +24,11 @@ utils_single_SOURCES =					\
 	utils_single.cc
 
 utils_single_LDFLAGS =					\
-	-L$(top_srcdir)/zypp/solver/detail/.libs	\
+	-L$(top_srcdir)/zypp/solver/temporary/.libs	\
 	-L$(top_srcdir)/zypp
 
 utils_single_LDADD =					\
-	-lzypp_solver_detail				\
+	-lzypp_solver_temporary				\
 	$(LIBZYPP_LIBS)
 
 
@@ -37,9 +37,12 @@ deptestomatic_multi_SOURCES =				\
 
 deptestomatic_multi_LDFLAGS =				\
 	-L$(top_srcdir)/zypp/solver/detail/.libs	\
+	-L$(top_srcdir)/zypp/solver/temporary/.libs	\
 	-L$(top_srcdir)/zypp
 
 deptestomatic_multi_LDADD =				\
+	-lzypp_solver_detail				\
+	-lzypp_solver_temporary				\
 	-lzypp_solver_detail				\
 	$(LIBZYPP_LIBS)
 

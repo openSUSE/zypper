@@ -340,7 +340,9 @@ load_channel (const string & name, const string & filename, const string & type,
     if (chan_type == CHANNEL_TYPE_HELIX) {
 	count = extract_packages_from_helix_file (pathname, channel, add_to_world_cb, (void *)&store);
     } else if (chan_type == CHANNEL_TYPE_DEBIAN) {
-	count = extract_packages_from_debian_file (pathname, channel, add_to_world_cb, (void *)&store);
+	fprintf (stderr, "Unsupported channel 'debian'\n");
+	exit (1);
+//	count = extract_packages_from_debian_file (pathname, channel, add_to_world_cb, (void *)&store);
     } else {
 	fprintf (stderr, "Unsupported channel type\n");
 	return;

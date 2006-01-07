@@ -22,7 +22,6 @@
 #define ZYPP_SOLVER_DETAIL_RESITEMANDDEPENDENCY_PTR_H
 
 #include "zypp/base/PtrTypes.h"
-#include "zypp/solver/detail/WorldPtr.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

@@ -32,7 +32,7 @@
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/solver/detail/ResItemAndDependencyPtr.h"
-#include "zypp/solver/detail/ResItem.h"
+#include "zypp/solver/temporary/ResItem.h"
 #include "zypp/Capability.h"
 
 /////////////////////////////////////////////////////////////////////////

@@ -28,8 +28,8 @@
 
 #include "zypp/solver/detail/QueueItem.h"
 #include "zypp/solver/detail/QueueItemGroupPtr.h"
-#include "zypp/solver/detail/ResItem.h"
-#include "zypp/solver/detail/Channel.h"
+#include "zypp/solver/temporary/ResItem.h"
+#include "zypp/solver/temporary/Channel.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

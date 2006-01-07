@@ -10,40 +10,11 @@ INCLUDES = 						\
 	-DG_LOG_DOMAIN=\"solver_detail\"
 
 include_HEADERS = \
-	utils.h				\
-	extract.h			\
-	Hash.h				\
-	Spec.h				\
-	SpecPtr.h			\
-	Channel.h			\
-	ChannelPtr.h			\
-	Subscription.h			\
-	ResItem.h			\
-	ResItemPtr.h			\
-	ResItemAndDependency.h	\
+	ResItemAndDependency.h		\
 	ResItemAndDependencyPtr.h	\
-	Package.h			\
-	PackagePtr.h			\
-	PackageUpdate.h			\
-	PackageUpdatePtr.h		\
-	XmlNode.h			\
-	XmlNodePtr.h			\
-	XmlParser.h			\
 	Importance.h			\
-	Match.h				\
-	MatchPtr.h			\
 	Pending.h			\
 	PendingPtr.h			\
-	World.h				\
-	WorldPtr.h			\
-	UndumpWorld.h			\
-	UndumpWorldPtr.h		\
-	StoreWorld.h			\
-	StoreWorldPtr.h			\
-	MultiWorld.h			\
-	MultiWorldPtr.h			\
-	ServiceWorld.h			\
-	ServiceWorldPtr.h		\
 	ResolverContext.h		\
 	ResolverContextPtr.h		\
 	ResolverInfo.h			\
@@ -86,24 +57,9 @@ include_HEADERS = \
 noinst_LTLIBRARIES =	lib@PACKAGE@_solver_detail.la
 
 lib@PACKAGE@_solver_detail_la_SOURCES =			\
-	utils.cc					\
-	Spec.cc						\
-	Channel.cc					\
-	Subscription.cc					\
-	ResItem.cc					\
-	ResItemAndDependency.cc			\
-	XmlNode.cc					\
+	ResItemAndDependency.cc				\
 	Importance.cc					\
-	Package.cc					\
-	PackageUpdate.cc				\
-	XmlParser.cc					\
-	Match.cc					\
 	Pending.cc					\
-	World.cc					\
-	UndumpWorld.cc					\
-	StoreWorld.cc					\
-	MultiWorld.cc					\
-	ServiceWorld.cc					\
 	QueueItem.cc					\
 	QueueItemBranch.cc				\
 	QueueItemConflict.cc				\
@@ -122,6 +78,5 @@ lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	ResolverInfoNeededBy.cc				\
 	ResolverInfoObsoletes.cc			\
 	ResolverContext.cc				\
-	ResolverQueue.cc				\
-	extract.cc
+	ResolverQueue.cc
 
