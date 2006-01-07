@@ -35,8 +35,6 @@ include_HEADERS = \
 	MatchPtr.h			\
 	Pending.h			\
 	PendingPtr.h			\
-	Packman.h			\
-	PackmanPtr.h			\
 	World.h				\
 	WorldPtr.h			\
 	UndumpWorld.h			\
