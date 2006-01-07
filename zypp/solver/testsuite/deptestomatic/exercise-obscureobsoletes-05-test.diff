@@ -1,9 +1,0 @@
---- exercise-obscureobsoletes-05-test.solution	2005-11-06 11:59:29.000000000 +0100
-+++ exercise-obscureobsoletes-05-test.mistake	2005-11-30 10:37:36.000000000 +0100
-@@ -1,6 +0,0 @@
-->!> Installing barold2 from channel test
-->!> Solution #1:
-->!> install barold2-4.0-1[test]
-->!> remove  bar2-1.0-1
-->!> remove  bar2-devel-1.1-1
-->!> installs=1, upgrades=0, uninstalls=2

@@ -1,5 +1,0 @@
---- exercise-obscureobsoletes-07-test.solution	2005-11-06 12:05:40.000000000 +0100
-+++ exercise-obscureobsoletes-07-test.mistake	2005-11-30 10:37:36.000000000 +0100
-@@ -1,2 +0,0 @@
-->!> Installing aaa from channel test
-->!> Installing bbb from channel test

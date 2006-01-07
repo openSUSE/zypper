@@ -1,9 +1,0 @@
---- exercise-01simple-2-test.solution	2005-11-04 12:10:15.000000000 +0100
-+++ exercise-01simple-2-test.mistake	2005-11-30 10:37:36.000000000 +0100
-@@ -1,6 +0,0 @@
-->!> Installing amd from channel test
-->!> Solution #1:
-->!> install amd-upl102-11[test]
-->!> install libgdbm-1.17-1[test]
-->!> upgrade libc6-2.0.5-1 => libc6-2.0.7-1[test]
-->!> installs=2, upgrades=1, uninstalls=0

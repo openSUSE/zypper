@@ -1,5 +1,0 @@
---- exercise-04obsoletes-07-test.solution	2005-11-05 16:56:07.000000000 +0100
-+++ exercise-04obsoletes-07-test.mistake	2005-11-30 10:37:37.000000000 +0100
-@@ -1,2 +0,0 @@
-->!> Installing A from channel test
-->!> Installing B from channel test

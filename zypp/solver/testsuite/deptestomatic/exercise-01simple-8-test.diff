@@ -1,9 +1,0 @@
---- exercise-01simple-8-test.solution	2005-11-04 12:54:09.000000000 +0100
-+++ exercise-01simple-8-test.mistake	2005-11-30 10:37:36.000000000 +0100
-@@ -1,6 +0,0 @@
-->!> Installing foo4 from channel test
-->!> Solution #1:
-->!> install bash-2.0.2-1[test]
-->!> install foo3-1.0-1[test]
-->!> install foo4-1.0-1[test]
-->!> installs=3, upgrades=0, uninstalls=0

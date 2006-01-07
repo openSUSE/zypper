@@ -1,8 +1,0 @@
---- exercise-02conflict-13-test.solution	2005-11-04 23:22:15.000000000 +0100
-+++ exercise-02conflict-13-test.mistake	2005-11-30 10:37:37.000000000 +0100
-@@ -1,5 +0,0 @@
-->!> Installing required3 from channel test
-->!> Solution #1:
-->!> remove  requirerer3-2.0-1
-->!> upgrade required3-1.0-1 => required3-2.0-1[test]
-->!> installs=0, upgrades=1, uninstalls=1

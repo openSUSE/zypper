@@ -1,7 +1,0 @@
---- exercise-inconsistent2-test.solution	2005-11-06 12:21:28.000000000 +0100
-+++ exercise-inconsistent2-test.mistake	2005-11-30 10:37:36.000000000 +0100
-@@ -1,4 +0,0 @@
-->!> Solution #1:
-->!> remove  at-1-1
-->!> remove  shadow-1.0-1
-->!> installs=0, upgrades=0, uninstalls=2
