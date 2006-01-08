@@ -7,7 +7,8 @@ SUBDIRS =
 INCLUDES = 						\
 	-I$(top_srcdir) -Wall -fno-strict-aliasing	\
 	-I/usr/include/libxml2 -I/usr/include/rpm	\
-	-DG_LOG_DOMAIN=\"solver_detail\"
+	-DG_LOG_DOMAIN=\"solver_detail\"		\
+	-DPHI
 
 include_HEADERS = \
 	ResItemAndDependency.h		\
