@@ -32,104 +32,101 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      using namespace std;
+using namespace std;
 
-      const Importance & Importance::Undefined= Importance("undefined");
+const Importance Importance::Undefined (IMPORTANCE_UNDEFINED);
+const Importance Importance::Invalid (IMPORTANCE_INVALID);
+const Importance Importance::Necessary (IMPORTANCE_NECESSARY);
+const Importance Importance::Urgent (IMPORTANCE_URGENT);
+const Importance Importance::Suggested (IMPORTANCE_SUGGESTED);
+const Importance Importance::Feature (IMPORTANCE_FEATURE);
+const Importance Importance::Minor (IMPORTANCE_MINOR);
 
-      //---------------------------------------------------------------------------
-      string
-      Importance::asString ( void ) const
-      {
-          return toString (*this);
-      }
-
-
-      string
-      Importance::toString ( const Importance & importance )
-      {
-          string res;
-
-          switch (importance.importance()) {
-      	case IMPORTANCE_UNDEFINED:	res = "undefined"; break;
-      	case IMPORTANCE_INVALID:	res = "invalid"; break;
-      	case IMPORTANCE_NECESSARY:	res = "necessary"; break;
-      	case IMPORTANCE_URGENT:		res = "urgent"; break;
-      	case IMPORTANCE_SUGGESTED:	res = "suggested"; break;
-      	case IMPORTANCE_FEATURE:	res = "feature"; break;
-      	case IMPORTANCE_MINOR:		res = "minor"; break;
-      	default:
-      	    WAR << "invalid importance "<< importance.importance() << endl;
-      	    res = "invalid";
-          }
-          return res;
-      }
+//---------------------------------------------------------------------------
+string
+Importance::asString ( void ) const
+{
+    return toString (*this);
+}
 
 
-      ostream &
-      Importance::dumpOn( ostream & str ) const
-      {
-          str << asString();
-          return str;
-      }
+string
+Importance::toString ( const Importance & importance )
+{
+    string res;
+
+    switch (importance.importance()) {
+	case IMPORTANCE_UNDEFINED:	res = "undefined"; break;
+	case IMPORTANCE_INVALID:	res = "invalid"; break;
+	case IMPORTANCE_NECESSARY:	res = "necessary"; break;
+	case IMPORTANCE_URGENT:		res = "urgent"; break;
+	case IMPORTANCE_SUGGESTED:	res = "suggested"; break;
+	case IMPORTANCE_FEATURE:	res = "feature"; break;
+	case IMPORTANCE_MINOR:		res = "minor"; break;
+	default:
+	    WAR << "invalid importance "<< importance.importance() << endl;
+	    res = "invalid";
+    }
+    return res;
+}
 
 
-      ostream&
-      operator<<( ostream& os, const Importance& importance)
-      {
-          return os << importance.asString();
-      }
-
-      //---------------------------------------------------------------------------
-
-      Importance::Importance(const char *importance_str)
-      {
-          _importance = IMPORTANCE_INVALID;
-          if (importance_str != NULL) {
-      	switch (*importance_str) {
-      	    case 'f':
-      		if (!strcmp (importance_str, "feature")) {
-      		    _importance = IMPORTANCE_FEATURE;
-      		}
-      	    break;
-      	    case 'm':
-      		if (!strcmp (importance_str, "minor")) {
-      		    _importance = IMPORTANCE_MINOR;
-      		}
-      	    break;
-      	    case 'n':
-      		if (!strcmp (importance_str, "necessary")) {
-      		    _importance = IMPORTANCE_NECESSARY;
-      		}
-      	    break;
-      	    case 's':
-      		if (!strcmp (importance_str, "suggested")) {
-      		    _importance = IMPORTANCE_SUGGESTED;
-      		}
-      	    break;
-      	    case 'u':
-      		if (!strcmp (importance_str, "urgent")) {
-      		    _importance = IMPORTANCE_URGENT;
-      		}
-      		else if (!strcmp (importance_str, "undefined")) {
-      		    _importance = IMPORTANCE_UNDEFINED;
-      		}
-      	    default:
-      	    break;
-      	}
-          }
-          if (_importance == IMPORTANCE_INVALID)
-	      WAR << "invalid importance '"
-		  << (importance_str ? importance_str : "<null>")
-		  << "'" << endl;
-
-      }
+ostream &
+Importance::dumpOn( ostream & str ) const
+{
+    str << asString();
+    return str;
+}
 
 
-      Importance::~Importance()
-      {
-      }
+ostream&
+operator<<( ostream& os, const Importance& importance)
+{
+    return os << importance.asString();
+}
 
-      ///////////////////////////////////////////////////////////////////
+//---------------------------------------------------------------------------
+
+const Importance
+Importance::parse(const string & str)
+{
+    Importance importance = Invalid;
+    if (str == "feature") {
+	importance = Feature;
+    }
+    else if (str == "minor") {
+	importance = Minor;
+    }
+    else if (str == "necessary") {
+	importance = Necessary;
+    }
+    if (str == "suggested") {
+	importance = Suggested;
+    }
+    if (str == "urgent") {
+	importance = Urgent;
+    }
+    else if (str == "undefined") {
+	importance = Undefined;
+    }
+
+    if (importance == Invalid)
+	WAR << "invalid importance '" << str << "'" << endl;
+
+    return importance;
+}
+
+
+Importance::Importance(importance_t importance)
+    : _importance (importance)
+{
+}
+
+Importance::~Importance()
+{
+}
+
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

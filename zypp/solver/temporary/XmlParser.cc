@@ -681,7 +681,7 @@ XmlParser::updateEnd(const char *name)
     _XXX("RC_SPEW_XML") << "XmlParser::updateEnd(" << name << ")" << endl;
 
     Channel_constPtr channel;
-    const char *url_prefix = NULL;
+    string url_prefix;
 
     assert(_current_update != NULL);
 
@@ -701,7 +701,7 @@ XmlParser::updateEnd(const char *name)
     } else if (!strcmp(name, "arch")) {			_current_update->setArch (strstrip (_text_buffer));
     } else if (!strcmp(name, "filename")) {
         strstrip (_text_buffer);
-        if (url_prefix) {
+        if (!url_prefix.empty()) {
             _current_update->setPackageUrl (maybe_merge_paths(url_prefix, _text_buffer));
         }
         else {
@@ -711,7 +711,7 @@ XmlParser::updateEnd(const char *name)
     } else if (!strcmp(name, "installedsize")) {	_current_update->setInstalledSize (atoi (_text_buffer));
     } else if (!strcmp(name, "signaturename")) {
         strstrip (_text_buffer);
-        if (url_prefix) {
+        if (!url_prefix.empty()) {
             _current_update->setSignatureUrl (maybe_merge_paths(url_prefix, _text_buffer));
         }
         else {
@@ -719,7 +719,7 @@ XmlParser::updateEnd(const char *name)
         }
     } else if (!strcmp(name, "signaturesize")) {	_current_update->setSignatureSize (atoi (_text_buffer));
     } else if (!strcmp(name, "md5sum")) {		_current_update->setMd5sum (strstrip (_text_buffer));
-    } else if (!strcmp(name, "importance")) {		_current_update->setImportance (new Importance (strstrip (_text_buffer)));
+    } else if (!strcmp(name, "importance")) {		_current_update->setImportance (Importance::parse (strstrip (_text_buffer)));
     } else if (!strcmp(name, "description")) {		_current_update->setDescription (strstrip (_text_buffer));
     } else if (!strcmp(name, "hid")) {			_current_update->setHid (atoi(_text_buffer));
     } else if (!strcmp (name, "license")) {		_current_update->setLicense (strstrip (_text_buffer));

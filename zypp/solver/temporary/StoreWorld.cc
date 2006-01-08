@@ -97,7 +97,7 @@ bool
 StoreWorld::addResItem (ResItem_constPtr resItem)
 {
     ResItemAndDependency_Ptr r_and_d;
-    const char *package_name;
+    string package_name;
     Channel_constPtr channel;
     bool actually_added_package = false;
 
@@ -349,7 +349,7 @@ StoreWorld::findInstalledResItem (ResItem_constPtr resItem)
 //
 
 ResItem_constPtr
-StoreWorld::findResItem (Channel_constPtr channel, const char *name) const
+StoreWorld::findResItem (Channel_constPtr channel, const string & name) const
 {
     syncConditional (channel);
     for (ResItemTable::const_iterator pos = _resItems_by_name.lower_bound(name); pos != _resItems_by_name.upper_bound(name); pos++) {
@@ -363,7 +363,7 @@ StoreWorld::findResItem (Channel_constPtr channel, const char *name) const
 
 
 ResItem_constPtr
-StoreWorld::findResItemWithConstraint (Channel_constPtr channel, const char *name, const Capability & constraint, bool is_and) const
+StoreWorld::findResItemWithConstraint (Channel_constPtr channel, const string & name, const Capability & constraint, bool is_and) const
 {
 	fprintf (stderr, "StoreWorld::findResItemWithConstraint() not implemented\n");
     return 0;
@@ -658,15 +658,14 @@ StoreWorld::containsChannel (Channel_constPtr channel) const
 
 
 Channel_Ptr
-StoreWorld::getChannelByName (const char *channel_name) const
+StoreWorld::getChannelByName (const string & channel_name) const
 {
-    if (channel_name == NULL
-	|| *channel_name == 0) {
+    if (channel_name.empty()) {
 	return NULL;
     }
 
     for (ChannelList::const_iterator iter = _channels.begin(); iter != _channels.end(); iter++) {
-	if (strcasecmp ((*iter)->name(), channel_name) == 0) {
+	if ((*iter)->name() == channel_name) {
 	    return *iter;
 	}
     }
@@ -675,15 +674,14 @@ StoreWorld::getChannelByName (const char *channel_name) const
 
 
 Channel_Ptr
-StoreWorld::getChannelByAlias (const char *alias) const
+StoreWorld::getChannelByAlias (const string & alias) const
 {
-    if (alias == NULL
-	|| *alias == 0) {
+    if (alias.empty()) {
 	return NULL;
     }
 
     for (ChannelList::const_iterator iter = _channels.begin(); iter != _channels.end(); iter++) {
-	if (strcasecmp ((*iter)->alias(), alias) == 0) {
+	if ((*iter)->alias() == alias) {
 	    return *iter;
 	}
     }
@@ -692,15 +690,14 @@ StoreWorld::getChannelByAlias (const char *alias) const
 
 
 Channel_Ptr
-StoreWorld::getChannelById (const char *channel_id) const
+StoreWorld::getChannelById (const string & channel_id) const
 {
-    if (channel_id == NULL
-	|| *channel_id  == 0) {
+    if (channel_id.empty()) {
 	return NULL;
     }
 
     for (ChannelList::const_iterator iter = _channels.begin(); iter != _channels.end(); iter++) {
-	if (strcasecmp ((*iter)->id(), channel_id) == 0) {
+	if ((*iter)->id() == channel_id) {
 	    return *iter;
 	}
     }

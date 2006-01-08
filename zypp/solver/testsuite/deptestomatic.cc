@@ -235,13 +235,13 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 
 //---------------------------------------------------------------------------------------------------------------------
 static void
-undump (const char *filename)
+undump (const std::string & filename)
 {
     UndumpWorld_Ptr undump_world;
 
     undump_world = new UndumpWorld (filename);
     if (undump_world == NULL) {
-	fprintf (stderr, "Couldn't undump from file '%s'", filename);
+	fprintf (stderr, "Couldn't undump from file '%s'", filename.c_str());
 	return;
     }
 
@@ -250,7 +250,7 @@ undump (const char *filename)
 
 
 static Channel_Ptr
-get_channel (const char *channel_name)
+get_channel (const string & channel_name)
 {
     Channel_Ptr channel;
 
@@ -267,7 +267,7 @@ get_channel (const char *channel_name)
 
 
 static ResItem_constPtr
-get_resItem (const char *channel_name, const char *package_name)
+get_resItem (const string & channel_name, const string & package_name)
 {
     Channel_constPtr channel;
     ResItem_constPtr resItem;
@@ -275,14 +275,14 @@ get_resItem (const char *channel_name, const char *package_name)
     channel = get_channel (channel_name);
 
     if (channel == NULL) {
-	fprintf (stderr, "Can't find package '%s': channel '%s' not defined\n", package_name, channel_name);
+	fprintf (stderr, "Can't find package '%s': channel '%s' not defined\n", package_name.c_str(), channel_name.c_str());
 	return NULL;
     }
 
     resItem = world->findResItem (channel, package_name);
 
     if (resItem == NULL) {
-	fprintf (stderr, "Can't find package '%s' in channel '%s': no such package\n", package_name, channel_name);
+	fprintf (stderr, "Can't find package '%s' in channel '%s': no such package\n", package_name.c_str(), channel_name.c_str());
 	return NULL;
     }
 
@@ -305,8 +305,9 @@ add_to_world_cb (ResItem_constPtr resItem, void *data)
 static void
 load_channel (const string & name, const string & filename, const string & type, bool system_packages)
 {
-    string pathname = "deptestomatic/" + filename;
-    
+//    string pathname = "deptestomatic/" + filename;
+    string pathname = filename;
+
     if (getenv ("RC_SPEW")) fprintf (stderr, "load_channel(%s,%s,%s,%s)\n", name.c_str(), pathname.c_str(), type.c_str(), system_packages?"system":"non-system");
 
     ChannelType chan_type = system_packages ? CHANNEL_TYPE_SYSTEM : CHANNEL_TYPE_UNKNOWN;
@@ -373,10 +374,9 @@ parse_xml_setup (XmlNode_Ptr node)
 	}
 
 	if (node->equals ("system")) {
-	    const char *file = node->getProp ("file");
-	    assertExit (file);
+	    string file = node->getProp ("file");
+	    assertExit (!file.empty());
 	    load_channel ("@system", file, "helix", true);
-	    free ((void *)file);
 	} else if (node->equals ("channel")) {
 	    string name = node->getProp ("name");
 	    string file = node->getProp ("file");
@@ -385,22 +385,21 @@ parse_xml_setup (XmlNode_Ptr node)
 	    assertExit (!file.empty());
 	    load_channel (name, file, type, false);
 	} else if (node->equals ("undump")) {
-	    const char *file = node->getProp ("file");
-	    assertExit (file);
+	    string file = node->getProp ("file");
+	    assertExit (!file.empty());
 	    undump (file);
-	    free((void *)file);
 	} else if (node->equals ("force-install")) {
-	    const char *channel_name = node->getProp ("channel");
-	    const char *package_name = node->getProp ("package");
+	    string channel_name = node->getProp ("channel");
+	    string package_name = node->getProp ("package");
 	    ResItem_constPtr resItem;
 	    Channel_constPtr system_channel;
 
-	    assertExit (channel_name);
-	    assertExit (package_name);
+	    assertExit (!channel_name.empty());
+	    assertExit (!package_name.empty());
 
 	    resItem = get_resItem (channel_name, package_name);
 	    if (resItem) {
-		printf (">!> Force-installing %s from channel %s\n", package_name, channel_name);
+		printf (">!> Force-installing %s from channel %s\n", package_name.c_str(), channel_name.c_str());
 
 		system_channel = world->getChannelById ("@system");
 
@@ -411,48 +410,42 @@ parse_xml_setup (XmlNode_Ptr node)
 //		r->setChannel (system_channel);
 //		r->setInstalled (true);
 	    } else {
-		fprintf (stderr, "Unknown package %s::%s\n", channel_name, package_name);
+		fprintf (stderr, "Unknown package %s::%s\n", channel_name.c_str(), package_name.c_str());
 	    }
 
-	    free ((void *)channel_name);
-	    free ((void *)package_name);
 	} else if (node->equals ("force-uninstall")) {
-	    const char *package_name = node->getProp ("package");
+	    string package_name = node->getProp ("package");
 	    ResItem_constPtr resItem;
 
-	    assertExit (package_name);
+	    assertExit (!package_name.empty());
 	    resItem = get_resItem ("@system", package_name);
 	    
 	    if (! resItem) {
-		fprintf (stderr, "Can't force-uninstall installed package '%s'\n", package_name);
+		fprintf (stderr, "Can't force-uninstall installed package '%s'\n", package_name.c_str());
 	    } else {
-		printf (">!> Force-uninstalling '%s'\n", package_name);
+		printf (">!> Force-uninstalling '%s'\n", package_name.c_str());
 	    }
 
-	    free ((void *)package_name);
 	} else if (node->equals ("lock")) {
-	    const char *channel_name = node->getProp ("channel");
-	    const char *package_name = node->getProp ("package");
+	    string channel_name = node->getProp ("channel");
+	    string package_name = node->getProp ("package");
 	    ResItem_constPtr resItem;
 
-	    assertExit (channel_name);
-	    assertExit (package_name);
+	    assertExit (!channel_name.c_str());
+	    assertExit (!package_name.c_str());
 
 	    resItem = get_resItem (channel_name, package_name);
 	    if (resItem) {
-		printf (">!> Locking %s from channel %s\n", package_name, channel_name);
+		printf (">!> Locking %s from channel %s\n", package_name.c_str(), channel_name.c_str());
 #warning lock disabled
 //		ResItem_Ptr r = ResItem_Ptr::cast_away_const(resItem);
 //		r->setLocked (true);
 	    } else {
-		fprintf (stderr, "Unknown package %s::%s\n", channel_name, package_name);
+		fprintf (stderr, "Unknown package %s::%s\n", channel_name.c_str(), package_name.c_str());
 	    }
 
-	    free ((void *)channel_name);
-	    free ((void *)package_name);
-
 	} else {
-	    fprintf (stderr, "Unrecognized tag '%s' in setup\n", node->name());
+	    fprintf (stderr, "Unrecognized tag '%s' in setup\n", node->name().c_str());
 	}
 
 	node = node->next();
@@ -562,9 +555,8 @@ parse_xml_trial (XmlNode_Ptr node)
 
 	if (node->equals("note")) {
 
-	    const char *note = node->getContent ();
-	    printf ("NOTE: %s\n", note);
-	    free ((void *)note);
+	    string note = node->getContent ();
+	    printf ("NOTE: %s\n", note.c_str());
 
 	} else if (node->equals ("verify")) {
 
@@ -572,66 +564,57 @@ parse_xml_trial (XmlNode_Ptr node)
 
 	} else if (node->equals ("current")) {
 
-	    const char *channel_name = node->getProp ("channel");
+	    string channel_name = node->getProp ("channel");
 	    Channel_constPtr channel = get_channel (channel_name);
 
 	    if (channel != NULL) {
 		resolver.setCurrentChannel (channel);
 	    } else {
-		fprintf (stderr, "Unknown channel '%s' (current)\n", channel_name);
+		fprintf (stderr, "Unknown channel '%s' (current)\n", channel_name.c_str());
 	    }
-
-	    free ((void *)channel_name);
 
 	} else if (node->equals ("subscribe")) {
 
-	    const char *channel_name = node->getProp ("channel");
+	    string channel_name = node->getProp ("channel");
 	    Channel_Ptr channel = get_channel (channel_name);
 
 	    if (channel != NULL) {
 		channel->setSubscription (true);
 	    } else {
-		fprintf (stderr, "Unknown channel '%s' (subscribe)\n", channel_name);
+		fprintf (stderr, "Unknown channel '%s' (subscribe)\n", channel_name.c_str());
 	    }
 
-	    free ((void *)channel_name);
-	
 	} else if (node->equals ("install")) {
 
-	    const char *channel_name = node->getProp ("channel");
-	    const char *package_name = node->getProp ("package");
+	    string channel_name = node->getProp ("channel");
+	    string package_name = node->getProp ("package");
 	    ResItem_constPtr resItem;
 
-	    assertExit (channel_name);
-	    assertExit (package_name);
+	    assertExit (!channel_name.empty());
+	    assertExit (!package_name.empty());
 
 	    resItem = get_resItem (channel_name, package_name);
 	    if (resItem) {
-		printf (">!> Installing %s from channel %s\n", package_name, channel_name);
+		printf (">!> Installing %s from channel %s\n", package_name.c_str(), channel_name.c_str());
 		resolver.addResItemToInstall (resItem);
 	    } else {
-		fprintf (stderr, "Unknown package %s::%s\n", channel_name, package_name);
+		fprintf (stderr, "Unknown package %s::%s\n", channel_name.c_str(), package_name.c_str());
 	    }
-
-	    free ((void *)channel_name);
-	    free ((void *)package_name);
 
 	} else if (node->equals ("uninstall")) {
 
-	    const char *package_name = node->getProp ("package");
+	    string package_name = node->getProp ("package");
 	    ResItem_constPtr resItem;
 
-	    assertExit (package_name);
+	    assertExit (!package_name.empty());
 
 	    resItem = get_resItem ("@system", package_name);
 	    if (resItem) {
-		printf (">!> Uninstalling %s\n", package_name);
+		printf (">!> Uninstalling %s\n", package_name.c_str());
 		resolver.addResItemToRemove (resItem);
 	    } else {
-		fprintf (stderr, "Unknown system package %s\n", package_name);
+		fprintf (stderr, "Unknown system package %s\n", package_name.c_str());
 	    }
-
-	    free ((void *)package_name);
 
 	} else if (node->equals ("upgrade")) {
 	    int count;
@@ -655,13 +638,12 @@ parse_xml_trial (XmlNode_Ptr node)
 		/* We just skip over anything that doesn't look like a dependency. */
 
 		if (dep) {
-		    const char *conflict_str = iter->getProp ("conflict");
+		    string conflict_str = iter->getProp ("conflict");
 
-		    printf (">!> Solvedeps %s%s\n", conflict_str ? "conflict " : "",  dep->asString().c_str());
+		    printf (">!> Solvedeps %s%s\n", conflict_str.empty() ? "" : "conflict ",  dep->asString().c_str());
 
 		    resolver.addExtraDependency (dep);
 
-		    free ((void *)conflict_str);
 		}
 		iter = iter->next();
 	    }
@@ -669,7 +651,7 @@ parse_xml_trial (XmlNode_Ptr node)
 #warning solvedeps disabled
 #endif
 	} else {
-	    fprintf (stderr, "Unknown tag '%s' in trial\n", node->name());
+	    fprintf (stderr, "Unknown tag '%s' in trial\n", node->name().c_str());
 	}
 
 	node = node->next();
@@ -705,7 +687,7 @@ parse_xml_test (XmlNode_Ptr node)
 	    } else if (node->equals ("trial")) {
 		parse_xml_trial (node);
 	    } else {
-		fprintf (stderr, "Unknown tag '%s' in test\n", node->name());
+		fprintf (stderr, "Unknown tag '%s' in test\n", node->name().c_str());
 	    }
 	}
 

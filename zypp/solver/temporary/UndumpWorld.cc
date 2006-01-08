@@ -32,141 +32,141 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-        
-      using namespace std;
-      
-      IMPL_PTR_TYPE(UndumpWorld);
-      
-      //---------------------------------------------------------------------------
-      
-      string
-      UndumpWorld::asString ( void ) const
-      {
-          return toString (*this);
-      }
-      
-      
-      string
-      UndumpWorld::toString ( const UndumpWorld & world )
-      {
-          return "<undumpworld/>";
-      }
-      
-      
-      ostream &
-      UndumpWorld::dumpOn( ostream & str ) const
-      {
-          str << asString();
-          return str;
-      }
-      
-      
-      ostream&
-      operator<<( ostream& os, const UndumpWorld & world)
-      {
-          return os << world.asString();
-      }
-      
-      //---------------------------------------------------------------------------
-      
-      UndumpWorld::UndumpWorld (const char *filename)
-          : StoreWorld (UNDUMP_WORLD)
-      {
-          load (filename);
-      }
-      
-      
-      UndumpWorld::~UndumpWorld()
-      {
-          fprintf (stderr, "*** deleting undump world[%p]: %s\n", this, World::toString(type()).c_str());
-      }
-      
-      //---------------------------------------------------------------------------
-      
-      
-      static bool
-      add_channel_cb (Channel_Ptr channel, bool subscribed, void *data)
-      {
-          UndumpWorld *undump = (UndumpWorld *)data;
-      
-          undump->addChannel (channel);
-      
-          if (!channel->system ()) {
-      	undump->setSubscription (channel, subscribed);
-          }
-      
-          return true;
-      }
-      
-      
-      static bool
-      add_resItem_cb (ResItem_constPtr res, void *data)
-      {
-          UndumpWorld *undump = (UndumpWorld *)data;
-      
-          undump->addResItem (res);
-      
-          return true;
-      }
-      
-      
-      static bool
-      add_lock_cb (Match_constPtr lock, void *data)
-      {
-          UndumpWorld *undump = (UndumpWorld *)data;
-      
-          undump->addLock (lock);
-          
-          return true;
-      }
-      
-      
-      void
-      UndumpWorld::load (const char *filename)
-      {
-          if (filename) {
-      	extract_packages_from_undump_file (filename, add_channel_cb, add_resItem_cb, add_lock_cb, (void *)this);
-          }
-      }
-      
-      
-      void
-      UndumpWorld::setSubscription (Channel_constPtr channel, bool subscribe)
-      {
-	  _XXX("RC_SPEW") << "UndumpWorld::setSubscription (" << channel->asString() << " , " <<  (subscribe?"subscribe":"unsubscribe")
+  
+using namespace std;
+
+IMPL_PTR_TYPE(UndumpWorld);
+
+//---------------------------------------------------------------------------
+
+string
+UndumpWorld::asString ( void ) const
+{
+    return toString (*this);
+}
+
+
+string
+UndumpWorld::toString ( const UndumpWorld & world )
+{
+    return "<undumpworld/>";
+}
+
+
+ostream &
+UndumpWorld::dumpOn( ostream & str ) const
+{
+    str << asString();
+    return str;
+}
+
+
+ostream&
+operator<<( ostream& os, const UndumpWorld & world)
+{
+    return os << world.asString();
+}
+
+//---------------------------------------------------------------------------
+
+UndumpWorld::UndumpWorld (const std::string & filename)
+    : StoreWorld (UNDUMP_WORLD)
+{
+    load (filename);
+}
+
+
+UndumpWorld::~UndumpWorld()
+{
+    fprintf (stderr, "*** deleting undump world[%p]: %s\n", this, World::toString(type()).c_str());
+}
+
+//---------------------------------------------------------------------------
+
+
+static bool
+add_channel_cb (Channel_Ptr channel, bool subscribed, void *data)
+{
+    UndumpWorld *undump = (UndumpWorld *)data;
+
+    undump->addChannel (channel);
+
+    if (!channel->system ()) {
+	undump->setSubscription (channel, subscribed);
+    }
+
+    return true;
+}
+
+
+static bool
+add_resItem_cb (ResItem_constPtr res, void *data)
+{
+    UndumpWorld *undump = (UndumpWorld *)data;
+
+    undump->addResItem (res);
+
+    return true;
+}
+
+
+static bool
+add_lock_cb (Match_constPtr lock, void *data)
+{
+    UndumpWorld *undump = (UndumpWorld *)data;
+
+    undump->addLock (lock);
+    
+    return true;
+}
+
+
+void
+UndumpWorld::load (const string & filename)
+{
+    if (!filename.empty()) {
+	extract_packages_from_undump_file (filename, add_channel_cb, add_resItem_cb, add_lock_cb, (void *)this);
+    }
+}
+
+
+void
+UndumpWorld::setSubscription (Channel_constPtr channel, bool subscribe)
+{
+    _XXX("RC_SPEW") << "UndumpWorld::setSubscription (" << channel->asString() << " , " <<  (subscribe?"subscribe":"unsubscribe")
 			  << ")" << endl;
-          for (ChannelSubscriptions::iterator i = _subscriptions.begin(); i != _subscriptions.end(); i++) {
-      	if (*i == channel) {
-      	    if (!subscribe) {
-      		_subscriptions.erase (i);
-      	    }
-      	    return;
-      	}
-          }
-      
-          if (subscribe) {
-      	_subscriptions.push_back (channel);
-          }
-      
-          return;
-      }
-      
-      
-      bool
-      UndumpWorld::isSubscribed (Channel_constPtr channel) const
-      {
-          for (ChannelSubscriptions::const_iterator i = _subscriptions.begin(); i != _subscriptions.end(); i++) {
-      	if (*i == channel) {
-      	    _DBG("RC_SPEW") << "UndumpWorld::isSubscribed (" << channel->asString() <<") YES" << endl;
-      	    return true;
-      	}
-          }
-      
-          _DBG("RC_SPEW") << "UndumpWorld::isSubscribed (" << channel->asString() << ") NO" << endl;
-          return false;
-      }
-      
-      ///////////////////////////////////////////////////////////////////
+    for (ChannelSubscriptions::iterator i = _subscriptions.begin(); i != _subscriptions.end(); i++) {
+	if (*i == channel) {
+	    if (!subscribe) {
+		_subscriptions.erase (i);
+	    }
+	    return;
+	}
+    }
+
+    if (subscribe) {
+	_subscriptions.push_back (channel);
+    }
+
+    return;
+}
+
+
+bool
+UndumpWorld::isSubscribed (Channel_constPtr channel) const
+{
+    for (ChannelSubscriptions::const_iterator i = _subscriptions.begin(); i != _subscriptions.end(); i++) {
+	if (*i == channel) {
+	    _DBG("RC_SPEW") << "UndumpWorld::isSubscribed (" << channel->asString() <<") YES" << endl;
+	    return true;
+	}
+    }
+
+    _DBG("RC_SPEW") << "UndumpWorld::isSubscribed (" << channel->asString() << ") NO" << endl;
+    return false;
+}
+
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

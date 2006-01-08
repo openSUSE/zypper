@@ -112,17 +112,17 @@ class StoreWorld : public World {
 
     virtual bool containsChannel (Channel_constPtr channel) const;
 
-    virtual Channel_Ptr getChannelByName (const char *channel_name) const;
-    virtual Channel_Ptr getChannelByAlias (const char *alias) const;
-    virtual Channel_Ptr getChannelById (const char *channel_id) const;
+    virtual Channel_Ptr getChannelByName (const std::string & channel_name) const;
+    virtual Channel_Ptr getChannelByAlias (const std::string & alias) const;
+    virtual Channel_Ptr getChannelById (const std::string & channel_id) const;
 
     virtual int foreachChannel (ChannelFn fn, void *data) const;
 
     // Single resItem queries
 
     virtual ResItem_constPtr findInstalledResItem (ResItem_constPtr resItem);
-    virtual ResItem_constPtr findResItem (Channel_constPtr channel, const char *name) const;
-    virtual ResItem_constPtr findResItemWithConstraint (Channel_constPtr channel, const char *name, const Capability & constraint, bool is_and) const;
+    virtual ResItem_constPtr findResItem (Channel_constPtr channel, const std::string & name) const;
+    virtual ResItem_constPtr findResItemWithConstraint (Channel_constPtr channel, const std::string & name, const Capability & constraint, bool is_and) const;
     virtual Channel_Ptr guessResItemChannel (ResItem_constPtr resItem) const;
 
 };

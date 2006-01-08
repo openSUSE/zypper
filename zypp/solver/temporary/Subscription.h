@@ -40,57 +40,57 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : Subscription
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : Subscription
 
 
-      class Subscription;
-      typedef std::list<Subscription *> SubscriptionList;
+class Subscription;
+typedef std::list<Subscription *> SubscriptionList;
 
-      class Subscription {
+class Subscription {
 
-        private:
+  private:
 
-          static SubscriptionList subscriptions;
-          static bool subscriptions_changed;
-          static const char *subscription_file;
+    static SubscriptionList subscriptions;
+    static bool subscriptions_changed;
+    static std::string subscription_file;
 
-          std::string _channel_id;
-          time_t _last_seen;
-          bool _old;		// subscription imported from an old-style subs file
+    std::string _channel_id;
+    time_t _last_seen;
+    bool _old;		// subscription imported from an old-style subs file
 
-          bool match (Channel_constPtr channel);
-          static void save (void);
-          static void load (void);
-          static void load_old_subscriptions (void);
+    bool match (Channel_constPtr channel);
+    static void save (void);
+    static void load (void);
+    static void load_old_subscriptions (void);
 
-        public:
+  public:
 
-          Subscription (const char *id);
-          virtual ~Subscription();
+    Subscription (const std::string & id);
+    virtual ~Subscription();
 
-          // ---------------------------------- I/O
+    // ---------------------------------- I/O
 
-          static std::string toString ( const Subscription & section);
+    static std::string toString ( const Subscription & section);
 
-          virtual std::ostream & dumpOn( std::ostream & str ) const;
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
 
-          friend std::ostream& operator<<( std::ostream&, const Subscription & section);
+    friend std::ostream& operator<<( std::ostream&, const Subscription & section);
 
-          std::string asString ( void ) const;
+    std::string asString ( void ) const;
 
-          // ---------------------------------- accessors
+    // ---------------------------------- accessors
 
-          // ---------------------------------- methods
+    // ---------------------------------- methods
 
-          void  setFile (const char *file);
-          static bool status (Channel_constPtr channel);
-          static void setStatus (Channel_constPtr channel, bool channel_is_subscribed);
+    void setFile (const std::string & file);
+    static bool status (Channel_constPtr channel);
+    static void setStatus (Channel_constPtr channel, bool channel_is_subscribed);
 
-      };
+};
 
-      ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

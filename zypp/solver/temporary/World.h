@@ -194,9 +194,9 @@ namespace zypp
           virtual ChannelList channels () const = 0;
           virtual bool containsChannel (Channel_constPtr channel) const = 0;
 
-          virtual Channel_Ptr getChannelByName (const char *channel_name) const = 0;
-          virtual Channel_Ptr getChannelByAlias (const char *alias) const = 0;
-          virtual Channel_Ptr getChannelById (const char *channel_id) const = 0;
+          virtual Channel_Ptr getChannelByName (const std::string & channel_name) const = 0;
+          virtual Channel_Ptr getChannelByAlias (const std::string & alias) const = 0;
+          virtual Channel_Ptr getChannelById (const std::string & channel_id) const = 0;
 
           // ResItem Locks
 
@@ -211,8 +211,8 @@ namespace zypp
           // Single resItem queries
 
           virtual ResItem_constPtr findInstalledResItem (ResItem_constPtr resItem) = 0;
-          virtual ResItem_constPtr findResItem (Channel_constPtr channel, const char *name) const = 0;
-          virtual ResItem_constPtr findResItemWithConstraint (Channel_constPtr channel, const char *name, const Capability &  constraint, bool is_and) const = 0;
+          virtual ResItem_constPtr findResItem (Channel_constPtr channel, const std::string & name) const = 0;
+          virtual ResItem_constPtr findResItemWithConstraint (Channel_constPtr channel, const std::string & name, const Capability &  constraint, bool is_and) const = 0;
           virtual Channel_Ptr guessResItemChannel (ResItem_constPtr resItem) const = 0;
 
           // Iterate across resItems
@@ -246,7 +246,7 @@ namespace zypp
           // XML serialization
 
           void serialize (XmlNode_Ptr parent);
-          void toFile (const char *filename);
+          void toFile (const std::string & filename);
 
           // Duplicating (primarily for atomic refreshes)
           World_Ptr dup (void);

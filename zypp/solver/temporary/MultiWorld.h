@@ -55,80 +55,80 @@ typedef std::list <SubWorldInfo *> SubWorldInfoList;
 class MultiWorld : public World {
     
 
-        private:
-      
-          SubWorldInfoList _subworlds;
-      
-          Pending_Ptr _multi_pending;
-          PendingList _subworld_pendings;
-      
-          void (*_subworld_added)   (World_Ptr subworld);
-          void (*_subworld_removed) (World_Ptr subworld);
-      
-        public:
-      
-          MultiWorld ();
-          MultiWorld (XmlNode_Ptr node);
-          MultiWorld (const char *filename);
-          virtual ~MultiWorld();
-      
-          // ---------------------------------- I/O
-      
-          static std::string toString (const MultiWorld & section);
-      
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
-      
-          friend std::ostream& operator<<(std::ostream&, const MultiWorld & section);
-      
-          std::string asString (void ) const;
-      
-          // ---------------------------------- accessors
-      
-          void addSubworld (World_Ptr subworld);
-          void removeSubworld (World_Ptr subworld);
-      
-          // ---------------------------------- methods
-      
-          virtual ChannelList channels () const;
-          virtual bool containsChannel (Channel_constPtr channel) const;
-          virtual Channel_Ptr getChannelByName (const char *channel_name) const;
-          virtual Channel_Ptr getChannelByAlias (const char *alias) const;
-          virtual Channel_Ptr getChannelById (const char *channel_id) const;
-          virtual Channel_Ptr guessResItemChannel (ResItem_constPtr resItem) const;
-          virtual int foreachChannel (ChannelFn fn, void *data) const;
-      
-          int foreachSubworld (WorldFn callback, void *user_data);
-          int foreachSubworldByType (WorldType type, WorldFn callback, NameConflictInfo *info);
-          WorldList getSubworlds ();
-          ServiceWorld_Ptr lookupService (const char *url);
-          ServiceWorld_Ptr lookupServiceById (const char *id);
-          bool mountService (const char *url, void *error);			// GError **error);
-      
-          // Single resItem queries
-      
-          virtual ResItem_constPtr findInstalledResItem (ResItem_constPtr resItem);
-          virtual ResItem_constPtr findResItem (Channel_constPtr channel, const char *name) const;
-          virtual ResItem_constPtr findResItemWithConstraint (Channel_constPtr channel, const char *name, const Capability & constraint, bool is_and) const;
-      
-          // Iterate over resItems
-      
-          virtual int foreachResItem (Channel_Ptr channel, CResItemFn fn, void *data);
-          virtual int foreachResItemByName (const std::string & name, Channel_Ptr channel, CResItemFn fn, void *data);
-          virtual int foreachResItemByMatch (Match_constPtr match, CResItemFn fn, void *data);
-      
-          // Iterate across provides or requirement
-      
-          virtual int foreachProvidingResItem (const Capability & dep, ResItemAndDepFn fn, void *data);
-          virtual int foreachRequiringResItem (const Capability & dep, ResItemAndDepFn fn, void *data);
-          virtual int foreachConflictingResItem (const Capability & dep, ResItemAndDepFn fn, void *data);
-      
-          // locks
-      
-          virtual int foreachLock (MatchFn fn, void *data) const;
-      
-      };
-          
-      ///////////////////////////////////////////////////////////////////
+  private:
+
+    SubWorldInfoList _subworlds;
+
+    Pending_Ptr _multi_pending;
+    PendingList _subworld_pendings;
+
+    void (*_subworld_added)   (World_Ptr subworld);
+    void (*_subworld_removed) (World_Ptr subworld);
+
+  public:
+
+    MultiWorld ();
+    MultiWorld (XmlNode_Ptr node);
+    MultiWorld (const std::string & filename);
+    virtual ~MultiWorld();
+
+    // ---------------------------------- I/O
+
+    static std::string toString (const MultiWorld & section);
+
+    virtual std::ostream & dumpOn(std::ostream & str ) const;
+
+    friend std::ostream& operator<<(std::ostream&, const MultiWorld & section);
+
+    std::string asString (void ) const;
+
+    // ---------------------------------- accessors
+
+    void addSubworld (World_Ptr subworld);
+    void removeSubworld (World_Ptr subworld);
+
+    // ---------------------------------- methods
+
+    virtual ChannelList channels () const;
+    virtual bool containsChannel (Channel_constPtr channel) const;
+    virtual Channel_Ptr getChannelByName (const std::string & channel_name) const;
+    virtual Channel_Ptr getChannelByAlias (const std::string & alias) const;
+    virtual Channel_Ptr getChannelById (const std::string & channel_id) const;
+    virtual Channel_Ptr guessResItemChannel (ResItem_constPtr resItem) const;
+    virtual int foreachChannel (ChannelFn fn, void *data) const;
+
+    int foreachSubworld (WorldFn callback, void *user_data);
+    int foreachSubworldByType (WorldType type, WorldFn callback, NameConflictInfo *info);
+    WorldList getSubworlds ();
+    ServiceWorld_Ptr lookupService (const std::string & url);
+    ServiceWorld_Ptr lookupServiceById (const std::string & id);
+    bool mountService (const std::string & url, void *error);			// GError **error);
+
+    // Single resItem queries
+
+    virtual ResItem_constPtr findInstalledResItem (ResItem_constPtr resItem);
+    virtual ResItem_constPtr findResItem (Channel_constPtr channel, const std::string & name) const;
+    virtual ResItem_constPtr findResItemWithConstraint (Channel_constPtr channel, const std::string & name, const Capability & constraint, bool is_and) const;
+
+    // Iterate over resItems
+
+    virtual int foreachResItem (Channel_Ptr channel, CResItemFn fn, void *data);
+    virtual int foreachResItemByName (const std::string & name, Channel_Ptr channel, CResItemFn fn, void *data);
+    virtual int foreachResItemByMatch (Match_constPtr match, CResItemFn fn, void *data);
+
+    // Iterate across provides or requirement
+
+    virtual int foreachProvidingResItem (const Capability & dep, ResItemAndDepFn fn, void *data);
+    virtual int foreachRequiringResItem (const Capability & dep, ResItemAndDepFn fn, void *data);
+    virtual int foreachConflictingResItem (const Capability & dep, ResItemAndDepFn fn, void *data);
+
+    // locks
+
+    virtual int foreachLock (MatchFn fn, void *data) const;
+
+};
+    
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

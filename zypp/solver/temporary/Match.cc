@@ -37,144 +37,144 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      using namespace std;
+using namespace std;
 
-      IMPL_PTR_TYPE(Match);
+IMPL_PTR_TYPE(Match);
 
-      //---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 
-      string
-      Match::asString ( void ) const
-      {
-          return toString (*this);
-      }
-
-
-      string
-      Match::toString ( const Match & lock )
-      {
-          return "<lock/>";
-      }
+string
+Match::asString ( void ) const
+{
+    return toString (*this);
+}
 
 
-      ostream &
-      Match::dumpOn( ostream & str ) const
-      {
-          str << asString();
-          return str;
-      }
+string
+Match::toString ( const Match & lock )
+{
+    return "<lock/>";
+}
 
 
-      ostream&
-      operator<<( ostream& os, const Match& edition)
-      {
-          return os << edition.asString();
-      }
-
-      //---------------------------------------------------------------------------
-
-      Match::Match()
-          : _importance (Importance::Undefined)
-      {
-      }
-
-      Match::Match (XmlNode_Ptr node)
-          : _importance (Importance::Undefined)
-      {
-      }
-
-      Match::~Match()
-      {
-      }
-
-      //---------------------------------------------------------------------------
-
-      XmlNode_Ptr
-      Match::asXmlNode (void) const
-      {
-          return new XmlNode("match");
-      }
+ostream &
+Match::dumpOn( ostream & str ) const
+{
+    str << asString();
+    return str;
+}
 
 
-      // equality
-      bool
-      Match::equals ( const Match & lock ) const {
+ostream&
+operator<<( ostream& os, const Match& edition)
+{
+    return os << edition.asString();
+}
 
-          // Check the name glob
+//---------------------------------------------------------------------------
 
-          if ((_name_glob.empty()) ^ (lock._name_glob.empty()))
-      	return false;
-          if (_name_glob != lock._name_glob)
-      	return false;
+Match::Match()
+    : _importance (Importance::Undefined)
+{
+}
 
-          // Check the channel
+Match::Match (XmlNode_Ptr node)
+    : _importance (Importance::Undefined)
+{
+}
 
-          if ((_channel_id.empty()) ^ (lock._channel_id.empty()))
-      	return false;
-          if (_channel_id != lock._channel_id)
-      	return false;
+Match::~Match()
+{
+}
 
-          // Check the importance
+//---------------------------------------------------------------------------
 
-          if (_importance != lock._importance
-      	|| _importance_gteq != lock._importance_gteq)
-          {
-      	return false;
-          }
-
-          // Check the dep
-          if ( _dependency != lock._dependency)
-              return false;
-
-          return true;
-      }
+XmlNode_Ptr
+Match::asXmlNode (void) const
+{
+    return new XmlNode("match");
+}
 
 
-      bool
-      Match::test (ResItem_constPtr resItem, World_Ptr world) const
-      {
-          string name;
-          Channel_constPtr channel = resItem->channel ();
+// equality
+bool
+Match::equals ( const Match & lock ) const {
 
-          if (channel != NULL && !_channel_id.empty()) {
-              if (! channel->hasEqualId (_channel_id)) {
-                  return false;
-              }
-          }
+    // Check the name glob
 
-          name = resItem->name ();
+    if ((_name_glob.empty()) ^ (lock._name_glob.empty()))
+	return false;
+    if (_name_glob != lock._name_glob)
+	return false;
 
-          // FIXME, implement regexp
+    // Check the channel
+
+    if ((_channel_id.empty()) ^ (lock._channel_id.empty()))
+	return false;
+    if (_channel_id != lock._channel_id)
+	return false;
+
+    // Check the importance
+
+    if (_importance != lock._importance
+	|| _importance_gteq != lock._importance_gteq)
+    {
+	return false;
+    }
+
+    // Check the dep
+    if ( _dependency != lock._dependency)
+        return false;
+
+    return true;
+}
+
+
+bool
+Match::test (ResItem_constPtr resItem, World_Ptr world) const
+{
+    string name;
+    Channel_constPtr channel = resItem->channel ();
+
+    if (channel != NULL && !_channel_id.empty()) {
+        if (! channel->hasEqualId (_channel_id)) {
+            return false;
+        }
+    }
+
+    name = resItem->name ();
+
+    // FIXME, implement regexp
 #if 0
-          if (match->_pattern_spec
-              && ! g_pattern_match_string (match->pattern_spec, name)) {
-              return false;
-          }
+    if (match->_pattern_spec
+        && ! g_pattern_match_string (match->pattern_spec, name)) {
+        return false;
+    }
 #endif
 
-          /* FIXME: ResItems don't have ResItemUpdate right now */
-          /*   if (match->importance != RC_IMPORTANCE_INVALID && */
-          /* 	  !rc_resItem_is_installed (resItem)) { */
-          /* 	  RCResItemUpdate *up = rc_resItem_get_latest_update (pkg); */
-          /* 	  if (up) { */
-          /* 		  if (match->importance_gteq ? up->importance > match->importance */
-          /* 			  : up->importance < match->importance) */
-          /* 			  return FALSE; */
-          /* 	  } */
-          /*   } */
-          CapFactory  factory;
-          Capability dependency;
-          bool check = false;
+    /* FIXME: ResItems don't have ResItemUpdate right now */
+    /*   if (match->importance != RC_IMPORTANCE_INVALID && */
+    /* 	  !rc_resItem_is_installed (resItem)) { */
+    /* 	  RCResItemUpdate *up = rc_resItem_get_latest_update (pkg); */
+    /* 	  if (up) { */
+    /* 		  if (match->importance_gteq ? up->importance > match->importance */
+    /* 			  : up->importance < match->importance) */
+    /* 			  return FALSE; */
+    /* 	  } */
+    /*   } */
+    CapFactory  factory;
+    Capability dependency;
+    bool check = false;
 
-          dependency = factory.parse ( resItem->kind(),
-                                       resItem->name(),
-                                       Rel::EQ,
-                                       resItem->edition());
+    dependency = factory.parse ( resItem->kind(),
+                                 resItem->name(),
+                                 Rel::EQ,
+                                 resItem->edition());
 //          check = _dependency.matches (dependency);
-          return check;
-      }
+    return check;
+}
 
-      ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

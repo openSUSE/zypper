@@ -35,67 +35,73 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : Importance
-      /**
-       *
-       **/
-      class Importance {
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : Importance
+/**
+ *
+ **/
+class Importance {
 
-        private:
+  private:
 
-          typedef enum {
-      	IMPORTANCE_INVALID = -1,
+    typedef enum {
+	IMPORTANCE_INVALID = -1,
 
-      	IMPORTANCE_NECESSARY,
-      	IMPORTANCE_URGENT,
-      	IMPORTANCE_SUGGESTED,
-      	IMPORTANCE_FEATURE,
-      	IMPORTANCE_MINOR,
-      	IMPORTANCE_UNDEFINED,
+	IMPORTANCE_NECESSARY,
+	IMPORTANCE_URGENT,
+	IMPORTANCE_SUGGESTED,
+	IMPORTANCE_FEATURE,
+	IMPORTANCE_MINOR,
+	IMPORTANCE_UNDEFINED,
 
-      	// Not a real importance
-      	IMPORTANCE_LAST
-          } importance_t;
+	// Not a real importance
+	IMPORTANCE_LAST
+    } importance_t;
 
-          importance_t _importance;
+    importance_t _importance;
 
-        private:
-          importance_t importance () const { return _importance; }
+  private:
+    importance_t importance () const { return _importance; }
+    Importance(importance_t importance);
 
-        public:
+  public:
+    static const Importance parse (const std::string & str);
+    virtual ~Importance();
 
-          Importance(const char *importance_str);
-          virtual ~Importance();
+    static const Importance Undefined;
+    static const Importance Invalid;
+    static const Importance Necessary;
+    static const Importance Urgent;
+    static const Importance Suggested;
+    static const Importance Feature;
+    static const Importance Minor;
 
-          static const Importance & Undefined;
+    // ---------------------------------- I/O
 
-          // ---------------------------------- I/O
+    static std::string toString ( const Importance & importance);
 
-          static std::string toString ( const Importance & importance);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
 
-          virtual std::ostream & dumpOn( std::ostream & str ) const;
+    friend std::ostream& operator<<( std::ostream&, const Importance & importance);
 
-          friend std::ostream& operator<<( std::ostream&, const Importance & importance);
+    std::string asString ( void ) const;
 
-          std::string asString ( void ) const;
+    // ---------------------------------- accessors
 
-          // ---------------------------------- accessors
+    // equality
+    bool operator==( const Importance & importance) const {
+	return _importance == importance.importance();
+    }
 
-          // equality
-          bool operator==( const Importance & importance) const {
-      	return _importance == importance.importance();
-          }
+    // inequality
+    bool operator!=( const Importance & importance) const {
+	return !(*this == importance);
+    }
 
-          // inequality
-          bool operator!=( const Importance & importance) const {
-      	return !(*this == importance);
-          }
+};
 
-      };
-
-      ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

@@ -39,56 +39,56 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
-      typedef bool (*ServiceWorldAssembleFn) (ServiceWorld_Ptr service, void *error);	// GError **error
-      
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : ServiceWorld
-      
-      class ServiceWorld : public StoreWorld {
-          
-      
-        private:
-      
-          char *_url;
-          char *_name;
-          char *_unique_id;
-      
-          bool _is_sticky;		// if true, can't be unmounted
-          bool _is_invisible;		// ... to users
-          bool _is_unsaved;		// Never save into the services.xml file
-          bool _is_singleton;		// only one such service at a time.  FIXME: broken
-      
-          ServiceWorldAssembleFn _assemble_fn;
-      
-        public:
-      
-          ServiceWorld ();
-          virtual ~ServiceWorld();
-      
-          // ---------------------------------- I/O
-      
-          static std::string toString (const ServiceWorld & section);
-      
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
-      
-          friend std::ostream& operator<<(std::ostream&, const ServiceWorld & section);
-      
-          std::string asString (void ) const;
-      
-          // ---------------------------------- accessors
-      
-          char *url () const { return _url; }
-          char *name () const { return _name; }
-          void setName (const char *name) { _name = strdup (name); }
-          char *unique_id () const { return _unique_id; }
-      
-          // ---------------------------------- methods
-      
-      };
-        
-      ///////////////////////////////////////////////////////////////////
+
+typedef bool (*ServiceWorldAssembleFn) (ServiceWorld_Ptr service, void *error);	// GError **error
+
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : ServiceWorld
+
+class ServiceWorld : public StoreWorld {
+    
+
+  private:
+
+    std::string _url;
+    std::string _name;
+    std::string _unique_id;
+
+    bool _is_sticky;		// if true, can't be unmounted
+    bool _is_invisible;		// ... to users
+    bool _is_unsaved;		// Never save into the services.xml file
+    bool _is_singleton;		// only one such service at a time.  FIXME: broken
+
+    ServiceWorldAssembleFn _assemble_fn;
+
+  public:
+
+    ServiceWorld ();
+    virtual ~ServiceWorld();
+
+    // ---------------------------------- I/O
+
+    static std::string toString (const ServiceWorld & section);
+
+    virtual std::ostream & dumpOn(std::ostream & str ) const;
+
+    friend std::ostream& operator<<(std::ostream&, const ServiceWorld & section);
+
+    std::string asString (void ) const;
+
+    // ---------------------------------- accessors
+
+    std::string url () const { return _url; }
+    std::string name () const { return _name; }
+    void setName (const std::string & name) { _name = name; }
+    std::string unique_id () const { return _unique_id; }
+
+    // ---------------------------------- methods
+
+};
+  
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

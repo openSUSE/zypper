@@ -39,44 +39,44 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-              
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : UndumpWorld
-      
-      class UndumpWorld : public StoreWorld {
-          
-      
-        private:
-      
-          typedef std::list<Channel_constPtr> ChannelSubscriptions;
-          ChannelSubscriptions _subscriptions;
-      
-        public:
-      
-          UndumpWorld (const char *filename);
-          virtual ~UndumpWorld();
-      
-          // ---------------------------------- I/O
-      
-          static std::string toString (const UndumpWorld & section);
-      
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
-      
-          friend std::ostream& operator<<(std::ostream&, const UndumpWorld & section);
-      
-          std::string asString (void ) const;
-      
-          // ---------------------------------- accessors
-      
-          // ---------------------------------- methods
-      
-          void load (const char *filename);
-          virtual bool isSubscribed (Channel_constPtr channel) const;
-          virtual void setSubscription (Channel_constPtr channel, bool is_subscribed);
-      
-      };
-      ///////////////////////////////////////////////////////////////////
+        
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : UndumpWorld
+
+class UndumpWorld : public StoreWorld {
+    
+
+  private:
+
+    typedef std::list<Channel_constPtr> ChannelSubscriptions;
+    ChannelSubscriptions _subscriptions;
+
+  public:
+
+    UndumpWorld (const std::string & filename);
+    virtual ~UndumpWorld();
+
+    // ---------------------------------- I/O
+
+    static std::string toString (const UndumpWorld & section);
+
+    virtual std::ostream & dumpOn(std::ostream & str ) const;
+
+    friend std::ostream& operator<<(std::ostream&, const UndumpWorld & section);
+
+    std::string asString (void ) const;
+
+    // ---------------------------------- accessors
+
+    // ---------------------------------- methods
+
+    void load (const std::string & filename);
+    virtual bool isSubscribed (Channel_constPtr channel) const;
+    virtual void setSubscription (Channel_constPtr channel, bool is_subscribed);
+
+};
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

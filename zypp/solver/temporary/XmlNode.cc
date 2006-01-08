@@ -47,8 +47,8 @@ XmlNode::XmlNode (const xmlNodePtr node)
 {
 }
 
-XmlNode::XmlNode (const char *name)
-    : _node(xmlNewNode (NULL, (const xmlChar *)name))
+XmlNode::XmlNode (const string & name)
+    : _node(xmlNewNode (NULL, (const xmlChar *)name.c_str()))
 {
 }
 
@@ -88,18 +88,18 @@ operator<<( ostream& os, const XmlNode& node)
 
 //---------------------------------------------------------------------------
 
-const char *
-XmlNode::getValue (const char *name, const char *deflt) const
+string 
+XmlNode::getValue (const string & name, const string & deflt) const
 {
-    char *ret;
+    string ret;
     xmlChar *xml_s;
     xmlNode *child;
 
-    xml_s = xmlGetProp(_node, (const xmlChar *)name);
+    xml_s = xmlGetProp(_node, (const xmlChar *)name.c_str());
 	  _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") xmlGetProp '" << (char *)xml_s << "'" << endl;
 
     if (xml_s) {
-	ret = strdup ((const char *)xml_s);
+	ret = string ((const char *)xml_s);
 	xmlFree (xml_s);
 	return ret;
     }
@@ -107,14 +107,12 @@ XmlNode::getValue (const char *name, const char *deflt) const
     child = _node->xmlChildrenNode;
 
     while (child) {
-	      _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") child '" << (const char *)(child->name) << "'" 
-				  << endl;
-	if (strcasecmp((const char *)(child->name), name) == 0) {
+	      _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") child '" << (child->name) << "'" << endl;
+	if (strcasecmp((const char *)(child->name), name.c_str()) == 0) {
 	    xml_s = xmlNodeGetContent(child);
-	    _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") xmlNodeGetContent '" << (char *)xml_s << "'"
-				<< endl;
+	    _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") xmlNodeGetContent '" << (char *)xml_s << "'" << endl;
 	    if (xml_s) {
-		ret = strdup ((const char *)xml_s);
+		ret = string ((const char *)xml_s);
 		xmlFree (xml_s);
 		return ret;
 	    }
@@ -122,22 +120,34 @@ XmlNode::getValue (const char *name, const char *deflt) const
 	child = child->next;
     }
 
-	  _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") NULL" << endl;
+    _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") deflt" << endl;
     return deflt;
 }
 
 
-const char *
-XmlNode::getProp (const char *name, const char *deflt) const
+bool
+XmlNode::hasProp (const std::string & name) const
 {
     xmlChar *ret;
-    char *gs;
 
-    ret = xmlGetProp (_node, (const xmlChar *)name);
-	  _XXX("RC_SPEW_XML") << "XmlNode::getProp(" << name << ") xmlGetProp '" << (char *)ret << "'"
-			      << endl;
+    ret = xmlGetProp (_node, (const xmlChar *)name.c_str());
     if (ret) {
-	gs = strdup ((const char *)ret);
+	return true;
+    }
+    return false;
+}
+
+
+string
+XmlNode::getProp (const std::string & name, const std::string & deflt) const
+{
+    xmlChar *ret;
+    string gs;
+
+    ret = xmlGetProp (_node, (const xmlChar *)name.c_str());
+	  _XXX("RC_SPEW_XML") << "XmlNode::getProp(" << name << ") xmlGetProp '" << (char *)ret << "'" << endl;
+    if (ret) {
+	gs = string ((const char  *)ret);
 	xmlFree (ret);
 	return gs;
     }
@@ -146,31 +156,29 @@ XmlNode::getProp (const char *name, const char *deflt) const
 
 
 bool
-XmlNode::getIntValue (const char *name, int *value) const
+XmlNode::getIntValue (const std::string & name, int *value) const
 {
-    const char *strval;
+    string strval;
     char *ret;
-    int z;
+    long z;
 
     strval = this->getValue (name, NULL);
-    if (!strval) {
+    if (strval.empty()) {
 	return false;
     }
 
-    z = strtol (strval, &ret, 10);
+    z = strtol (strval.c_str(), &ret, 10);
     if (*ret != '\0') {
-	free ((void *)strval);
 	return false;
     }
 
-    free ((void *)strval);
     *value = z;
     return true;
 }
 
 
 int
-XmlNode::getIntValueDefault (const char *name, int def) const
+XmlNode::getIntValueDefault (const std::string & name, int def) const
 {
     int z;
     if (this->getIntValue (name, &z))
@@ -181,7 +189,7 @@ XmlNode::getIntValueDefault (const char *name, int def) const
 
 	       
 unsigned int
-XmlNode::getUnsignedIntValueDefault (const char *name, unsigned int def) const
+XmlNode::getUnsignedIntValueDefault (const std::string & name, unsigned int def) const
 {
     unsigned int z;
     if (this->getUnsignedIntValue (name, &z))
@@ -192,56 +200,53 @@ XmlNode::getUnsignedIntValueDefault (const char *name, unsigned int def) const
 
 
 bool
-XmlNode::getUnsignedIntValue (const char *name, unsigned int *value) const
+XmlNode::getUnsignedIntValue (const std::string & name, unsigned int *value) const
 {
-    const char *strval;
+    string strval;
     char *ret;
     int z;
 
     strval = this->getValue (name, NULL);
-    if (!strval) {
+    if (strval.empty()) {
 	return false;
     }
 
-    z = strtoul (strval, &ret, 10);
+    z = strtoul (strval.c_str(), &ret, 10);
     if (*ret != '\0') {
-	free ((void *)strval);
 	return false;
     }
 
-    free ((void *)strval);
     *value = z;
     return true;
 }
 
 
 unsigned int
-XmlNode::getUnsignedIntPropDefault (const char *name, unsigned int def) const
+XmlNode::getUnsignedIntPropDefault (const std::string & name, unsigned int def) const
 {
     xmlChar *buf;
     unsigned int ret;
 
-    buf = xmlGetProp (_node, (const xmlChar *)name);
+    buf = xmlGetProp (_node, (const xmlChar *)name.c_str());
 
     if (buf) {
 	ret = strtol ((const char *)buf, NULL, 10);
 	xmlFree (buf);
 	return (ret);
-    } else {
-	return (def);
     }
+    return (def);
 }
 
 
-const char *
+string
 XmlNode::getContent (void) const
 {
     xmlChar *buf;
-    char *ret;
+    string ret;
 
     buf = xmlNodeGetContent (_node);
 
-    ret = strdup ((const char *)buf);
+    ret = string ((const char *)buf);
 
     xmlFree (buf);
 
@@ -261,19 +266,18 @@ XmlNode::getUnsignedIntContentDefault (unsigned int def) const
 	ret = strtol ((const char *)buf, NULL, 10);
 	xmlFree (buf);
 	return (ret);
-    } else {
-	return (def);
     }
+    return (def);
 }
 
 
 const XmlNode_Ptr
-XmlNode::getNode (const char *name) const
+XmlNode::getNode (const std::string & name) const
 {
     xmlNodePtr iter;
 
     for (iter = _node->xmlChildrenNode; iter; iter = iter->next) {
-	if (strcasecmp ((const char *)(iter->name), name) == 0) {
+	if (strcasecmp ((const char *)(iter->name), name.c_str()) == 0) {
 	    return new XmlNode (iter);
 	}
     }
@@ -286,9 +290,9 @@ XmlNode::getNode (const char *name) const
 
 
 void
-XmlNode::addTextChild (const char *name, const char *content)
+XmlNode::addTextChild (const std::string & name, const std::string & content)
 {
-    xmlNewTextChild (_node, NULL, (const xmlChar *)name, (const xmlChar *)content);
+    xmlNewTextChild (_node, NULL, (const xmlChar *)name.c_str(), (const xmlChar *)content.c_str());
 }
 
 ///////////////////////////////////////////////////////////////////

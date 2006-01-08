@@ -40,36 +40,35 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
-      typedef unsigned char byte;
-      
-      char *strstrip (const char *str);
-      char *maybe_merge_paths(const char *parent_path, const char *child_path);
-      bool url_is_absolute (const char *url);
-      
-      
-      typedef struct {
-          byte *data;
-          size_t len;
-      } ByteArray;
-      
-      // An easy way to map files.  If we map a compressed file,
-      //   it will be magically uncompressed for us.
-      
-      typedef struct {
-          byte *data;
-          size_t size;
-          bool is_mmapped;
-      } Buffer;
-      
-      Buffer *buffer_map_file (const std::string & filename);
-      void buffer_unmap_file (Buffer *buffer);
-      
-      
-      xmlDoc *parse_xml_from_buffer (const char *input_buffer, size_t input_length);
-      xmlDoc *parse_xml_from_file (const std::string & filename);
-      
-      ///////////////////////////////////////////////////////////////////
+
+typedef unsigned char byte;
+
+char *strstrip (const char *str);
+std::string maybe_merge_paths(const std::string & parent_path, const std::string & child_path);
+bool url_is_absolute (const std::string & url);
+
+typedef struct {
+    byte *data;
+    size_t len;
+} ByteArray;
+
+// An easy way to map files.  If we map a compressed file,
+//   it will be magically uncompressed for us.
+
+typedef struct {
+    byte *data;
+    size_t size;
+    bool is_mmapped;
+} Buffer;
+
+Buffer *buffer_map_file (const std::string & filename);
+void buffer_unmap_file (Buffer *buffer);
+
+
+xmlDoc *parse_xml_from_buffer (const char *input_buffer, size_t input_length);
+xmlDoc *parse_xml_from_file (const std::string & filename);
+
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

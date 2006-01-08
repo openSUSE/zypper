@@ -59,7 +59,7 @@ struct DepTable {
 
 static Capability
 parseXmlDep (XmlNode_constPtr node) {
-    const char *tmp;
+    string tmp;
     string epoch,version,release,name = "";
     Arch arch = Arch_noarch;
     Rel relation;
@@ -71,16 +71,16 @@ parseXmlDep (XmlNode_constPtr node) {
     }
 
     name = node->getProp ("name");
-    tmp = node->getProp ("op", NULL);
-    if (tmp) {
+    tmp = node->getProp ("op");
+    if (!tmp.empty()) {
         relation = Rel(tmp);
         epoch = node->getIntValueDefault ("epoch", Edition::noepoch);
         version = node->getProp ("version");
         release = node->getProp ("release");
     }
 
-    tmp = node->getProp ("arch", NULL);
-    if (tmp) {
+    tmp = node->getProp ("arch");
+    if (!tmp.empty()) {
         arch = Arch(node->getProp ("arch"));
     } else {
         arch =  Arch();
@@ -143,14 +143,13 @@ extract_dep_info (XmlNode_constPtr iter, struct DepTable & dep_table)
     } else if (iter->equals("conflicts")) {
 	XmlNode_Ptr iter2;
 	bool all_are_obs = false, this_is_obs = false;
-	const char *obs;
+	string obs;
 
 	iter2 = iter->children();
 
-	obs = iter->getProp ("obsoletes", NULL);
-	if (obs) {
+	obs = iter->getProp ("obsoletes");
+	if (!obs.empty()) {
 	    all_are_obs = true;
-	    free ((void *)obs);
 	}
 
 	while (iter2) {
@@ -164,10 +163,9 @@ extract_dep_info (XmlNode_constPtr iter, struct DepTable & dep_table)
 
 	    if (! all_are_obs) {
 		this_is_obs = false;
-		obs = iter2->getProp ("obsoletes", NULL);
-		if (obs) {
+		obs = iter2->getProp ("obsoletes");
+		if (!obs.empty()) {
 		    this_is_obs = true;
-		    free ((void *)obs);
 		}
 	    }
 
@@ -352,20 +350,16 @@ Package::Package (XmlNode_constPtr node, Channel_constPtr channel)
         bool extracted_deps = false;
 
         if (iter->equals("name")) {	  		name = iter->getContent();
-        } else if (iter->equals("epoch")) {		epoch = atoi (iter->getContent());
+        } else if (iter->equals("epoch")) {		epoch = atoi (iter->getContent().c_str());
         } else if (iter->equals("version")) {		version = iter->getContent();
         } else if (iter->equals("release")) {		release = iter->getContent();
-        } else if (iter->equals("summary")) {		_summary = strdup (iter->getContent());
-        } else if (iter->equals("description")) {	_description = strdup (iter->getContent());
+        } else if (iter->equals("summary")) {		_summary = iter->getContent();
+        } else if (iter->equals("description")) {	_description = iter->getContent();
         } else if (iter->equals("arch")) {		arch = Arch(iter->getContent());
         } else if (iter->equals("filesize")) {
-            const char *tmp = iter->getContent();
-            setFileSize (tmp && *tmp ? atoi (tmp) : 0);
-            free ((void *)tmp);
+            setFileSize (iter->getIntValueDefault("filesize", 0));
         } else if (iter->equals("installedsize")) {
-            const char *tmp = iter->getContent();
-            setInstalledSize (tmp && *tmp ? atoi (tmp) : 0);
-            free ((void *)tmp);
+            setInstalledSize (iter->getIntValueDefault("installedsize", 0));
         } else if (iter->equals("install_only")) {	_install_only = true;
         } else if (iter->equals("package_set")) {	_package_set = true;
         } else if (iter->equals("history")) {

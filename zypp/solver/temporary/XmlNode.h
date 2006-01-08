@@ -51,14 +51,13 @@ namespace zypp
 
 class XmlNode : public base::ReferenceCounted, private base::NonCopyable
 {
-    
 
   private:
     const xmlNodePtr _node;
 
   public:
     XmlNode (const xmlNodePtr node);
-    XmlNode (const char *name);
+    XmlNode (const std::string & name);
     virtual ~XmlNode ();
 
     // ---------------------------------- I/O
@@ -73,7 +72,7 @@ class XmlNode : public base::ReferenceCounted, private base::NonCopyable
 
     // ---------------------------------- accessors
 
-    const char *name() const { return ((const char *)(_node->name)); }
+    const std::string name() const { return (std::string((const char *)_node->name)); }
     xmlNodePtr node() const { return (_node); }
     XmlNode_Ptr next() const { return (_node->next == NULL ? NULL : new XmlNode (_node->next)); }
     XmlNode_Ptr children() const { return (_node->xmlChildrenNode == NULL ? NULL : new XmlNode (_node->xmlChildrenNode)); }
@@ -81,31 +80,30 @@ class XmlNode : public base::ReferenceCounted, private base::NonCopyable
 
     // ---------------------------------- methods
 
-    const char *getProp (const char *name, const char *deflt = "") const;
-    const char *getValue (const char *name, const char *deflt = "") const;
-    const char *getContent (void) const;
+    bool hasProp (const std::string & name) const;
+    std::string getProp (const std::string & name, const std::string & deflt = "") const;
+    std::string getValue (const std::string & name, const std::string & deflt = "") const;
+    std::string getContent (void) const;
 
-    bool equals (const char *n) const { return (strcasecmp (name(), n) == 0); }
+    bool equals (const std::string & n) const { return (strcasecmp (name().c_str(), n.c_str()) == 0); }
     bool isElement (void) const { return (type() == XML_ELEMENT_NODE); }
 
-    bool match (const char *str) const { return (! strcasecmp ((const char *)(_node->name), str)); }
-
-    const XmlNode_Ptr getNode (const char *name) const;
+    const XmlNode_Ptr getNode (const std::string & name) const;
 
     // The former will get either a property or a tag, whereas the latter will
     //   get only a property
 
-    bool getIntValue (const char *name, int *value) const;
-    int getIntValueDefault (const char *name, int def) const;
+    bool getIntValue (const std::string & name, int *value) const;
+    int getIntValueDefault (const std::string & name, int def) const;
 
-    bool getUnsignedIntValue (const char *name, unsigned int *value) const;
-    unsigned int getUnsignedIntValueDefault (const char *name, unsigned int def) const;
+    bool getUnsignedIntValue (const std::string & name, unsigned int *value) const;
+    unsigned int getUnsignedIntValueDefault (const std::string & name, unsigned int def) const;
 
-    unsigned int getUnsignedIntPropDefault (const char *name, unsigned int def) const;
+    unsigned int getUnsignedIntPropDefault (const std::string & name, unsigned int def) const;
 
     unsigned int getUnsignedIntContentDefault (unsigned int def) const;
 
-    void addTextChild (const char *name, const char *content);
+    void addTextChild (const std::string & name, const std::string & content);
 };
 
       ///////////////////////////////////////////////////////////////////
