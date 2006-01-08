@@ -47,7 +47,7 @@ extract_packages_from_xml_node (XmlNode_Ptr node, Channel_Ptr channel, CResItemF
     Package_Ptr package;
     int count = 0;
 
-    _DBG("RC_SPEW_XML") << "extract_packages_from_xml_node ()" << endl;
+//    _DBG("RC_SPEW_XML") << "extract_packages_from_xml_node ()" << endl;
     // search the 'package' node
 
     while (node && !node->equals("package")) {
@@ -65,7 +65,7 @@ extract_packages_from_xml_node (XmlNode_Ptr node, Channel_Ptr channel, CResItemF
 	if (node->equals("package")) {
 	    package = new Package (node, channel);
 	    if (package) {
-				_DBG("RC_SPEW") << package->asString(true) << endl;
+//		_DBG("RC_SPEW") << package->asString(true) << endl;
 		bool ok = true;
 		if (callback)
 		    ok = callback (package, data);
@@ -87,7 +87,7 @@ extract_packages_from_helix_buffer (const char *buf, size_t len, Channel_Ptr cha
     unsigned int count = 0;
     PackageList packages;
 
-    _DBG("RC_SPEW_XML") << "extract_packages_from_helix_buffer(" << buf << "...," << (long)len << ",...)" << endl;
+//    _DBG("RC_SPEW_XML") << "extract_packages_from_helix_buffer(" << buf << "...," << (long)len << ",...)" << endl;
 
     if (buf == NULL || len == 0)
 	return 0;
@@ -101,7 +101,7 @@ extract_packages_from_helix_buffer (const char *buf, size_t len, Channel_Ptr cha
 
     count = packages.size();
 
-    _DBG("RC_SPEW_XML") << "extract_packages_from_helix_buffer: parsed " << count << "packages" << endl;
+//    _DBG("RC_SPEW_XML") << "extract_packages_from_helix_buffer: parsed " << count << "packages" << endl;
 
     if (callback != NULL) {
 	for (PackageList::iterator iter = packages.begin(); iter != packages.end(); iter++) {
@@ -153,7 +153,7 @@ extract_packages_from_undump_buffer (const char *buf, size_t len, ChannelAndSubs
 	return -1;
 
     if (!dump_node->equals("world")) {
-			  WAR << "Unrecognized top-level node for undump: '" << dump_node->name() << "'" << endl;
+	WAR << "Unrecognized top-level node for undump: '" << dump_node->name() << "'" << endl;
 	return -1;
     }
 
@@ -497,7 +497,7 @@ extract_yum_package (const guint8 *data, size_t len,
     g_return_val_if_fail (packman != NULL, NULL);
 
     if (!g_type_is_a (G_TYPE_FROM_INSTANCE (packman), RC_TYPE_RPMMAN)) {
-			  DBG << "yum support is not available on non-RPM systems" << endl;
+	DBG << "yum support is not available on non-RPM systems" << endl;
 	return NULL;
     }
 
@@ -506,7 +506,7 @@ extract_yum_package (const guint8 *data, size_t len,
     h = rpmman->headerLoad (data);
 
     if (h == NULL) {
-			  DBG << "Unable to get header from headerCopyLoad!" << endl;
+	DBG << "Unable to get header from headerCopyLoad!" << endl;
 	return NULL;
     }
 
@@ -554,14 +554,14 @@ extract_packages_from_aptrpm_buffer (const guint8 *data, size_t len,
     g_return_val_if_fail (packman != NULL, -1);
 
     if (!g_type_is_a (G_TYPE_FROM_INSTANCE (packman), RC_TYPE_RPMMAN)) {
-			  ERR << "apt-rpm support is not available on non-RPM systems" << endl;
+	ERR << "apt-rpm support is not available on non-RPM systems" << endl;
 	return -1;
     }
 
     rpmman = RC_RPMMAN (packman);
 
     if (len < hdrmagic_len) {
-			  ERR << "Data is too small to possibly be correct" << endl;
+	ERR << "Data is too small to possibly be correct" << endl;
 	return 0;
     }
 
