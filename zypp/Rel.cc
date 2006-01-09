@@ -37,7 +37,7 @@ namespace
         _table["LE"] = _table["le"] = _table["<="] = Rel::LE_e;
         _table["GT"] = _table["gt"] = _table[">"]  = Rel::GT_e;
         _table["GE"] = _table["ge"] = _table[">="] = Rel::GE_e;
-        _table["ANY"]  = _table["any"] = _table[""] = Rel::ANY_e;
+        _table["ANY"]  = _table["any"] = _table["(any)"] = _table[""] = Rel::ANY_e;
         _table["NONE"] = _table["none"]             = Rel::NONE_e;
       }
 
@@ -45,7 +45,7 @@ namespace
       = _table.find( strval_r );
     if ( it == _table.end() )
       {
-        ZYPP_THROW( Exception("Rel parse: illegal string value") );
+        ZYPP_THROW( Exception("Rel parse: illegal string value '"+strval_r+"'") );
       }
     return it->second;
   }
