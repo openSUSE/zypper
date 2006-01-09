@@ -26,15 +26,20 @@ namespace zypp
 
 
     // ---------------------------------------------------------------
-    /**
-     * FIXME:
+    /** Url behaviour configuration container.
      */
     typedef std::map< std::string, std::string > UrlConfig;
 
 
     // ---------------------------------------------------------------
+    /** Url toString() view options.
+     */
     struct ViewOption
     {
+      /**
+        * @{
+        * Flags 
+        */
       static const ViewOption WITH_SCHEME;
       static const ViewOption WITH_USERNAME;
       static const ViewOption WITH_PASSWORD;
@@ -44,24 +49,43 @@ namespace zypp
       static const ViewOption WITH_PATH_PARAMS;
       static const ViewOption WITH_QUERY_STR;
       static const ViewOption WITH_FRAGMENT;
+      /* @} */
+
+      /**
+       * @{
+       * With Empty flags.
+       */
       static const ViewOption EMPTY_AUTHORITY;
       static const ViewOption EMPTY_PATH_NAME;
       static const ViewOption EMPTY_PATH_PARAMS;
       static const ViewOption EMPTY_QUERY_STR;
       static const ViewOption EMPTY_FRAGMENT;
+      /* @} */
+
+      /** Default combination of view options.
+       */
       static const ViewOption DEFAULTS;
 
       ViewOption(): opt(DEFAULTS.opt)
       {}
 
+      /** @return The result of a add of \p r from \p l.
+       */
       friend inline ViewOption
       operator + (const ViewOption &l, const ViewOption &r)
       { return ViewOption(l.opt |  r.opt); }
 
+      /** @return The result of a subtract of \p r from \p l.
+       */
       friend inline ViewOption
       operator - (const ViewOption &l, const ViewOption &r)
       { return ViewOption(l.opt & ~r.opt); }
 
+      /** Check if option is set.
+       * \param o    A view option.
+       * \return True, if the current options bitwise matches
+       *         the specified one.
+       */
       inline bool
       has(const ViewOption &o) const
       { return o.opt & opt; }

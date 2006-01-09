@@ -68,7 +68,7 @@ namespace zypp
      * \param str      A string to encode (binary data).
      * \param safe     Characters safe to skip in encoding,
      *                 e.g. "/" for path names.
-     * \return A percend encoded string.
+     * \return A percent encoded string.
      */
     std::string
     encode(const std::string &str, const std::string &safe = "");
@@ -223,7 +223,7 @@ namespace zypp
      * \param psep    Separator character to use between key-value pairs.
      * \param vsep    Separator character to use between keys and values.
      * \param safe    List of characters to accept without encoding.
-     * \return A URL percend-encoded parameter string.
+     * \return A URL percent-encoded parameter string.
      * \throws A std::invalid_argument exception, if the \p safe character
      * list contains characters used in \p psep or \p vsep.
      */
