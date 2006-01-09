@@ -8,14 +8,19 @@ INCLUDES =
 ## ##################################################
 
 include_HEADERS = \
-	Tags.h
+	ParseException.h\
+	Tags.h		\
+	Grammar.h	\
+	Parser.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_parser_tagfile.la
 
 ## ##################################################
 
 lib@PACKAGE@_parser_tagfile_la_SOURCES = \
-	Tags.cc
+	ParseException.cc\
+	Tags.cc		\
+	Parser.cc
 
 lib@PACKAGE@_parser_tagfile_la_LIBADD =
 
