@@ -118,8 +118,8 @@ namespace zypp
     /** More or less human readable representation as string. */
     std::string asString() const;
 
-    /** More or less human readable name of the dependency */
-    std::string name() const;
+    /** Deprecated */
+    std::string index() const;
 
   private:
     /** Pointer to implementation */

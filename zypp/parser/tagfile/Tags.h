@@ -63,6 +63,18 @@ namespace zypp
         Range       range;
         std::string ident;
         std::string ext;
+
+        bool isPlain() const
+        { return ext.empty(); }
+
+        bool hasLang() const
+        { return !isPlain(); }
+
+        bool isPlain( const std::string & val_r ) const
+        { return isPlain() && ident == val_r; }
+
+        bool isLang( const std::string & val_r ) const
+        { return hasLang() && ident == val_r; }
       };
 
       /** \relates Tag Stream output.*/

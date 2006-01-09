@@ -55,6 +55,9 @@ namespace zypp
       /**  */
       virtual const Kind & kind() const;
 
+      virtual bool relevant() const
+      { return false; }
+
       /** Return whether the Capabilities match. */
       virtual CapMatch matches( const constPtr & rhs ) const;
 

@@ -59,11 +59,8 @@ namespace zypp
   std::string Capability::asString() const
   { return _pimpl->asString(); }
 
-  /** \bug How is this supposed to work? What's the name of
-   * an OR capability or a Conditiona or a Split?
-  */
-  std::string Capability::name() const
-  { return "CapabilityName"; }//return _pimpl->name(); }
+  std::string Capability::index() const
+  { return _pimpl->index(); }
 
   /******************************************************************
   **

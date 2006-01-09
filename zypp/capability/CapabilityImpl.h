@@ -67,10 +67,14 @@ namespace zypp
       /** More or less human readable representation as string. */
       virtual std::string asString() const = 0;
 
+      /**  */
+      std::string index() const
+      { return value(): }
+
     protected: // Match helpers
       /** Implementation dependent value. */
       virtual std::string value() const
-      { return std::string(); }
+      { return asString(); }
 
       /** Implementation dependent value. */
       virtual Edition::Range editionRange() const

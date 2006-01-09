@@ -25,7 +25,7 @@ namespace zypp
     //
     //	CLASS NAME : OrCap
     //
-    /** \toto Implement it. */
+    /** \todo Implement it. */
     class OrCap : public CapabilityImpl
     {
     public:

@@ -25,7 +25,7 @@ namespace zypp
     //
     //	CLASS NAME : ConditionalCap
     //
-    /** \toto Implement it. */
+    /** \todo Implement it. */
     class ConditionalCap : public CapabilityImpl
     {
     public:
