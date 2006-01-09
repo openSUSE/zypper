@@ -84,26 +84,12 @@ namespace zypp
 
       //---------------------------------------------------------------------------
 
-      /* This function also checks channels in addition to just dep relations */
-      /* FIXME: rc_resItem_dep_verify_relation already checks the channel */
+      /* This function checks the dep relations */
 
-      bool
+      CapMatch
       ResItemAndDependency::verifyRelation (const Capability & dep) const
       {
-#if 0
-      #if PHI
-          // don't check the channel, thereby honoring conflicts from installed resItems to to-be-installed resItems
           return dep.matches (_dependency);
-      #else
-          //if (!dep.matches (_dependency)) {
-      	return false;
-          //}
-          _DBG("SPEW_DEP") << "ResItemAndDependency::verifyRelation _resItem->channel() " << _resItem->channel()->asString() << ", dep->channel()" << dep->channel()->asString() << endl;
-          return _resItem->channel()->equals (dep->channel());
-      #endif
-#else
-          return true;
-#endif
       }
 
       ///////////////////////////////////////////////////////////////////

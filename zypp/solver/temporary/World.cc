@@ -227,7 +227,7 @@ is_locked_cb (Match_constPtr match, void *data)
 {
     IsLockedInfo *info = (IsLockedInfo *)data;
 
-    if (match->test (info->resItem, info->world)) {
+    if (match->test (info->resItem, info->world) == CapMatch::yes) {
 	info->is_locked = true;
 	return false;
     }

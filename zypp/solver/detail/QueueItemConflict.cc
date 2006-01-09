@@ -35,6 +35,7 @@
 #include "zypp/solver/detail/ResolverInfoObsoletes.h"
 #include "zypp/CapFactory.h"
 #include "zypp/CapSet.h"
+#include "zypp/CapMatch.h"
 #include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -179,8 +180,8 @@ conflict_process_cb (ResItem_constPtr resItem, const Capability & cap, void *dat
                                           Rel::EQ,
                                           resItem->edition());
 
-    if (info->actually_an_obsolete)
-//              && !capTest.matches (cap))
+    if (info->actually_an_obsolete
+        && capTest.matches (cap) != CapMatch::yes )
     {
         return true;
     }

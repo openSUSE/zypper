@@ -130,7 +130,7 @@ Match::equals ( const Match & lock ) const {
 }
 
 
-bool
+CapMatch
 Match::test (ResItem_constPtr resItem, World_Ptr world) const
 {
     string name;
@@ -164,13 +164,12 @@ Match::test (ResItem_constPtr resItem, World_Ptr world) const
     /*   } */
     CapFactory  factory;
     Capability dependency;
-    bool check = false;
 
     dependency = factory.parse ( resItem->kind(),
                                  resItem->name(),
                                  Rel::EQ,
                                  resItem->edition());
-//          check = _dependency.matches (dependency);
+    CapMatch check = _dependency.matches (dependency);
     return check;
 }
 

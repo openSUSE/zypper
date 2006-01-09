@@ -36,6 +36,7 @@
 #include "zypp/solver/temporary/ResItem.h"
 #include "zypp/solver/temporary/WorldPtr.h"
 #include "zypp/solver/temporary/XmlNode.h"
+#include "zypp/CapMatch.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -113,7 +114,7 @@ namespace zypp
           // equality
           bool equals (const Match & match) const;
 
-          bool test (ResItem_constPtr resItem, World_Ptr world) const;
+          CapMatch test (ResItem_constPtr resItem, World_Ptr world) const;
       };
 
       ///////////////////////////////////////////////////////////////////

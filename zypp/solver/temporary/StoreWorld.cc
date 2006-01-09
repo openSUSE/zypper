@@ -28,6 +28,7 @@
 #include "zypp/Arch.h"
 #include "zypp/CapSet.h"
 #include "zypp/base/Logger.h"
+#include "zypp/CapMatch.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -502,7 +503,7 @@ StoreWorld::foreachProvidingResItem (const Capability & dep, ResItemAndDepFn fn,
     for (ResItemAndDependencyTable::const_iterator iter = _provides_by_name.lower_bound(dep.index()); iter != _provides_by_name.upper_bound(dep.index()); iter++) {
 	ResItemAndDependency_constPtr r_and_d = iter->second;
 
-	if (r_and_d && r_and_d->verifyRelation (dep)) {
+	if (r_and_d && r_and_d->verifyRelation (dep) == CapMatch::yes) {
 //fprintf (stderr, "found: %s\n", r_and_d->resItem()->asString(true).c_str());
 	    /* If we have multiple identical resItems in RCWorld,
 	       we want to only include the resItem that is installed and
@@ -545,7 +546,7 @@ StoreWorld::foreachRequiringResItem (const Capability & dep, ResItemAndDepFn fn,
     for (ResItemAndDependencyTable::const_iterator iter = _requires_by_name.lower_bound(dep.index()); iter != _requires_by_name.upper_bound(dep.index()); iter++) {
 	ResItemAndDependency_constPtr r_and_d = iter->second;
 
-	if (r_and_d ) {//&& r_and_d->dependency().matches (dep)) {
+	if (r_and_d && r_and_d->dependency().matches (dep) == CapMatch::yes) {
 
 	    /* Skip dups if one of them in installed. */
 	    if (r_and_d->resItem()->isInstalled()
@@ -588,7 +589,7 @@ StoreWorld::foreachConflictingResItem (const Capability & dep, ResItemAndDepFn f
 
 	if (r_and_d)
 //fprintf (stderr, "==> %s verify %s ? %s\n", r_and_d->asString().c_str(), dep->asString().c_str(), r_and_d->verifyRelation (dep) ? "Y" : "N");
-	if (r_and_d) {//&& r_and_d->dependency().matches (dep)) {
+	if (r_and_d && r_and_d->dependency().matches (dep) == CapMatch::yes) {
 	    /* Skip dups if one of them in installed. */
 	    if (r_and_d->resItem()->isInstalled()
 		|| installed.find(r_and_d->resItem()) == installed.end()) {

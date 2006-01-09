@@ -34,6 +34,7 @@
 #include "zypp/solver/detail/ResItemAndDependencyPtr.h"
 #include "zypp/solver/temporary/ResItem.h"
 #include "zypp/Capability.h"
+#include "zypp/CapMatch.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -85,7 +86,7 @@ typedef std::multimap<const std::string, ResItem_constPtr> ResItemTable;
 
           // ---------------------------------- methods
 
-          bool verifyRelation (const Capability & dep) const;
+          CapMatch verifyRelation (const Capability & dep) const;
       };
 
       ///////////////////////////////////////////////////////////////////
