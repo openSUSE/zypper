@@ -68,7 +68,7 @@ namespace zypp
        **/
 
       class ResItem : public base::ReferenceCounted, private base::NonCopyable {
-          
+
 
         private:
           Channel_constPtr _channel;
@@ -129,13 +129,13 @@ namespace zypp
           size_t installedSize() const { return _installed_size; }
           void setInstalledSize (size_t installed_size) { _installed_size = installed_size; }
 
-          const CapSet & requires() const { return _resObject->deps().requires(); }
-          const CapSet & provides() const { return _resObject->deps().provides(); }
-          const CapSet & conflicts() const { return _resObject->deps().conflicts(); }
-          const CapSet & obsoletes() const { return _resObject->deps().obsoletes(); }
-          const CapSet & suggests() const { return _resObject->deps().suggests(); }
-          const CapSet & recommends() const { return _resObject->deps().recommends(); }
-          const CapSet & freshens() const { return _resObject->deps().freshens(); }
+          const CapSet & requires() const { return _resObject->requires(); }
+          const CapSet & provides() const { return _resObject->provides(); }
+          const CapSet & conflicts() const { return _resObject->conflicts(); }
+          const CapSet & obsoletes() const { return _resObject->obsoletes(); }
+          const CapSet & suggests() const { return _resObject->suggests(); }
+          const CapSet & recommends() const { return _resObject->recommends(); }
+          const CapSet & freshens() const { return _resObject->freshens(); }
 
           void setDependencies (const Dependencies & dependencies) { _resObject->setDeps(dependencies); }
 

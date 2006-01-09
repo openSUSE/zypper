@@ -6,45 +6,15 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/Message.cc
+/** \file	zypp/NVRAD.cc
  *
 */
-#include "zypp/Message.h"
 
-using namespace std;
+#include "zypp/NVRAD.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Message::Message
-  //	METHOD TYPE : Ctor
-  //
-  Message::Message( const NVRAD & nvrad_r )
-  : ResObject( TraitsType::kind, nvrad_r )
-  {}
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : Message::~Message
-  //	METHOD TYPE : Dtor
-  //
-  Message::~Message()
-  {}
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	Message interface forwarded to implementation
-  //
-  ///////////////////////////////////////////////////////////////////
-
-  std::string Message::text()
-  { return pimpl().text(); }
-
-  std::string Message::type()
-  { return pimpl().type(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

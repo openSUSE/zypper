@@ -1,14 +1,24 @@
 //http://www.boost.org/libs/libraries.htm
 #include <iostream>
 #include <list>
+#include <vector>
 #include <string>
+#include <iterator>
 
 #include <zypp/base/Logger.h>
 #include <zypp/base/Exception.h>
+#include <zypp/base/String.h>
 #include <zypp/base/PtrTypes.h>
-#include <zypp/parser/tagfile/Tags.h>
+
+#include <zypp/parser/tagfile/Parser.h>
+#include <zypp/Package.h>
+#include <zypp/CapSet.h>
+#include <zypp/CapFactory.h>
+#include <zypp/detail/PackageImpl.h>
 
 #include <zypp/NVRA.h>
+
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -20,60 +30,88 @@ namespace zypp
     namespace tagfile
     { /////////////////////////////////////////////////////////////////
 
-      void echoOn( std::ostream & str,
-                   iterator_t first, const iterator_t last,
-                   const char* s = "" )
+
+      struct PackagesParser : public Parser
       {
-        //return;
-        str << first.get_position() << last.get_position();
-        str << s << ">>";
-        while ( first != last )
-          str << *first++;
-        str << "<< " << std::endl;
-      }
+        std::list<Package::Ptr> result;
 
-      void echo( iterator_t first, const iterator_t last, const char* s = "" )
-      {
-        echoOn( DBG, first, last, s );
-      }
-      void xecho( const char * first, const char *const last, const char* s = "" )
-      {
-        DBG << ">>" << std::string(first,last) << "<< " << std::endl;
-      }
-      void mecho( iterator_t first, const iterator_t last, const char* s = "" )
-      {
-        echoOn( MIL, first, last, s );
-      }
+        shared_ptr<detail::PackageImpl> pkgImpl;
 
-      ////////////////////////////////////////////////////////////////////////////
-      //
-      //  SingleTag Grammar
-      //
-      ////////////////////////////////////////////////////////////////////////////
+        Package::Ptr pkg;
+        Dependencies deps;
 
+        void collectPkg()
+        {
+          if ( pkg )
+            {
+              pkg->setDeps( deps );
+              result.push_back( pkg );
+              // reset
+              deps = Dependencies();
+            }
+        }
 
-      struct Merror_report_parser
-      {
-        Merror_report_parser( const char * msg_r )
-        : msg( msg_r )
-        {}
+        void collectDeps( const std::list<std::string> & depstr_r,
+                          std::insert_iterator<CapSet> result_r )
+        {
+          Capability c( CapFactory().parse( ResTraits<Package>::kind, "" ) );
+          INT << c << endl;
+          *result_r++ = c;
+        }
 
-        typedef spirit::nil_t result_t;
+        CapSet collectDeps( const std::list<std::string> & depstr_r )
+        {
+          return CapSet();
+        }
 
-        template <typename ScannerT>
-          int operator()( const ScannerT & scan, result_t & /*result*/ ) const
-          {
-            SEC << scan.first.get_position() << ' ' << msg << std::endl;
-            return -1; // Fail.
-          }
+        /* Overload to consume SingleTag data. */
+        virtual void consume( const STag & stag_r )
+        {
+          if ( stag_r.stag.isPlain( "Pkg" ) )
+            {
+              collectPkg();
 
-        const char * msg;
+              std::vector<std::string> words;
+              str::split( stag_r.value, std::back_inserter(words) );
+
+              if ( str::split( stag_r.value, std::back_inserter(words) ) != 4 )
+                ZYPP_THROW( ParseException( "Pkg" ) );
+
+              pkg = detail::makeResolvableAndImpl( words[0],
+                                                   Edition(words[1],words[2]),
+                                                   Arch(words[4]),
+                                                   pkgImpl );
+            }
+          //MIL << stag_r << endl;
+        }
+        /* Overload to consume MulitTag data. */
+        virtual void consume( const MTag & mtag_r )
+        {
+          if ( mtag_r.stag.isPlain( "Prv" ) )
+            {
+              CapSet cs;
+              collectDeps( mtag_r.value, std::inserter(cs,cs.end()) );
+              INT << cs.size() << endl;
+              deps.setProvides( cs );
+            }
+          else if ( mtag_r.stag.isPlain( "Prq" ) )
+            {
+              deps.setPrerequires( collectDeps( mtag_r.value ) );
+            }
+          else if ( mtag_r.stag.isPlain( "Req" ) )
+            {
+              deps.setRequires( collectDeps( mtag_r.value ) );
+            }
+          else if ( mtag_r.stag.isPlain( "Con" ) )
+            {
+              deps.setConflicts( collectDeps( mtag_r.value ) );
+            }
+          else if ( mtag_r.stag.isPlain( "Obs" ) )
+            {
+              deps.setObsoletes( collectDeps( mtag_r.value ) );
+            }
+        }
       };
-
-      typedef functor_parser<Merror_report_parser> Merror_report_p;
-
-
-
 
       /////////////////////////////////////////////////////////////////
     } // namespace tagfile
@@ -89,13 +127,11 @@ namespace zypp
 //  Types
 //
 ////////////////////////////////////////////////////////////////////////////
+
 using std::endl;
-using std::list;
-using std::string;
 using namespace zypp;
 using namespace zypp::parser::tagfile;
-typedef scanner<iterator_t>            scanner_t;
-typedef rule<scanner_t>                rule_t;
+
 ////////////////////////////////////////////////////////////////////////////
 //
 //  Just for the stats
@@ -116,71 +152,8 @@ struct Measure
 };
 ////////////////////////////////////////////////////////////////////////////
 
-NVRA parseNVRA( const std::string & value )
-{
-  std::string n;
-  std::string v;
-  std::string r;
-  std::string a;
 
-  parse_info<> info = parse( value.c_str(),
-
-       lexeme_d[(+~space_p)]                    [assign_a(n)]
-       >> lexeme_d[(+(~space_p & ~ch_p('-')))]  [assign_a(v)]
-       >> lexeme_d[(+(~space_p & ~ch_p('-')))]  [assign_a(r)]
-       >> lexeme_d[(+~space_p)]                 [assign_a(a)]
-       ,
-                             space_p );
-
-  NVRA data;
-  if ( info.full )
-    {
-      data = NVRA( n, Edition(v,r), Arch(a) );
-    }
-  else
-    {
-      ERR << "parseNVRA failed on " << value << std::endl;
-    }
-  INT << data << endl;
-  return data;
-}
-
-
-struct PConsume
-{
-  static bool isTag( const Tag & tag_r, const std::string & ident_r )
-  {
-    return tag_r.ident == ident_r && tag_r.ext.empty();
-  }
-  static bool isLangTag( const Tag & tag_r, const std::string & ident_r )
-  {
-    return tag_r.ident == ident_r && ! tag_r.ext.empty();
-  }
-
-  bool newPkg( const std::string & value )
-  {
-    NVRA data( parseNVRA( value ) );
-    return true;
-  }
-
-
-  PConsume & operator=( const STag & stag_r )
-  {
-    if ( isTag( stag_r.stag, "Pkg" ) )
-      {
-        newPkg( stag_r.value );
-        MIL << stag_r << endl;
-      }
-    return *this;
-  }
-  PConsume & operator=( const MTag & mtag_r )
-  {
-    return *this;
-  }
-
-  scoped_ptr<NVRA> _nvra;
-};
-
+using namespace std;
 ////////////////////////////////////////////////////////////////////////////
 //
 //  Main
@@ -193,76 +166,12 @@ int main( int argc, char* argv[] )
   if (argc >= 2 )
     infile = argv[1];
 
-  // Create a file iterator for this file
-  fiterator_t first(infile);
-  if (!first)
-    {
-      ERR << "Unable to open file!\n";
-      return -1;
-    }
-  // Create an EOF iterator
-  fiterator_t last = first.make_end();
+  PackagesParser p;
+  p.parse( infile );
 
-  // Create position iterators
-  iterator_t begin( first, last, infile );
-  iterator_t end;
-
-  // Result var
-  SingleTag stag;
-  MultiTag  mtag;
-  STag      stagData;
-  MTag      mtagData;
-
-  PConsume  consume;
-
-#if 1
-  rule_t file =   end_p
-                | ( stag [var(consume)=arg1]
-                  | mtag [var(consume)=arg1]
-                  | ( *blank_p
-                      >> !( ch_p('#')
-                            >> *(anychar_p - eol_p)
-                          )
-                      >> (eol_p|end_p)
-                    )
-                    | error_report_p( "illegal line" )
-                  )
-                  >> file
-                  ;
-#else
-  rule_t file =
-            end_p
-          | (+~space_p) [&echo]
-            >> ( lazy_p(var(skip))
-               | Merror_report_p( "lazy failed" )
-               )
-            >> file
-          ;
-#endif
-
-  // Parse
-  shared_ptr<Measure> duration( new Measure );
-  parse_info<iterator_t> info
-    = parse( begin, end,
-
-             file
-
-           );
-  duration.reset();
-
-  // Check for fail...
-  if ( info.full )
-    USR << "Parse succeeded!\n";
-  else if ( info.hit )
-    {
-      ERR << "Parse partial!\n";
-      ERR << " at pos " << info.length << endl;
-    }
-  else
-    {
-      ERR << "Parse failed!\n";
-      ERR << " at pos " << info.length << endl;
-    }
+  SEC << p.result.size() << endl;
+  MIL << *p.result.front() << endl;
+  MIL << p.result.front()->deps() << endl;
 
   INT << "===[END]============================================" << endl;
   return 0;

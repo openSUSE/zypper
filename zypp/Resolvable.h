@@ -22,11 +22,14 @@
 
 #include "zypp/Edition.h"
 #include "zypp/Arch.h"
+#include "zypp/CapSetFwd.h"
 #include "zypp/Dependencies.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  struct NVRAD;
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -52,6 +55,19 @@ namespace zypp
     const Edition & edition() const;
     /**  */
     const Arch & arch() const;
+
+    /** \name Dependencies. */
+    //@{
+    const CapSet & provides() const;
+    const CapSet & prerequires() const;
+    const CapSet & requires() const;
+    const CapSet & conflicts() const;
+    const CapSet & obsoletes() const;
+    const CapSet & recommends() const;
+    const CapSet & suggests() const;
+    const CapSet & freshens() const;
+    //@}
+
     /**  */
     const Dependencies & deps() const;
     /** */
@@ -60,9 +76,7 @@ namespace zypp
   protected:
     /** Ctor */
     Resolvable( const Kind & kind_r,
-                const std::string & name_r,
-                const Edition & edition_r,
-                const Arch & arch_r );
+                const NVRAD & nvrad_r );
     /** Dtor */
     virtual ~Resolvable();
     /** Helper for stream output */

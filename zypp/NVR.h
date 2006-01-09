@@ -6,14 +6,16 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/Selection.h
+/** \file	zypp/NVR.h
  *
 */
-#ifndef ZYPP_SELECTION_H
-#define ZYPP_SELECTION_H
+#ifndef ZYPP_NVR_H
+#define ZYPP_NVR_H
 
-#include "zypp/ResObject.h"
-#include "zypp/detail/SelectionImplIf.h"
+#include <iosfwd>
+#include <string>
+
+#include "zypp/Edition.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -21,38 +23,34 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : Selection
+  //	CLASS NAME : NVR
   //
-  /** Selection interface.
-  */
-  class Selection : public ResObject
+  /** Helper storing Name and Edition. */
+  struct NVR
   {
-  public:
-    typedef detail::SelectionImplIf  Impl;
-    typedef Selection                Self;
-    typedef ResTraits<Self>          TraitsType;
-    typedef TraitsType::PtrType      Ptr;
-    typedef TraitsType::constPtrType constPtr;
+    /** Default ctor */
+    NVR()
+    {}
 
-  public:
-    /** */
-    // data here:
-
-  protected:
     /** Ctor */
-    Selection( const NVRAD & nvrad_r );
-    /** Dtor */
-    virtual ~Selection();
+    explicit
+    NVR( const std::string & name_r,
+         const Edition & edition_r = Edition() )
+    : name( name_r )
+    , edition( edition_r )
+    {}
 
-  private:
-    /** Access implementation */
-    virtual Impl & pimpl() = 0;
-    /** Access implementation */
-    virtual const Impl & pimpl() const = 0;
+    /**  */
+    std::string name;
+    /**  */
+    Edition edition;
   };
   ///////////////////////////////////////////////////////////////////
+
+  /** \relates NVR Stream output */
+  std::ostream & operator<<( std::ostream & str, const NVR & obj );
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SELECTION_H
+#endif // ZYPP_NVR_H

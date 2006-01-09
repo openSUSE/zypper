@@ -26,10 +26,8 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   Resolvable::Resolvable( const Kind & kind_r,
-                          const std::string & name_r,
-                          const Edition & edition_r,
-                          const Arch & arch_r )
-  : _pimpl( new Impl( kind_r, name_r, edition_r, arch_r ) )
+                          const NVRAD & nvrad_r )
+  : _pimpl( new Impl( kind_r, nvrad_r ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -68,6 +66,31 @@ namespace zypp
 
   const Arch & Resolvable::arch() const
   { return _pimpl->arch(); }
+
+  const CapSet & Resolvable::provides() const
+  { return _pimpl->deps().provides(); }
+
+  const CapSet & Resolvable::prerequires() const
+  { return _pimpl->deps().prerequires(); }
+
+  const CapSet & Resolvable::requires() const
+  { return _pimpl->deps().requires(); }
+
+  const CapSet & Resolvable::conflicts() const
+  { return _pimpl->deps().conflicts(); }
+
+  const CapSet & Resolvable::obsoletes() const
+  { return _pimpl->deps().obsoletes(); }
+
+  const CapSet & Resolvable::recommends() const
+  { return _pimpl->deps().recommends(); }
+
+  const CapSet & Resolvable::suggests() const
+  { return _pimpl->deps().suggests(); }
+
+  const CapSet & Resolvable::freshens() const
+  { return _pimpl->deps().freshens(); }
+
 
   const Dependencies & Resolvable::deps() const
   { return _pimpl->deps(); }

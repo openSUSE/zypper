@@ -41,10 +41,7 @@ namespace zypp
     std::string type();
 
   protected:
-    /** Ctor */
-    Message( const std::string & name_r,
-             const Edition & edition_r,
-             const Arch & arch_r );
+    Message( const NVRAD & nvrad_r );
     /** Dtor */
     virtual ~Message();
 

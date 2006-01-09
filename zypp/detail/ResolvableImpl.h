@@ -13,6 +13,7 @@
 #define ZYPP_DETAIL_RESOLVABLEIMPL_H
 
 #include "zypp/Resolvable.h"
+#include "zypp/NVRAD.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -29,31 +30,27 @@ namespace zypp
   {
     /** Ctor */
     Impl( const Kind & kind_r,
-          const std::string & name_r,
-          const Edition & edition_r,
-          const Arch & arch_r )
+          const NVRAD & nvrad_r )
     : _kind( kind_r )
-    , _name( name_r )
-    , _edition( edition_r )
-    , _arch( arch_r )
+    , _name( nvrad_r.name )
+    , _edition( nvrad_r.edition )
+    , _arch( nvrad_r.arch )
+    , _deps( nvrad_r.deps )
     {}
 
   public:
     /**  */
     const Kind & kind() const
     { return _kind; }
-      
     /**  */
     const std::string & name() const
     { return _name; }
-      
     /**  */
     const Edition & edition() const
     { return _edition; }
-
+    /**  */
     const Arch & arch() const
     { return _arch; }
-      
     /**  */
     const Dependencies & deps() const
     { return _deps; }
@@ -63,8 +60,6 @@ namespace zypp
     */
     void setDeps( const Dependencies & val_r )
     { _deps = val_r; }
-
-      
 
   private:
     /**  */

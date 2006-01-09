@@ -23,10 +23,8 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   ResObject::ResObject( const Kind & kind_r,
-                        const std::string & name_r,
-                        const Edition & edition_r,
-                        const Arch & arch_r )
-  : Resolvable( kind_r, name_r, edition_r, arch_r )
+                        const NVRAD & nvrad_r )
+  : Resolvable( kind_r, nvrad_r )
   {}
 
   ///////////////////////////////////////////////////////////////////

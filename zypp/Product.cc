@@ -24,10 +24,8 @@ namespace zypp
   //	METHOD NAME : Product::Product
   //	METHOD TYPE : Ctor
   //
-  Product::Product( const std::string & name_r,
-                    const Edition & edition_r,
-                    const Arch & arch_r )
-  : ResObject( TraitsType::kind, name_r, edition_r, arch_r )
+  Product::Product( const NVRAD & nvrad_r )
+  : ResObject( TraitsType::kind, nvrad_r )
   {}
 
   ///////////////////////////////////////////////////////////////////

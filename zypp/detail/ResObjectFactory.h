@@ -13,6 +13,7 @@
 #define ZYPP_DETAIL_RESOBJECTFACTORY_H
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/NVRAD.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -20,6 +21,7 @@ namespace zypp
 
   class Edition;
   class Arch;
+  struct NVRAD;
 
   ///////////////////////////////////////////////////////////////////
   namespace detail
@@ -28,6 +30,7 @@ namespace zypp
     namespace _resobjectfactory_detail
     { /////////////////////////////////////////////////////////////////
 
+      /** Glues a Resolvable to it's implementation. */
       template<class _Res>
         class ResImplConnect : public _Res
         {
@@ -39,16 +42,16 @@ namespace zypp
           // typedef intrusive_ptr<Self>       Ptr;
           // typedef intrusive_ptr<const Self> constPtr;
         public:
-          /** \todo protect against NULL Impl. */
-          ResImplConnect( const std::string & name_r,
-                          const Edition & edition_r,
-                          const Arch & arch_r,
+          /** Ctor */
+          ResImplConnect( const NVRAD & nvrad_r,
                           Impl_Ptr impl_r )
-          : _Res( name_r, edition_r, arch_r )
+          : _Res( nvrad_r )
           , _impl( impl_r )
           { _impl->_backRef = this; }
+
           virtual ~ResImplConnect()
           { _impl->_backRef = 0; }
+
         private:
           Impl_Ptr _impl;
           virtual Impl &       pimpl()       { return *_impl; }
@@ -61,15 +64,37 @@ namespace zypp
 
     template<class _Impl>
       typename _Impl::ResType::Ptr
-      makeResolvableAndImpl( const std::string & name_r,
-                             const Edition & edition_r,
-                             const Arch & arch_r,
+      makeResolvableAndImpl( const NVRAD & nvrad_r,
                              shared_ptr<_Impl> & impl_r )
       {
         impl_r.reset( new _Impl );
         return new
                _resobjectfactory_detail::ResImplConnect<typename _Impl::ResType>
-               ( name_r, edition_r, arch_r, impl_r );
+               ( nvrad_r, impl_r );
+      }
+
+    template<class _Impl>
+      typename _Impl::ResType::Ptr
+      makeResolvableAndImpl( const std::string & name_r,
+                             const Edition & edition_r,
+                             const Arch & arch_r,
+                             shared_ptr<_Impl> & impl_r )
+      {
+        return makeResolvableAndImpl( NVRAD( name_r, edition_r, arch_r ), impl_r );
+      }
+
+    template<class _Impl>
+      typename _Impl::ResType::Ptr
+      makeResolvableFromImpl( const NVRAD & nvrad_r,
+                              shared_ptr<_Impl> impl_r )
+      {
+        if ( ! impl_r )
+          throw ( "makeResolvableFromImpl: NULL Impl " );
+        if ( impl_r->hasBackRef() )
+          throw ( "makeResolvableFromImpl: Impl already managed" );
+        return new
+               _resobjectfactory_detail::ResImplConnect<typename _Impl::ResType>
+               ( nvrad_r, impl_r );
       }
 
     template<class _Impl>
@@ -79,13 +104,7 @@ namespace zypp
                               const Arch & arch_r,
                               shared_ptr<_Impl> impl_r )
       {
-        if ( ! impl_r )
-          throw ( "makeResolvableFromImpl: NULL Impl " );
-        if ( impl_r->hasBackRef() )
-          throw ( "makeResolvableFromImpl: Impl already managed" );
-        return new
-               _resobjectfactory_detail::ResImplConnect<typename _Impl::ResType>
-               ( name_r, edition_r, arch_r, impl_r );
+        return makeResolvableFromImpl( NVRAD( name_r, edition_r, arch_r ), impl_r );
       }
 
     /////////////////////////////////////////////////////////////////

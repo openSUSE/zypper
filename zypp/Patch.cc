@@ -22,10 +22,8 @@ namespace zypp
   //	METHOD NAME : Patch::Patch
   //	METHOD TYPE : Ctor
   //
-  Patch::Patch( const std::string & name_r,
-                const Edition & edition_r,
-                const Arch & arch_r )
-  : ResObject( TraitsType::kind, name_r, edition_r, arch_r )
+  Patch::Patch( const NVRAD & nvrad_r )
+  : ResObject( TraitsType::kind, nvrad_r )
   {}
 
   ///////////////////////////////////////////////////////////////////

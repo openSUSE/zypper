@@ -6,14 +6,14 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/Selection.h
+/** \file	zypp/NVRAD.h
  *
 */
-#ifndef ZYPP_SELECTION_H
-#define ZYPP_SELECTION_H
+#ifndef ZYPP_NVRAD_H
+#define ZYPP_NVRAD_H
 
-#include "zypp/ResObject.h"
-#include "zypp/detail/SelectionImplIf.h"
+#include "zypp/NVRA.h"
+#include "zypp/Dependencies.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -21,38 +21,48 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : Selection
+  //	CLASS NAME : NVRAD
   //
-  /** Selection interface.
-  */
-  class Selection : public ResObject
+  /**  Helper storing Name, Edition, Arch and Dependencies. */
+  struct NVRAD : public NVRA
   {
-  public:
-    typedef detail::SelectionImplIf  Impl;
-    typedef Selection                Self;
-    typedef ResTraits<Self>          TraitsType;
-    typedef TraitsType::PtrType      Ptr;
-    typedef TraitsType::constPtrType constPtr;
+    /** Default ctor */
+    NVRAD()
+    {}
 
-  public:
-    /** */
-    // data here:
-
-  protected:
     /** Ctor */
-    Selection( const NVRAD & nvrad_r );
-    /** Dtor */
-    virtual ~Selection();
+    explicit
+    NVRAD( const std::string & name_r,
+           const Edition & edition_r = Edition(),
+           const Arch & arch_r = Arch(),
+           const Dependencies & deps_r = Dependencies() )
+    : NVRA( name_r, edition_r, arch_r )
+    , deps( deps_r )
+    {}
 
-  private:
-    /** Access implementation */
-    virtual Impl & pimpl() = 0;
-    /** Access implementation */
-    virtual const Impl & pimpl() const = 0;
+    /** Ctor */
+    explicit
+    NVRAD( const NVRA & nvra_r,
+           const Dependencies & deps_r = Dependencies() )
+    : NVRA( nvra_r )
+    , deps( deps_r )
+    {}
+
+    /** Ctor */
+    explicit
+    NVRAD( const NVR & nvr_r,
+           const Arch & arch_r = Arch(),
+           const Dependencies & deps_r = Dependencies() )
+    : NVRA( nvr_r, arch_r )
+    , deps( deps_r )
+    {}
+
+    /**  */
+    Dependencies deps;
   };
   ///////////////////////////////////////////////////////////////////
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SELECTION_H
+#endif // ZYPP_NVRAD_H

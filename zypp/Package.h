@@ -43,10 +43,7 @@ namespace zypp
     // data here:
 
   protected:
-    /** Ctor */
-    Package( const std::string & name_r,
-             const Edition & edition_r,
-             const Arch & arch_r );
+    Package( const NVRAD & nvrad_r );
     /** Dtor */
     virtual ~Package();
 

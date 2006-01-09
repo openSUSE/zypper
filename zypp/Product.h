@@ -40,9 +40,7 @@ namespace zypp
 
   protected:
     /** Ctor */
-    Product( const std::string & name_r,
-             const Edition & edition_r,
-             const Arch & arch_r );
+    Product( const NVRAD & nvrad_r );
     /** Dtor */
     virtual ~Product();
 

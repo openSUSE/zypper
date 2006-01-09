@@ -13,10 +13,8 @@
 #define ZYPP_NVRA_H
 
 #include <iosfwd>
-#include <string>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/Edition.h"
+#include "zypp/NVR.h"
 #include "zypp/Arch.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -27,8 +25,8 @@ namespace zypp
   //
   //	CLASS NAME : NVRA
   //
-  /** */
-  struct NVRA
+  /**  Helper storing Name, Edition and Arch. */
+  struct NVRA : public NVR
   {
     /** Default ctor */
     NVRA()
@@ -39,15 +37,18 @@ namespace zypp
     NVRA( const std::string & name_r,
           const Edition & edition_r = Edition(),
           const Arch & arch_r = Arch() )
-    : name( name_r )
-    , edition( edition_r )
+    : NVR( name_r, edition_r )
     , arch( arch_r )
     {}
 
-    /**  */
-    std::string name;
-    /**  */
-    Edition edition;
+    /** Ctor */
+    explicit
+    NVRA( const NVR & nvr_r,
+          const Arch & arch_r = Arch() )
+    : NVR( nvr_r )
+    , arch( arch_r )
+    {}
+
     /**  */
     Arch arch;
   };

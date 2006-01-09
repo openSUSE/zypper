@@ -43,9 +43,7 @@ namespace zypp
   protected:
     /** Ctor */
     ResObject( const Kind & kind_r,
-               const std::string & name_r,
-               const Edition & edition_r,
-               const Arch & arch_r );
+               const NVRAD & nvrad_r );
     /** Dtor */
     virtual ~ResObject();
 

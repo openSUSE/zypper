@@ -44,9 +44,7 @@ namespace zypp
 
   protected:
     /** Ctor */
-    Script( const std::string & name_r,
-            const Edition & edition_r,
-            const Arch & arch_r );
+    Script( const NVRAD & nvrad_r );
     /** Dtor */
     virtual ~Script();
 

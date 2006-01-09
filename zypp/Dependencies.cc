@@ -65,15 +65,24 @@ namespace zypp
   /** \relates DependenciesImpl Stream output */
   inline std::ostream & operator<<( std::ostream & str, const Dependencies::Impl & obj )
   {
-    str << "PROVIDES:"    << endl << obj._provides;
-    str << "PREREQUIRES:" << endl << obj._prerequires;
-    str << "REQUIRES:"    << endl << obj._requires;
-    str << "CONFLICTS:"   << endl << obj._conflicts;
-    str << "OBSOLETES:"   << endl << obj._obsoletes;
-    str << "RECOMMENDS:"  << endl << obj._recommends;
-    str << "SUGGESTS:"    << endl << obj._suggests;
-    str << "FRESHENS:"    << endl << obj._freshens;
-    return str;
+    str << "Dependencies: [" << endl;
+    if ( ! obj._provides.empty() )
+      str << "PROVIDES:" << endl << obj._provides;
+    if ( ! obj._prerequires.empty() )
+      str << "PREREQUIRES:" << endl << obj._prerequires;
+    if ( ! obj._requires.empty() )
+      str << "REQUIRES:" << endl << obj._requires;
+    if ( ! obj._conflicts.empty() )
+      str << "CONFLICTS:" << endl << obj._conflicts;
+    if ( ! obj._obsoletes.empty() )
+      str << "OBSOLETES:" << endl << obj._obsoletes;
+    if ( ! obj._recommends.empty() )
+      str << "RECOMMENDS:" << endl << obj._recommends;
+    if ( ! obj._suggests.empty() )
+      str << "SUGGESTS:" << endl << obj._suggests;
+    if ( ! obj._freshens.empty() )
+      str << "FRESHENS:" << endl << obj._freshens;
+    return str << "]";
   }
   ///////////////////////////////////////////////////////////////////
 

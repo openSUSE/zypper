@@ -18,7 +18,9 @@ include_HEADERS = NeedAType.h \
 	Edition.h	\
 	LanguageCode.h	\
 	Locale.h	\
+	NVR.h		\
 	NVRA.h		\
+	NVRAD.h		\
 	Rel.h		\
 	ResObject.h	\
 	Resolvable.h	\
@@ -59,7 +61,9 @@ lib@PACKAGE@_la_SOURCES = \
 	Edition.cc	\
 	LanguageCode.cc	\
 	Locale.cc	\
+	NVR.cc		\
 	NVRA.cc		\
+	NVRAD.cc	\
 	Rel.cc		\
 	ResObject.cc	\
 	Resolvable.cc	\

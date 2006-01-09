@@ -61,9 +61,7 @@ namespace zypp
 
   protected:
     /** Ctor */
-    Patch( const std::string & name_r,
-           const Edition & edition_r,
-           const Arch & arch_r );
+    Patch( const NVRAD & nvrad_r );
     /** Dtor */
     virtual ~Patch();
 
