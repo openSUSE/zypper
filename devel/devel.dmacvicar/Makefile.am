@@ -14,8 +14,8 @@ AM_LDFLAGS = -pg
 AM_CXXFLAGS =
 # gperf:	-pg
 
-LDADD =		$(top_srcdir)/zypp/lib@PACKAGE@.la -lboost_regex -lsqlite3
-#LDADD =	-lboost_regex -lsqlite3
+LDADD =		$(top_srcdir)/zypp/lib@PACKAGE@.la -lboost_regex -lsqlite3 -ldbxml
+#LDADD =	-lboost_regex -lsqlite3 -dbxml
 
 ## ##################################################
 

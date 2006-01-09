@@ -194,8 +194,8 @@ INCLUDES =
 AM_LDFLAGS = -pg
 AM_CXXFLAGS = 
 # gperf:	-pg
-LDADD = $(top_srcdir)/zypp/libzypp.la -lboost_regex -lsqlite3
-#LDADD =	-lboost_regex -lsqlite3
+LDADD = $(top_srcdir)/zypp/libzypp.la -lboost_regex -lsqlite3 -ldbxml
+#LDADD =	-lboost_regex -lsqlite3 -dbxml
 test2_SOURCES = test2.cc PersistentStorage.cc Backend.cc BDBBackend.cc SQLiteWrapper.cc SQLiteBackend.cc
 test2_debug_SOURCES = $(test2_SOURCES)
 test2_debug_LDFLAGS = -static
