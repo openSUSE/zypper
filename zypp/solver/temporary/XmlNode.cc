@@ -162,7 +162,7 @@ XmlNode::getIntValue (const std::string & name, int *value) const
     char *ret;
     long z;
 
-    strval = this->getValue (name, NULL);
+    strval = this->getValue (name);
     if (strval.empty()) {
 	return false;
     }
@@ -206,7 +206,7 @@ XmlNode::getUnsignedIntValue (const std::string & name, unsigned int *value) con
     char *ret;
     int z;
 
-    strval = this->getValue (name, NULL);
+    strval = this->getValue (name);
     if (strval.empty()) {
 	return false;
     }
