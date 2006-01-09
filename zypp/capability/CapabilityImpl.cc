@@ -37,7 +37,7 @@ namespace zypp
     //	METHOD NAME : CapabilityImpl::capImplOrderLess
     //	METHOD TYPE : bool
     //
-    bool CapabilityImpl::capImplOrderLess( const CapabilityImpl::constPtr & rhs ) const
+    bool CapabilityImpl::capImplOrderLess( const constPtr & rhs ) const
     {
       return asString() < rhs->asString();
     }

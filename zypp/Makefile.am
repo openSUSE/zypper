@@ -10,6 +10,7 @@ include_HEADERS = NeedAType.h \
 	ByteCount.h	\
 	Capability.h	\
 	CapFactory.h	\
+	CapMatch.h	\
 	CapSet.h	\
 	CountryCode.h	\
 	Date.h		\
@@ -50,6 +51,7 @@ lib@PACKAGE@_la_SOURCES = \
 	ByteCount.cc	\
 	Capability.cc	\
 	CapFactory.cc	\
+	CapMatch.cc	\
 	CapSet.cc	\
 	CountryCode.cc	\
 	Date.cc		\

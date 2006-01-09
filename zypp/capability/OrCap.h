@@ -25,13 +25,12 @@ namespace zypp
     //
     //	CLASS NAME : OrCap
     //
-    /** */
+    /** \toto Implement it. */
     class OrCap : public CapabilityImpl
     {
     public:
-      /**  */
-      bool matches( constResolvablePtr resolvable_r,
-                    solver::Context_constPtr solverContext_r )
+      /** Return whether the Capabilities match. */
+      virtual CapMatch matches( const CapabilityImpl & rhs ) const
       { return false; }
     };
     ///////////////////////////////////////////////////////////////////

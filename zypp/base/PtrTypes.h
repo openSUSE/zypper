@@ -59,13 +59,42 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
+    //	RW_pointer traits
+    //
+    ///////////////////////////////////////////////////////////////////
+    namespace rw_pointer {
+
+      template<class _D>
+        struct Shared
+        {
+          typedef shared_ptr<_D>       _Ptr;
+          typedef shared_ptr<const _D> _constPtr;
+          /** Check whether pointer is shared. */
+          bool isShared( const _constPtr & ptr_r )
+          { return ptr_r.use_count() > 1; }
+        };
+
+      template<class _D>
+        struct Intrusive
+        {
+          typedef intrusive_ptr<_D>       _Ptr;
+          typedef intrusive_ptr<const _D> _constPtr;
+          /** Check whether pointer is shared. */
+          bool isShared( const _constPtr & ptr_r )
+          { return ptr_r && (ptr_r->refCount() > 1); }
+        };
+    }
+    ///////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    //
     //	CLASS NAME : RW_pointer
     //
     /** Wrapper for \c const correct access via \ref ZYPP_SMART_PTR.
      *
-     * zypp::RW_pointer<tt>\<_D,_Ptr></tt> stores a \ref ZYPP_SMART_PTR
-     * of type \c _Ptr, which must be convertible into a <tt>_D *</tt>. Pointer
-     * style access (via \c -> and \c *) offers a <tt>const _D *</tt> in const
+     * zypp::RW_pointer<tt>\<_D,_Traits></tt> stores a \ref ZYPP_SMART_PTR
+     * of type \c _Traits::_Ptr, which must be convertible into a <tt>_D *</tt>.
+     * Pointer style access (via \c -> and \c *) offers a <tt>const _D *</tt> in const
      * a context, otherwise a <tt>_D *</tt>. Thus \em RW_ means \em read/write,
      * as you get a different type, dependent on whether you're allowed to
      * read or write.
@@ -74,7 +103,10 @@ namespace zypp
      * RW_pointer prevents const interface methods from accidentally calling
      * nonconst implementation methods.
      *
-     * The second template argument defaults to <tt>_Ptr = shared_ptr<_D></tt>.
+     * The second template argument defaults to
+     * <tt>_Traits = rw_pointer::Shared<_D></tt> thus wraping a
+     * <tt>shared_ptr<_D></tt>. To wrap an <tt>intrusive_ptr<_D></tt>
+     * use <tt>rw_pointer::Intrusive<_D></tt>.
      *
      * \see zypp::RWCOW_pointer for 'copy on write' functionality.
      *
@@ -95,10 +127,12 @@ namespace zypp
      * };
      * \endcode
     */
-    template<class _D, class _Ptr = shared_ptr<_D> >
+    template<class _D, class _Traits = rw_pointer::Shared<_D> >
       struct RW_pointer
       {
-        typedef _D element_type;
+        typedef typename _Traits::_Ptr               _Ptr;
+        typedef typename _Traits::_constPtr          _constPtr;
+        typedef typename _Ptr::unspecified_bool_type unspecified_bool_type;
 
         explicit
         RW_pointer( typename _Ptr::element_type * dptr = 0 )
@@ -122,6 +156,9 @@ namespace zypp
         void swap( _Ptr & rhs )
         { _dptr.swap( rhs ); }
 
+        operator unspecified_bool_type() const
+        { return _dptr; }
+
         const _D & operator*() const
         { return *_dptr; };
 
@@ -139,6 +176,13 @@ namespace zypp
 
         _D * get()
         { return _dptr.get(); }
+
+      public:
+        _constPtr getPtr() const
+        { return _dptr; }
+
+        _Ptr getPtr()
+        { return _dptr; }
 
       private:
         _Ptr _dptr;
@@ -172,10 +216,11 @@ namespace zypp
      *
      * See \ref RW_pointer.
     */
-    template<class _D, class _Ptr = shared_ptr<_D> >
+    template<class _D, class _Traits = rw_pointer::Shared<_D> >
       struct RWCOW_pointer
       {
-        typedef _D element_type;
+        typedef typename _Traits::_Ptr               _Ptr;
+        typedef typename _Traits::_constPtr          _constPtr;
         typedef typename _Ptr::unspecified_bool_type unspecified_bool_type;
 
         explicit
@@ -221,11 +266,18 @@ namespace zypp
         _D * get()
         { assertUnshared(); return _dptr.get(); }
 
+      public:
+        _constPtr getPtr() const
+        { return _dptr; }
+
+        _Ptr getPtr()
+        { assertUnshared(); return _dptr; }
+
       private:
 
         void assertUnshared()
         {
-          if ( rwcowIsShared( _dptr ) )
+          if ( _Traits().isShared( _dptr ) )
             {
               _dptr.reset( rwcowClone( _dptr.get() ) );
             }
@@ -235,19 +287,6 @@ namespace zypp
         _Ptr _dptr;
       };
     ///////////////////////////////////////////////////////////////////
-
-    /** \relates RWCOW_pointer Check whether pointer is shared. */
-    template<class _D>
-      inline bool rwcowIsShared( const shared_ptr<_D> & ptr_r )
-      { return ptr_r.use_count() > 1; }
-
-    /** \relates RWCOW_pointer Check whether pointer is shared.
-     * \todo Quite zypp specific assumption that intrusive_ptr
-     * is derived from zypp::base::ReferenceCounted.
-    */
-    template<class _D>
-      inline bool rwcowIsShared( const intrusive_ptr<_D> & ptr_r )
-      { return ptr_r && (ptr_r->refCount() > 1); }
 
     /** \relates RWCOW_pointer Clone the underlying object.
      * Calls \a rhs <tt>-\>clone()</tt>. Being defined as a

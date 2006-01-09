@@ -20,19 +20,31 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
-    const CapabilityImpl::Kind NamedCap::_kind( "NamedCap" );
-
     const CapabilityImpl::Kind & NamedCap::kind() const
-    { return _kind; }
+    { return CapTraits<Self>::kind; }
 
     std::string NamedCap::asString() const
     { return _name; }
 
-    bool NamedCap::matches( Resolvable::constPtr resolvable_r,
-                            solver::Context_constPtr solverContext_r ) const
+    CapMatch NamedCap::matches( const constPtr & rhs ) const
     {
+      if ( sameRefers( rhs ) )
+        {
+          if ( sameKind( rhs ) )
+            {
+              return matchValue( rhs );
+            }
+          else if ( isKind<VersionedCap>( rhs ) )
+            {
+              // matchEditionRange in case VersionedCap has Rel::NONE
+              return matchValue( rhs ) && matchEditionRange( rhs );
+            }
+        }
       return false;
     }
+
+    std::string NamedCap::value() const
+    { return _name; }
 
     /////////////////////////////////////////////////////////////////
   } // namespace capability

@@ -6,13 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/capability/NullCap.h
+/** \file	zypp/capability/CapTraits.cc
  *
 */
-#ifndef ZYPP_CAPABILITY_NULLCAP_H
-#define ZYPP_CAPABILITY_NULLCAP_H
 
-#include "zypp/capability/CapabilityImpl.h"
+#include "zypp/capability/CapTraits.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -21,46 +19,20 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : NullCap
-    //
-    /** A dummy Capability.
-     *
-     * It's a singleton, so you can't construct one. Call \ref instance to
-     * get a CapabilityImpl_Ptr to the NullCap.
-    */
-    class NullCap : public CapabilityImpl
-    {
-    public:
-      /** Get a Ptr to the NULLCap. */
-      static CapabilityImpl_Ptr instance();
-
-    private:
-      /** Private Ctor.
-       * Call \ref instance to get a CapabilityImpl_Ptr to the NullCap.
-      */
-      NullCap();
-
-    public:
-      typedef NullCap Self;
-
-      /**  */
-      virtual const Kind & kind() const;
-
-      /** Return whether the Capabilities match.
-       * A NullCap matches NullCap only.
-      */
-      virtual CapMatch matches( const constPtr & rhs ) const;
-
-      /**  */
-      virtual std::string asString() const;
-
-    private:
-      /** Singleton */
-      static CapabilityImpl_Ptr _instance;
-    };
-    ///////////////////////////////////////////////////////////////////
+    template<>
+      const CapTraitsBase::KindType CapTraits<NullCap>       ::kind( "NullCap" );
+    template<>
+      const CapTraitsBase::KindType CapTraits<FileCap>       ::kind( "FileCap" );
+    template<>
+      const CapTraitsBase::KindType CapTraits<NamedCap>      ::kind( "NamedCap" );
+    template<>
+      const CapTraitsBase::KindType CapTraits<VersionedCap>  ::kind( "VersionedCap" );
+    template<>
+      const CapTraitsBase::KindType CapTraits<SplitCap>      ::kind( "SplitCap" );
+    template<>
+      const CapTraitsBase::KindType CapTraits<OrCap>         ::kind( "OrCap" );
+    template<>
+      const CapTraitsBase::KindType CapTraits<ConditionalCap>::kind( "ConditionalCap" );
 
     /////////////////////////////////////////////////////////////////
   } // namespace capability
@@ -68,4 +40,3 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_CAPABILITY_NULLCAP_H

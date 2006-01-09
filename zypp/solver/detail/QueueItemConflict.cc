@@ -211,7 +211,7 @@ conflict_process_cb (ResItem_constPtr resItem, const Capability & cap, void *dat
             Capability maybe_upgrade_dep =  factory.parse ( resItem->kind(),
                                                             resItem->name(),
                                                             Rel::ANY,
-                                                            Edition::noepoch);
+                                                            Edition::noedition );
 
             info->world->foreachProvidingResItem (maybe_upgrade_dep, upgrade_candidates_cb, (void *)&upgrade_info);
 

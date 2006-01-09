@@ -18,6 +18,7 @@
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/Resolvable.h"
+#include "zypp/CapMatch.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -31,6 +32,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   class CapFactory;
+  struct CapMatchContext {};
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -100,16 +102,28 @@ namespace zypp
     /** Kind of Resolvable the Capability refers to. */
     const Resolvable::Kind & refers() const;
 
+    /** Whether to consider this Capability.
+     * Evaluates the Capabilities pre-condition (if any), and
+     * returns whether the condition applies. If not, the Capability
+     * is to be ignored.
+    */
+    bool relevant() const;
+
+    /** Return whether the Capabilities match.
+     * If either Capability is not \ref relevant, CapMatch::irrelevant
+     * is returned.
+    */
+    CapMatch matches( const Capability & rhs ) const;
+
     /** More or less human readable representation as string. */
     std::string asString() const;
 
-    /** More or less humal readable name of the dependency */
+    /** More or less human readable name of the dependency */
     std::string name() const;
-
 
   private:
     /** Pointer to implementation */
-    RW_pointer<Impl,Impl_Ptr> _pimpl;
+    RW_pointer<Impl,rw_pointer::Intrusive<Impl> > _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 

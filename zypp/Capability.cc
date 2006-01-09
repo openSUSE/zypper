@@ -50,13 +50,21 @@ namespace zypp
   const Resolvable::Kind & Capability::refers() const
   { return _pimpl->refers(); }
 
+  bool Capability::relevant() const
+  { return _pimpl->relevant(); }
+
+  CapMatch Capability::matches( const Capability & rhs ) const
+  { return _pimpl->matches( rhs._pimpl.getPtr() ); }
+
   std::string Capability::asString() const
   { return _pimpl->asString(); }
 
-
+  /** \bug How is this supposed to work? What's the name of
+   * an OR capability or a Conditiona or a Split?
+  */
   std::string Capability::name() const
   { return "CapabilityName"; }//return _pimpl->name(); }
-    
+
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<

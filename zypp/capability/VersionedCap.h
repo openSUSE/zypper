@@ -29,6 +29,8 @@ namespace zypp
     class VersionedCap : public CapabilityImpl
     {
     public:
+      typedef VersionedCap Self;
+
       /** Ctor */
       VersionedCap( const Resolvable::Kind & refers_r,
                     const std::string & name_r,
@@ -43,16 +45,20 @@ namespace zypp
       /**  */
       virtual const Kind & kind() const;
 
+      /** Return whether the Capabilities match. */
+      virtual CapMatch matches( const constPtr & rhs ) const;
+
       /**  */
       virtual std::string asString() const;
 
-      /**  */
-      bool matches( Resolvable::constPtr resolvable_r,
-                    solver::Context_constPtr solverContext_r ) const;
+    protected:
+      /** Implementation dependent value. */
+      virtual std::string value() const;
+
+      /** Implementation dependent value. */
+      virtual Edition::Range editionRange() const;
 
     private:
-      /**  */
-      static const Kind _kind;
       /**  */
       std::string _name;
       /**  */

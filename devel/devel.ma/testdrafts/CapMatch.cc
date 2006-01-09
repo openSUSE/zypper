@@ -4,7 +4,7 @@
 #include <zypp/base/Logger.h>
 #include <zypp/base/Exception.h>
 
-#include <zypp/Edition.h>
+#include <zypp/CapMatch.h>
 
 using namespace std;
 using namespace zypp;
@@ -60,47 +60,48 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  Edition::Range any;
-  DBG << any << endl;
+  CapMatch u( CapMatch::irrelevant );
+  CapMatch y(true);
+  CapMatch n(false);
 
-  Edition l( "1.0" );
-  Edition r( "2.0" );
+#define OUT(X) DBG << #X << " " << (X) << endl
 
-#define R(O,E) Edition::Range( Rel::O, E )
+  OUT( u );
+  OUT( u == y );
+  OUT( u != y );
 
-#define NONE(E) R(NONE,E)
-#define ANY(E) R(ANY,E)
-#define LT(E) R(LT,E)
-#define LE(E) R(LE,E)
-#define EQ(E) R(EQ,E)
-#define GE(E) R(GE,E)
-#define GT(E) R(GT,E)
-#define NE(E) R(NE,E)
+  OUT( u == true );
+  OUT( u == false );
+  OUT( true == u );
+  OUT( false == u );
 
-#define OV(L,R) DBG << #L << " <> " << #R << " ==> " << Edition::Range::overlaps( L, R ) << endl
+  OUT( u && y );
+  OUT( u && n );
+  OUT( u && u );
 
-  ERR << "Omitting Rel::NE" << endl;
+  OUT( y && y );
+  OUT( y && n );
+  OUT( y && u );
 
-#define OVALL( L )  \
-  DBG << "----------------------------" << endl; \
-  OV( L, NONE(r) ); \
-  OV( L, ANY(r) );  \
-  OV( L, LT(r) );   \
-  OV( L, LE(r) );   \
-  OV( L, EQ(r) );   \
-  OV( L, GE(r) );   \
-  OV( L, GT(r) );   \
-  DBG << "----------------------------" << endl;
+  OUT( n && y );
+  OUT( n && n );
+  OUT( n && u );
 
-  OVALL( NONE(l) );
-  OVALL( ANY(l) );
-  OVALL( LT(l) );
-  OVALL( LE(l) );
-  OVALL( EQ(l) );
-  OVALL( GE(l) );
-  OVALL( GT(l) );
+  OUT( u || y );
+  OUT( u || n );
+  OUT( u || u );
 
-  // same for l > r and l == r
+  OUT( y || y );
+  OUT( y || n );
+  OUT( y || u );
+
+  OUT( n || y );
+  OUT( n || n );
+  OUT( n || u );
+
+  OUT( !u );
+  OUT( !y );
+  OUT( !n );
 
   INT << "===[END]============================================" << endl;
   return 0;

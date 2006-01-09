@@ -27,11 +27,13 @@ namespace zypp
     //
     /** A \c filename matching if some Resolvable provides it.
      *
-     * \todo Actually we have to look into the Resolable filelist as well.
+     * \todo Check whether we have to look into the Resolable filelist as well.
     */
     class FileCap : public CapabilityImpl
     {
     public:
+      typedef FileCap Self;
+
       /** Ctor */
       FileCap( const Resolvable::Kind & refers_r, const std::string & fname_r )
       : CapabilityImpl( refers_r )
@@ -42,16 +44,17 @@ namespace zypp
       /**  */
       virtual const Kind & kind() const;
 
+      /** Return whether the Capabilities match. */
+      virtual CapMatch matches( const constPtr & rhs ) const;
+
       /**  */
       virtual std::string asString() const;
 
-      /**  */
-      bool matches( Resolvable::constPtr resolvable_r,
-                    solver::Context_constPtr solverContext_r ) const;
+    protected:
+      /** Implementation dependent value. */
+      virtual std::string value() const;
 
     private:
-      /**  */
-      static const Kind _kind;
       /**  */
       std::string _fname;
     };

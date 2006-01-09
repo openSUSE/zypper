@@ -20,8 +20,6 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
-    const CapabilityImpl::Kind NullCap::_kind( "NullCap" );
-
     CapabilityImpl_Ptr NullCap::_instance;
 
     ///////////////////////////////////////////////////////////////////
@@ -38,16 +36,13 @@ namespace zypp
     }
 
     const CapabilityImpl::Kind & NullCap::kind() const
-    { return _kind; }
+    { return CapTraits<Self>::kind; }
+
+    CapMatch NullCap::matches( const constPtr & rhs ) const
+    { return sameKind( rhs ); }
 
     std::string NullCap::asString() const
     { return std::string(); }
-
-    bool NullCap::matches( Resolvable::constPtr resolvable_r,
-                           solver::Context_constPtr solverContext_r ) const
-    {
-      return false;
-    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace capability

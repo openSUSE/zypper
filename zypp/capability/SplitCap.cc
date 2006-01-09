@@ -20,18 +20,15 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
-    const CapabilityImpl::Kind SplitCap::_kind( "SplitCap" );
-
     const CapabilityImpl::Kind & SplitCap::kind() const
-    { return _kind; }
+    { return CapTraits<Self>::kind; }
 
     std::string SplitCap::asString() const
     { return _name + ":" + _path; }
 
-    bool SplitCap::matches( Resolvable::constPtr resolvable_r,
-                            solver::Context_constPtr solverContext_r ) const
+    CapMatch SplitCap::matches( const constPtr & rhs ) const
     {
-      return false;
+      return CapMatch::irrelevant;
     }
 
     /////////////////////////////////////////////////////////////////

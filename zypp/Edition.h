@@ -131,6 +131,9 @@ namespace zypp
     */
     static int compare( const Edition & lhs, const Edition & rhs );
 
+    /* A range defined by \ref Rel and \ref Edition. */
+    struct Range;
+
     /* Binary operator functor comparing Edition. */
     struct Less;
 
@@ -172,6 +175,68 @@ namespace zypp
   inline bool operator>=( const Edition & lhs, const Edition & rhs )
   { return Edition::compare( Rel::GE, lhs, rhs ); }
   //@}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : Edition::Range
+  //
+  /** A range defined by \ref Rel and \ref Edition.
+   *
+   * Two ranges \ref overlap, if they have at least one Edition in common.
+   * Rnages defined by \ref Rel::NONE and \ref Rel::ANY are special, and
+   * their Edition is not taken into account.
+   *
+   * \ref Rel::NONE never overlaps.
+   *
+   * \ref Rel::ANY overlaps any range except \ref Rel::NONE.
+   *
+   * The other ranges overlap as you may expect it.
+   *
+   * \todo overlaps does not treat Rel::NE correct.
+  */
+  struct Edition::Range
+  {
+    Rel op;
+    Edition edition;
+
+    /** Default ctor: \ref Rel::ANY. */
+    Range()
+    : op( Rel::ANY )
+    {}
+
+    /** Ctor taking \ref Edition (\ref Rel::EQ). */
+    Range( const Edition & edition_r )
+    : op( Rel::EQ )
+    , edition( edition_r )
+    {}
+
+    /** Ctor taking \ref Rel and \ref Edition. */
+    Range( Rel op_r, const Edition & edition_r )
+    : op( op_r )
+    , edition( edition_r )
+    {}
+
+    /** Return whether two Ranges overlap. */
+    bool overlaps( const Range & rhs ) const
+    { return overlaps( *this, rhs ); }
+
+    /** Return whether two Ranges overlap. */
+    static bool overlaps( const Range & lhs, const Range & rhs );
+
+    friend bool operator==( const Range & lhs, const Range & rhs )
+    {
+      return( lhs.op == rhs.op
+              && ( lhs.op == Rel::ANY || lhs.op == Rel::NONE
+                   || lhs.edition == rhs.edition ) );
+    }
+
+    friend bool operator!=( const Range & lhs, const Range & rhs )
+    { return ! ( lhs == rhs ); }
+  };
+  ///////////////////////////////////////////////////////////////////
+
+  /** \relates Edition::Range Stream output. */
+  std::ostream & operator<<( std::ostream & str, const Edition::Range & obj );
 
   ///////////////////////////////////////////////////////////////////
   //

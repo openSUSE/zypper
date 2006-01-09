@@ -6,13 +6,14 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/capability/NullCap.h
+/** \file	zypp/capability/CapTraits.h
  *
 */
-#ifndef ZYPP_CAPABILITY_NULLCAP_H
-#define ZYPP_CAPABILITY_NULLCAP_H
+#ifndef ZYPP_CAPABILITY_CAPTRAITS_H
+#define ZYPP_CAPABILITY_CAPTRAITS_H
 
-#include "zypp/capability/CapabilityImpl.h"
+#include "zypp/base/PtrTypes.h"
+#include "zypp/base/KindOf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -21,46 +22,28 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : NullCap
-    //
-    /** A dummy Capability.
-     *
-     * It's a singleton, so you can't construct one. Call \ref instance to
-     * get a CapabilityImpl_Ptr to the NullCap.
-    */
-    class NullCap : public CapabilityImpl
+    class CapabilityImpl;
+
+    /** Base of CapTraits. Defines the Resolvable::Kind type. */
+    struct CapTraitsBase
     {
-    public:
-      /** Get a Ptr to the NULLCap. */
-      static CapabilityImpl_Ptr instance();
-
-    private:
-      /** Private Ctor.
-       * Call \ref instance to get a CapabilityImpl_Ptr to the NullCap.
-      */
-      NullCap();
-
-    public:
-      typedef NullCap Self;
-
-      /**  */
-      virtual const Kind & kind() const;
-
-      /** Return whether the Capabilities match.
-       * A NullCap matches NullCap only.
-      */
-      virtual CapMatch matches( const constPtr & rhs ) const;
-
-      /**  */
-      virtual std::string asString() const;
-
-    private:
-      /** Singleton */
-      static CapabilityImpl_Ptr _instance;
+      typedef KindOf<CapabilityImpl>  KindType;
     };
-    ///////////////////////////////////////////////////////////////////
+
+    class NullCap;
+    class FileCap;
+    class NamedCap;
+    class VersionedCap;
+    class SplitCap;
+    class OrCap;
+    class ConditionalCap;
+
+    /** CapTraits. Defines common types and the Kind value. */
+    template<typename _Cap>
+      struct CapTraits : public CapTraitsBase
+      {
+        static const KindType kind;
+      };
 
     /////////////////////////////////////////////////////////////////
   } // namespace capability
@@ -68,4 +51,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_CAPABILITY_NULLCAP_H
+#endif // ZYPP_CAPABILITY_CAPTRAITS_H

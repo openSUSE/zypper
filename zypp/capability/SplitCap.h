@@ -41,6 +41,8 @@ namespace zypp
     class SplitCap : public CapabilityImpl
     {
     public:
+      typedef SplitCap Self;
+
       /** Ctor */
       SplitCap( const Resolvable::Kind & refers_r,
                 const std::string & name_r,
@@ -53,16 +55,13 @@ namespace zypp
       /**  */
       virtual const Kind & kind() const;
 
+      /** Return whether the Capabilities match. */
+      virtual CapMatch matches( const constPtr & rhs ) const;
+
       /**  */
       virtual std::string asString() const;
 
-      /**  */
-      virtual bool matches( Resolvable::constPtr resolvable_r,
-                            solver::Context_constPtr solverContext_r ) const;
-
     private:
-      /**  */
-      static const Kind _kind;
       /**  */
       std::string _name;
       /**  */

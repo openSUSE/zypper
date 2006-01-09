@@ -6,35 +6,36 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/capability/FileCap.cc
+/** \file	zypp/CapMatch.cc
  *
 */
-#include "zypp/capability/FileCap.h"
+#include <iostream>
+//#include "zypp/base/Logger.h"
 
-using namespace std;
+#include "zypp/CapMatch.h"
+
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace capability
-  { /////////////////////////////////////////////////////////////////
 
-    const CapabilityImpl::Kind & FileCap::kind() const
-    { return CapTraits<Self>::kind; }
+  const CapMatch CapMatch::yes( true );
+  const CapMatch CapMatch::no( false );
+  const CapMatch CapMatch::irrelevant;
 
-    CapMatch FileCap::matches( const constPtr & rhs ) const
-    { return matchValueIf( sameKindAndRefers( rhs ), rhs ); }
+  /******************************************************************
+  **
+  **	FUNCTION NAME : operator<<
+  **	FUNCTION TYPE : std::ostream &
+  */
+  std::ostream & operator<<( std::ostream & str, const CapMatch & obj )
+  {
+    if ( obj._result == CapMatch::IRRELEVANT )
+      return str << "IRRELEVANT";
+    return str << ( obj._result == CapMatch::MATCH ? "MATCH" : "NOMATCH" );
+  }
 
-    std::string FileCap::asString() const
-    { return _fname; }
-
-    std::string FileCap::value() const
-    { return _fname; }
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace capability
-  ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
