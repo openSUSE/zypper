@@ -195,7 +195,7 @@ StoreWorld::addResItem (ResItem_constPtr resItem)
     for (CapSet::const_iterator i = resItem->provides().begin(); i != resItem->provides().end(); i++) {
 	r_and_d = new ResItemAndDependency (resItem, *i);
 
-	_provides_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency().name(), r_and_d));
+	_provides_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency().index(), r_and_d));
     }
 
     /* StoreWorld all of the resItem's requires in a hash by name. */
@@ -203,7 +203,7 @@ StoreWorld::addResItem (ResItem_constPtr resItem)
     for (CapSet::const_iterator i = resItem->requires().begin(); i != resItem->requires().end(); i++) {
 	r_and_d = new ResItemAndDependency (resItem, *i);
 
-	_requires_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency().name(), r_and_d));
+	_requires_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency().index(), r_and_d));
     }
 
     /* "Recommends" are treated as requirements. */
@@ -212,14 +212,14 @@ StoreWorld::addResItem (ResItem_constPtr resItem)
     for (CapSet::const_iterator i = resItem->recommends().begin(); i != resItem->recommends().end(); i++) {
 	r_and_d = new ResItemAndDependency (resItem, *i);
 
-	_requires_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency().name(), r_and_d));
+	_requires_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency().index(), r_and_d));
     }
 
     /* StoreWorld all of the resItem's conflicts in a hash by name. */
 
     for (CapSet::const_iterator i = resItem->conflicts().begin(); i != resItem->conflicts().end(); i++) {
 	r_and_d = new ResItemAndDependency (resItem, *i);
-	_conflicts_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency().name(), r_and_d));
+	_conflicts_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency().index(), r_and_d));
     }
 
  finished:
@@ -490,7 +490,7 @@ StoreWorld::foreachProvidingResItem (const Capability & dep, ResItemAndDepFn fn,
     int count = 0;
     InstalledTable installed;
 //fprintf (stderr, "StoreWorld::foreachProvidingResItem(%s)\n", dep->asString().c_str());
-    for (ResItemAndDependencyTable::const_iterator iter = _provides_by_name.lower_bound(dep.name()); iter != _provides_by_name.upper_bound(dep.name()); iter++) {
+    for (ResItemAndDependencyTable::const_iterator iter = _provides_by_name.lower_bound(dep.index()); iter != _provides_by_name.upper_bound(dep.index()); iter++) {
 	ResItemAndDependency_constPtr r_and_d = iter->second;
 	ResItem_constPtr res = r_and_d->resItem();
 //fprintf (stderr, "StoreWorld::foreachProvidingResItem(): %s\n", res->asString(true).c_str());
@@ -499,7 +499,7 @@ StoreWorld::foreachProvidingResItem (const Capability & dep, ResItemAndDepFn fn,
 	}
     }
 
-    for (ResItemAndDependencyTable::const_iterator iter = _provides_by_name.lower_bound(dep.name()); iter != _provides_by_name.upper_bound(dep.name()); iter++) {
+    for (ResItemAndDependencyTable::const_iterator iter = _provides_by_name.lower_bound(dep.index()); iter != _provides_by_name.upper_bound(dep.index()); iter++) {
 	ResItemAndDependency_constPtr r_and_d = iter->second;
 
 	if (r_and_d && r_and_d->verifyRelation (dep)) {
@@ -533,7 +533,7 @@ StoreWorld::foreachRequiringResItem (const Capability & dep, ResItemAndDepFn fn,
     InstalledTable installed;
 
 
-    for (ResItemAndDependencyTable::const_iterator iter = _requires_by_name.lower_bound(dep.name()); iter != _requires_by_name.upper_bound(dep.name()); iter++) {
+    for (ResItemAndDependencyTable::const_iterator iter = _requires_by_name.lower_bound(dep.index()); iter != _requires_by_name.upper_bound(dep.index()); iter++) {
 	ResItemAndDependency_constPtr r_and_d = iter->second;
 	ResItem_constPtr res = r_and_d->resItem();
 	if (res != NULL && res->isInstalled ()) {
@@ -542,7 +542,7 @@ StoreWorld::foreachRequiringResItem (const Capability & dep, ResItemAndDepFn fn,
 	}
     }
 
-    for (ResItemAndDependencyTable::const_iterator iter = _requires_by_name.lower_bound(dep.name()); iter != _requires_by_name.upper_bound(dep.name()); iter++) {
+    for (ResItemAndDependencyTable::const_iterator iter = _requires_by_name.lower_bound(dep.index()); iter != _requires_by_name.upper_bound(dep.index()); iter++) {
 	ResItemAndDependency_constPtr r_and_d = iter->second;
 
 	if (r_and_d ) {//&& r_and_d->dependency().matches (dep)) {
@@ -574,7 +574,7 @@ StoreWorld::foreachConflictingResItem (const Capability & dep, ResItemAndDepFn f
     int count = 0;
     InstalledTable installed;
 //fprintf (stderr, "StoreWorld::foreachConflictingResItem (%s)\n", dep->name().c_str());
-    for (ResItemAndDependencyTable::const_iterator iter = _conflicts_by_name.lower_bound(dep.name()); iter != _conflicts_by_name.upper_bound(dep.name()); iter++) {
+    for (ResItemAndDependencyTable::const_iterator iter = _conflicts_by_name.lower_bound(dep.index()); iter != _conflicts_by_name.upper_bound(dep.index()); iter++) {
 	ResItemAndDependency_constPtr r_and_d = iter->second;
 	ResItem_constPtr res = r_and_d->resItem();
 //fprintf (stderr, "==> %s\n", res->asString().c_str());
@@ -583,7 +583,7 @@ StoreWorld::foreachConflictingResItem (const Capability & dep, ResItemAndDepFn f
 	}
     }
 
-    for (ResItemAndDependencyTable::const_iterator iter = _conflicts_by_name.lower_bound(dep.name()); iter != _conflicts_by_name.upper_bound(dep.name()); iter++) {
+    for (ResItemAndDependencyTable::const_iterator iter = _conflicts_by_name.lower_bound(dep.index()); iter != _conflicts_by_name.upper_bound(dep.index()); iter++) {
 	ResItemAndDependency_constPtr r_and_d = iter->second;
 
 	if (r_and_d)
