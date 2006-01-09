@@ -205,6 +205,44 @@ namespace zypp
     //@}
 
     ///////////////////////////////////////////////////////////////////
+    /** \name Split. */
+    //@{
+    /** Split \a line_r into words.
+     * Any sequence of characters in \a sepchars_r is treated as
+     * delimiter. The words are passed to OutputIterator \a result_r.
+     * \code
+     * std::vector<std::string> words;
+     * str::split( "some line", std::back_inserter(words) )
+     * \endcode
+     *
+    */
+    template<class _OutputIterator>
+      unsigned split( const std::string & line_r,
+                      _OutputIterator     result_r,
+                      const std::string & sepchars_r = " \t" )
+      {
+        const char * beg = line_r.c_str();
+        const char * cur = beg;
+        // skip leading sepchars
+        while ( sepchars_r.find( *cur ) != std::string::npos )
+          ++cur;
+        unsigned ret = 0;
+        for ( beg = cur; *beg; beg = cur, ++result_r, ++ret )
+          {
+            // skip non sepchars
+            while( *cur && sepchars_r.find( *cur ) == std::string::npos )
+              ++cur;
+            // build string
+            *result_r = std::string( beg, cur-beg );
+            // skip sepchars
+            while ( sepchars_r.find( *cur ) != std::string::npos )
+              ++cur;
+          }
+        return ret;
+      }
+    //@}
+
+    ///////////////////////////////////////////////////////////////////
     /** \name Case conversion. */
     //@{
     /** Return lowercase version of \a s
