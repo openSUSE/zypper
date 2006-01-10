@@ -14,6 +14,8 @@
 #include <zypp/detail/PatchImpl.h>
 #include <zypp/Patch.h>
 #include <zypp/Package.h>
+#include <zypp/Script.h>
+#include <zypp/Message.h>
 #include <zypp/Edition.h>
 #include <zypp/CapSet.h>
 #include <zypp/detail/PackageImpl.h>
@@ -81,7 +83,6 @@ template<> // or constPtr?
 std::string toXML( const Dependencies dep )
 {
   stringstream out;
-  out << "  <dependencies>" << std::endl;
   out << "    <provides>" << std::endl;
   out << "    " << toXML(dep.provides) << std::endl;
   out << "    </provides>" << std::endl;
@@ -106,7 +107,6 @@ std::string toXML( const Dependencies dep )
   out << "    <recommends>" << std::endl;
   out << "    " << toXML(dep.recommends) << std::endl;
   out << "    </recommends>" << std::endl;  
-  out << "  </dependencies>" << std::endl;
   return out.str();
   
 }
@@ -133,6 +133,26 @@ std::string toXML( Patch::Ptr obj )
   out << "  </atoms>" << std::endl;
   out << "  </atoms>" << std::endl;
   out << "</patch>" << std::endl;
+  return out.str();
+}
+
+template<> // or constPtr?
+std::string toXML( Script::Ptr obj )
+{
+  stringstream out;
+  out << "<script>" << std::endl;
+  // reuse Resolvable information serialize function
+  toXML(static_cast<Resolvable::Ptr>(obj));
+  out << "  <do>" << std::endl;
+  out << "      " << obj->do_script() << std::endl;
+  out << "  </do>" << std::endl;
+  if ( obj->undo_available() )
+  {
+    out << "  <undo>" << std::endl;
+    out << "      " << obj->undo_script() << std::endl;
+    out << "  </undo>" << std::endl;
+  }
+  out << "</script>" << std::endl;
   return out.str();
 }
 
