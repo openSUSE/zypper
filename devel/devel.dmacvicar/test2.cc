@@ -156,6 +156,18 @@ std::string toXML( Script::Ptr obj )
   return out.str();
 }
 
+template<> // or constPtr?
+std::string toXML( Message::Ptr obj )
+{
+  stringstream out;
+  out << "<message type=\"" << obj->type() << "\">" << std::endl;
+  // reuse Resolvable information serialize function
+  toXML(static_cast<Resolvable::Ptr>(obj));
+  out << "  <text>" << obj->text() << "</text>" << std::endl;
+  out << "</message>" << std::endl;
+  return out.str();
+}
+
 class XMLBackend : public base::ReferenceCounted, private base::NonCopyable
 {
 	public:
