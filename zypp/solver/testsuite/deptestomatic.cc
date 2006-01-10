@@ -54,6 +54,7 @@ using namespace std;
 using namespace zypp::solver::detail;
 
 static MultiWorld_Ptr world = NULL;
+static string globalPath;
 
 typedef list<unsigned int> ChecksumList;
 
@@ -306,7 +307,7 @@ add_to_world_cb (ResItem_constPtr resItem, void *data)
 static void
 load_channel (const string & name, const string & filename, const string & type, bool system_packages)
 {
-    string pathname = "deptestomatic/" + filename;
+    string pathname = globalPath + filename;
 
     if (getenv ("RC_SPEW")) fprintf (stderr, "load_channel(%s,%s,%s,%s)\n", name.c_str(), pathname.c_str(), type.c_str(), system_packages?"system":"non-system");
 
@@ -739,6 +740,9 @@ main (int argc, char *argv[])
     }
 
     init_libzypp ();
+
+    globalPath = argv[1];
+    globalPath = globalPath.substr (0, globalPath.find_last_of ("/") +1);
 
     world = World::globalWorld();
 

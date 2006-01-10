@@ -120,58 +120,61 @@ proc multi-run { src } {
 
   puts "Running $base_name..."
 
-  set testcases [glob $base_name/*-test.xml ]
+  set dircases [glob $base_name/* ]
+  foreach dircase $dircases { 
+      set testcases [glob $dircase/*-test.xml ]
 
-  foreach testcase $testcases { 
-      set testPath [split $testcase "/"]
-      set testFilename [lindex $testPath [expr [llength $testPath]-1]]
-      set testFname [split $testFilename "."]
-      set testBase_name [lindex $testFname 0]
-      puts "   ... $testBase_name" 
+      foreach testcase $testcases { 
+	  set testPath [split $testcase "/"]
+	  set testFilename [lindex $testPath [expr [llength $testPath]-1]]
+	  set testFname [split $testFilename "."]
+	  set testBase_name [lindex $testFname 0]
+	  puts "   ... $testBase_name" 
 
-      #generate output directory
+	  #generate output directory
 
-      exec mkdir -p ./$base_name/out
-      set outfile ./$base_name/out/$testBase_name.mistake
-      set outfilegrep ./$base_name/out/$testBase_name.grep
-      set refoutfile ./$base_name/$testBase_name.solution
+	  exec mkdir -p ./$dircase/out
+	  set outfile ./$dircase/out/$testBase_name.mistake
+	  set outfilegrep ./$dircase/out/$testBase_name.grep
+	  set refoutfile ./$dircase/$testBase_name.solution
 
-      # run the test
+	  # run the test
 
-      set command "LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:../src/.libs\" $src $testcase >$outfile 2>$outfile"
-      set result ""
-      set oops [catch { set result [exec sh -c $command] } catched]
+	  set command "LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:../src/.libs\" $src $testcase >$outfile 2>$outfile"
+	  set result ""
+	  set oops [catch { set result [exec sh -c $command] } catched]
 
-      if {$oops != 0} {
-	  fail "test case failed for $testBase_name: $catched"
-	  set errorOccured 0
-	  continue
-      }
-
-      # check return code from runprg
-      
-      if {$result != ""} {
-	  warning "Run of $testBase_name results in '$result'"
-	  set errorOccured 0
-	  continue
-      }
-
-      exec sh -c "/usr/bin/fgrep \'>!>\' $outfile >$outfilegrep"
-
-      if { [ file exists $refoutfile ] == 0 } {
-	  perror "Missing file $refoutfile" 0
-      } else {
-	  if { [ diff $refoutfile $outfilegrep ] != 1 } {
-	      puts "Output doesn't match expected data:"
-	      puts [ exec sh -c "diff -u $refoutfile $outfilegrep || true" ]
-	      fail $testBase_name
+	  if {$oops != 0} {
+	      fail "test case failed for $testBase_name: $catched"
 	      set errorOccured 0
 	      continue
 	  }
-      }
 
-      # ok, all is fine
-      pass $testBase_name
+	  # check return code from runprg
+      
+	  if {$result != ""} {
+	      warning "Run of $testBase_name results in '$result'"
+	      set errorOccured 0
+	      continue
+	  }
+
+	  exec sh -c "/usr/bin/fgrep \'>!>\' $outfile >$outfilegrep"
+
+	  if { [ file exists $refoutfile ] == 0 } {
+	      perror "Missing file $refoutfile" 0
+	  } else {
+	      if { [ diff $refoutfile $outfilegrep ] != 1 } {
+		  puts "Output doesn't match expected data:"
+		  puts [ exec sh -c "diff -u $refoutfile $outfilegrep || true" ]
+		  fail $testBase_name
+		  set errorOccured 0
+		  continue
+	      }
+	  }
+
+	  # ok, all is fine
+	  pass $testBase_name
+      }
   }
 
   if { $errorOccured == 0 } {
