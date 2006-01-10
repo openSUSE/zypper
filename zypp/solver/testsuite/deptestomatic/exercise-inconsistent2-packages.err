@@ -1,7 +1,0 @@
-deptestomatic/exercise-inconsistent2-packages.xml:1: parser error : Document is empty
-
-^
-deptestomatic/exercise-inconsistent2-packages.xml:1: parser error : Start tag expected, '<' not found
-
-^
-Can't parse test file 'deptestomatic/exercise-inconsistent2-packages.xml'
