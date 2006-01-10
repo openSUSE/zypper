@@ -14,12 +14,14 @@ AM_LDFLAGS = -pg
 AM_CXXFLAGS =
 # gperf:	-pg
 
-LDADD =		$(top_srcdir)/zypp/lib@PACKAGE@.la -lboost_regex -lsqlite3 -ldbxml
+
+# -ldbxml -lpathan -lxerces-c -lxquery
+LDADD =		$(top_srcdir)/zypp/lib@PACKAGE@.la -lboost_regex -ldb -ldb_cxx 
 #LDADD =	-lboost_regex -lsqlite3 -dbxml
 
 ## ##################################################
 
-test2_SOURCES = test2.cc PersistentStorage.cc Backend.cc BDBBackend.cc SQLiteWrapper.cc SQLiteBackend.cc
+test2_SOURCES = test2.cc
 
 test2_debug_SOURCES = 	$(test2_SOURCES)
 test2_debug_LDFLAGS =	-static

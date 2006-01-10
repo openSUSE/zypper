@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 #include "dbxml/DbXml.hpp"
 
@@ -13,6 +14,8 @@
 #include <zypp/detail/PatchImpl.h>
 #include <zypp/Patch.h>
 #include <zypp/Package.h>
+#include <zypp/Edition.h>
+#include <zypp/CapSet.h>
 #include <zypp/detail/PackageImpl.h>
 #include <zypp/Script.h>
 #include <zypp/detail/ScriptImpl.h>
@@ -40,23 +43,75 @@ using namespace zypp;
 using namespace zypp::parser::yum;
 using namespace zypp::source::yum;
 using namespace zypp::storage;
-using namespace DbXml;
+//using namespace DbXml;
 
-/*
-class YUMSerializer : public base::ReferenceCounted, private base::NonCopyable
+template<class T>
+std::string toXML( T obj ); //undefined
+
+template<> // or constPtr?
+std::string toXML( const Edition edition )
 {
-	public:
-	friend std::ostream & operator<<( std::ostream & str, const YUMSerializer & obj );
-	typedef intrusive_ptr<PatchYUMSerializer> Ptr;
-	typedef intrusive_ptr<const PatchYUMSerializer> constPtr;
-	YUMSerializer( Resolvable::constPtr resolvable )
-	{
-		m_resolvable = resolvable;
-	}
-	private:
-	Resolvable::constPtr m_resolvable;
-};
-*/
+  stringstream out;
+  out << "<edition>" << edition.asString() << "</edition>";
+  return out.str();
+}
+
+template<> // or constPtr?
+std::string toXML( Capability cap )
+{
+  stringstream out;
+  out << "<capability refers=\"" << cap.refers() << "\">" <<  cap.asString() << "</capability>" << std::endl;
+  return out.str();
+}
+
+template<> // or constPtr?
+std::string toXML( const CapSet caps )
+{
+  stringstream out;
+  CapSet::iterator it = caps.begin();
+  for ( ; it != caps.end(); ++it)
+  {
+    out << toXML((*it));
+  }
+  return out.str(); 
+}
+
+template<> // or constPtr?
+std::string toXML( const Dependencies dep )
+{
+  stringstream out;
+  out << "  <dependencies>" << std::endl;
+  out << "    <provides>" << std::endl;
+  out << "      " << toXML(dep.provides) << " " << std::endl;
+  out << "    </provides>" << std::endl;
+  out << "    <prerequires>" << std::endl;
+  out << "    </prerequires>" << std::endl;
+  out << "    <conflicts>" << std::endl;
+  out << "    </conflicts>" << std::endl;
+  out << "  </dependencies>" << std::endl;
+  return out.str();
+  
+}
+
+template<> // or constPtr?
+std::string toXML( Resolvable::Ptr obj )
+{
+  stringstream out;
+  out << "<resolvable-object type=\"" << obj->kind() << "\">" << std::endl;
+  out << "  <name>" << obj->name() << "</name>" << std::endl;
+  // is this shared? uh
+  out << "  " << toXML(obj->edition()) << std::endl;
+  out << "  " << toXML(obj->deps()) << std::endl;
+  out << "</resolvable-object>" << std::endl;
+  return out.str();
+}
+
+template<> // or constPtr?
+std::string toXML( Patch::Ptr obj )
+{
+  stringstream out;
+  return out.str();
+}
 
 class XMLBackend : public base::ReferenceCounted, private base::NonCopyable
 {
@@ -68,37 +123,26 @@ class XMLBackend : public base::ReferenceCounted, private base::NonCopyable
   void initDatabase()
   {
     // Get a manager object.
-    XmlManager myManager;
+    //XmlManager myManager;
     // Open a container
-    XmlContainer myContainer =  myManager.openContainer("zypp_db.dbxml");
+    //XmlContainer myContainer =  myManager.openContainer("zypp_db.dbxml");
   }
 
 	XMLBackend()
 	{
 		
 	}
-  protected:
-  const std::string serializePatch( Patch::constPtr patch ) const
-  {
-    std::string str;
-    //ostream str(buffer);
-    str += "<patch>\n";
-    /*
-    str << "  xmlns=\"http://novell.com/package/metadata/suse/patch\"" << endl;
-    str << "  xmlns:patch=\"http://novell.com/package/metadata/suse/patch\"" << endl;
-    str << "  xmlns:yum=\"http://linux.duke.edu/metadata/common\"" << endl;
-    str << "  xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\"" << endl;
-    str << "  xmlns:suse=\"http://novell.com/package/metadata/suse/common\"" << endl;
-    str << "  patchid=\"" << obj.m_patch->id() << "\"" <<  endl;
-    str << "  timestamp=\"" << obj.m_patch->timestamp() << "\"" << endl;
-    str << "  engine=\"1.0\">" << endl;
-    str << "  <yum:name>" << obj.m_patch->name() << "</yum:name>" << endl;
-    str << "  <summary lang=\"en\">"  << obj.m_patch->summary() << "</summary>" << endl;
-    */
-    str += "</patch>\n";
-    return str;
-  }
 
+  ~XMLBackend()
+  {
+    DBG << endl;
+  }
+  
+  void storeObject( Resolvable::Ptr res )
+  {
+    DBG << std::endl;
+    DBG << toXML(res) << std::endl;
+  }
 
 	private:
 	//std::ostream & operator<<( std::ostream & str, const PatchYUMSerializer & obj )
@@ -139,18 +183,21 @@ int main()
 
 	// process the patch
 	
-	DBG << patch1 << endl;
-	DBG << *patch1 << endl;
-	DBG << patch1->deps() << endl;
-	Patch::AtomList at = patch1->atoms();
-	for (Patch::AtomList::iterator it = at.begin(); it != at.end(); it++)
-	{
-		DBG << **it << endl;
-		DBG << (**it).deps() << endl;
-	}
-	INT << "===[END]============================================" << endl;
+	//DBG << patch1 << endl;
+	//DBG << *patch1 << endl;
+	//DBG << patch1->deps() << endl;
+	//Patch::AtomList at = patch1->atoms();
+	//for (Patch::AtomList::iterator it = at.begin(); it != at.end(); it++)
+	//{
+	//	DBG << **it << endl;
+	//	DBG << (**it).deps() << endl;
+	//}
+	//INT << "===[END]============================================" << endl;
 	//PatchYUMSerializer serializer(patch1);
 	//DBG << endl << serializer << endl;
+
+  XMLBackend backend;
+  backend.storeObject(patch1);
 	return 1;	
 }
 
