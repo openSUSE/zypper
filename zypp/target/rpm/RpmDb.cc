@@ -1002,7 +1002,7 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
                        iter->tag_arch() );
 
     list<string> filenames = impl->filenames();
-    dataCollect.deps.provides = iter->tag_provides ( & _filerequires );
+    dataCollect.provides = iter->tag_provides ( & _filerequires );
     for (list<string>::const_iterator filename = filenames.begin();
          filename != filenames.end();
          filename++)
@@ -1017,14 +1017,14 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
         || filename->find("/usr/share/magic.mime")
         || filename->find("/opt/gnome/games"))
       {
-	dataCollect.deps.provides.insert(_f.parse(ResTraits<Package>::kind, *filename));
+	dataCollect.provides.insert(_f.parse(ResTraits<Package>::kind, *filename));
       }
     }
 
-    dataCollect.deps.requires    = iter->tag_requires ( &_filerequires );
-    dataCollect.deps.prerequires = iter->tag_prerequires ( &_filerequires );
-    dataCollect.deps.conflicts   = iter->tag_conflicts( &_filerequires );
-    dataCollect.deps.obsoletes   = iter->tag_obsoletes( &_filerequires );
+    dataCollect.requires    = iter->tag_requires ( &_filerequires );
+    dataCollect.prerequires = iter->tag_prerequires ( &_filerequires );
+    dataCollect.conflicts   = iter->tag_conflicts( &_filerequires );
+    dataCollect.obsoletes   = iter->tag_obsoletes( &_filerequires );
 
     // create package from dataprovider
     nptr = detail::makeResolvableFromImpl( dataCollect, impl );

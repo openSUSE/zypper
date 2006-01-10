@@ -59,37 +59,36 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
+  // Collect basic Resolvable data
+  NVRAD dataCollect;
+
   // parse basic values
-  std::string _name( "foo" );
-  Edition     _edition( "1.0", "42" );
-  Arch        _arch( "i386" );
+  dataCollect.name    = "foo";
+  dataCollect.edition = Edition("1.0","42");
+  dataCollect.arch    = Arch_i386;
 
-  // create the object
-  shared_ptr<detail::PackageImpl> pkgImpl;
-  Package::Ptr pkg( detail::makeResolvableAndImpl( _name, _edition, _arch,
-                                                   pkgImpl ) );
-  DBG << *pkg << endl;
-  DBG << pkg->deps() << endl;
-
-  // finalize implementation class construction
-  Dependencies _deps;
-
+  // parse dependencies
   std::list<std::string> depList( parseDeps() );
-  CapSet prv;
   try
     {
-      for_each( depList.begin(), depList.end(), CapSetInsert<Package>(prv) );
+      for_each( depList.begin(), depList.end(),
+                CapSetInsert<Package>(dataCollect.provides) );
     }
   catch(...)
     {
-      INT << prv << endl;
+      INT << dataCollect.provides << endl;
     }
-  _deps.setProvides( prv );
-
   // ...parse other deps
-  pkgImpl->self()->setDeps( _deps );
 
-  // ... aditional data if...
+  // create the object
+  shared_ptr<detail::PackageImpl> pkgImpl;
+  Package::Ptr pkg( detail::makeResolvableAndImpl( dataCollect, pkgImpl ) );
+  DBG << *pkg << endl;
+  DBG << pkg->deps() << endl;
+
+
+  // finalize implementation class construction
+  // ... aditional data ...
 
   DBG << pkg << endl;
   DBG << *pkg << endl;

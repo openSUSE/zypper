@@ -23,8 +23,9 @@ namespace zypp
   //
   //	CLASS NAME : NVRAD
   //
-  /**  Helper storing Name, Edition, Arch and Dependencies. */
-  struct NVRAD : public NVRA
+  /**  Helper storing Name, Edition, Arch and Dependencies.
+  */
+  struct NVRAD : public NVRA, public Dependencies
   {
     /** Default ctor */
     NVRAD()
@@ -37,7 +38,7 @@ namespace zypp
            const Arch & arch_r = Arch(),
            const Dependencies & deps_r = Dependencies() )
     : NVRA( name_r, edition_r, arch_r )
-    , deps( deps_r )
+    , Dependencies( deps_r )
     {}
 
     /** Ctor */
@@ -45,7 +46,7 @@ namespace zypp
     NVRAD( const NVRA & nvra_r,
            const Dependencies & deps_r = Dependencies() )
     : NVRA( nvra_r )
-    , deps( deps_r )
+    , Dependencies( deps_r )
     {}
 
     /** Ctor */
@@ -54,11 +55,8 @@ namespace zypp
            const Arch & arch_r = Arch(),
            const Dependencies & deps_r = Dependencies() )
     : NVRA( nvr_r, arch_r )
-    , deps( deps_r )
+    , Dependencies( deps_r )
     {}
-
-    /**  */
-    Dependencies deps;
   };
   ///////////////////////////////////////////////////////////////////
 

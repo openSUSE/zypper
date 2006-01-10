@@ -36,6 +36,8 @@ namespace zypp
   //	CLASS NAME : Resolvable
   //
   /** Interface base for resolvable objects (identification and dependencies).
+   * \invariant \c provides <tt>name = edition</tt>
+   * \invariant \c prerequires is a subset of \c requires
   */
   class Resolvable : public base::ReferenceCounted, private base::NonCopyable
   {
@@ -66,12 +68,16 @@ namespace zypp
     const CapSet & recommends() const;
     const CapSet & suggests() const;
     const CapSet & freshens() const;
+    /** All dependencies. */
+    const Dependencies & deps() const;
     //@}
 
-    /** */
+    /** \name Deprecated. */
+    //@{
     void deprecatedSetDeps( const Dependencies & val_r );
     void injectProvides( const Capability & cap_r );
     void injectRequires( const Capability & cap_r );
+    //@}
 
   protected:
     /** Ctor */

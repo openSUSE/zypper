@@ -359,11 +359,13 @@ namespace zypp
 	  try
 	  {
 	    shared_ptr<YUMGroupImpl> impl(new YUMGroupImpl(parsed));
-	    Selection::Ptr group = detail::makeResolvableFromImpl(
-	      parsed.groupId,
-	      Edition::noedition,
-	      Arch_noarch,
-	      impl
+            // Collect basic Resolvable data
+            NVRAD dataCollect( parsed.groupId,
+                               Edition::noedition,
+                               Arch_noarch
+                             );
+ 	    Selection::Ptr group = detail::makeResolvableFromImpl(
+	      dataCollect, impl
 	    );
 	    return group;
 	  }

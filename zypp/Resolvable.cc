@@ -91,14 +91,20 @@ namespace zypp
   const CapSet & Resolvable::freshens() const
   { return _pimpl->deps().freshens; }
 
-#warning IMPLEMENT IT
+  const Dependencies & Resolvable::deps() const
+  { return _pimpl->deps(); }
+
+
   void Resolvable::injectProvides( const Capability & cap_r )
-  {}
+  { return _pimpl->injectProvides( cap_r ); }
+
   void Resolvable::injectRequires( const Capability & cap_r )
-  {}
+  { return _pimpl->injectRequires( cap_r ); }
+
 
   void Resolvable::deprecatedSetDeps( const Dependencies & val_r )
-  { _pimpl->setDeps( val_r ); }
+  { _pimpl->deprecatedSetDeps( val_r ); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

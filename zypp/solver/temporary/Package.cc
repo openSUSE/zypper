@@ -312,7 +312,7 @@ Package::Package (Channel_constPtr channel,
     setChannel (channel);
 
     shared_ptr<zypp::detail::PackageImpl> pkgImpl;
-    zypp::Package::Ptr pkg( zypp::detail::makeResolvableAndImpl( name, edition, arch,
+    zypp::Package::Ptr pkg( zypp::detail::makeResolvableAndImpl( NVRAD(name, edition, arch),
                                                                  pkgImpl ) );
     _resObject = pkg;
 }
@@ -478,7 +478,7 @@ Package::Package (XmlNode_constPtr node, Channel_constPtr channel)
 
     Edition     _edition( version, release, zypp::str::numstring(epoch) );
     shared_ptr<zypp::detail::PackageImpl> pkgImpl;
-    zypp::Package::Ptr pkg( zypp::detail::makeResolvableAndImpl( name, _edition, arch,
+    zypp::Package::Ptr pkg( zypp::detail::makeResolvableAndImpl( NVRAD(name, _edition, arch),
                                                                  pkgImpl ) );
     _resObject = pkg;
 }

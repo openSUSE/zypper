@@ -75,16 +75,6 @@ namespace zypp
 
     template<class _Impl>
       typename _Impl::ResType::Ptr
-      makeResolvableAndImpl( const std::string & name_r,
-                             const Edition & edition_r,
-                             const Arch & arch_r,
-                             shared_ptr<_Impl> & impl_r )
-      {
-        return makeResolvableAndImpl( NVRAD( name_r, edition_r, arch_r ), impl_r );
-      }
-
-    template<class _Impl>
-      typename _Impl::ResType::Ptr
       makeResolvableFromImpl( const NVRAD & nvrad_r,
                               shared_ptr<_Impl> impl_r )
       {
@@ -95,16 +85,6 @@ namespace zypp
         return new
                _resobjectfactory_detail::ResImplConnect<typename _Impl::ResType>
                ( nvrad_r, impl_r );
-      }
-
-    template<class _Impl>
-      typename _Impl::ResType::Ptr
-      makeResolvableFromImpl( const std::string & name_r,
-                              const Edition & edition_r,
-                              const Arch & arch_r,
-                              shared_ptr<_Impl> impl_r )
-      {
-        return makeResolvableFromImpl( NVRAD( name_r, edition_r, arch_r ), impl_r );
       }
 
     /////////////////////////////////////////////////////////////////

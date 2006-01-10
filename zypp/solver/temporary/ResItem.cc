@@ -194,37 +194,37 @@ namespace zypp
           if (kind == "Package")
           {
               shared_ptr<zypp::detail::PackageImpl> pkgImpl;
-              zypp::Package::Ptr pkg( zypp::detail::makeResolvableAndImpl( name, _edition, arch,
+              zypp::Package::Ptr pkg( zypp::detail::makeResolvableAndImpl( NVRAD(name, _edition, arch),
                                                                            pkgImpl ) );
               _resObject = pkg;
           } else if (kind == "Selection")
           {
               shared_ptr<zypp::detail::SelectionImpl> selImpl;
-              zypp::Selection::Ptr sel( zypp::detail::makeResolvableAndImpl( name, _edition, arch,
+              zypp::Selection::Ptr sel( zypp::detail::makeResolvableAndImpl( NVRAD(name, _edition, arch),
                                                                              selImpl ) );
               _resObject = sel;
           } else if (kind == "Product")
           {
 //              shared_ptr<zypp::detail::ProductImpl> proImpl;
-//              zypp::Product::Ptr pro( zypp::detail::makeResolvableAndImpl( name, _edition, arch,
+//              zypp::Product::Ptr pro( zypp::detail::makeResolvableAndImpl( NVRAD(name, _edition, arch),
 //                                                                           proImpl ) );
 //              _resObject = pro;
           } else if (kind == "Patch")
           {
               shared_ptr<zypp::detail::PatchImpl> patchImpl;
-              zypp::Patch::Ptr patch( zypp::detail::makeResolvableAndImpl( name, _edition, arch,
+              zypp::Patch::Ptr patch( zypp::detail::makeResolvableAndImpl( NVRAD(name, _edition, arch),
                                                                            patchImpl ) );
               _resObject = patch;
           } else if (kind == "Script")
           {
               shared_ptr<zypp::detail::ScriptImpl> scriptImpl;
-              zypp::Script::Ptr script( zypp::detail::makeResolvableAndImpl( name, _edition, arch,
+              zypp::Script::Ptr script( zypp::detail::makeResolvableAndImpl( NVRAD(name, _edition, arch),
                                                                              scriptImpl ) );
               _resObject = script;
           } else if (kind == "Message")
           {
               shared_ptr<zypp::detail::MessageImpl> messageImpl;
-              zypp::Message::Ptr message( zypp::detail::makeResolvableAndImpl( name, _edition, arch,
+              zypp::Message::Ptr message( zypp::detail::makeResolvableAndImpl( NVRAD(name, _edition, arch),
                                                                                messageImpl ) );
               _resObject = message;
           }
