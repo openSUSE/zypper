@@ -52,7 +52,8 @@ template<> // or constPtr?
 std::string toXML( const Edition edition )
 {
   stringstream out;
-  out << "<edition>" << edition.asString() << "</edition>";
+  // sad the yum guys did not acll it edition
+  out << "<version ver=\"" << edition.version() << "\" rel=\"" << edition.release() << "\"/>";
   return out.str();
 }
 
@@ -60,7 +61,7 @@ template<> // or constPtr?
 std::string toXML( Capability cap )
 {
   stringstream out;
-  out << "<capability refers=\"" << cap.refers() << "\">" <<  cap.asString() << "</capability>" << std::endl;
+  out << "<entry kind=\"" << cap.refers() << " name=\"" <<  cap.asString() << "\" />";
   return out.str();
 }
 
@@ -82,12 +83,29 @@ std::string toXML( const Dependencies dep )
   stringstream out;
   out << "  <dependencies>" << std::endl;
   out << "    <provides>" << std::endl;
-  out << "      " << toXML(dep.provides) << " " << std::endl;
+  out << "    " << toXML(dep.provides) << std::endl;
   out << "    </provides>" << std::endl;
   out << "    <prerequires>" << std::endl;
+  out << "    " << toXML(dep.prerequires) << std::endl;
   out << "    </prerequires>" << std::endl;
+  out << "    <requires>" << std::endl;
+  out << "    " << toXML(dep.requires) << std::endl;
+  out << "    </requires>" << std::endl;
   out << "    <conflicts>" << std::endl;
+  out << "    " << toXML(dep.conflicts) << std::endl;
   out << "    </conflicts>" << std::endl;
+  out << "    <obsoletes>" << std::endl;
+  out << "    " << toXML(dep.obsoletes) << std::endl;
+  out << "    </obsoletes>" << std::endl;  
+  out << "    <freshens>" << std::endl;
+  out << "    " << toXML(dep.freshens) << std::endl;
+  out << "    </freshens>" << std::endl;
+  out << "    <suggests>" << std::endl;
+  out << "    " << toXML(dep.suggests) << std::endl;
+  out << "    </suggest>" << std::endl;
+  out << "    <recommends>" << std::endl;
+  out << "    " << toXML(dep.recommends) << std::endl;
+  out << "    </recommends>" << std::endl;  
   out << "  </dependencies>" << std::endl;
   return out.str();
   
@@ -97,12 +115,11 @@ template<> // or constPtr?
 std::string toXML( Resolvable::Ptr obj )
 {
   stringstream out;
-  out << "<resolvable-object type=\"" << obj->kind() << "\">" << std::endl;
+  
   out << "  <name>" << obj->name() << "</name>" << std::endl;
   // is this shared? uh
   out << "  " << toXML(obj->edition()) << std::endl;
   out << "  " << toXML(obj->deps()) << std::endl;
-  out << "</resolvable-object>" << std::endl;
   return out.str();
 }
 
@@ -110,6 +127,12 @@ template<> // or constPtr?
 std::string toXML( Patch::Ptr obj )
 {
   stringstream out;
+  out << "<patch>" << std::endl;
+  // reuse Resolvable information serialize function
+  toXML(static_cast<Resolvable::Ptr>(obj));
+  out << "  </atoms>" << std::endl;
+  out << "  </atoms>" << std::endl;
+  out << "</patch>" << std::endl;
   return out.str();
 }
 
@@ -141,7 +164,7 @@ class XMLBackend : public base::ReferenceCounted, private base::NonCopyable
   void storeObject( Resolvable::Ptr res )
   {
     DBG << std::endl;
-    DBG << toXML(res) << std::endl;
+    DBG << std::endl << toXML(res) << std::endl;
   }
 
 	private:
