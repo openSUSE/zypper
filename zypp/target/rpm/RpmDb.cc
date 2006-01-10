@@ -1017,7 +1017,14 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
         || filename->find("/usr/share/magic.mime")
         || filename->find("/opt/gnome/games"))
       {
-	dataCollect.provides.insert(_f.parse(ResTraits<Package>::kind, *filename));
+	try {
+	  dataCollect.provides.insert(_f.parse(ResTraits<Package>::kind, *filename));
+	}
+	catch (Exception & excpt_r)
+	{
+	  ZYPP_CAUGHT(excpt_r);
+	  WAR << "Invalid capability: " << *filename << endl;
+	}
       }
     }
 

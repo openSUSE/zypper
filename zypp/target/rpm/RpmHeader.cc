@@ -23,6 +23,7 @@
 #include "zypp/CapFactory.h"
 #include "zypp/Rel.h"
 #include "zypp/Package.h"
+#include "zypp/base/Exception.h"
 
 using namespace std;
 
@@ -296,13 +297,21 @@ namespace zypp {
 	    || ((! pre) && !(f & RPMSENSE_PREREQ)))
 	  {
 	    CapFactory _f;
-	    Capability cap = _f.parse(
-	      ResTraits<Package>::kind,
-	      n,
-	      op,
-	      Edition(v)
-	    );
-	    ret.insert(cap);
+	    try {
+	      Capability cap = _f.parse(
+	        ResTraits<Package>::kind,
+	        n,
+	        op,
+	        Edition(v)
+	      );
+	      ret.insert(cap);
+	    }
+	    catch (Exception & excpt_r)
+	    {
+	      ZYPP_CAUGHT(excpt_r);
+	      WAR << "Invalid capability: " << n << " " << op << " "
+		<< v << endl;
+	    }
 	  }
         }
       
