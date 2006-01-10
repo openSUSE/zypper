@@ -116,6 +116,7 @@ proc multi-run { src } {
   set test_prg  "$filename"
 
   set base_name [lindex $fname 0]
+  set base_name "data.$base_name"
 
   puts "Running $base_name..."
 
