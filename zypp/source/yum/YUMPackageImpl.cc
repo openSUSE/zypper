@@ -316,13 +316,13 @@ namespace zypp
       unsigned YUMPackageImpl::mediaId() const
       { return _mediaid; }
 
-      PackageImplIf::CheckSum YUMPackageImpl::checksum() const
+      CheckSum YUMPackageImpl::checksum() const
       { return _checksum; }
 
-      std::list<PackageImplIf::DeltaRpm> YUMPackageImpl::deltaRpms() const
+      std::list<DeltaRpm> YUMPackageImpl::deltaRpms() const
       { return _delta_rpms; }
 
-      std::list<PackageImplIf::PatchRpm> YUMPackageImpl::patchRpms() const
+      std::list<PatchRpm> YUMPackageImpl::patchRpms() const
       { return _patch_rpms; }
 
 #if 0

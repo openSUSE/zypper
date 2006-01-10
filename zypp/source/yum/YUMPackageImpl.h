@@ -15,6 +15,9 @@
 #include "zypp/detail/PackageImpl.h"
 #include "zypp/parser/yum/YUMParserData.h"
 #include "zypp/Changelog.h"
+#include "zypp/CheckSum.h"
+#include "zypp/PatchRpm.h"
+#include "zypp/DeltaRpm.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -105,11 +108,11 @@ namespace zypp
         /** */
 	virtual unsigned mediaId() const;
         /** */
-	virtual PackageImplIf::CheckSum checksum() const;
+	virtual CheckSum checksum() const;
         /** */
-	virtual std::list<PackageImplIf::DeltaRpm> deltaRpms() const;
+	virtual std::list<DeltaRpm> deltaRpms() const;
         /** */
-	virtual std::list<PackageImplIf::PatchRpm> patchRpms() const;
+	virtual std::list<PatchRpm> patchRpms() const;
 
 #if 0
         /** */
@@ -205,7 +208,7 @@ namespace zypp
 	Text _authors;
 	std::list<std::string>_keywords;
 	unsigned _mediaid;
-	PackageImplIf::CheckSum _checksum;
+	CheckSum _checksum;
 	Text _filenames;
 	std::string _location;
 	std::list<DeltaRpm> _delta_rpms;

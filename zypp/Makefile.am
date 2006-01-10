@@ -41,7 +41,11 @@ include_HEADERS = NeedAType.h \
 	TmpPath.h	\
 	KVMap.h		\
 	Callback.h	\
-	DiskUsage.h
+	DiskUsage.h	\
+	CheckSum.h	\
+	BaseVersion.h	\
+	PatchRpm.h	\
+	DeltaRpm.h
 
 ## ##################################################
 
