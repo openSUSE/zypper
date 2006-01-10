@@ -87,30 +87,25 @@ namespace zypp
 
     ~Url();
     Url();
+
+    /**
+     * Create a new Url object as shared copy of the given one.
+     *
+     * \param url The Url object to make a copy of.
+     */
     Url(const Url &url);
 
 
     /**
      * \brief Construct a Url object from percent-encoded URL string.
      *
-     * Parses the \p encodedUrl string using the parseUrl() method.
+     * Parses the \p encodedUrl string using the parseUrl() method
+     * and assings the result to the new created object.
      *
      * \param encodedUrl A percent-encoded URL string.
      * \throws A std::invalid_argument exception if parsing fails.
      */
     Url(const std::string &encodedUrl);
-
-
-    /**
-     * \brief Register a scheme-specific implementation.
-     *
-     * \param scheme  A name of a scheme.
-     * \param urlImpl A UrlBase object specialized for this scheme.
-     * \return True, if the object claims to implement the scheme.
-     */
-    static bool
-    registerScheme(const std::string &scheme,
-                   url::UrlRef       urlImpl);
 
 
     /**
@@ -129,6 +124,45 @@ namespace zypp
      */
     static url::UrlRef
     parseUrl(const std::string &encodedUrl);
+
+
+    /**
+     * \brief Assigns parsed percent-encoded URL string.
+     *
+     * Parses \p encodedUrl string using the parseUrl() method
+     * and assigns the result to the current object.
+     * 
+     * \param encodedUrl A percent-encoded URL string.
+     * \return A reference to this Url object.
+     * \throws A std::invalid_argument exception if parsing fails.
+     */
+    Url&
+    operator = (const std::string &encodedUrl);
+
+
+    /**
+     * \brief Assigns the \p url to the current object.
+     *
+     * After this operation the current object will be a shared
+     * copy of the object specified in the \p url parameter.
+     *
+     * \param url The Url object to make a copy of.
+     * \return A reference to this Url object.
+     */
+    Url&
+    operator = (const Url &url);
+
+
+    /**
+     * \brief Register a scheme-specific implementation.
+     *
+     * \param scheme  A name of a scheme.
+     * \param urlImpl A UrlBase object specialized for this scheme.
+     * \return True, if the object claims to implement the scheme.
+     */
+    static bool
+    registerScheme(const std::string &scheme,
+                   url::UrlRef       urlImpl);
 
 
     /**

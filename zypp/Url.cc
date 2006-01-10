@@ -204,6 +204,31 @@ namespace zypp
 
 
   // -----------------------------------------------------------------
+  Url&
+  Url::operator = (const std::string &encodedUrl)
+  {
+    UrlRef  url( parseUrl(encodedUrl));
+    if( !url)
+    {
+      throw std::invalid_argument(
+        "Unable to parse Url components"
+      );
+    }
+    m_impl = url;
+    return *this;
+  }
+
+
+  // -----------------------------------------------------------------
+  Url&
+  Url::operator = (const Url &url)
+  {
+    m_impl = url.m_impl;
+    return *this;
+  }
+
+
+  // -----------------------------------------------------------------
   // static
   bool
   Url::registerScheme(const std::string &scheme,
