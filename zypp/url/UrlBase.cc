@@ -294,7 +294,7 @@ namespace zypp
         Schemes::const_iterator s;
         for(s=schemes.begin(); s!=schemes.end(); ++s)
         {
-          if( scheme == str::toLower(*s))
+          if( lscheme == str::toLower(*s))
             return true;
         }
       }
