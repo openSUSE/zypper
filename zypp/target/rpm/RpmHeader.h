@@ -21,6 +21,7 @@
 #include "zypp/Changelog.h"
 #include "zypp/CapSetFwd.h"
 #include "zypp/Pathname.h"
+#include "zypp/DiskUsage.h"
 
 namespace zypp {
   namespace target {
@@ -124,7 +125,7 @@ namespace zypp {
           /**
            * Returns reference to arg <code>dudata_r</code>.
            **/
-          Package::DiskUsage & tag_du( Package::DiskUsage & dudata_r ) const;
+          DiskUsage & tag_du( DiskUsage & dudata_r ) const;
       
         public:
       

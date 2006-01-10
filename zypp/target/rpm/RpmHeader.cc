@@ -655,7 +655,7 @@ namespace zypp {
       //
       //        DESCRIPTION :
       //
-      Package::DiskUsage & RpmHeader::tag_du( Package::DiskUsage & dudata_r ) const
+      DiskUsage & RpmHeader::tag_du( DiskUsage & dudata_r ) const
       {
         dudata_r.clear();
         stringList basenames;
@@ -679,10 +679,10 @@ namespace zypp {
           // filter out hardliks ( different name but same device and inode ).
           ///////////////////////////////////////////////////////////////////
           filesystem::DevInoCache trace;
-          vector<Package::DiskUsage::Entry> entries;
+          vector<DiskUsage::Entry> entries;
           entries.resize( dirnames.size() );
           for ( unsigned i = 0; i < dirnames.size(); ++i ) {
-            entries[i] = Package::DiskUsage::Entry(dirnames[i]);
+            entries[i] = DiskUsage::Entry(dirnames[i]);
           }
       
           for ( unsigned i = 0; i < basenames.size(); ++ i ) {

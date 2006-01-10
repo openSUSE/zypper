@@ -187,7 +187,7 @@ namespace zypp
       { return _keywords; }
 
       /** */
-      Package::DiskUsage RPMPackageImpl::diskUsage() const
+      DiskUsage RPMPackageImpl::diskUsage() const
       { return _disk_usage; }
 #if 0
       /** */
