@@ -366,6 +366,10 @@ namespace zypp
       void
       setViewOptions(const ViewOptions &vopts);
 
+    protected:
+      virtual std::string
+      cleanupPathName(const std::string &path);
+
     private:
       UrlData        *m_data;
     };

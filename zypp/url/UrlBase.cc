@@ -90,6 +90,7 @@ namespace zypp
             );
         }
       }
+
     } // namespace
 
 
@@ -233,6 +234,26 @@ namespace zypp
 
 
     // ---------------------------------------------------------------
+    std::string
+    UrlBase::cleanupPathName(const std::string &path)
+    {
+      size_t pos = 0;
+
+      while( pos < path.length() && path.at(pos) == '/')
+        pos++;
+
+      if( pos > 1)
+      {
+        // make sure, there is not more than
+        // _one_ leading "/" in the path name.
+        return path.substr(pos - 1);
+      }
+
+      return std::string(path);
+    }
+
+
+    // ---------------------------------------------------------------
     UrlBase::Schemes
     UrlBase::getKnownSchemes() const
     {
@@ -358,7 +379,8 @@ namespace zypp
         tmp.pathname = getPathName(zypp::url::E_ENCODED);
         if( !tmp.pathname.empty())
         {
-          if( !tmp.host.empty() && tmp.pathname.at(0) != '/')
+          if( (!tmp.host.empty() || opts.has(ViewOptions::EMPTY_AUTHORITY))
+              && (tmp.pathname.at(0) != '/'))
           {
             url += "/";
           }
@@ -629,7 +651,7 @@ namespace zypp
     {
       if( isValidScheme(scheme))
       {
-        m_data->scheme = scheme;
+        m_data->scheme = str::toLower(scheme);
       }
       else
       {
@@ -825,7 +847,7 @@ namespace zypp
       }
       else
       {
-        std::string data( zypp::url::decode(path));
+        std::string data( cleanupPathName(zypp::url::decode(path)));
 
         checkUrlData(data, "path", config("rx_pathname"));
 
