@@ -119,7 +119,7 @@ proc multi-run { src } {
 
   puts "Running $base_name..."
 
-  set testcases [glob $base_name/*.xml ]
+  set testcases [glob $base_name/*-test.xml ]
 
   foreach testcase $testcases { 
       set testPath [split $testcase "/"]
@@ -131,14 +131,13 @@ proc multi-run { src } {
       #generate output directory
 
       exec mkdir -p ./$base_name/out
-      set errfile ./$base_name/out/$testBase_name.err
-      set referrfile ./$base_name/$testBase_name.err
-      set outfile ./$base_name/out/$testBase_name.out
-      set refoutfile ./$base_name/$testBase_name.out
+      set outfile ./$base_name/out/$testBase_name.mistake
+      set outfilegrep ./$base_name/out/$testBase_name.grep
+      set refoutfile ./$base_name/$testBase_name.solution
 
       # run the test
 
-      set command "LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:../src/.libs\" $src $testcase >$outfile 2>$errfile"
+      set command "LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:../src/.libs\" $src $testcase >$outfile 2>$outfile"
       set result ""
       set oops [catch { set result [exec sh -c $command] } catched]
 
@@ -156,24 +155,14 @@ proc multi-run { src } {
 	  continue
       }
 
+      exec sh -c "/usr/bin/fgrep \'>!>\' $outfile >$outfilegrep"
+
       if { [ file exists $refoutfile ] == 0 } {
 	  perror "Missing file $refoutfile" 0
       } else {
-	  if { [ diff $refoutfile $outfile ] != 1 } {
+	  if { [ diff $refoutfile $outfilegrep ] != 1 } {
 	      puts "Output doesn't match expected data:"
-	      puts [ exec sh -c "diff -u $refoutfile $outfile || true" ]
-	      fail $testBase_name
-	      set errorOccured 0
-	      continue
-	  }
-      }
-
-      if { [ file exists $referrfile ] == 0 } {
-	  perror "Missing file $referrfile" 0
-      } else {
-	  if { [ diff $referrfile $errfile ] != 1 } {
-	      puts "Output doesn't match expected data:"
-	      puts [ exec sh -c "diff -u $referrfile $errfile || true" ]
+	      puts [ exec sh -c "diff -u $refoutfile $outfilegrep || true" ]
 	      fail $testBase_name
 	      set errorOccured 0
 	      continue

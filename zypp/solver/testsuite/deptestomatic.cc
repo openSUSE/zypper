@@ -24,6 +24,7 @@
  * USA.
  */
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -305,8 +306,7 @@ add_to_world_cb (ResItem_constPtr resItem, void *data)
 static void
 load_channel (const string & name, const string & filename, const string & type, bool system_packages)
 {
-//    string pathname = "deptestomatic/" + filename;
-    string pathname = filename;
+    string pathname = "deptestomatic/" + filename;
 
     if (getenv ("RC_SPEW")) fprintf (stderr, "load_channel(%s,%s,%s,%s)\n", name.c_str(), pathname.c_str(), type.c_str(), system_packages?"system":"non-system");
 
@@ -731,6 +731,8 @@ init_libzypp (void)
 int
 main (int argc, char *argv[])
 {
+    setenv("ZYPP_NOLOG","1",1); // no logging
+    
     if (argc != 2) {
 	fprintf (stderr, "Usage: deptestomatic testfile.xml\n");
 	exit (0);

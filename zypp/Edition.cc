@@ -269,8 +269,7 @@ namespace zypp
   {
     string ret;
 
-#warning RE-fix asString and supress epoch
-//    if ( _pimpl->_epoch )
+    if ( _pimpl->_epoch )
       ret += str::form(  "%d:", _pimpl->_epoch );
 
     ret += _pimpl->_version;
