@@ -33,7 +33,7 @@
 #include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 { ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
     namespace solver
@@ -41,7 +41,7 @@ namespace zypp
   /////////////////////////////////////////////////////////////////////
   namespace detail
   { ///////////////////////////////////////////////////////////////////
-  
+
 using namespace std;
 
 //---------------------------------------------------------------------------
@@ -49,7 +49,7 @@ using namespace std;
 static Capability
 parse_dep_attrs(bool *is_obsolete, const xmlChar **attrs)
 {
-    CapFactory  factory;                
+    CapFactory  factory;
     int i;
     bool op_present = false;
     /* Temporary variables dependent upon the presense of an 'op' attribute */
@@ -147,7 +147,7 @@ sax_end_element(void *ptr, const xmlChar *name)
     XmlParser *ctx = (XmlParser *)ptr;
 
 //    _XXX("RC_SPEW_XML") << "* End element (" << (const char *)name << ")" << endl;
-    
+
     if (!strcmp((const char *)name, "channel") || !strcmp((const char *)name, "subchannel")) {
 	/* Unneeded container tags.  Ignore */
 	name = NULL;
@@ -308,7 +308,7 @@ XmlParser::parseChunk(const char *xmlbuf, size_t size)
 //    _DBG("RC_SPEW_XML") << "XmlParser::parseChunk(" << xmlbuf << "...," << (long)size << ")" << endl;
 
     xmlSubstituteEntitiesDefault(true);
-    
+
     if (!_xml_context) {
 	_xml_context = xmlCreatePushParserCtxt(&sax_handler, this, NULL, 0, NULL);
     }
@@ -327,7 +327,7 @@ XmlParser::done()
 
     if (_xml_context)
 	xmlFreeParserCtxt(_xml_context);
-    
+
     if (!_current_package_stored) {
 	fprintf (stderr, "Incomplete package lost\n");
     }
@@ -422,7 +422,7 @@ XmlParser::toplevelStart(const char * name, const xmlChar **attrs)
 	_current_package_installOnly = false;
 	_current_package_packageSet = false;
 	_current_package_packageUpdateList.clear();
-  
+
 	_current_requires.clear();
 	_current_provides.clear();
 	_current_conflicts.clear();
@@ -495,7 +495,7 @@ XmlParser::packageStart(const char * name, const xmlChar **attrs)
     else if (!strcmp(name, "children")) {
 	_state = PARSER_DEP;
 	_current_dep_list = _toplevel_dep_list = &_current_children;
-    } 
+    }
     else {
 	_XXX("RC_SPEW_XML") << "! Not handling " << name << " in package start" << endl;
     }
@@ -585,7 +585,7 @@ XmlParser::packageEnd(const char *name)
 #endif
 	// check if we provide ourselfs properly
 
-	CapFactory  factory;                                    
+	CapFactory  factory;
 	Capability selfdep = factory.parse ( ResTraits<zypp::Package>::kind,
 		                           _current_package_name,
 		                           Rel::EQ,
@@ -613,13 +613,13 @@ XmlParser::packageEnd(const char *name)
 	    package->setInstalled (true);
 
 	Dependencies deps;
-	deps.setRequires          (_current_requires);
-	deps.setProvides          (_current_provides);
-	deps.setConflicts         (_current_conflicts);
-	deps.setObsoletes         (_current_obsoletes);
-	deps.setSuggests          (_current_suggests);
-	deps.setRecommends        (_current_recommends);
-	package->setDependencies  (deps);
+	deps.requires          = _current_requires;
+	deps.provides          = _current_provides;
+	deps.conflicts         = _current_conflicts;
+	deps.obsoletes         = _current_obsoletes;
+	deps.suggests          = _current_suggests;
+	deps.recommends        = _current_recommends;
+	package->deprecatedSetDependencies  (deps);
 	package->setPrettyName    (_current_package_prettyName);
 	package->setSummary       (_current_package_summary);
 	package->setDescription   (_current_package_description);
@@ -635,7 +635,7 @@ XmlParser::packageEnd(const char *name)
 	    package->addUpdate (update);
 	}
 	_all_packages.push_back (package);
-	
+
 //	_DBG("RC_SPEW") << package->asString(true) << endl;
 	_DBG("RC_SPEW_XML") << "XmlParser::packageEnd done: '" << package->asString(true) << "'" << endl;
 //	_XXX("RC_SPEW_XML") << "XmlParser::packageEnd now " << _all_packages.size() << " packages" << endl;
@@ -741,7 +741,7 @@ XmlParser::dependencyEnd(const char *name)
 //    _XXX("RC_SPEW_XML") << "XmlParser::dependencyEnd(" << name << ")" << endl;
 
     if (!strcmp(name, "or")) {
-#if 0 
+#if 0
 	OrDependency_Ptr or_dep = OrDependency::fromDependencyList (*_current_dep_list);
 	Dependency_Ptr dep = new Dependency (or_dep);
 
@@ -780,7 +780,7 @@ rc_xml_node_to_resItem_dep_internal (const xmlNode *node)
     guint32 epoch = 0;
     RCResItemRelation relation;
     RCResItemDep *dep;
-    
+
     gchar *tmp;
 
     if (g_strcasecmp (node->name, "dep")) {
@@ -791,7 +791,7 @@ rc_xml_node_to_resItem_dep_internal (const xmlNode *node)
     tmp = xml_get_prop (node, "op");
     if (tmp) {
 	relation = rc_resItem_relation_from_string (tmp);
-	
+
 	has_epoch = xml_get_guint32_value (node, "epoch", &epoch);
 
 	version = xml_get_prop (node, "version");

@@ -137,7 +137,7 @@ namespace zypp
           const CapSet & recommends() const { return _resObject->recommends(); }
           const CapSet & freshens() const { return _resObject->freshens(); }
 
-          void setDependencies (const Dependencies & dependencies) { _resObject->setDeps(dependencies); }
+          void deprecatedSetDependencies (const Dependencies & dependencies) { _resObject->deprecatedSetDeps(dependencies); }
 
           ResObject::constPtr resObject() { return _resObject; }
 

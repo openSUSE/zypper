@@ -112,11 +112,7 @@ namespace zypp
 	       it != _atoms.end();
 	       it++)
 	  {
-	    Dependencies _deps = (*it)->deps();
-	    CapSet _req = _deps.requires();
-	    _req.insert(cap);
-	    _deps.setRequires(_req);
-	    (*it)->setDeps(_deps);
+            (*it)->injectRequires(cap);
 	  }
 
 	}

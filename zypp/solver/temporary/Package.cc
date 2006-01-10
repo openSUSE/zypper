@@ -436,13 +436,13 @@ Package::Package (XmlNode_constPtr node, Channel_constPtr channel)
     }
 
     Dependencies deps;
-    deps.setRequires          (dep_table.requires);
-    deps.setProvides          (dep_table.provides);
-    deps.setConflicts         (dep_table.conflicts);
-    deps.setObsoletes         (dep_table.obsoletes);
-    deps.setSuggests          (dep_table.suggests);
-    deps.setRecommends        (dep_table.recommends);
-    setDependencies (deps);
+    deps.requires          = dep_table.requires;
+    deps.provides          = dep_table.provides;
+    deps.conflicts         = dep_table.conflicts;
+    deps.obsoletes         = dep_table.obsoletes;
+    deps.suggests          = dep_table.suggests;
+    deps.recommends        = dep_table.recommends;
+    deprecatedSetDependencies (deps);
 
     if (!_history.empty()) {
 

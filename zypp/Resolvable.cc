@@ -68,36 +68,37 @@ namespace zypp
   { return _pimpl->arch(); }
 
   const CapSet & Resolvable::provides() const
-  { return _pimpl->deps().provides(); }
+  { return _pimpl->deps().provides; }
 
   const CapSet & Resolvable::prerequires() const
-  { return _pimpl->deps().prerequires(); }
+  { return _pimpl->deps().prerequires; }
 
   const CapSet & Resolvable::requires() const
-  { return _pimpl->deps().requires(); }
+  { return _pimpl->deps().requires; }
 
   const CapSet & Resolvable::conflicts() const
-  { return _pimpl->deps().conflicts(); }
+  { return _pimpl->deps().conflicts; }
 
   const CapSet & Resolvable::obsoletes() const
-  { return _pimpl->deps().obsoletes(); }
+  { return _pimpl->deps().obsoletes; }
 
   const CapSet & Resolvable::recommends() const
-  { return _pimpl->deps().recommends(); }
+  { return _pimpl->deps().recommends; }
 
   const CapSet & Resolvable::suggests() const
-  { return _pimpl->deps().suggests(); }
+  { return _pimpl->deps().suggests; }
 
   const CapSet & Resolvable::freshens() const
-  { return _pimpl->deps().freshens(); }
+  { return _pimpl->deps().freshens; }
 
+#warning IMPLEMENT IT
+  void Resolvable::injectProvides( const Capability & cap_r )
+  {}
+  void Resolvable::injectRequires( const Capability & cap_r )
+  {}
 
-  const Dependencies & Resolvable::deps() const
-  { return _pimpl->deps(); }
-
-  void Resolvable::setDeps( const Dependencies & val_r )
+  void Resolvable::deprecatedSetDeps( const Dependencies & val_r )
   { _pimpl->setDeps( val_r ); }
-
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

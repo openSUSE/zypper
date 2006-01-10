@@ -305,15 +305,17 @@ namespace zypp
 	  {
 	    shared_ptr<YUMPackageImpl> impl(
 	      new YUMPackageImpl(parsed, filelist, other));
-	    Dependencies _deps = createDependencies(parsed,
-	  					  ResTraits<Package>::kind);
+
+            // Collect basic Resolvable data
+            NVRAD dataCollect( parsed.name,
+                               Edition( parsed.ver, parsed.rel, parsed.epoch ),
+                               Arch( parsed.arch ),
+                               createDependencies(parsed,
+                                                   ResTraits<Package>::kind)
+                             );
 	    Package::Ptr package = detail::makeResolvableFromImpl(
-	      parsed.name,
-	      Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	      Arch( parsed.arch ),
-	      impl
+	      dataCollect, impl
 	    );
-	    package->setDeps(_deps);
 	    return package;
 	  }
 	  catch (const Exception & excpt_r)
@@ -330,15 +332,17 @@ namespace zypp
 	  try
 	  {
 	    shared_ptr<YUMPackageImpl> impl(new YUMPackageImpl(parsed));
-	    Dependencies _deps = createDependencies(parsed,
-	  					  ResTraits<Package>::kind);
+
+            // Collect basic Resolvable data
+            NVRAD dataCollect( parsed.name,
+                               Edition( parsed.ver, parsed.rel, parsed.epoch ),
+                               Arch( parsed.arch ),
+                               createDependencies(parsed,
+                                                   ResTraits<Package>::kind)
+                             );
 	    Package::Ptr package = detail::makeResolvableFromImpl(
-	      parsed.name,
-	      Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	      Arch( parsed.arch ),
-	      impl
+	      dataCollect, impl
 	    );
-	    package->setDeps(_deps);
 	    return package;
 	  }
 	  catch (const Exception & excpt_r)
@@ -377,15 +381,17 @@ namespace zypp
 	  try
 	  {
 	    shared_ptr<YUMMessageImpl> impl(new YUMMessageImpl(parsed));
-	    Dependencies _deps = createDependencies(parsed,
-						    ResTraits<Message>::kind);
+
+            // Collect basic Resolvable data
+            NVRAD dataCollect( parsed.name,
+                               Edition( parsed.ver, parsed.rel, parsed.epoch ),
+                               Arch_noarch,
+                               createDependencies(parsed,
+                                                   ResTraits<Message>::kind)
+                             );
 	    Message::Ptr message = detail::makeResolvableFromImpl(
-	      parsed.name,
-	      Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	      Arch_noarch,
-	      impl
+	      dataCollect, impl
 	    );
-	    message->setDeps(_deps);
 	    return message;
 	  }
 	  catch (const Exception & excpt_r)
@@ -402,15 +408,17 @@ namespace zypp
 	  try
 	  {
 	    shared_ptr<YUMScriptImpl> impl(new YUMScriptImpl(parsed));
-	    Dependencies _deps = createDependencies(parsed,
-						    ResTraits<Script>::kind);
+
+            // Collect basic Resolvable data
+            NVRAD dataCollect( parsed.name,
+                               Edition( parsed.ver, parsed.rel, parsed.epoch ),
+                               Arch_noarch,
+                               createDependencies(parsed,
+                                                   ResTraits<Script>::kind)
+                             );
 	    Script::Ptr script = detail::makeResolvableFromImpl(
-	      parsed.name,
-	      Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	      Arch_noarch,
-	      impl
+	      dataCollect, impl
 	    );
-	    script->setDeps(_deps);
 	    return script;
 	  }
 	  catch (const Exception & excpt_r)
@@ -427,15 +435,17 @@ namespace zypp
 	  try
 	  {
 	    shared_ptr<YUMProductImpl> impl(new YUMProductImpl(parsed, this));
-	    Dependencies _deps = createDependencies(parsed,
-						    ResTraits<Product>::kind);
+
+            // Collect basic Resolvable data
+            NVRAD dataCollect( parsed.name,
+                               Edition( parsed.ver, parsed.rel, parsed.epoch ),
+                               Arch_noarch,
+                               createDependencies(parsed,
+                                                   ResTraits<Product>::kind)
+                             );
 	    Product::Ptr product = detail::makeResolvableFromImpl(
-	      parsed.name,
-	      Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	      Arch_noarch,
-	      impl
+	      dataCollect, impl
 	    );
-	    product->setDeps(_deps);
 	    return product;
 	  }
 	  catch (const Exception & excpt_r)
@@ -452,15 +462,17 @@ namespace zypp
 	  try
 	  {
 	    shared_ptr<YUMPatchImpl> impl(new YUMPatchImpl(parsed, this));
-	    Dependencies _deps = createDependencies(parsed,
-						    ResTraits<Patch>::kind);
+
+            // Collect basic Resolvable data
+            NVRAD dataCollect( parsed.name,
+                               Edition( parsed.ver, parsed.rel, parsed.epoch ),
+                               Arch_noarch,
+                               createDependencies(parsed,
+                                                   ResTraits<Patch>::kind)
+                             );
 	    Patch::Ptr patch = detail::makeResolvableFromImpl(
-	      parsed.name,
-	      Edition( parsed.ver, parsed.rel, parsed.epoch ),
-	      Arch_noarch,
-	      impl
+	      dataCollect, impl
 	    );
-	    patch->setDeps(_deps);
 	    return patch;
 	  }
 	  catch (const Exception & excpt_r)
@@ -475,39 +487,33 @@ namespace zypp
 	  const Resolvable::Kind my_kind
 	)
 	{
-	  CapSet _provides;
-	  CapSet _conflicts;
-	  CapSet _obsoletes;
-	  CapSet _freshens;
-	  CapSet _requires;
-	  CapSet _prerequires;
 	  Dependencies _deps;
 	  for (std::list<YUMDependency>::const_iterator it = parsed.provides.begin();
 	       it != parsed.provides.end();
 	       it++)
 	  {
-	    _provides.insert(createCapability(*it, my_kind));
+	    _deps.provides.insert(createCapability(*it, my_kind));
 	  }
 
 	  for (std::list<YUMDependency>::const_iterator it = parsed.conflicts.begin();
 	       it != parsed.conflicts.end();
 	       it++)
 	  {
-	    _conflicts.insert(createCapability(*it, my_kind));
+	    _deps.conflicts.insert(createCapability(*it, my_kind));
 	  }
 
 	  for (std::list<YUMDependency>::const_iterator it = parsed.obsoletes.begin();
 	       it != parsed.obsoletes.end();
 	       it++)
 	  {
-	    _obsoletes.insert(createCapability(*it, my_kind));
+	    _deps.obsoletes.insert(createCapability(*it, my_kind));
 	  }
 
 	  for (std::list<YUMDependency>::const_iterator it = parsed.freshen.begin();
 	       it != parsed.freshen.end();
 	       it++)
 	  {
-	    _freshens.insert(createCapability(*it, my_kind));
+	    _deps.freshens.insert(createCapability(*it, my_kind));
 	  }
 
 	  for (std::list<YUMDependency>::const_iterator it = parsed.requires.begin();
@@ -515,17 +521,11 @@ namespace zypp
 	       it++)
 	  {
 	    if (it->pre == "1")
-	      _prerequires.insert(createCapability(*it, my_kind));
+	      _deps.prerequires.insert(createCapability(*it, my_kind));
 	    else
-	      _requires.insert(createCapability(*it, my_kind));
+	      _deps.requires.insert(createCapability(*it, my_kind));
 	  }
 
-	  _deps.setProvides(_provides);
-	  _deps.setConflicts(_conflicts);
-	  _deps.setObsoletes(_obsoletes);
-	  _deps.setFreshens(_freshens);
-	  _deps.setRequires(_requires);
-	  _deps.setPrerequires(_prerequires);
 	  return _deps;
 	}
 

@@ -23,13 +23,13 @@
 #include "zypp/Edition.h"
 #include "zypp/Arch.h"
 #include "zypp/CapSetFwd.h"
-#include "zypp/Dependencies.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   struct NVRAD;
+  class Dependencies;
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -68,10 +68,10 @@ namespace zypp
     const CapSet & freshens() const;
     //@}
 
-    /**  */
-    const Dependencies & deps() const;
     /** */
-    void setDeps( const Dependencies & val_r );
+    void deprecatedSetDeps( const Dependencies & val_r );
+    void injectProvides( const Capability & cap_r );
+    void injectRequires( const Capability & cap_r );
 
   protected:
     /** Ctor */

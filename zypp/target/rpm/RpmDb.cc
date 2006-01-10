@@ -993,16 +993,16 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
       // else overwrite previous entry
     }
 
-    // create dataprovider and package
+    // create dataprovider
     shared_ptr<RPMPackageImpl> impl(new RPMPackageImpl(*iter));
-    nptr = detail::makeResolvableFromImpl(
-      iter->tag_name(),
-      iter->tag_edition(),
-      iter->tag_arch(),
-      impl);
+
+    // Collect basic Resolvable data
+    NVRAD dataCollect( iter->tag_name(),
+                       iter->tag_edition(),
+                       iter->tag_arch() );
 
     list<string> filenames = impl->filenames();
-    CapSet provides = iter->tag_provides ( & _filerequires );
+    dataCollect.deps.provides = iter->tag_provides ( & _filerequires );
     for (list<string>::const_iterator filename = filenames.begin();
          filename != filenames.end();
          filename++)
@@ -1017,17 +1017,18 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
         || filename->find("/usr/share/magic.mime")
         || filename->find("/opt/gnome/games"))
       {
-	provides.insert(_f.parse(ResTraits<Package>::kind, *filename));
+	dataCollect.deps.provides.insert(_f.parse(ResTraits<Package>::kind, *filename));
       }
     }
 
-    Dependencies _deps;
-    _deps.setProvides( provides );
-    _deps.setRequires ( iter->tag_requires ( &_filerequires ) );
-    _deps.setPrerequires ( iter->tag_prerequires ( &_filerequires ) );
-    _deps.setConflicts( iter->tag_conflicts( &_filerequires ) );
-    _deps.setObsoletes( iter->tag_obsoletes( &_filerequires ) );
-    nptr->setDeps(_deps);
+    dataCollect.deps.requires    = iter->tag_requires ( &_filerequires );
+    dataCollect.deps.prerequires = iter->tag_prerequires ( &_filerequires );
+    dataCollect.deps.conflicts   = iter->tag_conflicts( &_filerequires );
+    dataCollect.deps.obsoletes   = iter->tag_obsoletes( &_filerequires );
+
+    // create package from dataprovider
+    nptr = detail::makeResolvableFromImpl( dataCollect, impl );
+
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -1041,11 +1042,7 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
 	WAR << "rpmdb.findByFile returned unknown package " << *iter << endl;
 	continue;
       }
-      Dependencies _deps = pptr->deps();
-      CapSet _provides = _deps.provides();
-      _provides.insert(_f.parse(ResTraits<Package>::kind, *it));
-      _deps.setProvides(_provides);
-      pptr->setDeps(_deps);
+      pptr->injectProvides(_f.parse(ResTraits<Package>::kind, *it));
     }
 
   }
