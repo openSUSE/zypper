@@ -9,6 +9,8 @@
 /** \file zypp/base/Logger.cc
  *
 */
+#include <cstdlib>
+
 #include <iostream>
 
 #include "zypp/base/Logger.h"
@@ -23,6 +25,15 @@ namespace zypp
   namespace base
   { /////////////////////////////////////////////////////////////////
 
+    namespace
+    {
+      std::ostream & noStream()
+      {
+        static std::ostream no_stream( 0 );
+        return no_stream;
+      }
+    }
+
     ///////////////////////////////////////////////////////////////////
     namespace logger
     { /////////////////////////////////////////////////////////////////
@@ -33,10 +44,12 @@ namespace zypp
                                 const char * func_r,
                                 const int    line_r )
       {
-        return (level_r < 0 ? std::cout : std::cerr)
-               << str::form( "<%d> [%s] %s(%s):%d ",
-                             level_r, group_r,
-                             file_r, func_r, line_r );
+        static std::ostream & outStr( getenv("ZYPP_NOLOG") ? noStream()
+                                                           : std::cerr );
+        return outStr
+                 << str::form( "<%d> [%s] %s(%s):%d ",
+                               level_r, group_r,
+                               file_r, func_r, line_r );
       }
 
       /////////////////////////////////////////////////////////////////
