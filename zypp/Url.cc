@@ -127,7 +127,7 @@ namespace zypp
       {
         UrlRef ref(urlImpl);
         ref->clear();
-        urlByScheme[scheme] = ref;
+        urlByScheme[str::toLower(scheme)] = ref;
         return true;
       }
       return false;
@@ -136,7 +136,7 @@ namespace zypp
     UrlRef
     getUrlByScheme(const std::string &scheme) const
     {
-      UrlBySchemeMap::const_iterator i(urlByScheme.find(scheme));
+      UrlBySchemeMap::const_iterator i(urlByScheme.find(str::toLower(scheme)));
       if( i != urlByScheme.end())
       {
         return i->second;

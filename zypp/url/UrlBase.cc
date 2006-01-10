@@ -265,11 +265,13 @@ namespace zypp
     bool
     UrlBase::isKnownScheme(const std::string &scheme) const
     {
-      Schemes schemes(getKnownSchemes());
+      std::string             lscheme( str::toLower(scheme));
+      Schemes                 schemes( getKnownSchemes());
       Schemes::const_iterator s;
+
       for(s=schemes.begin(); s!=schemes.end(); ++s)
       {
-        if( scheme == *s)
+        if( lscheme == str::toLower(*s))
           return true;
       }
       return false;
@@ -283,7 +285,8 @@ namespace zypp
       if(scheme.empty() ||
          str::regex_match(scheme, str::regex(config("rx_scheme"))))
       {
-        Schemes schemes(getKnownSchemes());
+        std::string lscheme( str::toLower(scheme));
+        Schemes     schemes( getKnownSchemes());
 
         if( schemes.empty())
           return true;
@@ -291,7 +294,7 @@ namespace zypp
         Schemes::const_iterator s;
         for(s=schemes.begin(); s!=schemes.end(); ++s)
         {
-          if( scheme == *s)
+          if( scheme == str::toLower(*s))
             return true;
         }
       }
