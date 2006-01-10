@@ -124,15 +124,24 @@ std::string toXML( Resolvable::Ptr obj )
 }
 
 template<> // or constPtr?
-std::string toXML( Patch::Ptr obj )
+std::string toXML( Package::Ptr obj )
 {
   stringstream out;
-  out << "<patch>" << std::endl;
+  /*
+  out << "<script>" << std::endl;
   // reuse Resolvable information serialize function
   toXML(static_cast<Resolvable::Ptr>(obj));
-  out << "  </atoms>" << std::endl;
-  out << "  </atoms>" << std::endl;
-  out << "</patch>" << std::endl;
+  out << "  <do>" << std::endl;
+  out << "      " << obj->do_script() << std::endl;
+  out << "  </do>" << std::endl;
+  if ( obj->undo_available() )
+  {
+    out << "  <undo>" << std::endl;
+    out << "      " << obj->undo_script() << std::endl;
+    out << "  </undo>" << std::endl;
+  }
+  out << "</script>" << std::endl;
+  */
   return out.str();
 }
 
@@ -142,7 +151,7 @@ std::string toXML( Script::Ptr obj )
   stringstream out;
   out << "<script>" << std::endl;
   // reuse Resolvable information serialize function
-  toXML(static_cast<Resolvable::Ptr>(obj));
+  out << toXML(static_cast<Resolvable::Ptr>(obj));
   out << "  <do>" << std::endl;
   out << "      " << obj->do_script() << std::endl;
   out << "  </do>" << std::endl;
@@ -162,9 +171,37 @@ std::string toXML( Message::Ptr obj )
   stringstream out;
   out << "<message type=\"" << obj->type() << "\">" << std::endl;
   // reuse Resolvable information serialize function
-  toXML(static_cast<Resolvable::Ptr>(obj));
+  out << toXML(static_cast<Resolvable::Ptr>(obj));
   out << "  <text>" << obj->text() << "</text>" << std::endl;
   out << "</message>" << std::endl;
+  return out.str();
+}
+
+template<> // or constPtr?
+std::string toXML( Patch::Ptr obj )
+{
+  stringstream out;
+  out << "<patch>" << std::endl;
+  // reuse Resolvable information serialize function
+  out << toXML(static_cast<Resolvable::Ptr>(obj));
+  Patch::AtomList at = obj->atoms();
+  for (Patch::AtomList::iterator it = at.begin(); it != at.end(); it++)
+  {
+    // atoms tag here looks weird but lets follow YUM
+    out << "  <atoms>" << std::endl;
+    // I have a better idea to avoid the cast here (Michaels code in his tmp/)
+    Resolvable::Ptr one_atom = *it;
+    if ( isKind<Package>(one_atom) )
+       out << toXML(asKind<Package>(one_atom)) << std::endl;
+    if ( isKind<Patch>(one_atom) )
+       out << toXML(asKind<Patch>(one_atom)) << std::endl;
+    if ( isKind<Message>(one_atom) )
+       out << toXML(asKind<Message>(one_atom)) << std::endl;
+    if ( isKind<Script>(one_atom) )
+       out << toXML(asKind<Script>(one_atom)) << std::endl;
+    out << "  </atoms>" << std::endl;
+  }
+  out << "</patch>" << std::endl;
   return out.str();
 }
 
@@ -193,12 +230,11 @@ class XMLBackend : public base::ReferenceCounted, private base::NonCopyable
     DBG << endl;
   }
   
-  void storeObject( Resolvable::Ptr res )
+  void storePatch( Patch::Ptr p )
   {
     DBG << std::endl;
-    DBG << std::endl << toXML(res) << std::endl;
+    DBG << std::endl << toXML(p) << std::endl;
   }
-
 	private:
 	//std::ostream & operator<<( std::ostream & str, const PatchYUMSerializer & obj )
 };
@@ -236,23 +272,8 @@ int main()
 	if (iter.errorStatus())
 		throw *iter.errorStatus();
 
-	// process the patch
-	
-	//DBG << patch1 << endl;
-	//DBG << *patch1 << endl;
-	//DBG << patch1->deps() << endl;
-	//Patch::AtomList at = patch1->atoms();
-	//for (Patch::AtomList::iterator it = at.begin(); it != at.end(); it++)
-	//{
-	//	DBG << **it << endl;
-	//	DBG << (**it).deps() << endl;
-	//}
-	//INT << "===[END]============================================" << endl;
-	//PatchYUMSerializer serializer(patch1);
-	//DBG << endl << serializer << endl;
-
   XMLBackend backend;
-  backend.storeObject(patch1);
+  backend.storePatch(patch1);
 	return 1;	
 }
 
