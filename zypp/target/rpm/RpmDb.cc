@@ -48,6 +48,36 @@ namespace zypp {
   namespace target {
     namespace rpm {
 
+unsigned diffFiles(const std::string file1, const std::string file2, std::string& out, int maxlines)
+{
+    const char* argv[] =
+    {
+        "diff",
+        "-u",
+        file1.c_str(),
+        file2.c_str(),
+        NULL
+    };
+    ExternalProgram* prog = new ExternalProgram(argv,ExternalProgram::Discard_Stderr, false, -1, true);
+
+    if(!prog)
+        return 2;
+
+    string line;
+    int count = 0;
+    for(line = prog->receiveLine(), count=0;
+        !line.empty();
+        line = prog->receiveLine(), count++ )
+    {
+        if(maxlines<0?true:count<maxlines)
+            out+=line;
+    }
+
+    return prog->close();
+}
+
+
+
 /******************************************************************
 **
 **
@@ -1062,7 +1092,7 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
   return _packages._list;
 }
 
-#warning Uncomment this function
+#warning Uncomment this function if it is needed
 #if 0
 ///////////////////////////////////////////////////////////////////
 //
@@ -1527,9 +1557,7 @@ void RpmDb::processConfigFiles(const string& line, const string& name, const cha
 	}
 
 	string out;
-#warning FIXME the diffing functionality
-#if 0
-	int ret = Diff::differ (file1.asString(), file2.asString(), out, 25);
+	int ret = diffFiles (file1.asString(), file2.asString(), out, 25);
 	if (ret)
 	{
 	    Pathname file = _root + WARNINGMAILPATH;
@@ -1583,7 +1611,6 @@ void RpmDb::processConfigFiles(const string& line, const string& name, const cha
 	{
 	    WAR << "rpm created " << file2 << " but it is not different from " << file2 << endl;
 	}
-#endif
 	break;
     }
 }
