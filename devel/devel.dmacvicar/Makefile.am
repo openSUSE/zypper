@@ -21,7 +21,7 @@ LDADD =		$(top_srcdir)/zypp/lib@PACKAGE@.la -lboost_regex -lboost_filesystem -ld
 
 ## ##################################################
 
-test2_SOURCES = test2.cc
+test2_SOURCES = test2.cc PersistentStorage.cc Backend.cc XMLFilesBackend.cc serialize.cc
 
 test2_debug_SOURCES = 	$(test2_SOURCES)
 test2_debug_LDFLAGS =	-static

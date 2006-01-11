@@ -17,6 +17,7 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
+#include <zypp/Patch.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -40,6 +41,9 @@ namespace zypp
 			/** Dtor */
 			~PersistentStorage();
 			void doTest();
+      void storePatch( Patch::Ptr p );
+      std::list<Patch::Ptr> installedPatches();
+ 
 		private:
 			class Private;
 			Private *d;

@@ -15,23 +15,6 @@
 #include <zypp/base/Logger.h>
 ///////////////////////////////////////////////////////////////////
 
-#include <zypp/Message.h>
-#include <zypp/detail/MessageImpl.h>
-#include <zypp/detail/PatchImpl.h>
-#include <zypp/Patch.h>
-#include <zypp/Package.h>
-#include <zypp/Script.h>
-#include <zypp/Message.h>
-#include <zypp/Edition.h>
-#include <zypp/CapSet.h>
-#include <zypp/detail/PackageImpl.h>
-#include <zypp/Script.h>
-#include <zypp/detail/ScriptImpl.h>
-#include <zypp/Resolvable.h>
-#include <zypp/detail/ResolvableImpl.h>
-#include <zypp/Capability.h>
-#include <zypp/capability/CapabilityImpl.h>
-
 #include <zypp/parser/yum/YUMParser.h>
 #include <zypp/base/Logger.h>
 #include <zypp/source/yum/YUMScriptImpl.h>
@@ -44,6 +27,8 @@
 
 #include <zypp/CapFactory.h>
 
+#include "serialize.h"
+
 using namespace zypp::detail;
 
 using namespace std;
@@ -52,293 +37,9 @@ using namespace zypp::parser::yum;
 using namespace zypp::source::yum;
 using namespace zypp::storage;
 
-using namespace boost::filesystem;                   // for ease of tutorial presentation;
-                                           // a namespace alias is preferred in real code
-using namespace boost::iostreams;
+
 
 //using namespace DbXml;
-
-template<class T>
-std::string toXML( T obj ); //undefined
-
-template<> // or constPtr?
-std::string toXML( const Edition edition )
-{
-  stringstream out;
-  // sad the yum guys did not acll it edition
-  out << "<version ver=\"" << edition.version() << "\" rel=\"" << edition.release() << "\"/>";
-  return out.str();
-}
-
-template<> // or constPtr?
-std::string toXML( Capability cap )
-{
-  stringstream out;
-  out << "<entry kind=\"" << cap.refers() << " name=\"" <<  cap.asString() << "\" />";
-  return out.str();
-}
-
-template<> // or constPtr?
-std::string toXML( const CapSet caps )
-{
-  stringstream out;
-  CapSet::iterator it = caps.begin();
-  for ( ; it != caps.end(); ++it)
-  {
-    out << toXML((*it));
-  }
-  return out.str(); 
-}
-
-template<> // or constPtr?
-std::string toXML( const Dependencies dep )
-{
-  stringstream out;
-  out << "    <provides>" << std::endl;
-  out << "    " << toXML(dep.provides) << std::endl;
-  out << "    </provides>" << std::endl;
-  out << "    <prerequires>" << std::endl;
-  out << "    " << toXML(dep.prerequires) << std::endl;
-  out << "    </prerequires>" << std::endl;
-  out << "    <requires>" << std::endl;
-  out << "    " << toXML(dep.requires) << std::endl;
-  out << "    </requires>" << std::endl;
-  out << "    <conflicts>" << std::endl;
-  out << "    " << toXML(dep.conflicts) << std::endl;
-  out << "    </conflicts>" << std::endl;
-  out << "    <obsoletes>" << std::endl;
-  out << "    " << toXML(dep.obsoletes) << std::endl;
-  out << "    </obsoletes>" << std::endl;  
-  out << "    <freshens>" << std::endl;
-  out << "    " << toXML(dep.freshens) << std::endl;
-  out << "    </freshens>" << std::endl;
-  out << "    <suggests>" << std::endl;
-  out << "    " << toXML(dep.suggests) << std::endl;
-  out << "    </suggest>" << std::endl;
-  out << "    <recommends>" << std::endl;
-  out << "    " << toXML(dep.recommends) << std::endl;
-  out << "    </recommends>" << std::endl;  
-  return out.str();
-  
-}
-
-template<> // or constPtr?
-std::string toXML( Resolvable::Ptr obj )
-{
-  stringstream out;
-  
-  out << "  <name>" << obj->name() << "</name>" << std::endl;
-  // is this shared? uh
-  out << "  " << toXML(obj->edition()) << std::endl;
-  out << "  " << toXML(obj->deps()) << std::endl;
-  return out.str();
-}
-
-template<> // or constPtr?
-std::string toXML( Package::Ptr obj )
-{
-  stringstream out;
-  out << "<package>" << std::endl;
-  // reuse Resolvable information serialize function
-  toXML(static_cast<Resolvable::Ptr>(obj));
-  out << "  <do>" << std::endl;
-  //out << "      " << obj->do_script() << std::endl;
-  out << "  </do>" << std::endl;
-  out << "</package>" << std::endl;
-  return out.str();
-}
-
-template<> // or constPtr?
-std::string toXML( Script::Ptr obj )
-{
-  stringstream out;
-  out << "<script>" << std::endl;
-  // reuse Resolvable information serialize function
-  out << toXML(static_cast<Resolvable::Ptr>(obj));
-  out << "  <do>" << std::endl;
-  out << "      " << obj->do_script() << std::endl;
-  out << "  </do>" << std::endl;
-  if ( obj->undo_available() )
-  {
-    out << "  <undo>" << std::endl;
-    out << "      " << obj->undo_script() << std::endl;
-    out << "  </undo>" << std::endl;
-  }
-  out << "</script>" << std::endl;
-  return out.str();
-}
-
-template<> // or constPtr?
-std::string toXML( Message::Ptr obj )
-{
-  stringstream out;
-  out << "<message type=\"" << obj->type() << "\">" << std::endl;
-  // reuse Resolvable information serialize function
-  out << toXML(static_cast<Resolvable::Ptr>(obj));
-  out << "  <text>" << obj->text() << "</text>" << std::endl;
-  out << "</message>" << std::endl;
-  return out.str();
-}
-
-template<> // or constPtr?
-std::string toXML( Patch::Ptr obj )
-{
-  stringstream out;
-  out << "<patch>" << std::endl;
-  // reuse Resolvable information serialize function
-  out << toXML(static_cast<Resolvable::Ptr>(obj));
-  Patch::AtomList at = obj->atoms();
-  for (Patch::AtomList::iterator it = at.begin(); it != at.end(); it++)
-  {
-    // atoms tag here looks weird but lets follow YUM
-    out << "  <atoms>" << std::endl;
-    // I have a better idea to avoid the cast here (Michaels code in his tmp/)
-    Resolvable::Ptr one_atom = *it;
-    if ( isKind<Package>(one_atom) )
-       out << toXML(asKind<Package>(one_atom)) << std::endl;
-    if ( isKind<Patch>(one_atom) )
-       out << toXML(asKind<Patch>(one_atom)) << std::endl;
-    if ( isKind<Message>(one_atom) )
-       out << toXML(asKind<Message>(one_atom)) << std::endl;
-    if ( isKind<Script>(one_atom) )
-       out << toXML(asKind<Script>(one_atom)) << std::endl;
-    out << "  </atoms>" << std::endl;
-  }
-  out << "</patch>" << std::endl;
-  return out.str();
-}
-
-class StorageBackend : public base::ReferenceCounted, private base::NonCopyable
-{
-	public:
-	//friend std::ostream & operator<<( std::ostream & str, const PatchYUMSerializer & obj );
-	typedef intrusive_ptr<StorageBackend> Ptr;
-	typedef intrusive_ptr<const StorageBackend> constPtr;
-  
-  StorageBackend()
-	{
-		
-	}
-
-  ~StorageBackend()
-  {
-    DBG << endl;
-  }
-  virtual void initDatabase() = 0;
-  virtual void storePatch( Patch::Ptr p ) = 0;
-};
-
-#define ZYPP_DB_DIR "zypp_db"
-
-class TextBackend : public StorageBackend
-{
-  public:
-  //friend std::ostream & operator<<( std::ostream & str, const PatchYUMSerializer & obj );
-  typedef intrusive_ptr<TextBackend> Ptr;
-  typedef intrusive_ptr<const TextBackend> constPtr;
-
-  void initDatabase()
-  {
-    if ( !exists( ZYPP_DB_DIR ) )
-      initDirTree();
-  }
-
-  void initDirTree() const
-  {
-    // FIXME duncan * handle exceptions
-    DBG << "Creating directory structure..." << std::endl;
-    create_directory( path(ZYPP_DB_DIR) );
-    create_directory( path(ZYPP_DB_DIR) / path("patches") );
-    create_directory( path(ZYPP_DB_DIR) / path("selections") );
-    create_directory( path(ZYPP_DB_DIR) / path("products") );
-  }
-
-  TextBackend()
-  {
-    initDatabase();
-  }
-
-  ~TextBackend()
-  {
-    DBG << endl;
-  }
-  
-  std::string randomFileName() const
-  {
-    FILE *fp;
-    char puffer[49];
-    if ( (fp = popen("openssl rand -base64 48", "r")) == 0)
-    {
-      DBG << "mierda!" << std::endl;
-      //ZYPP_THROW("put some message here");
-    }
-    
-    /*Ausgabe der von der Pipe gelesenen Daten*/
-    fscanf(fp, "%s", &puffer);
-    pclose(fp);
-    return "blah";
-  }
-
-  std::string fileNameForPatch( Patch::Ptr patch ) const
-  {
-    return patch->id();
-  }
-
-  std::list<Patch::Ptr> installedPatches() const
-  {
-    return list<Patch::Ptr>();
-  }
-
-  void storePatch( Patch::Ptr p )
-  {
-    std::string xml = toXML(p);
-    DBG << std::endl << xml << std::endl;
-    std::ofstream file;
-    // FIXME replace with path class of boost
-    file.open( (std::string(ZYPP_DB_DIR) + std::string("/patches/") + fileNameForPatch(p)).c_str() );
-    file << xml;
-    file.close();
-  }
-  private:
-  //std::ostream & operator<<( std::ostream & str, const PatchYUMSerializer & obj )
-};
-
-
-class XMLBackend : public StorageBackend
-{
-  public:
-  //friend std::ostream & operator<<( std::ostream & str, const PatchYUMSerializer & obj );
-  typedef intrusive_ptr<XMLBackend> Ptr;
-  typedef intrusive_ptr<const XMLBackend> constPtr;
-
-  void initDatabase()
-  {
-    // Get a manager object.
-    //XmlManager myManager;
-    // Open a container
-    //XmlContainer myContainer =  myManager.openContainer("zypp_db.dbxml");
-  }
-
-  XMLBackend()
-  {
-    
-  }
-
-  ~XMLBackend()
-  {
-    DBG << endl;
-  }
-  
-  void storePatch( Patch::Ptr p )
-  {
-    DBG << std::endl;
-    
-    DBG << std::endl << toXML(p) << std::endl;
-  }
-  private:
-  //std::ostream & operator<<( std::ostream & str, const PatchYUMSerializer & obj )
-};
-
 
 int main()
 {
@@ -371,9 +72,21 @@ int main()
 	if (iter.errorStatus())
 		throw *iter.errorStatus();
 
-  TextBackend backend;
+  PersistentStorage backend;
   backend.storePatch(patch1);
-  cout << backend.randomFileName() << std::endl;
+
+  // test xml 2 object
+  std::string xml = toXML(patch1);
+  std::stringstream str;
+  str << xml;
+  Patch::Ptr patch2;
+  YUMPatchParser iter2(str,"");
+  for (; !iter2.atEnd(); ++iter2)
+  {
+    patch2 = src.createPatch(**iter2);
+  }
+  cout << toXML(patch2);
+  //backend.storePatch(patch1);
 	return 1;	
 }
 

@@ -15,6 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
+#include <zypp/Patch.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -39,6 +40,9 @@ namespace zypp
 			virtual void doTest() = 0;
 			virtual bool isDatabaseInitialized() = 0;
 			virtual void initDatabaseForFirstTime() = 0;
+      virtual void storePatch( Patch::Ptr p ) = 0;
+      virtual std::list<Patch::Ptr> installedPatches() = 0;
+ 
 		private:
 			/** Pointer to implementation */
 			class Private;
