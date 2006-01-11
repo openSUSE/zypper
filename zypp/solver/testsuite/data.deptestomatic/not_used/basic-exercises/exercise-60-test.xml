@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<test>
+
+<!--
+
+This test is the same as exercise 59, only inverted.
+
+-->
+
+
+<setup>
+  <system file="exercise-21-packages.xml"/>
+  <channel name="test" file="exercise-59-system.xml"/>
+</setup>
+<trial>
+  <install channel="test" package="B"/>
+</trial>
+</test>

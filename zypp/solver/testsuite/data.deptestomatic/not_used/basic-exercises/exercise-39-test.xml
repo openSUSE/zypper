@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<test>
+
+<setup>
+  <system file="exercise-25-system.xml"/>
+  <channel name="gnome2" file="exercise-39-packages.xml"/>
+</setup>
+
+<trial>
+  <install channel="gnome2" package="GConf2"/>
+</trial>
+
+</test>

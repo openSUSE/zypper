@@ -1,0 +1,9 @@
+>!> Installing A from channel test1
+>!> Solution #1:
+>!> install A-1.0-1[test1]
+>!> install B-1.0-1[test1]
+>!> installs=2, upgrades=0, uninstalls=0
+>!> Solution #2:
+>!> install A-1.0-1[test1]
+>!> install B-2.0-1[test2]
+>!> installs=2, upgrades=0, uninstalls=0

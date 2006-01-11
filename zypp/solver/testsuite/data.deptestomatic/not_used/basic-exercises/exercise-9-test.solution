@@ -1,0 +1,7 @@
+>!> Installing Y from channel test
+>!> Solution #1:
+>!> install AA-0:1.0-1[test]
+>!> install AAA-0:1.0-1[test]
+>!> install Y-0:1.0-1[test]
+>!> remove  A-0:1.0-1
+>!> installs=3, upgrades=0, uninstalls=1

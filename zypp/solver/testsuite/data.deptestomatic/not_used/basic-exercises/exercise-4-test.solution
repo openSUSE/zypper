@@ -1,0 +1,6 @@
+>!> Installing N from channel test
+>!> Solution #1:
+>!> install N-0:1.0-1[test]
+>!> remove  L-0:1.0-1
+>!> remove  M-0:1.0-1
+>!> installs=1, upgrades=0, uninstalls=2

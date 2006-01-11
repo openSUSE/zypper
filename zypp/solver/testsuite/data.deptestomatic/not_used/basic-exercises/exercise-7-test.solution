@@ -1,0 +1,6 @@
+>!> Installing AA from channel test
+>!> Installing BB from channel test
+>!> Solution #1:
+>!> install AA-0:1.0-1[test]
+>!> install BB-0:1.0-1[test]
+>!> installs=2, upgrades=0, uninstalls=0

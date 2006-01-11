@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-41-system.xml"/>
+  <channel name="mandrake" file="exercise-41-packages-1.xml"/>
+  <channel name="ximian" file="exercise-41-packages-2.xml"/>
+  <channel name="preview" file="exercise-41-packages-3.xml"/>
+</setup>
+<trial>
+  <install channel="ximian" package="xmms"/>
+  <install channel="ximian" package="gdm"/>
+  <install channel="mandrake" package="openssh-clients"/>
+  <install channel="ximian" package="xmms-esd"/>
+  <install channel="ximian" package="libxmms1-devel"/>
+  <install channel="mandrake" package="glibc-devel"/>
+  <install channel="mandrake" package="libsasl7-plug-digestmd5"/>
+  <install channel="ximian" package="gnumeric-devel"/>
+  <install channel="ximian" package="control-center"/>
+  <install channel="mandrake" package="gcc"/>
+  <install channel="mandrake" package="util-linux"/>
+  <install channel="mandrake" package="openldap"/>
+  <install channel="mandrake" package="libnss3"/>
+  <install channel="ximian" package="ORBit"/>
+  <install channel="mandrake" package="libstdc++2.10"/>
+  <install channel="ximian" package="xmms-diskwriter"/>
+  <install channel="mandrake" package="perl-URI"/>
+  <install channel="mandrake" package="initscripts"/>
+  <install channel="mandrake" package="ldconfig"/>
+  <install channel="ximian" package="galeon"/>
+  <install channel="ximian" package="xmms-mesa"/>
+  <install channel="ximian" package="gnome-core-devel"/>
+  <install channel="mandrake" package="libsasl7-devel"/>
+  <install channel="mandrake" package="gcc-c++"/>
+  <install channel="mandrake" package="zlib1-devel"/>
+  <install channel="mandrake" package="bison"/>
+  <install channel="mandrake" package="procmail"/>
+  <install channel="mandrake" package="groff"/>
+  <install channel="mandrake" package="flex"/>
+  <install channel="mandrake" package="krb5-libs"/>
+  <install channel="ximian" package="gnumeric"/>
+  <install channel="mandrake" package="libsasl7-plug-login"/>
+  <install channel="mandrake" package="zlib1"/>
+  <install channel="mandrake" package="gzip"/>
+  <install channel="mandrake" package="libldap2"/>
+  <install channel="mandrake" package="libsasl7"/>
+  <install channel="mandrake" package="groff-for-man"/>
+  <install channel="mandrake" package="passwd"/>
+  <install channel="ximian" package="libxmms1"/>
+  <install channel="mandrake" package="gcc-cpp"/>
+  <install channel="mandrake" package="libsasl7-plug-crammd5"/>
+  <install channel="ximian" package="control-center-devel"/>
+  <install channel="mandrake" package="rsync"/>
+  <install channel="mandrake" package="libgnet1-devel"/>
+  <install channel="mandrake" package="sudo"/>
+  <install channel="mandrake" package="libstdc++2.10-devel"/>
+  <install channel="mandrake" package="glibc"/>
+  <install channel="ximian" package="ORBit-devel"/>
+  <install channel="mandrake" package="libldap2-devel"/>
+  <install channel="mandrake" package="libsasl7-plug-plain"/>
+  <install channel="mandrake" package="libnspr4"/>
+  <install channel="mandrake" package="perl-Storable"/>
+  <install channel="mandrake" package="libsasl7-plug-anonymous"/>
+  <install channel="ximian" package="xmms-gnome"/>
+  <install channel="mandrake" package="openssh"/>
+  <install channel="mandrake" package="krb5-devel"/>
+  <install channel="mandrake" package="libgnet1"/>
+  <install channel="ximian" package="gnome-core"/>
+  <install channel="ximian" package="xmms-mikmod"/>
+  <install channel="mandrake" package="openssh-server"/>
+</trial>
+</test>

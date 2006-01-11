@@ -1,0 +1,6 @@
+>!> Installing B from channel test
+>!> Solution #1:
+>!> install B-0:1.0-1[test]
+>!> install D-0:1.0-1[test]
+>!> remove  C-0:1.0-1
+>!> installs=2, upgrades=0, uninstalls=1

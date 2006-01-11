@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+  B requires A
+  A prerequires C
+-->
+<test>
+<setup>
+  <channel name="test" file="exercise-1-packages.xml"/>
+</setup>
+<trial>
+  <install channel="test" package="B"/>
+  <instorder/>
+</trial>
+</test>

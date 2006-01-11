@@ -1,0 +1,9 @@
+>!> Installing xmms from channel ximian
+>!> Solution #1:
+>!> upgrade libogg-1:1.0rc2-1 => libogg-1:1.0rc3-ximian.3[ximian]
+>!> upgrade libogg-devel-1:1.0rc2-1 => libogg-devel-1:1.0rc3-ximian.3[ximian]
+>!> upgrade libvorbis-1.0rc2-2 => libvorbis-1:1.0rc3-ximian.2[ximian]
+>!> upgrade libvorbis-devel-1.0rc2-2 => libvorbis-devel-1:1.0rc3-ximian.2[ximian]
+>!> upgrade xmms-1:1.2.5-ximian.5 => xmms-1:1.2.6-ximian.3[ximian]
+>!> upgrade xmms-gnome-1:1.2.5-ximian.5 => xmms-gnome-1:1.2.6-ximian.3[ximian]
+>!> installs=0, upgrades=6, uninstalls=0

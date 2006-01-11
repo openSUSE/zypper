@@ -1,0 +1,7 @@
+>!> Installing H from channel test
+>!> Solution #1:
+>!> install H-0:1.0-1[test]
+>!> remove  F-0:1.0-1
+>!> remove  G-0:1.0-1
+>!> |unflag E-0:1.0-1[test]
+>!> installs=1, upgrades=0, uninstalls=2

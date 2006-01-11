@@ -1,0 +1,34 @@
+>!> Installing H from channel test
+>!> Solution #1:
+>!> install A-0:1.0-1[test]
+>!> install E-0:1.0-1[test]
+>!> install G-0:1.0-1[test]
+>!> install H-0:1.0-1[test]
+>!> installs=4, upgrades=0, uninstalls=0
+>!> Solution #2:
+>!> install A-0:1.0-1[test]
+>!> install B-0:1.0-1[test]
+>!> install C-0:1.0-1[test]
+>!> install F-0:1.0-1[test]
+>!> install H-0:1.0-1[test]
+>!> remove  D-0:1.0-1
+>!> installs=5, upgrades=0, uninstalls=1
+>!> Installing B from channel test
+>!> Installing H from channel test
+>!> Solution #1:
+>!> install A-0:1.0-1[test]
+>!> install B-0:1.0-1[test]
+>!> install E-0:1.0-1[test]
+>!> install G-0:1.0-1[test]
+>!> install H-0:1.0-1[test]
+>!> installs=5, upgrades=0, uninstalls=0
+>!> Solution #2:
+>!> install A-0:1.0-1[test]
+>!> install B-0:1.0-1[test]
+>!> install C-0:1.0-1[test]
+>!> install F-0:1.0-1[test]
+>!> install H-0:1.0-1[test]
+>!> remove  D-0:1.0-1
+>!> installs=5, upgrades=0, uninstalls=1
+>!> Installing C from channel test
+>!> Installing G from channel test

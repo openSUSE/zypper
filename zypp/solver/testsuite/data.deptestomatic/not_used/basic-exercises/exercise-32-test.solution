@@ -1,0 +1,130 @@
+>!> Installing GConf2 from channel gnome2
+>!> Installing ORBit2 from channel gnome2
+>!> Installing atk from channel gnome2
+>!> Installing audiofile from channel gnome2
+>!> Installing bonobo-activation from channel gnome2
+>!> Installing bug-buddy2 from channel gnome2
+>!> Installing control-center2 from channel gnome2
+>!> Installing eel2 from channel gnome2
+>!> Installing eog2 from channel gnome2
+>!> Installing esound from channel gnome2
+>!> Installing gconf-editor from channel gnome2
+>!> Installing gdm2 from channel gnome2
+>!> Installing gedit2 from channel gnome2
+>!> Installing glade2 from channel gnome2
+>!> Installing glib2 from channel gnome2
+>!> Installing gnome-applets2 from channel gnome2
+>!> Installing gnome-desktop from channel gnome2
+>!> Installing gnome-games2 from channel gnome2
+>!> Installing gnome-panel from channel gnome2
+>!> Installing gnome-session from channel gnome2
+>!> Installing gnome-terminal from channel gnome2
+>!> Installing gnome-vfs2 from channel gnome2
+>!> Installing gtk2 from channel gnome2
+>!> Installing libIDL from channel gnome2
+>!> Installing libart_lgpl from channel gnome2
+>!> Installing libbonobo from channel gnome2
+>!> Installing libbonoboui from channel gnome2
+>!> Installing libglade2 from channel gnome2
+>!> Installing libgnome from channel gnome2
+>!> Installing libgnomecanvas from channel gnome2
+>!> Installing libgnomeprint from channel gnome2
+>!> Installing libgnomeprintui from channel gnome2
+>!> Installing libgnomeui from channel gnome2
+>!> Installing libgtkhtml from channel gnome2
+>!> Installing libgtop2 from channel gnome2
+>!> Installing librsvg2 from channel gnome2
+>!> Installing libtool-libs from channel gnome2
+>!> Installing libwnck from channel gnome2
+>!> Installing libxml2 from channel gnome2
+>!> Installing libxslt from channel gnome2
+>!> Installing libzvt from channel gnome2
+>!> Installing linc from channel gnome2
+>!> Installing nautilus-gtkhtml from channel gnome2
+>!> Installing pango from channel gnome2
+>!> Installing sawfish2 from channel gnome2
+>!> Solution #1:
+>!> upgrade GConf2-1.1.8.0.200202140152-snap.ximian.1 => GConf2-0:1.1.8.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade GConf2-devel-1.1.8.0.200202140152-snap.ximian.1 => GConf2-devel-0:1.1.8.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade ORBit2-2.3.105.0.200202140152-snap.ximian.1 => ORBit2-0:2.3.105.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade ORBit2-devel-2.3.105.0.200202140152-snap.ximian.1 => ORBit2-devel-0:2.3.105.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade atk-0.12.0.200202140152-snap.ximian.1 => atk-0:0.13.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade atk-devel-0.12.0.200202140152-snap.ximian.1 => atk-devel-0:0.13.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade audiofile-1:0.2.3.0.200202140152-snap.ximian. => audiofile-1:0.2.3.0.200202240433-snap.ximian.[gnome2]
+>!> upgrade audiofile-devel-1:0.2.3.0.200202140152-snap.ximian. => audiofile-devel-1:0.2.3.0.200202240433-snap.ximian.[gnome2]
+>!> upgrade bonobo-activation-0.9.3.0.200202140152-snap.ximian.1 => bonobo-activation-0:0.9.4.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade bonobo-activation-devel-0.9.3.0.200202140152-snap.ximian.1 => bonobo-activation-devel-0:0.9.4.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade bug-buddy2-1:2.1.3.0.200202140152-snap.ximian.1 => bug-buddy2-1:2.1.3.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade control-center2-1:1.99.3.0.200202140152-snap.ximian.1 => control-center2-1:1.99.3.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade eel2-1.1.4.0.200202140152-snap.ximian.1 => eel2-0:1.1.5.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade eog2-1:0.111.0.0.200202140152-snap.ximian.1 => eog2-1:0.112.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade esound-1:0.2.23.0.200202140152-snap.ximian.1 => esound-1:0.2.23.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade esound-devel-1:0.2.23.0.200202140152-snap.ximian.1 => esound-devel-1:0.2.23.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gail-0.8.0.200202140152-snap.ximian.1 => gail-0:0.8.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gconf-editor-0.1.0.200202140152-snap.ximian.1 => gconf-editor-0:0.1.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gdm2-1:2.3.90.1.0.200202140152-snap.ximian.1 => gdm2-1:2.3.90.1.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gedit2-1:1.112.0.0.200202140152-snap.ximian.1 => gedit2-1:1.113.0cvs.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade glade2-1.1.0.0.200202140152-snap.ximian.1 => glade2-0:1.1.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade glib2-1.3.13.0.200202140152-snap.ximian.1 => glib2-0:1.3.15.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade glib2-devel-1.3.13.0.200202140152-snap.ximian.1 => glib2-devel-0:1.3.15.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gnome-applets2-1:1.92.2.0.200202140152-snap.ximian.1 => gnome-applets2-1:1.93.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gnome-desktop-1.5.9.0.200202140152-snap.ximian.1 => gnome-desktop-0:1.5.10.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gnome-desktop-libs-1.5.9.0.200202140152-snap.ximian.1 => gnome-desktop-libs-0:1.5.10.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gnome-games2-1:1.90.1.0.200202140152-snap.ximian.1 => gnome-games2-1:1.90.1.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gnome-media2-1.112.0.0.200202140152-snap.ximian.1 => gnome-media2-0:1.176.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gnome-panel-1.5.9.0.200202140152-snap.ximian.1 => gnome-panel-0:1.5.10.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gnome-panel-libs-1.5.9.0.200202140152-snap.ximian.1 => gnome-panel-libs-0:1.5.10.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gnome-session-1.5.9.0.200202140152-snap.ximian.1 => gnome-session-0:1.5.10.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gnome-system-monitor-1.1.4.0.200202140152-snap.ximian.1 => gnome-system-monitor-0:1.1.4.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gnome-terminal-1.9.0.0.200202151246-snap.ximian.1 => gnome-terminal-0:1.9.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gnome-utils2-1:1.99.1.0.200202140152-snap.ximian.1 => gnome-utils2-1:1.99.2.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gnome-vfs2-1.9.7.0.200202140152-snap.ximian.1 => gnome-vfs2-0:1.9.7.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gnome-vfs2-devel-1.9.7.0.200202140152-snap.ximian.1 => gnome-vfs2-devel-0:1.9.7.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gtk2-1.3.13.0.200202140152-snap.ximian.1 => gtk2-0:1.3.14.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade gtk2-devel-1.3.13.0.200202140152-snap.ximian.1 => gtk2-devel-0:1.3.14.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libIDL-0.7.4.0.200202140152-snap.ximian.1 => libIDL-0:0.7.4.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libIDL-devel-0.7.4.0.200202140152-snap.ximian.1 => libIDL-devel-0:0.7.4.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libart_lgpl-2.3.8.0.200202140152-snap.ximian.1 => libart_lgpl-0:2.3.8.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libart_lgpl-devel-2.3.8.0.200202140152-snap.ximian.1 => libart_lgpl-devel-0:2.3.8.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libbonobo-1.111.0.0.200202140152-snap.ximian.1 => libbonobo-0:1.112.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libbonobo-devel-1.111.0.0.200202140152-snap.ximian.1 => libbonobo-devel-0:1.112.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libbonoboui-1.111.0.0.200202140152-snap.ximian.1 => libbonoboui-0:1.112.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libbonoboui-devel-1.111.0.0.200202140152-snap.ximian.1 => libbonoboui-devel-0:1.112.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libglade2-1.99.7.0.200202140152-snap.ximian.1 => libglade2-0:1.99.7.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libglade2-devel-1.99.7.0.200202140152-snap.ximian.1 => libglade2-devel-0:1.99.7.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libgnome-1.111.0.0.200202140152-snap.ximian.2 => libgnome-0:1.112.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libgnome-devel-1.111.0.0.200202140152-snap.ximian.2 => libgnome-devel-0:1.112.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libgnomecanvas-1.111.0.0.200202140152-snap.ximian.1 => libgnomecanvas-0:1.112.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libgnomecanvas-devel-1.111.0.0.200202140152-snap.ximian.1 => libgnomecanvas-devel-0:1.112.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libgnomeprint-1.111.0.0.200202140152-snap.ximian.1 => libgnomeprint-0:1.111.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libgnomeprint-devel-1.111.0.0.200202140152-snap.ximian.1 => libgnomeprint-devel-0:1.111.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libgnomeprintui-1.110.0.0.200202140152-snap.ximian.1 => libgnomeprintui-0:1.110.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libgnomeprintui-devel-1.110.0.0.200202140152-snap.ximian.1 => libgnomeprintui-devel-0:1.110.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libgnomeui-1.111.1.0.200202140152-snap.ximian.1 => libgnomeui-0:1.112.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libgnomeui-devel-1.111.1.0.200202140152-snap.ximian.1 => libgnomeui-devel-0:1.112.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libgtkhtml-1.99.2.0.200202140152-snap.ximian.1 => libgtkhtml-0:1.99.2.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libgtop2-1.90.2.0.200202140152-snap.ximian.1 => libgtop2-0:1.90.2.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade librsvg2-1.1.3.0.200202140152-snap.ximian.1 => librsvg2-0:1.1.3.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libtool-1.4-8 => libtool-0:1.4-8.ximian.1[gnome2]
+>!> upgrade libtool-libs-1.4-8 => libtool-libs-0:1.4-8.ximian.1[gnome2]
+>!> upgrade libwnck-0.3.0.200202140152-snap.ximian.1 => libwnck-0:0.5.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libwnck-devel-0.3.0.200202140152-snap.ximian.1 => libwnck-devel-0:0.5.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libxml2-2.4.15.0.200202140152-snap.ximian.1 => libxml2-0:2.4.16.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libxml2-devel-2.4.15.0.200202140152-snap.ximian.1 => libxml2-devel-0:2.4.16.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libxslt-1.0.12.0.200202140152-snap.ximian.1 => libxslt-0:1.0.12.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libxslt-devel-1.0.12.0.200202140152-snap.ximian.1 => libxslt-devel-0:1.0.12.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libzvt-1.111.0.0.200202140152-snap.ximian.1 => libzvt-0:1.111.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade libzvt-devel-1.111.0.0.200202140152-snap.ximian.1 => libzvt-devel-0:1.111.0.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade linc-0.1.18.0.200202140152-snap.ximian.1 => linc-0:0.1.18.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade linc-devel-0.1.18.0.200202140152-snap.ximian.1 => linc-devel-0:0.1.18.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade nautilus-gtkhtml-0.3.0.200202140152-snap.ximian.1 => nautilus-gtkhtml-0:0.3.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade nautilus2-1.1.5.0.200202140152-snap.ximian.1 => nautilus2-0:1.1.5.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade pango-0.24.0.200202140152-snap.ximian.1 => pango-0:0.26.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade pango-devel-0.24.0.200202140152-snap.ximian.1 => pango-devel-0:0.26.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade rep-gtk2-1:0.16.pre1.0.200202140152-snap.ximian.1 => rep-gtk2-1:0.16.pre1.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade sawfish2-1:2.0.pre1.0.200202140152-snap.ximian.1 => sawfish2-1:2.0.pre1.0.200202240433-snap.ximian.1[gnome2]
+>!> upgrade yelp-0.2.99.0.200202140152-snap.ximian.1 => yelp-0:0.2.99.0.200202240433-snap.ximian.1[gnome2]
+>!> installs=0, upgrades=80, uninstalls=0
+>!> Solution #2:
+>!> This solution is a duplicate.
+>!> installs=0, upgrades=80, uninstalls=0

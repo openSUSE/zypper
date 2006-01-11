@@ -1,0 +1,27 @@
+>!> Installing GConf2 from channel gnome2snaps
+>!> Solution #1:
+>!> remove  gnome-desktop-libs-1.5.12.0.200203140655-snap.ximian.1
+>!> remove  gnome-panel-libs-1.5.13.0.200203140655-snap.ximian.1
+>!> upgrade GConf2-1.1.8.0.200203140655-snap.ximian.1 => GConf2-0:1.1.8.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade bug-buddy2-1:2.1.3.0.200203140655-snap.ximian.1 => bug-buddy2-1:2.1.3.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade control-center2-1:1.99.4.0.200203140655-snap.ximian.1 => control-center2-1:1.99.4.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade eel2-1.1.7.0.200203140655-snap.ximian.1 => eel2-0:1.1.7.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade eog2-1:0.114.0.0.200203140655-snap.ximian.1 => eog2-1:0.114.0.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade gdm2-1:2.3.90.1.0.200203140655-snap.ximian.1 => gdm2-1:2.3.90.1.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade gedit2-1:1.115.0.0.200203140655-snap.ximian.1 => gedit2-1:1.115.0.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade gnome-applets2-1:1.96.0.0.200203140655-snap.ximian.1 => gnome-applets2-1:1.96.0.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade gnome-desktop-1.5.12.0.200203140655-snap.ximian.1 => gnome-desktop-0:1.5.12.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade gnome-games2-1:1.90.2.0.200203140655-snap.ximian.1 => gnome-games2-1:1.90.2.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade gnome-media2-1.176.0.0.200203140655-snap.ximian.1 => gnome-media2-0:1.176.0.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade gnome-panel-1.5.13.0.200203140655-snap.ximian.1 => gnome-panel-0:1.5.13.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade gnome-session-1.5.11.0.200203140655-snap.ximian.1 => gnome-session-0:1.5.11.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade gnome-system-monitor-1.1.5.0.200203140655-snap.ximian.1 => gnome-system-monitor-0:1.1.5.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade gnome-terminal-1.9.1.0.200203140655-snap.ximian.1 => gnome-terminal-0:1.9.1.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade gnome-utils2-1:1.101.0.0.200203140655-snap.ximian.1 => gnome-utils2-1:1.101.0.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade gnome-vfs2-1.9.9.0.200203140655-snap.ximian.1 => gnome-vfs2-0:1.9.10.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade libbonoboui-1.112.1.0.200203140655-snap.ximian.1 => libbonoboui-0:1.112.1.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade libgnome-1.112.1.0.200203140655-snap.ximian.1 => libgnome-0:1.112.1.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade libgnomeui-1.112.1.0.200203140655-snap.ximian.1 => libgnomeui-0:1.112.1.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade nautilus-gtkhtml-0.3.0.200203140655-snap.ximian.1 => nautilus-gtkhtml-0:0.3.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> upgrade nautilus2-1.1.9.0.200203140655-snap.ximian.1 => nautilus2-0:1.1.9.0.200203150445-0.snap.ximian.1[gnome2snaps]
+>!> installs=0, upgrades=22, uninstalls=2

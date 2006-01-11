@@ -1,0 +1,4 @@
+>!> Installing gcc from channel redhat
+>!> Solution #1:
+>!> upgrade gcc-2.96-98 => gcc-0:2.96-98[redhat]
+>!> installs=0, upgrades=1, uninstalls=0

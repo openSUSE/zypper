@@ -1,0 +1,7 @@
+>!> Installing control-center from channel preview
+>!> Solution #1:
+>!> install libcapplet0-0:1.5.8-ximian.4[preview]
+>!> install libcapplet1-0:1.5.11-ximian.1[preview]
+>!> upgrade control-center-1:1.4.0.2-ximian.1 => control-center-1:1.5.12-ximian.2[preview]
+>!> upgrade control-center-devel-1:1.4.0.2-ximian.1 => control-center-devel-1:1.5.12-ximian.2[preview]
+>!> installs=2, upgrades=2, uninstalls=0

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<test>
+
+<setup>
+  <system file="exercise-25-system.xml"/>
+  <channel name="gnome2" file="exercise-32-packages.xml"/>
+</setup>
+
+<trial>
+  <install channel="gnome2" package="GConf2"/>
+  <install channel="gnome2" package="ORBit2"/>
+  <install channel="gnome2" package="atk"/>
+  <install channel="gnome2" package="audiofile"/>
+  <install channel="gnome2" package="bonobo-activation"/>
+  <install channel="gnome2" package="bug-buddy2"/>
+  <install channel="gnome2" package="control-center2"/>
+  <install channel="gnome2" package="eel2"/>
+  <install channel="gnome2" package="eog2"/>
+  <install channel="gnome2" package="esound"/>
+  <install channel="gnome2" package="gconf-editor"/>
+  <install channel="gnome2" package="gdm2"/>
+  <install channel="gnome2" package="gedit2"/>
+  <install channel="gnome2" package="glade2"/>
+  <install channel="gnome2" package="glib2"/>
+  <install channel="gnome2" package="gnome-applets2"/>
+  <install channel="gnome2" package="gnome-desktop"/>
+  <install channel="gnome2" package="gnome-games2"/>
+  <install channel="gnome2" package="gnome-panel"/>
+  <install channel="gnome2" package="gnome-session"/>
+  <install channel="gnome2" package="gnome-terminal"/>
+  <install channel="gnome2" package="gnome-vfs2"/>
+  <install channel="gnome2" package="gtk2"/>
+  <install channel="gnome2" package="libIDL"/>
+  <install channel="gnome2" package="libart_lgpl"/>
+  <install channel="gnome2" package="libbonobo"/>
+  <install channel="gnome2" package="libbonoboui"/>
+  <install channel="gnome2" package="libglade2"/>
+  <install channel="gnome2" package="libgnome"/>
+  <install channel="gnome2" package="libgnomecanvas"/>
+  <install channel="gnome2" package="libgnomeprint"/>
+  <install channel="gnome2" package="libgnomeprintui"/>
+  <install channel="gnome2" package="libgnomeui"/>
+  <install channel="gnome2" package="libgtkhtml"/>
+  <install channel="gnome2" package="libgtop2"/>
+  <install channel="gnome2" package="librsvg2"/>
+  <install channel="gnome2" package="libtool-libs"/>
+  <install channel="gnome2" package="libwnck"/>
+  <install channel="gnome2" package="libxml2"/>
+  <install channel="gnome2" package="libxslt"/>
+  <install channel="gnome2" package="libzvt"/>
+  <install channel="gnome2" package="linc"/>
+  <install channel="gnome2" package="nautilus-gtkhtml"/>
+  <install channel="gnome2" package="pango"/>
+  <install channel="gnome2" package="sawfish2"/>
+</trial>
+
+</test>

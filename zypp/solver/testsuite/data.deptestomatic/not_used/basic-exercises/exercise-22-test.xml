@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-22-system.xml"/>
+  <channel name="test" file="exercise-22-packages.xml"/>
+</setup>
+<trial>
+  <install channel="test" package="C"/>
+</trial>
+<trial>
+  <install channel="test" package="D"/>
+</trial>
+<trial>
+  <install channel="test" package="E"/>
+</trial>
+</test>

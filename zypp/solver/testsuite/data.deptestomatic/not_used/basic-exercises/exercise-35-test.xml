@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<test>
+
+<setup>
+  <system file="exercise-25-system.xml"/>
+  <channel name="redhat" file="exercise-30-packages.xml"/>
+</setup>
+
+<trial>
+  <verify/>
+</trial>
+
+</test>

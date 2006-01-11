@@ -1,0 +1,4 @@
+>!> Installing C from channel test
+>!> Solution #1:
+>!> install C-0:1.0-1[test]
+>!> installs=1, upgrades=0, uninstalls=0

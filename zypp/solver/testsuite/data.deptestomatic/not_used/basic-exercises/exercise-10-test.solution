@@ -1,0 +1,9 @@
+>!> Installing B from channel test
+>!> Solution #1:
+>!> install AA-0:1.0-1[test]
+>!> install B-0:1.0-1[test]
+>!> installs=2, upgrades=0, uninstalls=0
+>!> Solution #2:
+>!> install A-0:1.0-1[test]
+>!> install B-0:1.0-1[test]
+>!> installs=2, upgrades=0, uninstalls=0

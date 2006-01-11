@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<test>
+
+<setup>
+  <system file="exercise-47-system.xml"/>
+</setup>
+
+<trial>
+  <uninstall package="exim"/>
+</trial>
+
+</test>

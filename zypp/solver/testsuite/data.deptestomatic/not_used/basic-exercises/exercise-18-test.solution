@@ -1,0 +1,108 @@
+>!> Installing Z from channel test
+>!> Solution #1:
+>!> install B-0:1.0-1[test]
+>!> install H-0:1.0-1[test]
+>!> install Z-0:1.0-1[test]
+>!> |unflag A-0:1.0-1[test]
+>!> |unflag G-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0
+>!> Solution #2:
+>!> install C-0:1.0-1[test]
+>!> install E-0:1.0-1[test]
+>!> install Z-0:1.0-1[test]
+>!> |unflag D-0:1.0-1[test]
+>!> |unflag F-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0
+>!> Solution #3:
+>!> install B-0:1.0-1[test]
+>!> install E-0:1.0-1[test]
+>!> install Z-0:1.0-1[test]
+>!> |unflag D-0:1.0-1[test]
+>!> |unflag G-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0
+>!> Solution #4:
+>!> install A-0:1.0-1[test]
+>!> install E-0:1.0-1[test]
+>!> install Z-0:1.0-1[test]
+>!> |unflag D-0:1.0-1[test]
+>!> |unflag H-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0
+>!> Solution #5:
+>!> install D-0:1.0-1[test]
+>!> install F-0:1.0-1[test]
+>!> install Z-0:1.0-1[test]
+>!> |unflag C-0:1.0-1[test]
+>!> |unflag E-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0
+>!> Solution #6:
+>!> install B-0:1.0-1[test]
+>!> install F-0:1.0-1[test]
+>!> install Z-0:1.0-1[test]
+>!> |unflag C-0:1.0-1[test]
+>!> |unflag G-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0
+>!> Solution #7:
+>!> install A-0:1.0-1[test]
+>!> install F-0:1.0-1[test]
+>!> install Z-0:1.0-1[test]
+>!> |unflag C-0:1.0-1[test]
+>!> |unflag H-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0
+>!> Solution #8:
+>!> install D-0:1.0-1[test]
+>!> install G-0:1.0-1[test]
+>!> install Z-0:1.0-1[test]
+>!> |unflag B-0:1.0-1[test]
+>!> |unflag E-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0
+>!> Solution #9:
+>!> install C-0:1.0-1[test]
+>!> install G-0:1.0-1[test]
+>!> install Z-0:1.0-1[test]
+>!> |unflag B-0:1.0-1[test]
+>!> |unflag F-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0
+>!> Solution #10:
+>!> install A-0:1.0-1[test]
+>!> install G-0:1.0-1[test]
+>!> install Z-0:1.0-1[test]
+>!> |unflag B-0:1.0-1[test]
+>!> |unflag H-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0
+>!> Solution #11:
+>!> install D-0:1.0-1[test]
+>!> install H-0:1.0-1[test]
+>!> install Z-0:1.0-1[test]
+>!> |unflag A-0:1.0-1[test]
+>!> |unflag E-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0
+>!> Solution #12:
+>!> install C-0:1.0-1[test]
+>!> install H-0:1.0-1[test]
+>!> install Z-0:1.0-1[test]
+>!> |unflag A-0:1.0-1[test]
+>!> |unflag F-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0
+>!> Installing A from channel test
+>!> Installing Z from channel test
+>!> Solution #1:
+>!> install A-0:1.0-1[test]
+>!> install G-0:1.0-1[test]
+>!> install Z-0:1.0-1[test]
+>!> |unflag B-0:1.0-1[test]
+>!> |unflag H-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0
+>!> Solution #2:
+>!> install A-0:1.0-1[test]
+>!> install E-0:1.0-1[test]
+>!> install Z-0:1.0-1[test]
+>!> |unflag D-0:1.0-1[test]
+>!> |unflag H-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0
+>!> Solution #3:
+>!> install A-0:1.0-1[test]
+>!> install F-0:1.0-1[test]
+>!> install Z-0:1.0-1[test]
+>!> |unflag C-0:1.0-1[test]
+>!> |unflag H-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0

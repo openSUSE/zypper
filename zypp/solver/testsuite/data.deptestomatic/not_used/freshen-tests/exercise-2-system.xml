@@ -1,0 +1,22 @@
+<channel><subchannel>
+<package>
+  <name>A</name>
+  <summary>A fake package</summary>
+  <description>A fake package</description>
+  <section>misc</section>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <epoch>0</epoch>
+      <version>1.1</version>
+      <release>1</release>
+      <filename>foo.bar</filename>
+      <filesize>123</filesize>
+      <installedsize>234</installedsize>
+      <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+      <importance>suggested</importance>
+      <description>Yggdrasil Linux</description>
+    </update>
+  </history>
+</package>
+</subchannel></channel>

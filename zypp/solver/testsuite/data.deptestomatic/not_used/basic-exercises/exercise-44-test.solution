@@ -1,0 +1,5 @@
+>!> Solution #1:
+>!> remove  rpm-perl-4.0.3-1.03
+>!> remove  talk-0.17-12
+>!> remove  talk-server-0.17-12
+>!> installs=0, upgrades=0, uninstalls=3

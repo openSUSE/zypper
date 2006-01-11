@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<test>
+
+<setup>
+  <system file="exercise-46-system.xml"/>
+  <channel name="ximian" file="exercise-46-packages.xml"/>
+</setup>
+
+<trial>
+  <install channel="ximian" package="liboaf0"/>
+</trial>
+
+</test>

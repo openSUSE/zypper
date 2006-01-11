@@ -1,0 +1,46 @@
+<channel><subchannel>
+<package>
+  <name>c</name>
+  <summary>Unknown</summary>
+  <description>Unknown</description>
+  <section>devel</section>
+  <history>
+    <update>
+  <version>1.0</version>
+  <release>1</release>
+  <filesize>1156</filesize>
+  <installedsize>0</installedsize>
+    </update>
+  </history>
+  <requires/>
+  <conflicts>
+  <dep name="a"/>
+  </conflicts>
+  <obsoletes/>
+  <provides>
+  <dep name="c" op="=" version="1.0" release="1"/>
+  </provides>
+</package>
+<package>
+  <name>d</name>
+  <summary>Unknown</summary>
+  <description>Unknown</description>
+  <section>devel</section>
+  <history>
+    <update>
+  <version>1.0</version>
+  <release>1</release>
+  <filesize>1155</filesize>
+  <installedsize>0</installedsize>
+    </update>
+  </history>
+  <requires/>
+  <conflicts/>
+  <obsoletes>
+  <dep name="a"/>
+  </obsoletes>
+  <provides>
+  <dep name="d" op="=" version="1.0" release="1"/>
+  </provides>
+</package>
+</subchannel></channel>

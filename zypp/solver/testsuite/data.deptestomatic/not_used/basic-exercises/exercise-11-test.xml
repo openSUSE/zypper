@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-11-system.xml"/>
+  <channel name="test" file="exercise-11-packages.xml"/>
+</setup>
+<trial>
+  <install channel="test" package="B"/>
+</trial>
+</test>

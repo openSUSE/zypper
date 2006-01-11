@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<test>
+
+<!-- In this test we lock foo-set and remove one of its children.
+     The update should fail. -->
+
+<setup>
+  <channel name="test" file="exercise-10-packages.xml"/>
+  <lock package="A" channel="test"/>
+</setup>
+
+<trial>
+  <install channel="test" package="B"/>
+</trial>
+
+</test>

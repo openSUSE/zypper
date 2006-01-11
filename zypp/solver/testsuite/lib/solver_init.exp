@@ -122,8 +122,16 @@ proc multi-run { src } {
 
   set dircases [glob $base_name/* ]
   foreach dircase $dircases { 
-      set testcases [glob $dircase/*-test.xml ]
+      set testPath [split $dircase "/"]
+      set testFilename [lindex $testPath [expr [llength $testPath]-1]]
+      set testFname [split $testFilename "."]
+      set testBase_name [lindex $testFname 0]
 
+      if {$testBase_name == "not_used"} {
+	  puts "   ignoring $testBase_name"
+	  continue
+      }
+      set testcases [glob $dircase/*-test.xml ]
       foreach testcase $testcases { 
 	  set testPath [split $testcase "/"]
 	  set testFilename [lindex $testPath [expr [llength $testPath]-1]]

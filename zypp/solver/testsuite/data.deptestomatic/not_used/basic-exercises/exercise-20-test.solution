@@ -1,0 +1,22 @@
+>!> Installing G from channel test
+>!> Solution #1:
+>!> install A-0:1.0-1[test]
+>!> install C-0:1.0-1[test]
+>!> install G-0:1.0-1[test]
+>!> |unflag I-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0
+>!> Installing H from channel test
+>!> Solution #1:
+>!> install E-0:1.0-1[test]
+>!> install H-0:1.0-1[test]
+>!> |unflag I-0:1.0-1[test]
+>!> installs=2, upgrades=0, uninstalls=0
+>!> Installing I from channel test
+>!> Solution #1:
+>!> install C-0:1.0-1[test]
+>!> install D-0:1.0-1[test]
+>!> install I-0:1.0-1[test]
+>!> |unflag A-0:1.0-1[test]
+>!> |unflag E-0:1.0-1[test]
+>!> |unflag F-0:1.0-1[test]
+>!> installs=3, upgrades=0, uninstalls=0

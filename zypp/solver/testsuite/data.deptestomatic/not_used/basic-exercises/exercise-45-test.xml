@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-25-system.xml"/>
+  <channel name="redhat" file="exercise-25-packages-2.xml"/>
+</setup>
+<trial>
+  <install channel="redhat" package="gcc"/>
+</trial>
+</test>

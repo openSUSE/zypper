@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+   nothing is installed
+   A-1.1 is available
+   Patch-A-1.1 is available
+
+   : patch-A-1-1 is satisfied
+-->
+<test allow_virtual_conflicts="yes">
+<setup>
+  <channel name="test" file="exercise-1-packages.xml"/>
+</setup>
+<trial>
+  <establish/>
+</trial>
+</test>

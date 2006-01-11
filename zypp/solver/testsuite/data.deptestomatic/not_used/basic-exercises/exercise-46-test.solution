@@ -1,0 +1,7 @@
+>!> Installing liboaf0 from channel ximian
+>!> Solution #1:
+>!> install oaf-0:0.6.9-1.ximian.1[ximian]
+>!> remove  libgnome-vfs0-devel-1.0.2-2mdk
+>!> remove  liboaf0-devel-0.6.6-3mdk
+>!> upgrade liboaf0-0.6.6-3mdk => liboaf0-0:0.6.9-1.ximian.1[ximian]
+>!> installs=1, upgrades=1, uninstalls=2

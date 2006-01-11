@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<channel>
+  <subchannel name="stable" preference="100">    <package>
+      <name>red-carpet</name>
+      <summary>Ximian's next-generation software manager and updater</summary>
+      <description>Bug Fixes // Release Candidate</description>
+      <section>system</section>
+      <history>
+        <update>
+          <hid>55160</hid>
+          <epoch>0</epoch>
+          <version>1.2.99.2</version>
+          <release>2.ximian.1</release>
+          <filename>red-carpet-1.2.99.2-2.ximian.1.i586.rpm</filename>
+          <filesize>6951197</filesize>
+          <installedsize>19486085</installedsize>
+          <importance>suggested</importance>
+          <description>Bug Fixes // Release Candidate</description>
+        </update>
+        <update>
+          <hid>54582</hid>
+          <epoch>0</epoch>
+          <version>1.2.99.1</version>
+          <release>1.ximian.1</release>
+          <filename>red-carpet-1.2.99.1-1.ximian.1.i586.rpm</filename>
+          <filesize>6951074</filesize>
+          <installedsize>19485755</installedsize>
+          <importance>suggested</importance>
+          <description>New beta build, bug fixes</description>
+        </update>
+        <update>
+          <hid>51983</hid>
+          <epoch>0</epoch>
+          <version>1.2.99</version>
+          <release>1.ximian.1</release>
+          <filename>red-carpet-1.2.99-1.ximian.1.i586.rpm</filename>
+          <filesize>3757070</filesize>
+          <installedsize>7881131</installedsize>
+          <importance>minor</importance>
+          <description>UNSTABLE Red Carpet testing release</description>
+        </update>
+     </history>
+<requires><dep name="libc.so.6(GLIBC_2.2.3)"/><dep name="libc.so.6(GLIBC_2.2)"/><dep name="libc.so.6(GLIBC_2.1.3)"/><dep name="libc.so.6(GLIBC_2.1.2)"/><dep name="libc.so.6(GLIBC_2.1)"/><dep name="libc.so.6(GLIBC_2.0)"/><dep name="ld-linux.so.2(GLIBC_2.0)"/><dep name="libdl.so.2"/><dep name="libc.so.6"/><dep name="ld-linux.so.2"/><dep name="/bin/sh"/></requires><provides><dep name="/usr/bin/red-carpet-ssl-proxy"/><dep name="/usr/bin/red-carpet"/><dep name="red-carpet" op="=" version="1.2.99.2" release="2.ximian.1"/><dep name="rc-{rpm}.so.0"/><dep name="rc-{rpm_rpmio}.so.0"/><dep name="rc-{rpm_rpmio_rpmdb}.so"/><dep name="rc-{rpm_rpmio_rpmdb}-4.0.4.so"/><dep name="rc-{rpm_rpmio_rpmdb}-4.0.3.so"/><dep name="ximian-red-carpet" op="=" version="1.2.99.2" release="1"/></provides>   </package>
+  </subchannel>
+</channel>

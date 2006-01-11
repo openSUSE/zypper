@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<test>
+
+<setup>
+  <system file="exercise-29-system.xml"/>
+  <channel name="preview" file="exercise-34-preview.xml"/>
+  <channel name="ximian" file="exercise-34-ximian.xml"/>
+  <channel name="redhat" file="exercise-34-rh72.xml"/>
+  <channel name="gnome2" file="exercise-34-snapshots.xml"/>
+</setup>
+
+<trial>
+  <current channel="ximian"/>
+  <subscribe channel="ximian"/>
+  <subscribe channel="redhat"/>
+  <install channel="ximian" package="gnome-vfs"/>
+</trial>
+
+<trial>
+  <current channel="ximian"/>
+  <subscribe channel="ximian"/>
+  <subscribe channel="redhat"/>
+  <install channel="ximian" package="gnome-vfs"/>
+  <install channel="ximian" package="libglade"/>
+</trial>
+
+</test>

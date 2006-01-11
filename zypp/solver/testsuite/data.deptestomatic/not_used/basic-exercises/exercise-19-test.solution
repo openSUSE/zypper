@@ -1,0 +1,9 @@
+>!> Installing C from channel test
+>!> Solution #1:
+>!> install C-0:1.0-1[test]
+>!> install D-0:1.0-1[test]
+>!> installs=2, upgrades=0, uninstalls=0
+>!> Installing D from channel test
+>!> Solution #1:
+>!> install D-0:1.0-1[test]
+>!> installs=1, upgrades=0, uninstalls=0

@@ -1,0 +1,7 @@
+>!> Installing Mesa-devel from channel redhat
+>!> Solution #1:
+>!> upgrade Mesa-3:3.4.2-7 => Mesa-3:3.4.2-10[redhat]
+>!> upgrade Mesa-demos-3:3.4.2-7 => Mesa-demos-3:3.4.2-10[redhat]
+>!> upgrade Mesa-devel-3:3.4.2-7 => Mesa-devel-3:3.4.2-10[redhat]
+>!> upgrade XFree86-4.1.0-3 => XFree86-0:4.1.0-15[redhat]
+>!> installs=0, upgrades=4, uninstalls=0

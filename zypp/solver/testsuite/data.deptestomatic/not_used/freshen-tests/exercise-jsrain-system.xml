@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel><subchannel>
+<package>
+  <name>foo</name>
+  <arch>noarch</arch>
+  <history><update>
+    <epoch>2</epoch>
+    <version>3</version>
+    <release>4</release>
+  </update></history>
+  <md5sum>8121d38334a682f5bf2c8320388395ba7e4b276d</md5sum>
+  <summary lang="en">A packetfilter wrapper compatible with ipfwadm, ipchains, iptables</summary>
+  <description lang="en">This package consists of a simple firewall wrapper script
+    providing a packet filter mini-language to state your
+    filtering needs independent of the used firewall type.
+    It's just like a service start/stop script and started
+    during the normal System V boot sequence.
+
+    See the README for details.</description>
+  <provides>
+    <dep name="packetfilter" op="=" epoch="0" version="0.9.1" release="3"/>
+    <dep name="/etc/packetfilter/def" />
+    <dep name="/etc/init.d/packetfilter" />
+    <dep name="/usr/sbin/rcpacketfilter" />
+    <dep name="/etc/packetfilter/ppp0" />
+    <dep name="/etc/packetfilter" />
+  </provides>
+  <requires>
+    <dep name="/bin/bash"/>
+    <dep name="/bin/sh" pre="1"/>
+  </requires>
+</package>
+
+</subchannel></channel>
+

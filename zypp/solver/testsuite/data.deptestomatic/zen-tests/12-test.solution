@@ -1,0 +1,5 @@
+>!> Installing A from channel test
+>!> Solution #1:
+>!> install A-1.0-1[test]
+>!> upgrade B-1.0-1 => B-3.0-1[test]
+>!> installs=1, upgrades=1, uninstalls=0

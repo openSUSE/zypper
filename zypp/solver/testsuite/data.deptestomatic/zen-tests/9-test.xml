@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="9-system.xml"/>
+  <channel name="test1" file="9-packages1.xml"/>
+  <channel name="test2" file="9-packages2.xml"/>
+</setup>
+<trial>
+  <current channel="test1"/>
+  <subscribe channel="test1"/>
+  <install channel="test1" package="A"/>
+</trial>
+</test>

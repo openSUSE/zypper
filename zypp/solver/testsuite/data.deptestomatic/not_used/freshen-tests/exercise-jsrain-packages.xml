@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel><subchannel>
+<patch>
+  <name>foo</name>
+  <summary>install if you have lots of foo</summary>
+  <description>fixes Bug #231312</description>
+  <history><update>
+    <epoch>0</epoch>
+    <version>0</version>
+    <release>2</release>
+  </update></history>
+  <provides>
+    <dep kind="patch" name="foo-patch-fitzefatze"/>
+  </provides>
+  <conflicts>
+    <dep kind="package" name="foo-oldpatch" op="=" epoch="1" version="1" release="2"/>
+  </conflicts>
+  <freshens>
+    <dep kind="package" name="foo" op="&lt;" epoch="2" version="3" release="4"/>
+    <dep kind="package" name="foo-devel" op="&lt;" epoch="3" version="4" release="5"/>
+  </freshens>
+  <requires>
+    <dep kind="package" name="foo" op="=" epoch="2" version="3" release="4"/>
+    <dep kind="script" name="foo-patch-script-1" op="=" epoch="0" version="1" release="2"/>
+    <dep kind="message" name="foo-patch-message-1" op="=" epoch="0" version="1" release="2"/>
+  </requires>
+  <category>security</category>
+  <reboot_needed/>
+  <package_manager/>
+  <update_script>
+<![CDATA[#!/bin/bash
+rpm -Uhv * > /dev/null
+]]>
+  </update_script>
+</patch>
+
+
+<script>
+  <name>foo-patch-script-1</name>
+  <history><update>
+    <epoch>0</epoch>
+    <version>1</version>
+    <release>2</release>
+  </update></history>
+      <do>#!/bin/bash</do>
+      <undo>#!/bin/unbash</undo>
+  <freshens>
+    <dep kind="package" name="foo" op="&lt;" epoch="2" version="3" release="4"/>
+    <dep kind="package" name="foo-devel" op="&lt;" epoch="3" version="4" release="5"/>
+  </freshens>
+</script>
+
+<message type="OK">
+  <name>foo-patch-message-1</name>
+  <history><update>
+    <epoch>0</epoch>
+    <version>1</version>
+    <release>2</release>
+  </update></history>
+  <text>Just note that the very critical package foo will be installed just now</text>
+  <freshens>
+    <dep kind="package" name="foo" op="&lt;" epoch="2" version="3" release="4"/>
+    <dep kind="package" name="foo-devel" op="&lt;" epoch="3" version="4" release="5"/>
+  </freshens>
+</message>
+
+<package>
+  <name>foo</name>
+  <arch>noarch</arch>
+  <history><update>
+    <epoch>2</epoch>
+    <version>3</version>
+    <release>4</release>
+  </update></history>
+  <md5sum>8121d38334a682f5bf2c8320388395ba7e4b276d</md5sum>
+  <summary lang="en">A packetfilter wrapper compatible with ipfwadm, ipchains, iptables</summary>
+  <description lang="en">This package consists of a simple firewall wrapper script
+    providing a packet filter mini-language to state your
+    filtering needs independent of the used firewall type.
+    It's just like a service start/stop script and started
+    during the normal System V boot sequence.
+
+    See the README for details.</description>
+  <freshens>
+    <dep kind="package" name="foo" op="&lt;" epoch="2" version="3" release="4"/>
+  </freshens>
+  <provides>
+    <dep name="packetfilter" op="=" epoch="0" version="0.9.1" release="3"/>
+    <dep name="/etc/packetfilter/def" />
+    <dep name="/etc/init.d/packetfilter" />
+    <dep name="/usr/sbin/rcpacketfilter" />
+    <dep name="/etc/packetfilter/ppp0" />
+    <dep name="/etc/packetfilter" />
+  </provides>
+  <requires>
+    <dep name="/bin/bash"/>
+    <dep name="/bin/sh" pre="1"/>
+  </requires>
+</package>
+
+</subchannel></channel>
+

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<test>
+
+<!-- In this test we force-remove an installed child and make sure that
+     it gets put back by 'verify'. -->
+
+<setup>
+  <undump file="exercise-52-dump.xml.gz"/>
+  <force-uninstall package="zebra"/>
+</setup>
+
+<trial>
+  <verify/>
+</trial>
+
+</test>

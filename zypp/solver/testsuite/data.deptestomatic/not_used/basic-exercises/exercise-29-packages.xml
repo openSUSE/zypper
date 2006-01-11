@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+
+<channel>
+  <subchannel name="Default" preference="100">
+    <package>
+      <name>control-center-devel</name>
+      <summary>The GNOME Control Center - development files</summary>
+      <description>Patched to call xscreensaver-demo correctly</description>
+      <section>devel</section>
+      <history>
+        <update>
+          <hid>40672</hid>
+          <epoch>1</epoch>
+          <version>1.5.12</version>
+          <release>ximian.2</release>
+          <filename>control-center-devel-1.5.12-ximian.2.i386.rpm</filename>
+          <filesize>271126</filesize>
+          <installedsize>1018419</installedsize>
+          <importance>suggested</importance>
+          <description>Patched to call xscreensaver-demo correctly</description>
+        </update>
+        <update>
+          <hid>29611</hid>
+          <epoch>1</epoch>
+          <version>1.5.9</version>
+          <release>ximian.1</release>
+          <filename>control-center-devel-1.5.9-ximian.1.i386.rpm</filename>
+          <filesize>270020</filesize>
+          <installedsize>1013715</installedsize>
+          <md5sum>6ecf354a36afd5be209619a20823f765</md5sum>
+          <importance>suggested</importance>
+          <description>Initial release to Red Carpet</description>
+        </update>
+     </history>
+<requires><dep name="gnome-libs-devel"/><dep name="control-center" op="=" version="1.5.12"/></requires><provides><dep name="control-center-devel" op="=" epoch="1" version="1.5.12" release="ximian.2"/></provides>   </package>
+    <package>
+      <name>control-center-plus</name>
+      <summary>The GNOME Control Center - extra configuration applets</summary>
+      <description>Preview Update</description>
+      <section>xapp</section>
+      <history>
+        <update>
+          <hid>40674</hid>
+          <epoch>0</epoch>
+          <version>1.5.11</version>
+          <release>ximian.1</release>
+          <filename>control-center-plus-1.5.11-ximian.1.i386.rpm</filename>
+          <filesize>333929</filesize>
+          <installedsize>904792</installedsize>
+          <importance>suggested</importance>
+          <description>Preview Update</description>
+        </update>
+        <update>
+          <hid>29612</hid>
+          <epoch>0</epoch>
+          <version>1.5.8</version>
+          <release>ximian.1</release>
+          <filename>control-center-plus-1.5.8-ximian.1.i386.rpm</filename>
+          <filesize>1019252</filesize>
+          <installedsize>3308409</installedsize>
+          <md5sum>ac1d8ce1e015e8bdf07918f2b74c9ebb</md5sum>
+          <importance>suggested</importance>
+          <description>Initial release to Red Carpet</description>
+        </update>
+     </history>
+<requires><dep name="libc.so.6(GLIBC_2.1.3)"/><dep name="libc.so.6(GLIBC_2.1)"/><dep name="libc.so.6(GLIBC_2.0)"/><dep name="libz.so.1"/><dep name="libxml.so.1"/><dep name="librt.so.1"/><dep name="libpthread.so.0"/><dep name="libpopt.so.0"/><dep name="liboaf.so.0"/><dep name="libnsl.so.1"/><dep name="libm.so.6"/><dep name="libgtk-1.2.so.0"/><dep name="libgthread-1.2.so.0"/><dep name="libgnorba.so.27"/><dep name="libgnomevfs.so.0"/><dep name="libgnomeui.so.32"/><dep name="libgnomesupport.so.0"/><dep name="libgnome.so.32"/><dep name="libgmodule-1.2.so.0"/><dep name="libglib-1.2.so.0"/><dep name="libglade.so.0"/><dep name="libglade-gnome.so.0"/><dep name="libgdk_pixbuf.so.2"/><dep name="libgdk_imlib.so.1"/><dep name="libgdk-1.2.so.0"/><dep name="libgconf-gtk-1.so.1"/><dep name="libgconf-1.so.1"/><dep name="libesd.so.0"/><dep name="libdl.so.2"/><dep name="libdb.so.2"/><dep name="libconfig_archiver.so.0"/><dep name="libcapplet.so.0"/><dep name="libc.so.6"/><dep name="libbonobox.so.2"/><dep name="libbonobo_conf.so.0"/><dep name="libbonobo.so.2"/><dep name="libaudiofile.so.0"/><dep name="libart_lgpl.so.2"/><dep name="libXi.so.6"/><dep name="libXext.so.6"/><dep name="libX11.so.6"/><dep name="libSM.so.6"/><dep name="libORBitutil.so.0"/><dep name="libORBitCosNaming.so.0"/><dep name="libORBit.so.0"/><dep name="libIIOP.so.0"/><dep name="libICE.so.6"/><dep name="ld-linux.so.2"/></requires><provides><dep name="/usr/bin/wm-properties-capplet"/><dep name="/usr/bin/url-properties"/><dep name="/usr/bin/ui-properties"/><dep name="/usr/bin/mime-type-capplet"/><dep name="/usr/bin/gtk-theme-selector-capplet"/><dep name="/usr/bin/file-types-capplet"/><dep name="control-center-plus" op="=" version="1.5.11" release="ximian.1"/></provides>   </package>
+    <package>
+      <name>libcapplet-devel</name>
+      <summary>Library for Gnome Control Center applets - Development</summary>
+      <description>libcapplet1 1.5.11 updated/soname change</description>
+      <section>devel</section>
+      <history>
+        <update>
+          <hid>40670</hid>
+          <epoch>0</epoch>
+          <version>1.5.11</version>
+          <release>ximian.1</release>
+          <filename>libcapplet-devel-1.5.11-ximian.1.i386.rpm</filename>
+          <filesize>27433</filesize>
+          <installedsize>71522</installedsize>
+          <importance>suggested</importance>
+          <description>libcapplet1 1.5.11 updated/soname change</description>
+        </update>
+        <update>
+          <hid>29613</hid>
+          <epoch>0</epoch>
+          <version>1.5.8</version>
+          <release>ximian.1</release>
+          <filename>libcapplet-devel-1.5.8-ximian.1.i386.rpm</filename>
+          <filesize>26200</filesize>
+          <installedsize>69311</installedsize>
+          <md5sum>ab237e78748f6a9e5d97a7fe3f436213</md5sum>
+          <importance>suggested</importance>
+          <description>Initial release to Red Carpet</description>
+        </update>
+     </history>
+<requires><dep name="libcapplet1" op="=" version="1.5.11"/></requires><provides><dep name="libcapplet-devel" op="=" version="1.5.11" release="ximian.1"/></provides>   </package>
+    <package>
+      <name>control-center</name>
+      <summary>The GNOME Control Center</summary>
+      <description>Patched to call xscreensaver-demo correctly</description>
+      <section>system</section>
+      <history>
+        <update>
+          <hid>40673</hid>
+          <epoch>1</epoch>
+          <version>1.5.12</version>
+          <release>ximian.2</release>
+          <filename>control-center-1.5.12-ximian.2.i386.rpm</filename>
+          <filesize>489576</filesize>
+          <installedsize>1359825</installedsize>
+          <importance>suggested</importance>
+          <description>Patched to call xscreensaver-demo correctly</description>
+        </update>
+        <update>
+          <hid>29614</hid>
+          <epoch>1</epoch>
+          <version>1.5.9</version>
+          <release>ximian.1</release>
+          <filename>control-center-1.5.9-ximian.1.i386.rpm</filename>
+          <filesize>2638062</filesize>
+          <installedsize>7811513</installedsize>
+          <md5sum>e1a9474537c2d3cc664d806e51cc713e</md5sum>
+          <importance>suggested</importance>
+          <description>Initial release to Red Carpet</description>
+        </update>
+     </history>
+<requires><dep name="libc.so.6(GLIBC_2.1.3)"/><dep name="libc.so.6(GLIBC_2.1)"/><dep name="libc.so.6(GLIBC_2.0)"/><dep name="/bin/sh"/><dep name="libz.so.1"/><dep name="libxml.so.1"/><dep name="libpopt.so.0"/><dep name="liboaf.so.0"/><dep name="libnsl.so.1"/><dep name="libm.so.6"/><dep name="libgtkhtml.so.20"/><dep name="libgtk-1.2.so.0"/><dep name="libgnorba.so.27"/><dep name="libgnomeui.so.32"/><dep name="libgnomesupport.so.0"/><dep name="libgnomeprint.so.15"/><dep name="libgnomecanvaspixbuf.so.1"/><dep name="libgnome.so.32"/><dep name="libgmodule-1.2.so.0"/><dep name="libglib-1.2.so.0"/><dep name="libglade.so.0"/><dep name="libglade-gnome.so.0"/><dep name="libgdk_pixbuf_xlib.so.2"/><dep name="libgdk_pixbuf.so.2"/><dep name="libgdk_imlib.so.1"/><dep name="libgdk-1.2.so.0"/><dep name="libgal.so.18"/><dep name="libfreetype.so.6"/><dep name="libesd.so.0"/><dep name="libdl.so.2"/><dep name="libdb.so.2"/><dep name="libconfig_archiver.so.0"/><dep name="libcapplet.so.1"/><dep name="libc.so.6"/><dep name="libbonobox.so.2"/><dep name="libbonobo_conf.so.0"/><dep name="libbonobo.so.2"/><dep name="libaudiofile.so.0"/><dep name="libart_lgpl.so.2"/><dep name="libXi.so.6"/><dep name="libXext.so.6"/><dep name="libX11.so.6"/><dep name="libSM.so.6"/><dep name="libORBitutil.so.0"/><dep name="libORBitCosNaming.so.0"/><dep name="libORBit.so.0"/><dep name="libIIOP.so.0"/><dep name="libICE.so.6"/><dep name="ld-linux.so.2"/><dep name="/bin/sh"/><dep name="/bin/sh"/><dep name="bonobo-conf" op="&gt;=" version="0.12"/></requires><provides><dep name="/usr/bin/sound-properties-control"/><dep name="/usr/bin/sound-properties"/><dep name="/usr/bin/mouse-properties-control"/><dep name="/usr/bin/mouse-properties-capplet"/><dep name="/usr/bin/keyboard-properties-control"/><dep name="/usr/bin/keyboard-properties"/><dep name="/usr/bin/gnomecc"/><dep name="/usr/bin/default-applications-properties"/><dep name="/usr/bin/config-archiver"/><dep name="/usr/bin/bonobo-moniker-archiver"/><dep name="/usr/bin/background-properties-control"/><dep name="/usr/bin/background-properties-capplet"/><dep name="control-center" op="=" epoch="1" version="1.5.12" release="ximian.2"/><dep name="libconfig_archiver.so.0"/></provides>   </package>
+    <package>
+      <name>libcapplet1</name>
+      <summary>Library for Gnome Control Center applets</summary>
+      <description>libcapplet1 1.5.11 updated/soname change</description>
+      <section>system</section>
+      <history>
+        <update>
+          <hid>40671</hid>
+          <epoch>0</epoch>
+          <version>1.5.11</version>
+          <release>ximian.1</release>
+          <filename>libcapplet1-1.5.11-ximian.1.i386.rpm</filename>
+          <filesize>42441</filesize>
+          <installedsize>121253</installedsize>
+          <importance>suggested</importance>
+          <description>libcapplet1 1.5.11 updated/soname change</description>
+        </update>
+     </history>
+<requires><dep name="libc.so.6(GLIBC_2.1.3)"/><dep name="libc.so.6(GLIBC_2.0)"/><dep name="libc.so.6"/><dep name="ld-linux.so.2"/><dep name="/bin/sh"/></requires><provides><dep name="libcapplet1" op="=" version="1.5.11" release="ximian.1"/><dep name="libcapplet.so.1"/></provides><conflicts><dep name="libcapplet"/></conflicts>   </package>
+    <package>
+      <name>libcapplet0</name>
+      <summary>Library for Gnome Control Center applets</summary>
+      <description>dependency fixes</description>
+      <section>system</section>
+      <history>
+        <update>
+          <hid>44725</hid>
+          <epoch>0</epoch>
+          <version>1.5.8</version>
+          <release>ximian.4</release>
+          <filename>libcapplet0-1.5.8-ximian.4.i386.rpm</filename>
+          <filesize>42706</filesize>
+          <installedsize>120115</installedsize>
+          <importance>suggested</importance>
+          <description>dependency fixes</description>
+        </update>
+     </history>
+<requires><dep name="libc.so.6(GLIBC_2.1.3)"/><dep name="libc.so.6(GLIBC_2.0)"/><dep name="libc.so.6"/><dep name="ld-linux.so.2"/><dep name="/bin/sh"/></requires><provides><dep name="libcapplet0" op="=" version="1.5.8" release="ximian.4"/><dep name="libcapplet.so.0"/></provides><conflicts><dep name="libcapplet"/></conflicts>   </package>
+  </subchannel>
+</channel>

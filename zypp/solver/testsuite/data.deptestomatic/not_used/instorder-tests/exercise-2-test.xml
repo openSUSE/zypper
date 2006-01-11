@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+  novell-groupwise-gwclient has some prereqs
+-->
+<test>
+<setup>
+  <channel name="test" file="stable-i386-packages.xml"/>
+</setup>
+<trial>
+  <install channel="test" package="novell-groupwise-gwclient"/>
+  <instorder/>
+</trial>
+</test>

@@ -1,0 +1,51 @@
+<channel><subchannel>
+<package>
+  <name>gaim-gnome</name>
+  <summary>A fake package</summary>
+  <description>A fake package</description>
+  <section>misc</section>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <epoch>1</epoch>
+      <version>0.11.0pre9</version>
+      <release>ximian.3</release>
+      <filename>foo.bar</filename>
+      <filesize>123</filesize>
+      <installedsize>234</installedsize>
+      <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+      <importance>suggested</importance>
+      <description>Yggdrasil Linux</description>
+    </update>
+  </history>
+  <provides>
+    <dep name="gaim-gnome" op="=" epoch="1" version="0.11.0pre9" release="ximian.3"/>
+  </provides>
+  <conflicts>
+    <dep name="gaim"/>
+  </conflicts>
+</package>
+<package>
+  <name>gaim</name>
+  <summary>A fake package</summary>
+  <description>A fake package</description>
+  <section>misc</section>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <epoch>1</epoch>
+      <version>0.11.0pre9</version>
+      <release>ximian.3</release>
+      <filename>foo.bar</filename>
+      <filesize>123</filesize>
+      <installedsize>234</installedsize>
+      <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+      <importance>suggested</importance>
+      <description>Yggdrasil Linux</description>
+    </update>
+  </history>
+  <provides>
+    <dep name="gaim" op="=" epoch="1" version="0.11.0pre9" release="ximian.3"/>
+  </provides>
+</package>
+</subchannel></channel>

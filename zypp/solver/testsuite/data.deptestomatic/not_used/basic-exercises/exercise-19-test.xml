@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-19-system.xml"/>
+  <channel name="test" file="exercise-19-packages.xml"/>
+</setup>
+<trial>
+  <install channel="test" package="C"/>
+</trial>
+<trial>
+  <install channel="test" package="D"/>
+</trial>
+</test>
