@@ -25,15 +25,16 @@ namespace zypp
    * \class Url
    * \brief Url manipulation class.
    *
-   * The generic URL (URI) syntax and its components are defined in the
+   * The generic URL (URI) syntax and its main components are defined in
    * RFC3986 (http://rfc.net/rfc3986.html) Section 3, "Syntax Components".
-   * The symantics of a URL and its components is defined in the
-   * specification of the scheme used in the URL.
+   * The scheme specific URL syntax and semantics is defined in the
+   * specification of the particular scheme. See also RFC1738
+   * (http://rfc.net/rfc1738.html), that defines specific syntax for
+   * several URL schemes.
    *
    * This class provides methods to access and manipulate generic and
    * common scheme-specific URL components (or using the more general
    * term, URI components).
-   *
    * To consider the scheme-specifics of a URL, the Url class contains
    * a reference object pointing to a UrlBase or derived object, that
    * implements the scheme specifics.
@@ -82,8 +83,16 @@ namespace zypp
   class Url
   {
   public:
+    /**
+     * Encoding flags.
+     */
     typedef zypp::url::EEncoding    EEncoding;
+
+    /**
+     * View options.
+     */
     typedef zypp::url::ViewOptions  ViewOptions;
+
 
     ~Url();
     Url();
@@ -91,7 +100,11 @@ namespace zypp
     /**
      * Create a new Url object as shared copy of the given one.
      *
-     * \param url The Url object to make a copy of.
+     * Upon return, both objects will point to the same underlying
+     * object. This state will remain until one of the object is
+     * modified.
+     *
+      * \param url The Url object to make a copy of.
      */
     Url(const Url &url);
 
@@ -108,6 +121,7 @@ namespace zypp
     Url(const std::string &encodedUrl);
 
 
+    // -----------------
     /**
      * \brief Parse a percent-encoded URL string.
      *
@@ -126,8 +140,9 @@ namespace zypp
     parseUrl(const std::string &encodedUrl);
 
 
+    // -----------------
     /**
-     * \brief Assigns parsed percent-encoded URL string.
+     * \brief Assigns parsed percent-encoded URL string to the object.
      *
      * Parses \p encodedUrl string using the parseUrl() method
      * and assigns the result to the current object.
@@ -141,10 +156,11 @@ namespace zypp
 
 
     /**
-     * \brief Assigns the \p url to the current object.
+     * \brief Assign shared copy of \p url to the current object.
      *
-     * After this operation the current object will be a shared
-     * copy of the object specified in the \p url parameter.
+     * Upon return, both objects will point to the same underlying
+     * object. This state will remain until one of the object is
+     * modified.
      *
      * \param url The Url object to make a copy of.
      * \return A reference to this Url object.
@@ -153,6 +169,7 @@ namespace zypp
     operator = (const Url &url);
 
 
+    // -----------------
     /**
      * \brief Register a scheme-specific implementation.
      *
@@ -164,37 +181,50 @@ namespace zypp
     registerScheme(const std::string &scheme,
                    url::UrlRef       urlImpl);
 
-
     /**
+     * \brief Returns all registered scheme names.
      * \return A vector with registered URL scheme names.
      */
-    static url::UrlBase::Schemes
-    getAllKnownSchemes();
-
+    static zypp::url::UrlSchemes
+    getRegisteredSchemes();
 
     /**
+     * \brief Returns if scheme name is registered.
+     * \return True, if scheme name is registered.
+     */
+    static bool
+    isRegisteredScheme(const std::string &scheme);
+
+
+    // -----------------
+    /**
+     * \brief Returns scheme names known to this object.
      * \return A vector with scheme names known by this object.
      */
-    url::UrlBase::Schemes
+    zypp::url::UrlSchemes
     getKnownSchemes() const;
 
 
     /**
      * \brief Verifies specified scheme name.
      *
-     * Verifies if the specified \p scheme name is valid (generic
-     * scheme name syntax) and if is contained in the list of
-     * current objects known scheme names.
+     * Verifies the generic syntax of the specified \p scheme name
+     * and if it is contained in the current object's list of known
+     * schemes (see getKnownSchemes()) if the list is not empty.
      *
-     * \return True, if generic scheme name syntax is valid
-     *         and if it is known to the current object.
+     * The default implementation in the UrlBase class returns an
+     * emtpy list of known schemes, causing a check of the generic
+     * syntax only.
+     *
+     * \return True, if generic scheme name syntax is valid and
+     *         the scheme name is known to the current object.
      */
     bool
     isValidScheme(const std::string &scheme) const;
 
 
     /**
-     * \brief Verifies Url.
+     * \brief Verifies the Url.
      *
      * Verifies if the current object contains a non-empty scheme
      * name. Additional semantical URL checks may be performed by
@@ -220,8 +250,7 @@ namespace zypp
     /**
      * Returns a string representation of the Url object.
      *
-     * To include a password in the resulting Url string,
-     * use:
+     * To include a password in the resulting Url string, use:
      * \code
      *    url.toString(url::ViewOptions() +
      *                 url::ViewOptions::WITH_PASSWORD);
@@ -243,93 +272,95 @@ namespace zypp
 
     // -----------------
     /**
+     * Returns the scheme name of the URL.
      * \return Scheme name of the current Url object.
      */
     std::string
     getScheme() const;
 
 
+    // -----------------
     /**
-     * \return The encoded authority component of the URL
-     *         ("user:pass@host:port" without leading "//").
+     * Returns the encoded authority component of the URL.
+     *
+     * The returned authority string does not contain the leading
+     * "//" separator characters, but just its "user:pass@host:port"
+     * content only.
+     *
+     * \return The encoded authority component string.
      */
     std::string
     getAuthority() const;
 
-
     /**
-     * \return The encoded path component of the URL
-     *         inclusive path parameters if any.
-     */
-    std::string
-    getPathData() const;
-
-
-    /**
-     * \return The encoded query string component of the URL.
-     */
-    std::string
-    getQueryString() const;
-
-
-    /**
-     * \return The encoded fragment component of the URL.
-     */
-    std::string
-    getFragment(EEncoding eflag = zypp::url::E_DECODED) const;
-
-
-    // -----------------
-    /**
-     * \param eflag Flag if the usename should be decoded or not.
-     * \return The username sub-component from URL-Authority.
+     * Returns the username from the URL authority.
+     * \param eflag Flag if the usename should be percent-decoded or not.
+     * \return The username sub-component from the URL authority.
      */
     std::string
     getUsername(EEncoding eflag = zypp::url::E_DECODED) const;
 
-
     /**
-     * \param eflag Flag if the password should be decoded or not.
-     * \return The password sub-component from URL-Authority.
+     * Returns the password from the URL authority.
+     * \param eflag Flag if the password should be percent-decoded or not.
+     * \return The password sub-component from the URL authority.
      */
     std::string
     getPassword(EEncoding eflag = zypp::url::E_DECODED) const;
 
-
     /**
-     * \param eflag Flag if the host should be decoded or not.
-     * \return The host (hostname or IP) sub-component from URL-Authority.
+     * Returns the hostname or IP from the URL authority.
+     *
+     * In case the Url contains an IP number, it may be surrounded
+     * by "[" and "]" characters, for example "[::1]" for an IPv6
+     * localhost address.
+     *
+     * \param eflag Flag if the host should be percent-decoded or not.
+     * \return The host sub-component from the URL authority.
      */
     std::string
     getHost(EEncoding eflag = zypp::url::E_DECODED) const;
 
     /**
+     * Returns the port from the URL authority.
      * \param eflag Flag if the port should be decoded or not.
-     * \return The port sub-component from URL-Authority.
+     * \return The port sub-component from the URL authority.
      */
     std::string
     getPort() const;
 
 
+    // -----------------
     /**
+     * Returns the encoded path component of the URL.
+     *
+     * The path data contains the path name, optionally
+     * followed by path parameters separated with a ";"
+     * character, for example "/foo/bar;version=1.1".
+     *
+     * \return The encoded path component of the URL.
+     */
+    std::string
+    getPathData() const;
+
+    /**
+     * Returns the path name from the URL.
      * \param eflag Flag if the path should be decoded or not.
      * \return The path name sub-component without path parameters
-     *  from Path-Data of the URL.
+     *  from Path-Data component of the URL.
      */
     std::string
     getPathName(EEncoding eflag = zypp::url::E_DECODED) const;
 
-
     /**
-     * \return The encoded path parameters from Path-Data of the URL.
+     * Returns the path parameters from the URL.
+     * \return The encoded path parameters from the URL.
      */
     std::string
     getPathParams() const;
 
-
-    // -----------------
     /**
-     * Returns a vector of path parameter substrings.
+     * Returns a vector with path parameter substrings.
      *
      * The default path parameter separator is the \c ',' character.
      * A schema specific object may overide the default separators.
@@ -342,7 +373,6 @@ namespace zypp
      */
     zypp::url::ParamVec
     getPathParamsVec() const;
-
 
     /**
      * Returns a string map with path parameter keys and values.
@@ -362,9 +392,8 @@ namespace zypp
     zypp::url::ParamMap
     getPathParamsMap(EEncoding eflag = zypp::url::E_DECODED) const;
 
-
     /**
-     * Return the value for the specified path parameter key.
+     * Return the value for the specified path parameter.
      *
      * For example, if the path parameters string is "foo=1,bar=2"
      * the method will return the substring "1" for the param key
@@ -380,8 +409,21 @@ namespace zypp
                  EEncoding eflag = zypp::url::E_DECODED) const;
 
 
+    // -----------------
     /**
-     * Returns a vector of query string parameter substrings.
+     * Returns the encoded query string component of the URL.
+     *
+     * The query string is returned without first "?" (separator)
+     * character. Further "?" characters as in e.g. LDAP URL's
+     * remains in the returned string.
+     *
+     * \return The encoded query string component of the URL.
+     */
+    std::string
+    getQueryString() const;
+
+    /**
+     * Returns a vector with query string parameter substrings.
      *
      * The default query string parameter separator is the \c '&'
      * character.
@@ -397,7 +439,7 @@ namespace zypp
     getQueryStringVec() const;
 
     /**
-     * Returns a string map with query string keys and values.
+     * Returns a string map with query parameter and their values.
      *
      * The default query string parameter separator is the \c ','
      * character, the default key/value separator the \c '=' character.
@@ -414,7 +456,7 @@ namespace zypp
     getQueryStringMap(EEncoding eflag = zypp::url::E_DECODED) const;
 
     /**
-     * Return the value for the specified query parameter key.
+     * Return the value for the specified query parameter.
      *
      * For example, if the query string is "foo=1,bar=2" the method
      * will return the substring "1" for the param key "foo" and
@@ -431,60 +473,157 @@ namespace zypp
 
 
     // -----------------
+    /**
+     * Returns the encoded fragment component of the URL.
+     * \param eflag Flag if the fragment should be percent-decoded or not.
+     * \return The encoded fragment component of the URL.
+     */
+    std::string
+    getFragment(EEncoding eflag = zypp::url::E_DECODED) const;
+
+
+    // -----------------
+    /**
+     * \brief Set the scheme name in the URL.
+     * \param scheme The new scheme name.
+     */
     void
     setScheme(const std::string &scheme);
 
+
+    // -----------------
+    /**
+     * \brief Set the authority component in the URL.
+     *
+     * The \p authority string shoud contain the "user:pass@host:port"
+     * sub-components without any leading "//" separator characters.
+     *
+     * \param authority The encoded authority component string.
+     */
     void
     setAuthority(const std::string &authority);
 
-    void
-    setPathData(const std::string &pathdata);
-
-    void
-    setQueryString(const std::string &querystr);
-
-    void
-    setFragment(const std::string &fragment);
-
-
-    // -----------------
+    /**
+     * \brief Set the username in the URL authority.
+     * \param user The new username.
+     */
     void
     setUsername(const std::string &user);
 
+    /**
+     * \brief Set the password in the URL authority.
+     * \param pass The new password.
+     */
     void
     setPassword(const std::string &pass);
 
+    /**
+     * \brief Set the hostname or IP in the URL authority.
+     * \param host The new hostname or IP.
+     */
     void
     setHost(const std::string &host);
 
+    /**
+     * \brief Set the port number in the URL authority.
+     * \param port The new port number.
+     */
     void
     setPort(const std::string &port);
 
+
+    // -----------------
+    /**
+     * \brief Set the path data component in the URL.
+     *
+     * The \p pathdata string may include path parameters
+     * separated using the ";" separator character.
+     *
+     * \param pathdata The encoded path data component string.
+     */
+    void
+    setPathData(const std::string &pathdata);
+
+    /**
+     * \brief Set the path name.
+     * \param path The new path name.
+     */
     void
     setPathName(const std::string &path);
 
+    /**
+     * \brief Set the path parameters.
+     * \param params The new path parameter string.
+     */
     void
     setPathParams(const std::string &params);
 
-
-    // -----------------
-    void
-    setPathParam(const std::string &param, const std::string &value);
-
+    /**
+     * \brief Set the path parameters.
+     * \param pvec The vector with path parameters.
+     */
     void
     setPathParamsVec(const zypp::url::ParamVec &pvec);
 
+    /**
+     * \brief Set the path parameters.
+     * \param pmap The map with path parameters.
+     */
     void
     setPathParamsMap(const zypp::url::ParamMap &pmap);
 
+    /**
+     * \brief Set or add value for the specified path parameter.
+     * \param param The path parameter name.
+     * \param value The path parameter value.
+     */
+    void
+    setPathParam(const std::string &param, const std::string &value);
+
+
+    // -----------------
+    /**
+     * \brief Set the query string in the URL.
+     *
+     * The \p querystr string will be supposed to not to
+     * contain the "?" separator character.
+     *
+     * \param querystr The new encoded query string.
+     */
+    void
+    setQueryString(const std::string &querystr);
+
+    /**
+     * \brief Set the query parameters.
+     * \param qvec The vector with query parameters.
+     */
+    void
+    setQueryStringVec(const zypp::url::ParamVec &qvec);
+
+    /**
+     * \brief Set the query parameters.
+     * \param qmap The map with query parameters.
+     */
+    void
+    setQueryStringMap(const zypp::url::ParamMap &qmap);
+
+    /**
+     * \brief Set or add value for the specified query parameter.
+     * \param param The query parameter name.
+     * \param value The query parameter value.
+     */
     void
     setQueryParam(const std::string &param, const std::string &value);
 
-    void
-    setQueryStringVec(const zypp::url::ParamVec &pvec);
 
+    // -----------------
+    /**
+     * \brief Set the fragment string in the URL.
+     * \param fragment The new encoded fragment string.
+     */
     void
-    setQueryStringMap(const zypp::url::ParamMap &pmap);
+    setFragment(const std::string &fragment);
+
 
   private:
     url::UrlRef m_impl;
