@@ -69,7 +69,9 @@ namespace zypp
         iterator_t end;
 
         // go
+        parseBegin();
         doParse( begin, end, *this );
+        parseEnd();
       }
 
       ///////////////////////////////////////////////////////////////////

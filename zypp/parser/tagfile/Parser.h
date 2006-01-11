@@ -39,11 +39,17 @@ namespace zypp
         virtual ~Parser()
         {}
 
+        /* Indicates begin of parsing. */
+        virtual void parseBegin()
+        {}
         /* Overload to consume SingleTag data. */
         virtual void consume( const STag & stag_r )
         {}
         /* Overload to consume MulitTag data. */
         virtual void consume( const MTag & mtag_r )
+        {}
+        /* Indicates end of parsing. */
+        virtual void parseEnd()
         {}
 
         /* Parse file and invoke consume on each tag found.

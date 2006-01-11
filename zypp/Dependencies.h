@@ -49,7 +49,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   /** \relates Dependencies Stream output */
-  inline std::ostream & operator<<( std::ostream & str, const Dependencies & obj );
+  std::ostream & operator<<( std::ostream & str, const Dependencies & obj );
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
