@@ -374,6 +374,16 @@ namespace zypp
       return Capability(); // not reached
     }
 
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : CapFactory::encode
+  //	METHOD TYPE : std::string
+  //
+  std::string CapFactory::encode( const Capability & cap_r ) const
+  {
+    return cap_r._pimpl->encode();
+  }
+
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<

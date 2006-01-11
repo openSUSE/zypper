@@ -46,15 +46,6 @@ namespace zypp
     ~CapFactory();
 
   public:
-#if 0
-    /** Parse Capability from string (incl. Resolvable::Kind).
-     * \a strval_r is expected to define a valid Capability \em including
-     * the Resolvable::Kind.
-     * \throw EXCEPTION on parse error.
-    */
-    Capability parse( const std::string & strval_r ) const;
-#endif
-
     /** Parse Capability from string providing Resolvable::Kind.
      * \a strval_r is expected to define a valid Capability.
      * \throw EXCEPTION on parse error.
@@ -78,6 +69,10 @@ namespace zypp
                       const std::string & name_r,
                       Rel op_r,
                       const Edition & edition_r ) const;
+
+  public:
+    /** Provide a parsable string representation of \a cap_r. */
+    std::string encode( const Capability & cap_r ) const;
 
   private:
     /** Implementation */

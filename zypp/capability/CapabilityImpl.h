@@ -71,6 +71,10 @@ namespace zypp
       std::string index() const
       { return value(); }
 
+      /** \todo check it. */
+      std::string encode() const
+      { return asString(); }
+
     protected: // Match helpers
       /** Implementation dependent value. */
       virtual std::string value() const
