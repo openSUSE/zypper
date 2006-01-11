@@ -53,7 +53,7 @@ namespace zypp
       ResolverInfoChildOf::toString ( const ResolverInfoChildOf & child)
       {
           string res = "<resolverinfochildof '";
-      
+	  //Translator all.%s = name of packages,patches,....
           res += str::form (_("%s part of %s"),
 			    ResolverInfo::toString (child).c_str(),
 			    child.resItemsToString(false).c_str());
