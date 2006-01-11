@@ -158,7 +158,8 @@ proc multi-run { src } {
 	      continue
 	  }
 
-	  exec sh -c "/usr/bin/fgrep \'>!>\' $outfile >$outfilegrep"
+	  set command "/usr/bin/fgrep \'>!>\' $outfile >$outfilegrep"
+	  set oops [catch { set result [exec sh -c $command] } catched]
 
 	  if { [ file exists $refoutfile ] == 0 } {
 	      perror "Missing file $refoutfile" 0
