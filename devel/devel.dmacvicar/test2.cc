@@ -4,6 +4,9 @@
 #include <fstream>
 #include <sstream>
 
+#include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
+#include "boost/filesystem/fstream.hpp"    // ditto
+
 #include "dbxml/DbXml.hpp"
 
 #include <zypp/base/Logger.h>
@@ -45,6 +48,11 @@ using namespace zypp;
 using namespace zypp::parser::yum;
 using namespace zypp::source::yum;
 using namespace zypp::storage;
+
+using namespace boost::filesystem;                   // for ease of tutorial presentation;
+                                           // a namespace alias is preferred in real code
+
+
 //using namespace DbXml;
 
 template<class T>
@@ -127,21 +135,13 @@ template<> // or constPtr?
 std::string toXML( Package::Ptr obj )
 {
   stringstream out;
-  /*
-  out << "<script>" << std::endl;
+  out << "<package>" << std::endl;
   // reuse Resolvable information serialize function
   toXML(static_cast<Resolvable::Ptr>(obj));
   out << "  <do>" << std::endl;
-  out << "      " << obj->do_script() << std::endl;
+  //out << "      " << obj->do_script() << std::endl;
   out << "  </do>" << std::endl;
-  if ( obj->undo_available() )
-  {
-    out << "  <undo>" << std::endl;
-    out << "      " << obj->undo_script() << std::endl;
-    out << "  </undo>" << std::endl;
-  }
-  out << "</script>" << std::endl;
-  */
+  out << "</package>" << std::endl;
   return out.str();
 }
 
@@ -205,12 +205,92 @@ std::string toXML( Patch::Ptr obj )
   return out.str();
 }
 
-class XMLBackend : public base::ReferenceCounted, private base::NonCopyable
+class StorageBackend : public base::ReferenceCounted, private base::NonCopyable
 {
 	public:
 	//friend std::ostream & operator<<( std::ostream & str, const PatchYUMSerializer & obj );
-	typedef intrusive_ptr<XMLBackend> Ptr;
-	typedef intrusive_ptr<const XMLBackend> constPtr;
+	typedef intrusive_ptr<StorageBackend> Ptr;
+	typedef intrusive_ptr<const StorageBackend> constPtr;
+  
+  StorageBackend()
+	{
+		
+	}
+
+  ~StorageBackend()
+  {
+    DBG << endl;
+  }
+  virtual void initDatabase() = 0;
+  virtual void storePatch( Patch::Ptr p ) = 0;
+};
+
+#define ZYPP_DB_DIR path("./zypp_db")
+
+class TextBackend : public StorageBackend
+{
+  public:
+  //friend std::ostream & operator<<( std::ostream & str, const PatchYUMSerializer & obj );
+  typedef intrusive_ptr<TextBackend> Ptr;
+  typedef intrusive_ptr<const TextBackend> constPtr;
+
+  void initDatabase()
+  {
+    if ( !exists( ZYPP_DB_DIR ) )
+      initDirTree();
+  }
+
+  void initDirTree()
+  {
+    // FIXME duncan * handle exceptions
+    DBG << "Creating directory structure..." << std::endl;
+    create_directory( ZYPP_DB_DIR );
+    create_directory( ZYPP_DB_DIR / path("patches") );
+    create_directory( ZYPP_DB_DIR / path("selections") );
+    create_directory( ZYPP_DB_DIR / path("products") );
+  }
+
+  TextBackend()
+  {
+    initDatabase();
+  }
+
+  ~TextBackend()
+  {
+    DBG << endl;
+  }
+
+  std::list<Patch::Ptr> installedPatches()
+  {
+    return list<Patch::Ptr>();
+  }
+
+  void storePatch( Patch::Ptr p )
+  {
+    //ofstream file( "foobar/cheeze" );
+    //file << "tastes good!\n";
+    //file.close();
+    //if ( !exists( "foobar/cheeze" ) )
+    //std::cout << "Something is rotten in foobar\n";
+    // Get a manager object.
+    //XmlManager myManager;
+    // Open a container
+    //XmlContainer myContainer =  myManager.openContainer("zypp_db.dbxml");
+
+    DBG << std::endl;
+    DBG << std::endl << toXML(p) << std::endl;
+  }
+  private:
+  //std::ostream & operator<<( std::ostream & str, const PatchYUMSerializer & obj )
+};
+
+
+class XMLBackend : public StorageBackend
+{
+  public:
+  //friend std::ostream & operator<<( std::ostream & str, const PatchYUMSerializer & obj );
+  typedef intrusive_ptr<XMLBackend> Ptr;
+  typedef intrusive_ptr<const XMLBackend> constPtr;
 
   void initDatabase()
   {
@@ -220,10 +300,10 @@ class XMLBackend : public base::ReferenceCounted, private base::NonCopyable
     //XmlContainer myContainer =  myManager.openContainer("zypp_db.dbxml");
   }
 
-	XMLBackend()
-	{
-		
-	}
+  XMLBackend()
+  {
+    
+  }
 
   ~XMLBackend()
   {
@@ -235,10 +315,9 @@ class XMLBackend : public base::ReferenceCounted, private base::NonCopyable
     DBG << std::endl;
     DBG << std::endl << toXML(p) << std::endl;
   }
-	private:
-	//std::ostream & operator<<( std::ostream & str, const PatchYUMSerializer & obj )
+  private:
+  //std::ostream & operator<<( std::ostream & str, const PatchYUMSerializer & obj )
 };
-
 
 
 int main()
@@ -263,7 +342,7 @@ int main()
 	Patch::Ptr patch1;
 	
 	//YUMPatchParser iter(cin,"");
-	ifstream patch_file("patch.xml");
+	std::ifstream patch_file("patch.xml");
 	YUMPatchParser iter(patch_file,"");
 	for (; !iter.atEnd(); ++iter)
 	{
