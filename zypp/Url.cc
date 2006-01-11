@@ -37,131 +37,145 @@ namespace zypp
                                              "(#(.*))?"
 
 
-  // -----------------------------------------------------------------
-  // FIXME:
-  class LDAPUrl: public UrlBase
-  {
-  public:
-    LDAPUrl(): UrlBase()
+  ////////////////////////////////////////////////////////////////////
+  namespace
+  { //////////////////////////////////////////////////////////////////
+
+
+    // ---------------------------------------------------------------
+    class LDAPUrl: public UrlBase
     {
-      configure();
-    }
-
-    LDAPUrl(const LDAPUrl &url): UrlBase(url)
-   {}
-
-    virtual UrlBase *
-    clone() const
-    {
-      return new LDAPUrl(*this);
-    }
-
-    virtual UrlBase::Schemes
-    getKnownSchemes() const
-    {
-      UrlBase::Schemes schemes(2);
-      schemes[0] = "ldap";
-      schemes[1] = "ldaps";
-      return schemes;
-    }
-
-    virtual void
-    configure()
-    {
-      // => put base-dn to path params :-)
-      // ahm... will this work propelly?
-      //config("sep_pathparams", "/");
-
-      config("psep_querystr",  "?");
-      config("vsep_querystr",  "");
-
-      config("safe_pathname",  "/=,");
-      config("safe_querystr",  "(),=");
-
-      // not allowed here
-      config("rx_username",     "");
-      config("rx_password",     "");
-      config("rx_fragment",     "");
-    }
-  };
-
-
-  // -----------------------------------------------------------------
-  // FIXME:
-  class UrlByScheme
-  {
-  private:
-    typedef std::map<std::string,UrlRef> UrlBySchemeMap;
-    UrlBySchemeMap urlByScheme;
-
-  public:
-    UrlByScheme()
-    {
-      UrlRef ref;
-
-      ref.reset( new LDAPUrl());
-      addUrlByScheme("ldap", ref);
-      addUrlByScheme("ldaps", ref);
-
-      ref.reset( new UrlBase());
-      // don't show empty authority
-      ref->setViewOptions( ref->getViewOptions() -
-                           zypp::url::ViewOption::EMPTY_AUTHORITY);
-      ref->config("rx_username",      "");  // disallow username
-      ref->config("rx_password",      "");  // disallow password
-      // FIXME: hmm... also host+port?
-      addUrlByScheme("nfs",    ref);
-
-      ref->config("safe_pathname",    "@"); // don't encode @ in path
-      ref->config("rx_hostname",      "");  // disallow hostname
-      ref->config("rx_port",          "");  // disallow port
-      addUrlByScheme("mailto", ref);
-    }
-
-    bool
-    addUrlByScheme(const std::string &scheme,
-                   UrlRef            urlImpl)
-    {
-      if( !scheme.empty() && urlImpl &&
-          urlImpl->isValidScheme(scheme))
+    public:
+      LDAPUrl(): UrlBase()
       {
-        UrlRef ref(urlImpl);
-        ref->clear();
-        urlByScheme[str::toLower(scheme)] = ref;
-        return true;
+        configure();
       }
-      return false;
-    }
 
-    UrlRef
-    getUrlByScheme(const std::string &scheme) const
-    {
-      UrlBySchemeMap::const_iterator i(urlByScheme.find(str::toLower(scheme)));
-      if( i != urlByScheme.end())
+      LDAPUrl(const LDAPUrl &url): UrlBase(url)
+      {}
+
+      virtual UrlBase *
+      clone() const
       {
-        return i->second;
+        return new LDAPUrl(*this);
       }
-      return UrlRef();
-    }
 
-    UrlBase::Schemes
-    getKnownSchemes() const
-    {
-      UrlBySchemeMap::const_iterator i(urlByScheme.begin());
-      UrlBase::Schemes               schemes;
-
-      schemes.reserve(urlByScheme.size());
-      for( ; i != urlByScheme.begin(); ++i)
+      virtual UrlSchemes
+      getKnownSchemes() const
       {
-        schemes.push_back(i->first);
+        UrlSchemes schemes(2);
+        schemes[0] = "ldap";
+        schemes[1] = "ldaps";
+        return schemes;
       }
-      return schemes;
-    }
-  };
+
+      virtual void
+      configure()
+      {
+        // => put base-dn to path params :-)
+        // ahm... will this work propelly?
+        //config("sep_pathparams", "/");
+
+        config("psep_querystr",  "?");
+        config("vsep_querystr",  "");
+
+        config("safe_pathname",  "/=,");
+        config("safe_querystr",  "(),=");
+
+        // not allowed here
+        config("rx_username",     "");
+        config("rx_password",     "");
+        config("rx_fragment",     "");
+      }
+    };
 
 
-  // -----------------------------------------------------------------
-  UrlByScheme g_urlSchemeRepository;
+    // ---------------------------------------------------------------
+    // FIXME:
+    class UrlByScheme
+    {
+    private:
+      typedef std::map<std::string,UrlRef> UrlBySchemeMap;
+      UrlBySchemeMap urlByScheme;
+
+    public:
+      UrlByScheme()
+      {
+        UrlRef ref;
+
+        ref.reset( new LDAPUrl());
+        addUrlByScheme("ldap", ref);
+        addUrlByScheme("ldaps", ref);
+
+        ref.reset( new UrlBase());
+        // don't show empty authority
+        ref->setViewOptions( ref->getViewOptions() -
+                             zypp::url::ViewOption::EMPTY_AUTHORITY);
+        ref->config("rx_username",      "");  // disallow username
+        ref->config("rx_password",      "");  // disallow password
+        // FIXME: hmm... also host+port?
+        addUrlByScheme("nfs",    ref);
+
+        ref->config("safe_pathname",    "@"); // don't encode @ in path
+        ref->config("rx_hostname",      "");  // disallow hostname
+        ref->config("rx_port",          "");  // disallow port
+        addUrlByScheme("mailto", ref);
+      }
+
+      bool
+      addUrlByScheme(const std::string &scheme,
+                     UrlRef            urlImpl)
+      {
+        if( urlImpl && urlImpl->isValidScheme(scheme))
+        {
+          UrlRef ref(urlImpl);
+          ref->clear();
+          urlByScheme[str::toLower(scheme)] = ref;
+          return true;
+        }
+        return false;
+      }
+
+      UrlRef
+      getUrlByScheme(const std::string &scheme) const
+      {
+        UrlBySchemeMap::const_iterator i(urlByScheme.find(str::toLower(scheme)));
+        if( i != urlByScheme.end())
+        {
+          return i->second;
+        }
+        return UrlRef();
+      }
+
+      bool
+      isRegisteredScheme(const std::string &scheme) const
+      {
+        return urlByScheme.find(str::toLower(scheme)) != urlByScheme.end();
+      }
+
+      UrlSchemes
+      getRegisteredSchemes() const
+      {
+        UrlBySchemeMap::const_iterator i(urlByScheme.begin());
+        UrlSchemes                     schemes;
+
+        schemes.reserve(urlByScheme.size());
+        for( ; i != urlByScheme.begin(); ++i)
+        {
+          schemes.push_back(i->first);
+        }
+        return schemes;
+      }
+    };
+
+
+    // ---------------------------------------------------------------
+    UrlByScheme g_urlSchemeRepository;
+
+
+    //////////////////////////////////////////////////////////////////
+  } // anonymous namespace
+  ////////////////////////////////////////////////////////////////////
 
 
   // -----------------------------------------------------------------
@@ -278,15 +292,24 @@ namespace zypp
 
   // -----------------------------------------------------------------
   // static
-  UrlBase::Schemes
-  Url::getAllKnownSchemes()
+  zypp::url::UrlSchemes
+  Url::getRegisteredSchemes()
   {
-    return g_urlSchemeRepository.getKnownSchemes();
+    return g_urlSchemeRepository.getRegisteredSchemes();
   }
 
 
   // -----------------------------------------------------------------
-  UrlBase::Schemes
+  // static
+  bool
+  Url::isRegisteredScheme(const std::string &scheme)
+  {
+    return g_urlSchemeRepository.isRegisteredScheme(scheme);
+  }
+
+
+  // -----------------------------------------------------------------
+  zypp::url::UrlSchemes
   Url::getKnownSchemes() const
   {
     return m_impl->getKnownSchemes();
