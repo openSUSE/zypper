@@ -46,5 +46,7 @@ deptestomatic_multi_LDADD =				\
 	-lzypp_solver_detail				\
 	$(LIBZYPP_LIBS)
 
-
-
+clean-local:
+	rm -rf data.deptestomatic/*/out
+	rm -rf data.deptestomatic/*/out
+	rm -rf single.out/out
