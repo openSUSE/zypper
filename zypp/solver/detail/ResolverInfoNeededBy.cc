@@ -23,6 +23,8 @@
 
 #include "zypp/solver/detail/ResolverInfo.h"
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -51,12 +53,10 @@ namespace zypp
       string
       ResolverInfoNeededBy::toString ( const ResolverInfoNeededBy & by)
       {
-          string res;
-      
-          res += ResolverInfo::toString (by, false);
-          res += string (" needed by ") + by.resItemsToString(false);
-      
-          return res;
+	  // Translator: all.%s = name of package,patch,...
+          return str::form (_("%s needed by %s"),
+			    ResolverInfo::toString (by, false).c_str(),
+			    by.resItemsToString(false).c_str());
       }
       
       

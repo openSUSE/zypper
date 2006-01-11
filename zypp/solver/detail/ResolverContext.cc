@@ -30,6 +30,8 @@
 #include "zypp/solver/detail/ResolverInfoMisc.h"
 #include "zypp/CapSet.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -52,15 +54,23 @@ ResolverContext::toString (const ResItemStatus & status)
 {
     string ret;
     switch (status) {
-    case RESOLVABLE_STATUS_UNKNOWN:				ret = "unknown"; break;
-    case RESOLVABLE_STATUS_INSTALLED:				ret = "installed"; break;
-    case RESOLVABLE_STATUS_UNINSTALLED:				ret = "uninstalled"; break;
-    case RESOLVABLE_STATUS_TO_BE_INSTALLED:			ret = "to be installed"; break;
-    case RESOLVABLE_STATUS_TO_BE_INSTALLED_SOFT:		ret = "to be installed (soft)"; break;
-    case RESOLVABLE_STATUS_TO_BE_UNINSTALLED:			ret = "to be uninstalled"; break;
-    case RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE:	ret = "to be uninstalled due to obsolete"; break;
-    case RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK:	ret = "to be uninstalled due to unlink"; break;
-    default:							ret = "Huh ?"; break;
+	// Translator: status of a package,patch,...	
+	case RESOLVABLE_STATUS_UNKNOWN:				ret = _("unknown"); break;
+	// Translator: status of a package,patch,...		    
+	case RESOLVABLE_STATUS_INSTALLED:			ret = _("installed"); break;
+	// Translator: status of a package,patch,...		    
+	case RESOLVABLE_STATUS_UNINSTALLED:			ret = _("uninstalled"); break;
+	// Translator: status of a package,patch,...		    
+	case RESOLVABLE_STATUS_TO_BE_INSTALLED:			ret = _("to be installed"); break;
+	// Translator: status of a package,patch,...		    
+	case RESOLVABLE_STATUS_TO_BE_INSTALLED_SOFT:		ret = _("to be installed (soft)"); break;
+	// Translator: status of a package,patch,...		    
+	case RESOLVABLE_STATUS_TO_BE_UNINSTALLED:		ret = _("to be uninstalled"); break;
+	// Translator: status of a package,patch,...		    
+	case RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE:ret = _("to be uninstalled due to obsolete"); break;
+	// Translator: status of a package,patch,...		    
+	case RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK:	ret = _("to be uninstalled due to unlink"); break;
+	default:							ret = "Huh ?"; break;
     }
 
     return ret;
@@ -233,7 +243,9 @@ ResolverContext::installResItem (ResItem_constPtr resItem, bool is_soft, int oth
 
     if (resItem_status_is_to_be_uninstalled (status)
 	&& status != RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK) {
-	msg = string ("Can't install ") + resItem->asString() + " since it is already marked as needing to be uninstalled";
+	// Translator: %s = name of package,patch,...
+	msg = str::form (_("Can't install %s since it is already marked as needing to be uninstalled"),
+			 resItem->asString().c_str());
 
 	addErrorString (resItem, msg);
 	return false;
@@ -244,7 +256,9 @@ ResolverContext::installResItem (ResItem_constPtr resItem, bool is_soft, int oth
     }
 
     if (isParallelInstall (resItem)) {
-	msg = string ("Can't install ") + resItem->asString() + ", since a resolvable of the same name is already marked as needing to be installed";
+	// Translator: %s = name of package,patch,...
+	msg = str::form (_("Can't install %s, since a resolvable of the same name is already marked as needing to be installed"),
+			 resItem->asString().c_str());
 	addErrorString (resItem, msg);
 	return false;
     }
@@ -339,7 +353,9 @@ ResolverContext::uninstallResItem (ResItem_constPtr resItem, bool part_of_upgrad
     status = getStatus (resItem);
 
     if (status == RESOLVABLE_STATUS_TO_BE_INSTALLED) {
-	msg = resItem->asString() + " is scheduled to be installed, but this is not possible because of dependency problems.";
+	// Translator: %s = name of packages,patch,...
+	msg = str::form (_("%s is scheduled to be installed, but this is not possible because of dependency problems."),
+			 resItem->asString().c_str());
 	addErrorString (resItem, msg);
 	return false;
     }
@@ -351,7 +367,9 @@ ResolverContext::uninstallResItem (ResItem_constPtr resItem, bool part_of_upgrad
 
     if (status == RESOLVABLE_STATUS_UNINSTALLED
 	|| status == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK) {
-	msg = string ("Marking resolvable ") + resItem->asString() + " as uninstallable";
+	// Translator: %s = name of packages,patch,...
+	msg = str::form (_("Marking resolvable %s as uninstallable"),
+			 resItem->asString().c_str());
 	addInfoString (resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
     }
 
@@ -682,7 +700,7 @@ ResolverContext::addInfo (ResolverInfo_Ptr info)
     if (info->error ()) {
 
 	if (! _invalid) {
-	    ResolverInfo_Ptr info = new ResolverInfoMisc (NULL, RESOLVER_INFO_PRIORITY_VERBOSE, "Marking this resolution attempt as invalid.");
+	    ResolverInfo_Ptr info = new ResolverInfoMisc (NULL, RESOLVER_INFO_PRIORITY_VERBOSE, _("Marking this resolution attempt as invalid."));
 	    info->flagAsError ();
 	    _log.push_back (info);
 	}

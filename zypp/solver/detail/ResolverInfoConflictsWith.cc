@@ -23,6 +23,8 @@
 
 #include "zypp/solver/detail/ResolverInfo.h"
 #include "zypp/solver/detail/ResolverInfoConflictsWith.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -51,12 +53,10 @@ namespace zypp
       string
       ResolverInfoConflictsWith::toString ( const ResolverInfoConflictsWith & with)
       {
-          string res;
-      
-          res += ResolverInfo::toString (with);
-          res += string ("conflicts with ") + with.resItemsToString(false);
-      
-          return res;
+	  // Translator: all.%s = name of package, patch,...
+          return str::form (_("%s conflicts with %s"),
+			    ResolverInfo::toString (with).c_str(),
+			    with.resItemsToString(false).c_str());
       }
       
       

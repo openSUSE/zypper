@@ -22,6 +22,8 @@
 #include <map>
 
 #include "zypp/solver/detail/ResolverInfoChildOf.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -52,8 +54,9 @@ namespace zypp
       {
           string res = "<resolverinfochildof '";
       
-          res += ResolverInfo::toString (child);
-          res += string ("part of ") + child.resItemsToString(false);
+          res += str::form (_("%s part of %s"),
+			    ResolverInfo::toString (child).c_str(),
+			    child.resItemsToString(false).c_str());
           res += "'>";
       
           return res;

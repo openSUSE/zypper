@@ -23,6 +23,8 @@
 
 #include "zypp/solver/detail/ResolverInfo.h"
 #include "zypp/solver/detail/ResolverInfoMissingReq.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -51,12 +53,10 @@ namespace zypp
       string
       ResolverInfoMissingReq::toString ( const ResolverInfoMissingReq & missing)
       {
-          string res;
-      
-          res += ResolverInfo::toString (missing);
-          res += string ("missing requirement ") + missing._missing_req.asString();
-      
-          return res;
+	  // Translator: 1.%s = name of package,patch,...; 2.%s = dependency
+          return str::form (_("%s missing requirement %s"),
+			    ResolverInfo::toString (missing).c_str(),
+			    missing._missing_req.asString().c_str());
       }
       
       

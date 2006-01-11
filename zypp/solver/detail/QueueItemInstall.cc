@@ -37,6 +37,8 @@
 #include "zypp/solver/detail/ResItemAndDependency.h"
 #include "zypp/CapSet.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -167,7 +169,9 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	    _DBG("RC_SPEW") << "upgrades equal resItem, skipping" << endl;
 
-	    msg = string("Skipping ") + res_name + (": already installed");
+	    // Translator: %s = name of package,patch,...
+	    msg = str::form (_("Skipping %s: already installed"),
+			     res_name.c_str());
 	    info = new ResolverInfoMisc (_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
 	    context->addInfo (info);
 	    goto finished;
@@ -255,9 +259,14 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	}
 
 	if (_upgrades != NULL) {
-	    msg = string ("Upgrading ") + _upgrades->asString() + " => " + res_name;
+	    // Translator: 1.%s and 2.%s = name of package
+	    msg = str::form (_("Upgrading %s => %s"),
+			     _upgrades->asString().c_str(),
+			     res_name.c_str());
 	} else {
-	    msg = string ("Installing ") + res_name;
+	    // Translator: %s = packagename
+	    msg = str::form (_("Installing %s"),
+			     res_name.c_str());
 	}
 
 	context->addInfoString (resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);

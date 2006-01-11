@@ -32,6 +32,8 @@
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
 #include "zypp/CapSet.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -178,13 +180,25 @@ no_installable_providers_info_cb (ResItem_constPtr resItem, const Capability & c
     status = info->context->getStatus (resItem);
 
     if (resItem_status_is_to_be_uninstalled (status)) {
-	msg_str = resItem->name() + " provides " + cap.asString() + ", but is scheduled to be uninstalled.";
+	// Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
+	msg_str = str::form (_("%s provides %s, but is scheduled to be uninstalled."),
+			     resItem->name().c_str(),
+			     cap.asString().c_str());
     } else if (info->context->isParallelInstall (resItem)) {
-	msg_str = resItem->name() + " provides " + cap.asString() + ", but another version of that resItem is already installed.";
+	// Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
+	msg_str = str::form (_("%s provides %s, but another version of that resItem is already installed."),
+			     resItem->name().c_str(),
+			     cap.asString().c_str());
     } else if (! info->context->resItemIsPossible (resItem)) {
-	msg_str = resItem->name() + " provides " + cap.asString() + ", but it is uninstallable.  Try installing it on its own for more details.";
+	// Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
+	msg_str = str::form (_("%s provides %s, but it is uninstallable.  Try installing it on its own for more details."),
+			     resItem->name().c_str(),
+			     cap.asString().c_str());
     } else if (info->world->resItemIsLocked (resItem)) {
-	msg_str = resItem->name() + " provides " + cap.asString() + ", but it is locked.";
+	// Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
+	msg_str = str::form (_("%s provides %s, but it is locked."),
+			     resItem->name().c_str(),
+			     cap.asString().c_str());
     }
 
     if (!msg_str.empty()) {
@@ -275,10 +289,28 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	if (_upgraded_resItem == NULL) {
 	    ResolverInfo_Ptr err_info;
 
-	    msg = string ("There are no ") + (_remove_only ? "alternative installed" : "installable") + " providers of " + _dep.asString();
-	    if (_requiring_resItem != NULL) {
-		msg += " for ";
-		msg += _requiring_resItem->asString();
+	    if (_remove_only) {
+		if (_requiring_resItem != NULL) {
+		    // Translator: 1.%s = dependency ; 2.%s = name of package,patch....
+		    msg = str::form (_("There are no alternative installed providers of %s for %s"),
+				     _dep.asString().c_str(),
+				     _requiring_resItem->asString().c_str());
+		} else {
+		    // Translator: %s = dependency 		    
+		    msg = str::form (_("There are no alternative installed providers of %s"),
+				     _dep.asString().c_str());
+		}
+	    } else {
+		if (_requiring_resItem != NULL) {
+		    // Translator: 1.%s = dependency ; 2.%s = name of package,patch....		    
+		    msg = str::form (_("There are no installable providers of %s for %s"),
+				     _dep.asString().c_str(),
+				     _requiring_resItem->asString().c_str());
+		} else {
+		    // Translator: %s = dependency		    
+		    msg = str::form (_("There are no installable providers of %s"),
+				     _dep.asString().c_str());
+		}		
 	    }
 
 	    err_info = new ResolverInfoMisc (_requiring_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
@@ -304,8 +336,11 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 		req_str = _requiring_resItem->asString();
 		up_str  = _upgraded_resItem->asString();
-
-		label = string ("for requiring ") + _dep.asString() + " for " + req_str + " when upgrading " + up_str;
+                 // Translator: 1.%s = dependency; 2.%s and 3.%s = name of package,patch,...
+		label = str::form (_("for requiring %s for %s when upgrading %s"),
+				   _dep.asString().c_str(),
+				   req_str.c_str(),
+				   up_str.c_str());
 		branch_item->setLabel (label);
 //fprintf (stderr, "Branching: %s\n", label.c_str());
 		for (CResItemList::const_iterator iter = upgrade_list.begin(); iter != upgrade_list.end(); iter++) {
@@ -352,8 +387,10 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 		    p1 = _requiring_resItem->asString();
 		    p2 = (*iter)->asString();
-		    str = string ("Upgrade to ") + p2 + " to avoid removing " + p1 + " is not possible.";
-
+		    // Translator: all.%s = name of package,patch,...
+		    str = str::form (_("Upgrade to %s to avoid removing %s is not possible."),
+				     p2.c_str(),
+				     p1.c_str());
 		    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (NULL, RESOLVER_INFO_PRIORITY_VERBOSE, str);
 		    misc_info->addRelatedResItem (_requiring_resItem);
 		    misc_info->addRelatedResItem (*iter);
@@ -405,9 +442,11 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	    new_items.push_front (branch_item);
 	} else {
 	    // We can't do anything to resolve the missing requirement, so we fail.
-	    string msg = string ("Can't satisfy requirement '") + _dep.asString() + "'";
-
-	    context->addErrorString (NULL, msg);
+	    // Translator: %s = dependency
+	    string msg = str::form (_("Can't satisfy requirement '%s'"),
+				    _dep.asString().c_str());
+	    
+	    context->addErrorString (NULL, msg);	    
 	}
 
     } else if (num_providers == 1) {

@@ -23,6 +23,8 @@
 
 #include "zypp/solver/detail/ResolverInfo.h"
 #include "zypp/solver/detail/ResolverInfoDependsOn.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -51,12 +53,10 @@ namespace zypp
       string
       ResolverInfoDependsOn::toString ( const ResolverInfoDependsOn & on)
       {
-          string res;
-      
-          res += ResolverInfo::toString (on);
-          res += string ("depended on ") + on.resItemsToString(false);
-      
-          return res;
+	  // Translator: all.%s = name of package,patch,....
+          return str::form (_("%s depended on %s"),
+			    ResolverInfo::toString (on).c_str(),
+			    on.resItemsToString(false));
       }
       
       

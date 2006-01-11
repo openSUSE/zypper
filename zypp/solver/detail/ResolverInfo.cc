@@ -22,6 +22,8 @@
 #include <map>
 
 #include "zypp/solver/detail/ResolverInfo.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -104,11 +106,11 @@ namespace zypp
           }
           if (resolverinfo._resItem != NULL) {
       	res += resolverinfo._resItem->asString();
-      	res += ": ";
+      	res += ":";
           }
       
-          if (resolverinfo._error) res += " Error!";
-          if (resolverinfo._important) res += " Important!";
+          if (resolverinfo._error) res += _(" Error!");
+          if (resolverinfo._important) res += _(" Important!");
       
           return res;
       }

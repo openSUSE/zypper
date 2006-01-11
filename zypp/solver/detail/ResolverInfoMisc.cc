@@ -23,6 +23,8 @@
 
 #include "zypp/solver/detail/ResolverInfo.h"
 #include "zypp/solver/detail/ResolverInfoMisc.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -60,10 +62,10 @@ namespace zypp
       #endif
           res += misc.resItemsToString(false);
           if (!misc._action.empty()) {
-      	res += string (", Action: ") + misc._action + "\n";
+      	res += string (_(", Action: ")) + misc._action + "\n";
           }
           if (!misc._trigger.empty()) {
-      	res += string (", Trigger: ") + misc._trigger + "\n";
+      	res += string (_(", Trigger: ")) + misc._trigger + "\n";
           }
 
           return res;

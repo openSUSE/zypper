@@ -28,6 +28,8 @@
 #include "zypp/solver/detail/ResolverInfoMissingReq.h"
 #include "zypp/CapSet.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -245,7 +247,9 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	}
 
 	if (unlink_cancelled) {
-	    string msg = pkg_str + " is required by other installed resolvable, so it won't be unlinked.";
+	    // Translator: %s = name of package,patch,...
+	    string msg = str::form (_("%s is required by other installed resolvable, so it won't be unlinked."),
+				    pkg_str.c_str());
 	    context->addInfoString (_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
 	    goto finished;
 	}
@@ -257,7 +261,9 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	if (! _explicitly_requested
 	    && world()->resItemIsLocked (_resItem)) {
-	    string msg = pkg_str + " is locked, and cannot be uninstalled.";
+	    // Translator: %s = name of package,patch,...
+	    string msg = str::form (_("%s is locked, and cannot be uninstalled."),
+				    pkg_str.c_str());
 	    context->addErrorString (_resItem, msg);
 	    goto finished;
 	}

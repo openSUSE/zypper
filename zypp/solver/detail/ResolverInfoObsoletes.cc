@@ -23,6 +23,8 @@
 
 #include "zypp/solver/detail/ResolverInfo.h"
 #include "zypp/solver/detail/ResolverInfoObsoletes.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -51,12 +53,10 @@ namespace zypp
       string
       ResolverInfoObsoletes::toString ( const ResolverInfoObsoletes & obsoletes)
       {
-          string res;
-      
-          res += ResolverInfo::toString (obsoletes);
-          res += string ("replaced by ") + obsoletes.resItemsToString(false);
-      
-          return res;
+	  // Translator: all.%s = name of package,patch,....
+	 return str::form (_("%s replaced by %s"),
+			   ResolverInfo::toString (obsoletes).c_str(),
+			   obsoletes.resItemsToString(false).c_str());;
       }
       
       

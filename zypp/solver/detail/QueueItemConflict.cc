@@ -37,6 +37,8 @@
 #include "zypp/CapSet.h"
 #include "zypp/CapMatch.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -260,7 +262,11 @@ conflict_process_cb (ResItem_constPtr resItem, const Capability & cap, void *dat
         }
 
         case RESOLVABLE_STATUS_TO_BE_INSTALLED: {
-            msg = string ("A conflict over ") + info->dep_str + " (" + cap_str + ") requires the removal of the to-be-installed resolvable " + pkg_str;
+	    // Translator: 1.%s and 2.%s = Dependency; 3.%s = name of package,patch,...
+            msg = str::form(_("A conflict over %s (%s) requires the removal of the to-be-installed resolvable %s"),
+			    info->dep_str.c_str(),
+			    cap_str.c_str(),
+			    pkg_str.c_str());
 
             ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (resItem,RESOLVER_INFO_PRIORITY_VERBOSE, msg);
 
@@ -277,9 +283,19 @@ conflict_process_cb (ResItem_constPtr resItem, const Capability & cap, void *dat
             info->context->setStatus (resItem, RESOLVABLE_STATUS_TO_BE_UNINSTALLED);
             msg = string ("Marking ") + pkg_str + " as uninstallable due to conflicts over " + info->dep_str + " (" + cap_str + ")";
             if (!(info->pkg_str.empty())) {
-                msg += " from ";
-                msg += info->pkg_str;
-            }
+		// Translator: 1.%s = name of package,patch,...; 2.%s and 3.%s = Dependency; 4.%s = name of package,patch,...
+		msg = str::form (_("Marking %s as uninstallable due to conflicts over %s (%s) from %s"),
+				 pkg_str.c_str(),
+				 info->dep_str.c_str(),
+				 cap_str.c_str(),
+				 info->pkg_str.c_str());
+            } else {
+		// Translator: 1.%s = name of package,patch,...; 2.%s and 3.%s = Dependency;		
+		msg = str::form (_("Marking %s as uninstallable due to conflicts over %s (%s)"),
+				 pkg_str.c_str(),
+				 info->dep_str.c_str(),
+				 cap_str.c_str());
+	    }
 
             ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (NULL, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
 
