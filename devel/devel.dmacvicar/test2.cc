@@ -3,9 +3,12 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <streambuf>
 
 #include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
 #include "boost/filesystem/fstream.hpp"    // ditto
+
+#include <boost/iostreams/device/file_descriptor.hpp>
 
 #include "dbxml/DbXml.hpp"
 
@@ -51,7 +54,7 @@ using namespace zypp::storage;
 
 using namespace boost::filesystem;                   // for ease of tutorial presentation;
                                            // a namespace alias is preferred in real code
-
+using namespace boost::iostreams;
 
 //using namespace DbXml;
 
@@ -225,7 +228,7 @@ class StorageBackend : public base::ReferenceCounted, private base::NonCopyable
   virtual void storePatch( Patch::Ptr p ) = 0;
 };
 
-#define ZYPP_DB_DIR path("./zypp_db")
+#define ZYPP_DB_DIR "zypp_db"
 
 class TextBackend : public StorageBackend
 {
@@ -240,14 +243,14 @@ class TextBackend : public StorageBackend
       initDirTree();
   }
 
-  void initDirTree()
+  void initDirTree() const
   {
     // FIXME duncan * handle exceptions
     DBG << "Creating directory structure..." << std::endl;
-    create_directory( ZYPP_DB_DIR );
-    create_directory( ZYPP_DB_DIR / path("patches") );
-    create_directory( ZYPP_DB_DIR / path("selections") );
-    create_directory( ZYPP_DB_DIR / path("products") );
+    create_directory( path(ZYPP_DB_DIR) );
+    create_directory( path(ZYPP_DB_DIR) / path("patches") );
+    create_directory( path(ZYPP_DB_DIR) / path("selections") );
+    create_directory( path(ZYPP_DB_DIR) / path("products") );
   }
 
   TextBackend()
@@ -259,26 +262,42 @@ class TextBackend : public StorageBackend
   {
     DBG << endl;
   }
+  
+  std::string randomFileName() const
+  {
+    FILE *fp;
+    char puffer[49];
+    if ( (fp = popen("openssl rand -base64 48", "r")) == 0)
+    {
+      DBG << "mierda!" << std::endl;
+      //ZYPP_THROW("put some message here");
+    }
+    
+    /*Ausgabe der von der Pipe gelesenen Daten*/
+    fscanf(fp, "%s", &puffer);
+    pclose(fp);
+    return "blah";
+  }
 
-  std::list<Patch::Ptr> installedPatches()
+  std::string fileNameForPatch( Patch::Ptr patch ) const
+  {
+    return patch->id();
+  }
+
+  std::list<Patch::Ptr> installedPatches() const
   {
     return list<Patch::Ptr>();
   }
 
   void storePatch( Patch::Ptr p )
   {
-    //ofstream file( "foobar/cheeze" );
-    //file << "tastes good!\n";
-    //file.close();
-    //if ( !exists( "foobar/cheeze" ) )
-    //std::cout << "Something is rotten in foobar\n";
-    // Get a manager object.
-    //XmlManager myManager;
-    // Open a container
-    //XmlContainer myContainer =  myManager.openContainer("zypp_db.dbxml");
-
-    DBG << std::endl;
-    DBG << std::endl << toXML(p) << std::endl;
+    std::string xml = toXML(p);
+    DBG << std::endl << xml << std::endl;
+    std::ofstream file;
+    // FIXME replace with path class of boost
+    file.open( (std::string(ZYPP_DB_DIR) + std::string("/patches/") + fileNameForPatch(p)).c_str() );
+    file << xml;
+    file.close();
   }
   private:
   //std::ostream & operator<<( std::ostream & str, const PatchYUMSerializer & obj )
@@ -313,6 +332,7 @@ class XMLBackend : public StorageBackend
   void storePatch( Patch::Ptr p )
   {
     DBG << std::endl;
+    
     DBG << std::endl << toXML(p) << std::endl;
   }
   private:
@@ -351,8 +371,9 @@ int main()
 	if (iter.errorStatus())
 		throw *iter.errorStatus();
 
-  XMLBackend backend;
+  TextBackend backend;
   backend.storePatch(patch1);
+  cout << backend.randomFileName() << std::endl;
 	return 1;	
 }
 

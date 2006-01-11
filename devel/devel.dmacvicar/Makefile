@@ -192,7 +192,7 @@ AM_CXXFLAGS =
 # gperf:	-pg
 
 # -ldbxml -lpathan -lxerces-c -lxquery
-LDADD = $(top_srcdir)/zypp/libzypp.la -lboost_regex -ldb -ldb_cxx 
+LDADD = $(top_srcdir)/zypp/libzypp.la -lboost_regex -lboost_filesystem -ldb -ldb_cxx 
 #LDADD =	-lboost_regex -lsqlite3 -dbxml
 test2_SOURCES = test2.cc
 test2_debug_SOURCES = $(test2_SOURCES)
