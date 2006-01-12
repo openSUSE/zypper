@@ -180,7 +180,8 @@ AC_OUTPUT(	\
 	zypp/media/proxyinfo/Makefile	\
 	zypp/url/Makefile		\
 	zypp/target/Makefile		\
-	zypp/target/rpm/Makefile
+	zypp/target/rpm/Makefile	\
+	zypp/target/hal/Makefile
 
 )
 dnl ==================================================

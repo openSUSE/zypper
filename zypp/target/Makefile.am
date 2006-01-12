@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-SUBDIRS = rpm
+SUBDIRS = hal rpm
 
 ## ##################################################
 
@@ -17,6 +17,8 @@ lib@PACKAGE@_target_la_SOURCES =
 
 lib@PACKAGE@_target_la_LDFLAGS =	@LIB_VERSION_INFO@
 
-lib@PACKAGE@_target_la_LIBADD = 	rpm/lib@PACKAGE@_target_rpm.la
+lib@PACKAGE@_target_la_LIBADD = \
+	rpm/lib@PACKAGE@_target_rpm.la	\
+	hal/lib@PACKAGE@_target_hal.la
 
 ## ##################################################
