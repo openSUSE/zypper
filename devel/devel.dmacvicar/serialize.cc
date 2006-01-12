@@ -61,6 +61,14 @@ std::string toXML( const Edition edition )
 }
 
 template<> // or constPtr?
+std::string toXML( const Arch arch )
+{
+  stringstream out;
+  out << xml_tag_enclose(arch.asString(), "arch");
+  return out.str();
+}
+
+template<> // or constPtr?
 std::string toXML( Capability cap )
 {
   stringstream out;
@@ -115,6 +123,7 @@ std::string toXML( Resolvable::Ptr obj )
   out << "  <name>" << obj->name() << "</name>" << std::endl;
   // is this shared? uh
   out << "  " << toXML(obj->edition()) << std::endl;
+  out << "  " << toXML(obj->arch()) << std::endl;
   out << "  " << toXML(obj->deps()) << std::endl;
   return out.str();
 }

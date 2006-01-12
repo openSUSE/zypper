@@ -48,6 +48,9 @@ template<> // or constPtr?
 std::string toXML( const Edition edition );
 
 template<> // or constPtr?
+std::string toXML( const Arch arch );
+
+template<> // or constPtr?
 std::string toXML( Capability cap );
 
 template<> // or constPtr?
