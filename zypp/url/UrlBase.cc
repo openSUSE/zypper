@@ -42,7 +42,8 @@ namespace zypp
     const ViewOptions ViewOptions::EMPTY_PATH_PARAMS = 0x0800;
     const ViewOptions ViewOptions::EMPTY_QUERY_STR   = 0x1000;
     const ViewOptions ViewOptions::EMPTY_FRAGMENT    = 0x2000;
-    const ViewOptions ViewOptions::DEFAULTS          = //0x07bb;
+    const ViewOptions ViewOptions::DEFAULTS          = 0x07bb;
+    /*
                       ViewOptions::WITH_SCHEME       +
                       ViewOptions::WITH_USERNAME     +
                       ViewOptions::WITH_HOST         +
@@ -52,6 +53,7 @@ namespace zypp
                       ViewOptions::WITH_FRAGMENT     +
                       ViewOptions::EMPTY_AUTHORITY   +
                       ViewOptions::EMPTY_PATH_NAME;
+    */
 
 
     // ---------------------------------------------------------------
