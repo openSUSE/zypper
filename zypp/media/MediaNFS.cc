@@ -79,20 +79,14 @@ namespace zypp {
       // This should prevent the mount command hanging when the portmapper isn't
       // running.
       vector<string> optionList;
-#warning FIXME once the function is in str namespace
-#if 0
-      str::split( options, optionList, "," );
-#endif
+      str::split( options, std::back_inserter(optionList), "," );
       vector<string>::const_iterator it;
       for( it = optionList.begin(); it != optionList.end(); ++it ) {
     	if ( *it == "lock" || *it == "nolock" ) break;
       }
       if ( it == optionList.end() ) {
     	optionList.push_back( "nolock" );
-#warning FIXME once the function is in str namespace
-#if 0
     	options = str::join( optionList, "," );
-#endif
       }
     
       mount.mount(path,mountpoint,filesystem,options);

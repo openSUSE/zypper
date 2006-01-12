@@ -116,10 +116,7 @@ namespace zypp {
     			 const KVMapPolicy & opts_r ) {
         map_type ret;
         std::vector<std::string> fields;
-#warning uncomment when split is ported
-#if 0
-        str::split( str_r, fields, opts_r._fsplit );
-#endif
+        str::split( str_r, std::back_inserter(fields), opts_r._fsplit );
     
         for ( unsigned i = 0; i < fields.size(); ++i ) {
           std::string::size_type pos = fields[i].find( opts_r._kvsplit );

@@ -243,6 +243,29 @@ namespace zypp
     //@}
 
     ///////////////////////////////////////////////////////////////////
+    /** \name Join. */
+    //@{
+    /** Join \a words_r into a single line
+     */
+    template <class _Input>
+      std::string join( const _Input & words_r,
+                        const std::string & sep_r )
+      { 
+        if ( words_r.empty() )
+          return "";
+        
+        std::string ret( words_r[0] );
+        
+        for ( unsigned i = 1; i < words_r.size(); ++i ) {
+          ret += sep_r + words_r[i];
+        }
+        
+        return ret;
+      }
+    //@}
+
+
+    ///////////////////////////////////////////////////////////////////
     /** \name Case conversion. */
     //@{
     /** Return lowercase version of \a s
