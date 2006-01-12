@@ -16,6 +16,7 @@ include_HEADERS = \
 	Importance.h			\
 	Pending.h			\
 	PendingPtr.h			\
+	InstallOrder.h			\
 	ResolverContext.h		\
 	ResolverContextPtr.h		\
 	ResolverInfo.h			\
@@ -63,6 +64,7 @@ lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	ResItemAndDependency.cc				\
 	Importance.cc					\
 	Pending.cc					\
+	InstallOrder.cc					\
 	QueueItem.cc					\
 	QueueItemBranch.cc				\
 	QueueItemConflict.cc				\
