@@ -145,8 +145,10 @@ XmlNode::getProp (const std::string & name, const std::string & deflt) const
     string gs;
 
     ret = xmlGetProp (_node, (const xmlChar *)name.c_str());
-	  _XXX("RC_SPEW_XML") << "XmlNode::getProp(" << name << ") xmlGetProp '" << (char *)ret << "'" << endl;
+
     if (ret) {
+	_XXX("RC_SPEW_XML") << "XmlNode::getProp(" << name << ") xmlGetProp '" << (char *)ret << "'" << endl;
+	
 	gs = string ((const char  *)ret);
 	xmlFree (ret);
 	return gs;
