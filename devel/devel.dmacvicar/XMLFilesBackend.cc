@@ -103,8 +103,6 @@ XMLFilesBackend::randomFileName() const
     DBG << "mierda!" << std::endl;
     //ZYPP_THROW("put some message here");
   }
-  
-  /*Ausgabe der von der Pipe gelesenen Daten*/
   fscanf(fp, "%s", &puffer);
   pclose(fp);
   return "blah";

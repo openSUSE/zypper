@@ -16,8 +16,10 @@
 #include <streambuf>
 
 #include "zypp/base/Logger.h"
+#include "zypp/CapFactory.h"
 
 #include "serialize.h"
+#include "xml_escape_parser.hpp"
 
 using namespace std;
 ///////////////////////////////////////////////////////////////////
@@ -25,6 +27,26 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 namespace storage
 { /////////////////////////////////////////////////////////////////
+
+std::string xml_escape( const std::string &text )
+{
+  iobind::parser::xml_escape_parser parser;
+  return parser.escape(text);
+}
+
+std::string xml_tag_enclose( const std::string &text, const std::string &tag, bool escape = false )
+{
+  std::string result;
+  result += "<" + tag + ">";
+  
+  if ( escape)
+   result += xml_escape(text);
+  else
+   result += text;
+
+  result += "</" + tag + ">";
+  return result;
+}
 
 template<class T>
 std::string toXML( T obj ); //undefined
@@ -42,7 +64,9 @@ template<> // or constPtr?
 std::string toXML( Capability cap )
 {
   stringstream out;
-  out << "<entry kind=\"" << cap.refers() << "\" name=\"" <<  cap.asString() << "\" />";
+  CapFactory factory;
+  
+  out << "<entry kind=\"" << cap.refers() << "\" >" <<  xml_escape(factory.encode(cap)) << "</entry>";
   return out.str();
 }
 
@@ -62,30 +86,23 @@ template<> // or constPtr?
 std::string toXML( const Dependencies dep )
 {
   stringstream out;
-  out << "    <provides>" << std::endl;
-  out << "    " << toXML(dep.provides) << std::endl;
-  out << "    </provides>" << std::endl;
-  out << "    <prerequires>" << std::endl;
-  out << "    " << toXML(dep.prerequires) << std::endl;
-  out << "    </prerequires>" << std::endl;
-  out << "    <requires>" << std::endl;
-  out << "    " << toXML(dep.requires) << std::endl;
-  out << "    </requires>" << std::endl;
-  out << "    <conflicts>" << std::endl;
-  out << "    " << toXML(dep.conflicts) << std::endl;
-  out << "    </conflicts>" << std::endl;
-  out << "    <obsoletes>" << std::endl;
-  out << "    " << toXML(dep.obsoletes) << std::endl;
-  out << "    </obsoletes>" << std::endl;  
-  out << "    <freshens>" << std::endl;
-  out << "    " << toXML(dep.freshens) << std::endl;
-  out << "    </freshens>" << std::endl;
-  out << "    <suggests>" << std::endl;
-  out << "    " << toXML(dep.suggests) << std::endl;
-  out << "    </suggest>" << std::endl;
-  out << "    <recommends>" << std::endl;
-  out << "    " << toXML(dep.recommends) << std::endl;
-  out << "    </recommends>" << std::endl;  
+  if ( dep.provides.size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep.provides), "provides") << std::endl;
+  if ( dep.prerequires.size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep.prerequires), "prerequires") << std::endl;
+  if ( dep.requires.size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep.requires), "requires") << std::endl;
+  if ( dep.conflicts.size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep.conflicts), "conflicts") << std::endl;
+   if ( dep.obsoletes.size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep.obsoletes), "obsoletes") << std::endl;
+  // why the YUM tag is freshen without s????
+   if ( dep.freshens.size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep.freshens), "freshen") << std::endl;
+   if ( dep.suggests.size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep.suggests), "suggests") << std::endl;
+   if ( dep.recommends.size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep.recommends), "recommends") << std::endl;
   return out.str();
   
 }
@@ -109,9 +126,9 @@ std::string toXML( Package::Ptr obj )
   out << "<package>" << std::endl;
   // reuse Resolvable information serialize function
   toXML(static_cast<Resolvable::Ptr>(obj));
-  out << "  <do>" << std::endl;
+  //out << "  <do>" << std::endl;
   //out << "      " << obj->do_script() << std::endl;
-  out << "  </do>" << std::endl;
+  //out << "  </do>" << std::endl;
   out << "</package>" << std::endl;
   return out.str();
 }

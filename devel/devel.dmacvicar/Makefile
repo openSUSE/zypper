@@ -50,13 +50,13 @@ CONFIG_CLEAN_FILES =
 PROGRAMS = $(noinst_PROGRAMS)
 am_test2_OBJECTS = test2.$(OBJEXT) PersistentStorage.$(OBJEXT) \
 	Backend.$(OBJEXT) XMLFilesBackend.$(OBJEXT) \
-	serialize.$(OBJEXT)
+	serialize.$(OBJEXT) xml_escape_parser.$(OBJEXT)
 test2_OBJECTS = $(am_test2_OBJECTS)
 test2_LDADD = $(LDADD)
 test2_DEPENDENCIES = $(top_srcdir)/zypp/libzypp.la
 am__objects_1 = test2.$(OBJEXT) PersistentStorage.$(OBJEXT) \
 	Backend.$(OBJEXT) XMLFilesBackend.$(OBJEXT) \
-	serialize.$(OBJEXT)
+	serialize.$(OBJEXT) xml_escape_parser.$(OBJEXT)
 am_test2_debug_OBJECTS = $(am__objects_1)
 test2_debug_OBJECTS = $(am_test2_debug_OBJECTS)
 test2_debug_LDADD = $(LDADD)
@@ -198,7 +198,7 @@ AM_CXXFLAGS =
 # -ldbxml -lpathan -lxerces-c -lxquery
 LDADD = $(top_srcdir)/zypp/libzypp.la -lboost_regex -lboost_filesystem -ldb -ldb_cxx 
 #LDADD =	-lboost_regex -lsqlite3 -dbxml
-test2_SOURCES = test2.cc PersistentStorage.cc Backend.cc XMLFilesBackend.cc serialize.cc
+test2_SOURCES = test2.cc PersistentStorage.cc Backend.cc XMLFilesBackend.cc serialize.cc xml_escape_parser.cpp
 test2_debug_SOURCES = $(test2_SOURCES)
 test2_debug_LDFLAGS = -static
 test1_SOURCES = test-sqlite.cc
@@ -207,7 +207,7 @@ test1_debug_LDFLAGS = -static
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cc .lo .o .obj
+.SUFFIXES: .cc .cpp .lo .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -262,6 +262,7 @@ include ./$(DEPDIR)/PersistentStorage.Po
 include ./$(DEPDIR)/XMLFilesBackend.Po
 include ./$(DEPDIR)/serialize.Po
 include ./$(DEPDIR)/test2.Po
+include ./$(DEPDIR)/xml_escape_parser.Po
 
 .cc.o:
 	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
@@ -278,6 +279,27 @@ include ./$(DEPDIR)/test2.Po
 #	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
 .cc.lo:
+	if $(LTCXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
+	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Plo"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+#	source='$<' object='$@' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(LTCXXCOMPILE) -c -o $@ $<
+
+.cpp.o:
+	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
+	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+#	source='$<' object='$@' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXXCOMPILE) -c -o $@ $<
+
+.cpp.obj:
+	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ `$(CYGPATH_W) '$<'`; \
+	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+#	source='$<' object='$@' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+.cpp.lo:
 	if $(LTCXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
 	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Plo"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
 #	source='$<' object='$@' libtool=yes \
