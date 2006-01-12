@@ -56,7 +56,7 @@ namespace zypp
 	  // Translator: all.%s = name of package,patch,....
           return str::form (_("%s depended on %s"),
 			    ResolverInfo::toString (on).c_str(),
-			    on.resItemsToString(false));
+			    on.resItemsToString(false).c_str());
       }
       
       
