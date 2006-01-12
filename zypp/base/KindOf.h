@@ -30,7 +30,7 @@ namespace zypp
      * etc. We want some thing to identify these types and have a string
      * value associated. Identification should be constructible from this
      * string. An \ref g_EnumerationClass could do this, but we would also
-     * like to be exensible at runtime.
+     * like to be extensible at runtime.
      *
      * KindOf stores a \b lowercased version of a string and uses this as
      * identification.
