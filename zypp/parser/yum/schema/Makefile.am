@@ -1,3 +1,3 @@
-schemafilesdir =  /usr/share/YaST2/schema/packagemanager
+schemafilesdir = ${schemadir}
 schemafiles_DATA = $(wildcard *.rng *.rnc)
 EXTRA_DIST = $(schemafiles_DATA)
