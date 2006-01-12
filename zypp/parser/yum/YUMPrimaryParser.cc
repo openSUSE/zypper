@@ -217,15 +217,29 @@ namespace zypp {
              child = child ->next) {
           if (_helper.isElement(child)) {
             string name = _helper.name(child);
+            // we have 2 format for entries
+            // For YUM repositories
+            // <entry kind="package" name="foo" epoch="2" ver="3" rel="4" flags="LE"/>
+            // The slightly modified YUM format the storage backend uses.
+            // <entry kind="package" >foo-devel &lt;= 3:4-5</entry>
             if (name == "entry") { 
-              depList->push_back
-                (YUMDependency(_helper.attribute(child,"kind"),
-                               _helper.attribute(child,"name"),
-                               _helper.attribute(child,"flags"),
-                               _helper.attribute(child,"epoch"),
-                               _helper.attribute(child,"ver"),
-                               _helper.attribute(child,"rel"),
-                               _helper.attribute(child,"pre")));
+              if ( _helper.content(child).empty() )
+              {
+                depList->push_back
+                  (YUMDependency(_helper.attribute(child,"kind"),
+                                _helper.attribute(child,"name"),
+                                _helper.attribute(child,"flags"),
+                                _helper.attribute(child,"epoch"),
+                                _helper.attribute(child,"ver"),
+                                _helper.attribute(child,"rel"),
+                                _helper.attribute(child,"pre")));
+              }
+              else
+              {
+                depList->push_back
+                  (YUMDependency(_helper.attribute(child,"kind"),
+                                _helper.content(child)));
+              }
             }
             else {
               WAR << "YUM dependency within <format> contains the unknown element <" << name << "> "

@@ -38,6 +38,17 @@ namespace zypp {
       pre(pre)
       { };
 
+      YUMDependency::YUMDependency(const std::string& kind,
+                                   const std::string& encoded)
+      : kind(kind),
+      encoded(encoded)
+      { };
+
+      bool YUMDependency::isEncoded() const
+      {
+        return !encoded.empty();
+      }
+
       YUMDirSize::YUMDirSize()
       { }
 

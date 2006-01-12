@@ -535,15 +535,21 @@ namespace zypp
 					       const Resolvable::Kind & my_kind)
 	{
 	  CapFactory _f;
-	  Resolvable::Kind _kind = dep.kind == ""
-	    ? my_kind
-	    : Resolvable::Kind(dep.kind);
-	  Capability cap = _f.parse(
+	  Resolvable::Kind _kind = dep.kind == "" ? my_kind : Resolvable::Kind(dep.kind);
+	  Capability cap;
+    if ( ! dep.isEncoded() ) 
+    {
+      cap = _f.parse(
 	    _kind,
 	    dep.name,
 	    Rel(dep.flags),
 	    Edition(dep.ver, dep.rel, dep.epoch)
-	  );
+	     );
+    }
+    else
+    {
+      cap = _f.parse( _kind, dep.encoded );
+    }
 	  return cap;
 	}
 

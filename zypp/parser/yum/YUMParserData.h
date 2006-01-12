@@ -57,7 +57,10 @@ namespace zypp {
                       const std::string& epoch,
                       const std::string& ver,
                       const std::string& rel,
-                      const std::string& pre);
+                      const std::string& pre );
+        YUMDependency(const std::string& kind,
+                      const std::string& encoded );
+        bool isEncoded() const;
         std::string kind;
         std::string name;
         std::string flags;
@@ -65,8 +68,9 @@ namespace zypp {
         std::string ver;
         std::string rel;
         std::string pre;
+        // in case we only store the encoded string
+        std::string encoded;
       };
-
 
       /**
       * @short Holds data about how much space will be needed per directory
