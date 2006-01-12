@@ -42,6 +42,8 @@ include_HEADERS = \
 	QueueItemBranchPtr.h		\
 	QueueItemConflict.h		\
 	QueueItemConflictPtr.h		\
+	QueueItemEstablish.h		\
+	QueueItemEstablishPtr.h		\
 	QueueItemGroup.h		\
 	QueueItemGroupPtr.h		\
 	QueueItemInstall.h		\
@@ -64,6 +66,7 @@ lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	QueueItem.cc					\
 	QueueItemBranch.cc				\
 	QueueItemConflict.cc				\
+	QueueItemEstablish.cc				\
 	QueueItemGroup.cc				\
 	QueueItemInstall.cc				\
 	QueueItemRequire.cc				\

@@ -59,6 +59,10 @@ ResolverContext::toString (const ResItemStatus & status)
 	// Translator: status of a package,patch,...		    
 	case RESOLVABLE_STATUS_INSTALLED:			ret = _("installed"); break;
 	// Translator: status of a package,patch,...		    
+	case RESOLVABLE_STATUS_SATISFIED:			ret = _("satisfied"); break;
+	// Translator: status of a package,patch,...		    
+	case RESOLVABLE_STATUS_INCOMPLETE:			ret = _("incomplete"); break;
+	// Translator: status of a package,patch,...		    
 	case RESOLVABLE_STATUS_UNINSTALLED:			ret = _("uninstalled"); break;
 	// Translator: status of a package,patch,...		    
 	case RESOLVABLE_STATUS_TO_BE_INSTALLED:			ret = _("to be installed"); break;
@@ -95,6 +99,16 @@ ResolverContext::toString ( const ResolverContext & context )
 	ret += context._parent->asString();
 	ret += "],\n\t";
     }
+    for (StatusTable::const_iterator iter = context._status.begin(); iter != context._status.end(); iter++) {
+	ResItem_constPtr res_item = iter->first;
+	ResItemStatus status = iter->second;
+
+	ret += res_item->asString();
+	ret += " ";
+	ret += toString(status);
+	ret += "\n\t";
+    }
+
     ret += str::form ("Download Size: %lld",  context._download_size);
     ret += str::form (", Install Size: %lld", context._install_size);
     ret += str::form (", Total Priority: %d", context._total_priority);

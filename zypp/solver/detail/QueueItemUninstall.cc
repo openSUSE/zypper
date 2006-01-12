@@ -148,7 +148,7 @@ unlink_check_cb (ResItem_constPtr resItem, const Capability & dep, void *data)
     if (! info->context->resItemIsPresent (resItem))
 	return true;
 
-    if (info->context->requirementIsMet (dep, false))
+    if (info->context->requirementIsMet (dep))
 	return true;
 
     info->cancel_unlink = true;

@@ -365,7 +365,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 			    CapSet::const_iterator iter = requires.begin();
 			    for (; iter != requires.end(); iter++) {
 				const Capability req = *iter;
-				if (! context->requirementIsMet (req, false)) {
+				if (! context->requirementIsMet (req)) {
 					break;
 				}
 			    }

@@ -47,142 +47,148 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      typedef enum {
-          RESOLVABLE_STATUS_UNKNOWN = 0,
-          RESOLVABLE_STATUS_INSTALLED,
-          RESOLVABLE_STATUS_UNINSTALLED,
-          RESOLVABLE_STATUS_TO_BE_INSTALLED,
-          RESOLVABLE_STATUS_TO_BE_INSTALLED_SOFT,
-          RESOLVABLE_STATUS_TO_BE_UNINSTALLED,
-          RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE,
-          RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK
-      } ResItemStatus;
+typedef enum {
+    RESOLVABLE_STATUS_UNKNOWN = 0,
+    RESOLVABLE_STATUS_INSTALLED,
+    RESOLVABLE_STATUS_SATISFIED,
+    RESOLVABLE_STATUS_INCOMPLETE,
+    RESOLVABLE_STATUS_UNINSTALLED,
+    RESOLVABLE_STATUS_TO_BE_INSTALLED,
+    RESOLVABLE_STATUS_TO_BE_INSTALLED_SOFT,
+    RESOLVABLE_STATUS_TO_BE_UNINSTALLED,
+    RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE,
+    RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK
+} ResItemStatus;
 
-      #define resItem_status_is_to_be_installed(x) (((x) == RESOLVABLE_STATUS_TO_BE_INSTALLED) || ((x) == RESOLVABLE_STATUS_TO_BE_INSTALLED_SOFT))
-      #define resItem_status_is_to_be_uninstalled(x) (((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED) || ((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE) || ((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK))
+#define resItem_status_is_to_be_installed(x) (((x) == RESOLVABLE_STATUS_TO_BE_INSTALLED) || ((x) == RESOLVABLE_STATUS_TO_BE_INSTALLED_SOFT))
+#define resItem_status_is_to_be_uninstalled(x) (((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED) || ((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE) || ((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK))
 
-      typedef std::map<ResItem_constPtr, ResItemStatus> StatusTable;
-      typedef std::list<ResolverInfo_Ptr> InfoList;
-
-
-      typedef void (*ResolverContextFn) (ResolverContext_Ptr ctx, void * data);
-      typedef void (*MarkedResItemFn) (ResItem_constPtr res, ResItemStatus status, void *data);
-      typedef void (*MarkedResItemPairFn) (ResItem_constPtr res1, ResItemStatus status1, ResItem_constPtr res2, ResItemStatus status2, void *data);
+typedef std::map<ResItem_constPtr, ResItemStatus> StatusTable;
+typedef std::list<ResolverInfo_Ptr> InfoList;
 
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : ResolverContext
-      class ResolverContext : public base::ReferenceCounted, private base::NonCopyable {
-          
+typedef void (*ResolverContextFn) (ResolverContext_Ptr ctx, void * data);
+typedef void (*MarkedResItemFn) (ResItem_constPtr res, ResItemStatus status, void *data);
+typedef void (*MarkedResItemPairFn) (ResItem_constPtr res1, ResItemStatus status1, ResItem_constPtr res2, ResItemStatus status2, void *data);
 
-        private:
 
-          ResolverContext_Ptr _parent;
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : ResolverContext
+class ResolverContext : public base::ReferenceCounted, private base::NonCopyable {
+    
 
-          int _refs;
+  private:
 
-          World_Ptr _world;
-          StatusTable _status;
+    ResolverContext_Ptr _parent;
 
-          // just a caching mechanism
-          ResItem_constPtr _last_checked_resItem;
-          ResItemStatus _last_checked_status;
+    int _refs;
 
-          InfoList _log;
-          unsigned long long _download_size;
-          unsigned long long _install_size;
-          int _total_priority;
-          int _min_priority;
-          int _max_priority;
-          int _other_penalties;
-          Channel_constPtr _current_channel;
-          bool _verifying;
-          bool _invalid;
+    World_Ptr _world;
+    StatusTable _status;
 
-        public:
-          ResolverContext (ResolverContext_Ptr parent = NULL);
-          virtual ~ResolverContext();
+    // just a caching mechanism
+    ResItem_constPtr _last_checked_resItem;
+    ResItemStatus _last_checked_status;
 
-          // ---------------------------------- I/O
+    InfoList _log;
+    unsigned long long _download_size;
+    unsigned long long _install_size;
+    int _total_priority;
+    int _min_priority;
+    int _max_priority;
+    int _other_penalties;
+    Channel_constPtr _current_channel;
+    bool _verifying;
+    bool _invalid;
 
-          static std::string toString (const ResolverContext & context);
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
-          friend std::ostream& operator<<(std::ostream&, const ResolverContext & context);
-          std::string asString (void ) const;
+  public:
+    ResolverContext (ResolverContext_Ptr parent = NULL);
+    virtual ~ResolverContext();
 
-          static std::string toString (const ResItemStatus & status);
+    // ---------------------------------- I/O
 
-          // ---------------------------------- accessors
+    static std::string toString (const ResolverContext & context);
+    virtual std::ostream & dumpOn(std::ostream & str ) const;
+    friend std::ostream& operator<<(std::ostream&, const ResolverContext & context);
+    std::string asString (void ) const;
 
-          World_Ptr world (void) const;				// gets global world, if _world == NULL
-          void setWorld (World_Ptr world) { _world = world; }
+    static std::string toString (const ResItemStatus & status);
 
-          Channel_constPtr currentChannel (void) const { return _current_channel; }
-          void setCurrentChannel (Channel_constPtr channel) { _current_channel = channel; }
+    // ---------------------------------- accessors
 
-          unsigned long long downloadSize(void) const { return _download_size; }
-          unsigned long long installSize(void) const { return _install_size; }
-          int totalPriority (void) const { return _total_priority; }
-          int minPriority (void) const { return _min_priority; }
-          int maxPriority (void) const { return _max_priority; }
-          int otherPenalties (void) const { return _other_penalties; }
+    World_Ptr world (void) const;				// gets global world, if _world == NULL
+    void setWorld (World_Ptr world) { _world = world; }
 
-          bool isValid (void) const { return !_invalid; }
-          bool isInvalid (void) const { return _invalid; }
+    Channel_constPtr currentChannel (void) const { return _current_channel; }
+    void setCurrentChannel (Channel_constPtr channel) { _current_channel = channel; }
 
-          bool verifying (void) const { return _verifying; }
-          void setVerifying (bool verifying) { _verifying = verifying; }
+    unsigned long long downloadSize(void) const { return _download_size; }
+    unsigned long long installSize(void) const { return _install_size; }
+    int totalPriority (void) const { return _total_priority; }
+    int minPriority (void) const { return _min_priority; }
+    int maxPriority (void) const { return _max_priority; }
+    int otherPenalties (void) const { return _other_penalties; }
 
-          // ---------------------------------- methods
+    bool isValid (void) const { return !_invalid; }
+    bool isInvalid (void) const { return _invalid; }
 
-          ResItemStatus getStatus (ResItem_constPtr res);			// non-const, because its caching
-          void setStatus (ResItem_constPtr res, ResItemStatus status);
+    bool verifying (void) const { return _verifying; }
+    void setVerifying (bool verifying) { _verifying = verifying; }
 
-          bool installResItem (ResItem_constPtr resItem, bool is_soft, int other_penalty);
-          bool upgradeResItem (ResItem_constPtr new_resItem, ResItem_constPtr old_resItem, bool is_soft, int other_penalty);
-          bool uninstallResItem (ResItem_constPtr resItem, bool part_of_upgrade, bool due_to_obsolete, bool due_to_unlink);
+    // ---------------------------------- methods
 
-          bool resItemIsPresent (ResItem_constPtr resItem);
-          bool resItemIsAbsent (ResItem_constPtr resItem);
+    ResItemStatus getStatus (ResItem_constPtr res);			// non-const, because its caching
+    void setStatus (ResItem_constPtr res, ResItemStatus status);
 
-          void foreachMarkedResItem (MarkedResItemFn fn, void *data) const;
-          CResItemList getMarkedResItems (void) const;
+    // state change functions
+    //   they do some checking before calling setStatus()
+    bool installResItem (ResItem_constPtr resItem, bool is_soft, int other_penalty);
+    bool satisfyResItem (ResItem_constPtr resItem, int other_penalty);
+    bool incompleteResItem (ResItem_constPtr resItem, int other_penalty);
+    bool upgradeResItem (ResItem_constPtr new_resItem, ResItem_constPtr old_resItem, bool is_soft, int other_penalty);
+    bool uninstallResItem (ResItem_constPtr resItem, bool part_of_upgrade, bool due_to_obsolete, bool due_to_unlink);
 
-          int foreachInstall (MarkedResItemFn fn, void *data) const;
-          CResItemList getInstalls (void) const;
-          int installCount (void) const;
+    bool resItemIsPresent (ResItem_constPtr resItem);
+    bool resItemIsAbsent (ResItem_constPtr resItem);
 
-          int foreachUninstall (MarkedResItemFn fn, void *data);			// non-const, calls foreachUpgrade
-          CResItemList getUninstalls (void);
-          int uninstallCount (void);
+    void foreachMarkedResItem (MarkedResItemFn fn, void *data) const;
+    CResItemList getMarkedResItems (void) const;
 
-          int foreachUpgrade (MarkedResItemPairFn fn, void *data);			// non-const, calls getStatus
-          CResItemList getUpgrades (void);
-          int upgradeCount (void);
+    int foreachInstall (MarkedResItemFn fn, void *data) const;
+    CResItemList getInstalls (void) const;
+    int installCount (void) const;
 
-          void addInfo (ResolverInfo_Ptr info);
-          void addInfoString (ResItem_constPtr resItem, int priority, std::string str);
-          void addErrorString (ResItem_constPtr resItem, std::string str);
+    int foreachUninstall (MarkedResItemFn fn, void *data);			// non-const, calls foreachUpgrade
+    CResItemList getUninstalls (void);
+    int uninstallCount (void);
 
-          void foreachInfo (ResItem_Ptr resItem, int priority, ResolverInfoFn fn, void *data);
-          InfoList getInfo (void);
+    int foreachUpgrade (MarkedResItemPairFn fn, void *data);			// non-const, calls getStatus
+    CResItemList getUpgrades (void);
+    int upgradeCount (void);
 
-          void spew (void);
-          void spewInfo (void);
+    void addInfo (ResolverInfo_Ptr info);
+    void addInfoString (ResItem_constPtr resItem, int priority, std::string str);
+    void addErrorString (ResItem_constPtr resItem, std::string str);
 
-          bool requirementIsMet (const Capability & dep, bool is_child);
-          bool requirementIsPossible (const Capability & dep);
-          bool resItemIsPossible (ResItem_constPtr resItem);
-          bool isParallelInstall (ResItem_constPtr resItem);
+    void foreachInfo (ResItem_Ptr resItem, int priority, ResolverInfoFn fn, void *data);
+    InfoList getInfo (void);
 
-          int getChannelPriority (Channel_constPtr channel) const;
+    void spew (void);
+    void spewInfo (void);
 
-          int partialCompare (ResolverContext_Ptr context);			// non-const, calls uninstall/upgrade Count
-          int compare (ResolverContext_Ptr context);
-      };
+    bool requirementIsMet (const Capability & dep, bool is_child = false);
+    bool requirementIsPossible (const Capability & dep);
+    bool resItemIsPossible (ResItem_constPtr resItem);
+    bool isParallelInstall (ResItem_constPtr resItem);
 
-      ///////////////////////////////////////////////////////////////////
+    int getChannelPriority (Channel_constPtr channel) const;
+
+    int partialCompare (ResolverContext_Ptr context);			// non-const, calls uninstall/upgrade Count
+    int compare (ResolverContext_Ptr context);
+};
+
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

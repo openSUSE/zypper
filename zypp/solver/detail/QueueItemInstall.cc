@@ -282,7 +282,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	for (CapSet::const_iterator iter = deps.begin(); iter != deps.end(); iter++) {
 	    const Capability dep = *iter;
 	    _DBG("RC_SPEW") << "this requires " << dep.asString() << endl;
-	    if (!context->requirementIsMet (dep, false)) {
+	    if (!context->requirementIsMet (dep)) {
 	        _DBG("RC_SPEW") << "this requires " << dep.asString() << endl;
 	        QueueItemRequire_Ptr req_item = new QueueItemRequire (world(), dep);
 	        req_item->addResItem (resItem);

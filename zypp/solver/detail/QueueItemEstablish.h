@@ -1,5 +1,5 @@
-/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* QueueItemInstall.h
+/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+/* QueueItemEstablish.h
  *
  * Copyright (C) 2000-2002 Ximian, Inc.
  * Copyright (C) 2005 SUSE Linux Products GmbH
@@ -19,15 +19,15 @@
  * 02111-1307, USA.
  */
 
-#ifndef ZYPP_SOLVER_DETAIL_QUEUEITEMINSTALL_H
-#define ZYPP_SOLVER_DETAIL_QUEUEITEMINSTALL_H
+#ifndef ZYPP_SOLVER_DETAIL_QUEUEITEMESTABLISH_H
+#define ZYPP_SOLVER_DETAIL_QUEUEITEMESTABLISH_H
 
 #include <iosfwd>
 #include <list>
 #include <string>
 
 #include "zypp/solver/detail/QueueItem.h"
-#include "zypp/solver/detail/QueueItemInstallPtr.h"
+#include "zypp/solver/detail/QueueItemEstablishPtr.h"
 #include "zypp/solver/temporary/ResItem.h"
 #include "zypp/solver/temporary/Channel.h"
 #include "zypp/CapSet.h"
@@ -44,16 +44,12 @@ namespace zypp
 
 ///////////////////////////////////////////////////////////////////
 //
-//	CLASS NAME : QueueItemInstall
+//	CLASS NAME : QueueItemEstablish
 
-class QueueItemInstall : public QueueItem {
-
+class QueueItemEstablish : public QueueItem {
 
   private:
     ResItem_constPtr _resItem;
-    ResItem_constPtr _upgrades;
-    CapSet _deps_satisfied_by_this_install;
-    CResItemList _needed_by;
     int _channel_priority;
     int _other_penalty;
 
@@ -61,25 +57,22 @@ class QueueItemInstall : public QueueItem {
 
   public:
 
-    QueueItemInstall (World_Ptr world, ResItem_constPtr resItem);
-    virtual ~QueueItemInstall();
+    QueueItemEstablish (World_Ptr world, ResItem_constPtr resItem);
+    virtual ~QueueItemEstablish();
 
     // ---------------------------------- I/O
 
-    static std::string toString (const QueueItemInstall & item);
+    static std::string toString (const QueueItemEstablish & item);
 
     virtual std::ostream & dumpOn(std::ostream & str ) const;
 
-    friend std::ostream& operator<<(std::ostream&, const QueueItemInstall & item);
+    friend std::ostream& operator<<(std::ostream&, const QueueItemEstablish & item);
 
     std::string asString (void ) const;
 
     // ---------------------------------- accessors
 
     ResItem_constPtr resItem (void) const { return _resItem; }
-
-    ResItem_constPtr upgrades (void) const { return _upgrades; }
-    void setUpgrades (ResItem_constPtr upgrades) { _upgrades = upgrades; }
 
     int channelPriority (void) const { return _channel_priority; }
     void setChannelPriority (int channel_priority) { _channel_priority = channel_priority; }
@@ -97,10 +90,6 @@ class QueueItemInstall : public QueueItem {
 
     virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
     virtual bool isSatisfied (ResolverContext_Ptr context) const;
-
-    void addDependency (const Capability & dep);
-    void addNeededBy (const ResItem_constPtr resItem);
-
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -113,4 +102,4 @@ class QueueItemInstall : public QueueItem {
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // ZYPP_SOLVER_DETAIL_QUEUEITEMINSTALL_H
+#endif // ZYPP_SOLVER_DETAIL_QUEUEITEMESTABLISH_H
