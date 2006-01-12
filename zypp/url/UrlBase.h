@@ -89,6 +89,10 @@ namespace zypp
       operator - (const ViewOption &l, const ViewOption &r)
       { return ViewOption(l.opt & ~r.opt); }
 
+      inline ViewOption &
+      operator = (const ViewOption &o)
+      { opt = o.opt; return *this; }
+
       /** Check if option is set.
        * \param o    A view option.
        * \return True, if the current options bitwise matches
