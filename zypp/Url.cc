@@ -109,7 +109,7 @@ namespace zypp
 
         ref.reset( new UrlBase());
         // don't show empty authority
-        ref->setViewOptions( ref->getViewOptions() -
+        ref->setViewOptions( zypp::url::ViewOption::DEFAULTS -
                              zypp::url::ViewOption::EMPTY_AUTHORITY);
         ref->config("rx_username",      "");  // disallow username
         ref->config("rx_password",      "");  // disallow password
