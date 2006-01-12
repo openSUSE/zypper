@@ -36,9 +36,46 @@ namespace zypp
 
   public:
     /** Time of package installation */
-    Date installtime();
+    Date installtime() const;
     /** Get the package change log */
-    Changelog changelog();
+    Changelog changelog() const;
+    /** */
+    Date buildtime() const;
+    /** */
+    std::string buildhost() const;
+    /** */
+    std::string distribution() const;
+    /** */
+    Vendor vendor() const;
+    /** */
+    Label license() const;
+    /** */
+    std::string packager() const;
+    /** */
+    PackageGroup group() const;
+    /** Don't ship it as class Url, because it might be
+     * in fact anything but a legal Url. */
+    std::string url() const;
+    /** */
+    std::string os() const;
+    /** */
+    Text prein() const;
+    /** */
+    Text postin() const;
+    /** */
+    Text preun() const;
+    /** */
+    Text postun() const;
+    /** */
+    ByteCount sourcesize() const;
+    /** */
+    ByteCount archivesize() const;
+    /** */
+    Text authors() const;
+    /** */
+    Text filenames() const;
+    /** */
+    License licenseToConfirm() const;
     // data here:
 
   protected:
