@@ -50,116 +50,117 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      typedef std::list<ResItem_Ptr> ResItemList;
-      typedef std::list<ResItem_constPtr> CResItemList;
+typedef std::list<ResItem_Ptr> ResItemList;
+typedef std::list<ResItem_constPtr> CResItemList;
 
-      typedef std::set<ResItem_constPtr> CResItemSet;
+typedef std::set<ResItem_constPtr> CResItemSet;
 
-      typedef bool (*ResItemFn) (ResItem_Ptr r, void *data);
-      typedef bool (*CResItemFn) (ResItem_constPtr r, void *data);
-      typedef bool (*ResItemPairFn) (ResItem_constPtr r1, ResItem_constPtr r2, void *data);
-      typedef bool (*ResItemAndDepFn) (ResItem_constPtr r, const Capability & dep, void *data);
+typedef bool (*ResItemFn) (ResItem_Ptr r, void *data);
+typedef bool (*CResItemFn) (ResItem_constPtr r, void *data);
+typedef bool (*ResItemPairFn) (ResItem_constPtr r1, ResItem_constPtr r2, void *data);
+typedef bool (*ResItemAndDepFn) (ResItem_constPtr r, const Capability & dep, void *data);
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : ResItem
-      /**
-       *
-       **/
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : ResItem
+/**
+ *
+ **/
 
-      class ResItem : public base::ReferenceCounted, private base::NonCopyable {
+class ResItem : public base::ReferenceCounted, private base::NonCopyable {
 
 
-        private:
-          Channel_constPtr _channel;
+  private:
+    Channel_constPtr _channel;
 
-          bool _installed;
-          bool _local;
-          bool _locked;
+    bool _installed;
+    bool _local;
+    bool _locked;
 
-          size_t _file_size;
-          size_t _installed_size;
+    size_t _file_size;
+    size_t _installed_size;
 
-        protected:
+  protected:
 
-          // ---------------------------------- accessors
+    // ---------------------------------- accessors
 
-          void setLocal (bool local) { _local = local; }
-          ResObject::Ptr _resObject;
+    void setLocal (bool local) { _local = local; }
+    ResObject::Ptr _resObject;
 
-        public:
+  public:
 
-          ResItem(const Resolvable::Kind & kind, const std::string & name, int epoch = Edition::noepoch, const std::string & version = "", const std::string & release = "", const Arch & arch = Arch());
+    ResItem(const Resolvable::Kind & kind, const std::string & name, int epoch = Edition::noepoch, const std::string & version = "", const std::string & release = "", const Arch & arch = Arch());
 
-          ResItem(const ResObject::Ptr & resObject);
-          ResItem(const XmlNode_Ptr node);
+    ResItem(const ResObject::Ptr & resObject);
+    ResItem(const XmlNode_Ptr node);
 
-          virtual ~ResItem();
+    virtual ~ResItem();
 
-          // ---------------------------------- I/O
+    // ---------------------------------- I/O
 
-          const XmlNode_Ptr asXmlNode (void) const;
+    const XmlNode_Ptr asXmlNode (void) const;
 
-          static std::string toString ( const ResItem & res, bool full = false );
+    static std::string toString ( const ResItem & res, bool full = false );
 
-          static std::string toString ( const CResItemList & reslist, bool full = false );
+    static std::string toString ( const CResItemList & reslist, bool full = false );
 
-          virtual std::ostream & dumpOn( std::ostream & str ) const;
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
 
-          friend std::ostream& operator<<( std::ostream & str, const ResItem & str);
+    friend std::ostream& operator<<( std::ostream & str, const ResItem & str);
 
-          std::string asString ( bool full = false ) const;
+    std::string asString ( bool full = false ) const;
 
-          // ---------------------------------- accessors
+    // ---------------------------------- accessors
 
-          Channel_constPtr channel() const { return _channel; }
-          void setChannel (Channel_constPtr channel) { _channel = channel; }
+    Channel_constPtr channel() const { return _channel; }
+    void setChannel (Channel_constPtr channel) { _channel = channel; }
 
-          bool locked () const { return _locked; }
-          void setLocked (bool locked) { _locked = locked; }
+    bool locked () const { return _locked; }
+    void setLocked (bool locked) { _locked = locked; }
 
-          bool isInstalled() const;				// does *not* reflect _installed
-          void setInstalled (bool installed) { _installed = installed; }
+    bool isInstalled() const;				// does *not* reflect _installed
+    void setInstalled (bool installed) { _installed = installed; }
 
-          bool local() const { return _local; }
+    bool local() const { return _local; }
 
-          size_t fileSize() const { return _file_size; }
-          void setFileSize (size_t file_size) { _file_size = file_size; }
+    size_t fileSize() const { return _file_size; }
+    void setFileSize (size_t file_size) { _file_size = file_size; }
 
-          size_t installedSize() const { return _installed_size; }
-          void setInstalledSize (size_t installed_size) { _installed_size = installed_size; }
+    size_t installedSize() const { return _installed_size; }
+    void setInstalledSize (size_t installed_size) { _installed_size = installed_size; }
 
-          const CapSet & requires() const { return _resObject->requires(); }
-          const CapSet & provides() const { return _resObject->provides(); }
-          const CapSet & conflicts() const { return _resObject->conflicts(); }
-          const CapSet & obsoletes() const { return _resObject->obsoletes(); }
-          const CapSet & suggests() const { return _resObject->suggests(); }
-          const CapSet & recommends() const { return _resObject->recommends(); }
-          const CapSet & freshens() const { return _resObject->freshens(); }
+    const CapSet & requires() const { return _resObject->requires(); }
+    const CapSet & prerequires() const { return _resObject->prerequires(); }
+    const CapSet & provides() const { return _resObject->provides(); }
+    const CapSet & conflicts() const { return _resObject->conflicts(); }
+    const CapSet & obsoletes() const { return _resObject->obsoletes(); }
+    const CapSet & suggests() const { return _resObject->suggests(); }
+    const CapSet & recommends() const { return _resObject->recommends(); }
+    const CapSet & freshens() const { return _resObject->freshens(); }
 
-          void deprecatedSetDependencies (const Dependencies & dependencies) { _resObject->deprecatedSetDeps(dependencies); }
+    void deprecatedSetDependencies (const Dependencies & dependencies) { _resObject->deprecatedSetDeps(dependencies); }
 
-          ResObject::constPtr resObject() { return _resObject; }
+    ResObject::constPtr resObject() { return _resObject; }
 
-          // Spec definitions
+    // Spec definitions
 
-          const Edition & edition() const { return _resObject->edition(); }
-          const std::string & version() const { return edition().version(); }
-          const std::string & release() const { return edition().release(); }
-          const int epoch() const { return edition().epoch(); }
-          bool hasEpoch() const { return edition().epoch() != Edition::noepoch; }
-          const Arch & arch() const { return _resObject->arch(); }
-          const Resolvable::Kind & kind() const { return _resObject->kind(); }
-          const std::string name() const { return _resObject->name(); }
-          bool equals(ResItem_constPtr item) const;
-          bool equals(const  Resolvable::Kind & kind, const std::string & name,
-                      const Edition & edition) const;
+    const Edition & edition() const { return _resObject->edition(); }
+    const std::string & version() const { return edition().version(); }
+    const std::string & release() const { return edition().release(); }
+    const int epoch() const { return edition().epoch(); }
+    bool hasEpoch() const { return edition().epoch() != Edition::noepoch; }
+    const Arch & arch() const { return _resObject->arch(); }
+    const Resolvable::Kind & kind() const { return _resObject->kind(); }
+    const std::string name() const { return _resObject->name(); }
+    bool equals(ResItem_constPtr item) const;
+    bool equals(const  Resolvable::Kind & kind, const std::string & name,
+                const Edition & edition) const;
 
-          static int compare (ResItem_constPtr res1, ResItem_constPtr res2);
+    static int compare (ResItem_constPtr res1, ResItem_constPtr res2);
 
-      };
+};
 
-      ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////
