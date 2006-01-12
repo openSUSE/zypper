@@ -14,8 +14,8 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_url.la
 ## ##################################################
 
 lib@PACKAGE@_url_la_SOURCES =	\
-	UrlBase.cc	\
-	UrlUtils.cc
+	UrlUtils.cc	\
+	UrlBase.cc
 
 lib@PACKAGE@_url_la_LIBADD = -lboost_regex
 
