@@ -1,7 +1,7 @@
 #
-# Makefile.am for src/testsuite
+# Makefile.am for zypp/solver/testsuite
 #
-SUBDIRS = lib config libzypp_solver.test single.out
+SUBDIRS = single.out
 AUTOMAKE_OPTIONS = dejagnu
 PACKAGE = libzypp_solver
 
@@ -51,6 +51,8 @@ deptestomatic_multi_LDADD =				\
 	-lzypp_solver_temporary				\
 	-lzypp_solver_detail				\
 	$(LIBZYPP_LIBS)
+
+EXTRA_DIST = config/*.exp lib/*.exp $(PACKAGE).test/*.exp
 
 clean-local:
 	rm -rf data.deptestomatic/*/out
