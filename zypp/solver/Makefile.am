@@ -9,8 +9,7 @@ include_HEADERS =
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_solver.la
 
-## ##################################################
+lib@PACKAGE@_solver_la_LIBADD = detail/lib@PACKAGE@_solver_detail.la	\
+				temporary/lib@PACKAGE@_solver_temporary.la
 
 lib@PACKAGE@_solver_la_SOURCES =
-
-## ##################################################

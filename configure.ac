@@ -168,6 +168,8 @@ AC_OUTPUT(	\
 	testsuite/zypp/tests/Makefile	\
 	testsuite/solver/Makefile	\
 	testsuite/solver/single.out/Makefile	\
+	testsuite/target/Makefile	\
+	testsuite/target/tests/Makefile	\
 	zypp/Makefile			\
 	zypp/base/Makefile		\
 	zypp/detail/Makefile		\
@@ -186,9 +188,7 @@ AC_OUTPUT(	\
 	zypp/url/Makefile		\
 	zypp/target/Makefile		\
 	zypp/target/rpm/Makefile	\
-	zypp/target/hal/Makefile	\
-	zypp/target/testsuite/Makefile	\
-	zypp/target/testsuite/tests/Makefile
+	zypp/target/hal/Makefile
 
 )
 dnl ==================================================
