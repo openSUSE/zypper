@@ -19,7 +19,7 @@ INCLUDES=						\
 	-DG_LOG_DOMAIN=\"testsuite\"			\
 	-Wall
 
-LIBZYPP_LIBS = -lxml2 -lz -lm -ly2util -lpthread -lrt -lz -lbz2 -lzypp
+LIBZYPP_LIBS = -lxml2 -lz -lm -lpthread -lrt -lz -lbz2 -lzypp_base
 
 # We're not ready for this yet.
 #check_PROGRAMS = deptestomatic.multi
@@ -31,7 +31,7 @@ utils_single_SOURCES =					\
 
 utils_single_LDFLAGS =					\
 	-L$(top_srcdir)/zypp/solver/temporary/.libs	\
-	-L$(top_srcdir)/zypp
+	-L$(top_srcdir)/zypp/base/.libs
 
 utils_single_LDADD =					\
 	-lzypp_solver_temporary				\
@@ -44,7 +44,7 @@ deptestomatic_multi_SOURCES =				\
 deptestomatic_multi_LDFLAGS =				\
 	-L$(top_srcdir)/zypp/solver/detail/.libs	\
 	-L$(top_srcdir)/zypp/solver/temporary/.libs	\
-	-L$(top_srcdir)/zypp
+	-L$(top_srcdir)/zypp/base/.libs
 
 deptestomatic_multi_LDADD =				\
 	-lzypp_solver_detail				\

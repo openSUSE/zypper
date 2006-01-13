@@ -164,7 +164,10 @@ AC_OUTPUT(	\
 	doc/autodoc/Makefile		\
 	doc/autodoc/Doxyfile		\
 	testsuite/Makefile		\
-	testsuite/tests/Makefile	\
+	testsuite/zypp/Makefile		\
+	testsuite/zypp/tests/Makefile	\
+	testsuite/solver/Makefile	\
+	testsuite/solver/single.out/Makefile	\
 	zypp/Makefile			\
 	zypp/base/Makefile		\
 	zypp/detail/Makefile		\
@@ -176,8 +179,6 @@ AC_OUTPUT(	\
 	zypp/solver/Makefile		\
 	zypp/solver/detail/Makefile	\
 	zypp/solver/temporary/Makefile	\
-	zypp/solver/testsuite/Makefile	\
-	zypp/solver/testsuite/single.out/Makefile	\
 	zypp/source/Makefile		\
 	zypp/source/yum/Makefile	\
 	zypp/media/Makefile		\
