@@ -3,21 +3,7 @@
 #
 SUBDIRS = single.out
 AUTOMAKE_OPTIONS = dejagnu
-PACKAGE = libzypp_solver
-
-INCLUDES=						\
-	-I$(top_srcdir)/src				\
-	-I$(includedir)					\
-	-I/usr/include/YaST2				\
-	-I/usr/include/libxml2 -I/usr/include/rpm	\
-        -DDBUS_API_SUBJECT_TO_CHANGE			\
-	-I/usr/include/dbus-1.0				\
-	-I/usr/lib64/dbus-1.0/include			\
-	-I/opt/gnome/include/glib-2.0			\
-	-I/opt/gnome/lib64/glib-2.0/include		\
-	-I/usr/include/hal				\
-	-DG_LOG_DOMAIN=\"testsuite\"			\
-	-Wall
+PACKAGE = solver
 
 LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
 
