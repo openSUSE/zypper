@@ -177,10 +177,7 @@ AC_OUTPUT(	\
 	zypp/solver/detail/Makefile	\
 	zypp/solver/temporary/Makefile	\
 	zypp/solver/testsuite/Makefile	\
-	zypp/solver/testsuite/lib/Makefile	\
-	zypp/solver/testsuite/config/Makefile	\
 	zypp/solver/testsuite/single.out/Makefile	\
-	zypp/solver/testsuite/libzypp_solver.test/Makefile	\
 	zypp/source/Makefile		\
 	zypp/source/yum/Makefile	\
 	zypp/media/Makefile		\
