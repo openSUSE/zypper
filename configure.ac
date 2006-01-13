@@ -164,9 +164,6 @@ AC_OUTPUT(	\
 	doc/autodoc/Makefile		\
 	doc/autodoc/Doxyfile		\
 	testsuite/Makefile		\
-	testsuite/lib/Makefile		\
-	testsuite/config/Makefile	\
-	testsuite/libzypp.test/Makefile	\
 	testsuite/tests/Makefile	\
 	zypp/Makefile			\
 	zypp/base/Makefile		\
