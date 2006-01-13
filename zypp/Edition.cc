@@ -127,6 +127,45 @@ namespace zypp
       }
       return 1;
     }
+
+
+    /** Convert Rel op evaluation to call to compare returning (-1,0,1).
+     */
+    bool compConv( Rel op, const Edition & lhs, const Edition & rhs,
+                   int (*compare)( const Edition &, const Edition & rhs ) )
+    {
+      switch ( op.inSwitch() )
+      {
+      case Rel::EQ_e:
+        return compare( lhs, rhs ) == 0;
+        break;
+      case Rel::NE_e:
+        return compare( lhs, rhs ) != 0;
+        break;
+      case Rel::LT_e:
+        return compare( lhs, rhs ) == -1;
+        break;
+      case Rel::LE_e:
+        return compare( lhs, rhs ) != 1;
+        break;
+      case Rel::GT_e:
+        return compare( lhs, rhs ) == 1;
+        break;
+      case Rel::GE_e:
+        return compare( lhs, rhs ) != -1;
+        break;
+      case Rel::ANY_e:
+        return true;
+        break;
+      case Rel::NONE_e:
+        return false;
+        break;
+      }
+    // We shouldn't get here.
+    INT << "Unknown relational opertor '" << op << "' treated as  'NONE'" << endl;
+    return false;
+  }
+
   }
   ///////////////////////////////////////////////////////////////////
 
@@ -288,36 +327,7 @@ namespace zypp
 
   bool Edition::compare( Rel op, const Edition & lhs, const Edition & rhs )
   {
-    switch ( op.inSwitch() )
-      {
-      case Rel::EQ_e:
-        return compare( lhs, rhs ) == 0;
-        break;
-      case Rel::NE_e:
-        return compare( lhs, rhs ) != 0;
-        break;
-      case Rel::LT_e:
-        return compare( lhs, rhs ) == -1;
-        break;
-      case Rel::LE_e:
-        return compare( lhs, rhs ) != 1;
-        break;
-      case Rel::GT_e:
-        return compare( lhs, rhs ) == 1;
-        break;
-      case Rel::GE_e:
-        return compare( lhs, rhs ) != -1;
-        break;
-      case Rel::ANY_e:
-        return true;
-        break;
-      case Rel::NONE_e:
-        return false;
-        break;
-      }
-    // We shouldn't get here.
-    INT << "Unknown relational opertor '" << op << "' treated as  'NONE'" << endl;
-    return false;
+    return compConv( op, lhs, rhs, Edition::compare );
   }
 
   int Edition::compare( const Edition & lhs, const Edition & rhs )
@@ -339,6 +349,32 @@ namespace zypp
     return 0; //equal
   }
 
+  bool Edition::match( Rel op, const Edition & lhs, const Edition & rhs )
+  {
+    return compConv( op, lhs, rhs, Edition::match );
+  }
+
+  int Edition::match( const Edition & lhs, const Edition & rhs )
+  {
+    // compare epoch
+    if ( lhs.epoch() != rhs.epoch() )
+      return lhs.epoch() < rhs.epoch() ? -1 : 1;
+
+    // next compare versions
+    if ( lhs.version().empty() || rhs.version().empty() )
+      return 0; //equal
+
+    int res = rpmverscmp( lhs.version(), rhs.version() );
+    if ( res )
+      return res; // -1|1: not equal
+
+    // finaly compare releases
+    if ( lhs.release().empty() || rhs.release().empty() )
+      return 0; //equal
+
+    return rpmverscmp( lhs.release(), rhs.release() );
+  }
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Edition::Range
@@ -352,7 +388,7 @@ namespace zypp
     if ( lhs.op == Rel::ANY || rhs.op == Rel::ANY )
       return true;
 
-    int cmp = Edition::compare( lhs.edition, rhs.edition );
+    int cmp = Edition::match( lhs.edition, rhs.edition );
 
     // FIX: omitting the Rel::NE case :(
 

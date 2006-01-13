@@ -54,6 +54,8 @@ namespace zypp
    * <em>plain string comparison</em> is used. If you want to compare by
    * version, let the container use Edition::Less to compare.
    *
+   * \attention
+   *
    * \ingroup g_BackendSpecific
    * \todo Define exceptions.
    * \todo optimize implementation(e.g don't store epoch if noepoch)
@@ -121,21 +123,45 @@ namespace zypp
      * If \a op is Rel::ANY, the expression is always \c true.<BR>
      * If \a op is Rel::NONE, the expression is always \c false.
      *
+     * \attention An empty version or release string is not treated
+     * specialy. It's the least possible value. If you want an empty
+     * string treated as \c ANY, use \ref match.
+     *
      * \todo optimize impementation. currently a full compare( lhs, rhs )
      * is done and the result evaluated. But step by step would be faster.
     */
     static bool compare( Rel op, const Edition & lhs, const Edition & rhs );
 
     /** Compare two Editions returning <tt>-1,0,1</tt>.
-     * \return <tt>-1,0,1</tt> if editions are <tt>\<,==,\></tt>
+     * \return <tt>-1,0,1</tt> if editions are <tt>\<,==,\></tt>.
     */
     static int compare( const Edition & lhs, const Edition & rhs );
 
-    /* A range defined by \ref Rel and \ref Edition. */
-    struct Range;
-
     /* Binary operator functor comparing Edition. */
     struct Less;
+
+  public:
+    /** Match two Editions using relational operator \a op, treating empty
+     *  strings as wildcard.
+     * Rules for match are simple:
+     * \li If \a op is Rel::ANY, the expression is always \c true.
+     * \li If \a op is Rel::NONE, the expression is always \c false.
+     * \li If \a op includes equality an empty string matches Rel::ANY.
+     * \li Otherwise an empty string matches Rel::NONE.
+     */
+    static bool match( Rel op, const Edition & lhs, const Edition & rhs );
+
+    /** Match two Editions returning <tt>-1,0,1</tt>, treating empty
+     *  strings as wildcard.
+     * \return <tt>-1,0,1</tt> if editions match <tt>\<,==,\></tt>.
+    */
+    static int match( const Edition & lhs, const Edition & rhs );
+
+    /* Binary operator functor matching Edition. */
+    struct Match;
+
+    /* A range defined by \ref Rel and \ref Edition. */
+    struct Range;
 
   private:
     /** Hides implementation */
@@ -182,16 +208,15 @@ namespace zypp
   //
   /** A range defined by \ref Rel and \ref Edition.
    *
-   * Two ranges \ref overlap, if they have at least one Edition in common.
-   * Rnages defined by \ref Rel::NONE and \ref Rel::ANY are special, and
-   * their Edition is not taken into account.
-   *
    * \ref Rel::NONE never overlaps.
    *
    * \ref Rel::ANY overlaps any range except \ref Rel::NONE.
    *
    * The other ranges overlap as you may expect it.
    *
+   * \note Uses Edition::match to compare Editions.
+   *
+   * \todo template it to use Edition::compare. as well.
    * \todo overlaps does not treat Rel::NE correct.
   */
   struct Edition::Range
@@ -227,7 +252,7 @@ namespace zypp
     {
       return( lhs.op == rhs.op
               && ( lhs.op == Rel::ANY || lhs.op == Rel::NONE
-                   || lhs.edition == rhs.edition ) );
+                   || match( Rel::EQ, lhs.edition, rhs.edition ) ) );
     }
 
     friend bool operator!=( const Range & lhs, const Range & rhs )
@@ -264,6 +289,22 @@ namespace zypp
     /** \return <tt>lhs < rhs</tt> */
     bool operator()(const Edition & lhs, const Edition & rhs ) const
     { return lhs < rhs; }
+  };
+  ///////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : Edition::Match
+  //
+  /** Binary operator functor matching Edition.
+   * Provided for completeness, but probabely of little use. Be shure to
+   * understand the difference between Edition::compare and Edition::match.
+  */
+  struct Edition::Match : public std::binary_function<Edition,Edition,bool>
+  {
+    /** \return <tt>Edition::match(Rel::LT,lhs,rhs)</tt> */
+    bool operator()(const Edition & lhs, const Edition & rhs ) const
+    { return Edition::match( Rel::LT, lhs, rhs); }
   };
   ///////////////////////////////////////////////////////////////////
 
