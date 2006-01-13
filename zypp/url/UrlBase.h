@@ -26,77 +26,210 @@ namespace zypp
 
 
     // ---------------------------------------------------------------
-    /** Url behaviour configuration container.
+    /**
+     * UrlBase behaviour configuration variables container.
      */
     typedef std::map< std::string, std::string > UrlConfig;
 
 
     // ---------------------------------------------------------------
     /**
-     * Vector of url scheme names.
+     * Vector of URL scheme names.
      */
     typedef std::vector<std::string>             UrlSchemes;
 
 
     // ---------------------------------------------------------------
-    /** Url toString() view options.
-     * FIXME: document me!
+    /**
+     * Url::toString() view options.
+     *
+     * A instance of this class represents a bit-wise combination
+     * of view option constants.
+     *
+     * It provides ViewOption::operator+() and ViewOption::operator-()
+     * to modify a view option combination and a ViewOption::has()
+     * method, to check if a specified option is enabled or not.
      */
     struct ViewOption
     {
+      /** @{ */
       /**
-        * @{
-        * Flags 
-        */
+       * Option to include scheme name in the URL string.
+       *
+       * Disabling this option causes, that the URL string
+       * contains the path, query and fragment components
+       * only, for example just "/foo/bar.txt".
+       *
+       * This option is \b enabled by default.
+       */
       static const ViewOption WITH_SCHEME;
-      static const ViewOption WITH_USERNAME;
-      static const ViewOption WITH_PASSWORD;
-      static const ViewOption WITH_HOST;
-      static const ViewOption WITH_PORT;
-      static const ViewOption WITH_PATH_NAME;
-      static const ViewOption WITH_PATH_PARAMS;
-      static const ViewOption WITH_QUERY_STR;
-      static const ViewOption WITH_FRAGMENT;
-      /* @} */
-
       /**
-       * @{
-       * With Empty flags.
+       * Option to include username in the URL string.
+       *
+       * This option depends on a enabled WITH_SCHEME and
+       * WITH_HOST options and is \b enabled by default.
+       */
+      static const ViewOption WITH_USERNAME;
+      /**
+       * Option to include password in the URL string.
+       *
+       * This option depends on a enabled WITH_SCHEME,
+       * WITH_HOST and WITH_USERNAME options and is
+       * \b disabled by default, causing to hide the
+       * password in the URL authority.
+       */
+      static const ViewOption WITH_PASSWORD;
+      /**
+       * Option to include hostname in the URL string.
+       *
+       * This option depends on a enabled WITH_SCHEME
+       * option and is \b enabled by default.
+       */
+      static const ViewOption WITH_HOST;
+      /**
+       * Option to include port number in the URL string.
+       *
+       * This option depends on a enabled WITH_SCHEME and
+       * WITH_HOST options and is \b enabled by default.
+       */
+      static const ViewOption WITH_PORT;
+      /**
+       * Option to include path name in the URL string.
+       *
+       * This option is \b enabled by default.
+       */
+      static const ViewOption WITH_PATH_NAME;
+      /**
+       * Option to include path parameters in the URL string.
+       *
+       * This option depends on a enabled WITH_PATH_NAME
+       * option and is \b disabled by default, causing to
+       * hide the path parameters.
+       */
+      static const ViewOption WITH_PATH_PARAMS;
+      /**
+       * Option to include query string in the URL string.
+       *
+       * This option is \b enabled by default.
+       */
+      static const ViewOption WITH_QUERY_STR;
+      /**
+       * Option to include fragment string in the URL string.
+       *
+       * This option is \b enabled by default.
+       */
+      static const ViewOption WITH_FRAGMENT;
+      /** @} */
+
+      /** @{ */
+      /**
+       * Explicitely include the URL authority separator "//".
+       *
+       * It causes, that the URL string includes an empty URL
+       * authority, for example:
+       * "file:///foo.txt" instead of just "file:/foo.txt".
+       *
+       * This option depends on a enabled WITH_SCHEME view
+       * option and is enabled by default.
        */
       static const ViewOption EMPTY_AUTHORITY;
+      /**
+       * Explicitely include the "/" path character.
+       *
+       * It causes, that a "/" is added to the Url if the path
+       * name is empty, for example:
+       *
+       * "http://localhost/" instead of just "http://localhost".
+       *
+       * This option depends on a enabled WITH_PATH_NAME view
+       * option and is enabled by default.
+       */
       static const ViewOption EMPTY_PATH_NAME;
+      /**
+       * Explicitely include the path parameters separator ";".
+       *
+       * It causes, that the URL allways contains the ";" path
+       * parameters separator.
+       *
+       * This option depends on a enabled EMPTY_PATH_NAME view
+       * option and is disabled by default.
+       */
       static const ViewOption EMPTY_PATH_PARAMS;
+      /**
+       * Explicitely include the query string separator "?".
+       *
+       * It causes, that if the query string is requested using
+       * the WITH_QUERY_STR option, the URL allways contains the
+       * "?" query string separator, even if the query string is
+       * empty.
+       * This option depends on a enabled WITH_QUERY_STR view
+       * option and is disabled by default.
+       */
       static const ViewOption EMPTY_QUERY_STR;
+      /**
+       * Explicitely include the fragment string separator "#".
+       *
+       * It causes, that if the fragment string is requested using
+       * the WITH_FRAGMENT option, the URL allways contains the "#"
+       * fragment string separator, even if the fragment string is
+       * empty. 
+       * This option depends on a enabled WITH_FRAGMENT view
+       * option and is disabled by default.
+       */
       static const ViewOption EMPTY_FRAGMENT;
-      /* @} */
+      /** @} */
 
-      /** Default combination of view options.
+      /** @{ */
+      /**
+       * Default combination of view options.
+       *
+       * By default, following view options are enabled:
+       *   WITH_SCHEME,    WITH_USERNAME,    WITH_HOST,
+       *   WITH_PORT,      WITH_PATH_NAME,   WITH_QUERY_STR,
+       *   WITH_FRAGMENT,  EMPTY_AUTHORITY,  EMPTY_PATH_NAME.
        */
       static const ViewOption DEFAULTS;
+      /** @} */
 
+      /**
+       * Create instance with default combination of view options.
+       */
       ViewOption(): opt(DEFAULTS.opt)
       {}
 
-      /** @return The result of a add of \p r from \p l.
+      /**
+       * Adds \p l and \p r to a new option combination.
+       *
+       * @return The new option combination.
        */
       friend inline ViewOption
       operator + (const ViewOption &l, const ViewOption &r)
       { return ViewOption(l.opt |  r.opt); }
 
-      /** @return The result of a subtract of \p r from \p l.
+      /**
+       * Substract \p r from \p l to a new option combination.
+       *
+       * @return The new option combination.
        */
       friend inline ViewOption
       operator - (const ViewOption &l, const ViewOption &r)
       { return ViewOption(l.opt & ~r.opt); }
 
+      /**
+       * Assign specified option combination \p o to the current object.
+       *
+       * \param o   The option or option combination to make a copy of.
+       * \return A reference to this option combination.
+       */
       inline ViewOption &
       operator = (const ViewOption &o)
       { opt = o.opt; return *this; }
 
-      /** Check if option is set.
-       * \param o    A view option.
-       * \return True, if the current options bitwise matches
-       *         the specified one.
+      /**
+       * Check if specified option \p o is set in the current object.
+       * \param o    A view option constant.
+       * \return True, if specified option \p o is
+       *               set/enabled in the instance.
        */
       inline bool
       has(const ViewOption &o) const
@@ -109,12 +242,15 @@ namespace zypp
 
 
     // ---------------------------------------------------------------
+    /**
+     * ViewOptions is just an alias for ViewOption.
+     */
     typedef ViewOption ViewOptions;
 
 
     // ---------------------------------------------------------------
     /**
-     * FIXME: document me!
+     * Internal data as used by UrlBase.
      */
     class UrlData
     {
@@ -143,6 +279,12 @@ namespace zypp
 
     // ---------------------------------------------------------------
     /**
+     * \brief Generic Url base class.
+     *
+     * The UrlBase class implements default behaviour for URL
+     * manipulations and a base for implementation of scheme-
+     * specialized URL's for the Url class.
+     *
      */
     class UrlBase
     {
@@ -356,7 +498,6 @@ namespace zypp
 
       /**
        * Returns the port from the URL authority.
-       * \param eflag Flag if the port should be decoded or not.
        * \return The port sub-component from the URL authority.
        */
       virtual std::string
@@ -658,14 +799,73 @@ namespace zypp
 
       // -----------------
       /**
-       * FIXME: document me!
+       * Configures behaviour of the instance.
+       *
+       * This method is called in UrlBase constructors before
+       * any URL components are applied.
+       * Derived classes may reimplement this method to change
+       * the behaviour of the object.
+       * Use the config() methods to query and change them.
+       *
+       * The UrlBase class uses following config variables:
+       *
+       * - Path parameter separators:
+       *   - \a \c sep_pathparams   \c ";"
+       *     Separator used to split path parameters from path name.
+       *   - \a \c psep_pathparam   \c ","
+       *     Separator between path parameters.
+       *   - \a \c vsep_pathparam   \c "="
+       *     Separator between key and value of a path parameter.
+       *   .
+       * .
+       *
+       * - Query string separators:
+       *   - \a \c psep_querystr    \c "&"
+       *     Separator between query string parameters.
+       *   - \a \c vsep_querystr    \c "="
+       *     Separator between key and value of a query parameter.
+       *   .
+       * .
+       *
+       * - Characters in URL components, that are safe without
+       *   URL percent-encoding (see zypp::url::encode()).
+       *   - \a safe_username    ""
+       *   - \a safe_password    ""
+       *   - \a safe_hostname    "[:]"
+       *   - \a safe_pathname    "/"
+       *   - \a safe_pathparams  ""
+       *   - \a safe_querystr    ""
+       *   - \a safe_fragment    ""
+       *   .
+       * .
+       *
+       * - Regular expressions used to verify URL components
+       *   and their sub-components:
+       *   - \a rx_scheme        "^[a-zA-Z][a-zA-Z0-9\\._-]*$"
+       *   - \a rx_username      ".*"
+       *   - \a rx_password      ".*"
+       *   - \a rx_hostname      ".*" FIXME!
+       *   - \a rx_port          "^[0-9]{1,5}$"
+       *   - \a rx_pathname      ".*"
+       *   - \a rx_pathparams    ".*"
+       *   - \a rx_querystr      ".*"
+       *   - \a rx_fragment      ".*"
+       *   .
+       * .
        */
       virtual void
       configure();
 
 
       /**
-       * FIXME: document me!
+       * Get the value of a UrlBase configuration variable.
+       *
+       * See configure() method for names an purpose of the
+       * configuration variables used in UrlBase class.
+       *
+       * \param opt The name of the configuration variable.
+       * \return The value of the specified variable
+       *         or empty string.
        */
       std::string
       config(const std::string &opt) const;
@@ -673,26 +873,56 @@ namespace zypp
     //protected:
       // friend class Url;
       /**
-       * FIXME: document me!
+       * Set the value of a UrlBase configuration variable.
+       *
+       * See configure() method for names an purpose of the
+       * configuration variables used in UrlBase class.
+       *
+       * \param opt The name of the configuration variable.
+       * \param val The new value for the configuration variable.
        */
       void
       config(const std::string &opt, const std::string &val);
 
 
       /**
-       * FIXME: document me!
+       * Return the view options of the current object.
+       *
+       * This method is used to query the view options
+       * used by the Url::toString() method.
+       *
+       * \return The current view option combination.
        */
       ViewOptions
       getViewOptions() const;
 
       /**
-       * FIXME: document me!
+       * Change the view options of the current object.
+       *
+       * This method is used to change the view options
+       * used by the Url::toString() method.
+       *
+       * \param vopts New view options combination.
        */
       void
       setViewOptions(const ViewOptions &vopts);
 
 
     protected:
+      /**
+       * Utility method to cleanup a path name.
+       *
+       * By default, this method replaces multiple occurences
+       * of the "/" characeter from the begining of the path,
+       * so the cleaned path begins with at most one "/".
+       *
+       * This operation is required in some cases to not to
+       * missinterpret multiple "/" occurences as an empty
+       * URL authority.
+       *
+       * \param path A path name.
+       * \return A path begining with at most one "/" character.
+       */
       virtual std::string
       cleanupPathName(const std::string &path);
 
@@ -703,6 +933,9 @@ namespace zypp
 
 
     // ---------------------------------------------------------------
+    /**
+     * \brief Copy-On-Write Url reference.
+     */
     typedef RWCOW_pointer<UrlBase>          UrlRef;
 
 
