@@ -24,6 +24,7 @@ namespace zypp
 
   class Package;
   class Selection;
+  class Pattern;
   class Product;
   class Patch;
   class Script;

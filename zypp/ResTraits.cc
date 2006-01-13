@@ -21,6 +21,8 @@ namespace zypp
   template<>
     const ResolvableTraits::KindType ResTraits<Selection>::kind( "Selection" );
   template<>
+    const ResolvableTraits::KindType ResTraits<Pattern>  ::kind( "Pattern" );
+  template<>
     const ResolvableTraits::KindType ResTraits<Product>  ::kind( "Product" );
   template<>
     const ResolvableTraits::KindType ResTraits<Patch>    ::kind( "Patch" );
