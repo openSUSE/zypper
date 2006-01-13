@@ -49,7 +49,7 @@ namespace zypp
         KindOf()
         {}
         /** Ctor from string.
-         * Lowecase version of \a value_r is used as identification.
+         * Lowercase version of \a value_r is used as identification.
         */
         explicit
         KindOf( const std::string & value_r )
