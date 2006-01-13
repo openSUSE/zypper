@@ -3,7 +3,7 @@
 
 SUBDIRS = tests
 
-PACKAGE=libzypp
+PACKAGE=zypp
 AUTOMAKE_OPTIONS = dejagnu
 
 ## ##################################################
