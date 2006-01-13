@@ -82,6 +82,7 @@ namespace zypp
 
 
           void addResItemToInstall (ResItem_constPtr resItem);
+          void addResItemToEstablish (ResItem_constPtr resItem);
           void addResItemToRemove (ResItem_constPtr resItem, bool remove_only_mode);
           void addResItemToVerify (ResItem_constPtr resItem);
           void addExtraDependency (const Capability & dep);
