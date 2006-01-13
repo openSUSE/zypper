@@ -323,7 +323,6 @@ namespace zypp
 
     /**
      * Returns the port from the URL authority.
-     * \param eflag Flag if the port should be decoded or not.
      * \return The port sub-component from the URL authority.
      */
     std::string
