@@ -123,6 +123,7 @@ struct Hal::Impl
 	       const std::string & val_r ) const
     {
 	DBusError error;
+	dbus_error_init (&error);
 
 	// ask HAL which devices provide the needed capability
 
