@@ -84,6 +84,9 @@ namespace zypp
       virtual Edition::Range editionRange() const
       { return Edition::Range(); }
 
+      bool sameIndex( const constPtr & rhs ) const
+      { return index() == rhs->index(); }
+
       bool sameKind( const constPtr & rhs ) const
       { return kind() == rhs->kind(); }
 

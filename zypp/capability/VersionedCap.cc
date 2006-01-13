@@ -35,7 +35,8 @@ namespace zypp
     CapMatch VersionedCap::matches( const constPtr & rhs ) const
     {
       if ( sameRefers( rhs )
-           && ( sameKind( rhs ) || isKind<NamedCap>( rhs ) ) )
+           && ( sameKind( rhs ) || isKind<NamedCap>( rhs ) )
+	   && sameIndex( rhs ))
         {
           return matchEditionRange( rhs );
         }
