@@ -37,12 +37,17 @@ namespace zypp
         Impl()
         {}
 
+        bool query( const std::string & cap_r ) const
+        { return query( cap_r, Rel::ANY, std::string() ); }
+
         /** \todo Implement it.
          * And maybee std::ostream & operator<< Hal::Impl below too.
          * return libhal vetsion ore something like that.
         */
-        std::string query( const std::string & val_r ) const
-        { return std::string(); }
+        bool  query( const std::string & cap_r,
+                     Rel op_r,
+                     const std::string & val_r ) const
+        { return false; }
 
       public:
         /** Offer default Impl. */
@@ -98,8 +103,13 @@ namespace zypp
       // Foreward to implenemtation
       ///////////////////////////////////////////////////////////////////
 
-      std::string Hal::query( const std::string & val_r ) const
-      { return _pimpl->query( val_r ); }
+      bool Hal::query( const std::string & cap_r ) const
+      { return _pimpl->query( cap_r ); }
+
+      bool Hal::query( const std::string & cap_r,
+                       Rel op_r,
+                       const std::string & val_r ) const
+      { return _pimpl->query( cap_r, op_r, val_r ); }
 
       /******************************************************************
       **

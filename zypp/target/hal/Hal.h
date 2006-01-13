@@ -16,6 +16,7 @@
 #include <string>
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/Rel.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -52,7 +53,12 @@ namespace zypp
       public:
 
         /** */
-        std::string query( const std::string & val_r ) const;
+        bool query( const std::string & cap_r ) const;
+
+        /** */
+        bool query( const std::string & cap_r,
+                    Rel op_r,
+                    const std::string & val_r ) const;
 
       private:
         /** Singleton ctor. */
