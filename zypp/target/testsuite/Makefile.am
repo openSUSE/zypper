@@ -5,7 +5,7 @@ SUBDIRS = tests
 AUTOMAKE_OPTIONS = dejagnu
 PACKAGE = target
 
-EXTRA_DIST = lib/target_init.exp config/*.exp target.test/*.exp
+EXTRA_DIST = lib/*.exp config/*.exp $(PACKAGE).test/*.exp
 
 clean-local:
 	rm -rf *.log
