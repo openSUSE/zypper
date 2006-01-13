@@ -27,7 +27,7 @@ namespace zypp
 
 
   // -----------------------------------------------------------------
-  /**
+  /*
    * url       = [scheme:] [//authority] /path [?query] [#fragment]
    */
   #define RX_SPLIT_URL                       "^(([^:/?#]+):)?" \
