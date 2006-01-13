@@ -362,8 +362,8 @@ namespace zypp
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.groupId,
                                Edition::noedition,
-                               Arch_noarch
-                             );
+                               Arch_noarch,
+                               createGroupDependencies(parsed));
  	    Selection::Ptr group = detail::makeResolvableFromImpl(
 	      dataCollect, impl
 	    );
@@ -528,6 +528,51 @@ namespace zypp
 	      _deps.requires.insert(createCapability(*it, my_kind));
 	  }
 
+	  return _deps;
+	}
+
+	Dependencies YUMSource::createGroupDependencies(
+	  const zypp::parser::yum::YUMGroupData & parsed
+	)
+	{
+	  Dependencies _deps;
+
+	  for (std::list<PackageReq>::const_iterator it = parsed.packageList.begin();
+	    it != parsed.packageList.end();
+	    it++)
+	  {
+	    if (it->type == "mandatory" || it->type == "")
+	    {
+	      _deps.requires.insert(createCapability(YUMDependency(
+		  "",
+		  it->name,
+		  "EQ",
+		  it->epoch,
+		  it->ver,
+		  it->rel,
+		  ""
+		),
+		ResTraits<Package>::kind));
+	    }
+	  }
+	  for (std::list<MetaPkg>::const_iterator it = parsed.grouplist.begin();
+	    it != parsed.grouplist.end();
+	    it++)
+	  {
+	    if (it->type == "mandatory" || it->type == "")
+	    {
+	      _deps.requires.insert(createCapability(YUMDependency(
+		  "",
+		  it->name,
+		  "",
+		  "",
+		  "",
+		  "",
+		  ""
+		),
+		ResTraits<Selection>::kind));
+	    }
+	  }
 	  return _deps;
 	}
 

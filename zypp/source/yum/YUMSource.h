@@ -76,6 +76,10 @@ namespace zypp
 	  const Resolvable::Kind my_kind
 	);
 
+	Dependencies createGroupDependencies(
+	  const zypp::parser::yum::YUMGroupData & parsed
+	);
+
 	Capability createCapability(const YUMDependency & dep,
 				    const Resolvable::Kind & my_kind);
 

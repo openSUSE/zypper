@@ -11,6 +11,7 @@
 */
 
 #include "zypp/source/yum/YUMGroupImpl.h"
+#include "zypp/CapFactory.h"
 
 using namespace std;
 using namespace zypp::detail;
@@ -37,21 +38,47 @@ namespace zypp
       )
       : _user_visible(parsed.userVisible == "true")
       {
-	for (std::list<PackageReq>::const_iterator it
-			= parsed.packageList.begin();
-             it != parsed.packageList.end();
-	     it++)
-        {
-	  _pkgs_req.push_back(PkgReq(it->type, it->name, it->ver,
-				     it->rel, it->epoch));
-        }
-	for (std::list<MetaPkg>::const_iterator it
-			= parsed.grouplist.begin();
-             it != parsed.grouplist.end();
-	     it++)
-        {
-	  _groups_req.push_back(GroupReq(it->type, it->name));
-        }
+	CapFactory _f;
+	for (std::list<PackageReq>::const_iterator it = parsed.packageList.begin();
+	  it != parsed.packageList.end();
+	  it++)
+	{
+          Capability _cap = _f.parse(
+            ResTraits<Package>::kind,
+            it->name,
+            Rel("EQ"),
+            Edition(it->ver, it->rel, it->epoch)
+          );
+	  if (it->type == "default")
+	  {
+	    _default_req.insert(_cap);
+	  }
+	  else if (it->type == "optional")
+	  {
+	    _optional_req.insert(_cap);
+	  } 
+	}
+	for (std::list<MetaPkg>::const_iterator it = parsed.grouplist.begin();
+	    it != parsed.grouplist.end();
+	    it++)
+	{
+          Capability _cap = _f.parse(
+            ResTraits<Selection>::kind,
+            it->name,
+            Rel(),
+            Edition()
+          );
+	  if (it->type == "default")
+	  {
+	    _default_req.insert(_cap);
+	  }
+	  else if (it->type == "optional")
+	  {
+	    _optional_req.insert(_cap);
+	  } 
+	}
+
+
 // to name        std::string groupId;
 // as _summary        std::list<multilang> name;
 // _description
@@ -60,12 +87,11 @@ namespace zypp
       bool YUMGroupImpl::userVisible() const {
 	return _user_visible;
       }
+      CapSet YUMGroupImpl::optionalReq() const
+      { return _optional_req; }
 
-      std::list<YUMGroupImpl::GroupReq> YUMGroupImpl::groupsReq() const
-      { return _groups_req; }
-
-      std::list<YUMGroupImpl::PkgReq> YUMGroupImpl::pkgsReq() const
-      { return _pkgs_req; }
+      CapSet YUMGroupImpl::defaultReq() const
+      { return _default_req; }
 
       Label YUMGroupImpl::summary() const
       { return ResObjectImplIf::summary(); }
