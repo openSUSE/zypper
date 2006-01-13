@@ -473,6 +473,24 @@ finished:
 
 
 int
+StoreWorld::foreachResItemByKind (const Resolvable::Kind & kind, CResItemFn fn, void *data)
+{
+    int count = 0;
+
+    for (ResItemTable::const_iterator iter = _resItems_by_name.begin(); iter != _resItems_by_name.end(); ++iter) {
+	ResItem_constPtr resItem = iter->second;
+	if (resItem->kind() == kind) {
+	    ++count;
+	    if (fn != NULL) {
+		fn (resItem, data);
+	    }
+	}
+    }
+    return count;
+}
+
+
+int
 StoreWorld::foreachResItemByMatch (Match_constPtr match, CResItemFn fn, void *data)
 {
 	fprintf (stderr, "StoreWorld::foreachResItemByMatch () not implemented\n");

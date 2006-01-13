@@ -102,6 +102,35 @@ Resolver::world (void) const
     return _world;
 }
 
+void
+Resolver::reset (void)
+{
+    _timeout_seconds = 0;
+    _verifying = false;
+
+    _initial_items.clear();
+
+    _resItems_to_install.clear();
+    _resItems_to_remove.clear();
+    _resItems_to_verify.clear();
+    _resItems_to_establish.clear();
+
+    _extra_deps.clear();
+    _extra_conflicts.clear();
+
+    _pending_queues.clear();
+    _pruned_queues.clear();
+    _complete_queues.clear();
+    _deferred_queues.clear();
+    _invalid_queues.clear();
+
+    _valid_solution_count = 0;
+
+    _best_context = NULL;
+    _timed_out = false;
+}
+
+
 //---------------------------------------------------------------------------
 
 void
@@ -110,11 +139,13 @@ Resolver::addSubscribedChannel (Channel_constPtr channel)
     fprintf (stderr, "Resolver::addSubscribedChannel() not implemented\n");
 }
 
+
 void
 Resolver::addResItemToInstall (ResItem_constPtr resItem)
 {
     _resItems_to_install.push_front (resItem);
 }
+
 
 void
 Resolver::addResItemsToInstallFromList (CResItemList & rl)
@@ -124,11 +155,13 @@ Resolver::addResItemsToInstallFromList (CResItemList & rl)
     }
 }
 
+
 void
 Resolver::addResItemToRemove (ResItem_constPtr resItem)
 {
     _resItems_to_remove.push_front (resItem);
 }
+
 
 void
 Resolver::addResItemsToRemoveFromList (CResItemList & rl)
@@ -138,6 +171,23 @@ Resolver::addResItemsToRemoveFromList (CResItemList & rl)
     }
 }
 
+
+void
+Resolver::addResItemToEstablish (ResItem_constPtr resItem)
+{
+    _resItems_to_establish.push_front (resItem);
+}
+
+
+void
+Resolver::addResItemsToEstablishFromList (CResItemList & rl)
+{
+    for (CResItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
+	addResItemToEstablish (*iter);
+    }
+}
+
+
 void
 Resolver::addResItemToVerify (ResItem_constPtr resItem)
 {
@@ -145,11 +195,13 @@ Resolver::addResItemToVerify (ResItem_constPtr resItem)
     _resItems_to_verify.sort ();			//(GCompareFunc) rc_resItem_compare_name);
 }
 
+
 void
 Resolver::addExtraDependency (const Capability & dependency)
 {
     _extra_deps.insert (dependency);
 }
+
 
 void
 Resolver::addExtraConflict (const Capability & dependency)
@@ -234,9 +286,60 @@ Resolver::verifySystem (void)
 
 //---------------------------------------------------------------------------
 
+// establish state
+
+static bool
+trial_establish_cb (ResItem_constPtr resItem, void *user_data)
+{
+    Resolver *resolver = (Resolver *)user_data;
+
+    resolver->addResItemToEstablish (resItem);
+
+    printf (">!> Establishing %s\n", resItem->asString().c_str());
+
+    return false;
+}
+
 
 void
-Resolver::resolveDependencies (void)
+Resolver::establishState (void)
+{
+    _DBG("RC_SPEW") << "Resolver::establishState ()" << endl;
+    typedef list<Resolvable::Kind> KindList; 
+    static KindList ordered;
+    if (ordered.empty()) {
+	ordered.push_back (ResTraits<zypp::Script>::kind);
+	ordered.push_back (ResTraits<zypp::Message>::kind);
+	ordered.push_back (ResTraits<zypp::Patch>::kind);
+#warning where is zypp::Pattern ?
+//	ordered.push_back (ResTraits<zypp::Pattern>::kind);
+	ordered.push_back (ResTraits<zypp::Product>::kind);
+    }
+
+    ResolverContext_Ptr context = new ResolverContext();
+
+    for (KindList::const_iterator iter = ordered.begin(); iter != ordered.end(); iter++) {
+	const Resolvable::Kind kind = *iter;
+
+	_DBG("RC_SPEW") << "establishing state for kind " << kind.asString() << endl;
+
+	world()->foreachResItemByKind (kind, trial_establish_cb, this);
+
+	// process the queue
+	resolveDependencies (context);
+
+	reset();
+    }
+
+    _best_context = context;
+
+    return;
+}
+
+//---------------------------------------------------------------------------
+
+void
+Resolver::resolveDependencies (const ResolverContext_Ptr context)
 {
 
     time_t t_start, t_now;
@@ -275,7 +378,7 @@ Resolver::resolveDependencies (void)
 
     // create initial_queue
 
-    ResolverQueue_Ptr initial_queue = new ResolverQueue();
+    ResolverQueue_Ptr initial_queue = new ResolverQueue(context);
 
     /* Stick the current/subscribed channel and world info into the context */
 
@@ -316,6 +419,10 @@ Resolver::resolveDependencies (void)
 	initial_queue->addResItemToVerify (*iter);
     }
 
+    for (CResItemList::const_iterator iter = _resItems_to_establish.begin(); iter != _resItems_to_establish.end(); iter++) {
+	initial_queue->addResItemToEstablish (*iter);
+    }
+
     for (CapSet::const_iterator iter = _extra_deps.begin(); iter != _extra_deps.end(); iter++) {
 	initial_queue->addExtraDependency (*iter);
     }
@@ -325,6 +432,14 @@ Resolver::resolveDependencies (void)
     }
 
     _XXX("RC_SPEW") << "Initial Queue: [" << initial_queue->asString() << "]" << endl;
+
+    _best_context = NULL;
+
+    if (initial_queue->isEmpty()) {
+	INT << "Empty Queue, nothing to resolve" << endl;
+
+	return;
+    }
 
     _pending_queues.push_front (initial_queue);
 

@@ -189,6 +189,11 @@ ResolverContext::world (void) const
 }
 
 
+//---------------------------------------------------------------------------
+
+// set/get status
+
+
 void
 ResolverContext::setStatus (ResItem_constPtr resItem, ResItemStatus status)
 {
@@ -243,6 +248,9 @@ ResolverContext::getStatus (ResItem_constPtr resItem)
     return status;
 }
 
+
+//---------------------------------------------------------------------------
+// status change
 
 bool
 ResolverContext::installResItem (ResItem_constPtr resItem, bool is_soft, int other_penalty)
@@ -401,6 +409,23 @@ ResolverContext::uninstallResItem (ResItem_constPtr resItem, bool part_of_upgrad
     return true;
 }
 
+
+bool
+ResolverContext::satisfyResItem (ResItem_constPtr resItem, int other_penalty)
+{
+#warning implement me
+    return true;
+}
+
+
+bool
+ResolverContext::incompleteResItem (ResItem_constPtr resItem, int other_penalty)
+{
+#warning implement me
+    return true;
+}
+
+//---------------------------------------------------------------------------
 
 bool
 ResolverContext::resItemIsPresent (ResItem_constPtr resItem)

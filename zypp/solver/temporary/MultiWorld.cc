@@ -592,6 +592,21 @@ MultiWorld::foreachResItemByName (const std::string & name, Channel_Ptr channel,
 
 
 int
+MultiWorld::foreachResItemByKind (const Resolvable::Kind & kind, CResItemFn fn, void *data)
+{
+    int count = 0;
+    for (SubWorldInfoList::const_iterator iter = _subworlds.begin(); iter != _subworlds.end(); iter++) {
+	int this_count;
+	this_count = (*iter)->subworld()->foreachResItemByKind(kind, fn, data);
+	if (this_count < 0)
+	    return -1;
+	count += this_count;
+    }
+    return count;
+}
+
+
+int
 MultiWorld::foreachResItemByMatch (Match_constPtr match, CResItemFn fn, void *data)
 {
     fprintf (stderr, "MultiWorld::foreachResItemByMatch not implemented\n");

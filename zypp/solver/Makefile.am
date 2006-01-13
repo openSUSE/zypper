@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-SUBDIRS = detail temporary
+SUBDIRS = detail temporary testsuite
 
 ## ##################################################
 

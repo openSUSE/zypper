@@ -114,6 +114,7 @@ class MultiWorld : public World {
 
     virtual int foreachResItem (Channel_Ptr channel, CResItemFn fn, void *data);
     virtual int foreachResItemByName (const std::string & name, Channel_Ptr channel, CResItemFn fn, void *data);
+    virtual int foreachResItemByKind (const Resolvable::Kind & kind, CResItemFn fn, void *user_data);
     virtual int foreachResItemByMatch (Match_constPtr match, CResItemFn fn, void *data);
 
     // Iterate across provides or requirement

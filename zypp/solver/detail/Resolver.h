@@ -63,6 +63,7 @@ namespace zypp
 
           QueueItemList _initial_items;
           CResItemList _resItems_to_install;
+          CResItemList _resItems_to_establish;
           CResItemList _resItems_to_remove;
           CResItemList _resItems_to_verify;
 
@@ -123,14 +124,19 @@ namespace zypp
           void addResItemToRemove (ResItem_constPtr resItem);
           void addResItemsToRemoveFromList (CResItemList & rl);
 
+          void addResItemToEstablish (ResItem_constPtr resItem);
+          void addResItemsToEstablishFromList (CResItemList & rl);
+
           void addResItemToVerify (ResItem_constPtr resItem);
 
           void addExtraDependency (const Capability & dependency);
           void addExtraConflict (const Capability & dependency);
 
           void verifySystem (void);
-          void resolveDependencies (void);
+          void establishState (void);
+          void resolveDependencies (const ResolverContext_Ptr context = NULL);
 
+	  void reset (void);
       };
 
       ///////////////////////////////////////////////////////////////////
