@@ -73,15 +73,36 @@ void PersistentStorage::doTest()
 }
 
 void
-PersistentStorage::storePatch( Patch::Ptr p )
+PersistentStorage::storeObject( Resolvable::Ptr resolvable )
 {
-  d->backend->storePatch(p);
+  d->backend->storeObject(resolvable);
 }
 
-std::list<Patch::Ptr>
-PersistentStorage::installedPatches()
+void
+PersistentStorage::deleteObject( Resolvable::Ptr resolvable )
 {
-  return d->backend->installedPatches();
+
+}
+
+
+std::list<Resolvable::Ptr>
+PersistentStorage::storedObjects()
+{
+  return d->backend->storedObjects();
+}
+
+std::list<Resolvable::Ptr>
+PersistentStorage::storedObjects(const Resolvable::Kind kind)
+{
+  //list<Resolvable::Ptr>::iterator it;
+  //it = find(nums.begin(), nums.end(), 3); // Search the list.
+  return d->backend->storedObjects(kind);
+}
+
+std::list<Resolvable::Ptr>
+PersistentStorage::storedObjects(const Resolvable::Kind kind, const std::string & name, bool partial_match)
+{
+  return d->backend->storedObjects(kind, name, partial_match);
 }
 
 /******************************************************************

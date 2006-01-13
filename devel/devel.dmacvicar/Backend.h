@@ -38,11 +38,39 @@ namespace zypp
 			/** Dtor */
 			virtual ~Backend();
 			virtual void doTest() = 0;
-			virtual bool isDatabaseInitialized() = 0;
-			virtual void initDatabaseForFirstTime() = 0;
-      virtual void storePatch( Patch::Ptr p ) = 0;
-      virtual std::list<Patch::Ptr> installedPatches() = 0;
- 
+
+      /**
+       * is the storage backend initialized
+       */
+			virtual bool isBackendInitialized() = 0;
+      /**
+       * initialize the storage backend
+       */
+			virtual void initBackend() = 0;
+
+      /**
+       * Stores a Resolvable in the active backend.
+       */
+      virtual void storeObject( Resolvable::Ptr resolvable )  = 0;
+      /**
+       * Deletes a Resolvable from the active backend.
+       */
+      virtual void deleteObject( Resolvable::Ptr resolvable ) = 0;
+     
+      /**
+       * Query for installed Resolvables.
+       */
+      virtual std::list<Resolvable::Ptr> storedObjects() = 0;
+       /**
+       * Query for installed Resolvables of a certain kind
+       */
+      virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind) = 0;
+       /**
+       * Query for installed Resolvables of a certain kind by name
+       * \a partial_match allows for text search.
+       */
+      virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false) = 0;
+
 		private:
 			/** Pointer to implementation */
 			class Private;

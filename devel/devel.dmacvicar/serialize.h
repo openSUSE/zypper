@@ -59,8 +59,23 @@ std::string toXML( const CapSet caps );
 template<> // or constPtr?
 std::string toXML( const Dependencies dep );
 
+/**
+ * Serialize Resolvable properties
+ * NOTE: This wont serialize child classes properties
+ * Use castedToXML for that.
+ */
 template<> // or constPtr?
 std::string toXML( Resolvable::Ptr obj );
+
+/**
+ * Serialize properties based in the specific kind of the Resolvable
+ */
+std::string castedToXML( Resolvable::Ptr ret );
+
+/**
+ * lack of instrospection sucks
+ */
+std::string typeToString( Resolvable::Ptr resolvable, bool plural = false );
 
 template<> // or constPtr?
 std::string toXML( Package::Ptr obj );

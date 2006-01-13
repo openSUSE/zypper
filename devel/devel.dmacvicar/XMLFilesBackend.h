@@ -40,15 +40,42 @@ public:
   XMLFilesBackend();
   /** Dtor */
   ~XMLFilesBackend();
-  void doTest();
-  bool isDatabaseInitialized();
-  void initDatabaseForFirstTime();
+  virtual void doTest();
 
-  void insertTest();
+  /**
+    * is the storage backend initialized
+    */
+  virtual bool isBackendInitialized();
+  /**
+    * initialize the storage backend
+    */
+  virtual void initBackend();
+
+  /**
+    * Stores a Resolvable in the active backend.
+    */
+  virtual void storeObject( Resolvable::Ptr resolvable ) ;
+  /**
+    * Deletes a Resolvable from the active backend.
+    */
+  virtual void deleteObject( Resolvable::Ptr resolvable );
+  /**
+    * Deletes a Resolvable from the active backend.
+    */
+  virtual std::list<Resolvable::Ptr> storedObjects();
+   /**
+    * Query for installed Resolvables of a certain kind
+    */
+  virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind);
+  /**
+    * Query for installed Resolvables of a certain kind by name
+    * \a partial_match allows for text search.
+    */
+  virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false);
+
+  protected:
   std::string randomFileName() const;
-  std::string fileNameForPatch( Patch::Ptr patch ) const;
-  void storePatch( Patch::Ptr p );
-  std::list<Patch::Ptr> installedPatches();
+  
   private:
   class Private;
   Private *d;

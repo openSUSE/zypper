@@ -162,6 +162,8 @@ std::string toXML( Script::Ptr obj )
   return out.str();
 }
 
+
+
 template<> // or constPtr?
 std::string toXML( Message::Ptr obj )
 {
@@ -172,6 +174,35 @@ std::string toXML( Message::Ptr obj )
   out << "  <text>" << obj->text() << "</text>" << std::endl;
   out << "</message>" << std::endl;
   return out.str();
+}
+
+// or constPtr?
+std::string castedToXML( Resolvable::Ptr resolvable )
+{
+  stringstream out;
+  if ( isKind<Package>(resolvable) )
+     out << toXML(asKind<Package>(resolvable)) << std::endl;
+  if ( isKind<Patch>(resolvable) )
+     out << toXML(asKind<Patch>(resolvable)) << std::endl;
+  if ( isKind<Message>(resolvable) )
+     out << toXML(asKind<Message>(resolvable)) << std::endl;
+  if ( isKind<Script>(resolvable) )
+     out << toXML(asKind<Script>(resolvable)) << std::endl;
+  return out.str();
+}
+
+// or constPtr?
+std::string typeToString( Resolvable::Ptr resolvable, bool plural )
+{
+  stringstream out;
+  if ( isKind<Package>(resolvable) )
+     return plural ? "packages" : "package";
+  if ( isKind<Patch>(resolvable) )
+     return plural ? "patches" : "patch";
+  if ( isKind<Message>(resolvable) )
+     return plural ? "messages" : "message";
+  if ( isKind<Script>(resolvable) )
+     return plural ? "scripts" : "script";
 }
 
 template<> // or constPtr?
@@ -188,14 +219,7 @@ std::string toXML( Patch::Ptr obj )
     out << "  <atoms>" << std::endl;
     // I have a better idea to avoid the cast here (Michaels code in his tmp/)
     Resolvable::Ptr one_atom = *it;
-    if ( isKind<Package>(one_atom) )
-       out << toXML(asKind<Package>(one_atom)) << std::endl;
-    if ( isKind<Patch>(one_atom) )
-       out << toXML(asKind<Patch>(one_atom)) << std::endl;
-    if ( isKind<Message>(one_atom) )
-       out << toXML(asKind<Message>(one_atom)) << std::endl;
-    if ( isKind<Script>(one_atom) )
-       out << toXML(asKind<Script>(one_atom)) << std::endl;
+    out << castedToXML(one_atom) << std::endl;
     out << "  </atoms>" << std::endl;
   }
   out << "</patch>" << std::endl;

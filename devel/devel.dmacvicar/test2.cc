@@ -73,7 +73,7 @@ int main()
 		throw *iter.errorStatus();
 
   PersistentStorage backend;
-  backend.storePatch(patch1);
+  backend.storeObject(patch1);
 
   // test xml 2 object
   std::string xml = toXML(patch1);

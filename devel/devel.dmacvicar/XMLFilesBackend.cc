@@ -61,11 +61,12 @@ class XMLFilesBackend::Private
 XMLFilesBackend::XMLFilesBackend()
 {
 	// check if the db exists
-	if (!isDatabaseInitialized())
+	if (!isBackendInitialized())
 	{
 		DBG << "Database not initialized" << std::endl;
-		initDatabaseForFirstTime();
-		if (!isDatabaseInitialized())
+		initBackend();
+    // should be initialized now...
+		if (!isBackendInitialized())
 			DBG << "Error, cant init database" << std::endl;
 		else
 			DBG << "Database initialized" << std::endl;
@@ -76,14 +77,15 @@ XMLFilesBackend::XMLFilesBackend()
 	}
 }
 
+
 bool
-XMLFilesBackend::isDatabaseInitialized()
+XMLFilesBackend::isBackendInitialized()
 {
   return exists( ZYPP_DB_DIR );
 }
 
 void
-XMLFilesBackend::initDatabaseForFirstTime()
+XMLFilesBackend::initBackend()
 {
   // FIXME duncan * handle exceptions
   DBG << "Creating directory structure..." << std::endl;
@@ -91,6 +93,47 @@ XMLFilesBackend::initDatabaseForFirstTime()
   create_directory( path(ZYPP_DB_DIR) / path("patches") );
   create_directory( path(ZYPP_DB_DIR) / path("selections") );
   create_directory( path(ZYPP_DB_DIR) / path("products") );
+}
+
+void
+XMLFilesBackend::storeObject( Resolvable::Ptr resolvable )
+{
+  std::string xml = castedToXML(resolvable);
+  std::string filename;
+  DBG << std::endl << xml << std::endl;
+  std::ofstream file;
+  // FIXME replace with path class of boost
+  filename += std::string(ZYPP_DB_DIR);
+  filename += "/";
+  filename += typeToString(resolvable, true);
+  filename += "/";
+  filename += resolvable->name();
+  DBG << filename << std::endl;
+  file.open(filename.c_str());
+  file << xml;
+  file.close();
+}
+
+void
+XMLFilesBackend::deleteObject( Resolvable::Ptr resolvable )
+{}
+
+std::list<Resolvable::Ptr>
+XMLFilesBackend::storedObjects()
+{
+  return  std::list<Resolvable::Ptr>();
+}
+
+std::list<Resolvable::Ptr>
+XMLFilesBackend::storedObjects(const Resolvable::Kind)
+{
+  return storedObjects();
+}
+
+std::list<Resolvable::Ptr>
+XMLFilesBackend::storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match)
+{
+  return storedObjects();
 }
 
 std::string
@@ -106,35 +149,6 @@ XMLFilesBackend::randomFileName() const
   fscanf(fp, "%s", &puffer);
   pclose(fp);
   return "blah";
-}
-
-std::string XMLFilesBackend::fileNameForPatch( Patch::Ptr patch ) const
-{
-  return patch->id();
-}
-
-std::list<Patch::Ptr>
-XMLFilesBackend::installedPatches()
-{
-  return std::list<Patch::Ptr>();
-}
-
-void
-XMLFilesBackend::storePatch( Patch::Ptr p )
-{
-  std::string xml = toXML(p);
-  DBG << std::endl << xml << std::endl;
-  std::ofstream file;
-  // FIXME replace with path class of boost
-  file.open( (std::string(ZYPP_DB_DIR) + std::string("/patches/") + fileNameForPatch(p)).c_str() );
-  file << xml;
-  file.close();
-}
-
-void
-XMLFilesBackend::insertTest()
-{
-
 }
 
 ///////////////////////////////////////////////////////////////////
