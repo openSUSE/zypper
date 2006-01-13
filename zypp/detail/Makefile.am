@@ -11,6 +11,7 @@ include_HEADERS = \
 	ResObjectFactory.h	\
 	PackageImplIf.h		\
 	SelectionImplIf.h	\
+	PatternImplIf.h	\
 	MessageImplIf.h		\
 	ScriptImplIf.h		\
 	PatchImplIf.h		\
@@ -20,6 +21,7 @@ include_HEADERS = \
 	\
 	PackageImpl.h		\
 	SelectionImpl.h		\
+	PatternImpl.h		\
 	MessageImpl.h		\
 	ScriptImpl.h		\
 	PatchImpl.h		\
@@ -42,6 +44,7 @@ lib@PACKAGE@_detail_la_SOURCES = \
 	\
 	PackageImpl.cc		\
 	SelectionImpl.cc	\
+	PatternImpl.cc		\
 	MessageImpl.cc		\
 	ScriptImpl.cc		\
 	PatchImpl.cc		\
