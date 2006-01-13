@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-SUBDIRS = hal rpm
+SUBDIRS = hal rpm testsuite
 
 ## ##################################################
 

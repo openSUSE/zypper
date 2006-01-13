@@ -7,9 +7,7 @@ html_DATA = 	@PACKAGE@.doxytag $(wildcard html/*)
 
 ## ##################################################
 
-.PHONY:	always
-
-@PACKAGE@.doxytag: Doxyfile always
+@PACKAGE@.doxytag: Doxyfile
 	@DOCGEN@
 
 ## ##################################################

@@ -124,6 +124,16 @@ AC_CHECK_LIB([xml2], [xmlNewTextReader],
         [:],
         AC_MSG_ERROR([libxml2 not found. please install libxml2-devel]))
 dnl ==================================================
+dnl checks for pkgconfig modules
+hal_module="hal >= 0.5.4"
+dbus_module="dbus-1 >= 0.33"
+hal_modules="glib-2.0 >= 2.6.0, gobject-2.0 >= 2.6.0, dbus-glib-1 >= 0.33, $dbus_module, $hal_module"
+PKG_CHECK_MODULES(HAL, [$hal_modules])
+AC_SUBST(HAL_CFLAGS)
+AC_SUBST(HAL_LDADD)
+AC_SUBST(HAL_LIBS)
+
+dnl ==================================================
 dnl checks for header files
 AC_CHECK_HEADERS([boost/scoped_ptr.hpp],
         [],
@@ -181,7 +191,9 @@ AC_OUTPUT(	\
 	zypp/url/Makefile		\
 	zypp/target/Makefile		\
 	zypp/target/rpm/Makefile	\
-	zypp/target/hal/Makefile
+	zypp/target/hal/Makefile	\
+	zypp/target/testsuite/Makefile	\
+	zypp/target/testsuite/tests/Makefile
 
 )
 dnl ==================================================
