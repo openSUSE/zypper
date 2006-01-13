@@ -331,8 +331,12 @@ namespace zypp
     if ( res )
       return res; // -1|1: not equal
 
-    // finaly compare releases
-    return rpmverscmp( lhs.release(), rhs.release() );
+    if (lhs.release().length() > 0
+	&& rhs.release().length() > 0)
+	// finaly compare releases, if both are available
+	return rpmverscmp( lhs.release(), rhs.release() );
+
+    return 0; //equal
   }
 
   ///////////////////////////////////////////////////////////////////
