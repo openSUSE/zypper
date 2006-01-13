@@ -170,8 +170,8 @@ namespace zypp
       config("rx_scheme",       "^[a-zA-Z][a-zA-Z0-9\\._-]*$");
       config("rx_username",     ".*");
       config("rx_password",     ".*");
-      config("rx_hostname",     ".*"); // FIXME
-      config("rx_port",         ".*"); // FIXME
+      config("rx_hostname",     ".*");           // FIXME
+      config("rx_port",         "^[0-9]{1,5}$");
       config("rx_pathname",     ".*");
       config("rx_pathparams",   ".*");
       config("rx_querystr",     ".*");
