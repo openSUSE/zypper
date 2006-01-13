@@ -28,6 +28,7 @@ include_HEADERS = NeedAType.h \
 	Package.h	\
 	Pathname.h	\
 	Selection.h	\
+	Pattern.h	\
 	Message.h	\
 	Script.h	\
 	Patch.h		\
@@ -76,6 +77,7 @@ lib@PACKAGE@_la_SOURCES = \
 	Package.cc	\
 	Pathname.cc	\
 	Selection.cc	\
+	Pattern.cc	\
 	Message.cc	\
 	Script.cc	\
 	Patch.cc	\
