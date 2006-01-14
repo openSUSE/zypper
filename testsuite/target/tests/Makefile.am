@@ -4,6 +4,8 @@
 
 LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
 
-noinst_PROGRAMS = hal
+noinst_PROGRAMS = hal librpmDb
 
 hal_SOURCES = hal.cc
+
+librpmDb_SOURCES = librpmDb.cc
