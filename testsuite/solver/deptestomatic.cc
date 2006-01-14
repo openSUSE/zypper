@@ -25,17 +25,15 @@
  */
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <libxml/parser.h>
 #include <libxml/xmlmemory.h>
 #include <zypp/solver/detail/libzypp_solver.h>
-
-#include <y2util/stringutil.h>
 
 int assertOutput( const char* output)
 {
@@ -117,7 +115,9 @@ assemble_install_cb (ResItem_constPtr resItem,
 		     void *data)
 {
     StringList *slist = (StringList *)data;
-    string str = stringutil::form ("%-7s ",  resItem->isInstalled() ? "|flag" : "install");
+    char buf[10];
+    snprintf (buf, 10, "%-7s ", resItem->isInstalled() ? "|flag" : "install");
+    string str (buf);
     str += resItem->asString();
 
     slist->push_back (str);
@@ -130,7 +130,9 @@ assemble_uninstall_cb (ResItem_constPtr resItem,
 		       void *data)
 {
     StringList *slist = (StringList *)data;
-    string str = stringutil::form ("%-7s ",  resItem->isInstalled() ? "remove" : "|unflag");
+    char buf[10];
+    snprintf (buf, 10, "%-7s ", resItem->isInstalled() ? "remove" : "|unflag");
+    string str (buf);
     str += resItem->asString();
 
     slist->push_back (str);

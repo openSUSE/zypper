@@ -5,6 +5,7 @@ SUBDIRS = single.out
 AUTOMAKE_OPTIONS = dejagnu
 PACKAGE = solver
 
+INCLUDES = -I/usr/include/libxml2
 LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
 
 # We're not ready for this yet.
