@@ -141,6 +141,12 @@ AC_CHECK_HEADERS([boost/scoped_ptr.hpp],
 AC_CHECK_HEADERS([curl/curl.h],
         [],
         AC_MSG_ERROR([libcurl header not found. please install curl-devel.]))
+AC_CHECK_HEADERS([rpm/rpmlib.h],
+        [],
+        AC_MSG_ERROR([rpmlib header not found. please install rpm-devel.]))
+AC_CHECK_HEADERS([popt.h],
+        [],
+        AC_MSG_ERROR([popt header not found. please install popt-devel.]))
 dnl ==================================================
 dnl checks for typedefs
 dnl ==================================================
