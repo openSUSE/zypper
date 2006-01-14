@@ -167,6 +167,14 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     CResItemList getUpgrades (void);
     int upgradeCount (void);
 
+    int foreachSatisfy (MarkedResItemFn fn, void *data);			// non-const, calls getStatus
+    CResItemList getSatisfies (void);
+    int satisfyCount (void);
+
+    int foreachIncomplete (MarkedResItemFn fn, void *data);			// non-const, calls getStatus
+    CResItemList getIncompletes (void);
+    int incompleteCount (void);
+
     void addInfo (ResolverInfo_Ptr info);
     void addInfoString (ResItem_constPtr resItem, int priority, std::string str);
     void addErrorString (ResItem_constPtr resItem, std::string str);

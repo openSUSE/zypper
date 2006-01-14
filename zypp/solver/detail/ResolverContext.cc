@@ -725,6 +725,34 @@ ResolverContext::upgradeCount (void)
 }
 
 
+static void
+satisfy_count_cb (ResItem_constPtr resItem, ResItemStatus status, void *data)
+{
+    int *count = (int *)data;
+    if (! resItem->isInstalled ()) {
+	++*count;
+    }
+}
+
+int
+ResolverContext::satisfyCount (void)
+{
+    int count = 0;
+
+    foreachSatisfy (satisfy_count_cb, (void *)&count);
+
+    return count;
+}
+
+
+int
+ResolverContext::incompleteCount (void)
+{
+    return foreachIncomplete ((MarkedResItemFn)NULL, (void *)NULL);
+}
+
+
+
 //---------------------------------------------------------------------------
 // info
 
