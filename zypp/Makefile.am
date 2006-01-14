@@ -12,6 +12,7 @@ include_HEADERS = NeedAType.h \
 	CapFactory.h	\
 	CapMatch.h	\
 	CapSet.h	\
+	CapSetFwd.h	\
 	CountryCode.h	\
 	Date.h		\
 	Dependencies.h	\
