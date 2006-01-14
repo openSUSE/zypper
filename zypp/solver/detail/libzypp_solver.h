@@ -31,6 +31,7 @@
 #include "zypp/solver/temporary/MultiWorld.h"
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/ResolverContext.h"
+#include "zypp/solver/detail/InstallOrder.h"
 #include "zypp/solver/temporary/XmlNode.h"
 
 #include "zypp/solver/temporary/utils.h"
