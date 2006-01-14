@@ -340,6 +340,7 @@ StoreWorld::findInstalledResItem (ResItem_constPtr resItem)
 // findResItem
 // @channel: A non-wildcard #Channel.
 // @name: The name of a resItem.
+// @kind: Kind of resItem (defaults to 'Package')
 //
 // Searches the world for a resItem in the specified channel
 // with the specified name.  @channel must be an actual
@@ -350,12 +351,13 @@ StoreWorld::findInstalledResItem (ResItem_constPtr resItem)
 //
 
 ResItem_constPtr
-StoreWorld::findResItem (Channel_constPtr channel, const string & name) const
+StoreWorld::findResItem (Channel_constPtr channel, const string & name, const Resolvable::Kind & kind) const
 {
     syncConditional (channel);
     for (ResItemTable::const_iterator pos = _resItems_by_name.lower_bound(name); pos != _resItems_by_name.upper_bound(name); pos++) {
 	ResItem_constPtr res = pos->second;
-	if (res->channel() == channel) {
+	if (res->channel() == channel
+	    && res->kind() == kind) {
 	    return res;
 	}
     }

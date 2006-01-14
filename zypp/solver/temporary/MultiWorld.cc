@@ -530,11 +530,11 @@ MultiWorld::findInstalledResItem (ResItem_constPtr resItem)
 
 
 ResItem_constPtr
-MultiWorld::findResItem (Channel_constPtr channel, const string & name) const
+MultiWorld::findResItem (Channel_constPtr channel, const string & name, const Resolvable::Kind & kind) const
 {
     ResItem_constPtr resItem;
     for (SubWorldInfoList::const_iterator iter = _subworlds.begin(); iter != _subworlds.end(); iter++) {
-	resItem = (*iter)->subworld()->findResItem(channel, name);
+	resItem = (*iter)->subworld()->findResItem(channel, name, kind);
 	if (resItem != NULL)
 	    return resItem;
     }

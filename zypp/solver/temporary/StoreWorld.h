@@ -122,7 +122,7 @@ class StoreWorld : public World {
     // Single resItem queries
 
     virtual ResItem_constPtr findInstalledResItem (ResItem_constPtr resItem);
-    virtual ResItem_constPtr findResItem (Channel_constPtr channel, const std::string & name) const;
+    virtual ResItem_constPtr findResItem (Channel_constPtr channel, const std::string & name, const Resolvable::Kind & kind = ResTraits<zypp::Package>::kind) const;
     virtual ResItem_constPtr findResItemWithConstraint (Channel_constPtr channel, const std::string & name, const Capability & constraint, bool is_and) const;
     virtual Channel_Ptr guessResItemChannel (ResItem_constPtr resItem) const;
 
