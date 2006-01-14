@@ -98,7 +98,7 @@ class MultiWorld : public World {
     virtual int foreachChannel (ChannelFn fn, void *data) const;
 
     int foreachSubworld (WorldFn callback, void *user_data);
-    int foreachSubworldByType (WorldType type, WorldFn callback, NameConflictInfo *info);
+    int foreachSubworldByType (WorldType type, WorldFn fn, void *data);
     WorldList getSubworlds ();
     ServiceWorld_Ptr lookupService (const std::string & url);
     ServiceWorld_Ptr lookupServiceById (const std::string & id);

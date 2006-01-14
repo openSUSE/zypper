@@ -310,7 +310,7 @@ MultiWorld::foreachSubworld (WorldFn callback, void *user_data)
 
     int count = 0;
 
-    for (WorldList::const_iterator iter = copied_subworlds.begin(); iter != copied_subworlds.end(); iter++) {
+    for (WorldList::iterator iter = copied_subworlds.begin(); iter != copied_subworlds.end(); iter++) {
         if (! callback (*iter, user_data)) {
             count = -1;
             break;
@@ -323,7 +323,7 @@ MultiWorld::foreachSubworld (WorldFn callback, void *user_data)
 
 
 static bool
-foreach_by_type_cb (World_constPtr subworld, void *user_data)
+foreach_by_type_cb (World_Ptr subworld, void *user_data)
 {
     ForeachByTypeInfo *info = (ForeachByTypeInfo *)user_data;
 
@@ -344,12 +344,13 @@ foreach_by_type_cb (World_constPtr subworld, void *user_data)
 
 
 int
-MultiWorld::foreachSubworldByType (WorldType type, WorldFn callback, NameConflictInfo *name_conflict_info)
+MultiWorld::foreachSubworldByType (WorldType type, WorldFn fn, void *data)
 {
     ForeachByTypeInfo info;
 
+    NameConflictInfo *name_conflict_info = (NameConflictInfo *)data;
     info.type = type;
-    info.callback = callback;
+    info.callback = fn;
     info.name_conflict_info = name_conflict_info;
     info.count = 0;
 
@@ -362,7 +363,7 @@ MultiWorld::foreachSubworldByType (WorldType type, WorldFn callback, NameConflic
 // subworld
 
 static bool
-service_name_conflict_cb (World_constPtr world, void *user_data)
+service_name_conflict_cb (World_Ptr world, void *user_data)
 {
     ServiceWorld_constPtr service = dynamic_pointer_cast<const ServiceWorld>(world);
     if (service == NULL) {

@@ -77,29 +77,37 @@ lock_resItem (ResItem_Ptr resItem)
     rc_world_add_lock (rc_get_world (), match);
 }
 
+#endif	// 0
+
+
+typedef struct {
+    ResItem_constPtr resolvable;
+} RemoveTypeInfo;
+ 
 
 static bool
-remove_resItem_cb (RCWorld *world, gpointer user_data)
+remove_resItem_cb (World_Ptr world, void *data)
 {
-    ResItem_Ptr resItem = user_data;
-
-    rc_world_store_remove_resItem (RC_WORLD_STORE (world), resItem);
+    RemoveTypeInfo *info = (RemoveTypeInfo *)data;
+    StoreWorld_Ptr store = boost::dynamic_pointer_cast<StoreWorld>(world);
+    if (store == NULL) {
+	fprintf (stderr, "remove_resItem_cb: world is not a STORE_WORLD\n");
+	return false;
+    }
+    store->removeResItem (info->resolvable);
 
     return true;
 }
 
 
 static void
-remove_resItem (ResItem_Ptr resItem)
+remove_resItem (ResItem_constPtr resItem)
 {
-    rc_world_multi_foreach_subworld_by_type (RC_WORLD_MULTI (world),
-					     RC_TYPE_WORLD_STORE,
-					     remove_resItem_cb, resItem);
+    RemoveTypeInfo info = { resItem };
+    world->foreachSubworldByType (STORE_WORLD, remove_resItem_cb, &info);
 }
 
 /* ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** */
-
-#endif	// 0
 
 
 //==============================================================================================================================
@@ -427,6 +435,7 @@ parse_xml_setup (XmlNode_Ptr node)
 		fprintf (stderr, "Can't force-uninstall installed package '%s'\n", package_name.c_str());
 	    } else {
 		printf (">!> Force-uninstalling '%s'\n", package_name.c_str());
+		remove_resItem (resItem);
 	    }
 
 	} else if (node->equals ("lock")) {

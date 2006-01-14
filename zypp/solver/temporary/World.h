@@ -52,7 +52,8 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-typedef std::list <World_constPtr> WorldList;
+typedef std::list <World_Ptr> WorldList;
+typedef std::list <World_constPtr> CWorldList;
 
 class NameConflictInfo;
 
@@ -68,7 +69,8 @@ typedef enum {
     SYSTEM_WORLD
 } WorldType;
 
-typedef bool		(*WorldFn)	  (World_constPtr world, void *user_data);
+typedef bool		(*CWorldFn)	  (World_constPtr world, void *user_data);
+typedef bool		(*WorldFn)	  (World_Ptr world, void *user_data);
 typedef Pending_Ptr	(*WorldRefreshFn) (World_constPtr world);
 
 #if 0
