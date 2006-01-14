@@ -11,6 +11,7 @@ include_HEADERS = 		\
 	MediaException.h	\
 	MediaAccess.h		\
 	MediaHandler.h		\
+	MediaCallbacks.h	\
 	Mount.h			\
 	MediaNFS.h		\
 	MediaCD.h		\
