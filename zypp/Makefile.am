@@ -95,7 +95,7 @@ lib@PACKAGE@_la_SOURCES = \
 	TmpPath.cc	\
 	DiskUsage.cc
 
-lib@PACKAGE@_la_LDFLAGS =	@LIB_VERSION_INFO@
+lib@PACKAGE@_la_LDFLAGS =	@LIBZYPP_VERSION_INFO@
 
 lib@PACKAGE@_la_LIBADD =        base/lib@PACKAGE@_base.la	\
 				detail/lib@PACKAGE@_detail.la	\

@@ -7,3 +7,8 @@
 SUBDIRS =	zypp testsuite doc
 
 ## ##################################################
+
+.PHONY: package
+
+package: dist
+

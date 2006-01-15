@@ -15,7 +15,7 @@ lib_LTLIBRARIES =	lib@PACKAGE@_target.la
 
 lib@PACKAGE@_target_la_SOURCES =
 
-lib@PACKAGE@_target_la_LDFLAGS =	@LIB_VERSION_INFO@
+lib@PACKAGE@_target_la_LDFLAGS = @LIBZYPP_VERSION_INFO@
 
 lib@PACKAGE@_target_la_LIBADD = \
 	rpm/lib@PACKAGE@_target_rpm.la	\
