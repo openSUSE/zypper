@@ -70,6 +70,11 @@ namespace zypp
                       Rel op_r,
                       const Edition & edition_r ) const;
 
+    /** Special Capability, triggering evaluation of Hal
+     * capabilities when matched.
+    */
+    Capability halEvalCap() const;
+
   public:
     /** Provide a parsable string representation of \a cap_r. */
     std::string encode( const Capability & cap_r ) const;

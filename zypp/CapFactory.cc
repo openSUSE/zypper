@@ -184,6 +184,12 @@ namespace zypp
       return name_r.find( ":/" ) != std::string::npos;
     }
 
+    /** Test for a HalCap. \a name_r starts with  "hal(". */
+    static bool isHalSpec( const std::string & name_r )
+    {
+      return name_r.substr(0,4) == "hal(";
+    }
+
     /** Try to build a non versioned cap from \a name_r .
      *
      * The CapabilityImpl is built here and inserted into _uset.
@@ -247,6 +253,38 @@ namespace zypp
 
       return buildNamed( refers_r, name_r );
     }
+
+    /** Try to build a hal cap from \a name_r .
+     *
+     * The CapabilityImpl is built here and inserted into _uset.
+     * The final Capability must be created by CapFactory, as it
+     * is a friend of Capability. Here we can't access the ctor.
+     *
+     * \todo Fix incaccuracy.
+    */
+    static CapabilityImpl::Ptr Impl::buildHal( const Resolvable::Kind & refers_r,
+                                               const std::string & name_r,
+                                               Rel op_r = Rel::ANY,
+                                               const std::string & value_r = std::string() )
+    {
+      if ( op_r != Rel::ANY )
+        {
+          ZYPP_THROW( Exception("Unsupported kind of Hal Capability") );
+        }
+
+      //split:   hal(name) [op string]
+      str::regex  rx( "hal\\(([^)]*)\\)" );
+      str::smatch what;
+      if( str::regex_match( name_r.begin(), name_r.end(), what, rx ) )
+        {
+          // Hal always refers to 'System' kind of Resolvable.
+          return usetInsert
+          ( new capability::HalCap( ResTraits<System>::kind,
+                                    what[1].str() ) );
+        }
+      // otherwise
+      ZYPP_THROW( Exception("Unsupported kind of Hal Capability") );
+    }
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -274,18 +312,6 @@ namespace zypp
   CapFactory::~CapFactory()
   {}
 
-#if 0
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	METHOD NAME : CapFactory::parse
-  //	METHOD TYPE : Capability
-  //
-  Capability CapFactory::parse( const std::string & strval_r ) const
-  {
-    return parse( strval_r, Resolvable::Kind() );
-  }
-#endif
-
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : CapFactory::parse
@@ -296,36 +322,43 @@ namespace zypp
 
   try
     {
-      // strval_r has at least two words which could make 'op edition'?
-      // improve regex!
-      str::regex  rx( "(.*[^ \t])([ \t]+)([^ \t]+)([ \t]+)([^ \t]+)" );
-      str::smatch what;
-      if( str::regex_match( strval_r.begin(), strval_r.end(),what, rx ) )
+      if ( Impl::isHalSpec( strval_r ) )
         {
-          Rel op;
-          Edition edition;
-          try
-            {
-              op = Rel(what[3].str());
-              edition = Edition(what[5].str());
-            }
-          catch ( Exception & excpt )
-            {
-              // So they don't make valid 'op edition'
-              ZYPP_CAUGHT( excpt );
-              DBG << "Trying named cap for: " << strval_r << endl;
-              // See whether it makes a named cap.
-              return Capability( Impl::buildNamed( refers_r, strval_r ) );
-            }
-
-          // Valid 'op edition'
-          return Capability ( Impl::buildVersioned( refers_r,
-                                                    what[1].str(), op, edition ) );
+          return Capability( Impl::buildHal( refers_r, strval_r ) );
         }
-      //else
-      // not a VersionedCap
+      else
+        {
+          // strval_r has at least two words which could make 'op edition'?
+          // improve regex!
+          str::regex  rx( "(.*[^ \t])([ \t]+)([^ \t]+)([ \t]+)([^ \t]+)" );
+          str::smatch what;
+          if( str::regex_match( strval_r.begin(), strval_r.end(),what, rx ) )
+            {
+              Rel op;
+              Edition edition;
+              try
+                {
+                  op = Rel(what[3].str());
+                  edition = Edition(what[5].str());
+                }
+              catch ( Exception & excpt )
+                {
+                  // So they don't make valid 'op edition'
+                  ZYPP_CAUGHT( excpt );
+                  DBG << "Trying named cap for: " << strval_r << endl;
+                  // See whether it makes a named cap.
+                  return Capability( Impl::buildNamed( refers_r, strval_r ) );
+                }
 
-      return Capability( Impl::buildNamed( refers_r, strval_r ) );
+              // Valid 'op edition'
+              return Capability ( Impl::buildVersioned( refers_r,
+                                                        what[1].str(), op, edition ) );
+            }
+          //else
+          // not a VersionedCap
+
+          return Capability( Impl::buildNamed( refers_r, strval_r ) );
+        }
     }
   catch ( Exception & excpt )
     {
@@ -345,6 +378,10 @@ namespace zypp
                                 const std::string & edition_r ) const
   try
     {
+      if ( Impl::isHalSpec( name_r ) )
+        {
+          return Capability( Impl::buildHal( refers_r, name_r, Rel(op_r), edition_r ) );
+        }
       // Try creating Rel and Edition, then parse
       return parse( refers_r, name_r, Rel(op_r), Edition(edition_r) );
     }
@@ -365,8 +402,28 @@ namespace zypp
                                 const Edition & edition_r ) const
   try
     {
+      if ( Impl::isHalSpec( name_r ) )
+        {
+          return Capability( Impl::buildHal( refers_r, name_r, op_r, edition_r.asString() ) );
+        }
       return Capability
       ( Impl::buildVersioned( refers_r, name_r, op_r, edition_r ) );
+    }
+  catch ( Exception & excpt )
+    {
+      ZYPP_RETHROW( excpt );
+      return Capability(); // not reached
+    }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : CapFactory::halEvalCap
+  //	METHOD TYPE : Capability
+  //
+  Capability CapFactory::halEvalCap() const
+  try
+    {
+      return Capability( Impl::buildHal( Resolvable::Kind(), "hal()" ) );
     }
   catch ( Exception & excpt )
     {

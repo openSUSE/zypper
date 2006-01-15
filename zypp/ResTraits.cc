@@ -31,6 +31,9 @@ namespace zypp
   template<>
     const ResolvableTraits::KindType ResTraits<Message>  ::kind( "Message" );
 
+  template<>
+    const ResolvableTraits::KindType ResTraits<System>  ::kind( "System" );
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

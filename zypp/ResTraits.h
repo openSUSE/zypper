@@ -30,6 +30,8 @@ namespace zypp
   class Script;
   class Message;
 
+  class System;
+
   /** Base of ResTraits. Defines the Resolvable::Kind type. */
   struct ResolvableTraits
   {

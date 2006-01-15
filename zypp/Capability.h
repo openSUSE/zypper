@@ -52,7 +52,7 @@ namespace zypp
    *                                          parsed.rel,
    *                                          parsed.epoch ) );
    *     }
-   *   catch ( const Exception & excpt_r )
+   *   catch ( Exception & excpt_r )
    *     {
    *       ERR << excpt_r << endl;
    *       ... Or maybe just WAR, or ?
