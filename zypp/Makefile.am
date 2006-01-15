@@ -109,3 +109,6 @@ lib@PACKAGE@_la_LIBADD =        base/lib@PACKAGE@_base.la	\
 				-lutil
 
 ## ##################################################
+
+EXTRA_DIST = @DOXYGEN/*
+
