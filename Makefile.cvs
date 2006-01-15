@@ -14,11 +14,13 @@ LIB = $(shell gcc -v 2>&1 				\
 		END{print lib} ' )
 
 PREFIX = /usr
-
+CONFIGURE_OPTS=
 default: configure
 
 configure: init
-	./configure --prefix=$(PREFIX) --libdir=$(PREFIX)/$(LIB) --disable-static
+	./configure --prefix=$(PREFIX) --libdir=$(PREFIX)/$(LIB) \
+		--disable-static \
+		$(CONFIGURE_OPTS)
 
 init:
 	rm -rf autom4te.cache

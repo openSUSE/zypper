@@ -1,8 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-SUBDIRS = base parser capability source detail media url target
-# solver
+SUBDIRS = base url media capability detail parser source target solver
 
 ## ##################################################
 
@@ -104,10 +103,9 @@ lib@PACKAGE@_la_LIBADD =        base/lib@PACKAGE@_base.la	\
 				source/lib@PACKAGE@_source.la	\
 				media/lib@PACKAGE@_media.la	\
 				url/lib@PACKAGE@_url.la		\
-				\
 				target/lib@PACKAGE@_target.la	\
 				solver/lib@PACKAGE@_solver.la	\
+				\
 				-lutil
-# solver/lib@PACKAGE@_solver.la   
 
 ## ##################################################

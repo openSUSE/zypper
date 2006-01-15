@@ -4,53 +4,47 @@
 #include <zypp/base/Logger.h>
 #include <zypp/base/Exception.h>
 
+#include <zypp/Range.h>
 #include <zypp/Edition.h>
 
 using namespace std;
 using namespace zypp;
 
-// work around flaw in y2logview
-template<class _Tp>
-  void printOnHack( const _Tp & obj )
+template<class _Compare>
+  void allCompare( const Edition & lhs, const Edition & rhs,
+                   _Compare compare )
   {
-    MIL << obj << endl;
-  };
-
-///////////////////////////////////////////////////////////////////
-// Just for the stats
-struct Measure
-{
-  time_t _begin;
-  Measure()
-  : _begin( time(NULL) )
-  {
-    USR << "START MEASURE..." << endl;
+    MIL << "===============" << endl;
+#define CMP(O) DBG << compare(lhs,rhs) << '\t' << lhs << '\t' << Rel::O << '\t' << rhs << "\t==> " << compareByRel( Rel::O, lhs, rhs, compare ) << endl
+    CMP( NONE );
+    CMP( ANY );
+    CMP( LT );
+    CMP( LE );
+    CMP( EQ );
+    CMP( GE );
+    CMP( GT );
+    CMP( NE );
+#undef CMP
   }
-  ~Measure()
+
+template<class _Compare>
+  void allRange( const Edition & lhs, const Edition & rhs)
   {
-    USR << "DURATION: " << (time(NULL)-_begin) << " sec." << endl;
+    typedef Range<Edition,_Compare> Range;
+
+    MIL << "===============" << endl;
+#define CMP(L,R) DBG << Rel::L<<' '<<lhs<< '\t' <<Rel::R<<' '<<rhs << '\t' << overlaps( Range(Rel::L,lhs), Range(Rel::R,rhs) ) << endl
+
+    CMP( NONE,	NONE );
+    CMP( ANY,	ANY );
+    CMP( LT,	LT );
+    CMP( LE ,	LE  );
+    CMP( EQ,	EQ );
+    CMP( GE,	GE );
+    CMP( GT,	GT );
+    CMP( NE,	NE );
+#undef CMP
   }
-};
-
-///////////////////////////////////////////////////////////////////
-// Print stream status
-ostream & operator<<( ostream & str, const istream & obj ) {
-  return str
-  << (obj.good() ? 'g' : '_')
-  << (obj.eof()  ? 'e' : '_')
-  << (obj.fail() ? 'F' : '_')
-  << (obj.bad()  ? 'B' : '_');
-}
-
-namespace zypp
-{
-
-
-
-}
-
-using namespace zypp;
-
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -60,6 +54,13 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
+  Edition l( "1.0" );
+  Edition r( "1.0","1" );
+
+  allRange<Edition::Compare>( l, r );
+  allRange<Edition::Match>( l, r );
+
+#if 0
   Edition::Range any;
   DBG << any << endl;
 
@@ -101,7 +102,7 @@ int main( int argc, char * argv[] )
   OVALL( GT(l) );
 
   // same for l > r and l == r
-
+#endif
   INT << "===[END]============================================" << endl;
   return 0;
 }

@@ -124,11 +124,19 @@ AC_CHECK_LIB([xml2], [xmlNewTextReader],
         [:],
         AC_MSG_ERROR([libxml2 not found. please install libxml2-devel]))
 dnl ==================================================
-dnl checks for pkgconfig modules
-hal_module="hal >= 0.5.4"
-dbus_module="dbus-1 >= 0.33"
-hal_modules="glib-2.0 >= 2.6.0, gobject-2.0 >= 2.6.0, dbus-glib-1 >= 0.33, $dbus_module, $hal_module"
-PKG_CHECK_MODULES(HAL, [$hal_modules])
+
+AC_ARG_ENABLE(faked-hal, [  --devel-faked-hal   do not use libhal],
+  devel_faked_hal=yes, devel_faked_hal=no)
+
+if test "x$devel_faked_hal" = "xyes"; then
+ HAL_CFLAGS=-DFAKE_HAL
+else
+ dnl checks for pkgconfig modules
+ hal_module="hal >= 0.5.4"
+ dbus_module="dbus-1 >= 0.33"
+ hal_modules="glib-2.0 >= 2.6.0, gobject-2.0 >= 2.6.0, dbus-glib-1 >= 0.33, $dbus_module, $hal_module"
+ PKG_CHECK_MODULES(HAL, [$hal_modules])
+fi
 AC_SUBST(HAL_CFLAGS)
 AC_SUBST(HAL_LDADD)
 AC_SUBST(HAL_LIBS)
