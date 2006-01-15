@@ -33,12 +33,17 @@
 #include <unistd.h>
 #include <libxml/parser.h>
 #include <libxml/xmlmemory.h>
+#include <zypp/Resolvable.h>
+#include <zypp/ResTraits.h>
+#include <zypp/Capability.h>
+#include <zypp/CapSet.h>
+#include <zypp/CapFactory.h>
 #include <zypp/solver/detail/libzypp_solver.h>
 
 int assertOutput( const char* output)
 {
     printf( "Assertion in %s, %d : %s  --> exit\n",  __FILE__, __LINE__,
-             output );
+	     output );
     exit (0);
 }
 
@@ -49,12 +54,46 @@ int assertOutput( const char* output)
 
 
 using namespace std;
+using zypp::Resolvable;
+using zypp::ResTraits;
+using zypp::Capability;
+using zypp::CapSet;
+using zypp::CapFactory;
 using namespace zypp::solver::detail;
 
 static MultiWorld_Ptr world = NULL;
 static string globalPath;
 
 typedef list<unsigned int> ChecksumList;
+
+//---------------------------------------------------------------------------
+
+Resolvable::Kind
+string2kind (const std::string & str)
+{
+    Resolvable::Kind kind = ResTraits<zypp::Package>::kind;
+    if (!str.empty()) {
+	if (str == "patch") {
+	    kind = ResTraits<zypp::Patch>::kind;
+	}
+	else if (str == "pattern") {
+	    kind = ResTraits<zypp::Pattern>::kind;
+	}
+	else if (str == "script") {
+	    kind = ResTraits<zypp::Script>::kind;
+	}
+	else if (str == "message") {
+	    kind = ResTraits<zypp::Message>::kind;
+	}
+	else if (str == "product") {
+	    kind = ResTraits<zypp::Product>::kind;
+	}
+	else {
+	    fprintf (stderr, "get_resItem unknown kind '%s'\n", str.c_str());
+	}
+    }
+    return kind;
+}
 
 //---------------------------------------------------------------------------
 
@@ -181,7 +220,7 @@ print_important (const string & str)
 
 
 static void
-print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum_list)
+print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum_list, bool instorder)
 {
     if (context->isValid ()) {
 
@@ -232,14 +271,33 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 	printf (">!> Failed Attempt:\n");
     }
 
-    printf (">!> installs=%d, upgrades=%d, uninstalls=%d\n", context->installCount(), context->upgradeCount(), context->uninstallCount());
+    printf (">!> installs=%d, upgrades=%d, uninstalls=%d", context->installCount(), context->upgradeCount(), context->uninstallCount());
+    int satisfied = context->satisfyCount();
+    if (satisfied > 0) printf (", satisfied=%d", satisfied);
+    printf ("\n");
     printf ("download size=%.1fk, install size=%.1fk\n", context->downloadSize() / 1024.0, context->installSize() / 1024.0);
     printf ("total priority=%d, min priority=%d, max priority=%d\n", context->totalPriority(), context->minPriority(), context->maxPriority());
     printf ("other penalties=%d\n",  context->otherPenalties());
     printf ("- - - - - - - - - -\n");
+
+    if (instorder) {
+	printf ("\n>!> Installation Order:\n\n");
+	CResItemList installs = context->getMarkedResItems(1);
+	CResItemList dummy;
+
+	InstallOrder order( world, installs, dummy );		 // sort according top prereq
+	order.init();
+	const CResItemList & installorder ( order.getTopSorted() );
+	for (CResItemList::const_iterator iter = installorder.begin(); iter != installorder.end(); iter++) {
+		printf (">!> %s\n", (*iter)->asString().c_str());
+	}
+	printf ("- - - - - - - - - -\n");
+    }
+
     fflush (stdout);
 
     context->spewInfo ();
+    if (getenv ("RC_SPEW")) printf ("%s\n", context->asString().c_str());
     fflush (stdout);
 
 }
@@ -279,26 +337,99 @@ get_channel (const string & channel_name)
 
 
 static ResItem_constPtr
-get_resItem (const string & channel_name, const string & package_name)
+get_resItem (const string & channel_name, const string & package_name, const string & kind_name = "")
 {
     Channel_constPtr channel;
     ResItem_constPtr resItem;
-
+    Resolvable::Kind kind = string2kind (kind_name);
     channel = get_channel (channel_name);
 
     if (channel == NULL) {
-	fprintf (stderr, "Can't find package '%s': channel '%s' not defined\n", package_name.c_str(), channel_name.c_str());
+	fprintf (stderr, "Can't find resolvable '%s': channel '%s' not defined\n", package_name.c_str(), channel_name.c_str());
 	return NULL;
     }
 
-    resItem = world->findResItem (channel, package_name);
+    resItem = world->findResItem (channel, package_name, kind);
 
     if (resItem == NULL) {
-	fprintf (stderr, "Can't find package '%s' in channel '%s': no such package\n", package_name.c_str(), channel_name.c_str());
+	fprintf (stderr, "Can't find resolvable '%s' in channel '%s': no such name/kind\n", package_name.c_str(), channel_name.c_str());
 	return NULL;
     }
 
     return resItem;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// whatdependson
+
+typedef struct {
+    CResItemSet *rs;
+    ResItem_constPtr resItem;
+    Capability cap;
+    bool first;
+} WhatDependsOnInfo;
+
+
+static bool
+requires_resItem_cb (ResItem_constPtr resItem, const Capability & cap, void *data)
+{
+    WhatDependsOnInfo *info = (WhatDependsOnInfo *)data;
+    if (info->rs->insert (resItem).second) {
+	if (info->first) {
+    printf ("\t%s provides %s required by\n", info->resItem->asString().c_str(), info->cap.asString().c_str());
+	    info->first = false;
+	}
+	printf ("\t\t%s for %s\n", resItem->asString().c_str(), cap.asString().c_str());
+    }
+    return true;
+}
+
+
+static CResItemSet
+whatdependson (ResItem_constPtr resItem)
+{
+    CResItemSet rs;
+
+    printf ("\n\nWhat depends on '%s'\n", resItem->asString().c_str());
+
+    WhatDependsOnInfo info;
+    info.rs = &rs;
+    info.resItem = resItem;
+
+    // loop over all provides and call foreachRequiringResItem
+    CapSet caps = resItem->provides();
+    for (CapSet::const_iterator cap_iter = caps.begin(); cap_iter != caps.end(); ++cap_iter) {
+	info.cap = *cap_iter;
+	info.first = true;
+	world->foreachRequiringResItem (info.cap, requires_resItem_cb, &info);
+    }
+
+    return rs;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// whatprovides
+
+static bool
+providing_resItem_cb (ResItem_constPtr resItem, const Capability & cap, void *data)
+{
+    CResItemSet *rs = (CResItemSet *)data;
+    rs->insert (resItem);
+    return true;
+}
+
+
+static CResItemSet
+get_providing_resItems (const string & prov_name, const string & kind_name = "")
+{
+    CResItemSet rs;
+    Resolvable::Kind kind = string2kind (kind_name);
+
+    CapFactory factory;
+    Capability cap = factory.parse (kind, prov_name);
+    world->foreachProvidingResItem (cap, providing_resItem_cb, &rs);
+
+    return rs;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -385,30 +516,39 @@ parse_xml_setup (XmlNode_Ptr node)
 	}
 
 	if (node->equals ("system")) {
+
 	    string file = node->getProp ("file");
 	    assertExit (!file.empty());
 	    load_channel ("@system", file, "helix", true);
+
 	} else if (node->equals ("channel")) {
+
 	    string name = node->getProp ("name");
 	    string file = node->getProp ("file");
 	    string type = node->getProp ("type");
 	    assertExit (!name.empty());
 	    assertExit (!file.empty());
 	    load_channel (name, file, type, false);
+
 	} else if (node->equals ("undump")) {
+
 	    string file = node->getProp ("file");
 	    assertExit (!file.empty());
 	    undump (file);
+
 	} else if (node->equals ("force-install")) {
+
 	    string channel_name = node->getProp ("channel");
 	    string package_name = node->getProp ("package");
+	    string kind_name = node->getProp ("kind");
+
 	    ResItem_constPtr resItem;
 	    Channel_constPtr system_channel;
 
 	    assertExit (!channel_name.empty());
 	    assertExit (!package_name.empty());
 
-	    resItem = get_resItem (channel_name, package_name);
+	    resItem = get_resItem (channel_name, package_name, kind_name);
 	    if (resItem) {
 		printf (">!> Force-installing %s from channel %s\n", package_name.c_str(), channel_name.c_str());
 
@@ -425,11 +565,14 @@ parse_xml_setup (XmlNode_Ptr node)
 	    }
 
 	} else if (node->equals ("force-uninstall")) {
+
 	    string package_name = node->getProp ("package");
+	    string kind_name = node->getProp ("kind");
+
 	    ResItem_constPtr resItem;
 
 	    assertExit (!package_name.empty());
-	    resItem = get_resItem ("@system", package_name);
+	    resItem = get_resItem ("@system", package_name, kind_name);
 	    
 	    if (! resItem) {
 		fprintf (stderr, "Can't force-uninstall installed package '%s'\n", package_name.c_str());
@@ -439,14 +582,17 @@ parse_xml_setup (XmlNode_Ptr node)
 	    }
 
 	} else if (node->equals ("lock")) {
+
 	    string channel_name = node->getProp ("channel");
 	    string package_name = node->getProp ("package");
+	    string kind_name = node->getProp ("kind");
+
 	    ResItem_constPtr resItem;
 
 	    assertExit (!channel_name.c_str());
 	    assertExit (!package_name.c_str());
 
-	    resItem = get_resItem (channel_name, package_name);
+	    resItem = get_resItem (channel_name, package_name, kind_name);
 	    if (resItem) {
 		printf (">!> Locking %s from channel %s\n", package_name.c_str(), channel_name.c_str());
 #warning lock disabled
@@ -468,7 +614,7 @@ parse_xml_setup (XmlNode_Ptr node)
 // trial related functions
 
 static void
-report_solutions (Resolver & resolver)
+report_solutions (Resolver & resolver, bool instorder)
 {
     int count = 1;
     ChecksumList checksum_list;
@@ -493,7 +639,7 @@ report_solutions (Resolver & resolver)
     
     if (resolver.bestContext()) {
 	printf ("\nBest Solution:\n\n");
-	print_solution (resolver.bestContext(), &count, checksum_list);
+	print_solution (resolver.bestContext(), &count, checksum_list, instorder);
 
 	ResolverQueueList complete = resolver.completeQueues();
 	if (complete.size() > 1)
@@ -503,7 +649,7 @@ report_solutions (Resolver & resolver)
 	    for (ResolverQueueList::const_iterator iter = complete.begin(); iter != complete.end(); iter++) {
 		ResolverQueue_Ptr queue = (*iter);
 		if (queue->context() != resolver.bestContext()) 
-		    print_solution (queue->context(), &count, checksum_list);
+		    print_solution (queue->context(), &count, checksum_list, instorder);
 	    }
 	}
     }
@@ -543,6 +689,7 @@ static void
 parse_xml_trial (XmlNode_Ptr node)
 {
     bool verify = false;
+    bool instorder = false;
 
     assertExit (node->equals ("trial"));
 
@@ -557,6 +704,7 @@ parse_xml_trial (XmlNode_Ptr node)
 
     Resolver resolver;
     resolver.setWorld (world);
+    ResolverContext_Ptr established = NULL;
 
     node = node->children();
     while (node) {
@@ -600,12 +748,14 @@ parse_xml_trial (XmlNode_Ptr node)
 
 	    string channel_name = node->getProp ("channel");
 	    string package_name = node->getProp ("package");
+	    string kind_name = node->getProp ("kind");
+
 	    ResItem_constPtr resItem;
 
 	    assertExit (!channel_name.empty());
 	    assertExit (!package_name.empty());
 
-	    resItem = get_resItem (channel_name, package_name);
+	    resItem = get_resItem (channel_name, package_name, kind_name);
 	    if (resItem) {
 		printf (">!> Installing %s from channel %s\n", package_name.c_str(), channel_name.c_str());
 		resolver.addResItemToInstall (resItem);
@@ -616,11 +766,13 @@ parse_xml_trial (XmlNode_Ptr node)
 	} else if (node->equals ("uninstall")) {
 
 	    string package_name = node->getProp ("package");
+	    string kind_name = node->getProp ("kind");
+
 	    ResItem_constPtr resItem;
 
 	    assertExit (!package_name.empty());
 
-	    resItem = get_resItem ("@system", package_name);
+	    resItem = get_resItem ("@system", package_name, kind_name);
 	    if (resItem) {
 		printf (">!> Uninstalling %s\n", package_name.c_str());
 		resolver.addResItemToRemove (resItem);
@@ -639,6 +791,24 @@ parse_xml_trial (XmlNode_Ptr node)
 		printf (">!> System is up-to-date, no upgrades required\n");
 	    else
 		printf (">!> Upgrading %d package%s\n", count, count > 1 ? "s" : "");
+
+	} else if (node->equals ("establish")) {
+
+	    printf (">!> Establishing state ...\n");
+
+	    resolver.establishState ();
+
+	    established = resolver.bestContext();
+	    if (established == NULL)
+		printf (">!> Established NO context !\n");
+	    else
+		printf (">!> Established context\n\t%s\n", established->asString().c_str());
+
+	} else if (node->equals ("instorder")) {
+
+	    printf (">!> Calculating installation order ...\n");
+
+	    instorder = true;
 
 	} else if (node->equals ("solvedeps")) {
 #if 0
@@ -662,6 +832,60 @@ parse_xml_trial (XmlNode_Ptr node)
 #else
 #warning solvedeps disabled
 #endif
+
+	} else if (node->equals ("whatprovides")) {
+
+	    string kind_name = node->getProp ("kind");
+	    string prov_name = node->getProp ("provides");
+
+	    CResItemSet resItems;
+
+	    printf ("resItems providing '%s'\n", prov_name.c_str());
+
+	    resItems = get_providing_resItems (prov_name, kind_name);
+
+	    if (resItems.empty()) {
+		fprintf (stderr, "None found\n");
+	    } else {
+		for (CResItemSet::const_iterator iter = resItems.begin(); iter != resItems.end(); ++iter) {
+		    printf ("%s\n", (*iter)->asString().c_str());
+		}
+	    }
+
+	} else if (node->equals ("whatdependson")) {
+
+	    string channel_name = node->getProp ("channel");
+	    string package_name = node->getProp ("package");
+	    string kind_name = node->getProp ("kind");
+	    string prov_name = node->getProp ("provides");
+
+	    CResItemSet resItems;
+
+	    assert (!channel_name.empty());
+	    assert (!package_name.empty());
+
+	    if (!prov_name.empty()) {
+		if (!package_name.empty()) {
+		    fprintf (stderr, "<whatdependson ...> can't have both package and provides.\n");
+		    exit (1);
+		}
+		resItems = get_providing_resItems (prov_name, kind_name);
+	    }
+	    else {
+		ResItem_constPtr resItem = get_resItem (channel_name, package_name, kind_name);
+		if (resItem) resItems.insert (resItem);
+	    }
+	    if (resItems.empty()) {
+		fprintf (stderr, "Can't find matching package\n");
+	    } else {
+		for (CResItemSet::const_iterator iter = resItems.begin(); iter != resItems.end(); ++iter) {
+		    CResItemSet dependants = whatdependson (*iter);
+		    for (CResItemSet::const_iterator dep_iter = dependants.begin(); dep_iter != dependants.end(); ++dep_iter) {
+			printf ("%s\n", (*dep_iter)->asString().c_str());
+		    }
+		}
+	    }
+
 	} else {
 	    fprintf (stderr, "Unknown tag '%s' in trial\n", node->name().c_str());
 	}
@@ -678,9 +902,9 @@ parse_xml_trial (XmlNode_Ptr node)
     if (verify)
 	resolver.verifySystem ();
     else
-	resolver.resolveDependencies ();
+	resolver.resolveDependencies (established);
 
-    report_solutions (resolver);
+    report_solutions (resolver, instorder);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -709,20 +933,20 @@ parse_xml_test (XmlNode_Ptr node)
 
 
 static void
-process_xml_test_file (const char *filename)
+process_xml_test_file (const string & filename)
 {
     xmlDocPtr xml_doc;
     XmlNode_Ptr root;
 
-    xml_doc = xmlParseFile (filename);
+    xml_doc = xmlParseFile (filename.c_str());
     if (xml_doc == NULL) {
-	fprintf (stderr, "Can't parse test file '%s'\n", filename);
+	fprintf (stderr, "Can't parse test file '%s'\n", filename.c_str());
 	exit (0);
     }
 
     root = new XmlNode (xmlDocGetRootElement (xml_doc));
 
-    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "Parsing file '%s'\n", filename);
+    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "Parsing file '%s'\n", filename.c_str());
     
     parse_xml_test (root);
     
@@ -759,7 +983,7 @@ main (int argc, char *argv[])
 
     if (getenv ("RC_SPEW_XML")) fprintf (stderr, "init_libzypp() done\n");
 
-    process_xml_test_file (argv[1]);
+    process_xml_test_file (string (argv[1]));
 
     return 0;
 }

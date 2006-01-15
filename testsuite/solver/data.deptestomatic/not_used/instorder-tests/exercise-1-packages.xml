@@ -38,6 +38,9 @@
       <description>Yggdrasil Linux</description>
     </update>
   </history>
+  <requires>
+    <dep kind="package" name="A" pre="1" />
+  </requires>
 </package>
 <package>
   <name>B</name>
@@ -59,7 +62,6 @@
     </update>
   </history>
   <requires>
-    <dep kind="package" name="A" pre="1" />
     <dep kind="package" name="C"/>
   </requires>
 </package>

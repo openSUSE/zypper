@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <!--
-  B requires A
-  A prerequires C
+  B requires C
+  C prerequires A
+
+  result: A C B
 -->
 <test>
 <setup>
