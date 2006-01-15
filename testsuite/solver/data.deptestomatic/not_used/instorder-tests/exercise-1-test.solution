@@ -1,0 +1,11 @@
+>!> Installing B from channel test
+>!> Calculating installation order ...
+>!> Solution #1:
+>!> install A-1.2-1[test]
+>!> install B-1.0-1[test]
+>!> install C-1.3-1[test]
+>!> installs=3, upgrades=0, uninstalls=0
+>!> Installation Order:
+>!> A-1.2-1[test]
+>!> C-1.3-1[test]
+>!> B-1.0-1[test]

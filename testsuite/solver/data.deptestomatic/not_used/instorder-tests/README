@@ -1,1 +1,6 @@
 Test for computing the installation order (pre-requires)
+
+exercise-1-test.xml		A simple A, B, C
+exercise-preview4-test.xml	SLES10 preview4, install emacs on bare system
+exercise-stable-test.xml	STABLE from around preview3, install novell-groupwise-gwclient on bare system
+
