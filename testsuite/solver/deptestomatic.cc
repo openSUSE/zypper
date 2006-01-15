@@ -38,7 +38,7 @@
 #include <zypp/Capability.h>
 #include <zypp/CapSet.h>
 #include <zypp/CapFactory.h>
-#include <zypp/solver/detail/libzypp_solver.h>
+#include <zypp/solver/libzypp_solver.h>
 
 int assertOutput( const char* output)
 {
