@@ -4,7 +4,7 @@
 -->
 <test>
 <setup>
-  <channel name="test" file="preview4-i386-packages.xml"/>
+  <channel name="test" file="preview4-x86_64-packages.xml.gz"/>
 </setup>
 <trial>
   <install channel="test" package="emacs"/>
