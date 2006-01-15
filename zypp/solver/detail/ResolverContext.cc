@@ -473,20 +473,31 @@ ResolverContext::foreachMarkedResItem (MarkedResItemFn fn, void *data) const
 //---------------------------------------------------------------------------
 // collect
 
+typedef struct {
+    CResItemList *rl;
+    int status;				// <0: uninstalls, ==0: all, >0: installs
+} MarkedResolvableInfo;
+
+
 static void
 marked_resItem_collector (ResItem_constPtr resItem, ResItemStatus status, void *data)
 {
-    CResItemList *rl = (CResItemList *)data;
-    rl->push_back (resItem);
+    MarkedResolvableInfo *info = (MarkedResolvableInfo *)data;
+    if (info->status == 0
+       || (info->status > 0 && resItem_status_is_to_be_installed(status))
+       || (info->status < 0 && resItem_status_is_to_be_uninstalled(status))) {
+	info->rl->push_back (resItem);
+    }
 }
 
 
 CResItemList
-ResolverContext::getMarkedResItems (void) const
+ResolverContext::getMarkedResItems (int which) const
 {
     CResItemList rl;
+    MarkedResolvableInfo info = { &rl, which };
 
-    foreachMarkedResItem (marked_resItem_collector, &rl);
+    foreachMarkedResItem (marked_resItem_collector, &info);
 
     return rl;
 }
@@ -544,6 +555,121 @@ ResolverContext::getInstalls (void) const
     CResItemList rl;
 
     foreachInstall (context_resItem_collector, (void *)&rl);
+
+    return rl;
+}
+
+
+//---------------------------------------------------------------------------
+// satisfy
+
+typedef struct {
+    World_Ptr world;
+    MarkedResItemFn fn;
+    CResItemList *rl;
+    int count;
+} SatisfyInfo;
+
+static void
+satisfy_pkg_cb (ResItem_constPtr resItem, ResItemStatus status, void *data)
+{
+    SatisfyInfo *info = (SatisfyInfo *)data;
+    if (resItem_status_is_satisfied (status)
+       && ! resItem->isInstalled ()
+       && info->world->findInstalledResItem (resItem) == NULL) {
+
+       if (info->fn) info->fn (resItem, status, info->rl);
+       ++info->count;
+    }
+}
+
+
+int
+ResolverContext::foreachSatisfy (MarkedResItemFn fn, void *data)
+{
+    CResItemList *rl = (CResItemList *)data;
+    SatisfyInfo info = { world(), fn, rl, 0 };
+
+    foreachMarkedResItem (satisfy_pkg_cb, (void *)&info);
+
+    return info.count;
+}
+
+
+static void
+context_resItem_collector_satisfy (ResItem_constPtr resItem, ResItemStatus status, void *data)
+{
+    CResItemList *rl = (CResItemList *)data;
+    if (resItem_status_is_satisfied (status)) {
+       rl->push_front (resItem);
+    }
+}
+
+
+CResItemList
+ResolverContext::getSatisfies (void)
+{
+    CResItemList rl;
+
+    foreachSatisfy (context_resItem_collector_satisfy, (void *)&rl);
+
+    return rl;
+}
+
+
+//---------------------------------------------------------------------------
+// incomplete
+
+typedef struct {
+    World_Ptr world;
+    MarkedResItemFn fn;
+    CResItemList *rl;
+    int count;
+} IncompleteInfo;
+
+static void
+incomplete_pkg_cb (ResItem_constPtr resItem, ResItemStatus status, void *data)
+{
+    IncompleteInfo *info = (IncompleteInfo *)data;
+#warning Probably wrong check for incomplete
+    if (resItem_status_is_incomplete (status)
+       && ! resItem->isInstalled ()
+       && info->world->findInstalledResItem (resItem) == NULL) {
+
+       if (info->fn) info->fn (resItem, status, info->rl);
+       ++info->count;
+    }
+}
+
+
+int
+ResolverContext::foreachIncomplete (MarkedResItemFn fn, void *data)
+{
+    CResItemList *rl = (CResItemList *)data;
+    IncompleteInfo info = { world(), fn, rl, 0 };
+
+    foreachMarkedResItem (incomplete_pkg_cb, (void *)&info);
+
+    return info.count;
+}
+
+
+static void
+context_resItem_collector_incomplete (ResItem_constPtr resItem, ResItemStatus status, void *data)
+{
+    CResItemList *rl = (CResItemList *)data;
+    if (resItem_status_is_incomplete (status)) {
+       rl->push_front (resItem);
+    }
+}
+
+
+CResItemList
+ResolverContext::getIncompletes (void)
+{
+    CResItemList rl;
+
+    foreachIncomplete (context_resItem_collector_incomplete, (void *)&rl);
 
     return rl;
 }

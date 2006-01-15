@@ -62,6 +62,8 @@ typedef enum {
 
 #define resItem_status_is_to_be_installed(x) (((x) == RESOLVABLE_STATUS_TO_BE_INSTALLED) || ((x) == RESOLVABLE_STATUS_TO_BE_INSTALLED_SOFT))
 #define resItem_status_is_to_be_uninstalled(x) (((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED) || ((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE) || ((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK))
+#define resItem_status_is_satisfied(x) ((x) == RESOLVABLE_STATUS_SATISFIED)
+#define resItem_status_is_incomplete(x) ((x) == RESOLVABLE_STATUS_INCOMPLETE)
 
 typedef std::map<ResItem_constPtr, ResItemStatus> StatusTable;
 typedef std::list<ResolverInfo_Ptr> InfoList;
@@ -153,7 +155,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     bool resItemIsAbsent (ResItem_constPtr resItem);
 
     void foreachMarkedResItem (MarkedResItemFn fn, void *data) const;
-    CResItemList getMarkedResItems (void) const;
+    CResItemList getMarkedResItems (int which) const;				// <0:uninstalls, 0:all; >0:installs
 
     int foreachInstall (MarkedResItemFn fn, void *data) const;
     CResItemList getInstalls (void) const;
