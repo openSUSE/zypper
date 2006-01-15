@@ -9,7 +9,7 @@ include_HEADERS =
 
 ## ##################################################
 
-lib_LTLIBRARIES =	lib@PACKAGE@_target.la
+noinst_LTLIBRARIES =	lib@PACKAGE@_target.la
 
 ## ##################################################
 
