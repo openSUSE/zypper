@@ -7,7 +7,9 @@ INCLUDES = -I$(oldincludedir)/libxml2
 
 ## ##################################################
 
-include_HEADERS = 		\
+mediaproxyinfoincludedir = $(pkgincludedir)/media/proxyinfo
+
+mediaproxyinfoinclude_HEADERS = 		\
 	ProxyInfoImpl.h		\
 	ProxyInfos.h		\
 	ProxyInfoSysconfig.h
