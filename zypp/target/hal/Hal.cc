@@ -16,11 +16,15 @@
 
 #include "zypp/target/hal/Hal.h"
 
+#ifndef FAKE_HAL
+
 #include <glib.h>
 
 #include <dbus/dbus-glib-lowlevel.h>
 #include <dbus/dbus-glib.h>
 #include <hal/libhal.h>
+
+#endif
 
 using std::endl;
 using std::string;
@@ -35,6 +39,7 @@ namespace zypp
     namespace hal
     { /////////////////////////////////////////////////////////////////
 
+#ifndef FAKE_HAL
 ///////////////////////////////////////////////////////////////////
 //
 //	CLASS NAME : Hal::Impl
@@ -196,6 +201,25 @@ struct Hal::Impl
     }
 
 };  // struct Hal::Impl
+
+
+#else // FAKE_HAL
+      struct Hal::Impl
+      {
+        bool query( const std::string & cap_r ) const
+        { return query( cap_r, Rel::ANY, std::string() ); }
+        bool  query( const std::string & cap_r,
+                     Rel op_r,
+                     const std::string & val_r ) const
+        { return false; }
+        /** Offer default Impl. */
+        static shared_ptr<Impl> nullimpl()
+        {
+          static shared_ptr<Impl> _nullimpl( new Impl );
+          return _nullimpl;
+        }
+      };
+#endif
 
 ///////////////////////////////////////////////////////////////////
 

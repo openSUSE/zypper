@@ -1,7 +1,8 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-SUBDIRS = base parser capability solver source detail media url target
+SUBDIRS = base parser capability source detail media url target
+# solver
 
 ## ##################################################
 
@@ -22,7 +23,9 @@ include_HEADERS = NeedAType.h \
 	NVR.h		\
 	NVRA.h		\
 	NVRAD.h		\
+	Range.h		\
 	Rel.h		\
+	RelCompare.h	\
 	ResObject.h	\
 	Resolvable.h	\
 	ResTraits.h	\
@@ -71,6 +74,7 @@ lib@PACKAGE@_la_SOURCES = \
 	NVR.cc		\
 	NVRA.cc		\
 	NVRAD.cc	\
+	Range.cc	\
 	Rel.cc		\
 	ResObject.cc	\
 	Resolvable.cc	\
@@ -96,7 +100,6 @@ lib@PACKAGE@_la_LDFLAGS =	@LIB_VERSION_INFO@
 lib@PACKAGE@_la_LIBADD =        base/lib@PACKAGE@_base.la	\
 				detail/lib@PACKAGE@_detail.la	\
 				capability/lib@PACKAGE@_capability.la	\
-				solver/lib@PACKAGE@_solver.la	\
 				parser/lib@PACKAGE@_parser.la	\
 				source/lib@PACKAGE@_source.la	\
 				media/lib@PACKAGE@_media.la	\
@@ -104,5 +107,6 @@ lib@PACKAGE@_la_LIBADD =        base/lib@PACKAGE@_base.la	\
 				\
 				target/lib@PACKAGE@_target.la	\
 				-lutil
+# solver/lib@PACKAGE@_solver.la   
 
 ## ##################################################

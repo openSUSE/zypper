@@ -18,7 +18,8 @@
 
 #include "zypp/base/PtrTypes.h"
 
-#include "zypp/Rel.h"
+#include "zypp/RelCompare.h"
+#include "zypp/Range.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -52,7 +53,7 @@ namespace zypp
    * in the example.<BR>
    * If Edition is used as key in a std::container, per default
    * <em>plain string comparison</em> is used. If you want to compare by
-   * version, let the container use Edition::Less to compare.
+   * version, let the container use Edition::ComareLess to compare.
    *
    * \attention
    *
@@ -118,50 +119,46 @@ namespace zypp
     std::string asString() const;
 
   public:
-    /** Compare two Editions using relational operator \a op.
-     * \return Result of expression \c ( \a lhs \a op \a rhs \c ).<BR>
-     * If \a op is Rel::ANY, the expression is always \c true.<BR>
-     * If \a op is Rel::NONE, the expression is always \c false.
+    /** Compare two Editions returning <tt>-1,0,1</tt>.
+     * \return <tt>-1,0,1</tt> if editions are <tt>\<,==,\></tt>.
      *
      * \attention An empty version or release string is not treated
      * specialy. It's the least possible value. If you want an empty
      * string treated as \c ANY, use \ref match.
-     *
-     * \todo optimize impementation. currently a full compare( lhs, rhs )
-     * is done and the result evaluated. But step by step would be faster.
-    */
-    static bool compare( Rel op, const Edition & lhs, const Edition & rhs );
-
-    /** Compare two Editions returning <tt>-1,0,1</tt>.
-     * \return <tt>-1,0,1</tt> if editions are <tt>\<,==,\></tt>.
-    */
+   */
     static int compare( const Edition & lhs, const Edition & rhs );
 
-    /* Binary operator functor comparing Edition. */
-    struct Less;
+    /** \ref compare functor.
+     * \see \ref RelCompare.
+    */
+    typedef Compare<Edition> Compare;
+
+    /** \ref Edition \ref Range based on \ref Compare.
+     * \see \ref RelCompare.
+    */
+    typedef Range<Edition> CompareRange;
 
   public:
-    /** Match two Editions using relational operator \a op, treating empty
-     *  strings as wildcard.
-     * Rules for match are simple:
-     * \li If \a op is Rel::ANY, the expression is always \c true.
-     * \li If \a op is Rel::NONE, the expression is always \c false.
-     * \li If \a op includes equality an empty string matches Rel::ANY.
-     * \li Otherwise an empty string matches Rel::NONE.
-     */
-    static bool match( Rel op, const Edition & lhs, const Edition & rhs );
-
     /** Match two Editions returning <tt>-1,0,1</tt>, treating empty
-     *  strings as wildcard.
+     *  strings as \c ANY.
      * \return <tt>-1,0,1</tt> if editions match <tt>\<,==,\></tt>.
     */
     static int match( const Edition & lhs, const Edition & rhs );
 
-    /* Binary operator functor matching Edition. */
-    struct Match;
+    /** \ref match functor.
+     * \see \ref RelCompare.
+    */
+    struct Match: public std::binary_function<Edition,Edition,int>
+    {
+      int operator()( const Edition & lhs, const Edition & rhs ) const
+      { return Edition::match( lhs, rhs ); }
+    };
 
-    /* A range defined by \ref Rel and \ref Edition. */
-    struct Range;
+    /** \ref Edition \ref Range based on \ref Match.
+     * \see \ref RelCompare.
+    */
+    typedef Range<Edition, Match> MatchRange;
+    typedef MatchRange Range;
 
   private:
     /** Hides implementation */
@@ -179,134 +176,28 @@ namespace zypp
   //@{
   /** \relates Edition */
   inline bool operator==( const Edition & lhs, const Edition & rhs )
-  { return Edition::compare( Rel::EQ, lhs, rhs ); }
+  { return compareByRel( Rel::EQ, lhs, rhs ); }
 
   /** \relates Edition */
   inline bool operator!=( const Edition & lhs, const Edition & rhs )
-  { return Edition::compare( Rel::NE, lhs, rhs ); }
+  { return compareByRel( Rel::NE, lhs, rhs ); }
 
   /** \relates Edition */
   inline bool operator<( const Edition & lhs, const Edition & rhs )
-  { return Edition::compare( Rel::LT, lhs, rhs ); }
+  { return compareByRel( Rel::LT, lhs, rhs ); }
 
   /** \relates Edition */
   inline bool operator<=( const Edition & lhs, const Edition & rhs )
-  { return Edition::compare( Rel::LE, lhs, rhs ); }
+  { return compareByRel( Rel::LE, lhs, rhs ); }
 
   /** \relates Edition */
   inline bool operator>( const Edition & lhs, const Edition & rhs )
-  { return Edition::compare( Rel::GT, lhs, rhs ); }
+  { return compareByRel( Rel::GT, lhs, rhs ); }
 
   /** \relates Edition */
   inline bool operator>=( const Edition & lhs, const Edition & rhs )
-  { return Edition::compare( Rel::GE, lhs, rhs ); }
+  { return compareByRel( Rel::GE, lhs, rhs ); }
   //@}
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : Edition::Range
-  //
-  /** A range defined by \ref Rel and \ref Edition.
-   *
-   * \ref Rel::NONE never overlaps.
-   *
-   * \ref Rel::ANY overlaps any range except \ref Rel::NONE.
-   *
-   * The other ranges overlap as you may expect it.
-   *
-   * \note Uses Edition::match to compare Editions.
-   *
-   * \todo template it to use Edition::compare. as well.
-   * \todo overlaps does not treat Rel::NE correct.
-  */
-  struct Edition::Range
-  {
-    Rel op;
-    Edition edition;
-
-    /** Default ctor: \ref Rel::ANY. */
-    Range()
-    : op( Rel::ANY )
-    {}
-
-    /** Ctor taking \ref Edition (\ref Rel::EQ). */
-    Range( const Edition & edition_r )
-    : op( Rel::EQ )
-    , edition( edition_r )
-    {}
-
-    /** Ctor taking \ref Rel and \ref Edition. */
-    Range( Rel op_r, const Edition & edition_r )
-    : op( op_r )
-    , edition( edition_r )
-    {}
-
-    /** Return whether two Ranges overlap. */
-    bool overlaps( const Range & rhs ) const
-    { return overlaps( *this, rhs ); }
-
-    /** Return whether two Ranges overlap. */
-    static bool overlaps( const Range & lhs, const Range & rhs );
-
-    friend bool operator==( const Range & lhs, const Range & rhs )
-    {
-      return( lhs.op == rhs.op
-              && ( lhs.op == Rel::ANY || lhs.op == Rel::NONE
-                   || match( Rel::EQ, lhs.edition, rhs.edition ) ) );
-    }
-
-    friend bool operator!=( const Range & lhs, const Range & rhs )
-    { return ! ( lhs == rhs ); }
-  };
-  ///////////////////////////////////////////////////////////////////
-
-  /** \relates Edition::Range Stream output. */
-  std::ostream & operator<<( std::ostream & str, const Edition::Range & obj );
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : Edition::Less
-  //
-  /** Binary operator functor comparing Edition.
-   * Default order for std::container using Edition as key is based
-   * on <em>plain string comparison</em>. Use Less to compare, if
-   * real version comparison is desired.
-   * \code
-   * set<Edition> eset;
-   * eset.insert( Edition("1.0","") );
-   * eset.insert( Edition("1_0","") );
-   * // Now: eset.size() == 2
-   * \endcode
-   * \code
-   * set<Edition,Edition::Less> eset;
-   * eset.insert( Edition("1.0","") );
-   * eset.insert( Edition("1_0","") );
-   * // Now: eset.size() == 1
-   * \endcode
-  */
-  struct Edition::Less : public std::binary_function<Edition,Edition,bool>
-  {
-    /** \return <tt>lhs < rhs</tt> */
-    bool operator()(const Edition & lhs, const Edition & rhs ) const
-    { return lhs < rhs; }
-  };
-  ///////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : Edition::Match
-  //
-  /** Binary operator functor matching Edition.
-   * Provided for completeness, but probabely of little use. Be shure to
-   * understand the difference between Edition::compare and Edition::match.
-  */
-  struct Edition::Match : public std::binary_function<Edition,Edition,bool>
-  {
-    /** \return <tt>Edition::match(Rel::LT,lhs,rhs)</tt> */
-    bool operator()(const Edition & lhs, const Edition & rhs ) const
-    { return Edition::match( Rel::LT, lhs, rhs); }
-  };
-  ///////////////////////////////////////////////////////////////////
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

@@ -127,46 +127,7 @@ namespace zypp
       }
       return 1;
     }
-
-
-    /** Convert Rel op evaluation to call to compare returning (-1,0,1).
-     */
-    bool compConv( Rel op, const Edition & lhs, const Edition & rhs,
-                   int (*compare)( const Edition &, const Edition & rhs ) )
-    {
-      switch ( op.inSwitch() )
-      {
-      case Rel::EQ_e:
-        return compare( lhs, rhs ) == 0;
-        break;
-      case Rel::NE_e:
-        return compare( lhs, rhs ) != 0;
-        break;
-      case Rel::LT_e:
-        return compare( lhs, rhs ) == -1;
-        break;
-      case Rel::LE_e:
-        return compare( lhs, rhs ) != 1;
-        break;
-      case Rel::GT_e:
-        return compare( lhs, rhs ) == 1;
-        break;
-      case Rel::GE_e:
-        return compare( lhs, rhs ) != -1;
-        break;
-      case Rel::ANY_e:
-        return true;
-        break;
-      case Rel::NONE_e:
-        return false;
-        break;
-      }
-    // We shouldn't get here.
-    INT << "Unknown relational opertor '" << op << "' treated as  'NONE'" << endl;
-    return false;
-  }
-
-  }
+  } // namespace
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
@@ -325,11 +286,6 @@ namespace zypp
     return ret;
   }
 
-  bool Edition::compare( Rel op, const Edition & lhs, const Edition & rhs )
-  {
-    return compConv( op, lhs, rhs, Edition::compare );
-  }
-
   int Edition::compare( const Edition & lhs, const Edition & rhs )
   {
     // compare epoch
@@ -341,17 +297,7 @@ namespace zypp
     if ( res )
       return res; // -1|1: not equal
 
-    if (lhs.release().length() > 0
-	&& rhs.release().length() > 0)
-	// finaly compare releases, if both are available
-	return rpmverscmp( lhs.release(), rhs.release() );
-
-    return 0; //equal
-  }
-
-  bool Edition::match( Rel op, const Edition & lhs, const Edition & rhs )
-  {
-    return compConv( op, lhs, rhs, Edition::match );
+    return rpmverscmp( lhs.release(), rhs.release() );
   }
 
   int Edition::match( const Edition & lhs, const Edition & rhs )
@@ -373,63 +319,6 @@ namespace zypp
       return 0; //equal
 
     return rpmverscmp( lhs.release(), rhs.release() );
-  }
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : Edition::Range
-  //
-  ///////////////////////////////////////////////////////////////////
-
-  bool Edition::Range::overlaps( const Range & lhs, const Range & rhs )
-  {
-    if ( lhs.op == Rel::NONE || rhs.op == Rel::NONE )
-      return false;
-    if ( lhs.op == Rel::ANY || rhs.op == Rel::ANY )
-      return true;
-
-    int cmp = Edition::match( lhs.edition, rhs.edition );
-
-    // FIX: omitting the Rel::NE case :(
-
-    if ( cmp < 0 )
-      {
-        // lhs < rhs: either lhs includes greater values or rhs includes lower.
-        return(    lhs.op == Rel::GT
-                || lhs.op == Rel::GE
-                || rhs.op == Rel::LT
-                || rhs.op == Rel::LE );
-      }
-
-    if ( cmp > 0 )
-      {
-        // lhs > rhs: either lhs includes lower values or rhs includes greater.
-        return(    lhs.op == Rel::LT
-                || lhs.op == Rel::LE
-                || rhs.op == Rel::GT
-                || rhs.op == Rel::GE );
-      }
-
-    // lhs == rhs: either both ranges include Rel::EQ, or both head
-    // into the same direction.
-    if (    ( lhs.op == Rel::LE || lhs.op == Rel::EQ || lhs.op == Rel::GE )
-         && ( rhs.op == Rel::LE || rhs.op == Rel::EQ || rhs.op == Rel::GE ) )
-      return true;
-    if (    ( lhs.op == Rel::LT && ( rhs.op == Rel::LT || rhs.op == Rel::LE ) )
-         || ( lhs.op == Rel::GT && ( rhs.op == Rel::GT || rhs.op == Rel::GE ) )
-         || ( rhs.op == Rel::LT && ( lhs.op == Rel::LT || lhs.op == Rel::LE ) )
-         || ( rhs.op == Rel::GT && ( lhs.op == Rel::GT || lhs.op == Rel::GE ) ) )
-      return true;
-    // else
-    return false;
-  }
-
-  std::ostream & operator<<( std::ostream & str, const Edition::Range & obj )
-  {
-    str << '[' << obj.op;
-    if ( ! ( obj.op == Rel::ANY || obj.op == Rel::NONE ) )
-      str << obj.edition;
-    return str << ']';
   }
 
   /////////////////////////////////////////////////////////////////
