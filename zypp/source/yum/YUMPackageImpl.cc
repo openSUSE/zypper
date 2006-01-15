@@ -206,7 +206,8 @@ namespace zypp
       { return ResObjectImplIf::delnotify(); }
 
       ByteCount YUMPackageImpl::size() const
-      { }
+#warning fixme
+      { return 0; }
 
       bool YUMPackageImpl::providesSources() const
       { return ResObjectImplIf::providesSources(); }
@@ -231,7 +232,8 @@ namespace zypp
 
       /** */
       std::string YUMPackageImpl::distribution() const
-      { }
+#warning fixme
+      { return string(); }
 
       /** */
       Vendor YUMPackageImpl::vendor() const
@@ -285,11 +287,13 @@ namespace zypp
 
       /** */
       ByteCount YUMPackageImpl::sourcesize() const
-      { }
+#warning fixme
+      { return 0; }
 
       /** */
       ByteCount YUMPackageImpl::archivesize() const
-      { }
+#warning fixme
+      { return 0; }
 
       /** */
       Text YUMPackageImpl::authors() const

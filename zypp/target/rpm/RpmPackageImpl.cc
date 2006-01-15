@@ -82,7 +82,8 @@ namespace zypp
       { return ResObjectImplIf::delnotify(); }
 
       ByteCount RPMPackageImpl::size() const
-      { }
+#warning fixme
+      { return 0; }
 
       bool RPMPackageImpl::providesSources() const
       { return ResObjectImplIf::providesSources(); }
@@ -107,7 +108,8 @@ namespace zypp
 
       /** */
       std::string RPMPackageImpl::distribution() const
-      { }
+#warning fixme
+      { return string(); }
 
       /** */
       Vendor RPMPackageImpl::vendor() const
@@ -161,11 +163,13 @@ namespace zypp
 
       /** */
       ByteCount RPMPackageImpl::sourcesize() const
-      { }
+#warning fixme
+      { return 0; }
 
       /** */
       ByteCount RPMPackageImpl::archivesize() const
-      { }
+#warning fixme
+      { return 0; }
 
       /** */
       Text RPMPackageImpl::authors() const

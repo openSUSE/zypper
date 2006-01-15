@@ -970,6 +970,9 @@ const std::list<Package::Ptr> & RpmDb::getPackages()
     report.end(excpt_r);
     ZYPP_RETHROW(excpt_r);
   }
+#warning fixme
+  static const std::list<Package::Ptr> empty_list;
+  return empty_list;
 }
 
 
