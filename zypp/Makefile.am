@@ -106,6 +106,7 @@ lib@PACKAGE@_la_LIBADD =        base/lib@PACKAGE@_base.la	\
 				url/lib@PACKAGE@_url.la		\
 				\
 				target/lib@PACKAGE@_target.la	\
+				solver/lib@PACKAGE@_solver.la	\
 				-lutil
 # solver/lib@PACKAGE@_solver.la   
 
