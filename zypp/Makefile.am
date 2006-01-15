@@ -28,6 +28,7 @@ pkginclude_HEADERS = NeedAType.h \
 	ResObject.h	\
 	Resolvable.h	\
 	ResTraits.h	\
+	ResStore.h	\
 	Package.h	\
 	Pathname.h	\
 	Selection.h	\
@@ -78,6 +79,7 @@ lib@PACKAGE@_la_SOURCES = \
 	ResObject.cc	\
 	Resolvable.cc	\
 	ResTraits.cc	\
+	ResStore.cc	\
 	Package.cc	\
 	Pathname.cc	\
 	Selection.cc	\
