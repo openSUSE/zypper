@@ -10,3 +10,6 @@ Comments to the yast (PHI) test cases
 
 - A limited conflict (foo <= 1.2) also triggers for 'foo' in rc but not in phi
   (exercise-04obsoletes-03-test.xml)
+
+
+FIXME: xfail contains testcases which currently fail

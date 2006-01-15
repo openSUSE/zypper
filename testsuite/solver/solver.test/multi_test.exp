@@ -19,7 +19,12 @@
 #
 # The testcase is successful if the program returns 0 AND
 # the "...diff" file is empty
-
+#
+# Additionally, if a subdirectory contains the file "xfail",
+# it is supposed to contain the filename of testcases which
+# are expected to fail
+#
+#
 if { [catch {  set filenames [glob $srcdir/*.multi] } ] } {
     puts "No .multi files found"
 } else {

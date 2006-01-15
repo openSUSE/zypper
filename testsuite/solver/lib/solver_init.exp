@@ -136,6 +136,14 @@ proc multi-run { src } {
 	  continue
       }
 
+      set xfails [list ]
+      set xfailname "$dircase/xfail"
+      if { [ file exists $xfailname] != 0 } {
+	set fp [open $xfailname r]
+	set xfails [read $fp]
+	close $fp
+      }
+
       #							look for *-test.xml
       set testcases [glob $dircase/*-test.xml ]
 
@@ -145,6 +153,12 @@ proc multi-run { src } {
 	  set testPathLen  [llength $testPath]
 	  set testFilename [lindex $testPath [expr $testPathLen-1]]
 	  set testDirname [lindex $testPath [expr $testPathLen-2]]
+
+	  set expect_to_fail 0
+	  if { [lsearch $xfails $testFilename] != -1 } {
+	    set expect_to_fail 1
+	  }
+
 	  set testFname [split $testFilename "."]
 	  set testBase_name [lindex $testFname 0]
 	  puts "   ... $testDirname/$testFilename" 
@@ -181,6 +195,10 @@ proc multi-run { src } {
 	  set oops [catch { set result [exec sh -c $command] } catched]
 
 	  if { [ file exists $solutionfile ] == 0 } {
+	      if { $expect_to_fail == 1 } {
+		xfail $testBase_name
+		continue
+	      }
 	      perror "Testcase $testFilename has no solution" 0
 	  } else {
 	      set command "/usr/bin/diff -u $solutionfile $mistakefile > $difffile"
@@ -188,6 +206,10 @@ proc multi-run { src } {
 	      if { $oops != "0" } {
 #		  puts "Output doesn't match expected data:"
 #		  puts [ exec sh -c "cat $difffile" ]
+		  if { $expect_to_fail == 1 } {
+		    xfail $testBase_name
+		    continue
+		  }
 		  fail $testBase_name
 		  set errorOccured 0
 		  continue

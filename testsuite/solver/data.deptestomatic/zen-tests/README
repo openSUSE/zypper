@@ -1,5 +1,7 @@
 Additional libredcarpet testcases for ZENworks functionality.
 
+FIXME: xfail contains testcases which currently fail
+
 Install a package which has a require provided by multiple available packages.
 Package A requires 'a' (any version)
 
