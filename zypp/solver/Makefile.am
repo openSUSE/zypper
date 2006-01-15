@@ -5,7 +5,7 @@ SUBDIRS = detail temporary
 
 ## ##################################################
 
-include_HEADERS =
+include_HEADERS = libzypp_solver.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_solver.la
 
