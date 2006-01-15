@@ -44,15 +44,11 @@ namespace zypp
       /**  */
       virtual const Kind & kind() const;
 
-      /** Return whether the Capabilities match. */
+      /** Same kind, refers and filename. */
       virtual CapMatch matches( const constPtr & rhs ) const;
 
-      /**  */
-      virtual std::string asString() const;
-
-    protected:
-      /** Implementation dependent value. */
-      virtual std::string value() const;
+      /** Filename. */
+      virtual std::string encode() const;
 
     private:
       /**  */

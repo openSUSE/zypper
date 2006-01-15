@@ -44,16 +44,12 @@ namespace zypp
       typedef CapTraitsBase::KindType  Kind;
 
     public:
-      /** Ctor taking the kind of Resolvable \c this refers to.*/
-      CapabilityImpl( const Resolvable::Kind & refers_r );
-
-    public:
-      /** Kind of capabiliy.  */
-      virtual const Kind & kind() const = 0;
-
       /** Kind of Resolvable \c this refers to. */
       const Resolvable::Kind & refers() const
       { return _refers; }
+
+      /** Kind of capabiliy.  */
+      virtual const Kind & kind() const = 0;
 
       /** Relevant per default. */
       virtual bool relevant() const
@@ -64,29 +60,32 @@ namespace zypp
       */
       virtual CapMatch matches( const constPtr & rhs ) const = 0;
 
-      /** More or less human readable representation as string. */
-      virtual std::string asString() const = 0;
+      /** The string representation that enables \ref CapFactory
+       * to recreate this capability.
+       * \todo check it!
+      */
+      virtual std::string encode() const = 0;
 
-      /** Usg. string representation without edition range. */
-      std::string index() const
-      { return value(); }
+      /** More or less human readable representation as string.
+       * Suitable for displaying it at the UI. Defaults to
+       * \ref encode.
+      */
+      virtual std::string asString() const
+      { return encode(); }
 
-      /** \todo check it. */
-      std::string encode() const
-      { return asString(); }
+      /** \deprecated A string representation usg. without
+       * edition range. All Capabilities that match each other
+       * must have the same index. That's ugly, but the way the
+       * solver currently uses it.
+      */
+      virtual std::string index() const
+      { return encode(); }
+
+    protected:
+      /** Ctor taking the kind of Resolvable \c this refers to.*/
+      CapabilityImpl( const Resolvable::Kind & refers_r );
 
     protected: // Match helpers
-      /** Implementation dependent value. */
-      virtual std::string value() const
-      { return asString(); }
-
-      /** Implementation dependent value. */
-      virtual Edition::Range editionRange() const
-      { return Edition::Range(); }
-
-      bool sameIndex( const constPtr & rhs ) const
-      { return index() == rhs->index(); }
-
       bool sameKind( const constPtr & rhs ) const
       { return kind() == rhs->kind(); }
 
@@ -95,22 +94,6 @@ namespace zypp
 
       bool sameKindAndRefers( const constPtr & rhs ) const
       { return sameKind( rhs ) && sameRefers( rhs ); }
-
-      /** Match by value if \a condition_r is \c true. */
-      bool matchValueIf( bool condition_r, const constPtr & rhs ) const
-      { return condition_r && value() == rhs->value(); }
-
-      /** Match by value. */
-      bool matchValue( const constPtr & rhs ) const
-      { return matchValueIf( true, rhs ); }
-
-      /** Match by editionRange if \a condition_r is \c true. */
-      bool matchEditionRangeIf( bool condition_r, const constPtr & rhs ) const
-      { return condition_r && editionRange().overlaps( rhs->editionRange() ); }
-
-      /** Match by editionRange. */
-      bool matchEditionRange( const constPtr & rhs ) const
-      { return matchEditionRangeIf( true, rhs ); }
 
     protected:
       /** Helper for stream output. */
@@ -127,7 +110,7 @@ namespace zypp
        * and \c kind values are equal to \c this. Implementation
        * may concentrate on the remaining values.
        *
-       * \todo make it pure virt?
+       * Default compares \ref encoded.
       */
       virtual bool capImplOrderLess( const constPtr & rhs ) const;
     };
@@ -141,6 +124,11 @@ namespace zypp
     template<class _Cap>
       inline bool isKind( const CapabilityImpl::constPtr & cap )
       { return cap && cap->kind() == CapTraits<_Cap>::kind; }
+
+    /** Short for dynamic_pointer_cast. */
+    template<class _Cap>
+      inline intrusive_ptr<const _Cap> asKind( const CapabilityImpl::constPtr & cap )
+      { return dynamic_pointer_cast<const _Cap>(cap); }
 
     ///////////////////////////////////////////////////////////////////
 

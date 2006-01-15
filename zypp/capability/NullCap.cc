@@ -38,10 +38,13 @@ namespace zypp
     const CapabilityImpl::Kind & NullCap::kind() const
     { return CapTraits<Self>::kind; }
 
-    CapMatch NullCap::matches( const constPtr & rhs ) const
-    { return sameKind( rhs ); }
+    bool NullCap::relevant() const
+    { return false; }
 
-    std::string NullCap::asString() const
+    CapMatch NullCap::matches( const constPtr & rhs ) const
+    { return CapMatch::irrelevant; }
+
+    std::string NullCap::encode() const
     { return std::string(); }
 
     /////////////////////////////////////////////////////////////////

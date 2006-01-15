@@ -48,13 +48,14 @@ namespace zypp
       /**  */
       virtual const Kind & kind() const;
 
-      /** Return whether the Capabilities match.
-       * A NullCap matches NullCap only.
-      */
+      /** Not relevant. */
+      virtual bool relevant() const;
+
+      /** Iirrelevant. */
       virtual CapMatch matches( const constPtr & rhs ) const;
 
-      /**  */
-      virtual std::string asString() const;
+      /** Empty string. */
+      virtual std::string encode() const;
 
     private:
       /** Singleton */

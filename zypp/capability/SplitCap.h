@@ -27,16 +27,16 @@ namespace zypp
     //
     /** A pseudo Capability indicating a package split.
      *
+     * <tt>packagename:/absolute/path</tt> means: If \c packagename is
+     * installed on system, and has <tt>/absolute/path</tt> in it's
+     * filelist, and is to be replaced/updated, then this package
+     * (the one providing the SplitCap) should be installed too.
+     *
      * \todo implement matches().
      * \todo See where and how we handle it. Currently the info is
      * just stored here. Splits <tt>packagename:/absolute/path</tt>
      * are shipped as \c provides (SuSE packages file), but have to
      * be freshens, and implemented as ConditionalCap.
-     *
-     * <tt>packagename:/absolute/path</tt> means: If \c packagename is
-     * installed on system, and has <tt>/absolute/path</tt> in it's
-     * filelist, and is to be replaced/updated, then this package
-     * (the one providing the SplitCap) should be installed too.
     */
     class SplitCap : public CapabilityImpl
     {
@@ -58,11 +58,11 @@ namespace zypp
       virtual bool relevant() const
       { return false; }
 
-      /** Return whether the Capabilities match. */
+      /** */
       virtual CapMatch matches( const constPtr & rhs ) const;
 
-      /**  */
-      virtual std::string asString() const;
+      /**  <tt>name:/path</tt> */
+      virtual std::string encode() const;
 
     private:
       /**  */

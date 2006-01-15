@@ -24,12 +24,12 @@ namespace zypp
     { return CapTraits<Self>::kind; }
 
     CapMatch FileCap::matches( const constPtr & rhs ) const
-    { return matchValueIf( sameKindAndRefers( rhs ), rhs ); }
+    {
+      return (    sameKindAndRefers( rhs )
+               && _fname == asKind<Self>(rhs)->_fname );
+    }
 
-    std::string FileCap::asString() const
-    { return _fname; }
-
-    std::string FileCap::value() const
+    std::string FileCap::encode() const
     { return _fname; }
 
     /////////////////////////////////////////////////////////////////

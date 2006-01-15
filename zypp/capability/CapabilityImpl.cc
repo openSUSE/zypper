@@ -39,7 +39,7 @@ namespace zypp
     //
     bool CapabilityImpl::capImplOrderLess( const constPtr & rhs ) const
     {
-      return asString() < rhs->asString();
+      return encode() < rhs->encode();
     }
 
     ///////////////////////////////////////////////////////////////////

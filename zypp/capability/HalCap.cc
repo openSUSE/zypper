@@ -6,13 +6,13 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/capability/VersionedCap.h
+/** \file zypp/capability/HalCap.cc
  *
 */
-#ifndef ZYPP_CAPABILITY_VERSIONEDCAP_H
-#define ZYPP_CAPABILITY_VERSIONEDCAP_H
+#include "zypp/capability/HalCap.h"
+#include "zypp/target/hal/Hal.h"
 
-#include "zypp/capability/NamedCap.h"
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -21,42 +21,51 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : VersionedCap
-    //
-    /** A \ref NamedCap providing an Edition::MatchRange.
-     * Overloads \ref encode and provides the \ref range.
-     * Remaining stuff is handles in \ref NamedCap.
-    */
-    class VersionedCap : public NamedCap
+    const CapabilityImpl::Kind & HalCap::kind() const
+    { return CapTraits<Self>::kind; }
+
+    CapMatch HalCap::matches( const constPtr & rhs ) const
     {
-    public:
-      /** Ctor */
-      VersionedCap( const Resolvable::Kind & refers_r,
-                    const std::string & name_r,
-                    Rel op_r,
-                    const Edition & edition_r )
-      : NamedCap( refers_r, name_r )
-      , _range( op_r, edition_r )
-      {}
+      if ( sameKindAndRefers( rhs ) )
+        {
+          intrusive_ptr<const Self> halrhs( asKind<Self>(rhs) );
+          if ( isEvalCmd() == halrhs->isEvalCmd() )
+            return CapMatch::irrelevant;
 
-    public:
-      /** Name Op Editon. */
-      virtual std::string encode() const;
+          return( isEvalCmd() ? halrhs->evaluate() : evaluate() );
+        }
+      return false;
+    }
 
-      /** Name only. */
-      virtual std::string index() const;
+    std::string HalCap::encode() const
+    {
+      std::string ret( "hal(" );
+      ret += _name;
+      ret += ")";
+      if ( _op != Rel::ANY )
+        {
+          ret += " ";
+          ret += _op.asString();
+          ret += " ";
+          ret += _value;
+        }
+      return ret;
+    }
 
-    protected:
-      /** Implementation dependent value. */
-      virtual const Edition::MatchRange & range() const;
+    std::string HalCap::index() const
+    {
+      std::string ret( "hal(" );
+      ret += _name;
+      return ret += ")";
+    }
 
-    private:
-      /**  */
-      Edition::MatchRange _range;
-    };
-    ///////////////////////////////////////////////////////////////////
+    bool HalCap::isEvalCmd() const
+    { return _name.empty(); }
+
+    bool HalCap::evaluate() const
+    {
+      return target::hal::Hal::instance().query( _name, _op, _value );
+    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace capability
@@ -64,4 +73,3 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_CAPABILITY_VERSIONEDCAP_H

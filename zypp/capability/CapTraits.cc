@@ -25,10 +25,12 @@ namespace zypp
       const CapTraitsBase::KindType CapTraits<FileCap>       ::kind( "FileCap" );
     template<>
       const CapTraitsBase::KindType CapTraits<NamedCap>      ::kind( "NamedCap" );
-    template<>
-      const CapTraitsBase::KindType CapTraits<VersionedCap>  ::kind( "VersionedCap" );
+    template<>                                               // VersionedCap IsA NamedCap
+      const CapTraitsBase::KindType CapTraits<VersionedCap>  ::kind( "NamedCap" );
     template<>
       const CapTraitsBase::KindType CapTraits<SplitCap>      ::kind( "SplitCap" );
+    template<>
+      const CapTraitsBase::KindType CapTraits<HalCap>        ::kind( "HalCap" );
     template<>
       const CapTraitsBase::KindType CapTraits<OrCap>         ::kind( "OrCap" );
     template<>

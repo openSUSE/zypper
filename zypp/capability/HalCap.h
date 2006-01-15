@@ -6,11 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/capability/NamedCap.h
+/** \file zypp/capability/HalCap.h
  *
 */
-#ifndef ZYPP_CAPABILITY_NAMEDCAP_H
-#define ZYPP_CAPABILITY_NAMEDCAP_H
+#ifndef ZYPP_CAPABILITY_HALCAP_H
+#define ZYPP_CAPABILITY_HALCAP_H
 
 #include "zypp/capability/CapabilityImpl.h"
 
@@ -23,42 +23,69 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : NamedCap
+    //	CLASS NAME : HalCap
     //
-    /** A \c name and optional Edition::MatchRange.
-     * To provide an Edition::MatchRange create a \ref VersionedCap.
+    /** A Capability resolved by a query to target::hal.
+     *
+     * \note HalCap is special as it is self evaluating, and does not
+     * comapre to the \a rhs (or \a lhs). This is currently solved by
+     * treating a HalCap with an empty name as evaluate command.
+     *
+     * \ref matches returns \c CapMatch::irrelevant, if either both sides
+     * are evaluate commands, or both are not.
+     *
+     * Otherwise the result of the query to target::hal is returned.
+     * Either from \a lhs or \a rhs, dependent on which one is the
+     * evaluate command.
     */
-    class NamedCap : public CapabilityImpl
+    class HalCap : public CapabilityImpl
     {
     public:
-      typedef NamedCap Self;
+      typedef HalCap Self;
 
+    public:
       /** Ctor */
-      NamedCap( const Resolvable::Kind & refers_r, const std::string & name_r )
+      HalCap( const Resolvable::Kind & refers_r, const std::string & name_r )
       : CapabilityImpl( refers_r )
       , _name( name_r )
+      {}
+
+      /** Ctor */
+      HalCap( const Resolvable::Kind & refers_r,
+              const std::string & name_r,
+              Rel op_r,
+              const std::string & value_r )
+      : CapabilityImpl( refers_r )
+      , _name( name_r )
+      , _op( op_r )
+      , _value( value_r )
       {}
 
     public:
       /**  */
       virtual const Kind & kind() const;
 
-      /** Return whether the Capabilities match. */
+      /** Query target::Hal. */
       virtual CapMatch matches( const constPtr & rhs ) const;
 
-      /** Name. */
+      /** <tt>hal(name) [op value]</tt> */
       virtual std::string encode() const;
 
-    protected:
-      /**  */
-      const std::string & name() const
-      { return _name; }
-      /**  Rel::ANY. */
-      virtual const Edition::MatchRange & range() const;
+      /** <tt>hal(name)</tt> */
+      virtual std::string index() const;
+
+    private:
+      /** Empty HalCap <tt>hal()</tt> */
+      bool isEvalCmd() const;
+
+      /** Query target::Hal. */
+      bool evaluate() const;
 
     private:
       /**  */
       std::string _name;
+      Rel _op;
+      std::string _value;
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -68,4 +95,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_CAPABILITY_NAMEDCAP_H
+#endif // ZYPP_CAPABILITY_HALCAP_H

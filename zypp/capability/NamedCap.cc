@@ -23,28 +23,25 @@ namespace zypp
     const CapabilityImpl::Kind & NamedCap::kind() const
     { return CapTraits<Self>::kind; }
 
-    std::string NamedCap::asString() const
-    { return _name; }
-
     CapMatch NamedCap::matches( const constPtr & rhs ) const
     {
-      if ( sameRefers( rhs ) )
+      if ( sameKindAndRefers( rhs ) )
         {
-          if ( sameKind( rhs ) )
-            {
-              return matchValue( rhs );
-            }
-          else if ( isKind<VersionedCap>( rhs ) )
-            {
-              // matchEditionRange in case VersionedCap has Rel::NONE
-              return matchValue( rhs ) && matchEditionRange( rhs );
-            }
+          intrusive_ptr<const Self> namedrhs( asKind<Self>(rhs) );
+          return(    _name == namedrhs->_name
+                  && range().overlaps( namedrhs->range() ) );
         }
       return false;
     }
 
-    std::string NamedCap::value() const
+    std::string NamedCap::encode() const
     { return _name; }
+
+    const Edition::MatchRange & NamedCap::range() const
+    {
+      static Edition::MatchRange _range;
+      return _range;
+    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace capability

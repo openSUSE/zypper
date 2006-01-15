@@ -23,13 +23,13 @@ namespace zypp
     const CapabilityImpl::Kind & SplitCap::kind() const
     { return CapTraits<Self>::kind; }
 
-    std::string SplitCap::asString() const
-    { return _name + ":" + _path; }
-
     CapMatch SplitCap::matches( const constPtr & rhs ) const
     {
       return CapMatch::irrelevant;
     }
+
+    std::string SplitCap::encode() const
+    { return _name + ":" + _path; }
 
     /////////////////////////////////////////////////////////////////
   } // namespace capability

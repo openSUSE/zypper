@@ -19,6 +19,7 @@
 #include "zypp/capability/NamedCap.h"
 #include "zypp/capability/VersionedCap.h"
 #include "zypp/capability/SplitCap.h"
+#include "zypp/capability/HalCap.h"
 //#include "zypp/capability/OrCap.h"
 //#include "zypp/capability/ConditionalCap.h"
 
