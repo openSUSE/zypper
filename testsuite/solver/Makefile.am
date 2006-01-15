@@ -21,7 +21,10 @@ deptestomatic_multi_SOURCES =				\
 
 EXTRA_DIST = config/*.exp lib/*.exp $(PACKAGE).test/*.exp data.deptestomatic
 
+dist-local: clean-local
+
 clean-local:
-	rm -rf data.deptestomatic/*/out
-	rm -rf data.deptestomatic/*/out
+	rm -rf data.deptestomatic/*/*.out
+	rm -rf data.deptestomatic/*/*.diff
+	rm -rf data.deptestomatic/*/*.mistake
 	rm -rf single.out/out
