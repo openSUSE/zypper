@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 #
 # packages_to_xml.rb
 #

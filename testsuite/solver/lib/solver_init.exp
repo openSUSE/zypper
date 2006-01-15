@@ -116,11 +116,15 @@ proc multi-run { src } {
   set test_prg  "$filename"
 
   set base_name [lindex $fname 0]
-  set base_name "data.$base_name"
 
-  puts "Running $base_name..."
+  #							the data.<name> directory
+  set basedir_name "data.$base_name"
 
-  set dircases [glob $base_name/* ]
+  puts "Running $basedir_name..."
+
+  #							scan through all subdirs below data.<name>
+  set dircases [glob $basedir_name/* ]
+
   foreach dircase $dircases { 
       set testPath [split $dircase "/"]
       set testFilename [lindex $testPath [expr [llength $testPath]-1]]
@@ -131,24 +135,31 @@ proc multi-run { src } {
 	  puts "   ignoring $testBase_name"
 	  continue
       }
+
+      #							look for *-test.xml
       set testcases [glob $dircase/*-test.xml ]
+
       foreach testcase $testcases { 
+
 	  set testPath [split $testcase "/"]
-	  set testFilename [lindex $testPath [expr [llength $testPath]-1]]
+	  set testPathLen  [llength $testPath]
+	  set testFilename [lindex $testPath [expr $testPathLen-1]]
+	  set testDirname [lindex $testPath [expr $testPathLen-2]]
 	  set testFname [split $testFilename "."]
 	  set testBase_name [lindex $testFname 0]
-	  puts "   ... $testBase_name" 
+	  puts "   ... $testDirname/$testFilename" 
 
 	  #generate output directory
 
-	  exec mkdir -p ./$dircase/out
-	  set outfile ./$dircase/out/$testBase_name.mistake
-	  set outfilegrep ./$dircase/out/$testBase_name.grep
-	  set refoutfile ./$dircase/$testBase_name.solution
+	  set outfile ./$dircase/$testBase_name.out
+	  set mistakefile ./$dircase/$testBase_name.mistake
+	  set difffile ./$dircase/$testBase_name.diff
+	  set solutionfile ./$dircase/$testBase_name.solution
 
 	  # run the test
 
-	  set command "LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:../src/.libs\" $src $testcase >$outfile 2>$outfile"
+#	  set command "LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:../src/.libs\" $src $testcase >$outfile 2>$outfile"
+	  set command "$src $testcase >$outfile 2>$outfile"
 	  set result ""
 	  set oops [catch { set result [exec sh -c $command] } catched]
 
@@ -166,15 +177,17 @@ proc multi-run { src } {
 	      continue
 	  }
 
-	  set command "/usr/bin/fgrep \'>!>\' $outfile >$outfilegrep"
+	  set command "/usr/bin/fgrep \'>!>\' $outfile >$mistakefile"
 	  set oops [catch { set result [exec sh -c $command] } catched]
 
-	  if { [ file exists $refoutfile ] == 0 } {
-	      perror "Missing file $refoutfile" 0
+	  if { [ file exists $solutionfile ] == 0 } {
+	      perror "Testcase $testFilename has no solution" 0
 	  } else {
-	      if { [ diff $refoutfile $outfilegrep ] != 1 } {
-		  puts "Output doesn't match expected data:"
-		  puts [ exec sh -c "diff -u $refoutfile $outfilegrep || true" ]
+	      set command "/usr/bin/diff -u $solutionfile $mistakefile > $difffile"
+	      set oops [catch { set result [exec sh -c $command] } catched]
+	      if { $oops != "0" } {
+#		  puts "Output doesn't match expected data:"
+#		  puts [ exec sh -c "cat $difffile" ]
 		  fail $testBase_name
 		  set errorOccured 0
 		  continue
