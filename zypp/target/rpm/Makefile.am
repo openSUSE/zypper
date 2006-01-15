@@ -5,7 +5,9 @@ SUBDIRS =
 
 ## ##################################################
 
-include_HEADERS = 		\
+targetrpmincludedir = $(pkgincludedir)/target/rpm
+
+targetrpminclude_HEADERS = 		\
 	librpm.h		\
 	RpmException.h		\
 	BinHeader.h		\

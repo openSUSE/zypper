@@ -5,7 +5,9 @@ SUBDIRS =
 
 ## ##################################################
 
-include_HEADERS = \
+capabilityincludedir = $(pkgincludedir)/capability
+
+capabilityinclude_HEADERS = \
 	CapabilityImpl.h\
 	CapTraits.h	\
 	Capabilities.h	\

@@ -7,7 +7,9 @@ INCLUDES = -I$(oldincludedir)/libxml2 -I..
 
 ## ##################################################
 
-include_HEADERS = \
+parseryumincludedir = $(pkgincludedir)/parser/yum
+
+parseryuminclude_HEADERS = \
 	YUMFileListParser.h	\
 	YUMOtherParser.h	\
 	YUMParser.h		\

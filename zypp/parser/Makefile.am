@@ -7,7 +7,9 @@ INCLUDES = -I$(oldincludedir)/libxml2
 
 ## ##################################################
 
-include_HEADERS = \
+parserincludedir = $(pkgincludedir)/parser
+
+parserinclude_HEADERS = \
 	XMLNodeIterator.h	\
 	LibXMLHelper.h		\
 	\

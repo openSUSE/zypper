@@ -5,7 +5,9 @@ SUBDIRS =
 
 ## ##################################################
 
-include_HEADERS = \
+detailincludedir = $(pkgincludedir)/detail
+
+detailinclude_HEADERS = \
 	ResolvableImpl.h	\
 	ResObjectImplIf.h	\
 	ResObjectFactory.h	\

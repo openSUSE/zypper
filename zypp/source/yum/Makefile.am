@@ -5,7 +5,9 @@ SUBDIRS =
 
 ## ##################################################
 
-include_HEADERS =			\
+sourceyumincludedir = $(pkgincludedir)/source/yum
+
+sourceyuminclude_HEADERS =			\
 	YUMSource.h			\
 	YUMScriptImpl.h			\
 	YUMMessageImpl.h		\

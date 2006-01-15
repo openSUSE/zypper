@@ -9,7 +9,9 @@ INCLUDES = 						\
 	-I/usr/include/libxml2 -I/usr/include/rpm	\
 	-DG_LOG_DOMAIN=\"solver_temporary\"
 
-include_HEADERS = \
+solvertemporaryincludedir = $(pkgincludedir)/solver/temporary
+
+solvertemporaryinclude_HEADERS = \
 	utils.h				\
 	extract.h			\
 	Hash.h				\

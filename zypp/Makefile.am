@@ -5,7 +5,7 @@ SUBDIRS = base url media capability detail parser source target solver
 
 ## ##################################################
 
-include_HEADERS = NeedAType.h \
+pkginclude_HEADERS = NeedAType.h \
 	Arch.h		\
 	ByteCount.h	\
 	Capability.h	\

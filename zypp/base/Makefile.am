@@ -5,7 +5,9 @@ SUBDIRS =
 
 ## ##################################################
 
-include_HEADERS =	\
+baseincludedir = $(pkgincludedir)/base
+
+baseinclude_HEADERS =	\
 	Debug.h		\
 	Fd.h		\
 	KindOf.h	\

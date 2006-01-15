@@ -5,7 +5,9 @@ SUBDIRS =
 
 ## ##################################################
 
-include_HEADERS =	\
+urlincludedir = $(pkgincludedir)/url
+
+urlinclude_HEADERS =	\
 	UrlBase.h	\
 	UrlUtils.h
 

@@ -7,7 +7,9 @@ INCLUDES = -I$(oldincludedir)/libxml2
 
 ## ##################################################
 
-include_HEADERS = 		\
+mediaincludedir = $(pkgincludedir)/media
+
+mediainclude_HEADERS = 		\
 	MediaException.h	\
 	MediaAccess.h		\
 	MediaHandler.h		\

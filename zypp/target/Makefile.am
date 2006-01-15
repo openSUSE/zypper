@@ -5,7 +5,9 @@ SUBDIRS = hal rpm
 
 ## ##################################################
 
-include_HEADERS =
+targetincludedir = $(pkgincludedir)/target
+
+targetinclude_HEADERS =
 
 ## ##################################################
 

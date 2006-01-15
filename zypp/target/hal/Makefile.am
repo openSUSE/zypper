@@ -15,7 +15,9 @@ INCLUDES = \
 
 ## ##################################################
 
-include_HEADERS =	\
+targethalincludedir = $(pkgincludedir)/target/hal
+
+targethalinclude_HEADERS =	\
 	Hal.h
 
 

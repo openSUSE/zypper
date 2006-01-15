@@ -5,7 +5,9 @@ SUBDIRS = yum
 
 ## ##################################################
 
-include_HEADERS =	\
+sourceincludedir = $(pkgincludedir)/source
+
+sourceinclude_HEADERS =	\
 	Source.h
 
 

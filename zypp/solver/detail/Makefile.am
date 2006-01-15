@@ -10,7 +10,9 @@ INCLUDES = 						\
 	-DG_LOG_DOMAIN=\"solver_detail\"		\
 	-DPHI
 
-include_HEADERS = \
+solverdetailincludedir = $(pkgincludedir)/solver/detail
+
+solverdetailinclude_HEADERS = \
 	ResItemAndDependency.h		\
 	ResItemAndDependencyPtr.h	\
 	Importance.h			\
