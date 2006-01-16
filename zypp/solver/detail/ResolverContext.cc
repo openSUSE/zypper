@@ -376,8 +376,7 @@ ResolverContext::uninstallResItem (ResItem_constPtr resItem, bool part_of_upgrad
 
     if (status == RESOLVABLE_STATUS_TO_BE_INSTALLED) {
 	// Translator: %s = name of packages,patch,...
-	msg = str::form (_("%s is scheduled to be installed, but this is not possible because of dependency problems."),
-			 resItem->asString().c_str());
+	msg = str::form (_("%s is scheduled to be installed, but this is not possible because of dependency problems."), resItem->asString().c_str());
 	addErrorString (resItem, msg);
 	return false;
     }
@@ -390,8 +389,7 @@ ResolverContext::uninstallResItem (ResItem_constPtr resItem, bool part_of_upgrad
     if (status == RESOLVABLE_STATUS_UNINSTALLED
 	|| status == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK) {
 	// Translator: %s = name of packages,patch,...
-	msg = str::form (_("Marking resolvable %s as uninstallable"),
-			 resItem->asString().c_str());
+	msg = str::form (_("Marking resolvable %s as uninstallable"), resItem->asString().c_str());
 	addInfoString (resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
     }
 
@@ -413,7 +411,17 @@ ResolverContext::uninstallResItem (ResItem_constPtr resItem, bool part_of_upgrad
 bool
 ResolverContext::satisfyResItem (ResItem_constPtr resItem, int other_penalty)
 {
-#warning implement me
+    ResItemStatus status;
+
+    _DBG("RC_SPEW") << "ResolverContext[" << this << "]::satisfyResItem(" << resItem->asString() << ")" << endl;
+
+    status = getStatus (resItem);
+
+    if (status == RESOLVABLE_STATUS_INSTALLED
+	|| status == RESOLVABLE_STATUS_UNINSTALLED) {
+	setStatus (resItem, RESOLVABLE_STATUS_SATISFIED);
+    }
+
     return true;
 }
 
@@ -421,7 +429,13 @@ ResolverContext::satisfyResItem (ResItem_constPtr resItem, int other_penalty)
 bool
 ResolverContext::incompleteResItem (ResItem_constPtr resItem, int other_penalty)
 {
-#warning implement me
+    _DBG("RC_SPEW") << "ResolverContext[" << this << "]::incompleteResItem(" << resItem->asString() << ")" << endl;
+
+//    ResItemStatus status;
+//    status = getStatus (resItem);
+
+    setStatus (resItem, RESOLVABLE_STATUS_INCOMPLETE);
+
     return true;
 }
 
