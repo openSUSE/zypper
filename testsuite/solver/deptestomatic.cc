@@ -308,10 +308,11 @@ static void
 undump (const std::string & filename)
 {
     UndumpWorld_Ptr undump_world;
+    std::string pathname = globalPath + filename;
 
-    undump_world = new UndumpWorld (filename);
+    undump_world = new UndumpWorld (pathname);
     if (undump_world == NULL) {
-	fprintf (stderr, "Couldn't undump from file '%s'", filename.c_str());
+	fprintf (stderr, "Couldn't undump from file '%s'", pathname.c_str());
 	return;
     }
 
