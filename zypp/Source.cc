@@ -6,42 +6,47 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/source/Source.h
+/** \file zypp/Source.cc
  *
 */
-#ifndef ZYPP_DETAIL_SOURCE_H
-#define ZYPP_DETAIL_SOURCE_H
+#include <cassert>
 
-#include <string>
+#include <iostream>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
+#include "zypp/Source.h"
+#include "zypp/source/SourceImpl.h"
+
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace source
-  { /////////////////////////////////////////////////////////////////
-    DEFINE_PTR_TYPE(Source)
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : Source
-    //
-    /**
-     * \todo Assert \c deps provide 'name=edition'.
-    */
-    class Source : public base::ReferenceCounted, private base::NonCopyable
-    {
-    public:
-    };
-    ///////////////////////////////////////////////////////////////////
+  IMPL_PTR_TYPE(Source)
 
-    /////////////////////////////////////////////////////////////////
-  } // namespace source
   ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Source::Source
+  //	METHOD TYPE : Ctor
+  //
+  Source::Source( Impl_Ptr impl_r )
+  : _pimpl( impl_r )
+  {
+    assert( impl_r );
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	Forward to SourceImpl:
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  const ResStore & Source::resolvables() const
+  { return _pimpl->resolvables(); }
+
+  std::ostream & Source::dumpOn( std::ostream & str ) const
+  { return _pimpl->dumpOn( str ); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_DETAIL_SOURCE_H

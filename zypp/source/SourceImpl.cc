@@ -6,14 +6,15 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/source/Source.cc
+/** \file	zypp/source/SourceImpl.cc
  *
 */
 #include <iostream>
+#include "zypp/base/Logger.h"
 
-#include "zypp/source/Source.h"
+#include "zypp/source/SourceImpl.h"
 
-using namespace std;
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -21,10 +22,25 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace source
   { /////////////////////////////////////////////////////////////////
-    IMPL_PTR_TYPE(Source)
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : SourceImpl::SourceImpl
+    //	METHOD TYPE : Ctor
+    //
+    SourceImpl::SourceImpl()
+    {}
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : SourceImpl::~SourceImpl
+    //	METHOD TYPE : Dtor
+    //
+    SourceImpl::~SourceImpl()
+    {}
 
     /////////////////////////////////////////////////////////////////
-  } // namespace detail
+  } // namespace source
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

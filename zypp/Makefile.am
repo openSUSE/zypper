@@ -32,6 +32,7 @@ pkginclude_HEADERS = NeedAType.h \
 	Package.h	\
 	Pathname.h	\
 	Selection.h	\
+	Source.h	\
 	Pattern.h	\
 	Message.h	\
 	Script.h	\
@@ -83,6 +84,7 @@ lib@PACKAGE@_la_SOURCES = \
 	Package.cc	\
 	Pathname.cc	\
 	Selection.cc	\
+	Source.cc	\
 	Pattern.cc	\
 	Message.cc	\
 	Script.cc	\

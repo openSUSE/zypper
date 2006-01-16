@@ -12,7 +12,7 @@
 #ifndef ZYPP_SOURCE_YUM_YUMSOURCE_H
 #define ZYPP_SOURCE_YUM_YUMSOURCE_H
 
-#include "zypp/source/Source.h"
+#include "zypp/source/SourceImpl.h"
 #include "zypp/parser/yum/YUMParserData.h"
 #include "zypp/Package.h"
 #include "zypp/Message.h"
@@ -38,7 +38,7 @@ namespace zypp
       //
       /** Class representing a YUM installation source
       */
-      class YUMSource : public source::Source
+      class YUMSource : public SourceImpl
       {
       public:
         /** Default ctor */
