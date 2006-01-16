@@ -14,8 +14,6 @@
 
 #include <iosfwd>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/ResStore.h"
@@ -23,7 +21,6 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  DEFINE_PTR_TYPE(Source)
   namespace source
   {
     class SourceImpl;
@@ -34,13 +31,14 @@ namespace zypp
   //	CLASS NAME : Source
   //
   /**
-   *
+   * \note Source is a reference to the implementation. No COW
+   * is performed.
   */
-  class Source : public base::ReferenceCounted, private base::NonCopyable
+  class Source
   {
   public:
-    typedef source::SourceImpl Impl;
-    typedef shared_ptr<Impl>   Impl_Ptr;
+    typedef source::SourceImpl  Impl;
+    typedef intrusive_ptr<Impl> Impl_Ptr;
 
   public:
 
@@ -52,7 +50,7 @@ namespace zypp
     friend class SourceFactory;
     /** Factory ctor */
     explicit
-    Source( Impl_Ptr impl_r );
+    Source( const Impl_Ptr & impl_r );
 
   private:
     friend std::ostream & operator<<( std::ostream & str, const Source & obj );
@@ -61,7 +59,7 @@ namespace zypp
 
   public:
     /** Pointer to implementation */
-    RW_pointer<Impl> _pimpl;
+    RW_pointer<Impl,rw_pointer::Intrusive<Impl> > _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 

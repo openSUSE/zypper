@@ -22,14 +22,12 @@ using namespace std;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  IMPL_PTR_TYPE(Source)
-
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Source::Source
   //	METHOD TYPE : Ctor
   //
-  Source::Source( Impl_Ptr impl_r )
+  Source::Source( const Impl_Ptr & impl_r )
   : _pimpl( impl_r )
   {
     assert( impl_r );

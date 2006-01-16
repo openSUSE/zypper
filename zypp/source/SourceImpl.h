@@ -14,6 +14,8 @@
 
 #include <iosfwd>
 
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/ResStore.h"
 
@@ -33,7 +35,7 @@ namespace zypp
      * Constructed by \ref SourceFactory. Public access via \ref Source
      * interface.
     */
-    class SourceImpl
+    class SourceImpl : public base::ReferenceCounted, private base::NonCopyable
     {
       friend std::ostream & operator<<( std::ostream & str, const SourceImpl & obj );
 

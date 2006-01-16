@@ -8,8 +8,8 @@ SUBDIRS = susetags yum
 sourceincludedir = $(pkgincludedir)/source
 
 sourceinclude_HEADERS =	\
-	SourceImpl.h
-
+	SourceImpl.h	\
+	Builtin.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_source.la
 

@@ -6,44 +6,58 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/source/SourceImpl.cc
+/** \file	zypp/SourceFactory.h
  *
 */
-#include <iostream>
-#include "zypp/base/Logger.h"
+#ifndef ZYPP_SOURCEFACTORY_H
+#define ZYPP_SOURCEFACTORY_H
 
-#include "zypp/source/SourceImpl.h"
+#include <iosfwd>
 
-using std::endl;
+#include "zypp/base/PtrTypes.h"
+
+#include "zypp/Source.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
   ///////////////////////////////////////////////////////////////////
-  namespace source
-  { /////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : SourceFactory
+  //
+  /** Factory to create a \ref Source.
+   * Actually a Singleton
+   *
+  */
+  class SourceFactory
+  {
+    friend std::ostream & operator<<( std::ostream & str, const SourceFactory & obj );
 
-    IMPL_PTR_TYPE(SourceImpl);
+  public:
+    /** Default ctor */
+    SourceFactory();
+    /** Dtor */
+    ~SourceFactory();
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : SourceImpl::SourceImpl
-    //	METHOD TYPE : Ctor
-    //
-    SourceImpl::SourceImpl()
-    {}
+  public:
+    /** Construct source from an implementation.
+     * \throw EXCEPTION on NULL \a impl_r
+    */
+    Source createFrom( const Source::Impl_Ptr & impl_r );
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : SourceImpl::~SourceImpl
-    //	METHOD TYPE : Dtor
-    //
-    SourceImpl::~SourceImpl()
-    {}
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace source
+  private:
+    /** Implementation  */
+    class Impl;
+    /** Pointer to implementation */
+    RW_pointer<Impl> _pimpl;
+  };
   ///////////////////////////////////////////////////////////////////
+
+  /** \relates SourceFactory Stream output */
+  extern std::ostream & operator<<( std::ostream & str, const SourceFactory & obj );
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_SOURCEFACTORY_H

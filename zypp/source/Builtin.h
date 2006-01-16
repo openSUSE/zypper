@@ -6,15 +6,17 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/source/SourceImpl.cc
+/** \file	zypp/source/Builtin.h
  *
+ * Include all builtin Source implementations.
 */
-#include <iostream>
-#include "zypp/base/Logger.h"
+#ifndef ZYPP_SOURCE_BUILTIN_H
+#define ZYPP_SOURCE_BUILTIN_H
+
+#include <iosfwd>
 
 #include "zypp/source/SourceImpl.h"
-
-using std::endl;
+#include "zypp/source/yum/YUMSource.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -23,27 +25,10 @@ namespace zypp
   namespace source
   { /////////////////////////////////////////////////////////////////
 
-    IMPL_PTR_TYPE(SourceImpl);
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : SourceImpl::SourceImpl
-    //	METHOD TYPE : Ctor
-    //
-    SourceImpl::SourceImpl()
-    {}
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : SourceImpl::~SourceImpl
-    //	METHOD TYPE : Dtor
-    //
-    SourceImpl::~SourceImpl()
-    {}
-
     /////////////////////////////////////////////////////////////////
   } // namespace source
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_SOURCE_BUILTIN_H
