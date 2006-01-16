@@ -4378,9 +4378,9 @@ Homepage: http://www.jclark.com/jade/</description>
       </history>
       <requires>
         <dep name="libc6" op="&gt;=" version="2.2.3" release="1"/>
-        <dep name="libsp1" op="&gt;=" version="1.3.4-1.2.1" release="1"/>
+        <dep name="libsp1" op="&gt;=" version="1.3.4_1.2.1" release="1"/>
         <dep name="libstdc++2.10-glibc2.2"/>
-        <dep name="libsp1" op="&gt;=" version="1.3.4-1.2.1" release="1"/>
+        <dep name="libsp1" op="&gt;=" version="1.3.4_1.2.1" release="1"/>
         <dep name="sgml-base"/>
       </requires>
       <suggests>
@@ -13889,7 +13889,7 @@ Homepage: http://www.jclark.com/sp/</description>
       <section>util</section>
       <history>
         <update>
-          <version>1.3.4-1.2.1</version>
+          <version>1.3.4_1.2.1</version>
           <release>18</release>
           <filename>dummy.rpm</filename>
           <filesize>0</filesize>
@@ -13900,9 +13900,9 @@ Homepage: http://www.jclark.com/sp/</description>
       </history>
       <requires>
         <dep name="libc6" op="&gt;=" version="2.2.1"/>
-        <dep name="libsp1" op="&gt;=" version="1.3.4-1.2.1" release="1"/>
+        <dep name="libsp1" op="&gt;=" version="1.3.4_1.2.1" release="1"/>
         <dep name="libstdc++2.10-glibc2.2"/>
-        <dep name="libsp1" op="&gt;=" version="1.3.4-1.2.1" release="1"/>
+        <dep name="libsp1" op="&gt;=" version="1.3.4_1.2.1" release="1"/>
         <dep name="sgml-base"/>
       </requires>
       <suggests>
@@ -13910,7 +13910,7 @@ Homepage: http://www.jclark.com/sp/</description>
         <dep name="sgml-data"/>
       </suggests>
       <provides>
-        <dep name="sp" op="=" version="1.3.4-1.2.1" release="18"/>
+        <dep name="sp" op="=" version="1.3.4_1.2.1" release="18"/>
       </provides>
     </package>
     <package>
@@ -13927,7 +13927,7 @@ Homepage: http://www.jclark.com/sp/</description>
       <section>library</section>
       <history>
         <update>
-          <version>1.3.4-1.2.1</version>
+          <version>1.3.4_1.2.1</version>
           <release>18</release>
           <filename>dummy.rpm</filename>
           <filesize>0</filesize>
@@ -13943,7 +13943,7 @@ Homepage: http://www.jclark.com/sp/</description>
         <dep name="sp" op="&lt;=" version="1.3-1.1" release="6"/>
       </conflicts>
       <provides>
-        <dep name="libsp1" op="=" version="1.3.4-1.2.1" release="18"/>
+        <dep name="libsp1" op="=" version="1.3.4_1.2.1" release="18"/>
       </provides>
     </package>
     <package>
