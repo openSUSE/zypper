@@ -22,6 +22,7 @@
 #include "zypp/Package.h"
 #include "zypp/detail/PackageImpl.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
 #include "zypp/CapFactory.h"
 #include "zypp/CapSet.h"
 
@@ -74,7 +75,7 @@ parseXmlDep (XmlNode_constPtr node) {
     tmp = node->getProp ("op");
     if (!tmp.empty()) {
         relation = Rel(tmp);
-        epoch = node->getIntValueDefault ("epoch", Edition::noepoch);
+        epoch = str::numstring(node->getIntValueDefault ("epoch", Edition::noepoch));
         version = node->getProp ("version");
         release = node->getProp ("release");
     }
