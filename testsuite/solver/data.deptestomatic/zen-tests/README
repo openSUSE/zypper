@@ -135,6 +135,8 @@ result:
   Upgrade C-2 over C-1 (prefer upgrades over new installations)
 
 12.
+Nothing installed, select A and require B-3.i386 (prefer highest version)
+
 package A
   require 'b' > 1.0
 package B
@@ -155,6 +157,26 @@ result:
   arch is not used in vercmp)
 
 13.
+Have B-1.i586 installed , select A and require B-2.i586 (prefer matching arch over higher version)
+
+package A
+  require 'b' > 1.0
+package B
+  arch = i586
+  version 2
+  provide 'b' = 2.0
+package B
+  arch = i386
+  version 3
+  provide 'b' = 3.0
+package B
+  arch = i586
+  version 1
+  provide 'b' = 1.0
+  installed
+result:
+  Install A, upgrade B-3.i386 to B-2.i586 (prefer the latest version,
+  arch is not used in vercmp)
  like 12, but upgrade to B-2.i586 instead
   (prefer equal arch over higher version)
 
