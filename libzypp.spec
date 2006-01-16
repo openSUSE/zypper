@@ -20,7 +20,7 @@ BuildRoot:    %{_tmppath}/%{name}-%{version}-build
 Autoreqprov:  on
 Obsoletes:    yast2-packagemanager
 Summary:      Package, Patch, Pattern, Product Management
-Version:      1.0.0
+Version:      0.0.0
 Release:      0
 Source:       zypp-0.0.0.tar.bz2
 prefix:       /usr
@@ -68,8 +68,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %dir %{_libdir}/libzypp.so
 %dir %{_libdir}/libzypp.la
-%dir %{_docdir}
-%{_docdir}
+%dir %{_docdir}/zypp
+%{_docdir}/zypp/*
 %dir %{prefix}/include/zypp
 %{prefix}/include/zypp/*
 %dir %{prefix}/share/zypp
