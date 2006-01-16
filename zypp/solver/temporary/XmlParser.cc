@@ -555,13 +555,27 @@ XmlParser::packageEnd(const char *name)
 
     if (!strcmp(name, "package")) {
 	PackageUpdate_Ptr update = NULL;
-
 	/* If possible, grab the version info from the most recent update.
 	 * Otherwise, try to find where the package provides itself and use
 	 * that version info.
 	 */
+	// searching the highest version. It is not sure anymore that the last
+	// has highest version
 	if (!_current_package_packageUpdateList.empty())
-	    update = _current_package_packageUpdateList.back();
+	{
+	    for (PackageUpdateList::iterator iter = _current_package_packageUpdateList.begin();
+		 iter != _current_package_packageUpdateList.end();
+		 iter++)
+	    {
+		if (!update)
+		    update = *iter;
+		else
+		{
+		    if (update->edition() < (*iter)->edition())
+			update = *iter;			
+		}
+	    }
+	}
 
 	if (update) {
 	    _current_package_name = update->name();
