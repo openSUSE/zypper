@@ -4,6 +4,8 @@
    A-1.1 is available
    Patch-A-1.1 is available
 
+   - freshen -
+
    : install patch-A-1-1
    : install A-1.1
 -->
@@ -13,6 +15,6 @@
   <channel name="test" file="exercise-1-packages.xml"/>
 </setup>
 <trial>
-  <establish/>
+  <freshen/>
 </trial>
 </test>
