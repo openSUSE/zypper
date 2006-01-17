@@ -1458,7 +1458,7 @@ The `Makefile.am' is basically a series of `make' macro definitions
       <section>devel</section>
       <history>
         <update>
-          <version>1.4-p4</version>
+          <version>1.4_p4</version>
           <release>1</release>
           <filename>dummy.rpm</filename>
           <filesize>0</filesize>
@@ -1472,7 +1472,7 @@ The `Makefile.am' is basically a series of `make' macro definitions
         <dep name="autotools-dev" op="&gt;=" version="20010511.2"/>
       </requires>
       <provides>
-        <dep name="automake" op="=" version="1.4-p4" release="1"/>
+        <dep name="automake" op="=" version="1.4_p4" release="1"/>
       </provides>
     </package>
     <package>
