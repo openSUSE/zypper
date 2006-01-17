@@ -34,7 +34,7 @@ namespace zypp
   {
     friend std::ostream & operator<<( std::ostream & str, const ResStore & obj );
 
-    typedef std::set<ResObject::Ptr> StorageT;
+    typedef std::set<Resolvable::Ptr> StorageT;
 
   public:
     /** Implementation  */
@@ -73,14 +73,14 @@ namespace zypp
 
     // insert/erase
     /**  */
-    iterator insert( const ResObject::Ptr & ptr_r )
+    iterator insert( const Resolvable::Ptr & ptr_r )
     { return store().insert( ptr_r ).first; }
     /**  */
     template <class _InputIterator>
       void insert( _InputIterator first_r, _InputIterator last_r )
       { store().insert( first_r, last_r ); }
     /**  */
-    size_type erase( const ResObject::Ptr & ptr_r )
+    size_type erase( const Resolvable::Ptr & ptr_r )
     { return store().erase( ptr_r ); }
     /**  */
     void erase( iterator first_r, iterator last_r )
@@ -91,10 +91,10 @@ namespace zypp
 
     /** Query inerface.
      * Both, \a filter_r and \a fnc_r are expected to be
-     * functions or functors taking a <tt>ResObject::Ptr<\tt>
+     * functions or functors taking a <tt>Resolvable::Ptr<\tt>
      * as argument and return a \c bool.
      *
-     * forEach iterates over all ResObjects and invokes \a fnc_r,
+     * forEach iterates over all Resolvables and invokes \a fnc_r,
      * iff \a filter_r returned \c true. If \a fnc_r returnes
      * \c false the loop is aborted.
      *
