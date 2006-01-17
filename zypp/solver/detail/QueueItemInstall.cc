@@ -369,7 +369,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	/* Construct establish items for each of those which freshen this resolvable. */
 
 	EstablishFreshensInfo info = { world(), &qil };
-	CapFactory  factory;
+	CapFactory factory;
 	Capability cap = factory.parse (resItem->kind(), resItem->name(), Rel::EQ, resItem->edition());
 	world()->foreachFresheningResItem (cap, establish_freshens_cb, &info);
 
