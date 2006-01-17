@@ -219,14 +219,12 @@ bool RpmDb::setInstallationLogfile( const Pathname & filename )
  * list<Package::Ptr> returned. We have to assert, that there
  * is a unique entry for every string.
  *
- * In the first step we build the _index map which helps to catch
- * multiple occurances of a string in the rpmdb. That's not desired,
- * but possible. Usg. the last package instance installed is strored
- * in the _index map.
+ * In the first step we build the _list list which contains all
+ * packages (even those which are contained in multiple versions).
  *
- * At the end buildList() is called to build the list<Package::Ptr>
- * from the _index map. _valid is set true to assign that the list
- * is in sync with the rpmdb content. Operations changing the rpmdb
+ * At the end buildIndex() is called to build the _index is created
+ * and points to the last installed versions of all packages.
+ * Operations changing the rpmdb
  * content (install/remove package) should set _valid to false. The
  * next call to RpmDb::getPackages() will then reread the the rpmdb.
  *
@@ -251,12 +249,25 @@ class RpmDb::Packages {
 	return got->second;
       return Package::Ptr();
     }
-    void buildList() {
-      _list.clear();
-      for ( map<string,Package::Ptr>::iterator iter = _index.begin();
-	    iter != _index.end(); ++iter ) {
-	if ( iter->second )
-	  _list.push_back( iter->second );
+    void buildIndex() {
+      _index.clear();
+      for ( list<Package::Ptr>::iterator iter = _list.begin();
+            iter != _list.end(); ++iter )
+      {
+        string name = (*iter)->name();
+        Package::Ptr & nptr = _index[name]; // be shure to get a reference!
+
+        if ( nptr ) {
+          WAR << "Multiple entries for package '" << name << "' in rpmdb" << endl;
+          if ( nptr->installtime() > (*iter)->installtime() )
+	    continue;
+          else
+	    nptr = *iter;
+        }
+	else
+	{
+	  nptr = *iter;
+	}
       }
       _valid = true;
     }
@@ -1017,6 +1028,8 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
       continue;
     }
     Date installtime = iter->tag_installtime();
+#if 0
+This prevented from having packages multiple times
     Package::Ptr & nptr = _packages._index[name]; // be shure to get a reference!
 
     if ( nptr ) {
@@ -1025,6 +1038,7 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
 	continue;
       // else overwrite previous entry
     }
+#endif
 
     // create dataprovider
     shared_ptr<RPMPackageImpl> impl(new RPMPackageImpl(*iter));
@@ -1067,9 +1081,11 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
     dataCollect.obsoletes   = iter->tag_obsoletes( &_filerequires );
 
     // create package from dataprovider
-    nptr = detail::makeResolvableFromImpl( dataCollect, impl );
-
+    Package::Ptr nptr = detail::makeResolvableFromImpl( dataCollect, impl );
+    _packages._list.push_back(nptr);
   }
+  _packages.buildIndex();
+  DBG << "Found installed packages: " << _packages._list.size() << endl;
 
   ///////////////////////////////////////////////////////////////////
   // Evaluate filerequires collected so far
@@ -1090,8 +1106,6 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
   ///////////////////////////////////////////////////////////////////
   // Build final packages list
   ///////////////////////////////////////////////////////////////////
-  _packages.buildList();
-  DBG << "Found installed packages: " << _packages._list.size() << endl;
   return _packages._list;
 }
 
