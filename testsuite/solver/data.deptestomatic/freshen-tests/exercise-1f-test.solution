@@ -1,8 +1,10 @@
->!> Establishing state ...
->!> Establishing patch:Patch-A-1.1-1[test]
->!> Established context
->!> patch:Patch-A-1.1-1[test] incomplete
->!> Solution #1:
->!> install patch:Patch-A-1.1-1[test]
->!> upgrade A-1.0-1 => A-1.1-1[test]
->!> installs=1, upgrades=1, uninstalls=0
+--- ./data.deptestomatic/freshen-tests/exercise-1f-test.solution	2006-01-17 13:26:36.000000000 +0100
++++ ./data.deptestomatic/freshen-tests/exercise-1f-test.mistake	2006-01-17 13:32:38.000000000 +0100
+@@ -2,6 +2,7 @@
+ >!> Establishing patch:Patch-A-1.1-1[test]
+ >!> Established context
+ >!> patch:Patch-A-1.1-1[test] incomplete
++>!> Freshening ...
+ >!> Solution #1:
+ >!> install patch:Patch-A-1.1-1[test]
+ >!> upgrade A-1.0-1 => A-1.1-1[test]
