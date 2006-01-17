@@ -308,11 +308,8 @@ Resolver::establishState (void)
     typedef list<Resolvable::Kind> KindList; 
     static KindList ordered;
     if (ordered.empty()) {
-	ordered.push_back (ResTraits<zypp::Script>::kind);
-	ordered.push_back (ResTraits<zypp::Message>::kind);
 	ordered.push_back (ResTraits<zypp::Patch>::kind);
-#warning where is zypp::Pattern ?
-//	ordered.push_back (ResTraits<zypp::Pattern>::kind);
+	ordered.push_back (ResTraits<zypp::Pattern>::kind);
 	ordered.push_back (ResTraits<zypp::Product>::kind);
     }
 
