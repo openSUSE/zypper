@@ -247,7 +247,7 @@ ResolverQueue::processOnce ()
 	for (QueueItemList::iterator iter = _items.begin(); iter != _items.end() && _context->isValid();) {
 	    QueueItem_Ptr item = *iter;
 	    _DBG("QUEUE_SPEW") <<  "=====> 1st pass: [" << item->asString() << "]" << endl;
-	    QueueItemList::iterator next = iter; next++;
+	    QueueItemList::iterator next = iter; ++next;
 	    if (item && item->priority() == max_priority) {
 		if (item->process (_context, new_items)) {
 		    did_something_recently = true;
