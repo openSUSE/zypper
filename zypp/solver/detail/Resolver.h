@@ -133,7 +133,7 @@ namespace zypp
           void addExtraConflict (const Capability & dependency);
 
           void verifySystem (void);
-          void establishState (void);
+          void establishState (const ResolverContext_Ptr context = NULL);
           void resolveDependencies (const ResolverContext_Ptr context = NULL);
 
 	  void reset (void);

@@ -51,6 +51,7 @@ typedef enum {
     RESOLVABLE_STATUS_UNKNOWN = 0,
     RESOLVABLE_STATUS_INSTALLED,
     RESOLVABLE_STATUS_SATISFIED,
+    RESOLVABLE_STATUS_UNNEEDED,
     RESOLVABLE_STATUS_INCOMPLETE,
     RESOLVABLE_STATUS_UNINSTALLED,
     RESOLVABLE_STATUS_TO_BE_INSTALLED,
@@ -64,6 +65,7 @@ typedef enum {
 #define resItem_status_is_to_be_uninstalled(x) (((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED) || ((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE) || ((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK))
 #define resItem_status_is_satisfied(x) ((x) == RESOLVABLE_STATUS_SATISFIED)
 #define resItem_status_is_incomplete(x) ((x) == RESOLVABLE_STATUS_INCOMPLETE)
+#define resItem_status_is_unneeded(x) ((x) == RESOLVABLE_STATUS_UNNEEDED)
 
 typedef std::map<ResItem_constPtr, ResItemStatus> StatusTable;
 typedef std::list<ResolverInfo_Ptr> InfoList;
@@ -147,6 +149,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     //   they do some checking before calling setStatus()
     bool installResItem (ResItem_constPtr resItem, bool is_soft, int other_penalty);
     bool satisfyResItem (ResItem_constPtr resItem, int other_penalty);
+    bool unneededResItem (ResItem_constPtr resItem, int other_penalty);
     bool incompleteResItem (ResItem_constPtr resItem, int other_penalty);
     bool upgradeResItem (ResItem_constPtr new_resItem, ResItem_constPtr old_resItem, bool is_soft, int other_penalty);
     bool uninstallResItem (ResItem_constPtr resItem, bool part_of_upgrade, bool due_to_obsolete, bool due_to_unlink);

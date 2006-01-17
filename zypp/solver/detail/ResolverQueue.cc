@@ -108,8 +108,9 @@ ResolverQueue::addResItemToInstall (ResItem_constPtr resItem)
 {
     QueueItemInstall_Ptr item;
 
-    if (_context->resItemIsPresent (resItem)) {
-	printf ("%s is already installed\n", resItem->asString().c_str());
+    if (_context->resItemIsPresent (resItem)
+	&& (!resItem_status_is_satisfied(_context->getStatus (resItem)))) {
+	WAR << resItem->asString() << " is already installed" << endl;
 	return;
     }
 

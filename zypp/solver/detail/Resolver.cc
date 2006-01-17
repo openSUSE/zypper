@@ -302,7 +302,7 @@ trial_establish_cb (ResItem_constPtr resItem, void *user_data)
 
 
 void
-Resolver::establishState (void)
+Resolver::establishState (ResolverContext_Ptr context)
 {
     _DBG("RC_SPEW") << "Resolver::establishState ()" << endl;
     typedef list<Resolvable::Kind> KindList; 
@@ -313,7 +313,8 @@ Resolver::establishState (void)
 	ordered.push_back (ResTraits<zypp::Product>::kind);
     }
 
-    ResolverContext_Ptr context = new ResolverContext();
+    if (context == NULL)
+	context = new ResolverContext();
 
     for (KindList::const_iterator iter = ordered.begin(); iter != ordered.end(); iter++) {
 	const Resolvable::Kind kind = *iter;

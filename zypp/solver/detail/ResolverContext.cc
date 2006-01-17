@@ -59,6 +59,8 @@ ResolverContext::toString (const ResItemStatus & status)
 	// Translator: status of a package,patch,...		    
 	case RESOLVABLE_STATUS_INSTALLED:			ret = _("installed"); break;
 	// Translator: status of a package,patch,...		    
+	case RESOLVABLE_STATUS_UNNEEDED:			ret = _("unneeded"); break;
+	// Translator: status of a package,patch,...		    
 	case RESOLVABLE_STATUS_SATISFIED:			ret = _("satisfied"); break;
 	// Translator: status of a package,patch,...		    
 	case RESOLVABLE_STATUS_INCOMPLETE:			ret = _("incomplete"); break;
@@ -200,7 +202,7 @@ ResolverContext::setStatus (ResItem_constPtr resItem, ResItemStatus status)
     if (_invalid) return;
 
     ResItemStatus old_status = getStatus (resItem);
-
+cerr << "ResolverContext::setStatus " << resItem->asString() << ": " << toString(old_status) << " -> " << toString(status) << endl;
     if (status != old_status) {
 	_status[resItem] = status;
     }
@@ -273,7 +275,7 @@ ResolverContext::installResItem (ResItem_constPtr resItem, bool is_soft, int oth
 	return false;
     }
 
-    if (resItem_status_is_satisfied (status)) {
+    if (resItem_status_is_unneeded (status)) {
 	msg = str::form (_("Can't install %s since it is does not apply to this system."), resItem->asString().c_str());
 	addErrorString (resItem, msg);
 	return false;
@@ -415,17 +417,39 @@ ResolverContext::uninstallResItem (ResItem_constPtr resItem, bool part_of_upgrad
 
 
 bool
-ResolverContext::satisfyResItem (ResItem_constPtr resItem, int other_penalty)
+ResolverContext::unneededResItem (ResItem_constPtr resItem, int other_penalty)
 {
     ResItemStatus status;
 
-    _DBG("RC_SPEW") << "ResolverContext[" << this << "]::satisfyResItem(" << resItem->asString() << ")" << endl;
+    _DBG("RC_SPEW") << "ResolverContext[" << this << "]::unneededResItem(" << resItem->asString() << ")" << endl;
 
     status = getStatus (resItem);
 
     if (status == RESOLVABLE_STATUS_INSTALLED
 	|| status == RESOLVABLE_STATUS_UNINSTALLED) {
+	setStatus (resItem, RESOLVABLE_STATUS_UNNEEDED);
+    }
+
+    return true;
+}
+
+
+bool
+ResolverContext::satisfyResItem (ResItem_constPtr resItem, int other_penalty)
+{
+    ResItemStatus status;
+
+    status = getStatus (resItem);
+
+    _DBG("RC_SPEW") << "ResolverContext[" << this << "]::satisfyResItem(" << resItem->asString() << ":" << toString(status) << ")" << endl;
+
+    if (status == RESOLVABLE_STATUS_INSTALLED
+	|| status == RESOLVABLE_STATUS_UNINSTALLED
+	|| status == RESOLVABLE_STATUS_UNNEEDED) {
 	setStatus (resItem, RESOLVABLE_STATUS_SATISFIED);
+    }
+    else {
+	WAR << "Can't satisfy " << resItem->asString() << " is is already " << toString(status) << endl;
     }
 
     return true;
@@ -458,6 +482,8 @@ ResolverContext::incompleteResItem (ResItem_constPtr resItem, int other_penalty)
 
 //---------------------------------------------------------------------------
 
+// is it installed (after transaction) ?
+// if yes, install/requires requests are considered done
 bool
 ResolverContext::resItemIsPresent (ResItem_constPtr resItem)
 {
@@ -468,10 +494,15 @@ ResolverContext::resItemIsPresent (ResItem_constPtr resItem)
     if (status == RESOLVABLE_STATUS_UNKNOWN)
 	return false;
 
-    return (status == RESOLVABLE_STATUS_INSTALLED) || resItem_status_is_to_be_installed (status);
+    return (status == RESOLVABLE_STATUS_INSTALLED)
+	    || resItem_status_is_to_be_installed (status)
+	    || resItem_status_is_satisfied (status)
+	    || resItem_status_is_unneeded (status);
 }
 
 
+// is it uninstalled (after transaction) ?
+// if yes, uninstall requests are considered done
 bool
 ResolverContext::resItemIsAbsent (ResItem_constPtr resItem)
 {
@@ -481,7 +512,10 @@ ResolverContext::resItemIsAbsent (ResItem_constPtr resItem)
     if (status == RESOLVABLE_STATUS_UNKNOWN)
 	return false;
 
-    return status == RESOLVABLE_STATUS_UNINSTALLED || resItem_status_is_to_be_uninstalled (status);
+    // DONT add incomplete here, uninstall requests for incompletes must be handled
+
+    return (status == RESOLVABLE_STATUS_UNINSTALLED)
+	   || resItem_status_is_to_be_uninstalled (status);
 }
 
 
@@ -1187,13 +1221,13 @@ requirement_met_cb (ResItem_constPtr resItem, const Capability & cap, void *data
     // info->dep is set for resItem set children. If it is set, query the
     //   exact version only.
     if ((info->dep == NULL
-	       || *(info->dep) == cap)
+	 || *(info->dep) == cap)
 	&& info->context->resItemIsPresent (resItem))
     {
 	info->flag = true;
     }
 
-//fprintf (stderr, "requirement_met_cb(%s, %s) [info->dep %s] -> %s\n", resItem->asString().c_str(), cap.asString().c_str(), info->dep != NULL ? info->dep->asString().c_str() : "(none)", info->flag ? "true" : "false");
+fprintf (stderr, "requirement_met_cb(%s, %s) [info->dep %s] -> %s\n", resItem->asString().c_str(), cap.asString().c_str(), info->dep != NULL ? info->dep->asString().c_str() : "(none)", info->flag ? "true" : "false");
     return ! info->flag;
 }
 

@@ -207,15 +207,15 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    _DBG("RC_SPEW") <<  "still needed " << endl;
 
 	    for (CResItemList::const_iterator iter = _needed_by.begin(); iter != _needed_by.end() && !still_needed; iter++) {
-	        ResItemStatus status = context->getStatus (*iter);
-	        _DBG("RC_SPEW") << "by: [status: " << ResolverContext::toString(status) << "] " << (*iter)->asString() << endl;
-	        if (! resItem_status_is_to_be_uninstalled (status)) {
+		ResItemStatus status = context->getStatus (*iter);
+		_DBG("RC_SPEW") << "by: [status: " << ResolverContext::toString(status) << "] " << (*iter)->asString() << endl;
+		if (! resItem_status_is_to_be_uninstalled (status)) {
 		      still_needed = true;
-	        }
+		}
 	    }
 
 	    if (! still_needed)
-	        goto finished;
+		goto finished;
 	}
 
 	/* If we are in verify mode and this install is about to fail, don't let it happen...
@@ -229,8 +229,8 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    QueueItemUninstall_Ptr uninstall_item;
 
 	    for (CResItemList::const_iterator iter = _needed_by.begin(); iter != _needed_by.end(); iter++) {
-	        uninstall_item = new QueueItemUninstall (world(), *iter, "uninstallable resolvable");
-	        qil.push_front (uninstall_item);
+		uninstall_item = new QueueItemUninstall (world(), *iter, "uninstallable resolvable");
+		qil.push_front (uninstall_item);
 	    }
 
 	    goto finished;
@@ -243,7 +243,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	    _DBG("RC_SPEW")  << "simple install of " <<  resItem->asString(true) << endl;
 
-	    context->installResItem (resItem, context->verifying(), /* is_soft */ _other_penalty);
+	    context->installResItem (resItem, context->verifying() /* is_soft */, _other_penalty);
 
 	} else {
 
@@ -251,13 +251,13 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	    _DBG("RC_SPEW") << "upgrade install of " << resItem->asString() << endl;
 
-	    context->upgradeResItem (resItem, _upgrades, context->verifying(), /* is_soft */ _other_penalty);
+	    context->upgradeResItem (resItem, _upgrades, context->verifying() /* is_soft */, _other_penalty);
 
 	    uninstall_item = new QueueItemUninstall (world(), _upgrades, "upgrade");
 	    uninstall_item->setUpgradedTo (resItem);
 
 	    if (_explicitly_requested)
-	        uninstall_item->setExplicitlyRequested ();
+		uninstall_item->setExplicitlyRequested ();
 
 	    qil.push_front (uninstall_item);
 	}
@@ -306,10 +306,10 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    const Capability dep = *iter;
 	    _DBG("RC_SPEW") << "this requires " << dep.asString() << endl;
 	    if (!context->requirementIsMet (dep)) {
-	        _DBG("RC_SPEW") << "this requires " << dep.asString() << endl;
-	        QueueItemRequire_Ptr req_item = new QueueItemRequire (world(), dep);
-	        req_item->addResItem (resItem);
-	        qil.push_front (req_item);
+		_DBG("RC_SPEW") << "this requires " << dep.asString() << endl;
+		QueueItemRequire_Ptr req_item = new QueueItemRequire (world(), dep);
+		req_item->addResItem (resItem);
+		qil.push_front (req_item);
 	    }
 	}
 
@@ -354,7 +354,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	     * exist on the system at a time.
 	     */
 	    if (conflicting_resItem->equals (resItem)) {
-	        continue;
+		continue;
 	    }
 
 	    _DBG("RC_SPEW") << "because: '" << conflicting_resItem->asString(true) << "'" << endl;

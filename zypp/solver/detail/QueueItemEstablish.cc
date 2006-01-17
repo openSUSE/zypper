@@ -123,7 +123,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
     _DBG("RC_SPEW") << "QueueItemEstablish::process(" << asString() << ")" << endl;
 
-    _DBG("RC_SPEW") << "simple establish of " << _resItem->asString() << endl;
+    _DBG("RC_SPEW") << "simple establish of " << _resItem->asString() << " with " << _resItem->freshens().size() << " freshens" << endl;
 
     string msg = string ("Establishing ") + _resItem->name();
 
@@ -143,11 +143,12 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	}
     }
 
-    // if none of the freshen deps were met, mark the _resItem as satisfied
+    // if we have freshens but none of the freshen deps were met, mark the _resItem as unneeded
     // else we look at its requires to set it to satisfied or incomplete
-    if (iter == deps.end()) {
-	_DBG("RC_SPEW") << "this freshens nothing -> satisfied" << endl;
-	context->satisfyResItem (_resItem, _other_penalty);
+    if (deps.size() > 0
+	&& iter == deps.end()) {
+	_DBG("RC_SPEW") << "this freshens nothing -> unneeded" << endl;
+	context->unneededResItem (_resItem, _other_penalty);
     }
     else {
 	deps = _resItem->requires();
