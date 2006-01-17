@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
 <!--
+   Nothing is installed
    A-1.1 is available
-   Patch-A-1.1 is available
+   Patch-A-1.1 is available but unneeded
    Patch-A-1.1 is to be installed
 
-   : Patch-A-1-1 is installed
+   : ERROR Patch-A-1-1 does not apply
 -->
-<test allow_virtual_conflicts="yes">
+<test>
 <setup>
   <channel name="test" file="exercise-1-packages.xml"/>
 </setup>

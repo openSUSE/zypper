@@ -1,0 +1,5 @@
+>!> Establishing state ...
+>!> Establishing patch:Patch-A-1.1-1[test]
+>!> Established context
+>!> patch:Patch-A-1.1-1[test] unneeded
+>!> Installing Patch-A from channel test

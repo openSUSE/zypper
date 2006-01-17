@@ -2,12 +2,12 @@
 <!--
    A-1.1 is installed
    A-1.1 is available
-   Patch-A-1.1 is available
-   Patch-A-1.1 is to be installed
+   Patch-A-1.1 is available but satisfied
+   A-1.1 is to be uninstalled
 
-   : Patch-A-1-1 is installed
+   : Patch-A-1-1 is unneeded
 -->
-<test allow_virtual_conflicts="yes">
+<test>
 <setup>
   <system file="exercise-2-system.xml"/>
   <channel name="test" file="exercise-1-packages.xml"/>
@@ -15,5 +15,6 @@
 <trial>
   <establish/>
   <uninstall package="A"/>
+  <establish/>
 </trial>
 </test>

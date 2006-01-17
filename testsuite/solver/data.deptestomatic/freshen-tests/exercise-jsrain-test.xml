@@ -1,10 +1,17 @@
 <?xml version="1.0"?>
 <!--
+  A-1.0 installed
+
+  patch:foo-0:0-4 available, freshening foo < 2:3-4 -> unneeded
+  foo-2:3-4 available
+
   patch with script, message, and package
+
+  : patch unneeded
 -->
-<test allow_virtual_conflicts="yes">
+<test>
 <setup>
-  <system file="exercise-jsrain-system.xml"/>
+  <system file="exercise-1-system.xml"/>
   <channel name="test" file="exercise-jsrain-packages.xml"/>
 </setup>
 <trial>

@@ -6,12 +6,13 @@
 
    : Patch-A-1-1 is uninstalled
 -->
-<test allow_virtual_conflicts="yes">
+<test>
 <setup>
   <system file="exercise-1-packages.xml"/>
 </setup>
 <trial>
   <establish/>
   <uninstall kind="patch" package="Patch-A"/>
+  <establish/>
 </trial>
 </test>
