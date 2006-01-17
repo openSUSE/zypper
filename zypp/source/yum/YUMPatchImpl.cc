@@ -11,7 +11,7 @@
 */
 
 #include "zypp/source/yum/YUMPatchImpl.h"
-#include "zypp/source/yum/YUMSource.h"
+#include "zypp/source/yum/YUMSourceImpl.h"
 #include <zypp/CapFactory.h>
 #include "zypp/parser/yum/YUMParserData.h"
 #include <zypp/parser/yum/YUMParser.h>
@@ -44,7 +44,7 @@ namespace zypp
       */
       YUMPatchImpl::YUMPatchImpl(
 	const zypp::parser::yum::YUMPatchData & parsed,
-	YUMSource * src
+	YUMSourceImpl * src
       )
       {
 	_patch_id = parsed.patchId;

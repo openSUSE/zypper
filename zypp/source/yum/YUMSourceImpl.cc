@@ -6,11 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/source/yum/YUMSource.cc
+/** \file zypp/source/yum/YUMSourceImpl.cc
  *
 */
 
-#include "zypp/source/yum/YUMSource.h"
+#include "zypp/source/yum/YUMSourceImpl.h"
 #include "zypp/source/yum/YUMPackageImpl.h"
 #include "zypp/source/yum/YUMScriptImpl.h"
 #include "zypp/source/yum/YUMMessageImpl.h"
@@ -41,16 +41,16 @@ namespace zypp
     {
       ///////////////////////////////////////////////////////////////////
       //
-      //        CLASS NAME : YUMSource
+      //        CLASS NAME : YUMSourceImpl
       //
       ///////////////////////////////////////////////////////////////////
 
       /** Default ctor
       */
-      YUMSource::YUMSource()
+      YUMSourceImpl::YUMSourceImpl()
       {}
 
-      void YUMSource::parseSourceMetadata(std::string path)
+      void YUMSourceImpl::parseSourceMetadata(std::string path)
       {
        std::list<YUMRepomdData_Ptr> repo_primary;
        std::list<YUMRepomdData_Ptr> repo_files;
@@ -179,7 +179,7 @@ namespace zypp
 	        ? *found_other->second
 	        : other_empty
 	    );
-	    ERR << "Insert package " << *p << " into the pool" << endl;
+	    _store.insert (p);
 	  }
 	  if (prim.errorStatus())
 	    throw *prim.errorStatus();
@@ -205,7 +205,7 @@ namespace zypp
 	       ++group)
 	  {
 	    Selection::Ptr p = createGroup(**group);
-	    ERR << "Insert group " << *p << " into the pool" << endl;
+	    _store.insert (p);
 	  }
 	  if (group.errorStatus())
 	    throw *group.errorStatus();
@@ -231,7 +231,7 @@ namespace zypp
 	       ++pattern)
 	  {
 	    Pattern::Ptr p = createPattern(**pattern);
-	    ERR << "Insert pattern " << *p << " into the pool" << endl;
+	    _store.insert (p);
 	  }
 	  if (pattern.errorStatus())
 	    throw *pattern.errorStatus();
@@ -257,7 +257,7 @@ namespace zypp
 	       ++product)
 	  {
 	    Product::Ptr p = createProduct(**product);
-	    ERR << "Insert product " << *p << " into the pool" << endl;
+	    _store.insert (p);
 	  }
 	  if (product.errorStatus())
 	    throw *product.errorStatus();
@@ -304,13 +304,13 @@ namespace zypp
 	        ++ptch)
 	    {
 	      Patch::Ptr p = createPatch(**ptch);
-	      ERR << "Insert patch " << *p << " into the pool" << endl;
+	      _store.insert (p);
 	      Patch::AtomList atoms = p->atoms();
 	      for (Patch::AtomList::iterator at = atoms.begin();
 		at != atoms.end();
 		at++)
 	      {
-		ERR << "Inserting atom " << **at << " into the pool" << endl;
+	        _store.insert (*at);
 	      }
 	    }
 	    if (ptch.errorStatus())
@@ -323,7 +323,7 @@ namespace zypp
        }
       }
 
-	Package::Ptr YUMSource::createPackage(
+	Package::Ptr YUMSourceImpl::createPackage(
 	  const zypp::parser::yum::YUMPrimaryData & parsed,
 	  const zypp::parser::yum::YUMFileListData & filelist,
 	  const zypp::parser::yum::YUMOtherData & other
@@ -353,7 +353,7 @@ namespace zypp
 	  }
 	}
 
-	Package::Ptr YUMSource::createPackage(
+	Package::Ptr YUMSourceImpl::createPackage(
 	  const zypp::parser::yum::YUMPatchPackage & parsed
 	)
 	{
@@ -380,7 +380,7 @@ namespace zypp
 	  }
 	}
 
-	Selection::Ptr YUMSource::createGroup(
+	Selection::Ptr YUMSourceImpl::createGroup(
 	  const zypp::parser::yum::YUMGroupData & parsed
 	)
 	{
@@ -404,7 +404,7 @@ namespace zypp
 	  }
 	}
 
-	Pattern::Ptr YUMSource::createPattern(
+	Pattern::Ptr YUMSourceImpl::createPattern(
 	  const zypp::parser::yum::YUMPatternData & parsed
 	)
 	{
@@ -428,7 +428,7 @@ namespace zypp
 	  }
 	}
 
-	Message::Ptr YUMSource::createMessage(
+	Message::Ptr YUMSourceImpl::createMessage(
 	  const zypp::parser::yum::YUMPatchMessage & parsed
 	)
 	{
@@ -455,7 +455,7 @@ namespace zypp
 	  }
 	}
 
-	Script::Ptr YUMSource::createScript(
+	Script::Ptr YUMSourceImpl::createScript(
 	  const zypp::parser::yum::YUMPatchScript & parsed
 	)
 	{
@@ -482,7 +482,7 @@ namespace zypp
 	  }
 	}
 
-	Product::Ptr YUMSource::createProduct(
+	Product::Ptr YUMSourceImpl::createProduct(
 	  const zypp::parser::yum::YUMProductData & parsed
 	)
 	{
@@ -509,7 +509,7 @@ namespace zypp
 	  }
 	}
 
-	Patch::Ptr YUMSource::createPatch(
+	Patch::Ptr YUMSourceImpl::createPatch(
 	  const zypp::parser::yum::YUMPatchData & parsed
 	)
 	{
@@ -536,7 +536,7 @@ namespace zypp
 	  }
 	}
 
-	Dependencies YUMSource::createDependencies(
+	Dependencies YUMSourceImpl::createDependencies(
 	  const zypp::parser::yum::YUMObjectData & parsed,
 	  const Resolvable::Kind my_kind
 	)
@@ -583,7 +583,7 @@ namespace zypp
 	  return _deps;
 	}
 
-	Dependencies YUMSource::createGroupDependencies(
+	Dependencies YUMSourceImpl::createGroupDependencies(
 	  const zypp::parser::yum::YUMGroupData & parsed
 	)
 	{
@@ -628,7 +628,7 @@ namespace zypp
 	  return _deps;
 	}
 
-	Dependencies YUMSource::createPatternDependencies(
+	Dependencies YUMSourceImpl::createPatternDependencies(
 	  const zypp::parser::yum::YUMPatternData & parsed
 	)
 	{
@@ -673,7 +673,7 @@ namespace zypp
 	  return _deps;
 	}
 
-	Capability YUMSource::createCapability(const YUMDependency & dep,
+	Capability YUMSourceImpl::createCapability(const YUMDependency & dep,
 					       const Resolvable::Kind & my_kind)
 	{
 	  CapFactory _f;

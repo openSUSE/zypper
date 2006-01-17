@@ -8,7 +8,7 @@ SUBDIRS =
 sourceyumincludedir = $(pkgincludedir)/source/yum
 
 sourceyuminclude_HEADERS =		\
-	YUMSource.h			\
+	YUMSourceImpl.h			\
 	YUMScriptImpl.h			\
 	YUMMessageImpl.h		\
 	YUMPackageImpl.h		\
@@ -23,7 +23,7 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_source_yum.la
 ## ##################################################
 
 lib@PACKAGE@_source_yum_la_SOURCES =	\
-	YUMSource.cc			\
+	YUMSourceImpl.cc		\
 	YUMScriptImpl.cc		\
 	YUMMessageImpl.cc		\
 	YUMPackageImpl.cc		\

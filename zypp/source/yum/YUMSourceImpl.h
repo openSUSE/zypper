@@ -6,11 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/source/yum/YUMSource.h
+/** \file zypp/source/yum/YUMSourceImpl.h
  *
 */
-#ifndef ZYPP_SOURCE_YUM_YUMSOURCE_H
-#define ZYPP_SOURCE_YUM_YUMSOURCE_H
+#ifndef ZYPP_SOURCE_YUM_YUMSOURCEIMPL_H
+#define ZYPP_SOURCE_YUM_YUMSOURCEIMPL_H
 
 #include "zypp/source/SourceImpl.h"
 #include "zypp/parser/yum/YUMParserData.h"
@@ -35,15 +35,15 @@ namespace zypp
 
       ///////////////////////////////////////////////////////////////////
       //
-      //        CLASS NAME : YUMSource
+      //        CLASS NAME : YUMSourceImpl
       //
       /** Class representing a YUM installation source
       */
-      class YUMSource : public SourceImpl
+      class YUMSourceImpl : public SourceImpl
       {
       public:
         /** Default ctor */
-        YUMSource();
+        YUMSourceImpl();
 
 	void parseSourceMetadata(std::string path);
 
@@ -134,8 +134,8 @@ namespace zypp
 	};
 
       };
-      inline bool operator<( const YUMSource::PackageID & lhs, const YUMSource::PackageID & rhs )
-      { return YUMSource::PackageID::compare( lhs, rhs ) == -1; }
+      inline bool operator<( const YUMSourceImpl::PackageID & lhs, const YUMSourceImpl::PackageID & rhs )
+      { return YUMSourceImpl::PackageID::compare( lhs, rhs ) == -1; }
 
       ///////////////////////////////////////////////////////////////////
     } // namespace yum
@@ -145,4 +145,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SOURCE_YUM_YUMSOURCE_H
+#endif // ZYPP_SOURCE_YUM_YUMSOURCEIMPL_H

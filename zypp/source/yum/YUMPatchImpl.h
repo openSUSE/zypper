@@ -14,7 +14,7 @@
 
 #include "zypp/detail/PatchImpl.h"
 #include "zypp/parser/yum/YUMParserData.h"
-#include "zypp/source/yum/YUMSource.h"
+#include "zypp/source/yum/YUMSourceImpl.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -37,7 +37,7 @@ namespace zypp
         /** Default ctor */
         YUMPatchImpl(
 	  const zypp::parser::yum::YUMPatchData & parsed,
-	  YUMSource * src
+	  YUMSourceImpl * src
 	);
 	/** Patch ID */
 	std::string id() const;

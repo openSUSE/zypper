@@ -17,7 +17,7 @@
 
 #include "zypp/source/SourceImpl.h"
 #include "zypp/source/susetags/SuseTagsImpl.h"
-#include "zypp/source/yum/YUMSource.h"
+#include "zypp/source/yum/YUMSourceImpl.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

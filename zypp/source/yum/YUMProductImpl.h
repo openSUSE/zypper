@@ -14,7 +14,7 @@
 
 #include "zypp/detail/ProductImpl.h"
 #include "zypp/parser/yum/YUMParserData.h"
-#include "zypp/source/yum/YUMSource.h"
+#include "zypp/source/yum/YUMSourceImpl.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -37,7 +37,7 @@ namespace zypp
         /** Default ctor */
         YUMProductImpl(
 	  const zypp::parser::yum::YUMProductData & parsed,
-	  YUMSource * src
+	  YUMSourceImpl * src
 	);
 	std::string category() const;
 	Label vendor() const;

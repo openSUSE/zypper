@@ -11,7 +11,7 @@
 */
 
 #include "zypp/source/yum/YUMProductImpl.h"
-#include "zypp/source/yum/YUMSource.h"
+#include "zypp/source/yum/YUMSourceImpl.h"
 #include <zypp/CapFactory.h>
 #include "zypp/parser/yum/YUMParserData.h"
 #include <zypp/parser/yum/YUMParser.h>
@@ -44,7 +44,7 @@ namespace zypp
       */
       YUMProductImpl::YUMProductImpl(
 	const zypp::parser::yum::YUMProductData & parsed,
-	YUMSource * src
+	YUMSourceImpl * src
       )
       :	_category(parsed.type),
 	_vendor(parsed.vendor)//,
