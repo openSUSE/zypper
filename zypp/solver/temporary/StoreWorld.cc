@@ -254,13 +254,10 @@ static void
 resItem_table_remove (ResItemTable & table, ResItem_constPtr resItem)
 {
     const string name = resItem->name();
-    for (ResItemTable::iterator pos = table.lower_bound(name); pos != table.upper_bound(name);) {
+    for (ResItemTable::iterator pos = table.lower_bound(name); pos != table.upper_bound(name); ++pos) {
 	ResItem_constPtr res = pos->second;
 	if (res == resItem) {
-	    ResItemTable::iterator next = pos;
-	    ++next;
 	    table.erase (pos);
-	    pos = next;
 	    break;
 	}
     }
