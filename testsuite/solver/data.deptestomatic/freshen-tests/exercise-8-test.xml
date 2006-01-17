@@ -5,7 +5,7 @@
    Patch-A-1.1 is available
    Patch-A-1.1 is to be installed
 
-   : Patch-A-1-1 is installed
+   : Error: Patch-A-1-1 does not apply 
 -->
 <test allow_virtual_conflicts="yes">
 <setup>

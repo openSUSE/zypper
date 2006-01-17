@@ -16,5 +16,6 @@
 <trial>
   <establish/>
   <install channel="test" kind="patch" package="Patch-A"/>
+  <instorder/>
 </trial>
 </test>
