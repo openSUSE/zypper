@@ -30,7 +30,7 @@ namespace {
   void usage() {
     cerr << "YUMtest usage: "<< endl
     << "YUMtest TYPE" << endl
-    << "TYPE: repomd|primary|group|filelist|other|patch|patches|product" << endl;
+    << "TYPE: repomd|primary|group|pattern|filelist|other|patch|patches|product" << endl;
   }
 }
 
@@ -67,6 +67,16 @@ int main(int argc, char **argv)
     }
     else if (!strcmp(argv[1],"group")) {
       YUMGroupParser iter(cin,"");
+      for (;
+           !iter.atEnd();
+           ++iter) {
+             cout << **iter;
+           }
+      if (iter.errorStatus())
+        throw *iter.errorStatus();
+    }
+    else if (!strcmp(argv[1],"pattern")) {
+      YUMPatternParser iter(cin,"");
       for (;
            !iter.atEnd();
            ++iter) {

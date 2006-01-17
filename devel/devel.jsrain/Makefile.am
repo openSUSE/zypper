@@ -3,7 +3,7 @@
 
 SUBDIRS = yum
 
-noinst_PROGRAMS =	Msg Msg.debug Patch Patch.debug Script Script.debug PatchSelect PatchSelect.debug PatchRead PatchRead.debug SourceRead SourceRead.debug RpmTarget RpmTarget.debug
+noinst_PROGRAMS =	Msg Msg.debug Patch Patch.debug Script Script.debug PatchSelect PatchSelect.debug PatchRead PatchRead.debug SourceRead SourceRead.debug RpmTarget RpmTarget.debug RpmInstall RpmInstall.debug
 
 
 ## ##################################################
@@ -52,6 +52,12 @@ RpmTarget_SOURCES = 		RpmTarget.cc
 
 RpmTarget_debug_SOURCES = 	$(RpmTarget_SOURCES)
 RpmTarget_debug_LDFLAGS =	-static
+
+RpmInstall_SOURCES = 		RpmInstall.cc
+
+RpmInstall_debug_SOURCES = 	$(RpmInstall_SOURCES)
+RpmInstall_debug_LDFLAGS =	-static
+
 
 
 ## ##################################################
