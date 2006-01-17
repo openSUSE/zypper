@@ -431,8 +431,19 @@ ResolverContext::incompleteResItem (ResItem_constPtr resItem, int other_penalty)
 {
     _DBG("RC_SPEW") << "ResolverContext[" << this << "]::incompleteResItem(" << resItem->asString() << ")" << endl;
 
-//    ResItemStatus status;
-//    status = getStatus (resItem);
+    ResItemStatus status;
+    status = getStatus (resItem);
+
+    switch (status) {
+	case RESOLVABLE_STATUS_INSTALLED: {
+	    std::string msg = str::form (_("This conflicts with installed %s."), resItem->asString().c_str());
+	    addErrorString (resItem, msg);
+	    return false;
+	}
+	break;
+	default:
+	break;
+    }
 
     setStatus (resItem, RESOLVABLE_STATUS_INCOMPLETE);
 
@@ -646,10 +657,7 @@ incomplete_pkg_cb (ResItem_constPtr resItem, ResItemStatus status, void *data)
 {
     IncompleteInfo *info = (IncompleteInfo *)data;
 #warning Probably wrong check for incomplete
-    if (resItem_status_is_incomplete (status)
-       && ! resItem->isInstalled ()
-       && info->world->findInstalledResItem (resItem) == NULL) {
-
+    if (resItem_status_is_incomplete (status)) {
        if (info->fn) info->fn (resItem, status, info->rl);
        ++info->count;
     }
