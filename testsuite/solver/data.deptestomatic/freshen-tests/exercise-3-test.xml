@@ -8,7 +8,7 @@
    : satisfy patch-A-1-1
    : satisfy patchlevel-1
 -->
-<test allow_virtual_conflicts="yes">
+<test>
 <setup>
   <system file="exercise-2-system.xml"/>
   <channel name="test" file="exercise-3-packages.xml"/>

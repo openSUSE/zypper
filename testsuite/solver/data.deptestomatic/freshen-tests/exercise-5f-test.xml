@@ -7,7 +7,7 @@
 
    :Error patch-A-1-1 moves from satisfied to incomplete
 -->
-<test allow_virtual_conflicts="yes">
+<test>
 <setup>
   <channel name="core" file="exercise-1-system.xml"/>
   <channel name="test" file="exercise-1-packages.xml"/>
@@ -15,5 +15,6 @@
 <trial>
   <establish/>
   <install channel="core" package="A"/>
+  <freshen/>
 </trial>
 </test>

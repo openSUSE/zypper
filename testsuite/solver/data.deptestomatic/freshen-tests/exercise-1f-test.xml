@@ -9,7 +9,7 @@
    : install patch-A-1-1
    : install A-1.1
 -->
-<test allow_virtual_conflicts="yes">
+<test>
 <setup>
   <system file="exercise-1-system.xml"/>
   <channel name="test" file="exercise-1-packages.xml"/>

@@ -1,0 +1,11 @@
+>!> Establishing state ...
+>!> Establishing patch:Patch-A-1.1-1[test]
+>!> Established context
+>!> patch:Patch-A-1.1-1[test] satisfied
+>!> Installing A from channel core
+>!> Establishing state ...
+>!> Establishing patch:Patch-A-1.1-1[test]
+>!> Established context
+>!> A-1.0-1[core] to be installed
+>!> patch:Patch-A-1.1-1[test] incomplete
+>!> Freshening ...

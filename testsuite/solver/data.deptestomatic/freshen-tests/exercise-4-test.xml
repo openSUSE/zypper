@@ -6,7 +6,7 @@
 
    : patch-A-1-1 is satisfied
 -->
-<test allow_virtual_conflicts="yes">
+<test>
 <setup>
   <channel name="test" file="exercise-1-packages.xml"/>
 </setup>
