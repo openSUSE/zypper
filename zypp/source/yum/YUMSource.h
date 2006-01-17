@@ -20,6 +20,7 @@
 #include "zypp/Patch.h"
 #include "zypp/Product.h"
 #include "zypp/Selection.h"
+#include "zypp/Pattern.h"
 
 using namespace zypp::parser::yum;
 
@@ -57,6 +58,9 @@ namespace zypp
 	Selection::Ptr createGroup(
 	  const zypp::parser::yum::YUMGroupData & parsed
 	);
+	Pattern::Ptr createPattern(
+	  const zypp::parser::yum::YUMPatternData & parsed
+	);
 	Message::Ptr createMessage(
 	  const zypp::parser::yum::YUMPatchMessage & parsed
 	);
@@ -78,6 +82,10 @@ namespace zypp
 
 	Dependencies createGroupDependencies(
 	  const zypp::parser::yum::YUMGroupData & parsed
+	);
+
+	Dependencies createPatternDependencies(
+	  const zypp::parser::yum::YUMPatternData & parsed
 	);
 
 	Capability createCapability(const YUMDependency & dep,

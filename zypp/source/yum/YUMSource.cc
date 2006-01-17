@@ -17,6 +17,7 @@
 #include "zypp/source/yum/YUMPatchImpl.h"
 #include "zypp/source/yum/YUMProductImpl.h"
 #include "zypp/source/yum/YUMGroupImpl.h"
+#include "zypp/source/yum/YUMPatternImpl.h"
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
@@ -55,6 +56,7 @@ namespace zypp
        std::list<YUMRepomdData_Ptr> repo_files;
        std::list<YUMRepomdData_Ptr> repo_other;
        std::list<YUMRepomdData_Ptr> repo_group;
+       std::list<YUMRepomdData_Ptr> repo_pattern;
        std::list<YUMRepomdData_Ptr> repo_product;
        std::list<YUMRepomdData_Ptr> repo_patches;
 
@@ -211,6 +213,32 @@ namespace zypp
        }
        catch (...) {
 	ERR << "Cannot read package groups information" << endl;
+       }
+
+       try {
+	// patterns
+	for (std::list<YUMRepomdData_Ptr>::const_iterator it = repo_pattern.begin();
+	     it != repo_pattern.end();
+	     it++)
+	{
+	  // TODO check checksum
+	  string filename = (*it)->location;
+	  DBG << "Reading file " << filename << endl;
+	  ifstream st(filename.c_str());
+	  YUMPatternParser pattern(st, "");
+	  for (;
+	       !pattern.atEnd();
+	       ++pattern)
+	  {
+	    Pattern::Ptr p = createPattern(**pattern);
+	    ERR << "Insert pattern " << *p << " into the pool" << endl;
+	  }
+	  if (pattern.errorStatus())
+	    throw *pattern.errorStatus();
+	}
+       }
+       catch (...) {
+	ERR << "Cannot read installation patterns information" << endl;
        }
 
        try {
@@ -373,6 +401,30 @@ namespace zypp
 	  {
 	    ERR << excpt_r << endl;
 	    throw "Cannot create package group object";
+	  }
+	}
+
+	Pattern::Ptr YUMSource::createPattern(
+	  const zypp::parser::yum::YUMPatternData & parsed
+	)
+	{
+	  try
+	  {
+	    shared_ptr<YUMPatternImpl> impl(new YUMPatternImpl(parsed));
+            // Collect basic Resolvable data
+            NVRAD dataCollect( parsed.patternId,
+                               Edition::noedition,
+                               Arch_noarch,
+                               createPatternDependencies(parsed));
+ 	    Pattern::Ptr pattern = detail::makeResolvableFromImpl(
+	      dataCollect, impl
+	    );
+	    return pattern;
+	  }
+	  catch (const Exception & excpt_r)
+	  {
+	    ERR << excpt_r << endl;
+	    throw "Cannot create installation pattern object";
 	  }
 	}
 
@@ -557,6 +609,51 @@ namespace zypp
 	  }
 	  for (std::list<MetaPkg>::const_iterator it = parsed.grouplist.begin();
 	    it != parsed.grouplist.end();
+	    it++)
+	  {
+	    if (it->type == "mandatory" || it->type == "")
+	    {
+	      _deps.requires.insert(createCapability(YUMDependency(
+		  "",
+		  it->name,
+		  "",
+		  "",
+		  "",
+		  "",
+		  ""
+		),
+		ResTraits<Selection>::kind));
+	    }
+	  }
+	  return _deps;
+	}
+
+	Dependencies YUMSource::createPatternDependencies(
+	  const zypp::parser::yum::YUMPatternData & parsed
+	)
+	{
+	  Dependencies _deps;
+
+	  for (std::list<PackageReq>::const_iterator it = parsed.packageList.begin();
+	    it != parsed.packageList.end();
+	    it++)
+	  {
+	    if (it->type == "mandatory" || it->type == "")
+	    {
+	      _deps.requires.insert(createCapability(YUMDependency(
+		  "",
+		  it->name,
+		  "EQ",
+		  it->epoch,
+		  it->ver,
+		  it->rel,
+		  ""
+		),
+		ResTraits<Package>::kind));
+	    }
+	  }
+	  for (std::list<MetaPkg>::const_iterator it = parsed.patternlist.begin();
+	    it != parsed.patternlist.end();
 	    it++)
 	  {
 	    if (it->type == "mandatory" || it->type == "")
