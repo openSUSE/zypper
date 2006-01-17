@@ -462,6 +462,7 @@ XmlParser::toplevelStart(const std::string & name, const xmlChar **attrs)
 	_current_requires.clear();
 	_current_provides.clear();
 	_current_conflicts.clear();
+	_current_freshens.clear();
 	_current_children.clear();
 	_current_recommends.clear();
 	_current_suggests.clear();
