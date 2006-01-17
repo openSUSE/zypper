@@ -4,3 +4,12 @@ debian related cases removed
 
 Solutions were missing for 22, 23, 24, 36, 38, 40, 44, 47.
 
+
+Reasons for failing testsuite
+==============================
+exercise-39-test:
+   return more duplicate results, but works correctly
+
+
+exercise-18-test:
+   Wrong priority of results

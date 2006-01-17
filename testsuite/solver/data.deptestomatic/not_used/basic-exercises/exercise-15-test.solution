@@ -1,10 +1,10 @@
 >!> Installing W from channel test
 >!> Solution #1:
->!> install AA-0:1.0-1[test]
->!> install W-0:1.0-1[test]
->!> remove  A-0:1.0-1
->!> remove  M-0:1.0-1
->!> remove  N-0:1.0-1
->!> remove  O-0:1.0-1
->!> remove  P-0:1.0-1
+>!> install AA-1.0-1[test]
+>!> install W-1.0-1[test]
+>!> remove  A-1.0-1
+>!> remove  M-1.0-1
+>!> remove  N-1.0-1
+>!> remove  O-1.0-1
+>!> remove  P-1.0-1
 >!> installs=2, upgrades=0, uninstalls=5

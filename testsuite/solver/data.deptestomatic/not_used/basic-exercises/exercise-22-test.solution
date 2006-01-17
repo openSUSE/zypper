@@ -1,27 +1,27 @@
 >!> Installing C from channel test
 >!> Solution #1:
->!> install B-0:1.0-1[test]
->!> install C-0:1.0-1[test]
+>!> install B-1.0-1[test]
+>!> install C-1.0-1[test]
 >!> installs=2, upgrades=0, uninstalls=0
 >!> Solution #2:
->!> install A-0:1.0-1[test]
->!> install C-0:1.0-1[test]
+>!> install A-1.0-1[test]
+>!> install C-1.0-1[test]
 >!> installs=2, upgrades=0, uninstalls=0
 >!> Installing D from channel test
 >!> Solution #1:
->!> install B-0:1.0-1[test]
->!> install D-0:1.0-1[test]
+>!> install B-1.0-1[test]
+>!> install D-1.0-1[test]
 >!> installs=2, upgrades=0, uninstalls=0
 >!> Solution #2:
->!> install A-0:1.0-1[test]
->!> install D-0:1.0-1[test]
+>!> install A-1.0-1[test]
+>!> install D-1.0-1[test]
 >!> installs=2, upgrades=0, uninstalls=0
 >!> Installing E from channel test
 >!> Solution #1:
->!> install B-0:1.0-1[test]
->!> install E-0:1.0-1[test]
+>!> install B-1.0-1[test]
+>!> install E-1.0-1[test]
 >!> installs=2, upgrades=0, uninstalls=0
 >!> Solution #2:
->!> install A-0:1.0-1[test]
->!> install E-0:1.0-1[test]
+>!> install A-1.0-1[test]
+>!> install E-1.0-1[test]
 >!> installs=2, upgrades=0, uninstalls=0

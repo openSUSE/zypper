@@ -1,8 +1,8 @@
 >!> Uninstalling exim
 >!> Solution #1:
->!> remove  at-0:3.1.8-10
->!> remove  devscripts-0:2.5.8.2
->!> remove  dupload-0:2.4.0.9
->!> remove  exim-0:3.12-10.2
->!> remove  task-debian-devel-0:1.0
+>!> remove  at-3.1.8-10
+>!> remove  devscripts-2.5.8.2
+>!> remove  dupload-2.4.0.9
+>!> remove  exim-3.12-10.2
+>!> remove  task-debian-devel-1.0
 >!> installs=0, upgrades=0, uninstalls=5
