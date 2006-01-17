@@ -96,7 +96,7 @@ XmlNode::getValue (const string & name, const string & deflt) const
     xmlNode *child;
 
     xml_s = xmlGetProp(_node, (const xmlChar *)name.c_str());
-	  _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") xmlGetProp '" << (char *)xml_s << "'" << endl;
+//	  _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") xmlGetProp '" << (char *)xml_s << "'" << endl;
 
     if (xml_s) {
 	ret = string ((const char *)xml_s);
