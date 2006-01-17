@@ -201,10 +201,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     status = context->getStatus (_resItem);
 
-    _DBG("RC_SPEW") << "QueueItemUninstall::process(<" << ResolverContext::toString(status) << ">" << _resItem->asString() << ")";
-	  if (_unlink)
-	      _DBG("RC_SPEW") << "[unlink]";
-	  _DBG("RC_SPEW") << endl;
+    _DBG("RC_SPEW") << "QueueItemUninstall::process(<" << ResolverContext::toString(status) << ">" << _resItem->asString() << ( _unlink ? "[unlink]" : "") << endl;
 
     /* In the case of an unlink, we only want to uninstall the resItem if it is
        being used by something else.  We can't really determine this with 100%
@@ -294,7 +291,6 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
     }
 
  finished:
-// FIXME    rc_queue_item_free (item);
 
     return true;
 }
