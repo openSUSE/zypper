@@ -8096,7 +8096,7 @@ Even if you don't use it it may be required by other programmes.</description>
       <history>
         <update>
           <epoch>1</epoch>
-          <version>8.1.2-0.20010319cvs</version>
+          <version>8.1.2_0.20010319cvs</version>
           <release>1</release>
           <filename>dummy.rpm</filename>
           <filesize>0</filesize>
@@ -8117,7 +8117,7 @@ Even if you don't use it it may be required by other programmes.</description>
         <dep name="suidmanager" op="&lt;" version="0.52"/>
       </conflicts>
       <provides>
-        <dep name="mailx" op="=" epoch="1" version="8.1.2-0.20010319cvs" release="1"/>
+        <dep name="mailx" op="=" epoch="1" version="8.1.2_0.20010319cvs" release="1"/>
         <dep name="mail-reader"/>
       </provides>
     </package>
@@ -9619,7 +9619,7 @@ that want to communicate with a 3COM Palm Pilot.</description>
       <section>library</section>
       <history>
         <update>
-          <version>0.9.5-0pre3</version>
+          <version>0.9.5_0pre3</version>
           <release>ximian.1</release>
           <filename>dummy.rpm</filename>
           <filesize>0</filesize>
@@ -9632,7 +9632,7 @@ that want to communicate with a 3COM Palm Pilot.</description>
         <dep name="libc6" op="&gt;=" version="2.1.2"/>
       </requires>
       <provides>
-        <dep name="libpisock3" op="=" version="0.9.5-0pre3" release="ximian.1"/>
+        <dep name="libpisock3" op="=" version="0.9.5_0pre3" release="ximian.1"/>
       </provides>
     </package>
     <package>
@@ -10000,7 +10000,7 @@ option for this feature.</description>
       <section>util</section>
       <history>
         <update>
-          <version>2.0.6-big</version>
+          <version>2.0.6_big</version>
           <release>1</release>
           <filename>dummy.rpm</filename>
           <filesize>0</filesize>
@@ -10013,7 +10013,7 @@ option for this feature.</description>
         <dep name="libc6" op="&gt;=" version="2.1.2"/>
       </requires>
       <provides>
-        <dep name="bonnie" op="=" version="2.0.6-big" release="1"/>
+        <dep name="bonnie" op="=" version="2.0.6_big" release="1"/>
       </provides>
     </package>
     <package>
@@ -13940,7 +13940,7 @@ Homepage: http://www.jclark.com/sp/</description>
         <dep name="libc6" op="&gt;=" version="2.2.1"/>
       </requires>
       <conflicts>
-        <dep name="sp" op="&lt;=" version="1.3-1.1" release="6"/>
+        <dep name="sp" op="&lt;=" version="1.3_1.1" release="6"/>
       </conflicts>
       <provides>
         <dep name="libsp1" op="=" version="1.3.4_1.2.1" release="18"/>
@@ -14045,7 +14045,7 @@ The following types of boxes are at your disposal:
       <section>library</section>
       <history>
         <update>
-          <version>0.9a-20010115</version>
+          <version>0.9a_20010115</version>
           <release>1</release>
           <filename>dummy.rpm</filename>
           <filesize>0</filesize>
@@ -14060,7 +14060,7 @@ The following types of boxes are at your disposal:
         <dep name="debianutils" op="&gt;=" version="1.6"/>
       </requires>
       <provides>
-        <dep name="dialog" op="=" version="0.9a-20010115" release="1"/>
+        <dep name="dialog" op="=" version="0.9a_20010115" release="1"/>
       </provides>
     </package>
     <package>
@@ -20003,7 +20003,7 @@ for more information.</description>
       <section>devel</section>
       <history>
         <update>
-          <version>1.2-1.19</version>
+          <version>1.2_1.19</version>
           <release>3</release>
           <filename>dummy.rpm</filename>
           <filesize>0</filesize>
@@ -20020,7 +20020,7 @@ for more information.</description>
         <dep name="e2fsprogs" op="&lt;" version="1.10" release="6"/>
       </conflicts>
       <provides>
-        <dep name="uuid-dev" op="=" version="1.2-1.19" release="3"/>
+        <dep name="uuid-dev" op="=" version="1.2_1.19" release="3"/>
       </provides>
     </package>
     <package>
@@ -21796,7 +21796,7 @@ FreeType 2 library.</description>
       </requires>
       <conflicts>
         <dep name="freetype0-dev"/>
-        <dep name="freetype1" op="&lt;=" version="1.0.0.1998-03-22" release="1"/>
+        <dep name="freetype1" op="&lt;=" version="1.0.0.1998_03_22" release="1"/>
         <dep name="freetype1-dev"/>
       </conflicts>
       <provides>
@@ -24682,7 +24682,7 @@ use Debconf to ask questions when they are installed.</description>
         <dep name="debconf-tiny"/>
         <dep name="apt" op="&lt;" version="0.3.12.1"/>
         <dep name="menu" op="&lt;=" version="2.1.3" release="1"/>
-        <dep name="dialog" op="&lt;" version="0.9a-20000730" release="1"/>
+        <dep name="dialog" op="&lt;" version="0.9a_20000730" release="1"/>
         <dep name="whiptail" op="&lt;" version="0.50.8" release="1"/>
         <dep name="libterm-stool-perl" op="&lt;" version="0.20"/>
         <dep name="cdebconf" op="&lt;" version="0.10" release="5"/>
