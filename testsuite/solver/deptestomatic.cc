@@ -690,9 +690,21 @@ trial_upgrade_cb (ResItem_constPtr original, ResItem_constPtr upgrade, void *use
 
 
 static void
-print_marked_cb (ResItem_constPtr res, ResItemStatus status, void *data)
+print_marked_cb (ResItem_constPtr resItem, ResItemStatus status, void *data)
 {
-    printf (">!> %s %s\n", res->asString().c_str(), ResolverContext::toString (status).c_str());
+    printf (">!> %s %s\n", resItem->asString().c_str(), ResolverContext::toString (status).c_str());
+    return;
+}
+
+
+static void
+freshen_marked_cb (ResItem_constPtr resItem, ResItemStatus status, void *data)
+{
+    Resolver *resolver = (Resolver *)data;
+    if (resItem_status_is_incomplete (status)) {
+	resolver->addResItemToInstall (resItem);
+    }
+
     return;
 }
 
@@ -804,7 +816,8 @@ parse_xml_trial (XmlNode_Ptr node)
 	    else
 		printf (">!> Upgrading %d package%s\n", count, count > 1 ? "s" : "");
 
-	} else if (node->equals ("establish")) {
+	} else if (node->equals ("establish")
+		   || node->equals ("freshen")) {
 
 	    printf (">!> Establishing state ...\n");
 
@@ -816,6 +829,10 @@ parse_xml_trial (XmlNode_Ptr node)
 	    else {
 		printf (">!> Established context\n");
 		established->foreachMarkedResItem (print_marked_cb, NULL);
+		if (node->equals ("freshen")) {
+		    printf (">!> Freshening ...\n");
+		    established->foreachMarkedResItem (freshen_marked_cb, &resolver);
+		}
 	    }
 
 	} else if (node->equals ("instorder")) {
