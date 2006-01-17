@@ -36,10 +36,12 @@ namespace zypp
       typedef Product ResType;
 
     public:
+#if 0
       /** Get the category of the product */
       virtual std::string category() const = 0;
       virtual Label vendor() const = 0;
       virtual Label displayName() const = 0;
+#endif
     };
     ///////////////////////////////////////////////////////////////////
 
