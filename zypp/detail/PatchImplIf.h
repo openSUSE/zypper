@@ -13,7 +13,8 @@
 #define ZYPP_DETAIL_PATCHIMPLIF_H
 
 #include "zypp/detail/ResObjectImplIf.h"
-#include "zypp/Resolvable.h"
+#include "zypp/ResObject.h"
+
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -37,7 +38,7 @@ namespace zypp
       typedef Patch ResType;
 
     public:
-      typedef std::list<Resolvable::Ptr> AtomList;
+      typedef std::list<ResObject::Ptr> AtomList;
 
     public:
       /** Patch ID */
