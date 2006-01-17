@@ -102,7 +102,7 @@ namespace zypp
      * if the loop succeeded. Negative if some call to \a fnc_r
      * returned \c false.
      +
-     * \see ResFilters for a collection of predefined filters.
+     * \see \ref RESFILTERS for a collection of predefined filters.
      */
     template <class _Function, class _Filter>
       int forEach( _Filter filter_r, _Function fnc_r ) const
