@@ -22,6 +22,7 @@
 #include "zypp/solver/temporary/World.h"
 
 #include "zypp/solver/detail/QueueItemUninstall.h"
+#include "zypp/solver/detail/QueueItemEstablish.h"
 #include "zypp/solver/detail/QueueItemRequire.h"
 #include "zypp/solver/detail/QueueItem.h"
 #include "zypp/solver/detail/ResolverContext.h"
@@ -161,31 +162,39 @@ typedef struct {
     ResolverContext_Ptr context;
     ResItem_constPtr uninstalled_resItem;
     ResItem_constPtr upgraded_resItem;
-    QueueItemList *require_items;
+    QueueItemList *qil;
     bool remove_only;
 } UninstallProcessInfo;
 
+
+// the uninstall of info->uninstalled_resItem breaks the dependency 'dep' of resolvable 'resItem'
 
 static bool
 uninstall_process_cb (ResItem_constPtr resItem, const Capability & dep, void *data)
 {
     UninstallProcessInfo *info = (UninstallProcessInfo *)data;
 
-    if (! info->context->resItemIsPresent (resItem))
+    if (! info->context->resItemIsPresent (resItem))				// its not installed -> dont care
 	return true;
 
-    if (info->context->requirementIsMet (dep, false))
+    if (info->context->requirementIsMet (dep, false))				// its provided by another installed resolvable -> dont care
 	return true;
 
-    QueueItemRequire_Ptr require_item = new QueueItemRequire (info->world, dep);
+    if (resItem_status_is_satisfied (info->context->getStatus (resItem))) {	// it is just satisfied, check freshens
+	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (info->world, resItem);	// re-check if its still needed
+	info->qil->push_front (establish_item);
+	return true;
+    }
+
+    QueueItemRequire_Ptr require_item = new QueueItemRequire (info->world, dep);	// issue a new require to fulfill this dependency
     require_item->addResItem (resItem);
     if (info->remove_only) {
         require_item->setRemoveOnly ();
     }
     require_item->setUpgradedResItem (info->upgraded_resItem);
-    require_item->setLostResItem (info->uninstalled_resItem);
+    require_item->setLostResItem (info->uninstalled_resItem);				// this is what we lost, dont re-install it
 
-    info->require_items->push_front (require_item);
+    info->qil->push_front (require_item);
 
     return true;
 }
@@ -283,7 +292,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    info.context = context;
 	    info.uninstalled_resItem = _resItem;
 	    info.upgraded_resItem = _upgraded_to;
-	    info.require_items = &qil;
+	    info.qil = &qil;
 	    info.remove_only = _remove_only;
 
 	    world()->foreachRequiringResItem (*iter, uninstall_process_cb, &info);
