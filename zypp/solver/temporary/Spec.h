@@ -75,7 +75,7 @@ class Spec : public base::ReferenceCounted, private base::NonCopyable {
 
     Spec (const Resolvable::Kind & kind, const std::string & name, const Edition & edition, const Arch & arch = Arch());
 
-    Spec (XmlNode_constPtr node);
+    Spec (XmlNode_constPtr node, const Resolvable::Kind & kind);
 
     virtual ~Spec();
 

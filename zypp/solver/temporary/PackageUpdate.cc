@@ -134,8 +134,8 @@ PackageUpdate::asXmlNode (void) const
 
 //---------------------------------------------------------------------------
 
-PackageUpdate::PackageUpdate (const string & name)
-    : Spec (ResTraits<zypp::Package>::kind, name)
+PackageUpdate::PackageUpdate (const string & name, const Resolvable::Kind & kind)
+    : Spec (kind, name)
     , _package (NULL)
     , _package_size (0)
     , _installed_size (0)
@@ -148,7 +148,7 @@ PackageUpdate::PackageUpdate (const string & name)
 
 
 PackageUpdate::PackageUpdate (XmlNode_constPtr node, Package_Ptr package)
-    : Spec (ResTraits<zypp::Package>::kind, package->name())
+    : Spec (package->kind(), package->name())
     , _package (NULL)
     , _package_size (0)
     , _installed_size (0)

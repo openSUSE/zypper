@@ -80,12 +80,13 @@ class Package : public ResItem {
       
         public:
       
-          Package(Channel_constPtr channel);
+          Package(Channel_constPtr channel, const Resolvable::Kind & kind);
           Package(Channel_constPtr channel,
-                  const std::string & name = "",
+		  const Resolvable::Kind & kind,		// Yes, its a hack, but 'Package' is just for the testsuite anyways
+                  const std::string & name,
                   const Edition & edition = Edition::noedition,
                   const Arch arch = Arch_noarch);
-          Package(XmlNode_constPtr node, Channel_constPtr channel);	//RCPackage *rc_xml_node_to_package (const xmlNode *node, const RCChannel *channel);
+          Package(XmlNode_constPtr node, Channel_constPtr channel, const Resolvable::Kind & kind);
           virtual ~Package();
       
           // ---------------------------------- I/O

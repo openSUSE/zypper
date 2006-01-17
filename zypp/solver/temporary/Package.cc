@@ -279,8 +279,8 @@ operator<<( ostream& os, const Package& package)
 
 //---------------------------------------------------------------------------
 
-Package::Package (Channel_constPtr channel)
-    : ResItem (ResTraits<zypp::Package>::kind, "")
+Package::Package (Channel_constPtr channel, const Resolvable::Kind & kind)
+    : ResItem (kind, "")
     , _pretty_name ("")
     , _summary ("")
     , _description ("")
@@ -295,11 +295,12 @@ Package::Package (Channel_constPtr channel)
 
 
 Package::Package (Channel_constPtr channel,
+		  const Resolvable::Kind & kind,
                   const string & name,
                   const Edition & edition,
                   const Arch arch)
 
-    : ResItem (ResTraits<zypp::Package>::kind, "")
+    : ResItem (kind, name, edition, arch)
     , _pretty_name ("")
     , _summary ("")
     , _description ("")
@@ -311,16 +312,11 @@ Package::Package (Channel_constPtr channel,
 {
 
     setChannel (channel);
-
-    shared_ptr<zypp::detail::PackageImpl> pkgImpl;
-    zypp::Package::Ptr pkg( zypp::detail::makeResolvableAndImpl( NVRAD(name, edition, arch),
-                                                                 pkgImpl ) );
-    _resObject = pkg;
 }
 
 
-Package::Package (XmlNode_constPtr node, Channel_constPtr channel)
-    : ResItem (ResTraits<zypp::Package>::kind, "")
+Package::Package (XmlNode_constPtr node, Channel_constPtr channel, const Resolvable::Kind & kind)
+    : ResItem (kind, "")
     , _pretty_name ("")
     , _summary ("")
     , _description ("")
@@ -418,10 +414,10 @@ Package::Package (XmlNode_constPtr node, Channel_constPtr channel)
     // check if we're already listed in the provides
     // if not, provide ourself
     CapFactory  factory;
-    Capability selfdep = factory.parse ( ResTraits<zypp::Package>::kind,
+    Capability selfdep = factory.parse ( kind,
                                        name,
                                        Rel::EQ,
-					       Edition( version, release, zypp::str::numstring(epoch)));
+				       Edition( version, release, zypp::str::numstring(epoch)));
 
 
     CapSet::const_iterator piter;

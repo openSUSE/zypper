@@ -63,7 +63,7 @@ extract_packages_from_xml_node (XmlNode_Ptr node, Channel_Ptr channel, CResItemF
 
     while (node) {
 	if (node->equals("package")) {
-	    package = new Package (node, channel);
+	    package = new Package (node, channel, ResTraits<zypp::Package>::kind);
 	    if (package) {
 //		_DBG("RC_SPEW") << package->asString(true) << endl;
 		bool ok = true;

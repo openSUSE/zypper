@@ -112,8 +112,8 @@ Spec::Spec ( const Resolvable::Kind & kind, const string & name, int epoch, cons
 }
 
 
-Spec::Spec (XmlNode_constPtr node)
-    : _kind (ResTraits<zypp::Package>::kind) // Fixme: should be type like unknown
+Spec::Spec (XmlNode_constPtr node, const Resolvable::Kind & kind)
+    : _kind (kind)
 {
     fprintf (stderr, "Spec::Spec (XmlNode_constPtr node)\nNot implemented\n");
     abort();

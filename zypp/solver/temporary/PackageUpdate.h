@@ -79,7 +79,7 @@ class PackageUpdate : public Spec {
 
   public:
 
-    PackageUpdate(const std::string & name);
+    PackageUpdate(const std::string & name, const Resolvable::Kind & kind);		// Yes, 'kind' is a hack, but 'PackageUpdate' is just for the testsuite anyways
     PackageUpdate(XmlNode_constPtr node, Package_Ptr package);
 
     virtual ~PackageUpdate();

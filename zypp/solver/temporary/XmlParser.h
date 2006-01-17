@@ -53,7 +53,7 @@ namespace zypp
         public:
           enum _XmlParserState {
       	PARSER_TOPLEVEL = 0,
-      	PARSER_PACKAGE,
+      	PARSER_RESOLVABLE,
       	PARSER_HISTORY,
       	PARSER_UPDATE,
       	PARSER_DEP,
@@ -69,20 +69,20 @@ namespace zypp
           PackageList _all_packages;
 
           /* Temporary state */
-          bool _current_package_stored;
-          std::string _current_package_name;
-          std::string _current_package_prettyName;
-          std::string _current_package_summary;
-          std::string _current_package_description;
-          std::string _current_package_section;
-          Arch _current_package_arch;
-          Resolvable::Kind _current_package_kind;
-          Edition _current_package_edition;
-          int _current_package_fileSize;
-          int _current_package_installedSize;
-          bool _current_package_installOnly;
-          bool _current_package_packageSet;
-          PackageUpdateList _current_package_packageUpdateList;
+          bool _current_resitem_stored;
+          std::string _current_resitem_name;
+          std::string _current_resitem_prettyName;
+          std::string _current_resitem_summary;
+          std::string _current_resitem_description;
+          std::string _current_resitem_section;
+          Arch _current_resitem_arch;
+          Resolvable::Kind _current_resitem_kind;
+          Edition _current_resitem_edition;
+          int _current_resitem_fileSize;
+          int _current_resitem_installedSize;
+          bool _current_resitem_installOnly;
+          bool _current_resitem_packageSet;
+          PackageUpdateList _current_resitem_packageUpdateList;
 
           CapSet _current_requires;
           CapSet _current_provides;
@@ -91,6 +91,7 @@ namespace zypp
           CapSet _current_recommends;
           CapSet _current_suggests;
           CapSet _current_obsoletes;
+          CapSet _current_freshens;
           PackageUpdate_Ptr _current_update;
 
           // these point to one of the above lists during dependency parsing
@@ -137,18 +138,20 @@ namespace zypp
           void toBuffer (const char *data, size_t size);
           void releaseBuffer (void);		// free _text_buffer
 
+	  // callbacks for XML parser, c-style
           void startElement(const char *name, const xmlChar **attrs);
           void endElement(const char *name);
 
-          void toplevelStart(const char *name, const xmlChar **attrs);
-          void packageStart(const char *name, const xmlChar **attrs);
-          void historyStart(const char *name, const xmlChar **attrs);
-          void dependencyStart(const char *name, const xmlChar **attrs);
+	  // internal XmlParser functions, c++-style
+          void toplevelStart(const std::string & name, const xmlChar **attrs);
+          void resolvableStart(const std::string & name, const xmlChar **attrs);
+          void historyStart(const std::string & name, const xmlChar **attrs);
+          void dependencyStart(const std::string & name, const xmlChar **attrs);
 
-          void updateEnd(const char *name);
-          void packageEnd(const char *name);
-          void historyEnd(const char *name);
-          void dependencyEnd(const char *name);
+          void updateEnd(const std::string & name);
+          void resolvableEnd(const std::string & name);
+          void historyEnd(const std::string & name);
+          void dependencyEnd(const std::string & name);
 
           void parseChunk (const char *xmlbuf, size_t size);
           PackageList done (void);

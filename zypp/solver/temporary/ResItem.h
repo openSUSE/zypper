@@ -89,7 +89,7 @@ class ResItem : public base::ReferenceCounted, private base::NonCopyable {
 
   public:
 
-    ResItem(const Resolvable::Kind & kind, const std::string & name, int epoch = Edition::noepoch, const std::string & version = "", const std::string & release = "", const Arch & arch = Arch());
+    ResItem(const Resolvable::Kind & kind, const std::string & name, const Edition & edition = Edition::noedition, const Arch & arch = Arch());
 
     ResItem(const ResObject::Ptr & resObject);
     ResItem(const XmlNode_Ptr node);

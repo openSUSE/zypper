@@ -46,6 +46,39 @@ using namespace std;
 
 //---------------------------------------------------------------------------
 
+static Resolvable::Kind
+string2kind (const std::string & str)
+{
+    Resolvable::Kind kind = ResTraits<zypp::Package>::kind;
+    if (!str.empty()) {
+	if (str == "package") {
+	    // empty
+	}
+	else if (str == "patch") {
+	    kind = ResTraits<zypp::Patch>::kind;
+	}
+	else if (str == "pattern") {
+	    kind = ResTraits<zypp::Pattern>::kind;
+	}
+	else if (str == "script") {
+	    kind = ResTraits<zypp::Script>::kind;
+	}
+	else if (str == "message") {
+	    kind = ResTraits<zypp::Message>::kind;
+	}
+	else if (str == "product") {
+	    kind = ResTraits<zypp::Product>::kind;
+	}
+	else {
+	    fprintf (stderr, "get_resItem unknown kind '%s'\n", str.c_str());
+	}
+    }
+    return kind;
+}
+
+
+//---------------------------------------------------------------------------
+
 static Capability
 parse_dep_attrs(bool *is_obsolete, const xmlChar **attrs)
 {
@@ -53,6 +86,7 @@ parse_dep_attrs(bool *is_obsolete, const xmlChar **attrs)
     int i;
     bool op_present = false;
     /* Temporary variables dependent upon the presense of an 'op' attribute */
+    Resolvable::Kind kind = ResTraits<zypp::Package>::kind;
     const char *name = NULL;
     int epoch = Edition::noepoch;
     string version;
@@ -67,7 +101,8 @@ parse_dep_attrs(bool *is_obsolete, const xmlChar **attrs)
 	const char *value = (const char *)attrs[i];
 
 	if (!strcasecmp(attr, "name"))		    name = value;
-	else if (!strcasecmp(attr, "op")) {	    op_present = true; relation = Rel(value); }
+	else if (!strcasecmp(attr, "kind"))	    kind = string2kind (value);
+	else if (!strcasecmp(attr, "op"))	{   op_present = true; relation = Rel(value); }
 	else if (!strcasecmp(attr, "epoch"))	    epoch = atoi (value);
 	else if (!strcasecmp(attr, "version"))      version = value;
 	else if (!strcasecmp(attr, "release"))	    release = value;
@@ -80,11 +115,7 @@ parse_dep_attrs(bool *is_obsolete, const xmlChar **attrs)
     }
 
     /* FIXME: should get Channel from XML */
-    /* FIXME: should get Kind from XML */
-	return  factory.parse ( ResTraits<zypp::Package>::kind,
-				name,
-				relation,
-				Edition (version, release, epoch));
+    return  factory.parse ( kind, name, relation, Edition (version, release, epoch));
 }
 
 
@@ -231,7 +262,7 @@ XmlParser::XmlParser (Channel_constPtr channel)
     , _processing (false)
     , _xml_context (NULL)
     , _state (PARSER_TOPLEVEL)
-    , _current_package_stored(true)
+    , _current_resitem_stored(true)
     , _current_update (NULL)
     , _toplevel_dep_list (NULL)
     , _current_dep_list (NULL)
@@ -328,7 +359,7 @@ XmlParser::done()
     if (_xml_context)
 	xmlFreeParserCtxt(_xml_context);
 
-    if (!_current_package_stored) {
+    if (!_current_resitem_stored) {
 	fprintf (stderr, "Incomplete package lost\n");
     }
 
@@ -350,16 +381,16 @@ XmlParser::startElement(const char *name, const xmlChar **attrs)
 
     switch (_state) {
 	case PARSER_TOPLEVEL:
-	    toplevelStart(name, attrs);
+	    toplevelStart (name, attrs);
 	    break;
-	case PARSER_PACKAGE:
-	    packageStart(name, attrs);
+	case PARSER_RESOLVABLE:
+	    resolvableStart (name, attrs);
 	    break;
 	case PARSER_HISTORY:
-	    historyStart(name, attrs);
+	    historyStart (name, attrs);
 	    break;
 	case PARSER_DEP:
-	    dependencyStart(name, attrs);
+	    dependencyStart (name, attrs);
 	    break;
 	default:
 	    break;
@@ -376,17 +407,17 @@ XmlParser::endElement(const char *name)
 
     if (name != NULL) {			// sax_end_element might set name to NULL
 	switch (_state) {
-	    case PARSER_PACKAGE:
-		packageEnd(name);
+	    case PARSER_RESOLVABLE:
+		resolvableEnd (name);
 		break;
 	    case PARSER_HISTORY:
-		historyEnd(name);
+		historyEnd (name);
 		break;
 	    case PARSER_UPDATE:
-		updateEnd(name);
+		updateEnd (name);
 		break;
 	    case PARSER_DEP:
-		dependencyEnd(name);
+		dependencyEnd (name);
 		break;
 	    default:
 		break;
@@ -400,28 +431,33 @@ XmlParser::endElement(const char *name)
 
 
 void
-XmlParser::toplevelStart(const char * name, const xmlChar **attrs)
+XmlParser::toplevelStart(const std::string & name, const xmlChar **attrs)
 {
     _XXX("RC_SPEW_XML") << "XmlParser::toplevelStart(" << name << ")" << endl;
 
-    if (!strcmp(name, "package")) {
+    if ((name == "package")
+	|| (name == "pattern")
+	|| (name == "script")
+	|| (name == "message")
+	|| (name == "patch")
+	|| (name == "product")) {
 
-	_state = PARSER_PACKAGE;
+	_state = PARSER_RESOLVABLE;
 
-	_current_package_stored = false;
-	_current_package_name = "";
-	_current_package_prettyName = "";
-	_current_package_summary = "";
-	_current_package_description = "";
-	_current_package_section = "";
-	_current_package_kind = ResTraits<zypp::Package>::kind;
-	_current_package_arch = Arch_noarch;
-	_current_package_edition = Edition::noedition;
-	_current_package_fileSize = 0;
-	_current_package_installedSize = 0;
-	_current_package_installOnly = false;
-	_current_package_packageSet = false;
-	_current_package_packageUpdateList.clear();
+	_current_resitem_stored = false;
+	_current_resitem_name = "";
+	_current_resitem_prettyName = "";
+	_current_resitem_summary = "";
+	_current_resitem_description = "";
+	_current_resitem_section = "";
+	_current_resitem_kind = string2kind (name);	// needed for <update>..</update>, see updateStart
+	_current_resitem_arch = Arch_noarch;
+	_current_resitem_edition = Edition::noedition;
+	_current_resitem_fileSize = 0;
+	_current_resitem_installedSize = 0;
+	_current_resitem_installOnly = false;
+	_current_resitem_packageSet = false;
+	_current_resitem_packageUpdateList.clear();
 
 	_current_requires.clear();
 	_current_provides.clear();
@@ -433,40 +469,40 @@ XmlParser::toplevelStart(const char * name, const xmlChar **attrs)
 
     }
     else {
-	_DBG("RC_SPEW_XML") << "! Not handling " << (const char *)name << " at toplevel" << endl;
+	_DBG("RC_SPEW_XML") << "! Not handling " << name << " at toplevel" << endl;
     }
 }
 
 
 void
-XmlParser::packageStart(const char * name, const xmlChar **attrs)
+XmlParser::resolvableStart(const std::string & name, const xmlChar **attrs)
 {
-//    _XXX("RC_SPEW_XML") << "XmlParser::packageStart(" << name << ")" << endl;
+//    _XXX("RC_SPEW_XML") << "XmlParser::resolvableStart(" << name << ")" << endl;
 
     /* Only care about the containers here */
-    if (!strcmp((const char *)name, "history")) {
+    if (name == "history") {
 	_state = PARSER_HISTORY;
     }
-    else if (!strcmp (name, "deps")) {
+    else if (name == "deps") {
 	/*
 	 * We can get a <deps> tag surrounding the actual package
 	 * dependency sections (requires, provides, conflicts, etc).
 	 * In this case, we'll just ignore this tag quietly.
 	 */
     }
-    else if (!strcmp(name, "requires")) {
+    else if (name == "requires") {
 	_state = PARSER_DEP;
 	_current_dep_list = _toplevel_dep_list = &_current_requires;
     }
-    else if (!strcmp(name, "recommends")) {
+    else if (name == "recommends") {
 	_state = PARSER_DEP;
 	_current_dep_list = _toplevel_dep_list = &_current_recommends;
     }
-    else if (!strcmp(name, "suggests")) {
+    else if (name == "suggests") {
 	_state = PARSER_DEP;
 	_current_dep_list = _toplevel_dep_list = &_current_suggests;
     }
-    else if (!strcmp(name, "conflicts")) {
+    else if (name == "conflicts") {
 	bool is_obsolete = false;
 	int i;
 
@@ -484,17 +520,21 @@ XmlParser::packageStart(const char * name, const xmlChar **attrs)
 	    _current_dep_list = _toplevel_dep_list = &_current_conflicts;
 	}
     }
-    else if (!strcmp(name, "obsoletes")) {
+    else if (name == "obsoletes") {
 	_state = PARSER_DEP;
 	_current_dep_list = _toplevel_dep_list = &_current_obsoletes;
     }
-    else if (!strcmp(name, "provides")) {
+    else if (name == "provides") {
 	_state = PARSER_DEP;
 	_current_dep_list = _toplevel_dep_list = &_current_provides;
     }
-    else if (!strcmp(name, "children")) {
+    else if (name == "children") {
 	_state = PARSER_DEP;
 	_current_dep_list = _toplevel_dep_list = &_current_children;
+    }
+    else if (name == "freshens") {
+	_state = PARSER_DEP;
+	_current_dep_list = _toplevel_dep_list = &_current_freshens;
     }
     else {
 	_XXX("RC_SPEW_XML") << "! Not handling " << name << " in package start" << endl;
@@ -503,14 +543,14 @@ XmlParser::packageStart(const char * name, const xmlChar **attrs)
 
 
 void
-XmlParser::historyStart(const char * name, const xmlChar **attrs)
+XmlParser::historyStart(const std::string & name, const xmlChar **attrs)
 {
 //    _XXX("RC_SPEW_XML") << "XmlParser::historyStart(" << name << ")" << endl;
 
-    if (!strcmp(name, "update")) {
+    if (name == "update") {
 	assert(_current_update == NULL);
 
-	_current_update = new PackageUpdate(_current_package_name);
+	_current_update = new PackageUpdate(_current_resitem_name, _current_resitem_kind);
 
 	_state = PARSER_UPDATE;
     }
@@ -521,11 +561,11 @@ XmlParser::historyStart(const char * name, const xmlChar **attrs)
 
 
 void
-XmlParser::dependencyStart(const char *name, const xmlChar **attrs)
+XmlParser::dependencyStart(const std::string & name, const xmlChar **attrs)
 {
 //    _XXX("RC_SPEW_XML") << "XmlParser::dependencyStart(" << name << ")" << endl;
 
-    if (!strcmp(name, "dep")) {
+    if (name == "dep") {
 	Capability dep;
 	bool is_obsolete;
 
@@ -537,7 +577,7 @@ XmlParser::dependencyStart(const char *name, const xmlChar **attrs)
 	    _current_dep_list->insert (dep);
 	}
     }
-    else if (!strcmp(name, "or"))
+    else if (name == "or")
 	_current_dep_list->clear();
     else {
 	_DBG("RC_SPEW_XML") <<  "! Not handling " << name << " in dependency" << endl;
@@ -549,11 +589,19 @@ XmlParser::dependencyStart(const char *name, const xmlChar **attrs)
 
 
 void
-XmlParser::packageEnd(const char *name)
+XmlParser::resolvableEnd (const std::string & name)
 {
-//    _XXX("RC_SPEW_XML") << "XmlParser::packageEnd(" << name << ")" << endl;
+//    _XXX("RC_SPEW_XML") << "XmlParser::resolvableEnd(" << name << ")" << endl;
 
-    if (!strcmp(name, "package")) {
+    if ((name == "package")
+	|| (name == "pattern")
+	|| (name == "script")
+	|| (name == "message")
+	|| (name == "patch")
+	|| (name == "product")) {
+
+	_current_resitem_kind = string2kind (name);
+
 	PackageUpdate_Ptr update = NULL;
 	/* If possible, grab the version info from the most recent update.
 	 * Otherwise, try to find where the package provides itself and use
@@ -561,10 +609,10 @@ XmlParser::packageEnd(const char *name)
 	 */
 	// searching the highest version. It is not sure anymore that the last
 	// has highest version
-	if (!_current_package_packageUpdateList.empty())
+	if (!_current_resitem_packageUpdateList.empty())
 	{
-	    for (PackageUpdateList::iterator iter = _current_package_packageUpdateList.begin();
-		 iter != _current_package_packageUpdateList.end();
+	    for (PackageUpdateList::iterator iter = _current_resitem_packageUpdateList.begin();
+		 iter != _current_resitem_packageUpdateList.end();
 		 iter++)
 	    {
 		if (!update)
@@ -578,20 +626,20 @@ XmlParser::packageEnd(const char *name)
 	}
 
 	if (update) {
-	    _current_package_name = update->name();
-	    _current_package_kind = update->kind();
-	    _current_package_edition = update->edition();
-	    _current_package_fileSize = update->packageSize();
-	    _current_package_installedSize = update->installedSize();
+	    _current_resitem_name = update->name();
+	    _current_resitem_kind = update->kind();
+	    _current_resitem_edition = update->edition();
+	    _current_resitem_fileSize = update->packageSize();
+	    _current_resitem_installedSize = update->installedSize();
 	}
 #if 0 //Is this really needed ?
 	else {
 	    for (CapSet::const_iterator iter = _current_provides.begin(); iter != _current_provides.end(); iter++) {
 		if ((*iter)->relation() == Rel::EQ
-		    && ((*iter)->name() == _current_package_name))
+		    && ((*iter)->name() == _current_resitem_name))
 		{
-		    _current_package_kind = (*iter)->kind();
-		    _current_package_edition = (*iter)->edition();
+		    _current_resitem_kind = (*iter)->kind();
+		    _current_resitem_edition = (*iter)->edition();
 		    break;
 		}
 	    }
@@ -600,10 +648,10 @@ XmlParser::packageEnd(const char *name)
 	// check if we provide ourselfs properly
 
 	CapFactory  factory;
-	Capability selfdep = factory.parse ( ResTraits<zypp::Package>::kind,
-		                           _current_package_name,
+	Capability selfdep = factory.parse ( _current_resitem_kind,
+		                           _current_resitem_name,
 		                           Rel::EQ,
-							 _current_package_edition);
+					 _current_resitem_edition);
 	CapSet::const_iterator piter;
 	for (piter = _current_provides.begin(); piter != _current_provides.end(); piter++) {
 	    if ((*piter) == selfdep)
@@ -618,31 +666,32 @@ XmlParser::packageEnd(const char *name)
 	}
 
 	Package_Ptr package = new Package ( _channel,
-		                           _current_package_name,
-		                           _current_package_edition,
-		                           _current_package_arch);
-
+					   _current_resitem_kind,
+		                           _current_resitem_name,
+		                           _current_resitem_edition,
+		                           _current_resitem_arch);
 
 	if (_channel->system())				// simulate system channel by loading xml file
 	    package->setInstalled (true);
 
 	Dependencies deps;
-	deps.requires          = _current_requires;
-	deps.provides          = _current_provides;
-	deps.conflicts         = _current_conflicts;
-	deps.obsoletes         = _current_obsoletes;
-	deps.suggests          = _current_suggests;
-	deps.recommends        = _current_recommends;
+	deps.requires		= _current_requires;
+	deps.provides		= _current_provides;
+	deps.conflicts		= _current_conflicts;
+	deps.obsoletes		= _current_obsoletes;
+	deps.suggests		= _current_suggests;
+	deps.recommends		= _current_recommends;
+	deps.freshens		= _current_freshens;
 	package->deprecatedSetDependencies  (deps);
-	package->setPrettyName    (_current_package_prettyName);
-	package->setSummary       (_current_package_summary);
-	package->setDescription   (_current_package_description);
-	package->setFileSize      (_current_package_fileSize);
-	package->setInstalledSize (_current_package_installedSize);
-	package->setInstallOnly   (_current_package_installOnly);
-	package->setPackageSet    (_current_package_packageSet);
-	for (PackageUpdateList::iterator iter = _current_package_packageUpdateList.begin();
-	     iter != _current_package_packageUpdateList.end();
+	package->setPrettyName    (_current_resitem_prettyName);
+	package->setSummary       (_current_resitem_summary);
+	package->setDescription   (_current_resitem_description);
+	package->setFileSize      (_current_resitem_fileSize);
+	package->setInstalledSize (_current_resitem_installedSize);
+	package->setInstallOnly   (_current_resitem_installOnly);
+	package->setPackageSet    (_current_resitem_packageSet);
+	for (PackageUpdateList::iterator iter = _current_resitem_packageUpdateList.begin();
+	     iter != _current_resitem_packageUpdateList.end();
 	     iter++) {
 	    PackageUpdate_Ptr update = *iter;
 	    update->setPackage (package);
@@ -651,46 +700,46 @@ XmlParser::packageEnd(const char *name)
 	_all_packages.push_back (package);
 
 //	_DBG("RC_SPEW") << package->asString(true) << endl;
-	_DBG("RC_SPEW_XML") << "XmlParser::packageEnd done: '" << package->asString(true) << "'" << endl;
-//	_XXX("RC_SPEW_XML") << "XmlParser::packageEnd now " << _all_packages.size() << " packages" << endl;
-	_current_package_stored = true;
+	_DBG("RC_SPEW_XML") << "XmlParser::resolvableEnd(" << name << ") done: '" << package->asString(true) << "'" << endl;
+//	_XXX("RC_SPEW_XML") << "XmlParser::resolvableEnd now " << _all_packages.size() << " packages" << endl;
+	_current_resitem_stored = true;
 	_state = PARSER_TOPLEVEL;
     }
-    else if (!strcmp(name, "name")) {			_current_package_name = strstrip (_text_buffer);
-    } else if (!strcmp(name, "pretty_name")) {		_current_package_prettyName = strstrip (_text_buffer);
-    } else if (!strcmp(name, "summary")) {		_current_package_summary = strstrip (_text_buffer);
-    } else if (!strcmp(name, "description")) {		_current_package_description = strstrip (_text_buffer);
-    } else if (!strcmp(name, "section")) {		_current_package_section = strstrip (_text_buffer);
-    } else if (!strcmp(name, "arch")) {			_current_package_arch = Arch(strstrip (_text_buffer));
-    } else if (!strcmp(name, "filesize")) {		_current_package_fileSize = atoi(_text_buffer);
-    } else if (!strcmp(name, "installedsize")) {		_current_package_installedSize = atoi(_text_buffer);
-    } else if (!strcmp(name, "install_only")) {		_current_package_installOnly = true;
-    } else if (!strcmp(name, "package_set")) {		_current_package_packageSet = true;
+    else if (name == "name") {			_current_resitem_name = strstrip (_text_buffer);
+    } else if (name == "pretty_name") {		_current_resitem_prettyName = strstrip (_text_buffer);
+    } else if (name == "summary") {		_current_resitem_summary = strstrip (_text_buffer);
+    } else if (name == "description") {		_current_resitem_description = strstrip (_text_buffer);
+    } else if (name == "section") {		_current_resitem_section = strstrip (_text_buffer);
+    } else if (name == "arch") {		_current_resitem_arch = Arch(strstrip (_text_buffer));
+    } else if (name == "filesize") {		_current_resitem_fileSize = atoi(_text_buffer);
+    } else if (name == "installedsize") {	_current_resitem_installedSize = atoi(_text_buffer);
+    } else if (name == "install_only") {	_current_resitem_installOnly = true;
+    } else if (name == "package_set") {		_current_resitem_packageSet = true;
     } else {
-	_DBG("RC_SPEW_XML") << "XmlParser::packageEnd(" << name << ") unknown" << endl;
+	_DBG("RC_SPEW_XML") << "XmlParser::resolvableEnd(" << name << ") unknown" << endl;
     }
 
-//    _XXX("RC_SPEW_XML") << "XmlParser::packageEnd(" << name << ") done" << endl;
+//    _XXX("RC_SPEW_XML") << "XmlParser::resolvableEnd(" << name << ") done" << endl;
 
     releaseBuffer();
 }
 
 
 void
-XmlParser::historyEnd(const char *name)
+XmlParser::historyEnd (const std::string & name)
 {
 //    _XXX("RC_SPEW_XML") << "XmlParser::historyEnd(" << name << ")" << endl;
 
-    if (!strcmp(name, "history")) {
+    if (name == "history") {
 	assert(_current_update == NULL);
 
-	_state = PARSER_PACKAGE;
+	_state = PARSER_RESOLVABLE;
     }
 }
 
 
 void
-XmlParser::updateEnd(const char *name)
+XmlParser::updateEnd (const std::string & name)
 {
 //    _XXX("RC_SPEW_XML") << "XmlParser::updateEnd(" << name << ")" << endl;
 
@@ -703,17 +752,17 @@ XmlParser::updateEnd(const char *name)
 	url_prefix = _channel->filePath ();
     }
 
-    if (!strcmp(name, "update")) {
-	_current_package_packageUpdateList.push_back(_current_update);
+    if (name == "update") {
+	_current_resitem_packageUpdateList.push_back(_current_update);
 
 	_current_update = NULL;
 	_state = PARSER_HISTORY;
 
-    } else if (!strcmp(name, "epoch")) {		_current_update->setEpoch (atoi(_text_buffer));
-    } else if (!strcmp(name, "version")) {		_current_update->setVersion (strstrip (_text_buffer));
-    } else if (!strcmp(name, "release")) {		_current_update->setRelease (strstrip (_text_buffer));
-    } else if (!strcmp(name, "arch")) {			_current_update->setArch (strstrip (_text_buffer));
-    } else if (!strcmp(name, "filename")) {
+    } else if (name == "epoch") {		_current_update->setEpoch (atoi(_text_buffer));
+    } else if (name == "version") {		_current_update->setVersion (strstrip (_text_buffer));
+    } else if (name == "release") {		_current_update->setRelease (strstrip (_text_buffer));
+    } else if (name == "arch") {		_current_update->setArch (strstrip (_text_buffer));
+    } else if (name == "filename") {
 	strstrip (_text_buffer);
 	if (!url_prefix.empty()) {
 	    _current_update->setPackageUrl (maybe_merge_paths(url_prefix, _text_buffer));
@@ -721,9 +770,9 @@ XmlParser::updateEnd(const char *name)
 	else {
 	    _current_update->setPackageUrl (_text_buffer);
 	}
-    } else if (!strcmp(name, "filesize")) {		_current_update->setPackageSize (atoi(_text_buffer));
-    } else if (!strcmp(name, "installedsize")) {	_current_update->setInstalledSize (atoi (_text_buffer));
-    } else if (!strcmp(name, "signaturename")) {
+    } else if (name == "filesize") {		_current_update->setPackageSize (atoi(_text_buffer));
+    } else if (name == "installedsize") {	_current_update->setInstalledSize (atoi (_text_buffer));
+    } else if (name == "signaturename") {
 	strstrip (_text_buffer);
 	if (!url_prefix.empty()) {
 	    _current_update->setSignatureUrl (maybe_merge_paths(url_prefix, _text_buffer));
@@ -731,14 +780,14 @@ XmlParser::updateEnd(const char *name)
 	else {
 	    _current_update->setSignatureUrl (_text_buffer);
 	}
-    } else if (!strcmp(name, "signaturesize")) {	_current_update->setSignatureSize (atoi (_text_buffer));
-    } else if (!strcmp(name, "md5sum")) {		_current_update->setMd5sum (strstrip (_text_buffer));
-    } else if (!strcmp(name, "importance")) {		_current_update->setImportance (Importance::parse (strstrip (_text_buffer)));
-    } else if (!strcmp(name, "description")) {		_current_update->setDescription (strstrip (_text_buffer));
-    } else if (!strcmp(name, "hid")) {			_current_update->setHid (atoi(_text_buffer));
-    } else if (!strcmp (name, "license")) {		_current_update->setLicense (strstrip (_text_buffer));
+    } else if (name == "signaturesize") {	_current_update->setSignatureSize (atoi (_text_buffer));
+    } else if (name == "md5sum") {		_current_update->setMd5sum (strstrip (_text_buffer));
+    } else if (name == "importance") {		_current_update->setImportance (Importance::parse (strstrip (_text_buffer)));
+    } else if (name == "description") {		_current_update->setDescription (strstrip (_text_buffer));
+    } else if (name == "hid") {			_current_update->setHid (atoi(_text_buffer));
+    } else if (name == "license") {		_current_update->setLicense (strstrip (_text_buffer));
     } else {
-	fprintf (stderr, "XmlParser::updateEnd(%s) unknown\n", name);
+	fprintf (stderr, "XmlParser::updateEnd(%s) unknown\n", name.c_str());
     }
 
 //    if (_current_update != NULL )
@@ -750,11 +799,11 @@ XmlParser::updateEnd(const char *name)
 
 
 void
-XmlParser::dependencyEnd(const char *name)
+XmlParser::dependencyEnd (const std::string & name)
 {
 //    _XXX("RC_SPEW_XML") << "XmlParser::dependencyEnd(" << name << ")" << endl;
 
-    if (!strcmp(name, "or")) {
+    if (name == "or") {
 #if 0
 	OrDependency_Ptr or_dep = OrDependency::fromDependencyList (*_current_dep_list);
 	Dependency_Ptr dep = new Dependency (or_dep);
@@ -765,14 +814,14 @@ XmlParser::dependencyEnd(const char *name)
 	_current_dep_list = _toplevel_dep_list;
 #endif
     }
-    else if (!strcmp(name, "dep")) {
+    else if (name == "dep") {
 	/* We handled everything we needed for dep in start */
     }
     else {
 	/* All of the dep lists (requires, provides, etc.) */
 	_toplevel_dep_list = NULL;
 	_current_dep_list = NULL;
-	_state = PARSER_PACKAGE;
+	_state = PARSER_RESOLVABLE;
     }
 }
 
