@@ -89,14 +89,49 @@ namespace zypp
     void clear()
     { store().clear(); }
 
-    // query
-    template <class _Function>
-      _Function forEach( _Function fnc_r )
-      { return std::for_each( store().begin(), store().end(), fnc_r ); }
+    /** Query inerface.
+     * Both, \a filter_r and \a fnc_r are expected to be
+     * functions or functors taking a <tt>ResObject::Ptr<\tt>
+     * as argument and return a \c bool.
+     *
+     * forEach iterates over all ResObjects and invokes \a fnc_r,
+     * iff \a filter_r returned \c true. If \a fnc_r returnes
+     * \c false the loop is aborted.
+     *
+     * forEach returns the number of \a fnc_r invocations. Positive
+     * if the loop succeeded. Negative if some call to \a fnc_r
+     * returned \c false.
+     +
+     * \see ResFilters for a collection of predefined filters.
+     */
+    template <class _Function, class _Filter>
+      int forEach( _Filter filter_r, _Function fnc_r ) const
+      {
+        int cnt = 0;
+        for ( ResStore::const_iterator it = _store.begin(); it != _store.end(); ++it )
+          {
+            if ( filter_r( *it ) )
+              {
+                ++cnt;
+                if ( ! fnc_r( *it ) )
+                  return -cnt;
+              }
+          }
+        return cnt;
+      }
 
     template <class _Function>
-      _Function forEach( _Function fnc_r ) const
-      { return std::for_each( store().begin(), store().end(), fnc_r ); }
+      int forEach( _Function fnc_r ) const
+      {
+        int cnt = 0;
+        for ( ResStore::const_iterator it = _store.begin(); it != _store.end(); ++it )
+          {
+            ++cnt;
+            if ( ! fnc_r( *it ) )
+              return -cnt;
+          }
+        return cnt;
+      }
 
   private:
     /**  */
@@ -116,69 +151,6 @@ namespace zypp
 
   /** \relates ResStore Stream output */
   std::ostream & operator<<( std::ostream & str, const ResStore & obj );
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  // Predefined filters
-  //
-  ///////////////////////////////////////////////////////////////////
-
-  /** Filter by kind. */
-  template <class _Function>
-    struct ByKindFilter
-    {
-      ByKindFilter( const ResObject::Kind & kind_r, const _Function & fnc_r )
-      : _kind( kind_r )
-      , _fnc( fnc_r )
-      {}
-
-      void operator()( ResObject::Ptr p ) const
-      {
-        if ( p->kind() == _kind )
-          _fnc( p );
-      }
-
-      ResObject::Kind _kind;
-      const _Function & _fnc;
-    };
-
-  /** Convenience creating appropriate ByKindFilter. */
-  template <class _Function>
-    ByKindFilter<_Function> byKind( const ResObject::Kind & kind_r, const _Function & fnc_r )
-    { return ByKindFilter<_Function>( kind_r, fnc_r ); }
-
-  /** Convenience creating appropriate ByKindFilter. */
-  template <class _Res, class _Function>
-    ByKindFilter<_Function> byKind( const _Function & fnc_r )
-    { return ByKindFilter<_Function>( ResTraits<_Res>::kind, fnc_r ); }
-
-  ///////////////////////////////////////////////////////////////////
-
-  /** Filter by name. */
-  template <class _Function>
-    struct ByNameFilter
-    {
-      ByNameFilter( const std::string & name_r, const _Function & fnc_r )
-      : _name( name_r )
-      , _fnc( fnc_r )
-      {}
-
-      void operator()( ResObject::Ptr p ) const
-      {
-        if ( p->name() == _name )
-          _fnc( p );
-      }
-
-      std::string _name;
-      const _Function & _fnc;
-    };
-
-  /** Convenience creating appropriate ByNameFilter. */
-  template <class _Function>
-    ByNameFilter<_Function> byName( const std::string & name_r, const _Function & fnc_r )
-    { return ByNameFilter<_Function>( name_r, fnc_r ); }
-
-  ///////////////////////////////////////////////////////////////////
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

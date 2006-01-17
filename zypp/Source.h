@@ -57,7 +57,7 @@ namespace zypp
     /** Stream output. */
     std::ostream & dumpOn( std::ostream & str ) const;
 
-  public:
+  private:
     /** Pointer to implementation */
     RW_pointer<Impl,rw_pointer::Intrusive<Impl> > _pimpl;
   };

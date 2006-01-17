@@ -6,18 +6,16 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/source/Builtin.h
+/** \file	zypp/source/susetags/SuseTagsImpl.h
  *
- * Include all builtin Source implementations.
 */
-#ifndef ZYPP_SOURCE_BUILTIN_H
-#define ZYPP_SOURCE_BUILTIN_H
+#ifndef ZYPP_SOURCE_SUSETAGS_SUSETAGSIMPL_H
+#define ZYPP_SOURCE_SUSETAGS_SUSETAGSIMPL_H
 
 #include <iosfwd>
 
+#include "zypp/Pathname.h"
 #include "zypp/source/SourceImpl.h"
-#include "zypp/source/susetags/SuseTagsImpl.h"
-#include "zypp/source/yum/YUMSource.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -25,6 +23,39 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace source
   { /////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+    namespace susetags
+    { /////////////////////////////////////////////////////////////////
+
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	CLASS NAME : SuseTagsImpl
+      //
+      /** */
+      class SuseTagsImpl : public SourceImpl
+      {
+      public:
+        /** \deprecated Interim ctor
+         * \throw EXCEPTION on parse error
+        */
+        SuseTagsImpl( const Pathname & localDir_r );
+        /** Dtor */
+        ~SuseTagsImpl();
+
+      public:
+        /** Stream output. */
+        virtual std::ostream & dumpOn( std::ostream & str ) const;
+
+      public:
+
+      };
+      ///////////////////////////////////////////////////////////////////
+
+      /////////////////////////////////////////////////////////////////
+    } // namespace susetags
+    ///////////////////////////////////////////////////////////////////
+
+    using susetags::SuseTagsImpl;
 
     /////////////////////////////////////////////////////////////////
   } // namespace source
@@ -32,4 +63,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SOURCE_BUILTIN_H
+#endif // ZYPP_SOURCE_SUSETAGS_SUSETAGSIMPL_H

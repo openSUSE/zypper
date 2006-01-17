@@ -8,14 +8,16 @@ SUBDIRS =
 sourceincludedir = $(pkgincludedir)/source
 
 sourceinclude_HEADERS =	\
-	PackagesParser.h
+	PackagesParser.h\
+	SuseTagsImpl.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_source_susetags.la
 
 ## ##################################################
 
 lib@PACKAGE@_source_susetags_la_SOURCES = \
-	PackagesParser.cc
+	PackagesParser.cc	\
+	SuseTagsImpl.cc
 
 lib@PACKAGE@_source_susetags_la_LIBADD =
 

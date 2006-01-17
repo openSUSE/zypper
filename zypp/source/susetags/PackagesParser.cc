@@ -80,7 +80,7 @@ namespace zypp
                 ZYPP_THROW( ParseException( "Pkg" ) );
 
               newPkg();
-              nvrad = NVRAD( words[0], Edition(words[1],words[2]), Arch(words[4]) );
+              nvrad = NVRAD( words[0], Edition(words[1],words[2]), Arch(words[3]) );
             }
         }
 

@@ -29,6 +29,7 @@ pkginclude_HEADERS = NeedAType.h \
 	Resolvable.h	\
 	ResTraits.h	\
 	ResStore.h	\
+	ResFilters.h	\
 	Package.h	\
 	Pathname.h	\
 	Selection.h	\

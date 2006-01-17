@@ -336,13 +336,13 @@ namespace zypp
       /** Returns current users permission (<tt>[0-7]</tt>)*/
       mode_t userMay() const;
 
-      bool   userMayR() const { return( userMay() & 01 ); }
+      bool   userMayR() const { return( userMay() & 04 ); }
       bool   userMayW() const { return( userMay() & 02 ); }
-      bool   userMayX() const { return( userMay() & 04 ); }
+      bool   userMayX() const { return( userMay() & 01 ); }
 
-      bool   userMayRW()  const { return( (userMay() & 03) == 03 ); }
+      bool   userMayRW()  const { return( (userMay() & 06) == 06 ); }
       bool   userMayRX()  const { return( (userMay() & 05) == 05 ); }
-      bool   userMayWX()  const { return( (userMay() & 06) == 06 ); }
+      bool   userMayWX()  const { return( (userMay() & 03) == 03 ); }
 
       bool   userMayRWX() const { return( userMay() == 07 ); }
       //@}
