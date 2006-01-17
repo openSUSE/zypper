@@ -251,10 +251,11 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    context->addInfo (info);
 	}
 
-	// we're done if this isn't currently uninstalled
+	// we're done if this isn't currently uninstalled or incomplete
 
 	if (! (status == RESOLVABLE_STATUS_UNINSTALLED
-	       || status == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK)) {
+	       || status == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK
+	       || resItem_status_is_incomplete (status))) {
 	    goto finished;
 	}
 
