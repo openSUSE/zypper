@@ -223,6 +223,13 @@ StoreWorld::addResItem (ResItem_constPtr resItem)
 	_conflicts_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency().index(), r_and_d));
     }
 
+    /* StoreWorld all of the resItem's freshens in a hash by name. */
+
+    for (CapSet::const_iterator i = resItem->freshens().begin(); i != resItem->freshens().end(); i++) {
+	r_and_d = new ResItemAndDependency (resItem, *i);
+	_freshens_by_name.insert (ResItemAndDependencyTable::value_type (r_and_d->dependency().index(), r_and_d));
+    }
+
  finished:
 
     return actually_added_package;
@@ -288,6 +295,7 @@ StoreWorld::removeResItem (ResItem_constPtr resItem)
     resItem_and_dependency_table_remove (_provides_by_name, resItem);
     resItem_and_dependency_table_remove (_requires_by_name, resItem);
     resItem_and_dependency_table_remove (_conflicts_by_name, resItem);
+    resItem_and_dependency_table_remove (_freshens_by_name, resItem);
 
     resItem_table_remove (_resItems_by_name, resItem);
 
@@ -609,6 +617,47 @@ StoreWorld::foreachConflictingResItem (const Capability & dep, ResItemAndDepFn f
 
 	if (r_and_d)
 //fprintf (stderr, "==> %s verify %s ? %s\n", r_and_d->asString().c_str(), dep->asString().c_str(), r_and_d->verifyRelation (dep) ? "Y" : "N");
+	if (r_and_d && r_and_d->dependency().matches (dep) == CapMatch::yes) {
+	    /* Skip dups if one of them in installed. */
+	    if (r_and_d->resItem()->isInstalled()
+		|| installed.find(r_and_d->resItem()) == installed.end()) {
+
+		if (fn) {
+		    if (! fn(r_and_d->resItem(), r_and_d->dependency(), data)) {
+			count = -1;
+			goto finished;
+		    }
+		}
+		++count;
+	    }
+	}
+    }
+
+ finished:
+
+    return count;
+}
+
+int
+StoreWorld::foreachFresheningResItem (const Capability & dep, ResItemAndDepFn fn, void *data)
+{
+    int count = 0;
+    InstalledTable installed;
+fprintf (stderr, "StoreWorld::foreachFresheningResItem (%s)\n", dep.asString().c_str());
+    for (ResItemAndDependencyTable::const_iterator iter = _freshens_by_name.lower_bound(dep.index()); iter != _freshens_by_name.upper_bound(dep.index()); iter++) {
+	ResItemAndDependency_constPtr r_and_d = iter->second;
+	ResItem_constPtr res = r_and_d->resItem();
+fprintf (stderr, "==> %s\n", res->asString().c_str());
+	if (res != NULL && res->isInstalled ()) {
+	    installed[res] = r_and_d;
+	}
+    }
+
+    for (ResItemAndDependencyTable::const_iterator iter = _freshens_by_name.lower_bound(dep.index()); iter != _freshens_by_name.upper_bound(dep.index()); iter++) {
+	ResItemAndDependency_constPtr r_and_d = iter->second;
+
+	if (r_and_d)
+fprintf (stderr, "==> %s verify %s ? %s\n", r_and_d->asString().c_str(), dep.asString().c_str(), r_and_d->dependency().matches (dep) == CapMatch::yes ? "Y" : "N");
 	if (r_and_d && r_and_d->dependency().matches (dep) == CapMatch::yes) {
 	    /* Skip dups if one of them in installed. */
 	    if (r_and_d->resItem()->isInstalled()

@@ -226,9 +226,10 @@ class World : public base::ReferenceCounted, private base::NonCopyable {
 
     // Iterate across provides or requirement
 
-    virtual int foreachProvidingResItem (const Capability & dep, ResItemAndDepFn fn, void *user_data) = 0;
-    virtual int foreachRequiringResItem (const Capability & dep, ResItemAndDepFn fn, void *user_data) = 0;
-    virtual int foreachConflictingResItem (const Capability & dep, ResItemAndDepFn fn, void *user_data) = 0;
+    virtual int foreachProvidingResItem (const Capability & cap, ResItemAndDepFn fn, void *user_data) = 0;
+    virtual int foreachRequiringResItem (const Capability & cap, ResItemAndDepFn fn, void *user_data) = 0;
+    virtual int foreachConflictingResItem (const Capability & cap, ResItemAndDepFn fn, void *user_data) = 0;
+    virtual int foreachFresheningResItem (const Capability & cap, ResItemAndDepFn fn, void *user_data) = 0;
 
     // upgrades
 

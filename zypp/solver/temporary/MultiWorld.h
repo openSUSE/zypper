@@ -119,9 +119,10 @@ class MultiWorld : public World {
 
     // Iterate across provides or requirement
 
-    virtual int foreachProvidingResItem (const Capability & dep, ResItemAndDepFn fn, void *data);
-    virtual int foreachRequiringResItem (const Capability & dep, ResItemAndDepFn fn, void *data);
-    virtual int foreachConflictingResItem (const Capability & dep, ResItemAndDepFn fn, void *data);
+    virtual int foreachProvidingResItem (const Capability & cap, ResItemAndDepFn fn, void *data);
+    virtual int foreachRequiringResItem (const Capability & cap, ResItemAndDepFn fn, void *data);
+    virtual int foreachConflictingResItem (const Capability & cap, ResItemAndDepFn fn, void *data);
+    virtual int foreachFresheningResItem (const Capability & cap, ResItemAndDepFn fn, void *user_data);
 
     // locks
 

@@ -61,6 +61,7 @@ class StoreWorld : public World {
     ResItemAndDependencyTable _provides_by_name;
     ResItemAndDependencyTable _requires_by_name;
     ResItemAndDependencyTable _conflicts_by_name;
+    ResItemAndDependencyTable _freshens_by_name;
 
     ChannelList _channels;
 
@@ -102,9 +103,10 @@ class StoreWorld : public World {
 
     // Iterate across provides or requirement
 
-    virtual int foreachProvidingResItem (const Capability & dep, ResItemAndDepFn fn, void *data);
-    virtual int foreachRequiringResItem (const Capability & dep, ResItemAndDepFn fn, void *data);
-    virtual int foreachConflictingResItem (const Capability & dep, ResItemAndDepFn fn, void *data);
+    virtual int foreachProvidingResItem (const Capability & cap, ResItemAndDepFn fn, void *data);
+    virtual int foreachRequiringResItem (const Capability & cap, ResItemAndDepFn fn, void *data);
+    virtual int foreachConflictingResItem (const Capability & cap, ResItemAndDepFn fn, void *data);
+    virtual int foreachFresheningResItem (const Capability & cap, ResItemAndDepFn fn, void *user_data);
 
     // Channels
 

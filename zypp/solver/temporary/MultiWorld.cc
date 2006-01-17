@@ -661,6 +661,21 @@ MultiWorld::foreachConflictingResItem (const Capability & dep, ResItemAndDepFn f
 }
 
 
+int
+MultiWorld::foreachFresheningResItem (const Capability & dep, ResItemAndDepFn fn, void *data)
+{
+    int count = 0;
+    for (SubWorldInfoList::const_iterator iter = _subworlds.begin(); iter != _subworlds.end(); iter++) {
+	int this_count;
+	this_count = (*iter)->subworld()->foreachFresheningResItem (dep, fn, data);
+	if (this_count < 0)
+	    return -1;
+	count += this_count;
+    }
+    return count;
+}
+
+
 //-----------------------------------------------------------------------------
 // iterater over resItems with locks
 
