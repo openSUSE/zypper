@@ -26,6 +26,7 @@
 #include "zypp/solver/temporary/World.h"
 
 #include "zypp/solver/detail/QueueItemInstall.h"
+#include "zypp/solver/detail/QueueItemEstablish.h"
 #include "zypp/solver/detail/QueueItemUninstall.h"
 #include "zypp/solver/detail/QueueItemRequire.h"
 #include "zypp/solver/detail/QueueItemConflict.h"
@@ -35,6 +36,7 @@
 #include "zypp/solver/detail/ResolverInfoMisc.h"
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
 #include "zypp/solver/detail/ResItemAndDependency.h"
+#include "zypp/CapFactory.h"
 #include "zypp/CapSet.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
@@ -148,6 +150,25 @@ build_conflict_list (ResItem_constPtr resItem, const Capability & dep, void *dat
 	rl->push_front (resItem);
 	return true;
 }
+
+// Handle resItems which freshen us -> re-establish them
+
+typedef struct {
+    World_Ptr world;
+    QueueItemList *qil;
+} EstablishFreshensInfo;
+
+static bool
+establish_freshens_cb (ResItem_constPtr resItem, const Capability & dep, void *data)
+{
+    _DBG("RC_SPEW") << "establish_freshens_cb (" << resItem << ", " << dep << ")" << endl;
+    EstablishFreshensInfo *info = (EstablishFreshensInfo *)data;
+
+    QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (info->world, resItem);
+    info->qil->push_front (establish_item);
+    return true;
+}
+
 
 bool
 QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
@@ -343,6 +364,15 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    uninstall_item->addInfo (log_info);
 	    qil.push_front (uninstall_item);
 	}
+
+
+	/* Construct establish items for each of those which freshen this resolvable. */
+
+	EstablishFreshensInfo info = { world(), &qil };
+	CapFactory  factory;
+	Capability cap = factory.parse (resItem->kind(), resItem->name(), Rel::EQ, resItem->edition());
+	world()->foreachFresheningResItem (cap, establish_freshens_cb, &info);
+
 	}
 
  finished:
