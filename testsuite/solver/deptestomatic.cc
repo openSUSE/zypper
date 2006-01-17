@@ -855,8 +855,8 @@ parse_xml_trial (XmlNode_Ptr node)
 
 	    printf (">!> Establishing state ...\n");
 
-	    resolver.establishState ();
-
+	    resolver.establishState (established);
+//cerr << "established<" << established << "> -> <" << resolver.bestContext() << ">" << endl;
 	    established = resolver.bestContext();
 	    if (established == NULL)
 		printf (">!> Established NO context !\n");
