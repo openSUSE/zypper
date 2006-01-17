@@ -7,7 +7,7 @@
 
    : B-1.0 is installed
    : A-1.1 is installed
-   : patch-A-1-1 is installed
+   : patch-A-1-1 is satisfied
 -->
 <test allow_virtual_conflicts="yes">
 <setup>
