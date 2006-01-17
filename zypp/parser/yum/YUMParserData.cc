@@ -79,6 +79,9 @@ namespace zypp {
       YUMGroupData::YUMGroupData()
       { }
 
+      YUMPatternData::YUMPatternData()
+      { }
+
       MultiLang::MultiLang()
       { }
 
@@ -129,6 +132,7 @@ namespace zypp {
       IMPL_PTR_TYPE(YUMRepomdData);
       IMPL_PTR_TYPE(YUMPrimaryData);
       IMPL_PTR_TYPE(YUMGroupData);
+      IMPL_PTR_TYPE(YUMPatternData);
       IMPL_PTR_TYPE(YUMFileListData);
       IMPL_PTR_TYPE(YUMOtherData);
       IMPL_PTR_TYPE(YUMPatchData);
@@ -320,6 +324,24 @@ namespace zypp {
           << data.description << endl
           << "grouplist:" << endl
           << data.grouplist << endl
+          << "packageList:" << endl
+          << data.packageList << endl;
+        return out;
+      }
+
+      ostream& operator<<(ostream &out, const YUMPatternData& data)
+      {
+        out << "-------------------------------------------------" << endl
+          << "Pattern Data: " << endl
+          << "pattern-id: '" << data.patternId << "'" << endl
+          << "name:" << endl
+          << data.name << endl
+          << "default: '" << data.default_  << "'" << endl
+          << "user-visible: '" << data.userVisible  << "'" << endl
+          << "description:" << endl
+          << data.description << endl
+          << "patternlist:" << endl
+          << data.patternlist << endl
           << "packageList:" << endl
           << data.packageList << endl;
         return out;

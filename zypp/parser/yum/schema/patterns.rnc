@@ -1,0 +1,34 @@
+default namespace = "http://linux.duke.edu/metadata/patterns"
+
+element patterns {
+  element pattern {
+    element patternid { text },
+    element name {
+      attribute lang { text }?,
+      text
+    }+,
+    element default { "true" | "false" }?,
+    element uservisible { "true" | "false" },
+    element description {
+      attribute lang { text }?,
+      text
+    }+,
+    element patternlist {
+      element metapkg {
+        attribute type { text }?,
+        text
+      }+
+    }?,
+    element packagelist {
+      element packagereq {
+        attribute type { text }?,
+        attribute epoch { xsd:nonNegativeInteger },
+        attribute ver { text },
+        attribute rel { text },
+        text
+      }+
+    }?,
+    empty
+  }+,
+  empty
+}

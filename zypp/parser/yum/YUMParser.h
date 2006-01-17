@@ -18,6 +18,7 @@
 #include "zypp/parser/yum/YUMRepomdParser.h"
 #include "zypp/parser/yum/YUMPrimaryParser.h"
 #include "zypp/parser/yum/YUMGroupParser.h"
+#include "zypp/parser/yum/YUMPatternParser.h"
 #include "zypp/parser/yum/YUMFileListParser.h"
 #include "zypp/parser/yum/YUMOtherParser.h"
 #include "zypp/parser/yum/YUMPatchParser.h"

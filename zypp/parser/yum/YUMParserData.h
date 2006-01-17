@@ -36,6 +36,7 @@ namespace zypp {
       DEFINE_PTR_TYPE( YUMRepomdData );
       DEFINE_PTR_TYPE( YUMPrimaryData );
       DEFINE_PTR_TYPE( YUMGroupData );
+      DEFINE_PTR_TYPE( YUMPatternData );
       DEFINE_PTR_TYPE( YUMFileListData );
       DEFINE_PTR_TYPE( YUMOtherData );
       DEFINE_PTR_TYPE( YUMPatchData );
@@ -344,6 +345,23 @@ namespace zypp {
         std::string userVisible;
         std::list<MultiLang> description;
         std::list<MetaPkg> grouplist;
+        std::list<PackageReq> packageList;
+      };
+
+      /**
+      * @short Describes the patterns in a YUM repository
+      **/
+
+      class YUMPatternData : public base::ReferenceCounted, private base::NonCopyable {
+      public:
+
+        YUMPatternData();
+        std::string patternId;
+        std::list<MultiLang> name;
+        std::string default_;
+        std::string userVisible;
+        std::list<MultiLang> description;
+        std::list<MetaPkg> patternlist;
         std::list<PackageReq> packageList;
       };
 

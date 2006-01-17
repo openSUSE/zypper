@@ -22,6 +22,7 @@ namespace zypp {
     #define REPOMDSCHEMA (SCHEMABASE "repomd.rng")
     #define PRIMARYSCHEMA (SCHEMABASE "suse-primary.rng")
     #define GROUPSCHEMA (SCHEMABASE "groups.rng")
+    #define PATTERNSCHEMA (SCHEMABASE "patterns.rng")
     #define FILELISTSCHEMA (SCHEMABASE "filelists.rng")
     #define OTHERSCHEMA (SCHEMABASE "other.rng")
     #define PATCHSCHEMA (SCHEMABASE "patch.rng")
