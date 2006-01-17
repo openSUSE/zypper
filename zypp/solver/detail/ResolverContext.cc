@@ -426,7 +426,8 @@ ResolverContext::unneededResItem (ResItem_constPtr resItem, int other_penalty)
     status = getStatus (resItem);
 
     if (status == RESOLVABLE_STATUS_INSTALLED
-	|| status == RESOLVABLE_STATUS_UNINSTALLED) {
+	|| status == RESOLVABLE_STATUS_UNINSTALLED
+	|| status == RESOLVABLE_STATUS_SATISFIED) {
 	setStatus (resItem, RESOLVABLE_STATUS_UNNEEDED);
     }
 
