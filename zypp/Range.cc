@@ -26,7 +26,6 @@ namespace zypp
      * Takes the \a lhs and \a rhs operator and the result
      * of comparing \a lhs and \a rhs (<tt>-1,0,1</tt>).
      *
-     *\todo FIX omitting the Rel::NE case
     */
     bool overlaps( Rel lhs, Rel rhs, int cmp )
     {
@@ -34,6 +33,46 @@ namespace zypp
         return false;
       if ( lhs == Rel::ANY || rhs == Rel::ANY )
         return true;
+
+      if ( lhs == Rel::NE )
+      {
+	  if ( cmp < 0 )
+	  {
+	      // lhs < rhs
+	      return( rhs == Rel::GE 
+		      || rhs == Rel::EQ );
+	  } else if ( cmp > 0)
+	  {
+	      // lhs > rhs
+	      return( rhs == Rel::LT
+		      || rhs == Rel::EQ );	      
+	  } else 
+	  {
+	      //lhs == rhs
+	      return ( rhs == Rel::GT
+		       || rhs == Rel::LT );
+	  }
+      }
+      
+      if ( rhs == Rel::NE )
+      {
+	  if ( cmp < 0 )
+	  {
+	      // lhs < rhs
+	      return(  lhs == Rel::LE
+		       || lhs == Rel::EQ );
+	  } else if ( cmp > 0)
+	  {
+	      // lhs > rhs
+	      return(  lhs == Rel::GT
+		       || lhs == Rel::EQ );	      
+	  } else
+	  {
+	      //lhs == rhs
+	      return ( lhs == Rel::GT
+		       || lhs == Rel::LT );
+	  }
+      }
 
       if ( cmp < 0 )
         {
