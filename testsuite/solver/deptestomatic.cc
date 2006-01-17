@@ -73,7 +73,10 @@ string2kind (const std::string & str)
 {
     Resolvable::Kind kind = ResTraits<zypp::Package>::kind;
     if (!str.empty()) {
-	if (str == "patch") {
+	if (str == "package") {
+	    // empty 
+	}
+	else if (str == "patch") {
 	    kind = ResTraits<zypp::Patch>::kind;
 	}
 	else if (str == "pattern") {
@@ -687,6 +690,14 @@ trial_upgrade_cb (ResItem_constPtr original, ResItem_constPtr upgrade, void *use
 
 
 static void
+print_marked_cb (ResItem_constPtr res, ResItemStatus status, void *data)
+{
+    printf (">!> %s %s\n", res->asString().c_str(), ResolverContext::toString (status).c_str());
+    return;
+}
+
+
+static void
 parse_xml_trial (XmlNode_Ptr node)
 {
     bool verify = false;
@@ -802,8 +813,10 @@ parse_xml_trial (XmlNode_Ptr node)
 	    established = resolver.bestContext();
 	    if (established == NULL)
 		printf (">!> Established NO context !\n");
-	    else
-		printf (">!> Established context\n\t%s\n", established->asString().c_str());
+	    else {
+		printf (">!> Established context\n");
+		established->foreachMarkedResItem (print_marked_cb, NULL);
+	    }
 
 	} else if (node->equals ("instorder")) {
 
