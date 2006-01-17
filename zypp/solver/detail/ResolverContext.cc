@@ -273,6 +273,12 @@ ResolverContext::installResItem (ResItem_constPtr resItem, bool is_soft, int oth
 	return false;
     }
 
+    if (resItem_status_is_satisfied (status)) {
+	msg = str::form (_("Can't install %s since it is does not apply to this system."), resItem->asString().c_str());
+	addErrorString (resItem, msg);
+	return false;
+    }
+
     if (resItem_status_is_to_be_installed (status)) {
 	return true;
     }
@@ -656,7 +662,7 @@ static void
 incomplete_pkg_cb (ResItem_constPtr resItem, ResItemStatus status, void *data)
 {
     IncompleteInfo *info = (IncompleteInfo *)data;
-#warning Probably wrong check for incomplete
+
     if (resItem_status_is_incomplete (status)) {
        if (info->fn) info->fn (resItem, status, info->rl);
        ++info->count;
