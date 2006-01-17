@@ -276,7 +276,8 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	if (! (status == RESOLVABLE_STATUS_UNINSTALLED
 	       || status == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK
-	       || resItem_status_is_incomplete (status))) {
+	       || resItem_status_is_incomplete (status)
+	       || resItem_status_is_satisfied (status))) {
 	    goto finished;
 	}
 
