@@ -2,12 +2,12 @@
 <!--
    A-1.0 is available
    A-1.2 is available
-   Patch-A-1.1 is available
+   Patch-A-1.1 is available but unneeded
    B-1.0 is to be installed which requires A
 
    : B-1.0 is installed
    : A-1.2 is installed
-   : patch-A-1-1 is installed
+   : patch-A-1-1 is satisfied
 -->
 <test allow_virtual_conflicts="yes">
 <setup>

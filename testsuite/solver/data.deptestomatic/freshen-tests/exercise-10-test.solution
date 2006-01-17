@@ -1,9 +1,8 @@
 >!> Establishing state ...
 >!> Establishing patch:Patch-A-1.1-1[test]
 >!> Established context
->!> patch:Patch-A-1.1-1[test] unneeded
->!> Installing A from channel core
+>!> patch:Patch-A-1.1-1[test] satisfied
+>!> Installing Patch-A from channel test
 >!> Solution #1:
->!> install A-1.0-1[core]
->!> |incomplete patch:Patch-A-1.1-1[test]
+>!> install patch:Patch-A-1.1-1[test]
 >!> installs=1, upgrades=0, uninstalls=0
