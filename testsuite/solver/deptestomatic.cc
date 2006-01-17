@@ -222,6 +222,21 @@ assemble_incomplete_cb (ResItem_constPtr resItem,
 }
 
 
+static void
+assemble_satisfy_cb (ResItem_constPtr resItem,
+		       ResItemStatus status,
+		       void *data)
+{
+    StringList *slist = (StringList *)data;
+    char buf[13];
+    snprintf (buf, 13, "%-10s ", resItem->isInstalled() ? "SATISFIED" : "|satisfied");
+    string str (buf);
+    str += resItem->asString();
+
+    slist->push_back (str);
+}
+
+
 
 static void
 print_sep (void)
@@ -258,6 +273,8 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 	context->foreachUpgrade (assemble_upgrade_cb, &items);
 
 	context->foreachIncomplete (assemble_incomplete_cb, &items);
+
+	context->foreachSatisfy (assemble_satisfy_cb, &items);
 
 	items.sort ();
 
