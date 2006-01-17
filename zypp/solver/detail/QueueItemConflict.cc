@@ -117,6 +117,7 @@ QueueItemConflict::~QueueItemConflict()
 
 typedef struct {
     ResolverContext_Ptr context;
+    ResItem_constPtr resItem; // the conflicting resolvable, used to filter upgrades with an identical resolvable
     CResItemList upgrades;
 } UpgradeCandidateInfo;
 
@@ -124,9 +125,9 @@ typedef struct {
 static bool
 upgrade_candidates_cb (ResItem_constPtr resItem, const Capability & cap, void *data)
 {
-//fprintf (stderr, "upgrade_candidates_cb(%s,%s)\n", resItem->asString().c_str(), cap.asString().c_str());
     UpgradeCandidateInfo *info = (UpgradeCandidateInfo *)data;
-    if (info->context->getStatus (resItem) == RESOLVABLE_STATUS_UNINSTALLED) {
+    if ( !(info->resItem->equals (resItem)) 		// dont upgrade with ourselves
+	&& info->context->getStatus (resItem) == RESOLVABLE_STATUS_UNINSTALLED) {
 	info->upgrades.push_back (resItem);
     }
     return true;
@@ -210,6 +211,7 @@ conflict_process_cb (ResItem_constPtr resItem, const Capability & cap, void *dat
 
             UpgradeCandidateInfo upgrade_info;
             upgrade_info.context = info->context;
+	    upgrade_info.resItem = resItem;
 
             Capability maybe_upgrade_dep =  factory.parse ( resItem->kind(),
                                                             resItem->name(),
@@ -335,8 +337,6 @@ QueueItemConflict::process (ResolverContext_Ptr context, QueueItemList & new_ite
     info.dep_str = _dep.asString();
 
     world()->foreachProvidingResItem (_dep, conflict_process_cb, (void *)&info);
-
-// FIXME: free self
 
     return true;
 }
