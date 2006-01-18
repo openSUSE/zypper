@@ -12,9 +12,9 @@
 #include <iostream>
 #include "zypp/base/Logger.h"
 
-#include "devel/devel.dmacvicar/PersistentStorage.h"
-#include "devel/devel.dmacvicar/Backend.h"
-#include "devel/devel.dmacvicar/XMLFilesBackend.h"
+#include "PersistentStorage.h"
+#include "Backend.h"
+#include "XMLFilesBackend.h"
 //#include "devel/devel.dmacvicar/BDBBackend.h"
 
 using std::endl;

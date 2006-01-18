@@ -9,8 +9,8 @@
 /** \file	devel/devel.dmacvicar/PersistentStorage.h
 *
 */
-#ifndef DEVEL_DEVEL_DMACVICAR_PERSISTENTSTORAGE_H
-#define DEVEL_DEVEL_DMACVICAR_PERSISTENTSTORAGE_H
+#ifndef ZYPP_TARGET_PERSISTENTSTORAGE_H
+#define ZYPP_TARGET_PERSISTENTSTORAGE_H
 
 #include <iosfwd>
 

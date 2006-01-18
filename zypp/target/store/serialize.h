@@ -15,7 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
-#include "devel/devel.dmacvicar/Backend.h"
+#include "Backend.h"
 
 #include <zypp/Message.h>
 #include <zypp/detail/MessageImpl.h>

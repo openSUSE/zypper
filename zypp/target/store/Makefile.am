@@ -1,57 +1,20 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS =	test2 test2_debug
-
-#Main Main.debug Parse
+SUBDIRS = 
 
 ## ##################################################
 
-INCLUDES =
+targetstoreincludedir = $(pkgincludedir)/target/store
 
-AM_LDFLAGS = -pg
+targetstoreinclude_HEADERS = PersistentStorage.h Backend.h XMLFilesBackend.h serialize.h xml_escape_parser.hpp parser_utils.hpp
 
-AM_CXXFLAGS =
-# gperf:	-pg
-
-
-# -ldbxml -lpathan -lxerces-c -lxquery
-LDADD =		$(top_srcdir)/zypp/lib@PACKAGE@.la -lboost_regex -lboost_filesystem -ldb -ldb_cxx 
-#LDADD =	-lboost_regex -lsqlite3 -dbxml
+noinst_LTLIBRARIES =	lib@PACKAGE@_target_store.la
 
 ## ##################################################
 
-test2_SOURCES = test2.cc PersistentStorage.cc Backend.cc XMLFilesBackend.cc serialize.cc xml_escape_parser.cpp
+lib@PACKAGE@_target_store_la_SOURCES = PersistentStorage.cc Backend.cc XMLFilesBackend.cc serialize.cc xml_escape_parser.cpp
 
-test2_debug_SOURCES = 	$(test2_SOURCES)
-test2_debug_LDFLAGS =	-static
-
-## ##################################################
-
-test1_SOURCES = test-sqlite.cc
-
-test1_debug_SOURCES = 	$(test1_SOURCES)
-test1_debug_LDFLAGS =	-static
-
-## ##################################################
-
-#Main_SOURCES = 		Main.cc
-
-#Main_debug_SOURCES = 	$(Main_SOURCES)
-#Main_debug_LDFLAGS =	-static
-
-## ##################################################
-
-#Parse_SOURCES = 	Parse.cc
-#Parse_LDFLAGS =		-static
-
-## ##################################################
-
-.PHONY:        always
-
-$(noinst_PROGRAMS):    $(top_srcdir)/zypp/lib@PACKAGE@.la
-
-$(top_srcdir)/zypp/lib@PACKAGE@.la:     always
-	$(MAKE) -C $(top_srcdir)/zypp
+lib@PACKAGE@_target_store_la_LIBADD = -lboost_regex -lboost_filesystem
 
 ## ##################################################
