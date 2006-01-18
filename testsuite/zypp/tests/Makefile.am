@@ -7,7 +7,7 @@ SUBDIRS =
 
 ## ##################################################
 
-noinst_PROGRAMS = Arch Url1 Url2 Url3 Edition
+noinst_PROGRAMS = Arch Url1 Url2 Url3 Url4 Edition
 
 ## ##################################################
 
@@ -19,6 +19,7 @@ Arch_SOURCES = Arch.cc
 Url1_SOURCES = Url1.cc
 Url2_SOURCES = Url2.cc
 Url3_SOURCES = Url3.cc
+Url4_SOURCES = Url4.cc
 Edition_SOURCES = Edition.cc
 
 ## ##################################################
