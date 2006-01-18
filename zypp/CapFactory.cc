@@ -84,16 +84,16 @@ namespace
       str << "  Capabilities total: " << _caps._count << endl;
       str << "  Capability kinds:" << endl;
       for ( std::map<CapabilityImpl::Kind,Counter>::const_iterator it = _capKind.begin();
-            it != _capKind.end(); ++it )
-        {
-          str << "    " << it->first << '\t' << it->second._count << endl;
-        }
+	    it != _capKind.end(); ++it )
+	{
+	  str << "    " << it->first << '\t' << it->second._count << endl;
+	}
       str << "  Capability refers:" << endl;
       for ( std::map<Resolvable::Kind,Counter>::const_iterator it = _capRefers.begin();
-            it != _capRefers.end(); ++it )
-        {
-          str << "    " << it->first << '\t' << it->second._count << endl;
-        }
+	    it != _capRefers.end(); ++it )
+	{
+	  str << "    " << it->first << '\t' << it->second._count << endl;
+	}
       return str;
     }
   };
@@ -131,7 +131,7 @@ namespace zypp
     static void assertResKind( const Resolvable::Kind & refers_r )
     {
       if ( refers_r == Resolvable::Kind() )
-        ZYPP_THROW( Exception("Missing or empty  Resolvable::Kind in Capability") );
+	ZYPP_THROW( Exception("Missing or empty  Resolvable::Kind in Capability") );
     }
 
     /** Check whether \a op_r and \a edition_r make a valid edition spec.
@@ -146,27 +146,27 @@ namespace zypp
     static bool isEditionSpec( Rel op_r, const Edition & edition_r )
     {
       switch ( op_r.inSwitch() )
-        {
-        case Rel::ANY_e:
-          if ( edition_r != Edition::noedition )
-            WAR << "Operator " << op_r << " causes Edition "
-            << edition_r << " to be ignored." << endl;
-          return false;
-          break;
+	{
+	case Rel::ANY_e:
+	  if ( edition_r != Edition::noedition )
+	    WAR << "Operator " << op_r << " causes Edition "
+	    << edition_r << " to be ignored." << endl;
+	  return false;
+	  break;
 
-        case Rel::NONE_e:
-          ZYPP_THROW( Exception("Operator NONE is not allowed in Capability") );
-          break;
+	case Rel::NONE_e:
+	  ZYPP_THROW( Exception("Operator NONE is not allowed in Capability") );
+	  break;
 
-        case Rel::EQ_e:
-        case Rel::NE_e:
-        case Rel::LT_e:
-        case Rel::LE_e:
-        case Rel::GT_e:
-        case Rel::GE_e:
-          return true;
-          break;
-        }
+	case Rel::EQ_e:
+	case Rel::NE_e:
+	case Rel::LT_e:
+	case Rel::LE_e:
+	case Rel::GT_e:
+	case Rel::GE_e:
+	  return true;
+	  break;
+	}
       // SHOULD NOT GET HERE
       ZYPP_THROW( Exception("Unknow Operator NONE is not allowed in Capability") );
       return false; // not reached
@@ -197,30 +197,30 @@ namespace zypp
      * is a friend of Capability. Here we can't access the ctor.
     */
     static CapabilityImpl::Ptr buildNamed( const Resolvable::Kind & refers_r,
-                                           const std::string & name_r )
+				           const std::string & name_r )
     {
       // NullCap check first:
       if ( name_r.empty() )
-        {
-          // Singleton, so no need to put it into _uset !?
-          return capability::NullCap::instance();
-        }
+	{
+	  // Singleton, so no need to put it into _uset !?
+	  return capability::NullCap::instance();
+	}
 
       assertResKind( refers_r );
 
       // file:    /absolute/path
       if ( isFileSpec( name_r ) )
-        return usetInsert
-        ( new capability::FileCap( refers_r, name_r ) );
+	return usetInsert
+	( new capability::FileCap( refers_r, name_r ) );
 
       //split:   name:/absolute/path
       str::regex  rx( "([^/]*):(/.*)" );
       str::smatch what;
       if( str::regex_match( name_r.begin(), name_r.end(), what, rx ) )
-        {
-          return usetInsert
-          ( new capability::SplitCap( refers_r, what[1].str(), what[2].str() ) );
-        }
+	{
+	  return usetInsert
+	  ( new capability::SplitCap( refers_r, what[1].str(), what[2].str() ) );
+	}
 
       //name:    name
       return usetInsert
@@ -236,18 +236,18 @@ namespace zypp
      * \todo Quick check for name not being filename or split.
     */
     static CapabilityImpl::Ptr buildVersioned( const Resolvable::Kind & refers_r,
-                                               const std::string & name_r,
-                                               Rel op_r,
-                                               const Edition & edition_r )
+				               const std::string & name_r,
+				               Rel op_r,
+				               const Edition & edition_r )
     {
       if ( Impl::isEditionSpec( op_r, edition_r ) )
-        {
-          assertResKind( refers_r );
+	{
+	  assertResKind( refers_r );
 
-          // build a VersionedCap
-          return usetInsert
-          ( new capability::VersionedCap( refers_r, name_r, op_r, edition_r ) );
-        }
+	  // build a VersionedCap
+	  return usetInsert
+	  ( new capability::VersionedCap( refers_r, name_r, op_r, edition_r ) );
+	}
       //else
       // build a NamedCap
 
@@ -262,28 +262,29 @@ namespace zypp
      *
      * \todo Fix incaccuracy.
     */
-    static CapabilityImpl::Ptr Impl::buildHal( const Resolvable::Kind & refers_r,
-                                               const std::string & name_r,
-                                               Rel op_r = Rel::ANY,
-                                               const std::string & value_r = std::string() )
+    static CapabilityImpl::Ptr buildHal( const Resolvable::Kind & refers_r,
+				               const std::string & name_r,
+				               Rel op_r = Rel::ANY,
+				               const std::string & value_r = std::string() )
     {
       if ( op_r != Rel::ANY )
-        {
-          ZYPP_THROW( Exception("Unsupported kind of Hal Capability") );
-        }
+	{
+	  ZYPP_THROW( Exception("Unsupported kind of Hal Capability") );
+	}
 
       //split:   hal(name) [op string]
       str::regex  rx( "hal\\(([^)]*)\\)" );
       str::smatch what;
       if( str::regex_match( name_r.begin(), name_r.end(), what, rx ) )
-        {
-          // Hal always refers to 'System' kind of Resolvable.
-          return usetInsert
-          ( new capability::HalCap( ResTraits<System>::kind,
-                                    what[1].str() ) );
-        }
+	{
+	  // Hal always refers to 'System' kind of Resolvable.
+	  return usetInsert
+	  ( new capability::HalCap( ResTraits<System>::kind,
+				    what[1].str() ) );
+	}
       // otherwise
       ZYPP_THROW( Exception("Unsupported kind of Hal Capability") );
+      return NULL; // make gcc happy
     }
   };
   ///////////////////////////////////////////////////////////////////
@@ -318,47 +319,47 @@ namespace zypp
   //	METHOD TYPE : Capability
   //
   Capability CapFactory::parse( const Resolvable::Kind & refers_r,
-                                const std::string & strval_r ) const
+				const std::string & strval_r ) const
 
   try
     {
       if ( Impl::isHalSpec( strval_r ) )
-        {
-          return Capability( Impl::buildHal( refers_r, strval_r ) );
-        }
+	{
+	  return Capability( Impl::buildHal( refers_r, strval_r ) );
+	}
       else
-        {
-          // strval_r has at least two words which could make 'op edition'?
-          // improve regex!
-          str::regex  rx( "(.*[^ \t])([ \t]+)([^ \t]+)([ \t]+)([^ \t]+)" );
-          str::smatch what;
-          if( str::regex_match( strval_r.begin(), strval_r.end(),what, rx ) )
-            {
-              Rel op;
-              Edition edition;
-              try
-                {
-                  op = Rel(what[3].str());
-                  edition = Edition(what[5].str());
-                }
-              catch ( Exception & excpt )
-                {
-                  // So they don't make valid 'op edition'
-                  ZYPP_CAUGHT( excpt );
-                  DBG << "Trying named cap for: " << strval_r << endl;
-                  // See whether it makes a named cap.
-                  return Capability( Impl::buildNamed( refers_r, strval_r ) );
-                }
+	{
+	  // strval_r has at least two words which could make 'op edition'?
+	  // improve regex!
+	  str::regex  rx( "(.*[^ \t])([ \t]+)([^ \t]+)([ \t]+)([^ \t]+)" );
+	  str::smatch what;
+	  if( str::regex_match( strval_r.begin(), strval_r.end(),what, rx ) )
+	    {
+	      Rel op;
+	      Edition edition;
+	      try
+		{
+		  op = Rel(what[3].str());
+		  edition = Edition(what[5].str());
+		}
+	      catch ( Exception & excpt )
+		{
+		  // So they don't make valid 'op edition'
+		  ZYPP_CAUGHT( excpt );
+		  DBG << "Trying named cap for: " << strval_r << endl;
+		  // See whether it makes a named cap.
+		  return Capability( Impl::buildNamed( refers_r, strval_r ) );
+		}
 
-              // Valid 'op edition'
-              return Capability ( Impl::buildVersioned( refers_r,
-                                                        what[1].str(), op, edition ) );
-            }
-          //else
-          // not a VersionedCap
+	      // Valid 'op edition'
+	      return Capability ( Impl::buildVersioned( refers_r,
+				                        what[1].str(), op, edition ) );
+	    }
+	  //else
+	  // not a VersionedCap
 
-          return Capability( Impl::buildNamed( refers_r, strval_r ) );
-        }
+	  return Capability( Impl::buildNamed( refers_r, strval_r ) );
+	}
     }
   catch ( Exception & excpt )
     {
@@ -373,15 +374,15 @@ namespace zypp
   //	METHOD TYPE : Capability
   //
   Capability CapFactory::parse( const Resolvable::Kind & refers_r,
-                                const std::string & name_r,
-                                const std::string & op_r,
-                                const std::string & edition_r ) const
+				const std::string & name_r,
+				const std::string & op_r,
+				const std::string & edition_r ) const
   try
     {
       if ( Impl::isHalSpec( name_r ) )
-        {
-          return Capability( Impl::buildHal( refers_r, name_r, Rel(op_r), edition_r ) );
-        }
+	{
+	  return Capability( Impl::buildHal( refers_r, name_r, Rel(op_r), edition_r ) );
+	}
       // Try creating Rel and Edition, then parse
       return parse( refers_r, name_r, Rel(op_r), Edition(edition_r) );
     }
@@ -397,15 +398,15 @@ namespace zypp
   //	METHOD TYPE : Capability
   //
   Capability CapFactory::parse( const Resolvable::Kind & refers_r,
-                                const std::string & name_r,
-                                Rel op_r,
-                                const Edition & edition_r ) const
+				const std::string & name_r,
+				Rel op_r,
+				const Edition & edition_r ) const
   try
     {
       if ( Impl::isHalSpec( name_r ) )
-        {
-          return Capability( Impl::buildHal( refers_r, name_r, op_r, edition_r.asString() ) );
-        }
+	{
+	  return Capability( Impl::buildHal( refers_r, name_r, op_r, edition_r.asString() ) );
+	}
       return Capability
       ( Impl::buildVersioned( refers_r, name_r, op_r, edition_r ) );
     }
