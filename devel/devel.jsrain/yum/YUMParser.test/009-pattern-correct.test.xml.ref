@@ -1,16 +1,16 @@
 -------------------------------------------------
-Group Data: 
-group-id: 'foo'
+Pattern Data: 
+pattern-id: 'foo'
 name:
 foobar
 [en.US] foobar
 default: 'false'
 user-visible: 'true'
 description:
-This is my group, it is soooooooo coool!
+This is my pattern, it is soooooooo coool!
 [en.US] Duh
-grouplist:
-type: mandatory, name: othergroup
+patternlist:
+type: mandatory, name: otherpattern
 type: optional, name: stillother
 type: default, name: stillmore
 type: , name: other
