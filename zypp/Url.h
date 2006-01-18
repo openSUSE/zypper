@@ -110,6 +110,18 @@ namespace zypp
 
 
     /**
+     * Create a new Url object as shared copy of the given reference.
+     *
+     * Upon return, both objects will point to the same underlying
+     * object. This state will remain until one of the object is
+     * modified.
+     *
+      * \param url The URL implementation reference to make a copy of.
+     */
+    Url(const zypp::url::UrlRef &url);
+
+
+    /**
      * \brief Construct a Url object from percent-encoded URL string.
      *
      * Parses the \p encodedUrl string using the parseUrl() method
@@ -504,21 +516,38 @@ namespace zypp
 
     /**
      * \brief Set the username in the URL authority.
-     * \param user The new username.
+     * \param user  The new username.
+     * \param eflag If the \p username is encoded or not.
      */
     void
-    setUsername(const std::string &user);
+    setUsername(const std::string &user,
+                EEncoding         eflag = zypp::url::E_DECODED);
 
     /**
      * \brief Set the password in the URL authority.
-     * \param pass The new password.
+     * \param pass  The new password.
+     * \param eflag If the \p password is encoded or not.
      */
     void
-    setPassword(const std::string &pass);
+    setPassword(const std::string &pass,
+                EEncoding         eflag = zypp::url::E_DECODED);
 
     /**
      * \brief Set the hostname or IP in the URL authority.
-     * \param host The new hostname or IP.
+     *
+     * The \p host parameter may contain a hostname, an IPv4 address
+     * in dotted-decimal form or an IPv6 address literal encapsulated
+     * within square brackets (RFC3513, Sect. 2.2).
+     *
+     * A hostname may contain national alphanumeric UTF8 characters
+     * (letters other than ASCII a-z0-9), that will be encoded.
+     * This function allows to specify both, a encoded or decoded
+     * hostname.
+     *
+     * Other IP literals in "[v ... ]" square bracket format are not
+     * supported by the implementation in UrlBase class.
+     *
+     * \param host The new hostname or IP address.
      */
     void
     setHost(const std::string &host);
@@ -535,8 +564,8 @@ namespace zypp
     /**
      * \brief Set the path data component in the URL.
      *
-     * The \p pathdata string may include path parameters
-     * separated using the ";" separator character.
+     * By default, the \p pathdata string may include path
+     * parameters separated by the ";" separator character.
      *
      * \param pathdata The encoded path data component string.
      */
@@ -545,36 +574,38 @@ namespace zypp
 
     /**
      * \brief Set the path name.
-     * \param path The new path name.
+     * \param path  The new path name.
+     * \param eflag If the \p path name is encoded or not.
      */
     void
-    setPathName(const std::string &path);
+    setPathName(const std::string &path,
+                EEncoding         eflag = zypp::url::E_DECODED);
 
     /**
      * \brief Set the path parameters.
-     * \param params The new path parameter string.
+     * \param params The new encoded path parameter string.
      */
     void
     setPathParams(const std::string &params);
 
     /**
      * \brief Set the path parameters.
-     * \param pvec The vector with path parameters.
+     * \param pvec The vector with encoded path parameters.
      */
     void
     setPathParamsVec(const zypp::url::ParamVec &pvec);
 
     /**
      * \brief Set the path parameters.
-     * \param pmap The map with path parameters.
+     * \param pmap The map with decoded path parameters.
      */
     void
     setPathParamsMap(const zypp::url::ParamMap &pmap);
 
     /**
      * \brief Set or add value for the specified path parameter.
-     * \param param The path parameter name.
-     * \param value The path parameter value.
+     * \param param The decoded path parameter name.
+     * \param value The decoded path parameter value.
      */
     void
     setPathParam(const std::string &param, const std::string &value);
@@ -583,10 +614,6 @@ namespace zypp
     // -----------------
     /**
      * \brief Set the query string in the URL.
-     *
-     * The \p querystr string will be supposed to not to
-     * contain the "?" separator character.
-     *
      * \param querystr The new encoded query string.
      */
     void
@@ -594,22 +621,22 @@ namespace zypp
 
     /**
      * \brief Set the query parameters.
-     * \param qvec The vector with query parameters.
+     * \param qvec The vector with encoded query parameters.
      */
     void
     setQueryStringVec(const zypp::url::ParamVec &qvec);
 
     /**
      * \brief Set the query parameters.
-     * \param qmap The map with query parameters.
+     * \param qmap The map with decoded query parameters.
      */
     void
     setQueryStringMap(const zypp::url::ParamMap &qmap);
 
     /**
      * \brief Set or add value for the specified query parameter.
-     * \param param The query parameter name.
-     * \param value The query parameter value.
+     * \param param The decoded query parameter name.
+     * \param value The decoded query parameter value.
      */
     void
     setQueryParam(const std::string &param, const std::string &value);
@@ -618,10 +645,12 @@ namespace zypp
     // -----------------
     /**
      * \brief Set the fragment string in the URL.
-     * \param fragment The new encoded fragment string.
+     * \param fragment The new fragment string.
+     * \param eflag If the \p fragment is encoded or not.
      */
     void
-    setFragment(const std::string &fragment);
+    setFragment(const std::string &fragment,
+                EEncoding         eflag = zypp::url::E_DECODED);
 
 
   private:

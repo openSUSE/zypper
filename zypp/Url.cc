@@ -11,12 +11,8 @@
  */
 #include <zypp/Url.h>
 #include <zypp/base/String.h>
-
 #include <stdexcept>
-// FIXME:
-#if defined(WITH_URL_PARSE_DEBUG)
-#include <iostream>
-#endif
+
 
 //////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -72,26 +68,89 @@ namespace zypp
       virtual void
       configure()
       {
-        // => put base-dn to path params :-)
-        // ahm... will this work propelly?
-        //config("sep_pathparams", "/");
+        config("sep_pathparams",  "");
 
-        config("psep_querystr",  "?");
-        config("vsep_querystr",  "");
-
-        config("safe_pathname",  "/=,");
-        config("safe_querystr",  "(),=");
+        config("psep_querystr",   "?");
+        config("vsep_querystr",   "");
 
         // not allowed here
         config("rx_username",     "");
         config("rx_password",     "");
         config("rx_fragment",     "");
+        config("rx_pathparams",   "");
+      }
+
+      virtual zypp::url::ParamMap
+      getQueryStringMap(zypp::url::EEncoding eflag) const
+      {
+        static const char * const keys[] = {
+          "attrs", "scope", "filter", "exts", NULL
+        };
+        zypp::url::ParamMap pmap;
+        zypp::url::ParamVec pvec( getQueryStringVec());
+        if( pvec.size() <= 4)
+        {
+          for(size_t i=0; i<pvec.size(); i++)
+          {
+            if(eflag == zypp::url::E_ENCODED)
+              pmap[keys[i]] = pvec[i];
+            else
+              pmap[keys[i]] = zypp::url::decode( pvec[i]);
+          }
+        }
+        else
+        {
+          throw std::invalid_argument(
+            "Invalid LDAP URL query string"
+          );
+        }
+        return pmap;
+      }
+
+      virtual void
+      setQueryStringMap(const zypp::url::ParamMap &pmap)
+      {
+        static const char * const keys[] = {
+          "attrs", "scope", "filter", "exts", NULL
+        };
+
+        // remove psep ("?") from safe chars
+        std::string join_safe;
+        std::string safe(config("safe_querystr"));
+        std::string psep(config("psep_querystr"));
+        for(std::string::size_type i=0; i<safe.size(); i++)
+        {
+          if( psep.find(safe[i]) == std::string::npos)
+            join_safe.append(1, safe[i]);
+        }
+
+        zypp::url::ParamVec pvec(4);
+        zypp::url::ParamMap::const_iterator p;
+        for(p=pmap.begin(); p!=pmap.end(); ++p)
+        {
+          bool found=false;
+          for(size_t i=0; i<4; i++)
+          {
+            if(p->first == keys[i])
+            {
+              found=true;
+              pvec[i] = zypp::url::encode(p->second, join_safe);
+            }
+          }
+          if( !found)
+          {
+            throw std::invalid_argument(
+              "Invalid LDAP URL query parameter '" + p->first + "'"
+            );
+          }
+        }
+        setQueryStringVec(pvec);
       }
     };
 
 
     // ---------------------------------------------------------------
-    // FIXME:
+    // FIXME: hmm..
     class UrlByScheme
     {
     private:
@@ -116,9 +175,7 @@ namespace zypp
         // FIXME: hmm... also host+port?
         addUrlByScheme("nfs",    ref);
 
-        ref->config("safe_pathname",    "@"); // don't encode @ in path
-        ref->config("rx_hostname",      "");  // disallow hostname
-        ref->config("rx_port",          "");  // disallow port
+        ref->config("with_authority"    "n");   // disallow host & port
         addUrlByScheme("mailto", ref);
       }
 
@@ -205,6 +262,19 @@ namespace zypp
 
 
   // -----------------------------------------------------------------
+  Url::Url(const zypp::url::UrlRef &url)
+    : m_impl( url)
+  {
+    if( !m_impl)
+    {
+      throw std::invalid_argument(
+        "Invalid empty Url reference"
+      );
+    }
+  }
+
+
+  // -----------------------------------------------------------------
   Url::Url(const std::string &encodedUrl)
     : m_impl( parseUrl(encodedUrl))
   {
@@ -261,17 +331,6 @@ namespace zypp
     str::regex  rex(RX_SPLIT_URL);
     str::smatch out;
     bool        ret = str::regex_match(encodedUrl, out, rex);
-
-    // FIXME:
-    #if defined(WITH_URL_PARSE_DEBUG)
-    std::cerr << "Regex parsed URL components("
-              << out.size() << "):" << std::endl;
-    std::cerr << "URL " << encodedUrl << std::endl;
-    for(size_t n=0; n < out.size(); n++)
-    {
-      std::cerr << "[" << n << "] " << out[n].str() << std::endl;
-    }
-    #endif
 
     if(ret && out.size() == 10)
     {
@@ -539,25 +598,27 @@ namespace zypp
 
   // -----------------------------------------------------------------
   void
-  Url::setFragment(const std::string &fragment)
+  Url::setFragment(const std::string &fragment, EEncoding eflag)
   {
-    m_impl->setFragment(fragment);
+    m_impl->setFragment(fragment, eflag);
   }
 
 
   // -----------------------------------------------------------------
   void
-  Url::setUsername(const std::string &user)
+  Url::setUsername(const std::string &user,
+                   EEncoding         eflag)
   {
-    m_impl->setUsername(user);
+    m_impl->setUsername(user, eflag);
   }
 
 
   // -----------------------------------------------------------------
   void
-  Url::setPassword(const std::string &pass)
+  Url::setPassword(const std::string &pass,
+                   EEncoding         eflag)
   {
-    m_impl->setPassword(pass);
+    m_impl->setPassword(pass, eflag);
   }
 
 
@@ -579,9 +640,10 @@ namespace zypp
 
   // -----------------------------------------------------------------
   void
-  Url::setPathName(const std::string &path)
+  Url::setPathName(const std::string &path,
+                   EEncoding         eflag)
   {
-    m_impl->setPathName(path);
+    m_impl->setPathName(path, eflag);
   }
 
 
