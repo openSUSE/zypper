@@ -202,7 +202,7 @@ ResolverContext::setStatus (ResItem_constPtr resItem, ResItemStatus status)
     if (_invalid) return;
 
     ResItemStatus old_status = getStatus (resItem);
-cerr << "ResolverContext::setStatus " << resItem->asString() << ": " << toString(old_status) << " -> " << toString(status) << endl;
+    // cerr << "ResolverContext::setStatus " << resItem->asString() << ": " << toString(old_status) << " -> " << toString(status) << endl;
     if (status != old_status) {
 	_status[resItem] = status;
     }
