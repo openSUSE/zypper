@@ -3,7 +3,7 @@
 #include <zypp/base/Logger.h>
 #include <zypp/detail/MessageImpl.h>
 #include <zypp/Message.h>
-#include <YUMParser.h>
+#include <zypp/parser/yum/YUMParser.h>
 #include <zypp/base/Logger.h>
 #include <map>
 #include "zypp/source/yum/YUMSource.h"

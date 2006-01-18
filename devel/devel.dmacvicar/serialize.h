@@ -75,7 +75,12 @@ std::string castedToXML( Resolvable::Ptr ret );
 /**
  * lack of instrospection sucks
  */
-std::string typeToString( Resolvable::Ptr resolvable, bool plural = false );
+std::string resolvableTypeToString( Resolvable::Ptr resolvable, bool plural = false );
+
+/**
+ * lack of instrospection sucks
+ */
+std::string resolvableKindToString( Resolvable::Kind kind, bool plural = false );
 
 template<> // or constPtr?
 std::string toXML( Package::Ptr obj );

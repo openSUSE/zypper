@@ -87,14 +87,14 @@ if (iter.errorStatus())
 
 DBG << patch1 << endl;
 DBG << *patch1 << endl;
-DBG << patch1->deps() << endl;
+//DBG << patch1->deps() << endl;
 Patch::AtomList at = patch1->atoms();
 for (Patch::AtomList::iterator it = at.begin();
      it != at.end();
      it++)
 {
-  DBG << **it << endl;
-  DBG << (**it).deps() << endl;
+  //DBG << **it << endl;
+  //DBG << (**it).deps() << endl;
 }
 
   INT << "===[END]============================================" << endl;

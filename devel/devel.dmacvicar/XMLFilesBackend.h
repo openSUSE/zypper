@@ -76,16 +76,22 @@ public:
   std::string randomFileName() const;
   /**
     * Directory where the xml file is stored (for the given resolvable)
-    * \a partial_match allows for text search.
     */
   std::string dirForResolvable( Resolvable::Ptr resolvable ) const;
   /**
+    * Directory where the xml file is stored (for the given resolvable kind)
+    */
+  std::string dirForResolvableKind( Resolvable::Kind kind ) const;
+  /**
     * Full path to the xml file for a given resolvable
     * Does not care if the resolvable is yet stored or not
-    * \a partial_match allows for text search.
     */
   std::string fullPathForResolvable( Resolvable::Ptr resolvable ) const;
-
+   /**
+    * Full path to the xml file for a given resolvable
+    * Does not care if the resolvable is yet stored or not
+    */
+  Resolvable::Ptr resolvableFromFile( std::string file_path, Resolvable::Kind kind ) const;
 
   private:
   class Private;

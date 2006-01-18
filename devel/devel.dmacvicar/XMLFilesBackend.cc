@@ -14,6 +14,7 @@
 #include "zypp/base/Logger.h"
 
 #include "zypp/source/yum/YUMSourceImpl.h"
+#include "zypp/parser/yum/YUMParser.h"
 
 #include <iostream>
 #include <fstream>
@@ -48,7 +49,8 @@ namespace storage
 ///////////////////////////////////////////////////////////////////
 class XMLFilesBackend::Private
 {
-	public:
+  public:
+	YUMSourceImpl source;
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -64,6 +66,7 @@ class XMLFilesBackend::Private
 //
 XMLFilesBackend::XMLFilesBackend()
 {
+  d = new Private;
 	// check if the db exists
 	if (!isBackendInitialized())
 	{
@@ -100,14 +103,20 @@ XMLFilesBackend::initBackend()
 }
 
 std::string
-XMLFilesBackend::dirForResolvable( Resolvable::Ptr resolvable ) const
+XMLFilesBackend::dirForResolvableKind( Resolvable::Kind kind ) const
 {
   std::string dir;
   // FIXME replace with path class of boost
   dir += std::string(ZYPP_DB_DIR);
   dir += "/";
-  dir += typeToString(resolvable, true);
+  dir += resolvableKindToString(kind, true);
   return dir;
+}
+
+std::string
+XMLFilesBackend::dirForResolvable( Resolvable::Ptr resolvable ) const
+{
+  return dirForResolvableKind(resolvable->kind());
 }
 
 std::string
@@ -136,10 +145,34 @@ void
 XMLFilesBackend::deleteObject( Resolvable::Ptr resolvable )
 {}
 
+Resolvable::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Resolvable::Kind kind ) const
+{
+  DBG << "[" << resolvableKindToString( kind, false ) << "] - " << file_path << std::endl;
+  Resolvable::Ptr resolvable;
+  std::ifstream res_file(file_path.c_str());
+  if ( kind == ResTraits<zypp::Patch>::kind )
+  {
+    // a patch file can contain more than one patch, but we store only
+    // one patch, so we break at the first
+    // FIXME how can we avoid creating this for every object?
+    YUMPatchParser iter(res_file,"");
+    for (; !iter.atEnd(); ++iter)
+    {
+      resolvable = d->source.createPatch(**iter);
+      break;
+    }
+  }
+  else
+  {
+    resolvable = 0;
+  }
+  return resolvable;
+}
+
 std::list<Resolvable::Ptr>
 XMLFilesBackend::storedObjects()
 {
-  zypp::source::yum::YUMSourceImpl src;
+  std::list<Resolvable::Ptr> objects;
   std::list<Resolvable::Kind> kinds;
   // only patches for now
   kinds.push_back(ResTraits<zypp::Patch>::kind);
@@ -147,39 +180,22 @@ XMLFilesBackend::storedObjects()
   std::list<Resolvable::Kind>::const_iterator it_kinds;
   for ( it_kinds = kinds.begin() ; it_kinds != kinds.end(); ++it_kinds )
   {
+    Resolvable::Kind kind = (*it_kinds);
     // patches
-    if ( (*it_kinds) == ResTraits<zypp::Patch>::kind )
+    if ( kind == ResTraits<zypp::Patch>::kind )
     {
-      DBG << "parches...";
+      std::string dir_path = dirForResolvableKind(kind);
+      DBG << "objects in ... " << dir_path << std::endl;
+      directory_iterator end_iter;
+      if ( !exists( dir_path ) ) continue;
+      for ( directory_iterator dir_itr( dir_path ); dir_itr != end_iter; ++dir_itr )
+      {
+        DBG << "[" << resolvableKindToString( kind, false ) << "] - " << dir_itr->leaf() << std::endl;
+        objects.push_back( resolvableFromFile( dir_path + "/" + dir_itr->leaf(), kind) );
+      }
     }
   }
-  //for YUMPatchParser parser;
-/*
-  return  std::list<Resolvable::Ptr>();
-  for ( fs::directory_iterator dir_itr( dirForResolvable );
-          dir_itr != end_iter;
-          ++dir_itr )
-    {
-      try
-      {
-        if ( fs::is_directory( *dir_itr ) )
-        {
-          ++dir_count;
-          std::cout << dir_itr->leaf()<< " [directory]\n";
-        }
-        else
-        {
-          ++file_count;
-          std::cout << dir_itr->leaf() << "\n";
-        }
-      }
-      catch ( const std::exception & ex )
-      {
-        ++err_count;
-        std::cout << dir_itr->leaf() << " " << ex.what() << std::endl;
-      }
-    }
-*/
+  return objects;
 }
 
 std::list<Resolvable::Ptr>
@@ -215,7 +231,9 @@ XMLFilesBackend::randomFileName() const
 //	METHOD TYPE : Dtor
 //
 XMLFilesBackend::~XMLFilesBackend()
-{}
+{
+  delete d;
+}
 
 ///////////////////////////////////////////////////////////////////
 //

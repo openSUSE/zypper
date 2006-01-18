@@ -192,17 +192,22 @@ std::string castedToXML( Resolvable::Ptr resolvable )
 }
 
 // or constPtr?
-std::string typeToString( Resolvable::Ptr resolvable, bool plural )
+std::string resolvableTypeToString( Resolvable::Ptr resolvable, bool plural )
 {
-  stringstream out;
-  if ( isKind<Package>(resolvable) )
+  return resolvableKindToString(resolvable->kind(), plural);
+}
+
+std::string resolvableKindToString( Resolvable::Kind kind, bool plural)
+{
+  if ( kind == ResTraits<zypp::Package>::kind )
      return plural ? "packages" : "package";
-  if ( isKind<Patch>(resolvable) )
+  if ( kind == ResTraits<zypp::Patch>::kind )
      return plural ? "patches" : "patch";
-  if ( isKind<Message>(resolvable) )
+  if ( kind == ResTraits<zypp::Message>::kind )
      return plural ? "messages" : "message";
-  if ( isKind<Script>(resolvable) )
+  if ( kind == ResTraits<zypp::Script>::kind )
      return plural ? "scripts" : "script";
+  return "";
 }
 
 template<> // or constPtr?

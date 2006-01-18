@@ -10,8 +10,6 @@
 
 #include <boost/iostreams/device/file_descriptor.hpp>
 
-#include "dbxml/DbXml.hpp"
-
 #include <zypp/base/Logger.h>
 ///////////////////////////////////////////////////////////////////
 
@@ -75,6 +73,9 @@ int main()
   PersistentStorage backend;
   backend.storeObject(patch1);
 
+  std::list<Resolvable::Ptr> objs = backend.storedObjects();
+  DBG << objs.size() << std::endl;
+  //DBG << objs.first() << std::endl;
   // test xml 2 object
   std::string xml = toXML(patch1);
   std::stringstream str;
@@ -85,7 +86,7 @@ int main()
   {
     patch2 = src.createPatch(**iter2);
   }
-  cout << toXML(patch2);
+  //cout << toXML(patch2);
   //backend.storePatch(patch1);
 	return 1;	
 }
