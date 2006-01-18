@@ -13,10 +13,34 @@
 #include <zypp/base/String.h>
 
 #include <stdexcept>
-// FIXME:
-#if defined(WITH_URL_PARSE_DEBUG)
-#include <iostream>
-#endif
+#include <climits>
+#include <errno.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+
+
+// ---------------------------------------------------------------
+/*
+** authority = //[user [:password] @ ] host [:port]
+**
+** host      = hostname | IPv4 | "[" IPv6-IP "]" | "[v...]"
+*/
+#define RX_SPLIT_AUTHORITY \
+        "^(([^:@]*)([:]([^@]*))?@)?(\\[[^]]+\\]|[^:]+)?([:](.*))?"
+
+#define RX_VALID_SCHEME    "^[a-zA-Z][a-zA-Z0-9\\.+-]*$"
+
+#define RX_VALID_PORT      "^[0-9]{1,5}$"
+
+#define RX_VALID_HOSTNAME  "^[[:alnum:]]+([\\.-][[:alnum:]]+)*$"
+
+#define RX_VALID_HOSTIPV4  \
+        "^([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})\\.([0-9]{1,3})$"
+
+#define RX_VALID_HOSTIPV6  \
+        "^\\[[:a-fA-F0-9]+(:[0-9]{1,3}(\\.[0-9]{1,3}){3})?\\]$"
+
 
 //////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -28,6 +52,9 @@ namespace zypp
 
 
     // ---------------------------------------------------------------
+    /*
+    ** URL toString() view option constants:
+    */
     const ViewOptions ViewOptions::WITH_SCHEME       = 0x0001;
     const ViewOptions ViewOptions::WITH_USERNAME     = 0x0002;
     const ViewOptions ViewOptions::WITH_PASSWORD     = 0x0004;
@@ -57,24 +84,53 @@ namespace zypp
 
 
     // ---------------------------------------------------------------
-    /**
-     * authority = //[user [:password] @ ] host [:port]
-     *
-     * host      = hostname | IPv4 | "[" IPv6-IP "]" | "[v...]"
-     */
-    #define RX_SPLIT_AUTHORITY \
-    "^(([^:@]*)" "([:]([^@]*))?" "@)?" "(\\[[^]]+\\]|[^:]+)?" "([:](.*))?"
+    /*
+    ** Behaviour configuration variables.
+    */
+    typedef std::map< std::string, std::string > UrlConfig;
 
 
     // ---------------------------------------------------------------
+    /**
+     * \brief Internal data used by UrlBase.
+     */
+    class UrlBaseData
+    {
+    public:
+      UrlBaseData()
+      {}
+
+      UrlBaseData(const UrlConfig &conf)
+        : config(conf)
+      {}
+
+      UrlConfig       config;
+      ViewOptions     vopts;
+
+      std::string     scheme;
+      std::string     user;
+      std::string     pass;
+      std::string     host;
+      std::string     port;
+      std::string     pathname;
+      std::string     pathparams;
+      std::string     querystr;
+      std::string     fragment;
+    };
+
+
+    // ---------------------------------------------------------------
+    /*
+    ** Anonymous/internal utility namespace:
+    */
     namespace // anonymous
     {
 
 			// -------------------------------------------------------------
       inline void
       checkUrlData(const std::string &data,
-             const std::string &name,
-             const std::string &regx)
+                   const std::string &name,
+                   const std::string &regx)
       {
         if( regx.empty() || regx == "^$")
         {
@@ -106,7 +162,7 @@ namespace zypp
 
     // ---------------------------------------------------------------
     UrlBase::UrlBase()
-      : m_data( new UrlData())
+      : m_data( new UrlBaseData())
     {
       configure();
     }
@@ -114,7 +170,7 @@ namespace zypp
 
     // ---------------------------------------------------------------
     UrlBase::UrlBase(const UrlBase &url)
-      : m_data( new UrlData( *(url.m_data)))
+      : m_data( new UrlBaseData( *(url.m_data)))
     {
     }
 
@@ -125,7 +181,7 @@ namespace zypp
                      const std::string &pathdata,
                      const std::string &querystr,
                      const std::string &fragment)
-      : m_data( new UrlData())
+      : m_data( new UrlBaseData())
     {
       configure();
       init(scheme, authority, pathdata, querystr, fragment);
@@ -144,7 +200,7 @@ namespace zypp
       setAuthority(authority);
       setPathData(pathdata);
       setQueryString(querystr);
-      setFragment(fragment);
+      setFragment(fragment, zypp::url::E_ENCODED);
     }
 
 
@@ -159,23 +215,24 @@ namespace zypp
       config("psep_querystr",   "&");
       config("vsep_querystr",   "=");
 
-      config("safe_username",   "");
-      config("safe_password",   "");
+      config("safe_username",   "~!$&'()*+=,;");
+      config("safe_password",   "~!$&'()*+=,:;");
       config("safe_hostname",   "[:]");
-      config("safe_pathname",   "/");
-      config("safe_pathparams", "");
-      config("safe_querystr",   "");
-      config("safe_fragment",   "");
+      config("safe_pathname",   "~!$&'()*+=,:@/");
+      config("safe_pathparams", "~!$&'()*+=,:;@/");
+      config("safe_querystr",   "~!$&'()*+=,:;@/?");
+      config("safe_fragment",   "~!$&'()*+=,:;@/?");
 
-      config("rx_scheme",       "^[a-zA-Z][a-zA-Z0-9\\._-]*$");
-      config("rx_username",     ".*");
-      config("rx_password",     ".*");
-      config("rx_hostname",     ".*");           // FIXME
-      config("rx_port",         "^[0-9]{1,5}$");
-      config("rx_pathname",     ".*");
-      config("rx_pathparams",   ".*");
-      config("rx_querystr",     ".*");
-      config("rx_fragment",     ".*");
+      config("with_authority",  "y");
+
+      config("rx_username",     "^([a-zA-Z0-9!$&'\\(\\)*+=,;~\\._-]|%[a-fA-F0-9]{2})+$");
+      config("rx_password",     "^([a-zA-Z0-9!$&'\\(\\)*+=,:;~\\._-]|%[a-fA-F0-9]{2})+$");
+
+      config("rx_pathname",     "^([a-zA-Z0-9!$&'\\(\\)*+=,:@/~\\._-]|%[a-fA-F0-9]{2})+$");
+      config("rx_pathparams",   "^([a-zA-Z0-9!$&'\\(\\)*+=,:;@/~\\._-]|%[a-fA-F0-9]{2})+$");
+
+      config("rx_querystr",     "^([a-zA-Z0-9!$&'\\(\\)*+=,:;@/?~\\._-]|%[a-fA-F0-9]{2})+$");
+      config("rx_fragment",     "^([a-zA-Z0-9!$&'\\(\\)*+=,:;@/?~\\._-]|%[a-fA-F0-9]{2})+$");
     }
 
 
@@ -221,7 +278,7 @@ namespace zypp
     {
       zypp::url::UrlConfig   config(m_data->config);
       zypp::url::ViewOptions vopts(m_data->vopts);
-      *m_data = UrlData();
+      *m_data = UrlBaseData();
       m_data->config = config;
       m_data->vopts  = vopts;
     }
@@ -232,26 +289,6 @@ namespace zypp
     UrlBase::clone() const
     {
       return new UrlBase(*this);
-    }
-
-
-    // ---------------------------------------------------------------
-    std::string
-    UrlBase::cleanupPathName(const std::string &path)
-    {
-      size_t pos = 0;
-
-      while( pos < path.length() && path.at(pos) == '/')
-        pos++;
-
-      if( pos > 1)
-      {
-        // make sure, there is not more than
-        // _one_ leading "/" in the path name.
-        return path.substr(pos - 1);
-      }
-
-      return std::string(path);
     }
 
 
@@ -285,7 +322,7 @@ namespace zypp
     UrlBase::isValidScheme(const std::string &scheme) const
     {
       if(scheme.empty() ||
-         str::regex_match(scheme, str::regex(config("rx_scheme"))))
+         str::regex_match(scheme, str::regex(RX_VALID_SCHEME)))
       {
         std::string    lscheme( str::toLower(scheme));
         UrlSchemes     schemes( getKnownSchemes());
@@ -324,8 +361,8 @@ namespace zypp
     std::string
     UrlBase::toString(const zypp::url::ViewOptions &opts) const
     {
-      std::string url;
-      UrlData     tmp;
+      std::string   url;
+      UrlBaseData   tmp;
 
       if( opts.has(ViewOptions::WITH_SCHEME))
       {
@@ -675,21 +712,10 @@ namespace zypp
       str::smatch out;
       bool        ret = str::regex_match(authority, out, rex);
 
-      // FIXME:
-      #if defined(WITH_URL_PARSE_DEBUG)
-      std::cerr << "Regex parsed URL authority("
-                << out.size() << "):" << std::endl;
-      std::cerr << "==> " << authority << std::endl;
-      for(size_t n=0; n < out.size(); n++)
-      {
-        std::cerr << "[" << n << "] " << out[n].str() << std::endl;
-      }
-      #endif
-
       if( ret && out.size() == 8)
       {
-        setUsername(out[2].str());
-        setPassword(out[4].str());
+        setUsername(out[2].str(), zypp::url::E_ENCODED);
+        setPassword(out[4].str(), zypp::url::E_ENCODED);
         setHost(out[5].str());
         setPort(out[7].str());
       }
@@ -701,21 +727,26 @@ namespace zypp
       }
     }
 
-
     // ---------------------------------------------------------------
     void
     UrlBase::setPathData(const std::string &pathdata)
     {
-      size_t pos;
-      pos = pathdata.find(config("sep_pathparams"));
+      size_t      pos = std::string::npos;
+      std::string sep(config("sep_pathparams"));
+
+      if( !sep.empty())
+        pos = pathdata.find(sep);
+
       if( pos != std::string::npos)
       {
-        setPathName(pathdata.substr(0, pos));
+        setPathName(pathdata.substr(0, pos),
+                    zypp::url::E_ENCODED);
         setPathParams(pathdata.substr(pos + 1));
       }
       else
       {
-        setPathName(pathdata);
+        setPathName(pathdata,
+                    zypp::url::E_ENCODED);
         setPathParams("");
       }
     }
@@ -733,7 +764,6 @@ namespace zypp
       {
         checkUrlData(querystr, "query string", config("rx_querystr"));
 
-        // FIXME: split & recode?
         m_data->querystr = querystr;
       }
     }
@@ -741,7 +771,8 @@ namespace zypp
 
     // ---------------------------------------------------------------
     void
-    UrlBase::setFragment(const std::string &fragment)
+    UrlBase::setFragment(const std::string &fragment,
+                         EEncoding         eflag)
     {
       if( fragment.empty())
       {
@@ -749,20 +780,26 @@ namespace zypp
       }
       else
       {
-        std::string data( zypp::url::decode(fragment));
+        if(eflag == zypp::url::E_ENCODED)
+        {
+          checkUrlData(fragment, "fragment", config("rx_fragment"));
 
-        checkUrlData(data, "fragment", config("rx_fragment"));
-
-        m_data->fragment = zypp::url::encode(
-          data, config("safe_fragment")
-        );
+          m_data->fragment = fragment;
+        }
+        else
+        {
+          m_data->fragment = zypp::url::encode(
+            fragment, config("safe_password")
+          );
+        }
       }
     }
 
 
     // ---------------------------------------------------------------
     void
-    UrlBase::setUsername(const std::string &user)
+    UrlBase::setUsername(const std::string &user,
+                         EEncoding         eflag)
     {
       if( user.empty())
       {
@@ -770,20 +807,33 @@ namespace zypp
       }
       else
       {
-        std::string data( zypp::url::decode(user));
+        if( config("with_authority") != "y")
+        {
+          throw std::invalid_argument(
+            std::string("Url scheme does not allow a username")
+          );
+        }
 
-        checkUrlData(data, "username", config("rx_username"));
+        if(eflag == zypp::url::E_ENCODED)
+        {
+          checkUrlData(user, "username", config("rx_username"));
 
-        m_data->user = zypp::url::encode(
-          data, config("safe_username")
-        );
+          m_data->user = user;
+        }
+        else
+        {
+          m_data->user = zypp::url::encode(
+            user, config("safe_username")
+          );
+        }
       }
     }
 
 
     // ---------------------------------------------------------------
     void
-    UrlBase::setPassword(const std::string &pass)
+    UrlBase::setPassword(const std::string &pass,
+                         EEncoding         eflag)
     {
       if( pass.empty())
       {
@@ -791,13 +841,25 @@ namespace zypp
       }
       else
       {
-        std::string data( zypp::url::decode(pass));
+        if( config("with_authority") != "y")
+        {
+          throw std::invalid_argument(
+            std::string("Url scheme does not allow a password")
+          );
+        }
 
-        checkUrlData(data, "password", config("rx_password"));
+        if(eflag == zypp::url::E_ENCODED)
+        {
+          checkUrlData(pass, "password", config("rx_password"));
 
-        m_data->pass = zypp::url::encode(
-          data, config("safe_password")
-        );
+          m_data->pass = pass;
+        }
+        else
+        {
+          m_data->pass = zypp::url::encode(
+            pass, config("safe_password")
+          );
+        }
       }
     }
 
@@ -812,13 +874,35 @@ namespace zypp
       }
       else
       {
-        std::string data( zypp::url::decode(host));
+        if( config("with_authority") != "y")
+        {
+          throw std::invalid_argument(
+            std::string("Url scheme does not allow a host")
+          );
+        }
 
-        checkUrlData(data, "hostname", config("rx_hostname"));
+        if( isValidHost(host))
+        {
+          std::string temp;
+          if( host.at(0) == '[')
+          {
+            temp = str::toUpper(zypp::url::decode(host));
+          }
+          else
+          {
+            temp = str::toLower(zypp::url::decode(host));
+          }
 
-        m_data->host = zypp::url::encode(
-          data, config("safe_hostname")
-        );
+          m_data->host = zypp::url::encode(
+            temp, config("safe_hostname")
+          );
+        }
+        else
+        {
+          throw std::invalid_argument(
+            std::string("Invalid host argument '" + host + "'")
+          );
+        }
       }
     }
 
@@ -833,18 +917,31 @@ namespace zypp
       }
       else
       {
-        std::string data( zypp::url::decode(port));
+        if( config("with_authority") != "y")
+        {
+          throw std::invalid_argument(
+            std::string("Url scheme does not allow a port")
+          );
+        }
 
-        checkUrlData(data, "port", config("rx_port"));
-
-        m_data->port = data;
+        if( isValidPort(port))
+        {
+          m_data->port = port;
+        }
+        else
+        {
+          throw std::invalid_argument(
+            std::string("Invalid host argument '" + port + "'")
+          );
+        }
       }
     }
 
 
     // ---------------------------------------------------------------
     void
-    UrlBase::setPathName(const std::string &path)
+    UrlBase::setPathName(const std::string &path,
+                         EEncoding         eflag)
     {
       if( path.empty())
       {
@@ -852,9 +949,15 @@ namespace zypp
       }
       else
       {
-        std::string data( cleanupPathName(zypp::url::decode(path)));
-
-        checkUrlData(data, "path", config("rx_pathname"));
+        std::string data;
+        if(eflag == zypp::url::E_ENCODED)
+        {
+          data = cleanupPathName(zypp::url::decode(path));
+        }
+        else
+        {
+          data = cleanupPathName(path);
+        }
 
         m_data->pathname = zypp::url::encode(
           data, config("safe_pathname")
@@ -875,7 +978,6 @@ namespace zypp
       {
         checkUrlData(params, "path parameters", config("rx_pathparams"));
 
-        // FIXME: split & recode?
         m_data->pathparams = params;
       }
     }
@@ -913,12 +1015,8 @@ namespace zypp
     void
     UrlBase::setPathParam(const std::string &param, const std::string &value)
     {
-          std::string raw_param( zypp::url::decode(param));
-          std::string raw_value( zypp::url::decode(value));
-
           zypp::url::ParamMap pmap( getPathParamsMap(zypp::url::E_DECODED));
-          pmap[raw_param] = raw_value;
-
+          pmap[param] = value;
           setPathParamsMap(pmap);
     }
 
@@ -954,13 +1052,67 @@ namespace zypp
     void
     UrlBase::setQueryParam(const std::string &param, const std::string &value)
     {
-          std::string raw_param( zypp::url::decode(param));
-          std::string raw_value( zypp::url::decode(value));
-
           zypp::url::ParamMap pmap( getQueryStringMap(zypp::url::E_DECODED));
-          pmap[raw_param] = raw_value;
-
+          pmap[param] = value;
           setQueryStringMap(pmap);
+    }
+
+
+    // ---------------------------------------------------------------
+    std::string
+    UrlBase::cleanupPathName(const std::string &path)
+    {
+      size_t pos = 0;
+
+      while( pos < path.length() && path.at(pos) == '/')
+        pos++;
+
+      if( pos > 1)
+      {
+        // make sure, there is not more than
+        // _one_ leading "/" in the path name.
+        return path.substr(pos - 1);
+      }
+
+      return std::string(path);
+    }
+
+
+    // ---------------------------------------------------------------
+    bool
+    UrlBase::isValidHost(const std::string &host)
+    {
+      if( str::regex_match(host, str::regex(RX_VALID_HOSTIPV6)))
+      {
+        struct in6_addr ip;
+
+        if( inet_pton(AF_INET6, host.substr(1, host.size()-2).c_str(), &ip) > 0)
+          return true;
+        else
+          return false;
+      }
+      else
+      {
+        // matches also IPv4 dotted-decimal adresses...
+        std::string tmp( zypp::url::decode(host));
+        return str::regex_match(tmp, str::regex(RX_VALID_HOSTNAME));
+      }
+    }
+
+
+    // ---------------------------------------------------------------
+    bool
+    UrlBase::isValidPort(const std::string &port)
+    {
+        if( str::regex_match(port, str::regex(RX_VALID_PORT)))
+        {
+          long pnum = str::strtonum<long>(port);
+          if( pnum >= 1 && pnum <= USHRT_MAX)
+          {
+            return true;
+          }
+        }
+        return false;
     }
 
 

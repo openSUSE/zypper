@@ -27,20 +27,6 @@ namespace zypp
 
     // ---------------------------------------------------------------
     /**
-     * UrlBase behaviour configuration variables container.
-     */
-    typedef std::map< std::string, std::string > UrlConfig;
-
-
-    // ---------------------------------------------------------------
-    /**
-     * Vector of URL scheme names.
-     */
-    typedef std::vector<std::string>             UrlSchemes;
-
-
-    // ---------------------------------------------------------------
-    /**
      * Url::toString() view options.
      *
      * A instance of this class represents a bit-wise combination
@@ -191,11 +177,13 @@ namespace zypp
       static const ViewOption DEFAULTS;
       /** @} */
 
+
       /**
        * Create instance with default combination of view options.
        */
       ViewOption(): opt(DEFAULTS.opt)
       {}
+
 
       /**
        * Adds \p l and \p r to a new option combination.
@@ -204,7 +192,9 @@ namespace zypp
        */
       friend inline ViewOption
       operator + (const ViewOption &l, const ViewOption &r)
-      { return ViewOption(l.opt |  r.opt); }
+      {
+        return ViewOption(l.opt |  r.opt);
+      }
 
       /**
        * Substract \p r from \p l to a new option combination.
@@ -213,7 +203,9 @@ namespace zypp
        */
       friend inline ViewOption
       operator - (const ViewOption &l, const ViewOption &r)
-      { return ViewOption(l.opt & ~r.opt); }
+      {
+        return ViewOption(l.opt & ~r.opt);
+      }
 
       /**
        * Assign specified option combination \p o to the current object.
@@ -223,7 +215,9 @@ namespace zypp
        */
       inline ViewOption &
       operator = (const ViewOption &o)
-      { opt = o.opt; return *this; }
+      {
+        opt = o.opt; return *this;
+      }
 
       /**
        * Check if specified option \p o is set in the current object.
@@ -233,7 +227,9 @@ namespace zypp
        */
       inline bool
       has(const ViewOption &o) const
-      { return o.opt & opt; }
+      {
+        return o.opt & opt;
+      }
 
     private:
       ViewOption(int o): opt(o) {}
@@ -245,36 +241,21 @@ namespace zypp
     /**
      * ViewOptions is just an alias for ViewOption.
      */
-    typedef ViewOption ViewOptions;
+    typedef ViewOption                           ViewOptions;
 
 
     // ---------------------------------------------------------------
     /**
-     * Internal data as used by UrlBase.
+     * Vector of URL scheme names.
      */
-    class UrlData
-    {
-    public:
-      UrlData()
-      {}
+    typedef std::vector<std::string>             UrlSchemes;
 
-      UrlData(const UrlConfig &conf)
-        : config(conf)
-      {}
 
-      UrlConfig       config;
-      ViewOptions     vopts;
-
-      std::string     scheme;
-      std::string     user;
-      std::string     pass;
-      std::string     host;
-      std::string     port;
-      std::string     pathname;
-      std::string     pathparams;
-      std::string     querystr;
-      std::string     fragment;
-    };
+    // ---------------------------------------------------------------
+    /**
+     * Forward declaration of internal UrlBase data.
+     */
+    class UrlBaseData;
 
 
     // ---------------------------------------------------------------
@@ -290,7 +271,9 @@ namespace zypp
     {
     public:
 
-      virtual ~UrlBase();
+      virtual
+      ~UrlBase();
+
       UrlBase();
 
       /**
@@ -391,12 +374,12 @@ namespace zypp
        * schemes (see getKnownSchemes()) if the list is not empty (as
        * in the UrlBase class).
        *
+       * \param  scheme The scheme name to verify.
        * \return True, if generic scheme name syntax is valid and
        *         the scheme name is known to the current object.
        */
       virtual bool
       isValidScheme(const std::string &scheme) const;
-
 
       /**
        * \brief Verifies the Url.
@@ -677,20 +660,37 @@ namespace zypp
 
       /**
        * \brief Set the username in the URL authority.
-       * \param user The new username.
+       * \param user  The new username.
+       * \param eflag If the \p username is encoded or not.
        */
       virtual void
-      setUsername(const std::string &user);
+      setUsername(const std::string &user,
+                  EEncoding         eflag);
 
       /**
        * \brief Set the password in the URL authority.
-       * \param pass The new password.
+       * \param pass  The new password.
+       * \param eflag If the \p password is encoded or not.
        */
       virtual void
-      setPassword(const std::string &pass);
+      setPassword(const std::string &pass,
+                  EEncoding         eflag);
 
       /**
        * \brief Set the hostname or IP in the URL authority.
+       *
+       * The \p host parameter may contain a hostname, an IPv4 address
+       * in dotted-decimal form or an IPv6 address literal encapsulated
+       * within square brackets (RFC3513, Sect. 2.2).
+       *
+       * A hostname may contain national alphanumeric UTF8 characters
+       * (letters other than ASCII a-z0-9), that will be encoded.
+       * This function allows to specify both, a encoded or decoded
+       * hostname.
+       *
+       * Other IP literals in "[v ... ]" square bracket format are not
+       * supported by the implementation in UrlBase class.
+       *
        * \param host The new hostname or IP.
        */
       virtual void
@@ -708,8 +708,8 @@ namespace zypp
       /**
        * \brief Set the path data component in the URL.
        *
-       * The \p pathdata string may include path parameters
-       * separated using the ";" separator character.
+       * By default, the \p pathdata string may include path
+       * parameters separated by the ";" separator character.
        *
        * \param pathdata The encoded path data component string.
        */
@@ -718,36 +718,38 @@ namespace zypp
 
       /**
        * \brief Set the path name.
-       * \param path The new path name.
+       * \param path  The new path name.
+       * \param eflag If the \p path name is encoded or not.
        */
       virtual void
-      setPathName(const std::string &path);
+      setPathName(const std::string &path,
+                  EEncoding         eflag);
 
       /**
        * \brief Set the path parameters.
-       * \param params The new path parameter string.
+       * \param params The new encoded path parameter string.
        */
       virtual void
       setPathParams(const std::string &params);
 
       /**
        * \brief Set the path parameters.
-       * \param pvec The vector with path parameters.
+       * \param pvec The vector with encoded path parameters.
        */
       virtual void
       setPathParamsVec(const zypp::url::ParamVec &pvec);
 
       /**
        * \brief Set the path parameters.
-       * \param pmap The map with path parameters.
+       * \param pmap The map with decoded path parameters.
        */
       virtual void
       setPathParamsMap(const zypp::url::ParamMap &pmap);
 
       /**
        * \brief Set or add value for the specified path parameter.
-       * \param param The path parameter name.
-       * \param value The path parameter value.
+       * \param param The decoded path parameter name.
+       * \param value The decoded path parameter value.
        */
       virtual void
       setPathParam(const std::string &param, const std::string &value);
@@ -757,9 +759,6 @@ namespace zypp
       /**
        * \brief Set the query string in the URL.
        *
-       * The \p querystr string will be supposed to not to
-       * contain the "?" separator character.
-       *
        * \param querystr The new encoded query string.
        */
       virtual void
@@ -767,22 +766,22 @@ namespace zypp
 
       /**
        * \brief Set the query parameters.
-       * \param qvec The vector with query parameters.
+       * \param qvec The vector with encoded query parameters.
        */
       virtual void
       setQueryStringVec(const zypp::url::ParamVec &qvec);
 
       /**
        * \brief Set the query parameters.
-       * \param qmap The map with query parameters.
+       * \param qmap The map with decoded query parameters.
        */
       virtual void
       setQueryStringMap(const zypp::url::ParamMap &qmap);
 
       /**
        * \brief Set or add value for the specified query parameter.
-       * \param param The query parameter name.
-       * \param value The query parameter value.
+       * \param param The decoded query parameter name.
+       * \param value The decoded query parameter value.
        */
       virtual void
       setQueryParam(const std::string &param, const std::string &value);
@@ -791,10 +790,12 @@ namespace zypp
       // -----------------
       /**
        * \brief Set the fragment string in the URL.
-       * \param fragment The new encoded fragment string.
+       * \param fragment The new fragment string.
+       * \param eflag If the \p fragment is encoded or not.
        */
       virtual void
-      setFragment(const std::string &fragment);
+      setFragment(const std::string &fragment,
+                  EEncoding         eflag);
 
 
       // -----------------
@@ -809,7 +810,7 @@ namespace zypp
        *
        * The UrlBase class uses following config variables:
        *
-       * - Path parameter separators:
+       * - Common path parameter separators:
        *   - \a \c sep_pathparams   \c ";"
        *     Separator used to split path parameters from path name.
        *   - \a \c psep_pathparam   \c ","
@@ -819,7 +820,7 @@ namespace zypp
        *   .
        * .
        *
-       * - Query string separators:
+       * - Common query string separators:
        *   - \a \c psep_querystr    \c "&"
        *     Separator between query string parameters.
        *   - \a \c vsep_querystr    \c "="
@@ -829,27 +830,24 @@ namespace zypp
        *
        * - Characters in URL components, that are safe without
        *   URL percent-encoding (see zypp::url::encode()).
-       *   - \a safe_username    ""
-       *   - \a safe_password    ""
-       *   - \a safe_hostname    "[:]"
-       *   - \a safe_pathname    "/"
-       *   - \a safe_pathparams  ""
-       *   - \a safe_querystr    ""
-       *   - \a safe_fragment    ""
+       *   - \a safe_username
+       *   - \a safe_password
+       *   - \a safe_hostname
+       *   - \a safe_pathname
+       *   - \a safe_pathparams
+       *   - \a safe_querystr
+       *   - \a safe_fragment
        *   .
        * .
        *
-       * - Regular expressions used to verify URL components
-       *   and their sub-components:
-       *   - \a rx_scheme        "^[a-zA-Z][a-zA-Z0-9\\._-]*$"
-       *   - \a rx_username      ".*"
-       *   - \a rx_password      ".*"
-       *   - \a rx_hostname      ".*" FIXME!
-       *   - \a rx_port          "^[0-9]{1,5}$"
-       *   - \a rx_pathname      ".*"
-       *   - \a rx_pathparams    ".*"
-       *   - \a rx_querystr      ".*"
-       *   - \a rx_fragment      ".*"
+       * - Regular expressions used to verify encoded URL
+       *   components and their sub-components:
+       *   - \a rx_username
+       *   - \a rx_password
+       *   - \a rx_pathname
+       *   - \a rx_pathparams
+       *   - \a rx_querystr
+       *   - \a rx_fragment
        *   .
        * .
        */
@@ -920,15 +918,35 @@ namespace zypp
        * missinterpret multiple "/" occurences as an empty
        * URL authority.
        *
-       * \param path A path name.
+       * \param path   A path name to cleanup.
        * \return A path begining with at most one "/" character.
        */
       virtual std::string
       cleanupPathName(const std::string &path);
 
+      /**
+       * \brief Verifies specified host or IP.
+       *
+       * This function does not perform any hostname lookups and
+       * supports only IPv6 addresses in "[ ... ]" notation.
+       *
+       * \param  host  The host name or IP to verify.
+       * \return True, if host seems to be valid.
+       */
+      virtual bool
+      isValidHost(const std::string &host);
+
+      /**
+       * \brief Verifies specified port number.
+       *
+       * \param  port  The port number to verify.
+       * \return True, if port number is valid.
+       */
+      virtual bool
+      isValidPort(const std::string &port);
 
     private:
-      UrlData        *m_data;
+      UrlBaseData *m_data;
     };
 
 
