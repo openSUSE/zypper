@@ -184,6 +184,8 @@ AC_OUTPUT(	\
 	testsuite/solver/single.out/Makefile	\
 	testsuite/source/Makefile	\
 	testsuite/source/tests/Makefile	\
+	testsuite/parser/Makefile	\
+	testsuite/parser/tests/Makefile	\
 	testsuite/target/Makefile	\
 	testsuite/target/tests/Makefile	\
 	zypp/Makefile			\
