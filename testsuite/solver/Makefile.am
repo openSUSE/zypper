@@ -19,7 +19,12 @@ utils_single_SOURCES =					\
 deptestomatic_multi_SOURCES =				\
 	deptestomatic.cc
 
-EXTRA_DIST = config/*.exp lib/*.exp $(PACKAGE).test/*.exp data.deptestomatic
+EXTRA_DIST = config/*.exp				\
+	    lib/*.exp					\
+	    $(PACKAGE).test/*.exp			\
+	    data.deptestomatic/*-tests/*.xml		\
+	    data.deptestomatic/*-tests/*.solution	\
+	    data.deptestomatic/*-tests/README
 
 dist-local: clean-local
 
