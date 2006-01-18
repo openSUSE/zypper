@@ -1228,7 +1228,7 @@ requirement_met_cb (ResItem_constPtr resItem, const Capability & cap, void *data
 	info->flag = true;
     }
 
-fprintf (stderr, "requirement_met_cb(%s, %s) [info->dep %s] -> %s\n", resItem->asString().c_str(), cap.asString().c_str(), info->dep != NULL ? info->dep->asString().c_str() : "(none)", info->flag ? "true" : "false");
+//fprintf (stderr, "requirement_met_cb(%s, %s) [info->dep %s] -> %s\n", resItem->asString().c_str(), cap.asString().c_str(), info->dep != NULL ? info->dep->asString().c_str() : "(none)", info->flag ? "true" : "false");
     return ! info->flag;
 }
 
