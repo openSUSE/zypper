@@ -1,0 +1,2 @@
+perror "No setup for current configuration"
+exit 1

@@ -1,0 +1,53 @@
+# parser_init.exp
+
+#
+# run binary $path/$prog
+# and expect $expected_result as a result
+#  (expected_result == 0  ==> program should pass)
+#  (expected_result == 1  ==> program should fail)
+#
+
+proc runYumTest { prog {path ""} {expected_result 0} } {
+
+  if { $path == "" } { set path "tests" }
+
+  set result 0
+  set oops [catch { set result [exec "$path/runtxxxxest.sh" "$path/$prog" ">" "/dev/null" "2>/dev/null"] } catched]
+
+  # check if the program crashed
+
+  if {$oops != 0 && $result != 0} {
+    puts ""
+    fail "$prog crashed ($oops) with: $catched"
+    return -1
+  }
+
+  # check return code from $prog
+
+  if {$result != ""} {
+    if {$expected_result != "0"} {
+      xfail $prog			# expected failure
+      return 0
+    }
+    puts ""
+    warning "Running of $prog results in '$result'"
+    return -1
+  }
+
+  pass $prog
+
+  return 0
+}
+
+# expect prog to pass
+
+proc shouldPass { prog {path ""} } {
+  return [runBinary $prog $path "0"]
+}
+
+# expect prog to fail
+
+proc shouldFail { prog {path ""} } {
+  return [runBinary $prog $path "1"]
+}
+
