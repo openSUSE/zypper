@@ -627,8 +627,8 @@ parse_xml_setup (XmlNode_Ptr node)
 
 	    ResItem_constPtr resItem;
 
-	    assertExit (!channel_name.c_str());
-	    assertExit (!package_name.c_str());
+	    assertExit (!channel_name.empty());
+	    assertExit (!package_name.empty());
 
 	    resItem = get_resItem (channel_name, package_name, kind_name);
 	    if (resItem) {
