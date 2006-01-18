@@ -13,6 +13,8 @@
 #include <ctime>
 #include "zypp/base/Logger.h"
 
+#include "zypp/source/yum/YUMSourceImpl.h"
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -30,6 +32,8 @@
 using std::endl;
 using namespace boost::filesystem;
 //using namespace boost::iostreams;
+using namespace zypp::parser::yum;
+using namespace zypp::source::yum;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -95,19 +99,33 @@ XMLFilesBackend::initBackend()
   create_directory( path(ZYPP_DB_DIR) / path("products") );
 }
 
+std::string
+XMLFilesBackend::dirForResolvable( Resolvable::Ptr resolvable ) const
+{
+  std::string dir;
+  // FIXME replace with path class of boost
+  dir += std::string(ZYPP_DB_DIR);
+  dir += "/";
+  dir += typeToString(resolvable, true);
+  return dir;
+}
+
+std::string
+XMLFilesBackend::fullPathForResolvable( Resolvable::Ptr resolvable ) const
+{
+  std::string filename;
+  filename = dirForResolvable(resolvable) + "/";
+  filename += resolvable->name();
+  return filename;
+}
+
 void
 XMLFilesBackend::storeObject( Resolvable::Ptr resolvable )
 {
   std::string xml = castedToXML(resolvable);
-  std::string filename;
+  std::string filename = fullPathForResolvable(resolvable);
   DBG << std::endl << xml << std::endl;
   std::ofstream file;
-  // FIXME replace with path class of boost
-  filename += std::string(ZYPP_DB_DIR);
-  filename += "/";
-  filename += typeToString(resolvable, true);
-  filename += "/";
-  filename += resolvable->name();
   DBG << filename << std::endl;
   file.open(filename.c_str());
   file << xml;
@@ -121,7 +139,47 @@ XMLFilesBackend::deleteObject( Resolvable::Ptr resolvable )
 std::list<Resolvable::Ptr>
 XMLFilesBackend::storedObjects()
 {
+  zypp::source::yum::YUMSourceImpl src;
+  std::list<Resolvable::Kind> kinds;
+  // only patches for now
+  kinds.push_back(ResTraits<zypp::Patch>::kind);
+
+  std::list<Resolvable::Kind>::const_iterator it_kinds;
+  for ( it_kinds = kinds.begin() ; it_kinds != kinds.end(); ++it_kinds )
+  {
+    // patches
+    if ( (*it_kinds) == ResTraits<zypp::Patch>::kind )
+    {
+      DBG << "parches...";
+    }
+  }
+  //for YUMPatchParser parser;
+/*
   return  std::list<Resolvable::Ptr>();
+  for ( fs::directory_iterator dir_itr( dirForResolvable );
+          dir_itr != end_iter;
+          ++dir_itr )
+    {
+      try
+      {
+        if ( fs::is_directory( *dir_itr ) )
+        {
+          ++dir_count;
+          std::cout << dir_itr->leaf()<< " [directory]\n";
+        }
+        else
+        {
+          ++file_count;
+          std::cout << dir_itr->leaf() << "\n";
+        }
+      }
+      catch ( const std::exception & ex )
+      {
+        ++err_count;
+        std::cout << dir_itr->leaf() << " " << ex.what() << std::endl;
+      }
+    }
+*/
 }
 
 std::list<Resolvable::Ptr>

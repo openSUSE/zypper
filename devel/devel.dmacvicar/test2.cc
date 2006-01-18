@@ -20,7 +20,7 @@
 #include <zypp/source/yum/YUMScriptImpl.h>
 #include <zypp/source/yum/YUMMessageImpl.h>
 #include <zypp/source/yum/YUMPackageImpl.h>
-#include <zypp/source/yum/YUMSource.h>
+#include <zypp/source/yum/YUMSourceImpl.h>
 
 #include <map>
 #include <set>
@@ -59,7 +59,7 @@ int main()
 	//INT << "===[END]============================================" << endl;
 
 	INT << "===[START]==========================================" << endl;
-	YUMSource src;
+	YUMSourceImpl src;
 	Patch::Ptr patch1;
 	
 	//YUMPatchParser iter(cin,"");

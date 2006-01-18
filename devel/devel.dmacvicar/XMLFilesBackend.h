@@ -50,7 +50,6 @@ public:
     * initialize the storage backend
     */
   virtual void initBackend();
-
   /**
     * Stores a Resolvable in the active backend.
     */
@@ -75,7 +74,19 @@ public:
 
   protected:
   std::string randomFileName() const;
-  
+  /**
+    * Directory where the xml file is stored (for the given resolvable)
+    * \a partial_match allows for text search.
+    */
+  std::string dirForResolvable( Resolvable::Ptr resolvable ) const;
+  /**
+    * Full path to the xml file for a given resolvable
+    * Does not care if the resolvable is yet stored or not
+    * \a partial_match allows for text search.
+    */
+  std::string fullPathForResolvable( Resolvable::Ptr resolvable ) const;
+
+
   private:
   class Private;
   Private *d;
