@@ -165,7 +165,7 @@ etc., that you can use to develop libglade applications.</description>
         <dep name="/bin/sh"/>
         <dep name="libxml-devel"/>
         <dep name="gnome-libs-devel"/>
-        <dep name="libglade" op="=" version="0.16"/>
+        <dep name="libglade" op="=" epoch="1" version="0.16"/>
       </requires>
       <provides>
         <dep name="/usr/bin/libglade-xgettext"/>

@@ -731,7 +731,9 @@ etc., that you can use to develop libglade applications.</description>
           <description>Initial release to Red Carpet</description>
         </update>
      </history>
-<requires><dep name="/usr/bin/env"/><dep name="/bin/sh"/><dep name="libxml-devel"/><dep name="gnome-libs-devel"/><dep name="libglade" op="=" version="0.17"/></requires><provides><dep name="/usr/bin/libglade-xgettext"/><dep name="/usr/bin/libglade-config"/><dep name="libglade-devel" op="=" epoch="1" version="0.17" release="1.ximian.1"/></provides>   </package>
+<requires><dep name="/usr/bin/env"/><dep name="/bin/sh"/><dep
+name="libxml-devel"/><dep name="gnome-libs-devel"/><dep name="libglade" op="="
+epoch="1" version="0.17"/></requires><provides><dep name="/usr/bin/libglade-xgettext"/><dep name="/usr/bin/libglade-config"/><dep name="libglade-devel" op="=" epoch="1" version="0.17" release="1.ximian.1"/></provides>   </package>
     <package>
       <name>librsvg</name>
       <summary>SVG rendering library</summary>
