@@ -27,13 +27,21 @@ namespace zypp
 
     // ---------------------------------------------------------------
     std::string
-    encode(const std::string &str, const std::string &safe)
+    encode(const std::string &str, const std::string &safe,
+                                   EEncoding         eflag)
     {
       std::string skip("ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                        "abcdefghijklmnopqrstuvwxyz"
-                       "0123456789_.-" + safe);
+                       "0123456789.~_-");
+      std::string more(":/?#[]@!$&'()*+,;=");
       size_t      beg, pos, len;
       std::string out;
+
+      for(size_t i=0; i<safe.size(); i++)
+      {
+        if( more.find(safe.at(i)) != std::string::npos)
+          skip.append(1, safe.at(i));
+      }
 
       len = str.length();
       beg = 0;
@@ -47,8 +55,8 @@ namespace zypp
             out.append(str, beg, pos - beg);
           }
 
-          if( /* detect_encoded && */
-              pos + 2 < len &&
+          if( eflag == E_ENCODED &&
+              pos + 2 < len      &&
               str.at(pos) == '%' &&
               std::isxdigit(str.at(pos + 1)) &&
               std::isxdigit(str.at(pos + 2)))
@@ -154,9 +162,15 @@ namespace zypp
     void
     split(ParamVec          &pvec,
           const std::string &pstr,
-	  const std::string &psep)
+	        const std::string &psep)
     {
       size_t beg, pos, len;
+      if( psep.empty())
+      {
+        throw std::invalid_argument(
+          "Invalid split separator character."
+        );
+      }
 
       len = pstr.length();
       beg = 0;
@@ -186,10 +200,17 @@ namespace zypp
           const std::string &vsep,
           EEncoding         eflag)
     {
-      ParamVec     pvec;
+      ParamVec                 pvec;
       ParamVec::const_iterator pitr;
-      std::string    k, v;
-      size_t       pos;
+      std::string              k, v;
+      size_t                   pos;
+
+      if( psep.empty() || vsep.empty())
+      {
+        throw std::invalid_argument(
+          "Invalid split separator character."
+        );
+      }
 
       split(pvec, str, psep);
 
@@ -254,31 +275,36 @@ namespace zypp
          const std::string &vsep,
          const std::string &safe)
     {
-      for(std::string::size_type i=0; i<safe.size(); i++)
+      if( psep.empty() || vsep.empty())
       {
-        if( psep.find(safe[i]) != std::string::npos ||
-            vsep.find(safe[i]) != std::string::npos)
-        {
-          throw std::invalid_argument(
-            "The encoding safe character list contains a separator character."
-          );
-        }
+        throw std::invalid_argument(
+          "Invalid join separator character."
+        );
       }
 
-      std::string    str;
+      std::string join_safe;
+      for(std::string::size_type i=0; i<safe.size(); i++)
+      {
+        if( psep.find(safe[i]) == std::string::npos &&
+            vsep.find(safe[i]) == std::string::npos)
+        {
+          join_safe.append(1, safe[i]);
+        }
+      }
+      std::string              str;
       ParamMap::const_iterator i( pmap.begin());
 
       if( i != pmap.end())
       {
-        str = encode(i->first, safe);
+        str = encode(i->first, join_safe);
         if( !i->second.empty())
-          str += vsep + encode(i->second, safe);
+          str += vsep + encode(i->second, join_safe);
 
         while( ++i != pmap.end())
         {
-          str += psep + encode(i->first, safe);
+          str += psep + encode(i->first, join_safe);
           if( !i->second.empty())
-            str +=  vsep + encode(i->second, safe);
+            str +=  vsep + encode(i->second, join_safe);
         }
       }
 

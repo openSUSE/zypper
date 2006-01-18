@@ -54,24 +54,32 @@ namespace zypp
     // ---------------------------------------------------------------
     /** Encodes a string using URL percent encoding.
      *
-     * Already encoded characters are detected and will be not encoded a
-     * second time. By default, all characters except of "a-zA-Z0-9_.-"
-     * will be encoded. Additional characters can be specified in the
+     * By default, all characters except of "a-zA-Z0-9_.-" will be encoded.
+     * Additional characters from the set ":/?#[]@!$&'()*+,;=", that are
+     * safe for a URL compoent without encoding, can be specified in the
      * \p safe argument.
      *
+     * If the \p eflag parameter is set to E_ENCODED, then already encoded
+     * substrings will be detected and not encoded a second time.
+     *
      * The following function call will encode the "@" character as "%40",
-     * but skip encoding of the "%" character:
+     * but skip encoding of the "%" character, because the \p eflag is set
+     * to E_ENCODED and "%ba" is detected as a valid encoded character.
      * \code
-     *   zypp::url::encode("foo%bar@localhost", "%");
+     *   zypp::url::encode("foo%bar@localhost", "", E_ENCODED);
      * \endcode
+     * With \p eflag set to E_DECODED, the "%" character would be encoded
+     * as well. The complete encoded string would be "foo%25bar%40localhost".
      *
      * \param str      A string to encode (binary data).
      * \param safe     Characters safe to skip in encoding,
      *                 e.g. "/" for path names.
+     * \param eflag    If to detect and skip already encoded substrings.
      * \return A percent encoded string.
      */
     std::string
-    encode(const std::string &str, const std::string &safe = "");
+    encode(const std::string &str, const std::string &safe = "",
+                                   EEncoding         eflag = E_DECODED);
 
 
     // ---------------------------------------------------------------
