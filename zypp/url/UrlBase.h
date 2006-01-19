@@ -286,11 +286,13 @@ namespace zypp
        * \brief Construct new object and initializes it with
        *        specified URL components.
        *
-       * \param scheme    A scheme name.
-       * \param authority A authority component data (encoded).
-       * \param pathdata  A path component data (encoded).
-       * \param querystr  A query string (encoded).
-       * \param fragment  A fragment component (encoded),
+       * \param scheme    The scheme name.
+       * \param authority The encoded authority component data.
+       * \param pathdata  The encoded path component data.
+       * \param querystr  The encoded query string component.
+       * \param fragment  The encoded fragment string component.
+       * \throws std::invalid_argument exception if one of the
+       *         parameters contains an invalid character.
        */
       UrlBase(const std::string &scheme,
               const std::string &authority,
@@ -323,11 +325,13 @@ namespace zypp
       /**
        * \brief Initializes current object with new URL components.
        *
-       * \param scheme    A scheme name.
-       * \param authority A authority component data (encoded).
-       * \param pathdata  A path component data (encoded).
-       * \param querystr  A query string (encoded).
-       * \param fragment  A fragment component (encoded),
+       * \param scheme    The scheme name.
+       * \param authority The encoded authority component data.
+       * \param pathdata  The encoded path component data.
+       * \param querystr  The encoded query string component.
+       * \param fragment  The encoded fragment string component.
+       * \throws std::invalid_argument exception if one of the
+       *         parameters contains an invalid character.
        */
       virtual void
       init(const std::string &scheme,
@@ -454,6 +458,8 @@ namespace zypp
        * Returns the username from the URL authority.
        * \param eflag Flag if the usename should be percent-decoded or not.
        * \return The username sub-component from the URL authority.
+       * \throws std::invalid_argument exception if the decoded
+       *         result string would contain a '\\0' character.
        */
       virtual std::string
       getUsername(EEncoding eflag) const;
@@ -462,6 +468,8 @@ namespace zypp
        * Returns the password from the URL authority.
        * \param eflag Flag if the password should be percent-decoded or not.
        * \return The password sub-component from the URL authority.
+       * \throws std::invalid_argument exception if the decoded
+       *         result string would contain a '\\0' character.
        */
       virtual std::string
       getPassword(EEncoding eflag) const;
@@ -469,18 +477,20 @@ namespace zypp
       /**
        * Returns the hostname or IP from the URL authority.
        *
-       * In case the Url contains an IP number, it may be surrounded
+       * In case the Url contains an IPv6 number, it is be surrounded
        * by "[" and "]" characters, for example "[::1]" for an IPv6
        * localhost address.
        *
        * \param eflag Flag if the host should be percent-decoded or not.
        * \return The host sub-component from the URL authority.
+       * \throws std::invalid_argument exception if the decoded
+       *         result string would contain a '\\0' character.
        */
       virtual std::string
       getHost(EEncoding eflag) const;
 
       /**
-       * Returns the port from the URL authority.
+       * Returns the port number from the URL authority.
        * \return The port sub-component from the URL authority.
        */
       virtual std::string
@@ -504,20 +514,22 @@ namespace zypp
        * Returns the path name from the URL.
        * \param eflag Flag if the path should be decoded or not.
        * \return The path name sub-component without path parameters
-       *         from Path-Data component of the URL.
+       *         from path data component of the URL.
+       * \throws std::invalid_argument exception if the decoded
+       *         result string would contain a '\\0' character.
        */
       virtual std::string
       getPathName(EEncoding eflag) const;
 
       /**
-       * Returns the path parameters from the URL.
+       * Returns the encoded path parameters from the URL.
        * \return The encoded path parameters from the URL.
        */
       virtual std::string
       getPathParams() const;
 
       /**
-       * Returns a vector with path parameter substrings.
+       * Returns a vector with encoded path parameter substrings.
        *
        * The default path parameter separator is the \c ',' character.
        * A schema specific object may overide the default separators.
@@ -526,7 +538,7 @@ namespace zypp
        * by default into a vector containing the substrings "foo=1" and
        * "bar=2".
        *
-       * \return The path parameters splited into a vector of substrings.
+       * \return The encoded path parameters vector.
        */
       virtual zypp::url::ParamVec
       getPathParamsVec() const;
@@ -545,6 +557,10 @@ namespace zypp
        * \param eflag Flag if the path parameter keys and values should
        *               be decoded or not.
        * \return The path parameters key and values as a string map.
+       * \throws std::logic_error exception if parameter parsing
+       *         is not supported for a URL (scheme).
+       * \throws std::invalid_argument exception if a decoded
+       *         string would contain a '\\0' character.
        */
       virtual zypp::url::ParamMap
       getPathParamsMap(EEncoding eflag) const;
@@ -560,6 +576,10 @@ namespace zypp
        * \param eflag Flag if the path parameter keys and values should
        *              be decoded or not.
        * \return The value for the path parameter key or empty string.
+       * \throws std::logic_error exception if parameter parsing
+       *         is not supported for a URL (scheme).
+       * \throws std::invalid_argument exception if a decoded
+       *         string would contain a '\\0' character.
        */
       virtual std::string
       getPathParam(const std::string &param, EEncoding eflag) const;
@@ -607,6 +627,10 @@ namespace zypp
        * \param eflag Flag if the query string keys and values should
        *               be decoded or not.
        * \return The query string as a key/value string map.
+       * \throws std::logic_error exception if parameter parsing
+       *         is not supported for a URL (scheme).
+       * \throws std::invalid_argument exception if a decoded
+       *         string would contain a '\\0' character.
        */
       virtual zypp::url::ParamMap
       getQueryStringMap(EEncoding eflag) const;
@@ -622,6 +646,10 @@ namespace zypp
        * \param eflag Flag if the query parameter keys and values should
        *              be decoded or not.
        * \return The value for the query parameter key or empty string.
+       * \throws std::logic_error exception if parameter parsing
+       *         is not supported for a URL (scheme).
+       * \throws std::invalid_argument exception if a decoded
+       *         string would contain a '\\0' character.
        */
       virtual std::string
       getQueryParam(const std::string &param, EEncoding eflag) const;
@@ -632,6 +660,8 @@ namespace zypp
        * Returns the encoded fragment component of the URL.
        * \param eflag Flag if the fragment should be percent-decoded or not.
        * \return The encoded fragment component of the URL.
+       * \throws std::invalid_argument exception if the decoded
+       *         result string would contain a '\\0' character.
        */
       virtual std::string
       getFragment(EEncoding eflag) const;
@@ -641,6 +671,8 @@ namespace zypp
       /**
        * \brief Set the scheme name in the URL.
        * \param scheme The new scheme name.
+       * \throws std::invalid_argument exception if the \p scheme
+       *         parameter contains an invalid character.
        */
       virtual void
       setScheme(const std::string &scheme);
@@ -654,6 +686,8 @@ namespace zypp
        * "//" separator characters (just "user:pass@host:port").
        *
        * \param authority The authority component string.
+       * \throws std::invalid_argument exception if the \p authority
+       *         parameter contains an invalid character.
        */
       virtual void
       setAuthority(const std::string &authority);
@@ -662,6 +696,8 @@ namespace zypp
        * \brief Set the username in the URL authority.
        * \param user  The new username.
        * \param eflag If the \p username is encoded or not.
+       * \throws std::invalid_argument exception if the encoded
+       *         \p user parameter contains an invalid character.
        */
       virtual void
       setUsername(const std::string &user,
@@ -671,6 +707,8 @@ namespace zypp
        * \brief Set the password in the URL authority.
        * \param pass  The new password.
        * \param eflag If the \p password is encoded or not.
+       * \throws std::invalid_argument exception if the encoded
+       *         \p pass parameter contains an invalid character.
        */
       virtual void
       setPassword(const std::string &pass,
@@ -684,14 +722,15 @@ namespace zypp
        * within square brackets (RFC3513, Sect. 2.2).
        *
        * A hostname may contain national alphanumeric UTF8 characters
-       * (letters other than ASCII a-z0-9), that will be encoded.
+       * (letters other than ASCII a-zA-Z), that will be encoded.
        * This function allows to specify both, a encoded or decoded
        * hostname.
        *
        * Other IP literals in "[v ... ]" square bracket format are not
        * supported by the implementation in UrlBase class.
        *
-       * \param host The new hostname or IP.
+       * \param host The new hostname or IP address.
+       * \throws std::invalid_argument exception if the host is invalid.
        */
       virtual void
       setHost(const std::string &host);
@@ -699,6 +738,7 @@ namespace zypp
       /**
        * \brief Set the port number in the URL authority.
        * \param port The new port number.
+       * \throws std::invalid_argument exception if the port is invalid.
        */
       virtual void
       setPort(const std::string &port);
@@ -712,6 +752,8 @@ namespace zypp
        * parameters separated by the ";" separator character.
        *
        * \param pathdata The encoded path data component string.
+       * \throws std::invalid_argument exception if the
+       *         \p pathdata parameter contains an invalid character.
        */
       virtual void
       setPathData(const std::string &pathdata);
@@ -720,6 +762,8 @@ namespace zypp
        * \brief Set the path name.
        * \param path  The new path name.
        * \param eflag If the \p path name is encoded or not.
+       * \throws std::invalid_argument exception if the encoded
+       *         \p path parameter contains an invalid character.
        */
       virtual void
       setPathName(const std::string &path,
@@ -728,6 +772,8 @@ namespace zypp
       /**
        * \brief Set the path parameters.
        * \param params The new encoded path parameter string.
+       * \throws std::invalid_argument exception if the
+       *         \p params parameter contains an invalid character.
        */
       virtual void
       setPathParams(const std::string &params);
@@ -735,6 +781,8 @@ namespace zypp
       /**
        * \brief Set the path parameters.
        * \param pvec The vector with encoded path parameters.
+       * \throws std::invalid_argument exception if the
+       *         \pvec parameter contains an invalid character.
        */
       virtual void
       setPathParamsVec(const zypp::url::ParamVec &pvec);
@@ -742,6 +790,8 @@ namespace zypp
       /**
        * \brief Set the path parameters.
        * \param pmap The map with decoded path parameters.
+       * \throws std::logic_error exception if parameter parsing
+       *         is not supported for a URL (scheme).
        */
       virtual void
       setPathParamsMap(const zypp::url::ParamMap &pmap);
@@ -750,6 +800,10 @@ namespace zypp
        * \brief Set or add value for the specified path parameter.
        * \param param The decoded path parameter name.
        * \param value The decoded path parameter value.
+       * \throws std::logic_error exception if parameter parsing
+       *         is not supported for a URL (scheme).
+       * \throws std::invalid_argument exception if a decoded
+       *         string would contain a '\\0' character.
        */
       virtual void
       setPathParam(const std::string &param, const std::string &value);
@@ -759,7 +813,14 @@ namespace zypp
       /**
        * \brief Set the query string in the URL.
        *
+       * The \p querystr string parameter is supposed
+       * to not to contain the "?" URL query separator
+       * character (use just a "foo=bar&x=22" instead
+       * of "?foo=bar&x=22").
+       *
        * \param querystr The new encoded query string.
+       * \throws std::invalid_argument exception if the
+       *         \p querystr parameter contains an invalid character.
        */
       virtual void
       setQueryString(const std::string &querystr);
@@ -767,6 +828,8 @@ namespace zypp
       /**
        * \brief Set the query parameters.
        * \param qvec The vector with encoded query parameters.
+       * \throws std::invalid_argument exception if the
+       *         \p qvec parameter contains an invalid character.
        */
       virtual void
       setQueryStringVec(const zypp::url::ParamVec &qvec);
@@ -774,6 +837,8 @@ namespace zypp
       /**
        * \brief Set the query parameters.
        * \param qmap The map with decoded query parameters.
+       * \throws std::logic_error exception if parameter parsing
+       *         is not supported for a URL (scheme).
        */
       virtual void
       setQueryStringMap(const zypp::url::ParamMap &qmap);
@@ -782,6 +847,10 @@ namespace zypp
        * \brief Set or add value for the specified query parameter.
        * \param param The decoded query parameter name.
        * \param value The decoded query parameter value.
+       * \throws std::logic_error exception if parameter parsing
+       *         is not supported for a URL (scheme).
+       * \throws std::invalid_argument exception if a decoded
+       *         string would contain a '\\0' character.
        */
       virtual void
       setQueryParam(const std::string &param, const std::string &value);
@@ -792,6 +861,8 @@ namespace zypp
        * \brief Set the fragment string in the URL.
        * \param fragment The new fragment string.
        * \param eflag If the \p fragment is encoded or not.
+       * \throws std::invalid_argument exception if the encoded
+       *         \p fragment parameter contains an invalid character.
        */
       virtual void
       setFragment(const std::string &fragment,
@@ -813,6 +884,9 @@ namespace zypp
        * - Common path parameter separators:
        *   - \a \c sep_pathparams   \c ";"
        *     Separator used to split path parameters from path name.
+       *     Setting it to empty string disables splitting of path
+       *     name and path parameters. Set also rx_pathparams to an
+       *     empty string.
        *   - \a \c psep_pathparam   \c ","
        *     Separator between path parameters.
        *   - \a \c vsep_pathparam   \c "="
@@ -868,8 +942,6 @@ namespace zypp
       std::string
       config(const std::string &opt) const;
 
-    //protected:
-      // friend class Url;
       /**
        * Set the value of a UrlBase configuration variable.
        *
@@ -887,7 +959,7 @@ namespace zypp
        * Return the view options of the current object.
        *
        * This method is used to query the view options
-       * used by the Url::toString() method.
+       * used by the toString() method.
        *
        * \return The current view option combination.
        */
@@ -898,7 +970,7 @@ namespace zypp
        * Change the view options of the current object.
        *
        * This method is used to change the view options
-       * used by the Url::toString() method.
+       * used by the toString() method.
        *
        * \param vopts New view options combination.
        */
@@ -927,8 +999,20 @@ namespace zypp
       /**
        * \brief Verifies specified host or IP.
        *
+       * It verifies, if the specified \p host parameter contains
+       * a hostname, an IPv4 address in dotted-decimal form or an
+       * IPv6 address literal encapsulated within square brackets
+       * (RFC3513, Sect. 2.2).
+       *
+       * A hostname in the \p host parameter, may contain national
+       * alphanumeric UTF8 characters (letters other than ASCII
+       * a-zA-Z) and allows to specify both, a encoded or decoded
+       * hostname.
+       *
        * This function does not perform any hostname lookups and
-       * supports only IPv6 addresses in "[ ... ]" notation.
+       * supports only IPv6 addresses in "[ ... ]" notation. The
+       * "[v ... ]" square bracket format is not supported by
+       * this implementation.
        *
        * \param  host  The host name or IP to verify.
        * \return True, if host seems to be valid.
