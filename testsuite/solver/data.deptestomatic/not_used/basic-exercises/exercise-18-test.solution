@@ -62,7 +62,7 @@
 >!> |unflag B-1.0-1[test]
 >!> |unflag F-1.0-1[test]
 >!> installs=3, upgrades=0, uninstalls=0
->!> Solution #1
+>!> Solution #10:
 >!> install A-1.0-1[test]
 >!> install G-1.0-1[test]
 >!> install Z-1.0-1[test]
