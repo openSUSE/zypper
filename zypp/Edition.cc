@@ -269,7 +269,7 @@ namespace zypp
   {
     string ret;
 
-    if ( _pimpl->_epoch )
+    if ( _pimpl->_epoch != noepoch )
       ret += str::form(  "%d:", _pimpl->_epoch );
 
     ret += _pimpl->_version;
@@ -289,8 +289,22 @@ namespace zypp
   int Edition::compare( const Edition & lhs, const Edition & rhs )
   {
     // compare epoch
-    if ( lhs.epoch() != rhs.epoch() )
-      return lhs.epoch() < rhs.epoch() ? -1 : 1;
+    if ( lhs.epoch() != noepoch && rhs.epoch() != noepoch) {	// both have epoch, compare them
+	if ( lhs.epoch() != rhs.epoch() ) {
+	    int ret = lhs.epoch() < rhs.epoch() ? -1 : 1;
+DBG << "Edition::compare( " << lhs.asString() << ", " << rhs.asString() << ") = " << ret << endl;
+	    return ret;
+	}
+	// FALLTHRU, equal epochs, now look at versions
+    }
+    else if (lhs.epoch() != noepoch) {			// requirer has epoch, provider does not -> 1
+DBG << "Edition::compare( " << lhs.asString() << ", " << rhs.asString() << ") = 0" << endl;
+	return 1;
+    }
+//    else if (rhs.epoch() != noepoch) {		// provider has epoch, requirer does not -> FALLTHRU
+//DBG << "Edition::compare( " << lhs.asString() << ", " << rhs.asString() << ") = 1" << endl;
+//	return 1;
+//    }
 
     // next compare versions
     int res = rpmverscmp( lhs.version(), rhs.version() );
@@ -303,8 +317,22 @@ namespace zypp
   int Edition::match( const Edition & lhs, const Edition & rhs )
   {
     // compare epoch
-    if ( lhs.epoch() != rhs.epoch() )
-      return lhs.epoch() < rhs.epoch() ? -1 : 1;
+    if ( lhs.epoch() != noepoch && rhs.epoch() != noepoch) {	// both have epoch, compare them
+	if ( lhs.epoch() != rhs.epoch() ) {
+	    int ret = lhs.epoch() < rhs.epoch() ? -1 : 1;
+DBG << "Edition::match( " << lhs.asString() << ", " << rhs.asString() << ") = " << ret << endl;
+	    return ret;
+	}
+	// FALLTHRU, equal epochs, now look at versions
+    }
+    else if (lhs.epoch() != noepoch) {			// requirer has epoch, provider does not -> 1
+DBG << "Edition::match( " << lhs.asString() << ", " << rhs.asString() << ") = 0" << endl;
+	return 1;
+    }
+//    else if (rhs.epoch() != noepoch) {		// provider has epoch, requirer does not -> FALLTHRU
+//DBG << "Edition::match( " << lhs.asString() << ", " << rhs.asString() << ") = 1" << endl;
+//	return 1;
+//    }
 
     // next compare versions
     if ( lhs.version().empty() || rhs.version().empty() )
