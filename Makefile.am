@@ -4,7 +4,7 @@
 # Do NOT list 'devel' in subdirs. It's developers playgound
 # and must not prevent anything from building.
 
-SUBDIRS =	zypp testsuite doc
+SUBDIRS =	zypp testsuite zmd
 
 ## ##################################################
 

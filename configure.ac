@@ -123,6 +123,14 @@ AC_CHECK_LIB([z], [gzopen],
 AC_CHECK_LIB([xml2], [xmlNewTextReader],
         [:],
         AC_MSG_ERROR([libxml2 not found. please install libxml2-devel]))
+
+dnl sqlite
+PKG_CHECK_MODULES(SQLITE, sqlite3, pkg_sqlite=yes, pkg_sqlite=no)
+if test ! -f $SQLITE_LIBS/libsqlite3.so; then
+  echo
+  AC_MSG_ERROR([Could not find sqlite3 library, please install sqlite-devel])
+fi
+
 dnl ==================================================
 
 AC_ARG_ENABLE(faked-hal, [  --devel-faked-hal   do not use libhal],
@@ -206,9 +214,11 @@ AC_OUTPUT(	\
 	zypp/media/proxyinfo/Makefile	\
 	zypp/url/Makefile		\
 	zypp/target/Makefile		\
-  zypp/target/rpm/Makefile	\
-  zypp/target/store/Makefile  \
-	zypp/target/hal/Makefile
+	zypp/target/rpm/Makefile	\
+	zypp/target/store/Makefile	\
+	zypp/target/hal/Makefile	\
+	zmd/Makefile			\
+	zmd/backend/Makefile
 
 )
 dnl ==================================================
