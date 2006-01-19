@@ -453,7 +453,6 @@ Package::Package (XmlNode_constPtr node, Channel_constPtr channel, const Resolva
         release = update->package()->release();
 
     }
-#if 0 //Is this really needed ?
     else {
 
         /* Otherwise, try to find where the package provides itself,
@@ -461,17 +460,19 @@ Package::Package (XmlNode_constPtr node, Channel_constPtr channel, const Resolva
 
         if (!provides().empty())
             for (CapSet::const_iterator iter = provides().begin(); iter != provides().end(); iter++) {
-                if ((*iter)->relation() == Rel::EQ &&
-                    ((*iter)->name() == name))
-                {
-                    epoch = (*iter)->epoch();
-                    version = (*iter)->version();
-                    release = (*iter)->release();
-                    break;
-                }
+		std::string capString = (*iter).asString();
+		std::string cmpString = name + " == ";
+		string::size_type ret = capString.find (cmpString);		
+		if (ret != string::npos)
+		{
+		    Edition edition = Edition(capString.substr (cmpString.length()));
+                    epoch = edition.epoch();
+                    version = edition.version();
+                    release = edition.release();
+		    break;
+		}
             }
     }
-#endif
 
     Edition     _edition( version, release, zypp::str::numstring(epoch) );
     shared_ptr<zypp::detail::PackageImpl> pkgImpl;

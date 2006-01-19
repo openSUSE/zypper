@@ -433,7 +433,7 @@ XmlParser::endElement(const char *name)
 void
 XmlParser::toplevelStart(const std::string & name, const xmlChar **attrs)
 {
-    _XXX("RC_SPEW_XML") << "XmlParser::toplevelStart(" << name << ")" << endl;
+//    _XXX("RC_SPEW_XML") << "XmlParser::toplevelStart(" << name << ")" << endl;
 
     if ((name == "package")
 	|| (name == "pattern")
@@ -538,7 +538,7 @@ XmlParser::resolvableStart(const std::string & name, const xmlChar **attrs)
 	_current_dep_list = _toplevel_dep_list = &_current_freshens;
     }
     else {
-	_XXX("RC_SPEW_XML") << "! Not handling " << name << " in package start" << endl;
+//	_XXX("RC_SPEW_XML") << "! Not handling " << name << " in package start" << endl;
     }
 }
 
@@ -633,19 +633,21 @@ XmlParser::resolvableEnd (const std::string & name)
 	    _current_resitem_fileSize = update->packageSize();
 	    _current_resitem_installedSize = update->installedSize();
 	}
-#if 0 //Is this really needed ?
 	else {
 	    for (CapSet::const_iterator iter = _current_provides.begin(); iter != _current_provides.end(); iter++) {
-		if ((*iter)->relation() == Rel::EQ
-		    && ((*iter)->name() == _current_resitem_name))
+		std::string capString = (*iter).asString();
+		std::string cmpString = _current_resitem_name + " == ";
+		string::size_type ret = capString.find (cmpString);		
+		if (ret != string::npos)
 		{
-		    _current_resitem_kind = (*iter)->kind();
-		    _current_resitem_edition = (*iter)->edition();
+		    string editionStr = capString.substr (cmpString.length());
+		    _current_resitem_kind = (*iter).refers();
+		    _current_resitem_edition = Edition (editionStr);
 		    break;
 		}
 	    }
 	}
-#endif
+
 	// check if we provide ourselfs properly
 
 	CapFactory  factory;
