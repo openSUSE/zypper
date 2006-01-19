@@ -7,6 +7,7 @@ SUBDIRS = base url media capability detail parser source target solver
 
 pkginclude_HEADERS = NeedAType.h \
 	Arch.h		\
+	Bit.h		\
 	ByteCount.h	\
 	Capability.h	\
 	CapFactory.h	\
@@ -28,6 +29,7 @@ pkginclude_HEADERS = NeedAType.h \
 	ResObject.h	\
 	Resolvable.h	\
 	ResTraits.h	\
+	ResStatus.h	\
 	ResStore.h	\
 	ResFilters.h	\
 	Package.h	\
@@ -82,6 +84,7 @@ lib@PACKAGE@_la_SOURCES = \
 	ResObject.cc	\
 	Resolvable.cc	\
 	ResTraits.cc	\
+	ResStatus.cc	\
 	ResStore.cc	\
 	Package.cc	\
 	Pathname.cc	\

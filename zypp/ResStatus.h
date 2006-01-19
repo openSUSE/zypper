@@ -1,33 +1,29 @@
-#include <iostream>
-#include <ctime>
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+\---------------------------------------------------------------------*/
+/** \file	zypp/ResStatus.h
+ *
+*/
+#ifndef ZYPP_RESSTATUS_H
+#define ZYPP_RESSTATUS_H
 
-#include <zypp/base/Logger.h>
-#include <zypp/base/Exception.h>
+#include <iosfwd>
 
-#include <zypp/base/String.h>
-#include <zypp/base/Exception.h>
-#include <zypp/base/PtrTypes.h>
-
-#include <zypp/PathInfo.h>
-#include <zypp/SourceFactory.h>
-#include <zypp/source/Builtin.h>
-#include <zypp/source/susetags/SuseTagsImpl.h>
-
-#include <zypp/ResFilters.h>
-#include <zypp/ResStatus.h>
-#include <zypp/Bit.h>
-
-using namespace std;
-using namespace zypp;
+#include "zypp/Bit.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{
-}
-///////////////////////////////////////////////////////////////////
+{ /////////////////////////////////////////////////////////////////
 
-namespace zypp
-{
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : ResStatus
+  //
   /** Status bitfield.
    *
    * \li \c StateField Whether the resolvable is installed
@@ -43,6 +39,8 @@ namespace zypp
   */
   class ResStatus
   {
+    friend std::ostream & operator<<( std::ostream & str, const ResStatus & obj );
+
     typedef char FieldType;
     // Bit Ranges within FieldType defined by 1st bit and size:
     typedef bit::Range<FieldType,0,                    1> StateField;
@@ -93,8 +91,10 @@ namespace zypp
 
   public:
 
-    ResStatus()
-    {}
+    /** Default ctor. */
+    ResStatus();
+    /** Dtor. */
+    ~ResStatus();
 
     // get/set functions, returnig \c true if requested status change
     // was successfull (i.e. leading to the desired transaction).
@@ -105,19 +105,12 @@ namespace zypp
   private:
     bit::BitField<FieldType> _bitfield;
   };
+  ///////////////////////////////////////////////////////////////////
 
-}
+  /** \relates ResStatus Stream output */
+  std::ostream & operator<<( std::ostream & str, const ResStatus & obj );
 
-/******************************************************************
-**
-**      FUNCTION NAME : main
-**      FUNCTION TYPE : int
-*/
-int main( int argc, char * argv[] )
-{
-  INT << "===[START]==========================================" << endl;
-
-
-  INT << "===[END]============================================" << endl;
-  return 0;
-}
+  /////////////////////////////////////////////////////////////////
+} // namespace zypp
+///////////////////////////////////////////////////////////////////
+#endif // ZYPP_RESSTATUS_H
