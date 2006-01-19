@@ -375,7 +375,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     }
 
     Url url( _url );
-    url.setPathName( escapedPath(path) );
+    url.setPathName( path );
 
     Pathname dest = target.absolutename();
     string destNew = target.asString() + ".new.zypp.37456";
