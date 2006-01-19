@@ -140,12 +140,23 @@ namespace zypp
           );
         }
         else
-        if( !str::regex_match(data, str::regex(regx)))
         {
-          throw std::invalid_argument(
-            std::string("Invalid " + name + " argument '" +
-                        data + "'")
-            );
+          bool valid = false;
+          try
+          {
+            str::regex rex(regx);
+            valid = str::regex_match(data, rex);
+          }
+          catch( ... )
+          {}
+
+          if( !valid)
+          {
+            throw std::invalid_argument(
+              std::string("Invalid " + name + " argument '" +
+                          data + "'")
+              );
+          }
         }
       }
 
@@ -321,8 +332,16 @@ namespace zypp
     bool
     UrlBase::isValidScheme(const std::string &scheme) const
     {
-      if(scheme.empty() ||
-         str::regex_match(scheme, str::regex(RX_VALID_SCHEME)))
+      bool valid = false;
+      try
+      {
+        str::regex rex(RX_VALID_SCHEME);
+        valid = str::regex_match(scheme, rex);
+      }
+      catch( ... )
+      {}
+
+      if(scheme.empty() || valid)
       {
         std::string    lscheme( str::toLower(scheme));
         UrlSchemes     schemes( getKnownSchemes());
@@ -1139,7 +1158,8 @@ namespace zypp
     {
       try
       {
-        if( str::regex_match(host, str::regex(RX_VALID_HOSTIPV6)))
+        str::regex regx(RX_VALID_HOSTIPV6);
+        if( str::regex_match(host, regx))
         {
           struct in6_addr ip;
           std::string temp( host.substr(1, host.size()-2));
@@ -1150,7 +1170,8 @@ namespace zypp
         {
           // matches also IPv4 dotted-decimal adresses...
           std::string temp( zypp::url::decode(host));
-          return str::regex_match(temp, str::regex(RX_VALID_HOSTNAME));
+          str::regex  regx(RX_VALID_HOSTNAME);
+          return str::regex_match(temp, regx);
         }
       }
       catch( ... )
@@ -1166,7 +1187,8 @@ namespace zypp
     {
       try
       {
-        if( str::regex_match(port, str::regex(RX_VALID_PORT)))
+        str::regex regx(RX_VALID_PORT);
+        if( str::regex_match(port, regx))
         {
           long pnum = str::strtonum<long>(port);
           return ( pnum >= 1 && pnum <= USHRT_MAX);

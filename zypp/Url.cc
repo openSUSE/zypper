@@ -328,9 +328,16 @@ namespace zypp
   Url::parseUrl(const std::string &encodedUrl)
   {
     UrlRef      url;
-    str::regex  rex(RX_SPLIT_URL);
     str::smatch out;
-    bool        ret = str::regex_match(encodedUrl, out, rex);
+    bool        ret = false;
+
+    try
+    {
+      str::regex  rex(RX_SPLIT_URL);
+      ret = str::regex_match(encodedUrl, out, rex);
+    }
+    catch( ... )
+    {}
 
     if(ret && out.size() == 10)
     {
