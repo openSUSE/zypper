@@ -12,6 +12,7 @@
               <value>group</value>
               <value>product</value>
               <value>patches</value>
+              <value>pattern</value>
             </choice>
           </attribute>
           <element name="location">

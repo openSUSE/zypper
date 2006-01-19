@@ -36,4 +36,10 @@
     <timestamp>1119534896</timestamp>
     <open-checksum type="sha">e8f9b1f8b3aa049ba3e3e813ee33e37302e9b16a</open-checksum>
   </data>
+  <data type="pattern">
+    <location href="repodata/pattern.xml"/>
+    <checksum type="sha">20f45621426fcd74364d6fabe6929d1164797801</checksum>
+    <timestamp>1119534896</timestamp>
+    <open-checksum type="sha">e8f9b1f8b3aa049ba3e3e813ee33e37302e9b16a</open-checksum>
+  </data>
 </repomd>

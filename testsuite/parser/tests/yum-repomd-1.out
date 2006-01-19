@@ -46,4 +46,12 @@ Repomd Data:
   timestamp: '1119534896'
   openChecksumType: 'sha'
   openChecksum: 'e8f9b1f8b3aa049ba3e3e813ee33e37302e9b16a'
+Repomd Data: 
+  type: 'pattern'
+  location: 'repodata/pattern.xml'
+  checksumType: 'sha'
+  checksum: '20f45621426fcd74364d6fabe6929d1164797801'
+  timestamp: '1119534896'
+  openChecksumType: 'sha'
+  openChecksum: 'e8f9b1f8b3aa049ba3e3e813ee33e37302e9b16a'
 Exit Code: 0
