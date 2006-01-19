@@ -2,6 +2,7 @@
 
 #include "package-writer.h"
 #include <sqlite3.h>
+#include "zypp/target/rpm/librpmDb.h"
 #include "zypp/base/Logger.h"
 #include "zypp/CapSet.h"
 #include <cstdlib>
@@ -296,12 +297,19 @@ write_package (RCDB *rcdb, RpmHeader::constPtr pkg)
 //-----------------------------------------------------------------------------
 
 void
-write_packages_to_db (const string & db_file, librpmDb::db_const_iterator iter)
+write_packages_to_db (const string & db_file)
 {
     RCDB *db;
 
     db = rc_db_new (db_file);
     rc_db_begin (db);
+
+    librpmDb::db_const_iterator iter;
+
+    if (iter.dbHdrNum() == 0) {
+	ERR << "Couldn't access the packaging system:" << endl;
+	return;
+    }
 
     while (*iter) {
 	sqlite_int64 id = write_package (db, *iter);
