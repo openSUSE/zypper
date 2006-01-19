@@ -151,6 +151,8 @@ namespace zypp
      * \param pvec    Reference to a result parameter vector.
      * \param pstr    Reference to the PathParam- or Query-String to split.
      * \param psep    Parameter separator character to split at.
+     * \throws A std::invalid_argument exception if \p psep separator is
+     *         empty.
      */
     void
     split(ParamVec          &pvec,
@@ -183,8 +185,8 @@ namespace zypp
      * \param vsep    Separator character to split key and value.
      * \param eflag   Flag if the key and value strings should be URL percent
      *                decoded before they're stored in the map.
-     * \throws A std::invalid_argument exception if the eflag is set to
-     * E_DECODED and the \p pstr contains a \c "%00" (encoded \c '\\0').
+     * \throws A std::invalid_argument exception if \p psep or \p vsep
+     *         separators are empty.
      */
     void
     split(ParamMap          &pmap,
@@ -232,8 +234,8 @@ namespace zypp
      * \param vsep    Separator character to use between keys and values.
      * \param safe    List of characters to accept without encoding.
      * \return A URL percent-encoded parameter string.
-     * \throws A std::invalid_argument exception, if the \p safe character
-     * list contains characters used in \p psep or \p vsep.
+     * \throws A std::invalid_argument exception if \p psep or \p vsep
+     *         separators are empty.
      */
     std::string
     join(const ParamMap     &pmap,
