@@ -35,9 +35,11 @@ namespace zypp
       class SuseTagsImpl : public SourceImpl
       {
       public:
-        /** \deprecated Interim ctor
+        /** \deprecated Interim ctor for testing
          * \throw EXCEPTION on parse error
         */
+        SuseTagsImpl( const Pathname & localDir_r );
+        /** Factory ctor */
         SuseTagsImpl( media::MediaAccess::Ptr & media_r, const Pathname & path_r = "/" );
         /** Dtor */
         ~SuseTagsImpl();
