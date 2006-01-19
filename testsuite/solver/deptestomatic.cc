@@ -632,9 +632,8 @@ parse_xml_setup (XmlNode_Ptr node)
 	    resItem = get_resItem (channel_name, package_name, kind_name);
 	    if (resItem) {
 		printf (">!> Locking %s from channel %s\n", package_name.c_str(), channel_name.c_str());
-#warning lock disabled
-//		ResItem_Ptr r = ResItem_Ptr::cast_away_const(resItem);
-//		r->setLocked (true);
+                ResItem_Ptr r = boost::const_pointer_cast<ResItem>(resItem);                   
+		r->setLocked (true);
 	    } else {
 		fprintf (stderr, "Unknown package %s::%s\n", channel_name.c_str(), package_name.c_str());
 	    }
