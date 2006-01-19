@@ -30,7 +30,10 @@ namespace zypp
     //	METHOD NAME : SourceImpl::SourceImpl
     //	METHOD TYPE : Ctor
     //
-    SourceImpl::SourceImpl()
+    SourceImpl::SourceImpl(media::MediaAccess::Ptr & media_r,
+                           const Pathname & path_r)
+    : _media (media_r)
+    , _path(path_r)
     {}
 
     ///////////////////////////////////////////////////////////////////
@@ -40,6 +43,12 @@ namespace zypp
     //
     SourceImpl::~SourceImpl()
     {}
+
+    const Pathname SourceImpl::provideFile(const Pathname & file_r)
+    {
+      _media->provideFile (file_r);
+      return _media->localPath (file_r);
+    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace source

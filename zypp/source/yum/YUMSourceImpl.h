@@ -42,10 +42,11 @@ namespace zypp
       class YUMSourceImpl : public SourceImpl
       {
       public:
+	/** Ctor, FIXME it is here only because of target storage */
+        YUMSourceImpl()
+	{}
         /** Default ctor */
-        YUMSourceImpl();
-
-	void parseSourceMetadata(std::string path);
+        YUMSourceImpl(media::MediaAccess::Ptr & media_r, const Pathname & path_r = "/");
 
 	Package::Ptr createPackage(
 	  const zypp::parser::yum::YUMPrimaryData & parsed,

@@ -19,6 +19,9 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/ResStore.h"
 
+#include "zypp/Pathname.h"
+#include "zypp/media/MediaAccess.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -42,8 +45,12 @@ namespace zypp
       friend std::ostream & operator<<( std::ostream & str, const SourceImpl & obj );
 
     public:
+      /** Ctor, FIXME it is here only because of target storage */
+      SourceImpl()
+      {}
       /** Ctor. */
-      SourceImpl();
+      SourceImpl(media::MediaAccess::Ptr & media_r,
+                 const Pathname & path_r = "/");
       /** Dtor. */
       virtual ~SourceImpl();
 
@@ -53,6 +60,9 @@ namespace zypp
       const ResStore & resolvables() const
       { return _store; }
 
+      /** Provide a file to local filesystem */
+      const Pathname provideFile(const Pathname & file);
+
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const
       { return str << "SourceImpl"; }
@@ -60,6 +70,10 @@ namespace zypp
     protected:
       /** All resolvables provided by this source. */
       ResStore _store;
+      /** Handle to media which contains this source */
+      media::MediaAccess::Ptr _media;
+      /** Path to the source on the media */
+      Pathname _path;
     };
     ///////////////////////////////////////////////////////////////////
 

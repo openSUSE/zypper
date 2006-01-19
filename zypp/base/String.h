@@ -301,6 +301,12 @@ namespace zypp
     { return trim( s, R_TRIM ); }
     //@}
 
+    std::string stripFirstWord( std::string & line, const bool ltrim_first );
+
+    std::string getline( std::istream & str, bool trim = false );
+
+    std::string getline( std::istream & str, const Trim trim_r );
+
     /////////////////////////////////////////////////////////////////
   } // namespace str
   ///////////////////////////////////////////////////////////////////

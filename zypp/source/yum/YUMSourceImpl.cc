@@ -47,10 +47,9 @@ namespace zypp
 
       /** Default ctor
       */
-      YUMSourceImpl::YUMSourceImpl()
-      {}
-
-      void YUMSourceImpl::parseSourceMetadata(std::string path)
+      YUMSourceImpl::YUMSourceImpl(media::MediaAccess::Ptr & media_r,
+				   const Pathname & path_r)
+      : SourceImpl(media_r, path_r)
       {
        std::list<YUMRepomdData_Ptr> repo_primary;
        std::list<YUMRepomdData_Ptr> repo_files;
@@ -62,9 +61,9 @@ namespace zypp
 
        try {
 	// first read list of all files in the reposotory
-	std::string filename = path + "/repmod.xml";
+        Pathname filename = provideFile(path_r + "/repomd.xml");
 	DBG << "Reading file " << filename << endl;
-	ifstream repo_st(filename.c_str());
+	ifstream repo_st(filename.asString().c_str());
 	YUMRepomdParser repomd(repo_st, "");
 
 	for(;
@@ -79,6 +78,8 @@ namespace zypp
 	    repo_other.push_back(*repomd);
 	  else if ((*repomd)->type == "group")
 	    repo_group.push_back(*repomd);
+	  else if ((*repomd)->type == "pattern")
+	    repo_pattern.push_back(*repomd);
 	  else if ((*repomd)->type == "product")
 	    repo_product.push_back(*repomd);
 	  else if ((*repomd)->type == "patches")
@@ -90,7 +91,7 @@ namespace zypp
        catch (...)
        {
 	ERR << "Cannot read repomd file, cannot initialize source" << endl;
-//	ZYPP_THROW( Exception("Cannot read repomd file, cannot initialize source") );
+	ZYPP_THROW( Exception("Cannot read repomd file, cannot initialize source") );
        }
        try {
 	// now put other and filelist data to structures for easier find
@@ -102,9 +103,9 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  string filename = (*it)->location;
+	  Pathname filename = provideFile(path_r + (*it)->location);
 	  DBG << "Reading file " << filename << endl;
-	  ifstream st(filename.c_str());
+	  ifstream st(filename.asString().c_str());
 	  YUMFileListParser filelist(st, "");
 	  for (;
 	       ! filelist.atEnd();
@@ -126,9 +127,9 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  string filename = (*it)->location;
+	  Pathname filename = provideFile(path_r + (*it)->location);
 	  DBG << "Reading file " << filename << endl;
-	  ifstream st(filename.c_str());
+	  ifstream st(filename.asString().c_str());
 	  YUMOtherParser other(st, "");
 	  for (;
 	       ! other.atEnd();
@@ -151,9 +152,9 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  string filename = (*it)->location;
+	  Pathname filename = provideFile(path_r + (*it)->location);
 	  DBG << "Reading file " << filename << endl;
-	  ifstream st(filename.c_str());
+	  ifstream st(filename.asString().c_str());
 	  YUMPrimaryParser prim(st, "");
 	  for (;
 	       !prim.atEnd();
@@ -196,9 +197,9 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  string filename = (*it)->location;
+	  Pathname filename = provideFile(path_r + (*it)->location);
 	  DBG << "Reading file " << filename << endl;
-	  ifstream st(filename.c_str());
+	  ifstream st(filename.asString().c_str());
 	  YUMGroupParser group(st, "");
 	  for (;
 	       !group.atEnd();
@@ -222,9 +223,9 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  string filename = (*it)->location;
+	  Pathname filename = provideFile(path_r + (*it)->location);
 	  DBG << "Reading file " << filename << endl;
-	  ifstream st(filename.c_str());
+	  ifstream st(filename.asString().c_str());
 	  YUMPatternParser pattern(st, "");
 	  for (;
 	       !pattern.atEnd();
@@ -248,9 +249,9 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  string filename = (*it)->location;
+	  Pathname filename = provideFile(path_r + (*it)->location);
 	  DBG << "Reading file " << filename << endl;
-	  ifstream st(filename.c_str());
+	  ifstream st(filename.asString().c_str());
 	  YUMProductParser product(st, "");
 	  for (;
 	       !product.atEnd();
@@ -275,9 +276,9 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  string filename = (*it)->location;
+	  Pathname filename = provideFile(path_r + (*it)->location);
 	  DBG << "Reading file " << filename << endl;
-	  ifstream st(filename.c_str());
+	  ifstream st(filename.asString().c_str());
 	  YUMPatchesParser patch(st, "");
 	  for (;
 	       !patch.atEnd();
@@ -295,9 +296,9 @@ namespace zypp
 	     it != patch_files.end();
 	     it++)
 	{
-	    std::string filename = *it;
+	    Pathname filename = provideFile(path_r + *it);
 	    DBG << "Reading file " << filename << endl;
-	    ifstream st(filename.c_str());
+	    ifstream st(filename.asString().c_str());
 	    YUMPatchParser ptch(st, "");
 	    for(;
 	        !ptch.atEnd();

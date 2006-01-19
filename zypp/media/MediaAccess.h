@@ -26,6 +26,7 @@
 
 #include "zypp/media/MediaException.h"
 #include "zypp/Url.h"
+#include "zypp/base/Logger.h"
 
 namespace zypp {
   namespace media {

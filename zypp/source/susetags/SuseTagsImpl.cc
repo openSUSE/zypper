@@ -35,20 +35,22 @@ namespace zypp
       //	METHOD NAME : SuseTagsImpl::SuseTagsImpl
       //	METHOD TYPE : Ctor
       //
-      SuseTagsImpl::SuseTagsImpl( const Pathname & localDir_r )
+      SuseTagsImpl::SuseTagsImpl( media::MediaAccess::Ptr & media_r, const Pathname & path_r )
+      : SourceImpl(media_r, path_r)
       {
-        PathInfo p( localDir_r );
+        Pathname p = provideFile(path_r + "suse/setup/descr/packages");
+/*        PathInfo p( localDir_r );
         if ( p.isDir() )
           p( localDir_r + "packages" );
         if ( ! p.isFile() )
           ZYPP_THROW( Exception( p.asString()+" is not a file" ) );
         if ( ! p.userMayR() )
           ZYPP_THROW( Exception( p.asString()+" no permission to read" ) );
-
+*/
         DBG << "Going to parse " << p << endl;
-        std::list<Package::Ptr> content( parsePackages( p.path() ) );
+        std::list<Package::Ptr> content( parsePackages( p ) );
         _store.insert( content.begin(), content.end() );
-        DBG << "SuseTagsImpl (fake) from " << p.path() << ": "
+        DBG << "SuseTagsImpl (fake) from " << p << ": "
             << content.size() << " packages" << endl;
       }
 

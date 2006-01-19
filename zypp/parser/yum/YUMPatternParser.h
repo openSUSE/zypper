@@ -26,10 +26,10 @@ namespace zypp {
 
       /**
       *
-      * @short Parser for YUM group files.
+      * @short Parser for YUM pattern files.
       *
       * Use this class as an iterator that produces, one after one,
-      * YUMPatternData_Ptr(s) for the XML group elements.
+      * YUMPatternData_Ptr(s) for the XML pattern elements.
       * Here's an example:
       *
       * for (YUMPatternParser iter(anIstream, baseUrl),

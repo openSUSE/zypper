@@ -17,6 +17,8 @@
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/Source.h"
+#include "zypp/Url.h"
+#include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -46,11 +48,39 @@ namespace zypp
     */
     Source createFrom( const Source::Impl_Ptr & impl_r );
 
+    /** Construct source from an implementation.
+     * \throw EXCEPTION on fail
+    */
+    Source createFrom( const Url & url_r, const Pathname & path_r = "/" );
+
   private:
     /** Implementation  */
     class Impl;
     /** Pointer to implementation */
     RW_pointer<Impl> _pimpl;
+
+  public:
+   struct ProductEntry {
+      Pathname    _dir;
+      std::string _name;
+      ProductEntry( const Pathname & dir_r = "/", const std::string & name_r = std::string() ){
+        _dir  = dir_r;
+        _name = name_r;
+      }
+      bool operator<( const ProductEntry & rhs ) const {
+        return( _dir.asString() < rhs._dir.asString() );
+      }
+    };
+
+    typedef std::set<ProductEntry> ProductSet;
+
+    /** Check which products are available on the media
+     * \throw Exception or MediaException on fail
+     */
+    void listProducts( const Url & url_r, ProductSet & products_r );
+
+  private:
+    void scanProductsFile( const Pathname & file_r, ProductSet & pset_r ) const;
   };
   ///////////////////////////////////////////////////////////////////
 

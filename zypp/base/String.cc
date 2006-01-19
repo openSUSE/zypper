@@ -120,6 +120,75 @@ namespace zypp
 
       return ret;
     }
+    /******************************************************************
+    **
+    **	FUNCTION NAME : stripFirstWord
+    **	FUNCTION TYPE : std::string
+    **
+    **	DESCRIPTION :
+    */
+    std::string stripFirstWord( std::string & line, const bool ltrim_first )
+    {
+      if ( ltrim_first )
+        line = ltrim( line );
+    
+      if ( line.empty() )
+        return line;
+    
+      std::string ret;
+      std::string::size_type p = line.find_first_of( " \t" );
+    
+      if ( p == std::string::npos ) {
+        // no ws on line
+        ret = line;
+        line.erase();
+      } else if ( p == 0 ) {
+        // starts with ws
+        // ret remains empty
+        line = ltrim( line );
+      }
+      else {
+        // strip word and ltim line
+        ret = line.substr( 0, p );
+        line = ltrim( line.erase( 0, p ) );
+      }
+      return ret;
+    }
+
+    /******************************************************************
+    **
+    **
+    **      FUNCTION NAME : getline
+    **      FUNCTION TYPE : std::string
+    **
+    **      DESCRIPTION :
+    */
+    static inline std::string _getline( std::istream & str, const Trim trim_r )
+    {
+      const unsigned tmpBuffLen = 1024;
+      char           tmpBuff[tmpBuffLen];
+
+      std::string ret;
+      do {
+        str.clear();
+        str.getline( tmpBuff, tmpBuffLen ); // always writes '\0' terminated
+        ret += tmpBuff;
+      } while( str.rdstate() == std::ios::failbit );
+    
+      return trim( ret, trim_r );
+    }
+    
+    std::string getline( std::istream & str, const Trim trim_r )
+    {
+      return _getline(str, trim_r);
+    }
+    
+    std::string getline( std::istream & str, bool trim )
+    {
+      return _getline(str, trim?TRIM:NO_TRIM);
+    }
+
+
 
     /////////////////////////////////////////////////////////////////
   } // namespace str

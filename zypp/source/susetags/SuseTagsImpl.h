@@ -38,7 +38,7 @@ namespace zypp
         /** \deprecated Interim ctor
          * \throw EXCEPTION on parse error
         */
-        SuseTagsImpl( const Pathname & localDir_r );
+        SuseTagsImpl( media::MediaAccess::Ptr & media_r, const Pathname & path_r = "/" );
         /** Dtor */
         ~SuseTagsImpl();
 

@@ -453,6 +453,7 @@ namespace zypp {
       std::ostream& operator<<(std::ostream &out, const YUMRepomdData& data);
       std::ostream& operator<<(std::ostream &out, const YUMPrimaryData& data);
       std::ostream& operator<<(std::ostream &out, const YUMGroupData& data);
+      std::ostream& operator<<(std::ostream &out, const YUMPatternData& data);
       std::ostream& operator<<(std::ostream &out, const YUMFileListData& data);
       std::ostream& operator<<(std::ostream& out, const YUMOtherData& data);
       std::ostream& operator<<(std::ostream& out, const YUMPatchData& data);
