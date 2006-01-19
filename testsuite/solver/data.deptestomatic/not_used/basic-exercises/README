@@ -13,3 +13,6 @@ exercise-39-test:
 
 exercise-18-test:
    Wrong priority of results
+
+exercise-58-test:
+   Missing OR dependency
