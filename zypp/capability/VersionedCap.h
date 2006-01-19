@@ -42,7 +42,7 @@ namespace zypp
       {}
 
     public:
-      /** Name Op Editon. */
+      /** Name Op Edition. */
       virtual std::string encode() const;
 
       /** Name only. */
