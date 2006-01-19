@@ -1,53 +1,88 @@
-# parser_init.exp
-
 #
-# run binary $path/$prog
-# and expect $expected_result as a result
-#  (expected_result == 0  ==> program should pass)
-#  (expected_result == 1  ==> program should fail)
+# run a prg file for single-time used testcases
 #
+proc runYumTest { src } {
 
-proc runYumTest { prog {path ""} {expected_result 0} } {
+  set path [split $src "/"]
+  set filename [lindex $path [expr [llength $path]-1]]
 
-  if { $path == "" } { set path "tests" }
+  # extract basename and check extension
 
-  set result 0
-  set oops [catch { set result [exec "$path/runtxxxxest.sh" "$path/$prog" ">" "/dev/null" "2>/dev/null"] } catched]
+  set fname [split $filename "."]
 
-  # check if the program crashed
-
-  if {$oops != 0 && $result != 0} {
-    puts ""
-    fail "$prog crashed ($oops) with: $catched"
+  if {[llength $fname] < 2} {
+    fail "Bad filename syntax '$src'"
+    return -1
+  }
+  if {[lindex $fname [expr [llength $fname]-1]] != "xml"} {
+    fail "Not .xml extension '$src'"
     return -1
   }
 
-  # check return code from $prog
+  # setup filenames
+
+  # $src is the name of the original testfile with absolute path
+  # tests/$filename is the name of the original testfile with relative path,
+  #                 relative to the testsuite directory
+  set test_prg  "$filename"
+
+  set base_name [lindex $fname 0]
+
+  puts "Running $base_name..."
+
+  #generate output directory
+
+  exec mkdir -p ./tmp.out
+  set outfile ./tmp.out/$base_name.out
+  set refoutfile ./tests/$base_name.out
+  set errfile ./tmp.out/$base_name.err
+  set referrfile ./tests/$base_name.err
+
+  # run the test
+
+  set command "./runtest.sh tests/$base_name.xml >$outfile 2>$errfile"
+  set result ""
+  set oops [catch { set result [exec sh -c $command] } catched]
+
+  if {$oops != 0} {
+    fail "test case failed for $base_name: $catched"
+    return -1
+  }
+
+  # check return code from runprg
 
   if {$result != ""} {
-    if {$expected_result != "0"} {
-      xfail $prog			# expected failure
-      return 0
-    }
-    puts ""
-    warning "Running of $prog results in '$result'"
+    warning "Run of $base_name results in '$result'"
     return -1
   }
 
-  pass $prog
+  if { [ file exists $referrfile ] == 0 } {
+      perror "Missing file $referrfile" 0
+  } else {
+      if { [ diff $referrfile $errfile ] != 1 } {
+	  puts "Output doesn't match expected data:"
+	  puts [ exec sh -c "diff -u $referrfile $errfile || true" ]
+	  fail $base_name
+	  return -1
+      }
+  }
+
+  if { [ file exists $refoutfile ] == 0 } {
+      perror "Missing file $refoutfile" 0
+  } else {
+      if { [ diff $refoutfile $outfile ] != 1 } {
+	  puts "Output doesn't match expected data:"
+	  puts [ exec sh -c "diff -u $refoutfile $outfile || true" ]
+	  fail $base_name
+	  return -1
+      }
+  }
+
+  # ok, all is fine
+
+  pass $base_name
 
   return 0
 }
 
-# expect prog to pass
-
-proc shouldPass { prog {path ""} } {
-  return [runBinary $prog $path "0"]
-}
-
-# expect prog to fail
-
-proc shouldFail { prog {path ""} } {
-  return [runBinary $prog $path "1"]
-}
 
