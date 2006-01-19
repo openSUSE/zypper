@@ -594,10 +594,9 @@ parse_xml_setup (XmlNode_Ptr node)
 
 		if (!system_channel)
 		    fprintf (stderr, "No system channel available!\n");
-#warning force-install disabled
-//		ResItem_Ptr r = ResItem_Ptr::cast_away_const(resItem);
-//		r->setChannel (system_channel);
-//		r->setInstalled (true);
+		ResItem_Ptr r = boost::const_pointer_cast<ResItem>(resItem);
+		r->setChannel (system_channel);
+		r->setInstalled (true);
 	    } else {
 		fprintf (stderr, "Unknown package %s::%s\n", channel_name.c_str(), package_name.c_str());
 	    }
