@@ -610,11 +610,18 @@ namespace zypp
     UrlBase::getPathParamsVec() const
     {
       zypp::url::ParamVec pvec;
-      zypp::url::split(
-        pvec,
-        getPathParams(),
-        config("psep_pathparam")
-      );
+      if( config("psep_pathparam").empty())
+      {
+        pvec.push_back(getPathParams());
+      }
+      else
+      {
+        zypp::url::split(
+          pvec,
+          getPathParams(),
+          config("psep_pathparam")
+        );
+      }
       return pvec;
     }
 
@@ -623,6 +630,13 @@ namespace zypp
     zypp::url::ParamMap
     UrlBase::getPathParamsMap(EEncoding eflag) const
     {
+      if( config("psep_pathparam").empty() ||
+          config("vsep_pathparam").empty())
+      {
+        throw std::logic_error(
+          "Path parameter parsing not supported for this URL"
+        );
+      }
       zypp::url::ParamMap pmap;
       zypp::url::split(
         pmap,
@@ -651,11 +665,18 @@ namespace zypp
     UrlBase::getQueryStringVec() const
     {
       zypp::url::ParamVec pvec;
-      zypp::url::split(
-        pvec,
-        getQueryString(),
-        config("psep_querystr")
-      );
+      if( config("psep_querystr").empty())
+      {
+        pvec.push_back(getQueryString());
+      }
+      else
+      {
+        zypp::url::split(
+          pvec,
+          getQueryString(),
+          config("psep_querystr")
+        );
+      }
       return pvec;
     }
 
@@ -664,6 +685,13 @@ namespace zypp
     zypp::url::ParamMap
     UrlBase::getQueryStringMap(EEncoding eflag) const
     {
+      if( config("psep_querystr").empty() ||
+          config("vsep_querystr").empty())
+      {
+        throw std::logic_error(
+          "Query string parsing not supported for this URL"
+        );
+      }
       zypp::url::ParamMap pmap;
       zypp::url::split(
         pmap,
@@ -708,9 +736,16 @@ namespace zypp
     void
     UrlBase::setAuthority(const std::string &authority)
     {
-      str::regex  rex(RX_SPLIT_AUTHORITY);
       str::smatch out;
-      bool        ret = str::regex_match(authority, out, rex);
+      bool        ret = false;
+
+      try
+      {
+        str::regex  rex(RX_SPLIT_AUTHORITY);
+        ret = str::regex_match(authority, out, rex);
+      }
+      catch( ... )
+      {}
 
       if( ret && out.size() == 8)
       {
@@ -884,6 +919,10 @@ namespace zypp
         if( isValidHost(host))
         {
           std::string temp;
+
+          // always decode in case isValidHost()
+          // is reimplemented and supports also
+          // the [v ... ] notation.
           if( host.at(0) == '[')
           {
             temp = str::toUpper(zypp::url::decode(host));
@@ -952,6 +991,8 @@ namespace zypp
         std::string data;
         if(eflag == zypp::url::E_ENCODED)
         {
+          checkUrlData(path, "path name", config("rx_pathname"));
+
           data = cleanupPathName(zypp::url::decode(path));
         }
         else
@@ -1000,6 +1041,13 @@ namespace zypp
     void
     UrlBase::setPathParamsMap(const zypp::url::ParamMap &pmap)
     {
+      if( config("psep_pathparam").empty() ||
+          config("vsep_pathparam").empty())
+      {
+        throw std::logic_error(
+          "Path Parameter parsing not supported for this URL"
+        );
+      }
       setPathParams(
         zypp::url::join(
           pmap,
@@ -1038,6 +1086,13 @@ namespace zypp
     void
     UrlBase::setQueryStringMap(const zypp::url::ParamMap &pmap)
     {
+      if( config("psep_querystr").empty() ||
+          config("vsep_querystr").empty())
+      {
+        throw std::logic_error(
+          "Query string parsing not supported for this URL"
+        );
+      }
       setQueryString(
         zypp::url::join(
           pmap,
@@ -1082,21 +1137,26 @@ namespace zypp
     bool
     UrlBase::isValidHost(const std::string &host)
     {
-      if( str::regex_match(host, str::regex(RX_VALID_HOSTIPV6)))
+      try
       {
-        struct in6_addr ip;
-
-        if( inet_pton(AF_INET6, host.substr(1, host.size()-2).c_str(), &ip) > 0)
-          return true;
+        if( str::regex_match(host, str::regex(RX_VALID_HOSTIPV6)))
+        {
+          struct in6_addr ip;
+          std::string temp( host.substr(1, host.size()-2));
+          
+          return inet_pton(AF_INET6, temp.c_str(), &ip) > 0;
+        }
         else
-          return false;
+        {
+          // matches also IPv4 dotted-decimal adresses...
+          std::string temp( zypp::url::decode(host));
+          return str::regex_match(temp, str::regex(RX_VALID_HOSTNAME));
+        }
       }
-      else
-      {
-        // matches also IPv4 dotted-decimal adresses...
-        std::string tmp( zypp::url::decode(host));
-        return str::regex_match(tmp, str::regex(RX_VALID_HOSTNAME));
-      }
+      catch( ... )
+      {}
+
+      return false;
     }
 
 
@@ -1104,15 +1164,18 @@ namespace zypp
     bool
     UrlBase::isValidPort(const std::string &port)
     {
+      try
+      {
         if( str::regex_match(port, str::regex(RX_VALID_PORT)))
         {
           long pnum = str::strtonum<long>(port);
-          if( pnum >= 1 && pnum <= USHRT_MAX)
-          {
-            return true;
-          }
+          return ( pnum >= 1 && pnum <= USHRT_MAX);
         }
-        return false;
+      }
+      catch( ... )
+      {}
+
+      return false;
     }
 
 
