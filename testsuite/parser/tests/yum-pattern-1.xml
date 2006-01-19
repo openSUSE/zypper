@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patterns  xmlns="http://linux.duke.edu/metadata/patterns">
+  <pattern>
+    <patternid>foo</patternid>
+    <name>foobar</name>
+    <name lang='en.US'>foobar</name>
+    <default>false</default>
+    <uservisible>true</uservisible>
+    <description>This is my pattern, it is soooooooo coool!</description>
+    <description lang='en.US'>Duh</description>
+    <patternlist>
+       <metapkg type="mandatory">otherpattern</metapkg>
+       <metapkg type="optional">stillother</metapkg>
+       <metapkg type="default">stillmore</metapkg>
+       <metapkg>other</metapkg>
+    </patternlist>
+    <packagelist>
+       <packagereq type="mandatory" epoch="0" ver="1" rel="1">pkgname</packagereq>
+       <packagereq epoch="1" ver="2" rel="0">otherpkgname</packagereq>
+    </packagelist>
+  </pattern>
+</patterns>
+

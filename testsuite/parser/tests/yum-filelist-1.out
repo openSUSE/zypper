@@ -1,0 +1,239 @@
+-------------------------------------------------
+File List: 
+pkgid: 8121d38334a682f5bf2c8320388395ba7e4b276d
+package: packetfilter 0-0.9.1-3
+files:
+/etc/init.d/packetfilter
+/etc/packetfilter/def
+/etc/packetfilter/ppp0
+/usr/sbin/rcpacketfilter
+/usr/share/doc/packages/packetfilter/README
+/etc/packetfilter: dir
+/usr/share/doc/packages/packetfilter: dir
+/usr/share/doc/packages/packetfilter/samples: dir
+-------------------------------------------------
+File List: 
+pkgid: 5f5547fe534991d161f5cbd9b823276a86eb55ea
+package: packetfilter 0-0.9.1-4
+files:
+/etc/init.d/packetfilter
+/etc/packetfilter/def
+/etc/packetfilter/ppp0
+/usr/sbin/rcpacketfilter
+/usr/share/doc/packages/packetfilter/README
+/usr/share/doc/packages/packetfilter/samples/isdn-router/def
+/usr/share/doc/packages/packetfilter/samples/isdn-router/eth0
+/usr/share/doc/packages/packetfilter/samples/isdn-router/ppp0
+/usr/share/doc/packages/packetfilter/samples/tdsl-ipsec/def
+/usr/share/doc/packages/packetfilter/samples/tdsl-ipsec/eth0
+/usr/share/doc/packages/packetfilter/samples/tdsl-ipsec/ipsec0
+/usr/share/doc/packages/packetfilter/samples/tdsl-ipsec/ppp0
+/etc/packetfilter: dir
+/usr/share/doc/packages/packetfilter: dir
+/usr/share/doc/packages/packetfilter/samples: dir
+/usr/share/doc/packages/packetfilter/samples/isdn-router: dir
+/usr/share/doc/packages/packetfilter/samples/tdsl-ipsec: dir
+-------------------------------------------------
+File List: 
+pkgid: f9d63f4369eda675a65522ab6c985a60e73a1ceb
+package: bbconf 0-1.2-1
+files:
+/usr/bin/bbconf
+/usr/doc/bbconf/AUTHORS
+/usr/doc/bbconf/COPYING
+/usr/doc/bbconf/ChangeLog
+/usr/doc/bbconf/README
+/usr/doc/bbconf/README.html
+/usr/doc/bbconf/TODO
+/usr/man/man1/bbconf.1.gz
+/usr/share/bbconf/plugins/libbbconf.la
+/usr/share/bbconf/plugins/libbbconf.so
+/usr/share/bbconf/plugins/libkeybindings.la
+/usr/share/bbconf/plugins/libkeybindings.so
+/usr/share/bbconf/plugins/libmenu.la
+/usr/share/bbconf/plugins/libmenu.so
+/usr/share/bbconf/plugins/libthemes.la
+/usr/share/bbconf/plugins/libthemes.so
+/usr/share/doc/packages/bbconf/AUTHORS
+/usr/share/doc/packages/bbconf/COPYING
+/usr/share/doc/packages/bbconf/ChangeLog
+/usr/share/doc/packages/bbconf/README
+/usr/share/doc/packages/bbconf/README.html
+/usr/share/doc/packages/bbconf/TODO
+/usr/bin: dir
+/usr/doc: dir
+/usr/doc/bbconf: dir
+/usr/man: dir
+/usr/man/man1: dir
+/usr/share: dir
+/usr/share/bbconf: dir
+/usr/share/bbconf/plugins: dir
+/usr/share/doc/packages/bbconf: dir
+-------------------------------------------------
+File List: 
+pkgid: eced88b6e724e4a45b82f2723912ef2e29ee134b
+package: PlatinGUI 0-620-0
+files:
+/opt/PlatinGUI/6.20/bin/gmux/gmbax
+/opt/PlatinGUI/6.20/bin/gmux/gmbfx
+/opt/PlatinGUI/6.20/bin/gmux/gmbmx
+/opt/PlatinGUI/6.20/bin/gmux/gmbtx
+/opt/PlatinGUI/6.20/bin/gmux/gmbux
+/opt/PlatinGUI/6.20/bin/gmux/gmdlx
+/opt/PlatinGUI/6.20/bin/gmux/gmgax
+/opt/PlatinGUI/6.20/bin/gmux/gmhix
+/opt/PlatinGUI/6.20/bin/gmux/gmhox
+/opt/PlatinGUI/6.20/bin/gmux/gmhpx
+/opt/PlatinGUI/6.20/bin/gmux/gmmsx
+/opt/PlatinGUI/6.20/bin/gmux/gmnex
+/opt/PlatinGUI/6.20/bin/gmux/gmpox
+/opt/PlatinGUI/6.20/bin/gmux/gmscx
+/opt/PlatinGUI/6.20/bin/gmux/gmstx
+/opt/PlatinGUI/6.20/bin/gmux/gmsux
+/opt/PlatinGUI/6.20/bin/gmux/gmupx
+/opt/PlatinGUI/6.20/bin/gmux/gmuxsvr
+/opt/PlatinGUI/6.20/bin/gmux/gxvalogo.gmf
+/opt/PlatinGUI/6.20/bin/gmux/gxvasap1.gmf
+/opt/PlatinGUI/6.20/bin/gmux/gxvasap2.gmf
+/opt/PlatinGUI/6.20/bin/gmux/gxwilcs.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilda.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilde.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilen.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwiles.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilfr.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilhr.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilhu.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilit.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilko.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilnl.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilno.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilpl.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilpt.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilro.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilru.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilsl.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilsv.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilth.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwiltr.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilx1.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilx2.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilzh.txt
+/opt/PlatinGUI/6.20/bin/gmux/sapgui
+/opt/PlatinGUI/6.20/bin/guilogon
+/opt/PlatinGUI/6.20/bin/guistart
+/opt/PlatinGUI/6.20/bin/libJPlatin.so
+/opt/PlatinGUI/6.20/bin/sapftp
+/opt/PlatinGUI/6.20/bin/sapgui
+/opt/PlatinGUI/6.20/bin/saphttp
+/opt/PlatinGUI/6.20/install.properties
+/opt/PlatinGUI/6.20/jar/AcrobatViewerS.jar
+/opt/PlatinGUI/6.20/jar/GuiStartS.jar
+/opt/PlatinGUI/6.20/jar/IceBrowserS.jar
+/opt/PlatinGUI/6.20/jar/Linux-gmux.jar
+/opt/PlatinGUI/6.20/jar/Linux-graphics.jar
+/opt/PlatinGUI/6.20/jar/Linux-lib.jar
+/opt/PlatinGUI/6.20/jar/Manual.jar
+/opt/PlatinGUI/6.20/jar/Unix-localstart.jar
+/opt/PlatinGUI/6.20/jar/iCubeS.jar
+/opt/PlatinGUI/6.20/jar/platincoreS.jar
+/opt/PlatinGUI/6.20/jar/sapCalendarS.jar
+/opt/PlatinGUI/6.20/jar/sapChartS.jar
+/opt/PlatinGUI/6.20/jar/sapContextMenuS.jar
+/opt/PlatinGUI/6.20/jar/sapGridS.jar
+/opt/PlatinGUI/6.20/jar/sapHtmlViewerS.jar
+/opt/PlatinGUI/6.20/jar/sapImageS.jar
+/opt/PlatinGUI/6.20/jar/sapTextEditS.jar
+/opt/PlatinGUI/6.20/jar/sapToolBarS.jar
+/opt/PlatinGUI/6.20/jar/sapTreeS.jar
+/usr/bin/guilogon
+/usr/share/doc/packages/PlatinGUI/doc/admconf/guiconf.htm
+/usr/share/doc/packages/PlatinGUI/doc/admconf/index.htm
+/usr/share/doc/packages/PlatinGUI/doc/admconf/msgsrv.htm
+/usr/share/doc/packages/PlatinGUI/doc/admconf/router.htm
+/usr/share/doc/packages/PlatinGUI/doc/applet/conndata.htm
+/usr/share/doc/packages/PlatinGUI/doc/applet/htmlref.htm
+/usr/share/doc/packages/PlatinGUI/doc/applet/index.htm
+/usr/share/doc/packages/PlatinGUI/doc/applet/install.htm
+/usr/share/doc/packages/PlatinGUI/doc/applet/intro.htm
+/usr/share/doc/packages/PlatinGUI/doc/applet/jscript.htm
+/usr/share/doc/packages/PlatinGUI/doc/backgrnd/conndata.htm
+/usr/share/doc/packages/PlatinGUI/doc/backgrnd/connstr.htm
+/usr/share/doc/packages/PlatinGUI/doc/backgrnd/index.htm
+/usr/share/doc/packages/PlatinGUI/doc/backgrnd/jnlp.htm
+/usr/share/doc/packages/PlatinGUI/doc/backgrnd/signing.htm
+/usr/share/doc/packages/PlatinGUI/doc/backgrnd/trace.htm
+/usr/share/doc/packages/PlatinGUI/doc/index.htm
+/usr/share/doc/packages/PlatinGUI/doc/install/index.htm
+/usr/share/doc/packages/PlatinGUI/doc/install/install.htm
+/usr/share/doc/packages/PlatinGUI/doc/install/mac.htm
+/usr/share/doc/packages/PlatinGUI/doc/intro/applet.htm
+/usr/share/doc/packages/PlatinGUI/doc/intro/index.htm
+/usr/share/doc/packages/PlatinGUI/doc/intro/platin.htm
+/usr/share/doc/packages/PlatinGUI/doc/main.htm
+/usr/share/doc/packages/PlatinGUI/doc/manual.htm
+/usr/share/doc/packages/PlatinGUI/doc/relnotes/index.htm
+/usr/share/doc/packages/PlatinGUI/doc/relnotes/issues.htm
+/usr/share/doc/packages/PlatinGUI/doc/relnotes/missing.htm
+/usr/share/doc/packages/PlatinGUI/doc/relnotes/new.htm
+/usr/share/doc/packages/PlatinGUI/doc/relnotes/upgrade.htm
+/usr/share/doc/packages/PlatinGUI/doc/start/index.htm
+/usr/share/doc/packages/PlatinGUI/doc/start/mac.htm
+/usr/share/doc/packages/PlatinGUI/doc/start/os2.htm
+/usr/share/doc/packages/PlatinGUI/doc/start/unix.htm
+/usr/share/doc/packages/PlatinGUI/doc/start/win32.htm
+/usr/share/doc/packages/PlatinGUI/doc/sysreq/aix.htm
+/usr/share/doc/packages/PlatinGUI/doc/sysreq/hpux.htm
+/usr/share/doc/packages/PlatinGUI/doc/sysreq/index.htm
+/usr/share/doc/packages/PlatinGUI/doc/sysreq/linux.htm
+/usr/share/doc/packages/PlatinGUI/doc/sysreq/mac.htm
+/usr/share/doc/packages/PlatinGUI/doc/sysreq/os2.htm
+/usr/share/doc/packages/PlatinGUI/doc/sysreq/solaris.htm
+/usr/share/doc/packages/PlatinGUI/doc/sysreq/tru64.htm
+/usr/share/doc/packages/PlatinGUI/doc/sysreq/win32.htm
+/usr/share/doc/packages/PlatinGUI/doc/userconf/index.htm
+/usr/share/doc/packages/PlatinGUI/doc/userconf/settings.htm
+/usr/share/doc/packages/PlatinGUI/doc/userconf/systems.htm
+/opt/PlatinGUI/6.20: dir
+/opt/PlatinGUI/6.20/bin: dir
+/opt/PlatinGUI/6.20/bin/gmux: dir
+/opt/PlatinGUI/6.20/jar: dir
+/usr/share/doc/packages/PlatinGUI: dir
+/usr/share/doc/packages/PlatinGUI/doc: dir
+/usr/share/doc/packages/PlatinGUI/doc/admconf: dir
+/usr/share/doc/packages/PlatinGUI/doc/applet: dir
+/usr/share/doc/packages/PlatinGUI/doc/backgrnd: dir
+/usr/share/doc/packages/PlatinGUI/doc/install: dir
+/usr/share/doc/packages/PlatinGUI/doc/intro: dir
+/usr/share/doc/packages/PlatinGUI/doc/relnotes: dir
+/usr/share/doc/packages/PlatinGUI/doc/start: dir
+/usr/share/doc/packages/PlatinGUI/doc/sysreq: dir
+/usr/share/doc/packages/PlatinGUI/doc/userconf: dir
+-------------------------------------------------
+File List: 
+pkgid: 77b165fcb30789fb8c4c669e21fed3d04938f607
+package: packetfilter 0-0.9.1-3
+files:
+packetfilter.spec
+packetfilter.tgz
+-------------------------------------------------
+File List: 
+pkgid: 548c0cac5b1e89c0200879a9b337e7d5fc183122
+package: bbconf 0-1.2-1
+files:
+bbconf-1.2.tar.gz
+bbconf.spec
+-------------------------------------------------
+File List: 
+pkgid: 5d34c98c42302406c5c0a31c163ee6145c014f9d
+package: PlatinGUI 0-620-0
+files:
+PlatinGUI-620.tgz
+PlatinGUI.spec
+-------------------------------------------------
+File List: 
+pkgid: dffba597ee9614af9ad1db6a82141d024a94ab6a
+package: packetfilter 0-0.9.1-4
+files:
+packetfilter.spec
+packetfilter.tgz
+Exit Code: 0

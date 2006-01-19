@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product 
+    xmlns="http://novell.com/package/metadata/suse/product"
+    xmlns:product="http://novell.com/package/metadata/suse/product"
+    xmlns:yum="http://linux.duke.edu/metadata/common" 
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm" 
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    type="add-on">
+  <vendor>Novell Inc.</vendor>
+  <name>OES</name>
+  <version epoch="0" ver="1" rel="2"/>
+  <displayname lang="en">Open Enterprise Server</displayname>
+  <description lang="en">Opens your server to enterprise</description>
+  <rpm:provides><rpm:entry kind="product" name="OES"/></rpm:provides>
+</product>
+

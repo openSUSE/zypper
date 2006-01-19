@@ -1,0 +1,13 @@
+-------------------------------------------------
+Patches Entry Data: 
+  patch ID: 12345
+  location: repodata/patch.xml
+  checksumType: 'sha'
+  checksum: 'e7ba668ab0d49486f0a3e7a0b168406a88a46ed9'
+-------------------------------------------------
+Patches Entry Data: 
+  patch ID: 54321
+  location: repodata/patch2.xml
+  checksumType: 'md5'
+  checksum: 'e7ba668ab0d49486f0a3e7a0b168406a88a46ed9'
+Exit Code: 0

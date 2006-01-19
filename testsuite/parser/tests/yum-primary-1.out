@@ -1,0 +1,512 @@
+-------------------------------------------------
+Primary Data: 
+name: 'packetfilter'
+type: 'rpm'
+ arch: 'noarch'
+ ver: '0.9.1'
+checksumType: 'sha'
+checksumPkgid: 'YES'
+checksum: '8121d38334a682f5bf2c8320388395ba7e4b276d'
+summary: 'A packetfilter wrapper compatible with ipfwadm, ipchains, iptables'
+description: 'This package consists of a simple firewall wrapper script
+providing a packet filter mini-language to state your
+filtering needs independent of the used firewall type.
+It's just like a service start/stop script and started
+during the normal System V boot sequence.
+
+See the README for details.'
+packager: ''
+url: ''
+timeFile: '1011218465'
+timeBuild: '1011218465'
+sizePackage: '7333'
+sizeInstalled: '16835'
+sizeArchive: '17904'
+location: 'packetfilter-0.9.1-3.noarch.rpm'
+license: '(c) 2002, Michael Radziej, under Gnu LPL'
+vendor: ''
+group: 'unsorted'
+buildhost: 'martin.suse.de'
+sourcerpm: 'packetfilter-0.9.1-3.src.rpm'
+headerStart: '168'
+headerEnd: '2268'
+provides:
+packetfilter EQ 0-0.9.1-3
+conflicts:
+
+obsoletes:
+
+requires:
+/bin/bash  -
+/bin/sh  - (pre=1)
+files:
+/etc/packetfilter/def
+/etc/init.d/packetfilter
+/usr/sbin/rcpacketfilter
+/etc/packetfilter/ppp0
+/etc/packetfilter: dir
+authors: 
+keywords: 
+media: 
+dirsizes: 
+
+freshen: 
+
+install-only: '0'
+-------------------------------------------------
+Primary Data: 
+name: 'packetfilter'
+type: 'rpm'
+ arch: 'noarch'
+ ver: '0.9.1'
+checksumType: 'sha'
+checksumPkgid: 'YES'
+checksum: '5f5547fe534991d161f5cbd9b823276a86eb55ea'
+summary: 'A packetfilter wrapper compatible with ipfwadm, ipchains, iptables'
+description: 'This package consists of a simple firewall wrapper script
+providing a packet filter mini-language to state your
+filtering needs independent of the used firewall type.
+It's just like a service start/stop script and started
+during the normal System V boot sequence.
+
+See the README for details.'
+packager: ''
+url: ''
+timeFile: '1011218885'
+timeBuild: '1011218885'
+sizePackage: '9119'
+sizeInstalled: '23203'
+sizeArchive: '25560'
+location: 'packetfilter-0.9.1-4.noarch.rpm'
+license: '(c) 2002, Michael Radziej, under Gnu LPL'
+vendor: ''
+group: 'unsorted'
+buildhost: 'martin.suse.de'
+sourcerpm: 'packetfilter-0.9.1-4.src.rpm'
+headerStart: '168'
+headerEnd: '3397'
+provides:
+packetfilter EQ 0-0.9.1-4
+conflicts:
+
+obsoletes:
+
+requires:
+/bin/bash  -
+/bin/sh  - (pre=1)
+files:
+/etc/packetfilter/def
+/etc/init.d/packetfilter
+/usr/sbin/rcpacketfilter
+/etc/packetfilter/ppp0
+/etc/packetfilter: dir
+authors: 
+keywords: 
+media: 
+dirsizes: 
+
+freshen: 
+
+install-only: '0'
+-------------------------------------------------
+Primary Data: 
+name: 'bbconf'
+type: 'rpm'
+ arch: 'i386'
+ ver: '1.2'
+checksumType: 'sha'
+checksumPkgid: 'YES'
+checksum: 'f9d63f4369eda675a65522ab6c985a60e73a1ceb'
+summary: 'bbconf'
+description: 'bbconf is a complete GUI blackbox configuration tool, using plugins to
+allow other developers to easily develop plugins to run inside bbconf to
+allow every aspect of blackbox and its companion programs to be configured
+easily in a single application.  bbconf comes with 4 plugins, allowing
+configuration of blackbox's keybindings, blackbox's menus, and blackbox's
+style files/themes.'
+packager: 'movingparts.net'
+url: 'http://bbconf.sourceforge.net/'
+timeFile: '1010404157'
+timeBuild: '1010404154'
+sizePackage: '295403'
+sizeInstalled: '901567'
+sizeArchive: '905072'
+location: 'bbconf-1.2-1.i386.rpm'
+license: 'GPL'
+vendor: 'movingparts.net <http://movingparts.net>'
+group: 'X11/Applications'
+buildhost: 'martin.suse.de'
+sourcerpm: 'bbconf-1.2-1.src.rpm'
+headerStart: '168'
+headerEnd: '5168'
+provides:
+libbbconf.so  -
+libmenu.so  -
+libkeybindings.so  -
+libthemes.so  -
+bbconf EQ 0-1.2-1
+conflicts:
+
+obsoletes:
+
+requires:
+libXrender.so.1  -
+libstdc++-libc6.2-2.so.3  -
+libmng.so.1  -
+libc.so.6(GLIBC_2.0)  -
+libICE.so.6  -
+ld-linux.so.2  -
+libpng.so.2  -
+/sbin/ldconfig  - (pre=1)
+liblcms.so.1  -
+libc.so.6  -
+libdl.so.2(GLIBC_2.0)  -
+libz.so.1  -
+libXmu.so.6  -
+libc.so.6(GLIBC_2.1.3)  -
+libXi.so.6  -
+libresolv.so.2  -
+libGL.so.1  -
+libGLU.so.1  -
+libfreetype.so.6  -
+libXft.so.1  -
+libX11.so.6  -
+libqt.so.2  -
+libSM.so.6  -
+libXt.so.6  -
+libdl.so.2(GLIBC_2.1)  -
+libjpeg.so.62  -
+libXext.so.6  -
+libdl.so.2  -
+/bin/sh  - (pre=1)
+libm.so.6  -
+files:
+/usr/bin/bbconf
+authors: First Author, Second Author
+keywords: One keyword, Another one
+media: 2
+dirsizes: 
+/usr/bin: 520 kByte, 2 files
+/usr/share/doc: 100 kByte, 25 files
+freshen: 
+nothing EQ 0-1.1-521
+anything LT 0-1.2-125
+install-only: '1'
+-------------------------------------------------
+Primary Data: 
+name: 'PlatinGUI'
+type: 'rpm'
+ arch: 'noarch'
+ ver: '620'
+checksumType: 'sha'
+checksumPkgid: 'YES'
+checksum: 'eced88b6e724e4a45b82f2723912ef2e29ee134b'
+summary: 'SAPGUI for the JAVA Environment'
+description: 'This package provides the frontend application to connect to a SAP R/3 System.
+There are two scripts for starting the application, "guilogon" and "guistart".
+For further information, direct your browser to the documentation in
+file: /usr/share/doc/packages/PlatinGUI/doc/manual.htm'
+packager: ''
+url: ''
+timeFile: '1016026813'
+timeBuild: '1016026421'
+sizePackage: '36667755'
+sizeInstalled: '95672876'
+sizeArchive: '95690012'
+location: 'PlatinGUI-620-0.noarch.rpm'
+license: '(c) by SAP'
+vendor: ''
+group: 'SuSE internal'
+buildhost: 'martin.suse.de'
+sourcerpm: 'PlatinGUI-620-0.src.rpm'
+headerStart: '168'
+headerEnd: '17093'
+provides:
+libJPlatin.so  -
+PlatinGUI EQ 0-620-0
+conflicts:
+
+obsoletes:
+
+requires:
+libm.so.6(GLIBC_2.0)  -
+libstdc++-libc6.2-2.so.3  -
+libc.so.6(GLIBC_2.0)  -
+libICE.so.6  -
+ld-linux.so.2  -
+libc.so.6  -
+libdl.so.2(GLIBC_2.0)  -
+libpthread.so.0(GLIBC_2.0)  -
+libc.so.6(GLIBC_2.2)  -
+libc.so.6(GLIBC_2.1.2)  -
+/bin/sh  -
+libdl.so.2  -
+libX11.so.6  -
+libSM.so.6  -
+libc.so.6(GLIBC_2.1)  -
+libXt.so.6  -
+libdl.so.2(GLIBC_2.1)  -
+libXpm.so.4  -
+libpthread.so.0  -
+libXext.so.6  -
+libpthread.so.0(GLIBC_2.1)  -
+libm.so.6  -
+files:
+/opt/PlatinGUI/6.20/bin/gmux/gxwilnl.txt
+/opt/PlatinGUI/6.20/bin/saphttp
+/opt/PlatinGUI/6.20/bin/gmux/gmuxsvr
+/opt/PlatinGUI/6.20/bin/gmux/gxwilsv.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilpt.txt
+/opt/PlatinGUI/6.20/bin/guilogon
+/usr/bin/guilogon
+/opt/PlatinGUI/6.20/bin/sapftp
+/opt/PlatinGUI/6.20/bin/gmux/gmbux
+/opt/PlatinGUI/6.20/bin/gmux/gmpox
+/opt/PlatinGUI/6.20/bin/gmux/gxwiles.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilx2.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilen.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwiltr.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilde.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilru.txt
+/opt/PlatinGUI/6.20/bin/gmux/gmsux
+/opt/PlatinGUI/6.20/bin/gmux/gmhox
+/opt/PlatinGUI/6.20/bin/gmux/gmhpx
+/opt/PlatinGUI/6.20/bin/gmux/gxwilhr.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilpl.txt
+/opt/PlatinGUI/6.20/bin/gmux/gmmsx
+/opt/PlatinGUI/6.20/bin/gmux/gmhix
+/opt/PlatinGUI/6.20/bin/gmux/gxwilfr.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilth.txt
+/opt/PlatinGUI/6.20/bin/sapgui
+/opt/PlatinGUI/6.20/bin/gmux/gmgax
+/opt/PlatinGUI/6.20/bin/gmux/gxwilcs.txt
+/opt/PlatinGUI/6.20/bin/gmux/gmbmx
+/opt/PlatinGUI/6.20/bin/gmux/gxwilx1.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilda.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxvalogo.gmf
+/opt/PlatinGUI/6.20/bin/gmux/gxwilsl.txt
+/opt/PlatinGUI/6.20/bin/gmux/sapgui
+/opt/PlatinGUI/6.20/bin/gmux/gmbtx
+/opt/PlatinGUI/6.20/bin/gmux/gmbax
+/opt/PlatinGUI/6.20/bin/gmux/gxwilhu.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilit.txt
+/opt/PlatinGUI/6.20/bin/gmux/gmscx
+/opt/PlatinGUI/6.20/bin/gmux/gmupx
+/opt/PlatinGUI/6.20/bin/gmux/gmbfx
+/opt/PlatinGUI/6.20/bin/gmux/gmnex
+/opt/PlatinGUI/6.20/bin/gmux/gmstx
+/opt/PlatinGUI/6.20/bin/gmux/gxvasap1.gmf
+/opt/PlatinGUI/6.20/bin/gmux/gxwilko.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxwilno.txt
+/opt/PlatinGUI/6.20/bin/gmux/gxvasap2.gmf
+/opt/PlatinGUI/6.20/bin/gmux/gxwilro.txt
+/opt/PlatinGUI/6.20/bin/guistart
+/opt/PlatinGUI/6.20/bin/gmux/gxwilzh.txt
+/opt/PlatinGUI/6.20/bin/gmux/gmdlx
+/opt/PlatinGUI/6.20/bin/libJPlatin.so
+/opt/PlatinGUI/6.20/bin/gmux: dir
+authors: 
+keywords: 
+media: 
+dirsizes: 
+
+freshen: 
+
+install-only: '0'
+-------------------------------------------------
+Primary Data: 
+name: 'packetfilter'
+type: 'rpm'
+ arch: 'src'
+ ver: '0.9.1'
+checksumType: 'sha'
+checksumPkgid: 'YES'
+checksum: '77b165fcb30789fb8c4c669e21fed3d04938f607'
+summary: 'A packetfilter wrapper compatible with ipfwadm, ipchains, iptables'
+description: 'This package consists of a simple firewall wrapper script
+providing a packet filter mini-language to state your
+filtering needs independent of the used firewall type.
+It's just like a service start/stop script and started
+during the normal System V boot sequence.
+
+See the README for details.'
+packager: ''
+url: ''
+timeFile: '1011218465'
+timeBuild: '1011218465'
+sizePackage: '8889'
+sizeInstalled: '7775'
+sizeArchive: '8160'
+location: 'packetfilter-0.9.1-3.src.rpm'
+license: '(c) 2002, Michael Radziej, under Gnu LPL'
+vendor: ''
+group: 'unsorted'
+buildhost: 'martin.suse.de'
+sourcerpm: ''
+headerStart: '168'
+headerEnd: '1488'
+provides:
+
+conflicts:
+
+obsoletes:
+
+requires:
+
+files:
+
+authors: 
+keywords: 
+media: 
+dirsizes: 
+
+freshen: 
+
+install-only: '0'
+-------------------------------------------------
+Primary Data: 
+name: 'bbconf'
+type: 'rpm'
+ arch: 'src'
+ ver: '1.2'
+checksumType: 'sha'
+checksumPkgid: 'YES'
+checksum: '548c0cac5b1e89c0200879a9b337e7d5fc183122'
+summary: 'bbconf'
+description: 'bbconf is a complete GUI blackbox configuration tool, using plugins to
+allow other developers to easily develop plugins to run inside bbconf to
+allow every aspect of blackbox and its companion programs to be configured
+easily in a single application.  bbconf comes with 4 plugins, allowing
+configuration of blackbox's keybindings, blackbox's menus, and blackbox's
+style files/themes.'
+packager: 'movingparts.net'
+url: 'http://bbconf.sourceforge.net/'
+timeFile: '1010402287'
+timeBuild: '1010364098'
+sizePackage: '559740'
+sizeInstalled: '561644'
+sizeArchive: '562024'
+location: 'bbconf-1.2-1.src.rpm'
+license: 'GPL'
+vendor: 'movingparts.net <http://movingparts.net>'
+group: 'X11/Applications'
+buildhost: 'macmir.spieleck.de'
+sourcerpm: ''
+headerStart: '168'
+headerEnd: '1600'
+provides:
+
+conflicts:
+
+obsoletes:
+
+requires:
+
+files:
+
+authors: 
+keywords: 
+media: 
+dirsizes: 
+
+freshen: 
+
+install-only: '0'
+-------------------------------------------------
+Primary Data: 
+name: 'PlatinGUI'
+type: 'rpm'
+ arch: 'src'
+ ver: '620'
+checksumType: 'sha'
+checksumPkgid: 'YES'
+checksum: '5d34c98c42302406c5c0a31c163ee6145c014f9d'
+summary: 'SAPGUI for the JAVA Environment'
+description: 'This package provides the frontend application to connect to a SAP R/3 System.
+There are two scripts for starting the application, "guilogon" and "guistart".
+For further information, direct your browser to the documentation in
+file: /usr/share/doc/packages/PlatinGUI/doc/manual.htm'
+packager: ''
+url: ''
+timeFile: '1016026466'
+timeBuild: '1016026421'
+sizePackage: '36057152'
+sizeInstalled: '36898821'
+sizeArchive: '36899204'
+location: 'PlatinGUI-620-0.src.rpm'
+license: '(c) by SAP'
+vendor: ''
+group: 'SuSE internal'
+buildhost: 'martin.suse.de'
+sourcerpm: ''
+headerStart: '168'
+headerEnd: '1412'
+provides:
+
+conflicts:
+
+obsoletes:
+
+requires:
+
+files:
+
+authors: 
+keywords: 
+media: 
+dirsizes: 
+
+freshen: 
+
+install-only: '0'
+-------------------------------------------------
+Primary Data: 
+name: 'packetfilter'
+type: 'rpm'
+ arch: 'src'
+ ver: '0.9.1'
+checksumType: 'sha'
+checksumPkgid: 'YES'
+checksum: 'dffba597ee9614af9ad1db6a82141d024a94ab6a'
+summary: 'A packetfilter wrapper compatible with ipfwadm, ipchains, iptables'
+description: 'This package consists of a simple firewall wrapper script
+providing a packet filter mini-language to state your
+filtering needs independent of the used firewall type.
+It's just like a service start/stop script and started
+during the normal System V boot sequence.
+
+See the README for details.'
+packager: ''
+url: ''
+timeFile: '1011218885'
+timeBuild: '1011218885'
+sizePackage: '8896'
+sizeInstalled: '7790'
+sizeArchive: '8172'
+location: 'packetfilter-0.9.1-4.src.rpm'
+license: '(c) 2002, Michael Radziej, under Gnu LPL'
+vendor: ''
+group: 'unsorted'
+buildhost: 'martin.suse.de'
+sourcerpm: ''
+headerStart: '168'
+headerEnd: '1488'
+provides:
+
+conflicts:
+
+obsoletes:
+
+requires:
+
+files:
+
+authors: 
+keywords: 
+media: 
+dirsizes: 
+
+freshen: 
+
+install-only: '0'
+Exit Code: 0

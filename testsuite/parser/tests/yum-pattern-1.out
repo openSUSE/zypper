@@ -1,0 +1,20 @@
+-------------------------------------------------
+Pattern Data: 
+pattern-id: 'foo'
+name:
+foobar
+[en.US] foobar
+default: 'false'
+user-visible: 'true'
+description:
+This is my pattern, it is soooooooo coool!
+[en.US] Duh
+patternlist:
+type: mandatory, name: otherpattern
+type: optional, name: stillother
+type: default, name: stillmore
+type: , name: other
+packageList:
+[mandatory] pkgname 0-1-1
+[] otherpkgname 1-2-0
+Exit Code: 0
