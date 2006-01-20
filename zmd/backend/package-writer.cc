@@ -6,10 +6,13 @@
 #include "zypp/base/Exception.h"
 #include "zypp/base/Logger.h"
 #include "zypp/CapSet.h"
+#include "zypp/Rel.h"
+#include "zypp/Edition.h"
 #include <cstdlib>
 #include <string>
 
 using namespace zypp::target::rpm;
+using namespace zypp;
 
 using std::endl;
 using std::string;
@@ -27,6 +30,45 @@ typedef struct {
     sqlite3_stmt *insert_pkg_handle;
     sqlite3_stmt *insert_dep_handle;
 } RCDB;
+
+//----------------------------------------------------------------------------
+
+// Convert ZYPP relation operator to ZMD int
+static int
+Rel2Int (Rel op)
+{
+#define RELATION_ANY 0
+#define RELATION_EQUAL (1 << 0)
+#define RELATION_LESS (1 << 1)
+#define RELATION_GREATER (1 << 2)
+#define RELATION_NONE (1 << 3)
+
+   /* This enum is here so that gdb can give us pretty strings */
+
+    typedef enum {
+	RC_RELATION_INVALID            = -1,
+	RC_RELATION_ANY                = RELATION_ANY,
+	RC_RELATION_EQUAL              = RELATION_EQUAL,
+	RC_RELATION_LESS               = RELATION_LESS,
+	RC_RELATION_LESS_EQUAL         = RELATION_LESS | RELATION_EQUAL,
+	RC_RELATION_GREATER            = RELATION_GREATER,
+	RC_RELATION_GREATER_EQUAL      = RELATION_GREATER | RELATION_EQUAL,
+	RC_RELATION_NOT_EQUAL          = RELATION_LESS | RELATION_GREATER,
+	RC_RELATION_NONE               = RELATION_NONE,
+    } RCResolvableRelation;
+
+    switch (op.inSwitch()) {
+	case Rel::EQ_e:	   return RC_RELATION_EQUAL; break;
+	case Rel::NE_e:    return RC_RELATION_NOT_EQUAL; break;
+	case Rel::LT_e:    return RC_RELATION_LESS; break;
+	case Rel::LE_e:    return RC_RELATION_LESS_EQUAL; break;
+	case Rel::GT_e:    return RC_RELATION_GREATER; break;
+	case Rel::GE_e:    return RC_RELATION_GREATER_EQUAL; break;
+	case Rel::ANY_e:   return RC_RELATION_ANY; break;
+	case Rel::NONE_e:  return RC_RELATION_NONE; break;
+    }
+    return RC_RELATION_INVALID;
+}
 
 //----------------------------------------------------------------------------
 
@@ -225,14 +267,28 @@ write_deps (RCDB *rcdb, sqlite_int64 pkg_id, int type, const zypp::CapSet & capa
 	
 	sqlite3_bind_int64 (handle, 1, pkg_id);
 	sqlite3_bind_int (handle, 2, type);
-	sqlite3_bind_text (handle, 3, iter->index().c_str(), -1, SQLITE_STATIC);
-#if 0
-	sqlite3_bind_text (handle, 4, spec->version, -1, SQLITE_STATIC);
-	sqlite3_bind_text (handle, 5, spec->release, -1, SQLITE_STATIC);
-	sqlite3_bind_int (handle, 6, spec->epoch);
-	sqlite3_bind_int (handle, 7, spec->arch);
-	sqlite3_bind_int (handle, 8, rc_package_dep_get_relation (dep));
-#endif
+	sqlite3_bind_text (handle, 3, iter->index().c_str(), -1, SQLITE_TRANSIENT);
+
+	Edition edition = iter->edition();
+
+	if (edition != Edition::noedition) {
+	    sqlite3_bind_text (handle, 4, edition.version().c_str(), -1, SQLITE_TRANSIENT);
+	    sqlite3_bind_text (handle, 5, edition.release().c_str(), -1, SQLITE_TRANSIENT);
+	    Edition::epoch_t epoch = edition.epoch();
+	    if (epoch != Edition::noepoch) {
+		sqlite3_bind_int (handle, 6, epoch);
+	    }
+	    else {
+		sqlite3_bind_int (handle, 6, 0);
+	    }
+	}
+	else {
+	    sqlite3_bind_int (handle, 6, 0);
+	}
+
+	sqlite3_bind_int (handle, 7, 0);				// arch
+	sqlite3_bind_int (handle, 8, Rel2Int(iter->op()));
+
 	rc = sqlite3_step (handle);
 	sqlite3_reset (handle);
 
@@ -301,7 +357,7 @@ write_package (RCDB *rcdb, RpmHeader::constPtr pkg)
 void
 write_packages_to_db (const string & db_file)
 {
-    RCDB *db;
+   RCDB *db;
 
     db = rc_db_new (db_file);
     rc_db_begin (db);
