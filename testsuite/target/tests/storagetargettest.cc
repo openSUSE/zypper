@@ -66,11 +66,11 @@ int main()
   for (; i < 1000; i++)
     backend.storeObject(patch1);
   curr_time = clock() - time_start;           // time in micro seconds 
-  DBG << "Wrote " << i << " patches in " << curr_time / (float)1000000 << " seconds" << std::endl;
+  DBG << "Wrote " << i << " patches in " << (double) curr_time / CLOCKS_PER_SEC << " seconds" << std::endl;
 
   time_start = clock();
   std::list<Resolvable::Ptr> objs = backend.storedObjects();
   curr_time = clock() - time_start;           // time in micro seconds 
-  DBG << "Read " << objs.size() << " patches in " << curr_time / (float)1000000 << " seconds" << std::endl;
+  DBG << "Read " << objs.size() << " patches in " << (double) curr_time / CLOCKS_PER_SEC << " seconds" << std::endl;
   return 0;	
 }
