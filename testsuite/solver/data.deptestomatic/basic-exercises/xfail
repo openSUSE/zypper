@@ -6,13 +6,13 @@ exercise-26-test.xml
 exercise-29-test.xml
 # requires without epoch is treated like 'any' epoch
 exercise-32-test.xml
-# requires without epoch is treated like 'any' epoch
+# Comparing 0:1.0.0-1 and 1.0.0-1 returns "true"
 exercise-35-test.xml
-# requires without epoch is treated like 'any' epoch
+# Comparing 0:1.0.0-1 and 1.0.0-1 returns "true"
 exercise-36-test.xml
-# requires without epoch is treated like 'any' epoch
+# Comparing 0:1.0.0-1 and 1.0.0-1 returns "true"
 exercise-37-test.xml
-# requires without epoch is treated like 'any' epoch
+# Comparing 0:1.0.0-1 and 1.0.0-1 returns "true"
 exercise-38-test.xml
 # duplicate solutions
 exercise-39-test.xml

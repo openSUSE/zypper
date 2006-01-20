@@ -15,3 +15,10 @@ exercise-47-test:
 
 exercise-58-test:
    Not implemented "lock"
+
+exercise-35-test
+exercise-36-test
+exercise-37-test
+exercise-38-test:
+   Comparing 0:1.0.0-1 and 1.0.0-1 returns "true" with the new solver cause he use 0 for none epoch.
+   The old server returns "false" cause he takes -1 for none epoch.
