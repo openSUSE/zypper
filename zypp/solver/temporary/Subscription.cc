@@ -130,8 +130,11 @@ Subscription::save (void)
 	if (sub->_old)
 	    xmlNewProp (sub_node, (const xmlChar*)"old", (const xmlChar*)"1");
     }
-
+#if 0
     save_retval = xmlSaveFile (subscription_file.c_str(), doc);
+#else
+    save_retval = 1;
+#endif
     xmlFreeDoc (doc);
 
     if (save_retval > 0) {
@@ -148,6 +151,9 @@ Subscription::save (void)
 void
 Subscription::load_old_subscriptions (void)
 {
+#if 1
+    return;
+#else
     static bool tried_to_do_this_already = false;
     xmlDoc *doc;
     XmlNode_Ptr node;
@@ -204,12 +210,16 @@ Subscription::load_old_subscriptions (void)
 
     subscriptions_changed = true;
     save ();
+#endif
 }
 
 
 void
 Subscription::load (void)
 {
+#if 1
+    return;
+#else 
     xmlDoc *doc;
     XmlNode_Ptr node;
 
@@ -262,6 +272,7 @@ Subscription::load (void)
     }
 
     xmlFreeDoc (doc);
+#endif
 }
 
 //---------------------------------------------------------------------------
