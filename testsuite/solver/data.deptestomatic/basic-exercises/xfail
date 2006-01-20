@@ -6,6 +6,8 @@ exercise-26-test.xml
 exercise-29-test.xml
 # requires without epoch is treated like 'any' epoch
 exercise-32-test.xml
+# tries to save subscription to /var/adm/zypp
+exercise-34-test.xml
 # Comparing 0:1.0.0-1 and 1.0.0-1 returns "true"
 exercise-35-test.xml
 # Comparing 0:1.0.0-1 and 1.0.0-1 returns "true"
