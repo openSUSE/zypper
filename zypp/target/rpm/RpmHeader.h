@@ -27,7 +27,7 @@ namespace zypp {
   namespace target {
     namespace rpm {
 
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : RpmHeader
@@ -44,110 +44,118 @@ namespace zypp {
        * <B>NEVER create <code>RpmHeader</code> from a NULL <code>Header</code>! </B>
        **/
       class RpmHeader : public BinHeader {
-        public:
+	public:
 	  typedef intrusive_ptr<RpmHeader> Ptr;
 	  typedef intrusive_ptr<const RpmHeader> constPtr;
 
-        private:
-      
-          CapSet PkgRelList_val( tag tag_r, bool pre, std::set<std::string> * freq_r = 0 ) const;
-      
-        public:
-      
-          /**
-           *
-           **/
-          RpmHeader( Header h_r = 0 );
-      
-          /**
-           * <B>Dangerous!<\B> This one takes the header out of rhs
-           * and leaves rhs empty.
-           **/
-          RpmHeader( BinHeader::Ptr & rhs );
-      
-          virtual ~RpmHeader();
-      
-          bool isSrc() const;
-      
-        public:
-      
-          std::string    tag_name()        const;
-          Edition tag_edition()     const;
-          Arch    tag_arch()        const;
-      
-          Date       tag_installtime() const;
-          Date       tag_buildtime()   const;
-      
-          /**
-           * If <code>freq_r</code> is not NULL, file dependencies found are inserted.
-           **/
-          CapSet tag_provides ( std::set<std::string> * freq_r = 0 ) const;
-          /**
-           * @see #tag_provides
-           **/
-          CapSet tag_requires ( std::set<std::string> * freq_r = 0 ) const;
-          /**
-           * @see #tag_provides
-           **/
-          CapSet tag_prerequires ( std::set<std::string> * freq_r = 0 ) const;
-          /**
-           * @see #tag_provides
-           **/
-          CapSet tag_conflicts( std::set<std::string> * freq_r = 0 ) const;
-          /**
-           * @see #tag_provides
-           **/
-          CapSet tag_obsoletes( std::set<std::string> * freq_r = 0 ) const;
-      
-          ByteCount tag_size()        const;
-          ByteCount tag_archivesize() const;
-      
-          std::string tag_summary()      const;
-          std::string tag_description()  const;
-          std::string tag_group()        const;
-          std::string tag_vendor()       const;
-          std::string tag_distribution() const;
-          std::string tag_license()      const;
-          std::string tag_buildhost()    const;
-          std::string tag_packager()     const;
-          std::string tag_url()          const;
-          std::string tag_os()           const;
-          std::string tag_prein()        const;
-          std::string tag_postin()       const;
-          std::string tag_preun()        const;
-          std::string tag_postun()       const;
-          std::string tag_sourcerpm()    const;
-      
-          std::list<std::string> tag_filenames() const;
-      
-          Changelog tag_changelog() const;
-     
-          /**
-           * Returns reference to arg <code>dudata_r</code>.
-           **/
-          DiskUsage & tag_du( DiskUsage & dudata_r ) const;
-      
-        public:
-      
-          virtual std::ostream & dumpOn( std::ostream & str ) const;
-      
-        public:
-      
-          /**
-           * Digest and signature verification flags
-           **/
-          enum VERIFICATION {
-            VERIFY       = 0x0000,
-            NODIGEST     = (1<<0),
-            NOSIGNATURE  = (1<<1),
-            NOVERIFY     = 0xffff
-          };
-      
-          /**
-           * Get an accessible packages data from disk.
-           * Returns NULL on any error.
-           **/
-          static RpmHeader::constPtr readPackage( const Pathname & path,
+	private:
+
+	  CapSet PkgRelList_val( tag tag_r, bool pre, std::set<std::string> * freq_r = 0 ) const;
+
+	public:
+
+	  /**
+	   *
+	   **/
+	  RpmHeader( Header h_r = 0 );
+
+	  /**
+	   * <B>Dangerous!<\B> This one takes the header out of rhs
+	   * and leaves rhs empty.
+	   **/
+	  RpmHeader( BinHeader::Ptr & rhs );
+
+	  virtual ~RpmHeader();
+
+	  bool isSrc() const;
+
+	public:
+
+	  std::string tag_name()    const;
+	  std::string tag_epoch()   const;
+	  std::string tag_version() const;
+	  std::string tag_release() const;
+	  std::string tag_arch()    const;
+
+	  /**
+	   * return complete edition (from tag_epoch, tag_version, tag_release)
+	   * returns Edition::noedition if an error occurs
+           */
+	  Edition tag_edition() const;
+
+	  Date tag_installtime() const;
+	  Date tag_buildtime()   const;
+
+	  /**
+	   * If <code>freq_r</code> is not NULL, file dependencies found are inserted.
+	   **/
+	  CapSet tag_provides ( std::set<std::string> * freq_r = 0 ) const;
+	  /**
+	   * @see #tag_provides
+	   **/
+	  CapSet tag_requires ( std::set<std::string> * freq_r = 0 ) const;
+	  /**
+	   * @see #tag_provides
+	   **/
+	  CapSet tag_prerequires ( std::set<std::string> * freq_r = 0 ) const;
+	  /**
+	   * @see #tag_provides
+	   **/
+	  CapSet tag_conflicts( std::set<std::string> * freq_r = 0 ) const;
+	  /**
+	   * @see #tag_provides
+	   **/
+	  CapSet tag_obsoletes( std::set<std::string> * freq_r = 0 ) const;
+
+	  ByteCount tag_size()        const;
+	  ByteCount tag_archivesize() const;
+
+	  std::string tag_summary()      const;
+	  std::string tag_description()  const;
+	  std::string tag_group()        const;
+	  std::string tag_vendor()       const;
+	  std::string tag_distribution() const;
+	  std::string tag_license()      const;
+	  std::string tag_buildhost()    const;
+	  std::string tag_packager()     const;
+	  std::string tag_url()          const;
+	  std::string tag_os()           const;
+	  std::string tag_prein()        const;
+	  std::string tag_postin()       const;
+	  std::string tag_preun()        const;
+	  std::string tag_postun()       const;
+	  std::string tag_sourcerpm()    const;
+
+	  std::list<std::string> tag_filenames() const;
+
+	  Changelog tag_changelog() const;
+
+	  /**
+	   * Returns reference to arg <code>dudata_r</code>.
+	   **/
+	  DiskUsage & tag_du( DiskUsage & dudata_r ) const;
+
+	public:
+
+	  virtual std::ostream & dumpOn( std::ostream & str ) const;
+
+	public:
+
+	  /**
+	   * Digest and signature verification flags
+	   **/
+	  enum VERIFICATION {
+	    VERIFY       = 0x0000,
+	    NODIGEST     = (1<<0),
+	    NOSIGNATURE  = (1<<1),
+	    NOVERIFY     = 0xffff
+	  };
+
+	  /**
+	   * Get an accessible packages data from disk.
+	   * Returns NULL on any error.
+	   **/
+	  static RpmHeader::constPtr readPackage( const Pathname & path,
       					  VERIFICATION verification = VERIFY );
       };
 

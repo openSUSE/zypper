@@ -943,7 +943,9 @@ set<Edition> RpmDb::pubkeys() const
 
   librpmDb::db_const_iterator it;
   for ( it.findByName( string( "gpg-pubkey" ) ); *it; ++it ) {
-    ret.insert( it->tag_edition() );
+    Edition edition = it->tag_edition();
+    if (edition != Edition::noedition)
+      ret.insert( edition );
   }
 
   return ret;
@@ -1043,10 +1045,36 @@ This prevented from having packages multiple times
     // create dataprovider
     shared_ptr<RPMPackageImpl> impl(new RPMPackageImpl(*iter));
 
+    Edition edition;
+    Arch arch;
+
+    try {
+	edition = Edition( iter->tag_version(),
+			   iter->tag_release(),
+			   iter->tag_epoch());
+    }
+    catch (Exception & excpt_r) {
+	ZYPP_CAUGHT(excpt_r);
+	WAR << "Package " << name << " has bad edition '"
+	    << (iter->tag_epoch().empty()?"":(iter->tag_epoch()+":"))
+	    << iter->tag_version()
+	    << (iter->tag_release().empty()?"":(string("-") + iter->tag_release())) << "'";
+	continue;
+    }
+
+    try {
+	arch = Arch (iter->tag_arch());
+    }
+    catch (Exception & excpt_r) {
+	ZYPP_CAUGHT(excpt_r);
+	WAR << "Package " << name << " has bad architecture '" << iter->tag_arch() << "'";
+	continue;
+    }
+
     // Collect basic Resolvable data
     NVRAD dataCollect( iter->tag_name(),
-                       iter->tag_edition(),
-                       iter->tag_arch() );
+                       edition,
+                       arch );
 
     list<string> filenames = impl->filenames();
     dataCollect.provides = iter->tag_provides ( & _filerequires );

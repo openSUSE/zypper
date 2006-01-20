@@ -129,7 +129,11 @@ namespace zypp {
       //
       ostream & RpmHeader::dumpOn( ostream & str ) const
       {
-        return BinHeader::dumpOn( str ) << '{' << tag_name() << "-" << tag_edition() << ( isSrc() ? ".src}" : "}");
+        return BinHeader::dumpOn( str ) << '{' << tag_name() << "-"
+		<< (tag_epoch().empty()?"":(tag_epoch()+":"))
+		<< tag_version()
+		<< (tag_release().empty()?"":(string("-")+tag_release()))
+		<< ( isSrc() ? ".src}" : "}");
       }
       
       
@@ -154,7 +158,46 @@ namespace zypp {
       //
       string RpmHeader::tag_name() const
       {
-        return string( string_val( RPMTAG_NAME ) );
+        return string_val( RPMTAG_NAME );
+      }
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //
+      //        METHOD NAME : RpmHeader::tag_epoch
+      //        METHOD TYPE : string
+      //
+      //        DESCRIPTION :
+      //
+      string RpmHeader::tag_epoch() const
+      {
+	return string_val ( RPMTAG_EPOCH );
+      }
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //
+      //        METHOD NAME : RpmHeader::tag_version
+      //        METHOD TYPE : string
+      //
+      //        DESCRIPTION :
+      //
+      string RpmHeader::tag_version() const
+      {
+	return string_val ( RPMTAG_VERSION );
+      }
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //
+      //        METHOD NAME : RpmHeader::tag_release
+      //        METHOD TYPE : string
+      //
+      //        DESCRIPTION :
+      //
+      string RpmHeader::tag_release() const
+      {
+	return string_val( RPMTAG_RELEASE );
       }
       
       ///////////////////////////////////////////////////////////////////
@@ -165,24 +208,29 @@ namespace zypp {
       //
       //        DESCRIPTION :
       //
-      Edition RpmHeader::tag_edition() const
+      Edition RpmHeader::tag_edition () const
       {
-        return Edition( string_val( RPMTAG_VERSION ),
-              	     string_val( RPMTAG_RELEASE ),
-		     string_val   ( RPMTAG_EPOCH ));
+	try {
+	  return Edition( tag_version(), tag_release(), tag_epoch());
+	}
+	catch (Exception & excpt_r) {
+	  WAR << "Package " << tag_name() << "has an invalid edition";
+	  ZYPP_CAUGHT (excpt_r);
+	}
+	return Edition();
       }
       
       ///////////////////////////////////////////////////////////////////
       //
       //
       //        METHOD NAME : RpmHeader::tag_arch
-      //        METHOD TYPE : Arch
+      //        METHOD TYPE : string
       //
       //        DESCRIPTION :
       //
-      Arch RpmHeader::tag_arch() const
+      string RpmHeader::tag_arch() const
       {
-        return Arch( string_val( RPMTAG_ARCH ) );
+        return string_val( RPMTAG_ARCH );
       }
       
       ///////////////////////////////////////////////////////////////////
