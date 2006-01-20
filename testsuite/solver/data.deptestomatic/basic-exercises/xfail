@@ -1,7 +1,27 @@
+# requires without epoch is treated like 'any' epoch
+exercise-25-test.xml
+# requires without epoch is treated like 'any' epoch
+exercise-26-test.xml
+# requires without epoch is treated like 'any' epoch
+exercise-29-test.xml
+# requires without epoch is treated like 'any' epoch
+exercise-32-test.xml
+# requires without epoch is treated like 'any' epoch
 exercise-35-test.xml
+# requires without epoch is treated like 'any' epoch
 exercise-36-test.xml
+# requires without epoch is treated like 'any' epoch
 exercise-37-test.xml
+# requires without epoch is treated like 'any' epoch
 exercise-38-test.xml
+# duplicate solutions
 exercise-39-test.xml
-exercise-58-test.xml
+# requires without epoch is treated like 'any' epoch
+exercise-40-test.xml
+# requires without epoch is treated like 'any' epoch
+exercise-44-test.xml
+# or dependency
 exercise-47-test.xml
+# lock
+exercise-58-test.xml
+
