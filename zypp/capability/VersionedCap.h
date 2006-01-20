@@ -47,6 +47,10 @@ namespace zypp
 
       /** Name only. */
       virtual std::string index() const;
+      /** Rel op. */
+      virtual Rel op() const;
+      /** Edition. */
+      virtual Edition edition () const;
 
     protected:
       /** Implementation dependent value. */

@@ -36,6 +36,12 @@ namespace zypp
     std::string VersionedCap::index() const
     { return name(); }
 
+    Rel VersionedCap::op() const
+    { return _range.op; }
+
+    Edition VersionedCap::edition () const
+    { return _range.value; }
+
     const Edition::MatchRange & VersionedCap::range() const
     { return _range; }
 

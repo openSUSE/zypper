@@ -117,8 +117,13 @@ namespace zypp
     /** More or less human readable representation as string. */
     std::string asString() const;
 
+    /** accessors needed by solver/zmd  */
     /** Deprecated */
     std::string index() const;
+    /** Deprecated, defaults to Rel::NONE */
+    Rel op() const;
+    /** Deprecated, defaults to Edition::noedition */
+    Edition edition() const;
 
   private:
     /** Pointer to implementation */

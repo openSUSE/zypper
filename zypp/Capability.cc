@@ -62,6 +62,12 @@ namespace zypp
   std::string Capability::index() const
   { return _pimpl->index(); }
 
+  Rel Capability::op() const
+  { return _pimpl->op(); }
+
+  Edition Capability::edition() const
+  { return _pimpl->edition(); }
+
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<
