@@ -29,7 +29,7 @@ prefix:       /usr
 We are ZYPP, you will be assimilated.
 
 %package devel
-Requires:     libzypp
+Requires:     libzypp = %{version}
 Summary:      Package, Patch, Pattern, Product Management - development files
 Group:        Development/Libraries/C and C++
 
