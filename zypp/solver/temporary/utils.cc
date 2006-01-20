@@ -279,7 +279,7 @@ gunzip_memory (const unsigned char *input_buffer, unsigned int input_length, Byt
     free ((void *)outbuf);
 
     if (zret != Z_STREAM_END) {
-	fprintf (stderr, "libz inflate failed! (%d)", zret);
+	ERR << "libz inflate failed! (" << zret << ")" << endl;
 	free (ba->data);
 	free (ba);
 	ba = NULL;
@@ -344,7 +344,7 @@ gzip_memory (const char *input_buffer, unsigned int input_length, ByteArray **ou
     free ((void *)outbuf);
 
     if (zret != Z_STREAM_END) {
-	fprintf (stderr, "libz deflate failed! (%d)", zret);
+	ERR << "libz deflate failed! (" << zret << ")" << endl;
 	free (ba->data);
 	free (ba);
 	ba = NULL;
@@ -378,7 +378,7 @@ bunzip2_memory (const unsigned char *input_buffer, unsigned int input_length, By
 {
 #ifndef HAVE_BZ2
 
-    fprintf (stderr, "bz2 support not compiled in");
+    ERR << "bz2 support not compiled in" << endl;
     *out_ba = NULL;
 
     return -1;
@@ -436,7 +436,7 @@ bunzip2_memory (const unsigned char *input_buffer, unsigned int input_length, By
     free ((void *)outbuf);
 
     if (bzret != BZ_STREAM_END) {
-	fprintf (stderr, "libbzip2 decompress failed (%d)", bzret);
+	ERR << "libbzip2 decompress failed (" <<  bzret << ")" << endl;
 	free (ba->data);
 	free (ba);
 	ba = NULL;
@@ -455,7 +455,7 @@ bzip2_memory (const char *input_buffer, unsigned int input_length, ByteArray **o
 {
 #ifndef HAVE_BZ2
 
-    fprintf (stderr, "bz2 support not compiled in");
+    ERR << "bz2 support not compiled in" << endl;
     *out_ba = NULL;
 
     return -1;
@@ -511,7 +511,7 @@ bzip2_memory (const char *input_buffer, unsigned int input_length, ByteArray **o
     free ((void *)outbuf);
 
     if (bzret != BZ_STREAM_END) {
-	fprintf (stderr, "bz2 compress failed! (%d)", bzret);
+	ERR << "bz2 compress failed! (" << bzret << ")" << endl;
 	free (ba->data);
 	free (ba);
 	ba = NULL;

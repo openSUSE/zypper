@@ -78,7 +78,7 @@ UndumpWorld::UndumpWorld (const std::string & filename)
 
 UndumpWorld::~UndumpWorld()
 {
-    fprintf (stderr, "*** deleting undump world[%p]: %s\n", this, World::toString(type()).c_str());
+    ERR << "*** deleting undump world[" << this << "]: " << World::toString(type()) << endl;
 }
 
 //---------------------------------------------------------------------------

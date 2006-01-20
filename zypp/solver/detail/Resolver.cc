@@ -136,7 +136,7 @@ Resolver::reset (void)
 void
 Resolver::addSubscribedChannel (Channel_constPtr channel)
 {
-    fprintf (stderr, "Resolver::addSubscribedChannel() not implemented\n");
+    ERR << "Resolver::addSubscribedChannel() not implemented" << endl;
 }
 
 

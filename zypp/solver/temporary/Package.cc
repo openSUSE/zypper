@@ -67,7 +67,7 @@ parseXmlDep (XmlNode_constPtr node) {
     CapFactory  factory;
 
     if (!node->equals("dep")) {
-        fprintf (stderr, "parseXmlDep bad node\n");
+        ERR << "parseXmlDep bad node" << endl;
         abort();
     }
 
@@ -333,7 +333,7 @@ Package::Package (XmlNode_constPtr node, Channel_constPtr channel, const Resolva
     Arch arch = Arch_noarch;
 
     if (!node->equals("package")) {
-        fprintf (stderr, "Package::Package() not a package node\n");
+        ERR << "Package::Package() not a package node" << endl;
         exit (1);
     }
 

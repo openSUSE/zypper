@@ -193,7 +193,7 @@ extract_packages_from_undump_buffer (const char *buf, size_t len, ChannelAndSubs
 
 	    if (subcount < 0) {
 		/* Do something clever */
-		fprintf (stderr, "No packages found\n");
+			ERR << "No packages found" << endl;
 		abort ();
 	    }
 	    
@@ -213,7 +213,7 @@ extract_packages_from_undump_buffer (const char *buf, size_t len, ChannelAndSubs
 		subcount = extract_packages_from_xml_node (channel_node, current_channel, resItem_callback, data);
 		if (subcount < 0) {
 		    /* FIXME: do something clever */
-		    fprintf (stderr, "No packages found\n");
+		    ERR << "No packages found" << endl;
 		    abort ();
 		}
 		count += subcount;

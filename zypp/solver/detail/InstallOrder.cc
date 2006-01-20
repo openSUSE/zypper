@@ -124,7 +124,7 @@ InstallOrder::setInstalled( ResItem_constPtr resItem )
 	info.order--;
 	if (info.order < 0)
 	{
-	    cerr << "order of node " << (*it)->asString() << " is < 0" << endl;
+	    DBG << "order of node " << (*it)->asString() << " is < 0" << endl;
 	}
     }
 }
@@ -257,7 +257,7 @@ InstallOrder::rdfsvisit(ResItem_constPtr resItem)
 	    {
 		if (must_visit != resItem)
 		{
-		    cerr << "dependency loop: " << resItem->asString() << " -> " << must_visit->asString() << endl;
+		    DBG << "dependency loop: " << resItem->asString() << " -> " << must_visit->asString() << endl;
 		}
 	    }
 	    else

@@ -104,13 +104,13 @@ operator<<( ostream& os, const World & world)
 World::World (WorldType type)
     : _type (type)
 {
-//    fprintf (stderr, "*** creating world[%p]: %s\n", this, toString(_type).c_str());
+//    ERR << "*** creating world[" << this << "]: " << toString(_type) << endl;
 }
 
 
 World::~World()
 {
-//    fprintf (stderr, "*** deleting world[%p]: %s\n", this, toString(_type).c_str());
+//    ERR "*** deleting world[" << this << "]: " << toString(_type) << endl;
 }
 
 //---------------------------------------------------------------------------
@@ -119,14 +119,14 @@ World::~World()
 bool
 World::sync (void) const
 {
-  if (getenv("FIXME"))     fprintf (stderr, "World::sync() not implemented\n");
+    if (getenv("FIXME"))     _ERR("FIXME") << "World::sync() not implemented" << endl;
   return false;
 }
 
 bool
 World::syncConditional (Channel_constPtr channel) const
 {
-  if (getenv("FIXME"))    fprintf (stderr, "World::syncConditional() not implemented\n");
+    if (getenv("FIXME"))    _ERR("FIXME") << "World::syncConditional() not implemented" << endl;
   return false;
 }
 
@@ -134,14 +134,14 @@ World::syncConditional (Channel_constPtr channel) const
 Pending_Ptr
 World::refresh (void)
 {
-  if (getenv("FIXME"))     fprintf (stderr, "World::refresh() not implemented\n");
+    if (getenv("FIXME"))     _ERR("FIXME") << "World::refresh() not implemented" << endl;
   return 0;
 }
 
 bool
 World::hasRefresh (void)
 {
-  if (getenv("FIXME"))     fprintf (stderr, "World::hasRefresh() not implemented\n");
+    if (getenv("FIXME"))     _ERR("FIXME") << "World::hasRefresh() not implemented" << endl;
   return false;
 }
 
@@ -149,7 +149,7 @@ World::hasRefresh (void)
 bool
 World::isRefreshing (void)
 {
-  if (getenv("FIXME"))     fprintf (stderr, "World::isRefreshing() not implemented\n");
+    if (getenv("FIXME"))     _ERR("FIXME") << "World::isRefreshing() not implemented" << endl;
   return false;
 }
 
@@ -158,14 +158,14 @@ World::isRefreshing (void)
 void
 World::refreshBegin (void)
 {
-  if (getenv("FIXME"))     fprintf (stderr, "World::refreshBegin() not implemented\n");
+    if (getenv("FIXME"))     _ERR("FIXME") << "World::refreshBegin() not implemented" << endl;
   return;
 }
 
 void
 World::refreshComplete (void)
 {
-  if (getenv("FIXME"))     fprintf (stderr, "World::refreshComplete() not implemented\n");
+    if (getenv("FIXME"))     _ERR("FIXME") << "World::refreshComplete() not implemented" << endl;
   return;
 }
 
@@ -183,7 +183,7 @@ World::setSubscription (Channel_Ptr channel, bool is_subscribed)
 	      (is_subscribed?"subscribe":"unsubscribe") << ")" << endl;
 
     if (channel->system ()) {
-	fprintf (stderr, "Can't subscribe to system channel '%s'\n",  channel->name ().c_str());
+	ERR << "Can't subscribe to system channel '" << channel->name () << "'" << endl;
 	return;
     }
 
@@ -257,14 +257,14 @@ World::resItemIsLocked (ResItem_constPtr resItem)
 bool
 World::canTransactResItem (ResItem_constPtr resItem)
 {
-  if (getenv("FIXME"))      fprintf (stderr, "World::canTransactResItem() not implemented\n");
+    if (getenv("FIXME"))      _ERR("FIXME") << "World::canTransactResItem() not implemented" << endl;
   return false;
 }
 
 bool
 World::transact (const ResItemList & installResItems, const ResItemList & remove_resItems, int flags)
 {
-  if (getenv("FIXME"))      fprintf (stderr, "World::transact() not implemented\n");
+    if (getenv("FIXME"))      _ERR("FIXME") << "World::transact() not implemented" << endl;
   return false;
 }
 
@@ -275,14 +275,14 @@ World::transact (const ResItemList & installResItems, const ResItemList & remove
 void
 World::serialize (XmlNode_Ptr parent)
 {
-  if (getenv("FIXME"))      fprintf (stderr, "World::serialize() not implemented\n");
+    if (getenv("FIXME"))      _ERR("FIXME") << "World::serialize() not implemented" << endl;
   return;
 }
 
 void
 World::toFile (const std::string & filename)
 {
-  if (getenv("FIXME"))      fprintf (stderr, "World::toFile() not implemented\n");
+    if (getenv("FIXME"))      _ERR("FIXME") << "World::toFile() not implemented" << endl;
   return;
 }
 
@@ -293,7 +293,7 @@ World::toFile (const std::string & filename)
 World_Ptr
 World::dup (void)
 {
-  if (getenv("FIXME"))      fprintf (stderr, "World::dup() not implemented\n");
+    if (getenv("FIXME"))      _ERR("FIXME") << "World::dup() not implemented" << endl;
   return 0;
 }
 
@@ -304,7 +304,7 @@ World::dup (void)
 void
 World::setRefreshFunction (WorldRefreshFn refresh_fn)
 {
-  if (getenv("FIXME"))      fprintf (stderr, "World::setRefreshFunction() not implemented\n");
+    if (getenv("FIXME"))      _ERR("FIXME") << "World::setRefreshFunction() not implemented" << endl;
   return;
 }
 
@@ -511,14 +511,14 @@ World::foreachSystemUpgrade (bool subscribed_only, ResItemPairFn fn, void *data)
 PackageUpdateList
 World::getUpgrades (ResItem_constPtr resItem, Channel_constPtr channel)
 {
-    fprintf (stderr, "World::getUpgrades not implemented\n");
+    ERR << "World::getUpgrades not implemented" << endl;
   return PackageUpdateList();
 }
 
 ResItem_constPtr
 World::getBestUpgrade (ResItem_constPtr resItem, bool subscribed_only)
 {
-    fprintf (stderr, "World::getBestUpgrade not implemented\n");
+    ERR << "World::getBestUpgrade not implemented" << endl;
   return 0;
 }
 

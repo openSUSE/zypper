@@ -20,6 +20,7 @@
  */
 
 #include "zypp/solver/temporary/ServiceWorld.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -75,7 +76,7 @@ namespace zypp
       
       ServiceWorld::~ServiceWorld()
       {
-          fprintf (stderr, "*** deleting service world[%p]: %s\n", this, World::toString(type()).c_str());
+          ERR << "*** deleting service world[" << this << "]: " << World::toString(type()) << endl;
       }
       
       //---------------------------------------------------------------------------

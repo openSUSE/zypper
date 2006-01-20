@@ -206,7 +206,7 @@ namespace zypp
       	did_something = false;
 
           } else {
-      //fprintf (stderr, "QueueItemBranch::process rebranching\n");
+      // ERR << "QueueItemBranch::process rebranching" << endl;
       	QueueItemBranch_Ptr new_branch = new QueueItemBranch (world());
       	for (QueueItemList::const_iterator iter = live_branches.begin(); iter != live_branches.end(); iter++) {
       	    new_branch->addItem ((*iter)->copy());

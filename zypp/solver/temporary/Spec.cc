@@ -23,6 +23,7 @@
  */
 
 #include "zypp/solver/temporary/Spec.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -115,7 +116,7 @@ Spec::Spec ( const Resolvable::Kind & kind, const string & name, int epoch, cons
 Spec::Spec (XmlNode_constPtr node, const Resolvable::Kind & kind)
     : _kind (kind)
 {
-    fprintf (stderr, "Spec::Spec (XmlNode_constPtr node)\nNot implemented\n");
+    ERR << "Spec::Spec (XmlNode_constPtr node)\nNot implemented" << endl;
     abort();
 }
 
@@ -217,7 +218,7 @@ Spec::match(Spec_constPtr spec) const {
 
 bool
 Spec::equals(Spec_constPtr spec) const {
-//fprintf (stderr, "<%s> equals <%s>\n", asString(true).c_str(), spec->asString(true).c_str());
+// ERR << "<" << asString(true) << "> equals <" << spec->asString(true) << ">" << endl;
     return ((_kind == spec->kind())
   	&& (_name == spec->name())
 	&& Edition::compare( _edition, spec->edition()) == 0);

@@ -202,7 +202,7 @@ ResolverContext::setStatus (ResItem_constPtr resItem, ResItemStatus status)
     if (_invalid) return;
 
     ResItemStatus old_status = getStatus (resItem);
-    // cerr << "ResolverContext::setStatus " << resItem->asString() << ": " << toString(old_status) << " -> " << toString(status) << endl;
+    // ERR << "ResolverContext::setStatus " << resItem->asString() << ": " << toString(old_status) << " -> " << toString(status) << endl;
     if (status != old_status) {
 	_status[resItem] = status;
     }
@@ -491,7 +491,7 @@ ResolverContext::resItemIsPresent (ResItem_constPtr resItem)
     ResItemStatus status;
 
     status = getStatus (resItem);
-//fprintf (stderr, "ResolverContext::resItemIsPresent(<%s>%s)\n", ResolverContext::toString(status).c_str(), resItem->asString().c_str());
+//ERR << "ResolverContext::resItemIsPresent(<" << ResolverContext::toString(status) << ">" << resItem->asString() << ")" << endl;
     if (status == RESOLVABLE_STATUS_UNKNOWN)
 	return false;
 
@@ -1228,7 +1228,8 @@ requirement_met_cb (ResItem_constPtr resItem, const Capability & cap, void *data
 	info->flag = true;
     }
 
-//fprintf (stderr, "requirement_met_cb(%s, %s) [info->dep %s] -> %s\n", resItem->asString().c_str(), cap.asString().c_str(), info->dep != NULL ? info->dep->asString().c_str() : "(none)", info->flag ? "true" : "false");
+//ERR << "requirement_met_cb(" <<  resItem->asString() << ", " << cap.asString() << ") [info->dep " <<
+//    (info->dep != NULL ? info->dep->asString().c_str() : "(none)") << "] -> " <<  (info->flag ? "true" : "false") << endl;
     return ! info->flag;
 }
 

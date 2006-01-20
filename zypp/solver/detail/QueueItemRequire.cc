@@ -146,9 +146,10 @@ require_process_cb (ResItem_constPtr resItem, const Capability & cap, void *data
     ResItemStatus status;
 
     status = info->context->getStatus (resItem);
-//fprintf (stderr, "require_process_cb(res: %s, spec %s, status %s)\n", resItem->asString().c_str(), cap.asString().c_str(), ResolverContext::toString(status).c_str());
-//fprintf (stderr, "require_process_cb(info->dep: %s)\n", info->dep ? info->dep->asString().c_str() : "(null)");
-//fprintf (stderr, "require_process_cb(resItemIsPossible -> %d)\n", info->context->resItemIsPossible (resItem));
+// ERR << "require_process_cb(res: " << resItem->asString() << ", spec " << cap.asString() << ", status "
+//     <<  ResolverContext::toString(status) << ")" << endl;
+// ERR << "require_process_cb(info->dep: " << (info->dep ? info->dep->asString() : "(null)") << ")" << endl;
+// ERR << "require_process_cb(resItemIsPossible -> " <<  info->context->resItemIsPossible (resItem) << ")" << endl;
     /* info->dep is set for resItem set childern only. If it is set
        allow only exactly required version */
     if (info->dep != NULL
@@ -342,7 +343,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 				   req_str.c_str(),
 				   up_str.c_str());
 		branch_item->setLabel (label);
-//fprintf (stderr, "Branching: %s\n", label.c_str());
+// ERR << "Branching: " << label << endl;
 		for (CResItemList::const_iterator iter = upgrade_list.begin(); iter != upgrade_list.end(); iter++) {
 		    ResItem_constPtr upgrade_resItem = *iter;
 		    QueueItemInstall_Ptr install_item;
@@ -466,7 +467,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	      _DBG("RC_SPEW") << "Found more than one resolvable, branching." << endl;
 
-//fprintf (stderr, "Found more than one resItem, branching.\n");
+// ERR << "Found more than one resItem, branching." << endl;
 	QueueItemBranch_Ptr branch_item = new QueueItemBranch (world());
 
 	for (CResItemList::const_iterator iter = info.providers.begin(); iter != info.providers.end(); iter++) {

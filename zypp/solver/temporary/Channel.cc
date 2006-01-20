@@ -52,7 +52,7 @@ int Channel::_fake_id = 1;
 string
 Channel::asString ( void ) const
 {
-    if (this == NULL) fprintf (stderr, "Channel::asString NULL\n");
+    if (this == NULL) ERR << "Channel::asString NULL" << endl;
     return toString (*this);
 }
 
@@ -256,7 +256,7 @@ bool
 Channel::isSubscribed (void) const
 {
     if (_world == NULL)
-	fprintf (stderr, "Channel::isSubscribed() without world\n");
+	ERR << "Channel::isSubscribed() without world" << endl;
     return _world->isSubscribed (this);
 }
 
@@ -265,7 +265,7 @@ void
 Channel::setSubscription (bool subscribed)
 {
     if (_world == NULL)
-	fprintf (stderr, "Channel::setSubscription() without world\n");
+	ERR << "Channel::setSubscription() without world" << endl;
     _world->setSubscription (this, subscribed);
 }
 

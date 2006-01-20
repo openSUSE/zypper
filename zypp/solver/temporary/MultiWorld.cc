@@ -22,6 +22,7 @@
 #include "zypp/base/String.h"
 #include "zypp/solver/temporary/MultiWorld.h"
 #include "zypp/solver/temporary/ServiceWorld.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -367,7 +368,7 @@ service_name_conflict_cb (World_Ptr world, void *user_data)
 {
     ServiceWorld_constPtr service = dynamic_pointer_cast<const ServiceWorld>(world);
     if (service == NULL) {
-	fprintf (stderr, "OOPS: service_name_conflict_cb: world is no service\n");
+	ERR << "OOPS: service_name_conflict_cb: world is no service" << endl;
 	abort();
     }
 
@@ -376,7 +377,7 @@ service_name_conflict_cb (World_Ptr world, void *user_data)
 	info->incDepth();
 	ServiceWorld_Ptr infoservice = dynamic_pointer_cast<ServiceWorld>(info->subworld());
 	if (infoservice == NULL) {
-	    fprintf (stderr, "OOPS: service_name_conflict_cb: info->subworld is no service\n");
+	    ERR << "OOPS: service_name_conflict_cb: info->subworld is no service" << endl;
 	    abort();
 	}
         info->setName (str::form ("%s (%d)", infoservice->name().c_str(), info->depth()).c_str());
@@ -610,7 +611,7 @@ MultiWorld::foreachResItemByKind (const Resolvable::Kind & kind, CResItemFn fn, 
 int
 MultiWorld::foreachResItemByMatch (Match_constPtr match, CResItemFn fn, void *data)
 {
-    fprintf (stderr, "MultiWorld::foreachResItemByMatch not implemented\n");
+    ERR << "MultiWorld::foreachResItemByMatch not implemented" << endl;
     return 0;
 }
 

@@ -70,7 +70,7 @@ string2kind (const std::string & str)
 	    kind = ResTraits<zypp::Product>::kind;
 	}
 	else {
-	    fprintf (stderr, "get_resItem unknown kind '%s'\n", str.c_str());
+	    ERR << "get_resItem unknown kind '" << str << "'" << endl;
 	}
     }
     return kind;
@@ -206,7 +206,7 @@ sax_warning(void *ptr, const char *msg, ...)
 
     va_start(args, msg);
 
-    if (vsnprintf(tmp, 2048, msg, args) >= 2048) fprintf (stderr, "vsnprintf overflow\n");
+    if (vsnprintf(tmp, 2048, msg, args) >= 2048) ERR << "vsnprintf overflow" << endl;
     WAR << "* SAX Warning: " << tmp << endl;
 
     va_end(args);
@@ -221,7 +221,7 @@ sax_error(void *ptr, const char *msg, ...)
 
     va_start(args, msg);
 
-    if (vsnprintf(tmp, 2048, msg, args) >= 2048) fprintf (stderr, "vsnprintf overflow\n");
+    if (vsnprintf(tmp, 2048, msg, args) >= 2048) ERR << "vsnprintf overflow" << endl;;
     ERR << "* SAX Error: " <<  tmp <<endl;
 
     va_end(args);
@@ -360,11 +360,11 @@ XmlParser::done()
 	xmlFreeParserCtxt(_xml_context);
 
     if (!_current_resitem_stored) {
-	fprintf (stderr, "Incomplete package lost\n");
+	ERR << "Incomplete package lost" << endl;
     }
 
     if (_current_update) {
-	fprintf (stderr, "Incomplete update lost");
+	ERR << "Incomplete update lost" << endl;
     }
 
     return _all_packages;
@@ -790,7 +790,7 @@ XmlParser::updateEnd (const std::string & name)
     } else if (name == "hid") {			_current_update->setHid (atoi(_text_buffer));
     } else if (name == "license") {		_current_update->setLicense (strstrip (_text_buffer));
     } else {
-	fprintf (stderr, "XmlParser::updateEnd(%s) unknown\n", name.c_str());
+	ERR << "XmlParser::updateEnd(" << name << ") unknown" << endl;
     }
 
 //    if (_current_update != NULL )

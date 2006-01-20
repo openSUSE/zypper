@@ -27,6 +27,7 @@
 #include "zypp/solver/temporary/utils.h"
 #include "zypp/solver/temporary/PackageUpdate.h"
 #include "zypp/solver/temporary/Package.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -161,13 +162,13 @@ PackageUpdate::PackageUpdate (XmlNode_constPtr node, Package_Ptr package)
     string url_prefix;
 
     if (node == NULL) {
-	fprintf (stderr, "PackageUpdate::PackageUpdate(NULL)\n");
+	ERR << "PackageUpdate::PackageUpdate(NULL)" << endl;
 	exit (1);
     }
 
     /* Make sure this is an update node */
     if (!node->equals("update")) {
-	fprintf (stderr, "PackageUpdate::PackageUpdate() wrong node (%s)\n", node->name().c_str());
+	ERR << "PackageUpdate::PackageUpdate() wrong node (" <<  node->name() << ")" << endl;
 	exit (1);
     }
 

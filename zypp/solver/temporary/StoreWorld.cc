@@ -86,7 +86,7 @@ StoreWorld::StoreWorld (WorldType type)
 
 StoreWorld::~StoreWorld()
 {
-    fprintf (stderr, "*** deleting store world[%p]: %s\n", this, World::toString(type()).c_str());
+    ERR << "*** deleting store world[" << this << "]: " << World::toString(type()) << endl;
 }
 
 
@@ -106,7 +106,7 @@ StoreWorld::addResItem (ResItem_constPtr resItem)
 
     channel = resItem->channel ();
 
-//          fprintf (stderr, "StoreWorld[%p]::addResItem(%s) [%s]\n", this, ((Spec_constPtr)resItem)->asString().c_str(), channel?channel->name():"?");
+// ERR << "StoreWorld[" << this << "]::addResItem(" << ((Spec_constPtr)resItem)->asString() ") [" << (channel?channel->name():"?") << "]" << endl;
 
 
     /* Before we do anything, check to make sure that a resItem of the
@@ -145,7 +145,7 @@ StoreWorld::addResItem (ResItem_constPtr resItem)
 	    int cmp;
 
 	    cmp = ResItem::compare (resItem, dup_res);
-//fprintf (stderr, "res: %s, dup_res %s, cmp %d\n", resItem->asString().c_str(), dup_res->asString().c_str(), cmp);
+//ERR << "res: " << resItem->asString() << ", dup_res " << dup_res->asString() << ", cmp " <<  cmp << endl;
 
 	    /* If the resItem we are trying to add has a lower
 	       version number, just ignore it. */
@@ -241,7 +241,7 @@ StoreWorld::addResItemsFromList (const CResItemList & slist)
 {
     for (CResItemList::const_iterator i = slist.begin(); i != slist.end(); i++) {
 	if (!addResItem (*i)) {
-	    fprintf (stderr, "addResItem failed\n");
+	    ERR << "addResItem failed" << endl;
 	    break;
 	}
     }
@@ -306,14 +306,14 @@ StoreWorld::removeResItem (ResItem_constPtr resItem)
 void
 StoreWorld::removeResItems (Channel_constPtr channel)
 {
-	fprintf (stderr, "StoreWorld::removeResItems(%s) not implemented\n", channel->asString().c_str());
+    ERR << "StoreWorld::removeResItems(" << channel->asString() << ") not implemented" << endl;
 }
 
 
 void
 StoreWorld::clear ()
 {
-	fprintf (stderr, "StoreWorld::clear() not implemented\n");
+    ERR << "StoreWorld::clear() not implemented" << endl;
 }
 
 //---------------------------------------------------------------------------
@@ -376,7 +376,7 @@ StoreWorld::findResItem (Channel_constPtr channel, const string & name, const Re
 ResItem_constPtr
 StoreWorld::findResItemWithConstraint (Channel_constPtr channel, const string & name, const Capability & constraint, bool is_and) const
 {
-	fprintf (stderr, "StoreWorld::findResItemWithConstraint() not implemented\n");
+    ERR << "StoreWorld::findResItemWithConstraint() not implemented" << endl;
     return 0;
 }
 
@@ -384,7 +384,7 @@ StoreWorld::findResItemWithConstraint (Channel_constPtr channel, const string & 
 Channel_Ptr
 StoreWorld::guessResItemChannel (ResItem_constPtr resItem) const
 {
-	fprintf (stderr, "StoreWorld::guessResItemChannel(%s) not implemented\n", resItem->asString().c_str());
+    ERR << "StoreWorld::guessResItemChannel(" << resItem->asString() << ") not implemented" << endl;
     return 0;
 }
 
@@ -503,7 +503,7 @@ StoreWorld::foreachResItemByKind (const Resolvable::Kind & kind, CResItemFn fn, 
 int
 StoreWorld::foreachResItemByMatch (Match_constPtr match, CResItemFn fn, void *data)
 {
-	fprintf (stderr, "StoreWorld::foreachResItemByMatch () not implemented\n");
+    ERR << "StoreWorld::foreachResItemByMatch () not implemented" << endl;
     return 0;
 }
 
@@ -518,11 +518,11 @@ StoreWorld::foreachProvidingResItem (const Capability & dep, ResItemAndDepFn fn,
 {
     int count = 0;
     InstalledTable installed;
-//fprintf (stderr, "StoreWorld::foreachProvidingResItem(%s)\n", dep->asString().c_str());
+// ERR <<  "StoreWorld::foreachProvidingResItem(" << dep->asString() << ")" << endl;
     for (ResItemAndDependencyTable::const_iterator iter = _provides_by_name.lower_bound(dep.index()); iter != _provides_by_name.upper_bound(dep.index()); iter++) {
 	ResItemAndDependency_constPtr r_and_d = iter->second;
 	ResItem_constPtr res = r_and_d->resItem();
-//fprintf (stderr, "StoreWorld::foreachProvidingResItem(): %s\n", res->asString(true).c_str());
+// ERR << "StoreWorld::foreachProvidingResItem(): " << res->asString(true) << endl;
 	if (res != NULL && res->isInstalled ()) {
 	    installed[res] = r_and_d;
 	}
@@ -532,7 +532,7 @@ StoreWorld::foreachProvidingResItem (const Capability & dep, ResItemAndDepFn fn,
 	ResItemAndDependency_constPtr r_and_d = iter->second;
 
 	if (r_and_d && r_and_d->verifyRelation (dep) == CapMatch::yes) {
-//fprintf (stderr, "found: %s\n", r_and_d->resItem()->asString(true).c_str());
+//ERR << "found: " << r_and_d->resItem()->asString(true) << endl;
 	    /* If we have multiple identical resItems in RCWorld,
 	       we want to only include the resItem that is installed and
 	       skip the rest. */
@@ -566,7 +566,7 @@ StoreWorld::foreachRequiringResItem (const Capability & dep, ResItemAndDepFn fn,
 	ResItemAndDependency_constPtr r_and_d = iter->second;
 	ResItem_constPtr res = r_and_d->resItem();
 	if (res != NULL && res->isInstalled ()) {
-//fprintf (stderr, "is installed: %s\n", res->asString(true).c_str());
+//ERR << "is installed: " << res->asString(true) << endl;
 	    installed[res] = r_and_d;
 	}
     }
@@ -604,11 +604,11 @@ StoreWorld::foreachConflictingResItem (const Capability & dep, ResItemAndDepFn f
 {
     int count = 0;
     InstalledTable installed;
-//fprintf (stderr, "StoreWorld::foreachConflictingResItem (%s)\n", dep->name().c_str());
+//ERR << "StoreWorld::foreachConflictingResItem (" <<  dep->name() << ")" << endl;
     for (ResItemAndDependencyTable::const_iterator iter = _conflicts_by_name.lower_bound(dep.index()); iter != _conflicts_by_name.upper_bound(dep.index()); iter++) {
 	ResItemAndDependency_constPtr r_and_d = iter->second;
 	ResItem_constPtr res = r_and_d->resItem();
-//fprintf (stderr, "==> %s\n", res->asString().c_str());
+//ERR << "==> " << res->asString() << endl;
 	if (res != NULL && res->isInstalled ()) {
 	    installed[res] = r_and_d;
 	}
@@ -618,7 +618,7 @@ StoreWorld::foreachConflictingResItem (const Capability & dep, ResItemAndDepFn f
 	ResItemAndDependency_constPtr r_and_d = iter->second;
 
 //	if (r_and_d)
-//fprintf (stderr, "==> %s verify %s ? %s\n", r_and_d->asString().c_str(), dep->asString().c_str(), r_and_d->verifyRelation (dep) ? "Y" : "N");
+//ERR << "==> " << r_and_d->asString() << " verify " << dep->asString() << " ? " << (r_and_d->verifyRelation (dep) ? "Y" : "N") << endl;
 	if (r_and_d && r_and_d->dependency().matches (dep) == CapMatch::yes) {
 	    /* If we have multiple identical resItems in RCWorld,
 	       we want to only include the resItem that is installed and
@@ -649,14 +649,17 @@ int
 StoreWorld::foreachFresheningResItem (const Capability & dep, ResItemAndDepFn fn, void *data)
 {
     int count = 0;
-//fprintf (stderr, "StoreWorld::foreachFresheningResItem (%s)\n", dep.asString().c_str());
+// ERR << "StoreWorld::foreachFresheningResItem (" << dep.asString() << ")" << endl;
 
     for (ResItemAndDependencyTable::const_iterator iter = _freshens_by_name.lower_bound(dep.index()); iter != _freshens_by_name.upper_bound(dep.index()); iter++) {
 	ResItemAndDependency_constPtr r_and_d = iter->second;
 
-	if (r_and_d) fprintf (stderr, "==> %s verify %s ? %s\n", r_and_d->asString().c_str(), dep.asString().c_str(), r_and_d->dependency().matches (dep) == CapMatch::yes ? "Y" : "N");
+	if (r_and_d) {
+	    ERR << "==> " << r_and_d->asString() << " verify " << dep.asString() << " ? "
+		<< ((r_and_d->dependency().matches(dep) == CapMatch::yes) ? "Y" : "N") << endl;
+	}
 	if (r_and_d && r_and_d->dependency().matches (dep) == CapMatch::yes) {
-//fprintf (stderr, "StoreWorld::foreachFresheningResItem found !, fn <%p>\n", fn);
+//ERR << "StoreWorld::foreachFresheningResItem found !, fn <" << fn << ">" << endl;
 	    if (fn) {
 		if (! fn(r_and_d->resItem(), r_and_d->dependency(), data)) {
 		    count = -1;
