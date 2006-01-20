@@ -41,7 +41,7 @@ namespace
   */
   USet _uset;
 
-  /** Each CapabilityImpl created in CapFactory \b must be warpped.
+  /** Each CapabilityImpl created in CapFactory \b must be wrapped.
    *
    * Immediately wrap \a allocated_r, and unified by inserting it into
    * \c _uset. Each CapabilityImpl created by CapFactory, \b must be
