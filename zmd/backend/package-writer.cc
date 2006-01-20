@@ -3,6 +3,7 @@
 #include "package-writer.h"
 #include <sqlite3.h>
 #include "zypp/target/rpm/librpmDb.h"
+#include "zypp/base/Exception.h"
 #include "zypp/base/Logger.h"
 #include "zypp/CapSet.h"
 #include <cstdlib>
@@ -259,21 +260,20 @@ write_package (RCDB *rcdb, RpmHeader::constPtr pkg)
     sqlite3_stmt *handle = rcdb->insert_pkg_handle;
 
     sqlite3_bind_text (handle, 1, pkg->tag_name().c_str(), -1, SQLITE_STATIC);
-    zypp::Edition edition = pkg->tag_edition();
-    sqlite3_bind_text (handle, 2, edition.version().c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_text (handle, 3, edition.release().c_str(), -1, SQLITE_STATIC);
-
-    if (edition.epoch() != zypp::Edition::noepoch) {
-	sqlite3_bind_int (handle, 4, edition.epoch());
-    } else {
+    sqlite3_bind_text (handle, 2, pkg->tag_version().c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text (handle, 3, pkg->tag_release().c_str(), -1, SQLITE_STATIC);
+    if (pkg->tag_epoch().empty()) {
 	sqlite3_bind_int (handle, 4, 0);
+    } else {
+	int epoch = atoi (pkg->tag_epoch().c_str());
+	sqlite3_bind_int (handle, 4, epoch);
     }
 
     sqlite3_bind_int (handle, 5, 1);						//pkg->arch().asString().c_str());
     sqlite3_bind_int (handle, 6, 1);						//pkg->section);
     sqlite3_bind_int64 (handle, 7, pkg->tag_archivesize());
     sqlite3_bind_int64 (handle, 8, pkg->tag_size());
-    sqlite3_bind_text (handle, 9, "1", -1, SQLITE_STATIC);			//rc_channel_get_id (pkg->channel)
+    sqlite3_bind_text (handle, 9, "@suse", -1, SQLITE_STATIC);		//rc_channel_get_id (pkg->channel)
     sqlite3_bind_text (handle, 10, "", -1, SQLITE_STATIC);			// pkg->pretty_name
     sqlite3_bind_text (handle, 11, pkg->tag_summary().c_str(), -1, SQLITE_STATIC);
     sqlite3_bind_text (handle, 12, pkg->tag_description().c_str(), -1, SQLITE_STATIC);
@@ -290,8 +290,10 @@ write_package (RCDB *rcdb, RpmHeader::constPtr pkg)
 	ERR << "Error adding package to SQL: " << sqlite3_errmsg (rcdb->db) << endl;
 	return -1;
     }
+    sqlite_int64 rowid = sqlite3_last_insert_rowid (rcdb->db);
+fprintf (stderr, "%s-%s-%s : %lld\n", pkg->tag_name().c_str(),pkg->tag_version().c_str(),pkg->tag_release().c_str(), rowid);fflush(stderr);
 
-    return sqlite3_last_insert_rowid (rcdb->db);
+    return rowid;
 }
 
 //-----------------------------------------------------------------------------
