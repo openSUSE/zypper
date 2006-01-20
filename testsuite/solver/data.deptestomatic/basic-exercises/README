@@ -23,6 +23,3 @@ exercise-38-test:
    Comparing 0:1.0.0-1 and 1.0.0-1 returns "true" with the new solver cause he use 0 for none epoch.
    The old server returns "false" cause he takes -1 for none epoch.
 
-exercise-34-test:
-Tries to save subscription to /var/adm/zypp. The rest is OK
-
