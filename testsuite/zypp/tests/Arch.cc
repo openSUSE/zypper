@@ -6,9 +6,9 @@
 #include <iostream>
 #include <list>
 #include <string>
-#include <zypp/base/Logger.h>
 
-#include <zypp/Arch.h>
+#include "zypp/base/Logger.h"
+#include "zypp/Arch.h"
 
 using namespace std;
 using namespace zypp;

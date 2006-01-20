@@ -3,12 +3,8 @@
 // tests for Edition
 //
 
-#include <iostream>
-#include <list>
-#include <string>
-#include <zypp/base/Logger.h>
-
-#include <zypp/Edition.h>
+#include "zypp/base/Logger.h"
+#include "zypp/Edition.h"
 
 using namespace std;
 using namespace zypp;
