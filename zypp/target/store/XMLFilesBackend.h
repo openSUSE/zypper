@@ -40,6 +40,7 @@ public:
   XMLFilesBackend();
   /** Dtor */
   ~XMLFilesBackend();
+  void setRandomFileNameEnabled( bool enabled );
   virtual void doTest();
 
   /**
@@ -73,6 +74,9 @@ public:
   virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false);
 
   protected:
+  std::string randomString(int length) const;
+  int random() const;
+  
   std::string randomFileName() const;
   /**
     * Directory where the xml file is stored (for the given resolvable)

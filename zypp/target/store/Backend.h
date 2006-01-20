@@ -9,8 +9,8 @@
 /** \file	devel/devel.dmacvicar/Backend.h
 *
 */
-#ifndef DEVEL_DEVEL_DMACVICAR_BACKEND_H
-#define DEVEL_DEVEL_DMACVICAR_BACKEND_H
+#ifndef ZYPP_STORAGE_BACKEND_H
+#define ZYPP_STORAGE_BACKEND_H
 
 #include <iosfwd>
 
@@ -20,71 +20,73 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////
-	namespace storage
-	{ /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+namespace storage
+{ /////////////////////////////////////////////////////////////////
 
-		///////////////////////////////////////////////////////////////////
-		//
-		//	CLASS NAME : Backend
-		//
-		/** */
-		class Backend
-		{
-			friend std::ostream & operator<<( std::ostream & str, const Backend & obj );
-		public:
-			/** Default ctor */
-			Backend();
-			/** Dtor */
-			virtual ~Backend();
-			virtual void doTest() = 0;
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : Backend
+//
+/**
+* This class represents a storage backend implementation
+*/
+class Backend
+{
+  friend std::ostream & operator<<( std::ostream & str, const Backend & obj );
+public:
+  /** Default ctor */
+  Backend();
+  /** Dtor */
+  virtual ~Backend();
+  virtual void doTest() = 0;
 
-      /**
-       * is the storage backend initialized
-       */
-			virtual bool isBackendInitialized() = 0;
-      /**
-       * initialize the storage backend
-       */
-			virtual void initBackend() = 0;
+  /**
+  * is the storage backend initialized
+  */
+  virtual bool isBackendInitialized() = 0;
+  /**
+  * initialize the storage backend
+  */
+  virtual void initBackend() = 0;
 
-      /**
-       * Stores a Resolvable in the active backend.
-       */
-      virtual void storeObject( Resolvable::Ptr resolvable )  = 0;
-      /**
-       * Deletes a Resolvable from the active backend.
-       */
-      virtual void deleteObject( Resolvable::Ptr resolvable ) = 0;
-     
-      /**
-       * Query for installed Resolvables.
-       */
-      virtual std::list<Resolvable::Ptr> storedObjects() = 0;
-       /**
-       * Query for installed Resolvables of a certain kind
-       */
-      virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind) = 0;
-       /**
-       * Query for installed Resolvables of a certain kind by name
-       * \a partial_match allows for text search.
-       */
-      virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false) = 0;
+  /**
+  * Stores a Resolvable in the active backend.
+  */
+  virtual void storeObject( Resolvable::Ptr resolvable )  = 0;
+  /**
+  * Deletes a Resolvable from the active backend.
+  */
+  virtual void deleteObject( Resolvable::Ptr resolvable ) = 0;
 
-		private:
-			/** Pointer to implementation */
-			class Private;
-			Private *d;
-		};
-		///////////////////////////////////////////////////////////////////
+  /**
+  * Query for installed Resolvables.
+  */
+  virtual std::list<Resolvable::Ptr> storedObjects() = 0;
+  /**
+  * Query for installed Resolvables of a certain kind
+  */
+  virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind) = 0;
+  /**
+  * Query for installed Resolvables of a certain kind by name
+  * \a partial_match allows for text search.
+  */
+  virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false) = 0;
 
-		/** \relates Backend Stream output */
-		std::ostream & operator<<( std::ostream & str, const Backend & obj );
+private:
+  /** Pointer to implementation */
+  class Private;
+  Private *d;
+};
+///////////////////////////////////////////////////////////////////
 
-		/////////////////////////////////////////////////////////////////
-	} // namespace devel.dmacvicar
-	///////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+/** \relates Backend Stream output */
+std::ostream & operator<<( std::ostream & str, const Backend & obj );
+
+/////////////////////////////////////////////////////////////////
+} // namespace devel.dmacvicar
+///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 } // namespace devel
 ///////////////////////////////////////////////////////////////////
 #endif // DEVEL_DEVEL_DMACVICAR_BACKEND_H
