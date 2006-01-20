@@ -7,7 +7,9 @@ SUBDIRS =
 
 ## ##################################################
 
-noinst_PROGRAMS = Arch Url1 Url2 Url3 Url4 Edition
+noinst_PROGRAMS = Arch Url1 Url2 Url3 Url4\
+	Edition			\
+	Capabilities
 
 ## ##################################################
 
@@ -21,6 +23,7 @@ Url2_SOURCES = Url2.cc
 Url3_SOURCES = Url3.cc
 Url4_SOURCES = Url4.cc
 Edition_SOURCES = Edition.cc
+Capabilities_SOURCES = Capabilities.cc
 
 ## ##################################################
 
@@ -28,7 +31,7 @@ Edition_SOURCES = Edition.cc
 
 $(noinst_PROGRAMS):    $(top_srcdir)/zypp/lib@PACKAGE@.la
 
-$(top_srcdir)/zypp/lib@PACKAGE@.la:     always
-	$(MAKE) -C $(top_srcdir)/zypp
+#$(top_srcdir)/zypp/lib@PACKAGE@.la:     always
+#	$(MAKE) -C $(top_srcdir)/zypp
 
 ## ##################################################
