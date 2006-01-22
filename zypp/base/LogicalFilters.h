@@ -12,6 +12,8 @@
 #ifndef ZYPP_BASE_LOGICALFILTERS_H
 #define ZYPP_BASE_LOGICALFILTERS_H
 
+#include <functional>
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -45,12 +47,9 @@ namespace zypp
      *  struct Print; // functor priniting elements
      *  struct Count; // functor counting number of elements
      *
-     *
      *  std::for_each( c.begin(), c.end(),
-     *
-     *
+     *                 chain( Print(), Count() ) );
      * \endcode
-     *
     */
     //@{
     ///////////////////////////////////////////////////////////////////

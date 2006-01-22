@@ -12,6 +12,10 @@
 #ifndef ZYPP_RESFILTERS_H
 #define ZYPP_RESFILTERS_H
 
+#include <functional>
+
+#include "zypp/base/FunctorRef.h"
+#include "zypp/base/LogicalFilters.h"
 #include "zypp/Resolvable.h"
 
 ///////////////////////////////////////////////////////////////////
