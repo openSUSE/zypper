@@ -195,6 +195,7 @@ AC_OUTPUT(	\
 	devel/devel.jsrain/Makefile	\
 	devel/devel.jsrain/yum/Makefile	\
 	devel/devel.ma/Makefile		\
+	devel/devel.kkaempf/Makefile	\
 	doc/Makefile			\
 	doc/autodoc/Makefile		\
 	doc/autodoc/Doxyfile		\
