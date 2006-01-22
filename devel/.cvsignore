@@ -1,0 +1,9 @@
+Makefile.in
+Makefile
+.deps
+.libs
+*.o
+*.lo
+*.a
+*.la
+genclass
