@@ -166,14 +166,15 @@ proc multi-run { src } {
 	  #generate output directory
 
 	  set outfile ./$dircase/$testBase_name.out
+	  set errfile ./$dircase/$testBase_name.err
 	  set mistakefile ./$dircase/$testBase_name.mistake
 	  set difffile ./$dircase/$testBase_name.diff
 	  set solutionfile ./$dircase/$testBase_name.solution
 
 	  # run the test
 
-#	  set command "LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:../src/.libs\" $src $testcase >$outfile 2>$outfile"
-	  set command "$src $testcase >$outfile 2>$outfile"
+#	  set command "LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:../src/.libs\" $src $testcase >$outfile 2>$errfile"
+	  set command "$src $testcase >$outfile 2>$errfile"
 	  set result ""
 	  set oops [catch { set result [exec sh -c $command] } catched]
 
