@@ -33,130 +33,130 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      using namespace std;
+using namespace std;
 
-      IMPL_PTR_TYPE(QueueItemGroup);
+IMPL_PTR_TYPE(QueueItemGroup);
 
-      //---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 
-      string
-      QueueItemGroup::asString ( void ) const
-      {
-          return toString (*this);
-      }
-
-
-      string
-      QueueItemGroup::toString ( const QueueItemGroup & item)
-      {
-          string ret = "[Group: ";
-          ret += QueueItem::toString(item._subitems);
-          ret += "]";
-          return ret;
-      }
+string
+QueueItemGroup::asString ( void ) const
+{
+    return toString (*this);
+}
 
 
-      ostream &
-      QueueItemGroup::dumpOn( ostream & str ) const
-      {
-          str << asString();
-          return str;
-      }
+string
+QueueItemGroup::toString ( const QueueItemGroup & item)
+{
+    string ret = "[Group: ";
+    ret += QueueItem::toString(item._subitems);
+    ret += "]";
+    return ret;
+}
 
 
-      ostream&
-      operator<<( ostream& os, const QueueItemGroup & item)
-      {
-          return os << item.asString();
-      }
-
-      //---------------------------------------------------------------------------
-
-      QueueItemGroup::QueueItemGroup (World_Ptr world)
-          : QueueItem (QUEUE_ITEM_TYPE_GROUP, world)
-      {
-      }
+ostream &
+QueueItemGroup::dumpOn( ostream & str ) const
+{
+    str << asString();
+    return str;
+}
 
 
-      QueueItemGroup::~QueueItemGroup()
-      {
-      }
+ostream&
+operator<<( ostream& os, const QueueItemGroup & item)
+{
+    return os << item.asString();
+}
 
-      //---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 
-      bool
-      QueueItemGroup::process (ResolverContext_Ptr context, QueueItemList & new_items)
-      {
-          _DBG("RC_SPEW") << "QueueItemGroup::process" << endl;
-
-          bool did_something = false;
-
-          // Just move all of the group's subitems onto the new_items list.
-
-          for (QueueItemList::const_iterator iter = _subitems.begin(); iter != _subitems.end(); iter++) {
-      	new_items.push_front (*iter);
-      	did_something = true;
-          }
-
-          _subitems.clear();
-
-      // FIXME: delete self
-
-          return did_something;
-      }
+QueueItemGroup::QueueItemGroup (World_Ptr world)
+    : QueueItem (QUEUE_ITEM_TYPE_GROUP, world)
+{
+}
 
 
-      QueueItem_Ptr
-      QueueItemGroup::copy (void) const
-      {
-          QueueItemGroup_Ptr new_group = new QueueItemGroup (world());
-          ((QueueItem_Ptr)new_group)->copy((QueueItem_constPtr)this);
+QueueItemGroup::~QueueItemGroup()
+{
+}
 
-          for (QueueItemList::const_iterator iter = _subitems.begin(); iter != _subitems.end(); iter++) {
-      	new_group->_subitems.push_back ((*iter)->copy());
-          }
-          return new_group;
-      }
+//---------------------------------------------------------------------------
 
+bool
+QueueItemGroup::process (ResolverContext_Ptr context, QueueItemList & new_items)
+{
+    _DBG("RC_SPEW") << "QueueItemGroup::process" << endl;
 
-      int
-      QueueItemGroup::cmp (QueueItem_constPtr item) const
-      {
-          int cmp = this->compare (item);		// assures equal type
-          if (cmp != 0)
-      	return cmp;
+    bool did_something = false;
 
-          QueueItemGroup_constPtr group = dynamic_pointer_cast<const QueueItemGroup>(item);
+    // Just move all of the group's subitems onto the new_items list.
 
-          // First, sort by # of subitems
+    for (QueueItemList::const_iterator iter = _subitems.begin(); iter != _subitems.end(); iter++) {
+	new_items.push_front (*iter);
+	did_something = true;
+    }
 
-          cmp = CMP(_subitems.size(), group->_subitems.size());
-          if (cmp)
-              return cmp;
+    _subitems.clear();
 
-          // We can do a by-item cmp since the possible items are kept in sorted order.
-          QueueItemList::const_iterator iter2;
-          for (QueueItemList::const_iterator iter = _subitems.begin(), iter2 = group->_subitems.begin();
-      	 iter != _subitems.end() && iter2 != group->_subitems.end(); iter++, iter2++) {
-      	cmp = (*iter)->cmp (*iter2);
-      	if (cmp) {
-      	    return cmp;
-      	}
-          }
+// FIXME: delete self
 
-          return 0;
-      }
+    return did_something;
+}
 
 
-      void
-      QueueItemGroup::addItem (QueueItem_Ptr subitem)
-      {
-          // We need to keep the list sorted for comparison purposes.
-          _subitems.push_back (subitem);
-      // FIXME    _subitems.sort(cmp)
-      }
+QueueItem_Ptr
+QueueItemGroup::copy (void) const
+{
+    QueueItemGroup_Ptr new_group = new QueueItemGroup (world());
+    new_group->QueueItem::copy(this);
 
-      ///////////////////////////////////////////////////////////////////
+    for (QueueItemList::const_iterator iter = _subitems.begin(); iter != _subitems.end(); iter++) {
+	new_group->_subitems.push_back ((*iter)->copy());
+    }
+    return new_group;
+}
+
+
+int
+QueueItemGroup::cmp (QueueItem_constPtr item) const
+{
+    int cmp = this->compare (item);		// assures equal type
+    if (cmp != 0)
+	return cmp;
+
+    QueueItemGroup_constPtr group = dynamic_pointer_cast<const QueueItemGroup>(item);
+
+    // First, sort by # of subitems
+
+    cmp = CMP(_subitems.size(), group->_subitems.size());
+    if (cmp)
+        return cmp;
+
+    // We can do a by-item cmp since the possible items are kept in sorted order.
+    QueueItemList::const_iterator iter2;
+    for (QueueItemList::const_iterator iter = _subitems.begin(), iter2 = group->_subitems.begin();
+	 iter != _subitems.end() && iter2 != group->_subitems.end(); iter++, iter2++) {
+	cmp = (*iter)->cmp (*iter2);
+	if (cmp) {
+	    return cmp;
+	}
+    }
+
+    return 0;
+}
+
+
+void
+QueueItemGroup::addItem (QueueItem_Ptr subitem)
+{
+    // We need to keep the list sorted for comparison purposes.
+    _subitems.push_back (subitem);
+// FIXME    _subitems.sort(cmp)
+}
+
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

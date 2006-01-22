@@ -142,7 +142,7 @@ ResolverQueue::addResItemToRemove (ResItem_constPtr resItem, bool remove_only_mo
     if (_context->resItemIsAbsent (resItem))
 	return;
 
-    item = new QueueItemUninstall (_context->world(), resItem, "user request");
+    item = new QueueItemUninstall (_context->world(), resItem, QueueItemUninstall::EXPLICIT);
     if (remove_only_mode)
 	item->setRemoveOnly ();
 

@@ -28,14 +28,13 @@
 
 #include "zypp/solver/detail/QueueItemEstablish.h"
 #include "zypp/solver/detail/QueueItemInstall.h"
-#include "zypp/solver/detail/QueueItemUninstall.h"
 #include "zypp/solver/detail/QueueItemRequire.h"
 #include "zypp/solver/detail/QueueItemConflict.h"
 #include "zypp/solver/detail/QueueItem.h"
 #include "zypp/solver/detail/ResolverContext.h"
 #include "zypp/solver/detail/ResolverInfoConflictsWith.h"
-#include "zypp/solver/detail/ResolverInfoMisc.h"
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
+#include "zypp/solver/detail/ResolverInfoMisc.h"
 #include "zypp/solver/detail/ResItemAndDependency.h"
 #include "zypp/CapSet.h"
 #include "zypp/base/Logger.h"
@@ -125,10 +124,8 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     _DBG("RC_SPEW") << "simple establish of " << _resItem->asString() << " with " << _resItem->freshens().size() << " freshens" << endl;
 
-    string msg = string ("Establishing ") + _resItem->name();
-
-    context->addInfoString (_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
-
+    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_ESTABLISHING, _resItem, RESOLVER_INFO_PRIORITY_VERBOSE);
+    context->addInfo (misc_info);
     logInfo (context);
 
     /* Loop through all freshen dependencies. If one is satisfied, queue the _resItem for installation.  */
@@ -176,7 +173,7 @@ QueueItem_Ptr
 QueueItemEstablish::copy (void) const
 {
     QueueItemEstablish_Ptr new_install = new QueueItemEstablish (world(), _resItem);
-    ((QueueItem_Ptr)new_install)->copy((QueueItem_constPtr)this);
+    new_install->QueueItem::copy(this);
 
     new_install->_channel_priority = _channel_priority;
     new_install->_other_penalty = _other_penalty;

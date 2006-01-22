@@ -254,6 +254,8 @@ ResolverContext::getStatus (ResItem_constPtr resItem)
 //---------------------------------------------------------------------------
 // status change
 
+// change state to TO_BE_INSTALLED (does not upgrade)
+
 bool
 ResolverContext::installResItem (ResItem_constPtr resItem, bool is_soft, int other_penalty)
 {
@@ -267,17 +269,14 @@ ResolverContext::installResItem (ResItem_constPtr resItem, bool is_soft, int oth
 
     if (resItem_status_is_to_be_uninstalled (status)
 	&& status != RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK) {
-	// Translator: %s = name of package,patch,...
-	msg = str::form (_("Can't install %s since it is already marked as needing to be uninstalled"),
-			 resItem->asString().c_str());
-
-	addErrorString (resItem, msg);
+	ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INSTALL_TO_BE_UNINSTALLED, resItem, RESOLVER_INFO_PRIORITY_VERBOSE);
+	addError (misc_info);
 	return false;
     }
 
     if (resItem_status_is_unneeded (status)) {
-	msg = str::form (_("Can't install %s since it is does not apply to this system."), resItem->asString().c_str());
-	addErrorString (resItem, msg);
+	ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INSTALL_UNNEEDED, resItem, RESOLVER_INFO_PRIORITY_VERBOSE);
+	addError (misc_info);
 	return false;
     }
 
@@ -286,10 +285,8 @@ ResolverContext::installResItem (ResItem_constPtr resItem, bool is_soft, int oth
     }
 
     if (isParallelInstall (resItem)) {
-	// Translator: %s = name of package,patch,...
-	msg = str::form (_("Can't install %s, since a resolvable of the same name is already marked as needing to be installed"),
-			 resItem->asString().c_str());
-	addErrorString (resItem, msg);
+	ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INSTALL_PARALLEL, resItem, RESOLVER_INFO_PRIORITY_VERBOSE);
+	addError (misc_info);
 	return false;
     }
 
@@ -323,6 +320,8 @@ ResolverContext::installResItem (ResItem_constPtr resItem, bool is_soft, int oth
     return true;
 }
 
+
+// change state to TO_BE_INSTALLED (does upgrade)
 
 bool
 ResolverContext::upgradeResItem (ResItem_constPtr resItem, ResItem_constPtr old_resItem, bool is_soft, int other_penalty)
@@ -367,6 +366,8 @@ ResolverContext::upgradeResItem (ResItem_constPtr resItem, ResItem_constPtr old_
 }
 
 
+// change state to 'TO_BE_UNINSTALLED{, DUE_TO_OBSOLETE, DUE_TO_UNLINK}'
+
 bool
 ResolverContext::uninstallResItem (ResItem_constPtr resItem, bool part_of_upgrade, bool due_to_obsolete, bool due_to_unlink)
 {
@@ -383,9 +384,8 @@ ResolverContext::uninstallResItem (ResItem_constPtr resItem, bool part_of_upgrad
     status = getStatus (resItem);
 
     if (status == RESOLVABLE_STATUS_TO_BE_INSTALLED) {
-	// Translator: %s = name of packages,patch,...
-	msg = str::form (_("%s is scheduled to be installed, but this is not possible because of dependency problems."), resItem->asString().c_str());
-	addErrorString (resItem, msg);
+	ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_REJECT_INSTALL, resItem, RESOLVER_INFO_PRIORITY_VERBOSE);
+	addError (misc_info);
 	return false;
     }
 
@@ -396,11 +396,9 @@ ResolverContext::uninstallResItem (ResItem_constPtr resItem, bool part_of_upgrad
 
     if (status == RESOLVABLE_STATUS_UNINSTALLED
 	|| status == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK) {
-	// Translator: %s = name of packages,patch,...
-	msg = str::form (_("Marking resolvable %s as uninstallable"), resItem->asString().c_str());
-	addInfoString (resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
+	ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALLABLE, resItem, RESOLVER_INFO_PRIORITY_VERBOSE);
+	addInfo (misc_info);
     }
-
 
     if (due_to_obsolete)	new_status = RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE;
     else if (due_to_unlink)	new_status = RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK;
@@ -415,6 +413,8 @@ ResolverContext::uninstallResItem (ResItem_constPtr resItem, bool part_of_upgrad
     return true;
 }
 
+
+// change state to UNNEEDED
 
 bool
 ResolverContext::unneededResItem (ResItem_constPtr resItem, int other_penalty)
@@ -434,6 +434,8 @@ ResolverContext::unneededResItem (ResItem_constPtr resItem, int other_penalty)
     return true;
 }
 
+
+// change state to SATISFIED
 
 bool
 ResolverContext::satisfyResItem (ResItem_constPtr resItem, int other_penalty)
@@ -457,6 +459,8 @@ ResolverContext::satisfyResItem (ResItem_constPtr resItem, int other_penalty)
 }
 
 
+// change state to INCOMPLETE
+
 bool
 ResolverContext::incompleteResItem (ResItem_constPtr resItem, int other_penalty)
 {
@@ -467,8 +471,8 @@ ResolverContext::incompleteResItem (ResItem_constPtr resItem, int other_penalty)
 
     switch (status) {
 	case RESOLVABLE_STATUS_INSTALLED: {
-	    std::string msg = str::form (_("This conflicts with installed %s."), resItem->asString().c_str());
-	    addErrorString (resItem, msg);
+	    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INCOMPLETES, resItem, RESOLVER_INFO_PRIORITY_VERBOSE);
+	    addError (misc_info);
 	    return false;
 	}
 	break;
@@ -956,7 +960,7 @@ ResolverContext::addInfo (ResolverInfo_Ptr info)
     if (info->error ()) {
 
 	if (! _invalid) {
-	    ResolverInfo_Ptr info = new ResolverInfoMisc (NULL, RESOLVER_INFO_PRIORITY_VERBOSE, _("Marking this resolution attempt as invalid."));
+	    ResolverInfo_Ptr info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INVALID, NULL, RESOLVER_INFO_PRIORITY_VERBOSE);
 	    info->flagAsError ();
 	    _log.push_back (info);
 	}
@@ -967,18 +971,8 @@ ResolverContext::addInfo (ResolverInfo_Ptr info)
 
 
 void
-ResolverContext::addInfoString (ResItem_constPtr resItem, int priority, string msg)
+ResolverContext::addError (ResolverInfo_Ptr info)
 {
-    _XXX("RC_SPEW") << "ResolverContext::addInfoString(" << (resItem ? resItem->asString().c_str() : "") << ") " << msg << endl;
-    ResolverInfo_Ptr info = new ResolverInfoMisc (resItem, priority, msg);
-    addInfo (info);
-}
-
-
-void
-ResolverContext::addErrorString (ResItem_constPtr resItem, string msg)
-{
-    ResolverInfo_Ptr info = new ResolverInfoMisc (resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
     info->flagAsError ();
     addInfo (info);
 }
@@ -1010,7 +1004,7 @@ mark_important_info (InfoList & il)
 	if (info != NULL						// list items might be NULL
 	    && info->error ()) {					// only look at error infos
 
-	    ResItem_constPtr resItem = info->resItem();			// get resItem from InfoList
+	    ResItem_constPtr resItem = info->affected();		// get resItem from InfoList
 	    if (resItem != NULL) {
 		error_set.insert (resItem);
 	    }
@@ -1091,7 +1085,7 @@ ResolverContext::foreachInfo (ResItem_Ptr resItem, int priority, ResolverInfoFn 
     // Assemble a list of copies of all of the info objects
     while (context != NULL) {
 	for (InfoList::iterator iter = context->_log.begin(); iter != context->_log.end(); iter++) {
-	    if ((resItem == NULL || (*iter)->resItem() == resItem)
+	    if ((resItem == NULL || (*iter)->affected() == resItem)
 		&& (*iter)->priority() >= priority) {
 		info_list.push_back ((*iter)->copy());
 	    }

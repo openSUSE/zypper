@@ -58,7 +58,12 @@ solverdetailinclude_HEADERS = \
 	ResolverQueue.h			\
 	ResolverQueuePtr.h		\
 	Resolver.h			\
-	ResolverPtr.h
+	ResolverPtr.h			\
+	ProblemSolution.h		\
+	ProblemSolutionPtr.h		\
+	SolutionAction.h		\
+	SolutionActionPtr.h		\
+	ResolverProblem.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_solver_detail.la
 
@@ -76,6 +81,7 @@ lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	QueueItemRequire.cc				\
 	QueueItemUninstall.cc				\
 	Resolver.cc					\
+	Resolver_problems.cc				\
 	ResolverInfo.cc					\
 	ResolverInfoChildOf.cc				\
 	ResolverInfoConflictsWith.cc			\
@@ -86,5 +92,7 @@ lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	ResolverInfoNeededBy.cc				\
 	ResolverInfoObsoletes.cc			\
 	ResolverContext.cc				\
-	ResolverQueue.cc
-
+	ResolverQueue.cc				\
+	ProblemSolution.cc				\
+	SolutionAction.cc				\
+	ResolverProblem.cc

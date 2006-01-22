@@ -261,13 +261,13 @@ Resolver::verifySystem (void)
 		    QueueItemUninstall_Ptr uninstall_item;
 
 		    if (i != j) {
-			uninstall_item = new QueueItemUninstall (world(), dup_pkg, "duplicate install");
+			uninstall_item = new QueueItemUninstall (world(), dup_pkg, QueueItemUninstall::DUPLICATE);
 			grp_item->addItem (uninstall_item);
 		    }
 
 		}
 
-		branch_item->adddIitem (grp_item);
+		branch_item->addItem (grp_item);
 	    }
 
 	    _initial_items.push_back (branch_item);
@@ -336,7 +336,7 @@ Resolver::establishState (ResolverContext_Ptr context)
 
 //---------------------------------------------------------------------------
 
-void
+bool
 Resolver::resolveDependencies (const ResolverContext_Ptr context)
 {
 
@@ -436,7 +436,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     if (initial_queue->isEmpty()) {
 	INT << "Empty Queue, nothing to resolve" << endl;
 
-	return;
+	return true;
     }
 
     _pending_queues.push_front (initial_queue);
@@ -445,32 +445,34 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
     while (!_pending_queues.empty()) {
 
-	      _XXX("RC_SPEW") << "Pend " << (long) _pending_queues.size()
+	_XXX("RC_SPEW") << "Pend " << (long) _pending_queues.size()
 			      << " / Cmpl " << (long) _complete_queues.size()
 			      << " / Prun " << (long) _pruned_queues.size()
 			      << " / Defr " << (long) _deferred_queues.size()
 			      << " / Invl " << (long) _invalid_queues.size() << endl;
 
 	      if (_timeout_seconds > 0) {
-		  time (&t_now);
-		  if (difftime (t_now, t_start) > _timeout_seconds) {
-		      _timed_out = true;
-		      break;
-		  }
-	      }
+		    time (&t_now);
+		    if (difftime (t_now, t_start) > _timeout_seconds) {
+			_timed_out = true;
+		    break;
+		}
+	    }
 
-	      ResolverQueue_Ptr queue = _pending_queues.front();
-	      _pending_queues.pop_front();
-	      ResolverContext_Ptr context = queue->context();
+	    ResolverQueue_Ptr queue = _pending_queues.front();
+	    _pending_queues.pop_front();
+	    ResolverContext_Ptr context = queue->context();
 
-	      queue->process();
+	    queue->process();
 
-	      if (queue->isInvalid ()) {
-		  _XXX("RC_SPEW") << "Invalid Queue\n" << endl;;
-	      _invalid_queues.push_front (queue);
+	if (queue->isInvalid ()) {
 
-	  } else if (queue->isEmpty ()) {
-	      _XXX("RC_SPEW") <<"Empty Queue\n" << endl;
+	    _XXX("RC_SPEW") << "Invalid Queue\n" << endl;;
+	    _invalid_queues.push_front (queue);
+
+	} else if (queue->isEmpty ()) {
+
+	    _XXX("RC_SPEW") <<"Empty Queue\n" << endl;
 
 	    _complete_queues.push_front (queue);
 
@@ -519,7 +521,8 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 			<< " / Prun " << (long) _pruned_queues.size()
 			<< " / Defr " << (long) _deferred_queues.size()
 			<< " / Invl " << (long) _invalid_queues.size() << endl;
-    return;
+
+    return _best_context && _best_context->isValid();
 }
 
 ///////////////////////////////////////////////////////////////////

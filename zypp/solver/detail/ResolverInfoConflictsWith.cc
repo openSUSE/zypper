@@ -92,7 +92,7 @@ namespace zypp
       ResolverInfo_Ptr
       ResolverInfoConflictsWith::copy (void) const
       {
-          ResolverInfoConflictsWith_Ptr cpy = new ResolverInfoConflictsWith(resItem(), NULL);
+          ResolverInfoConflictsWith_Ptr cpy = new ResolverInfoConflictsWith(affected(), NULL);
       
           ((ResolverInfoContainer_Ptr)cpy)->copy (this);
       

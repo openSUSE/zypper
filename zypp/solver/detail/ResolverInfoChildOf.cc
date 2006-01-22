@@ -95,7 +95,7 @@ namespace zypp
       ResolverInfo_Ptr
       ResolverInfoChildOf::copy (void) const
       {
-          ResolverInfoChildOf_Ptr cpy = new ResolverInfoChildOf(resItem(), NULL);
+          ResolverInfoChildOf_Ptr cpy = new ResolverInfoChildOf(affected(), NULL);
       
           ((ResolverInfoContainer_Ptr)cpy)->copy (this);
       

@@ -180,30 +180,24 @@ no_installable_providers_info_cb (ResItem_constPtr resItem, const Capability & c
 
     status = info->context->getStatus (resItem);
 
+    ResolverInfoMisc_Ptr misc_info;
+
     if (resItem_status_is_to_be_uninstalled (status)) {
-	// Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
-	msg_str = str::form (_("%s provides %s, but is scheduled to be uninstalled."),
-			     resItem->name().c_str(),
-			     cap.asString().c_str());
+	misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALL_PROVIDER, info->resItem, RESOLVER_INFO_PRIORITY_VERBOSE, cap);
+	misc_info->setOtherResItem (resItem);
     } else if (info->context->isParallelInstall (resItem)) {
-	// Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
-	msg_str = str::form (_("%s provides %s, but another version of that resItem is already installed."),
-			     resItem->name().c_str(),
-			     cap.asString().c_str());
+	misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_PARALLEL_PROVIDER, info->resItem, RESOLVER_INFO_PRIORITY_VERBOSE, cap);
+	misc_info->setOtherResItem (resItem);
     } else if (! info->context->resItemIsPossible (resItem)) {
-	// Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
-	msg_str = str::form (_("%s provides %s, but it is uninstallable.  Try installing it on its own for more details."),
-			     resItem->name().c_str(),
-			     cap.asString().c_str());
+	misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NOT_INSTALLABLE_PROVIDER, info->resItem, RESOLVER_INFO_PRIORITY_VERBOSE, cap);
+	misc_info->setOtherResItem (resItem);
     } else if (info->world->resItemIsLocked (resItem)) {
-	// Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
-	msg_str = str::form (_("%s provides %s, but it is locked."),
-			     resItem->name().c_str(),
-			     cap.asString().c_str());
+	misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_LOCKED_PROVIDER, info->resItem, RESOLVER_INFO_PRIORITY_VERBOSE, cap);
+	misc_info->setOtherResItem (resItem);
     }
 
-    if (!msg_str.empty()) {
-	info->context->addInfoString (info->resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg_str);
+    if (misc_info != NULL) {
+	info->context->addInfo (misc_info);
     }
 
     return true;
@@ -253,8 +247,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
     _DBG("RC_SPEW") << "QueueItemRequire::process(" << this->asString() << ")" << endl;
 
     if (context->requirementIsMet (_dep, _is_child)) {
-	      _DBG("RC_SPEW") <<  "requirement is already met in current context" << endl;
-//    rc_queue_item_free (item);
+	_DBG("RC_SPEW") <<  "requirement is already met in current context" << endl;
 	return true;
     }
 
@@ -281,7 +274,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
     if (num_providers == 0) {
 
-	      _DBG("RC_SPEW") << "Unfulfilled requirement, try different solution" << endl;
+	_DBG("RC_SPEW") << "Unfulfilled requirement, try different solution" << endl;
 
 	QueueItemUninstall_Ptr uninstall_item = NULL;
 	QueueItemBranch_Ptr branch_item = NULL;
@@ -291,30 +284,10 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	    ResolverInfo_Ptr err_info;
 
 	    if (_remove_only) {
-		if (_requiring_resItem != NULL) {
-		    // Translator: 1.%s = dependency ; 2.%s = name of package,patch....
-		    msg = str::form (_("There are no alternative installed providers of %s for %s"),
-				     _dep.asString().c_str(),
-				     _requiring_resItem->asString().c_str());
-		} else {
-		    // Translator: %s = dependency 		    
-		    msg = str::form (_("There are no alternative installed providers of %s"),
-				     _dep.asString().c_str());
-		}
+		err_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER, _requiring_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, _dep);
 	    } else {
-		if (_requiring_resItem != NULL) {
-		    // Translator: 1.%s = dependency ; 2.%s = name of package,patch....		    
-		    msg = str::form (_("There are no installable providers of %s for %s"),
-				     _dep.asString().c_str(),
-				     _requiring_resItem->asString().c_str());
-		} else {
-		    // Translator: %s = dependency		    
-		    msg = str::form (_("There are no installable providers of %s"),
-				     _dep.asString().c_str());
-		}		
+		err_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NO_PROVIDER, _requiring_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, _dep);
 	    }
-
-	    err_info = new ResolverInfoMisc (_requiring_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
 
 	    context->addInfo (err_info);
 
@@ -383,17 +356,10 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		&& branch_item->isEmpty ()) {
 
 		for (CResItemList::const_iterator iter = upgrade_list.begin(); iter != upgrade_list.end(); iter++) {
-		    string str;
-		    string p1, p2;
-
-		    p1 = _requiring_resItem->asString();
-		    p2 = (*iter)->asString();
-		    // Translator: all.%s = name of package,patch,...
-		    str = str::form (_("Upgrade to %s to avoid removing %s is not possible."),
-				     p2.c_str(),
-				     p1.c_str());
-		    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (NULL, RESOLVER_INFO_PRIORITY_VERBOSE, str);
-		    misc_info->addRelatedResItem (_requiring_resItem);
+		    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NO_UPGRADE, _requiring_resItem, RESOLVER_INFO_PRIORITY_VERBOSE);
+		    if (iter == upgrade_list.begin()) {
+			misc_info->setOtherResItem (*iter);
+		    }
 		    misc_info->addRelatedResItem (*iter);
 		    context->addInfo (misc_info);
 
@@ -422,7 +388,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	if (explore_uninstall_branch && _requiring_resItem) {
 	    ResolverInfo_Ptr log_info;
-	    uninstall_item = new QueueItemUninstall (world(),_requiring_resItem, "unsatisfied requirements");
+	    uninstall_item = new QueueItemUninstall (world(), _requiring_resItem, QueueItemUninstall::UNSATISFIED);
 	    uninstall_item->setDependency (_dep);
 
 	    if (_lost_resItem) {
@@ -443,16 +409,14 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	    new_items.push_front (branch_item);
 	} else {
 	    // We can't do anything to resolve the missing requirement, so we fail.
-	    // Translator: %s = dependency
-	    string msg = str::form (_("Can't satisfy requirement '%s'"),
-				    _dep.asString().c_str());
-	    
-	    context->addErrorString (NULL, msg);	    
+
+	    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CANT_SATISFY, _requiring_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, _dep);
+	    context->addError (misc_info);	    
 	}
 
     } else if (num_providers == 1) {
 
-	      _DBG("RC_SPEW") << "Found exactly one resolvable, installing it." << endl;
+	_DBG("RC_SPEW") << "Found exactly one resolvable, installing it." << endl;
 
 	QueueItemInstall_Ptr install_item = new QueueItemInstall (world(), info.providers.front());
 	install_item->addDependency (_dep);
@@ -498,8 +462,8 @@ QueueItem_Ptr
 QueueItemRequire::copy (void) const
 {
     QueueItemRequire_Ptr new_require = new QueueItemRequire (world(), _dep);
-#warning wrong casts
-    ((QueueItem_Ptr)new_require)->copy((QueueItem_constPtr)this);
+
+    new_require->QueueItem::copy(this);
 
     new_require->_requiring_resItem = _requiring_resItem;
     new_require->_upgraded_resItem  = _upgraded_resItem;

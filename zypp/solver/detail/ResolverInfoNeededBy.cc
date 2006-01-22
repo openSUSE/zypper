@@ -91,7 +91,7 @@ namespace zypp
       ResolverInfo_Ptr
       ResolverInfoNeededBy::copy (void) const
       {
-          ResolverInfoNeededBy_Ptr cpy = new ResolverInfoNeededBy(resItem());
+          ResolverInfoNeededBy_Ptr cpy = new ResolverInfoNeededBy(affected());
       
           ((ResolverInfoContainer_Ptr)cpy)->copy (this);
       

@@ -42,36 +42,47 @@ namespace zypp
       
       class ResolverInfoMisc : public ResolverInfoContainer {
       
-          
+	private:
+
+	  Capability _capability;			// capability leading to this info
+
+	  ResItem_constPtr _other_resolvable;
+	  Capability _other_capability;
+
+	  std::string _action;
+	  std::string _trigger;
       
-        private:
+	public:
       
-          std::string _msg;
-          std::string _action;
-          std::string _trigger;
+	  ResolverInfoMisc (ResolverInfoType detailedtype, ResItem_constPtr affected, int priority, const Capability & capability = Capability());
+	  virtual ~ResolverInfoMisc();
       
-        public:
+	  // ---------------------------------- I/O
       
-          ResolverInfoMisc (ResItem_constPtr resItem, int priority, const std::string & msg);
-          virtual ~ResolverInfoMisc();
+	  static std::string toString (const ResolverInfoMisc & context);
+	  virtual std::ostream & dumpOn(std::ostream & str ) const;
+	  friend std::ostream& operator<<(std::ostream&, const ResolverInfoMisc & context);
+	  std::string asString (void ) const;
       
-          // ---------------------------------- I/O
+	  // ---------------------------------- accessors
+
+	  std::string message (void) const;
+	  std::string action (void) const { return _action; }
+	  std::string trigger (void) const { return _trigger; }
+
+	  ResItem_constPtr other (void) const { return _other_resolvable; }
+	  const Capability other_capability (void) const { return _other_capability; }
+
+	  // ---------------------------------- methods
       
-          static std::string toString (const ResolverInfoMisc & context);
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
-          friend std::ostream& operator<<(std::ostream&, const ResolverInfoMisc & context);
-          std::string asString (void ) const;
+	  virtual bool merge (ResolverInfo_Ptr to_be_merged);
+	  virtual ResolverInfo_Ptr copy (void) const;
       
-          // ---------------------------------- accessors
-      
-          // ---------------------------------- methods
-      
-          virtual bool merge (ResolverInfo_Ptr to_be_merged);
-          virtual ResolverInfo_Ptr copy (void) const;
-      
-          void addAction (const std::string & action_msg);
-          void addTrigger (const std::string & trigger_msg);
-      
+	  void addAction (const std::string & action_msg);
+	  void addTrigger (const std::string & trigger_msg);
+
+	  void setOtherResItem (ResItem_constPtr other);
+	  void setOtherCapability (const Capability & capability);
       };
 
       ///////////////////////////////////////////////////////////////////

@@ -26,6 +26,7 @@
 #include "zypp/solver/detail/QueueItemRequire.h"
 #include "zypp/solver/detail/QueueItem.h"
 #include "zypp/solver/detail/ResolverContext.h"
+#include "zypp/solver/detail/ResolverInfoMisc.h"
 #include "zypp/solver/detail/ResolverInfoMissingReq.h"
 #include "zypp/CapSet.h"
 #include "zypp/base/Logger.h"
@@ -61,7 +62,17 @@ QueueItemUninstall::toString ( const QueueItemUninstall & item)
     string ret = "[Uninstall: ";
 
     ret += item._resItem->asString();
-    ret += " ("; ret += item._reason; ret += ")";
+    ret += " (";
+    switch (item._reason) {
+	case CONFLICT:	  ret += "conflicts"; break;
+	case OBSOLETE:	  ret += "obsoletes"; break;
+	case UNSATISFIED: ret += "unsatisfied dependency"; break;
+	case BACKOUT:	  ret += "uninstallable"; break;
+	case UPGRADE:	  ret += "upgrade"; break;
+	case DUPLICATE:	  ret += "duplicate"; break;
+	case EXPLICIT:	  ret += "explicit"; break;
+    }
+    ret += ")";
     if (item._dep_leading_to_uninstall != Capability()) {
 	ret += ", Triggered By ";
 	ret += item._dep_leading_to_uninstall.asString();
@@ -97,7 +108,7 @@ operator<<( ostream& os, const QueueItemUninstall & item)
 
 //---------------------------------------------------------------------------
 
-QueueItemUninstall::QueueItemUninstall (World_Ptr world, ResItem_constPtr resItem, const std::string & reason)
+QueueItemUninstall::QueueItemUninstall (World_Ptr world, ResItem_constPtr resItem, UninstallReason reason)
     : QueueItem (QUEUE_ITEM_TYPE_UNINSTALL, world)
     , _resItem (resItem)
     , _reason (reason)
@@ -134,25 +145,29 @@ QueueItemUninstall::setUnlink ()
 
 typedef struct {
     ResolverContext_Ptr context;
+    Capability capability;
     bool cancel_unlink;
 } UnlinkCheckInfo;
 
+// A resolvable providing dep is to be uninstalled, resItem requires dep
+//  check if we have to cancel the uninstallation
 
 static bool
 unlink_check_cb (ResItem_constPtr resItem, const Capability & dep, void *data)
 {
     UnlinkCheckInfo *info = (UnlinkCheckInfo *)data;
 
-    if (info->cancel_unlink)
+    if (info->cancel_unlink)				// already cancelled
 	return true;
 
-    if (! info->context->resItemIsPresent (resItem))
+    if (! info->context->resItemIsPresent (resItem))	// resItem is not installed
 	return true;
 
-    if (info->context->requirementIsMet (dep))
+    if (info->context->requirementIsMet (dep))		// another resolvable provided dep
 	return true;
 
-    info->cancel_unlink = true;
+    info->capability = dep;
+    info->cancel_unlink = true;				// cancel, as this would break dependencies
 
     return true;
 }
@@ -174,13 +189,13 @@ uninstall_process_cb (ResItem_constPtr resItem, const Capability & dep, void *da
 {
     UninstallProcessInfo *info = (UninstallProcessInfo *)data;
 
-    if (! info->context->resItemIsPresent (resItem))				// its not installed -> dont care
+    if (! info->context->resItemIsPresent (resItem))					// its not installed -> dont care
 	return true;
 
-    if (info->context->requirementIsMet (dep, false))				// its provided by another installed resolvable -> dont care
+    if (info->context->requirementIsMet (dep, false))					// its provided by another installed resolvable -> dont care
 	return true;
 
-    if (resItem_status_is_satisfied (info->context->getStatus (resItem))) {	// it is just satisfied, check freshens
+    if (resItem_status_is_satisfied (info->context->getStatus (resItem))) {		// it is just satisfied, check freshens
 	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (info->world, resItem);	// re-check if its still needed
 	info->qil->push_front (establish_item);
 	return true;
@@ -223,12 +238,12 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
        problem. */
 
     if (_unlink) {
-	bool unlink_cancelled = false;
-
 	/* If the resItem is to-be-installed, obviously it is being use! */
 	if (status == RESOLVABLE_STATUS_TO_BE_INSTALLED) {
 
-	    unlink_cancelled = true;
+	    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALL_TO_BE_INSTALLED, _resItem, RESOLVER_INFO_PRIORITY_VERBOSE);
+	    context->addInfo (misc_info);
+	    goto finished;
 
 	} else if (status == RESOLVABLE_STATUS_INSTALLED) {
 	    UnlinkCheckInfo info;
@@ -240,6 +255,9 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    info.context = context;
 	    info.cancel_unlink = false;
 
+	    // look at the provides of the to-be-uninstalled resolvable and
+	    //   check if anyone (installed) needs it
+
 	    CapSet provides = _resItem->provides();
 	    for (CapSet::const_iterator iter = provides.begin(); iter != provides.end() && ! info.cancel_unlink; iter++) {
 		world()->foreachRequiringResItem (*iter, unlink_check_cb, &info);
@@ -248,17 +266,13 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    /* Set the status back to normal. */
 	    context->setStatus (_resItem, status);
 
-	    if (info.cancel_unlink)
-		unlink_cancelled = true;
+	    if (info.cancel_unlink) {
+		ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALL_INSTALLED, _resItem, RESOLVER_INFO_PRIORITY_VERBOSE);
+		context->addInfo (misc_info);
+		goto finished;
+	    }
 	}
 
-	if (unlink_cancelled) {
-	    // Translator: %s = name of package,patch,...
-	    string msg = str::form (_("%s is required by other installed resolvable, so it won't be unlinked."),
-				    pkg_str.c_str());
-	    context->addInfoString (_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
-	    goto finished;
-	}
     }
 
     context->uninstallResItem (_resItem, _upgraded_to != NULL, _due_to_obsolete, _unlink);
@@ -267,16 +281,15 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	if (! _explicitly_requested
 	    && world()->resItemIsLocked (_resItem)) {
-	    // Translator: %s = name of package,patch,...
-	    string msg = str::form (_("%s is locked, and cannot be uninstalled."),
-				    pkg_str.c_str());
-	    context->addErrorString (_resItem, msg);
+
+	    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALL_LOCKED, _resItem, RESOLVER_INFO_PRIORITY_VERBOSE);
+	    context->addError (misc_info);
 	    goto finished;
 	}
 
 	this->logInfo (context);
 
-	if (_dep_leading_to_uninstall != Capability()
+	if (_dep_leading_to_uninstall != Capability()		// non-empty _dep_leading_to_uninstall
 	    && !_due_to_conflict
 	    && !_due_to_obsolete)
 	{
@@ -322,7 +335,7 @@ QueueItem_Ptr
 QueueItemUninstall::copy (void) const
 {
     QueueItemUninstall_Ptr new_uninstall = new QueueItemUninstall (world(), _resItem, _reason);
-    ((QueueItem_Ptr)new_uninstall)->copy((QueueItem_constPtr)this);
+    new_uninstall->QueueItem::copy(this);
 
 
     new_uninstall->_resItem                = _resItem;

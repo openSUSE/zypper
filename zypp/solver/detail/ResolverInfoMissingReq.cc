@@ -92,7 +92,7 @@ namespace zypp
       ResolverInfo_Ptr
       ResolverInfoMissingReq::copy (void) const
       {
-          ResolverInfoMissingReq_Ptr cpy = new ResolverInfoMissingReq(resItem(), _missing_req);
+          ResolverInfoMissingReq_Ptr cpy = new ResolverInfoMissingReq(affected(), _missing_req);
       
           ((ResolverInfo_Ptr)cpy)->copy (this);
       

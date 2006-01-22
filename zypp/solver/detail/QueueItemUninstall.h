@@ -47,52 +47,63 @@ namespace zypp
       //	CLASS NAME : QueueItemUninstall
 
       class QueueItemUninstall : public QueueItem {
+	public:
+	  typedef enum {
+	    CONFLICT,				// conflicts [dep]
+	    OBSOLETE,				// obsolets [dep]
+	    UNSATISFIED,			// unsatisfied dep, must be unistalled since required dep isnt provided anymore
+	    BACKOUT,				// back out during verify
+	    UPGRADE,				// its being upgraded, so the original get uninstalled, find out if this breaks something
+	    DUPLICATE,				// duplicate install
+	    EXPLICIT,				// user request
+	  } UninstallReason;
 
 
-        private:
-          ResItem_constPtr _resItem;
-          const std::string _reason;
-          Capability _dep_leading_to_uninstall;
-          ResItem_constPtr _upgraded_to;
+	private:
+	  ResItem_constPtr _resItem;
+	  UninstallReason _reason;
+	  Capability _dep_leading_to_uninstall;
+	  ResItem_constPtr _upgraded_to;
 
-          bool _explicitly_requested;
-          bool _remove_only;
-          bool _due_to_conflict;
-          bool _due_to_obsolete;
-          bool _unlink;
+	  bool _explicitly_requested;
+	  bool _remove_only;
+	  bool _due_to_conflict;
+	  bool _due_to_obsolete;
+	  bool _unlink;
 
-        public:
+	public:
 
-          QueueItemUninstall (World_Ptr world, ResItem_constPtr resItem, const std::string & reason);
-          virtual ~QueueItemUninstall();
+	  QueueItemUninstall (World_Ptr world, ResItem_constPtr resItem, UninstallReason reason);
+	  virtual ~QueueItemUninstall();
 
-          // ---------------------------------- I/O
+	  // ---------------------------------- I/O
 
-          static std::string toString (const QueueItemUninstall & item);
+	  static std::string toString (const QueueItemUninstall & item);
 
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
+	  virtual std::ostream & dumpOn(std::ostream & str ) const;
 
-          friend std::ostream& operator<<(std::ostream&, const QueueItemUninstall & item);
+	  friend std::ostream& operator<<(std::ostream&, const QueueItemUninstall & item);
 
-          std::string asString (void ) const;
+	  std::string asString (void ) const;
 
-          // ---------------------------------- accessors
+	  // ---------------------------------- accessors
 
-          void setDependency (const Capability & dep) { _dep_leading_to_uninstall = dep; }
-          void setExplicitlyRequested (void) { _explicitly_requested = true; }
-          void setRemoveOnly (void) { _remove_only = true; }
-          void setUpgradedTo (ResItem_constPtr resItem) { _upgraded_to = resItem; }
-          void setDueToConflict (void) { _due_to_conflict = true; }
-          void setDueToObsolete (void) { _due_to_obsolete = true; }
-          void setUnlink (void);
+	  UninstallReason reason (void) const { return _reason; }
+	  void setDependency (const Capability & dep) { _dep_leading_to_uninstall = dep; }
+	  void setExplicitlyRequested (void) { _explicitly_requested = true; }
+	  void setRemoveOnly (void) { _remove_only = true; }
+	  void setUpgradedTo (ResItem_constPtr resItem) { _upgraded_to = resItem; }
+	  void setDueToConflict (void) { _due_to_conflict = true; }
+	  void setDueToObsolete (void) { _due_to_obsolete = true; }
+	  void setUnlink (void);
 
-          // ---------------------------------- methods
+	  // ---------------------------------- methods
 
-          virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
-          virtual QueueItem_Ptr copy (void) const;
-          virtual int cmp (QueueItem_constPtr item) const;
-          virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
-          virtual bool isSatisfied (ResolverContext_Ptr context) const { return false; }
+	  virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
+	  virtual QueueItem_Ptr copy (void) const;
+	  virtual int cmp (QueueItem_constPtr item) const;
+	  virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
+	  virtual bool isSatisfied (ResolverContext_Ptr context) const { return false; }
 
       };
 

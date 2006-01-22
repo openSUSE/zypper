@@ -91,7 +91,7 @@ namespace zypp
       ResolverInfo_Ptr
       ResolverInfoObsoletes::copy (void) const
       {
-          ResolverInfoObsoletes_Ptr cpy = new ResolverInfoObsoletes(resItem(), NULL);
+          ResolverInfoObsoletes_Ptr cpy = new ResolverInfoObsoletes(affected(), NULL);
       
           ((ResolverInfoContainer_Ptr)cpy)->copy (this);
       

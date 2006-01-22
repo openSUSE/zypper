@@ -181,8 +181,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     int incompleteCount (void);
 
     void addInfo (ResolverInfo_Ptr info);
-    void addInfoString (ResItem_constPtr resItem, int priority, std::string str);
-    void addErrorString (ResItem_constPtr resItem, std::string str);
+    void addError (ResolverInfo_Ptr info);
 
     void foreachInfo (ResItem_Ptr resItem, int priority, ResolverInfoFn fn, void *data);
     InfoList getInfo (void);

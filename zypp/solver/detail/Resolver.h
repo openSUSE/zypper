@@ -27,11 +27,12 @@
 #include <string>
 
 #include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/solver/detail/ResolverPtr.h"
 #include "zypp/solver/detail/ResolverQueue.h"
+#include "zypp/solver/detail/ResolverProblemPtr.h"
+#include "zypp/solver/detail/ProblemSolutionPtr.h"
 #include "zypp/solver/temporary/ResItem.h"
 #include "zypp/solver/temporary/Channel.h"
 #include "zypp/CapSet.h"
@@ -134,7 +135,10 @@ namespace zypp
 
           void verifySystem (void);
           void establishState (const ResolverContext_Ptr context = NULL);
-          void resolveDependencies (const ResolverContext_Ptr context = NULL);
+          bool resolveDependencies (const ResolverContext_Ptr context = NULL);
+
+	  ResolverProblemList problems (void) const;
+	  void applySolutions (const ProblemSolutionList & solutions);
 
 	  void reset (void);
       };

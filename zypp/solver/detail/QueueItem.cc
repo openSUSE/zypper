@@ -99,7 +99,7 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       void
-      QueueItem::copy (QueueItem_constPtr from)
+      QueueItem::copy (const QueueItem *from)
       {
           _priority = from->_priority;
           _size = from->_size;

@@ -190,10 +190,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	    _DBG("RC_SPEW") << "upgrades equal resItem, skipping" << endl;
 
-	    // Translator: %s = name of package,patch,...
-	    msg = str::form (_("Skipping %s: already installed"),
-			     res_name.c_str());
-	    info = new ResolverInfoMisc (_resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
+	    info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_SKIPPING, _resItem, RESOLVER_INFO_PRIORITY_VERBOSE);
 	    context->addInfo (info);
 	    goto finished;
 	}
@@ -229,7 +226,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    QueueItemUninstall_Ptr uninstall_item;
 
 	    for (CResItemList::const_iterator iter = _needed_by.begin(); iter != _needed_by.end(); iter++) {
-		uninstall_item = new QueueItemUninstall (world(), *iter, "uninstallable resolvable");
+		uninstall_item = new QueueItemUninstall (world(), *iter, QueueItemUninstall::BACKOUT);
 		qil.push_front (uninstall_item);
 	    }
 
@@ -253,7 +250,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	    context->upgradeResItem (resItem, _upgrades, context->verifying() /* is_soft */, _other_penalty);
 
-	    uninstall_item = new QueueItemUninstall (world(), _upgrades, "upgrade");
+	    uninstall_item = new QueueItemUninstall (world(), _upgrades, QueueItemUninstall::UPGRADE);
 	    uninstall_item->setUpgradedTo (resItem);
 
 	    if (_explicitly_requested)
@@ -281,23 +278,23 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    goto finished;
 	}
 
+	{	// just a block for local initializers, the goto above makes this necessary
+
+	ResolverInfoMisc_Ptr misc_info;
+
 	if (_upgrades != NULL) {
-	    // Translator: 1.%s and 2.%s = name of package
-	    msg = str::form (_("Upgrading %s => %s"),
-			     _upgrades->asString().c_str(),
-			     res_name.c_str());
+	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UPDATING, resItem, RESOLVER_INFO_PRIORITY_VERBOSE);
+	    misc_info->setOtherResItem (_upgrades);
+cerr << "Updating " << _upgrades->asString() << " to " << resItem->asString() << endl;
 	} else {
-	    // Translator: %s = packagename
-	    msg = str::form (_("Installing %s"),
-			     res_name.c_str());
+	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INSTALLING, resItem, RESOLVER_INFO_PRIORITY_VERBOSE);
 	}
 
-	context->addInfoString (resItem, RESOLVER_INFO_PRIORITY_VERBOSE, msg);
-
+	context->addInfo (misc_info);
 	logInfo (context);
 
 	/* Construct require items for each of the resItem's requires that is still unsatisfied. */
-	{
+
 	CapSet deps;
 
 	deps = resItem->requires();
@@ -359,7 +356,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	    _DBG("RC_SPEW") << "because: '" << conflicting_resItem->asString(true) << "'" << endl;
 
-	    uninstall_item = new QueueItemUninstall (world(), conflicting_resItem, "conflict");
+	    uninstall_item = new QueueItemUninstall (world(), conflicting_resItem, QueueItemUninstall::CONFLICT);
 	    uninstall_item->setDueToConflict ();
 	    log_info = new ResolverInfoConflictsWith (conflicting_resItem, resItem);
 	    uninstall_item->addInfo (log_info);
@@ -386,7 +383,7 @@ QueueItem_Ptr
 QueueItemInstall::copy (void) const
 {
 	QueueItemInstall_Ptr new_install = new QueueItemInstall (world(), _resItem);
-	((QueueItem_Ptr)new_install)->copy((QueueItem_constPtr)this);
+	new_install->QueueItem::copy(this);
 
 	new_install->_upgrades = _upgrades;
 	new_install->_deps_satisfied_by_this_install = CapSet(_deps_satisfied_by_this_install.begin(), _deps_satisfied_by_this_install.end());

@@ -107,7 +107,7 @@ namespace zypp
 
           // ---------------------------------- methods
 
-          void copy (QueueItem_constPtr from);
+          void copy (const QueueItem *from);
 
           bool isBranch (void) const { return _type == QUEUE_ITEM_TYPE_BRANCH; }
           bool isConflict (void) const { return _type == QUEUE_ITEM_TYPE_CONFLICT; }
