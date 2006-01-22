@@ -20,7 +20,7 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  NVRA::NVRA( Resolvable::constPtr res_r );
+  NVRA::NVRA( Resolvable::constPtr res_r )
   {
     if ( res_r )
       {
