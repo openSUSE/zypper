@@ -11,10 +11,20 @@
 */
 
 #include "zypp/NVRAD.h"
+#include "zypp/Resolvable.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  NVRAD::NVRAD( Resolvable::constPtr res_r )
+  {
+    if ( res_r )
+      {
+          *this = NVRAD( res_r->name(), res_r->edition(), res_r->arch(),
+                         res_r->deps() );
+      }
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

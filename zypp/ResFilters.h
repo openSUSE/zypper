@@ -235,12 +235,17 @@ namespace zypp
       ByKind( const Resolvable::Kind & kind_r )
       : _kind( kind_r )
       {}
+
       bool operator()( Resolvable::Ptr p ) const
       {
         return p->kind() == _kind;
       }
       Resolvable::Kind _kind;
     };
+
+    template<class _Res>
+      ByKind byKind()
+      { return ByKind( ResTraits<_Res>::kind ); }
 
     struct ByName
     {

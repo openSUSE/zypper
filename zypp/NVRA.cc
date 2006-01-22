@@ -10,9 +10,9 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
 
 #include "zypp/NVRA.h"
+#include "zypp/Resolvable.h"
 
 using std::endl;
 
@@ -20,11 +20,13 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : NVRA
-  //
-  ///////////////////////////////////////////////////////////////////
+  NVRA::NVRA( Resolvable::constPtr res_r );
+  {
+    if ( res_r )
+      {
+        *this = NVRA( res_r->name(), res_r->edition(), res_r->arch() );
+      }
+  }
 
   /******************************************************************
   **

@@ -41,20 +41,23 @@ namespace zypp
     */
     /*@{*/
 
-    /** */
+    /** \class scoped_ptr scoped_ptr */
     using boost::scoped_ptr;
 
-    /** */
+    /** \class shared_ptr */
     using boost::shared_ptr;
 
-    /** */
+    /** \class weak_ptr */
     using boost::weak_ptr;
 
-    /** Use boost::intrusive_ptr as Ptr type */
+    /** \class intrusive_ptr */
     using boost::intrusive_ptr;
 
+    /**  */
     using boost::static_pointer_cast;
+    /**  */
     using boost::const_pointer_cast;
+    /**  */
     using boost::dynamic_pointer_cast;
 
     ///////////////////////////////////////////////////////////////////

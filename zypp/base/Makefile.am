@@ -15,6 +15,7 @@ baseinclude_HEADERS =	\
 	Exception.h	\
 	Gettext.h	\
 	IOStream.h	\
+	Iterator.h	\
 	NonCopyable.h	\
 	PtrTypes.h	\
 	ReferenceCounted.h	\

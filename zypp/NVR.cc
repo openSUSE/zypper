@@ -12,10 +12,19 @@
 #include <iostream>
 
 #include "zypp/NVR.h"
+#include "zypp/Resolvable.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  NVR::NVR( Resolvable::constPtr res_r );
+  {
+    if ( res_r )
+      {
+        *this = NVR( res_r->name(), res_r->edition() );
+      }
+  }
 
   /******************************************************************
   **

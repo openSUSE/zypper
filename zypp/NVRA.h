@@ -49,6 +49,10 @@ namespace zypp
     , arch( arch_r )
     {}
 
+    /** Ctor from Resolvable::constPtr */
+    explicit
+    NVRA( ResTraits<Resolvable>::constPtrType res_r );
+
     /**  */
     Arch arch;
   };

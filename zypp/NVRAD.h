@@ -49,7 +49,7 @@ namespace zypp
     , Dependencies( deps_r )
     {}
 
-    /** Ctor */
+    /** Ctor from Resolvable::constPtr */
     explicit
     NVRAD( const NVR & nvr_r,
            const Arch & arch_r = Arch(),
@@ -57,6 +57,10 @@ namespace zypp
     : NVRA( nvr_r, arch_r )
     , Dependencies( deps_r )
     {}
+
+    /** Ctor */
+    explicit
+    NVRAD( Resolvable::constPtr res_r );
   };
   ///////////////////////////////////////////////////////////////////
 

@@ -4,7 +4,12 @@
 # Do NOT list 'devel' in subdirs. It's developers playgound
 # and must not prevent anything from building.
 
-SUBDIRS =	zypp testsuite zmd
+if BUILD_ZMD
+  SUB_ZMD=zmd
+else
+  SUB_ZMD=
+endif
+SUBDIRS =	zypp testsuite $(SUB_ZMD)
 
 ## ##################################################
 

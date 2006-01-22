@@ -16,6 +16,7 @@
 #include <string>
 
 #include "zypp/Edition.h"
+#include "zypp/ResTraits.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -39,6 +40,10 @@ namespace zypp
     : name( name_r )
     , edition( edition_r )
     {}
+
+    /** Ctor from Resolvable::constPtr */
+    explicit
+    NVR( ResTraits<Resolvable>::constPtrType res_r );
 
     /**  */
     std::string name;

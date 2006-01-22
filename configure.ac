@@ -109,11 +109,23 @@ if test -z "$XGETTEXT" ; then
     AC_MSG_ERROR(xgettext is missing; please install gettext-devel.)
 fi
 
-
 AC_PATH_PROG(MYRUNTEST, runtest)
 if test -z "$MYRUNTEST" ; then
     AC_MSG_ERROR(runtest is missing; please install dejagnu.)
 fi
+
+dnl ==================================================
+dnl
+dnl Switches during develpoment only. They disable code using
+dnl certain libraries (e.g. hal, sqlite) which may be temporarily
+dnl unavailable or broken. This is just to allow building and testing
+dnl the remaining parts of zypp.
+dnl
+AC_ARG_ENABLE(faked-hal, [  --enable-faked-hal   do not use libhal (DEVELOPMENT ONLY)],
+  devel_faked_hal=yes, devel_faked_hal=no)
+
+AC_ARG_ENABLE(faked-zmd, [  --enable-faked-zmd   do not build zmd (DEVELOPMENT ONLY)],
+  devel_faked_zmd=yes, devel_faked_zmd=no)
 
 dnl ==================================================
 dnl checks for libraries
@@ -125,16 +137,17 @@ AC_CHECK_LIB([xml2], [xmlNewTextReader],
         AC_MSG_ERROR([libxml2 not found. please install libxml2-devel]))
 
 dnl sqlite
-PKG_CHECK_MODULES(SQLITE, sqlite3, pkg_sqlite=yes, pkg_sqlite=no)
-if test ! -f $SQLITE_LIBS/libsqlite3.so; then
-  echo
-  AC_MSG_ERROR([Could not find sqlite3 library, please install sqlite-devel])
+if test "x$devel_faked_zmd" = "xyes"; then
+ AM_CONDITIONAL(BUILD_ZMD, false)
+else
+ AM_CONDITIONAL(BUILD_ZMD, true)
+ PKG_CHECK_MODULES(SQLITE, sqlite3, pkg_sqlite=yes, pkg_sqlite=no)
+ if test ! -f $SQLITE_LIBS/libsqlite3.so; then
+   echo
+   AC_MSG_ERROR([Could not find sqlite3 library, please install sqlite-devel])
+ fi
 fi
-
 dnl ==================================================
-
-AC_ARG_ENABLE(faked-hal, [  --devel-faked-hal   do not use libhal],
-  devel_faked_hal=yes, devel_faked_hal=no)
 
 if test "x$devel_faked_hal" = "xyes"; then
  HAL_CFLAGS=-DFAKE_HAL
@@ -235,4 +248,13 @@ Configuration:
 
   PREFIX:               ${prefix}
   LIBDIR:               ${libdir}
+
 "
+if test "x$devel_faked_hal" = "xyes"; then
+  echo "**WARNIG: 	faked_hal"
+fi
+if test "x$devel_faked_zmd" = "xyes"; then
+  echo "**WARNIG: 	faked_zmd"
+fi
+echo
+

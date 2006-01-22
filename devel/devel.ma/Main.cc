@@ -1,9 +1,14 @@
-#include <iostream>
 #include <ctime>
 
-#include <zypp/base/Logger.h>
-#include <zypp/base/Exception.h>
+#include <iostream>
+#include <list>
+#include <map>
+#include <set>
 
+#include <boost/iterator/filter_iterator.hpp>
+#include <boost/iterator/transform_iterator.hpp>
+
+#include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
 #include <zypp/base/Exception.h>
 #include <zypp/base/PtrTypes.h>
@@ -13,6 +18,15 @@
 #include <zypp/source/Builtin.h>
 #include <zypp/source/susetags/SuseTagsImpl.h>
 
+#include <zypp/Resolvable.h>
+#include <zypp/Package.h>
+#include <zypp/detail/PackageImpl.h>
+#include <zypp/Selection.h>
+#include <zypp/detail/SelectionImpl.h>
+#include <zypp/Patch.h>
+#include <zypp/detail/PatchImpl.h>
+
+
 #include <zypp/ResFilters.h>
 #include <zypp/ResStatus.h>
 #include <zypp/Bit.h>
@@ -21,92 +35,212 @@ using namespace std;
 using namespace zypp;
 
 ///////////////////////////////////////////////////////////////////
+#if 0
 namespace zypp
 {
-}
-///////////////////////////////////////////////////////////////////
-
-namespace zypp
-{
-  /** Status bitfield.
-   *
-   * \li \c StateField Whether the resolvable is installed
-   *        or uninstalled (available).
-   * \li \c FreshenField Freshen status computed by the solver.
-   * \li \c TransactField Wheter to transact this resolvable
-   *        (delete if installed install if uninstalled).
-   * \li \c TransactByField Who triggered the transaction. Transaction
-   *        bit may be reset by higer levels only.
-   * \li \c TransactDetailField Reason why the Resolvable transacts.
-   *        Splitted into \c InstallDetailValue and \c RemoveDetailValue
-   *        dependent on the kind of transaction.
+  /**
   */
-  class ResStatus
+
+  template<class _Res>
+    struct PoolItem
+    {
+      typedef ResTraits<_Res>::PtrType      Res_Ptr;
+      typedef ResTraits<_Res>::constPtrType Res_constPtr;
+
+      PoolItem( Res_Ptr res_r )
+      : _resolvable( res_r )
+      {}
+
+      ResStatus _status;
+      Res_Ptr   _resolvable;
+    };
+
+  /**
+  */
+  class Pool
   {
-    typedef char FieldType;
-    // Bit Ranges within FieldType defined by 1st bit and size:
-    typedef bit::Range<FieldType,0,                    1> StateField;
-    typedef bit::Range<FieldType,StateField::end,      2> FreshenField;
-    typedef bit::Range<FieldType,FreshenField::end,    1> TransactField;
-    typedef bit::Range<FieldType,TransactField::end,   2> TransactByField;
-    typedef bit::Range<FieldType,TransactByField::end, 2> TransactDetailField;
-    // enlarge FieldType if more bit's needed. It's not yet
-    // checked by the compiler.
   public:
+    typedef PoolItem                Item;
+    typedef PoolItem::Res           Res;
+    typedef PoolItem::Res_Ptr       Res_Ptr;
+    typedef PoolItem::Res_constPtr  Res_constPtr;
 
-    enum StateValue
-      {
-        UNINSTALLED = 0,
-        INSTALLED   = StateField::minval
-      };
-    enum FreshenValue
-      {
-        UNDETERMINED = 0,
-        NO_TRIGGER   = FreshenField::minval,
-        TRIGGER_OK,
-        TRIGGER_FAILED
-      };
-    enum TransactValue
-      {
-        KEEP_STATE = 0,
-        TRANSACT = TransactField::minval
-      };
-    enum TransactByValue
-      {
-        SOLVER = 0,
-        APPL_LOW  = TransactByField::minval,
-        APPL_HIGH,
-        USER
-      };
+    //private:
+    typedef ResObject                     ResT;
+    typedef ResTraits<ResT>::KindType     ResKindT;
+    typedef ResTraits<ResT>::PtrType      Res_Ptr;
+    typedef ResTraits<ResT>::constPtrType Res_constPtr;
 
-    enum InstallDetailValue
-      {
-        EXPLICIT_INSTALL = 0,
-        SOFT_REQUIRES = TransactDetailField::minval
-      };
-    enum RemoveDetailValue
-      {
-        EXPLICIT_REMOVE = 0,
-        DUE_TO_OBSOLETE = TransactDetailField::minval,
-        DUE_TO_UNLINK
-      };
+    typedef PoolItem<ResT>            ItemT;
+    typedef std::set<ItemT>           KindStoreT;
+    typedef std::map<ResKindT,ItemT>  StorageT;
 
   public:
 
-    ResStatus()
-    {}
+    template <class _InputIterator>
+      void addResolvables(  _InputIterator first_r, _InputIterator last_r )
 
-    // get/set functions, returnig \c true if requested status change
-    // was successfull (i.e. leading to the desired transaction).
-    // If a lower level (e.g.SOLVER) wants to transact, but it's
-    // already set by a higher level, \c true should be returned.
-    // Removing a higher levels transaction bit should fail.
 
-  private:
-    bit::BitField<FieldType> _bitfield;
+
+  //private:
+    /**  */
+    StorageT _store;
+    /**  */
+    StorageT & store()
+    { return _store; }
+    /**  */
+    const StorageT & store() const
+    { return _store; }
   };
 
 }
+///////////////////////////////////////////////////////////////////
+
+#endif
+///////////////////////////////////////////////////////////////////
+
+template<class _IntT>
+  struct Counter
+  {
+    Counter()
+    : _value( _IntT(0) )
+    {}
+
+    Counter( _IntT value_r )
+    : _value( _IntT( value_r ) )
+    {}
+
+    operator _IntT &()
+    { return _value; }
+
+    operator const _IntT &() const
+    { return _value; }
+
+    _IntT _value;
+  };
+
+
+template <class _Functor>
+  class RefFunctor
+  {
+  public:
+    typedef typename _Functor::argument_type argument_type;
+    typedef typename _Functor::result_type   result_type;
+
+    RefFunctor( _Functor & f_r )
+    : _f( f_r )
+    {}
+
+    result_type operator()( argument_type a1 ) const
+    {
+      return _f.operator()( a1 );
+    }
+
+  private:
+    _Functor & _f;
+  };
+
+template <class _Functor>
+  RefFunctor<_Functor> refFunctor( _Functor & f_r )
+  { return RefFunctor<_Functor>( f_r ); }
+
+///////////////////////////////////////////////////////////////////
+
+template <class _Impl>
+  typename _Impl::ResType::Ptr fakeResKind( Resolvable::Ptr from_r )
+  {
+    // fake different kind based on NVRAD
+    NVRAD nvrad( from_r );
+    shared_ptr<_Impl> impl;
+    return detail::makeResolvableAndImpl( nvrad, impl );
+  }
+
+///////////////////////////////////////////////////////////////////
+
+struct Rstats : public std::unary_function<Resolvable::constPtr, void>
+{
+  void operator()( Resolvable::constPtr ptr )
+  {
+    ++_total;
+    ++_perKind[ptr->kind()];
+  }
+
+  typedef std::map<ResolvableTraits::KindType,Counter<unsigned> > KindMap;
+  Counter<unsigned> _total;
+  KindMap           _perKind;
+};
+
+std::ostream & operator<<( std::ostream & str, const Rstats & obj )
+{
+  str << "Total: " << obj._total;
+  for( Rstats::KindMap::const_iterator it = obj._perKind.begin(); it != obj._perKind.end(); ++it )
+    {
+      str << endl << "  " << it->first << ":\t" << it->second;
+    }
+  return str;
+}
+
+///////////////////////////////////////////////////////////////////
+
+struct FakeConv : public std::unary_function<Resolvable::Ptr, void>
+{
+  void operator()( Resolvable::Ptr ptr )
+  {
+    if ( ptr->name()[0] == 's' )
+      {
+        ptr = fakeResKind<detail::SelectionImpl>( ptr );
+      }
+    else if ( ptr->name()[0] == 'p' )
+      {
+        ptr = fakeResKind<detail::PatchImpl>( ptr );
+      }
+    _store.insert( ptr );
+  }
+
+  std::set<Resolvable::Ptr> _store;
+
+  typedef std::set<Resolvable::Ptr>  ContainerT;
+  typedef ContainerT::iterator       IteratorT;
+  typedef ContainerT::const_iterator ConstIteratorT;
+
+  ConstIteratorT begin() const
+  { return _store.begin(); }
+
+  ConstIteratorT end() const
+  { return _store.end(); }
+
+
+  template<class _Filter>
+    boost::filter_iterator<_Filter, ConstIteratorT> begin() const
+    { return boost::make_filter_iterator( _Filter(), begin(), end() ); }
+
+  template<class _Filter>
+    boost::filter_iterator<_Filter, ConstIteratorT> begin( _Filter f ) const
+    { return boost::make_filter_iterator( f, begin(), end() ); }
+
+  template<class _Filter>
+    boost::filter_iterator<_Filter, ConstIteratorT> end() const
+    { return boost::make_filter_iterator( _Filter(), end(), end() ); }
+
+  template<class _Filter>
+    boost::filter_iterator<_Filter, ConstIteratorT> end( _Filter f ) const
+    { return boost::make_filter_iterator( f, end(), end() ); }
+
+};
+
+///////////////////////////////////////////////////////////////////
+
+struct xTrue
+{
+  bool operator()( Resolvable::Ptr p ) const
+  {
+    SEC << __FUNCTION__ << ' ' << p << endl;
+    return true;
+  }
+};
+
+
+
 
 /******************************************************************
 **
@@ -116,8 +250,34 @@ namespace zypp
 int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
+  string infile( "p" );
+  if (argc >= 2 )
+    infile = argv[1];
+
+  Source src( SourceFactory().createFrom( new source::susetags::SuseTagsImpl(infile) ) );
+  MIL << src.resolvables().size() << endl;
+
+  FakeConv fakeconv;
+  for_each( src.resolvables().begin(), src.resolvables().end(), refFunctor(fakeconv) );
+
+  Rstats rstats = Rstats();
+  for_each( fakeconv.begin( resfilter::byKind<Package>() ),
+            fakeconv.end( resfilter::ByName( "Foo" ) ),
+            refFunctor(rstats) );
+  MIL << rstats << endl;
+
+
+#if 0
+  rstats = Rstats();
+  for_each( boost::make_filter_iterator( resfilter::byKind<Package>(), begin, end ),
+            boost::make_filter_iterator( resfilter::byKind<Package>(), end, end ),
+            refFunctor(rstats) );
+  MIL << rstats << endl;
+#endif
+
 
 
   INT << "===[END]============================================" << endl;
   return 0;
 }
+
