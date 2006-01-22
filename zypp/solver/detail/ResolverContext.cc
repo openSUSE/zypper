@@ -476,6 +476,12 @@ ResolverContext::incompleteResItem (ResItem_constPtr resItem, int other_penalty)
 	    return false;
 	}
 	break;
+	case RESOLVABLE_STATUS_UNNEEDED: {
+	    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INCOMPLETES, resItem, RESOLVER_INFO_PRIORITY_VERBOSE);
+	    addError (misc_info);
+	    return false;
+	}
+	break;
 	default:
 	break;
     }
