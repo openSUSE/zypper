@@ -60,12 +60,54 @@ namespace zypp
   //@{
 
   /** \class filter_iterator
+   * An iterator over the subset of elements of some sequence
+   * which satisfy a given predicate.
+   *
+   * Provides boost::filter_iterator and boost::make_filter_iterator
+   * convenience function.
+   * \see http://www.boost.org/libs/iterator/doc/filter_iterator.html
+   * \code
+   * template <class Predicate, class Iterator>
+   *   filter_iterator<Predicate,Iterator>
+   *   make_filter_iterator(Predicate f, Iterator x, Iterator end = Iterator());
+   *
+   * template <class Predicate, class Iterator>
+   *   filter_iterator<Predicate,Iterator>
+   *   make_filter_iterator(Iterator x, Iterator end = Iterator());
+   * \endcode
+   * Remember the deduction rules for template arguments.
+   * \code
+   * struct MyDefaultConstructibleFilter;
+   * make_filter_iterator<MyDefaultConstructibleFilter>( c.begin(), c.end() );
+   * make_filter_iterator( MyDefaultConstructibleFilter(), c.begin(), c.end() );
+   * ...
+   * make_filter_iterator( resfilter::ByName("foo"), c.begin(), c.end() );
+   *
+   * \endcode
   */
   using boost::filter_iterator;
+  using boost::make_filter_iterator;
 
   /** \class transform_iterator
+   * An iterator over elements which are the result of applying
+   * some functional transformation to the elements of an underlying
+   * sequence.
+   *
+   * Provides boost::transform_iterator and boost::make_transform_iterator
+   * convenience function.
+   * \see http://www.boost.org/libs/iterator/doc/transform_iterator.html
+   * \code
+   * template <class UnaryFunction, class Iterator>
+   *   transform_iterator<UnaryFunction, Iterator>
+   *   make_transform_iterator(Iterator it, UnaryFunction fun);
+   *
+   * template <class UnaryFunction, class Iterator>
+   *   transform_iterator<UnaryFunction, Iterator>
+   *   make_transform_iterator(Iterator it);
+   * \endcode
   */
   using boost::transform_iterator;
+  using boost::make_transform_iterator;
 
   //@}
   /////////////////////////////////////////////////////////////////

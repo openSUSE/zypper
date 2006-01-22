@@ -12,17 +12,16 @@
 #ifndef ZYPP_RESFILTERS_H
 #define ZYPP_RESFILTERS_H
 
-#include <iosfwd>
-
 #include "zypp/Resolvable.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace resfilter
+  namespace functor
   { /////////////////////////////////////////////////////////////////
     /** \defgroup RESFILTERS Filter functors operating on Resolvables.
+     * \ingroup g_Functor
      *
      * A simple filter is a function or functor matching the signature:
      * \code
@@ -34,25 +33,8 @@ namespace zypp
      * will do;
      *
      * Besides basic filter functors which actually evaluate the
-     * \c Resolvable (e.g. \ref ByKind, \ref ByName), there are some
-     * special functors to build more complex queries:
-     *
-     * \li \ref True and \ref False. No supprise, they always return
-     *     \c true or \c false.
-     * \li \ref Not\<_Condition\>. _Condition is a filter functor, and
-     *     it's result is inverted.
-     * \li \ref Chain\<_ACondition,_BCondition\>. \c _ACondition and \c _BCondition
-     *     are filter functors, and Chain evaluates
-     *     <tt>_ACondition && _BCondition</tt>
-     *
-     * As it's no fun to get and write the correct template arguments,
-     * convenience functions creating the correct functor are provided.
-     *
-     * \li \c true_c and \c false_c. (provided just to match the schema)
-     * \li \c not_c. Takes a functor as argument and returns the appropriate
-     *     \ref Not functor.
-     * \li \c chain. Takes two functors and returns the appropriate
-     *     \ref Cain functor.
+     * \c Resolvable (e.g. \ref ByKind, \ref ByName) you may
+     * use \ref LOGICALFILTERS to build more complex filters.
      *
      * \code
      * // some 'action' functor, printing and counting
@@ -72,7 +54,6 @@ namespace zypp
      *
      *   unsigned & _counter;
      * };
-     *
      *
      * ResStore store;
      * unsigned counter = 0;
@@ -129,7 +110,7 @@ namespace zypp
      *
      * But as a rule of thumb, a functor should be lightweight. If you
      * want to get data out, pass references to variables in (and assert
-     * these variables live as long as the quiery lasts).
+     * these variables live as long as the query lasts). Or use \ref FunctorRef.
      *
      * Internally all functors are passed by value. Thus it would not help
      * you to create an instance of some collecting functor, and pass it
@@ -152,80 +133,6 @@ namespace zypp
     //@{
     ///////////////////////////////////////////////////////////////////
     //
-    // Predefined filters
-    //
-    ///////////////////////////////////////////////////////////////////
-
-    struct True
-    {
-      bool operator()( Resolvable::Ptr ) const
-      {
-        return true;
-      }
-    };
-
-    True true_c()
-    { return True(); }
-
-    ///////////////////////////////////////////////////////////////////
-
-    struct False
-    {
-      bool operator()( Resolvable::Ptr ) const
-      {
-        return false;
-      }
-    };
-
-    False false_c()
-    { return False(); }
-
-    ///////////////////////////////////////////////////////////////////
-
-    template<class _Condition>
-      struct Not
-      {
-        Not( _Condition cond_r )
-        : _cond( cond_r )
-        {}
-        bool operator()( Resolvable::Ptr p ) const
-        {
-          return ! _cond( p );
-        }
-        _Condition _cond;
-      };
-
-    template<class _Condition>
-      Not<_Condition> not_c( _Condition cond_r )
-      {
-        return Not<_Condition>( cond_r );
-      }
-
-    ///////////////////////////////////////////////////////////////////
-
-    template<class _ACondition, class _BCondition>
-      struct Chain
-      {
-        Chain( _ACondition conda_r, _BCondition condb_r )
-        : _conda( conda_r )
-        , _condb( condb_r )
-        {}
-        bool operator()( Resolvable::Ptr p ) const
-        {
-          return _conda( p ) && _condb( p );
-        }
-        _ACondition _conda;
-        _BCondition _condb;
-      };
-
-    template<class _ACondition, class _BCondition>
-      Chain<_ACondition, _BCondition> chain( _ACondition conda_r, _BCondition condb_r )
-      {
-        return Chain<_ACondition, _BCondition>( conda_r, condb_r );
-      }
-
-    ///////////////////////////////////////////////////////////////////
-    //
     // Now some Resolvable attributes
     //
     ///////////////////////////////////////////////////////////////////
@@ -236,10 +143,11 @@ namespace zypp
       : _kind( kind_r )
       {}
 
-      bool operator()( Resolvable::Ptr p ) const
+      bool operator()( Resolvable::constPtr p ) const
       {
         return p->kind() == _kind;
       }
+
       Resolvable::Kind _kind;
     };
 
@@ -252,10 +160,12 @@ namespace zypp
       ByName( const std::string & name_r )
       : _name( name_r )
       {}
-      bool operator()( Resolvable::Ptr p ) const
+
+      bool operator()( Resolvable::constPtr p ) const
       {
         return p->name() == _name;
       }
+
       std::string _name;
     };
 
@@ -263,7 +173,7 @@ namespace zypp
 
     //@}
     /////////////////////////////////////////////////////////////////
-  } // namespace resfilter
+  } // namespace functor
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
