@@ -952,6 +952,16 @@ parse_xml_trial (XmlNode_Ptr node)
 		}
 	    }
 
+	} else if (node->equals ("reportproblems")) {
+	    if (resolver.resolveDependencies (established) == true) {
+		RESULT << "No problems so far" << endl;
+	    }
+	    else {
+		ResolverProblemList problems = resolver.problems ();
+		RESULT << problems.size() << " problems found:" << endl;
+		cout << ResolverProblem::toString(problems) << endl;
+	    }
+
 	} else {
 	    fprintf (stderr, "Unknown tag '%s' in trial\n", node->name().c_str());
 	}
