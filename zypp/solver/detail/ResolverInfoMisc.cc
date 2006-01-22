@@ -537,8 +537,8 @@ ResolverInfoMisc::message (void) const
 	//-------------------
 
 	default:
-	    WAR << "Not a InfoMisc type: " << type() << endl;
-	    msg = "Unknown";
+	    WAR << "Not an InfoMisc type: " << type() << endl;
+//	    msg = "Unknown";
 	break;
     }
     return msg;
