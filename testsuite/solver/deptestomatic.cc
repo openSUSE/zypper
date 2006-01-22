@@ -265,7 +265,7 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 	unsigned int checksum = 0;
 	bool is_dup = false;
 
-	RESULT << "Solution #" << *count << endl;
+	RESULT << "Solution #" << *count << ":" << endl;
 	++*count;
 
 	context->foreachInstall (assemble_install_cb, &items);
@@ -718,7 +718,7 @@ trial_upgrade_cb (ResItem_constPtr original, ResItem_constPtr upgrade, void *use
 
     resolver->addResItemToInstall (upgrade);
 
-    RESULT << "Upgrading " << original->asString() << " => " << upgrade << endl;
+    RESULT << "Upgrading " << original->asString() << " => " << upgrade->asString() << endl;
 
     return false;
 }
