@@ -24,12 +24,12 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace functor
   { /////////////////////////////////////////////////////////////////
-    /** \defgroup RESFILTERS Filter functors operating on Resolvables.
+    /** \defgroup RESFILTERS Filter functors operating on ResObjects.
      * \ingroup g_Functor
      *
      * A simple filter is a function or functor matching the signature:
      * \code
-     *   bool simplefilter( Resolvable::Ptr );
+     *   bool simplefilter( ResObject::Ptr );
      * \endcode
      *
      * \note It's not neccessary that your function or functor actually
@@ -37,19 +37,19 @@ namespace zypp
      * will do;
      *
      * Besides basic filter functors which actually evaluate the
-     * \c Resolvable (e.g. \ref ByKind, \ref ByName) you may
+     * \c ResObject (e.g. \ref ByKind, \ref ByName) you may
      * use \ref LOGICALFILTERS to build more complex filters.
      *
      * \code
      * // some 'action' functor, printing and counting
-     * // Resolvables.
+     * // ResObjects.
      * struct PrintAndCount
      * {
      *   PrintAndCount( unsigned & counter_r )
      *   : _counter( counter_r )
      *   {}
      *
-     *   bool operator()( Resolvable::Ptr p ) const
+     *   bool operator()( ResObject::Ptr p ) const
      *   {
      *     DBG << *p << endl;
      *     ++_counter;
@@ -109,7 +109,7 @@ namespace zypp
      *
      * \c PrintAndCount is an example how a functor can return data collected
      * during the query. You ca easily write a collector, that takes a
-     * <tt>std:list\<Resolvable::Ptr\>\&</tt> and fills it with the matches
+     * <tt>std:list\<ResObject::Ptr\>\&</tt> and fills it with the matches
      * found.
      *
      * But as a rule of thumb, a functor should be lightweight. If you
@@ -137,22 +137,22 @@ namespace zypp
     //@{
     ///////////////////////////////////////////////////////////////////
     //
-    // Now some Resolvable attributes
+    // Now some ResObject attributes
     //
     ///////////////////////////////////////////////////////////////////
 
     struct ByKind
     {
-      ByKind( const Resolvable::Kind & kind_r )
+      ByKind( const ResObject::Kind & kind_r )
       : _kind( kind_r )
       {}
 
-      bool operator()( Resolvable::constPtr p ) const
+      bool operator()( ResObject::constPtr p ) const
       {
         return p->kind() == _kind;
       }
 
-      Resolvable::Kind _kind;
+      ResObject::Kind _kind;
     };
 
     template<class _Res>
@@ -165,7 +165,7 @@ namespace zypp
       : _name( name_r )
       {}
 
-      bool operator()( Resolvable::constPtr p ) const
+      bool operator()( ResObject::constPtr p ) const
       {
         return p->name() == _name;
       }

@@ -5,13 +5,11 @@
 #include <map>
 #include <set>
 
-#include <boost/iterator/filter_iterator.hpp>
-#include <boost/iterator/transform_iterator.hpp>
-
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
 #include <zypp/base/Exception.h>
 #include <zypp/base/PtrTypes.h>
+#include <zypp/base/Iterator.h>
 
 #include <zypp/PathInfo.h>
 #include <zypp/SourceFactory.h>
@@ -33,70 +31,13 @@
 
 using namespace std;
 using namespace zypp;
+using namespace zypp::functor;
 
 ///////////////////////////////////////////////////////////////////
-#if 0
 namespace zypp
 {
-  /**
-  */
-
-  template<class _Res>
-    struct PoolItem
-    {
-      typedef ResTraits<_Res>::PtrType      Res_Ptr;
-      typedef ResTraits<_Res>::constPtrType Res_constPtr;
-
-      PoolItem( Res_Ptr res_r )
-      : _resolvable( res_r )
-      {}
-
-      ResStatus _status;
-      Res_Ptr   _resolvable;
-    };
-
-  /**
-  */
-  class Pool
-  {
-  public:
-    typedef PoolItem                Item;
-    typedef PoolItem::Res           Res;
-    typedef PoolItem::Res_Ptr       Res_Ptr;
-    typedef PoolItem::Res_constPtr  Res_constPtr;
-
-    //private:
-    typedef ResObject                     ResT;
-    typedef ResTraits<ResT>::KindType     ResKindT;
-    typedef ResTraits<ResT>::PtrType      Res_Ptr;
-    typedef ResTraits<ResT>::constPtrType Res_constPtr;
-
-    typedef PoolItem<ResT>            ItemT;
-    typedef std::set<ItemT>           KindStoreT;
-    typedef std::map<ResKindT,ItemT>  StorageT;
-
-  public:
-
-    template <class _InputIterator>
-      void addResolvables(  _InputIterator first_r, _InputIterator last_r )
-
-
-
-  //private:
-    /**  */
-    StorageT _store;
-    /**  */
-    StorageT & store()
-    { return _store; }
-    /**  */
-    const StorageT & store() const
-    { return _store; }
-  };
 
 }
-///////////////////////////////////////////////////////////////////
-
-#endif
 ///////////////////////////////////////////////////////////////////
 
 template<class _IntT>
@@ -120,30 +61,6 @@ template<class _IntT>
   };
 
 
-template <class _Functor>
-  class RefFunctor
-  {
-  public:
-    typedef typename _Functor::argument_type argument_type;
-    typedef typename _Functor::result_type   result_type;
-
-    RefFunctor( _Functor & f_r )
-    : _f( f_r )
-    {}
-
-    result_type operator()( argument_type a1 ) const
-    {
-      return _f.operator()( a1 );
-    }
-
-  private:
-    _Functor & _f;
-  };
-
-template <class _Functor>
-  RefFunctor<_Functor> refFunctor( _Functor & f_r )
-  { return RefFunctor<_Functor>( f_r ); }
-
 ///////////////////////////////////////////////////////////////////
 
 template <class _Impl>
@@ -157,9 +74,9 @@ template <class _Impl>
 
 ///////////////////////////////////////////////////////////////////
 
-struct Rstats : public std::unary_function<Resolvable::constPtr, void>
+struct Rstats : public std::unary_function<ResObject::constPtr, void>
 {
-  void operator()( Resolvable::constPtr ptr )
+  void operator()( ResObject::constPtr ptr )
   {
     ++_total;
     ++_perKind[ptr->kind()];
@@ -182,6 +99,33 @@ std::ostream & operator<<( std::ostream & str, const Rstats & obj )
 
 ///////////////////////////////////////////////////////////////////
 
+struct SelItem
+{
+  SelItem( ResObject::Ptr ptr_r )
+  : _status( 0 )
+  , _ptr( ptr_r )
+  {}
+
+  unsigned       _status;
+  ResObject::Ptr _ptr;
+
+  operator ResObject::Ptr()
+  { return _ptr; }
+
+  operator ResObject::constPtr() const
+  { return _ptr; }
+
+  ResObject::Ptr operator->()
+  { return _ptr; }
+
+  ResObject::constPtr operator->() const
+  { return _ptr; }
+
+  bool operator<( const SelItem & rhs ) const
+  { return _ptr < rhs._ptr; }
+};
+
+
 struct FakeConv : public std::unary_function<Resolvable::Ptr, void>
 {
   void operator()( Resolvable::Ptr ptr )
@@ -194,12 +138,15 @@ struct FakeConv : public std::unary_function<Resolvable::Ptr, void>
       {
         ptr = fakeResKind<detail::PatchImpl>( ptr );
       }
-    _store.insert( ptr );
+    _store.insert( SelItem(asKind<ResObject>(ptr)) );
   }
 
-  std::set<Resolvable::Ptr> _store;
 
-  typedef std::set<Resolvable::Ptr>  ContainerT;
+  typedef SelItem           ValueT;
+  typedef std::set<ValueT>  ContainerT;
+
+  ContainerT _store;
+
   typedef ContainerT::iterator       IteratorT;
   typedef ContainerT::const_iterator ConstIteratorT;
 
@@ -209,38 +156,26 @@ struct FakeConv : public std::unary_function<Resolvable::Ptr, void>
   ConstIteratorT end() const
   { return _store.end(); }
 
+  template<class _Filter>
+    filter_iterator<_Filter, ConstIteratorT> begin() const
+    { return make_filter_iterator( _Filter(), begin(), end() ); }
 
   template<class _Filter>
-    boost::filter_iterator<_Filter, ConstIteratorT> begin() const
-    { return boost::make_filter_iterator( _Filter(), begin(), end() ); }
+    filter_iterator<_Filter, ConstIteratorT> begin( _Filter f ) const
+    { return make_filter_iterator( f, begin(), end() ); }
 
   template<class _Filter>
-    boost::filter_iterator<_Filter, ConstIteratorT> begin( _Filter f ) const
-    { return boost::make_filter_iterator( f, begin(), end() ); }
+    filter_iterator<_Filter, ConstIteratorT> end() const
+    { return make_filter_iterator( _Filter(), end(), end() ); }
 
   template<class _Filter>
-    boost::filter_iterator<_Filter, ConstIteratorT> end() const
-    { return boost::make_filter_iterator( _Filter(), end(), end() ); }
+    filter_iterator<_Filter, ConstIteratorT> end( _Filter f ) const
+    { return make_filter_iterator( f, end(), end() ); }
 
-  template<class _Filter>
-    boost::filter_iterator<_Filter, ConstIteratorT> end( _Filter f ) const
-    { return boost::make_filter_iterator( f, end(), end() ); }
 
 };
 
 ///////////////////////////////////////////////////////////////////
-
-struct xTrue
-{
-  bool operator()( Resolvable::Ptr p ) const
-  {
-    SEC << __FUNCTION__ << ' ' << p << endl;
-    return true;
-  }
-};
-
-
-
 
 /******************************************************************
 **
@@ -258,23 +193,16 @@ int main( int argc, char * argv[] )
   MIL << src.resolvables().size() << endl;
 
   FakeConv fakeconv;
-  for_each( src.resolvables().begin(), src.resolvables().end(), refFunctor(fakeconv) );
+  for_each( src.resolvables().begin(), src.resolvables().end(), functorRef(fakeconv) );
 
   Rstats rstats = Rstats();
-  for_each( fakeconv.begin( resfilter::byKind<Package>() ),
-            fakeconv.end( resfilter::ByName( "Foo" ) ),
-            refFunctor(rstats) );
+  for_each( fakeconv.begin( byKind<Package>() ),
+            fakeconv.end( byKind<Package>() ),
+            functorRef(rstats) );
   MIL << rstats << endl;
 
-
-#if 0
-  rstats = Rstats();
-  for_each( boost::make_filter_iterator( resfilter::byKind<Package>(), begin, end ),
-            boost::make_filter_iterator( resfilter::byKind<Package>(), end, end ),
-            refFunctor(rstats) );
-  MIL << rstats << endl;
-#endif
-
+  SelItem it( *fakeconv.begin() );
+  SEC << it->kind() << it->name() << endl;
 
 
   INT << "===[END]============================================" << endl;

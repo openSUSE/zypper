@@ -27,18 +27,22 @@ namespace zypp
   //	CLASS NAME : ResStore
   //
   /**
-   *
-   *
   */
   class ResStore
   {
     friend std::ostream & operator<<( std::ostream & str, const ResStore & obj );
 
-    typedef std::set<Resolvable::Ptr> StorageT;
+  public:
+    /** Implementation */
+    class Impl;
+
+    /** Type of Resolvable provided by ResStore. */
+    typedef ResObject                ResT;
+
+  private:
+    typedef std::set<ResT::Ptr>      StorageT;
 
   public:
-    /** Implementation  */
-    class Impl;
 
     typedef StorageT::size_type      size_type;
     typedef StorageT::iterator       iterator;
@@ -73,14 +77,14 @@ namespace zypp
 
     // insert/erase
     /**  */
-    iterator insert( const Resolvable::Ptr & ptr_r )
+    iterator insert( const ResT::Ptr & ptr_r )
     { return store().insert( ptr_r ).first; }
     /**  */
     template <class _InputIterator>
       void insert( _InputIterator first_r, _InputIterator last_r )
       { store().insert( first_r, last_r ); }
     /**  */
-    size_type erase( const Resolvable::Ptr & ptr_r )
+    size_type erase( const ResT::Ptr & ptr_r )
     { return store().erase( ptr_r ); }
     /**  */
     void erase( iterator first_r, iterator last_r )
@@ -91,10 +95,10 @@ namespace zypp
 
     /** Query inerface.
      * Both, \a filter_r and \a fnc_r are expected to be
-     * functions or functors taking a <tt>Resolvable::Ptr<\tt>
+     * functions or functors taking a <tt>ResT::Ptr<\tt>
      * as argument and return a \c bool.
      *
-     * forEach iterates over all Resolvables and invokes \a fnc_r,
+     * forEach iterates over all ResTs and invokes \a fnc_r,
      * iff \a filter_r returned \c true. If \a fnc_r returnes
      * \c false the loop is aborted.
      *
