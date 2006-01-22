@@ -66,6 +66,8 @@ static string globalPath;
 
 typedef list<unsigned int> ChecksumList;
 
+#define RESULT cout << ">!> "
+
 //---------------------------------------------------------------------------
 
 Resolvable::Kind
@@ -248,7 +250,7 @@ print_sep (void)
 static void
 print_important (const string & str)
 {
-    printf (">!> %s\n", str.c_str());
+    RESULT << str.c_str() << endl;
 }
 
 
@@ -263,7 +265,7 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 	unsigned int checksum = 0;
 	bool is_dup = false;
 
-	printf (">!> Solution #%d:\n", *count);
+	RESULT << "Solution #" << *count << endl;
 	++*count;
 
 	context->foreachInstall (assemble_install_cb, &items);
@@ -299,26 +301,27 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 	    }
 	    checksum_list.push_back (checksum);
 	} else {
-	    printf (">!> This solution is a duplicate.\n");
+	    RESULT << "This solution is a duplicate." << endl;
 	}
 
 	items.clear();
 
     } else {
-	printf (">!> Failed Attempt:\n");
+	RESULT << "Failed Attempt:" << endl;
     }
 
-    printf (">!> installs=%d, upgrades=%d, uninstalls=%d", context->installCount(), context->upgradeCount(), context->uninstallCount());
+    RESULT << "installs=" << context->installCount() << ", upgrades=" << context->upgradeCount() << ", uninstalls=" << context->uninstallCount();
     int satisfied = context->satisfyCount();
-    if (satisfied > 0) printf (", satisfied=%d", satisfied);
-    printf ("\n");
+    if (satisfied > 0) cout << ", satisfied=" << satisfied;
+    cout << endl;
     printf ("download size=%.1fk, install size=%.1fk\n", context->downloadSize() / 1024.0, context->installSize() / 1024.0);
     printf ("total priority=%d, min priority=%d, max priority=%d\n", context->totalPriority(), context->minPriority(), context->maxPriority());
     printf ("other penalties=%d\n",  context->otherPenalties());
     printf ("- - - - - - - - - -\n");
 
     if (instorder) {
-	printf ("\n>!> Installation Order:\n\n");
+	cout << endl;
+	RESULT << "Installation Order:" << endl << endl;
 	CResItemList installs = context->getMarkedResItems(1);
 	CResItemList dummy;
 
@@ -326,7 +329,7 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 	order.init();
 	const CResItemList & installorder ( order.getTopSorted() );
 	for (CResItemList::const_iterator iter = installorder.begin(); iter != installorder.end(); iter++) {
-		printf (">!> %s\n", (*iter)->asString().c_str());
+		RESULT << (*iter)->asString() << endl;
 	}
 	printf ("- - - - - - - - - -\n");
     }
@@ -588,7 +591,7 @@ parse_xml_setup (XmlNode_Ptr node)
 
 	    resItem = get_resItem (channel_name, package_name, kind_name);
 	    if (resItem) {
-		printf (">!> Force-installing %s from channel %s\n", package_name.c_str(), channel_name.c_str());
+		RESULT << "Force-installing " << package_name << " from channel " << channel_name << endl;;
 
 		system_channel = world->getChannelById ("@system");
 
@@ -614,7 +617,7 @@ parse_xml_setup (XmlNode_Ptr node)
 	    if (! resItem) {
 		fprintf (stderr, "Can't force-uninstall installed package '%s'\n", package_name.c_str());
 	    } else {
-		printf (">!> Force-uninstalling '%s'\n", package_name.c_str());
+		RESULT << "Force-uninstalling " << package_name << endl;
 		remove_resItem (resItem);
 	    }
 
@@ -631,7 +634,7 @@ parse_xml_setup (XmlNode_Ptr node)
 
 	    resItem = get_resItem (channel_name, package_name, kind_name);
 	    if (resItem) {
-		printf (">!> Locking %s from channel %s\n", package_name.c_str(), channel_name.c_str());
+		RESULT << "Locking " << package_name << " from channel " << channel_name << endl;
                 ResItem_Ptr r = boost::const_pointer_cast<ResItem>(resItem);                   
 		r->setLocked (true);
 	    } else {
@@ -715,7 +718,7 @@ trial_upgrade_cb (ResItem_constPtr original, ResItem_constPtr upgrade, void *use
 
     resolver->addResItemToInstall (upgrade);
 
-    printf (">!> Upgrading %s => %s\n", original->asString().c_str(), upgrade->asString().c_str());
+    RESULT << "Upgrading " << original->asString() << " => " << upgrade << endl;
 
     return false;
 }
@@ -724,7 +727,7 @@ trial_upgrade_cb (ResItem_constPtr original, ResItem_constPtr upgrade, void *use
 static void
 print_marked_cb (ResItem_constPtr resItem, ResItemStatus status, void *data)
 {
-    printf (">!> %s %s\n", resItem->asString().c_str(), ResolverContext::toString (status).c_str());
+    RESULT << resItem->asString() << " " << ResolverContext::toString (status) << endl;
     return;
 }
 
@@ -813,7 +816,7 @@ parse_xml_trial (XmlNode_Ptr node)
 
 	    resItem = get_resItem (channel_name, package_name, kind_name);
 	    if (resItem) {
-		printf (">!> Installing %s from channel %s\n", package_name.c_str(), channel_name.c_str());
+		RESULT << "Installing " << package_name << " from channel " << channel_name << endl;;
 		resolver.addResItemToInstall (resItem);
 	    } else {
 		fprintf (stderr, "Unknown package %s::%s\n", channel_name.c_str(), package_name.c_str());
@@ -830,7 +833,7 @@ parse_xml_trial (XmlNode_Ptr node)
 
 	    resItem = get_resItem ("@system", package_name, kind_name);
 	    if (resItem) {
-		printf (">!> Uninstalling %s\n", package_name.c_str());
+		RESULT << "Uninstalling " << package_name << endl;
 		resolver.addResItemToRemove (resItem);
 	    } else {
 		fprintf (stderr, "Unknown system package %s\n", package_name.c_str());
@@ -839,37 +842,37 @@ parse_xml_trial (XmlNode_Ptr node)
 	} else if (node->equals ("upgrade")) {
 	    int count;
 
-	    printf (">!> Checking for upgrades...\n");
+	    RESULT << "Checking for upgrades..." << endl;
 
 	    count = world->foreachSystemUpgrade (true, trial_upgrade_cb, (void *)&resolver);
 	    
 	    if (count == 0)
-		printf (">!> System is up-to-date, no upgrades required\n");
+		RESULT << "System is up-to-date, no upgrades required" << endl;
 	    else
-		printf (">!> Upgrading %d package%s\n", count, count > 1 ? "s" : "");
+		RESULT << "Upgrading " << count << " package" << (count > 1 ? "s" : "") << endl;
 
 	} else if (node->equals ("establish")
 		   || node->equals ("freshen")) {
 
-	    printf (">!> Establishing state ...\n");
+	    RESULT << "Establishing state ..." << endl;
 
 	    resolver.establishState (established);
 //cerr << "established<" << established << "> -> <" << resolver.bestContext() << ">" << endl;
 	    established = resolver.bestContext();
 	    if (established == NULL)
-		printf (">!> Established NO context !\n");
+		RESULT << "Established NO context !" << endl;
 	    else {
-		printf (">!> Established context\n");
+		RESULT << "Established context" << endl;
 		established->foreachMarkedResItem (print_marked_cb, NULL);
 		if (node->equals ("freshen")) {
-		    printf (">!> Freshening ...\n");
+		    RESULT << "Freshening ..." << endl;
 		    established->foreachMarkedResItem (freshen_marked_cb, &resolver);
 		}
 	    }
 
 	} else if (node->equals ("instorder")) {
 
-	    printf (">!> Calculating installation order ...\n");
+	    RESULT << "Calculating installation order ..." << endl;
 
 	    instorder = true;
 
@@ -885,7 +888,7 @@ parse_xml_trial (XmlNode_Ptr node)
 		if (dep) {
 		    string conflict_str = iter->getProp ("conflict");
 
-		    printf (">!> Solvedeps %s%s\n", conflict_str.empty() ? "" : "conflict ",  dep->asString().c_str());
+		    RESULT << "Solvedeps " << (conflict_str.empty() ? "" : "conflict ") << dep->asString().c_str() << endl;
 
 		    resolver.addExtraDependency (dep);
 
