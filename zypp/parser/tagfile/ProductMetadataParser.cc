@@ -41,9 +41,10 @@ namespace zypp
       //
       void ProductMetadataParser::parse( const Pathname & file_r, ProductEntry &entry_r )
       {
-        //istd::ifstream file(file_r.asString().c_str());
-        
-        //tokenizer<> tok(file.str());
+        std::ifstream file(file_r.asString().c_str());
+        std::stringstream st;
+        st << file;
+        tokenizer<> tok(st.str());
         //for(tokenizer<>::iterator beg=tok.begin(); beg!=tok.end();++beg){
         //  std::cout << *beg << std:endl;
         //}

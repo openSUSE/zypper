@@ -11,7 +11,7 @@ noinst_PROGRAMS = YUMtest ProductMetadataParserTest
 
 YUMtest_SOURCES = YUMtest.cc
 
-ProductMetadataTest_SOURCES = ProductMetadataParserTest.cc
+ProductMetadataParserTest_SOURCES = ProductMetadataParserTest.cc
 
 EXTRA_DIST = lib/*.exp config/*.exp $(PACKAGE).test/*.exp
 
