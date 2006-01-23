@@ -30,7 +30,7 @@ namespace zypp
     //
     //	CLASS NAME : PoolItem
     //
-    /**
+    /** Connects ResObject and ResStatus.
     */
     class PoolItem
     {

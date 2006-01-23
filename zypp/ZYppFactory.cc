@@ -6,82 +6,59 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/ResPool.cc
+/** \file	zypp/ZYppFactory.cc
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+#include "zypp/base/Logger.h"
 
-#include "zypp/ResPool.h"
+#include "zypp/ZYppFactory.h"
+#include "zypp/zypp_detail/ZYppImpl.h"
 
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-#if 0
+
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : ResPool::Impl
-  //
-  /** ResPool implementation. */
-  struct ResPool::Impl
-  {
-
-  public:
-    /** Offer default Impl. */
-    static shared_ptr<Impl> nullimpl()
-    {
-      static shared_ptr<Impl> _nullimpl( new Impl );
-      return _nullimpl;
-    }
-
-  private:
-    friend Impl * rwcowClone<Impl>( const Impl * rhs );
-    /** clone for RWCOW_pointer */
-    Impl * clone() const
-    { return new Impl( *this ); }
-  };
-  ///////////////////////////////////////////////////////////////////
-
-  /** \relates ResPool::Impl Stream output */
-  inline std::ostream & operator<<( std::ostream & str, const ResPool::Impl & obj )
-  {
-    return str << "ResPool::Impl";
-  }
-#endif
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : ResPool
+  //	CLASS NAME : ZYppFactory
   //
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : ResPool::ResPool
+  //	METHOD NAME : ZYppFactory::ZYppFactory
   //	METHOD TYPE : Ctor
   //
-  ResPool::ResPool()
-  : _inserter( _store )
-  , _deleter( _store )
+  ZYppFactory::ZYppFactory()
   {}
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : ResPool::~ResPool
+  //	METHOD NAME : ZYppFactory::~ZYppFactory
   //	METHOD TYPE : Dtor
   //
-  ResPool::~ResPool()
+  ZYppFactory::~ZYppFactory()
   {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  ZYpp::Ptr ZYppFactory::letsTest() const
+  {
+    static ZYpp::Ptr _instance( new ZYpp( ZYpp::Impl_Ptr(new ZYpp::Impl) ) );
+    return _instance;
+  }
 
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<
   **	FUNCTION TYPE : std::ostream &
   */
-  std::ostream & operator<<( std::ostream & str, const ResPool & obj )
+  std::ostream & operator<<( std::ostream & str, const ZYppFactory & obj )
   {
-    return str << "ResPool";
+    return str << "ZYppFactory";
   }
 
   /////////////////////////////////////////////////////////////////

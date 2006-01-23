@@ -14,6 +14,7 @@
 
 #include <boost/iterator/filter_iterator.hpp>
 #include <boost/iterator/transform_iterator.hpp>
+#include <boost/function_output_iterator.hpp>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -106,8 +107,25 @@ namespace zypp
    *   make_transform_iterator(Iterator it);
    * \endcode
   */
-  using boost::transform_iterator;
+  using boost::function_output_iterator;
   using boost::make_transform_iterator;
+
+  /** \class function_output_iterator
+   * An output iterator wrapping a unary function object; each time an
+   * element is written into the dereferenced iterator, it is passed as
+   * a parameter to the function object.
+   *
+   * Provides boost::function_output_iterator and boost::make_function_output_iterator
+   * convenience function.
+   * \see http://www.boost.org/libs/iterator/doc/function_output_iterator.html
+   * \code
+   * template <class UnaryFunction>
+   *   function_output_iterator<UnaryFunction>
+   *   make_function_output_iterator(const UnaryFunction& f = UnaryFunction());
+   * \endcode
+  */
+  using boost::function_output_iterator;
+  using boost::make_function_output_iterator;
 
   //@}
   /////////////////////////////////////////////////////////////////

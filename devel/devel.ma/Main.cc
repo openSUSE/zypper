@@ -27,7 +27,9 @@
 
 #include <zypp/ResFilters.h>
 #include <zypp/ResStatus.h>
-#include <zypp/Bit.h>
+#include <zypp/ResPool.h>
+
+#include <zypp/ZYppFactory.h>
 
 using namespace std;
 using namespace zypp;
@@ -99,35 +101,11 @@ std::ostream & operator<<( std::ostream & str, const Rstats & obj )
 
 ///////////////////////////////////////////////////////////////////
 
-struct SelItem
-{
-  SelItem( ResObject::Ptr ptr_r )
-  : _status( 0 )
-  , _ptr( ptr_r )
-  {}
-
-  unsigned       _status;
-  ResObject::Ptr _ptr;
-
-  operator ResObject::Ptr()
-  { return _ptr; }
-
-  operator ResObject::constPtr() const
-  { return _ptr; }
-
-  ResObject::Ptr operator->()
-  { return _ptr; }
-
-  ResObject::constPtr operator->() const
-  { return _ptr; }
-
-  bool operator<( const SelItem & rhs ) const
-  { return _ptr < rhs._ptr; }
-};
-
-
 struct FakeConv : public std::unary_function<Resolvable::Ptr, void>
 {
+  typedef pool::PoolItem    ValueT;
+  typedef std::set<ValueT>  ContainerT;
+
   void operator()( Resolvable::Ptr ptr )
   {
     if ( ptr->name()[0] == 's' )
@@ -138,12 +116,8 @@ struct FakeConv : public std::unary_function<Resolvable::Ptr, void>
       {
         ptr = fakeResKind<detail::PatchImpl>( ptr );
       }
-    _store.insert( SelItem(asKind<ResObject>(ptr)) );
+    _store.insert( ValueT(asKind<ResObject>(ptr)) );
   }
-
-
-  typedef SelItem           ValueT;
-  typedef std::set<ValueT>  ContainerT;
 
   ContainerT _store;
 
@@ -177,6 +151,8 @@ struct FakeConv : public std::unary_function<Resolvable::Ptr, void>
 
 ///////////////////////////////////////////////////////////////////
 
+
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -192,17 +168,33 @@ int main( int argc, char * argv[] )
   Source src( SourceFactory().createFrom( new source::susetags::SuseTagsImpl(infile) ) );
   MIL << src.resolvables().size() << endl;
 
+  ResPool pool;
+  pool.insert( src.resolvables().begin(), src.resolvables().end() );
+  MIL << pool << endl;
+
+#if 0
   FakeConv fakeconv;
-  for_each( src.resolvables().begin(), src.resolvables().end(), functorRef(fakeconv) );
+
+  std::copy( src.resolvables().begin(), src.resolvables().end(),
+             make_function_output_iterator( functorRef(fakeconv) ) );
+
+  //for_each( src.resolvables().begin(), src.resolvables().end(),
+  //          functorRef(fakeconv) );
 
   Rstats rstats = Rstats();
   for_each( fakeconv.begin( byKind<Package>() ),
             fakeconv.end( byKind<Package>() ),
             functorRef(rstats) );
+
   MIL << rstats << endl;
 
-  SelItem it( *fakeconv.begin() );
+  FakeConv::ValueT it( *fakeconv.begin() );
   SEC << it->kind() << it->name() << endl;
+  SEC << it.status() << endl;
+#endif
+
+  ZYpp::Ptr appl( ZYppFactory().letsTest() );
+  MIL << *appl;
 
 
   INT << "===[END]============================================" << endl;
