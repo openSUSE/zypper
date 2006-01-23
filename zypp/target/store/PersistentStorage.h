@@ -46,7 +46,7 @@ namespace zypp
       /**
        * Stores a Resolvable in the active backend.
        */
-      void storeObject( Resolvable::Ptr resolvable );
+      void storeObject( Resolvable::constPtr resolvable );
       /**
        * Deletes a Resolvable from the active backend.
        */

@@ -42,7 +42,7 @@ namespace storage
 { /////////////////////////////////////////////////////////////////
 
 template<class T>
-std::string toXML( T obj ); //undefined
+std::string toXML( const T &obj ); //undefined
 
 template<> // or constPtr?
 std::string toXML( const Edition &edition );
@@ -51,7 +51,7 @@ template<> // or constPtr?
 std::string toXML( const Arch &arch );
 
 template<> // or constPtr?
-std::string toXML( Capability &cap );
+std::string toXML( const Capability &cap );
 
 template<> // or constPtr?
 std::string toXML( const CapSet &caps );
@@ -65,17 +65,17 @@ std::string toXML( const Dependencies &dep );
  * Use castedToXML for that.
  */
 template<> // or constPtr?
-std::string toXML( Resolvable::constPtr obj );
+std::string toXML( const Resolvable::constPtr &obj );
 
 /**
  * Serialize properties based in the specific kind of the Resolvable
  */
-std::string castedToXML( Resolvable::constPtr ret );
+std::string castedToXML( const Resolvable::constPtr &ret );
 
 /**
  * lack of instrospection sucks
  */
-std::string resolvableTypeToString( Resolvable::constPtr resolvable, bool plural = false );
+std::string resolvableTypeToString( const Resolvable::constPtr &resolvable, bool plural = false );
 
 /**
  * lack of instrospection sucks
@@ -83,16 +83,16 @@ std::string resolvableTypeToString( Resolvable::constPtr resolvable, bool plural
 std::string resolvableKindToString( Resolvable::Kind kind, bool plural = false );
 
 template<> // or constPtr?
-std::string toXML( Package::constPtr obj );
+std::string toXML( const Package::constPtr &obj );
 
 template<> // or constPtr?
-std::string toXML( Script::constPtr obj );
+std::string toXML( const Script::constPtr &obj );
 
 template<> // or constPtr?
-std::string toXML( Message::constPtr obj );
+std::string toXML( const Message::constPtr &obj );
 
 template<> // or constPtr?
-std::string toXML( Patch::constPtr obj );
+std::string toXML( const Patch::constPtr &obj );
 
 /////////////////////////////////////////////////////////////////
 } // namespace devel.dmacvicar

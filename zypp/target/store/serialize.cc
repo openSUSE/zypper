@@ -49,7 +49,7 @@ std::string xml_tag_enclose( const std::string &text, const std::string &tag, bo
 }
 
 template<class T>
-std::string toXML( T obj ); //undefined
+std::string toXML( const T &obj ); //undefined
 
 template<> // or constPtr?
 std::string toXML( const Edition &edition )
@@ -69,7 +69,7 @@ std::string toXML( const Arch &arch )
 }
 
 template<> // or constPtr?
-std::string toXML( Capability &cap )
+std::string toXML( const Capability &cap )
 {
   stringstream out;
   CapFactory factory;
@@ -116,7 +116,7 @@ std::string toXML( const Dependencies &dep )
 }
 
 template<> // or constPtr?
-std::string toXML( Resolvable::constPtr obj )
+std::string toXML( const Resolvable::constPtr &obj )
 {
   stringstream out;
   
@@ -129,7 +129,7 @@ std::string toXML( Resolvable::constPtr obj )
 }
 
 template<> // or constPtr?
-std::string toXML( Package::constPtr obj )
+std::string toXML( const Package::constPtr &obj )
 {
   stringstream out;
   out << "<package>" << std::endl;
@@ -143,7 +143,7 @@ std::string toXML( Package::constPtr obj )
 }
 
 template<> // or constPtr?
-std::string toXML( Script::constPtr obj )
+std::string toXML( const Script::constPtr &obj )
 {
   stringstream out;
   out << "<script>" << std::endl;
@@ -165,7 +165,7 @@ std::string toXML( Script::constPtr obj )
 
 
 template<> // or constPtr?
-std::string toXML( Message::constPtr obj )
+std::string toXML( const Message::constPtr &obj )
 {
   stringstream out;
   out << "<message type=\"" << obj->type() << "\">" << std::endl;
@@ -177,22 +177,22 @@ std::string toXML( Message::constPtr obj )
 }
 
 // or constPtr?
-std::string castedToXML( Resolvable::constPtr resolvable )
+std::string castedToXML( const Resolvable::constPtr &resolvable )
 {
   stringstream out;
-  if ( isKind<const Package>(resolvable) )
+  if ( isKind<Package>(resolvable) )
      out << toXML(asKind<const Package>(resolvable)) << std::endl;
-  if ( isKind<const Patch>(resolvable) )
+  if ( isKind<Patch>(resolvable) )
      out << toXML(asKind<const Patch>(resolvable)) << std::endl;
-  if ( isKind<const Message>(resolvable) )
+  if ( isKind<Message>(resolvable) )
      out << toXML(asKind<const Message>(resolvable)) << std::endl;
-  if ( isKind<const Script>(resolvable) )
+  if ( isKind<Script>(resolvable) )
      out << toXML(asKind<const Script>(resolvable)) << std::endl;
   return out.str();
 }
 
 // or constPtr?
-std::string resolvableTypeToString( Resolvable::constPtr resolvable, bool plural )
+std::string resolvableTypeToString( const Resolvable::constPtr &resolvable, bool plural )
 {
   return resolvableKindToString(resolvable->kind(), plural);
 }
@@ -211,7 +211,7 @@ std::string resolvableKindToString( Resolvable::Kind kind, bool plural)
 }
 
 template<> // or constPtr?
-std::string toXML( Patch::constPtr obj )
+std::string toXML( const Patch::constPtr &obj )
 {
   stringstream out;
   out << "<patch>" << std::endl;

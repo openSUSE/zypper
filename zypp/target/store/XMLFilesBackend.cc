@@ -163,13 +163,13 @@ XMLFilesBackend::dirForResolvableKind( Resolvable::Kind kind ) const
 }
 
 std::string
-XMLFilesBackend::dirForResolvable( Resolvable::Ptr resolvable ) const
+XMLFilesBackend::dirForResolvable( Resolvable::constPtr resolvable ) const
 {
   return dirForResolvableKind(resolvable->kind());
 }
 
 std::string
-XMLFilesBackend::fullPathForResolvable( Resolvable::Ptr resolvable ) const
+XMLFilesBackend::fullPathForResolvable( Resolvable::constPtr resolvable ) const
 {
   std::string filename;
   filename = dirForResolvable(resolvable) + "/";
@@ -178,7 +178,7 @@ XMLFilesBackend::fullPathForResolvable( Resolvable::Ptr resolvable ) const
 }
 
 void
-XMLFilesBackend::storeObject( Resolvable::Ptr resolvable )
+XMLFilesBackend::storeObject( Resolvable::constPtr resolvable )
 {
   std::string xml = castedToXML(resolvable);
   std::string filename = fullPathForResolvable(resolvable);
@@ -257,21 +257,6 @@ std::list<Resolvable::Ptr>
 XMLFilesBackend::storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match)
 {
   return storedObjects();
-}
-
-std::string
-XMLFilesBackend::randomFileName() const
-{
-  FILE *fp;
-  char puffer[49];
-  if ( (fp = popen("openssl rand -base64 48", "r")) == 0)
-  {
-    DBG << "mierda!" << std::endl;
-    //ZYPP_THROW("put some message here");
-  }
-  fscanf(fp, "%s", &puffer);
-  pclose(fp);
-  return "blah";
 }
 
 ///////////////////////////////////////////////////////////////////

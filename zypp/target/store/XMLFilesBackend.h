@@ -54,7 +54,7 @@ public:
   /**
     * Stores a Resolvable in the active backend.
     */
-  virtual void storeObject( Resolvable::Ptr resolvable ) ;
+  virtual void storeObject( Resolvable::constPtr resolvable ) ;
   /**
     * Deletes a Resolvable from the active backend.
     */
@@ -77,11 +77,10 @@ public:
   std::string randomString(int length) const;
   int random() const;
   
-  std::string randomFileName() const;
   /**
     * Directory where the xml file is stored (for the given resolvable)
     */
-  std::string dirForResolvable( Resolvable::Ptr resolvable ) const;
+  std::string dirForResolvable( Resolvable::constPtr resolvable ) const;
   /**
     * Directory where the xml file is stored (for the given resolvable kind)
     */
@@ -90,7 +89,7 @@ public:
     * Full path to the xml file for a given resolvable
     * Does not care if the resolvable is yet stored or not
     */
-  std::string fullPathForResolvable( Resolvable::Ptr resolvable ) const;
+  std::string fullPathForResolvable( Resolvable::constPtr resolvable ) const;
    /**
     * Full path to the xml file for a given resolvable
     * Does not care if the resolvable is yet stored or not

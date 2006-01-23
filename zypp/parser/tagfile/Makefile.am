@@ -13,7 +13,8 @@ parsertagfileinclude_HEADERS = \
 	ParseException.h\
 	Tags.h		\
 	Grammar.h	\
-	Parser.h
+	Parser.h \
+  ProductMetadataParser.h	
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_parser_tagfile.la
 
@@ -22,8 +23,9 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_parser_tagfile.la
 lib@PACKAGE@_parser_tagfile_la_SOURCES = \
 	ParseException.cc\
 	Tags.cc		\
-	Parser.cc
+	Parser.cc \
+	ProductMetadataParser.cc
 
-lib@PACKAGE@_parser_tagfile_la_LIBADD =
+lib@PACKAGE@_parser_tagfile_la_LIBADD = 
 
 ## ##################################################

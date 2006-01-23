@@ -53,7 +53,7 @@ public:
   /**
   * Stores a Resolvable in the active backend.
   */
-  virtual void storeObject( Resolvable::Ptr resolvable )  = 0;
+  virtual void storeObject( Resolvable::constPtr resolvable )  = 0;
   /**
   * Deletes a Resolvable from the active backend.
   */

@@ -73,7 +73,7 @@ void PersistentStorage::doTest()
 }
 
 void
-PersistentStorage::storeObject( Resolvable::Ptr resolvable )
+PersistentStorage::storeObject( Resolvable::constPtr resolvable )
 {
   d->backend->storeObject(resolvable);
 }
