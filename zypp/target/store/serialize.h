@@ -45,19 +45,19 @@ template<class T>
 std::string toXML( T obj ); //undefined
 
 template<> // or constPtr?
-std::string toXML( const Edition edition );
+std::string toXML( const Edition &edition );
 
 template<> // or constPtr?
-std::string toXML( const Arch arch );
+std::string toXML( const Arch &arch );
 
 template<> // or constPtr?
-std::string toXML( Capability cap );
+std::string toXML( Capability &cap );
 
 template<> // or constPtr?
-std::string toXML( const CapSet caps );
+std::string toXML( const CapSet &caps );
 
 template<> // or constPtr?
-std::string toXML( const Dependencies dep );
+std::string toXML( const Dependencies &dep );
 
 /**
  * Serialize Resolvable properties
@@ -65,17 +65,17 @@ std::string toXML( const Dependencies dep );
  * Use castedToXML for that.
  */
 template<> // or constPtr?
-std::string toXML( Resolvable::Ptr obj );
+std::string toXML( Resolvable::constPtr obj );
 
 /**
  * Serialize properties based in the specific kind of the Resolvable
  */
-std::string castedToXML( Resolvable::Ptr ret );
+std::string castedToXML( Resolvable::constPtr ret );
 
 /**
  * lack of instrospection sucks
  */
-std::string resolvableTypeToString( Resolvable::Ptr resolvable, bool plural = false );
+std::string resolvableTypeToString( Resolvable::constPtr resolvable, bool plural = false );
 
 /**
  * lack of instrospection sucks
@@ -83,16 +83,16 @@ std::string resolvableTypeToString( Resolvable::Ptr resolvable, bool plural = fa
 std::string resolvableKindToString( Resolvable::Kind kind, bool plural = false );
 
 template<> // or constPtr?
-std::string toXML( Package::Ptr obj );
+std::string toXML( Package::constPtr obj );
 
 template<> // or constPtr?
-std::string toXML( Script::Ptr obj );
+std::string toXML( Script::constPtr obj );
 
 template<> // or constPtr?
-std::string toXML( Message::Ptr obj );
+std::string toXML( Message::constPtr obj );
 
 template<> // or constPtr?
-std::string toXML( Patch::Ptr obj );
+std::string toXML( Patch::constPtr obj );
 
 /////////////////////////////////////////////////////////////////
 } // namespace devel.dmacvicar

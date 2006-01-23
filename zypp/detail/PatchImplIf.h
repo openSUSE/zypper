@@ -55,15 +55,15 @@ namespace zypp
       virtual ByteCount size() const;
 
       /** Is the patch installation interactive? (does it need user input?) */
-      virtual bool interactive() = 0;
+      virtual bool interactive() const = 0;
       /** The list of all atoms building the patch */
-      virtual AtomList all_atoms() = 0;
+      virtual AtomList all_atoms() const = 0;
       /** The list of those atoms which have not been installed */
-      virtual AtomList not_installed_atoms() = 0;
+      virtual AtomList not_installed_atoms() const = 0;
 
 // TODO check necessarity of functions below
       virtual void mark_atoms_to_freshen(bool freshen) = 0;
-      virtual bool any_atom_selected() = 0;
+      virtual bool any_atom_selected() const = 0;
     };
     ///////////////////////////////////////////////////////////////////
 

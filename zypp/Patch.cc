@@ -55,10 +55,10 @@ namespace zypp
   bool Patch::affects_pkg_manager() const
   { return pimpl().affects_pkg_manager(); }
 
-  Patch::AtomList Patch::atoms()
+  Patch::AtomList Patch::atoms() const
   { return pimpl().all_atoms(); }
 
-  bool Patch::interactive()
+  bool Patch::interactive() const
   { return pimpl().interactive(); }
 
   void Patch::mark_atoms_to_freshen(bool freshen)

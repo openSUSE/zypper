@@ -52,7 +52,7 @@ template<class T>
 std::string toXML( T obj ); //undefined
 
 template<> // or constPtr?
-std::string toXML( const Edition edition )
+std::string toXML( const Edition &edition )
 {
   stringstream out;
   // sad the yum guys did not acll it edition
@@ -61,7 +61,7 @@ std::string toXML( const Edition edition )
 }
 
 template<> // or constPtr?
-std::string toXML( const Arch arch )
+std::string toXML( const Arch &arch )
 {
   stringstream out;
   out << xml_tag_enclose(arch.asString(), "arch");
@@ -69,7 +69,7 @@ std::string toXML( const Arch arch )
 }
 
 template<> // or constPtr?
-std::string toXML( Capability cap )
+std::string toXML( Capability &cap )
 {
   stringstream out;
   CapFactory factory;
@@ -79,7 +79,7 @@ std::string toXML( Capability cap )
 }
 
 template<> // or constPtr?
-std::string toXML( const CapSet caps )
+std::string toXML( const CapSet &caps )
 {
   stringstream out;
   CapSet::iterator it = caps.begin();
@@ -91,7 +91,7 @@ std::string toXML( const CapSet caps )
 }
 
 template<> // or constPtr?
-std::string toXML( const Dependencies dep )
+std::string toXML( const Dependencies &dep )
 {
   stringstream out;
   if ( dep.provides.size() > 0 )
@@ -116,7 +116,7 @@ std::string toXML( const Dependencies dep )
 }
 
 template<> // or constPtr?
-std::string toXML( Resolvable::Ptr obj )
+std::string toXML( Resolvable::constPtr obj )
 {
   stringstream out;
   
@@ -129,12 +129,12 @@ std::string toXML( Resolvable::Ptr obj )
 }
 
 template<> // or constPtr?
-std::string toXML( Package::Ptr obj )
+std::string toXML( Package::constPtr obj )
 {
   stringstream out;
   out << "<package>" << std::endl;
   // reuse Resolvable information serialize function
-  toXML(static_cast<Resolvable::Ptr>(obj));
+  toXML(static_cast<Resolvable::constPtr>(obj));
   //out << "  <do>" << std::endl;
   //out << "      " << obj->do_script() << std::endl;
   //out << "  </do>" << std::endl;
@@ -143,12 +143,12 @@ std::string toXML( Package::Ptr obj )
 }
 
 template<> // or constPtr?
-std::string toXML( Script::Ptr obj )
+std::string toXML( Script::constPtr obj )
 {
   stringstream out;
   out << "<script>" << std::endl;
   // reuse Resolvable information serialize function
-  out << toXML(static_cast<Resolvable::Ptr>(obj));
+  out << toXML(static_cast<Resolvable::constPtr>(obj));
   out << "  <do>" << std::endl;
   out << "      " << obj->do_script() << std::endl;
   out << "  </do>" << std::endl;
@@ -165,34 +165,34 @@ std::string toXML( Script::Ptr obj )
 
 
 template<> // or constPtr?
-std::string toXML( Message::Ptr obj )
+std::string toXML( Message::constPtr obj )
 {
   stringstream out;
   out << "<message type=\"" << obj->type() << "\">" << std::endl;
   // reuse Resolvable information serialize function
-  out << toXML(static_cast<Resolvable::Ptr>(obj));
+  out << toXML(static_cast<Resolvable::constPtr>(obj));
   out << "  <text>" << obj->text() << "</text>" << std::endl;
   out << "</message>" << std::endl;
   return out.str();
 }
 
 // or constPtr?
-std::string castedToXML( Resolvable::Ptr resolvable )
+std::string castedToXML( Resolvable::constPtr resolvable )
 {
   stringstream out;
-  if ( isKind<Package>(resolvable) )
-     out << toXML(asKind<Package>(resolvable)) << std::endl;
-  if ( isKind<Patch>(resolvable) )
-     out << toXML(asKind<Patch>(resolvable)) << std::endl;
-  if ( isKind<Message>(resolvable) )
-     out << toXML(asKind<Message>(resolvable)) << std::endl;
-  if ( isKind<Script>(resolvable) )
-     out << toXML(asKind<Script>(resolvable)) << std::endl;
+  if ( isKind<const Package>(resolvable) )
+     out << toXML(asKind<const Package>(resolvable)) << std::endl;
+  if ( isKind<const Patch>(resolvable) )
+     out << toXML(asKind<const Patch>(resolvable)) << std::endl;
+  if ( isKind<const Message>(resolvable) )
+     out << toXML(asKind<const Message>(resolvable)) << std::endl;
+  if ( isKind<const Script>(resolvable) )
+     out << toXML(asKind<const Script>(resolvable)) << std::endl;
   return out.str();
 }
 
 // or constPtr?
-std::string resolvableTypeToString( Resolvable::Ptr resolvable, bool plural )
+std::string resolvableTypeToString( Resolvable::constPtr resolvable, bool plural )
 {
   return resolvableKindToString(resolvable->kind(), plural);
 }
@@ -211,12 +211,12 @@ std::string resolvableKindToString( Resolvable::Kind kind, bool plural)
 }
 
 template<> // or constPtr?
-std::string toXML( Patch::Ptr obj )
+std::string toXML( Patch::constPtr obj )
 {
   stringstream out;
   out << "<patch>" << std::endl;
   // reuse Resolvable information serialize function
-  out << toXML(static_cast<Resolvable::Ptr>(obj));
+  out << toXML(static_cast<Resolvable::constPtr>(obj));
   Patch::AtomList at = obj->atoms();
   for (Patch::AtomList::iterator it = at.begin(); it != at.end(); it++)
   {

@@ -36,11 +36,11 @@ namespace zypp
 
   public:
     /** Get the script to perform the change */
-    std::string do_script();
+    std::string do_script() const;
     /** Get the script to undo the change */
-    std::string undo_script();
+    std::string undo_script() const ;
     /** Check whether script to undo the change is available */
-    bool undo_available();
+    bool undo_available() const;
 
   protected:
     /** Ctor */

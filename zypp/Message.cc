@@ -40,10 +40,10 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  std::string Message::text()
+  std::string Message::text() const
   { return pimpl().text(); }
 
-  std::string Message::type()
+  std::string Message::type() const
   { return pimpl().type(); }
 
   /////////////////////////////////////////////////////////////////

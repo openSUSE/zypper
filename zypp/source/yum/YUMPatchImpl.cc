@@ -166,7 +166,7 @@ namespace zypp
         return _affects_pkg_manager;
       }
 
-      bool YUMPatchImpl::interactive() {
+      bool YUMPatchImpl::interactive() const {
         if (_reboot_needed)
         {
           DBG << "Patch needs reboot" << endl;
@@ -209,13 +209,13 @@ namespace zypp
         return false;
       }
 
-      YUMPatchImpl::AtomList YUMPatchImpl::all_atoms() {
+      YUMPatchImpl::AtomList YUMPatchImpl::all_atoms() const {
         return _atoms;
       }
 
-      YUMPatchImpl::AtomList YUMPatchImpl::not_installed_atoms() {
+      YUMPatchImpl::AtomList YUMPatchImpl::not_installed_atoms() const {
         AtomList ret;
-        for (AtomList::iterator it = _atoms.begin();
+        for (AtomList::const_iterator it = _atoms.begin();
           it != _atoms.end();
           it++)
         {
@@ -229,8 +229,8 @@ namespace zypp
 
   // TODO check necessarity of functions below
 
-      bool YUMPatchImpl::any_atom_selected() {
-        for (AtomList::iterator it = _atoms.begin();
+      bool YUMPatchImpl::any_atom_selected() const {
+        for (AtomList::const_iterator it = _atoms.begin();
           it != _atoms.end();
           it++)
         {

@@ -51,9 +51,9 @@ namespace zypp
     /** Does the patch affect the package manager itself? */
     bool affects_pkg_manager() const;
     /** The list of all atoms building the patch */
-    AtomList atoms();
+    AtomList atoms() const;
     /** Is the patch installation interactive? (does it need user input?) */
-    bool interactive();
+    bool interactive() const;
     // TODO add comments and reevaluate the need for functions below
     void mark_atoms_to_freshen(bool freshen);
     bool any_atom_selected();

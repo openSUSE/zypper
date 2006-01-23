@@ -72,14 +72,14 @@ namespace zypp
       return _affects_pkg_manager;
     }
 
-    bool PatchImpl::interactive() {
+    bool PatchImpl::interactive() const {
       if (_reboot_needed)
       {
 	DBG << "Patch needs reboot" << endl;
 	return true;
       }
       AtomList not_installed = not_installed_atoms();
-      for (AtomList::iterator it = not_installed.begin();
+      for (AtomList::const_iterator it = not_installed.begin();
 	it != not_installed.end();
 	it++)
       {
@@ -115,13 +115,13 @@ namespace zypp
       return false;
     }
 
-    PatchImpl::AtomList PatchImpl::all_atoms() {
+    PatchImpl::AtomList PatchImpl::all_atoms() const {
       return _atoms;
     }
 
-    PatchImpl::AtomList PatchImpl::not_installed_atoms() {
+    PatchImpl::AtomList PatchImpl::not_installed_atoms() const {
       AtomList ret;
-      for (AtomList::iterator it = _atoms.begin();
+      for (AtomList::const_iterator it = _atoms.begin();
 	it != _atoms.end();
 	it++)
       {
@@ -135,8 +135,8 @@ namespace zypp
 
 // TODO check necessarity of functions below
 
-    bool PatchImpl::any_atom_selected() {
-      for (AtomList::iterator it = _atoms.begin();
+    bool PatchImpl::any_atom_selected() const {
+      for (AtomList::const_iterator it = _atoms.begin();
 	it != _atoms.end();
 	it++)
       {
