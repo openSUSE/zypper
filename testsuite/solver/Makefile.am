@@ -1,6 +1,7 @@
 #
 # Makefile.am for zypp/solver/testsuite
 #
+
 SUBDIRS = src single.out
 AUTOMAKE_OPTIONS = dejagnu
 PACKAGE = solver

@@ -203,6 +203,8 @@ AC_OUTPUT(	\
 	testsuite/zypp/Makefile		\
 	testsuite/zypp/tests/Makefile	\
 	testsuite/solver/Makefile	\
+	testsuite/solver/src/Makefile	\
+	testsuite/solver/src/helix/Makefile	\
 	testsuite/solver/single.out/Makefile	\
 	testsuite/source/Makefile	\
 	testsuite/source/tests/Makefile	\
