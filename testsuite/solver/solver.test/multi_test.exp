@@ -25,7 +25,7 @@
 # are expected to fail
 #
 #
-if { [catch {  set filenames [glob $srcdir/*.multi] } ] } {
+if { [catch {  set filenames [glob $srcdir/src/*.multi] } ] } {
     puts "No .multi files found"
 } else {
     # foreach file, call multi-run (from testsuite/lib)
