@@ -6,67 +6,50 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/ZYpp.h
+/** \file	zypp/pool/PoolTraits.h
  *
 */
-#ifndef ZYPP_ZYPP_H
-#define ZYPP_ZYPP_H
+#ifndef ZYPP_POOL_POOLTRAITS_H
+#define ZYPP_POOL_POOLTRAITS_H
 
-#include <iosfwd>
+#include <set>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
+#include "zypp/pool/PoolItem.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
-  namespace zypp_detail
-  {
-    class ZYppImpl;
-  }
-
-  class ZYppFactory;
-  class ResPool;
-
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : ZYpp
-  //
-  /** */
-  class ZYpp : public base::ReferenceCounted, private base::NonCopyable
-  {
-  public:
+  namespace pool
+  { /////////////////////////////////////////////////////////////////
 
-    typedef intrusive_ptr<ZYpp>       Ptr;
-    typedef intrusive_ptr<const ZYpp> constPtr;
+    class PoolImpl;
 
-  public:
-    /**  */
-    ResPool pool() const;
-
-  protected:
-    /** Dtor */
-    virtual ~ZYpp();
-    /** Stream output */
-    virtual std::ostream & dumpOn( std::ostream & str ) const;
-  private:
-    /** Factory */
-    friend class ZYppFactory;
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : PoolTraits
+    //
     /** */
-    typedef zypp_detail::ZYppImpl Impl;
-    typedef shared_ptr<Impl>      Impl_Ptr;
-    /** Factory ctor */
-    explicit
-    ZYpp( const Impl_Ptr & impl_r );
-  private:
-    /** Pointer to implementation */
-    RW_pointer<Impl> _pimpl;
-  };
-  ///////////////////////////////////////////////////////////////////
+    struct PoolTraits
+    {
+    public:
+      /** */
+      typedef PoolItem                   Item;
+      typedef std::set<Item>             ContainerT;
+      typedef ContainerT::size_type      size_type;
+      typedef ContainerT::iterator       iterator;
+      typedef ContainerT::const_iterator const_iterator;
 
+      typedef PoolImpl                   Impl;
+      typedef shared_ptr<PoolImpl>       Impl_Ptr;
+      typedef shared_ptr<const PoolImpl> Impl_constPtr;
+    };
+    ///////////////////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////////
+  } // namespace pool
+  ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_ZYPP_H
+#endif // ZYPP_POOL_POOLTRAITS_H

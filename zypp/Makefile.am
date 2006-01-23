@@ -34,6 +34,7 @@ pkginclude_HEADERS = NeedAType.h \
 	ResStore.h	\
 	ResFilters.h	\
 	ResPool.h	\
+	ResPoolManager.h\
 	Package.h	\
 	Pathname.h	\
 	Selection.h	\
@@ -91,6 +92,7 @@ lib@PACKAGE@_la_SOURCES = \
 	ResStatus.cc	\
 	ResStore.cc	\
 	ResPool.cc	\
+	ResPoolManager.cc\
 	Package.cc	\
 	Pathname.cc	\
 	Selection.cc	\

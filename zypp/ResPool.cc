@@ -13,57 +13,21 @@
 //#include "zypp/base/Logger.h"
 
 #include "zypp/ResPool.h"
+#include "zypp/pool/PoolImpl.h"
 
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-#if 0
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : ResPool::Impl
-  //
-  /** ResPool implementation. */
-  struct ResPool::Impl
-  {
-
-  public:
-    /** Offer default Impl. */
-    static shared_ptr<Impl> nullimpl()
-    {
-      static shared_ptr<Impl> _nullimpl( new Impl );
-      return _nullimpl;
-    }
-
-  private:
-    friend Impl * rwcowClone<Impl>( const Impl * rhs );
-    /** clone for RWCOW_pointer */
-    Impl * clone() const
-    { return new Impl( *this ); }
-  };
-  ///////////////////////////////////////////////////////////////////
-
-  /** \relates ResPool::Impl Stream output */
-  inline std::ostream & operator<<( std::ostream & str, const ResPool::Impl & obj )
-  {
-    return str << "ResPool::Impl";
-  }
-#endif
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : ResPool
-  //
-  ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : ResPool::ResPool
   //	METHOD TYPE : Ctor
   //
-  ResPool::ResPool()
-  : _inserter( _store )
-  , _deleter( _store )
+  ResPool::ResPool( pool::PoolTraits::Impl_constPtr impl_r )
+  : _pimpl( impl_r )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -74,6 +38,24 @@ namespace zypp
   ResPool::~ResPool()
   {}
 
+  ///////////////////////////////////////////////////////////////////
+  //
+  // Forward to impementation:
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  bool ResPool::empty() const
+  { return _pimpl->empty(); }
+
+  ResPool::size_type ResPool::size() const
+  { return _pimpl->size(); }
+
+  ResPool::const_iterator ResPool::begin() const
+  { return _pimpl->begin(); }
+
+  ResPool::const_iterator ResPool::end() const
+  { return _pimpl->end(); }
+
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<
@@ -81,7 +63,7 @@ namespace zypp
   */
   std::ostream & operator<<( std::ostream & str, const ResPool & obj )
   {
-    return str << "ResPool";
+    return str << *obj._pimpl;
   }
 
   /////////////////////////////////////////////////////////////////

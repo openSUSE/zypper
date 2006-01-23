@@ -8,14 +8,17 @@ SUBDIRS =
 baseincludedir = $(pkgincludedir)/pool
 
 baseinclude_HEADERS =	\
-	PoolItem.h
+	PoolTraits.h	\
+	PoolItem.h	\
+	PoolImpl.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_pool.la
 
 ## ##################################################
 
 lib@PACKAGE@_pool_la_SOURCES =	\
-	PoolItem.cc
+	PoolItem.cc	\
+	PoolImpl.cc
 
 # lib@PACKAGE@_pool_la_LIBADD =
 

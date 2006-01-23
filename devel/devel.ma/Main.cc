@@ -27,7 +27,7 @@
 
 #include <zypp/ResFilters.h>
 #include <zypp/ResStatus.h>
-#include <zypp/ResPool.h>
+#include <zypp/ResPoolManager.h>
 
 #include <zypp/ZYppFactory.h>
 
@@ -168,7 +168,7 @@ int main( int argc, char * argv[] )
   Source src( SourceFactory().createFrom( new source::susetags::SuseTagsImpl(infile) ) );
   MIL << src.resolvables().size() << endl;
 
-  ResPool pool;
+  ResPoolManager pool;
   pool.insert( src.resolvables().begin(), src.resolvables().end() );
   MIL << pool << endl;
 
@@ -194,7 +194,7 @@ int main( int argc, char * argv[] )
 #endif
 
   ZYpp::Ptr appl( ZYppFactory().letsTest() );
-  MIL << *appl;
+  MIL << *appl << endl;
 
 
   INT << "===[END]============================================" << endl;

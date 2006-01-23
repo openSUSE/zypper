@@ -6,56 +6,90 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/zypp_detail/ZYppImpl.h
+/** \file	zypp/pool/PoolImpl.h
  *
 */
-#ifndef ZYPP_ZYPP_DETAIL_ZYPPIMPL_H
-#define ZYPP_ZYPP_DETAIL_ZYPPIMPL_H
+#ifndef ZYPP_POOL_POOLIMPL_H
+#define ZYPP_POOL_POOLIMPL_H
 
 #include <iosfwd>
 
-#include "zypp/ResPoolManager.h"
+#include "zypp/pool/PoolTraits.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace zypp_detail
+  namespace pool
   { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : ZYppImpl
+    //	CLASS NAME : PoolImpl
     //
     /** */
-    class ZYppImpl
+    class PoolImpl
     {
-      friend std::ostream & operator<<( std::ostream & str, const ZYppImpl & obj );
+      friend std::ostream & operator<<( std::ostream & str, const PoolImpl & obj );
+
+    public:
+    /** */
+    typedef pool::PoolTraits::Item           Item;
+    typedef pool::PoolTraits::ContainerT     ContainerT;
+    typedef pool::PoolTraits::size_type      size_type;
+    typedef pool::PoolTraits::iterator       iterator;
+    typedef pool::PoolTraits::const_iterator const_iterator;
 
     public:
       /** Default ctor */
-      ZYppImpl();
+      PoolImpl();
       /** Dtor */
-      ~ZYppImpl();
+      ~PoolImpl();
+
+    public:
+      /**  */
+      ContainerT & store()
+      { return _store; }
+      /**  */
+      const ContainerT & store() const
+      { return _store; }
+      /**  */
+      bool empty() const
+      { return _store.empty(); }
+      /**  */
+      size_type size() const
+      { return _store.size(); }
+      /** */
+      iterator begin()
+      { return _store.begin(); }
+      /** */
+      const_iterator begin() const
+      { return _store.begin(); }
+      /** */
+      iterator end()
+      { return _store.end(); }
+      /** */
+      const_iterator end() const
+      { return _store.end(); }
+
+      /** */
+      void clear()
+      { return _store.clear(); }
+
 
     public:
       /** */
-      ResPool pool() const
-      { return _pool.accessor(); }
-
-    private:
-      /** */
-      ResPoolManager _pool;
+      ContainerT _store;
     };
     ///////////////////////////////////////////////////////////////////
 
-    /** \relates ZYppImpl Stream output */
-    std::ostream & operator<<( std::ostream & str, const ZYppImpl & obj );
+    /** \relates PoolImpl Stream output */
+    std::ostream & operator<<( std::ostream & str, const PoolImpl & obj );
 
     /////////////////////////////////////////////////////////////////
-  } // namespace zypp_detail
+  } // namespace pool
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_ZYPP_DETAIL_ZYPPIMPL_H
+#endif // ZYPP_POOL_POOLIMPL_H

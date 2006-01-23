@@ -6,67 +6,52 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/ZYpp.h
+/** \file	zypp/pool/PoolImpl.cc
  *
 */
-#ifndef ZYPP_ZYPP_H
-#define ZYPP_ZYPP_H
+#include <iostream>
+//#include "zypp/base/Logger.h"
 
-#include <iosfwd>
+#include "zypp/pool/PoolImpl.h"
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
-  namespace zypp_detail
-  {
-    class ZYppImpl;
-  }
-
-  class ZYppFactory;
-  class ResPool;
-
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : ZYpp
-  //
-  /** */
-  class ZYpp : public base::ReferenceCounted, private base::NonCopyable
-  {
-  public:
+  namespace pool
+  { /////////////////////////////////////////////////////////////////
 
-    typedef intrusive_ptr<ZYpp>       Ptr;
-    typedef intrusive_ptr<const ZYpp> constPtr;
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : PoolImpl::PoolImpl
+    //	METHOD TYPE : Ctor
+    //
+    PoolImpl::PoolImpl()
+    {}
 
-  public:
-    /**  */
-    ResPool pool() const;
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : PoolImpl::~PoolImpl
+    //	METHOD TYPE : Dtor
+    //
+    PoolImpl::~PoolImpl()
+    {}
 
-  protected:
-    /** Dtor */
-    virtual ~ZYpp();
-    /** Stream output */
-    virtual std::ostream & dumpOn( std::ostream & str ) const;
-  private:
-    /** Factory */
-    friend class ZYppFactory;
-    /** */
-    typedef zypp_detail::ZYppImpl Impl;
-    typedef shared_ptr<Impl>      Impl_Ptr;
-    /** Factory ctor */
-    explicit
-    ZYpp( const Impl_Ptr & impl_r );
-  private:
-    /** Pointer to implementation */
-    RW_pointer<Impl> _pimpl;
-  };
+    /******************************************************************
+    **
+    **	FUNCTION NAME : operator<<
+    **	FUNCTION TYPE : std::ostream &
+    */
+    std::ostream & operator<<( std::ostream & str, const PoolImpl & obj )
+    {
+      return str << "PoolImpl " << obj.size();
+    }
+
+    /////////////////////////////////////////////////////////////////
+  } // namespace pool
   ///////////////////////////////////////////////////////////////////
-
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_ZYPP_H
