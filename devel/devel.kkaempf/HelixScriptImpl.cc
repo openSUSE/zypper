@@ -6,59 +6,48 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/solver/temporary/HelixPackageImpl.h
+/** \file zypp/solver/temporary/HelixScriptImpl.cc
  *
 */
-#ifndef ZYPP_SOLVER_TEMPORARY_HELIXPACKAGEIMPL_H
-#define ZYPP_SOLVER_TEMPORARY_HELIXPACKAGEIMPL_H
 
-#include "zypp/detail/PackageImpl.h"
-#include "HelixParser.h"
+#include "HelixScriptImpl.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Logger.h"
+
+using namespace std;
+using namespace zypp::detail;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
 ///////////////////////////////////////////////////////////////////
 //
-//        CLASS NAME : HelixPackageImpl
+//        CLASS NAME : HelixScriptImpl
 //
-/** Class representing a package
+///////////////////////////////////////////////////////////////////
+
+/** Default ctor
 */
-class HelixPackageImpl : public detail::PackageImplIf
+HelixScriptImpl::HelixScriptImpl (const zypp::HelixParser & parsed)
+    : _size_installed(parsed.installedSize)
 {
-public:
+}
 
-	class HelixParser;
-	/** Default ctor
-	*/
-	HelixPackageImpl( const zypp::HelixParser & data );
+/** Get the script to perform the change */
+std::string HelixScriptImpl::do_script() const
+{ return "do_script"; }
 
-	/** Package summary */
-	virtual Label summary() const;
-	/** Package description */
-	virtual Text description() const;
-	virtual ByteCount size() const;
-	/** */
-	virtual PackageGroup group() const;
-	/** */
-	virtual ByteCount archivesize() const;
-	/** */
-	virtual bool installOnly() const;
-	/** */
+/** Get the script to undo the change */
+std::string HelixScriptImpl::undo_script() const
+{ return "undo_script"; }
 
-protected:
-	Label _summary;
-	Text _description;
-	PackageGroup _group;
-	bool _install_only;
+/** Check whether script to undo the change is available */
+bool HelixScriptImpl::undo_available() const
+{ return false; }
 
-	ByteCount _size_installed;
-	ByteCount _size_archive;
+ByteCount HelixScriptImpl::size() const
+{ return _size_installed; }
 
-
- };
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SOLVER_TEMPORARY_HELIXPACKAGEIMPL_H

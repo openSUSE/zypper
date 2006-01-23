@@ -6,13 +6,13 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/solver/temporary/HelixPackageImpl.h
+/** \file zypp/solver/temporary/HelixPatternImpl.h
  *
 */
-#ifndef ZYPP_SOLVER_TEMPORARY_HELIXPACKAGEIMPL_H
-#define ZYPP_SOLVER_TEMPORARY_HELIXPACKAGEIMPL_H
+#ifndef ZYPP_SOLVER_TEMPORARY_HELIXPATTERNIMPL_H
+#define ZYPP_SOLVER_TEMPORARY_HELIXPATTERNIMPL_H
 
-#include "zypp/detail/PackageImpl.h"
+#include "zypp/detail/PatternImpl.h"
 #include "HelixParser.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -21,22 +21,22 @@ namespace zypp
 
 ///////////////////////////////////////////////////////////////////
 //
-//        CLASS NAME : HelixPackageImpl
+//        CLASS NAME : HelixPatternImpl
 //
 /** Class representing a package
 */
-class HelixPackageImpl : public detail::PackageImplIf
+class HelixPatternImpl : public detail::PatternImplIf
 {
 public:
 
 	class HelixParser;
 	/** Default ctor
 	*/
-	HelixPackageImpl( const zypp::HelixParser & data );
+	HelixPatternImpl( const zypp::HelixParser & data );
 
-	/** Package summary */
+	/** Pattern summary */
 	virtual Label summary() const;
-	/** Package description */
+	/** Pattern description */
 	virtual Text description() const;
 	virtual ByteCount size() const;
 	/** */

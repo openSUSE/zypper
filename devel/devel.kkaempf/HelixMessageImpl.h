@@ -6,13 +6,13 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/solver/temporary/HelixPackageImpl.h
+/** \file zypp/solver/temporary/HelixMessageImpl.h
  *
 */
-#ifndef ZYPP_SOLVER_TEMPORARY_HELIXPACKAGEIMPL_H
-#define ZYPP_SOLVER_TEMPORARY_HELIXPACKAGEIMPL_H
+#ifndef ZYPP_SOLVER_TEMPORARY_HELIXMESSAGEIMPL_H
+#define ZYPP_SOLVER_TEMPORARY_HELIXMESSAGEIMPL_H
 
-#include "zypp/detail/PackageImpl.h"
+#include "zypp/detail/MessageImpl.h"
 #include "HelixParser.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -21,44 +21,31 @@ namespace zypp
 
 ///////////////////////////////////////////////////////////////////
 //
-//        CLASS NAME : HelixPackageImpl
+//        CLASS NAME : HelixMessageImpl
 //
 /** Class representing a package
 */
-class HelixPackageImpl : public detail::PackageImplIf
+class HelixMessageImpl : public detail::MessageImplIf
 {
 public:
 
 	class HelixParser;
 	/** Default ctor
 	*/
-	HelixPackageImpl( const zypp::HelixParser & data );
+	HelixMessageImpl( const zypp::HelixParser & data );
 
-	/** Package summary */
-	virtual Label summary() const;
-	/** Package description */
-	virtual Text description() const;
+	std::string text () const;
+	std::string type () const;
 	virtual ByteCount size() const;
-	/** */
-	virtual PackageGroup group() const;
-	/** */
-	virtual ByteCount archivesize() const;
-	/** */
-	virtual bool installOnly() const;
-	/** */
 
 protected:
-	Label _summary;
-	Text _description;
-	PackageGroup _group;
-	bool _install_only;
-
+	std::string _text;
+	std::string _type;
 	ByteCount _size_installed;
-	ByteCount _size_archive;
 
 
  };
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SOLVER_TEMPORARY_HELIXPACKAGEIMPL_H
+#endif // ZYPP_SOLVER_TEMPORARY_HELIXMESSAGEIMPL_H

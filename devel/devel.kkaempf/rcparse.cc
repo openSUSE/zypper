@@ -1,4 +1,4 @@
-// test for RCUndumpSourceImpl
+// test for HelixSourceImpl
 //
 
 #include <iostream>
@@ -15,14 +15,6 @@
 using namespace std;
 using namespace zypp;
 
-static void
-usage (void)
-{
-    ERR << "Usage: rcparse <filename>" << endl;
-    exit (1);
-}
-
-
 /******************************************************************
 **
 **
@@ -33,8 +25,10 @@ usage (void)
 */
 int main( int argc, char * argv[] )
 {
-    if (argc < 2)
-	usage();
+    if (argc < 2) {
+	cerr << "Usage: rcparse <helixname>" << endl;
+	exit (1);
+    }
 
     INT << "===[START]==========================================" << endl;
 

@@ -6,59 +6,44 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/solver/temporary/HelixPackageImpl.h
+/** \file zypp/solver/temporary/HelixMessageImpl.cc
  *
 */
-#ifndef ZYPP_SOLVER_TEMPORARY_HELIXPACKAGEIMPL_H
-#define ZYPP_SOLVER_TEMPORARY_HELIXPACKAGEIMPL_H
 
-#include "zypp/detail/PackageImpl.h"
-#include "HelixParser.h"
+#include "HelixMessageImpl.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Logger.h"
+
+using namespace std;
+using namespace zypp::detail;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
 ///////////////////////////////////////////////////////////////////
 //
-//        CLASS NAME : HelixPackageImpl
+//        CLASS NAME : HelixMessageImpl
 //
-/** Class representing a package
+///////////////////////////////////////////////////////////////////
+
+/** Default ctor
 */
-class HelixPackageImpl : public detail::PackageImplIf
+HelixMessageImpl::HelixMessageImpl (const zypp::HelixParser & parsed)
 {
-public:
+}
 
-	class HelixParser;
-	/** Default ctor
-	*/
-	HelixPackageImpl( const zypp::HelixParser & data );
+string
+HelixMessageImpl::text () const
+{ return _text; }
 
-	/** Package summary */
-	virtual Label summary() const;
-	/** Package description */
-	virtual Text description() const;
-	virtual ByteCount size() const;
-	/** */
-	virtual PackageGroup group() const;
-	/** */
-	virtual ByteCount archivesize() const;
-	/** */
-	virtual bool installOnly() const;
-	/** */
+string
+HelixMessageImpl::type () const
+{ return _type; }
 
-protected:
-	Label _summary;
-	Text _description;
-	PackageGroup _group;
-	bool _install_only;
+ByteCount
+HelixMessageImpl::size() const
+{ return _size_installed; }
 
-	ByteCount _size_installed;
-	ByteCount _size_archive;
-
-
- };
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SOLVER_TEMPORARY_HELIXPACKAGEIMPL_H

@@ -20,7 +20,12 @@ noinst_HEADERS = \
 	HelixExtract.h				\
 	HelixParser.h				\
 	HelixSourceImpl.h			\
-	HelixPackageImpl.h
+	HelixPackageImpl.h			\
+	HelixScriptImpl.h			\
+	HelixMessageImpl.h			\
+	HelixPatchImpl.h			\
+	HelixPatternImpl.h			\
+	HelixProductImpl.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_devel_kkaempf.la
 
@@ -29,5 +34,10 @@ lib@PACKAGE@_devel_kkaempf_la_SOURCES =		\
 	HelixExtract.cc				\
 	HelixParser.cc				\
 	HelixSourceImpl.cc			\
-	HelixPackageImpl.cc
+	HelixPackageImpl.cc			\
+	HelixScriptImpl.cc			\
+	HelixMessageImpl.cc			\
+	HelixPatchImpl.cc			\
+	HelixPatternImpl.cc			\
+	HelixProductImpl.cc
 

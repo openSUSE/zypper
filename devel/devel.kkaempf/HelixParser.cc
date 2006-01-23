@@ -105,7 +105,7 @@ parse_dep_attrs(bool *is_obsolete, bool *is_pre, const xmlChar **attrs)
 	else if (attr == "release")	drelease = value;
 	else if (attr == "arch")	darch = value;
 	else if (attr == "obsoletes")	*is_obsolete = true;
-	else if (attr == "pre")		if (value && *value == '1') *is_pre = true;
+	else if (attr == "pre")		if (value == "1") *is_pre = true;
 	else {
 	    _DBG("HelixParser") << "! Unknown attribute: " << attr << " = " << value << endl;
 	}
