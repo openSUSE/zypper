@@ -275,7 +275,6 @@ resItem_and_dependency_table_remove (ResItemAndDependencyTable & table, ResItem_
 	ResItemAndDependency_constPtr r_and_d = pos->second;
 	if (r_and_d->resItem() == resItem) {
 	    table.erase (pos);
-	    break;
 	}
     }
     return;
