@@ -16,7 +16,7 @@
 #include <set>
 
 #include "zypp/base/PtrTypes.h"
-#include "zypp/Package.h"
+#include "zypp/ResObject.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-SUBDIRS = base url media capability detail parser source target solver
+SUBDIRS = base url media capability detail pool parser source target solver
 
 ## ##################################################
 
@@ -32,6 +32,7 @@ pkginclude_HEADERS = NeedAType.h \
 	ResStatus.h	\
 	ResStore.h	\
 	ResFilters.h	\
+	ResPool.h	\
 	Package.h	\
 	Pathname.h	\
 	Selection.h	\
@@ -86,6 +87,7 @@ lib@PACKAGE@_la_SOURCES = \
 	ResTraits.cc	\
 	ResStatus.cc	\
 	ResStore.cc	\
+	ResPool.cc	\
 	Package.cc	\
 	Pathname.cc	\
 	Selection.cc	\
@@ -109,6 +111,7 @@ lib@PACKAGE@_la_LDFLAGS =	@LIBZYPP_VERSION_INFO@
 lib@PACKAGE@_la_LIBADD =        base/lib@PACKAGE@_base.la	\
 				detail/lib@PACKAGE@_detail.la	\
 				capability/lib@PACKAGE@_capability.la	\
+				pool/lib@PACKAGE@_pool.la	\
 				parser/lib@PACKAGE@_parser.la	\
 				source/lib@PACKAGE@_source.la	\
 				media/lib@PACKAGE@_media.la	\
