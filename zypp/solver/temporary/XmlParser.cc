@@ -632,6 +632,7 @@ XmlParser::resolvableEnd (const std::string & name)
 	    _current_resitem_edition = update->edition();
 	    _current_resitem_fileSize = update->packageSize();
 	    _current_resitem_installedSize = update->installedSize();
+	    _current_resitem_arch = update->arch();	 
 	}
 	else {
 	    for (CapSet::const_iterator iter = _current_provides.begin(); iter != _current_provides.end(); iter++) {
