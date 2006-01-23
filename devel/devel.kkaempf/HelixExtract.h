@@ -32,10 +32,16 @@
 #include "zypp/solver/temporary/XmlNodePtr.h"
 #include "zypp/solver/temporary/ChannelPtr.h"
 
-typedef bool (*ResolvableStoreCallback) (zypp::Resolvable::Ptr res, zypp::ResStore *store);
+#include "HelixParser.h"
 
-int extractHelixBuffer (const char data[], size_t len, zypp::solver::detail::Channel_Ptr channel, ResolvableStoreCallback callback, zypp::ResStore *store);
-int extractHelixFile (const std::string & filename, zypp::solver::detail::Channel_Ptr channel, ResolvableStoreCallback callback, zypp::ResStore *store);
+namespace zypp {
+
+class HelixSourceImpl;
+
+int extractHelixBuffer (const char *data, size_t len, solver::detail::Channel_Ptr channel, HelixSourceImpl *impl);
+int extractHelixFile (const std::string & filename, solver::detail::Channel_Ptr channel, HelixSourceImpl *impl);
+
+}
 
 #endif /* HELIXEXTRACT_H */
 

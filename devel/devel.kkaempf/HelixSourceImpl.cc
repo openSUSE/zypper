@@ -19,22 +19,17 @@
  * 02111-1307, USA.
  */
 
+#include "HelixExtract.h"
 #include "HelixSourceImpl.h"
+#include "HelixPackageImpl.h"
+
 #include "zypp/solver/temporary/Channel.h"
 #include "zypp/solver/temporary/extract.h"
 #include "zypp/base/Logger.h"
 
-/////////////////////////////////////////////////////////////////////////
-namespace zypp 
-{ ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  namespace solver
-  { /////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////
-    namespace detail
-    { ///////////////////////////////////////////////////////////////////
 
 using namespace std;
+using namespace zypp;
 
 //---------------------------------------------------------------------------
 
@@ -43,24 +38,92 @@ HelixSourceImpl::HelixSourceImpl(media::MediaAccess::Ptr & media_r, const Pathna
     load (path_r.asString());
 }
 
-
-//---------------------------------------------------------------------------
-
-
-static bool
-add_resolvable_cb (Resolvable::Ptr res, ResStore *store)
+Dependencies
+HelixSourceImpl::createDependencies (const HelixParser & parsed)
 {
-#if 0
-    HelixSourceImpl *undump = (HelixSourceImpl *)data;
+    Dependencies deps;
 
-    undump->addResItem (res);
-#else
-    MIL << "add_resItem_cb()" << endl;
-#endif
+    deps.provides = parsed.provides;
+    deps.prerequires = parsed.prerequires;
+    deps.requires = parsed.requires;
+    deps.conflicts = parsed.conflicts;
+    deps.obsoletes = parsed.obsoletes;
+    deps.recommends = parsed.recommends;
+    deps.suggests = parsed.suggests;
+    deps.freshens = parsed.freshens;
+    deps.enhances = parsed.enhances;
 
-    return true;
+    return deps;
 }
 
+Package::Ptr
+HelixSourceImpl::createPackage (const HelixParser & parsed)
+{
+    try
+    {
+	shared_ptr<HelixPackageImpl> impl(new HelixPackageImpl(parsed));
+
+	// Collect basic Resolvable data
+	NVRAD dataCollect( parsed.name,
+			Edition( parsed.version, parsed.release, parsed.epoch ),
+			Arch( parsed.arch ),
+			createDependencies (parsed));
+	Package::Ptr package = detail::makeResolvableFromImpl(dataCollect, impl);
+	return package;
+    }
+    catch (const Exception & excpt_r)
+    {
+	ERR << excpt_r << endl;
+	throw "Cannot create package object";
+    }
+    return NULL;
+}
+
+
+Message::Ptr
+HelixSourceImpl::createMessage (const HelixParser & data)
+{
+    return NULL;
+}
+
+
+Script::Ptr
+HelixSourceImpl::createScript (const HelixParser & data)
+{
+    return NULL;
+}
+
+
+Patch::Ptr
+HelixSourceImpl::createPatch (const HelixParser & data)
+{
+    return NULL;
+}
+
+
+Pattern::Ptr
+HelixSourceImpl::createPattern (const HelixParser & data)
+{
+    return NULL;
+}
+
+
+Product::Ptr
+HelixSourceImpl::createProduct (const HelixParser & data)
+{
+    return NULL;
+}
+
+//-----------------------------------------------------------------------------
+
+void
+HelixSourceImpl::parserCallback (const HelixParser & data)
+{
+    if (data.kind == ResTraits<Package>::kind) {
+	Package::Ptr p = createPackage (data);
+	_store.insert (p);
+    }
+}
 
 //-----------------------------------------------------------------------------
 
@@ -68,22 +131,10 @@ void
 HelixSourceImpl::load (const string & filename)
 {
     if (!filename.empty()) {
-	Channel_Ptr channel = new Channel ("test", "test", "test", "test");
-	channel->setType (CHANNEL_TYPE_HELIX);
+	solver::detail::Channel_Ptr channel = new solver::detail::Channel ("test", "test", "test", "test");
+	channel->setType (solver::detail::CHANNEL_TYPE_HELIX);
 //	channel->setSystem (true);
 
-	extractHelixFile (filename, channel, add_resolvable_cb, &_store);
+	extractHelixFile (filename, channel, this);
     }
 }
-
-
-///////////////////////////////////////////////////////////////////
-    };// namespace detail
-    /////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////
-  };// namespace solver
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-};// namespace zypp
-/////////////////////////////////////////////////////////////////////////
-

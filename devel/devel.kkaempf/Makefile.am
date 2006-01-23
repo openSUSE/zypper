@@ -28,7 +28,6 @@ lib@PACKAGE@_devel_kkaempf_la_SOURCES =		\
 	Buffer.cc				\
 	HelixExtract.cc				\
 	HelixParser.cc				\
-	HelixSourceImpl.cc
-
-#	HelixPackageImpl.cc
+	HelixSourceImpl.cc			\
+	HelixPackageImpl.cc
 

@@ -33,10 +33,11 @@
 
 using namespace std;
 using namespace zypp;
-using namespace zypp::solver::detail;
+
+namespace zypp {
 
 int 
-extractHelixBuffer (const char buf[], size_t len, Channel_Ptr channel, ResolvableStoreCallback callback, ResStore *store)
+extractHelixBuffer (const char *buf, size_t len, solver::detail::Channel_Ptr channel, HelixSourceImpl *impl)
 {
 //    _DBG("HelixExtract") << "extract_packages_from_helix_buffer(" << buf << "...," << (long)len << ",...)" << endl;
 
@@ -44,7 +45,7 @@ extractHelixBuffer (const char buf[], size_t len, Channel_Ptr channel, Resolvabl
 	return 1;
 
     HelixParser parser (channel);
-    parser.parseChunk (buf, len, callback, store);
+    parser.parseChunk (buf, len, impl);
     parser.done ();
 
     return 0;
@@ -52,7 +53,7 @@ extractHelixBuffer (const char buf[], size_t len, Channel_Ptr channel, Resolvabl
 
 
 int
-extractHelixFile (const std::string & filename, Channel_Ptr channel, ResolvableStoreCallback callback, ResStore *store)
+extractHelixFile (const std::string & filename, solver::detail::Channel_Ptr channel, HelixSourceImpl *impl)
 {
     Buffer *buf;
 
@@ -63,10 +64,11 @@ extractHelixFile (const std::string & filename, Channel_Ptr channel, ResolvableS
     if (buf == NULL)
 	return -1;
 
-    extractHelixBuffer ((const char *)(buf->data), buf->size, channel, callback, store);
+    extractHelixBuffer ((const char *)(buf->data), buf->size, channel, impl);
 
     bufferUnmapFile (buf);
 
     return 0;
 }
 
+} // namespace zypp

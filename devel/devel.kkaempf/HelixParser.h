@@ -27,21 +27,18 @@
 #include <list>
 
 #include "zypp/CapSet.h"
-
-#include "HelixExtract.h"
+#include "zypp/ResStore.h"
+#include "zypp/Dependencies.h"
 
 #include "zypp/solver/temporary/Channel.h"
 #include "zypp/solver/temporary/XmlNode.h"
 
-/////////////////////////////////////////////////////////////////////////
-namespace zypp
-{ ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  namespace solver
-  { /////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////
-    namespace detail
-    { ///////////////////////////////////////////////////////////////////
+namespace zypp {
+
+class HelixParser;
+class HelixSourceImpl;
+typedef bool (*ParserCallback) (const HelixParser & parsed, HelixSourceImpl *impl);
+
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -60,7 +57,7 @@ class HelixParser
     typedef enum _HelixParserState HelixParserState;
 
   private:
-    Channel_constPtr _channel;
+    solver::detail::Channel_constPtr _channel;
     bool _processing;
     xmlParserCtxtPtr _xml_context;
     HelixParserState _state;
@@ -82,21 +79,22 @@ class HelixParser
     int fileSize;
     int installedSize;
     bool installOnly;
+    bool installed;
 
-    CapSet requires;
     CapSet provides;
+    CapSet prerequires;
+    CapSet requires;
     CapSet conflicts;
-    CapSet children;
+    CapSet obsoletes;
     CapSet recommends;
     CapSet suggests;
-    CapSet obsoletes;
     CapSet freshens;
     CapSet enhances;
 
   private:
-    // these point to one of the above lists during dependency parsing
-    CapSet *_toplevel_dep_list;
-    CapSet *_dep_list;
+    // these point to one of the Dependency sets during dependency parsing
+    CapSet *_dep_set;
+    CapSet *_toplevel_dep_set;		// just needed during 'or' parsing
 
     std::string _text_buffer;
 
@@ -104,7 +102,7 @@ class HelixParser
 
   public:
 
-    HelixParser (Channel_constPtr channel);
+    HelixParser (solver::detail::Channel_constPtr channel);
     virtual ~HelixParser();
 
     // ---------------------------------- I/O
@@ -133,12 +131,11 @@ class HelixParser
     void startElement(const std::string & token, const xmlChar **attrs);
     void endElement(const std::string & token);
 
-    void parseChunk (const char *xmlbuf, size_t size, ResolvableStoreCallback callback, ResStore *store);
+    void parseChunk (const char *xmlbuf, size_t size, HelixSourceImpl *impl);
     void done (void);
 
   private:
-    ResolvableStoreCallback _callback;
-    ResStore *_store;
+    HelixSourceImpl *_impl;
 
     // internal HelixParser functions, c++-style
     void toplevelStart(const std::string & token, const xmlChar **attrs);
@@ -153,15 +150,6 @@ class HelixParser
 
 };
 
-///////////////////////////////////////////////////////////////////
-    };// namespace detail
-    /////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////
-  };// namespace solver
-  ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-};// namespace zypp
-/////////////////////////////////////////////////////////////////////////
-
+} // namespace zypp
 
 #endif  // ZYPP_SOLVER_TEMPORARY_HELIXPARSER_H

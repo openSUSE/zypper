@@ -502,8 +502,7 @@ bufferMapFile (const string & filename)
 	ByteArray *byte_array = NULL;
 
 	if (uncompress_memory (data, s.st_size, &byte_array)) {
-	    WAR << "Uncompression of '" << filename
-		<< "' failed" << endl;
+	    WAR << "Uncompression of '" << filename << "' failed" << endl;
 	} else {
 	    buf = (Buffer *)malloc(sizeof (Buffer));
 	    buf->data       = byte_array->data;

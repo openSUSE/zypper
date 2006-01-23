@@ -1,6 +1,6 @@
 <channel><subchannel>
 <package>
-  <name>unfulfilled</name>
+  <name>Package1</name>
   <summary>A fake package</summary>
   <description>A fake package</description>
   <section>misc</section>
@@ -19,14 +19,14 @@
     </update>
   </history>
   <provides>
-    <dep name="x" op="(any)" version="1.0"/>
+    <dep name="x"/>
   </provides>
   <requires>
     <dep name="nothere"/>
   </requires>
 </package>
 <package>
-  <name>A</name>
+  <name>Package2</name>
   <summary>A fake package</summary>
   <description>A fake package</description>
   <section>misc</section>
@@ -45,14 +45,14 @@
     </update>
   </history>
   <requires>
-    <dep name="b" op="(any)" version="1.0"/>
+    <dep name="b" op="=" version="1.0"/>
   </requires>
   <provides>
-    <dep name="a" op="(any)" version="1.0"/>
+    <dep name="a" op="=" version="1.0"/>
   </provides>
 </package>
 <package>
-  <name>B</name>
+  <name>Package3</name>
   <summary>A fake package</summary>
   <description>A fake package</description>
   <section>misc</section>
@@ -71,17 +71,17 @@
     </update>
   </history>
   <requires>
-    <dep name="c" op="(any)" version="1.0"/>
+    <dep name="c" op="&lt;" version="1.0"/>
   </requires>
   <provides>
-    <dep name="b" op="(any)" version="1.0"/>
+    <dep name="b" op="&gt;=" version="1.0"/>
   </provides>
   <conflicts>
-    <dep name="e" op="(any)" version="1.0"/>
+    <dep name="e" op="!=" version="1.0"/>
   </conflicts>
 </package>
 <package>
-  <name>C</name>
+  <name>Package4</name>
   <summary>A fake package</summary>
   <description>A fake package</description>
   <section>misc</section>
@@ -100,11 +100,11 @@
     </update>
   </history>
   <provides>
-    <dep name="c" op="(any)" version="1.0"/>
+    <dep name="c" op="&lt;=" version="1.0"/>
   </provides>
 </package>
 <package>
-  <name>D</name>
+  <name>Package5</name>
   <summary>A fake package</summary>
   <description>A fake package</description>
   <section>misc</section>
@@ -123,12 +123,12 @@
     </update>
   </history>
   <provides>
-    <dep name="d" op="(any)" version="1.0"/>
-    <dep name="c" op="(any)" version="1.0"/>
+    <dep name="d" op="==" version="1.0"/>
+    <dep name="c"/>
   </provides>
 </package>
 <package>
-  <name>E</name>
+  <name>Package6</name>
   <summary>A fake package</summary>
   <description>A fake package</description>
   <section>misc</section>
@@ -146,10 +146,5 @@
       <description>Yggdrasil Linux</description>
     </update>
   </history>
-  <provides>
-    <dep name="c" op="(any)" version="1.0"/>
-    <dep name="e" op="(any)" version="1.0"/>
-    <dep name="x" op="(any)" version="1.0"/>
-  </provides>
 </package>
 </subchannel></channel>

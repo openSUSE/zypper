@@ -25,6 +25,8 @@
 #include <ctype.h>
 #include <assert.h>
 #include "HelixParser.h"
+#include "HelixPackageImpl.h"
+#include "HelixSourceImpl.h"
 
 #include "zypp/ResObject.h"
 #include "zypp/CapFactory.h"
@@ -34,42 +36,33 @@
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
 
-/////////////////////////////////////////////////////////////////////////
-namespace zypp
-{ ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-    namespace solver
-    { /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
-  namespace detail
-  { ///////////////////////////////////////////////////////////////////
-
 using namespace std;
+using namespace zypp;
 
 //---------------------------------------------------------------------------
 
 static Resolvable::Kind
 string2kind (const std::string & str)
 {
-    Resolvable::Kind kind = ResTraits<zypp::Package>::kind;
+    Resolvable::Kind kind = ResTraits<Package>::kind;
     if (!str.empty()) {
 	if (str == "package") {
 	    // empty
 	}
 	else if (str == "patch") {
-	    kind = ResTraits<zypp::Patch>::kind;
+	    kind = ResTraits<Patch>::kind;
 	}
 	else if (str == "pattern") {
-	    kind = ResTraits<zypp::Pattern>::kind;
+	    kind = ResTraits<Pattern>::kind;
 	}
 	else if (str == "script") {
-	    kind = ResTraits<zypp::Script>::kind;
+	    kind = ResTraits<Script>::kind;
 	}
 	else if (str == "message") {
-	    kind = ResTraits<zypp::Message>::kind;
+	    kind = ResTraits<Message>::kind;
 	}
 	else if (str == "product") {
-	    kind = ResTraits<zypp::Product>::kind;
+	    kind = ResTraits<Product>::kind;
 	}
 	else {
 	    ERR << "get_resItem unknown kind '" << str << "'" << endl;
@@ -82,14 +75,14 @@ string2kind (const std::string & str)
 //---------------------------------------------------------------------------
 
 static Capability
-parse_dep_attrs(bool *is_obsolete, const xmlChar **attrs)
+parse_dep_attrs(bool *is_obsolete, bool *is_pre, const xmlChar **attrs)
 {
     CapFactory  factory;
     int i;
     bool op_present = false;
     /* Temporary variables dependent upon the presense of an 'op' attribute */
 
-    Resolvable::Kind dkind = ResTraits<zypp::Package>::kind;	// default to package
+    Resolvable::Kind dkind = ResTraits<Package>::kind;	// default to package
     string dname;
     int depoch = Edition::noepoch;
     string dversion;
@@ -98,6 +91,7 @@ parse_dep_attrs(bool *is_obsolete, const xmlChar **attrs)
     Rel relation = Rel::ANY;
 
     *is_obsolete = false;
+    *is_pre = false;
 
     for (i = 0; attrs[i]; i++) {
 	const string attr ((const char *)attrs[i++]);
@@ -111,6 +105,7 @@ parse_dep_attrs(bool *is_obsolete, const xmlChar **attrs)
 	else if (attr == "release")	drelease = value;
 	else if (attr == "arch")	darch = value;
 	else if (attr == "obsoletes")	*is_obsolete = true;
+	else if (attr == "pre")		if (value && *value == '1') *is_pre = true;
 	else {
 	    _DBG("HelixParser") << "! Unknown attribute: " << attr << " = " << value << endl;
 	}
@@ -201,7 +196,7 @@ sax_characters(void *ptr, const xmlChar *ch, int len)
 {
     HelixParser *ctx = (HelixParser *)ptr;
 
-    ctx->toBuffer (str::trim (string ((const char *)ch)));
+    ctx->toBuffer (str::trim (string ((const char *)ch, len)));
     return;
 }
 
@@ -265,14 +260,15 @@ static xmlSAXHandler sax_handler = {
 
 //---------------------------------------------------------------------------
 
-HelixParser::HelixParser (Channel_constPtr channel)
+HelixParser::HelixParser (solver::detail::Channel_constPtr channel)
     : _channel (channel)
     , _processing (false)
     , _xml_context (NULL)
     , _state (PARSER_TOPLEVEL)
     , _stored(true)
-    , _toplevel_dep_list (NULL)
-    , _dep_list (NULL)
+    , _dep_set (NULL)
+    , _toplevel_dep_set (NULL)
+    , _impl (NULL)
 {
 //    _XXX("HelixParser") <<  "* Context created (" << this << ")" << endl;
 }
@@ -336,7 +332,7 @@ HelixParser::releaseBuffer ()
 // called for extracting
 
 void
-HelixParser::parseChunk(const char *xmlbuf, size_t size, ResolvableStoreCallback callback, ResStore *store)
+HelixParser::parseChunk(const char *xmlbuf, size_t size, HelixSourceImpl *impl)
 {
 //    _DBG("HelixParser") << "HelixParser::parseChunk(" << xmlbuf << "...," << (long)size << ")" << endl;
 
@@ -346,8 +342,7 @@ HelixParser::parseChunk(const char *xmlbuf, size_t size, ResolvableStoreCallback
 	_xml_context = xmlCreatePushParserCtxt(&sax_handler, this, NULL, 0, NULL);
     }
 
-    _callback = callback;
-    _store = store;
+    _impl = impl;
 
     xmlParseChunk(_xml_context, xmlbuf, size, 0);
 }
@@ -455,13 +450,13 @@ HelixParser::toplevelStart(const std::string & token, const xmlChar **attrs)
 	fileSize = 0;
 	installedSize = 0;
 	installOnly = false;
+	installed = false;
 
 	requires.clear();
 	provides.clear();
 	conflicts.clear();
 	freshens.clear();
 	enhances.clear();
-	children.clear();
 	recommends.clear();
 	suggests.clear();
 	obsoletes.clear();
@@ -491,15 +486,15 @@ HelixParser::resolvableStart(const std::string & token, const xmlChar **attrs)
     }
     else if (token == "requires") {
 	_state = PARSER_DEP;
-	_dep_list = _toplevel_dep_list = &requires;
+	_dep_set = _toplevel_dep_set = &requires;
     }
     else if (token == "recommends") {
 	_state = PARSER_DEP;
-	_dep_list = _toplevel_dep_list = &recommends;
+	_dep_set = _toplevel_dep_set = &recommends;
     }
     else if (token == "suggests") {
 	_state = PARSER_DEP;
-	_dep_list = _toplevel_dep_list = &suggests;
+	_dep_set = _toplevel_dep_set = &suggests;
     }
     else if (token == "conflicts") {
 	bool is_obsolete = false;
@@ -514,26 +509,32 @@ HelixParser::resolvableStart(const std::string & token, const xmlChar **attrs)
 	}
 
 	if (is_obsolete)
-	    _dep_list = _toplevel_dep_list = &obsoletes;
+	    _dep_set = _toplevel_dep_set = &obsoletes;
 	else {
-	    _dep_list = _toplevel_dep_list = &conflicts;
+	    _dep_set = _toplevel_dep_set = &conflicts;
 	}
     }
     else if (token == "obsoletes") {
 	_state = PARSER_DEP;
-	_dep_list = _toplevel_dep_list = &obsoletes;
+	_dep_set = _toplevel_dep_set = &obsoletes;
     }
     else if (token == "provides") {
 	_state = PARSER_DEP;
-	_dep_list = _toplevel_dep_list = &provides;
+	_dep_set = _toplevel_dep_set = &provides;
     }
+#if 0		// disabled
     else if (token == "children") {
 	_state = PARSER_DEP;
-	_dep_list = _toplevel_dep_list = &children;
+	_dep_set = _toplevel_dep_set = &children;
     }
+#endif
     else if (token == "freshens") {
 	_state = PARSER_DEP;
-	_dep_list = _toplevel_dep_list = &freshens;
+	_dep_set = _toplevel_dep_set = &freshens;
+    }
+    else if (token == "enhances") {
+	_state = PARSER_DEP;
+	_dep_set = _toplevel_dep_set = &enhances;
     }
     else {
 //	_XXX("HelixParser") << "! Not handling " << token << " in package start" << endl;
@@ -564,17 +565,20 @@ HelixParser::dependencyStart(const std::string & token, const xmlChar **attrs)
     if (token == "dep") {
 	Capability dep;
 	bool is_obsolete;
+	bool is_pre;
 
-	dep = parse_dep_attrs(&is_obsolete, attrs);
+	dep = parse_dep_attrs(&is_obsolete, &is_pre, attrs);
 
 	if (is_obsolete)
 	    obsoletes.insert (dep);
+	else if (is_pre)
+	    prerequires.insert (dep);
 	else {
-	    _dep_list->insert (dep);
+	    _dep_set->insert (dep);
 	}
     }
     else if (token == "or")
-	_dep_list->clear();
+	_dep_set->clear();
     else {
 	_DBG("HelixParser") <<  "! Not handling " << token << " in dependency" << endl;
     }
@@ -612,28 +616,18 @@ HelixParser::resolvableEnd (const std::string & token)
 	}
 
 	if (piter == provides.end()) {			// no self provide found, construct one
-	    _XXX("RC_SPEW") << "Adding self-provide [" << selfdep.asString() << "]" << endl;
+//	    _XXX("HelixParser") << "Adding self-provide [" << selfdep.asString() << "]" << endl;
 	    provides.insert (selfdep);
 	}
 
-	Dependencies deps;
-	deps.requires		= requires;
-	deps.provides		= provides;
-	deps.conflicts		= conflicts;
-	deps.obsoletes		= obsoletes;
-	deps.suggests		= suggests;
-	deps.recommends		= recommends;
-	deps.freshens		= freshens;
+	if (_channel->system())
+	    installed = true;
 
-#warning Resolvable complete
-#if 0
-	Package_Ptr package = new Package ( channel, kind, name, edition, arch);
+	if (_impl) {
+	    _impl->parserCallback (*this);
+	}
 
-	if (_channel->system())				// simulate system channel by loading xml file
-	    package->setInstalled (true);
-#endif
-
-//	_DBG("RC_SPEW") << package->asString(true) << endl;
+//	_DBG("HelixParser") << package->asString(true) << endl;
 //	_DBG("HelixParser") << "HelixParser::resolvableEnd(" << token << ") done: '" << package->asString(true) << "'" << endl;
 //	_XXX("HelixParser") << "HelixParser::resolvableEnd now " << _all_packages.size() << " packages" << endl;
 	_stored = true;
@@ -648,6 +642,7 @@ HelixParser::resolvableEnd (const std::string & token)
     } else if (token == "filesize") {		fileSize = str::strtonum<long>(_text_buffer);
     } else if (token == "installedsize") {	installedSize = str::strtonum<long>(_text_buffer);
     } else if (token == "install_only") {	installOnly = true;
+    } else if (token == "md5sum") {		// ignore
     } else {
 	_DBG("HelixParser") << "HelixParser::resolvableEnd(" << token << ") unknown" << endl;
     }
@@ -674,8 +669,6 @@ void
 HelixParser::updateEnd (const std::string & token)
 {
 //    _XXX("HelixParser") << "HelixParser::updateEnd(" << token << ")" << endl;
-
-    Channel_constPtr channel;
 
     if (token == "update") {
 	_state = PARSER_HISTORY;
@@ -708,13 +701,13 @@ HelixParser::dependencyEnd (const std::string & token)
 
     if (token == "or") {
 #if 0
-	OrDependency_Ptr or_dep = OrDependency::fromDependencyList (*_dep_list);
+	OrDependency_Ptr or_dep = OrDependency::fromDependencyList (*_dep_set);
 	Dependency_Ptr dep = new Dependency (or_dep);
 
-	(*_dep_list).clear();
+	(*_dep_set).clear();
 
-	(*_toplevel_dep_list).push_back (dep);
-	_dep_list = _toplevel_dep_list;
+	(*_toplevel_dep_set).push_back (dep);
+	_dep_set = _toplevel_dep_set;
 #endif
     }
     else if (token == "dep") {
@@ -722,19 +715,9 @@ HelixParser::dependencyEnd (const std::string & token)
     }
     else {
 	/* All of the dep lists (requires, provides, etc.) */
-	_toplevel_dep_list = NULL;
-	_dep_list = NULL;
+	_toplevel_dep_set = NULL;
+	_dep_set = NULL;
 	_state = PARSER_RESOLVABLE;
     }
 }
 
-
-///////////////////////////////////////////////////////////////////
-  };// namespace detail
-  /////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////
-    };// namespace solver
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////
-};// namespace zypp
-/////////////////////////////////////////////////////////////////////////
