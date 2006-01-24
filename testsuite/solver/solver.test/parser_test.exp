@@ -1,0 +1,95 @@
+#
+# parser_test.exp
+# 'main' file for all helix parser tests
+#
+# Runs 'helixparser' for all *-packages.xml and *-system.xml files in data.deptestomatic
+#
+#
+
+#
+# run a prg file for several times ( defined in subdirectory <programname> )
+#
+  set prog "src/helixparse"
+  set datadir "data.deptestomatic"
+  set errorOccured 0
+  
+  puts "Running $prog ..."
+
+  set dircases [glob $datadir/* ]
+
+  foreach dircase $dircases { 
+      set testPath [split $dircase "/"]
+      set testFilename [lindex $testPath [expr [llength $testPath]-1]]
+      set testFname [split $testFilename "."]
+      set testBase_name [lindex $testFname 0]
+
+      if {$testBase_name == "not_used"} {
+	  puts "   ignoring $testBase_name"
+	  continue
+      }
+
+      set xfails [list ]
+      set xfailname "$dircase/xfail"
+      if { [ file exists $xfailname] != 0 } {
+	set fp [open $xfailname r]
+	set xfails [read $fp]
+	close $fp
+      }
+
+      #							look for *-packages.xml
+      set testcases [glob $dircase/*-packages.xml $dircase/*-system.xml]
+
+      foreach testcase $testcases { 
+
+	  set testPath [split $testcase "/"]
+	  set testPathLen  [llength $testPath]
+	  set testFilename [lindex $testPath [expr $testPathLen-1]]
+	  set testDirname [lindex $testPath [expr $testPathLen-2]]
+
+	  set expect_to_fail 0
+	  if { [lsearch $xfails $testFilename] != -1 } {
+	    set expect_to_fail 1
+	  }
+
+	  set testFname [split $testFilename "."]
+	  set testBase_name [lindex $testFname 0]
+	  puts "   ... $testDirname/$testFilename" 
+
+	  #generate output directory
+
+	  set outfile ./$dircase/$testBase_name.out
+	  set errfile ./$dircase/$testBase_name.err
+
+	  # run the test
+
+#	  set command "LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:../src/.libs\" $prog $testcase >$outfile 2>$errfile"
+	  set command "$prog $testcase >$outfile 2>$errfile"
+	  set result ""
+	  set oops [catch { set result [exec sh -c $command] } catched]
+
+	  if {$oops != 0} {
+	      fail "test case failed for $testBase_name: $catched"
+	      set errorOccured 0
+	      continue
+	  }
+
+	  # check return code from runprg
+      
+	  if {$result != ""} {
+	      warning "Run of $testBase_name results in '$result'"
+	      set errorOccured 0
+	      continue
+	  }
+
+
+	  # ok, all is fine
+	  pass $testBase_name
+      }
+  }
+
+  if { $errorOccured == 0 } {
+      return 0
+  } else {
+      return -1
+  }
+

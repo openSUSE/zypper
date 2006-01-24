@@ -11,7 +11,7 @@ LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la helix/lib@PACKAGE@_helix.la
 #check_PROGRAMS = deptestomatic.multi
 noinst_PROGRAMS = utils.single				\
 		deptestomatic.multi			\
-		helixparse.multi
+		helixparse
 
 utils_single_SOURCES =					\
 	utils_single.cc
@@ -19,5 +19,5 @@ utils_single_SOURCES =					\
 deptestomatic_multi_SOURCES =				\
 	deptestomatic.cc
 
-helixparse_multi_SOURCES =				\
+helixparse_SOURCES =					\
 	helixparse.cc
