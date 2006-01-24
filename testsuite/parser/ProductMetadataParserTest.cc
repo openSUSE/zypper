@@ -4,7 +4,7 @@
 int main()
 {
   zypp::parser::tagfile::ProductMetadataParser parser;
-  parser.parse("tagfiles/products/content.1.txt");
+  //parser.parse("tagfiles/products/content.1.txt");
 
   return 0;
 }
