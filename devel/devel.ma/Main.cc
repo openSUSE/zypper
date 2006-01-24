@@ -143,6 +143,10 @@ struct FakeConv : public std::unary_function<Resolvable::Ptr, void>
         ptr = fakeResKind<detail::SelectionImpl>( ptr );
       }
     _store.insert( asKind<ResObject>(ptr) );
+
+
+    DBG << *ptr << endl << ptr->deps() << endl;
+
   }
 
   ContainerT _store;
@@ -153,24 +157,68 @@ struct FakeConv : public std::unary_function<Resolvable::Ptr, void>
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 {
+  namespace functor {
 
-  template<class _Iterator>
-    struct Query
+    /** */
+    typedef std::unary_function<Capability, bool> CapabilityFilterFunctor;
+
+    /** */
+    struct ByIndex : public CapabilityFilterFunctor
     {
+      bool operator()( Capability c ) const
+      {
+        return c.index() == _index;
+      }
+
+      ByIndex( const std::string & index_r )
+      : _index( index_r )
+      {}
+      ByIndex( const Capability & cap_r )
+      : _index( cap_r.index() )
+      {}
+      std::string _index;
+    };
+
+  }
 
 
+  namespace functor {
 
-
-      Query( _Iterator begin_r, _Iterator end_r )
-      : _begin( begin_r )
-      , _end( end_r )
+    /** \todo enumerate dependencies. */
+    struct ByProvidesIndex : public ResObjectFilterFunctor
+    {
+      ByProvidesIndex( const std::string & index_r )
+      : _index( index_r )
       {}
 
-      _Iterator _begin;
-      _Iterator _end;
+      bool operator()( ResObject::constPtr p ) const
+      {
+        return(    make_filter_begin( ByIndex(_index), p->provides() )
+                != make_filter_end( ByIndex(_index), p->provides() ) );
+      }
+
+      std::string _index;
+    };
+
+    /** \todo enumerate dependencies. */
+    struct ByRequiresIndex : public ResObjectFilterFunctor
+    {
+      ByRequiresIndex( const std::string & index_r )
+      : _index( index_r )
+      {}
+
+      bool operator()( ResObject::constPtr p ) const
+      {
+        return(    make_filter_begin( ByIndex(_index), p->requires() )
+                != make_filter_end( ByIndex(_index), p->requires() ) );
+      }
+
+      std::string _index;
     };
 
 
+
+  } // namespace functor
 }
 ///////////////////////////////////////////////////////////////////
 
@@ -216,6 +264,16 @@ int main( int argc, char * argv[] )
                        Print() ) << endl;
   SEC << invokeOnEach( query.byNameBegin("rpm"), query.byNameEnd("rpm"),
                        xPrint() ) << endl;
+
+  std::string i( "3ddiag" );
+  SEC << invokeOnEach( make_filter_begin( ByProvidesIndex(i), query ),
+                       make_filter_end( ByProvidesIndex(i), query ),
+                       Print() ) << endl;
+  i = "/bin/sh";
+  SEC << invokeOnEach( make_filter_begin( ByRequiresIndex(i), query ),
+                       make_filter_end( ByRequiresIndex(i), query ),
+                       Print() ) << endl;
+
 
 
   INT << "===[END]============================================" << endl;

@@ -196,10 +196,10 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     /** */
-    typedef std::unary_function<ResObject::constPtr, bool> FilterFunctor;
+    typedef std::unary_function<ResObject::constPtr, bool> ResObjectFilterFunctor;
 
     /** */
-    struct ByKind : public FilterFunctor
+    struct ByKind : public ResObjectFilterFunctor
     {
       ByKind( const ResObject::Kind & kind_r )
       : _kind( kind_r )
@@ -219,7 +219,7 @@ namespace zypp
       { return ByKind( ResTraits<_Res>::kind ); }
 
     /** */
-    struct ByName : public FilterFunctor
+    struct ByName : public ResObjectFilterFunctor
     {
       ByName( const std::string & name_r )
       : _name( name_r )
@@ -235,7 +235,7 @@ namespace zypp
 
 #if 0
     /** \todo enumerate dependencies. */
-    struct ByCapabilityIndex : public FilterFunctor
+    struct ByCapabilityIndex : public ResObjectFilterFunctor
     {
       ByCapabilityIndex( const std::string & index_r )
       : _index( index_r )
