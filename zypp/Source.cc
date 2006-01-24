@@ -27,6 +27,14 @@ namespace zypp
   //	METHOD NAME : Source::Source
   //	METHOD TYPE : Ctor
   //
+  Source::Source()
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Source::Source
+  //	METHOD TYPE : Ctor
+  //
   Source::Source( const Impl_Ptr & impl_r )
   : _pimpl( impl_r )
   {

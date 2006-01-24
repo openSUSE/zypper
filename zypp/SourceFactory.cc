@@ -77,7 +77,7 @@ namespace zypp
 
     return Source( impl_r );
   }
- 
+
   void SourceFactory::listProducts( const Url & url_r, ProductSet & products_r )
   {
     if (! url_r.isValid())
@@ -143,6 +143,7 @@ ERR << "Impl created" << endl;
       ZYPP_CAUGHT(excpt_r);
     }
     ZYPP_THROW(Exception("Cannot create the installatino source"));
+    return Source(); // not reached!!
   }
 
   /******************************************************************

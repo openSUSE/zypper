@@ -49,6 +49,8 @@ namespace zypp
     /** Factory */
     friend class SourceFactory;
     /** Factory ctor */
+    Source();
+    /** Factory ctor */
     explicit
     Source( const Impl_Ptr & impl_r );
 
