@@ -137,11 +137,69 @@ namespace zypp
     //@{
     ///////////////////////////////////////////////////////////////////
     //
-    // Now some ResObject attributes
+    // Some tool funktions.
     //
     ///////////////////////////////////////////////////////////////////
 
-    struct ByKind
+    /** Iterate through <tt>[begin_r,end_r)</tt> and invoke \a fnc_r
+     *  on each item that passes \filter_r.
+     *
+     * Iteration aborts if \a fnc_r returns \c false.
+     *
+     * \return Number of invokations of \a fnc_r, negative if
+     * loop was aborted by \a fnc_.
+    */
+    template <class _Iterator, class _Filter, class _Function>
+      inline int invokeOnEach( _Iterator begin_r, _Iterator end_r,
+                               _Filter filter_r,
+                               _Function fnc_r )
+      {
+        int cnt = 0;
+        for ( _Iterator it = begin_r; it != end_r; ++it )
+          {
+            if ( filter_r( *it ) )
+              {
+                ++cnt;
+                if ( ! fnc_r( *it ) )
+                  return -cnt;
+              }
+          }
+        return cnt;
+      }
+
+    /** Iterate through <tt>[begin_r,end_r)</tt> and invoke \a fnc_r
+     *  on each item.
+     *
+     * Iteration aborts if \a fnc_r returns \c false.
+     *
+     * \return Number of invokations of \a fnc_r, negative if
+     * loop was aborted by \a fnc_.
+    */
+    template <class _Iterator, class _Function>
+      inline int invokeOnEach( _Iterator begin_r, _Iterator end_r,
+                               _Function fnc_r )
+      {
+        int cnt = 0;
+        for ( _Iterator it = begin_r; it != end_r; ++it )
+          {
+            ++cnt;
+            if ( ! fnc_r( *it ) )
+              return -cnt;
+          }
+        return cnt;
+      }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    // Some ResObject attributes
+    //
+    ///////////////////////////////////////////////////////////////////
+
+    /** */
+    typedef std::unary_function<ResObject::constPtr, bool> FilterFunctor;
+
+    /** */
+    struct ByKind : public FilterFunctor
     {
       ByKind( const ResObject::Kind & kind_r )
       : _kind( kind_r )
@@ -155,11 +213,13 @@ namespace zypp
       ResObject::Kind _kind;
     };
 
+    /** */
     template<class _Res>
-      ByKind byKind()
+      inline ByKind byKind()
       { return ByKind( ResTraits<_Res>::kind ); }
 
-    struct ByName
+    /** */
+    struct ByName : public FilterFunctor
     {
       ByName( const std::string & name_r )
       : _name( name_r )
@@ -172,6 +232,26 @@ namespace zypp
 
       std::string _name;
     };
+
+#if 0
+    /** \todo enumerate dependencies. */
+    struct ByCapabilityIndex : public FilterFunctor
+    {
+      ByCapabilityIndex( const std::string & index_r )
+      : _index( index_r )
+      {}
+
+      bool operator()( ResObject::constPtr p ) const
+      {
+        p->provides()
+
+        return p->index() == _index;
+
+      }
+
+      std::string _index;
+    };
+#endif
 
     ///////////////////////////////////////////////////////////////////
 

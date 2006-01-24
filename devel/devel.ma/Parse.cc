@@ -15,6 +15,7 @@
 //#include <zypp/ResFilters.h>
 
 using std::endl;
+#if 0
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -124,6 +125,7 @@ template <class _Function>
     return sforEach( Always<true>(), fnc_r );
   }
 
+#endif
 ////////////////////////////////////////////////////////////////////////////
 
 
@@ -134,6 +136,7 @@ template <class _Function>
 ////////////////////////////////////////////////////////////////////////////
 int main( int argc, char* argv[] )
 {
+#if 0
   INT << "===[START]==========================================" << endl;
   string infile( "p" );
   if (argc >= 2 )
@@ -154,5 +157,6 @@ int main( int argc, char* argv[] )
   INT << sforEach( byName("rpm"), Always<true>() ) << endl;
 
   INT << "===[END]============================================" << endl;
+#endif
   return 0;
 }

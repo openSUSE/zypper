@@ -14,8 +14,10 @@
 
 #include <iosfwd>
 
-#include "zypp/base/Iterator.h"
 #include "zypp/pool/PoolTraits.h"
+#include "zypp/base/Iterator.h"
+#include "zypp/ResTraits.h"
+#include "zypp/ResFilters.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -31,7 +33,7 @@ namespace zypp
     friend std::ostream & operator<<( std::ostream & str, const ResPool & obj );
 
   public:
-    /** */
+    /** \ref zypp::pool::PoolItem */
     typedef pool::PoolTraits::Item           Item;
     typedef pool::PoolTraits::size_type      size_type;
     typedef pool::PoolTraits::const_iterator const_iterator;
@@ -45,36 +47,61 @@ namespace zypp
     bool empty() const;
     /**  */
     size_type size() const;
+
+  public:
+    /** \name Iterate through all ResObjects (all kinds). */
+    //@{
     /** */
     const_iterator begin() const;
     /** */
     const_iterator end() const;
+    //@}
 
   public:
-    /** */
-    template<class _Filter>
-      filter_iterator<_Filter, const_iterator> begin() const
-      { return make_filter_iterator( _Filter(), begin(), end() ); }
-    /** */
-    template<class _Filter>
-      filter_iterator<_Filter, const_iterator> begin( _Filter f ) const
-      { return make_filter_iterator( f, begin(), end() ); }
+    /** \name Iterate through all ResObjects of a certain kind. */
+    //@{
+    typedef functor::ByKind ByKind;
+    typedef filter_iterator<ByKind,const_iterator> byKind_iterator;
 
-    /** */
-    template<class _Filter>
-      filter_iterator<_Filter, const_iterator> end() const
-      { return make_filter_iterator( _Filter(), end(), end() ); }
-    /** */
-    template<class _Filter>
-      filter_iterator<_Filter, const_iterator> end( _Filter f ) const
-      { return make_filter_iterator( f, end(), end() ); }
+    byKind_iterator byKindBegin( const ResObject::Kind & kind_r ) const
+    { return make_filter_begin( ByKind(kind_r), *this ); }
+
+    template<class _Res>
+      byKind_iterator byKindBegin() const
+      { return make_filter_begin( functor::byKind<_Res>(), *this ); }
+
+
+    byKind_iterator byKindEnd( const ResObject::Kind & kind_r ) const
+    { return make_filter_end( ByKind(kind_r), *this ); }
+
+    template<class _Res>
+      byKind_iterator byKindEnd() const
+      { return make_filter_end( functor::byKind<_Res>(), *this ); }
+    //@}
+
+  public:
+    /** \name Iterate through all ResObjects with a certain name. */
+    //@{
+    typedef functor::ByName ByName;
+    typedef filter_iterator<ByName,const_iterator> byName_iterator;
+
+    byName_iterator byNameBegin( const std::string & name_r ) const
+    { return make_filter_begin( ByName(name_r), *this ); }
+
+    byName_iterator byNameEnd( const std::string & name_r ) const
+    { return make_filter_end( ByName(name_r), *this ); }
+    //@}
+
+ public:
+   /** \name Iterate through dependency tables. */
+   //@{
+   //@}
 
   private:
     /** */
     friend class ResPoolManager;
     /** Ctor */
     ResPool( pool::PoolTraits::Impl_constPtr impl_r );
-
   private:
     /** Const access to implementation. */
     pool::PoolTraits::Impl_constPtr _pimpl;

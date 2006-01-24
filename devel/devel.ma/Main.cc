@@ -62,6 +62,23 @@ template<class _IntT>
     _IntT _value;
   };
 
+struct Print : public std::unary_function<ResObject::constPtr, bool>
+{
+  bool operator()( ResObject::constPtr ptr )
+  {
+    USR << *ptr << endl;
+    return true;
+  }
+};
+struct xPrint : public std::unary_function<ResObject::constPtr, bool>
+{
+  bool operator()( ResObject::constPtr ptr )
+  {
+    USR << *ptr << endl;
+    return isKind<Package>(ptr);
+  }
+};
+
 
 ///////////////////////////////////////////////////////////////////
 
@@ -99,59 +116,63 @@ std::ostream & operator<<( std::ostream & str, const Rstats & obj )
   return str;
 }
 
+template<class _Iterator>
+  void rstats( _Iterator begin, _Iterator end )
+  {
+    DBG << __PRETTY_FUNCTION__ << endl;
+    Rstats stats;
+    for_each( begin, end, functorRef(stats) );
+    MIL << stats << endl;
+  }
+
 ///////////////////////////////////////////////////////////////////
 
 struct FakeConv : public std::unary_function<Resolvable::Ptr, void>
 {
-  typedef pool::PoolItem    ValueT;
+  typedef ResObject::Ptr ValueT;
   typedef std::set<ValueT>  ContainerT;
 
   void operator()( Resolvable::Ptr ptr )
   {
-    if ( ptr->name()[0] == 's' )
-      {
-        ptr = fakeResKind<detail::SelectionImpl>( ptr );
-      }
-    else if ( ptr->name()[0] == 'p' )
+    if ( ptr->arch() == "noarch" )
       {
         ptr = fakeResKind<detail::PatchImpl>( ptr );
       }
-    _store.insert( ValueT(asKind<ResObject>(ptr)) );
+    else if (  ptr->arch() == "i586" )
+      {
+        ptr = fakeResKind<detail::SelectionImpl>( ptr );
+      }
+    _store.insert( asKind<ResObject>(ptr) );
   }
 
   ContainerT _store;
-
-  typedef ContainerT::iterator       IteratorT;
-  typedef ContainerT::const_iterator ConstIteratorT;
-
-  ConstIteratorT begin() const
-  { return _store.begin(); }
-
-  ConstIteratorT end() const
-  { return _store.end(); }
-
-  template<class _Filter>
-    filter_iterator<_Filter, ConstIteratorT> begin() const
-    { return make_filter_iterator( _Filter(), begin(), end() ); }
-
-  template<class _Filter>
-    filter_iterator<_Filter, ConstIteratorT> begin( _Filter f ) const
-    { return make_filter_iterator( f, begin(), end() ); }
-
-  template<class _Filter>
-    filter_iterator<_Filter, ConstIteratorT> end() const
-    { return make_filter_iterator( _Filter(), end(), end() ); }
-
-  template<class _Filter>
-    filter_iterator<_Filter, ConstIteratorT> end( _Filter f ) const
-    { return make_filter_iterator( f, end(), end() ); }
-
-
 };
 
 ///////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////////
+namespace zypp
+{
 
+  template<class _Iterator>
+    struct Query
+    {
+
+
+
+
+      Query( _Iterator begin_r, _Iterator end_r )
+      : _begin( begin_r )
+      , _end( end_r )
+      {}
+
+      _Iterator _begin;
+      _Iterator _end;
+    };
+
+
+}
+///////////////////////////////////////////////////////////////////
 
 /******************************************************************
 **
@@ -168,33 +189,33 @@ int main( int argc, char * argv[] )
   Source src( SourceFactory().createFrom( new source::susetags::SuseTagsImpl(infile) ) );
   MIL << src.resolvables().size() << endl;
 
-  ResPoolManager pool;
-  pool.insert( src.resolvables().begin(), src.resolvables().end() );
-  MIL << pool << endl;
-
-#if 0
   FakeConv fakeconv;
-
   std::copy( src.resolvables().begin(), src.resolvables().end(),
              make_function_output_iterator( functorRef(fakeconv) ) );
-
   //for_each( src.resolvables().begin(), src.resolvables().end(),
   //          functorRef(fakeconv) );
 
-  Rstats rstats = Rstats();
-  for_each( fakeconv.begin( byKind<Package>() ),
-            fakeconv.end( byKind<Package>() ),
-            functorRef(rstats) );
+  rstats( fakeconv._store.begin(), fakeconv._store.end() );
 
-  MIL << rstats << endl;
+  ResPoolManager pool;
+  ResPool query( pool.accessor() );
+  rstats( query.begin(), query.end() );
 
-  FakeConv::ValueT it( *fakeconv.begin() );
-  SEC << it->kind() << it->name() << endl;
-  SEC << it.status() << endl;
-#endif
+  pool.insert( fakeconv._store.begin(), fakeconv._store.end() );
+  MIL << pool << endl;
+  rstats( query.begin(), query.end() );
 
-  ZYpp::Ptr appl( ZYppFactory().letsTest() );
-  MIL << *appl << endl;
+  rstats( query.byKindBegin<Package>(), query.byKindEnd<Package>() );
+  rstats( query.byKindBegin<Selection>(), query.byKindEnd<Selection>() );
+  rstats( query.byKindBegin<Pattern>(), query.byKindEnd<Pattern>() );
+  rstats( query.byKindBegin<Patch>(), query.byKindEnd<Patch>() );
+  rstats( query.byNameBegin("rpm"), query.byNameEnd("rpm") );
+
+
+  SEC << invokeOnEach( query.byNameBegin("rpm"), query.byNameEnd("rpm"),
+                       Print() ) << endl;
+  SEC << invokeOnEach( query.byNameBegin("rpm"), query.byNameEnd("rpm"),
+                       xPrint() ) << endl;
 
 
   INT << "===[END]============================================" << endl;

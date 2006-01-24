@@ -65,7 +65,7 @@ namespace zypp
     };
 
     /** Convenience function for creating a True. */
-    True true_c()
+    inline True true_c()
     { return True(); }
 
     ///////////////////////////////////////////////////////////////////
@@ -81,7 +81,7 @@ namespace zypp
     };
 
     /** Convenience function for creating a False. */
-    False false_c()
+    inline False false_c()
     { return False(); }
 
     ///////////////////////////////////////////////////////////////////
@@ -105,7 +105,7 @@ namespace zypp
 
     /** Convenience function for creating a Not from \a _Condition. */
     template<class _Condition>
-      Not<_Condition> not_c( _Condition cond_r )
+      inline Not<_Condition> not_c( _Condition cond_r )
       {
         return Not<_Condition>( cond_r );
       }
@@ -135,7 +135,7 @@ namespace zypp
      *  \a conda_r and \a condb_r.
     */
     template<class _ACondition, class _BCondition>
-      Chain<_ACondition, _BCondition> chain( _ACondition conda_r, _BCondition condb_r )
+      inline Chain<_ACondition, _BCondition> chain( _ACondition conda_r, _BCondition condb_r )
       {
         return Chain<_ACondition, _BCondition>( conda_r, condb_r );
       }

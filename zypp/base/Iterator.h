@@ -89,6 +89,22 @@ namespace zypp
   using boost::filter_iterator;
   using boost::make_filter_iterator;
 
+  /** Convenience to create filter_iterator from container::begin(). */
+  template<class _Filter, class _Container>
+    filter_iterator<_Filter, typename _Container::const_iterator>
+    make_filter_begin( _Filter f, const _Container & c )
+    {
+      return make_filter_iterator( f, c.begin(), c.end() );
+    }
+
+  /** Convenience to create filter_iterator from container::end(). */
+  template<class _Filter, class _Container>
+    filter_iterator<_Filter, typename _Container::const_iterator>
+    make_filter_end( _Filter f, const _Container & c )
+    {
+      return make_filter_iterator( f, c.end(), c.end() );
+    }
+
   /** \class transform_iterator
    * An iterator over elements which are the result of applying
    * some functional transformation to the elements of an underlying
@@ -107,7 +123,7 @@ namespace zypp
    *   make_transform_iterator(Iterator it);
    * \endcode
   */
-  using boost::function_output_iterator;
+  using boost::transform_iterator;
   using boost::make_transform_iterator;
 
   /** \class function_output_iterator

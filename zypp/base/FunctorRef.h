@@ -96,6 +96,7 @@ namespace zypp
       FunctorRef<_Functor> functorRef( _Functor & f_r )
       { return FunctorRef<_Functor>( f_r ); }
 
+    /** Convenience function creating a \ref FunctorRef. */
     template <class _Functor, class argument_type, class result_type>
       FunctorRef<_Functor,argument_type,result_type> functorRef( _Functor & f_r )
       { return FunctorRef<_Functor,argument_type,result_type>( f_r ); }
