@@ -57,15 +57,15 @@ bool HelixPatchImpl::affects_pkg_manager() const
 { return false; }
 
       /** Is the patch installation interactive? (does it need user input?) */
-bool HelixPatchImpl::interactive() 
+bool HelixPatchImpl::interactive() const 
 { return false; }
 
       /** The list of all atoms building the patch */
-PatchImplIf::AtomList HelixPatchImpl::all_atoms() 
+PatchImplIf::AtomList HelixPatchImpl::all_atoms() const
 { return AtomList(); }
 
       /** The list of those atoms which have not been installed */
-PatchImplIf::AtomList HelixPatchImpl::not_installed_atoms() 
+PatchImplIf::AtomList HelixPatchImpl::not_installed_atoms() const
 { return AtomList(); }
 
 
@@ -73,7 +73,7 @@ PatchImplIf::AtomList HelixPatchImpl::not_installed_atoms()
 void HelixPatchImpl::mark_atoms_to_freshen(bool freshen) 
 { return; }
 
-bool HelixPatchImpl::any_atom_selected() 
+bool HelixPatchImpl::any_atom_selected() const
 { return false; }
 
 
