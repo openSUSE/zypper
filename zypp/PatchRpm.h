@@ -15,6 +15,7 @@
 #include "zypp/Edition.h"
 #include "zypp/Arch.h"
 #include "zypp/BaseVersion.h"
+#include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -24,7 +25,7 @@ namespace zypp
   {
   public:
     PatchRpm(const Arch & arch,
-             const std::string & filename, 
+             const Pathname & filename, 
              const ByteCount & downloadsize,
              const CheckSum & checksum,
              const Date & buildtime,
@@ -37,14 +38,14 @@ namespace zypp
     , _base_versions(base_versions)
     {}
     Arch arch() { return _arch; }
-    std::string filename() { return _filename; }
+    Pathname filename() { return _filename; }
     ByteCount downloadsize() { return _downloadsize; }
     CheckSum checksum() { return _checksum; }
     Date buildtime() { return _buildtime; }
     std::list<BaseVersion> baseVersions() { return _base_versions; }
   private:
     Arch _arch;
-    std::string _filename;
+    Pathname _filename;
     ByteCount _downloadsize;
     CheckSum _checksum;
     Date _buildtime;
