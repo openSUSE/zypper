@@ -48,9 +48,14 @@ namespace zypp
     return _next_id++;
   }
 
-  unsigned SourceManager::removeSource(const unsigned id)
+  void SourceManager::removeSource(const unsigned id)
   {
-
+    SourceMap::iterator it = _sources.find(id);
+    if (it != _sources.end())
+    {
+#warning disable the source here
+      _sources.erase(it);
+    }
   }
 
   const Pathname SourceManager::provideFile(const unsigned id,
@@ -61,12 +66,32 @@ namespace zypp
     return src->provideFile (path_r, media_nr);
   }
 
-  const Pathname provideDir(const unsigned id,
-			    const unsigned media_nr,
-			    const Pathname & path_r,
-			    const bool recursive = false)
+  const Pathname SourceManager::provideDir(const unsigned id,
+					   const unsigned media_nr,
+					   const Pathname & path_r,
+					   const bool recursive)
   {
+    RW_pointer<Source> src = findSource(id);
+    return src->provideDir (path_r, media_nr, recursive);
 
+  }
+
+  const bool SourceManager::enabled(const unsigned id) const
+  {
+    RW_pointer<Source> src = findSource(id);
+    return src->enabled();
+  }
+
+  void SourceManager::enable(const unsigned id)
+  {
+    RW_pointer<Source> src = findSource(id);
+    src->enable();
+  }
+
+  void SourceManager::disable(const unsigned id)
+  {
+    RW_pointer<Source> src = findSource(id);
+    src->disable();
   }
 
   /******************************************************************
@@ -81,7 +106,7 @@ namespace zypp
 
   unsigned SourceManager::_next_id = 0;
 
-  RW_pointer<Source> SourceManager::findSource(const unsigned id)
+  RW_pointer<Source> SourceManager::findSource(const unsigned id) const
   {
     SourceMap::const_iterator it = _sources.find(id);
     if (it == _sources.end())

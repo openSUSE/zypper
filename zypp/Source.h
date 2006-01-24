@@ -67,7 +67,17 @@ namespace zypp
 
   public:
     /** Provide a file to local filesystem */
-    const Pathname provideFile(const Pathname & file, const unsigned media_nr = 1);
+    const Pathname provideFile(const Pathname & file_r,
+			       const unsigned media_nr = 1);
+    const Pathname provideDir(const Pathname & dir_r,
+		              const unsigned media_nr = 1,
+			      const bool recursive = false);
+
+    const bool enabled() const;
+
+    void enable();
+
+    void disable();
   };
   ///////////////////////////////////////////////////////////////////
 

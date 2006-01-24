@@ -53,10 +53,23 @@ namespace zypp
   std::ostream & Source::dumpOn( std::ostream & str ) const
   { return _pimpl->dumpOn( str ); }
 
-  const Pathname Source::provideFile(const Pathname & file, const unsigned media_nr)
-  { return _pimpl->provideFile(file, media_nr); }
+  const Pathname Source::provideFile(const Pathname & file_r,
+				     const unsigned media_nr)
+  { return _pimpl->provideFile(file_r, media_nr); }
 
+  const Pathname Source::provideDir(const Pathname & dir_r,
+				    const unsigned media_nr,
+				    const bool recursive)
+  { return _pimpl->provideDir(dir_r, media_nr, recursive); }
 
+  const bool Source::enabled() const
+  { return _pimpl->enabled(); }
+
+  void Source::enable()
+  { _pimpl->enable(); }
+
+  void Source::disable()
+  { _pimpl->disable(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

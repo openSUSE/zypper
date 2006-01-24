@@ -32,8 +32,9 @@ namespace zypp
     //
     SourceImpl::SourceImpl(media::MediaAccess::Ptr & media_r,
                            const Pathname & path_r)
-    : _media (media_r)
+    : _media(media_r)
     , _path(path_r)
+    , _enabled(true)
     {}
 
     ///////////////////////////////////////////////////////////////////
@@ -44,10 +45,23 @@ namespace zypp
     SourceImpl::~SourceImpl()
     {}
 
-    const Pathname SourceImpl::provideFile(const Pathname & file_r, const unsigned media_nr)
+    const Pathname SourceImpl::provideFile(const Pathname & file_r,
+					   const unsigned media_nr)
     {
       _media->provideFile (file_r);
       return _media->localPath (file_r);
+    }
+
+    /** Provide a directory to local filesystem */
+    const Pathname SourceImpl::provideDir(const Pathname & path_r,
+					  const unsigned media_nr,
+					  const bool recursive)
+    {
+      if (recursive)
+	_media->provideDirTree(path_r);
+      else
+	_media->provideDir(path_r);
+      return _media->localPath (path_r);
     }
 
     /////////////////////////////////////////////////////////////////

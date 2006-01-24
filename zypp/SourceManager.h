@@ -40,24 +40,54 @@ namespace zypp
     ~SourceManager();
 
   public:
+    /**
+     * \throws Exception
+     */
     unsigned addSource(const Url & url_r, const Pathname & path_r = "/");
 
-    unsigned removeSource(const unsigned id);
+    /**
+     * \throws Exception
+     */
+    void removeSource(const unsigned id);
 
+    /**
+     * \throws Exception
+     */
     const Pathname provideFile(const unsigned id,
 			       const unsigned media_nr,
 			       const Pathname & path_r);
 
+    /**
+     * \throws Exception
+     */
     const Pathname provideDir(const unsigned id,
 			      const unsigned media_nr,
 			      const Pathname & path_r,
 			      const bool recursive = false);
 
+    /**
+     * \throws Exception
+     */
+    const bool enabled(const unsigned id) const;
+
+    /**
+     * \throws Exception
+     */
+    void enable(const unsigned id);
+
+    /**
+     * \throws Exception
+     */
+    void disable(const unsigned id);
+
   private:
     typedef std::map<unsigned, RW_pointer<Source> > SourceMap;
     SourceMap _sources;
 
-    RW_pointer<Source> findSource(const unsigned id);
+    /**
+     * \throws Exception
+     */
+    RW_pointer<Source> findSource(const unsigned id) const;
 
     static unsigned _next_id;
   };

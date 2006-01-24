@@ -61,7 +61,22 @@ namespace zypp
       { return _store; }
 
       /** Provide a file to local filesystem */
-      const Pathname provideFile(const Pathname & file, const unsigned media_nr = 1);
+      const Pathname provideFile(const Pathname & file,
+				 const unsigned media_nr = 1);
+
+      /** Provide a directory to local filesystem */
+      const Pathname provideDir(const Pathname & path,
+				const unsigned media_nr = 1,
+				const bool recursive = false);
+
+      const bool enabled() const
+      { return _enabled; }
+
+      void enable()
+      { _enabled = true; }
+
+      void disable()
+      { _enabled = false; }
 
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const
@@ -74,6 +89,8 @@ namespace zypp
       media::MediaAccess::Ptr _media;
       /** Path to the source on the media */
       Pathname _path;
+      /** The source is enabled */
+      bool _enabled;
     };
     ///////////////////////////////////////////////////////////////////
 
