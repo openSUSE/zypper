@@ -53,6 +53,11 @@ namespace zypp
   std::ostream & Source::dumpOn( std::ostream & str ) const
   { return _pimpl->dumpOn( str ); }
 
+  const Pathname Source::provideFile(const Pathname & file, const unsigned media_nr)
+  { return _pimpl->provideFile(file, media_nr); }
+
+
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

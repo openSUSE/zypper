@@ -44,7 +44,7 @@ namespace zypp
     SourceImpl::~SourceImpl()
     {}
 
-    const Pathname SourceImpl::provideFile(const Pathname & file_r)
+    const Pathname SourceImpl::provideFile(const Pathname & file_r, const unsigned media_nr)
     {
       _media->provideFile (file_r);
       return _media->localPath (file_r);

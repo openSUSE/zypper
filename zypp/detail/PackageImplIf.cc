@@ -53,6 +53,9 @@ namespace zypp
       Changelog PackageImplIf::changelog() const
       { return Changelog(); }
 
+      Pathname PackageImplIf::location() const
+      { return Pathname(); }
+
       std::string PackageImplIf::url() const
       { return std::string(); }
 
@@ -85,6 +88,13 @@ namespace zypp
 
       License PackageImplIf::licenseToConfirm() const
       { return License(); }
+
+      std::list<DeltaRpm> PackageImplIf::deltaRpms() const
+      { return std::list<DeltaRpm>(); }
+
+      std::list<PatchRpm> PackageImplIf::patchRpms() const
+      { return std::list<PatchRpm>(); }
+
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

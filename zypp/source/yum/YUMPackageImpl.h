@@ -76,6 +76,8 @@ namespace zypp
 	virtual PackageGroup group() const;
 	/** */
 	virtual Changelog changelog() const;
+        /** */
+        virtual Pathname location() const;
 	/** Don't ship it as class Url, because it might be
 	 * in fact anything but a legal Url. */
 	virtual std::string url() const;
@@ -172,8 +174,6 @@ namespace zypp
         /** */
         virtual std::list<std::string> suggests() const;
         /** */
-        virtual std::string location() const;
-        /** */
         virtual unsigned int medianr() const;
         /** */
         virtual std::string md5sum() const;
@@ -210,7 +210,7 @@ namespace zypp
 	unsigned _mediaid;
 	CheckSum _checksum;
 	Text _filenames;
-	std::string _location;
+	Pathname _location;
 	std::list<DeltaRpm> _delta_rpms;
 	std::list<PatchRpm> _patch_rpms;
 

@@ -121,6 +121,17 @@ namespace zypp
   License Package::licenseToConfirm() const
   { return pimpl().licenseToConfirm(); }
 
+  /** */
+  Pathname Package::plainRpm() const
+  { return pimpl().location(); }
+
+  /** */
+  std::list<PatchRpm> Package::patchRpms() const
+  { return pimpl().patchRpms(); }
+
+  /** */
+  std::list<DeltaRpm> Package::deltaRpms() const
+  { return pimpl().deltaRpms(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

@@ -18,6 +18,8 @@
 #include "zypp/Edition.h"
 #include "zypp/Arch.h"
 #include "zypp/Changelog.h"
+#include "zypp/PatchRpm.h"
+#include "zypp/DeltaRpm.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -79,6 +81,8 @@ namespace zypp
       virtual PackageGroup group() const PURE_VIRTUAL;
       /** */
       virtual Changelog changelog() const PURE_VIRTUAL;
+      /** */
+      virtual Pathname location() const PURE_VIRTUAL;
       /** Don't ship it as class Url, because it might be
        * in fact anything but a legal Url. */
       virtual std::string url() const PURE_VIRTUAL;
@@ -100,6 +104,11 @@ namespace zypp
       virtual Text authors() const PURE_VIRTUAL;
       /** */
       virtual Text filenames() const PURE_VIRTUAL;
+      /** */
+      virtual std::list<DeltaRpm> deltaRpms() const PURE_VIRTUAL;
+      /** */
+      virtual std::list<PatchRpm> patchRpms() const PURE_VIRTUAL;
+
       //@}
 
       /** \name Additional Package Attributes.

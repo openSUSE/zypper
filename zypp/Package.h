@@ -76,7 +76,15 @@ namespace zypp
     Text filenames() const;
     /** */
     License licenseToConfirm() const;
+    /** */
+    Pathname plainRpm() const;
+    /** */
+    std::list<PatchRpm> patchRpms() const;
+    /** */
+    std::list<DeltaRpm> deltaRpms() const;
+
     // data here:
+ 
 
   protected:
     Package( const NVRAD & nvrad_r );

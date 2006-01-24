@@ -61,7 +61,7 @@ namespace zypp
       { return _store; }
 
       /** Provide a file to local filesystem */
-      const Pathname provideFile(const Pathname & file);
+      const Pathname provideFile(const Pathname & file, const unsigned media_nr = 1);
 
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const

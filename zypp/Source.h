@@ -17,6 +17,7 @@
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/ResStore.h"
+#include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -62,12 +63,17 @@ namespace zypp
   private:
     /** Pointer to implementation */
     RW_pointer<Impl,rw_pointer::Intrusive<Impl> > _pimpl;
+
+  public:
+    /** Provide a file to local filesystem */
+    const Pathname provideFile(const Pathname & file, const unsigned media_nr = 1);
   };
   ///////////////////////////////////////////////////////////////////
 
   /** \relates Source Stream output. */
   inline std::ostream & operator<<( std::ostream & str, const Source & obj )
   { return obj.dumpOn( str ); }
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
