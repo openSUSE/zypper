@@ -18,6 +18,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/String.h"
 
 #include "zypp/parser/tagfile/ProductMetadataParser.h"
 #include <boost/regex.hpp>
@@ -97,16 +98,10 @@ namespace zypp
 
       void ProductMetadataParser::parseLine( const string &key, const string &modif, const string &value, map< string, list<string> > &container)
       {
-        std::string value_copy = value;
-        string_find_iterator it = make_find_iterator(value_copy, token_finder(is_space()));
-        if(it!=string_find_iterator())
-        {
-          DBG << "add element " << key << " " << modif << " [" << value << "]" << std::endl;
-          if( modif.size() == 0)
-            container["default"].push_back(value_copy);
-          else     
-            container[modif].push_back(value_copy);
-        }
+        if( modif.size() == 0)
+          str::split( value, std::back_inserter(container["default"]), " ");
+        else
+          str::split( value, std::back_inserter(container[modif]), " ");
       }
 
       void ProductMetadataParser::parseLine( const string &key, const string &modif, const string &value, map< string, string > &container)
