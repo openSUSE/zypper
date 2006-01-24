@@ -49,6 +49,12 @@ namespace zypp
       return str << "PoolImpl " << obj.size();
     }
 
+    void PoolImplInserter::operator()( ResObject::constPtr ptr_r )
+    { _poolImpl.store().insert( PoolImpl::Item( ptr_r ) ); }
+
+    void PoolImplDeleter::operator()( ResObject::constPtr ptr_r )
+    { _poolImpl.store().erase( PoolImpl::Item( ptr_r ) ); }
+
     /////////////////////////////////////////////////////////////////
   } // namespace pool
   ///////////////////////////////////////////////////////////////////

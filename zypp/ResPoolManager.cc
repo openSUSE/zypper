@@ -28,8 +28,6 @@ namespace zypp
   //
   ResPoolManager::ResPoolManager()
   : _pimpl( new pool::PoolImpl )
-  , _inserter( _pimpl->store() )
-  , _deleter( _pimpl->store() )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -48,13 +46,6 @@ namespace zypp
 
   void ResPoolManager::clear()
   { _pimpl->clear(); }
-
-#warning IMPLEMENT IT
-  void ResPoolManager::Inserter::operator()( ResObject::constPtr ptr_r )
-  { INT << "+++ " << *ptr_r << endl; }
-
-  void ResPoolManager::Deleter::operator()( ResObject::constPtr ptr_r )
-  { SEC << "--- " << *ptr_r << endl; }
 
   /******************************************************************
   **

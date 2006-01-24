@@ -48,20 +48,20 @@ namespace zypp
   public:
     /**  */
     void insert( ResObject::constPtr ptr_r )
-    { _inserter( ptr_r ); }
+    { inserter()( ptr_r ); }
 
     /**  */
     template <class _InputIterator>
       void insert( _InputIterator first_r, _InputIterator last_r )
-      { std::for_each( first_r, last_r, _inserter ); }
+      { std::for_each( first_r, last_r, inserter() ); }
 
     /**  */
     void erase( ResObject::constPtr ptr_r )
-    { _deleter( ptr_r ); }
+    { deleter()( ptr_r ); }
 
     /**  */
     void erase( iterator first_r, iterator last_r )
-    { std::for_each( first_r, last_r, _deleter ); }
+    { std::for_each( first_r, last_r, deleter() ); }
 
     /**  */
     void clear();
@@ -70,34 +70,18 @@ namespace zypp
     /**  */
     typedef pool::PoolTraits::ContainerT  ContainerT;
     typedef pool::PoolTraits::Impl        Impl;
-    /**  */
-    struct Inserter
-    {
-      void operator()( ResObject::constPtr ptr_r );
-
-      Inserter( ContainerT & store_r )
-      : _store( store_r )
-      {}
-      ContainerT & _store;
-    };
-    /**  */
-    struct Deleter
-    {
-      void operator()( ResObject::constPtr ptr_r );
-
-      Deleter( ContainerT & store_r )
-      : _store( store_r )
-      {}
-      ContainerT & _store;
-    };
+    typedef pool::PoolTraits::Inserter    Inserter;
+    typedef pool::PoolTraits::Deleter     Deleter;
 
   private:
     /** Pointer to implementation */
     RW_pointer<pool::PoolTraits::Impl> _pimpl;
     /**  */
-    Inserter _inserter;
+    Inserter inserter()
+    { return Inserter( *_pimpl ); }
     /**  */
-    Deleter _deleter;
+    Deleter deleter()
+    { return Deleter( *_pimpl ); }
   };
   ///////////////////////////////////////////////////////////////////
 

@@ -25,6 +25,28 @@ namespace zypp
 
     class PoolImpl;
 
+    /**  */
+    struct PoolImplInserter
+    {
+      void operator()( ResObject::constPtr ptr_r );
+
+      PoolImplInserter( PoolImpl & poolImpl_r )
+      : _poolImpl( poolImpl_r )
+      {}
+      PoolImpl & _poolImpl;
+    };
+
+    /**  */
+    struct PoolImplDeleter
+    {
+      void operator()( ResObject::constPtr ptr_r );
+
+      PoolImplDeleter( PoolImpl & poolImpl_r )
+      : _poolImpl( poolImpl_r )
+      {}
+      PoolImpl & _poolImpl;
+    };
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : PoolTraits
@@ -43,6 +65,8 @@ namespace zypp
       typedef PoolImpl                   Impl;
       typedef shared_ptr<PoolImpl>       Impl_Ptr;
       typedef shared_ptr<const PoolImpl> Impl_constPtr;
+      typedef PoolImplInserter           Inserter;
+      typedef PoolImplDeleter            Deleter;
     };
     ///////////////////////////////////////////////////////////////////
 
