@@ -966,7 +966,7 @@ ResolverContext::addInfo (ResolverInfo_Ptr info)
     if (info->error ()) {
 
 	if (! _invalid) {
-	    ResolverInfo_Ptr info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INVALID, NULL, RESOLVER_INFO_PRIORITY_VERBOSE);
+	    ResolverInfo_Ptr info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INVALID_SOLUTION, NULL, RESOLVER_INFO_PRIORITY_VERBOSE);
 	    info->flagAsError ();
 	    _log.push_back (info);
 	}
