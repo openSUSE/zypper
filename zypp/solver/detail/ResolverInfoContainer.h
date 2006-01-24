@@ -73,7 +73,8 @@ class ResolverInfoContainer : public ResolverInfo {
     virtual bool merge (ResolverInfoContainer_Ptr to_be_merged);
     virtual ResolverInfo_Ptr copy (void) const;
 
-    std::string resItemsToString (bool names_only) const;
+    std::string resItemsToString (const bool names_only,
+				  const bool shorten_output = false) const;
 
     bool mentions (ResItem_constPtr resItem) const;
     void addRelatedResItem (ResItem_constPtr resItem);

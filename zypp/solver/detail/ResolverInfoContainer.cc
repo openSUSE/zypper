@@ -145,21 +145,49 @@ ResolverInfoContainer::copy (void) const
 //---------------------------------------------------------------------------
 
 string
-ResolverInfoContainer::resItemsToString (bool names_only) const
+ResolverInfoContainer::resItemsToString (const bool names_only,
+					 const bool shorten_output) const
 {
     string res;
+    int max_items = 3;
 
     if (_resItem_list.empty())
 	return res;
 
-    res += " [";
-    for (CResItemList::const_iterator iter = _resItem_list.begin(); iter != _resItem_list.end(); iter++) {
-	if (iter != _resItem_list.begin())
-	    res += ", ";
-
-	res += (names_only ? (*iter)->name() : (*iter)->asString());
+    if (names_only)
+    {
+	res += " [";
+	for (CResItemList::const_iterator iter = _resItem_list.begin();
+	     iter != _resItem_list.end(); iter++)
+	{
+	    if (iter != _resItem_list.begin())
+		res += ", ";
+	    res += (*iter)->name();
+	    if (shorten_output
+		&& --max_items <= 0)
+	    {
+		res += ", ...";
+		break;
+	    }
+	}
+	res += "]";
     }
-    res += "]";
+    else
+    {
+	// one line for each entry
+	for (CResItemList::const_iterator iter = _resItem_list.begin();
+	     iter != _resItem_list.end(); iter++)
+	{
+	    res += "\n- ";	    
+	    res += (*iter)->asString();
+	    if (shorten_output
+		&& --max_items <= 0)
+	    {
+		res += "\n- ...\n- ..\n- .";
+		break;
+	    }
+	}	
+    }
 
     return res;
 }
