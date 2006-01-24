@@ -111,7 +111,8 @@ namespace zypp
 
 	/**
 	 * A problem solution action that injects an artificial "provides" to
-	 * the pool to satisfy open requirements.
+	 * the pool to satisfy open requirements or remove the conflict of
+	 * concerning resolvable
 	 *
 	 * This is typically used by "ignore" (user override) solutions.
 	 **/
@@ -119,8 +120,14 @@ namespace zypp
 	{
 	public:
 	    
-	    InjectSolutionAction( const Capability & provides )
-		: SolutionAction(), _capability( provides ) {}
+	    typedef enum
+	    {
+		PROVIDE,
+		CONFLICT
+	    } CapabilityKind;
+	    
+	    InjectSolutionAction( const Capability & capability, const CapabilityKind & kind )
+		: SolutionAction(), _capability( capability ), _kind( kind ) {}
 
 	  // ---------------------------------- I/O
 
@@ -141,6 +148,7 @@ namespace zypp
 	protected:
 
 	    const Capability & _capability;
+	    const CapabilityKind & _kind;
 	};
 
 
