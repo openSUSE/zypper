@@ -49,6 +49,7 @@ namespace zypp
   private:
     /** Factory */
     friend class SourceFactory;
+    friend class SourceManager;
     /** Factory ctor */
     Source();
     /** Factory ctor */

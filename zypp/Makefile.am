@@ -40,6 +40,7 @@ pkginclude_HEADERS = NeedAType.h \
 	Selection.h	\
 	Source.h	\
 	SourceFactory.h	\
+	SourceManager.h	\
 	Pattern.h	\
 	Message.h	\
 	Script.h	\
@@ -98,6 +99,7 @@ lib@PACKAGE@_la_SOURCES = \
 	Selection.cc	\
 	Source.cc	\
 	SourceFactory.cc\
+	SourceManager.cc\
 	Pattern.cc	\
 	Message.cc	\
 	Script.cc	\
