@@ -9,13 +9,17 @@ baseincludedir = $(pkgincludedir)/base
 
 baseinclude_HEADERS =	\
 	Debug.h		\
+	\
+	Algorithm.h	\
+	Exception.h	\
+	Functional.h	\
+	Iterator.h	\
+	Logger.h	\
+	\
 	Fd.h		\
 	KindOf.h	\
-	Logger.h	\
-	Exception.h	\
 	Gettext.h	\
 	IOStream.h	\
-	Iterator.h	\
 	NonCopyable.h	\
 	PtrTypes.h	\
 	ReferenceCounted.h	\

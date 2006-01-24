@@ -15,41 +15,41 @@
 
 #include "zypp/Rel.h"
 
-using namespace std;
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-namespace
-{
-
-  map<string,Rel::for_use_in_switch> _table;
-
-  Rel::for_use_in_switch parse( const std::string & strval_r )
+  namespace
   {
-    if ( _table.empty() )
-      {
-        // initialize it
-        _table["EQ"] = _table["eq"] = _table["=="] = _table["="] = Rel::EQ_e;
-        _table["NE"] = _table["ne"] = _table["!="] = Rel::NE_e;
-        _table["LT"] = _table["lt"] = _table["<"]  = Rel::LT_e;
-        _table["LE"] = _table["le"] = _table["<="] = Rel::LE_e;
-        _table["GT"] = _table["gt"] = _table[">"]  = Rel::GT_e;
-        _table["GE"] = _table["ge"] = _table[">="] = Rel::GE_e;
-        _table["ANY"]  = _table["any"] = _table["(any)"] = _table[""] = Rel::ANY_e;
-        _table["NONE"] = _table["none"]             = Rel::NONE_e;
-      }
 
-    map<string,Rel::for_use_in_switch>::const_iterator it
+    std::map<std::string,Rel::for_use_in_switch> _table;
+
+    Rel::for_use_in_switch parse( const std::string & strval_r )
+    {
+      if ( _table.empty() )
+        {
+          // initialize it
+          _table["EQ"]   = _table["eq"]  = _table["=="]    = _table["="] = Rel::EQ_e;
+          _table["NE"]   = _table["ne"]  = _table["!="]                  = Rel::NE_e;
+          _table["LT"]   = _table["lt"]  = _table["<"]                   = Rel::LT_e;
+          _table["LE"]   = _table["le"]  = _table["<="]                  = Rel::LE_e;
+          _table["GT"]   = _table["gt"]  = _table[">"]                   = Rel::GT_e;
+          _table["GE"]   = _table["ge"]  = _table[">="]                  = Rel::GE_e;
+          _table["ANY"]  = _table["any"] = _table["(any)"] = _table[""]  = Rel::ANY_e;
+          _table["NONE"] = _table["none"]                                = Rel::NONE_e;
+        }
+
+      std::map<std::string,Rel::for_use_in_switch>::const_iterator it
       = _table.find( strval_r );
-    if ( it == _table.end() )
-      {
-        ZYPP_THROW( Exception("Rel parse: illegal string value '"+strval_r+"'") );
-      }
-    return it->second;
+      if ( it == _table.end() )
+        {
+          ZYPP_THROW( Exception("Rel parse: illegal string value '"+strval_r+"'") );
+        }
+      return it->second;
+    }
   }
-}
+
+  ///////////////////////////////////////////////////////////////////
 
   const Rel Rel::EQ( Rel::EQ_e );
   const Rel Rel::NE( Rel::NE_e );
@@ -76,7 +76,7 @@ namespace
   //
   const std::string & Rel::asString() const
   {
-    static map<for_use_in_switch,string> _table;
+    static std::map<for_use_in_switch,std::string> _table;
     if ( _table.empty() )
       {
         // initialize it

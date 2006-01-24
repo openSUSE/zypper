@@ -17,6 +17,7 @@ pkginclude_HEADERS = NeedAType.h \
 	CapSetFwd.h	\
 	CountryCode.h	\
 	Date.h		\
+	Dep.h		\
 	Dependencies.h	\
 	Edition.h	\
 	LanguageCode.h	\
@@ -78,6 +79,7 @@ lib@PACKAGE@_la_SOURCES = \
 	CapSet.cc	\
 	CountryCode.cc	\
 	Date.cc		\
+	Dep.cc		\
 	Dependencies.cc	\
 	Edition.cc	\
 	LanguageCode.cc	\

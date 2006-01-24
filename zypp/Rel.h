@@ -42,6 +42,9 @@ namespace zypp
   */
   struct Rel
   {
+    friend bool operator==( const Rel & lhs, const Rel & rhs );
+    friend bool operator!=( const Rel & lhs, const Rel & rhs );
+
     /** \name Relational operators
      * These are the \em real relational operator contants to
      * use. Don't mind that it's not an enum. See also: \ref zypp::Rel::inSwitch
@@ -114,19 +117,22 @@ namespace zypp
     {}
     /** The operator. */
     for_use_in_switch _op;
-
-    friend bool operator==( const Rel & lhs, const Rel & rhs )
-    { return lhs._op == rhs._op; }
-
-    friend bool operator!=( const Rel & lhs, const Rel & rhs )
-    { return lhs._op != rhs._op; }
-
   };
   ///////////////////////////////////////////////////////////////////
 
   /** \relates Rel Stream output. */
   inline std::ostream & operator<<( std::ostream & str, const Rel & obj )
   { return str << obj.asString(); }
+
+  ///////////////////////////////////////////////////////////////////
+
+  /** \relates Rel */
+  inline bool operator==( const Rel & lhs, const Rel & rhs )
+  { return lhs._op == rhs._op; }
+
+  /** \relates Rel */
+  inline bool operator!=( const Rel & lhs, const Rel & rhs )
+  { return lhs._op != rhs._op; }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

@@ -14,6 +14,7 @@
 
 #include <iosfwd>
 
+#include "zypp/Dep.h"
 #include "zypp/CapSetFwd.h"
 #include "zypp/CapSet.h"
 
