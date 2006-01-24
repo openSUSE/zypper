@@ -85,23 +85,40 @@ namespace zypp
               entry_r.release_notes_url = value;
             else if(key == "ARCH")
               parseLine( key, modifier, value, entry_r.arch);
+            else if(key == "DEFAULTBASE")
+              entry_r.default_base = value;
+            else if(key == "REQUIRES")
+              parseLine( key, value, entry_r.requires);
+            else if(key == "LINGUAS")
+              parseLine( key, value, entry_r.languages);
+            else if(key == "LABEL")
+              parseLine( key, modifier, value, entry_r.label);
+            else if(key == "DESCRDIR")
+              entry_r.description_dir = value;
+            else if(key == "DATADIR")
+              entry_r.data_dir = value;
+            else if(key == "FLAGS")
+              parseLine( key, value, entry_r.flags);
+            else if(key == "LANGUAGE")
+              entry_r.language = value;
+            else if(key == "TIMEZONE")
+              entry_r.timezone = value;
             else
               DBG << "parse error" << std::endl;
           }
           else
           {
-            std::cout << "** No Match found **\n";
+            DBG << "** No Match found:  " << buffer << std::endl;
           }
-          //std::cout << "hola: [" << buffer << "]" << std::endl;
         }
       }
 
       void ProductMetadataParser::parseLine( const string &key, const string &modif, const string &value, map< string, list<string> > &container)
       {
-        if( modif.size() == 0)
-          str::split( value, std::back_inserter(container["default"]), " ");
+        if ( modif.size() == 0)
+          parseLine( key, value, container["default"]); 
         else
-          str::split( value, std::back_inserter(container[modif]), " ");
+          parseLine( key, value, container[modif]);
       }
 
       void ProductMetadataParser::parseLine( const string &key, const string &modif, const string &value, map< string, string > &container)
@@ -111,6 +128,12 @@ namespace zypp
         else
           container[modif] = value;
       }
+
+      void ProductMetadataParser::parseLine( const string &key, const string &value, std::list<std::string> &container)
+      {
+          str::split( value, std::back_inserter(container), " ");
+      }
+
 
       /////////////////////////////////////////////////////////////////
     } // namespace tagfile

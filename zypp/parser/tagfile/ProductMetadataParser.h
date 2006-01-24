@@ -54,7 +54,7 @@ namespace zypp
           std::string release_notes_url;
           std::map< std::string, std::list<std::string> > arch;
           std::string default_base;
-          std::string requires;
+          std::list<std::string> requires;
           std::list<std::string> languages;
           std::map< std::string, std::string > label;
           std::string description_dir;
@@ -84,14 +84,18 @@ namespace zypp
         */
         void parse( const Pathname & file_r, ProductEntry &entry_r );
         /* Parse a key.modifier (std::list of std::strings)
+         * That means, translatable tag with multiple values
          * the default modifier will get the modifier of default (LABEL.de, LABEL as LANGUAGE.default)
         */ 
-        void parseLine( const std::string &key, const std::string &modifr, const std::string &value, std::map< std::string, std::list<std::string> > &container);
+        void parseLine( const std::string &key, const std::string &modif, const std::string &value, std::map< std::string, std::list<std::string> > &container);
         /*
-         * same as above, but the value is a single std::string
+         * same as above, but the value is a single std::string, this means, translatable tags, with only 1 value
         */
         void parseLine( const std::string &key,const std::string &modif, const std::string &value, std::map< std::string, std::string > &container);
-        
+        /*
+         * Non translatable tag with multiple values
+         */
+        void parseLine( const std::string &key, const std::string &value, std::list<std::string> &container);
       };
       ///////////////////////////////////////////////////////////////////
 
