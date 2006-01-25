@@ -235,6 +235,7 @@ XMLFilesBackend::storedObjects()
     std::list<Resolvable::Ptr>::iterator it;
     for( it = objects_for_kind.begin(); it != objects_for_kind.end(); ++it)
     {
+      DBG << "adding objects back" << std::endl;
       objects.push_back(*it);
     } 
   }
@@ -254,7 +255,7 @@ XMLFilesBackend::storedObjects(const Resolvable::Kind kind)
     
   for ( directory_iterator dir_itr( dir_path ); dir_itr != end_iter; ++dir_itr )
   {
-    //DBG << "[" << resolvableKindToString( kind, false ) << "] - " << dir_itr->leaf() << std::endl;
+    DBG << "[" << resolvableKindToString( kind, false ) << "] - " << dir_itr->leaf() << std::endl;
     objects.push_back( resolvableFromFile( dir_path + "/" + dir_itr->leaf(), kind) );
   }
   DBG << "done" << std::endl;
@@ -264,7 +265,17 @@ XMLFilesBackend::storedObjects(const Resolvable::Kind kind)
 std::list<Resolvable::Ptr>
 XMLFilesBackend::storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match)
 {
-  return storedObjects();
+  std::list<Resolvable::Ptr> result;
+  std::list<Resolvable::Ptr> all;
+  all = storedObjects();
+  std::list<Resolvable::Ptr>::iterator it;
+  for( it = all.begin(); it != all.end(); ++it)
+  {
+    Resolvable::Ptr item = *it;
+    if (item->name() == name )
+      result.push_back(item);
+  }
+  return result;
 }
 
 ///////////////////////////////////////////////////////////////////
