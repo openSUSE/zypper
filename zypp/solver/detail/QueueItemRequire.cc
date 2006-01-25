@@ -105,9 +105,40 @@ QueueItemRequire::addPoolItem (PoolItem *item)
 
 
 //---------------------------------------------------------------------------
+struct UniqTable
+{
+  /** Order PoolItems based on name and edition only. */
+  struct Order
+  {
+    /** 'less then' based on name and edition */
+    bool operator()( PoolItem lhs, PoolItem rhs ) const
+    {
+      int res = lhs->name().compare( rhs->name() );
+      if ( res )
+        return res == -1; // lhs < rhs ?
+      // here: lhs == rhs, so compare edition:
+      return lhs->edition() < rhs->edition();
+    }
+  };
+  /** Set of PoolItems unified by Order. */
+  typedef std::set<PoolItem,Order> UTable;
 
-#warning FIXME: should filter items with equal name-edition
-typedef std::map <const PoolItem *, bool> UniqTable;
+
+  /** Test whether a matching PoolItem is in the table. */
+  bool has( PoolItem item_r ) const
+  { return _table.find( item_r ) != _table.end(); }
+
+  /** Remember \a item_r (unless another matching PoolItem
+   *  is already in the table)
+  */
+  void remember( PoolItem item_r )
+  { _table.insert(  item_r ); }
+
+
+  /** The set. */
+  UTable _table;
+};
+//---------------------------------------------------------------------------
 
 struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 {
@@ -143,7 +174,7 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 
 	if ((! item_status_is_to_be_uninstalled (status))
 	    && ! context->isParallelInstall (provider)
-	    && uniq.find(&provider) == uniq.end()
+	    && ! uniq.has(provider)
 	    && context->itemIsPossible (provider)
 #warning Locks not implemented
 //	    && ! pool->itemIsLocked (provider)
@@ -157,7 +188,7 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
             // does not work.
             // does not work.-----v
 	    providers.push_front (&provider);
-	    uniq[&provider] = true;
+	    uniq.remember(provider);
 	}
 
 	return true;
