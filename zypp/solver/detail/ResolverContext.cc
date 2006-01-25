@@ -29,7 +29,7 @@
 
 #include "zypp/base/String.h"
 
-#include "zypp/solver/detail/Ptr.h"
+#include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/ResolverContext.h"
 
 /////////////////////////////////////////////////////////////////////////
