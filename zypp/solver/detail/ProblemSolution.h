@@ -47,7 +47,7 @@ namespace zypp
 	 **/
 	class ProblemSolution : public base::ReferenceCounted
 	{
-	private:
+	protected:
 	    
 	    /**
 	     * Clear all data.

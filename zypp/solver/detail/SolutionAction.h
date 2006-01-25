@@ -67,20 +67,18 @@ namespace zypp
 	 * (installs, updates, removes, ...)  one resolvable
 	 * (package, patch, pattern, product).
 	 **/
+	typedef enum
+	{
+	    // TO DO: use some already existing enum (?)
+	    KEEP,
+	    INSTALL,
+	    UPDATE,
+	    REMOVE
+	} TransactionKind;
+	
 	class TransactionSolutionAction: public SolutionAction
 	{
 	public:
-
-	    typedef enum
-	    {
-		// TO DO: use some already existing enum (?)
-		Keep,
-		Install,
-		Update,
-		Remove
-	    } TransactionKind;
-
-
 	    TransactionSolutionAction( ResItem_constPtr resolvable,
 				       TransactionKind action )
 		: SolutionAction(), _resolvable( resolvable ), _action( action ) {}

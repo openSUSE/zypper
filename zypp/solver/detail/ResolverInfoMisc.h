@@ -72,6 +72,7 @@ namespace zypp
 
 	  ResItem_constPtr other (void) const { return _other_resolvable; }
 	  const Capability other_capability (void) const { return _other_capability; }
+	  const Capability capability(void) const { return _capability; }
 
 	  // ---------------------------------- methods
       

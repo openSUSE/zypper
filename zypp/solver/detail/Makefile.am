@@ -61,6 +61,12 @@ solverdetailinclude_HEADERS = \
 	ResolverPtr.h			\
 	ProblemSolution.h		\
 	ProblemSolutionPtr.h		\
+	ProblemSolutionInstall.h	\
+	ProblemSolutionInstallPtr.h	\
+	ProblemSolutionUninstall.h	\
+	ProblemSolutionUninstallPtr.h	\
+	ProblemSolutionIgnore.h		\
+	ProblemSolutionIgnorePtr.h	\
 	SolutionAction.h		\
 	SolutionActionPtr.h		\
 	ResolverProblem.h
@@ -94,5 +100,8 @@ lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	ResolverContext.cc				\
 	ResolverQueue.cc				\
 	ProblemSolution.cc				\
+	ProblemSolutionInstall.cc			\
+	ProblemSolutionUninstall.cc			\
+	ProblemSolutionIgnore.cc			\
 	SolutionAction.cc				\
 	ResolverProblem.cc

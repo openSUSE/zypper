@@ -88,10 +88,10 @@ TransactionSolutionAction::toString ( const TransactionSolutionAction & action )
 {
     string ret ("TransactionSolutionAction: ");
     switch (action._action) {
-	case Keep:	ret += "Keep"; break;
-	case Install:	ret += "Install"; break;
-	case Update:	ret += "Update"; break;
-	case Remove:	ret += "Remove"; break;
+	case KEEP:	ret += "Keep"; break;
+	case INSTALL:	ret += "Install"; break;
+	case UPDATE:	ret += "Update"; break;
+	case REMOVE:	ret += "Remove"; break;
     }
     ret += " ";
     ret += action._resolvable->asString();

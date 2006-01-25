@@ -287,8 +287,8 @@ ResolverInfoMisc::message (void) const
 	// There are no alternative installed providers of c [for p]
 
 	case RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER: {
-	    // affected() =
-	    // _capability =
+	    // affected() = is set
+	    // _capability = is set
 	    // other() =
 	    // other_capability() =
 
