@@ -30,14 +30,11 @@
 #ifndef ZYPP_SOLVER_DETAIL_INSTALLORDER_H
 #define ZYPP_SOLVER_DETAIL_INSTALLORDER_H
 
-#include <iosfwd>
-#include <set>
-#include <list>
-#include <string>
-
-#include "zypp/solver/temporary/ResItem.h"
-#include "zypp/solver/temporary/World.h"
+#include "zypp/PoolItem.h"
+#include "zypp/ResPool.h"
 #include "zypp/CapSet.h"
+
+#include "zypp/solver/detail/Types.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -60,13 +57,13 @@ namespace zypp
 class InstallOrder
 {
     private:
-	World_Ptr _world;
+	const ResPool *_pool;
 
-	CResItemSet _toinstall;
-	CResItemSet _installed;
+	CPoolItemSet _toinstall;
+	CPoolItemSet _installed;
 
 	/** adjacency list type */
-	typedef std::map<ResItem_constPtr,CResItemSet> Graph;
+	typedef std::map<const PoolItem *, CPoolItemSet> Graph;
 
 	/** adjacency list, package -> requirements */
 	Graph _graph;
@@ -81,26 +78,26 @@ class InstallOrder
 	    bool visited;
 	    int order; // number of incoming edges in reverse graph
 
-	    ResItem_constPtr resItem;
+	    const PoolItem *item;
 
 	    NodeInfo() : begintime(0), endtime(0), visited(false), order(0) {}
-	    NodeInfo(ResItem_constPtr ptr) : begintime(0), endtime(0), visited(false), order(0), resItem(ptr) {}
+	    NodeInfo(const PoolItem *item) : begintime(0), endtime(0), visited(false), order(0), item(item) {}
 	};
 	
-	typedef std::map<ResItem_constPtr,NodeInfo> Nodes;
+	typedef std::map<const PoolItem *,NodeInfo> Nodes;
 
 	Nodes _nodes;
 
 	unsigned _rdfstime;
 
-	CResItemList _topsorted;
+	CPoolItemList _topsorted;
 
 	bool _dirty;
 
 	unsigned _numrun;
 
     private:
-	void rdfsvisit(ResItem_constPtr node);
+	void rdfsvisit (const PoolItem *item);
 
     public:
 
@@ -110,24 +107,24 @@ class InstallOrder
 	 * @param toinstall Set of ResItems that have to be installed
 	 * @param installed Set of ResItems that are already installed
 	 * */
-	InstallOrder (World_Ptr world, const CResItemList & toinstall, const CResItemList & installed);
+	InstallOrder (const ResPool *pool, const CPoolItemList & toinstall, const CPoolItemList & installed);
 
 	/**
 	 * Compute a list of ResItems which have no requirements and can be
 	 * installed in parallel without conflicts. Use setInstalled to make
 	 * computation of a different set possible */
-	CResItemList computeNextSet();
+	CPoolItemList computeNextSet();
 
 	/**
 	 * set a Solvable as installed, computeNextSet is able to compute a new
 	 * set then
 	 * */
-	void setInstalled( ResItem_constPtr ptr );
+	void setInstalled( const PoolItem *item );
 	
 	/**
 	 * like above, for convenience
 	 * */
-	void setInstalled( const CResItemList & list );
+	void setInstalled( const CPoolItemList & list );
 
 	/**
 	 * recoursive depth first search, build internal trees
@@ -145,9 +142,9 @@ class InstallOrder
 	 *
 	 * @return list of resolvables in an installable order
 	 * */
-	const CResItemList & getTopSorted() const;
+	const CPoolItemList getTopSorted() const;
 
-	const void printAdj (std::ostream& os, bool reversed = false) const;
+	const void printAdj (std::ostream & os, bool reversed = false) const;
 };
 
 ///////////////////////////////////////////////////////////////////
