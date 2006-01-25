@@ -52,23 +52,40 @@ namespace zypp
   SourceManager::~SourceManager()
   {}
 
-  unsigned SourceManager::addSource(const Url & url_r, const Pathname & path_r)
+  unsigned SourceManager::addSource(ResPoolManager & pool_r, const Url & url_r, const Pathname & path_r)
   {
     Source src = SourceFactory().createFrom(url_r, path_r);
     RW_pointer<Source> src_ptr = RW_pointer<Source>(new Source(src));
     _sources[_next_id] = src_ptr;
+    addToPool(pool_r, src.resolvables());
     return _next_id++;
   }
 
-  void SourceManager::removeSource(const unsigned id)
+  void SourceManager::removeSource(ResPoolManager & pool_r, const unsigned id)
   {
     SourceMap::iterator it = _sources.find(id);
     if (it != _sources.end())
     {
-#warning disable the source here
+      removeFromPool(pool_r, (it->second)->resolvables());
       _sources.erase(it);
     }
   }
+
+  void SourceManager::addToPool(ResPoolManager & pool_r, const ResStore & store_r)
+  {
+    pool_r.insert(store_r.begin(), store_r.end());
+  }
+
+  void SourceManager::removeFromPool(ResPoolManager & pool_r, const ResStore & store_r)
+  {
+    for (ResStore::iterator it = store_r.begin(); it != store_r.end(); it++)
+    {
+      pool_r.erase(*it);
+    }
+  }
+
+
+
 
   /******************************************************************
   **

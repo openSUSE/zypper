@@ -21,6 +21,7 @@
 #include "zypp/Source.h"
 #include "zypp/Url.h"
 #include "zypp/Pathname.h"
+#include "zypp/ResPoolManager.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -50,22 +51,41 @@ namespace zypp
 
   public:
     /**
+     * Find a source with a specified ID
+     *
      * \throws Exception
      */
     Source & findSource(const unsigned id);
 
-    /**
-     * \throws Exception
-     */
-    unsigned addSource(const Url & url_r, const Pathname & path_r = "/");
+#warning FIXME 4 times: Find a better way to link to the resolvable pool than passing a reference...
 
     /**
+     * Add a new source
+     *
      * \throws Exception
      */
-    void removeSource(const unsigned id);
+    unsigned addSource(ResPoolManager & pool_r, const Url & url_r, const Pathname & path_r = "/");
+
+    /**
+     * Remove an existing source
+     *
+     * \throws Exception
+     */
+    void removeSource(ResPoolManager & pool_r, const unsigned id);
+
+    /**
+     * Add packages in a resolvable store into pool
+     */
+    void addToPool(ResPoolManager & pool_r, const ResStore & store_r);
+
+    /**
+     * Remove packages which are in a resolvable store from pool
+     */
+    void removeFromPool(ResPoolManager & pool_r, const ResStore & store_r);
 
   private:
     typedef std::map<unsigned, RW_pointer<Source> > SourceMap;
+
     SourceMap _sources;
 
     static unsigned _next_id;
