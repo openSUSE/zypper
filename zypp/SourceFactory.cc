@@ -101,48 +101,35 @@ namespace zypp
       ZYPP_THROW( Exception("Empty URL passed to SourceFactory") );
 
     // open the media
-    media::MediaAccess::Ptr media;
-    try {
-      media = new media::MediaAccess();
-      media->open( url_r );
-      media->attach();
-      try
-      {
-	MIL << "Trying the YUM source" << endl;
-	Source::Impl_Ptr impl = new yum::YUMSourceImpl(media, path_r);
-ERR << "Impl created" << endl;
-	return Source(impl);
-      }
-      catch (const Exception & excpt_r)
-      {
-	ZYPP_CAUGHT(excpt_r);
-	WAR << "Not YUM source, trying next type" << endl;
-      }
-      catch (...)
-      {
-	INT << "Unknown exception" << endl;
-      }
-      try
-      {
-	MIL << "Trying the SUSE tags source" << endl;
-	Source::Impl_Ptr impl = new susetags::SuseTagsImpl(media, path_r);
-	return Source(impl);
-      }
-      catch (const Exception & excpt_r)
-      {
-	ZYPP_CAUGHT(excpt_r);
-	WAR << "Not SUSE tags source, trying next type" << endl;
-      }
-    }
-    catch (const media::MediaException & excpt_r)
+    media::MediaAccess::Ptr media = new media::MediaAccess();
+    media->open( url_r );
+    media->attach();
+    try
     {
-      ZYPP_CAUGHT(excpt_r);
+      MIL << "Trying the YUM source" << endl;
+      Source::Impl_Ptr impl = new yum::YUMSourceImpl(media, path_r);
+      MIL << "Found the YUM source" << endl;
+      return Source(impl);
     }
     catch (const Exception & excpt_r)
     {
       ZYPP_CAUGHT(excpt_r);
+      MIL << "Not YUM source, trying next type" << endl;
     }
-    ZYPP_THROW(Exception("Cannot create the installatino source"));
+    try
+    {
+      MIL << "Trying the SUSE tags source" << endl;
+      Source::Impl_Ptr impl = new susetags::SuseTagsImpl(media, path_r);
+      MIL << "Found the SUSE tags source" << endl;
+      return Source(impl);
+    }
+    catch (const Exception & excpt_r)
+    {
+      ZYPP_CAUGHT(excpt_r);
+      WAR << "Not SUSE tags source, trying next type" << endl;
+    }
+    ERR << "No next type of source" << endl;
+    ZYPP_THROW(Exception("Cannot create the installation source"));
     return Source(); // not reached!!
   }
 
