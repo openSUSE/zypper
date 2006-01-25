@@ -15,9 +15,9 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/PtrTypes.h"
 
+#include "zypp/solver/detail/Types.h"
+
 #include "zypp/solver/detail/Resolver.h"
-#include "zypp/solver/detail/ProblemSolutionPtr.h"
-#include "zypp/solver/detail/ResolverProblemPtr.h"
 #include "zypp/solver/detail/SolutionAction.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -78,15 +78,9 @@ namespace zypp
 
           // ---------------------------------- I/O
 
-          static std::string toString (const ProblemSolution & solution);
-          static std::string toString (const ProblemSolutionList & solutionlist);
-          static std::string toString (const CProblemSolutionList & solutionlist);
-
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
-
           friend std::ostream& operator<<(std::ostream&, const ProblemSolution & solution);
-
-          std::string asString (void) const;
+          friend std::ostream& operator<<(std::ostream&, const ProblemSolutionList & solutionlist);
+          friend std::ostream& operator<<(std::ostream&, const CProblemSolutionList & solutionlist);
 
           // ---------------------------------- accessors
 	    /**

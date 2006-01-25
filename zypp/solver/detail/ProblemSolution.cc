@@ -40,60 +40,32 @@ IMPL_PTR_TYPE(ProblemSolution);
 
 //---------------------------------------------------------------------------
 
-string
-ProblemSolution::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-ProblemSolution::toString ( const ProblemSolution & solution )
-{
-    string ret ("Solution:\n");
-    ret += solution._description + "\n";
-    ret += solution._details + "\n";
-    ret += SolutionAction::toString (solution._actions);
-    return ret;
-}
-
-
-std::string
-ProblemSolution::toString (const ProblemSolutionList & solutionlist)
-{
-    string ret;
-    for (ProblemSolutionList::const_iterator iter = solutionlist.begin(); iter != solutionlist.end(); ++iter) {
-	ret += (*iter)->asString();
-	ret += "\n";
-    }
-    return ret;
-}
-
-
-std::string
-ProblemSolution::toString (const CProblemSolutionList & solutionlist)
-{
-    string ret;
-    for (CProblemSolutionList::const_iterator iter = solutionlist.begin(); iter != solutionlist.end(); ++iter) {
-	ret += (*iter)->asString();
-	ret += "\n";
-    }
-    return ret;
-}
-
-
-ostream &
-ProblemSolution::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
 ostream&
 operator<<( ostream& os, const ProblemSolution & solution)
 {
-    return os << solution.asString();
+    os << "Solution:" << endl;
+    os << solution._description << endl;
+    os << solution._details << endl;
+    os << solution._actions;
+    return os;
+}
+
+ostream&
+operator<<( ostream& os, const ProblemSolutionList & solutionlist)
+{
+    for (ProblemSolutionList::const_iterator iter = solutionlist.begin(); iter != solutionlist.end(); ++iter) {
+	os << (*iter) << endl;
+    }
+    return os;
+}
+
+ostream&
+operator<<( ostream& os, const CProblemSolutionList & solutionlist)
+{
+    for (CProblemSolutionList::const_iterator iter = solutionlist.begin(); iter != solutionlist.end(); ++iter) {
+	os << (*iter) << endl;
+    }
+    return os;
 }
 
 //---------------------------------------------------------------------------

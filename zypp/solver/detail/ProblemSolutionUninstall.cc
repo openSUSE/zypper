@@ -22,6 +22,8 @@
  * 02111-1307, USA.
  */
 
+#include <sstream>
+
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/solver/detail/ProblemSolutionUninstall.h"
@@ -43,30 +45,34 @@ IMPL_PTR_TYPE(ProblemSolutionUninstall);
 //---------------------------------------------------------------------------
 
 ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent,
-						    ResItem_constPtr resItem )
+						    PoolItem *item)
     : ProblemSolution (parent, "", "")
 {
     // TranslatorExplanation %s = name of package, patch, selection ...	
-    _description = str::form (_("Deleting %s"), resItem->name().c_str() );
+    _description = str::form (_("Deleting %s"), (*item)->name().c_str() );
+    ostringstream item_str;
+    item_str << (*item);
     // TranslatorExplanation %s = name of package, patch, selection ...	    
-    _details = str::form (_("Deleting %s"), resItem->asString().c_str() );
+    _details = str::form (_("Deleting %s"), item_str.str().c_str() );
 
-    addAction ( new TransactionSolutionAction (resItem, REMOVE));
+    addAction ( new TransactionSolutionAction (item, REMOVE));
 }
 
 ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent,
-						    CResItemList & resItemList )
+						    PoolItemList & itemlist)
     : ProblemSolution (parent, "", "")
 {
     _description = _("Removing conflicting resolvables");
 
-    for (CResItemList::const_iterator iter = resItemList.begin();
-	 iter != resItemList.end(); iter++) {
-	ResItem_constPtr resItem = *iter;
-	addAction ( new TransactionSolutionAction (resItem, REMOVE));
+    for (PoolItemList::iterator iter = itemlist.begin();
+	 iter != itemlist.end(); iter++) {
+	PoolItem *item = *iter;
+	addAction ( new TransactionSolutionAction (item, REMOVE));
     }
     
-    _details = SolutionAction::toString (_actions);
+    ostringstream details;
+    details << _actions;    
+    _details = details.str();
 }
 
       ///////////////////////////////////////////////////////////////////

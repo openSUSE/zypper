@@ -22,9 +22,11 @@
 #ifndef ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONIGNORE_H
 #define ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONIGNORE_H
 
+#include "zypp/solver/detail/Types.h"
+
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/ProblemSolution.h"
-#include "zypp/solver/detail/ProblemSolutionIgnorePtr.h"
+
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -50,7 +52,7 @@ namespace zypp
 	     **/
 	    ProblemSolutionIgnore( ResolverProblem_Ptr parent,
 				   const Dep &dep,
-				   ResItem_constPtr resItem,
+				   PoolItem *item,
 				   const Capability & capability);
 	};
 
@@ -64,5 +66,5 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONAIGNORE_H
+#endif // ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONIGNORE_H
 

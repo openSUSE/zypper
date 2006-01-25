@@ -22,8 +22,11 @@
  * 02111-1307, USA.
  */
 
+#include <sstream>
+
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
+
 #include "zypp/solver/detail/ProblemSolutionInstall.h"
 
 using namespace std;
@@ -43,31 +46,35 @@ IMPL_PTR_TYPE(ProblemSolutionInstall);
 //---------------------------------------------------------------------------
 
 ProblemSolutionInstall::ProblemSolutionInstall( ResolverProblem_Ptr parent,
-						ResItem_constPtr resItem )
+						PoolItem * item )
     : ProblemSolution (parent, "", "")
 {
     // TranslatorExplanation %s = name of package, patch, selection ...    
-    _description = str::form (_("Installing %s"), resItem->name().c_str() );
+    _description = str::form (_("Installing %s"), (*item)->name().c_str() );
+    ostringstream item_str;
+    item_str << (*item);
     // TranslatorExplanation %s = name of package, patch, selection ...      
-    _details = str::form (_("Installing %s"), resItem->asString().c_str() );
+    _details = str::form (_("Installing %s"), item_str.str().c_str() );
 
-    addAction ( new TransactionSolutionAction (resItem,
+    addAction ( new TransactionSolutionAction (item,
 					       INSTALL));
 }
 
 ProblemSolutionInstall::ProblemSolutionInstall( ResolverProblem_Ptr parent,
-						CResItemList & resItemList )
+						PoolItemList & itemList )
     : ProblemSolution (parent, "", "")
 {
     _description = _("Installing missing resolvables");
 
-    for (CResItemList::const_iterator iter = resItemList.begin();
-	 iter != resItemList.end(); iter++) {
-	ResItem_constPtr resItem = *iter;
-	addAction ( new TransactionSolutionAction (resItem, INSTALL));
+    for (PoolItemList::iterator iter = itemList.begin();
+	 iter != itemList.end(); iter++) {
+	PoolItem *item = *iter;
+	addAction ( new TransactionSolutionAction (item, INSTALL));
     }
-    
-    _details = SolutionAction::toString (_actions);
+
+    ostringstream details;
+    details << _actions;    
+    _details = details.str();
     
 }
 

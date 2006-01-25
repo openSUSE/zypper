@@ -22,9 +22,10 @@
 #ifndef ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONINSTALL_H
 #define ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONINSTALL_H
 
+#include "zypp/solver/detail/Types.h"
+
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/ProblemSolution.h"
-#include "zypp/solver/detail/ProblemSolutionInstallPtr.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -48,8 +49,8 @@ namespace zypp
 	    /**
 	     * Constructor.
 	     **/
-	    ProblemSolutionInstall( ResolverProblem_Ptr parent, ResItem_constPtr resItem );
-	    ProblemSolutionInstall( ResolverProblem_Ptr parent, CResItemList & resItemList );	    
+	    ProblemSolutionInstall( ResolverProblem_Ptr parent, PoolItem *item);
+	    ProblemSolutionInstall( ResolverProblem_Ptr parent, PoolItemList & itemlist );	    
 	};
 
       ///////////////////////////////////////////////////////////////////

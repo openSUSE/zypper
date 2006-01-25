@@ -22,9 +22,10 @@
 #ifndef ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONUNINSTALL_H
 #define ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONUNINSTALL_H
 
+#include "zypp/solver/detail/Types.h"
+
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/ProblemSolution.h"
-#include "zypp/solver/detail/ProblemSolutionUninstallPtr.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -48,8 +49,8 @@ namespace zypp
 	    /**
 	     * Constructor.
 	     **/
-	    ProblemSolutionUninstall( ResolverProblem_Ptr parent, ResItem_constPtr resItem );
-	    ProblemSolutionUninstall( ResolverProblem_Ptr parent, CResItemList & resItemList );	    
+	    ProblemSolutionUninstall( ResolverProblem_Ptr parent, PoolItem *item);
+	    ProblemSolutionUninstall( ResolverProblem_Ptr parent, PoolItemList & itemlist);	    
 	};
 
       ///////////////////////////////////////////////////////////////////
