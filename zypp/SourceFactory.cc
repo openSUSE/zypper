@@ -126,7 +126,7 @@ namespace zypp
     catch (const Exception & excpt_r)
     {
       ZYPP_CAUGHT(excpt_r);
-      WAR << "Not SUSE tags source, trying next type" << endl;
+      MIL << "Not SUSE tags source, trying next type" << endl;
     }
     ERR << "No next type of source" << endl;
     ZYPP_THROW(Exception("Cannot create the installation source"));
