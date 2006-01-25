@@ -22,7 +22,7 @@
 #ifndef ZYPP_SOLVER_DETAIL_RESOLVERINFOCONFLICTSWITH_H
 #define ZYPP_SOLVER_DETAIL_RESOLVERINFOCONFLICTSWITH_H
 
-#include "zypp/solver/detail/ResolverInfoConflictsWithPtr.h"
+#include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/ResolverInfoContainer.h"
 
 /////////////////////////////////////////////////////////////////////////
