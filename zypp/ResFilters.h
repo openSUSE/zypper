@@ -270,7 +270,7 @@ namespace zypp
     template<class _OnCapMatchCallback>
       struct CallOnCapMatchIn
       {
-        bool operator()( PoolItem & p ) const
+        bool operator()( PoolItem & p )
         {
           const CapSet & depSet( p->dep( _dep ) ); // dependency set in p to iterate
           capfilter::ByCapMatch matching( _cap );  // predicate: true if match with _cap
