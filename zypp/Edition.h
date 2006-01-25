@@ -166,7 +166,6 @@ namespace zypp
      * \see \ref RelCompare.
     */
     typedef Range<Edition, Match> MatchRange;
-    typedef MatchRange Range;
 
   private:
     /** Hides implementation */

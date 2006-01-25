@@ -180,6 +180,48 @@ namespace zypp
       std::string _name;
     };
 
+
+    /** Select ResObject by Edition using \a _Compare functor.
+     *
+     * Selects ResObject if <tt>_Compare( ResObject->edition(), _edition )<\tt>
+     * is \c true.
+     * \code
+     * // use the convenience funktions to create ByEdition:
+     *
+     * byEdition( someedition ); // selects ResObjects with edition == someedition
+     *
+     * byEdition( someedition, CompareByGT<Edition>() ) //  edition >  someedition
+     * \endcode
+    */
+    template<class _Compare = CompareByEQ<Edition> >
+      struct ByEdition : public ResObjectFilterFunctor
+      {
+        ByEdition( const Edition & edition_r,
+                   _Compare cmp_r )
+        : _edition( edition_r )
+        , _cmp( cmp_r )
+        {}
+
+        bool operator()( ResObject::constPtr p ) const
+        {
+          return _cmp( p->edition(), _edition );
+        }
+
+        Edition  _edition;
+        _Compare _cmp;
+      };
+
+    /** */
+    template<class _Compare>
+      ByEdition<_Compare> byEdition( const Edition & edition_r, _Compare cmp_r )
+      { return ByEdition<_Compare>( edition_r, cmp_r ); }
+
+    /** */
+    template<class _Compare>
+      ByEdition<_Compare> byEdition( const Edition & edition_r )
+      { return byEdition( edition_r, _Compare() ); }
+
+
     /** Select ResObject if at least one Capability with
      *  index \a index_r was found in dependency \a depType_r.
     */
