@@ -66,9 +66,8 @@ class QueueItemEstablish : public QueueItem {
 
     PoolItem *item (void) const { return _item; }
 
-#warning not implemented
-//    int channelPriority (void) const { return _channel_priority; }
-//    void setChannelPriority (int channel_priority) { _channel_priority = channel_priority; }
+    int channelPriority (void) const { return _channel_priority; }
+    void setChannelPriority (int channel_priority) { _channel_priority = channel_priority; }
 
     int otherPenalty (void) { return _other_penalty; }
     void setOtherPenalty (int other_penalty) { _other_penalty = other_penalty; }

@@ -19,12 +19,7 @@
  * 02111-1307, USA.
  */
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
-#include "zypp/solver/temporary/ResItem.h"
-#include "zypp/solver/temporary/World.h"
+#include "zypp/solver/detail/Types.h"
 
 #include "zypp/solver/detail/QueueItemEstablish.h"
 #include "zypp/solver/detail/QueueItemInstall.h"
@@ -35,7 +30,7 @@
 #include "zypp/solver/detail/ResolverInfoConflictsWith.h"
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
 #include "zypp/solver/detail/ResolverInfoMisc.h"
-#include "zypp/solver/detail/ResItemAndDependency.h"
+
 #include "zypp/CapSet.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
@@ -57,43 +52,21 @@ IMPL_PTR_TYPE(QueueItemEstablish);
 
 //---------------------------------------------------------------------------
 
-string
-QueueItemEstablish::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-QueueItemEstablish::toString ( const QueueItemEstablish & item)
-{
-    string ret = "[Establish: ";
-    ret += item._resItem->asString();
-    if (item._explicitly_requested) ret += ", Explicit !";
-    ret += "]";
-    return ret;
-}
-
-
-ostream &
-QueueItemEstablish::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
 ostream&
 operator<<( ostream& os, const QueueItemEstablish & item)
 {
-    return os << item.asString();
+    os <<"[Establish: ";
+    os << *(item._item);
+    if (item._explicitly_requested) os << ", Explicit !";
+    os << "]";
+    return os;
 }
 
 //---------------------------------------------------------------------------
 
-QueueItemEstablish::QueueItemEstablish (World_Ptr world, ResItem_constPtr res_item)
-    : QueueItem (QUEUE_ITEM_TYPE_INSTALL, world)
-    , _resItem (res_item)
+QueueItemEstablish::QueueItemEstablish (const ResPool *pool, PoolItem *item)
+    : QueueItem (QUEUE_ITEM_TYPE_INSTALL, pool)
+    , _item(item)
     , _channel_priority (0)
     , _other_penalty (0)
     , _explicitly_requested (false)
@@ -110,7 +83,7 @@ QueueItemEstablish::~QueueItemEstablish()
 bool
 QueueItemEstablish::isSatisfied (ResolverContext_Ptr context) const
 {
-    return context->resItemIsPresent (_resItem);
+    return context->isPresent (_item);
 }
 
 
@@ -120,48 +93,49 @@ QueueItemEstablish::isSatisfied (ResolverContext_Ptr context) const
 bool
 QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
-    _DBG("RC_SPEW") << "QueueItemEstablish::process(" << asString() << ")" << endl;
+    DBG << "QueueItemEstablish::process(" << *this << ")" << endl;
 
-    _DBG("RC_SPEW") << "simple establish of " << _resItem->asString() << " with " << _resItem->freshens().size() << " freshens" << endl;
+    CapSet freshens = (*_item)->dep(Dep::FRESHENS);
 
-    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_ESTABLISHING, _resItem, RESOLVER_INFO_PRIORITY_VERBOSE);
+    DBG << "simple establish of " << *_item << " with " << freshens.size() << " freshens" << endl;
+
+    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_ESTABLISHING, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
     context->addInfo (misc_info);
     logInfo (context);
 
-    /* Loop through all freshen dependencies. If one is satisfied, queue the _resItem for installation.  */
+    /* Loop through all freshen dependencies. If one is satisfied, queue the _item for installation.  */
 
-    CapSet deps = _resItem->freshens();
     CapSet::const_iterator iter;
-    for (iter = deps.begin(); iter != deps.end(); iter++) {
-	const Capability dep = *iter;
-	if (context->requirementIsMet (dep)) {
-	    _DBG("RC_SPEW") << "this freshens " << dep.asString() << endl;
+    for (iter = freshens.begin(); iter != freshens.end(); iter++) {
+	const Capability cap = *iter;
+	if (context->requirementIsMet (cap)) {
+	    DBG << "this freshens " << cap << endl;
 	    break;
 	}
     }
 
-    // if we have freshens but none of the freshen deps were met, mark the _resItem as unneeded
+    // if we have freshens but none of the freshen deps were met, mark the _item as unneeded
     // else we look at its requires to set it to satisfied or incomplete
-    if (deps.size() > 0
-	&& iter == deps.end()) {
-	_DBG("RC_SPEW") << "this freshens nothing -> unneeded" << endl;
-	context->unneededResItem (_resItem, _other_penalty);
+    if (freshens.size() > 0
+	&& iter == freshens.end()) {
+	DBG << "this freshens nothing -> unneeded" << endl;
+	context->unneeded (_item, _other_penalty);
     }
     else {
-	deps = _resItem->requires();
-	for (iter = deps.begin(); iter != deps.end(); iter++) {
-	    const Capability dep = *iter;
-	    if (!context->requirementIsMet (dep)) {
+	CapSet requires = (*_item)->dep(Dep::REQUIRES);
+	for (iter = requires.begin(); iter != requires.end(); iter++) {
+	    const Capability cap = *iter;
+	    if (!context->requirementIsMet (cap)) {
 		break;
 	    }
 	}
-	if (iter == deps.end()) {		// all are met
-	    _DBG("RC_SPEW") << "all requirements met -> satisfied" << endl;
-	    context->satisfyResItem (_resItem, _other_penalty);
+	if (iter == requires.end()) {		// all are met
+	    DBG << "all requirements met -> satisfied" << endl;
+	    context->satisfy (_item, _other_penalty);
 	}
 	else {
-	    _DBG("RC_SPEW") << "unfulfilled requirements -> incomplete" << endl;
-	    context->incompleteResItem (_resItem, _other_penalty);
+	    DBG << "unfulfilled requirements -> incomplete" << endl;
+	    context->incomplete (_item, _other_penalty);
 	}
     }
 
@@ -172,7 +146,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 QueueItem_Ptr
 QueueItemEstablish::copy (void) const
 {
-    QueueItemEstablish_Ptr new_install = new QueueItemEstablish (world(), _resItem);
+    QueueItemEstablish_Ptr new_install = new QueueItemEstablish (pool(), _item);
     new_install->QueueItem::copy(this);
 
     new_install->_channel_priority = _channel_priority;
@@ -190,7 +164,7 @@ QueueItemEstablish::cmp (QueueItem_constPtr item) const
     if (cmp != 0)
 	return cmp;
     QueueItemEstablish_constPtr establish = dynamic_pointer_cast<const QueueItemEstablish>(item);
-    return ResItem::compare (_resItem, establish->_resItem);
+    return Resolvable::compare (_item->resolvable(), establish->_item->resolvable());
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -202,5 +176,3 @@ QueueItemEstablish::cmp (QueueItem_constPtr item) const
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-
-
