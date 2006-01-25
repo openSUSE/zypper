@@ -63,7 +63,7 @@ class InstallOrder
 	CPoolItemSet _installed;
 
 	/** adjacency list type */
-	typedef std::map<const PoolItem , CPoolItemSet> Graph;
+	typedef std::map<const PoolItem, CPoolItemSet> Graph;
 
 	/** adjacency list, package -> requirements */
 	Graph _graph;
@@ -84,7 +84,7 @@ class InstallOrder
 	    NodeInfo(const PoolItem item) : begintime(0), endtime(0), visited(false), order(0), item(item) {}
 	};
 	
-	typedef std::map<const PoolItem ,NodeInfo> Nodes;
+	typedef std::map<const PoolItem, NodeInfo> Nodes;
 
 	Nodes _nodes;
 

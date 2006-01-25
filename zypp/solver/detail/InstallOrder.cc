@@ -73,12 +73,12 @@ InstallOrder::printAdj (std::ostream& os, bool reversed) const
     {
 	Nodes::const_iterator niit = _nodes.find(gcit->first);
 	int order = niit->second.order;
-	string name = gcit->first->resolvable()->name();
+	string name = gcit->first.resolvable()->name();
 	os << "\"" << name << "\"" << "[label=\"" << name << "\\n" << order << "\"";
 	os << "] " << endl;
 	for (CPoolItemSet::const_iterator scit = gcit->second.begin(); scit != gcit->second.end(); ++scit)
 	{
-	    os << "\"" << name << "\" -> \"" << (*scit)->resolvable()->name() << "\"" << endl;
+	    os << "\"" << name << "\" -> \"" << (*scit).resolvable()->name() << "\"" << endl;
 	}
     }
     os << "}" << endl;
@@ -111,7 +111,7 @@ InstallOrder::computeNextSet()
 
 // decrease order of every adjacent node
 void
-InstallOrder::setInstalled(const PoolItem * item )
+InstallOrder::setInstalled(const PoolItem  item )
 {
     _dirty = true;
 
@@ -165,7 +165,7 @@ InstallOrder::startrdfs()
     // initialize all nodes
     for (CPoolItemSet::iterator it = _toinstall.begin(); it != _toinstall.end(); ++it)
     {
-	const PoolItem * item = *it;
+	const PoolItem item = *it;
 	_nodes[item] = NodeInfo (item);
 	_rgraph[item] = CPoolItemSet();
 	_graph[item] = CPoolItemSet();
@@ -174,7 +174,7 @@ InstallOrder::startrdfs()
     // visit all nodes
     for (CPoolItemSet::iterator it = _toinstall.begin(); it != _toinstall.end(); ++it)
     {
-	const PoolItem * item = *it;
+	const PoolItem item = *it;
 	if (_nodes[item].visited == false)
 	{
 	    _DBG("RC_SPEW") << "start recursion on " << item << endl;
@@ -186,38 +186,51 @@ InstallOrder::startrdfs()
 }
 
 
-typedef struct {
-    const PoolItem * requestor;
-    CPoolItemSet *tovisit;   
-    CPoolItemSet *toinstall;
-    CPoolItemSet *installed;
-} CollectProvidersInfo;
 
 
-// item provides cap which matches a requirement from info->requestor
-//   this function gets _all_ providers and filter out those which are
-//   either installed or in our toinstall input list
-//
-
-static bool
-collect_providers (PoolItem * item, const Capability & cap, void *data)
+struct CollectProviders : public resfilter::OnCapMatchCallbackFunctor
 {
-    CollectProvidersInfo *info = (CollectProvidersInfo *)data;
+    const PoolItem requestor;
+    CPoolItemSet & tovisit;   
+    CPoolItemSet & toinstall;
+    CPoolItemSet & installed;
 
-    if ((item != info->requestor)  					// package could provide its own requirement
+    CollectProviders info (const PoolItem pi, CPoolItemSet & tv, CPoolItemSet & ti, CPoolItemSet i)
+	: requestor (pi)
+	, tovisit (tv)
+	, toinstall (ti)
+	, installed (i)
+    { }
+
+
+    bool operator()( PoolItem provider, const Capability & match ) const
+    {
+      // Untill we can pass the functor by reference to algorithms.
+      return const_cast<RequireProcess&>(*this).fake( provider, match );
+    }
+    bool fake( PoolItem provider, const Capability & match )
+    {
+	// item provides cap which matches a requirement from info->requestor
+	//   this function gets _all_ providers and filter out those which are
+	//   either installed or in our toinstall input list
+	//
+
+	if ((provider != requestor)  					// package could provide its own requirement
 #warning fixme
-//	&& (!(item->status().isInstalled())						// only visit if provider is not already installed
-	&& (info->toinstall->find(item) != info->toinstall->end()		// only look at packages
-	    || info->installed->find(item) != info->installed->end())) {	//   we are currently considering anyways
-	info->tovisit->insert (item);
+//	&& (!(item->status().isInstalled())				// only visit if provider is not already installed
+	    && (toinstall->find(provider) != toinstall->end()		// only look at packages
+		|| installed->find(provider) != installed->end())) {	//   we are currently considering anyways
+	    tovisit->insert (provider);
+	}
+
+	return true;
     }
 
-    return true;
-}
+};
 
 
 void
-InstallOrder::rdfsvisit (const PoolItem * item)
+InstallOrder::rdfsvisit (const PoolItem  item)
 {
     typedef list<Capability> CapList;
     CapList requires;
@@ -233,13 +246,13 @@ InstallOrder::rdfsvisit (const PoolItem * item)
     // put prerequires first and requires last on list to ensure
     // that prerequires are processed first
 
-    for (CapSet::const_iterator it = (*item)->dep (Dep::PREREQUIRES).begin(); it != (*item)->dep (Dep::PREREQUIRES).end(); ++it)
+    for (CapSet::const_iterator it = item->dep (Dep::PREREQUIRES).begin(); it != item->dep (Dep::PREREQUIRES).end(); ++it)
     {
 	const Capability cap = *it;
 	requires.push_back(cap);
     }
 
-    for (CapSet::const_iterator it = (*item)->dep (Dep::REQUIRES).begin(); it != (*item)->dep (Dep::REQUIRES).end(); ++it)
+    for (CapSet::const_iterator it = item->dep (Dep::REQUIRES).begin(); it != item->dep (Dep::REQUIRES).end(); ++it)
     {
 	const Capability cap = *it;
 	requires.push_back(cap);
@@ -251,19 +264,19 @@ InstallOrder::rdfsvisit (const PoolItem * item)
 	_DBG("RC_SPEW") << "check requirement " << requirement << " of " << item << endl;
 	CPoolItemSet tovisit;
 
-	CollectProvidersInfo info = { item, &tovisit, &_toinstall, &_installed };
+	CollectProviders info ( item, tovisit, _toinstall, _installed );
+
 #warning fixme
 //	_world->foreachProvidingResItem (requirement, collect_providers, &info);
-	invokeOnEach( _pool->byCapabilityIndexBegin( _capability.index(), dep ),
-		      _pool->byCapabilityIndexEnd( _capability.index(), dep ),
-		      resfilter::callOnCapMatchIn( dep, _capability, info ) );
-//	invokeOnEach( make_filter_begin( ByCapability (requirement, Dep::PROVIDES), *_pool ),
-//		      make_filter_end( ByCapability (requirement, Dep::PROVIDES), *_pool ),
-//		      Print() );
+
+	Dep dep (Dep::PROVIDES);
+	invokeOnEach( _pool->byCapabilityIndexBegin( requirement.index(), dep ),
+		      _pool->byCapabilityIndexEnd( requirement.index(), dep ),
+		      resfilter::callOnCapMatchIn( dep, requirement, info ) );
 
 	for (CPoolItemSet::iterator it = tovisit.begin(); it != tovisit.end(); ++it)
 	{
-	    const PoolItem *must_visit = *it;
+	    const PoolItem must_visit = *it;
 	    if (_nodes[must_visit].visited == false)
 	    {
 		nodeinfo.order++;
