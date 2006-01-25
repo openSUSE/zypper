@@ -49,10 +49,18 @@ namespace zypp
     */
     bool compatibleWith( const Arch & rhs ) const;
 
+    /** Order on Arch (arbitrary).
+     * \todo Adjust logical operators below to follow compare.
+    */
+    int compare( const Arch & rhs ) const
+    { return _value.compare( rhs._value ); }
+
     /** Architecture of the current working system
      * \return \c Arch.
-    */      
-    static const Arch System; 
+     * \todo Eliminate this, it's not task of a data type to
+     * detect and define what the system architecture is.
+    */
+    static const Arch System;
 
   private:
     /** String representation of Arch. */

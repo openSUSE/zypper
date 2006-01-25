@@ -35,6 +35,7 @@
 using namespace std;
 using namespace zypp;
 using namespace zypp::functor;
+using namespace zypp::resfilter;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -160,63 +161,6 @@ namespace zypp
 {
   namespace functor {
 
-    /** */
-    typedef std::unary_function<Capability, bool> CapabilityFilterFunctor;
-
-    /** */
-    struct ByIndex : public CapabilityFilterFunctor
-    {
-      bool operator()( Capability c ) const
-      {
-        return c.index() == _index;
-      }
-
-      ByIndex( const std::string & index_r )
-      : _index( index_r )
-      {}
-      ByIndex( const Capability & cap_r )
-      : _index( cap_r.index() )
-      {}
-      std::string _index;
-    };
-
-  }
-
-
-  namespace functor {
-
-    /** \todo enumerate dependencies. */
-    struct ByProvidesIndex : public ResObjectFilterFunctor
-    {
-      ByProvidesIndex( const std::string & index_r )
-      : _index( index_r )
-      {}
-
-      bool operator()( ResObject::constPtr p ) const
-      {
-        return(    make_filter_begin( ByIndex(_index), p->dep( Dep::PROVIDES ) )
-                != make_filter_end( ByIndex(_index), p->dep( Dep::PROVIDES ) ) );
-      }
-
-      std::string _index;
-    };
-
-    /** \todo enumerate dependencies. */
-    struct ByRequiresIndex : public ResObjectFilterFunctor
-    {
-      ByRequiresIndex( const std::string & index_r )
-      : _index( index_r )
-      {}
-
-      bool operator()( ResObject::constPtr p ) const
-      {
-        return(    make_filter_begin( ByIndex(_index), p->dep( Dep::REQUIRES ) )
-                != make_filter_end( ByIndex(_index), p->dep( Dep::REQUIRES ) ) );
-      }
-
-      std::string _index;
-    };
-
 
 
   } // namespace functor
@@ -267,12 +211,12 @@ int main( int argc, char * argv[] )
                        xPrint() ) << endl;
 
   std::string i( "3ddiag" );
-  SEC << invokeOnEach( make_filter_begin( ByProvidesIndex(i), query ),
-                       make_filter_end( ByProvidesIndex(i), query ),
+  SEC << invokeOnEach( make_filter_begin( ByCapabilityIndex(i,Dep::PROVIDES), query ),
+                       make_filter_end( ByCapabilityIndex(i,Dep::PROVIDES), query ),
                        Print() ) << endl;
   i = "/bin/sh";
-  SEC << invokeOnEach( make_filter_begin( ByRequiresIndex(i), query ),
-                       make_filter_end( ByRequiresIndex(i), query ),
+  SEC << invokeOnEach( make_filter_begin( ByCapabilityIndex(i,Dep::REQUIRES), query ),
+                       make_filter_end( ByCapabilityIndex(i,Dep::REQUIRES), query ),
                        Print() ) << endl;
 
 

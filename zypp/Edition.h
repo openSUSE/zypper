@@ -125,8 +125,12 @@ namespace zypp
      * \attention An empty version or release string is not treated
      * specialy. It's the least possible value. If you want an empty
      * string treated as \c ANY, use \ref match.
-   */
+    */
     static int compare( const Edition & lhs, const Edition & rhs );
+
+    /** */
+    int compare( const Edition & rhs ) const
+    { return compare( *this, rhs ); }
 
     /** \ref compare functor.
      * \see \ref RelCompare.
@@ -144,6 +148,10 @@ namespace zypp
      * \return <tt>-1,0,1</tt> if editions match <tt>\<,==,\></tt>.
     */
     static int match( const Edition & lhs, const Edition & rhs );
+
+    /** */
+    int match( const Edition & rhs ) const
+    { return match( *this, rhs ); }
 
     /** \ref match functor.
      * \see \ref RelCompare.

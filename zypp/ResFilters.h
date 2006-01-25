@@ -14,13 +14,15 @@
 
 #include "zypp/base/Functional.h"
 #include "zypp/Resolvable.h"
+#include "zypp/CapFilters.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace functor
+  namespace resfilter
   { /////////////////////////////////////////////////////////////////
+
     /** \defgroup RESFILTERS Filter functors operating on ResObjects.
      * \ingroup g_Functor
      *
@@ -141,7 +143,7 @@ namespace zypp
     /** */
     typedef std::unary_function<ResObject::constPtr, bool> ResObjectFilterFunctor;
 
-    /** */
+    /** Select ResObject by kind. */
     struct ByKind : public ResObjectFilterFunctor
     {
       ByKind( const ResObject::Kind & kind_r )
@@ -161,7 +163,7 @@ namespace zypp
       inline ByKind byKind()
       { return ByKind( ResTraits<_Res>::kind ); }
 
-    /** */
+    /** Select ResObject by name. */
     struct ByName : public ResObjectFilterFunctor
     {
       ByName( const std::string & name_r )
@@ -176,31 +178,32 @@ namespace zypp
       std::string _name;
     };
 
-#if 0
-    /** \todo enumerate dependencies. */
+    /** Select ResObject if at least one Capability with
+     *  index \a index_r was found in dependency \a depType_r.
+    */
     struct ByCapabilityIndex : public ResObjectFilterFunctor
     {
-      ByCapabilityIndex( const std::string & index_r )
-      : _index( index_r )
+      ByCapabilityIndex( const std::string & index_r, Dep depType_r )
+      : _dep( depType_r )
+      , _index( index_r )
       {}
 
       bool operator()( ResObject::constPtr p ) const
       {
-        p->provides()
-
-        return p->index() == _index;
-
+        using capfilter::ByIndex;
+        return(    make_filter_begin( ByIndex(_index), p->dep( _dep ) )
+                != make_filter_end( ByIndex(_index), p->dep( _dep ) ) );
       }
 
+      Dep         _dep;
       std::string _index;
     };
-#endif
 
     ///////////////////////////////////////////////////////////////////
 
     //@}
     /////////////////////////////////////////////////////////////////
-  } // namespace functor
+  } // namespace resfilter
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

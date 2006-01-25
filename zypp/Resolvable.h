@@ -130,6 +130,62 @@ namespace zypp
     inline typename ResTraits<_Res>::constPtrType asKind( const Resolvable::constPtr & p )
     { return dynamic_pointer_cast<const _Res>(p); }
 
+  ///////////////////////////////////////////////////////////////////
+
+  /** \relates Resolvable Compare Resolvable::constPtr according to
+   *  \a kind and \a name.
+  */
+  inline int compareByN( const Resolvable::constPtr & lhs,
+                         const Resolvable::constPtr & rhs )
+  {
+    if ( lhs == rhs )
+      return 0;
+    if ( ! (lhs && rhs) )
+      return lhs ? 1 : -1;
+    int res = 0;
+    if ( (res = lhs->kind().compare( rhs->kind() )) )
+      return res;
+    return lhs->name().compare( rhs->name() );
+  }
+
+  /** \relates Resolvable Compare Resolvable::constPtr according to
+   *  \a kind, \a name and \a edition(compare!).
+  */
+  inline int compareByNVR( const Resolvable::constPtr & lhs,
+                           const Resolvable::constPtr & rhs )
+  {
+    if ( lhs == rhs )
+      return 0;
+    if ( ! (lhs && rhs) )
+      return lhs ? 1 : -1;
+    int res = 0;
+    if ( (res = lhs->kind().compare( rhs->kind() )) )
+      return res;
+    if ( (res = lhs->name().compare( rhs->name() )) )
+      return res;
+    return lhs->edition().compare( rhs->edition() );
+  }
+
+  /** \relates Resolvable Compare Resolvable::constPtr according to
+   *  \a kind, \a name, \a edition(compare!) and \a arch.
+  */
+  inline int compareByNVRA( const Resolvable::constPtr & lhs,
+                            const Resolvable::constPtr & rhs )
+  {
+    if ( lhs == rhs )
+      return 0;
+    if ( ! (lhs && rhs) )
+      return lhs ? 1 : -1;
+    int res = 0;
+    if ( (res = lhs->kind().compare( rhs->kind() )) )
+      return res;
+    if ( (res = lhs->name().compare( rhs->name() )) )
+      return res;
+    if ( (res = lhs->edition().compare( rhs->edition() )) )
+      return res;
+    return lhs->arch().compare( rhs->arch() );
+  }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

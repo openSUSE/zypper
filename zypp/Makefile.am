@@ -15,6 +15,7 @@ pkginclude_HEADERS = NeedAType.h \
 	CapMatch.h	\
 	CapSet.h	\
 	CapSetFwd.h	\
+	CapFilters.h	\
 	CountryCode.h	\
 	Date.h		\
 	Dep.h		\

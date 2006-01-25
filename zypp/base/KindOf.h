@@ -63,6 +63,14 @@ namespace zypp
         const std::string & asString() const
         { return _value; }
 
+        /** Order on KindOf (arbitrary).
+         * Not necessarily lexicographical.
+         * \todo Enable class _Tp to define the order,
+         * Fix logical operators below to use compare,
+        */
+        int compare( const KindOf & rhs ) const
+        { return _value.compare( rhs._value ); }
+
       private:
         /** */
         std::string _value;
