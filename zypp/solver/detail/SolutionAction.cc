@@ -128,7 +128,7 @@ InjectSolutionAction::toString ( const InjectSolutionAction & action )
 {
     string ret ("InjectSolutionAction: ");
     ret += action._capability.asString();
-    ret += action._kind == PROVIDE ? "(provide)" : "(conflict)";
+    ret += action._kind.asString();
     ret += "\n";
     return ret;
 }

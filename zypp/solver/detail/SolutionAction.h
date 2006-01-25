@@ -15,6 +15,7 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/PtrTypes.h"
 
+#include "zypp/Dep.h"
 #include "zypp/Capability.h"
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/ProblemSolutionPtr.h"
@@ -120,13 +121,7 @@ namespace zypp
 	{
 	public:
 	    
-	    typedef enum
-	    {
-		PROVIDE,
-		CONFLICT
-	    } CapabilityKind;
-	    
-	    InjectSolutionAction( const Capability & capability, const CapabilityKind & kind )
+	    InjectSolutionAction( const Capability & capability, const Dep & kind )
 		: SolutionAction(), _capability( capability ), _kind( kind ) {}
 
 	  // ---------------------------------- I/O
@@ -148,7 +143,7 @@ namespace zypp
 	protected:
 
 	    const Capability & _capability;
-	    const CapabilityKind & _kind;
+	    const Dep & _kind;
 	};
 
 
