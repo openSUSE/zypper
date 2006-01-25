@@ -52,100 +52,57 @@ SolutionAction::~SolutionAction()
 }
 
 
-std::string
-SolutionAction::toString (const SolutionActionList & actionlist)
-{
-    string ret;
-    for (SolutionActionList::const_iterator iter = actionlist.begin(); iter != actionlist.end(); ++iter) {
-	ret += (*iter)->asString();
-	ret += "\n";
-    }
-    return ret;
-}
-
-std::string
-SolutionAction::toString (const CSolutionActionList & actionlist)
-{
-    string ret;
-    for (CSolutionActionList::const_iterator iter = actionlist.begin(); iter != actionlist.end(); ++iter) {
-	ret += (*iter)->asString();
-	ret += "\n";
-    }
-    return ret;
-}
-
 //---------------------------------------------------------------------------
-
-string
-TransactionSolutionAction::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-TransactionSolutionAction::toString ( const TransactionSolutionAction & action )
-{
-    string ret ("TransactionSolutionAction: ");
-    switch (action._action) {
-	case KEEP:	ret += "Keep"; break;
-	case INSTALL:	ret += "Install"; break;
-	case UPDATE:	ret += "Update"; break;
-	case REMOVE:	ret += "Remove"; break;
-    }
-    ret += " ";
-    ret += action._resolvable->asString();
-    ret += "\n";
-    return ret;
-}
-
-
-ostream &
-TransactionSolutionAction::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
 
 ostream&
 operator<<( ostream& os, const TransactionSolutionAction & action)
 {
-    return os << action.asString();
-}
-
-//---------------------------------------------------------------------------
-
-string
-InjectSolutionAction::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-InjectSolutionAction::toString ( const InjectSolutionAction & action )
-{
-    string ret ("InjectSolutionAction: ");
-    ret += action._capability.asString();
-    ret += action._kind.asString();
-    ret += "\n";
-    return ret;
-}
-
-
-ostream &
-InjectSolutionAction::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
+    os << "TransactionSolutionAction: ";
+    switch (action._action) {
+	case KEEP:	os << "Keep"; break;
+	case INSTALL:	os << "Install"; break;
+	case UPDATE:	os << "Update"; break;
+	case REMOVE:	os << "Remove"; break;
+    }
+    os << " ";
+    os << action._item;
+    os << endl;
+    return os;
 }
 
 
 ostream&
+operator<<( ostream& os, const SolutionActionList & actionlist)
+{
+    for (SolutionActionList::const_iterator iter = actionlist.begin(); iter != actionlist.end(); ++iter) {
+	os << (*iter);
+	os << endl;
+    }
+    return os;
+}
+
+
+ostream&
+operator<<( ostream& os, const CSolutionActionList & actionlist)
+{
+    for (CSolutionActionList::const_iterator iter = actionlist.begin(); iter != actionlist.end(); ++iter) {
+	os << (*iter);
+	os << endl;
+    }
+    return os;
+}
+
+//---------------------------------------------------------------------------
+
+ostream&
 operator<<( ostream& os, const InjectSolutionAction & action)
 {
-    return os << action.asString();
+    os << "InjectSolutionAction: ";
+    os << action._capability;
+    os << ", ";
+    os << action._kind;
+    os << endl;
+    return os;
 }
 
 //---------------------------------------------------------------------------

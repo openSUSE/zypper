@@ -17,10 +17,9 @@
 
 #include "zypp/Dep.h"
 #include "zypp/Capability.h"
+
+#include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/Resolver.h"
-#include "zypp/solver/detail/ProblemSolutionPtr.h"
-#include "zypp/solver/detail/ResolverProblemPtr.h"
-#include "zypp/solver/detail/SolutionActionPtr.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -43,15 +42,9 @@ namespace zypp
 
 	  // ---------------------------------- I/O
 
-	  static std::string toString (const SolutionAction & action);
-	  static std::string toString (const SolutionActionList & actionlist);
-	  static std::string toString (const CSolutionActionList & actionlist);
-
-	  virtual std::ostream & dumpOn(std::ostream & str ) const = 0;
-
 	  friend std::ostream& operator<<(std::ostream&, const SolutionAction & action);
-
-	  virtual std::string asString (void) const = 0;
+	  friend std::ostream& operator<<(std::ostream&, const SolutionActionList & actionlist);
+	  friend std::ostream& operator<<(std::ostream&, const CSolutionActionList & actionlist);
 
 	  // ---------------------------------- methods
 	    /**
@@ -79,23 +72,18 @@ namespace zypp
 	class TransactionSolutionAction: public SolutionAction
 	{
 	public:
-	    TransactionSolutionAction( ResItem_constPtr resolvable,
+	    TransactionSolutionAction( PoolItem *item,
 				       TransactionKind action )
-		: SolutionAction(), _resolvable( resolvable ), _action( action ) {}
+		: SolutionAction(), _item( item ), _action( action ) {}
 
 	  // ---------------------------------- I/O
 
-	  static std::string toString (const TransactionSolutionAction & action);
-
-	  virtual std::ostream & dumpOn(std::ostream & str ) const;
-
 	  friend std::ostream& operator<<(std::ostream&, const TransactionSolutionAction & action);
 
-	  std::string asString (void) const;
-
 	  // ---------------------------------- accessors
-	    ResItem_constPtr resolvable() const { return _resolvable; }
-	    TransactionKind action()     const { return _action;     }
+
+	  PoolItem *item() const { return _item; }
+	  TransactionKind action() const { return _action;     }
 
 	  // ---------------------------------- methods
 	    virtual bool execute();
@@ -103,8 +91,8 @@ namespace zypp
 
 	protected:
 
-	    ResItem_constPtr	_resolvable;
-	    TransactionKind	_action;
+	    PoolItem *_item;
+	    TransactionKind _action;
 	};
 
 
@@ -124,13 +112,7 @@ namespace zypp
 
 	  // ---------------------------------- I/O
 
-	  static std::string toString (const InjectSolutionAction & action);
-
-	  virtual std::ostream & dumpOn(std::ostream & str ) const;
-
 	  friend std::ostream& operator<<(std::ostream&, const InjectSolutionAction & action);
-
-	  std::string asString (void) const;
 
 	  // ---------------------------------- accessors
 	    const Capability & capability() const { return _capability; };
