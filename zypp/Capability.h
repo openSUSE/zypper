@@ -91,11 +91,17 @@ namespace zypp
     /** Factory */
     typedef CapFactory Factory;
 
-    /** DefaultCtor creating a dummy Capability. */
+    /** DefaultCtor creating \ref noCap. */
     Capability();
 
     /** Dtor */
     virtual ~Capability();
+
+    /** Constant representing no Capabiliy.
+     * It refers to no kind of Resolvable, and matches returns
+     *  returns \c CapMatch::irrelevant.
+    */
+    static const Capability noCap;
 
   public:
     /** Kind of Resolvable the Capability refers to. */
