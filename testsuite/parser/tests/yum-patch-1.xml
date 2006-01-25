@@ -38,8 +38,6 @@ rpm -Uhv * > /dev/null
 	<suse:entry kind="package" name="foo-devel" epoch="3" ver="4" rel="5" flags="LE"/>
       </suse:freshen>
     </script>
-  </atoms>
-  <atoms>
     <message type="OK">
       <yum:name>foo-patch-message-1</yum:name>
       <yum:version epoch="0" ver="1" rel="2"/>
@@ -49,8 +47,6 @@ rpm -Uhv * > /dev/null
 	<suse:entry kind="package" name="foo-devel" epoch="3" ver="4" rel="5" flags="LE"/>
       </suse:freshen>
     </message>
-  </atoms>
-  <atoms>
     <package xmlns="http://linux.duke.edu/metadata/common"
              type="rpm">
       <name>foo</name>
