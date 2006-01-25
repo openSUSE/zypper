@@ -30,8 +30,6 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
-#include "zypp/solver/detail/PendingPtr.h"
-
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
@@ -42,7 +40,8 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      class Pending;
+      DEFINE_PTR_TYPE(Pending);
+
       typedef std::list <Pending_Ptr> PendingList;
       typedef PendingList * PendingList_Ptr;
 
