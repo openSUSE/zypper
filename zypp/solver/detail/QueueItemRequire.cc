@@ -118,10 +118,14 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
     PoolItemList providers;		// the provider which matched
     UniqTable uniq;
 
-//    bool operator()( PoolItem & provider, const Capability & match )
-    bool operator()( PoolItem & provider )
+    bool operator()( PoolItem provider, const Capability & match ) const
     {
-	const Capability match;
+      // Untill we can pass the functor by reference to algorithms.
+      return const_cast<RequireProcess&>(*this).fake( provider, match );
+    }
+    bool fake( PoolItem provider, const Capability & match )
+    {
+	//const Capability match;
 	ResStatus status;
 
 	status = provider.status();
@@ -145,6 +149,13 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 //	    && ! pool->itemIsLocked (provider)
 	) {
 
+            // does not work.
+            // does not work.
+            // does not work.
+            // does not work.
+            // does not work.
+            // does not work.
+            // does not work.-----v
 	    providers.push_front (&provider);
 	    uniq[&provider] = true;
 	}
@@ -159,11 +170,15 @@ struct NoInstallableProviders : public resfilter::OnCapMatchCallbackFunctor
     PoolItem *requirer;
     ResolverContext_Ptr context;
 
-//    bool operator()( PoolItem & provider, const Capability & match )
-    bool operator()( PoolItem & provider )
+    bool operator()( PoolItem provider, const Capability & match ) const
+    {
+      // Untill we can pass the functor by reference to algorithms.
+      return const_cast<NoInstallableProviders&>(*this).fake( provider, match );
+    }
+    bool fake( PoolItem provider, const Capability & match  ) const
     {
 	string msg_str;
-	const Capability match;
+	//const Capability match;
 
 	ResStatus status = provider.status();
 
@@ -438,7 +453,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	    // We can't do anything to resolve the missing requirement, so we fail.
 
 	    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CANT_SATISFY, _requiring_item, RESOLVER_INFO_PRIORITY_VERBOSE, _capability);
-	    context->addError (misc_info);	    
+	    context->addError (misc_info);
 	}
 
     }
