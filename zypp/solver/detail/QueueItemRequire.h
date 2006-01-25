@@ -27,9 +27,6 @@
 #include <string>
 
 #include "zypp/solver/detail/QueueItem.h"
-#include "zypp/solver/detail/QueueItemRequirePtr.h"
-#include "zypp/solver/temporary/ResItem.h"
-#include "zypp/solver/temporary/Channel.h"
 
 #include "zypp/Capability.h"
 
@@ -43,58 +40,60 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : QueueItemRequire
+///////////////////////////////////////////////////////////////////
+//	CLASS NAME : QueueItemRequire_Ptr
+//	CLASS NAME : QueueItemRequire_constPtr
+///////////////////////////////////////////////////////////////////
+DEFINE_PTR_TYPE(QueueItemRequire);
 
-      class QueueItemRequire : public QueueItem {
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : QueueItemRequire
+
+class QueueItemRequire : public QueueItem {
+
+  private:
+    const Capability _capability;		// the required capability
+
+    PoolItem *_requiring_item;			// who's requiring it
+
+    PoolItem *_upgraded_item;
+    PoolItem *_lost_item;
+
+    bool _remove_only;
+    bool _is_child;
+
+  public:
+
+    QueueItemRequire (const ResPool *pool, const Capability & cap);
+    virtual ~QueueItemRequire();
+
+    // ---------------------------------- I/O
+
+    friend std::ostream & operator<<(std::ostream &os, const QueueItemRequire & item);
+
+    // ---------------------------------- accessors
+
+    const Capability & capability (void) const { return _capability; }
+
+    void setRemoveOnly (void) { _remove_only = true; }
+    void setUpgradedPoolItem (PoolItem *upgraded_item) { _upgraded_item = upgraded_item; }
+    void setLostPoolItem (PoolItem *lost_item) { _lost_item = lost_item; }
+
+    // ---------------------------------- methods
+
+    virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
+    virtual QueueItem_Ptr copy (void) const;
+    virtual int cmp (QueueItem_constPtr item) const;
+    virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
+    virtual bool isSatisfied (ResolverContext_Ptr context) const { return false; }
+
+    void addPoolItem (PoolItem * item);
 
 
-        private:
-          const Capability _dep;
-          ResItem_constPtr _requiring_resItem;
-          ResItem_constPtr _upgraded_resItem;
-          ResItem_constPtr _lost_resItem;
-          bool _remove_only;
-          bool _is_child;
+};
 
-        public:
-
-          QueueItemRequire (World_Ptr world, const Capability & dep);
-          virtual ~QueueItemRequire();
-
-          // ---------------------------------- I/O
-
-          static std::string toString (const QueueItemRequire & item);
-
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
-
-          friend std::ostream& operator<<(std::ostream&, const QueueItemRequire & item);
-
-          std::string asString (void ) const;
-
-          // ---------------------------------- accessors
-
-          const Capability & dependency (void) const { return _dep; }
-
-          void setRemoveOnly (void) { _remove_only = true; }
-          void setUpgradedResItem (ResItem_constPtr upgraded_resItem) { _upgraded_resItem = upgraded_resItem; }
-          void setLostResItem (ResItem_constPtr lost_resItem) { _lost_resItem = lost_resItem; }
-
-          // ---------------------------------- methods
-
-          virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
-          virtual QueueItem_Ptr copy (void) const;
-          virtual int cmp (QueueItem_constPtr item) const;
-          virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
-          virtual bool isSatisfied (ResolverContext_Ptr context) const { return false; }
-
-          void addResItem (ResItem_constPtr resItem);
-
-
-      };
-
-      ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////
