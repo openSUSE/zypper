@@ -159,11 +159,56 @@ struct FakeConv : public std::unary_function<Resolvable::Ptr, void>
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 {
-  namespace functor {
+
+  struct OnCapMatchCallback : public CapFilterFunctor
+  {
+    bool operator()( ResObject::constPtr p, const Capability & match ) const
+    {
+    }
+  };
+
+  struct CallOnCapMatchIn : public ResObjectFilterFunctor
+  {
+    bool operator()( ResObject::constPtr p ) const
+    {
+      const CapSet & depSet( p->dep( _dep ) ); // dependency set in p to iterate
+      ByCapMatch  matching( _cap );            // predicate: true if match with _cap
+
+      invokeOnEach( depSet.begin(), depSet.end(), // iterate this set
+                    matching,                     // Filter: if match
+                    std::bind1st(_fnc,p) );       // Action: invoke _fnc(p,match)
+      // Maybe worth to note: Filter and Action are invoked with the same
+      // iterator, thus Action will use the same capability that cause
+      // the match in Filter.
+    }
+
+    CallOnCapMatchIn( Dep dep_r, const Capability & cap_r,
+                      OnCapMatchCallback fnc_r )
+    : _dep( dep_r )
+    , _cap( cap_r )
+    , _fnc( fnc_r )
+    {}
+    Dep                _dep;
+    const Capability & _cap;
+    OnCapMatchCallback _fnc;
+  };
 
 
+  void example()
+  {
+    ResPool            query;
+    Dep                dep( Dep::PROVIDES );
+    Capability         cap;
+    OnCapMatchCallback fnc;
+    //-------------
 
-  } // namespace functor
+    int ret
+    = invokeOnEach( query.byCapabilityIndexBegin( cap.index(), dep ), // begin()
+                    query.byCapabilityIndexEnd( cap.index(), dep ),   // end()
+                    CallOnCapMatchIn( dep, cap, fnc ) );              // Action(ResObject::constPtr)
+  }
+
+
 }
 ///////////////////////////////////////////////////////////////////
 
@@ -210,15 +255,11 @@ int main( int argc, char * argv[] )
   SEC << invokeOnEach( query.byNameBegin("rpm"), query.byNameEnd("rpm"),
                        xPrint() ) << endl;
 
-  std::string i( "3ddiag" );
-  SEC << invokeOnEach( make_filter_begin( ByCapabilityIndex(i,Dep::PROVIDES), query ),
-                       make_filter_end( ByCapabilityIndex(i,Dep::PROVIDES), query ),
+  std::string i( "/bin/sh" );
+  SEC << invokeOnEach( query.byCapabilityIndex(i,Dep::PROVIDES),
+                       query.byCapabilityIndex(i,Dep::PROVIDES),
                        Print() ) << endl;
   i = "/bin/sh";
-  SEC << invokeOnEach( make_filter_begin( ByCapabilityIndex(i,Dep::REQUIRES), query ),
-                       make_filter_end( ByCapabilityIndex(i,Dep::REQUIRES), query ),
-                       Print() ) << endl;
-
 
 
   INT << "===[END]============================================" << endl;

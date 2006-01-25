@@ -1,73 +1,36 @@
-#include "zypp/ResPoolManager.h"
+#include "zypp/base/Algorithm.h"
+#include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
+#include "zypp/CapFilters.h"
+
+#include "zypp/ResPoolManager.h"
 
 namespace zypp
 {
-  ///////////////////////////////////////////////////////////////////
-
-  bool somefunction( ResObject::constPtr p, Capability c )
+  struct OnCapMatchCallback : public resfilter::OnCapMatchCallbackFunctor
   {
-    return true;
-  }
-
-  class SomeClass
-  {
-    bool somemember( ResObject::constPtr p, Capability c )
+    bool operator()( ResObject::constPtr p, const Capability & match ) const
     {
       return true;
     }
+
+    // func pointer
+    // void *
   };
 
-  struct SomeFunctor
+  int test( ResPool query )
   {
-    bool operator()( ResObject::constPtr p, Capability c )
-    {
-      return true;
-    }
-  };
+    Dep                 dep( Dep::PROVIDES );
+    Capability          cap;
+    OnCapMatchCallback  fnc;
 
-  ///////////////////////////////////////////////////////////////////
-
-  
-  
-  ///////////////////////////////////////////////////////////////////
-
-  template<class _RedirectToFunction>
-    struct MyFunction : public functor::ResObjectFilterFunctor
-    {
-      bool operator()( ResObject::constPtr p ) const
-      {
-        Capability c;
-        // c = ....
-        return _fnc( p, c );
-      }
-
-      MyFunction( _RedirectToFunction fnc_r )
-      : _fnc( fnc_r  )
-      {}
-      _RedirectToFunction _fnc;
-    };
-
-  template<class _RedirectToFunction>
-    MyFunction<_RedirectToFunction> makeMyFunction( _RedirectToFunction r )
-    { return MyFunction<_RedirectToFunction>( r ); }
-
-  ///////////////////////////////////////////////////////////////////
-
-
-  void test( const ResPool & pool_r )
-  {
-    int res = invokeOnEach( pool_r.byNameBegin("rpm"),
-                            pool_r.byNameEnd("rpm"),
-                            makeMyFunction(somefunction) );
-
-    res = invokeOnEach( pool_r.byNameBegin("rpm"),
-                        pool_r.byNameEnd("rpm"),
-                        makeMyFunction(SomeFunctor()) );
-    
-    SomeClass c;
-    
+    int ret
+    = invokeOnEach( query.byCapabilityIndexBegin( cap.index(), dep ), // begin()
+                    query.byCapabilityIndexEnd( cap.index(), dep ),   // end()
+                    resfilter::callOnCapMatchIn( dep, cap, fnc ) );   // Action(ResObject::constPtr)
+    return ret;
   }
+
 
 }
 
@@ -75,6 +38,7 @@ int main()
 {
   zypp::ResPoolManager pool;
   zypp::test( pool.accessor() );
+
   return 0;
 }
 

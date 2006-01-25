@@ -28,7 +28,27 @@ namespace zypp
     //@{
 
     /** */
-    typedef std::unary_function<const Capability &, bool> CapabilityFilterFunctor;
+    typedef std::unary_function<Capability, bool> CapabilityFilterFunctor;
+
+    /** */
+    struct ByRefers : public CapabilityFilterFunctor
+    {
+      bool operator()( const Capability & c ) const
+      {
+        return c.refers() == _refers;
+      }
+
+      ByRefers( Resolvable::Kind refers_r )
+      : _refers( refers_r )
+      {}
+      ByRefers( ResObject::constPtr p )
+      : _refers( p->kind() )
+      {}
+      ByRefers( const Capability & cap_r )
+      : _refers( cap_r.refers() )
+      {}
+      Resolvable::Kind _refers;
+    };
 
     /** */
     struct ByIndex : public CapabilityFilterFunctor
@@ -45,6 +65,22 @@ namespace zypp
       : _index( cap_r.index() )
       {}
       std::string _index;
+    };
+
+    /** */
+    struct ByCapMatch : public CapabilityFilterFunctor
+    {
+      bool operator()( const Capability & c ) const
+      {
+        return _lhs.matches( c ) == _expect;
+      }
+
+      ByCapMatch( const Capability & cap_r, CapMatch expect_r = CapMatch::yes )
+      : _lhs( cap_r )
+      , _expect( expect_r )
+      {}
+      const Capability & _lhs;
+      CapMatch           _expect;
     };
 
     //@}

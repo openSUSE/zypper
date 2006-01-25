@@ -187,6 +187,10 @@ namespace zypp
       : _dep( depType_r )
       , _index( index_r )
       {}
+      ByCapabilityIndex( const Capability & cap_r, Dep depType_r )
+      : _dep( depType_r )
+      , _index( cap_r.index() )
+      {}
 
       bool operator()( ResObject::constPtr p ) const
       {
@@ -198,6 +202,51 @@ namespace zypp
       Dep         _dep;
       std::string _index;
     };
+
+    ///////////////////////////////////////////////////////////////////
+
+    typedef std::binary_function<ResObject::constPtr,Capability,
+                                 bool> OnCapMatchCallbackFunctor;
+
+    /** */
+    template<class _OnCapMatchCallback>
+      struct CallOnCapMatchIn : public ResObjectFilterFunctor
+      {
+        bool operator()( ResObject::constPtr p ) const
+        {
+          const CapSet & depSet( p->dep( _dep ) ); // dependency set in p to iterate
+          capfilter::ByCapMatch matching( _cap );  // predicate: true if match with _cap
+
+          int res
+          = invokeOnEach( depSet.begin(), depSet.end(), // iterate this set
+                          matching,                     // Filter: if match
+                          std::bind1st(_fnc,p) );       // Action: invoke _fnc(p,match)
+          // Maybe worth to note: Filter and Action are invoked with the same
+          // iterator, thus Action will use the same capability that cause
+          // the match in Filter.
+
+          return ( res >= 0 );
+        }
+
+        CallOnCapMatchIn( Dep dep_r, const Capability & cap_r,
+                          _OnCapMatchCallback fnc_r )
+        : _dep( dep_r )
+        , _cap( cap_r )
+        , _fnc( fnc_r )
+        {}
+        Dep                 _dep;
+        const Capability &  _cap;
+        _OnCapMatchCallback _fnc;
+      };
+
+    /** */
+    template<class _OnCapMatchCallback>
+      inline CallOnCapMatchIn<_OnCapMatchCallback>
+      callOnCapMatchIn( Dep dep_r, const Capability & cap_r,
+                        _OnCapMatchCallback fnc_r )
+      {
+        return CallOnCapMatchIn<_OnCapMatchCallback>( dep_r, cap_r, fnc_r );
+      }
 
     ///////////////////////////////////////////////////////////////////
 
