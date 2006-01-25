@@ -24,6 +24,18 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  IMPL_PTR_TYPE(SourceManager)
+
+  SourceManager_Ptr SourceManager::_source_manager;
+
+  SourceManager_Ptr SourceManager::sourceManager()
+  {
+    if ( ! _source_manager )
+      _source_manager = new SourceManager;
+    return _source_manager;
+  }
+
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : SourceManager::SourceManager
@@ -58,42 +70,6 @@ namespace zypp
     }
   }
 
-  const Pathname SourceManager::provideFile(const unsigned id,
-				            const unsigned media_nr,
-					    const Pathname & path_r)
-  {
-    RW_pointer<Source> src = findSource(id);
-    return src->provideFile (path_r, media_nr);
-  }
-
-  const Pathname SourceManager::provideDir(const unsigned id,
-					   const unsigned media_nr,
-					   const Pathname & path_r,
-					   const bool recursive)
-  {
-    RW_pointer<Source> src = findSource(id);
-    return src->provideDir (path_r, media_nr, recursive);
-
-  }
-
-  const bool SourceManager::enabled(const unsigned id) const
-  {
-    RW_pointer<Source> src = findSource(id);
-    return src->enabled();
-  }
-
-  void SourceManager::enable(const unsigned id)
-  {
-    RW_pointer<Source> src = findSource(id);
-    src->enable();
-  }
-
-  void SourceManager::disable(const unsigned id)
-  {
-    RW_pointer<Source> src = findSource(id);
-    src->disable();
-  }
-
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<
@@ -106,14 +82,14 @@ namespace zypp
 
   unsigned SourceManager::_next_id = 0;
 
-  RW_pointer<Source> SourceManager::findSource(const unsigned id) const
+  Source & SourceManager::findSource(const unsigned id)
   {
-    SourceMap::const_iterator it = _sources.find(id);
+    SourceMap::iterator it = _sources.find(id);
     if (it == _sources.end())
     {
       ZYPP_THROW(Exception("Unknown source ID"));
     }
-    return it->second;
+    return *(it->second);
   }
 
   /////////////////////////////////////////////////////////////////
