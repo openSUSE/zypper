@@ -28,22 +28,22 @@ namespace zypp
   std::ostream & operator<<( std::ostream & str, const Dependencies & obj )
   {
     str << "Dependencies: [" << endl;
-    if ( ! obj.provides.empty() )
-      str << "PROVIDES:" << endl << obj.provides;
-    if ( ! obj.prerequires.empty() )
-      str << "PREREQUIRES:" << endl << obj.prerequires;
-    if ( ! obj.requires.empty() )
-      str << "REQUIRES:" << endl << obj.requires;
-    if ( ! obj.conflicts.empty() )
-      str << "CONFLICTS:" << endl << obj.conflicts;
-    if ( ! obj.obsoletes.empty() )
-      str << "OBSOLETES:" << endl << obj.obsoletes;
-    if ( ! obj.recommends.empty() )
-      str << "RECOMMENDS:" << endl << obj.recommends;
-    if ( ! obj.suggests.empty() )
-      str << "SUGGESTS:" << endl << obj.suggests;
-    if ( ! obj.freshens.empty() )
-      str << "FRESHENS:" << endl << obj.freshens;
+    if ( ! obj[Dep::PROVIDES].empty() )
+      str << "PROVIDES:" << endl << obj[Dep::PROVIDES];
+    if ( ! obj[Dep::PREREQUIRES].empty() )
+      str << "PREREQUIRES:" << endl << obj[Dep::PREREQUIRES];
+    if ( ! obj[Dep::REQUIRES].empty() )
+      str << "REQUIRES:" << endl << obj[Dep::REQUIRES];
+    if ( ! obj[Dep::CONFLICTS].empty() )
+      str << "CONFLICTS:" << endl << obj[Dep::CONFLICTS];
+    if ( ! obj[Dep::OBSOLETES].empty() )
+      str << "OBSOLETES:" << endl << obj[Dep::OBSOLETES];
+    if ( ! obj[Dep::RECOMMENDS].empty() )
+      str << "RECOMMENDS:" << endl << obj[Dep::RECOMMENDS];
+    if ( ! obj[Dep::SUGGESTS].empty() )
+      str << "SUGGESTS:" << endl << obj[Dep::SUGGESTS];
+    if ( ! obj[Dep::FRESHENS].empty() )
+      str << "FRESHENS:" << endl << obj[Dep::FRESHENS];
     return str << "]";
   }
 

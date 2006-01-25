@@ -10,6 +10,7 @@
 #include <zypp/base/Exception.h>
 #include <zypp/base/PtrTypes.h>
 #include <zypp/base/Iterator.h>
+#include <zypp/base/Algorithm.h>
 
 #include <zypp/PathInfo.h>
 #include <zypp/SourceFactory.h>
@@ -193,8 +194,8 @@ namespace zypp
 
       bool operator()( ResObject::constPtr p ) const
       {
-        return(    make_filter_begin( ByIndex(_index), p->provides() )
-                != make_filter_end( ByIndex(_index), p->provides() ) );
+        return(    make_filter_begin( ByIndex(_index), p->dep( Dep::PROVIDES ) )
+                != make_filter_end( ByIndex(_index), p->dep( Dep::PROVIDES ) ) );
       }
 
       std::string _index;
@@ -209,8 +210,8 @@ namespace zypp
 
       bool operator()( ResObject::constPtr p ) const
       {
-        return(    make_filter_begin( ByIndex(_index), p->requires() )
-                != make_filter_end( ByIndex(_index), p->requires() ) );
+        return(    make_filter_begin( ByIndex(_index), p->dep( Dep::REQUIRES ) )
+                != make_filter_end( ByIndex(_index), p->dep( Dep::REQUIRES ) ) );
       }
 
       std::string _index;

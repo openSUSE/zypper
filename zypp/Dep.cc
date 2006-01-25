@@ -30,18 +30,18 @@ namespace zypp
       if ( _table.empty() )
         {
           // initialize it
-          _table["PROVIDES"]    = Dep::PROVIDES_e;
-          _table["PREREQUIRES"] = Dep::PREREQUIRES_e;
-          _table["REQUIRES"]    = Dep::REQUIRES_e;
-          _table["CONFLICTS"]   = Dep::CONFLICTS_e;
-          _table["OBSOLETES"]   = Dep::OBSOLETES_e;
-          _table["RECOMMENDS"]  = Dep::RECOMMENDS_e;
-          _table["SUGGESTS"]    = Dep::SUGGESTS_e;
-          _table["FRESHENS"]    = Dep::FRESHENS_e;
+          _table["provides"]    = Dep::PROVIDES_e;
+          _table["prerequires"] = Dep::PREREQUIRES_e;
+          _table["requires"]    = Dep::REQUIRES_e;
+          _table["conflicts"]   = Dep::CONFLICTS_e;
+          _table["obsoletes"]   = Dep::OBSOLETES_e;
+          _table["recommends"]  = Dep::RECOMMENDS_e;
+          _table["suggests"]    = Dep::SUGGESTS_e;
+          _table["freshens"]    = Dep::FRESHENS_e;
         }
 
       std::map<std::string,Dep::for_use_in_switch>::const_iterator it
-      = _table.find( str::toUpper( strval_r ) );
+      = _table.find( str::toLower( strval_r ) );
       if ( it == _table.end() )
         {
           ZYPP_THROW( Exception("Dep parse: illegal string value '"+strval_r+"'") );
@@ -81,14 +81,14 @@ namespace zypp
     if ( _table.empty() )
       {
         // initialize it
-        _table[PROVIDES_e]    = "PROVIDES";
-        _table[PREREQUIRES_e] = "PREREQUIRES";
-        _table[REQUIRES_e]    = "REQUIRES";
-        _table[CONFLICTS_e]   = "CONFLICTS";
-        _table[OBSOLETES_e]   = "OBSOLETES";
-        _table[RECOMMENDS_e]  = "RECOMMENDS";
-        _table[SUGGESTS_e]    = "SUGGESTS";
-        _table[FRESHENS_e]    = "FRESHENS";
+        _table[PROVIDES_e]    = "provides";
+        _table[PREREQUIRES_e] = "prerequires";
+        _table[REQUIRES_e]    = "requires";
+        _table[CONFLICTS_e]   = "conflicts";
+        _table[OBSOLETES_e]   = "obsoletes";
+        _table[RECOMMENDS_e]  = "recommends";
+        _table[SUGGESTS_e]    = "suggests";
+        _table[FRESHENS_e]    = "freshens";
       }
     return _table[_type];
   }

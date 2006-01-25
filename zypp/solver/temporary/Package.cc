@@ -433,12 +433,12 @@ Package::Package (XmlNode_constPtr node, Channel_constPtr channel, const Resolva
     }
 
     Dependencies deps;
-    deps.requires          = dep_table.requires;
-    deps.provides          = dep_table.provides;
-    deps.conflicts         = dep_table.conflicts;
-    deps.obsoletes         = dep_table.obsoletes;
-    deps.suggests          = dep_table.suggests;
-    deps.recommends        = dep_table.recommends;
+    deps[Dep::REQUIRES]          = dep_table.requires;
+    deps[Dep::PROVIDES]          = dep_table.provides;
+    deps[Dep::CONFLICTS]         = dep_table.conflicts;
+    deps[Dep::OBSOLETES]         = dep_table.obsoletes;
+    deps[Dep::SUGGESTS]          = dep_table.suggests;
+    deps[Dep::RECOMMENDS]        = dep_table.recommends;
     deprecatedSetDependencies (deps);
 
     if (!_history.empty()) {
@@ -462,7 +462,7 @@ Package::Package (XmlNode_constPtr node, Channel_constPtr channel, const Resolva
             for (CapSet::const_iterator iter = provides().begin(); iter != provides().end(); iter++) {
 		std::string capString = (*iter).asString();
 		std::string cmpString = name + " == ";
-		string::size_type ret = capString.find (cmpString);		
+		string::size_type ret = capString.find (cmpString);
 		if (ret != string::npos)
 		{
 		    Edition edition = Edition(capString.substr (cmpString.length()));

@@ -23,6 +23,7 @@
 #include "zypp/Edition.h"
 #include "zypp/Arch.h"
 #include "zypp/CapSetFwd.h"
+#include "zypp/Dep.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -60,14 +61,8 @@ namespace zypp
 
     /** \name Dependencies. */
     //@{
-    const CapSet & provides() const;
-    const CapSet & prerequires() const;
-    const CapSet & requires() const;
-    const CapSet & conflicts() const;
-    const CapSet & obsoletes() const;
-    const CapSet & recommends() const;
-    const CapSet & suggests() const;
-    const CapSet & freshens() const;
+    /** Select by Dep. */
+    const CapSet & dep( Dep which_r ) const;
     /** All dependencies. */
     const Dependencies & deps() const;
     //@}

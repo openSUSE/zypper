@@ -38,7 +38,7 @@ std::string xml_tag_enclose( const std::string &text, const std::string &tag, bo
 {
   std::string result;
   result += "<" + tag + ">";
-  
+
   if ( escape)
    result += xml_escape(text);
   else
@@ -73,7 +73,7 @@ std::string toXML( const Capability &cap )
 {
   stringstream out;
   CapFactory factory;
-  
+
   out << "<entry kind=\"" << cap.refers() << "\" >" <<  xml_escape(factory.encode(cap)) << "</entry>";
   return out.str();
 }
@@ -87,39 +87,39 @@ std::string toXML( const CapSet &caps )
   {
     out << toXML((*it));
   }
-  return out.str(); 
+  return out.str();
 }
 
 template<> // or constPtr?
 std::string toXML( const Dependencies &dep )
 {
   stringstream out;
-  if ( dep.provides.size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep.provides), "provides") << std::endl;
-  if ( dep.prerequires.size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep.prerequires), "prerequires") << std::endl;
-  if ( dep.requires.size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep.requires), "requires") << std::endl;
-  if ( dep.conflicts.size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep.conflicts), "conflicts") << std::endl;
-   if ( dep.obsoletes.size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep.obsoletes), "obsoletes") << std::endl;
+  if ( dep[Dep::PROVIDES].size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::PROVIDES]), "provides") << std::endl;
+  if ( dep[Dep::PREREQUIRES].size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::PREREQUIRES]), "prerequires") << std::endl;
+  if ( dep[Dep::REQUIRES].size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::REQUIRES]), "requires") << std::endl;
+  if ( dep[Dep::CONFLICTS].size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::CONFLICTS]), "conflicts") << std::endl;
+   if ( dep[Dep::OBSOLETES].size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::OBSOLETES]), "obsoletes") << std::endl;
   // why the YUM tag is freshen without s????
-   if ( dep.freshens.size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep.freshens), "freshen") << std::endl;
-   if ( dep.suggests.size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep.suggests), "suggests") << std::endl;
-   if ( dep.recommends.size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep.recommends), "recommends") << std::endl;
+   if ( dep[Dep::FRESHENS].size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::FRESHENS]), "freshen") << std::endl;
+   if ( dep[Dep::SUGGESTS].size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::SUGGESTS]), "suggests") << std::endl;
+   if ( dep[Dep::RECOMMENDS].size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::RECOMMENDS]), "recommends") << std::endl;
   return out.str();
-  
+
 }
 
 template<> // or constPtr?
 std::string toXML( const Resolvable::constPtr &obj )
 {
   stringstream out;
-  
+
   out << "  <name>" << obj->name() << "</name>" << std::endl;
   // is this shared? uh
   out << "  " << toXML(obj->edition()) << std::endl;

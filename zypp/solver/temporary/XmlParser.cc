@@ -621,7 +621,7 @@ XmlParser::resolvableEnd (const std::string & name)
 		else
 		{
 		    if (update->edition() < (*iter)->edition())
-			update = *iter;			
+			update = *iter;
 		}
 	    }
 	}
@@ -632,13 +632,13 @@ XmlParser::resolvableEnd (const std::string & name)
 	    _current_resitem_edition = update->edition();
 	    _current_resitem_fileSize = update->packageSize();
 	    _current_resitem_installedSize = update->installedSize();
-	    _current_resitem_arch = update->arch();	 
+	    _current_resitem_arch = update->arch();
 	}
 	else {
 	    for (CapSet::const_iterator iter = _current_provides.begin(); iter != _current_provides.end(); iter++) {
 		std::string capString = (*iter).asString();
 		std::string cmpString = _current_resitem_name + " == ";
-		string::size_type ret = capString.find (cmpString);		
+		string::size_type ret = capString.find (cmpString);
 		if (ret != string::npos)
 		{
 		    string editionStr = capString.substr (cmpString.length());
@@ -679,13 +679,13 @@ XmlParser::resolvableEnd (const std::string & name)
 	    package->setInstalled (true);
 
 	Dependencies deps;
-	deps.requires		= _current_requires;
-	deps.provides		= _current_provides;
-	deps.conflicts		= _current_conflicts;
-	deps.obsoletes		= _current_obsoletes;
-	deps.suggests		= _current_suggests;
-	deps.recommends		= _current_recommends;
-	deps.freshens		= _current_freshens;
+	deps[Dep::REQUIRES]		= _current_requires;
+	deps[Dep::PROVIDES]		= _current_provides;
+	deps[Dep::CONFLICTS]		= _current_conflicts;
+	deps[Dep::OBSOLETES]		= _current_obsoletes;
+	deps[Dep::SUGGESTS]		= _current_suggests;
+	deps[Dep::RECOMMENDS]		= _current_recommends;
+	deps[Dep::FRESHENS]		= _current_freshens;
 	package->deprecatedSetDependencies  (deps);
 	package->setPrettyName    (_current_resitem_prettyName);
 	package->setSummary       (_current_resitem_summary);

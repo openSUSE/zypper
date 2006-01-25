@@ -92,23 +92,23 @@ namespace zypp
 
           if ( mtag_r.stag.isPlain( "Prv" ) )
             {
-              collectDeps( mtag_r.value, nvrad.provides );
+              collectDeps( mtag_r.value, nvrad[Dep::PROVIDES] );
             }
           else if ( mtag_r.stag.isPlain( "Prq" ) )
             {
-              collectDeps( mtag_r.value, nvrad.prerequires );
+              collectDeps( mtag_r.value, nvrad[Dep::PREREQUIRES] );
             }
           else if ( mtag_r.stag.isPlain( "Req" ) )
             {
-              collectDeps( mtag_r.value, nvrad.requires );
+              collectDeps( mtag_r.value, nvrad[Dep::REQUIRES] );
             }
           else if ( mtag_r.stag.isPlain( "Con" ) )
             {
-              collectDeps( mtag_r.value, nvrad.conflicts );
+              collectDeps( mtag_r.value, nvrad[Dep::CONFLICTS] );
             }
           else if ( mtag_r.stag.isPlain( "Obs" ) )
             {
-              collectDeps( mtag_r.value, nvrad.obsoletes );
+              collectDeps( mtag_r.value, nvrad[Dep::OBSOLETES] );
             }
         }
 

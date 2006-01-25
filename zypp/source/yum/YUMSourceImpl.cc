@@ -547,28 +547,28 @@ namespace zypp
 	       it != parsed.provides.end();
 	       it++)
 	  {
-	    _deps.provides.insert(createCapability(*it, my_kind));
+	    _deps[Dep::PROVIDES].insert(createCapability(*it, my_kind));
 	  }
 
 	  for (std::list<YUMDependency>::const_iterator it = parsed.conflicts.begin();
 	       it != parsed.conflicts.end();
 	       it++)
 	  {
-	    _deps.conflicts.insert(createCapability(*it, my_kind));
+	    _deps[Dep::CONFLICTS].insert(createCapability(*it, my_kind));
 	  }
 
 	  for (std::list<YUMDependency>::const_iterator it = parsed.obsoletes.begin();
 	       it != parsed.obsoletes.end();
 	       it++)
 	  {
-	    _deps.obsoletes.insert(createCapability(*it, my_kind));
+	    _deps[Dep::OBSOLETES].insert(createCapability(*it, my_kind));
 	  }
 
 	  for (std::list<YUMDependency>::const_iterator it = parsed.freshen.begin();
 	       it != parsed.freshen.end();
 	       it++)
 	  {
-	    _deps.freshens.insert(createCapability(*it, my_kind));
+	    _deps[Dep::FRESHENS].insert(createCapability(*it, my_kind));
 	  }
 
 	  for (std::list<YUMDependency>::const_iterator it = parsed.requires.begin();
@@ -576,9 +576,9 @@ namespace zypp
 	       it++)
 	  {
 	    if (it->pre == "1")
-	      _deps.prerequires.insert(createCapability(*it, my_kind));
+	      _deps[Dep::PREREQUIRES].insert(createCapability(*it, my_kind));
 	    else
-	      _deps.requires.insert(createCapability(*it, my_kind));
+	      _deps[Dep::REQUIRES].insert(createCapability(*it, my_kind));
 	  }
 
 	  return _deps;
@@ -596,7 +596,7 @@ namespace zypp
 	  {
 	    if (it->type == "mandatory" || it->type == "")
 	    {
-	      _deps.requires.insert(createCapability(YUMDependency(
+	      _deps[Dep::REQUIRES].insert(createCapability(YUMDependency(
 		  "",
 		  it->name,
 		  "EQ",
@@ -614,7 +614,7 @@ namespace zypp
 	  {
 	    if (it->type == "mandatory" || it->type == "")
 	    {
-	      _deps.requires.insert(createCapability(YUMDependency(
+	      _deps[Dep::REQUIRES].insert(createCapability(YUMDependency(
 		  "",
 		  it->name,
 		  "",
@@ -641,7 +641,7 @@ namespace zypp
 	  {
 	    if (it->type == "mandatory" || it->type == "")
 	    {
-	      _deps.requires.insert(createCapability(YUMDependency(
+	      _deps[Dep::REQUIRES].insert(createCapability(YUMDependency(
 		  "",
 		  it->name,
 		  "EQ",
@@ -659,7 +659,7 @@ namespace zypp
 	  {
 	    if (it->type == "mandatory" || it->type == "")
 	    {
-	      _deps.requires.insert(createCapability(YUMDependency(
+	      _deps[Dep::REQUIRES].insert(createCapability(YUMDependency(
 		  "",
 		  it->name,
 		  "",
@@ -680,7 +680,7 @@ namespace zypp
 	  CapFactory _f;
 	  Resolvable::Kind _kind = dep.kind == "" ? my_kind : Resolvable::Kind(dep.kind);
 	  Capability cap;
-    if ( ! dep.isEncoded() ) 
+    if ( ! dep.isEncoded() )
     {
       cap = _f.parse(
 	    _kind,

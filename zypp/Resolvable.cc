@@ -67,29 +67,8 @@ namespace zypp
   const Arch & Resolvable::arch() const
   { return _pimpl->arch(); }
 
-  const CapSet & Resolvable::provides() const
-  { return _pimpl->deps().provides; }
-
-  const CapSet & Resolvable::prerequires() const
-  { return _pimpl->deps().prerequires; }
-
-  const CapSet & Resolvable::requires() const
-  { return _pimpl->deps().requires; }
-
-  const CapSet & Resolvable::conflicts() const
-  { return _pimpl->deps().conflicts; }
-
-  const CapSet & Resolvable::obsoletes() const
-  { return _pimpl->deps().obsoletes; }
-
-  const CapSet & Resolvable::recommends() const
-  { return _pimpl->deps().recommends; }
-
-  const CapSet & Resolvable::suggests() const
-  { return _pimpl->deps().suggests; }
-
-  const CapSet & Resolvable::freshens() const
-  { return _pimpl->deps().freshens; }
+  const CapSet & Resolvable::dep( Dep which_r ) const
+  { return _pimpl->deps()[which_r]; }
 
   const Dependencies & Resolvable::deps() const
   { return _pimpl->deps(); }

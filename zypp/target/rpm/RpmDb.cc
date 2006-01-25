@@ -1077,7 +1077,7 @@ This prevented from having packages multiple times
                        arch );
 
     list<string> filenames = impl->filenames();
-    dataCollect.provides = iter->tag_provides ( & _filerequires );
+    dataCollect[Dep::PROVIDES] = iter->tag_provides ( & _filerequires );
     for (list<string>::const_iterator filename = filenames.begin();
          filename != filenames.end();
          filename++)
@@ -1093,7 +1093,7 @@ This prevented from having packages multiple times
         || filename->find("/opt/gnome/games"))
       {
 	try {
-	  dataCollect.provides.insert(_f.parse(ResTraits<Package>::kind, *filename));
+	  dataCollect[Dep::PROVIDES].insert(_f.parse(ResTraits<Package>::kind, *filename));
 	}
 	catch (Exception & excpt_r)
 	{
@@ -1103,10 +1103,10 @@ This prevented from having packages multiple times
       }
     }
 
-    dataCollect.requires    = iter->tag_requires ( &_filerequires );
-    dataCollect.prerequires = iter->tag_prerequires ( &_filerequires );
-    dataCollect.conflicts   = iter->tag_conflicts( &_filerequires );
-    dataCollect.obsoletes   = iter->tag_obsoletes( &_filerequires );
+    dataCollect[Dep::REQUIRES]    = iter->tag_requires ( &_filerequires );
+    dataCollect[Dep::PREREQUIRES] = iter->tag_prerequires ( &_filerequires );
+    dataCollect[Dep::CONFLICTS]   = iter->tag_conflicts( &_filerequires );
+    dataCollect[Dep::OBSOLETES]   = iter->tag_obsoletes( &_filerequires );
 
     // create package from dataprovider
     Package::Ptr nptr = detail::makeResolvableFromImpl( dataCollect, impl );

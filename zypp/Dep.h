@@ -30,6 +30,8 @@ namespace zypp
   {
     friend bool operator==( const Dep & lhs, const Dep & rhs );
     friend bool operator!=( const Dep & lhs, const Dep & rhs );
+    /** Arbitrary order to allow Dep as key in std::container. */
+    friend bool operator<( const Dep & lhs, const Dep & rhs );
 
     /** \name Dependency types
      * These are the \em real dependency type contants to
@@ -71,8 +73,8 @@ namespace zypp
     explicit
     Dep( const std::string & strval_r );
 
-    /** String representation of dependency type operator.
-     * \return The constants names.
+    /** String representation of dependency type.
+     * \return The constants names lowercased.
     */
     const std::string & asString() const;
 
@@ -103,6 +105,10 @@ namespace zypp
   /** \relates Dep */
   inline bool operator!=( const Dep & lhs, const Dep & rhs )
   { return lhs._type != rhs._type; }
+
+  /** \relates Dep */
+  inline bool operator<( const Dep & lhs, const Dep & rhs )
+  { return lhs._type < rhs._type; }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

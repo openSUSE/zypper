@@ -129,14 +129,14 @@ class ResItem : public base::ReferenceCounted, private base::NonCopyable {
     size_t installedSize() const { return _installed_size; }
     void setInstalledSize (size_t installed_size) { _installed_size = installed_size; }
 
-    const CapSet & requires() const { return _resObject->requires(); }
-    const CapSet & prerequires() const { return _resObject->prerequires(); }
-    const CapSet & provides() const { return _resObject->provides(); }
-    const CapSet & conflicts() const { return _resObject->conflicts(); }
-    const CapSet & obsoletes() const { return _resObject->obsoletes(); }
-    const CapSet & suggests() const { return _resObject->suggests(); }
-    const CapSet & recommends() const { return _resObject->recommends(); }
-    const CapSet & freshens() const { return _resObject->freshens(); }
+    const CapSet & requires() const { return _resObject->dep( Dep::REQUIRES ); }
+    const CapSet & prerequires() const { return _resObject->dep( Dep::PREREQUIRES ); }
+    const CapSet & provides() const { return _resObject->dep( Dep::PROVIDES ); }
+    const CapSet & conflicts() const { return _resObject->dep( Dep::CONFLICTS ); }
+    const CapSet & obsoletes() const { return _resObject->dep( Dep::OBSOLETES ); }
+    const CapSet & suggests() const { return _resObject->dep( Dep::SUGGESTS ); }
+    const CapSet & recommends() const { return _resObject->dep( Dep::RECOMMENDS ); }
+    const CapSet & freshens() const { return _resObject->dep( Dep::FRESHENS ); }
 
     void deprecatedSetDependencies (const Dependencies & dependencies) { _resObject->deprecatedSetDeps(dependencies); }
 
