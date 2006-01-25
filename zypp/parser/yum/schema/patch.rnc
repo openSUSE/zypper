@@ -34,7 +34,7 @@ patch =
   element reboot_needed { empty }?,
   element package_manager { empty }?,
   element-update_script?,
-  element atoms { element-package | element-script | element-message }+
+  element atoms { (element-package | element-script | element-message)+ }+
 
 dependency-block =
   # shortcut since all atoms have the same dependency section

@@ -78,11 +78,13 @@
     </optional>
     <oneOrMore>
       <element name="atoms">
-        <choice>
-          <ref name="element-package"/>
-          <ref name="element-script"/>
-          <ref name="element-message"/>
-        </choice>
+        <oneOrMore>
+          <choice>
+            <ref name="element-package"/>
+            <ref name="element-script"/>
+            <ref name="element-message"/>
+          </choice>
+        </oneOrMore>
       </element>
     </oneOrMore>
   </define>
