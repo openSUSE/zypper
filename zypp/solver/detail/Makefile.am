@@ -13,68 +13,40 @@ INCLUDES = 						\
 solverdetailincludedir = $(pkgincludedir)/solver/detail
 
 solverdetailinclude_HEADERS = \
-	ResItemAndDependency.h		\
-	ResItemAndDependencyPtr.h	\
+	Types.h				\
 	Importance.h			\
 	Pending.h			\
-	PendingPtr.h			\
 	InstallOrder.h			\
 	ResolverContext.h		\
-	ResolverContextPtr.h		\
 	ResolverInfo.h			\
-	ResolverInfoPtr.h		\
 	ResolverInfoContainer.h		\
-	ResolverInfoContainerPtr.h	\
 	ResolverInfoChildOf.h		\
-	ResolverInfoChildOfPtr.h	\
 	ResolverInfoConflictsWith.h	\
-	ResolverInfoConflictsWithPtr.h	\
 	ResolverInfoDependsOn.h		\
-	ResolverInfoDependsOnPtr.h	\
 	ResolverInfoMisc.h		\
-	ResolverInfoMiscPtr.h		\
 	ResolverInfoMissingReq.h	\
-	ResolverInfoMissingReqPtr.h	\
 	ResolverInfoNeededBy.h		\
-	ResolverInfoNeededByPtr.h	\
 	ResolverInfoObsoletes.h		\
-	ResolverInfoObsoletesPtr.h	\
 	QueueItem.h			\
-	QueueItemPtr.h			\
 	QueueItemBranch.h		\
-	QueueItemBranchPtr.h		\
 	QueueItemConflict.h		\
-	QueueItemConflictPtr.h		\
 	QueueItemEstablish.h		\
-	QueueItemEstablishPtr.h		\
 	QueueItemGroup.h		\
-	QueueItemGroupPtr.h		\
 	QueueItemInstall.h		\
-	QueueItemInstallPtr.h		\
 	QueueItemRequire.h		\
-	QueueItemRequirePtr.h		\
 	QueueItemUninstall.h		\
-	QueueItemUninstallPtr.h		\
 	ResolverQueue.h			\
-	ResolverQueuePtr.h		\
 	Resolver.h			\
-	ResolverPtr.h			\
 	ProblemSolution.h		\
-	ProblemSolutionPtr.h		\
 	ProblemSolutionInstall.h	\
-	ProblemSolutionInstallPtr.h	\
 	ProblemSolutionUninstall.h	\
-	ProblemSolutionUninstallPtr.h	\
 	ProblemSolutionIgnore.h		\
-	ProblemSolutionIgnorePtr.h	\
 	SolutionAction.h		\
-	SolutionActionPtr.h		\
 	ResolverProblem.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_solver_detail.la
 
 lib@PACKAGE@_solver_detail_la_SOURCES =			\
-	ResItemAndDependency.cc				\
 	Importance.cc					\
 	Pending.cc					\
 	InstallOrder.cc					\
