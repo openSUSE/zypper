@@ -99,13 +99,19 @@ namespace zypp
           // consume another line
           consume = true;
         }
+        else
+        {
+          // media count defaults to 1
+          entry_r.count = 1;
+        }
         
         while(!file.eof())
         {
           // probably is the first line after we dont find the media number
           if(consume)
             getline(file, buffer);
-          // only once
+          
+          // only skip once
           consume = true;
           boost::regex e("^MEDIA([\\d]+)(\\.([_A-Za-z]+)){0,1} (.+)$");
           boost::smatch what;
@@ -116,14 +122,17 @@ namespace zypp
            
             dumpRegexpResults(what);
             
-            std::string key = what[2];
-            std::string value = what[5];
-            std::string modifier = what[4];
+            unsigned int number = 1;
+            str::strtonum( what[1], number);
+            std::string lang = what[3];
+            std::string desc = what[4];
+            entry_r.alternate_names[number][lang] = desc;
           }
           else
           {
             DBG << "** No Match found:  " << buffer << std::endl;
           }
+          
         }
       }
 
