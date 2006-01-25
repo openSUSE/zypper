@@ -63,8 +63,10 @@ int main()
   clock_t time_start, curr_time;
   time_start = clock();
   int i = 0;
+  DBG << "Writing Patches..." << std::endl;
   for (; i < 1000; i++)
     backend.storeObject(patch1);
+  
   curr_time = clock() - time_start;           // time in micro seconds 
   DBG << "Wrote " << i << " patches in " << (double) curr_time / CLOCKS_PER_SEC << " seconds" << std::endl;
 

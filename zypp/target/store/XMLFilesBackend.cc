@@ -221,6 +221,7 @@ Resolvable::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Reso
 std::list<Resolvable::Ptr>
 XMLFilesBackend::storedObjects()
 {
+  DBG << std::endl;
   std::list<Resolvable::Ptr> objects;
   std::list<Resolvable::Kind> kinds;
   // only patches for now
@@ -230,26 +231,33 @@ XMLFilesBackend::storedObjects()
   for ( it_kinds = kinds.begin() ; it_kinds != kinds.end(); ++it_kinds )
   {
     Resolvable::Kind kind = (*it_kinds);
-    // patches
-    if ( kind == ResTraits<zypp::Patch>::kind )
+    std::list<Resolvable::Ptr> objects_for_kind = storedObjects(kind);
+    std::list<Resolvable::Ptr>::iterator it;
+    for( it = objects_for_kind.begin(); it != objects_for_kind.end(); ++it)
     {
-      std::string dir_path = dirForResolvableKind(kind);
-      DBG << "objects in ... " << dir_path << std::endl;
-      directory_iterator end_iter;
-      if ( !exists( dir_path ) ) continue;
-      for ( directory_iterator dir_itr( dir_path ); dir_itr != end_iter; ++dir_itr )
-      {
-        //DBG << "[" << resolvableKindToString( kind, false ) << "] - " << dir_itr->leaf() << std::endl;
-        objects.push_back( resolvableFromFile( dir_path + "/" + dir_itr->leaf(), kind) );
-      }
-    }
+      objects.push_back(*it);
+    } 
   }
   return objects;
 }
 
 std::list<Resolvable::Ptr>
-XMLFilesBackend::storedObjects(const Resolvable::Kind)
+XMLFilesBackend::storedObjects(const Resolvable::Kind kind)
 {
+  std::list<Resolvable::Ptr> objects;
+  std::string dir_path = dirForResolvableKind(kind);
+  DBG << "objects in ... " << dir_path << std::endl;
+  directory_iterator end_iter;
+  // return empty list if the dir does not exist
+  if ( !exists( dir_path ) )
+    return std::list<Resolvable::Ptr>();
+    
+  for ( directory_iterator dir_itr( dir_path ); dir_itr != end_iter; ++dir_itr )
+  {
+    //DBG << "[" << resolvableKindToString( kind, false ) << "] - " << dir_itr->leaf() << std::endl;
+    objects.push_back( resolvableFromFile( dir_path + "/" + dir_itr->leaf(), kind) );
+  }
+  DBG << "done" << std::endl;
   return storedObjects();
 }
 
