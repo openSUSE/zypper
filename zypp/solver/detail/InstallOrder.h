@@ -63,7 +63,7 @@ class InstallOrder
 	CPoolItemSet _installed;
 
 	/** adjacency list type */
-	typedef std::map<const PoolItem *, CPoolItemSet> Graph;
+	typedef std::map<const PoolItem , CPoolItemSet> Graph;
 
 	/** adjacency list, package -> requirements */
 	Graph _graph;
@@ -78,13 +78,13 @@ class InstallOrder
 	    bool visited;
 	    int order; // number of incoming edges in reverse graph
 
-	    const PoolItem *item;
+	    const PoolItem item;
 
 	    NodeInfo() : begintime(0), endtime(0), visited(false), order(0) {}
-	    NodeInfo(const PoolItem *item) : begintime(0), endtime(0), visited(false), order(0), item(item) {}
+	    NodeInfo(const PoolItem item) : begintime(0), endtime(0), visited(false), order(0), item(item) {}
 	};
 	
-	typedef std::map<const PoolItem *,NodeInfo> Nodes;
+	typedef std::map<const PoolItem ,NodeInfo> Nodes;
 
 	Nodes _nodes;
 
@@ -97,7 +97,7 @@ class InstallOrder
 	unsigned _numrun;
 
     private:
-	void rdfsvisit (const PoolItem *item);
+	void rdfsvisit (const PoolItem item);
 
     public:
 
@@ -119,7 +119,7 @@ class InstallOrder
 	 * set a Solvable as installed, computeNextSet is able to compute a new
 	 * set then
 	 * */
-	void setInstalled( const PoolItem *item );
+	void setInstalled( const PoolItem item );
 	
 	/**
 	 * like above, for convenience

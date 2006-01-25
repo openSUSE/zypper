@@ -33,9 +33,9 @@
 
 #include "zypp/PoolItem.h"
 
-typedef std::list <zypp::PoolItem *> PoolItemList;
-typedef std::list <const zypp::PoolItem *> CPoolItemList;
-typedef std::set <const zypp::PoolItem *> CPoolItemSet;
+typedef std::list <zypp::PoolItem> PoolItemList;
+typedef std::list <const zypp::PoolItem> CPoolItemList;
+typedef std::set <const zypp::PoolItem> CPoolItemSet;
 
 
 #define item_status_is_to_be_uninstalled(x) true

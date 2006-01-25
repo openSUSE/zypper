@@ -43,8 +43,8 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
 typedef void (*ResolverContextFn) (ResolverContext_Ptr ctx, void *data);
-typedef void (*MarkedPoolItemFn) (PoolItem *item, void *data);
-typedef void (*MarkedPoolItemPairFn) (PoolItem *item1, PoolItem *item2, void *data);
+typedef void (*MarkedPoolItemFn) (PoolItem item, void *data);
+typedef void (*MarkedPoolItemPairFn) (PoolItem item1, PoolItem item2, void *data);
 
 
 ///////////////////////////////////////////////////////////////////
@@ -57,7 +57,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     ResolverContext_Ptr _parent;		// branches share a common parent
 
-    typedef std::set<PoolItem *> Context;
+    typedef std::set<PoolItem > Context;
     Context _context;				// the set of items touched in this transaction
 
     ResolverInfoList _log;			// report log
@@ -104,42 +104,42 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
      *set the state of \c item to \c status
      *If \c status is not the current state of \c item, make \c item
      *part of the current transaction (the context) */
-    void setStatus (PoolItem *item, ResStatus & status);
+    void setStatus (PoolItem item, ResStatus & status);
 
     /**
      *set \c item to \a to-be-installed */
-    bool install (PoolItem *item, bool is_soft, int other_penalty);
+    bool install (PoolItem item, bool is_soft, int other_penalty);
 
     /**
      *set \c item to \a satisfied */
-    bool satisfy (PoolItem *item, int other_penalty);
+    bool satisfy (PoolItem item, int other_penalty);
 
     /**
      *set \c item to \a unneeded */
-    bool unneeded (PoolItem *item, int other_penalty);
+    bool unneeded (PoolItem item, int other_penalty);
 
     /**
      *set \c item to \a incomplete */
-    bool incomplete (PoolItem *item, int other_penalty);
+    bool incomplete (PoolItem item, int other_penalty);
 
     /**
      *upgrade \c from to \c to
      *marks \c from as \a to-be-uninstalled and \c to as \a to-be-installed  */
-    bool upgrade (PoolItem *to, PoolItem *from, bool is_soft, int other_penalty);
+    bool upgrade (PoolItem to, PoolItem from, bool is_soft, int other_penalty);
 
     /**
      *set \c item to \a to-be-uninstalled */
-    bool uninstall (PoolItem *item, bool part_of_upgrade, bool due_to_obsolete, bool due_to_unlink);
+    bool uninstall (PoolItem item, bool part_of_upgrade, bool due_to_obsolete, bool due_to_unlink);
 
     // rough installed/uninstalled test for 'after transaction'
 
     /**
      *\return \c true if \c item is \a installed or \a to-be-installed */
-    bool isPresent (PoolItem *item);
+    bool isPresent (PoolItem item);
 
     /**
      *\return \c true if \c item is \a uninstalled or \a to-be-uninstalled */
-    bool isAbsent (PoolItem *item);
+    bool isAbsent (PoolItem item);
 
     bool requirementIsMet (const Capability & cap, bool is_child = false);
     bool requirementIsPossible (const Capability & cap);
@@ -176,7 +176,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     void addError (ResolverInfo_Ptr info);					// error progress info
 
     // iterate over report log
-    void foreachInfo (PoolItem *item, int priority, ResolverInfoFn fn, void *data);
+    void foreachInfo (PoolItem item, int priority, ResolverInfoFn fn, void *data);
     ResolverInfoList getInfo (void);
 
     // Context compare to identify equal branches

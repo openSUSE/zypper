@@ -47,7 +47,7 @@ class ResolverInfoNeededBy : public ResolverInfoContainer {
 
   public:
 
-    ResolverInfoNeededBy (PoolItem *item);
+    ResolverInfoNeededBy (PoolItem item);
     virtual ~ResolverInfoNeededBy();
 
     // ---------------------------------- I/O

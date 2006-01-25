@@ -50,13 +50,13 @@ class QueueItemConflict : public QueueItem {
 
   private:
     const Capability & _capability;		// the conflicting capability
-    PoolItem *_conflicting_item;		// the item which issued the conflict
+    PoolItem _conflicting_item;		// the item which issued the conflict
 
     bool _actually_an_obsolete;
 
   public:
 
-    QueueItemConflict (const ResPool *pool, const Capability & capability, PoolItem *item);
+    QueueItemConflict (const ResPool *pool, const Capability & capability, PoolItem item);
     virtual ~QueueItemConflict();
 
     // ---------------------------------- I/O

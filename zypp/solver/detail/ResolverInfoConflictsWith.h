@@ -45,7 +45,7 @@ class ResolverInfoConflictsWith : public ResolverInfoContainer {
 
   public:
 
-    ResolverInfoConflictsWith (PoolItem *resItem, PoolItem *with);
+    ResolverInfoConflictsWith (PoolItem resItem, PoolItem with);
     virtual ~ResolverInfoConflictsWith();
 
     // ---------------------------------- I/O

@@ -47,7 +47,7 @@ class ResolverInfoContainer : public ResolverInfo {
 
   protected:
 
-    ResolverInfoContainer (ResolverInfoType type, PoolItem *initial_item, int priority, PoolItem *child = NULL);
+    ResolverInfoContainer (ResolverInfoType type, PoolItem initial_item, int priority, PoolItem child = NULL);
 
   public:
     virtual ~ResolverInfoContainer();
@@ -70,8 +70,8 @@ class ResolverInfoContainer : public ResolverInfo {
     std::string itemsToString (const bool names_only,
 				const bool shorten_output = false) const;
 
-    bool mentions (PoolItem *item) const;
-    void addRelatedPoolItem (PoolItem *item);
+    bool mentions (PoolItem item) const;
+    void addRelatedPoolItem (PoolItem item);
     void addRelatedPoolItemList (const CPoolItemList & items);
 
 };

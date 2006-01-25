@@ -75,10 +75,10 @@ class ResolverQueue : public base::ReferenceCounted, private base::NonCopyable {
     // ---------------------------------- methods
 
 
-    void addPoolItemToInstall (PoolItem *item);
-    void addPoolItemToEstablish (PoolItem *item);
-    void addPoolItemToRemove (PoolItem *item, bool remove_only_mode);
-    void addPoolItemToVerify (PoolItem *item);
+    void addPoolItemToInstall (PoolItem item);
+    void addPoolItemToEstablish (PoolItem item);
+    void addPoolItemToRemove (PoolItem item, bool remove_only_mode);
+    void addPoolItemToVerify (PoolItem item);
     void addExtraDependency (const Capability & cap);
     void addExtraConflict (const Capability & cap);
     void addItem (QueueItem_Ptr item);
