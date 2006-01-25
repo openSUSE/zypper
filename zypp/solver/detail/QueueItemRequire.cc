@@ -119,7 +119,7 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
     UniqTable uniq;
 
 //    bool operator()( PoolItem & provider, const Capability & match )
-    bool operator()( const PoolItem & provider )
+    bool operator()( PoolItem & provider )
     {
 	const Capability match;
 	ResStatus status;
