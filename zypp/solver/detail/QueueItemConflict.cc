@@ -18,11 +18,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
 
-#include "zypp/solver/temporary/World.h"
+#include "zypp/solver/detail/Types.h"
 
 #include "zypp/solver/detail/QueueItemConflict.h"
 #include "zypp/solver/detail/QueueItemBranch.h"
@@ -56,46 +53,24 @@ IMPL_PTR_TYPE(QueueItemConflict);
 
 //---------------------------------------------------------------------------
 
-string
-QueueItemConflict::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-QueueItemConflict::toString ( const QueueItemConflict & item)
-{
-    string res = "[Conflict: ";
-    res += item._dep.asString();
-    res += ", Triggered by ";
-    res += item._conflicting_resItem->asString();
-    if (item._actually_an_obsolete) res += ", Obsolete !";
-    res += "]";
-    return res;
-}
-
-
-ostream &
-QueueItemConflict::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
 ostream&
 operator<<( ostream& os, const QueueItemConflict & item)
 {
-    return os << item.asString();
+    os << "[Conflict: ";
+    os << item._dep;
+    os << ", Triggered by ";
+    os << *(item._conflicting_item);
+    if (item._actually_an_obsolete) os << ", Obsolete !";
+    os << "]";
+    return res;
 }
 
 //---------------------------------------------------------------------------
 
-QueueItemConflict::QueueItemConflict (World_Ptr world, const Capability & dep, ResItem_constPtr resItem)
-    : QueueItem (QUEUE_ITEM_TYPE_CONFLICT, world)
-    , _dep (dep)
-    , _conflicting_resItem (resItem)
+QueueItemConflict::QueueItemConflict (const ResPool *pool, const Capability & cap, PoolItem *item)
+    : QueueItem (QUEUE_ITEM_TYPE_CONFLICT, pool)
+    , _capability (cap)
+    , _conflicting_item (item)
     , _actually_an_obsolete (false)
 {
 }
@@ -109,69 +84,78 @@ QueueItemConflict::~QueueItemConflict()
 
 #if PHI
 
-// on conflict, try to find upgrade candidates for the installed resItem triggering the conflict
+// on conflict, try to find upgrade candidates for the installed item triggering the conflict
 // there are cases where upgrading prevents the conflict
-// rc tends to uninstall the resItem
-// phi tends to upgrade the resItem
+// rc tends to uninstall the item
+// phi tends to upgrade the item
 // testcases: exercise-02conflict-08-test.xml, exercise-02conflict-09-test.xml
 
-typedef struct {
-    ResolverContext_Ptr context;
-    ResItem_constPtr resItem; // the conflicting resolvable, used to filter upgrades with an identical resolvable
-    CResItemList upgrades;
-} UpgradeCandidateInfo;
-
-
-static bool
-upgrade_candidates_cb (ResItem_constPtr resItem, const Capability & cap, void *data)
+struct UpgradeCandidate : public resfilter::OnCapMatchCallbackFunctor
 {
-    UpgradeCandidateInfo *info = (UpgradeCandidateInfo *)data;
-    if ( !(info->resItem->equals (resItem)) 		// dont upgrade with ourselves
-	&& info->context->getStatus (resItem) == RESOLVABLE_STATUS_UNINSTALLED) {
-	info->upgrades.push_back (resItem);
+    PoolItem * item; // the conflicting resolvable, used to filter upgrades with an identical resolvable
+    PoolItemList upgrades;
+
+    UpgradeCandidate (PoolItem *pi)
+	: item (pi)
+    { }
+
+
+    bool operator() (PoolItem & candidate, const Capability & cap)
+    {
+	if (!(item->equals (candidate)) 		// dont upgrade with ourselves
+	    && candidate.status () == RESOLVABLE_STATUS_UNINSTALLED) {
+
+	    info->upgrades.push_back (item);
+	}
+	return true;
     }
-    return true;
-}
+};
 
 #endif  // PHI
 
 
-typedef struct {
-    World_Ptr world;
-    ResItem_constPtr conflict_issuer;		// the item which issues 'conflicts:'
-    const Capability conflict_capability;	// the capability mentioned in the 'conflicts'
+//---------------------------------------------------------------------------------------
+
+struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
+{
+    const ResPool *pool;
+    PoolItem *conflict_issuer;			// the item which issues 'conflicts:'
+    const Capability & conflict_capability;	// the capability mentioned in the 'conflicts'
     ResolverContext_Ptr context;
     QueueItemList & new_items;
-
     bool actually_an_obsolete;
-} ConflictProcessInfo;
 
+    ConflictProcess (const ResPool *pl, PoolItem *ci, const Capability & cc, ResolverContext_Ptr ct, QueueItemList & ni, bool ao)
+	: pool (pl)
+	, conflict_issuer (ci),
+	, conflict_capability (cc)
+	, context (ct),
+	, new_items (ni)
+	, actually_an_obsolete (ao)
+    { }
 
-// resItem provides cap
-static bool
-conflict_process_cb (ResItem_constPtr provider, const Capability & provides, void *data)
-{
-    ConflictProcessInfo *info = (ConflictProcessInfo *)data;
-    ResItemStatus status;
+    bool operator()( PoolItem & provider, const Capability & provides )
+    {
+    ResStatus status;
     ResolverInfo_Ptr log_info;
     CapFactory factory;
 
-    _DBG("RC_SPEW") << "conflict_process_cb (resolvable[" << provider->asString() <<"], provides[" << provides.asString() << "], conflicts with [" <<
-	      info->conflict_issuer->asString() << " conflicts: " << info->conflict_capability.asString() << endl;
+    DBG << "conflict_process_cb (resolvable[" << provider <<"], provides[" << provides << "], conflicts with [" <<
+	      conflict_issuer << " conflicts: " << conflict_capability << endl;
 
     /* We conflict with ourself.  For the purpose of installing ourself, we
      * just ignore it, but it's Debian's way of saying that one and only one
-     * resItem with this provide may exist on the system at a time. */
+     * item with this provide may exist on the system at a time. */
 
-    if (info->conflict_issuer
-	&& provider->equals (info->conflict_issuer)) {
+    if (conflict_issuer != NULL
+	&& provider->equals (conflict_issuer)) {
 	return true;
     }
 
     /* FIXME: This should probably be a GVersion capability. */
-    /* Obsoletes don't apply to virtual provides, only the resItems
+    /* Obsoletes don't apply to virtual provides, only the items
      * themselves.  A provide is "virtual" if it's not the same spec
-     * as the resItem that's providing it.  This, of course, only
+     * as the item that's providing it.  This, of course, only
      * applies to RPM, since it's the only one with obsoletes right
      * now. */
     Capability capTest =  factory.parse ( provider->kind(),
@@ -179,15 +163,15 @@ conflict_process_cb (ResItem_constPtr provider, const Capability & provides, voi
 	                                  Rel::EQ,
 	                                  provider->edition());
 
-    if (info->actually_an_obsolete
+    if (actually_an_obsolete
 	&& capTest.matches (provides) != CapMatch::yes )
     {
 	return true;
     }
 
-    status = info->context->getStatus (provider);
+    status = provider.status();
 
-    _DBG("RC_SPEW") << "conflict_process_cb (resolvable[" << provider->asString() << "]<" << ResolverContext::toString(status) << ">" << endl;
+    DBG << "conflict_process_cb (resolvable[" << provider << "]<" << status << ">" << endl;
 
     switch (status) {
 
@@ -198,32 +182,35 @@ conflict_process_cb (ResItem_constPtr provider, const Capability & provides, voi
 
 #if PHI
 	    // maybe an upgrade can resolve the conflict ?
-	    //        check if other resItem is available which upgrades
+	    //        check if other item is available which upgrades
 
 	    // find non-installed packages which provide the conflicting name
 
-	    UpgradeCandidateInfo upgrade_info;
-	    upgrade_info.context = info->context;
-	    upgrade_info.resItem = provider;
+	    UpgradeCandidate upgrade_info (provider);
 
-	    Capability maybe_upgrade_dep =  factory.parse ( provider->kind(),
+	    Capability maybe_upgrade_cap =  factory.parse ( provider->kind(),
 	                                                    provider->name(),
 	                                                    Rel::ANY,
 	                                                    Edition::noedition );
 
-	    info->world->foreachProvidingResItem (maybe_upgrade_dep, upgrade_candidates_cb, (void *)&upgrade_info);
+	    // pool->foreachProvidingResItem (maybe_upgrade_dep, upgrade_candidates_cb, (void *)&upgrade_info);
+	    Dep dep( Dep::PROVIDES );
+
+	    invokeOnEach( pool->byCapabilityIndexBegin( maybe_upgrade_cap.index(), dep ),
+			  pool->byCapabilityIndexEnd( maybe_upgrade_cap.index(), dep ),
+			  resfilter::callOnCapMatchIn( dep, maybe_upgrade_cap, upgrade_info ) );
 
 #endif
 
-	    uninstall = new QueueItemUninstall (info->world, provider, info->actually_an_obsolete ? QueueItemUninstall::OBSOLETE : QueueItemUninstall::CONFLICT);
-	    uninstall->setDependency (info->conflict_capability);
+	    uninstall = new QueueItemUninstall (pool, provider, actually_an_obsolete ? QueueItemUninstall::OBSOLETE : QueueItemUninstall::CONFLICT);
+	    uninstall->setDependency (conflict_capability);
 
-	    if (info->actually_an_obsolete) {
+	    if (actually_an_obsolete) {
 	        uninstall->setDueToObsolete ();
-	        log_info = new ResolverInfoObsoletes (provider, info->conflict_issuer);
+	        log_info = new ResolverInfoObsoletes (provider, conflict_issuer);
 	    } else {
 	        uninstall->setDueToConflict ();
-	        log_info = new ResolverInfoConflictsWith (provider, info->conflict_issuer);
+	        log_info = new ResolverInfoConflictsWith (provider, conflict_issuer);
 	    }
 
 	    uninstall->addInfo (log_info);
@@ -237,15 +224,15 @@ conflict_process_cb (ResItem_constPtr provider, const Capability & provides, voi
 #if PHI
 	    }
 	    else {
-	        // there are upgrade candidates for the conflicting resItem
-	        // branch to: 1. uninstall, 2. upgrade (for each upgrading resItem)
+	        // there are upgrade candidates for the conflicting item
+	        // branch to: 1. uninstall, 2. upgrade (for each upgrading item)
 
 	        QueueItemBranch_Ptr branch = new QueueItemBranch (info->world);
 
 	        branch->addItem (uninstall);			// try uninstall
 
-	        for (CResItemList::const_iterator iter = upgrade_info.upgrades.begin(); iter != upgrade_info.upgrades.end(); iter++) {
-	            QueueItemInstall_Ptr upgrade = new QueueItemInstall (info->world, *iter);
+	        for (PoolItemList::const_iterator iter = upgrade_info.upgrades.begin(); iter != upgrade_info.upgrades.end(); iter++) {
+	            QueueItemInstall_Ptr upgrade = new QueueItemInstall (pool, *iter);
 	            upgrade->setUpgrades (provider);
 	            branch->addItem (upgrade);			// try upgrade
 	        }
@@ -298,18 +285,16 @@ conflict_process_cb (ResItem_constPtr provider, const Capability & provides, voi
 bool
 QueueItemConflict::process (ResolverContext_Ptr context, QueueItemList & new_items)
 {
-    _DBG("RC_SPEW") << "QueueItemConflict::process(" << this->asString() << ")" << endl;
+    DBG << "QueueItemConflict::process(" << this->asString() << ")" << endl;
 
-    ConflictProcessInfo info = {
-	world(),
-	_conflicting_resItem,		// conflict_issuer
-	_dep,				// conflict_capability
-	context,
-	new_items,
-	_actually_an_obsolete
-    };
+    ConflictProcess info (pool(), _conflicting_item, _capability, context. new_items, actually_an_obsolete);
 
-    world()->foreachProvidingResItem (_dep, conflict_process_cb, (void *)&info);
+    // world()->foreachProvidingResItem (_capability, conflict_process_cb, (void *)&info);
+
+    Dep dep( Dep::PROVIDES );
+    invokeOnEach( pool()->byCapabilityIndexBegin( _capability.index(), dep ),
+		  pool()->byCapabilityIndexEnd( _capability.index(), dep ),
+		  resfilter::callOnCapMatchIn( dep, _capability, info ) );
 
     return true;
 }
@@ -320,7 +305,7 @@ QueueItemConflict::process (ResolverContext_Ptr context, QueueItemList & new_ite
 QueueItem_Ptr
 QueueItemConflict::copy (void) const
 {
-    QueueItemConflict_Ptr new_conflict = new QueueItemConflict (world(), _dep, _conflicting_resItem);
+    QueueItemConflict_Ptr new_conflict = new QueueItemConflict (pool(), _capability, _conflicting_item);
     new_conflict->QueueItem::copy(this);
 
     // _actually_an_obsolete is not being copied !
@@ -337,7 +322,7 @@ QueueItemConflict::cmp (QueueItem_constPtr item) const
 	return cmp;
 
     QueueItemConflict_constPtr conflict = dynamic_pointer_cast<const QueueItemConflict>(item);
-    if ( _dep != conflict->dependency())
+    if ( _capability != conflict->capability())
 	cmp = -1;
 
     return cmp;
