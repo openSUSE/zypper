@@ -50,14 +50,14 @@ HelixSourceImpl::createDependencies (const HelixParser & parsed)
 {
     Dependencies deps;
 
-    deps.provides = parsed.provides;
-    deps.prerequires = parsed.prerequires;
-    deps.requires = parsed.requires;
-    deps.conflicts = parsed.conflicts;
-    deps.obsoletes = parsed.obsoletes;
-    deps.recommends = parsed.recommends;
-    deps.suggests = parsed.suggests;
-    deps.freshens = parsed.freshens;
+    deps[Dep::PROVIDES] = parsed.provides;
+    deps[Dep::PREREQUIRES] = parsed.prerequires;
+    deps[Dep::REQUIRES] = parsed.requires;
+    deps[Dep::CONFLICTS] = parsed.conflicts;
+    deps[Dep::OBSOLETES] = parsed.obsoletes;
+    deps[Dep::RECOMMENDS] = parsed.recommends;
+    deps[Dep::SUGGESTS] = parsed.suggests;
+    deps[Dep::FRESHENS] = parsed.freshens;
 #warning enable 'enhances' in zypp/Dependencies
 //    deps.enhances = parsed.enhances;
 
