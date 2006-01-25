@@ -14,7 +14,7 @@
 
 #include <set>
 
-#include "zypp/pool/PoolItem.h"
+#include "zypp/PoolItem.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

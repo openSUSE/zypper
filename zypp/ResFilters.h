@@ -16,6 +16,8 @@
 #include "zypp/Resolvable.h"
 #include "zypp/CapFilters.h"
 
+#include "zypp/PoolItem.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -205,14 +207,28 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
 
-    typedef std::binary_function<ResObject::constPtr,Capability,
+    typedef std::binary_function<PoolItem,Capability,
                                  bool> OnCapMatchCallbackFunctor;
 
-    /** */
+    /** Find matching Capabilities in a ResObjects dependency and invoke a
+     *  callback on matches.
+     *
+     * Iterates through the PoolItem (in fact the ResObject it holds)
+     * CapSet denoted by \a dep_r. For each Capability matching the
+     * provided \a cap_r the callback functor \a fnc_r is called with
+     * the PoolItem and the PoolItem's matching Capability.
+     *
+     * \returns \c true, unless an invokation of the callback functor
+     * returned \c false.
+     *
+     * \todo Unfortunately a pure PoolItem Filter, but woud be usefull with
+     * plain ResObjects too. But the Solver urgently needs the PoolItem in
+     * the OnCapMatchCallback.
+    */
     template<class _OnCapMatchCallback>
-      struct CallOnCapMatchIn : public ResObjectFilterFunctor
+      struct CallOnCapMatchIn
       {
-        bool operator()( ResObject::constPtr p ) const
+        bool operator()( const PoolItem & p ) const
         {
           const CapSet & depSet( p->dep( _dep ) ); // dependency set in p to iterate
           capfilter::ByCapMatch matching( _cap );  // predicate: true if match with _cap
@@ -224,7 +240,6 @@ namespace zypp
           // Maybe worth to note: Filter and Action are invoked with the same
           // iterator, thus Action will use the same capability that cause
           // the match in Filter.
-
           return ( res >= 0 );
         }
 
