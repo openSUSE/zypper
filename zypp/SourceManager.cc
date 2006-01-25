@@ -57,7 +57,15 @@ namespace zypp
     Source src = SourceFactory().createFrom(url_r, path_r);
     RW_pointer<Source> src_ptr = RW_pointer<Source>(new Source(src));
     _sources[_next_id] = src_ptr;
-    addToPool(pool_r, src.resolvables());
+    addToPool(pool_r, src_ptr->resolvables());
+    return _next_id++;
+  }
+
+  unsigned SourceManager::addSource(ResPoolManager & pool_r, Source & source_r)
+  {
+    RW_pointer<Source> src_ptr = RW_pointer<Source>(new Source(source_r));
+    _sources[_next_id] = src_ptr;
+    addToPool(pool_r, src_ptr->resolvables());
     return _next_id++;
   }
 

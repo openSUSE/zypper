@@ -57,7 +57,7 @@ namespace zypp
      */
     Source & findSource(const unsigned id);
 
-#warning FIXME 4 times: Find a better way to link to the resolvable pool than passing a reference...
+#warning FIXME 5 times: Find a better way to link to the resolvable pool than passing a reference...
 
     /**
      * Add a new source
@@ -65,6 +65,13 @@ namespace zypp
      * \throws Exception
      */
     unsigned addSource(ResPoolManager & pool_r, const Url & url_r, const Pathname & path_r = "/");
+
+    /**
+     * Add a new source
+     *
+     * \throws Exception
+     */
+    unsigned addSource(ResPoolManager & pool_r, Source & source_r);
 
     /**
      * Remove an existing source
