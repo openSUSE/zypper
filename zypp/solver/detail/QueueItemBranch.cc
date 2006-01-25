@@ -19,6 +19,8 @@
  * 02111-1307, USA.
  */
 
+#include "zypp/solver/detail/Types.h"
+
 #include "zypp/solver/detail/QueueItemBranch.h"
 #include "zypp/solver/detail/QueueItem.h"
 #include "zypp/solver/detail/Resolver.h"
@@ -40,45 +42,23 @@ IMPL_PTR_TYPE(QueueItemBranch);
 
 //---------------------------------------------------------------------------
 
-string
-QueueItemBranch::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-QueueItemBranch::toString ( const QueueItemBranch & item)
-{
-    string res = "[Branch: ";
-    if (!item._label.empty()) {
-	res += item._label;
-    }
-    res += "\n\t";
-    res += QueueItem::toString(item._possible_items, "\n\t");
-    res += "]";
-    return res;
-}
-
-
-ostream &
-QueueItemBranch::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
 ostream&
 operator<<( ostream& os, const QueueItemBranch & item)
 {
-    return os << item.asString();
+    os << "[Branch: ";
+    if (!item._label.empty()) {
+	os << item._label;
+    }
+    os << endl << "\t";
+    os << item._possible_items << endl << "\t";
+    os << "]";
+    return os;
 }
 
 //---------------------------------------------------------------------------
 
-QueueItemBranch::QueueItemBranch (World_Ptr world)
-    : QueueItem (QUEUE_ITEM_TYPE_BRANCH, world)
+QueueItemBranch::QueueItemBranch (const ResPool *pool)
+    : QueueItem (QUEUE_ITEM_TYPE_BRANCH, pool)
 {
 }
 
@@ -119,7 +99,6 @@ QueueItemBranch::contains (QueueItem_Ptr possible_subbranch)
 	return false;
     }
 
-
     if (_possible_items.size() < branch->_possible_items.size()) {
 	return false;
     }
@@ -153,7 +132,7 @@ QueueItemBranch::contains (QueueItem_Ptr possible_subbranch)
 bool
 QueueItemBranch::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
-    _DBG("RC_SPEW") << "QueueItemBranch::process(" << asString() << ")" << endl;
+    DBG << "QueueItemBranch::process(" << *this << ")" << endl;
 
     QueueItemList live_branches;
     unsigned int branch_count;
@@ -207,7 +186,7 @@ QueueItemBranch::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     } else {
 // ERR << "QueueItemBranch::process rebranching" << endl;
-	QueueItemBranch_Ptr new_branch = new QueueItemBranch (world());
+	QueueItemBranch_Ptr new_branch = new QueueItemBranch (pool());
 	for (QueueItemList::const_iterator iter = live_branches.begin(); iter != live_branches.end(); iter++) {
 	    new_branch->addItem ((*iter)->copy());
 	}
@@ -260,7 +239,7 @@ QueueItemBranch::cmp (QueueItem_constPtr item) const
 QueueItem_Ptr
 QueueItemBranch::copy (void) const
 {
-    QueueItemBranch_Ptr new_branch = new QueueItemBranch (world());
+    QueueItemBranch_Ptr new_branch = new QueueItemBranch (pool());
     new_branch->QueueItem::copy(this);
     for (QueueItemList::const_iterator iter = _possible_items.begin(); iter != _possible_items.end(); iter++) {
 	QueueItem_Ptr cpy = (*iter)->copy();

@@ -1,41 +1,36 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /* ResolverContext.h
  *
- * Copyright (C) 2000-2002 Ximian, Inc.
- * Copyright (C) 2005 SUSE Linux Products GmbH
+ *Keep a set of 'active' PoolItems, these are part of the current
+ *transaction
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License,
- * version 2, as published by the Free Software Foundation.
  *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
+ *Copyright (C) 2000-2002 Ximian, Inc.
+ *Copyright (C) 2005 SUSE Linux Products GmbH
  *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
- * 02111-1307, USA.
+ *This program is free software; you can redistribute it and/or
+ *modify it under the terms of the GNU General Public License,
+ *version 2, as published by the Free Software Foundation.
+ *
+ *This program is distributed in the hope that it will be useful, but
+ *WITHOUT ANY WARRANTY; without even the implied warranty of
+ *MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ *General Public License for more details.
+ *
+ *You should have received a copy of the GNU General Public License
+ *along with this program; if not, write to the Free Software
+ *Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+ *02111-1307, USA.
  */
 
 #ifndef ZYPP_SOLVER_DETAIL_RESOLVERCONTEXT_H
 #define ZYPP_SOLVER_DETAIL_RESOLVERCONTEXT_H
 
-#include <iosfwd>
-#include <list>
-#include <map>
-#include <string>
-
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
-
-#include "zypp/solver/detail/ResolverContextPtr.h"
-#include "zypp/solver/detail/ResolverInfo.h"
-#include "zypp/solver/temporary/ResItem.h"
-#include "zypp/solver/temporary/Channel.h"
+#include "zypp/PoolItem.h"
 #include "zypp/Capability.h"
+
+#include "zypp/solver/detail/Types.h"
+#include "zypp/solver/detail/ResolverInfo.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -47,33 +42,9 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-typedef enum {
-    RESOLVABLE_STATUS_UNKNOWN = 0,
-    RESOLVABLE_STATUS_INSTALLED,
-    RESOLVABLE_STATUS_SATISFIED,
-    RESOLVABLE_STATUS_UNNEEDED,
-    RESOLVABLE_STATUS_INCOMPLETE,
-    RESOLVABLE_STATUS_UNINSTALLED,
-    RESOLVABLE_STATUS_TO_BE_INSTALLED,
-    RESOLVABLE_STATUS_TO_BE_INSTALLED_SOFT,
-    RESOLVABLE_STATUS_TO_BE_UNINSTALLED,
-    RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE,
-    RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK
-} ResItemStatus;
-
-#define resItem_status_is_to_be_installed(x) (((x) == RESOLVABLE_STATUS_TO_BE_INSTALLED) || ((x) == RESOLVABLE_STATUS_TO_BE_INSTALLED_SOFT))
-#define resItem_status_is_to_be_uninstalled(x) (((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED) || ((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE) || ((x) == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK))
-#define resItem_status_is_satisfied(x) ((x) == RESOLVABLE_STATUS_SATISFIED)
-#define resItem_status_is_incomplete(x) ((x) == RESOLVABLE_STATUS_INCOMPLETE)
-#define resItem_status_is_unneeded(x) ((x) == RESOLVABLE_STATUS_UNNEEDED)
-
-typedef std::map<ResItem_constPtr, ResItemStatus> StatusTable;
-typedef std::list<ResolverInfo_Ptr> InfoList;
-
-
-typedef void (*ResolverContextFn) (ResolverContext_Ptr ctx, void * data);
-typedef void (*MarkedResItemFn) (ResItem_constPtr res, ResItemStatus status, void *data);
-typedef void (*MarkedResItemPairFn) (ResItem_constPtr res1, ResItemStatus status1, ResItem_constPtr res2, ResItemStatus status2, void *data);
+typedef void (*ResolverContextFn) (ResolverContext_Ptr ctx, void *data);
+typedef void (*MarkedPoolItemFn) (PoolItem *item, void *data);
+typedef void (*MarkedPoolItemPairFn) (PoolItem *item1, PoolItem *item2, void *data);
 
 
 ///////////////////////////////////////////////////////////////////
@@ -84,27 +55,22 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
   private:
 
-    ResolverContext_Ptr _parent;
+    ResolverContext_Ptr _parent;		// branches share a common parent
 
-    int _refs;
+    typedef std::set<PoolItem *> Context;
+    Context _context;				// the set of items touched in this transaction
 
-    World_Ptr _world;
-    StatusTable _status;
+    ResolverInfoList _log;			// report log
 
-    // just a caching mechanism
-    ResItem_constPtr _last_checked_resItem;
-    ResItemStatus _last_checked_status;
-
-    InfoList _log;
     unsigned long long _download_size;
     unsigned long long _install_size;
     int _total_priority;
     int _min_priority;
     int _max_priority;
     int _other_penalties;
-    Channel_constPtr _current_channel;
-    bool _verifying;
-    bool _invalid;
+
+    bool _verifying;				// running 'verifySystem'
+    bool _invalid;				// lead to invalid solution
 
   public:
     ResolverContext (ResolverContext_Ptr parent = NULL);
@@ -112,20 +78,9 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     // ---------------------------------- I/O
 
-    static std::string toString (const ResolverContext & context);
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
     friend std::ostream& operator<<(std::ostream&, const ResolverContext & context);
-    std::string asString (void ) const;
-
-    static std::string toString (const ResItemStatus & status);
 
     // ---------------------------------- accessors
-
-    World_Ptr world (void) const;				// gets global world, if _world == NULL
-    void setWorld (World_Ptr world) { _world = world; }
-
-    Channel_constPtr currentChannel (void) const { return _current_channel; }
-    void setCurrentChannel (Channel_constPtr channel) { _current_channel = channel; }
 
     unsigned long long downloadSize(void) const { return _download_size; }
     unsigned long long installSize(void) const { return _install_size; }
@@ -142,62 +97,97 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     // ---------------------------------- methods
 
-    ResItemStatus getStatus (ResItem_constPtr res);			// non-const, because its caching
-    void setStatus (ResItem_constPtr res, ResItemStatus status);
+    /** state change functions
+    *  they do some checking before actually changing the state of the PoolItem. */
 
-    // state change functions
-    //   they do some checking before calling setStatus()
-    bool installResItem (ResItem_constPtr resItem, bool is_soft, int other_penalty);
-    bool satisfyResItem (ResItem_constPtr resItem, int other_penalty);
-    bool unneededResItem (ResItem_constPtr resItem, int other_penalty);
-    bool incompleteResItem (ResItem_constPtr resItem, int other_penalty);
-    bool upgradeResItem (ResItem_constPtr new_resItem, ResItem_constPtr old_resItem, bool is_soft, int other_penalty);
-    bool uninstallResItem (ResItem_constPtr resItem, bool part_of_upgrade, bool due_to_obsolete, bool due_to_unlink);
+    /**
+     *set the state of \c item to \c status
+     *If \c status is not the current state of \c item, make \c item
+     *part of the current transaction (the context) */
+    void setStatus (PoolItem *item, ResStatus & status);
 
-    bool resItemIsPresent (ResItem_constPtr resItem);
-    bool resItemIsAbsent (ResItem_constPtr resItem);
+    /**
+     *set \c item to \a to-be-installed */
+    bool install (PoolItem *item, bool is_soft, int other_penalty);
 
-    void foreachMarkedResItem (MarkedResItemFn fn, void *data) const;
-    CResItemList getMarkedResItems (int which) const;				// <0:uninstalls, 0:all; >0:installs
+    /**
+     *set \c item to \a satisfied */
+    bool satisfy (PoolItem *item, int other_penalty);
 
-    int foreachInstall (MarkedResItemFn fn, void *data) const;
-    CResItemList getInstalls (void) const;
+    /**
+     *set \c item to \a unneeded */
+    bool unneeded (PoolItem *item, int other_penalty);
+
+    /**
+     *set \c item to \a incomplete */
+    bool incomplete (PoolItem *item, int other_penalty);
+
+    /**
+     *upgrade \c from to \c to
+     *marks \c from as \a to-be-uninstalled and \c to as \a to-be-installed  */
+    bool upgrade (PoolItem *to, PoolItem *from, bool is_soft, int other_penalty);
+
+    /**
+     *set \c item to \a to-be-uninstalled */
+    bool uninstall (PoolItem *item, bool part_of_upgrade, bool due_to_obsolete, bool due_to_unlink);
+
+    // rough installed/uninstalled test for 'after transaction'
+
+    /**
+     *\return \c true if \c item is \a installed or \a to-be-installed */
+    bool isPresent (PoolItem *item);
+
+    /**
+     *\return \c true if \c item is \a uninstalled or \a to-be-uninstalled */
+    bool isAbsent (PoolItem *item);
+
+    bool requirementIsMet (const Capability & cap, bool is_child = false);
+    bool requirementIsPossible (const Capability & cap);
+    bool itemIsPossible (const PoolItem & item);
+    bool isParallelInstall (const PoolItem & item);
+
+    /** iterate over various states */
+
+    void foreachMarked (MarkedPoolItemFn fn, void *data) const;
+    CPoolItemList getMarked (int which) const;					// <0:uninstalls, 0:all; >0:installs
+
+    int foreachInstall (MarkedPoolItemFn fn, void *data) const;
+    CPoolItemList getInstalls (void) const;
     int installCount (void) const;
 
-    int foreachUninstall (MarkedResItemFn fn, void *data);			// non-const, calls foreachUpgrade
-    CResItemList getUninstalls (void);
+    int foreachUninstall (MarkedPoolItemFn fn, void *data) const;
+    CPoolItemList getUninstalls (void);
     int uninstallCount (void);
 
-    int foreachUpgrade (MarkedResItemPairFn fn, void *data);			// non-const, calls getStatus
-    CResItemList getUpgrades (void);
+    int foreachUpgrade (MarkedPoolItemPairFn fn, void *data) const;
+    CPoolItemList getUpgrades (void);
     int upgradeCount (void);
 
-    int foreachSatisfy (MarkedResItemFn fn, void *data);			// non-const, calls getStatus
-    CResItemList getSatisfies (void);
+    int foreachSatisfy (MarkedPoolItemFn fn, void *data) const;
+    CPoolItemList getSatisfies (void);
     int satisfyCount (void);
 
-    int foreachIncomplete (MarkedResItemFn fn, void *data);			// non-const, calls getStatus
-    CResItemList getIncompletes (void);
+    int foreachIncomplete (MarkedPoolItemFn fn, void *data) const;
+    CPoolItemList getIncompletes (void);
     int incompleteCount (void);
 
-    void addInfo (ResolverInfo_Ptr info);
-    void addError (ResolverInfo_Ptr info);
+    // add to the report log
+    void addInfo (ResolverInfo_Ptr info);					// normal progress info
+    void addError (ResolverInfo_Ptr info);					// error progress info
 
-    void foreachInfo (ResItem_Ptr resItem, int priority, ResolverInfoFn fn, void *data);
-    InfoList getInfo (void);
+    // iterate over report log
+    void foreachInfo (PoolItem *item, int priority, ResolverInfoFn fn, void *data);
+    ResolverInfoList getInfo (void);
 
+    // Context compare to identify equal branches
+
+    int partialCompare (ResolverContext_Ptr context) const;
+    int compare (ResolverContext_Ptr context);
+
+    // debug
     void spew (void);
     void spewInfo (void);
 
-    bool requirementIsMet (const Capability & dep, bool is_child = false);
-    bool requirementIsPossible (const Capability & dep);
-    bool resItemIsPossible (ResItem_constPtr resItem);
-    bool isParallelInstall (ResItem_constPtr resItem);
-
-    int getChannelPriority (Channel_constPtr channel) const;
-
-    int partialCompare (ResolverContext_Ptr context);			// non-const, calls uninstall/upgrade Count
-    int compare (ResolverContext_Ptr context);
 };
 
 ///////////////////////////////////////////////////////////////////

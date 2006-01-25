@@ -29,12 +29,12 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/PtrTypes.h"
 
-#include "zypp/solver/detail/ResolverPtr.h"
+#include "zypp/ResPool.h"
+
+#include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/ResolverQueue.h"
-#include "zypp/solver/detail/ResolverProblemPtr.h"
-#include "zypp/solver/detail/ProblemSolutionPtr.h"
-#include "zypp/solver/temporary/ResItem.h"
-#include "zypp/solver/temporary/Channel.h"
+#include "zypp/solver/detail/ResolverContext.h"
+
 #include "zypp/CapSet.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -51,99 +51,91 @@ namespace zypp
 //
 //	CLASS NAME : Resolver
 
-      class Resolver : public base::ReferenceCounted, private base::NonCopyable {
-          
+class Resolver : public base::ReferenceCounted, private base::NonCopyable {
+    
 
-        private:
-          Channel_constPtr _current_channel;
+  private:
+    const ResPool *_pool;
 
-          World_Ptr _world;
+    int _timeout_seconds;
+    bool _verifying;
 
-          int _timeout_seconds;
-          bool _verifying;
+    QueueItemList _initial_items;
+    CPoolItemList _items_to_install;
+    CPoolItemList _items_to_establish;
+    CPoolItemList _items_to_remove;
+    CPoolItemList _items_to_verify;
 
-          QueueItemList _initial_items;
-          CResItemList _resItems_to_install;
-          CResItemList _resItems_to_establish;
-          CResItemList _resItems_to_remove;
-          CResItemList _resItems_to_verify;
+    CapSet _extra_deps;
+    CapSet _extra_conflicts;
 
-          CapSet _extra_deps;
-          CapSet _extra_conflicts;
+    ResolverQueueList _pending_queues;
+    ResolverQueueList _pruned_queues;
+    ResolverQueueList _complete_queues;
+    ResolverQueueList _deferred_queues;
+    ResolverQueueList _invalid_queues;
 
-          ResolverQueueList _pending_queues;
-          ResolverQueueList _pruned_queues;
-          ResolverQueueList _complete_queues;
-          ResolverQueueList _deferred_queues;
-          ResolverQueueList _invalid_queues;
+    int _valid_solution_count;
 
-          int _valid_solution_count;
+    ResolverContext_Ptr _best_context;
+    bool _timed_out;
 
-          ResolverContext_Ptr _best_context;
-          bool _timed_out;
+  public:
 
-        public:
+    Resolver (const ResPool *pool = NULL);
+    virtual ~Resolver();
 
-          Resolver (World_Ptr world = NULL);
-          virtual ~Resolver();
+    // ---------------------------------- I/O
 
-          // ---------------------------------- I/O
+    friend std::ostream& operator<<(std::ostream&, const Resolver &resolver);
 
-          static std::string toString (const Resolver & resolver);
+    // ---------------------------------- accessors
 
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
+    QueueItemList initialItems () const { return _initial_items; }
 
-          friend std::ostream& operator<<(std::ostream&, const Resolver & resolver);
+    ResolverQueueList pendingQueues () const { return _pending_queues; }
+    ResolverQueueList prunedQueues () const { return _pruned_queues; }
+    ResolverQueueList completeQueues () const { return _complete_queues; }
+    ResolverQueueList deferredQueues () const { return _deferred_queues; }
+    ResolverQueueList invalidQueues () const { return _invalid_queues; }
 
-          std::string asString (void ) const;
+    ResolverContext_Ptr bestContext (void) const { return _best_context; }
 
-          // ---------------------------------- accessors
+    // ---------------------------------- methods
 
-          QueueItemList initialItems () const { return _initial_items; }
+    void setTimeout (int seconds) { _timeout_seconds = seconds; }
 
-          ResolverQueueList pendingQueues () const { return _pending_queues; }
-          ResolverQueueList prunedQueues () const { return _pruned_queues; }
-          ResolverQueueList completeQueues () const { return _complete_queues; }
-          ResolverQueueList deferredQueues () const { return _deferred_queues; }
-          ResolverQueueList invalidQueues () const { return _invalid_queues; }
+    const ResPool *pool (void) const;			// returns global world if _world == NULL
+    void setPool (const ResPool *pool) { _pool = pool; }
 
-          ResolverContext_Ptr bestContext (void) const { return _best_context; }
+//    void setCurrentChannel (Channel_constPtr channel) { _current_channel = channel; }
+//    void addSubscribedChannel (Channel_constPtr channel);
 
-          // ---------------------------------- methods
+    void addPoolItemToInstall (PoolItem *item);
+    void addPoolItemsToInstallFromList (CPoolItemList & rl);
 
-          void setTimeout (int seconds) { _timeout_seconds = seconds; }
+    void addPoolItemToRemove (PoolItem *item);
+    void addPoolItemsToRemoveFromList (CPoolItemList & rl);
 
-          World_Ptr world (void) const;			// returns global world if _world == NULL
-          void setWorld (World_Ptr world) { _world = world; }
+    void addPoolItemToEstablish (PoolItem *item);
+    void addPoolItemsToEstablishFromList (CPoolItemList & rl);
 
-          void setCurrentChannel (Channel_constPtr channel) { _current_channel = channel; }
-          void addSubscribedChannel (Channel_constPtr channel);
+    void addPoolItemToVerify (PoolItem *item);
 
-          void addResItemToInstall (ResItem_constPtr resItem);
-          void addResItemsToInstallFromList (CResItemList & rl);
+    void addExtraCapability (const Capability & capability);
+    void addExtraConflict (const Capability & capability);
 
-          void addResItemToRemove (ResItem_constPtr resItem);
-          void addResItemsToRemoveFromList (CResItemList & rl);
+    void verifySystem (void);
+    void establishState (const ResolverContext_Ptr context = NULL);
+    bool resolveDependencies (const ResolverContext_Ptr context = NULL);
 
-          void addResItemToEstablish (ResItem_constPtr resItem);
-          void addResItemsToEstablishFromList (CResItemList & rl);
+    ResolverProblemList problems (void) const;
+    void applySolutions (const ProblemSolutionList &solutions);
 
-          void addResItemToVerify (ResItem_constPtr resItem);
+    void reset (void);
+};
 
-          void addExtraDependency (const Capability & dependency);
-          void addExtraConflict (const Capability & dependency);
-
-          void verifySystem (void);
-          void establishState (const ResolverContext_Ptr context = NULL);
-          bool resolveDependencies (const ResolverContext_Ptr context = NULL);
-
-	  ResolverProblemList problems (void) const;
-	  void applySolutions (const ProblemSolutionList & solutions);
-
-	  void reset (void);
-      };
-
-      ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

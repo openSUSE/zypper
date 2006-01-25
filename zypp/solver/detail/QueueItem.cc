@@ -32,100 +32,76 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
-      
-      using namespace std;
-      
-      IMPL_PTR_TYPE(QueueItem);
-      
-      //---------------------------------------------------------------------------
-      
-      string
-      QueueItem::asString ( void ) const
-      {
-          return toString (*this);
-      }
-      
-      
-      string
-      QueueItem::toString ( const QueueItem & item )
-      {
-          return "<queueitem/>";
-      }
-      
-      
-      string
-      QueueItem::toString ( const QueueItemList & itemlist, const string & sep )
-      {
-          string res = "[";
-          for (QueueItemList::const_iterator iter = itemlist.begin(); iter != itemlist.end(); iter++) {
-      	if (iter != itemlist.begin())
-      	    res += sep;
-      	res += (*iter)->asString();
-          }
-          return res + "]";
-      }
-      
-      
-      ostream &
-      QueueItem::dumpOn( ostream & str ) const
-      {
-          str << asString();
-          return str;
-      }
-      
-      
-      ostream&
-      operator<<( ostream& os, const QueueItem & item )
-      {
-          return os << item.asString();
-      }
-      
-      //---------------------------------------------------------------------------
-      
-      QueueItem::QueueItem (QueueItemType type, World_Ptr world)
-          : _type (type)
-          , _world (world)
-          , _priority (0)
-          , _size (0)
-      {
-      }
-      
-      
-      QueueItem::~QueueItem()
-      {
-      }
-      
-      //---------------------------------------------------------------------------
-      
-      void
-      QueueItem::copy (const QueueItem *from)
-      {
-          _priority = from->_priority;
-          _size = from->_size;
-          _pending_info = ResolverInfoList (from->_pending_info.begin(), from->_pending_info.end());
-      }
-      
-      
-      //---------------------------------------------------------------------------
-      
-      void
-      QueueItem::addInfo (ResolverInfo_Ptr info)
-      {
-          _pending_info.push_back (info);
-      }
-      
-      
-      void
-      QueueItem::logInfo (ResolverContext_Ptr context)
-      {
-          for (ResolverInfoList::const_iterator iter = _pending_info.begin(); iter != _pending_info.end(); iter++) {
-      	context->addInfo (*iter);
-          }
-          _pending_info.clear();
-      }
 
-      ///////////////////////////////////////////////////////////////////
+using namespace std;
+
+IMPL_PTR_TYPE(QueueItem);
+
+//---------------------------------------------------------------------------
+
+ostream&
+operator<<( ostream & os, const QueueItem & item )
+{
+    return os << "<queueitem/>";
+}
+
+
+ostream&
+operator<<( ostream & os, const QueueItemList & itemlist )
+{
+    for (QueueItemList::const_iterator iter = itemlist.begin(); iter != itemlist.end(); ++iter) {
+	if (iter != itemlist.begin())
+	    os << ", ";
+	os << *iter;
+    }
+    return os;
+}
+
+//---------------------------------------------------------------------------
+
+QueueItem::QueueItem (QueueItemType type, const ResPool *pool)
+    : _type (type)
+    , _pool (pool)
+    , _priority (0)
+    , _size (0)
+{
+}
+
+
+QueueItem::~QueueItem()
+{
+}
+
+//---------------------------------------------------------------------------
+
+void
+QueueItem::copy (const QueueItem *from)
+{
+    _priority = from->_priority;
+    _size = from->_size;
+    _pending_info = ResolverInfoList (from->_pending_info.begin(), from->_pending_info.end());
+}
+
+
+//---------------------------------------------------------------------------
+
+void
+QueueItem::addInfo (ResolverInfo_Ptr info)
+{
+    _pending_info.push_back (info);
+}
+
+
+void
+QueueItem::logInfo (ResolverContext_Ptr context)
+{
+    for (ResolverInfoList::const_iterator iter = _pending_info.begin(); iter != _pending_info.end(); iter++) {
+	context->addInfo (*iter);
+    }
+    _pending_info.clear();
+}
+
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

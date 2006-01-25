@@ -36,39 +36,36 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : ResolverInfoMissingReq
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : ResolverInfoMissingReq
 
-      class ResolverInfoMissingReq : public ResolverInfo {
+class ResolverInfoMissingReq : public ResolverInfo {
 
-        private:
+  private:
 
-          const Capability  _missing_req;
+    const Capability  _missing;
 
-        public:
+  public:
 
-          ResolverInfoMissingReq (ResItem_constPtr resItem, const Capability & missing_req);
-          virtual ~ResolverInfoMissingReq();
+    ResolverInfoMissingReq (PoolItem *item, const Capability & missing_req);
+    virtual ~ResolverInfoMissingReq();
 
-          // ---------------------------------- I/O
+    // ---------------------------------- I/O
 
-          static std::string toString (const ResolverInfoMissingReq & context);
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
-          friend std::ostream& operator<<(std::ostream&, const ResolverInfoMissingReq & context);
-          std::string asString (void ) const;
+    friend std::ostream& operator<<(std::ostream&, const ResolverInfoMissingCap & context);
 
-          // ---------------------------------- accessors
+    // ---------------------------------- accessors
 
-	  const Capability capability (void) const { return _missing_req; }
+    const Capability capability (void) const { return _missing; }
 
-          // ---------------------------------- methods
+    // ---------------------------------- methods
 
-          virtual ResolverInfo_Ptr copy (void) const;
+    virtual ResolverInfo_Ptr copy (void) const;
 
-      };
+};
 
-      ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

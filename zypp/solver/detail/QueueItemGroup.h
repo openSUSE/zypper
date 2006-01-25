@@ -26,10 +26,8 @@
 #include <list>
 #include <string>
 
+#include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/QueueItem.h"
-#include "zypp/solver/detail/QueueItemGroupPtr.h"
-#include "zypp/solver/temporary/ResItem.h"
-#include "zypp/solver/temporary/Channel.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -41,46 +39,39 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : QueueItemGroup
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : QueueItemGroup
 
-      class QueueItemGroup : public QueueItem {
-
-
-        private:
-          QueueItemList _subitems;
-
-        public:
-
-          QueueItemGroup (World_Ptr world);
-          virtual ~QueueItemGroup();
-
-          // ---------------------------------- I/O
-
-          static std::string toString (const QueueItemGroup & item);
-
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
-
-          friend std::ostream& operator<<(std::ostream&, const QueueItemGroup & item);
-
-          std::string asString (void ) const;
-
-          // ---------------------------------- accessors
+class QueueItemGroup : public QueueItem {
 
 
-          // ---------------------------------- methods
+  private:
+    QueueItemList _subitems;
 
-          virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
-          virtual QueueItem_Ptr copy (void) const;
-          virtual int cmp (QueueItem_constPtr item) const;
-          virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
-          virtual bool isSatisfied (ResolverContext_Ptr context) const { return false; }
+  public:
 
-          void addItem (QueueItem_Ptr subitem);
-      };
+    QueueItemGroup (const ResPool *pool);
+    virtual ~QueueItemGroup();
 
-      ///////////////////////////////////////////////////////////////////
+    // ---------------------------------- I/O
+
+    friend std::ostream& operator<<(std::ostream&, const QueueItemGroup & item);
+
+    // ---------------------------------- accessors
+
+    // ---------------------------------- methods
+
+    virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
+    virtual QueueItem_Ptr copy (void) const;
+    virtual int cmp (QueueItem_constPtr item) const;
+    virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
+    virtual bool isSatisfied (ResolverContext_Ptr context) const { return false; }
+
+    void addItem (QueueItem_Ptr subitem);
+};
+
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

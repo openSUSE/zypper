@@ -22,17 +22,7 @@
 #ifndef ZYPP_SOLVER_DETAIL_RESOLVER_INFO_H
 #define ZYPP_SOLVER_DETAIL_RESOLVER_INFO_H
 
-#include <iosfwd>
-#include <list>
-#include <map>
-#include <string>
-
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/solver/detail/ResolverInfoPtr.h"
-#include "zypp/solver/temporary/ResItem.h"
-#include "zypp/solver/temporary/Channel.h"
+#include "zypp/solver/detail/Types.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -102,7 +92,7 @@ class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
 
     ResolverInfoType _type;
 
-    ResItem_constPtr _affected;
+    PoolItem *_affected;
 
     int _priority;
 
@@ -111,7 +101,7 @@ class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
 
   protected:
 
-    ResolverInfo (ResolverInfoType type, ResItem_constPtr affected, int priority);
+    ResolverInfo (ResolverInfoType type, PoolItem *affected, int priority);
 
   public:
 
@@ -121,15 +111,12 @@ class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
 
     // ---------------------------------- I/O
 
-    static std::string toString (const ResolverInfo & context, bool full = false);
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
     friend std::ostream& operator<<(std::ostream&, const ResolverInfo & context);
-    virtual std::string asString (void ) const;
 
     // ---------------------------------- accessors
 
     ResolverInfoType type (void) const { return _type; }
-    ResItem_constPtr affected (void) const { return _affected; }
+    PoolItem *affected (void) const { return _affected; }
     int priority (void) const { return _priority; }
 
     int error (void) const { return _error; }
@@ -142,7 +129,7 @@ class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
     bool merge (ResolverInfo_Ptr to_be_merged);
     virtual ResolverInfo_Ptr copy (void) const;
 
-    bool isAbout (ResItem_constPtr resItem) const;
+    bool isAbout (PoolItem & item) const;
 };
 
 ///////////////////////////////////////////////////////////////////

@@ -31,10 +31,9 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 
-#include "zypp/solver/detail/ResolverQueuePtr.h"
-#include "zypp/solver/detail/ResolverContextPtr.h"
+#include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/QueueItem.h"
-#include "zypp/solver/temporary/ResItemPtr.h"
+
 #include "zypp/Capability.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -47,61 +46,56 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      typedef std::list <ResolverQueue_Ptr> ResolverQueueList;
+typedef std::list <ResolverQueue_Ptr> ResolverQueueList;
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : ResolverQueue
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : ResolverQueue
 
-      class ResolverQueue : public base::ReferenceCounted, private base::NonCopyable {
+class ResolverQueue : public base::ReferenceCounted, private base::NonCopyable {
 
-          
+  private:
 
-        private:
+    ResolverContext_Ptr _context;
+    QueueItemList _items;
 
-          ResolverContext_Ptr _context;
-          QueueItemList _items;
+  public:
+    ResolverQueue (ResolverContext_Ptr context = NULL);
+    virtual ~ResolverQueue();
 
-        public:
-          ResolverQueue (ResolverContext_Ptr context = NULL);
-          virtual ~ResolverQueue();
+    // ---------------------------------- I/O
 
-          // ---------------------------------- I/O
+    friend std::ostream& operator<<(std::ostream&, const ResolverQueue & context);
 
-          static std::string toString (const ResolverQueue & context);
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
-          friend std::ostream& operator<<(std::ostream&, const ResolverQueue & context);
-          std::string asString (void ) const;
+    // ---------------------------------- accessors
 
-          // ---------------------------------- accessors
+    ResolverContext_Ptr context (void) const { return _context; }
+    QueueItemList items(void) const { return _items; }
 
-          ResolverContext_Ptr context (void) const { return _context; }
-          QueueItemList items(void) const { return _items; }
-
-          // ---------------------------------- methods
+    // ---------------------------------- methods
 
 
-          void addResItemToInstall (ResItem_constPtr resItem);
-          void addResItemToEstablish (ResItem_constPtr resItem);
-          void addResItemToRemove (ResItem_constPtr resItem, bool remove_only_mode);
-          void addResItemToVerify (ResItem_constPtr resItem);
-          void addExtraDependency (const Capability & dep);
-          void addExtraConflict (const Capability & dep);
-          void addItem (QueueItem_Ptr item);
+    void addPoolItemToInstall (PoolItem *item);
+    void addPoolItemToEstablish (PoolItem *item);
+    void addPoolItemToRemove (PoolItem *item, bool remove_only_mode);
+    void addPoolItemToVerify (PoolItem *item);
+    void addExtraDependency (const Capability & cap);
+    void addExtraConflict (const Capability & cap);
+    void addItem (QueueItem_Ptr item);
 
-          bool isEmpty () const { return _items.empty(); }
-          bool isInvalid ();
-          bool containsOnlyBranches ();
+    bool isEmpty () const { return _items.empty(); }
+    bool isInvalid ();
+    bool containsOnlyBranches ();
 
-          bool processOnce ();
-          void process ();
+    bool processOnce ();
+    void process ();
 
-          void splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueList & deferred_queues);
+    void splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueList & deferred_queues);
 
-          void spew ();
+    void spew ();
 
-      };
-      ///////////////////////////////////////////////////////////////////
+};
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

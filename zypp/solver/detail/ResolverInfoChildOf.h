@@ -22,7 +22,7 @@
 #ifndef ZYPP_SOLVER_DETAIL_RESOLVERINFOCHILDOF_H
 #define ZYPP_SOLVER_DETAIL_RESOLVERINFOCHILDOF_H
 
-#include "zypp/solver/detail/ResolverInfoChildOfPtr.h"
+#include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/ResolverInfoContainer.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -34,37 +34,32 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
-      //////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : ResolverInfoChildOf
-      
-      class ResolverInfoChildOf : public ResolverInfoContainer {
-      
-          
-      
-        private:
-      
-        public:
-      
-          ResolverInfoChildOf (ResItem_constPtr resItem, ResItem_constPtr dependency);
-          virtual ~ResolverInfoChildOf();
-      
-          // ---------------------------------- I/O
-      
-          static std::string toString (const ResolverInfoChildOf & context);
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
-          friend std::ostream& operator<<(std::ostream&, const ResolverInfoChildOf & context);
-          std::string asString (void ) const;
-      
-          // ---------------------------------- accessors
-      
-          // ---------------------------------- methods
-      
-          virtual ResolverInfo_Ptr copy (void) const;
-      };
-        
-      ///////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : ResolverInfoChildOf
+
+class ResolverInfoChildOf : public ResolverInfoContainer {
+
+  private:
+
+  public:
+
+    ResolverInfoChildOf (PoolItem *item, PoolItem *dependency);
+    virtual ~ResolverInfoChildOf();
+
+    // ---------------------------------- I/O
+
+    friend std::ostream& operator<<(std::ostream&, const ResolverInfoChildOf & context);
+
+    // ---------------------------------- accessors
+
+    // ---------------------------------- methods
+
+    virtual ResolverInfo_Ptr copy (void) const;
+};
+  
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

@@ -22,16 +22,15 @@
 
 #include <values.h>
 
-#include "zypp/solver/temporary/MultiWorld.h"
-#include "zypp/solver/temporary/World.h"
-
-#include "zypp/base/String.h"
-#include "zypp/solver/detail/ResolverContext.h"
-#include "zypp/solver/detail/ResolverInfoMisc.h"
 #include "zypp/CapSet.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
+
+#include "zypp/base/String.h"
+
+#include "zypp/solver/detail/Ptr.h"
+#include "zypp/solver/detail/ResolverContext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -47,121 +46,29 @@ using namespace std;
 
 IMPL_PTR_TYPE(ResolverContext);
 
-//---------------------------------------------------------------------------
-
-string
-ResolverContext::toString (const ResItemStatus & status)
-{
-    string ret;
-    switch (status) {
-	// Translator: status of a package,patch,...	
-	case RESOLVABLE_STATUS_UNKNOWN:				ret = _("unknown"); break;
-	// Translator: status of a package,patch,...		    
-	case RESOLVABLE_STATUS_INSTALLED:			ret = _("installed"); break;
-	// Translator: status of a package,patch,...		    
-	case RESOLVABLE_STATUS_UNNEEDED:			ret = _("unneeded"); break;
-	// Translator: status of a package,patch,...		    
-	case RESOLVABLE_STATUS_SATISFIED:			ret = _("satisfied"); break;
-	// Translator: status of a package,patch,...		    
-	case RESOLVABLE_STATUS_INCOMPLETE:			ret = _("incomplete"); break;
-	// Translator: status of a package,patch,...		    
-	case RESOLVABLE_STATUS_UNINSTALLED:			ret = _("uninstalled"); break;
-	// Translator: status of a package,patch,...		    
-	case RESOLVABLE_STATUS_TO_BE_INSTALLED:			ret = _("to be installed"); break;
-	// Translator: status of a package,patch,...		    
-	case RESOLVABLE_STATUS_TO_BE_INSTALLED_SOFT:		ret = _("to be installed (soft)"); break;
-	// Translator: status of a package,patch,...		    
-	case RESOLVABLE_STATUS_TO_BE_UNINSTALLED:		ret = _("to be uninstalled"); break;
-	// Translator: status of a package,patch,...		    
-	case RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE:ret = _("to be uninstalled due to obsolete"); break;
-	// Translator: status of a package,patch,...		    
-	case RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK:	ret = _("to be uninstalled due to unlink"); break;
-	default:							ret = "Huh ?"; break;
-    }
-
-    return ret;
-}
-
-//---------------------------------------------------------------------------
-
-string
-ResolverContext::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-ResolverContext::toString ( const ResolverContext & context )
-{
-    string ret;
-    if (context._parent != NULL) {
-	ret += "Parent: [";
-	ret += str::form("<@%p> ", (const void *)(context._parent.get()));
-	ret += context._parent->asString();
-	ret += "],\n\t";
-    }
-    for (StatusTable::const_iterator iter = context._status.begin(); iter != context._status.end(); iter++) {
-	ResItem_constPtr res_item = iter->first;
-	ResItemStatus status = iter->second;
-
-	ret += res_item->asString();
-	ret += " ";
-	ret += toString(status);
-	ret += "\n\t";
-    }
-
-    ret += str::form ("Download Size: %lld",  context._download_size);
-    ret += str::form (", Install Size: %lld", context._install_size);
-    ret += str::form (", Total Priority: %d", context._total_priority);
-    ret += str::form (", Min Priority: %d", context._min_priority);
-    ret += str::form (", Max Priority: %d", context._max_priority);
-    ret += str::form (", Other Penalties: %d", context._other_penalties);
-    if (context._current_channel != 0) {
-	ret += ", Current Channel";
-	ret += context._current_channel->asString();
-    }
-    if (context._verifying) ret += ", Verifying";
-    if (context._invalid) ret += ", Invalid";
-
-    return ret;
-}
-
-
-ostream &
-ResolverContext::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
 ostream&
-operator<<( ostream& os, const ResolverContext & ResolverContext)
+operator<<( ostream& os, const ResolverContext & context)
 {
-    return os << ResolverContext.asString();
+    for (ResolverContext::Context::const_iterator iter = context._context.begin(); iter != context._context.end(); ++iter) {
+	os << *iter << endl;
+    }
+    return os;
 }
 
 //---------------------------------------------------------------------------
 
 ResolverContext::ResolverContext (ResolverContext_Ptr parent)
     : _parent (parent)
-    , _refs (0)
-    , _world (NULL)
-    , _last_checked_resItem (NULL)
-    , _last_checked_status (RESOLVABLE_STATUS_UNKNOWN)
     , _download_size (0)
     , _install_size (0)
     , _total_priority (0)
     , _min_priority (0)
     , _max_priority (0)
     , _other_penalties (0)
-    , _current_channel (NULL)
     , _verifying (false)
     , _invalid (false)
 {
     if (parent != NULL) {
-	_world           = parent->_world;
 	_download_size   = parent->_download_size;
 	_install_size    = parent->_install_size;
 	_total_priority  = parent->_total_priority;
@@ -180,80 +87,19 @@ ResolverContext::~ResolverContext()
 }
 
 //---------------------------------------------------------------------------
-
-World_Ptr
-ResolverContext::world (void) const
-{
-    if (_world == NULL) {
-	return World::globalWorld();
-    }
-    return _world;
-}
-
-
-//---------------------------------------------------------------------------
-
-// set/get status
-
-
-void
-ResolverContext::setStatus (ResItem_constPtr resItem, ResItemStatus status)
-{
-    if (_invalid) return;
-
-    ResItemStatus old_status = getStatus (resItem);
-    // ERR << "ResolverContext::setStatus " << resItem->asString() << ": " << toString(old_status) << " -> " << toString(status) << endl;
-    if (status != old_status) {
-	_status[resItem] = status;
-    }
-
-    // Update our cache if we changed the status of the last checked resItem.
-
-    if (_last_checked_resItem == resItem)
-	_last_checked_status = status;
-}
-
-
-ResItemStatus
-ResolverContext::getStatus (ResItem_constPtr resItem)
-{
-    ResItemStatus status = RESOLVABLE_STATUS_UNKNOWN;
-
-    // We often end up getting the status of the same resItem several times
-    // in a row.  By caching the status of the last checked resItem, we can
-    // in practice eliminate the need for any hash table lookups in about
-    // 50% of our calls to get_status.
-
-    if (resItem == _last_checked_resItem)
-    {
-	return _last_checked_status;
-    }
-
-    ResolverContext_Ptr context = this;
-
-    while (status == RESOLVABLE_STATUS_UNKNOWN
-	   && context != NULL) {
-	StatusTable::const_iterator pos = context->_status.find (resItem);
-	if (pos != context->_status.end()) {
-	    status = (*pos).second;
-	}
-	context = context->_parent;
-    }
-
-    if (status == RESOLVABLE_STATUS_UNKNOWN) {
-	status = resItem->isInstalled() ? RESOLVABLE_STATUS_INSTALLED : RESOLVABLE_STATUS_UNINSTALLED;
-    }
-
-    _last_checked_resItem = resItem;
-    _last_checked_status = status;
-
-    return status;
-}
-
-
-//---------------------------------------------------------------------------
 // status change
 
+void
+ResolverContext::setStatus (PoolItem & item, ResStatus & status)
+{
+#if 0
+	item.setStatus (status);
+#endif
+	_context.insert (&item);
+}
+
+
+#if 0
 // change state to TO_BE_INSTALLED (does not upgrade)
 
 bool
@@ -1407,7 +1253,7 @@ ResolverContext::compare (ResolverContext_Ptr context)
 
     return 0;
 }
-
+#endif
 ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

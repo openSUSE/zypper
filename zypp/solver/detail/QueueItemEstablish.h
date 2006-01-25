@@ -26,10 +26,8 @@
 #include <list>
 #include <string>
 
+#include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/QueueItem.h"
-#include "zypp/solver/detail/QueueItemEstablishPtr.h"
-#include "zypp/solver/temporary/ResItem.h"
-#include "zypp/solver/temporary/Channel.h"
 #include "zypp/CapSet.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -49,7 +47,7 @@ namespace zypp
 class QueueItemEstablish : public QueueItem {
 
   private:
-    ResItem_constPtr _resItem;
+    PoolItem *_item;
     int _channel_priority;
     int _other_penalty;
 
@@ -57,25 +55,20 @@ class QueueItemEstablish : public QueueItem {
 
   public:
 
-    QueueItemEstablish (World_Ptr world, ResItem_constPtr resItem);
+    QueueItemEstablish (const ResPool *pool, PoolItem *item);
     virtual ~QueueItemEstablish();
 
     // ---------------------------------- I/O
 
-    static std::string toString (const QueueItemEstablish & item);
-
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-
     friend std::ostream& operator<<(std::ostream&, const QueueItemEstablish & item);
-
-    std::string asString (void ) const;
 
     // ---------------------------------- accessors
 
-    ResItem_constPtr resItem (void) const { return _resItem; }
+    PoolItem *item (void) const { return _item; }
 
-    int channelPriority (void) const { return _channel_priority; }
-    void setChannelPriority (int channel_priority) { _channel_priority = channel_priority; }
+#warning not implemented
+//    int channelPriority (void) const { return _channel_priority; }
+//    void setChannelPriority (int channel_priority) { _channel_priority = channel_priority; }
 
     int otherPenalty (void) { return _other_penalty; }
     void setOtherPenalty (int other_penalty) { _other_penalty = other_penalty; }

@@ -26,10 +26,8 @@
 #include <list>
 #include <string>
 
+#include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/QueueItem.h"
-#include "zypp/solver/detail/QueueItemInstallPtr.h"
-#include "zypp/solver/temporary/ResItem.h"
-#include "zypp/solver/temporary/Channel.h"
 #include "zypp/CapSet.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -50,10 +48,10 @@ class QueueItemInstall : public QueueItem {
 
 
   private:
-    ResItem_constPtr _resItem;
-    ResItem_constPtr _upgrades;
+    PoolItem *_item;					// the item to-be-installed
+    PoolItem *_upgrades;				// the item this install upgrades (if any)
     CapSet _deps_satisfied_by_this_install;
-    CResItemList _needed_by;
+    CPoolItemList _needed_by;
     int _channel_priority;
     int _other_penalty;
 
@@ -61,25 +59,19 @@ class QueueItemInstall : public QueueItem {
 
   public:
 
-    QueueItemInstall (World_Ptr world, ResItem_constPtr resItem);
+    QueueItemInstall (const ResPool *pool, PoolItem *item);
     virtual ~QueueItemInstall();
 
     // ---------------------------------- I/O
 
-    static std::string toString (const QueueItemInstall & item);
-
-    virtual std::ostream & dumpOn(std::ostream & str ) const;
-
     friend std::ostream& operator<<(std::ostream&, const QueueItemInstall & item);
-
-    std::string asString (void ) const;
 
     // ---------------------------------- accessors
 
-    ResItem_constPtr resItem (void) const { return _resItem; }
+    PoolItem *item(void) const { return _item; }
 
-    ResItem_constPtr upgrades (void) const { return _upgrades; }
-    void setUpgrades (ResItem_constPtr upgrades) { _upgrades = upgrades; }
+    PoolItem *upgrades (void) const { return _upgrades; }
+    void setUpgrades (PoolItem *upgrades) { _upgrades = upgrades; }
 
     int channelPriority (void) const { return _channel_priority; }
     void setChannelPriority (int channel_priority) { _channel_priority = channel_priority; }
@@ -98,8 +90,8 @@ class QueueItemInstall : public QueueItem {
     virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
     virtual bool isSatisfied (ResolverContext_Ptr context) const;
 
-    void addDependency (const Capability & dep);
-    void addNeededBy (const ResItem_constPtr resItem);
+    void addDependency (const Capability & capability);
+    void addNeededBy (const PoolItem *item);
 
 };
 

@@ -27,9 +27,6 @@
 #include <string>
 
 #include "zypp/solver/detail/QueueItem.h"
-#include "zypp/solver/detail/QueueItemUninstallPtr.h"
-#include "zypp/solver/temporary/ResItem.h"
-#include "zypp/solver/temporary/Channel.h"
 #include "zypp/Capability.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -42,11 +39,14 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : QueueItemUninstall
+DEFINE_PTR_TYPE(QueueItemUninstall);
 
-      class QueueItemUninstall : public QueueItem {
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : QueueItemUninstall
+
+class QueueItemUninstall : public QueueItem {
+
 	public:
 	  typedef enum {
 	    CONFLICT,				// conflicts [dep]
@@ -60,10 +60,10 @@ namespace zypp
 
 
 	private:
-	  ResItem_constPtr _resItem;
+	  PoolItem *_item;			// the item to-be-uninstalled
 	  UninstallReason _reason;
-	  Capability _dep_leading_to_uninstall;
-	  ResItem_constPtr _upgraded_to;
+	  Capability _cap_leading_to_uninstall;
+	  PoolItem *_upgraded_to;		// if the uninstall is actually an upgrade
 
 	  bool _explicitly_requested;
 	  bool _remove_only;
@@ -73,28 +73,22 @@ namespace zypp
 
 	public:
 
-	  QueueItemUninstall (World_Ptr world, ResItem_constPtr resItem, UninstallReason reason);
+	  QueueItemUninstall (const ResPool *pool, PoolItem *item, UninstallReason reason);
 	  virtual ~QueueItemUninstall();
 
 	  // ---------------------------------- I/O
 
-	  static std::string toString (const QueueItemUninstall & item);
-
-	  virtual std::ostream & dumpOn(std::ostream & str ) const;
-
 	  friend std::ostream& operator<<(std::ostream&, const QueueItemUninstall & item);
-
-	  std::string asString (void ) const;
 
 	  // ---------------------------------- accessors
 
-	  UninstallReason reason (void) const { return _reason; }
-	  void setDependency (const Capability & dep) { _dep_leading_to_uninstall = dep; }
-	  void setExplicitlyRequested (void) { _explicitly_requested = true; }
-	  void setRemoveOnly (void) { _remove_only = true; }
-	  void setUpgradedTo (ResItem_constPtr resItem) { _upgraded_to = resItem; }
-	  void setDueToConflict (void) { _due_to_conflict = true; }
-	  void setDueToObsolete (void) { _due_to_obsolete = true; }
+	  UninstallReason reason (void) const		{ return _reason; }
+	  void setDependency (const Capability & cap)	{ _cap_leading_to_uninstall = cap; }
+	  void setExplicitlyRequested (void)		{ _explicitly_requested = true; }
+	  void setRemoveOnly (void)			{ _remove_only = true; }
+	  void setUpgradedTo (PoolItem *item)		{ _upgraded_to = item; }
+	  void setDueToConflict (void)			{ _due_to_conflict = true; }
+	  void setDueToObsolete (void)			{ _due_to_obsolete = true; }
 	  void setUnlink (void);
 
 	  // ---------------------------------- methods
@@ -105,9 +99,9 @@ namespace zypp
 	  virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
 	  virtual bool isSatisfied (ResolverContext_Ptr context) const { return false; }
 
-      };
+};
 
-      ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

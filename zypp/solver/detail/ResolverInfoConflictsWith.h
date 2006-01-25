@@ -34,38 +34,33 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : ResolverInfoConflictsWith
-      
-      class ResolverInfoConflictsWith : public ResolverInfoContainer {
-      
-          
-      
-        private:
-      
-        public:
-      
-          ResolverInfoConflictsWith (ResItem_constPtr resItem, ResItem_constPtr with);
-          virtual ~ResolverInfoConflictsWith();
-      
-          // ---------------------------------- I/O
-      
-          static std::string toString (const ResolverInfoConflictsWith & context);
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
-          friend std::ostream& operator<<(std::ostream&, const ResolverInfoConflictsWith & context);
-          std::string asString (void ) const;
-      
-          // ---------------------------------- accessors
-      
-      
-          // ---------------------------------- methods
-      
-          virtual ResolverInfo_Ptr copy (void) const;
-      };
 
-      ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : ResolverInfoConflictsWith
+
+class ResolverInfoConflictsWith : public ResolverInfoContainer {
+
+  private:
+
+  public:
+
+    ResolverInfoConflictsWith (PoolItem *resItem, PoolItem *with);
+    virtual ~ResolverInfoConflictsWith();
+
+    // ---------------------------------- I/O
+
+    friend std::ostream& operator<<(std::ostream&, const ResolverInfoConflictsWith & context);
+
+    // ---------------------------------- accessors
+
+
+    // ---------------------------------- methods
+
+    virtual ResolverInfo_Ptr copy (void) const;
+};
+
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

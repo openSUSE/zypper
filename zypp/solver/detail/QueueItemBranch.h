@@ -26,10 +26,8 @@
 #include <list>
 #include <string>
 
+#include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/QueueItem.h"
-#include "zypp/solver/detail/QueueItemBranchPtr.h"
-#include "zypp/solver/temporary/ResItem.h"
-#include "zypp/solver/temporary/Channel.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -41,54 +39,47 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : QueueItemBranch
+///////////////////////////////////////////////////////////////////
+//
+//	CLASS NAME : QueueItemBranch
 
-      class QueueItemBranch : public QueueItem {
+class QueueItemBranch : public QueueItem {
 
 
-        private:
-          std::string _label;
-          QueueItemList _possible_items;
+  private:
+    std::string _label;
+    QueueItemList _possible_items;
 
-        public:
+  public:
 
-          QueueItemBranch (World_Ptr world);
-          virtual ~QueueItemBranch();
+    QueueItemBranch (const ResPool *pool);
+    virtual ~QueueItemBranch();
 
-          // ---------------------------------- I/O
+    // ---------------------------------- I/O
 
-          static std::string toString (const QueueItemBranch & item);
+    friend std::ostream& operator<<(std::ostream&, const QueueItemBranch & item);
+    // ---------------------------------- accessors
 
-          virtual std::ostream & dumpOn(std::ostream & str ) const;
+    QueueItemList possibleItems (void) const { return _possible_items; }
 
-          friend std::ostream& operator<<(std::ostream&, const QueueItemBranch & item);
+    const std::string & label (void) const { return _label; }
+    void setLabel (const std::string & label) { _label = label; }
 
-          std::string asString (void ) const;
+    bool isEmpty (void) const { return _possible_items.empty(); }
 
-          // ---------------------------------- accessors
+    // ---------------------------------- methods
 
-          QueueItemList possibleItems (void) const { return _possible_items; }
+    virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
+    virtual QueueItem_Ptr copy (void) const;
+    virtual int cmp (QueueItem_constPtr item) const;
+    virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
+    virtual bool isSatisfied (ResolverContext_Ptr context) const { return false; }
 
-          const std::string & label (void) const { return _label; }
-          void setLabel (const std::string & label) { _label = label; }
+    void addItem (QueueItem_Ptr subitem);
+    bool contains (QueueItem_Ptr possible_subbranch);
+};
 
-          bool isEmpty (void) const { return _possible_items.empty(); }
-
-          // ---------------------------------- methods
-
-          virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
-          virtual QueueItem_Ptr copy (void) const;
-          virtual int cmp (QueueItem_constPtr item) const;
-          virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
-          virtual bool isSatisfied (ResolverContext_Ptr context) const { return false; }
-
-          void addItem (QueueItem_Ptr subitem);
-          bool contains (QueueItem_Ptr possible_subbranch);
-      };
-
-      ///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

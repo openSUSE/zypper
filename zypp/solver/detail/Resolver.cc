@@ -19,14 +19,7 @@
  * 02111-1307, USA.
  */
 
-#include "zypp/solver/temporary/ResItem.h"
-#include "zypp/solver/temporary/World.h"
-#include "zypp/solver/temporary/StoreWorld.h"
-#include "zypp/solver/temporary/MultiWorld.h"
-
 #include "zypp/solver/detail/Resolver.h"
-#include "zypp/solver/detail/ResolverContext.h"
-#include "zypp/solver/detail/ResolverQueue.h"
 #include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
@@ -45,39 +38,16 @@ IMPL_PTR_TYPE(Resolver);
 
 //---------------------------------------------------------------------------
 
-string
-Resolver::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-Resolver::toString ( const Resolver & resolver )
-{
-    return "<resolver/>";
-}
-
-
-ostream &
-Resolver::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
 ostream&
 operator<<( ostream& os, const Resolver & resolver)
 {
-    return os << resolver.asString();
+    return os << "<resolver/>";
 }
 
 //---------------------------------------------------------------------------
 
-Resolver::Resolver (World_Ptr world)
-    : _current_channel (NULL)
-    , _world (world)
+Resolver::Resolver (const ResPool *pool)
+    , _pool (pool)
     , _timeout_seconds (0)
     , _verifying (false)
     , _valid_solution_count (0)
@@ -93,13 +63,13 @@ Resolver::~Resolver()
 
 //---------------------------------------------------------------------------
 
-World_Ptr
-Resolver::world (void) const
+const ResPool *
+Resolver::pool (void) const
 {
-    if (_world == NULL)
-	return World::globalWorld();
+//    if (_pool == NULL)
+//	return World::globalWorld();
 
-    return _world;
+    return _pool;
 }
 
 void
@@ -110,10 +80,10 @@ Resolver::reset (void)
 
     _initial_items.clear();
 
-    _resItems_to_install.clear();
-    _resItems_to_remove.clear();
-    _resItems_to_verify.clear();
-    _resItems_to_establish.clear();
+    _items_to_install.clear();
+    _items_to_remove.clear();
+    _items_to_verify.clear();
+    _items_to_establish.clear();
 
     _extra_deps.clear();
     _extra_conflicts.clear();
@@ -141,58 +111,58 @@ Resolver::addSubscribedChannel (Channel_constPtr channel)
 
 
 void
-Resolver::addResItemToInstall (ResItem_constPtr resItem)
+Resolver::addResItemToInstall (PoolItem & item)
 {
-    _resItems_to_install.push_front (resItem);
+    _items_to_install.push_front (item);
 }
 
 
 void
-Resolver::addResItemsToInstallFromList (CResItemList & rl)
+Resolver::addPoolItemsToInstallFromList (CPoolItemList & rl)
 {
-    for (CResItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
-	addResItemToInstall (*iter);
+    for (CPoolItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
+	addPoolItemToInstall (*iter);
     }
 }
 
 
 void
-Resolver::addResItemToRemove (ResItem_constPtr resItem)
+Resolver::addPoolItemToRemove (PoolItem & item)
 {
-    _resItems_to_remove.push_front (resItem);
+    _items_to_remove.push_front (item);
 }
 
 
 void
-Resolver::addResItemsToRemoveFromList (CResItemList & rl)
+Resolver::addPoolItemsToRemoveFromList (CPoolItemList & rl)
 {
-    for (CResItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
-	addResItemToRemove (*iter);
+    for (CPoolItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
+	addPoolItemToRemove (*iter);
     }
 }
 
 
 void
-Resolver::addResItemToEstablish (ResItem_constPtr resItem)
+Resolver::addPoolItemToEstablish (PoolItem & item)
 {
-    _resItems_to_establish.push_front (resItem);
+    _items_to_establish.push_front (item);
 }
 
 
 void
-Resolver::addResItemsToEstablishFromList (CResItemList & rl)
+Resolver::addPoolItemsToEstablishFromList (CPoolItemList & rl)
 {
-    for (CResItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
-	addResItemToEstablish (*iter);
+    for (CPoolItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
+	addPoolItemToEstablish (*iter);
     }
 }
 
 
 void
-Resolver::addResItemToVerify (ResItem_constPtr resItem)
+Resolver::addPoolItemToVerify (PoolItem & item)
 {
-    _resItems_to_verify.push_front (resItem);
-    _resItems_to_verify.sort ();			//(GCompareFunc) rc_resItem_compare_name);
+    _items_to_verify.push_front (item);
+    _items_to_verify.sort ();			//(GCompareFunc) rc_item_compare_name);
 }
 
 
@@ -213,11 +183,11 @@ Resolver::addExtraConflict (const Capability & dependency)
 //---------------------------------------------------------------------------
 
 static bool
-verify_system_cb (ResItem_constPtr resItem, void *data)
+verify_system_cb (PoolItem & item, void *data)
 {
     Resolver *resolver  = (Resolver *)data;
 
-    resolver->addResItemToVerify (resItem);
+    resolver->addPoolItemToVerify (item);
 
     return true;
 }
@@ -226,7 +196,7 @@ verify_system_cb (ResItem_constPtr resItem, void *data)
 void
 Resolver::verifySystem (void)
 {
-    _XXX("RC_SPEW") <<  "Resolver::verifySystem()" << endl;
+    _XXX("Resolver") <<  "Resolver::verifySystem()" << endl;
     world()->foreachResItem (new Channel(CHANNEL_TYPE_SYSTEM), verify_system_cb, this);
 
     _verifying = true;
@@ -239,11 +209,11 @@ Resolver::verifySystem (void)
       all but one of the duplicates.
     */
 
-    for (CResItemList::const_iterator i0 = _resItems_to_verify.begin(); i0 != _resItems_to_verify.end();) {
-	CResItemList::const_iterator i1 = i0;
+    for (CPoolItemList::const_iterator i0 = _items_to_verify.begin(); i0 != _items_to_verify.end();) {
+	CPoolItemList::const_iterator i1 = i0;
 	i1++;
-	CResItemList::const_iterator i2 = i1;
-	for (; i1 != _resItems_to_verify.end()&& ! (*i0)->compareName (*i1); i1++) {
+	CPoolItemList::const_iterator i2 = i1;
+	for (; i1 != _items_to_verify.end()&& ! (*i0)->compareName (*i1); i1++) {
 	    //empty
 	}
 
@@ -252,11 +222,11 @@ Resolver::verifySystem (void)
 
 	    branch_item = new QueueItemBranch(world());
 
-	    for (CResItemList::const_iterator i = i0; i != i1; i++) {
+	    for (CPoolItemList::const_iterator i = i0; i != i1; i++) {
 
 		QueueItemGroup_Ptr grp_item = new QueueItemGroup(world());
 
-		for (CResItemList::const_iterator j = i0; j != i1; j++) {
+		for (CPoolItemList::const_iterator j = i0; j != i1; j++) {
 		    Package_constPtr dup_pkg = *j;
 		    QueueItemUninstall_Ptr uninstall_item;
 
@@ -289,13 +259,13 @@ Resolver::verifySystem (void)
 // establish state
 
 static bool
-trial_establish_cb (ResItem_constPtr resItem, void *user_data)
+trial_establish_cb (PoolItem & item, void *user_data)
 {
     Resolver *resolver = (Resolver *)user_data;
 
-    resolver->addResItemToEstablish (resItem);
+    resolver->addPoolItemToEstablish (item);
 
-    printf (">!> Establishing %s\n", resItem->asString().c_str());
+    printf (">!> Establishing %s\n", item->asString().c_str());
 
     return false;
 }
@@ -304,7 +274,7 @@ trial_establish_cb (ResItem_constPtr resItem, void *user_data)
 void
 Resolver::establishState (ResolverContext_Ptr context)
 {
-    _DBG("RC_SPEW") << "Resolver::establishState ()" << endl;
+    _DBG("Resolver") << "Resolver::establishState ()" << endl;
     typedef list<Resolvable::Kind> KindList; 
     static KindList ordered;
     if (ordered.empty()) {
@@ -319,7 +289,7 @@ Resolver::establishState (ResolverContext_Ptr context)
     for (KindList::const_iterator iter = ordered.begin(); iter != ordered.end(); iter++) {
 	const Resolvable::Kind kind = *iter;
 
-	_DBG("RC_SPEW") << "establishing state for kind " << kind.asString() << endl;
+	_DBG("Resolver") << "establishing state for kind " << kind.asString() << endl;
 
 	world()->foreachResItemByKind (kind, trial_establish_cb, this);
 
@@ -341,15 +311,17 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 {
 
     time_t t_start, t_now;
-    bool have_local_resItems = false;
+    bool have_local_items = false;
 
-    _XXX("RC_SPEW") << "Resolver::resolveDependencies()" << endl;
+    _XXX("Resolver") << "Resolver::resolveDependencies()" << endl;
 
+#warning local items disabled
+#if 0
     /* Walk through are list of to-be-installed packages and see if any of them are local. */
 
-    for (CResItemList::const_iterator iter = _resItems_to_install.begin(); iter != _resItems_to_install.end(); iter++) {
+    for (CPoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
 	if ((*iter)->local()) {
-	    have_local_resItems = true;
+	    have_local_items = true;
 	    break;
 	}
     }
@@ -360,7 +332,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
     Channel_Ptr local_channel = NULL;
 
-    if (have_local_resItems) {
+    if (have_local_items) {
 	local_multiworld = new MultiWorld();
 	local_world = new StoreWorld();
 
@@ -373,6 +345,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
 	the_world = local_multiworld;
     }
+#endif
 
     // create initial_queue
 
@@ -381,8 +354,6 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     /* Stick the current/subscribed channel and world info into the context */
 
     initial_queue->context()->setWorld(the_world);
-
-    initial_queue->context()->setCurrentChannel (_current_channel);
 
     /* If this is a verify, we do a "soft resolution" */
 
@@ -395,30 +366,30 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     }
     _initial_items.clear();
 
-    for (CResItemList::const_iterator iter = _resItems_to_install.begin(); iter != _resItems_to_install.end(); iter++) {
-	ResItem_constPtr r = *iter;
+    for (CPoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
+	PoolItem & r = *iter;
 
 	/* Add local packages to our dummy channel. */
 	if (r->local()) {
 	    assert (local_channel != NULL);
 	    ResItem_Ptr r1 = const_pointer_cast<ResItem>(r);
 	    r1->setChannel (local_channel);
-	    local_world->addResItem (r);
+	    local_world->addPoolItem (r);
 	}
 
-	initial_queue->addResItemToInstall (r);
+	initial_queue->addPoolItemToInstall (r);
     }
 
-    for (CResItemList::const_iterator iter = _resItems_to_remove.begin(); iter != _resItems_to_remove.end(); iter++) {
-	initial_queue->addResItemToRemove (*iter, true /* remove-only mode */);
+    for (CPoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
+	initial_queue->addPoolItemToRemove (*iter, true /* remove-only mode */);
     }
 
-    for (CResItemList::const_iterator iter = _resItems_to_verify.begin(); iter != _resItems_to_verify.end(); iter++) {
-	initial_queue->addResItemToVerify (*iter);
+    for (CPoolItemList::const_iterator iter = _items_to_verify.begin(); iter != _items_to_verify.end(); iter++) {
+	initial_queue->addPoolItemToVerify (*iter);
     }
 
-    for (CResItemList::const_iterator iter = _resItems_to_establish.begin(); iter != _resItems_to_establish.end(); iter++) {
-	initial_queue->addResItemToEstablish (*iter);
+    for (CPoolItemList::const_iterator iter = _items_to_establish.begin(); iter != _items_to_establish.end(); iter++) {
+	initial_queue->addPoolItemToEstablish (*iter);
     }
 
     for (CapSet::const_iterator iter = _extra_deps.begin(); iter != _extra_deps.end(); iter++) {
@@ -429,7 +400,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	initial_queue->addExtraConflict (*iter);
     }
 
-    _XXX("RC_SPEW") << "Initial Queue: [" << initial_queue->asString() << "]" << endl;
+    _XXX("Resolver") << "Initial Queue: [" << initial_queue->asString() << "]" << endl;
 
     _best_context = NULL;
 
@@ -445,7 +416,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
     while (!_pending_queues.empty()) {
 
-	_XXX("RC_SPEW") << "Pend " << (long) _pending_queues.size()
+	_XXX("Resolver") << "Pend " << (long) _pending_queues.size()
 			      << " / Cmpl " << (long) _complete_queues.size()
 			      << " / Prun " << (long) _pruned_queues.size()
 			      << " / Defr " << (long) _deferred_queues.size()
@@ -467,12 +438,12 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
 	if (queue->isInvalid ()) {
 
-	    _XXX("RC_SPEW") << "Invalid Queue\n" << endl;;
+	    _XXX("Resolver") << "Invalid Queue\n" << endl;;
 	    _invalid_queues.push_front (queue);
 
 	} else if (queue->isEmpty ()) {
 
-	    _XXX("RC_SPEW") <<"Empty Queue\n" << endl;
+	    _XXX("Resolver") <<"Empty Queue\n" << endl;
 
 	    _complete_queues.push_front (queue);
 
@@ -494,7 +465,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	    /* If we aren't currently as good as our previous best complete solution,
 	       this solution gets pruned. */
 
-	    _XXX("RC_SPEW") << "PRUNED!" << endl;
+	    _XXX("Resolver") << "PRUNED!" << endl;
 
 	    _pruned_queues.push_front(queue);
 
@@ -516,7 +487,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	    _pending_queues.push_front (_deferred_queues.front());
 	}
 	  }
-	_XXX("RC_SPEW") << "Pend " << (long) _pending_queues.size()
+	_XXX("Resolver") << "Pend " << (long) _pending_queues.size()
 			<< " / Cmpl " << (long) _complete_queues.size()
 			<< " / Prun " << (long) _pruned_queues.size()
 			<< " / Defr " << (long) _deferred_queues.size()
