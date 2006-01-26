@@ -26,9 +26,14 @@ namespace zypp
   //
   /** Status bitfield.
    *
-   * \li \c StateField Whether the resolvable is installed
+   * \li \c StateField Whether the resolvable is currently installed
    *        or uninstalled (available).
-   * \li \c FreshenField Freshen status computed by the solver.
+   * \li \c EstablishField Established status computed by the solver as
+   *        unneeded (have freshens but none of them trigger)
+   *	    satisfied (no freshen or at least one triggered freshen and
+   *	    all requires fulfilled)
+   *	    or incomplete (no freshen or at least one triggered freshen and
+   *	    NOT all requires fulfilled)
    * \li \c TransactField Wheter to transact this resolvable
    *        (delete if installed install if uninstalled).
    * \li \c TransactByField Who triggered the transaction. Transaction
@@ -44,8 +49,8 @@ namespace zypp
     typedef char FieldType;
     // Bit Ranges within FieldType defined by 1st bit and size:
     typedef bit::Range<FieldType,0,                    1> StateField;
-    typedef bit::Range<FieldType,StateField::end,      2> FreshenField;
-    typedef bit::Range<FieldType,FreshenField::end,    1> TransactField;
+    typedef bit::Range<FieldType,StateField::end,      2> EstablishField;
+    typedef bit::Range<FieldType,EstablishField::end,  1> TransactField;
     typedef bit::Range<FieldType,TransactField::end,   2> TransactByField;
     typedef bit::Range<FieldType,TransactByField::end, 2> TransactDetailField;
     // enlarge FieldType if more bit's needed. It's not yet
@@ -59,17 +64,17 @@ namespace zypp
         UNINSTALLED = 0,
         INSTALLED   = StateField::minval
       };
-    enum FreshenValue
+    enum EstablishValue
       {
         UNDETERMINED = 0,
-        NO_TRIGGER   = FreshenField::minval,
-        TRIGGER_OK,
-        TRIGGER_FAILED
+        UNNEEDED     = EstablishField::minval,
+        SATISFIED,
+        INCOMPLETE
       };
     enum TransactValue
       {
         KEEP_STATE = 0,
-        TRANSACT = TransactField::minval
+        TRANSACT = TransactField::minval		// change state installed <-> uninstalled
       };
     enum TransactByValue
       {
@@ -96,7 +101,7 @@ namespace zypp
     /** Default ctor. */
     ResStatus();
 
-    /** Ctor seting the initail . */
+    /** Ctor setting the initial . */
     ResStatus( bool isInstalled_r );
 
     /** Dtor. */
@@ -107,8 +112,35 @@ namespace zypp
     bool isInstalled() const
     { return fieldValueIs<StateField>( INSTALLED ); }
 
-    bool transacts()   const
+    bool isToBeInstalled() const
+    { return isUninstalled() && transacts(); }
+
+    bool isUninstalled() const
+    { return fieldValueIs<StateField>( UNINSTALLED ); }
+
+    bool isToBeUninstalled() const
+    { return isInstalled() && transacts(); }
+
+    bool isUnneeded() const
+    { return fieldValueIs<EstablishField>( UNNEEDED ); }
+
+    bool isSatisfied() const
+    { return fieldValueIs<EstablishField>( SATISFIED ); }
+
+    bool isIncomplete() const
+    { return fieldValueIs<EstablishField>( INCOMPLETE ); }
+
+    bool transacts() const
     { return fieldValueIs<TransactField>( TRANSACT ); }
+
+    bool isToBeUninstalledDueToObsolete () const
+    { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_OBSOLETE ); }
+
+    bool isToBeUninstalledDueToUnlink() const
+    { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_UNLINK); }
+
+    bool isToBeInstalledSoft () const
+    { return isToBeInstalled() && fieldValueIs<TransactDetailField> (SOFT_REQUIRES); }
 
   public:
 
@@ -118,6 +150,58 @@ namespace zypp
       return true;
     }
 
+    bool setToBeInstalled ( )
+    {
+      if (isInstalled()) return false;
+      return setTransacts (true);
+    }
+
+    bool setToBeInstalledSoft ( )
+    {
+      if (!setToBeInstalled()) return false;
+      fieldValueAssign<TransactDetailField>(SOFT_REQUIRES);
+      return true;
+    }
+
+    bool setToBeUninstalled ( )
+    {
+      if (isUninstalled()) return false;
+      return setTransacts (true);
+    }
+
+    bool setToBeUninstalledDueToUnlink ( )
+    {
+      if (!setToBeUninstalled()) return false;
+      fieldValueAssign<TransactDetailField>(DUE_TO_UNLINK);
+      return true;
+    }
+
+    bool setToBeUninstalledDueToObsolete ( )
+    {
+      if (!setToBeUninstalled()) return false;
+      fieldValueAssign<TransactDetailField>(DUE_TO_OBSOLETE);
+      return true;
+    }
+
+    // *** These are only for the Resolver ***
+
+    bool setUnneeded ()
+    {
+      fieldValueAssign<EstablishField>(UNNEEDED);
+      return true;
+    }
+
+    bool setSatisfied ()
+    {
+      fieldValueAssign<EstablishField>(SATISFIED);
+      return true;
+    }
+
+    bool setIncomplete ()
+    {
+      fieldValueAssign<EstablishField>(INCOMPLETE);
+      return true;
+    }
 
     // get/set functions, returnig \c true if requested status change
     // was successfull (i.e. leading to the desired transaction).
