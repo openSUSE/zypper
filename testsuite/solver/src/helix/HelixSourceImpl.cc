@@ -28,8 +28,6 @@
 #include "HelixPatternImpl.h"
 #include "HelixProductImpl.h"
 
-#include "zypp/solver/temporary/Channel.h"
-#include "zypp/solver/temporary/extract.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 
@@ -58,8 +56,7 @@ HelixSourceImpl::createDependencies (const HelixParser & parsed)
     deps[Dep::RECOMMENDS] = parsed.recommends;
     deps[Dep::SUGGESTS] = parsed.suggests;
     deps[Dep::FRESHENS] = parsed.freshens;
-#warning enable 'enhances' in zypp/Dependencies
-//    deps.enhances = parsed.enhances;
+    deps[Dep::ENHANCES] = parsed.enhances;
 
     return deps;
 }
@@ -272,12 +269,12 @@ HelixSourceImpl::load (const string & filename)
 	    channel_name = filename.substr (0, colon);
 	    realname = filename.substr (++colon);
 	}
-
+#if 0
 	solver::detail::Channel_Ptr channel = new solver::detail::Channel (channel_name.c_str(),channel_name.c_str(),channel_name.c_str(),channel_name.c_str());
 	channel->setType (solver::detail::CHANNEL_TYPE_HELIX);
 	if (channel_name == "@system")
 	    channel->setSystem (true);
-
-	extractHelixFile (realname, channel, this);
+#endif
+	extractHelixFile (realname, this);
     }
 }

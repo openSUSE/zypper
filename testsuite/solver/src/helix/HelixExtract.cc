@@ -28,8 +28,6 @@
 #include "Buffer.h"
 
 #include "zypp/base/Logger.h"
-#include "zypp/solver/temporary/Channel.h"
-#include "zypp/solver/temporary/XmlNode.h"
 
 using namespace std;
 using namespace zypp;
@@ -37,14 +35,14 @@ using namespace zypp;
 namespace zypp {
 
 int 
-extractHelixBuffer (const char *buf, size_t len, solver::detail::Channel_Ptr channel, HelixSourceImpl *impl)
+extractHelixBuffer (const char *buf, size_t len, HelixSourceImpl *impl)
 {
 //    _DBG("HelixExtract") << "extract_packages_from_helix_buffer(" << buf << "...," << (long)len << ",...)" << endl;
 
     if (buf == NULL || len == 0)
 	return 1;
 
-    HelixParser parser (channel);
+    HelixParser parser;
     parser.parseChunk (buf, len, impl);
     parser.done ();
 
@@ -53,7 +51,7 @@ extractHelixBuffer (const char *buf, size_t len, solver::detail::Channel_Ptr cha
 
 
 int
-extractHelixFile (const std::string & filename, solver::detail::Channel_Ptr channel, HelixSourceImpl *impl)
+extractHelixFile (const std::string & filename, HelixSourceImpl *impl)
 {
     Buffer *buf;
 
@@ -64,7 +62,7 @@ extractHelixFile (const std::string & filename, solver::detail::Channel_Ptr chan
     if (buf == NULL)
 	return -1;
 
-    extractHelixBuffer ((const char *)(buf->data), buf->size, channel, impl);
+    extractHelixBuffer ((const char *)(buf->data), buf->size, impl);
 
     bufferUnmapFile (buf);
 

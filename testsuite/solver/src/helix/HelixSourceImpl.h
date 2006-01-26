@@ -26,7 +26,6 @@
 #include <string>
 
 #include "zypp/source/SourceImpl.h"
-#include "zypp/solver/temporary/Channel.h"
 
 #include "HelixParser.h"
 

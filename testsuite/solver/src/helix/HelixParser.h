@@ -29,9 +29,9 @@
 #include "zypp/CapSet.h"
 #include "zypp/ResStore.h"
 #include "zypp/Dependencies.h"
+#include "zypp/Source.h"
 
-#include "zypp/solver/temporary/Channel.h"
-#include "zypp/solver/temporary/XmlNode.h"
+#include "XmlNode.h"
 
 namespace zypp {
 
@@ -57,7 +57,6 @@ class HelixParser
     typedef enum _HelixParserState HelixParserState;
 
   private:
-    solver::detail::Channel_constPtr _channel;
     bool _processing;
     xmlParserCtxtPtr _xml_context;
     HelixParserState _state;
@@ -102,7 +101,7 @@ class HelixParser
 
   public:
 
-    HelixParser (solver::detail::Channel_constPtr channel);
+    HelixParser ();
     virtual ~HelixParser();
 
     // ---------------------------------- I/O

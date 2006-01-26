@@ -28,9 +28,8 @@
 #define HELIXEXTRACT_H
 
 #include "zypp/Resolvable.h"
+#include "zypp/Source.h"
 #include "zypp/ResStore.h"
-#include "zypp/solver/temporary/XmlNodePtr.h"
-#include "zypp/solver/temporary/ChannelPtr.h"
 
 #include "HelixParser.h"
 
@@ -38,8 +37,8 @@ namespace zypp {
 
 class HelixSourceImpl;
 
-int extractHelixBuffer (const char *data, size_t len, solver::detail::Channel_Ptr channel, HelixSourceImpl *impl);
-int extractHelixFile (const std::string & filename, solver::detail::Channel_Ptr channel, HelixSourceImpl *impl);
+int extractHelixBuffer (const char *data, size_t len, HelixSourceImpl *impl);
+int extractHelixFile (const std::string & filename, HelixSourceImpl *impl);
 
 }
 

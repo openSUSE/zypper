@@ -260,9 +260,8 @@ static xmlSAXHandler sax_handler = {
 
 //---------------------------------------------------------------------------
 
-HelixParser::HelixParser (solver::detail::Channel_constPtr channel)
-    : _channel (channel)
-    , _processing (false)
+HelixParser::HelixParser ()
+    : _processing (false)
     , _xml_context (NULL)
     , _state (PARSER_TOPLEVEL)
     , _stored(true)
@@ -620,9 +619,11 @@ HelixParser::resolvableEnd (const std::string & token)
 	    provides.insert (selfdep);
 	}
 
+#warning Needs to know if a source is actually the target
+#if 0
 	if (_channel->system())
 	    installed = true;
-
+#endif
 	if (_impl) {
 	    _impl->parserCallback (*this);
 	}

@@ -11,6 +11,7 @@ LDADD =	$(noinst_LTLIBRARIES) $(top_srcdir)/zypp/lib@PACKAGE@.la
 
 noinst_HEADERS = \
 	Buffer.h				\
+	XmlNode.h				\
 	HelixExtract.h				\
 	HelixParser.h				\
 	HelixSourceImpl.h			\
@@ -25,6 +26,7 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_helix.la
 
 lib@PACKAGE@_helix_la_SOURCES =			\
 	Buffer.cc				\
+	XmlNode.cc				\
 	HelixExtract.cc				\
 	HelixParser.cc				\
 	HelixSourceImpl.cc			\
