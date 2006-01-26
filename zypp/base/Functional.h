@@ -44,62 +44,130 @@ namespace zypp
      *   std::set<SomeType> c;
      *   Counter<SomeType> counter;
      *   // Invokations of FunctorRef are forwarded to counter:
-     *   std::for_each( c.begin, c.end(), functorRef(counter) );
-     * \endcode
-     *
-     * \note FunctorRef must be able to deduce the signature of \c _Functor::operator().
-     * Per default the tyedefs  \c _Functor::argument_type and \c _Functor::result_type
-     * are expected. They are e.g. provided by deriving your \c _Functor from
-     * \c std::unary_function. In case these typedefs are not provided, you have to
-     * specify them as additional template arguments:
-     *
-     * \code
-     *   // Counts invokations of operator().
-     *     struct Counter
-     *     {
-     *       template<class _Tp>
-     *         void operator()( _Tp )
-     *         { ++_value; }
-     *
-     *       Counter() : _value( 0 ) {}
-     *
-     *       unsigned _value;
-     *     };
-     *
-     *   std::set<SomeType> c;
-     *   Counter counter;
-     *   // Invokations of FunctorRef are forwarded to counter:
      *   std::for_each( c.begin, c.end(),
-     *                  functorRef<Counter, SomeType, void>(counter) );
+     *                  // currently you must specify the
+     *                  // operator() signature:
+     *                  functorRef<void,SomeType>(counter)
+     *                );
      * \endcode
+     *
+     * \note FunctorRef must be able to deduce the signature of
+     * \c _Functor::operator(). This is currently not automated,
+     * so you must specify the operator() signature as template
+     * arguments.
+     *
+     * \note The order is <result_type, arg1_type, ...> (this
+     * differs from std::, where the result comes last).
     */
-    template <class _Functor, class argument_type = typename _Functor::argument_type,
-                              class result_type = typename _Functor::result_type>
-      class FunctorRef : public std::unary_function<argument_type, result_type>
-      {
-      public:
-        FunctorRef( _Functor & f_r )
-        : _f( f_r )
-        {}
 
-        typename FunctorRef::result_type operator()( typename FunctorRef::argument_type a1 ) const
+    /////////////////////////////////////////////////////////////////
+    namespace functor_detail
+    {
+      template <class _Functor, class res_type>
+        struct FunctorRef0
         {
-          return _f( a1 );
-        }
+          FunctorRef0( _Functor & f_r )
+          : _f( f_r )
+          {}
 
-      private:
-        _Functor & _f;
+          res_type operator()() const
+          {
+          return _f();
+          }
+
+        private:
+          _Functor & _f;
+        };
+
+      template <class _Functor, class res_type, class arg1_type>
+        struct FunctorRef1 : public std::unary_function<arg1_type, res_type>
+        {
+          FunctorRef1( _Functor & f_r )
+          : _f( f_r )
+          {}
+
+          res_type operator()( arg1_type a1 ) const
+          {
+            return _f( a1 );
+          }
+
+        private:
+          _Functor & _f;
+        };
+
+      template <class _Functor, class res_type, class arg1_type, class arg2_type>
+        struct FunctorRef2 : public std::binary_function<arg1_type, arg2_type, res_type>
+        {
+          FunctorRef2( _Functor & f_r )
+          : _f( f_r )
+          {}
+
+          res_type operator()( arg1_type a1, arg2_type a2 ) const
+          {
+            return _f( a1, a2 );
+          }
+
+        private:
+          _Functor & _f;
+        };
+
+      struct nil
+      {};
+    }
+    /////////////////////////////////////////////////////////////////
+
+    /** A binary \ref FunctorRef.
+     * Create it using \ref functorRef convenience function.
+    */
+    template <class _Functor, class res_type, class arg1_type = functor_detail::nil,
+                                              class arg2_type = functor_detail::nil>
+      struct FunctorRef
+      : public functor_detail::FunctorRef2<_Functor, res_type, arg1_type, arg2_type>
+      {
+        FunctorRef( _Functor & f_r )
+        : functor_detail::FunctorRef2<_Functor, res_type, arg1_type, arg2_type>( f_r )
+        {}
       };
 
-    /** Convenience function creating a \ref FunctorRef. */
-    template <class _Functor>
-      FunctorRef<_Functor> functorRef( _Functor & f_r )
-      { return FunctorRef<_Functor>( f_r ); }
+    /** A unary \ref FunctorRef.
+     * Create it using \ref functorRef convenience function.
+    */
+    template <class _Functor, class res_type, class arg1_type>
+      struct FunctorRef<_Functor, res_type, arg1_type>
+      : public functor_detail::FunctorRef1<_Functor, res_type, arg1_type>
+      {
+        FunctorRef( _Functor & f_r )
+        : functor_detail::FunctorRef1<_Functor, res_type, arg1_type>( f_r )
+        {}
+      };
 
-    /** Convenience function creating a \ref FunctorRef. */
-    template <class _Functor, class argument_type, class result_type>
-      FunctorRef<_Functor,argument_type,result_type> functorRef( _Functor & f_r )
-      { return FunctorRef<_Functor,argument_type,result_type>( f_r ); }
+    /** A nullary \ref FunctorRef.
+     * Create it using \ref functorRef convenience function.
+    */
+    template <class _Functor, class res_type>
+      struct FunctorRef<_Functor, res_type>
+      : public functor_detail::FunctorRef0<_Functor, res_type>
+      {
+        FunctorRef( _Functor & f_r )
+        : functor_detail::FunctorRef0<_Functor, res_type>( f_r )
+        {}
+      };
+
+    /** Convenience function creating a binary \ref FunctorRef. */
+    template <class res_type, class arg1_type, class arg2_type, class _Functor>
+      FunctorRef<_Functor, res_type, arg1_type, arg2_type>
+      functorRef( _Functor & f_r )
+      { return FunctorRef<_Functor, res_type, arg1_type, arg2_type>( f_r ); }
+    /** Convenience function creating a unary \ref FunctorRef. */
+    template <class res_type, class arg1_type, class _Functor>
+      FunctorRef<_Functor, res_type, arg1_type>
+      functorRef( _Functor & f_r )
+      { return FunctorRef<_Functor, res_type, arg1_type>( f_r ); }
+    /** Convenience function creating a nullary \ref FunctorRef. */
+    template <class res_type, class _Functor>
+      FunctorRef<_Functor, res_type>
+      functorRef( _Functor & f_r )
+      { return FunctorRef<_Functor, res_type>( f_r ); }
 
     /////////////////////////////////////////////////////////////////
 
