@@ -25,13 +25,24 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : PoolItem
+  //	CLASS NAME : PoolItem_Ref
   //
-  /** Connects ResObject and ResStatus.
+  /** Reference to a PoolItem conecting ResObject and ResStatus.
+   *
+   * The "real" PoolItem is usg. somwhere in the ResPool. This is
+   * a reference to it. All copies made will reference (and modify)
+   * the same PoolItem. All changes via a PoolItem_Ref are immediately
+   * visible in all copies (now COW).
+   *
+   * \note Constnes: Like pointer types, a <tt>const PoolItem_Ref</tt>
+   * does \b not refer to a <tt>const PoolItem</tt>. The reference is
+   * \c const, i.e. you can't change the refered PoolItem. The PoolItem
+   * (i.e. the status) is always mutable.
+   *
   */
-  class PoolItem
+  class PoolItem_Ref
   {
-    friend std::ostream & operator<<( std::ostream & str, const PoolItem & obj );
+    friend std::ostream & operator<<( std::ostream & str, const PoolItem_Ref & obj );
 
   public:
     /** Implementation  */
@@ -39,25 +50,28 @@ namespace zypp
 
   public:
     /** Default ctor for use in std::container. */
-    PoolItem();
+    PoolItem_Ref();
 
     /** Ctor */
     explicit
-    PoolItem( ResObject::constPtr res_r );
+    PoolItem_Ref( ResObject::constPtr res_r );
 
     /** Ctor */
-    PoolItem( ResObject::constPtr res_r, const ResStatus & status_r );
+    PoolItem_Ref( ResObject::constPtr res_r, const ResStatus & status_r );
 
     /** Dtor */
-    ~PoolItem();
+    ~PoolItem_Ref();
 
   public:
-    /** */
+    /** Returns */
     ResStatus & status() const;
 
-    /** */
+    /** Returns the ResObject::constPtr.
+     * \see \ref operator->
+    */
     ResObject::constPtr resolvable() const;
 
+  public:
     /** Implicit conversion into ResObject::constPtr to
      *  support query filters operating on ResObject.
     */
@@ -68,14 +82,46 @@ namespace zypp
     ResObject::constPtr operator->() const
     { return resolvable(); }
 
+    /** Conversion to bool to allow pointer style tests
+     *  for nonNULL \ref resolvable. */
+    operator ResObject::constPtr::unspecified_bool_type() const
+    { return resolvable(); }
+
   private:
     /** Pointer to implementation */
     RW_pointer<Impl> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 
-  /** \relates PoolItem Stream output */
-  std::ostream & operator<<( std::ostream & str, const PoolItem & obj );
+  typedef PoolItem_Ref PoolItem;
+
+  /** \relates PoolItem_Ref Stream output */
+  std::ostream & operator<<( std::ostream & str, const PoolItem_Ref & obj );
+
+  /** \relates PoolItem_Ref */
+  inline bool operator==( const PoolItem_Ref & lhs, const PoolItem_Ref & rhs )
+  { return lhs.resolvable() == rhs.resolvable(); }
+
+  /** \relates PoolItem_Ref */
+  inline bool operator==( const PoolItem_Ref & lhs, const ResObject::constPtr & rhs )
+  { return lhs.resolvable() == rhs; }
+
+  /** \relates PoolItem_Ref */
+  inline bool operator==( const ResObject::constPtr & lhs, const PoolItem_Ref & rhs )
+  { return lhs == rhs.resolvable(); }
+
+
+  /** \relates PoolItem_Ref */
+  inline bool operator!=( const PoolItem_Ref & lhs, const PoolItem_Ref & rhs )
+  { return ! (lhs==rhs); }
+
+  /** \relates PoolItem_Ref */
+  inline bool operator!=( const PoolItem_Ref & lhs, const ResObject::constPtr & rhs )
+  { return ! (lhs==rhs); }
+
+  /** \relates PoolItem_Ref */
+  inline bool operator!=( const ResObject::constPtr & lhs, const PoolItem_Ref & rhs )
+  { return ! (lhs==rhs); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
@@ -84,15 +130,10 @@ namespace zypp
 namespace std
 { /////////////////////////////////////////////////////////////////
 
-  /** \relates zypp::PoolItem Order in std::container follows ResObject::constPtr.*/
+  /** \relates zypp::PoolItem_Ref Order in std::container follows ResObject::constPtr.*/
   template<>
-    inline bool less<zypp::PoolItem>::operator()( const zypp::PoolItem & lhs, const zypp::PoolItem & rhs ) const
+    inline bool less<zypp::PoolItem_Ref>::operator()( const zypp::PoolItem_Ref & lhs, const zypp::PoolItem_Ref & rhs ) const
     { return lhs.resolvable() < rhs.resolvable(); }
-
-  /** \relates zypp::PoolItem Equal for std::container follows ResObject::constPtr. */
-  template<>
-    inline bool equal_to<zypp::PoolItem>::operator()( const zypp::PoolItem & lhs, const zypp::PoolItem & rhs ) const
-    { return lhs.resolvable() == rhs.resolvable(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
