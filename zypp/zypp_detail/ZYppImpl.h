@@ -15,6 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/ResPoolManager.h"
+#include "zypp/SourceManager.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -43,6 +44,10 @@ namespace zypp
       ResPool pool() const
       { return _pool.accessor(); }
 
+      void addResolvables (const ResStore& store);
+
+      void removeResolvables (const ResStore& store);
+            
     private:
       /** */
       ResPoolManager _pool;

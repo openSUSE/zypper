@@ -41,6 +41,19 @@ namespace zypp
     {
     }
 
+    void ZYppImpl::addResolvables (const ResStore& store)
+    {
+	_pool.insert(store.begin(), store.end());
+    }
+    
+    void ZYppImpl::removeResolvables (const ResStore& store)
+    {
+        for (ResStore::iterator it = store.begin(); it != store.end(); it++)
+	{
+    	    _pool.erase(*it);
+	}
+    }
+    
     /******************************************************************
      **
      **	FUNCTION NAME : operator<<

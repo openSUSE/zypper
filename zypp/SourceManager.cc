@@ -52,29 +52,26 @@ namespace zypp
   SourceManager::~SourceManager()
   {}
 
-  unsigned SourceManager::addSource(ResPoolManager & pool_r, const Url & url_r, const Pathname & path_r)
+  unsigned SourceManager::addSource(const Url & url_r, const Pathname & path_r)
   {
     Source src = SourceFactory().createFrom(url_r, path_r);
     RW_pointer<Source> src_ptr = RW_pointer<Source>(new Source(src));
     _sources[_next_id] = src_ptr;
-    addToPool(pool_r, src_ptr->resolvables());
     return _next_id++;
   }
 
-  unsigned SourceManager::addSource(ResPoolManager & pool_r, Source & source_r)
+  unsigned SourceManager::addSource(Source & source_r)
   {
     RW_pointer<Source> src_ptr = RW_pointer<Source>(new Source(source_r));
     _sources[_next_id] = src_ptr;
-    addToPool(pool_r, src_ptr->resolvables());
     return _next_id++;
   }
 
-  void SourceManager::removeSource(ResPoolManager & pool_r, const unsigned id)
+  void SourceManager::removeSource(const unsigned id)
   {
     SourceMap::iterator it = _sources.find(id);
     if (it != _sources.end())
     {
-      removeFromPool(pool_r, (it->second)->resolvables());
       _sources.erase(it);
     }
   }
@@ -84,19 +81,6 @@ namespace zypp
     for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
     {
 	it->second->disable ();
-    }
-  }
-    
-  void SourceManager::addToPool(ResPoolManager & pool_r, const ResStore & store_r)
-  {
-    pool_r.insert(store_r.begin(), store_r.end());
-  }
-
-  void SourceManager::removeFromPool(ResPoolManager & pool_r, const ResStore & store_r)
-  {
-    for (ResStore::iterator it = store_r.begin(); it != store_r.end(); it++)
-    {
-      pool_r.erase(*it);
     }
   }
 

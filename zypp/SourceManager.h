@@ -64,21 +64,21 @@ namespace zypp
      *
      * \throws Exception
      */
-    unsigned addSource(ResPoolManager & pool_r, const Url & url_r, const Pathname & path_r = "/");
+    unsigned addSource(const Url & url_r, const Pathname & path_r = "/");
 
     /**
      * Add a new source
      *
      * \throws Exception
      */
-    unsigned addSource(ResPoolManager & pool_r, Source & source_r);
+    unsigned addSource(Source & source_r);
 
     /**
      * Remove an existing source
      *
      * \throws Exception
      */
-    void removeSource(ResPoolManager & pool_r, const unsigned id);
+    void removeSource(const unsigned id);
 
     /**
      * Disable all registered sources
@@ -86,16 +86,6 @@ namespace zypp
 #warning: this could be done by providing iterator-like methods
     void disableAllSources();
     
-    /**
-     * Add packages in a resolvable store into pool
-     */
-    void addToPool(ResPoolManager & pool_r, const ResStore & store_r);
-
-    /**
-     * Remove packages which are in a resolvable store from pool
-     */
-    void removeFromPool(ResPoolManager & pool_r, const ResStore & store_r);
-
   private:
     typedef std::map<unsigned, RW_pointer<Source> > SourceMap;
 
