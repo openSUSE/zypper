@@ -79,6 +79,14 @@ namespace zypp
     }
   }
 
+  void SourceManager::disableAllSources()
+  {
+    for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
+    {
+	it->second->disable ();
+    }
+  }
+    
   void SourceManager::addToPool(ResPoolManager & pool_r, const ResStore & store_r)
   {
     pool_r.insert(store_r.begin(), store_r.end());
@@ -91,9 +99,6 @@ namespace zypp
       pool_r.erase(*it);
     }
   }
-
-
-
 
   /******************************************************************
   **

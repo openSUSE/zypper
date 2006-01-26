@@ -56,7 +56,7 @@ namespace zypp
      * \throws Exception
      */
     Source & findSource(const unsigned id);
-
+    
 #warning FIXME 5 times: Find a better way to link to the resolvable pool than passing a reference...
 
     /**
@@ -80,6 +80,12 @@ namespace zypp
      */
     void removeSource(ResPoolManager & pool_r, const unsigned id);
 
+    /**
+     * Disable all registered sources
+     */
+#warning: this could be done by providing iterator-like methods
+    void disableAllSources();
+    
     /**
      * Add packages in a resolvable store into pool
      */
