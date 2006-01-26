@@ -62,13 +62,13 @@ operator<<( ostream& os, const QueueItemRequire & item)
 {
     os << "[Require: ";
     os << item._capability;
-    if (item._requiring_item != NULL) {
+    if (item._requiring_item) {
 	os << ", Required by " << item._requiring_item;
     }
-    if (item._upgraded_item != NULL) {
+    if (item._upgraded_item) {
 	os << ", Upgrades " << item._upgraded_item;
     }
-    if (item._lost_item != NULL) {
+    if (item._lost_item) {
 	os << ", Lost " << item._lost_item;
     }
     if (item._remove_only) os << ", Remove Only";
@@ -81,9 +81,6 @@ operator<<( ostream& os, const QueueItemRequire & item)
 QueueItemRequire::QueueItemRequire (const ResPool * pool, const Capability & dep)
     : QueueItem (QUEUE_ITEM_TYPE_REQUIRE, pool)
     , _capability (dep)
-    , _requiring_item (NULL)
-    , _upgraded_item (NULL)
-    , _lost_item (NULL)
     , _remove_only (false)
     , _is_child (false)
 {
@@ -97,9 +94,9 @@ QueueItemRequire::~QueueItemRequire()
 //---------------------------------------------------------------------------
 
 void
-QueueItemRequire::addPoolItem_Ref (PoolItem_Ref *item)
+QueueItemRequire::addPoolItem_Ref (PoolItem_Ref item)
 {
-    assert (_requiring_item == NULL);
+    assert (!_requiring_item);
     _requiring_item = item;
 }
 
@@ -142,19 +139,21 @@ struct UniqTable
 
 struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 {
-    PoolItem_Ref *requirer;
-    const Capability *capability;
+    PoolItem_Ref requirer;
+    const Capability & capability;
     ResolverContext_Ptr context;
     const ResPool *pool;
     PoolItemList providers;		// the provider which matched
     UniqTable uniq;
 
-    bool operator()( PoolItem_Ref provider, const Capability & match ) const
-    {
-      // Untill we can pass the functor by reference to algorithms.
-      return const_cast<RequireProcess&>(*this).fake( provider, match );
-    }
-    bool fake( PoolItem_Ref provider, const Capability & match )
+    RequireProcess (PoolItem_Ref r, const Capability & c, ResolverContext_Ptr ctx, const ResPool * p)
+	: requirer (r)
+	, capability (c)
+	, context (ctx)
+	, pool (p)
+    { }
+
+    bool operator()( PoolItem_Ref provider, const Capability & match )
     {
 	//const Capability match;
 	ResStatus status;
@@ -167,8 +166,8 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 	/* capability is set for item set childern only. If it is set
 	   allow only exactly required version */
 
-	if (capability != NULL
-	    && *capability != match) {		// exact match required
+	if (capability != Capability()
+	    && capability != match) {		// exact match required
 	    return true;
 	}
 
@@ -180,14 +179,7 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 //	    && ! pool->itemIsLocked (provider)
 	) {
 
-            // does not work.
-            // does not work.
-            // does not work.
-            // does not work.
-            // does not work.
-            // does not work.
-            // does not work.-----v
-	    providers.push_front (&provider);
+	    providers.push_front (provider);
 	    uniq.remember(provider);
 	}
 
@@ -198,15 +190,10 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 
 struct NoInstallableProviders : public resfilter::OnCapMatchCallbackFunctor
 {
-    PoolItem_Ref *requirer;
+    PoolItem_Ref requirer;
     ResolverContext_Ptr context;
 
-    bool operator()( PoolItem_Ref provider, const Capability & match ) const
-    {
-      // Untill we can pass the functor by reference to algorithms.
-      return const_cast<NoInstallableProviders&>(*this).fake( provider, match );
-    }
-    bool fake( PoolItem_Ref provider, const Capability & match  ) const
+    bool operator()( PoolItem_Ref provider, const Capability & match )
     {
 	string msg_str;
 	//const Capability match;
@@ -217,18 +204,18 @@ struct NoInstallableProviders : public resfilter::OnCapMatchCallbackFunctor
 
 	if (item_status_is_to_be_uninstalled (status)) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALL_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
-	    misc_info->setOtherPoolItem_Ref (&provider);
+	    misc_info->setOtherPoolItem_Ref (provider);
 	} else if (context->isParallelInstall (provider)) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_PARALLEL_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
-	    misc_info->setOtherPoolItem_Ref (&provider);
+	    misc_info->setOtherPoolItem_Ref (provider);
 	} else if (! context->itemIsPossible (provider)) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NOT_INSTALLABLE_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
-	    misc_info->setOtherPoolItem_Ref (&provider);
+	    misc_info->setOtherPoolItem_Ref (provider);
 #warning Locks not implemented
 #if 0
 	} else if (pool->itemIsLocked (provider)) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_LOCKED_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
-	    misc_info->setOtherPoolItem_Ref (&provider);
+	    misc_info->setOtherPoolItem_Ref (provider);
 #endif
  	}
 
@@ -245,9 +232,9 @@ struct LookForUpgrades : public resfilter::OnCapMatchCallbackFunctor
 {
     PoolItemList upgrades;
 
-    bool operator()( PoolItem_Ref  & provider )
+    bool operator()( PoolItem_Ref provider )
     {
-	upgrades.push_front (&provider);
+	upgrades.push_front (provider);
 	return true;
     }
 };
@@ -257,10 +244,10 @@ struct LookForUpgrades : public resfilter::OnCapMatchCallbackFunctor
 //   by looking at the name prefix: 'foo' and 'foo-bar' are codependent
 
 static bool
-codependent_items (const PoolItem_Ref *item1, const PoolItem_Ref *item2)
+codependent_items (const PoolItem_Ref item1, const PoolItem_Ref item2)
 {
-    string name1 = (*item1)->name();
-    string name2 = (*item2)->name();
+    string name1 = item1->name();
+    string name2 = item2->name();
     string::size_type len1 = name1.size();
     string::size_type len2 = name2.size();
 
@@ -294,12 +281,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	return true;
     }
 
-    RequireProcess info;
-
-    info.requirer = _requiring_item,
-    info.capability = _is_child ? &_capability : NULL;
-    info.context = context;
-    info.pool =	pool();
+    RequireProcess info (_requiring_item, _is_child ? _capability : Capability(), context,  pool());
 
     int num_providers = 0;
 
@@ -310,7 +292,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	// world->foreachProvidingResItem (_capability, require_process_cb, &info);
 	invokeOnEach( pool()->byCapabilityIndexBegin( _capability.index(), dep ),
 		      pool()->byCapabilityIndexEnd( _capability.index(), dep ),
-		      resfilter::callOnCapMatchIn( dep, _capability, info ) );
+		      resfilter::callOnCapMatchIn( dep, _capability, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 
 	num_providers = info.providers.size();
 
@@ -331,7 +313,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	QueueItemBranch_Ptr branch_item = NULL;
 	bool explore_uninstall_branch = true;
 
-	if (_upgraded_item == NULL) {
+	if (!_upgraded_item) {
 
 	    ResolverInfo_Ptr err_info;
 
@@ -355,7 +337,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	    invokeOnEach( pool()->byCapabilityIndexBegin( _capability.index(), dep ), // begin()
 			  pool()->byCapabilityIndexEnd( _capability.index(), dep ),   // end()
-			  resfilter::callOnCapMatchIn( dep, _capability, info) );
+			  resfilter::callOnCapMatchIn( dep, _capability, functor::functorRef<bool,PoolItem,Capability>(info)) );
 
 	}
 
@@ -363,19 +345,18 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	// If this is an upgrade, we might be able to avoid removing stuff by upgrading it instead.
 	//
 
-	if (_upgraded_item != NULL
-	    && _requiring_item != NULL) {
+	if (_upgraded_item
+	    && _requiring_item) {
 
 	    LookForUpgrades info;
 
 //	    pool()->foreachUpgrade (_requiring_item, new Channel(CHANNEL_TYPE_ANY), look_for_upgrades_cb, (void *)&upgrade_list);
 
-#if 0
-	    invokeOnEach( pool()->byNameBegin( (*_requiring_item)->name() ), pool()->byNameEnd( (*_requiring_item)->name() ),
-			  functor::chain( resfilter::ByKind( (*_requiring_item)->kind() ),
-					  resfilter::ByEdition<CompareByGT<Edition> >( (*_requiring_item)->edition() ),
-			  info );
-#endif
+	    invokeOnEach( pool()->byNameBegin( _requiring_item->name() ), pool()->byNameEnd( _requiring_item->name() ),
+			  functor::chain( resfilter::ByKind( _requiring_item->kind() ),
+					  resfilter::ByEdition<CompareByGT<Edition> >( _requiring_item->edition() ),
+					  functor::functorRef<bool,PoolItem>(info) );
+
 	    if (!info.upgrades.empty()) {
 		string label;
 
@@ -391,10 +372,10 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		branch_item->setLabel (label);
 // ERR << "Branching: " << label << endl;
 		for (PoolItemList::const_iterator iter = info.upgrades.begin(); iter != info.upgrades.end(); iter++) {
-		    PoolItem_Ref *upgrade_item = *iter;
+		    PoolItem_Ref upgrade_item = *iter;
 		    QueueItemInstall_Ptr install_item;
 
-		    if (context->itemIsPossible (*upgrade_item)) {
+		    if (context->itemIsPossible (upgrade_item)) {
 
 			install_item = new QueueItemInstall (pool(), upgrade_item);
 		    	install_item->setUpgrades (_requiring_item);
@@ -408,7 +389,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 			//   FIXME: should we also look at conflicts here?
 
 			if (explore_uninstall_branch) {
-			    CapSet requires = (*upgrade_item)->dep (Dep::REQUIRES);
+			    CapSet requires = upgrade_item->dep (Dep::REQUIRES);
 			    CapSet::const_iterator iter = requires.begin();
 			    for (; iter != requires.end(); iter++) {
 				const Capability req = *iter;
@@ -447,7 +428,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	    } else if (!info.upgrades.empty()
 		       && explore_uninstall_branch
 		       && codependent_items (_requiring_item, _upgraded_item)
-		       && _lost_item == NULL) {
+		       && !_lost_item) {
 		explore_uninstall_branch = false;
 	    }
 
@@ -462,7 +443,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	if (explore_uninstall_branch && _requiring_item) {
 	    ResolverInfo_Ptr log_info;
 	    uninstall_item = new QueueItemUninstall (pool(), _requiring_item, QueueItemUninstall::UNSATISFIED);
-	    uninstall_item->setDependency (_capability);
+	    uninstall_item->setCapability (_capability);
 
 	    if (_lost_item) {
 		log_info = new ResolverInfoDependsOn (_requiring_item, _lost_item);

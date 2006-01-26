@@ -67,7 +67,7 @@ operator<<( ostream& os, const QueueItemConflict & item)
 
 //---------------------------------------------------------------------------
 
-QueueItemConflict::QueueItemConflict (const ResPool *pool, const Capability & cap, PoolItem_Ref *item)
+QueueItemConflict::QueueItemConflict (const ResPool *pool, const Capability & cap, PoolItem_Ref item)
     : QueueItem (QUEUE_ITEM_TYPE_CONFLICT, pool)
     , _capability (cap)
     , _conflicting_item (item)
@@ -92,10 +92,10 @@ QueueItemConflict::~QueueItemConflict()
 
 struct UpgradeCandidate : public resfilter::OnCapMatchCallbackFunctor
 {
-    PoolItem_Ref * item; // the conflicting resolvable, used to filter upgrades with an identical resolvable
+    PoolItem_Ref item; // the conflicting resolvable, used to filter upgrades with an identical resolvable
     PoolItemList upgrades;
 
-    UpgradeCandidate (PoolItem_Ref *pi)
+    UpgradeCandidate (PoolItem_Ref pi)
 	: item (pi)
     { }
 
@@ -119,13 +119,13 @@ struct UpgradeCandidate : public resfilter::OnCapMatchCallbackFunctor
 struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 {
     const ResPool *pool;
-    PoolItem_Ref *conflict_issuer;			// the item which issues 'conflicts:'
+    PoolItem_Ref conflict_issuer;			// the item which issues 'conflicts:'
     const Capability & conflict_capability;	// the capability mentioned in the 'conflicts'
     ResolverContext_Ptr context;
     QueueItemList & new_items;
     bool actually_an_obsolete;
 
-    ConflictProcess (const ResPool *pl, PoolItem_Ref *ci, const Capability & cc, ResolverContext_Ptr ct, QueueItemList & ni, bool ao)
+    ConflictProcess (const ResPool *pl, PoolItem_Ref ci, const Capability & cc, ResolverContext_Ptr ct, QueueItemList & ni, bool ao)
 	: pool (pl)
 	, conflict_issuer (ci),
 	, conflict_capability (cc)

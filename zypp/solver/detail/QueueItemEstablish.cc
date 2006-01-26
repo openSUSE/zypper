@@ -64,7 +64,7 @@ operator<<( ostream& os, const QueueItemEstablish & item)
 
 //---------------------------------------------------------------------------
 
-QueueItemEstablish::QueueItemEstablish (const ResPool *pool, PoolItem_Ref *item)
+QueueItemEstablish::QueueItemEstablish (const ResPool *pool, PoolItem_Ref item)
     : QueueItem (QUEUE_ITEM_TYPE_INSTALL, pool)
     , _item(item)
     , _channel_priority (0)
