@@ -247,6 +247,38 @@ namespace zypp
       std::string _index;
     };
 
+
+
+    ///////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    // Some PoolItem attributes
+    //
+    ///////////////////////////////////////////////////////////////////
+
+    /** */
+    typedef std::unary_function<PoolItem, bool> PoolItemFilterFunctor;
+
+    /** Select PoolItem by installed. */
+    struct ByInstalled : public PoolItemFilterFunctor
+    {
+      bool operator()( const PoolItem & p ) const
+      {
+	return p.status().isInstalled();
+      }
+
+    };
+
+    /** Select PoolItem by uninstalled. */
+    struct ByUninstalled : public PoolItemFilterFunctor
+    {
+      bool operator()( const PoolItem & p ) const
+      {
+	return p.status().isUninstalled();
+      }
+    };
+
     ///////////////////////////////////////////////////////////////////
 
     typedef std::binary_function<PoolItem,Capability,
