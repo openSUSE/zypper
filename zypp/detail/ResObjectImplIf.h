@@ -55,7 +55,7 @@ namespace zypp
        * default implementation if you don't have a value for it.
        * \todo The UI likes to work on ResObject level, but some of
        * the values actually make no sense for several kinds of Resolvable,
-       * or may have completely different semantics. See wheter we can get
+       * or may have completely different semantics. See whether we can get
        * rid of ome stuff.
        * \todo Some of these are actually tranlated or translatable.
        * offer some concept to express it.
@@ -103,7 +103,7 @@ namespace zypp
       /** Dtor. Makes this an abstract class. */
       virtual ~ResObjectImplIf() = 0;
 
-      /** Test wheter \c this is already connected to Resolvable. */
+      /** Test whether \c this is already connected to Resolvable. */
       bool hasBackRef() const
       { return _backRef; }
 

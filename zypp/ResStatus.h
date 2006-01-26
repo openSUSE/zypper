@@ -126,7 +126,7 @@ namespace zypp
     // Removing a higher levels transaction bit should fail.
   private:
 
-    /** Return wheter the corresponding Field has value \a val_r.
+    /** Return whether the corresponding Field has value \a val_r.
     */
     template<class _Field>
       bool fieldValueIs( FieldType val_r ) const
