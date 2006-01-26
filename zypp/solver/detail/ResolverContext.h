@@ -141,16 +141,16 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     /**
      *\return \c true if \c item is \a installed or \a to-be-installed */
-    bool isPresent (PoolItem_Ref item);
+    bool isPresent (PoolItem_Ref item) const;
 
     /**
      *\return \c true if \c item is \a uninstalled or \a to-be-uninstalled */
-    bool isAbsent (PoolItem_Ref item);
+    bool isAbsent (PoolItem_Ref item) const;
 
-    bool requirementIsMet (const Capability & cap, bool is_child = false);
-    bool requirementIsPossible (const Capability & cap);
-    bool itemIsPossible (const PoolItem_Ref item);
-    bool isParallelInstall (const PoolItem_Ref item);
+    bool requirementIsMet (const Capability & cap, bool is_child = false) const;
+    bool requirementIsPossible (const Capability & cap) const;
+    bool itemIsPossible (const PoolItem_Ref item) const;
+    bool isParallelInstall (const PoolItem_Ref item) const;
 
     /** iterate over various states */
 
@@ -162,37 +162,37 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     int installCount (void) const;
 
     int foreachUninstall (MarkedPoolItemFn fn, void *data) const;
-    PoolItemList getUninstalls (void);
-    int uninstallCount (void);
+    PoolItemList getUninstalls (void) const;
+    int uninstallCount (void) const;
 
     int foreachUpgrade (MarkedPoolItemPairFn fn, void *data) const;
-    PoolItemList getUpgrades (void);
-    int upgradeCount (void);
+    PoolItemList getUpgrades (void) const;
+    int upgradeCount (void) const;
 
     int foreachSatisfy (MarkedPoolItemFn fn, void *data) const;
-    PoolItemList getSatisfies (void);
-    int satisfyCount (void);
+    PoolItemList getSatisfies (void) const;
+    int satisfyCount (void) const;
 
     int foreachIncomplete (MarkedPoolItemFn fn, void *data) const;
-    PoolItemList getIncompletes (void);
-    int incompleteCount (void);
+    PoolItemList getIncompletes (void) const;
+    int incompleteCount (void) const;
 
     // add to the report log
     void addInfo (ResolverInfo_Ptr info);					// normal progress info
     void addError (ResolverInfo_Ptr info);					// error progress info
 
     // iterate over report log
-    void foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn, void *data);
-    ResolverInfoList getInfo (void);
+    void foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn, void *data) const;
+    ResolverInfoList getInfo (void) const;
 
     // Context compare to identify equal branches
 
     int partialCompare (ResolverContext_Ptr context) const;
-    int compare (ResolverContext_Ptr context);
+    int compare (ResolverContext_Ptr context) const;
 
     // debug
-    void spew (void);
-    void spewInfo (void);
+    void spew (void) const;
+    void spewInfo (void) const;
 
 };
 

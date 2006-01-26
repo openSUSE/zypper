@@ -353,7 +353,7 @@ ResolverContext::incomplete (PoolItem_Ref item, int other_penalty)
 // is it installed (after transaction) ?
 // if yes, install/requires requests are considered done
 bool
-ResolverContext::isPresent (PoolItem_Ref item)
+ResolverContext::isPresent (PoolItem_Ref item) const
 {
     ResStatus status;
 
@@ -372,7 +372,7 @@ ResolverContext::isPresent (PoolItem_Ref item)
 // if yes, uninstall requests are considered done
 
 bool
-ResolverContext::isAbsent (PoolItem_Ref item)
+ResolverContext::isAbsent (PoolItem_Ref item) const
 {
     ResStatus status;
 
@@ -509,7 +509,7 @@ satisfy_pkg_cb (PoolItem_Ref item, void *data)
 {
     SatisfyInfo *info = (SatisfyInfo *)data;
     if (item.status().isSatisfied()
-       && ! item->isInstalled ()
+       && ! item.status().isInstalled ()
        && !Helper::findInstalledItem (info->pool, item))
     {
        if (info->fn) info->fn (item, info->rl);
@@ -519,12 +519,12 @@ satisfy_pkg_cb (PoolItem_Ref item, void *data)
 
 
 int
-ResolverContext::foreachSatisfy (MarkedPoolItemFn fn, void *data)
+ResolverContext::foreachSatisfy (MarkedPoolItemFn fn, void *data) const
 {
     PoolItemList *rl = (PoolItemList *)data;
     SatisfyInfo info = { _pool, fn, rl, 0 };
 
-    foreachMarkedResItem (satisfy_pkg_cb, (void *)&info);
+    foreachMarked (satisfy_pkg_cb, (void *)&info);
 
     return info.count;
 }
@@ -542,7 +542,7 @@ context_item_collector_satisfy (PoolItem_Ref item, void *data)
 
 
 PoolItemList
-ResolverContext::getSatisfies (void)
+ResolverContext::getSatisfies (void) const
 {
     PoolItemList rl;
 
@@ -575,12 +575,12 @@ incomplete_pkg_cb (PoolItem_Ref item, void *data)
 
 
 int
-ResolverContext::foreachIncomplete (MarkedPoolItemFn fn, void *data)
+ResolverContext::foreachIncomplete (MarkedPoolItemFn fn, void *data) const
 {
     PoolItemList *rl = (PoolItemList *)data;
     IncompleteInfo info = { _pool, fn, rl, 0 };
 
-    foreachMarkedResItem (incomplete_pkg_cb, (void *)&info);
+    foreachMarked (incomplete_pkg_cb, (void *)&info);
 
     return info.count;
 }
@@ -598,7 +598,7 @@ context_item_collector_incomplete (PoolItem_Ref item, void *data)
 
 
 PoolItemList
-ResolverContext::getIncompletes (void)
+ResolverContext::getIncompletes (void) const
 {
     PoolItemList rl;
 
@@ -612,29 +612,28 @@ ResolverContext::getIncompletes (void)
 // upgrade
 
 typedef struct {
-    World_Ptr world;
-    MarkedResItemPairFn fn;
+    const ResPool *pool;
+    MarkedPoolItemPairFn fn;
     void *data;
-    ResolverContext_Ptr context;
+    ResolverContext_constPtr context;
     int count;
 } UpgradeInfo;
 
 static void
-upgrade_pkg_cb (PoolItem_Ref item, ResStatus status, void *data)
+upgrade_pkg_cb (PoolItem_Ref item, void *data)
 {
     UpgradeInfo *info = (UpgradeInfo *)data;
 
     PoolItem_Ref to_be_upgraded;
-    ResStatus tbu_status;
 
-    if (item_status_is_to_be_installed (status)
-	&& ! item->isInstalled ()) {
+    if (item.status().isToBeInstalled()
+	&& ! item.status().isInstalled ())
+    {
 
-	to_be_upgraded = info->world->findInstalledResItem (item);
+	to_be_upgraded = Helper::findInstalledItem(info->pool, item);
 	if (to_be_upgraded) {
-	    tbu_status = info->context->getStatus (to_be_upgraded);
 	    if (info->fn) {
-		info->fn (item, status, to_be_upgraded, tbu_status, info->data);
+		info->fn (item, to_be_upgraded, info->data);
 	    }
 	    ++info->count;
 	}
@@ -643,18 +642,18 @@ upgrade_pkg_cb (PoolItem_Ref item, ResStatus status, void *data)
 
 
 int
-ResolverContext::foreachUpgrade (MarkedResItemPairFn fn, void *data)
+ResolverContext::foreachUpgrade (MarkedPoolItemPairFn fn, void *data) const
 {
-    UpgradeInfo info = { world(), fn, data, this, 0 };
+    UpgradeInfo info = { _pool, fn, data, this, 0 };
 
-    foreachMarkedResItem (upgrade_pkg_cb, (void *)&info);
+    foreachMarked (upgrade_pkg_cb, (void *)&info);
 
     return info.count;
 }
 
 
 static void
-pair_item_collector (PoolItem_Ref item, ResStatus status, PoolItem_Ref old, ResStatus old_status, void *data)
+pair_item_collector (PoolItem_Ref item, PoolItem_Ref old, void *data)
 {
     PoolItemList *rl = (PoolItemList *)data;
     rl->push_back (item);
@@ -662,7 +661,7 @@ pair_item_collector (PoolItem_Ref item, ResStatus status, PoolItem_Ref old, ResS
 
 
 PoolItemList
-ResolverContext::getUpgrades (void)
+ResolverContext::getUpgrades (void) const
 {
     PoolItemList rl;
 
@@ -685,22 +684,24 @@ typedef struct {
 } UninstallInfo;
 
 static void
-uninstall_pkg_cb (PoolItem_Ref item, ResStatus status, void *data)
+uninstall_pkg_cb (PoolItem_Ref item, void *data)
 {
     UninstallInfo *info = (UninstallInfo *)data;
 
     UpgradeTable::const_iterator pos = info->upgrade_hash.find(item->name());
 
-    if (item_status_is_to_be_uninstalled (status)
-	&& pos == info->upgrade_hash.end()) {
+    if (item.status().isToBeUninstalled ()
+	&& pos == info->upgrade_hash.end())
+    {
 	if (info->fn)
-	    info->fn (item, status, info->rl);
+	    info->fn (item, info->rl);
 	++info->count;
     }
 }
 
+
 static void
-build_upgrade_hash_cb (PoolItem_Ref item_add, ResStatus status_add, PoolItem_Ref item_del, ResStatus status_del, void *data)
+build_upgrade_hash_cb (PoolItem_Ref item_add, PoolItem_Ref item_del, void *data)
 {
     UpgradeTable *upgrade_hash = (UpgradeTable *)data;
     (*upgrade_hash)[item_del->name()] = item_del;
@@ -708,7 +709,7 @@ build_upgrade_hash_cb (PoolItem_Ref item_add, ResStatus status_add, PoolItem_Ref
 
 
 int
-ResolverContext::foreachUninstall (MarkedPoolItemFn fn, void *data)
+ResolverContext::foreachUninstall (MarkedPoolItemFn fn, void *data) const
 {
     UninstallInfo info;		// inits upgrade_hash
 
@@ -717,14 +718,14 @@ ResolverContext::foreachUninstall (MarkedPoolItemFn fn, void *data)
     info.count = 0;
 
     foreachUpgrade (build_upgrade_hash_cb, (void *)&(info.upgrade_hash));
-    foreachMarkedResItem (uninstall_pkg_cb, (void *)&info);
+    foreachMarked (uninstall_pkg_cb, (void *)&info);
 
     return info.count;
 }
 
 
 PoolItemList
-ResolverContext::getUninstalls (void)
+ResolverContext::getUninstalls (void) const
 {
     PoolItemList rl;
 
@@ -737,10 +738,10 @@ ResolverContext::getUninstalls (void)
 //---------------------------------------------------------------------------
 
 static void
-install_count_cb (PoolItem_Ref item, ResStatus status, void *data)
+install_count_cb (PoolItem_Ref item, void *data)
 {
     int *count = (int *)data;
-    if (! item->isInstalled ()) {
+    if (! item.status().isInstalled ()) {
 	++*count;
     }
 }
@@ -757,17 +758,17 @@ ResolverContext::installCount (void) const
 
 
 static void
-uninstall_count_cb (PoolItem_Ref item, ResStatus status, void *data)
+uninstall_count_cb (PoolItem_Ref item, void *data)
 {
     int *count = (int *)data;
-    if (item->isInstalled ()) {
+    if (item.status().isInstalled ()) {
 	++*count;
     }
 }
 
 
 int
-ResolverContext::uninstallCount (void)
+ResolverContext::uninstallCount (void) const
 {
     int count = 0;
 
@@ -778,23 +779,23 @@ ResolverContext::uninstallCount (void)
 
 
 int
-ResolverContext::upgradeCount (void)
+ResolverContext::upgradeCount (void) const
 {
-    return foreachUpgrade ((MarkedResItemPairFn)NULL, (void *)NULL);
+    return foreachUpgrade ((MarkedPoolItemPairFn)NULL, (void *)NULL);
 }
 
 
 static void
-satisfy_count_cb (PoolItem_Ref item, ResStatus status, void *data)
+satisfy_count_cb (PoolItem_Ref item, void *data)
 {
     int *count = (int *)data;
-    if (! item->isInstalled ()) {
+    if (! item.status().isInstalled ()) {
 	++*count;
     }
 }
 
 int
-ResolverContext::satisfyCount (void)
+ResolverContext::satisfyCount (void) const
 {
     int count = 0;
 
@@ -805,7 +806,7 @@ ResolverContext::satisfyCount (void)
 
 
 int
-ResolverContext::incompleteCount (void)
+ResolverContext::incompleteCount (void) const
 {
     return foreachIncomplete ((MarkedPoolItemFn)NULL, (void *)NULL);
 }
@@ -826,7 +827,7 @@ ResolverContext::addInfo (ResolverInfo_Ptr info)
     if (info->error ()) {
 
 	if (! _invalid) {
-	    ResolverInfo_Ptr info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INVALID_SOLUTION, NULL, RESOLVER_INFO_PRIORITY_VERBOSE);
+	    ResolverInfo_Ptr info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INVALID_SOLUTION, PoolItem_Ref(), RESOLVER_INFO_PRIORITY_VERBOSE);
 	    info->flagAsError ();
 	    _log.push_back (info);
 	}
@@ -942,11 +943,11 @@ mark_important_info (InfoList & il)
 
 
 void
-ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn, void *data)
+ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn, void *data) const
 {
     InfoList info_list;
 
-    ResolverContext_Ptr context = this;
+    ResolverContext_constPtr context = this;
 
     // Assemble a list of copies of all of the info objects
     while (context != NULL) {
@@ -1000,7 +1001,7 @@ get_info_foreach_cb (ResolverInfo_Ptr info, void *data)
 
 
 InfoList
-ResolverContext::getInfo (void)
+ResolverContext::getInfo (void) const
 {
     InfoList il;
     foreachInfo (NULL, -1, get_info_foreach_cb, (void *)&il);
@@ -1031,7 +1032,7 @@ spew_pkg2_cb (PoolItem_Ref item1, ResStatus status1, PoolItem_Ref item2, ResStat
 
 
 void
-ResolverContext::spew (void)
+ResolverContext::spew (void) const
 {
     cout << "TO INSTALL:" << endl;
     foreachInstall (spew_pkg_cb, NULL);
@@ -1057,7 +1058,7 @@ spew_info_cb (ResolverInfo_Ptr info, void *unused)
 
 
 void
-ResolverContext::spewInfo (void)
+ResolverContext::spewInfo (void) const
 {
     DBG << "ResolverContext[" << this << "]::spewInfo" << endl;
     foreachInfo (NULL, -1, spew_info_cb, NULL);
@@ -1067,7 +1068,7 @@ ResolverContext::spewInfo (void)
 // requirements
 
 typedef struct {
-    ResolverContext_Ptr context;
+    ResolverContext_constPtr context;
     const Capability *dep;
     bool flag;
 } RequirementMetInfo;
@@ -1087,14 +1088,14 @@ requirement_met_cb (PoolItem_Ref item, const Capability & cap, void *data)
 	info->flag = true;
     }
 
-//ERR << "requirement_met_cb(" <<  item->asString() << ", " << cap.asString() << ") [info->dep " <<
+//ERR << "requirement_met_cb(" <<  item << ", " << cap << ") [info->dep " <<
 //    (info->dep != NULL ? info->dep->asString().c_str() : "(none)") << "] -> " <<  (info->flag ? "true" : "false") << endl;
     return ! info->flag;
 }
 
 
 bool
-ResolverContext::requirementIsMet (const Capability & dependency, bool is_child)
+ResolverContext::requirementIsMet (const Capability & dependency, bool is_child) const
 {
     RequirementMetInfo info;
 
@@ -1102,7 +1103,7 @@ ResolverContext::requirementIsMet (const Capability & dependency, bool is_child)
     info.dep = is_child ? &dependency : NULL;
     info.flag = false;
 
-    world()->foreachProvidingResItem (dependency, requirement_met_cb, (void *)&info);
+    world()->foreachProviding (dependency, requirement_met_cb, (void *)&info);
 
     return info.flag;
 }
@@ -1127,23 +1128,23 @@ requirement_possible_cb (PoolItem_Ref item, const Capability & cap, void *data)
 
 
 bool
-ResolverContext::requirementIsPossible (const Capability & dep)
+ResolverContext::requirementIsPossible (const Capability & dep) const
 {
     RequirementMetInfo info;
 
     info.context = this;
     info.flag = false;
 
-    world()->foreachProvidingResItem (dep, requirement_possible_cb, (void *)&info);
+    world()->foreachProviding (dep, requirement_possible_cb, (void *)&info);
 
     return info.flag;
 }
 
 
 bool
-ResolverContext::itemIsPossible (PoolItem_Ref item)
+ResolverContext::itemIsPossible (PoolItem_Ref item) const
 {
-    CapSet requires = item->requires();
+    CapSet requires = item->dep (Dep::REQUIRES);
     for (CapSet::iterator iter = requires.begin(); iter !=  requires.end(); iter++) {
 	    if (! requirementIsPossible (*iter)) {
 		return false;
@@ -1156,30 +1157,31 @@ ResolverContext::itemIsPossible (PoolItem_Ref item)
 //---------------------------------------------------------------------------
 
 typedef struct {
-    PoolItem_Ref res;
+    PoolItem_Ref other;
     bool flag;
 } DupNameCheckInfo;
 
 static void
-dup_name_check_cb (PoolItem_Ref item, ResStatus status, void *data)
+dup_name_check_cb (PoolItem_Ref item, void *data)
 {
     DupNameCheckInfo *info = (DupNameCheckInfo *)data;
     if (! info->flag
-	&& item_status_is_to_be_installed (status)
-	&& info->res->name() == item->name()
-	&& !item->equals(info->res)) {
+	&& item.status().isToBeInstalled ()
+	&& info->other->name() == item->name()
+	&& !compareByNVR (item, info->other))
+    {
 	info->flag = true;
     }
 }
 
 bool
-ResolverContext::isParallelInstall (PoolItem_Ref item)
+ResolverContext::isParallelInstall (PoolItem_Ref item) const
 {
     DupNameCheckInfo info;
 
-    info.res = item;
+    info.other = item;
     info.flag = false;
-    foreachMarkedResItem (dup_name_check_cb, (void *)&info);
+    foreachMarked (dup_name_check_cb, (void *)&info);
 
     return info.flag;
 }
@@ -1214,13 +1216,13 @@ rev_num_cmp (double a, double b)
 }
 
 static double
-churn_factor (ResolverContext_Ptr a)
+churn_factor (ResolverContext_constPtr a)
 {
     return a->upgradeCount() + (2.0 * a->installCount ()) + (4.0 * a->uninstallCount ());
 }
 
 int
-ResolverContext::partialCompare (ResolverContext_Ptr context)
+ResolverContext::partialCompare (ResolverContext_constPtr context) const
 {
     int cmp = 0;
     if (this != context) {
@@ -1245,7 +1247,7 @@ ResolverContext::partialCompare (ResolverContext_Ptr context)
 }
 
 int
-ResolverContext::compare (ResolverContext_Ptr context)
+ResolverContext::compare (ResolverContext_constPtr context) const
 {
     int cmp;
 
