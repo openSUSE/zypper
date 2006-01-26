@@ -22,9 +22,7 @@
 #ifndef ZYPP_SOLVER_DETAIL_QUEUITEMUNINSTALL_H
 #define ZYPP_SOLVER_DETAIL_QUEUITEMUNINSTALL_H
 
-#include <iosfwd>
-#include <list>
-#include <string>
+#include "zypp/solver/detail/Types.h"
 
 #include "zypp/solver/detail/QueueItem.h"
 #include "zypp/Capability.h"
@@ -47,57 +45,57 @@ DEFINE_PTR_TYPE(QueueItemUninstall);
 
 class QueueItemUninstall : public QueueItem {
 
-	public:
-	  typedef enum {
-	    CONFLICT,				// conflicts [dep]
-	    OBSOLETE,				// obsolets [dep]
-	    UNSATISFIED,			// unsatisfied dep, must be unistalled since required dep isnt provided anymore
-	    BACKOUT,				// back out during verify
-	    UPGRADE,				// its being upgraded, so the original get uninstalled, find out if this breaks something
-	    DUPLICATE,				// duplicate install
-	    EXPLICIT,				// user request
-	  } UninstallReason;
+  public:
+    typedef enum {
+      CONFLICT,				// conflicts [dep]
+      OBSOLETE,				// obsolets [dep]
+      UNSATISFIED,			// unsatisfied dep, must be unistalled since required dep isnt provided anymore
+      BACKOUT,				// back out during verify
+      UPGRADE,				// its being upgraded, so the original get uninstalled, find out if this breaks something
+      DUPLICATE,				// duplicate install
+      EXPLICIT,				// user request
+    } UninstallReason;
 
 
-	private:
-	  PoolItem _item;			// the item to-be-uninstalled
-	  UninstallReason _reason;
-	  Capability _cap_leading_to_uninstall;
-	  PoolItem _upgraded_to;		// if the uninstall is actually an upgrade
+  private:
+    PoolItem _item;			// the item to-be-uninstalled
+    UninstallReason _reason;
+    Capability _cap_leading_to_uninstall;
+    PoolItem _upgraded_to;		// if the uninstall is actually an upgrade
 
-	  bool _explicitly_requested;
-	  bool _remove_only;
-	  bool _due_to_conflict;
-	  bool _due_to_obsolete;
-	  bool _unlink;
+    bool _explicitly_requested;
+    bool _remove_only;
+    bool _due_to_conflict;
+    bool _due_to_obsolete;
+    bool _unlink;
 
-	public:
+  public:
 
-	  QueueItemUninstall (const ResPool *pool, PoolItem item, UninstallReason reason);
-	  virtual ~QueueItemUninstall();
+    QueueItemUninstall (const ResPool *pool, PoolItem item, UninstallReason reason);
+    virtual ~QueueItemUninstall();
 
-	  // ---------------------------------- I/O
+    // ---------------------------------- I/O
 
-	  friend std::ostream& operator<<(std::ostream&, const QueueItemUninstall & item);
+    friend std::ostream& operator<<(std::ostream&, const QueueItemUninstall & item);
 
-	  // ---------------------------------- accessors
+    // ---------------------------------- accessors
 
-	  UninstallReason reason (void) const		{ return _reason; }
-	  void setDependency (const Capability & cap)	{ _cap_leading_to_uninstall = cap; }
-	  void setExplicitlyRequested (void)		{ _explicitly_requested = true; }
-	  void setRemoveOnly (void)			{ _remove_only = true; }
-	  void setUpgradedTo (PoolItem item)		{ _upgraded_to = item; }
-	  void setDueToConflict (void)			{ _due_to_conflict = true; }
-	  void setDueToObsolete (void)			{ _due_to_obsolete = true; }
-	  void setUnlink (void);
+    UninstallReason reason (void) const		{ return _reason; }
+    void setCapability (const Capability & cap)	{ _cap_leading_to_uninstall = cap; }
+    void setExplicitlyRequested (void)		{ _explicitly_requested = true; }
+    void setRemoveOnly (void)			{ _remove_only = true; }
+    void setUpgradedTo (PoolItem item)		{ _upgraded_to = item; }
+    void setDueToConflict (void)		{ _due_to_conflict = true; }
+    void setDueToObsolete (void)		{ _due_to_obsolete = true; }
+    void setUnlink (void);
 
-	  // ---------------------------------- methods
+    // ---------------------------------- methods
 
-	  virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
-	  virtual QueueItem_Ptr copy (void) const;
-	  virtual int cmp (QueueItem_constPtr item) const;
-	  virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
-	  virtual bool isSatisfied (ResolverContext_Ptr context) const { return false; }
+    virtual bool process (ResolverContext_Ptr context, QueueItemList & qil);
+    virtual QueueItem_Ptr copy (void) const;
+    virtual int cmp (QueueItem_constPtr item) const;
+    virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
+    virtual bool isSatisfied (ResolverContext_Ptr context) const { return false; }
 
 };
 
