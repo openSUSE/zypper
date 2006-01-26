@@ -111,7 +111,7 @@ Resolver::addSubscribedChannel (Channel_constPtr channel)
 
 
 void
-Resolver::addResItemToInstall (PoolItem & item)
+Resolver::addResItemToInstall (PoolItem_Ref & item)
 {
     _items_to_install.push_front (item);
 }
@@ -127,7 +127,7 @@ Resolver::addPoolItemsToInstallFromList (PoolItemList & rl)
 
 
 void
-Resolver::addPoolItemToRemove (PoolItem & item)
+Resolver::addPoolItemToRemove (PoolItem_Ref & item)
 {
     _items_to_remove.push_front (item);
 }
@@ -143,7 +143,7 @@ Resolver::addPoolItemsToRemoveFromList (PoolItemList & rl)
 
 
 void
-Resolver::addPoolItemToEstablish (PoolItem & item)
+Resolver::addPoolItemToEstablish (PoolItem_Ref & item)
 {
     _items_to_establish.push_front (item);
 }
@@ -159,7 +159,7 @@ Resolver::addPoolItemsToEstablishFromList (PoolItemList & rl)
 
 
 void
-Resolver::addPoolItemToVerify (PoolItem & item)
+Resolver::addPoolItemToVerify (PoolItem_Ref & item)
 {
     _items_to_verify.push_front (item);
     _items_to_verify.sort ();			//(GCompareFunc) rc_item_compare_name);
@@ -183,7 +183,7 @@ Resolver::addExtraConflict (const Capability & dependency)
 //---------------------------------------------------------------------------
 
 static bool
-verify_system_cb (PoolItem & item, void *data)
+verify_system_cb (PoolItem_Ref & item, void *data)
 {
     Resolver *resolver  = (Resolver *)data;
 
@@ -259,7 +259,7 @@ Resolver::verifySystem (void)
 // establish state
 
 static bool
-trial_establish_cb (PoolItem & item, void *user_data)
+trial_establish_cb (PoolItem_Ref & item, void *user_data)
 {
     Resolver *resolver = (Resolver *)user_data;
 
@@ -367,14 +367,14 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     _initial_items.clear();
 
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
-	PoolItem & r = *iter;
+	PoolItem_Ref & r = *iter;
 
 	/* Add local packages to our dummy channel. */
 	if (r->local()) {
 	    assert (local_channel != NULL);
 	    ResItem_Ptr r1 = const_pointer_cast<ResItem>(r);
 	    r1->setChannel (local_channel);
-	    local_world->addPoolItem (r);
+	    local_world->addPoolItem_Ref (r);
 	}
 
 	initial_queue->addPoolItemToInstall (r);

@@ -111,16 +111,16 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 //    void setCurrentChannel (Channel_constPtr channel) { _current_channel = channel; }
 //    void addSubscribedChannel (Channel_constPtr channel);
 
-    void addPoolItemToInstall (PoolItem item);
+    void addPoolItemToInstall (PoolItem_Ref item);
     void addPoolItemsToInstallFromList (PoolItemList & rl);
 
-    void addPoolItemToRemove (PoolItem item);
+    void addPoolItemToRemove (PoolItem_Ref item);
     void addPoolItemsToRemoveFromList (PoolItemList & rl);
 
-    void addPoolItemToEstablish (PoolItem item);
+    void addPoolItemToEstablish (PoolItem_Ref item);
     void addPoolItemsToEstablishFromList (PoolItemList & rl);
 
-    void addPoolItemToVerify (PoolItem item);
+    void addPoolItemToVerify (PoolItem_Ref item);
 
     void addExtraCapability (const Capability & capability);
     void addExtraConflict (const Capability & capability);

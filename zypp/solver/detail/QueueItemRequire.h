@@ -55,10 +55,10 @@ class QueueItemRequire : public QueueItem {
   private:
     const Capability _capability;		// the required capability
 
-    PoolItem _requiring_item;			// who's requiring it
+    PoolItem_Ref _requiring_item;			// who's requiring it
 
-    PoolItem _upgraded_item;
-    PoolItem _lost_item;
+    PoolItem_Ref _upgraded_item;
+    PoolItem_Ref _lost_item;
 
     bool _remove_only;
     bool _is_child;
@@ -77,8 +77,8 @@ class QueueItemRequire : public QueueItem {
     const Capability & capability (void) const { return _capability; }
 
     void setRemoveOnly (void) { _remove_only = true; }
-    void setUpgradedPoolItem (PoolItem upgraded_item) { _upgraded_item = upgraded_item; }
-    void setLostPoolItem (PoolItem lost_item) { _lost_item = lost_item; }
+    void setUpgradedPoolItem_Ref (PoolItem_Ref upgraded_item) { _upgraded_item = upgraded_item; }
+    void setLostPoolItem_Ref (PoolItem_Ref lost_item) { _lost_item = lost_item; }
 
     // ---------------------------------- methods
 
@@ -88,7 +88,7 @@ class QueueItemRequire : public QueueItem {
     virtual bool isRedundant (ResolverContext_Ptr context) const { return false; }
     virtual bool isSatisfied (ResolverContext_Ptr context) const { return false; }
 
-    void addPoolItem (PoolItem item);
+    void addPoolItem_Ref (PoolItem_Ref item);
 
 
 };

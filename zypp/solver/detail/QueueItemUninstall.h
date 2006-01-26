@@ -58,10 +58,10 @@ class QueueItemUninstall : public QueueItem {
 
 
   private:
-    PoolItem _item;			// the item to-be-uninstalled
+    PoolItem_Ref _item;			// the item to-be-uninstalled
     UninstallReason _reason;
     Capability _cap_leading_to_uninstall;
-    PoolItem _upgraded_to;		// if the uninstall is actually an upgrade
+    PoolItem_Ref _upgraded_to;		// if the uninstall is actually an upgrade
 
     bool _explicitly_requested;
     bool _remove_only;
@@ -71,7 +71,7 @@ class QueueItemUninstall : public QueueItem {
 
   public:
 
-    QueueItemUninstall (const ResPool *pool, PoolItem item, UninstallReason reason);
+    QueueItemUninstall (const ResPool *pool, PoolItem_Ref item, UninstallReason reason);
     virtual ~QueueItemUninstall();
 
     // ---------------------------------- I/O
@@ -84,7 +84,7 @@ class QueueItemUninstall : public QueueItem {
     void setCapability (const Capability & cap)	{ _cap_leading_to_uninstall = cap; }
     void setExplicitlyRequested (void)		{ _explicitly_requested = true; }
     void setRemoveOnly (void)			{ _remove_only = true; }
-    void setUpgradedTo (PoolItem item)		{ _upgraded_to = item; }
+    void setUpgradedTo (PoolItem_Ref item)		{ _upgraded_to = item; }
     void setDueToConflict (void)		{ _due_to_conflict = true; }
     void setDueToObsolete (void)		{ _due_to_obsolete = true; }
     void setUnlink (void);

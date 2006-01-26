@@ -111,7 +111,7 @@ InstallOrder::computeNextSet()
 
 // decrease order of every adjacent node
 void
-InstallOrder::setInstalled(const PoolItem  item )
+InstallOrder::setInstalled(const PoolItem_Ref  item )
 {
     _dirty = true;
 
@@ -165,7 +165,7 @@ InstallOrder::startrdfs()
     // initialize all nodes
     for (PoolItemSet::iterator it = _toinstall.begin(); it != _toinstall.end(); ++it)
     {
-	const PoolItem item = *it;
+	const PoolItem_Ref item = *it;
 	_nodes[item] = NodeInfo (item);
 	_rgraph[item] = PoolItemSet();
 	_graph[item] = PoolItemSet();
@@ -174,7 +174,7 @@ InstallOrder::startrdfs()
     // visit all nodes
     for (PoolItemSet::iterator it = _toinstall.begin(); it != _toinstall.end(); ++it)
     {
-	const PoolItem item = *it;
+	const PoolItem_Ref item = *it;
 	if (_nodes[item].visited == false)
 	{
 	    _DBG("RC_SPEW") << "start recursion on " << item << endl;
@@ -190,12 +190,12 @@ InstallOrder::startrdfs()
 
 struct CollectProviders : public resfilter::OnCapMatchCallbackFunctor
 {
-    const PoolItem requestor;
+    const PoolItem_Ref requestor;
     PoolItemSet & tovisit;   
     PoolItemSet & toinstall;
     PoolItemSet & installed;
 
-    CollectProviders info (const PoolItem pi, PoolItemSet & tv, PoolItemSet & ti, PoolItemSet i)
+    CollectProviders info (const PoolItem_Ref pi, PoolItemSet & tv, PoolItemSet & ti, PoolItemSet i)
 	: requestor (pi)
 	, tovisit (tv)
 	, toinstall (ti)
@@ -203,12 +203,12 @@ struct CollectProviders : public resfilter::OnCapMatchCallbackFunctor
     { }
 
 
-    bool operator()( PoolItem provider, const Capability & match ) const
+    bool operator()( PoolItem_Ref provider, const Capability & match ) const
     {
       // Untill we can pass the functor by reference to algorithms.
       return const_cast<RequireProcess&>(*this).fake( provider, match );
     }
-    bool fake( PoolItem provider, const Capability & match )
+    bool fake( PoolItem_Ref provider, const Capability & match )
     {
 	// item provides cap which matches a requirement from info->requestor
 	//   this function gets _all_ providers and filter out those which are
@@ -230,7 +230,7 @@ struct CollectProviders : public resfilter::OnCapMatchCallbackFunctor
 
 
 void
-InstallOrder::rdfsvisit (const PoolItem  item)
+InstallOrder::rdfsvisit (const PoolItem_Ref  item)
 {
     typedef list<Capability> CapList;
     CapList requires;
@@ -276,7 +276,7 @@ InstallOrder::rdfsvisit (const PoolItem  item)
 
 	for (PoolItemSet::iterator it = tovisit.begin(); it != tovisit.end(); ++it)
 	{
-	    const PoolItem must_visit = *it;
+	    const PoolItem_Ref must_visit = *it;
 	    if (_nodes[must_visit].visited == false)
 	    {
 		nodeinfo.order++;

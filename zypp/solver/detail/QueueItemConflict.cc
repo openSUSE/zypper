@@ -67,7 +67,7 @@ operator<<( ostream& os, const QueueItemConflict & item)
 
 //---------------------------------------------------------------------------
 
-QueueItemConflict::QueueItemConflict (const ResPool *pool, const Capability & cap, PoolItem *item)
+QueueItemConflict::QueueItemConflict (const ResPool *pool, const Capability & cap, PoolItem_Ref *item)
     : QueueItem (QUEUE_ITEM_TYPE_CONFLICT, pool)
     , _capability (cap)
     , _conflicting_item (item)
@@ -92,15 +92,15 @@ QueueItemConflict::~QueueItemConflict()
 
 struct UpgradeCandidate : public resfilter::OnCapMatchCallbackFunctor
 {
-    PoolItem * item; // the conflicting resolvable, used to filter upgrades with an identical resolvable
+    PoolItem_Ref * item; // the conflicting resolvable, used to filter upgrades with an identical resolvable
     PoolItemList upgrades;
 
-    UpgradeCandidate (PoolItem *pi)
+    UpgradeCandidate (PoolItem_Ref *pi)
 	: item (pi)
     { }
 
 
-    bool operator() (PoolItem & candidate, const Capability & cap)
+    bool operator() (PoolItem_Ref & candidate, const Capability & cap)
     {
 	if (!(item->equals (candidate)) 		// dont upgrade with ourselves
 	    && candidate.status () == RESOLVABLE_STATUS_UNINSTALLED) {
@@ -119,13 +119,13 @@ struct UpgradeCandidate : public resfilter::OnCapMatchCallbackFunctor
 struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 {
     const ResPool *pool;
-    PoolItem *conflict_issuer;			// the item which issues 'conflicts:'
+    PoolItem_Ref *conflict_issuer;			// the item which issues 'conflicts:'
     const Capability & conflict_capability;	// the capability mentioned in the 'conflicts'
     ResolverContext_Ptr context;
     QueueItemList & new_items;
     bool actually_an_obsolete;
 
-    ConflictProcess (const ResPool *pl, PoolItem *ci, const Capability & cc, ResolverContext_Ptr ct, QueueItemList & ni, bool ao)
+    ConflictProcess (const ResPool *pl, PoolItem_Ref *ci, const Capability & cc, ResolverContext_Ptr ct, QueueItemList & ni, bool ao)
 	: pool (pl)
 	, conflict_issuer (ci),
 	, conflict_capability (cc)
@@ -134,7 +134,7 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	, actually_an_obsolete (ao)
     { }
 
-    bool operator()( PoolItem & provider, const Capability & provides )
+    bool operator()( PoolItem_Ref & provider, const Capability & provides )
     {
     ResStatus status;
     ResolverInfo_Ptr log_info;

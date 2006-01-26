@@ -92,7 +92,7 @@ class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
 
     ResolverInfoType _type;
 
-    PoolItem _affected;
+    PoolItem_Ref _affected;
 
     int _priority;
 
@@ -101,7 +101,7 @@ class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
 
   protected:
 
-    ResolverInfo (ResolverInfoType type, PoolItem affected, int priority);
+    ResolverInfo (ResolverInfoType type, PoolItem_Ref affected, int priority);
 
   public:
 
@@ -116,7 +116,7 @@ class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
     // ---------------------------------- accessors
 
     ResolverInfoType type (void) const { return _type; }
-    PoolItem affected (void) const { return _affected; }
+    PoolItem_Ref affected (void) const { return _affected; }
     int priority (void) const { return _priority; }
 
     int error (void) const { return _error; }
@@ -129,7 +129,7 @@ class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
     bool merge (ResolverInfo_Ptr to_be_merged);
     virtual ResolverInfo_Ptr copy (void) const;
 
-    bool isAbout (PoolItem & item) const;
+    bool isAbout (PoolItem_Ref & item) const;
 };
 
 ///////////////////////////////////////////////////////////////////

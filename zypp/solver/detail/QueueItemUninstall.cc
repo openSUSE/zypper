@@ -84,7 +84,7 @@ operator<<( ostream& os, const QueueItemUninstall & item)
 
 //---------------------------------------------------------------------------
 
-QueueItemUninstall::QueueItemUninstall (const ResPool *pool, PoolItem item, UninstallReason reason)
+QueueItemUninstall::QueueItemUninstall (const ResPool *pool, PoolItem_Ref item, UninstallReason reason)
     : QueueItem (QUEUE_ITEM_TYPE_UNINSTALL, pool)
     , _item (item)
     , _reason (reason)
@@ -131,12 +131,12 @@ struct UnlinkCheck: public resfilter::OnCapMatchCallbackFunctor
     //	   or if the uninstall breaks the requirer
     //	     in this case, we have to cancel the uninstallation
 
-    bool operator()( PoolItem requirer, const Capability & match ) const
+    bool operator()( PoolItem_Ref requirer, const Capability & match ) const
     {
       // Untill we can pass the functor by reference to algorithms.
       return const_cast<RequireProcess&>(*this).fake( requirer, match );
     }
-    bool fake( PoolItem requirer, const Capability & match )
+    bool fake( PoolItem_Ref requirer, const Capability & match )
     {
 	if (cancel_unlink)				// already cancelled
 	    return true;
@@ -160,12 +160,12 @@ struct UninstallProcess: public resfilter::OnCapMatchCallbackFunctor
 {
     const ResPool *pool;
     ResolverContext_Ptr context;
-    PoolItem uninstalled_item;
-    PoolItem upgraded_item;
+    PoolItem_Ref uninstalled_item;
+    PoolItem_Ref upgraded_item;
     QueueItemList & qil;
     bool remove_only;
 
-    UninstallProcessInfo (const ResPool *p, ResolverContext_Ptr ct, PoolItem u1, PoolItem u2, QueueItemList & l, bool ro)
+    UninstallProcessInfo (const ResPool *p, ResolverContext_Ptr ct, PoolItem_Ref u1, PoolItem_Ref u2, QueueItemList & l, bool ro)
 	: pool (p)
 	, context (ct)
 	, uninstalled_item (u1)
@@ -176,12 +176,12 @@ struct UninstallProcess: public resfilter::OnCapMatchCallbackFunctor
 
     // the uninstall of uninstalled_item breaks the dependency 'match' of resolvable 'requirer'
 
-    bool operator()( PoolItem requirer, const Capability & match ) const
+    bool operator()( PoolItem_Ref requirer, const Capability & match ) const
     {
       // Untill we can pass the functor by reference to algorithms.
       return const_cast<RequireProcess&>(*this).fake( requirer, match );
     }
-    bool fake( PoolItem requirer, const Capability & match )
+    bool fake( PoolItem_Ref requirer, const Capability & match )
     {
 	if (! context->isPresent (requirer))				// its not installed -> dont care
 	    return true;

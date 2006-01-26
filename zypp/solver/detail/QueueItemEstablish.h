@@ -47,7 +47,7 @@ namespace zypp
 class QueueItemEstablish : public QueueItem {
 
   private:
-    PoolItem _item;
+    PoolItem_Ref _item;
     int _channel_priority;
     int _other_penalty;
 
@@ -55,7 +55,7 @@ class QueueItemEstablish : public QueueItem {
 
   public:
 
-    QueueItemEstablish (const ResPool *pool, PoolItem item);
+    QueueItemEstablish (const ResPool *pool, PoolItem_Ref item);
     virtual ~QueueItemEstablish();
 
     // ---------------------------------- I/O
@@ -64,7 +64,7 @@ class QueueItemEstablish : public QueueItem {
 
     // ---------------------------------- accessors
 
-    PoolItem item (void) const { return _item; }
+    PoolItem_Ref item (void) const { return _item; }
 
     int channelPriority (void) const { return _channel_priority; }
     void setChannelPriority (int channel_priority) { _channel_priority = channel_priority; }

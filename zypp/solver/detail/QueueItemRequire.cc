@@ -97,7 +97,7 @@ QueueItemRequire::~QueueItemRequire()
 //---------------------------------------------------------------------------
 
 void
-QueueItemRequire::addPoolItem (PoolItem *item)
+QueueItemRequire::addPoolItem_Ref (PoolItem_Ref *item)
 {
     assert (_requiring_item == NULL);
     _requiring_item = item;
@@ -111,7 +111,7 @@ struct UniqTable
   struct Order
   {
     /** 'less then' based on name and edition */
-    bool operator()( PoolItem lhs, PoolItem rhs ) const
+    bool operator()( PoolItem_Ref lhs, PoolItem_Ref rhs ) const
     {
       int res = lhs->name().compare( rhs->name() );
       if ( res )
@@ -124,14 +124,14 @@ struct UniqTable
   typedef std::set<PoolItem,Order> UTable;
 
 
-  /** Test whether a matching PoolItem is in the table. */
-  bool has( PoolItem item_r ) const
+  /** Test whether a matching PoolItem_Ref is in the table. */
+  bool has( PoolItem_Ref item_r ) const
   { return _table.find( item_r ) != _table.end(); }
 
   /** Remember \a item_r (unless another matching PoolItem
    *  is already in the table)
   */
-  void remember( PoolItem item_r )
+  void remember( PoolItem_Ref item_r )
   { _table.insert(  item_r ); }
 
 
@@ -142,19 +142,19 @@ struct UniqTable
 
 struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 {
-    PoolItem *requirer;
+    PoolItem_Ref *requirer;
     const Capability *capability;
     ResolverContext_Ptr context;
     const ResPool *pool;
     PoolItemList providers;		// the provider which matched
     UniqTable uniq;
 
-    bool operator()( PoolItem provider, const Capability & match ) const
+    bool operator()( PoolItem_Ref provider, const Capability & match ) const
     {
       // Untill we can pass the functor by reference to algorithms.
       return const_cast<RequireProcess&>(*this).fake( provider, match );
     }
-    bool fake( PoolItem provider, const Capability & match )
+    bool fake( PoolItem_Ref provider, const Capability & match )
     {
 	//const Capability match;
 	ResStatus status;
@@ -198,15 +198,15 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 
 struct NoInstallableProviders : public resfilter::OnCapMatchCallbackFunctor
 {
-    PoolItem *requirer;
+    PoolItem_Ref *requirer;
     ResolverContext_Ptr context;
 
-    bool operator()( PoolItem provider, const Capability & match ) const
+    bool operator()( PoolItem_Ref provider, const Capability & match ) const
     {
       // Untill we can pass the functor by reference to algorithms.
       return const_cast<NoInstallableProviders&>(*this).fake( provider, match );
     }
-    bool fake( PoolItem provider, const Capability & match  ) const
+    bool fake( PoolItem_Ref provider, const Capability & match  ) const
     {
 	string msg_str;
 	//const Capability match;
@@ -217,18 +217,18 @@ struct NoInstallableProviders : public resfilter::OnCapMatchCallbackFunctor
 
 	if (item_status_is_to_be_uninstalled (status)) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALL_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
-	    misc_info->setOtherPoolItem (&provider);
+	    misc_info->setOtherPoolItem_Ref (&provider);
 	} else if (context->isParallelInstall (provider)) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_PARALLEL_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
-	    misc_info->setOtherPoolItem (&provider);
+	    misc_info->setOtherPoolItem_Ref (&provider);
 	} else if (! context->itemIsPossible (provider)) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NOT_INSTALLABLE_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
-	    misc_info->setOtherPoolItem (&provider);
+	    misc_info->setOtherPoolItem_Ref (&provider);
 #warning Locks not implemented
 #if 0
 	} else if (pool->itemIsLocked (provider)) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_LOCKED_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
-	    misc_info->setOtherPoolItem (&provider);
+	    misc_info->setOtherPoolItem_Ref (&provider);
 #endif
  	}
 
@@ -245,7 +245,7 @@ struct LookForUpgrades : public resfilter::OnCapMatchCallbackFunctor
 {
     PoolItemList upgrades;
 
-    bool operator()( PoolItem  & provider )
+    bool operator()( PoolItem_Ref  & provider )
     {
 	upgrades.push_front (&provider);
 	return true;
@@ -257,7 +257,7 @@ struct LookForUpgrades : public resfilter::OnCapMatchCallbackFunctor
 //   by looking at the name prefix: 'foo' and 'foo-bar' are codependent
 
 static bool
-codependent_items (const PoolItem *item1, const PoolItem *item2)
+codependent_items (const PoolItem_Ref *item1, const PoolItem_Ref *item2)
 {
     string name1 = (*item1)->name();
     string name2 = (*item2)->name();
@@ -391,7 +391,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		branch_item->setLabel (label);
 // ERR << "Branching: " << label << endl;
 		for (PoolItemList::const_iterator iter = info.upgrades.begin(); iter != info.upgrades.end(); iter++) {
-		    PoolItem *upgrade_item = *iter;
+		    PoolItem_Ref *upgrade_item = *iter;
 		    QueueItemInstall_Ptr install_item;
 
 		    if (context->itemIsPossible (*upgrade_item)) {
@@ -401,7 +401,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 			branch_item->addItem (install_item);
 
 			ResolverInfoNeededBy_Ptr upgrade_info = new ResolverInfoNeededBy (upgrade_item);
-			upgrade_info->addRelatedPoolItem (_upgraded_item);
+			upgrade_info->addRelatedPoolItem_Ref (_upgraded_item);
 			install_item->addInfo (upgrade_info);
 
 			// If an upgrade item has its requirements met, don't do the uninstall branch.
@@ -431,9 +431,9 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		for (PoolItemList::const_iterator iter = info.upgrades.begin(); iter != info.upgrades.end(); iter++) {
 		    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NO_UPGRADE, _requiring_item, RESOLVER_INFO_PRIORITY_VERBOSE);
 		    if (iter == info.upgrades.begin()) {
-			misc_info->setOtherPoolItem (*iter);
+			misc_info->setOtherPoolItem_Ref (*iter);
 		    }
-		    misc_info->addRelatedPoolItem (*iter);
+		    misc_info->addRelatedPoolItem_Ref (*iter);
 		    context->addInfo (misc_info);
 
 		    explore_uninstall_branch = true;

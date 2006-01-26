@@ -45,7 +45,7 @@ IMPL_PTR_TYPE(ProblemSolutionIgnore);
 
 ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
 					      const Dep &kind, 
-					      PoolItem item,
+					      PoolItem_Ref item,
 					      const Capability & capability)
     : ProblemSolution (parent, "", "")
 {

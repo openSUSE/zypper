@@ -46,7 +46,7 @@ class ResolverInfoMisc : public ResolverInfoContainer {
 
 	  Capability _capability;			// capability leading to this info
 
-	  PoolItem _other_item;
+	  PoolItem_Ref _other_item;
 	  Capability _other_capability;
 
 	  std::string _action;
@@ -54,7 +54,7 @@ class ResolverInfoMisc : public ResolverInfoContainer {
 
 	public:
 
-	  ResolverInfoMisc (ResolverInfoType detailedtype, PoolItem affected, int priority, const Capability & capability = Capability());
+	  ResolverInfoMisc (ResolverInfoType detailedtype, PoolItem_Ref affected, int priority, const Capability & capability = Capability());
 	  virtual ~ResolverInfoMisc();
 
 	  // ---------------------------------- I/O
@@ -67,7 +67,7 @@ class ResolverInfoMisc : public ResolverInfoContainer {
 	  std::string action (void) const { return _action; }
 	  std::string trigger (void) const { return _trigger; }
 
-	  PoolItem other (void) const { return _other_item; }
+	  PoolItem_Ref other (void) const { return _other_item; }
 	  const Capability other_capability (void) const { return _other_capability; }
 	  const Capability capability(void) const { return _capability; }
 
@@ -79,7 +79,7 @@ class ResolverInfoMisc : public ResolverInfoContainer {
 	  void addAction (const std::string & action_msg);
 	  void addTrigger (const std::string & trigger_msg);
 
-	  void setOtherPoolItem (PoolItem other);
+	  void setOtherPoolItem_Ref (PoolItem_Ref other);
 	  void setOtherCapability (const Capability & capability);
 };
 

@@ -34,16 +34,16 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
 PoolItem
-Helper::findInstalledItem (const ResPool *pool, PoolItem item)
+Helper::findInstalledItem (const ResPool *pool, PoolItem_Ref item)
 {
     struct LookForUpgrades : public resfilter::OnCapMatchCallbackFunctor
     {
-	PoolItem installed;
+	PoolItem_Ref installed;
 
 	LookForUpgrades ()
 	{ }
 
-	bool operator()( PoolItem  & provider )
+	bool operator()( PoolItem_Ref  & provider )
 	{
 	    installed = provider;
 	    return false;				// stop here, we found it

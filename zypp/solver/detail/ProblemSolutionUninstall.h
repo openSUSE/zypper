@@ -49,7 +49,7 @@ namespace zypp
 	    /**
 	     * Constructor.
 	     **/
-	    ProblemSolutionUninstall( ResolverProblem_Ptr parent, PoolItem item);
+	    ProblemSolutionUninstall( ResolverProblem_Ptr parent, PoolItem_Ref item);
 	    ProblemSolutionUninstall( ResolverProblem_Ptr parent, PoolItemList & itemlist);	    
 	};
 

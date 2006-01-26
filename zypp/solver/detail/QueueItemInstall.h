@@ -48,8 +48,8 @@ class QueueItemInstall : public QueueItem {
 
 
   private:
-    PoolItem _item;					// the item to-be-installed
-    PoolItem _upgrades;				// the item this install upgrades (if any)
+    PoolItem_Ref _item;					// the item to-be-installed
+    PoolItem_Ref _upgrades;				// the item this install upgrades (if any)
     CapSet _deps_satisfied_by_this_install;
     PoolItemList _needed_by;
     int _channel_priority;
@@ -59,7 +59,7 @@ class QueueItemInstall : public QueueItem {
 
   public:
 
-    QueueItemInstall (const ResPool *pool, PoolItem item);
+    QueueItemInstall (const ResPool *pool, PoolItem_Ref item);
     virtual ~QueueItemInstall();
 
     // ---------------------------------- I/O
@@ -68,10 +68,10 @@ class QueueItemInstall : public QueueItem {
 
     // ---------------------------------- accessors
 
-    PoolItem item(void) const { return _item; }
+    PoolItem_Ref item(void) const { return _item; }
 
-    PoolItem upgrades (void) const { return _upgrades; }
-    void setUpgrades (PoolItem upgrades) { _upgrades = upgrades; }
+    PoolItem_Ref upgrades (void) const { return _upgrades; }
+    void setUpgrades (PoolItem_Ref upgrades) { _upgrades = upgrades; }
 
     int channelPriority (void) const { return _channel_priority; }
     void setChannelPriority (int channel_priority) { _channel_priority = channel_priority; }
@@ -91,7 +91,7 @@ class QueueItemInstall : public QueueItem {
     virtual bool isSatisfied (ResolverContext_Ptr context) const;
 
     void addDependency (const Capability & capability);
-    void addNeededBy (const PoolItem item);
+    void addNeededBy (const PoolItem_Ref item);
 
 };
 

@@ -72,7 +72,7 @@ namespace zypp
 	class TransactionSolutionAction: public SolutionAction
 	{
 	public:
-	    TransactionSolutionAction( PoolItem item,
+	    TransactionSolutionAction( PoolItem_Ref item,
 				       TransactionKind action )
 		: SolutionAction(), _item( item ), _action( action ) {}
 
@@ -82,7 +82,7 @@ namespace zypp
 
 	  // ---------------------------------- accessors
 
-	  PoolItem item() const { return _item; }
+	  PoolItem_Ref item() const { return _item; }
 	  TransactionKind action() const { return _action;     }
 
 	  // ---------------------------------- methods
@@ -91,7 +91,7 @@ namespace zypp
 
 	protected:
 
-	    PoolItem _item;
+	    PoolItem_Ref _item;
 	    TransactionKind _action;
 	};
 

@@ -83,14 +83,14 @@ operator<<( ostream& os, const QueueItemInstall & item)
 
 //---------------------------------------------------------------------------
 
-QueueItemInstall::QueueItemInstall (const ResPool *pool, PoolItem *item)
+QueueItemInstall::QueueItemInstall (const ResPool *pool, PoolItem_Ref *item)
     : QueueItem (QUEUE_ITEM_TYPE_INSTALL, pool)
     , _item (item)
     , _channel_priority (0)
     , _other_penalty (0)
     , _explicitly_requested (false)
 {
-    PoolItem upgrades = Helper::findInstalledItem (item);
+    PoolItem_Ref upgrades = Helper::findInstalledItem (item);
 
     DBG << "QueueItemInstall::QueueItemInstall(" << item << ") upgrades "
 		<< ((upgrades!=PoolItem()) ? upgrades : "nothing") << endl;
@@ -123,12 +123,12 @@ struct BuildConflictList : public resfilter::OnCapMatchCallbackFunctor
 {
     PoolItemList items;
 
-    bool operator()( PoolItem provider, const Capability & match ) const
+    bool operator()( PoolItem_Ref provider, const Capability & match ) const
     {
       // Untill we can pass the functor by reference to algorithms.
       return const_cast<RequireProcess&>(*this).fake( provider, match );
     }
-    bool fake( PoolItem provider, const Capability & match )
+    bool fake( PoolItem_Ref provider, const Capability & match )
     {
 	items.push_front (provider);
 	return true;
@@ -154,12 +154,12 @@ struct EstablishFreshens : public resfilter::OnCapMatchCallbackFunctor
     // provider has a freshens on a just to-be-installed item
     //   re-establish provider, maybe its incomplete now
 
-    bool operator()( PoolItem provider, const Capability & match ) const
+    bool operator()( PoolItem_Ref provider, const Capability & match ) const
     {
       // Untill we can pass the functor by reference to algorithms.
       return const_cast<RequireProcess&>(*this).fake( provider, match );
     }
-    bool fake( PoolItem provider, const Capability & match )
+    bool fake( PoolItem_Ref provider, const Capability & match )
     {
 	DBG << "EstablishFreshens (" << provider << ", " << math << ")" << endl;
 
@@ -285,7 +285,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
     {	// just a block for local initializers, the goto above makes this necessary
 
 	ResolverInfoMisc_Ptr misc_info;
-#warning PoolItem default
+#warning PoolItem_Ref default
 	if (*_upgrades) {
 
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UPDATING, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
@@ -362,7 +362,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	for (PoolItemList::const_iterator iter = conflicts.items.begin(); iter != conflicts.items.end(); ++iter) {
 
-	    PoolItem conflicting_item = *iter;
+	    PoolItem_Ref conflicting_item = *iter;
 	    ResolverInfo_Ptr log_info;
 	    QueueItemUninstall_Ptr uninstall_item;
 
@@ -443,7 +443,7 @@ QueueItemInstall::addDependency (const Capability & dep)
 
 
 void
-QueueItemInstall::addNeededBy (PoolItem item)
+QueueItemInstall::addNeededBy (PoolItem_Ref item)
 {
     _needed_by.push_front (item);
 }

@@ -46,7 +46,7 @@ class ResolverInfoDependsOn : public ResolverInfoContainer {
 
   public:
 
-    ResolverInfoDependsOn (PoolItem item, PoolItem on);
+    ResolverInfoDependsOn (PoolItem_Ref item, PoolItem_Ref on);
     virtual ~ResolverInfoDependsOn();
 
     // ---------------------------------- I/O

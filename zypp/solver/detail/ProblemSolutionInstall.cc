@@ -46,7 +46,7 @@ IMPL_PTR_TYPE(ProblemSolutionInstall);
 //---------------------------------------------------------------------------
 
 ProblemSolutionInstall::ProblemSolutionInstall( ResolverProblem_Ptr parent,
-						PoolItem item )
+						PoolItem_Ref item )
     : ProblemSolution (parent, "", "")
 {
     // TranslatorExplanation %s = name of package, patch, selection ...    
@@ -68,7 +68,7 @@ ProblemSolutionInstall::ProblemSolutionInstall( ResolverProblem_Ptr parent,
 
     for (PoolItemList::iterator iter = itemList.begin();
 	 iter != itemList.end(); iter++) {
-	PoolItem item = *iter;
+	PoolItem_Ref item = *iter;
 	addAction ( new TransactionSolutionAction (item, INSTALL));
     }
 

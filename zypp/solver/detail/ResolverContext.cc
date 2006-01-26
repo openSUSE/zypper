@@ -90,7 +90,7 @@ ResolverContext::~ResolverContext()
 // status change
 
 void
-ResolverContext::setStatus (PoolItem & item, ResStatus & status)
+ResolverContext::setStatus (PoolItem_Ref & item, ResStatus & status)
 {
 #if 0
 	item.setStatus (status);

@@ -48,7 +48,7 @@ class ResolverInfoMissingReq : public ResolverInfo {
 
   public:
 
-    ResolverInfoMissingReq (PoolItem item, const Capability & missing_req);
+    ResolverInfoMissingReq (PoolItem_Ref item, const Capability & missing_req);
     virtual ~ResolverInfoMissingReq();
 
     // ---------------------------------- I/O

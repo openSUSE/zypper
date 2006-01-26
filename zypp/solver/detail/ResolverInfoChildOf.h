@@ -45,7 +45,7 @@ class ResolverInfoChildOf : public ResolverInfoContainer {
 
   public:
 
-    ResolverInfoChildOf (PoolItem item, PoolItem dependency);
+    ResolverInfoChildOf (PoolItem_Ref item, PoolItem_Ref dependency);
     virtual ~ResolverInfoChildOf();
 
     // ---------------------------------- I/O

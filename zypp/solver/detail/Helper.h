@@ -50,7 +50,7 @@ class Helper {
     // for item, find installed item which has same name and lower edition
     //  FIXME: should probably take provides/obsoletes into account for
     //	       renamed upgrades
-    static PoolItem findInstalledItem (const ResPool *pool, PoolItem item);
+    static PoolItem_Ref findInstalledItem (const ResPool *pool, PoolItem_Ref item);
 };
 
 ///////////////////////////////////////////////////////////////////

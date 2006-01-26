@@ -45,7 +45,7 @@ class ResolverInfoObsoletes : public ResolverInfoContainer {
 
   public:
 
-    ResolverInfoObsoletes (PoolItem resItem, PoolItem obsoletes);
+    ResolverInfoObsoletes (PoolItem_Ref resItem, PoolItem_Ref obsoletes);
     virtual ~ResolverInfoObsoletes();
 
     // ---------------------------------- I/O

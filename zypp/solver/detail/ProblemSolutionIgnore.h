@@ -52,7 +52,7 @@ namespace zypp
 	     **/
 	    ProblemSolutionIgnore( ResolverProblem_Ptr parent,
 				   const Dep &dep,
-				   PoolItem item,
+				   PoolItem_Ref item,
 				   const Capability & capability);
 	};
 
