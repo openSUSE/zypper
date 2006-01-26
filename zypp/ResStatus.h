@@ -52,6 +52,8 @@ namespace zypp
     // checked by the compiler.
   public:
 
+    // do we manage to hide them
+
     enum StateValue
       {
         UNINSTALLED = 0,
@@ -93,14 +95,48 @@ namespace zypp
 
     /** Default ctor. */
     ResStatus();
+
+    /** Ctor seting the initail . */
+    ResStatus( bool isInstalled_r );
+
     /** Dtor. */
     ~ResStatus();
+
+  public:
+
+    bool isInstalled() const
+    { return fieldValueIs<StateField>( INSTALLED ); }
+
+    bool transacts()   const
+    { return fieldValueIs<TransactField>( TRANSACT ); }
+
+  public:
+
+    bool setTransacts( bool val_r )
+    {
+      fieldValueAssign<TransactField>( val_r ? TRANSACT : KEEP_STATE );
+      return true;
+    }
+
 
     // get/set functions, returnig \c true if requested status change
     // was successfull (i.e. leading to the desired transaction).
     // If a lower level (e.g.SOLVER) wants to transact, but it's
     // already set by a higher level, \c true should be returned.
     // Removing a higher levels transaction bit should fail.
+  private:
+
+    /** Return wheter the corresponding Field has value \a val_r.
+    */
+    template<class _Field>
+      bool fieldValueIs( FieldType val_r ) const
+      { return _bitfield.isEqual<_Field>( val_r ); }
+
+    /** Set the corresponding Field to value \a val_r.
+    */
+    template<class _Field>
+      void fieldValueAssign( FieldType val_r )
+      { _bitfield.assign<_Field>( val_r ); }
 
   private:
     bit::BitField<FieldType> _bitfield;

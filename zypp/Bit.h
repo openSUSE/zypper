@@ -104,7 +104,7 @@ namespace zypp
      *
      * Most methods exist as templated and nontemplated
      * version. The nontemplated operates on the complete
-     * FitField, while the tamplated ones are restricted
+     * BitField, while the tamplated ones are restricted
      * to the given Range.
      * \code
      * BitField<char> bf;                // 00000000
@@ -169,12 +169,12 @@ namespace zypp
 
         /** Test for equal value within a Range. */
         template<class _Range>
-          bool isEqual( _IntT rhs )
+          bool isEqual( _IntT rhs ) const
           {
             return (_value & _Range::Mask::value)
                 == (rhs & _Range::Mask::value);
           }
-        bool isEqual( _IntT rhs )
+        bool isEqual( _IntT rhs ) const
         {
           return _value == rhs;
         }

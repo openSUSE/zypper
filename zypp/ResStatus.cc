@@ -30,6 +30,15 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
+  //	METHOD NAME : ResStatus::ResStatus
+  //	METHOD TYPE : Ctor
+  //
+  ResStatus::ResStatus( bool isInstalled_r )
+  : _bitfield( isInstalled_r ? INSTALLED : UNINSTALLED )
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
   //	METHOD NAME : ResStatus::~ResStatus
   //	METHOD TYPE : Dtor
   //
