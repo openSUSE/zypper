@@ -61,10 +61,10 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool _verifying;
 
     QueueItemList _initial_items;
-    CPoolItemList _items_to_install;
-    CPoolItemList _items_to_establish;
-    CPoolItemList _items_to_remove;
-    CPoolItemList _items_to_verify;
+    PoolItemList _items_to_install;
+    PoolItemList _items_to_establish;
+    PoolItemList _items_to_remove;
+    PoolItemList _items_to_verify;
 
     CapSet _extra_deps;
     CapSet _extra_conflicts;
@@ -112,13 +112,13 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 //    void addSubscribedChannel (Channel_constPtr channel);
 
     void addPoolItemToInstall (PoolItem item);
-    void addPoolItemsToInstallFromList (CPoolItemList & rl);
+    void addPoolItemsToInstallFromList (PoolItemList & rl);
 
     void addPoolItemToRemove (PoolItem item);
-    void addPoolItemsToRemoveFromList (CPoolItemList & rl);
+    void addPoolItemsToRemoveFromList (PoolItemList & rl);
 
     void addPoolItemToEstablish (PoolItem item);
-    void addPoolItemsToEstablishFromList (CPoolItemList & rl);
+    void addPoolItemsToEstablishFromList (PoolItemList & rl);
 
     void addPoolItemToVerify (PoolItem item);
 

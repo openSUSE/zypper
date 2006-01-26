@@ -45,14 +45,14 @@ Helper::findInstalledItem (const ResPool *pool, PoolItem item)
 
 	bool operator()( PoolItem  & provider )
 	{
-	    installed = provider
+	    installed = provider;
 	    return false;				// stop here, we found it
 	}
     };
 
-    LookForUpgrades info (item);
+    LookForUpgrades info;
 
-    invokeOnEach( pool()->byNameBegin( item->name() ), pool()->byNameEnd( item->name() ),
+    invokeOnEach( pool->byNameBegin( item->name() ), pool->byNameEnd( item->name() ),
 		  functor::chain( resfilter::ByStatus ( ResStatus::INSTALLED ),
 				  resfilter::ByKind( item->kind() ),
 				  resfilter::ByEdition<CompareByLT<Edition> >( item->edition() ),
@@ -71,4 +71,3 @@ Helper::findInstalledItem (const ResPool *pool, PoolItem item)
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // ZYPP_SOLVER_DETAIL_HELPER_H

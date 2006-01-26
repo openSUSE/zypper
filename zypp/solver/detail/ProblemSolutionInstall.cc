@@ -46,13 +46,13 @@ IMPL_PTR_TYPE(ProblemSolutionInstall);
 //---------------------------------------------------------------------------
 
 ProblemSolutionInstall::ProblemSolutionInstall( ResolverProblem_Ptr parent,
-						PoolItem * item )
+						PoolItem item )
     : ProblemSolution (parent, "", "")
 {
     // TranslatorExplanation %s = name of package, patch, selection ...    
-    _description = str::form (_("Installing %s"), (*item)->name().c_str() );
+    _description = str::form (_("Installing %s"), item->name().c_str() );
     ostringstream item_str;
-    item_str << (*item);
+    item_str << item;
     // TranslatorExplanation %s = name of package, patch, selection ...      
     _details = str::form (_("Installing %s"), item_str.str().c_str() );
 
@@ -68,7 +68,7 @@ ProblemSolutionInstall::ProblemSolutionInstall( ResolverProblem_Ptr parent,
 
     for (PoolItemList::iterator iter = itemList.begin();
 	 iter != itemList.end(); iter++) {
-	PoolItem *item = *iter;
+	PoolItem item = *iter;
 	addAction ( new TransactionSolutionAction (item, INSTALL));
     }
 

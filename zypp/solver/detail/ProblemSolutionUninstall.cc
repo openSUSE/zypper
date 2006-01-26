@@ -45,13 +45,13 @@ IMPL_PTR_TYPE(ProblemSolutionUninstall);
 //---------------------------------------------------------------------------
 
 ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent,
-						    PoolItem *item)
+						    PoolItem item)
     : ProblemSolution (parent, "", "")
 {
     // TranslatorExplanation %s = name of package, patch, selection ...	
-    _description = str::form (_("Deleting %s"), (*item)->name().c_str() );
+    _description = str::form (_("Deleting %s"), item->name().c_str() );
     ostringstream item_str;
-    item_str << (*item);
+    item_str << item;
     // TranslatorExplanation %s = name of package, patch, selection ...	    
     _details = str::form (_("Deleting %s"), item_str.str().c_str() );
 
@@ -66,7 +66,7 @@ ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent,
 
     for (PoolItemList::iterator iter = itemlist.begin();
 	 iter != itemlist.end(); iter++) {
-	PoolItem *item = *iter;
+	PoolItem item = *iter;
 	addAction ( new TransactionSolutionAction (item, REMOVE));
     }
     

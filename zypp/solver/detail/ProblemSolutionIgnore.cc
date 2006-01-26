@@ -45,14 +45,14 @@ IMPL_PTR_TYPE(ProblemSolutionIgnore);
 
 ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
 					      const Dep &kind, 
-					      PoolItem *item,
+					      PoolItem item,
 					      const Capability & capability)
     : ProblemSolution (parent, "", "")
 {
     if (kind == Dep::CONFLICTS) {
 	// TranslatorExplanation %s = name of package, patch, selection ...
 	_description = str::form (_("Ignoring conflict of %s"),
-				  (*item)->name().c_str());
+				  item->name().c_str());
 	addAction (new InjectSolutionAction (capability, kind));	
     } else if (kind == Dep::PROVIDES) { 
 	_description = _("Ignoring this requirement");

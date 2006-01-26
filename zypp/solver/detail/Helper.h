@@ -25,7 +25,7 @@
 #define ZYPP_SOLVER_DETAIL_HELPER_H
 
 #include "zypp/ResPool.h"
-#include "zypp/ResItem.h"
+#include "zypp/PoolItem.h"
 #include "zypp/CapSet.h"
 
 #include "zypp/solver/detail/Types.h"
@@ -44,7 +44,7 @@ namespace zypp
 //
 //	CLASS NAME : Helper
 
-class Helper:
+class Helper {
   public:
 
     // for item, find installed item which has same name and lower edition

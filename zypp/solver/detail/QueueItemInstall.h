@@ -51,7 +51,7 @@ class QueueItemInstall : public QueueItem {
     PoolItem _item;					// the item to-be-installed
     PoolItem _upgrades;				// the item this install upgrades (if any)
     CapSet _deps_satisfied_by_this_install;
-    CPoolItemList _needed_by;
+    PoolItemList _needed_by;
     int _channel_priority;
     int _other_penalty;
 

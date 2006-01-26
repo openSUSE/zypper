@@ -43,7 +43,7 @@ class ResolverInfoContainer : public ResolverInfo {
 
   private:
 
-    CPoolItemList _item_list;
+    PoolItemList _item_list;
 
   protected:
 
@@ -60,7 +60,7 @@ class ResolverInfoContainer : public ResolverInfo {
 
     // ---------------------------------- accessors
 
-    CPoolItemList items (void) const { return _item_list; }
+    PoolItemList items (void) const { return _item_list; }
 
     // ---------------------------------- methods
 
@@ -72,7 +72,7 @@ class ResolverInfoContainer : public ResolverInfo {
 
     bool mentions (PoolItem item) const;
     void addRelatedPoolItem (PoolItem item);
-    void addRelatedPoolItemList (const CPoolItemList & items);
+    void addRelatedPoolItemList (const PoolItemList & items);
 
 };
 

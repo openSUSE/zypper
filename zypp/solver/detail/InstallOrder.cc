@@ -50,14 +50,14 @@ using namespace zypp;
 
 //-----------------------------------------------------------------------------
 
-InstallOrder::InstallOrder(const ResPool *pool, const CPoolItemList & toinstall, const CPoolItemList & installed)
+InstallOrder::InstallOrder(const ResPool *pool, const PoolItemList & toinstall, const PoolItemList & installed)
     : _pool (pool)
     , _dirty (true)
     , _numrun (0)
 {
-    for (CPoolItemList::const_iterator iter = toinstall.begin(); iter != toinstall.end(); ++iter)
+    for (PoolItemList::const_iterator iter = toinstall.begin(); iter != toinstall.end(); ++iter)
 	_toinstall.insert (*iter);
-    for (CPoolItemList::const_iterator iter = installed.begin(); iter != installed.end(); ++iter)
+    for (PoolItemList::const_iterator iter = installed.begin(); iter != installed.end(); ++iter)
 	_installed.insert (*iter);
 }
 
@@ -76,7 +76,7 @@ InstallOrder::printAdj (std::ostream& os, bool reversed) const
 	string name = gcit->first.resolvable()->name();
 	os << "\"" << name << "\"" << "[label=\"" << name << "\\n" << order << "\"";
 	os << "] " << endl;
-	for (CPoolItemSet::const_iterator scit = gcit->second.begin(); scit != gcit->second.end(); ++scit)
+	for (PoolItemSet::const_iterator scit = gcit->second.begin(); scit != gcit->second.end(); ++scit)
 	{
 	    os << "\"" << name << "\" -> \"" << (*scit).resolvable()->name() << "\"" << endl;
 	}
@@ -88,10 +88,10 @@ InstallOrder::printAdj (std::ostream& os, bool reversed) const
 //-----------------------------------------------------------------------------
 
 // yea, that stuff is suboptimal. there should be a heap sorted by order
-CPoolItemList
+PoolItemList
 InstallOrder::computeNextSet()
 {
-    CPoolItemList newlist;
+    PoolItemList newlist;
 
     if (_dirty) startrdfs();
 
@@ -115,7 +115,7 @@ InstallOrder::setInstalled(const PoolItem  item )
 {
     _dirty = true;
 
-    CPoolItemSet & adj = _rgraph[item];
+    PoolItemSet & adj = _rgraph[item];
 
     _DBG("RC_SPEW") << "InstallOrder::setInstalled " << item << endl;
 
@@ -124,7 +124,7 @@ InstallOrder::setInstalled(const PoolItem  item )
     _installed.insert (item);
     _toinstall.erase (item);
 
-    for (CPoolItemSet::iterator it = adj.begin(); it != adj.end(); ++it)
+    for (PoolItemSet::iterator it = adj.begin(); it != adj.end(); ++it)
     {
 	NodeInfo& info = _nodes[*it];
 	info.order--;
@@ -137,9 +137,9 @@ InstallOrder::setInstalled(const PoolItem  item )
 
 
 void
-InstallOrder::setInstalled( const CPoolItemList & rl )
+InstallOrder::setInstalled( const PoolItemList & rl )
 {
-    for (CPoolItemList::const_iterator it = rl.begin(); it != rl.end(); ++it)
+    for (PoolItemList::const_iterator it = rl.begin(); it != rl.end(); ++it)
     {
 	setInstalled(*it);
     }
@@ -163,16 +163,16 @@ InstallOrder::startrdfs()
     _DBG("RC_SPEW") << "run #" << _numrun << endl;
 
     // initialize all nodes
-    for (CPoolItemSet::iterator it = _toinstall.begin(); it != _toinstall.end(); ++it)
+    for (PoolItemSet::iterator it = _toinstall.begin(); it != _toinstall.end(); ++it)
     {
 	const PoolItem item = *it;
 	_nodes[item] = NodeInfo (item);
-	_rgraph[item] = CPoolItemSet();
-	_graph[item] = CPoolItemSet();
+	_rgraph[item] = PoolItemSet();
+	_graph[item] = PoolItemSet();
     }
 
     // visit all nodes
-    for (CPoolItemSet::iterator it = _toinstall.begin(); it != _toinstall.end(); ++it)
+    for (PoolItemSet::iterator it = _toinstall.begin(); it != _toinstall.end(); ++it)
     {
 	const PoolItem item = *it;
 	if (_nodes[item].visited == false)
@@ -191,11 +191,11 @@ InstallOrder::startrdfs()
 struct CollectProviders : public resfilter::OnCapMatchCallbackFunctor
 {
     const PoolItem requestor;
-    CPoolItemSet & tovisit;   
-    CPoolItemSet & toinstall;
-    CPoolItemSet & installed;
+    PoolItemSet & tovisit;   
+    PoolItemSet & toinstall;
+    PoolItemSet & installed;
 
-    CollectProviders info (const PoolItem pi, CPoolItemSet & tv, CPoolItemSet & ti, CPoolItemSet i)
+    CollectProviders info (const PoolItem pi, PoolItemSet & tv, PoolItemSet & ti, PoolItemSet i)
 	: requestor (pi)
 	, tovisit (tv)
 	, toinstall (ti)
@@ -262,7 +262,7 @@ InstallOrder::rdfsvisit (const PoolItem  item)
     {
 	const Capability requirement = *iter;
 	_DBG("RC_SPEW") << "check requirement " << requirement << " of " << item << endl;
-	CPoolItemSet tovisit;
+	PoolItemSet tovisit;
 
 	CollectProviders info ( item, tovisit, _toinstall, _installed );
 
@@ -274,7 +274,7 @@ InstallOrder::rdfsvisit (const PoolItem  item)
 		      _pool->byCapabilityIndexEnd( requirement.index(), dep ),
 		      resfilter::callOnCapMatchIn( dep, requirement, info ) );
 
-	for (CPoolItemSet::iterator it = tovisit.begin(); it != tovisit.end(); ++it)
+	for (PoolItemSet::iterator it = tovisit.begin(); it != tovisit.end(); ++it)
 	{
 	    const PoolItem must_visit = *it;
 	    if (_nodes[must_visit].visited == false)
@@ -294,13 +294,13 @@ InstallOrder::rdfsvisit (const PoolItem  item)
 	    else
 	    {
 		// filter multiple depends on same item (cosmetic)
-		CPoolItemSet & lrg = _rgraph[must_visit];
+		PoolItemSet & lrg = _rgraph[must_visit];
 		if (lrg.find(item) == lrg.end())
 		{
 		    nodeinfo.order++;
 		    lrg.insert(item);
 
-		    CPoolItemSet & lg = _graph[item];
+		    PoolItemSet & lg = _graph[item];
 		    if (lg.find (must_visit) == lg.end())
 			lg.insert (must_visit);
 		}
@@ -317,7 +317,7 @@ InstallOrder::rdfsvisit (const PoolItem  item)
 
 //-----------------------------------------------------------------------------
 
-const CPoolItemList
+const PoolItemList
 InstallOrder::getTopSorted() const
 {
     return _topsorted;

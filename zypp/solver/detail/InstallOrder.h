@@ -59,11 +59,11 @@ class InstallOrder
     private:
 	const ResPool *_pool;
 
-	CPoolItemSet _toinstall;
-	CPoolItemSet _installed;
+	PoolItemSet _toinstall;
+	PoolItemSet _installed;
 
 	/** adjacency list type */
-	typedef std::map<const PoolItem, CPoolItemSet> Graph;
+	typedef std::map<const PoolItem, PoolItemSet> Graph;
 
 	/** adjacency list, package -> requirements */
 	Graph _graph;
@@ -90,7 +90,7 @@ class InstallOrder
 
 	unsigned _rdfstime;
 
-	CPoolItemList _topsorted;
+	PoolItemList _topsorted;
 
 	bool _dirty;
 
@@ -107,13 +107,13 @@ class InstallOrder
 	 * @param toinstall Set of ResItems that have to be installed
 	 * @param installed Set of ResItems that are already installed
 	 * */
-	InstallOrder (const ResPool *pool, const CPoolItemList & toinstall, const CPoolItemList & installed);
+	InstallOrder (const ResPool *pool, const PoolItemList & toinstall, const PoolItemList & installed);
 
 	/**
 	 * Compute a list of ResItems which have no requirements and can be
 	 * installed in parallel without conflicts. Use setInstalled to make
 	 * computation of a different set possible */
-	CPoolItemList computeNextSet();
+	PoolItemList computeNextSet();
 
 	/**
 	 * set a Solvable as installed, computeNextSet is able to compute a new
@@ -124,7 +124,7 @@ class InstallOrder
 	/**
 	 * like above, for convenience
 	 * */
-	void setInstalled( const CPoolItemList & list );
+	void setInstalled( const PoolItemList & list );
 
 	/**
 	 * recoursive depth first search, build internal trees
@@ -142,7 +142,7 @@ class InstallOrder
 	 *
 	 * @return list of resolvables in an installable order
 	 * */
-	const CPoolItemList getTopSorted() const;
+	const PoolItemList getTopSorted() const;
 
 	const void printAdj (std::ostream & os, bool reversed = false) const;
 };

@@ -118,9 +118,9 @@ Resolver::addResItemToInstall (PoolItem & item)
 
 
 void
-Resolver::addPoolItemsToInstallFromList (CPoolItemList & rl)
+Resolver::addPoolItemsToInstallFromList (PoolItemList & rl)
 {
-    for (CPoolItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
+    for (PoolItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
 	addPoolItemToInstall (*iter);
     }
 }
@@ -134,9 +134,9 @@ Resolver::addPoolItemToRemove (PoolItem & item)
 
 
 void
-Resolver::addPoolItemsToRemoveFromList (CPoolItemList & rl)
+Resolver::addPoolItemsToRemoveFromList (PoolItemList & rl)
 {
-    for (CPoolItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
+    for (PoolItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
 	addPoolItemToRemove (*iter);
     }
 }
@@ -150,9 +150,9 @@ Resolver::addPoolItemToEstablish (PoolItem & item)
 
 
 void
-Resolver::addPoolItemsToEstablishFromList (CPoolItemList & rl)
+Resolver::addPoolItemsToEstablishFromList (PoolItemList & rl)
 {
-    for (CPoolItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
+    for (PoolItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
 	addPoolItemToEstablish (*iter);
     }
 }
@@ -209,10 +209,10 @@ Resolver::verifySystem (void)
       all but one of the duplicates.
     */
 
-    for (CPoolItemList::const_iterator i0 = _items_to_verify.begin(); i0 != _items_to_verify.end();) {
-	CPoolItemList::const_iterator i1 = i0;
+    for (PoolItemList::const_iterator i0 = _items_to_verify.begin(); i0 != _items_to_verify.end();) {
+	PoolItemList::const_iterator i1 = i0;
 	i1++;
-	CPoolItemList::const_iterator i2 = i1;
+	PoolItemList::const_iterator i2 = i1;
 	for (; i1 != _items_to_verify.end()&& ! (*i0)->compareName (*i1); i1++) {
 	    //empty
 	}
@@ -222,11 +222,11 @@ Resolver::verifySystem (void)
 
 	    branch_item = new QueueItemBranch(world());
 
-	    for (CPoolItemList::const_iterator i = i0; i != i1; i++) {
+	    for (PoolItemList::const_iterator i = i0; i != i1; i++) {
 
 		QueueItemGroup_Ptr grp_item = new QueueItemGroup(world());
 
-		for (CPoolItemList::const_iterator j = i0; j != i1; j++) {
+		for (PoolItemList::const_iterator j = i0; j != i1; j++) {
 		    Package_constPtr dup_pkg = *j;
 		    QueueItemUninstall_Ptr uninstall_item;
 
@@ -319,7 +319,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 #if 0
     /* Walk through are list of to-be-installed packages and see if any of them are local. */
 
-    for (CPoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
+    for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
 	if ((*iter)->local()) {
 	    have_local_items = true;
 	    break;
@@ -366,7 +366,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     }
     _initial_items.clear();
 
-    for (CPoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
+    for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
 	PoolItem & r = *iter;
 
 	/* Add local packages to our dummy channel. */
@@ -380,15 +380,15 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	initial_queue->addPoolItemToInstall (r);
     }
 
-    for (CPoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
+    for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
 	initial_queue->addPoolItemToRemove (*iter, true /* remove-only mode */);
     }
 
-    for (CPoolItemList::const_iterator iter = _items_to_verify.begin(); iter != _items_to_verify.end(); iter++) {
+    for (PoolItemList::const_iterator iter = _items_to_verify.begin(); iter != _items_to_verify.end(); iter++) {
 	initial_queue->addPoolItemToVerify (*iter);
     }
 
-    for (CPoolItemList::const_iterator iter = _items_to_establish.begin(); iter != _items_to_establish.end(); iter++) {
+    for (PoolItemList::const_iterator iter = _items_to_establish.begin(); iter != _items_to_establish.end(); iter++) {
 	initial_queue->addPoolItemToEstablish (*iter);
     }
 

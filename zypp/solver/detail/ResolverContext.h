@@ -149,26 +149,26 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     /** iterate over various states */
 
     void foreachMarked (MarkedPoolItemFn fn, void *data) const;
-    CPoolItemList getMarked (int which) const;					// <0:uninstalls, 0:all; >0:installs
+    PoolItemList getMarked (int which) const;					// <0:uninstalls, 0:all; >0:installs
 
     int foreachInstall (MarkedPoolItemFn fn, void *data) const;
-    CPoolItemList getInstalls (void) const;
+    PoolItemList getInstalls (void) const;
     int installCount (void) const;
 
     int foreachUninstall (MarkedPoolItemFn fn, void *data) const;
-    CPoolItemList getUninstalls (void);
+    PoolItemList getUninstalls (void);
     int uninstallCount (void);
 
     int foreachUpgrade (MarkedPoolItemPairFn fn, void *data) const;
-    CPoolItemList getUpgrades (void);
+    PoolItemList getUpgrades (void);
     int upgradeCount (void);
 
     int foreachSatisfy (MarkedPoolItemFn fn, void *data) const;
-    CPoolItemList getSatisfies (void);
+    PoolItemList getSatisfies (void);
     int satisfyCount (void);
 
     int foreachIncomplete (MarkedPoolItemFn fn, void *data) const;
-    CPoolItemList getIncompletes (void);
+    PoolItemList getIncompletes (void);
     int incompleteCount (void);
 
     // add to the report log
