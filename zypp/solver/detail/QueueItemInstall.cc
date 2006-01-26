@@ -19,6 +19,17 @@
  * 02111-1307, USA.
  */
 
+#include "zypp/CapFactory.h"
+#include "zypp/CapSet.h"
+#include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
+
+#include "zypp/base/Algorithm.h"
+#include "zypp/ResPool.h"
+#include "zypp/ResFilters.h"
+#include "zypp/CapFilters.h"
+
 #include "zypp/solver/detail/QueueItemInstall.h"
 #include "zypp/solver/detail/QueueItemEstablish.h"
 #include "zypp/solver/detail/QueueItemUninstall.h"
@@ -30,12 +41,6 @@
 #include "zypp/solver/detail/ResolverInfoMisc.h"
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
 #include "zypp/solver/detail/Helper.h"
-
-#include "zypp/CapFactory.h"
-#include "zypp/CapSet.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Gettext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -57,10 +62,10 @@ ostream&
 operator<<( ostream& os, const QueueItemInstall & item)
 {
     os << "[Install: ";
-    os << item._item->asString();
-    if (item._upgrades != NULL) {
+    os << item._item;
+    if (item._upgrades) {
 	os << ", Upgrades ";
-	os << item._upgrades->asString();
+	os << item._upgrades;
     }
     if (!item._deps_satisfied_by_this_install.empty()) {
 	os << ", Satisfies [";
@@ -68,13 +73,12 @@ operator<<( ostream& os, const QueueItemInstall & item)
 	    iter != item._deps_satisfied_by_this_install.end(); iter++)
 	{
 	    if (iter != item._deps_satisfied_by_this_install.begin()) os << ", ";
-	    os << (*iter).asString();
+	    os << (*iter);
 	}
 	os << "]";
     }
     if (!item._needed_by.empty()) {
-	os << ", Needed by ";
-	os << ResItem::toString(item._needed_by);
+	os << ", Needed by " << item._needed_by;
     }
     if (item._explicitly_requested) os << ", Explicit !";
     os << "]";
@@ -90,15 +94,10 @@ QueueItemInstall::QueueItemInstall (const ResPool *pool, PoolItem_Ref item)
     , _other_penalty (0)
     , _explicitly_requested (false)
 {
-    PoolItem_Ref upgrades = Helper::findInstalledItem (item);
+    // check if this install upgrades anything
+    _upgrades = Helper::findInstalledItem (pool, item);
 
-    DBG << "QueueItemInstall::QueueItemInstall(" << item << ") upgrades "
-		<< ((upgrades!=PoolItem()) ? upgrades : "nothing") << endl;
-    if (upgrades!=PoolItem()
-	&& ! (upgrades->equals (item)))
-    {
-	setUpgrades(upgrades);
-    }
+    DBG << "QueueItemInstall::QueueItemInstall(" << item << ") upgrades " << _upgrades << endl;
 }
  
 
@@ -123,17 +122,12 @@ struct BuildConflictList : public resfilter::OnCapMatchCallbackFunctor
 {
     PoolItemList items;
 
-    bool operator()( PoolItem_Ref provider, const Capability & match ) const
-    {
-      // Untill we can pass the functor by reference to algorithms.
-      return const_cast<RequireProcess&>(*this).fake( provider, match );
-    }
-    bool fake( PoolItem_Ref provider, const Capability & match )
+    bool operator()( PoolItem_Ref provider, const Capability & match )
     {
 	items.push_front (provider);
 	return true;
     }
-}
+};
 
 
 //---------------------------------------------------------------------------
@@ -147,27 +141,22 @@ struct EstablishFreshens : public resfilter::OnCapMatchCallbackFunctor
 
     EstablishFreshens (const ResPool *p, QueueItemList &l)
 	: pool (p)
-	, qli (l)
+	, qil (l)
     { }
 
 
     // provider has a freshens on a just to-be-installed item
     //   re-establish provider, maybe its incomplete now
 
-    bool operator()( PoolItem_Ref provider, const Capability & match ) const
+    bool operator()( PoolItem_Ref provider, const Capability & match )
     {
-      // Untill we can pass the functor by reference to algorithms.
-      return const_cast<RequireProcess&>(*this).fake( provider, match );
-    }
-    bool fake( PoolItem_Ref provider, const Capability & match )
-    {
-	DBG << "EstablishFreshens (" << provider << ", " << math << ")" << endl;
+	DBG << "EstablishFreshens (" << provider << ", " << match << ")" << endl;
 
 	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, provider);
-	qil.push_front (provider);
+	qil.push_front (establish_item);
 	return true;
     }
-}
+};
 
 
 //---------------------------------------------------------------------------------------
@@ -175,15 +164,16 @@ struct EstablishFreshens : public resfilter::OnCapMatchCallbackFunctor
 bool
 QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
-    DBG <<  "QueueItemInstall::process(" << this->asString() << ")" << endl;
+    DBG <<  "QueueItemInstall::process(" << *this << ")" << endl;
 
-    ResItemStatus status = _item.status();
+    ResStatus status = _item.status();
 
     /* If we are trying to upgrade item A with item B and they both have the
 	same version number, do nothing.  This shouldn't happen in general with
 	zypp, but can come up with the installer & autopull. */
 
-    if (*_item == *_upgrades)
+    if (_upgrades
+	&& compareByNVRA(_item.resolvable(), _upgrades.resolvable()) == 0)
     {
 	ResolverInfo_Ptr info;
 
@@ -203,9 +193,9 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	DBG <<  "still needed " << endl;
 
 	for (PoolItemList::const_iterator iter = _needed_by.begin(); iter != _needed_by.end() && !still_needed; ++iter) {
-	    ResItemStatus status = iter->status();
+	    ResStatus status = iter->status();
 	    DBG << "by: [status: " << status << "] " << *iter << endl;
-	    if (! item_status_is_to_be_uninstalled (status)) {
+	    if (! status.isToBeUninstalled()) {
 		still_needed = true;
 	    }
 	}
@@ -219,7 +209,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	   needed this. */
 
     if (context->verifying()
-	&& item_status_is_to_be_uninstalled (_item.status()))
+	&& _item.status().isToBeUninstalled()
 	&& !_needed_by.empty()) {
 
 	QueueItemUninstall_Ptr uninstall_item;
@@ -267,16 +257,16 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	ResolverInfoNeededBy_Ptr info;
 
 	info = new ResolverInfoNeededBy (_item);
-	info->addRelatedResItemList (_needed_by);
+	info->addRelatedPoolItemList (_needed_by);
 	context->addInfo (info);
     }
 
     // we're done if this isn't currently uninstalled or incomplete
 
-    if (! (status == RESOLVABLE_STATUS_UNINSTALLED
-	|| status == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK
-	|| item_status_is_incomplete (status)
-	|| item_status_is_satisfied (status)))
+    if (! (status.isUninstalled()
+	|| status.isToBeUninstalledDueToUnlink()
+	|| status.isIncomplete()
+	|| status.isSatisfied()))
     {
 	goto finished;
     }
@@ -288,7 +278,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	if (_upgrades) {
 
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UPDATING, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
-	    misc_info->setOtherResItem (_upgrades);
+	    misc_info->setOtherPoolItem (_upgrades);
 
 	} else {
 
@@ -313,7 +303,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    if (!context->requirementIsMet (cap)) {
 		DBG << "this requirement is still unfulfilled" << endl;
 		QueueItemRequire_Ptr req_item = new QueueItemRequire (pool(), cap);
-		req_item->addResItem (item);
+		req_item->addPoolItem (_item);
 		qil.push_front (req_item);
 	    }
 
@@ -321,24 +311,24 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	/* Construct conflict items for each of the item's conflicts. */
 
-	caps = item->dep (Dep::CONFLICTS);
+	caps = _item->dep (Dep::CONFLICTS);
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 
 	    const Capability cap = *iter;
 	    DBG << "this conflicts with '" << cap << "'" << endl;
-	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, item);
+	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item);
 	    qil.push_front (conflict_item);
 
 	}
 
 	/* Construct conflict items for each of the item's obsoletes. */
 
-	caps = item->dep (Dep::OBSOLETES);
+	caps = _item->dep (Dep::OBSOLETES);
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 
 	    const Capability cap = *iter;
-	    DBG << "this obsoletes " <<  dep << endl;
-	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, item);
+	    DBG << "this obsoletes " <<  cap << endl;
+	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item);
 	    conflict_item->setActuallyAnObsolete();
 	    qil.push_front (conflict_item);
 
@@ -347,7 +337,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	/* Construct uninstall items for system item's that conflict with us. */
 
 	BuildConflictList conflicts;
-	caps = item->dep (Dep::PROVIDES);
+	caps = _item->dep (Dep::PROVIDES);
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 	    const Capability cap = *iter;
 
@@ -356,7 +346,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    Dep dep( Dep::CONFLICTS);
 	    invokeOnEach( pool()->byCapabilityIndexBegin( cap.index(), dep ), // begin()
 			  pool()->byCapabilityIndexEnd( cap.index(), dep ),   // end()
-			  resfilter::callOnCapMatchIn( dep, cap, conflicts) );
+			  resfilter::callOnCapMatchIn( dep, cap, functor::functorRef<bool,PoolItem,Capability>(conflicts)) );
 	}
 
 	for (PoolItemList::const_iterator iter = conflicts.items.begin(); iter != conflicts.items.end(); ++iter) {
@@ -371,11 +361,11 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	     * exist on the system at a time.
 	     */
 
-	    if (*conflicting_item == *_item) {
+	    if (compareByNVR (conflicting_item.resolvable(), _item.resolvable()) == 0) {
 		continue;
 	    }
 
-	    DBG << "because: '" << conflicting_item->asString(true) << "'" << endl;
+	    DBG << "because: '" << conflicting_item << "'" << endl;
 
 	    uninstall_item = new QueueItemUninstall (pool(), conflicting_item, QueueItemUninstall::CONFLICT);
 	    uninstall_item->setDueToConflict ();
@@ -395,7 +385,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	Dep dep( Dep::FRESHENS);
 	invokeOnEach( pool()->byCapabilityIndexBegin( cap.index(), dep ), // begin()
 		      pool()->byCapabilityIndexEnd( cap.index(), dep ),   // end()
-		      resfilter::callOnCapMatchIn( dep, cap, info) );
+		      resfilter::callOnCapMatchIn( dep, cap, functor::functorRef<bool,PoolItem,Capability>(info)) );
 
     } // end of block
 
@@ -429,7 +419,7 @@ QueueItemInstall::cmp (QueueItem_constPtr item) const
     if (cmp != 0)
 	return cmp;
     QueueItemInstall_constPtr install = dynamic_pointer_cast<const QueueItemInstall>(item);
-    return ResItem::compare (_item, install->_item);
+    return compareByNVRA (_item.resolvable(), install->_item.resolvable());
 }
 
 //---------------------------------------------------------------------------

@@ -79,7 +79,7 @@ class ResolverQueue : public base::ReferenceCounted, private base::NonCopyable {
     void addPoolItemToEstablish (PoolItem_Ref item);
     void addPoolItemToRemove (PoolItem_Ref item, bool remove_only_mode);
     void addPoolItemToVerify (PoolItem_Ref item);
-    void addExtraDependency (const Capability & cap);
+    void addExtraCapability (const Capability & cap);
     void addExtraConflict (const Capability & cap);
     void addItem (QueueItem_Ptr item);
 

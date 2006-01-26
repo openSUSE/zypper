@@ -20,6 +20,7 @@
  */
 
 #include <map>
+#include <sstream>
 
 #include "zypp/solver/detail/ResolverInfo.h"
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
@@ -43,41 +44,24 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       
-      string
-      ResolverInfoNeededBy::asString ( void ) const
-      {
-          return toString (*this);
-      }
-      
-      
-      string
-      ResolverInfoNeededBy::toString ( const ResolverInfoNeededBy & by)
-      {
-	  // Translator: all.%s = name of package,patch,...
-          return str::form (_("%s needed by %s"),
-			    ResolverInfo::toString (by, false).c_str(),
-			    by.resItemsToString(false).c_str());
-      }
-      
-      
-      ostream &
-      ResolverInfoNeededBy::dumpOn( ostream & str ) const
-      {
-          str << asString();
-          return str;
-      }
-      
-      
       ostream&
       operator<<( ostream& os, const ResolverInfoNeededBy & by)
       {
-          return os << by.asString();
+	  const ResolverInfo & info = by;
+	  ostringstream info_str;
+	  info_str << info;
+
+	  // Translator: all.%s = name of package,patch,...
+          os << str::form (_("%s needed by %s"),
+			    info_str.str().c_str(),
+			    by.itemsToString(false).c_str());
+	  return os;
       }
       
       //---------------------------------------------------------------------------
       
-      ResolverInfoNeededBy::ResolverInfoNeededBy (ResItem_constPtr resItem)
-          : ResolverInfoContainer (RESOLVER_INFO_TYPE_NEEDED_BY, resItem, RESOLVER_INFO_PRIORITY_USER, NULL)
+      ResolverInfoNeededBy::ResolverInfoNeededBy (PoolItem_Ref item)
+          : ResolverInfoContainer (RESOLVER_INFO_TYPE_NEEDED_BY, item, RESOLVER_INFO_PRIORITY_USER)
       {
       }
       

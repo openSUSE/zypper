@@ -111,11 +111,11 @@ InstallOrder::computeNextSet()
 
 // decrease order of every adjacent node
 void
-InstallOrder::setInstalled(const PoolItem_Ref  item )
+InstallOrder::setInstalled(PoolItem_Ref item )
 {
     _dirty = true;
 
-    PoolItemSet & adj = _rgraph[item];
+    PoolItemSet adj = _rgraph[item];
 
     _DBG("RC_SPEW") << "InstallOrder::setInstalled " << item << endl;
 
@@ -165,7 +165,7 @@ InstallOrder::startrdfs()
     // initialize all nodes
     for (PoolItemSet::iterator it = _toinstall.begin(); it != _toinstall.end(); ++it)
     {
-	const PoolItem_Ref item = *it;
+	PoolItem_Ref item = *it;
 	_nodes[item] = NodeInfo (item);
 	_rgraph[item] = PoolItemSet();
 	_graph[item] = PoolItemSet();
@@ -195,7 +195,7 @@ struct CollectProviders : public resfilter::OnCapMatchCallbackFunctor
     PoolItemSet & toinstall;
     PoolItemSet & installed;
 
-    CollectProviders info (const PoolItem_Ref pi, PoolItemSet & tv, PoolItemSet & ti, PoolItemSet i)
+    CollectProviders (const PoolItem_Ref pi, PoolItemSet & tv, PoolItemSet & ti, PoolItemSet i)
 	: requestor (pi)
 	, tovisit (tv)
 	, toinstall (ti)
@@ -203,24 +203,18 @@ struct CollectProviders : public resfilter::OnCapMatchCallbackFunctor
     { }
 
 
-    bool operator()( PoolItem_Ref provider, const Capability & match ) const
-    {
-      // Untill we can pass the functor by reference to algorithms.
-      return const_cast<RequireProcess&>(*this).fake( provider, match );
-    }
-    bool fake( PoolItem_Ref provider, const Capability & match )
+    bool operator()( PoolItem_Ref provider, const Capability & match )
     {
 	// item provides cap which matches a requirement from info->requestor
 	//   this function gets _all_ providers and filter out those which are
 	//   either installed or in our toinstall input list
 	//
 
-	if ((provider != requestor)  					// package could provide its own requirement
-#warning fixme
-//	&& (!(item->status().isInstalled())				// only visit if provider is not already installed
-	    && (toinstall->find(provider) != toinstall->end()		// only look at packages
-		|| installed->find(provider) != installed->end())) {	//   we are currently considering anyways
-	    tovisit->insert (provider);
+	if ((provider.resolvable() != requestor.resolvable())		// resolvable could provide its own requirement
+	    && (!provider.status().isInstalled())			// only visit if provider is not already installed
+	    && (toinstall.find(provider) != toinstall.end()		// only look at resolvables
+		|| installed.find(provider) != installed.end())) {	//   we are currently considering anyways
+	    tovisit.insert (provider);
 	}
 
 	return true;
@@ -266,13 +260,13 @@ InstallOrder::rdfsvisit (const PoolItem_Ref  item)
 
 	CollectProviders info ( item, tovisit, _toinstall, _installed );
 
-#warning fixme
-//	_world->foreachProvidingResItem (requirement, collect_providers, &info);
+
+	// _world->foreachProvidingResItem (requirement, collect_providers, &info);
 
 	Dep dep (Dep::PROVIDES);
 	invokeOnEach( _pool->byCapabilityIndexBegin( requirement.index(), dep ),
 		      _pool->byCapabilityIndexEnd( requirement.index(), dep ),
-		      resfilter::callOnCapMatchIn( dep, requirement, info ) );
+		      resfilter::callOnCapMatchIn( dep, requirement, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 
 	for (PoolItemSet::iterator it = tovisit.begin(); it != tovisit.end(); ++it)
 	{

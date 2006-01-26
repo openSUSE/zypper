@@ -20,6 +20,7 @@
  */
 
 #include <map>
+#include <sstream>
 
 #include "zypp/solver/detail/ResolverInfo.h"
 #include "zypp/solver/detail/ResolverInfoMissingReq.h"
@@ -43,42 +44,26 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       
-      string
-      ResolverInfoMissingReq::asString ( void ) const
-      {
-          return toString (*this);
-      }
-      
-      
-      string
-      ResolverInfoMissingReq::toString ( const ResolverInfoMissingReq & missing)
-      {
-	  // Translator: 1.%s = name of package,patch,...; 2.%s = dependency
-          return str::form (_("%s missing requirement %s"),
-			    ResolverInfo::toString (missing).c_str(),
-			    missing._missing_req.asString().c_str());
-      }
-      
-      
-      ostream &
-      ResolverInfoMissingReq::dumpOn( ostream & str ) const
-      {
-          str << asString();
-          return str;
-      }
-      
-      
       ostream&
       operator<<( ostream& os, const ResolverInfoMissingReq & missing)
       {
-          return os << missing.asString();
+	  const ResolverInfo & info = missing;
+	  ostringstream info_str;
+	  info_str << info;
+	  ostringstream mis_str;
+	  mis_str << missing._missing;
+	  // Translator: 1.%s = name of package,patch,...; 2.%s = dependency
+          os << str::form (_("%s missing requirement %s"),
+			    info_str.str().c_str(),
+			    mis_str.str().c_str());
+	  return os;
       }
       
       //---------------------------------------------------------------------------
       
-      ResolverInfoMissingReq::ResolverInfoMissingReq (ResItem_constPtr resItem, const Capability & missing_req)
-          : ResolverInfo (RESOLVER_INFO_TYPE_MISSING_REQ, resItem, RESOLVER_INFO_PRIORITY_USER)
-          , _missing_req (missing_req)
+      ResolverInfoMissingReq::ResolverInfoMissingReq (PoolItem_Ref item, const Capability & missing)
+          : ResolverInfo (RESOLVER_INFO_TYPE_MISSING_REQ, item, RESOLVER_INFO_PRIORITY_USER)
+          , _missing (missing)
       {
       }
       
@@ -92,7 +77,7 @@ namespace zypp
       ResolverInfo_Ptr
       ResolverInfoMissingReq::copy (void) const
       {
-          ResolverInfoMissingReq_Ptr cpy = new ResolverInfoMissingReq(affected(), _missing_req);
+          ResolverInfoMissingReq_Ptr cpy = new ResolverInfoMissingReq(affected(), _missing);
       
           ((ResolverInfo_Ptr)cpy)->copy (this);
       

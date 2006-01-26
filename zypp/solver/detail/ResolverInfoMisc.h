@@ -23,6 +23,11 @@
 #define ZYPP_SOLVER_DETAIL_RESOLVERINFOMISC_H
 
 #include <string>
+
+#include "zypp/ResPool.h"
+#include "zypp/Capability.h"
+
+
 #include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/ResolverInfoContainer.h"
 
@@ -54,7 +59,7 @@ class ResolverInfoMisc : public ResolverInfoContainer {
 
 	public:
 
-	  ResolverInfoMisc (ResolverInfoType detailedtype, PoolItem_Ref affected, int priority, const Capability & capability = Capability());
+	  ResolverInfoMisc (ResolverInfoType detailedtype, PoolItem_Ref affected, int priority, const Capability & capability = Capability::noCap);
 	  virtual ~ResolverInfoMisc();
 
 	  // ---------------------------------- I/O
@@ -79,7 +84,7 @@ class ResolverInfoMisc : public ResolverInfoContainer {
 	  void addAction (const std::string & action_msg);
 	  void addTrigger (const std::string & trigger_msg);
 
-	  void setOtherPoolItem_Ref (PoolItem_Ref other);
+	  void setOtherPoolItem (PoolItem_Ref other);
 	  void setOtherCapability (const Capability & capability);
 };
 

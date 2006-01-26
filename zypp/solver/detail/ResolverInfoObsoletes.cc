@@ -20,6 +20,7 @@
  */
 
 #include <map>
+#include <sstream>
 
 #include "zypp/solver/detail/ResolverInfo.h"
 #include "zypp/solver/detail/ResolverInfoObsoletes.h"
@@ -42,42 +43,24 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      
-      string
-      ResolverInfoObsoletes::asString ( void ) const
-      {
-          return toString (*this);
-      }
-      
-      
-      string
-      ResolverInfoObsoletes::toString ( const ResolverInfoObsoletes & obsoletes)
-      {
-	  // Translator: all.%s = name of package,patch,....
-	 return str::form (_("%s replaced by %s"),
-			   ResolverInfo::toString (obsoletes).c_str(),
-			   obsoletes.resItemsToString(false).c_str());;
-      }
-      
-      
-      ostream &
-      ResolverInfoObsoletes::dumpOn( ostream & str ) const
-      {
-          str << asString();
-          return str;
-      }
-      
-      
       ostream&
       operator<<( ostream& os, const ResolverInfoObsoletes & obsoletes)
       {
-          return os << obsoletes.asString();
+	  const ResolverInfo & info = obsoletes;
+	  ostringstream info_str;
+	  info_str << info;
+
+	  // Translator: all.%s = name of package,patch,....
+	  os << str::form (_("%s replaced by %s"),
+			   info_str.str().c_str(),
+			   obsoletes.itemsToString(false).c_str());
+	  return os;
       }
       
       //---------------------------------------------------------------------------
       
-      ResolverInfoObsoletes::ResolverInfoObsoletes (ResItem_constPtr resItem, ResItem_constPtr obsoletes)
-          : ResolverInfoContainer (RESOLVER_INFO_TYPE_OBSOLETES, resItem, RESOLVER_INFO_PRIORITY_USER, obsoletes)
+      ResolverInfoObsoletes::ResolverInfoObsoletes (PoolItem_Ref item, PoolItem_Ref obsoletes)
+          : ResolverInfoContainer (RESOLVER_INFO_TYPE_OBSOLETES, item, RESOLVER_INFO_PRIORITY_USER, obsoletes)
       {
       }
       
@@ -91,7 +74,9 @@ namespace zypp
       ResolverInfo_Ptr
       ResolverInfoObsoletes::copy (void) const
       {
-          ResolverInfoObsoletes_Ptr cpy = new ResolverInfoObsoletes(affected(), NULL);
+	  // leave the second item empty, it will be copied with the container below
+
+          ResolverInfoObsoletes_Ptr cpy = new ResolverInfoObsoletes(affected(), PoolItem_Ref());
       
           ((ResolverInfoContainer_Ptr)cpy)->copy (this);
       

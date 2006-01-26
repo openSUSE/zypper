@@ -20,6 +20,7 @@
  */
 
 #include <map>
+#include <sstream>
 
 #include "zypp/solver/detail/ResolverInfo.h"
 #include "zypp/solver/detail/ResolverInfoDependsOn.h"
@@ -42,42 +43,23 @@ namespace zypp
       
       //---------------------------------------------------------------------------
       
-      
-      string
-      ResolverInfoDependsOn::asString ( void ) const
-      {
-          return toString (*this);
-      }
-      
-      
-      string
-      ResolverInfoDependsOn::toString ( const ResolverInfoDependsOn & on)
-      {
-	  // Translator: all.%s = name of package,patch,....
-          return str::form (_("%s depended on %s"),
-			    ResolverInfo::toString (on).c_str(),
-			    on.resItemsToString(false).c_str());
-      }
-      
-      
-      ostream &
-      ResolverInfoDependsOn::dumpOn( ostream & str ) const
-      {
-          str << asString();
-          return str;
-      }
-      
-      
       ostream&
       operator<<( ostream& os, const ResolverInfoDependsOn & on)
       {
-          return os << on.asString();
+	  const ResolverInfo & info = on;
+	  ostringstream info_str;
+	  info_str << info;
+	  // Translator: all.%s = name of package,patch,....
+          os << str::form (_("%s depended on %s"),
+			info_str.str().c_str(),
+			on.itemsToString(false).c_str());
+	  return os;
       }
-      
+
       //---------------------------------------------------------------------------
-      
-      ResolverInfoDependsOn::ResolverInfoDependsOn (ResItem_constPtr resItem, ResItem_constPtr on)
-          : ResolverInfoContainer (RESOLVER_INFO_TYPE_DEPENDS_ON, resItem, RESOLVER_INFO_PRIORITY_USER, on)
+
+      ResolverInfoDependsOn::ResolverInfoDependsOn (PoolItem_Ref item, PoolItem_Ref on)
+          : ResolverInfoContainer (RESOLVER_INFO_TYPE_DEPENDS_ON, item, RESOLVER_INFO_PRIORITY_USER, on)
       {
       }
       
@@ -91,7 +73,7 @@ namespace zypp
       ResolverInfo_Ptr
       ResolverInfoDependsOn::copy (void) const
       {
-          ResolverInfoDependsOn_Ptr cpy = new ResolverInfoDependsOn(affected(), NULL);
+          ResolverInfoDependsOn_Ptr cpy = new ResolverInfoDependsOn(affected(), PoolItem_Ref());
       
           ((ResolverInfoContainer_Ptr)cpy)->copy (this);
       

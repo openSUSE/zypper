@@ -56,7 +56,7 @@ ostream&
 operator<<( ostream& os, const QueueItemEstablish & item)
 {
     os <<"[Establish: ";
-    os << *(item._item);
+    os << item._item;
     if (item._explicitly_requested) os << ", Explicit !";
     os << "]";
     return os;
@@ -95,9 +95,9 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
     DBG << "QueueItemEstablish::process(" << *this << ")" << endl;
 
-    CapSet freshens = (*_item)->dep(Dep::FRESHENS);
+    CapSet freshens = _item->dep(Dep::FRESHENS);
 
-    DBG << "simple establish of " << *_item << " with " << freshens.size() << " freshens" << endl;
+    DBG << "simple establish of " << _item << " with " << freshens.size() << " freshens" << endl;
 
     ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_ESTABLISHING, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
     context->addInfo (misc_info);
@@ -122,7 +122,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	context->unneeded (_item, _other_penalty);
     }
     else {
-	CapSet requires = (*_item)->dep(Dep::REQUIRES);
+	CapSet requires = _item->dep(Dep::REQUIRES);
 	for (iter = requires.begin(); iter != requires.end(); iter++) {
 	    const Capability cap = *iter;
 	    if (!context->requirementIsMet (cap)) {
@@ -164,7 +164,7 @@ QueueItemEstablish::cmp (QueueItem_constPtr item) const
     if (cmp != 0)
 	return cmp;
     QueueItemEstablish_constPtr establish = dynamic_pointer_cast<const QueueItemEstablish>(item);
-    return Resolvable::compare (_item->resolvable(), establish->_item->resolvable());
+    return compareByNVR(_item.resolvable(), establish->_item.resolvable());
 }
 
 ///////////////////////////////////////////////////////////////////

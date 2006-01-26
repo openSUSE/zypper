@@ -20,7 +20,16 @@
  */
 
 #include "zypp/solver/detail/Resolver.h"
+
+#include "zypp/CapSet.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
+
+#include "zypp/base/Algorithm.h"
+#include "zypp/ResPool.h"
+#include "zypp/ResFilters.h"
+#include "zypp/CapFilters.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -47,7 +56,7 @@ operator<<( ostream& os, const Resolver & resolver)
 //---------------------------------------------------------------------------
 
 Resolver::Resolver (const ResPool *pool)
-    , _pool (pool)
+    : _pool (pool)
     , _timeout_seconds (0)
     , _verifying (false)
     , _valid_solution_count (0)
@@ -85,7 +94,7 @@ Resolver::reset (void)
     _items_to_verify.clear();
     _items_to_establish.clear();
 
-    _extra_deps.clear();
+    _extra_caps.clear();
     _extra_conflicts.clear();
 
     _pending_queues.clear();
@@ -103,15 +112,17 @@ Resolver::reset (void)
 
 //---------------------------------------------------------------------------
 
+#warning Needs Source Backref
+#if 0
 void
 Resolver::addSubscribedChannel (Channel_constPtr channel)
 {
     ERR << "Resolver::addSubscribedChannel() not implemented" << endl;
 }
-
+#endif
 
 void
-Resolver::addResItemToInstall (PoolItem_Ref & item)
+Resolver::addPoolItemToInstall (PoolItem_Ref item)
 {
     _items_to_install.push_front (item);
 }
@@ -127,7 +138,7 @@ Resolver::addPoolItemsToInstallFromList (PoolItemList & rl)
 
 
 void
-Resolver::addPoolItemToRemove (PoolItem_Ref & item)
+Resolver::addPoolItemToRemove (PoolItem_Ref item)
 {
     _items_to_remove.push_front (item);
 }
@@ -143,7 +154,7 @@ Resolver::addPoolItemsToRemoveFromList (PoolItemList & rl)
 
 
 void
-Resolver::addPoolItemToEstablish (PoolItem_Ref & item)
+Resolver::addPoolItemToEstablish (PoolItem_Ref item)
 {
     _items_to_establish.push_front (item);
 }
@@ -159,95 +170,77 @@ Resolver::addPoolItemsToEstablishFromList (PoolItemList & rl)
 
 
 void
-Resolver::addPoolItemToVerify (PoolItem_Ref & item)
+Resolver::addPoolItemToVerify (PoolItem_Ref item)
 {
+#if 0
+  /** Order PoolItems based on name and edition only. */
+  struct {
+    /** 'less then' based on name and edition */
+    bool operator()( PoolItem_Ref lhs, PoolItem_Ref rhs ) const
+    {
+      int res = lhs->name().compare( rhs->name() );
+      if ( res )
+        return res == -1; // lhs < rhs ?
+      // here: lhs == rhs, so compare edition:
+      return lhs->edition() < rhs->edition();
+    }
+  } order;
+#endif
+
     _items_to_verify.push_front (item);
-    _items_to_verify.sort ();			//(GCompareFunc) rc_item_compare_name);
+
+#warning Should order by name (and probably edition since with zypp we could have multiple editions installed in parallel)
+//    _items_to_verify.sort (order);			//(GCompareFunc) rc_item_compare_name);
 }
 
 
 void
-Resolver::addExtraDependency (const Capability & dependency)
+Resolver::addExtraCapability (const Capability & capability)
 {
-    _extra_deps.insert (dependency);
+    _extra_caps.insert (capability);
 }
 
 
 void
-Resolver::addExtraConflict (const Capability & dependency)
+Resolver::addExtraConflict (const Capability & capability)
 {
-    _extra_conflicts.insert (dependency);
+    _extra_conflicts.insert (capability);
 }
 
 
 //---------------------------------------------------------------------------
 
-static bool
-verify_system_cb (PoolItem_Ref & item, void *data)
+struct VerifySystem : public resfilter::PoolItemFilterFunctor
 {
-    Resolver *resolver  = (Resolver *)data;
+    Resolver & resolver;
 
-    resolver->addPoolItemToVerify (item);
+    VerifySystem (Resolver & r)
+	: resolver (r)
+    { }
 
-    return true;
-}
+    bool operator()( PoolItem_Ref provider )
+    {
+	resolver.addPoolItemToVerify (provider);
+	return true;
+    }
+};
 
 
 void
 Resolver::verifySystem (void)
 {
-    _XXX("Resolver") <<  "Resolver::verifySystem()" << endl;
-    world()->foreachResItem (new Channel(CHANNEL_TYPE_SYSTEM), verify_system_cb, this);
+    DBG <<  "Resolver::verifySystem()" << endl;
+
+    VerifySystem info (*this);
+
+    invokeOnEach( pool()->byKindBegin( ResTraits<Package>::kind ),
+		  pool()->byKindEnd( ResTraits<Package>::kind ),
+		  resfilter::ByInstalled ( ),
+		  functor::functorRef<bool,PoolItem>(info) );
+
 
     _verifying = true;
 
-#if 0		// commented out in libredcarpet also
-    /*
-      Walk across the (sorted-by-name) list of installed packages and look for
-      packages with the same name.  If they exist, construct a branch item
-      containing multiple group items.  Each group item corresponds to removing
-      all but one of the duplicates.
-    */
-
-    for (PoolItemList::const_iterator i0 = _items_to_verify.begin(); i0 != _items_to_verify.end();) {
-	PoolItemList::const_iterator i1 = i0;
-	i1++;
-	PoolItemList::const_iterator i2 = i1;
-	for (; i1 != _items_to_verify.end()&& ! (*i0)->compareName (*i1); i1++) {
-	    //empty
-	}
-
-	if (i1 != i2) {
-	    QueueItemBranch_Ptr branch_item;
-
-	    branch_item = new QueueItemBranch(world());
-
-	    for (PoolItemList::const_iterator i = i0; i != i1; i++) {
-
-		QueueItemGroup_Ptr grp_item = new QueueItemGroup(world());
-
-		for (PoolItemList::const_iterator j = i0; j != i1; j++) {
-		    Package_constPtr dup_pkg = *j;
-		    QueueItemUninstall_Ptr uninstall_item;
-
-		    if (i != j) {
-			uninstall_item = new QueueItemUninstall (world(), dup_pkg, QueueItemUninstall::DUPLICATE);
-			grp_item->addItem (uninstall_item);
-		    }
-
-		}
-
-		branch_item->addItem (grp_item);
-	    }
-
-	    _initial_items.push_back (branch_item);
-	}
-
-	i0 = i1;
-    }
-#endif
-
-    /* OK, that was fun.  Now just resolve the dependencies. */
     resolveDependencies ();
 
     return;
@@ -258,23 +251,26 @@ Resolver::verifySystem (void)
 
 // establish state
 
-static bool
-trial_establish_cb (PoolItem_Ref & item, void *user_data)
+struct EstablishState : public resfilter::OnCapMatchCallbackFunctor
 {
-    Resolver *resolver = (Resolver *)user_data;
+    Resolver & resolver;
 
-    resolver->addPoolItemToEstablish (item);
+    EstablishState (Resolver & r)
+	: resolver (r)
+    { }
 
-    printf (">!> Establishing %s\n", item->asString().c_str());
-
-    return false;
-}
+    bool operator()( PoolItem_Ref provider )
+    {
+	resolver.addPoolItemToEstablish (provider);
+	return true;
+    }
+};
 
 
 void
 Resolver::establishState (ResolverContext_Ptr context)
 {
-    _DBG("Resolver") << "Resolver::establishState ()" << endl;
+    DBG << "Resolver::establishState ()" << endl;
     typedef list<Resolvable::Kind> KindList; 
     static KindList ordered;
     if (ordered.empty()) {
@@ -289,9 +285,15 @@ Resolver::establishState (ResolverContext_Ptr context)
     for (KindList::const_iterator iter = ordered.begin(); iter != ordered.end(); iter++) {
 	const Resolvable::Kind kind = *iter;
 
-	_DBG("Resolver") << "establishing state for kind " << kind.asString() << endl;
+	DBG << "establishing state for kind " << kind.asString() << endl;
 
-	world()->foreachResItemByKind (kind, trial_establish_cb, this);
+	//world()->foreachResItemByKind (kind, trial_establish_cb, this);
+
+	EstablishState info (*this);
+
+	invokeOnEach( pool()->byKindBegin( kind ),
+		      pool()->byKindEnd( kind ),
+		      functor::functorRef<bool,PoolItem>(info) );
 
 	// process the queue
 	resolveDependencies (context);
@@ -311,12 +313,13 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 {
 
     time_t t_start, t_now;
-    bool have_local_items = false;
 
-    _XXX("Resolver") << "Resolver::resolveDependencies()" << endl;
+    DBG << "Resolver::resolveDependencies()" << endl;
 
 #warning local items disabled
 #if 0
+    bool have_local_items = false;
+
     /* Walk through are list of to-be-installed packages and see if any of them are local. */
 
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
@@ -351,9 +354,9 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
     ResolverQueue_Ptr initial_queue = new ResolverQueue(context);
 
-    /* Stick the current/subscribed channel and world info into the context */
+    /* Stick the current/subscribed channel and pool info into the context */
 
-    initial_queue->context()->setWorld(the_world);
+    initial_queue->context()->setPool(_pool);
 
     /* If this is a verify, we do a "soft resolution" */
 
@@ -367,8 +370,10 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     _initial_items.clear();
 
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
-	PoolItem_Ref & r = *iter;
+	PoolItem_Ref r = *iter;
 
+#warning local items disabled
+#if 0
 	/* Add local packages to our dummy channel. */
 	if (r->local()) {
 	    assert (local_channel != NULL);
@@ -376,7 +381,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	    r1->setChannel (local_channel);
 	    local_world->addPoolItem_Ref (r);
 	}
-
+#endif
 	initial_queue->addPoolItemToInstall (r);
     }
 
@@ -392,15 +397,15 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	initial_queue->addPoolItemToEstablish (*iter);
     }
 
-    for (CapSet::const_iterator iter = _extra_deps.begin(); iter != _extra_deps.end(); iter++) {
-	initial_queue->addExtraDependency (*iter);
+    for (CapSet::const_iterator iter = _extra_caps.begin(); iter != _extra_caps.end(); iter++) {
+	initial_queue->addExtraCapability (*iter);
     }
 
     for (CapSet::const_iterator iter = _extra_conflicts.begin(); iter != _extra_conflicts.end(); iter++) {
 	initial_queue->addExtraConflict (*iter);
     }
 
-    _XXX("Resolver") << "Initial Queue: [" << initial_queue->asString() << "]" << endl;
+    DBG << "Initial Queue: [" << initial_queue << "]" << endl;
 
     _best_context = NULL;
 
@@ -416,7 +421,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
     while (!_pending_queues.empty()) {
 
-	_XXX("Resolver") << "Pend " << (long) _pending_queues.size()
+	DBG << "Pend " << (long) _pending_queues.size()
 			      << " / Cmpl " << (long) _complete_queues.size()
 			      << " / Prun " << (long) _pruned_queues.size()
 			      << " / Defr " << (long) _deferred_queues.size()
@@ -438,12 +443,12 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
 	if (queue->isInvalid ()) {
 
-	    _XXX("Resolver") << "Invalid Queue\n" << endl;;
+	    DBG << "Invalid Queue\n" << endl;;
 	    _invalid_queues.push_front (queue);
 
 	} else if (queue->isEmpty ()) {
 
-	    _XXX("Resolver") <<"Empty Queue\n" << endl;
+	    DBG <<"Empty Queue\n" << endl;
 
 	    _complete_queues.push_front (queue);
 
@@ -465,7 +470,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	    /* If we aren't currently as good as our previous best complete solution,
 	       this solution gets pruned. */
 
-	    _XXX("Resolver") << "PRUNED!" << endl;
+	    DBG << "PRUNED!" << endl;
 
 	    _pruned_queues.push_front(queue);
 
@@ -487,7 +492,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	    _pending_queues.push_front (_deferred_queues.front());
 	}
 	  }
-	_XXX("Resolver") << "Pend " << (long) _pending_queues.size()
+	DBG << "Pend " << (long) _pending_queues.size()
 			<< " / Cmpl " << (long) _complete_queues.size()
 			<< " / Prun " << (long) _pruned_queues.size()
 			<< " / Defr " << (long) _deferred_queues.size()

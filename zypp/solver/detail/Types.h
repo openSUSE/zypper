@@ -37,9 +37,6 @@
 typedef std::list <zypp::PoolItem> PoolItemList;
 typedef std::set <zypp::PoolItem> PoolItemSet;
 
-#warning needs get/set status in PoolItem
-#define item_status_is_to_be_uninstalled(x) true
-#define item_status_is_satisfied(x) true
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

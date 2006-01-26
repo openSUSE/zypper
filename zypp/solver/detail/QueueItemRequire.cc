@@ -94,7 +94,7 @@ QueueItemRequire::~QueueItemRequire()
 //---------------------------------------------------------------------------
 
 void
-QueueItemRequire::addPoolItem_Ref (PoolItem_Ref item)
+QueueItemRequire::addPoolItem (PoolItem_Ref item)
 {
     assert (!_requiring_item);
     _requiring_item = item;
@@ -171,7 +171,7 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 	    return true;
 	}
 
-	if ((! item_status_is_to_be_uninstalled (status))
+	if ((!status.isToBeUninstalled())
 	    && ! context->isParallelInstall (provider)
 	    && ! uniq.has(provider)
 	    && context->itemIsPossible (provider)
@@ -202,20 +202,20 @@ struct NoInstallableProviders : public resfilter::OnCapMatchCallbackFunctor
 
 	ResolverInfoMisc_Ptr misc_info;
 
-	if (item_status_is_to_be_uninstalled (status)) {
+	if (status.isToBeUninstalled()) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALL_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
-	    misc_info->setOtherPoolItem_Ref (provider);
+	    misc_info->setOtherPoolItem (provider);
 	} else if (context->isParallelInstall (provider)) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_PARALLEL_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
-	    misc_info->setOtherPoolItem_Ref (provider);
+	    misc_info->setOtherPoolItem (provider);
 	} else if (! context->itemIsPossible (provider)) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NOT_INSTALLABLE_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
-	    misc_info->setOtherPoolItem_Ref (provider);
+	    misc_info->setOtherPoolItem (provider);
 #warning Locks not implemented
 #if 0
 	} else if (pool->itemIsLocked (provider)) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_LOCKED_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
-	    misc_info->setOtherPoolItem_Ref (provider);
+	    misc_info->setOtherPoolItem (provider);
 #endif
  	}
 
@@ -382,7 +382,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 			branch_item->addItem (install_item);
 
 			ResolverInfoNeededBy_Ptr upgrade_info = new ResolverInfoNeededBy (upgrade_item);
-			upgrade_info->addRelatedPoolItem_Ref (_upgraded_item);
+			upgrade_info->addRelatedPoolItem (_upgraded_item);
 			install_item->addInfo (upgrade_info);
 
 			// If an upgrade item has its requirements met, don't do the uninstall branch.
@@ -412,9 +412,9 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		for (PoolItemList::const_iterator iter = info.upgrades.begin(); iter != info.upgrades.end(); iter++) {
 		    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NO_UPGRADE, _requiring_item, RESOLVER_INFO_PRIORITY_VERBOSE);
 		    if (iter == info.upgrades.begin()) {
-			misc_info->setOtherPoolItem_Ref (*iter);
+			misc_info->setOtherPoolItem (*iter);
 		    }
-		    misc_info->addRelatedPoolItem_Ref (*iter);
+		    misc_info->addRelatedPoolItem (*iter);
 		    context->addInfo (misc_info);
 
 		    explore_uninstall_branch = true;

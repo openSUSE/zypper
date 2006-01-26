@@ -20,8 +20,7 @@
  */
 
 #include <map>
-
-#include "zypp/solver/temporary/ResItem.h"
+#include <sstream>
 
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/ResolverContext.h"
@@ -55,7 +54,7 @@ namespace zypp
 
 using namespace std;
 
-typedef map<ResItem_constPtr, ResolverInfo_Ptr> ProblemMap;
+typedef map<PoolItem_Ref, ResolverInfo_Ptr> ProblemMap;
 
 // set resolvables with errors
 
@@ -68,9 +67,9 @@ static void
 collector_cb (ResolverInfo_Ptr info, void *data)
 {
     ResItemCollector *collector = (ResItemCollector *)data;
-    ResItem_constPtr resItem = info->affected();
-    if (resItem != NULL) {
-	collector->problems[resItem] = info;
+    PoolItem_Ref item = info->affected();
+    if (item) {
+	collector->problems[item] = info;
     }
 }
 
@@ -97,15 +96,15 @@ Resolver::problems (void) const
     ResolverContext_Ptr context = invalid.front()->context();
 
     ResItemCollector collector;
-    context->foreachInfo (NULL, RESOLVER_INFO_PRIORITY_VERBOSE, collector_cb, &collector);
+    context->foreachInfo (PoolItem(), RESOLVER_INFO_PRIORITY_VERBOSE, collector_cb, &collector);
 
     for (ProblemMap::const_iterator iter = collector.problems.begin(); iter != collector.problems.end(); ++iter) {
-	ResItem_constPtr resItem = iter->first;
+	PoolItem_Ref item = iter->first;
 	ResolverInfo_Ptr info = iter->second;
 
 	bool problem_created = false;
 
-	DBG << info->asString();
+	DBG << info;
 	if (!(info->error())) {
 	    DBG << "; It is not an error --> ignoring" << endl;
 	    continue; // only errors are important
@@ -113,7 +112,7 @@ Resolver::problems (void) const
 	    DBG << "; Evaluate solutions..." << endl;
 	}
 	
-	string who = resItem->name();
+	string who = item->name();
 	string what;
 	string details;
 	switch (info->type()) {
@@ -124,32 +123,32 @@ Resolver::problems (void) const
 	    case RESOLVER_INFO_TYPE_NEEDED_BY: { // no solution; it is only a info
 		ResolverInfoNeededBy_constPtr needed_by = dynamic_pointer_cast<const ResolverInfoNeededBy>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...
-		what = str::form (_("%s is needed by %s"), who.c_str(), needed_by->resItemsToString(true,true).c_str());
-		details = str::form (_("%s is needed by:\n%s"), who.c_str(), needed_by->resItemsToString(false).c_str());
+		what = str::form (_("%s is needed by %s"), who.c_str(), needed_by->itemsToString(true,true).c_str());
+		details = str::form (_("%s is needed by:\n%s"), who.c_str(), needed_by->itemsToString(false).c_str());
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_CONFLICTS_WITH: { // no solution; it is only a info
 		ResolverInfoConflictsWith_constPtr conflicts_with = dynamic_pointer_cast<const ResolverInfoConflictsWith>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...		
-		what = str::form (_("%s conflicts with %s"), who.c_str(), conflicts_with->resItemsToString(true,true).c_str());
-		details = str::form (_("%s conflicts with:\n%s"), who.c_str(), conflicts_with->resItemsToString(false).c_str());		
+		what = str::form (_("%s conflicts with %s"), who.c_str(), conflicts_with->itemsToString(true,true).c_str());
+		details = str::form (_("%s conflicts with:\n%s"), who.c_str(), conflicts_with->itemsToString(false).c_str());		
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_OBSOLETES: { // no solution; it is only a info
 		ResolverInfoObsoletes_constPtr obsoletes = dynamic_pointer_cast<const ResolverInfoObsoletes>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...		
-		what = str::form (_("%s obsoletes %s"), who.c_str(), obsoletes->resItemsToString(true,true).c_str());
+		what = str::form (_("%s obsoletes %s"), who.c_str(), obsoletes->itemsToString(true,true).c_str());
 		// TranslatorExplanation %s = name of package, patch, selection ...				
-		details = str::form (_("%s obsoletes:%s"), who.c_str(), obsoletes->resItemsToString(false).c_str());
+		details = str::form (_("%s obsoletes:%s"), who.c_str(), obsoletes->itemsToString(false).c_str());
 		details += _("\nThese resolvables will be deleted from the system.");
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_DEPENDS_ON: { // no solution; it is only a info
 		ResolverInfoDependsOn_constPtr depends_on = dynamic_pointer_cast<const ResolverInfoDependsOn>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("%s depends on %s"), depends_on->resItemsToString(true,true).c_str());
+		what = str::form (_("%s depends on %s"), depends_on->itemsToString(true,true).c_str());
 		// TranslatorExplanation %s = name of package, patch, selection ...				
-		details = str::form (_("%s depends on:%s"), depends_on->resItemsToString(false).c_str());		
+		details = str::form (_("%s depends on:%s"), depends_on->itemsToString(false).c_str());		
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_CHILD_OF: {				// unused
@@ -197,7 +196,7 @@ Resolver::problems (void) const
 		// TranslatorExplanation %s = name of package,patch,...				
 		what = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
-		problem->addSolution (new ProblemSolutionInstall (problem, resItem)); // Install resolvable again
+		problem->addSolution (new ProblemSolutionInstall (problem, item)); // Install resolvable again
 		problems.push_back (problem);
 		problem_created = true;
 	    }
@@ -260,7 +259,7 @@ Resolver::problems (void) const
 		details = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// Add dummy provides
-		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::PROVIDES, resItem, misc_info->capability())); 
+		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::PROVIDES, item, misc_info->capability())); 
 		problems.push_back (problem);
 		problem_created = true;
 	    }
@@ -272,7 +271,7 @@ Resolver::problems (void) const
 		details = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// Add dummy provides
-		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::PROVIDES, resItem, misc_info->capability())); 
+		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::PROVIDES, item, misc_info->capability())); 
 		problems.push_back (problem);
 		problem_created = true;		
 	    }
@@ -286,8 +285,10 @@ Resolver::problems (void) const
 	    case RESOLVER_INFO_TYPE_UNINSTALL_PROVIDER: {		// p provides c but is scheduled to be uninstalled
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...				
+		ostringstream other_str;
+		other_str << misc_info->other();
 		what =str::form (_("%s fulfil dependencies of %s but will be uninstalled"),
-				 misc_info->other()->asString().c_str(),
+				 other_str.str().c_str(),
 				 who.c_str());
 		details = misc_info->message();
 		// It is only an info --> no solution is needed

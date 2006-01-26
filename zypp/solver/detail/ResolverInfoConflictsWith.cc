@@ -20,6 +20,7 @@
  */
 
 #include <map>
+#include <sstream>
 
 #include "zypp/solver/detail/ResolverInfo.h"
 #include "zypp/solver/detail/ResolverInfoConflictsWith.h"
@@ -43,41 +44,23 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       
-      string
-      ResolverInfoConflictsWith::asString ( void ) const
-      {
-          return toString (*this);
-      }
-      
-      
-      string
-      ResolverInfoConflictsWith::toString ( const ResolverInfoConflictsWith & with)
-      {
-	  // Translator: all.%s = name of package, patch,...
-          return str::form (_("%s conflicts with %s"),
-			    ResolverInfo::toString (with).c_str(),
-			    with.resItemsToString(false).c_str());
-      }
-      
-      
-      ostream &
-      ResolverInfoConflictsWith::dumpOn( ostream & str ) const
-      {
-          str << asString();
-          return str;
-      }
-      
-      
       ostream&
       operator<<( ostream& os, const ResolverInfoConflictsWith & with)
       {
-          return os << with.asString();
+	  ostringstream with_str;
+	  const ResolverInfo & info = with;
+	  with_str << info;
+	  // Translator: all.%s = name of package, patch,...
+	  os << str::form (_("%s conflicts with %s"),
+			    with_str.str().c_str(),
+			    with.itemsToString(false).c_str());
+	  return os;
       }
       
       //---------------------------------------------------------------------------
       
-      ResolverInfoConflictsWith::ResolverInfoConflictsWith (ResItem_constPtr resItem, ResItem_constPtr with)
-          : ResolverInfoContainer (RESOLVER_INFO_TYPE_CONFLICTS_WITH, resItem, RESOLVER_INFO_PRIORITY_USER, with)
+      ResolverInfoConflictsWith::ResolverInfoConflictsWith (PoolItem_Ref item, PoolItem_Ref with)
+          : ResolverInfoContainer (RESOLVER_INFO_TYPE_CONFLICTS_WITH, item, RESOLVER_INFO_PRIORITY_USER, with)
       {
       }
       
@@ -92,7 +75,7 @@ namespace zypp
       ResolverInfo_Ptr
       ResolverInfoConflictsWith::copy (void) const
       {
-          ResolverInfoConflictsWith_Ptr cpy = new ResolverInfoConflictsWith(affected(), NULL);
+          ResolverInfoConflictsWith_Ptr cpy = new ResolverInfoConflictsWith(affected(), PoolItem_Ref());
       
           ((ResolverInfoContainer_Ptr)cpy)->copy (this);
       

@@ -19,6 +19,19 @@
  * 02111-1307, USA.
  */
 
+#include "zypp/CapFactory.h"
+#include "zypp/CapSet.h"
+#include "zypp/CapMatch.h"
+#include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
+#include "zypp/base/Exception.h"
+
+#include "zypp/base/Algorithm.h"
+#include "zypp/ResPool.h"
+#include "zypp/ResFilters.h"
+#include "zypp/CapFilters.h"
+
 #include "zypp/solver/detail/Types.h"
 
 #include "zypp/solver/detail/QueueItemConflict.h"
@@ -30,12 +43,6 @@
 #include "zypp/solver/detail/ResolverInfoConflictsWith.h"
 #include "zypp/solver/detail/ResolverInfoMisc.h"
 #include "zypp/solver/detail/ResolverInfoObsoletes.h"
-#include "zypp/CapFactory.h"
-#include "zypp/CapSet.h"
-#include "zypp/CapMatch.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Gettext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -57,12 +64,12 @@ ostream&
 operator<<( ostream& os, const QueueItemConflict & item)
 {
     os << "[Conflict: ";
-    os << item._dep;
+    os << item._capability;
     os << ", Triggered by ";
-    os << *(item._conflicting_item);
+    os << item._conflicting_item;
     if (item._actually_an_obsolete) os << ", Obsolete !";
     os << "]";
-    return res;
+    return os;
 }
 
 //---------------------------------------------------------------------------
@@ -102,10 +109,10 @@ struct UpgradeCandidate : public resfilter::OnCapMatchCallbackFunctor
 
     bool operator() (PoolItem_Ref & candidate, const Capability & cap)
     {
-	if (!(item->equals (candidate)) 		// dont upgrade with ourselves
-	    && candidate.status () == RESOLVABLE_STATUS_UNINSTALLED) {
+	if (!compareByNVRA (item.resolvable(), candidate.resolvable()) 		// dont upgrade with ourselves
+	    && candidate.status().isUninstalled()) {
 
-	    info->upgrades.push_back (item);
+	    upgrades.push_back (item);
 	}
 	return true;
     }
@@ -127,56 +134,56 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 
     ConflictProcess (const ResPool *pl, PoolItem_Ref ci, const Capability & cc, ResolverContext_Ptr ct, QueueItemList & ni, bool ao)
 	: pool (pl)
-	, conflict_issuer (ci),
+	, conflict_issuer (ci)
 	, conflict_capability (cc)
-	, context (ct),
+	, context (ct)
 	, new_items (ni)
 	, actually_an_obsolete (ao)
     { }
 
     bool operator()( PoolItem_Ref & provider, const Capability & provides )
     {
-    ResStatus status;
-    ResolverInfo_Ptr log_info;
-    CapFactory factory;
+	ResStatus status;
+	ResolverInfo_Ptr log_info;
+	CapFactory factory;
 
-    DBG << "conflict_process_cb (resolvable[" << provider <<"], provides[" << provides << "], conflicts with [" <<
+	DBG << "conflict_process_cb (resolvable[" << provider <<"], provides[" << provides << "], conflicts with [" <<
 	      conflict_issuer << " conflicts: " << conflict_capability << endl;
 
-    /* We conflict with ourself.  For the purpose of installing ourself, we
-     * just ignore it, but it's Debian's way of saying that one and only one
-     * item with this provide may exist on the system at a time. */
+	/* We conflict with ourself.  For the purpose of installing ourself, we
+	 * just ignore it, but it's Debian's way of saying that one and only one
+	 * item with this provide may exist on the system at a time. */
 
-    if (conflict_issuer != NULL
-	&& provider->equals (conflict_issuer)) {
-	return true;
-    }
+	if (conflict_issuer
+	    && compareByNVRA (provider.resolvable(), conflict_issuer.resolvable()) == 0)
+	{
+	    return true;
+	}
 
-    /* FIXME: This should probably be a GVersion capability. */
-    /* Obsoletes don't apply to virtual provides, only the items
-     * themselves.  A provide is "virtual" if it's not the same spec
-     * as the item that's providing it.  This, of course, only
-     * applies to RPM, since it's the only one with obsoletes right
-     * now. */
-    Capability capTest =  factory.parse ( provider->kind(),
-	                                  provider->name(),
-	                                  Rel::EQ,
-	                                  provider->edition());
+	/* FIXME: This should probably be a GVersion capability. */
+	/* Obsoletes don't apply to virtual provides, only the items
+	 * themselves.  A provide is "virtual" if it's not the same spec
+	 * as the item that's providing it.  This, of course, only
+	 * applies to RPM, since it's the only one with obsoletes right
+	 * now. */
+	Capability capTest =  factory.parse ( provider->kind(),
+			                  provider->name(),
+			                  Rel::EQ,
+			                  provider->edition());
 
-    if (actually_an_obsolete
+	if (actually_an_obsolete
 	&& capTest.matches (provides) != CapMatch::yes )
-    {
+	{
 	return true;
-    }
+	}
 
-    status = provider.status();
+	status = provider.status();
 
-    DBG << "conflict_process_cb (resolvable[" << provider << "]<" << status << ">" << endl;
+	DBG << "ConflictProcess (provider[" << provider << "]<" << status << ">" << endl;
 
-    switch (status) {
-
-	case RESOLVABLE_STATUS_INSTALLED:
-	case RESOLVABLE_STATUS_TO_BE_INSTALLED_SOFT: {
+	if (status.isInstalled()
+	    || status.isToBeInstalledSoft())
+	{
 	    QueueItemUninstall_Ptr uninstall;
 	    ResolverInfo_Ptr log_info;
 
@@ -188,29 +195,26 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 
 	    UpgradeCandidate upgrade_info (provider);
 
-	    Capability maybe_upgrade_cap =  factory.parse ( provider->kind(),
-	                                                    provider->name(),
-	                                                    Rel::ANY,
-	                                                    Edition::noedition );
+	    Capability maybe_upgrade_cap =  factory.parse ( provider->kind(), provider->name(), Rel::ANY, Edition::noedition );
 
 	    // pool->foreachProvidingResItem (maybe_upgrade_dep, upgrade_candidates_cb, (void *)&upgrade_info);
 	    Dep dep( Dep::PROVIDES );
 
 	    invokeOnEach( pool->byCapabilityIndexBegin( maybe_upgrade_cap.index(), dep ),
 			  pool->byCapabilityIndexEnd( maybe_upgrade_cap.index(), dep ),
-			  resfilter::callOnCapMatchIn( dep, maybe_upgrade_cap, upgrade_info ) );
+			  resfilter::callOnCapMatchIn( dep, maybe_upgrade_cap, functor::functorRef<bool,PoolItem,Capability>(upgrade_info) ) );
 
 #endif
 
 	    uninstall = new QueueItemUninstall (pool, provider, actually_an_obsolete ? QueueItemUninstall::OBSOLETE : QueueItemUninstall::CONFLICT);
-	    uninstall->setDependency (conflict_capability);
+	    uninstall->setCapability (conflict_capability);
 
 	    if (actually_an_obsolete) {
-	        uninstall->setDueToObsolete ();
-	        log_info = new ResolverInfoObsoletes (provider, conflict_issuer);
+		uninstall->setDueToObsolete ();
+		log_info = new ResolverInfoObsoletes (provider, conflict_issuer);
 	    } else {
-	        uninstall->setDueToConflict ();
-	        log_info = new ResolverInfoConflictsWith (provider, conflict_issuer);
+		uninstall->setDueToConflict ();
+		log_info = new ResolverInfoConflictsWith (provider, conflict_issuer);
 	    }
 
 	    uninstall->addInfo (log_info);
@@ -219,82 +223,80 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	    if (upgrade_info.upgrades.empty ()) {
 #endif
 
-	        info->new_items.push_back (uninstall);
+		new_items.push_back (uninstall);
 
 #if PHI
 	    }
 	    else {
-	        // there are upgrade candidates for the conflicting item
-	        // branch to: 1. uninstall, 2. upgrade (for each upgrading item)
+		// there are upgrade candidates for the conflicting item
+		// branch to: 1. uninstall, 2. upgrade (for each upgrading item)
 
-	        QueueItemBranch_Ptr branch = new QueueItemBranch (info->world);
+		QueueItemBranch_Ptr branch = new QueueItemBranch (pool);
 
-	        branch->addItem (uninstall);			// try uninstall
+		branch->addItem (uninstall);			// try uninstall
 
-	        for (PoolItemList::const_iterator iter = upgrade_info.upgrades.begin(); iter != upgrade_info.upgrades.end(); iter++) {
-	            QueueItemInstall_Ptr upgrade = new QueueItemInstall (pool, *iter);
-	            upgrade->setUpgrades (provider);
-	            branch->addItem (upgrade);			// try upgrade
-	        }
-	        info->new_items.push_back (branch);
+		for (PoolItemList::const_iterator iter = upgrade_info.upgrades.begin(); iter != upgrade_info.upgrades.end(); iter++) {
+		    QueueItemInstall_Ptr upgrade = new QueueItemInstall (pool, *iter);
+		    upgrade->setUpgrades (provider);
+		    branch->addItem (upgrade);			// try upgrade
+		}
+		new_items.push_back (branch);
 	    }
 #endif
 
-	    break;
 	}
-
-	case RESOLVABLE_STATUS_TO_BE_INSTALLED: {
+	else if (status.isToBeInstalled()) {
 	    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL, provider, RESOLVER_INFO_PRIORITY_VERBOSE, provides);
 
 	    misc_info->flagAsError ();
-	    if (info->conflict_issuer) {
-	        misc_info->setOtherResItem (info->conflict_issuer);
-		misc_info->setOtherCapability (info->conflict_capability);
+	    if (conflict_issuer) {
+		misc_info->setOtherPoolItem (conflict_issuer);
+		misc_info->setOtherCapability (conflict_capability);
 	    }
-	    info->context->addInfo (misc_info);
+	    context->addInfo (misc_info);
 
-	    break;
 	}
+	else if (status.isUninstalled()) {
 
-	case RESOLVABLE_STATUS_UNINSTALLED: {
-	    info->context->setStatus (provider, RESOLVABLE_STATUS_TO_BE_UNINSTALLED);
+	    context->setStatus (provider, ResStatus (false));
 
 	    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CONFLICT_UNINSTALLABLE, provider, RESOLVER_INFO_PRIORITY_VERBOSE, provides);
 
-	    misc_info->setOtherResItem (info->conflict_issuer);
-	    misc_info->setOtherCapability (info->conflict_capability);
+	    misc_info->setOtherPoolItem (conflict_issuer);
+	    misc_info->setOtherCapability (conflict_capability);
 
-	    info->context->addInfo (misc_info);
+	    context->addInfo (misc_info);
 
-	    break;
+	}
+	else if ((status.isToBeUninstalled() && !status.isToBeUninstalledDueToUnlink())
+		|| status.isToBeUninstalledDueToObsolete()) {
+
+	    /* This is the easy case -- we do nothing. */
+	}
+	else {
+	    ZYPP_THROW (Exception ("Unhandled status in ConflictProcess"));
 	}
 
-	case RESOLVABLE_STATUS_TO_BE_UNINSTALLED:
-	case RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_OBSOLETE:
-	    /* This is the easy case -- we do nothing. */
-	    break;
+	return true;
 
-	default:
-	    abort();
-    }
+    } // operator ()
 
-    return true;
-}
+}; // struct ConflictProcess
 
 
 bool
 QueueItemConflict::process (ResolverContext_Ptr context, QueueItemList & new_items)
 {
-    DBG << "QueueItemConflict::process(" << this->asString() << ")" << endl;
+    DBG << "QueueItemConflict::process(" << *this << ")" << endl;
 
-    ConflictProcess info (pool(), _conflicting_item, _capability, context. new_items, actually_an_obsolete);
+    ConflictProcess info (pool(), _conflicting_item, _capability, context, new_items, _actually_an_obsolete);
 
-    // world()->foreachProvidingResItem (_capability, conflict_process_cb, (void *)&info);
+    // world()->foreachProvidingPoolItem (_capability, conflict_process_cb, (void *)&info);
 
     Dep dep( Dep::PROVIDES );
     invokeOnEach( pool()->byCapabilityIndexBegin( _capability.index(), dep ),
 		  pool()->byCapabilityIndexEnd( _capability.index(), dep ),
-		  resfilter::callOnCapMatchIn( dep, _capability, info ) );
+		  resfilter::callOnCapMatchIn( dep, _capability, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 
     return true;
 }

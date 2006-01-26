@@ -19,6 +19,16 @@
  * 02111-1307, USA.
  */
 
+#include "zypp/CapSet.h"
+#include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
+
+#include "zypp/base/Algorithm.h"
+#include "zypp/ResPool.h"
+#include "zypp/ResFilters.h"
+#include "zypp/CapFilters.h"
+
 #include "zypp/solver/detail/QueueItemUninstall.h"
 #include "zypp/solver/detail/QueueItemEstablish.h"
 #include "zypp/solver/detail/QueueItemRequire.h"
@@ -26,11 +36,6 @@
 #include "zypp/solver/detail/ResolverContext.h"
 #include "zypp/solver/detail/ResolverInfoMisc.h"
 #include "zypp/solver/detail/ResolverInfoMissingReq.h"
-
-#include "zypp/CapSet.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Gettext.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -53,25 +58,25 @@ operator<<( ostream& os, const QueueItemUninstall & item)
 {
     os << "[Uninstall: ";
 
-    os << item._item->asString();
+    os << item._item;
     os << " (";
     switch (item._reason) {
-	case CONFLICT:	  os << "conflicts"; break;
-	case OBSOLETE:	  os << "obsoletes"; break;
-	case UNSATISFIED: os << "unsatisfied dependency"; break;
-	case BACKOUT:	  os << "uninstallable"; break;
-	case UPGRADE:	  os << "upgrade"; break;
-	case DUPLICATE:	  os << "duplicate"; break;
-	case EXPLICIT:	  os << "explicit"; break;
+	case QueueItemUninstall::CONFLICT:	os << "conflicts"; break;
+	case QueueItemUninstall::OBSOLETE:	os << "obsoletes"; break;
+	case QueueItemUninstall::UNSATISFIED:	os << "unsatisfied dependency"; break;
+	case QueueItemUninstall::BACKOUT:	os << "uninstallable"; break;
+	case QueueItemUninstall::UPGRADE:	os << "upgrade"; break;
+	case QueueItemUninstall::DUPLICATE:	os << "duplicate"; break;
+	case QueueItemUninstall::EXPLICIT:	os << "explicit"; break;
     }
     os << ")";
-    if (item._dep_leading_to_uninstall != Capability()) {
+    if (item._cap_leading_to_uninstall != Capability::noCap) {
 	os << ", Triggered By ";
-	os << item._dep_leading_to_uninstall.asString();
+	os << item._cap_leading_to_uninstall;
     }
-    if (item._upgraded_to != NULL) {
+    if (item._upgraded_to) {
 	os << ", Upgraded To ";
-	os << item._upgraded_to->asString();
+	os << item._upgraded_to;
     }
     if (item._explicitly_requested) os << ", Explicit";
     if (item._remove_only) os << ", Remove Only";
@@ -131,12 +136,7 @@ struct UnlinkCheck: public resfilter::OnCapMatchCallbackFunctor
     //	   or if the uninstall breaks the requirer
     //	     in this case, we have to cancel the uninstallation
 
-    bool operator()( PoolItem_Ref requirer, const Capability & match ) const
-    {
-      // Untill we can pass the functor by reference to algorithms.
-      return const_cast<RequireProcess&>(*this).fake( requirer, match );
-    }
-    bool fake( PoolItem_Ref requirer, const Capability & match )
+    bool operator()( PoolItem_Ref requirer, const Capability & match )
     {
 	if (cancel_unlink)				// already cancelled
 	    return true;
@@ -151,7 +151,7 @@ struct UnlinkCheck: public resfilter::OnCapMatchCallbackFunctor
 
 	return true;
     }
-}
+};
 
 //---------------------------------------------------------------------------
 
@@ -165,23 +165,18 @@ struct UninstallProcess: public resfilter::OnCapMatchCallbackFunctor
     QueueItemList & qil;
     bool remove_only;
 
-    UninstallProcessInfo (const ResPool *p, ResolverContext_Ptr ct, PoolItem_Ref u1, PoolItem_Ref u2, QueueItemList & l, bool ro)
+    UninstallProcess (const ResPool *p, ResolverContext_Ptr ct, PoolItem_Ref u1, PoolItem_Ref u2, QueueItemList & l, bool ro)
 	: pool (p)
 	, context (ct)
 	, uninstalled_item (u1)
 	, upgraded_item (u2)
 	, qil (l)
 	, remove_only (ro)
-
+    { }
 
     // the uninstall of uninstalled_item breaks the dependency 'match' of resolvable 'requirer'
 
-    bool operator()( PoolItem_Ref requirer, const Capability & match ) const
-    {
-      // Untill we can pass the functor by reference to algorithms.
-      return const_cast<RequireProcess&>(*this).fake( requirer, match );
-    }
-    bool fake( PoolItem_Ref requirer, const Capability & match )
+    bool operator()( PoolItem_Ref requirer, const Capability & match )
     {
 	if (! context->isPresent (requirer))				// its not installed -> dont care
 	    return true;
@@ -189,39 +184,34 @@ struct UninstallProcess: public resfilter::OnCapMatchCallbackFunctor
 	if (context->requirementIsMet (match, false))			// its provided by another installed resolvable -> dont care
 	    return true;
 
-	if (item_status_is_satisfied (requirer)) {			// it is just satisfied, check freshens
+	if (requirer.status().isSatisfied()) {			// it is just satisfied, check freshens
 #warning If an uninstall incompletes a satisfied, the uninstall should be cancelled
 	    QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, requirer);	// re-check if its still needed
-	    qil->push_front (establish_item);
+	    qil.push_front (establish_item);
 	    return true;
 	}
 
 	QueueItemRequire_Ptr require_item = new QueueItemRequire (pool, match);	// issue a new require to fulfill this dependency
-	require_item->addResItem (requirer);
+	require_item->addPoolItem (requirer);
 	if (remove_only) {
 	    require_item->setRemoveOnly ();
 	}
-	require_item->setUpgradedResItem (upgraded_item);
-	require_item->setLostResItem (uninstalled_item);				// this is what we lost, dont re-install it
+	require_item->setUpgradedPoolItem (upgraded_item);
+	require_item->setLostPoolItem (uninstalled_item);				// this is what we lost, dont re-install it
 
-	qil->push_front (require_item);
+	qil.push_front (require_item);
 
 	return true;
     }
-}
+};
 
 
 bool
 QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
-    ResItemStatus status;
-    string pkg_str;
+    ResStatus status = _item.status();
 
-    pkg_str = _item->asString();
-
-    status = context->getStatus (_item);
-
-    _DBG("RC_SPEW") << "QueueItemUninstall::process(<" << ResolverContext::toString(status) << ">" << _item->asString() << ( _unlink ? "[unlink]" : "") << endl;
+    DBG << "QueueItemUninstall::process(<" << status << ">" << _item << ( _unlink ? "[unlink]" : "") << endl;
 
     /* In the case of an unlink, we only want to uninstall the item if it is
        being used by something else.  We can't really determine this with 100%
@@ -235,19 +225,20 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     if (_unlink) {
 	/* If the item is to-be-installed, obviously it is being use! */
-	if (status == RESOLVABLE_STATUS_TO_BE_INSTALLED) {
-
+	if (status.isToBeInstalled()) {
 	    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALL_TO_BE_INSTALLED, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
 	    context->addInfo (misc_info);
 	    goto finished;
 
-	} else if (status == RESOLVABLE_STATUS_INSTALLED) {
-	    UnlinkCheckInfo info;
+	}
+	else if (status.isInstalled()) {
+
+	    UnlinkCheck info;
 
 	    /* Flag the item as to-be-uninstalled so that it won't
 	       satisfy any other item's deps during this check. */
 
-	    _item.setStatus (RESOLVABLE_STATUS_TO_BE_UNINSTALLED);
+	    _item.status().setToBeUninstalled ();
 
 	    info.context = context;
 	    info.cancel_unlink = false;
@@ -255,20 +246,21 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    // look at the provides of the to-be-uninstalled resolvable and
 	    //   check if anyone (installed) needs it
 
-	    CapSet provides = _item->provides();
+	    CapSet provides = _item->dep(Dep::PROVIDES);
 	    for (CapSet::const_iterator iter = provides.begin(); iter != provides.end() && ! info.cancel_unlink; iter++) {
 
-		//world()->foreachRequiringResItem (*iter, unlink_check_cb, &info);
+		//world()->foreachRequiringPoolItem (*iter, unlink_check_cb, &info);
 
 		Dep dep( Dep::REQUIRES);
 
 		invokeOnEach( pool()->byCapabilityIndexBegin( iter->index(), dep ),
 			      pool()->byCapabilityIndexEnd( iter->index(), dep ),
-			      resfilter::callOnCapMatchIn( dep, *iter, info ) );
+			      resfilter::callOnCapMatchIn( dep, *iter, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 	    }
 
 	    /* Set the status back to normal. */
-	    _item->setStatus (status);
+
+	    _item.status().setStatus (status);
 
 	    if (info.cancel_unlink) {
 		ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALL_INSTALLED, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
@@ -279,10 +271,12 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     }
 
-    context->uninstallResItem (_item, _upgraded_to != NULL, _due_to_obsolete, _unlink);
+    context->uninstall (_item, _upgraded_to /*bool*/, _due_to_obsolete, _unlink);
 
-    if (status == RESOLVABLE_STATUS_INSTALLED) {
+    if (status.isInstalled()) {
 
+#warning Needs Locks
+#if 0
 	if (! _explicitly_requested
 	    && pool()->itemIsLocked (_item)) {
 
@@ -290,7 +284,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    context->addError (misc_info);
 	    goto finished;
 	}
-
+#endif
 	this->logInfo (context);
 
 	if (_cap_leading_to_uninstall != Capability()		// non-empty _cap_leading_to_uninstall
@@ -311,12 +305,12 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	for (CapSet::const_iterator iter = provides.begin(); iter != provides.end(); iter++) {
 	    UninstallProcess info ( pool(), context, _item, _upgraded_to, qil, _remove_only);
 
-	    //world()->foreachRequiringResItem (*iter, uninstall_process_cb, &info);
+	    //world()->foreachRequiringPoolItem (*iter, uninstall_process_cb, &info);
 	    Dep dep( Dep::REQUIRES);
 
 	    invokeOnEach( pool()->byCapabilityIndexBegin( iter->index(), dep ),
 			  pool()->byCapabilityIndexEnd( iter->index(), dep ),
-			  resfilter::callOnCapMatchIn( dep, *iter, info ) );
+			  resfilter::callOnCapMatchIn( dep, *iter, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 	}
     }
 
@@ -335,14 +329,14 @@ QueueItemUninstall::cmp (QueueItem_constPtr item) const
 	return cmp;
 
     QueueItemUninstall_constPtr uninstall = dynamic_pointer_cast<const QueueItemUninstall>(item);
-    return ResItem::compare (_item, uninstall->_item);
+    return compareByNVRA (_item.resolvable(), uninstall->_item.resolvable());
 }
 
 
 QueueItem_Ptr
 QueueItemUninstall::copy (void) const
 {
-    QueueItemUninstall_Ptr new_uninstall = new QueueItemUninstall (world(), _item, _reason);
+    QueueItemUninstall_Ptr new_uninstall = new QueueItemUninstall (pool(), _item, _reason);
     new_uninstall->QueueItem::copy(this);
 
 

@@ -20,6 +20,7 @@
  */
 
 #include <map>
+#include <sstream>
 
 #include "zypp/solver/detail/ResolverInfoChildOf.h"
 #include "zypp/base/String.h"
@@ -42,45 +43,25 @@ namespace zypp
       //---------------------------------------------------------------------------
       
       
-      string
-      ResolverInfoChildOf::asString ( void ) const
-      {
-          return toString (*this);
-      }
-      
-      
-      string
-      ResolverInfoChildOf::toString ( const ResolverInfoChildOf & child)
-      {
-          string res = "<resolverinfochildof '";
-	  //Translator all.%s = name of packages,patches,....
-          res += str::form (_("%s part of %s"),
-			    ResolverInfo::toString (child).c_str(),
-			    child.resItemsToString(false).c_str());
-          res += "'>";
-      
-          return res;
-      }
-      
-      
-      ostream &
-      ResolverInfoChildOf::dumpOn( ostream & str ) const
-      {
-          str << asString();
-          return str;
-      }
-      
-      
       ostream&
       operator<<( ostream& os, const ResolverInfoChildOf & child)
       {
-          return os << child.asString();
+          os << "<resolverinfochildof '";
+	  ostringstream child_str;
+	  const ResolverInfo & info  = child;
+	  child_str << info;
+	  //Translator all.%s = name of packages,patches,....
+          os << str::form (_("%s part of %s"),
+			    child_str.str().c_str(),
+			    child.itemsToString(false).c_str());
+          os << "'>";
+	  return os;
       }
       
       //---------------------------------------------------------------------------
       
-      ResolverInfoChildOf::ResolverInfoChildOf (ResItem_constPtr resItem, ResItem_constPtr dependency)
-          : ResolverInfoContainer (RESOLVER_INFO_TYPE_CHILD_OF, resItem, RESOLVER_INFO_PRIORITY_USER, dependency)
+      ResolverInfoChildOf::ResolverInfoChildOf (PoolItem_Ref item, PoolItem_Ref dependency)
+          : ResolverInfoContainer (RESOLVER_INFO_TYPE_CHILD_OF, item, RESOLVER_INFO_PRIORITY_USER, dependency)
       {
       }
       
@@ -95,7 +76,7 @@ namespace zypp
       ResolverInfo_Ptr
       ResolverInfoChildOf::copy (void) const
       {
-          ResolverInfoChildOf_Ptr cpy = new ResolverInfoChildOf(affected(), NULL);
+          ResolverInfoChildOf_Ptr cpy = new ResolverInfoChildOf(affected(), PoolItem_Ref());
       
           ((ResolverInfoContainer_Ptr)cpy)->copy (this);
       

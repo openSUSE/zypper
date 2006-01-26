@@ -129,7 +129,7 @@ class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
     bool merge (ResolverInfo_Ptr to_be_merged);
     virtual ResolverInfo_Ptr copy (void) const;
 
-    bool isAbout (PoolItem_Ref & item) const;
+    bool isAbout (PoolItem_Ref item) const;
 };
 
 ///////////////////////////////////////////////////////////////////

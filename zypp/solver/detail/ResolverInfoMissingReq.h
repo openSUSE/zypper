@@ -48,12 +48,12 @@ class ResolverInfoMissingReq : public ResolverInfo {
 
   public:
 
-    ResolverInfoMissingReq (PoolItem_Ref item, const Capability & missing_req);
+    ResolverInfoMissingReq (PoolItem_Ref item, const Capability & missing);
     virtual ~ResolverInfoMissingReq();
 
     // ---------------------------------- I/O
 
-    friend std::ostream& operator<<(std::ostream&, const ResolverInfoMissingCap & context);
+    friend std::ostream& operator<<(std::ostream&, const ResolverInfoMissingReq & context);
 
     // ---------------------------------- accessors
 

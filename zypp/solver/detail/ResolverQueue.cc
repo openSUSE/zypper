@@ -115,7 +115,7 @@ ResolverQueue::addResItemToInstall (ResItem_constPtr resItem)
 	return;
     }
 
-    item = new QueueItemInstall (_context->world(), resItem);
+    item = new QueueItemInstall (_context->pool(), resItem);
     item->setExplicitlyRequested ();
 
     addItem (item);
@@ -127,7 +127,7 @@ ResolverQueue::addResItemToEstablish (ResItem_constPtr resItem)
 {
     QueueItemEstablish_Ptr item;
 
-    item = new QueueItemEstablish (_context->world(), resItem);
+    item = new QueueItemEstablish (_context->pool(), resItem);
     item->setExplicitlyRequested ();
 
     addItem (item);
@@ -142,7 +142,7 @@ ResolverQueue::addResItemToRemove (ResItem_constPtr resItem, bool remove_only_mo
     if (_context->resItemIsAbsent (resItem))
 	return;
 
-    item = new QueueItemUninstall (_context->world(), resItem, QueueItemUninstall::EXPLICIT);
+    item = new QueueItemUninstall (_context->pool(), resItem, QueueItemUninstall::EXPLICIT);
     if (remove_only_mode)
 	item->setRemoveOnly ();
 
@@ -155,29 +155,25 @@ ResolverQueue::addResItemToRemove (ResItem_constPtr resItem, bool remove_only_mo
 void
 ResolverQueue::addResItemToVerify (ResItem_constPtr resItem)
 {
-    World_Ptr world;
-
-    world = _context->world ();
-
     CapSet requires = resItem->requires();
     for (CapSet::const_iterator iter = requires.begin(); iter != requires.end(); iter++) {
-	QueueItemRequire_Ptr item = new QueueItemRequire (world, *iter);
+	QueueItemRequire_Ptr item = new QueueItemRequire (_context->pool(), *iter);
 	item->addResItem (resItem);
 	addItem (item);
     }
 
     CapSet conflicts = resItem->conflicts();
     for (CapSet::const_iterator iter = conflicts.begin(); iter != conflicts.end(); iter++) {
-	QueueItemConflict_Ptr item = new QueueItemConflict (world, *iter, resItem);
+	QueueItemConflict_Ptr item = new QueueItemConflict (_context->pool(), *iter, resItem);
 	addItem (item);
     }
 }
 
 
 void
-ResolverQueue::addExtraDependency (const Capability & dep)
+ResolverQueue::addExtraCapability (const Capability & dep)
 {
-    QueueItemRequire_Ptr item = new QueueItemRequire (_context->world(), dep);
+    QueueItemRequire_Ptr item = new QueueItemRequire (_context->pool(), dep);
     addItem (item);
 }
 
@@ -185,7 +181,7 @@ ResolverQueue::addExtraDependency (const Capability & dep)
 void
 ResolverQueue::addExtraConflict (const Capability & dep)
 {
-    QueueItemConflict_Ptr item = new QueueItemConflict (_context->world(), dep, NULL);
+    QueueItemConflict_Ptr item = new QueueItemConflict (_context->pool(), dep, NULL);
     addItem (item);
 }
 

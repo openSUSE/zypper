@@ -20,8 +20,10 @@
  */
 
 #include <map>
+#include <sstream>
 
 #include "zypp/solver/detail/ResolverInfoContainer.h"
+#include "zypp/solver/detail/Helper.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -40,50 +42,22 @@ IMPL_PTR_TYPE(ResolverInfoContainer);
 //---------------------------------------------------------------------------
 
 
-string
-ResolverInfoContainer::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-ResolverInfoContainer::toString ( const ResolverInfoContainer & container )
-{
-    string res = "<resolverinfocontainer '";
-
-    res += ResolverInfo::toString (container);
-    for (CResItemList::const_iterator iter = container._resItem_list.begin(); iter != container._resItem_list.end(); iter++) {
-	if (iter != container._resItem_list.begin()) res += ", ";
-	res += (*iter)->asString();
-    }
-    res += "'>";
-
-    return res;
-}
-
-
-ostream &
-ResolverInfoContainer::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
 ostream&
 operator<<( ostream& os, const ResolverInfoContainer & container)
 {
-    return os << container.asString();
+    os << "<resolverinfocontainer '";
+    os << container._item_list;
+    os << "'>";
+    return os;
 }
 
 //---------------------------------------------------------------------------
 
-ResolverInfoContainer::ResolverInfoContainer (ResolverInfoType type, ResItem_constPtr resItem, int priority, ResItem_constPtr child)
-    : ResolverInfo (type, resItem, priority)
+ResolverInfoContainer::ResolverInfoContainer (ResolverInfoType type, PoolItem_Ref item, int priority, PoolItem_Ref child)
+    : ResolverInfo (type, item, priority)
 {
-    if (child != NULL)
-	_resItem_list.push_back (child);
+    if (child)
+	_item_list.push_back (child);
 }
 
 
@@ -101,18 +75,18 @@ ResolverInfoContainer::merge (ResolverInfoContainer_Ptr to_be_merged)
     res = ((ResolverInfo_Ptr)this)->merge ((ResolverInfo_Ptr)to_be_merged);
     if (!res) return res;
 
-    typedef std::map<ResItem_constPtr, bool> SeenTable;
+    typedef std::map<PoolItem_Ref, bool> SeenTable;
     SeenTable seen_packages;
 
-    for (CResItemList::const_iterator iter = _resItem_list.begin(); iter != _resItem_list.end(); iter++) {
+    for (PoolItemList::const_iterator iter = _item_list.begin(); iter != _item_list.end(); iter++) {
 	seen_packages[*iter] = true;
     }
 
-    CResItemList rl = to_be_merged->resItems();
-    for (CResItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
+    PoolItemList rl = to_be_merged->items();
+    for (PoolItemList::const_iterator iter = rl.begin(); iter != rl.end(); iter++) {
 	SeenTable::const_iterator pos = seen_packages.find(*iter);
 	if (pos == seen_packages.end()) {
-	    _resItem_list.push_front (*iter);
+	    _item_list.push_front (*iter);
 	    seen_packages[*iter] = true;
 	}
     }
@@ -126,8 +100,8 @@ ResolverInfoContainer::copy (ResolverInfoContainer_constPtr from)
 {
     ((ResolverInfo_Ptr)this)->copy(from);
 
-    for (CResItemList::const_iterator iter = from->_resItem_list.begin(); iter != from->_resItem_list.end(); iter++) {
-	_resItem_list.push_back (*iter);
+    for (PoolItemList::const_iterator iter = from->_item_list.begin(); iter != from->_item_list.end(); iter++) {
+	_item_list.push_back (*iter);
     }
 }
 
@@ -145,64 +119,64 @@ ResolverInfoContainer::copy (void) const
 //---------------------------------------------------------------------------
 
 string
-ResolverInfoContainer::resItemsToString (const bool names_only,
-					 const bool shorten_output) const
+ResolverInfoContainer::itemsToString (const bool names_only,
+				      const bool shorten_output) const
 {
-    string res;
+    ostringstream res;
     int max_items = 3;
 
-    if (_resItem_list.empty())
-	return res;
+    if (_item_list.empty())
+	return "";
 
     if (names_only)
     {
-	res += " [";
-	for (CResItemList::const_iterator iter = _resItem_list.begin();
-	     iter != _resItem_list.end(); iter++)
+	res << " [";
+	for (PoolItemList::const_iterator iter = _item_list.begin();
+	     iter != _item_list.end(); ++iter)
 	{
-	    if (iter != _resItem_list.begin())
-		res += ", ";
-	    res += (*iter)->name();
+	    if (iter != _item_list.begin())
+		res << ", ";
+	    res << (*iter)->name();
 	    if (shorten_output
 		&& --max_items <= 0)
 	    {
-		res += ", ...";
+		res << ", ...";
 		break;
 	    }
 	}
-	res += "]";
+	res << "]";
     }
     else
     {
 	// one line for each entry
-	for (CResItemList::const_iterator iter = _resItem_list.begin();
-	     iter != _resItem_list.end(); iter++)
+	for (PoolItemList::const_iterator iter = _item_list.begin();
+	     iter != _item_list.end(); iter++)
 	{
-	    res += "\n- ";	    
-	    res += (*iter)->asString();
+	    res << "\n- ";	    
+	    res << (*iter);
 	    if (shorten_output
 		&& --max_items <= 0)
 	    {
-		res += "\n- ...\n- ..\n- .";
+		res << "\n- ...\n- ..\n- .";
 		break;
 	    }
 	}	
     }
 
-    return res;
+    return res.str();
 }
 
 
 bool
-ResolverInfoContainer::mentions (ResItem_constPtr resItem) const
+ResolverInfoContainer::mentions (PoolItem_Ref item) const
 {
-    if (isAbout(resItem))
+    if (isAbout(item))
 	return true;
 
-    // Search resItem_list for any mention of the resItem.
+    // Search item_list for any mention of the item.
 
-    for (CResItemList::const_iterator iter = _resItem_list.begin(); iter != _resItem_list.end(); iter++) {
-	if ((*iter)->name() == resItem->name()) {
+    for (PoolItemList::const_iterator iter = _item_list.begin(); iter != _item_list.end(); iter++) {
+	if ((*iter)->name() == item->name()) {
 	    return true;
 	}
     }
@@ -212,19 +186,19 @@ ResolverInfoContainer::mentions (ResItem_constPtr resItem) const
 
 
 void
-ResolverInfoContainer::addRelatedResItem (ResItem_constPtr resItem)
+ResolverInfoContainer::addRelatedPoolItem (PoolItem_Ref item)
 {
-    if (!mentions(resItem)) {
-	_resItem_list.push_front (resItem);
+    if (!mentions(item)) {
+	_item_list.push_front (item);
     }
 }
 
 
 void
-ResolverInfoContainer::addRelatedResItemList (const CResItemList & resItems)
+ResolverInfoContainer::addRelatedPoolItemList (const PoolItemList & items)
 {
-    for (CResItemList::const_iterator iter = resItems.begin(); iter != resItems.end(); iter++) {
-	_resItem_list.push_front (*iter);
+    for (PoolItemList::const_iterator iter = items.begin(); iter != items.end(); iter++) {
+	_item_list.push_front (*iter);
     }
 }
 

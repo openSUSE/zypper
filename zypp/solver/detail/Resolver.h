@@ -52,7 +52,6 @@ namespace zypp
 //	CLASS NAME : Resolver
 
 class Resolver : public base::ReferenceCounted, private base::NonCopyable {
-    
 
   private:
     const ResPool *_pool;
@@ -66,7 +65,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     PoolItemList _items_to_remove;
     PoolItemList _items_to_verify;
 
-    CapSet _extra_deps;
+    CapSet _extra_caps;
     CapSet _extra_conflicts;
 
     ResolverQueueList _pending_queues;
@@ -82,7 +81,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
   public:
 
-    Resolver (const ResPool *pool = NULL);
+    Resolver (const ResPool *pool);
     virtual ~Resolver();
 
     // ---------------------------------- I/O

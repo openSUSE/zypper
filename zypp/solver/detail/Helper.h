@@ -21,8 +21,10 @@
  * 02111-1307, USA.
  */
 
-#ifndef ZYPP_SOLVER_DETAIL_RESOLVER_H
+#ifndef ZYPP_SOLVER_DETAIL_HELPER_H
 #define ZYPP_SOLVER_DETAIL_HELPER_H
+
+#include <iosfwd>
 
 #include "zypp/ResPool.h"
 #include "zypp/PoolItem.h"
@@ -51,6 +53,9 @@ class Helper {
     //  FIXME: should probably take provides/obsoletes into account for
     //	       renamed upgrades
     static PoolItem_Ref findInstalledItem (const ResPool *pool, PoolItem_Ref item);
+
+    friend std::ostream& operator<<(std::ostream&, const PoolItemList & itemlist);
+
 };
 
 ///////////////////////////////////////////////////////////////////

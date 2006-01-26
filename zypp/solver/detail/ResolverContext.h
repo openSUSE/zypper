@@ -26,6 +26,7 @@
 #ifndef ZYPP_SOLVER_DETAIL_RESOLVERCONTEXT_H
 #define ZYPP_SOLVER_DETAIL_RESOLVERCONTEXT_H
 
+#include "zypp/ResPool.h"
 #include "zypp/PoolItem.h"
 #include "zypp/Capability.h"
 
@@ -57,8 +58,10 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     ResolverContext_Ptr _parent;		// branches share a common parent
 
-    typedef std::set<PoolItem_Ref > Context;
+    typedef std::set<PoolItem_Ref> Context;
     Context _context;				// the set of items touched in this transaction
+
+    const ResPool *_pool;
 
     ResolverInfoList _log;			// report log
 
@@ -95,6 +98,9 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     bool verifying (void) const { return _verifying; }
     void setVerifying (bool verifying) { _verifying = verifying; }
 
+    inline const ResPool *pool() const { return _pool; }
+    void setPool (const ResPool *pool) { _pool = pool; }
+
     // ---------------------------------- methods
 
     /** state change functions
@@ -104,7 +110,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
      *set the state of \c item to \c status
      *If \c status is not the current state of \c item, make \c item
      *part of the current transaction (the context) */
-    void setStatus (PoolItem_Ref item, ResStatus & status);
+    void setStatus (PoolItem_Ref item, ResStatus status);
 
     /**
      *set \c item to \a to-be-installed */
@@ -143,8 +149,8 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     bool requirementIsMet (const Capability & cap, bool is_child = false);
     bool requirementIsPossible (const Capability & cap);
-    bool itemIsPossible (const PoolItem_Ref & item);
-    bool isParallelInstall (const PoolItem_Ref & item);
+    bool itemIsPossible (const PoolItem_Ref item);
+    bool isParallelInstall (const PoolItem_Ref item);
 
     /** iterate over various states */
 

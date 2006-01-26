@@ -45,27 +45,27 @@ static struct {
     ResolverInfoType type;
     const char        *str;
 } type_str_table[] = {
-    { RESOLVER_INFO_TYPE_NEEDED_BY,      "needed_by" },
-    { RESOLVER_INFO_TYPE_CONFLICTS_WITH, "conflicts_with" },
-    { RESOLVER_INFO_TYPE_OBSOLETES,      "obsoletes" },
-    { RESOLVER_INFO_TYPE_DEPENDS_ON,     "depended_on" },
-    { RESOLVER_INFO_TYPE_CHILD_OF,       "child_of" },
-    { RESOLVER_INFO_TYPE_MISSING_REQ,    "missing_req" },
-	  { RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER,		"There are no alternative installed providers of c [for p]" },
-	  { RESOLVER_INFO_TYPE_NO_PROVIDER,			"There are no installable providers of c [for p]" },
-	  { RESOLVER_INFO_TYPE_NO_UPGRADE,			"Upgrade to q to avoid removing p is not possible." },
-	  { RESOLVER_INFO_TYPE_UNINSTALL_PROVIDER,		"p provides c but is scheduled to be uninstalled" },
-	  { RESOLVER_INFO_TYPE_PARALLEL_PROVIDER,		"p provides c but another version is already installed" },
-	  { RESOLVER_INFO_TYPE_NOT_INSTALLABLE_PROVIDER,	"p provides c but is uninstallable" },
-	  { RESOLVER_INFO_TYPE_LOCKED_PROVIDER,			"p provides c but is locked" },
-	  { RESOLVER_INFO_TYPE_SKIPPING,			"Skipping p, already installed" },
-	  { RESOLVER_INFO_TYPE_UNINSTALL_TO_BE_INSTALLED,	"p is to-be-installed, so it won't be unlinked." },
-	  { RESOLVER_INFO_TYPE_UNINSTALL_INSTALLED,		"p is required by installed, so it won't be unlinked." },
-	  { RESOLVER_INFO_TYPE_UNINSTALL_LOCKED,		"cant uninstall, its locked" },
-	  { RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL,		"to-be-installed p conflicts with q due to c" },
-	  { RESOLVER_INFO_TYPE_CONFLICT_UNINSTALLABLE,		"uninstalled p is marked uninstallable it conflicts [with q] due to c" },
-    { RESOLVER_INFO_TYPE_INVALID,        "invalid" },
-    { RESOLVER_INFO_TYPE_INVALID,        NULL }
+    { RESOLVER_INFO_TYPE_NEEDED_BY,			"needed_by" },
+    { RESOLVER_INFO_TYPE_CONFLICTS_WITH,		"conflicts_with" },
+    { RESOLVER_INFO_TYPE_OBSOLETES,			"obsoletes" },
+    { RESOLVER_INFO_TYPE_DEPENDS_ON,			"depended_on" },
+    { RESOLVER_INFO_TYPE_CHILD_OF,			"child_of" },
+    { RESOLVER_INFO_TYPE_MISSING_REQ,			"missing_req" },
+    { RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER,		"There are no alternative installed providers of c [for p]" },
+    { RESOLVER_INFO_TYPE_NO_PROVIDER,			"There are no installable providers of c [for p]" },
+    { RESOLVER_INFO_TYPE_NO_UPGRADE,			"Upgrade to q to avoid removing p is not possible." },
+    { RESOLVER_INFO_TYPE_UNINSTALL_PROVIDER,		"p provides c but is scheduled to be uninstalled" },
+    { RESOLVER_INFO_TYPE_PARALLEL_PROVIDER,		"p provides c but another version is already installed" },
+    { RESOLVER_INFO_TYPE_NOT_INSTALLABLE_PROVIDER,	"p provides c but is uninstallable" },
+    { RESOLVER_INFO_TYPE_LOCKED_PROVIDER,		"p provides c but is locked" },
+    { RESOLVER_INFO_TYPE_SKIPPING,			"Skipping p, already installed" },
+    { RESOLVER_INFO_TYPE_UNINSTALL_TO_BE_INSTALLED,	"p is to-be-installed, so it won't be unlinked." },
+    { RESOLVER_INFO_TYPE_UNINSTALL_INSTALLED,		"p is required by installed, so it won't be unlinked." },
+    { RESOLVER_INFO_TYPE_UNINSTALL_LOCKED,		"cant uninstall, its locked" },
+    { RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL,		"to-be-installed p conflicts with q due to c" },
+    { RESOLVER_INFO_TYPE_CONFLICT_UNINSTALLABLE,	"uninstalled p is marked uninstallable it conflicts [with q] due to c" },
+    { RESOLVER_INFO_TYPE_INVALID,			"invalid" },
+    { RESOLVER_INFO_TYPE_INVALID, NULL }
 };
 
 static const char *
@@ -99,54 +99,27 @@ resolver_info_type_from_string (const char *str)
 
 //---------------------------------------------------------------------------
 
-string
-ResolverInfo::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-ResolverInfo::toString ( const ResolverInfo & resolverinfo, bool full )
-{
-    string res;
-
-    if (full) {
-	res += "<";
-	res += info_type_to_string (resolverinfo._type);
-	res += "> ";
-    }
-    if (resolverinfo._affected!= NULL) {
-	res += resolverinfo._affected->asString();
-	res += ":";
-    }
-
-    if (resolverinfo._error) res += _(" Error!");
-    if (resolverinfo._important) res += _(" Important!");
-
-    return res;
-}
-
-
-ostream &
-ResolverInfo::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
 ostream&
-operator<<( ostream& os, const ResolverInfo & resolver)
+operator<<( ostream& os, const ResolverInfo & resolverinfo)
 {
-    return os << resolver.asString();
+    os << "<";
+    os << info_type_to_string (resolverinfo._type);
+    os << "> ";
+
+    if (resolverinfo._affected) {
+	os << resolverinfo._affected << ":";
+    }
+
+    if (resolverinfo._error) os << _(" Error!");
+    if (resolverinfo._important) os << _(" Important!");
+    return os;
 }
 
 //---------------------------------------------------------------------------
 
-ResolverInfo::ResolverInfo (ResolverInfoType type, ResItem_constPtr resItem, int priority)
+ResolverInfo::ResolverInfo (ResolverInfoType type, PoolItem_Ref item, int priority)
     : _type (type)
-    , _affected (resItem)
+    , _affected (item)
     , _priority (priority)
     , _error (false)
     , _important (false)
@@ -195,12 +168,12 @@ ResolverInfo::copy (void) const
 //---------------------------------------------------------------------------
 
 bool
-ResolverInfo::isAbout (ResItem_constPtr resItem) const
+ResolverInfo::isAbout (PoolItem_Ref item) const
 {
-    if (_affected == NULL)
+    if (!_affected)
 	return false;
 
-    return _affected->name() == resItem->name();
+    return _affected->name() == item->name();
 }
   
 ///////////////////////////////////////////////////////////////////

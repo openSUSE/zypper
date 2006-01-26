@@ -68,10 +68,10 @@ class ResolverInfoContainer : public ResolverInfo {
     virtual ResolverInfo_Ptr copy (void) const;
 
     std::string itemsToString (const bool names_only,
-				const bool shorten_output = false) const;
+			       const bool shorten_output = false) const;
 
     bool mentions (PoolItem_Ref item) const;
-    void addRelatedPoolItem_Ref (PoolItem_Ref item);
+    void addRelatedPoolItem (PoolItem_Ref item);
     void addRelatedPoolItemList (const PoolItemList & items);
 
 };

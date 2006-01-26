@@ -20,6 +20,7 @@
  */
 
 #include <map>
+#include <sstream>
 
 #include "zypp/solver/detail/ResolverInfo.h"
 #include "zypp/solver/detail/ResolverInfoMisc.h"
@@ -44,52 +45,28 @@ IMPL_PTR_TYPE(ResolverInfoMisc);
 //---------------------------------------------------------------------------
 
 
-string
-ResolverInfoMisc::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-ResolverInfoMisc::toString ( const ResolverInfoMisc & misc)
-{
-    string res;
-    res += misc.message();
-#if 0
-    res += " [";
-    res += ResolverInfo::toString (misc, false);
-    res += "]";
-#endif
-    res += misc.resItemsToString(false);
-    if (!misc._action.empty()) {
-	res += string (_(", Action: ")) + misc._action + "\n";
-    }
-    if (!misc._trigger.empty()) {
-	res += string (_(", Trigger: ")) + misc._trigger + "\n";
-    }
-
-    return res;
-}
-
-
-ostream &
-ResolverInfoMisc::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
 ostream&
 operator<<( ostream& os, const ResolverInfoMisc & misc)
 {
-    return os << misc.asString();
+    os << misc.message();
+#if 0
+    os << " [";
+    os << ResolverInfo::toString (misc, false);
+    os << "]";
+#endif
+    os << misc.itemsToString(true);
+    if (!misc._action.empty()) {
+	os << _(", Action: ") << misc._action << endl;
+    }
+    if (!misc._trigger.empty()) {
+	os << _(", Trigger: ") << misc._trigger << endl;
+    }
+    return os;
 }
 
 //---------------------------------------------------------------------------
 
-ResolverInfoMisc::ResolverInfoMisc  (ResolverInfoType detailedtype, ResItem_constPtr affected, int priority, const Capability & capability)
+ResolverInfoMisc::ResolverInfoMisc  (ResolverInfoType detailedtype, PoolItem_Ref affected, int priority, const Capability & capability)
     : ResolverInfoContainer (detailedtype, affected, priority)
     , _capability (capability)
 {
@@ -143,10 +120,30 @@ translateResTraits (const Resolvable::Kind & kind)
 }
 
 
+static string
+toString (PoolItem_Ref item)
+{
+    ostringstream os;
+    os << item;
+    return os.str();
+}
+
+
+static string
+toString (const Capability & capability)
+{
+    ostringstream os;
+    os << capability;
+    return os.str();
+}
+
+
 std::string
 ResolverInfoMisc::message (void) const
 {
     string msg;
+
+    string affected_str = toString(affected());
 
     switch (type()) {
 
@@ -163,7 +160,7 @@ ResolverInfoMisc::message (void) const
 	    // Translator: %s = name of packages,patch,...
 	    // TranslatorExplanation: Additional information to dependency solver result.
 	    msg = str::form (_("Marking resolvable %s as uninstallable"),
-			affected()->asString().c_str());
+			affected_str.c_str());
 	}
 	break;
 
@@ -171,7 +168,7 @@ ResolverInfoMisc::message (void) const
 	    // Translator: %s = name of packages,patch,...
 	    // TranslatorExplanation: Additional information to dependency solver result.
 	    msg = str::form (_("%s is scheduled to be installed, but this is not possible because of dependency problems."),
-			affected()->asString().c_str());
+			affected_str.c_str());
 	}
 	break;
 
@@ -179,7 +176,7 @@ ResolverInfoMisc::message (void) const
 	    // Translator: %s = name of package,patch,...
 	    // TranslatorExplanation: Additional information to dependency solver result.
 	    msg = str::form (_("Can't install %s since it is already marked as needing to be uninstalled"),
-			 affected()->asString().c_str());
+			 affected_str.c_str());
 	}
 	break;
 
@@ -191,21 +188,21 @@ ResolverInfoMisc::message (void) const
 	    // TranslatorExplanation: Here a patch was selected for installation but the to-be-fixed
 	    // TranslatorExplanation: package is not installed.
 	    msg = str::form (_("Can't install %s since it is does not apply to this system."),
-			affected()->asString().c_str());
+			affected_str.c_str());
 	}
 	break;
 
 	case RESOLVER_INFO_TYPE_INSTALL_PARALLEL: {
 	    // Translator: %s = name of package,patch,...
 	    msg = str::form (_("Can't install %s, since a resolvable of the same name is already marked as needing to be installed"),
-			affected()->asString().c_str());
+			affected_str.c_str());
 	}
 	break;
 
 	case RESOLVER_INFO_TYPE_INCOMPLETES: {
 	    // Translator: %s = name of patch,product
 	    msg = str::form (_("This would invalidate %s."),
-			affected()->asString().c_str());
+			affected_str.c_str());
 	}
 	break;
 
@@ -220,7 +217,7 @@ ResolverInfoMisc::message (void) const
 	    // TranslatorExplanation: This is just a progress indicator
 	    // TranslatorExplanation: It is also used for other types of resolvables in order to verify
 	    // TranslatorExplanation: the completeness of their dependencies
-	    msg = str::form (_("Establishing %s"), affected()->asString().c_str());
+	    msg = str::form (_("Establishing %s"), affected_str.c_str());
 	}
 	break;
 
@@ -242,7 +239,7 @@ ResolverInfoMisc::message (void) const
 	    // TranslatorExplanation: Just a progress indicator that something is scheduled for installation
 	    // Translator: %s = packagename
 	    msg = str::form (_("Installing %s"),
-			     affected()->asString().c_str());
+			     affected_str.c_str());
 	}
 	break;
 
@@ -259,8 +256,8 @@ ResolverInfoMisc::message (void) const
 	    // TranslatorExample: Updating foo-1.1 to foo-1.2
 	    // TranslatorExplanation: Just a progress indicator that something is scheduled for upgrade
 	    msg = str::form (_("Updating %s to %s"),
-			     other()->asString().c_str(),
-			     affected()->asString().c_str());
+			     toString (other()).c_str(),
+			     affected_str.c_str());
 	}
 	break;
 
@@ -276,7 +273,7 @@ ResolverInfoMisc::message (void) const
 	    // Translator: %s = name of package,patch,...
 	    // TranslatorExample: Skipping foo: already installed
 	    // TranslatorExplanation: An installation request for foo is skipped since foo is already installed
-	    msg = str::form (_("Skipping %s: already installed"), affected()->asString().c_str());
+	    msg = str::form (_("Skipping %s: already installed"), affected_str.c_str());
 	}
 	break;
 
@@ -298,13 +295,13 @@ ResolverInfoMisc::message (void) const
 	    // TranslatorExplanation: We just found out that 'foo' is not provided by anything else (an alternative)
 	    // TranslatorExplanation: removal of this resolvable would therefore break dependency
 	    // TranslatorExplanation: This is an error message explaining that the resolvable cannot be uninstalled
-	    msg = str::form (_("There are no alternative installed providers of %s"), _capability.asString().c_str());
-	    if (affected() != NULL) {
+	    msg = str::form (_("There are no alternative installed providers of %s"), toString (_capability).c_str());
+	    if (affected()) {
 		msg += " ";
 		// Translator: 1.%s = name of package,patch....
 		// TranslatorExample: for bar
 		// TranslatorExplanation: extension to previous message if we know what the resolvable is
-		msg += str::form (_("for %s"), affected()->asString().c_str());
+		msg += str::form (_("for %s"), affected_str.c_str());
 	    }
 	}
 	break;
@@ -323,13 +320,13 @@ ResolverInfoMisc::message (void) const
 	    // TranslatorExplanation: A resolvable is to be installed which requires foo
 	    // TranslatorExplanation: But there is nothing available to fulfill this requirement
 	    // TranslatorExplanation: This is an error message explaining that the resolvable cannot be installed
-	    msg = str::form (_("There are no installable providers of %s"), _capability.asString().c_str());
-	    if (affected() != NULL) {
+	    msg = str::form (_("There are no installable providers of %s"), toString (_capability).c_str());
+	    if (affected()) {
 		msg += " ";
 		// Translator: 1.%s = name of package,patch....
 		// TranslatorExample: for bar
 		// TranslatorExplanation: extension to previous message if we know what the resolvable is
-		msg += str::form (_("for %s"), affected()->asString().c_str());
+		msg += str::form (_("for %s"), affected_str.c_str());
 	    }
 	}
 	break;
@@ -347,8 +344,8 @@ ResolverInfoMisc::message (void) const
 	    // TranslatorExample: Upgrade to foo to avoid removing bar is not possible
 	    // TranslatorExplanation: bar requires something from foo
 	    msg = str::form (_("Upgrade to %s to avoid removing %s is not possible."),
-				    other()->asString().c_str(),
-				    affected()->asString().c_str());
+				    toString (other()).c_str(),
+				    affected_str.c_str());
 	}
 	break;
 
@@ -363,8 +360,8 @@ ResolverInfoMisc::message (void) const
 
 	    // Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
 	    msg = str::form (_("%s provides %s, but is scheduled to be uninstalled."),
-			     other()->asString().c_str(),
-			     _capability.asString().c_str());
+			     toString (other()).c_str(),
+			     toString (_capability).c_str());
 	}
 	break;
 
@@ -380,7 +377,7 @@ ResolverInfoMisc::message (void) const
 	    // Translator: 1.%s = name of package,patch,...; 2.%s = dependency; 3.%s type (package, patch, ...)
 	    msg = str::form (_("%s provides %s, but another version of that %s is already installed."),
 			     other()->name().c_str(),
-			     _capability.asString().c_str(),
+			     toString (_capability).c_str(),
 			     translateResTraits(other()->kind()).c_str());
 	}
 	break;
@@ -397,7 +394,7 @@ ResolverInfoMisc::message (void) const
 	    // Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
 	    msg = str::form (_("%s provides %s, but it is uninstallable.  Try installing it on its own for more details."),
 			     other()->name().c_str(),
-			     _capability.asString().c_str());
+			     toString (_capability).c_str());
 	}
 	break;
 
@@ -413,7 +410,7 @@ ResolverInfoMisc::message (void) const
 	    // Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
 	    msg = str::form (_("%s provides %s, but it is locked."),
 			     other()->name().c_str(),
-			     _capability.asString().c_str());
+			     toString (_capability).c_str());
 	}
 	break;
 
@@ -428,8 +425,8 @@ ResolverInfoMisc::message (void) const
 
 	    // Translator: 1.%s = dependency. 2.%s name of package, patch, ...
 	    msg = str::form (_("Can't satisfy requirement %s for %s"),
-				_capability.asString().c_str(),
-				affected()->asString().c_str());
+				toString (_capability).c_str(),
+				affected_str.c_str());
 	}
 	break;
 
@@ -502,9 +499,9 @@ ResolverInfoMisc::message (void) const
 	    // Translator: 1.%s and 2.%s = Dependency; 4.%s = name of package,patch,...
 	    // TranslatorExample: A conflict over foo (bar) requires the removal of to-be-installed xyz
 	    msg = str::form(_("A conflict over %s (%s) requires the removal of to-be-installed %s"),
-			    _capability.asString().c_str(),
-			    _other_capability.asString().c_str(),
-			    affected()->asString().c_str());
+			    toString (_capability).c_str(),
+			    toString (_other_capability).c_str(),
+			    affected_str.c_str());
 	}
 	break;
 
@@ -520,15 +517,15 @@ ResolverInfoMisc::message (void) const
 	    // Translator: 1.%s = name of package,patch,...; 3.%s and 4.%s = Dependency;
 	    // TranslatorExample: Marking xyz as uninstallable due to conflicts over foo (bar)
 	    msg = str::form (_("Marking %s as uninstallable due to conflicts over %s"),
-				affected()->asString().c_str(),
-				_capability.asString().c_str());
-	    ResItem_constPtr issuer = other();
-	    if (issuer != NULL) {
+				affected_str.c_str(),
+				toString (_capability).c_str());
+	    PoolItem_Ref  issuer = other();
+	    if (issuer) {
 		msg += " ";
 		// Translator: %s = name of package,patch
 		// TranslatorExample: from abc
 		msg += str::form (_("from %s"),
-			issuer->asString().c_str());
+			toString (issuer).c_str());
 	    }
 	}
 	break;
@@ -572,7 +569,7 @@ ResolverInfoMisc::copy (void) const
     ResolverInfoMisc_Ptr cpy = new ResolverInfoMisc(type(), affected(), priority(), _capability);
 
     ((ResolverInfoContainer_Ptr)cpy)->copy (this);
-    cpy->_other_resolvable = _other_resolvable;
+    cpy->_other_item = _other_item;
     return cpy;
 }
 
@@ -592,9 +589,9 @@ ResolverInfoMisc::addTrigger (const std::string & trigger_msg)
 }
 
 void
-ResolverInfoMisc::setOtherResItem (ResItem_constPtr other)
+ResolverInfoMisc::setOtherPoolItem (PoolItem_Ref other)
 {
-    _other_resolvable = other;
+    _other_item = other;
 }
 
 void
