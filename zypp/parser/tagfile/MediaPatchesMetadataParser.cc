@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/parser/tagfile/MediaMetadataParser.cc
+/** \file	zypp/parser/tagfile/MediaPatchesMetadataParser.cc
  *
 */
 #include <iostream>
@@ -20,7 +20,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/String.h"
 
-#include "zypp/parser/tagfile/MediaMetadataParser.h"
+#include "zypp/parser/tagfile/MediaPatchesMetadataParser.h"
 #include <boost/regex.hpp>
 #include "zypp/parser/tagfile/Grammar.h"
 
@@ -71,38 +71,31 @@ namespace zypp
       //	METHOD NAME : Parser::parse
       //	METHOD TYPE : void
       //
-      void MediaMetadataParser::parse( const Pathname & file_r, MediaEntry &entry_r )
+      void MediaPatchesMetadataParser::parse( const Pathname & file_r, MediaPatchesEntry &entry_r )
       {
         std::ifstream file(file_r.asString().c_str());
         std::string buffer;
         // read vendor
-        getline(file, entry_r.vendor);
-        // read timestamp
-        getline(file, entry_r.timestamp);
-        // skip flags for now
-        std::string media_count_str;
-        
         getline(file, buffer);
-        regex is_digit_rx("^[\\d]+$");
-        boost::smatch what_digit;
-        
-        // for the first line here we dont have to consume one if
-        // there was no media
-        bool consume = false;  
 
-        if(boost::regex_match(buffer, what_digit, is_digit_rx))
+        regex rx("^[\\S]+( (.*))?$");
+        boost::smatch what;
+
+        if(boost::regex_match(buffer, what, rx))
         {
+          dumpRegexpResults(what);
+
           // it was the media count
-          str::strtonum(buffer, entry_r.count);
+          //str::strtonum(buffer, entry_r.count);
           // consume another line
-          consume = true;
+          //consume = true;
         }
         else
         {
-          // media count defaults to 1
-          entry_r.count = 1;
+          //entry_r.count = 1;
         }
-        
+
+        /* 
         while(!file.eof())
         {
           // probably is the first line after we dont find the media number
@@ -132,9 +125,10 @@ namespace zypp
           }
           
         }
+        */
       }
 
-       /////////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////
     } // namespace tagfile
     ///////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////

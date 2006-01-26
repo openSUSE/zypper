@@ -40,7 +40,6 @@ namespace zypp
       struct ProductMetadataParser
       {
         struct ProductEntry {
-          Pathname    dir;
           std::string name;
           std::string version;
           std::string dist;
@@ -62,18 +61,7 @@ namespace zypp
           std::list<std::string> flags;
           std::string language;
           std::string timezone;
-
-          ProductEntry( const Pathname & dir_r = "/", const std::string & name_r = std::string() ){
-            dir  = dir_r;
-            name = name_r;
-          }
-          bool operator<( const ProductEntry & rhs ) const {
-            return( dir.asString() < rhs.dir.asString() );
-          }
         };
-
-        typedef std::set<ProductEntry> ProductSet;
-
 
         virtual ~ProductMetadataParser()
         {}

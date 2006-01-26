@@ -9,8 +9,8 @@
 /** \file	zypp/parser/tagfile/Parser.h
  *
 */
-#ifndef ZYPP_PARSER_TAGFILE_MediaMetadataPARSER_H
-#define ZYPP_PARSER_TAGFILE_MediaMetadataPARSER_H
+#ifndef ZYPP_PARSER_TAGFILE_MediaPatchesMetadataPARSER_H
+#define ZYPP_PARSER_TAGFILE_MediaPatchesMetadataPARSER_H
 
 #include <iosfwd>
 #include <set>
@@ -31,38 +31,37 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace tagfile
     { /////////////////////////////////////////////////////////////////
-
+      
+      /*
+        Location  /media.1/ directory
+        Content  one line of ASCII as follows
+        <directory> <whitespace> <optional comment>
+        zero or more lines specifying exclusive products: <productname>-<productversion>
+      */
+      
       ///////////////////////////////////////////////////////////////////
       //
-      //	CLASS NAME : MediaMetadataParser
+      //	CLASS NAME : MediaPatchesMetadataParser
       //
       /** Tagfile parser. */
-      struct MediaMetadataParser
+      struct MediaPatchesMetadataParser
       {
-        struct MediaEntry {
-          std::string vendor;
-          std::string timestamp;
-          unsigned int count;
-          std::set<std::string> flags;
-          // map media number to ( map language -> description string )
-          // entry.alternate_names[1]["de"] -> "SUSE Linux"
-          std::map< unsigned int, std::map<std::string, std::string> > alternate_names;
+        struct MediaPatchesEntry {
+          Pathname dir;
+          std::string comment;
+          std::set<std::string> products;
         };
 
-        virtual ~MediaMetadataParser()
+        virtual ~MediaPatchesMetadataParser()
         {}
 
         /* Parse file and invoke consume on each tag found.
          * \throw ParseException
          * \todo more doc on Ecaptions.
         */
-        void parse( const Pathname & file_r, MediaEntry &entry_r );
-        /* Parse a key.modifier (std::list of std::strings)
-         * That means, translatable tag with multiple values
-         * the default modifier will get the modifier of default (LABEL.de, LABEL as LANGUAGE.default)
-         */ 
+        void parse( const Pathname & file_r, MediaPatchesEntry &entry_r );
       };
-      ///////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////
 
       /////////////////////////////////////////////////////////////////
     } // namespace tagfile
@@ -74,4 +73,4 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 //
-#endif //  ZYPP_PARSER_TAGFILE_MediaMetadataPPARSER_H
+#endif //  ZYPP_PARSER_TAGFILE_MediaPatchesMetadataPPARSER_H

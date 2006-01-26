@@ -15,7 +15,8 @@ parsertagfileinclude_HEADERS = \
 	Grammar.h	\
 	Parser.h \
   ProductMetadataParser.h	\
-	MediaMetadataParser.h
+	MediaMetadataParser.h \
+	MediaPatchesMetadataParser.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_parser_tagfile.la
 
@@ -26,7 +27,8 @@ lib@PACKAGE@_parser_tagfile_la_SOURCES = \
 	Tags.cc		\
 	Parser.cc \
 	ProductMetadataParser.cc \
-	MediaMetadataParser.cc
+	MediaMetadataParser.cc \
+	MediaPatchesMetadataParser.cc
 
 lib@PACKAGE@_parser_tagfile_la_LIBADD = 
 
