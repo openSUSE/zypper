@@ -57,7 +57,7 @@ class ResolverQueue : public base::ReferenceCounted, private base::NonCopyable {
   private:
 
     ResolverContext_Ptr _context;
-    QueueItemList _items;
+    QueueItemList _qitems;
 
   public:
     ResolverQueue (ResolverContext_Ptr context = NULL);
@@ -70,20 +70,20 @@ class ResolverQueue : public base::ReferenceCounted, private base::NonCopyable {
     // ---------------------------------- accessors
 
     ResolverContext_Ptr context (void) const { return _context; }
-    QueueItemList items(void) const { return _items; }
+    QueueItemList qitems(void) const { return _qitems; }
 
     // ---------------------------------- methods
 
 
-    void addPoolItemToInstall (PoolItem_Ref item);
-    void addPoolItemToEstablish (PoolItem_Ref item);
-    void addPoolItemToRemove (PoolItem_Ref item, bool remove_only_mode);
-    void addPoolItemToVerify (PoolItem_Ref item);
+    void addPoolItemToInstall (PoolItem_Ref poolItem);
+    void addPoolItemToEstablish (PoolItem_Ref poolItem);
+    void addPoolItemToRemove (PoolItem_Ref poolItem, bool remove_only_mode);
+    void addPoolItemToVerify (PoolItem_Ref poolItem);
     void addExtraCapability (const Capability & cap);
     void addExtraConflict (const Capability & cap);
-    void addItem (QueueItem_Ptr item);
+    void addItem (QueueItem_Ptr qtem);
 
-    bool isEmpty () const { return _items.empty(); }
+    bool isEmpty () const { return _qitems.empty(); }
     bool isInvalid ();
     bool containsOnlyBranches ();
 

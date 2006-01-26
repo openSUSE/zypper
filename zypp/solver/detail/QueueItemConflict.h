@@ -50,7 +50,7 @@ class QueueItemConflict : public QueueItem {
 
   private:
     const Capability & _capability;		// the conflicting capability
-    PoolItem_Ref _conflicting_item;		// the item which issued the conflict
+    PoolItem_Ref _conflicting_item;		// the item which issued the conflict, can be 'empty' for 'extraConflicts'
 
     bool _actually_an_obsolete;
 

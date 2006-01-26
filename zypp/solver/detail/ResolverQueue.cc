@@ -53,38 +53,13 @@ IMPL_PTR_TYPE(ResolverQueue);
 
 //---------------------------------------------------------------------------
 
-string
-ResolverQueue::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-ResolverQueue::toString ( const ResolverQueue & resolverqueue )
-{
-    string res;
-
-    res += str::form ("Context [%p]", (const void *)resolverqueue._context.get());
-    res +=  ", Items:\n\t";
-    res += QueueItem::toString (resolverqueue._items, ",\n\t");
-
-    return res;
-}
-
-
-ostream &
-ResolverQueue::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
 ostream&
 operator<<( ostream& os, const ResolverQueue & resolverqueue)
 {
-    return os << resolverqueue.asString();
+    os << str::form ("Context [%p]", (const void *)resolverqueue._context.get());
+    os <<  ", Items:" << endl << "\t";
+    os << resolverqueue._qitems;
+    return os;
 }
 
 //---------------------------------------------------------------------------
@@ -104,68 +79,68 @@ ResolverQueue::~ResolverQueue()
 //---------------------------------------------------------------------------
 
 void
-ResolverQueue::addResItemToInstall (ResItem_constPtr resItem)
+ResolverQueue::addPoolItemToInstall (PoolItem_Ref poolItem)
 {
-    QueueItemInstall_Ptr item;
+    QueueItemInstall_Ptr qitem;
 
-    if (_context->resItemIsPresent (resItem)
-	&& (!resItem_status_is_satisfied(_context->getStatus (resItem)))
-	&& (!resItem_status_is_unneeded(_context->getStatus (resItem)))) {
-	WAR << resItem->asString() << " is already installed" << endl;
+    if (_context->isPresent (poolItem)
+	&& (!poolItem.status().isSatisfied())
+	&& (!poolItem.status().isUnneeded())) {
+	WAR << poolItem << " is already installed" << endl;
 	return;
     }
 
-    item = new QueueItemInstall (_context->pool(), resItem);
-    item->setExplicitlyRequested ();
+    qitem = new QueueItemInstall (_context->pool(), poolItem);
+    qitem->setExplicitlyRequested ();
 
-    addItem (item);
+    addItem (qitem);
 }
 
 
 void
-ResolverQueue::addResItemToEstablish (ResItem_constPtr resItem)
+ResolverQueue::addPoolItemToEstablish (PoolItem_Ref poolItem)
 {
-    QueueItemEstablish_Ptr item;
+    QueueItemEstablish_Ptr qitem;
 
-    item = new QueueItemEstablish (_context->pool(), resItem);
-    item->setExplicitlyRequested ();
+    qitem = new QueueItemEstablish (_context->pool(), poolItem);
+    qitem->setExplicitlyRequested ();
 
-    addItem (item);
+    addItem (qitem);
 }
 
 
 void
-ResolverQueue::addResItemToRemove (ResItem_constPtr resItem, bool remove_only_mode)
+ResolverQueue::addPoolItemToRemove (PoolItem_Ref poolItem, bool remove_only_mode)
 {
-    QueueItemUninstall_Ptr item;
+    QueueItemUninstall_Ptr qitem;
 
-    if (_context->resItemIsAbsent (resItem))
+    if (_context->isAbsent (poolItem))
 	return;
 
-    item = new QueueItemUninstall (_context->pool(), resItem, QueueItemUninstall::EXPLICIT);
+    qitem = new QueueItemUninstall (_context->pool(), poolItem, QueueItemUninstall::EXPLICIT);
     if (remove_only_mode)
-	item->setRemoveOnly ();
+	qitem->setRemoveOnly ();
 
-    item->setExplicitlyRequested ();
+    qitem->setExplicitlyRequested ();
 
-    addItem (item);
+    addItem (qitem);
 }
 
 
 void
-ResolverQueue::addResItemToVerify (ResItem_constPtr resItem)
+ResolverQueue::addPoolItemToVerify (PoolItem_Ref poolItem)
 {
-    CapSet requires = resItem->requires();
-    for (CapSet::const_iterator iter = requires.begin(); iter != requires.end(); iter++) {
-	QueueItemRequire_Ptr item = new QueueItemRequire (_context->pool(), *iter);
-	item->addResItem (resItem);
-	addItem (item);
+    CapSet requires = poolItem->dep (Dep::REQUIRES);
+    for (CapSet::const_iterator iter = requires.begin(); iter != requires.end(); ++iter) {
+	QueueItemRequire_Ptr qitem = new QueueItemRequire (_context->pool(), *iter);
+	qitem->addPoolItem (poolItem);
+	addItem (qitem);
     }
 
-    CapSet conflicts = resItem->conflicts();
-    for (CapSet::const_iterator iter = conflicts.begin(); iter != conflicts.end(); iter++) {
-	QueueItemConflict_Ptr item = new QueueItemConflict (_context->pool(), *iter, resItem);
-	addItem (item);
+    CapSet conflicts = poolItem->dep (Dep::CONFLICTS);
+    for (CapSet::const_iterator iter = conflicts.begin(); iter != conflicts.end(); ++iter) {
+	QueueItemConflict_Ptr qitem = new QueueItemConflict (_context->pool(), *iter, poolItem);
+	addItem (qitem);
     }
 }
 
@@ -173,23 +148,23 @@ ResolverQueue::addResItemToVerify (ResItem_constPtr resItem)
 void
 ResolverQueue::addExtraCapability (const Capability & dep)
 {
-    QueueItemRequire_Ptr item = new QueueItemRequire (_context->pool(), dep);
-    addItem (item);
+    QueueItemRequire_Ptr qitem = new QueueItemRequire (_context->pool(), dep);
+    addItem (qitem);
 }
 
 
 void
 ResolverQueue::addExtraConflict (const Capability & dep)
 {
-    QueueItemConflict_Ptr item = new QueueItemConflict (_context->pool(), dep, NULL);
-    addItem (item);
+    QueueItemConflict_Ptr qitem = new QueueItemConflict (_context->pool(), dep, PoolItem_Ref());
+    addItem (qitem);
 }
 
 
 void
-ResolverQueue::addItem (QueueItem_Ptr item)
+ResolverQueue::addItem (QueueItem_Ptr qitem)
 {
-    _items.push_front (item);
+    _qitems.push_front (qitem);
 }
 
 
@@ -203,7 +178,7 @@ ResolverQueue::isInvalid ()
 bool
 ResolverQueue::containsOnlyBranches ()
 {
-    for (QueueItemList::const_iterator iter = _items.begin(); iter != _items.end(); iter++) {
+    for (QueueItemList::const_iterator iter = _qitems.begin(); iter != _qitems.end(); ++iter) {
 	if (!(*iter)->isBranch())
 	    return false;
     }
@@ -214,10 +189,10 @@ ResolverQueue::containsOnlyBranches ()
 //---------------------------------------------------------------------------
 
 static int
-itemlist_max_priority (const QueueItemList & qil)
+qitemlist_max_priority (const QueueItemList & qil)
 {
     int max_priority = -1;
-    for (QueueItemList::const_iterator iter = qil.begin(); iter != qil.end(); iter++) {
+    for (QueueItemList::const_iterator iter = qil.begin(); iter != qil.end(); ++iter) {
 	if ((*iter)->priority() > max_priority) {
 	    max_priority = (*iter)->priority();
 	}
@@ -231,26 +206,26 @@ itemlist_max_priority (const QueueItemList & qil)
 bool
 ResolverQueue::processOnce ()
 {
-    QueueItemList new_items;
+    QueueItemList new_qitems;
     int max_priority;
     bool did_something = false;
 
-    _DBG("QUEUE_SPEW") << "ResolverQueue::processOnce(" << asString() <<", " << (int) _items.size() << " items" << endl;
-    while ( (max_priority = itemlist_max_priority (_items)) >= 0
+    DBG << "ResolverQueue::processOnce(" << *this <<", " << (int) _qitems.size() << " items" << endl;
+    while ( (max_priority = qitemlist_max_priority (_qitems)) >= 0
 	    && _context->isValid () ) {
 
 	bool did_something_recently = false;
 
-	_DBG("QUEUE_SPEW") << "ResolverQueue::processOnce() inside loop" << endl;
-	for (QueueItemList::iterator iter = _items.begin(); iter != _items.end() && _context->isValid();) {
-	    QueueItem_Ptr item = *iter;
-	    _DBG("QUEUE_SPEW") <<  "=====> 1st pass: [" << item->asString() << "]" << endl;
+	DBG << "ResolverQueue::processOnce() inside loop" << endl;
+	for (QueueItemList::iterator iter = _qitems.begin(); iter != _qitems.end() && _context->isValid();) {
+	    QueueItem_Ptr qitem = *iter;
+	    DBG <<  "=====> 1st pass: [" << qitem << "]" << endl;
 	    QueueItemList::iterator next = iter; ++next;
-	    if (item && item->priority() == max_priority) {
-		if (item->process (_context, new_items)) {
+	    if (qitem && qitem->priority() == max_priority) {
+		if (qitem->process (_context, new_qitems)) {
 		    did_something_recently = true;
 		}
-		_items.erase (iter);
+		_qitems.erase (iter);
 	    }
 	    iter = next;
 	}
@@ -260,8 +235,8 @@ ResolverQueue::processOnce ()
 	}
     }
 
-    _items = new_items;
-    _DBG("QUEUE_SPEW") <<  (int) _items.size() << " items after first pass" << endl;
+    _qitems = new_qitems;
+    DBG <<  (int) _qitems.size() << " qitems after first pass" << endl;
 
     /*
        Now make a second pass over the queue, removing any super-branches.
@@ -270,20 +245,20 @@ ResolverQueue::processOnce ()
     */
 
     _XXX("QUEUE_SPEW") <<  "ResolverQueue::processOnce() second pass" << endl;
-    for (QueueItemList::iterator iter = _items.begin(); iter != _items.end();) {
+    for (QueueItemList::iterator iter = _qitems.begin(); iter != _qitems.end();) {
 	QueueItemList::iterator next = iter; next++;
-	QueueItem_Ptr item = *iter;
+	QueueItem_Ptr qitem = *iter;
 
-	_DBG("QUEUE_SPEW") <<  "=====> 2nd pass: [" << item->asString() << "]" << endl;
-	if (item->isBranch()) {
-	    _DBG("QUEUE_SPEW") << "ResolverQueue::processOnce() is branch" << endl;
-	    QueueItemBranch_Ptr branch = dynamic_pointer_cast<QueueItemBranch>(item);
-	    for (QueueItemList::const_iterator iter2 = _items.begin(); iter2 != _items.end(); iter2++) {
-		_DBG("QUEUE_SPEW") << "Compare branch with [" << (*iter2)->asString() << "]" << endl;
+	DBG <<  "=====> 2nd pass: [" << qitem << "]" << endl;
+	if (qitem->isBranch()) {
+	    DBG << "ResolverQueue::processOnce() is branch" << endl;
+	    QueueItemBranch_Ptr branch = dynamic_pointer_cast<QueueItemBranch>(qitem);
+	    for (QueueItemList::const_iterator iter2 = _qitems.begin(); iter2 != _qitems.end(); iter2++) {
+		DBG << "Compare branch with [" << (*iter2) << "]" << endl;
 		if (iter != iter2
 		    && branch->contains (*iter2)) {
-		    _DBG("QUEUE_SPEW") << "Contained within, removing" << endl;
-		    _items.erase (iter);
+		    DBG << "Contained within, removing" << endl;
+		    _qitems.erase (iter);
 		    break;
 		}
 	    }
@@ -291,9 +266,9 @@ ResolverQueue::processOnce ()
 	iter = next;
     }
 	  if (did_something)
-	      _DBG("QUEUE_SPEW") <<  "did somesthing: " << (int)_items.size() << " items" << endl;
+	      DBG <<  "did somesthing: " << (int)_qitems.size() << " qitems" << endl;
 	  else
-	      _DBG("QUEUE_SPEW") <<  "did nothing: " << (int)_items.size() << " items" << endl;	      
+	      DBG <<  "did nothing: " << (int)_qitems.size() << " qitems" << endl;	      
 
     return did_something;
 }
@@ -317,7 +292,7 @@ ResolverQueue::process ()
 //---------------------------------------------------------------------------
 
 static ResolverQueue_Ptr
-copy_queue_except_for_branch (ResolverQueue_Ptr queue, QueueItem_Ptr branch_item, QueueItem_Ptr subitem)
+copy_queue_except_for_branch (ResolverQueue_Ptr queue, QueueItem_Ptr branch_qitem, QueueItem_Ptr subqitem)
 {
     ResolverContext_Ptr new_context;
     ResolverQueue_Ptr new_queue;
@@ -325,31 +300,33 @@ copy_queue_except_for_branch (ResolverQueue_Ptr queue, QueueItem_Ptr branch_item
     new_context = new ResolverContext (queue->context());
     new_queue = new ResolverQueue (new_context);
 
-    QueueItemList qil = queue->items();
-    for (QueueItemList::const_iterator iter = qil.begin(); iter != qil.end(); iter++) {
-	QueueItem_Ptr item = *iter;
-	QueueItem_Ptr new_item;
+    QueueItemList qil = queue->qitems();
+    for (QueueItemList::const_iterator iter = qil.begin(); iter != qil.end(); ++iter) {
+	QueueItem_Ptr qitem = *iter;
+	QueueItem_Ptr new_qitem;
 
-	if (item == branch_item) {
-	    new_item = subitem->copy ();
+	if (qitem == branch_qitem) {
+	    new_qitem = subqitem->copy ();
 
-	    if (new_item->isInstall()) {
-		QueueItemInstall_Ptr install_item = dynamic_pointer_cast<QueueItemInstall>(new_item);
-
+	    if (new_qitem->isInstall()) {
+		QueueItemInstall_Ptr install_qitem = dynamic_pointer_cast<QueueItemInstall>(new_qitem);
+#warning needs Source backref
+#if 0
 		/* Penalties are negative priorities */
 		int penalty;
-		penalty = - queue->context()->getChannelPriority (install_item->resItem()->channel());
+		penalty = - queue->context()->getChannelPriority (install_qitem->poolItem()->channel());
 
-		install_item->setOtherPenalty (penalty);
+		install_qitem->setOtherPenalty (penalty);
+#endif
 	    }
 
 	} else {
 
-	    new_item = item->copy ();
+	    new_qitem = qitem->copy ();
 
 	}
 
-	new_queue->addItem (new_item);
+	new_queue->addItem (new_qitem);
     }
 
     return new_queue;
@@ -363,34 +340,37 @@ ResolverQueue::splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueLi
     typedef std::map <QueueItem_Ptr, QueueItem_Ptr> DeferTable;
     DeferTable to_defer;
 
-    for (QueueItemList::const_iterator iter = _items.begin(); iter != _items.end() && first_branch == NULL; iter++) {
-	QueueItem_Ptr item = *iter;
-	if (item->isBranch()) {
-	    first_branch = dynamic_pointer_cast<QueueItemBranch>(item);
+    for (QueueItemList::const_iterator iter = _qitems.begin(); iter != _qitems.end() && first_branch == NULL; ++iter) {
+	QueueItem_Ptr qitem = *iter;
+	if (qitem->isBranch()) {
+	    first_branch = dynamic_pointer_cast<QueueItemBranch>(qitem);
 	}
     }
 
     if (first_branch == NULL)
 	return;
 
+    QueueItemList possible_qitems = first_branch->possibleQItems();
+
+#warning Needs Source backref
+#if 0
     /*
-       Check for deferrable items: if we have two install items where the to-be-installed
-       resItems have the same name, then we will defer the lower-priority install if
+       Check for deferrable qitems: if we have two install qitems where the to-be-installed
+       poolItems have the same name, then we will defer the lower-priority install if
        one of the following is true:
-       (1) Both resItems have the same version
+       (1) Both poolItems have the same version
        (2) The lower-priority channel is a previous version.
     */
 
-    QueueItemList possible_items = first_branch->possibleItems();
-    for (QueueItemList::const_iterator iter = possible_items.begin(); iter != possible_items.end(); iter++) {
+    for (QueueItemList::const_iterator iter = possible_qitems.begin(); iter != possible_qitems.end(); ++iter) {
 	QueueItemList::const_iterator iter2 = iter;
-	for (iter2++; iter2 != possible_items.end(); iter2++) {
-	    QueueItem_Ptr item = *iter;
-	    QueueItem_Ptr item2 = *iter2;
+	for (iter2++; iter2 != possible_qitems.end(); iter2++) {
+	    QueueItem_Ptr qitem = *iter;
+	    QueueItem_Ptr qitem2 = *iter2;
 
-	    if (item->isInstall() && item2->isInstall()) {
-		ResItem_constPtr r = (dynamic_pointer_cast<QueueItemInstall>(item))->resItem();
-		ResItem_constPtr r2 = (dynamic_pointer_cast<QueueItemInstall>(item2))->resItem();
+	    if (qitem->isInstall() && qitem2->isInstall()) {
+		PoolItem_Ref r = (dynamic_pointer_cast<QueueItemInstall>(qitem))->item();
+		PoolItem_Ref r2 = (dynamic_pointer_cast<QueueItemInstall>(qitem2))->item();
 		Channel_constPtr channel = r->channel();
 		Channel_constPtr channel2 = r2->channel();
 		int priority, priority2;
@@ -404,23 +384,24 @@ ResolverQueue::splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueLi
 			|| (priority > priority2 && ResItem::compare (r, r2) > 0)) {
 
 			if (priority < priority2)
-			    to_defer[item] = item;
+			    to_defer[qitem] = qitem;
 			else /* if (priority > priority2) */
-			    to_defer[item2] = item2;
+			    to_defer[qitem2] = qitem2;
 		    }
 		}
 	    }
 	}
     }
+#endif
 
 
-    for (QueueItemList::const_iterator iter = possible_items.begin(); iter != possible_items.end(); iter++) {
+    for (QueueItemList::const_iterator iter = possible_qitems.begin(); iter != possible_qitems.end(); ++iter) {
 	ResolverQueue_Ptr new_queue;
-	QueueItem_Ptr new_item = *iter;
+	QueueItem_Ptr new_qitem = *iter;
 
-	new_queue = copy_queue_except_for_branch (this, (QueueItem_Ptr) first_branch, new_item);
+	new_queue = copy_queue_except_for_branch (this, (QueueItem_Ptr) first_branch, new_qitem);
 
-	DeferTable::const_iterator pos = to_defer.find (new_item);
+	DeferTable::const_iterator pos = to_defer.find (new_qitem);
 	if (pos != to_defer.end()) {
 	    deferred_queues.push_back (new_queue);
 	} else {
@@ -436,13 +417,13 @@ ResolverQueue::spew ()
 {
     _DBG("RC_SPEW") << "Resolver Queue: " << (_context->isInvalid() ? "INVALID" : "") << endl;
 
-    if (_items.empty()) {
+    if (_qitems.empty()) {
 
 	      _DBG("RC_SPEW") <<  "  (empty)" << endl;
 
     } else {
-	      for (QueueItemList::const_iterator iter = _items.begin(); iter != _items.end(); iter++) {
-		  _DBG("RC_SPEW") << "  " << (*iter)->asString() << endl;
+	      for (QueueItemList::const_iterator iter = _qitems.begin(); iter != _qitems.end(); ++iter) {
+		  _DBG("RC_SPEW") << "  " << (*iter) << endl;
 	      }
 
     }

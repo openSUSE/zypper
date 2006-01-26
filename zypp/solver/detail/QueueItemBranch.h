@@ -48,7 +48,7 @@ class QueueItemBranch : public QueueItem {
 
   private:
     std::string _label;
-    QueueItemList _possible_items;
+    QueueItemList _possible_qitems;
 
   public:
 
@@ -60,12 +60,12 @@ class QueueItemBranch : public QueueItem {
     friend std::ostream& operator<<(std::ostream&, const QueueItemBranch & item);
     // ---------------------------------- accessors
 
-    QueueItemList possibleItems (void) const { return _possible_items; }
+    QueueItemList possibleQItems (void) const { return _possible_qitems; }
 
     const std::string & label (void) const { return _label; }
     void setLabel (const std::string & label) { _label = label; }
 
-    bool isEmpty (void) const { return _possible_items.empty(); }
+    bool isEmpty (void) const { return _possible_qitems.empty(); }
 
     // ---------------------------------- methods
 

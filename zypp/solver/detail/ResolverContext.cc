@@ -26,8 +26,13 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
-
 #include "zypp/base/String.h"
+
+#include "zypp/base/Algorithm.h"
+#include "zypp/ResPool.h"
+#include "zypp/ResFilters.h"
+#include "zypp/CapFilters.h"
+
 
 #include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/Helper.h"
@@ -856,9 +861,9 @@ ResolverContext::addError (ResolverInfo_Ptr info)
 //  (2) An info item is about an important-item is important.
 
 static void
-mark_important_info (InfoList & il)
+mark_important_info (ResolverInfoList & il)
 {
-    // set of all items mentioned in the InfoList
+    // set of all items mentioned in the ResolverInfoList
     PoolItemSet error_set;
 
     bool did_something;
@@ -866,13 +871,13 @@ mark_important_info (InfoList & il)
 
     /* First of all, store all error-items in a set. */
 
-    for (InfoList::iterator info_iter = il.begin(); info_iter != il.end(); ++info_iter) {
+    for (ResolverInfoList::iterator info_iter = il.begin(); info_iter != il.end(); ++info_iter) {
 	ResolverInfo_Ptr info = (*info_iter);
 	if (info != NULL						// list items might be NULL
 	    && info->error ()) {					// only look at error infos
 
-	    PoolItem_Ref item = info->affected();		// get item from InfoList
-	    if (item != NULL) {
+	    PoolItem_Ref item = info->affected();		// get item from ResolverInfoList
+	    if (item) {
 		error_set.insert (item);
 	    }
 
@@ -886,7 +891,7 @@ mark_important_info (InfoList & il)
 
 	    for (PoolItemList::iterator res_iter = containerItems.begin(); res_iter != containerItems.end(); res_iter++) {
 		PoolItem_Ref item = (*res_iter);
-		if (item != NULL) {
+		if (item) {
 		    error_set.insert (item);
 		}
 	    }
@@ -903,7 +908,7 @@ mark_important_info (InfoList & il)
 
 	did_something = false;
 
-	for (InfoList::iterator info_iter = il.begin(); info_iter != il.end(); ++info_iter) {
+	for (ResolverInfoList::iterator info_iter = il.begin(); info_iter != il.end(); ++info_iter) {
 	    ResolverInfo_Ptr info = (*info_iter);
 	    if (info != NULL						// list items might be set to NULL
 		&& info->important ()) {				// only look at important ones
@@ -941,17 +946,16 @@ mark_important_info (InfoList & il)
 
 }
 
-
 void
 ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn, void *data) const
 {
-    InfoList info_list;
+    ResolverInfoList info_list;
 
     ResolverContext_constPtr context = this;
 
     // Assemble a list of copies of all of the info objects
     while (context != NULL) {
-	for (InfoList::iterator iter = context->_log.begin(); iter != context->_log.end(); iter++) {
+	for (ResolverInfoList::const_iterator iter = context->_log.begin(); iter != context->_log.end(); iter++) {
 	    if ((item || (*iter)->affected() == item)
 		&& (*iter)->priority() >= priority) {
 		info_list.push_back ((*iter)->copy());
@@ -961,10 +965,10 @@ ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn
     }
 #if 0
     // Merge info objects
-    for (InfoList::iterator iter = info_list.begin(); iter != info_list.end(); iter++) {
+    for (ResolverInfoList::iterator iter = info_list.begin(); iter != info_list.end(); iter++) {
 
 	ResolverInfo_Ptr info1 = (*iter);
-	InfoList::iterator subiter = iter;
+	ResolverInfoList::iterator subiter = iter;
 	if (info1 != NULL) {
 	    for (subiter++; subiter != info_list.end(); subiter++) {
 		ResolverInfo_Ptr info2 = *subiter;
@@ -979,7 +983,7 @@ ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn
 
     // Walk across the list of info objects and invoke our callback
 
-    for (InfoList::iterator iter = info_list.begin(); iter != info_list.end(); iter++) {
+    for (ResolverInfoList::iterator iter = info_list.begin(); iter != info_list.end(); iter++) {
 	if (*iter != NULL) {
 	    fn (*iter, data);
 	}
@@ -991,7 +995,7 @@ ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn
 static void
 get_info_foreach_cb (ResolverInfo_Ptr info, void *data)
 {
-    InfoList *il = (InfoList *)data;
+    ResolverInfoList *il = (ResolverInfoList *)data;
 
     if (info->important ()) {
 	il->push_back (info);
@@ -1000,11 +1004,11 @@ get_info_foreach_cb (ResolverInfo_Ptr info, void *data)
 
 
 
-InfoList
+ResolverInfoList
 ResolverContext::getInfo (void) const
 {
-    InfoList il;
-    foreachInfo (NULL, -1, get_info_foreach_cb, (void *)&il);
+    ResolverInfoList il;
+    foreachInfo (PoolItem_Ref(), -1, get_info_foreach_cb, (void *)&il);
     return il;
 }
 
@@ -1013,47 +1017,42 @@ ResolverContext::getInfo (void) const
 // spew
 
 static void
-spew_pkg_cb (PoolItem_Ref item, ResStatus status, void *unused)
+spew_pkg_cb (PoolItem_Ref item, void *unused)
 {
-    cout << "  " << item << " (" << status << ")" << endl;
+    MIL << "  " << item << " (" << item.status() << ")" << endl;
 }
 
 
 void
-spew_pkg2_cb (PoolItem_Ref item1, ResStatus status1, PoolItem_Ref item2, ResStatus status2, void *unused)
+spew_pkg2_cb (PoolItem_Ref item1, PoolItem_Ref item2, void *unused)
 {
-    const char *s1, *s2;
-
-    s1 = item1->asString().c_str();
-    s2 = item2->asString().c_str();
-
-    cout << "  " << item2 << " (" << status2 << ") => (" << item1 << " (" << status1 << ")" << endl;
+    MIL << "  " << item2 << " (" << item2.status() << ") => (" << item1 << " (" << item1.status() << ")" << endl;
 }
 
 
 void
 ResolverContext::spew (void) const
 {
-    cout << "TO INSTALL:" << endl;
+    MIL << "TO INSTALL:" << endl;
     foreachInstall (spew_pkg_cb, NULL);
-    cout << endl;
+    MIL << endl;
 
-    cout << "TO REMOVE:" << endl;
+    MIL << "TO REMOVE:" << endl;
     foreachUninstall (spew_pkg_cb, NULL);
-    cout << endl;
+    MIL << endl;
 
-    cout << "TO UPGRADE:" << endl;
+    MIL << "TO UPGRADE:" << endl;
     foreachUpgrade (spew_pkg2_cb, NULL);
-    cout << endl;
+    MIL << endl;
 }
 
 
 static void
 spew_info_cb (ResolverInfo_Ptr info, void *unused)
 {
-    if (info->error ()) cout << "[ERROR] ");
-    else if (info->important()) cout << "[>>>>>] ");
-    cout << info << endl;
+    if (info->error ()) MIL << "[ERROR] )";
+    else if (info->important()) MIL << "[>>>>>] )";
+    MIL << info << endl;
 }
 
 
@@ -1061,49 +1060,58 @@ void
 ResolverContext::spewInfo (void) const
 {
     DBG << "ResolverContext[" << this << "]::spewInfo" << endl;
-    foreachInfo (NULL, -1, spew_info_cb, NULL);
+    foreachInfo (PoolItem_Ref(), -1, spew_info_cb, NULL);
 }
 
 //---------------------------------------------------------------------------
 // requirements
 
-typedef struct {
-    ResolverContext_constPtr context;
-    const Capability *dep;
-    bool flag;
-} RequirementMetInfo;
-
-
-static bool
-requirement_met_cb (PoolItem_Ref item, const Capability & cap, void *data)
+struct RequirementMet : public resfilter::OnCapMatchCallbackFunctor
 {
-    RequirementMetInfo *info = (RequirementMetInfo *)data;
+    ResolverContext_constPtr context;
+    const Capability & capability;
+    bool flag;
 
-    // info->dep is set for item set children. If it is set, query the
-    //   exact version only.
-    if ((info->dep == NULL
-	 || *(info->dep) == cap)
-	&& info->context->itemIsPresent (item))
+    RequirementMet (ResolverContext_constPtr ctx, const Capability & c)
+	: context (ctx)
+	, capability (c)
+	, flag (false)
+    { }
+
+
+    bool operator()( PoolItem_Ref provider, const Capability & match )
     {
-	info->flag = true;
-    }
+	// capability is set for item set children. If it is set, query the
+	//   exact version only.
+	if ((capability == Capability::noCap
+	     || capability == match)
+	    && context->isPresent (provider))
+	{
+	    flag = true;
+	}
 
-//ERR << "requirement_met_cb(" <<  item << ", " << cap << ") [info->dep " <<
-//    (info->dep != NULL ? info->dep->asString().c_str() : "(none)") << "] -> " <<  (info->flag ? "true" : "false") << endl;
-    return ! info->flag;
-}
+//	ERR << "RequirementMet(" <<  item << ", " << cap << ") [capability " <<
+//	  capability << "] -> " <<  (flag ? "true" : "false") << endl;
+
+	return ! flag;
+    }
+};
 
 
 bool
 ResolverContext::requirementIsMet (const Capability & dependency, bool is_child) const
 {
-    RequirementMetInfo info;
+    RequirementMet info (this, is_child ? dependency : Capability::noCap);
 
-    info.context = this;
-    info.dep = is_child ? &dependency : NULL;
-    info.flag = false;
+    //    world()->foreachProviding (dependency, requirement_met_cb, (void *)&info);
 
-    world()->foreachProviding (dependency, requirement_met_cb, (void *)&info);
+    Dep dep( Dep::PROVIDES );
+
+    // world->foreachProvidingResItem (dependency, require_process_cb, &info);
+
+    invokeOnEach( pool()->byCapabilityIndexBegin( dependency.index(), dep ),
+		  pool()->byCapabilityIndexEnd( dependency.index(), dep ),
+		  resfilter::callOnCapMatchIn( dep, dependency, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 
     return info.flag;
 }
@@ -1111,31 +1119,43 @@ ResolverContext::requirementIsMet (const Capability & dependency, bool is_child)
 
 //---------------------------------------------------------------------------
 
-static bool
-requirement_possible_cb (PoolItem_Ref item, const Capability & cap, void *data)
+struct RequirementPossible : public resfilter::OnCapMatchCallbackFunctor
 {
-    RequirementMetInfo *info = (RequirementMetInfo *)data;
+    bool flag;
 
-    ResStatus status = info->context->getStatus (item);
+    RequirementPossible ()
+	: flag (false)
+    { }
 
-    if (! item_status_is_to_be_uninstalled (status)
-	|| status == RESOLVABLE_STATUS_TO_BE_UNINSTALLED_DUE_TO_UNLINK) {
-	info->flag = true;
+    bool operator()( PoolItem_Ref provider, const Capability & match )
+    {
+	ResStatus status = provider.status();
+
+	if (! status.isToBeUninstalled ()
+	    || status.isToBeUninstalledDueToUnlink())
+	{
+	    flag = true;
+	}
+
+	return ! flag;
     }
-
-    return ! info->flag;
-}
+};
 
 
 bool
-ResolverContext::requirementIsPossible (const Capability & dep) const
+ResolverContext::requirementIsPossible (const Capability & dependency) const
 {
-    RequirementMetInfo info;
+    RequirementPossible info;
 
-    info.context = this;
-    info.flag = false;
+    // world()->foreachProviding (dep, requirement_possible_cb, (void *)&info);
 
-    world()->foreachProviding (dep, requirement_possible_cb, (void *)&info);
+    Dep dep( Dep::PROVIDES );
+
+    // world->foreachProvidingResItem (dependency, require_process_cb, &info);
+
+    invokeOnEach( pool()->byCapabilityIndexBegin( dependency.index(), dep ),
+		  pool()->byCapabilityIndexEnd( dependency.index(), dep ),
+		  resfilter::callOnCapMatchIn( dep, dependency, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 
     return info.flag;
 }
@@ -1146,10 +1166,10 @@ ResolverContext::itemIsPossible (PoolItem_Ref item) const
 {
     CapSet requires = item->dep (Dep::REQUIRES);
     for (CapSet::iterator iter = requires.begin(); iter !=  requires.end(); iter++) {
-	    if (! requirementIsPossible (*iter)) {
-		return false;
-	    }
+	if (! requirementIsPossible (*iter)) {
+	    return false;
 	}
+    }
 
     return true;
 }
@@ -1168,7 +1188,7 @@ dup_name_check_cb (PoolItem_Ref item, void *data)
     if (! info->flag
 	&& item.status().isToBeInstalled ()
 	&& info->other->name() == item->name()
-	&& !compareByNVR (item, info->other))
+	&& !compareByNVR (item.resolvable(), info->other.resolvable()))
     {
 	info->flag = true;
     }

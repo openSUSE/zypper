@@ -187,8 +187,8 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     // Context compare to identify equal branches
 
-    int partialCompare (ResolverContext_Ptr context) const;
-    int compare (ResolverContext_Ptr context) const;
+    int partialCompare (ResolverContext_constPtr context) const;
+    int compare (ResolverContext_constPtr context) const;
 
     // debug
     void spew (void) const;
