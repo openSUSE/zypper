@@ -44,6 +44,8 @@ namespace zypp
       str << "SUGGESTS:" << endl << obj[Dep::SUGGESTS];
     if ( ! obj[Dep::FRESHENS].empty() )
       str << "FRESHENS:" << endl << obj[Dep::FRESHENS];
+    if ( ! obj[Dep::ENHANCES].empty() )
+      str << "ENHANCES:" << endl << obj[Dep::ENHANCES];
     return str << "]";
   }
 
