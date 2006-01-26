@@ -354,7 +354,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	    invokeOnEach( pool()->byNameBegin( _requiring_item->name() ), pool()->byNameEnd( _requiring_item->name() ),
 			  functor::chain( resfilter::ByKind( _requiring_item->kind() ),
-					  resfilter::ByEdition<CompareByGT<Edition> >( _requiring_item->edition() ),
+					  resfilter::byEdition<CompareByGT<Edition> >( _requiring_item->edition() )),
 					  functor::functorRef<bool,PoolItem>(info) );
 
 	    if (!info.upgrades.empty()) {
