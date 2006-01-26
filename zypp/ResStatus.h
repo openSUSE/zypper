@@ -112,8 +112,14 @@ namespace zypp
     bool isInstalled() const
     { return fieldValueIs<StateField>( INSTALLED ); }
 
+    bool staysInstalled() const
+    { return isInstalled() && !transacts(); }
+
     bool isToBeInstalled() const
     { return isUninstalled() && transacts(); }
+
+    bool staysUninstalled() const
+    { return isUninstalled() && !transacts(); }
 
     bool isUninstalled() const
     { return fieldValueIs<StateField>( UNINSTALLED ); }
@@ -144,6 +150,13 @@ namespace zypp
 
   public:
 
+    bool revert ()
+    {
+      setTransacts (false);
+      fieldValueAssign<TransactDetailField>(0);
+      return true;
+    }
+
     bool setTransacts( bool val_r )
     {
       fieldValueAssign<TransactField>( val_r ? TRANSACT : KEEP_STATE );
@@ -152,7 +165,7 @@ namespace zypp
 
     bool setToBeInstalled ( )
     {
-      if (isInstalled()) return false;
+      if (!isUninstalled()) return false;
       return setTransacts (true);
     }
 
@@ -165,7 +178,7 @@ namespace zypp
 
     bool setToBeUninstalled ( )
     {
-      if (isUninstalled()) return false;
+      if (!isInstalled()) return false;
       return setTransacts (true);
     }
 
@@ -183,6 +196,7 @@ namespace zypp
       return true;
     }
 
+    //------------------------------------------------------------------------
     // *** These are only for the Resolver ***
 
     bool setUnneeded ()
@@ -203,6 +217,12 @@ namespace zypp
       return true;
     }
 
+    void setStatus (ResStatus status)
+    {
+	_bitfield = status._bitfield;
+    }
+
+    //------------------------------------------------------------------------
     // get/set functions, returnig \c true if requested status change
     // was successfull (i.e. leading to the desired transaction).
     // If a lower level (e.g.SOLVER) wants to transact, but it's
