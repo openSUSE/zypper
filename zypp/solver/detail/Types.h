@@ -50,6 +50,8 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
       
+DEFINE_PTR_TYPE(Resolver);
+
 DEFINE_PTR_TYPE(ResolverContext);
       
 DEFINE_PTR_TYPE(ResolverInfo);

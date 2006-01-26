@@ -61,14 +61,7 @@ namespace zypp
 
 	  // ---------------------------------- I/O
 
-	  static std::string toString (const ResolverProblem & problem);
-	  static std::string toString (const ResolverProblemList & problemlist);
-
-	  virtual std::ostream & dumpOn(std::ostream & str ) const;
-
 	  friend std::ostream& operator<<(std::ostream&, const ResolverProblem & problem);
-
-	  std::string asString (void ) const;
 
 	  // ---------------------------------- accessors
 

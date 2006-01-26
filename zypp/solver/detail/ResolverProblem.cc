@@ -40,47 +40,26 @@ IMPL_PTR_TYPE(ResolverProblem);
 
 //---------------------------------------------------------------------------
 
-string
-ResolverProblem::asString ( void ) const
+ostream&
+operator<<( ostream& os, const ResolverProblem & problem)
 {
-    return toString (*this);
-}
-
-
-string
-ResolverProblem::toString ( const ResolverProblem & problem )
-{
-    string ret ("Problem:\n");
-    ret += problem._description + "\n";
-    ret += problem._details + "\n";
-    ret += ProblemSolution::toString (problem._solutions);
-    return ret;
-}
-
-
-std::string
-ResolverProblem::toString (const ResolverProblemList & problemlist)
-{
-    string ret;
-    for (ResolverProblemList::const_iterator iter = problemlist.begin(); iter != problemlist.end(); ++iter) {
-	ret += (*iter)->asString();
-    }
-    return ret;
-}
-
-
-ostream &
-ResolverProblem::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
+    os << "Problem:" << endl;
+    os << problem._description << endl;
+    os << problem._details << endl;
+    os << problem._solutions;
+    return os;
 }
 
 
 ostream&
-operator<<( ostream& os, const ResolverProblem & problem)
+operator<<( ostream& os, const ResolverProblemList & problemlist)
 {
-    return os << problem.asString();
+    for (ResolverProblemList::const_iterator iter = problemlist.begin(); iter != problemlist.end(); ++iter) {
+	if (iter != problemlist.begin())
+	    os << ", ";
+	os << (*iter);
+    }
+    return os;
 }
 
 //---------------------------------------------------------------------------
