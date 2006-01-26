@@ -10,6 +10,8 @@
  *
 */
 #include "zypp/detail/ResObjectImplIf.h"
+#include "zypp/source/SourceImpl.h"
+#include "zypp/SourceFactory.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -40,6 +42,9 @@ namespace zypp
 
       bool ResObjectImplIf::providesSources() const
       { return false; }
+
+      Source ResObjectImplIf::source() const
+      { return SourceFactory().createFrom(source::SourceImpl::nullimpl()); }
 
       Label ResObjectImplIf::instSrcLabel() const
       { return Label(); }

@@ -10,6 +10,7 @@
  *
 */
 #include "zypp/ResObject.h"
+#include "zypp/detail/ResObjectImplIf.h"
 
 using namespace std;
 

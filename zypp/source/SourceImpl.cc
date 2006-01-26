@@ -25,6 +25,17 @@ namespace zypp
 
     IMPL_PTR_TYPE(SourceImpl);
 
+    SourceImpl_Ptr SourceImpl::_nullimpl;
+
+    /** Null implementation */
+    SourceImpl_Ptr SourceImpl::nullimpl()
+    {
+      if (_nullimpl == 0)
+	_nullimpl = new SourceImpl;
+      return _nullimpl;
+    }
+
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : SourceImpl::SourceImpl

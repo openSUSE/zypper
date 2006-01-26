@@ -45,7 +45,7 @@ namespace zypp
       friend std::ostream & operator<<( std::ostream & str, const SourceImpl & obj );
 
     public:
-      /** Ctor, FIXME it is here only because of target storage */
+      /** Ctor, FIXME it is here only because of target storage, then make it private */
       SourceImpl()
       {}
       /** Ctor. */
@@ -53,6 +53,9 @@ namespace zypp
                  const Pathname & path_r = "/");
       /** Dtor. */
       virtual ~SourceImpl();
+
+      /** Null implementation */
+      static SourceImpl_Ptr nullimpl();
 
     public:
 
@@ -91,6 +94,9 @@ namespace zypp
       Pathname _path;
       /** The source is enabled */
       bool _enabled;
+    private:
+      /** Null implementation */
+      static SourceImpl_Ptr _nullimpl;
     };
     ///////////////////////////////////////////////////////////////////
 
