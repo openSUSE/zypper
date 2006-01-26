@@ -83,49 +83,30 @@ namespace zypp
 
         if(boost::regex_match(buffer, what, rx))
         {
-          dumpRegexpResults(what);
-
-          // it was the media count
-          //str::strtonum(buffer, entry_r.count);
-          // consume another line
-          //consume = true;
+          //dumpRegexpResults(what);
+          entry_r.dir = Pathname(what[1]);
+          entry_r.comment = what[3];
         }
         else
         {
-          //entry_r.count = 1;
+          // throw exception? 
         }
 
-        /* 
         while(!file.eof())
         {
-          // probably is the first line after we dont find the media number
-          if(consume)
-            getline(file, buffer);
-          
-          // only skip once
-          consume = true;
-          boost::regex e("^MEDIA([\\d]+)(\\.([_A-Za-z]+)){0,1} (.+)$");
-          boost::smatch what;
-          if(boost::regex_match(buffer, what, e, boost::match_extra))
+          getline(file, buffer);
+          rx = boost::regex("^(.+)-(.+)$");
+          if(boost::regex_match(buffer, what, rx, boost::match_extra))
           {
-            if ( what.size() < 5 )
-              std::cout << "ups!!!!" << std::endl;
-           
             dumpRegexpResults(what);
-            
-            unsigned int number = 1;
-            str::strtonum( what[1], number);
-            std::string lang = what[3];
-            std::string desc = what[4];
-            entry_r.alternate_names[number][lang] = desc;
+            entry_r.products.insert(std::pair<std::string, std::string>(what[1],what[2])); 
           }
           else
           {
-            DBG << "** No Match found:  " << buffer << std::endl;
+            // throw exception?
           }
           
         }
-        */
       }
 
       /////////////////////////////////////////////////////////////////

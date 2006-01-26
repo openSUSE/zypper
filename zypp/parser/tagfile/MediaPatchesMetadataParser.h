@@ -49,7 +49,8 @@ namespace zypp
         struct MediaPatchesEntry {
           Pathname dir;
           std::string comment;
-          std::set<std::string> products;
+          // set of pairs (productname, version)
+          std::set< std::pair<std::string, std::string> > products;
         };
 
         virtual ~MediaPatchesMetadataParser()
