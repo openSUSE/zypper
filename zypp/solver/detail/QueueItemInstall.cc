@@ -235,8 +235,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
     // if this install upgrades an installed resolvable, explicitly uninstall this one
     //   in order to ensure that all dependencies are still met after the upgrade
 
-#warning item default
-    if (*_upgrades == NULL) {
+    if (!_upgrades) {
 
 	    DBG  << "simple install of " <<  _item  << endl;
 	    context->install (_item, context->verifying() /* is_soft */, _other_penalty);
@@ -285,8 +284,8 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
     {	// just a block for local initializers, the goto above makes this necessary
 
 	ResolverInfoMisc_Ptr misc_info;
-#warning PoolItem_Ref default
-	if (*_upgrades) {
+
+	if (_upgrades) {
 
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UPDATING, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
 	    misc_info->setOtherResItem (_upgrades);
