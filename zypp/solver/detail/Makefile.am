@@ -14,6 +14,7 @@ solverdetailincludedir = $(pkgincludedir)/solver/detail
 
 solverdetailinclude_HEADERS = \
 	Types.h				\
+	Helper.h			\
 	Importance.h			\
 	Pending.h			\
 	InstallOrder.h			\
@@ -49,6 +50,7 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_solver_detail.la
 lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	Importance.cc					\
 	Pending.cc					\
+	Helper.cc					\
 	InstallOrder.cc					\
 	QueueItem.cc					\
 	QueueItemBranch.cc				\
