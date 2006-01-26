@@ -78,7 +78,7 @@ namespace zypp
         // read vendor
         getline(file, buffer);
 
-        regex rx("^[\\S]+( (.*))?$");
+        regex rx("^([\\S]+)( (.*))?$");
         boost::smatch what;
 
         if(boost::regex_match(buffer, what, rx))
