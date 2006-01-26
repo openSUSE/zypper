@@ -39,41 +39,19 @@ IMPL_PTR_TYPE(QueueItemGroup);
 
 //---------------------------------------------------------------------------
 
-string
-QueueItemGroup::asString ( void ) const
-{
-    return toString (*this);
-}
-
-
-string
-QueueItemGroup::toString ( const QueueItemGroup & item)
-{
-    string ret = "[Group: ";
-    ret += QueueItem::toString(item._subitems);
-    ret += "]";
-    return ret;
-}
-
-
-ostream &
-QueueItemGroup::dumpOn( ostream & str ) const
-{
-    str << asString();
-    return str;
-}
-
-
 ostream&
 operator<<( ostream& os, const QueueItemGroup & item)
 {
-    return os << item.asString();
+    os << "[Group: ";
+    os << item._subitems;
+    os << "]";
+    return os;
 }
 
 //---------------------------------------------------------------------------
 
-QueueItemGroup::QueueItemGroup (World_Ptr world)
-    : QueueItem (QUEUE_ITEM_TYPE_GROUP, world)
+QueueItemGroup::QueueItemGroup (const ResPool *pool)
+    : QueueItem (QUEUE_ITEM_TYPE_GROUP, pool)
 {
 }
 
@@ -87,7 +65,7 @@ QueueItemGroup::~QueueItemGroup()
 bool
 QueueItemGroup::process (ResolverContext_Ptr context, QueueItemList & new_items)
 {
-    _DBG("RC_SPEW") << "QueueItemGroup::process" << endl;
+    DBG << "QueueItemGroup::process" << endl;
 
     bool did_something = false;
 
@@ -100,8 +78,6 @@ QueueItemGroup::process (ResolverContext_Ptr context, QueueItemList & new_items)
 
     _subitems.clear();
 
-// FIXME: delete self
-
     return did_something;
 }
 
@@ -109,7 +85,7 @@ QueueItemGroup::process (ResolverContext_Ptr context, QueueItemList & new_items)
 QueueItem_Ptr
 QueueItemGroup::copy (void) const
 {
-    QueueItemGroup_Ptr new_group = new QueueItemGroup (world());
+    QueueItemGroup_Ptr new_group = new QueueItemGroup (pool());
     new_group->QueueItem::copy(this);
 
     for (QueueItemList::const_iterator iter = _subitems.begin(); iter != _subitems.end(); iter++) {
