@@ -15,9 +15,7 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/PtrTypes.h"
 
-#include "zypp/solver/detail/ResolverPtr.h"
-#include "zypp/solver/detail/ProblemSolutionPtr.h"
-#include "zypp/solver/detail/ResolverProblemPtr.h"
+#include "zypp/solver/detail/Types.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

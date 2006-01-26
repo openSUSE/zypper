@@ -22,7 +22,7 @@
 #ifndef ZYPP_SOLVER_DETAIL_RESOLVERINFOMISSINGREQ_H
 #define ZYPP_SOLVER_DETAIL_RESOLVERINFOMISSINGREQ_H
 
-#include "zypp/solver/detail/ResolverInfoMissingReqPtr.h"
+#include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/ResolverInfo.h"
 #include "zypp/Capability.h"
 

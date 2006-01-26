@@ -1,5 +1,5 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* Ptr.h
+/* Types.h
  *
  * Copyright (C) 2005 SUSE Linux Products GmbH
  *
