@@ -38,6 +38,7 @@ lib@PACKAGE@_detail_la_SOURCES = \
 	ResolvableImpl.cc	\
 	ResObjectImplIf.cc	\
 	PackageImplIf.cc	\
+	SelectionImplIf.cc	\
 	MessageImplIf.cc	\
 	ScriptImplIf.cc		\
 	PatchImplIf.cc		\
