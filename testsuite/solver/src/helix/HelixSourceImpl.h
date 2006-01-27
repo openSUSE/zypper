@@ -55,7 +55,7 @@ class HelixSourceImpl : public zypp::source::SourceImpl {
     HelixSourceImpl()
     {}
     /** Default ctor */
-    HelixSourceImpl(media::MediaAccess::Ptr & media_r, const Pathname & path_r = "/");
+    HelixSourceImpl(media::MediaAccess::Ptr & media_r, const Pathname & path_r = "/", const std::string & alias_r = "");
 
     Package::Ptr createPackage (const HelixParser & data);
     Message::Ptr createMessage (const HelixParser & data);

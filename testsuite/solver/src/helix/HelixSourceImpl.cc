@@ -37,7 +37,7 @@ using namespace zypp;
 
 //---------------------------------------------------------------------------
 
-HelixSourceImpl::HelixSourceImpl(media::MediaAccess::Ptr & media_r, const Pathname & path_r)
+HelixSourceImpl::HelixSourceImpl(media::MediaAccess::Ptr & media_r, const Pathname & path_r, const std::string & alias_r)
 {
     load (path_r.asString());
 }
@@ -255,26 +255,5 @@ HelixSourceImpl::parserCallback (const HelixParser & parsed)
 void
 HelixSourceImpl::load (const string & filename)
 {
-    if (!filename.empty()) {
-
-	string channel_name;
-	string realname;
-
-	string::size_type colon = filename.find (":");
-	if (colon == string::npos) {
-	    channel_name = "test";		// default channel name
-	    realname = filename;
-	}
-	else {
-	    channel_name = filename.substr (0, colon);
-	    realname = filename.substr (++colon);
-	}
-#if 0
-	solver::detail::Channel_Ptr channel = new solver::detail::Channel (channel_name.c_str(),channel_name.c_str(),channel_name.c_str(),channel_name.c_str());
-	channel->setType (solver::detail::CHANNEL_TYPE_HELIX);
-	if (channel_name == "@system")
-	    channel->setSystem (true);
-#endif
-	extractHelixFile (realname, this);
-    }
+    extractHelixFile (filename, this);
 }
