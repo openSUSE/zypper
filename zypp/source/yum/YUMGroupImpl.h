@@ -12,10 +12,10 @@
 #ifndef ZYPP_SOURCE_YUM_YUMGROUPIMPL_H
 #define ZYPP_SOURCE_YUM_YUMGROUPIMPL_H
 
+#include "zypp/source/SourceImpl.h"
 #include "zypp/detail/SelectionImplIf.h"
 #include "zypp/parser/yum/YUMParserData.h"
 #include "zypp/Edition.h"
-#include "zypp/Source.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -37,7 +37,7 @@ namespace zypp
       public:
         /** Default ctor */
         YUMGroupImpl(
-	  Source & source_r,
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMGroupData & parsed
 	);
 	
@@ -77,9 +77,9 @@ namespace zypp
 	CapSet _optional_req;
 	CapSet _default_req;
       private:
-	Source & _source;
+	Source_Ref _source;
       public:
-	Source & source() const;
+	Source_Ref source() const;
       };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum

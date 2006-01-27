@@ -72,7 +72,7 @@ namespace zypp
        }
       }
 
-      void YUMSourceImpl::createResolvables(Source & source_r)
+      void YUMSourceImpl::createResolvables(Source_Ref source_r)
       {
        std::list<YUMRepomdData_Ptr> repo_primary;
        std::list<YUMRepomdData_Ptr> repo_files;
@@ -361,7 +361,7 @@ namespace zypp
       }
 
 	Package::Ptr YUMSourceImpl::createPackage(
-	  Source & source_r,
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPrimaryData & parsed,
 	  const zypp::parser::yum::YUMFileListData & filelist,
 	  const zypp::parser::yum::YUMOtherData & other
@@ -392,7 +392,7 @@ namespace zypp
 	}
 
 	Package::Ptr YUMSourceImpl::createPackage(
-	  Source & source_r,
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchPackage & parsed
 	)
 	{
@@ -420,7 +420,7 @@ namespace zypp
 	}
 
 	Selection::Ptr YUMSourceImpl::createGroup(
-	  Source & source_r,
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMGroupData & parsed
 	)
 	{
@@ -445,7 +445,7 @@ namespace zypp
 	}
 
 	Pattern::Ptr YUMSourceImpl::createPattern(
-	  Source & source_r,
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatternData & parsed
 	)
 	{
@@ -470,7 +470,7 @@ namespace zypp
 	}
 
 	Message::Ptr YUMSourceImpl::createMessage(
-	  Source & source_r,
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchMessage & parsed
 	)
 	{
@@ -498,7 +498,7 @@ namespace zypp
 	}
 
 	Script::Ptr YUMSourceImpl::createScript(
-	  Source & source_r,
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchScript & parsed
 	)
 	{
@@ -526,7 +526,7 @@ namespace zypp
 	}
 
 	Product::Ptr YUMSourceImpl::createProduct(
-	  Source & source_r,
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMProductData & parsed
 	)
 	{
@@ -554,7 +554,7 @@ namespace zypp
 	}
 
 	Patch::Ptr YUMSourceImpl::createPatch(
-	  Source & source_r,
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchData & parsed
 	)
 	{

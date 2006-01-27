@@ -21,7 +21,6 @@
 #include "zypp/Date.h"
 
 #include "zypp/NeedAType.h" // volatile include propagating type drafts
-#include "zypp/Source.h"
 
 // will be defined =0 later
 #define PURE_VIRTUAL
@@ -31,6 +30,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   class Resolvable;
+  class Source_Ref;
 
   ///////////////////////////////////////////////////////////////////
   namespace detail
@@ -81,7 +81,7 @@ namespace zypp
       virtual bool providesSources() const PURE_VIRTUAL;
 
       /** Installation source which provides the package */
-      virtual Source & source() const PURE_VIRTUAL;
+      virtual Source_Ref source() const PURE_VIRTUAL;
 
       /** \name deprecated
        * \todo These should be replaced by a offering a

@@ -12,6 +12,7 @@
 #ifndef ZYPP_SOURCE_YUM_YUMPATTERNIMPL_H
 #define ZYPP_SOURCE_YUM_YUMPATTERNIMPL_H
 
+#include "zypp/source/SourceImpl.h"
 #include "zypp/detail/PatternImplIf.h"
 #include "zypp/parser/yum/YUMParserData.h"
 #include "zypp/Edition.h"
@@ -36,7 +37,7 @@ namespace zypp
       public:
         /** Default ctor */
         YUMPatternImpl(
-	  Source & source_r,
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatternData & parsed
 	);
 	/** Is to be visible for user? */
@@ -70,9 +71,9 @@ namespace zypp
 	CapSet _optional_req;
 	CapSet _default_req;
       private:
-	Source & _source;
+	Source_Ref _source;
       public:
-	Source & source() const;
+	Source_Ref source() const;
       };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum

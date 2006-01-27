@@ -22,7 +22,7 @@ namespace zypp
   namespace detail {
     class ResObjectImplIf;
   }
-  class Source;
+  class Source_Ref;
   class ByteCount;
 
   ///////////////////////////////////////////////////////////////////
@@ -57,7 +57,7 @@ namespace zypp
     ByteCount size() const;
 
     /** */
-    zypp::Source & source() const;
+    Source_Ref source() const;
 
   protected:
     /** Ctor */

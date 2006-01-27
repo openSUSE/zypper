@@ -12,6 +12,7 @@
 #ifndef ZYPP_SOURCE_YUM_YUMMESSAGEIMPL_H
 #define ZYPP_SOURCE_YUM_YUMMESSAGEIMPL_H
 
+#include "zypp/source/SourceImpl.h"
 #include "zypp/detail/MessageImpl.h"
 #include "zypp/parser/yum/YUMParserData.h"
 
@@ -35,7 +36,7 @@ namespace zypp
       public:
         /** Default ctor */
         YUMMessageImpl(
-	  Source & source_r,
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchMessage & parsed
 	);
 	/** Get the text of the message */
@@ -64,9 +65,9 @@ namespace zypp
 	/** The type of the message (YesNo / OK) */
 	std::string _type;
       private:
-	Source & _source;
+	Source_Ref _source;
       public:
-	Source & source() const;
+	Source_Ref source() const;
       };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum

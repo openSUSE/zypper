@@ -32,7 +32,7 @@ namespace zypp
       /** Default ctor
       */
       YUMMessageImpl::YUMMessageImpl(
-	Source & source_r,
+	Source_Ref source_r,
 	const zypp::parser::yum::YUMPatchMessage & parsed
       )
       : _source(source_r)
@@ -69,7 +69,7 @@ namespace zypp
       Vendor YUMMessageImpl::instSrcVendor() const
       { return ResObjectImplIf::instSrcVendor(); }
 
-      Source & YUMMessageImpl::source() const
+      Source_Ref YUMMessageImpl::source() const
       { return _source; }
 
 

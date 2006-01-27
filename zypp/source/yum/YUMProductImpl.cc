@@ -43,7 +43,7 @@ namespace zypp
        * \bug CANT BE CONSTUCTED THAT WAY ANYMORE
       */
       YUMProductImpl::YUMProductImpl(
-	Source & source_r,
+	Source_Ref source_r,
 	const zypp::parser::yum::YUMProductData & parsed
       )
       :	_category(parsed.type),
@@ -86,7 +86,7 @@ namespace zypp
       Vendor YUMProductImpl::instSrcVendor() const
       { return ResObjectImplIf::instSrcVendor(); }
 
-      Source & YUMProductImpl::source() const
+      Source_Ref YUMProductImpl::source() const
       { return _source; }
  
     } // namespace yum

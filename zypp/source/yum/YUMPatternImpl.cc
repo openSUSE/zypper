@@ -34,7 +34,7 @@ namespace zypp
       /** Default ctor
       */
       YUMPatternImpl::YUMPatternImpl(
-	Source & source_r,
+	Source_Ref source_r,
 	const zypp::parser::yum::YUMPatternData & parsed
       )
       : _user_visible(parsed.userVisible == "true")
@@ -119,7 +119,7 @@ namespace zypp
       ByteCount YUMPatternImpl::size() const
       { return ResObjectImplIf::size(); }
 
-      Source & YUMPatternImpl::source() const
+      Source_Ref YUMPatternImpl::source() const
       { return _source; }
 
 

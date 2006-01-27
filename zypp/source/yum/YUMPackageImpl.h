@@ -12,6 +12,7 @@
 #ifndef ZYPP_SOURCE_YUM_YUMPACKAGEIMPL_H
 #define ZYPP_SOURCE_YUM_YUMPACKAGEIMPL_H
 
+#include "zypp/source/SourceImpl.h"
 #include "zypp/detail/PackageImpl.h"
 #include "zypp/parser/yum/YUMParserData.h"
 #include "zypp/Changelog.h"
@@ -40,13 +41,13 @@ namespace zypp
 	/** Default ctor
 	*/
 	YUMPackageImpl(
-	  Source & source_r,
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPrimaryData & parsed,
 	  const zypp::parser::yum::YUMFileListData & filelist,
 	  const zypp::parser::yum::YUMOtherData & other
 	);
 	YUMPackageImpl(
-	  Source & source_r,
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchPackage & parsed
 	);
 
@@ -228,9 +229,9 @@ namespace zypp
 	std::list<ChangelogEntry> changelog;
 */
       private:
-	Source & _source;
+	Source_Ref _source;
       public:
-	Source & source() const;
+	Source_Ref source() const;
 
 
        };

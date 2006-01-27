@@ -12,6 +12,7 @@
 #ifndef ZYPP_SOURCE_YUM_YUMSCRIPTIMPL_H
 #define ZYPP_SOURCE_YUM_YUMSCRIPTIMPL_H
 
+#include "zypp/source/SourceImpl.h"
 #include "zypp/detail/ScriptImpl.h"
 #include "zypp/parser/yum/YUMParserData.h"
 
@@ -34,7 +35,7 @@ namespace zypp
       public:
         /** Default ctor */
         YUMScriptImpl(
-	  Source & source_r,
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchScript & parsed
 	);
 	/** Get the script to perform the change */
@@ -59,9 +60,9 @@ namespace zypp
 	/** The script to undo the change */
 	std::string _undo_script;
       private:
-	Source & _source;
+	Source_Ref _source;
       public:
-	Source & source() const;
+	Source_Ref source() const;
       };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum

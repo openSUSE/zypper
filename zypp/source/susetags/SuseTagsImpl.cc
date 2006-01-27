@@ -62,7 +62,7 @@ namespace zypp
 #warning TODO check if the source is of this type
       }
 
-      void SuseTagsImpl::createResolvables(Source & source_r)
+      void SuseTagsImpl::createResolvables(Source_Ref source_r)
       {
         Pathname p = provideFile(_path + "suse/setup/descr/packages");
         DBG << "Going to parse " << p << endl;

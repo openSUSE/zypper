@@ -12,6 +12,7 @@
 #ifndef ZYPP_SOURCE_YUM_YUMPRODUCTIMPL_H
 #define ZYPP_SOURCE_YUM_YUMPRODUCTIMPL_H
 
+#include "zypp/source/SourceImpl.h"
 #include "zypp/detail/ProductImpl.h"
 #include "zypp/parser/yum/YUMParserData.h"
 #include "zypp/source/yum/YUMSourceImpl.h"
@@ -36,7 +37,7 @@ namespace zypp
       public:
         /** Default ctor */
         YUMProductImpl(
-	  Source & source_r,
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMProductData & parsed
 	);
 	std::string category() const;
@@ -58,9 +59,9 @@ namespace zypp
 
 
       private:
-	Source & _source;
+	Source_Ref _source;
       public:
-	Source & source() const;
+	Source_Ref source() const;
 
        };
       ///////////////////////////////////////////////////////////////////

@@ -10,6 +10,7 @@
  *
 */
 #include "zypp/ResObject.h"
+#include "zypp/source/SourceImpl.h"
 #include "zypp/detail/ResObjectImplIf.h"
 
 using namespace std;
@@ -57,7 +58,7 @@ namespace zypp
   ByteCount ResObject::size() const
   { return pimpl().size(); }
 
-  Source & ResObject::source() const
+  Source_Ref ResObject::source() const
   { return pimpl().source(); }
 
   /////////////////////////////////////////////////////////////////

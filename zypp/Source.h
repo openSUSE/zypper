@@ -17,7 +17,6 @@
 
 #include "zypp/base/PtrTypes.h"
 
-#include "zypp/ResStore.h"
 #include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -27,6 +26,7 @@ namespace zypp
   {
     class SourceImpl;
   }
+  class ResStore;
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -36,7 +36,7 @@ namespace zypp
    * \note Source is a reference to the implementation. No COW
    * is performed.
   */
-  class Source
+  class Source_Ref
   {
   public:
     typedef source::SourceImpl  Impl;
@@ -47,7 +47,7 @@ namespace zypp
     /** All resolvables provided by this source. */
     const ResStore & resolvables();
     /** Null implementation */
-    static Source & nullimpl();
+    static Source_Ref & nullimpl();
 
   private:
     /** Factory */
@@ -55,13 +55,13 @@ namespace zypp
     friend class SourceManager;
   private:
     /** Factory ctor */
-    Source();
+    Source_Ref();
     /** Factory ctor */
     explicit
-    Source( const Impl_Ptr & impl_r );
+    Source_Ref( const Impl_Ptr & impl_r );
 
   private:
-    friend std::ostream & operator<<( std::ostream & str, const Source & obj );
+    friend std::ostream & operator<<( std::ostream & str, Source_Ref obj );
     /** Stream output. */
     std::ostream & dumpOn( std::ostream & str ) const;
 
@@ -69,7 +69,7 @@ namespace zypp
     /** Pointer to implementation */
     RW_pointer<Impl,rw_pointer::Intrusive<Impl> > _pimpl;
 
-    static Source _nullimpl;
+    static Source_Ref _nullimpl;
     static bool _nullimpl_initialized;
 
   public:
@@ -96,17 +96,15 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
-  /** \todo Rename Source and eliminate this typedef. */
-  typedef Source Source_Ref;
+  typedef Source_Ref Source;
 
   ///////////////////////////////////////////////////////////////////
-
   /** \relates Source Stream output. */
-  inline std::ostream & operator<<( std::ostream & str, const Source & obj )
+  inline std::ostream & operator<<( std::ostream & str, Source_Ref obj )
   { return obj.dumpOn( str ); }
 
   /** \relates Source  */
-  inline bool operator==( const Source & lhs, const Source & rhs )
+  inline bool operator==( Source_Ref lhs, Source_Ref rhs )
   { return !lhs.alias().empty() && !rhs.alias().empty() && lhs.alias() == rhs.alias(); }
 
   /////////////////////////////////////////////////////////////////

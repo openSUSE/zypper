@@ -25,28 +25,28 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Source::Source
+  //	METHOD NAME : Source_Ref::Source_Ref
   //	METHOD TYPE : Ctor
   //
-  Source::Source()
+  Source_Ref::Source_Ref()
   {}
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Source::Source
+  //	METHOD NAME : Source_Ref::Source_Ref
   //	METHOD TYPE : Ctor
   //
-  Source::Source( const Impl_Ptr & impl_r )
+  Source_Ref::Source_Ref( const Impl_Ptr & impl_r )
   : _pimpl( impl_r )
   {
     assert( impl_r );
   }
 
-  Source Source::_nullimpl;
-  bool Source::_nullimpl_initialized = false;
+  Source_Ref Source_Ref::_nullimpl;
+  bool Source_Ref::_nullimpl_initialized = false;
 
   /** Null implementation */
-  Source & Source::nullimpl()
+  Source_Ref & Source_Ref::nullimpl()
   {
     if (! _nullimpl_initialized)
     {
@@ -63,32 +63,32 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  const ResStore & Source::resolvables()
+  const ResStore & Source_Ref::resolvables()
   { return _pimpl->resolvables(*this); }
 
-  std::ostream & Source::dumpOn( std::ostream & str ) const
+  std::ostream & Source_Ref::dumpOn( std::ostream & str ) const
   { return _pimpl->dumpOn( str ); }
 
-  const Pathname Source::provideFile(const Pathname & file_r,
+  const Pathname Source_Ref::provideFile(const Pathname & file_r,
 				     const unsigned media_nr)
   { return _pimpl->provideFile(file_r, media_nr); }
 
-  const Pathname Source::provideDir(const Pathname & dir_r,
+  const Pathname Source_Ref::provideDir(const Pathname & dir_r,
 				    const unsigned media_nr,
 				    const bool recursive)
   { return _pimpl->provideDir(dir_r, media_nr, recursive); }
 
-  const bool Source::enabled() const
+  const bool Source_Ref::enabled() const
   { return _pimpl->enabled(); }
 
-  void Source::enable()
+  void Source_Ref::enable()
   { _pimpl->enable(); }
 
-  void Source::disable()
+  void Source_Ref::disable()
   { _pimpl->disable(); }
 
-  string Source::alias (void) const
-  { _pimpl->alias(); }
+  string Source_Ref::alias (void) const
+  { return _pimpl->alias(); }
 
 
   /////////////////////////////////////////////////////////////////

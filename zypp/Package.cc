@@ -10,6 +10,7 @@
  *
 */
 #include "zypp/Package.h"
+#include "zypp/source/SourceImpl.h"
 #include "zypp/base/Exception.h"
 
 using namespace std;

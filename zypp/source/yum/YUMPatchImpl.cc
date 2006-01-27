@@ -43,7 +43,7 @@ namespace zypp
        * \bug CANT BE CONSTUCTED THAT WAY ANYMORE
       */
       YUMPatchImpl::YUMPatchImpl(
-	Source & source_r,
+	Source_Ref source_r,
 	const zypp::parser::yum::YUMPatchData & parsed,
 	YUMSourceImpl & srcimpl_r
       )
@@ -253,7 +253,7 @@ namespace zypp
         }
       }
 
-      Source & YUMPatchImpl::source() const
+      Source_Ref YUMPatchImpl::source() const
       { return _source; }
 
     } // namespace yum

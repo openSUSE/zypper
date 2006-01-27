@@ -12,6 +12,7 @@
 #ifndef ZYPP_SOURCE_YUM_YUMPATCHIMPL_H
 #define ZYPP_SOURCE_YUM_YUMPATCHIMPL_H
 
+#include "zypp/source/SourceImpl.h"
 #include "zypp/detail/PatchImpl.h"
 #include "zypp/parser/yum/YUMParserData.h"
 #include "zypp/source/yum/YUMSourceImpl.h"
@@ -36,7 +37,7 @@ namespace zypp
       public:
         /** Default ctor */
         YUMPatchImpl(
-	  Source & source_r,
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchData & parsed,
 	  YUMSourceImpl & srcimpl_r
 	);
@@ -89,9 +90,9 @@ namespace zypp
 	/** The list of all atoms building the patch */
 	AtomList _atoms;
       private:
-	Source & _source;
+	Source_Ref _source;
       public:
-	Source & source() const;
+	Source_Ref source() const;
        };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum

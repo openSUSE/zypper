@@ -45,7 +45,7 @@ namespace zypp
         /** Dtor */
         ~SuseTagsImpl();
 
-	virtual void createResolvables(Source & source_r);
+	virtual void createResolvables(Source_Ref source_r);
       public:
         /** Stream output. */
         virtual std::ostream & dumpOn( std::ostream & str ) const;

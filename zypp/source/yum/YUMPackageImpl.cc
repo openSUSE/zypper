@@ -35,7 +35,7 @@ namespace zypp
       /** Default ctor
       */
       YUMPackageImpl::YUMPackageImpl(
-	Source & source_r,
+	Source_Ref source_r,
 	const zypp::parser::yum::YUMPrimaryData & parsed,
 	const zypp::parser::yum::YUMFileListData & filelist,
 	const zypp::parser::yum::YUMOtherData & other
@@ -91,7 +91,7 @@ namespace zypp
       }
 
       YUMPackageImpl::YUMPackageImpl(
-	Source & source_r,
+	Source_Ref source_r,
 	const zypp::parser::yum::YUMPatchPackage & parsed
       )
       : _summary(parsed.summary),
@@ -337,7 +337,7 @@ namespace zypp
       std::list<PatchRpm> YUMPackageImpl::patchRpms() const
       { return _patch_rpms; }
 
-      Source & YUMPackageImpl::source() const
+      Source_Ref YUMPackageImpl::source() const
       { return _source; }
 
 #if 0

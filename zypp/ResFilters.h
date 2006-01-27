@@ -17,6 +17,7 @@
 #include "zypp/CapFilters.h"
 
 #include "zypp/Source.h"
+#include "zypp/source/SourceImpl.h"
 
 #include "zypp/PoolItem.h"
 
@@ -186,7 +187,7 @@ namespace zypp
     /** Select ResObject by source. */
     struct BySource : public ResObjectFilterFunctor
     {
-      BySource( const Source & source_r )
+      BySource( Source_Ref source_r )
       : _source( source_r )
       {}
 
@@ -195,7 +196,7 @@ namespace zypp
         return p->source() == _source;
       }
 
-      const Source & _source;
+      Source_Ref _source;
     };
 
 

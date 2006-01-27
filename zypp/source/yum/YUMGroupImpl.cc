@@ -34,7 +34,7 @@ namespace zypp
       /** Default ctor
       */
       YUMGroupImpl::YUMGroupImpl(
-	Source & source_r,
+	Source_Ref source_r,
 	const zypp::parser::yum::YUMGroupData & parsed
       )
       : _user_visible(parsed.userVisible == "true")
@@ -133,7 +133,7 @@ namespace zypp
 	return Label("base");
       }
 
-      Source & YUMGroupImpl::source() const
+      Source_Ref YUMGroupImpl::source() const
       { return _source; }
 
  

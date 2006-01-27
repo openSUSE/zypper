@@ -14,6 +14,7 @@
 
 #include <iosfwd>
 #include <string>
+#include <set>
 
 #include "zypp/base/PtrTypes.h"
 

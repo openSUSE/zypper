@@ -18,11 +18,12 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
+#include "zypp/Source.h"
+
 #include "zypp/ResStore.h"
 
 #include "zypp/Pathname.h"
 #include "zypp/media/MediaAccess.h"
-#include "zypp/Source.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -64,7 +65,7 @@ namespace zypp
     public:
 
       /** All resolvables provided by this source. */
-      const ResStore & resolvables(Source & source_r);
+      const ResStore & resolvables(Source_Ref source_r);
 
       /**
        * Provide a file to local filesystem
@@ -118,7 +119,7 @@ namespace zypp
       /** ResStore initialized? */
       bool _res_store_initialized;
       /** Fill in the ResStore */
-      virtual void createResolvables(Source & source_r);
+      virtual void createResolvables(Source_Ref source_r);
     };
     ///////////////////////////////////////////////////////////////////
 
