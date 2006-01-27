@@ -47,9 +47,9 @@ namespace zypp
     /**  */
     ResPool pool() const;
     
-    void ZYpp::addResolvables (const ResStore& store);
+    void addResolvables (const ResStore& store);
 
-    void ZYpp::removeResolvables (const ResStore& store);
+    void removeResolvables (const ResStore& store);
 
   protected:
     /** Dtor */
