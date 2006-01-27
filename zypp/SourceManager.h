@@ -21,7 +21,6 @@
 #include "zypp/Source.h"
 #include "zypp/Url.h"
 #include "zypp/Pathname.h"
-#include "zypp/ResPoolManager.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -57,8 +56,6 @@ namespace zypp
      */
     Source & findSource(const unsigned id);
     
-#warning FIXME 5 times: Find a better way to link to the resolvable pool than passing a reference...
-
     /**
      * Add a new source
      *
