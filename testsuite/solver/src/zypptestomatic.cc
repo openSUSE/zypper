@@ -63,22 +63,16 @@
 
 #include "helix/HelixSourceImpl.h"
 
+#include "zypp/ZYpp.h"
+#include "zypp/ZYppFactory.h"
+
 using namespace std;
 using namespace zypp;
 using namespace zypp::solver::detail;
 
-int assertOutput( const char* output)
-{
-    cout << "Assertion in " << __FILE__ << ", " << __LINE__ << " : " << output << " --> exit" << endl;
-    exit (0);
-}
-
-# define assertExit(expr) \
-  (__ASSERT_VOID_CAST ((expr) ? 0 :		 \
-		       (assertOutput (__STRING(expr)))))
-
 static string globalPath;
-static ResPool *globalPool;
+static const ResPool *globalPool = NULL;
+static ZYpp::Ptr God;
 static SourceManager_Ptr manager;
 
 typedef list<unsigned int> ChecksumList;
@@ -348,8 +342,8 @@ get_poolItem (const string & source_name, const string & package_name, const str
 	const Source & source = manager->findSource (source_name);
 	FindPackage info;
 
-	invokeOnEach( globalPool->byNameBegin( package_name ),
-		      globalPool->byNameEnd( package_name ),
+	invokeOnEach( God->pool().byNameBegin( package_name ),
+		      God->pool().byNameEnd( package_name ),
 		      functor::chain( resfilter::BySource(source), resfilter::ByKind (kind) ),
 		      functor::functorRef<bool,PoolItem> (info) );
 
@@ -416,8 +410,8 @@ whatdependson (PoolItem_Ref poolItem)
 	//world->foreachRequiringResItem (info.cap, requires_poolItem_cb, &info);
 
 	Dep dep( Dep::REQUIRES );
-	invokeOnEach( globalPool->byCapabilityIndexBegin( info.cap.index(), dep ),
-		      globalPool->byCapabilityIndexEnd( info.cap.index(), dep ),
+	invokeOnEach( God->pool().byCapabilityIndexBegin( info.cap.index(), dep ),
+		      God->pool().byCapabilityIndexEnd( info.cap.index(), dep ),
 		      resfilter::callOnCapMatchIn( dep, info.cap, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 
     }
@@ -456,8 +450,8 @@ get_providing_poolItems (const string & prov_name, const string & kind_name = ""
 
     // world->foreachProvidingResItem (cap, providing_poolItem_cb, &rs);
 
-    invokeOnEach( globalPool->byCapabilityIndexBegin( cap.index(), dep ),
-		  globalPool->byCapabilityIndexEnd( cap.index(), dep ),
+    invokeOnEach( God->pool().byCapabilityIndexBegin( cap.index(), dep ),
+		  God->pool().byCapabilityIndexEnd( cap.index(), dep ),
 		  resfilter::callOnCapMatchIn( dep, cap, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 
     return info.itemset;
@@ -485,6 +479,7 @@ load_source (const string & alias, const string & filename, const string & type,
 
 	    count = impl->resolvables (s).size();
 	    manager->addSource (s);
+	    God->addResolvables( impl->resolvables (s) );
 	}
 	cout << "Loaded " << count << " package(s) from " << pathname << endl;
     }
@@ -508,7 +503,9 @@ static bool done_setup = false;
 static void
 parse_xml_setup (XmlNode_Ptr node)
 {
-    assertExit (node->equals("setup"));
+    if (!node->equals("setup")) {
+	ZYPP_THROW (Exception ("Node not 'setup' in parse_xml_setup"));
+    }
 
     if (done_setup) {
 	cerr << "Multiple <setup>..</setup> sections not allowed!" << endl;
@@ -526,22 +523,18 @@ parse_xml_setup (XmlNode_Ptr node)
 	if (node->equals ("system")) {
 
 	    string file = node->getProp ("file");
-	    assertExit (!file.empty());
 	    load_source ("@system", file, "helix", true);
 
-	} else if (node->equals ("source")) {
+	} else if (node->equals ("channel")) {
 
 	    string name = node->getProp ("name");
 	    string file = node->getProp ("file");
 	    string type = node->getProp ("type");
-	    assertExit (!name.empty());
-	    assertExit (!file.empty());
 	    load_source (name, file, type, false);
 
 	} else if (node->equals ("undump")) {
 
 	    string file = node->getProp ("file");
-	    assertExit (!file.empty());
 	    undump (file);
 
 	} else if (node->equals ("force-install")) {
@@ -551,9 +544,6 @@ parse_xml_setup (XmlNode_Ptr node)
 	    string kind_name = node->getProp ("kind");
 
 	    PoolItem_Ref poolItem;
-
-	    assertExit (!source_name.empty());
-	    assertExit (!package_name.empty());
 
 	    poolItem = get_poolItem (source_name, package_name, kind_name);
 	    if (poolItem) {
@@ -580,7 +570,6 @@ parse_xml_setup (XmlNode_Ptr node)
 
 	    PoolItem_Ref poolItem;
 
-	    assertExit (!package_name.empty());
 	    poolItem = get_poolItem ("@system", package_name, kind_name);
 	    
 	    if (! poolItem) {
@@ -589,7 +578,7 @@ parse_xml_setup (XmlNode_Ptr node)
 		RESULT << "Force-uninstalling " << package_name << endl;
 #warning Needs pool remove
 #if 0
-		globalPool->remove (poolItem);
+		God->pool().remove (poolItem);
 #endif
 	    }
 
@@ -600,9 +589,6 @@ parse_xml_setup (XmlNode_Ptr node)
 	    string kind_name = node->getProp ("kind");
 
 	    PoolItem_Ref poolItem;
-
-	    assertExit (!source_name.empty());
-	    assertExit (!package_name.empty());
 
 	    poolItem = get_poolItem (source_name, package_name, kind_name);
 	    if (poolItem) {
@@ -706,8 +692,8 @@ uniquelyInstalled (void)
 {
     Unique info;
 
-    invokeOnEach( globalPool->begin( ),
-		  globalPool->end ( ),
+    invokeOnEach( God->pool().begin( ),
+		  God->pool().end ( ),
 		  resfilter::ByInstalled (),
 		  functor::functorRef<bool,PoolItem> (info) );
     return info.itemset;
@@ -749,7 +735,7 @@ foreach_system_upgrade (Resolver & resolver)
     for (PoolItemSet::iterator iter = installed.begin(); iter != installed.end(); ++iter) {
 	PoolItem_Ref p = *iter;
 	info.installed = p;
-	invokeOnEach( globalPool->byNameBegin( p->name() ), globalPool->byNameEnd( p->name() ),
+	invokeOnEach( God->pool().byNameBegin( p->name() ), God->pool().byNameEnd( p->name() ),
 		      functor::chain( resfilter::ByKind( p->kind() ),
 		      resfilter::byEdition<CompareByGT<Edition> >( p->edition() )),
 		      functor::functorRef<bool,PoolItem>(info) );
@@ -787,7 +773,9 @@ parse_xml_trial (XmlNode_Ptr node)
     bool verify = false;
     bool instorder = false;
 
-    assertExit (node->equals ("trial"));
+    if (!node->equals ("trial")) {
+	ZYPP_THROW (Exception ("Node not 'trial' in parse_xml_trial()"));
+    }
 
     DBG << "parse_xml_trial()" << endl;
 
@@ -848,9 +836,6 @@ parse_xml_trial (XmlNode_Ptr node)
 
 	    PoolItem_Ref poolItem;
 
-	    assertExit (!source_name.empty());
-	    assertExit (!package_name.empty());
-
 	    poolItem = get_poolItem (source_name, package_name, kind_name);
 	    if (poolItem) {
 		RESULT << "Installing " << package_name << " from source " << source_name << endl;;
@@ -865,8 +850,6 @@ parse_xml_trial (XmlNode_Ptr node)
 	    string kind_name = node->getProp ("kind");
 
 	    PoolItem_Ref poolItem;
-
-	    assertExit (!package_name.empty());
 
 	    poolItem = get_poolItem ("@system", package_name, kind_name);
 	    if (poolItem) {
@@ -1026,7 +1009,9 @@ parse_xml_trial (XmlNode_Ptr node)
 static void
 parse_xml_test (XmlNode_Ptr node)
 {
-    assertExit (node->equals("test"));
+    if (!node->equals("test")) {
+	ZYPP_THROW (Exception("Node not 'test' in parse_xml_test()"));
+    }
 
     node = node->children();
 
@@ -1081,6 +1066,10 @@ main (int argc, char *argv[])
     }
 
     manager = SourceManager::sourceManager();
+    ZYppFactory zf;
+    God = zf.letsTest();
+    const ResPool pool = God->pool();
+    globalPool = &pool;
 
     globalPath = argv[1];
     globalPath = globalPath.substr (0, globalPath.find_last_of ("/") +1);
