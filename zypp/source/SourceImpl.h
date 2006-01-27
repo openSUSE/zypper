@@ -64,11 +64,21 @@ namespace zypp
       /** All resolvables provided by this source. */
       const ResStore & resolvables(Source & source_r);
 
-      /** Provide a file to local filesystem */
+      /**
+       * Provide a file to local filesystem
+       *
+       * \throws Exception
+       *
+       */
       const Pathname provideFile(const Pathname & file,
 				 const unsigned media_nr = 1);
 
-      /** Provide a directory to local filesystem */
+      /**
+       * Provide a directory to local filesystem
+       *
+       * \throws Exception
+       *
+       */
       const Pathname provideDir(const Pathname & path,
 				const unsigned media_nr = 1,
 				const bool recursive = false);

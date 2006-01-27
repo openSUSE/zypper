@@ -70,6 +70,8 @@ namespace zypp
     const Pathname SourceImpl::provideFile(const Pathname & file_r,
 					   const unsigned media_nr)
     {
+      if (_media == 0)
+	ZYPP_THROW(Exception("Source not initialized properly"));
       _media->provideFile (file_r);
       return _media->localPath (file_r);
     }
@@ -79,6 +81,8 @@ namespace zypp
 					  const unsigned media_nr,
 					  const bool recursive)
     {
+      if (_media == 0)
+	ZYPP_THROW(Exception("Source not initialized properly"));
       if (recursive)
 	_media->provideDirTree(path_r);
       else
