@@ -79,7 +79,7 @@ operator<<( ostream& os, const QueueItemInstall & item)
     }
     if (!item._needed_by.empty()) {
 	os << ", Needed by ";
-	for (PoolItemList::iterator it = item._needed_by.begin(); it != item._needed_by.end(); ++it) {
+	for (PoolItemList::const_iterator it = item._needed_by.begin(); it != item._needed_by.end(); ++it) {
 	    if (it != item._needed_by.begin()) os << ", ";
 	    os << *it;
 	}
