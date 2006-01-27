@@ -46,7 +46,11 @@ ostream&
 operator<<( ostream& os, const ResolverInfoContainer & container)
 {
     os << "<resolverinfocontainer '";
-    os << container._item_list;
+	for (PoolItemList::const_iterator it = container._item_list.begin(); it != container._item_list.end(); ++it) {
+	    if (it != container._item_list.begin()) os << ", ";
+	    os << *it;
+	}
+//    os << container._item_list;
     os << "'>";
     return os;
 }
