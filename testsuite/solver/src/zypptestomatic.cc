@@ -26,6 +26,8 @@
 
 #include <sstream>
 #include <iostream>
+#include <map>
+#include <set>
 
 #include <cstdlib>
 #include <cstring>
@@ -77,6 +79,9 @@ static SourceManager_Ptr manager;
 
 typedef list<unsigned int> ChecksumList;
 typedef std::set <zypp::PoolItem> PoolItemSet;
+
+typedef std::map<std::string, unsigned> AliasMap;
+AliasMap aliasMap;
 
 #define RESULT cout << ">!> "
 
@@ -339,12 +344,22 @@ get_poolItem (const string & source_name, const string & package_name, const str
     Resolvable::Kind kind = string2kind (kind_name);
 
     try {
-	const Source & source = manager->findSource (source_name);
+	AliasMap::const_iterator it = aliasMap.find(source_name);
+	if (it == aliasMap.end()) {
+	    cerr << "Can't find source " << source_name << endl;
+	    return poolItem;
+	}	    
+	Source_Ref source = manager->findSource (it->second);
+	if (!source) {
+	    cerr << "Can't find source #" << it->second << ": " << source_name << endl;
+	    return poolItem;
+	}
+
 	FindPackage info;
 
 	invokeOnEach( God->pool().byNameBegin( package_name ),
 		      God->pool().byNameEnd( package_name ),
-		      functor::chain( resfilter::BySource(source), resfilter::ByKind (kind) ),
+//		      functor::chain( resfilter::BySource(source), resfilter::ByKind (kind) ),
 		      functor::functorRef<bool,PoolItem> (info) );
 
 	poolItem = info.poolItem;
@@ -462,6 +477,33 @@ get_providing_poolItems (const string & prov_name, const string & kind_name = ""
 //---------------------------------------------------------------------------------------------------------------------
 // setup related functions
 
+struct PrintItem : public resfilter::PoolItemFilterFunctor
+{
+    int count;
+
+    PrintItem() : count (0) { }
+
+    bool operator()( PoolItem_Ref poolItem )
+    {
+	cout << ++count << ": " << poolItem << endl;
+	return true;
+    }
+};
+
+
+// collect all installed items in a set
+
+void
+print_pool (void)
+{
+    PrintItem info;
+
+    invokeOnEach( God->pool().begin( ),
+		  God->pool().end ( ),
+		  functor::functorRef<bool,PoolItem> (info) );
+    return;
+}
+
 
 static void
 load_source (const string & alias, const string & filename, const string & type, bool system_packages)
@@ -478,8 +520,10 @@ load_source (const string & alias, const string & filename, const string & type,
 	if (s) {
 
 	    count = impl->resolvables (s).size();
-	    manager->addSource (s);
+	    aliasMap[alias] = manager->addSource (s);
+	    cout << "Added source " << alias << " as #" << aliasMap[alias] << endl;
 	    God->addResolvables( impl->resolvables (s) );
+	    print_pool ();
 	}
 	cout << "Loaded " << count << " package(s) from " << pathname << endl;
     }
@@ -504,7 +548,7 @@ static void
 parse_xml_setup (XmlNode_Ptr node)
 {
     if (!node->equals("setup")) {
-	ZYPP_THROW (Exception ("Node not 'setup' in parse_xml_setup"));
+	ZYPP_THROW (Exception ("Node not 'setup' in parse_xml_setup():"+node->name()));
     }
 
     if (done_setup) {
@@ -549,7 +593,7 @@ parse_xml_setup (XmlNode_Ptr node)
 	    if (poolItem) {
 		RESULT << "Force-installing " << package_name << " from source " << source_name << endl;;
 
-		const Source & system_source = manager->findSource("@system");
+		Source_Ref system_source = manager->findSource("@system");
 
 		if (!system_source)
 		    cerr << "No system source available!" << endl;
@@ -809,7 +853,7 @@ parse_xml_trial (XmlNode_Ptr node)
 	} else if (node->equals ("current")) {
 
 	    string source_name = node->getProp ("source");
-	    const Source & source = manager->findSource (source_name);
+	    Source_Ref source = manager->findSource (source_name);
 
 	    if (source) {
 //FIXME		resolver.setCurrentChannel (source);
@@ -820,7 +864,7 @@ parse_xml_trial (XmlNode_Ptr node)
 	} else if (node->equals ("subscribe")) {
 
 	    string source_name = node->getProp ("source");
-	    Source & source = manager->findSource (source_name);
+	    Source_Ref source = manager->findSource (source_name);
 
 	    if (source) {
 //FIXME		source->setSubscription (true);
@@ -830,7 +874,7 @@ parse_xml_trial (XmlNode_Ptr node)
 
 	} else if (node->equals ("install")) {
 
-	    string source_name = node->getProp ("source");
+	    string source_name = node->getProp ("channel");
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 
@@ -1010,7 +1054,7 @@ static void
 parse_xml_test (XmlNode_Ptr node)
 {
     if (!node->equals("test")) {
-	ZYPP_THROW (Exception("Node not 'test' in parse_xml_test()"));
+	ZYPP_THROW (Exception("Node not 'test' in parse_xml_test():"+node->name()));
     }
 
     node = node->children();
