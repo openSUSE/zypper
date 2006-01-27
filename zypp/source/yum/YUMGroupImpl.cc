@@ -86,7 +86,7 @@ namespace zypp
 // _description
       }
       /** Is to be visible for user? */
-      bool YUMGroupImpl::userVisible() const {
+      bool YUMGroupImpl::visible() const {
 	return _user_visible;
       }
       CapSet YUMGroupImpl::optionalReq() const
@@ -119,9 +119,20 @@ namespace zypp
       ByteCount YUMGroupImpl::size() const
       { return ResObjectImplIf::size(); }
 
+      Label YUMGroupImpl::order() const {
+#warning Ordering support in YUM?
+	return Label("0");
+      }
+
+     Label YUMGroupImpl::category() const {
+#warning Category support in YUM missing!
+	return Label("base");
+      }
+
       Source & YUMGroupImpl::source() const
       { return _source; }
 
+ 
     } // namespace yum
     /////////////////////////////////////////////////////////////////
   } // namespace source

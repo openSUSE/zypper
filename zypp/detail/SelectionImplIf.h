@@ -44,13 +44,13 @@ namespace zypp
         virtual Text description() const PURE_VIRTUAL;
 
         /** */
-	virtual Text category() const PURE_VIRTUAL;
+	virtual Label category() const PURE_VIRTUAL;
 
         /** */
 	virtual bool visible() const PURE_VIRTUAL;
     
         /** */
-	virtual Text order() const PURE_VIRTUAL;
+	virtual Label order() const PURE_VIRTUAL;
 #if 0
       virtual std::list<std::string> suggests() const;
       virtual std::list<std::string> recommends() const;

@@ -44,13 +44,13 @@ namespace zypp
     Text description() const;
 
     /** selection category */
-    Text category() const;
+    Label category() const;
 
     /** selection visibility (for hidden selections) */
     bool visible() const;
 
     /** selection presentation order */
-    Text order() const;
+    Label order() const;
 
   protected:
     /** Ctor */

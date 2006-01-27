@@ -61,8 +61,13 @@ namespace zypp
 	/** */
 	virtual Vendor instSrcVendor() const;
         /** */
-        virtual ByteCount size() const;
-
+        virtual ByteCount size() const;	
+        /** */
+	virtual Label category() const;
+        /** */
+	virtual bool visible() const;
+        /** */
+	virtual Label order() const;
 
       protected:
 // _summary

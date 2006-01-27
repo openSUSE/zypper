@@ -43,31 +43,31 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
     /** selection summary (FIXME: localized) */
-    Label summary() const
+    Label Selection::summary() const
     {
 	return pimpl().summary();    
     }
 
     /** */
-    Text description() const
+    Text Selection::description() const
     {
 	return pimpl().description();    
     }
 
     /** selection category */
-    Text category() const
+    Label Selection::category() const
     {
 	return pimpl().category();    
     }
 
     /** selection visibility (for hidden selections) */
-    bool visible() const
+    bool Selection::visible() const
     {
 	return pimpl().visible();    
     }
 
     /** selection presentation order */
-    Text order() const
+    Label Selection::order() const
     {
 	return pimpl().order();    
     }
