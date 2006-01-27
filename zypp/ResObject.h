@@ -22,6 +22,7 @@ namespace zypp
   namespace detail {
     class ResObjectImplIf;
   }
+  class Source;
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -43,6 +44,8 @@ namespace zypp
     Label summary() const;
     /** */
     Text description() const;
+    /** */
+    zypp::Source & source() const;
 
   protected:
     /** Ctor */

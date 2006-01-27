@@ -46,6 +46,7 @@ namespace zypp
     : _media(media_r)
     , _path(path_r)
     , _enabled(true)
+    , _res_store_initialized(false)
     {}
 
     ///////////////////////////////////////////////////////////////////
@@ -55,6 +56,16 @@ namespace zypp
     //
     SourceImpl::~SourceImpl()
     {}
+
+    const ResStore & SourceImpl::resolvables(Source & source_r)
+    {
+      if (! _res_store_initialized)
+      {
+	createResolvables(source_r);
+	_res_store_initialized = true;
+      }
+      return _store;
+     }
 
     const Pathname SourceImpl::provideFile(const Pathname & file_r,
 					   const unsigned media_nr)
@@ -74,6 +85,9 @@ namespace zypp
 	_media->provideDir(path_r);
       return _media->localPath (path_r);
     }
+
+    void SourceImpl::createResolvables(Source & source_r)
+    {}
 
     /////////////////////////////////////////////////////////////////
   } // namespace source

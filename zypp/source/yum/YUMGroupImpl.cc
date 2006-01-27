@@ -34,9 +34,11 @@ namespace zypp
       /** Default ctor
       */
       YUMGroupImpl::YUMGroupImpl(
+	Source & source_r,
 	const zypp::parser::yum::YUMGroupData & parsed
       )
       : _user_visible(parsed.userVisible == "true")
+      , _source(source_r)
       {
 	CapFactory _f;
 	for (std::list<PackageReq>::const_iterator it = parsed.packageList.begin();
@@ -117,6 +119,8 @@ namespace zypp
       ByteCount YUMGroupImpl::size() const
       { return ResObjectImplIf::size(); }
 
+      Source & YUMGroupImpl::source() const
+      { return _source; }
 
     } // namespace yum
     /////////////////////////////////////////////////////////////////

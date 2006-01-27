@@ -48,30 +48,40 @@ namespace zypp
         /** Default ctor */
         YUMSourceImpl(media::MediaAccess::Ptr & media_r, const Pathname & path_r = "/");
 
+	virtual void createResolvables(Source & source_r);
+
 	Package::Ptr createPackage(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMPrimaryData & parsed,
 	  const zypp::parser::yum::YUMFileListData & filelist,
 	  const zypp::parser::yum::YUMOtherData & other
 	);
 	Package::Ptr createPackage(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMPatchPackage & parsed
 	);
 	Selection::Ptr createGroup(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMGroupData & parsed
 	);
 	Pattern::Ptr createPattern(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMPatternData & parsed
 	);
 	Message::Ptr createMessage(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMPatchMessage & parsed
 	);
 	Script::Ptr createScript(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMPatchScript & parsed
 	);
 	Patch::Ptr createPatch(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMPatchData & parsed
 	);
 	Product::Ptr createProduct(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMProductData & parsed
 	);
 
@@ -91,6 +101,7 @@ namespace zypp
 
 	Capability createCapability(const YUMDependency & dep,
 				    const Resolvable::Kind & my_kind);
+      private:
 
 	class PackageID {
 	public:
@@ -133,8 +144,9 @@ namespace zypp
 	  std::string _rel;
 	  std::string _arch;
 	};
-
+	friend inline bool operator<( const YUMSourceImpl::PackageID & lhs, const YUMSourceImpl::PackageID & rhs );
       };
+
       inline bool operator<( const YUMSourceImpl::PackageID & lhs, const YUMSourceImpl::PackageID & rhs )
       { return YUMSourceImpl::PackageID::compare( lhs, rhs ) == -1; }
 

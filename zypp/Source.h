@@ -44,12 +44,15 @@ namespace zypp
   public:
 
     /** All resolvables provided by this source. */
-    const ResStore & resolvables() const;
+    const ResStore & resolvables();
+    /** Null implementation */
+    static Source & nullimpl();
 
   private:
     /** Factory */
     friend class SourceFactory;
     friend class SourceManager;
+  private:
     /** Factory ctor */
     Source();
     /** Factory ctor */
@@ -64,6 +67,9 @@ namespace zypp
   private:
     /** Pointer to implementation */
     RW_pointer<Impl,rw_pointer::Intrusive<Impl> > _pimpl;
+
+    static Source _nullimpl;
+    static bool _nullimpl_initialized;
 
   public:
     /** Provide a file to local filesystem */

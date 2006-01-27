@@ -43,13 +43,14 @@ namespace zypp
        * \bug CANT BE CONSTUCTED THAT WAY ANYMORE
       */
       YUMProductImpl::YUMProductImpl(
-	const zypp::parser::yum::YUMProductData & parsed,
-	YUMSourceImpl * src
+	Source & source_r,
+	const zypp::parser::yum::YUMProductData & parsed
       )
       :	_category(parsed.type),
-	_vendor(parsed.vendor)//,
+	_vendor(parsed.vendor),
 //	_displayname(parsed.displayname),
 //	_description(parsed.description)
+	_source(source_r)
       {}
 
       std::string YUMProductImpl::category() const
@@ -84,6 +85,9 @@ namespace zypp
 
       Vendor YUMProductImpl::instSrcVendor() const
       { return ResObjectImplIf::instSrcVendor(); }
+
+      Source & YUMProductImpl::source() const
+      { return _source; }
  
     } // namespace yum
     /////////////////////////////////////////////////////////////////

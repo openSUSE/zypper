@@ -36,8 +36,8 @@ namespace zypp
       public:
         /** Default ctor */
         YUMProductImpl(
-	  const zypp::parser::yum::YUMProductData & parsed,
-	  YUMSourceImpl * src
+	  Source & source_r,
+	  const zypp::parser::yum::YUMProductData & parsed
 	);
 	std::string category() const;
 	Label vendor() const;
@@ -57,6 +57,10 @@ namespace zypp
 	Text _description;
 
 
+      private:
+	Source & _source;
+      public:
+	Source & source() const;
 
        };
       ///////////////////////////////////////////////////////////////////

@@ -35,7 +35,10 @@ namespace zypp
       {
       public:
         /** Default ctor */
-        YUMPatternImpl( const zypp::parser::yum::YUMPatternData & parsed );
+        YUMPatternImpl(
+	  Source & source_r,
+	  const zypp::parser::yum::YUMPatternData & parsed
+	);
 	/** Is to be visible for user? */
 	virtual bool userVisible() const;
         /** optional requirements */
@@ -66,6 +69,10 @@ namespace zypp
         bool _user_visible;
 	CapSet _optional_req;
 	CapSet _default_req;
+      private:
+	Source & _source;
+      public:
+	Source & source() const;
       };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum

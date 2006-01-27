@@ -52,8 +52,12 @@ namespace storage
 class XMLFilesBackend::Private
 {
   public:
+  XMLFilesBackend::Private::Private()
+  : source(Source::nullimpl())
+  { }
   bool randomFileName;
-	YUMSourceImpl source;
+  Source & source;
+  YUMSourceImpl sourceimpl;
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -207,7 +211,7 @@ Resolvable::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Reso
     YUMPatchParser iter(res_file,"");
     for (; !iter.atEnd(); ++iter)
     {
-      resolvable = d->source.createPatch(**iter);
+      resolvable = d->sourceimpl.createPatch(d->source, **iter);
       break;
     }
   }

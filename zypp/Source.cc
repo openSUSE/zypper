@@ -15,6 +15,7 @@
 
 #include "zypp/Source.h"
 #include "zypp/source/SourceImpl.h"
+#include "zypp/SourceFactory.h"
 
 using namespace std;
 
@@ -41,14 +42,29 @@ namespace zypp
     assert( impl_r );
   }
 
+  Source Source::_nullimpl;
+  bool Source::_nullimpl_initialized = false;
+
+  /** Null implementation */
+  Source & Source::nullimpl()
+  {
+    if (! _nullimpl_initialized)
+    {
+      _nullimpl = SourceFactory().createFrom(source::SourceImpl::nullimpl());
+      _nullimpl_initialized = true;
+    }
+    return _nullimpl;
+  }
+
+
   ///////////////////////////////////////////////////////////////////
   //
   //	Forward to SourceImpl:
   //
   ///////////////////////////////////////////////////////////////////
 
-  const ResStore & Source::resolvables() const
-  { return _pimpl->resolvables(); }
+  const ResStore & Source::resolvables()
+  { return _pimpl->resolvables(*this); }
 
   std::ostream & Source::dumpOn( std::ostream & str ) const
   { return _pimpl->dumpOn( str ); }

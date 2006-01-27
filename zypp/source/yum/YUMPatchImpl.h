@@ -36,8 +36,9 @@ namespace zypp
       public:
         /** Default ctor */
         YUMPatchImpl(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMPatchData & parsed,
-	  YUMSourceImpl * src
+	  YUMSourceImpl & srcimpl_r
 	);
 	/** Patch ID */
 	std::string id() const;
@@ -87,6 +88,10 @@ namespace zypp
 	bool _affects_pkg_manager;
 	/** The list of all atoms building the patch */
 	AtomList _atoms;
+      private:
+	Source & _source;
+      public:
+	Source & source() const;
        };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum

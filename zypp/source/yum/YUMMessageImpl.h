@@ -34,7 +34,10 @@ namespace zypp
       {
       public:
         /** Default ctor */
-        YUMMessageImpl( const zypp::parser::yum::YUMPatchMessage & parsed );
+        YUMMessageImpl(
+	  Source & source_r,
+	  const zypp::parser::yum::YUMPatchMessage & parsed
+	);
 	/** Get the text of the message */
 	virtual std::string text() const;
 	/** Get the type of the message (YesNo / OK) */
@@ -60,6 +63,10 @@ namespace zypp
 	std::string _text;
 	/** The type of the message (YesNo / OK) */
 	std::string _type;
+      private:
+	Source & _source;
+      public:
+	Source & source() const;
       };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum

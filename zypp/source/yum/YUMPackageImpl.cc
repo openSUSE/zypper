@@ -35,6 +35,7 @@ namespace zypp
       /** Default ctor
       */
       YUMPackageImpl::YUMPackageImpl(
+	Source & source_r,
 	const zypp::parser::yum::YUMPrimaryData & parsed,
 	const zypp::parser::yum::YUMFileListData & filelist,
 	const zypp::parser::yum::YUMOtherData & other
@@ -61,7 +62,8 @@ namespace zypp
 	_delta_rpms(),
 	_patch_rpms(),
 
-	_install_only(parsed.installOnly)
+	_install_only(parsed.installOnly),
+	_source(source_r)
 #if 0
       : _size_package(strtol(parsed.sizePackage.c_str(), 0, 10)),
 	_size_archive(strtol(parsed.sizeArchive.c_str(), 0, 10)),
@@ -89,6 +91,7 @@ namespace zypp
       }
 
       YUMPackageImpl::YUMPackageImpl(
+	Source & source_r,
 	const zypp::parser::yum::YUMPatchPackage & parsed
       )
       : _summary(parsed.summary),
@@ -113,7 +116,8 @@ namespace zypp
 	_delta_rpms(),
 	_patch_rpms(),
 
-	_install_only(parsed.installOnly)
+	_install_only(parsed.installOnly),
+	_source(source_r)
 #if 0
       : _size_package( strtol(parsed.sizePackage.c_str(), 0, 10)),
 	_size_archive( strtol(parsed.sizeArchive.c_str(), 0, 10)),
@@ -332,6 +336,9 @@ namespace zypp
 
       std::list<PatchRpm> YUMPackageImpl::patchRpms() const
       { return _patch_rpms; }
+
+      Source & YUMPackageImpl::source() const
+      { return _source; }
 
 #if 0
       /** */

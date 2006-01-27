@@ -81,7 +81,7 @@ namespace zypp
       virtual bool providesSources() const PURE_VIRTUAL;
 
       /** Installation source which provides the package */
-      virtual Source source() const PURE_VIRTUAL;
+      virtual Source & source() const PURE_VIRTUAL;
 
       /** \name deprecated
        * \todo These should be replaced by a offering a

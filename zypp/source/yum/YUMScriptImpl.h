@@ -33,7 +33,10 @@ namespace zypp
       {
       public:
         /** Default ctor */
-        YUMScriptImpl( const zypp::parser::yum::YUMPatchScript & parsed );
+        YUMScriptImpl(
+	  Source & source_r,
+	  const zypp::parser::yum::YUMPatchScript & parsed
+	);
 	/** Get the script to perform the change */
 	virtual std::string do_script() const;
 	/** Get the script to undo the change */
@@ -55,6 +58,10 @@ namespace zypp
 	std::string _do_script;
 	/** The script to undo the change */
 	std::string _undo_script;
+      private:
+	Source & _source;
+      public:
+	Source & source() const;
       };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum

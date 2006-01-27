@@ -51,6 +51,28 @@ namespace zypp
 				   const Pathname & path_r)
       : SourceImpl(media_r, path_r)
       {
+       try {
+	// first read list of all files in the reposotory
+        Pathname filename = provideFile(_path + "/repomd.xml");
+	DBG << "Reading file " << filename << endl;
+	ifstream repo_st(filename.asString().c_str());
+	YUMRepomdParser repomd(repo_st, "");
+
+	for(;
+	    ! repomd.atEnd();
+	    ++repomd)
+	{
+	}
+       }
+       catch (...)
+       {
+	ERR << "Cannot read repomd file, cannot initialize source" << endl;
+	ZYPP_THROW( Exception("Cannot read repomd file, cannot initialize source") );
+       }
+      }
+
+      void YUMSourceImpl::createResolvables(Source & source_r)
+      {
        std::list<YUMRepomdData_Ptr> repo_primary;
        std::list<YUMRepomdData_Ptr> repo_files;
        std::list<YUMRepomdData_Ptr> repo_other;
@@ -61,7 +83,7 @@ namespace zypp
 
        try {
 	// first read list of all files in the reposotory
-        Pathname filename = provideFile(path_r + "/repomd.xml");
+        Pathname filename = provideFile(_path + "/repomd.xml");
 	DBG << "Reading file " << filename << endl;
 	ifstream repo_st(filename.asString().c_str());
 	YUMRepomdParser repomd(repo_st, "");
@@ -103,7 +125,7 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  Pathname filename = provideFile(path_r + (*it)->location);
+	  Pathname filename = provideFile(_path + (*it)->location);
 	  DBG << "Reading file " << filename << endl;
 	  ifstream st(filename.asString().c_str());
 	  YUMFileListParser filelist(st, "");
@@ -127,7 +149,7 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  Pathname filename = provideFile(path_r + (*it)->location);
+	  Pathname filename = provideFile(_path + (*it)->location);
 	  DBG << "Reading file " << filename << endl;
 	  ifstream st(filename.asString().c_str());
 	  YUMOtherParser other(st, "");
@@ -152,7 +174,7 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  Pathname filename = provideFile(path_r + (*it)->location);
+	  Pathname filename = provideFile(_path + (*it)->location);
 	  DBG << "Reading file " << filename << endl;
 	  ifstream st(filename.asString().c_str());
 	  YUMPrimaryParser prim(st, "");
@@ -172,6 +194,7 @@ namespace zypp
 	    YUMFileListData filelist_empty;
 	    YUMOtherData other_empty;
 	    Package::Ptr p = createPackage(
+	      source_r,
 	      **prim,
 	      found_files != files_data.end()
 	        ? *found_files->second
@@ -197,7 +220,7 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  Pathname filename = provideFile(path_r + (*it)->location);
+	  Pathname filename = provideFile(_path + (*it)->location);
 	  DBG << "Reading file " << filename << endl;
 	  ifstream st(filename.asString().c_str());
 	  YUMGroupParser group(st, "");
@@ -205,7 +228,10 @@ namespace zypp
 	       !group.atEnd();
 	       ++group)
 	  {
-	    Selection::Ptr p = createGroup(**group);
+	    Selection::Ptr p = createGroup(
+	      source_r,
+	      **group
+	    );
 	    _store.insert (p);
 	  }
 	  if (group.errorStatus())
@@ -223,7 +249,7 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  Pathname filename = provideFile(path_r + (*it)->location);
+	  Pathname filename = provideFile(_path + (*it)->location);
 	  DBG << "Reading file " << filename << endl;
 	  ifstream st(filename.asString().c_str());
 	  YUMPatternParser pattern(st, "");
@@ -231,7 +257,10 @@ namespace zypp
 	       !pattern.atEnd();
 	       ++pattern)
 	  {
-	    Pattern::Ptr p = createPattern(**pattern);
+	    Pattern::Ptr p = createPattern(
+	      source_r,
+	      **pattern
+	    );
 	    _store.insert (p);
 	  }
 	  if (pattern.errorStatus())
@@ -249,7 +278,7 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  Pathname filename = provideFile(path_r + (*it)->location);
+	  Pathname filename = provideFile(_path + (*it)->location);
 	  DBG << "Reading file " << filename << endl;
 	  ifstream st(filename.asString().c_str());
 	  YUMProductParser product(st, "");
@@ -257,7 +286,10 @@ namespace zypp
 	       !product.atEnd();
 	       ++product)
 	  {
-	    Product::Ptr p = createProduct(**product);
+	    Product::Ptr p = createProduct(
+	      source_r,
+	      **product
+	    );
 	    _store.insert (p);
 	  }
 	  if (product.errorStatus())
@@ -276,7 +308,7 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  Pathname filename = provideFile(path_r + (*it)->location);
+	  Pathname filename = provideFile(_path + (*it)->location);
 	  DBG << "Reading file " << filename << endl;
 	  ifstream st(filename.asString().c_str());
 	  YUMPatchesParser patch(st, "");
@@ -296,7 +328,7 @@ namespace zypp
 	     it != patch_files.end();
 	     it++)
 	{
-	    Pathname filename = provideFile(path_r + *it);
+	    Pathname filename = provideFile(_path + *it);
 	    DBG << "Reading file " << filename << endl;
 	    ifstream st(filename.asString().c_str());
 	    YUMPatchParser ptch(st, "");
@@ -304,7 +336,10 @@ namespace zypp
 	        !ptch.atEnd();
 	        ++ptch)
 	    {
-	      Patch::Ptr p = createPatch(**ptch);
+	      Patch::Ptr p = createPatch(
+	        source_r,
+		**ptch
+	      );
 	      _store.insert (p);
 	      Patch::AtomList atoms = p->atoms();
 	      for (Patch::AtomList::iterator at = atoms.begin();
@@ -325,6 +360,7 @@ namespace zypp
       }
 
 	Package::Ptr YUMSourceImpl::createPackage(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMPrimaryData & parsed,
 	  const zypp::parser::yum::YUMFileListData & filelist,
 	  const zypp::parser::yum::YUMOtherData & other
@@ -333,7 +369,7 @@ namespace zypp
 	  try
 	  {
 	    shared_ptr<YUMPackageImpl> impl(
-	      new YUMPackageImpl(parsed, filelist, other));
+	      new YUMPackageImpl(source_r, parsed, filelist, other));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -355,12 +391,13 @@ namespace zypp
 	}
 
 	Package::Ptr YUMSourceImpl::createPackage(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMPatchPackage & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMPackageImpl> impl(new YUMPackageImpl(parsed));
+	    shared_ptr<YUMPackageImpl> impl(new YUMPackageImpl(source_r, parsed));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -382,12 +419,13 @@ namespace zypp
 	}
 
 	Selection::Ptr YUMSourceImpl::createGroup(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMGroupData & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMGroupImpl> impl(new YUMGroupImpl(parsed));
+	    shared_ptr<YUMGroupImpl> impl(new YUMGroupImpl(source_r, parsed));
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.groupId,
                                Edition::noedition,
@@ -406,12 +444,13 @@ namespace zypp
 	}
 
 	Pattern::Ptr YUMSourceImpl::createPattern(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMPatternData & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMPatternImpl> impl(new YUMPatternImpl(parsed));
+	    shared_ptr<YUMPatternImpl> impl(new YUMPatternImpl(source_r, parsed));
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.patternId,
                                Edition::noedition,
@@ -430,12 +469,13 @@ namespace zypp
 	}
 
 	Message::Ptr YUMSourceImpl::createMessage(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMPatchMessage & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMMessageImpl> impl(new YUMMessageImpl(parsed));
+	    shared_ptr<YUMMessageImpl> impl(new YUMMessageImpl(source_r, parsed));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -457,12 +497,13 @@ namespace zypp
 	}
 
 	Script::Ptr YUMSourceImpl::createScript(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMPatchScript & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMScriptImpl> impl(new YUMScriptImpl(parsed));
+	    shared_ptr<YUMScriptImpl> impl(new YUMScriptImpl(source_r, parsed));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -484,12 +525,13 @@ namespace zypp
 	}
 
 	Product::Ptr YUMSourceImpl::createProduct(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMProductData & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMProductImpl> impl(new YUMProductImpl(parsed, this));
+	    shared_ptr<YUMProductImpl> impl(new YUMProductImpl(source_r, parsed));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -511,12 +553,13 @@ namespace zypp
 	}
 
 	Patch::Ptr YUMSourceImpl::createPatch(
+	  Source & source_r,
 	  const zypp::parser::yum::YUMPatchData & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMPatchImpl> impl(new YUMPatchImpl(parsed, this));
+	    shared_ptr<YUMPatchImpl> impl(new YUMPatchImpl(source_r, parsed, *this));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,

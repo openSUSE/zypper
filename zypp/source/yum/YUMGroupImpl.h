@@ -15,6 +15,7 @@
 #include "zypp/detail/SelectionImplIf.h"
 #include "zypp/parser/yum/YUMParserData.h"
 #include "zypp/Edition.h"
+#include "zypp/Source.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -35,7 +36,10 @@ namespace zypp
       {
       public:
         /** Default ctor */
-        YUMGroupImpl( const zypp::parser::yum::YUMGroupData & parsed );
+        YUMGroupImpl(
+	  Source & source_r,
+	  const zypp::parser::yum::YUMGroupData & parsed
+	);
 	/** Is to be visible for user? */
 	virtual bool userVisible() const;
         /** Other requested groups */
@@ -66,6 +70,10 @@ namespace zypp
         bool _user_visible;
 	CapSet _optional_req;
 	CapSet _default_req;
+      private:
+	Source & _source;
+      public:
+	Source & source() const;
       };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum

@@ -34,9 +34,11 @@ namespace zypp
       /** Default ctor
       */
       YUMPatternImpl::YUMPatternImpl(
+	Source & source_r,
 	const zypp::parser::yum::YUMPatternData & parsed
       )
       : _user_visible(parsed.userVisible == "true")
+      , _source(source_r)
       {
 	CapFactory _f;
 	for (std::list<PackageReq>::const_iterator it = parsed.packageList.begin();
@@ -116,6 +118,9 @@ namespace zypp
 
       ByteCount YUMPatternImpl::size() const
       { return ResObjectImplIf::size(); }
+
+      Source & YUMPatternImpl::source() const
+      { return _source; }
 
 
     } // namespace yum

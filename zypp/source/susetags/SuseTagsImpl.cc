@@ -59,14 +59,18 @@ namespace zypp
       SuseTagsImpl::SuseTagsImpl( media::MediaAccess::Ptr & media_r, const Pathname & path_r )
       : SourceImpl(media_r, path_r)
       {
-        Pathname p = provideFile(path_r + "suse/setup/descr/packages");
+#warning TODO check if the source is of this type
+      }
+
+      void SuseTagsImpl::createResolvables(Source & source_r)
+      {
+        Pathname p = provideFile(_path + "suse/setup/descr/packages");
         DBG << "Going to parse " << p << endl;
         std::list<Package::Ptr> content( parsePackages( p ) );
         _store.insert( content.begin(), content.end() );
         DBG << "SuseTagsImpl (fake) from " << p << ": "
             << content.size() << " packages" << endl;
       }
-
       ///////////////////////////////////////////////////////////////////
       //
       //	METHOD NAME : SuseTagsImpl::~SuseTagsImpl

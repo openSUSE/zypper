@@ -35,8 +35,10 @@ namespace zypp
       /** Default ctor
       */
       YUMScriptImpl::YUMScriptImpl(
+	Source & source_r,
 	const zypp::parser::yum::YUMPatchScript & parsed
       )
+      : _source(source_r)
       {
 	_do_script = parsed.do_script;
 	_undo_script = parsed.undo_script;
@@ -72,6 +74,11 @@ namespace zypp
 
       Vendor YUMScriptImpl::instSrcVendor() const
       { return ResObjectImplIf::instSrcVendor(); }
+
+      Source & YUMScriptImpl::source() const
+      { return _source; }
+
+
 
     } // namespace yum
     /////////////////////////////////////////////////////////////////

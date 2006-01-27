@@ -43,8 +43,8 @@ namespace zypp
       bool ResObjectImplIf::providesSources() const
       { return false; }
 
-      Source ResObjectImplIf::source() const
-      { return SourceFactory().createFrom(source::SourceImpl::nullimpl()); }
+      Source & ResObjectImplIf::source() const
+      { return Source::nullimpl(); }
 
       Label ResObjectImplIf::instSrcLabel() const
       { return Label(); }

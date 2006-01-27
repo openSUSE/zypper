@@ -21,6 +21,7 @@
 
 #include "zypp/Pathname.h"
 #include "zypp/media/MediaAccess.h"
+#include "zypp/Source.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -47,6 +48,7 @@ namespace zypp
     public:
       /** Ctor, FIXME it is here only because of target storage, then make it private */
       SourceImpl()
+      : _res_store_initialized(true) // in case of null source, nothing to read
       {}
       /** Ctor. */
       SourceImpl(media::MediaAccess::Ptr & media_r,
@@ -60,8 +62,7 @@ namespace zypp
     public:
 
       /** All resolvables provided by this source. */
-      const ResStore & resolvables() const
-      { return _store; }
+      const ResStore & resolvables(Source & source_r);
 
       /** Provide a file to local filesystem */
       const Pathname provideFile(const Pathname & file,
@@ -97,6 +98,10 @@ namespace zypp
     private:
       /** Null implementation */
       static SourceImpl_Ptr _nullimpl;
+      /** ResStore initialized? */
+      bool _res_store_initialized;
+      /** Fill in the ResStore */
+      virtual void createResolvables(Source & source_r);
     };
     ///////////////////////////////////////////////////////////////////
 

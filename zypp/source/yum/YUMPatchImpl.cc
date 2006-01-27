@@ -43,9 +43,11 @@ namespace zypp
        * \bug CANT BE CONSTUCTED THAT WAY ANYMORE
       */
       YUMPatchImpl::YUMPatchImpl(
+	Source & source_r,
 	const zypp::parser::yum::YUMPatchData & parsed,
-	YUMSourceImpl * src
+	YUMSourceImpl & srcimpl_r
       )
+      : _source(source_r)
       {
 	_patch_id = parsed.patchId;
         _timestamp = atol(parsed.timestamp.c_str());
@@ -87,21 +89,21 @@ namespace zypp
             case YUMPatchAtom::Package: {
               shared_ptr<YUMPatchPackage> package_data
                 = dynamic_pointer_cast<YUMPatchPackage>(*it);
-              Package::Ptr package = src->createPackage(*package_data);
+              Package::Ptr package = srcimpl_r.createPackage(_source, *package_data);
               _atoms.push_back(package);
               break;
             }
             case YUMPatchAtom::Message: {
               shared_ptr<YUMPatchMessage> message_data
                 = dynamic_pointer_cast<YUMPatchMessage>(*it);
-              Message::Ptr message = src->createMessage(*message_data);
+              Message::Ptr message = srcimpl_r.createMessage(_source, *message_data);
               _atoms.push_back(message);
               break;
             }
             case YUMPatchAtom::Script: {
               shared_ptr<YUMPatchScript> script_data
                 = dynamic_pointer_cast<YUMPatchScript>(*it);
-              Script::Ptr script = src->createScript(*script_data);
+              Script::Ptr script = srcimpl_r.createScript(_source, *script_data);
               _atoms.push_back(script);
               break;
             }
@@ -250,6 +252,9 @@ namespace zypp
           // TODO mark the resolvable to be or not to be freshed
         }
       }
+
+      Source & YUMPatchImpl::source() const
+      { return _source; }
 
     } // namespace yum
     /////////////////////////////////////////////////////////////////
