@@ -69,7 +69,6 @@ namespace zypp
 
     /** \name Deprecated. */
     //@{
-    void deprecatedSetDeps( const Dependencies & val_r );
     void injectProvides( const Capability & cap_r );
     void injectRequires( const Capability & cap_r );
     //@}

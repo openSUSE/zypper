@@ -80,10 +80,6 @@ namespace zypp
   void Resolvable::injectRequires( const Capability & cap_r )
   { return _pimpl->injectRequires( cap_r ); }
 
-
-  void Resolvable::deprecatedSetDeps( const Dependencies & val_r )
-  { _pimpl->deprecatedSetDeps( val_r ); }
-
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

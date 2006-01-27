@@ -66,16 +66,6 @@ namespace zypp
 
     /** \name Deprecated. */
     //@{
-    void deprecatedSetDeps( const Dependencies & val_r )
-    {
-      _deps = val_r;
-      // assert self provides
-      _deps[Dep::PROVIDES].insert( CapFactory()
-                             .parse( _kind, _name, Rel::EQ, _edition ) );
-      // assert all prerequires are in requires too
-      _deps[Dep::REQUIRES].insert( _deps[Dep::PREREQUIRES].begin(),
-                                   _deps[Dep::PREREQUIRES].end() );
-    }
     void injectProvides( const Capability & cap_r )
     { _deps[Dep::PROVIDES].insert( cap_r ); }
     void injectRequires( const Capability & cap_r )
