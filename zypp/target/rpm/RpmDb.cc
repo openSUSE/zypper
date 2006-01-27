@@ -1895,43 +1895,43 @@ RpmDb::checkPackageResult2string(unsigned code)
 	return string(_("Ok"))+eol;
 
     //translator: these are different kinds of how an rpm package can be broken
-    msg = _("Package is not OK for the following reasons:");
+    msg = _("The package is not OK for the following reasons:");
     msg += eol;
 
     if(code&CHK_INCORRECT_VERSION)
     {
 	msg += bol;
-	msg+=_("Package contains different version than expected");
+	msg+=_("The package contains different version than expected");
 	msg += eol;
     }
     if(code&CHK_INCORRECT_FILEMD5)
     {
 	msg += bol;
-	msg+=_("Package file has incorrect MD5 sum");
+	msg+=_("The package file has incorrect MD5 sum");
 	msg += eol;
     }
     if(code&CHK_GPGSIG_MISSING)
     {
 	msg += bol;
-	msg+=_("Package is not signed");
+	msg+=_("The package is not signed");
 	msg += eol;
     }
     if(code&CHK_MD5SUM_MISSING)
     {
 	msg += bol;
-	msg+=_("Package has no MD5 sum");
+	msg+=_("The package has no MD5 sum");
 	msg += eol;
     }
     if(code&CHK_INCORRECT_GPGSIG)
     {
 	msg += bol;
-	msg+=_("Package has incorrect signature");
+	msg+=_("The package has incorrect signature");
 	msg += eol;
     }
     if(code&CHK_INCORRECT_PKGMD5)
     {
 	msg += bol;
-	msg+=_("Package archive has incorrect MD5 sum");
+	msg+=_("The package archive has incorrect MD5 sum");
 	msg += eol;
     }
     if(code&CHK_OTHER_FAILURE)

@@ -53,7 +53,7 @@ namespace zypp
 	  ostringstream mis_str;
 	  mis_str << missing._missing;
 	  // Translator: 1.%s = name of package,patch,...; 2.%s = dependency
-          os << str::form (_("%s missing requirement %s"),
+          os << str::form (_("%s is missing the requirement %s"),
 			    info_str.str().c_str(),
 			    mis_str.str().c_str());
 	  return os;

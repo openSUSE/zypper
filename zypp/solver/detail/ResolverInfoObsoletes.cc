@@ -51,7 +51,7 @@ namespace zypp
 	  info_str << info;
 
 	  // Translator: all.%s = name of package,patch,....
-	  os << str::form (_("%s replaced by %s"),
+	  os << str::form (_("%s is replaced by %s"),
 			   info_str.str().c_str(),
 			   obsoletes.itemsToString(false).c_str());
 	  return os;
