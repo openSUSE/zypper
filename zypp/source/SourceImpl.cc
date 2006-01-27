@@ -42,11 +42,13 @@ namespace zypp
     //	METHOD TYPE : Ctor
     //
     SourceImpl::SourceImpl(media::MediaAccess::Ptr & media_r,
-                           const Pathname & path_r)
+                           const Pathname & path_r,
+			   const std::string & name_r)
     : _media(media_r)
     , _path(path_r)
     , _enabled(true)
     , _res_store_initialized(false)
+    , _name (name_r)
     {}
 
     ///////////////////////////////////////////////////////////////////

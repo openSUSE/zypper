@@ -13,6 +13,7 @@
 #define ZYPP_SOURCE_SOURCEIMPL_H
 
 #include <iosfwd>
+#include <string>
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
@@ -52,7 +53,8 @@ namespace zypp
       {}
       /** Ctor. */
       SourceImpl(media::MediaAccess::Ptr & media_r,
-                 const Pathname & path_r = "/");
+                 const Pathname & path_r = "/",
+		 const std::string & name = "");
       /** Dtor. */
       virtual ~SourceImpl();
 
@@ -92,6 +94,9 @@ namespace zypp
       void disable()
       { _enabled = false; }
 
+      std::string name (void) const
+      { return _name; }
+
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const
       { return str << "SourceImpl"; }
@@ -105,6 +110,8 @@ namespace zypp
       Pathname _path;
       /** The source is enabled */
       bool _enabled;
+      /** (user defined) name of the source */
+      std::string _name;
     private:
       /** Null implementation */
       static SourceImpl_Ptr _nullimpl;

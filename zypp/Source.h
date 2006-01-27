@@ -13,6 +13,7 @@
 #define ZYPP_SOURCE_H
 
 #include <iosfwd>
+#include <string>
 
 #include "zypp/base/PtrTypes.h"
 
@@ -84,6 +85,8 @@ namespace zypp
     void enable();
 
     void disable();
+
+    std::string name (void) const;
   };
   ///////////////////////////////////////////////////////////////////
 
