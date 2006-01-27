@@ -87,7 +87,7 @@ namespace zypp
   void Source::disable()
   { _pimpl->disable(); }
 
-  string name (void) const
+  string Source::name (void) const
   { _pimpl->name(); }
 
 
