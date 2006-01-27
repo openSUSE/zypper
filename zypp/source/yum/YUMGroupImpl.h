@@ -40,8 +40,9 @@ namespace zypp
 	  Source & source_r,
 	  const zypp::parser::yum::YUMGroupData & parsed
 	);
-	/** Is to be visible for user? */
-	virtual bool userVisible() const;
+	
+	virtual ~YUMGroupImpl();
+
         /** Other requested groups */
 	virtual CapSet optionalReq() const;
 	/** Requested packages */

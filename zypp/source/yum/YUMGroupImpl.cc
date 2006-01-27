@@ -85,6 +85,10 @@ namespace zypp
 // as _summary        std::list<multilang> name;
 // _description
       }
+      
+      YUMGroupImpl::~YUMGroupImpl()
+      {}
+
       /** Is to be visible for user? */
       bool YUMGroupImpl::visible() const {
 	return _user_visible;
