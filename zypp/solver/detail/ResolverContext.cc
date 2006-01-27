@@ -32,7 +32,8 @@
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
-
+#include "zypp/Package.h"
+#include "zypp/Resolvable.h"
 
 #include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/Helper.h"
@@ -150,11 +151,14 @@ ResolverContext::install (PoolItem_Ref item, bool is_soft, int other_penalty)
 	item.status().setToBeInstalled();
 
     if (status.isUninstalled()) {
-
-#warning Needs size information
 #if 0
-	_download_size += item->fileSize();
-	_install_size += item->installedSize();
+	Package::constPtr pkg = asKind<Package>(item.resolvable());	// try to access it as a package
+	if (pkg) {							// if its !=NULL, get size information
+
+	    _download_size += pkg->archivesize();
+	    _install_size += pkg->sourcesize();
+
+	}
 #endif
 #warning Needs source backref
 #if 0
@@ -201,16 +205,18 @@ ResolverContext::upgrade (PoolItem_Ref item, PoolItem_Ref old_item, bool is_soft
     }
 
     if (status.isUninstalled()) {
-
-#warning Needs size information
 #if 0
-	_download_size += item->fileSize();
+	Package::constPtr pkg = asKind<Package>(item.resolvable());	// try to access it as a package
+	if (pkg) {							// if its !=NULL, get size information
+
+	    _download_size += pkg->archivesize();
+	    _install_size += pkg->sourcesize();
 
 	// FIXME: Incomplete
 	// We should change installed_size to reflect the difference in
 	//   installed size between the old and new versions.
+	}
 #endif
-
 #warning Needs source backref
 #if 0
 	int priority;
@@ -275,7 +281,12 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
     }
 
     if (status.isInstalled()) {
-	/* FIXME: incomplete */
+#if 0
+	Package::constPtr pkg = asKind<Package>(item.resolvable());	// try to access it as a package
+	if (pkg) {							// if its !=NULL, get size information
+	    _install_size -= pkg->sourcesize();
+	}
+#endif
     }
 
     return true;
