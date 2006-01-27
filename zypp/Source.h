@@ -87,6 +87,12 @@ namespace zypp
     void disable();
 
     std::string alias (void) const;
+
+    /** Conversion to bool to allow pointer style tests
+     *  for nonNULL \ref resolvable. */
+    operator bool() const
+    { return _pimpl; }
+
   };
   ///////////////////////////////////////////////////////////////////
 
