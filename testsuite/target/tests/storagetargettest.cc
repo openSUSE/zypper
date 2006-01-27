@@ -9,6 +9,8 @@
 
 #include <boost/iostreams/device/file_descriptor.hpp>
 
+#include <zypp/SourceFactory.h>
+
 #include <zypp/base/Logger.h>
 ///////////////////////////////////////////////////////////////////
 
@@ -44,7 +46,13 @@ using namespace zypp::storage;
 int main()
 {
 	INT << "===[START]==========================================" << endl;
-	YUMSourceImpl src;
+
+	YUMSourceImpl srcimpl;
+
+    Source::Impl_Ptr impl (&srcimpl );
+    SourceFactory _f;
+    Source src = _f.createFrom( impl );
+
 	Patch::Ptr patch1;
 	
 	//YUMPatchParser iter(cin,"");
@@ -52,7 +60,7 @@ int main()
 	YUMPatchParser iter(patch_file,"");
 	for (; !iter.atEnd(); ++iter)
 	{
-		patch1 = src.createPatch(**iter);
+		patch1 = srcimpl.createPatch(src, **iter);
 	}
 	if (iter.errorStatus())
 		throw *iter.errorStatus();
