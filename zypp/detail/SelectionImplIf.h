@@ -38,19 +38,19 @@ namespace zypp
     public:
 
         /** */
-        virtual Label summary() const = 0;
+        virtual Label summary() const PURE_VIRTUAL;
 
         /** */
-        virtual Text description() const = 0;
+        virtual Text description() const PURE_VIRTUAL;
 
         /** */
-	virtual Text category() const = 0;
+	virtual Text category() const PURE_VIRTUAL;
 
         /** */
-	virtual bool visible() const = 0;
+	virtual bool visible() const PURE_VIRTUAL;
     
         /** */
-	virtual Text order() const = 0;
+	virtual Text order() const PURE_VIRTUAL;
 #if 0
       virtual std::list<std::string> suggests() const;
       virtual std::list<std::string> recommends() const;
