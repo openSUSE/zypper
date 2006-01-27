@@ -82,6 +82,18 @@ namespace zypp
     std::list<PatchRpm> patchRpms() const;
     /** */
     std::list<DeltaRpm> deltaRpms() const;
+    /**
+     * \throws Exception
+     */
+    Pathname getPlainRpm() const;
+    /**
+     * \throws Exception
+     */
+    Pathname getDeltaRpm(BaseVersion & base_r) const;
+    /**
+     * \throws Exception
+     */
+    Pathname getPatchRpm(BaseVersion & base_r) const;
 
     // data here:
  

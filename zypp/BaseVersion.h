@@ -38,6 +38,9 @@ namespace zypp
     Date _buildtime;
   };
 
+  inline bool operator==(const BaseVersion & bv1, const BaseVersion & bv2)
+  { return bv1.edition() == bv2.edition(); }
+
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // ZYPP_BASEVERSION_H

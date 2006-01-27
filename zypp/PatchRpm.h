@@ -37,12 +37,12 @@ namespace zypp
     , _buildtime(buildtime)
     , _base_versions(base_versions)
     {}
-    Arch arch() { return _arch; }
-    Pathname filename() { return _filename; }
-    ByteCount downloadsize() { return _downloadsize; }
-    CheckSum checksum() { return _checksum; }
-    Date buildtime() { return _buildtime; }
-    std::list<BaseVersion> baseVersions() { return _base_versions; }
+    Arch arch() const { return _arch; }
+    Pathname filename() const { return _filename; }
+    ByteCount downloadsize() const { return _downloadsize; }
+    CheckSum checksum() const { return _checksum; }
+    Date buildtime() const { return _buildtime; }
+    std::list<BaseVersion> baseVersions() const { return _base_versions; }
   private:
     Arch _arch;
     Pathname _filename;

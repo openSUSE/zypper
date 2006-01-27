@@ -37,12 +37,12 @@ namespace zypp
     , _buildtime(buildtime)
     , _base_version(base_version)
     {}
-    Arch arch() { return _arch; }
-    Pathname filename() { return _filename; }
-    ByteCount downloadsize() { return _downloadsize; }
-    CheckSum checksum() { return _checksum; }
-    Date buildtime() { return _buildtime; }
-    BaseVersion baseVersion() { return _base_version; }
+    Arch arch() const { return _arch; }
+    Pathname filename() const { return _filename; }
+    ByteCount downloadsize() const { return _downloadsize; }
+    CheckSum checksum() const { return _checksum; }
+    Date buildtime() const { return _buildtime; }
+    BaseVersion baseVersion() const { return _base_version; }
   private:
     Arch _arch;
     Pathname _filename;
