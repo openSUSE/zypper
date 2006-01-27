@@ -10,7 +10,6 @@
  *
  * Interface to gettext.
  *
- * \todo Use config.h for TEXTDOMAIN/LOCALEDIR.
 */
 #ifndef ZYPP_BASE_GETTEXT_H
 #define ZYPP_BASE_GETTEXT_H
