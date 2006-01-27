@@ -1,0 +1,286 @@
+# SuSE-Linux-Package-Selection 10.0-61.noarch -- (c) 2004 SuSE Linux AG
+# Needs parser version 4.0 or greater
+# generated on Mon Sep 12 10:40:12 UTC 2005
+
+=Ver: 4.0
+
+=Sel:  Office 10.0 61 noarch
+
+=Sum: Office Applications
+=Sum.bg: Офис приложения
+=Sum.cs: Kancelářské aplikace
+=Sum.da: Kontorprogrammer
+=Sum.de: Büroanwendungen
+=Sum.el: Εφαρμογές Γραφείου
+=Sum.en: Office Applications
+=Sum.es: Aplicaciones ofimáticas
+=Sum.fr: Applications bureautiques
+=Sum.gl: Office Applications
+=Sum.hu: Irodai alkalmazások
+=Sum.it: Applicazioni Office
+=Sum.ja: オフィス・アプリケーション
+=Sum.ko: 사무 응용프로그램
+=Sum.lt: Biuro programos
+=Sum.nl: Kantoorprogramma's
+=Sum.no: Kantoorprogramma's
+=Sum.pl: Aplikacje biurowe
+=Sum.pt: Aplicações de Escritório
+=Sum.pt_BR: Aplicações Office
+=Sum.ru: Офисные приложения
+=Sum.sk: Kancelárske aplikácie
+=Sum.sl: Pisarniške aplikacije
+=Sum.sv: Office-program
+=Sum.zh_CN: 办公应用程序
+=Sum.zh_TW: 辦公室應用程式
+
+=Cat: addon
+
+=Vis: true
+
+=Ord: 15
+
++Ins:
+OpenOffice_org
+aspell
+aspell-32bit
+java-1_4_2-sun
+myspell-american
+myspell-british
+planmaker
+sesam_srv
+startup-notification
+startup-notification-32bit
+taskjuggler-kde
+textmaker
+unixODBC
+unixODBC-32bit
+wine
+-Ins:
+
++Ins.af:
+OpenOffice_org-af
+myspell-african
+-Ins.af:
+
++Ins.ar:
+OpenOffice_org-ar
+-Ins.ar:
+
++Ins.be:
+OpenOffice_org-be-BY
+-Ins.be:
+
++Ins.bg:
+OpenOffice_org-bg
+myspell-bulgarian
+-Ins.bg:
+
++Ins.ca:
+OpenOffice_org-ca
+myspell-catalan
+-Ins.ca:
+
++Ins.cs:
+OpenOffice_org-cs
+myspell-czech
+-Ins.cs:
+
++Ins.cy:
+OpenOffice_org-cy
+myspell-welsh
+-Ins.cy:
+
++Ins.da:
+OpenOffice_org-da
+myspell-danish
+-Ins.da:
+
++Ins.de:
+OpenOffice_org-de
+OpenOffice_org-de-templates
+myspell-german
+-Ins.de:
+
++Ins.default:
+myspell-american
+-Ins.default:
+
++Ins.el:
+OpenOffice_org-el
+myspell-greek
+-Ins.el:
+
++Ins.en_GB:
+OpenOffice_org-en-GB
+-Ins.en_GB:
+
++Ins.en_US:
+myspell-american
+-Ins.en_US:
+
++Ins.es:
+OpenOffice_org-es
+myspell-catalan
+myspell-mexican
+myspell-spanish
+-Ins.es:
+
++Ins.et:
+OpenOffice_org-et
+-Ins.et:
+
++Ins.fi:
+OpenOffice_org-fi
+-Ins.fi:
+
++Ins.fo:
+myspell-faroese
+-Ins.fo:
+
++Ins.fr:
+OpenOffice_org-fr
+myspell-french
+-Ins.fr:
+
++Ins.ga:
+myspell-irish
+-Ins.ga:
+
++Ins.gl:
+myspell-galician
+-Ins.gl:
+
++Ins.gu:
+OpenOffice_org-gu-IN
+-Ins.gu:
+
++Ins.he:
+myspell-hebrew
+-Ins.he:
+
++Ins.hr:
+OpenOffice_org-hr
+myspell-croatian
+-Ins.hr:
+
++Ins.hu:
+OpenOffice_org-hu
+myspell-hungarian
+-Ins.hu:
+
++Ins.id:
+myspell-indonese
+-Ins.id:
+
++Ins.it:
+OpenOffice_org-it
+myspell-italian
+-Ins.it:
+
++Ins.ja:
+OpenOffice_org-ja
+-Ins.ja:
+
++Ins.ko:
+OpenOffice_org-ko
+-Ins.ko:
+
++Ins.lt:
+myspell-lithuanian
+-Ins.lt:
+
++Ins.ms:
+myspell-malay
+-Ins.ms:
+
++Ins.nb:
+OpenOffice_org-nb
+myspell-norsk-bokmaal
+-Ins.nb:
+
++Ins.nl:
+OpenOffice_org-nl
+myspell-dutch
+-Ins.nl:
+
++Ins.nn:
+OpenOffice_org-nn
+myspell-norsk-nynorsk
+-Ins.nn:
+
++Ins.pa:
+OpenOffice_org-pa-IN
+-Ins.pa:
+
++Ins.pl:
+OpenOffice_org-pl
+myspell-polish
+-Ins.pl:
+
++Ins.pt:
+OpenOffice_org-pt
+myspell-portuguese
+-Ins.pt:
+
++Ins.pt_BR:
+OpenOffice_org-pt-BR
+myspell-brazilian
+-Ins.pt_BR:
+
++Ins.ro:
+myspell-romanian
+-Ins.ro:
+
++Ins.ru:
+OpenOffice_org-ru
+myspell-russian
+-Ins.ru:
+
++Ins.rw:
+myspell-kinyarwanda
+-Ins.rw:
+
++Ins.sk:
+OpenOffice_org-sk
+myspell-slovak
+-Ins.sk:
+
++Ins.sl:
+OpenOffice_org-sl
+myspell-slovene
+-Ins.sl:
+
++Ins.sv:
+OpenOffice_org-sv
+myspell-swedish
+-Ins.sv:
+
++Ins.tr:
+OpenOffice_org-tr
+-Ins.tr:
+
++Ins.uk:
+myspell-ukrainian
+-Ins.uk:
+
++Ins.vi:
+OpenOffice_org-vi
+-Ins.vi:
+
++Ins.xh:
+OpenOffice_org-xh
+-Ins.xh:
+
++Ins.zh_CN:
+OpenOffice_org-zh-CN
+-Ins.zh_CN:
+
++Ins.zh_TW:
+OpenOffice_org-zh-TW
+-Ins.zh_TW:
+
++Ins.zu:
+OpenOffice_org-zu
+myspell-zulu
+-Ins.zu:
+

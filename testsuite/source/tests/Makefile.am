@@ -8,3 +8,6 @@ LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
 
 #yum_SOURCES = yum.cc
 
+noinst_PROGRAMS = susetagstest
+susetagstest_SOURCES = SuseTagsTest.cc
+
