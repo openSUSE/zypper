@@ -42,6 +42,35 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
+    /** selection summary (FIXME: localized) */
+    Label summary() const
+    {
+	return pimpl().summary();    
+    }
+
+    /** */
+    Text description() const
+    {
+	return pimpl().description();    
+    }
+
+    /** selection category */
+    Text category() const
+    {
+	return pimpl().category();    
+    }
+
+    /** selection visibility (for hidden selections) */
+    bool visible() const
+    {
+	return pimpl().visible();    
+    }
+
+    /** selection presentation order */
+    Text order() const
+    {
+	return pimpl().order();    
+    }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

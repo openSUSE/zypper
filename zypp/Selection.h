@@ -35,8 +35,22 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
+    // data access:
+
+    /** selection summary (FIXME: localized) */
+    Label summary() const;
+
     /** */
-    // data here:
+    Text description() const;
+
+    /** selection category */
+    Text category() const;
+
+    /** selection visibility (for hidden selections) */
+    bool visible() const;
+
+    /** selection presentation order */
+    Text order() const;
 
   protected:
     /** Ctor */
