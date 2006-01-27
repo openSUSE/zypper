@@ -94,6 +94,9 @@ namespace zypp
   inline std::ostream & operator<<( std::ostream & str, const Source & obj )
   { return obj.dumpOn( str ); }
 
+  /** \relates Source  */
+  inline bool operator==( const Source & lhs, const Source & rhs )
+  { return !lhs.alias().empty() && !rhs.alias().empty() && lhs.alias() == rhs.alias(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

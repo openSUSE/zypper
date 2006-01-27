@@ -16,6 +16,8 @@
 #include "zypp/Resolvable.h"
 #include "zypp/CapFilters.h"
 
+#include "zypp/Source.h"
+
 #include "zypp/PoolItem.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -178,6 +180,22 @@ namespace zypp
       }
 
       std::string _name;
+    };
+
+
+    /** Select ResObject by source. */
+    struct BySource : public ResObjectFilterFunctor
+    {
+      BySource( const Source & source_r )
+      : _source( source_r )
+      {}
+
+      bool operator()( ResObject::constPtr p ) const
+      {
+        return p->source() == _source;
+      }
+
+      const Source & _source;
     };
 
 
