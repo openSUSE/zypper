@@ -48,8 +48,18 @@ namespace zypp
   Text ResObject::description() const
   { return pimpl().description(); }
 
+  Text ResObject::insnotify() const
+  { return pimpl().insnotify(); }
+
+  Text ResObject::delnotify() const
+  { return pimpl().delnotify(); }
+
+  ByteCount ResObject::size() const
+  { return pimpl().size(); }
+
   Source & ResObject::source() const
   { return pimpl().source(); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

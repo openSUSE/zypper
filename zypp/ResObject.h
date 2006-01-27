@@ -23,6 +23,7 @@ namespace zypp
     class ResObjectImplIf;
   }
   class Source;
+  class ByteCount;
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -42,8 +43,19 @@ namespace zypp
   public:
     /** */
     Label summary() const;
+
     /** */
     Text description() const;
+
+    /** */
+    Text insnotify() const;
+
+    /** */
+    Text delnotify() const;
+
+    /** */
+    ByteCount size() const;
+
     /** */
     zypp::Source & source() const;
 
