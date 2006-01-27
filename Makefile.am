@@ -18,6 +18,7 @@ SUBDIRS = po 	zypp testsuite $(SUB_ZMD)
 package: dist
 
 
-ACLOCAL_AMFLAGS = -I m4
+#ACLOCAL_AMFLAGS = -I m4
+ACLOCAL_AMFLAGS =
 
 EXTRA_DIST = config.rpath mkinstalldirs
