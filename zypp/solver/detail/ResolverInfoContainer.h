@@ -47,7 +47,7 @@ class ResolverInfoContainer : public ResolverInfo {
 
   protected:
 
-    ResolverInfoContainer (ResolverInfoType type, PoolItem_Ref initial_item, int priority, PoolItem_Ref child = NULL);
+    ResolverInfoContainer (ResolverInfoType type, PoolItem_Ref initial_item, int priority, PoolItem_Ref child);
 
   public:
     virtual ~ResolverInfoContainer();
