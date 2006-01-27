@@ -9,7 +9,9 @@ sourceincludedir = $(pkgincludedir)/source
 
 sourceinclude_HEADERS =	\
 	PackagesParser.h\
-	SuseTagsImpl.h
+	SuseTagsImpl.h \
+	SuseTagsSelectionImpl.h \
+	SelectionSelFileParser.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_source_susetags.la
 
@@ -17,7 +19,9 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_source_susetags.la
 
 lib@PACKAGE@_source_susetags_la_SOURCES = \
 	PackagesParser.cc	\
-	SuseTagsImpl.cc
+	SuseTagsImpl.cc \
+	SuseTagsSelectionImpl.cc \
+	SelectionSelFileParser.cc
 
 lib@PACKAGE@_source_susetags_la_LIBADD =
 
