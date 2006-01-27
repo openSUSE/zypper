@@ -22,8 +22,8 @@ int main( int argc, char * argv[] )
   INT << "===[START]==========================================" << endl;
   SourceFactory _f;
   Pathname p = "/";
-  Url url = Url("ftp://cml.suse.cz/netboot/find/SUSE-10.1-CD-OSS-i386-Beta1-CD1");
-//  Url url = Url("http://lide.suse.cz/~~jsrain/devel.jsrain");
+//  Url url = Url("ftp://cml.suse.cz/netboot/find/SUSE-10.1-CD-OSS-i386-Beta1-CD1");
+  Url url = Url("http://lide.suse.cz/~~jsrain/devel.jsrain");
 //  Url url = Url("dir:/local/zypp/libzypp/devel/devel.jsrain");
   Source s = _f.createFrom( url, p );
   ResStore store = s.resolvables();
