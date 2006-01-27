@@ -52,7 +52,7 @@ namespace storage
 class XMLFilesBackend::Private
 {
   public:
-  XMLFilesBackend::Private::Private()
+  Private()
   : source(Source::nullimpl())
   { }
   bool randomFileName;
