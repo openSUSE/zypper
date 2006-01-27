@@ -176,6 +176,10 @@ AC_CHECK_HEADERS([rpm/rpmlib.h],
 AC_CHECK_HEADERS([popt.h],
         [],
         AC_MSG_ERROR([popt header not found. please install popt-devel.]))
+
+dnl internationalization macros
+AM_GNU_GETTEXT
+
 dnl ==================================================
 dnl checks for typedefs
 dnl ==================================================
@@ -188,7 +192,7 @@ dnl ==================================================
 dnl checks for system services
 dnl ==================================================
 dnl AC_CONFIG_FILES([FILE...])
-AC_OUTPUT(	\
+AC_OUTPUT(	 po/Makefile.in\
 	Makefile			\
 	devel/Makefile			\
 	devel/genclass			\

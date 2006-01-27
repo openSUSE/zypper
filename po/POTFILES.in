@@ -1,0 +1,19 @@
+# List of source files which contain translatable strings.
+./zypp/media/Mount.cc
+./zypp/LanguageCode.cc
+./zypp/target/rpm/RpmDb.cc
+./zypp/solver/detail/ResolverInfoObsoletes.cc
+./zypp/solver/detail/Resolver_problems.cc
+./zypp/solver/detail/ProblemSolutionIgnore.cc
+./zypp/solver/detail/ProblemSolutionUninstall.cc
+./zypp/solver/detail/QueueItemRequire.cc
+./zypp/solver/detail/ResolverInfoMissingReq.cc
+./zypp/solver/detail/ResolverInfoConflictsWith.cc
+./zypp/solver/detail/ResolverInfoMisc.cc
+./zypp/solver/detail/ResolverInfo.cc
+./zypp/solver/detail/ProblemSolutionInstall.cc
+./zypp/solver/detail/ResolverInfoDependsOn.cc
+./zypp/solver/detail/ResolverInfoNeededBy.cc
+./zypp/solver/detail/ResolverInfoChildOf.cc
+./zypp/solver/detail/ProblemSolutionUnlock.cc
+./zypp/CountryCode.cc

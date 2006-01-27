@@ -9,7 +9,7 @@ if BUILD_ZMD
 else
   SUB_ZMD=
 endif
-SUBDIRS =	zypp testsuite $(SUB_ZMD)
+SUBDIRS = po 	zypp testsuite $(SUB_ZMD)
 
 ## ##################################################
 
@@ -17,3 +17,7 @@ SUBDIRS =	zypp testsuite $(SUB_ZMD)
 
 package: dist
 
+
+ACLOCAL_AMFLAGS = -I m4
+
+EXTRA_DIST = config.rpath mkinstalldirs
