@@ -40,7 +40,6 @@ pkginclude_HEADERS = NeedAType.h \
 	ResPoolManager.h\
 	Package.h	\
 	Pathname.h	\
-	Selection.h	\
 	Source.h	\
 	SourceFactory.h	\
 	SourceManager.h	\
@@ -101,7 +100,6 @@ lib@PACKAGE@_la_SOURCES = \
 	ResPoolManager.cc\
 	Package.cc	\
 	Pathname.cc	\
-	Selection.cc	\
 	Source.cc	\
 	SourceFactory.cc\
 	SourceManager.cc\

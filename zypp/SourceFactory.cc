@@ -95,7 +95,7 @@ namespace zypp
     media->close();
   }
 
-  Source SourceFactory::createFrom( const Url & url_r, const Pathname & path_r )
+  Source SourceFactory::createFrom( const Url & url_r, const Pathname & path_r, const std::string & alias_r )
   {
     if (! url_r.isValid())
       ZYPP_THROW( Exception("Empty URL passed to SourceFactory") );
@@ -107,7 +107,7 @@ namespace zypp
     try
     {
       MIL << "Trying the YUM source" << endl;
-      Source::Impl_Ptr impl = new yum::YUMSourceImpl(media, path_r);
+      Source::Impl_Ptr impl = new yum::YUMSourceImpl(media, path_r, alias_r);
       MIL << "Found the YUM source" << endl;
       return Source(impl);
     }
@@ -119,7 +119,7 @@ namespace zypp
     try
     {
       MIL << "Trying the SUSE tags source" << endl;
-      Source::Impl_Ptr impl = new susetags::SuseTagsImpl(media, path_r);
+      Source::Impl_Ptr impl = new susetags::SuseTagsImpl(media, path_r, alias_r);
       MIL << "Found the SUSE tags source" << endl;
       return Source(impl);
     }

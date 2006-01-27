@@ -46,7 +46,7 @@ namespace zypp
       {
         static std::ostream & outStr( getenv("ZYPP_NOLOG") ? noStream()
                                                            : std::cerr );
-        return outStr
+        return cerr
                  << str::form( "<%d> [%s] %s(%s):%d ",
                                level_r, group_r,
                                file_r, func_r, line_r );

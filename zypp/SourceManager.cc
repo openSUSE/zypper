@@ -52,9 +52,9 @@ namespace zypp
   SourceManager::~SourceManager()
   {}
 
-  unsigned SourceManager::addSource(const Url & url_r, const Pathname & path_r)
+  unsigned SourceManager::addSource(const Url & url_r, const Pathname & path_r, const std::string & name_r)
   {
-    Source src = SourceFactory().createFrom(url_r, path_r);
+    Source src = SourceFactory().createFrom(url_r, path_r, name_r);
     RW_pointer<Source> src_ptr = RW_pointer<Source>(new Source(src));
     _sources[_next_id] = src_ptr;
     return _next_id++;
@@ -73,6 +73,17 @@ namespace zypp
     if (it != _sources.end())
     {
       _sources.erase(it);
+    }
+  }
+
+  void SourceManager::removeSource(const std::string & alias_r)
+  {
+    for (SourceMap::iterator it = _sources.begin(); it != _sources.end(); ++it)
+    {
+	if (it->second->alias() == alias_r) {
+	    _sources.erase(it);
+	    break;
+	}
     }
   }
 
@@ -104,6 +115,22 @@ namespace zypp
       ZYPP_THROW(Exception("Unknown source ID"));
     }
     return *(it->second);
+  }
+
+  Source & SourceManager::findSource(const std::string & alias_r)
+  {
+    SourceMap::iterator it;
+    for (it = _sources.begin(); it != _sources.end(); ++it)
+    {
+	if (it->second->alias() == alias_r) {
+	    return *(it->second);
+	    break;
+	}
+	
+    }
+    ZYPP_THROW(Exception("Unknown source name '"+alias_r+"'"));
+    /*NOTREACHED*/
+    return *(it->second); // just to keep gcc happy
   }
 
   /////////////////////////////////////////////////////////////////

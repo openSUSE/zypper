@@ -86,7 +86,7 @@ namespace zypp
 
     void disable();
 
-    std::string name (void) const;
+    std::string alias (void) const;
   };
   ///////////////////////////////////////////////////////////////////
 

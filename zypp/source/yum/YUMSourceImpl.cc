@@ -48,8 +48,9 @@ namespace zypp
       /** Default ctor
       */
       YUMSourceImpl::YUMSourceImpl(media::MediaAccess::Ptr & media_r,
-				   const Pathname & path_r)
-      : SourceImpl(media_r, path_r)
+				   const Pathname & path_r,
+				   const std::string & alias_r)
+      : SourceImpl(media_r, path_r, alias_r)
       {
        try {
 	// first read list of all files in the reposotory

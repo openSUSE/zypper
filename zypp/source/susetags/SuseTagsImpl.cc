@@ -56,8 +56,8 @@ namespace zypp
       //	METHOD NAME : SuseTagsImpl::SuseTagsImpl
       //	METHOD TYPE : Ctor
       //
-      SuseTagsImpl::SuseTagsImpl( media::MediaAccess::Ptr & media_r, const Pathname & path_r )
-      : SourceImpl(media_r, path_r)
+      SuseTagsImpl::SuseTagsImpl( media::MediaAccess::Ptr & media_r, const Pathname & path_r, const std::string & alias_r )
+      : SourceImpl(media_r, path_r, alias_r)
       {
 #warning TODO check if the source is of this type
       }

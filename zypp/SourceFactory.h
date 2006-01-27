@@ -13,6 +13,7 @@
 #define ZYPP_SOURCEFACTORY_H
 
 #include <iosfwd>
+#include <string>
 
 #include "zypp/base/PtrTypes.h"
 
@@ -51,7 +52,7 @@ namespace zypp
     /** Construct source from an implementation.
      * \throw EXCEPTION on fail
     */
-    Source createFrom( const Url & url_r, const Pathname & path_r = "/" );
+    Source createFrom( const Url & url_r, const Pathname & path_r = "/", const std::string & alias_r = "" );
 
   private:
     /** Implementation  */

@@ -54,7 +54,7 @@ namespace zypp
       /** Ctor. */
       SourceImpl(media::MediaAccess::Ptr & media_r,
                  const Pathname & path_r = "/",
-		 const std::string & name = "");
+		 const std::string & alias = "");
       /** Dtor. */
       virtual ~SourceImpl();
 
@@ -94,8 +94,8 @@ namespace zypp
       void disable()
       { _enabled = false; }
 
-      std::string name (void) const
-      { return _name; }
+      std::string alias (void) const
+      { return _alias; }
 
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const
@@ -110,8 +110,8 @@ namespace zypp
       Pathname _path;
       /** The source is enabled */
       bool _enabled;
-      /** (user defined) name of the source */
-      std::string _name;
+      /** (user defined) alias of the source */
+      std::string _alias;
     private:
       /** Null implementation */
       static SourceImpl_Ptr _nullimpl;

@@ -57,11 +57,18 @@ namespace zypp
     Source & findSource(const unsigned id);
     
     /**
+     * Find a source with a specified alias
+     *
+     * \throws Exception
+     */
+    Source & findSource(const std::string & alias_r);
+    
+    /**
      * Add a new source
      *
      * \throws Exception
      */
-    unsigned addSource(const Url & url_r, const Pathname & path_r = "/");
+    unsigned addSource(const Url & url_r, const Pathname & path_r = "/", const std::string & name_r = "");
 
     /**
      * Add a new source
@@ -71,11 +78,18 @@ namespace zypp
     unsigned addSource(Source & source_r);
 
     /**
-     * Remove an existing source
+     * Remove an existing source by ID
      *
      * \throws Exception
      */
     void removeSource(const unsigned id);
+
+    /**
+     * Remove an existing source by Alias
+     *
+     * \throws Exception
+     */
+    void removeSource(const std::string & alias_r);
 
     /**
      * Disable all registered sources
