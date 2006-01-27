@@ -7,7 +7,8 @@ SUBDIRS = hal rpm store
 
 targetincludedir = $(pkgincludedir)/target
 
-targetinclude_HEADERS =
+targetinclude_HEADERS =			\
+	TargetImpl.h
 
 ## ##################################################
 
@@ -15,7 +16,8 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_target.la
 
 ## ##################################################
 
-lib@PACKAGE@_target_la_SOURCES =
+lib@PACKAGE@_target_la_SOURCES =	\
+	TargetImpl.cc
 
 lib@PACKAGE@_target_la_LDFLAGS = @LIBZYPP_VERSION_INFO@
 

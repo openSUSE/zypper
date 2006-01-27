@@ -17,6 +17,7 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
+#include "zypp/Target.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -50,6 +51,21 @@ namespace zypp
     void addResolvables (const ResStore& store);
 
     void removeResolvables (const ResStore& store);
+
+    /**
+     * \throws Exception
+     */
+    Target_Ptr target() const;
+
+    /**
+     * \throws Exception
+     */
+    void initTarget(const Pathname & root);
+
+    /**
+     * \throws Exception
+     */
+    void finishTarget();
 
   protected:
     /** Dtor */

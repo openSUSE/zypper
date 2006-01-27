@@ -73,6 +73,18 @@ namespace zypp
     _pimpl->addResolvables (store);
   }
 
+  Target_Ptr ZYpp::target() const
+  { return _pimpl->target(); }
+
+  void ZYpp::initTarget(const Pathname & root)
+  { _pimpl->initTarget(root); }
+
+  void ZYpp::finishTarget()
+  { _pimpl->finishTarget(); }
+
+
+
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

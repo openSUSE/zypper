@@ -15,7 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/ResPoolManager.h"
-#include "zypp/SourceManager.h"
+#include "zypp/Target.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -47,10 +47,27 @@ namespace zypp
       void addResolvables (const ResStore& store);
 
       void removeResolvables (const ResStore& store);
+
+      /**
+       * \throws Exception
+       */
+      Target_Ptr target() const;
+  
+      /**
+       * \throws Exception
+       */
+      void initTarget(const Pathname & root);
+  
+      /**
+       * \throws Exception
+       */
+      void finishTarget();
             
     private:
       /** */
       ResPoolManager _pool;
+      /** */
+      Target_Ptr _target;
     };
     ///////////////////////////////////////////////////////////////////
 
