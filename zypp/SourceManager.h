@@ -54,14 +54,14 @@ namespace zypp
      *
      * \throws Exception
      */
-    Source & findSource(const unsigned id);
+    Source_Ref findSource(const unsigned id);
     
     /**
      * Find a source with a specified alias
      *
      * \throws Exception
      */
-    Source & findSource(const std::string & alias_r);
+    Source_Ref findSource(const std::string & alias_r);
     
     /**
      * Add a new source
@@ -75,7 +75,7 @@ namespace zypp
      *
      * \throws Exception
      */
-    unsigned addSource(Source & source_r);
+    unsigned addSource(Source_Ref source_r);
 
     /**
      * Remove an existing source by ID

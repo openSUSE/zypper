@@ -60,7 +60,7 @@ namespace zypp
     return _next_id++;
   }
 
-  unsigned SourceManager::addSource(Source & source_r)
+  unsigned SourceManager::addSource(Source_Ref source_r)
   {
     RW_pointer<Source> src_ptr = RW_pointer<Source>(new Source(source_r));
     _sources[_next_id] = src_ptr;
@@ -107,7 +107,7 @@ namespace zypp
 
   unsigned SourceManager::_next_id = 0;
 
-  Source & SourceManager::findSource(const unsigned id)
+  Source_Ref SourceManager::findSource(const unsigned id)
   {
     SourceMap::iterator it = _sources.find(id);
     if (it == _sources.end())
@@ -117,7 +117,7 @@ namespace zypp
     return *(it->second);
   }
 
-  Source & SourceManager::findSource(const std::string & alias_r)
+  Source_Ref SourceManager::findSource(const std::string & alias_r)
   {
     SourceMap::iterator it;
     for (it = _sources.begin(); it != _sources.end(); ++it)
