@@ -123,22 +123,34 @@ Resolver::problems (void) const
 	    break;
 	    case RESOLVER_INFO_TYPE_NEEDED_BY: { // no solution; it is only a info
 		ResolverInfoNeededBy_constPtr needed_by = dynamic_pointer_cast<const ResolverInfoNeededBy>(info);
-		// TranslatorExplanation %s = name of package, patch, selection ...
-		what = str::form (_("%s is needed by %s"), who.c_str(), needed_by->itemsToString(true,true).c_str());
+		if (needed_by->items().size() >= 1)
+		    // TranslatorExplanation %s = name of package, patch, selection ...
+		    what = str::form (_("%s is needed by other resolvables"), who.c_str());
+		else
+		    // TranslatorExplanation %s = name of package, patch, selection ...		    
+		    what = str::form (_("%s is needed by %s"), who.c_str(), needed_by->itemsToString(true).c_str());
 		details = str::form (_("%s is needed by:\n%s"), who.c_str(), needed_by->itemsToString(false).c_str());
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_CONFLICTS_WITH: { // no solution; it is only a info
 		ResolverInfoConflictsWith_constPtr conflicts_with = dynamic_pointer_cast<const ResolverInfoConflictsWith>(info);
-		// TranslatorExplanation %s = name of package, patch, selection ...		
-		what = str::form (_("%s conflicts with %s"), who.c_str(), conflicts_with->itemsToString(true,true).c_str());
+		if (conflicts_with->items().size() >= 1)
+		    // TranslatorExplanation %s = name of package, patch, selection ...
+		    what = str::form (_("%s conflicts with other resolvables"), who.c_str() );
+		else
+		    // TranslatorExplanation %s = name of package, patch, selection ...		
+		    what = str::form (_("%s conflicts with %s"), who.c_str(), conflicts_with->itemsToString(true).c_str());
 		details = str::form (_("%s conflicts with:\n%s"), who.c_str(), conflicts_with->itemsToString(false).c_str());		
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_OBSOLETES: { // no solution; it is only a info
 		ResolverInfoObsoletes_constPtr obsoletes = dynamic_pointer_cast<const ResolverInfoObsoletes>(info);
-		// TranslatorExplanation %s = name of package, patch, selection ...		
-		what = str::form (_("%s obsoletes %s"), who.c_str(), obsoletes->itemsToString(true,true).c_str());
+		if (obsoletes->items().size() >= 1)
+		    // TranslatorExplanation %s = name of package, patch, selection ...
+		    what = str::form (_("%s obsoletes other resolvables"), who.c_str());
+		else
+		    // TranslatorExplanation %s = name of package, patch, selection ...		
+		    what = str::form (_("%s obsoletes %s"), who.c_str(), obsoletes->itemsToString(true).c_str());
 		// TranslatorExplanation %s = name of package, patch, selection ...				
 		details = str::form (_("%s obsoletes:%s"), who.c_str(), obsoletes->itemsToString(false).c_str());
 		details += _("\nThese resolvables will be deleted from the system.");
@@ -146,10 +158,16 @@ Resolver::problems (void) const
 	    break;
 	    case RESOLVER_INFO_TYPE_DEPENDS_ON: { // no solution; it is only a info
 		ResolverInfoDependsOn_constPtr depends_on = dynamic_pointer_cast<const ResolverInfoDependsOn>(info);
+		if (depends_on->items().size() >= 1)
+		    // TranslatorExplanation %s = name of package, patch, selection ...
+		    what = str::form (_("%s depends on other resolvables"), who.c_str(),
+				      depends_on->itemsToString(true).c_str());
+		else
+		    // TranslatorExplanation %s = name of package, patch, selection ...				
+		    what = str::form (_("%s depends on %s"), who.c_str(),
+				      depends_on->itemsToString(true).c_str());
 		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("%s depends on %s"), depends_on->itemsToString(true,true).c_str());
-		// TranslatorExplanation %s = name of package, patch, selection ...				
-		details = str::form (_("%s depends on:%s"), depends_on->itemsToString(false).c_str());		
+		details = str::form (_("%s depends on:%s"), who.c_str(), depends_on->itemsToString(false).c_str());		
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_CHILD_OF: {				// unused

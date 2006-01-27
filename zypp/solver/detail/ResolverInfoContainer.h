@@ -67,8 +67,7 @@ class ResolverInfoContainer : public ResolverInfo {
     virtual bool merge (ResolverInfoContainer_Ptr to_be_merged);
     virtual ResolverInfo_Ptr copy (void) const;
 
-    std::string itemsToString (const bool names_only,
-			       const bool shorten_output = false) const;
+    std::string itemsToString (const bool names_only) const;
 
     bool mentions (PoolItem_Ref item) const;
     void addRelatedPoolItem (PoolItem_Ref item);

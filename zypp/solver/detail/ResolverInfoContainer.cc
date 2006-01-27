@@ -123,11 +123,9 @@ ResolverInfoContainer::copy (void) const
 //---------------------------------------------------------------------------
 
 string
-ResolverInfoContainer::itemsToString (const bool names_only,
-				      const bool shorten_output) const
+ResolverInfoContainer::itemsToString (const bool names_only) const
 {
     ostringstream res;
-    int max_items = 3;
 
     if (_item_list.empty())
 	return "";
@@ -141,12 +139,6 @@ ResolverInfoContainer::itemsToString (const bool names_only,
 	    if (iter != _item_list.begin())
 		res << ", ";
 	    res << (*iter)->name();
-	    if (shorten_output
-		&& --max_items <= 0)
-	    {
-		res << ", ...";
-		break;
-	    }
 	}
 	res << "]";
     }
@@ -158,12 +150,6 @@ ResolverInfoContainer::itemsToString (const bool names_only,
 	{
 	    res << "\n- ";	    
 	    res << (*iter);
-	    if (shorten_output
-		&& --max_items <= 0)
-	    {
-		res << "\n- ...\n- ..\n- .";
-		break;
-	    }
 	}	
     }
 
