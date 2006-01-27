@@ -28,6 +28,7 @@
 #include "zypp/solver/detail/ProblemSolutionIgnore.h"
 #include "zypp/solver/detail/ProblemSolutionInstall.h"
 #include "zypp/solver/detail/ProblemSolutionUninstall.h"
+#include "zypp/solver/detail/ProblemSolutionUnlock.h"
 
 #include "zypp/solver/detail/ResolverInfoChildOf.h"
 #include "zypp/solver/detail/ResolverInfoConflictsWith.h"
@@ -325,6 +326,11 @@ Resolver::problems (void) const
 	    case RESOLVER_INFO_TYPE_CANT_SATISFY: {			// Can't satisfy requirement c
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		what = misc_info->message();
+		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		// Add dummy provides
+		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::PROVIDES, item, misc_info->capability())); 
+		problems.push_back (problem);
+		problem_created = true;		
 	    }
 	    break;
 	// from QueueItemUninstall
@@ -333,6 +339,7 @@ Resolver::problems (void) const
 		// TranslatorExplanation %s = name of package, patch, selection ...				
 		what = str::form (_("%s will not be uninstalled cause it is still required"), who.c_str());
 		details = misc_info->message();
+		// It is only an info --> no solution is needed				
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_UNINSTALL_INSTALLED: {		// p is required by installed, so it won't be unlinked.
@@ -340,11 +347,16 @@ Resolver::problems (void) const
 		// TranslatorExplanation %s = name of package, patch, selection ...				
 		what = str::form (_("%s will not be uninstalled cause it is still required"), who.c_str());		
 		details = misc_info->message();
+		// It is only an info --> no solution is needed				
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_UNINSTALL_LOCKED: {			// cant uninstall, its locked
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		what = misc_info->message();
+		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		problem->addSolution (new ProblemSolutionUnlock (problem, item)); // Unlocking resItem
+		problems.push_back (problem);
+		problem_created = true;
 	    }
 	    break;
 	// from QueueItemConflict
@@ -355,6 +367,17 @@ Resolver::problems (void) const
 				  who.c_str(),
 				  misc_info->other()->name().c_str());				
 		details = misc_info->message();
+#if 1
+		// It is only an info --> no solution is needed
+#else		
+		// Uninstall p
+		problem->addSolution (new ProblemSolutionUninstall (problem, resItem));
+		// Remove conflict in the resolvable which has to be installed
+		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::CONFLICTS, resItem, misc_info->capability())); 
+		problems.push_back (problem);
+		problem_created = true;
+#endif
+		
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_CONFLICT_UNINSTALLABLE: {		// uninstalled p is marked uninstallable it conflicts [with q] due to c
@@ -364,6 +387,16 @@ Resolver::problems (void) const
 				who.c_str(),
 				misc_info->other()->name().c_str());				
 		details = misc_info->message();
+#if 1
+		// It is only an info --> no solution is needed
+#else
+		// Uninstall p
+		problem->addSolution (new ProblemSolutionUninstall (problem, resItem));
+		// Remove conflict in the resolvable which has to be installed
+		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::CONFLICTS, resItem, misc_info->capability())); 
+		problems.push_back (problem);
+		problem_created = true;		
+#endif
 	    }
 	    break;
 	}
@@ -379,10 +412,18 @@ Resolver::problems (void) const
 }
 
 
-void
+bool
 Resolver::applySolutions (const ProblemSolutionList & solutions)
 {
-    return;
+    bool ret = true;
+    for (ProblemSolutionList::const_iterator iter = solutions.begin();
+	 iter != solutions.end(); ++iter) {
+	ProblemSolution_Ptr solution = *iter;
+	ret = solution->apply (*this);
+	if (ret == false)
+	    break;
+    }    
+    return ret;
 }
 
 ///////////////////////////////////////////////////////////////////

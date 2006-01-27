@@ -42,6 +42,7 @@ solverdetailinclude_HEADERS = \
 	ProblemSolutionInstall.h	\
 	ProblemSolutionUninstall.h	\
 	ProblemSolutionIgnore.h		\
+	ProblemSolutionUnlock.h		\
 	SolutionAction.h		\
 	ResolverProblem.h
 
@@ -77,5 +78,6 @@ lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	ProblemSolutionInstall.cc			\
 	ProblemSolutionUninstall.cc			\
 	ProblemSolutionIgnore.cc			\
+	ProblemSolutionUnlock.cc			\
 	SolutionAction.cc				\
 	ResolverProblem.cc

@@ -22,8 +22,11 @@
  * 02111-1307, USA.
  */
 
-#include "zypp/solver/detail/ProblemSolution.h"
-#include "zypp/base/Logger.h"
+#include <sstream>
+
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
+#include "zypp/solver/detail/ProblemSolutionUnlock.h"
 
 using namespace std;
 
@@ -37,93 +40,36 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-IMPL_PTR_TYPE(ProblemSolution);
+IMPL_PTR_TYPE(ProblemSolutionUnlock);
 
 //---------------------------------------------------------------------------
 
-ostream&
-operator<<( ostream& os, const ProblemSolution & solution)
+ProblemSolutionUnlock::ProblemSolutionUnlock( ResolverProblem_Ptr parent,
+					      PoolItem_Ref item)
+    : ProblemSolution (parent, "", "")
 {
-    os << "Solution:" << endl;
-    os << solution._description << endl;
-    os << solution._details << endl;
-    os << solution._actions;
-    return os;
+    // TranslatorExplanation %s = name of package, patch, selection ...	
+    _description = str::form (_("Unlock %s"), item->name().c_str() );
+
+    addAction ( new TransactionSolutionAction (item, UNLOCK));
 }
 
-ostream&
-operator<<( ostream& os, const ProblemSolutionList & solutionlist)
+ProblemSolutionUnlock::ProblemSolutionUnlock( ResolverProblem_Ptr parent,
+					      PoolItemList & itemlist)
+    : ProblemSolution (parent, "", "")
 {
-    for (ProblemSolutionList::const_iterator iter = solutionlist.begin(); iter != solutionlist.end(); ++iter) {
-	os << (*iter) << endl;
+    _description = _("Unlocking these resolvables");
+
+    for (PoolItemList::iterator iter = itemlist.begin();
+	 iter != itemlist.end(); iter++) {
+	PoolItem item = *iter;
+	addAction ( new TransactionSolutionAction (item, UNLOCK));
     }
-    return os;
+    
+    ostringstream details;
+    details << _actions;    
+    _details = details.str();
 }
-
-ostream&
-operator<<( ostream& os, const CProblemSolutionList & solutionlist)
-{
-    for (CProblemSolutionList::const_iterator iter = solutionlist.begin(); iter != solutionlist.end(); ++iter) {
-	os << (*iter) << endl;
-    }
-    return os;
-}
-
-//---------------------------------------------------------------------------
-
-ProblemSolution::ProblemSolution( ResolverProblem_Ptr parent, const string & description, const string & details )
-    : _problem (parent)
-    , _description (description)
-    , _details (details)
-{
-}
-
-
-ProblemSolution::~ProblemSolution()
-{
-}
-
-
-/**
- * Apply this solution, i.e. execute all of its actions.
- *
- * Returns 'true' on success, 'false' if actions could not be performed.
- **/
-
-bool
-ProblemSolution::apply (Resolver & resolver)
-{
-    DBG << "apply solution " << *this << endl;
-    bool ret = true;
-    for (CSolutionActionList::const_iterator iter = _actions.begin();
-	 iter != _actions.end(); ++iter) {
-	SolutionAction_constPtr action = *iter;
-	if (! action->execute (resolver))
-	{
-	    ret = false;
-	    break;
-	}
-    }
-    return true;
-}
-
-
-/**
- * Add an action to the actions list.
- **/ 
-void
-ProblemSolution::addAction (SolutionAction_constPtr action)
-{
-    _actions.push_back (action);
-}
-
-
-void
-ProblemSolution::clear()
-{
-    _actions.clear();
-}
-
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail

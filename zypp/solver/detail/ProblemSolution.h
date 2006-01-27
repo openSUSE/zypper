@@ -106,7 +106,7 @@ namespace zypp
 	     *
 	     * Returns 'true' on success, 'false' if actions could not be performed.
 	     **/
-	    bool apply();
+	    bool apply (Resolver & resolver);
 
 	    /**
 	     * Add an action to the actions list.

@@ -84,6 +84,8 @@ typedef std::list<ProblemSolution_constPtr> CProblemSolutionList;
 DEFINE_PTR_TYPE(SolutionAction);
 typedef std::list<SolutionAction_Ptr> SolutionActionList;
 typedef std::list<SolutionAction_constPtr> CSolutionActionList;
+DEFINE_PTR_TYPE(TransactionSolutionAction);
+DEFINE_PTR_TYPE(InjectSolutionAction);	
       
       ///////////////////////////////////////////////////////////////////
     };// namespace detail

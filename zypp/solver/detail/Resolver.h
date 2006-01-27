@@ -129,7 +129,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool resolveDependencies (const ResolverContext_Ptr context = NULL);
 
     ResolverProblemList problems (void) const;
-    void applySolutions (const ProblemSolutionList &solutions);
+    bool applySolutions (const ProblemSolutionList &solutions);
 
     void reset (void);
 };

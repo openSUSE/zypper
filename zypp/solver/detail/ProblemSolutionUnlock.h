@@ -1,8 +1,5 @@
-
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* ProblemSolution.cc
- *
- * Easy-to use interface to the ZYPP dependency resolver
+/* Resolver_problems.cc
  *
  * Copyright (C) 2000-2002 Ximian, Inc.
  * Copyright (C) 2005 SUSE Linux Products GmbH
@@ -22,12 +19,13 @@
  * 02111-1307, USA.
  */
 
-#include "zypp/base/String.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/Logger.h"
-#include "zypp/solver/detail/ProblemSolutionIgnore.h"
+#ifndef ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONUNLOCK_H
+#define ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONUNLOCK_H
 
-using namespace std;
+#include "zypp/solver/detail/Types.h"
+
+#include "zypp/solver/detail/Resolver.h"
+#include "zypp/solver/detail/ProblemSolution.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -39,28 +37,21 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-IMPL_PTR_TYPE(ProblemSolutionIgnore);
+	/**
+	 * Class representing one possible solution to one problem found during resolving
+	 * This problem solution unlocks one or more items
+	 * 
+	 **/
+	class ProblemSolutionUnlock : public ProblemSolution
+	{
+	public:
 
-//---------------------------------------------------------------------------
-
-ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
-					      const Dep &kind, 
-					      PoolItem_Ref item,
-					      const Capability & capability)
-    : ProblemSolution (parent, "", "")
-{
-    if (kind == Dep::CONFLICTS) {
-	// TranslatorExplanation %s = name of package, patch, selection ...
-	_description = str::form (_("Ignoring conflict of %s"),
-				  item->name().c_str());
-	addAction (new InjectSolutionAction (item, capability, kind));	
-    } else if (kind == Dep::PROVIDES) { 
-	_description = _("Ignoring this requirement");
-	addAction ( new InjectSolutionAction (item, capability, kind));		
-    } else {  
-	ERR << "Wrong kind of capability: " << kind << endl;
-    }
-}
+	    /**
+	     * Constructor.
+	     **/
+	    ProblemSolutionUnlock( ResolverProblem_Ptr parent, PoolItem_Ref item);
+	    ProblemSolutionUnlock( ResolverProblem_Ptr parent, PoolItemList & itemlist);	    
+	};
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -71,3 +62,6 @@ ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
+
+#endif // ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONAUNLOCK_H
+

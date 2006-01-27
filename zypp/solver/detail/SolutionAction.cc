@@ -23,6 +23,10 @@
 
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/SolutionAction.h"
+#include "zypp/CapSet.h"
+#include "zypp/base/Logger.h"
+#include "zypp/Dependencies.h"
+
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -63,6 +67,7 @@ operator<<( ostream& os, const TransactionSolutionAction & action)
 	case INSTALL:	os << "Install"; break;
 	case UPDATE:	os << "Update"; break;
 	case REMOVE:	os << "Remove"; break;
+	case UNLOCK:	os << "Unlock"; break;	    
     }
     os << " ";
     os << action._item;
@@ -107,15 +112,55 @@ operator<<( ostream& os, const InjectSolutionAction & action)
 
 //---------------------------------------------------------------------------
 
+
 bool 
-TransactionSolutionAction::execute()
+TransactionSolutionAction::execute(Resolver & resolver) const
 {
-    return true;
+    bool ret = true;
+    switch (action()) {
+	case KEEP:
+	case INSTALL:
+	case UPDATE:
+	    resolver.addPoolItemToInstall (_item);
+	    break;
+	case REMOVE:
+	    resolver.addPoolItemToRemove (_item);	    
+	    break;
+	case UNLOCK:
+	    ERR << "Not implemented yet" << endl;
+	    ret = false;
+#warning Unlocking items not implemented
+	    break;
+	default:
+	    ERR << "Wrong TransactionKind" << endl;
+	    ret = false;
+    }
+    return ret;
 }
 
 bool
-InjectSolutionAction::execute()
+InjectSolutionAction::execute(Resolver & resolver) const
 {
+    ResObject::constPtr resolvable = _item.resolvable();
+    CapSet dep;
+    
+    dep.insert(_capability);
+    Dependencies dependencies;
+
+    if (_kind == Dep::CONFLICTS) {
+	// removing provide, it the other resolvable has the conflict
+	dependencies[Dep::PROVIDES] = dep;
+	// removing conflict
+	dependencies[Dep::CONFLICTS] = dep;		
+    } else if (_kind  == Dep::PROVIDES) {
+	// removing the requires dependency from the item
+	dependencies[Dep::REQUIRES] = dep;
+    } else {
+	ERR << "No valid InjectSolutionAction kind found" << endl;
+	return false;
+    }
+#warning Disabling capabilities currently not possible;
+//    resolvable->deprecatedSetDeps(dependencies);
     return true;
 }
 

@@ -36,22 +36,23 @@ namespace zypp
 	 **/
 	class SolutionAction : public base::ReferenceCounted
 	{
+	protected:    
+	    SolutionAction ();
 	public:
-	  SolutionAction();
-	  virtual ~SolutionAction();
+	    virtual ~SolutionAction();
 
-	  // ---------------------------------- I/O
+	    // ---------------------------------- I/O
 
-	  friend std::ostream& operator<<(std::ostream&, const SolutionAction & action);
-	  friend std::ostream& operator<<(std::ostream&, const SolutionActionList & actionlist);
-	  friend std::ostream& operator<<(std::ostream&, const CSolutionActionList & actionlist);
+	    friend std::ostream& operator<<(std::ostream&, const SolutionAction & action);
+	    friend std::ostream& operator<<(std::ostream&, const SolutionActionList & actionlist);
+	    friend std::ostream& operator<<(std::ostream&, const CSolutionActionList & actionlist);
 
-	  // ---------------------------------- methods
+	    // ---------------------------------- methods
 	    /**
 	     * Execute this action.
 	     * Returns 'true' on success, 'false' on error.
 	     **/
-	    virtual bool execute() = 0;
+	    virtual bool execute (Resolver & resolver) const = 0;
 	};
 
 
@@ -62,11 +63,11 @@ namespace zypp
 	 **/
 	typedef enum
 	{
-	    // TO DO: use some already existing enum (?)
 	    KEEP,
 	    INSTALL,
 	    UPDATE,
-	    REMOVE
+	    REMOVE,
+	    UNLOCK
 	} TransactionKind;
 	
 	class TransactionSolutionAction: public SolutionAction
@@ -74,7 +75,8 @@ namespace zypp
 	public:
 	    TransactionSolutionAction( PoolItem_Ref item,
 				       TransactionKind action )
-		: SolutionAction(), _item( item ), _action( action ) {}
+		: SolutionAction(),
+		  _item( item ), _action( action ) {}
 
 	  // ---------------------------------- I/O
 
@@ -82,17 +84,16 @@ namespace zypp
 
 	  // ---------------------------------- accessors
 
-	  PoolItem_Ref item() const { return _item; }
-	  TransactionKind action() const { return _action;     }
+	  const PoolItem_Ref item() const { return _item; }
+	  const TransactionKind action() const { return _action; }
 
 	  // ---------------------------------- methods
-	    virtual bool execute();
-
+	    virtual bool execute(Resolver & resolver) const;
 
 	protected:
 
 	    PoolItem_Ref _item;
-	    TransactionKind _action;
+	    const TransactionKind _action;
 	};
 
 
@@ -107,8 +108,9 @@ namespace zypp
 	{
 	public:
 	    
-	    InjectSolutionAction( const Capability & capability, const Dep & kind )
-		: SolutionAction(), _capability( capability ), _kind( kind ) {}
+	    InjectSolutionAction( PoolItem_Ref item, const Capability & capability, const Dep & kind )
+		: SolutionAction(),
+		  _capability( capability ), _kind( kind ) {}
 
 	  // ---------------------------------- I/O
 
@@ -116,13 +118,15 @@ namespace zypp
 
 	  // ---------------------------------- accessors
 	    const Capability & capability() const { return _capability; };
+	    const PoolItem_Ref item() const { return _item; }	    
 
 	  // ---------------------------------- methods
-	    virtual bool execute();
+	    virtual bool execute(Resolver & resolver) const;
 
 	protected:
 
 	    const Capability & _capability;
+	    PoolItem_Ref _item;	    
 	    const Dep & _kind;
 	};
 
