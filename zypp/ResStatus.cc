@@ -52,7 +52,19 @@ namespace zypp
   */
   std::ostream & operator<<( std::ostream & str, const ResStatus & obj )
   {
-    return str << obj._bitfield.asString();
+    str << (obj.isInstalled() ? "I" : "U");
+
+    str << (obj.isUnneeded() ? "U" :
+	( obj.isSatisfied() ? "S" :
+	( obj.isIncomplete() ? "I" : "_") ) );
+
+    str << (obj.transacts () ? "T" : "_");
+
+    str << (obj.isToBeUninstalledDueToObsolete() ? "O" :
+	( obj.isToBeUninstalledDueToUnlink() ? "U" :
+	( obj.isToBeInstalledSoft() ? "S" : "_" ) ) );
+
+    return str;
   }
 
   /////////////////////////////////////////////////////////////////
