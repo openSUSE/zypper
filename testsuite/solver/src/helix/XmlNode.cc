@@ -96,7 +96,7 @@ XmlNode::getValue (const string & name, const string & deflt) const
     xmlNode *child;
 
     xml_s = xmlGetProp(_node, (const xmlChar *)name.c_str());
-//	  _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") xmlGetProp '" << (char *)xml_s << "'" << endl;
+//	  // XXX << "XmlNode::getValue(" << name << ") xmlGetProp '" << (char *)xml_s << "'" << endl;
 
     if (xml_s) {
 	ret = string ((const char *)xml_s);
@@ -107,10 +107,10 @@ XmlNode::getValue (const string & name, const string & deflt) const
     child = _node->xmlChildrenNode;
 
     while (child) {
-	      _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") child '" << (child->name) << "'" << endl;
+//	      // XXX << "XmlNode::getValue(" << name << ") child '" << (child->name) << "'" << endl;
 	if (strcasecmp((const char *)(child->name), name.c_str()) == 0) {
 	    xml_s = xmlNodeGetContent(child);
-	    _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") xmlNodeGetContent '" << (char *)xml_s << "'" << endl;
+//	    // XXX << "XmlNode::getValue(" << name << ") xmlNodeGetContent '" << (char *)xml_s << "'" << endl;
 	    if (xml_s) {
 		ret = string ((const char *)xml_s);
 		xmlFree (xml_s);
@@ -120,7 +120,7 @@ XmlNode::getValue (const string & name, const string & deflt) const
 	child = child->next;
     }
 
-    _XXX("RC_SPEW_XML") << "XmlNode::getValue(" << name << ") deflt" << endl;
+    // XXX << "XmlNode::getValue(" << name << ") deflt" << endl;
     return deflt;
 }
 
@@ -147,7 +147,7 @@ XmlNode::getProp (const std::string & name, const std::string & deflt) const
     ret = xmlGetProp (_node, (const xmlChar *)name.c_str());
 
     if (ret) {
-	_XXX("RC_SPEW_XML") << "XmlNode::getProp(" << name << ") xmlGetProp '" << (char *)ret << "'" << endl;
+	// XXX << "XmlNode::getProp(" << name << ") xmlGetProp '" << (char *)ret << "'" << endl;
 	
 	gs = string ((const char  *)ret);
 	xmlFree (ret);
