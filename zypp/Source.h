@@ -91,7 +91,7 @@ namespace zypp
     /** Conversion to bool to allow pointer style tests
      *  for nonNULL \ref resolvable. */
     operator bool() const
-    { return _pimpl; }
+    { return _pimpl != NULL; }
 
   };
   ///////////////////////////////////////////////////////////////////
@@ -104,8 +104,12 @@ namespace zypp
   { return obj.dumpOn( str ); }
 
   /** \relates Source  */
-  inline bool operator==( Source_Ref lhs, Source_Ref rhs )
-  { return !lhs.alias().empty() && !rhs.alias().empty() && lhs.alias() == rhs.alias(); }
+  inline bool operator==( const Source_Ref & lhs, const Source_Ref & rhs )
+  { return lhs == rhs; }
+
+  /** \relates Source  */
+  inline bool operator!=( const Source_Ref & lhs, const Source_Ref & rhs )
+  { return !(lhs == rhs); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
