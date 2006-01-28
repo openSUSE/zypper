@@ -102,3 +102,27 @@ Delete A with Patch-A installed -> move Patch-A from installed to satisfied
 Upgrade A above Patch-A -> move Patch-A from installed to satisfied
 
 III. Patchlevels / Products
+
+
+-----------------------------------------------------
+
+Cases to cover
+
+
+Installed/Uninstalled	| Freshens?	| Triggered?	| Requirements	| State
+----------------------------------------------------------------------------------------------------
+Uninstalled		| empty		| -		| -		| Unneeded
+Uninstalled		| non-empty	| N		| -		| Unneeded
+Uninstalled		| non-empty	| Y		| not met	| Incomplete	(-> needed)
+Uninstalled		| non-empty	| Y		| met		| Satisfied	(-> complete)
+
+Installed		| empty		| -		| not met	| Incomplete
+Installed		| empty		| -		| met		| Satisfied
+Installed		| non- empty	| N		| not met	| Incomplete
+Installed		| non- empty	| N		| met		| Satisfied
+Installed		| non- empty	| Y		| not met	| Incomplete
+Installed		| non- empty	| Y		| met		| Satisfied
+
+
+ResStatus
+
