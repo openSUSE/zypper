@@ -2,16 +2,17 @@
 
 #include "package-writer.h"
 #include <sqlite3.h>
-#include "zypp/target/rpm/librpmDb.h"
+
 #include "zypp/base/Exception.h"
 #include "zypp/base/Logger.h"
 #include "zypp/CapSet.h"
 #include "zypp/Rel.h"
 #include "zypp/Edition.h"
+#include "zypp/Package.h"
+
 #include <cstdlib>
 #include <string>
 
-using namespace zypp::target::rpm;
 using namespace zypp;
 
 using std::endl;
@@ -70,6 +71,27 @@ Rel2Int (Rel op)
     return RC_RELATION_INVALID;
 }
 
+//----------------------------------------------------------------------------
+
+// convert ZYPP architecture string to ZMD int
+
+static int
+arch2zmd (string str)
+{
+    return 0;
+}
+
+
+static string
+list2str (const Text t)
+{
+    static string s;
+    for (Text::const_iterator it = t.begin(); it != t.end(); ++it) {
+	if (it != t.begin()) s += " ";
+	s += *it;
+    }
+    return s;
+}
 //----------------------------------------------------------------------------
 
 static sqlite3_stmt *
@@ -300,39 +322,46 @@ write_deps (RCDB *rcdb, sqlite_int64 pkg_id, int type, const zypp::CapSet & capa
 
 
 static void
-write_package_deps (RCDB *rcdb, sqlite_int64 id, RpmHeader::constPtr pkg)
+write_package_deps (RCDB *rcdb, sqlite_int64 id, ResStore::ResT::Ptr res)
 {
-    write_deps (rcdb, id, RC_DEP_TYPE_REQUIRE, pkg->tag_requires());
-    write_deps (rcdb, id, RC_DEP_TYPE_PROVIDE, pkg->tag_provides());
-    write_deps (rcdb, id, RC_DEP_TYPE_CONFLICT, pkg->tag_conflicts());
-    write_deps (rcdb, id, RC_DEP_TYPE_OBSOLETE, pkg->tag_obsoletes());
+    write_deps (rcdb, id, RC_DEP_TYPE_REQUIRE, res->dep (Dep::REQUIRES));
+    write_deps (rcdb, id, RC_DEP_TYPE_PROVIDE, res->dep (Dep::PROVIDES));
+    write_deps (rcdb, id, RC_DEP_TYPE_CONFLICT, res->dep (Dep::CONFLICTS));
+    write_deps (rcdb, id, RC_DEP_TYPE_OBSOLETE, res->dep (Dep::OBSOLETES));
 }
 
 
 static sqlite_int64
-write_package (RCDB *rcdb, RpmHeader::constPtr pkg)
+write_package (RCDB *rcdb, const ResStore::ResT::constPtr res)
 {
+    Package::constPtr pkg = asKind<Package>(res);
+    if (pkg == NULL)
+    {
+	WAR << "Not a package " << *res << endl;
+	return -1;
+    }
+
     int rc;
     sqlite3_stmt *handle = rcdb->insert_pkg_handle;
 
-    sqlite3_bind_text (handle, 1, pkg->tag_name().c_str(), -1, SQLITE_TRANSIENT);
-    sqlite3_bind_text (handle, 2, pkg->tag_version().c_str(), -1, SQLITE_TRANSIENT);
-    sqlite3_bind_text (handle, 3, pkg->tag_release().c_str(), -1, SQLITE_TRANSIENT);
-    if (pkg->tag_epoch().empty()) {
+    sqlite3_bind_text (handle, 1, pkg->name().c_str(), -1, SQLITE_STATIC);
+    Edition ed = pkg->edition();
+    sqlite3_bind_text (handle, 2, ed.version().c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text (handle, 3, ed.release().c_str(), -1, SQLITE_STATIC);
+    if (ed.epoch() == Edition::noepoch) {
 	sqlite3_bind_int (handle, 4, 0);
     } else {
-	int epoch = atoi (pkg->tag_epoch().c_str());
-	sqlite3_bind_int (handle, 4, epoch);
+	sqlite3_bind_int (handle, 4, ed.epoch());
     }
 
-    sqlite3_bind_int (handle, 5, 1);						//pkg->arch().asString().c_str());
+    sqlite3_bind_int (handle, 5, arch2zmd (pkg->arch().asString()));						//pkg->arch().asString().c_str());
     sqlite3_bind_int (handle, 6, 1);						//pkg->section);
-    sqlite3_bind_int64 (handle, 7, pkg->tag_archivesize());
-    sqlite3_bind_int64 (handle, 8, pkg->tag_size());
+    sqlite3_bind_int64 (handle, 7, pkg->archivesize());
+    sqlite3_bind_int64 (handle, 8, pkg->size());
     sqlite3_bind_text (handle, 9, "@system", -1, SQLITE_STATIC);		//rc_channel_get_id (pkg->channel)
     sqlite3_bind_text (handle, 10, "", -1, SQLITE_STATIC);			// pkg->pretty_name
-    sqlite3_bind_text (handle, 11, pkg->tag_summary().c_str(), -1, SQLITE_TRANSIENT);
-    sqlite3_bind_text (handle, 12, pkg->tag_description().c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text (handle, 11, pkg->summary().c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text (handle, 12, list2str (pkg->description()).c_str(), -1, SQLITE_STATIC);
     sqlite3_bind_text (handle, 13, "", -1, SQLITE_STATIC);			//pkg->package_filename
     sqlite3_bind_text (handle, 14, "", -1, SQLITE_STATIC);			//pkg->signature_filename
     sqlite3_bind_int (handle, 15, 1);						//pkg->installed
@@ -355,35 +384,27 @@ write_package (RCDB *rcdb, RpmHeader::constPtr pkg)
 //-----------------------------------------------------------------------------
 
 void
-write_packages_to_db (const string & db_file)
+write_packages_to_db (const string & db_file, const ResStore & resolvables)
 {
    RCDB *db;
 
     db = rc_db_new (db_file);
     rc_db_begin (db);
 
-    librpmDb::db_const_iterator iter;
-
-    if (iter.dbHdrNum() == 0) {
+    if (resolvables.empty()) {
 	ERR << "Couldn't access the packaging system:" << endl;
 	return;
     }
 
-    while (*iter) {
+    for (ResStore::const_iterator iter = resolvables.begin(); iter != resolvables.end(); ++iter) {
 	sqlite_int64 id = write_package (db, *iter);
 	if (id > 0) {
 	    write_package_deps (db, id, *iter);
 	}
-	++iter;
     }
 
     rc_db_commit (db);
-    rc_db_begin (db);
 
-    while (*iter) {
-    }
-
-    rc_db_commit (db);
     rc_db_close (db);
     delete (db);
 }

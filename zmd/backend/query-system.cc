@@ -1,11 +1,12 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 
-#include "zypp/target/rpm/librpmDb.h"
+#include "zypp/ZYpp.h"
+#include "zypp/ZYppFactory.h"
 #include "zypp/base/Logger.h"
-
-using namespace zypp::target::rpm;
+#include "zypp/base/Exception.h"
 
 using std::endl;
+using namespace zypp;
 
 #include <sqlite3.h>
 #include "package-writer.h"
@@ -18,13 +19,18 @@ main (int argc, char **argv)
 	return 1;
     }
 
-    librpmDb::unblockAccess();
-    librpmDb::dbAccess (librpmDb::defaultRoot(), librpmDb::defaultDbPath());
+    ZYppFactory zf;
+    ZYpp::Ptr God = zf.letsTest();
 
-    librpmDb::constPtr rpmhandle;
-    librpmDb::dbAccess (rpmhandle);
+    try {
+	God->initTarget("/");
+    }
+    catch (Exception & excpt_r) {
+	ZYPP_CAUGHT (excpt_r);
+	return 1;
+    }
 
-    write_packages_to_db (argv[1]);
+    write_packages_to_db (argv[1], God->target()->resolvables());
 
     return 0;
 }
