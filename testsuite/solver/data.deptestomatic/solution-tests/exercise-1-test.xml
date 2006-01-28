@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+   install unknown package
+-->
+<test>
+<setup>
+  <channel name="test" file="unfulfilled-packages.xml"/>
+</setup>
+<trial>
+  <install channel="test" package="nothere"/>
+  <reportproblems/>
+</trial>
+</test>

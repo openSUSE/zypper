@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+   install package with unfulfilled dependency
+-->
+<test>
+<setup>
+  <channel name="test" file="unfulfilled-packages.xml"/>
+</setup>
+<trial>
+  <install channel="test" package="unfulfilled"/>
+  <reportproblems/>
+</trial>
+</test>

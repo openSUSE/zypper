@@ -1,0 +1,117 @@
+<channel><subchannel>
+<package>
+  <name>unfulfilled</name>
+  <summary>A fake package</summary>
+  <description>A fake package</description>
+  <section>misc</section>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <epoch>0</epoch>
+      <version>1.0</version>
+      <release>1</release>
+      <filename>foo.bar</filename>
+      <filesize>123</filesize>
+      <installedsize>234</installedsize>
+      <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+      <importance>suggested</importance>
+      <description>Yggdrasil Linux</description>
+    </update>
+  </history>
+  <requires>
+    <dep name="nothere"/>
+  </requires>
+</package>
+<package>
+  <name>unfulfilled1</name>
+  <summary>A fake package</summary>
+  <description>A fake package</description>
+  <section>misc</section>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <epoch>0</epoch>
+      <version>1.0</version>
+      <release>1</release>
+      <filename>foo.bar</filename>
+      <filesize>123</filesize>
+      <installedsize>234</installedsize>
+      <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+      <importance>suggested</importance>
+      <description>Yggdrasil Linux</description>
+    </update>
+  </history>
+  <requires>
+    <dep name="nothere"/>
+  </requires>
+</package>
+<package>
+  <name>unfulfilled2</name>
+  <summary>A fake package</summary>
+  <description>A fake package</description>
+  <section>misc</section>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <epoch>0</epoch>
+      <version>1.0</version>
+      <release>1</release>
+      <filename>foo.bar</filename>
+      <filesize>123</filesize>
+      <installedsize>234</installedsize>
+      <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+      <importance>suggested</importance>
+      <description>Yggdrasil Linux</description>
+    </update>
+  </history>
+  <requires>
+    <dep name="nothere"/>
+  </requires>
+</package>
+<package>
+  <name>unfulfilled3</name>
+  <summary>A fake package</summary>
+  <description>A fake package</description>
+  <section>misc</section>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <epoch>0</epoch>
+      <version>1.0</version>
+      <release>1</release>
+      <filename>foo.bar</filename>
+      <filesize>123</filesize>
+      <installedsize>234</installedsize>
+      <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+      <importance>suggested</importance>
+      <description>Yggdrasil Linux</description>
+    </update>
+  </history>
+  <requires>
+    <dep name="nothere"/>
+  </requires>
+</package>
+<package>
+  <name>unfulfilled4</name>
+  <summary>A fake package</summary>
+  <description>A fake package</description>
+  <section>misc</section>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <epoch>0</epoch>
+      <version>1.0</version>
+      <release>1</release>
+      <filename>foo.bar</filename>
+      <filesize>123</filesize>
+      <installedsize>234</installedsize>
+      <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+      <importance>suggested</importance>
+      <description>Yggdrasil Linux</description>
+    </update>
+  </history>
+  <requires>
+    <dep name="nothere"/>
+  </requires>
+</package>
+</subchannel></channel>
