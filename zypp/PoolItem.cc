@@ -59,7 +59,12 @@ namespace zypp
   /** \relates PoolItem_Ref::Impl Stream output */
   inline std::ostream & operator<<( std::ostream & str, const PoolItem_Ref::Impl & obj )
   {
-    return str << obj.status() << *obj.resolvable();
+    str << obj.status();
+    if (obj.resolvable())
+	str << *obj.resolvable();
+    else
+	str << "(NULL)";
+    return str;
   }
 
   ///////////////////////////////////////////////////////////////////
