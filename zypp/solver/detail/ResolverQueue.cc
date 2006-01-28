@@ -277,7 +277,7 @@ ResolverQueue::processOnce ()
 void
 ResolverQueue::process ()
 {
-	  _DBG("RC_SPEW") << "----- Processing -----" << endl;
+	  DBG << "----- Processing -----" << endl;
 	  spew ();
 
     while (_context->isValid ()
@@ -415,20 +415,20 @@ ResolverQueue::splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueLi
 void
 ResolverQueue::spew ()
 {
-    _DBG("RC_SPEW") << "Resolver Queue: " << (_context->isInvalid() ? "INVALID" : "") << endl;
+    DBG << "Resolver Queue: " << (_context->isInvalid() ? "INVALID" : "") << endl;
 
     if (_qitems.empty()) {
 
-	      _DBG("RC_SPEW") <<  "  (empty)" << endl;
+	      DBG <<  "  (empty)" << endl;
 
     } else {
 	      for (QueueItemList::const_iterator iter = _qitems.begin(); iter != _qitems.end(); ++iter) {
-		  _DBG("RC_SPEW") << "  " << (*iter) << endl;
+		  DBG << "  " << (*iter) << endl;
 	      }
 
     }
 
-    _DBG("RC_SPEW") << endl;
+    DBG << endl;
     fflush (stdout);
 }
 
