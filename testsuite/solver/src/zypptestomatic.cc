@@ -50,6 +50,7 @@
 #include "zypp/Source.h"
 #include "zypp/SourceFactory.h"
 #include "zypp/SourceManager.h"
+#include "zypp/source/SourceImpl.h"
 
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
@@ -337,12 +338,20 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 struct FindPackage : public resfilter::ResObjectFilterFunctor
 {
     PoolItem_Ref poolItem;
+    Source_Ref source;
+    Resolvable::Kind kind;
 
-    FindPackage ()
+    FindPackage (Source_Ref s, Resolvable::Kind k)
+	: source (s)
+	, kind (k)
     { }
 
     bool operator()( PoolItem_Ref p)
     {
+	Source_Ref s = p->source();
+	if (s.alias() != source.alias()) {
+	    return true;
+	}
 	poolItem = p;
 	return false;				// stop here, we found it
     }
@@ -363,11 +372,12 @@ get_poolItem (const string & source_alias, const string & package_name, const st
 	    return poolItem;
 	}
 
-	FindPackage info;
+	FindPackage info (source, kind);
 
 	invokeOnEach( God->pool().byNameBegin( package_name ),
 		      God->pool().byNameEnd( package_name ),
-		      functor::chain( resfilter::BySource(source), resfilter::ByKind (kind) ),
+//		      functor::chain( resfilter::BySource(source), resfilter::ByKind (kind) ),
+		      resfilter::ByKind (kind),
 		      functor::functorRef<bool,PoolItem> (info) );
 
 	poolItem = info.poolItem;
@@ -592,7 +602,7 @@ parse_xml_setup (XmlNode_Ptr node)
 
 	} else if (node->equals ("force-install")) {
 
-	    string source_alias = node->getProp ("source");
+	    string source_alias = node->getProp ("channel");
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 
@@ -600,7 +610,7 @@ parse_xml_setup (XmlNode_Ptr node)
 
 	    poolItem = get_poolItem (source_alias, package_name, kind_name);
 	    if (poolItem) {
-		RESULT << "Force-installing " << package_name << " from source " << source_alias << endl;;
+		RESULT << "Force-installing " << package_name << " from channel " << source_alias << endl;;
 
 		Source_Ref system_source = manager->findSource("@system");
 
@@ -637,7 +647,7 @@ parse_xml_setup (XmlNode_Ptr node)
 
 	} else if (node->equals ("lock")) {
 
-	    string source_alias = node->getProp ("source");
+	    string source_alias = node->getProp ("channel");
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 
@@ -861,7 +871,7 @@ parse_xml_trial (XmlNode_Ptr node)
 
 	} else if (node->equals ("current")) {
 
-	    string source_alias = node->getProp ("source");
+	    string source_alias = node->getProp ("channel");
 	    Source_Ref source = manager->findSource (source_alias);
 
 	    if (source) {
@@ -872,7 +882,7 @@ parse_xml_trial (XmlNode_Ptr node)
 
 	} else if (node->equals ("subscribe")) {
 
-	    string source_alias = node->getProp ("source");
+	    string source_alias = node->getProp ("channel");
 	    Source_Ref source = manager->findSource (source_alias);
 
 	    if (source) {
@@ -891,7 +901,7 @@ parse_xml_trial (XmlNode_Ptr node)
 
 	    poolItem = get_poolItem (source_alias, package_name, kind_name);
 	    if (poolItem) {
-		RESULT << "Installing " << package_name << " from source " << source_alias << endl;;
+		RESULT << "Installing " << package_name << " from channel " << source_alias << endl;;
 		resolver.addPoolItemToInstall (poolItem);
 	    } else {
 		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
@@ -992,7 +1002,7 @@ parse_xml_trial (XmlNode_Ptr node)
 
 	} else if (node->equals ("whatdependson")) {
 
-	    string source_alias = node->getProp ("source");
+	    string source_alias = node->getProp ("channel");
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 	    string prov_name = node->getProp ("provides");
