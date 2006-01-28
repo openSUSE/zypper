@@ -54,11 +54,13 @@ using namespace std;
 
 IMPL_PTR_TYPE(ResolverContext);
 
+//---------------------------------------------------------------------------
+
 ostream&
 operator<<( ostream& os, const ResolverContext & context)
 {
     for (ResolverContext::Context::const_iterator iter = context._context.begin(); iter != context._context.end(); ++iter) {
-	os << *iter << endl;
+	os << iter->first << " : " << iter->second << endl;
     }
     return os;
 }
@@ -95,17 +97,48 @@ ResolverContext::~ResolverContext()
 }
 
 //---------------------------------------------------------------------------
+// status retrieve
+
+ResStatus
+ResolverContext::getStatus (PoolItem_Ref item) const
+{
+    Context::const_iterator it;
+    ResolverContext_constPtr context = this;
+
+    while (context) {					// go through the _parent chain
+
+	it = context->_context.find(item);		// part of local context ?
+	if (it != context->_context.end()) {
+	    return it->second;				// Y: return
+	}
+	context = context->_parent;			// N: go up the chain
+    }
+
+    return item.status();				// Not part of context, return Pool status
+}
+
+
+//---------------------------------------------------------------------------
 // status change
 
 void
-ResolverContext::setStatus (PoolItem_Ref item, ResStatus status)
+ResolverContext::setStatus (PoolItem_Ref item, const ResStatus & status)
 {
-    if (status.isInstalled())
-	item.status().setToBeInstalled();
-    else if (status.isUninstalled())
-	item.status().setToBeUninstalled();
+    if (status == item.status()) {		// same as original status
+	Context::iterator it;
+	it = _context.find(item);		// part of local context ?
+	if (it != _context.end()) {
+	    _context.erase (it);		// erase it !
+	}
+    }
+    else {
+	ResStatus old_status = getStatus (item);
 
-    _context.insert (item);
+	if (old_status != status) {		// new status ?
+	    _context[item] = status;		// set it !
+	}
+    }
+    return;
 }
 
 
@@ -117,7 +150,7 @@ ResolverContext::install (PoolItem_Ref item, bool is_soft, int other_penalty)
     ResStatus status, new_status;
     std::string msg;
 
-    status = item.status();
+    status = getStatus(item);
     DBG << "ResolverContext[" << this << "]::install(<" << status  << "> " << item << ")" << endl;
 
     if (status.isToBeUninstalled()
@@ -144,11 +177,11 @@ ResolverContext::install (PoolItem_Ref item, bool is_soft, int other_penalty)
     }
 
     if (is_soft)
-	item.status().setToBeInstalledSoft();
+	setStatus (item, ResStatus::toBeInstalledSoft);
     else if (status.isToBeUninstalledDueToUnlink())
-	item.status().revert();
+	setStatus (item, ResStatus(true));
     else
-	item.status().setToBeInstalled();
+	setStatus (item, ResStatus::toBeInstalled);
 
     if (status.isUninstalled()) {
 #if 0
@@ -189,7 +222,7 @@ ResolverContext::upgrade (PoolItem_Ref item, PoolItem_Ref old_item, bool is_soft
 
     DBG << "ResolverContext[" << this << "]::upgrade(" << item << " upgrades " << old_item << ")" << endl;
 
-    status = item.status();
+    status = getStatus(item);
 
     if (status.isToBeUninstalled())
 	return false;
@@ -198,10 +231,10 @@ ResolverContext::upgrade (PoolItem_Ref item, PoolItem_Ref old_item, bool is_soft
 	return true;
 
     if (is_soft) {
-	item.status().setToBeInstalledSoft();
+	setStatus (item, ResStatus::toBeInstalledSoft);
     }
     else {
-	item.status().setToBeInstalled();
+	setStatus (item, ResStatus::toBeInstalled);
     }
 
     if (status.isUninstalled()) {
@@ -251,7 +284,7 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 
     assert (! (due_to_obsolete && due_to_unlink));
 
-    status = item.status();
+    status = getStatus(item);
 
     if (status.isToBeInstalled()) {
 	ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_REJECT_INSTALL, item, RESOLVER_INFO_PRIORITY_VERBOSE);
@@ -271,13 +304,13 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
     }
 
     if (due_to_obsolete) {
-	item.status().setToBeUninstalledDueToObsolete();
+	setStatus (item, ResStatus::toBeUninstalledDueToObsolete);
     }
     else if (due_to_unlink) {
-	item.status().setToBeUninstalledDueToUnlink();
+	setStatus (item, ResStatus::toBeUninstalledDueToUnlink);
     }
     else {
-	item.status().setToBeUninstalled();
+	setStatus (item, ResStatus::toBeUninstalled);
     }
 
     if (status.isInstalled()) {
@@ -302,12 +335,13 @@ ResolverContext::unneeded (PoolItem_Ref item, int other_penalty)
 
     DBG << "ResolverContext[" << this << "]::unneeded(" << item << ")" << endl;
 
-    status = item.status();
+    status = getStatus(item);
 
-    if (status.isInstalled()
-	|| status.isUninstalled()
-	|| status.isSatisfied()) {
-	item.status().setUnneeded();
+    if (status.isInstalled()) {
+	setStatus (item, ResStatus::satisfied);
+    }
+    else {
+	setStatus (item, ResStatus::unneeded);
     }
 
     return true;
@@ -321,17 +355,15 @@ ResolverContext::satisfy (PoolItem_Ref item, int other_penalty)
 {
     ResStatus status;
 
-    status = item.status();
+    status = getStatus(item);
 
     DBG << "ResolverContext[" << this << "]::satisfy(" << item << ":" << status << ")" << endl;
 
-    if (status.isInstalled()
-	|| status.isUninstalled()
-	|| status.isUnneeded()) {
-	item.status().setSatisfied();
+    if (status.isInstalled()) {
+	setStatus (item, ResStatus::complete);
     }
     else {
-	WAR << "Can't satisfy " << item << " is is already " << status << endl;
+	setStatus (item, ResStatus::satisfied);
     }
 
     return true;
@@ -346,7 +378,7 @@ ResolverContext::incomplete (PoolItem_Ref item, int other_penalty)
     DBG << "ResolverContext[" << this << "]::incomplete(" << item << ")" << endl;
 
     ResStatus status;
-    status = item.status();
+    status = getStatus(item);
 
     if (status.isInstalled()) {
 	ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INCOMPLETES, item, RESOLVER_INFO_PRIORITY_VERBOSE);
@@ -359,7 +391,12 @@ ResolverContext::incomplete (PoolItem_Ref item, int other_penalty)
 	return false;
     }
 
-    item.status().setIncomplete();
+    if (status.isInstalled()) {
+	setStatus (item, ResStatus::incomplete);
+    }
+    else {
+	setStatus (item, ResStatus::needed);
+    }
 
     return true;
 }
@@ -371,16 +408,14 @@ ResolverContext::incomplete (PoolItem_Ref item, int other_penalty)
 bool
 ResolverContext::isPresent (PoolItem_Ref item) const
 {
-    ResStatus status;
-
-    status = item.status();
+    ResStatus status = getStatus(item);
 
 //ERR << "ResolverContext::itemIsPresent(<" << status << ">" << item << ")" << endl;
 
     return (status.isInstalled()
 	    || status.isToBeInstalled()
-	    || status.isSatisfied ()
-	    || status.isUnneeded ());
+	    || status.isToBeInstalledSoft()
+	    || status.isSatisfied ());
 }
 
 
@@ -392,7 +427,7 @@ ResolverContext::isAbsent (PoolItem_Ref item) const
 {
     ResStatus status;
 
-    status = item.status();
+    status = getStatus(item);
 
     // DONT add incomplete here, uninstall requests for incompletes must be handled
 
@@ -409,8 +444,8 @@ ResolverContext::foreachMarked (MarkedPoolItemFn fn, void *data) const
 {
     ResolverContext_constPtr context = this;
     while (context) {
-	for (Context::iterator iter = context->_context.begin(); iter != context->_context.end(); ++iter) {
-	    fn (*iter, data);
+	for (Context::const_iterator iter = context->_context.begin(); iter != context->_context.end(); ++iter) {
+	    fn (iter->first, iter->second, data);
 	}
 	context = context->_parent;
     }
@@ -427,12 +462,12 @@ typedef struct {
 
 
 static void
-marked_item_collector (PoolItem_Ref item, void *data)
+marked_item_collector (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     MarkedResolvableInfo *info = (MarkedResolvableInfo *)data;
     if (info->status == 0
-       || (info->status > 0 && item.status().isToBeInstalled())
-       || (info->status < 0 && item.status().isToBeUninstalled()))
+       || (info->status > 0 && status.isToBeInstalled())
+       || (info->status < 0 && status.isToBeUninstalled()))
     {
 	info->rl->push_back (item);
     }
@@ -461,15 +496,14 @@ typedef struct {
 } InstallInfo;
 
 static void
-install_pkg_cb (PoolItem_Ref item, void *data)
+install_pkg_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     InstallInfo *info = (InstallInfo *)data;
-    if (item.status().isToBeInstalled()
-	&& ! item.status().isInstalled ()
+    if (status.isToBeInstalled()
+	&& ! status.isInstalled ()
 	&& !Helper::findInstalledItem (info->pool, item))
     {
-
-	if (info->fn) info->fn (item, info->rl);
+	if (info->fn) info->fn (item, status, info->rl);
 	++info->count;
     }
 }
@@ -488,11 +522,11 @@ ResolverContext::foreachInstall (MarkedPoolItemFn fn, void *data) const
 
 
 static void
-context_item_collector (PoolItem_Ref item, void *data)
+context_item_collector (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     PoolItemList *rl = (PoolItemList *)data;
-    if (item.status().isToBeInstalled()
-	|| item.status().isToBeUninstalled())
+    if (status.isToBeInstalled()
+	|| status.isToBeUninstalled())
     {
 	rl->push_front (item);
     }
@@ -521,14 +555,14 @@ typedef struct {
 } SatisfyInfo;
 
 static void
-satisfy_pkg_cb (PoolItem_Ref item, void *data)
+satisfy_pkg_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     SatisfyInfo *info = (SatisfyInfo *)data;
-    if (item.status().isSatisfied()
-       && ! item.status().isInstalled ()
+    if (status.isSatisfied()
+       && ! status.isInstalled ()
        && !Helper::findInstalledItem (info->pool, item))
     {
-       if (info->fn) info->fn (item, info->rl);
+       if (info->fn) info->fn (item, status, info->rl);
        ++info->count;
     }
 }
@@ -547,10 +581,10 @@ ResolverContext::foreachSatisfy (MarkedPoolItemFn fn, void *data) const
 
 
 static void
-context_item_collector_satisfy (PoolItem_Ref item, void *data)
+context_item_collector_satisfy (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     PoolItemList *rl = (PoolItemList *)data;
-    if (item.status().isSatisfied ())
+    if (status.isSatisfied ())
     {
        rl->push_front (item);
     }
@@ -579,12 +613,12 @@ typedef struct {
 } IncompleteInfo;
 
 static void
-incomplete_pkg_cb (PoolItem_Ref item, void *data)
+incomplete_pkg_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     IncompleteInfo *info = (IncompleteInfo *)data;
 
-    if (item.status().isIncomplete ()) {
-       if (info->fn) info->fn (item, info->rl);
+    if (status.isIncomplete ()) {
+       if (info->fn) info->fn (item, status, info->rl);
        ++info->count;
     }
 }
@@ -603,10 +637,10 @@ ResolverContext::foreachIncomplete (MarkedPoolItemFn fn, void *data) const
 
 
 static void
-context_item_collector_incomplete (PoolItem_Ref item, void *data)
+context_item_collector_incomplete (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     PoolItemList *rl = (PoolItemList *)data;
-    if (item.status().isIncomplete ())
+    if (status.isIncomplete ())
     {
        rl->push_front (item);
     }
@@ -636,20 +670,20 @@ typedef struct {
 } UpgradeInfo;
 
 static void
-upgrade_pkg_cb (PoolItem_Ref item, void *data)
+upgrade_pkg_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     UpgradeInfo *info = (UpgradeInfo *)data;
 
     PoolItem_Ref to_be_upgraded;
 
-    if (item.status().isToBeInstalled()
-	&& ! item.status().isInstalled ())
+    if (status.isToBeInstalled()
+	&& ! status.isInstalled ())
     {
 
 	to_be_upgraded = Helper::findInstalledItem(info->pool, item);
 	if (to_be_upgraded) {
 	    if (info->fn) {
-		info->fn (item, to_be_upgraded, info->data);
+		info->fn (item, status, to_be_upgraded, info->context->getStatus(to_be_upgraded), info->data);
 	    }
 	    ++info->count;
 	}
@@ -669,7 +703,7 @@ ResolverContext::foreachUpgrade (MarkedPoolItemPairFn fn, void *data) const
 
 
 static void
-pair_item_collector (PoolItem_Ref item, PoolItem_Ref old, void *data)
+pair_item_collector (PoolItem_Ref item, const ResStatus & status, PoolItem_Ref old_item, const ResStatus & old_status, void *data)
 {
     PoolItemList *rl = (PoolItemList *)data;
     rl->push_back (item);
@@ -700,24 +734,24 @@ typedef struct {
 } UninstallInfo;
 
 static void
-uninstall_pkg_cb (PoolItem_Ref item, void *data)
+uninstall_pkg_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     UninstallInfo *info = (UninstallInfo *)data;
 
     UpgradeTable::const_iterator pos = info->upgrade_hash.find(item->name());
 
-    if (item.status().isToBeUninstalled ()
+    if (status.isToBeUninstalled ()
 	&& pos == info->upgrade_hash.end())
     {
 	if (info->fn)
-	    info->fn (item, info->rl);
+	    info->fn (item, status, info->rl);
 	++info->count;
     }
 }
 
 
 static void
-build_upgrade_hash_cb (PoolItem_Ref item_add, PoolItem_Ref item_del, void *data)
+build_upgrade_hash_cb (PoolItem_Ref item_add, const ResStatus & add_status, PoolItem_Ref item_del, const ResStatus & del_status, void *data)
 {
     UpgradeTable *upgrade_hash = (UpgradeTable *)data;
     (*upgrade_hash)[item_del->name()] = item_del;
@@ -754,10 +788,10 @@ ResolverContext::getUninstalls (void) const
 //---------------------------------------------------------------------------
 
 static void
-install_count_cb (PoolItem_Ref item, void *data)
+install_count_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     int *count = (int *)data;
-    if (! item.status().isInstalled ()) {
+    if (! status.isInstalled ()) {
 	++*count;
     }
 }
@@ -774,10 +808,10 @@ ResolverContext::installCount (void) const
 
 
 static void
-uninstall_count_cb (PoolItem_Ref item, void *data)
+uninstall_count_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     int *count = (int *)data;
-    if (item.status().isInstalled ()) {
+    if (status.isInstalled ()) {
 	++*count;
     }
 }
@@ -802,10 +836,10 @@ ResolverContext::upgradeCount (void) const
 
 
 static void
-satisfy_count_cb (PoolItem_Ref item, void *data)
+satisfy_count_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     int *count = (int *)data;
-    if (! item.status().isInstalled ()) {
+    if (! status.isInstalled ()) {
 	++*count;
     }
 }
@@ -1028,16 +1062,16 @@ ResolverContext::getInfo (void) const
 // spew
 
 static void
-spew_pkg_cb (PoolItem_Ref item, void *unused)
+spew_item_cb (PoolItem_Ref item, const ResStatus & status, void *unused)
 {
-    MIL << "  " << item << " (" << item.status() << ")" << endl;
+    MIL << "  " << item << " (" << status << ")" << endl;
 }
 
 
 void
-spew_pkg2_cb (PoolItem_Ref item1, PoolItem_Ref item2, void *unused)
+spew_item_pair_cb (PoolItem_Ref item1, const ResStatus & status1, PoolItem_Ref item2, const ResStatus & status2, void *unused)
 {
-    MIL << "  " << item2 << " (" << item2.status() << ") => (" << item1 << " (" << item1.status() << ")" << endl;
+    MIL << "  " << item2 << " (" << status2 << ") => (" << item1 << " (" << status2 << ")" << endl;
 }
 
 
@@ -1045,15 +1079,15 @@ void
 ResolverContext::spew (void) const
 {
     MIL << "TO INSTALL:" << endl;
-    foreachInstall (spew_pkg_cb, NULL);
+    foreachInstall (spew_item_cb, NULL);
     MIL << endl;
 
     MIL << "TO REMOVE:" << endl;
-    foreachUninstall (spew_pkg_cb, NULL);
+    foreachUninstall (spew_item_cb, NULL);
     MIL << endl;
 
     MIL << "TO UPGRADE:" << endl;
-    foreachUpgrade (spew_pkg2_cb, NULL);
+    foreachUpgrade (spew_item_pair_cb, NULL);
     MIL << endl;
 }
 
@@ -1193,11 +1227,11 @@ typedef struct {
 } DupNameCheckInfo;
 
 static void
-dup_name_check_cb (PoolItem_Ref item, void *data)
+dup_name_check_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     DupNameCheckInfo *info = (DupNameCheckInfo *)data;
     if (! info->flag
-	&& item.status().isToBeInstalled ()
+	&& status.isToBeInstalled ()
 	&& info->other->name() == item->name()
 	&& !compareByNVR (item.resolvable(), info->other.resolvable()))
     {

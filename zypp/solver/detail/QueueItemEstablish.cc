@@ -114,22 +114,28 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	}
     }
 
+    ResStatus status = context->getStatus(_item);
+
     // if we have freshens but none of the freshen deps were met, mark the _item as unneeded
     // else we look at its requires to set it to satisfied or incomplete
-    if (freshens.size() > 0
-	&& iter == freshens.end()) {
+
+    if (status.isUninstalled()
+	&& freshens.size() > 0
+	&& iter == freshens.end())
+    {
 	DBG << "this freshens nothing -> unneeded" << endl;
 	context->unneeded (_item, _other_penalty);
     }
-    else {
-	CapSet requires = _item->dep(Dep::REQUIRES);
+    else {							// installed or no freshens or triggered freshens
+
+	CapSet requires = _item->dep(Dep::REQUIRES);			// check requirements
 	for (iter = requires.begin(); iter != requires.end(); iter++) {
 	    const Capability cap = *iter;
 	    if (!context->requirementIsMet (cap)) {
 		break;
 	    }
 	}
-	if (iter == requires.end()) {		// all are met
+	if (iter == requires.end()) {					// all are met
 	    DBG << "all requirements met -> satisfied" << endl;
 	    context->satisfy (_item, _other_penalty);
 	}

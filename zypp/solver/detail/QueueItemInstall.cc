@@ -170,7 +170,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
     DBG <<  "QueueItemInstall::process(" << *this << ")" << endl;
 
-    ResStatus status = _item.status();
+    ResStatus status = context->getStatus(_item);
 
     /* If we are trying to upgrade item A with item B and they both have the
 	same version number, do nothing.  This shouldn't happen in general with
@@ -213,7 +213,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	   needed this. */
 
     if (context->verifying()
-	&& _item.status().isToBeUninstalled()
+	&& status.isToBeUninstalled()
 	&& !_needed_by.empty()) {
 
 	QueueItemUninstall_Ptr uninstall_item;

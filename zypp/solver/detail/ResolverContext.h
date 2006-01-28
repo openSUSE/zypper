@@ -2,7 +2,7 @@
 /* ResolverContext.h
  *
  *Keep a set of 'active' PoolItems, these are part of the current
- *transaction
+ *transaction. It thereby provides a to-be status for these items
  *
  *
  *Copyright (C) 2000-2002 Ximian, Inc.
@@ -44,8 +44,8 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
 typedef void (*ResolverContextFn) (ResolverContext_Ptr ctx, void *data);
-typedef void (*MarkedPoolItemFn) (PoolItem_Ref item, void *data);
-typedef void (*MarkedPoolItemPairFn) (PoolItem_Ref item1, PoolItem_Ref item2, void *data);
+typedef void (*MarkedPoolItemFn) (PoolItem_Ref item, const ResStatus & status, void *data);
+typedef void (*MarkedPoolItemPairFn) (PoolItem_Ref item1, const ResStatus & status1, PoolItem_Ref item2, const ResStatus & status2, void *data);
 
 
 ///////////////////////////////////////////////////////////////////
@@ -58,7 +58,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     ResolverContext_Ptr _parent;		// branches share a common parent
 
-    typedef std::set<PoolItem_Ref> Context;
+    typedef std::map<PoolItem_Ref,ResStatus> Context;
     Context _context;				// the set of items touched in this transaction
 
     const ResPool *_pool;
@@ -103,6 +103,12 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     // ---------------------------------- methods
 
+    /**
+     *get the state of \c item
+     *This is NOT the status in the pool but the status according
+     * to the context. */
+    ResStatus getStatus (PoolItem_Ref item) const;
+
     /** state change functions
     *  they do some checking before actually changing the state of the PoolItem. */
 
@@ -110,7 +116,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
      *set the state of \c item to \c status
      *If \c status is not the current state of \c item, make \c item
      *part of the current transaction (the context) */
-    void setStatus (PoolItem_Ref item, ResStatus status);
+    void setStatus (PoolItem_Ref item, const ResStatus & status);
 
     /**
      *set \c item to \a to-be-installed */

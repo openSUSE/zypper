@@ -209,7 +209,7 @@ struct UninstallProcess: public resfilter::OnCapMatchCallbackFunctor
 bool
 QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
-    ResStatus status = _item.status();
+    ResStatus status = context->getStatus(_item);
 
     DBG << "QueueItemUninstall::process(<" << status << ">" << _item << ( _unlink ? "[unlink]" : "") << endl;
 
@@ -238,7 +238,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    /* Flag the item as to-be-uninstalled so that it won't
 	       satisfy any other item's deps during this check. */
 
-	    _item.status().setToBeUninstalled ();
+	    context->setStatus(_item, ResStatus::toBeUninstalled);
 
 	    info.context = context;
 	    info.cancel_unlink = false;
@@ -260,7 +260,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	    /* Set the status back to normal. */
 
-	    _item.status().setStatus (status);
+	    context->setStatus(_item, status);
 
 	    if (info.cancel_unlink) {
 		ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALL_INSTALLED, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
