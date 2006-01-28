@@ -9,11 +9,14 @@ LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la helix/lib@PACKAGE@_helix.la
 
 # We're not ready for this yet.
 #check_PROGRAMS = deptestomatic.multi
-noinst_PROGRAMS = zypptestomatic.multi			\
-		helixparse
+noinst_PROGRAMS = deptestomatic.multi			\
+		helixparse				\
+		test
 
-zypptestomatic_multi_SOURCES =				\
-	zypptestomatic.cc
+deptestomatic_multi_SOURCES =				\
+	deptestomatic.cc
 
 helixparse_SOURCES =					\
 	helixparse.cc
+
+test_SOURCES = test.cc

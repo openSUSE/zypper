@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 
 /*
- * deptestomatic.cc
+ * zypptestomatic.cc
  *
  * Copyright (C) 2002 Ximian, Inc.
  * Copyright (C) 2005 SUSE Linux Products GmbH
@@ -24,8 +24,11 @@
  * USA.
  */
 
+#include <sstream>
+#include <iostream>
+#include <map>
+#include <set>
 
-#include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <sys/types.h>
@@ -33,40 +36,74 @@
 #include <unistd.h>
 #include <libxml/parser.h>
 #include <libxml/xmlmemory.h>
-#include <zypp/Resolvable.h>
-#include <zypp/ResTraits.h>
-#include <zypp/Capability.h>
-#include <zypp/CapSet.h>
-#include <zypp/CapFactory.h>
-#include <zypp/solver/libzypp_solver.h>
+#include "helix/XmlNode.h"
 
-int assertOutput( const char* output)
-{
-    printf( "Assertion in %s, %d : %s  --> exit\n",  __FILE__, __LINE__,
-	     output );
-    exit (0);
-}
+#include "zypp/Resolvable.h"
+#include "zypp/ResTraits.h"
+#include "zypp/ResPool.h"
+#include "zypp/PoolItem.h"
+#include "zypp/Capability.h"
+#include "zypp/CapSet.h"
+#include "zypp/CapFactory.h"
+#include "zypp/solver/libzypp_solver.h"
 
-# define assertExit(expr) \
-  (__ASSERT_VOID_CAST ((expr) ? 0 :		 \
-		       (assertOutput (__STRING(expr)))))
+#include "zypp/Source.h"
+#include "zypp/SourceFactory.h"
+#include "zypp/SourceManager.h"
+#include "zypp/source/SourceImpl.h"
 
+#include "zypp/base/String.h"
+#include "zypp/base/Logger.h"
+#include "zypp/base/Exception.h"
 
+#include "zypp/base/Algorithm.h"
+#include "zypp/ResPool.h"
+#include "zypp/ResFilters.h"
+#include "zypp/CapFilters.h"
+
+#include "zypp/media/MediaAccess.h"
+#include "zypp/source/SourceImpl.h"
+
+#include "helix/HelixSourceImpl.h"
+
+#include "zypp/ZYpp.h"
+#include "zypp/ZYppFactory.h"
 
 using namespace std;
-using zypp::Resolvable;
-using zypp::ResTraits;
-using zypp::Capability;
-using zypp::CapSet;
-using zypp::CapFactory;
+using namespace zypp;
 using namespace zypp::solver::detail;
 
-static MultiWorld_Ptr world = NULL;
 static string globalPath;
+static const ResPool *globalPool = NULL;
+static ZYpp::Ptr God;
+static SourceManager_Ptr manager;
 
 typedef list<unsigned int> ChecksumList;
+typedef std::set <zypp::PoolItem_Ref> PoolItemSet;
 
 #define RESULT cout << ">!> "
+
+static std::ostream &
+printRes ( std::ostream & str, ResObject::constPtr r )
+{
+    if (r->kind() != ResTraits<zypp::Package>::kind)
+	str << '[' << r->kind() << ']';
+    str  << r->name() << '-' << r->edition();
+    if (r->arch() != "") {
+	str << '.' << r->arch();
+    }
+    Source_Ref s = r->source();
+    if (s) {
+	string alias = s.alias();
+	if (!alias.empty()
+	    && alias != "@system")
+	{
+	    str << '[' << s.alias() << ']';
+	}
+//	str << '[' << s << ']';
+    }
+    return str;
+}
 
 //---------------------------------------------------------------------------
 
@@ -94,7 +131,7 @@ string2kind (const std::string & str)
 	    kind = ResTraits<zypp::Product>::kind;
 	}
 	else {
-	    fprintf (stderr, "get_resItem unknown kind '%s'\n", str.c_str());
+	    cerr << "get_poolItem unknown kind '" << str << "'" << endl;
 	}
     }
     return kind;
@@ -102,57 +139,29 @@ string2kind (const std::string & str)
 
 //---------------------------------------------------------------------------
 
+#warning Locks not implemented
 #if 0
 static void
-lock_resItem (ResItem_Ptr resItem)
+lock_poolItem (PoolItem_Ref poolItem)
 {
     RCResItemDep *dep;
     RCResItemMatch *match;
 
-    dep = rc_resItem_dep_new_from_spec (RC_RESOLVABLE_SPEC (resItem),
+    dep = rc_poolItem_dep_new_from_spec (RC_RESOLVABLE_SPEC (poolItem),
 					RC_RELATION_EQUAL, RC_TYPE_RESOLVABLE,
 					RC_CHANNEL_ANY, false, false);
 
-    match = rc_resItem_match_new ();
-    rc_resItem_match_set_dep (match, dep);
+    match = rc_poolItem_match_new ();
+    rc_poolItem_match_set_dep (match, dep);
 
-    rc_resItem_dep_unref (dep);
+    rc_poolItem_dep_unref (dep);
 
     rc_world_add_lock (rc_get_world (), match);
 }
 
 #endif	// 0
 
-
-typedef struct {
-    ResItem_constPtr resolvable;
-} RemoveTypeInfo;
- 
-
-static bool
-remove_resItem_cb (World_Ptr world, void *data)
-{
-    RemoveTypeInfo *info = (RemoveTypeInfo *)data;
-    StoreWorld_Ptr store = boost::dynamic_pointer_cast<StoreWorld>(world);
-    if (store == NULL) {
-	fprintf (stderr, "remove_resItem_cb: world is not a STORE_WORLD\n");
-	return false;
-    }
-    store->removeResItem (info->resolvable);
-
-    return true;
-}
-
-
-static void
-remove_resItem (ResItem_constPtr resItem)
-{
-    RemoveTypeInfo info = { resItem };
-    world->foreachSubworldByType (STORE_WORLD, remove_resItem_cb, &info);
-}
-
 /* ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** */
-
 
 //==============================================================================================================================
 
@@ -162,88 +171,72 @@ remove_resItem (ResItem_constPtr resItem)
 typedef list<string> StringList;
 
 static void
-assemble_install_cb (ResItem_constPtr resItem,
-		     ResItemStatus status,
-		     void *data)
+assemble_install_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
     StringList *slist = (StringList *)data;
-    char buf[10];
-    snprintf (buf, 10, "%-7s ", resItem->isInstalled() ? "|flag" : "install");
-    string str (buf);
-    str += resItem->asString();
+    ostringstream s;
+    s << str::form ("%-7s ", status.isInstalled() ? "|flag" : "install");
+    printRes (s, poolItem.resolvable());
 
-    slist->push_back (str);
+    slist->push_back (s.str());
 }
 
 
 static void
-assemble_uninstall_cb (ResItem_constPtr resItem,
-		       ResItemStatus status,
-		       void *data)
+assemble_uninstall_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
     StringList *slist = (StringList *)data;
-    char buf[10];
-    snprintf (buf, 10, "%-7s ", resItem->isInstalled() ? "remove" : "|unflag");
-    string str (buf);
-    str += resItem->asString();
+    ostringstream s;
+    s << str::form ("%-7s ", status.isInstalled() ? "remove" : "|unflag");
+    printRes (s, poolItem.resolvable());
 
-    slist->push_back (str);
+    slist->push_back (s.str());
 }
 
 
 static void
-assemble_upgrade_cb (ResItem_constPtr res1,
-		     ResItemStatus status1,
-		     ResItem_constPtr res2,
-		     ResItemStatus status2,
-		     void *data)
+assemble_upgrade_cb (PoolItem_Ref res1, const ResStatus & status, PoolItem_Ref res2, const ResStatus & status2, void *data)
 {
     StringList *slist = (StringList *)data;
-    string str = "upgrade ";
+    ostringstream s;
 
-    str += res2->asString();
-    str += " => ";
-    str += res1->asString();
+    s << "upgrade ";
 
-    slist->push_back (str);
+    printRes (s, res2.resolvable());
+    s << " => ";
+    printRes (s, res1.resolvable());
+
+    slist->push_back (s.str());
 }
 
 
 static void
-assemble_incomplete_cb (ResItem_constPtr resItem,
-		       ResItemStatus status,
-		       void *data)
+assemble_incomplete_cb (PoolItem_Ref poolItem, const ResStatus & status,void *data)
 {
     StringList *slist = (StringList *)data;
-    char buf[13];
-    snprintf (buf, 13, "%-11s ", resItem->isInstalled() ? "incomplete" : "|incomplete");
-    string str (buf);
-    str += resItem->asString();
+    ostringstream s;
+    s << str::form ("%-11s ", status.isInstalled() ? "incomplete" : "|incomplete");
+    printRes (s, poolItem.resolvable());
 
-    slist->push_back (str);
+    slist->push_back (s.str());
 }
 
 
 static void
-assemble_satisfy_cb (ResItem_constPtr resItem,
-		       ResItemStatus status,
-		       void *data)
+assemble_satisfy_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
     StringList *slist = (StringList *)data;
-    char buf[13];
-    snprintf (buf, 13, "%-10s ", resItem->isInstalled() ? "SATISFIED" : "|satisfied");
-    string str (buf);
-    str += resItem->asString();
+    ostringstream s;
+    s << str::form ("%-10s ", status.isInstalled() ? "SATISFIED" : "|satisfied");
+    printRes (s, poolItem.resolvable());
 
-    slist->push_back (str);
+    slist->push_back (s.str());
 }
-
-
 
 static void
 print_sep (void)
 {
-    printf ("\n------------------------------------------------\n\n");
+    cout << endl << "------------------------------------------------" << endl << endl;
 }
 
 
@@ -287,7 +280,7 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 		++c;
 	    }
 	}
-	printf ("Checksum = %x\n", checksum);
+	cout << str::form ("Checksum = %x", checksum) << endl;
 
 	for (ChecksumList::const_iterator iter = checksum_list.begin(); iter != checksum_list.end() && !is_dup; iter++) {
 	    if (*iter == checksum) {
@@ -314,225 +307,257 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
     int satisfied = context->satisfyCount();
     if (satisfied > 0) cout << ", satisfied=" << satisfied;
     cout << endl;
-    printf ("download size=%.1fk, install size=%.1fk\n", context->downloadSize() / 1024.0, context->installSize() / 1024.0);
-    printf ("total priority=%d, min priority=%d, max priority=%d\n", context->totalPriority(), context->minPriority(), context->maxPriority());
-    printf ("other penalties=%d\n",  context->otherPenalties());
-    printf ("- - - - - - - - - -\n");
+    cout << str::form ("download size=%.1fk, install size=%.1fk\n", context->downloadSize() / 1024.0, context->installSize() / 1024.0);
+    cout << str::form ("total priority=%d, min priority=%d, max priority=%d\n", context->totalPriority(), context->minPriority(), context->maxPriority());
+    cout << str::form ("other penalties=%d\n",  context->otherPenalties());
+    cout << "- - - - - - - - - -" << endl;
 
     if (instorder) {
 	cout << endl;
 	RESULT << "Installation Order:" << endl << endl;
-	CResItemList installs = context->getMarkedResItems(1);
-	CResItemList dummy;
+	PoolItemList installs = context->getMarked(1);
+	PoolItemList dummy;
 
-	InstallOrder order( world, installs, dummy );		 // sort according top prereq
+	InstallOrder order( globalPool, installs, dummy );		 // sort according top prereq
 	order.init();
-	const CResItemList & installorder ( order.getTopSorted() );
-	for (CResItemList::const_iterator iter = installorder.begin(); iter != installorder.end(); iter++) {
-		RESULT << (*iter)->asString() << endl;
+	const PoolItemList & installorder ( order.getTopSorted() );
+	for (PoolItemList::const_iterator iter = installorder.begin(); iter != installorder.end(); iter++) {
+		RESULT << (*iter) << endl;
 	}
-	printf ("- - - - - - - - - -\n");
+	cout << "- - - - - - - - - -" << endl;
     }
 
     fflush (stdout);
 
     context->spewInfo ();
-    if (getenv ("RC_SPEW")) printf ("%s\n", context->asString().c_str());
-    fflush (stdout);
+    if (getenv ("RC_SPEW")) cout << context << endl;
 
 }
-
 
 //---------------------------------------------------------------------------------------------------------------------
-static void
-undump (const std::string & filename)
+struct FindPackage : public resfilter::ResObjectFilterFunctor
 {
-    UndumpWorld_Ptr undump_world;
-    std::string pathname = globalPath + filename;
+    PoolItem_Ref poolItem;
+    Source_Ref source;
+    Resolvable::Kind kind;
 
-    undump_world = new UndumpWorld (pathname);
-    if (undump_world == NULL) {
-	fprintf (stderr, "Couldn't undump from file '%s'", pathname.c_str());
-	return;
+    FindPackage (Source_Ref s, Resolvable::Kind k)
+	: source (s)
+	, kind (k)
+    { }
+
+    bool operator()( PoolItem_Ref p)
+    {
+	Source_Ref s = p->source();
+	if (s.alias() != source.alias()) {
+	    return true;
+	}
+	poolItem = p;
+	return false;				// stop here, we found it
     }
-
-    world->addSubworld (undump_world);
-}
+};
 
 
-static Channel_Ptr
-get_channel (const string & channel_name)
+
+static PoolItem_Ref
+get_poolItem (const string & source_alias, const string & package_name, const string & kind_name = "")
 {
-    Channel_Ptr channel;
-
-    channel = world->getChannelById (channel_name);
-
-    if (channel == NULL)
-	channel = world->getChannelByAlias (channel_name);
-
-    if (channel == NULL)
-	channel = world->getChannelByName (channel_name);
-
-    return channel;
-}
-
-
-static ResItem_constPtr
-get_resItem (const string & channel_name, const string & package_name, const string & kind_name = "")
-{
-    Channel_constPtr channel;
-    ResItem_constPtr resItem;
+    PoolItem_Ref poolItem;
     Resolvable::Kind kind = string2kind (kind_name);
-    channel = get_channel (channel_name);
 
-    if (channel == NULL) {
-	fprintf (stderr, "Can't find resolvable '%s': channel '%s' not defined\n", package_name.c_str(), channel_name.c_str());
-	return NULL;
+    try {
+	Source_Ref source = manager->findSource (source_alias);
+	if (!source) {
+	    cerr << "Can't find source '" << source_alias << "'" << endl;
+	    return poolItem;
+	}
+
+	FindPackage info (source, kind);
+
+	invokeOnEach( God->pool().byNameBegin( package_name ),
+		      God->pool().byNameEnd( package_name ),
+//		      functor::chain( resfilter::BySource(source), resfilter::ByKind (kind) ),
+		      resfilter::ByKind (kind),
+		      functor::functorRef<bool,PoolItem> (info) );
+
+	poolItem = info.poolItem;
+    }
+    catch (Exception & excpt_r) {
+	ZYPP_CAUGHT (excpt_r);
+	cerr << "Can't find resolvable '" << package_name << "': source '" << source_alias << "' not defined" << endl;
+	return poolItem;
     }
 
-    resItem = world->findResItem (channel, package_name, kind);
-
-    if (resItem == NULL) {
-	fprintf (stderr, "Can't find resolvable '%s' in channel '%s': no such name/kind\n", package_name.c_str(), channel_name.c_str());
-	return NULL;
+    if (!poolItem) {
+	cerr << "Can't find resolvable '" << package_name << "' in source '" << source_alias << "': no such name/kind" << endl;
     }
 
-    return resItem;
+    return poolItem;
 }
+
 
 //---------------------------------------------------------------------------------------------------------------------
 // whatdependson
 
-typedef struct {
-    CResItemSet *rs;
-    ResItem_constPtr resItem;
+
+struct RequiringPoolItem : public resfilter::OnCapMatchCallbackFunctor
+{
+    PoolItemSet itemset;
+    PoolItem_Ref provider;
     Capability cap;
     bool first;
-} WhatDependsOnInfo;
 
+    RequiringPoolItem (PoolItem_Ref p)
+	: provider (p)
+    { }
 
-static bool
-requires_resItem_cb (ResItem_constPtr resItem, const Capability & cap, void *data)
-{
-    WhatDependsOnInfo *info = (WhatDependsOnInfo *)data;
-    if (info->rs->insert (resItem).second) {
-	if (info->first) {
-    printf ("\t%s provides %s required by\n", info->resItem->asString().c_str(), info->cap.asString().c_str());
-	    info->first = false;
+    bool operator()( PoolItem_Ref requirer, const Capability & match )
+    {
+	if (itemset.insert (requirer).second) {
+	    if (first) {
+		cout << "\t" << provider.resolvable() << " provides " << cap << " required by" << endl;
+		first = false;
+	    }
+	    cout << "\t\t" << requirer.resolvable() << " for " << cap << endl;
 	}
-	printf ("\t\t%s for %s\n", resItem->asString().c_str(), cap.asString().c_str());
+	return true;
     }
-    return true;
-}
+};
 
 
-static CResItemSet
-whatdependson (ResItem_constPtr resItem)
+static PoolItemSet
+whatdependson (PoolItem_Ref poolItem)
 {
-    CResItemSet rs;
+    cout << endl << endl << "What depends on '" << poolItem.resolvable() << "'" << endl;
 
-    printf ("\n\nWhat depends on '%s'\n", resItem->asString().c_str());
-
-    WhatDependsOnInfo info;
-    info.rs = &rs;
-    info.resItem = resItem;
+    RequiringPoolItem info (poolItem);
 
     // loop over all provides and call foreachRequiringResItem
-    CapSet caps = resItem->provides();
+
+    CapSet caps = poolItem->dep (Dep::PROVIDES);
     for (CapSet::const_iterator cap_iter = caps.begin(); cap_iter != caps.end(); ++cap_iter) {
+
 	info.cap = *cap_iter;
 	info.first = true;
-	world->foreachRequiringResItem (info.cap, requires_resItem_cb, &info);
+
+	//world->foreachRequiringResItem (info.cap, requires_poolItem_cb, &info);
+
+	Dep dep( Dep::REQUIRES );
+	invokeOnEach( God->pool().byCapabilityIndexBegin( info.cap.index(), dep ),
+		      God->pool().byCapabilityIndexEnd( info.cap.index(), dep ),
+		      resfilter::callOnCapMatchIn( dep, info.cap, functor::functorRef<bool,PoolItem,Capability>(info) ) );
+
     }
 
-    return rs;
+    return info.itemset;
 }
+
 
 //---------------------------------------------------------------------------------------------------------------------
 // whatprovides
 
-static bool
-providing_resItem_cb (ResItem_constPtr resItem, const Capability & cap, void *data)
+
+struct ProvidingPoolItem : public resfilter::OnCapMatchCallbackFunctor
 {
-    CResItemSet *rs = (CResItemSet *)data;
-    rs->insert (resItem);
-    return true;
-}
+    PoolItemSet itemset;
+
+    bool operator()( PoolItem_Ref provider, const Capability & match )
+    {
+	itemset.insert (provider);
+	return true;
+    }
+};
 
 
-static CResItemSet
-get_providing_resItems (const string & prov_name, const string & kind_name = "")
+static PoolItemSet
+get_providing_poolItems (const string & prov_name, const string & kind_name = "")
 {
-    CResItemSet rs;
+    PoolItemSet rs;
     Resolvable::Kind kind = string2kind (kind_name);
 
     CapFactory factory;
     Capability cap = factory.parse (kind, prov_name);
-    world->foreachProvidingResItem (cap, providing_resItem_cb, &rs);
 
-    return rs;
+    Dep dep( Dep::PROVIDES );
+    ProvidingPoolItem info;
+
+    // world->foreachProvidingResItem (cap, providing_poolItem_cb, &rs);
+
+    invokeOnEach( God->pool().byCapabilityIndexBegin( cap.index(), dep ),
+		  God->pool().byCapabilityIndexEnd( cap.index(), dep ),
+		  resfilter::callOnCapMatchIn( dep, cap, functor::functorRef<bool,PoolItem,Capability>(info) ) );
+
+    return info.itemset;
 }
+
+
 
 //---------------------------------------------------------------------------------------------------------------------
 // setup related functions
 
-static bool
-add_to_world_cb (ResItem_constPtr resItem, void *data)
+struct PrintItem : public resfilter::PoolItemFilterFunctor
 {
-    StoreWorld_Ptr world = *((StoreWorld_Ptr *)data);
-    world->addResItem (resItem);
+    int count;
 
-    return true;
+    PrintItem() : count (0) { }
+
+    bool operator()( PoolItem_Ref poolItem )
+    {
+	cout << ++count << ": ";
+	printRes (cout, poolItem);
+	cout << ": " << poolItem.status() << endl;
+	return true;
+    }
+};
+
+
+// collect all installed items in a set
+
+void
+print_pool (void)
+{
+    PrintItem info;
+
+    invokeOnEach( God->pool().begin( ),
+		  God->pool().end ( ),
+		  functor::functorRef<bool,PoolItem> (info) );
+    return;
 }
 
 
 static void
-load_channel (const string & name, const string & filename, const string & type, bool system_packages)
+load_source (const string & alias, const string & filename, const string & type, bool system_packages)
 {
-    string pathname = globalPath + filename;
+    Pathname pathname = globalPath + filename;
+    int count = 0;
 
-    if (getenv ("RC_SPEW")) fprintf (stderr, "load_channel(%s,%s,%s,%s)\n", name.c_str(), pathname.c_str(), type.c_str(), system_packages?"system":"non-system");
+    try {
+	media::MediaAccess::Ptr media = new media::MediaAccess();
+	Source::Impl_Ptr impl = new HelixSourceImpl (media, pathname, alias);
+	SourceFactory _f;
+	Source s = _f.createFrom( impl );
 
-    ChannelType chan_type = system_packages ? CHANNEL_TYPE_SYSTEM : CHANNEL_TYPE_UNKNOWN;
-    Channel_Ptr channel;
-    unsigned int count;
-    StoreWorld_Ptr store = new StoreWorld();
-
-    World::globalWorld()->addSubworld (store);
-
-    if (type == "helix")
-	chan_type = CHANNEL_TYPE_HELIX;
-    else if (type == "debian")
-	chan_type = CHANNEL_TYPE_DEBIAN;
-#if 0
-    else
-	printf ("Unknown channel type '%s', defaulting to helix\n", type.c_str());
-#endif
-    if (chan_type == CHANNEL_TYPE_UNKNOWN) { /* default to helix */
-	chan_type = CHANNEL_TYPE_HELIX;
+	if (s) {
+	    count = impl->resolvables (s).size();
+	    unsigned snum = manager->addSource (s);
+	    cout << "Added source '" << alias << "' as #" << snum  << ":[" << s.alias() << "]" << endl;
+	    God->addResolvables( impl->resolvables (s), (alias == "@system") );
+	    print_pool ();
+	}
+	cout << "Loaded " << count << " package(s) from " << pathname << endl;
     }
-
-    channel = new Channel (name, name, name, name);
-
-    if (system_packages)
-	channel->setSystem (true);
-
-    channel->setType (chan_type);
-
-    store->addChannel (channel);
-
-    if (chan_type == CHANNEL_TYPE_HELIX) {
-	count = extract_packages_from_helix_file (pathname, channel, add_to_world_cb, (void *)&store);
-    } else if (chan_type == CHANNEL_TYPE_DEBIAN) {
-	fprintf (stderr, "Unsupported channel 'debian'\n");
-	exit (1);
-//	count = extract_packages_from_debian_file (pathname, channel, add_to_world_cb, (void *)&store);
-    } else {
-	fprintf (stderr, "Unsupported channel type\n");
-	return;
+    catch ( Exception & excpt_r ) {
+	ZYPP_CAUGHT (excpt_r);
+	cout << "Loaded NO package(s) from " << pathname << endl;
     }
+}
 
-    printf ("Loaded %d package%s from %s\n", count, count == 1 ? "" : "s", pathname.c_str()); fflush (stdout);
+static void
+undump (const std::string & filename)
+{
+    cerr << "undump not really supported" << endl;
+
+    return load_source ("undump", filename, "undump", false);
 }
 
 
@@ -541,10 +566,12 @@ static bool done_setup = false;
 static void
 parse_xml_setup (XmlNode_Ptr node)
 {
-    assertExit (node->equals("setup"));
+    if (!node->equals("setup")) {
+	ZYPP_THROW (Exception ("Node not 'setup' in parse_xml_setup():"+node->name()));
+    }
 
     if (done_setup) {
-	fprintf (stderr, "Multiple <setup>..</setup> sections not allowed!\n");
+	cerr << "Multiple <setup>..</setup> sections not allowed!" << endl;
 	exit (0);
     }
     done_setup = true;
@@ -559,49 +586,44 @@ parse_xml_setup (XmlNode_Ptr node)
 	if (node->equals ("system")) {
 
 	    string file = node->getProp ("file");
-	    assertExit (!file.empty());
-	    load_channel ("@system", file, "helix", true);
+	    load_source ("@system", file, "helix", true);
 
 	} else if (node->equals ("channel")) {
 
 	    string name = node->getProp ("name");
 	    string file = node->getProp ("file");
 	    string type = node->getProp ("type");
-	    assertExit (!name.empty());
-	    assertExit (!file.empty());
-	    load_channel (name, file, type, false);
+	    load_source (name, file, type, false);
 
 	} else if (node->equals ("undump")) {
 
 	    string file = node->getProp ("file");
-	    assertExit (!file.empty());
 	    undump (file);
 
 	} else if (node->equals ("force-install")) {
 
-	    string channel_name = node->getProp ("channel");
+	    string source_alias = node->getProp ("channel");
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 
-	    ResItem_constPtr resItem;
-	    Channel_constPtr system_channel;
+	    PoolItem_Ref poolItem;
 
-	    assertExit (!channel_name.empty());
-	    assertExit (!package_name.empty());
+	    poolItem = get_poolItem (source_alias, package_name, kind_name);
+	    if (poolItem) {
+		RESULT << "Force-installing " << package_name << " from channel " << source_alias << endl;;
 
-	    resItem = get_resItem (channel_name, package_name, kind_name);
-	    if (resItem) {
-		RESULT << "Force-installing " << package_name << " from channel " << channel_name << endl;;
+		Source_Ref system_source = manager->findSource("@system");
 
-		system_channel = world->getChannelById ("@system");
-
-		if (!system_channel)
-		    fprintf (stderr, "No system channel available!\n");
-		ResItem_Ptr r = boost::const_pointer_cast<ResItem>(resItem);
-		r->setChannel (system_channel);
+		if (!system_source)
+		    cerr << "No system source available!" << endl;
+#warning Needs force-install
+#if 0
+		PoolItem_Ref r = boost::const_pointer_cast<PoolItem>(poolItem);
+		r->setChannel (system_source);
 		r->setInstalled (true);
+#endif
 	    } else {
-		fprintf (stderr, "Unknown package %s::%s\n", channel_name.c_str(), package_name.c_str());
+		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
 	    }
 
 	} else if (node->equals ("force-uninstall")) {
@@ -609,40 +631,41 @@ parse_xml_setup (XmlNode_Ptr node)
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 
-	    ResItem_constPtr resItem;
+	    PoolItem_Ref poolItem;
 
-	    assertExit (!package_name.empty());
-	    resItem = get_resItem ("@system", package_name, kind_name);
+	    poolItem = get_poolItem ("@system", package_name, kind_name);
 	    
-	    if (! resItem) {
-		fprintf (stderr, "Can't force-uninstall installed package '%s'\n", package_name.c_str());
+	    if (! poolItem) {
+		cerr << "Can't force-uninstall installed package '" << package_name << "'" << endl;
 	    } else {
 		RESULT << "Force-uninstalling " << package_name << endl;
-		remove_resItem (resItem);
+#warning Needs pool remove
+#if 0
+		God->pool().remove (poolItem);
+#endif
 	    }
 
 	} else if (node->equals ("lock")) {
 
-	    string channel_name = node->getProp ("channel");
+	    string source_alias = node->getProp ("channel");
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 
-	    ResItem_constPtr resItem;
+	    PoolItem_Ref poolItem;
 
-	    assertExit (!channel_name.empty());
-	    assertExit (!package_name.empty());
-
-	    resItem = get_resItem (channel_name, package_name, kind_name);
-	    if (resItem) {
-		RESULT << "Locking " << package_name << " from channel " << channel_name << endl;
-                ResItem_Ptr r = boost::const_pointer_cast<ResItem>(resItem);                   
+	    poolItem = get_poolItem (source_alias, package_name, kind_name);
+	    if (poolItem) {
+		RESULT << "Locking " << package_name << " from source " << source_alias << endl;
+#warning Needs locks
+#if 0
 		r->setLocked (true);
+#endif
 	    } else {
-		fprintf (stderr, "Unknown package %s::%s\n", channel_name.c_str(), package_name.c_str());
+		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
 	    }
 
 	} else {
-	    fprintf (stderr, "Unrecognized tag '%s' in setup\n", node->name().c_str());
+	    cerr << "Unrecognized tag '" << node->name() << "' in setup" << endl;
 	}
 
 	node = node->next();
@@ -658,31 +681,31 @@ report_solutions (Resolver & resolver, bool instorder)
     int count = 1;
     ChecksumList checksum_list;
 
-    printf ("\n");
+    cout << endl;
 
     if (!resolver.completeQueues().empty()) {
-	printf ("Completed solutions: %ld\n", (long) resolver.completeQueues().size());
+	cout << "Completed solutions: " << (long) resolver.completeQueues().size() << endl;
     }
 
     if (resolver.prunedQueues().empty()) {
-	printf ("Pruned solutions: %ld\n", (long) resolver.prunedQueues().size());
+	cout << "Pruned solutions: " << (long) resolver.prunedQueues().size() << endl;
     }
 
     if (resolver.deferredQueues().empty()) {
-	printf ("Deferred solutions: %ld\n", (long) resolver.deferredQueues().size());
+	cout << "Deferred solutions: " << (long) resolver.deferredQueues().size() << endl;
     }
 
     if (resolver.invalidQueues().empty()) {
-	printf ("Invalid solutions: %ld\n", (long) resolver.invalidQueues().size());
+	cout << "Invalid solutions: " << (long) resolver.invalidQueues().size() << endl;
     }
     
     if (resolver.bestContext()) {
-	printf ("\nBest Solution:\n\n");
+	cout << endl << "Best Solution:" << endl;
 	print_solution (resolver.bestContext(), &count, checksum_list, instorder);
 
 	ResolverQueueList complete = resolver.completeQueues();
 	if (complete.size() > 1)
-	    printf ("\nOther Valid Solutions:\n\n");
+	    cout << endl << "Other Valid Solutions:" << endl;
 
 	if (complete.size() < 20) {
 	    for (ResolverQueueList::const_iterator iter = complete.begin(); iter != complete.end(); iter++) {
@@ -695,49 +718,112 @@ report_solutions (Resolver & resolver, bool instorder)
 
     ResolverQueueList invalid = resolver.invalidQueues();
     if (invalid.size() < 20) {
-	printf ("\n");
+	cout << endl;
 
 	for (ResolverQueueList::const_iterator iter = invalid.begin(); iter != invalid.end(); iter++) {
 	    ResolverQueue_Ptr queue = (*iter);
-	    printf ("Failed Solution: \n%s\n", queue->context()->asString().c_str());
-	    printf ("- - - - - - - - - -\n");
+	    cout << "Failed Solution: " << endl << queue->context() << endl;
+	    cout << "- - - - - - - - - -" << endl;
 	    queue->context()->spewInfo ();
 	    fflush (stdout);
 	}
     } else {
-	printf ("(Not displaying more than 20 invalid solutions)\n");
+	cout << "(Not displaying more than 20 invalid solutions)" << endl;
     }
     fflush (stdout);
 }
 
+//-----------------------------------------------------------------------------
+// system Upgrade
 
-static bool
-trial_upgrade_cb (ResItem_constPtr original, ResItem_constPtr upgrade, void *user_data)
+struct Unique : public resfilter::PoolItemFilterFunctor
 {
-    Resolver *resolver = (Resolver *)user_data;
+    PoolItemSet itemset;
 
-    resolver->addResItemToInstall (upgrade);
+    bool operator()( PoolItem_Ref poolItem )
+    {
+	itemset.insert (poolItem);
+	return true;
+    }
+};
 
-    RESULT << "Upgrading " << original->asString() << " => " << upgrade->asString() << endl;
 
-    return false;
+// collect all installed items in a set
+
+PoolItemSet
+uniquelyInstalled (void)
+{
+    Unique info;
+
+    invokeOnEach( God->pool().begin( ),
+		  God->pool().end ( ),
+		  resfilter::ByInstalled (),
+		  functor::functorRef<bool,PoolItem> (info) );
+    return info.itemset;
 }
 
+struct DoUpgrades : public resfilter::OnCapMatchCallbackFunctor
+{
+    PoolItem_Ref installed;
+    PoolItemSet upgrades;
+    Resolver & resolver;
+    int count;
+
+    DoUpgrades (Resolver & r)
+	: resolver (r)
+	, count (0)
+    {  }
+
+    bool operator()( PoolItem_Ref poolItem )
+    {
+	if (upgrades.insert (poolItem).second) {			// only consider first match
+	    resolver.addPoolItemToInstall (poolItem);
+	    RESULT << "Upgrading " << installed << " => " << poolItem << endl;
+	    ++count;
+	}
+	return true;
+    }
+};
+
+
+int
+foreach_system_upgrade (Resolver & resolver)
+{
+    PoolItemSet installed = uniquelyInstalled();
+
+    DoUpgrades info (resolver);
+
+    // world->foreachSystemUpgrade (true, trial_upgrade_cb, (void *)&resolver);
+
+    for (PoolItemSet::iterator iter = installed.begin(); iter != installed.end(); ++iter) {
+	PoolItem_Ref p = *iter;
+	info.installed = p;
+	invokeOnEach( God->pool().byNameBegin( p->name() ), God->pool().byNameEnd( p->name() ),
+		      functor::chain( resfilter::ByKind( p->kind() ),
+		      resfilter::byEdition<CompareByGT<Edition> >( p->edition() )),
+		      functor::functorRef<bool,PoolItem>(info) );
+    }
+
+    return info.count;
+}
+
+//-----------------------------------------------------------------------------
+// ResolverContext output
 
 static void
-print_marked_cb (ResItem_constPtr resItem, ResItemStatus status, void *data)
+print_marked_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
-    RESULT << resItem->asString() << " " << ResolverContext::toString (status) << endl;
+    RESULT << poolItem << " " << status << endl;
     return;
 }
 
 
 static void
-freshen_marked_cb (ResItem_constPtr resItem, ResItemStatus status, void *data)
+freshen_marked_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
     Resolver *resolver = (Resolver *)data;
-    if (resItem_status_is_incomplete (status)) {
-	resolver->addResItemToInstall (resItem);
+    if (status.isIncomplete()) {
+	resolver->addPoolItemToInstall (poolItem);
     }
 
     return;
@@ -750,19 +836,21 @@ parse_xml_trial (XmlNode_Ptr node)
     bool verify = false;
     bool instorder = false;
 
-    assertExit (node->equals ("trial"));
+    if (!node->equals ("trial")) {
+	ZYPP_THROW (Exception ("Node not 'trial' in parse_xml_trial()"));
+    }
 
-    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "parse_xml_setup()\n");
+    DBG << "parse_xml_trial()" << endl;
 
     if (! done_setup) {
-	fprintf (stderr, "Any trials must be preceeded by the setup!\n");
+	cerr << "Any trials must be preceeded by the setup!" << endl;
 	exit (0);
     }
 
     print_sep ();
 
-    Resolver resolver;
-    resolver.setWorld (world);
+    Resolver resolver (globalPool);
+
     ResolverContext_Ptr established = NULL;
 
     node = node->children();
@@ -775,7 +863,7 @@ parse_xml_trial (XmlNode_Ptr node)
 	if (node->equals("note")) {
 
 	    string note = node->getContent ();
-	    printf ("NOTE: %s\n", note.c_str());
+	    cout << "NOTE: " << note << endl;
 
 	} else if (node->equals ("verify")) {
 
@@ -783,43 +871,40 @@ parse_xml_trial (XmlNode_Ptr node)
 
 	} else if (node->equals ("current")) {
 
-	    string channel_name = node->getProp ("channel");
-	    Channel_constPtr channel = get_channel (channel_name);
+	    string source_alias = node->getProp ("channel");
+	    Source_Ref source = manager->findSource (source_alias);
 
-	    if (channel != NULL) {
-		resolver.setCurrentChannel (channel);
+	    if (source) {
+//FIXME		resolver.setCurrentChannel (source);
 	    } else {
-		fprintf (stderr, "Unknown channel '%s' (current)\n", channel_name.c_str());
+		cerr << "Unknown source '" << source_alias << "' (current)" << endl;
 	    }
 
 	} else if (node->equals ("subscribe")) {
 
-	    string channel_name = node->getProp ("channel");
-	    Channel_Ptr channel = get_channel (channel_name);
+	    string source_alias = node->getProp ("channel");
+	    Source_Ref source = manager->findSource (source_alias);
 
-	    if (channel != NULL) {
-		channel->setSubscription (true);
+	    if (source) {
+//FIXME		source->setSubscription (true);
 	    } else {
-		fprintf (stderr, "Unknown channel '%s' (subscribe)\n", channel_name.c_str());
+		cerr << "Unknown source '" << source_alias << "' (subscribe)" << endl;
 	    }
 
 	} else if (node->equals ("install")) {
 
-	    string channel_name = node->getProp ("channel");
+	    string source_alias = node->getProp ("channel");
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 
-	    ResItem_constPtr resItem;
+	    PoolItem_Ref poolItem;
 
-	    assertExit (!channel_name.empty());
-	    assertExit (!package_name.empty());
-
-	    resItem = get_resItem (channel_name, package_name, kind_name);
-	    if (resItem) {
-		RESULT << "Installing " << package_name << " from channel " << channel_name << endl;;
-		resolver.addResItemToInstall (resItem);
+	    poolItem = get_poolItem (source_alias, package_name, kind_name);
+	    if (poolItem) {
+		RESULT << "Installing " << package_name << " from channel " << source_alias << endl;;
+		resolver.addPoolItemToInstall (poolItem);
 	    } else {
-		fprintf (stderr, "Unknown package %s::%s\n", channel_name.c_str(), package_name.c_str());
+		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
 	    }
 
 	} else if (node->equals ("uninstall")) {
@@ -827,24 +912,21 @@ parse_xml_trial (XmlNode_Ptr node)
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 
-	    ResItem_constPtr resItem;
+	    PoolItem_Ref poolItem;
 
-	    assertExit (!package_name.empty());
-
-	    resItem = get_resItem ("@system", package_name, kind_name);
-	    if (resItem) {
+	    poolItem = get_poolItem ("@system", package_name, kind_name);
+	    if (poolItem) {
 		RESULT << "Uninstalling " << package_name << endl;
-		resolver.addResItemToRemove (resItem);
+		resolver.addPoolItemToRemove (poolItem);
 	    } else {
-		fprintf (stderr, "Unknown system package %s\n", package_name.c_str());
+		cerr << "Unknown system package " << package_name << endl;
 	    }
 
 	} else if (node->equals ("upgrade")) {
-	    int count;
 
 	    RESULT << "Checking for upgrades..." << endl;
 
-	    count = world->foreachSystemUpgrade (true, trial_upgrade_cb, (void *)&resolver);
+	    int count = foreach_system_upgrade (resolver);
 	    
 	    if (count == 0)
 		RESULT << "System is up-to-date, no upgrades required" << endl;
@@ -863,10 +945,10 @@ parse_xml_trial (XmlNode_Ptr node)
 		RESULT << "Established NO context !" << endl;
 	    else {
 		RESULT << "Established context" << endl;
-		established->foreachMarkedResItem (print_marked_cb, NULL);
+		established->foreachMarked (print_marked_cb, NULL);
 		if (node->equals ("freshen")) {
 		    RESULT << "Freshening ..." << endl;
-		    established->foreachMarkedResItem (freshen_marked_cb, &resolver);
+		    established->foreachMarked (freshen_marked_cb, &resolver);
 		}
 	    }
 
@@ -904,50 +986,50 @@ parse_xml_trial (XmlNode_Ptr node)
 	    string kind_name = node->getProp ("kind");
 	    string prov_name = node->getProp ("provides");
 
-	    CResItemSet resItems;
+	    PoolItemSet poolItems;
 
-	    printf ("resItems providing '%s'\n", prov_name.c_str());
+	    cout << "poolItems providing '" << prov_name << "'" << endl;
 
-	    resItems = get_providing_resItems (prov_name, kind_name);
+	    poolItems = get_providing_poolItems (prov_name, kind_name);
 
-	    if (resItems.empty()) {
-		fprintf (stderr, "None found\n");
+	    if (poolItems.empty()) {
+		cerr << "None found" << endl;
 	    } else {
-		for (CResItemSet::const_iterator iter = resItems.begin(); iter != resItems.end(); ++iter) {
-		    printf ("%s\n", (*iter)->asString().c_str());
+		for (PoolItemSet::const_iterator iter = poolItems.begin(); iter != poolItems.end(); ++iter) {
+		    cout << (*iter) << endl;
 		}
 	    }
 
 	} else if (node->equals ("whatdependson")) {
 
-	    string channel_name = node->getProp ("channel");
+	    string source_alias = node->getProp ("channel");
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 	    string prov_name = node->getProp ("provides");
 
-	    CResItemSet resItems;
+	    PoolItemSet poolItems;
 
-	    assert (!channel_name.empty());
+	    assert (!source_alias.empty());
 	    assert (!package_name.empty());
 
 	    if (!prov_name.empty()) {
 		if (!package_name.empty()) {
-		    fprintf (stderr, "<whatdependson ...> can't have both package and provides.\n");
+		    cerr << "<whatdependson ...> can't have both package and provides." << endl;
 		    exit (1);
 		}
-		resItems = get_providing_resItems (prov_name, kind_name);
+		poolItems = get_providing_poolItems (prov_name, kind_name);
 	    }
 	    else {
-		ResItem_constPtr resItem = get_resItem (channel_name, package_name, kind_name);
-		if (resItem) resItems.insert (resItem);
+		PoolItem_Ref poolItem = get_poolItem (source_alias, package_name, kind_name);
+		if (poolItem) poolItems.insert (poolItem);
 	    }
-	    if (resItems.empty()) {
-		fprintf (stderr, "Can't find matching package\n");
+	    if (poolItems.empty()) {
+		cerr << "Can't find matching package" << endl;
 	    } else {
-		for (CResItemSet::const_iterator iter = resItems.begin(); iter != resItems.end(); ++iter) {
-		    CResItemSet dependants = whatdependson (*iter);
-		    for (CResItemSet::const_iterator dep_iter = dependants.begin(); dep_iter != dependants.end(); ++dep_iter) {
-			printf ("%s\n", (*dep_iter)->asString().c_str());
+		for (PoolItemSet::const_iterator iter = poolItems.begin(); iter != poolItems.end(); ++iter) {
+		    PoolItemSet dependants = whatdependson (*iter);
+		    for (PoolItemSet::const_iterator dep_iter = dependants.begin(); dep_iter != dependants.end(); ++dep_iter) {
+			cout << (*dep_iter) << endl;
 		    }
 		}
 	    }
@@ -959,11 +1041,13 @@ parse_xml_trial (XmlNode_Ptr node)
 	    else {
 		ResolverProblemList problems = resolver.problems ();
 		RESULT << problems.size() << " problems found:" << endl;
-		cout << ResolverProblem::toString(problems) << endl;
+		for (ResolverProblemList::iterator iter = problems.begin(); iter != problems.end(); ++iter) {
+		    cout << *iter << endl;
+		}
 	    }
 
 	} else {
-	    fprintf (stderr, "Unknown tag '%s' in trial\n", node->name().c_str());
+	    cerr << "Unknown tag '" << node->name() << "' in trial" << endl;
 	}
 
 	node = node->next();
@@ -988,7 +1072,9 @@ parse_xml_trial (XmlNode_Ptr node)
 static void
 parse_xml_test (XmlNode_Ptr node)
 {
-    assertExit (node->equals("test"));
+    if (!node->equals("test")) {
+	ZYPP_THROW (Exception("Node not 'test' in parse_xml_test():"+node->name()));
+    }
 
     node = node->children();
 
@@ -999,7 +1085,7 @@ parse_xml_test (XmlNode_Ptr node)
 	    } else if (node->equals ("trial")) {
 		parse_xml_trial (node);
 	    } else {
-		fprintf (stderr, "Unknown tag '%s' in test\n", node->name().c_str());
+		cerr << "Unknown tag '" << node->name() << "' in test" << endl;
 	    }
 	}
 
@@ -1016,13 +1102,13 @@ process_xml_test_file (const string & filename)
 
     xml_doc = xmlParseFile (filename.c_str());
     if (xml_doc == NULL) {
-	fprintf (stderr, "Can't parse test file '%s'\n", filename.c_str());
+	cerr << "Can't parse test file '" << filename << "'" << endl;
 	exit (0);
     }
 
     root = new XmlNode (xmlDocGetRootElement (xml_doc));
 
-    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "Parsing file '%s'\n", filename.c_str());
+    DBG << "Parsing file '" << filename << "'" << endl;
     
     parse_xml_test (root);
     
@@ -1032,32 +1118,26 @@ process_xml_test_file (const string & filename)
 
 //---------------------------------------------------------------------------------------------------------------------
 
-static void
-init_libzypp (void)
-{
-//    rc_version_set_global (rc_version_rpm_new());		//  rpm is the default for GVersion
-
-      World::setGlobalWorld (new MultiWorld());
-}
-
 int
 main (int argc, char *argv[])
 {
     setenv("ZYPP_NOLOG","1",1); // no logging
     
     if (argc != 2) {
-	fprintf (stderr, "Usage: deptestomatic testfile.xml\n");
+	cerr << "Usage: deptestomatic testfile.xml" << endl;
 	exit (0);
     }
 
-    init_libzypp ();
+    manager = SourceManager::sourceManager();
+    ZYppFactory zf;
+    God = zf.letsTest();
+    const ResPool pool = God->pool();
+    globalPool = &pool;
 
     globalPath = argv[1];
     globalPath = globalPath.substr (0, globalPath.find_last_of ("/") +1);
 
-    world = World::globalWorld();
-
-    if (getenv ("RC_SPEW_XML")) fprintf (stderr, "init_libzypp() done\n");
+    DBG << "init_libzypp() done" << endl;
 
     process_xml_test_file (string (argv[1]));
 
