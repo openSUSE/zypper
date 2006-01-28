@@ -11,6 +11,7 @@
 */
 
 #include "HelixScriptImpl.h"
+#include "zypp/source/SourceImpl.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
 
@@ -28,10 +29,15 @@ namespace zypp
 
 /** Default ctor
 */
-HelixScriptImpl::HelixScriptImpl (const zypp::HelixParser & parsed)
-    : _size_installed(parsed.installedSize)
+HelixScriptImpl::HelixScriptImpl (Source_Ref source_r, const zypp::HelixParser & parsed)
+    : _source (source_r)
+    , _size_installed(parsed.installedSize)
 {
 }
+
+Source_Ref
+HelixScriptImpl::source() const
+{ return _source; }
 
 /** Get the script to perform the change */
 std::string HelixScriptImpl::do_script() const

@@ -619,11 +619,6 @@ HelixParser::resolvableEnd (const std::string & token)
 	    provides.insert (selfdep);
 	}
 
-#warning Needs to know if a source is actually the target
-#if 0
-	if (_channel->system())
-	    installed = true;
-#endif
 	if (_impl) {
 	    _impl->parserCallback (*this);
 	}

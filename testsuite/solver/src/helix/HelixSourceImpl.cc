@@ -28,6 +28,7 @@
 #include "HelixPatternImpl.h"
 #include "HelixProductImpl.h"
 
+#include "zypp/source/SourceImpl.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 
@@ -39,10 +40,22 @@ using namespace zypp;
 
 HelixSourceImpl::HelixSourceImpl(media::MediaAccess::Ptr & media_r, const Pathname & path_r, const std::string & alias_r)
     : SourceImpl (media_r, path_r, alias_r)
+    , _source (Source::nullimpl())
+    , _pathname (path_r)
 {
-    load (path_r.asString());
 }
 
+
+void
+HelixSourceImpl::createResolvables(Source_Ref source_r)
+{
+    _source = source_r;
+    extractHelixFile (_pathname.asString(), this);
+}
+
+
+
+//-----------------------------------------------------------------------------
 
 Dependencies
 HelixSourceImpl::createDependencies (const HelixParser & parsed)
@@ -68,7 +81,7 @@ HelixSourceImpl::createPackage (const HelixParser & parsed)
 {
     try
     {
-	shared_ptr<HelixPackageImpl> impl(new HelixPackageImpl(parsed));
+	shared_ptr<HelixPackageImpl> impl(new HelixPackageImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,
@@ -92,7 +105,7 @@ HelixSourceImpl::createMessage (const HelixParser & parsed)
 {
     try
     {
-	shared_ptr<HelixMessageImpl> impl(new HelixMessageImpl(parsed));
+	shared_ptr<HelixMessageImpl> impl(new HelixMessageImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,
@@ -116,7 +129,7 @@ HelixSourceImpl::createScript (const HelixParser & parsed)
 {
     try
     {
-	shared_ptr<HelixScriptImpl> impl(new HelixScriptImpl(parsed));
+	shared_ptr<HelixScriptImpl> impl(new HelixScriptImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,
@@ -140,7 +153,7 @@ HelixSourceImpl::createPatch (const HelixParser & parsed)
 {
     try
     {
-	shared_ptr<HelixPatchImpl> impl(new HelixPatchImpl(parsed));
+	shared_ptr<HelixPatchImpl> impl(new HelixPatchImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,
@@ -164,7 +177,7 @@ HelixSourceImpl::createPattern (const HelixParser & parsed)
 {
     try
     {
-	shared_ptr<HelixPatternImpl> impl(new HelixPatternImpl(parsed));
+	shared_ptr<HelixPatternImpl> impl(new HelixPatternImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,
@@ -188,7 +201,7 @@ HelixSourceImpl::createProduct (const HelixParser & parsed)
 {
     try
     {
-	shared_ptr<HelixProductImpl> impl(new HelixProductImpl(parsed));
+	shared_ptr<HelixProductImpl> impl(new HelixProductImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,
@@ -248,13 +261,3 @@ HelixSourceImpl::parserCallback (const HelixParser & parsed)
 
 //-----------------------------------------------------------------------------
 
-// load filename as helix file
-//   filename:	[channel:]/path/to/file
-// if channel is given, it is used as the channel name
-// if channel == "@system", mark all items as 'installed'
-//
-void
-HelixSourceImpl::load (const string & filename)
-{
-    extractHelixFile (filename, this);
-}

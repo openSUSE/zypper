@@ -11,6 +11,7 @@
 */
 
 #include "HelixProductImpl.h"
+#include "zypp/source/SourceImpl.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
 
@@ -28,8 +29,9 @@ namespace zypp
 
 /** Default ctor
 */
-HelixProductImpl::HelixProductImpl (const zypp::HelixParser & parsed)
-    : _summary(parsed.summary)
+HelixProductImpl::HelixProductImpl (Source_Ref source_r, const zypp::HelixParser & parsed)
+    : _source (source_r)
+    , _summary(parsed.summary)
     , _description()
     , _group(parsed.section)
     , _install_only(parsed.installOnly)
@@ -38,6 +40,10 @@ HelixProductImpl::HelixProductImpl (const zypp::HelixParser & parsed)
 {
     _description.push_back(parsed.description);
 }
+
+Source_Ref
+HelixProductImpl::source() const
+{ return _source; }
 
 /** Package summary */
 Label HelixProductImpl::summary() const

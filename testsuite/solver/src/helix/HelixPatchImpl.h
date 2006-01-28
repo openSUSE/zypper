@@ -32,7 +32,7 @@ public:
 	class HelixParser;
 	/** Default ctor
 	*/
-	HelixPatchImpl( const zypp::HelixParser & data );
+	HelixPatchImpl( Source_Ref source_r, const zypp::HelixParser & data );
 
 
       /** Patch ID */
@@ -59,7 +59,11 @@ public:
       virtual void mark_atoms_to_freshen(bool freshen) ;
       virtual bool any_atom_selected() const;
 
+	/** */
+	virtual Source_Ref source() const;
+
 protected:
+	Source_Ref _source;
 	ByteCount _size_installed;
  };
   /////////////////////////////////////////////////////////////////

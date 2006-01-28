@@ -11,6 +11,7 @@
 */
 
 #include "HelixMessageImpl.h"
+#include "zypp/source/SourceImpl.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
 
@@ -28,9 +29,14 @@ namespace zypp
 
 /** Default ctor
 */
-HelixMessageImpl::HelixMessageImpl (const zypp::HelixParser & parsed)
+HelixMessageImpl::HelixMessageImpl (Source_Ref source_r, const zypp::HelixParser & parsed)
+    : _source (source_r)
 {
 }
+
+Source_Ref
+HelixMessageImpl::source() const
+{ return _source; }
 
 string
 HelixMessageImpl::text () const

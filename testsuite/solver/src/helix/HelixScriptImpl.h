@@ -32,7 +32,7 @@ public:
 	class HelixParser;
 	/** Default ctor
 	*/
-	HelixScriptImpl( const zypp::HelixParser & data );
+	HelixScriptImpl( Source_Ref source_r, const zypp::HelixParser & data );
 
       /** Get the script to perform the change */
       virtual std::string do_script() const;
@@ -43,7 +43,11 @@ public:
       /** */
       virtual ByteCount size() const;
 
+	/** */
+	virtual Source_Ref source() const;
+
 protected:
+	Source_Ref _source;
 	ByteCount _size_installed;
 
 

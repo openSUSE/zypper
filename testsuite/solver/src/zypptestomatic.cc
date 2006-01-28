@@ -80,10 +80,29 @@ static SourceManager_Ptr manager;
 typedef list<unsigned int> ChecksumList;
 typedef std::set <zypp::PoolItem> PoolItemSet;
 
-typedef std::map<std::string, unsigned> AliasMap;
-AliasMap aliasMap;
-
 #define RESULT cout << ">!> "
+
+static std::ostream &
+printRes ( std::ostream & str, ResObject::constPtr r )
+{
+    if (r->kind() != ResTraits<zypp::Package>::kind)
+	str << '[' << r->kind() << ']';
+    str  << r->name() << '-' << r->edition();
+    if (r->arch() != "") {
+	str << '.' << r->arch();
+    }
+    Source_Ref s = r->source();
+    if (s) {
+	string alias = s.alias();
+	if (!alias.empty()
+	    && alias != "@system")
+	{
+	    str << '[' << s.alias() << ']';
+	}
+//	str << '[' << s << ']';
+    }
+    return str;
+}
 
 //---------------------------------------------------------------------------
 
@@ -151,70 +170,64 @@ lock_poolItem (PoolItem_Ref poolItem)
 typedef list<string> StringList;
 
 static void
-assemble_install_cb (PoolItem_Ref poolItem,
-		     void *data)
+assemble_install_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
     StringList *slist = (StringList *)data;
     ostringstream s;
-    s << str::form ("%-7s ", poolItem.status().isInstalled() ? "|flag" : "install");
-    s << poolItem.resolvable();
+    s << str::form ("%-7s ", status.isInstalled() ? "|flag" : "install");
+    printRes (s, poolItem.resolvable());
 
     slist->push_back (s.str());
 }
 
 
 static void
-assemble_uninstall_cb (PoolItem_Ref poolItem,
-		       void *data)
+assemble_uninstall_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
     StringList *slist = (StringList *)data;
     ostringstream s;
-    s << str::form ("%-7s ", poolItem.status().isInstalled() ? "remove" : "|unflag");
-    s << poolItem.resolvable();
+    s << str::form ("%-7s ", status.isInstalled() ? "remove" : "|unflag");
+    printRes (s, poolItem.resolvable());
 
     slist->push_back (s.str());
 }
 
 
 static void
-assemble_upgrade_cb (PoolItem_Ref res1,
-		     PoolItem_Ref res2,
-		     void *data)
+assemble_upgrade_cb (PoolItem_Ref res1, const ResStatus & status, PoolItem_Ref res2, const ResStatus & status2, void *data)
 {
     StringList *slist = (StringList *)data;
     ostringstream s;
 
     s << "upgrade ";
 
-    s << res2.resolvable();
+    printRes (s, res2.resolvable());
     s << " => ";
-    s << res1.resolvable();
+    printRes (s, res1.resolvable());
 
     slist->push_back (s.str());
 }
 
 
 static void
-assemble_incomplete_cb (PoolItem_Ref poolItem,
-		       void *data)
+assemble_incomplete_cb (PoolItem_Ref poolItem, const ResStatus & status,void *data)
 {
     StringList *slist = (StringList *)data;
     ostringstream s;
-    s << str::form ("%-11s ", poolItem.status().isInstalled() ? "incomplete" : "|incomplete");
-    s << poolItem.resolvable();
+    s << str::form ("%-11s ", status.isInstalled() ? "incomplete" : "|incomplete");
+    printRes (s, poolItem.resolvable());
 
     slist->push_back (s.str());
 }
 
 
 static void
-assemble_satisfy_cb (PoolItem_Ref poolItem,
-		       void *data)
+assemble_satisfy_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
     StringList *slist = (StringList *)data;
     ostringstream s;
-    s << str::form ("%-10s ", poolItem.status().isInstalled() ? "SATISFIED" : "|satisfied");
-    s << poolItem.resolvable();
+    s << str::form ("%-10s ", status.isInstalled() ? "SATISFIED" : "|satisfied");
+    printRes (s, poolItem.resolvable());
 
     slist->push_back (s.str());
 }
@@ -338,20 +351,15 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
 
 
 static PoolItem_Ref
-get_poolItem (const string & source_name, const string & package_name, const string & kind_name = "")
+get_poolItem (const string & source_alias, const string & package_name, const string & kind_name = "")
 {
     PoolItem_Ref poolItem;
     Resolvable::Kind kind = string2kind (kind_name);
 
     try {
-	AliasMap::const_iterator it = aliasMap.find(source_name);
-	if (it == aliasMap.end()) {
-	    cerr << "Can't find source " << source_name << endl;
-	    return poolItem;
-	}	    
-	Source_Ref source = manager->findSource (it->second);
+	Source_Ref source = manager->findSource (source_alias);
 	if (!source) {
-	    cerr << "Can't find source #" << it->second << ": " << source_name << endl;
+	    cerr << "Can't find source '" << source_alias << "'" << endl;
 	    return poolItem;
 	}
 
@@ -359,19 +367,19 @@ get_poolItem (const string & source_name, const string & package_name, const str
 
 	invokeOnEach( God->pool().byNameBegin( package_name ),
 		      God->pool().byNameEnd( package_name ),
-//		      functor::chain( resfilter::BySource(source), resfilter::ByKind (kind) ),
+		      functor::chain( resfilter::BySource(source), resfilter::ByKind (kind) ),
 		      functor::functorRef<bool,PoolItem> (info) );
 
 	poolItem = info.poolItem;
     }
     catch (Exception & excpt_r) {
 	ZYPP_CAUGHT (excpt_r);
-	cerr << "Can't find resolvable '" << package_name << "': source '" << source_name << "' not defined" << endl;
+	cerr << "Can't find resolvable '" << package_name << "': source '" << source_alias << "' not defined" << endl;
 	return poolItem;
     }
 
     if (!poolItem) {
-	cerr << "Can't find resolvable '" << package_name << "' in source '" << source_name << "': no such name/kind" << endl;
+	cerr << "Can't find resolvable '" << package_name << "' in source '" << source_alias << "': no such name/kind" << endl;
     }
 
     return poolItem;
@@ -485,7 +493,9 @@ struct PrintItem : public resfilter::PoolItemFilterFunctor
 
     bool operator()( PoolItem_Ref poolItem )
     {
-	cout << ++count << ": " << poolItem << endl;
+	cout << ++count << ": ";
+	printRes (cout, poolItem);
+	cout << ": " << poolItem.status() << endl;
 	return true;
     }
 };
@@ -518,11 +528,10 @@ load_source (const string & alias, const string & filename, const string & type,
 	Source s = _f.createFrom( impl );
 
 	if (s) {
-
 	    count = impl->resolvables (s).size();
-	    aliasMap[alias] = manager->addSource (s);
-	    cout << "Added source " << alias << " as #" << aliasMap[alias] << endl;
-	    God->addResolvables( impl->resolvables (s) );
+	    unsigned snum = manager->addSource (s);
+	    cout << "Added source '" << alias << "' as #" << snum  << ":[" << s.alias() << "]" << endl;
+	    God->addResolvables( impl->resolvables (s), (alias == "@system") );
 	    print_pool ();
 	}
 	cout << "Loaded " << count << " package(s) from " << pathname << endl;
@@ -583,15 +592,15 @@ parse_xml_setup (XmlNode_Ptr node)
 
 	} else if (node->equals ("force-install")) {
 
-	    string source_name = node->getProp ("source");
+	    string source_alias = node->getProp ("source");
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 
 	    PoolItem_Ref poolItem;
 
-	    poolItem = get_poolItem (source_name, package_name, kind_name);
+	    poolItem = get_poolItem (source_alias, package_name, kind_name);
 	    if (poolItem) {
-		RESULT << "Force-installing " << package_name << " from source " << source_name << endl;;
+		RESULT << "Force-installing " << package_name << " from source " << source_alias << endl;;
 
 		Source_Ref system_source = manager->findSource("@system");
 
@@ -604,7 +613,7 @@ parse_xml_setup (XmlNode_Ptr node)
 		r->setInstalled (true);
 #endif
 	    } else {
-		cerr << "Unknown package " << source_name << "::" << package_name << endl;
+		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
 	    }
 
 	} else if (node->equals ("force-uninstall")) {
@@ -628,21 +637,21 @@ parse_xml_setup (XmlNode_Ptr node)
 
 	} else if (node->equals ("lock")) {
 
-	    string source_name = node->getProp ("source");
+	    string source_alias = node->getProp ("source");
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 
 	    PoolItem_Ref poolItem;
 
-	    poolItem = get_poolItem (source_name, package_name, kind_name);
+	    poolItem = get_poolItem (source_alias, package_name, kind_name);
 	    if (poolItem) {
-		RESULT << "Locking " << package_name << " from source " << source_name << endl;
+		RESULT << "Locking " << package_name << " from source " << source_alias << endl;
 #warning Needs locks
 #if 0
 		r->setLocked (true);
 #endif
 	    } else {
-		cerr << "Unknown package " << source_name << "::" << package_name << endl;
+		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
 	    }
 
 	} else {
@@ -792,18 +801,18 @@ foreach_system_upgrade (Resolver & resolver)
 // ResolverContext output
 
 static void
-print_marked_cb (PoolItem_Ref poolItem, void *data)
+print_marked_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
-    RESULT << poolItem << " " << poolItem.status() << endl;
+    RESULT << poolItem << " " << status << endl;
     return;
 }
 
 
 static void
-freshen_marked_cb (PoolItem_Ref poolItem, void *data)
+freshen_marked_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
     Resolver *resolver = (Resolver *)data;
-    if (poolItem.status().isIncomplete()) {
+    if (status.isIncomplete()) {
 	resolver->addPoolItemToInstall (poolItem);
     }
 
@@ -852,40 +861,40 @@ parse_xml_trial (XmlNode_Ptr node)
 
 	} else if (node->equals ("current")) {
 
-	    string source_name = node->getProp ("source");
-	    Source_Ref source = manager->findSource (source_name);
+	    string source_alias = node->getProp ("source");
+	    Source_Ref source = manager->findSource (source_alias);
 
 	    if (source) {
 //FIXME		resolver.setCurrentChannel (source);
 	    } else {
-		cerr << "Unknown source '" << source_name << "' (current)" << endl;
+		cerr << "Unknown source '" << source_alias << "' (current)" << endl;
 	    }
 
 	} else if (node->equals ("subscribe")) {
 
-	    string source_name = node->getProp ("source");
-	    Source_Ref source = manager->findSource (source_name);
+	    string source_alias = node->getProp ("source");
+	    Source_Ref source = manager->findSource (source_alias);
 
 	    if (source) {
 //FIXME		source->setSubscription (true);
 	    } else {
-		cerr << "Unknown source '" << source_name << "' (subscribe)" << endl;
+		cerr << "Unknown source '" << source_alias << "' (subscribe)" << endl;
 	    }
 
 	} else if (node->equals ("install")) {
 
-	    string source_name = node->getProp ("channel");
+	    string source_alias = node->getProp ("channel");
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 
 	    PoolItem_Ref poolItem;
 
-	    poolItem = get_poolItem (source_name, package_name, kind_name);
+	    poolItem = get_poolItem (source_alias, package_name, kind_name);
 	    if (poolItem) {
-		RESULT << "Installing " << package_name << " from source " << source_name << endl;;
+		RESULT << "Installing " << package_name << " from source " << source_alias << endl;;
 		resolver.addPoolItemToInstall (poolItem);
 	    } else {
-		cerr << "Unknown package " << source_name << "::" << package_name << endl;
+		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
 	    }
 
 	} else if (node->equals ("uninstall")) {
@@ -983,14 +992,14 @@ parse_xml_trial (XmlNode_Ptr node)
 
 	} else if (node->equals ("whatdependson")) {
 
-	    string source_name = node->getProp ("source");
+	    string source_alias = node->getProp ("source");
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 	    string prov_name = node->getProp ("provides");
 
 	    PoolItemSet poolItems;
 
-	    assert (!source_name.empty());
+	    assert (!source_alias.empty());
 	    assert (!package_name.empty());
 
 	    if (!prov_name.empty()) {
@@ -1001,7 +1010,7 @@ parse_xml_trial (XmlNode_Ptr node)
 		poolItems = get_providing_poolItems (prov_name, kind_name);
 	    }
 	    else {
-		PoolItem_Ref poolItem = get_poolItem (source_name, package_name, kind_name);
+		PoolItem_Ref poolItem = get_poolItem (source_alias, package_name, kind_name);
 		if (poolItem) poolItems.insert (poolItem);
 	    }
 	    if (poolItems.empty()) {

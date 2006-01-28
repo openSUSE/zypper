@@ -11,6 +11,7 @@
 */
 
 #include "HelixPatchImpl.h"
+#include "zypp/source/SourceImpl.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
 
@@ -28,10 +29,15 @@ namespace zypp
 
 /** Default ctor
 */
-HelixPatchImpl::HelixPatchImpl (const zypp::HelixParser & parsed)
-    : _size_installed(parsed.installedSize)
+HelixPatchImpl::HelixPatchImpl (Source_Ref source_r, const zypp::HelixParser & parsed)
+    : _source (source_r)
+    , _size_installed(parsed.installedSize)
 {
 }
+
+Source_Ref
+HelixPatchImpl::source() const
+{ return _source; }
 
 ByteCount HelixPatchImpl::size() const
 { return _size_installed; }

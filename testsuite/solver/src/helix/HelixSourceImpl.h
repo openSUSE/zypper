@@ -45,14 +45,11 @@ namespace zypp {
 
 class HelixSourceImpl : public zypp::source::SourceImpl {
 
-  private:
-
-    void load (const std::string & filename_r);
-    
   public:
 
     /** Ctor, FIXME it is here only because of target storage */
     HelixSourceImpl()
+      : _source (Source::nullimpl())
     {}
     /** Default ctor */
     HelixSourceImpl(media::MediaAccess::Ptr & media_r, const Pathname & path_r = "/", const std::string & alias_r = "");
@@ -67,6 +64,12 @@ class HelixSourceImpl : public zypp::source::SourceImpl {
     Dependencies createDependencies (const HelixParser & data);
 
     void parserCallback (const HelixParser & data);
+
+  private:
+    Source_Ref _source;
+    const Pathname _pathname;
+    void createResolvables(Source_Ref source_r);
+
 };
 
 

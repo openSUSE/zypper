@@ -32,13 +32,16 @@ public:
 	class HelixParser;
 	/** Default ctor
 	*/
-	HelixMessageImpl( const zypp::HelixParser & data );
+	HelixMessageImpl( Source_Ref source_r, const zypp::HelixParser & data );
 
 	std::string text () const;
 	std::string type () const;
 	virtual ByteCount size() const;
+	/** */
+	virtual Source_Ref source() const;
 
 protected:
+	Source_Ref _source;
 	std::string _text;
 	std::string _type;
 	ByteCount _size_installed;

@@ -32,7 +32,7 @@ public:
 	class HelixParser;
 	/** Default ctor
 	*/
-	HelixPatternImpl( const zypp::HelixParser & data );
+	HelixPatternImpl( Source_Ref source_r, const zypp::HelixParser & data );
 
 	/** Pattern summary */
 	virtual Label summary() const;
@@ -47,7 +47,10 @@ public:
 	virtual bool installOnly() const;
 	/** */
 
+	/** */
+	virtual Source_Ref source() const;
 protected:
+	Source_Ref _source;
 	Label _summary;
 	Text _description;
 	PackageGroup _group;
