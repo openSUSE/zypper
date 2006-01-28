@@ -69,6 +69,7 @@ operator<<( ostream& os, const ResolverContext & context)
 
 ResolverContext::ResolverContext (ResolverContext_Ptr parent)
     : _parent (parent)
+    , _pool (NULL)
     , _download_size (0)
     , _install_size (0)
     , _total_priority (0)
@@ -79,6 +80,7 @@ ResolverContext::ResolverContext (ResolverContext_Ptr parent)
     , _invalid (false)
 {
     if (parent != NULL) {
+	_pool		 = parent->_pool;
 	_download_size   = parent->_download_size;
 	_install_size    = parent->_install_size;
 	_total_priority  = parent->_total_priority;
