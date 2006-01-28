@@ -72,7 +72,7 @@ struct LookForUpgrades : public resfilter::OnCapMatchCallbackFunctor, public res
 };
 
 
-PoolItem
+PoolItem_Ref
 Helper::findInstalledItem (const ResPool *pool, PoolItem_Ref item)
 {
     LookForUpgrades info;
