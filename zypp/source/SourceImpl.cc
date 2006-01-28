@@ -48,6 +48,8 @@ namespace zypp
     , _path(path_r)
     , _enabled(true)
     , _alias (alias_r)
+    , _priority (0)
+    , _priority_unsubscribed (0)
     , _res_store_initialized(false)
     {}
 
@@ -95,6 +97,18 @@ namespace zypp
     void SourceImpl::createResolvables(Source_Ref source_r)
     {}
 
+
+    std::string SourceImpl::zmdname (void) const
+    { return "zmdname"; }
+
+    std::string SourceImpl::zmddescription (void) const
+    { return "zmddescription"; }
+
+    unsigned SourceImpl::priority (void) const
+    { return _priority; }
+
+    unsigned SourceImpl::priority_unsubscribed (void) const
+    { return _priority_unsubscribed; }
 
     std::ostream & SourceImpl::dumpOn( std::ostream & str ) const
     { return str << (_alias.empty() ? "SourceImpl" : _alias); }

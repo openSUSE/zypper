@@ -98,6 +98,11 @@ namespace zypp
       std::string alias (void) const
       { return _alias; }
 
+      virtual std::string zmdname (void) const;
+      virtual std::string zmddescription (void) const;
+      virtual unsigned priority (void) const;
+      virtual unsigned priority_unsubscribed (void) const;
+
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const;
 
@@ -112,6 +117,11 @@ namespace zypp
       bool _enabled;
       /** (user defined) alias of the source */
       std::string _alias;
+      /** (user defined) default priority of the source */
+      unsigned _priority;
+      /** (user defined) unsubscribed priority of the source */
+      unsigned _priority_unsubscribed;
+
     private:
       /** Null implementation */
       static SourceImpl_Ptr _nullimpl;

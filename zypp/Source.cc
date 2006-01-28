@@ -90,6 +90,18 @@ namespace zypp
   string Source_Ref::alias (void) const
   { return _pimpl->alias(); }
 
+  string Source_Ref::zmdname (void) const
+  { return _pimpl->zmdname(); }
+
+  string Source_Ref::zmddescription (void) const
+  { return _pimpl->zmddescription (); }
+
+  unsigned Source_Ref::priority (void) const
+  { return _pimpl->priority(); }
+
+  unsigned Source_Ref::priority_unsubscribed (void) const
+  { return _pimpl->priority_unsubscribed(); }
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

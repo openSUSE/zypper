@@ -86,7 +86,12 @@ namespace zypp
 
     void disable();
 
+    // for ZMD
     std::string alias (void) const;
+    std::string zmdname (void) const;
+    std::string zmddescription (void) const;
+    unsigned priority (void) const;
+    unsigned priority_unsubscribed (void) const;
 
     /** Conversion to bool to allow pointer style tests
      *  for nonNULL \ref resolvable. */
@@ -102,14 +107,6 @@ namespace zypp
   /** \relates Source Stream output. */
   inline std::ostream & operator<<( std::ostream & str, Source_Ref obj )
   { return obj.dumpOn( str ); }
-
-  /** \relates Source  */
-  inline bool operator==( const Source_Ref & lhs, const Source_Ref & rhs )
-  { return lhs == rhs; }
-
-  /** \relates Source  */
-  inline bool operator!=( const Source_Ref & lhs, const Source_Ref & rhs )
-  { return !(lhs == rhs); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
