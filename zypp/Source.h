@@ -93,6 +93,9 @@ namespace zypp
     unsigned priority (void) const;
     unsigned priority_unsubscribed (void) const;
 
+    // for YaST
+    std::string url (void) const;
+    
     /** Conversion to bool to allow pointer style tests
      *  for nonNULL \ref resolvable. */
     operator bool() const
