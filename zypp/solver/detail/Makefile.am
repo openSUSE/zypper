@@ -8,6 +8,7 @@ INCLUDES = 						\
 	-I$(top_srcdir) -Wall -fno-strict-aliasing	\
 	-I/usr/include/libxml2 -I/usr/include/rpm	\
 	-DG_LOG_DOMAIN=\"solver_detail\"		\
+	-DZYPP_BASE_LOGGER_LOGGROUP=\"solver\"		\
 	-DPHI
 
 solverdetailincludedir = $(pkgincludedir)/solver/detail
