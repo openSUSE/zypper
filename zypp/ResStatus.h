@@ -41,6 +41,7 @@ namespace zypp
    * \li \c TransactDetailField Reason why the Resolvable transacts.
    *        Splitted into \c InstallDetailValue and \c RemoveDetailValue
    *        dependent on the kind of transaction.
+   *
   */
   class ResStatus
   {
@@ -67,9 +68,10 @@ namespace zypp
     enum EstablishValue
       {
         UNDETERMINED = 0,
-        UNNEEDED     = EstablishField::minval,
-        SATISFIED,
-        INCOMPLETE
+        UNNEEDED     = EstablishField::minval,		// has freshens, none trigger
+        SATISFIED,					// has none or triggered freshens, all requirements fulfilled
+        INCOMPLETE					// installed: has none or triggered freshens, requirements unfulfilled
+							// uninstalled: has triggered freshens, requirements unfulfilled
       };
     enum TransactValue
       {
@@ -128,13 +130,19 @@ namespace zypp
     { return isInstalled() && transacts(); }
 
     bool isUnneeded() const
-    { return fieldValueIs<EstablishField>( UNNEEDED ); }
+    { return isUninstalled() && fieldValueIs<EstablishField>( UNNEEDED ); }
 
     bool isSatisfied() const
-    { return fieldValueIs<EstablishField>( SATISFIED ); }
+    { return isUninstalled() && fieldValueIs<EstablishField>( SATISFIED ); }
+
+    bool isComplete () const
+    { return isInstalled() && fieldValueIs<EstablishField>( SATISFIED ); }
 
     bool isIncomplete() const
-    { return fieldValueIs<EstablishField>( INCOMPLETE ); }
+    { return isInstalled() && fieldValueIs<EstablishField>( INCOMPLETE ); }
+
+    bool isNeeded() const
+    { return isUninstalled() && fieldValueIs<EstablishField>( INCOMPLETE ); }
 
     bool transacts() const
     { return fieldValueIs<TransactField>( TRANSACT ); }
@@ -149,6 +157,13 @@ namespace zypp
     { return isToBeInstalled() && fieldValueIs<TransactDetailField> (SOFT_REQUIRES); }
 
   public:
+
+    //------------------------------------------------------------------------
+    // get/set functions, returnig \c true if requested status change
+    // was successfull (i.e. leading to the desired transaction).
+    // If a lower level (e.g.SOLVER) wants to transact, but it's
+    // already set by a higher level, \c true should be returned.
+    // Removing a higher levels transaction bit should fail.
 
     bool revert ()
     {
@@ -222,13 +237,25 @@ namespace zypp
 	_bitfield = status._bitfield;
     }
 
-    //------------------------------------------------------------------------
-    // get/set functions, returnig \c true if requested status change
-    // was successfull (i.e. leading to the desired transaction).
-    // If a lower level (e.g.SOLVER) wants to transact, but it's
-    // already set by a higher level, \c true should be returned.
-    // Removing a higher levels transaction bit should fail.
+    static ResStatus toBeInstalled;
+    static ResStatus toBeInstalledSoft;
+    static ResStatus toBeUninstalled;
+    static ResStatus toBeUninstalledDueToUnlink;
+    static ResStatus toBeUninstalledDueToObsolete;
+    static ResStatus satisfied;			// uninstalled, satisfied
+    static ResStatus complete;			// installed, satisfied
+    static ResStatus unneeded;			// uninstalled, unneeded
+    static ResStatus needed;			// uninstalled, incomplete
+    static ResStatus incomplete;		// installed, incomplete 
+
+  inline bool operator==( const ResStatus & rhs ) const
+  { return _bitfield.value() == rhs._bitfield.value(); }
+
+  inline bool operator!=( const ResStatus & rhs ) const
+  { return _bitfield.value() != rhs._bitfield.value(); }
+
   private:
+    ResStatus (enum StateValue s, enum EstablishValue e = UNDETERMINED, enum TransactValue t = TRANSACT, enum InstallDetailValue i = EXPLICIT_INSTALL, enum RemoveDetailValue r = EXPLICIT_REMOVE);
 
     /** Return whether the corresponding Field has value \a val_r.
     */
@@ -241,6 +268,7 @@ namespace zypp
     template<class _Field>
       void fieldValueAssign( FieldType val_r )
       { _bitfield.assign<_Field>( val_r ); }
+
 
   private:
     bit::BitField<FieldType> _bitfield;

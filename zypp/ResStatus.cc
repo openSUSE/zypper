@@ -45,6 +45,30 @@ namespace zypp
   ResStatus::~ResStatus()
   {}
 
+
+ResStatus ResStatus::toBeInstalled		 = ResStatus (UNINSTALLED, UNDETERMINED, TRANSACT);
+ResStatus ResStatus::toBeInstalledSoft		 = ResStatus (UNINSTALLED, UNDETERMINED, TRANSACT, SOFT_REQUIRES);
+ResStatus ResStatus::toBeUninstalled		 = ResStatus (INSTALLED,   UNDETERMINED, TRANSACT);
+ResStatus ResStatus::toBeUninstalledDueToUnlink	 = ResStatus (INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_UNLINK);
+ResStatus ResStatus::toBeUninstalledDueToObsolete= ResStatus (INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_OBSOLETE);
+ResStatus ResStatus::incomplete			 = ResStatus (INSTALLED,   INCOMPLETE);
+ResStatus ResStatus::complete			 = ResStatus (INSTALLED,   SATISFIED);
+ResStatus ResStatus::satisfied			 = ResStatus (UNINSTALLED, SATISFIED);
+ResStatus ResStatus::unneeded			 = ResStatus (UNINSTALLED, UNNEEDED);
+ResStatus ResStatus::needed			 = ResStatus (UNINSTALLED, INCOMPLETE);
+
+  ResStatus::ResStatus (enum StateValue s, enum EstablishValue e, enum TransactValue t, enum InstallDetailValue i, enum RemoveDetailValue r)
+    : _bitfield (s)
+  {
+    fieldValueAssign<EstablishField>(e);
+    fieldValueAssign<TransactField>(t);
+    if (t == TRANSACT) {
+	if (s == INSTALLED) fieldValueAssign<TransactDetailField>(r);
+	else fieldValueAssign<TransactDetailField>(i);
+    }
+  }
+
+
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<
