@@ -63,9 +63,9 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  void ZYpp::addResolvables (const ResStore& store)
+  void ZYpp::addResolvables (const ResStore& store, bool installed)
   {
-    _pimpl->addResolvables (store);
+    _pimpl->addResolvables (store, installed);
   }
 
   void ZYpp::removeResolvables (const ResStore& store)

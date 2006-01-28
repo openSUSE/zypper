@@ -28,7 +28,7 @@ namespace zypp
     /**  */
     struct PoolImplInserter
     {
-      void operator()( ResObject::constPtr ptr_r );
+      void operator()( ResObject::constPtr ptr_r, bool installed = false );
 
       PoolImplInserter( PoolImpl & poolImpl_r )
       : _poolImpl( poolImpl_r )

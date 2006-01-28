@@ -44,7 +44,7 @@ namespace zypp
       ResPool pool() const
       { return _pool.accessor(); }
 
-      void addResolvables (const ResStore& store);
+      void addResolvables (const ResStore& store, bool installed = false);
 
       void removeResolvables (const ResStore& store);
 

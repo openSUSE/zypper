@@ -47,13 +47,13 @@ namespace zypp
 
   public:
     /**  */
-    void insert( ResObject::constPtr ptr_r )
-    { inserter()( ptr_r ); }
+    void insert( ResObject::constPtr ptr_r, bool installed = false )
+    { inserter()( ptr_r, installed ); }
 
     /**  */
     template <class _InputIterator>
-      void insert( _InputIterator first_r, _InputIterator last_r )
-      { std::for_each( first_r, last_r, inserter() ); }
+      void insert( _InputIterator first_r, _InputIterator last_r, bool installed = false )
+      { while (first_r != last_r) { inserter()( *first_r, installed ); ++first_r; } }
 
     /**  */
     void erase( ResObject::constPtr ptr_r )
