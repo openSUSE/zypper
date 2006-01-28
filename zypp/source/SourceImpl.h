@@ -99,8 +99,7 @@ namespace zypp
       { return _alias; }
 
       /** Overload to realize stream output. */
-      virtual std::ostream & dumpOn( std::ostream & str ) const
-      { return str << "SourceImpl"; }
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
 
     protected:
       /** All resolvables provided by this source. */

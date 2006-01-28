@@ -95,6 +95,10 @@ namespace zypp
     void SourceImpl::createResolvables(Source_Ref source_r)
     {}
 
+
+    std::ostream & SourceImpl::dumpOn( std::ostream & str ) const
+    { return str << (_alias.empty() ? "SourceImpl" : _alias); }
+
     /////////////////////////////////////////////////////////////////
   } // namespace source
   ///////////////////////////////////////////////////////////////////
