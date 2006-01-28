@@ -38,6 +38,7 @@ using namespace zypp;
 //---------------------------------------------------------------------------
 
 HelixSourceImpl::HelixSourceImpl(media::MediaAccess::Ptr & media_r, const Pathname & path_r, const std::string & alias_r)
+    : SourceImpl (media_r, path_r, alias_r)
 {
     load (path_r.asString());
 }
