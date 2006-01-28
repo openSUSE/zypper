@@ -244,7 +244,6 @@ ResolverQueue::processOnce ()
        the larger branch can be dropped.
     */
 
-    _XXX("QUEUE_SPEW") <<  "ResolverQueue::processOnce() second pass" << endl;
     for (QueueItemList::iterator iter = _qitems.begin(); iter != _qitems.end();) {
 	QueueItemList::iterator next = iter; next++;
 	QueueItem_Ptr qitem = *iter;
