@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+   update-install single package on system
+-->
+<test>
+<setup>
+  <system file="single-package.xml"/>
+  <channel name="test" file="update-package.xml"/>
+</setup>
+<trial>
+  <install channel="test" package="A"/>
+</trial>
+</test>
