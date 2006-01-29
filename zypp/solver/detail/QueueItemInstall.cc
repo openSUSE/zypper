@@ -231,10 +231,11 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     if (!_upgrades) {
 
-	    DBG  << "simple install of " <<  _item  << endl;
-	    context->install (_item, context->verifying() /* is_soft */, _other_penalty);
+	DBG  << "simple install of " <<  _item  << endl;
+	context->install (_item, context->verifying() /* is_soft */, _other_penalty);
 
-    } else {
+    }
+    else {
 
 	QueueItemUninstall_Ptr uninstall_item;
 
@@ -268,13 +269,15 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
     // we're done if this isn't currently uninstalled or incomplete
 
     if (! (status.isUninstalled()
-	|| status.isToBeUninstalledDueToUnlink()
-	|| status.isIncomplete()
-	|| status.isSatisfied()))
+	   || status.isToBeUninstalledDueToUnlink()
+	   || status.isIncomplete()
+	   || status.isSatisfied()))
     {
+	DBG << "status " << status << " -> finished" << endl;
 	goto finished;
     }
 
+    DBG << "status " << status << " -> NOT finished" << endl;
     {	// just a block for local initializers, the goto above makes this necessary
 
 	ResolverInfoMisc_Ptr misc_info;
