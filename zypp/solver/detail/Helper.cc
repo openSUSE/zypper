@@ -70,6 +70,9 @@ class LookForUpgrades : public resfilter::OnCapMatchCallbackFunctor, public resf
 };
 
 
+// just find installed item with same kind/name as item
+// does NOT check edition
+
 PoolItem_Ref
 Helper::findInstalledItem (const ResPool & pool, PoolItem_Ref item)
 {
@@ -77,9 +80,8 @@ Helper::findInstalledItem (const ResPool & pool, PoolItem_Ref item)
 
     invokeOnEach( pool.byNameBegin( item->name() ),
 		  pool.byNameEnd( item->name() ),
-		  functor::chain( resfilter::ByInstalled (),
-				  functor::chain (resfilter::ByKind( item->kind() ),
-				  	   resfilter::byEdition<CompareByLT<Edition> >( item->edition() ) ) ),
+		  functor::chain (resfilter::ByInstalled (),			// ByInstalled
+				  resfilter::ByKind( item->kind() ) ),		// equal kind
 		  functor::functorRef<bool,PoolItem> (info) );
 
     return info.installed;
