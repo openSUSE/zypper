@@ -182,7 +182,7 @@ assemble_install_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data
 {
     StringList *slist = (StringList *)data;
     ostringstream s;
-    s << str::form ("%-7s ", status.isInstalled() ? "|flag" : "install");
+    s << str::form ("%-7s ", poolItem.status().isInstalled() ? "|flag" : "install");
     printRes (s, poolItem.resolvable());
 
     slist->push_back (s.str());
@@ -194,7 +194,8 @@ assemble_uninstall_cb (PoolItem_Ref poolItem, const ResStatus & status, void *da
 {
     StringList *slist = (StringList *)data;
     ostringstream s;
-    s << str::form ("%-7s ", status.isInstalled() ? "remove" : "|unflag");
+MIL << "assemble_uninstall_cb(" << poolItem << "):" << status << endl;
+    s << str::form ("%-7s ", poolItem.status().isInstalled() ? "remove" : "|unflag");
     printRes (s, poolItem.resolvable());
 
     slist->push_back (s.str());
@@ -222,7 +223,7 @@ assemble_incomplete_cb (PoolItem_Ref poolItem, const ResStatus & status,void *da
 {
     StringList *slist = (StringList *)data;
     ostringstream s;
-    s << str::form ("%-11s ", status.isInstalled() ? "incomplete" : "|incomplete");
+    s << str::form ("%-11s ", poolItem.status().isInstalled() ? "incomplete" : "|needed");
     printRes (s, poolItem.resolvable());
 
     slist->push_back (s.str());
@@ -234,7 +235,7 @@ assemble_satisfy_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data
 {
     StringList *slist = (StringList *)data;
     ostringstream s;
-    s << str::form ("%-10s ", status.isInstalled() ? "SATISFIED" : "|satisfied");
+    s << str::form ("%-10s ", poolItem.status().isInstalled() ? "complete" : "|satisfied");
     printRes (s, poolItem.resolvable());
 
     slist->push_back (s.str());
@@ -334,11 +335,15 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 	cout << "- - - - - - - - - -" << endl;
     }
 
-    fflush (stdout);
+    cout.flush();
 
+    cout << "Context Info:" << endl;
     context->spewInfo ();
-    if (getenv ("RC_SPEW")) cout << context << endl;
 
+    cout << "Context Context:" << endl;
+    cout << context << endl;
+
+    return;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
