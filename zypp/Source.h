@@ -16,8 +16,10 @@
 #include <string>
 
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/Logger.h"
 
 #include "zypp/Pathname.h"
+#include "zypp/Url.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -94,13 +96,24 @@ namespace zypp
     unsigned priority_unsubscribed (void) const;
 
     // for YaST
-    std::string url (void) const;
-    
-    /** Conversion to bool to allow pointer style tests
-     *  for nonNULL \ref resolvable. */
-    operator bool() const
-    { return _pimpl != NULL; }
+    Url url (void) const;
+    const Pathname & path (void) const;
 
+    /** Conversion to bool to allow pointer style tests
+     *  for nonNULL \ref source impl. */
+    // see http://www.c-plusplus.de/forum/viewtopic-var-t-is-113762-and-start-is-0-and-postdays-is-0-and-postorder-is-asc-and-highlight-is-.html
+    //  for the glory details
+
+    typedef void (Source_Ref::*unspecified_bool_type)();
+
+    operator unspecified_bool_type() const
+    { if ((_pimpl == NULL)
+	  || (_pimpl == nullimpl()._pimpl))
+      {
+	return static_cast<unspecified_bool_type>(0);
+      }
+      return &Source_Ref::enable;	// return pointer to a void() function since the typedef is like this
+    }
   };
   ///////////////////////////////////////////////////////////////////
 

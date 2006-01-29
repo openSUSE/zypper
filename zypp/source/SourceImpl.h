@@ -103,7 +103,9 @@ namespace zypp
       virtual unsigned priority (void) const;
       virtual unsigned priority_unsubscribed (void) const;
 
-      std::string url (void) const;
+      Url url (void) const;
+      
+      const Pathname & path (void) const;
       
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const;

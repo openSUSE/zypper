@@ -110,10 +110,11 @@ namespace zypp
     unsigned SourceImpl::priority_unsubscribed (void) const
     { return _priority_unsubscribed; }
 
-    std::string SourceImpl::url (void) const
-    {
-      return _media->url().toString() + _path.asString();
-    }
+    Url SourceImpl::url (void) const
+    { return _media->url(); }
+    
+    const Pathname & SourceImpl::path (void) const
+    { return _path; }
     
     std::ostream & SourceImpl::dumpOn( std::ostream & str ) const
     { return str << (_alias.empty() ? "SourceImpl" : _alias); }

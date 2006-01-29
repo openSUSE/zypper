@@ -102,9 +102,11 @@ namespace zypp
   unsigned Source_Ref::priority_unsubscribed (void) const
   { return _pimpl->priority_unsubscribed(); }
 
-
-  string Source_Ref::url (void) const
+  Url Source_Ref::url (void) const
   { return _pimpl->url (); }
+
+  const Pathname & Source_Ref::path (void) const
+  { return _pimpl->path (); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
