@@ -45,7 +45,6 @@
 #include "zypp/Capability.h"
 #include "zypp/CapSet.h"
 #include "zypp/CapFactory.h"
-#include "zypp/solver/libzypp_solver.h"
 
 #include "zypp/Source.h"
 #include "zypp/SourceFactory.h"
@@ -69,12 +68,20 @@
 #include "zypp/ZYpp.h"
 #include "zypp/ZYppFactory.h"
 
+#include "zypp/solver/detail/Resolver.h"
+#include "zypp/solver/detail/ResolverContext.h"
+#include "zypp/solver/detail/ResolverQueue.h"
+#include "zypp/solver/detail/ResolverInfo.h"
+#include "zypp/solver/detail/ResolverProblem.h"
+#include "zypp/solver/detail/InstallOrder.h"
+
+
 using namespace std;
 using namespace zypp;
 using namespace zypp::solver::detail;
 
 static string globalPath;
-static const ResPool *globalPool = NULL;
+
 static ZYpp::Ptr God;
 static SourceManager_Ptr manager;
 
@@ -318,7 +325,7 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 	PoolItemList installs = context->getMarked(1);
 	PoolItemList dummy;
 
-	InstallOrder order( globalPool, installs, dummy );		 // sort according top prereq
+	InstallOrder order( context->pool(), installs, dummy );		 // sort according top prereq
 	order.init();
 	const PoolItemList & installorder ( order.getTopSorted() );
 	for (PoolItemList::const_iterator iter = installorder.begin(); iter != installorder.end(); iter++) {
@@ -504,8 +511,10 @@ struct PrintItem : public resfilter::PoolItemFilterFunctor
     bool operator()( PoolItem_Ref poolItem )
     {
 	cout << ++count << ": ";
-	printRes (cout, poolItem);
-	cout << ": " << poolItem.status() << endl;
+	cout << poolItem;
+//	printRes (cout, poolItem);
+//	cout << ": " << poolItem.status();
+	cout << endl;
 	return true;
     }
 };
@@ -676,47 +685,47 @@ parse_xml_setup (XmlNode_Ptr node)
 // trial related functions
 
 static void
-report_solutions (Resolver & resolver, bool instorder)
+report_solutions ( Resolver_Ptr resolver, bool instorder)
 {
     int count = 1;
     ChecksumList checksum_list;
 
     cout << endl;
 
-    if (!resolver.completeQueues().empty()) {
-	cout << "Completed solutions: " << (long) resolver.completeQueues().size() << endl;
+    if (!resolver->completeQueues().empty()) {
+	cout << "Completed solutions: " << (long) resolver->completeQueues().size() << endl;
     }
 
-    if (resolver.prunedQueues().empty()) {
-	cout << "Pruned solutions: " << (long) resolver.prunedQueues().size() << endl;
+    if (resolver->prunedQueues().empty()) {
+	cout << "Pruned solutions: " << (long) resolver->prunedQueues().size() << endl;
     }
 
-    if (resolver.deferredQueues().empty()) {
-	cout << "Deferred solutions: " << (long) resolver.deferredQueues().size() << endl;
+    if (resolver->deferredQueues().empty()) {
+	cout << "Deferred solutions: " << (long) resolver->deferredQueues().size() << endl;
     }
 
-    if (resolver.invalidQueues().empty()) {
-	cout << "Invalid solutions: " << (long) resolver.invalidQueues().size() << endl;
+    if (resolver->invalidQueues().empty()) {
+	cout << "Invalid solutions: " << (long) resolver->invalidQueues().size() << endl;
     }
     
-    if (resolver.bestContext()) {
+    if (resolver->bestContext()) {
 	cout << endl << "Best Solution:" << endl;
-	print_solution (resolver.bestContext(), &count, checksum_list, instorder);
+	print_solution (resolver->bestContext(), &count, checksum_list, instorder);
 
-	ResolverQueueList complete = resolver.completeQueues();
+	ResolverQueueList complete = resolver->completeQueues();
 	if (complete.size() > 1)
 	    cout << endl << "Other Valid Solutions:" << endl;
 
 	if (complete.size() < 20) {
 	    for (ResolverQueueList::const_iterator iter = complete.begin(); iter != complete.end(); iter++) {
 		ResolverQueue_Ptr queue = (*iter);
-		if (queue->context() != resolver.bestContext()) 
+		if (queue->context() != resolver->bestContext()) 
 		    print_solution (queue->context(), &count, checksum_list, instorder);
 	    }
 	}
     }
 
-    ResolverQueueList invalid = resolver.invalidQueues();
+    ResolverQueueList invalid = resolver->invalidQueues();
     if (invalid.size() < 20) {
 	cout << endl;
 
@@ -762,35 +771,56 @@ uniquelyInstalled (void)
     return info.itemset;
 }
 
-struct DoUpgrades : public resfilter::OnCapMatchCallbackFunctor
+
+// keep upgrades in a map to achieve lexically sorted debug output
+
+typedef pair<PoolItem_Ref,PoolItem_Ref> UpgradePair;
+typedef map<string,UpgradePair > UpgradeMap;
+
+struct DoUpgrades : public resfilter::OnCapMatchCallbackFunctor, public resfilter::PoolItemFilterFunctor
 {
     PoolItem_Ref installed;
-    PoolItemSet upgrades;
-    Resolver & resolver;
+    UpgradeMap upgrades;
+//    PoolItemSet upgrades;
+    Resolver_Ptr resolver;
     int count;
 
-    DoUpgrades (Resolver & r)
+    DoUpgrades (Resolver_Ptr r)
 	: resolver (r)
 	, count (0)
     {  }
 
     bool operator()( PoolItem_Ref poolItem )
     {
+	if (installed->edition().compare (poolItem->edition()) < 0) {
+
+	UpgradeMap::const_iterator pos = upgrades.find(poolItem->name());
+	if (pos == upgrades.end()) {
+	    upgrades[poolItem->name()] = make_pair (installed, poolItem);
+	    ++count;
+	    return false;
+	}
+	}
+#if 0
 	if (upgrades.insert (poolItem).second) {			// only consider first match
-	    resolver.addPoolItemToInstall (poolItem);
-	    RESULT << "Upgrading " << installed << " => " << poolItem << endl;
+	    resolver->addPoolItemToInstall (poolItem);
+	    RESULT << "Upgrading ";
+	    printRes (cout, installed);
+	    cout << " => ";
+	    printRes (cout, poolItem);
+	    cout << endl;
 	    ++count;
 	}
+#endif
 	return true;
     }
 };
 
 
 int
-foreach_system_upgrade (Resolver & resolver)
+foreach_system_upgrade (Resolver_Ptr resolver)
 {
     PoolItemSet installed = uniquelyInstalled();
-
     DoUpgrades info (resolver);
 
     // world->foreachSystemUpgrade (true, trial_upgrade_cb, (void *)&resolver);
@@ -799,9 +829,26 @@ foreach_system_upgrade (Resolver & resolver)
 	PoolItem_Ref p = *iter;
 	info.installed = p;
 	invokeOnEach( God->pool().byNameBegin( p->name() ), God->pool().byNameEnd( p->name() ),
-		      functor::chain( resfilter::ByKind( p->kind() ),
-		      resfilter::byEdition<CompareByGT<Edition> >( p->edition() )),
+			functor::chain( resfilter::ByUninstalled(), resfilter::ByKind( p->kind() ) ),
+#if 0
+		      functor::chain( resfilter::ByUninstalled(),
+			functor::chain( resfilter::ByKind( p->kind() ),
+					resfilter::byEdition<CompareByGT<Edition> >( p->edition() ) ) ),
+#endif
 		      functor::functorRef<bool,PoolItem>(info) );
+
+    }
+
+    // now output in alphabetical order
+
+    for (UpgradeMap::const_iterator iter = info.upgrades.begin(); iter != info.upgrades.end(); ++iter) {
+	UpgradePair i_and_u = iter->second;
+	resolver->addPoolItemToInstall (i_and_u.second);
+	RESULT << "Upgrading ";
+	printRes (cout, i_and_u.first);
+	cout << " => ";
+	printRes (cout, i_and_u.second);
+	cout << endl;
     }
 
     return info.count;
@@ -821,7 +868,7 @@ print_marked_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 static void
 freshen_marked_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
-    Resolver *resolver = (Resolver *)data;
+    Resolver_Ptr resolver = *((Resolver_Ptr *)data);
     if (status.isIncomplete()) {
 	resolver->addPoolItemToInstall (poolItem);
     }
@@ -831,7 +878,7 @@ freshen_marked_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 
 
 static void
-parse_xml_trial (XmlNode_Ptr node)
+parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 {
     bool verify = false;
     bool instorder = false;
@@ -849,7 +896,7 @@ parse_xml_trial (XmlNode_Ptr node)
 
     print_sep ();
 
-    Resolver resolver (globalPool);
+    Resolver_Ptr resolver = new Resolver (pool);
 
     ResolverContext_Ptr established = NULL;
 
@@ -875,7 +922,7 @@ parse_xml_trial (XmlNode_Ptr node)
 	    Source_Ref source = manager->findSource (source_alias);
 
 	    if (source) {
-//FIXME		resolver.setCurrentChannel (source);
+//FIXME		resolver->setCurrentChannel (source);
 	    } else {
 		cerr << "Unknown source '" << source_alias << "' (current)" << endl;
 	    }
@@ -902,7 +949,7 @@ parse_xml_trial (XmlNode_Ptr node)
 	    poolItem = get_poolItem (source_alias, package_name, kind_name);
 	    if (poolItem) {
 		RESULT << "Installing " << package_name << " from channel " << source_alias << endl;;
-		resolver.addPoolItemToInstall (poolItem);
+		resolver->addPoolItemToInstall (poolItem);
 	    } else {
 		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
 	    }
@@ -917,7 +964,7 @@ parse_xml_trial (XmlNode_Ptr node)
 	    poolItem = get_poolItem ("@system", package_name, kind_name);
 	    if (poolItem) {
 		RESULT << "Uninstalling " << package_name << endl;
-		resolver.addPoolItemToRemove (poolItem);
+		resolver->addPoolItemToRemove (poolItem);
 	    } else {
 		cerr << "Unknown system package " << package_name << endl;
 	    }
@@ -938,9 +985,9 @@ parse_xml_trial (XmlNode_Ptr node)
 
 	    RESULT << "Establishing state ..." << endl;
 
-	    resolver.establishState (established);
-//cerr << "established<" << established << "> -> <" << resolver.bestContext() << ">" << endl;
-	    established = resolver.bestContext();
+	    resolver->establishState (established);
+//cerr << "established<" << established << "> -> <" << resolver->bestContext() << ">" << endl;
+	    established = resolver->bestContext();
 	    if (established == NULL)
 		RESULT << "Established NO context !" << endl;
 	    else {
@@ -972,7 +1019,7 @@ parse_xml_trial (XmlNode_Ptr node)
 
 		    RESULT << "Solvedeps " << (conflict_str.empty() ? "" : "conflict ") << dep->asString().c_str() << endl;
 
-		    resolver.addExtraDependency (dep);
+		    resolver->addExtraDependency (dep);
 
 		}
 		iter = iter->next();
@@ -1035,11 +1082,11 @@ parse_xml_trial (XmlNode_Ptr node)
 	    }
 
 	} else if (node->equals ("reportproblems")) {
-	    if (resolver.resolveDependencies (established) == true) {
+	    if (resolver->resolveDependencies (established) == true) {
 		RESULT << "No problems so far" << endl;
 	    }
 	    else {
-		ResolverProblemList problems = resolver.problems ();
+		ResolverProblemList problems = resolver->problems ();
 		RESULT << problems.size() << " problems found:" << endl;
 		for (ResolverProblemList::iterator iter = problems.begin(); iter != problems.end(); ++iter) {
 		    cout << *iter << endl;
@@ -1056,13 +1103,13 @@ parse_xml_trial (XmlNode_Ptr node)
     if (getenv ("RC_DEPS_TIME")) {
 	int timeout = atoi (getenv ("RC_DEPS_TIME"));
 
-	resolver.setTimeout (timeout);
+	resolver->setTimeout (timeout);
     }
 
     if (verify)
-	resolver.verifySystem ();
+	resolver->verifySystem ();
     else
-	resolver.resolveDependencies (established);
+	resolver->resolveDependencies (established);
 
     report_solutions (resolver, instorder);
 }
@@ -1070,7 +1117,7 @@ parse_xml_trial (XmlNode_Ptr node)
 //---------------------------------------------------------------------------------------------------------------------
 
 static void
-parse_xml_test (XmlNode_Ptr node)
+parse_xml_test (XmlNode_Ptr node, const ResPool & pool)
 {
     if (!node->equals("test")) {
 	ZYPP_THROW (Exception("Node not 'test' in parse_xml_test():"+node->name()));
@@ -1083,7 +1130,7 @@ parse_xml_test (XmlNode_Ptr node)
 	    if (node->equals("setup")) {
 		parse_xml_setup (node);
 	    } else if (node->equals ("trial")) {
-		parse_xml_trial (node);
+		parse_xml_trial (node, pool);
 	    } else {
 		cerr << "Unknown tag '" << node->name() << "' in test" << endl;
 	    }
@@ -1095,7 +1142,7 @@ parse_xml_test (XmlNode_Ptr node)
 
 
 static void
-process_xml_test_file (const string & filename)
+process_xml_test_file (const string & filename, const ResPool & pool)
 {
     xmlDocPtr xml_doc;
     XmlNode_Ptr root;
@@ -1110,7 +1157,7 @@ process_xml_test_file (const string & filename)
 
     DBG << "Parsing file '" << filename << "'" << endl;
     
-    parse_xml_test (root);
+    parse_xml_test (root, pool);
     
     xmlFreeDoc (xml_doc);
 }
@@ -1121,7 +1168,7 @@ process_xml_test_file (const string & filename)
 int
 main (int argc, char *argv[])
 {
-    setenv("ZYPP_NOLOG","1",1); // no logging
+//    setenv("ZYPP_NOLOG","1",1); // no logging
     
     if (argc != 2) {
 	cerr << "Usage: deptestomatic testfile.xml" << endl;
@@ -1131,15 +1178,13 @@ main (int argc, char *argv[])
     manager = SourceManager::sourceManager();
     ZYppFactory zf;
     God = zf.letsTest();
-    const ResPool pool = God->pool();
-    globalPool = &pool;
 
     globalPath = argv[1];
     globalPath = globalPath.substr (0, globalPath.find_last_of ("/") +1);
 
     DBG << "init_libzypp() done" << endl;
 
-    process_xml_test_file (string (argv[1]));
+    process_xml_test_file (string (argv[1]), God->pool());
 
     return 0;
 }
