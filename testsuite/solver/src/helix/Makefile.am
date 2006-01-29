@@ -5,7 +5,8 @@
 INCLUDES = 					\
 	-I$(top_srcdir) -Wall			\
 	-I/usr/include/libxml2			\
-	-DG_LOG_DOMAIN=\"helix\"
+	-DG_LOG_DOMAIN=\"helix\"		\
+	-DZYPP_BASE_LOGGER_LOGGROUP=\"helix\"
 
 LDADD =	$(noinst_LTLIBRARIES) $(top_srcdir)/zypp/lib@PACKAGE@.la
 
