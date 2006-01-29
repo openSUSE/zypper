@@ -59,6 +59,11 @@ IMPL_PTR_TYPE(ResolverContext);
 ostream&
 operator<<( ostream& os, const ResolverContext & context)
 {
+    if (context._parent != NULL) {
+	os << "Parent @" << context._parent << endl;
+	os << *(context._parent);
+    }
+    os << "ResolverContext with " << context._context.size() << " entries" << endl;
     for (ResolverContext::Context::const_iterator iter = context._context.begin(); iter != context._context.end(); ++iter) {
 	os << iter->first << " : " << iter->second << endl;
     }
@@ -871,7 +876,7 @@ ResolverContext::incompleteCount (void) const
 void
 ResolverContext::addInfo (ResolverInfo_Ptr info)
 {
-    DBG << "ResolverContext[" << this << "]::addInfo(" << info << ")" << endl;
+    DBG << "ResolverContext[" << this << "]::addInfo(" << *info << ")" << endl;
     _log.push_back (info);
 
     // _propagated_importance = false;
