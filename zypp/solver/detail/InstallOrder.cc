@@ -99,7 +99,7 @@ InstallOrder::computeNextSet()
     {
 	if (it->second.order == 0)
 	{
-	    _DBG("RC_SPEW") << "InstallOrder::computeNextSet found " << it->second.item << endl;
+	    DBG << "InstallOrder::computeNextSet found " << it->second.item << endl;
 
 	    newlist.push_back(it->second.item);
 	}
@@ -117,7 +117,7 @@ InstallOrder::setInstalled(PoolItem_Ref item )
 
     PoolItemSet adj = _rgraph[item];
 
-    _DBG("RC_SPEW") << "InstallOrder::setInstalled " << item << endl;
+    DBG << "InstallOrder::setInstalled " << item << endl;
 
     // order will be < 0
     _nodes[item].order--;
@@ -160,7 +160,7 @@ InstallOrder::startrdfs()
     _topsorted.clear();
 
     _numrun++;
-    _DBG("RC_SPEW") << "run #" << _numrun << endl;
+    DBG << "run #" << _numrun << endl;
 
     // initialize all nodes
     for (PoolItemSet::iterator it = _toinstall.begin(); it != _toinstall.end(); ++it)
@@ -177,7 +177,7 @@ InstallOrder::startrdfs()
 	const PoolItem_Ref item = *it;
 	if (_nodes[item].visited == false)
 	{
-	    _DBG("RC_SPEW") << "start recursion on " << item << endl;
+	    DBG << "start recursion on " << item << endl;
 	    rdfsvisit (item);
 	}
     }
@@ -255,7 +255,7 @@ InstallOrder::rdfsvisit (const PoolItem_Ref  item)
     for (CapList::const_iterator iter = requires.begin(); iter != requires.end(); ++iter)
     {
 	const Capability requirement = *iter;
-	_DBG("RC_SPEW") << "check requirement " << requirement << " of " << item << endl;
+	DBG << "check requirement " << requirement << " of " << item << endl;
 	PoolItemSet tovisit;
 
 	CollectProviders info ( item, tovisit, _toinstall, _installed );
@@ -305,7 +305,7 @@ InstallOrder::rdfsvisit (const PoolItem_Ref  item)
     _nodes[item].endtime = _rdfstime;
     _rdfstime++;
 
-    _DBG("RC_SPEW") << item << " done" << endl;
+    DBG << item << " done" << endl;
 }
 
 
