@@ -331,7 +331,7 @@ namespace zypp
 	{
 	  // strval_r has at least two words which could make 'op edition'?
 	  // improve regex!
-	  str::regex  rx( "(.*[^ \t])([ \t]+)([^ \t]+)([ \t]+)([^ \t]+)" );
+	  str::regex  rx( "[^/](.*[^ \t])([ \t]+)([^ \t]+)([ \t]+)([^ \t]+)" );
 	  str::smatch what;
 	  if( str::regex_match( strval_r.begin(), strval_r.end(),what, rx ) )
 	    {
