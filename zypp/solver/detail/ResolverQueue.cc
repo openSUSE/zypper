@@ -421,7 +421,7 @@ ResolverQueue::spew ()
 
     } else {
 	      for (QueueItemList::const_iterator iter = _qitems.begin(); iter != _qitems.end(); ++iter) {
-		  DBG << "  " << (*iter) << endl;
+		  DBG << "  " << *(*iter) << endl;
 	      }
 
     }
