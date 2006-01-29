@@ -798,7 +798,7 @@ static void
 install_count_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     int *count = (int *)data;
-    if (! status.isInstalled ()) {
+    if (! item.status().isInstalled ()) {
 	++*count;
     }
 }
@@ -818,7 +818,7 @@ static void
 uninstall_count_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     int *count = (int *)data;
-    if (status.isInstalled ()) {
+    if (item.status().isInstalled ()) {
 	++*count;
     }
 }
@@ -846,7 +846,7 @@ static void
 satisfy_count_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     int *count = (int *)data;
-    if (! status.isInstalled ()) {
+    if (! item.status().isInstalled ()) {
 	++*count;
     }
 }
