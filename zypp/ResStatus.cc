@@ -20,6 +20,17 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  const ResStatus ResStatus::toBeInstalled		 (UNINSTALLED, UNDETERMINED, TRANSACT);
+  const ResStatus ResStatus::toBeInstalledSoft		 (UNINSTALLED, UNDETERMINED, TRANSACT, SOFT_REQUIRES);
+  const ResStatus ResStatus::toBeUninstalled		 (INSTALLED,   UNDETERMINED, TRANSACT);
+  const ResStatus ResStatus::toBeUninstalledDueToUnlink	 (INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_UNLINK);
+  const ResStatus ResStatus::toBeUninstalledDueToObsolete(INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_OBSOLETE);
+  const ResStatus ResStatus::incomplete			 (INSTALLED,   INCOMPLETE);
+  const ResStatus ResStatus::complete			 (INSTALLED,   SATISFIED);
+  const ResStatus ResStatus::satisfied			 (UNINSTALLED, SATISFIED);
+  const ResStatus ResStatus::unneeded			 (UNINSTALLED, UNNEEDED);
+  const ResStatus ResStatus::needed			 (UNINSTALLED, INCOMPLETE);
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : ResStatus::ResStatus
@@ -45,17 +56,6 @@ namespace zypp
   ResStatus::~ResStatus()
   {}
 
-
-ResStatus ResStatus::toBeInstalled		 = ResStatus (UNINSTALLED, UNDETERMINED, TRANSACT);
-ResStatus ResStatus::toBeInstalledSoft		 = ResStatus (UNINSTALLED, UNDETERMINED, TRANSACT, SOFT_REQUIRES);
-ResStatus ResStatus::toBeUninstalled		 = ResStatus (INSTALLED,   UNDETERMINED, TRANSACT);
-ResStatus ResStatus::toBeUninstalledDueToUnlink	 = ResStatus (INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_UNLINK);
-ResStatus ResStatus::toBeUninstalledDueToObsolete= ResStatus (INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_OBSOLETE);
-ResStatus ResStatus::incomplete			 = ResStatus (INSTALLED,   INCOMPLETE);
-ResStatus ResStatus::complete			 = ResStatus (INSTALLED,   SATISFIED);
-ResStatus ResStatus::satisfied			 = ResStatus (UNINSTALLED, SATISFIED);
-ResStatus ResStatus::unneeded			 = ResStatus (UNINSTALLED, UNNEEDED);
-ResStatus ResStatus::needed			 = ResStatus (UNINSTALLED, INCOMPLETE);
 
   ResStatus::ResStatus (enum StateValue s, enum EstablishValue e, enum TransactValue t, enum InstallDetailValue i, enum RemoveDetailValue r)
     : _bitfield (s)
@@ -97,7 +97,7 @@ ResStatus ResStatus::needed			 = ResStatus (UNINSTALLED, INCOMPLETE);
     if (obj == ResStatus::complete)			str << "<complete>";			// installed, satisfied
     if (obj == ResStatus::unneeded)			str << "<uneeded>";			// uninstalled, unneeded
     if (obj == ResStatus::needed)			str << "<needed>";			// uninstalled, incomplete
-    if (obj == ResStatus::incomplete)			str << "<incomplete>";			// installed, incomplete 
+    if (obj == ResStatus::incomplete)			str << "<incomplete>";			// installed, incomplete
 
     return str;
   }

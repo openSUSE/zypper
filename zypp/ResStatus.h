@@ -46,7 +46,14 @@ namespace zypp
   class ResStatus
   {
     friend std::ostream & operator<<( std::ostream & str, const ResStatus & obj );
+    friend bool operator==( const ResStatus & lhs, const ResStatus & rhs );
 
+    /** \name BitField range definitions.
+     *
+     * \note Enlarge FieldType if more bit's needed. It's not yet
+     * checked by the compiler.
+     */
+    //@{
     typedef char FieldType;
     // Bit Ranges within FieldType defined by 1st bit and size:
     typedef bit::Range<FieldType,0,                    1> StateField;
@@ -56,10 +63,16 @@ namespace zypp
     typedef bit::Range<FieldType,TransactByField::end, 2> TransactDetailField;
     // enlarge FieldType if more bit's needed. It's not yet
     // checked by the compiler.
+    //@}
   public:
 
-    // do we manage to hide them
-
+    /** \name Status values.
+     *
+     * Each enum corresponds to a BitField range.
+     * \note Take care that enumerator values actually fit into
+     * the corresponding field. It's not yet checked by the compiler.
+     */
+    //@{
     enum StateValue
       {
         UNINSTALLED = 0,
@@ -71,7 +84,6 @@ namespace zypp
         UNNEEDED     = EstablishField::minval,		// has freshens, none trigger
         SATISFIED,					// has none or triggered freshens, all requirements fulfilled
         INCOMPLETE					// installed: has none or triggered freshens, requirements unfulfilled
-							// uninstalled: has triggered freshens, requirements unfulfilled
       };
     enum TransactValue
       {
@@ -97,6 +109,7 @@ namespace zypp
         DUE_TO_OBSOLETE = TransactDetailField::minval,
         DUE_TO_UNLINK
       };
+    //@}
 
   public:
 
@@ -237,25 +250,27 @@ namespace zypp
 	_bitfield = status._bitfield;
     }
 
-    static ResStatus toBeInstalled;
-    static ResStatus toBeInstalledSoft;
-    static ResStatus toBeUninstalled;
-    static ResStatus toBeUninstalledDueToUnlink;
-    static ResStatus toBeUninstalledDueToObsolete;
-    static ResStatus satisfied;			// uninstalled, satisfied
-    static ResStatus complete;			// installed, satisfied
-    static ResStatus unneeded;			// uninstalled, unneeded
-    static ResStatus needed;			// uninstalled, incomplete
-    static ResStatus incomplete;		// installed, incomplete 
-
-  inline bool operator==( const ResStatus & rhs ) const
-  { return _bitfield.value() == rhs._bitfield.value(); }
-
-  inline bool operator!=( const ResStatus & rhs ) const
-  { return _bitfield.value() != rhs._bitfield.value(); }
+    /** \name Builtin ResStatus constants. */
+    //@{
+    static const ResStatus toBeInstalled;
+    static const ResStatus toBeInstalledSoft;
+    static const ResStatus toBeUninstalled;
+    static const ResStatus toBeUninstalledDueToUnlink;
+    static const ResStatus toBeUninstalledDueToObsolete;
+    static const ResStatus satisfied;	// uninstalled, satisfied
+    static const ResStatus complete;	// installed, satisfied
+    static const ResStatus unneeded;	// uninstalled, unneeded
+    static const ResStatus needed;	// uninstalled, incomplete
+    static const ResStatus incomplete;	// installed, incomplete
+    //@}
 
   private:
-    ResStatus (enum StateValue s, enum EstablishValue e = UNDETERMINED, enum TransactValue t = TRANSACT, enum InstallDetailValue i = EXPLICIT_INSTALL, enum RemoveDetailValue r = EXPLICIT_REMOVE);
+    /** Ctor for intialization of builtin constants. */
+    ResStatus( StateValue s,
+               EstablishValue e     = UNDETERMINED,
+               TransactValue t      = TRANSACT,
+               InstallDetailValue i = EXPLICIT_INSTALL,
+               RemoveDetailValue r  = EXPLICIT_REMOVE );
 
     /** Return whether the corresponding Field has value \a val_r.
     */
@@ -269,7 +284,6 @@ namespace zypp
       void fieldValueAssign( FieldType val_r )
       { _bitfield.assign<_Field>( val_r ); }
 
-
   private:
     bit::BitField<FieldType> _bitfield;
   };
@@ -277,6 +291,14 @@ namespace zypp
 
   /** \relates ResStatus Stream output */
   std::ostream & operator<<( std::ostream & str, const ResStatus & obj );
+
+  /** \relates ResStatus */
+  inline bool operator==( const ResStatus & lhs, const ResStatus & rhs )
+  { return lhs._bitfield == rhs._bitfield; }
+
+  /** \relates ResStatus */
+  inline bool operator!=( const ResStatus & lhs, const ResStatus & rhs )
+  { return ! (lhs == rhs); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

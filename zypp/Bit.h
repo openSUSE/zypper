@@ -13,8 +13,7 @@
 #define ZYPP_BIT_H
 
 #include <iosfwd>
-
-#include "zypp/base/PtrTypes.h"
+#include <string>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -190,6 +189,16 @@ namespace zypp
       {
         return str << obj.asString();
       }
+
+    /** \relates BitField */
+    template<class _IntT>
+      inline bool operator==( const BitField<_IntT> & lhs, const BitField<_IntT> & rhs )
+      { return lhs.value() == rhs.value(); }
+
+    /** \relates BitField */
+    template<class _IntT>
+      inline bool operator!=( const BitField<_IntT> & lhs, const BitField<_IntT> & rhs )
+      { return ! (lhs == rhs); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace bit
