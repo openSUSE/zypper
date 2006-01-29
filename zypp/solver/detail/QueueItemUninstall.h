@@ -76,7 +76,10 @@ class QueueItemUninstall : public QueueItem {
 
     // ---------------------------------- I/O
 
-    friend std::ostream& operator<<(std::ostream&, const QueueItemUninstall & item);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+
+    friend std::ostream& operator<<(std::ostream& str, const QueueItemUninstall & obj)
+    { return obj.dumpOn (str); }
 
     // ---------------------------------- accessors
 

@@ -60,7 +60,10 @@ class QueueItemEstablish : public QueueItem {
 
     // ---------------------------------- I/O
 
-    friend std::ostream& operator<<(std::ostream&, const QueueItemEstablish & item);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+
+    friend std::ostream& operator<<(std::ostream & str, const QueueItemEstablish & obj)
+    { return obj.dumpOn (str); }
 
     // ---------------------------------- accessors
 

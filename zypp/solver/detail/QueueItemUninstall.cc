@@ -53,14 +53,14 @@ IMPL_PTR_TYPE(QueueItemUninstall);
 
 //---------------------------------------------------------------------------
 
-ostream&
-operator<<( ostream& os, const QueueItemUninstall & item)
+std::ostream &
+QueueItemUninstall::dumpOn( std::ostream & os ) const
 {
     os << "[Uninstall: ";
 
-    os << item._item;
+    os << _item;
     os << " (";
-    switch (item._reason) {
+    switch (_reason) {
 	case QueueItemUninstall::CONFLICT:	os << "conflicts"; break;
 	case QueueItemUninstall::OBSOLETE:	os << "obsoletes"; break;
 	case QueueItemUninstall::UNSATISFIED:	os << "unsatisfied dependency"; break;
@@ -70,19 +70,19 @@ operator<<( ostream& os, const QueueItemUninstall & item)
 	case QueueItemUninstall::EXPLICIT:	os << "explicit"; break;
     }
     os << ")";
-    if (item._cap_leading_to_uninstall != Capability::noCap) {
+    if (_cap_leading_to_uninstall != Capability::noCap) {
 	os << ", Triggered By ";
-	os << item._cap_leading_to_uninstall;
+	os << _cap_leading_to_uninstall;
     }
-    if (item._upgraded_to) {
+    if (_upgraded_to) {
 	os << ", Upgraded To ";
-	os << item._upgraded_to;
+	os << _upgraded_to;
     }
-    if (item._explicitly_requested) os << ", Explicit";
-    if (item._remove_only) os << ", Remove Only";
-    if (item._due_to_conflict) os << ", Due To Conflict";
-    if (item._due_to_obsolete) os << ", Due To Obsolete";
-    if (item._unlink) os << ", Unlink";
+    if (_explicitly_requested) os << ", Explicit";
+    if (_remove_only) os << ", Remove Only";
+    if (_due_to_conflict) os << ", Due To Conflict";
+    if (_due_to_obsolete) os << ", Due To Obsolete";
+    if (_unlink) os << ", Unlink";
     os << "]";
     return os;
 }

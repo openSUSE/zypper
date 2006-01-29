@@ -39,11 +39,11 @@ IMPL_PTR_TYPE(QueueItemGroup);
 
 //---------------------------------------------------------------------------
 
-ostream&
-operator<<( ostream& os, const QueueItemGroup & item)
+std::ostream &
+QueueItemGroup::dumpOn( std::ostream & os ) const
 {
     os << "[Group: ";
-    os << item._subitems;
+    os << _subitems;
     os << "]";
     return os;
 }

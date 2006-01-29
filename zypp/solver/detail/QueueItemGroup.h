@@ -56,7 +56,10 @@ class QueueItemGroup : public QueueItem {
 
     // ---------------------------------- I/O
 
-    friend std::ostream& operator<<(std::ostream&, const QueueItemGroup & item);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+
+    friend std::ostream& operator<<(std::ostream & str, const QueueItemGroup & obj)
+    { return obj.dumpOn (str); }
 
     // ---------------------------------- accessors
 

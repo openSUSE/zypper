@@ -58,33 +58,33 @@ IMPL_PTR_TYPE(QueueItemInstall);
 
 //---------------------------------------------------------------------------
 
-ostream&
-operator<<( ostream& os, const QueueItemInstall & item)
+std::ostream &
+QueueItemInstall::dumpOn( std::ostream & os ) const
 {
     os << "[Install: ";
-    os << item._item;
-    if (item._upgrades) {
+    os << _item;
+    if (_upgrades) {
 	os << ", Upgrades ";
-	os << item._upgrades;
+	os << _upgrades;
     }
-    if (!item._deps_satisfied_by_this_install.empty()) {
+    if (!_deps_satisfied_by_this_install.empty()) {
 	os << ", Satisfies [";
-	for (CapSet::const_iterator iter = item._deps_satisfied_by_this_install.begin();
-	    iter != item._deps_satisfied_by_this_install.end(); iter++)
+	for (CapSet::const_iterator iter = _deps_satisfied_by_this_install.begin();
+	    iter != _deps_satisfied_by_this_install.end(); iter++)
 	{
-	    if (iter != item._deps_satisfied_by_this_install.begin()) os << ", ";
+	    if (iter != _deps_satisfied_by_this_install.begin()) os << ", ";
 	    os << (*iter);
 	}
 	os << "]";
     }
-    if (!item._needed_by.empty()) {
+    if (!_needed_by.empty()) {
 	os << ", Needed by ";
-	for (PoolItemList::const_iterator it = item._needed_by.begin(); it != item._needed_by.end(); ++it) {
-	    if (it != item._needed_by.begin()) os << ", ";
+	for (PoolItemList::const_iterator it = _needed_by.begin(); it != _needed_by.end(); ++it) {
+	    if (it != _needed_by.begin()) os << ", ";
 	    os << *it;
 	}
     }
-    if (item._explicitly_requested) os << ", Explicit !";
+    if (_explicitly_requested) os << ", Explicit !";
     os << "]";
     return os;
 }

@@ -70,7 +70,10 @@ class QueueItemRequire : public QueueItem {
 
     // ---------------------------------- I/O
 
-    friend std::ostream & operator<<(std::ostream &os, const QueueItemRequire & item);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+
+    friend std::ostream & operator<<(std::ostream & str, const QueueItemRequire & obj)
+    { return obj.dumpOn (str); }
 
     // ---------------------------------- accessors
 

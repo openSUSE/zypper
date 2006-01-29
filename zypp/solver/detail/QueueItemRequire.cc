@@ -57,22 +57,22 @@ IMPL_PTR_TYPE(QueueItemRequire);
 
 //---------------------------------------------------------------------------
 
-ostream&
-operator<<( ostream& os, const QueueItemRequire & item)
+std::ostream &
+QueueItemRequire::dumpOn( std::ostream & os ) const
 {
     os << "[Require: ";
-    os << item._capability;
-    if (item._requiring_item) {
-	os << ", Required by " << item._requiring_item;
+    os << _capability;
+    if (_requiring_item) {
+	os << ", Required by " << _requiring_item;
     }
-    if (item._upgraded_item) {
-	os << ", Upgrades " << item._upgraded_item;
+    if (_upgraded_item) {
+	os << ", Upgrades " << _upgraded_item;
     }
-    if (item._lost_item) {
-	os << ", Lost " << item._lost_item;
+    if (_lost_item) {
+	os << ", Lost " << _lost_item;
     }
-    if (item._remove_only) os << ", Remove Only";
-    if (item._is_child) os << ", Child";
+    if (_remove_only) os << ", Remove Only";
+    if (_is_child) os << ", Child";
     return os << "]";
 }
 

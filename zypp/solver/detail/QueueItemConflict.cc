@@ -60,14 +60,14 @@ IMPL_PTR_TYPE(QueueItemConflict);
 
 //---------------------------------------------------------------------------
 
-ostream&
-operator<<( ostream& os, const QueueItemConflict & item)
+std::ostream &
+QueueItemConflict::dumpOn( std::ostream & os ) const
 {
     os << "[Conflict: ";
-    os << item._capability;
+    os << _capability;
     os << ", Triggered by ";
-    os << item._conflicting_item;
-    if (item._actually_an_obsolete) os << ", Obsolete !";
+    os << _conflicting_item;
+    if (_actually_an_obsolete) os << ", Obsolete !";
     os << "]";
     return os;
 }

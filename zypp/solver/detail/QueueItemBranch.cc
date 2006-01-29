@@ -42,15 +42,15 @@ IMPL_PTR_TYPE(QueueItemBranch);
 
 //---------------------------------------------------------------------------
 
-ostream&
-operator<<( ostream& os, const QueueItemBranch & item)
+std::ostream &
+QueueItemBranch::dumpOn( std::ostream & os ) const
 {
     os << "[Branch: ";
-    if (!item._label.empty()) {
-	os << item._label;
+    if (!_label.empty()) {
+	os << _label;
     }
     os << endl << "\t";
-    os << item._possible_qitems << endl << "\t";
+    os << _possible_qitems << endl << "\t";
     os << "]";
     return os;
 }

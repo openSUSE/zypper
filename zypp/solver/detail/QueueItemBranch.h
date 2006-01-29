@@ -57,7 +57,11 @@ class QueueItemBranch : public QueueItem {
 
     // ---------------------------------- I/O
 
-    friend std::ostream& operator<<(std::ostream&, const QueueItemBranch & item);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+
+    friend std::ostream& operator<<(std::ostream & str, const QueueItemBranch & obj)
+    { return obj.dumpOn (str); }
+
     // ---------------------------------- accessors
 
     QueueItemList possibleQItems (void) const { return _possible_qitems; }

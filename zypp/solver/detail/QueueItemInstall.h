@@ -64,7 +64,10 @@ class QueueItemInstall : public QueueItem {
 
     // ---------------------------------- I/O
 
-    friend std::ostream& operator<<(std::ostream&, const QueueItemInstall & item);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+
+    friend std::ostream& operator<<(std::ostream & str, const QueueItemInstall & obj)
+    { return obj.dumpOn (str); }
 
     // ---------------------------------- accessors
 

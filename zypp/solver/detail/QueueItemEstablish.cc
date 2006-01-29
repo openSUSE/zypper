@@ -52,12 +52,12 @@ IMPL_PTR_TYPE(QueueItemEstablish);
 
 //---------------------------------------------------------------------------
 
-ostream&
-operator<<( ostream& os, const QueueItemEstablish & item)
+std::ostream &
+QueueItemEstablish::dumpOn( std::ostream & os ) const
 {
     os <<"[Establish: ";
-    os << item._item;
-    if (item._explicitly_requested) os << ", Explicit !";
+    os << _item;
+    if (_explicitly_requested) os << ", Explicit !";
     os << "]";
     return os;
 }

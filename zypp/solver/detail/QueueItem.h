@@ -86,8 +86,11 @@ class QueueItem : public base::ReferenceCounted, private base::NonCopyable {
 
     // ---------------------------------- I/O
 
-    friend std::ostream& operator<<(std::ostream&, const QueueItem & item);
-    friend std::ostream& operator<<(std::ostream&, const QueueItemList & itemlist);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+
+    friend std::ostream& operator<<(std::ostream & str, const QueueItem & obj)
+    { return obj.dumpOn (str); }
+    friend std::ostream& operator<<(std::ostream & str, const QueueItemList & itemlist);
 
     // ---------------------------------- accessors
 

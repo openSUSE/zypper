@@ -39,8 +39,8 @@ IMPL_PTR_TYPE(QueueItem);
 
 //---------------------------------------------------------------------------
 
-ostream&
-operator<<( ostream & os, const QueueItem & item )
+std::ostream &
+QueueItem::dumpOn( std::ostream & os ) const
 {
     return os << "<queueitem/>";
 }

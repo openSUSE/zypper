@@ -61,7 +61,10 @@ class QueueItemConflict : public QueueItem {
 
     // ---------------------------------- I/O
 
-    friend std::ostream& operator<<(std::ostream&, const QueueItemConflict & item);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+
+    friend std::ostream& operator<<(std::ostream & str, const QueueItemConflict & obj)
+    { return obj.dumpOn (str); }
 
     // ---------------------------------- accessors
 
