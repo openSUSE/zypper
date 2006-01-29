@@ -38,6 +38,7 @@ pkginclude_HEADERS = NeedAType.h \
 	PoolItem.h	\
 	ResPool.h	\
 	ResPoolManager.h\
+	Resolver.h	\
 	Package.h	\
 	Pathname.h	\
 	Source.h	\
@@ -100,6 +101,7 @@ lib@PACKAGE@_la_SOURCES = \
 	PoolItem.cc	\
 	ResPool.cc	\
 	ResPoolManager.cc\
+	Resolver.cc	\
 	Package.cc	\
 	Pathname.cc	\
 	Source.cc	\
