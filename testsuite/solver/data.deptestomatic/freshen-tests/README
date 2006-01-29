@@ -126,3 +126,5 @@ Installed		| non- empty	| Y		| met		| Satisfied
 
 ResStatus
 
+current		future				meaning
+uninstalled	to-be-uninstalled		uninstallable
