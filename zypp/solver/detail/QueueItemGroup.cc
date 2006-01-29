@@ -50,7 +50,7 @@ operator<<( ostream& os, const QueueItemGroup & item)
 
 //---------------------------------------------------------------------------
 
-QueueItemGroup::QueueItemGroup (const ResPool *pool)
+QueueItemGroup::QueueItemGroup (const ResPool & pool)
     : QueueItem (QUEUE_ITEM_TYPE_GROUP, pool)
 {
 }

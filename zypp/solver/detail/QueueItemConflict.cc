@@ -74,7 +74,7 @@ operator<<( ostream& os, const QueueItemConflict & item)
 
 //---------------------------------------------------------------------------
 
-QueueItemConflict::QueueItemConflict (const ResPool *pool, const Capability & cap, PoolItem_Ref item)
+QueueItemConflict::QueueItemConflict (const ResPool & pool, const Capability & cap, PoolItem_Ref item)
     : QueueItem (QUEUE_ITEM_TYPE_CONFLICT, pool)
     , _capability (cap)
     , _conflicting_item (item)
@@ -125,14 +125,14 @@ struct UpgradeCandidate : public resfilter::OnCapMatchCallbackFunctor
 
 struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 {
-    const ResPool *pool;
+    ResPool pool;
     PoolItem_Ref conflict_issuer;			// the item which issues 'conflicts:'
     const Capability & conflict_capability;	// the capability mentioned in the 'conflicts'
     ResolverContext_Ptr context;
     QueueItemList & new_items;
     bool actually_an_obsolete;
 
-    ConflictProcess (const ResPool *pl, PoolItem_Ref ci, const Capability & cc, ResolverContext_Ptr ct, QueueItemList & ni, bool ao)
+    ConflictProcess (const ResPool & pl, PoolItem_Ref ci, const Capability & cc, ResolverContext_Ptr ct, QueueItemList & ni, bool ao)
 	: pool (pl)
 	, conflict_issuer (ci)
 	, conflict_capability (cc)
@@ -200,8 +200,8 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	    // pool->foreachProvidingResItem (maybe_upgrade_dep, upgrade_candidates_cb, (void *)&upgrade_info);
 	    Dep dep( Dep::PROVIDES );
 
-	    invokeOnEach( pool->byCapabilityIndexBegin( maybe_upgrade_cap.index(), dep ),
-			  pool->byCapabilityIndexEnd( maybe_upgrade_cap.index(), dep ),
+	    invokeOnEach( pool.byCapabilityIndexBegin( maybe_upgrade_cap.index(), dep ),
+			  pool.byCapabilityIndexEnd( maybe_upgrade_cap.index(), dep ),
 			  resfilter::callOnCapMatchIn( dep, maybe_upgrade_cap, functor::functorRef<bool,PoolItem,Capability>(upgrade_info) ) );
 
 #endif
@@ -294,8 +294,8 @@ QueueItemConflict::process (ResolverContext_Ptr context, QueueItemList & new_ite
     // world()->foreachProvidingPoolItem (_capability, conflict_process_cb, (void *)&info);
 
     Dep dep( Dep::PROVIDES );
-    invokeOnEach( pool()->byCapabilityIndexBegin( _capability.index(), dep ),
-		  pool()->byCapabilityIndexEnd( _capability.index(), dep ),
+    invokeOnEach( pool().byCapabilityIndexBegin( _capability.index(), dep ),
+		  pool().byCapabilityIndexEnd( _capability.index(), dep ),
 		  resfilter::callOnCapMatchIn( dep, _capability, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 
     return true;

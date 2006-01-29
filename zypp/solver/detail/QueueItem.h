@@ -70,7 +70,7 @@ class QueueItem : public base::ReferenceCounted, private base::NonCopyable {
   private:
 
     QueueItemType _type;
-    const ResPool *_pool;
+    ResPool _pool;
 
     int _priority;
     size_t _size;
@@ -78,7 +78,7 @@ class QueueItem : public base::ReferenceCounted, private base::NonCopyable {
 
   protected:
 
-    QueueItem (QueueItemType type, const ResPool *pool);
+    QueueItem (QueueItemType type, const ResPool & pool);
 
   public:
 
@@ -91,7 +91,7 @@ class QueueItem : public base::ReferenceCounted, private base::NonCopyable {
 
     // ---------------------------------- accessors
 
-    const ResPool *pool (void) const { return _pool; }
+    ResPool pool (void) const { return _pool; }
     int priority (void) const { return _priority; }
     void setPriority (int priority) { _priority = priority; }
     int size (void) const { return _size; }

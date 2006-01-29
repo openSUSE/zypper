@@ -67,9 +67,9 @@ operator<<( ostream& os, const ResolverContext & context)
 
 //---------------------------------------------------------------------------
 
-ResolverContext::ResolverContext (ResolverContext_Ptr parent)
+ResolverContext::ResolverContext (const ResPool & pool, ResolverContext_Ptr parent)
     : _parent (parent)
-    , _pool (NULL)
+    , _pool (pool)
     , _download_size (0)
     , _install_size (0)
     , _total_priority (0)
@@ -491,7 +491,7 @@ ResolverContext::getMarked (int which) const
 // install
 
 typedef struct {
-    const ResPool *pool;
+    ResPool pool;
     MarkedPoolItemFn fn;
     PoolItemList *rl;
     int count;
@@ -550,7 +550,7 @@ ResolverContext::getInstalls (void) const
 // satisfy
 
 typedef struct {
-    const ResPool *pool;
+    ResPool pool;
     MarkedPoolItemFn fn;
     PoolItemList *rl;
     int count;
@@ -608,7 +608,7 @@ ResolverContext::getSatisfies (void) const
 // incomplete
 
 typedef struct {
-    const ResPool *pool;
+    ResPool pool;
     MarkedPoolItemFn fn;
     PoolItemList *rl;
     int count;
@@ -664,7 +664,7 @@ ResolverContext::getIncompletes (void) const
 // upgrade
 
 typedef struct {
-    const ResPool *pool;
+    ResPool pool;
     MarkedPoolItemPairFn fn;
     void *data;
     ResolverContext_constPtr context;
@@ -1156,8 +1156,8 @@ ResolverContext::requirementIsMet (const Capability & dependency, bool is_child)
 
     // world->foreachProvidingResItem (dependency, require_process_cb, &info);
 
-    invokeOnEach( pool()->byCapabilityIndexBegin( dependency.index(), dep ),
-		  pool()->byCapabilityIndexEnd( dependency.index(), dep ),
+    invokeOnEach( pool().byCapabilityIndexBegin( dependency.index(), dep ),
+		  pool().byCapabilityIndexEnd( dependency.index(), dep ),
 		  resfilter::callOnCapMatchIn( dep, dependency, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 
     return info.flag;
@@ -1200,8 +1200,8 @@ ResolverContext::requirementIsPossible (const Capability & dependency) const
 
     // world->foreachProvidingResItem (dependency, require_process_cb, &info);
 
-    invokeOnEach( pool()->byCapabilityIndexBegin( dependency.index(), dep ),
-		  pool()->byCapabilityIndexEnd( dependency.index(), dep ),
+    invokeOnEach( pool().byCapabilityIndexBegin( dependency.index(), dep ),
+		  pool().byCapabilityIndexEnd( dependency.index(), dep ),
 		  resfilter::callOnCapMatchIn( dep, dependency, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 
     return info.flag;

@@ -52,7 +52,7 @@ class QueueItemBranch : public QueueItem {
 
   public:
 
-    QueueItemBranch (const ResPool *pool);
+    QueueItemBranch (const ResPool & pool);
     virtual ~QueueItemBranch();
 
     // ---------------------------------- I/O

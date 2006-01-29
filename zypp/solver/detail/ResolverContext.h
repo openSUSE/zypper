@@ -61,7 +61,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     typedef std::map<PoolItem_Ref,ResStatus> Context;
     Context _context;				// the set of items touched in this transaction
 
-    const ResPool *_pool;
+    ResPool _pool;
 
     ResolverInfoList _log;			// report log
 
@@ -76,7 +76,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     bool _invalid;				// lead to invalid solution
 
   public:
-    ResolverContext (ResolverContext_Ptr parent = NULL);
+    ResolverContext (const ResPool & pool, ResolverContext_Ptr parent = NULL);
     virtual ~ResolverContext();
 
     // ---------------------------------- I/O
@@ -98,8 +98,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     bool verifying (void) const { return _verifying; }
     void setVerifying (bool verifying) { _verifying = verifying; }
 
-    inline const ResPool *pool() const { return _pool; }
-    void setPool (const ResPool *pool) { _pool = pool; }
+    inline ResPool pool() const { return _pool; }
 
     // ---------------------------------- methods
 

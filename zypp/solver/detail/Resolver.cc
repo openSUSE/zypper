@@ -55,7 +55,7 @@ operator<<( ostream& os, const Resolver & resolver)
 
 //---------------------------------------------------------------------------
 
-Resolver::Resolver (const ResPool *pool)
+Resolver::Resolver (const ResPool & pool)
     : _pool (pool)
     , _timeout_seconds (0)
     , _verifying (false)
@@ -72,12 +72,9 @@ Resolver::~Resolver()
 
 //---------------------------------------------------------------------------
 
-const ResPool *
+ResPool
 Resolver::pool (void) const
 {
-//    if (_pool == NULL)
-//	return World::globalWorld();
-
     return _pool;
 }
 
@@ -233,8 +230,8 @@ Resolver::verifySystem (void)
 
     VerifySystem info (*this);
 
-    invokeOnEach( pool()->byKindBegin( ResTraits<Package>::kind ),
-		  pool()->byKindEnd( ResTraits<Package>::kind ),
+    invokeOnEach( pool().byKindBegin( ResTraits<Package>::kind ),
+		  pool().byKindEnd( ResTraits<Package>::kind ),
 		  resfilter::ByInstalled ( ),
 		  functor::functorRef<bool,PoolItem>(info) );
 
@@ -280,7 +277,7 @@ Resolver::establishState (ResolverContext_Ptr context)
     }
 
     if (context == NULL)
-	context = new ResolverContext();
+	context = new ResolverContext(_pool);
 
     for (KindList::const_iterator iter = ordered.begin(); iter != ordered.end(); iter++) {
 	const Resolvable::Kind kind = *iter;
@@ -291,8 +288,8 @@ Resolver::establishState (ResolverContext_Ptr context)
 
 	EstablishState info (*this);
 
-	invokeOnEach( pool()->byKindBegin( kind ),
-		      pool()->byKindEnd( kind ),
+	invokeOnEach( pool().byKindBegin( kind ),
+		      pool().byKindEnd( kind ),
 		      functor::functorRef<bool,PoolItem>(info) );
 
 	// process the queue
@@ -352,11 +349,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
     // create initial_queue
 
-    ResolverQueue_Ptr initial_queue = new ResolverQueue(context);
-
-    /* Stick the current/subscribed channel and pool info into the context */
-
-    initial_queue->context()->setPool(_pool);
+    ResolverQueue_Ptr initial_queue = new ResolverQueue(_pool, context);
 
     /* If this is a verify, we do a "soft resolution" */
 

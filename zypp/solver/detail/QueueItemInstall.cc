@@ -91,7 +91,7 @@ operator<<( ostream& os, const QueueItemInstall & item)
 
 //---------------------------------------------------------------------------
 
-QueueItemInstall::QueueItemInstall (const ResPool *pool, PoolItem_Ref item)
+QueueItemInstall::QueueItemInstall (const ResPool & pool, PoolItem_Ref item)
     : QueueItem (QUEUE_ITEM_TYPE_INSTALL, pool)
     , _item (item)
     , _channel_priority (0)
@@ -140,10 +140,10 @@ struct BuildConflictList : public resfilter::OnCapMatchCallbackFunctor
 
 struct EstablishFreshens : public resfilter::OnCapMatchCallbackFunctor
 {
-    const ResPool *pool;
+    const ResPool & pool;
     QueueItemList & qil;
 
-    EstablishFreshens (const ResPool *p, QueueItemList &l)
+    EstablishFreshens (const ResPool & p, QueueItemList &l)
 	: pool (p)
 	, qil (l)
     { }
@@ -348,8 +348,8 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    // pool()->foreachConflictingResItem (dep, build_conflict_list, &conflicts);
 
 	    Dep dep( Dep::CONFLICTS);
-	    invokeOnEach( pool()->byCapabilityIndexBegin( cap.index(), dep ), // begin()
-			  pool()->byCapabilityIndexEnd( cap.index(), dep ),   // end()
+	    invokeOnEach( pool().byCapabilityIndexBegin( cap.index(), dep ), // begin()
+			  pool().byCapabilityIndexEnd( cap.index(), dep ),   // end()
 			  resfilter::callOnCapMatchIn( dep, cap, functor::functorRef<bool,PoolItem,Capability>(conflicts)) );
 	}
 
@@ -387,8 +387,8 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	Capability cap = factory.parse (_item->kind(), _item->name(), Rel::EQ, _item->edition());
 	// pool ()->foreachFresheningResItem (cap, establish_freshens_cb, &info);
 	Dep dep( Dep::FRESHENS);
-	invokeOnEach( pool()->byCapabilityIndexBegin( cap.index(), dep ), // begin()
-		      pool()->byCapabilityIndexEnd( cap.index(), dep ),   // end()
+	invokeOnEach( pool().byCapabilityIndexBegin( cap.index(), dep ), // begin()
+		      pool().byCapabilityIndexEnd( cap.index(), dep ),   // end()
 		      resfilter::callOnCapMatchIn( dep, cap, functor::functorRef<bool,PoolItem,Capability>(info)) );
 
     } // end of block

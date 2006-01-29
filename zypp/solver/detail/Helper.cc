@@ -57,12 +57,10 @@ operator<< (ostream & os, const PoolItemList & itemlist)
 }
 
 
-struct LookForUpgrades : public resfilter::OnCapMatchCallbackFunctor, public resfilter::PoolItemFilterFunctor
+class LookForUpgrades : public resfilter::OnCapMatchCallbackFunctor, public resfilter::PoolItemFilterFunctor
 {
+  public:
     PoolItem_Ref installed;
-
-    LookForUpgrades ()
-    { }
 
     bool operator()( PoolItem_Ref provider )
     {
@@ -73,12 +71,12 @@ struct LookForUpgrades : public resfilter::OnCapMatchCallbackFunctor, public res
 
 
 PoolItem_Ref
-Helper::findInstalledItem (const ResPool *pool, PoolItem_Ref item)
+Helper::findInstalledItem (const ResPool & pool, PoolItem_Ref item)
 {
     LookForUpgrades info;
 
-    invokeOnEach( pool->byNameBegin( item->name() ),
-		  pool->byNameEnd( item->name() ),
+    invokeOnEach( pool.byNameBegin( item->name() ),
+		  pool.byNameEnd( item->name() ),
 		  functor::chain( resfilter::ByInstalled (),
 				  functor::chain (resfilter::ByKind( item->kind() ),
 				  	   resfilter::byEdition<CompareByLT<Edition> >( item->edition() ) ) ),

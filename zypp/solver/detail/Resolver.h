@@ -54,7 +54,7 @@ namespace zypp
 class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
   private:
-    const ResPool *_pool;
+    ResPool _pool;
 
     int _timeout_seconds;
     bool _verifying;
@@ -81,7 +81,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
   public:
 
-    Resolver (const ResPool *pool);
+    Resolver (const ResPool & pool);
     virtual ~Resolver();
 
     // ---------------------------------- I/O
@@ -104,8 +104,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     void setTimeout (int seconds) { _timeout_seconds = seconds; }
 
-    const ResPool *pool (void) const;			// returns global world if _world == NULL
-    void setPool (const ResPool *pool) { _pool = pool; }
+    ResPool pool (void) const;
+    void setPool (const ResPool & pool) { _pool = pool; }
 
 //    void setCurrentChannel (Channel_constPtr channel) { _current_channel = channel; }
 //    void addSubscribedChannel (Channel_constPtr channel);

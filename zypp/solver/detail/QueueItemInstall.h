@@ -59,7 +59,7 @@ class QueueItemInstall : public QueueItem {
 
   public:
 
-    QueueItemInstall (const ResPool *pool, PoolItem_Ref item);
+    QueueItemInstall (const ResPool & pool, PoolItem_Ref item);
     virtual ~QueueItemInstall();
 
     // ---------------------------------- I/O

@@ -51,7 +51,7 @@ class QueueItemGroup : public QueueItem {
 
   public:
 
-    QueueItemGroup (const ResPool *pool);
+    QueueItemGroup (const ResPool & pool);
     virtual ~QueueItemGroup();
 
     // ---------------------------------- I/O

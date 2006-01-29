@@ -57,7 +57,7 @@ operator<<( ostream& os, const QueueItemBranch & item)
 
 //---------------------------------------------------------------------------
 
-QueueItemBranch::QueueItemBranch (const ResPool *pool)
+QueueItemBranch::QueueItemBranch (const ResPool & pool)
     : QueueItem (QUEUE_ITEM_TYPE_BRANCH, pool)
 {
 }

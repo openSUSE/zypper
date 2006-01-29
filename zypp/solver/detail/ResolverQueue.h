@@ -60,7 +60,7 @@ class ResolverQueue : public base::ReferenceCounted, private base::NonCopyable {
     QueueItemList _qitems;
 
   public:
-    ResolverQueue (ResolverContext_Ptr context = NULL);
+    ResolverQueue (const ResPool & pool, ResolverContext_Ptr context = NULL);
     virtual ~ResolverQueue();
 
     // ---------------------------------- I/O

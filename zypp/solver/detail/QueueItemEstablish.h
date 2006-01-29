@@ -55,7 +55,7 @@ class QueueItemEstablish : public QueueItem {
 
   public:
 
-    QueueItemEstablish (const ResPool *pool, PoolItem_Ref item);
+    QueueItemEstablish (const ResPool & pool, PoolItem_Ref item);
     virtual ~QueueItemEstablish();
 
     // ---------------------------------- I/O

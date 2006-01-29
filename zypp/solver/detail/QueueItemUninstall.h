@@ -71,7 +71,7 @@ class QueueItemUninstall : public QueueItem {
 
   public:
 
-    QueueItemUninstall (const ResPool *pool, PoolItem_Ref item, UninstallReason reason);
+    QueueItemUninstall (const ResPool & pool, PoolItem_Ref item, UninstallReason reason);
     virtual ~QueueItemUninstall();
 
     // ---------------------------------- I/O

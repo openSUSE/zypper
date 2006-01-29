@@ -50,7 +50,7 @@ using namespace zypp;
 
 //-----------------------------------------------------------------------------
 
-InstallOrder::InstallOrder(const ResPool *pool, const PoolItemList & toinstall, const PoolItemList & installed)
+InstallOrder::InstallOrder(const ResPool & pool, const PoolItemList & toinstall, const PoolItemList & installed)
     : _pool (pool)
     , _dirty (true)
     , _numrun (0)
@@ -264,8 +264,8 @@ InstallOrder::rdfsvisit (const PoolItem_Ref  item)
 	// _world->foreachProvidingResItem (requirement, collect_providers, &info);
 
 	Dep dep (Dep::PROVIDES);
-	invokeOnEach( _pool->byCapabilityIndexBegin( requirement.index(), dep ),
-		      _pool->byCapabilityIndexEnd( requirement.index(), dep ),
+	invokeOnEach( _pool.byCapabilityIndexBegin( requirement.index(), dep ),
+		      _pool.byCapabilityIndexEnd( requirement.index(), dep ),
 		      resfilter::callOnCapMatchIn( dep, requirement, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 
 	for (PoolItemSet::iterator it = tovisit.begin(); it != tovisit.end(); ++it)

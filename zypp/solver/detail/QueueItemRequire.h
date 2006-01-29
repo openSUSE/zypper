@@ -65,7 +65,7 @@ class QueueItemRequire : public QueueItem {
 
   public:
 
-    QueueItemRequire (const ResPool *pool, const Capability & cap);
+    QueueItemRequire (const ResPool & pool, const Capability & cap);
     virtual ~QueueItemRequire();
 
     // ---------------------------------- I/O

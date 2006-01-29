@@ -89,7 +89,7 @@ operator<<( ostream& os, const QueueItemUninstall & item)
 
 //---------------------------------------------------------------------------
 
-QueueItemUninstall::QueueItemUninstall (const ResPool *pool, PoolItem_Ref item, UninstallReason reason)
+QueueItemUninstall::QueueItemUninstall (const ResPool & pool, PoolItem_Ref item, UninstallReason reason)
     : QueueItem (QUEUE_ITEM_TYPE_UNINSTALL, pool)
     , _item (item)
     , _reason (reason)
@@ -158,14 +158,14 @@ struct UnlinkCheck: public resfilter::OnCapMatchCallbackFunctor
 
 struct UninstallProcess: public resfilter::OnCapMatchCallbackFunctor
 {
-    const ResPool *pool;
+    ResPool pool;
     ResolverContext_Ptr context;
     PoolItem_Ref uninstalled_item;
     PoolItem_Ref upgraded_item;
     QueueItemList & qil;
     bool remove_only;
 
-    UninstallProcess (const ResPool *p, ResolverContext_Ptr ct, PoolItem_Ref u1, PoolItem_Ref u2, QueueItemList & l, bool ro)
+    UninstallProcess (const ResPool & p, ResolverContext_Ptr ct, PoolItem_Ref u1, PoolItem_Ref u2, QueueItemList & l, bool ro)
 	: pool (p)
 	, context (ct)
 	, uninstalled_item (u1)
@@ -253,8 +253,8 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 		Dep dep( Dep::REQUIRES);
 
-		invokeOnEach( pool()->byCapabilityIndexBegin( iter->index(), dep ),
-			      pool()->byCapabilityIndexEnd( iter->index(), dep ),
+		invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
+			      pool().byCapabilityIndexEnd( iter->index(), dep ),
 			      resfilter::callOnCapMatchIn( dep, *iter, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 	    }
 
@@ -278,7 +278,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 #warning Needs Locks
 #if 0
 	if (! _explicitly_requested
-	    && pool()->itemIsLocked (_item)) {
+	    && pool().itemIsLocked (_item)) {
 
 	    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALL_LOCKED, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
 	    context->addError (misc_info);
@@ -308,8 +308,8 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    //world()->foreachRequiringPoolItem (*iter, uninstall_process_cb, &info);
 	    Dep dep( Dep::REQUIRES);
 
-	    invokeOnEach( pool()->byCapabilityIndexBegin( iter->index(), dep ),
-			  pool()->byCapabilityIndexEnd( iter->index(), dep ),
+	    invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
+			  pool().byCapabilityIndexEnd( iter->index(), dep ),
 			  resfilter::callOnCapMatchIn( dep, *iter, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 	}
     }

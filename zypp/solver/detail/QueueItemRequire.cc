@@ -78,7 +78,7 @@ operator<<( ostream& os, const QueueItemRequire & item)
 
 //---------------------------------------------------------------------------
 
-QueueItemRequire::QueueItemRequire (const ResPool * pool, const Capability & dep)
+QueueItemRequire::QueueItemRequire (const ResPool & pool, const Capability & dep)
     : QueueItem (QUEUE_ITEM_TYPE_REQUIRE, pool)
     , _capability (dep)
     , _remove_only (false)
@@ -142,11 +142,11 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
     PoolItem_Ref requirer;
     const Capability & capability;
     ResolverContext_Ptr context;
-    const ResPool *pool;
+    ResPool pool;
     PoolItemList providers;		// the provider which matched
     UniqTable uniq;
 
-    RequireProcess (PoolItem_Ref r, const Capability & c, ResolverContext_Ptr ctx, const ResPool * p)
+    RequireProcess (PoolItem_Ref r, const Capability & c, ResolverContext_Ptr ctx, const ResPool & p)
 	: requirer (r)
 	, capability (c)
 	, context (ctx)
@@ -290,8 +290,8 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	Dep dep( Dep::PROVIDES );
 
 	// world->foreachProvidingResItem (_capability, require_process_cb, &info);
-	invokeOnEach( pool()->byCapabilityIndexBegin( _capability.index(), dep ),
-		      pool()->byCapabilityIndexEnd( _capability.index(), dep ),
+	invokeOnEach( pool().byCapabilityIndexBegin( _capability.index(), dep ),
+		      pool().byCapabilityIndexEnd( _capability.index(), dep ),
 		      resfilter::callOnCapMatchIn( dep, _capability, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 
 	num_providers = info.providers.size();
@@ -335,8 +335,8 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	    Dep dep( Dep::PROVIDES );
 
-	    invokeOnEach( pool()->byCapabilityIndexBegin( _capability.index(), dep ), // begin()
-			  pool()->byCapabilityIndexEnd( _capability.index(), dep ),   // end()
+	    invokeOnEach( pool().byCapabilityIndexBegin( _capability.index(), dep ), // begin()
+			  pool().byCapabilityIndexEnd( _capability.index(), dep ),   // end()
 			  resfilter::callOnCapMatchIn( dep, _capability, functor::functorRef<bool,PoolItem,Capability>(info)) );
 
 	}
@@ -352,7 +352,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 //	    pool()->foreachUpgrade (_requiring_item, new Channel(CHANNEL_TYPE_ANY), look_for_upgrades_cb, (void *)&upgrade_list);
 
-	    invokeOnEach( pool()->byNameBegin( _requiring_item->name() ), pool()->byNameEnd( _requiring_item->name() ),
+	    invokeOnEach( pool().byNameBegin( _requiring_item->name() ), pool().byNameEnd( _requiring_item->name() ),
 			  functor::chain( resfilter::ByKind( _requiring_item->kind() ),
 					  resfilter::byEdition<CompareByGT<Edition> >( _requiring_item->edition() )),
 					  functor::functorRef<bool,PoolItem>(info) );
