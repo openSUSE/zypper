@@ -27,6 +27,7 @@ namespace zypp
   namespace source
   {
     class SourceImpl;
+    DEFINE_PTR_TYPE(SourceImpl);
   }
   class ResStore;
 
