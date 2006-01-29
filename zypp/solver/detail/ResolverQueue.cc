@@ -210,16 +210,15 @@ ResolverQueue::processOnce ()
     int max_priority;
     bool did_something = false;
 
-    DBG << "ResolverQueue::processOnce(" << *this <<", " << (int) _qitems.size() << " items" << endl;
+    DBG << "ResolverQueue::processOnce()" << (int) _qitems.size() << " items" << endl;
     while ( (max_priority = qitemlist_max_priority (_qitems)) >= 0
 	    && _context->isValid () ) {
 
 	bool did_something_recently = false;
 
-	DBG << "ResolverQueue::processOnce() inside loop" << endl;
 	for (QueueItemList::iterator iter = _qitems.begin(); iter != _qitems.end() && _context->isValid();) {
 	    QueueItem_Ptr qitem = *iter;
-	    DBG <<  "=====> 1st pass: [" << qitem << "]" << endl;
+//	    DBG <<  "=====> 1st pass: [" << qitem << "]" << endl;
 	    QueueItemList::iterator next = iter; ++next;
 	    if (qitem && qitem->priority() == max_priority) {
 		if (qitem->process (_context, new_qitems)) {
@@ -236,7 +235,7 @@ ResolverQueue::processOnce ()
     }
 
     _qitems = new_qitems;
-    DBG <<  (int) _qitems.size() << " qitems after first pass" << endl;
+//    DBG <<  (int) _qitems.size() << " qitems after first pass" << endl;
 
     /*
        Now make a second pass over the queue, removing any super-branches.
@@ -248,15 +247,15 @@ ResolverQueue::processOnce ()
 	QueueItemList::iterator next = iter; next++;
 	QueueItem_Ptr qitem = *iter;
 
-	DBG <<  "=====> 2nd pass: [" << qitem << "]" << endl;
+//	DBG <<  "=====> 2nd pass: [" << qitem << "]" << endl;
 	if (qitem->isBranch()) {
-	    DBG << "ResolverQueue::processOnce() is branch" << endl;
+//	    DBG << "ResolverQueue::processOnce() is branch" << endl;
 	    QueueItemBranch_Ptr branch = dynamic_pointer_cast<QueueItemBranch>(qitem);
 	    for (QueueItemList::const_iterator iter2 = _qitems.begin(); iter2 != _qitems.end(); iter2++) {
-		DBG << "Compare branch with [" << (*iter2) << "]" << endl;
+//		DBG << "Compare branch with [" << (*iter2) << "]" << endl;
 		if (iter != iter2
 		    && branch->contains (*iter2)) {
-		    DBG << "Contained within, removing" << endl;
+//		    DBG << "Contained within, removing" << endl;
 		    _qitems.erase (iter);
 		    break;
 		}
@@ -265,7 +264,7 @@ ResolverQueue::processOnce ()
 	iter = next;
     }
 	  if (did_something)
-	      DBG <<  "did somesthing: " << (int)_qitems.size() << " qitems" << endl;
+	      DBG <<  "did something: " << (int)_qitems.size() << " qitems" << endl;
 	  else
 	      DBG <<  "did nothing: " << (int)_qitems.size() << " qitems" << endl;	      
 
