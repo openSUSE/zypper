@@ -400,17 +400,17 @@ namespace zypp
 
   // -----------------------------------------------------------------
   std::string
-  Url::toString() const
+  Url::asString() const
   {
-    return m_impl->toString();
+    return m_impl->asString();
   }
 
 
   // -----------------------------------------------------------------
   std::string
-  Url::toString(const ViewOptions &opts) const
+  Url::asString(const ViewOptions &opts) const
   {
-    return m_impl->toString(opts);
+    return m_impl->asString(opts);
   }
 
 
@@ -712,7 +712,7 @@ namespace zypp
   // -----------------------------------------------------------------
   std::ostream & operator<<( std::ostream & str, const Url & url )
   {
-    return str << url.toString();
+    return str << url.asString();
   }
 
 

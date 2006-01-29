@@ -27,7 +27,7 @@ namespace zypp
 
     // ---------------------------------------------------------------
     /**
-     * Url::toString() view options.
+     * Url::asString() view options.
      *
      * A instance of this class represents a bit-wise combination
      * of view option constants.
@@ -407,21 +407,21 @@ namespace zypp
        * \return A default string representation of the Url object.
        */
       virtual std::string
-      toString() const;
+      asString() const;
 
       /**
        * Returns a string representation of the Url object.
        *
        * To include a password in the resulting Url string, use:
        * \code
-       *    url.toString(url::ViewOptions() +
+       *    url.asString(url::ViewOptions() +
        *                 url::ViewOptions::WITH_PASSWORD);
        * \endcode
        *
        * or its equivalent:
        *
        * \code
-       *    url.toString(url::ViewOptions::DEFAULTS +
+       *    url.asString(url::ViewOptions::DEFAULTS +
        *                 url::ViewOptions::WITH_PASSWORD);
        * \endcode
        *
@@ -429,7 +429,7 @@ namespace zypp
        * \return A string representation of the Url object. 
        */
       virtual std::string
-      toString(const zypp::url::ViewOptions &opts) const;
+      asString(const zypp::url::ViewOptions &opts) const;
 
 
       // -----------------
@@ -959,7 +959,7 @@ namespace zypp
        * Return the view options of the current object.
        *
        * This method is used to query the view options
-       * used by the toString() method.
+       * used by the asString() method.
        *
        * \return The current view option combination.
        */
@@ -970,7 +970,7 @@ namespace zypp
        * Change the view options of the current object.
        *
        * This method is used to change the view options
-       * used by the toString() method.
+       * used by the asString() method.
        *
        * \param vopts New view options combination.
        */

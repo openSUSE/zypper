@@ -53,7 +53,7 @@ namespace zypp
 
     // ---------------------------------------------------------------
     /*
-    ** URL toString() view option constants:
+    ** URL asString() view option constants:
     */
     const ViewOptions ViewOptions::WITH_SCHEME       = 0x0001;
     const ViewOptions ViewOptions::WITH_USERNAME     = 0x0002;
@@ -370,15 +370,15 @@ namespace zypp
 
     // ---------------------------------------------------------------
     std::string
-    UrlBase::toString() const
+    UrlBase::asString() const
     {
-      return toString(getViewOptions());
+      return asString(getViewOptions());
     }
 
 
     // ---------------------------------------------------------------
     std::string
-    UrlBase::toString(const zypp::url::ViewOptions &opts) const
+    UrlBase::asString(const zypp::url::ViewOptions &opts) const
     {
       std::string   url;
       UrlBaseData   tmp;
