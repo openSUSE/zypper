@@ -2,6 +2,7 @@
 
 #include "package-writer.h"
 #include <sqlite3.h>
+#include <iostream>
 
 #include "zypp/base/Exception.h"
 #include "zypp/base/Logger.h"
@@ -14,6 +15,7 @@
 #include <string>
 
 using namespace zypp;
+using namespace std;
 
 using std::endl;
 using std::string;
@@ -82,13 +84,24 @@ arch2zmd (string str)
 }
 
 
+// convert description Text (list<string>) to a single string
 static string
-list2str (const Text t)
+desc2str (const Text t)
 {
     static string s;
+    s.clear();
     for (Text::const_iterator it = t.begin(); it != t.end(); ++it) {
-	if (it != t.begin()) s += " ";
-	s += *it;
+	string line = *it;
+	string::size_type authors = line.find ("Authors:");		// strip off 'Authors:'
+	if (authors != string::npos) {
+	    do {
+		--authors;
+	    } while (line[authors] == ' ' || line[authors] == '\n');
+	    line.resize(authors+1);
+	}
+
+	if (it != t.begin()) s += "\n";
+	s += line;
     }
     return s;
 }
@@ -334,7 +347,8 @@ write_package_deps (RCDB *rcdb, sqlite_int64 id, ResStore::ResT::Ptr res)
 static sqlite_int64
 write_package (RCDB *rcdb, const ResStore::ResT::constPtr res)
 {
-    Package::constPtr pkg = asKind<Package>(res);
+    const Resolvable::constPtr obj = res;
+    Package::constPtr pkg = asKind<Package>(obj);
     if (pkg == NULL)
     {
 	WAR << "Not a package " << *res << endl;
@@ -361,7 +375,7 @@ write_package (RCDB *rcdb, const ResStore::ResT::constPtr res)
     sqlite3_bind_text (handle, 9, "@system", -1, SQLITE_STATIC);		//rc_channel_get_id (pkg->channel)
     sqlite3_bind_text (handle, 10, "", -1, SQLITE_STATIC);			// pkg->pretty_name
     sqlite3_bind_text (handle, 11, pkg->summary().c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_text (handle, 12, list2str (pkg->description()).c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text (handle, 12, desc2str (pkg->description()).c_str(), -1, SQLITE_STATIC);
     sqlite3_bind_text (handle, 13, "", -1, SQLITE_STATIC);			//pkg->package_filename
     sqlite3_bind_text (handle, 14, "", -1, SQLITE_STATIC);			//pkg->signature_filename
     sqlite3_bind_int (handle, 15, 1);						//pkg->installed
