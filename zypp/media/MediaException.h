@@ -129,7 +129,7 @@ namespace zypp
       MediaFileNotFoundException(const Url & url_r,
 				 const Pathname & filename_r)
       : MediaException()
-      , _url(url_r.toString())
+      , _url(url_r.asString())
       , _filename(filename_r.asString())
       {}
       virtual ~MediaFileNotFoundException() throw() {};
@@ -159,7 +159,7 @@ namespace zypp
     public:
       MediaNotAttachedException(const Url & url_r)
       : MediaException()
-      , _url(url_r.toString())
+      , _url(url_r.asString())
       {}
       virtual ~MediaNotAttachedException() throw() {};
     protected:
@@ -173,7 +173,7 @@ namespace zypp
     public:
       MediaBadAttachPointException(const Url & url_r)
       : MediaException()
-      , _url(url_r.toString())
+      , _url(url_r.asString())
       {}
       virtual ~MediaBadAttachPointException() throw() {};
     protected:
@@ -187,7 +187,7 @@ namespace zypp
     public:
       MediaCurlInitException(const Url & url_r)
       : MediaException()
-      , _url(url_r.toString())
+      , _url(url_r.asString())
       {}
       virtual ~MediaCurlInitException() throw() {};
     protected:
@@ -202,7 +202,7 @@ namespace zypp
       MediaSystemException(const Url & url_r,
 			   const std::string & message_r)
       : MediaException()
-      , _url(url_r.toString())
+      , _url(url_r.asString())
       , _message(message_r)
       {}
       virtual ~MediaSystemException() throw() {};
@@ -219,7 +219,7 @@ namespace zypp
       MediaNotAFileException(const Url & url_r,
 			     const Pathname & path_r)
       : MediaException()
-      , _url(url_r.toString())
+      , _url(url_r.asString())
       , _path(path_r.asString())
       {}
       virtual ~MediaNotAFileException() throw() {};
@@ -236,7 +236,7 @@ namespace zypp
       MediaNotADirException(const Url & url_r,
 			    const Pathname & path_r)
       : MediaException()
-      , _url(url_r.toString())
+      , _url(url_r.asString())
       , _path(path_r.asString())
       {}
       virtual ~MediaNotADirException() throw() {};
@@ -252,7 +252,7 @@ namespace zypp
     public:
       MediaBadUrlException(const Url & url_r)
       : MediaException()
-      , _url(url_r.toString())
+      , _url(url_r.asString())
       {}
       virtual ~MediaBadUrlException() throw() {};
     protected:
@@ -309,7 +309,7 @@ namespace zypp
     public:
       MediaNotSupportedException(const Url & url_r)
       : MediaException()
-      , _url(url_r.toString())
+      , _url(url_r.asString())
       {}
       virtual ~MediaNotSupportedException() throw() {};
     protected:
@@ -324,7 +324,7 @@ namespace zypp
 			 const std::string & err_r,
 			 const std::string & msg_r)
       : MediaException()
-      , _url(url_r.toString())
+      , _url(url_r.asString())
       , _err(err_r)
       , _msg(msg_r)
       {}
@@ -341,7 +341,7 @@ namespace zypp
     public:
       MediaCurlSetOptException(const Url & url_r, const std::string & msg_r)
       : MediaException()
-      , _url(url_r.toString())
+      , _url(url_r.asString())
       , _msg(msg_r)
       {}
       virtual ~MediaCurlSetOptException() throw() {};

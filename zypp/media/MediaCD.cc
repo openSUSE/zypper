@@ -207,7 +207,7 @@ namespace zypp {
       {
     	_mounteddevice.erase();
     	_lastdev = -1;
-        ZYPP_THROW(MediaMountException(_url.toString(), mountpoint, "Mounting media failed"));
+        ZYPP_THROW(MediaMountException(_url.asString(), mountpoint, "Mounting media failed"));
       }
       DBG << _lastdev << " " << count << endl;
     }

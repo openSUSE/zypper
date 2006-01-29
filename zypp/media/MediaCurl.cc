@@ -389,7 +389,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
       ZYPP_THROW( MediaSystemException(_url, "System error on " + dest.dirname().asString()) );
     }
 
-    DBG << "URL: " << url.toString().c_str() << endl;
+    DBG << "URL: " << url.asString().c_str() << endl;
     // Use URL without options (not RFC conform) and without
     // username and passwd (some proxies dislike them in the URL.
     // Curloptions for these were set in attachTo().
@@ -397,8 +397,8 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     curlUrl.setUsername( "" );
     curlUrl.setPassword( "" );
 #warning Check whether the call is correct
-//    string urlBuffer = curlUrl.toString(true,false,true); // without options
-    string urlBuffer = curlUrl.toString(); // without options
+//    string urlBuffer = curlUrl.asString(true,false,true); // without options
+    string urlBuffer = curlUrl.asString(); // without options
 
     CURLcode ret = curl_easy_setopt( _curl, CURLOPT_URL,
                                      urlBuffer.c_str() );
@@ -450,11 +450,11 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
             if ( infoRet == CURLE_OK ) {
               string msg = "HTTP return code: " +
                            str::numstring( httpReturnCode ) +
-                           " (URL: " + url.toString() + ")";
+                           " (URL: " + url.asString() + ")";
               DBG << msg << endl;
               if ( httpReturnCode == 401 )
 	      {
-		msg = "URL: " + url.toString();
+		msg = "URL: " + url.asString();
                 err = "Login failed";
 	      }
               else
