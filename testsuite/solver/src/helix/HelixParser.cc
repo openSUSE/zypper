@@ -440,10 +440,14 @@ HelixParser::toplevelStart(const std::string & token, const xmlChar **attrs)
 	_state = PARSER_RESOLVABLE;
 
 	_stored = false;
-	name = "";
-	summary = "";
-	description = "";
-	section = "";
+	name.clear();
+	epoch = 0;
+	version.clear();
+	release.clear();
+	arch.clear();
+	summary.clear();
+	description.clear();
+	section.clear();
 	kind = string2kind (token);	// needed for <update>..</update>, see updateStart
 
 	fileSize = 0;
@@ -451,14 +455,15 @@ HelixParser::toplevelStart(const std::string & token, const xmlChar **attrs)
 	installOnly = false;
 	installed = false;
 
-	requires.clear();
 	provides.clear();
+	prerequires.clear();
+	requires.clear();
 	conflicts.clear();
-	freshens.clear();
-	enhances.clear();
+	obsoletes.clear();
 	recommends.clear();
 	suggests.clear();
-	obsoletes.clear();
+	freshens.clear();
+	enhances.clear();
 
     }
     else {
