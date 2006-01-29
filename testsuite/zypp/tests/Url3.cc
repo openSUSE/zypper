@@ -13,21 +13,21 @@ int main(void)
   val = "ha ha";
   url.setQueryParam(key, val);
   std::cout << "ADD1: '" << key << "' = '" << val << "'" << std::endl;
-  std::cout << "URL1: " << url.toString() << std::endl << std::endl;
+  std::cout << "URL1: " << url.asString() << std::endl << std::endl;
 
   // will be encoded as "foo%3Dbar%26key=foo%26bar%3Dvalue"
   key = "foo=bar&key";
   val = "foo&bar=value";
   url.setQueryParam(key, val);
   std::cout << "ADD2: '" << key << "' = '" << val << "'" << std::endl;
-  std::cout << "URL2: " << url.toString() << std::endl << std::endl;
+  std::cout << "URL2: " << url.asString() << std::endl << std::endl;
 
   // will be encoded as "foo%25bar=is%25de%25ad"
   key = "foo%bar";
   val = "is%de%ad";
   url.setQueryParam(key, val);
   std::cout << "ADD3: '" << key << "' = '" << val << "'" << std::endl;
-  std::cout << "URL3: " << url.toString() << std::endl << std::endl;
+  std::cout << "URL3: " << url.asString() << std::endl << std::endl;
 
   // get encoded query parameters:
   std::cout << "QUERY PARAMS:" << std::endl;

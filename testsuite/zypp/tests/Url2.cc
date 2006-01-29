@@ -12,14 +12,14 @@ int main(void)
   zypp::Url   url;
   url = str;
 
-  str = url.toString();
+  str = url.asString();
   std::cout << "URL1: " << str << std::endl << std::endl;
 
-  str = url.toString(zypp::url::ViewOptions() +
+  str = url.asString(zypp::url::ViewOptions() +
                      zypp::url::ViewOptions::WITH_PASSWORD);
   std::cout << "URL2: " << str << std::endl << std::endl;
 
-  str = url.toString(zypp::url::ViewOptions() +
+  str = url.asString(zypp::url::ViewOptions() +
                      zypp::url::ViewOptions::WITH_PATH_PARAMS);
   std::cout << "URL3: " << str << std::endl << std::endl;
 

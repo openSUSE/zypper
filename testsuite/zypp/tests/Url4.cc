@@ -13,7 +13,7 @@ int main(void)
     std::cout << "STR: " << str << std::endl;
 
     url = str;
-    std::cout << "URL: " << url.toString() << std::endl;
+    std::cout << "URL: " << url.asString() << std::endl;
 
     zypp::url::ParamVec pvec( url.getQueryStringVec());
     zypp::url::ParamVec::const_iterator v;
@@ -33,7 +33,7 @@ int main(void)
     }
 
     url.setQueryParam("attrs", "cn,sn,uid");
-    std::cout << "OUT: " << url.toString() << std::endl;
+    std::cout << "OUT: " << url.asString() << std::endl;
   }
   catch(const std::invalid_argument &e)
   {
