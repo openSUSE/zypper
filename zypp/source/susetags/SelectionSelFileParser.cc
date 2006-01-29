@@ -66,7 +66,7 @@ namespace zypp
             // str::strtonum(buffer, entry_r.count);
             dumpRegexpResults(what);
           }
-          else if(boost::regex_match(buffer, what, boost::regex("^\\+([a-zA-Z]+)(\\.([\\S]+))?:$"), boost::match_extra))
+          else if(boost::regex_match(buffer, what, boost::regex("^\\+([a-zA-Z]+)(\\.([^[:space:]]+))?:$"), boost::match_extra))
           {
             DBG << "start list" << std::endl;
             dumpRegexpResults(what);
@@ -88,14 +88,14 @@ namespace zypp
             DBG << "end list" << std::endl;
             // end of list
           }
-          else if(boost::regex_match(buffer, what, boost::regex("^=([a-zA-Z])+(\\.([\\S]+))?:[\\s]*(.*)$"), boost::match_extra))
+          else if(boost::regex_match(buffer, what, boost::regex("^=([a-zA-Z])+(\\.([^[:space:]]+))?:[\\s]*(.*)$"), boost::match_extra))
           {
             DBG << "assign" << std::endl;
             // start of list
             // str::strtonum(buffer, entry_r.count);
             dumpRegexpResults(what);
           }
-          else if(boost::regex_match(buffer, what, boost::regex("^[\\s]*$"), boost::match_extra) || (buffer.size() == 0 ))
+          else if(boost::regex_match(buffer, what, boost::regex("^([[:space:]]*)$"), boost::match_extra))
           {
             DBG << "empty line" << std::endl;
           }
