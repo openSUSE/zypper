@@ -82,6 +82,8 @@ namespace zypp
 		              const unsigned media_nr = 1,
 			      const bool recursive = false);
 
+    const bool valid () const;
+
     const bool enabled() const;
 
     void enable();
@@ -107,8 +109,7 @@ namespace zypp
     typedef void (Source_Ref::*unspecified_bool_type)();
 
     operator unspecified_bool_type() const
-    { if ((_pimpl == NULL)
-	  || (_pimpl == nullimpl()._pimpl))
+    { if (!valid())
       {
 	return static_cast<unspecified_bool_type>(0);
       }

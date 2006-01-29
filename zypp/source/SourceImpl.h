@@ -86,6 +86,9 @@ namespace zypp
 				const unsigned media_nr = 1,
 				const bool recursive = false);
 
+      virtual const bool valid() const
+      { return false; }
+
       const bool enabled() const
       { return _enabled; }
 

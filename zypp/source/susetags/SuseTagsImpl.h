@@ -46,6 +46,10 @@ namespace zypp
         ~SuseTagsImpl();
 
 	virtual void createResolvables(Source_Ref source_r);
+
+	virtual const bool valid() const
+	{ return true; }
+
       public:
         /** Stream output. */
         virtual std::ostream & dumpOn( std::ostream & str ) const;

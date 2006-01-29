@@ -78,6 +78,9 @@ namespace zypp
 				    const bool recursive)
   { return _pimpl->provideDir(dir_r, media_nr, recursive); }
 
+  const bool Source_Ref::valid() const
+  { return _pimpl!=NULL ? _pimpl->valid() : false; }
+
   const bool Source_Ref::enabled() const
   { return _pimpl->enabled(); }
 
