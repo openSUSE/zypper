@@ -51,7 +51,7 @@ operator<<( ostream & os, const QueueItemList & itemlist )
 {
     for (QueueItemList::const_iterator iter = itemlist.begin(); iter != itemlist.end(); ++iter) {
 	if (iter != itemlist.begin())
-	    os << ", ";
+	    os << "," << endl << "\t";
 	os << **iter;
     }
     return os;
