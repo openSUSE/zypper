@@ -345,9 +345,8 @@ write_package_deps (RCDB *rcdb, sqlite_int64 id, ResStore::ResT::Ptr res)
 
 
 static sqlite_int64
-write_package (RCDB *rcdb, const ResStore::ResT::constPtr res)
+write_package (RCDB *rcdb, const Resolvable::constPtr obj)
 {
-    const Resolvable::constPtr obj = res;
     Package::constPtr pkg = asKind<Package>(obj);
     if (pkg == NULL)
     {
@@ -397,28 +396,70 @@ write_package (RCDB *rcdb, const ResStore::ResT::constPtr res)
 
 //-----------------------------------------------------------------------------
 
-void
-write_packages_to_db (const string & db_file, const ResStore & resolvables)
+static
+RCDB *init_db (const string & db_file)
 {
-   RCDB *db;
+    RCDB *db;
 
     db = rc_db_new (db_file);
+    if (db == NULL) {
+	ERR << "Can't access database '" << db_file << "'" << endl;
+	return NULL;
+    }
     rc_db_begin (db);
 
-    if (resolvables.empty()) {
+    return db;
+}
+
+
+static void
+finish_db (RCDB *db)
+{
+    rc_db_commit (db);
+
+    rc_db_close (db);
+    delete (db);
+}
+
+
+void
+write_store_to_db (const string & db_file, const ResStore & store)
+{
+    RCDB *db = init_db (db_file);
+    if (db == NULL) return;
+
+    if (store.empty()) {
 	ERR << "Couldn't access the packaging system:" << endl;
 	return;
     }
 
-    for (ResStore::const_iterator iter = resolvables.begin(); iter != resolvables.end(); ++iter) {
+    for (ResStore::const_iterator iter = store.begin(); iter != store.end(); ++iter) {
+		// *iter == const ResStore::ResT::constPtr res
 	sqlite_int64 id = write_package (db, *iter);
 	if (id > 0) {
 	    write_package_deps (db, id, *iter);
 	}
     }
 
-    rc_db_commit (db);
+    finish_db (db);
+    return;
+}
 
-    rc_db_close (db);
-    delete (db);
+
+void
+write_resolvables_to_db (const std::string & db_file, const ResolvableList & resolvables)
+{
+    RCDB *db = init_db (db_file);
+    if (db == NULL) return;
+
+    for (ResStore::const_iterator iter = resolvables.begin(); iter != resolvables.end(); ++iter) {
+		// *iter == const Package::constPtr
+	sqlite_int64 id = write_package (db, *iter);
+	if (id > 0) {
+	    write_package_deps (db, id, *iter);
+	}
+    }
+
+    finish_db (db);
+    return;
 }
