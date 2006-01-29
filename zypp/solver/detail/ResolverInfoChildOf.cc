@@ -35,55 +35,57 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
-      using namespace std;
-      
-      IMPL_PTR_TYPE(ResolverInfoChildOf);
-      
-      //---------------------------------------------------------------------------
-      
-      
-      ostream&
-      operator<<( ostream& os, const ResolverInfoChildOf & child)
-      {
-          os << "<resolverinfochildof '";
-	  ostringstream child_str;
-	  const ResolverInfo & info  = child;
-	  child_str << info;
-	  //Translator all.%s = name of packages,patches,....
-          os << str::form (_("%s part of %s"),
-			    child_str.str().c_str(),
-			    child.itemsToString(false).c_str());
-          os << "'>";
-	  return os;
-      }
-      
-      //---------------------------------------------------------------------------
-      
-      ResolverInfoChildOf::ResolverInfoChildOf (PoolItem_Ref item, PoolItem_Ref dependency)
-          : ResolverInfoContainer (RESOLVER_INFO_TYPE_CHILD_OF, item, RESOLVER_INFO_PRIORITY_USER, dependency)
-      {
-      }
-      
-      
-      ResolverInfoChildOf::~ResolverInfoChildOf ()
-      {
-      }
-      
-      //---------------------------------------------------------------------------
-      
-      
-      ResolverInfo_Ptr
-      ResolverInfoChildOf::copy (void) const
-      {
-          ResolverInfoChildOf_Ptr cpy = new ResolverInfoChildOf(affected(), PoolItem_Ref());
-      
-          ((ResolverInfoContainer_Ptr)cpy)->copy (this);
-      
-          return cpy;
-      }
 
-      ///////////////////////////////////////////////////////////////////
+using namespace std;
+
+IMPL_PTR_TYPE(ResolverInfoChildOf);
+
+//---------------------------------------------------------------------------
+
+
+std::ostream &
+ResolverInfoChildOf::dumpOn( std::ostream & os ) const
+{
+    os << "<resolverinfochildof '";
+    ResolverInfo::dumpOn (os);
+
+    ostringstream affected_str;
+    affected_str << affected();
+
+    //Translator all.%s = name of packages,patches,....
+    os << str::form (_("%s part of %s"),
+			    affected_str.str().c_str(),
+			    itemsToString(false).c_str());
+    os << "'>";
+    return os;
+}
+
+//---------------------------------------------------------------------------
+
+ResolverInfoChildOf::ResolverInfoChildOf (PoolItem_Ref item, PoolItem_Ref dependency)
+    : ResolverInfoContainer (RESOLVER_INFO_TYPE_CHILD_OF, item, RESOLVER_INFO_PRIORITY_USER, dependency)
+{
+}
+
+
+ResolverInfoChildOf::~ResolverInfoChildOf ()
+{
+}
+
+//---------------------------------------------------------------------------
+
+
+ResolverInfo_Ptr
+ResolverInfoChildOf::copy (void) const
+{
+    ResolverInfoChildOf_Ptr cpy = new ResolverInfoChildOf(affected(), PoolItem_Ref());
+
+    ((ResolverInfoContainer_Ptr)cpy)->copy (this);
+
+    return cpy;
+}
+
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

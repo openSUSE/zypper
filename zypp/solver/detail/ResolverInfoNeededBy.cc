@@ -36,53 +36,54 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
-      using namespace std;
-      
-      IMPL_PTR_TYPE(ResolverInfoNeededBy);
-      
-      //---------------------------------------------------------------------------
-      
-      
-      ostream&
-      operator<<( ostream& os, const ResolverInfoNeededBy & by)
-      {
-	  const ResolverInfo & info = by;
-	  ostringstream info_str;
-	  info_str << info;
+
+using namespace std;
+
+IMPL_PTR_TYPE(ResolverInfoNeededBy);
+
+//---------------------------------------------------------------------------
+
+
+std::ostream &
+ResolverInfoNeededBy::dumpOn( std::ostream & os ) const
+{
+    ResolverInfo::dumpOn (os);
+
+    ostringstream affected_str;
+    affected_str << affected();
 
 	  // Translator: all.%s = name of package,patch,...
-          os << str::form (_("%s is needed by %s"),
-			    info_str.str().c_str(),
-			    by.itemsToString(false).c_str());
-	  return os;
-      }
-      
-      //---------------------------------------------------------------------------
-      
-      ResolverInfoNeededBy::ResolverInfoNeededBy (PoolItem_Ref item)
-          : ResolverInfoContainer (RESOLVER_INFO_TYPE_NEEDED_BY, item, RESOLVER_INFO_PRIORITY_USER)
-      {
-      }
-      
-      
-      ResolverInfoNeededBy::~ResolverInfoNeededBy ()
-      {
-      }
-      
-      //---------------------------------------------------------------------------
-      
-      ResolverInfo_Ptr
-      ResolverInfoNeededBy::copy (void) const
-      {
-          ResolverInfoNeededBy_Ptr cpy = new ResolverInfoNeededBy(affected());
-      
-          ((ResolverInfoContainer_Ptr)cpy)->copy (this);
-      
-          return cpy;
-      }
-      
-      ///////////////////////////////////////////////////////////////////
+    os << str::form (_("%s is needed by %s"),
+			    affected_str.str().c_str(),
+			    itemsToString(false).c_str());
+    return os;
+}
+
+//---------------------------------------------------------------------------
+
+ResolverInfoNeededBy::ResolverInfoNeededBy (PoolItem_Ref item)
+    : ResolverInfoContainer (RESOLVER_INFO_TYPE_NEEDED_BY, item, RESOLVER_INFO_PRIORITY_USER)
+{
+}
+
+
+ResolverInfoNeededBy::~ResolverInfoNeededBy ()
+{
+}
+
+//---------------------------------------------------------------------------
+
+ResolverInfo_Ptr
+ResolverInfoNeededBy::copy (void) const
+{
+    ResolverInfoNeededBy_Ptr cpy = new ResolverInfoNeededBy(affected());
+
+    ((ResolverInfoContainer_Ptr)cpy)->copy (this);
+
+    return cpy;
+}
+
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

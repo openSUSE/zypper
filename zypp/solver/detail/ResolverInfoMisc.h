@@ -64,7 +64,9 @@ class ResolverInfoMisc : public ResolverInfoContainer {
 
 	  // ---------------------------------- I/O
 
-	  friend std::ostream& operator<<(std::ostream&, const ResolverInfoMisc & context);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+    friend std::ostream& operator<<(std::ostream & str, const ResolverInfoMisc & obj)
+    { return obj.dumpOn (str); }
 
 	  // ---------------------------------- accessors
 

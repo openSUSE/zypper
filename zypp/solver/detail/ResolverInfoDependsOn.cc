@@ -36,52 +36,54 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
-      using namespace std;
-      
-      IMPL_PTR_TYPE(ResolverInfoDependsOn);
-      
-      //---------------------------------------------------------------------------
-      
-      ostream&
-      operator<<( ostream& os, const ResolverInfoDependsOn & on)
-      {
-	  const ResolverInfo & info = on;
-	  ostringstream info_str;
-	  info_str << info;
-	  // Translator: all.%s = name of package,patch,....
-          os << str::form (_("%s depended on %s"),
-			info_str.str().c_str(),
-			on.itemsToString(false).c_str());
-	  return os;
-      }
 
-      //---------------------------------------------------------------------------
+using namespace std;
 
-      ResolverInfoDependsOn::ResolverInfoDependsOn (PoolItem_Ref item, PoolItem_Ref on)
-          : ResolverInfoContainer (RESOLVER_INFO_TYPE_DEPENDS_ON, item, RESOLVER_INFO_PRIORITY_USER, on)
-      {
-      }
-      
-      
-      ResolverInfoDependsOn::~ResolverInfoDependsOn ()
-      {
-      }
-      
-      //---------------------------------------------------------------------------
-      
-      ResolverInfo_Ptr
-      ResolverInfoDependsOn::copy (void) const
-      {
-          ResolverInfoDependsOn_Ptr cpy = new ResolverInfoDependsOn(affected(), PoolItem_Ref());
-      
-          ((ResolverInfoContainer_Ptr)cpy)->copy (this);
-      
-          return cpy;
-      }
-      
-      //---------------------------------------------------------------------------
-      ///////////////////////////////////////////////////////////////////
+IMPL_PTR_TYPE(ResolverInfoDependsOn);
+
+//---------------------------------------------------------------------------
+
+std::ostream &
+ResolverInfoDependsOn::dumpOn( std::ostream & os ) const
+{
+    ResolverInfo::dumpOn (os);
+
+    ostringstream affected_str;
+    affected_str << affected();
+
+    // Translator: all.%s = name of package,patch,....
+    os << str::form (_("%s depended on %s"),
+			affected_str.str().c_str(),
+			itemsToString(false).c_str());
+    return os;
+}
+
+//---------------------------------------------------------------------------
+
+ResolverInfoDependsOn::ResolverInfoDependsOn (PoolItem_Ref item, PoolItem_Ref on)
+    : ResolverInfoContainer (RESOLVER_INFO_TYPE_DEPENDS_ON, item, RESOLVER_INFO_PRIORITY_USER, on)
+{
+}
+
+
+ResolverInfoDependsOn::~ResolverInfoDependsOn ()
+{
+}
+
+//---------------------------------------------------------------------------
+
+ResolverInfo_Ptr
+ResolverInfoDependsOn::copy (void) const
+{
+    ResolverInfoDependsOn_Ptr cpy = new ResolverInfoDependsOn(affected(), PoolItem_Ref());
+
+    ((ResolverInfoContainer_Ptr)cpy)->copy (this);
+
+    return cpy;
+}
+
+//---------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

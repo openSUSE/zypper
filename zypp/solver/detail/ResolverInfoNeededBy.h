@@ -52,7 +52,9 @@ class ResolverInfoNeededBy : public ResolverInfoContainer {
 
     // ---------------------------------- I/O
 
-    friend std::ostream& operator<<(std::ostream&, const ResolverInfoNeededBy & context);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+    friend std::ostream& operator<<(std::ostream & str, const ResolverInfoNeededBy & obj)
+    { return obj.dumpOn (str); }
 
     // ---------------------------------- accessors
 

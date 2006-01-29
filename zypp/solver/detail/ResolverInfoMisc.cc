@@ -45,21 +45,22 @@ IMPL_PTR_TYPE(ResolverInfoMisc);
 //---------------------------------------------------------------------------
 
 
-ostream&
-operator<<( ostream& os, const ResolverInfoMisc & misc)
+std::ostream &
+ResolverInfoMisc::dumpOn( std::ostream & os ) const
 {
-    os << misc.message();
-#if 0
-    os << " [";
-    os << ResolverInfo::toString (misc, false);
-    os << "]";
-#endif
-    os << misc.itemsToString(true);
-    if (!misc._action.empty()) {
-	os << _(", Action: ") << misc._action << endl;
+    ResolverInfo::dumpOn (os);
+
+    ostringstream affected_str;
+    affected_str << affected();
+
+    if (!affected_str.str().empty()) os << affected_str.str();
+    os << message();
+    os << itemsToString(true);
+    if (!_action.empty()) {
+	os << _(", Action: ") << _action << endl;
     }
-    if (!misc._trigger.empty()) {
-	os << _(", Trigger: ") << misc._trigger << endl;
+    if (!_trigger.empty()) {
+	os << _(", Trigger: ") << _trigger << endl;
     }
     return os;
 }

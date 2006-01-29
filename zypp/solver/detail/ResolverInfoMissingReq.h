@@ -53,7 +53,9 @@ class ResolverInfoMissingReq : public ResolverInfo {
 
     // ---------------------------------- I/O
 
-    friend std::ostream& operator<<(std::ostream&, const ResolverInfoMissingReq & context);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+    friend std::ostream& operator<<(std::ostream & str, const ResolverInfoMissingReq & obj)
+    { return obj.dumpOn (str); }
 
     // ---------------------------------- accessors
 

@@ -50,7 +50,9 @@ class ResolverInfoConflictsWith : public ResolverInfoContainer {
 
     // ---------------------------------- I/O
 
-    friend std::ostream& operator<<(std::ostream&, const ResolverInfoConflictsWith & context);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+    friend std::ostream& operator<<(std::ostream & str, const ResolverInfoConflictsWith & obj)
+    { return obj.dumpOn (str); }
 
     // ---------------------------------- accessors
 

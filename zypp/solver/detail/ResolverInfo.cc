@@ -51,6 +51,21 @@ static struct {
     { RESOLVER_INFO_TYPE_DEPENDS_ON,			"depended_on" },
     { RESOLVER_INFO_TYPE_CHILD_OF,			"child_of" },
     { RESOLVER_INFO_TYPE_MISSING_REQ,			"missing_req" },
+
+    { RESOLVER_INFO_TYPE_INVALID_SOLUTION,		"Marking this resolution attempt as invalid" },
+    { RESOLVER_INFO_TYPE_UNINSTALLABLE,			"Marking p as uninstallable" },
+    { RESOLVER_INFO_TYPE_REJECT_INSTALL,		"p is scheduled to be installed, but this is not possible because of dependency problems." },
+    { RESOLVER_INFO_TYPE_INSTALL_TO_BE_UNINSTALLED,	"Can't install p since it is already marked as needing to be uninstalled" },
+    { RESOLVER_INFO_TYPE_INSTALL_UNNEEDED,		"Can't install p since it is does not apply to this system." },
+    { RESOLVER_INFO_TYPE_INSTALL_PARALLEL,		"Can't install p, since a resolvable of the same name is already marked as needing to be installed." },
+    { RESOLVER_INFO_TYPE_INCOMPLETES,			"This would invalidate p" },
+	// from QueueItemEstablish
+    { RESOLVER_INFO_TYPE_ESTABLISHING,			"Establishing p" },
+	// from QueueItemInstall
+    { RESOLVER_INFO_TYPE_INSTALLING,			"Installing p" },
+    { RESOLVER_INFO_TYPE_UPDATING,			"Updating p" },
+    { RESOLVER_INFO_TYPE_SKIPPING,			"Skipping p, already installed" },
+	// from QueueItemRequire
     { RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER,		"There are no alternative installed providers of c [for p]" },
     { RESOLVER_INFO_TYPE_NO_PROVIDER,			"There are no installable providers of c [for p]" },
     { RESOLVER_INFO_TYPE_NO_UPGRADE,			"Upgrade to q to avoid removing p is not possible." },
@@ -58,10 +73,12 @@ static struct {
     { RESOLVER_INFO_TYPE_PARALLEL_PROVIDER,		"p provides c but another version is already installed" },
     { RESOLVER_INFO_TYPE_NOT_INSTALLABLE_PROVIDER,	"p provides c but is uninstallable" },
     { RESOLVER_INFO_TYPE_LOCKED_PROVIDER,		"p provides c but is locked" },
-    { RESOLVER_INFO_TYPE_SKIPPING,			"Skipping p, already installed" },
+    { RESOLVER_INFO_TYPE_CANT_SATISFY,			"Can't satisfy requirement c" },
+	// from QueueItemUninstall
     { RESOLVER_INFO_TYPE_UNINSTALL_TO_BE_INSTALLED,	"p is to-be-installed, so it won't be unlinked." },
     { RESOLVER_INFO_TYPE_UNINSTALL_INSTALLED,		"p is required by installed, so it won't be unlinked." },
     { RESOLVER_INFO_TYPE_UNINSTALL_LOCKED,		"cant uninstall, its locked" },
+	// from QueueItemConflict
     { RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL,		"to-be-installed p conflicts with q due to c" },
     { RESOLVER_INFO_TYPE_CONFLICT_UNINSTALLABLE,	"uninstalled p is marked uninstallable it conflicts [with q] due to c" },
     { RESOLVER_INFO_TYPE_INVALID,			"invalid" },
@@ -78,7 +95,7 @@ info_type_to_string (ResolverInfoType type)
 	    return type_str_table[i].str;
     }
 
-    return NULL;
+    return "?ResolverInfoType?";
 }
 
 
@@ -99,19 +116,20 @@ resolver_info_type_from_string (const char *str)
 
 //---------------------------------------------------------------------------
 
-ostream&
-operator<<( ostream& os, const ResolverInfo & resolverinfo)
+std::ostream &
+ResolverInfo::dumpOn( std::ostream & os ) const
 {
-    os << "<";
-    os << info_type_to_string (resolverinfo._type);
+    os << "ResolverInfo<";
+    os << info_type_to_string (_type);
     os << "> ";
 
-    if (resolverinfo._affected) {
-	os << resolverinfo._affected << ":";
+    if (_affected) {
+	os << _affected << ":";
     }
 
-    if (resolverinfo._error) os << _(" Error!");
-    if (resolverinfo._important) os << _(" Important!");
+    if (_error) os << _(" Error!");
+    if (_important) os << _(" Important!");
+
     return os;
 }
 

@@ -36,54 +36,57 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
-      using namespace std;
-      
-      IMPL_PTR_TYPE(ResolverInfoMissingReq);
-      
-      //---------------------------------------------------------------------------
-      
-      
-      ostream&
-      operator<<( ostream& os, const ResolverInfoMissingReq & missing)
-      {
-	  const ResolverInfo & info = missing;
-	  ostringstream info_str;
-	  info_str << info;
-	  ostringstream mis_str;
-	  mis_str << missing._missing;
-	  // Translator: 1.%s = name of package,patch,...; 2.%s = dependency
-          os << str::form (_("%s is missing the requirement %s"),
-			    info_str.str().c_str(),
+
+using namespace std;
+
+IMPL_PTR_TYPE(ResolverInfoMissingReq);
+
+//---------------------------------------------------------------------------
+
+
+std::ostream &
+ResolverInfoMissingReq::dumpOn( std::ostream & os ) const
+{
+    ResolverInfo::dumpOn (os);
+
+    ostringstream affected_str;
+    affected_str << affected();
+
+    ostringstream mis_str;
+    mis_str << _missing;
+
+    // Translator: 1.%s = name of package,patch,...; 2.%s = dependency
+    os << str::form (_("%s is missing the requirement %s"),
+			    affected_str.str().c_str(),
 			    mis_str.str().c_str());
-	  return os;
-      }
-      
-      //---------------------------------------------------------------------------
-      
-      ResolverInfoMissingReq::ResolverInfoMissingReq (PoolItem_Ref item, const Capability & missing)
-          : ResolverInfo (RESOLVER_INFO_TYPE_MISSING_REQ, item, RESOLVER_INFO_PRIORITY_USER)
-          , _missing (missing)
-      {
-      }
-      
-      
-      ResolverInfoMissingReq::~ResolverInfoMissingReq ()
-      {
-      }
-      
-      //---------------------------------------------------------------------------
-      
-      ResolverInfo_Ptr
-      ResolverInfoMissingReq::copy (void) const
-      {
-          ResolverInfoMissingReq_Ptr cpy = new ResolverInfoMissingReq(affected(), _missing);
-      
-          ((ResolverInfo_Ptr)cpy)->copy (this);
-      
-          return cpy;
-      }
-      ///////////////////////////////////////////////////////////////////
+    return os;
+}
+
+//---------------------------------------------------------------------------
+
+ResolverInfoMissingReq::ResolverInfoMissingReq (PoolItem_Ref item, const Capability & missing)
+    : ResolverInfo (RESOLVER_INFO_TYPE_MISSING_REQ, item, RESOLVER_INFO_PRIORITY_USER)
+    , _missing (missing)
+{
+}
+
+
+ResolverInfoMissingReq::~ResolverInfoMissingReq ()
+{
+}
+
+//---------------------------------------------------------------------------
+
+ResolverInfo_Ptr
+ResolverInfoMissingReq::copy (void) const
+{
+    ResolverInfoMissingReq_Ptr cpy = new ResolverInfoMissingReq(affected(), _missing);
+
+    ((ResolverInfo_Ptr)cpy)->copy (this);
+
+    return cpy;
+}
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

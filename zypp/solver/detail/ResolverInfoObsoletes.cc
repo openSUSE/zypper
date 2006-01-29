@@ -36,54 +36,55 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
-      using namespace std;
-      
-      IMPL_PTR_TYPE(ResolverInfoObsoletes);
-      
-      //---------------------------------------------------------------------------
-      
-      ostream&
-      operator<<( ostream& os, const ResolverInfoObsoletes & obsoletes)
-      {
-	  const ResolverInfo & info = obsoletes;
-	  ostringstream info_str;
-	  info_str << info;
 
-	  // Translator: all.%s = name of package,patch,....
-	  os << str::form (_("%s is replaced by %s"),
-			   info_str.str().c_str(),
-			   obsoletes.itemsToString(false).c_str());
-	  return os;
-      }
-      
-      //---------------------------------------------------------------------------
-      
-      ResolverInfoObsoletes::ResolverInfoObsoletes (PoolItem_Ref item, PoolItem_Ref obsoletes)
-          : ResolverInfoContainer (RESOLVER_INFO_TYPE_OBSOLETES, item, RESOLVER_INFO_PRIORITY_USER, obsoletes)
-      {
-      }
-      
-      
-      ResolverInfoObsoletes::~ResolverInfoObsoletes ()
-      {
-      }
-      
-      //---------------------------------------------------------------------------
-      
-      ResolverInfo_Ptr
-      ResolverInfoObsoletes::copy (void) const
-      {
+using namespace std;
+
+IMPL_PTR_TYPE(ResolverInfoObsoletes);
+
+//---------------------------------------------------------------------------
+
+std::ostream &
+ResolverInfoObsoletes::dumpOn( std::ostream & os ) const
+{
+    ResolverInfo::dumpOn (os);
+
+    ostringstream affected_str;
+    affected_str << affected();
+
+    // Translator: all.%s = name of package,patch,....
+    os << str::form (_("%s is replaced by %s"),
+			   affected_str.str().c_str(),
+			   itemsToString(false).c_str());
+    return os;
+}
+
+//---------------------------------------------------------------------------
+
+ResolverInfoObsoletes::ResolverInfoObsoletes (PoolItem_Ref item, PoolItem_Ref obsoletes)
+    : ResolverInfoContainer (RESOLVER_INFO_TYPE_OBSOLETES, item, RESOLVER_INFO_PRIORITY_USER, obsoletes)
+{
+}
+
+
+ResolverInfoObsoletes::~ResolverInfoObsoletes ()
+{
+}
+
+//---------------------------------------------------------------------------
+
+ResolverInfo_Ptr
+ResolverInfoObsoletes::copy (void) const
+{
 	  // leave the second item empty, it will be copied with the container below
 
-          ResolverInfoObsoletes_Ptr cpy = new ResolverInfoObsoletes(affected(), PoolItem_Ref());
-      
-          ((ResolverInfoContainer_Ptr)cpy)->copy (this);
-      
-          return cpy;
-      }
-      
-      ///////////////////////////////////////////////////////////////////
+    ResolverInfoObsoletes_Ptr cpy = new ResolverInfoObsoletes(affected(), PoolItem_Ref());
+
+    ((ResolverInfoContainer_Ptr)cpy)->copy (this);
+
+    return cpy;
+}
+
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

@@ -36,53 +36,54 @@ namespace zypp
     /////////////////////////////////////////////////////////////////////
     namespace detail
     { ///////////////////////////////////////////////////////////////////
-      
-      using namespace std;
-      
-      IMPL_PTR_TYPE(ResolverInfoConflictsWith);
-      
-      //---------------------------------------------------------------------------
-      
-      
-      ostream&
-      operator<<( ostream& os, const ResolverInfoConflictsWith & with)
-      {
-	  ostringstream with_str;
-	  const ResolverInfo & info = with;
-	  with_str << info;
-	  // Translator: all.%s = name of package, patch,...
-	  os << str::form (_("%s conflicts with %s"),
-			    with_str.str().c_str(),
-			    with.itemsToString(false).c_str());
+
+using namespace std;
+
+IMPL_PTR_TYPE(ResolverInfoConflictsWith);
+
+//---------------------------------------------------------------------------
+
+
+std::ostream &
+ResolverInfoConflictsWith::dumpOn( std::ostream & os ) const
+{
+    ResolverInfo::dumpOn (os);
+    ostringstream affected_str;
+    affected_str << affected();
+
+    // Translator: all.%s = name of package, patch,...
+    os << str::form (_("%s conflicts with %s"),
+			    affected_str.str().c_str(),
+			    itemsToString(false).c_str());
 	  return os;
-      }
-      
-      //---------------------------------------------------------------------------
-      
-      ResolverInfoConflictsWith::ResolverInfoConflictsWith (PoolItem_Ref item, PoolItem_Ref with)
-          : ResolverInfoContainer (RESOLVER_INFO_TYPE_CONFLICTS_WITH, item, RESOLVER_INFO_PRIORITY_USER, with)
-      {
-      }
-      
-      
-      ResolverInfoConflictsWith::~ResolverInfoConflictsWith ()
-      {
-      }
-      
-      
-      //---------------------------------------------------------------------------
-      
-      ResolverInfo_Ptr
-      ResolverInfoConflictsWith::copy (void) const
-      {
-          ResolverInfoConflictsWith_Ptr cpy = new ResolverInfoConflictsWith(affected(), PoolItem_Ref());
-      
-          ((ResolverInfoContainer_Ptr)cpy)->copy (this);
-      
-          return cpy;
-      }
-      
-      ///////////////////////////////////////////////////////////////////
+}
+
+//---------------------------------------------------------------------------
+
+ResolverInfoConflictsWith::ResolverInfoConflictsWith (PoolItem_Ref item, PoolItem_Ref with)
+    : ResolverInfoContainer (RESOLVER_INFO_TYPE_CONFLICTS_WITH, item, RESOLVER_INFO_PRIORITY_USER, with)
+{
+}
+
+
+ResolverInfoConflictsWith::~ResolverInfoConflictsWith ()
+{
+}
+
+
+//---------------------------------------------------------------------------
+
+ResolverInfo_Ptr
+ResolverInfoConflictsWith::copy (void) const
+{
+    ResolverInfoConflictsWith_Ptr cpy = new ResolverInfoConflictsWith(affected(), PoolItem_Ref());
+
+    ((ResolverInfoContainer_Ptr)cpy)->copy (this);
+
+    return cpy;
+}
+
+///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////

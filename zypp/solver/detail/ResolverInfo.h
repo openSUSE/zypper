@@ -111,7 +111,9 @@ class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
 
     // ---------------------------------- I/O
 
-    friend std::ostream& operator<<(std::ostream&, const ResolverInfo & context);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+    friend std::ostream& operator<<(std::ostream & str, const ResolverInfo & obj)
+    { return obj.dumpOn (str); }
 
     // ---------------------------------- accessors
 

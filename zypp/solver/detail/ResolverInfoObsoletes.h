@@ -50,7 +50,9 @@ class ResolverInfoObsoletes : public ResolverInfoContainer {
 
     // ---------------------------------- I/O
 
-    friend std::ostream& operator<<(std::ostream&, const ResolverInfoObsoletes & context);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+    friend std::ostream& operator<<(std::ostream & str, const ResolverInfoObsoletes & obj)
+    { return obj.dumpOn (str); }
 
     // ---------------------------------- accessors
 

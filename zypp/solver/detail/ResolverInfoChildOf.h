@@ -50,7 +50,9 @@ class ResolverInfoChildOf : public ResolverInfoContainer {
 
     // ---------------------------------- I/O
 
-    friend std::ostream& operator<<(std::ostream&, const ResolverInfoChildOf & context);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+    friend std::ostream& operator<<(std::ostream & str, const ResolverInfoChildOf & obj)
+    { return obj.dumpOn (str); }
 
     // ---------------------------------- accessors
 
