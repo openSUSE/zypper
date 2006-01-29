@@ -230,12 +230,20 @@ struct NoInstallableProviders : public resfilter::OnCapMatchCallbackFunctor
 
 struct LookForUpgrades : public resfilter::OnCapMatchCallbackFunctor
 {
+    PoolItem_Ref installed;
     PoolItemList upgrades;
+
+    LookForUpgrades (PoolItem_Ref i)
+	: installed (i)
+    { }
 
     bool operator()( PoolItem_Ref provider )
     {
-	upgrades.push_front (provider);
-	return true;
+	if (installed->edition().compare (provider->edition()) < 0) {
+	    upgrades.push_front (provider);
+	    return true;
+	}
+	return false;
     }
 };
 
@@ -348,13 +356,16 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	if (_upgraded_item
 	    && _requiring_item) {
 
-	    LookForUpgrades info;
+	    LookForUpgrades info (_requiring_item);
 
 //	    pool()->foreachUpgrade (_requiring_item, new Channel(CHANNEL_TYPE_ANY), look_for_upgrades_cb, (void *)&upgrade_list);
 
 	    invokeOnEach( pool().byNameBegin( _requiring_item->name() ), pool().byNameEnd( _requiring_item->name() ),
-			  functor::chain( resfilter::ByKind( _requiring_item->kind() ),
-					  resfilter::byEdition<CompareByGT<Edition> >( _requiring_item->edition() )),
+			  functor::chain( resfilter::ByUninstalled(),
+					  resfilter::ByKind( _requiring_item->kind() ) ),
+#if 0
+	// CompareByGT is broken		  resfilter::byEdition<CompareByGT<Edition> >( _requiring_item->edition() )),
+#endif
 					  functor::functorRef<bool,PoolItem>(info) );
 
 	    if (!info.upgrades.empty()) {
