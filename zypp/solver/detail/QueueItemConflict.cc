@@ -263,7 +263,7 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	}
 	else if (status.isUninstalled()) {
 
-	    context->setStatus (provider, ResStatus (false));
+	    context->setStatus (provider, ResStatus::toBeUninstalled);
 
 	    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CONFLICT_UNINSTALLABLE, provider, RESOLVER_INFO_PRIORITY_VERBOSE, provides);
 
