@@ -41,9 +41,12 @@ namespace zypp
   */
   class Source_Ref
   {
+    friend bool operator==( const Source_Ref & lhs, const Source_Ref & rhs );
+    friend bool operator<( const Source_Ref & lhs, const Source_Ref & rhs );
+
   public:
-    typedef source::SourceImpl  Impl;
-    typedef intrusive_ptr<Impl> Impl_Ptr;
+    typedef source::SourceImpl     Impl;
+    typedef source::SourceImpl_Ptr Impl_Ptr;
 
   public:
 
@@ -52,30 +55,6 @@ namespace zypp
     /** Null implementation */
     static Source_Ref & nullimpl();
 
-  private:
-    /** Factory */
-    friend class SourceFactory;
-    friend class SourceManager;
-  private:
-    /** Factory ctor */
-    Source_Ref();
-    /** Factory ctor */
-    explicit
-    Source_Ref( const Impl_Ptr & impl_r );
-
-  private:
-    friend std::ostream & operator<<( std::ostream & str, Source_Ref obj );
-    /** Stream output. */
-    std::ostream & dumpOn( std::ostream & str ) const;
-
-  private:
-    /** Pointer to implementation */
-    RW_pointer<Impl,rw_pointer::Intrusive<Impl> > _pimpl;
-
-    static Source_Ref _nullimpl;
-    static bool _nullimpl_initialized;
-
-  public:
     /** Provide a file to local filesystem */
     const Pathname provideFile(const Pathname & file_r,
 			       const unsigned media_nr = 1);
@@ -116,15 +95,50 @@ namespace zypp
       }
       return &Source_Ref::enable;	// return pointer to a void() function since the typedef is like this
     }
+
+
+  private:
+    /** Factory */
+    friend class SourceFactory;
+    friend class SourceManager;
+  private:
+    /** Factory ctor */
+    Source_Ref();
+    /** Factory ctor */
+    explicit
+    Source_Ref( const Impl_Ptr & impl_r );
+
+  private:
+    friend std::ostream & operator<<( std::ostream & str, Source_Ref obj );
+    /** Stream output. */
+    std::ostream & dumpOn( std::ostream & str ) const;
+
+  private:
+    /** Pointer to implementation */
+    Impl_Ptr _pimpl;
+
+    static Source_Ref _nullimpl;
+    static bool _nullimpl_initialized;
+
   };
   ///////////////////////////////////////////////////////////////////
 
+  /** \todo eliminate typedef.*/
   typedef Source_Ref Source;
 
   ///////////////////////////////////////////////////////////////////
+
   /** \relates Source Stream output. */
   inline std::ostream & operator<<( std::ostream & str, Source_Ref obj )
   { return obj.dumpOn( str ); }
+
+  /** \relates Source_Ref Equal if same implementation class. */
+  inline bool operator==( const Source_Ref & lhs, const Source_Ref & rhs )
+  { return lhs._pimpl == rhs._pimpl; }
+
+  /** \relates Source_Ref Order in std::conainer based on _pimpl. */
+  inline bool operator<( const Source_Ref & lhs, const Source_Ref & rhs )
+  { return lhs._pimpl < rhs._pimpl; }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
