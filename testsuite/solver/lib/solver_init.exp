@@ -165,16 +165,16 @@ proc multi-run { src } {
 
 	  #generate output directory
 
-	  set outfile ./$dircase/$testBase_name.out
-	  set errfile ./$dircase/$testBase_name.err
-	  set mistakefile ./$dircase/$testBase_name.mistake
-	  set difffile ./$dircase/$testBase_name.diff
-	  set solutionfile ./$dircase/$testBase_name.solution
+	  set outfile "$testBase_name.out"
+	  set errfile "$testBase_name.err"
+	  set mistakefile "$testBase_name.mistake"
+	  set difffile "$testBase_name.diff"
+	  set solutionfile "$testBase_name.solution"
 
 	  # run the test
 
 #	  set command "LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:../src/.libs\" $src $testcase >$outfile 2>$errfile"
-	  set command "$src $testcase >$outfile 2>$errfile"
+	  set command "(cd $dircase; ../../$src $testFilename >$outfile 2>$errfile)"
 	  set result ""
 	  set oops [catch { set result [exec sh -c $command] } catched]
 
@@ -192,17 +192,17 @@ proc multi-run { src } {
 	      continue
 	  }
 
-	  set command "/usr/bin/fgrep \'>!>\' $outfile >$mistakefile"
+	  set command "(cd $dircase; /usr/bin/fgrep \'>!>\' $outfile >$mistakefile)"
 	  set oops [catch { set result [exec sh -c $command] } catched]
 
-	  if { [ file exists $solutionfile ] == 0 } {
+	  if { [ file exists $dircase/$solutionfile ] == 0 } {
 	      if { $expect_to_fail == 1 } {
 		xfail $testBase_name
 		continue
 	      }
 	      perror "Testcase $testFilename has no solution" 0
 	  } else {
-	      set command "/usr/bin/diff -u $solutionfile $mistakefile > $difffile"
+	      set command "(cd $dircase; /usr/bin/diff -u $solutionfile $mistakefile > $difffile)"
 	      set oops [catch { set result [exec sh -c $command] } catched]
 	      if { $oops != "0" } {
 #		  puts "Output doesn't match expected data:"
