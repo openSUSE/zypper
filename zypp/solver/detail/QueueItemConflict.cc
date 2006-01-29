@@ -100,12 +100,13 @@ QueueItemConflict::~QueueItemConflict()
 struct UpgradeCandidate : public resfilter::OnCapMatchCallbackFunctor
 {
     PoolItem_Ref item; // the conflicting resolvable, used to filter upgrades with an identical resolvable
+    ResolverContext_Ptr context;
     PoolItemList upgrades;
 
-    UpgradeCandidate (PoolItem_Ref pi)
+    UpgradeCandidate (PoolItem_Ref pi, ResolverContext_Ptr ctx)
 	: item (pi)
+	, context (ctx)
     { }
-
 
     bool operator() (PoolItem_Ref & candidate, const Capability & cap)
     {
@@ -113,7 +114,7 @@ struct UpgradeCandidate : public resfilter::OnCapMatchCallbackFunctor
 // FIXME put this in the resfilter chain
 	if ((item->edition().compare(candidate->edition()) < 0)		// look at real upgrades
 	    && item->arch() == candidate->arch()			// keep the architecture
-	    && candidate.status().isUninstalled())
+	    && context->getStatus (candidate).isUninstalled())
 	{
 	    upgrades.push_back (candidate);
 	}
@@ -130,7 +131,7 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 {
     ResPool pool;
     PoolItem_Ref conflict_issuer;			// the item which issues 'conflicts:'
-    const Capability & conflict_capability;	// the capability mentioned in the 'conflicts'
+    const Capability conflict_capability;		// the capability mentioned in the 'conflicts'
     ResolverContext_Ptr context;
     QueueItemList & new_items;
     bool actually_an_obsolete;
@@ -197,7 +198,7 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 
 	    // find non-installed packages which provide the conflicting name
 
-	    UpgradeCandidate upgrade_info (provider);
+	    UpgradeCandidate upgrade_info (provider, context);
 
 	    Capability maybe_upgrade_cap =  factory.parse ( provider->kind(), provider->name(), Rel::ANY, Edition::noedition );
 
