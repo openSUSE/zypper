@@ -50,7 +50,6 @@ solverdetailinclude_HEADERS = \
 noinst_LTLIBRARIES =	lib@PACKAGE@_solver_detail.la
 
 lib@PACKAGE@_solver_detail_la_SOURCES =			\
-	hexdump.cc					\
 	Importance.cc					\
 	Pending.cc					\
 	Helper.cc					\
