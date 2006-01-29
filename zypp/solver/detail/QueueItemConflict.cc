@@ -109,10 +109,13 @@ struct UpgradeCandidate : public resfilter::OnCapMatchCallbackFunctor
 
     bool operator() (PoolItem_Ref & candidate, const Capability & cap)
     {
-	if (!compareByNVRA (item.resolvable(), candidate.resolvable()) 		// dont upgrade with ourselves
-	    && candidate.status().isUninstalled()) {
 
-	    upgrades.push_back (item);
+// FIXME put this in the resfilter chain
+	if ((item->edition().compare(candidate->edition()) < 0)		// look at real upgrades
+	    && item->arch() == candidate->arch()			// keep the architecture
+	    && candidate.status().isUninstalled())
+	{
+	    upgrades.push_back (candidate);
 	}
 	return true;
     }
@@ -157,6 +160,7 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	if (conflict_issuer
 	    && compareByNVRA (provider.resolvable(), conflict_issuer.resolvable()) == 0)
 	{
+	    DBG << "self-conflict" << endl;
 	    return true;
 	}
 
@@ -166,15 +170,13 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	 * as the item that's providing it.  This, of course, only
 	 * applies to RPM, since it's the only one with obsoletes right
 	 * now. */
-	Capability capTest =  factory.parse ( provider->kind(),
-			                  provider->name(),
-			                  Rel::EQ,
-			                  provider->edition());
+	Capability capTest =  factory.parse ( provider->kind(), provider->name(), Rel::EQ, provider->edition());
 
 	if (actually_an_obsolete
-	&& capTest.matches (provides) != CapMatch::yes )
+	    && capTest.matches (provides) != CapMatch::yes )
 	{
-	return true;
+	    DBG << "obsolete to virtual provide - ignoring" << endl;
+	    return true;
 	}
 
 	status = provider.status();
@@ -188,6 +190,8 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	    ResolverInfo_Ptr log_info;
 
 #if PHI
+	    DBG << "Provider is installed - try upgrade" << endl;
+
 	    // maybe an upgrade can resolve the conflict ?
 	    //        check if other item is available which upgrades
 
