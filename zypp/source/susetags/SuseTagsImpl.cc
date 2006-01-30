@@ -73,29 +73,29 @@ namespace zypp
         DBG << "SuseTagsImpl (fake) from " << p << ": "
             << content.size() << " packages" << endl;
 
-	    
+
 	// parse selections
 	p = provideFile(_path + "suse/setup/descr/selections");
-	
+
 	std::ifstream sels (p.asString().c_str());
-	
+
 	while (!sels.eof())
 	{
 	    string selfile;
-	    
+
 	    getline(sels,selfile);
 
 	    if (selfile.empty() ) continue;
-	    
+
 	    DBG << "Going to parse selection " << selfile << endl;
-	    
+
 	    Pathname file = provideFile(_path + "suse/setup/descr/" + selfile);
 	    DBG << "Selection file to parse " << file << endl;
-	    
+
 	    Selection::Ptr sel( parseSelection( file ) );
-	    
+
 	    DBG << "Selection:" << sel << endl;
-	    
+
 	    if (sel)
     		_store.insert( sel );
 
@@ -129,4 +129,3 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
- 

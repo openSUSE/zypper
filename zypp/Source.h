@@ -63,7 +63,7 @@ namespace zypp
   public:
 
     /** All resolvables provided by this source. */
-    const ResStore & resolvables();
+    const ResStore & resolvables() const;
 
     /** Provide a file to local filesystem */
     const Pathname provideFile(const Pathname & file_r,
@@ -71,8 +71,6 @@ namespace zypp
     const Pathname provideDir(const Pathname & dir_r,
 		              const unsigned media_nr = 1,
 			      const bool recursive = false);
-
-    const bool valid () const;
 
     const bool enabled() const;
 
@@ -103,10 +101,9 @@ namespace zypp
     typedef void (Source_Ref::*unspecified_bool_type)();
 
     operator unspecified_bool_type() const
-    { if (!valid())
-      {
-	return static_cast<unspecified_bool_type>(0);
-      }
+    {
+      if ( *this == noSource )
+        return static_cast<unspecified_bool_type>(0);
       return &Source_Ref::enable;	// return pointer to a void() function since the typedef is like this
     }
 

@@ -48,9 +48,6 @@ namespace zypp
         /** Default ctor */
         YUMSourceImpl(media::MediaAccess::Ptr & media_r, const Pathname & path_r = "/", const std::string & alias_r = "");
 
-	virtual const bool valid() const
-	{ return true; }
-
 	virtual void createResolvables(Source_Ref source_r);
 
 	Package::Ptr createPackage(

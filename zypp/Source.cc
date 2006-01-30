@@ -51,7 +51,7 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  const ResStore & Source_Ref::resolvables()
+  const ResStore & Source_Ref::resolvables() const
   { return _pimpl->resolvables(*this); }
 
   std::ostream & Source_Ref::dumpOn( std::ostream & str ) const
@@ -65,9 +65,6 @@ namespace zypp
 				    const unsigned media_nr,
 				    const bool recursive)
   { return _pimpl->provideDir(dir_r, media_nr, recursive); }
-
-  const bool Source_Ref::valid() const
-  { return _pimpl!=NULL ? _pimpl->valid() : false; }
 
   const bool Source_Ref::enabled() const
   { return _pimpl->enabled(); }
