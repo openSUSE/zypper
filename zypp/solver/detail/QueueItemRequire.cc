@@ -158,7 +158,7 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 	//const Capability match;
 	ResStatus status;
 
-	status = provider.status();
+	status = context->getStatus(provider);
 // ERR << "RequireProcessInfo (" << *provider << " provides " << match << ", is " << status << ")" << endl;
 // ERR << "RequireProcessInfo(required: " << *capability << ")" << endl;
 // ERR << "require_process_cb(itemIsPossible -> " <<  context->itemIsPossible (*provider) << ")" << endl;
@@ -171,7 +171,7 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 	    return true;
 	}
 
-	if ((!status.isToBeUninstalled())
+	if (!status.isToBeUninstalled()
 	    && ! context->isParallelInstall (provider)
 	    && ! uniq.has(provider)
 	    && context->itemIsPossible (provider)
