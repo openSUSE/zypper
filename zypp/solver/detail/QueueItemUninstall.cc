@@ -101,6 +101,7 @@ QueueItemUninstall::QueueItemUninstall (const ResPool & pool, PoolItem_Ref item,
     , _due_to_obsolete (false)
     , _unlink (false)
 {
+    DBG << "QueueItemUninstall::QueueItemUninstall(" << item << ")" << endl;
 }
 
 
