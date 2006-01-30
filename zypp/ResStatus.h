@@ -160,6 +160,18 @@ namespace zypp
     bool transacts() const
     { return fieldValueIs<TransactField>( TRANSACT ); }
 
+    bool isBySolver() const
+    { return fieldValueIs<TransactByField>( SOLVER ); }
+
+    bool isByApplLow() const
+    { return fieldValueIs<TransactByField>( APPL_LOW ); }
+
+    bool isByApplHigh() const
+    { return fieldValueIs<TransactByField>( APPL_HIGH ); }
+
+    bool isByUser() const
+    { return fieldValueIs<TransactByField>( USER ); }
+
     bool isToBeUninstalledDueToObsolete () const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_OBSOLETE ); }
 
@@ -178,7 +190,7 @@ namespace zypp
     // already set by a higher level, \c true should be returned.
     // Removing a higher levels transaction bit should fail.
 
-    bool revert ()
+    bool setNoTransact ()
     {
       setTransacts (false);
       fieldValueAssign<TransactDetailField>(0);
