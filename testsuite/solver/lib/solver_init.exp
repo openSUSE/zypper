@@ -174,7 +174,7 @@ proc multi-run { src } {
 	  # run the test
 
 #	  set command "LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:../src/.libs\" $src $testcase >$outfile 2>$errfile"
-	  set command "(cd $dircase; $src $testFilename >$outfile 2>$errfile)"
+	  set command "(cd $dircase; ZYPP_NOLOG=1 ../../$src $testFilename >$outfile 2>$errfile)"
 	  set result ""
 	  set oops [catch { set result [exec sh -c $command] } catched]
 
