@@ -19,7 +19,7 @@
 
 #include "zypp/parser/tagfile/Tags.h"
 #include "zypp/parser/tagfile/ParseException.h"
-
+#include "zypp/Selection.h"
 #include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -39,7 +39,21 @@ namespace zypp
       /** Tagfile parser. */
       struct SelectionSelFileParser
       {
-        struct SelectionEntry {
+        std::list<Selection::Ptr> result;
+        shared_ptr<detail::SelectionImpl> selImpl;
+
+        struct MultiTag
+        {
+          std::string name;
+          std::string modifier;
+          std::set<std::string> values;
+        };
+
+        struct SingleTag
+        {
+          std::string name;
+          std::string modifier;
+          std::string value;
         };
 
         virtual ~SelectionSelFileParser()
@@ -49,10 +63,12 @@ namespace zypp
          * \throw ParseException
          * \todo more doc on Ecaptions.
         */
-        void parse( const Pathname & file_r, SelectionEntry &entry_r );
+        void parse( const Pathname & file_r);
+        void consume( const SingleTag &tag );
+        void consume( const MultiTag &tag );
       };
       ///////////////////////////////////////////////////////////////////
-
+      std::list<Selection::Ptr> parseSelections( const Pathname & file_r );
       /////////////////////////////////////////////////////////////////
     } // namespace source
     ///////////////////////////////////////////////////////////////////

@@ -20,9 +20,12 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/String.h"
 
+#include "zypp/Selection.h"
+#include "zypp/detail/SelectionImpl.h"
+
 #include "zypp/source/susetags/SelectionSelFileParser.h"
 #include <boost/regex.hpp>
-#include "zypp/parser/tagfile/Grammar.h"
+
 
 using namespace std;
 using namespace boost;
@@ -45,12 +48,27 @@ namespace zypp
         }
       }
 
+      std::list<Selection::Ptr> parseSelections( const Pathname & file_r )
+      {
+
+      }
+
+      void SelectionSelFileParser::consume( const SingleTag &tag )
+      {
+
+      }
+      
+      void SelectionSelFileParser::consume( const MultiTag &tag )
+      {
+
+      }
+
       ///////////////////////////////////////////////////////////////////
       //
       //	METHOD NAME : Parser::parse
       //	METHOD TYPE : void
       //
-      void SelectionSelFileParser::parse( const Pathname & file_r, SelectionEntry &entry_r )
+      void SelectionSelFileParser::parse( const Pathname & file_r)
       {
         std::ifstream file(file_r.asString().c_str());
         std::string buffer;

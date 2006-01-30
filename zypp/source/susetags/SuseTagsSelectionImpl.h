@@ -29,13 +29,12 @@ namespace zypp
     //
     /**
     */
-    class SuseTagsSelectionImpl : public zypp::detail::SelectionImplIf
+    struct SuseTagsSelectionImpl : public zypp::detail::SelectionImplIf
     {
     public:
       SuseTagsSelectionImpl();
       virtual ~SuseTagsSelectionImpl();
 
-    private:
       /*
       virtual std::list<std::string> suggests() const;
       virtual std::list<std::string> recommends() const;
