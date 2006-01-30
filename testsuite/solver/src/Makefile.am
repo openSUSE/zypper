@@ -4,7 +4,10 @@
 
 SUBDIRS = helix
 
-INCLUDES = -I/usr/include/libxml2 -Ihelix
+INCLUDES = -I/usr/include/libxml2	\
+	-Ihelix				\
+	-DZYPP_BASE_LOGGER_LOGGROUP=\"testsuite\"
+
 LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la helix/lib@PACKAGE@_helix.la
 
 # We're not ready for this yet.
