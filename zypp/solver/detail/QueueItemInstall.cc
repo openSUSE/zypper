@@ -98,8 +98,14 @@ QueueItemInstall::QueueItemInstall (const ResPool & pool, PoolItem_Ref item)
     , _other_penalty (0)
     , _explicitly_requested (false)
 {
-    // check if this install upgrades anything
-    _upgrades = Helper::findInstalledItem (pool, item);
+    Resolvable::constPtr res = item.resolvable();
+    Package::constPtr pkg = asKind<Package>(res);			// try to access it as a package
+    if (pkg == NULL
+	|| !pkg->installOnly()) {
+
+	// check if this install upgrades anything			// only if its a 'rpm -U' package
+	_upgrades = Helper::findInstalledItem (pool, item);
+    }
 
     DBG << "QueueItemInstall::QueueItemInstall(" << item << ") upgrades " << _upgrades << endl;
 }
