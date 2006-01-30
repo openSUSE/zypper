@@ -59,8 +59,8 @@ namespace zypp
   { return _pimpl->verifySystem(); }
   void Resolver::establishState ()
   { return _pimpl->establishState(); }
-  bool Resolver::resolveDependencies ()
-  { return _pimpl->resolveDependencies(); }
+  bool Resolver::resolvePool ()
+  { return _pimpl->resolvePool (); }
 
   // ResolverContext_constPtr bestContext (void) const;
 

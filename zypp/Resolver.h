@@ -51,7 +51,7 @@ namespace zypp
      * Verify consistency of system
      *
      **/
-    void verifySystem ();
+    void verifySystem (void);
 
     /**
      * Establish state of 'higher level' Resolvables
@@ -60,7 +60,7 @@ namespace zypp
      * like Patches, Patterns, and Products
      *
      **/
-    void establishState ();
+    void establishState (void);
 
     /**
      * Resolve package dependencies:
@@ -73,7 +73,7 @@ namespace zypp
      * the latter case, use problems() and later applySolutions()
      * below.
      **/
-    bool resolveDependencies ();
+    bool resolvePool (void);
 
     /**
      * Return the dependency problems found by the last call to
