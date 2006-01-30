@@ -70,7 +70,7 @@ namespace zypp
   target::rpm::RpmDb & Target::rpmDb()
   { return _pimpl->rpm(); }
 
-  void Target::commit(ResPool & pool_r)
+  void Target::commit(ResPool pool_r)
   { return _pimpl->commit(pool_r); }
 
   std::ostream & Target::dumpOn( std::ostream & str ) const

@@ -54,7 +54,7 @@ namespace zypp
     /** Refference to the RPM database */
     target::rpm::RpmDb & rpmDb();
     /** Comomit changes in the pool */
-    void commit(ResPool & pool_r);
+    void commit(ResPool pool_r);
 
   public:
     /** Ctor */

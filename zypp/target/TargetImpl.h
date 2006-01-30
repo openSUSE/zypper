@@ -62,7 +62,7 @@ namespace zypp
 
       /** Comomit changes in the pool */
 #warning Add support for multiple medias - eg. limit only to CD1
-      void commit(ResPool & pool_r);
+      void commit(ResPool pool_r);
 
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const

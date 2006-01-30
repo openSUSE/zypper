@@ -76,7 +76,7 @@ namespace zypp
       return _store;
     }
 
-    void TargetImpl::commit(ResPool & pool_r)
+    void TargetImpl::commit(ResPool pool_r)
     {
 #warning FIXME this orderding doesn't honor the dependencies
       vector<ResObject::constPtr> to_uninstall;
