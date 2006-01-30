@@ -94,6 +94,8 @@ namespace zypp
      * \throws Exception
      */
     Pathname getPatchRpm(BaseVersion & base_r) const;
+    /** */
+    bool installOnly() const;
 
     // data here:
  

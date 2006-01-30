@@ -108,6 +108,8 @@ namespace zypp
       virtual std::list<DeltaRpm> deltaRpms() const PURE_VIRTUAL;
       /** */
       virtual std::list<PatchRpm> patchRpms() const PURE_VIRTUAL;
+      /** */
+      virtual bool installOnly() const PURE_VIRTUAL;
 
       //@}
 

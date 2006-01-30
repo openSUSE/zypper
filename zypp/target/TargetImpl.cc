@@ -122,7 +122,8 @@ namespace zypp
 	if (isKind<Package>(it->resolvable()))
 	{
 	  Package::constPtr p = dynamic_pointer_cast<const Package>(it->resolvable());
-	  rpm().installPackage(p->getPlainRpm(), rpm::RpmDb::RPMINST_NOUPGRADE);
+	  rpm().installPackage(p->getPlainRpm(),
+	    p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : 0);
 	}
       }
     }

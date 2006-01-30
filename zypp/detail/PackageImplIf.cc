@@ -95,6 +95,8 @@ namespace zypp
       std::list<PatchRpm> PackageImplIf::patchRpms() const
       { return std::list<PatchRpm>(); }
 
+      bool PackageImplIf::installOnly() const
+      { return false; }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

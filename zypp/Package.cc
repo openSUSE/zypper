@@ -173,6 +173,9 @@ namespace zypp
     return source().provideFile(plainRpm()); // never reached
   }
 
+  bool Package::installOnly() const
+  { return pimpl().installOnly(); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
