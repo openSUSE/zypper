@@ -31,6 +31,7 @@ namespace zypp
     ZYppImpl::ZYppImpl()
     : _pool()
     , _sourceFeed( _pool )
+    , _resolver( new Resolver(_pool.accessor()) )
     {
     }
 

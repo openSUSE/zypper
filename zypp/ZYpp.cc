@@ -60,6 +60,9 @@ namespace zypp
   ResPool ZYpp::pool() const
   { return _pimpl->pool(); }
 
+  Resolver_Ptr ZYpp::resolver() const
+  { return _pimpl->resolver(); }
+
   ///////////////////////////////////////////////////////////////////
   //
   // Forward to Impl:

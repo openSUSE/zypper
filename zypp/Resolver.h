@@ -39,7 +39,6 @@ namespace zypp
   {
   public:
 
-  protected:
     /** Ctor */
     Resolver( const ResPool & pool );
     /** Dtor */

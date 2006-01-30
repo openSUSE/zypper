@@ -18,6 +18,7 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Target.h"
+#include "zypp/Resolver.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -71,6 +72,11 @@ namespace zypp
      * \throws Exception
      */
     void finishTarget();
+    
+    /**
+     *
+     */
+    Resolver_Ptr resolver() const;
 
   protected:
     /** Dtor */

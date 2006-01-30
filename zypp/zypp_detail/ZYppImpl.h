@@ -17,6 +17,7 @@
 #include "zypp/ResPoolManager.h"
 #include "zypp/SourceFeed.h"
 #include "zypp/Target.h"
+#include "zypp/Resolver.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -49,6 +50,9 @@ namespace zypp
       SourceFeed_Ref sourceFeed() const
       { return _sourceFeed; }
 
+      Resolver_Ptr resolver() const
+      { return _resolver; }
+
       void addResolvables (const ResStore& store, bool installed = false);
 
       void removeResolvables (const ResStore& store);
@@ -75,6 +79,8 @@ namespace zypp
       SourceFeed_Ref _sourceFeed;
       /** */
       Target_Ptr _target;
+      /** */
+      Resolver_Ptr _resolver;
     };
     ///////////////////////////////////////////////////////////////////
 
