@@ -23,6 +23,7 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_parser_tagfile.la
 ## ##################################################
 
 lib@PACKAGE@_parser_tagfile_la_SOURCES = \
+	Parser.cc	\
 	ParseException.cc\
 	Tags.cc		\
 	TagFileParser.cc \
