@@ -115,7 +115,7 @@ MIL << "UpgradeCandidate? " << candidate << ":[" << context->getStatus (candidat
 // FIXME put this in the resfilter chain
 	if ((item->edition().compare(candidate->edition()) < 0)		// look at real upgrades
 	    && item->arch() == candidate->arch()			// keep the architecture
-	    && (context->getStatus (candidate).isUninstalled()
+	    && (context->getStatus (candidate).staysUninstalled()
 		|| context->getStatus (candidate).isToBeUninstalled()))	// FIXME: just for exercise-02conflict-03-test.xml
 									// the original solver found the uninstalled foo-2.0.1 first, this solver
 									// finds the uninstallable first. In the end, we had a duplicate solution
