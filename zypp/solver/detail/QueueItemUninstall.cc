@@ -56,7 +56,7 @@ IMPL_PTR_TYPE(QueueItemUninstall);
 std::ostream &
 QueueItemUninstall::dumpOn( std::ostream & os ) const
 {
-    os << "[Uninstall: ";
+    os << "[" << (_soft?"Soft":"") << "Uninstall: ";
 
     os << _item;
     os << " (";
@@ -89,10 +89,11 @@ QueueItemUninstall::dumpOn( std::ostream & os ) const
 
 //---------------------------------------------------------------------------
 
-QueueItemUninstall::QueueItemUninstall (const ResPool & pool, PoolItem_Ref item, UninstallReason reason)
+QueueItemUninstall::QueueItemUninstall (const ResPool & pool, PoolItem_Ref item, UninstallReason reason, bool soft)
     : QueueItem (QUEUE_ITEM_TYPE_UNINSTALL, pool)
     , _item (item)
     , _reason (reason)
+    , _soft (soft)
     , _cap_leading_to_uninstall (Capability())
     , _upgraded_to (NULL)
     , _explicitly_requested (false)

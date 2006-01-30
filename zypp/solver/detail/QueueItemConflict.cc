@@ -63,7 +63,7 @@ IMPL_PTR_TYPE(QueueItemConflict);
 std::ostream &
 QueueItemConflict::dumpOn( std::ostream & os ) const
 {
-    os << "[Conflict: ";
+    os << "[" << (_soft?"Soft":"") << "Conflict: ";
     os << _capability;
     os << ", Triggered by ";
     os << _conflicting_item;
@@ -74,10 +74,11 @@ QueueItemConflict::dumpOn( std::ostream & os ) const
 
 //---------------------------------------------------------------------------
 
-QueueItemConflict::QueueItemConflict (const ResPool & pool, const Capability & cap, PoolItem_Ref item)
+QueueItemConflict::QueueItemConflict (const ResPool & pool, const Capability & cap, PoolItem_Ref item, bool soft)
     : QueueItem (QUEUE_ITEM_TYPE_CONFLICT, pool)
     , _capability (cap)
     , _conflicting_item (item)
+    , _soft (soft)
     , _actually_an_obsolete (false)
 {
 }

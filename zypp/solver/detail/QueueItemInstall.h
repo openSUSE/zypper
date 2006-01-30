@@ -49,6 +49,7 @@ class QueueItemInstall : public QueueItem {
 
   private:
     PoolItem_Ref _item;					// the item to-be-installed
+    bool _soft;						// if triggered by a soft requirement (a recommends)
     PoolItem_Ref _upgrades;				// the item this install upgrades (if any)
     CapSet _deps_satisfied_by_this_install;
     PoolItemList _needed_by;
@@ -59,7 +60,7 @@ class QueueItemInstall : public QueueItem {
 
   public:
 
-    QueueItemInstall (const ResPool & pool, PoolItem_Ref item);
+    QueueItemInstall (const ResPool & pool, PoolItem_Ref item, bool soft = false);
     virtual ~QueueItemInstall();
 
     // ---------------------------------- I/O
@@ -72,6 +73,8 @@ class QueueItemInstall : public QueueItem {
     // ---------------------------------- accessors
 
     PoolItem_Ref item(void) const { return _item; }
+
+    bool isSoft (void) const { return _soft; }
 
     PoolItem_Ref upgrades (void) const { return _upgrades; }
     void setUpgrades (PoolItem_Ref upgrades) { _upgrades = upgrades; }

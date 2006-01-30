@@ -51,12 +51,13 @@ class QueueItemConflict : public QueueItem {
   private:
     const Capability _capability;		// the conflicting capability
     PoolItem_Ref _conflicting_item;		// the item which issued the conflict, can be 'empty' for 'extraConflicts'
+    bool _soft;
 
     bool _actually_an_obsolete;
 
   public:
 
-    QueueItemConflict (const ResPool & pool, const Capability & capability, PoolItem_Ref item);
+    QueueItemConflict (const ResPool & pool, const Capability & capability, PoolItem_Ref item, bool soft = false);
     virtual ~QueueItemConflict();
 
     // ---------------------------------- I/O
@@ -69,6 +70,7 @@ class QueueItemConflict : public QueueItem {
     // ---------------------------------- accessors
 
     const Capability & capability (void) const { return _capability; }
+    bool isSoft (void) const { return _soft; }
     bool actuallyAnObsolete (void) const { return _actually_an_obsolete; }
     void setActuallyAnObsolete (void) { _actually_an_obsolete = true; }
 

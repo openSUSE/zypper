@@ -52,14 +52,15 @@ class QueueItemUninstall : public QueueItem {
       UNSATISFIED,			// unsatisfied dep, must be unistalled since required dep isnt provided anymore
       BACKOUT,				// back out during verify
       UPGRADE,				// its being upgraded, so the original get uninstalled, find out if this breaks something
-      DUPLICATE,				// duplicate install
-      EXPLICIT,				// user request
+      DUPLICATE,			// duplicate install
+      EXPLICIT				// user request
     } UninstallReason;
 
 
   private:
     PoolItem_Ref _item;			// the item to-be-uninstalled
     UninstallReason _reason;
+    bool _soft;
     Capability _cap_leading_to_uninstall;
     PoolItem_Ref _upgraded_to;		// if the uninstall is actually an upgrade
 
@@ -71,7 +72,7 @@ class QueueItemUninstall : public QueueItem {
 
   public:
 
-    QueueItemUninstall (const ResPool & pool, PoolItem_Ref item, UninstallReason reason);
+    QueueItemUninstall (const ResPool & pool, PoolItem_Ref item, UninstallReason reason, bool soft = false);
     virtual ~QueueItemUninstall();
 
     // ---------------------------------- I/O

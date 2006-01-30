@@ -60,7 +60,7 @@ IMPL_PTR_TYPE(QueueItemRequire);
 std::ostream &
 QueueItemRequire::dumpOn( std::ostream & os ) const
 {
-    os << "[Require: ";
+    os << "[" << (_soft?"Soft":"") << "Require: ";
     os << _capability;
     if (_requiring_item) {
 	os << ", Required by " << _requiring_item;
@@ -78,9 +78,10 @@ QueueItemRequire::dumpOn( std::ostream & os ) const
 
 //---------------------------------------------------------------------------
 
-QueueItemRequire::QueueItemRequire (const ResPool & pool, const Capability & dep)
+QueueItemRequire::QueueItemRequire (const ResPool & pool, const Capability & dep, bool soft)
     : QueueItem (QUEUE_ITEM_TYPE_REQUIRE, pool)
     , _capability (dep)
+    , _soft (soft)
     , _remove_only (false)
     , _is_child (false)
 {
@@ -143,6 +144,7 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
     const Capability capability;
     ResolverContext_Ptr context;
     ResPool pool;
+
     PoolItemList providers;		// the provider which matched
     UniqTable uniq;
 
@@ -307,13 +309,13 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	DBG << "requirement is met by " << num_providers << " resolvable";
     }
 
-    std::string msg;
-
     //
     // No providers found
     //
 
     if (num_providers == 0) {
+
+	if (_soft) goto finished;			// don't care for soft requires
 
 	DBG << "Unfulfilled requirement, try different solution" << endl;
 
@@ -489,7 +491,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	DBG << "Found exactly one resolvable, installing it." << endl;
 
-	QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), info.providers.front());
+	QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), info.providers.front(), _soft);
 	install_item->addDependency (_capability);
 
 	// The requiring item could be NULL if the requirement was added as an extra dependency.
@@ -512,7 +514,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	QueueItemBranch_Ptr branch_item = new QueueItemBranch (pool());
 
 	for (PoolItemList::const_iterator iter = info.providers.begin(); iter != info.providers.end(); iter++) {
-	    QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), *iter);
+	    QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), *iter, _soft);
 	    install_item->addDependency (_capability);
 	    branch_item->addItem (install_item);
 
@@ -527,6 +529,8 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
     } else {
 	abort ();
     }
+
+finished:
 
     return true;
 }

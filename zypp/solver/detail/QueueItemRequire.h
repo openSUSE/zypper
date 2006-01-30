@@ -54,6 +54,7 @@ class QueueItemRequire : public QueueItem {
 
   private:
     const Capability _capability;		// the required capability
+    bool _soft;
 
     PoolItem_Ref _requiring_item;		// who's requiring it
 
@@ -65,7 +66,7 @@ class QueueItemRequire : public QueueItem {
 
   public:
 
-    QueueItemRequire (const ResPool & pool, const Capability & cap);
+    QueueItemRequire (const ResPool & pool, const Capability & cap, bool soft = false);
     virtual ~QueueItemRequire();
 
     // ---------------------------------- I/O
@@ -76,6 +77,8 @@ class QueueItemRequire : public QueueItem {
     { return obj.dumpOn (str); }
 
     // ---------------------------------- accessors
+
+    bool isSoft (void) const { return _soft; }
 
     const Capability & capability (void) const { return _capability; }
 

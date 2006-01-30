@@ -62,7 +62,7 @@ IMPL_PTR_TYPE(QueueItemInstall);
 std::ostream &
 QueueItemInstall::dumpOn( std::ostream & os ) const
 {
-    os << "[Install: ";
+    os << "[" << (_soft?"Soft":"") << "Install: ";
     os << _item;
     if (_upgrades) {
 	os << ", Upgrades ";
@@ -92,9 +92,10 @@ QueueItemInstall::dumpOn( std::ostream & os ) const
 
 //---------------------------------------------------------------------------
 
-QueueItemInstall::QueueItemInstall (const ResPool & pool, PoolItem_Ref item)
+QueueItemInstall::QueueItemInstall (const ResPool & pool, PoolItem_Ref item, bool soft)
     : QueueItem (QUEUE_ITEM_TYPE_INSTALL, pool)
     , _item (item)
+    , _soft (soft)
     , _channel_priority (0)
     , _other_penalty (0)
     , _explicitly_requested (false)
@@ -252,7 +253,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	// the upgrade will uninstall the installed one, take care of this
 
-	uninstall_item = new QueueItemUninstall (pool(), _upgrades, QueueItemUninstall::UPGRADE);
+	uninstall_item = new QueueItemUninstall (pool(), _upgrades, QueueItemUninstall::UPGRADE, _soft);
 	uninstall_item->setUpgradedTo (_item);
 
 	if (_explicitly_requested)
@@ -316,7 +317,23 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	    if (!context->requirementIsMet (cap)) {
 		DBG << "this requirement is still unfulfilled" << endl;
-		QueueItemRequire_Ptr req_item = new QueueItemRequire (pool(), cap);
+		QueueItemRequire_Ptr req_item = new QueueItemRequire (pool(), cap, _soft);
+		req_item->addPoolItem (_item);
+		qil.push_front (req_item);
+	    }
+
+	}
+
+	caps = _item->dep (Dep::RECOMMENDS);
+
+	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
+
+	    const Capability cap = *iter;
+	    DBG << "this recommends " << cap << endl;
+
+	    if (!context->requirementIsMet (cap)) {
+		DBG << "this recommends is still unfulfilled" << endl;
+		QueueItemRequire_Ptr req_item = new QueueItemRequire (pool(), cap, true);	// this is a soft requires
 		req_item->addPoolItem (_item);
 		qil.push_front (req_item);
 	    }
@@ -330,7 +347,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	    const Capability cap = *iter;
 	    DBG << "this conflicts with '" << cap << "'" << endl;
-	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item);
+	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item, _soft);
 	    qil.push_front (conflict_item);
 
 	}
@@ -342,7 +359,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	    const Capability cap = *iter;
 	    DBG << "this obsoletes " <<  cap << endl;
-	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item);
+	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item, _soft);
 	    conflict_item->setActuallyAnObsolete();
 	    qil.push_front (conflict_item);
 
@@ -381,7 +398,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	    DBG << "because: '" << conflicting_item << "'" << endl;
 
-	    uninstall_item = new QueueItemUninstall (pool(), conflicting_item, QueueItemUninstall::CONFLICT);
+	    uninstall_item = new QueueItemUninstall (pool(), conflicting_item, QueueItemUninstall::CONFLICT, _soft);
 	    uninstall_item->setDueToConflict ();
 	    log_info = new ResolverInfoConflictsWith (conflicting_item, _item);
 	    uninstall_item->addInfo (log_info);
