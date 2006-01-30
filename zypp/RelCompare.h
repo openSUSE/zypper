@@ -59,11 +59,11 @@ namespace zypp
    * // Editions sets use lexicographical order per default:
    * std::set<Edition>
    *
-   * // An Edition set using Edition::comapre as order:
+   * // An Edition set using Edition::compare as order:
    * std::set<Edition,CompareByLT<Edition> >;
    *
-   * // An Edition set using Edition::match as order:
-   * std::set<Edition,CompareByLT<Edition,Edition::Match> >;
+   * // Edition::match is not transitive, thus not an appropriate
+   * // order relation for std::set or std::map.
    * \endcode
    *
    * Classes like zypp:Range are templated by  by type and general
@@ -155,6 +155,19 @@ namespace zypp
    * Expects \a _Compare to be suitable for use in \ref compareByRel.
    * Defaults to Compare\<_Tp\>.
   */
+  template<class _Tp, class _Compare = Compare<_Tp> >
+    struct CompareBy : public std::binary_function<_Tp,_Tp,bool>
+    {
+      CompareBy( Rel op_r )
+      : _op( op_r )
+      {}
+
+      bool operator()( const _Tp & lhs, const _Tp & rhs ) const
+      { return compareByRel( _op, lhs, rhs, _Compare() ); }
+
+      Rel _op;
+    };
+
   template<class _Tp, class _Compare = Compare<_Tp> >
     struct CompareByEQ : public std::binary_function<_Tp,_Tp,bool>
     {

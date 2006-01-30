@@ -53,9 +53,11 @@ namespace zypp
    * in the example.<BR>
    * If Edition is used as key in a std::container, per default
    * <em>plain string comparison</em> is used. If you want to compare by
-   * version, let the container use Edition::ComareLess to compare.
+   * version, let the container use \ref CompareByLT<Edition> to compare.
    *
-   * \attention
+   * \attention Edition::match compares two editions, treating empty
+   * version or release strings as wildcard. Thus match is not transitive,
+   * and you don't want to use it to order keys in a a std::container.
    *
    * \ingroup g_BackendSpecific
    * \todo Define exceptions.
