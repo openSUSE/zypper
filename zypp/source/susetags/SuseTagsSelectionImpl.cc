@@ -45,13 +45,13 @@ namespace zypp
     { return _summary; }
 
     Label SuseTagsSelectionImpl::category() const
-    { return Label(); }
+    { return _category; }
 
     bool SuseTagsSelectionImpl::visible() const
     { return _visible; }
 
     Label SuseTagsSelectionImpl::order() const
-    { return Label(); }
+    { return _order; }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

@@ -10,6 +10,7 @@
  *
 */
 #include <iostream>
+#include <fstream>
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 
@@ -17,6 +18,7 @@
 
 #include "zypp/source/susetags/SuseTagsImpl.h"
 #include "zypp/source/susetags/PackagesParser.h"
+#include "zypp/source/susetags/SelectionSelFileParser.h"
 
 using std::endl;
 
@@ -70,6 +72,35 @@ namespace zypp
         _store.insert( content.begin(), content.end() );
         DBG << "SuseTagsImpl (fake) from " << p << ": "
             << content.size() << " packages" << endl;
+
+	    
+	// parse selections
+	p = provideFile(_path + "suse/setup/descr/selections");
+	
+	std::ifstream sels (p.asString().c_str());
+	
+	while (!sels.eof())
+	{
+	    string selfile;
+	    
+	    getline(sels,selfile);
+
+	    if (selfile.empty() ) continue;
+	    
+	    DBG << "Going to parse selection " << selfile << endl;
+	    
+	    Pathname file = provideFile(_path + "suse/setup/descr/" + selfile);
+	    DBG << "Selection file to parse " << file << endl;
+	    
+	    Selection::Ptr sel( parseSelection( file ) );
+	    
+	    DBG << "Selection:" << sel << endl;
+	    
+	    if (sel)
+    		_store.insert( sel );
+
+	    DBG << "Parsing of " << file << " done" << endl;
+	}
       }
       ///////////////////////////////////////////////////////////////////
       //
@@ -98,3 +129,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+ 
