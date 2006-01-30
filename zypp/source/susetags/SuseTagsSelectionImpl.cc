@@ -37,6 +37,22 @@ namespace zypp
     SuseTagsSelectionImpl::~SuseTagsSelectionImpl()
     {}
 
+
+    Label SuseTagsSelectionImpl::summary() const
+    { return Label(); }
+
+    Text SuseTagsSelectionImpl::description() const
+    { return Text(); }
+
+    Label SuseTagsSelectionImpl::category() const
+    { return Label(); }
+
+    bool SuseTagsSelectionImpl::visible() const
+    { return false; }
+
+    Label SuseTagsSelectionImpl::order() const
+    { return Label(); }
+
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////

@@ -20,8 +20,6 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/String.h"
 
-#include "zypp/Selection.h"
-#include "zypp/detail/SelectionImpl.h"
 
 #include "zypp/source/susetags/SelectionSelFileParser.h"
 #include <boost/regex.hpp>
@@ -48,19 +46,54 @@ namespace zypp
         }
       }
 
-      std::list<Selection::Ptr> parseSelections( const Pathname & file_r )
+      Selection::Ptr parseSelection( const Pathname & file_r )
       {
+        SelectionSelFileParser p;
+        p.parse( file_r );
+        return p.result;
 
       }
 
+      SelectionSelFileParser::SelectionSelFileParser()
+      {
+        selImpl = shared_ptr<SuseTagsSelectionImpl>(new SuseTagsSelectionImpl);
+      }
+
+
       void SelectionSelFileParser::consume( const SingleTag &tag )
       {
-
+        if ( tag.name == "Sum" )
+        {
+          selImpl->_summary[tag.modifier] = tag.value;
+        }
+        else if ( tag.name == "Ver" )
+        {
+          selImpl->_parser_version = tag.value;
+        }
+        else if ( tag.name == "Sel" )
+        {
+          std::string line = tag.value;
+          std::vector<std::string> words;
+          str::split( line, std::back_inserter(words), " " );
+          DBG << "[" << words[0] << "]" << "[" << words[1] << "]" << "[" << words[2] << "]" << "[" << words[3] << "]" << std::endl;
+          selImpl->_name = words[0];
+          selImpl->_version = words[1];
+          selImpl->_release = words[2];
+          selImpl->_arch = words[3];
+        }
+        else if ( tag.name == "Vis" )
+        {
+          selImpl->_visible = (tag.value == "true") ? true : false;
+        }
+        
       }
       
       void SelectionSelFileParser::consume( const MultiTag &tag )
       {
-
+        if ( tag.name == "Req" )
+        {
+          selImpl->_requires = tag.values;
+        }
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -84,34 +117,43 @@ namespace zypp
             // str::strtonum(buffer, entry_r.count);
             dumpRegexpResults(what);
           }
-          else if(boost::regex_match(buffer, what, boost::regex("^\\+([a-zA-Z]+)(\\.([^[:space:]]+))?:$"), boost::match_extra))
+          else if(boost::regex_match(buffer, what, boost::regex("^\\+([a-zA-Z^\\.]+)(\\.([^[:space:]]+))?:$"), boost::match_extra))
           {
+            MultiTag tag;
+            tag.name = what[1];
+            tag.modifier = what[3];
+
             DBG << "start list" << std::endl;
             dumpRegexpResults(what);
             // start of list +Something.lang:
             // lang is optional
             // str::strtonum(buffer, entry_r.count);
-            std::set<std::string> elements;
             std::string element;
             boost::smatch element_what;
             getline(file, element);
             // while we dont find the list terminator
-            while( ! boost::regex_match(element, element_what, boost::regex("^\\-([a-zA-Z]+)(\\.([_a-zA-Z]+))?:$"), boost::match_extra))
+            while( ! boost::regex_match(element, element_what, boost::regex("^\\-([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:$"), boost::match_extra))
             {
-              elements.insert(element);
+              tag.values.insert(element);
               DBG << element << std::endl;
               getline(file, element);
               //dumpRegexpResults(element_what);
             }
             DBG << "end list" << std::endl;
+            consume(tag);
             // end of list
           }
-          else if(boost::regex_match(buffer, what, boost::regex("^=([a-zA-Z])+(\\.([^[:space:]]+))?:[\\s]*(.*)$"), boost::match_extra))
+          else if(boost::regex_match(buffer, what, boost::regex("^=([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:[[:space:]]+(.*)$"), boost::match_extra))
           {
+            SingleTag tag;
+            tag.name = what[1];
+            tag.modifier = what[3];
+            tag.value = what[4];
             DBG << "assign" << std::endl;
             // start of list
             // str::strtonum(buffer, entry_r.count);
             dumpRegexpResults(what);
+            consume(tag);
           }
           else if(boost::regex_match(buffer, what, boost::regex("^([[:space:]]*)$"), boost::match_extra))
           {

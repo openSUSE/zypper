@@ -20,6 +20,8 @@
 #include "zypp/parser/tagfile/Tags.h"
 #include "zypp/parser/tagfile/ParseException.h"
 #include "zypp/Selection.h"
+#include "zypp/source/susetags/SuseTagsSelectionImpl.h"
+
 #include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -39,9 +41,9 @@ namespace zypp
       /** Tagfile parser. */
       struct SelectionSelFileParser
       {
-        std::list<Selection::Ptr> result;
-        shared_ptr<detail::SelectionImpl> selImpl;
-
+        Selection::Ptr result;
+        shared_ptr<SuseTagsSelectionImpl> selImpl;
+        
         struct MultiTag
         {
           std::string name;
@@ -56,6 +58,7 @@ namespace zypp
           std::string value;
         };
 
+        SelectionSelFileParser();
         virtual ~SelectionSelFileParser()
         {}
 
@@ -68,7 +71,7 @@ namespace zypp
         void consume( const MultiTag &tag );
       };
       ///////////////////////////////////////////////////////////////////
-      std::list<Selection::Ptr> parseSelections( const Pathname & file_r );
+      Selection::Ptr parseSelection( const Pathname & file_r );
       /////////////////////////////////////////////////////////////////
     } // namespace source
     ///////////////////////////////////////////////////////////////////

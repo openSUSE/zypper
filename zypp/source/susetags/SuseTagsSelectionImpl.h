@@ -56,8 +56,24 @@ namespace zypp
       virtual bool isBase() const;
       virtual PMError provideSelToInstall( Pathname & path_r ) const;
       */
+
+      virtual Label summary() const;
+      virtual Text description() const;
+      virtual Label category() const;
+      virtual bool visible() const;
+      virtual Label order() const;
+
+      std::map< std::string, std::string> _summary;
+      std::string _parser_version;
+      std::string _name;
+      std::string _version;
+      std::string _release;
+      std::string _arch;
+      bool _visible;
+
       std::set<std::string> _suggests;
       std::set<std::string> _recommends;
+      std::set<std::string> _requires;
       std::set<std::string> _supported_locales;
       std::map< std::string, std::set<std::string> > _insnotify;
       std::map< std::string, std::set<std::string> > _delnotify;
