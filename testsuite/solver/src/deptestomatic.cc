@@ -547,11 +547,11 @@ load_source (const string & alias, const string & filename, const string & type,
 
     try {
 	media::MediaAccess::Ptr media = new media::MediaAccess();
-	Source::Impl_Ptr impl = new HelixSourceImpl (media, pathname, alias);
+	Source_Ref::Impl_Ptr impl = new HelixSourceImpl (media, pathname, alias);
 	SourceFactory _f;
-	Source s = _f.createFrom( impl );
+	Source_Ref s = _f.createFrom( impl );
 
-	if (s) {
+	if (s != Source_Ref::noSource) {
 	    count = impl->resolvables (s).size();
 	    unsigned snum = manager->addSource (s);
 	    cout << "Added source '" << alias << "' as #" << snum  << ":[" << s.alias() << "]" << endl;

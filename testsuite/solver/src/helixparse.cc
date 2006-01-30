@@ -35,9 +35,9 @@ int main( int argc, char * argv[] )
     Pathname p = argv[1];
 
     media::MediaAccess::Ptr media = new media::MediaAccess();
-    Source::Impl_Ptr impl = new HelixSourceImpl (media, p);
+    Source_Ref::Impl_Ptr impl = new HelixSourceImpl (media, p);
     SourceFactory _f;
-    Source s = _f.createFrom( impl );
+    Source_Ref s = _f.createFrom( impl );
     ResStore store = s.resolvables();
     for (ResStore::const_iterator it = store.begin();
 	it != store.end(); it++)
