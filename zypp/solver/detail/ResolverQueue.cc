@@ -67,6 +67,7 @@ operator<<( ostream& os, const ResolverQueue & resolverqueue)
 ResolverQueue::ResolverQueue (const ResPool & pool, ResolverContext_Ptr context)
     : _context (context)
 {
+DBG << "ResolverQueue::ResolverQueue(pool, " << context << ")" << endl;
     if (context == NULL)
 	_context = new ResolverContext(pool);
 }
@@ -294,9 +295,9 @@ copy_queue_except_for_branch (ResolverQueue_Ptr queue, QueueItem_Ptr branch_qite
 {
     ResolverContext_Ptr new_context;
     ResolverQueue_Ptr new_queue;
-
+MIL << "copy_queue_except_for_branch" << endl;
     new_context = new ResolverContext (queue->context()->pool(), queue->context());
-    new_queue = new ResolverQueue (new_context->pool());
+    new_queue = new ResolverQueue (new_context->pool(), new_context);
 
     QueueItemList qil = queue->qitems();
     for (QueueItemList::const_iterator iter = qil.begin(); iter != qil.end(); ++iter) {
