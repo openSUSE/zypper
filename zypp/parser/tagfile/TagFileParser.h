@@ -6,59 +6,84 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/parser/tagfile/Parser.h
+/** \file	zypp/parser/tagfile/TagFileParser.h
  *
 */
-#ifndef ZYPP_PARSER_TAGFILE_SelectionSelFilePARSER_H
-#define ZYPP_PARSER_TAGFILE_SelectionSelFilePARSER_H
+#ifndef ZYPP_PARSER_TAGFILE2_H
+#define ZYPP_PARSER_TAGFILE2_H
 
 #include <iosfwd>
 #include <set>
 #include <map>
 #include <list>
 
-#include "zypp/parser/tagfile/TagFileParser.h"
+#include "zypp/parser/tagfile/Tags.h"
 #include "zypp/parser/tagfile/ParseException.h"
-#include "zypp/Selection.h"
-#include "zypp/source/susetags/SuseTagsSelectionImpl.h"
-
 #include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace source
+  namespace parser
   { /////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////
-    namespace susetags
+    namespace tagfile
     { /////////////////////////////////////////////////////////////////
 
       ///////////////////////////////////////////////////////////////////
       //
-      //	CLASS NAME : SelectionSelFileParser
+      //	CLASS NAME : TagFileParser
       //
       /** Tagfile parser. */
-      struct SelectionSelFileParser : public zypp::parser::tagfile::TagFileParser
-      {
-        Selection::Ptr result;
-        shared_ptr<SuseTagsSelectionImpl> selImpl;
-        
-        SelectionSelFileParser();
-        virtual ~SelectionSelFileParser()
+      struct TagFileParser
+      { 
+        struct MultiTag
+        {
+          std::string name;
+          std::string modifier;
+          std::set<std::string> values;
+        };
+
+        struct SingleTag
+        {
+          std::string name;
+          std::string modifier;
+          std::string value;
+        };
+
+        TagFileParser();
+        virtual ~TagFileParser()
         {}
 
-        void consume( const SingleTag &tag );
-        void consume( const MultiTag &tag );
-        void endParse();
+        /* Parse file and invoke consume on each tag found.
+         * \throw ParseException
+         * \todo more doc on Ecaptions.
+        */
+        virtual void parse( const Pathname & file_r);
+
+        /*
+         * Called when start parsing
+         */ 
+        virtual void beginParse();
+        /*
+         * Called when a single tag is found
+         */ 
+        virtual void consume( const SingleTag &tag );
+        /*
+         * Called when a multiple tag is found
+         */ 
+        virtual void consume( const MultiTag &tag );
+        /*
+         * Called when the parse is done
+         */ 
+        virtual void endParse();
       };
-      ///////////////////////////////////////////////////////////////////
-      Selection::Ptr parseSelection( const Pathname & file_r );
       /////////////////////////////////////////////////////////////////
-    } // namespace source
+    } // namespace parser
     ///////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////
-  } // namespace susetags
+  } // namespace tagfile
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
