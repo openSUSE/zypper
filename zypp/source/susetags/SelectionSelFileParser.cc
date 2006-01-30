@@ -85,7 +85,14 @@ namespace zypp
         {
           selImpl->_visible = (tag.value == "true") ? true : false;
         }
-        
+        else if ( tag.name == "Cat" )
+        {
+          selImpl->_category = tag.value;
+        }
+         else if ( tag.name == "Ord" )
+        {
+          selImpl->_order = tag.value;
+        }
       }
       
       void SelectionSelFileParser::consume( const MultiTag &tag )
@@ -93,6 +100,18 @@ namespace zypp
         if ( tag.name == "Req" )
         {
           selImpl->_requires = tag.values;
+        }
+        if ( tag.name == "Rec" )
+        {
+          selImpl->_recommends = tag.values;
+        }
+        else if ( tag.name == "Con" )
+        {
+          selImpl->_conflicts = tag.values;
+        }
+        else if ( tag.name == "Ins" )
+        {
+          selImpl->_inspacks[tag.modifier] = tag.values;
         }
       }
 
@@ -117,7 +136,7 @@ namespace zypp
             // str::strtonum(buffer, entry_r.count);
             dumpRegexpResults(what);
           }
-          else if(boost::regex_match(buffer, what, boost::regex("^\\+([a-zA-Z^\\.]+)(\\.([^[:space:]]+))?:$"), boost::match_extra))
+          else if(boost::regex_match(buffer, what, boost::regex("^\\+([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:$"), boost::match_extra))
           {
             MultiTag tag;
             tag.name = what[1];

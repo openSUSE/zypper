@@ -64,16 +64,20 @@ namespace zypp
       virtual Label order() const;
 
       std::map< std::string, std::string> _summary;
+      std::string _description;
       std::string _parser_version;
       std::string _name;
       std::string _version;
       std::string _release;
       std::string _arch;
+      std::string _order;
+      std::string _category;
       bool _visible;
 
       std::set<std::string> _suggests;
       std::set<std::string> _recommends;
       std::set<std::string> _requires;
+      std::set<std::string> _conflicts;
       std::set<std::string> _supported_locales;
       std::map< std::string, std::set<std::string> > _insnotify;
       std::map< std::string, std::set<std::string> > _delnotify;

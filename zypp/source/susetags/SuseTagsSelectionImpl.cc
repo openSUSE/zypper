@@ -48,7 +48,7 @@ namespace zypp
     { return Label(); }
 
     bool SuseTagsSelectionImpl::visible() const
-    { return false; }
+    { return _visible; }
 
     Label SuseTagsSelectionImpl::order() const
     { return Label(); }
