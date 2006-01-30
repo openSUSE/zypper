@@ -197,27 +197,27 @@ ResolverContext::install (PoolItem_Ref item, bool is_soft, int other_penalty)
 	setStatus (item, ResStatus::toBeInstalled);
 
     if (status.isUninstalled()) {
-#if 0
-	Package::constPtr pkg = asKind<Package>(item.resolvable());	// try to access it as a package
+	Resolvable::constPtr res = item.resolvable();
+	Package::constPtr pkg = asKind<Package>(res);			// try to access it as a package
 	if (pkg) {							// if its !=NULL, get size information
 
 	    _download_size += pkg->archivesize();
-	    _install_size += pkg->sourcesize();
+	    _install_size += pkg->size();
 
 	}
-#endif
-#warning Needs source backref
-#if 0
+
 	int priority;
+#if 0
 	if (item->local())
 	    priority = 0;
 	else {
-	    priority = getChannelPriority (item->channel ());
-	}
+#endif
+	    priority = getSourcePriority (item->source());
+//	}
 
 	if (priority < _min_priority) _min_priority = priority;
 	if (priority > _max_priority) _max_priority = priority;
-#endif
+
 	_other_penalties += other_penalty;
 
     }
@@ -251,30 +251,30 @@ ResolverContext::upgrade (PoolItem_Ref item, PoolItem_Ref old_item, bool is_soft
     }
 
     if (status.isUninstalled()) {
-#if 0
-	Package::constPtr pkg = asKind<Package>(item.resolvable());	// try to access it as a package
+	Resolvable::constPtr res = item.resolvable();
+	Package::constPtr pkg = asKind<Package>(res);			// try to access it as a package
 	if (pkg) {							// if its !=NULL, get size information
 
 	    _download_size += pkg->archivesize();
-	    _install_size += pkg->sourcesize();
+	    _install_size += pkg->size();
 
 	// FIXME: Incomplete
 	// We should change installed_size to reflect the difference in
 	//   installed size between the old and new versions.
 	}
-#endif
-#warning Needs source backref
-#if 0
+
 	int priority;
+#if 0
 	if (item->local())
 	    priority = 0;
 	else {
-	    priority = getChannelPriority (item->channel());
-	}
+#endif
+	    priority = getSourcePriority (item->source());
+//	}
 
 	if (priority < _min_priority) _min_priority = priority;
 	if (priority > _max_priority) _max_priority = priority;
-#endif
+
 	_other_penalties += other_penalty;
     }
 
@@ -327,12 +327,11 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
     }
 
     if (status.isInstalled()) {
-#if 0
-	Package::constPtr pkg = asKind<Package>(item.resolvable());	// try to access it as a package
+	Resolvable::constPtr res = item.resolvable();
+	Package::constPtr pkg = asKind<Package>(res);		// try to access it as a package
 	if (pkg) {							// if its !=NULL, get size information
-	    _install_size -= pkg->sourcesize();
+	    _install_size -= pkg->size();
 	}
-#endif
     }
 
     return true;
@@ -1264,20 +1263,18 @@ ResolverContext::isParallelInstall (PoolItem_Ref item) const
     return info.flag;
 }
 
-#warning needs source backref
-#if 0
-int
-ResolverContext::getChannelPriority (Channel_constPtr channel) const
-{
-    bool is_subscribed;
-    int priority;
 
-    is_subscribed = channel->isSubscribed ();
-    priority = channel->getPriority (is_subscribed);
+int
+ResolverContext::getSourcePriority (Source_Ref source) const
+{
+//    bool is_subscribed;
+    int priority = 0;
+#warning getSourcePriority not implemented
+//    is_subscribed = channel->isSubscribed ();
+//    priority = channel->getPriority (is_subscribed);
 
     return priority;
 }
-#endif
 
 //---------------------------------------------------------------------------
 

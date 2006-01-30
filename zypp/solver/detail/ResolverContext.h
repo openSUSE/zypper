@@ -199,6 +199,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     void spew (void) const;
     void spewInfo (void) const;
 
+    int getSourcePriority (Source_Ref source) const;
 };
 
 ///////////////////////////////////////////////////////////////////
