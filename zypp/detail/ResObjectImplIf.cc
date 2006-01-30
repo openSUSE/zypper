@@ -44,7 +44,7 @@ namespace zypp
       { return false; }
 
       Source_Ref ResObjectImplIf::source() const
-      { return Source_Ref::nullimpl(); }
+      { return Source_Ref::noSource; }
 
       Label ResObjectImplIf::instSrcLabel() const
       { return Label(); }

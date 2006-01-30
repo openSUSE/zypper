@@ -50,10 +50,20 @@ namespace zypp
 
   public:
 
+    /** Default ctor: noSource.
+     * Real Sources are to be created via SourceFactory.
+    */
+    Source_Ref();
+
+    /** A dummy Source providing nothing, doing nothing.
+     * \todo provide a _constRef
+    */
+    static const Source_Ref noSource;
+
+  public:
+
     /** All resolvables provided by this source. */
     const ResStore & resolvables();
-    /** Null implementation */
-    static Source_Ref & nullimpl();
 
     /** Provide a file to local filesystem */
     const Pathname provideFile(const Pathname & file_r,
@@ -81,10 +91,14 @@ namespace zypp
     Url url (void) const;
     const Pathname & path (void) const;
 
+  public:
     /** Conversion to bool to allow pointer style tests
-     *  for nonNULL \ref source impl. */
+     *  for nonNULL \ref source impl.
+     * \todo fix by providing a safebool basecalss, doing the 'nasty'
+     * things.
+    */
     // see http://www.c-plusplus.de/forum/viewtopic-var-t-is-113762-and-start-is-0-and-postdays-is-0-and-postorder-is-asc-and-highlight-is-.html
-    //  for the glory details
+    // for the glory details
 
     typedef void (Source_Ref::*unspecified_bool_type)();
 
@@ -96,14 +110,12 @@ namespace zypp
       return &Source_Ref::enable;	// return pointer to a void() function since the typedef is like this
     }
 
-
   private:
     /** Factory */
     friend class SourceFactory;
     friend class SourceManager;
+
   private:
-    /** Factory ctor */
-    Source_Ref();
     /** Factory ctor */
     explicit
     Source_Ref( const Impl_Ptr & impl_r );
@@ -116,10 +128,6 @@ namespace zypp
   private:
     /** Pointer to implementation */
     Impl_Ptr _pimpl;
-
-    static Source_Ref _nullimpl;
-    static bool _nullimpl_initialized;
-
   };
   ///////////////////////////////////////////////////////////////////
 

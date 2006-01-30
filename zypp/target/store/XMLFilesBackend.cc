@@ -53,10 +53,10 @@ class XMLFilesBackend::Private
 {
   public:
   Private()
-  : source(Source::nullimpl())
+  : source(Source::noSource)
   { }
   bool randomFileName;
-  Source & source;
+  Source_Ref  source;
   YUMSourceImpl sourceimpl;
 };
 
@@ -241,7 +241,7 @@ XMLFilesBackend::storedObjects()
     {
       DBG << "adding objects back" << std::endl;
       objects.push_back(*it);
-    } 
+    }
   }
   return objects;
 }
@@ -256,7 +256,7 @@ XMLFilesBackend::storedObjects(const Resolvable::Kind kind)
   // return empty list if the dir does not exist
   if ( !exists( dir_path ) )
     return std::list<Resolvable::Ptr>();
-    
+
   for ( directory_iterator dir_itr( dir_path ); dir_itr != end_iter; ++dir_itr )
   {
     DBG << "[" << resolvableKindToString( kind, false ) << "] - " << dir_itr->leaf() << std::endl;

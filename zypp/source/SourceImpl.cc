@@ -25,17 +25,6 @@ namespace zypp
 
     IMPL_PTR_TYPE(SourceImpl);
 
-    SourceImpl_Ptr SourceImpl::_nullimpl;
-
-    /** Null implementation */
-    SourceImpl_Ptr SourceImpl::nullimpl()
-    {
-      if (_nullimpl == 0)
-	_nullimpl = new SourceImpl;
-      return _nullimpl;
-    }
-
-
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : SourceImpl::SourceImpl
@@ -61,12 +50,13 @@ namespace zypp
     SourceImpl::~SourceImpl()
     {}
 
-    const ResStore & SourceImpl::resolvables(Source_Ref source_r)
+    const ResStore & SourceImpl::resolvables(Source_Ref source_r) const
     {
-      if (! _res_store_initialized)
+      if ( !_res_store_initialized )
       {
-	createResolvables(source_r);
-	_res_store_initialized = true;
+        // cast away const to allow late init
+	const_cast<SourceImpl*>(this)->createResolvables(source_r);
+	const_cast<SourceImpl*>(this)->_res_store_initialized = true;
       }
       return _store;
      }
@@ -112,10 +102,10 @@ namespace zypp
 
     Url SourceImpl::url (void) const
     { return _media->url(); }
-    
+
     const Pathname & SourceImpl::path (void) const
     { return _path; }
-    
+
     std::ostream & SourceImpl::dumpOn( std::ostream & str ) const
     { return str << (_alias.empty() ? "SourceImpl" : _alias); }
 

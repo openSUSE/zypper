@@ -52,6 +52,7 @@ namespace zypp
       SourceImpl()
       : _res_store_initialized(true) // in case of null source, nothing to read
       {}
+
       /** Ctor. */
       SourceImpl(media::MediaAccess::Ptr & media_r,
                  const Pathname & path_r = "/",
@@ -59,13 +60,10 @@ namespace zypp
       /** Dtor. */
       virtual ~SourceImpl();
 
-      /** Null implementation */
-      static SourceImpl_Ptr nullimpl();
-
     public:
 
       /** All resolvables provided by this source. */
-      const ResStore & resolvables(Source_Ref source_r);
+      const ResStore & resolvables(Source_Ref source_r) const;
 
       /**
        * Provide a file to local filesystem
@@ -107,9 +105,9 @@ namespace zypp
       virtual unsigned priority_unsubscribed (void) const;
 
       Url url (void) const;
-      
+
       const Pathname & path (void) const;
-      
+
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const;
 
@@ -130,12 +128,19 @@ namespace zypp
       unsigned _priority_unsubscribed;
 
     private:
-      /** Null implementation */
-      static SourceImpl_Ptr _nullimpl;
-      /** ResStore initialized? */
-      bool _res_store_initialized;
-      /** Fill in the ResStore */
+      /**  */
+      /** Late initialize the ResStore. */
       virtual void createResolvables(Source_Ref source_r);
+      /** Whether the ResStore is initialized. */
+      bool _res_store_initialized;
+
+    public:
+      /** Offer default Impl. */
+      static SourceImpl_Ptr nullimpl()
+      {
+        static SourceImpl_Ptr _nullimpl( new SourceImpl );
+        return _nullimpl;
+      }
     };
     ///////////////////////////////////////////////////////////////////
 

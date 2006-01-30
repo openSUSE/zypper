@@ -23,12 +23,15 @@ using namespace std;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  const Source_Ref Source_Ref::noSource;
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Source_Ref::Source_Ref
   //	METHOD TYPE : Ctor
   //
   Source_Ref::Source_Ref()
+  : _pimpl( Impl::nullimpl() )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -41,21 +44,6 @@ namespace zypp
   {
     assert( impl_r );
   }
-
-  Source_Ref Source_Ref::_nullimpl;
-  bool Source_Ref::_nullimpl_initialized = false;
-
-  /** Null implementation */
-  Source_Ref & Source_Ref::nullimpl()
-  {
-    if (! _nullimpl_initialized)
-    {
-      _nullimpl = SourceFactory().createFrom(source::SourceImpl::nullimpl());
-      _nullimpl_initialized = true;
-    }
-    return _nullimpl;
-  }
-
 
   ///////////////////////////////////////////////////////////////////
   //
