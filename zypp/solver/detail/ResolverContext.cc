@@ -1126,7 +1126,7 @@ ResolverContext::spewInfo (void) const
 struct RequirementMet : public resfilter::OnCapMatchCallbackFunctor
 {
     ResolverContext_constPtr context;
-    const Capability & capability;
+    const Capability capability;
     bool flag;
 
     RequirementMet (ResolverContext_constPtr ctx, const Capability & c)
@@ -1330,16 +1330,19 @@ ResolverContext::compare (ResolverContext_constPtr context) const
 	return 0;
 
     cmp = partialCompare (context);
+MIL << "partialCompare " << cmp << endl;
     if (cmp)
 	return cmp;
 
     /* High numbers are bad.  Smaller downloads are best. */
     cmp = rev_num_cmp (_download_size, context->_download_size);
+MIL << "download size " << cmp << endl;
     if (cmp)
 	return cmp;
 
     /* High numbers are bad.  Less disk space consumed is good. */
     cmp = rev_num_cmp (_install_size, context->_install_size);
+MIL << "install size " << cmp << endl;
     if (cmp)
 	return cmp;
 

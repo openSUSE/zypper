@@ -140,7 +140,7 @@ struct UniqTable
 struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 {
     PoolItem_Ref requirer;
-    const Capability & capability;
+    const Capability capability;
     ResolverContext_Ptr context;
     ResPool pool;
     PoolItemList providers;		// the provider which matched
