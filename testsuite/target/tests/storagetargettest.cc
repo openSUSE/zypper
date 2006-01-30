@@ -49,12 +49,12 @@ int main()
 
 	YUMSourceImpl srcimpl;
 
-    Source::Impl_Ptr impl (&srcimpl );
+    Source_Ref::Impl_Ptr impl (&srcimpl );
     SourceFactory _f;
-    Source src = _f.createFrom( impl );
+    Source_Ref src = _f.createFrom( impl );
 
 	Patch::Ptr patch1;
-	
+
 	//YUMPatchParser iter(cin,"");
 	std::ifstream patch_file(PATCH_FILE);
 	YUMPatchParser iter(patch_file,"");
@@ -67,20 +67,20 @@ int main()
 
   XMLFilesBackend backend;
   backend.setRandomFileNameEnabled(true);
-  
+
   clock_t time_start, curr_time;
   time_start = clock();
   int i = 0;
   DBG << "Writing Patches..." << std::endl;
   for (; i < 1000; i++)
     backend.storeObject(patch1);
-  
-  curr_time = clock() - time_start;           // time in micro seconds 
+
+  curr_time = clock() - time_start;           // time in micro seconds
   DBG << "Wrote " << i << " patches in " << (double) curr_time / CLOCKS_PER_SEC << " seconds" << std::endl;
 
   time_start = clock();
   std::list<Resolvable::Ptr> objs = backend.storedObjects();
-  curr_time = clock() - time_start;           // time in micro seconds 
+  curr_time = clock() - time_start;           // time in micro seconds
   DBG << "Read " << objs.size() << " patches in " << (double) curr_time / CLOCKS_PER_SEC << " seconds" << std::endl;
-  return 0;	
+  return 0;
 }
