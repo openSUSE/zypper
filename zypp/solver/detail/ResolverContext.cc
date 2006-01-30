@@ -417,9 +417,9 @@ ResolverContext::isPresent (PoolItem_Ref item) const
 {
     ResStatus status = getStatus(item);
 
-//ERR << "ResolverContext::itemIsPresent(<" << status << ">" << item << ")" << endl;
+ERR << "ResolverContext::itemIsPresent(<" << status << ">" << item << ")" << endl;
 
-    return (status.isInstalled()
+    return (status.staysInstalled()
 	    || status.isToBeInstalled()
 	    || status.isToBeInstalledSoft()
 	    || status.isSatisfied ());
