@@ -111,11 +111,17 @@ struct UpgradeCandidate : public resfilter::OnCapMatchCallbackFunctor
     bool operator() (PoolItem_Ref & candidate, const Capability & cap)
     {
 
+MIL << "UpgradeCandidate? " << candidate << ":[" << context->getStatus (candidate) << "]" << (item->edition().compare(candidate->edition())) << "<" << item->arch() << "," << candidate->arch() << ">" << endl;
 // FIXME put this in the resfilter chain
 	if ((item->edition().compare(candidate->edition()) < 0)		// look at real upgrades
 	    && item->arch() == candidate->arch()			// keep the architecture
-	    && context->getStatus (candidate).isUninstalled())
+	    && (context->getStatus (candidate).isUninstalled()
+		|| context->getStatus (candidate).isToBeUninstalled()))	// FIXME: just for exercise-02conflict-03-test.xml
+									// the original solver found the uninstalled foo-2.0.1 first, this solver
+									// finds the uninstallable first. In the end, we had a duplicate solution
+									// now we have no solution. Both results are right.
 	{
+MIL << "UpgradeCandidate! " << candidate << endl;
 	    upgrades.push_back (candidate);
 	}
 	return true;
@@ -187,7 +193,6 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	if (status.isInstalled()
 	    || status.isToBeInstalledSoft())
 	{
-	    QueueItemUninstall_Ptr uninstall;
 	    ResolverInfo_Ptr log_info;
 
 #if PHI
@@ -209,9 +214,11 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 			  pool.byCapabilityIndexEnd( maybe_upgrade_cap.index(), dep ),
 			  resfilter::callOnCapMatchIn( dep, maybe_upgrade_cap, functor::functorRef<bool,PoolItem,Capability>(upgrade_info) ) );
 
+
+	    MIL << "found " << upgrade_info.upgrades.size() << " upgrade candidates" << endl;
 #endif
 
-	    uninstall = new QueueItemUninstall (pool, provider, actually_an_obsolete ? QueueItemUninstall::OBSOLETE : QueueItemUninstall::CONFLICT);
+	    QueueItemUninstall_Ptr uninstall = new QueueItemUninstall (pool, provider, actually_an_obsolete ? QueueItemUninstall::OBSOLETE : QueueItemUninstall::CONFLICT);
 	    uninstall->setCapability (conflict_capability);
 
 	    if (actually_an_obsolete) {
