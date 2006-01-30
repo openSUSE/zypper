@@ -14,9 +14,11 @@
 
 #include "zypp/target/TargetImpl.h"
 
-#include <vector>
+#include "zypp/solver/detail/Types.h"
+#include "zypp/solver/detail/InstallOrder.h"
 
 using namespace std;
+using zypp::solver::detail::InstallOrder;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -78,41 +80,48 @@ namespace zypp
 
     void TargetImpl::commit(ResPool pool_r)
     {
-#warning FIXME this orderding doesn't honor the dependencies
-      vector<ResObject::constPtr> to_uninstall;
-      vector<ResObject::constPtr> to_install;
+      PoolItemList to_uninstall;
+      PoolItemList to_install;
+      PoolItemList installed;
       for (ResPool::const_iterator it = pool_r.begin();
            it != pool_r.end(); it++)
       {
 	if (it->status().isToBeInstalled())
 	{
-	  to_install.push_back(it->resolvable());
+	  to_install.push_back(*it);
 	}
 	else if (it->status().isToBeUninstalled())
 	{
-	  to_uninstall.push_back(it->resolvable());
+	  to_uninstall.push_back(*it);
+	}
+	else if (it->status().isInstalled())
+	{
+	  installed.push_back(*it);
 	}
       }
       // first uninstall what is to be uninstalled
-      for (vector<ResObject::constPtr>::const_iterator it = to_uninstall.begin();
+#warning FIXME this orderding doesn't honor the dependencies for removals
+      for (PoolItemList::const_iterator it = to_uninstall.begin();
            it != to_uninstall.end();
 	   it++)
       {
-	if (isKind<Package>(*it))
+	if (isKind<Package>(it->resolvable()))
 	{
-	  Package::constPtr p = dynamic_pointer_cast<const Package>(*it);
+	  Package::constPtr p = dynamic_pointer_cast<const Package>(it->resolvable());
 	  rpm().removePackage(p);
 	}
 #warning FIXME other resolvables (once more below)
       }
       // now install what is to be installed
-      for (vector<ResObject::constPtr>::const_iterator it = to_install.begin();
-           it != to_install.end();
-	   it++)
+      InstallOrder order(pool_r, to_install, installed);
+      order.init();
+      const PoolItemList & installorder(order.getTopSorted());
+      for (PoolItemList::const_iterator it = installorder.begin();
+	it != installorder.end(); it++)
       {
-	if (isKind<Package>(*it))
+	if (isKind<Package>(it->resolvable()))
 	{
-	  Package::constPtr p = dynamic_pointer_cast<const Package>(*it);
+	  Package::constPtr p = dynamic_pointer_cast<const Package>(it->resolvable());
 	  rpm().installPackage(p->getPlainRpm(), rpm::RpmDb::RPMINST_NOUPGRADE);
 	}
       }
