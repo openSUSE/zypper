@@ -79,6 +79,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     ResolverContext_Ptr _best_context;
     bool _timed_out;
 
+    std::set<Source_Ref> _subscribed;
+
   public:
 
     Resolver (const ResPool & pool);
@@ -107,8 +109,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     ResPool pool (void) const;
     void setPool (const ResPool & pool) { _pool = pool; }
 
-//    void setCurrentChannel (Channel_constPtr channel) { _current_channel = channel; }
-//    void addSubscribedChannel (Channel_constPtr channel);
+    void addSubscribedSource (Source_Ref source);
 
     void addPoolItemToInstall (PoolItem_Ref item);
     void addPoolItemsToInstallFromList (PoolItemList & rl);

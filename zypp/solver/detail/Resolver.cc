@@ -109,14 +109,11 @@ Resolver::reset (void)
 
 //---------------------------------------------------------------------------
 
-#warning Needs Source Backref
-#if 0
 void
-Resolver::addSubscribedChannel (Channel_constPtr channel)
+Resolver::addSubscribedSource (Source_Ref source)
 {
-    ERR << "Resolver::addSubscribedChannel() not implemented" << endl;
+    _subscribed.insert(source);
 }
-#endif
 
 void
 Resolver::addPoolItemToInstall (PoolItem_Ref item)
