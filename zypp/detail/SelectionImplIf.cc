@@ -26,11 +26,11 @@ namespace zypp
     // as far as resonable.
     /////////////////////////////////////////////////////////////////
 
-    Label SelectionImplIf::summary() const
-    { return Label(); }
+    const TranslatedText & SelectionImplIf::summary() const
+    { return TranslatedText(); }
 
-    Text SelectionImplIf::description() const
-    { return Text(); }
+    const TranslatedText & SelectionImplIf::description() const
+    { return TranslatedText(); }
 
     Label SelectionImplIf::category() const
     { return Label(); }

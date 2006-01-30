@@ -62,10 +62,10 @@ namespace zypp
       Label YUMProductImpl::displayName() const
       { return _displayname; }
 
-      Label YUMProductImpl::summary() const
+      const TranslatedText &  YUMProductImpl::summary() const
       { return ResObjectImplIf::summary(); }
 
-      Text YUMProductImpl::description() const
+      const TranslatedText &  YUMProductImpl::description() const
       { return _description; }
 
       Text YUMProductImpl::insnotify() const

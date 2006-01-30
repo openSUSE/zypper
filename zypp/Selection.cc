@@ -12,6 +12,7 @@
 #include <iostream>
 
 #include "zypp/Selection.h"
+#include "zypp/TranslatedText.h"
 
 using namespace std;
 
@@ -45,13 +46,13 @@ namespace zypp
     /** selection summary (FIXME: localized) */
     Label Selection::summary() const
     {
-	return pimpl().summary();    
+	return pimpl().summary().text();    
     }
 
     /** */
     Text Selection::description() const
     {
-	return pimpl().description();    
+	return pimpl().description().text();    
     }
 
     /** selection category */

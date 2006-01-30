@@ -54,10 +54,10 @@ namespace zypp
       bool YUMScriptImpl::undo_available() const {
 	return _undo_script != "";
       }
-      Label YUMScriptImpl::summary() const
+      const TranslatedText &  YUMScriptImpl::summary() const
       { return ResObjectImplIf::summary(); }
 
-      Text YUMScriptImpl::description() const
+      const TranslatedText &  YUMScriptImpl::description() const
       { return ResObjectImplIf::description(); }
 
       Text YUMScriptImpl::insnotify() const

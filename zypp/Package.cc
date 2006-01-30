@@ -112,11 +112,11 @@ namespace zypp
   { return pimpl().archivesize(); }
 
   /** */
-  Text Package::authors() const
+  std::list<std::string> Package::authors() const
   { return pimpl().authors(); }
 
   /** */
-  Text Package::filenames() const
+  std::list<std::string> Package::filenames() const
   { return pimpl().filenames(); }
 
   /** */

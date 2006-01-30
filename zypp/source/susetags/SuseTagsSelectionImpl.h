@@ -57,14 +57,13 @@ namespace zypp
       virtual PMError provideSelToInstall( Pathname & path_r ) const;
       */
 
-      virtual Label summary() const;
-      virtual Text description() const;
+      virtual const TranslatedText & summary() const;
+      virtual const TranslatedText & description() const;
       virtual Label category() const;
       virtual bool visible() const;
       virtual Label order() const;
 
-      std::map< std::string, std::string> _summary;
-      std::string _description;
+      TranslatedText _summary;
       std::string _parser_version;
       std::string _name;
       std::string _version;
@@ -79,10 +78,10 @@ namespace zypp
       std::set<std::string> _requires;
       std::set<std::string> _conflicts;
       std::set<std::string> _supported_locales;
-      std::map< std::string, std::set<std::string> > _insnotify;
-      std::map< std::string, std::set<std::string> > _delnotify;
-      std::map< std::string, std::set<std::string> > _inspacks;
-      std::map< std::string, std::set<std::string> > _delpacks;
+      std::map< LanguageCode, std::set<std::string> > _insnotify;
+      std::map< LanguageCode, std::set<std::string> > _delnotify;
+      std::map< LanguageCode, std::set<std::string> > _inspacks;
+      std::map< LanguageCode, std::set<std::string> > _delpacks;
       
     };
     ///////////////////////////////////////////////////////////////////

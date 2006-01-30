@@ -54,7 +54,7 @@ namespace zypp
 
   /** Single line of (human readable) text. See Label. A description would
    Text, while a a packages file list would be list<string> */
-  typedef std::list<std::string> Text;
+  typedef std::string Text;
 
   /** Offer a License text and methods to remember confirmation. */
   typedef std::list<std::string> License;

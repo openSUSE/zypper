@@ -129,10 +129,10 @@ namespace zypp
         return _timestamp;
       }
 
-      Label YUMPatchImpl::summary() const
+      const TranslatedText &  YUMPatchImpl::summary() const
       { return _summary; }
 
-      Text YUMPatchImpl::description() const
+      const TranslatedText &  YUMPatchImpl::description() const
       { return _description; }
 
       Text YUMPatchImpl::insnotify() const

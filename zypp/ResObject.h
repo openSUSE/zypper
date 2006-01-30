@@ -13,6 +13,7 @@
 #define ZYPP_RESOBJECT_H
 
 #include "zypp/Resolvable.h"
+#include "zypp/TranslatedText.h"
 //#include "zypp/detail/ResObjectImplIf.h"
 #include "zypp/NeedAType.h"
 
@@ -42,10 +43,10 @@ namespace zypp
 
   public:
     /** */
-    Label summary() const;
+    const TranslatedText & summary() const;
 
     /** */
-    Text description() const;
+    const TranslatedText & description() const;
 
     /** */
     Text insnotify() const;

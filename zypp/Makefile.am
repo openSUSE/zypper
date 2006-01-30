@@ -67,6 +67,7 @@ pkginclude_HEADERS = NeedAType.h \
 	PatchRpm.h	\
 	DeltaRpm.h	\
 	ZYpp.h		\
+	TranslatedText.h \
 	ZYppFactory.h
 
 ## ##################################################
@@ -124,6 +125,7 @@ lib@PACKAGE@_la_SOURCES = \
 	TmpPath.cc	\
 	DiskUsage.cc	\
 	ZYpp.cc		\
+	TranslatedText.cc \
 	ZYppFactory.cc
 
 lib@PACKAGE@_la_LDFLAGS =	@LIBZYPP_VERSION_INFO@

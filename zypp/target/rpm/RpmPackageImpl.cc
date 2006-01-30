@@ -60,17 +60,17 @@ namespace zypp
 	_dir_sizes(parsed.dirSizes),
 #endif
       {
-	_description.push_back(data->tag_description());
+	_description.setText(data->tag_description());
 	data->tag_du(_disk_usage);
       }
 
 
       /** Package summary */
-      Label RPMPackageImpl::summary() const
+      const TranslatedText &  RPMPackageImpl::summary() const
       { return _summary; }
 
       /** Package description */
-      Text RPMPackageImpl::description() const
+      const TranslatedText &  RPMPackageImpl::description() const
       { return _description; }
 
       Text RPMPackageImpl::insnotify() const
@@ -172,11 +172,11 @@ namespace zypp
       { return 0; }
 
       /** */
-      Text RPMPackageImpl::authors() const
+      std::list<std::string> RPMPackageImpl::authors() const
       { return _authors; }
 
       /** */
-      Text RPMPackageImpl::filenames() const
+      std::list<std::string> RPMPackageImpl::filenames() const
       { return _filenames; }
 
       License RPMPackageImpl::licenseToConfirm() const

@@ -13,6 +13,7 @@
 #define ZYPP_DETAIL_SELECTIONIMPLIF_H
 
 #include "zypp/detail/ResObjectImplIf.h"
+#include "zypp/TranslatedText.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -45,10 +46,10 @@ namespace zypp
     public:
 
         /** */
-        virtual Label summary() const = 0;
+        virtual const TranslatedText & summary() const = 0;
 
         /** */
-        virtual Text description() const = 0;
+        virtual const TranslatedText & description() const = 0;
 
         /** */
 	virtual Label category() const = 0;

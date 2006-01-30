@@ -71,9 +71,9 @@ namespace zypp
     /** */
     ByteCount archivesize() const;
     /** */
-    Text authors() const;
+    std::list<std::string> authors() const;
     /** */
-    Text filenames() const;
+    std::list<std::string> filenames() const;
     /** */
     License licenseToConfirm() const;
     /** */

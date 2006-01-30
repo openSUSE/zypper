@@ -52,9 +52,9 @@ namespace zypp
 	);
 
 	/** Package summary */
-	virtual Label summary() const;
+	virtual const TranslatedText &  summary() const;
 	/** Package description */
-	virtual Text description() const;
+	virtual const TranslatedText &  description() const;
 	virtual Text insnotify() const;
 	virtual Text delnotify() const;
 	virtual ByteCount size() const;
@@ -99,9 +99,9 @@ namespace zypp
 	/** */
 	virtual ByteCount archivesize() const;
 	/** */
-	virtual Text authors() const;
+	virtual std::list<std::string> authors() const;
 	/** */
-	virtual Text filenames() const;
+	virtual std::list<std::string> filenames() const;
         /** */
         virtual License licenseToConfirm() const;
         /** */
@@ -196,8 +196,8 @@ namespace zypp
         virtual bool prefererCandidate() const;
 #endif
       protected:
-	Label _summary;
-	Text _description;
+	TranslatedText _summary;
+	TranslatedText _description;
 	Date _buildtime;
 	std::string _buildhost;
 	std::string _url;
@@ -208,11 +208,11 @@ namespace zypp
 	Changelog _changelog;
 	std::string _type;
 	License _license_to_confirm;
-	Text _authors;
-	std::list<std::string>_keywords;
+	std::list<std::string> _authors;
+	std::list<std::string> _keywords;
 	unsigned _mediaid;
 	CheckSum _checksum;
-	Text _filenames;
+	std::list<std::string> _filenames;
 	Pathname _location;
 	std::list<DeltaRpm> _delta_rpms;
 	std::list<PatchRpm> _patch_rpms;

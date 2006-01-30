@@ -64,7 +64,7 @@ namespace zypp
       {
         if ( tag.name == "Sum" )
         {
-          selImpl->_summary[tag.modifier] = tag.value;
+          selImpl->_summary.setText(tag.value, LanguageCode(tag.modifier));
         }
         else if ( tag.name == "Ver" )
         {
@@ -111,7 +111,7 @@ namespace zypp
         }
         else if ( tag.name == "Ins" )
         {
-          selImpl->_inspacks[tag.modifier] = tag.values;
+          selImpl->_inspacks[LanguageCode(tag.modifier)] = tag.values;
         }
       }
 

@@ -72,7 +72,7 @@ namespace zypp
 	_dir_sizes(parsed.dirSizes),
 #endif
       {
-	_description.push_back(parsed.description);
+	_description.setText(parsed.description);
 	for (std::list<FileData>::const_iterator it = filelist.files.begin();
 	     it != filelist.files.end();
 	     it++)
@@ -126,7 +126,7 @@ namespace zypp
 	_dir_sizes(parsed.dirSizes),
 #endif
       {
-	_description.push_back(parsed.description);
+	_description.setText(parsed.description);
 	for (std::list<FileData>::const_iterator it = parsed.files.begin();
 	     it != parsed.files.end();
 	     it++)
@@ -194,11 +194,11 @@ namespace zypp
 
 
       /** Package summary */
-      Label YUMPackageImpl::summary() const
+      const TranslatedText &  YUMPackageImpl::summary() const
       { return _summary; }
 
       /** Package description */
-      Text YUMPackageImpl::description() const
+      const TranslatedText &  YUMPackageImpl::description() const
       { return _description; }
 
       Text YUMPackageImpl::insnotify() const
@@ -304,11 +304,11 @@ namespace zypp
       { return 0; }
 
       /** */
-      Text YUMPackageImpl::authors() const
+      std::list<std::string> YUMPackageImpl::authors() const
       { return _authors; }
 
       /** */
-      Text YUMPackageImpl::filenames() const
+      std::list<std::string> YUMPackageImpl::filenames() const
       { return _filenames; }
 
       License YUMPackageImpl::licenseToConfirm() const

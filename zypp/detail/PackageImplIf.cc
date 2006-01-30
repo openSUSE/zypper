@@ -62,17 +62,17 @@ namespace zypp
       std::string PackageImplIf::os() const
       { return std::string(); }
 
-      std::list<std::string> PackageImplIf::prein() const
-      { return std::list<std::string>(); }
+      Text PackageImplIf::prein() const
+      { return Text(); }
 
-      std::list<std::string> PackageImplIf::postin() const
-      { return std::list<std::string>(); }
+      Text PackageImplIf::postin() const
+      { return Text(); }
 
-      std::list<std::string> PackageImplIf::preun() const
-      { return std::list<std::string>(); }
+      Text PackageImplIf::preun() const
+      { return Text(); }
 
-      std::list<std::string> PackageImplIf::postun() const
-      { return std::list<std::string>(); }
+      Text PackageImplIf::postun() const
+      { return Text(); }
 
       ByteCount PackageImplIf::sourcesize() const
       { return ByteCount(); }

@@ -38,11 +38,11 @@ namespace zypp
     {}
 
 
-    Label SuseTagsSelectionImpl::summary() const
-    { return Label(); }
+    const TranslatedText & SuseTagsSelectionImpl::summary() const
+    { return _summary; }
 
-    Text SuseTagsSelectionImpl::description() const
-    { return Text(); }
+    const TranslatedText & SuseTagsSelectionImpl::description() const
+    { return _summary; }
 
     Label SuseTagsSelectionImpl::category() const
     { return Label(); }

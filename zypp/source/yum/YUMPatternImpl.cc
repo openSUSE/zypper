@@ -95,10 +95,10 @@ namespace zypp
       CapSet YUMPatternImpl::defaultReq() const
       { return _default_req; }
 
-      Label YUMPatternImpl::summary() const
+      const TranslatedText &  YUMPatternImpl::summary() const
       { return ResObjectImplIf::summary(); }
 
-      Text YUMPatternImpl::description() const
+      const TranslatedText &  YUMPatternImpl::description() const
       { return ResObjectImplIf::description(); }
 
       Text YUMPatternImpl::insnotify() const

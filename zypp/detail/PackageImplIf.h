@@ -101,9 +101,9 @@ namespace zypp
       /** */
       virtual ByteCount archivesize() const PURE_VIRTUAL;
       /** */
-      virtual Text authors() const PURE_VIRTUAL;
+      virtual std::list<std::string> authors() const PURE_VIRTUAL;
       /** */
-      virtual Text filenames() const PURE_VIRTUAL;
+      virtual std::list<std::string> filenames() const PURE_VIRTUAL;
       /** */
       virtual std::list<DeltaRpm> deltaRpms() const PURE_VIRTUAL;
       /** */

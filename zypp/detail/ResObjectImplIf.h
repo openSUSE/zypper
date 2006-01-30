@@ -19,6 +19,7 @@
 #include "zypp/Locale.h"
 #include "zypp/ByteCount.h"
 #include "zypp/Date.h"
+#include "zypp/TranslatedText.h"
 
 #include "zypp/NeedAType.h" // volatile include propagating type drafts
 
@@ -63,10 +64,10 @@ namespace zypp
       */
       //@{
       /** Short label. */
-      virtual Label summary() const PURE_VIRTUAL;
+      virtual const TranslatedText & summary() const PURE_VIRTUAL;
 
       /** Long description */
-      virtual Text description() const PURE_VIRTUAL;
+      virtual const TranslatedText & description() const PURE_VIRTUAL;
 
       /** \todo well define! */
       virtual Text insnotify() const PURE_VIRTUAL;

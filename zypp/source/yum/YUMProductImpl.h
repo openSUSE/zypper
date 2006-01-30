@@ -43,8 +43,8 @@ namespace zypp
 	std::string category() const;
 	Label vendor() const;
 	Label displayName() const;
-	Label summary() const;
-	Text description() const;
+	const TranslatedText &  summary() const;
+	const TranslatedText &  description() const;
 	Text insnotify() const;
 	Text delnotify() const;
 	ByteCount size() const;

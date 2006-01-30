@@ -47,12 +47,12 @@ namespace zypp
       return _timestamp;
     }
 
-    std::string PatchImpl::summary() const
+    const TranslatedText & PatchImpl::summary() const
     {
       return _summary;
     }
 
-    std::list<std::string> PatchImpl::description() const
+    const TranslatedText & PatchImpl::description() const
     {
       return _description;
     }
