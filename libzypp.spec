@@ -1,5 +1,5 @@
 #
-# spec file for package libzypp (Version 1.9.1)
+# spec file for package libzypp (Version 0.0.0)
 #
 # Copyright (c) 2006 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,32 +9,46 @@
 #
 
 # norootforbuild
-# neededforbuild  gpp libgpp boost boost-devel doxygen graphviz gettext-devel tcl expect dejagnu pkgconfig expat zlib zlib-devel libxml2 libxml2-devel curl curl-devel dbus-1 dbus-1-glib dbus-1-devel hal hal-devel fontconfig freetype2 libjpeg libpng  glib2 glib2-devel rpm-devel popt popt-devel openssl openssl-devel libicu
-
-BuildRequires: binutils gcc gcc-c++ glibc-devel libstdc++ libstdc++-devel boost-devel doxygen graphviz gettext-devel dejagnu pkgconfig expat zlib-devel libxml2-devel curl-devel dbus-1-devel hal-devel glib2 glib2-devel rpm-devel
 
 Name:         libzypp
-License:      GNUv2
-Group:        System/Libraries
+BuildRequires: boost-devel curl-devel dejagnu doxygen gcc-c++ graphviz hal-devel libjpeg-devel libxml2-devel rpm-devel sqlite-devel
+License:      GPL
+Group:        System/Packages
 BuildRoot:    %{_tmppath}/%{name}-%{version}-build
 Autoreqprov:  on
 Obsoletes:    yast2-packagemanager
-Summary:      Package, Patch, Pattern, Product Management
+Summary:      Package, Patch, Pattern, and Product Management
 Version:      0.0.0
-Release:      0
+Release:      1
 Source:       zypp-0.0.0.tar.bz2
 prefix:       /usr
 
 %description
-We are ZYPP, you will be assimilated.
+Package, Patch, Pattern, and Product Management
+
+Authors:
+--------
+    Michael Andres <ma@suse.de>
+    Jiri Srain <jsrain@suse.cz>
+    Stefan Schubert <schubi@suse.de>
+    Duncan Mac-Vicar <dmacvicar@suse.de>
+    Klaus Kaempf <kkaempf@suse.de>
 
 %package devel
-Requires:     libzypp = %{version}
-Summary:      Package, Patch, Pattern, Product Management - development files
-Group:        Development/Libraries/C and C++
+Requires:     libzypp
+Summary:      Package, Patch, Pattern, and Product Management - developers files
+Group:        System/Packages
 
 %description -n libzypp-devel
-We are ZYPP, you will be assimilated.
+Package, Patch, Pattern, and Product Management - developers files
+
+Authors:
+--------
+    Michael Andres <ma@suse.de>
+    Jiri Srain <jsrain@suse.cz>
+    Stefan Schubert <schubi@suse.de>
+    Duncan Mac-Vicar <dmacvicar@suse.de>
+    Klaus Kaempf <kkaempf@suse.de>
 
 %prep
 %setup -q -n zypp-0.0.0
@@ -50,6 +64,9 @@ make check
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
+# Create filelist with translatins
+%{find_lang} zypp
+
 
 %post
 %run_ldconfig
@@ -60,7 +77,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f zypp.lang
 %defattr(-,root,root)
 %dir %{_libdir}/libzypp*so.*
 
@@ -74,3 +91,9 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/include/zypp/*
 %dir %{prefix}/share/zypp
 %{prefix}/share/zypp/*
+
+%changelog -n libzypp
+* Wed Jan 25 2006 - mls@suse.de
+- converted neededforbuild to BuildRequires
+* Sat Jan 14 2006 - kkaempf@suse.de
+- Initial version
