@@ -84,6 +84,7 @@ ResolverContext::ResolverContext (const ResPool & pool, ResolverContext_Ptr pare
     , _verifying (false)
     , _invalid (false)
 {
+DBG << "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" << endl;
     if (parent != NULL) {
 	_pool		 = parent->_pool;
 	_download_size   = parent->_download_size;
@@ -109,6 +110,7 @@ ResolverContext::~ResolverContext()
 ResStatus
 ResolverContext::getStatus (PoolItem_Ref item) const
 {
+DBG << "[" << this << "]getStatus(" << item << ")" << endl;
     Context::const_iterator it;
     ResolverContext_constPtr context = this;
 
@@ -116,11 +118,13 @@ ResolverContext::getStatus (PoolItem_Ref item) const
 
 	it = context->_context.find(item);		// part of local context ?
 	if (it != context->_context.end()) {
+DBG << "[" << context << "]:" << it->second << endl;
 	    return it->second;				// Y: return
 	}
 	context = context->_parent;			// N: go up the chain
     }
 
+DBG << "[NULL]:" << item.status() << endl;
     return item.status();				// Not part of context, return Pool status
 }
 
@@ -131,6 +135,8 @@ ResolverContext::getStatus (PoolItem_Ref item) const
 void
 ResolverContext::setStatus (PoolItem_Ref item, const ResStatus & status)
 {
+    if (_invalid) return;
+DBG << "[" << this << "]setStatus(" << item << ", " << status << ")" << endl;
     if (status == item.status()) {		// same as original status
 	Context::iterator it;
 	it = _context.find(item);		// part of local context ?
