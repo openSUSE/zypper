@@ -19,6 +19,7 @@
  * 02111-1307, USA.
  */
 
+#include "zypp/base/Logger.h"
 #include "zypp/solver/detail/QueueItem.h"
 #include "zypp/solver/detail/ResolverContext.h"
 
@@ -42,7 +43,18 @@ IMPL_PTR_TYPE(QueueItem);
 std::ostream &
 QueueItem::dumpOn( std::ostream & os ) const
 {
-    return os << "<queueitem/>";
+    switch (_type) {
+      case QUEUE_ITEM_TYPE_UNKNOWN:	os << "unknown"; break;
+      case QUEUE_ITEM_TYPE_INSTALL:	os << "install"; break;
+      case QUEUE_ITEM_TYPE_REQUIRE:	os << "require"; break;
+      case QUEUE_ITEM_TYPE_BRANCH:	os << "branch"; break;
+      case QUEUE_ITEM_TYPE_GROUP:	os << "group"; break;
+      case QUEUE_ITEM_TYPE_CONFLICT:	os << "conflict"; break;
+      case QUEUE_ITEM_TYPE_UNINSTALL:	os << "uninstall"; break;
+      case QUEUE_ITEM_TYPE_LAST:	os << "last"; break;
+      default: os << "?queueitem?"; break;
+    }
+    return os;
 }
 
 
@@ -65,6 +77,7 @@ QueueItem::QueueItem (QueueItemType type, const ResPool & pool)
     , _priority (0)
     , _size (0)
 {
+    DBG << "QueueItem(" << *this << ")" << endl;
 }
 
 
