@@ -494,6 +494,90 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     return _best_context && _best_context->isValid();
 }
 
+
+//----------------------------------------------------------------------------
+// resolvePool
+
+struct CollectTransact : public resfilter::PoolItemFilterFunctor
+{
+    Resolver & resolver;
+
+    CollectTransact (Resolver & r)
+	: resolver (r)
+    { }
+
+    bool operator()( PoolItem_Ref item )		// only transacts() items go here
+    {
+	ResStatus status = item.status();
+	if (status.isBySolver()) {			// clear any solver transactions
+	    item.status().setNoTransact();
+	}
+	if (status.isUninstalled()) {			// transact && uninstalled
+	    resolver.addPoolItemToInstall(item);	// -> install! 
+	}
+	if (status.isInstalled()) {			// transact && installed
+	    resolver.addPoolItemToRemove(item);		// -> remove !
+	}
+	return true;
+    }
+};
+
+
+// copy marked item from solution back to pool
+
+static void
+solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
+{
+    if (status.isToBeInstalled()) {
+	item.status().setToBeInstalled();
+    }
+    else if (status.isToBeUninstalled()) {
+	item.status().setToBeUninstalled();
+    }
+    else if (status.isIncomplete()
+	     || status.isNeeded()) {
+	item.status().setIncomplete();
+    }
+    return;
+}
+
+
+
+//  This function loops over the pool and grabs
+//  all item.status().transacts() and item.status().byUser()
+//  It clears all previous bySolver() states also
+//
+//  Every toBeInstalled is passed to zypp::solver:detail::Resolver.addPoolItemToInstall()
+//  Every toBeUninstalled is passed to zypp::solver:detail::Resolver.addPoolItemToRemove()
+//
+//  Then zypp::solver:detail::Resolver.resolveDependencies() is called.
+//
+//  zypp::solver:detail::Resolver then returns a ResolverContext via bestContext() which
+//  describes the best solution. If bestContext() is NULL, no solution was found.
+//
+//  ResolverContext has a foreachMarked() iterator function which loops over all
+//  items of the solutions. These must be written back to the pool.
+
+bool
+Resolver::resolvePool ()
+{
+
+    CollectTransact info (*this);
+
+    invokeOnEach ( _pool.begin(), _pool.end(),
+		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
+		   functor::functorRef<bool,PoolItem>(info) );
+
+    bool have_solution = resolveDependencies ();		// resolve !
+
+    if (have_solution) {					// copy solution back to pool
+	ResolverContext_Ptr solution = bestContext();
+	solution->foreachMarked (solution_to_pool, NULL);
+    }
+
+    return have_solution;
+}
+
 ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

@@ -127,6 +127,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void verifySystem (void);
     void establishState (const ResolverContext_Ptr context = NULL);
     bool resolveDependencies (const ResolverContext_Ptr context = NULL);
+    bool resolvePool (void);
 
     ResolverProblemList problems (void) const;
     bool applySolutions (const ProblemSolutionList &solutions);
