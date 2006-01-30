@@ -23,6 +23,7 @@
 #include "zypp/media/MediaAccess.h"
 #include "zypp/Target.h"
 #include "zypp/target/rpm/RpmDb.h"
+#include "zypp/solver/detail/Types.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -63,6 +64,9 @@ namespace zypp
       /** Comomit changes in the pool */
 #warning Add support for multiple medias - eg. limit only to CD1
       void commit(ResPool pool_r);
+
+      /** Comomit ordered changes */
+      void commit(const PoolItemList & items_r);
 
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const

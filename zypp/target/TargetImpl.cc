@@ -101,31 +101,35 @@ namespace zypp
       }
       // first uninstall what is to be uninstalled
 #warning FIXME this orderding doesn't honor the dependencies for removals
-      for (PoolItemList::const_iterator it = to_uninstall.begin();
-           it != to_uninstall.end();
-	   it++)
-      {
-	if (isKind<Package>(it->resolvable()))
-	{
-	  Package::constPtr p = dynamic_pointer_cast<const Package>(it->resolvable());
-	  rpm().removePackage(p);
-	}
-#warning FIXME other resolvables (once more below)
-      }
+      commit(to_uninstall);
       // now install what is to be installed
       InstallOrder order(pool_r, to_install, installed);
       order.init();
       const PoolItemList & installorder(order.getTopSorted());
-      for (PoolItemList::const_iterator it = installorder.begin();
-	it != installorder.end(); it++)
+      commit(installorder);
+    }
+
+    void TargetImpl::commit(const PoolItemList & items_r)
+    {
+      for (PoolItemList::const_iterator it = items_r.begin();
+	it != items_r.end(); it++)
       {
 	if (isKind<Package>(it->resolvable()))
 	{
 	  Package::constPtr p = dynamic_pointer_cast<const Package>(it->resolvable());
-	  rpm().installPackage(p->getPlainRpm(),
-	    p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : 0);
+	  if (it->status().isToBeInstalled())
+	  {
+	    rpm().installPackage(p->getPlainRpm(),
+	      p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : 0);
+	  }
+	  else
+	  {
+	    rpm().removePackage(p);
+	  }
 	}
+#warning FIXME other resolvables
       }
+
     }
 
     rpm::RpmDb & TargetImpl::rpm()
