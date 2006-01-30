@@ -67,14 +67,11 @@ namespace zypp
     {
        if (_target)
 	 _target = Target_Ptr();
-#warning FIXME does this release the memory? _target is intrusive_ptr<Target>. Once more below...
        _target = new Target(root);
      }
 
     void ZYppImpl::finishTarget()
     {
-//      if (_target)
-//	_target = 0;
       _target = 0;
     }
 
