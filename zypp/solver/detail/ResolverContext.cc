@@ -141,6 +141,7 @@ DBG << "[" << this << "]setStatus(" << item << ", " << status << ")" << endl;
 	Context::iterator it;
 	it = _context.find(item);		// part of local context ?
 	if (it != _context.end()) {
+DBG << "UNMARK" << endl;
 	    _context.erase (it);		// erase it !
 	}
     }
@@ -148,6 +149,7 @@ DBG << "[" << this << "]setStatus(" << item << ", " << status << ")" << endl;
 	ResStatus old_status = getStatus (item);
 
 	if (old_status != status) {		// new status ?
+DBG << "MARK" << endl;
 	    _context[item] = status;		// set it !
 	}
     }
