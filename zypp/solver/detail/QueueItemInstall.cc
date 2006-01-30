@@ -21,6 +21,7 @@
 
 #include "zypp/CapFactory.h"
 #include "zypp/CapSet.h"
+#include "zypp/Package.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
