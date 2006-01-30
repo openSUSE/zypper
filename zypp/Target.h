@@ -18,7 +18,7 @@
 
 #include "zypp/ResStore.h"
 #include "zypp/Pathname.h"
-#include "zypp/target/TargetImpl.h"
+#include "zypp/ResPool.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -53,11 +53,13 @@ namespace zypp
     static Target_Ptr nullimpl();
     /** Refference to the RPM database */
     target::rpm::RpmDb & rpmDb();
+    /** Comomit changes in the pool */
+    void commit(ResPool & pool_r);
 
   public:
-    /** Factory ctor */
+    /** Ctor */
     Target( const Pathname & root = "/" );
-    /** Factory ctor */
+    /** Ctor */
     explicit
     Target( const Impl_Ptr & impl_r );
 

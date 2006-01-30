@@ -14,7 +14,9 @@
 
 #include "zypp/target/TargetImpl.h"
 
-using std::endl;
+#include <vector>
+
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -72,6 +74,48 @@ namespace zypp
       }
       // TODO objects from the XML store
       return _store;
+    }
+
+    void TargetImpl::commit(ResPool & pool_r)
+    {
+#warning FIXME this orderding doesn't honor the dependencies
+      vector<ResObject::constPtr> to_uninstall;
+      vector<ResObject::constPtr> to_install;
+      for (ResPool::const_iterator it = pool_r.begin();
+           it != pool_r.end(); it++)
+      {
+	if (it->status().isToBeInstalled())
+	{
+	  to_install.push_back(it->resolvable());
+	}
+	else if (it->status().isToBeUninstalled())
+	{
+	  to_uninstall.push_back(it->resolvable());
+	}
+      }
+      // first uninstall what is to be uninstalled
+      for (vector<ResObject::constPtr>::const_iterator it = to_uninstall.begin();
+           it != to_uninstall.end();
+	   it++)
+      {
+	if (isKind<Package>(*it))
+	{
+	  Package::constPtr p = dynamic_pointer_cast<const Package>(*it);
+	  rpm().removePackage(p);
+	}
+#warning FIXME other resolvables (once more below)
+      }
+      // now install what is to be installed
+      for (vector<ResObject::constPtr>::const_iterator it = to_install.begin();
+           it != to_install.end();
+	   it++)
+      {
+	if (isKind<Package>(*it))
+	{
+	  Package::constPtr p = dynamic_pointer_cast<const Package>(*it);
+	  rpm().installPackage(p->getPlainRpm(), rpm::RpmDb::RPMINST_NOUPGRADE);
+	}
+      }
     }
 
     rpm::RpmDb & TargetImpl::rpm()
