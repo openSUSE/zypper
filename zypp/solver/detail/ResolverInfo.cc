@@ -24,6 +24,7 @@
 #include "zypp/solver/detail/ResolverInfo.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
+#include "zypp/base/Logger.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -142,6 +143,7 @@ ResolverInfo::ResolverInfo (ResolverInfoType type, PoolItem_Ref item, int priori
     , _error (false)
     , _important (false)
 {
+    DBG << *this;
 }
 
 
