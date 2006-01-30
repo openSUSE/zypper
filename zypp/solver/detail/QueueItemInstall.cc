@@ -168,9 +168,9 @@ struct EstablishFreshens : public resfilter::OnCapMatchCallbackFunctor
 bool
 QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
-    DBG <<  "QueueItemInstall::process(" << *this << ")" << endl;
-
     ResStatus status = context->getStatus(_item);
+
+    DBG <<  "QueueItemInstall::process(" << *this << "):" << status << endl;
 
     /* If we are trying to upgrade item A with item B and they both have the
 	same version number, do nothing.  This shouldn't happen in general with
