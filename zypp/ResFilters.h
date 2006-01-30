@@ -298,6 +298,15 @@ namespace zypp
       }
     };
 
+    /** Select PoolItem by transact. */
+    struct ByTransact : public PoolItemFilterFunctor
+    {
+      bool operator()( const PoolItem & p ) const
+      {
+	return p.status().transacts();
+      }
+    };
+
     ///////////////////////////////////////////////////////////////////
 
     typedef std::binary_function<PoolItem,Capability,
