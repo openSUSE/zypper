@@ -186,7 +186,7 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	    return true;
 	}
 
-	status = provider.status();
+	status = context->getStatus(provider);
 
 	DBG << "ConflictProcess (provider[" << provider << "]<" << status << ">" << endl;
 
