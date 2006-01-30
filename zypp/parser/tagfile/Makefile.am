@@ -10,6 +10,7 @@ INCLUDES =
 parsertagfileincludedir = $(pkgincludedir)/parser/tagfile
 
 parsertagfileinclude_HEADERS = \
+	Parser.h	\
 	ParseException.h\
 	Tags.h		\
 	Grammar.h	\
