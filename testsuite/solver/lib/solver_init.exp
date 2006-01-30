@@ -215,7 +215,7 @@ proc multi-run { src } {
 		  set errorOccured 0
 		  continue
 	      } else {					# remove the (empty) diff
-		exec sh -c "rm -f $mistakefile $difffile"
+		exec sh -c "(cd $dircase; rm -f $mistakefile $difffile)"
 	      }
 	  }
 
