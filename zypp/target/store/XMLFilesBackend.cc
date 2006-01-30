@@ -15,6 +15,7 @@
 
 #include "zypp/base/Logger.h"
 
+#include "zypp/Source.h"
 #include "zypp/source/yum/YUMSourceImpl.h"
 #include "zypp/parser/yum/YUMParser.h"
 
@@ -53,7 +54,7 @@ class XMLFilesBackend::Private
 {
   public:
   Private()
-  : source(Source::noSource)
+  : source(Source_Ref::noSource)
   { }
   bool randomFileName;
   Source_Ref  source;

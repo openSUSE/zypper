@@ -30,7 +30,7 @@ namespace zypp
   //
   //	CLASS NAME : SourceFactory
   //
-  /** Factory to create a \ref Source.
+  /** Factory to create a \ref Source_Ref.
    * Actually a Singleton
    *
   */
@@ -48,12 +48,12 @@ namespace zypp
     /** Construct source from an implementation.
      * \throw EXCEPTION on NULL \a impl_r
     */
-    Source createFrom( const Source::Impl_Ptr & impl_r );
+    Source_Ref createFrom( const Source_Ref::Impl_Ptr & impl_r );
 
     /** Construct source from an implementation.
      * \throw EXCEPTION on fail
     */
-    Source createFrom( const Url & url_r, const Pathname & path_r = "/", const std::string & alias_r = "" );
+    Source_Ref createFrom( const Url & url_r, const Pathname & path_r = "/", const std::string & alias_r = "" );
 
   private:
     /** Implementation  */

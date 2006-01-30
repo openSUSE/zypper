@@ -131,11 +131,6 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
-  /** \todo eliminate typedef.*/
-  typedef Source_Ref Source;
-
-  ///////////////////////////////////////////////////////////////////
-
   /** \relates Source Stream output. */
   inline std::ostream & operator<<( std::ostream & str, Source_Ref obj )
   { return obj.dumpOn( str ); }

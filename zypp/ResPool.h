@@ -125,6 +125,11 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
+  /** \todo rename class and eliminate typedef. */
+  typedef ResPool ResPool_Ref;
+
+  ///////////////////////////////////////////////////////////////////
+
   /** \relates ResPool Stream output */
   std::ostream & operator<<( std::ostream & str, const ResPool & obj );
 

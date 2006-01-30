@@ -55,14 +55,14 @@ namespace zypp
      * \throws Exception
      */
     Source_Ref findSource(const unsigned id);
-    
+
     /**
      * Find a source with a specified alias
      *
      * \throws Exception
      */
     Source_Ref findSource(const std::string & alias_r);
-    
+
     /**
      * Add a new source
      *
@@ -96,9 +96,10 @@ namespace zypp
      */
 #warning: this could be done by providing iterator-like methods
     void disableAllSources();
-    
+
   private:
-    typedef std::map<unsigned, RW_pointer<Source> > SourceMap;
+#warning move data to a PIMPL or anonymous namespace as it's a Singlreton
+    typedef std::map<unsigned, RW_pointer<Source_Ref> > SourceMap;
 
     SourceMap _sources;
 

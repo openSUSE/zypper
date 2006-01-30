@@ -70,12 +70,12 @@ namespace zypp
   //	METHOD NAME : SourceFactory::createFrom
   //	METHOD TYPE : Source
   //
-  Source SourceFactory::createFrom( const Source::Impl_Ptr & impl_r )
+  Source_Ref SourceFactory::createFrom( const Source_Ref::Impl_Ptr & impl_r )
   {
     if ( ! impl_r )
       ZYPP_THROW( Exception("NULL implementation passed to SourceFactory") );
 
-    return Source( impl_r );
+    return Source_Ref( impl_r );
   }
 
   void SourceFactory::listProducts( const Url & url_r, ProductSet & products_r )
@@ -95,7 +95,7 @@ namespace zypp
     media->close();
   }
 
-  Source SourceFactory::createFrom( const Url & url_r, const Pathname & path_r, const std::string & alias_r )
+  Source_Ref SourceFactory::createFrom( const Url & url_r, const Pathname & path_r, const std::string & alias_r )
   {
     if (! url_r.isValid())
       ZYPP_THROW( Exception("Empty URL passed to SourceFactory") );
@@ -107,9 +107,9 @@ namespace zypp
     try
     {
       MIL << "Trying the YUM source" << endl;
-      Source::Impl_Ptr impl = new yum::YUMSourceImpl(media, path_r, alias_r);
+      Source_Ref::Impl_Ptr impl = new yum::YUMSourceImpl(media, path_r, alias_r);
       MIL << "Found the YUM source" << endl;
-      return Source(impl);
+      return Source_Ref(impl);
     }
     catch (const Exception & excpt_r)
     {
@@ -119,9 +119,9 @@ namespace zypp
     try
     {
       MIL << "Trying the SUSE tags source" << endl;
-      Source::Impl_Ptr impl = new susetags::SuseTagsImpl(media, path_r, alias_r);
+      Source_Ref::Impl_Ptr impl = new susetags::SuseTagsImpl(media, path_r, alias_r);
       MIL << "Found the SUSE tags source" << endl;
-      return Source(impl);
+      return Source_Ref(impl);
     }
     catch (const Exception & excpt_r)
     {
@@ -130,7 +130,7 @@ namespace zypp
     }
     ERR << "No next type of source" << endl;
     ZYPP_THROW(Exception("Cannot create the installation source"));
-    return Source(); // not reached!!
+    return Source_Ref(); // not reached!!
   }
 
   /******************************************************************

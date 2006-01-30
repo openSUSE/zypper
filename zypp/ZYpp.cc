@@ -54,6 +54,9 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
+  SourceFeed_Ref ZYpp::sourceFeed() const
+  { return _pimpl->sourceFeed(); }
+
   ResPool ZYpp::pool() const
   { return _pimpl->pool(); }
 

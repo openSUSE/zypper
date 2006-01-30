@@ -15,6 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/ResPoolManager.h"
+#include "zypp/SourceFeed.h"
 #include "zypp/Target.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -44,6 +45,10 @@ namespace zypp
       ResPool pool() const
       { return _pool.accessor(); }
 
+      /** */
+      SourceFeed_Ref sourceFeed() const
+      { return _sourceFeed; }
+
       void addResolvables (const ResStore& store, bool installed = false);
 
       void removeResolvables (const ResStore& store);
@@ -52,20 +57,22 @@ namespace zypp
        * \throws Exception
        */
       Target_Ptr target() const;
-  
+
       /**
        * \throws Exception
        */
       void initTarget(const Pathname & root);
-  
+
       /**
        * \throws Exception
        */
       void finishTarget();
-            
+
     private:
       /** */
       ResPoolManager _pool;
+      /** */
+      SourceFeed_Ref _sourceFeed;
       /** */
       Target_Ptr _target;
     };

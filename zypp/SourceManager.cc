@@ -54,15 +54,15 @@ namespace zypp
 
   unsigned SourceManager::addSource(const Url & url_r, const Pathname & path_r, const std::string & alias_r)
   {
-    Source src = SourceFactory().createFrom(url_r, path_r, alias_r);
-    RW_pointer<Source> src_ptr = RW_pointer<Source>(new Source(src));
+    Source_Ref src( SourceFactory().createFrom(url_r, path_r, alias_r) );
+    RW_pointer<Source_Ref> src_ptr = RW_pointer<Source_Ref>(new Source_Ref(src));
     _sources[_next_id] = src_ptr;
     return _next_id++;
   }
 
   unsigned SourceManager::addSource(Source_Ref source_r)
   {
-    RW_pointer<Source> src_ptr = RW_pointer<Source>(new Source(source_r));
+    RW_pointer<Source_Ref> src_ptr = RW_pointer<Source_Ref>(new Source_Ref(source_r));
     _sources[_next_id] = src_ptr;
     return _next_id++;
   }
@@ -126,7 +126,7 @@ namespace zypp
 	    return *(it->second);
 	    break;
 	}
-	
+
     }
     ZYPP_THROW(Exception("Unknown source name '"+alias_r+"'"));
     /*NOTREACHED*/

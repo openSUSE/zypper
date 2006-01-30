@@ -29,6 +29,8 @@ namespace zypp
     //	METHOD TYPE : Constructor
     //
     ZYppImpl::ZYppImpl()
+    : _pool()
+    , _sourceFeed( _pool )
     {
     }
 
@@ -45,7 +47,7 @@ namespace zypp
     {
 	_pool.insert(store.begin(), store.end(), installed);
     }
-    
+
     void ZYppImpl::removeResolvables (const ResStore& store)
     {
         for (ResStore::iterator it = store.begin(); it != store.end(); it++)
@@ -60,7 +62,7 @@ namespace zypp
 	ZYPP_THROW(Exception("Target not initialized."));
       return _target;
      }
-  
+
     void ZYppImpl::initTarget(const Pathname & root)
     {
        if (_target)
@@ -68,14 +70,14 @@ namespace zypp
 #warning FIXME does this release the memory? _target is intrusive_ptr<Target>. Once more below...
        _target = new Target(root);
      }
-  
+
     void ZYppImpl::finishTarget()
     {
 //      if (_target)
 //	_target = 0;
       _target = 0;
     }
-    
+
     /******************************************************************
      **
      **	FUNCTION NAME : operator<<

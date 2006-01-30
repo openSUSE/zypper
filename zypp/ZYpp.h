@@ -30,6 +30,7 @@ namespace zypp
 
   class ZYppFactory;
   class ResPool;
+  class SourceFeed_Ref;
   class ResStore;
 
   ///////////////////////////////////////////////////////////////////
@@ -45,9 +46,13 @@ namespace zypp
     typedef intrusive_ptr<const ZYpp> constPtr;
 
   public:
+
+    /**  */
+    SourceFeed_Ref sourceFeed() const;
+
     /**  */
     ResPool pool() const;
-    
+
     void addResolvables (const ResStore& store, bool installed = false);
 
     void removeResolvables (const ResStore& store);
