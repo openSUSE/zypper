@@ -214,6 +214,8 @@ proc multi-run { src } {
 		  fail $testBase_name
 		  set errorOccured 0
 		  continue
+	      } else {					# remove the (empty) diff
+		exec sh -c "rm -f $mistakefile $difffile"
 	      }
 	  }
 
