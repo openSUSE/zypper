@@ -141,17 +141,21 @@ QueueItemBranch::process (ResolverContext_Ptr context, QueueItemList & qil)
     for (QueueItemList::const_iterator iter = _possible_qitems.begin(); iter != _possible_qitems.end(); iter++) {
 
 	QueueItem_Ptr item = *iter;
-
-	if (item->isSatisfied (context))
+DBG << "_possible_qitem " << *item << endl;
+	if (item->isSatisfied (context)) {
+DBG << "is satisfied" << endl;
 	    goto finished;
+	}
 
 	/* Drop any useless branch items */
 	if (! item->isRedundant (context)) {
+DBG << "not redundant" << endl;
 	    live_branches.push_front (item);
 	}
     }
 
     branch_count = live_branches.size();
+DBG << "branch_count " << branch_count << endl;
 
     if (branch_count == 0) {
 
@@ -176,7 +180,7 @@ QueueItemBranch::process (ResolverContext_Ptr context, QueueItemList & qil)
 	}
 
     } else if (branch_count == _possible_qitems.size()) {
-
+DBG << "Nothing was eliminated" << endl;
 	/* Nothing was eliminated, so just pass the branch through (and set it to
 	   NULL so that it won't get freed when we exit. */
 
@@ -185,7 +189,7 @@ QueueItemBranch::process (ResolverContext_Ptr context, QueueItemList & qil)
 	did_something = false;
 
     } else {
-// ERR << "QueueItemBranch::process rebranching" << endl;
+ERR << "rebranching" << endl;
 	QueueItemBranch_Ptr new_branch = new QueueItemBranch (pool());
 	for (QueueItemList::const_iterator iter = live_branches.begin(); iter != live_branches.end(); iter++) {
 	    new_branch->addItem ((*iter)->copy());
@@ -194,7 +198,6 @@ QueueItemBranch::process (ResolverContext_Ptr context, QueueItemList & qil)
     }
 
  finished:
-//FIXME    rc_queue_item_free (item);
 
     return did_something;
 }
