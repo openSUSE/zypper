@@ -43,11 +43,11 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  const TranslatedText & ResObject::summary() const
-  { return pimpl().summary(); }
+  Text ResObject::summary() const
+  { return pimpl().summary().text(); }
 
-  const TranslatedText & ResObject::description() const
-  { return pimpl().description(); }
+  Text ResObject::description() const
+  { return pimpl().description().text(); }
 
   Text ResObject::insnotify() const
   { return pimpl().insnotify(); }

@@ -21,6 +21,8 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  const TranslatedText TranslatedText::notext;
+
   struct TranslatedText::Private
   {
     std::map<LanguageCode, std::string> translations;

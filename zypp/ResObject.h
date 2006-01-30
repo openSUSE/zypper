@@ -43,10 +43,10 @@ namespace zypp
 
   public:
     /** */
-    const TranslatedText & summary() const;
+    Text summary() const;
 
     /** */
-    const TranslatedText & description() const;
+    Text description() const;
 
     /** */
     Text insnotify() const;

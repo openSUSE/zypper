@@ -26,10 +26,10 @@ namespace zypp
     /////////////////////////////////////////////////////////////////
 
       const TranslatedText & ResObjectImplIf::summary() const
-      { return TranslatedText(); }
+      { return TranslatedText::notext; }
 
       const TranslatedText & ResObjectImplIf::description() const
-      { return TranslatedText(); }
+      { return TranslatedText::notext; }
 
       Text ResObjectImplIf::insnotify() const
       { return Text(); }

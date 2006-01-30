@@ -27,10 +27,10 @@ namespace zypp
     /////////////////////////////////////////////////////////////////
 
     const TranslatedText & SelectionImplIf::summary() const
-    { return TranslatedText(); }
+    { return TranslatedText::notext; }
 
     const TranslatedText & SelectionImplIf::description() const
-    { return TranslatedText(); }
+    { return TranslatedText::notext; }
 
     Label SelectionImplIf::category() const
     { return Label(); }

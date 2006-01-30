@@ -22,7 +22,6 @@ using std::string;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : TranslatedText
@@ -35,6 +34,7 @@ namespace zypp
 
   public:
     /** Default ctor: 0 */
+    static const TranslatedText notext;
     TranslatedText();
     ~TranslatedText();
     TranslatedText(const std::string &text, const LanguageCode &lang = LanguageCode());
