@@ -66,11 +66,11 @@ namespace zypp
 
 
       /** Package summary */
-      const TranslatedText &  RPMPackageImpl::summary() const
+      TranslatedText RPMPackageImpl::summary() const
       { return _summary; }
 
       /** Package description */
-      const TranslatedText &  RPMPackageImpl::description() const
+      TranslatedText RPMPackageImpl::description() const
       { return _description; }
 
       Text RPMPackageImpl::insnotify() const
