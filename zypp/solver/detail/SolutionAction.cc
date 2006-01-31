@@ -119,12 +119,13 @@ TransactionSolutionAction::execute(Resolver & resolver) const
     bool ret = true;
     switch (action()) {
 	case KEEP:
+	    ret = _item.status().setNoTransact (ResStatus::USER);
 	case INSTALL:
 	case UPDATE:
-	    resolver.addPoolItemToInstall (_item);
+	    _item.status().setToBeInstalled (ResStatus::USER);
 	    break;
 	case REMOVE:
-	    resolver.addPoolItemToRemove (_item);	    
+	    _item.status().setToBeUninstalled (ResStatus::USER);
 	    break;
 	case UNLOCK:
 	    ERR << "Not implemented yet" << endl;
