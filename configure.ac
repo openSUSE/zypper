@@ -56,6 +56,17 @@ AC_SUBST(LIBZYPP_VERSION_INFO)
 dnl ==================================================
 
 CXXFLAGS="-g -O2 -Wall -Wformat"
+#AC_SYS_LARGEFILE
+#if test "$enable_largefile" != no ; then
+#	enable_largefile=yes
+#
+#	if test "$ac_cv_sys_file_offset_bits" != no; then
+#		CXXFLAGS="$CXXFLAGS -D_FILE_OFFSET_BITS=$ac_cv_sys_file_offset_bits"
+#	fi
+#	if test "$ac_cv_sys_large_files" != no; then
+#		CXXFLAGS="$CXXFLAGS -D_LARGE_FILES=$ac_cv_sys_large_files"
+#	fi
+#fi
 
 dnl ==================================================
 
@@ -153,7 +164,7 @@ if test "x$devel_faked_hal" = "xyes"; then
  HAL_CFLAGS=-DFAKE_HAL
 else
  dnl checks for pkgconfig modules
- hal_module="hal >= 0.5.4"
+ hal_module="hal >= 0.5.4, hal-storage >= 0.5.4"
  dbus_module="dbus-1 >= 0.33"
  hal_modules="glib-2.0 >= 2.6.0, gobject-2.0 >= 2.6.0, dbus-glib-1 >= 0.33, $dbus_module, $hal_module"
  PKG_CHECK_MODULES(HAL, [$hal_modules])
