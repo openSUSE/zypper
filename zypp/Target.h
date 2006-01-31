@@ -58,6 +58,7 @@ namespace zypp
 
   public:
     /** Ctor */
+    explicit
     Target( const Pathname & root = "/" );
     /** Ctor */
     explicit

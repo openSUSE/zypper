@@ -30,8 +30,8 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   Target::Target( const Pathname & root )
+  : _pimpl( new Impl(root) )
   {
-    _pimpl = RW_pointer<Impl, rw_pointer::Intrusive<Impl> >(new Impl(root));
   }
 
   ///////////////////////////////////////////////////////////////////
