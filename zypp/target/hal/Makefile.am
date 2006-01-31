@@ -18,6 +18,8 @@ INCLUDES = \
 targethalincludedir = $(pkgincludedir)/target/hal
 
 targethalinclude_HEADERS =	\
+	HalException.h		\
+	HalContext.h		\
 	Hal.h
 
 
@@ -26,6 +28,7 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_target_hal.la
 ## ##################################################
 
 lib@PACKAGE@_target_hal_la_SOURCES =	\
+	HalContext.cc			\
 	Hal.cc
 
 lib@PACKAGE@_target_hal_la_LIBADD =	\
