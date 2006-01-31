@@ -13,7 +13,7 @@
 #include "zypp/base/Logger.h"
 
 #include "zypp/source/susetags/PackagesParser.h"
-#include "zypp/parser/tagfile/Parser.h"
+#include "zypp/parser/tagfile/TagFileParser.h"
 #include "zypp/Package.h"
 #include "zypp/detail/PackageImpl.h"
 #include "zypp/CapFactory.h"
@@ -34,7 +34,7 @@ namespace zypp
 
       using namespace parser::tagfile;
 
-      struct PackagesParser : public parser::tagfile::Parser
+      struct PackagesParser : public zypp::parser::tagfile::TagFileParser
       {
         std::list<Package::Ptr> result;
 
@@ -59,9 +59,9 @@ namespace zypp
           collectPkg( shared_ptr<detail::PackageImpl>(new detail::PackageImpl) );
         }
 
-        void collectDeps( const std::list<std::string> & depstr_r, CapSet & capset )
+        void collectDeps( const std::set<std::string> & depstr_r, CapSet & capset )
         {
-          for ( std::list<std::string>::const_iterator it = depstr_r.begin();
+          for ( std::set<std::string>::const_iterator it = depstr_r.begin();
                 it != depstr_r.end(); ++it )
             {
               capset.insert( CapFactory().parse( ResTraits<Package>::kind, *it ) );
@@ -69,9 +69,9 @@ namespace zypp
         }
 
         /* Consume SingleTag data. */
-        virtual void consume( const STag & stag_r )
+        virtual void consume( const SingleTag & stag_r )
         {
-          if ( stag_r.stag.isPlain( "Pkg" ) )
+          if ( stag_r.name == "Pkg" )
             {
               std::vector<std::string> words;
               str::split( stag_r.value, std::back_inserter(words) );
@@ -85,30 +85,30 @@ namespace zypp
         }
 
         /* Consume MulitTag data. */
-        virtual void consume( const MTag & mtag_r )
+        virtual void consume( const MultiTag & mtag_r )
         {
           if ( ! pkgPending() )
             return;
 
-          if ( mtag_r.stag.isPlain( "Prv" ) )
+          if ( mtag_r.name == "Prv" )
             {
-              collectDeps( mtag_r.value, nvrad[Dep::PROVIDES] );
+              collectDeps( mtag_r.values, nvrad[Dep::PROVIDES] );
             }
-          else if ( mtag_r.stag.isPlain( "Prq" ) )
+          else if ( mtag_r.name == "Prq" )
             {
-              collectDeps( mtag_r.value, nvrad[Dep::PREREQUIRES] );
+              collectDeps( mtag_r.values, nvrad[Dep::PREREQUIRES] );
             }
-          else if ( mtag_r.stag.isPlain( "Req" ) )
+          else if ( mtag_r.name == "Req" )
             {
-              collectDeps( mtag_r.value, nvrad[Dep::REQUIRES] );
+              collectDeps( mtag_r.values, nvrad[Dep::REQUIRES] );
             }
-          else if ( mtag_r.stag.isPlain( "Con" ) )
+          else if ( mtag_r.name == "Con" )
             {
-              collectDeps( mtag_r.value, nvrad[Dep::CONFLICTS] );
+              collectDeps( mtag_r.values, nvrad[Dep::CONFLICTS] );
             }
-          else if ( mtag_r.stag.isPlain( "Obs" ) )
+          else if ( mtag_r.name == "Obs" )
             {
-              collectDeps( mtag_r.value, nvrad[Dep::OBSOLETES] );
+              collectDeps( mtag_r.values, nvrad[Dep::OBSOLETES] );
             }
         }
 
