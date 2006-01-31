@@ -31,21 +31,7 @@ namespace zypp
   struct Resolvable::Impl
   {
     /** Ctor */
-    Impl( const Kind & kind_r,
-          const NVRAD & nvrad_r )
-    : _kind( kind_r )
-    , _name( nvrad_r.name )
-    , _edition( nvrad_r.edition )
-    , _arch( nvrad_r.arch )
-    , _deps( nvrad_r )
-    {
-      // assert self provides
-      _deps[Dep::PROVIDES].insert( CapFactory()
-                             .parse( _kind, _name, Rel::EQ, _edition ) );
-      // assert all prerequires are in requires too
-      _deps[Dep::REQUIRES].insert( _deps[Dep::PREREQUIRES].begin(),
-                                   _deps[Dep::PREREQUIRES].end() );
-    }
+    Impl( const Kind & kind_r, const NVRAD & nvrad_r );
 
   public:
     /**  */

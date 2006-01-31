@@ -124,6 +124,7 @@ namespace zypp
    * \li \c split:   name:/absolute/path
    * \li \c name:    name
    * \li \c vers:    name op edition
+   * \li \c hal:     hal(string)
   */
   struct CapFactory::Impl
   {
@@ -188,6 +189,22 @@ namespace zypp
     static bool isHalSpec( const std::string & name_r )
     {
       return name_r.substr(0,4) == "hal(";
+    }
+
+    static CapabilityImpl::Ptr buildFile( const Resolvable::Kind & refers_r,
+                                          const std::string & name_r )
+    {
+      // NullCap check first:
+      if ( name_r.empty() )
+	{
+	  // Singleton, so no need to put it into _uset !?
+	  return capability::NullCap::instance();
+	}
+
+      assertResKind( refers_r );
+
+      return usetInsert
+      ( new capability::FileCap( refers_r, name_r ) );
     }
 
     /** Try to build a non versioned cap from \a name_r .
@@ -327,11 +344,15 @@ namespace zypp
 	{
 	  return Capability( Impl::buildHal( refers_r, strval_r ) );
 	}
+      else if ( Impl::isFileSpec( strval_r ) )
+        {
+          return Capability( Impl::buildFile( refers_r, strval_r ) );
+        }
       else
 	{
 	  // strval_r has at least two words which could make 'op edition'?
 	  // improve regex!
-	  str::regex  rx( "[^/](.*[^ \t])([ \t]+)([^ \t]+)([ \t]+)([^ \t]+)" );
+	  str::regex  rx( "(.*[^ \t])([ \t]+)([^ \t]+)([ \t]+)([^ \t]+)" );
 	  str::smatch what;
 	  if( str::regex_match( strval_r.begin(), strval_r.end(),what, rx ) )
 	    {
