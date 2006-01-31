@@ -113,7 +113,7 @@ namespace zypp
             if ( howmany >= 2 )
             {
               pkgImpl->_media_number = str::strtonum<unsigned int>(words[0]);
-              pkgImpl->_location = Pathname(words[1]);
+              pkgImpl->_location = Pathname("/suse/" + nvrad.arch.asString() + "/" + words[1]);
             }
             else
             {
