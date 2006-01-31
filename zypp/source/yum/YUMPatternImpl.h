@@ -47,9 +47,9 @@ namespace zypp
 	/** default requirements */
 	virtual CapSet defaultReq() const;
 	/** */
-	virtual const TranslatedText &  summary() const;
+	virtual TranslatedText summary() const;
 	/** */
-	virtual const TranslatedText &  description() const;
+	virtual TranslatedText description() const;
 	/** */
 	virtual Text insnotify() const;
 	/** */

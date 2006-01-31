@@ -194,11 +194,11 @@ namespace zypp
 
 
       /** Package summary */
-      const TranslatedText &  YUMPackageImpl::summary() const
+      TranslatedText YUMPackageImpl::summary() const
       { return _summary; }
 
       /** Package description */
-      const TranslatedText &  YUMPackageImpl::description() const
+      TranslatedText YUMPackageImpl::description() const
       { return _description; }
 
       Text YUMPackageImpl::insnotify() const

@@ -52,9 +52,9 @@ namespace zypp
 	);
 
 	/** Package summary */
-	virtual const TranslatedText &  summary() const;
+	virtual TranslatedText summary() const;
 	/** Package description */
-	virtual const TranslatedText &  description() const;
+	virtual TranslatedText description() const;
 	virtual Text insnotify() const;
 	virtual Text delnotify() const;
 	virtual ByteCount size() const;

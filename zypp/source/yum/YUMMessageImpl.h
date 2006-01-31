@@ -44,9 +44,9 @@ namespace zypp
 	/** Get the type of the message (YesNo / OK) */
 	virtual std::string type() const;
 	/** */
-	virtual const TranslatedText &  summary() const;
+	virtual TranslatedText summary() const;
 	/** */
-	virtual const TranslatedText & description() const;
+	virtual TranslatedText description() const;
 	/** */
 	virtual Text insnotify() const;
 	/** */

@@ -48,10 +48,10 @@ namespace zypp
       std::string YUMMessageImpl::type() const {
 	return _type;
       }
-      const TranslatedText &  YUMMessageImpl::summary() const
+      TranslatedText YUMMessageImpl::summary() const
       { return ResObjectImplIf::summary(); }
 
-      const TranslatedText &  YUMMessageImpl::description() const
+      TranslatedText YUMMessageImpl::description() const
       { return ResObjectImplIf::description(); }
 
       Text YUMMessageImpl::insnotify() const

@@ -99,10 +99,10 @@ namespace zypp
       CapSet YUMGroupImpl::defaultReq() const
       { return _default_req; }
 
-      const TranslatedText & YUMGroupImpl::summary() const
+      TranslatedText YUMGroupImpl::summary() const
       { return ResObjectImplIf::summary(); }
 
-      const TranslatedText & YUMGroupImpl::description() const
+      TranslatedText YUMGroupImpl::description() const
       { return ResObjectImplIf::description(); }
 
       Text YUMGroupImpl::insnotify() const

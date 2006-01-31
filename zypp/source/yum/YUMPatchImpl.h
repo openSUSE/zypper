@@ -59,9 +59,9 @@ namespace zypp
 	AtomList not_installed_atoms() const;
 
 	/** Patch summary */
-	virtual const TranslatedText &  summary() const;
+	virtual TranslatedText summary() const;
 	/** Patch description */
-	virtual const TranslatedText &  description() const;
+	virtual TranslatedText description() const;
 	virtual Text insnotify() const;
 	virtual Text delnotify() const;
 	virtual ByteCount size() const;

@@ -45,8 +45,8 @@ namespace zypp
 	/** Check whether script to undo the change is available */
 	virtual bool undo_available() const;
 
-	virtual const TranslatedText &  summary() const;
-	virtual const TranslatedText &  description() const;
+	virtual TranslatedText summary() const;
+	virtual TranslatedText description() const;
 	virtual Text insnotify() const;
 	virtual Text delnotify() const;
 	virtual bool providesSources() const;
