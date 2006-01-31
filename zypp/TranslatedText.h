@@ -6,58 +6,86 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/Date.h
+/** \file	zypp/TranslatedText.h
  *
 */
 #ifndef ZYPP_TRANSLATEDTEXT_H
 #define ZYPP_TRANSLATEDTEXT_H
 
-#include <list>
+#include <iosfwd>
 #include <map>
+#include <list>
 #include <string>
-#include "zypp/LanguageCode.h"
 
-using std::string;
+#include "zypp/base/PtrTypes.h"
+#include "zypp/LanguageCode.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : TranslatedText
   //
-  /** Class that represent a text and multiple translations
+  /** Class that represent a text and multiple translations.
   */
   class TranslatedText
   {
     friend std::ostream & operator<<( std::ostream & str, const TranslatedText & obj );
 
   public:
-    /** Default ctor: 0 */
-    static const TranslatedText notext;
+    /** Implementation  */
+    class Impl;
+
+  public:
+    /** Default ctor */
     TranslatedText();
-    ~TranslatedText();
+    /** Ctor \todo Make ctor it explicit */
+    //explicit
     TranslatedText(const std::string &text, const LanguageCode &lang = LanguageCode());
+    /** Ctor. \todo Make ctor it explicit */
+    //explicit
     TranslatedText(const std::list<std::string> &text, const LanguageCode &lang = LanguageCode());
-    void operator=(const std::string &text);
-    void operator=(const std::list<std::string> &text);
-    std::string asString() const;
+    /** Dtor */
+    ~TranslatedText();
+
+    /** \todo Think about eliminating them. The default text is nothing
+     * special. It's strange to allow to alter it in a different manner
+     * than the other ones. IMO more confusing than convenient.
+    */
+    void operator=(const std::string &text)
+    { setText(text); }
+    void operator=(const std::list<std::string> &text)
+    { setText(text); }
+
+    /**  */
+    static const TranslatedText notext;
+
+  public:
+
+    /** Synonym for \ref text */
+    std::string asString( const LanguageCode &lang = LanguageCode() ) const
+    { return text(lang); }
+
     std::string text( const LanguageCode &lang = LanguageCode() ) const;
-    //operator string() const;
+
     void setText( const std::string &text, const LanguageCode &lang = LanguageCode());
     void setText( const std::list<std::string> &text, const LanguageCode &lang = LanguageCode());
+
     LanguageCode detectLanguage() const;
+
   private:
-    class Private;
-    Private *d;
+    /** Pointer to implementation */
+    RWCOW_pointer<Impl> _pimpl;
   };
   ///////////////////////////////////////////////////////////////////
 
-  /** \relates Date Stream output */
+  /** \relates TranslatedText Stream output */
   inline std::ostream & operator<<( std::ostream & str, const TranslatedText & obj )
   { return str << obj.asString(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_TRANSLATED_H
+#endif // ZYPP_TRANSLATEDTEXT_H

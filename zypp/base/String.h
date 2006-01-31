@@ -245,23 +245,26 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     /** \name Join. */
     //@{
-    /** Join \a words_r into a single line
-     */
-    template <class _Input>
-      std::string join( const _Input & words_r,
-                        const std::string & sep_r )
-      { 
-        if ( words_r.empty() )
-          return "";
-        
-        std::string ret( words_r[0] );
-        
-        for ( unsigned i = 1; i < words_r.size(); ++i ) {
-          ret += sep_r + words_r[i];
-        }
-        
-        return ret;
+    /** Join strings using separator \sep_r (defaults to BLANK). */
+    template <class _Iterator>
+      std::string join( _Iterator begin, _Iterator end,
+                        const std::string & sep_r = " " )
+      {
+        std::string res;
+        for ( _Iterator iter = begin; iter != end; ++ iter )
+          {
+            if ( iter != begin )
+              res += sep_r;
+            res += *iter;
+          }
+        return res;
       }
+
+    /** Join strings using separator \sep_r (defaults to BLANK). */
+    template <class _Container>
+      std::string join( const _Container & cont_r,
+                        const std::string & sep_r = " " )
+      { return join( cont_r.begin(), cont_r.end() ); }
     //@}
 
 

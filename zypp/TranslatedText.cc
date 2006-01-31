@@ -10,9 +10,9 @@
  *
 */
 #include <iostream>
-#include <sstream>
 //#include "zypp/base/Logger.h"
 
+#include "zypp/base/String.h"
 #include "zypp/TranslatedText.h"
 
 using std::endl;
@@ -21,90 +21,118 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  const TranslatedText TranslatedText::notext;
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : TranslatedText::Impl
+  //
+  /** TranslatedText implementation. */
+  struct TranslatedText::Impl
+  {
+    Impl()
+    {}
 
-  struct TranslatedText::Private
-  {
-    std::map<LanguageCode, std::string> translations;
-  };
+    Impl(const std::string &text, const LanguageCode &lang)
+    { setText(text, lang); }
 
-  std::string TranslatedText::text( const LanguageCode &lang ) const
-  {
-    return d->translations[lang];
-  }
-  
-  LanguageCode TranslatedText::detectLanguage() const
-  {
-     return LanguageCode();
-  }
+    Impl(const std::list<std::string> &text, const LanguageCode &lang)
+    { setText(text, lang); }
 
-  void TranslatedText::setText( const std::string &text, const LanguageCode &lang )
-  {
-    d->translations[lang] = text;
-  }
+    std::string text( const LanguageCode &lang = LanguageCode() ) const
+    { return translations[lang]; }
 
-  void TranslatedText::setText( const std::list<std::string> &text, const LanguageCode &lang )
-  {
-    std::stringstream strs(d->translations[lang]);
-    //d->translations[lang].clear();
-    std::list<std::string>::const_iterator it;
-    for (it = text.begin(); it != text.end(); ++it)
+    void setText( const std::string &text, const LanguageCode &lang)
+    { translations[lang] = text; }
+
+    void setText( const std::list<std::string> &text, const LanguageCode &lang)
+    { translations[lang] = str::join( text, "\n" ); }
+
+    /** \todo Do it by accessing the global ZYpp. */
+    LanguageCode detectLanguage() const
     {
-      strs << *it << std::endl;
-      //d->translations[lang] = d->translations[lang] + *it;
-      //d->translations[lang] = d->translations[lang] + std::endl;
+      return LanguageCode();
     }
-  }
 
-  /*
-  operator TranslatedText::string() const
-  {
-    return text();
-  }
-  */
+  private:
+    mutable std::map<LanguageCode, std::string> translations;
 
-  TranslatedText::TranslatedText(const std::string &text, const LanguageCode &lang)
-  {
-    d = new Private();
-    setText(text, lang);
-  }
+  public:
+    /** Offer default Impl. */
+    static shared_ptr<Impl> nullimpl()
+    {
+      static shared_ptr<Impl> _nullimpl( new Impl );
+      return _nullimpl;
+    }
 
-  TranslatedText::TranslatedText(const std::list<std::string> &text, const LanguageCode &lang)
-  {
-    d = new Private();
-    setText(text, lang);
-  }
-
-  TranslatedText::TranslatedText()
-  {
-    d = new Private;
-  }
-
-  TranslatedText::~TranslatedText()
-  {
-    delete d;
-  }
-    
-
-  void TranslatedText::operator=(const std::string &text)
-  {
-    setText(text);
-  }
-    
-  void TranslatedText::operator=(const std::list<std::string> &text)
-  {
-    setText(text);
-  }
+  private:
+    friend Impl * rwcowClone<Impl>( const Impl * rhs );
+    /** clone for RWCOW_pointer */
+    Impl * clone() const
+    { return new Impl( *this ); }
+  };
+  ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : TranslatedText::asString
-  //	METHOD TYPE : std::string
+  //	CLASS NAME : TranslatedText
   //
-  std::string TranslatedText::asString() const
-  {
-    return std::string();
-  }
+  ///////////////////////////////////////////////////////////////////
+
+  const TranslatedText TranslatedText::notext;
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : TranslatedText::TranslatedText
+  //	METHOD TYPE : Ctor
+  //
+  TranslatedText::TranslatedText()
+  : _pimpl( Impl::nullimpl() )
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : TranslatedText::TranslatedText
+  //	METHOD TYPE : Ctor
+  //
+  TranslatedText::TranslatedText( const std::string &text,
+                                  const LanguageCode &lang )
+  : _pimpl( new Impl(text, lang) )
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : TranslatedText::TranslatedText
+  //	METHOD TYPE : Ctor
+  //
+  TranslatedText::TranslatedText( const std::list<std::string> &text,
+                                  const LanguageCode &lang )
+  : _pimpl( new Impl(text, lang) )
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : TranslatedText::~TranslatedText
+  //	METHOD TYPE : Dtor
+  //
+  TranslatedText::~TranslatedText()
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  // Forward to implementation:
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  std::string TranslatedText::text( const LanguageCode &lang ) const
+  { return _pimpl->text( lang ); }
+
+  void TranslatedText::setText( const std::string &text, const LanguageCode &lang )
+  { _pimpl->setText( text, lang ); }
+
+  void TranslatedText::setText( const std::list<std::string> &text, const LanguageCode &lang )
+  { _pimpl->setText( text, lang ); }
+
+  LanguageCode TranslatedText::detectLanguage() const
+  { return _pimpl->detectLanguage(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

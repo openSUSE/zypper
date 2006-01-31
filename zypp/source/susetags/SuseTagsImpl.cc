@@ -83,7 +83,7 @@ namespace zypp
 
 	while (!sels.eof())
 	{
-	    string selfile;
+            std::string selfile;
 
 	    getline(sels,selfile);
 
