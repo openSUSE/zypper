@@ -55,7 +55,7 @@ namespace zypp
 	std::string _category;
 	Label _vendor;
 	Label _displayname;
-	Text _description;
+	TranslatedText _description;
 
 
       private:
