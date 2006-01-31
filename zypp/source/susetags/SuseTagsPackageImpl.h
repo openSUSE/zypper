@@ -13,6 +13,7 @@
 #define ZYPP_SOURCE_SUSETAGSPACKAGEIMPL_H
 
 #include "zypp/detail/PackageImplIf.h"
+#include "zypp/Source.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -31,7 +32,7 @@ namespace zypp
       */
       struct SuseTagsPackageImpl : public zypp::detail::PackageImplIf
       {
-        SuseTagsPackageImpl();
+        SuseTagsPackageImpl(Source_Ref source_r);
         virtual ~SuseTagsPackageImpl();
 
         /** \name Rpm Package Attributes. */
@@ -95,6 +96,11 @@ namespace zypp
         Date _buildtime;
         unsigned int _media_number;
         Pathname _location;
+
+      private:
+        Source_Ref _source;
+      public:
+        Source_Ref source() const;
 
 /*
 =Grp: System/Base

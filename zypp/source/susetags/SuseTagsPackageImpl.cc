@@ -27,7 +27,8 @@ namespace zypp
       //	METHOD NAME : PackageImpl::PackageImpl
       //	METHOD TYPE : Ctor
       //
-      SuseTagsPackageImpl::SuseTagsPackageImpl()
+      SuseTagsPackageImpl::SuseTagsPackageImpl(Source_Ref source_r) :
+        _source( source_r )
       {}
   
       ///////////////////////////////////////////////////////////////////
@@ -112,6 +113,8 @@ namespace zypp
       bool SuseTagsPackageImpl::installOnly() const
       { return false; }
 
+      Source_Ref SuseTagsPackageImpl::source() const
+      { return _source; }
 
       /////////////////////////////////////////////////////////////////
     } // namespace susetags

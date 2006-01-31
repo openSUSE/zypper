@@ -47,10 +47,11 @@ namespace zypp
         if ( ! p.userMayR() )
           ZYPP_THROW( Exception( p.asString()+" no permission to read" ) );
 
-        std::list<Package::Ptr> content( parsePackages( p.path() ) );
+        DBG << "SuseTagsImpl from a local file not working" << endl;
+/*        std::list<Package::Ptr> content( parsePackages( this, p.path() ) );
         _store.insert( content.begin(), content.end() );
         DBG << "SuseTagsImpl (fake) from " << p << ": "
-            << content.size() << " packages" << endl;
+            << content.size() << " packages" << endl;*/
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -68,7 +69,7 @@ namespace zypp
       {
         Pathname p = provideFile(_path + "suse/setup/descr/packages");
         DBG << "Going to parse " << p << endl;
-        std::list<Package::Ptr> content( parsePackages( p ) );
+        std::list<Package::Ptr> content( parsePackages( source_r, p ) );
         _store.insert( content.begin(), content.end() );
         DBG << "SuseTagsImpl (fake) from " << p << ": "
             << content.size() << " packages" << endl;

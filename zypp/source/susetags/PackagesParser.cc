@@ -37,6 +37,8 @@ namespace zypp
       struct PackagesParser : public zypp::parser::tagfile::TagFileParser
       {
         std::list<Package::Ptr> result;
+	
+	zypp::Source_Ref _source;
 
         shared_ptr<source::susetags::SuseTagsPackageImpl> pkgImpl;
         NVRAD nvrad;
@@ -56,7 +58,7 @@ namespace zypp
 
         void newPkg()
         {
-          collectPkg( shared_ptr<source::susetags::SuseTagsPackageImpl>(new source::susetags::SuseTagsPackageImpl) );
+          collectPkg( shared_ptr<source::susetags::SuseTagsPackageImpl>(new source::susetags::SuseTagsPackageImpl(_source)) );
         }
 
         void collectDeps( const std::set<std::string> & depstr_r, CapSet & capset )
@@ -164,9 +166,10 @@ namespace zypp
 
       ////////////////////////////////////////////////////////////////////////////
 
-      std::list<Package::Ptr> parsePackages( const Pathname & file_r )
+      std::list<Package::Ptr> parsePackages( Source_Ref source_r, const Pathname & file_r )
       {
         PackagesParser p;
+	p._source = source_r;
         p.parse( file_r );
         return p.result;
       }
