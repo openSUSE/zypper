@@ -49,10 +49,19 @@ namespace zypp
 class Helper {
   public:
 
-    // for item, find installed item which has same name and lower edition
+    // for name, find installed item which has same name
+    static PoolItem_Ref findInstalledByNameAndKind (const ResPool & pool, std::string name, const Resolvable::Kind & kind);
+
+    // for item, find installed item which has same name
+    // does *NOT* check edition
     //  FIXME: should probably take provides/obsoletes into account for
     //	       renamed upgrades
     static PoolItem_Ref findInstalledItem (const ResPool & pool, PoolItem_Ref item);
+
+    // for item, find uninstalled item which has same name and higher edition
+    static PoolItem_Ref findUninstalledItem (const ResPool & pool, PoolItem_Ref item);
+
+    static PoolItem_Ref findUpdateItem (const ResPool & pool, PoolItem_Ref item);
 
     friend std::ostream& operator<<(std::ostream&, const PoolItemList & itemlist);
 

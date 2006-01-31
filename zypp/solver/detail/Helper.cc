@@ -57,7 +57,7 @@ operator<< (ostream & os, const PoolItemList & itemlist)
 }
 
 
-class LookForUpgrades : public resfilter::OnCapMatchCallbackFunctor, public resfilter::PoolItemFilterFunctor
+class LookForInstalled : public resfilter::OnCapMatchCallbackFunctor, public resfilter::PoolItemFilterFunctor
 {
   public:
     PoolItem_Ref installed;
@@ -71,20 +71,62 @@ class LookForUpgrades : public resfilter::OnCapMatchCallbackFunctor, public resf
 
 
 // just find installed item with same kind/name as item
-// does NOT check edition
+
+PoolItem_Ref
+Helper::findInstalledByNameAndKind (const ResPool & pool, string name, const Resolvable::Kind & kind)
+{
+    LookForInstalled info;
+
+    invokeOnEach( pool.byNameBegin( name ),
+		  pool.byNameEnd( name ),
+		  functor::chain (resfilter::ByInstalled (),			// ByInstalled
+				  resfilter::ByKind( kind ) ),			// equal kind
+		  functor::functorRef<bool,PoolItem> (info) );
+
+    return info.installed;
+}
+
+
+// just find installed item with same kind/name as item
+// does *NOT* check edition
 
 PoolItem_Ref
 Helper::findInstalledItem (const ResPool & pool, PoolItem_Ref item)
 {
-    LookForUpgrades info;
+    return findInstalledByNameAndKind (pool, item->name(), item->kind() );
+}
 
+//----------------------------------------------------------------------------
+
+class LookForUpdate : public resfilter::OnCapMatchCallbackFunctor, public resfilter::PoolItemFilterFunctor
+{
+  public:
+    PoolItem_Ref uninstalled;
+
+    bool operator()( PoolItem_Ref provider )
+    {
+	uninstalled = provider;
+	return false;				// stop here, we found it
+    }
+};
+
+
+// just find installed item with same kind/name as item
+// *DOES* check edition
+
+PoolItem_Ref
+Helper::findUpdateItem (const ResPool & pool, PoolItem_Ref item)
+{
+    LookForUpdate info;
+#warning FIXME, should not report locked update candidates.
     invokeOnEach( pool.byNameBegin( item->name() ),
 		  pool.byNameEnd( item->name() ),
-		  functor::chain (resfilter::ByInstalled (),			// ByInstalled
-				  resfilter::ByKind( item->kind() ) ),		// equal kind
+		  functor::chain (functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
+						  resfilter::ByKind( item->kind() ) ),		// equal kind
+				  resfilter::byEdition<CompareByGT<Edition> >( item->edition() )),
 		  functor::functorRef<bool,PoolItem> (info) );
-
-    return info.installed;
+MIL << "Helper::findUpdateItem(" << item << ") => " << info.uninstalled << endl;
+    return info.uninstalled;
 }
 
 ///////////////////////////////////////////////////////////////////
