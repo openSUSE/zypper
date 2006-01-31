@@ -73,6 +73,9 @@ namespace zypp
   void Target::commit(ResPool pool_r)
   { return _pimpl->commit(pool_r); }
 
+  bool Target::providesFile (const std::string & name_str, const std::string & path_str) const
+  { return _pimpl->providesFile (name_str, path_str); }
+
   std::ostream & Target::dumpOn( std::ostream & str ) const
   { return _pimpl->dumpOn( str ); }
 

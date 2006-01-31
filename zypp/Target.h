@@ -53,8 +53,12 @@ namespace zypp
     static Target_Ptr nullimpl();
     /** Refference to the RPM database */
     target::rpm::RpmDb & rpmDb();
-    /** Comomit changes in the pool */
+    /** Commit changes in the pool */
     void commit(ResPool pool_r);
+
+      /** If the package is installed and provides the file
+	  Needed to evaluate split provides during Resolver::Upgrade() */
+      bool providesFile (const std::string & name_str, const std::string & path_str) const;
 
   public:
     /** Ctor */
