@@ -103,6 +103,22 @@ namespace zypp
             pkgImpl->_sourcesize = str::strtonum<unsigned long>(words[0]);
             pkgImpl->_archivesize = str::strtonum<unsigned long>(words[1]);
           }
+          if ( stag_r.name == "Loc" )
+          {
+            std::vector<std::string> words;
+            unsigned int howmany = str::split( stag_r.value, std::back_inserter(words) );
+            pkgImpl->_media_number = 1;
+            if ( howmany >= 2 )
+            {
+              pkgImpl->_media_number = str::strtonum<unsigned int>(words[0]);
+              pkgImpl->_location = Pathname(words[1]);
+            }
+            else
+            {
+                ZYPP_THROW( ParseException( "Loc" ) );
+            }
+            // ignore path
+          }
         }
 
         /* Consume MulitTag data. */

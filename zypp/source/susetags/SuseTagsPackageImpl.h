@@ -84,7 +84,7 @@ namespace zypp
         /** */
         virtual bool installOnly() const;
 
-        virtual License licenseToConfirm() const PURE_VIRTUAL;
+        virtual License licenseToConfirm() const;
 
         PackageGroup _group;
         std::list<std::string> _authors;
@@ -93,8 +93,8 @@ namespace zypp
         ByteCount _archivesize;
         Label _license;
         Date _buildtime;
-        //=Tim: 1111489970
-        // what is this property
+        unsigned int _media_number;
+        Pathname _location;
 
 /*
 =Grp: System/Base

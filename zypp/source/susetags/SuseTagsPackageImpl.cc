@@ -66,7 +66,7 @@ namespace zypp
       { return Changelog(); }
 
       Pathname SuseTagsPackageImpl::location() const
-      { return Pathname(); }
+      { return _location; }
 
       std::string SuseTagsPackageImpl::url() const
       { return std::string(); }
