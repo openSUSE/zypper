@@ -39,6 +39,7 @@ solverdetailinclude_HEADERS = \
 	QueueItemUninstall.h		\
 	ResolverQueue.h			\
 	Resolver.h			\
+	ResolverUpgrade.cc		\
 	ProblemSolutionInstall.h	\
 	ProblemSolutionUninstall.h	\
 	ProblemSolutionIgnore.h		\
@@ -62,6 +63,7 @@ lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	QueueItemUninstall.cc				\
 	Resolver.cc					\
 	Resolver_problems.cc				\
+	ResolverUpgrade.cc				\
 	ResolverInfo.cc					\
 	ResolverInfoChildOf.cc				\
 	ResolverInfoConflictsWith.cc			\
