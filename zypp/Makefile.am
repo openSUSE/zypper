@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-SUBDIRS = base url media capability detail pool parser \
+SUBDIRS = base thread url media capability detail pool parser \
 	source target solver zypp_detail
 
 ## ##################################################
@@ -136,6 +136,7 @@ lib@PACKAGE@_la_SOURCES = \
 lib@PACKAGE@_la_LDFLAGS =	@LIBZYPP_VERSION_INFO@
 
 lib@PACKAGE@_la_LIBADD =        base/lib@PACKAGE@_base.la	\
+				thread/lib@PACKAGE@_thread.la	\
 				detail/lib@PACKAGE@_detail.la	\
 				capability/lib@PACKAGE@_capability.la	\
 				pool/lib@PACKAGE@_pool.la	\

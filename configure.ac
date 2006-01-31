@@ -229,6 +229,7 @@ AC_OUTPUT(	 po/Makefile.in\
 	testsuite/target/tests/Makefile	\
 	zypp/Makefile			\
 	zypp/base/Makefile		\
+	zypp/thread/Makefile		\
 	zypp/detail/Makefile		\
 	zypp/capability/Makefile	\
 	zypp/parser/Makefile		\
