@@ -72,12 +72,12 @@ VendorAttr::~VendorAttr ()
 {}
 
 
-VendorAttr
+VendorAttr *
 VendorAttr::vendorAttr (void)
 {
     static VendorAttr va;
 
-    return va;
+    return &va;
 }
 
 

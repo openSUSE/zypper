@@ -41,7 +41,7 @@ class VendorAttr {
 	bool trusted ( const Vendor & vendor_r );
 
     public:
-	static VendorAttr vendorAttr (void);
+	static VendorAttr *vendorAttr (void);
 
 	/**
 	 * Return whether it's a known vendor
