@@ -11,6 +11,9 @@
 */
 
 #include <sys/stat.h>
+#include <stdio.h>
+#include <mntent.h>
+#include <limits.h>
 #include <unistd.h>
 #include <errno.h>
 #include <iostream>
@@ -239,6 +242,50 @@ int Mount::Status()
 void Mount::Kill()
 {
   if (process) process->kill();
+}
+
+// STATIC
+MountEntries
+Mount::getEntries(const std::string &mtab)
+{
+  MountEntries entries;
+  std::string  _mtab( mtab.empty() ? "/etc/mtab" : mtab);
+
+  if(_mtab == "/etc/mtab"  ||
+     _mtab == "/etc/fstab" ||
+     _mtab == "/proc/mounts")
+  {
+    FILE *fp = setmntent(_mtab.c_str(), "r");
+    if( fp)
+    {
+      char          buf[PATH_MAX * 4];
+      struct mntent ent;
+
+      memset(buf,  0, sizeof(buf));
+      memset(&ent, 0, sizeof(ent));
+
+      while( getmntent_r(fp, &ent, buf, sizeof(buf)) != NULL)
+      {
+        if( ent.mnt_fsname && *ent.mnt_fsname &&
+            ent.mnt_dir    && *ent.mnt_dir    &&
+            ent.mnt_type   && *ent.mnt_type   &&
+            ent.mnt_opts   && *ent.mnt_opts)
+        {
+          entries.push_back(
+            MountEntry(
+              ent.mnt_fsname, ent.mnt_dir,
+              ent.mnt_type,   ent.mnt_opts,
+              ent.mnt_freq,   ent.mnt_passno
+            )
+          );
+          memset(buf,  0, sizeof(buf));
+          memset(&ent, 0, sizeof(ent));
+        }
+      }
+      endmntent(fp);
+    }
+  }
+  return entries;
 }
 
   } // namespace media

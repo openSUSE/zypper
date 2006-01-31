@@ -82,6 +82,20 @@ namespace zypp {
 	 * */
 	void umount (const std::string& path);
 
+    public:
+
+	/**
+	* Return mount entries from /etc/mtab or /etc/fstab file.
+	*
+	* @param mtab The name of the (mounted) file system description
+	*             file to read from. This file should be one /etc/mtab,
+	*             /etc/fstab or /proc/mounts. Defaults is /etc/mtab.
+	* @returns A vector with mount entries or empty vector if the
+	*          \p mtab parameter was not allowed or read error occurs.
+	*/
+	static MountEntries
+	getEntries(const std::string &mtab = "");
+
     private:
 
 	/** The connection to the mount process.
@@ -119,6 +133,41 @@ namespace zypp {
 	 * */
 	int exit_code;
     };
+
+
+    /**
+     * A "struct mntent" like mount entry structure,
+     * but using std::strings.
+     */
+    struct MountEntry
+    {
+        MountEntry(const std::string &source,
+                   const std::string &target,
+                   const std::string &fstype,
+                   const std::string &options,
+                   const int         dumpfreq = 0,
+                   const int         passnum  = 0)
+            : src(source)
+            , dir(target)
+            , type(fstype)
+            , opts(options)
+            , freq(dumpfreq)
+            , pass(passnum)
+        {}
+
+        std::string src;  //!< name of mounted file system
+        std::string dir;  //!< file system path prefix
+        std::string type; //!< filesystem / mount type
+        std::string opts; //!< mount options
+        int         freq; //!< dump frequency in days
+        int         pass; //!< pass number on parallel fsck
+    };
+
+    /**
+     * A vector of mount entries.
+     */
+    typedef std::vector<MountEntry> MountEntries;
+
 
   } // namespace media
 } // namespace zypp
