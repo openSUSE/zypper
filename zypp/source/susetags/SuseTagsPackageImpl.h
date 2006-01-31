@@ -91,6 +91,9 @@ namespace zypp
         std::list<std::string> _authors;
         ByteCount _sourcesize;
         ByteCount _archivesize;
+        //=Tim: 1111489970
+        // what is this property
+
 /*
 =Grp: System/Base
 =Lic: GPL

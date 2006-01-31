@@ -86,17 +86,15 @@ namespace zypp
           {
             pkgImpl->_group = stag_r.value;
           }
-          /*
           if ( stag_r.name == "Siz" )
           {
             std::vector<std::string> words;
             if ( str::split( stag_r.value, std::back_inserter(words) ) != 2 )
               ZYPP_THROW( ParseException( "Siz" ) );
 
-            pkgImpl->_sourcesize = words[0];
-            pkgImpl->_archivesize = words[1];
+            pkgImpl->_sourcesize = str::strtonum<unsigned long>(words[0]);
+            pkgImpl->_archivesize = str::strtonum<unsigned long>(words[1]);
           }
-          */
         }
 
         /* Consume MulitTag data. */

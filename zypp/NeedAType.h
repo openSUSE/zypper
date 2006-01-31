@@ -57,7 +57,7 @@ namespace zypp
   typedef std::string Text;
 
   /** Offer a License text and methods to remember confirmation. */
-  typedef std::list<std::string> License;
+  typedef std::string License;
 
   /** An rpm package group value. Also provide acces to a
    * (singleton) tree like group hierarchy which contains

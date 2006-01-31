@@ -87,15 +87,14 @@ namespace zypp
       { return Text(); }
 
       ByteCount SuseTagsPackageImpl::sourcesize() const
-      { return ByteCount(); }
+      { return _sourcesize; }
 
       ByteCount SuseTagsPackageImpl::archivesize() const
-      { return ByteCount(); }
+      { return _archivesize; }
 
       std::list<std::string> SuseTagsPackageImpl::authors() const
       {
-        //return _authors;
-        return std::list<std::string>();
+        return _authors;
        }
 
       std::list<std::string> SuseTagsPackageImpl::filenames() const
