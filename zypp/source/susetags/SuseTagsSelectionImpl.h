@@ -57,8 +57,8 @@ namespace zypp
       virtual PMError provideSelToInstall( Pathname & path_r ) const;
       */
 
-      virtual const TranslatedText & summary() const;
-      virtual const TranslatedText & description() const;
+      virtual TranslatedText summary() const;
+      virtual TranslatedText description() const;
       virtual Label category() const;
       virtual bool visible() const;
       virtual Label order() const;

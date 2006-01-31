@@ -38,10 +38,10 @@ namespace zypp
     {}
 
 
-    const TranslatedText & SuseTagsSelectionImpl::summary() const
+    TranslatedText SuseTagsSelectionImpl::summary() const
     { return _summary; }
 
-    const TranslatedText & SuseTagsSelectionImpl::description() const
+    TranslatedText SuseTagsSelectionImpl::description() const
     { return _summary; }
 
     Label SuseTagsSelectionImpl::category() const
