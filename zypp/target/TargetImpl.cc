@@ -135,6 +135,9 @@ namespace zypp
     rpm::RpmDb & TargetImpl::rpm()
     { return _rpm; }
 
+    bool TargetImpl::providesFile (const std::string & name_str, const std::string & path_str) const
+    { return _rpm.hasFile(path_str); }
+
     /////////////////////////////////////////////////////////////////
   } // namespace target
   ///////////////////////////////////////////////////////////////////

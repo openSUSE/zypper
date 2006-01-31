@@ -65,7 +65,7 @@ namespace zypp
 #warning Add support for multiple medias - eg. limit only to CD1
       void commit(ResPool pool_r);
 
-      /** Comomit ordered changes */
+      /** Commit ordered changes */
       void commit(const PoolItemList & items_r);
 
       /** Overload to realize stream output. */
@@ -74,6 +74,10 @@ namespace zypp
 
       /** The RPM database */
       rpm::RpmDb & rpm();
+
+      /** If the package is installed and provides the file
+	  Needed to evaluate split provides during Resolver::Upgrade() */
+      bool providesFile (const std::string & name_str, const std::string & path_str) const;
 
     protected:
       /** All resolvables provided by the target. */
