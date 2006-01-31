@@ -24,6 +24,7 @@
 #include "zypp/source/susetags/SelectionSelFileParser.h"
 #include <boost/regex.hpp>
 
+#define ZYPP_BASE_LOGGER_LOGGROUP "SelectionsTagFileParser"
 
 using namespace std;
 using namespace boost;
@@ -66,7 +67,7 @@ namespace zypp
           std::string line = tag.value;
           std::vector<std::string> words;
           str::split( line, std::back_inserter(words), " " );
-          DBG << "[" << words[0] << "]" << "[" << words[1] << "]" << "[" << words[2] << "]" << "[" << words[3] << "]" << std::endl;
+          XXX << "[" << words[0] << "]" << "[" << words[1] << "]" << "[" << words[2] << "]" << "[" << words[3] << "]" << std::endl;
           selImpl->_name = words[0];
           selImpl->_version = words[1];
           selImpl->_release = words[2];
