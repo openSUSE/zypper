@@ -75,7 +75,7 @@ CATALOGS = @CATALOGS@
 	mv t-$@ $@
 
 
-all: all-@USE_NLS@
+all: #all-@USE_NLS@
 
 all-yes: stamp-po
 all-no:
