@@ -110,6 +110,8 @@ namespace zypp
       virtual std::list<PatchRpm> patchRpms() const PURE_VIRTUAL;
       /** */
       virtual bool installOnly() const PURE_VIRTUAL;
+      /** */
+      virtual unsigned mediaId() const PURE_VIRTUAL;
 
       //@}
 

@@ -98,6 +98,10 @@ namespace zypp
       bool PackageImplIf::installOnly() const
       { return false; }
 
+      unsigned PackageImplIf::mediaId() const
+#warning FIXME: What's the first media? 1 or 0?
+      { return 1; }
+
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////

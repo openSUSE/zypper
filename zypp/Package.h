@@ -96,6 +96,8 @@ namespace zypp
     Pathname getPatchRpm(BaseVersion & base_r) const;
     /** */
     bool installOnly() const;
+    /** ID of the media */
+    unsigned mediaId() const;
 
     // data here:
  

@@ -176,6 +176,9 @@ namespace zypp
   bool Package::installOnly() const
   { return pimpl().installOnly(); }
 
+  unsigned Package::mediaId() const
+  { return pimpl().mediaId(); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
