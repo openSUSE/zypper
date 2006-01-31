@@ -28,6 +28,8 @@
 #include "zypp/Url.h"
 #include "zypp/base/Logger.h"
 
+#include <iostream> // endl
+
 namespace zypp {
   namespace media {
 
