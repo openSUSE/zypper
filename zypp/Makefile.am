@@ -69,6 +69,7 @@ pkginclude_HEADERS = NeedAType.h \
 	BaseVersion.h	\
 	PatchRpm.h	\
 	DeltaRpm.h	\
+	VendorAttr.h	\
 	ZYpp.h		\
 	TranslatedText.h \
 	ZYppFactory.h
@@ -129,6 +130,7 @@ lib@PACKAGE@_la_SOURCES = \
 	Url.cc		\
 	TmpPath.cc	\
 	DiskUsage.cc	\
+	VendorAttr.cc	\
 	ZYpp.cc		\
 	TranslatedText.cc \
 	ZYppFactory.cc
