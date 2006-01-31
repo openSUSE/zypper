@@ -196,7 +196,7 @@ namespace zypp
     bool setNoTransact (TransactByValue causer)
     {
 	if (!isGreaterThan<TransactByField>( causer )) {
-	    setTransacts (false, causer);
+	    setTransact (false, causer);
 	    fieldValueAssign<TransactDetailField>(0);
 	    return true;
 	} else if (!transacts()) {
@@ -214,7 +214,7 @@ namespace zypp
 	return ret;
     }
 
-    bool setTransacts (bool val_r, TransactByValue causer)
+    bool setTransact (bool val_r, TransactByValue causer)
     {
 	if (!isGreaterThan<TransactByField>( causer )) {	
 	    fieldValueAssign<TransactField>( val_r ? TRANSACT : KEEP_STATE );
@@ -227,10 +227,10 @@ namespace zypp
 	}	    
     }
 
-    bool maySetTransacts (bool val_r, TransactByValue causer)
+    bool maySetTransact (bool val_r, TransactByValue causer)
     {
 	bit::BitField<FieldType> savBitfield = _bitfield;
-	bool ret = setTransacts (val_r, causer);
+	bool ret = setTransact (val_r, causer);
 	_bitfield = savBitfield;
 	return ret;
     }
@@ -238,7 +238,7 @@ namespace zypp
     bool setToBeInstalled (TransactByValue causer)
     {
       if (isInstalled()) return false;
-      return setTransacts (true, causer);
+      return setTransact (true, causer);
     }
 
     bool maySetToBeInstalled (TransactByValue causer)
@@ -252,7 +252,7 @@ namespace zypp
     bool setToBeUninstalled (TransactByValue causer)
     {
       if (!isInstalled()) return false;
-      return setTransacts (true, causer);
+      return setTransact (true, causer);
     }
 
     bool maySetToBeUninstalled (TransactByValue causer)

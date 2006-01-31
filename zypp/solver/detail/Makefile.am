@@ -39,13 +39,11 @@ solverdetailinclude_HEADERS = \
 	QueueItemUninstall.h		\
 	ResolverQueue.h			\
 	Resolver.h			\
-	ProblemSolution.h		\
 	ProblemSolutionInstall.h	\
 	ProblemSolutionUninstall.h	\
 	ProblemSolutionIgnore.h		\
 	ProblemSolutionUnlock.h		\
-	SolutionAction.h		\
-	ResolverProblem.h
+	SolutionAction.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_solver_detail.la
 
@@ -75,10 +73,8 @@ lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	ResolverInfoObsoletes.cc			\
 	ResolverContext.cc				\
 	ResolverQueue.cc				\
-	ProblemSolution.cc				\
 	ProblemSolutionInstall.cc			\
 	ProblemSolutionUninstall.cc			\
 	ProblemSolutionIgnore.cc			\
 	ProblemSolutionUnlock.cc			\
-	SolutionAction.cc				\
-	ResolverProblem.cc
+	SolutionAction.cc

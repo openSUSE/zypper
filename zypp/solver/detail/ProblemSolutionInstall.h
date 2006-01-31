@@ -22,10 +22,8 @@
 #ifndef ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONINSTALL_H
 #define ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONINSTALL_H
 
+#include "zypp/ProblemSolution.h"
 #include "zypp/solver/detail/Types.h"
-
-#include "zypp/solver/detail/Resolver.h"
-#include "zypp/solver/detail/ProblemSolution.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

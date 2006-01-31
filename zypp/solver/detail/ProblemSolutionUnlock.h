@@ -24,8 +24,8 @@
 
 #include "zypp/solver/detail/Types.h"
 
-#include "zypp/solver/detail/Resolver.h"
-#include "zypp/solver/detail/ProblemSolution.h"
+#include "zypp/Resolver.h"
+#include "zypp/ProblemSolution.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

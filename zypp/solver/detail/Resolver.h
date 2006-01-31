@@ -34,6 +34,9 @@
 #include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/ResolverQueue.h"
 #include "zypp/solver/detail/ResolverContext.h"
+#include "zypp/ProblemTypes.h"
+#include "zypp/ResolverProblem.h"
+#include "zypp/ProblemSolution.h"
 
 #include "zypp/CapSet.h"
 

@@ -18,16 +18,16 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/PtrTypes.h"
 
-
 #include "zypp/ResPool.h"
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/ResolverContext.h"
+#include "zypp/ProblemTypes.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  DEFINE_PTR_TYPE(Resolver);
+
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -79,13 +79,13 @@ namespace zypp
      * resolveDependencies(). If there were no problems, the returned
      * list will be empty.
      **/
-//    list<ResolverProblem_Ptr> problems();
+    ResolverProblemList problems();
 
     /**
      * Apply problem solutions. No more than one solution per problem
      * can be applied.
      **/
-//    void applySolutions( list<ProblemSolution_Ptr> solutions );
+    bool applySolutions( const ProblemSolutionList & solutions );
 
     // ResolverContext_constPtr bestContext (void) const;
 

@@ -23,8 +23,9 @@
 #include <sstream>
 
 #include "zypp/solver/detail/Resolver.h"
+#include "zypp/Resolver.h"
 #include "zypp/solver/detail/ResolverContext.h"
-#include "zypp/solver/detail/ResolverProblem.h"
+#include "zypp/ResolverProblem.h"
 #include "zypp/solver/detail/ProblemSolutionIgnore.h"
 #include "zypp/solver/detail/ProblemSolutionInstall.h"
 #include "zypp/solver/detail/ProblemSolutionUninstall.h"

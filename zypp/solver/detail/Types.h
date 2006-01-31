@@ -72,20 +72,13 @@ DEFINE_PTR_TYPE(QueueItemRequire);
 DEFINE_PTR_TYPE(QueueItemUninstall);
 
 DEFINE_PTR_TYPE(ResolverQueue);
-
-DEFINE_PTR_TYPE(ResolverProblem);
-typedef std::list<ResolverProblem_Ptr> ResolverProblemList;
-typedef std::list<ResolverProblem_constPtr> CResolverProblemList;
-      
-DEFINE_PTR_TYPE(ProblemSolution);
-typedef std::list<ProblemSolution_Ptr> ProblemSolutionList;
-typedef std::list<ProblemSolution_constPtr> CProblemSolutionList;
       
 DEFINE_PTR_TYPE(SolutionAction);
 typedef std::list<SolutionAction_Ptr> SolutionActionList;
 typedef std::list<SolutionAction_constPtr> CSolutionActionList;
 DEFINE_PTR_TYPE(TransactionSolutionAction);
-DEFINE_PTR_TYPE(InjectSolutionAction);	
+DEFINE_PTR_TYPE(InjectSolutionAction);
+
       
       ///////////////////////////////////////////////////////////////////
     };// namespace detail

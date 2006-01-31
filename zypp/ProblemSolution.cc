@@ -21,21 +21,17 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
  * 02111-1307, USA.
  */
-
-#include "zypp/solver/detail/ProblemSolution.h"
+#include "zypp/solver/detail/Types.h"
+#include "zypp/solver/detail/SolutionAction.h"
+#include "zypp/ProblemSolution.h"
 #include "zypp/base/Logger.h"
+#include "zypp/solver/detail/Resolver.h"
 
 using namespace std;
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////////
-  namespace solver
-  { /////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////
-    namespace detail
-    { ///////////////////////////////////////////////////////////////////
 
 IMPL_PTR_TYPE(ProblemSolution);
 
@@ -91,13 +87,13 @@ ProblemSolution::~ProblemSolution()
  **/
 
 bool
-ProblemSolution::apply (Resolver & resolver)
+ProblemSolution::apply (solver::detail::Resolver & resolver)
 {
     DBG << "apply solution " << *this << endl;
     bool ret = true;
-    for (CSolutionActionList::const_iterator iter = _actions.begin();
+    for (solver::detail::CSolutionActionList::const_iterator iter = _actions.begin();
 	 iter != _actions.end(); ++iter) {
-	SolutionAction_constPtr action = *iter;
+	solver::detail::SolutionAction_constPtr action = *iter;
 	if (! action->execute (resolver))
 	{
 	    ret = false;
@@ -112,7 +108,7 @@ ProblemSolution::apply (Resolver & resolver)
  * Add an action to the actions list.
  **/ 
 void
-ProblemSolution::addAction (SolutionAction_constPtr action)
+ProblemSolution::addAction (solver::detail::SolutionAction_constPtr action)
 {
     _actions.push_back (action);
 }
@@ -124,13 +120,6 @@ ProblemSolution::clear()
     _actions.clear();
 }
 
-
-      ///////////////////////////////////////////////////////////////////
-    };// namespace detail
-    /////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////
-  };// namespace solver
-  ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
