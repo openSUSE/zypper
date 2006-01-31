@@ -86,11 +86,13 @@ namespace zypp
 
         virtual License licenseToConfirm() const PURE_VIRTUAL;
 
-        License _license;
         PackageGroup _group;
         std::list<std::string> _authors;
+        std::list<std::string> _keywords;
         ByteCount _sourcesize;
         ByteCount _archivesize;
+        Label _license;
+        Date _buildtime;
         //=Tim: 1111489970
         // what is this property
 
@@ -100,10 +102,7 @@ namespace zypp
 =Src: 3ddiag 0.724 3 src
 =Tim: 1111489970
 =Loc: 1 3ddiag-0.724-3.i586.rpm
-=Siz: 28015 46735
-+Aut:
-Stefan Dirsch <sndirsch@suse.de>
--Aut:
+
 */
 
       };

@@ -86,6 +86,14 @@ namespace zypp
           {
             pkgImpl->_group = stag_r.value;
           }
+          if ( stag_r.name == "Lic" )
+          {
+            pkgImpl->_license = stag_r.value;
+          }
+          if ( stag_r.name == "Tim" )
+          {
+            pkgImpl->_buildtime = Date(str::strtonum<time_t>(stag_r.value));
+          }
           if ( stag_r.name == "Siz" )
           {
             std::vector<std::string> words;
@@ -122,6 +130,10 @@ namespace zypp
           else if ( mtag_r.name == "Obs" )
             {
               collectDeps( mtag_r.values, nvrad[Dep::OBSOLETES] );
+            }
+          else if ( mtag_r.name == "Key" )
+            {
+               pkgImpl->_keywords = std::list<std::string>(mtag_r.values.begin(), mtag_r.values.end());
             }
           else if ( mtag_r.name == "Aut" )
             {

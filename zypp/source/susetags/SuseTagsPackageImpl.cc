@@ -45,7 +45,7 @@ namespace zypp
       { return std::string(); }
 
       Date SuseTagsPackageImpl::installtime() const
-      { return Date(); }
+      { return _buildtime; }
 
       std::string SuseTagsPackageImpl::distribution() const
       { return std::string(); }
@@ -54,7 +54,7 @@ namespace zypp
       { return Vendor(); }
 
       Label SuseTagsPackageImpl::license() const
-      { return Label(); }
+      { return _license; }
 
       std::string SuseTagsPackageImpl::packager() const
       { return std::string(); }
