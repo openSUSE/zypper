@@ -108,38 +108,34 @@ namespace zypp
 
       void SelectionSelFileParser::endParse()
       {
-        CapSet _required_selections;
-        CapSet _recommended_selections;
-        CapSet _conflicting_selections;
-        CapSet _packages;
         #warning FIXME how to insert the specific language packages
         CapFactory _f;
-        /*
-        for (std::list<std::string>::const_iterator it = selImpl->_inspacks[LanguageCode()].begin(); it != selImpl->_inspacks[LanguageCode()].end(); it++)
+	Dependencies _deps;
+
+        for (std::set<std::string>::const_iterator it = selImpl->_inspacks[LanguageCode()].begin(); it != selImpl->_inspacks[LanguageCode()].end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Package>::kind, *it);
-          _packages.insert(_cap);
+	  _deps[Dep::REQUIRES].insert(_cap);
         }
         
-        for (std::list<std::string>::const_iterator it = selImpl->_recommends.begin(); it != selImpl->_recommends.end(); it++)
+        for (std::set<std::string>::const_iterator it = selImpl->_recommends.begin(); it != selImpl->_recommends.end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Selection>::kind, *it );
-          _recommended_selections.insert(_cap);
+	  _deps[Dep::RECOMMENDS].insert(_cap);
         }
 
-        for (std::list<std::string>::const_iterator it = selImpl->_requires.begin(); it != selImpl->_requires.end(); it++)
+        for (std::set<std::string>::const_iterator it = selImpl->_requires.begin(); it != selImpl->_requires.end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Selection>::kind, *it );
-          _required_selections.insert(_cap);
+	  _deps[Dep::REQUIRES].insert(_cap);
         }
 
-        for (std::list<std::string>::const_iterator it = selImpl->_conflicts.begin(); it != selImpl->_conflicts.end(); it++)
+        for (std::set<std::string>::const_iterator it = selImpl->_conflicts.begin(); it != selImpl->_conflicts.end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Selection>::kind, *it );
-          _conflicting_selections.insert(_cap);
+	  _deps[Dep::CONFLICTS].insert(_cap);
         }
-        */
-        NVRAD nvrad = NVRAD( selImpl->_name, Edition(selImpl->_version, selImpl->_release, std::string()), Arch(selImpl->_arch) );
+        NVRAD nvrad = NVRAD( selImpl->_name, Edition(selImpl->_version, selImpl->_release, std::string()), Arch(selImpl->_arch), _deps );
         result = detail::makeResolvableFromImpl( nvrad, selImpl );
       }
        /////////////////////////////////////////////////////////////////
