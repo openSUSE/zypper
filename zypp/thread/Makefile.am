@@ -10,7 +10,8 @@ threadincludedir = $(pkgincludedir)/thread
 threadinclude_HEADERS = 	\
 	MutexException.h	\
 	Mutex.h			\
-	MutexLock.h
+	MutexLock.h		\
+	Once.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_thread.la
 
