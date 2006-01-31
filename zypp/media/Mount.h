@@ -24,6 +24,41 @@
 namespace zypp {
   namespace media {
 
+
+    /**
+     * A "struct mntent" like mount entry structure,
+     * but using std::strings.
+     */
+    struct MountEntry
+    {
+        MountEntry(const std::string &source,
+                   const std::string &target,
+                   const std::string &fstype,
+                   const std::string &options,
+                   const int         dumpfreq = 0,
+                   const int         passnum  = 0)
+            : src(source)
+            , dir(target)
+            , type(fstype)
+            , opts(options)
+            , freq(dumpfreq)
+            , pass(passnum)
+        {}
+
+        std::string src;  //!< name of mounted file system
+        std::string dir;  //!< file system path prefix
+        std::string type; //!< filesystem / mount type
+        std::string opts; //!< mount options
+        int         freq; //!< dump frequency in days
+        int         pass; //!< pass number on parallel fsck
+    };
+
+    /**
+     * A vector of mount entries.
+     */
+    typedef std::vector<MountEntry> MountEntries;
+
+
     /**
      * @short Interface to the mount program
      */
@@ -133,40 +168,6 @@ namespace zypp {
 	 * */
 	int exit_code;
     };
-
-
-    /**
-     * A "struct mntent" like mount entry structure,
-     * but using std::strings.
-     */
-    struct MountEntry
-    {
-        MountEntry(const std::string &source,
-                   const std::string &target,
-                   const std::string &fstype,
-                   const std::string &options,
-                   const int         dumpfreq = 0,
-                   const int         passnum  = 0)
-            : src(source)
-            , dir(target)
-            , type(fstype)
-            , opts(options)
-            , freq(dumpfreq)
-            , pass(passnum)
-        {}
-
-        std::string src;  //!< name of mounted file system
-        std::string dir;  //!< file system path prefix
-        std::string type; //!< filesystem / mount type
-        std::string opts; //!< mount options
-        int         freq; //!< dump frequency in days
-        int         pass; //!< pass number on parallel fsck
-    };
-
-    /**
-     * A vector of mount entries.
-     */
-    typedef std::vector<MountEntry> MountEntries;
 
 
   } // namespace media
