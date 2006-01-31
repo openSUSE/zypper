@@ -78,7 +78,13 @@
 
 using namespace std;
 using namespace zypp;
-using namespace zypp::solver::detail;
+using zypp::solver::detail::XmlNode;
+using zypp::solver::detail::XmlNode_Ptr;
+using zypp::solver::detail::ResolverContext_Ptr;
+using zypp::solver::detail::ResolverQueueList;
+using zypp::solver::detail::ResolverQueue_Ptr;
+using zypp::solver::detail::InstallOrder;
+using zypp::solver::detail::ResolverProblemList;
 
 static string globalPath;
 
@@ -690,7 +696,7 @@ parse_xml_setup (XmlNode_Ptr node)
 // trial related functions
 
 static void
-report_solutions ( Resolver_Ptr resolver, bool instorder)
+report_solutions ( solver::detail::Resolver_Ptr resolver, bool instorder)
 {
     int count = 1;
     ChecksumList checksum_list;
@@ -787,10 +793,10 @@ struct DoUpgrades : public resfilter::OnCapMatchCallbackFunctor, public resfilte
     PoolItem_Ref installed;
     UpgradeMap upgrades;
 //    PoolItemSet upgrades;
-    Resolver_Ptr resolver;
+    solver::detail::Resolver_Ptr resolver;
     int count;
 
-    DoUpgrades (Resolver_Ptr r)
+    DoUpgrades (solver::detail::Resolver_Ptr r)
 	: resolver (r)
 	, count (0)
     {  }
@@ -823,7 +829,7 @@ struct DoUpgrades : public resfilter::OnCapMatchCallbackFunctor, public resfilte
 
 
 int
-foreach_system_upgrade (Resolver_Ptr resolver)
+foreach_system_upgrade (solver::detail::Resolver_Ptr resolver)
 {
     PoolItemSet installed = uniquelyInstalled();
     DoUpgrades info (resolver);
@@ -873,7 +879,7 @@ print_marked_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 static void
 freshen_marked_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
-    Resolver_Ptr resolver = *((Resolver_Ptr *)data);
+    solver::detail::Resolver_Ptr resolver = *((solver::detail::Resolver_Ptr *)data);
     if (status.isIncomplete()) {
 	resolver->addPoolItemToInstall (poolItem);
     }
@@ -901,7 +907,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 
     print_sep ();
 
-    Resolver_Ptr resolver = new Resolver (pool);
+    solver::detail::Resolver_Ptr resolver = new solver::detail::Resolver (pool);
 
     ResolverContext_Ptr established = NULL;
 
