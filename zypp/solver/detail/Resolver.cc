@@ -507,7 +507,7 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
     {
 	ResStatus status = item.status();
 	if (status.isBySolver()) {			// clear any solver transactions
-	    item.status().setNoTransact();
+	    item.status().setNoTransact (ResStatus::SOLVER);
 	}
 	if (status.isUninstalled()) {			// transact && uninstalled
 	    resolver.addPoolItemToInstall(item);	// -> install! 
@@ -526,10 +526,10 @@ static void
 solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     if (status.isToBeInstalled()) {
-	item.status().setToBeInstalled();
+	item.status().setToBeInstalled (ResStatus::SOLVER);
     }
     else if (status.isToBeUninstalled()) {
-	item.status().setToBeUninstalled();
+	item.status().setToBeUninstalled (ResStatus::SOLVER);
     }
     else if (status.isIncomplete()
 	     || status.isNeeded()) {

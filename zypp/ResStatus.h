@@ -189,55 +189,104 @@ namespace zypp
     // If a lower level (e.g.SOLVER) wants to transact, but it's
     // already set by a higher level, \c true should be returned.
     // Removing a higher levels transaction bit should fail.
+    //
+    // The may functions checks only, if the action would return true
+    // if it is called.
 
-    bool setNoTransact ()
+    bool setNoTransact (TransactByValue causer)
     {
-      setTransacts (false);
-      fieldValueAssign<TransactDetailField>(0);
-      return true;
+	if (!isGreaterThan<TransactByField>( causer )) {
+	    setTransacts (false, causer);
+	    fieldValueAssign<TransactDetailField>(0);
+	    return true;
+	} else if (!transacts()) {
+	    return true; // is already set
+	} else {
+	    return false;
+	}
+    }
+      
+    bool maySetNoTransact (TransactByValue causer)
+    {
+	bit::BitField<FieldType> savBitfield = _bitfield;
+	bool ret = setNoTransact (causer);
+	_bitfield = savBitfield;
+	return ret;
     }
 
-    bool setTransacts( bool val_r )
+    bool setTransacts (bool val_r, TransactByValue causer)
     {
-      fieldValueAssign<TransactField>( val_r ? TRANSACT : KEEP_STATE );
-      return true;
+	if (!isGreaterThan<TransactByField>( causer )) {	
+	    fieldValueAssign<TransactField>( val_r ? TRANSACT : KEEP_STATE );
+	    fieldValueAssign<TransactByField>( causer );
+	    return true;
+	} else if (fieldValueIs<TransactField>(val_r ? TRANSACT : KEEP_STATE)) { 
+	    return true; // is already set
+	} else {
+	    return false;
+	}	    
     }
 
-    bool setToBeInstalled ( )
+    bool maySetTransacts (bool val_r, TransactByValue causer)
     {
-      if (!isUninstalled()) return false;
-      return setTransacts (true);
+	bit::BitField<FieldType> savBitfield = _bitfield;
+	bool ret = setTransacts (val_r, causer);
+	_bitfield = savBitfield;
+	return ret;
     }
 
-    bool setToBeInstalledSoft ( )
+    bool setToBeInstalled (TransactByValue causer)
     {
-      if (!setToBeInstalled()) return false;
-      fieldValueAssign<TransactDetailField>(SOFT_REQUIRES);
-      return true;
+      if (isInstalled()) return false;
+      return setTransacts (true, causer);
     }
 
-    bool setToBeUninstalled ( )
+    bool maySetToBeInstalled (TransactByValue causer)
+    {
+	bit::BitField<FieldType> savBitfield = _bitfield;
+	bool ret = setToBeInstalled (causer);
+	_bitfield = savBitfield;
+	return ret;
+    }      
+
+    bool setToBeUninstalled (TransactByValue causer)
     {
       if (!isInstalled()) return false;
-      return setTransacts (true);
+      return setTransacts (true, causer);
     }
+
+    bool maySetToBeUninstalled (TransactByValue causer)
+    {
+	bit::BitField<FieldType> savBitfield = _bitfield;
+	bool ret = setToBeUninstalled (causer);
+	_bitfield = savBitfield;
+	return ret;
+    }            
+
+    //------------------------------------------------------------------------
+    // *** These are only for the Resolver ***
 
     bool setToBeUninstalledDueToUnlink ( )
     {
-      if (!setToBeUninstalled()) return false;
+      if (!setToBeUninstalled (SOLVER)) return false;
       fieldValueAssign<TransactDetailField>(DUE_TO_UNLINK);
       return true;
     }
 
     bool setToBeUninstalledDueToObsolete ( )
     {
-      if (!setToBeUninstalled()) return false;
+      if (!setToBeUninstalled (SOLVER)) return false;
       fieldValueAssign<TransactDetailField>(DUE_TO_OBSOLETE);
       return true;
     }
 
-    //------------------------------------------------------------------------
-    // *** These are only for the Resolver ***
+    bool setToBeInstalledSoft ( )
+    {
+      if (!setToBeInstalled(SOLVER)) return false;
+      fieldValueAssign<TransactDetailField>(SOFT_REQUIRES);
+      return true;
+    }
+      
 
     bool setUnneeded ()
     {
@@ -295,6 +344,12 @@ namespace zypp
     template<class _Field>
       void fieldValueAssign( FieldType val_r )
       { _bitfield.assign<_Field>( val_r ); }
+
+    /** compare two values.
+    */
+    template<class _Field>
+      bool isGreaterThan( FieldType val_r )
+	  { return _bitfield.value<_Field>() > val_r; }
 
   private:
     bit::BitField<FieldType> _bitfield;
