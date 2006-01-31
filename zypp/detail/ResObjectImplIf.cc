@@ -25,10 +25,10 @@ namespace zypp
     // as far as resonable.
     /////////////////////////////////////////////////////////////////
 
-      const TranslatedText & ResObjectImplIf::summary() const
+      TranslatedText ResObjectImplIf::summary() const
       { return TranslatedText::notext; }
 
-      const TranslatedText & ResObjectImplIf::description() const
+      TranslatedText ResObjectImplIf::description() const
       { return TranslatedText::notext; }
 
       Text ResObjectImplIf::insnotify() const

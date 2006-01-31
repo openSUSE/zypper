@@ -43,9 +43,9 @@ namespace zypp
       /** Patch time stamp */
       unsigned int timestamp() const;
       /** Patch summary */
-      const TranslatedText & summary() const;
+      TranslatedText summary() const;
       /** Patch description */
-      const TranslatedText & description() const;
+      TranslatedText description() const;
       /** Patch category (recommended, security,...) */
       std::string category() const;
       /** Does the system need to reboot to finish the update process? */

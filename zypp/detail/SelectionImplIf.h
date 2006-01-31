@@ -46,10 +46,10 @@ namespace zypp
     public:
 
         /** */
-        virtual const TranslatedText & summary() const = 0;
+        virtual TranslatedText summary() const = 0;
 
         /** */
-        virtual const TranslatedText & description() const = 0;
+        virtual TranslatedText description() const = 0;
 
         /** */
 	virtual Label category() const = 0;

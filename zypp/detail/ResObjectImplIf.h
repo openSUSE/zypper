@@ -64,10 +64,10 @@ namespace zypp
       */
       //@{
       /** Short label. */
-      virtual const TranslatedText & summary() const PURE_VIRTUAL;
+      virtual TranslatedText summary() const PURE_VIRTUAL;
 
       /** Long description */
-      virtual const TranslatedText & description() const PURE_VIRTUAL;
+      virtual TranslatedText description() const PURE_VIRTUAL;
 
       /** \todo well define! */
       virtual Text insnotify() const PURE_VIRTUAL;
