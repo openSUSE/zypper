@@ -12,6 +12,7 @@
 #include <iostream>
 
 #include "zypp/Resolver.h"
+#include "zypp/UpgradeStatistics.h"
 #include "zypp/solver/detail/Resolver.h"
 
 using namespace std;
@@ -57,15 +58,16 @@ namespace zypp
 
   void Resolver::verifySystem ()
   { return _pimpl->verifySystem(); }
-  void Resolver::establishState ()
-  { return _pimpl->establishState(); }
+  void Resolver::establishPool ()
+  { return _pimpl->establishPool(); }
   bool Resolver::resolvePool ()
   { return _pimpl->resolvePool (); }
   ResolverProblemList Resolver::problems ()
   { return _pimpl->problems (); }
   bool Resolver::applySolutions( const ProblemSolutionList & solutions )
   { return _pimpl->applySolutions (solutions); }      
-    
+  void Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
+  { return _pimpl->doUpgrade(opt_stats_r); }
 
   // ResolverContext_constPtr bestContext (void) const;
 

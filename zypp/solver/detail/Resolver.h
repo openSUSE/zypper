@@ -34,11 +34,14 @@
 #include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/ResolverQueue.h"
 #include "zypp/solver/detail/ResolverContext.h"
+
 #include "zypp/ProblemTypes.h"
 #include "zypp/ResolverProblem.h"
 #include "zypp/ProblemSolution.h"
+#include "zypp/UpgradeStatistics.h"
 
 #include "zypp/CapSet.h"
+
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -84,6 +87,10 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     std::set<Source_Ref> _subscribed;
 
+    // helpers
+    bool doesObsoleteCapability (PoolItem_Ref candidate, const Capability & cap);
+    bool doesObsoleteItem (PoolItem_Ref candidate, PoolItem_Ref installed);
+
   public:
 
     Resolver (const ResPool & pool);
@@ -91,7 +98,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     // ---------------------------------- I/O
 
-    friend std::ostream& operator<<(std::ostream&, const Resolver &resolver);
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+    friend std::ostream& operator<<(std::ostream& str, const Resolver & obj)
+    { return obj.dumpOn (str); }
 
     // ---------------------------------- accessors
 
@@ -130,8 +139,11 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     void verifySystem (void);
     void establishState (const ResolverContext_Ptr context = NULL);
+    void establishPool (void);
     bool resolveDependencies (const ResolverContext_Ptr context = NULL);
     bool resolvePool (void);
+
+    void doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
 
     ResolverProblemList problems (void) const;
     bool applySolutions (const ProblemSolutionList &solutions);

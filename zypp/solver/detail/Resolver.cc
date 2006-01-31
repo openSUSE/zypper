@@ -47,8 +47,8 @@ IMPL_PTR_TYPE(Resolver);
 
 //---------------------------------------------------------------------------
 
-ostream&
-operator<<( ostream& os, const Resolver & resolver)
+std::ostream &
+Resolver::dumpOn( std::ostream & os ) const
 {
     return os << "<resolver/>";
 }
@@ -243,6 +243,34 @@ Resolver::verifySystem (void)
 
 //---------------------------------------------------------------------------
 
+// copy marked item from solution back to pool
+
+static void
+solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
+{
+    if (status.isToBeInstalled()) {
+	item.status().setToBeInstalled(ResStatus::SOLVER);
+    }
+    else if (status.isToBeUninstalled()) {
+	item.status().setToBeUninstalled(ResStatus::SOLVER);
+    }
+    else if (status.isIncomplete()
+	     || status.isNeeded()) {
+	item.status().setIncomplete();
+    }
+    else if (status.isUnneeded()) {
+	item.status().setUnneeded();
+    }
+    else if (status.isSatisfied()) {
+	item.status().setSatisfied();
+    }
+    return;
+}
+
+
+//---------------------------------------------------------------------------
+
+
 // establish state
 
 struct EstablishState : public resfilter::OnCapMatchCallbackFunctor
@@ -296,6 +324,23 @@ Resolver::establishState (ResolverContext_Ptr context)
     }
 
     _best_context = context;
+
+    return;
+}
+
+
+void
+Resolver::establishPool ()
+{
+    establishState ();						// establish !
+    ResolverContext_Ptr solution = bestContext();
+
+    if (solution) {						// copy solution back to pool
+	solution->foreachMarked (solution_to_pool, NULL);
+    }
+    else {
+	ERR << "establishState did not return a bestContext" << endl;
+    }
 
     return;
 }
@@ -507,7 +552,7 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
     {
 	ResStatus status = item.status();
 	if (status.isBySolver()) {			// clear any solver transactions
-	    item.status().setNoTransact (ResStatus::SOLVER);
+	    item.status().setNoTransact(ResStatus::SOLVER);
 	}
 	if (status.isUninstalled()) {			// transact && uninstalled
 	    resolver.addPoolItemToInstall(item);	// -> install! 
@@ -518,26 +563,6 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
 	return true;
     }
 };
-
-
-// copy marked item from solution back to pool
-
-static void
-solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
-{
-    if (status.isToBeInstalled()) {
-	item.status().setToBeInstalled (ResStatus::SOLVER);
-    }
-    else if (status.isToBeUninstalled()) {
-	item.status().setToBeUninstalled (ResStatus::SOLVER);
-    }
-    else if (status.isIncomplete()
-	     || status.isNeeded()) {
-	item.status().setIncomplete();
-    }
-    return;
-}
-
 
 
 //  This function loops over the pool and grabs

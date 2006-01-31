@@ -19,6 +19,7 @@
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/ResPool.h"
+#include "zypp/UpgradeStatistics.h"
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/ResolverContext.h"
 #include "zypp/ProblemTypes.h"
@@ -53,13 +54,13 @@ namespace zypp
     void verifySystem (void);
 
     /**
-     * Establish state of 'higher level' Resolvables
+     * Establish state of 'higher level' Resolvables in Pool
      *
      * Must be called when dealing with non-package resolvables,
      * like Patches, Patterns, and Products
      *
      **/
-    void establishState (void);
+    void establishPool (void);
 
     /**
      * Resolve package dependencies:
@@ -73,6 +74,21 @@ namespace zypp
      * below.
      **/
     bool resolvePool (void);
+
+    /**
+     * Do an distribution upgrade
+     *
+     * This will run a full upgrade on the pool, taking all upgrade
+     * dependencies (provide/obsolete for package renames, split-
+     * provides, etc.) into account and actually removing installed
+     * packages if no upgrade exists.
+     *
+     * To be run with great caution. It basically brings your
+     * system 'back to start'.
+     * Quite helpful to get back to a 'sane state'. Quite disastrous
+     * since you'll loose all non-distribution packages
+     **/
+    void doUpgrade( UpgradeStatistics & opt_stats_r );
 
     /**
      * Return the dependency problems found by the last call to
