@@ -32,13 +32,12 @@ namespace zypp
 HelixProductImpl::HelixProductImpl (Source_Ref source_r, const zypp::HelixParser & parsed)
     : _source (source_r)
     , _summary(parsed.summary)
-    , _description()
+    , _description(parsed.description)
     , _group(parsed.section)
     , _install_only(parsed.installOnly)
     , _size_installed(parsed.installedSize)
     , _size_archive(parsed.fileSize)
 {
-    _description.push_back(parsed.description);
 }
 
 Source_Ref
@@ -46,11 +45,11 @@ HelixProductImpl::source() const
 { return _source; }
 
 /** Package summary */
-Label HelixProductImpl::summary() const
+const TranslatedText & HelixProductImpl::summary() const
 { return _summary; }
 
 /** Package description */
-Text HelixProductImpl::description() const
+const TranslatedText & HelixProductImpl::description() const
 { return _description; }
 
 PackageGroup HelixProductImpl::group() const

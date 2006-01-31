@@ -35,9 +35,9 @@ public:
 	HelixPatternImpl( Source_Ref source_r, const zypp::HelixParser & data );
 
 	/** Pattern summary */
-	virtual Label summary() const;
+	virtual const TranslatedText & summary() const;
 	/** Pattern description */
-	virtual Text description() const;
+	virtual const TranslatedText & description() const;
 	virtual ByteCount size() const;
 	/** */
 	virtual PackageGroup group() const;
@@ -51,8 +51,8 @@ public:
 	virtual Source_Ref source() const;
 protected:
 	Source_Ref _source;
-	Label _summary;
-	Text _description;
+	TranslatedText _summary;
+	TranslatedText _description;
 	PackageGroup _group;
 	bool _install_only;
 
