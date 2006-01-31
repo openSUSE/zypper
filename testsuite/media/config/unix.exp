@@ -1,0 +1,4 @@
+load_lib "media_init.exp"
+proc media_exit {} {}
+proc media_version {} {}
+
