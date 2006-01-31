@@ -23,8 +23,6 @@
 #define ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONUNINSTALL_H
 
 #include "zypp/solver/detail/Types.h"
-
-#include "zypp/Resolver.h"
 #include "zypp/ProblemSolution.h"
 
 /////////////////////////////////////////////////////////////////////////
