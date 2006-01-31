@@ -24,6 +24,7 @@
 #include "zypp/parser/tagfile/TagFileParser.h"
 #include <boost/regex.hpp>
 
+#define ZYPP_BASE_LOGGER_LOGGROUP "TagFileParser"
 
 using namespace std;
 using namespace boost;
@@ -42,7 +43,7 @@ namespace zypp
       {
         for ( unsigned int k=0; k < what.size(); k++)
         {
-          DBG << "[match "<< k << "] [" << what[k] << "]" << std::endl; 
+          XXX << "[match "<< k << "] [" << what[k] << "]" << std::endl; 
         }
       }
 
@@ -83,7 +84,7 @@ namespace zypp
           boost::smatch what;
           if(boost::regex_match(buffer, what, boost::regex("^#(.*)$"), boost::match_extra))
           {
-            DBG << "comment" << std::endl;
+            XXX << "comment" << std::endl;
             // comment # something
             // str::strtonum(buffer, entry_r.count);
             dumpRegexpResults(what);
@@ -94,7 +95,7 @@ namespace zypp
             tag.name = what[1];
             tag.modifier = what[3];
 
-            DBG << "start list" << std::endl;
+            XXX << "start list" << std::endl;
             dumpRegexpResults(what);
             // start of list +Something.lang:
             // lang is optional
@@ -106,11 +107,11 @@ namespace zypp
             while( ! boost::regex_match(element, element_what, boost::regex("^\\-([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:$"), boost::match_extra))
             {
               tag.values.insert(element);
-              DBG << element << std::endl;
+              XXX << element << std::endl;
               getline(file, element);
               //dumpRegexpResults(element_what);
             }
-            DBG << "end list" << std::endl;
+            XXX << "end list" << std::endl;
             consume(tag);
             // end of list
           }
@@ -120,7 +121,7 @@ namespace zypp
             tag.name = what[1];
             tag.modifier = what[3];
             tag.value = what[4];
-            DBG << "assign" << std::endl;
+            XXX << "assign" << std::endl;
             // start of list
             // str::strtonum(buffer, entry_r.count);
             dumpRegexpResults(what);
@@ -128,11 +129,11 @@ namespace zypp
           }
           else if(boost::regex_match(buffer, what, boost::regex("^([[:space:]]*)$"), boost::match_extra))
           {
-            DBG << "empty line" << std::endl;
+            XXX << "empty line" << std::endl;
           }
           else
           {
-            DBG << "parse error: " << buffer << std::endl;
+            XXX << "parse error: " << buffer << std::endl;
           }
         }
         endParse();
