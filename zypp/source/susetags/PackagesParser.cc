@@ -15,7 +15,7 @@
 #include "zypp/source/susetags/PackagesParser.h"
 #include "zypp/parser/tagfile/TagFileParser.h"
 #include "zypp/Package.h"
-#include "zypp/detail/PackageImpl.h"
+#include "zypp/source/susetags/SuseTagsPackageImpl.h"
 #include "zypp/CapFactory.h"
 #include "zypp/CapSet.h"
 
@@ -38,14 +38,14 @@ namespace zypp
       {
         std::list<Package::Ptr> result;
 
-        shared_ptr<detail::PackageImpl> pkgImpl;
+        shared_ptr<source::susetags::SuseTagsPackageImpl> pkgImpl;
         NVRAD nvrad;
 
         bool pkgPending() const
         { return pkgImpl; }
 
-        void collectPkg( const shared_ptr<detail::PackageImpl> & nextPkg_r
-                         = shared_ptr<detail::PackageImpl>() )
+        void collectPkg( const shared_ptr<source::susetags::SuseTagsPackageImpl> & nextPkg_r
+                         = shared_ptr<source::susetags::SuseTagsPackageImpl>() )
         {
           if ( pkgPending() )
             {
@@ -56,7 +56,7 @@ namespace zypp
 
         void newPkg()
         {
-          collectPkg( shared_ptr<detail::PackageImpl>(new detail::PackageImpl) );
+          collectPkg( shared_ptr<source::susetags::SuseTagsPackageImpl>(new source::susetags::SuseTagsPackageImpl) );
         }
 
         void collectDeps( const std::set<std::string> & depstr_r, CapSet & capset )
@@ -72,16 +72,31 @@ namespace zypp
         virtual void consume( const SingleTag & stag_r )
         {
           if ( stag_r.name == "Pkg" )
-            {
-              std::vector<std::string> words;
-              str::split( stag_r.value, std::back_inserter(words) );
+          {
+            std::vector<std::string> words;
+            str::split( stag_r.value, std::back_inserter(words) );
 
-              if ( str::split( stag_r.value, std::back_inserter(words) ) != 4 )
-                ZYPP_THROW( ParseException( "Pkg" ) );
+            if ( str::split( stag_r.value, std::back_inserter(words) ) != 4 )
+              ZYPP_THROW( ParseException( "Pkg" ) );
 
-              newPkg();
-              nvrad = NVRAD( words[0], Edition(words[1],words[2]), Arch(words[3]) );
-            }
+            newPkg();
+            nvrad = NVRAD( words[0], Edition(words[1],words[2]), Arch(words[3]) );
+          }
+          if ( stag_r.name == "Grp" )
+          {
+            pkgImpl->_group = stag_r.value;
+          }
+          /*
+          if ( stag_r.name == "Siz" )
+          {
+            std::vector<std::string> words;
+            if ( str::split( stag_r.value, std::back_inserter(words) ) != 2 )
+              ZYPP_THROW( ParseException( "Siz" ) );
+
+            pkgImpl->_sourcesize = words[0];
+            pkgImpl->_archivesize = words[1];
+          }
+          */
         }
 
         /* Consume MulitTag data. */
@@ -109,6 +124,11 @@ namespace zypp
           else if ( mtag_r.name == "Obs" )
             {
               collectDeps( mtag_r.values, nvrad[Dep::OBSOLETES] );
+            }
+          else if ( mtag_r.name == "Aut" )
+            {
+              // MultiTag is a Set but author is a list
+              pkgImpl->_authors = std::list<std::string>(mtag_r.values.begin(), mtag_r.values.end());
             }
         }
 
