@@ -349,9 +349,12 @@ namespace zypp
 
       /** \name Device and inode info. */
       //@{
+      ino_t  ino()     const { return isExist() ? statbuf_C.st_ino  : 0; }
       dev_t  dev()     const { return isExist() ? statbuf_C.st_dev  : 0; }
       dev_t  rdev()    const { return isExist() ? statbuf_C.st_rdev : 0; }
-      ino_t  ino()     const { return isExist() ? statbuf_C.st_ino  : 0; }
+
+      unsigned int major() const;
+      unsigned int minor() const;
       //@}
 
       /** \name Size info. */

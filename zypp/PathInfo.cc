@@ -22,6 +22,8 @@
 #include "zypp/PathInfo.h"
 #include "zypp/Digest.h"
 
+#include <sys/types.h> // for ::minor, ::major macros
+
 using std::string;
 
 ///////////////////////////////////////////////////////////////////
@@ -223,6 +225,26 @@ namespace zypp
         return( gperm()/010 );
       }
       return operm();
+    }
+
+    /******************************************************************
+     **
+     **	FUNCTION NAME : PathInfo::major
+     **	FUNCTION TYPE : unsigned int
+     */
+    unsigned int PathInfo::major() const
+    {
+      return isBlk() || isChr() ? ::major(statbuf_C.st_rdev) : 0;
+    }
+
+    /******************************************************************
+     **
+     **	FUNCTION NAME : PathInfo::major
+     **	FUNCTION TYPE : unsigned int
+     */
+    unsigned int PathInfo::minor() const
+    {
+      return isBlk() || isChr() ? ::major(statbuf_C.st_rdev) : 0;
     }
 
     /******************************************************************
