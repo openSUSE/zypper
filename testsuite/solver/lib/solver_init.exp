@@ -144,6 +144,14 @@ proc multi-run { src } {
 	close $fp
       }
 
+      set ignores [list ]
+      set ignorename "$dircase/ignore"
+      if { [ file exists $ignorename] != 0 } {
+	set fp [open $ignorename r]
+	set ignores [read $fp]
+	close $fp
+      }
+
       #							look for *-test.xml
       set testcases [glob $dircase/*-test.xml ]
 
@@ -153,6 +161,10 @@ proc multi-run { src } {
 	  set testPathLen  [llength $testPath]
 	  set testFilename [lindex $testPath [expr $testPathLen-1]]
 	  set testDirname [lindex $testPath [expr $testPathLen-2]]
+
+	  if { [lsearch $ignores $testFilename] != -1 } {
+	    continue
+	  }
 
 	  set expect_to_fail 0
 	  if { [lsearch $xfails $testFilename] != -1 } {
