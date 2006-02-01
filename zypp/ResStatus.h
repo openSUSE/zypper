@@ -288,6 +288,12 @@ namespace zypp
     }
       
 
+    bool setUndetermined ()
+    {
+      fieldValueAssign<EstablishField>(UNDETERMINED);
+      return true;
+    }
+
     bool setUnneeded ()
     {
       fieldValueAssign<EstablishField>(UNNEEDED);
