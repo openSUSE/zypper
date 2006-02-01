@@ -242,9 +242,21 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	++opt_stats_r.pre_nocand;
 	continue;
       }
+MIL << "item is installed " << installed << ", candidate is " << candidate << endl;
+      if (candidate.status().isUnneeded()) {			// seen already
+	candidate.status().setUndetermined();
+	continue;
+      }
+      candidate.status().setUnneeded();				// mark as seen
       candidatemap[installed] = candidate;
     }
     else {					// assume Uninstalled
+MIL << "item is uninstalled " << item << endl;
+      if (item.status().isUnneeded()) {				// seen already
+	item.status().setUndetermined();
+	continue;
+      }
+      item.status().setUnneeded();				// mark as seen
       installed = PoolItem_Ref();
       candidate = item;
     }
