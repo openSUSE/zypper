@@ -72,7 +72,7 @@
 #include "zypp/solver/detail/ResolverContext.h"
 #include "zypp/solver/detail/ResolverQueue.h"
 #include "zypp/solver/detail/ResolverInfo.h"
-#include "zypp/solver/detail/ResolverProblem.h"
+#include "zypp/ResolverProblem.h"
 #include "zypp/solver/detail/InstallOrder.h"
 
 
@@ -84,7 +84,7 @@ using zypp::solver::detail::ResolverContext_Ptr;
 using zypp::solver::detail::ResolverQueueList;
 using zypp::solver::detail::ResolverQueue_Ptr;
 using zypp::solver::detail::InstallOrder;
-using zypp::solver::detail::ResolverProblemList;
+using zypp::ResolverProblemList;
 
 static string globalPath;
 
@@ -990,6 +990,20 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		RESULT << "System is up-to-date, no upgrades required" << endl;
 	    else
 		RESULT << "Upgrading " << count << " package" << (count > 1 ? "s" : "") << endl;
+
+	} else if (node->equals ("distupgrade")) {
+
+	    RESULT << "Doing distribution upgrade ..." << endl;
+	    UpgradeStatistics stats;
+
+	    string delete_unmaintained = node->getProp ("delete_unmaintained");
+	    if (delete_unmaintained == "false") {
+		stats.delete_unmaintained = false;
+	    }
+
+	    resolver->doUpgrade(stats);
+
+	    RESULT << stats;
 
 	} else if (node->equals ("establish")
 		   || node->equals ("freshen")) {

@@ -35,9 +35,9 @@ public:
 	HelixProductImpl( Source_Ref source_r, const zypp::HelixParser & data );
 
 	/** Product summary */
-	virtual const TranslatedText & summary() const;
+	virtual TranslatedText summary() const;
 	/** Product description */
-	virtual const TranslatedText & description() const;
+	virtual TranslatedText description() const;
 	virtual ByteCount size() const;
 	/** */
 	virtual PackageGroup group() const;

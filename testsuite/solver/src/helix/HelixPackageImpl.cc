@@ -45,11 +45,11 @@ HelixPackageImpl::source() const
 { return _source; }
 
 /** Package summary */
-const TranslatedText & HelixPackageImpl::summary() const
+TranslatedText HelixPackageImpl::summary() const
 { return _summary; }
 
 /** Package description */
-const TranslatedText & HelixPackageImpl::description() const
+TranslatedText HelixPackageImpl::description() const
 { return _description; }
 
 PackageGroup HelixPackageImpl::group() const

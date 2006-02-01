@@ -35,9 +35,9 @@ public:
 	HelixPatternImpl( Source_Ref source_r, const zypp::HelixParser & data );
 
 	/** Pattern summary */
-	virtual const TranslatedText & summary() const;
+	virtual TranslatedText summary() const;
 	/** Pattern description */
-	virtual const TranslatedText & description() const;
+	virtual TranslatedText description() const;
 	virtual ByteCount size() const;
 	/** */
 	virtual PackageGroup group() const;
