@@ -52,13 +52,12 @@ using namespace zypp;
 
 InstallOrder::InstallOrder(const ResPool & pool, const PoolItemList & toinstall, const PoolItemList & installed)
     : _pool (pool)
+    , _toinstall (toinstall.begin(), toinstall.end())
+    , _installed (installed.begin(), installed.end())
     , _dirty (true)
     , _numrun (0)
 {
-    for (PoolItemList::const_iterator iter = toinstall.begin(); iter != toinstall.end(); ++iter)
-	_toinstall.insert (*iter);
-    for (PoolItemList::const_iterator iter = installed.begin(); iter != installed.end(); ++iter)
-	_installed.insert (*iter);
+    _DEBUG("InstallOrder::InstallOrder(_toinstall " << _toinstall.size() << " items, _installed " << _installed.size() << " items)");
 }
 
 
