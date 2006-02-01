@@ -742,7 +742,7 @@ report_solutions ( solver::detail::Resolver_Ptr resolver, bool instorder)
 
 	for (ResolverQueueList::const_iterator iter = invalid.begin(); iter != invalid.end(); iter++) {
 	    ResolverQueue_Ptr queue = (*iter);
-	    cout << "Failed Solution: " << endl << queue->context() << endl;
+	    cout << "Failed Solution: " << endl << *queue->context() << endl;
 	    cout << "- - - - - - - - - -" << endl;
 	    queue->context()->spewInfo ();
 	    fflush (stdout);
@@ -1114,7 +1114,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		ResolverProblemList problems = resolver->problems ();
 		RESULT << problems.size() << " problems found:" << endl;
 		for (ResolverProblemList::iterator iter = problems.begin(); iter != problems.end(); ++iter) {
-		    cout << *iter << endl;
+		    cout << **iter << endl;
 		}
 	    }
 
