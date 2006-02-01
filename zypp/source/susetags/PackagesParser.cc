@@ -39,6 +39,7 @@ namespace zypp
         std::list<Package::Ptr> result;
 	
 	zypp::Source_Ref _source;
+	zypp::source::susetags::SuseTagsImpl::Ptr _sourceImpl;
 
         shared_ptr<source::susetags::SuseTagsPackageImpl> pkgImpl;
         NVRAD nvrad;
@@ -113,7 +114,7 @@ namespace zypp
             if ( howmany >= 2 )
             {
               pkgImpl->_media_number = str::strtonum<unsigned int>(words[0]);
-              pkgImpl->_location = Pathname("/suse/" + nvrad.arch.asString() + "/" + words[1]);
+              pkgImpl->_location = _sourceImpl->sourceDir(nvrad) + words[1];
             }
             else
             {

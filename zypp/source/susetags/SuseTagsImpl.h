@@ -36,6 +36,9 @@ namespace zypp
       class SuseTagsImpl : public SourceImpl
       {
       public:
+
+        typedef intrusive_ptr<SuseTagsImpl>      Ptr;
+
         /** \deprecated Interim ctor for testing
          * \throw EXCEPTION on parse error
         */
@@ -46,6 +49,8 @@ namespace zypp
         ~SuseTagsImpl();
 
 	virtual void createResolvables(Source_Ref source_r);
+	
+	Pathname sourceDir( const NVRAD& nvrad );
 
       public:
         /** Stream output. */

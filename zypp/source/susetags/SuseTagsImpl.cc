@@ -70,7 +70,7 @@ namespace zypp
 #warning We use suse instead of <DATADIR> for now
         Pathname p = provideFile(_path + "suse/setup/descr/packages");
         DBG << "Going to parse " << p << endl;
-        std::list<Package::Ptr> content( parsePackages( source_r, p ) );
+        std::list<Package::Ptr> content( parsePackages( source_r, this, p ) );
         _store.insert( content.begin(), content.end() );
         DBG << "SuseTagsImpl (fake) from " << p << ": "
             << content.size() << " packages" << endl;
@@ -111,6 +111,12 @@ namespace zypp
       //
       SuseTagsImpl::~SuseTagsImpl()
       {}
+      
+      Pathname SuseTagsImpl::sourceDir( const NVRAD& nvrad )
+      {
+#warning Not using <DATADIR>
+        return Pathname( "/suse/" + nvrad.arch.asString() + "/");
+      }
 
       ///////////////////////////////////////////////////////////////////
       //

@@ -17,6 +17,7 @@
 
 #include "zypp/Pathname.h"
 #include "zypp/Package.h"
+#include "zypp/source/susetags/SuseTagsImpl.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -31,7 +32,7 @@ namespace zypp
       /** \deprecated Just temporary.
        * \throws ParseException and others.
       */
-      std::list<Package::Ptr> parsePackages( Source_Ref source_r, const Pathname & file_r );
+      std::list<Package::Ptr> parsePackages( Source_Ref source_r, SuseTagsImpl::Ptr, Pathname & file_r );
 
       /////////////////////////////////////////////////////////////////
     } // namespace susetags
