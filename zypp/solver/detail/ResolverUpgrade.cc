@@ -437,11 +437,12 @@ MIL << "has split cap " << *scap << endl;
       Capability installedCap =  factory.parse ( installed->kind(), installed->name(), Rel::EQ, installed->edition());
 
       FindProviders info;
-_DEBUG("FindProviders for " << installedCap);
+
       invokeOnEach( _pool.byCapabilityIndexBegin( installed->name(), dep ),
 		    _pool.byCapabilityIndexEnd( installed->name(), dep ),
-		    functor::chain (resfilter::ByUninstalled (),
-				    resfilter::callOnCapMatchIn( dep, installedCap, functor::functorRef<bool,PoolItem,Capability>(info) ) ) );
+		    resfilter::ByUninstalled (),
+		    resfilter::callOnCapMatchIn( dep, installedCap, functor::functorRef<bool,PoolItem,Capability>(info) ) );
+		
 
       int num_providers = info.providers.size();
 
