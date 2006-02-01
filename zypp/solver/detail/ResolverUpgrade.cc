@@ -257,9 +257,16 @@ MIL << "item is uninstalled " << item << endl;
 	item.status().setUndetermined();
 	continue;
       }
-      item.status().setUnneeded();				// mark as seen
-      installed = PoolItem_Ref();
       candidate = item;
+      candidate.status().setUnneeded();				// mark as seen
+      installed = Helper::findInstalledItem (_pool, candidate);
+      if (installed) {						// check if we already have an installed
+	CandidateMap::const_iterator cand_it = candidatemap.find(installed);
+	if (cand_it != candidatemap.end()
+	    && cand_it->second->edition().compare (candidate->edition()) < 0) {	// the new is better!
+	    candidatemap[installed] = candidate;
+	}
+      }
     }
 
 #warning FIXME needs locks
@@ -296,6 +303,11 @@ MIL << "has split cap " << *scap << endl;
     }
 
   } // iterate over the complete pool
+
+  // reset all unneeded
+  for (PoolItemSet::const_iterator it = available.begin(); it != available.end(); ++it) {
+	it->status().setUndetermined();
+  }
 
 #warning Cant update from broken install medium like STABLE
 #if 0
@@ -561,9 +573,9 @@ MIL << "has split cap " << *scap << endl;
     PoolItem_Ref guess;
     PoolItemSet & gset( it->second );
     for ( PoolItemSet::iterator git = gset.begin(); git != gset.end(); ++git ) {
-      PoolItem_Ref item;
+      PoolItem_Ref item (*git);
       if ( item.status().isToBeInstalled()) {
-	MIL << " ==> (pass 2: meanwhile set to instaall): " << (*git) << endl;
+	MIL << " ==> (pass 2: meanwhile set to install): " << item << endl;
 	if ( ! doesObsoleteItem (item, it->first ) ) {
 	  it->first.status().setToBeUninstalled(ResStatus::APPL_HIGH);
 	}
