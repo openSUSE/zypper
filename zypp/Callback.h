@@ -34,7 +34,8 @@ namespace zypp
    * It \b must \b not conatin any data, just virtual methods.
    *
    * These are the functions the sender invokes, and which will be forwarded
-   * to some receiver.
+   * to some receiver. If no receiver is present, the defined default
+   * implementations are invoked.
    *
    * For methods returning non-void, define a reasonable return value,
    * because this is what you get back in case no receiver is listening.
@@ -71,6 +72,37 @@ namespace zypp
    *   report->ping( 13 );
    *   int response = report->pong();
    * }
+   * \endcode
+   *
+   * \par Receiving Task reports (RECEIVER SIDE).
+   *
+   * To receive task reports of type \c Foo the recipient class
+   * derives from callback::ReceiveReport\<Foo\>. callback::ReceiveReport
+   * inherits \c Foo and provides two additional methods:
+   *
+   * \code
+   *   virtual void reportbegin() {}
+   *   virtual void reportend() {}
+   * \endcode
+   *
+   * These two are automatically invoked, whenever the sender
+   * creates a callback::SendReport instance, and when it gets
+   * destructed. So even if the sending task is aborted without
+   * sending an explicit notification, the reciever may notice it,
+   * by overloading \c reportend.
+   *
+   * Overload the methods you're interested in.
+   *
+   * \note In case you must return some value and don't know which,
+   * return the task structures default. The author of the task
+   * structure had to provide this value, so it's probabely better
+   * than anything you \e invent.
+   * \code
+   *   int somefunktion()
+   *   {
+   *     ...// don't know what to return?
+   *     return Foo::somefunktion();
+   *   }
    * \endcode
    *
   */
