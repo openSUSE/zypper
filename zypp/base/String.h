@@ -264,7 +264,7 @@ namespace zypp
     template <class _Container>
       std::string join( const _Container & cont_r,
                         const std::string & sep_r = " " )
-      { return join( cont_r.begin(), cont_r.end() ); }
+      { return join( cont_r.begin(), cont_r.end(), sep_r ); }
     //@}
 
 
