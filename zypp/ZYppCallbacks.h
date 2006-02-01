@@ -43,9 +43,9 @@ namespace zypp
 	, Url url
       ) {}
 
-      // return false if the download should be aborted right now
+      // return true if the download should be aborted right now
       virtual bool progress(int value, Resolvable::Ptr resolvable_ptr) 
-      { return true; }
+      { return false; }
 
       virtual Action problem(
         Resolvable::Ptr resolvable_ptr
@@ -79,7 +79,7 @@ namespace zypp
       ) {}
 
       virtual bool progress(int value, URL url) 
-      { return true; ]
+      { return false; }
 
       virtual Action problem(
         URL url
@@ -113,7 +113,7 @@ namespace zypp
       ) {}
 
       virtual bool progress(int value, Source_Ref source) 
-      { return true; ]
+      { return false; }
 
       virtual Action problem(
         Source_Ref source
@@ -147,7 +147,7 @@ namespace zypp
       ) {}
 
       virtual bool progress(int value, URL url) 
-      { return true; ]
+      { return false; }
 
       virtual Action problem(
         URL url
@@ -218,7 +218,7 @@ namespace zypp
         ) {}
 
         virtual bool progress(int value, Resolvable::Ptr resolvable) 
-        { return true; ]
+        { return false; }
 
         virtual Action problem(
           Resolvable::Ptr resolvable
@@ -253,7 +253,7 @@ namespace zypp
         ) {}
 
         virtual bool progress(int value, Resolvable::Ptr resolvable) 
-        { return true; ]
+        { return false; }
 
         virtual Action problem(
           Resolvable::Ptr resolvable
@@ -288,7 +288,7 @@ namespace zypp
         ) {}
 
         virtual bool progress(int value, Pathname path) 
-        { return true; ]
+        { return false; } 
 
         virtual Action problem(
 	  Pathname path
@@ -323,7 +323,7 @@ namespace zypp
         ) {}
 
         virtual bool progress(int value, Pathname path) 
-        { return true; ]
+        { return false; }
 
         virtual Action problem(
 	  Pathname path
