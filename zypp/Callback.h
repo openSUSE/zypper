@@ -78,7 +78,7 @@ namespace zypp
    *
    * To receive task reports of type \c Foo the recipient class
    * derives from callback::ReceiveReport\<Foo\>. callback::ReceiveReport
-   * inherits \c Foo and provides two additional methods:
+   * inherits \c Foo and provides two additional virtual methods:
    *
    * \code
    *   virtual void reportbegin() {}
@@ -105,6 +105,26 @@ namespace zypp
    *   }
    * \endcode
    *
+   * \par Connecting the Receiver
+   *
+   * For this callback::ReceiveReport provides 4 methods:
+   * \code
+   *  void connect();
+   *  void disconnect();
+   *  bool connected() const;
+   *  ReceiveReport * whoIsConnected() const;
+   * \endcode
+   *
+   * \li \c connect Connect this ReceiveReport (in case some other
+   * ReceiveReport is connected, it get disconneced. Remember its
+   * a Callback light).
+   * \li \c disconnect Disconnect this ReceiveReport in case it is
+   * connected. If not connected nothing happens.
+   * \li \c connected Test wheter this ReceiveReport is currently
+   * connected.
+   * \li \c whoIsConnected Return a 'ReceiveReport*' to the currently
+   * connected ReceiveReport, or \c NULL if none is connected.
+   *
   */
   namespace callback
   { /////////////////////////////////////////////////////////////////
@@ -126,6 +146,21 @@ namespace zypp
       {
         typedef DistributeReport<_Report> Distributor;
 
+        virtual ~ReceiveReport()
+        { disconnect(); }
+
+        ReceiveReport * whoIsConnected() const
+        { return Distributor::instance().getReceiver(); }
+
+        bool connected() const
+        { return whoIsConnected() == this; }
+
+        void connect()
+        { Distributor::instance().setReceiver( *this ); }
+
+        void disconnect()
+        { Distributor::instance().unsetReceiver( *this ); }
+
         virtual void reportbegin()
         {}
         virtual void reportend()
@@ -145,8 +180,14 @@ namespace zypp
            return _self;
          }
 
-         void setReceiver( Receiver & _rec )
-         { _receiver = &_rec; }
+         Receiver * getReceiver() const
+         { return _receiver == &_noReceiver ? NULL : _receiver; }
+
+         void setReceiver( Receiver & rec_r )
+         { _receiver = &rec_r; }
+
+         void unsetReceiver( Receiver & rec_r )
+         { if ( _receiver == &rec_r ) noReceiver(); }
 
          void noReceiver()
          { _receiver = &_noReceiver; }
