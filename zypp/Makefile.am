@@ -132,7 +132,7 @@ lib@PACKAGE@_la_SOURCES = \
 	TmpPath.cc	\
 	DiskUsage.cc	\
 	VendorAttr.cc	\
-	UpgradeStatistics.h	\
+	UpgradeStatistics.cc	\
 	ZYpp.cc		\
 	TranslatedText.cc \
 	ZYppFactory.cc

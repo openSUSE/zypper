@@ -43,6 +43,9 @@ namespace zypp
 
 using namespace std;
 
+UpgradeStatistics::~UpgradeStatistics()
+{}
+
 /******************************************************************
 **
 **

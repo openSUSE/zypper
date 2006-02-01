@@ -202,7 +202,7 @@ class UpgradeStatistics : public UpgradeOptions {
       chk_replaced_guessed	= 0;
       chk_add_split		= 0;
     }
-    virtual ~UpgradeStatistics() {}
+    virtual ~UpgradeStatistics();
 
     /**
      * total number of packages that will be installed
