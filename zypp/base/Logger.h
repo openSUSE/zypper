@@ -81,14 +81,14 @@ namespace zypp
        * @see getStream
       */
       enum LogLevel {
-        E_XXX = -1, /**< Excessive logging. */
-        E_DBG = 0,  /**< Debug or verbose. */
-        E_MIL,      /**< Milestone. */
-        E_WAR,      /**< Warning. */
-        E_ERR,      /**< Error. */
-        E_SEC,      /**< Secutrity related. */
-        E_INT,      /**< Internal error. */
-        E_USR       /**< User log. */
+        E_XXX = 999, /**< Excessive logging. */
+        E_DBG = 0,   /**< Debug or verbose. */
+        E_MIL,       /**< Milestone. */
+        E_WAR,       /**< Warning. */
+        E_ERR,       /**< Error. */
+        E_SEC,       /**< Secutrity related. */
+        E_INT,       /**< Internal error. */
+        E_USR        /**< User log. */
       };
 
       /** Return a log stream to write on.
