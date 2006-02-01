@@ -52,6 +52,7 @@
 #include "zypp/VendorAttr.h"
 #include "zypp/Package.h"
 
+#include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/solver/detail/Resolver.h"
 
@@ -122,7 +123,7 @@ struct FindObsoletes : public resfilter::OnCapMatchCallbackFunctor
 bool
 Resolver::doesObsoleteCapability (PoolItem_Ref candidate, const Capability & cap)
 {
-    DBG << "doesObsoleteCapability " << candidate << ", " << cap << endl;
+    _DEBUG("doesObsoleteCapability " << candidate << ", " << cap);
 
     Dep dep (Dep::OBSOLETES);
     FindObsoletes info;
@@ -130,7 +131,7 @@ Resolver::doesObsoleteCapability (PoolItem_Ref candidate, const Capability & cap
 		  _pool.byCapabilityIndexEnd( cap.index(), dep ),
 		  resfilter::callOnCapMatchIn( dep, cap, functor::functorRef<bool,PoolItem_Ref,Capability>(info) ) );
 
-    DBG << (info.obsoletes ? "YES" : "NO");
+    _DEBUG((info.obsoletes ? "YES" : "NO"));
     return info.obsoletes;
 }
 
@@ -160,10 +161,10 @@ struct FindProviders : public resfilter::OnCapMatchCallbackFunctor
     bool operator()( PoolItem_Ref provider, const Capability & match )
     {
 	if ( provider.status().isToBeUninstalled() ) {
-	    DBG << "  IGNORE relation match (package is tagged to delete): " << match << " ==> " << provider << endl;
+	    MIL << "  IGNORE relation match (package is tagged to delete): " << match << " ==> " << provider << endl;
 	}
 	else {
-	    DBG << "  relation match: " << match << " ==> " << provider << endl;
+	    MIL << "  relation match: " << match << " ==> " << provider << endl;
 	    providers.insert (provider);
 	}
 	return true;
@@ -229,7 +230,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     item.status().setNoTransact(ResStatus::APPL_HIGH);
 
     if ( item.status().isToBeUninstalled() ) {
-      DBG << "doUpgrade available: SKIP to delete " << item << endl;
+      MIL << "doUpgrade available: SKIP to delete " << item << endl;
       ++opt_stats_r.pre_todel;
       continue;
     }
@@ -238,7 +239,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       installed = item;
       candidate = Helper::findUpdateItem( _pool, installed);
       if (!candidate) {
-	DBG << "doUpgrade available: SKIP no candidate for " << installed << endl;
+	MIL << "doUpgrade available: SKIP no candidate for " << installed << endl;
 	++opt_stats_r.pre_nocand;
 	continue;
       }
@@ -264,7 +265,7 @@ MIL << "item is uninstalled " << item << endl;
 #warning FIXME needs locks
 #if 0
     if ( item->isLocked() ) {
-      DBG << "doUpgrade available: SKIP taboo candidate " << item << endl;
+      MIL << "doUpgrade available: SKIP taboo candidate " << item << endl;
       ++opt_stats_r.pre_nocand;
       continue;
     }
@@ -313,7 +314,7 @@ MIL << "has split cap " << *scap << endl;
       CheckSetDeps::BrokenMap::iterator bit, bend;
       for(bit = broken.begin(), bend = broken.end(); bit != bend; ++bit)
       {
-	DBG << bit->first->name() << " is broken, not considering it for update" << endl;
+	MIL << bit->first->name() << " is broken, not considering it for update" << endl;
 	available.remove(bit->first);
 	--opt_stats_r.pre_avcand;
 	++opt_stats_r.pre_nocand;
@@ -343,12 +344,12 @@ MIL << "has split cap " << *scap << endl;
 #warning How to access the target ?
 #if 0
       if (Target::providesFile (it->first->name_str(), it->first->path_str())) {
-	DBG << "  " << it->second.size() << " package(s) for " << it->first << endl;
+	_DEBUG("  " << it->second.size() << " package(s) for " << it->first);
 	applyingSplits[citem].insert( it->second.begin(), it->second.end() );
-	DBG << "  split count for " << citem->name() << " now " << applyingSplits[citem].size() << endl;
+	_DEBUG("  split count for " << citem->name() << " now " << applyingSplits[citem].size());
       }
       else {
-	DBG << "  " << it-> first << " does not apply" << endl;
+	_DEBUG("  " << it-> first << " does not apply");
       }
 #endif
     }
@@ -374,7 +375,7 @@ MIL << "has split cap " << *scap << endl;
     ++opt_stats_r.chk_installed_total;
 
     if ( status.transacts() ) {						// we know its installed, if it transacts also
-      DBG << "SKIP to delete: " << it->resolvable() << endl;	// it'll be deleted
+      MIL << "SKIP to delete: " << it->resolvable() << endl;	// it'll be deleted
       ++opt_stats_r.chk_already_todel;
       continue;
     }
@@ -382,7 +383,7 @@ MIL << "has split cap " << *scap << endl;
 #warning This needs locks
 #if 0
     if ( (*it)->is_taboo() ) {
-      DBG << "SKIP taboo: " << (*it)->installedObj() << endl;
+      MIL << "SKIP taboo: " << (*it)->installedObj() << endl;
       ++opt_stats_r.chk_is_taboo;
       _update_items.push_back ( *it ); // remember in problem list ?
       continue;
@@ -393,7 +394,7 @@ MIL << "has split cap " << *scap << endl;
 
     bool probably_dropped = false;
 
-    DBG << "REPLACEMENT FOR " << installed << endl;
+    MIL << "REPLACEMENT FOR " << installed << endl;
     ///////////////////////////////////////////////////////////////////
     // figure out replacement
     ///////////////////////////////////////////////////////////////////
@@ -405,22 +406,22 @@ MIL << "has split cap " << *scap << endl;
 
 	if ( installed->edition().compare (candidate->edition()) < 0 ) {	  // new version
 	  candidate.status().setToBeInstalled(ResStatus::APPL_HIGH);
-	  DBG << " ==> INSTALL (new version): " << candidate << endl;
+	  MIL << " ==> INSTALL (new version): " << candidate << endl;
 	  ++opt_stats_r.chk_to_update;
 	} else {
 	  // check whether to downgrade:
 
 	  if (!downgrade_allowed (installed, candidate)) {
-	    DBG << " ==> (keep installed)" << candidate << endl;
+	    MIL << " ==> (keep installed)" << candidate << endl;
 	    ++opt_stats_r.chk_to_keep_installed;
 	  } else {
 	    candidate.status().setToBeInstalled(ResStatus::APPL_HIGH);
-	    DBG << " ==> INSTALL (SuSE version downgrade): " << candidate << endl;
+	    MIL << " ==> INSTALL (SuSE version downgrade): " << candidate << endl;
 	    ++opt_stats_r.chk_to_downgrade;
 	  }
 	}
       } else {
-	DBG << " ==> INSTALL (preselected): " << candidate << endl;
+	MIL << " ==> INSTALL (preselected): " << candidate << endl;
 	++opt_stats_r.chk_already_toins;
       }
 
@@ -436,7 +437,7 @@ MIL << "has split cap " << *scap << endl;
       Capability installedCap =  factory.parse ( installed->kind(), installed->name(), Rel::EQ, installed->edition());
 
       FindProviders info;
-
+_DEBUG("FindProviders for " << installedCap);
       invokeOnEach( _pool.byCapabilityIndexBegin( installed->name(), dep ),
 		    _pool.byCapabilityIndexEnd( installed->name(), dep ),
 		    functor::chain (resfilter::ByUninstalled (),
@@ -444,11 +445,11 @@ MIL << "has split cap " << *scap << endl;
 
       int num_providers = info.providers.size();
 
-      DBG << "lookup " << num_providers << " provides for installed " << installedCap << endl;
+      _DEBUG("lookup " << num_providers << " provides for installed " << installedCap);
 
       switch ( info.providers.size() ) {
       case 0:
-	DBG << " ==> (dropped)" << endl;
+	MIL << " ==> (dropped)" << endl;
 	// wait untill splits are processed. Might be a split obsoletes
 	// this one (i.e. package replaced but not provided by new one).
 	// otherwise it's finaly dropped.
@@ -456,13 +457,13 @@ MIL << "has split cap " << *scap << endl;
 	break;
       case 1:
         addProvided[installed] = info.providers;
-	DBG << " ==> REPLACED by: " << (*info.providers.begin()) << endl;
+	MIL << " ==> REPLACED by: " << (*info.providers.begin()) << endl;
 	// count stats later
 	// check obsoletes later
 	break;
       default:
 	addMultiProvided[installed] = info.providers;
-	DBG << " ==> pass 2 (" << info.providers.size() << " times provided)" << endl;
+	MIL << " ==> pass 2 (" << info.providers.size() << " times provided)" << endl;
 	// count stats later
 	// check obsoletes later
 	break;
@@ -482,7 +483,7 @@ MIL << "has split cap " << *scap << endl;
       } else {
 	for ( PoolItemSet::iterator ait = toadd.begin(); ait != toadd.end(); ++ait ) {
 	  PoolItem_Ref split_candidate = *ait;
-	  DBG << " ==> ADD (splitted): " << split_candidate << endl;
+	  MIL << " ==> ADD (splitted): " << split_candidate << endl;
 	  if ( probably_dropped
 	       && split_candidate.status().isUninstalled()
 	       && doesObsoleteItem (split_candidate, installed))
@@ -554,14 +555,14 @@ MIL << "has split cap " << *scap << endl;
   // look at the ones with multiple providers
 
   for ( TodoMap::iterator it = addMultiProvided.begin(); it != addMultiProvided.end(); ++it ) {
-    DBG << "GET ONE OUT OF " << it->second.size() << " for " << it->first << endl;
+    MIL << "GET ONE OUT OF " << it->second.size() << " for " << it->first << endl;
 
     PoolItem_Ref guess;
     PoolItemSet & gset( it->second );
     for ( PoolItemSet::iterator git = gset.begin(); git != gset.end(); ++git ) {
       PoolItem_Ref item;
       if ( item.status().isToBeInstalled()) {
-	DBG << " ==> (pass 2: meanwhile set to instaall): " << (*git) << endl;
+	MIL << " ==> (pass 2: meanwhile set to instaall): " << (*git) << endl;
 	if ( ! doesObsoleteItem (item, it->first ) ) {
 	  it->first.status().setToBeUninstalled(ResStatus::APPL_HIGH);
 	}
@@ -582,7 +583,7 @@ MIL << "has split cap " << *scap << endl;
 
     if ( guess ) {
       guess.status().setToBeInstalled(ResStatus::APPL_HIGH);
-      DBG << " ==> REPLACED by: (pass 2: guessed): " << guess << endl;
+      MIL << " ==> REPLACED by: (pass 2: guessed): " << guess << endl;
       if ( ! doesObsoleteItem (guess, it->first ) ) {
 	it->first.status().setToBeUninstalled(ResStatus::APPL_HIGH);
       }
