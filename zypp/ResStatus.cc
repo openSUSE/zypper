@@ -25,6 +25,8 @@ namespace zypp
   const ResStatus ResStatus::toBeUninstalled		 (INSTALLED,   UNDETERMINED, TRANSACT);
   const ResStatus ResStatus::toBeUninstalledDueToUnlink	 (INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_UNLINK);
   const ResStatus ResStatus::toBeUninstalledDueToObsolete(INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_OBSOLETE);
+  const ResStatus ResStatus::installed			 (INSTALLED,   UNDETERMINED);
+  const ResStatus ResStatus::uninstalled		 (UNINSTALLED, UNDETERMINED);
   const ResStatus ResStatus::incomplete			 (INSTALLED,   INCOMPLETE);
   const ResStatus ResStatus::complete			 (INSTALLED,   SATISFIED);
   const ResStatus ResStatus::satisfied			 (UNINSTALLED, SATISFIED);
@@ -83,6 +85,13 @@ namespace zypp
 	( obj.isIncomplete() ? "I" : "_") ) );
 
     str << (obj.transacts () ? "T" : "_");
+
+    if (obj.transacts ()) {
+	if (obj.isBySolver()) str << "s";
+	else if (obj.isByApplLow()) str << "l";
+	else if (obj.isByApplHigh()) str << "h";
+	else if (obj.isByUser()) str << "u";
+    }
 
     str << (obj.isToBeUninstalledDueToObsolete() ? "O" :
 	( obj.isToBeUninstalledDueToUnlink() ? "U" :
