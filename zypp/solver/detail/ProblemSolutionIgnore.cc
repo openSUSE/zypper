@@ -50,11 +50,8 @@ ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
     : ProblemSolution (parent, "", "")
 {
     if (kind == Dep::CONFLICTS) {
-	// TranslatorExplanation %s = name of package, patch, selection ...
-	_description = str::form (_("Ignoring conflict of %s"),
-				  item->name().c_str());
-	addAction (new InjectSolutionAction (item, capability, kind));	
-    } else if (kind == Dep::PROVIDES) { 
+	ERR << "Need BOTH resolvalbes; use the other constructor of  ProblemSolutionIgnore" << endl;
+    } else if (kind == Dep::REQUIRES) { 
 	_description = _("Ignoring this requirement");
 	addAction ( new InjectSolutionAction (item, capability, kind));		
     } else {  
@@ -62,6 +59,26 @@ ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
     }
 }
 
+ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
+					      const Dep &kind, 
+					      PoolItem_Ref item,
+					      const Capability & capability,
+					      PoolItem_Ref otherItem)
+    : ProblemSolution (parent, "", "")
+{
+    if (kind == Dep::CONFLICTS) {
+	// TranslatorExplanation %s = name of package, patch, selection ...
+	_description = str::form (_("Ignoring conflict of %s"),
+				  item->name().c_str());
+	addAction (new InjectSolutionAction (item, capability, kind, otherItem));	
+    } else if (kind == Dep::REQUIRES) { 
+	_description = _("Ignoring this requirement");
+	addAction ( new InjectSolutionAction (item, capability, kind));		
+    } else {  
+	ERR << "Wrong kind of capability: " << kind << endl;
+    }
+}
+	
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

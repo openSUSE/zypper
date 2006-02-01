@@ -201,6 +201,20 @@ Resolver::addExtraConflict (const Capability & capability)
     _extra_conflicts.insert (capability);
 }
 
+void
+Resolver::addIgnoreConflict (const PoolItem_Ref item,
+		   const Capability & capability)
+{
+    _ignoreConflicts[item] = capability;
+}
+void
+Resolver::addIgnoreRequires (const PoolItem_Ref item,
+			     const Capability & capability)
+{
+    _ignoreRequires[item] = capability;
+}
+
+
 
 //---------------------------------------------------------------------------
 

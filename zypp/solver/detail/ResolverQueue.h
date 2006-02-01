@@ -47,6 +47,8 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
 typedef std::list <ResolverQueue_Ptr> ResolverQueueList;
+typedef std::map<PoolItem_Ref,Capability> IgnoreMap;
+	    
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -58,6 +60,8 @@ class ResolverQueue : public base::ReferenceCounted, private base::NonCopyable {
 
     ResolverContext_Ptr _context;
     QueueItemList _qitems;
+    IgnoreMap _ignoreConflicts;
+    IgnoreMap _ignoreRequires;
 
   public:
     ResolverQueue (const ResPool & pool, ResolverContext_Ptr context = NULL);
@@ -82,6 +86,12 @@ class ResolverQueue : public base::ReferenceCounted, private base::NonCopyable {
     void addExtraCapability (const Capability & cap);
     void addExtraConflict (const Capability & cap);
     void addItem (QueueItem_Ptr qtem);
+
+    void setIgnoreConflicts(const IgnoreMap & ignoreMap)
+	{ _ignoreConflicts = ignoreMap; }
+
+    void setIgnoreRequires(const IgnoreMap & ignoreMap)
+	{ _ignoreRequires = ignoreMap; }
 
     bool isEmpty () const { return _qitems.empty(); }
     bool isInvalid ();

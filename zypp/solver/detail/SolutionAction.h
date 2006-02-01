@@ -107,10 +107,20 @@ namespace zypp
 	class InjectSolutionAction: public SolutionAction
 	{
 	public:
-	    
-	    InjectSolutionAction( PoolItem_Ref item, const Capability & capability, const Dep & kind )
+
+	    InjectSolutionAction( PoolItem_Ref item,
+				  const Capability & capability,
+				  const Dep & kind)
 		: SolutionAction(),
-		  _capability( capability ), _kind( kind ) {}
+		  _capability( capability ), _kind( kind ),
+		  _otherItem() {}
+	    
+	    InjectSolutionAction( PoolItem_Ref item,
+				  const Capability & capability,
+				  const Dep & kind,
+				  PoolItem_Ref otherItem)
+		: SolutionAction(),
+		  _capability( capability ), _kind( kind ), _otherItem( otherItem ) {}
 
 	  // ---------------------------------- I/O
 
@@ -126,8 +136,8 @@ namespace zypp
 	protected:
 
 	    const Capability & _capability;
-	    PoolItem_Ref _item;	    
 	    const Dep & _kind;
+	    PoolItem_Ref _item, _otherItem;	    
 	};
 
 

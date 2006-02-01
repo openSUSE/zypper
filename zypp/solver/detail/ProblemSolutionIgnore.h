@@ -52,6 +52,11 @@ namespace zypp
 				   const Dep &dep,
 				   PoolItem_Ref item,
 				   const Capability & capability);
+	    ProblemSolutionIgnore( ResolverProblem_Ptr parent,
+				   const Dep &dep,
+				   PoolItem_Ref item,
+				   const Capability & capability,
+				   PoolItem_Ref otherItem);	    
 	};
 
       ///////////////////////////////////////////////////////////////////

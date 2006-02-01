@@ -24,6 +24,7 @@
 
 #include <iosfwd>
 #include <list>
+#include <map>
 #include <string>
 
 #include "zypp/base/ReferenceCounted.h"
@@ -73,6 +74,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     CapSet _extra_caps;
     CapSet _extra_conflicts;
+
+    IgnoreMap _ignoreConflicts;
+    IgnoreMap _ignoreRequires;    
 
     ResolverQueueList _pending_queues;
     ResolverQueueList _pruned_queues;
@@ -136,6 +140,11 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     void addExtraCapability (const Capability & capability);
     void addExtraConflict (const Capability & capability);
+
+    void addIgnoreConflict (const PoolItem_Ref item,
+			    const Capability & capability);
+    void addIgnoreRequires (const PoolItem_Ref item,
+			    const Capability & capability);
 
     void verifySystem (void);
     void establishState (const ResolverContext_Ptr context = NULL);

@@ -142,20 +142,23 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 bool
 InjectSolutionAction::execute(Resolver & resolver) const
 {
-    ResObject::constPtr resolvable = _item.resolvable();
-    CapSet dep;
-    
-    dep.insert(_capability);
-    Dependencies dependencies;
-
     if (_kind == Dep::CONFLICTS) {
-	// removing provide, it the other resolvable has the conflict
-	dependencies[Dep::PROVIDES] = dep;
-	// removing conflict
-	dependencies[Dep::CONFLICTS] = dep;		
+	// removing conflict in both resolvables
+	Dependencies dependencies = _item.resolvable()->deps();
+	CapSet depList = dependencies[Dep::CONFLICTS];
+	if (depList.find(_capability) != depList.end())
+	{
+	    resolver.addIgnoreConflict (_item, _capability);
+	}
+	dependencies = _otherItem.resolvable()->deps();
+	depList = dependencies[Dep::CONFLICTS];
+	if (depList.find(_capability) != depList.end())
+	{
+	    resolver.addIgnoreConflict (_otherItem, _capability);
+	}
     } else if (_kind  == Dep::PROVIDES) {
 	// removing the requires dependency from the item
-	dependencies[Dep::REQUIRES] = dep;
+	resolver.addIgnoreRequires (_item, _capability);
     } else {
 	ERR << "No valid InjectSolutionAction kind found" << endl;
 	return false;

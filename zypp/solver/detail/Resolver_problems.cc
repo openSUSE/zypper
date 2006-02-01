@@ -279,7 +279,7 @@ Resolver::problems (void) const
 		details = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// Add dummy provides
-		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::PROVIDES, item, misc_info->capability())); 
+		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::REQUIRES, item, misc_info->capability())); 
 		problems.push_back (problem);
 		problem_created = true;
 	    }
@@ -291,7 +291,7 @@ Resolver::problems (void) const
 		details = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// Add dummy provides
-		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::PROVIDES, item, misc_info->capability())); 
+		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::REQUIRES, item, misc_info->capability())); 
 		problems.push_back (problem);
 		problem_created = true;		
 	    }
@@ -347,7 +347,7 @@ Resolver::problems (void) const
 		what = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// Add dummy provides
-		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::PROVIDES, item, misc_info->capability())); 
+		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::REQUIRES, item, misc_info->capability())); 
 		problems.push_back (problem);
 		problem_created = true;		
 	    }
@@ -392,7 +392,8 @@ Resolver::problems (void) const
 		// Uninstall p
 		problem->addSolution (new ProblemSolutionUninstall (problem, resItem));
 		// Remove conflict in the resolvable which has to be installed
-		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::CONFLICTS, resItem, misc_info->capability())); 
+		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::CONFLICTS, resItem, misc_info->capability(),
+								 misc_info->other())); 
 		problems.push_back (problem);
 		problem_created = true;
 #endif
@@ -412,7 +413,8 @@ Resolver::problems (void) const
 		// Uninstall p
 		problem->addSolution (new ProblemSolutionUninstall (problem, resItem));
 		// Remove conflict in the resolvable which has to be installed
-		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::CONFLICTS, resItem, misc_info->capability())); 
+		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::CONFLICTS, resItem, misc_info->capability(),
+								 misc_info->other())); 
 		problems.push_back (problem);
 		problem_created = true;		
 #endif
