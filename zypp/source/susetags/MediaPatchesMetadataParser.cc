@@ -20,7 +20,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/String.h"
 
-#include "zypp/parser/tagfile/MediaPatchesMetadataParser.h"
+#include "zypp/source/susetags/MediaPatchesMetadataParser.h"
 #include <boost/regex.hpp>
 #include "zypp/parser/tagfile/Grammar.h"
 
@@ -31,10 +31,10 @@ using namespace boost;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace parser
+  namespace source
   { /////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////
-    namespace tagfile
+    namespace susetags
     { /////////////////////////////////////////////////////////////////
 
       static void dumpRegexpResults( const boost::smatch &what )

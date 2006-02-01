@@ -9,8 +9,8 @@
 /** \file	zypp/parser/tagfile/Parser.h
  *
 */
-#ifndef ZYPP_PARSER_TAGFILE_MediaPatchesMetadataPARSER_H
-#define ZYPP_PARSER_TAGFILE_MediaPatchesMetadataPARSER_H
+#ifndef ZYPP_PARSER_TAGFILE_MediaMetadataPARSER_H
+#define ZYPP_PARSER_TAGFILE_MediaMetadataPARSER_H
 
 #include <iosfwd>
 #include <set>
@@ -26,43 +26,43 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace parser
+  namespace source
   { /////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////
-    namespace tagfile
+    namespace susetags
     { /////////////////////////////////////////////////////////////////
-      
-      /*
-        Location  /media.1/ directory
-        Content  one line of ASCII as follows
-        <directory> <whitespace> <optional comment>
-        zero or more lines specifying exclusive products: <productname>-<productversion>
-      */
-      
+
       ///////////////////////////////////////////////////////////////////
       //
-      //	CLASS NAME : MediaPatchesMetadataParser
+      //	CLASS NAME : MediaMetadataParser
       //
       /** Tagfile parser. */
-      struct MediaPatchesMetadataParser
+      struct MediaMetadataParser
       {
-        struct MediaPatchesEntry {
-          Pathname dir;
-          std::string comment;
-          // set of pairs (productname, version)
-          std::set< std::pair<std::string, std::string> > products;
+        struct MediaEntry {
+          std::string vendor;
+          std::string timestamp;
+          unsigned int count;
+          std::set<std::string> flags;
+          // map media number to ( map language -> description string )
+          // entry.alternate_names[1]["de"] -> "SUSE Linux"
+          std::map< unsigned int, std::map<std::string, std::string> > alternate_names;
         };
 
-        virtual ~MediaPatchesMetadataParser()
+        virtual ~MediaMetadataParser()
         {}
 
         /* Parse file and invoke consume on each tag found.
          * \throw ParseException
          * \todo more doc on Ecaptions.
         */
-        void parse( const Pathname & file_r, MediaPatchesEntry &entry_r );
+        void parse( const Pathname & file_r, MediaEntry &entry_r );
+        /* Parse a key.modifier (std::list of std::strings)
+         * That means, translatable tag with multiple values
+         * the default modifier will get the modifier of default (LABEL.de, LABEL as LANGUAGE.default)
+         */ 
       };
-        ///////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////
 
       /////////////////////////////////////////////////////////////////
     } // namespace tagfile
@@ -74,4 +74,4 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 //
-#endif //  ZYPP_PARSER_TAGFILE_MediaPatchesMetadataPPARSER_H
+#endif //  ZYPP_PARSER_TAGFILE_MediaMetadataPPARSER_H

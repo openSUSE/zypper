@@ -12,7 +12,10 @@ sourceinclude_HEADERS =	\
 	SuseTagsImpl.h \
 	SuseTagsSelectionImpl.h \
 	SuseTagsPackageImpl.h \
-	SelectionSelFileParser.h
+	SelectionSelFileParser.h \
+	ProductMetadataParser.h \
+	MediaMetadataParser.h \
+	MediaPatchesMetadataParser.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_source_susetags.la
 
@@ -23,7 +26,10 @@ lib@PACKAGE@_source_susetags_la_SOURCES = \
 	SuseTagsImpl.cc \
 	SuseTagsSelectionImpl.cc \
 	SuseTagsPackageImpl.cc \
-	SelectionSelFileParser.cc
+	SelectionSelFileParser.cc \
+	ProductMetadataParser.cc \
+	MediaMetadataParser.cc \
+	MediaPatchesMetadataParser.cc
 
 lib@PACKAGE@_source_susetags_la_LIBADD =
 
