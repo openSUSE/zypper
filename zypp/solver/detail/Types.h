@@ -37,6 +37,7 @@
 typedef std::list <zypp::PoolItem> PoolItemList;
 typedef std::set <zypp::PoolItem> PoolItemSet;
 
+#define _DEBUG(x) DBG << x
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

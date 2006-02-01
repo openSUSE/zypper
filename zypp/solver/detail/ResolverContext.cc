@@ -84,7 +84,7 @@ ResolverContext::ResolverContext (const ResPool & pool, ResolverContext_Ptr pare
     , _verifying (false)
     , _invalid (false)
 {
-DBG << "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" << endl;
+_DEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
     if (parent != NULL) {
 	_pool		 = parent->_pool;
 	_download_size   = parent->_download_size;
@@ -110,7 +110,7 @@ ResolverContext::~ResolverContext()
 ResStatus
 ResolverContext::getStatus (PoolItem_Ref item) const
 {
-DBG << "[" << this << "]getStatus(" << item << ")" << endl;
+_DEBUG( "[" << this << "]getStatus(" << item << ")" );
     Context::const_iterator it;
     ResolverContext_constPtr context = this;
 
@@ -118,13 +118,13 @@ DBG << "[" << this << "]getStatus(" << item << ")" << endl;
 
 	it = context->_context.find(item);		// part of local context ?
 	if (it != context->_context.end()) {
-DBG << "[" << context << "]:" << it->second << endl;
+_DEBUG( "[" << context << "]:" << it->second );
 	    return it->second;				// Y: return
 	}
 	context = context->_parent;			// N: go up the chain
     }
 
-DBG << "[NULL]:" << item.status() << endl;
+_DEBUG( "[NULL]:" << item.status() );
     return item.status();				// Not part of context, return Pool status
 }
 
@@ -136,12 +136,12 @@ void
 ResolverContext::setStatus (PoolItem_Ref item, const ResStatus & status)
 {
     if (_invalid) return;
-DBG << "[" << this << "]setStatus(" << item << ", " << status << ")" << endl;
+_DEBUG( "[" << this << "]setStatus(" << item << ", " << status << ")" );
     if (status == item.status()) {		// same as original status
 	Context::iterator it;
 	it = _context.find(item);		// part of local context ?
 	if (it != _context.end()) {
-DBG << "UNMARK" << endl;
+_DEBUG( "UNMARK" );
 	    _context.erase (it);		// erase it !
 	}
     }
@@ -149,7 +149,7 @@ DBG << "UNMARK" << endl;
 	ResStatus old_status = getStatus (item);
 
 	if (old_status != status) {		// new status ?
-DBG << "MARK" << endl;
+_DEBUG( "MARK" );
 	    _context[item] = status;		// set it !
 	}
     }
@@ -166,7 +166,7 @@ ResolverContext::install (PoolItem_Ref item, bool is_soft, int other_penalty)
     std::string msg;
 
     status = getStatus(item);
-    DBG << "ResolverContext[" << this << "]::install(<" << status  << "> " << item << ")" << endl;
+    _DEBUG( "ResolverContext[" << this << "]::install(<" << status  << "> " << item << ")" );
 
     if (status.isToBeUninstalled()
 	&& !status.isToBeUninstalledDueToUnlink()) {
@@ -235,7 +235,7 @@ ResolverContext::upgrade (PoolItem_Ref item, PoolItem_Ref old_item, bool is_soft
 {
     ResStatus status;
 
-    DBG << "ResolverContext[" << this << "]::upgrade(" << item << " upgrades " << old_item << ")" << endl;
+    _DEBUG( "ResolverContext[" << this << "]::upgrade(" << item << " upgrades " << old_item << ")" );
 
     status = getStatus(item);
 
@@ -292,10 +292,10 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
     ResStatus status, new_status;
     std::string msg;
 
-    DBG << "ResolverContext[" << this << "]::uninstall("
+    _DEBUG( "ResolverContext[" << this << "]::uninstall("
 		    << item << " " << (part_of_upgrade ? "part_of_upgrade" : "") << " "
 		    << (due_to_obsolete ? "due_to_obsolete": "") << " "
-		    << (due_to_unlink ? "due_to_unlink" : "") << ")" << endl;
+		    << (due_to_unlink ? "due_to_unlink" : "") << ")" );
 
     assert (! (due_to_obsolete && due_to_unlink));
 
@@ -347,7 +347,7 @@ ResolverContext::unneeded (PoolItem_Ref item, int other_penalty)
 {
     ResStatus status;
 
-    DBG << "ResolverContext[" << this << "]::unneeded(" << item << ")" << endl;
+    _DEBUG( "ResolverContext[" << this << "]::unneeded(" << item << ")" );
 
     status = getStatus(item);
 
@@ -371,7 +371,7 @@ ResolverContext::satisfy (PoolItem_Ref item, int other_penalty)
 
     status = getStatus(item);
 
-    DBG << "ResolverContext[" << this << "]::satisfy(" << item << ":" << status << ")" << endl;
+    _DEBUG( "ResolverContext[" << this << "]::satisfy(" << item << ":" << status << ")" );
 
     if (status.isInstalled()) {
 	setStatus (item, ResStatus::complete);
@@ -389,7 +389,7 @@ ResolverContext::satisfy (PoolItem_Ref item, int other_penalty)
 bool
 ResolverContext::incomplete (PoolItem_Ref item, int other_penalty)
 {
-    DBG << "ResolverContext[" << this << "]::incomplete(" << item << ")" << endl;
+    _DEBUG( "ResolverContext[" << this << "]::incomplete(" << item << ")" );
 
     ResStatus status;
     status = getStatus(item);
@@ -883,7 +883,7 @@ ResolverContext::incompleteCount (void) const
 void
 ResolverContext::addInfo (ResolverInfo_Ptr info)
 {
-    DBG << "ResolverContext[" << this << "]::addInfo(" << *info << ")" << endl;
+    _DEBUG( "ResolverContext[" << this << "]::addInfo(" << *info << ")" );
     _log.push_back (info);
 
     // _propagated_importance = false;
@@ -1118,7 +1118,7 @@ spew_info_cb (ResolverInfo_Ptr info, void *unused)
 void
 ResolverContext::spewInfo (void) const
 {
-    DBG << "ResolverContext[" << this << "]::spewInfo" << endl;
+    _DEBUG( "ResolverContext[" << this << "]::spewInfo" );
     foreachInfo (PoolItem_Ref(), -1, spew_info_cb, NULL);
 }
 
@@ -1332,19 +1332,16 @@ ResolverContext::compare (ResolverContext_constPtr context) const
 	return 0;
 
     cmp = partialCompare (context);
-MIL << "partialCompare " << cmp << endl;
     if (cmp)
 	return cmp;
 
     /* High numbers are bad.  Smaller downloads are best. */
     cmp = rev_num_cmp (_download_size, context->_download_size);
-MIL << "download size " << cmp << endl;
     if (cmp)
 	return cmp;
 
     /* High numbers are bad.  Less disk space consumed is good. */
     cmp = rev_num_cmp (_install_size, context->_install_size);
-MIL << "install size " << cmp << endl;
     if (cmp)
 	return cmp;
 

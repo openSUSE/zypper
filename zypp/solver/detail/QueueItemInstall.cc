@@ -109,7 +109,7 @@ QueueItemInstall::QueueItemInstall (const ResPool & pool, PoolItem_Ref item, boo
 	_upgrades = Helper::findInstalledItem (pool, item);
     }
 
-    DBG << "QueueItemInstall::QueueItemInstall(" << item << ") upgrades " << _upgrades << endl;
+    _DEBUG("QueueItemInstall::QueueItemInstall(" << item << (soft?", soft":"") << ") upgrades " << _upgrades);
 }
  
 
@@ -162,7 +162,7 @@ struct EstablishFreshens : public resfilter::OnCapMatchCallbackFunctor
 
     bool operator()( PoolItem_Ref provider, const Capability & match )
     {
-	DBG << "EstablishFreshens (" << provider << ", " << match << ")" << endl;
+	_DEBUG("EstablishFreshens (" << provider << ", " << match << ")");
 
 	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, provider);
 	qil.push_front (establish_item);
@@ -178,7 +178,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
     ResStatus status = context->getStatus(_item);
 
-    DBG <<  "QueueItemInstall::process(" << *this << "):" << status << endl;
+    _DEBUG( "QueueItemInstall::process(" << *this << "):" << status);
 
     /* If we are trying to upgrade item A with item B and they both have the
 	same version number, do nothing.  This shouldn't happen in general with
@@ -189,7 +189,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
     {
 	ResolverInfo_Ptr info;
 
-	DBG << "install upgrades itself, skipping" << endl;
+	_DEBUG("install upgrades itself, skipping");
 
 	info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_SKIPPING, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
 	context->addInfo (info);
@@ -202,11 +202,11 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
     if (!_needed_by.empty()) {
 	bool still_needed = false;
 
-	DBG <<  "still needed " << endl;
+	_DEBUG( "still needed ");
 
 	for (PoolItemList::const_iterator iter = _needed_by.begin(); iter != _needed_by.end() && !still_needed; ++iter) {
 	    ResStatus status = iter->status();
-	    DBG << "by: [status: " << status << "] " << *iter << endl;
+	    _DEBUG("by: [status: " << status << "] " << *iter);
 	    if (! status.isToBeUninstalled()) {
 		still_needed = true;
 	    }
@@ -239,7 +239,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     if (!_upgrades) {
 
-	DBG  << "simple install of " <<  _item  << endl;
+	_DEBUG("simple install of " <<  _item);
 	context->install (_item, context->verifying() /* is_soft */, _other_penalty);
 
     }
@@ -247,7 +247,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	QueueItemUninstall_Ptr uninstall_item;
 
-	DBG << "upgrade install of " << _item << endl;
+	_DEBUG("upgrade install of " << _item);
 
 	context->upgrade (_item, _upgrades, context->verifying() /* is_soft */, _other_penalty);
 
@@ -281,11 +281,11 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	   || status.isIncomplete()
 	   || status.isSatisfied()))
     {
-	DBG << "status " << status << " -> finished" << endl;
+	_DEBUG("status " << status << " -> finished");
 	goto finished;
     }
 
-    DBG << "status " << status << " -> NOT finished" << endl;
+    _DEBUG("status " << status << " -> NOT finished");
     {	// just a block for local initializers, the goto above makes this necessary
 
 	ResolverInfoMisc_Ptr misc_info;
@@ -313,10 +313,10 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 
 	    const Capability cap = *iter;
-	    DBG << "this requires " << cap << endl;
+	    _DEBUG("this requires " << cap);
 
 	    if (!context->requirementIsMet (cap)) {
-		DBG << "this requirement is still unfulfilled" << endl;
+		_DEBUG("this requirement is still unfulfilled");
 		QueueItemRequire_Ptr req_item = new QueueItemRequire (pool(), cap, _soft);
 		req_item->addPoolItem (_item);
 		qil.push_front (req_item);
@@ -329,10 +329,10 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 
 	    const Capability cap = *iter;
-	    DBG << "this recommends " << cap << endl;
+	    _DEBUG("this recommends " << cap);
 
 	    if (!context->requirementIsMet (cap)) {
-		DBG << "this recommends is still unfulfilled" << endl;
+		_DEBUG("this recommends is still unfulfilled");
 		QueueItemRequire_Ptr req_item = new QueueItemRequire (pool(), cap, true);	// this is a soft requires
 		req_item->addPoolItem (_item);
 		qil.push_front (req_item);
@@ -346,7 +346,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 
 	    const Capability cap = *iter;
-	    DBG << "this conflicts with '" << cap << "'" << endl;
+	    _DEBUG("this conflicts with '" << cap << "'");
 	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item, _soft);
 	    qil.push_front (conflict_item);
 
@@ -358,7 +358,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 
 	    const Capability cap = *iter;
-	    DBG << "this obsoletes " <<  cap << endl;
+	    _DEBUG("this obsoletes " <<  cap);
 	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item, _soft);
 	    conflict_item->setActuallyAnObsolete();
 	    qil.push_front (conflict_item);
@@ -396,7 +396,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 		continue;
 	    }
 
-	    DBG << "because: '" << conflicting_item << "'" << endl;
+	    _DEBUG("because: '" << conflicting_item << "'");
 
 	    uninstall_item = new QueueItemUninstall (pool(), conflicting_item, QueueItemUninstall::CONFLICT, _soft);
 	    uninstall_item->setDueToConflict ();

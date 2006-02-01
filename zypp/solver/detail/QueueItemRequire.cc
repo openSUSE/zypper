@@ -78,13 +78,14 @@ QueueItemRequire::dumpOn( std::ostream & os ) const
 
 //---------------------------------------------------------------------------
 
-QueueItemRequire::QueueItemRequire (const ResPool & pool, const Capability & dep, bool soft)
+QueueItemRequire::QueueItemRequire (const ResPool & pool, const Capability & cap, bool soft)
     : QueueItem (QUEUE_ITEM_TYPE_REQUIRE, pool)
-    , _capability (dep)
+    , _capability (cap)
     , _soft (soft)
     , _remove_only (false)
     , _is_child (false)
 {
+    _DEBUG("QueueItemRequire::QueueItemRequire(" << cap << (soft?", soft":"") << ")");
 }
 
 
@@ -284,7 +285,7 @@ codependent_items (const PoolItem_Ref item1, const PoolItem_Ref item2)
 bool
 QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_items)
 {
-    DBG << "QueueItemRequire::process(" << *this << ")" << endl;
+    MIL << "QueueItemRequire::process(" << *this << ")" << endl;
 
     if (context->requirementIsMet (_capability, _is_child)) {
 	DBG <<  "requirement is already met in current context" << endl;
@@ -306,7 +307,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	num_providers = info.providers.size();
 
-	DBG << "requirement is met by " << num_providers << " resolvable";
+	_DEBUG( "requirement is met by " << num_providers << " resolvable");
     }
 
     //
@@ -317,7 +318,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	if (_soft) goto finished;			// don't care for soft requires
 
-	DBG << "Unfulfilled requirement, try different solution" << endl;
+	_DEBUG( "Unfulfilled requirement, try different solution");
 
 	QueueItemUninstall_Ptr uninstall_item = NULL;
 	QueueItemBranch_Ptr branch_item = NULL;
@@ -489,7 +490,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
     else if (num_providers == 1) {
 
-	DBG << "Found exactly one resolvable, installing it." << endl;
+	_DEBUG( "Found exactly one resolvable, installing it.");
 
 	QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), info.providers.front(), _soft);
 	install_item->addDependency (_capability);
@@ -508,7 +509,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
     else if (num_providers > 1) {
 
-	      DBG << "Found more than one resolvable, branching." << endl;
+	      _DEBUG( "Found more than one resolvable, branching.");
 
 // ERR << "Found more than one item, branching." << endl;
 	QueueItemBranch_Ptr branch_item = new QueueItemBranch (pool());
