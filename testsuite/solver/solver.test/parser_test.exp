@@ -37,7 +37,7 @@
       }
 
       #							look for *-packages.xml
-      set testcases [glob $dircase/*-packages.xml $dircase/*-system.xml]
+      set testcases [glob $dircase/*-packages.xml $dircase/*-system.xml $dircase/*-package.xml]
 
       foreach testcase $testcases { 
 
