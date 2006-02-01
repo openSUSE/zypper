@@ -167,10 +167,11 @@ namespace zypp
 
       ////////////////////////////////////////////////////////////////////////////
 
-      std::list<Package::Ptr> parsePackages( Source_Ref source_r, const Pathname & file_r )
+      std::list<Package::Ptr> parsePackages( Source_Ref source_r, SuseTagsImpl::Ptr sourceImpl_r, const Pathname & file_r )
       {
         PackagesParser p;
 	p._source = source_r;
+	p._sourceImpl = sourceImpl_r;
         p.parse( file_r );
         return p.result;
       }
