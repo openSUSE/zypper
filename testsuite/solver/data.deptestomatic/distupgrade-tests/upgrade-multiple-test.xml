@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+   distupgrade multiple package, upgrade2 is better than upgrade1
+-->
+<test>
+<setup>
+  <system file="single-v1-package.xml"/>
+  <channel name="upgrade1" file="single-v2-package.xml"/>
+  <channel name="upgrade2" file="single-v3-package.xml"/>
+</setup>
+<trial>
+  <distupgrade/>
+</trial>
+</test>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+   distupgrade single unmaintained package
+-->
+<test>
+<setup>
+  <system file="single-v1-package.xml"/>
+  <channel name="upgrade" file="single-other-package.xml"/>
+</setup>
+<trial>
+  <distupgrade/>
+</trial>
+</test>
