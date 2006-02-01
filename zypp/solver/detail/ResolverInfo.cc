@@ -143,7 +143,7 @@ ResolverInfo::ResolverInfo (ResolverInfoType type, PoolItem_Ref item, int priori
     , _error (false)
     , _important (false)
 {
-    DBG << *this;
+    DBG << *this << endl;
 }
 
 
