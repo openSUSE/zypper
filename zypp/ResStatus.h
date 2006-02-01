@@ -324,6 +324,8 @@ namespace zypp
     static const ResStatus toBeUninstalled;
     static const ResStatus toBeUninstalledDueToUnlink;
     static const ResStatus toBeUninstalledDueToObsolete;
+    static const ResStatus installed;	// just for testsuite!
+    static const ResStatus uninstalled;	// just for testsuite!
     static const ResStatus satisfied;	// uninstalled, satisfied
     static const ResStatus complete;	// installed, satisfied
     static const ResStatus unneeded;	// uninstalled, unneeded
