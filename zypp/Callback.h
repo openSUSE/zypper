@@ -220,6 +220,53 @@ namespace zypp
         { return Distributor::instance(); }
       };
 
+    /** Temporarily connect a ReceiveReport then restore the previous one.
+     *
+     * Pass the ReceiveReport you want to connect temporarily
+     * to the ctor. The ReceiveReport is connected, a previously
+     * connected ReceiveReport is remembered and re-connected in
+     * the dtor.
+     * \code
+     *  struct FooReceive : public callback::ReceiveReport<Foo>
+     *  {..};
+     *  struct FooReceive2 : public callback::ReceiveReport<Foo>
+     *  {..};
+     *
+     *  FooReceive  r;
+     *  FooReceive2 r2;
+     *
+     *  r.connect();
+     *  ... // r receiving the report
+     *  {
+     *    callback::TempConnect<Foo> temp( r2 );
+     *    ...// r2 receiving the report
+     *  }
+     *  ...// r receiving the report
+     * \endcode
+    */
+    template<class _Report>
+      struct TempConnect
+      {
+        typedef ReceiveReport<_Report>    Receiver;
+        typedef DistributeReport<_Report> Distributor;
+
+        TempConnect( Receiver & rec_r )
+        : _oldRec( Distributor::instance().getReceiver() )
+        {
+          rec_r.connect();
+        }
+
+        ~TempConnect()
+        {
+          if ( _oldRec )
+            Distributor::instance().setReceiver( *_oldRec );
+          else
+            Distributor::instance().noReceiver();
+        }
+      private:
+        Receiver * _oldRec;
+      };
+
     /////////////////////////////////////////////////////////////////
   } // namespace callback
   ///////////////////////////////////////////////////////////////////
