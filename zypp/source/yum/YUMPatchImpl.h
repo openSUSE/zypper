@@ -78,9 +78,9 @@ namespace zypp
 	/** Patch time stamp */
 	int _timestamp;
 	/** Patch summary */
-	Label _summary;
+	TranslatedText _summary;
 	/** Patch description */
-	Text _description;
+	TranslatedText _description;
 	/** Patch category (recommended, security,...) */
 	std::string _category;
 	/** Does the system need to reboot to finish the update process? */
