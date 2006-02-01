@@ -126,6 +126,7 @@ namespace zypp
 	  {
 	    rpm().removePackage(p);
 	  }
+	  MIL << "Successful, resetting transact for " << *it << endl;
 	  it->status().setNoTransact(ResStatus::USER);
 	}
 #warning FIXME other resolvables
