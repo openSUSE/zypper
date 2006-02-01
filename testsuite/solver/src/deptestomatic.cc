@@ -336,7 +336,7 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 	order.init();
 	const PoolItemList & installorder ( order.getTopSorted() );
 	for (PoolItemList::const_iterator iter = installorder.begin(); iter != installorder.end(); iter++) {
-		RESULT << (*iter) << endl;
+		RESULT; printRes (cout, (*iter)); cout << endl;
 	}
 	cout << "- - - - - - - - - -" << endl;
     }
