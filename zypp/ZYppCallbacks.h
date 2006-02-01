@@ -17,6 +17,7 @@
 #include "zypp/Source.h"
 #include "zypp/TranslatedText.h"
 #include "zypp/Pathname.h"
+#include "zypp/Url.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -32,7 +33,7 @@ namespace zypp
       }; 
       
       enum Error {
-        NOT_FOUND, 	// the requested URL was not found
+        NOT_FOUND, 	// the requested Url was not found
 	IO,		// IO error
 	INVALID		// the downloaded file is invalid
       };
@@ -69,7 +70,7 @@ namespace zypp
       }; 
       
       enum Error {
-        NOT_FOUND, 	// the requested URL was not found
+        NOT_FOUND, 	// the requested Url was not found
 	IO,		// IO error
 	INVALID		// the downloaded file is invalid
       };
@@ -78,17 +79,17 @@ namespace zypp
 	, Url url
       ) {}
 
-      virtual bool progress(int value, URL url) 
+      virtual bool progress(int value, Url url) 
       { return false; }
 
       virtual Action problem(
-        URL url
+        Url url
 	, Error error
 	, TranslatedText description
       ) { return ABORT; }
 
       virtual void finish(
-        URL url
+        Url url
         , Error error
 	, TranslatedText reason
       ) {}
@@ -103,7 +104,7 @@ namespace zypp
       }; 
       
       enum Error {
-        NOT_FOUND, 	// the requested URL was not found
+        NOT_FOUND, 	// the requested Url was not found
 	IO,		// IO error
 	INVALID		// th source is invalid
       };
@@ -137,7 +138,7 @@ namespace zypp
       }; 
       
       enum Error {
-        NOT_FOUND, 	// the requested URL was not found
+        NOT_FOUND, 	// the requested Url was not found
 	IO,		// IO error
 	INVALID		// th source is invalid
       };
@@ -146,17 +147,17 @@ namespace zypp
 	, Url url
       ) {}
 
-      virtual bool progress(int value, URL url) 
+      virtual bool progress(int value, Url url) 
       { return false; }
 
       virtual Action problem(
-        URL url
+        Url url
 	, Error error
 	, TranslatedText description
       ) { return ABORT; }
 
       virtual void finish(
-        URL url
+        Url url
         , Error error
 	, TranslatedText reason
       ) {}
@@ -178,8 +179,15 @@ namespace zypp
 	IGNORE, // ignore this media in future, not available anymore
       }; 
 
+      enum Error { 
+        NOT_FOUND,  // the medie not found at all
+        IO,	// error accessing the media
+	INVALID, // media is broken
+	WRONG	// wrong media, need a different one
+      };       
+      
       virtual Action requestMedia(
-        Source_ref source
+        Source_Ref source
 	, unsigned mediumNr
 	, Error error
 	, TranslatedText description
@@ -208,7 +216,7 @@ namespace zypp
         }; 
       
         enum Error {
-          NOT_FOUND, 	// the requested URL was not found
+          NOT_FOUND, 	// the requested Url was not found
 	  IO,		// IO error
 	  INVALID		// th resolvable is invalid
         };
@@ -243,7 +251,7 @@ namespace zypp
         }; 
       
         enum Error {
-          NOT_FOUND, 	// the requested URL was not found
+          NOT_FOUND, 	// the requested Url was not found
 	  IO,		// IO error
 	  INVALID		// th resolvable is invalid
         };
@@ -278,7 +286,7 @@ namespace zypp
         }; 
       
         enum Error {
-          NOT_FOUND, 	// the requested URL was not found
+          NOT_FOUND, 	// the requested Url was not found
 	  IO,		// IO error
 	  INVALID		// th resolvable is invalid
         };
@@ -313,7 +321,7 @@ namespace zypp
         }; 
       
         enum Error {
-          NOT_FOUND, 	// the requested URL was not found
+          NOT_FOUND, 	// the requested Url was not found
 	  IO,		// IO error
 	  INVALID		// th resolvable is invalid
         };
