@@ -126,6 +126,7 @@ namespace zypp
 	  {
 	    rpm().removePackage(p);
 	  }
+	  it->status().setNoTransact(ResStatus::APPL_HIGH);
 	}
 #warning FIXME other resolvables
       }
