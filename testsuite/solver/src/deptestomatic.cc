@@ -515,13 +515,17 @@ get_providing_poolItems (const string & prov_name, const string & kind_name = ""
 
 struct PrintItem : public resfilter::PoolItemFilterFunctor
 {
+    string prefix;
     int count;
 
-    PrintItem() : count (0) { }
+    PrintItem(string prefix = "")
+	: prefix (prefix)
+	, count (0)
+    { }
 
     bool operator()( PoolItem_Ref poolItem )
     {
-	cout << ++count << ": ";
+	cout << prefix << ++count << ": ";
 	cout << poolItem;
 //	printRes (cout, poolItem);
 //	cout << ": " << poolItem.status();
@@ -534,9 +538,9 @@ struct PrintItem : public resfilter::PoolItemFilterFunctor
 // collect all installed items in a set
 
 void
-print_pool (void)
+print_pool (const string & prefix = "")
 {
-    PrintItem info;
+    PrintItem info (prefix);
 
     invokeOnEach( God->pool().begin( ),
 		  God->pool().end ( ),
@@ -632,15 +636,15 @@ parse_xml_setup (XmlNode_Ptr node)
 	    if (poolItem) {
 		RESULT << "Force-installing " << package_name << " from channel " << source_alias << endl;;
 
+		poolItem.status().setStatus(ResStatus::installed);
+
+#if 0
 		Source_Ref system_source = manager->findSource("@system");
 
 		if (!system_source)
 		    cerr << "No system source available!" << endl;
-#warning Needs force-install
-#if 0
 		PoolItem_Ref r = boost::const_pointer_cast<PoolItem>(poolItem);
 		r->setChannel (system_source);
-		r->setInstalled (true);
 #endif
 	    } else {
 		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
@@ -659,7 +663,7 @@ parse_xml_setup (XmlNode_Ptr node)
 		cerr << "Can't force-uninstall installed package '" << package_name << "'" << endl;
 	    } else {
 		RESULT << "Force-uninstalling " << package_name << endl;
-#warning Needs pool remove
+		poolItem.status().setStatus(ResStatus::uninstalled);
 #if 0
 		God->pool().remove (poolItem);
 #endif
@@ -1003,7 +1007,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 
 	    resolver->doUpgrade(stats);
 
-	    RESULT << stats;
+	    print_pool(">!>");
 
 	} else if (node->equals ("establish")
 		   || node->equals ("freshen")) {
