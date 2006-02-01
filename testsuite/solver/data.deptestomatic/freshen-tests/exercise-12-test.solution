@@ -1,10 +1,8 @@
 >!> Establishing state ...
->!> Establishing patch:Patch-A-1.1-1[test]
 >!> Established context
->!> patch:Patch-A-1.1-1[test] satisfied
+>!> patch:Patch-A-1.1-1[test] UUTs_<satisfied><uneeded>
 >!> Uninstalling A
 >!> Establishing state ...
->!> Establishing patch:Patch-A-1.1-1[test]
 >!> Established context
->!> A-1.1-1 to be uninstalled
->!> patch:Patch-A-1.1-1[test] unneeded
+>!> A-1.1-1 I_Ts_<tobeuninstalled>
+>!> patch:Patch-A-1.1-1[test] UUTs_<satisfied><uneeded>

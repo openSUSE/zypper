@@ -1,4 +1,3 @@
 >!> Establishing state ...
->!> Establishing patch:Patch-A-1.1-1[test]
 >!> Established context
->!> patch:Patch-A-1.1-1[test] unneeded
+>!> patch:Patch-A-1.1-1[test] UUTs_<satisfied><uneeded>
