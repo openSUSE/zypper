@@ -6,16 +6,16 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/Source.h
+/** \file zypp/ZYppCallbacks.h
  *
 */
 #ifndef ZYPP_ZYPPCALLBACKS_H
 #define ZYPP_ZYPPCALLBACKS_H
 
-#include <iosfwd>
-#include <string>
-
 #include "zypp/Callback.h"
+#include "zypp/Resolvable.h"
+#include "zypp/Source.h"
+#include "zypp/TranslatedText.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -25,11 +25,38 @@ namespace zypp
     // progress for downloading a resolvable
     struct DownloadResolvableReport : public callback::ReportBase
     {
-      virtual void start() {}
-      virtual void progress(int value) {]
-      virtual void finish() {}
+      enum Action { 
+        ABORT,  // abort and return error
+        RETRY	// retry
+      }; 
+      
+      enum Error {
+        NOT_FOUND, 	// the requested URL was not found
+	IO,		// IO error
+	INVALID		// the downloaded file is invalid
+      }
+
+      virtual void start(
+        Resolvable::Ptr resolvable_ptr
+	, Source_Ref source
+	, Url url
+      ) {}
+
+      virtual void progress(int value, Resolvable::Ptr resolvable_ptr) {]
+
+      virtual Action problem(
+        Resolvable::Ptr resolvable_ptr
+	, Error error
+	, TranslatedText description
+      ) { return ABORT; ]
+
+      virtual void finish(Resolvable::Ptr resolvable_ptr
+        , Error error
+	, TranslatedText reason
+      ) {}
     };
     
+
     // progress for downloading a specific file
     struct DownloadFileReport : public callback::ReportBase
     {
