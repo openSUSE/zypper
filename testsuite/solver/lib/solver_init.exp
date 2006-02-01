@@ -122,8 +122,16 @@ proc multi-run { src } {
 
   puts "Running $basedir_name..."
 
+  set dirignores [list ]
+  set dirignorename "$basedir_name/ignore"
+  if { [ file exists $dirignorename] != 0 } {
+    set fp [open $dirignorename r]
+    set dirignores [read $fp]
+    close $fp
+  }
+
   #							scan through all subdirs below data.<name>
-  set dircases [glob $basedir_name/* ]
+  set dircases [glob $basedir_name/*-tests $basedir_name/*-exercises ]
 
   foreach dircase $dircases { 
       set testPath [split $dircase "/"]
@@ -134,6 +142,10 @@ proc multi-run { src } {
       if {$testBase_name == "not_used"} {
 	  puts "   ignoring $testBase_name"
 	  continue
+      }
+
+      if { [lsearch $dirignores $testBase_name] != -1} {
+	continue
       }
 
       set xfails [list ]
