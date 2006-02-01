@@ -62,9 +62,9 @@ namespace zypp
           collectPkg( shared_ptr<source::susetags::SuseTagsPackageImpl>(new source::susetags::SuseTagsPackageImpl(_source)) );
         }
 
-        void collectDeps( const std::set<std::string> & depstr_r, CapSet & capset )
+        void collectDeps( const std::list<std::string> & depstr_r, CapSet & capset )
         {
-          for ( std::set<std::string>::const_iterator it = depstr_r.begin();
+          for ( std::list<std::string>::const_iterator it = depstr_r.begin();
                 it != depstr_r.end(); ++it )
             {
               capset.insert( CapFactory().parse( ResTraits<Package>::kind, *it ) );
@@ -152,12 +152,12 @@ namespace zypp
             }
           else if ( mtag_r.name == "Key" )
             {
-               pkgImpl->_keywords = std::list<std::string>(mtag_r.values.begin(), mtag_r.values.end());
+               pkgImpl->_keywords = mtag_r.values;
             }
           else if ( mtag_r.name == "Aut" )
             {
               // MultiTag is a Set but author is a list
-              pkgImpl->_authors = std::list<std::string>(mtag_r.values.begin(), mtag_r.values.end());
+              pkgImpl->_authors = mtag_r.values;
             }
         }
 

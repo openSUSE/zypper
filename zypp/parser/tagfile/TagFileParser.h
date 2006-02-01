@@ -13,7 +13,6 @@
 #define ZYPP_PARSER_TAGFILE2_H
 
 #include <iosfwd>
-#include <set>
 #include <map>
 #include <list>
 
@@ -42,7 +41,7 @@ namespace zypp
         {
           std::string name;
           std::string modifier;
-          std::set<std::string> values;
+          std::list<std::string> values;
         };
 
         struct SingleTag

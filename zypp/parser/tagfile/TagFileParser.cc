@@ -106,7 +106,7 @@ namespace zypp
             // while we dont find the list terminator
             while( ! boost::regex_match(element, element_what, boost::regex("^\\-([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:$"), boost::match_extra))
             {
-              tag.values.insert(element);
+              tag.values.push_back(element);
               XXX << element << std::endl;
               getline(file, element);
               //dumpRegexpResults(element_what);

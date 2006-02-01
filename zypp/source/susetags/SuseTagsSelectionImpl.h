@@ -73,15 +73,15 @@ namespace zypp
       std::string _category;
       bool _visible;
 
-      std::set<std::string> _suggests;
-      std::set<std::string> _recommends;
-      std::set<std::string> _requires;
-      std::set<std::string> _conflicts;
-      std::set<std::string> _supported_locales;
-      std::map< LanguageCode, std::set<std::string> > _insnotify;
-      std::map< LanguageCode, std::set<std::string> > _delnotify;
-      std::map< LanguageCode, std::set<std::string> > _inspacks;
-      std::map< LanguageCode, std::set<std::string> > _delpacks;
+      std::list<std::string> _suggests;
+      std::list<std::string> _recommends;
+      std::list<std::string> _requires;
+      std::list<std::string> _conflicts;
+      std::list<std::string> _supported_locales;
+      std::map< LanguageCode, std::list<std::string> > _insnotify;
+      std::map< LanguageCode, std::list<std::string> > _delnotify;
+      std::map< LanguageCode, std::list<std::string> > _inspacks;
+      std::map< LanguageCode, std::list<std::string> > _delpacks;
       
     };
     ///////////////////////////////////////////////////////////////////

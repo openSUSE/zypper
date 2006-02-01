@@ -113,25 +113,25 @@ namespace zypp
         CapFactory _f;
 	Dependencies _deps;
 
-        for (std::set<std::string>::const_iterator it = selImpl->_inspacks[LanguageCode()].begin(); it != selImpl->_inspacks[LanguageCode()].end(); it++)
+        for (std::list<std::string>::const_iterator it = selImpl->_inspacks[LanguageCode()].begin(); it != selImpl->_inspacks[LanguageCode()].end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Package>::kind, *it);
 	  _deps[Dep::REQUIRES].insert(_cap);
         }
         
-        for (std::set<std::string>::const_iterator it = selImpl->_recommends.begin(); it != selImpl->_recommends.end(); it++)
+        for (std::list<std::string>::const_iterator it = selImpl->_recommends.begin(); it != selImpl->_recommends.end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Selection>::kind, *it );
 	  _deps[Dep::RECOMMENDS].insert(_cap);
         }
 
-        for (std::set<std::string>::const_iterator it = selImpl->_requires.begin(); it != selImpl->_requires.end(); it++)
+        for (std::list<std::string>::const_iterator it = selImpl->_requires.begin(); it != selImpl->_requires.end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Selection>::kind, *it );
 	  _deps[Dep::REQUIRES].insert(_cap);
         }
 
-        for (std::set<std::string>::const_iterator it = selImpl->_conflicts.begin(); it != selImpl->_conflicts.end(); it++)
+        for (std::list<std::string>::const_iterator it = selImpl->_conflicts.begin(); it != selImpl->_conflicts.end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Selection>::kind, *it );
 	  _deps[Dep::CONFLICTS].insert(_cap);
