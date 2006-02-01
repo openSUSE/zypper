@@ -24,6 +24,7 @@
 
 #include <cstring> // strsignal
 #include <iostream>
+#include <sstream>
 
 #include "zypp/base/Logger.h"
 #include "zypp/ExternalProgram.h"
@@ -151,15 +152,18 @@ namespace zypp {
     
       // do not remove the single quotes around every argument, copy&paste of
       // command to shell will not work otherwise!
-      DBG << "Executing ";
+      
+      stringstream cmdstr;
+      
+      cmdstr << "Executing ";
       for (int i = 0; argv[i]; i++)
       {
-    	if (i>0) DBG << ' ';
-    	DBG << '\'';
-    	DBG << argv[i];
-    	DBG << '\'';
+    	if (i>0) cmdstr << ' ';
+    	cmdstr << '\'';
+    	cmdstr << argv[i];
+    	cmdstr << '\'';
       }
-      DBG << endl;
+      DBG << cmdstr.str() << endl;
     
       // Create module process
       if ((pid = fork()) == 0)
