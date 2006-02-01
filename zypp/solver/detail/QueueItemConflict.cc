@@ -81,6 +81,7 @@ QueueItemConflict::QueueItemConflict (const ResPool & pool, const Capability & c
     , _soft (soft)
     , _actually_an_obsolete (false)
 {
+    _DEBUG("QueueItemConflict::QueueItemConflict(" << cap << ", " << item << (soft?", soft":"") << ")");
 }
 
 
