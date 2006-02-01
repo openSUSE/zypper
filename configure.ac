@@ -246,6 +246,7 @@ AC_OUTPUT(	 po/Makefile.in\
 	zypp/source/yum/Makefile	\
 	zypp/media/Makefile		\
 	zypp/media/proxyinfo/Makefile	\
+	zypp/ui/Makefile		\
 	zypp/url/Makefile		\
 	zypp/target/Makefile		\
 	zypp/target/rpm/Makefile	\

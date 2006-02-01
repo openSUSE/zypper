@@ -2,7 +2,7 @@
 ## ##################################################
 
 SUBDIRS = base thread url media capability detail pool parser \
-	source target solver zypp_detail
+	source target solver zypp_detail ui
 
 ## ##################################################
 
@@ -151,6 +151,7 @@ lib@PACKAGE@_la_LIBADD =        base/lib@PACKAGE@_base.la	\
 				target/lib@PACKAGE@_target.la	\
 				solver/lib@PACKAGE@_solver.la	\
 				zypp_detail/lib@PACKAGE@_zypp_detail.la	\
+				ui/lib@PACKAGE@_ui.la	\
 				\
 				-lutil
 
