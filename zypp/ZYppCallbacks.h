@@ -16,6 +16,7 @@
 #include "zypp/Resolvable.h"
 #include "zypp/Source.h"
 #include "zypp/TranslatedText.h"
+#include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -34,7 +35,7 @@ namespace zypp
         NOT_FOUND, 	// the requested URL was not found
 	IO,		// IO error
 	INVALID		// the downloaded file is invalid
-      }
+      };
 
       virtual void start(
         Resolvable::Ptr resolvable_ptr
@@ -42,13 +43,15 @@ namespace zypp
 	, Url url
       ) {}
 
-      virtual void progress(int value, Resolvable::Ptr resolvable_ptr) {]
+      // return false if the download should be aborted right now
+      virtual bool progress(int value, Resolvable::Ptr resolvable_ptr) 
+      { return true; }
 
       virtual Action problem(
         Resolvable::Ptr resolvable_ptr
 	, Error error
 	, TranslatedText description
-      ) { return ABORT; ]
+      ) { return ABORT; }
 
       virtual void finish(Resolvable::Ptr resolvable_ptr
         , Error error
@@ -60,33 +63,103 @@ namespace zypp
     // progress for downloading a specific file
     struct DownloadFileReport : public callback::ReportBase
     {
-      virtual void start() {}
-      virtual void progress(int value) {]
-      virtual void finish() {}
+      enum Action { 
+        ABORT,  // abort and return error
+        RETRY	// retry
+      }; 
+      
+      enum Error {
+        NOT_FOUND, 	// the requested URL was not found
+	IO,		// IO error
+	INVALID		// the downloaded file is invalid
+      };
+      virtual void start(
+	Source_Ref source
+	, Url url
+      ) {}
+
+      virtual bool progress(int value, URL url) 
+      { return true; ]
+
+      virtual Action problem(
+        URL url
+	, Error error
+	, TranslatedText description
+      ) { return ABORT; }
+
+      virtual void finish(
+        URL url
+        , Error error
+	, TranslatedText reason
+      ) {}
     };
 
     // progress for refreshing a source data
     struct RefreshSourceReport : public callback::ReportBase
     {
-      virtual void start() {}
-      virtual void progress(int value) {]
-      virtual void finish() {}
+      enum Action { 
+        ABORT,  // abort and return error
+        RETRY	// retry
+      }; 
+      
+      enum Error {
+        NOT_FOUND, 	// the requested URL was not found
+	IO,		// IO error
+	INVALID		// th source is invalid
+      };
+      virtual void start(
+	Source_Ref source
+	, Url url
+      ) {}
+
+      virtual bool progress(int value, Source_Ref source) 
+      { return true; ]
+
+      virtual Action problem(
+        Source_Ref source
+	, Error error
+	, TranslatedText description
+      ) { return ABORT; }
+
+      virtual void finish(
+        Source_Ref source
+        , Error error
+	, TranslatedText reason
+      ) {}
     };
 
-    // progress for downloading a resolvable
+    // progress for creating a source (download and parsing)
     struct CreateSourceReport : public callback::ReportBase
     {
-      virtual void start() {}
-      virtual void progress(int value) {]
-      virtual void finish() {}
-    };
-    
-    // progress for downloading a resolvable
-    struct RefreshSourceReport : public callback::ReportBase
-    {
-      virtual void start() {}
-      virtual void progress(int value) {]
-      virtual void finish() {}
+      enum Action { 
+        ABORT,  // abort and return error
+        RETRY	// retry
+      }; 
+      
+      enum Error {
+        NOT_FOUND, 	// the requested URL was not found
+	IO,		// IO error
+	INVALID		// th source is invalid
+      };
+      virtual void start(
+	Source_Ref source
+	, Url url
+      ) {}
+
+      virtual bool progress(int value, URL url) 
+      { return true; ]
+
+      virtual Action problem(
+        URL url
+	, Error error
+	, TranslatedText description
+      ) { return ABORT; }
+
+      virtual void finish(
+        URL url
+        , Error error
+	, TranslatedText reason
+      ) {}
     };
     
     /////////////////////////////////////////////////////////////////
@@ -96,16 +169,21 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace media 
   { 
-
     // media change request callback
     struct MediaChangeReport : public callback::ReportBase
     {
       enum Action { 
         ABORT,  // abort and return error
-        RETRY	// retry
+        RETRY,	// retry
+	IGNORE, // ignore this media in future, not available anymore
       }; 
 
-      virtual Action userAction() { return ABORT; }
+      virtual Action requestMedia(
+        Source_ref source
+	, unsigned mediumNr
+	, Error error
+	, TranslatedText description
+      ) { return ABORT; }
     };
 
     /////////////////////////////////////////////////////////////////
@@ -114,7 +192,9 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   namespace target 
-  { ///////////////////////////////////////////////////////////////////
+  { 
+  
+    ///////////////////////////////////////////////////////////////////
     namespace rpm 
     { 
 
@@ -123,14 +203,34 @@ namespace zypp
       {
         enum Action { 
           ABORT,  // abort and return error
-          RETRY,  // retry
-	  IGNORE  // ignore
+          RETRY,	// retry
+	  IGNORE	// ignore the failure
         }; 
+      
+        enum Error {
+          NOT_FOUND, 	// the requested URL was not found
+	  IO,		// IO error
+	  INVALID		// th resolvable is invalid
+        };
+      
+        virtual void start(
+	  Resolvable::Ptr resolvable
+        ) {}
 
-        virtual void start() {}
-        virtual void progress(int value) {]
-	virtual Action error () { return ABORT; }
-        virtual void finish() {}
+        virtual bool progress(int value, Resolvable::Ptr resolvable) 
+        { return true; ]
+
+        virtual Action problem(
+          Resolvable::Ptr resolvable
+  	  , Error error
+  	 , TranslatedText description
+        ) { return ABORT; }
+
+        virtual void finish(
+          Resolvable::Ptr resolvable
+          , Error error
+	  , TranslatedText reason
+        ) {}
       };
     
       // progress for removing a resolvable
@@ -138,30 +238,104 @@ namespace zypp
       {
         enum Action { 
           ABORT,  // abort and return error
-          RETRY,  // retry
-	  IGNORE  // ignore
+          RETRY,	// retry
+	  IGNORE	// ignore the failure
         }; 
+      
+        enum Error {
+          NOT_FOUND, 	// the requested URL was not found
+	  IO,		// IO error
+	  INVALID		// th resolvable is invalid
+        };
+      
+        virtual void start(
+	  Resolvable::Ptr resolvable
+        ) {}
 
-        virtual void start() {}
-        virtual void progress(int value) {]
-	virtual Action error () { return ABORT; }
-        virtual void finish() {}
+        virtual bool progress(int value, Resolvable::Ptr resolvable) 
+        { return true; ]
+
+        virtual Action problem(
+          Resolvable::Ptr resolvable
+  	  , Error error
+  	 , TranslatedText description
+        ) { return ABORT; }
+
+        virtual void finish(
+          Resolvable::Ptr resolvable
+          , Error error
+	  , TranslatedText reason
+        ) {}
       };
     
       // progress for rebuilding the database
       struct RebuildDBReport : public callback::ReportBase
       {
-        virtual void start() {}
-        virtual void progress(int value) {]
-        virtual void finish() {}
+        enum Action { 
+          ABORT,  // abort and return error
+          RETRY,	// retry
+	  IGNORE	// ignore the failure
+        }; 
+      
+        enum Error {
+          NOT_FOUND, 	// the requested URL was not found
+	  IO,		// IO error
+	  INVALID		// th resolvable is invalid
+        };
+      
+        virtual void start(
+	  Pathname path
+        ) {}
+
+        virtual bool progress(int value, Pathname path) 
+        { return true; ]
+
+        virtual Action problem(
+	  Pathname path
+  	  , Error error
+  	 , TranslatedText description
+        ) { return ABORT; }
+
+        virtual void finish(
+	  Pathname path
+          , Error error
+	  , TranslatedText reason
+        ) {}
       };
 
       // progress for converting the database
       struct ConvertDBReport : public callback::ReportBase
       {
-        virtual void start() {}
-        virtual void progress(int value) {]
-        virtual void finish() {}
+        enum Action { 
+          ABORT,  // abort and return error
+          RETRY,	// retry
+	  IGNORE	// ignore the failure
+        }; 
+      
+        enum Error {
+          NOT_FOUND, 	// the requested URL was not found
+	  IO,		// IO error
+	  INVALID		// th resolvable is invalid
+        };
+      
+        virtual void start(
+	  Pathname path
+        ) {}
+
+        virtual bool progress(int value, Pathname path) 
+        { return true; ]
+
+        virtual Action problem(
+	  Pathname path
+  	  , Error error
+  	 , TranslatedText description
+        ) { return ABORT; }
+
+        virtual void finish(
+	  Pathname path
+          , Error error
+	  , TranslatedText reason
+        ) {}
       };
 
       /////////////////////////////////////////////////////////////////
