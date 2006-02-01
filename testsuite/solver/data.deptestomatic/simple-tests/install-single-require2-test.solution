@@ -1,0 +1,5 @@
+>!> Installing B from channel other
+>!> Solution #1:
+>!> install A-1.0-1[test]
+>!> install B-1.0-1[other]
+>!> installs=2, upgrades=0, uninstalls=0
