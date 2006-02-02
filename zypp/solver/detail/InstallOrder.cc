@@ -281,7 +281,9 @@ InstallOrder::rdfsvisit (const PoolItem_Ref  item)
 	    {
 		if (must_visit != item)
 		{
-		    DBG << "dependency loop: " << item << " -> " << must_visit << endl;
+		    ERR << "*************************************************************" << endl;
+		    ERR << "** dependency loop: " << item << " -> " << must_visit << endl;
+		    ERR << "*************************************************************" << endl;
 		}
 	    }
 	    else
