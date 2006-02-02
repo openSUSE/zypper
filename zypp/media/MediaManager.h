@@ -84,7 +84,7 @@ namespace zypp
        * open the media, return the ID, throw exception on fail
        */
       MediaId
-      open(const Url &url /*, preferedAttachPoint, ... */);
+      open(const Url &url, const Pathname & preferred_attach_point = "");
 
       /**
        * close the media
@@ -193,11 +193,13 @@ namespace zypp
        * 'attach point' of the specified media and the path prefix
        * on the media.
        *
-       * @param cached  If cached is set to true, the function checks, if
+       * \param mediaId The media source id to use.
+       * \param mediaNr The desired media number that should be in the source.
+       * \param cached  If cached is set to true, the function checks, if
        *                the file already exists and doesn't download it again
        *                if it does. Currently only the existence is checked,
        *                no other file attributes.
-       * @param checkonly If this and 'cached' are set to true only the
+       * \param checkonly If this and 'cached' are set to true only the
        *                  existence of the file is checked but it's not
        *                  downloaded. If 'cached' is unset an errer is
        *                  returned always.
@@ -250,6 +252,8 @@ namespace zypp
                    std::list<std::string> & retlist,
                    const Pathname & dirname, bool dots = true ) const;
 
+      /**
+       */
       void dirInfo(MediaId mediaId,
                    filesystem::DirContent & retlist,
                    const Pathname & dirname, bool dots = true ) const;

@@ -130,7 +130,7 @@ namespace zypp
 
     // ---------------------------------------------------------------
     MediaId
-    MediaManager::open(const Url &url /*, ... */)
+    MediaManager::open(const Url &url, const Pathname &preferred_attach_point)
     {
       MutexLock lock(g_Mutex);
 
@@ -153,7 +153,7 @@ namespace zypp
 
       m_impl->mediaAccMap[nextId] = accRef;
 
-      accRef->open(url, "");
+      accRef->open(url, preferred_attach_point);
 
       return nextId;
     }
@@ -422,6 +422,8 @@ namespace zypp
     MediaManager::releaseFile(MediaId mediaId,
                               const Pathname & filename) const
     {
+      MutexLock lock(g_Mutex);
+
       if( !m_impl->hasMediaAcc( mediaId))
       {
         ZYPP_THROW(MediaNotOpenException(
@@ -437,6 +439,8 @@ namespace zypp
     MediaManager::releaseDir(MediaId mediaId,
                              const Pathname & dirname) const
     {
+      MutexLock lock(g_Mutex);
+
       if( !m_impl->hasMediaAcc( mediaId))
       {
         ZYPP_THROW(MediaNotOpenException(
@@ -453,6 +457,8 @@ namespace zypp
     MediaManager::releasePath(MediaId mediaId,
                               const Pathname & pathname) const
     {
+      MutexLock lock(g_Mutex);
+
       if( !m_impl->hasMediaAcc( mediaId))
       {
         ZYPP_THROW(MediaNotOpenException(
@@ -469,6 +475,8 @@ namespace zypp
                           std::list<std::string> & retlist,
                           const Pathname & dirname, bool dots) const
     {
+      MutexLock lock(g_Mutex);
+
       if( !m_impl->hasMediaAcc( mediaId))
       {
         ZYPP_THROW(MediaNotOpenException(
@@ -485,6 +493,8 @@ namespace zypp
                           filesystem::DirContent & retlist,
                           const Pathname & dirname, bool dots) const
     {
+      MutexLock lock(g_Mutex);
+
       if( !m_impl->hasMediaAcc( mediaId))
       {
         ZYPP_THROW(MediaNotOpenException(
