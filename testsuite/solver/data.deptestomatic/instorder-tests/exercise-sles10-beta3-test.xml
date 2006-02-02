@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+  libgnomeui has some prereqs
+-->
+<test>
+<setup>
+  <channel name="test" file="sles10-beta3-i386-packages.xml.gz"/>
+</setup>
+<trial>
+  <install channel="test" package="libgnomeui"/>
+  <instorder/>
+</trial>
+</test>
