@@ -25,7 +25,7 @@ proc runBinary { prog {path ""} {expected_result 0} } {
   # check return code from $prog
 
   if {$result != ""} {
-    if {$expected_result != "0"} {
+    if {$expected_result != 0} {
       xfail $prog			# expected failure
       return 0
     }
@@ -42,12 +42,12 @@ proc runBinary { prog {path ""} {expected_result 0} } {
 # expect prog to pass
 
 proc shouldPass { prog {path ""} } {
-  return [runBinary $prog $path "0"]
+  return [runBinary $prog $path 0]
 }
 
 # expect prog to fail
 
 proc shouldFail { prog {path ""} } {
-  return [runBinary $prog $path "1"]
+  return [runBinary $prog $path 1]
 }
 

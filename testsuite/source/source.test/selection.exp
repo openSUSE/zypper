@@ -1,0 +1,4 @@
+# selection.exp
+# run tests for selectiontagparsertest
+
+  shouldPass "selectiontagparsertest"
