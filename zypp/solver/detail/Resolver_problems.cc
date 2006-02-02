@@ -390,6 +390,7 @@ Resolver::problems (void) const
 		// Uninstall p
 		problem->addSolution (new ProblemSolutionUninstall (problem, item));
 		// Remove conflict in the resolvable which has to be installed
+		
 		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::CONFLICTS, item, misc_info->capability(),
 								 misc_info->other())); 
 		problems.push_back (problem);

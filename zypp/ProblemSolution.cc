@@ -51,7 +51,7 @@ ostream&
 operator<<( ostream& os, const ProblemSolutionList & solutionlist)
 {
     for (ProblemSolutionList::const_iterator iter = solutionlist.begin(); iter != solutionlist.end(); ++iter) {
-	os << (*iter) << endl;
+	os << *(*iter) << endl;
     }
     return os;
 }
@@ -60,7 +60,7 @@ ostream&
 operator<<( ostream& os, const CProblemSolutionList & solutionlist)
 {
     for (CProblemSolutionList::const_iterator iter = solutionlist.begin(); iter != solutionlist.end(); ++iter) {
-	os << (*iter) << endl;
+	os << *(*iter) << endl;
     }
     return os;
 }

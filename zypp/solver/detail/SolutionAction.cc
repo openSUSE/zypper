@@ -58,11 +58,11 @@ SolutionAction::~SolutionAction()
 
 //---------------------------------------------------------------------------
 
-ostream&
-operator<<( ostream& os, const TransactionSolutionAction & action)
+ostream &
+TransactionSolutionAction::dumpOn( ostream& os) const
 {
     os << "TransactionSolutionAction: ";
-    switch (action._action) {
+    switch (_action) {
 	case KEEP:	os << "Keep"; break;
 	case INSTALL:	os << "Install"; break;
 	case UPDATE:	os << "Update"; break;
@@ -70,7 +70,7 @@ operator<<( ostream& os, const TransactionSolutionAction & action)
 	case UNLOCK:	os << "Unlock"; break;	    
     }
     os << " ";
-    os << action._item;
+    os << _item;
     os << endl;
     return os;
 }
@@ -80,7 +80,7 @@ ostream&
 operator<<( ostream& os, const SolutionActionList & actionlist)
 {
     for (SolutionActionList::const_iterator iter = actionlist.begin(); iter != actionlist.end(); ++iter) {
-	os << (*iter);
+	os << *(*iter);
 	os << endl;
     }
     return os;
@@ -91,7 +91,7 @@ ostream&
 operator<<( ostream& os, const CSolutionActionList & actionlist)
 {
     for (CSolutionActionList::const_iterator iter = actionlist.begin(); iter != actionlist.end(); ++iter) {
-	os << (*iter);
+	os << *(*iter);
 	os << endl;
     }
     return os;
@@ -99,18 +99,28 @@ operator<<( ostream& os, const CSolutionActionList & actionlist)
 
 //---------------------------------------------------------------------------
 
-ostream&
-operator<<( ostream& os, const InjectSolutionAction & action)
+ostream &
+InjectSolutionAction::dumpOn( ostream& os ) const
 {
     os << "InjectSolutionAction: ";
-    os << action._capability;
+    os << _capability;
     os << ", ";
-    os << action._kind;
+    os << _kind;
     os << endl;
     return os;
 }
 
 //---------------------------------------------------------------------------
+
+
+ostream &
+SolutionAction::dumpOn( std::ostream & os ) const
+{
+    os << "SolutionAction<";
+    os << "not specified";
+    os << "> ";
+    return os;
+}
 
 
 bool 

@@ -42,10 +42,11 @@ namespace zypp
 	    virtual ~SolutionAction();
 
 	    // ---------------------------------- I/O
-
-	    friend std::ostream& operator<<(std::ostream&, const SolutionAction & action);
-	    friend std::ostream& operator<<(std::ostream&, const SolutionActionList & actionlist);
-	    friend std::ostream& operator<<(std::ostream&, const CSolutionActionList & actionlist);
+	    virtual std::ostream & dumpOn( std::ostream & str ) const;
+	    friend std::ostream& operator<<(std::ostream & str, const SolutionAction & action)
+		{ return action.dumpOn (str); }
+	    friend std::ostream& operator<<(std::ostream & str, const SolutionActionList & actionlist);
+	    friend std::ostream& operator<<(std::ostream & str, const CSolutionActionList & actionlist);
 
 	    // ---------------------------------- methods
 	    /**
@@ -79,8 +80,9 @@ namespace zypp
 		  _item( item ), _action( action ) {}
 
 	  // ---------------------------------- I/O
-
-	  friend std::ostream& operator<<(std::ostream&, const TransactionSolutionAction & action);
+	  virtual std::ostream & dumpOn( std::ostream & str ) const;
+	  friend std::ostream& operator<<(std::ostream& str, const TransactionSolutionAction & action)
+		{ return action.dumpOn (str); }
 
 	  // ---------------------------------- accessors
 
@@ -123,8 +125,9 @@ namespace zypp
 		  _capability( capability ), _kind( kind ), _otherItem( otherItem ) {}
 
 	  // ---------------------------------- I/O
-
-	  friend std::ostream& operator<<(std::ostream&, const InjectSolutionAction & action);
+	  virtual std::ostream & dumpOn( std::ostream & str ) const;
+	  friend std::ostream& operator<<(std::ostream& str, const InjectSolutionAction & action)
+		{ return action.dumpOn (str); }	      
 
 	  // ---------------------------------- accessors
 	    const Capability & capability() const { return _capability; };
@@ -135,8 +138,8 @@ namespace zypp
 
 	protected:
 
-	    const Capability & _capability;
-	    const Dep & _kind;
+	    const Capability _capability;
+	    const Dep _kind;
 	    PoolItem_Ref _item, _otherItem;	    
 	};
 
