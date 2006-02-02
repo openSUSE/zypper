@@ -262,12 +262,11 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	else if (status.isToBeInstalled()) {
 	    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL, provider, RESOLVER_INFO_PRIORITY_VERBOSE, provides);
 
-	    misc_info->flagAsError ();
 	    if (conflict_issuer) {
 		misc_info->setOtherPoolItem (conflict_issuer);
 		misc_info->setOtherCapability (conflict_capability);
 	    }
-	    context->addInfo (misc_info);
+	    context->addError (misc_info);
 
 	}
 	else if (status.isUninstalled()) {
