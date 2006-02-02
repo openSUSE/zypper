@@ -20,6 +20,8 @@
 #include "zypp/source/susetags/PackagesParser.h"
 #include "zypp/source/susetags/SelectionSelFileParser.h"
 
+#include "zypp/SourceFactory.h"
+
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////
@@ -47,11 +49,12 @@ namespace zypp
         if ( ! p.userMayR() )
           ZYPP_THROW( Exception( p.asString()+" no permission to read" ) );
 
-        DBG << "SuseTagsImpl from a local file not working" << endl;
-/*        std::list<Package::Ptr> content( parsePackages( this, p.path() ) );
+        Source_Ref source_r( SourceFactory().createFrom( this ) );
+        std::list<Package::Ptr> content( parsePackages( source_r, this,
+                                                        p.path() ) );
         _store.insert( content.begin(), content.end() );
         DBG << "SuseTagsImpl (fake) from " << p << ": "
-            << content.size() << " packages" << endl;*/
+            << content.size() << " packages" << endl;
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -111,7 +114,7 @@ namespace zypp
       //
       SuseTagsImpl::~SuseTagsImpl()
       {}
-      
+
       Pathname SuseTagsImpl::sourceDir( const NVRAD& nvrad )
       {
 #warning Not using <DATADIR>
