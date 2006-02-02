@@ -678,6 +678,7 @@ HelixParser::updateEnd (const std::string & token)
     } else if (token == "release") {		release = _text_buffer;
     } else if (token == "arch") {		arch = _text_buffer;
     } else if (token == "filename") {		// ignore
+    } else if (token == "location") {		// ignore
     } else if (token == "filesize") {		fileSize = str::strtonum<long>(_text_buffer);
     } else if (token == "installedsize") {	installedSize = str::strtonum<long>(_text_buffer);
     } else if (token == "signaturename") {	// ignore
