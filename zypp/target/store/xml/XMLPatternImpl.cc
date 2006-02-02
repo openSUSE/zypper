@@ -6,13 +6,12 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/XMLScriptImpl.h
+/** \file	zypp/detail/XMLPatternImpl.cc
  *
 */
-#ifndef ZYPP_STORE_XMLSCRIPTIMPL_H
-#define ZYPP_STORE_XMLSCRIPTIMPL_H
+#include "zypp/target/store/xml/XMLPatternImpl.h"
 
-#include "zypp/detail/ScriptImplIf.h"
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -23,34 +22,23 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : XMLScriptImpl
+    //	METHOD NAME : XMLPatternImpl::XMLPatternImpl
+    //	METHOD TYPE : Ctor
     //
-    /** Class representing an update script */
-    struct XMLScriptImpl : public zypp::detail::ScriptImplIf
-    {
-      /** Default ctor */
-      XMLScriptImpl();
-      /** Dtor */
-      ~XMLScriptImpl();
+    XMLPatternImpl::XMLPatternImpl()
+    {}
 
-      /** Get the script to perform the change */
-      std::string do_script() const;
-      /** Get the script to undo the change */
-      std::string undo_script() const;
-      /** Check whether script to undo the change is available */
-      virtual bool undo_available() const;
-
-      /** The script to perform the change */
-      std::string _do_script;
-      /** The script to undo the change */
-      std::string _undo_script;
-    };
     ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : XMLPatternImpl::~XMLPatternImpl
+    //	METHOD TYPE : Dtor
+    //
+    XMLPatternImpl::~XMLPatternImpl()
+    {}
 
     /////////////////////////////////////////////////////////////////
-  } // namespace detail
+  } // namespace storage
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_DETAIL_SCRIPTIMPL_H

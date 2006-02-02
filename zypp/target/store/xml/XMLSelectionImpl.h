@@ -28,11 +28,33 @@ namespace zypp
     //
     /**
     */
-    class XMLSelectionImpl : public zypp::detail::SelectionImplIf
+    struct XMLSelectionImpl : public zypp::detail::SelectionImplIf
     {
-    public:
       XMLSelectionImpl();
       virtual ~XMLSelectionImpl();
+
+      /** selection summary (FIXME: localized) */
+      TranslatedText summary() const;
+      /** */
+      TranslatedText description() const;
+
+      /** selection category */
+      Label category() const;
+
+      /** selection visibility (for hidden selections) */
+      bool visible() const;
+
+      /** selection presentation order */
+      Label order() const;
+      
+      TranslatedText _summary;
+      std::string _name;
+      std::string _version;
+      std::string _release;
+      std::string _arch;
+      std::string _order;
+      std::string _category;
+      bool _visible;
     };
     ///////////////////////////////////////////////////////////////////
 

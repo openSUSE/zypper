@@ -12,6 +12,7 @@ targetxmlinclude_HEADERS =		\
 	XMLMessageImpl.h \
 	XMLScriptImpl.h \
 	XMLSelectionImpl.h \
+	XMLPatternImpl.h \
 	XMLProductImpl.h
 
 
@@ -24,6 +25,7 @@ lib@PACKAGE@_target_xml_la_SOURCES = \
 	XMLMessageImpl.cc \
 	XMLScriptImpl.cc \
 	XMLSelectionImpl.cc \
+	XMLPatternImpl.cc \
 	XMLProductImpl.cc
 
 ## ##################################################

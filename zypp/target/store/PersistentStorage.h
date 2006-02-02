@@ -54,16 +54,16 @@ namespace zypp
       /**
        * Query for installed Resolvables.
        */
-      std::list<Resolvable::Ptr> storedObjects();
+      std::list<Resolvable::Ptr> storedObjects() const;
        /**
        * Query for installed Resolvables of a certain kind.
        */
-      std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind kind);
+      std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind kind) const;
        /**
        * Query for installed Resolvables of a certain kind by name
        * \a partial_match allows for text search.
        */
-      std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind kind, const std::string & name, bool partial_match = false);
+      std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind kind, const std::string & name, bool partial_match = false) const;
 
     private:
       class Private;

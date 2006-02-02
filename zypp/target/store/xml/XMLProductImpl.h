@@ -27,21 +27,22 @@ namespace zypp
     //	CLASS NAME : ProductImpl
     //
     /** */
-    class XMLProductImpl : public zypp::detail::ProductImplIf
+    struct XMLProductImpl : public zypp::detail::ProductImplIf
     {
-    public:
       XMLProductImpl();
       ~XMLProductImpl();
-    public:
+
       /** Get the category of the product */
       virtual std::string category() const;
-    protected:
       std::string _category;
+      std::string _vendor;
+      TranslatedText _displayname;
+      TranslatedText _description;
     };
     ///////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////
-  } // namespace detail
+  } // namespace storage
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

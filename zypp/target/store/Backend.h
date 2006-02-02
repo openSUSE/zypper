@@ -44,7 +44,7 @@ public:
   /**
   * is the storage backend initialized
   */
-  virtual bool isBackendInitialized() = 0;
+  virtual bool isBackendInitialized() const = 0;
   /**
   * initialize the storage backend
   */
@@ -62,16 +62,16 @@ public:
   /**
   * Query for installed Resolvables.
   */
-  virtual std::list<Resolvable::Ptr> storedObjects() = 0;
+  virtual std::list<Resolvable::Ptr> storedObjects() const = 0;
   /**
   * Query for installed Resolvables of a certain kind
   */
-  virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind) = 0;
+  virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind) const = 0;
   /**
   * Query for installed Resolvables of a certain kind by name
   * \a partial_match allows for text search.
   */
-  virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false) = 0;
+  virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false) const = 0;
 
 private:
   /** Pointer to implementation */

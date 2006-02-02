@@ -17,6 +17,8 @@
 
 #include "zypp/Message.h"
 #include "zypp/Patch.h"
+#include "zypp/Script.h"
+#include "zypp/Product.h"
 
 #include "zypp/parser/yum/YUMParser.h"
 #include "zypp/parser/yum/YUMParserData.h"
@@ -55,7 +57,7 @@ public:
   /**
     * is the storage backend initialized
     */
-  virtual bool isBackendInitialized();
+  virtual bool isBackendInitialized() const;
   /**
     * initialize the storage backend
     */
@@ -71,16 +73,16 @@ public:
   /**
     * Deletes a Resolvable from the active backend.
     */
-  virtual std::list<Resolvable::Ptr> storedObjects();
+  virtual std::list<Resolvable::Ptr> storedObjects() const;
    /**
     * Query for installed Resolvables of a certain kind
     */
-  virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind);
+  virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind) const;
   /**
     * Query for installed Resolvables of a certain kind by name
     * \a partial_match allows for text search.
     */
-  virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false);
+  virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false) const;
 
   protected:
   std::string randomString(int length) const;
@@ -107,7 +109,9 @@ public:
 
   Patch::Ptr createPatch( const zypp::parser::yum::YUMPatchData & parsed ) const;
   Message::Ptr createMessage( const zypp::parser::yum::YUMPatchMessage & parsed ) const;
- 
+  Script::Ptr createScript(const zypp::parser::yum::YUMPatchScript & parsed ) const;
+  Product::Ptr createProduct( const zypp::parser::yum::YUMProductData & parsed ) const;
+
   Dependencies createDependencies( const zypp::parser::yum::YUMObjectData & parsed, const Resolvable::Kind my_kind ) const;
   Dependencies createGroupDependencies( const zypp::parser::yum::YUMGroupData & parsed ) const;
   Dependencies createPatternDependencies( const zypp::parser::yum::YUMPatternData & parsed ) const;

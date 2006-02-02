@@ -6,51 +6,40 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/XMLScriptImpl.h
+/** \file	zypp/detail/XMLPatternImpl.h
  *
 */
-#ifndef ZYPP_STORE_XMLSCRIPTIMPL_H
-#define ZYPP_STORE_XMLSCRIPTIMPL_H
+#ifndef ZYPP_STORAGE_XMLPATTERNIMPL_H
+#define ZYPP_STORAGE_XMLPATTERNIMPL_H
 
-#include "zypp/detail/ScriptImplIf.h"
+#include "zypp/detail/PatternImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
   ///////////////////////////////////////////////////////////////////
   namespace storage
   { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : XMLScriptImpl
+    //	CLASS NAME : XMLPatternImpl
     //
-    /** Class representing an update script */
-    struct XMLScriptImpl : public zypp::detail::ScriptImplIf
+    /**
+    */
+    class XMLPatternImpl : public zypp::detail::PatternImplIf
     {
-      /** Default ctor */
-      XMLScriptImpl();
-      /** Dtor */
-      ~XMLScriptImpl();
-
-      /** Get the script to perform the change */
-      std::string do_script() const;
-      /** Get the script to undo the change */
-      std::string undo_script() const;
-      /** Check whether script to undo the change is available */
-      virtual bool undo_available() const;
-
-      /** The script to perform the change */
-      std::string _do_script;
-      /** The script to undo the change */
-      std::string _undo_script;
+    public:
+      XMLPatternImpl();
+      virtual ~XMLPatternImpl();
     };
     ///////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////
-  } // namespace detail
+  } // namespace storage
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_DETAIL_SCRIPTIMPL_H
+#endif // ZYPP_DETAIL_PATTERNIMPL_H

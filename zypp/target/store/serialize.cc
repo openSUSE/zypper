@@ -162,8 +162,6 @@ std::string toXML( const Script::constPtr &obj )
   return out.str();
 }
 
-
-
 template<> // or constPtr?
 std::string toXML( const Message::constPtr &obj )
 {
@@ -173,6 +171,57 @@ std::string toXML( const Message::constPtr &obj )
   out << toXML(static_cast<Resolvable::constPtr>(obj));
   out << "  <text>" << obj->text() << "</text>" << std::endl;
   out << "</message>" << std::endl;
+  return out.str();
+}
+
+template<> // or constPtr?
+std::string toXML( const Selection::constPtr &obj )
+{
+  stringstream out;
+  /*
+  out << "<message type=\"" << obj->type() << "\">" << std::endl;
+  // reuse Resolvable information serialize function
+  out << toXML(static_cast<Resolvable::constPtr>(obj));
+  out << "  <text>" << obj->text() << "</text>" << std::endl;
+  out << "</message>" << std::endl;
+  */
+  return out.str();
+}
+
+template<> // or constPtr?
+std::string toXML( const Pattern::constPtr &obj )
+{
+  stringstream out;
+  /*
+  out << "<message type=\"" << obj->type() << "\">" << std::endl;
+  // reuse Resolvable information serialize function
+  out << toXML(static_cast<Resolvable::constPtr>(obj));
+  out << "  <text>" << obj->text() << "</text>" << std::endl;
+  out << "</message>" << std::endl;
+  */
+  return out.str();
+}
+
+template<> // or constPtr?
+std::string toXML( const Product::constPtr &obj )
+{
+  stringstream out;
+   #warning "FIXME add properties to public interface of products"
+  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
+  out << "<product";
+  out << "    xmlns=\"http://novell.com/package/metadata/suse/product\"" << std::endl;
+  out << "    xmlns:product=\"http://novell.com/package/metadata/suse/product\"" << std::endl;
+  out << "    xmlns:yum=\"http://linux.duke.edu/metadata/common\" " << std::endl;
+  out << "    xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\" " << std::endl;
+  out << "    xmlns:suse=\"http://novell.com/package/metadata/suse/common\"" << std::endl;
+  out << "    type=\"category\">" << std::endl;
+  out << "  <vendor>the vendor</vendor>" << std::endl;
+  out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
+  #warning "FIXME description and displayname of products"
+  out << "  <displayname lang=\"en\">Open Enterprise Server</displayname>" << std::endl;
+  out << "  <description lang=\"en\">Opens your server to enterprise</description>" << std::endl;
+  out << "</product>" << std::endl;
+
   return out.str();
 }
 
@@ -188,6 +237,12 @@ std::string castedToXML( const Resolvable::constPtr &resolvable )
      out << toXML(asKind<const Message>(resolvable)) << std::endl;
   if ( isKind<Script>(resolvable) )
      out << toXML(asKind<const Script>(resolvable)) << std::endl;
+  if ( isKind<Product>(resolvable) )
+     out << toXML(asKind<const Product>(resolvable)) << std::endl;
+  if ( isKind<Pattern>(resolvable) )
+     out << toXML(asKind<const Pattern>(resolvable)) << std::endl;
+  if ( isKind<Selection>(resolvable) )
+     out << toXML(asKind<const Selection>(resolvable)) << std::endl;
   return out.str();
 }
 
@@ -201,13 +256,20 @@ std::string resolvableKindToString( Resolvable::Kind kind, bool plural)
 {
   if ( kind == ResTraits<zypp::Package>::kind )
      return plural ? "packages" : "package";
-  if ( kind == ResTraits<zypp::Patch>::kind )
+  else if ( kind == ResTraits<zypp::Patch>::kind )
      return plural ? "patches" : "patch";
-  if ( kind == ResTraits<zypp::Message>::kind )
+  else if ( kind == ResTraits<zypp::Message>::kind )
      return plural ? "messages" : "message";
-  if ( kind == ResTraits<zypp::Script>::kind )
+  else if ( kind == ResTraits<zypp::Selection>::kind )
+     return plural ? "selections" : "selection";
+  else if ( kind == ResTraits<zypp::Script>::kind )
      return plural ? "scripts" : "script";
-  return "";
+  else if ( kind == ResTraits<zypp::Pattern>::kind )
+     return plural ? "patterns" : "pattern";
+  else if ( kind == ResTraits<zypp::Product>::kind )
+     return plural ? "products" : "product";
+  else
+     return "unknown";
 }
 
 template<> // or constPtr?

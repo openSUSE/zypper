@@ -36,8 +36,22 @@ namespace zypp
     XMLSelectionImpl::~XMLSelectionImpl()
     {}
 
+    TranslatedText XMLSelectionImpl::summary() const
+    { return _summary; }
+
+    TranslatedText XMLSelectionImpl::description() const
+    { return _summary; }
+
+    Label XMLSelectionImpl::category() const
+    { return _category; }
+
+    bool XMLSelectionImpl::visible() const
+    { return _visible; }
+
+    Label XMLSelectionImpl::order() const
+    { return _order; }
     /////////////////////////////////////////////////////////////////
-  } // namespace detail
+  } // namespace storage
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

@@ -18,21 +18,26 @@
 #include "Backend.h"
 
 #include <zypp/Message.h>
-#include <zypp/detail/MessageImpl.h>
-#include <zypp/detail/PatchImpl.h>
+#include <zypp/Resolvable.h>
 #include <zypp/Patch.h>
 #include <zypp/Package.h>
 #include <zypp/Script.h>
 #include <zypp/Message.h>
+#include <zypp/Pattern.h>
+#include <zypp/Selection.h>
+#include <zypp/Product.h>
 #include <zypp/Edition.h>
 #include <zypp/CapSet.h>
-#include <zypp/detail/PackageImpl.h>
-#include <zypp/Script.h>
-#include <zypp/detail/ScriptImpl.h>
-#include <zypp/Resolvable.h>
-#include <zypp/detail/ResolvableImpl.h>
+
+//#include <zypp/detail/PackageImpl.h>
+//#include <zypp/detail/ScriptImpl.h>
+//#include <zypp/detail/MessageImpl.h>
+//#include <zypp/detail/PatchImpl.h>
+//#include <zypp/detail/ScriptImpl.h>
+//#include <zypp/detail/ResolvableImpl.h>
+
 #include <zypp/Capability.h>
-#include <zypp/capability/CapabilityImpl.h>
+//#include <zypp/capability/CapabilityImpl.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -93,6 +98,15 @@ std::string toXML( const Message::constPtr &obj );
 
 template<> // or constPtr?
 std::string toXML( const Patch::constPtr &obj );
+
+template<> // or constPtr?
+std::string toXML( const Pattern::constPtr &obj );
+
+template<> // or constPtr?
+std::string toXML( const Selection::constPtr &obj );
+
+template<> // or constPtr?
+std::string toXML( const Product::constPtr &obj );
 
 /////////////////////////////////////////////////////////////////
 } // namespace devel.dmacvicar

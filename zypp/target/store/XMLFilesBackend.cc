@@ -18,6 +18,8 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 
+#include "zypp/CapFactory.h"
+
 #include "zypp/target/store/xml/XMLPatchImpl.h"
 #include "zypp/target/store/xml/XMLMessageImpl.h"
 #include "zypp/target/store/xml/XMLScriptImpl.h"
@@ -79,11 +81,12 @@ XMLFilesBackend::XMLFilesBackend()
   d = new Private;
   d->randomFileName = false;
 
-  // types of resolvables stored
+  // types of resolvables stored (supported)
   d->kinds.insert(ResTraits<zypp::Patch>::kind);
-  d->kinds.insert(ResTraits<zypp::Message>::kind);
-  //d->kinds.push_back(ResTraits<zypp::Script>::kind);
-  //d->kinds.push_back(ResTraits<zypp::Selection>::kind);
+  //d->kinds.insert(ResTraits<zypp::Message>::kind);
+  //d->kinds.insert(ResTraits<zypp::Script>::kind);
+  //d->kinds.insert(ResTraits<zypp::Selection>::kind);
+  d->kinds.insert(ResTraits<zypp::Product>::kind);
 
 	// check if the db exists
 	if (!isBackendInitialized())
@@ -144,7 +147,7 @@ std::string XMLFilesBackend::randomString(int length) const
 
 
 bool
-XMLFilesBackend::isBackendInitialized()
+XMLFilesBackend::isBackendInitialized() const
 {
   bool ok = true;
   ok = ok && exists( ZYPP_DB_DIR );
@@ -245,6 +248,38 @@ Resolvable::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Reso
       break;
     }
   }
+  else if ( kind == ResTraits<zypp::Product>::kind )
+  {
+    YUMProductParser iter(res_file,"");
+    for (; !iter.atEnd(); ++iter)
+    {
+      DBG << "here..." << std::endl;
+      resolvable = createProduct(**iter);
+      break;
+    }
+  }
+  /*
+  else if ( kind == ResTraits<zypp::Message>::kind )
+  {
+    YUMMessageParser iter(res_file,"");
+    for (; !iter.atEnd(); ++iter)
+    {
+      DBG << "here..." << std::endl;
+      resolvable = createMessage(**iter);
+      break;
+    }
+  }
+  else if ( kind == ResTraits<zypp::Script>::kind )
+  {
+    YUMScriptParser iter(res_file,"");
+    for (; !iter.atEnd(); ++iter)
+    {
+      DBG << "here..." << std::endl;
+      resolvable = createScript(**iter);
+      break;
+    }
+  }
+  */
   else
   {
     resolvable = 0;
@@ -253,7 +288,7 @@ Resolvable::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Reso
 }
 
 std::list<Resolvable::Ptr>
-XMLFilesBackend::storedObjects()
+XMLFilesBackend::storedObjects() const
 {
   DBG << std::endl;
   std::list<Resolvable::Ptr> objects;
@@ -274,7 +309,7 @@ XMLFilesBackend::storedObjects()
 }
 
 std::list<Resolvable::Ptr>
-XMLFilesBackend::storedObjects(const Resolvable::Kind kind)
+XMLFilesBackend::storedObjects(const Resolvable::Kind kind) const
 {
   std::list<Resolvable::Ptr> objects;
   std::string dir_path = dirForResolvableKind(kind);
@@ -297,12 +332,12 @@ XMLFilesBackend::storedObjects(const Resolvable::Kind kind)
 }
 
 std::list<Resolvable::Ptr>
-XMLFilesBackend::storedObjects(const Resolvable::Kind kind, const std::string & name, bool partial_match)
+XMLFilesBackend::storedObjects(const Resolvable::Kind kind, const std::string & name, bool partial_match) const
 {
   std::list<Resolvable::Ptr> result;
   std::list<Resolvable::Ptr> all;
   all = storedObjects(kind);
-  std::list<Resolvable::Ptr>::iterator it;
+  std::list<Resolvable::Ptr>::const_iterator it;
   for( it = all.begin(); it != all.end(); ++it)
   {
     Resolvable::Ptr item = *it;
@@ -362,6 +397,61 @@ XMLFilesBackend::createMessage( const zypp::parser::yum::YUMPatchMessage & parse
   {
     ERR << excpt_r << endl;
     throw "Cannot create message object";
+  }
+}
+
+Script::Ptr
+XMLFilesBackend::createScript(const zypp::parser::yum::YUMPatchScript & parsed ) const
+{
+  try
+  {
+    shared_ptr<XMLScriptImpl> impl(new XMLScriptImpl());
+    impl->_do_script = parsed.do_script;
+    impl->_undo_script = parsed.undo_script;
+    // Collect basic Resolvable data
+    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch, createDependencies(parsed, ResTraits<Script>::kind));
+    Script::Ptr script = detail::makeResolvableFromImpl( dataCollect, impl );
+    return script;
+  }
+  catch (const Exception & excpt_r)
+  {
+    ERR << excpt_r << endl;
+    throw "Cannot create script object";
+  }
+}
+
+/*
+      std::string groupId;
+      std::list<MultiLang> name;
+      std::string default_;
+      std::string userVisible;
+      std::list<MultiLang> description;
+      std::list<MetaPkg> grouplist;
+      std::list<PackageReq> package_list;
+*/
+
+Product::Ptr
+XMLFilesBackend::createProduct( const zypp::parser::yum::YUMProductData & parsed ) const
+{
+  try
+  {
+    shared_ptr<XMLProductImpl> impl(new XMLProductImpl());
+
+    impl->_category = parsed.type;
+    impl->_vendor = parsed.vendor;
+    #warning "FIX when YUM parser uses TranslatedString"
+    //impl->_displayname = parsed.displayname;
+    //impl->_description = parsed.description;
+
+    // Collect basic Resolvable data
+    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch, createDependencies(parsed, ResTraits<Product>::kind) );
+    Product::Ptr product = detail::makeResolvableFromImpl( dataCollect, impl );
+    return product;
+  }
+  catch (const Exception & excpt_r)
+  {
+    ERR << excpt_r << endl;
+    throw "Cannot create product object";
   }
 }
 
