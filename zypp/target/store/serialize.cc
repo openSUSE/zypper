@@ -178,13 +178,28 @@ template<> // or constPtr?
 std::string toXML( const Selection::constPtr &obj )
 {
   stringstream out;
-  /*
-  out << "<message type=\"" << obj->type() << "\">" << std::endl;
-  // reuse Resolvable information serialize function
-  out << toXML(static_cast<Resolvable::constPtr>(obj));
-  out << "  <text>" << obj->text() << "</text>" << std::endl;
-  out << "</message>" << std::endl;
-  */
+  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
+  out << "<groups  xmlns=\"http://linux.duke.edu/metadata/groups\">" << std::endl;
+  out << "  <group>" << std::endl;
+  out << "    <groupid>foo</groupid>" << std::endl;
+  out << "    <name>foobar</name>" << std::endl;
+  out << "    <name lang='en.US'>foobar</name>" << std::endl;
+  out << "    <default>false</default>" << std::endl;
+  out << "    <uservisible>true</uservisible>" << std::endl;
+  out << "    <description>This is my group, it is soooooooo coool!</description>" << std::endl;
+  out << "    <description lang='en.US'>Duh</description>" << std::endl;
+  out << "    <grouplist>" << std::endl;
+  out << "       <metapkg type=\"mandatory\">othergroup</metapkg>" << std::endl;
+  out << "       <metapkg type=\"optional\">stillother</metapkg>" << std::endl;
+  out << "       <metapkg type=\"default\">stillmore</metapkg>" << std::endl;
+  out << "       <metapkg>other</metapkg>" << std::endl;
+  out << "    </grouplist>" << std::endl;
+  out << "    <packagelist>" << std::endl;
+  out << "       <packagereq type=\"mandatory\" epoch=\"0\" ver=\"1\" rel=\"1\">pkgname</packagereq>" << std::endl;
+  out << "       <packagereq epoch=\"1\" ver=\"2\" rel=\"0\">otherpkgname</packagereq>" << std::endl;
+  out << "    </packagelist>" << std::endl;
+  out << "  </group>" << std::endl;
+  out << "</groups>" << std::endl;
   return out.str();
 }
 
