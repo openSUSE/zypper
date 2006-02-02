@@ -22,7 +22,7 @@ public:
   {}
 
   virtual bool
-  isDesiredMedia(MediaAccessRef &ref, MediaNr mediaNr)
+  isDesiredMedia(const MediaAccessRef &ref, MediaNr mediaNr)
   {
     DBG << "isDesiredMedia(): for media nr " << mediaNr << std::endl;
 
@@ -58,6 +58,8 @@ int main(void)
 
   id = mm.open(zypp::Url("cd:"));
   mm.addVerifier( id, v);
+
+  mm.attach(id);
 
   mm.provideFile(id, 1, Pathname("/directory.yast"));
 
