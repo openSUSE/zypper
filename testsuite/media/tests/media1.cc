@@ -10,11 +10,20 @@
 using namespace zypp;
 using namespace zypp::media;
 
+/*
+** Very basic example verifier.
+**
+** This one does not know anything about the product,
+** it just checks if /media.<mediaNr> exists...
+*/
 class MyMediaVerifier: public MediaVerifierBase
 {
+private:
+  // std::string _productname;
 public:
-  MyMediaVerifier()
+  MyMediaVerifier(/* std::string &productname */)
     : MediaVerifierBase()
+    //, _productname(productname)
   {}
 
   virtual
@@ -34,6 +43,8 @@ public:
 
     DBG << "isDesiredMedia(): checking " << dir.asString() << std::endl;
 
+    // FIXME: check the product e.g. via /media.X/products as well,
+    //        not only if the media nr is the correct one.
     try
     {
       if( ref)
@@ -52,16 +63,32 @@ public:
 
 int main(void)
 {
-  MediaVerifierRef v(new MyMediaVerifier());
-  MediaManager mm;
-  media::MediaId      id;
+  MediaVerifierRef verifier(
+    new MyMediaVerifier(/* "SUSE-Linux-CORE-i386 9" */)
+  );
+  MediaManager     mm;
+  media::MediaId   id;
 
-  id = mm.open(zypp::Url("cd:"));
-  mm.addVerifier( id, v);
+  try
+  {
 
-  mm.attach(id);
+    id = mm.open(zypp::Url("cd:"));
 
-  mm.provideFile(id, 1, Pathname("/directory.yast"));
+    mm.addVerifier( id, verifier);
+
+    mm.attach(id);
+
+    mm.provideFile(id, 1, Pathname("/directory.yast"));
+  }
+  catch(const MediaException &e)
+  {
+    ZYPP_CAUGHT(e);
+  }
+  catch( ... )
+  {
+    // hmm...
+    ERR << "Catched *unknown* exception" << std::endl;
+  }
 
   return 0;
 }
