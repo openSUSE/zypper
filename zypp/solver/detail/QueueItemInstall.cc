@@ -167,7 +167,7 @@ struct EstablishFreshens : public resfilter::OnCapMatchCallbackFunctor
 	_DEBUG("EstablishFreshens (" << provider << ", " << match << ")");
 
 	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, provider, soft);
-	qil.push_front (establish_item);
+	qil.push_back (establish_item);
 	return true;
     }
 };
@@ -235,6 +235,13 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	goto finished;
     }
+
+    // If this install is due to a needed, convert it to a normal install
+
+    if (status.isNeeded()) {
+	context->setStatus (_item, _soft ? ResStatus::toBeInstalledSoft :  ResStatus::toBeInstalled);
+    }
+
 
     // if this install upgrades an installed resolvable, explicitly uninstall this one
     //   in order to ensure that all dependencies are still met after the upgrade

@@ -191,7 +191,7 @@ struct UninstallProcess: public resfilter::OnCapMatchCallbackFunctor
 	if (requirer.status().isSatisfied()) {			// it is just satisfied, check freshens
 #warning If an uninstall incompletes a satisfied, the uninstall should be cancelled
 	    QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, requirer, soft);	// re-check if its still needed
-	    qil.push_front (establish_item);
+	    qil.push_back (establish_item);
 	    return true;
 	}
 
