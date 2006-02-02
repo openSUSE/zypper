@@ -14,11 +14,16 @@
 
 #include <iosfwd>
 
+
+#include "zypp/Message.h"
+#include "zypp/Patch.h"
+
 #include "zypp/parser/yum/YUMParser.h"
 #include "zypp/parser/yum/YUMParserData.h"
 #include "zypp/base/PtrTypes.h"
 #include "Backend.h"
 
+using namespace zypp;
 using namespace zypp::parser::yum;
 
 ///////////////////////////////////////////////////////////////////
@@ -101,6 +106,8 @@ public:
   Resolvable::Ptr resolvableFromFile( std::string file_path, Resolvable::Kind kind ) const;
 
   Patch::Ptr createPatch( const zypp::parser::yum::YUMPatchData & parsed ) const;
+  Message::Ptr createMessage( const zypp::parser::yum::YUMPatchMessage & parsed ) const;
+ 
   Dependencies createDependencies( const zypp::parser::yum::YUMObjectData & parsed, const Resolvable::Kind my_kind ) const;
   Dependencies createGroupDependencies( const zypp::parser::yum::YUMGroupData & parsed ) const;
   Dependencies createPatternDependencies( const zypp::parser::yum::YUMPatternData & parsed ) const;

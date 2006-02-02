@@ -18,9 +18,11 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 
-#include "zypp/Source.h"
-
 #include "zypp/target/store/xml/XMLPatchImpl.h"
+#include "zypp/target/store/xml/XMLMessageImpl.h"
+#include "zypp/target/store/xml/XMLScriptImpl.h"
+#include "zypp/target/store/xml/XMLSelectionImpl.h"
+#include "zypp/target/store/xml/XMLProductImpl.h"
 
 #include <iostream>
 #include <fstream>
@@ -38,6 +40,7 @@
 
 using std::endl;
 using namespace boost::filesystem;
+using namespace zypp;
 using namespace zypp::parser::yum;
 
 ///////////////////////////////////////////////////////////////////
@@ -78,7 +81,7 @@ XMLFilesBackend::XMLFilesBackend()
 
   // types of resolvables stored
   d->kinds.insert(ResTraits<zypp::Patch>::kind);
-  //d->kinds.push_back(ResTraits<zypp::Message>::kind);
+  d->kinds.insert(ResTraits<zypp::Message>::kind);
   //d->kinds.push_back(ResTraits<zypp::Script>::kind);
   //d->kinds.push_back(ResTraits<zypp::Selection>::kind);
 
@@ -143,7 +146,15 @@ std::string XMLFilesBackend::randomString(int length) const
 bool
 XMLFilesBackend::isBackendInitialized()
 {
-  return exists( ZYPP_DB_DIR );
+  bool ok = true;
+  ok = ok && exists( ZYPP_DB_DIR );
+  std::set<Resolvable::Kind>::const_iterator it_kinds;
+  for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
+  {
+    Resolvable::Kind kind = (*it_kinds);
+    ok = ok && exists(dirForResolvableKind(kind));
+  }
+  return ok;
 }
 
 void
@@ -151,10 +162,21 @@ XMLFilesBackend::initBackend()
 {
   // FIXME duncan * handle exceptions
   DBG << "Creating directory structure..." << std::endl;
-  create_directory( path(ZYPP_DB_DIR) );
-  create_directory( path(ZYPP_DB_DIR) / path("patches") );
-  create_directory( path(ZYPP_DB_DIR) / path("selections") );
-  create_directory( path(ZYPP_DB_DIR) / path("products") );
+  path topdir(ZYPP_DB_DIR);
+  create_directory(topdir);
+  MIL << "Created..." << topdir.string() << std::endl;
+  std::set<Resolvable::Kind>::const_iterator it_kinds;
+  for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
+  {
+    Resolvable::Kind kind = (*it_kinds);
+    # warning "add exception handling here"
+    path p(path(ZYPP_DB_DIR) / path(resolvableKindToString(kind, true /* plural */)));
+    if (!exists(p))
+    {
+      create_directory(p);
+      MIL << "Created..." << p.string() << std::endl;
+    }
+  }
 }
 
 void XMLFilesBackend::setRandomFileNameEnabled( bool enabled )
@@ -184,7 +206,7 @@ XMLFilesBackend::fullPathForResolvable( Resolvable::constPtr resolvable ) const
 {
   std::string filename;
   filename = dirForResolvable(resolvable) + "/";
-  filename += d->randomFileName ? randomString(40) : resolvable->name();
+  filename += d->randomFileName ? randomString(40) : (resolvable->name() + "-" + resolvable->edition().version());
   return filename;
 }
 
@@ -319,6 +341,27 @@ XMLFilesBackend::createPatch( const zypp::parser::yum::YUMPatchData & parsed ) c
   {
     ERR << excpt_r << endl;
     throw "Cannot create patch object";
+  }
+}
+
+Message::Ptr
+XMLFilesBackend::createMessage( const zypp::parser::yum::YUMPatchMessage & parsed ) const
+{
+  try
+  {
+    shared_ptr<XMLMessageImpl> impl(new XMLMessageImpl());
+    impl->_type = parsed.type;
+    impl->_text = parsed.text;
+
+    // Collect basic Resolvable data
+    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch, createDependencies(parsed, ResTraits<Message>::kind) );
+    Message::Ptr message = detail::makeResolvableFromImpl( dataCollect, impl);
+    return message;
+  }
+  catch (const Exception & excpt_r)
+  {
+    ERR << excpt_r << endl;
+    throw "Cannot create message object";
   }
 }
 
