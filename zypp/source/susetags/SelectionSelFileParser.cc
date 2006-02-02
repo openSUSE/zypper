@@ -116,7 +116,7 @@ namespace zypp
         for (std::list<std::string>::const_iterator it = selImpl->_inspacks[LanguageCode()].begin(); it != selImpl->_inspacks[LanguageCode()].end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Package>::kind, *it);
-	  _deps[Dep::REQUIRES].insert(_cap);
+	  _deps[Dep::RECOMMENDS].insert(_cap);
         }
         
         for (std::list<std::string>::const_iterator it = selImpl->_recommends.begin(); it != selImpl->_recommends.end(); it++)
