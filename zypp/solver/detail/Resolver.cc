@@ -20,6 +20,7 @@
  */
 
 #include "zypp/solver/detail/Resolver.h"
+#include "zypp/solver/detail/Helper.h"
 
 #include "zypp/CapSet.h"
 #include "zypp/base/Logger.h"
@@ -121,7 +122,7 @@ Resolver::addSubscribedSource (Source_Ref source)
 void
 Resolver::addPoolItemToInstall (PoolItem_Ref item)
 {
-    _items_to_install.push_front (item);
+    _items_to_install.push_back (item);
 }
 
 
@@ -137,7 +138,7 @@ Resolver::addPoolItemsToInstallFromList (PoolItemList & rl)
 void
 Resolver::addPoolItemToRemove (PoolItem_Ref item)
 {
-    _items_to_remove.push_front (item);
+    _items_to_remove.push_back (item);
 }
 
 
@@ -153,7 +154,7 @@ Resolver::addPoolItemsToRemoveFromList (PoolItemList & rl)
 void
 Resolver::addPoolItemToEstablish (PoolItem_Ref item)
 {
-    _items_to_establish.push_front (item);
+    _items_to_establish.push_back (item);
 }
 
 
@@ -184,7 +185,7 @@ Resolver::addPoolItemToVerify (PoolItem_Ref item)
   } order;
 #endif
 
-    _items_to_verify.push_front (item);
+    _items_to_verify.push_back (item);
 
 #warning Should order by name (and probably edition since with zypp we could have multiple editions installed in parallel)
 //    _items_to_verify.sort (order);			//(GCompareFunc) rc_item_compare_name);
@@ -330,6 +331,8 @@ Resolver::establishState (ResolverContext_Ptr context)
     if (context == NULL)
 	context = new ResolverContext(_pool);
 
+    context->setEstablishing (true);
+
     for (KindList::const_iterator iter = ordered.begin(); iter != ordered.end(); iter++) {
 	const Resolvable::Kind kind = *iter;
 
@@ -348,6 +351,8 @@ Resolver::establishState (ResolverContext_Ptr context)
 
 	reset();
     }
+
+    context->setEstablishing (false);
 
     _best_context = context;
 
@@ -379,7 +384,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
     time_t t_start, t_now;
 
-    DBG << "Resolver::resolveDependencies()" << endl;
+    MIL << "Resolver::resolveDependencies()" << endl;
 
 #warning local items disabled
 #if 0
@@ -466,7 +471,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	initial_queue->addExtraConflict (*iter);
     }
 
-    DBG << "Initial Queue: [" << initial_queue << "]" << endl;
+    DBG << "Initial Queue: [" << *initial_queue << "]" << endl;
 
     _best_context = NULL;
 
@@ -505,13 +510,13 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	if (queue->isInvalid ()) {
 
 	    DBG << "Invalid Queue\n" << endl;;
-	    _invalid_queues.push_front (queue);
+	    _invalid_queues.push_back(queue);
 
 	} else if (queue->isEmpty ()) {
 
 	    DBG <<"Empty Queue\n" << endl;
 
-	    _complete_queues.push_front (queue);
+	    _complete_queues.push_back(queue);
 
 	    ++_valid_solution_count;
 
@@ -533,7 +538,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
 	    DBG << "PRUNED!" << endl;
 
-	    _pruned_queues.push_front(queue);
+	    _pruned_queues.push_back(queue);
 
 	} else {
 
@@ -550,14 +555,14 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	if (_pending_queues.empty()
 	    && _complete_queues.empty()
 	    && !_deferred_queues.empty()) {
-	    _pending_queues.push_front (_deferred_queues.front());
+	    _pending_queues.push_back(_deferred_queues.front());
 	}
-	  }
-	DBG << "Pend " << (long) _pending_queues.size()
-			<< " / Cmpl " << (long) _complete_queues.size()
-			<< " / Prun " << (long) _pruned_queues.size()
-			<< " / Defr " << (long) _deferred_queues.size()
-			<< " / Invl " << (long) _invalid_queues.size() << endl;
+    }
+    DBG << "Pend " << (long) _pending_queues.size()
+		   << " / Cmpl " << (long) _complete_queues.size()
+		   << " / Prun " << (long) _pruned_queues.size()
+		   << " / Defr " << (long) _deferred_queues.size()
+		   << " / Invl " << (long) _invalid_queues.size() << endl;
 
     return _best_context && _best_context->isValid();
 }
@@ -577,14 +582,23 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
     bool operator()( PoolItem_Ref item )		// only transacts() items go here
     {
 	ResStatus status = item.status();
-	if (status.isBySolver()) {			// clear any solver transactions
-	    item.status().setNoTransact(ResStatus::SOLVER);
-	}
+	DBG << "CollectTransact(" << item << ")" << endl;
+	item.status().setNoTransact(ResStatus::APPL_LOW);// clear any solver/establish transactions
+
 	if (status.isUninstalled()) {			// transact && uninstalled
 	    resolver.addPoolItemToInstall(item);	// -> install! 
 	}
 	if (status.isInstalled()) {			// transact && installed
 	    resolver.addPoolItemToRemove(item);		// -> remove !
+	}
+	if (status.isIncomplete()) {			// incomplete (re-install needed)
+	    PoolItem_Ref reinstall = Helper::findReinstallItem (resolver.pool(), item);
+	    if (reinstall) {
+		resolver.addPoolItemToInstall(item);	// -> install! 
+	    }
+	    else {
+		WAR << "Can't find " << item << " for re-installation" << endl;
+	    }
 	}
 	return true;
     }
@@ -611,7 +625,7 @@ Resolver::resolvePool ()
 {
 
     CollectTransact info (*this);
-
+    MIL << "Resolver::resolvePool()" << endl;
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
 		   functor::functorRef<bool,PoolItem>(info) );
