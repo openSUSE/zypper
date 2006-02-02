@@ -251,6 +251,7 @@ AC_OUTPUT(	 po/Makefile.in\
 	zypp/target/Makefile		\
 	zypp/target/rpm/Makefile	\
 	zypp/target/store/Makefile	\
+  zypp/target/store/xml/Makefile  \
 	zypp/target/hal/Makefile	\
 	zypp/zypp_detail/Makefile	\
 	zmd/Makefile			\
