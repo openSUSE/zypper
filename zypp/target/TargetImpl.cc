@@ -125,9 +125,9 @@ namespace zypp
     	    RpmInstallPackageReceiver progress(it->resolvable());
 	    
 	    progress.connect();
-
+#warning FIX dependency loops in GNOME packages and remove --force --nodeps then
 	    rpm().installPackage(p->getPlainRpm(),
-	      p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : 0);
+	      p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : (rpm::RpmDb::RPMINST_FORCE|rpm::RpmDb::RPMINST_NODEPS));
 	      
 	    progress.disconnect();
 
