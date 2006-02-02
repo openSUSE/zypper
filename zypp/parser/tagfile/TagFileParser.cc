@@ -22,8 +22,10 @@
 
 
 #include "zypp/parser/tagfile/TagFileParser.h"
+#include "zypp/parser/tagfile/ParseException.h"
 #include <boost/regex.hpp>
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "TagFileParser"
 
 using namespace std;
@@ -75,11 +77,16 @@ namespace zypp
       void TagFileParser::parse( const Pathname & file_r)
       {
         std::ifstream file(file_r.asString().c_str());
+
+	if (!file) {
+	    ZYPP_THROW (ParseException( "Can't open " + file_r.asString() ) );
+	}
+
         std::string buffer;
         // read vendor
         MIL << "Started parsing " << file_r << std::endl;
         beginParse();
-        while(!file.eof())
+        while(file && !file.eof())
         {
           getline(file, buffer);
           boost::smatch what;
