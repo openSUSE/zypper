@@ -17,12 +17,11 @@
 #include <zypp/target/store/PersistentStorage.h>
 #include <zypp/target/store/XMLFilesBackend.h>
 
-#include <zypp/parser/yum/YUMParser.h>
 #include <zypp/base/Logger.h>
-#include <zypp/source/yum/YUMScriptImpl.h>
-#include <zypp/source/yum/YUMMessageImpl.h>
-#include <zypp/source/yum/YUMPackageImpl.h>
-#include <zypp/source/yum/YUMSourceImpl.h>
+
+#include "zypp/SourceFactory.h"
+#include "zypp/Source.h"
+#include "zypp/source/SourceImpl.h"
 
 #include <map>
 #include <set>
@@ -31,13 +30,16 @@
 
 #include <zypp/target/store/serialize.h>
 
-using namespace zypp::detail;
+#include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
+#include "boost/filesystem/fstream.hpp"    // ditto
 
+using namespace zypp::detail;
 using namespace std;
 using namespace zypp;
-using namespace zypp::parser::yum;
-using namespace zypp::source::yum;
 using namespace zypp::storage;
+using namespace zypp::source;
+
+using namespace boost::filesystem;
 
 #define PATCH_FILE "../../../devel/devel.jsrain/repodata/patch.xml"
 
@@ -45,42 +47,37 @@ using namespace zypp::storage;
 
 int main()
 {
-	INT << "===[START]==========================================" << endl;
 
-	YUMSourceImpl srcimpl;
-
-    Source_Ref::Impl_Ptr impl (&srcimpl );
-    SourceFactory _f;
-    Source_Ref src = _f.createFrom( impl );
-
-	Patch::Ptr patch1;
-
-	//YUMPatchParser iter(cin,"");
-	std::ifstream patch_file(PATCH_FILE);
-	YUMPatchParser iter(patch_file,"");
-	for (; !iter.atEnd(); ++iter)
-	{
-		patch1 = srcimpl.createPatch(src, **iter);
-	}
-	if (iter.errorStatus())
-		throw *iter.errorStatus();
-
+  /* Read YUM resolvables from a source */
+  INT << "===[START]==========================================" << endl;
+  SourceFactory _f;
+  Pathname p = "/";
+  //  Url url = Url("ftp://cml.suse.cz/netboot/find/SUSE-10.1-CD-OSS-i386-Beta1-CD1");
+  Url url = Url("dir:/space/sources/zypp-trunk/trunk/libzypp/devel/devel.jsrain");
+  //  Url url = Url("dir:/local/zypp/libzypp/devel/devel.jsrain");
+  Source_Ref s = _f.createFrom( url, p );
+  ResStore store = s.resolvables();
+  MIL << "done reading YUM source: " << store <<  std::endl;
+ 
   XMLFilesBackend backend;
-  backend.setRandomFileNameEnabled(true);
-
+  //backend.setRandomFileNameEnabled(true);
   clock_t time_start, curr_time;
   time_start = clock();
-  int i = 0;
-  DBG << "Writing Patches..." << std::endl;
-  for (; i < 1000; i++)
-    backend.storeObject(patch1);
 
+  // now write the files
+  DBG << "Writing objects..." << std::endl;
+  for (ResStore::const_iterator it = store.begin(); it != store.end(); it++)
+  {
+    //DBG << **it << endl;
+    backend.storeObject(*it);
+  }
+  
   curr_time = clock() - time_start;           // time in micro seconds
-  DBG << "Wrote " << i << " patches in " << (double) curr_time / CLOCKS_PER_SEC << " seconds" << std::endl;
-
+  MIL << "Wrote " << store.size() << " objects in " << (double) curr_time / CLOCKS_PER_SEC << " seconds" << std::endl;
+  
   time_start = clock();
   std::list<Resolvable::Ptr> objs = backend.storedObjects();
   curr_time = clock() - time_start;           // time in micro seconds
-  DBG << "Read " << objs.size() << " patches in " << (double) curr_time / CLOCKS_PER_SEC << " seconds" << std::endl;
+  MIL << "Read " << objs.size() << " patches in " << (double) curr_time / CLOCKS_PER_SEC << " seconds" << std::endl;
   return 0;
 }
