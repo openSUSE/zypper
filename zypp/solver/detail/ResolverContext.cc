@@ -82,6 +82,7 @@ ResolverContext::ResolverContext (const ResPool & pool, ResolverContext_Ptr pare
     , _max_priority (0)
     , _other_penalties (0)
     , _verifying (false)
+    , _establishing (false)
     , _invalid (false)
 {
 _DEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
@@ -94,6 +95,7 @@ _DEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
 	_min_priority    = parent->_min_priority;
 	_other_penalties = parent->_other_penalties;
 	_verifying	 = parent->_verifying;
+	_establishing	 = parent->_establishing;
     } else {
 	_min_priority = MAXINT;
     }
@@ -351,10 +353,10 @@ ResolverContext::unneeded (PoolItem_Ref item, int other_penalty)
 
     status = getStatus(item);
 
-    if (status.isInstalled()) {
+    if (status.staysInstalled()) {
 	setStatus (item, ResStatus::satisfied);
     }
-    else {
+    else if (status.staysUninstalled()) {
 	setStatus (item, ResStatus::unneeded);
     }
 
@@ -373,10 +375,10 @@ ResolverContext::satisfy (PoolItem_Ref item, int other_penalty)
 
     _DEBUG( "ResolverContext[" << this << "]::satisfy(" << item << ":" << status << ")" );
 
-    if (status.isInstalled()) {
+    if (status.staysInstalled()) {
 	setStatus (item, ResStatus::complete);
     }
-    else {
+    else if (status.staysUninstalled()) {
 	setStatus (item, ResStatus::satisfied);
     }
 
@@ -389,46 +391,43 @@ ResolverContext::satisfy (PoolItem_Ref item, int other_penalty)
 bool
 ResolverContext::incomplete (PoolItem_Ref item, int other_penalty)
 {
-    _DEBUG( "ResolverContext[" << this << "]::incomplete(" << item << ")" );
+    ResStatus status = getStatus (item);
 
-    ResStatus status;
-    status = getStatus(item);
+    _DEBUG( "ResolverContext[" << this << "]::incomplete(" << item << "):" << status );
 
-    if (status.isInstalled()) {
-	ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INCOMPLETES, item, RESOLVER_INFO_PRIORITY_VERBOSE);
-	addError (misc_info);
-	return false;
-    }
-    else if (status.isUnneeded()) {
-	ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INCOMPLETES, item, RESOLVER_INFO_PRIORITY_VERBOSE);
-	addError (misc_info);
-	return false;
-    }
+    if (_establishing) {
+	if (status.isInstalled()) {
+	    setStatus (item, ResStatus::incomplete);
+	}
+	else {
+	    setStatus (item, ResStatus::needed);
+	}
 
-    if (status.isInstalled()) {
-	setStatus (item, ResStatus::incomplete);
-    }
-    else {
-	setStatus (item, ResStatus::needed);
+	return true;
     }
 
-    return true;
+    // if something goes 'incomplete' outside of the establishing call, its always an error
+
+    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INCOMPLETES, item, RESOLVER_INFO_PRIORITY_VERBOSE);
+    addError (misc_info);
+    return false;
 }
 
 //---------------------------------------------------------------------------
 
 // is it installed (after transaction) ?
 // if yes, install/requires requests are considered done
+
 bool
 ResolverContext::isPresent (PoolItem_Ref item) const
 {
     ResStatus status = getStatus(item);
 
-ERR << "ResolverContext::itemIsPresent(<" << status << ">" << item << ")" << endl;
+DBG << "ResolverContext::itemIsPresent(<" << status << ">" << item << ")" << endl;
 
     return (status.staysInstalled()
-	    || status.isToBeInstalled()
-	    || status.isToBeInstalledSoft()
+	    || ((status.isToBeInstalled() || status.isToBeInstalledSoft())
+		&& !status.isNeeded())
 	    || status.isSatisfied ());
 }
 
@@ -442,6 +441,8 @@ ResolverContext::isAbsent (PoolItem_Ref item) const
     ResStatus status;
 
     status = getStatus(item);
+
+DBG << "ResolverContext::itemIsAbsent(<" << status << ">" << item << ")" << endl;
 
     // DONT add incomplete here, uninstall requests for incompletes must be handled
 
