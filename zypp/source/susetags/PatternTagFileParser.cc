@@ -136,13 +136,14 @@ namespace zypp
 	  _deps[Dep::CONFLICTS].insert(_cap);
         }
 
-        for (std::list<std::string>::const_iterator it = selImpl->_recommends.begin(); it != selImpl->_pkgrecommends.end(); it++)
+        for (std::list<std::string>::const_iterator it = selImpl->_pkgrecommends.begin(); it != selImpl->_pkgrecommends.end(); it++)
         {
+DBG << "recommends pkg '" << *it << "'" << endl;
           Capability _cap = _f.parse( ResTraits<Package>::kind, *it );
 	  _deps[Dep::RECOMMENDS].insert(_cap);
         }
 
-        for (std::list<std::string>::const_iterator it = selImpl->_requires.begin(); it != selImpl->_pkgrequires.end(); it++)
+        for (std::list<std::string>::const_iterator it = selImpl->_pkgrequires.begin(); it != selImpl->_pkgrequires.end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Package>::kind, *it );
 	  _deps[Dep::REQUIRES].insert(_cap);
