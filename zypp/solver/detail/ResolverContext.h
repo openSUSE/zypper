@@ -73,6 +73,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     int _other_penalties;
 
     bool _verifying;				// running 'verifySystem'
+    bool _establishing;				// running 'establishSystem'
     bool _invalid;				// lead to invalid solution
 
   public:
@@ -97,6 +98,9 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     bool verifying (void) const { return _verifying; }
     void setVerifying (bool verifying) { _verifying = verifying; }
+
+    bool establishing (void) const { return _establishing; }
+    void setEstablishing (bool establishing) { _establishing = establishing; }
 
     inline ResPool pool() const { return _pool; }
 
