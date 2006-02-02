@@ -85,8 +85,7 @@ ResolverQueue::addPoolItemToInstall (PoolItem_Ref poolItem)
     QueueItemInstall_Ptr qitem;
 
     if (_context->isPresent (poolItem)
-	&& (!poolItem.status().isSatisfied())
-	&& (!poolItem.status().isUnneeded())) {
+	&& poolItem.status().staysInstalled()) {
 	WAR << poolItem << " is already installed" << endl;
 	return;
     }
@@ -165,7 +164,7 @@ ResolverQueue::addExtraConflict (const Capability & dep)
 void
 ResolverQueue::addItem (QueueItem_Ptr qitem)
 {
-    _qitems.push_front (qitem);
+    _qitems.push_back(qitem);
 }
 
 
@@ -402,9 +401,9 @@ ResolverQueue::splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueLi
 
 	DeferTable::const_iterator pos = to_defer.find (new_qitem);
 	if (pos != to_defer.end()) {
-	    deferred_queues.push_back (new_queue);
+	    deferred_queues.push_back(new_queue);
 	} else {
-	    new_queues.push_back (new_queue);
+	    new_queues.push_back(new_queue);
 	}
     }
 
