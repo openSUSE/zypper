@@ -106,7 +106,7 @@ Resolver::problems (void) const
 
 	bool problem_created = false;
 
-	DBG << info;
+	DBG << "Problem: " << *info;
 	if (!(info->error())) {
 	    DBG << "; It is not an error --> ignoring" << endl;
 	    continue; // only errors are important
@@ -386,17 +386,14 @@ Resolver::problems (void) const
 				  who.c_str(),
 				  misc_info->other()->name().c_str());				
 		details = misc_info->message();
-#if 1
-		// It is only an info --> no solution is needed
-#else		
+		ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
 		// Uninstall p
-		problem->addSolution (new ProblemSolutionUninstall (problem, resItem));
+		problem->addSolution (new ProblemSolutionUninstall (problem, item));
 		// Remove conflict in the resolvable which has to be installed
-		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::CONFLICTS, resItem, misc_info->capability(),
+		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::CONFLICTS, item, misc_info->capability(),
 								 misc_info->other())); 
 		problems.push_back (problem);
 		problem_created = true;
-#endif
 		
 	    }
 	    break;
@@ -410,6 +407,7 @@ Resolver::problems (void) const
 #if 1
 		// It is only an info --> no solution is needed
 #else
+		ResolverProblem_Ptr problem = new ResolverProblem (what, details);				
 		// Uninstall p
 		problem->addSolution (new ProblemSolutionUninstall (problem, resItem));
 		// Remove conflict in the resolvable which has to be installed
