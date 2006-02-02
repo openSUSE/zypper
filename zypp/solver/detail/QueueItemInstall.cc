@@ -150,10 +150,12 @@ struct EstablishFreshens : public resfilter::OnCapMatchCallbackFunctor
 {
     const ResPool & pool;
     QueueItemList & qil;
+    bool soft;
 
-    EstablishFreshens (const ResPool & p, QueueItemList &l)
+    EstablishFreshens (const ResPool & p, QueueItemList &l, bool s)
 	: pool (p)
 	, qil (l)
+	, soft (s)
     { }
 
 
@@ -164,7 +166,7 @@ struct EstablishFreshens : public resfilter::OnCapMatchCallbackFunctor
     {
 	_DEBUG("EstablishFreshens (" << provider << ", " << match << ")");
 
-	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, provider);
+	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, provider, soft);
 	qil.push_front (establish_item);
 	return true;
     }
@@ -408,7 +410,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	/* Construct establish items for each of those which freshen this resolvable. */
 
-	EstablishFreshens info( pool(), qil );
+	EstablishFreshens info( pool(), qil, _soft );
 
 	CapFactory factory;
 	Capability cap = factory.parse (_item->kind(), _item->name(), Rel::EQ, _item->edition());
