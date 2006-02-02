@@ -11,6 +11,7 @@
 */
 #include <iostream>
 #include "zypp/base/Logger.h"
+#include "zypp/base/Exception.h"
 
 #include "zypp/target/TargetImpl.h"
 #include "zypp/target/TargetCallbackReceiver.h"
@@ -125,16 +126,47 @@ namespace zypp
     	    RpmInstallPackageReceiver progress(it->resolvable());
 	    
 	    progress.connect();
-#warning FIX dependency loops in GNOME packages and remove --force --nodeps then
-	    rpm().installPackage(p->getPlainRpm(),
-	      p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : (rpm::RpmDb::RPMINST_FORCE|rpm::RpmDb::RPMINST_NODEPS));
+
+	    try {
+		rpm().installPackage(p->getPlainRpm(),
+		    p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : 0);
+	    }
+	    catch (Exception & excpt_r) {
+		ZYPP_CAUGHT(excpt_r);
+
+		WAR << "Install failed, retrying with --nodeps" << endl;
+		try {
+		    rpm().installPackage(p->getPlainRpm(),
+			p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : rpm::RpmDb::RPMINST_NODEPS);
+		}
+		catch (Exception & excpt_r) {
+		    ZYPP_CAUGHT(excpt_r);
+		    WAR << "Install failed again, retrying with --force --nodeps" << endl;
+
+		    try {
+			rpm().installPackage(p->getPlainRpm(),
+			    p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : (rpm::RpmDb::RPMINST_NODEPS|rpm::RpmDb::RPMINST_FORCE));
+		    }
+		    catch (Exception & excpt_r) {
+			progress.disconnect();
+			ZYPP_RETHROW(excpt_r);
+		    }
+		}
+	    }
 	      
 	    progress.disconnect();
 
 	  }
 	  else
 	  {
-	    rpm().removePackage(p);
+	    try {
+		rpm().removePackage(p);
+	    }
+	    catch (Exception & excpt_r) {
+		ZYPP_CAUGHT(excpt_r);
+		WAR << "Remove failed, retrying with --nodeps" << endl;
+		rpm().removePackage(p, rpm::RpmDb::RPMINST_NODEPS);
+	    }
 	  }
 	  MIL << "Successful, resetting transact for " << *it << endl;
 	  it->status().setNoTransact(ResStatus::USER);
