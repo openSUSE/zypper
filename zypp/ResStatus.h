@@ -337,7 +337,7 @@ namespace zypp
     /** Ctor for intialization of builtin constants. */
     ResStatus( StateValue s,
                EstablishValue e     = UNDETERMINED,
-               TransactValue t      = TRANSACT,
+               TransactValue t      = KEEP_STATE,
                InstallDetailValue i = EXPLICIT_INSTALL,
                RemoveDetailValue r  = EXPLICIT_REMOVE );
 

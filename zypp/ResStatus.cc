@@ -31,7 +31,7 @@ namespace zypp
   const ResStatus ResStatus::complete			 (INSTALLED,   SATISFIED);
   const ResStatus ResStatus::satisfied			 (UNINSTALLED, SATISFIED);
   const ResStatus ResStatus::unneeded			 (UNINSTALLED, UNNEEDED);
-  const ResStatus ResStatus::needed			 (UNINSTALLED, INCOMPLETE);
+  const ResStatus ResStatus::needed			 (UNINSTALLED, INCOMPLETE, TRANSACT);
 
   ///////////////////////////////////////////////////////////////////
   //
