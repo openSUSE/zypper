@@ -61,6 +61,9 @@ class Helper {
     // for item, find uninstalled item which has same name and higher edition
     static PoolItem_Ref findUninstalledItem (const ResPool & pool, PoolItem_Ref item);
 
+    // for item, find uninstalled item which has same name and equal edition
+    static PoolItem_Ref findReinstallItem (const ResPool & pool, PoolItem_Ref item);
+
     static PoolItem_Ref findUpdateItem (const ResPool & pool, PoolItem_Ref item);
 
     friend std::ostream& operator<<(std::ostream&, const PoolItemList & itemlist);

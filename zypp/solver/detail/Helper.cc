@@ -129,6 +129,37 @@ MIL << "Helper::findUpdateItem(" << item << ") => " << info.uninstalled << endl;
     return info.uninstalled;
 }
 
+
+//----------------------------------------------------------------------------
+
+class LookForReinstall : public resfilter::OnCapMatchCallbackFunctor, public resfilter::PoolItemFilterFunctor
+{
+  public:
+    PoolItem_Ref uninstalled;
+
+    bool operator()( PoolItem_Ref provider )
+    {
+	uninstalled = provider;
+	return false;				// stop here, we found it
+    }
+};
+
+
+PoolItem_Ref
+Helper::findReinstallItem (const ResPool & pool, PoolItem_Ref item)
+{
+    LookForReinstall info;
+#warning FIXME, should not report locked update candidates.
+    invokeOnEach( pool.byNameBegin( item->name() ),
+		  pool.byNameEnd( item->name() ),
+		  functor::chain (functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
+						  resfilter::ByKind( item->kind() ) ),		// equal kind
+				  resfilter::byEdition<CompareByEQ<Edition> >( item->edition() )),
+		  functor::functorRef<bool,PoolItem> (info) );
+MIL << "Helper::findReinstallItem(" << item << ") => " << info.uninstalled << endl;
+    return info.uninstalled;
+}
+
 ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
