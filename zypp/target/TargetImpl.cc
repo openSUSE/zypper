@@ -13,6 +13,7 @@
 #include "zypp/base/Logger.h"
 
 #include "zypp/target/TargetImpl.h"
+#include "zypp/target/TargetCallbackReceiver.h"
 
 #include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/InstallOrder.h"
@@ -119,8 +120,17 @@ namespace zypp
 	  Package::constPtr p = dynamic_pointer_cast<const Package>(it->resolvable());
 	  if (it->status().isToBeInstalled())
 	  {
+#warning Exception handling
+	    // create a progress report proxy
+    	    RpmInstallPackageReceiver progress(it->resolvable());
+	    
+	    progress.connect();
+
 	    rpm().installPackage(p->getPlainRpm(),
 	      p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : 0);
+	      
+	    progress.disconnect();
+
 	  }
 	  else
 	  {

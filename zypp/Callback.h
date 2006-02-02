@@ -181,7 +181,7 @@ namespace zypp
          }
 
          Receiver * getReceiver() const
-         { return _receiver == &_noReceiver ? NULL : _receiver; }
+         { return _receiver == &_noReceiver ? 0 : _receiver; }
 
          void setReceiver( Receiver & rec_r )
          { _receiver = &rec_r; }

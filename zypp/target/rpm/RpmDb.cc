@@ -1668,24 +1668,28 @@ void RpmDb::processConfigFiles(const string& line, const string& name, const cha
 //
 void RpmDb::installPackage( const Pathname & filename, unsigned flags )
 {
-  RpmInstallReport report;
+  callback::SendReport<RpmInstallReport> report;
+
+  report->start(filename);
+
   try {
     doInstallPackage(filename, flags, report);
   }
   catch (RpmException & excpt_r)
   {
-    report.end(excpt_r);
+    report->end(/*excpt_r*/);
     ZYPP_RETHROW(excpt_r);
   }
-  report.end();
+  report->end();
 
 }
-void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, RpmInstallReport & report )
+void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, callback::SendReport<RpmInstallReport> & report )
 {
     FAILIFNOTINITIALIZED;
     Logfile progresslog;
 
     MIL << "RpmDb::installPackage(" << filename << "," << flags << ")" << endl;
+
 
     // backup
     if ( _packagebackups ) {
@@ -1694,9 +1698,9 @@ void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, RpmInst
 	ERR << "backup of " << filename.asString() << " failed" << endl;
       }
 // FIXME status handling
-      report.progress( 0 ); // allow 1% for backup creation.
+      report->progress( 0 ); // allow 1% for backup creation.
     } else {
-      report.progress( 100 );
+      report->progress( 100 );
     }
 
     // run rpm
@@ -1741,7 +1745,7 @@ void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, RpmInst
 	{
 	    int percent;
 	    sscanf (line.c_str () + 2, "%d", &percent);
-	    report.progress( percent );
+	    report->progress( percent );
 	}
 	else
 	    rpmmsg += line+'\n';

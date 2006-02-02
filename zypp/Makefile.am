@@ -73,7 +73,8 @@ pkginclude_HEADERS = NeedAType.h \
 	UpgradeStatistics.h	\
 	ZYpp.h		\
 	TranslatedText.h \
-	ZYppFactory.h
+	ZYppFactory.h	\
+	ZYppCallbacks.h
 
 ## ##################################################
 

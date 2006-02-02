@@ -539,7 +539,7 @@ namespace zypp {
 
 	protected:
 	  void doRemovePackage( const std::string & name_r, unsigned flags, RpmRemoveReport & report );
-	  void doInstallPackage( const Pathname & filename, unsigned flags, RpmInstallReport & report );
+	  void doInstallPackage( const Pathname & filename, unsigned flags, callback::SendReport<RpmInstallReport> & report );
 	  const std::list<Package::Ptr> & doGetPackages(ScanDbReport & report);
 	  void doRebuildDatabase(RebuildDbReport & report);
 	  

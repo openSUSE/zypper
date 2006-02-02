@@ -33,6 +33,7 @@ namespace zypp
       }; 
       
       enum Error {
+	NO_ERROR,
         NOT_FOUND, 	// the requested Url was not found
 	IO,		// IO error
 	INVALID		// the downloaded file is invalid
@@ -70,6 +71,7 @@ namespace zypp
       }; 
       
       enum Error {
+	NO_ERROR,
         NOT_FOUND, 	// the requested Url was not found
 	IO,		// IO error
 	INVALID		// the downloaded file is invalid
@@ -104,6 +106,7 @@ namespace zypp
       }; 
       
       enum Error {
+	NO_ERROR,
         NOT_FOUND, 	// the requested Url was not found
 	IO,		// IO error
 	INVALID		// th source is invalid
@@ -138,6 +141,7 @@ namespace zypp
       }; 
       
       enum Error {
+	NO_ERROR,
         NOT_FOUND, 	// the requested Url was not found
 	IO,		// IO error
 	INVALID		// th source is invalid
@@ -180,6 +184,7 @@ namespace zypp
       }; 
 
       enum Error { 
+	NO_ERROR,
         NOT_FOUND,  // the medie not found at all
         IO,	// error accessing the media
 	INVALID, // media is broken
@@ -216,26 +221,27 @@ namespace zypp
         }; 
       
         enum Error {
+	  NO_ERROR,
           NOT_FOUND, 	// the requested Url was not found
 	  IO,		// IO error
 	  INVALID		// th resolvable is invalid
         };
       
         virtual void start(
-	  Resolvable::Ptr resolvable
+	  Resolvable::constPtr resolvable
         ) {}
 
-        virtual bool progress(int value, Resolvable::Ptr resolvable) 
+        virtual bool progress(int value, Resolvable::constPtr resolvable) 
         { return false; }
 
         virtual Action problem(
-          Resolvable::Ptr resolvable
+          Resolvable::constPtr resolvable
   	  , Error error
   	 , TranslatedText description
         ) { return ABORT; }
 
         virtual void finish(
-          Resolvable::Ptr resolvable
+          Resolvable::constPtr resolvable
           , Error error
 	  , TranslatedText reason
         ) {}
@@ -251,6 +257,7 @@ namespace zypp
         }; 
       
         enum Error {
+	  NO_ERROR,
           NOT_FOUND, 	// the requested Url was not found
 	  IO,		// IO error
 	  INVALID		// th resolvable is invalid
@@ -286,6 +293,7 @@ namespace zypp
         }; 
       
         enum Error {
+	  NO_ERROR,
           NOT_FOUND, 	// the requested Url was not found
 	  IO,		// IO error
 	  INVALID		// th resolvable is invalid
@@ -321,6 +329,7 @@ namespace zypp
         }; 
       
         enum Error {
+	  NO_ERROR,
           NOT_FOUND, 	// the requested Url was not found
 	  IO,		// IO error
 	  INVALID		// th resolvable is invalid
