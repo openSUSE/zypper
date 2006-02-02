@@ -51,6 +51,7 @@ QueueItem::dumpOn( std::ostream & os ) const
       case QUEUE_ITEM_TYPE_GROUP:	os << "group"; break;
       case QUEUE_ITEM_TYPE_CONFLICT:	os << "conflict"; break;
       case QUEUE_ITEM_TYPE_UNINSTALL:	os << "uninstall"; break;
+      case QUEUE_ITEM_TYPE_ESTABLISH:	os << "establish"; break;
       case QUEUE_ITEM_TYPE_LAST:	os << "last"; break;
       default: os << "?queueitem?"; break;
     }

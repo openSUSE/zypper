@@ -65,7 +65,7 @@ QueueItemEstablish::dumpOn( std::ostream & os ) const
 //---------------------------------------------------------------------------
 
 QueueItemEstablish::QueueItemEstablish (const ResPool & pool, PoolItem_Ref item)
-    : QueueItem (QUEUE_ITEM_TYPE_INSTALL, pool)
+    : QueueItem (QUEUE_ITEM_TYPE_ESTABLISH, pool)
     , _item(item)
     , _channel_priority (0)
     , _other_penalty (0)

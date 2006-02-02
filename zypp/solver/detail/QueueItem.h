@@ -53,6 +53,7 @@ typedef enum {
     QUEUE_ITEM_TYPE_GROUP,
     QUEUE_ITEM_TYPE_CONFLICT,
     QUEUE_ITEM_TYPE_UNINSTALL,
+    QUEUE_ITEM_TYPE_ESTABLISH,
     QUEUE_ITEM_TYPE_LAST
 } QueueItemType;
 
@@ -109,6 +110,7 @@ class QueueItem : public base::ReferenceCounted, private base::NonCopyable {
     bool isInstall (void) const { return _type == QUEUE_ITEM_TYPE_INSTALL; }
     bool isRequire (void) const { return _type == QUEUE_ITEM_TYPE_REQUIRE; }
     bool isUninstall (void) const { return _type == QUEUE_ITEM_TYPE_UNINSTALL; }
+    bool isEstablish (void) const { return _type == QUEUE_ITEM_TYPE_ESTABLISH; }
 
     virtual bool process (ResolverContext_Ptr context, QueueItemList & qil) = 0;
     virtual QueueItem_Ptr copy (void) const = 0;
