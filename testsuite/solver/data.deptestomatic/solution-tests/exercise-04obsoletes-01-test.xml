@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-04obsoletes-system.xml"/>
+  <channel name="test" file="exercise-04obsoletes-packages.xml"/>
+</setup>
+
+<!-- foo is installed, but obsoleted by candidate foonew; 
+     reinstalling foo should results to error RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL -->
+<trial>
+  <install channel="test" package="foonew"/>
+  <install channel="test" package="foo"/> 
+  <reportproblems/>
+</trial>
+
+</test>
