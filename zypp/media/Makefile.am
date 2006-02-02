@@ -23,7 +23,8 @@ mediainclude_HEADERS = 		\
 	MediaCIFS.h		\
 	ProxyInfo.h		\
 	MediaCurl.h		\
-	MediaManager.h
+	MediaManager.h		\
+	SuseMediaVerifier.h
 
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_media.la
@@ -43,7 +44,8 @@ lib@PACKAGE@_media_la_SOURCES = \
 	MediaCIFS.cc		\
 	ProxyInfo.cc		\
 	MediaCurl.cc		\
-	MediaManager.cc
+	MediaManager.cc		\
+	SuseMediaVerifier.cc
 
 
 lib@PACKAGE@_media_la_LIBADD =	proxyinfo/lib@PACKAGE@_media_proxyinfo.la \
