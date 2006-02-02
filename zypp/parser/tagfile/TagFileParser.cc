@@ -77,6 +77,7 @@ namespace zypp
         std::ifstream file(file_r.asString().c_str());
         std::string buffer;
         // read vendor
+        MIL << "Started parsing " << file_r << std::endl;
         beginParse();
         while(!file.eof())
         {
@@ -133,10 +134,11 @@ namespace zypp
           }
           else
           {
-            XXX << "parse error: " << buffer << std::endl;
+            ERR << "parse error: " << buffer << std::endl;
           }
         }
         endParse();
+        MIL << "Done parsing " << file_r << std::endl;
       }
 
        /////////////////////////////////////////////////////////////////
