@@ -152,7 +152,9 @@ namespace zypp
 
       accRef->open(url, preferred_attach_point);
 
-      m_impl->mediaAccMap[m_impl->nextMediaId()] = accRef;
+      MediaId nextId = m_impl->nextMediaId();
+
+      m_impl->mediaAccMap[nextId] = accRef;
 
       return nextId;
     }
