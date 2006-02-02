@@ -166,14 +166,16 @@ struct UninstallProcess: public resfilter::OnCapMatchCallbackFunctor
     PoolItem_Ref upgraded_item;
     QueueItemList & qil;
     bool remove_only;
+    bool soft;
 
-    UninstallProcess (const ResPool & p, ResolverContext_Ptr ct, PoolItem_Ref u1, PoolItem_Ref u2, QueueItemList & l, bool ro)
+    UninstallProcess (const ResPool & p, ResolverContext_Ptr ct, PoolItem_Ref u1, PoolItem_Ref u2, QueueItemList & l, bool ro, bool s)
 	: pool (p)
 	, context (ct)
 	, uninstalled_item (u1)
 	, upgraded_item (u2)
 	, qil (l)
 	, remove_only (ro)
+	, soft (s)
     { }
 
     // the uninstall of uninstalled_item breaks the dependency 'match' of resolvable 'requirer'
@@ -188,7 +190,7 @@ struct UninstallProcess: public resfilter::OnCapMatchCallbackFunctor
 
 	if (requirer.status().isSatisfied()) {			// it is just satisfied, check freshens
 #warning If an uninstall incompletes a satisfied, the uninstall should be cancelled
-	    QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, requirer);	// re-check if its still needed
+	    QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, requirer, soft);	// re-check if its still needed
 	    qil.push_front (establish_item);
 	    return true;
 	}
@@ -305,7 +307,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	CapSet provides = _item->dep(Dep::PROVIDES);
 
 	for (CapSet::const_iterator iter = provides.begin(); iter != provides.end(); iter++) {
-	    UninstallProcess info ( pool(), context, _item, _upgraded_to, qil, _remove_only);
+	    UninstallProcess info ( pool(), context, _item, _upgraded_to, qil, _remove_only, _soft);
 
 	    //world()->foreachRequiringPoolItem (*iter, uninstall_process_cb, &info);
 	    Dep dep( Dep::REQUIRES);
