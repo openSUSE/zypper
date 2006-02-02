@@ -49,33 +49,14 @@ namespace zypp
       {}
 
       /*
-      **
-      ** Do we need this?
-      ** Returns the (cached) count of physical media
-      ** (e.g. nr CDs on SLES10) of the set.
-      **
-      virtual MediaNr
-      mediaCount() const { return 0; }
-      */
-
-      /*
-      ** Check if the specified attached media in the source
-      ** contains desired media number (e.g. SLES10 CD1).
-      ** If not:
-      **   - ask user for correct media
-      **   - it will return retry/abort/....,
-      **     behave according to it
-      ** TODO: exact workflow, need callbacks?
+      ** Check if the specified attached media contains
+      ** the desired media number (e.g. SLES10 CD1).
       */
       virtual bool
-      isDesiredMedia(MediaAccessRef &ref, MediaNr mediaNr)
+      isDesiredMedia(const MediaAccessRef &ref, MediaNr mediaNr)
       {
         return false;
       }
-
-      /*
-      ** FIXME: signal function to trigger user interactions?
-      */
     };
 
 
@@ -93,10 +74,6 @@ namespace zypp
     //
     // CLASS NAME : MediaManager
     //
-    /**
-     * FIXME: may have static methods... perhaps we should
-     *        use a zypp::media::manager namespace instead?
-     */
     class MediaManager: public zypp::base::NonCopyable
     {
     public:
@@ -113,28 +90,69 @@ namespace zypp
        * close the media
        */
       void
-      close(MediaId id);
+      close(MediaId mediaId);
 
       /**
-       * attach the media using the concrete handler
+       * Query if media is open.
+       * \return true, if media id is known.
        */
-      void attach(MediaId mediaId, bool next = false);
+      bool
+      isOpen(MediaId mediaId) const;
 
       /**
-       * Release the attached media and optionally eject.
+       * Used Protocol if media is opened, otherwise 'unknown'.
        */
-      void release(MediaId mediaId, bool eject = false);
+      std::string
+      protocol(MediaId mediaId) const;
 
+      /**
+       * Url of the media, otherwise empty.
+       */
+      Url
+      url(MediaId mediaId) const;
+
+    public:
       /**
        * Add verifier for specified media id.
        */
-      void addVerifier(MediaId mediaId, MediaVerifierRef &ref);
+      void
+      addVerifier(MediaId mediaId, const MediaVerifierRef &ref);
 
       /**
        * Remove verifier for specified media id.
        */
-      void delVerifier(MediaId mediaId);
+      void
+      delVerifier(MediaId mediaId);
 
+    public:
+      /**
+       * attach the media using the concrete handler
+       */
+      void
+      attach(MediaId mediaId, bool next = false);
+
+      /**
+       * Release the attached media and optionally eject.
+       */
+      void
+      release(MediaId mediaId, bool eject = false);
+
+      /**
+       * Check if media is attached or not.
+       * \return True if media is attached.
+       */
+      bool
+      isAttached(MediaId mediaId) const;
+
+      /**
+       * Ask the registered verifier if the attached
+       * media is the desired one or not.
+       * \return True if desired media is attached.
+       */
+      bool
+      isDesiredMedia(MediaId mediaId, MediaNr mediaNr) const;
+
+    public:
       /**
        * Provide provide file denoted by relative path below of the
        * 'attach point' of the specified media and the path prefix
@@ -152,11 +170,12 @@ namespace zypp
        * \throws MediaException
        *
        */
-      void provideFile(MediaId mediaId,
-                       MediaNr mediaNr,
-                       const Pathname &filename,
-                       bool            cached    = false,
-                       bool            checkonly = false) const;
+      void
+      provideFile(MediaId mediaId,
+                  MediaNr mediaNr,
+                  const Pathname &filename,
+                  bool            cached    = false,
+                  bool            checkonly = false) const;
 
       /*
       ** FIXME: other from MediaHandler/MediaAccess interface...

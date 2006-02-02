@@ -16,6 +16,7 @@
 #include <zypp/thread/Mutex.h>
 #include <zypp/thread/MutexLock.h>
 
+#include <zypp/base/String.h>
 #include <zypp/base/Logger.h>
 #include <zypp/Pathname.h>
 #include <zypp/PathInfo.h>
@@ -167,48 +168,48 @@ namespace zypp
         ZYPP_THROW(MediaException("Invalid media id"));
 
       if( m_impl->hasVerifier( mediaId))
-        ZYPP_THROW(MediaException("Remove verifier first"));
-
-      if( m_impl->mediaAccMap[mediaId]->isAttached())
-        ZYPP_THROW(MediaException("Release media first"));
+        m_impl->mediaVfyMap.erase(mediaId);
 
       m_impl->mediaAccMap[mediaId]->close();
       m_impl->mediaAccMap.erase(mediaId);
     }
 
     // ---------------------------------------------------------------
-    void
-    MediaManager::attach(MediaId mediaId, bool next)
+    bool
+    MediaManager::isOpen(MediaId mediaId) const
     {
       MutexLock lock(g_Mutex);
 
-      if( !m_impl->hasMediaAcc( mediaId))
-        ZYPP_THROW(MediaException("Invalid media id"));
+      return m_impl->hasMediaAcc( mediaId);
+    }
 
-      if( !m_impl->hasVerifier( mediaId))
-        ZYPP_THROW(MediaException("Add a verifier first"));
+    // ---------------------------------------------------------------
+    std::string
+    MediaManager::protocol(MediaId mediaId) const
+    {
+      MutexLock lock(g_Mutex);
 
-      m_impl->mediaAccMap[mediaId]->attach(next);
+      if( m_impl->hasMediaAcc( mediaId))
+        return m_impl->mediaAccMap[mediaId]->protocol();
+      else
+        return std::string("unknown");
+    }
+
+    // ---------------------------------------------------------------
+    Url
+    MediaManager::url(MediaId mediaId) const
+    {
+      MutexLock lock(g_Mutex);
+
+      if( m_impl->hasMediaAcc( mediaId))
+        return m_impl->mediaAccMap[mediaId]->url();
+      else
+        return Url();
     }
 
     // ---------------------------------------------------------------
     void
-    MediaManager::release(MediaId mediaId, bool eject)
-    {
-      MutexLock lock(g_Mutex);
-
-      if( !m_impl->hasMediaAcc( mediaId))
-        ZYPP_THROW(MediaException("Invalid media id"));
-
-      if( !m_impl->hasVerifier( mediaId))
-        ZYPP_THROW(MediaException("Add a verifier first"));
-
-      m_impl->mediaAccMap[mediaId]->release(eject);
-    }
-
-    // ---------------------------------------------------------------
-    void
-    MediaManager::addVerifier(MediaId mediaId, MediaVerifierRef &ref)
+    MediaManager::addVerifier(MediaId mediaId, const MediaVerifierRef &ref)
     {
       MutexLock lock(g_Mutex);
 
@@ -218,6 +219,7 @@ namespace zypp
       if( !m_impl->hasMediaAcc( mediaId))
         ZYPP_THROW(MediaException("Invalid media id"));
 
+      // FIXME: just replace?
       if( m_impl->hasVerifier( mediaId))
         ZYPP_THROW(MediaException("Remove verifier first"));
 
@@ -233,10 +235,82 @@ namespace zypp
       if( !m_impl->hasMediaAcc( mediaId))
         ZYPP_THROW(MediaException("Invalid media id"));
 
-      if( !m_impl->hasVerifier( mediaId))
-        ZYPP_THROW(MediaException("Remove verifier first"));
+      if( m_impl->hasVerifier( mediaId))
+        m_impl->mediaVfyMap.erase(mediaId);
+    }
 
-      m_impl->mediaVfyMap.erase(mediaId);
+    // ---------------------------------------------------------------
+    void
+    MediaManager::attach(MediaId mediaId, bool next)
+    {
+      MutexLock lock(g_Mutex);
+
+      if( !m_impl->hasMediaAcc( mediaId))
+      {
+        ZYPP_THROW(MediaNotOpenException(
+          "Invalid media id " + str::numstring(mediaId)
+        ));
+      }
+
+      if( !m_impl->hasVerifier( mediaId))
+        ZYPP_THROW(MediaException("Add a verifier first"));
+
+      m_impl->mediaAccMap[mediaId]->attach(next);
+    }
+
+    // ---------------------------------------------------------------
+    void
+    MediaManager::release(MediaId mediaId, bool eject)
+    {
+      MutexLock lock(g_Mutex);
+
+      if( !m_impl->hasMediaAcc( mediaId))
+      {
+        ZYPP_THROW(MediaNotOpenException(
+          "Invalid media id " + str::numstring(mediaId)
+        ));
+      }
+
+      m_impl->mediaAccMap[mediaId]->release(eject);
+    }
+
+    // ---------------------------------------------------------------
+    bool
+    MediaManager::isAttached(MediaId mediaId) const
+    {
+      MutexLock lock(g_Mutex);
+
+      if( !m_impl->hasMediaAcc( mediaId))
+      {
+        // FIXME: throw or just return false?
+        ZYPP_THROW(MediaNotOpenException(
+          "Invalid media id " + str::numstring(mediaId)
+        ));
+      }
+      return m_impl->mediaAccMap[mediaId]->isAttached();
+    }
+
+    // ---------------------------------------------------------------
+    bool
+    MediaManager::isDesiredMedia(MediaId mediaId, MediaNr mediaNr) const
+    {
+      MutexLock lock(g_Mutex);
+
+      if( !isAttached(mediaId))
+        return false;
+
+      // FIXME: throw or just return false?
+      if( !m_impl->hasVerifier( mediaId))
+        ZYPP_THROW(MediaException("Add a verifier first"));
+
+      bool ok;
+      try {
+        ok = m_impl->mediaVfyMap[mediaId]->isDesiredMedia(
+          m_impl->mediaAccMap[mediaId], mediaNr
+        );
+      }
+      catch( ... ) { ok = false; }
+      return ok;
     }
 
     // ---------------------------------------------------------------
@@ -247,29 +321,16 @@ namespace zypp
     {
       MutexLock lock(g_Mutex);
 
-      if( !m_impl->hasMediaAcc( mediaId))
-        ZYPP_THROW(MediaException("Invalid media id"));
-
-      if( !m_impl->hasVerifier( mediaId))
-        ZYPP_THROW(MediaException("No verifier avaliable"));
-
-      if( !m_impl->mediaAccMap[mediaId]->isAttached())
+      if( !isDesiredMedia(mediaId, mediaNr))
       {
-        m_impl->mediaAccMap[mediaId]->attach(false);
-
-        // FIXME: exact communication workflow
-        if( !m_impl->mediaVfyMap[mediaId]->isDesiredMedia(
-             m_impl->mediaAccMap[mediaId], mediaNr))
-        {
-          m_impl->mediaAccMap[mediaId]->release(true);
-
-          ZYPP_THROW(MediaFileNotFoundException(
-            m_impl->mediaAccMap[mediaId]->url(), filename
-          ));
-        }
+        ZYPP_THROW(MediaFileNotFoundException(
+          m_impl->mediaAccMap[mediaId]->url(), filename
+        ));
       }
+
       m_impl->mediaAccMap[mediaId]->provideFile(filename, cached, checkonly);
     }
+
 
     //////////////////////////////////////////////////////////////////
   } // namespace media
