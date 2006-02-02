@@ -412,6 +412,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	CapFactory factory;
 	Capability cap = factory.parse (_item->kind(), _item->name(), Rel::EQ, _item->edition());
+	MIL << "Re-establish all freshens on " << cap << endl;
 	// pool ()->foreachFresheningResItem (cap, establish_freshens_cb, &info);
 	Dep dep( Dep::FRESHENS);
 	invokeOnEach( pool().byCapabilityIndexBegin( cap.index(), dep ), // begin()
