@@ -61,7 +61,13 @@ namespace zypp
       /** All resolvables in the target. */
       const ResStore & resolvables();
 
-      /** Comomit changes in the pool */
+      /** Sort according to prereqs and media numbers */
+      void getResolvablesToInsDel ( ResPool pool_r,
+				    PoolItemList & dellist_r,
+				    PoolItemList & instlist_r,
+				    PoolItemList & srclist_r );
+
+      /** Commit changes in the pool */
 #warning Add support for multiple medias - eg. limit only to CD1
       void commit(ResPool pool_r);
 

@@ -92,18 +92,34 @@ namespace zypp
 	{
 	  to_install.push_back(*it);
 	}
-	else if (it->status().isToBeUninstalled())
+	else if (it->status().isToBeUninstalled()
+		 && !it->status().isToBeUninstalledDueToObsolete())	// leave out obsoletes
 	{
 	  to_uninstall.push_back(*it);
 	}
-	else if (it->status().isInstalled())
+	else if (it->status().staysInstalled())
 	{
 	  installed.push_back(*it);
 	}
       }
-      // first uninstall what is to be uninstalled
-#warning FIXME this orderding doesn't honor the dependencies for removals
-      commit(to_uninstall);
+
+      if (to_uninstall.size() > 0 ) {
+
+	// sort delete list...
+
+	InstallOrder order(pool_r, to_uninstall, installed);
+	order.init();
+	const PoolItemList & uninstallorder(order.getTopSorted());
+
+	to_uninstall.clear();
+	for (PoolItemList::const_reverse_iterator it = uninstallorder.rbegin(); it != uninstallorder.rend(); ++it ) {
+	    to_uninstall.push_back (*it);
+	}
+
+	// first uninstall what is to be uninstalled
+	commit(to_uninstall);
+      }
+
       // now install what is to be installed
       InstallOrder order(pool_r, to_install, installed);
       order.init();
@@ -181,6 +197,17 @@ namespace zypp
 
     bool TargetImpl::providesFile (const std::string & name_str, const std::string & path_str) const
     { return _rpm.hasFile(path_str); }
+
+
+
+void
+TargetImpl::getResolvablesToInsDel ( ResPool pool_r,
+				    PoolItemList & dellist_r,
+				    PoolItemList & instlist_r,
+				    PoolItemList & srclist_r )
+{
+}
+
 
     /////////////////////////////////////////////////////////////////
   } // namespace target
