@@ -132,9 +132,10 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
     else {							// installed or no freshens or triggered freshens
 
 	CapSet requires = _item->dep(Dep::REQUIRES);			// check requirements
+	Capability missing;
 	for (iter = requires.begin(); iter != requires.end(); iter++) {
-	    const Capability cap = *iter;
-	    if (!context->requirementIsMet (cap)) {
+	    missing = *iter;
+	    if (!context->requirementIsMet (missing)) {
 		break;
 	    }
 	}
@@ -144,6 +145,8 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	}
 	else {
 	    MIL << "unfulfilled requirements -> incomplete" << endl;
+
+	    // we could issue a QueueItemInstall (_item) here but better lets blame the user
 	    context->incomplete (_item, _other_penalty);
 	}
     }
