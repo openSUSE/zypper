@@ -138,6 +138,22 @@ namespace zypp
       release(MediaId mediaId, bool eject = false);
 
       /**
+       * Disconnect a remote media.
+       *
+       * This is useful for media which e.g. holds open a connection
+       * to a server like FTP. After calling disconnect() the media
+       * object (attach point) is still valid and files are present.
+       *
+       * But after calling disconnect() it's not possible to call
+       * fetch more data using the provideFile() or provideDir()
+       * functions anymore.
+       *
+       * \throws MediaException
+       */
+      void
+      disconnect(MediaId mediaId);
+
+      /**
        * Check if media is attached or not.
        * \return True if media is attached.
        */
@@ -151,6 +167,25 @@ namespace zypp
        */
       bool
       isDesiredMedia(MediaId mediaId, MediaNr mediaNr) const;
+
+      /**
+       * Return the local directory that corresponds to medias url,
+       * no matter if media isAttached or not. Files requested will
+       * be available at 'localRoot() + filename' or even better
+       * 'localPath( filename )'
+       *
+       * If media is not open an empty pathname is returned.
+       */
+      Pathname
+      localRoot(MediaId mediaId) const;
+
+      /**
+       * Shortcut for 'localRoot() + pathname', but returns an empty
+       * pathname if media is not open.
+       * Files provided will be available at 'localPath(filename)'.
+       */
+      Pathname
+      localPath(MediaId mediaId, const Pathname & pathname) const;
 
     public:
       /**
@@ -177,9 +212,47 @@ namespace zypp
                   bool            cached    = false,
                   bool            checkonly = false) const;
 
-      /*
-      ** FIXME: other from MediaHandler/MediaAccess interface...
-      */
+      /**
+       */
+      void
+      provideDir(MediaId mediaId,
+                 MediaNr mediaNr,
+                 const Pathname & dirname ) const;
+
+      /**
+       */
+      void
+      provideDirTree(MediaId mediaId,
+                     MediaNr mediaNr,
+                     const Pathname & dirname ) const;
+
+      /**
+       */
+      void
+      releaseFile(MediaId mediaId,
+                  const Pathname & filename) const;
+
+      /**
+       */
+      void
+      releaseDir(MediaId mediaId,
+                 const Pathname & dirname ) const;
+
+      /**
+       */
+      void
+      releasePath(MediaId mediaId,
+                  const Pathname & pathname ) const;
+
+      /**
+       */
+      void dirInfo(MediaId mediaId,
+                   std::list<std::string> & retlist,
+                   const Pathname & dirname, bool dots = true ) const;
+
+      void dirInfo(MediaId mediaId,
+                   filesystem::DirContent & retlist,
+                   const Pathname & dirname, bool dots = true ) const;
 
     private:
       class  Impl;

@@ -275,6 +275,21 @@ namespace zypp
     }
 
     // ---------------------------------------------------------------
+    void
+    MediaManager::disconnect(MediaId mediaId)
+    {
+      MutexLock lock(g_Mutex);
+
+      if( !m_impl->hasMediaAcc( mediaId))
+      {
+        ZYPP_THROW(MediaNotOpenException(
+          "Invalid media id " + str::numstring(mediaId)
+        ));
+      }
+      return m_impl->mediaAccMap[mediaId]->disconnect();
+    }
+
+    // ---------------------------------------------------------------
     bool
     MediaManager::isAttached(MediaId mediaId) const
     {
@@ -314,6 +329,41 @@ namespace zypp
     }
 
     // ---------------------------------------------------------------
+    Pathname
+    MediaManager::localRoot(MediaId mediaId) const
+    {
+      MutexLock lock(g_Mutex);
+
+      if( !m_impl->hasMediaAcc( mediaId))
+      {
+        ZYPP_THROW(MediaNotOpenException(
+          "Invalid media id " + str::numstring(mediaId)
+        ));
+      }
+      Pathname path;
+      path = m_impl->mediaAccMap[mediaId]->localRoot();
+      return path;
+    }
+
+    // ---------------------------------------------------------------
+    Pathname
+    MediaManager::localPath(MediaId mediaId,
+                            const Pathname & pathname) const
+    {
+      MutexLock lock(g_Mutex);
+
+      if( !m_impl->hasMediaAcc( mediaId))
+      {
+        ZYPP_THROW(MediaNotOpenException(
+          "Invalid media id " + str::numstring(mediaId)
+        ));
+      }
+      Pathname path;
+      path = m_impl->mediaAccMap[mediaId]->localPath(pathname);
+      return path;
+    }
+
+    // ---------------------------------------------------------------
     void
     MediaManager::provideFile(MediaId mediaId, MediaNr mediaNr,
                               const Pathname &filename,
@@ -323,14 +373,127 @@ namespace zypp
 
       if( !isDesiredMedia(mediaId, mediaNr))
       {
-        ZYPP_THROW(MediaFileNotFoundException(
-          m_impl->mediaAccMap[mediaId]->url(), filename
+        ZYPP_THROW(MediaNotDesiredException(
+          m_impl->mediaAccMap[mediaId]->url(), mediaNr
         ));
       }
 
       m_impl->mediaAccMap[mediaId]->provideFile(filename, cached, checkonly);
     }
 
+    // ---------------------------------------------------------------
+    void
+    MediaManager::provideDir(MediaId mediaId,
+                             MediaNr mediaNr,
+                             const Pathname & dirname ) const
+    {
+      MutexLock lock(g_Mutex);
+
+      if( !isDesiredMedia(mediaId, mediaNr))
+      {
+        ZYPP_THROW(MediaNotDesiredException(
+          m_impl->mediaAccMap[mediaId]->url(), mediaNr
+        ));
+      }
+
+      m_impl->mediaAccMap[mediaId]->provideDir(dirname);
+    }
+
+    // ---------------------------------------------------------------
+    void
+    MediaManager::provideDirTree(MediaId mediaId,
+                                 MediaNr mediaNr,
+                                 const Pathname & dirname ) const
+    {
+      MutexLock lock(g_Mutex);
+
+      if( !isDesiredMedia(mediaId, mediaNr))
+      {
+        ZYPP_THROW(MediaNotDesiredException(
+          m_impl->mediaAccMap[mediaId]->url(), mediaNr
+        ));
+      }
+
+      m_impl->mediaAccMap[mediaId]->provideDirTree(dirname);
+    }
+
+    // ---------------------------------------------------------------
+    void
+    MediaManager::releaseFile(MediaId mediaId,
+                              const Pathname & filename) const
+    {
+      if( !m_impl->hasMediaAcc( mediaId))
+      {
+        ZYPP_THROW(MediaNotOpenException(
+          "Invalid media id " + str::numstring(mediaId)
+        ));
+      }
+
+      m_impl->mediaAccMap[mediaId]->releaseFile(filename);
+    }
+
+    // ---------------------------------------------------------------
+    void
+    MediaManager::releaseDir(MediaId mediaId,
+                             const Pathname & dirname) const
+    {
+      if( !m_impl->hasMediaAcc( mediaId))
+      {
+        ZYPP_THROW(MediaNotOpenException(
+          "Invalid media id " + str::numstring(mediaId)
+        ));
+      }
+
+      m_impl->mediaAccMap[mediaId]->releaseDir(dirname);
+    }
+
+
+    // ---------------------------------------------------------------
+    void
+    MediaManager::releasePath(MediaId mediaId,
+                              const Pathname & pathname) const
+    {
+      if( !m_impl->hasMediaAcc( mediaId))
+      {
+        ZYPP_THROW(MediaNotOpenException(
+          "Invalid media id " + str::numstring(mediaId)
+        ));
+      }
+
+      m_impl->mediaAccMap[mediaId]->releasePath(pathname);
+    }
+
+    // ---------------------------------------------------------------
+    void
+    MediaManager::dirInfo(MediaId mediaId,
+                          std::list<std::string> & retlist,
+                          const Pathname & dirname, bool dots) const
+    {
+      if( !m_impl->hasMediaAcc( mediaId))
+      {
+        ZYPP_THROW(MediaNotOpenException(
+          "Invalid media id " + str::numstring(mediaId)
+        ));
+      }
+
+      m_impl->mediaAccMap[mediaId]->dirInfo(retlist, dirname, dots);
+    }
+
+    // ---------------------------------------------------------------
+    void
+    MediaManager::dirInfo(MediaId mediaId,
+                          filesystem::DirContent & retlist,
+                          const Pathname & dirname, bool dots) const
+    {
+      if( !m_impl->hasMediaAcc( mediaId))
+      {
+        ZYPP_THROW(MediaNotOpenException(
+          "Invalid media id " + str::numstring(mediaId)
+        ));
+      }
+
+      m_impl->mediaAccMap[mediaId]->dirInfo(retlist, dirname, dots);
+    }
 
     //////////////////////////////////////////////////////////////////
   } // namespace media
