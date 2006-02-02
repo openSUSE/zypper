@@ -21,6 +21,7 @@
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
+#include "zypp/Pathname.h"
 #include <string>
 #include <list>
 #include <iostream>
@@ -313,7 +314,7 @@ namespace zypp {
         std::string sizePackage;
         std::string sizeInstalled;
         std::string sizeArchive;
-        std::string location;
+        Pathname location;
         std::string license;
         std::string vendor;
         std::string group;
