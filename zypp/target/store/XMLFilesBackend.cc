@@ -12,11 +12,13 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <cstdio>
+#include <fcntl.h>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/Exception.h"
 
 #include "zypp/Source.h"
-#include "zypp/source/yum/YUMSourceImpl.h"
 
 #include "zypp/target/store/xml/XMLPatchImpl.h"
 
@@ -36,9 +38,7 @@
 
 using std::endl;
 using namespace boost::filesystem;
-//using namespace boost::iostreams;
 using namespace zypp::parser::yum;
-using namespace zypp::source::yum;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -55,12 +55,9 @@ class XMLFilesBackend::Private
 {
   public:
   Private()
-  : source(Source_Ref::noSource)
   { }
   bool randomFileName;
-  Source_Ref  source;
-  YUMSourceImpl sourceimpl;
-  std::list<Resolvable::Kind> kinds;
+  std::set<Resolvable::Kind> kinds;
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -80,10 +77,10 @@ XMLFilesBackend::XMLFilesBackend()
   d->randomFileName = false;
 
   // types of resolvables stored
-  d->kinds.push_back(ResTraits<zypp::Patch>::kind);
-  d->kinds.push_back(ResTraits<zypp::Message>::kind);
-  d->kinds.push_back(ResTraits<zypp::Script>::kind);
-  d->kinds.push_back(ResTraits<zypp::Selection>::kind);
+  d->kinds.insert(ResTraits<zypp::Patch>::kind);
+  //d->kinds.push_back(ResTraits<zypp::Message>::kind);
+  //d->kinds.push_back(ResTraits<zypp::Script>::kind);
+  //d->kinds.push_back(ResTraits<zypp::Selection>::kind);
 
 	// check if the db exists
 	if (!isBackendInitialized())
@@ -221,7 +218,8 @@ Resolvable::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Reso
     YUMPatchParser iter(res_file,"");
     for (; !iter.atEnd(); ++iter)
     {
-      resolvable = d->sourceimpl.createPatch(d->source, **iter);
+      DBG << "here..." << std::endl;
+      resolvable = createPatch(**iter);
       break;
     }
   }
@@ -238,7 +236,7 @@ XMLFilesBackend::storedObjects()
   DBG << std::endl;
   std::list<Resolvable::Ptr> objects;
 
-  std::list<Resolvable::Kind>::const_iterator it_kinds;
+  std::set<Resolvable::Kind>::const_iterator it_kinds;
   for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
   {
     Resolvable::Kind kind = (*it_kinds);
@@ -246,7 +244,7 @@ XMLFilesBackend::storedObjects()
     std::list<Resolvable::Ptr>::iterator it;
     for( it = objects_for_kind.begin(); it != objects_for_kind.end(); ++it)
     {
-      DBG << "adding objects back" << std::endl;
+      //DBG << "adding objects back" << std::endl;
       objects.push_back(*it);
     }
   }
@@ -258,27 +256,30 @@ XMLFilesBackend::storedObjects(const Resolvable::Kind kind)
 {
   std::list<Resolvable::Ptr> objects;
   std::string dir_path = dirForResolvableKind(kind);
-  DBG << "objects in ... " << dir_path << std::endl;
+  DBG << "Reading objects of kind " << resolvableKindToString(kind) << " in " << dir_path << std::endl;
   directory_iterator end_iter;
   // return empty list if the dir does not exist
   if ( !exists( dir_path ) )
+  {
+    ERR << "path " << dir_path << " does not exists. Required to read objects of kind " << resolvableKindToString(kind) << std::endl;
     return std::list<Resolvable::Ptr>();
+  }
 
   for ( directory_iterator dir_itr( dir_path ); dir_itr != end_iter; ++dir_itr )
   {
     DBG << "[" << resolvableKindToString( kind, false ) << "] - " << dir_itr->leaf() << std::endl;
     objects.push_back( resolvableFromFile( dir_path + "/" + dir_itr->leaf(), kind) );
   }
-  DBG << "done" << std::endl;
-  return storedObjects();
+  MIL << "done reading stored objecs of kind " << resolvableKindToString(kind) << std::endl;
+  return objects;
 }
 
 std::list<Resolvable::Ptr>
-XMLFilesBackend::storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match)
+XMLFilesBackend::storedObjects(const Resolvable::Kind kind, const std::string & name, bool partial_match)
 {
   std::list<Resolvable::Ptr> result;
   std::list<Resolvable::Ptr> all;
-  all = storedObjects();
+  all = storedObjects(kind);
   std::list<Resolvable::Ptr>::iterator it;
   for( it = all.begin(); it != all.end(); ++it)
   {
@@ -286,25 +287,26 @@ XMLFilesBackend::storedObjects(const Resolvable::Kind, const std::string & name,
     if (item->name() == name )
       result.push_back(item);
   }
+  MIL << "done reading stored objecs of kind " << resolvableKindToString(kind) << " and keyword [" << name <<"]" << std::endl;
   return result;
 }
 
 Patch::Ptr
-XMLFilesBackend::createPatch( const zypp::parser::yum::YUMPatchData & parsed )
+XMLFilesBackend::createPatch( const zypp::parser::yum::YUMPatchData & parsed ) const
 {
   try
   {
-    /*
-      std::string _patch_id;
-      int _timestamp;
-      TranslatedText _summary;
-      TranslatedText _description;
-      std::string _category;
-      bool _reboot_needed;
-      bool _affects_pkg_manager;
-      AtomList _atoms;
-    */
     shared_ptr<XMLPatchImpl> impl(new XMLPatchImpl());
+    impl->_patch_id = parsed.patchId;
+    impl->_timestamp = str::strtonum<time_t>(parsed.timestamp);
+    impl->_category = parsed.category;
+    impl->_reboot_needed = parsed.rebootNeeded;
+    impl->_affects_pkg_manager = parsed.packageManager;
+    /* impl._atoms -> std::list<shared_ptr<YUMPatchAtom> > parsed.atoms */
+    /*
+    impl._summary from parsed.summary (list of MultiLang.(lang and text));
+    impl._description from parsed.summary (list of MultiLang.(lang and text));
+    */
     
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name,
@@ -321,7 +323,7 @@ XMLFilesBackend::createPatch( const zypp::parser::yum::YUMPatchData & parsed )
 }
 
 Dependencies 
-XMLFilesBackend::createDependencies( const zypp::parser::yum::YUMObjectData & parsed, const Resolvable::Kind my_kind )
+XMLFilesBackend::createDependencies( const zypp::parser::yum::YUMObjectData & parsed, const Resolvable::Kind my_kind ) const
 {
   Dependencies _deps;
   for (std::list<YUMDependency>::const_iterator it = parsed.provides.begin(); it != parsed.provides.end(); it++)
@@ -356,7 +358,7 @@ XMLFilesBackend::createDependencies( const zypp::parser::yum::YUMObjectData & pa
   }
 
 Dependencies 
-XMLFilesBackend::createGroupDependencies( const zypp::parser::yum::YUMGroupData & parsed )
+XMLFilesBackend::createGroupDependencies( const zypp::parser::yum::YUMGroupData & parsed ) const
 {
   Dependencies _deps;
 
@@ -378,7 +380,7 @@ XMLFilesBackend::createGroupDependencies( const zypp::parser::yum::YUMGroupData 
 }
 
 Dependencies
-XMLFilesBackend::createPatternDependencies( const zypp::parser::yum::YUMPatternData & parsed )
+XMLFilesBackend::createPatternDependencies( const zypp::parser::yum::YUMPatternData & parsed ) const
 {
   Dependencies _deps;
 
@@ -400,7 +402,7 @@ XMLFilesBackend::createPatternDependencies( const zypp::parser::yum::YUMPatternD
 }
 
 Capability
-XMLFilesBackend::createCapability(const YUMDependency & dep, const Resolvable::Kind & my_kind)
+XMLFilesBackend::createCapability(const YUMDependency & dep, const Resolvable::Kind & my_kind) const
 {
   CapFactory _f;
   Resolvable::Kind _kind = dep.kind == "" ? my_kind : Resolvable::Kind(dep.kind);

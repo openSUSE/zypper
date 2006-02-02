@@ -100,11 +100,11 @@ public:
     */
   Resolvable::Ptr resolvableFromFile( std::string file_path, Resolvable::Kind kind ) const;
 
-  Patch::Ptr createPatch( const zypp::parser::yum::YUMPatchData & parsed );
-  Dependencies createDependencies( const zypp::parser::yum::YUMObjectData & parsed, const Resolvable::Kind my_kind );
-  Dependencies createGroupDependencies( const zypp::parser::yum::YUMGroupData & parsed );
-  Dependencies createPatternDependencies( const zypp::parser::yum::YUMPatternData & parsed );
-  Capability createCapability(const YUMDependency & dep, const Resolvable::Kind & my_kind);
+  Patch::Ptr createPatch( const zypp::parser::yum::YUMPatchData & parsed ) const;
+  Dependencies createDependencies( const zypp::parser::yum::YUMObjectData & parsed, const Resolvable::Kind my_kind ) const;
+  Dependencies createGroupDependencies( const zypp::parser::yum::YUMGroupData & parsed ) const;
+  Dependencies createPatternDependencies( const zypp::parser::yum::YUMPatternData & parsed ) const;
+  Capability createCapability(const YUMDependency & dep, const Resolvable::Kind & my_kind) const;
 
   private:
   class Private;
