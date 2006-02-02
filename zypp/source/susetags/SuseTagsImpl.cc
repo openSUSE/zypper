@@ -18,7 +18,8 @@
 
 #include "zypp/source/susetags/SuseTagsImpl.h"
 #include "zypp/source/susetags/PackagesParser.h"
-#include "zypp/source/susetags/SelectionSelFileParser.h"
+#include "zypp/source/susetags/SelectionTagFileParser.h"
+#include "zypp/source/susetags/PatternTagFileParser.h"
 
 #include "zypp/SourceFactory.h"
 
@@ -84,7 +85,7 @@ namespace zypp
 
 	std::ifstream sels (p.asString().c_str());
 
-	while (!sels.eof())
+	while (sels && !sels.eof())
 	{
             std::string selfile;
 
@@ -95,7 +96,7 @@ namespace zypp
 	    DBG << "Going to parse selection " << selfile << endl;
 
 	    Pathname file = provideFile(_path + "suse/setup/descr/" + selfile);
-	    DBG << "Selection file to parse " << file << endl;
+	    MIL << "Selection file to parse " << file << endl;
 
 	    Selection::Ptr sel( parseSelection( file ) );
 
@@ -103,6 +104,34 @@ namespace zypp
 
 	    if (sel)
     		_store.insert( sel );
+
+	    DBG << "Parsing of " << file << " done" << endl;
+	}
+
+	// parse patterns
+	p = provideFile(_path + "suse/setup/descr/patterns");
+
+	std::ifstream pats (p.asString().c_str());
+
+	while (pats && !pats.eof())
+	{
+            std::string patfile;
+
+	    getline(pats,patfile);
+
+	    if (patfile.empty() ) continue;
+
+	    DBG << "Going to parse pattern " << patfile << endl;
+
+	    Pathname file = provideFile(_path + "suse/setup/descr/" + patfile);
+	    MIL << "Pattern file to parse " << file << endl;
+
+	    Pattern::Ptr pat( parsePattern( file ) );
+
+	    DBG << "Pattern:" << pat << endl;
+
+	    if (pat)
+    		_store.insert( pat );
 
 	    DBG << "Parsing of " << file << " done" << endl;
 	}

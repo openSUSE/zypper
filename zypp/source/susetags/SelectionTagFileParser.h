@@ -9,8 +9,8 @@
 /** \file	zypp/parser/tagfile/Parser.h
  *
 */
-#ifndef ZYPP_PARSER_TAGFILE_SelectionSelFilePARSER_H
-#define ZYPP_PARSER_TAGFILE_SelectionSelFilePARSER_H
+#ifndef ZYPP_PARSER_TAGFILE_SELECTIONTAGFILEPARSER_H
+#define ZYPP_PARSER_TAGFILE_SELECTIONTAGFILEPARSER_H
 
 #include <iosfwd>
 #include <set>
@@ -36,16 +36,16 @@ namespace zypp
 
       ///////////////////////////////////////////////////////////////////
       //
-      //	CLASS NAME : SelectionSelFileParser
+      //	CLASS NAME : SelectionTagFileParser
       //
       /** Tagfile parser. */
-      struct SelectionSelFileParser : public zypp::parser::tagfile::TagFileParser
+      struct SelectionTagFileParser : public zypp::parser::tagfile::TagFileParser
       {
         Selection::Ptr result;
         shared_ptr<SuseTagsSelectionImpl> selImpl;
         
-        SelectionSelFileParser();
-        virtual ~SelectionSelFileParser()
+        SelectionTagFileParser();
+        virtual ~SelectionTagFileParser()
         {}
 
         void consume( const SingleTag &tag );
@@ -64,4 +64,4 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 //
-#endif //  ZYPP_PARSER_TAGFILE_SelectionSelFilePPARSER_H
+#endif //  ZYPP_PARSER_TAGFILE_SELECTIONTAGFILEPPARSER_H

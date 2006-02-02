@@ -11,8 +11,10 @@ sourceinclude_HEADERS =	\
 	PackagesParser.h\
 	SuseTagsImpl.h \
 	SuseTagsSelectionImpl.h \
+	SuseTagsPatternImpl.h \
 	SuseTagsPackageImpl.h \
-	SelectionSelFileParser.h \
+	SelectionTagFileParser.h \
+	PatternTagFileParser.h \
 	ProductMetadataParser.h \
 	MediaMetadataParser.h \
 	MediaPatchesMetadataParser.h
@@ -25,8 +27,10 @@ lib@PACKAGE@_source_susetags_la_SOURCES = \
 	PackagesParser.cc	\
 	SuseTagsImpl.cc \
 	SuseTagsSelectionImpl.cc \
+	SuseTagsPatternImpl.cc \
 	SuseTagsPackageImpl.cc \
-	SelectionSelFileParser.cc \
+	SelectionTagFileParser.cc \
+	PatternTagFileParser.cc \
 	ProductMetadataParser.cc \
 	MediaMetadataParser.cc \
 	MediaPatchesMetadataParser.cc

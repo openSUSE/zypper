@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/parser/tagfile/SelectionSelFileParser.cc
+/** \file	zypp/parser/tagfile/SelectionTagFileParser.cc
  *
 */
 #include <iostream>
@@ -21,9 +21,10 @@
 #include "zypp/base/String.h"
 #include "zypp/CapFactory.h"
 
-#include "zypp/source/susetags/SelectionSelFileParser.h"
+#include "zypp/source/susetags/SelectionTagFileParser.h"
 #include <boost/regex.hpp>
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "SelectionsTagFileParser"
 
 using namespace std;
@@ -41,18 +42,18 @@ namespace zypp
 
       Selection::Ptr parseSelection( const Pathname & file_r )
       {
-        SelectionSelFileParser p;
+        SelectionTagFileParser p;
         p.parse( file_r );
         return p.result;
 
       }
 
-      SelectionSelFileParser::SelectionSelFileParser()
+      SelectionTagFileParser::SelectionTagFileParser()
       {
         selImpl = shared_ptr<SuseTagsSelectionImpl>(new SuseTagsSelectionImpl);
       }
 
-      void SelectionSelFileParser::consume( const SingleTag &tag )
+      void SelectionTagFileParser::consume( const SingleTag &tag )
       {
         if ( tag.name == "Sum" )
         {
@@ -87,7 +88,7 @@ namespace zypp
         }
       }
       
-      void SelectionSelFileParser::consume( const MultiTag &tag )
+      void SelectionTagFileParser::consume( const MultiTag &tag )
       {
         if ( tag.name == "Req" )
         {
@@ -107,7 +108,7 @@ namespace zypp
         }
       }
 
-      void SelectionSelFileParser::endParse()
+      void SelectionTagFileParser::endParse()
       {
         #warning FIXME how to insert the specific language packages
         CapFactory _f;
