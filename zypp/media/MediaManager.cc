@@ -149,11 +149,10 @@ namespace zypp
 
       // create new access handler for it
       MediaAccessRef accRef( new MediaAccess());
-      MediaId        nextId( m_impl->nextMediaId());
-
-      m_impl->mediaAccMap[nextId] = accRef;
 
       accRef->open(url, preferred_attach_point);
+
+      m_impl->mediaAccMap[m_impl->nextMediaId()] = accRef;
 
       return nextId;
     }
