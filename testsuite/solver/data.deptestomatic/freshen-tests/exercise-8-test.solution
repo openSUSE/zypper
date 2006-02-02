@@ -1,4 +1,4 @@
 >!> Establishing state ...
 >!> Established context
->!> patch:Patch-A-1.1-1[test] UUTs_<satisfied><uneeded>
+>!> patch:Patch-A-1.1-1[test] UU__<satisfied><uneeded>
 >!> Installing Patch-A from channel test

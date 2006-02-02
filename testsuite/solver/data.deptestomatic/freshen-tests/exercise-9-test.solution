@@ -1,7 +1,6 @@
 >!> Establishing state ...
->!> Establishing patch:Patch-A-1.1-1[test]
 >!> Established context
->!> patch:Patch-A-1.1-1[test] incomplete
+>!> patch:Patch-A-1.1-1[test] U_Ts_<needed>
 >!> Installing Patch-A from channel test
 >!> Calculating installation order ...
 >!> Solution #1:

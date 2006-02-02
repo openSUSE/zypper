@@ -1,11 +1,9 @@
 >!> Establishing state ...
->!> Establishing patch:Patch-A-1.1-1[test]
 >!> Established context
->!> patch:Patch-A-1.1-1[test] satisfied
+>!> patch:Patch-A-1.1-1[test] UU__<satisfied><uneeded>
 >!> Installing B from channel core
 >!> Establishing state ...
->!> Establishing patch:Patch-A-1.1-1[test]
 >!> Established context
->!> B-1.0-1[core] to be installed
->!> patch:Patch-A-1.1-1[test] satisfied
+>!> B-1.0-1[core] U_Ts_<tobeinstalled>
+>!> patch:Patch-A-1.1-1[test] UU__<satisfied><uneeded>
 >!> Freshening ...

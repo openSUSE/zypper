@@ -1,9 +1,7 @@
 >!> Establishing state ...
->!> Establishing patch:Patch-A-1.1-1
 >!> Established context
->!> patch:Patch-A-1.1-1 satisfied
+>!> patch:Patch-A-1.1-1 I___<complete>
 >!> Uninstalling Patch-A
 >!> Establishing state ...
->!> Establishing patch:Patch-A-1.1-1
 >!> Established context
->!> patch:Patch-A-1.1-1 to be uninstalled
+>!> patch:Patch-A-1.1-1 I_Ts_<tobeuninstalled>
