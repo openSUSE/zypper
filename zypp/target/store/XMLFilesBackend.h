@@ -14,8 +14,12 @@
 
 #include <iosfwd>
 
+#include "zypp/parser/yum/YUMParser.h"
+#include "zypp/parser/yum/YUMParserData.h"
 #include "zypp/base/PtrTypes.h"
 #include "Backend.h"
+
+using namespace zypp::parser::yum;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -95,6 +99,12 @@ public:
     * Does not care if the resolvable is yet stored or not
     */
   Resolvable::Ptr resolvableFromFile( std::string file_path, Resolvable::Kind kind ) const;
+
+  Patch::Ptr createPatch( const zypp::parser::yum::YUMPatchData & parsed );
+  Dependencies createDependencies( const zypp::parser::yum::YUMObjectData & parsed, const Resolvable::Kind my_kind );
+  Dependencies createGroupDependencies( const zypp::parser::yum::YUMGroupData & parsed );
+  Dependencies createPatternDependencies( const zypp::parser::yum::YUMPatternData & parsed );
+  Capability createCapability(const YUMDependency & dep, const Resolvable::Kind & my_kind);
 
   private:
   class Private;

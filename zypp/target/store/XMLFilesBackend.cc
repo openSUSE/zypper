@@ -17,7 +17,8 @@
 
 #include "zypp/Source.h"
 #include "zypp/source/yum/YUMSourceImpl.h"
-#include "zypp/parser/yum/YUMParser.h"
+
+#include "zypp/target/store/xml/XMLPatchImpl.h"
 
 #include <iostream>
 #include <fstream>
@@ -59,6 +60,7 @@ class XMLFilesBackend::Private
   bool randomFileName;
   Source_Ref  source;
   YUMSourceImpl sourceimpl;
+  std::list<Resolvable::Kind> kinds;
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -76,6 +78,13 @@ XMLFilesBackend::XMLFilesBackend()
 {
   d = new Private;
   d->randomFileName = false;
+
+  // types of resolvables stored
+  d->kinds.push_back(ResTraits<zypp::Patch>::kind);
+  d->kinds.push_back(ResTraits<zypp::Message>::kind);
+  d->kinds.push_back(ResTraits<zypp::Script>::kind);
+  d->kinds.push_back(ResTraits<zypp::Selection>::kind);
+
 	// check if the db exists
 	if (!isBackendInitialized())
 	{
@@ -228,12 +237,9 @@ XMLFilesBackend::storedObjects()
 {
   DBG << std::endl;
   std::list<Resolvable::Ptr> objects;
-  std::list<Resolvable::Kind> kinds;
-  // only patches for now
-  kinds.push_back(ResTraits<zypp::Patch>::kind);
 
   std::list<Resolvable::Kind>::const_iterator it_kinds;
-  for ( it_kinds = kinds.begin() ; it_kinds != kinds.end(); ++it_kinds )
+  for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
   {
     Resolvable::Kind kind = (*it_kinds);
     std::list<Resolvable::Ptr> objects_for_kind = storedObjects(kind);
@@ -281,6 +287,133 @@ XMLFilesBackend::storedObjects(const Resolvable::Kind, const std::string & name,
       result.push_back(item);
   }
   return result;
+}
+
+Patch::Ptr
+XMLFilesBackend::createPatch( const zypp::parser::yum::YUMPatchData & parsed )
+{
+  try
+  {
+    /*
+      std::string _patch_id;
+      int _timestamp;
+      TranslatedText _summary;
+      TranslatedText _description;
+      std::string _category;
+      bool _reboot_needed;
+      bool _affects_pkg_manager;
+      AtomList _atoms;
+    */
+    shared_ptr<XMLPatchImpl> impl(new XMLPatchImpl());
+    
+    // Collect basic Resolvable data
+    NVRAD dataCollect( parsed.name,
+                       Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch,
+                       createDependencies(parsed, ResTraits<Patch>::kind) );
+    Patch::Ptr patch = detail::makeResolvableFromImpl( dataCollect, impl );
+    return patch;
+  }
+  catch (const Exception & excpt_r)
+  {
+    ERR << excpt_r << endl;
+    throw "Cannot create patch object";
+  }
+}
+
+Dependencies 
+XMLFilesBackend::createDependencies( const zypp::parser::yum::YUMObjectData & parsed, const Resolvable::Kind my_kind )
+{
+  Dependencies _deps;
+  for (std::list<YUMDependency>::const_iterator it = parsed.provides.begin(); it != parsed.provides.end(); it++)
+  {
+    _deps[Dep::PROVIDES].insert(createCapability(*it, my_kind));
+  }
+
+  for (std::list<YUMDependency>::const_iterator it = parsed.conflicts.begin(); it != parsed.conflicts.end(); it++)
+  {
+    _deps[Dep::CONFLICTS].insert(createCapability(*it, my_kind));
+  }
+  
+  for (std::list<YUMDependency>::const_iterator it = parsed.obsoletes.begin(); it != parsed.obsoletes.end(); it++)
+  {
+    _deps[Dep::OBSOLETES].insert(createCapability(*it, my_kind));
+  }
+
+  for (std::list<YUMDependency>::const_iterator it = parsed.freshen.begin(); it != parsed.freshen.end(); it++)
+  {
+    _deps[Dep::FRESHENS].insert(createCapability(*it, my_kind));
+  }
+
+  for (std::list<YUMDependency>::const_iterator it = parsed.requires.begin(); it != parsed.requires.end(); it++)
+  {
+    if (it->pre == "1")
+      _deps[Dep::PREREQUIRES].insert(createCapability(*it, my_kind));
+    else
+      _deps[Dep::REQUIRES].insert(createCapability(*it, my_kind));
+  }
+
+    return _deps;
+  }
+
+Dependencies 
+XMLFilesBackend::createGroupDependencies( const zypp::parser::yum::YUMGroupData & parsed )
+{
+  Dependencies _deps;
+
+  for (std::list<PackageReq>::const_iterator it = parsed.packageList.begin(); it != parsed.packageList.end(); it++)
+  {
+    if (it->type == "mandatory" || it->type == "")
+    {
+      _deps[Dep::REQUIRES].insert(createCapability(YUMDependency( "", it->name, "EQ", it->epoch, it->ver, it->rel, "" ), ResTraits<Package>::kind));
+    }
+  }
+  for (std::list<MetaPkg>::const_iterator it = parsed.grouplist.begin(); it != parsed.grouplist.end(); it++)
+  {
+    if (it->type == "mandatory" || it->type == "")
+    {
+      _deps[Dep::REQUIRES].insert(createCapability(YUMDependency("", it->name, "", "", "", "", "" ), ResTraits<Selection>::kind));
+    }
+  }
+  return _deps;
+}
+
+Dependencies
+XMLFilesBackend::createPatternDependencies( const zypp::parser::yum::YUMPatternData & parsed )
+{
+  Dependencies _deps;
+
+  for (std::list<PackageReq>::const_iterator it = parsed.packageList.begin(); it != parsed.packageList.end(); it++)
+  {
+    if (it->type == "mandatory" || it->type == "")
+    {
+      _deps[Dep::REQUIRES].insert(createCapability(YUMDependency( "", it->name, "EQ", it->epoch, it->ver, it->rel, "" ), ResTraits<Package>::kind));
+    }
+  }
+  for (std::list<MetaPkg>::const_iterator it = parsed.patternlist.begin(); it != parsed.patternlist.end(); it++)
+  {
+    if (it->type == "mandatory" || it->type == "")
+    {
+      _deps[Dep::REQUIRES].insert(createCapability(YUMDependency( "", it->name, "", "", "", "", "" ), ResTraits<Selection>::kind));
+    }
+  }
+  return _deps;
+}
+
+Capability
+XMLFilesBackend::createCapability(const YUMDependency & dep, const Resolvable::Kind & my_kind)
+{
+  CapFactory _f;
+  Resolvable::Kind _kind = dep.kind == "" ? my_kind : Resolvable::Kind(dep.kind);
+  Capability cap;
+  if ( ! dep.isEncoded() )
+  {
+    cap = _f.parse( _kind, dep.name, Rel(dep.flags), Edition(dep.ver, dep.rel, dep.epoch) );
+  }
+  else
+  {
+    cap = _f.parse( _kind, dep.encoded );
+  }
+  return cap;
 }
 
 ///////////////////////////////////////////////////////////////////
