@@ -48,6 +48,7 @@ class QueueItemEstablish : public QueueItem {
 
   private:
     PoolItem_Ref _item;
+    bool _soft;
     int _channel_priority;
     int _other_penalty;
 
@@ -55,7 +56,7 @@ class QueueItemEstablish : public QueueItem {
 
   public:
 
-    QueueItemEstablish (const ResPool & pool, PoolItem_Ref item);
+    QueueItemEstablish (const ResPool & pool, PoolItem_Ref item, bool soft = false);
     virtual ~QueueItemEstablish();
 
     // ---------------------------------- I/O

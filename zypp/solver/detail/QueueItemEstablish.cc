@@ -64,9 +64,10 @@ QueueItemEstablish::dumpOn( std::ostream & os ) const
 
 //---------------------------------------------------------------------------
 
-QueueItemEstablish::QueueItemEstablish (const ResPool & pool, PoolItem_Ref item)
+QueueItemEstablish::QueueItemEstablish (const ResPool & pool, PoolItem_Ref item, bool soft)
     : QueueItem (QUEUE_ITEM_TYPE_ESTABLISH, pool)
     , _item(item)
+    , _soft(soft)
     , _channel_priority (0)
     , _other_penalty (0)
     , _explicitly_requested (false)
@@ -154,7 +155,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 QueueItem_Ptr
 QueueItemEstablish::copy (void) const
 {
-    QueueItemEstablish_Ptr new_install = new QueueItemEstablish (pool(), _item);
+    QueueItemEstablish_Ptr new_install = new QueueItemEstablish (pool(), _item, _soft);
     new_install->QueueItem::copy(this);
 
     new_install->_channel_priority = _channel_priority;
