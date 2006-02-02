@@ -134,6 +134,11 @@ namespace zypp
 	<< ": " << _msg << endl;
     }
 
+    std::ostream & MediaNotDesiredException::dumpOn( std::ostream & str ) const
+    {
+      return str << "Media source " << _url << " does not contain the desired media number: " << _nr << endl;
+    }
+
   /////////////////////////////////////////////////////////////////
   } // namespace media
 } // namespace zypp

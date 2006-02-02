@@ -351,6 +351,23 @@ namespace zypp
       std::string _msg;
     };
 
+    class MediaNotDesiredException : public MediaException
+    {
+    public:
+      MediaNotDesiredException(const Url & url_r,
+                             unsigned int mediaNr)
+      : MediaException()
+      , _url(url_r.asString())
+      , _nr(mediaNr)
+      {}
+      virtual ~MediaNotDesiredException() throw() {};
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+    private:
+      std::string  _url;
+      unsigned int _nr;
+    };
+
   /////////////////////////////////////////////////////////////////
   } // namespace media
 } // namespace zypp
