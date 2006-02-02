@@ -4,10 +4,7 @@
 
 LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
 
-#noinst_PROGRAMS = yum
-
-#yum_SOURCES = yum.cc
-
-noinst_PROGRAMS = susetagstest
-susetagstest_SOURCES = SuseTagsTest.cc
+noinst_PROGRAMS = selectiontagparsertest patterntagparsertest
+selectiontagparsertest_SOURCES = SelectionTagParserTest.cc
+patterntagparsertest_SOURCES = PatternTagParserTest.cc
 
