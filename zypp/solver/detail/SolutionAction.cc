@@ -105,7 +105,14 @@ InjectSolutionAction::dumpOn( ostream& os ) const
     os << "InjectSolutionAction: ";
     os << _capability;
     os << ", ";
-    os << _kind;
+    switch (_kind) {
+	case REQUIRES:	os << "Requires"; break;
+	case CONFLICTS:	os << "Conflicts"; break;
+	case ARCHITECTURE: os << "Architecture"; break;
+	default: os << "Wrong kind"; break;
+    }
+    os << " ";
+    os << _item;	    
     os << endl;
     return os;
 }
@@ -152,7 +159,7 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 bool
 InjectSolutionAction::execute(Resolver & resolver) const
 {
-    if (_kind == Dep::CONFLICTS) {
+    if (_kind == CONFLICTS) {
 	// removing conflict in both resolvables
 	Dependencies dependencies = _item.resolvable()->deps();
 	CapSet depList = dependencies[Dep::CONFLICTS];
@@ -166,15 +173,17 @@ InjectSolutionAction::execute(Resolver & resolver) const
 	{
 	    resolver.addIgnoreConflict (_otherItem, _capability);
 	}
-    } else if (_kind  == Dep::PROVIDES) {
+    } else if (_kind  == REQUIRES) {
 	// removing the requires dependency from the item
 	resolver.addIgnoreRequires (_item, _capability);
+    } else if (_kind  == ARCHITECTURE) {
+	// ignoring architecture
+	resolver.addIgnoreArchitecture (_item);	
     } else {
 	ERR << "No valid InjectSolutionAction kind found" << endl;
 	return false;
     }
-#warning Disabling capabilities currently not possible;
-//    resolvable->deprecatedSetDeps(dependencies);
+
     return true;
 }
 

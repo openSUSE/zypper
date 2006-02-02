@@ -225,7 +225,10 @@ Resolver::problems (void) const
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package,patch,...				
 		what = misc_info->message();
-		// currently no solution available		
+		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		problem->addSolution (new ProblemSolutionIgnoreArch (problem, item));
+		problems.push_back (problem);
+		problem_created = true;		
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_INSTALL_PARALLEL: {			// Can't install p, since a resolvable of the same name is already marked as needing to be installed.
@@ -279,7 +282,7 @@ Resolver::problems (void) const
 		details = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// Add dummy provides
-		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::REQUIRES, item, misc_info->capability())); 
+		problem->addSolution (new ProblemSolutionIgnoreRequires (problem, item, misc_info->capability())); 
 		problems.push_back (problem);
 		problem_created = true;
 	    }
@@ -291,7 +294,7 @@ Resolver::problems (void) const
 		details = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// Add dummy provides
-		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::REQUIRES, item, misc_info->capability())); 
+		problem->addSolution (new ProblemSolutionIgnoreRequires (problem, item, misc_info->capability())); 
 		problems.push_back (problem);
 		problem_created = true;		
 	    }
@@ -347,7 +350,7 @@ Resolver::problems (void) const
 		what = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// Add dummy provides
-		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::REQUIRES, item, misc_info->capability())); 
+		problem->addSolution (new ProblemSolutionIgnoreRequires (problem, item, misc_info->capability())); 
 		problems.push_back (problem);
 		problem_created = true;		
 	    }
@@ -391,8 +394,8 @@ Resolver::problems (void) const
 		problem->addSolution (new ProblemSolutionUninstall (problem, item));
 		// Remove conflict in the resolvable which has to be installed
 		
-		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::CONFLICTS, item, misc_info->capability(),
-								 misc_info->other())); 
+		problem->addSolution (new ProblemSolutionIgnoreConflicts (problem, item, misc_info->capability(),
+									  misc_info->other())); 
 		problems.push_back (problem);
 		problem_created = true;
 		
@@ -412,8 +415,8 @@ Resolver::problems (void) const
 		// Uninstall p
 		problem->addSolution (new ProblemSolutionUninstall (problem, resItem));
 		// Remove conflict in the resolvable which has to be installed
-		problem->addSolution (new ProblemSolutionIgnore (problem, Dep::CONFLICTS, resItem, misc_info->capability(),
-								 misc_info->other())); 
+		problem->addSolution (new ProblemSolutionIgnoreConflicts (problem, resItem, misc_info->capability(),
+									  misc_info->other())); 
 		problems.push_back (problem);
 		problem_created = true;		
 #endif

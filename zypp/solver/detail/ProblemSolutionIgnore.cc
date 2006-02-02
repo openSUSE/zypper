@@ -39,44 +39,39 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-IMPL_PTR_TYPE(ProblemSolutionIgnore);
+IMPL_PTR_TYPE(ProblemSolutionIgnoreConflicts);
+IMPL_PTR_TYPE(ProblemSolutionIgnoreRequires);
+IMPL_PTR_TYPE(ProblemSolutionIgnoreArch);
 
 //---------------------------------------------------------------------------
 
-ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
-					      const Dep &kind, 
-					      PoolItem_Ref item,
-					      const Capability & capability)
+ProblemSolutionIgnoreRequires::ProblemSolutionIgnoreRequires( ResolverProblem_Ptr parent,
+							      PoolItem_Ref item,
+							      const Capability & capability)
     : ProblemSolution (parent, "", "")
 {
-    if (kind == Dep::CONFLICTS) {
-	ERR << "Need BOTH resolvalbes; use the other constructor of  ProblemSolutionIgnore" << endl;
-    } else if (kind == Dep::REQUIRES) { 
 	_description = _("Ignoring this requirement");
-	addAction ( new InjectSolutionAction (item, capability, kind));		
-    } else {  
-	ERR << "Wrong kind of capability: " << kind << endl;
-    }
+	addAction ( new InjectSolutionAction (item, capability, REQUIRES));
 }
 
-ProblemSolutionIgnore::ProblemSolutionIgnore( ResolverProblem_Ptr parent,
-					      const Dep &kind, 
-					      PoolItem_Ref item,
-					      const Capability & capability,
-					      PoolItem_Ref otherItem)
+ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
+								PoolItem_Ref item,
+								const Capability & capability,
+								PoolItem_Ref otherItem)
     : ProblemSolution (parent, "", "")
 {
-    if (kind == Dep::CONFLICTS) {
 	// TranslatorExplanation %s = name of package, patch, selection ...
 	_description = str::form (_("Ignoring conflict of %s"),
 				  item->name().c_str());
-	addAction (new InjectSolutionAction (item, capability, kind, otherItem));	
-    } else if (kind == Dep::REQUIRES) { 
-	_description = _("Ignoring this requirement");
-	addAction ( new InjectSolutionAction (item, capability, kind));		
-    } else {  
-	ERR << "Wrong kind of capability: " << kind << endl;
-    }
+	addAction (new InjectSolutionAction (item, capability, CONFLICTS, otherItem));	
+}
+
+ProblemSolutionIgnoreArch::ProblemSolutionIgnoreArch( ResolverProblem_Ptr parent,
+						      PoolItem_Ref item )
+    : ProblemSolution (parent, "", "")
+{
+    _description = _("Ignoring Architecture");
+    addAction ( new InjectSolutionAction (item, Capability(), ARCHITECTURE));
 }
 	
       ///////////////////////////////////////////////////////////////////

@@ -71,6 +71,7 @@ namespace zypp
 	    UNLOCK
 	} TransactionKind;
 	
+	
 	class TransactionSolutionAction: public SolutionAction
 	{
 	public:
@@ -100,6 +101,18 @@ namespace zypp
 
 
 	/**
+	 * Type of ignoring dependencies and architectures
+	 **/
+	
+	typedef enum
+	{
+	    REQUIRES,
+	    CONFLICTS,
+	    ARCHITECTURE
+	} InjectSolutionKind;
+	
+
+	/**
 	 * A problem solution action that injects an artificial "provides" to
 	 * the pool to satisfy open requirements or remove the conflict of
 	 * concerning resolvable
@@ -112,14 +125,14 @@ namespace zypp
 
 	    InjectSolutionAction( PoolItem_Ref item,
 				  const Capability & capability,
-				  const Dep & kind)
+				  const InjectSolutionKind & kind)
 		: SolutionAction(),
 		  _capability( capability ), _kind( kind ),
 		  _otherItem() {}
 	    
 	    InjectSolutionAction( PoolItem_Ref item,
 				  const Capability & capability,
-				  const Dep & kind,
+				  const InjectSolutionKind & kind,
 				  PoolItem_Ref otherItem)
 		: SolutionAction(),
 		  _capability( capability ), _kind( kind ), _otherItem( otherItem ) {}
@@ -139,7 +152,7 @@ namespace zypp
 	protected:
 
 	    const Capability _capability;
-	    const Dep _kind;
+	    const InjectSolutionKind _kind;
 	    PoolItem_Ref _item, _otherItem;	    
 	};
 

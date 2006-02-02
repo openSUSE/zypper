@@ -25,7 +25,6 @@
 #include "zypp/solver/detail/Types.h"
 #include "zypp/ProblemSolution.h"
 
-
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
@@ -41,23 +40,41 @@ namespace zypp
 	 * This problem solution ignores one or more items
 	 * 
 	 **/
-	class ProblemSolutionIgnore : public ProblemSolution
+	class ProblemSolutionIgnoreConflicts : public ProblemSolution
 	{
 	public:
 
 	    /**
 	     * Constructor.
 	     **/
-	    ProblemSolutionIgnore( ResolverProblem_Ptr parent,
-				   const Dep &dep,
-				   PoolItem_Ref item,
-				   const Capability & capability);
-	    ProblemSolutionIgnore( ResolverProblem_Ptr parent,
-				   const Dep &dep,
-				   PoolItem_Ref item,
-				   const Capability & capability,
-				   PoolItem_Ref otherItem);	    
+	    ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
+					    PoolItem_Ref item,
+					    const Capability & capability,
+					    PoolItem_Ref otherItem);	    
 	};
+
+	class ProblemSolutionIgnoreRequires : public ProblemSolution
+	{
+	public:
+
+	    /**
+	     * Constructor.
+	     **/
+	    ProblemSolutionIgnoreRequires( ResolverProblem_Ptr parent,
+					   PoolItem_Ref item,
+					   const Capability & capability);
+	};
+
+	class ProblemSolutionIgnoreArch : public ProblemSolution
+	{
+	public:
+
+	    /**
+	     * Constructor.
+	     **/
+	    ProblemSolutionIgnoreArch( ResolverProblem_Ptr parent,
+				       PoolItem_Ref item);
+	};	
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail

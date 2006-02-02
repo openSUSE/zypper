@@ -93,6 +93,9 @@ Resolver::reset (void)
 
     _extra_caps.clear();
     _extra_conflicts.clear();
+    _ignoreConflicts.clear();
+    _ignoreRequires.clear();
+    _ignoreArchitecture.clear();
 
     _pending_queues.clear();
     _pruned_queues.clear();
@@ -201,17 +204,26 @@ Resolver::addExtraConflict (const Capability & capability)
     _extra_conflicts.insert (capability);
 }
 
+
 void
 Resolver::addIgnoreConflict (const PoolItem_Ref item,
 		   const Capability & capability)
 {
     _ignoreConflicts[item] = capability;
 }
+
+
 void
 Resolver::addIgnoreRequires (const PoolItem_Ref item,
 			     const Capability & capability)
 {
     _ignoreRequires[item] = capability;
+}
+
+void
+Resolver::addIgnoreArchitecture (const PoolItem_Ref item)
+{
+    _ignoreArchitecture.push_back (item);
 }
 
 
