@@ -1,14 +1,12 @@
 <?xml version="1.0"?>
 <test>
 <setup>
-  <system file="parallel-system.xml"/>
   <channel name="test1" file="parallel-packages1.xml"/>
   <channel name="test2" file="parallel-packages1.xml"/>
 </setup>
 
 <!-- Can't install foo with two different version. -->
 <!-- RESOLVER_INFO_TYPE_INSTALL_PARALLEL should be returnd -->
-<!-- currently both will be installed -->
 
 <trial>
   <install channel="test1" package="foo"/> 
