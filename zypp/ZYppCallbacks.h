@@ -15,7 +15,6 @@
 #include "zypp/Callback.h"
 #include "zypp/Resolvable.h"
 #include "zypp/Source.h"
-#include "zypp/TranslatedText.h"
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
 
@@ -41,7 +40,6 @@ namespace zypp
 
       virtual void start(
         Resolvable::Ptr resolvable_ptr
-	, Source_Ref source
 	, Url url
       ) {}
 
@@ -52,12 +50,12 @@ namespace zypp
       virtual Action problem(
         Resolvable::Ptr resolvable_ptr
 	, Error error
-	, TranslatedText description
+	, std::string description
       ) { return ABORT; }
 
       virtual void finish(Resolvable::Ptr resolvable_ptr
         , Error error
-	, TranslatedText reason
+	, std::string reason
       ) {}
     };
     
@@ -87,13 +85,13 @@ namespace zypp
       virtual Action problem(
         Url url
 	, Error error
-	, TranslatedText description
+	, std::string description
       ) { return ABORT; }
 
       virtual void finish(
         Url url
         , Error error
-	, TranslatedText reason
+	, std::string reason
       ) {}
     };
 
@@ -122,13 +120,13 @@ namespace zypp
       virtual Action problem(
         Source_Ref source
 	, Error error
-	, TranslatedText description
+	, std::string description
       ) { return ABORT; }
 
       virtual void finish(
         Source_Ref source
         , Error error
-	, TranslatedText reason
+	, std::string reason
       ) {}
     };
 
@@ -157,13 +155,13 @@ namespace zypp
       virtual Action problem(
         Url url
 	, Error error
-	, TranslatedText description
+	, std::string description
       ) { return ABORT; }
 
       virtual void finish(
         Url url
         , Error error
-	, TranslatedText reason
+	, std::string reason
       ) {}
     };
     
@@ -195,7 +193,7 @@ namespace zypp
         Source_Ref source
 	, unsigned mediumNr
 	, Error error
-	, TranslatedText description
+	, std::string description
       ) { return ABORT; }
     };
 
@@ -237,13 +235,13 @@ namespace zypp
         virtual Action problem(
           Resolvable::constPtr resolvable
   	  , Error error
-  	 , TranslatedText description
+  	 , std::string description
         ) { return ABORT; }
 
         virtual void finish(
           Resolvable::constPtr resolvable
           , Error error
-	  , TranslatedText reason
+	  , std::string reason
         ) {}
       };
     
@@ -273,13 +271,13 @@ namespace zypp
         virtual Action problem(
           Resolvable::Ptr resolvable
   	  , Error error
-  	 , TranslatedText description
+  	 , std::string description
         ) { return ABORT; }
 
         virtual void finish(
           Resolvable::Ptr resolvable
           , Error error
-	  , TranslatedText reason
+	  , std::string reason
         ) {}
       };
     
@@ -309,13 +307,13 @@ namespace zypp
         virtual Action problem(
 	  Pathname path
   	  , Error error
-  	 , TranslatedText description
+  	 , std::string description
         ) { return ABORT; }
 
         virtual void finish(
 	  Pathname path
           , Error error
-	  , TranslatedText reason
+	  , std::string reason
         ) {}
       };
 
@@ -345,13 +343,13 @@ namespace zypp
         virtual Action problem(
 	  Pathname path
   	  , Error error
-  	 , TranslatedText description
+  	 , std::string description
         ) { return ABORT; }
 
         virtual void finish(
 	  Pathname path
           , Error error
-	  , TranslatedText reason
+	  , std::string reason
         ) {}
       };
 
