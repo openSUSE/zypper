@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="other-architect-system.xml"/>
+  <channel name="test" file="other-architect-packages.xml"/>
+</setup>
+
+<!-- Can't install foo since it is does not apply to this system. -->
+<!-- RESOLVER_INFO_TYPE_INSTALL_UNNEEDED should be returnd -->
+<!-- Currently no error will be returned and foo with wrong arch will be -->
+<!-- installed -->
+
+<trial>
+  <install channel="test" package="foo"/> 
+  <reportproblems/>
+</trial>
+
+</test>
