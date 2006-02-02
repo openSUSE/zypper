@@ -100,7 +100,7 @@ static std::ostream &
 printRes ( std::ostream & str, ResObject::constPtr r )
 {
     if (r->kind() != ResTraits<zypp::Package>::kind)
-	str << '[' << r->kind() << ']';
+	str << r->kind() << ':';
     str  << r->name() << '-' << r->edition();
     if (r->arch() != "") {
 	str << '.' << r->arch();
@@ -347,7 +347,7 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
     context->spewInfo ();
 
     cout << "Context Context:" << endl;
-    cout << context << endl;
+    cout << *context << endl;
 
     return;
 }
@@ -816,7 +816,7 @@ struct DoUpgrades : public resfilter::OnCapMatchCallbackFunctor, public resfilte
 	    return false;
 	}
 	}
-#if 0
+#if 0		// disabled in favor of lexical ordering
 	if (upgrades.insert (poolItem).second) {			// only consider first match
 	    resolver->addPoolItemToInstall (poolItem);
 	    RESULT << "Upgrading ";
@@ -875,7 +875,7 @@ foreach_system_upgrade (solver::detail::Resolver_Ptr resolver)
 static void
 print_marked_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
-    RESULT << poolItem << " " << status << endl;
+    RESULT; printRes (cout, poolItem.resolvable()); cout << " " << status << endl;
     return;
 }
 
@@ -884,7 +884,7 @@ static void
 freshen_marked_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
     solver::detail::Resolver_Ptr resolver = *((solver::detail::Resolver_Ptr *)data);
-    if (status.isIncomplete()) {
+    if (status.isNeeded()) {
 	resolver->addPoolItemToInstall (poolItem);
     }
 
