@@ -1209,12 +1209,10 @@ ResolverContext::requirementIsPossible (const Capability & dependency) const
 
     Dep dep( Dep::PROVIDES );
 
-    // world->foreachProvidingResItem (dependency, require_process_cb, &info);
-
     invokeOnEach( pool().byCapabilityIndexBegin( dependency.index(), dep ),
 		  pool().byCapabilityIndexEnd( dependency.index(), dep ),
 		  resfilter::callOnCapMatchIn( dep, dependency, functor::functorRef<bool,PoolItem,Capability>(info) ) );
-
+    MIL << "requirementIsPossible( " << dependency << ") = " << (info.flag ? "Y" : "N") << endl;
     return info.flag;
 }
 
@@ -1260,7 +1258,7 @@ ResolverContext::isParallelInstall (PoolItem_Ref item) const
     info.other = item;
     info.flag = false;
     foreachMarked (dup_name_check_cb, (void *)&info);
-
+    MIL << "isParallelInstall(" << item << ") = " << (info.flag ? "Y" : "N") << endl;
     return info.flag;
 }
 

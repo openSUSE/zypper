@@ -109,7 +109,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
     for (iter = freshens.begin(); iter != freshens.end(); iter++) {
 	const Capability cap = *iter;
 	if (context->requirementIsMet (cap)) {
-	    DBG << "this freshens " << cap << endl;
+	    MIL << "this freshens " << cap << endl;
 	    break;
 	}
     }
@@ -123,7 +123,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	&& freshens.size() > 0
 	&& iter == freshens.end())
     {
-	DBG << "this freshens nothing -> unneeded" << endl;
+	MIL << "this freshens nothing -> unneeded" << endl;
 	context->unneeded (_item, _other_penalty);
     }
     else {							// installed or no freshens or triggered freshens
@@ -136,11 +136,11 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    }
 	}
 	if (iter == requires.end()) {					// all are met
-	    DBG << "all requirements met -> satisfied" << endl;
+	    MIL << "all requirements met -> satisfied" << endl;
 	    context->satisfy (_item, _other_penalty);
 	}
 	else {
-	    DBG << "unfulfilled requirements -> incomplete" << endl;
+	    MIL << "unfulfilled requirements -> incomplete" << endl;
 	    context->incomplete (_item, _other_penalty);
 	}
     }

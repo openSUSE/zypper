@@ -162,7 +162,8 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 	ResStatus status;
 
 	status = context->getStatus(provider);
-// ERR << "RequireProcessInfo (" << *provider << " provides " << match << ", is " << status << ")" << endl;
+
+	MIL << "RequireProcessInfo (" << provider << " provides " << match << ", is " << status << ")" << endl;
 // ERR << "RequireProcessInfo(required: " << *capability << ")" << endl;
 // ERR << "require_process_cb(itemIsPossible -> " <<  context->itemIsPossible (*provider) << ")" << endl;
 
@@ -299,7 +300,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
     if (! _remove_only) {
 
 	Dep dep( Dep::PROVIDES );
-
+	MIL << "Look for providers of " << _capability << endl;
 	// world->foreachProvidingResItem (_capability, require_process_cb, &info);
 	invokeOnEach( pool().byCapabilityIndexBegin( _capability.index(), dep ),
 		      pool().byCapabilityIndexEnd( _capability.index(), dep ),
