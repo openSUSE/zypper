@@ -50,7 +50,7 @@ namespace zypp
       : _source(source_r)
       {
 	_patch_id = parsed.patchId;
-        _timestamp = atol(parsed.timestamp.c_str());
+        _timestamp = str::strtonum<time_t>(parsed.timestamp);
         _category = parsed.category;
         _reboot_needed = parsed.rebootNeeded;
         _affects_pkg_manager = parsed.packageManager;
