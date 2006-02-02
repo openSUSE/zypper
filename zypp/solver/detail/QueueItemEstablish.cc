@@ -71,6 +71,8 @@ QueueItemEstablish::QueueItemEstablish (const ResPool & pool, PoolItem_Ref item)
     , _other_penalty (0)
     , _explicitly_requested (false)
 {
+    _DEBUG("QueueItemEstablish::QueueItemEstablish (" << item << ")");
+
 }
 
 
