@@ -371,14 +371,14 @@ namespace zypp
                               bool cached, bool checkonly) const
     {
       MutexLock lock(g_Mutex);
-
+/*
       if( !isDesiredMedia(mediaId, mediaNr))
       {
         ZYPP_THROW(MediaNotDesiredException(
           m_impl->mediaAccMap[mediaId]->url(), mediaNr
         ));
       }
-
+*/
       m_impl->mediaAccMap[mediaId]->provideFile(filename, cached, checkonly);
     }
 

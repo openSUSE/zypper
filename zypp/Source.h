@@ -78,6 +78,8 @@ namespace zypp
 
     void disable();
 
+    void storeMetadata(const Pathname & cache_dir_r);
+
     // for ZMD
     std::string alias (void) const;
     std::string zmdname (void) const;

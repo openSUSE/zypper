@@ -47,6 +47,7 @@ pkginclude_HEADERS = NeedAType.h \
 	Source.h	\
 	SourceFactory.h	\
 	SourceManager.h	\
+	SourceCache.h	\
 	SourceFeed.h	\
 	Target.h	\
 	Selection.h	\
@@ -117,6 +118,7 @@ lib@PACKAGE@_la_SOURCES = \
 	Source.cc	\
 	SourceFactory.cc\
 	SourceManager.cc\
+	SourceCache.cc	\
 	SourceFeed.cc	\
 	Target.cc	\
 	Selection.cc	\

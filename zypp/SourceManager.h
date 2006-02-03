@@ -68,7 +68,7 @@ namespace zypp
      *
      * \throws Exception
      */
-    unsigned addSource(const Url & url_r, const Pathname & path_r = "/", const std::string & name_r = "");
+    unsigned addSource(const Url & url_r, const Pathname & path_r = "/", const std::string & name_r = "", const Pathname & cache_dir_r = "");
 
     /**
      * Add a new source

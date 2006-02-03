@@ -46,7 +46,9 @@ namespace zypp
         YUMSourceImpl()
 	{}
         /** Default ctor */
-        YUMSourceImpl(media::MediaId & media_r, const Pathname & path_r = "/", const std::string & alias_r = "");
+        YUMSourceImpl(media::MediaId & media_r, const Pathname & path_r = "/", const std::string & alias_r = "", const Pathname cache_dir_r = "/");
+
+        virtual void storeMetadata(const Pathname & cache_dir_r);
 
 	virtual void createResolvables(Source_Ref source_r);
 
@@ -102,6 +104,8 @@ namespace zypp
 	Capability createCapability(const YUMDependency & dep,
 				    const Resolvable::Kind & my_kind);
       private:
+
+	std::list<Pathname> _metadata_files;
 
 	class PackageID {
 	public:

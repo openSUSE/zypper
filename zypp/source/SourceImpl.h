@@ -56,7 +56,8 @@ namespace zypp
       /** Ctor. */
       SourceImpl(media::MediaId & media_r,
                  const Pathname & path_r = "/",
-		 const std::string & alias = "");
+		 const std::string & alias = "",
+		 const Pathname cache_dir_r = "");
       /** Dtor. */
       virtual ~SourceImpl();
 
@@ -95,6 +96,8 @@ namespace zypp
       void disable()
       { _enabled = false; }
 
+      virtual void storeMetadata(const Pathname & cache_dir_r);
+
       std::string alias (void) const
       { return _alias; }
 
@@ -121,6 +124,8 @@ namespace zypp
       bool _enabled;
       /** (user defined) alias of the source */
       std::string _alias;
+      /** Directory holding metadata cache */
+      Pathname _cache_dir;
       /** (user defined) default priority of the source */
       unsigned _priority;
       /** (user defined) unsubscribed priority of the source */

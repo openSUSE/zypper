@@ -96,7 +96,7 @@ media::MediaManager media_mgr;
     media_mgr.release(id);
   }
 
-  Source_Ref SourceFactory::createFrom( const Url & url_r, const Pathname & path_r, const std::string & alias_r )
+  Source_Ref SourceFactory::createFrom( const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r )
   {
     if (! url_r.isValid())
       ZYPP_THROW( Exception("Empty URL passed to SourceFactory") );
@@ -110,7 +110,7 @@ media::MediaManager media_mgr;
     try
     {
       MIL << "Trying the YUM source" << endl;
-      Source_Ref::Impl_Ptr impl = new yum::YUMSourceImpl(id, path_r, alias_r);
+      Source_Ref::Impl_Ptr impl = new yum::YUMSourceImpl(id, path_r, alias_r, cache_dir_r);
       MIL << "Found the YUM source" << endl;
       return Source_Ref(impl);
     }
@@ -122,6 +122,7 @@ media::MediaManager media_mgr;
     try
     {
       MIL << "Trying the SUSE tags source" << endl;
+#warning TODO pass cache_dir_r once constructor adapted
       Source_Ref::Impl_Ptr impl = new susetags::SuseTagsImpl(id, path_r, alias_r);
       MIL << "Found the SUSE tags source" << endl;
       return Source_Ref(impl);

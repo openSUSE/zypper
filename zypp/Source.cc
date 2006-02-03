@@ -75,6 +75,9 @@ namespace zypp
   void Source_Ref::disable()
   { _pimpl->disable(); }
 
+  void Source_Ref::storeMetadata(const Pathname & cache_dir_r)
+  { _pimpl->storeMetadata(cache_dir_r); }
+
   string Source_Ref::alias (void) const
   { return _pimpl->alias(); }
 

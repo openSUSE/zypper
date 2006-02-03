@@ -53,7 +53,7 @@ namespace zypp
     /** Construct source from an implementation.
      * \throw EXCEPTION on fail
     */
-    Source_Ref createFrom( const Url & url_r, const Pathname & path_r = "/", const std::string & alias_r = "" );
+    Source_Ref createFrom( const Url & url_r, const Pathname & path_r = "/", const std::string & alias_r = "", const Pathname & cache_dir_r = "" );
 
   private:
     /** Implementation  */

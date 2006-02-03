@@ -52,9 +52,9 @@ namespace zypp
   SourceManager::~SourceManager()
   {}
 
-  unsigned SourceManager::addSource(const Url & url_r, const Pathname & path_r, const std::string & alias_r)
+  unsigned SourceManager::addSource(const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r)
   {
-    Source_Ref src( SourceFactory().createFrom(url_r, path_r, alias_r) );
+    Source_Ref src( SourceFactory().createFrom(url_r, path_r, alias_r, cache_dir_r) );
     RW_pointer<Source_Ref> src_ptr = RW_pointer<Source_Ref>(new Source_Ref(src));
     _sources[_next_id] = src_ptr;
     return _next_id++;

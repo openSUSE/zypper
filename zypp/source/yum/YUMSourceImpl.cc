@@ -24,6 +24,7 @@
 #include "zypp/CapFactory.h"
 
 #include "zypp/parser/yum/YUMParser.h"
+#include "zypp/SourceFactory.h"
 
 #include <fstream>
 
@@ -49,8 +50,9 @@ namespace zypp
       */
       YUMSourceImpl::YUMSourceImpl(media::MediaId & media_r,
 				   const Pathname & path_r,
-				   const std::string & alias_r)
-      : SourceImpl(media_r, path_r, alias_r)
+				   const std::string & alias_r,
+				   const Pathname cache_dir_r)
+      : SourceImpl(media_r, path_r, alias_r, cache_dir_r)
       {
         try {
 	
@@ -71,12 +73,20 @@ namespace zypp
        
         
 	// first read list of all files in the repository
+	Pathname filename;
+	if (_cache_dir.empty())
+	{
+	  // check only first
+#warning What did the following line mean? With it uncommented, it doesn't compile
+//	  filename = provideFile(_path + "/repomd.xml", 0, false, true);
 
-	// check only first
-        Pathname filename = provideFile(_path + "/repomd.xml", 0, false, true);
-
-	// now, the file exists, try to read it
-	filename = provideFile(_path + "/repomd.xml");
+	  // now, the file exists, try to read it
+	  filename = provideFile(_path + "/repomd.xml");
+	}
+	else
+	{
+	  filename = _cache_dir + "/repomd.xml";
+	}
 	
 	DBG << "Reading file " << filename << endl;
 	ifstream repo_st(filename.asString().c_str());
@@ -95,6 +105,21 @@ namespace zypp
        }
       }
 
+      void YUMSourceImpl::storeMetadata(const Pathname & cache_dir_r)
+      {
+INT << "Storing data to cache" << endl;
+	resolvables(SourceFactory().createFrom(this));
+	for (std::list<Pathname>::const_iterator it = _metadata_files.begin();
+	  it != _metadata_files.end(); it++)
+	{
+	  Pathname src = provideFile(_path + *it);
+	  Pathname dst = cache_dir_r + *it;
+	  if (0 != assert_dir(dst.dirname(), 0700))
+	    ZYPP_THROW(Exception("Cannot create cache directory"));
+	  filesystem::copy(src, dst);
+	}
+      }
+  
       void YUMSourceImpl::createResolvables(Source_Ref source_r)
       {
        std::list<YUMRepomdData_Ptr> repo_primary;
@@ -107,7 +132,10 @@ namespace zypp
 
        try {
 	// first read list of all files in the reposotory
-        Pathname filename = provideFile(_path + "/repomd.xml");
+        Pathname filename = _cache_dir.empty()
+	  ? provideFile(_path + "/repomd.xml")
+	  : _cache_dir + "/repomd.xml";
+	_metadata_files.push_back("/repomd.xml");
 	DBG << "Reading file " << filename << endl;
 	ifstream repo_st(filename.asString().c_str());
 	YUMRepomdParser repomd(repo_st, "");
@@ -149,7 +177,10 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  Pathname filename = provideFile(_path + (*it)->location);
+	  Pathname filename = _cache_dir.empty()
+	    ? provideFile(_path + (*it)->location)
+	    : _cache_dir + (*it)->location;
+	  _metadata_files.push_back((*it)->location);
 	  DBG << "Reading file " << filename << endl;
 	  ifstream st(filename.asString().c_str());
 	  YUMFileListParser filelist(st, "");
@@ -173,7 +204,10 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  Pathname filename = provideFile(_path + (*it)->location);
+	  Pathname filename = _cache_dir.empty()
+	    ? provideFile(_path + (*it)->location)
+	    : _cache_dir + (*it)->location;
+	  _metadata_files.push_back((*it)->location);
 	  DBG << "Reading file " << filename << endl;
 	  ifstream st(filename.asString().c_str());
 	  YUMOtherParser other(st, "");
@@ -198,7 +232,10 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  Pathname filename = provideFile(_path + (*it)->location);
+	  Pathname filename = _cache_dir.empty()
+	    ? provideFile(_path + (*it)->location)
+	    : _cache_dir + (*it)->location;
+	  _metadata_files.push_back((*it)->location);
 	  DBG << "Reading file " << filename << endl;
 	  ifstream st(filename.asString().c_str());
 	  YUMPrimaryParser prim(st, "");
@@ -244,7 +281,10 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  Pathname filename = provideFile(_path + (*it)->location);
+	  Pathname filename = _cache_dir.empty()
+	    ? provideFile(_path + (*it)->location)
+	    : _cache_dir + (*it)->location;
+	  _metadata_files.push_back((*it)->location);
 	  DBG << "Reading file " << filename << endl;
 	  ifstream st(filename.asString().c_str());
 	  YUMGroupParser group(st, "");
@@ -273,7 +313,10 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  Pathname filename = provideFile(_path + (*it)->location);
+	  Pathname filename = _cache_dir.empty()
+	    ? provideFile(_path + (*it)->location)
+	    : _cache_dir + (*it)->location;
+	  _metadata_files.push_back((*it)->location);
 	  DBG << "Reading file " << filename << endl;
 	  ifstream st(filename.asString().c_str());
 	  YUMPatternParser pattern(st, "");
@@ -302,7 +345,10 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  Pathname filename = provideFile(_path + (*it)->location);
+	  Pathname filename = _cache_dir.empty()
+	    ? provideFile(_path + (*it)->location)
+	    : _cache_dir + (*it)->location;
+	  _metadata_files.push_back((*it)->location);
 	  DBG << "Reading file " << filename << endl;
 	  ifstream st(filename.asString().c_str());
 	  YUMProductParser product(st, "");
@@ -332,7 +378,10 @@ namespace zypp
 	     it++)
 	{
 	  // TODO check checksum
-	  Pathname filename = provideFile(_path + (*it)->location);
+	  Pathname filename = _cache_dir.empty()
+	    ? provideFile(_path + (*it)->location)
+	    : _cache_dir + (*it)->location;
+	  _metadata_files.push_back((*it)->location);
 	  DBG << "Reading file " << filename << endl;
 	  ifstream st(filename.asString().c_str());
 	  YUMPatchesParser patch(st, "");
@@ -352,7 +401,10 @@ namespace zypp
 	     it != patch_files.end();
 	     it++)
 	{
-	    Pathname filename = provideFile(_path + *it);
+	    Pathname filename = _cache_dir.empty()
+	      ? provideFile(_path + *it)
+	      : _cache_dir + *it;
+	    _metadata_files.push_back(*it);
 	    DBG << "Reading file " << filename << endl;
 	    ifstream st(filename.asString().c_str());
 	    YUMPatchParser ptch(st, "");
