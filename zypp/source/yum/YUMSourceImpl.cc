@@ -73,7 +73,7 @@ namespace zypp
 	// first read list of all files in the repository
 
 	// check only first
-        Pathname filename = provideFile(_path + "/repomd.xml", false, true);
+        Pathname filename = provideFile(_path + "/repomd.xml", 0, false, true);
 
 	// now, the file exists, try to read it
 	filename = provideFile(_path + "/repomd.xml");
