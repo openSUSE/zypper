@@ -6,11 +6,11 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/parser/tagfile/Parser.h
+/** \file	zypp/source/susetags/ProductMetadataParser.h
  *
 */
-#ifndef ZYPP_PARSER_TAGFILE_ProductMetadataPARSER_H
-#define ZYPP_PARSER_TAGFILE_ProductMetadataPARSER_H
+#ifndef ZYPP_SOURCE_SUSETAGS_PRODUCTMETADATAPARSER_H
+#define ZYPP_SOURCE_SUSETAGS_PRODUCTMETADATAPARSER_H
 
 #include <iosfwd>
 #include <set>
@@ -97,4 +97,4 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 //
-#endif //  ZYPP_PARSER_TAGFILE_ProductMetadataPPARSER_H
+#endif //  ZYPP_SOURCE_SUSETAGS_PRODUCTMETADATAPARSER_H
