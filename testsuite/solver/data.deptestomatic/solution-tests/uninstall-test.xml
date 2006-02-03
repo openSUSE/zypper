@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="uninstall-system.xml"/>
+  <channel name="test" file="uninstall-packages.xml"/>
+</setup>
+
+<!-- Can't remove cause it is still needed -->
+<!-- Currently both will be uninstalled.  -->
+<!-- RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER would be better -->
+
+<trial>
+  <uninstall package="foo"/> 
+  <reportproblems/>
+</trial>
+
+</test>
