@@ -100,7 +100,8 @@ namespace zypp
     {
       enum Action { 
         ABORT,  // abort and return error
-        RETRY	// retry
+        RETRY,	// retry
+	IGNORE  // skip refresh, ignore failed refresh
       }; 
       
       enum Error {
@@ -179,6 +180,9 @@ namespace zypp
         ABORT,  // abort and return error
         RETRY,	// retry
 	IGNORE, // ignore this media in future, not available anymore
+	IGNORE_ID,	// ignore wrong medium id
+	CHANGE_URL,	// change media URL
+	EJECT		// eject the medium
       }; 
 
       enum Error { 
