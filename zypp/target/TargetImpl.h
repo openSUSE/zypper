@@ -83,7 +83,11 @@ namespace zypp
 
       /** If the package is installed and provides the file
 	  Needed to evaluate split provides during Resolver::Upgrade() */
-      bool providesFile (const std::string & name_str, const std::string & path_str) const;
+      bool providesFile (const std::string & path_str, const std::string & name_str) const;
+
+      /** Return the resolvable which provides path_str (rpm -qf)
+	  return NULL if no resolvable provides this file  */
+      ResObject::constPtr whoOwnsFile (const std::string & path_str) const;
 
     protected:
       /** All resolvables provided by the target. */

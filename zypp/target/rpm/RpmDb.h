@@ -254,9 +254,16 @@ namespace zypp {
         public:
       
           /**
-           * Return true if at least one package owns a certain file.
+           * Return true if at least one package owns a certain file (name_r empty)
+           * Return true if package name_r owns file file_r (name_r nonempty).
            **/
-          bool hasFile( const std::string & file_r ) const;
+          bool hasFile( const std::string & file_r, const std::string & name_r = "" ) const;
+      
+          /**
+           * Return name of package owning file
+           * or empty string if no installed package owns file
+           **/
+          std::string whoOwnsFile( const std::string & file_r ) const;
       
           /**
            * Return true if at least one package provides a certain tag.

@@ -1186,10 +1186,36 @@ void RpmDb::traceFileRel( const PkgRelation & rel_r )
 //
 //	DESCRIPTION :
 //
-bool RpmDb::hasFile( const std::string & file_r ) const
+bool RpmDb::hasFile( const std::string & file_r, const std::string & name_r ) const
 {
   librpmDb::db_const_iterator it;
-  return it.findByFile( file_r );
+  bool res;
+  do {
+    res = it.findByFile( file_r );
+    if (!res) break;
+    if (!name_r.empty()) {
+      res = (it->tag_name() == name_r);
+    }
+    ++it;
+  } while (res && *it);
+  return res;
+}
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : RpmDb::whoOwnsFile
+//	METHOD TYPE : string
+//
+//	DESCRIPTION :
+//
+std::string RpmDb::whoOwnsFile( const std::string & file_r) const
+{
+  librpmDb::db_const_iterator it;
+  if (it.findByFile( file_r )) {
+    return it->tag_name();
+  }
+  return "";
 }
 
 ///////////////////////////////////////////////////////////////////
