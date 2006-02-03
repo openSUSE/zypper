@@ -17,7 +17,6 @@
 #include "zypp/Source.h"
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
-#include "zypp/media/MediaManager.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -191,7 +190,7 @@ namespace zypp
       };       
       
       virtual Action requestMedia(
-        const media::MediaAccessRef &ref
+        const Source_Ref source
 	, unsigned mediumNr
 	, Error error
 	, std::string description
