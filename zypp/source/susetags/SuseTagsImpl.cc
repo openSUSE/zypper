@@ -42,6 +42,35 @@ namespace zypp
       //
       SuseTagsImpl::SuseTagsImpl( const Pathname & localDir_r )
       {
+
+	media::MediaManager media_mgr;
+
+        try {
+	  Pathname media_file = "/media.1/media";
+
+	  media_mgr.provideFile (_media, 1, media_file);
+	  media_file = media_mgr.localPath(_media, media_file);
+
+#warning check the stream status
+	  std::ifstream str(media_file.asString().c_str());
+	  std::string media_vendor;
+	  std::string media_id;
+	  getline(str, media_vendor);
+	  getline(str, media_id);
+
+	  media_mgr.delVerifier(_media);
+	
+	  MIL << "Adding proper media verifier" << endl;
+	
+	  media_mgr.addVerifier(_media, media::MediaVerifierRef(new Verifier(media_vendor, media_id)));
+        }
+        catch (const Exception & excpt_r)
+        {
+#warning FIXME: If media data is not set, verifier is not set. Should the media be refused instead?
+	  ZYPP_CAUGHT(excpt_r);
+	  WAR << "Verifier not found" << endl;
+        }
+
         PathInfo p( localDir_r );
         if ( p.isDir() )
           p( localDir_r + "packages" );

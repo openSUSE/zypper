@@ -52,7 +52,24 @@ namespace zypp
 				   const std::string & alias_r)
       : SourceImpl(media_r, path_r, alias_r)
       {
+        try {
+	
+	  media::MediaManager media_mgr;
+
+	  MIL << "Adding no media verifier" << endl;
+	  	
+	  media_mgr.addVerifier(media_r, media::MediaVerifierRef(new media::NoVerifier()));
+        }
+        catch (const Exception & excpt_r)
+        {
+#warning FIXME: If media data is not set, verifier is not set. Should the media be refused instead?
+	  ZYPP_CAUGHT(excpt_r);
+	  WAR << "Verifier not found" << endl;
+        }
+       
        try {
+       
+        
 	// first read list of all files in the repository
 
 	// check only first
