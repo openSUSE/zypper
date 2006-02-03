@@ -90,7 +90,8 @@ ResolverQueue::addPoolItemToInstall (PoolItem_Ref poolItem)
 	return;
     }
 
-    qitem = new QueueItemInstall (_context->pool(), poolItem);
+    qitem = new QueueItemInstall (_context->pool(), poolItem, poolItem.status().isSoftInstall());
+    poolItem.status().setSoftInstall(false);
     qitem->setExplicitlyRequested ();
 
     addItem (qitem);
@@ -117,7 +118,8 @@ ResolverQueue::addPoolItemToRemove (PoolItem_Ref poolItem, bool remove_only_mode
     if (_context->isAbsent (poolItem))
 	return;
 
-    qitem = new QueueItemUninstall (_context->pool(), poolItem, QueueItemUninstall::EXPLICIT);
+    qitem = new QueueItemUninstall (_context->pool(), poolItem, QueueItemUninstall::EXPLICIT, poolItem.status().isSoftUninstall());
+    poolItem.status().setSoftUninstall(false);
     if (remove_only_mode)
 	qitem->setRemoveOnly ();
 

@@ -101,12 +101,13 @@ namespace zypp
     enum InstallDetailValue
       {
         EXPLICIT_INSTALL = 0,
-        SOFT_REQUIRES = TransactDetailField::minval
+        SOFT_INSTALL = TransactDetailField::minval
       };
     enum RemoveDetailValue
       {
         EXPLICIT_REMOVE = 0,
-        DUE_TO_OBSOLETE = TransactDetailField::minval,
+	SOFT_REMOVE = TransactDetailField::minval,
+        DUE_TO_OBSOLETE,
         DUE_TO_UNLINK
       };
     //@}
@@ -179,7 +180,10 @@ namespace zypp
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_UNLINK); }
 
     bool isToBeInstalledSoft () const
-    { return isToBeInstalled() && fieldValueIs<TransactDetailField> (SOFT_REQUIRES); }
+    { return isToBeInstalled() && fieldValueIs<TransactDetailField> (SOFT_INSTALL); }
+
+    bool isToBeUninstalledSoft () const
+    { return isToBeUninstalled() && fieldValueIs<TransactDetailField> (SOFT_REMOVE); }
 
   public:
 
@@ -283,10 +287,34 @@ namespace zypp
     bool setToBeInstalledSoft ( )
     {
       if (!setToBeInstalled(SOLVER)) return false;
-      fieldValueAssign<TransactDetailField>(SOFT_REQUIRES);
+      fieldValueAssign<TransactDetailField>(SOFT_INSTALL);
       return true;
     }
       
+    bool setToBeUninstalledSoft ( )
+    {
+      if (!setToBeUninstalled(SOLVER)) return false;
+      fieldValueAssign<TransactDetailField>(SOFT_REMOVE);
+      return true;
+    }
+
+    bool isSoftInstall () {
+        return fieldValueIs<TransactDetailField> (SOFT_INSTALL);
+    }      
+
+    bool isSoftUninstall () {
+        return fieldValueIs<TransactDetailField> (SOFT_REMOVE);
+    }      
+
+    bool setSoftInstall (bool flag) {
+        fieldValueAssign<TransactDetailField>(flag?SOFT_INSTALL:0);
+	return true;
+    }      
+
+    bool setSoftUninstall (bool flag) {
+        fieldValueAssign<TransactDetailField>(flag?SOFT_REMOVE:0);
+	return true;
+    }      
 
     bool setUndetermined ()
     {
@@ -322,6 +350,7 @@ namespace zypp
     static const ResStatus toBeInstalled;
     static const ResStatus toBeInstalledSoft;
     static const ResStatus toBeUninstalled;
+    static const ResStatus toBeUninstalledSoft;
     static const ResStatus toBeUninstalledDueToUnlink;
     static const ResStatus toBeUninstalledDueToObsolete;
     static const ResStatus installed;	// just for testsuite!
