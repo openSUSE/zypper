@@ -9,15 +9,15 @@
 
 #include <boost/iostreams/device/file_descriptor.hpp>
 
-#include <zypp/SourceFactory.h>
+#include "zypp/SourceFactory.h"
 
-#include <zypp/base/Logger.h>
+#include "zypp/base/Logger.h"
 ///////////////////////////////////////////////////////////////////
 
-#include <zypp/target/store/PersistentStorage.h>
-#include <zypp/target/store/XMLFilesBackend.h>
+#include "zypp/target/store/PersistentStorage.h"
+#include "zypp/target/store/XMLFilesBackend.h"
 
-#include <zypp/base/Logger.h>
+#include "zypp/base/Logger.h"
 
 #include "zypp/SourceFactory.h"
 #include "zypp/Source.h"
@@ -26,9 +26,9 @@
 #include <map>
 #include <set>
 
-#include <zypp/CapFactory.h>
+#include "zypp/CapFactory.h"
 
-#include <zypp/target/store/serialize.h>
+#include "zypp/target/store/serialize.h"
 
 #include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
 #include "boost/filesystem/fstream.hpp"    // ditto
@@ -58,8 +58,9 @@ int main()
   Source_Ref s = _f.createFrom( url, p );
   ResStore store = s.resolvables();
   MIL << "done reading YUM source: " << store <<  std::endl;
- 
-  XMLFilesBackend backend;
+
+  Pathname root("."); 
+  XMLFilesBackend backend(root);
   //backend.setRandomFileNameEnabled(true);
   clock_t time_start, curr_time;
   time_start = clock();
