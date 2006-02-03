@@ -53,8 +53,14 @@ namespace zypp
       : SourceImpl(media_r, path_r, alias_r)
       {
        try {
-	// first read list of all files in the reposotory
-        Pathname filename = provideFile(_path + "/repomd.xml");
+	// first read list of all files in the repository
+
+	// check only first
+        Pathname filename = provideFile(_path + "/repomd.xml", false, true);
+
+	// now, the file exists, try to read it
+	filename = provideFile(_path + "/repomd.xml");
+	
 	DBG << "Reading file " << filename << endl;
 	ifstream repo_st(filename.asString().c_str());
 	YUMRepomdParser repomd(repo_st, "");

@@ -92,9 +92,11 @@ media::MediaManager media_mgr;
      }
 
     const Pathname SourceImpl::provideFile(const Pathname & file_r,
-					   const unsigned media_nr)
+					   const unsigned media_nr, 
+					   bool cached, 
+					   bool checkonly )
     {
-      media_mgr.provideFile (_media, media_nr, file_r);
+      media_mgr.provideFile (_media, media_nr, file_r, cached, checkonly);
       return media_mgr.localPath(_media, file_r);
     }
 

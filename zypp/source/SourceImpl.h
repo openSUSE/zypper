@@ -72,7 +72,9 @@ namespace zypp
        *
        */
       const Pathname provideFile(const Pathname & file,
-				 const unsigned media_nr = 1);
+				 const unsigned media_nr = 1,
+				 bool cached = false,
+				 bool checkonly = false);
 
       /**
        * Provide a directory to local filesystem

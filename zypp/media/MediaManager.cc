@@ -380,8 +380,9 @@ namespace zypp
 
         while (!isDesiredMedia(mediaId, mediaNr))
         {
-          MediaChangeReport::Action user 
-	    = report->requestMedia(media_access, mediaNr, MediaChangeReport::WRONG, "Wrong media");
+	  // on checkonly don't ask user
+          MediaChangeReport::Action user = checkonly ? MediaChangeReport::RETRY :
+	    report->requestMedia(media_access, mediaNr, MediaChangeReport::WRONG, "Wrong media");
 	
 	  if (user != MediaChangeReport::RETRY)
 	  {
@@ -396,8 +397,9 @@ namespace zypp
           break;
         }
         catch ( Exception & exp ) {
-          MediaChangeReport::Action user 
-	    = report->requestMedia(media_access, mediaNr, MediaChangeReport::NOT_FOUND, "File not found on the media");
+	  // on checkonly don't ask user
+          MediaChangeReport::Action user = checkonly ? MediaChangeReport::RETRY :
+	    report->requestMedia(media_access, mediaNr, MediaChangeReport::NOT_FOUND, "File not found on the media");
 
           if ( user != MediaChangeReport::RETRY )
             ZYPP_RETHROW( exp );
