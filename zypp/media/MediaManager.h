@@ -12,11 +12,11 @@
 #ifndef ZYPP_MEDIA_MEDIAMANAGER_H
 #define ZYPP_MEDIA_MEDIAMANAGER_H
 
-#include <zypp/media/MediaAccess.h>
-#include <zypp/base/NonCopyable.h>
-#include <zypp/base/PtrTypes.h>
-#include <zypp/Pathname.h>
-#include <zypp/Url.h>
+#include "zypp/media/MediaAccess.h"
+#include "zypp/base/NonCopyable.h"
+#include "zypp/base/PtrTypes.h"
+#include "zypp/Pathname.h"
+#include "zypp/Url.h"
 
 
 //////////////////////////////////////////////////////////////////////

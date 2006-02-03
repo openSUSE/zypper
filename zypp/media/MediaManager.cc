@@ -9,18 +9,18 @@
 /** \file zypp/media/MediaManager.cc
  *
 */
-#include <zypp/media/MediaException.h>
-#include <zypp/media/MediaManager.h>
-//#include <zypp/media/Mount.h>
-//#include <zypp/media/Hal.h>
-#include <zypp/thread/Mutex.h>
-#include <zypp/thread/MutexLock.h>
+#include "zypp/media/MediaException.h"
+#include "zypp/media/MediaManager.h"
+//#include "zypp/media/Mount.h"
+//#include "zypp/media/Hal.h"
+#include "zypp/thread/Mutex.h"
+#include "zypp/thread/MutexLock.h"
 
-#include <zypp/base/String.h>
-#include <zypp/base/Logger.h>
-#include <zypp/Pathname.h>
-#include <zypp/PathInfo.h>
-#include <zypp/ZYppCallbacks.h>
+#include "zypp/base/String.h"
+#include "zypp/base/Logger.h"
+#include "zypp/Pathname.h"
+#include "zypp/PathInfo.h"
+#include "zypp/ZYppCallbacks.h"
 
 #include <map>
 #include <list>
