@@ -67,7 +67,7 @@ operator<<( ostream& os, const ResolverQueue & resolverqueue)
 ResolverQueue::ResolverQueue (const ResPool & pool, ResolverContext_Ptr context)
     : _context (context)
 {
-DBG << "ResolverQueue::ResolverQueue(pool, " << context << ")" << endl;
+_DEBUG("ResolverQueue::ResolverQueue(pool, " << context << ")");
     if (context == NULL)
 	_context = new ResolverContext(pool);
 }
@@ -212,7 +212,7 @@ ResolverQueue::processOnce ()
     int max_priority;
     bool did_something = false;
 
-    DBG << "ResolverQueue::processOnce()" << (int) _qitems.size() << " items" << endl;
+    _DEBUG("ResolverQueue::processOnce()" << (int) _qitems.size() << " items");
     while ( (max_priority = qitemlist_max_priority (_qitems)) >= 0
 	    && _context->isValid () ) {
 
@@ -220,7 +220,7 @@ ResolverQueue::processOnce ()
 
 	for (QueueItemList::iterator iter = _qitems.begin(); iter != _qitems.end() && _context->isValid();) {
 	    QueueItem_Ptr qitem = *iter;
-//	    DBG <<  "=====> 1st pass: [" << qitem << "]" << endl;
+	    _DEBUG( "=====> 1st pass: [" << *qitem << "]");
 	    QueueItemList::iterator next = iter; ++next;
 	    if (qitem && qitem->priority() == max_priority) {
 		if (qitem->process (_context, new_qitems)) {
@@ -237,7 +237,7 @@ ResolverQueue::processOnce ()
     }
 
     _qitems = new_qitems;
-//    DBG <<  (int) _qitems.size() << " qitems after first pass" << endl;
+    _DEBUG(_qitems.size() << " qitems after first pass");
 
     /*
        Now make a second pass over the queue, removing any super-branches.
@@ -249,15 +249,15 @@ ResolverQueue::processOnce ()
 	QueueItemList::iterator next = iter; next++;
 	QueueItem_Ptr qitem = *iter;
 
-//	DBG <<  "=====> 2nd pass: [" << qitem << "]" << endl;
+	_DEBUG( "=====> 2nd pass: [" << *qitem << "]");
 	if (qitem->isBranch()) {
-//	    DBG << "ResolverQueue::processOnce() is branch" << endl;
+	    _DEBUG("ResolverQueue::processOnce() is branch");
 	    QueueItemBranch_Ptr branch = dynamic_pointer_cast<QueueItemBranch>(qitem);
 	    for (QueueItemList::const_iterator iter2 = _qitems.begin(); iter2 != _qitems.end(); iter2++) {
-//		DBG << "Compare branch with [" << (*iter2) << "]" << endl;
+		_DEBUG("Compare branch with [" << *(*iter2) << "]");
 		if (iter != iter2
 		    && branch->contains (*iter2)) {
-//		    DBG << "Contained within, removing" << endl;
+		    _DEBUG("Contained within, removing");
 		    _qitems.erase (iter);
 		    break;
 		}
@@ -265,10 +265,12 @@ ResolverQueue::processOnce ()
 	}
 	iter = next;
     }
-	  if (did_something)
-	      DBG <<  "did something: " << (int)_qitems.size() << " qitems" << endl;
-	  else
-	      DBG <<  "did nothing: " << (int)_qitems.size() << " qitems" << endl;	      
+	  if (did_something) {
+	      _DEBUG( "did something: " << _qitems.size() << " qitems");
+	  }
+	  else {
+	      _DEBUG( "did nothing: " << _qitems.size() << " qitems"); 
+	  }
 
     return did_something;
 }
@@ -277,7 +279,7 @@ ResolverQueue::processOnce ()
 void
 ResolverQueue::process ()
 {
-	  DBG << "----- Processing -----" << endl;
+	  _DEBUG("----- Processing -----");
 	  spew ();
 
     while (_context->isValid ()
@@ -415,21 +417,21 @@ ResolverQueue::splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueLi
 void
 ResolverQueue::spew ()
 {
-    DBG << "Resolver Queue: " << (_context->isInvalid() ? "INVALID" : "") << endl;
+    _DEBUG("Resolver Queue: " << (_context->isInvalid() ? "INVALID" : ""));
 
     if (_qitems.empty()) {
 
-	      DBG <<  "  (empty)" << endl;
+	      _DEBUG( "  (empty)");
 
     } else {
 	      for (QueueItemList::const_iterator iter = _qitems.begin(); iter != _qitems.end(); ++iter) {
-		  DBG << "  " << *(*iter) << endl;
+		  _DEBUG("  " << *(*iter));
 	      }
 
     }
 
-    DBG << endl;
-    fflush (stdout);
+    _DEBUG("");
+    cout.flush();
 }
 
 ///////////////////////////////////////////////////////////////////
