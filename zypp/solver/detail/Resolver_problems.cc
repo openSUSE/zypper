@@ -333,7 +333,9 @@ Resolver::problems (void) const
 		what = str::form (_("%s cannot be installed due missing dependencies"), who.c_str());		
 		details = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
-		// Add dummy provides
+		// uninstall
+		problem->addSolution (new ProblemSolutionUninstall (problem, item)); 
+		// ignore requirement
 		problem->addSolution (new ProblemSolutionIgnoreRequires (problem, item, misc_info->capability())); 
 		problems.push_back (problem);
 		problem_created = true;		
