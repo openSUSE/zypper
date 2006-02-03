@@ -62,6 +62,35 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
+    // CLASS NAME : NoVerifier
+    //
+    /**
+     * Dummy media verifier, which is always happy.
+     */
+    class NoVerifier : public MediaVerifierBase
+    {
+    public:
+      NoVerifier()
+      {}
+
+      virtual
+      ~NoVerifier()
+      {}
+
+      /*
+      ** Check if the specified attached media contains
+      ** the desired media number (e.g. SLES10 CD1). Always return true.
+      */
+      virtual bool
+      isDesiredMedia(const MediaAccessRef &ref, MediaNr mediaNr)
+      {
+        return true;
+      }
+    };
+
+
+    ///////////////////////////////////////////////////////////////////
+    //
     // CLASS NAME : MediaVerifierRef
     //
     /**

@@ -47,7 +47,7 @@ namespace zypp
 
       /** Default ctor
       */
-      YUMSourceImpl::YUMSourceImpl(media::MediaAccess::Ptr & media_r,
+      YUMSourceImpl::YUMSourceImpl(media::MediaId & media_r,
 				   const Pathname & path_r,
 				   const std::string & alias_r)
       : SourceImpl(media_r, path_r, alias_r)

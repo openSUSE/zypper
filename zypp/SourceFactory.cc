@@ -26,6 +26,9 @@ using namespace zypp::source;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+
+media::MediaManager media_mgr;
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : SourceFactory::Impl
@@ -84,15 +87,13 @@ namespace zypp
       ZYPP_THROW( Exception("Empty URL passed to SourceFactory") );
 
     // open the media
-    media::MediaAccess::Ptr media = new media::MediaAccess();
-    media->open( url_r );
-    media->attach();
+    media::MediaId id = media_mgr.open(url_r);
+    media_mgr.attach(id);
     Pathname products_file = Pathname("media.1/products");
-    media->provideFile (products_file);
-    products_file = media->localPath (products_file);
+    media_mgr.provideFile (id, 1, products_file);
+    products_file = media_mgr.localPath (id, products_file);
     scanProductsFile (products_file, products_r);
-    media->release();
-    media->close();
+    media_mgr.release(id);
   }
 
   Source_Ref SourceFactory::createFrom( const Url & url_r, const Pathname & path_r, const std::string & alias_r )
@@ -101,13 +102,15 @@ namespace zypp
       ZYPP_THROW( Exception("Empty URL passed to SourceFactory") );
 
     // open the media
-    media::MediaAccess::Ptr media = new media::MediaAccess();
-    media->open( url_r );
-    media->attach();
+    media::MediaId id = media_mgr.open(url_r);
+    
+    // add dummy verifier
+    media_mgr.addVerifier(id, media::MediaVerifierRef(new media::NoVerifier()));
+    media_mgr.attach(id);
     try
     {
       MIL << "Trying the YUM source" << endl;
-      Source_Ref::Impl_Ptr impl = new yum::YUMSourceImpl(media, path_r, alias_r);
+      Source_Ref::Impl_Ptr impl = new yum::YUMSourceImpl(id, path_r, alias_r);
       MIL << "Found the YUM source" << endl;
       return Source_Ref(impl);
     }
@@ -119,7 +122,7 @@ namespace zypp
     try
     {
       MIL << "Trying the SUSE tags source" << endl;
-      Source_Ref::Impl_Ptr impl = new susetags::SuseTagsImpl(media, path_r, alias_r);
+      Source_Ref::Impl_Ptr impl = new susetags::SuseTagsImpl(id, path_r, alias_r);
       MIL << "Found the SUSE tags source" << endl;
       return Source_Ref(impl);
     }

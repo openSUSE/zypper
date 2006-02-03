@@ -44,7 +44,7 @@ namespace zypp
         */
         SuseTagsImpl( const Pathname & localDir_r );
         /** Factory ctor */
-        SuseTagsImpl( media::MediaAccess::Ptr & media_r, const Pathname & path_r = "/", const std::string & alias_r = "");
+        SuseTagsImpl( media::MediaId & media_r, const Pathname & path_r = "/", const std::string & alias_r = "");
         /** Dtor */
         ~SuseTagsImpl();
 

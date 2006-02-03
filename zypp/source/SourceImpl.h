@@ -23,7 +23,7 @@
 #include "zypp/ResStore.h"
 
 #include "zypp/Pathname.h"
-#include "zypp/media/MediaAccess.h"
+#include "zypp/media/MediaManager.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -54,7 +54,7 @@ namespace zypp
       {}
 
       /** Ctor. */
-      SourceImpl(media::MediaAccess::Ptr & media_r,
+      SourceImpl(media::MediaId & media_r,
                  const Pathname & path_r = "/",
 		 const std::string & alias = "");
       /** Dtor. */
@@ -112,7 +112,7 @@ namespace zypp
       /** All resolvables provided by this source. */
       ResStore _store;
       /** Handle to media which contains this source */
-      media::MediaAccess::Ptr _media;
+      media::MediaId _media;
       /** Path to the source on the media */
       Pathname _path;
       /** The source is enabled */
@@ -138,6 +138,26 @@ namespace zypp
         static SourceImpl_Ptr _nullimpl( new SourceImpl );
         return _nullimpl;
       }
+
+      class Verifier : public media::MediaVerifierBase
+      {
+      public:
+	/** ctor */
+	Verifier (const std::string & vendor_r, const std::string & id_r);
+	/*
+	 ** Check if the specified attached media contains
+	 ** the desired media number (e.g. SLES10 CD1).
+	 */
+	virtual bool
+	isDesiredMedia(const media::MediaAccessRef &ref, media::MediaNr mediaNr);
+
+      private:
+	std::string _media_vendor;
+	std::string _media_id;
+	SourceImpl_Ptr _source;
+      };
+
+
     };
     ///////////////////////////////////////////////////////////////////
 

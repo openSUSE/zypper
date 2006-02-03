@@ -20,6 +20,7 @@
 #include <zypp/base/Logger.h>
 #include <zypp/Pathname.h>
 #include <zypp/PathInfo.h>
+#include <zypp/ZYppCallbacks.h>
 
 #include <map>
 #include <list>
@@ -371,15 +372,39 @@ namespace zypp
                               bool cached, bool checkonly) const
     {
       MutexLock lock(g_Mutex);
+      
+      callback::SendReport<MediaChangeReport> report;
+      MediaAccessRef media_access = m_impl->mediaAccMap[mediaId];
 
-      if( !isDesiredMedia(mediaId, mediaNr))
-      {
-        ZYPP_THROW(MediaNotDesiredException(
-          m_impl->mediaAccMap[mediaId]->url(), mediaNr
-        ));
-      }
+      do {
 
-      m_impl->mediaAccMap[mediaId]->provideFile(filename, cached, checkonly);
+        while (!isDesiredMedia(mediaId, mediaNr))
+        {
+          MediaChangeReport::Action user 
+	    = report->requestMedia(media_access, mediaNr, MediaChangeReport::WRONG, "Wrong media");
+	
+	  if (user != MediaChangeReport::RETRY)
+	  {
+    	    ZYPP_THROW(MediaNotDesiredException(
+              media_access->url(), mediaNr
+            ));
+	  };
+        }
+      
+        try {
+          media_access->provideFile(filename, cached, checkonly);
+          break;
+        }
+        catch ( Exception & exp ) {
+          MediaChangeReport::Action user 
+	    = report->requestMedia(media_access, mediaNr, MediaChangeReport::NOT_FOUND, "File not found on the media");
+
+          if ( user != MediaChangeReport::RETRY )
+            ZYPP_RETHROW( exp );
+          // here: RETRY
+        }
+
+      } while ( true );
     }
 
     // ---------------------------------------------------------------
