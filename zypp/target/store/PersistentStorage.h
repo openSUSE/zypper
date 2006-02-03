@@ -17,6 +17,7 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
+#include <zypp/Pathname.h>
 #include <zypp/Patch.h>
 
 ///////////////////////////////////////////////////////////////////
@@ -43,6 +44,11 @@ namespace zypp
       void doTest();
 
     public:
+      /**
+       * Initializes the Storage when the system is located in some
+       * root path. THIS MUST BE CALLED BEFORE DOING ANY OPERATION
+       */
+       void init(const Pathname &root);
       /**
        * Stores a Resolvable in the active backend.
        */

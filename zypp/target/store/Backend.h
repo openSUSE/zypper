@@ -15,6 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/base/PtrTypes.h"
+#include <zypp/Pathname.h>
 #include <zypp/Patch.h>
 
 ///////////////////////////////////////////////////////////////////
@@ -35,8 +36,8 @@ class Backend
 {
   friend std::ostream & operator<<( std::ostream & str, const Backend & obj );
 public:
-  /** Default ctor */
-  Backend();
+  /** root is the system root path */
+  Backend(const Pathname &root);
   /** Dtor */
   virtual ~Backend();
   virtual void doTest() = 0;

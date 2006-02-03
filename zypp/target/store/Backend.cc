@@ -43,7 +43,7 @@ namespace zypp
 		//	METHOD NAME : Backend::Backend
 		//	METHOD TYPE : Ctor
 		//
-		Backend::Backend()
+		Backend::Backend(const Pathname &root)
 		{}
 
 		///////////////////////////////////////////////////////////////////

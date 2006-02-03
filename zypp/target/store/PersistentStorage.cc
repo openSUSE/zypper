@@ -51,7 +51,12 @@ PersistentStorage::PersistentStorage()
 {
   d = new Private;
   DBG << "  Creating XML Files backend" << endl;
-  d->backend = new XMLFilesBackend();
+  d->backend = 0L;
+}
+
+void PersistentStorage::init(const Pathname &root)
+{
+  d->backend = new XMLFilesBackend(root);
 }
 
 ///////////////////////////////////////////////////////////////////

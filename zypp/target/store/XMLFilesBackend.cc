@@ -38,7 +38,7 @@
 #include "serialize.h"
 #include <list>
 
-#define ZYPP_DB_DIR "zypp_db"
+#define ZYPP_DB_DIR "/var/lib/zypp_db"
 
 using std::endl;
 using namespace boost::filesystem;
@@ -63,6 +63,7 @@ class XMLFilesBackend::Private
   { }
   bool randomFileName;
   std::set<Resolvable::Kind> kinds;
+  Pathname root;
 };
 
 ///////////////////////////////////////////////////////////////////
@@ -76,11 +77,11 @@ class XMLFilesBackend::Private
 //	METHOD NAME : XMLFilesBackend::XMLFilesBackend
 //	METHOD TYPE : Ctor
 //
-XMLFilesBackend::XMLFilesBackend()
+XMLFilesBackend::XMLFilesBackend(const Pathname &root) : Backend(root)
 {
   d = new Private;
   d->randomFileName = false;
-
+  d->root = root;
   // types of resolvables stored (supported)
   d->kinds.insert(ResTraits<zypp::Patch>::kind);
   //d->kinds.insert(ResTraits<zypp::Message>::kind);
@@ -165,7 +166,7 @@ XMLFilesBackend::initBackend()
 {
   // FIXME duncan * handle exceptions
   DBG << "Creating directory structure..." << std::endl;
-  path topdir(ZYPP_DB_DIR);
+  path topdir = path(d->root.asString()) / path(ZYPP_DB_DIR);
   create_directory(topdir);
   MIL << "Created..." << topdir.string() << std::endl;
   std::set<Resolvable::Kind>::const_iterator it_kinds;
@@ -173,7 +174,7 @@ XMLFilesBackend::initBackend()
   {
     Resolvable::Kind kind = (*it_kinds);
     # warning "add exception handling here"
-    path p(path(ZYPP_DB_DIR) / path(resolvableKindToString(kind, true /* plural */)));
+    path p(topdir / path(resolvableKindToString(kind, true /* plural */)));
     if (!exists(p))
     {
       create_directory(p);
@@ -191,10 +192,7 @@ std::string
 XMLFilesBackend::dirForResolvableKind( Resolvable::Kind kind ) const
 {
   std::string dir;
-  // FIXME replace with path class of boost
-  dir += std::string(ZYPP_DB_DIR);
-  dir += "/";
-  dir += resolvableKindToString(kind, true);
+  dir += path( path(d->root.asString()) / path(ZYPP_DB_DIR) / path(resolvableKindToString(kind, true)) ).string();
   return dir;
 }
 
@@ -208,9 +206,8 @@ std::string
 XMLFilesBackend::fullPathForResolvable( Resolvable::constPtr resolvable ) const
 {
   std::string filename;
-  filename = dirForResolvable(resolvable) + "/";
-  filename += d->randomFileName ? randomString(40) : (resolvable->name() + "-" + resolvable->edition().version());
-  return filename;
+  filename = d->randomFileName ? randomString(40) : (resolvable->name() + "-" + resolvable->edition().version());
+  return path( path(dirForResolvable(resolvable)) / path(filename)).string();
 }
 
 void

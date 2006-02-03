@@ -48,7 +48,7 @@ public:
 
   public:
   /** Default ctor */
-  XMLFilesBackend();
+  XMLFilesBackend(const Pathname &root);
   /** Dtor */
   ~XMLFilesBackend();
   void setRandomFileNameEnabled( bool enabled );
