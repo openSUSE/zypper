@@ -9,18 +9,17 @@
 /** \file zypp/media/MediaManager.cc
  *
 */
-#include "zypp/media/MediaException.h"
-#include "zypp/media/MediaManager.h"
-//#include "zypp/media/Mount.h"
-//#include "zypp/media/Hal.h"
-#include "zypp/thread/Mutex.h"
-#include "zypp/thread/MutexLock.h"
+#include <zypp/media/MediaException.h>
+#include <zypp/media/MediaManager.h>
+//#include <zypp/media/Mount.h>
+//#include <zypp/media/Hal.h>
+#include <zypp/thread/Mutex.h>
+#include <zypp/thread/MutexLock.h>
 
-#include "zypp/base/String.h"
-#include "zypp/base/Logger.h"
-#include "zypp/Pathname.h"
-#include "zypp/PathInfo.h"
-#include "zypp/ZYppCallbacks.h"
+#include <zypp/base/String.h>
+#include <zypp/base/Logger.h>
+#include <zypp/Pathname.h>
+#include <zypp/PathInfo.h>
 
 #include <map>
 #include <list>
@@ -372,41 +371,15 @@ namespace zypp
                               bool cached, bool checkonly) const
     {
       MutexLock lock(g_Mutex);
-      
-      callback::SendReport<MediaChangeReport> report;
-      MediaAccessRef media_access = m_impl->mediaAccMap[mediaId];
-      MIL << "MediaManager::provideFile(media " << media_access << ", nr " << mediaNr << ", file " << filename << ", cached " << cached << ", checkonly " << checkonly << std::endl; 
-      do {
 
-        while (!isDesiredMedia(mediaId, mediaNr))
-        {
-	  // on checkonly don't ask user
-          MediaChangeReport::Action user = checkonly ? MediaChangeReport::RETRY :
-	    report->requestMedia(media_access, mediaNr, MediaChangeReport::WRONG, "Wrong media");
-	
-	  if (user != MediaChangeReport::RETRY)
-	  {
-    	    ZYPP_THROW(MediaNotDesiredException(
-              media_access->url(), mediaNr
-            ));
-	  };
-        }
-      
-        try {
-          media_access->provideFile(filename, cached, checkonly);
-          break;
-        }
-        catch ( Exception & exp ) {
-	  // on checkonly don't ask user
-          MediaChangeReport::Action user = checkonly ? MediaChangeReport::RETRY :
-	    report->requestMedia(media_access, mediaNr, MediaChangeReport::NOT_FOUND, "File not found on the media");
+      if( !isDesiredMedia(mediaId, mediaNr))
+      {
+        ZYPP_THROW(MediaNotDesiredException(
+          m_impl->mediaAccMap[mediaId]->url(), mediaNr
+        ));
+      }
 
-          if ( user != MediaChangeReport::RETRY )
-            ZYPP_RETHROW( exp );
-          // here: RETRY
-        }
-
-      } while ( true );
+      m_impl->mediaAccMap[mediaId]->provideFile(filename, cached, checkonly);
     }
 
     // ---------------------------------------------------------------
