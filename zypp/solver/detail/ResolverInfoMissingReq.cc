@@ -50,7 +50,7 @@ ResolverInfoMissingReq::dumpOn( std::ostream & os ) const
     ResolverInfo::dumpOn (os);
 
     ostringstream affected_str;
-    affected_str << affected();
+    affected_str << ResolverInfo::toString (affected());
 
     ostringstream mis_str;
     mis_str << _missing;

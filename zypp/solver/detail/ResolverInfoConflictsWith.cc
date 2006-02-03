@@ -49,13 +49,13 @@ ResolverInfoConflictsWith::dumpOn( std::ostream & os ) const
 {
     ResolverInfo::dumpOn (os);
     ostringstream affected_str;
-    affected_str << affected();
+    affected_str << ResolverInfo::toString (affected());
 
     // Translator: all.%s = name of package, patch,...
     os << str::form (_("%s conflicts with %s"),
 			    affected_str.str().c_str(),
 			    itemsToString(false).c_str());
-	  return os;
+    return os;
 }
 
 //---------------------------------------------------------------------------

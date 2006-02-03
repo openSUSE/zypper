@@ -111,6 +111,9 @@ class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
 
     // ---------------------------------- I/O
 
+    static std::string toString (PoolItem_Ref item);
+    static std::string toString (const Capability & capability);
+
     virtual std::ostream & dumpOn( std::ostream & str ) const;
     friend std::ostream& operator<<(std::ostream & str, const ResolverInfo & obj)
     { return obj.dumpOn (str); }

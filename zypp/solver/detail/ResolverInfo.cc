@@ -20,8 +20,11 @@
  */
 
 #include <map>
+#include <sstream>
 
 #include "zypp/solver/detail/ResolverInfo.h"
+#include "zypp/Source.h"
+#include "zypp/Capability.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Logger.h"
@@ -115,6 +118,40 @@ resolver_info_type_from_string (const char *str)
     return RESOLVER_INFO_TYPE_INVALID;
 }
 
+string
+ResolverInfo::toString (PoolItem_Ref item)
+{
+    ostringstream os;
+    if (!item) return "";
+
+    if (item->kind() != ResTraits<zypp::Package>::kind)
+	os << item->kind() << ':';
+    os  << item->name() << '-' << item->edition();
+    if (item->arch() != "") {
+	os << '.' << item->arch();
+    }
+    Source_Ref s = item->source();
+    if (s) {
+	string alias = s.alias();
+	if (!alias.empty()
+	    && alias != "@system")
+	{
+	    os << '[' << s.alias() << ']';
+	}
+    }
+    return os.str();
+}
+
+
+string
+ResolverInfo::toString (const Capability & capability)
+{
+    ostringstream os;
+    os << capability;
+    return os.str();
+}
+
+
 //---------------------------------------------------------------------------
 
 std::ostream &
@@ -125,7 +162,7 @@ ResolverInfo::dumpOn( std::ostream & os ) const
     os << "> ";
 
     if (_affected) {
-	os << _affected << ":";
+	os << toString (_affected);
     }
 
     if (_error) os << _(" Error!");

@@ -50,7 +50,7 @@ ResolverInfoChildOf::dumpOn( std::ostream & os ) const
     ResolverInfo::dumpOn (os);
 
     ostringstream affected_str;
-    affected_str << affected();
+    affected_str << ResolverInfo::toString (affected());
 
     //Translator all.%s = name of packages,patches,....
     os << str::form (_("%s part of %s"),

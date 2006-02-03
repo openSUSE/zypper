@@ -50,7 +50,7 @@ ResolverInfoContainer::dumpOn( std::ostream & os ) const
     os << "<resolverinfocontainer '";
     for (PoolItemList::const_iterator it = _item_list.begin(); it != _item_list.end(); ++it) {
 	if (it != _item_list.begin()) os << ", ";
-	os << *it;
+	os << ResolverInfo::toString (*it);
     }
     os << "'>";
     return os;
@@ -150,7 +150,7 @@ ResolverInfoContainer::itemsToString (const bool names_only) const
 	     iter != _item_list.end(); iter++)
 	{
 	    res << "\n- ";	    
-	    res << (*iter);
+	    res << ResolverInfo::toString (*iter);
 	}	
     }
 
