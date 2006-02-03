@@ -74,7 +74,7 @@ namespace zypp
            it != packages.end();
            it++)
       {
-	_store.insert(*it);
+        _store.insert(*it);
       }
       // TODO objects from the XML store
       return _store;
