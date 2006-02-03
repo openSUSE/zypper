@@ -1,0 +1,4 @@
+# product selection.exp
+# run tests for producttagparsertest
+
+  shouldPass "producttagparsertest"
