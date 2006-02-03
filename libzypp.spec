@@ -1,5 +1,5 @@
 #
-# spec file for package libzypp (Version 0.0.0)
+# spec file for package libzypp (Version 0.0.1)
 #
 # Copyright (c) 2006 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -16,9 +16,9 @@ License:      GPL
 Group:        System/Packages
 BuildRoot:    %{_tmppath}/%{name}-%{version}-build
 Autoreqprov:  on
-Obsoletes:    yast2-packagemanager
+Obsoletes:
 Summary:      Package, Patch, Pattern, and Product Management
-Version:      0.0.1
+Version:      0.0.3
 Release:      1
 Source:       zypp-0.0.0.tar.bz2
 prefix:       /usr
@@ -65,7 +65,6 @@ make check
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
 
-
 %post
 %run_ldconfig
 
@@ -91,6 +90,10 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/share/zypp/*
 
 %changelog -n libzypp
+* Thu Feb 02 2006 - schubi@suse.de
+- Snapshoot 2 Feb 2005 (14:00)
+* Thu Feb 02 2006 - schubi@suse.de
+- Snapshoot 2 Feb 2005 ( integrating YaST )
 * Wed Jan 25 2006 - mls@suse.de
 - converted neededforbuild to BuildRequires
 * Sat Jan 14 2006 - kkaempf@suse.de
