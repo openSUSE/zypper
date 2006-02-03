@@ -17,6 +17,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/Exception.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/String.h"
 
@@ -74,6 +75,9 @@ namespace zypp
       void MediaPatchesMetadataParser::parse( const Pathname & file_r, MediaPatchesEntry &entry_r )
       {
         std::ifstream file(file_r.asString().c_str());
+	if (!file) {
+	    ZYPP_THROW(Exception("Can't read patches file "+file_r.asString()));
+	}
         std::string buffer;
         // read vendor
         getline(file, buffer);
@@ -92,7 +96,7 @@ namespace zypp
           // throw exception? 
         }
 
-        while(!file.eof())
+        while(file && !file.eof())
         {
           getline(file, buffer);
           rx = boost::regex("^(.+)-(.+)$");

@@ -17,6 +17,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/Exception.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/String.h"
 
@@ -74,6 +75,10 @@ namespace zypp
       void MediaMetadataParser::parse( const Pathname & file_r, MediaEntry &entry_r )
       {
         std::ifstream file(file_r.asString().c_str());
+	if (!file) {
+	    ZYPP_THROW(Exception("Can't read media file "+file_r.asString()));
+	}
+
         std::string buffer;
         // read vendor
         getline(file, entry_r.vendor);
@@ -103,7 +108,7 @@ namespace zypp
           entry_r.count = 1;
         }
         
-        while(!file.eof())
+        while(file && !file.eof())
         {
           // probably is the first line after we dont find the media number
           if(consume)
