@@ -74,6 +74,8 @@ namespace zypp
 
     void ZYppImpl::finishTarget()
     {
+      if (_target)
+	removeResolvables (_target->resolvables());
       _target = 0;
     }
 
