@@ -234,16 +234,22 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       ++opt_stats_r.pre_todel;
       continue;
     }
-
+MIL << "look at item " << item << endl;
     if ( item.status().isInstalled() ) {
       installed = item;
-      candidate = Helper::findUpdateItem( _pool, installed);
+      CandidateMap::const_iterator cand_it = candidatemap.find(installed);
+      if (cand_it != candidatemap.end()) {
+	candidate = cand_it->second;
+      }
+      else {
+	candidate = Helper::findUpdateItem( _pool, installed);
+      }
       if (!candidate) {
 	MIL << "doUpgrade available: SKIP no candidate for " << installed << endl;
 	++opt_stats_r.pre_nocand;
 	continue;
       }
-MIL << "item is installed " << installed << ", candidate is " << candidate << endl;
+MIL << "item is installed, candidate is " << candidate << endl;
       if (candidate.status().isUnneeded()) {			// seen already
 	candidate.status().setUndetermined();
 	continue;
@@ -252,7 +258,7 @@ MIL << "item is installed " << installed << ", candidate is " << candidate << en
       candidatemap[installed] = candidate;
     }
     else {					// assume Uninstalled
-MIL << "item is uninstalled " << item << endl;
+MIL << "item is uninstalled" << endl;
       if (item.status().isUnneeded()) {				// seen already
 	item.status().setUndetermined();
 	continue;
@@ -261,11 +267,16 @@ MIL << "item is uninstalled " << item << endl;
       candidate.status().setUnneeded();				// mark as seen
       installed = Helper::findInstalledItem (_pool, candidate);
       if (installed) {						// check if we already have an installed
+MIL << "found installed for item: " << installed << endl;
 	CandidateMap::const_iterator cand_it = candidatemap.find(installed);
-	if (cand_it != candidatemap.end()
-	    && cand_it->second->edition().compare (candidate->edition()) < 0) {	// the new is better!
-	    candidatemap[installed] = candidate;
+	if (cand_it == candidatemap.end()					// not in map yet
+	    || cand_it->second->edition().compare (candidate->edition()) < 0)	// or the new is better!
+	{
+	    candidatemap[installed] = candidate;				// put it in !
 	}
+      }
+      else {
+MIL << "no installed for item" << endl;
       }
     }
 
