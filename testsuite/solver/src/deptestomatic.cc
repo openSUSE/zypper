@@ -1132,7 +1132,61 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		    cout << **iter << endl;
 		}
 	    }
+	} else if (node->equals ("takesolution")) {
+	    string problemNrStr = node->getProp ("problem");
+	    string solutionNrStr = node->getProp ("solution");
+	    assert (!problemNrStr.empty());
+	    assert (!solutionNrStr.empty());
+            int problemNr = atoi (problemNrStr.c_str());
+            int solutionNr = atoi (solutionNrStr.c_str());
+            RESULT << "Taking solution: " << solutionNr << endl;
+            RESULT << "For problem:     " << problemNr << endl;
+            ResolverProblemList problems = resolver->problems ();
+            
+            int problemCounter = 0;
+            int solutionCounter = 0;
+            // find problem
+            for (ResolverProblemList::iterator probIter = problems.begin();
+                 probIter != problems.end(); ++probIter) {
+                if (problemCounter == problemNr) {
+                    ResolverProblem problem = **probIter;
+                    ProblemSolutionList solutionList = problem.solutions();
+                    //find solution
+                    for (ProblemSolutionList::iterator solIter = solutionList.begin();
+                         solIter != solutionList.end(); ++solIter) {
+                        if (solutionCounter == solutionNr) {
+                            ProblemSolution_Ptr solution = *solIter;
+                            cout << "Taking solution: " << endl << *solution << endl;
+                            cout << "For problem: " << endl << problem << endl;
+                            ProblemSolutionList doList;
+                            doList.push_back (solution);
+                            resolver->applySolutions (doList);
+                            break;
+                        }
+                        solutionCounter++;
+                    }
+                    break;
+                }
+                problemCounter++;
+            }
 
+            if (problemCounter != problemNr) {
+                RESULT << "Wrong problem number (0-" << problemCounter-1 << ")" << endl;
+            } else if (solutionCounter != solutionNr) {
+                RESULT << "Wrong solution number (0-" << solutionCounter-1 << ")" <<endl;
+            } else {
+                // resolve and check it again
+                if (resolver->resolveDependencies (established) == true) {
+                    RESULT << "No problems so far" << endl;
+                }
+                else {
+                    ResolverProblemList problems = resolver->problems ();
+                    RESULT << problems.size() << " problems found:" << endl;
+                    for (ResolverProblemList::iterator iter = problems.begin(); iter != problems.end(); ++iter) {
+                        cout << **iter << endl;
+                    }
+                }
+            }
 	} else {
 	    cerr << "Unknown tag '" << node->name() << "' in trial" << endl;
 	}
