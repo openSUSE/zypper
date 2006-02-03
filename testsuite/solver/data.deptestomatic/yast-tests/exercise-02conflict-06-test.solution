@@ -5,6 +5,3 @@
 >!> remove  test2-1.0-1
 >!> |unflag test4-1.0-1[test]
 >!> installs=1, upgrades=0, uninstalls=2
->!> Solution #2:
->!> This solution is a duplicate.
->!> installs=1, upgrades=0, uninstalls=2

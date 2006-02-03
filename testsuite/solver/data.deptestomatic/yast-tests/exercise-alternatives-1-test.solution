@@ -5,8 +5,8 @@
 >!> install postfix-1.0-1[test]
 >!> installs=3, upgrades=0, uninstalls=0
 >!> Solution #2:
->!> install WindowMaker-1.0-1[test]
 >!> install alt-1.0-1[test]
+>!> install icewm-1.0-1[test]
 >!> install sendmail-1.0-1[test]
 >!> installs=3, upgrades=0, uninstalls=0
 >!> Solution #3:
@@ -15,7 +15,7 @@
 >!> install postfix-1.0-1[test]
 >!> installs=3, upgrades=0, uninstalls=0
 >!> Solution #4:
+>!> install WindowMaker-1.0-1[test]
 >!> install alt-1.0-1[test]
->!> install icewm-1.0-1[test]
 >!> install sendmail-1.0-1[test]
 >!> installs=3, upgrades=0, uninstalls=0
