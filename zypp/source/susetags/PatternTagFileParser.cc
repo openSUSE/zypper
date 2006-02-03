@@ -98,6 +98,14 @@ namespace zypp
         {
           selImpl->_recommends = tag.values;
         }
+        else if ( tag.name == "Prv" )
+        {
+          selImpl->_provides = tag.values;
+        }
+        else if ( tag.name == "Obs" )
+        {
+          selImpl->_obsoletes = tag.values;
+        }
         else if ( tag.name == "Con" )
         {
           selImpl->_conflicts = tag.values;
@@ -136,9 +144,20 @@ namespace zypp
 	  _deps[Dep::CONFLICTS].insert(_cap);
         }
 
+        for (std::list<std::string>::const_iterator it = selImpl->_provides.begin(); it != selImpl->_provides.end(); it++)
+        {
+          Capability _cap = _f.parse( ResTraits<Pattern>::kind, *it );
+	  _deps[Dep::PROVIDES].insert(_cap);
+        }
+
+        for (std::list<std::string>::const_iterator it = selImpl->_obsoletes.begin(); it != selImpl->_obsoletes.end(); it++)
+        {
+          Capability _cap = _f.parse( ResTraits<Pattern>::kind, *it );
+	  _deps[Dep::OBSOLETES].insert(_cap);
+        }
+
         for (std::list<std::string>::const_iterator it = selImpl->_pkgrecommends.begin(); it != selImpl->_pkgrecommends.end(); it++)
         {
-DBG << "recommends pkg '" << *it << "'" << endl;
           Capability _cap = _f.parse( ResTraits<Package>::kind, *it );
 	  _deps[Dep::RECOMMENDS].insert(_cap);
         }
