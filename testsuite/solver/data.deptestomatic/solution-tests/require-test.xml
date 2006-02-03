@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <channel name="test" file="require-packages.xml"/>
+</setup>
+
+<!-- Install packages which requires a none exist package -->
+<!-- RESOLVER_INFO_TYPE_REJECT_INSTALL will be returned -->
+<!-- RRESOLVER_INFO_TYPE_NO_PROVIDER would be better -->
+
+<trial>
+  <install channel="test" package="foonew"/> 
+  <reportproblems/>
+</trial>
+
+</test>
