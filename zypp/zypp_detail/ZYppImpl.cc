@@ -66,10 +66,11 @@ namespace zypp
 
     void ZYppImpl::initTarget(const Pathname & root)
     {
-       if (_target)
-	 _target = Target_Ptr();
-       _target = new Target(root);
-     }
+      if (_target)
+	_target = Target_Ptr();
+      _target = new Target(root);
+      addResolvables (_target->resolvables(), true);
+    }
 
     void ZYppImpl::finishTarget()
     {
