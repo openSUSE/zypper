@@ -60,12 +60,16 @@ void
 MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
 {
     if(!url.isValid()) {
+	MIL << "Url is not valid" << endl;
         ZYPP_THROW(MediaBadUrlException(url));
     }
 
     close();
 
     std::string scheme = url.getScheme();
+
+    MIL << "Trying scheme '" << scheme << "'" << endl;
+
     if (scheme == "cd" || scheme == "dvd")
         _handler = new MediaCD (url,preferred_attach_point);
     else if (scheme == "nfs")

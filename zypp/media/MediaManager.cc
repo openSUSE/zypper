@@ -375,7 +375,7 @@ namespace zypp
       
       callback::SendReport<MediaChangeReport> report;
       MediaAccessRef media_access = m_impl->mediaAccMap[mediaId];
-
+      MIL << "MediaManager::provideFile(media " << media_access << ", nr " << mediaNr << ", file " << filename << ", cached " << cached << ", checkonly " << checkonly << std::endl; 
       do {
 
         while (!isDesiredMedia(mediaId, mediaNr))
