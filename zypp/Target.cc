@@ -76,6 +76,9 @@ namespace zypp
   bool Target::providesFile (const std::string & name_str, const std::string & path_str) const
   { return _pimpl->providesFile (name_str, path_str); }
 
+  ResObject::constPtr Target::whoOwnsFile (const std::string & path_str) const
+  { return _pimpl->whoOwnsFile (path_str); }
+
   std::ostream & Target::dumpOn( std::ostream & str ) const
   { return _pimpl->dumpOn( str ); }
 

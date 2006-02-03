@@ -60,6 +60,8 @@ namespace zypp
 	  Needed to evaluate split provides during Resolver::Upgrade() */
       bool providesFile (const std::string & name_str, const std::string & path_str) const;
 
+      ResObject::constPtr whoOwnsFile (const std::string & path_str) const;
+
   public:
     /** Ctor */
     explicit
