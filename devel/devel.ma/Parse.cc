@@ -21,15 +21,12 @@
 #include <zypp/source/susetags/SuseTagsImpl.h>
 
 #include "zypp/ResPoolManager.h"
+#include "zypp/ui/Selectable.h"
 
 using namespace std;
 using namespace zypp;
 using namespace zypp::functor;
 using namespace zypp::resfilter;
-
-namespace zypp
-{
-}
 
 ///////////////////////////////////////////////////////////////////
 
@@ -98,15 +95,57 @@ template<class _Iterator>
 
 ///////////////////////////////////////////////////////////////////
 
-void test( ResPool::const_iterator begin, ResPool::const_iterator end, const Edition & ed, Rel op = Rel::EQ )
+namespace zypp { namespace ui
 {
-  SEC << "Serach for editions " << op << ' ' << ed << ':' << endl;
-  SEC << invokeOnEach( begin, end,
 
-                       resfilter::byEdition( Edition("2.0-1"), CompareBy<Edition>(op) ),
+  struct PP
+  {
+    typedef std::set<ResPool::Item>         ItemC;
+    struct SelC
+    {
+      void add( ResPool::Item it )
+      { available.insert( it ); }
+      ItemC installed;
+      ItemC available;
+    };
+    typedef std::map<std::string,SelC>      NameC;
+    typedef std::map<ResObject::Kind,NameC> KindC;
 
-                       Print() ) << endl;
-}
+    KindC _kinds;
+
+    void operator()( ResPool::Item it )
+    {
+      _kinds[it->kind()][it->name()].add( it );
+    }
+
+    void dumpOn() const
+    {
+      for ( KindC::const_iterator it = _kinds.begin(); it != _kinds.end(); ++it )
+        {
+          ERR << it->first << endl;
+          for ( NameC::const_iterator nit = it->second.begin(); nit != it->second.end(); ++nit )
+            {
+              WAR << nit->first << endl;
+              MIL << "i " << nit->second.installed.size()
+                  << " a " << nit->second.available.size() << endl;
+            }
+        }
+    }
+  };
+
+  class ResPoolProxy
+  {
+  public:
+
+  };
+
+
+
+}}
+
+
+
+///////////////////////////////////////////////////////////////////
 
 /******************************************************************
 **
@@ -129,16 +168,13 @@ int main( int argc, char * argv[] )
   ResPool query( pool.accessor() );
   rstats( query.begin(), query.end() );
 
-  SEC << invokeOnEach( query.begin(), query.end(),
-                       Print() ) << endl;
+  ui::PP collect;
+  for_each( query.begin(), query.end(),
+            functorRef<void,ResPool::Item>( collect ) );
+  collect.dumpOn();
 
-  test( query.begin(), query.end(), Edition("2.0-1"), Rel::LT );
-  test( query.begin(), query.end(), Edition("2.0-1"), Rel::LE );
-  test( query.begin(), query.end(), Edition("2.0-1"), Rel::EQ );
-  test( query.begin(), query.end(), Edition("2.0-1"), Rel::GE );
-  test( query.begin(), query.end(), Edition("2.0-1"), Rel::GT );
-  test( query.begin(), query.end(), Edition("2.0-1"), Rel::ANY );
-  test( query.begin(), query.end(), Edition("2.0-1"), Rel::NONE );
+
+
 
 
 

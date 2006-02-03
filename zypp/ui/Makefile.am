@@ -7,12 +7,16 @@ SUBDIRS =
 
 uiincludedir = $(pkgincludedir)/ui
 
-uiinclude_HEADERS =
+uiinclude_HEADERS = \
+	Status.h	\
+	Selectable.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_ui.la
 
 ## ##################################################
 
-lib@PACKAGE@_ui_la_SOURCES =
+lib@PACKAGE@_ui_la_SOURCES = \
+	Status.cc	\
+	Selectable.cc
 
 ## ##################################################

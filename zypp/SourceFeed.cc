@@ -50,7 +50,7 @@ namespace zypp
       for ( const_iterator it = sources_r.begin(); it != sources_r.end(); ++it )
         {
           _sources.insert( *it );
-//          _pool.insert( it->resolvables().begin(), it->resolvables().end() );
+          _pool.insert( it->resolvables().begin(), it->resolvables().end() );
         }
     }
 
@@ -58,7 +58,7 @@ namespace zypp
     {
       for ( const_iterator it = sources_r.begin(); it != sources_r.end(); ++it )
         {
-//          _pool.erase( it->resolvables().begin(), it->resolvables().end() );
+          //_pool.erase( it->resolvables().begin(), it->resolvables().end() );
           _sources.erase( *it );
         }
     }

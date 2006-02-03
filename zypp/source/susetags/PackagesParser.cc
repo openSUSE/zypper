@@ -34,12 +34,12 @@ namespace zypp
 
       using namespace parser::tagfile;
 
-      struct PackagesParser : public zypp::parser::tagfile::TagFileParser
+      struct PackagesParser : public parser::tagfile::TagFileParser
       {
         std::list<Package::Ptr> result;
-	
-	zypp::Source_Ref _source;
-	zypp::source::susetags::SuseTagsImpl::Ptr _sourceImpl;
+
+	Source_Ref _source;
+	SuseTagsImpl::Ptr _sourceImpl;
 
         shared_ptr<source::susetags::SuseTagsPackageImpl> pkgImpl;
         NVRAD nvrad;
