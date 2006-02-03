@@ -18,7 +18,7 @@ BuildRoot:    %{_tmppath}/%{name}-%{version}-build
 Autoreqprov:  on
 Obsoletes:    yast2-packagemanager
 Summary:      Package, Patch, Pattern, and Product Management
-Version:      0.0.0
+Version:      0.0.1
 Release:      1
 Source:       zypp-0.0.0.tar.bz2
 prefix:       /usr
@@ -64,8 +64,6 @@ make check
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
-# Create filelist with translatins
-%{find_lang} zypp
 
 
 %post
@@ -77,7 +75,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f zypp.lang
+%files
 %defattr(-,root,root)
 %dir %{_libdir}/libzypp*so.*
 
@@ -85,8 +83,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %dir %{_libdir}/libzypp.so
 %dir %{_libdir}/libzypp.la
-%dir %{_docdir}/zypp
-%{_docdir}/zypp/*
+#%dir %{_docdir}/zypp
+#%{_docdir}/zypp/*
 %dir %{prefix}/include/zypp
 %{prefix}/include/zypp/*
 %dir %{prefix}/share/zypp
