@@ -97,6 +97,7 @@ Resolver::reset (void)
     _ignoreConflicts.clear();
     _ignoreRequires.clear();
     _ignoreArchitecture.clear();
+    _ignoreInstalledItem.clear();
 
     _pending_queues.clear();
     _pruned_queues.clear();
@@ -227,7 +228,11 @@ Resolver::addIgnoreArchitecture (const PoolItem_Ref item)
     _ignoreArchitecture.push_back (item);
 }
 
-
+void
+Resolver::addIgnoreInstalledItem (const PoolItem_Ref item)
+{
+    _ignoreInstalledItem.push_back (item);
+}
 
 //---------------------------------------------------------------------------
 

@@ -163,6 +163,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     bool requirementIsPossible (const Capability & cap) const;
     bool itemIsPossible (const PoolItem_Ref item) const;
     bool isParallelInstall (const PoolItem_Ref item) const;
+    PoolItem_Ref getParallelInstall (const PoolItem_Ref item) const;
 
     /** iterate over various states */
 

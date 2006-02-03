@@ -125,7 +125,8 @@ static string
 toString (PoolItem_Ref item)
 {
     ostringstream os;
-    os << item;
+    ResObject::constPtr res = item.resolvable();
+    os << res->name() << " (" << res->edition() << "/" << res->source() << ")";
     return os.str();
 }
 
@@ -194,9 +195,14 @@ ResolverInfoMisc::message (void) const
 	break;
 
 	case RESOLVER_INFO_TYPE_INSTALL_PARALLEL: {
+	    // affected() = item 1 which has to be installed
+	    // _capability =
+	    // other() = item 2 which has to be installed
+	    // other_capability() =
 	    // Translator: %s = name of package,patch,...
-	    msg = str::form (_("Can't install %s, since a resolvable of the same name is already marked as needing to be installed"),
-			affected_str.c_str());
+	    msg = str::form (_("Can't install %s, since %s is already marked as needing to be installed"),
+			     affected_str.c_str(),
+			     toString (other()).c_str());
 	}
 	break;
 

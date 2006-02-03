@@ -328,15 +328,6 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	if (!_upgraded_item) {
 
 	    ResolverInfo_Ptr err_info;
-
-	    if (_remove_only) {
-		err_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER, _requiring_item, RESOLVER_INFO_PRIORITY_VERBOSE, _capability);
-	    } else {
-		err_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NO_PROVIDER, _requiring_item, RESOLVER_INFO_PRIORITY_VERBOSE, _capability);
-	    }
-
-	    context->addInfo (err_info);
-
 	    NoInstallableProviders info;
 	    info.requirer = _requiring_item;
 	    info.context = context;
@@ -478,8 +469,20 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	    new_items.push_front (branch_item);
 	} else {
 	    // We can't do anything to resolve the missing requirement, so we fail.
-
-	    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CANT_SATISFY, _requiring_item, RESOLVER_INFO_PRIORITY_VERBOSE, _capability);
+	    ResolverInfo_Ptr misc_info;
+	    if (!_upgraded_item) {
+		if (_remove_only) {
+		    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER,
+						     _requiring_item, RESOLVER_INFO_PRIORITY_VERBOSE, _capability);
+		} else {
+		    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NO_PROVIDER,
+						     _requiring_item, RESOLVER_INFO_PRIORITY_VERBOSE, _capability);
+		}
+	    } else {
+		ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CANT_SATISFY,
+								   _requiring_item, RESOLVER_INFO_PRIORITY_VERBOSE,
+								   _capability);
+	    }
 	    context->addError (misc_info);
 	}
 

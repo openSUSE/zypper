@@ -42,6 +42,7 @@ namespace zypp
 IMPL_PTR_TYPE(ProblemSolutionIgnoreConflicts);
 IMPL_PTR_TYPE(ProblemSolutionIgnoreRequires);
 IMPL_PTR_TYPE(ProblemSolutionIgnoreArch);
+IMPL_PTR_TYPE(ProblemSolutionIgnoreInstalled);	
 
 //---------------------------------------------------------------------------
 
@@ -54,6 +55,18 @@ ProblemSolutionIgnoreRequires::ProblemSolutionIgnoreRequires( ResolverProblem_Pt
 	addAction ( new InjectSolutionAction (item, capability, REQUIRES));
 }
 
+ProblemSolutionIgnoreRequires::ProblemSolutionIgnoreRequires( ResolverProblem_Ptr parent,
+							      PoolItemList itemList,	  
+							      const Capability & capability)
+    : ProblemSolution (parent, "", "")
+{
+	_description = _("Ignoring this requirement");
+	for (PoolItemList::const_iterator iter = itemList.begin();
+	     iter != itemList.end(); iter++) {
+	    addAction ( new InjectSolutionAction (*iter, capability, REQUIRES));
+	}
+}
+	
 ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
 								PoolItem_Ref item,
 								const Capability & capability,
@@ -72,6 +85,17 @@ ProblemSolutionIgnoreArch::ProblemSolutionIgnoreArch( ResolverProblem_Ptr parent
 {
     _description = _("Ignoring Architecture");
     addAction ( new InjectSolutionAction (item, Capability(), ARCHITECTURE));
+}
+
+ProblemSolutionIgnoreInstalled::ProblemSolutionIgnoreInstalled( ResolverProblem_Ptr parent,
+								PoolItem_Ref item,
+								PoolItem_Ref otherItem)
+    : ProblemSolution (parent, "", "")
+{
+	// TranslatorExplanation %s = name of package, patch, selection ...
+	_description = str::form (_("Ignoring that %s is already set to install"),
+				  item->name().c_str());
+	addAction (new InjectSolutionAction (item, Capability(), INSTALLED, otherItem));	
 }
 	
       ///////////////////////////////////////////////////////////////////

@@ -109,6 +109,7 @@ InjectSolutionAction::dumpOn( ostream& os ) const
 	case REQUIRES:	os << "Requires"; break;
 	case CONFLICTS:	os << "Conflicts"; break;
 	case ARCHITECTURE: os << "Architecture"; break;
+	case INSTALLED: os << "Installed"; break;
 	default: os << "Wrong kind"; break;
     }
     os << " ";
@@ -137,6 +138,7 @@ TransactionSolutionAction::execute(Resolver & resolver) const
     switch (action()) {
 	case KEEP:
 	    ret = _item.status().setNoTransact (ResStatus::USER);
+	    break;
 	case INSTALL:
 	case UPDATE:
 	    _item.status().setToBeInstalled (ResStatus::USER);
@@ -159,29 +161,38 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 bool
 InjectSolutionAction::execute(Resolver & resolver) const
 {
-    if (_kind == CONFLICTS) {
-	// removing conflict in both resolvables
-	Dependencies dependencies = _item.resolvable()->deps();
-	CapSet depList = dependencies[Dep::CONFLICTS];
-	if (depList.find(_capability) != depList.end())
-	{
-	    resolver.addIgnoreConflict (_item, _capability);
-	}
-	dependencies = _otherItem.resolvable()->deps();
-	depList = dependencies[Dep::CONFLICTS];
-	if (depList.find(_capability) != depList.end())
-	{
-	    resolver.addIgnoreConflict (_otherItem, _capability);
-	}
-    } else if (_kind  == REQUIRES) {
-	// removing the requires dependency from the item
-	resolver.addIgnoreRequires (_item, _capability);
-    } else if (_kind  == ARCHITECTURE) {
-	// ignoring architecture
-	resolver.addIgnoreArchitecture (_item);	
-    } else {
-	ERR << "No valid InjectSolutionAction kind found" << endl;
-	return false;
+    Dependencies dependencies = _item.resolvable()->deps();
+    CapSet depList = dependencies[Dep::CONFLICTS];    
+    switch (_kind) {
+        case CONFLICTS:
+	    // removing conflict in both resolvables
+	    if (depList.find(_capability) != depList.end())
+	    {
+		resolver.addIgnoreConflict (_item, _capability);
+	    }
+	    dependencies = _otherItem.resolvable()->deps();
+	    depList = dependencies[Dep::CONFLICTS];
+	    if (depList.find(_capability) != depList.end())
+	    {
+		resolver.addIgnoreConflict (_otherItem, _capability);
+	    }
+	    break;
+        case REQUIRES:
+	    // removing the requires dependency from the item
+	    resolver.addIgnoreRequires (_item, _capability);
+	    break;
+	case ARCHITECTURE:
+	    // ignoring architecture
+	    resolver.addIgnoreArchitecture (_item);
+	    break;
+        case INSTALLED:
+	    // ignoring already installed items
+	    resolver.addIgnoreInstalledItem (_item);
+	    resolver.addIgnoreInstalledItem (_otherItem);
+	    break;
+        default:
+	    ERR << "No valid InjectSolutionAction kind found" << endl;
+	    return false;
     }
 
     return true;

@@ -108,7 +108,8 @@ namespace zypp
 	{
 	    REQUIRES,
 	    CONFLICTS,
-	    ARCHITECTURE
+	    ARCHITECTURE,
+	    INSTALLED
 	} InjectSolutionKind;
 	
 
@@ -127,15 +128,16 @@ namespace zypp
 				  const Capability & capability,
 				  const InjectSolutionKind & kind)
 		: SolutionAction(),
-		  _capability( capability ), _kind( kind ),
-		  _otherItem() {}
+		  _item( item ), _capability( capability ),
+		  _kind( kind ), _otherItem() {}
 	    
 	    InjectSolutionAction( PoolItem_Ref item,
 				  const Capability & capability,
 				  const InjectSolutionKind & kind,
 				  PoolItem_Ref otherItem)
 		: SolutionAction(),
-		  _capability( capability ), _kind( kind ), _otherItem( otherItem ) {}
+		  _item( item ), _capability( capability ),
+		  _kind( kind ), _otherItem( otherItem ) {}
 
 	  // ---------------------------------- I/O
 	  virtual std::ostream & dumpOn( std::ostream & str ) const;
@@ -150,10 +152,10 @@ namespace zypp
 	    virtual bool execute(Resolver & resolver) const;
 
 	protected:
-
+	    PoolItem_Ref _item;
 	    const Capability _capability;
 	    const InjectSolutionKind _kind;
-	    PoolItem_Ref _item, _otherItem;	    
+	    PoolItem_Ref _otherItem;	    
 	};
 
 

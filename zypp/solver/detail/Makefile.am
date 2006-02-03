@@ -40,6 +40,7 @@ solverdetailinclude_HEADERS = \
 	ResolverQueue.h			\
 	Resolver.h			\
 	ResolverUpgrade.cc		\
+	ProblemSolutionKeep.h		\
 	ProblemSolutionInstall.h	\
 	ProblemSolutionUninstall.h	\
 	ProblemSolutionIgnore.h		\
@@ -75,6 +76,7 @@ lib@PACKAGE@_solver_detail_la_SOURCES =			\
 	ResolverInfoObsoletes.cc			\
 	ResolverContext.cc				\
 	ResolverQueue.cc				\
+	ProblemSolutionKeep.cc				\
 	ProblemSolutionInstall.cc			\
 	ProblemSolutionUninstall.cc			\
 	ProblemSolutionIgnore.cc			\

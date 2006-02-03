@@ -19,11 +19,11 @@
  * 02111-1307, USA.
  */
 
-#ifndef ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONIGNORE_H
-#define ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONIGNORE_H
+#ifndef ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONKEEP_H
+#define ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONKEEP_H
 
-#include "zypp/solver/detail/Types.h"
 #include "zypp/ProblemSolution.h"
+#include "zypp/solver/detail/Types.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -37,60 +37,19 @@ namespace zypp
 
 	/**
 	 * Class representing one possible solution to one problem found during resolving
-	 * This problem solution ignores one or more items
+	 * This problem solution keeps one or more items
 	 * 
 	 **/
-	class ProblemSolutionIgnoreConflicts : public ProblemSolution
+	class ProblemSolutionKeep : public ProblemSolution
 	{
 	public:
 
 	    /**
 	     * Constructor.
 	     **/
-	    ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
-					    PoolItem_Ref item,
-					    const Capability & capability,
-					    PoolItem_Ref otherItem);	    
+	    ProblemSolutionKeep( ResolverProblem_Ptr parent, PoolItem_Ref item);
+	    ProblemSolutionKeep( ResolverProblem_Ptr parent, PoolItemList & itemlist );	    
 	};
-
-	class ProblemSolutionIgnoreRequires : public ProblemSolution
-	{
-	public:
-
-	    /**
-	     * Constructor.
-	     **/
-	    ProblemSolutionIgnoreRequires( ResolverProblem_Ptr parent,
-					   PoolItem_Ref item,
-					   const Capability & capability);
-	    ProblemSolutionIgnoreRequires( ResolverProblem_Ptr parent,
-					   PoolItemList itemList,
-					   const Capability & capability);
-	};
-
-	class ProblemSolutionIgnoreArch : public ProblemSolution
-	{
-	public:
-
-	    /**
-	     * Constructor.
-	     **/
-	    ProblemSolutionIgnoreArch( ResolverProblem_Ptr parent,
-				       PoolItem_Ref item);
-	};
-
-	class ProblemSolutionIgnoreInstalled : public ProblemSolution
-	{
-	public:
-
-	    /**
-	     * Constructor.
-	     **/
-	    ProblemSolutionIgnoreInstalled( ResolverProblem_Ptr parent,
-					    PoolItem_Ref item,
-					    PoolItem_Ref otherItem);  
-	};
-	
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -102,5 +61,5 @@ namespace zypp
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
-#endif // ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONIGNORE_H
+#endif // ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONAKEEP_H
 

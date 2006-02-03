@@ -30,6 +30,7 @@
 #include "zypp/solver/detail/ProblemSolutionInstall.h"
 #include "zypp/solver/detail/ProblemSolutionUninstall.h"
 #include "zypp/solver/detail/ProblemSolutionUnlock.h"
+#include "zypp/solver/detail/ProblemSolutionKeep.h"
 
 #include "zypp/solver/detail/ResolverInfoChildOf.h"
 #include "zypp/solver/detail/ResolverInfoConflictsWith.h"
@@ -43,6 +44,12 @@
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Gettext.h"
+
+#include "zypp/base/Algorithm.h"
+#include "zypp/ResPool.h"
+#include "zypp/ResFilters.h"
+#include "zypp/CapFilters.h"
+
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -70,10 +77,25 @@ collector_cb (ResolverInfo_Ptr info, void *data)
 {
     ResItemCollector *collector = (ResItemCollector *)data;
     PoolItem_Ref item = info->affected();
-    if (item) {
+    if (item
+	&& info->error()) {
 	collector->problems[item] = info;
     }
 }
+
+struct AllRequires : public resfilter::OnCapMatchCallbackFunctor
+{
+    PoolItemList requirers;
+
+    bool operator()( PoolItem_Ref requirer, const Capability & match )
+    {
+	DBG << requirer << " requires " << match << endl;
+	requirers.push_back (requirer);
+
+	return true;
+    }
+};
+	
 
 
 ResolverProblemList
@@ -107,12 +129,7 @@ Resolver::problems (void) const
 	bool problem_created = false;
 
 	DBG << "Problem: " << *info;
-	if (!(info->error())) {
-	    DBG << "; It is not an error --> ignoring" << endl;
-	    continue; // only errors are important
-	} else{
-	    DBG << "; Evaluate solutions..." << endl;
-	}
+	DBG << "; Evaluate solutions..." << endl;
 	
 	string who = item->name();
 	string what;
@@ -226,6 +243,7 @@ Resolver::problems (void) const
 		// TranslatorExplanation %s = name of package,patch,...				
 		what = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		// Ignoring architecture
 		problem->addSolution (new ProblemSolutionIgnoreArch (problem, item));
 		problems.push_back (problem);
 		problem_created = true;		
@@ -236,8 +254,13 @@ Resolver::problems (void) const
 		// TranslatorExplanation %s = name of package,patch,...				
 		what = str::form (_("Cannot install %s"), who.c_str());
 		details = misc_info->message();
-		// currently no solution available cause I do not know the other resolvable.
-		// If it would be available we could replace these resolvable by a solution.
+		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		// Uninstall the other
+		problem->addSolution (new ProblemSolutionUninstall (problem, misc_info->other()));
+		// Ignore it
+		problem->addSolution (new ProblemSolutionIgnoreInstalled (problem, item, misc_info->other()));
+		problems.push_back (problem);
+		problem_created = true;		
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_INCOMPLETES: {			// This would invalidate p
@@ -245,7 +268,11 @@ Resolver::problems (void) const
 		what = misc_info->message();
 		// TranslatorExplanation %s = name of package, patch, selection ...				
 		details = str::form (_("%s has unfulfiled requirements"), who.c_str());
-		// currently no solution available				
+		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		// Uninstall 
+		problem->addSolution (new ProblemSolutionUninstall (problem, item));
+		problems.push_back (problem);
+		problem_created = true;		
 	    }
 	    break;
 	// from QueueItemEstablish
@@ -271,7 +298,7 @@ Resolver::problems (void) const
 	    case RESOLVER_INFO_TYPE_SKIPPING: {				// Skipping p, already installed
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		what = misc_info->message();
-		// currently no solution available	
+		// It is only an info and happens while upgrading
 	    }
 	    break;
 	// from QueueItemRequire
@@ -281,8 +308,21 @@ Resolver::problems (void) const
 		what = str::form (_("%s cannot be uninstalled due missing dependencies"), who.c_str());
 		details = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
-		// Add dummy provides
-		problem->addSolution (new ProblemSolutionIgnoreRequires (problem, item, misc_info->capability())); 
+
+		// keep installed
+		problem->addSolution (new ProblemSolutionKeep (problem, item)); 
+		
+		// Unflag require
+		// Evaluating all require Items
+		AllRequires info;
+		Dep dep( Dep::REQUIRES );
+
+		invokeOnEach( _pool.byCapabilityIndexBegin( misc_info->capability().index(), dep ), // begin()
+			      _pool.byCapabilityIndexEnd( misc_info->capability().index(), dep ),   // end()
+			      resfilter::callOnCapMatchIn( dep, misc_info->capability(),
+							   functor::functorRef<bool,PoolItem,Capability>(info)) );
+		problem->addSolution (new ProblemSolutionIgnoreRequires (problem, info.requirers, misc_info->capability()));
+
 		problems.push_back (problem);
 		problem_created = true;
 	    }

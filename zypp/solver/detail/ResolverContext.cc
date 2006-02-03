@@ -199,7 +199,8 @@ ResolverContext::install (PoolItem_Ref item, bool is_soft, int other_penalty)
     }
 
     if (isParallelInstall (item)) {
-	ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INSTALL_PARALLEL, item, RESOLVER_INFO_PRIORITY_VERBOSE);
+	ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INSTALL_PARALLEL, item, RESOLVER_INFO_PRIORITY_VERBOSE);
+	misc_info->setOtherPoolItem (getParallelInstall (item));
 	addError (misc_info);
 	return false;
     }
@@ -1247,6 +1248,7 @@ ResolverContext::itemIsPossible (PoolItem_Ref item) const
 typedef struct {
     PoolItem_Ref other;
     bool flag;
+    PoolItem_Ref foundItem;
 } DupNameCheckInfo;
 
 static void
@@ -1259,6 +1261,7 @@ dup_name_check_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 	&& !compareByNVR (item.resolvable(), info->other.resolvable()))
     {
 	info->flag = true;
+	info->foundItem = item;
     }
 }
 
@@ -1272,6 +1275,17 @@ ResolverContext::isParallelInstall (PoolItem_Ref item) const
     foreachMarked (dup_name_check_cb, (void *)&info);
     MIL << "isParallelInstall(" << item << ") = " << (info.flag ? "Y" : "N") << endl;
     return info.flag;
+}
+
+PoolItem_Ref
+ResolverContext::getParallelInstall (PoolItem_Ref item) const
+{
+    DupNameCheckInfo info;
+
+    info.other = item;
+    info.flag = false;
+    foreachMarked (dup_name_check_cb, (void *)&info);
+    return info.foundItem;
 }
 
 

@@ -1,5 +1,8 @@
+
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-/* Resolver_problems.cc
+/* ProblemSolution.cc
+ *
+ * Easy-to use interface to the ZYPP dependency resolver
  *
  * Copyright (C) 2000-2002 Ximian, Inc.
  * Copyright (C) 2005 SUSE Linux Products GmbH
@@ -19,11 +22,14 @@
  * 02111-1307, USA.
  */
 
-#ifndef ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONIGNORE_H
-#define ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONIGNORE_H
+#include <sstream>
 
-#include "zypp/solver/detail/Types.h"
-#include "zypp/ProblemSolution.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Gettext.h"
+
+#include "zypp/solver/detail/ProblemSolutionKeep.h"
+
+using namespace std;
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -35,62 +41,42 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-	/**
-	 * Class representing one possible solution to one problem found during resolving
-	 * This problem solution ignores one or more items
-	 * 
-	 **/
-	class ProblemSolutionIgnoreConflicts : public ProblemSolution
-	{
-	public:
+IMPL_PTR_TYPE(ProblemSolutionKeep);
 
-	    /**
-	     * Constructor.
-	     **/
-	    ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
-					    PoolItem_Ref item,
-					    const Capability & capability,
-					    PoolItem_Ref otherItem);	    
-	};
+//---------------------------------------------------------------------------
 
-	class ProblemSolutionIgnoreRequires : public ProblemSolution
-	{
-	public:
+ProblemSolutionKeep::ProblemSolutionKeep( ResolverProblem_Ptr parent,
+						PoolItem_Ref item )
+    : ProblemSolution (parent, "", "")
+{
+    // TranslatorExplanation %s = name of package, patch, selection ...    
+    _description = str::form (_("Keeping %s"), item->name().c_str() );
+    ostringstream item_str;
+    item_str << item;
+    // TranslatorExplanation %s = name of package, patch, selection ...      
+    _details = str::form (_("Keeping %s"), item_str.str().c_str() );
 
-	    /**
-	     * Constructor.
-	     **/
-	    ProblemSolutionIgnoreRequires( ResolverProblem_Ptr parent,
-					   PoolItem_Ref item,
-					   const Capability & capability);
-	    ProblemSolutionIgnoreRequires( ResolverProblem_Ptr parent,
-					   PoolItemList itemList,
-					   const Capability & capability);
-	};
+    addAction ( new TransactionSolutionAction (item,
+					       KEEP));
+}
 
-	class ProblemSolutionIgnoreArch : public ProblemSolution
-	{
-	public:
+ProblemSolutionKeep::ProblemSolutionKeep( ResolverProblem_Ptr parent,
+					  PoolItemList & itemList )
+    : ProblemSolution (parent, "", "")
+{
+    _description = _("Keeping missing resolvables");
 
-	    /**
-	     * Constructor.
-	     **/
-	    ProblemSolutionIgnoreArch( ResolverProblem_Ptr parent,
-				       PoolItem_Ref item);
-	};
+    for (PoolItemList::iterator iter = itemList.begin();
+	 iter != itemList.end(); iter++) {
+	PoolItem_Ref item = *iter;
+	addAction ( new TransactionSolutionAction (item, KEEP));
+    }
 
-	class ProblemSolutionIgnoreInstalled : public ProblemSolution
-	{
-	public:
-
-	    /**
-	     * Constructor.
-	     **/
-	    ProblemSolutionIgnoreInstalled( ResolverProblem_Ptr parent,
-					    PoolItem_Ref item,
-					    PoolItem_Ref otherItem);  
-	};
-	
+    ostringstream details;
+    details << _actions;    
+    _details = details.str();
+    
+}
 
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
@@ -101,6 +87,3 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////////
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
-
-#endif // ZYPP_SOLVER_DETAIL_PROBLEMSOLUTIONIGNORE_H
-
