@@ -56,6 +56,8 @@ namespace zypp {
     		    false ), // does_download
       _lastdev(-1)
     {
+	MIL << "MediaCD::MediaCD(" << url_r << ", " << attach_point_hint_r << ")" << endl;
+
       string devices = _url.getQueryParam("devices");
       if (!devices.empty())
       {

@@ -72,6 +72,7 @@ MediaCurl::MediaCurl( const Url &      url_r,
 		    true ), // does_download
       _curl( 0 ), _connected( false )
 {
+  MIL << "MediaCurl::MediaCurl(" << url_r << ", " << attach_point_hint_r << ")" << endl;
   if ( ! _globalInit )
     {
       _globalInit = true;

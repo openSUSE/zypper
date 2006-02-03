@@ -50,6 +50,7 @@ namespace zypp {
       _filesystem = _url.getQueryParam("filesystem");
       if(_filesystem.empty())
 	_filesystem="auto";
+	MIL << "MediaDISK::MediaDISK(" << url_r << ", " << attach_point_hint_r << ")" << endl;
     }
 
     ///////////////////////////////////////////////////////////////////

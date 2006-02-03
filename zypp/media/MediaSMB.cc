@@ -99,6 +99,7 @@ namespace zypp {
     		    false )       // does_download
         , _vfstype( "smbfs" )
     {
+	MIL << "MediaSMB::MediaSMB(" << url_r << ", " << attach_point_hint_r << ")" << endl;
     }
 
     ///////////////////////////////////////////////////////////////////

@@ -44,6 +44,7 @@ namespace zypp {
     		    "/", // urlpath at attachpoint
     		    false ) // does_download
     {
+	MIL << "MediaDIR::MediaDIR(" << url_r << ")" << endl;
     }
 
     ///////////////////////////////////////////////////////////////////

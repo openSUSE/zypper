@@ -44,6 +44,7 @@ namespace zypp {
 		      "/", // urlpath at attachpoint
 		      false ) // does_download
     {
+	MIL << "MediaNFS::MediaNFS(" << url_r << ", " << attach_point_hint_r << ")" << endl;
     }
 
     ///////////////////////////////////////////////////////////////////
