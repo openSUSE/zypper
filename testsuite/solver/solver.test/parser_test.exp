@@ -15,7 +15,7 @@
   
   puts "Running $prog ..."
 
-  set dircases [glob $datadir/* ]
+  set dircases [glob $datadir/*-tests datadir/*-exercises ]
 
   foreach dircase $dircases { 
       set testPath [split $dircase "/"]
