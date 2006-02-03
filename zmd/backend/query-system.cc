@@ -9,7 +9,7 @@ using std::endl;
 using namespace zypp;
 
 #include <sqlite3.h>
-#include "package-writer.h"
+#include "resolvable-writer.h"
 
 int
 main (int argc, char **argv)
@@ -30,7 +30,7 @@ main (int argc, char **argv)
 	return 1;
     }
 
-    write_packages_to_db (argv[1], God->target()->resolvables());
+    write_store_to_db (argv[1], God->target()->resolvables(), true);
 
     return 0;
 }
