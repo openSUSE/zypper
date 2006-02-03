@@ -7,11 +7,10 @@ PACKAGE = parser
 
 LDADD = $(top_srcdir)/zypp/lib@PACKAGE@.la
 
-noinst_PROGRAMS = YUMtest ProductMetadataParserTest MediaMetadataParserTest
+noinst_PROGRAMS = YUMtest MediaMetadataParserTest
 
 YUMtest_SOURCES = YUMtest.cc
 
-ProductMetadataParserTest_SOURCES = ProductMetadataParserTest.cc
 MediaMetadataParserTest_SOURCES = MediaMetadataParserTest.cc
 
 EXTRA_DIST = lib/*.exp config/*.exp $(PACKAGE).test/*.exp
