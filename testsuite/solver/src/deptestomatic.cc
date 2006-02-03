@@ -513,23 +513,20 @@ get_providing_poolItems (const string & prov_name, const string & kind_name = ""
 //---------------------------------------------------------------------------------------------------------------------
 // setup related functions
 
-struct PrintItem : public resfilter::PoolItemFilterFunctor
-{
-    string prefix;
-    int count;
+typedef multimap<string,PoolItem_Ref> ItemMap;
 
-    PrintItem(string prefix = "")
-	: prefix (prefix)
-	, count (0)
+struct SortItem : public resfilter::PoolItemFilterFunctor
+{
+    ItemMap sorted;
+
+    SortItem()
     { }
 
     bool operator()( PoolItem_Ref poolItem )
     {
-	cout << prefix << ++count << ": ";
-	cout << poolItem;
-//	printRes (cout, poolItem);
-//	cout << ": " << poolItem.status();
-	cout << endl;
+	ostringstream ostr;
+	printRes (ostr, poolItem);
+	sorted.insert (ItemMap::value_type(ostr.str(), poolItem));
 	return true;
     }
 };
@@ -540,11 +537,18 @@ struct PrintItem : public resfilter::PoolItemFilterFunctor
 void
 print_pool (const string & prefix = "")
 {
-    PrintItem info (prefix);
+    SortItem info;
 
     invokeOnEach( God->pool().begin( ),
 		  God->pool().end ( ),
 		  functor::functorRef<bool,PoolItem> (info) );
+
+    int count = 0;
+    for (ItemMap::const_iterator it = info.sorted.begin(); it != info.sorted.end(); ++it) {
+	cout << prefix << ++count << ": ";
+	cout << it->second;
+	cout << endl;
+    }
     return;
 }
 
@@ -556,7 +560,8 @@ load_source (const string & alias, const string & filename, const string & type,
     int count = 0;
 
     try {
-	media::MediaId mediaid = 0;
+	media::MediaManager mmgr;
+	media::MediaId mediaid = mmgr.open(Url("file://"));
 	Source_Ref::Impl_Ptr impl = new HelixSourceImpl (mediaid, pathname, alias);
 	SourceFactory _f;
 	Source_Ref s = _f.createFrom( impl );

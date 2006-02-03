@@ -50,6 +50,7 @@ void
 HelixSourceImpl::createResolvables(Source_Ref source_r)
 {
     _source = source_r;
+    MIL << "HelixSourceImpl::createResolvables()" << endl;
     extractHelixFile (_pathname.asString(), this);
 }
 

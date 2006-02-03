@@ -33,8 +33,8 @@ int main( int argc, char * argv[] )
     INT << "===[START]==========================================" << endl;
 
     Pathname p = argv[1];
-
-    media::MediaId mediaid = 0;
+    media::MediaManager mmgr;
+    media::MediaId mediaid = mmgr.open(Url("file://"));
     Source_Ref::Impl_Ptr impl = new HelixSourceImpl (mediaid, p);
     SourceFactory _f;
     Source_Ref s = _f.createFrom( impl );

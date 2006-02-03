@@ -37,7 +37,7 @@ namespace zypp {
 int 
 extractHelixBuffer (const char *buf, size_t len, HelixSourceImpl *impl)
 {
-//    _DBG("HelixExtract") << "extract_packages_from_helix_buffer(" << buf << "...," << (long)len << ",...)" << endl;
+    MIL << "extractHelixBuffer()" << endl;
 
     if (buf == NULL || len == 0)
 	return 1;
@@ -53,6 +53,8 @@ extractHelixBuffer (const char *buf, size_t len, HelixSourceImpl *impl)
 int
 extractHelixFile (const std::string & filename, HelixSourceImpl *impl)
 {
+    MIL << "extractHelixFile(" << filename << ")" << endl;
+
     Buffer *buf;
 
     if (filename.empty())
