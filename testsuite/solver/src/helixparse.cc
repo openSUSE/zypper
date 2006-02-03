@@ -8,7 +8,7 @@
 #include "zypp/SourceFactory.h"
 #include "zypp/Source.h"
 #include "zypp/source/SourceImpl.h"
-#include "zypp/media/MediaAccess.h"
+#include "zypp/media/MediaManager.h"
 
 #include "helix/HelixSourceImpl.h"
 
@@ -34,8 +34,8 @@ int main( int argc, char * argv[] )
 
     Pathname p = argv[1];
 
-    media::MediaAccess::Ptr media = new media::MediaAccess();
-    Source_Ref::Impl_Ptr impl = new HelixSourceImpl (media, p);
+    media::MediaId mediaid = 0;
+    Source_Ref::Impl_Ptr impl = new HelixSourceImpl (mediaid, p);
     SourceFactory _f;
     Source_Ref s = _f.createFrom( impl );
     ResStore store = s.resolvables();

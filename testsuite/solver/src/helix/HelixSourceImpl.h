@@ -52,7 +52,7 @@ class HelixSourceImpl : public zypp::source::SourceImpl {
       : _source (Source_Ref::noSource)
     {}
     /** Default ctor */
-    HelixSourceImpl(media::MediaAccess::Ptr & media_r, const Pathname & path_r = "/", const std::string & alias_r = "");
+    HelixSourceImpl(media::MediaId & mediaid_r, const Pathname & path_r = "/", const std::string & alias_r = "");
 
     virtual const bool valid() const
     { return true; }

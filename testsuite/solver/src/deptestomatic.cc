@@ -60,7 +60,7 @@
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
 
-#include "zypp/media/MediaAccess.h"
+#include "zypp/media/MediaManager.h"
 #include "zypp/source/SourceImpl.h"
 
 #include "helix/HelixSourceImpl.h"
@@ -556,8 +556,8 @@ load_source (const string & alias, const string & filename, const string & type,
     int count = 0;
 
     try {
-	media::MediaAccess::Ptr media = new media::MediaAccess();
-	Source_Ref::Impl_Ptr impl = new HelixSourceImpl (media, pathname, alias);
+	media::MediaId mediaid = 0;
+	Source_Ref::Impl_Ptr impl = new HelixSourceImpl (mediaid, pathname, alias);
 	SourceFactory _f;
 	Source_Ref s = _f.createFrom( impl );
 
@@ -958,12 +958,15 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    string source_alias = node->getProp ("channel");
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
+	    string soft = node->getProp ("soft");
 
 	    PoolItem_Ref poolItem;
 
 	    poolItem = get_poolItem (source_alias, package_name, kind_name);
 	    if (poolItem) {
 		RESULT << "Installing " << package_name << " from channel " << source_alias << endl;;
+		if (!soft.empty())
+		    poolItem.status().setSoftInstall(true);
 		resolver->addPoolItemToInstall (poolItem);
 	    } else {
 		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
@@ -973,12 +976,15 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
+	    string soft = node->getProp ("soft");
 
 	    PoolItem_Ref poolItem;
 
 	    poolItem = get_poolItem ("@system", package_name, kind_name);
 	    if (poolItem) {
 		RESULT << "Uninstalling " << package_name << endl;
+		if (!soft.empty())
+		    poolItem.status().setSoftUninstall(true);
 		resolver->addPoolItemToRemove (poolItem);
 	    } else {
 		cerr << "Unknown system package " << package_name << endl;
