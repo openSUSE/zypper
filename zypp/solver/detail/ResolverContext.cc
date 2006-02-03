@@ -110,9 +110,14 @@ ResolverContext::~ResolverContext()
 // status retrieve
 
 ResStatus
-ResolverContext::getStatus (PoolItem_Ref item) const
+ResolverContext::getStatus (PoolItem_Ref item)
 {
 _DEBUG( "[" << this << "]getStatus(" << item << ")" );
+
+    if (item == _last_checked_item) return _last_checked_status;
+
+    _last_checked_item = item;
+
     Context::const_iterator it;
     ResolverContext_constPtr context = this;
 
@@ -121,11 +126,12 @@ _DEBUG( "[" << this << "]getStatus(" << item << ")" );
 	it = context->_context.find(item);		// part of local context ?
 	if (it != context->_context.end()) {
 _DEBUG( "[" << context << "]:" << it->second );
+	    _last_checked_status = it->second;
 	    return it->second;				// Y: return
 	}
 	context = context->_parent;			// N: go up the chain
     }
-
+    _last_checked_status = item.status();
 _DEBUG( "[NULL]:" << item.status() );
     return item.status();				// Not part of context, return Pool status
 }
@@ -138,6 +144,7 @@ void
 ResolverContext::setStatus (PoolItem_Ref item, const ResStatus & status)
 {
     if (_invalid) return;
+
 _DEBUG( "[" << this << "]setStatus(" << item << ", " << status << ")" );
     if (status == item.status()) {		// same as original status
 	Context::iterator it;
@@ -155,6 +162,10 @@ _DEBUG( "MARK" );
 	    _context[item] = status;		// set it !
 	}
     }
+
+    _last_checked_item = item;
+    _last_checked_status = status;
+
     return;
 }
 
@@ -419,7 +430,7 @@ ResolverContext::incomplete (PoolItem_Ref item, int other_penalty)
 // if yes, install/requires requests are considered done
 
 bool
-ResolverContext::isPresent (PoolItem_Ref item) const
+ResolverContext::isPresent (PoolItem_Ref item)
 {
     ResStatus status = getStatus(item);
 
@@ -436,7 +447,7 @@ DBG << "ResolverContext::itemIsPresent(<" << status << ">" << item << ")" << end
 // if yes, uninstall requests are considered done
 
 bool
-ResolverContext::isAbsent (PoolItem_Ref item) const
+ResolverContext::isAbsent (PoolItem_Ref item)
 {
     ResStatus status;
 
@@ -680,7 +691,7 @@ typedef struct {
     ResPool pool;
     MarkedPoolItemPairFn fn;
     void *data;
-    ResolverContext_constPtr context;
+    ResolverContext_Ptr context;
     int count;
 } UpgradeInfo;
 
@@ -707,7 +718,7 @@ upgrade_pkg_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 
 
 int
-ResolverContext::foreachUpgrade (MarkedPoolItemPairFn fn, void *data) const
+ResolverContext::foreachUpgrade (MarkedPoolItemPairFn fn, void *data)
 {
     UpgradeInfo info = { _pool, fn, data, this, 0 };
 
@@ -726,7 +737,7 @@ pair_item_collector (PoolItem_Ref item, const ResStatus & status, PoolItem_Ref o
 
 
 PoolItemList
-ResolverContext::getUpgrades (void) const
+ResolverContext::getUpgrades (void)
 {
     PoolItemList rl;
 
@@ -774,7 +785,7 @@ build_upgrade_hash_cb (PoolItem_Ref item_add, const ResStatus & add_status, Pool
 
 
 int
-ResolverContext::foreachUninstall (MarkedPoolItemFn fn, void *data) const
+ResolverContext::foreachUninstall (MarkedPoolItemFn fn, void *data)
 {
     UninstallInfo info;		// inits upgrade_hash
 
@@ -790,7 +801,7 @@ ResolverContext::foreachUninstall (MarkedPoolItemFn fn, void *data) const
 
 
 PoolItemList
-ResolverContext::getUninstalls (void) const
+ResolverContext::getUninstalls (void)
 {
     PoolItemList rl;
 
@@ -833,7 +844,7 @@ uninstall_count_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 
 
 int
-ResolverContext::uninstallCount (void) const
+ResolverContext::uninstallCount (void)
 {
     int count = 0;
 
@@ -844,7 +855,7 @@ ResolverContext::uninstallCount (void) const
 
 
 int
-ResolverContext::upgradeCount (void) const
+ResolverContext::upgradeCount (void)
 {
     return foreachUpgrade ((MarkedPoolItemPairFn)NULL, (void *)NULL);
 }
@@ -1090,7 +1101,7 @@ spew_item_pair_cb (PoolItem_Ref item1, const ResStatus & status1, PoolItem_Ref i
 
 
 void
-ResolverContext::spew (void) const
+ResolverContext::spew (void)
 {
     MIL << "TO INSTALL:" << endl;
     foreachInstall (spew_item_cb, NULL);
@@ -1127,11 +1138,11 @@ ResolverContext::spewInfo (void) const
 
 struct RequirementMet : public resfilter::OnCapMatchCallbackFunctor
 {
-    ResolverContext_constPtr context;
+    ResolverContext_Ptr context;
     const Capability capability;
     bool flag;
 
-    RequirementMet (ResolverContext_constPtr ctx, const Capability & c)
+    RequirementMet (ResolverContext_Ptr ctx, const Capability & c)
 	: context (ctx)
 	, capability (c)
 	, flag (false)
@@ -1158,7 +1169,7 @@ struct RequirementMet : public resfilter::OnCapMatchCallbackFunctor
 
 
 bool
-ResolverContext::requirementIsMet (const Capability & dependency, bool is_child) const
+ResolverContext::requirementIsMet (const Capability & dependency, bool is_child)
 {
     RequirementMet info (this, is_child ? dependency : Capability::noCap);
 
@@ -1291,13 +1302,13 @@ rev_num_cmp (double a, double b)
 }
 
 static double
-churn_factor (ResolverContext_constPtr a)
+churn_factor (ResolverContext_Ptr a)
 {
     return a->upgradeCount() + (2.0 * a->installCount ()) + (4.0 * a->uninstallCount ());
 }
 
 int
-ResolverContext::partialCompare (ResolverContext_constPtr context) const
+ResolverContext::partialCompare (ResolverContext_Ptr context)
 {
     int cmp = 0;
     if (this != context) {
@@ -1322,7 +1333,7 @@ ResolverContext::partialCompare (ResolverContext_constPtr context) const
 }
 
 int
-ResolverContext::compare (ResolverContext_constPtr context) const
+ResolverContext::compare (ResolverContext_Ptr context)
 {
     int cmp;
 

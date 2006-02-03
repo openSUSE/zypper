@@ -76,6 +76,9 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     bool _establishing;				// running 'establishSystem'
     bool _invalid;				// lead to invalid solution
 
+    PoolItem_Ref _last_checked_item;		// cache for {get,set}Status
+    ResStatus _last_checked_status;
+
   public:
     ResolverContext (const ResPool & pool, ResolverContext_Ptr parent = NULL);
     virtual ~ResolverContext();
@@ -110,7 +113,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
      *get the state of \c item
      *This is NOT the status in the pool but the status according
      * to the context. */
-    ResStatus getStatus (PoolItem_Ref item) const;
+    ResStatus getStatus (PoolItem_Ref item);
 
     /** state change functions
     *  they do some checking before actually changing the state of the PoolItem. */
@@ -150,13 +153,13 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     /**
      *\return \c true if \c item is \a installed or \a to-be-installed */
-    bool isPresent (PoolItem_Ref item) const;
+    bool isPresent (PoolItem_Ref item);
 
     /**
      *\return \c true if \c item is \a uninstalled or \a to-be-uninstalled */
-    bool isAbsent (PoolItem_Ref item) const;
+    bool isAbsent (PoolItem_Ref item);
 
-    bool requirementIsMet (const Capability & cap, bool is_child = false) const;
+    bool requirementIsMet (const Capability & cap, bool is_child = false);
     bool requirementIsPossible (const Capability & cap) const;
     bool itemIsPossible (const PoolItem_Ref item) const;
     bool isParallelInstall (const PoolItem_Ref item) const;
@@ -170,13 +173,13 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     PoolItemList getInstalls (void) const;
     int installCount (void) const;
 
-    int foreachUninstall (MarkedPoolItemFn fn, void *data) const;
-    PoolItemList getUninstalls (void) const;
-    int uninstallCount (void) const;
+    int foreachUninstall (MarkedPoolItemFn fn, void *data);
+    PoolItemList getUninstalls (void);
+    int uninstallCount (void);
 
-    int foreachUpgrade (MarkedPoolItemPairFn fn, void *data) const;
-    PoolItemList getUpgrades (void) const;
-    int upgradeCount (void) const;
+    int foreachUpgrade (MarkedPoolItemPairFn fn, void *data);
+    PoolItemList getUpgrades (void);
+    int upgradeCount (void);
 
     int foreachSatisfy (MarkedPoolItemFn fn, void *data) const;
     PoolItemList getSatisfies (void) const;
@@ -196,11 +199,11 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     // Context compare to identify equal branches
 
-    int partialCompare (ResolverContext_constPtr context) const;
-    int compare (ResolverContext_constPtr context) const;
+    int partialCompare (ResolverContext_Ptr context);
+    int compare (ResolverContext_Ptr context);
 
     // debug
-    void spew (void) const;
+    void spew (void);
     void spewInfo (void) const;
 
     int getSourcePriority (Source_Ref source) const;
