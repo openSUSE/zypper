@@ -12,7 +12,9 @@
 #include <iostream>
 #include "zypp/base/Logger.h"
 
+#include "zypp/SourceFactory.h"
 #include "zypp/source/SourceImpl.h"
+#include "zypp/ZYppCallbacks.h"
 
 #include <fstream>
 
@@ -71,7 +73,41 @@ namespace zypp
 					   bool cached, 
 					   bool checkonly )
     {
-      media_mgr.provideFile (_media, media_nr, file_r, cached, checkonly);
+    
+      callback::SendReport<media::MediaChangeReport> report;
+      
+      SourceFactory source_factory;
+      
+      do {
+        try {
+	  media_mgr.provideFile (_media, media_nr, file_r, cached, checkonly);
+	  break;
+        } 
+	catch ( Exception & excp )
+        {
+	  media::MediaChangeReport::Action user 
+	    = checkonly ? media::MediaChangeReport::ABORT : 
+	      report->requestMedia ( 
+		source_factory.createFrom(this),
+		media_nr,
+		media::MediaChangeReport::WRONG, // FIXME: proper error
+		excp.msg()
+	    );
+	    
+	  if( user == media::MediaChangeReport::ABORT ) 
+	  {
+	    ZYPP_RETHROW ( excp );
+	  } 
+	  else if ( user == media::MediaChangeReport::EJECT )
+	  {
+	    media_mgr.release (_media, true);
+	    // FIXME: this will not work, probably
+	  }
+	
+	  // FIXME: IGNORE
+        }
+      } while( true );
+      
       return media_mgr.localPath(_media, file_r);
     }
 
