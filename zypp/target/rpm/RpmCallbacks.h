@@ -53,28 +53,35 @@ namespace zypp {
       ///////////////////////////////////////////////////////////////////
       // Reporting progress of package installation
       ///////////////////////////////////////////////////////////////////
-      class RpmInstallReport : public HACK::Callback {
-      public:
-        virtual ~RpmInstallReport()
-        {}
+      struct RpmInstallReport : public callback::ReportBase {
+
+	enum Action {
+          ABORT,  // abort and return error
+          RETRY,   // retry
+	  IGNORE   // ignore
+        };
+
         /** Start the operation */
         virtual void start( const Pathname & name ) 
         { }
         /**
          * Inform about progress
-         * Return true on abort
+         * Return false on abort
          */
         virtual bool progress( unsigned percent )
-        { return false; }
+        { return true; }
+
         /** Finish operation in case of success */
-        virtual void end()
+        virtual void finish()
         { }
-        /** Finish operatino in case of fail, report fail exception */
-        virtual void end( Exception & excpt_r )
+	
+	virtual Action problem( Exception & excpt_r )
+	 { return ABORT; }
+
+        /** Finish operation in case of fail, report fail exception */
+        virtual void finish( Exception & excpt_r )
         { }
       };
-
-      extern RpmInstallReport rpmInstallReport;
 
       ///////////////////////////////////////////////////////////////////
       // Reporting database scanning

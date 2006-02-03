@@ -1672,17 +1672,26 @@ void RpmDb::installPackage( const Pathname & filename, unsigned flags )
 
   report->start(filename);
 
-  try {
-    doInstallPackage(filename, flags, report);
-  }
-  catch (RpmException & excpt_r)
-  {
-    report->end(/*excpt_r*/);
-    ZYPP_RETHROW(excpt_r);
-  }
-  report->end();
-
+  do 
+    try {
+      doInstallPackage(filename, flags, report);
+      report->finish();
+      break;
+    }
+    catch (RpmException & excpt_r)
+    {
+      RpmInstallReport::Action user = report->problem( excpt_r );
+      
+      if( user == RpmInstallReport::ABORT ) {
+        report->finish( excpt_r );
+        ZYPP_RETHROW(excpt_r);
+      } else if ( user == RpmInstallReport::IGNORE ) {
+        break;
+      }
+    }
+  while (true);
 }
+
 void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, callback::SendReport<RpmInstallReport> & report )
 {
     FAILIFNOTINITIALIZED;

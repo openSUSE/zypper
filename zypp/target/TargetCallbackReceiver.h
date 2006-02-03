@@ -46,11 +46,14 @@ namespace zypp
          */
         virtual bool progress( unsigned percent );
 
+	/** inform user about a problem */
+	virtual rpm::RpmInstallReport::Action problem( Exception & excpt_r );
+
         /** Finish operation in case of success */
-        virtual void end();
+        virtual void finish();
 
         /** Finish operatin in case of fail, report fail exception */
-        virtual void end( Exception & excpt_r );
+        virtual void finish( Exception & excpt_r );
     };
 	
     /////////////////////////////////////////////////////////////////

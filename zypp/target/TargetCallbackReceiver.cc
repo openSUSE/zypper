@@ -53,15 +53,36 @@ namespace zypp
 	{
 	    return _report->progress( percent, _resolvable );
 	}
+	
+	rpm::RpmInstallReport::Action 
+	RpmInstallPackageReceiver::problem( Exception & excpt_r )
+	{
+	    rpm::InstallResolvableReport::Action user = 
+		_report->problem( _resolvable
+		    , rpm::InstallResolvableReport::INVALID
+		    , excpt_r.msg()
+		);
+		
+	    switch (user) {
+		case rpm::InstallResolvableReport::RETRY: 
+		    return rpm::RpmInstallReport::RETRY;
+		case rpm::InstallResolvableReport::ABORT: 
+		    return rpm::RpmInstallReport::ABORT;
+		case rpm::InstallResolvableReport::IGNORE: 
+		    return rpm::RpmInstallReport::IGNORE;
+	    }
+	    
+	    return rpm::RpmInstallReport::problem( excpt_r );
+	}
 
         /** Finish operation in case of success */
-        void RpmInstallPackageReceiver::end()
+        void RpmInstallPackageReceiver::finish()
 	{
 	    _report->finish( _resolvable, rpm::InstallResolvableReport::NO_ERROR, std::string() );
 	}
 
         /** Finish operation in case of success */
-        void RpmInstallPackageReceiver::end( Exception & excpt_r )
+        void RpmInstallPackageReceiver::finish( Exception & excpt_r )
 	{
 	    _report->finish( _resolvable, rpm::InstallResolvableReport::INVALID, std::string() );
 	}
