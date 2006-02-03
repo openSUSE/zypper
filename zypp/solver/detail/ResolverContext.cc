@@ -40,6 +40,9 @@
 #include "zypp/solver/detail/ResolverContext.h"
 #include "zypp/solver/detail/ResolverInfoMisc.h"
 
+#undef _DEBUG
+#define _DEBUG(x)
+
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
@@ -435,7 +438,7 @@ ResolverContext::isPresent (PoolItem_Ref item)
 {
     ResStatus status = getStatus(item);
 
-DBG << "ResolverContext::itemIsPresent(<" << status << ">" << item << ")" << endl;
+_DEBUG("ResolverContext::itemIsPresent(<" << status << ">" << item << ")");
 
     return (status.staysInstalled()
 	    || ((status.isToBeInstalled() || status.isToBeInstalledSoft())
@@ -454,7 +457,7 @@ ResolverContext::isAbsent (PoolItem_Ref item)
 
     status = getStatus(item);
 
-DBG << "ResolverContext::itemIsAbsent(<" << status << ">" << item << ")" << endl;
+_DEBUG("ResolverContext::itemIsAbsent(<" << status << ">" << item << ")");
 
     // DONT add incomplete here, uninstall requests for incompletes must be handled
 
@@ -1225,7 +1228,7 @@ ResolverContext::requirementIsPossible (const Capability & dependency) const
     invokeOnEach( pool().byCapabilityIndexBegin( dependency.index(), dep ),
 		  pool().byCapabilityIndexEnd( dependency.index(), dep ),
 		  resfilter::callOnCapMatchIn( dep, dependency, functor::functorRef<bool,PoolItem,Capability>(info) ) );
-    MIL << "requirementIsPossible( " << dependency << ") = " << (info.flag ? "Y" : "N") << endl;
+    _DEBUG("requirementIsPossible( " << dependency << ") = " << (info.flag ? "Y" : "N"));
     return info.flag;
 }
 
@@ -1273,7 +1276,7 @@ ResolverContext::isParallelInstall (PoolItem_Ref item) const
     info.other = item;
     info.flag = false;
     foreachMarked (dup_name_check_cb, (void *)&info);
-    MIL << "isParallelInstall(" << item << ") = " << (info.flag ? "Y" : "N") << endl;
+    _DEBUG("isParallelInstall(" << item << ") = " << (info.flag ? "Y" : "N"));
     return info.flag;
 }
 
