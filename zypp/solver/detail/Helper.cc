@@ -83,6 +83,7 @@ Helper::findInstalledByNameAndKind (const ResPool & pool, string name, const Res
 				  resfilter::ByKind( kind ) ),			// equal kind
 		  functor::functorRef<bool,PoolItem> (info) );
 
+MIL << "Helper::findInstalledByNameAndKind (" << name << ", " << kind << ") => " << info.installed << endl;
     return info.installed;
 }
 
