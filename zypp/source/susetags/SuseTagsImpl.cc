@@ -109,61 +109,84 @@ namespace zypp
             << content.size() << " packages" << endl;
 
 
+	bool file_found = true;
+
 	// parse selections
-	p = provideFile(_path + "suse/setup/descr/selections");
-
-	std::ifstream sels (p.asString().c_str());
-
-	while (sels && !sels.eof())
+	try {
+	  p = provideFile(_path + "suse/setup/descr/selections");
+	} catch (...)
 	{
-            std::string selfile;
+	    MIL << "'selections' file not found" << endl;
+	    
+	    file_found = false;
+	}
+	
+	if (file_found)
+	{
+	    std::ifstream sels (p.asString().c_str());
+	    
+	    while (sels && !sels.eof())
+	    {
+        	std::string selfile;
 
-	    getline(sels,selfile);
+		getline(sels,selfile);
 
-	    if (selfile.empty() ) continue;
+		if (selfile.empty() ) continue;
 
-	    DBG << "Going to parse selection " << selfile << endl;
+		DBG << "Going to parse selection " << selfile << endl;
 
-	    Pathname file = provideFile(_path + "suse/setup/descr/" + selfile);
-	    MIL << "Selection file to parse " << file << endl;
+		Pathname file = provideFile(_path + "suse/setup/descr/" + selfile);
+	        MIL << "Selection file to parse " << file << endl;
 
-	    Selection::Ptr sel( parseSelection( file ) );
+		Selection::Ptr sel( parseSelection( file ) );
 
-	    DBG << "Selection:" << sel << endl;
+		DBG << "Selection:" << sel << endl;
 
-	    if (sel)
-    		_store.insert( sel );
+		if (sel)
+    		    _store.insert( sel );
 
-	    DBG << "Parsing of " << file << " done" << endl;
+		DBG << "Parsing of " << file << " done" << endl;
+	    }
 	}
 
 	// parse patterns
-	p = provideFile(_path + "suse/setup/descr/patterns");
-
-	std::ifstream pats (p.asString().c_str());
-
-	while (pats && !pats.eof())
+	file_found = true;
+	
+	try {
+	    p = provideFile(_path + "suse/setup/descr/patterns");
+	} catch (...)
 	{
-            std::string patfile;
-
-	    getline(pats,patfile);
-
-	    if (patfile.empty() ) continue;
-
-	    DBG << "Going to parse pattern " << patfile << endl;
-
-	    Pathname file = provideFile(_path + "suse/setup/descr/" + patfile);
-	    MIL << "Pattern file to parse " << file << endl;
-
-	    Pattern::Ptr pat( parsePattern( file ) );
-
-	    DBG << "Pattern:" << pat << endl;
-
-	    if (pat)
-    		_store.insert( pat );
-
-	    DBG << "Parsing of " << file << " done" << endl;
+	    MIL << "'patterns' file not found" << endl;
+	    file_found = false;
 	}
+
+	if ( file_found )
+	{
+	    std::ifstream pats (p.asString().c_str());
+
+	    while (pats && !pats.eof())
+	    {
+        	std::string patfile;
+
+    		getline(pats,patfile);
+
+		if (patfile.empty() ) continue;
+
+		DBG << "Going to parse pattern " << patfile << endl;
+
+		Pathname file = provideFile(_path + "suse/setup/descr/" + patfile);
+		MIL << "Pattern file to parse " << file << endl;
+
+		Pattern::Ptr pat( parsePattern( file ) );
+
+		DBG << "Pattern:" << pat << endl;
+
+		if (pat)
+    		    _store.insert( pat );
+
+		DBG << "Parsing of " << file << " done" << endl;
+	    }
+        }
       }
       ///////////////////////////////////////////////////////////////////
       //
