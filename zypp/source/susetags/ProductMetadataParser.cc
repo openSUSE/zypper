@@ -17,6 +17,7 @@
 #include <boost/algorithm/string.hpp>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/Exception.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/String.h"
 
@@ -47,8 +48,13 @@ namespace zypp
       void ProductMetadataParser::parse( const Pathname & file_r, ProductEntry &entry_r )
       {
         std::ifstream file(file_r.asString().c_str());
+
+	if (!file) {
+	    ZYPP_THROW (Exception("Can't read product file :" + file_r.asString()));
+	}
+
         std::string buffer;
-        while(!file.eof())
+        while(file && !file.eof())
         {
           getline(file, buffer);
           boost::regex e("^(([A-Z]+)(\\.([_A-Z0-9a-z]+)){0,1}) (.+)$");
