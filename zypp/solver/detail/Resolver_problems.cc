@@ -344,7 +344,7 @@ Resolver::problems (void) const
 	    case RESOLVER_INFO_TYPE_NO_UPGRADE: {			// Upgrade to q to avoid removing p is not possible.
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		what = misc_info->message();
-		// The reason is not known. So no solution available
+		// It is only an info --> no solution is needed		
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_UNINSTALL_PROVIDER: {		// p provides c but is scheduled to be uninstalled
@@ -391,7 +391,7 @@ Resolver::problems (void) const
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		what = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
-		// Add dummy provides
+		// Unflag requirement
 		problem->addSolution (new ProblemSolutionIgnoreRequires (problem, item, misc_info->capability())); 
 		problems.push_back (problem);
 		problem_created = true;		
@@ -419,6 +419,8 @@ Resolver::problems (void) const
 		what = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		problem->addSolution (new ProblemSolutionUnlock (problem, item)); // Unlocking resItem
+		// keep installed
+		problem->addSolution (new ProblemSolutionKeep (problem, item)); 
 		problems.push_back (problem);
 		problem_created = true;
 	    }
@@ -450,18 +452,7 @@ Resolver::problems (void) const
 				who.c_str(),
 				misc_info->other()->name().c_str());				
 		details = misc_info->message();
-#if 1
 		// It is only an info --> no solution is needed
-#else
-		ResolverProblem_Ptr problem = new ResolverProblem (what, details);				
-		// Uninstall p
-		problem->addSolution (new ProblemSolutionUninstall (problem, resItem));
-		// Remove conflict in the resolvable which has to be installed
-		problem->addSolution (new ProblemSolutionIgnoreConflicts (problem, resItem, misc_info->capability(),
-									  misc_info->other())); 
-		problems.push_back (problem);
-		problem_created = true;		
-#endif
 	    }
 	    break;
 	}
