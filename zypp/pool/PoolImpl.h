@@ -36,9 +36,12 @@ namespace zypp
     /** */
     typedef PoolTraits::Item           Item;
     typedef PoolTraits::ContainerT     ContainerT;
+    typedef PoolTraits::IndexContainerT    IndexContainerT;
     typedef PoolTraits::size_type      size_type;
     typedef PoolTraits::iterator       iterator;
     typedef PoolTraits::const_iterator const_iterator;
+    typedef PoolTraits::indexiterator       indexiterator;
+    typedef PoolTraits::const_indexiterator const_indexiterator;
     typedef PoolTraits::Inserter       Inserter;
     typedef PoolTraits::Deleter        Deleter;
 
@@ -57,6 +60,13 @@ namespace zypp
       { return _store; }
 
       /**  */
+      IndexContainerT & providesstore()
+      { return _providesstore; }
+      /**  */
+      const IndexContainerT & providesstore() const
+      { return _providesstore; }
+
+      /**  */
       bool empty() const
       { return _store.empty(); }
       /**  */
@@ -71,6 +81,13 @@ namespace zypp
       { return _store.begin(); }
 
       /** */
+      indexiterator providesbegin(const std::string & tag_r)
+      { return _providesstore.lower_bound (tag_r); }
+      /** */
+      const_indexiterator providesbegin(const std::string & tag_r) const
+      { return _providesstore.lower_bound (tag_r); }
+
+      /** */
       iterator end()
       { return _store.end(); }
       /** */
@@ -78,12 +95,23 @@ namespace zypp
       { return _store.end(); }
 
       /** */
+      indexiterator providesend(const std::string & tag_r)
+      { return _providesstore.upper_bound (tag_r); }
+      /** */
+      const_indexiterator providesend(const std::string & tag_r) const
+      { return _providesstore.upper_bound (tag_r); }
+
+      /** */
       void clear()
-      { return _store.clear(); }
+      { _store.clear();
+	_providesstore.clear();
+	return;
+      }
 
     public:
       /** */
       ContainerT _store;
+      IndexContainerT _providesstore;
     };
     ///////////////////////////////////////////////////////////////////
 

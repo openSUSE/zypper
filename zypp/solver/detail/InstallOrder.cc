@@ -261,11 +261,19 @@ InstallOrder::rdfsvisit (const PoolItem_Ref  item)
 
 
 	// _world->foreachProvidingResItem (requirement, collect_providers, &info);
-
+#if 0
 	Dep dep (Dep::PROVIDES);
 	invokeOnEach( _pool.byCapabilityIndexBegin( requirement.index(), dep ),
 		      _pool.byCapabilityIndexEnd( requirement.index(), dep ),
 		      resfilter::callOnCapMatchIn( dep, requirement, functor::functorRef<bool,PoolItem,Capability>(info) ) );
+#endif
+	ResPool::const_indexiterator pend = _pool.providesend(requirement.index());
+	for (ResPool::const_indexiterator it = _pool.providesbegin(requirement.index()); it != pend; ++it) {
+	    if (requirement.matches (it->second.first) == CapMatch::yes) {
+		if (!info( it->second.second, it->second.first))
+		    break;
+	    }
+	}
 
 	for (PoolItemSet::iterator it = tovisit.begin(); it != tovisit.end(); ++it)
 	{

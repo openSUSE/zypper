@@ -299,12 +299,23 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
     if (! _remove_only) {
 
+#if 0
 	Dep dep( Dep::PROVIDES );
 	MIL << "Look for providers of " << _capability << endl;
 	// world->foreachProvidingResItem (_capability, require_process_cb, &info);
 	invokeOnEach( pool().byCapabilityIndexBegin( _capability.index(), dep ),
 		      pool().byCapabilityIndexEnd( _capability.index(), dep ),
 		      resfilter::callOnCapMatchIn( dep, _capability, functor::functorRef<bool,PoolItem,Capability>(info) ) );
+#endif
+	MIL << "Look for providers of " << _capability << endl;
+	// world->foreachProvidingResItem (_capability, require_process_cb, &info);
+	ResPool::const_indexiterator pend = pool().providesend(_capability.index());
+	for (ResPool::const_indexiterator it = pool().providesbegin(_capability.index()); it != pend; ++it) {
+	    if (_capability.matches (it->second.first) == CapMatch::yes) {
+		if (!info( it->second.second, it->second.first))
+		    break;
+	    }
+	}
 
 	num_providers = info.providers.size();
 

@@ -1178,7 +1178,7 @@ ResolverContext::requirementIsMet (const Capability & dependency, bool is_child)
     RequirementMet info (this, is_child ? dependency : Capability::noCap);
 
     //    world()->foreachProviding (dependency, requirement_met_cb, (void *)&info);
-
+#if 0
     Dep dep( Dep::PROVIDES );
 
     // world->foreachProvidingResItem (dependency, require_process_cb, &info);
@@ -1186,7 +1186,14 @@ ResolverContext::requirementIsMet (const Capability & dependency, bool is_child)
     invokeOnEach( pool().byCapabilityIndexBegin( dependency.index(), dep ),
 		  pool().byCapabilityIndexEnd( dependency.index(), dep ),
 		  resfilter::callOnCapMatchIn( dep, dependency, functor::functorRef<bool,PoolItem,Capability>(info) ) );
-
+#endif
+	ResPool::const_indexiterator pend = pool().providesend(dependency.index());
+	for (ResPool::const_indexiterator it = pool().providesbegin(dependency.index()); it != pend; ++it) {
+	    if (dependency.matches (it->second.first) == CapMatch::yes) {
+		if (!info( it->second.second, it->second.first))
+		    break;
+	    }
+	}
     return info.flag;
 }
 
@@ -1222,12 +1229,20 @@ ResolverContext::requirementIsPossible (const Capability & dependency) const
     RequirementPossible info;
 
     // world()->foreachProviding (dep, requirement_possible_cb, (void *)&info);
-
+#if 0
     Dep dep( Dep::PROVIDES );
 
     invokeOnEach( pool().byCapabilityIndexBegin( dependency.index(), dep ),
 		  pool().byCapabilityIndexEnd( dependency.index(), dep ),
 		  resfilter::callOnCapMatchIn( dep, dependency, functor::functorRef<bool,PoolItem,Capability>(info) ) );
+#endif
+	ResPool::const_indexiterator pend = pool().providesend(dependency.index());
+	for (ResPool::const_indexiterator it = pool().providesbegin(dependency.index()); it != pend; ++it) {
+	    if (dependency.matches (it->second.first) == CapMatch::yes) {
+		if (!info( it->second.second, it->second.first))
+		    break;
+	    }
+	}
     _DEBUG("requirementIsPossible( " << dependency << ") = " << (info.flag ? "Y" : "N"));
     return info.flag;
 }

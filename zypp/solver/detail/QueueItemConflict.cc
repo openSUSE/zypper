@@ -110,7 +110,7 @@ struct UpgradeCandidate : public resfilter::OnCapMatchCallbackFunctor
 	, context (ctx)
     { }
 
-    bool operator() (PoolItem_Ref & candidate, const Capability & cap)
+    bool operator() (const PoolItem & candidate, const Capability & cap)
     {
 
 MIL << "UpgradeCandidate? " << candidate << ":[" << context->getStatus (candidate) << "]" << (item->edition().compare(candidate->edition())) << "<" << item->arch() << "," << candidate->arch() << ">" << endl;
@@ -153,7 +153,7 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	, actually_an_obsolete (ao)
     { }
 
-    bool operator()( PoolItem_Ref & provider, const Capability & provides )
+    bool operator()( const PoolItem_Ref & provider, const Capability & provides )
     {
 	ResStatus status;
 	ResolverInfo_Ptr log_info;
@@ -208,14 +208,21 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	    UpgradeCandidate upgrade_info (provider, context);
 
 	    Capability maybe_upgrade_cap =  factory.parse ( provider->kind(), provider->name(), Rel::ANY, Edition::noedition );
-
+#if 0
 	    // pool->foreachProvidingResItem (maybe_upgrade_dep, upgrade_candidates_cb, (void *)&upgrade_info);
 	    Dep dep( Dep::PROVIDES );
 
 	    invokeOnEach( pool.byCapabilityIndexBegin( maybe_upgrade_cap.index(), dep ),
 			  pool.byCapabilityIndexEnd( maybe_upgrade_cap.index(), dep ),
 			  resfilter::callOnCapMatchIn( dep, maybe_upgrade_cap, functor::functorRef<bool,PoolItem,Capability>(upgrade_info) ) );
-
+#endif
+	ResPool::const_indexiterator pend = pool.providesend(maybe_upgrade_cap.index());
+	for (ResPool::const_indexiterator it = pool.providesbegin(maybe_upgrade_cap.index()); it != pend; ++it) {
+	    if (maybe_upgrade_cap.matches (it->second.first) == CapMatch::yes) {
+		if (!upgrade_info( it->second.second, it->second.first))
+		    break;
+	    }
+	}
 
 	    MIL << "found " << upgrade_info.upgrades.size() << " upgrade candidates" << endl;
 #endif
@@ -305,11 +312,19 @@ QueueItemConflict::process (ResolverContext_Ptr context, QueueItemList & new_ite
     ConflictProcess info (pool(), _conflicting_item, _capability, context, new_items, _actually_an_obsolete);
 
     // world()->foreachProvidingPoolItem (_capability, conflict_process_cb, (void *)&info);
-
+#if 0
     Dep dep( Dep::PROVIDES );
     invokeOnEach( pool().byCapabilityIndexBegin( _capability.index(), dep ),
 		  pool().byCapabilityIndexEnd( _capability.index(), dep ),
 		  resfilter::callOnCapMatchIn( dep, _capability, functor::functorRef<bool,PoolItem,Capability>(info) ) );
+#endif
+	ResPool::const_indexiterator pend = pool().providesend(_capability.index());
+	for (ResPool::const_indexiterator it = pool().providesbegin(_capability.index()); it != pend; ++it) {
+	    if (_capability.matches (it->second.first) == CapMatch::yes) {
+		if (!info( it->second.second, it->second.first))
+		    break;
+	    }
+	}
 
     return true;
 }

@@ -56,6 +56,12 @@ namespace zypp
   ResPool::const_iterator ResPool::end() const
   { return _pimpl->end(); }
 
+  ResPool::const_indexiterator ResPool::providesbegin(const std::string & tag_r) const
+  { return _pimpl->providesbegin(tag_r); }
+
+  ResPool::const_indexiterator ResPool::providesend(const std::string & tag_r) const
+  { return _pimpl->providesend(tag_r); }
+
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<

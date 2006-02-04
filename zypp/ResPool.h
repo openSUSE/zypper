@@ -43,6 +43,7 @@ namespace zypp
     typedef pool::PoolTraits::Item           Item;
     typedef pool::PoolTraits::size_type      size_type;
     typedef pool::PoolTraits::const_iterator const_iterator;
+    typedef pool::PoolTraits::const_indexiterator const_indexiterator;
 
   public:
     /** Dtor */
@@ -62,6 +63,14 @@ namespace zypp
     const_iterator begin() const;
     /** */
     const_iterator end() const;
+    //@}
+
+    /** \name Iterate through all ResObjects which provide tag_r. */
+    //@{
+    /** */
+    const_indexiterator providesbegin(const std::string & tag_r) const;
+    /** */
+    const_indexiterator providesend(const std::string & tar_r) const;
     //@}
 
   public:

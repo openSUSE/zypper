@@ -13,6 +13,7 @@
 #define ZYPP_POOL_POOLTRAITS_H
 
 #include <set>
+#include <map>
 
 #include "zypp/PoolItem.h"
 
@@ -58,9 +59,12 @@ namespace zypp
       /** */
       typedef PoolItem                   Item;
       typedef std::set<Item>             ContainerT;
+      typedef std::multimap<std::string,std::pair<Capability,Item> > IndexContainerT;
       typedef ContainerT::size_type      size_type;
       typedef ContainerT::iterator       iterator;
       typedef ContainerT::const_iterator const_iterator;
+      typedef IndexContainerT::iterator       indexiterator;
+      typedef IndexContainerT::const_iterator const_indexiterator;
 
       typedef PoolImpl                   Impl;
       typedef shared_ptr<PoolImpl>       Impl_Ptr;
