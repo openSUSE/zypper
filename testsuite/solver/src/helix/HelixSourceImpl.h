@@ -47,10 +47,6 @@ class HelixSourceImpl : public zypp::source::SourceImpl {
 
   public:
 
-    /** Ctor, FIXME it is here only because of target storage */
-    HelixSourceImpl()
-      : _source (Source_Ref::noSource)
-    {}
     /** Default ctor */
     HelixSourceImpl(media::MediaId & mediaid_r, const Pathname & path_r = "/", const std::string & alias_r = "");
 
