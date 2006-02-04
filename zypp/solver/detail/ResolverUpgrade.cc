@@ -468,7 +468,8 @@ MIL << "has split cap " << *scap << endl;
 #endif		
 	ResPool::const_indexiterator pend = pool().providesend(installed->name());
 	for (ResPool::const_indexiterator it = pool().providesbegin(installed->name()); it != pend; ++it) {
-	    if (installedCap.matches (it->second.first) == CapMatch::yes) {
+	    if (it->second.second.status().isUninstalled()
+		&& installedCap.matches (it->second.first) == CapMatch::yes) {
 		if (!info( it->second.second, it->second.first))
 		    break;
 	    }
