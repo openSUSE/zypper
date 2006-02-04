@@ -60,6 +60,7 @@ namespace zypp
 
 	  MIL << "Adding no media verifier" << endl;
 	  	
+	  media_mgr.delVerifier(media_r);
 	  media_mgr.addVerifier(media_r, media::MediaVerifierRef(new media::NoVerifier()));
         }
         catch (const Exception & excpt_r)
