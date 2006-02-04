@@ -48,23 +48,15 @@ namespace zypp
       friend std::ostream & operator<<( std::ostream & str, const SourceImpl & obj );
 
     public:
-      /** Ctor, FIXME it is here only because of target storage, then make it private */
-      SourceImpl()
-      : _res_store_initialized(true) // in case of null source, nothing to read
-      {}
-
-      /** Ctor. */
-      SourceImpl(media::MediaId & media_r,
-                 const Pathname & path_r = "/",
-		 const std::string & alias = "",
-		 const Pathname cache_dir_r = "");
-      /** Dtor. */
-      virtual ~SourceImpl();
+      /** SourceImpl MediaVerifier. */
+      class Verifier;
 
     public:
 
       /** All resolvables provided by this source. */
-      const ResStore & resolvables(Source_Ref source_r) const;
+      const ResStore & resolvables(Source_Ref) const
+      { return resolvables(); }
+      const ResStore & resolvables() const;
 
       /**
        * Provide a file to local filesystem
@@ -110,8 +102,10 @@ namespace zypp
 
       const Pathname & path (void) const;
 
-      /** Overload to realize stream output. */
-      virtual std::ostream & dumpOn( std::ostream & str ) const;
+    protected:
+      /** Provide Source_Ref to \c this. */
+      Source_Ref selfSourceRef()
+      { return Source_Ref( this ); }
 
     protected:
       /** All resolvables provided by this source. */
@@ -131,12 +125,32 @@ namespace zypp
       /** (user defined) unsubscribed priority of the source */
       unsigned _priority_unsubscribed;
 
+      ///////////////////////////////////////////////////////////////////
+      // no playgroung below this line ;)
+      ///////////////////////////////////////////////////////////////////
+    protected:
+      /** Ctor. */
+      SourceImpl(media::MediaId & media_r,
+                 const Pathname & path_r = "/",
+		 const std::string & alias = "",
+		 const Pathname cache_dir_r = "");
+      /** Dtor. */
+      virtual ~SourceImpl();
+
+      /** Overload to realize stream output. */
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+
     private:
-      /**  */
       /** Late initialize the ResStore. */
       virtual void createResolvables(Source_Ref source_r);
       /** Whether the ResStore is initialized. */
       bool _res_store_initialized;
+
+    private:
+      /** Ctor, excl. for nullimpl only. */
+      SourceImpl()
+      : _res_store_initialized(true)
+      {}
 
     public:
       /** Offer default Impl. */
@@ -146,7 +160,18 @@ namespace zypp
         return _nullimpl;
       }
 
-      class Verifier : public media::MediaVerifierBase
+    };
+    ///////////////////////////////////////////////////////////////////
+
+    /** \relates SourceImpl Stream output */
+    inline std::ostream & operator<<( std::ostream & str, const SourceImpl & obj )
+    { return obj.dumpOn( str ); }
+
+    ///////////////////////////////////////////////////////////////////
+
+    /** SourceImpl MediaVerifier.
+    */
+    class SourceImpl::Verifier : public media::MediaVerifierBase
       {
       public:
 	/** ctor */
@@ -163,14 +188,6 @@ namespace zypp
 	std::string _media_id;
 	SourceImpl_Ptr _source;
       };
-
-
-    };
-    ///////////////////////////////////////////////////////////////////
-
-    /** \relates SourceImpl Stream output */
-    inline std::ostream & operator<<( std::ostream & str, const SourceImpl & obj )
-    { return obj.dumpOn( str ); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace source

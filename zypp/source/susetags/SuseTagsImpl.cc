@@ -40,58 +40,6 @@ namespace zypp
       //	METHOD NAME : SuseTagsImpl::SuseTagsImpl
       //	METHOD TYPE : Ctor
       //
-      SuseTagsImpl::SuseTagsImpl( const Pathname & localDir_r )
-      {
-
-	media::MediaManager media_mgr;
-
-        try {
-	  Pathname media_file = "/media.1/media";
-
-	  media_mgr.provideFile (_media, 1, media_file);
-	  media_file = media_mgr.localPath(_media, media_file);
-
-#warning check the stream status
-	  std::ifstream str(media_file.asString().c_str());
-	  std::string media_vendor;
-	  std::string media_id;
-	  getline(str, media_vendor);
-	  getline(str, media_id);
-
-	  media_mgr.delVerifier(_media);
-	
-	  MIL << "Adding proper media verifier" << endl;
-	
-	  media_mgr.addVerifier(_media, media::MediaVerifierRef(new Verifier(media_vendor, media_id)));
-        }
-        catch (const Exception & excpt_r)
-        {
-#warning FIXME: If media data is not set, verifier is not set. Should the media be refused instead?
-	  ZYPP_CAUGHT(excpt_r);
-	  WAR << "Verifier not found" << endl;
-        }
-
-        PathInfo p( localDir_r );
-        if ( p.isDir() )
-          p( localDir_r + "packages" );
-        if ( ! p.isFile() )
-          ZYPP_THROW( Exception( p.asString()+" is not a file" ) );
-        if ( ! p.userMayR() )
-          ZYPP_THROW( Exception( p.asString()+" no permission to read" ) );
-
-        Source_Ref source_r( SourceFactory().createFrom( this ) );
-        std::list<Package::Ptr> content( parsePackages( source_r, this,
-                                                        p.path() ) );
-        _store.insert( content.begin(), content.end() );
-        DBG << "SuseTagsImpl (fake) from " << p << ": "
-            << content.size() << " packages" << endl;
-      }
-
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	METHOD NAME : SuseTagsImpl::SuseTagsImpl
-      //	METHOD TYPE : Ctor
-      //
       SuseTagsImpl::SuseTagsImpl( media::MediaId & media_r, const Pathname & path_r, const std::string & alias_r )
       : SourceImpl(media_r, path_r, alias_r)
       {
@@ -117,14 +65,14 @@ namespace zypp
 	} catch (...)
 	{
 	    MIL << "'selections' file not found" << endl;
-	    
+
 	    file_found = false;
 	}
-	
+
 	if (file_found)
 	{
 	    std::ifstream sels (p.asString().c_str());
-	    
+
 	    while (sels && !sels.eof())
 	    {
         	std::string selfile;
@@ -151,7 +99,7 @@ namespace zypp
 
 	// parse patterns
 	file_found = true;
-	
+
 	try {
 	    p = provideFile(_path + "suse/setup/descr/patterns");
 	} catch (...)

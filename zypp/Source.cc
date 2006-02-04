@@ -52,18 +52,15 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   const ResStore & Source_Ref::resolvables() const
-  { return _pimpl->resolvables(*this); }
-
-  std::ostream & Source_Ref::dumpOn( std::ostream & str ) const
-  { return _pimpl->dumpOn( str ); }
+  { return _pimpl->resolvables(); }
 
   const Pathname Source_Ref::provideFile(const Pathname & file_r,
 				     const unsigned media_nr)
   { return _pimpl->provideFile(file_r, media_nr); }
 
   const Pathname Source_Ref::provideDir(const Pathname & dir_r,
-				    const unsigned media_nr,
-				    const bool recursive)
+                                         const unsigned media_nr,
+                                         const bool recursive)
   { return _pimpl->provideDir(dir_r, media_nr, recursive); }
 
   const bool Source_Ref::enabled() const
@@ -98,6 +95,16 @@ namespace zypp
 
   const Pathname & Source_Ref::path (void) const
   { return _pimpl->path (); }
+
+  /******************************************************************
+   **
+   **	FUNCTION NAME : operator<<
+   **	FUNCTION TYPE : std::ostream &
+  */
+  std::ostream & operator<<( std::ostream & str, const Source_Ref & obj )
+  {
+    return str << *obj._pimpl;
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

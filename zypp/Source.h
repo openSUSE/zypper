@@ -41,6 +41,7 @@ namespace zypp
   */
   class Source_Ref
   {
+    friend std::ostream & operator<<( std::ostream & str, const Source_Ref & obj );
     friend bool operator==( const Source_Ref & lhs, const Source_Ref & rhs );
     friend bool operator<( const Source_Ref & lhs, const Source_Ref & rhs );
 
@@ -112,17 +113,12 @@ namespace zypp
   private:
     /** Factory */
     friend class SourceFactory;
-    friend class SourceManager;
+    friend class source::SourceImpl;
 
   private:
     /** Factory ctor */
     explicit
     Source_Ref( const Impl_Ptr & impl_r );
-
-  private:
-    friend std::ostream & operator<<( std::ostream & str, Source_Ref obj );
-    /** Stream output. */
-    std::ostream & dumpOn( std::ostream & str ) const;
 
   private:
     /** Pointer to implementation */
@@ -131,8 +127,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   /** \relates Source Stream output. */
-  inline std::ostream & operator<<( std::ostream & str, Source_Ref obj )
-  { return obj.dumpOn( str ); }
+  std::ostream & operator<<( std::ostream & str, const Source_Ref & obj );
 
   /** \relates Source_Ref Equal if same implementation class. */
   inline bool operator==( const Source_Ref & lhs, const Source_Ref & rhs )

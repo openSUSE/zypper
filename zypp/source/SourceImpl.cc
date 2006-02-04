@@ -59,57 +59,58 @@ namespace zypp
     SourceImpl::~SourceImpl()
     {}
 
-    const ResStore & SourceImpl::resolvables(Source_Ref source_r) const
+    const ResStore & SourceImpl::resolvables() const
     {
       if ( !_res_store_initialized )
       {
         // cast away const to allow late init
-	const_cast<SourceImpl*>(this)->createResolvables(source_r);
+        Source_Ref self( const_cast<SourceImpl*>(this)->selfSourceRef() );
+	const_cast<SourceImpl*>(this)->createResolvables(self);
 	const_cast<SourceImpl*>(this)->_res_store_initialized = true;
       }
       return _store;
      }
 
     const Pathname SourceImpl::provideFile(const Pathname & file_r,
-					   const unsigned media_nr, 
-					   bool cached, 
+					   const unsigned media_nr,
+					   bool cached,
 					   bool checkonly )
     {
-    
+
       callback::SendReport<media::MediaChangeReport> report;
-      
+
       SourceFactory source_factory;
-      
+
       do {
         try {
 	  media_mgr.provideFile (_media, media_nr, file_r, cached, checkonly);
 	  break;
-        } 
+        }
 	catch ( Exception & excp )
         {
-	  media::MediaChangeReport::Action user 
-	    = checkonly ? media::MediaChangeReport::ABORT : 
-	      report->requestMedia ( 
+	  media::MediaChangeReport::Action user
+	    = checkonly ? media::MediaChangeReport::ABORT :
+	      report->requestMedia (
 		source_factory.createFrom(this),
 		media_nr,
 		media::MediaChangeReport::WRONG, // FIXME: proper error
 		excp.msg()
 	    );
-	    
-	  if( user == media::MediaChangeReport::ABORT ) 
+
+	  if( user == media::MediaChangeReport::ABORT )
 	  {
 	    ZYPP_RETHROW ( excp );
-	  } 
+	  }
 	  else if ( user == media::MediaChangeReport::EJECT )
 	  {
 	    media_mgr.release (_media, true);
 	    // FIXME: this will not work, probably
 	  }
-	
+
 	  // FIXME: IGNORE
         }
       } while( true );
-      
+
       return media_mgr.localPath(_media, file_r);
     }
 
@@ -170,10 +171,10 @@ namespace zypp
       std::string vendor;
       std::string id;
 
-#warning check the stream status      
+#warning check the stream status
       getline(str, vendor);
       getline(str, id);
-      
+
       return (vendor == _media_vendor && id == _media_id );
     }
 

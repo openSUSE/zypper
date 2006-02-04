@@ -36,28 +36,22 @@ namespace zypp
       class SuseTagsImpl : public SourceImpl
       {
       public:
+        typedef intrusive_ptr<SuseTagsImpl>       Ptr;
+        typedef intrusive_ptr<const SuseTagsImpl> constPtr;
 
-        typedef intrusive_ptr<SuseTagsImpl>      Ptr;
-
-        /** \deprecated Interim ctor for testing
-         * \throw EXCEPTION on parse error
-        */
-        SuseTagsImpl( const Pathname & localDir_r );
+      public:
         /** Factory ctor */
         SuseTagsImpl( media::MediaId & media_r, const Pathname & path_r = "/", const std::string & alias_r = "");
         /** Dtor */
         ~SuseTagsImpl();
 
 	virtual void createResolvables(Source_Ref source_r);
-	
+
 	Pathname sourceDir( const NVRAD& nvrad );
 
-      public:
+      protected:
         /** Stream output. */
         virtual std::ostream & dumpOn( std::ostream & str ) const;
-
-      public:
-
       };
       ///////////////////////////////////////////////////////////////////
 

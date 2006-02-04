@@ -42,10 +42,7 @@ namespace zypp
       class YUMSourceImpl : public SourceImpl
       {
       public:
-	/** Ctor, FIXME it is here only because of target storage */
-        YUMSourceImpl()
-	{}
-        /** Default ctor */
+        /** Factory ctor */
         YUMSourceImpl(media::MediaId & media_r, const Pathname & path_r = "/", const std::string & alias_r = "", const Pathname cache_dir_r = "/");
 
         virtual void storeMetadata(const Pathname & cache_dir_r);
