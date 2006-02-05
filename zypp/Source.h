@@ -81,12 +81,21 @@ namespace zypp
 
     void storeMetadata(const Pathname & cache_dir_r);
 
-    // for ZMD
     std::string alias (void) const;
-    std::string zmdname (void) const;
-    std::string zmddescription (void) const;
+
+    // generic information get/set
+    std::string id (void) const;
+    void setId (const std::string id_r);
     unsigned priority (void) const;
-    unsigned priority_unsubscribed (void) const;
+    void setPriority (unsigned p);
+    unsigned priorityUnsubscribed (void) const;
+    void setPriorityUnsubscribed (unsigned p);
+
+    // for ZMD
+    std::string zmdName (void) const;
+    void setZmdName (const std::string name_r);
+    std::string zmdDescription (void) const;
+    void setZmdDescription (const std::string desc_r);
 
     // for YaST
     Url url (void) const;

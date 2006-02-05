@@ -109,9 +109,9 @@ namespace zypp
        * default source only provides dummy implementations
        */
       virtual std::string zmdName (void) const;
-      virtual void setZmdName (const std::string name_r) const;
+      virtual void setZmdName (const std::string name_r);
       virtual std::string zmdDescription (void) const;
-      virtual void setZmdDescription (const std::string desc_r) const;
+      virtual void setZmdDescription (const std::string desc_r);
 
     protected:
       /** Provide Source_Ref to \c this. */

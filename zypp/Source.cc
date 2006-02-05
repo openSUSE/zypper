@@ -78,17 +78,35 @@ namespace zypp
   string Source_Ref::alias (void) const
   { return _pimpl->alias(); }
 
-  string Source_Ref::zmdname (void) const
-  { return _pimpl->zmdname(); }
+  string Source_Ref::id (void) const
+  { return _pimpl->id(); }
 
-  string Source_Ref::zmddescription (void) const
-  { return _pimpl->zmddescription (); }
+  void Source_Ref::setId (const std::string id_r)
+  { return _pimpl->setId (id_r); }
+
+  string Source_Ref::zmdName (void) const
+  { return _pimpl->zmdName(); }
+
+  void Source_Ref::setZmdName (const std::string name_r)
+  { return _pimpl->setZmdName( name_r ); }
+
+  string Source_Ref::zmdDescription (void) const
+  { return _pimpl->zmdDescription(); }
+
+  void Source_Ref::setZmdDescription (const std::string desc_r)
+  { return _pimpl->setZmdDescription( desc_r ); }
 
   unsigned Source_Ref::priority (void) const
   { return _pimpl->priority(); }
 
-  unsigned Source_Ref::priority_unsubscribed (void) const
-  { return _pimpl->priority_unsubscribed(); }
+  void Source_Ref::setPriority (unsigned p)
+  { return _pimpl->setPriority(p); }
+
+  unsigned Source_Ref::priorityUnsubscribed (void) const
+  { return _pimpl->priorityUnsubscribed(); }
+
+  void Source_Ref::setPriorityUnsubscribed (unsigned p)
+  { return _pimpl->setPriorityUnsubscribed( p ); }
 
   Url Source_Ref::url (void) const
   { return _pimpl->url (); }
