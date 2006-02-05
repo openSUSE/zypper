@@ -32,9 +32,9 @@ namespace zypp
           _table["EQ"]   = _table["eq"]  = _table["=="]    = _table["="] = Rel::EQ_e;
           _table["NE"]   = _table["ne"]  = _table["!="]                  = Rel::NE_e;
           _table["LT"]   = _table["lt"]  = _table["<"]                   = Rel::LT_e;
-          _table["LE"]   = _table["le"]  = _table["<="]                  = Rel::LE_e;
+          _table["LE"]   = _table["le"]  = _table["lte"]  = _table["<="] = Rel::LE_e;
           _table["GT"]   = _table["gt"]  = _table[">"]                   = Rel::GT_e;
-          _table["GE"]   = _table["ge"]  = _table[">="]                  = Rel::GE_e;
+          _table["GE"]   = _table["ge"]  = _table["gte"]  = _table[">="] = Rel::GE_e;
           _table["ANY"]  = _table["any"] = _table["(any)"] = _table[""]  = Rel::ANY_e;
           _table["NONE"] = _table["none"]                                = Rel::NONE_e;
         }
