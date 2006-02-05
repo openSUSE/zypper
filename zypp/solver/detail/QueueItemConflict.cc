@@ -115,13 +115,15 @@ struct UpgradeCandidate : public resfilter::OnCapMatchCallbackFunctor
 
 //MIL << "UpgradeCandidate? " << candidate << ":[" << context->getStatus (candidate) << "]" << (item->edition().compare(candidate->edition())) << "<" << item->arch() << "," << candidate->arch() << ">" << endl;
 // FIXME put this in the resfilter chain
+	ResStatus status = context->getStatus (candidate);
 	if ((item->edition().compare(candidate->edition()) < 0)		// look at real upgrades
 	    && item->arch() == candidate->arch()			// keep the architecture
-	    && (context->getStatus (candidate).staysUninstalled()
-		|| context->getStatus (candidate).isToBeUninstalled()))	// FIXME: just for exercise-02conflict-03-test.xml
+	    && (status.wasUninstalled()
+		|| status.isToBeUninstalled())				// FIXME: just for exercise-02conflict-03-test.xml
 									// the original solver found the uninstalled foo-2.0.1 first, this solver
 									// finds the uninstallable first. In the end, we had a duplicate solution
 									// now we have no solution. Both results are right.
+	   && (!status.isImpossible()) )
 	{
 //MIL << "UpgradeCandidate! " << candidate << endl;
 	    upgrades.push_back (candidate);
@@ -276,9 +278,9 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	    context->addError (misc_info);
 
 	}
-	else if (status.isUninstalled()) {
+	else if (status.wasUninstalled()) {
 
-	    context->setStatus (provider, ResStatus::toBeUninstalled);
+	    context->setStatus (provider, ResStatus::impossible);
 
 	    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CONFLICT_UNINSTALLABLE, provider, RESOLVER_INFO_PRIORITY_VERBOSE, provides);
 
@@ -289,6 +291,7 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 
 	}
 	else if ((status.isToBeUninstalled() && !status.isToBeUninstalledDueToUnlink())
+		|| status.isImpossible()
 		|| status.isToBeUninstalledDueToObsolete()) {
 
 	    /* This is the easy case -- we do nothing. */

@@ -86,14 +86,14 @@ Helper::findInstalledByNameAndKind (const ResPool & pool, const string & name, c
 	ResPool::const_nameiterator pend = pool.nameend(name);
 	for (ResPool::const_nameiterator it = pool.namebegin(name); it != pend; ++it) {
 	    PoolItem item = it->second;
-	    if (item.status().isInstalled()
+	    if (item.status().staysInstalled()
 		&& item->kind() == kind) {
 		if (!info( it->second ))
 		    break;
 	    }
 	}
 
-    _DEBUG("Helper::findInstalledByNameAndKind (" << name << ", " << kind << ") => " << info.installed);
+    _XDEBUG("Helper::findInstalledByNameAndKind (" << name << ", " << kind << ") => " << info.installed);
     return info.installed;
 }
 
@@ -141,7 +141,7 @@ Helper::findUpdateItem (const ResPool & pool, PoolItem_Ref item)
 	ResPool::const_nameiterator pend = pool.nameend(item->name());
 	for (ResPool::const_nameiterator it = pool.namebegin(item->name()); it != pend; ++it) {
 	    PoolItem pos = it->second;
-	    if (pos.status().isUninstalled()
+	    if (pos.status().staysUninstalled()
 		&& pos->kind() == item->kind()
 		&& item->edition().compare(pos->edition()) < 0)
 	    {
@@ -150,7 +150,7 @@ Helper::findUpdateItem (const ResPool & pool, PoolItem_Ref item)
 	    }
 	}
 
-    _DEBUG("Helper::findUpdateItem(" << item << ") => " << info.uninstalled);
+    _XDEBUG("Helper::findUpdateItem(" << item << ") => " << info.uninstalled);
     return info.uninstalled;
 }
 
@@ -186,7 +186,7 @@ Helper::findReinstallItem (const ResPool & pool, PoolItem_Ref item)
 	ResPool::const_nameiterator pend = pool.nameend(item->name());
 	for (ResPool::const_nameiterator it = pool.namebegin(item->name()); it != pend; ++it) {
 	    PoolItem pos = it->second;
-	    if (pos.status().isUninstalled()
+	    if (pos.status().staysUninstalled()
 		&& pos->kind() == item->kind()
 		&& item->edition().compare(pos->edition()) == 0)
 	    {
@@ -195,7 +195,7 @@ Helper::findReinstallItem (const ResPool & pool, PoolItem_Ref item)
 	    }
 	}
 
-    _DEBUG("Helper::findReinstallItem(" << item << ") => " << info.uninstalled);
+    _XDEBUG("Helper::findReinstallItem(" << item << ") => " << info.uninstalled);
     return info.uninstalled;
 }
 

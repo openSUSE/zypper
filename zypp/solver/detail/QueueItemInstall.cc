@@ -209,7 +209,9 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	for (PoolItemList::const_iterator iter = _needed_by.begin(); iter != _needed_by.end() && !still_needed; ++iter) {
 	    ResStatus status = iter->status();
 	    _XDEBUG("by: [status: " << status << "] " << *iter);
-	    if (! status.isToBeUninstalled()) {
+	    if (! status.isToBeUninstalled()
+		&& ! status.isImpossible())
+	    {
 		still_needed = true;
 	    }
 	}
@@ -223,7 +225,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	   needed this. */
 
     if (context->verifying()
-	&& status.isToBeUninstalled()
+	&& (status.isToBeUninstalled() || status.isImpossible())
 	&& !_needed_by.empty()) {
 
 	QueueItemUninstall_Ptr uninstall_item;

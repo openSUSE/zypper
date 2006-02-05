@@ -175,7 +175,7 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 	    return true;
 	}
 
-	if (!status.isToBeUninstalled()
+	if (! (status.isToBeUninstalled() || status.isImpossible())
 	    && ! context->isParallelInstall (provider)
 	    && ! uniq.has(provider)
 	    && context->itemIsPossible (provider)
@@ -202,7 +202,7 @@ struct NoInstallableProviders : public resfilter::OnCapMatchCallbackFunctor
 	string msg_str;
 	//const Capability match;
 
-	ResStatus status = provider.status();
+	ResStatus status = context->getStatus( provider );
 
 	ResolverInfoMisc_Ptr misc_info;
 
@@ -212,7 +212,8 @@ struct NoInstallableProviders : public resfilter::OnCapMatchCallbackFunctor
 	} else if (context->isParallelInstall (provider)) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_PARALLEL_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);
-	} else if (! context->itemIsPossible (provider)) {
+	} else if (status.isImpossible()
+		  || ! context->itemIsPossible (provider)) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NOT_INSTALLABLE_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);
 #warning Locks not implemented
@@ -407,7 +408,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	ResPool::const_nameiterator pend = pool().nameend(_requiring_item->name());
 	for (ResPool::const_nameiterator it = pool().namebegin(_requiring_item->name()); it != pend; ++it) {
 	    PoolItem pos = it->second;
-	    if (pos.status().isUninstalled()
+	    if (pos.status().staysUninstalled()
 		&& pos->kind() == _requiring_item->kind()
 		&& _requiring_item->edition().compare(pos->edition()) < 0)
 	    {

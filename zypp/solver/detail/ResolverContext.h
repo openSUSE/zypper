@@ -160,8 +160,8 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     bool isAbsent (PoolItem_Ref item);
 
     bool requirementIsMet (const Capability & cap, bool is_child = false);
-    bool requirementIsPossible (const Capability & cap) const;
-    bool itemIsPossible (const PoolItem_Ref item) const;
+    bool requirementIsPossible (const Capability & cap);
+    bool itemIsPossible (const PoolItem_Ref item);
     bool isParallelInstall (const PoolItem_Ref item) const;
     PoolItem_Ref getParallelInstall (const PoolItem_Ref item) const;
 
@@ -189,6 +189,10 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     int foreachIncomplete (MarkedPoolItemFn fn, void *data) const;
     PoolItemList getIncompletes (void) const;
     int incompleteCount (void) const;
+
+    int foreachImpossible (MarkedPoolItemFn fn, void *data);
+//    PoolItemList getImpossibles (void);
+//    int impossibleCount (void);
 
     // add to the report log
     void addInfo (ResolverInfo_Ptr info);					// normal progress info

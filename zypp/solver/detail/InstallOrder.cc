@@ -210,7 +210,7 @@ struct CollectProviders : public resfilter::OnCapMatchCallbackFunctor
 	//
 
 	if ((provider.resolvable() != requestor.resolvable())		// resolvable could provide its own requirement
-	    && (!provider.status().isInstalled())			// only visit if provider is not already installed
+	    && (!provider.status().staysInstalled())			// only visit if provider is not already installed
 	    && (toinstall.find(provider) != toinstall.end()		// only look at resolvables
 		|| installed.find(provider) != installed.end())) {	//   we are currently considering anyways
 	    tovisit.insert (provider);

@@ -319,13 +319,23 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	for (CapSet::const_iterator iter = provides.begin(); iter != provides.end(); iter++) {
 	    UninstallProcess info ( pool(), context, _item, _upgraded_to, qil, _remove_only, _soft);
-
+#if 0
 	    //world()->foreachRequiringPoolItem (*iter, uninstall_process_cb, &info);
 	    Dep dep( Dep::REQUIRES);
 
 	    invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
 			  pool().byCapabilityIndexEnd( iter->index(), dep ),
 			  resfilter::callOnCapMatchIn( dep, *iter, functor::functorRef<bool,PoolItem,Capability>(info) ) );
+#endif
+	Capability c = *iter;
+	ResPool::const_indexiterator rend = pool().requiresend(c.index());
+	for (ResPool::const_indexiterator it = pool().requiresbegin(c.index()); it != rend; ++it) {
+	    if (c.matches (it->second.first) == CapMatch::yes) {
+		if (!info( it->second.second, it->second.first))
+		    break;
+	    }
+	}
+
 	}
     }
 

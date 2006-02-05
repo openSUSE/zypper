@@ -234,7 +234,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
       ++opt_stats_r.pre_todel;
       continue;
     }
-    if ( item.status().isInstalled() ) {
+    if ( item.status().staysInstalled() ) {
       installed = item;
       CandidateMap::const_iterator cand_it = candidatemap.find(installed);
       if (cand_it != candidatemap.end()) {
@@ -249,20 +249,20 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 	continue;
       }
 MIL << "item " << item << " is installed, candidate is " << candidate << endl;
-      if (candidate.status().isUnneeded()) {			// seen already
-	candidate.status().setUndetermined();
+      if (candidate.status().isSeen()) {			// seen already
+	candidate.status().setSeen(true);
 	continue;
       }
-      candidate.status().setUnneeded();				// mark as seen
+      candidate.status().setSeen(true);				// mark as seen
       candidatemap[installed] = candidate;
     }
     else {					// assume Uninstalled
-      if (item.status().isUnneeded()) {				// seen already
-	item.status().setUndetermined();
+      if (item.status().isSeen()) {				// seen already
+	item.status().setSeen(true);
 	continue;
       }
       candidate = item;
-      candidate.status().setUnneeded();				// mark as seen
+      candidate.status().setSeen(true);				// mark as seen
       installed = Helper::findInstalledItem (_pool, candidate);
       if (installed) {						// check if we already have an installed
 MIL << "found installed " << installed << " for item " << candidate << endl;
@@ -310,9 +310,9 @@ MIL << "has split cap " << *scap << endl;
 
   } // iterate over the complete pool
 
-  // reset all unneeded
+  // reset all seen
   for (PoolItemSet::const_iterator it = available.begin(); it != available.end(); ++it) {
-	it->status().setUndetermined();
+	it->status().setSeen(false);
   }
 
 #warning Cant update from broken install medium like STABLE
@@ -387,7 +387,7 @@ MIL << "has split cap " << *scap << endl;
     PoolItem_Ref installed(*it);
     ResStatus status (installed.status());
 
-    if ( ! status.isInstalled() ) {
+    if ( ! status.staysInstalled() ) {
       continue;
     }
     ++opt_stats_r.chk_installed_total;
@@ -463,7 +463,7 @@ MIL << "has split cap " << *scap << endl;
 #endif		
 	ResPool::const_indexiterator pend = pool().providesend(installed->name());
 	for (ResPool::const_indexiterator it = pool().providesbegin(installed->name()); it != pend; ++it) {
-	    if (it->second.second.status().isUninstalled()
+	    if (it->second.second.status().staysUninstalled()
 		&& installedCap.matches (it->second.first) == CapMatch::yes) {
 		if (!info( it->second.second, it->second.first))
 		    break;
@@ -512,7 +512,7 @@ MIL << "has split cap " << *scap << endl;
 	  PoolItem_Ref split_candidate = *ait;
 	  MIL << " ==> ADD (splitted): " << split_candidate << endl;
 	  if ( probably_dropped
-	       && split_candidate.status().isUninstalled()
+	       && split_candidate.status().staysUninstalled()
 	       && doesObsoleteItem (split_candidate, installed))
 	  {
 	    probably_dropped = false;
