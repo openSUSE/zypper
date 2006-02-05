@@ -132,23 +132,52 @@ namespace zypp
     void SourceImpl::storeMetadata(const Pathname & cache_dir_r)
     {}
 
-    std::string SourceImpl::zmdname (void) const
-    { return "zmdname"; }
+    /////////////////////////////////////////////////////////////////
+    // attribute accessors
 
-    std::string SourceImpl::zmddescription (void) const
-    { return "zmddescription"; }
+    std::string SourceImpl::id (void) const
+    { return _id; }
+
+    void SourceImpl::setId (const std::string id_r)
+    { _id = id_r; }
 
     unsigned SourceImpl::priority (void) const
     { return _priority; }
 
-    unsigned SourceImpl::priority_unsubscribed (void) const
+    void SourceImpl::setPriority (unsigned p)
+    { _priority = p; }
+
+    unsigned SourceImpl::priorityUnsubscribed (void) const
     { return _priority_unsubscribed; }
+
+    void SourceImpl::setPriorityUnsubscribed (unsigned p)
+    { _priority_unsubscribed = p; }
 
     Url SourceImpl::url (void) const
     { return media_mgr.url(_media); }
 
     const Pathname & SourceImpl::path (void) const
     { return _path; }
+
+    /////////////////////////////////////////////////////////////////
+    /**
+     * ZMD specific stuff
+     */
+
+    std::string SourceImpl::zmdName (void) const
+    { return "zmdname"; }
+
+    void SourceImpl::setZmdName (const std::string name_r) const
+    { return; }
+
+    std::string SourceImpl::zmdDescription (void) const
+    { return "zmddescription"; }
+
+    void SourceImpl::setZmdDescription (const std::string desc_r) const
+    { return; }
+
+    /////////////////////////////////////////////////////////////////
+
 
     std::ostream & SourceImpl::dumpOn( std::ostream & str ) const
     { return str << (_alias.empty() ? "SourceImpl" : _alias); }

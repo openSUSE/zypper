@@ -93,14 +93,25 @@ namespace zypp
       std::string alias (void) const
       { return _alias; }
 
-      virtual std::string zmdname (void) const;
-      virtual std::string zmddescription (void) const;
+      virtual std::string id (void) const;
+      virtual void setId (const std::string id_r);
       virtual unsigned priority (void) const;
-      virtual unsigned priority_unsubscribed (void) const;
+      virtual void setPriority (unsigned p);
+      virtual unsigned priorityUnsubscribed (void) const;
+      virtual void setPriorityUnsubscribed (unsigned p);
 
       Url url (void) const;
 
       const Pathname & path (void) const;
+
+      /**
+       * ZMD backend specific stuff
+       * default source only provides dummy implementations
+       */
+      virtual std::string zmdName (void) const;
+      virtual void setZmdName (const std::string name_r) const;
+      virtual std::string zmdDescription (void) const;
+      virtual void setZmdDescription (const std::string desc_r) const;
 
     protected:
       /** Provide Source_Ref to \c this. */
@@ -120,6 +131,9 @@ namespace zypp
       std::string _alias;
       /** Directory holding metadata cache */
       Pathname _cache_dir;
+      /** (user defined) id of the source
+          mostly used for ZENworks */
+      std::string _id;
       /** (user defined) default priority of the source */
       unsigned _priority;
       /** (user defined) unsubscribed priority of the source */
