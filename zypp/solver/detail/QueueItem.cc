@@ -78,7 +78,6 @@ QueueItem::QueueItem (QueueItemType type, const ResPool & pool)
     , _priority (0)
     , _size (0)
 {
-    DBG << "QueueItem(" << *this << ")" << endl;
 }
 
 
