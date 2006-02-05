@@ -1,6 +1,7 @@
 #
 # Makefile.am for zmd/backend
 #
+SUBDIRS = dbsource
 
 PKG_MANAGEMENT_LIBS = $(top_srcdir)/zypp/lib@PACKAGE@.la
 PKG_MANAGEMENT_CFLAGS = -I$(top_srcdir)
