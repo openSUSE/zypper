@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+  full SLES upgrade
+-->
+<test>
+<setup>
+  <system file="sles9-i386-packages.xml"/>
+  <channel name="test" file="sles10-beta3-i386-packages.xml.gz"/>
+</setup>
+<trial>
+  <distupgrade/>
+</trial>
+</test>
