@@ -32,6 +32,7 @@
 #include "zypp/CapFactory.h"
 #include "zypp/CapSet.h"
 #include "zypp/Dependencies.h"
+#include "zypp/Edition.h"
 
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
@@ -440,6 +441,8 @@ HelixParser::toplevelStart(const std::string & token, const xmlChar **attrs)
 	_state = PARSER_RESOLVABLE;
 
 	_stored = false;
+	_history.clear();
+
 	name.clear();
 	epoch = 0;
 	version.clear();
@@ -606,6 +609,40 @@ HelixParser::resolvableEnd (const std::string & token)
 
 	kind = string2kind (token);
 
+        /* If possible, grab the version info from the most recent update.
+         * Otherwise, try to find where the package provides itself and use
+         * that version info.
+         */
+        // searching the highest version. It is not sure anymore that the last
+        // has highest version
+
+	History *history = NULL;
+
+        if (!_history.empty())
+        {
+            for (HistoryList::iterator iter = _history.begin(); iter != _history.end(); iter++)
+            {
+                if (!history)
+                    history = &(*iter);
+                else
+                {
+		    Edition ed (history->version, history->release, history->epoch);
+		    Edition itered (iter->version, iter->release, iter->epoch);
+                    if (ed < itered)
+                        history = &(*iter);
+                }
+            }
+        }
+
+        if (history != NULL) {
+	    name = history->name;
+	    epoch = history->epoch;
+	    version = history->version;
+	    release = history->release;
+            fileSize = history->fileSize;
+            installedSize = history->installedSize;
+        }
+
 	// check if we provide ourselfs properly
 
 	CapFactory  factory;
@@ -614,9 +651,7 @@ HelixParser::resolvableEnd (const std::string & token)
 	CapSet::const_iterator piter;
 	for (piter = provides.begin(); piter != provides.end(); piter++) {
 	    if ((*piter) == selfdep)
-	    {
 		break;
-	    }
 	}
 
 	if (piter == provides.end()) {			// no self provide found, construct one
@@ -635,6 +670,8 @@ HelixParser::resolvableEnd (const std::string & token)
 	_state = PARSER_TOPLEVEL;
     }
     else if (token == "name") {			name = _text_buffer;
+    } else if (token == "version") {		version = _text_buffer;	// either here or in history
+    } else if (token == "release") {		release = _text_buffer;
     } else if (token == "pretty_name") {	// ignore
     } else if (token == "summary") {		summary = _text_buffer;
     } else if (token == "description") {	description = _text_buffer;
@@ -644,6 +681,7 @@ HelixParser::resolvableEnd (const std::string & token)
     } else if (token == "installedsize") {	installedSize = str::strtonum<long>(_text_buffer);
     } else if (token == "install_only") {	installOnly = true;
     } else if (token == "md5sum") {		// ignore
+    } else if (token == "deps") {		// ignore, see resolvableStart
     } else {
 	_DBG("HelixParser") << "HelixParser::resolvableEnd(" << token << ") unknown" << endl;
     }
@@ -672,6 +710,8 @@ HelixParser::updateEnd (const std::string & token)
 //    _XXX("HelixParser") << "HelixParser::updateEnd(" << token << ")" << endl;
 
     if (token == "update") {
+	History history = { name, epoch, version, release, arch, fileSize, installedSize };
+	_history.push_back(history);
 	_state = PARSER_HISTORY;
     } else if (token == "epoch") {		epoch = str::strtonum<int>(_text_buffer);
     } else if (token == "version") {		version = _text_buffer;

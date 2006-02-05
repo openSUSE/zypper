@@ -38,7 +38,16 @@ namespace zypp {
 class HelixParser;
 class HelixSourceImpl;
 typedef bool (*ParserCallback) (const HelixParser & parsed, HelixSourceImpl *impl);
-
+typedef struct {
+    std::string name;
+    int epoch;
+    std::string version;
+    std::string release;
+    std::string arch;
+    long fileSize;
+    long installedSize;
+} History;
+typedef std::list<History> HistoryList;
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -94,6 +103,8 @@ class HelixParser
     // these point to one of the Dependency sets during dependency parsing
     CapSet *_dep_set;
     CapSet *_toplevel_dep_set;		// just needed during 'or' parsing
+
+    HistoryList _history;
 
     std::string _text_buffer;
 
