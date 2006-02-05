@@ -23,6 +23,7 @@ namespace zypp
   const ResStatus ResStatus::toBeInstalled		 (UNINSTALLED, UNDETERMINED, TRANSACT);
   const ResStatus ResStatus::toBeInstalledSoft		 (UNINSTALLED, UNDETERMINED, TRANSACT, SOFT_INSTALL);
   const ResStatus ResStatus::toBeUninstalled		 (INSTALLED,   UNDETERMINED, TRANSACT);
+  const ResStatus ResStatus::impossible			 (UNINSTALLED, UNDETERMINED, KEEP_STATE, EXPLICIT_INSTALL, EXPLICIT_REMOVE, IMPOSSIBLE);
   const ResStatus ResStatus::toBeUninstalledSoft	 (INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, SOFT_REMOVE);
   const ResStatus ResStatus::toBeUninstalledDueToUnlink	 (INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_UNLINK);
   const ResStatus ResStatus::toBeUninstalledDueToObsolete(INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_OBSOLETE);
@@ -60,7 +61,7 @@ namespace zypp
   {}
 
 
-  ResStatus::ResStatus (enum StateValue s, enum EstablishValue e, enum TransactValue t, enum InstallDetailValue i, enum RemoveDetailValue r)
+  ResStatus::ResStatus (enum StateValue s, enum EstablishValue e, enum TransactValue t, enum InstallDetailValue i, enum RemoveDetailValue r, enum SolverStateValue ssv)
     : _bitfield (s)
   {
     fieldValueAssign<EstablishField>(e);
@@ -68,6 +69,9 @@ namespace zypp
     if (t == TRANSACT) {
 	if (s == INSTALLED) fieldValueAssign<TransactDetailField>(r);
 	else fieldValueAssign<TransactDetailField>(i);
+    }
+    if (ssv != NORMAL) {
+	fieldValueAssign<SolverStateField>(ssv);
     }
   }
 
@@ -97,6 +101,9 @@ namespace zypp
     str << (obj.isToBeUninstalledDueToObsolete() ? "O" :
 	( obj.isToBeUninstalledDueToUnlink() ? "U" :
 	( obj.isToBeInstalledSoft() ? "S" : "_" ) ) );
+
+    str << (obj.isSeen() ? "@" :
+	( obj.isImpossible() ? "X" : "" ) );
 
     if (obj == ResStatus::toBeInstalled)		str << "<tobeinstalled>";
     if (obj == ResStatus::toBeInstalledSoft)		str << "<tobesoftinstalled>";

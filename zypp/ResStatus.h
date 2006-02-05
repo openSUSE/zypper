@@ -54,13 +54,14 @@ namespace zypp
      * checked by the compiler.
      */
     //@{
-    typedef char FieldType;
+    typedef short FieldType;
     // Bit Ranges within FieldType defined by 1st bit and size:
     typedef bit::Range<FieldType,0,                    1> StateField;
     typedef bit::Range<FieldType,StateField::end,      2> EstablishField;
     typedef bit::Range<FieldType,EstablishField::end,  1> TransactField;
     typedef bit::Range<FieldType,TransactField::end,   2> TransactByField;
     typedef bit::Range<FieldType,TransactByField::end, 2> TransactDetailField;
+    typedef bit::Range<FieldType,TransactDetailField::end, 2> SolverStateField;
     // enlarge FieldType if more bit's needed. It's not yet
     // checked by the compiler.
     //@}
@@ -110,6 +111,12 @@ namespace zypp
         DUE_TO_OBSOLETE,
         DUE_TO_UNLINK
       };
+    enum SolverStateValue
+      {
+	NORMAL = 0,					// default, notthing special
+	SEEN = SolverStateField::minval,		// already seen during ResolverUpgrade
+	IMPOSSIBLE					// impossible to install
+      };
     //@}
 
   public:
@@ -123,13 +130,20 @@ namespace zypp
     /** Dtor. */
     ~ResStatus();
 
-  public:
+  private:
 
     bool isInstalled() const
     { return fieldValueIs<StateField>( INSTALLED ); }
 
+    bool isUninstalled() const
+    { return fieldValueIs<StateField>( UNINSTALLED ); }
+
+  public:
+
     bool staysInstalled() const
     { return isInstalled() && !transacts(); }
+
+    bool wasInstalled() const { return staysInstalled(); }	//for old status
 
     bool isToBeInstalled() const
     { return isUninstalled() && transacts(); }
@@ -137,8 +151,7 @@ namespace zypp
     bool staysUninstalled() const
     { return isUninstalled() && !transacts(); }
 
-    bool isUninstalled() const
-    { return fieldValueIs<StateField>( UNINSTALLED ); }
+    bool wasUninstalled() const { return staysUninstalled(); }	// for old status
 
     bool isToBeUninstalled() const
     { return isInstalled() && transacts(); }
@@ -180,10 +193,10 @@ namespace zypp
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_UNLINK); }
 
     bool isToBeInstalledSoft () const
-    { return isToBeInstalled() && fieldValueIs<TransactDetailField> (SOFT_INSTALL); }
+    { return isToBeInstalled() && fieldValueIs<TransactDetailField>( SOFT_INSTALL ); }
 
     bool isToBeUninstalledSoft () const
-    { return isToBeUninstalled() && fieldValueIs<TransactDetailField> (SOFT_REMOVE); }
+    { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( SOFT_REMOVE ); }
 
   public:
 
@@ -340,6 +353,24 @@ namespace zypp
       return true;
     }
 
+    bool isSeen () const
+    { return fieldValueIs<SolverStateField>( SEEN ); }
+
+    bool isImpossible () const
+    { return fieldValueIs<SolverStateField>( IMPOSSIBLE ); }
+
+    bool setSeen (bool value)
+    {
+      fieldValueAssign<SolverStateField>( value ? SEEN : NORMAL );
+      return true;
+    }
+
+    bool setImpossible (bool value)
+    {
+      fieldValueAssign<SolverStateField>( value ? IMPOSSIBLE : NORMAL );
+      return true;
+    }
+
     void setStatus (ResStatus status)
     {
 	_bitfield = status._bitfield;
@@ -360,6 +391,7 @@ namespace zypp
     static const ResStatus unneeded;	// uninstalled, unneeded
     static const ResStatus needed;	// uninstalled, incomplete
     static const ResStatus incomplete;	// installed, incomplete
+    static const ResStatus impossible;	// uninstallable
     //@}
 
   private:
@@ -368,7 +400,8 @@ namespace zypp
                EstablishValue e     = UNDETERMINED,
                TransactValue t      = KEEP_STATE,
                InstallDetailValue i = EXPLICIT_INSTALL,
-               RemoveDetailValue r  = EXPLICIT_REMOVE );
+               RemoveDetailValue r  = EXPLICIT_REMOVE,
+	       SolverStateValue ssv = NORMAL );
 
     /** Return whether the corresponding Field has value \a val_r.
     */
