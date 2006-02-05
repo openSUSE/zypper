@@ -235,7 +235,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    goto finished;
 
 	}
-	else if (status.isInstalled()) {
+	else if (status.staysInstalled()) {
 
 	    UnlinkCheck info;
 
@@ -288,7 +288,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     context->uninstall (_item, _upgraded_to /*bool*/, _due_to_obsolete, _unlink);
 
-    if (status.isInstalled()) {
+    if (status.staysInstalled()) {
 
 #warning Needs Locks
 #if 0

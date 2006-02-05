@@ -285,7 +285,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     // we're done if this isn't currently uninstalled or incomplete
 
-    if (! (status.isUninstalled()
+    if (! (status.staysUninstalled()
 	   || status.isToBeUninstalledDueToUnlink()
 	   || status.isIncomplete()
 	   || status.isSatisfied()))

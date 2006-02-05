@@ -192,7 +192,7 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 
 	_XDEBUG("ConflictProcess (provider[" << provider << "]<" << status << ">");
 
-	if (status.isInstalled()
+	if (status.staysInstalled()
 	    || status.isToBeInstalledSoft())
 	{
 	    ResolverInfo_Ptr log_info;
