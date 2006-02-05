@@ -1,0 +1,4 @@
+# catalogs.exp
+# run tests for catalogs
+
+  shouldPass "catalogs"
