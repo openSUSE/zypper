@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+   distupgrade rename single package
+-->
+<test>
+<setup>
+  <system file="single-v1-package.xml"/>
+  <channel name="upgrade" file="conflicting-multiple-rename-package.xml"/>
+</setup>
+<trial>
+  <distupgrade/>
+</trial>
+</test>
