@@ -61,7 +61,6 @@
 #include "zypp/CapFilters.h"
 
 #include "zypp/media/MediaManager.h"
-#include "zypp/source/SourceImpl.h"
 
 #include "helix/HelixSourceImpl.h"
 
@@ -684,7 +683,7 @@ parse_xml_setup (XmlNode_Ptr node)
 
 	    poolItem = get_poolItem (source_alias, package_name, kind_name);
 	    if (poolItem) {
-		RESULT << "Locking " << package_name << " from source " << source_alias << endl;
+		RESULT << "Locking " << package_name << " from channel " << source_alias << endl;
 #warning Needs locks
 #if 0
 		r->setLocked (true);
