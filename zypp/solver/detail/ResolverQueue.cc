@@ -67,7 +67,7 @@ operator<<( ostream& os, const ResolverQueue & resolverqueue)
 ResolverQueue::ResolverQueue (const ResPool & pool, ResolverContext_Ptr context)
     : _context (context)
 {
-_DEBUG("ResolverQueue::ResolverQueue(pool, " << context << ")");
+    _DEBUG("ResolverQueue::ResolverQueue(pool, " << context << ")");
     if (context == NULL)
 	_context = new ResolverContext(pool);
 }
@@ -298,7 +298,7 @@ copy_queue_except_for_branch (ResolverQueue_Ptr queue, QueueItem_Ptr branch_qite
 {
     ResolverContext_Ptr new_context;
     ResolverQueue_Ptr new_queue;
-MIL << "copy_queue_except_for_branch" << endl;
+    _DEBUG("copy_queue_except_for_branch");
     new_context = new ResolverContext (queue->context()->pool(), queue->context());
     new_queue = new ResolverQueue (new_context->pool(), new_context);
 
@@ -429,9 +429,6 @@ ResolverQueue::spew ()
 	      }
 
     }
-
-    _DEBUG("");
-    cout.flush();
 }
 
 ///////////////////////////////////////////////////////////////////
