@@ -187,7 +187,7 @@ assemble_install_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data
 {
     StringList *slist = (StringList *)data;
     ostringstream s;
-    s << str::form ("%-7s ", poolItem.status().isInstalled() ? "|flag" : "install");
+    s << str::form ("%-7s ", poolItem.status().staysInstalled() ? "|flag" : "install");
     printRes (s, poolItem.resolvable());
 
     slist->push_back (s.str());
@@ -200,7 +200,20 @@ assemble_uninstall_cb (PoolItem_Ref poolItem, const ResStatus & status, void *da
     StringList *slist = (StringList *)data;
     ostringstream s;
 MIL << "assemble_uninstall_cb(" << poolItem << "):" << status << endl;
-    s << str::form ("%-7s ", poolItem.status().isInstalled() ? "remove" : "|unflag");
+    s << str::form ("%-7s ", poolItem.status().isImpossible () ? "|unflag" : "remove");
+    printRes (s, poolItem.resolvable());
+
+    slist->push_back (s.str());
+}
+
+
+static void
+assemble_impossible_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
+{
+    StringList *slist = (StringList *)data;
+    ostringstream s;
+MIL << "assemble_impossible_cb(" << poolItem << "):" << status << endl;
+    s << str::form ("%-7s ", "|unflag");
     printRes (s, poolItem.resolvable());
 
     slist->push_back (s.str());
@@ -228,7 +241,7 @@ assemble_incomplete_cb (PoolItem_Ref poolItem, const ResStatus & status,void *da
 {
     StringList *slist = (StringList *)data;
     ostringstream s;
-    s << str::form ("%-11s ", poolItem.status().isInstalled() ? "incomplete" : "|needed");
+    s << str::form ("%-11s ", poolItem.status().wasInstalled() ? "incomplete" : "|needed");
     printRes (s, poolItem.resolvable());
 
     slist->push_back (s.str());
@@ -240,7 +253,7 @@ assemble_satisfy_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data
 {
     StringList *slist = (StringList *)data;
     ostringstream s;
-    s << str::form ("%-10s ", poolItem.status().isInstalled() ? "complete" : "|satisfied");
+    s << str::form ("%-10s ", poolItem.status().wasInstalled() ? "complete" : "|satisfied");
     printRes (s, poolItem.resolvable());
 
     slist->push_back (s.str());
@@ -277,6 +290,8 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 	context->foreachInstall (assemble_install_cb, &items);
 
 	context->foreachUninstall (assemble_uninstall_cb, &items);
+
+	context->foreachImpossible (assemble_impossible_cb, &items);
 
 	context->foreachUpgrade (assemble_upgrade_cb, &items);
 
@@ -901,6 +916,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 {
     bool verify = false;
     bool instorder = false;
+    bool distupgrade = false;
 
     if (!node->equals ("trial")) {
 	ZYPP_THROW (Exception ("Node not 'trial' in parse_xml_trial()"));
@@ -1006,6 +1022,8 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		RESULT << "Upgrading " << count << " package" << (count > 1 ? "s" : "") << endl;
 
 	} else if (node->equals ("distupgrade")) {
+
+	    distupgrade = true;
 
 	    RESULT << "Doing distribution upgrade ..." << endl;
 	    UpgradeStatistics stats;
@@ -1201,6 +1219,8 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 
     if (verify)
 	resolver->verifySystem ();
+    else if (distupgrade)
+	resolver->resolvePool();
     else
 	resolver->resolveDependencies (established);
 
