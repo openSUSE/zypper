@@ -167,13 +167,13 @@ namespace zypp
     std::string SourceImpl::zmdName (void) const
     { return "zmdname"; }
 
-    void SourceImpl::setZmdName (const std::string name_r) const
+    void SourceImpl::setZmdName (const std::string name_r)
     { return; }
 
     std::string SourceImpl::zmdDescription (void) const
     { return "zmddescription"; }
 
-    void SourceImpl::setZmdDescription (const std::string desc_r) const
+    void SourceImpl::setZmdDescription (const std::string desc_r)
     { return; }
 
     /////////////////////////////////////////////////////////////////
