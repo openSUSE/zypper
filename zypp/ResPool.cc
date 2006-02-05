@@ -62,6 +62,24 @@ namespace zypp
   ResPool::const_indexiterator ResPool::providesend(const std::string & tag_r) const
   { return _pimpl->providesend(tag_r); }
 
+  ResPool::const_indexiterator ResPool::requiresbegin(const std::string & tag_r) const
+  { return _pimpl->requiresbegin(tag_r); }
+
+  ResPool::const_indexiterator ResPool::requiresend(const std::string & tag_r) const
+  { return _pimpl->requiresend(tag_r); }
+
+  ResPool::const_indexiterator ResPool::conflictsbegin(const std::string & tag_r) const
+  { return _pimpl->conflictsbegin(tag_r); }
+
+  ResPool::const_indexiterator ResPool::conflictsend(const std::string & tag_r) const
+  { return _pimpl->conflictsend(tag_r); }
+
+  ResPool::const_nameiterator ResPool::namebegin(const std::string & tag_r) const
+  { return _pimpl->namebegin(tag_r); }
+
+  ResPool::const_nameiterator ResPool::nameend(const std::string & tag_r) const
+  { return _pimpl->nameend(tag_r); }
+
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<

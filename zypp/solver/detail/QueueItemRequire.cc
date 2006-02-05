@@ -85,7 +85,7 @@ QueueItemRequire::QueueItemRequire (const ResPool & pool, const Capability & cap
     , _remove_only (false)
     , _is_child (false)
 {
-    _DEBUG("QueueItemRequire::QueueItemRequire(" << cap << (soft?", soft":"") << ")");
+    _XDEBUG("QueueItemRequire::QueueItemRequire(" << cap << (soft?", soft":"") << ")");
 }
 
 
@@ -163,7 +163,7 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 
 	status = context->getStatus(provider);
 
-	MIL << "RequireProcessInfo (" << provider << " provides " << match << ", is " << status << ")" << endl;
+//	MIL << "RequireProcessInfo (" << provider << " provides " << match << ", is " << status << ")" << endl;
 // ERR << "RequireProcessInfo(required: " << *capability << ")" << endl;
 // ERR << "require_process_cb(itemIsPossible -> " <<  context->itemIsPossible (*provider) << ")" << endl;
 
@@ -243,11 +243,11 @@ struct LookForUpgrades : public resfilter::OnCapMatchCallbackFunctor
 
     bool operator()( PoolItem_Ref provider )
     {
-	if (installed->edition().compare (provider->edition()) < 0) {
+//	if (installed->edition().compare (provider->edition()) < 0) {
 	    upgrades.push_front (provider);
 	    return true;
-	}
-	return false;
+//	}
+//	return false;
     }
 };
 
@@ -286,10 +286,10 @@ codependent_items (const PoolItem_Ref item1, const PoolItem_Ref item2)
 bool
 QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_items)
 {
-    MIL << "QueueItemRequire::process(" << *this << ")" << endl;
+    _DEBUG("QueueItemRequire::process(" << *this << ")");
 
     if (context->requirementIsMet (_capability, _is_child)) {
-	DBG <<  "requirement is already met in current context" << endl;
+	_XDEBUG("requirement is already met in current context");
 	return true;
     }
 
@@ -307,7 +307,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		      pool().byCapabilityIndexEnd( _capability.index(), dep ),
 		      resfilter::callOnCapMatchIn( dep, _capability, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 #endif
-	MIL << "Look for providers of " << _capability << endl;
+	_XDEBUG("Look for providers of " << _capability);
 	// world->foreachProvidingResItem (_capability, require_process_cb, &info);
 	ResPool::const_indexiterator pend = pool().providesend(_capability.index());
 	for (ResPool::const_indexiterator it = pool().providesbegin(_capability.index()); it != pend; ++it) {
@@ -319,7 +319,35 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	num_providers = info.providers.size();
 
-	_DEBUG( "requirement is met by " << num_providers << " resolvable");
+	_XDEBUG( "requirement is met by " << num_providers << " resolvable");
+
+	if (num_providers > 1) {			// prefer to-be-installed providers
+	    MIL << "Have " << num_providers << " providers" << endl;
+	    int to_be_installed = 0;
+	    int uninstalled = 0;
+	    for (PoolItemList::iterator it = info.providers.begin(); it != info.providers.end(); ++it) {
+		PoolItem item = *it;
+		if (it->status().isToBeInstalled()) {
+		    uninstalled++;
+		}
+		if (it->status().staysUninstalled()) {
+		    uninstalled++;
+		}
+	    }
+	    MIL << to_be_installed << " to-be-installed, " << uninstalled << " uninstalled" << endl;
+	    if (to_be_installed > 0
+		&& uninstalled > 0) {
+		PoolItemList::iterator next;
+		for (PoolItemList::iterator it = info.providers.begin(); it != info.providers.end(); ++it) {
+		    next = it; ++next;
+		    if (it->status().staysUninstalled()) {
+			MIL << "Not considering " << *it << endl;
+			info.providers.erase (it);
+		    }
+		    it = next;
+		}
+	    }
+	}
     }
 
     //
@@ -366,6 +394,8 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 //	    pool()->foreachUpgrade (_requiring_item, new Channel(CHANNEL_TYPE_ANY), look_for_upgrades_cb, (void *)&upgrade_list);
 
+#if 0	// **!!!** re-enable editon check in LookForUpgrades()
+
 	    invokeOnEach( pool().byNameBegin( _requiring_item->name() ), pool().byNameEnd( _requiring_item->name() ),
 			  functor::chain( resfilter::ByUninstalled(),
 					  resfilter::ByKind( _requiring_item->kind() ) ),
@@ -373,6 +403,18 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	// CompareByGT is broken		  resfilter::byEdition<CompareByGT<Edition> >( _requiring_item->edition() )),
 #endif
 					  functor::functorRef<bool,PoolItem>(info) );
+#endif
+	ResPool::const_nameiterator pend = pool().nameend(_requiring_item->name());
+	for (ResPool::const_nameiterator it = pool().namebegin(_requiring_item->name()); it != pend; ++it) {
+	    PoolItem pos = it->second;
+	    if (pos.status().isUninstalled()
+		&& pos->kind() == _requiring_item->kind()
+		&& _requiring_item->edition().compare(pos->edition()) < 0)
+	    {
+		if (!info( pos ))
+		    break;
+	    }
+	}
 
 	    if (!info.upgrades.empty()) {
 		string label;
@@ -387,7 +429,8 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		label = str::form (_("for requiring %s for %s when upgrading %s"),
 				   cap_str.str().c_str(), req_str.str().c_str(), up_str.str().c_str());
 		branch_item->setLabel (label);
-// ERR << "Branching: " << label << endl;
+		_DEBUG("Branching: " + label)
+
 		for (PoolItemList::const_iterator iter = info.upgrades.begin(); iter != info.upgrades.end(); iter++) {
 		    PoolItem_Ref upgrade_item = *iter;
 		    QueueItemInstall_Ptr install_item;
@@ -505,7 +548,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
     else if (num_providers == 1) {
 
-	_DEBUG( "Found exactly one resolvable, installing it.");
+	_XDEBUG( "Found exactly one resolvable, installing it.");
 
 	QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), info.providers.front(), _soft);
 	install_item->addDependency (_capability);
@@ -524,9 +567,8 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
     else if (num_providers > 1) {
 
-	      _DEBUG( "Found more than one resolvable, branching.");
+	_DEBUG( "Branching: Found more than provider of " << _capability);
 
-// ERR << "Found more than one item, branching." << endl;
 	QueueItemBranch_Ptr branch_item = new QueueItemBranch (pool());
 
 	for (PoolItemList::const_iterator iter = info.providers.begin(); iter != info.providers.end(); iter++) {

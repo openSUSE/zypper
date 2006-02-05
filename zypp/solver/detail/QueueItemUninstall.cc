@@ -102,7 +102,7 @@ QueueItemUninstall::QueueItemUninstall (const ResPool & pool, PoolItem_Ref item,
     , _due_to_obsolete (false)
     , _unlink (false)
 {
-    DBG << "QueueItemUninstall::QueueItemUninstall(" << item << ")" << endl;
+    _XDEBUG("QueueItemUninstall::QueueItemUninstall(" << item << ")");
 }
 
 
@@ -215,7 +215,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
     ResStatus status = context->getStatus(_item);
 
-    DBG << "QueueItemUninstall::process(<" << status << ">" << _item << ( _unlink ? "[unlink]" : "") << endl;
+    _DEBUG("QueueItemUninstall::process(<" << status << ">" << _item << ( _unlink ? "[unlink]" : ""));
 
     /* In the case of an unlink, we only want to uninstall the item if it is
        being used by something else.  We can't really determine this with 100%
@@ -254,12 +254,23 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    for (CapSet::const_iterator iter = provides.begin(); iter != provides.end() && ! info.cancel_unlink; iter++) {
 
 		//world()->foreachRequiringPoolItem (*iter, unlink_check_cb, &info);
-
+#if 1
 		Dep dep( Dep::REQUIRES);
 
 		invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
 			      pool().byCapabilityIndexEnd( iter->index(), dep ),
 			      resfilter::callOnCapMatchIn( dep, *iter, functor::functorRef<bool,PoolItem,Capability>(info) ) );
+#else
+	Capability c = *iter;
+	ResPool::const_indexiterator rend = pool().requiresend(c.index());
+	for (ResPool::const_indexiterator it = pool().requiresbegin(c.index()); it != rend; ++it) {
+	    if (c.matches (it->second.first) == CapMatch::yes) {
+		if (!info( it->second.second, it->second.first))
+		    break;
+	    }
+	}
+#endif
+
 	    }
 
 	    /* Set the status back to normal. */

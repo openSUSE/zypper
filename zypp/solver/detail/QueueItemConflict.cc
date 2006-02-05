@@ -81,7 +81,7 @@ QueueItemConflict::QueueItemConflict (const ResPool & pool, const Capability & c
     , _soft (soft)
     , _actually_an_obsolete (false)
 {
-    _DEBUG("QueueItemConflict::QueueItemConflict(" << cap << ", " << item << (soft?", soft":"") << ")");
+    _XDEBUG("QueueItemConflict::QueueItemConflict(" << cap << ", " << item << (soft?", soft":"") << ")");
 }
 
 
@@ -113,7 +113,7 @@ struct UpgradeCandidate : public resfilter::OnCapMatchCallbackFunctor
     bool operator() (const PoolItem & candidate, const Capability & cap)
     {
 
-MIL << "UpgradeCandidate? " << candidate << ":[" << context->getStatus (candidate) << "]" << (item->edition().compare(candidate->edition())) << "<" << item->arch() << "," << candidate->arch() << ">" << endl;
+//MIL << "UpgradeCandidate? " << candidate << ":[" << context->getStatus (candidate) << "]" << (item->edition().compare(candidate->edition())) << "<" << item->arch() << "," << candidate->arch() << ">" << endl;
 // FIXME put this in the resfilter chain
 	if ((item->edition().compare(candidate->edition()) < 0)		// look at real upgrades
 	    && item->arch() == candidate->arch()			// keep the architecture
@@ -123,7 +123,7 @@ MIL << "UpgradeCandidate? " << candidate << ":[" << context->getStatus (candidat
 									// finds the uninstallable first. In the end, we had a duplicate solution
 									// now we have no solution. Both results are right.
 	{
-MIL << "UpgradeCandidate! " << candidate << endl;
+//MIL << "UpgradeCandidate! " << candidate << endl;
 	    upgrades.push_back (candidate);
 	}
 	return true;
@@ -159,8 +159,8 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	ResolverInfo_Ptr log_info;
 	CapFactory factory;
 
-	DBG << "conflict_process_cb (resolvable[" << provider <<"], provides[" << provides << "], conflicts with [" <<
-	      conflict_issuer << " conflicts: " << conflict_capability << endl;
+	_XDEBUG("conflict_process_cb (resolvable[" << provider <<"], provides[" << provides << "], conflicts with [" <<
+	      conflict_issuer << " conflicts: " << conflict_capability);
 
 	/* We conflict with ourself.  For the purpose of installing ourself, we
 	 * just ignore it, but it's Debian's way of saying that one and only one
@@ -169,7 +169,7 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	if (conflict_issuer
 	    && compareByNVRA (provider.resolvable(), conflict_issuer.resolvable()) == 0)
 	{
-	    DBG << "self-conflict" << endl;
+	    _XDEBUG("self-conflict");
 	    return true;
 	}
 
@@ -184,13 +184,13 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	if (actually_an_obsolete
 	    && capTest.matches (provides) != CapMatch::yes )
 	{
-	    DBG << "obsolete to virtual provide - ignoring" << endl;
+	    _XDEBUG("obsolete to virtual provide - ignoring");
 	    return true;
 	}
 
 	status = context->getStatus(provider);
 
-	DBG << "ConflictProcess (provider[" << provider << "]<" << status << ">" << endl;
+	_XDEBUG("ConflictProcess (provider[" << provider << "]<" << status << ">");
 
 	if (status.isInstalled()
 	    || status.isToBeInstalledSoft())
@@ -198,7 +198,7 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	    ResolverInfo_Ptr log_info;
 
 #if PHI
-	    DBG << "Provider is installed - try upgrade" << endl;
+	    _XDEBUG("Provider is installed - try upgrade");
 
 	    // maybe an upgrade can resolve the conflict ?
 	    //        check if other item is available which upgrades
@@ -224,7 +224,7 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	    }
 	}
 
-	    MIL << "found " << upgrade_info.upgrades.size() << " upgrade candidates" << endl;
+	    _XDEBUG("found " << upgrade_info.upgrades.size() << " upgrade candidates");
 #endif
 
 	    QueueItemUninstall_Ptr uninstall = new QueueItemUninstall (pool, provider, actually_an_obsolete ? QueueItemUninstall::OBSOLETE : QueueItemUninstall::CONFLICT);
@@ -251,7 +251,7 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	    else {
 		// there are upgrade candidates for the conflicting item
 		// branch to: 1. uninstall, 2. upgrade (for each upgrading item)
-
+		_DEBUG("Branching: uninstall vs. upgrade");
 		QueueItemBranch_Ptr branch = new QueueItemBranch (pool);
 
 		branch->addItem (uninstall);			// try uninstall
@@ -307,7 +307,7 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 bool
 QueueItemConflict::process (ResolverContext_Ptr context, QueueItemList & new_items)
 {
-    DBG << "QueueItemConflict::process(" << *this << ")" << endl;
+    _DEBUG("QueueItemConflict::process(" << *this << ")");
 
     ConflictProcess info (pool(), _conflicting_item, _capability, context, new_items, _actually_an_obsolete);
 

@@ -60,11 +60,14 @@ namespace zypp
       typedef PoolItem                   Item;
       typedef std::set<Item>             ContainerT;
       typedef std::multimap<std::string,std::pair<Capability,Item> > IndexContainerT;
+      typedef std::multimap<std::string,Item> NameContainerT;
       typedef ContainerT::size_type      size_type;
       typedef ContainerT::iterator       iterator;
       typedef ContainerT::const_iterator const_iterator;
       typedef IndexContainerT::iterator       indexiterator;
       typedef IndexContainerT::const_iterator const_indexiterator;
+      typedef NameContainerT::iterator       nameiterator;
+      typedef NameContainerT::const_iterator const_nameiterator;
 
       typedef PoolImpl                   Impl;
       typedef shared_ptr<PoolImpl>       Impl_Ptr;

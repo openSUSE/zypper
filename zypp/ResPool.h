@@ -44,6 +44,7 @@ namespace zypp
     typedef pool::PoolTraits::size_type      size_type;
     typedef pool::PoolTraits::const_iterator const_iterator;
     typedef pool::PoolTraits::const_indexiterator const_indexiterator;
+    typedef pool::PoolTraits::const_nameiterator const_nameiterator;
 
   public:
     /** Dtor */
@@ -71,6 +72,30 @@ namespace zypp
     const_indexiterator providesbegin(const std::string & tag_r) const;
     /** */
     const_indexiterator providesend(const std::string & tar_r) const;
+    //@}
+
+    /** \name Iterate through all ResObjects which require tag_r. */
+    //@{
+    /** */
+    const_indexiterator requiresbegin(const std::string & tag_r) const;
+    /** */
+    const_indexiterator requiresend(const std::string & tar_r) const;
+    //@}
+
+    /** \name Iterate through all ResObjects which conflict tag_r. */
+    //@{
+    /** */
+    const_indexiterator conflictsbegin(const std::string & tag_r) const;
+    /** */
+    const_indexiterator conflictsend(const std::string & tar_r) const;
+    //@}
+
+    /** \name Iterate through all ResObjects with name tag_r. */
+    //@{
+    /** */
+    const_nameiterator namebegin(const std::string & tag_r) const;
+    /** */
+    const_nameiterator nameend(const std::string & tar_r) const;
     //@}
 
   public:

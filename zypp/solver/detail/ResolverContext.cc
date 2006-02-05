@@ -40,9 +40,6 @@
 #include "zypp/solver/detail/ResolverContext.h"
 #include "zypp/solver/detail/ResolverInfoMisc.h"
 
-#undef _DEBUG
-#define _DEBUG(x)
-
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
@@ -115,7 +112,7 @@ ResolverContext::~ResolverContext()
 ResStatus
 ResolverContext::getStatus (PoolItem_Ref item)
 {
-_DEBUG( "[" << this << "]getStatus(" << item << ")" );
+_XDEBUG( "[" << this << "]getStatus(" << item << ")" );
 
     if (item == _last_checked_item) return _last_checked_status;
 
@@ -128,14 +125,14 @@ _DEBUG( "[" << this << "]getStatus(" << item << ")" );
 
 	it = context->_context.find(item);		// part of local context ?
 	if (it != context->_context.end()) {
-_DEBUG( "[" << context << "]:" << it->second );
+_XDEBUG( "[" << context << "]:" << it->second );
 	    _last_checked_status = it->second;
 	    return it->second;				// Y: return
 	}
 	context = context->_parent;			// N: go up the chain
     }
     _last_checked_status = item.status();
-_DEBUG( "[NULL]:" << item.status() );
+_XDEBUG( "[NULL]:" << item.status() );
     return item.status();				// Not part of context, return Pool status
 }
 
@@ -148,12 +145,12 @@ ResolverContext::setStatus (PoolItem_Ref item, const ResStatus & status)
 {
     if (_invalid) return;
 
-_DEBUG( "[" << this << "]setStatus(" << item << ", " << status << ")" );
+_XDEBUG( "[" << this << "]setStatus(" << item << ", " << status << ")" );
     if (status == item.status()) {		// same as original status
 	Context::iterator it;
 	it = _context.find(item);		// part of local context ?
 	if (it != _context.end()) {
-_DEBUG( "UNMARK" );
+_XDEBUG( "UNMARK" );
 	    _context.erase (it);		// erase it !
 	}
     }
@@ -161,7 +158,7 @@ _DEBUG( "UNMARK" );
 	ResStatus old_status = getStatus (item);
 
 	if (old_status != status) {		// new status ?
-_DEBUG( "MARK" );
+_XDEBUG( "MARK" );
 	    _context[item] = status;		// set it !
 	}
     }
@@ -182,7 +179,7 @@ ResolverContext::install (PoolItem_Ref item, bool is_soft, int other_penalty)
     std::string msg;
 
     status = getStatus(item);
-    _DEBUG( "ResolverContext[" << this << "]::install(<" << status  << "> " << item << ")" );
+    _XDEBUG( "ResolverContext[" << this << "]::install(<" << status  << "> " << item << ")" );
 
     if (status.isToBeUninstalled()
 	&& !status.isToBeUninstalledDueToUnlink()) {
@@ -252,7 +249,7 @@ ResolverContext::upgrade (PoolItem_Ref item, PoolItem_Ref old_item, bool is_soft
 {
     ResStatus status;
 
-    _DEBUG( "ResolverContext[" << this << "]::upgrade(" << item << " upgrades " << old_item << ")" );
+    _XDEBUG( "ResolverContext[" << this << "]::upgrade(" << item << " upgrades " << old_item << ")" );
 
     status = getStatus(item);
 
@@ -309,7 +306,7 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
     ResStatus status, new_status;
     std::string msg;
 
-    _DEBUG( "ResolverContext[" << this << "]::uninstall("
+    _XDEBUG( "ResolverContext[" << this << "]::uninstall("
 		    << item << " " << (part_of_upgrade ? "part_of_upgrade" : "") << " "
 		    << (due_to_obsolete ? "due_to_obsolete": "") << " "
 		    << (due_to_unlink ? "due_to_unlink" : "") << ")" );
@@ -364,7 +361,7 @@ ResolverContext::unneeded (PoolItem_Ref item, int other_penalty)
 {
     ResStatus status;
 
-    _DEBUG( "ResolverContext[" << this << "]::unneeded(" << item << ")" );
+    _XDEBUG( "ResolverContext[" << this << "]::unneeded(" << item << ")" );
 
     status = getStatus(item);
 
@@ -388,7 +385,7 @@ ResolverContext::satisfy (PoolItem_Ref item, int other_penalty)
 
     status = getStatus(item);
 
-    _DEBUG( "ResolverContext[" << this << "]::satisfy(" << item << ":" << status << ")" );
+    _XDEBUG( "ResolverContext[" << this << "]::satisfy(" << item << ":" << status << ")" );
 
     if (status.staysInstalled()) {
 	setStatus (item, ResStatus::complete);
@@ -408,7 +405,7 @@ ResolverContext::incomplete (PoolItem_Ref item, int other_penalty)
 {
     ResStatus status = getStatus (item);
 
-    _DEBUG( "ResolverContext[" << this << "]::incomplete(" << item << "):" << status );
+    _XDEBUG( "ResolverContext[" << this << "]::incomplete(" << item << "):" << status );
 
     if (_establishing) {
 	if (status.isInstalled()) {
@@ -438,7 +435,7 @@ ResolverContext::isPresent (PoolItem_Ref item)
 {
     ResStatus status = getStatus(item);
 
-_DEBUG("ResolverContext::itemIsPresent(<" << status << ">" << item << ")");
+_XDEBUG("ResolverContext::itemIsPresent(<" << status << ">" << item << ")");
 
     return (status.staysInstalled()
 	    || ((status.isToBeInstalled() || status.isToBeInstalledSoft())
@@ -457,7 +454,7 @@ ResolverContext::isAbsent (PoolItem_Ref item)
 
     status = getStatus(item);
 
-_DEBUG("ResolverContext::itemIsAbsent(<" << status << ">" << item << ")");
+_XDEBUG("ResolverContext::itemIsAbsent(<" << status << ">" << item << ")");
 
     // DONT add incomplete here, uninstall requests for incompletes must be handled
 
@@ -899,7 +896,7 @@ ResolverContext::incompleteCount (void) const
 void
 ResolverContext::addInfo (ResolverInfo_Ptr info)
 {
-    _DEBUG( "ResolverContext[" << this << "]::addInfo(" << *info << ")" );
+    _XDEBUG( "ResolverContext[" << this << "]::addInfo(" << *info << ")" );
     _log.push_back (info);
 
     // _propagated_importance = false;
@@ -1133,7 +1130,7 @@ spew_info_cb (ResolverInfo_Ptr info, void *unused)
 void
 ResolverContext::spewInfo (void) const
 {
-    _DEBUG( "ResolverContext[" << this << "]::spewInfo" );
+    _XDEBUG( "ResolverContext[" << this << "]::spewInfo" );
     foreachInfo (PoolItem_Ref(), -1, spew_info_cb, NULL);
 }
 
@@ -1243,7 +1240,7 @@ ResolverContext::requirementIsPossible (const Capability & dependency) const
 		    break;
 	    }
 	}
-    _DEBUG("requirementIsPossible( " << dependency << ") = " << (info.flag ? "Y" : "N"));
+    _XDEBUG("requirementIsPossible( " << dependency << ") = " << (info.flag ? "Y" : "N"));
     return info.flag;
 }
 
@@ -1291,7 +1288,7 @@ ResolverContext::isParallelInstall (PoolItem_Ref item) const
     info.other = item;
     info.flag = false;
     foreachMarked (dup_name_check_cb, (void *)&info);
-    _DEBUG("isParallelInstall(" << item << ") = " << (info.flag ? "Y" : "N"));
+    _XDEBUG("isParallelInstall(" << item << ") = " << (info.flag ? "Y" : "N"));
     return info.flag;
 }
 

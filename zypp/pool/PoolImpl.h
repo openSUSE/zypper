@@ -37,11 +37,14 @@ namespace zypp
     typedef PoolTraits::Item           Item;
     typedef PoolTraits::ContainerT     ContainerT;
     typedef PoolTraits::IndexContainerT    IndexContainerT;
+    typedef PoolTraits::NameContainerT    NameContainerT;
     typedef PoolTraits::size_type      size_type;
     typedef PoolTraits::iterator       iterator;
     typedef PoolTraits::const_iterator const_iterator;
     typedef PoolTraits::indexiterator       indexiterator;
     typedef PoolTraits::const_indexiterator const_indexiterator;
+    typedef PoolTraits::nameiterator       nameiterator;
+    typedef PoolTraits::const_nameiterator const_nameiterator;
     typedef PoolTraits::Inserter       Inserter;
     typedef PoolTraits::Deleter        Deleter;
 
@@ -66,6 +69,25 @@ namespace zypp
       const IndexContainerT & providesstore() const
       { return _providesstore; }
 
+      IndexContainerT & requiresstore()
+      { return _requiresstore; }
+      /**  */
+      const IndexContainerT & requiresstore() const
+      { return _requiresstore; }
+
+      IndexContainerT & conflictsstore()
+      { return _conflictsstore; }
+      /**  */
+      const IndexContainerT & conflictsstore() const
+      { return _conflictsstore; }
+
+      /**  */
+      NameContainerT & namestore()
+      { return _namestore; }
+      /**  */
+      const NameContainerT & namestore() const
+      { return _namestore; }
+
       /**  */
       bool empty() const
       { return _store.empty(); }
@@ -88,6 +110,27 @@ namespace zypp
       { return _providesstore.lower_bound (tag_r); }
 
       /** */
+      indexiterator requiresbegin(const std::string & tag_r)
+      { return _requiresstore.lower_bound (tag_r); }
+      /** */
+      const_indexiterator requiresbegin(const std::string & tag_r) const
+      { return _requiresstore.lower_bound (tag_r); }
+
+      /** */
+      indexiterator conflictsbegin(const std::string & tag_r)
+      { return _conflictsstore.lower_bound (tag_r); }
+      /** */
+      const_indexiterator conflictsbegin(const std::string & tag_r) const
+      { return _conflictsstore.lower_bound (tag_r); }
+
+      /** */
+      nameiterator namebegin(const std::string & tag_r)
+      { return _namestore.lower_bound (tag_r); }
+      /** */
+      const_nameiterator namebegin(const std::string & tag_r) const
+      { return _namestore.lower_bound (tag_r); }
+
+      /** */
       iterator end()
       { return _store.end(); }
       /** */
@@ -102,9 +145,33 @@ namespace zypp
       { return _providesstore.upper_bound (tag_r); }
 
       /** */
+      indexiterator requiresend(const std::string & tag_r)
+      { return _requiresstore.upper_bound (tag_r); }
+      /** */
+      const_indexiterator requiresend(const std::string & tag_r) const
+      { return _requiresstore.upper_bound (tag_r); }
+
+      /** */
+      indexiterator conflictsend(const std::string & tag_r)
+      { return _conflictsstore.upper_bound (tag_r); }
+      /** */
+      const_indexiterator conflictsend(const std::string & tag_r) const
+      { return _conflictsstore.upper_bound (tag_r); }
+
+      /** */
+      nameiterator nameend(const std::string & tag_r)
+      { return _namestore.upper_bound (tag_r); }
+      /** */
+      const_nameiterator nameend(const std::string & tag_r) const
+      { return _namestore.upper_bound (tag_r); }
+
+      /** */
       void clear()
       { _store.clear();
 	_providesstore.clear();
+	_requiresstore.clear();
+	_conflictsstore.clear();
+	_namestore.clear();
 	return;
       }
 
@@ -112,6 +179,9 @@ namespace zypp
       /** */
       ContainerT _store;
       IndexContainerT _providesstore;
+      IndexContainerT _requiresstore;
+      IndexContainerT _conflictsstore;
+      NameContainerT _namestore;
     };
     ///////////////////////////////////////////////////////////////////
 

@@ -73,17 +73,27 @@ class LookForInstalled : public resfilter::OnCapMatchCallbackFunctor, public res
 // just find installed item with same kind/name as item
 
 PoolItem_Ref
-Helper::findInstalledByNameAndKind (const ResPool & pool, string name, const Resolvable::Kind & kind)
+Helper::findInstalledByNameAndKind (const ResPool & pool, const string & name, const Resolvable::Kind & kind)
 {
     LookForInstalled info;
-
+#if 0
     invokeOnEach( pool.byNameBegin( name ),
 		  pool.byNameEnd( name ),
 		  functor::chain (resfilter::ByInstalled (),			// ByInstalled
 				  resfilter::ByKind( kind ) ),			// equal kind
 		  functor::functorRef<bool,PoolItem> (info) );
+#endif
+	ResPool::const_nameiterator pend = pool.nameend(name);
+	for (ResPool::const_nameiterator it = pool.namebegin(name); it != pend; ++it) {
+	    PoolItem item = it->second;
+	    if (item.status().isInstalled()
+		&& item->kind() == kind) {
+		if (!info( it->second ))
+		    break;
+	    }
+	}
 
-MIL << "Helper::findInstalledByNameAndKind (" << name << ", " << kind << ") => " << info.installed << endl;
+    _DEBUG("Helper::findInstalledByNameAndKind (" << name << ", " << kind << ") => " << info.installed);
     return info.installed;
 }
 
@@ -120,13 +130,27 @@ Helper::findUpdateItem (const ResPool & pool, PoolItem_Ref item)
 {
     LookForUpdate info;
 #warning FIXME, should not report locked update candidates.
+#if 0
     invokeOnEach( pool.byNameBegin( item->name() ),
 		  pool.byNameEnd( item->name() ),
 		  functor::chain (functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
 						  resfilter::ByKind( item->kind() ) ),		// equal kind
 				  resfilter::byEdition<CompareByGT<Edition> >( item->edition() )),
 		  functor::functorRef<bool,PoolItem> (info) );
-MIL << "Helper::findUpdateItem(" << item << ") => " << info.uninstalled << endl;
+#endif
+	ResPool::const_nameiterator pend = pool.nameend(item->name());
+	for (ResPool::const_nameiterator it = pool.namebegin(item->name()); it != pend; ++it) {
+	    PoolItem pos = it->second;
+	    if (pos.status().isUninstalled()
+		&& pos->kind() == item->kind()
+		&& item->edition().compare(pos->edition()) < 0)
+	    {
+		if (!info( pos ))
+		    break;
+	    }
+	}
+
+    _DEBUG("Helper::findUpdateItem(" << item << ") => " << info.uninstalled);
     return info.uninstalled;
 }
 
@@ -151,13 +175,27 @@ Helper::findReinstallItem (const ResPool & pool, PoolItem_Ref item)
 {
     LookForReinstall info;
 #warning FIXME, should not report locked update candidates.
+#if 0
     invokeOnEach( pool.byNameBegin( item->name() ),
 		  pool.byNameEnd( item->name() ),
 		  functor::chain (functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
 						  resfilter::ByKind( item->kind() ) ),		// equal kind
 				  resfilter::byEdition<CompareByEQ<Edition> >( item->edition() )),
 		  functor::functorRef<bool,PoolItem> (info) );
-MIL << "Helper::findReinstallItem(" << item << ") => " << info.uninstalled << endl;
+#endif
+	ResPool::const_nameiterator pend = pool.nameend(item->name());
+	for (ResPool::const_nameiterator it = pool.namebegin(item->name()); it != pend; ++it) {
+	    PoolItem pos = it->second;
+	    if (pos.status().isUninstalled()
+		&& pos->kind() == item->kind()
+		&& item->edition().compare(pos->edition()) == 0)
+	    {
+		if (!info( pos ))
+		    break;
+	    }
+	}
+
+    _DEBUG("Helper::findReinstallItem(" << item << ") => " << info.uninstalled);
     return info.uninstalled;
 }
 

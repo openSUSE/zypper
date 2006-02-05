@@ -72,7 +72,7 @@ QueueItemEstablish::QueueItemEstablish (const ResPool & pool, PoolItem_Ref item,
     , _other_penalty (0)
     , _explicitly_requested (false)
 {
-    _DEBUG("QueueItemEstablish::QueueItemEstablish (" << item << ")");
+    _XDEBUG("QueueItemEstablish::QueueItemEstablish (" << item << ")");
 
 }
 
@@ -96,11 +96,11 @@ QueueItemEstablish::isSatisfied (ResolverContext_Ptr context) const
 bool
 QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
-    DBG << "QueueItemEstablish::process(" << *this << ")" << endl;
+    _DEBUG("QueueItemEstablish::process(" << *this << ")");
 
     CapSet freshens = _item->dep(Dep::FRESHENS);
 
-    DBG << "simple establish of " << _item << " with " << freshens.size() << " freshens" << endl;
+    _XDEBUG("simple establish of " << _item << " with " << freshens.size() << " freshens");
 
     ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_ESTABLISHING, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
     context->addInfo (misc_info);
@@ -112,7 +112,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
     for (iter = freshens.begin(); iter != freshens.end(); iter++) {
 	const Capability cap = *iter;
 	if (context->requirementIsMet (cap)) {
-	    MIL << "this freshens " << cap << endl;
+	    _XDEBUG("this freshens " << cap);
 	    break;
 	}
     }
@@ -126,7 +126,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	&& freshens.size() > 0
 	&& iter == freshens.end())
     {
-	MIL << "this freshens nothing -> unneeded" << endl;
+	_DEBUG("this freshens nothing -> unneeded");
 	context->unneeded (_item, _other_penalty);
     }
     else {							// installed or no freshens or triggered freshens
@@ -140,11 +140,11 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    }
 	}
 	if (iter == requires.end()) {					// all are met
-	    MIL << "all requirements met -> satisfied" << endl;
+	    _DEBUG("all requirements met -> satisfied");
 	    context->satisfy (_item, _other_penalty);
 	}
 	else {
-	    MIL << "unfulfilled requirements -> incomplete" << endl;
+	    _DEBUG("unfulfilled requirements -> incomplete");
 
 	    // we could issue a QueueItemInstall (_item) here but better lets blame the user
 	    context->incomplete (_item, _other_penalty);

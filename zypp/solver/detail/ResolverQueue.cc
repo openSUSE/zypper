@@ -354,8 +354,6 @@ ResolverQueue::splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueLi
 
     QueueItemList possible_qitems = first_branch->possibleQItems();
 
-#warning Needs Source backref
-#if 0
     /*
        Check for deferrable qitems: if we have two install qitems where the to-be-installed
        poolItems have the same name, then we will defer the lower-priority install if
@@ -373,18 +371,18 @@ ResolverQueue::splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueLi
 	    if (qitem->isInstall() && qitem2->isInstall()) {
 		PoolItem_Ref r = (dynamic_pointer_cast<QueueItemInstall>(qitem))->item();
 		PoolItem_Ref r2 = (dynamic_pointer_cast<QueueItemInstall>(qitem2))->item();
-		Channel_constPtr channel = r->channel();
-		Channel_constPtr channel2 = r2->channel();
+		Source_Ref source = r->source();
+		Source_Ref source2 = r2->source();
 		int priority, priority2;
 
-		priority = channel->getPriority (channel->isSubscribed());
-		priority2 = channel2->getPriority (channel2->isSubscribed());
+		priority = source.priority();		//channel->isSubscribed());
+		priority2 = source2.priority();		//channel2->isSubscribed());
 
 		if (priority != priority2 && r->name() == r2->name()) {
-		    if (r->version() == r2->version()
-			|| (priority < priority2 && ResItem::compare (r, r2) < 0)
-			|| (priority > priority2 && ResItem::compare (r, r2) > 0)) {
-
+		    if (r->edition().compare(r2->edition()) == 0
+			|| (priority < priority2 && r->edition().compare(r2->edition()) < 0)
+			|| (priority > priority2 && r->edition().compare(r2->edition()) > 0))
+		    {
 			if (priority < priority2)
 			    to_defer[qitem] = qitem;
 			else /* if (priority > priority2) */
@@ -394,8 +392,6 @@ ResolverQueue::splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueLi
 	    }
 	}
     }
-#endif
-
 
     for (QueueItemList::const_iterator iter = possible_qitems.begin(); iter != possible_qitems.end(); ++iter) {
 	ResolverQueue_Ptr new_queue;

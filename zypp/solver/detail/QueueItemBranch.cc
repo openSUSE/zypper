@@ -131,7 +131,7 @@ QueueItemBranch::contains (QueueItem_Ptr possible_subbranch)
 bool
 QueueItemBranch::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
-    DBG << "QueueItemBranch::process(" << *this << ")" << endl;
+    _DEBUG("QueueItemBranch::process(" << *this << ")");
 
     QueueItemList live_branches;
     unsigned int branch_count;
@@ -140,21 +140,21 @@ QueueItemBranch::process (ResolverContext_Ptr context, QueueItemList & qil)
     for (QueueItemList::const_iterator iter = _possible_qitems.begin(); iter != _possible_qitems.end(); iter++) {
 
 	QueueItem_Ptr item = *iter;
-DBG << "_possible_qitem " << *item << endl;
+	_XDEBUG("_possible_qitem " << *item);
 	if (item->isSatisfied (context)) {
-DBG << "is satisfied" << endl;
+	    _XDEBUG("is satisfied");
 	    goto finished;
 	}
 
 	/* Drop any useless branch items */
 	if (! item->isRedundant (context)) {
-DBG << "not redundant" << endl;
+	    _XDEBUG("not redundant");
 	    live_branches.push_front (item);
 	}
     }
 
     branch_count = live_branches.size();
-DBG << "branch_count " << branch_count << endl;
+    _XDEBUG("branch_count " << branch_count);
 
     if (branch_count == 0) {
 
@@ -179,7 +179,7 @@ DBG << "branch_count " << branch_count << endl;
 	}
 
     } else if (branch_count == _possible_qitems.size()) {
-DBG << "Nothing was eliminated" << endl;
+	_XDEBUG("Nothing was eliminated");
 	/* Nothing was eliminated, so just pass the branch through (and set it to
 	   NULL so that it won't get freed when we exit. */
 
@@ -188,7 +188,7 @@ DBG << "Nothing was eliminated" << endl;
 	did_something = false;
 
     } else {
-ERR << "rebranching" << endl;
+	_XDEBUG("rebranching");
 	QueueItemBranch_Ptr new_branch = new QueueItemBranch (pool());
 	for (QueueItemList::const_iterator iter = live_branches.begin(); iter != live_branches.end(); iter++) {
 	    new_branch->addItem ((*iter)->copy());

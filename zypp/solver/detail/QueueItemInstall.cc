@@ -109,7 +109,7 @@ QueueItemInstall::QueueItemInstall (const ResPool & pool, PoolItem_Ref item, boo
 	_upgrades = Helper::findInstalledItem (pool, item);
     }
 
-    _DEBUG("QueueItemInstall::QueueItemInstall(" << item << (soft?", soft":"") << ") upgrades " << _upgrades);
+    _XDEBUG("QueueItemInstall::QueueItemInstall(" << item << (soft?", soft":"") << ") upgrades " << _upgrades);
 }
  
 
@@ -164,7 +164,7 @@ struct EstablishFreshens : public resfilter::OnCapMatchCallbackFunctor
 
     bool operator()( PoolItem_Ref provider, const Capability & match )
     {
-	_DEBUG("EstablishFreshens (" << provider << ", " << match << ")");
+	_XDEBUG("EstablishFreshens (" << provider << ", " << match << ")");
 
 	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, provider, soft);
 	qil.push_back (establish_item);
@@ -191,7 +191,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
     {
 	ResolverInfo_Ptr info;
 
-	_DEBUG("install upgrades itself, skipping");
+	_XDEBUG("install upgrades itself, skipping");
 
 	info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_SKIPPING, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
 	context->addInfo (info);
@@ -204,11 +204,11 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
     if (!_needed_by.empty()) {
 	bool still_needed = false;
 
-	_DEBUG( "still needed ");
+	_XDEBUG( "still needed ");
 
 	for (PoolItemList::const_iterator iter = _needed_by.begin(); iter != _needed_by.end() && !still_needed; ++iter) {
 	    ResStatus status = iter->status();
-	    _DEBUG("by: [status: " << status << "] " << *iter);
+	    _XDEBUG("by: [status: " << status << "] " << *iter);
 	    if (! status.isToBeUninstalled()) {
 		still_needed = true;
 	    }
@@ -248,7 +248,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     if (!_upgrades) {
 
-	_DEBUG("simple install of " <<  _item);
+	_XDEBUG("simple install of " <<  _item);
 	context->install (_item, context->verifying() /* is_soft */, _other_penalty);
 
     }
@@ -256,7 +256,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	QueueItemUninstall_Ptr uninstall_item;
 
-	_DEBUG("upgrade install of " << _item);
+	_XDEBUG("upgrade install of " << _item);
 
 	context->upgrade (_item, _upgrades, context->verifying() /* is_soft */, _other_penalty);
 
@@ -290,11 +290,11 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	   || status.isIncomplete()
 	   || status.isSatisfied()))
     {
-	_DEBUG("status " << status << " -> finished");
+	_XDEBUG("status " << status << " -> finished");
 	goto finished;
     }
 
-    _DEBUG("status " << status << " -> NOT finished");
+    _XDEBUG("status " << status << " -> NOT finished");
     {	// just a block for local initializers, the goto above makes this necessary
 
 	ResolverInfoMisc_Ptr misc_info;
@@ -322,10 +322,10 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 
 	    const Capability cap = *iter;
-	    _DEBUG("this requires " << cap);
+	    _XDEBUG("this requires " << cap);
 
 	    if (!context->requirementIsMet (cap)) {
-		_DEBUG("this requirement is still unfulfilled");
+		_XDEBUG("this requirement is still unfulfilled");
 		QueueItemRequire_Ptr req_item = new QueueItemRequire (pool(), cap, _soft);
 		req_item->addPoolItem (_item);
 		qil.push_front (req_item);
@@ -338,10 +338,10 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 
 	    const Capability cap = *iter;
-	    _DEBUG("this recommends " << cap);
+	    _XDEBUG("this recommends " << cap);
 
 	    if (!context->requirementIsMet (cap)) {
-		_DEBUG("this recommends is still unfulfilled");
+		_XDEBUG("this recommends is still unfulfilled");
 		QueueItemRequire_Ptr req_item = new QueueItemRequire (pool(), cap, true);	// this is a soft requires
 		req_item->addPoolItem (_item);
 		qil.push_front (req_item);
@@ -355,7 +355,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 
 	    const Capability cap = *iter;
-	    _DEBUG("this conflicts with '" << cap << "'");
+	    _XDEBUG("this conflicts with '" << cap << "'");
 	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item, _soft);
 	    qil.push_front (conflict_item);
 
@@ -367,7 +367,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 
 	    const Capability cap = *iter;
-	    _DEBUG("this obsoletes " <<  cap);
+	    _XDEBUG("this obsoletes " <<  cap);
 	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item, _soft);
 	    conflict_item->setActuallyAnObsolete();
 	    qil.push_front (conflict_item);
@@ -382,11 +382,20 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    const Capability cap = *iter;
 
 	    // pool()->foreachConflictingResItem (dep, build_conflict_list, &conflicts);
-
+#if 0
 	    Dep dep( Dep::CONFLICTS);
 	    invokeOnEach( pool().byCapabilityIndexBegin( cap.index(), dep ), // begin()
 			  pool().byCapabilityIndexEnd( cap.index(), dep ),   // end()
 			  resfilter::callOnCapMatchIn( dep, cap, functor::functorRef<bool,PoolItem,Capability>(conflicts)) );
+#endif
+	ResPool::const_indexiterator cend = pool().conflictsend(cap.index());
+	for (ResPool::const_indexiterator it = pool().conflictsbegin(cap.index()); it != cend; ++it) {
+	    if (cap.matches (it->second.first) == CapMatch::yes) {
+		if (!conflicts( it->second.second, it->second.first))
+		    break;
+	    }
+	}
+
 	}
 
 	for (PoolItemList::const_iterator iter = conflicts.items.begin(); iter != conflicts.items.end(); ++iter) {
@@ -405,7 +414,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 		continue;
 	    }
 
-	    _DEBUG("because: '" << conflicting_item << "'");
+	    _XDEBUG("because: '" << conflicting_item << "'");
 
 	    uninstall_item = new QueueItemUninstall (pool(), conflicting_item, QueueItemUninstall::CONFLICT, _soft);
 	    uninstall_item->setDueToConflict ();
@@ -421,7 +430,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	CapFactory factory;
 	Capability cap = factory.parse (_item->kind(), _item->name(), Rel::EQ, _item->edition());
-	MIL << "Re-establish all freshens on " << cap << endl;
+	_XDEBUG("Re-establish all freshens on " << cap);
 	// pool ()->foreachFresheningResItem (cap, establish_freshens_cb, &info);
 	Dep dep( Dep::FRESHENS);
 	invokeOnEach( pool().byCapabilityIndexBegin( cap.index(), dep ), // begin()

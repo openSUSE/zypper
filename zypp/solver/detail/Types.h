@@ -38,6 +38,8 @@ typedef std::list <zypp::PoolItem> PoolItemList;
 typedef std::set <zypp::PoolItem> PoolItemSet;
 
 #define _DEBUG(x) DBG << x << std::endl;
+#define _XDEBUG(x) XXX << x << std::endl;
+//#define _DEBUG(x)
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
