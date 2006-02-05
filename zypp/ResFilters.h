@@ -284,7 +284,7 @@ namespace zypp
     {
       bool operator()( const PoolItem & p ) const
       {
-	return p.status().isInstalled();
+	return p.status().staysInstalled();
       }
 
     };
@@ -294,7 +294,7 @@ namespace zypp
     {
       bool operator()( const PoolItem & p ) const
       {
-	return p.status().isUninstalled();
+	return p.status().staysUninstalled();
       }
     };
 
