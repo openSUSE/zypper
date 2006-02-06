@@ -1,1 +1,3 @@
 parallel-test.xml
+require-test.xml
+uninstall-test.xml

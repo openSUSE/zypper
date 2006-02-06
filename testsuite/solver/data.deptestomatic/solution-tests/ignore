@@ -5,3 +5,5 @@ exercise-3-test.xml
 exercise-04obsoletes-01-test.xml
 other-architect-test.xml
 parallel-test.xml
+require-test.xml
+uninstall-test.xml
