@@ -40,7 +40,7 @@ proc single-run { src } {
 
   # run the test
 
-  set command "LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:../src/.libs\" $src >$outfile 2>$errfile"
+  set command "LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:../src/\" $src >$outfile 2>$errfile"
   set result ""
   set oops [catch { set result [exec sh -c $command] } catched]
 
@@ -90,9 +90,18 @@ proc single-run { src } {
 # run a prg file for several times ( defined in subdirectory <programname> )
 #
 proc multi-run { src } {
-  
+
   set errorOccured 0
   set path [split $src "/"]
+  set root [lindex $path 0]
+
+  # check if we're run with an absolute or an relative path
+  # if relative ($src ="./xxx"), set $prefix relative
+  set prefix ""
+  if {root == "."} {
+	set prefix "../../"
+  }
+
   set filename [lindex $path [expr [llength $path]-1]]
 
   # extract basename and check extension
@@ -190,7 +199,8 @@ proc multi-run { src } {
 	  #generate output directory
 
 	  set outfile "$testBase_name.out"
-	  set errfile "$testBase_name.err"
+#	  set errfile "$testBase_name.err"
+	  set errfile "/dev/null"
 	  set mistakefile "$testBase_name.mistake"
 	  set difffile "$testBase_name.diff"
 	  set solutionfile "$testBase_name.solution"
@@ -198,7 +208,8 @@ proc multi-run { src } {
 	  # run the test
 
 #	  set command "LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:../src/.libs\" $src $testcase >$outfile 2>$errfile"
-	  set command "(cd $dircase; ZYPP_NOLOG=1 ../../$src $testFilename >$outfile 2>$errfile)"
+	  set command "(cd $dircase; ZYPP_NOLOG=1 $prefix$src $testFilename >$outfile 2>$errfile)"
+
 	  set result ""
 	  set oops [catch { set result [exec sh -c $command] } catched]
 
