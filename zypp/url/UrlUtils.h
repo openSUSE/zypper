@@ -12,6 +12,8 @@
 #ifndef   ZYPP_URL_URLUTILS_H
 #define   ZYPP_URL_URLUTILS_H
 
+#include <zypp/url/UrlException.h>
+
 #include <string>
 #include <vector>
 #include <map>
@@ -95,8 +97,8 @@ namespace zypp
      * \param allowNUL A flag, if \c "%00" (encoded \c '\\0')
      *                 is allowed or not.
      * \return A decoded strig (may contain binary data).
-     * \throws A std::invalid_argument exception if \p allowNUL
-     *         is false and a \c "%00" was found in \p str.
+     * \throws UrlDecodingException if \p allowNUL is false and
+     *         a encoded NUL byte (\c "%00") was found in \p str.
      */
     std::string
     decode(const std::string &str, bool allowNUL = false);
@@ -151,8 +153,7 @@ namespace zypp
      * \param pvec    Reference to a result parameter vector.
      * \param pstr    Reference to the PathParam- or Query-String to split.
      * \param psep    Parameter separator character to split at.
-     * \throws A std::invalid_argument exception if \p psep separator is
-     *         empty.
+     * \throws UrlNotSupportedException if \p psep separator is empty.
      */
     void
     split(ParamVec          &pvec,
@@ -185,8 +186,8 @@ namespace zypp
      * \param vsep    Separator character to split key and value.
      * \param eflag   Flag if the key and value strings should be URL percent
      *                decoded before they're stored in the map.
-     * \throws A std::invalid_argument exception if \p psep or \p vsep
-     *         separators are empty.
+     * \throws UrlNotSupportedException if \p psep or \p vsep separator
+     *         is empty.
      */
     void
     split(ParamMap          &pmap,
@@ -234,8 +235,8 @@ namespace zypp
      * \param vsep    Separator character to use between keys and values.
      * \param safe    List of characters to accept without encoding.
      * \return A URL percent-encoded parameter string.
-     * \throws A std::invalid_argument exception if \p psep or \p vsep
-     *         separators are empty.
+     * \throws UrlNotSupportedException if \p psep or \p vsep separator
+     *         is empty.
      */
     std::string
     join(const ParamMap     &pmap,

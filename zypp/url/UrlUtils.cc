@@ -105,9 +105,9 @@ namespace zypp
               // is a %00 octet allowed ?
               if( !allowNUL)
               {
-                throw std::invalid_argument(
-                  "NUL octed not allowed"
-                );
+                ZYPP_THROW(UrlDecodingException(
+                  "Encoded string contains a NUL byte"
+                ));
               }
             default:
               // other octets are fine...
@@ -167,9 +167,9 @@ namespace zypp
       size_t beg, pos, len;
       if( psep.empty())
       {
-        throw std::invalid_argument(
+        ZYPP_THROW(UrlNotSupportedException(
           "Invalid split separator character."
-        );
+        ));
       }
 
       len = pstr.length();
@@ -207,9 +207,9 @@ namespace zypp
 
       if( psep.empty() || vsep.empty())
       {
-        throw std::invalid_argument(
+        ZYPP_THROW(UrlNotSupportedException(
           "Invalid split separator character."
-        );
+        ));
       }
 
       split(pvec, str, psep);
@@ -277,9 +277,9 @@ namespace zypp
     {
       if( psep.empty() || vsep.empty())
       {
-        throw std::invalid_argument(
+        ZYPP_THROW(UrlNotSupportedException(
           "Invalid join separator character."
-        );
+        ));
       }
 
       std::string join_safe;

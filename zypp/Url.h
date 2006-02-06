@@ -105,6 +105,7 @@ namespace zypp
      * modified.
      *
      * \param url The Url object to make a copy of.
+     * \throws url::UrlException if copy fails (should not happen).
      */
     Url(const Url &url);
 
@@ -117,7 +118,7 @@ namespace zypp
      * modified.
      *
      * \param url The URL implementation reference to make a copy of.
-     * \throws A std::invalid_argument exception if reference is empty.
+     * \throws url::UrlException if reference is empty.
      */
     Url(const zypp::url::UrlRef &url);
 
@@ -129,7 +130,11 @@ namespace zypp
      * and assings the result to the new created object.
      *
      * \param encodedUrl A percent-encoded URL string.
-     * \throws A std::invalid_argument exception if parsing fails.
+     * \throws url::UrlParsingException if parsing of the url fails.
+     * \throws url::UrlNotAllowedException if one of the components
+     *         is not allowed for the scheme.
+     * \throws url::UrlBadComponentException if one of the components
+     *         contains an invalid character.
      */
     Url(const std::string &encodedUrl);
 
@@ -146,8 +151,10 @@ namespace zypp
      * \return           A reference to a (derived) UrlBase object or
      *                   empty reference if the \p encodedUrl string
      *                   does not match the generic URL syntax.
-     * \throws A std::invalid_argument exception in case of invalid
-     *         URL component is found.
+     * \throws url::UrlNotAllowedException if one of the components
+     *         is not allowed for the scheme.
+     * \throws url::UrlBadComponentException if one of the components
+     *         contains an invalid character.
      */
     static url::UrlRef
     parseUrl(const std::string &encodedUrl);
@@ -162,7 +169,11 @@ namespace zypp
      * 
      * \param encodedUrl A percent-encoded URL string.
      * \return A reference to this Url object.
-     * \throws A std::invalid_argument exception if parsing fails.
+     * \throws url::UrlParsingException if parsing of the url fails.
+     * \throws url::UrlNotAllowedException if one of the components
+     *         is not allowed for the scheme.
+     * \throws url::UrlBadComponentException if one of the components
+     *         contains an invalid character.
      */
     Url&
     operator = (const std::string &encodedUrl);
@@ -309,8 +320,8 @@ namespace zypp
      * Returns the username from the URL authority.
      * \param eflag Flag if the usename should be percent-decoded or not.
      * \return The username sub-component from the URL authority.
-     * \throws std::invalid_argument exception if the decoded
-     *         result string would contain a '\\0' character.
+     * \throws url::UrlDecodingException if the decoded result string
+     *         would contain a '\\0' character.
      */
     std::string
     getUsername(EEncoding eflag = zypp::url::E_DECODED) const;
@@ -319,8 +330,8 @@ namespace zypp
      * Returns the password from the URL authority.
      * \param eflag Flag if the password should be percent-decoded or not.
      * \return The password sub-component from the URL authority.
-     * \throws std::invalid_argument exception if the decoded
-     *         result string would contain a '\\0' character.
+     * \throws url::UrlDecodingException if the decoded result string
+     *         would contain a '\\0' character.
      */
     std::string
     getPassword(EEncoding eflag = zypp::url::E_DECODED) const;
@@ -334,8 +345,8 @@ namespace zypp
      *
      * \param eflag Flag if the host should be percent-decoded or not.
      * \return The host sub-component from the URL authority.
-     * \throws std::invalid_argument exception if the decoded
-     *         result string would contain a '\\0' character.
+     * \throws url::UrlDecodingException if the decoded result string
+     *         would contain a '\\0' character.
      */
     std::string
     getHost(EEncoding eflag = zypp::url::E_DECODED) const;
@@ -366,8 +377,8 @@ namespace zypp
      * \param eflag Flag if the path should be decoded or not.
      * \return The path name sub-component without path parameters
      *  from Path-Data component of the URL.
-     * \throws std::invalid_argument exception if the decoded
-     *         result string would contain a '\\0' character.
+     * \throws url::UrlDecodingException if the decoded result string
+     *         would contain a '\\0' character.
      */
     std::string
     getPathName(EEncoding eflag = zypp::url::E_DECODED) const;
@@ -408,10 +419,10 @@ namespace zypp
      * \param eflag Flag if the path parameter keys and values should
      *               be decoded or not.
      * \return The path parameters key and values as a string map.
-     * \throws std::logic_error exception if parameter parsing
+     * \throws url::UrlNotSupportedException if parameter parsing
      *         is not supported for a URL (scheme).
-     * \throws std::invalid_argument exception if the decoded
-     *         result string would contain a '\\0' character.
+     * \throws url::UrlDecodingException if the decoded result string
+     *         would contain a '\\0' character.
      */
     zypp::url::ParamMap
     getPathParamsMap(EEncoding eflag = zypp::url::E_DECODED) const;
@@ -427,10 +438,10 @@ namespace zypp
      * \param eflag Flag if the path parameter keys and values should
      *              be decoded or not.
      * \return The value for the path parameter key or empty string.
-     * \throws std::logic_error exception if parameter parsing
+     * \throws url::UrlNotSupportedException if parameter parsing
      *         is not supported for a URL (scheme).
-     * \throws std::invalid_argument exception if the decoded
-     *         result string would contain a '\\0' character.
+     * \throws url::UrlDecodingException if the decoded result string
+     *         would contain a '\\0' character.
      */
     std::string
     getPathParam(const std::string &param,
@@ -479,10 +490,10 @@ namespace zypp
      * \param eflag Flag if the query string keys and values should
      *               be decoded or not.
      * \return The query string as a key/value string map.
-     * \throws std::logic_error exception if parameter parsing
+     * \throws url::UrlNotSupportedException if parameter parsing
      *         is not supported for a URL (scheme).
-     * \throws std::invalid_argument exception if the decoded
-     *         result string would contain a '\\0' character.
+     * \throws url::UrlDecodingException if the decoded result string
+     *         would contain a '\\0' character.
      */
     zypp::url::ParamMap
     getQueryStringMap(EEncoding eflag = zypp::url::E_DECODED) const;
@@ -498,10 +509,10 @@ namespace zypp
      * \param eflag Flag if the query parameter keys and values should
      *              be decoded or not.
      * \return The value for the query parameter key or empty string.
-     * \throws std::logic_error exception if parameter parsing
+     * \throws url::UrlNotSupportedException if parameter parsing
      *         is not supported for a URL (scheme).
-     * \throws std::invalid_argument exception if the decoded
-     *         result string would contain a '\\0' character.
+     * \throws url::UrlDecodingException if the decoded result string
+     *         would contain a '\\0' character.
      */
     std::string
     getQueryParam(const std::string &param,
@@ -513,8 +524,8 @@ namespace zypp
      * Returns the encoded fragment component of the URL.
      * \param eflag Flag if the fragment should be percent-decoded or not.
      * \return The encoded fragment component of the URL.
-     * \throws std::invalid_argument exception if the decoded
-     *         result string would contain a '\\0' character.
+     * \throws url::UrlDecodingException if the decoded result string
+     *         would contain a '\\0' character.
      */
     std::string
     getFragment(EEncoding eflag = zypp::url::E_DECODED) const;
@@ -524,8 +535,8 @@ namespace zypp
     /**
      * \brief Set the scheme name in the URL.
      * \param scheme The new scheme name.
-     * \throws std::invalid_argument exception if the \p scheme
-     *         parameter contains an invalid character.
+     * \throws url::UrlBadComponentException if the \p scheme
+     *         contains an invalid character or is empty.
      */
     void
     setScheme(const std::string &scheme);
@@ -539,8 +550,11 @@ namespace zypp
      * sub-components without any leading "//" separator characters.
      *
      * \param authority The encoded authority component string.
-     * \throws std::invalid_argument exception if the \p authority
-     *         parameter contains an invalid character.
+     * \throws url::UrlNotAllowedException if the \p authority
+     *         has to be empty in for the current scheme.
+     * \throws url::UrlBadComponentException if the \p authority
+     *         contains an invalid character.
+     * \throws url::UrlParsingException if \p authority parsing fails.
      */
     void
     setAuthority(const std::string &authority);
@@ -549,8 +563,10 @@ namespace zypp
      * \brief Set the username in the URL authority.
      * \param user  The new username.
      * \param eflag If the \p username is encoded or not.
-     * \throws std::invalid_argument exception if the encoded
-     *         \p user parameter contains an invalid character.
+     * \throws url::UrlNotAllowedException if the \p user
+     *         has to be empty in for the current scheme
+     * \throws url::UrlBadComponentException if the \p user
+     *         contains an invalid character.
      */
     void
     setUsername(const std::string &user,
@@ -560,8 +576,10 @@ namespace zypp
      * \brief Set the password in the URL authority.
      * \param pass  The new password.
      * \param eflag If the \p password is encoded or not.
-     * \throws std::invalid_argument exception if the encoded
-     *         \p pass parameter contains an invalid character.
+     * \throws url::UrlNotAllowedException if the \p pass
+     *         has to be empty in for the current scheme.
+     * \throws url::UrlBadComponentException if the \p pass
+     *         contains an invalid character.
      */
     void
     setPassword(const std::string &pass,
@@ -583,7 +601,9 @@ namespace zypp
      * supported by the implementation in UrlBase class.
      *
      * \param host The new hostname or IP address.
-     * \throws std::invalid_argument exception if the host is invalid.
+     * \throws url::UrlNotAllowedException if the \p host (authority)
+     *         has to be empty in for the current scheme.
+     * \throws url::UrlBadComponentException if the \p host is invalid.
      */
     void
     setHost(const std::string &host);
@@ -591,7 +611,9 @@ namespace zypp
     /**
      * \brief Set the port number in the URL authority.
      * \param port The new port number.
-     * \throws std::invalid_argument exception if the port is invalid.
+     * \throws url::UrlNotAllowedException if the \p port (authority)
+     *         has to be empty in for the current scheme.
+     * \throws url::UrlBadComponentException if the \p port is invalid.
      */
     void
     setPort(const std::string &port);
@@ -605,8 +627,8 @@ namespace zypp
      * parameters separated by the ";" separator character.
      *
      * \param pathdata The encoded path data component string.
-     * \throws std::invalid_argument exception if the
-     *         \p pathdata parameter contains an invalid character.
+     * \throws url::UrlBadComponentException if the \p pathdata
+     *         contains an invalid character.
      */
     void
     setPathData(const std::string &pathdata);
@@ -615,8 +637,8 @@ namespace zypp
      * \brief Set the path name.
      * \param path  The new path name.
      * \param eflag If the \p path name is encoded or not.
-     * \throws std::invalid_argument exception if the encoded
-     *         \p path parameter contains an invalid character.
+     * \throws url::UrlBadComponentException if the \p path name
+     *         contains an invalid character.
      */
     void
     setPathName(const std::string &path,
@@ -625,8 +647,8 @@ namespace zypp
     /**
      * \brief Set the path parameters.
      * \param params The new encoded path parameter string.
-     * \throws std::invalid_argument exception if the
-     *         \p params parameter contains an invalid character.
+     * \throws url::UrlBadComponentException if the path \p params
+     *         contains an invalid character.
      */
     void
     setPathParams(const std::string &params);
@@ -634,8 +656,8 @@ namespace zypp
     /**
      * \brief Set the path parameters.
      * \param pvec The vector with encoded path parameters.
-     * \throws std::invalid_argument exception if the
-     *         \pvec parameter contains an invalid character.
+     * \throws url::UrlBadComponentException if the \p pvec
+     *         contains an invalid character.
      */
     void
     setPathParamsVec(const zypp::url::ParamVec &pvec);
@@ -643,7 +665,7 @@ namespace zypp
     /**
      * \brief Set the path parameters.
      * \param pmap The map with decoded path parameters.
-     * \throws std::logic_error exception if parameter parsing
+     * \throws url::UrlNotSupportedException if parameter parsing
      *         is not supported for a URL (scheme).
      */
     void
@@ -653,10 +675,10 @@ namespace zypp
      * \brief Set or add value for the specified path parameter.
      * \param param The decoded path parameter name.
      * \param value The decoded path parameter value.
-     * \throws std::logic_error exception if parameter parsing
+     * \throws url::UrlNotSupportedException if parameter parsing
      *         is not supported for a URL (scheme).
-     * \throws std::invalid_argument exception if the decoded
-     *         result string would contain a '\\0' character.
+     * \throws url::UrlDecodingException if the decoded result string
+     *         would contain a '\\0' character.
      */
     void
     setPathParam(const std::string &param, const std::string &value);
@@ -666,8 +688,8 @@ namespace zypp
     /**
      * \brief Set the query string in the URL.
      * \param querystr The new encoded query string.
-     * \throws std::invalid_argument exception if the
-     *         \p querystr parameter contains an invalid character.
+     * \throws url::UrlBadComponentException if the \p querystr
+     *         contains an invalid character.
      */
     void
     setQueryString(const std::string &querystr);
@@ -675,8 +697,8 @@ namespace zypp
     /**
      * \brief Set the query parameters.
      * \param qvec The vector with encoded query parameters.
-     * \throws std::invalid_argument exception if the
-     *         \p qvec parameter contains an invalid character.
+     * \throws url::UrlBadComponentException if the \p qvec
+     *         contains an invalid character.
      */
     void
     setQueryStringVec(const zypp::url::ParamVec &qvec);
@@ -684,7 +706,7 @@ namespace zypp
     /**
      * \brief Set the query parameters.
      * \param qmap The map with decoded query parameters.
-     * \throws std::logic_error exception if parameter parsing
+     * \throws url::UrlNotSupportedException if parameter parsing
      *         is not supported for a URL (scheme).
      */
     void
@@ -694,10 +716,10 @@ namespace zypp
      * \brief Set or add value for the specified query parameter.
      * \param param The decoded query parameter name.
      * \param value The decoded query parameter value.
-     * \throws std::logic_error exception if parameter parsing
+     * \throws url::UrlNotSupportedException if parameter parsing
      *         is not supported for a URL (scheme).
-     * \throws std::invalid_argument exception if the decoded
-     *         result string would contain a '\\0' character.
+     * \throws url::UrlDecodingException if the decoded result string
+     *         would contain a '\\0' character.
      */
     void
     setQueryParam(const std::string &param, const std::string &value);
@@ -708,8 +730,8 @@ namespace zypp
      * \brief Set the fragment string in the URL.
      * \param fragment The new fragment string.
      * \param eflag If the \p fragment is encoded or not.
-     * \throws std::invalid_argument exception if the encoded
-     *         \p fragment parameter contains an invalid character.
+     * \throws url::UrlBadComponentException if the \p fragment
+     *         contains an invalid character.
      */
     void
     setFragment(const std::string &fragment,

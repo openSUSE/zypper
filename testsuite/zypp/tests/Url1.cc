@@ -5,8 +5,9 @@
 int main(void)
 {
   std::string str, out;
+  zypp::Url   url;
 
-  str = "/%2f/srv/ftp";
+  str = "file:/%2f/srv/ftp";
   std::cout << "STR: " << str << std::endl;
   out = zypp::Url(str).asString();
   std::cout << "URL: " << out << std::endl << std::endl;
@@ -43,9 +44,9 @@ int main(void)
     out = zypp::Url(str).asString();
     std::cout << "URL: " << out << std::endl;
   }
-  catch(const std::invalid_argument &e)
+  catch(const zypp::url::UrlException &e)
   {
-    std::cout << "ERR: " << e.what() << std::endl << std::endl;
+    ZYPP_CAUGHT(e);
   }
 
   str = "ldap://example.net/dc=example,dc=net?cn,sn?sub?(cn=*)";

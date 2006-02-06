@@ -130,14 +130,14 @@ namespace zypp
       inline void
       checkUrlData(const std::string &data,
                    const std::string &name,
-                   const std::string &regx)
+                   const std::string &regx,
+                   bool               show=true)
       {
         if( regx.empty() || regx == "^$")
         {
-          throw std::invalid_argument(
-            std::string("Url scheme does not allow a " +
-                        name)
-          );
+          ZYPP_THROW(UrlNotAllowedException(
+            std::string("Url scheme does not allow a " + name)
+          ));
         }
         else
         {
@@ -152,10 +152,19 @@ namespace zypp
 
           if( !valid)
           {
-            throw std::invalid_argument(
-              std::string("Invalid " + name + " argument '" +
-                          data + "'")
-              );
+            if( show)
+            {
+              ZYPP_THROW(UrlBadComponentException(
+                std::string("Invalid " + name + " component '" +
+                            data + "'")
+              ));
+            }
+            else
+            {
+              ZYPP_THROW(UrlBadComponentException(
+                std::string("Invalid " + name + " component")
+              ));
+            }
           }
         }
       }
@@ -235,6 +244,7 @@ namespace zypp
       config("safe_fragment",   "~!$&'()*+=,:;@/?");
 
       config("with_authority",  "y");
+      config("require_scheme",  "y");
 
       config("rx_username",     "^([a-zA-Z0-9!$&'\\(\\)*+=,;~\\._-]|%[a-fA-F0-9]{2})+$");
       config("rx_password",     "^([a-zA-Z0-9!$&'\\(\\)*+=,:;~\\._-]|%[a-fA-F0-9]{2})+$");
@@ -341,7 +351,7 @@ namespace zypp
       catch( ... )
       {}
 
-      if(scheme.empty() || valid)
+      if((scheme.empty() && config("require_scheme") != "y") || valid)
       {
         std::string    lscheme( str::toLower(scheme));
         UrlSchemes     schemes( getKnownSchemes());
@@ -652,9 +662,9 @@ namespace zypp
       if( config("psep_pathparam").empty() ||
           config("vsep_pathparam").empty())
       {
-        throw std::logic_error(
+        ZYPP_THROW(UrlNotSupportedException(
           "Path parameter parsing not supported for this URL"
-        );
+        ));
       }
       zypp::url::ParamMap pmap;
       zypp::url::split(
@@ -707,9 +717,9 @@ namespace zypp
       if( config("psep_querystr").empty() ||
           config("vsep_querystr").empty())
       {
-        throw std::logic_error(
+        ZYPP_THROW(UrlNotSupportedException(
           "Query string parsing not supported for this URL"
-        );
+        ));
       }
       zypp::url::ParamMap pmap;
       zypp::url::split(
@@ -743,10 +753,17 @@ namespace zypp
         m_data->scheme = str::toLower(scheme);
       }
       else
+      if( scheme.empty())
       {
-        throw std::invalid_argument(
+        ZYPP_THROW(UrlBadComponentException(
+          std::string("Url scheme is a required component")
+        ));
+      }
+      else
+      {
+        ZYPP_THROW(UrlBadComponentException(
           std::string("Invalid Url scheme '" + scheme + "'")
-        );
+        ));
       }
     }
 
@@ -775,9 +792,9 @@ namespace zypp
       }
       else
       {
-        throw std::invalid_argument(
+        ZYPP_THROW(UrlParsingException(
           "Unable to parse Url authority"
-        );
+        ));
       }
     }
 
@@ -863,9 +880,9 @@ namespace zypp
       {
         if( config("with_authority") != "y")
         {
-          throw std::invalid_argument(
+          ZYPP_THROW(UrlNotAllowedException(
             std::string("Url scheme does not allow a username")
-          );
+          ));
         }
 
         if(eflag == zypp::url::E_ENCODED)
@@ -897,14 +914,14 @@ namespace zypp
       {
         if( config("with_authority") != "y")
         {
-          throw std::invalid_argument(
+          ZYPP_THROW(UrlNotAllowedException(
             std::string("Url scheme does not allow a password")
-          );
+          ));
         }
 
         if(eflag == zypp::url::E_ENCODED)
         {
-          checkUrlData(pass, "password", config("rx_password"));
+          checkUrlData(pass, "password", config("rx_password"), false);
 
           m_data->pass = pass;
         }
@@ -930,9 +947,9 @@ namespace zypp
       {
         if( config("with_authority") != "y")
         {
-          throw std::invalid_argument(
+          ZYPP_THROW(UrlNotAllowedException(
             std::string("Url scheme does not allow a host")
-          );
+          ));
         }
 
         if( isValidHost(host))
@@ -957,9 +974,9 @@ namespace zypp
         }
         else
         {
-          throw std::invalid_argument(
+          ZYPP_THROW(UrlBadComponentException(
             std::string("Invalid host argument '" + host + "'")
-          );
+          ));
         }
       }
     }
@@ -977,9 +994,9 @@ namespace zypp
       {
         if( config("with_authority") != "y")
         {
-          throw std::invalid_argument(
+          ZYPP_THROW(UrlNotAllowedException(
             std::string("Url scheme does not allow a port")
-          );
+          ));
         }
 
         if( isValidPort(port))
@@ -988,9 +1005,9 @@ namespace zypp
         }
         else
         {
-          throw std::invalid_argument(
+          ZYPP_THROW(UrlBadComponentException(
             std::string("Invalid host argument '" + port + "'")
-          );
+          ));
         }
       }
     }
@@ -1063,9 +1080,9 @@ namespace zypp
       if( config("psep_pathparam").empty() ||
           config("vsep_pathparam").empty())
       {
-        throw std::logic_error(
+        ZYPP_THROW(UrlNotSupportedException(
           "Path Parameter parsing not supported for this URL"
-        );
+        ));
       }
       setPathParams(
         zypp::url::join(
@@ -1108,9 +1125,9 @@ namespace zypp
       if( config("psep_querystr").empty() ||
           config("vsep_querystr").empty())
       {
-        throw std::logic_error(
+        ZYPP_THROW(UrlNotSupportedException(
           "Query string parsing not supported for this URL"
-        );
+        ));
       }
       setQueryString(
         zypp::url::join(

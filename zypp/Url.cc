@@ -100,9 +100,9 @@ namespace zypp
         }
         else
         {
-          throw std::invalid_argument(
+          ZYPP_THROW(url::UrlNotSupportedException(
             "Invalid LDAP URL query string"
-          );
+          ));
         }
         return pmap;
       }
@@ -139,9 +139,9 @@ namespace zypp
           }
           if( !found)
           {
-            throw std::invalid_argument(
+            ZYPP_THROW(url::UrlNotSupportedException(
               "Invalid LDAP URL query parameter '" + p->first + "'"
-            );
+            ));
           }
         }
         setQueryStringVec(pvec);
@@ -254,9 +254,9 @@ namespace zypp
   {
     if( !m_impl)
     {
-      throw std::invalid_argument(
+      ZYPP_THROW(url::UrlException(
         "Unable to clone Url object"
-      );
+      ));
     }
   }
 
@@ -267,9 +267,9 @@ namespace zypp
   {
     if( !m_impl)
     {
-      throw std::invalid_argument(
+      ZYPP_THROW(url::UrlException(
         "Invalid empty Url reference"
-      );
+      ));
     }
   }
 
@@ -280,9 +280,9 @@ namespace zypp
   {
     if( !m_impl)
     {
-      throw std::invalid_argument(
+      ZYPP_THROW(url::UrlParsingException(
         "Unable to parse Url components"
-      );
+      ));
     }
   }
 
@@ -294,9 +294,9 @@ namespace zypp
     UrlRef  url( parseUrl(encodedUrl));
     if( !url)
     {
-      throw std::invalid_argument(
+      ZYPP_THROW(url::UrlParsingException(
         "Unable to parse Url components"
-      );
+      ));
     }
     m_impl = url;
     return *this;
