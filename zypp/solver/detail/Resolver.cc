@@ -638,10 +638,13 @@ Resolver::resolvePool ()
     bool have_solution = resolveDependencies ();		// resolve !
 
     if (have_solution) {					// copy solution back to pool
+	MIL << "Have solution, copying back to pool" << endl;
 	ResolverContext_Ptr solution = bestContext();
 	solution->foreachMarked (solution_to_pool, NULL);
     }
-
+    else {
+	MIL << "!!! Have NO solution !!!" << endl;
+    }
     return have_solution;
 }
 
