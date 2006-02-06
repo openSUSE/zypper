@@ -63,9 +63,17 @@ namespace zypp {
 	ZYPP_THROW(MediaNotSupportedException(_url));
     
       const char* const filesystem = "nfs";
-      const char *mountpoint = attachPoint().asString().c_str();
+      std::string       mountpoint = attachPoint().asString();
       Mount mount;
-    
+
+      if( mountpoint.empty() || mountpoint == "/")
+      {
+	mountpoint = createAttachPoint().asString();
+	if( mountpoint.empty())
+	  ZYPP_THROW( MediaBadAttachPointException(url()));
+	setAttachPoint( mountpoint, true);
+      }
+
       string path = _url.getHost();
       path += ':';
       path += _url.getPathName();
@@ -90,7 +98,7 @@ namespace zypp {
     	options = str::join( optionList, "," );
       }
     
-      mount.mount(path,mountpoint,filesystem,options);
+      mount.mount(path,mountpoint.c_str(),filesystem,options);
     }
 
 

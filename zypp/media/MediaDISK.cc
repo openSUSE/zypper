@@ -78,14 +78,22 @@ namespace zypp {
 	ZYPP_THROW(MediaBadUrlEmptyFilesystemException(url()));
     
       Mount mount;
-      const char *mountpoint = attachPoint().asString().c_str();
+      std::string mountpoint = attachPoint().asString();
+      if( mountpoint.empty() || mountpoint == "/")
+      {
+	mountpoint = createAttachPoint().asString();
+	if( mountpoint.empty())
+	  ZYPP_THROW( MediaBadAttachPointException(url()));
+	setAttachPoint( mountpoint, true);
+      }
+
       string options = _url.getQueryParam("mountoptions");
       if(options.empty())
       {
     	options="ro";
       }
     
-      mount.mount(_device,mountpoint,_filesystem,options);
+      mount.mount(_device,mountpoint.c_str(),_filesystem,options);
     }
 
 

@@ -60,7 +60,7 @@ MediaHandler::MediaHandler ( const Url &      url_r,
 
     PathInfo adir( attach_point_r );
     // FIXME: verify if attach_point_r isn't a mountpoint of other device
-    if ( attach_point_r.asString() == "/" || !adir.isDir() ) {
+    if ( !adir.isDir() ) {
       ERR << "Provided attach point is not a directory: " << adir << endl;
     }
     else {

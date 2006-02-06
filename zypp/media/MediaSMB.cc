@@ -122,9 +122,17 @@ namespace zypp {
       if(next)
 	ZYPP_THROW(MediaNotSupportedException(_url));
     
-      const char *mountpoint = attachPoint().asString().c_str();
+      std::string mountpoint = attachPoint().asString();
+      if( mountpoint.empty() || mountpoint == "/")
+      {
+	mountpoint = createAttachPoint().asString();
+	if( mountpoint.empty())
+	  ZYPP_THROW( MediaBadAttachPointException(url()));
+	setAttachPoint( mountpoint, true);
+      }
+
       Mount mount;
-    
+ 
       string path = "//";
       path += _url.getHost() + "/" + getShare( _url.getPathName() );
    
@@ -199,7 +207,7 @@ namespace zypp {
       //
       //////////////////////////////////////////////////////
     
-      mount.mount( path, mountpoint, _vfstype,
+      mount.mount( path, mountpoint.c_str(), _vfstype,
 		   options.asString(), environment );
     }
 
