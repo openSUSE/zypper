@@ -148,6 +148,8 @@ namespace zypp
 	    progress.connect();
 
 	    try {
+		progress.tryLevel( target::rpm::InstallResolvableReport::RPM );
+		
 		rpm().installPackage(p->getPlainRpm(),
 		    p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : 0);
 	    }
@@ -156,6 +158,7 @@ namespace zypp
 
 		WAR << "Install failed, retrying with --nodeps" << endl;
 		try {
+		    progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS );
 		    rpm().installPackage(p->getPlainRpm(),
 			p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : rpm::RpmDb::RPMINST_NODEPS);
 		}
@@ -164,6 +167,7 @@ namespace zypp
 		    WAR << "Install failed again, retrying with --force --nodeps" << endl;
 
 		    try {
+			progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE );
 			rpm().installPackage(p->getPlainRpm(),
 			    p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : (rpm::RpmDb::RPMINST_NODEPS|rpm::RpmDb::RPMINST_FORCE));
 		    }

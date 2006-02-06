@@ -24,6 +24,7 @@ namespace zypp
 	RpmInstallPackageReceiver::RpmInstallPackageReceiver (Resolvable::constPtr res)
 	    : callback::ReceiveReport<rpm::RpmInstallReport> ()
 	    , _resolvable (res)
+	    , _level( target::rpm::InstallResolvableReport::RPM )
 	{
 	}
 
@@ -61,6 +62,7 @@ namespace zypp
 		_report->problem( _resolvable
 		    , rpm::InstallResolvableReport::INVALID
 		    , excpt_r.msg()
+		    , _level
 		);
 		
 	    switch (user) {
@@ -78,13 +80,18 @@ namespace zypp
         /** Finish operation in case of success */
         void RpmInstallPackageReceiver::finish()
 	{
-	    _report->finish( _resolvable, rpm::InstallResolvableReport::NO_ERROR, std::string() );
+	    _report->finish( _resolvable, rpm::InstallResolvableReport::NO_ERROR, std::string(), _level );
 	}
 
         /** Finish operation in case of success */
         void RpmInstallPackageReceiver::finish( Exception & excpt_r )
 	{
-	    _report->finish( _resolvable, rpm::InstallResolvableReport::INVALID, std::string() );
+	    _report->finish( _resolvable, rpm::InstallResolvableReport::INVALID, std::string(), _level );
+	}
+	
+	void RpmInstallPackageReceiver::tryLevel( target::rpm::InstallResolvableReport::RpmLevel level_r )
+	{
+	    _level = level_r;
 	}
 
     /////////////////////////////////////////////////////////////////

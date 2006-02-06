@@ -233,6 +233,13 @@ namespace zypp
 	  INVALID		// th resolvable is invalid
         };
       
+        // the level of RPM pushing
+        enum RpmLevel {
+            RPM,
+            RPM_NODEPS,
+            RPM_NODEPS_FORCE
+        };
+
         virtual void start(
 	  Resolvable::constPtr resolvable
         ) {}
@@ -243,13 +250,15 @@ namespace zypp
         virtual Action problem(
           Resolvable::constPtr resolvable
   	  , Error error
-  	 , std::string description
+  	  , std::string description
+	  , RpmLevel level
         ) { return ABORT; }
 
         virtual void finish(
           Resolvable::constPtr resolvable
           , Error error
 	  , std::string reason
+	  , RpmLevel level
         ) {}
       };
     
@@ -279,7 +288,7 @@ namespace zypp
         virtual Action problem(
           Resolvable::Ptr resolvable
   	  , Error error
-  	 , std::string description
+  	  , std::string description
         ) { return ABORT; }
 
         virtual void finish(
