@@ -37,29 +37,23 @@ namespace zypp
       typedef Selection ResType;
 
     public:
-      /** Ctor */
-      SelectionImplIf() : ResObjectImplIf ()
-      {}
-      /** Dtor. Makes this an abstract class. */
-      virtual ~SelectionImplIf() = 0;
-
-    public:
 
         /** */
-        virtual TranslatedText summary() const = 0;
+        virtual TranslatedText summary() const PURE_VIRTUAL;
 
         /** */
-        virtual TranslatedText description() const = 0;
+        virtual TranslatedText description() const PURE_VIRTUAL;
 
         /** */
-	virtual Label category() const = 0;
+	virtual Label category() const PURE_VIRTUAL;
 
         /** */
-	virtual bool visible() const = 0;
-    
+	virtual bool visible() const PURE_VIRTUAL;
+
         /** */
-	virtual Label order() const = 0;
+	virtual Label order() const PURE_VIRTUAL;
 #if 0
+        // NOTE LangCode id zypp:Locale
       virtual std::list<std::string> suggests() const;
       virtual std::list<std::string> recommends() const;
       virtual std::list<std::string> insnotify( const LangCode & lang = LangCode("") ) const;
@@ -82,11 +76,6 @@ namespace zypp
 #endif
     };
     ///////////////////////////////////////////////////////////////////
-
-    /* Implementation of pure virtual dtor is required! */
-    inline SelectionImplIf::~SelectionImplIf()
-    {}
-
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

@@ -83,9 +83,9 @@ namespace zypp
       std::list<std::string> _pkgrecommends;
       std::list<std::string> _pkgrequires;
       std::list<std::string> _supported_locales;
-      std::map< LanguageCode, std::list<std::string> > _insnotify;
-      std::map< LanguageCode, std::list<std::string> > _delnotify;
-      
+      std::map< Locale, std::list<std::string> > _insnotify;
+      std::map< Locale, std::list<std::string> > _delnotify;
+
     };
     ///////////////////////////////////////////////////////////////////
 

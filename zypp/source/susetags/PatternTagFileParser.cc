@@ -57,7 +57,7 @@ namespace zypp
       {
         if ( tag.name == "Sum" )
         {
-          selImpl->_summary.setText(tag.value, LanguageCode(tag.modifier));
+          selImpl->_summary.setText(tag.value, Locale(tag.modifier));
         }
         else if ( tag.name == "Ver" )
         {
@@ -87,7 +87,7 @@ namespace zypp
           selImpl->_order = tag.value;
         }
       }
-      
+
       void PatternTagFileParser::consume( const MultiTag &tag )
       {
         if ( tag.name == "Req" )

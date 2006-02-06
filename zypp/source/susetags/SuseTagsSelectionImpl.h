@@ -80,11 +80,11 @@ namespace zypp
       std::list<std::string> _provides;
       std::list<std::string> _obsoletes;
       std::list<std::string> _supported_locales;
-      std::map< LanguageCode, std::list<std::string> > _insnotify;
-      std::map< LanguageCode, std::list<std::string> > _delnotify;
-      std::map< LanguageCode, std::list<std::string> > _inspacks;
-      std::map< LanguageCode, std::list<std::string> > _delpacks;
-      
+      std::map< Locale, std::list<std::string> > _insnotify;
+      std::map< Locale, std::list<std::string> > _delnotify;
+      std::map< Locale, std::list<std::string> > _inspacks;
+      std::map< Locale, std::list<std::string> > _delpacks;
+
     };
     ///////////////////////////////////////////////////////////////////
 

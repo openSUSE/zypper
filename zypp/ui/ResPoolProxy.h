@@ -17,6 +17,7 @@
 #include "zypp/base/PtrTypes.h"
 
 #include "zypp/ResPool.h"
+#include "zypp/ui/Selectable.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

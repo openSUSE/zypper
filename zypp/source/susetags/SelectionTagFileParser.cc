@@ -57,7 +57,7 @@ namespace zypp
       {
 	if ( tag.name == "Sum" )
 	{
-	  selImpl->_summary.setText(tag.value, LanguageCode(tag.modifier));
+	  selImpl->_summary.setText(tag.value, Locale(tag.modifier));
 	}
 	else if ( tag.name == "Ver" )
 	{
@@ -87,7 +87,7 @@ namespace zypp
 	  selImpl->_order = tag.value;
 	}
       }
-      
+
       void SelectionTagFileParser::consume( const MultiTag &tag )
       {
 	if ( tag.name == "Req" )
@@ -112,7 +112,7 @@ namespace zypp
 	}
 	else if ( tag.name == "Ins" )
 	{
-	  selImpl->_inspacks[LanguageCode(tag.modifier)] = tag.values;
+	  selImpl->_inspacks[Locale(tag.modifier)] = tag.values;
 	}
       }
 
@@ -122,12 +122,12 @@ namespace zypp
 	CapFactory _f;
 	Dependencies _deps;
 
-	for (std::list<std::string>::const_iterator it = selImpl->_inspacks[LanguageCode()].begin(); it != selImpl->_inspacks[LanguageCode()].end(); it++)
+	for (std::list<std::string>::const_iterator it = selImpl->_inspacks[Locale()].begin(); it != selImpl->_inspacks[Locale()].end(); it++)
 	{
 	  Capability _cap = _f.parse( ResTraits<Package>::kind, *it);
 	  _deps[Dep::RECOMMENDS].insert(_cap);
 	}
-	
+
 	for (std::list<std::string>::const_iterator it = selImpl->_recommends.begin(); it != selImpl->_recommends.end(); it++)
 	{
 	  Capability _cap = _f.parse( ResTraits<Selection>::kind, *it );
