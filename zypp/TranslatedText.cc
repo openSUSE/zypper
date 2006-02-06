@@ -31,29 +31,29 @@ namespace zypp
     Impl()
     {}
 
-    Impl(const std::string &text, const LanguageCode &lang)
+    Impl(const std::string &text, const Locale &lang)
     { setText(text, lang); }
 
-    Impl(const std::list<std::string> &text, const LanguageCode &lang)
+    Impl(const std::list<std::string> &text, const Locale &lang)
     { setText(text, lang); }
 
-    std::string text( const LanguageCode &lang = LanguageCode() ) const
+    std::string text( const Locale &lang = Locale() ) const
     { return translations[lang]; }
 
-    void setText( const std::string &text, const LanguageCode &lang)
+    void setText( const std::string &text, const Locale &lang)
     { translations[lang] = text; }
 
-    void setText( const std::list<std::string> &text, const LanguageCode &lang)
+    void setText( const std::list<std::string> &text, const Locale &lang)
     { translations[lang] = str::join( text, "\n" ); }
 
     /** \todo Do it by accessing the global ZYpp. */
-    LanguageCode detectLanguage() const
+    Locale detectLanguage() const
     {
-      return LanguageCode();
+      return Locale();
     }
 
   private:
-    mutable std::map<LanguageCode, std::string> translations;
+    mutable std::map<Locale, std::string> translations;
 
   public:
     /** Offer default Impl. */
@@ -94,7 +94,7 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   TranslatedText::TranslatedText( const std::string &text,
-                                  const LanguageCode &lang )
+                                  const Locale &lang )
   : _pimpl( new Impl(text, lang) )
   {}
 
@@ -104,7 +104,7 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   TranslatedText::TranslatedText( const std::list<std::string> &text,
-                                  const LanguageCode &lang )
+                                  const Locale &lang )
   : _pimpl( new Impl(text, lang) )
   {}
 
@@ -122,16 +122,16 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  std::string TranslatedText::text( const LanguageCode &lang ) const
+  std::string TranslatedText::text( const Locale &lang ) const
   { return _pimpl->text( lang ); }
 
-  void TranslatedText::setText( const std::string &text, const LanguageCode &lang )
+  void TranslatedText::setText( const std::string &text, const Locale &lang )
   { _pimpl->setText( text, lang ); }
 
-  void TranslatedText::setText( const std::list<std::string> &text, const LanguageCode &lang )
+  void TranslatedText::setText( const std::list<std::string> &text, const Locale &lang )
   { _pimpl->setText( text, lang ); }
 
-  LanguageCode TranslatedText::detectLanguage() const
+  Locale TranslatedText::detectLanguage() const
   { return _pimpl->detectLanguage(); }
 
   /////////////////////////////////////////////////////////////////

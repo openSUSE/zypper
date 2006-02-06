@@ -18,7 +18,7 @@
 #include <string>
 
 #include "zypp/base/PtrTypes.h"
-#include "zypp/LanguageCode.h"
+#include "zypp/Locale.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -43,10 +43,10 @@ namespace zypp
     TranslatedText();
     /** Ctor \todo Make ctor it explicit */
     explicit
-    TranslatedText(const std::string &text, const LanguageCode &lang = LanguageCode());
+    TranslatedText(const std::string &text, const Locale &lang = Locale());
     /** Ctor. \todo Make ctor it explicit */
     explicit
-    TranslatedText(const std::list<std::string> &text, const LanguageCode &lang = LanguageCode());
+    TranslatedText(const std::list<std::string> &text, const Locale &lang = Locale());
     /** Dtor */
     ~TranslatedText();
 
@@ -65,15 +65,15 @@ namespace zypp
   public:
 
     /** Synonym for \ref text */
-    std::string asString( const LanguageCode &lang = LanguageCode() ) const
+    std::string asString( const Locale &lang = Locale() ) const
     { return text(lang); }
 
-    std::string text( const LanguageCode &lang = LanguageCode() ) const;
+    std::string text( const Locale &lang = Locale() ) const;
 
-    void setText( const std::string &text, const LanguageCode &lang = LanguageCode());
-    void setText( const std::list<std::string> &text, const LanguageCode &lang = LanguageCode());
+    void setText( const std::string &text, const Locale &lang = Locale());
+    void setText( const std::list<std::string> &text, const Locale &lang = Locale());
 
-    LanguageCode detectLanguage() const;
+    Locale detectLanguage() const;
 
   private:
     /** Pointer to implementation */
