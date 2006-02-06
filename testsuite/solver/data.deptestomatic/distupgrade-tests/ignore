@@ -1,2 +1,8 @@
 exercise-sles10-beta3-test.xml
 exercise-sles10-beta3-nodelete-test.xml
+rename-multiple-conflicting-test.xml
+rename-multiple-test.xml
+rename-single-test.xml
+unmaintained-single-test.xml
+upgrade-multiple-test.xml
+upgrade-single-test.xml
