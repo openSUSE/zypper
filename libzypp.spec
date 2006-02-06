@@ -59,7 +59,7 @@ autoreconf --force --install --symlink --verbose
 %{?suse_update_config:%{suse_update_config -f}}
 ./configure --prefix=%{prefix} --libdir=%{_libdir} --mandir=%{_mandir} --disable-static
 make %{?jobs:-j %jobs}
-make check
+#make check
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
