@@ -11,6 +11,8 @@ EXTRA_DIST = config/*.exp				\
 	    $(PACKAGE).test/*.exp			\
 	    data.deptestomatic/*-tests/*.xml		\
 	    data.deptestomatic/*-tests/*.solution	\
+	    data.deptestomatic/*-tests/ignore		\
+	    data.deptestomatic/*-tests/xfail		\
 	    data.deptestomatic/*-tests/README
 
 dist-local: clean-local
