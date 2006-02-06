@@ -24,7 +24,15 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 
+#include "zypp/Source.h"
+#include "zypp/SourceFactory.h"
+#include "zypp/SourceManager.h"
+#include "zypp/source/SourceImpl.h"
+
+#include "zypp/media/MediaManager.h"
+
 #include "DbSources.h"
+#include "DbSourceImpl.h"
 #include <sqlite3.h>
 
 using namespace std;
@@ -54,6 +62,9 @@ DbSources::sources (bool refresh)
 
     _sources.clear();
 
+    media::MediaManager mmgr;
+    media::MediaId mediaid = mmgr.open(Url("file://"));
+
     const char *query =
         "SELECT id, name, alias, description, priority, priority_unsubd "
         "FROM catalogs";
@@ -66,35 +77,35 @@ DbSources::sources (bool refresh)
     }
 
     while ((rc = sqlite3_step (handle)) == SQLITE_ROW) {
-	MIL << "id " << (const char *) sqlite3_column_text (handle, 0)
-	    << "name " << (const char *) sqlite3_column_text (handle, 1)
-	    << "alias " << (const char *) sqlite3_column_text (handle, 2)
-	    << "desc " << (const char *) sqlite3_column_text (handle, 3)
-	    << "prio " << sqlite3_column_int (handle, 4)
-	    << "pr. un" << sqlite3_column_int (handle, 5)
-	    << endl;
+	string id ((const char *) sqlite3_column_text (handle, 0));
+	string name ((const char *) sqlite3_column_text (handle, 1));
+        string alias ((const char *) sqlite3_column_text (handle, 2));
+        string desc ((const char *) sqlite3_column_text (handle, 3));
+	unsigned priority = sqlite3_column_int (handle, 4);
+	unsigned priority_unsub = sqlite3_column_int (handle, 5);
 
+	MIL << "id " << id
+	    << ", name " << name
+	    << ", alias " << alias
+	    << ", desc " << desc
+	    << ", prio " << priority
+	    << ", pr. un" << priority_unsub
+	    << endl;
 #if 0
+
 	try {
 
-	    media::MediaManager mmgr;
-	    media::MediaId mediaid = mmgr.open(Url("file://"));
-	    Source_Ref::Impl_Ptr impl = new HelixSourceImpl (mediaid, pathname, alias);
+	    Source_Ref::Impl_Ptr impl = new DbSourceImpl (mediaid, pathname, alias);
+	    impl->setId( id );
+	    impl->setName( name );
+	    impl->setPriority( priority );
+	    impl->setPriorityUnsubscribed( priority_unsub );
 	    SourceFactory _f;
 	    Source_Ref s = _f.createFrom( impl );
 	}
 	catch (Exception & excpt_r) {
 	    ZYPP_CAUGHT(excpt_r);
 	}
-
-        ch = rc_channel_new ((const char *) sqlite3_column_text (handle, 0),
-                             (const char *) sqlite3_column_text (handle, 1),
-                             (const char *) sqlite3_column_text (handle, 2),
-                             (const char *) sqlite3_column_text (handle, 3));
-        rc_channel_set_priorities (ch,
-                                   sqlite3_column_int (handle, 4),
-                                   sqlite3_column_int (handle, 5));
-
         if (!strcmp (rc_channel_get_id (ch), "@system")) {
             rc_channel_set_system (ch);
             rc_channel_set_hidden (ch);

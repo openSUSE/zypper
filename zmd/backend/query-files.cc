@@ -23,12 +23,12 @@ static ResolvableList
 query_file (Target_Ptr target, const char *path)
 {
     ResolvableList resolvables;
-
-    Resolvable::constPtr resolvable = target->whoOwnsFile (path);
+#if 0
+    Resolvable::constPtr resolvable = target->rpm-qp (path);	// FIXME, needs rpm -qp
     if (resolvable != NULL) {
 	resolvables.push_back (resolvable);
     }
-
+#endif
     return resolvables;
 }
 
@@ -164,7 +164,7 @@ main (int argc, char **argv)
 
     ResolvableList resolvables = query (God->target(), argv[2], argc == 4 ? argv[3] : NULL);
     if (!resolvables.empty()) {
-	write_resolvables_to_db (argv[1], resolvables, true);
+//	write_resolvables_to_db (argv[1], resolvables, true);
     }
 
     return 0;
