@@ -45,7 +45,7 @@ namespace zypp
       {
         for ( unsigned int k=0; k < what.size(); k++)
         {
-          XXX << "[match "<< k << "] [" << what[k] << "]" << std::endl; 
+          XXX << "[match "<< k << "] [" << what[k] << "]" << std::endl;
         }
       }
 
@@ -64,7 +64,7 @@ namespace zypp
       void TagFileParser::consume( const SingleTag &tag )
       {
       }
-      
+
       void TagFileParser::consume( const MultiTag &tag )
       {
       }
@@ -78,6 +78,12 @@ namespace zypp
       {
         std::ifstream file(file_r.asString().c_str());
 
+        boost::regex rxComment("^[[:space:]]*#(.*)$");
+        boost::regex rxMStart("^\\+([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:$");
+        boost::regex rxMEnd("^\\-([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:$");
+        boost::regex rxSStart("^=([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:[[:space:]]+(.*)$");
+        boost::regex rxEmpty("^([[:space:]]*)$");
+
 	if (!file) {
 	    ZYPP_THROW (ParseException( "Can't open " + file_r.asString() ) );
 	}
@@ -90,14 +96,14 @@ namespace zypp
         {
           getline(file, buffer);
           boost::smatch what;
-          if(boost::regex_match(buffer, what, boost::regex("^#(.*)$"), boost::match_extra))
+          if(boost::regex_match(buffer, what, rxComment, boost::match_extra))
           {
             XXX << "comment" << std::endl;
             // comment # something
             // str::strtonum(buffer, entry_r.count);
             dumpRegexpResults(what);
           }
-          else if(boost::regex_match(buffer, what, boost::regex("^\\+([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:$"), boost::match_extra))
+          else if(boost::regex_match(buffer, what, rxMStart, boost::match_extra))
           {
             MultiTag tag;
             tag.name = what[1];
@@ -112,7 +118,7 @@ namespace zypp
             boost::smatch element_what;
             getline(file, element);
             // while we dont find the list terminator
-            while( ! boost::regex_match(element, element_what, boost::regex("^\\-([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:$"), boost::match_extra))
+            while( ! boost::regex_match(element, element_what, rxMEnd, boost::match_extra))
             {
               tag.values.push_back(element);
               XXX << element << std::endl;
@@ -123,7 +129,7 @@ namespace zypp
             consume(tag);
             // end of list
           }
-          else if(boost::regex_match(buffer, what, boost::regex("^=([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:[[:space:]]+(.*)$"), boost::match_extra))
+          else if(boost::regex_match(buffer, what, rxSStart, boost::match_extra))
           {
             SingleTag tag;
             tag.name = what[1];
@@ -135,7 +141,7 @@ namespace zypp
             dumpRegexpResults(what);
             consume(tag);
           }
-          else if(boost::regex_match(buffer, what, boost::regex("^([[:space:]]*)$"), boost::match_extra))
+          else if(boost::regex_match(buffer, what, rxEmpty, boost::match_extra))
           {
             XXX << "empty line" << std::endl;
           }
