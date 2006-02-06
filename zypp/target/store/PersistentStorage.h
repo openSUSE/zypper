@@ -50,7 +50,7 @@ namespace zypp
           enabled = false;
           autorefresh = false;
         };
-
+       
         bool enabled;
         bool autorefresh;
         std::string product_dir;

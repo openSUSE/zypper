@@ -3,6 +3,8 @@
 
 SUBDIRS =
 
+INCLUDES = -I$(oldincludedir)/libxml2 -I..
+
 ## ##################################################
 
 targetxmlincludedir = $(pkgincludedir)/target/store/xml
@@ -13,7 +15,8 @@ targetxmlinclude_HEADERS =		\
 	XMLScriptImpl.h \
 	XMLSelectionImpl.h \
 	XMLPatternImpl.h \
-	XMLProductImpl.h
+	XMLProductImpl.h \
+	XMLSourceCacheParser.h
 
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_target_xml.la
@@ -26,6 +29,7 @@ lib@PACKAGE@_target_xml_la_SOURCES = \
 	XMLScriptImpl.cc \
 	XMLSelectionImpl.cc \
 	XMLPatternImpl.cc \
-	XMLProductImpl.cc
+	XMLProductImpl.cc \
+	XMLSourceCacheParser.cc
 
 ## ##################################################

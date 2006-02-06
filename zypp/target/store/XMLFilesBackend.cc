@@ -33,6 +33,8 @@
 
 #include <list>
 
+#include <zypp/target/store/xml/XMLSourceCacheParser.h>
+
 #include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
 #include "boost/filesystem/fstream.hpp"    // ditto
 
@@ -619,8 +621,13 @@ XMLFilesBackend::storedSources() const
   {
     DBG << "[source-cache] - " << dir_itr->leaf() << std::endl;
     //sources.insert( sourceDataFromCacheFile( source_p + "/" + dir_itr->leaf() ) );
-    PersistentStorage::SourceData data;
-    sources.push_back(data);
+    std::string full_path = (source_p / dir_itr->leaf()).string();
+    std::ifstream anIstream(full_path.c_str());
+    XMLSourceCacheParser iter(anIstream, "");
+    for (; ! iter.atEnd(); ++iter) {
+      PersistentStorage::SourceData data = **iter;
+      sources.push_back(data);
+    }
   }
   MIL << "done reading source cache" << std::endl;
   return sources;
