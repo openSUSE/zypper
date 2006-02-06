@@ -75,9 +75,15 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     CapSet _extra_caps;
     CapSet _extra_conflicts;
 
+    //typedef std::map<PoolItem_Ref,Capability> IgnoreMap;
+
+    // These conflict should be ignored of the concering item
     IgnoreMap _ignoreConflicts;
+    // These conflict should be ignored of the concering item    
     IgnoreMap _ignoreRequires;
+    // Ignore architecture of the item
     PoolItemList _ignoreArchitecture;
+    // Ignore the status "installed" of the item
     PoolItemList _ignoreInstalledItem;    
 
     ResolverQueueList _pending_queues;
