@@ -278,7 +278,7 @@ DbSourceImpl::createDependencies (sqlite_int64 resolvable_id)
 	}
 	catch ( Exception & excpt_r ) {
 	    ERR << "Can't parse dependencies for resolvable_id " << resolvable_id << ", name " << name << endl;
-	    ZYPP_RETHROW( excpt_r );
+	    ZYPP_CAUGHT( excpt_r );
 	}
     }
 
