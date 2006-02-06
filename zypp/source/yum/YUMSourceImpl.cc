@@ -46,22 +46,19 @@ namespace zypp
       //
       ///////////////////////////////////////////////////////////////////
 
-      /** Default ctor
-      */
-      YUMSourceImpl::YUMSourceImpl(media::MediaId & media_r,
-				   const Pathname & path_r,
-				   const std::string & alias_r,
-				   const Pathname cache_dir_r)
-      : SourceImpl(media_r, path_r, alias_r, cache_dir_r)
+      YUMSourceImpl::YUMSourceImpl()
+      {}
+
+      void YUMSourceImpl::factoryInit()
       {
         try {
-	
+
 	  media::MediaManager media_mgr;
 
 	  MIL << "Adding no media verifier" << endl;
-	  	
-	  media_mgr.delVerifier(media_r);
-	  media_mgr.addVerifier(media_r, media::MediaVerifierRef(new media::NoVerifier()));
+
+	  media_mgr.delVerifier(_media);
+	  media_mgr.addVerifier(_media, media::MediaVerifierRef(new media::NoVerifier()));
         }
         catch (const Exception & excpt_r)
         {
@@ -69,10 +66,10 @@ namespace zypp
 	  ZYPP_CAUGHT(excpt_r);
 	  WAR << "Verifier not found" << endl;
         }
-       
+
        try {
-       
-        
+
+
 	// first read list of all files in the repository
 	Pathname filename;
 	if (_cache_dir.empty())
@@ -88,7 +85,7 @@ namespace zypp
 	{
 	  filename = _cache_dir + "/repomd.xml";
 	}
-	
+
 	DBG << "Reading file " << filename << endl;
 	ifstream repo_st(filename.asString().c_str());
 	YUMRepomdParser repomd(repo_st, "");
@@ -120,7 +117,7 @@ INT << "Storing data to cache" << endl;
 	  filesystem::copy(src, dst);
 	}
       }
-  
+
       void YUMSourceImpl::createResolvables(Source_Ref source_r)
       {
        std::list<YUMRepomdData_Ptr> repo_primary;

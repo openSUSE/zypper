@@ -36,20 +36,46 @@ namespace zypp
     //	METHOD NAME : SourceImpl::SourceImpl
     //	METHOD TYPE : Ctor
     //
-    SourceImpl::SourceImpl(media::MediaId & media_r,
-                           const Pathname & path_r,
-			   const std::string & alias_r,
-			   const Pathname cache_dir_r)
-    : _media(media_r)
-    , _path(path_r)
-    , _enabled(true)
-    , _alias (alias_r)
-    , _cache_dir(cache_dir_r)
+    SourceImpl::SourceImpl()
+    : _enabled(true)
     , _priority (0)
     , _priority_unsubscribed (0)
     , _res_store_initialized(false)
     {
     }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : SourceImpl::factoryCtor
+    //	METHOD TYPE : void
+    //
+    void SourceImpl::factoryCtor( const media::MediaId & media_r,
+                                  const Pathname & path_r,
+                                  const std::string & alias_r,
+                                  const Pathname cache_dir_r )
+    {
+      _media     = media_r;
+      _path      = path_r;
+      _alias     = alias_r;
+      _cache_dir = cache_dir_r;
+      try
+        {
+          factoryInit();
+        }
+      catch ( Exception & excpt )
+        {
+          _store.clear();
+          ZYPP_RETHROW( excpt );
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : SourceImpl::factoryInit
+    //	METHOD TYPE : void
+    //
+    void SourceImpl::factoryInit()
+    {}
 
     ///////////////////////////////////////////////////////////////////
     //

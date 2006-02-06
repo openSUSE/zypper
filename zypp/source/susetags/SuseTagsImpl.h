@@ -40,11 +40,15 @@ namespace zypp
         typedef intrusive_ptr<const SuseTagsImpl> constPtr;
 
       public:
-        /** Factory ctor */
-        SuseTagsImpl( media::MediaId & media_r, const Pathname & path_r = "/", const std::string & alias_r = "");
+        /** Default Ctor.
+         * Just initilizes data members. Metadata retrieval
+         * is delayed untill \ref factoryInit.
+        */
+        SuseTagsImpl();
         /** Dtor */
         ~SuseTagsImpl();
 
+      public:
 	virtual void createResolvables(Source_Ref source_r);
 
 	Pathname sourceDir( const NVRAD& nvrad );
@@ -52,6 +56,13 @@ namespace zypp
       protected:
         /** Stream output. */
         virtual std::ostream & dumpOn( std::ostream & str ) const;
+
+      private:
+        /** Ctor substitute.
+         * Actually get the metadata.
+         * \throw EXCEPTION on fail
+        */
+        virtual void factoryInit();
       };
       ///////////////////////////////////////////////////////////////////
 

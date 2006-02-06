@@ -33,16 +33,24 @@ media::MediaManager media_mgr;
   //
   //	CLASS NAME : SourceFactory::Impl
   //
-  /** Currently not used: SourceFactory implementation. */
+  /** SourceFactory implementation. */
   struct SourceFactory::Impl
   {
-  public:
-    /** Offer default Impl. */
-    static shared_ptr<Impl> nullimpl()
-    {
-      static shared_ptr<Impl> _nullimpl( new Impl );
-      return _nullimpl;
-    }
+    /** Try to create a \a _SourceImpl kind of Source.
+     * \throw EXCEPTION if creation fails
+    */
+    template<class _SourceImpl>
+      static Source_Ref::Impl_Ptr createSourceImpl( const media::MediaId & media_r,
+                                                    const Pathname & path_r,
+                                                    const std::string & alias_r,
+                                                    const Pathname & cache_dir_r )
+      {
+        Source_Ref::Impl_Ptr impl( new _SourceImpl );
+        impl->factoryCtor( media_r, path_r, alias_r, cache_dir_r );
+        return impl;
+      }
+
+
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -75,10 +83,7 @@ media::MediaManager media_mgr;
   //
   Source_Ref SourceFactory::createFrom( const Source_Ref::Impl_Ptr & impl_r )
   {
-    if ( ! impl_r )
-      ZYPP_THROW( Exception("NULL implementation passed to SourceFactory") );
-
-    return Source_Ref( impl_r );
+    return impl_r ? Source_Ref( impl_r ) : Source_Ref::noSource;
   }
 
   void SourceFactory::listProducts( const Url & url_r, ProductSet & products_r )
@@ -103,14 +108,14 @@ media::MediaManager media_mgr;
 
     // open the media
     media::MediaId id = media_mgr.open(url_r);
-    
+
     // add dummy verifier
     media_mgr.addVerifier(id, media::MediaVerifierRef(new media::NoVerifier()));
     media_mgr.attach(id);
     try
     {
       MIL << "Trying the YUM source" << endl;
-      Source_Ref::Impl_Ptr impl = new yum::YUMSourceImpl(id, path_r, alias_r, cache_dir_r);
+      Source_Ref::Impl_Ptr impl( Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r) );
       MIL << "Found the YUM source" << endl;
       return Source_Ref(impl);
     }
@@ -123,7 +128,7 @@ media::MediaManager media_mgr;
     {
       MIL << "Trying the SUSE tags source" << endl;
 #warning TODO pass cache_dir_r once constructor adapted
-      Source_Ref::Impl_Ptr impl = new susetags::SuseTagsImpl(id, path_r, alias_r);
+      Source_Ref::Impl_Ptr impl( Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r) );
       MIL << "Found the SUSE tags source" << endl;
       return Source_Ref(impl);
     }

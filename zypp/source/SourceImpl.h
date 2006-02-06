@@ -40,14 +40,35 @@ namespace zypp
     //
     /** Base class for concrete Source implementations.
      *
-     * Constructed by \ref SourceFactory. Public access via \ref Source
-     * interface.
+     * Public access via \ref Source interface.
+     *
+     * Constructed by \ref SourceFactory, via default ctor to
+     * create the object, followed by a call to \ref factoryCtor.
+     * \ref factoryCtor initializes the remaining data members and
+     * calls \ref factoryInit to let implementations actually retrieve
+     * the metadata.
     */
     class SourceImpl : public base::ReferenceCounted, private base::NonCopyable
     {
       friend std::ostream & operator<<( std::ostream & str, const SourceImpl & obj );
 
     public:
+      /** Ctor substitute.
+       * Called by SourceFactory to initialize the Source. Actions performed
+       * are too complex for a real ctor. So factoryCtor initializes the
+       * appropriate data members and then calls \ref factoryInit to
+       * launch the Source.
+       *
+       * Common cleanup in case \ref factoryInit throws:
+       * \li clear _store
+       *
+       * \throw EXCEPTION on fail
+      */
+      void factoryCtor( const media::MediaId & media_r,
+                        const Pathname & path_r = "/",
+                        const std::string & alias_r = "",
+                        const Pathname cache_dir_r = "");
+
       /** SourceImpl MediaVerifier. */
       class Verifier;
 
@@ -114,7 +135,7 @@ namespace zypp
       virtual void setZmdDescription (const std::string desc_r);
 
     protected:
-      /** Provide Source_Ref to \c this. */
+      /** Provide Source_Ref back to \c this. */
       Source_Ref selfSourceRef()
       { return Source_Ref( this ); }
 
@@ -140,14 +161,27 @@ namespace zypp
       unsigned _priority_unsubscribed;
 
       ///////////////////////////////////////////////////////////////////
-      // no playgroung below this line ;)
+      // no playground below this line ;)
       ///////////////////////////////////////////////////////////////////
     protected:
-      /** Ctor. */
-      SourceImpl(media::MediaId & media_r,
-                 const Pathname & path_r = "/",
-		 const std::string & alias = "",
-		 const Pathname cache_dir_r = "");
+    protected:
+      /** Default Ctor.
+       * Just create the object and prepare the data members. Then wait
+       * for the \ref factoryCtor call to launch the Source.
+      */
+      SourceImpl();
+
+      /** Ctor substitute invoked by \ref factoryCtor.
+       * Derived implementations use this to load the
+       * metadata.
+       *
+       * Baseclass implementation could do tasks which are
+       * common to all sources.
+       *
+       * \throw EXCEPTION on fail
+      */
+      virtual void factoryInit();
+
       /** Dtor. */
       virtual ~SourceImpl();
 
@@ -161,8 +195,11 @@ namespace zypp
       bool _res_store_initialized;
 
     private:
+      /** Helper indicating creation of nullimpl. */
+      struct null {};
+
       /** Ctor, excl. for nullimpl only. */
-      SourceImpl()
+      SourceImpl( const null & )
       : _res_store_initialized(true)
       {}
 
@@ -170,7 +207,7 @@ namespace zypp
       /** Offer default Impl. */
       static SourceImpl_Ptr nullimpl()
       {
-        static SourceImpl_Ptr _nullimpl( new SourceImpl );
+        static SourceImpl_Ptr _nullimpl( new SourceImpl( null() ) );
         return _nullimpl;
       }
 

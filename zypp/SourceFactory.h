@@ -46,11 +46,11 @@ namespace zypp
 
   public:
     /** Construct source from an implementation.
-     * \throw EXCEPTION on NULL \a impl_r
+     * Returns Source_Ref::noSource on NULL \a impl_r.
     */
     Source_Ref createFrom( const Source_Ref::Impl_Ptr & impl_r );
 
-    /** Construct source from an implementation.
+    /** Construct source.
      * \throw EXCEPTION on fail
     */
     Source_Ref createFrom( const Url & url_r, const Pathname & path_r = "/", const std::string & alias_r = "", const Pathname & cache_dir_r = "" );

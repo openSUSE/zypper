@@ -42,8 +42,13 @@ namespace zypp
       class YUMSourceImpl : public SourceImpl
       {
       public:
-        /** Factory ctor */
-        YUMSourceImpl(media::MediaId & media_r, const Pathname & path_r = "/", const std::string & alias_r = "", const Pathname cache_dir_r = "/");
+        /** Default Ctor.
+         * Just initilizes data members. Metadata retrieval
+         * is delayed untill \ref factoryInit.
+        */
+        YUMSourceImpl();
+
+      public:
 
         virtual void storeMetadata(const Pathname & cache_dir_r);
 
@@ -100,6 +105,13 @@ namespace zypp
 
 	Capability createCapability(const YUMDependency & dep,
 				    const Resolvable::Kind & my_kind);
+      private:
+        /** Ctor substitute.
+         * Actually get the metadata.
+         * \throw EXCEPTION on fail
+        */
+        virtual void factoryInit();
+
       private:
 
 	std::list<Pathname> _metadata_files;
