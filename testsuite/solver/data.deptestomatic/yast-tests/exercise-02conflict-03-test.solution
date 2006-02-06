@@ -4,6 +4,3 @@
 >!> remove  foo-1.0-1
 >!> |unflag foo-2.0-1[test]
 >!> installs=1, upgrades=0, uninstalls=1
->!> Solution #2:
->!> This solution is a duplicate.
->!> installs=1, upgrades=0, uninstalls=1
