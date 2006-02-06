@@ -9,7 +9,7 @@ if BUILD_ZMD
 else
   SUB_ZMD=
 endif
-SUBDIRS = doc zypp testsuite $(SUB_ZMD)
+SUBDIRS = doc po zypp testsuite $(SUB_ZMD)
 
 ## ##################################################
 
