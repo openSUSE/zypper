@@ -112,6 +112,7 @@ public:
   protected:
   std::string randomString(int length) const;
   int random() const;
+
   
   /**
     * Directory where the xml file is stored (for the given resolvable)

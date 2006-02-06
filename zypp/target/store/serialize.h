@@ -29,12 +29,6 @@
 #include <zypp/Edition.h>
 #include <zypp/CapSet.h>
 
-//#include <zypp/detail/PackageImpl.h>
-//#include <zypp/detail/ScriptImpl.h>
-//#include <zypp/detail/MessageImpl.h>
-//#include <zypp/detail/PatchImpl.h>
-//#include <zypp/detail/ScriptImpl.h>
-//#include <zypp/detail/ResolvableImpl.h>
 
 #include <zypp/Capability.h>
 //#include <zypp/capability/CapabilityImpl.h>
@@ -108,10 +102,13 @@ std::string toXML( const Selection::constPtr &obj );
 template<> // or constPtr?
 std::string toXML( const Product::constPtr &obj );
 
+template<>
+std::string toXML( const PersistentStorage::SourceData &obj );
+
 /////////////////////////////////////////////////////////////////
-} // namespace devel.dmacvicar
+} // namespace storage
 	///////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-} // namespace devel
+} // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // DEVEL_DEVEL_DMACVICAR_SQLITEBACKEND_H
