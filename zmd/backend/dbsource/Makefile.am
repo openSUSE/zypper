@@ -10,8 +10,9 @@ INCLUDES = 					\
 LDADD =	$(noinst_LTLIBRARIES) $(top_srcdir)/zypp/lib@PACKAGE@.la
 
 noinst_HEADERS = \
-	DbSources.h
-
+	DbSources.h	\
+	DbSourceImpl.h
+	
 noinst_LTLIBRARIES =	lib@PACKAGE@_dbsource.la
 
 lib@PACKAGE@_dbsource_la_SOURCES =			\
