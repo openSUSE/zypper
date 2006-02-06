@@ -21,4 +21,4 @@ package: dist
 #ACLOCAL_AMFLAGS = -I m4
 ACLOCAL_AMFLAGS =
 
-EXTRA_DIST = config.rpath mkinstalldirs
+#EXTRA_DIST = config.rpath mkinstalldirs
