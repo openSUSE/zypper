@@ -280,23 +280,30 @@ Resolver::verifySystem (void)
 static void
 solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
 {
-    _DEBUG("solution_to_pool(" << item << ", " << status << ")");
+    bool r;
 
     if (status.isToBeInstalled()) {
-	item.status().setToBeInstalled(ResStatus::SOLVER);
+	r = item.status().setToBeInstalled(ResStatus::SOLVER);
+	_DEBUG("solution_to_pool(" << item << ", " << status << ") install !" << r);
     }
     else if (status.isToBeUninstalled()) {
-	item.status().setToBeUninstalled(ResStatus::SOLVER);
+	r = item.status().setToBeUninstalled(ResStatus::SOLVER);
+	_DEBUG("solution_to_pool(" << item << ", " << status << ") remove !" << r);
     }
     else if (status.isIncomplete()
 	     || status.isNeeded()) {
-	item.status().setIncomplete();
+	r = item.status().setIncomplete();
+	_DEBUG("solution_to_pool(" << item << ", " << status << ") incomplete !" << r);
     }
     else if (status.isUnneeded()) {
-	item.status().setUnneeded();
+	r = item.status().setUnneeded();
+	_DEBUG("solution_to_pool(" << item << ", " << status << ") unneeded !" << r);
     }
     else if (status.isSatisfied()) {
-	item.status().setSatisfied();
+	r = item.status().setSatisfied();
+	_DEBUG("solution_to_pool(" << item << ", " << status << ") satisfied !" << r);
+    } else {
+	_DEBUG("solution_to_pool(" << item << ", " << status << ") unchanged !");
     }
     return;
 }
