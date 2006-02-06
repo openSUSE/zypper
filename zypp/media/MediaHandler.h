@@ -18,13 +18,16 @@
 
 #include "zypp/Pathname.h"
 #include "zypp/PathInfo.h"
+#include "zypp/base/PtrTypes.h"
 
 #include "zypp/Url.h"
 
-#include "zypp/media/MediaAccess.h"
+#include "zypp/media/MediaSource.h"
+#include "zypp/media/MediaException.h"
 
 namespace zypp {
   namespace media {
+
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -45,23 +48,37 @@ class MediaHandler {
 	typedef shared_ptr<const MediaHandler> constPtr;
 
     private:
+        /**
+	 * MediaAccess (MediaManager) needs access to the
+	 * attachedMedia() function to deliver a shared
+	 * media source and its attach point to other
+	 * media handler instances.
+	 */
+	friend class MediaAccess;
+
+	/**
+	 * Returns the attached media. Used by MediaManager
+	 * to find other handlers using the same source.
+	 */
+	AttachedMedia        attachedMedia() const;
 
 	/**
 	 * this is where the media will be actually "mounted"
 	 * all files are provided 'below' this directory.
 	 **/
-	Pathname _attachPoint;
+	AttachPointRef _attachPoint;
 
 	/**
-	 * If a default attach point was created, it has to be
-	 * removed on destuction.
-	 **/
-	bool _tmp_attachPoint;
+	 * The relative root directory of the data on the media.
+	 * See also _localRoot and urlpath_below_attachpoint_r
+	 * constructor argument.
+	 */
+	Pathname _relativeRoot;
 
 	/**
 	 * The local directory that corresponds to the media url.
 	 * With NFS it's the '_attachPoint', as the directory on the
-	 * server is mounted. With CD/DVD it's 'attach point+_url.path()'
+	 * server is mounted. With CD/DVD it's 'attach point+_relativeRoot'
 	 * because the CDs root directory is mounted. And with CIFS
 	 * it's '_url.path() without the shares name'.
 	 **/
@@ -79,6 +96,11 @@ class MediaHandler {
 	bool _isAttached;
 
     protected:
+    	// FIXME: private...?
+	/**
+	 * The attached media source.
+	 */
+        MediaSourceRef _mediaSource;
 
         /**
 	 * Url to handle
@@ -86,9 +108,37 @@ class MediaHandler {
 	const Url _url;
 
         /**
-	 * Attachpoint to use
+	 * Return the currently used attach point.
 	 **/
-	const Pathname & attachPoint() const { return _attachPoint; }
+	Pathname         attachPoint() const;
+
+	/**
+	 * Set a new attach point and update localRoot.
+	 */
+	void             setAttachPoint(const Pathname &path, bool _temporary);
+
+	/**
+	 * Set a (shared) attach point and update localRoot.
+	 */
+	void             setAttachPoint(const AttachPointRef &ref);
+
+	/**
+	 * Try to create a default / temporary attach point.
+	 * \return The name of the new attach point or empty path name.
+	 */
+	Pathname         createAttachPoint() const;
+
+	/**
+	 * Remove unused attach point.
+	 */
+	void             removeAttachPoint();
+
+	/**
+	 * Ask the media manager if specified media source
+	 * is already attached.
+	 */
+	AttachedMedia
+	findAttachedMedia(const MediaSourceRef &media) const;
 
     protected:
 
@@ -131,7 +181,9 @@ class MediaHandler {
 
 	/**
 	 * Call concrete handler to release the media.
-	 * If eject is true, physically eject the media (i.e. CD-ROM).
+	 *
+	 * If eject is true, and the media is used in one handler
+	 * instance only, physically eject the media (i.e. CD-ROM).
 	 *
 	 * Asserted that media is attached.
 	 *
@@ -273,6 +325,7 @@ class MediaHandler {
 	virtual ~MediaHandler();
 
     public:
+
 
         ///////////////////////////////////////////////////////////////////
         //

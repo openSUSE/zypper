@@ -12,11 +12,14 @@
 #ifndef ZYPP_MEDIA_MEDIAMANAGER_H
 #define ZYPP_MEDIA_MEDIAMANAGER_H
 
-#include "zypp/media/MediaAccess.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/Pathname.h"
-#include "zypp/Url.h"
+#include <zypp/media/MediaAccess.h>
+
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/Pathname.h>
+#include <zypp/Url.h>
+
+#include <list>
 
 
 //////////////////////////////////////////////////////////////////////
@@ -27,9 +30,12 @@ namespace zypp
   namespace media
   { //////////////////////////////////////////////////////////////////
 
+
+    ///////////////////////////////////////////////////////////////////
     typedef zypp::RW_pointer<MediaAccess> MediaAccessRef;
     typedef unsigned int                  MediaId;
     typedef unsigned int                  MediaNr;
+
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -78,8 +84,8 @@ namespace zypp
       {}
 
       /*
-      ** Check if the specified attached media contains
-      ** the desired media number (e.g. SLES10 CD1). Always return true.
+      ** Don't check if the specified attached media contains
+      ** the desired media number. Always return true.
       */
       virtual bool
       isDesiredMedia(const MediaAccessRef &ref, MediaNr mediaNr)
@@ -286,6 +292,13 @@ namespace zypp
       void dirInfo(MediaId mediaId,
                    filesystem::DirContent & retlist,
                    const Pathname & dirname, bool dots = true ) const;
+
+
+    private:
+      friend class MediaHandler;
+
+      AttachedMedia
+      findAttachedMedia(const MediaSourceRef &media) const;
 
     private:
       class  Impl;

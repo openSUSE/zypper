@@ -11,7 +11,7 @@
 */
 #include <zypp/media/MediaException.h>
 #include <zypp/media/MediaManager.h>
-//#include <zypp/media/Mount.h>
+#include <zypp/media/Mount.h>
 //#include <zypp/media/Hal.h>
 #include <zypp/thread/Mutex.h>
 #include <zypp/thread/MutexLock.h>
@@ -55,14 +55,12 @@ namespace zypp
     //////////////////////////////////////////////////////////////////
 
 
-    // ---------------------------------------------------------------
+    //////////////////////////////////////////////////////////////////
     class MediaManager::Impl
     {
     private:
-    /*
       time_t       mtab_mtime;
       MountEntries mtab_table;
-    */
       MediaId      last_mediaid;
 
     public:
@@ -70,8 +68,8 @@ namespace zypp
       MediaAccMap  mediaAccMap;
 
       Impl()
-        : /* mtab_mtime(0)
-        , */ last_mediaid(0)
+        : mtab_mtime(0)
+        , last_mediaid(0)
       {}
 
       ~Impl()
@@ -80,7 +78,7 @@ namespace zypp
       MediaId
       nextMediaId()
       {
-        return last_mediaid++;
+        return ++last_mediaid;
       }
 
       bool hasMediaAcc(MediaId mediaId) const
@@ -93,7 +91,6 @@ namespace zypp
         return mediaVfyMap.find(mediaId) != mediaVfyMap.end();
       }
 
-      /*
       MountEntries
       getMountEntries()
       {
@@ -104,19 +101,18 @@ namespace zypp
         }
         return mtab_table;
       }
-      */
     };
 
 
-    // ---------------------------------------------------------------
+    //////////////////////////////////////////////////////////////////
     // STATIC
     zypp::RW_pointer<MediaManager::Impl> MediaManager::m_impl(NULL);
 
 
-    // ---------------------------------------------------------------
+    //////////////////////////////////////////////////////////////////
     MediaManager::MediaManager()
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
       if( !m_impl)
       {
         m_impl.reset( new MediaManager::Impl());
@@ -132,20 +128,7 @@ namespace zypp
     MediaId
     MediaManager::open(const Url &url, const Pathname &preferred_attach_point)
     {
-      MutexLock lock(g_Mutex);
-
-      // check if we already have this url
-      MediaAccMap::const_iterator a(m_impl->mediaAccMap.begin());
-      for( ; a != m_impl->mediaAccMap.end(); ++a)
-      {
-        // FIXME: not sufficient. each handler should provide
-        //        method to compare its type of media url
-        //        and MediaAccess to choose right handler...
-        if( a->second->url().asString() == url.asString())
-        {
-          return a->first;
-        }
-      }
+      MutexLock glock(g_Mutex);
 
       // create new access handler for it
       MediaAccessRef accRef( new MediaAccess());
@@ -155,7 +138,7 @@ namespace zypp
       MediaId nextId = m_impl->nextMediaId();
 
       m_impl->mediaAccMap[nextId] = accRef;
-
+      DBG << "Opened new media access using id " << nextId << std::endl;
       return nextId;
     }
 
@@ -163,7 +146,7 @@ namespace zypp
     void
     MediaManager::close(MediaId mediaId)
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !m_impl->hasMediaAcc( mediaId))
         ZYPP_THROW(MediaException("Invalid media id"));
@@ -179,7 +162,7 @@ namespace zypp
     bool
     MediaManager::isOpen(MediaId mediaId) const
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       return m_impl->hasMediaAcc( mediaId);
     }
@@ -188,7 +171,7 @@ namespace zypp
     std::string
     MediaManager::protocol(MediaId mediaId) const
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( m_impl->hasMediaAcc( mediaId))
         return m_impl->mediaAccMap[mediaId]->protocol();
@@ -200,7 +183,7 @@ namespace zypp
     Url
     MediaManager::url(MediaId mediaId) const
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( m_impl->hasMediaAcc( mediaId))
         return m_impl->mediaAccMap[mediaId]->url();
@@ -212,7 +195,7 @@ namespace zypp
     void
     MediaManager::addVerifier(MediaId mediaId, const MediaVerifierRef &ref)
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !ref)
         ZYPP_THROW(MediaException("Invalid (empty) verifier reference"));
@@ -231,7 +214,7 @@ namespace zypp
     void
     MediaManager::delVerifier(MediaId mediaId)
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !m_impl->hasMediaAcc( mediaId))
         ZYPP_THROW(MediaException("Invalid media id"));
@@ -244,7 +227,7 @@ namespace zypp
     void
     MediaManager::attach(MediaId mediaId, bool next)
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !m_impl->hasMediaAcc( mediaId))
       {
@@ -263,7 +246,7 @@ namespace zypp
     void
     MediaManager::release(MediaId mediaId, bool eject)
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !m_impl->hasMediaAcc( mediaId))
       {
@@ -279,7 +262,7 @@ namespace zypp
     void
     MediaManager::disconnect(MediaId mediaId)
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !m_impl->hasMediaAcc( mediaId))
       {
@@ -294,7 +277,7 @@ namespace zypp
     bool
     MediaManager::isAttached(MediaId mediaId) const
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !m_impl->hasMediaAcc( mediaId))
       {
@@ -310,7 +293,7 @@ namespace zypp
     bool
     MediaManager::isDesiredMedia(MediaId mediaId, MediaNr mediaNr) const
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !isAttached(mediaId))
         return false;
@@ -333,7 +316,7 @@ namespace zypp
     Pathname
     MediaManager::localRoot(MediaId mediaId) const
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !m_impl->hasMediaAcc( mediaId))
       {
@@ -351,7 +334,7 @@ namespace zypp
     MediaManager::localPath(MediaId mediaId,
                             const Pathname & pathname) const
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !m_impl->hasMediaAcc( mediaId))
       {
@@ -370,7 +353,7 @@ namespace zypp
                               const Pathname &filename,
                               bool cached, bool checkonly) const
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !isDesiredMedia(mediaId, mediaNr))
       {
@@ -388,7 +371,7 @@ namespace zypp
                              MediaNr mediaNr,
                              const Pathname & dirname ) const
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !isDesiredMedia(mediaId, mediaNr))
       {
@@ -406,7 +389,7 @@ namespace zypp
                                  MediaNr mediaNr,
                                  const Pathname & dirname ) const
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !isDesiredMedia(mediaId, mediaNr))
       {
@@ -423,7 +406,7 @@ namespace zypp
     MediaManager::releaseFile(MediaId mediaId,
                               const Pathname & filename) const
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !m_impl->hasMediaAcc( mediaId))
       {
@@ -440,7 +423,7 @@ namespace zypp
     MediaManager::releaseDir(MediaId mediaId,
                              const Pathname & dirname) const
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !m_impl->hasMediaAcc( mediaId))
       {
@@ -458,7 +441,7 @@ namespace zypp
     MediaManager::releasePath(MediaId mediaId,
                               const Pathname & pathname) const
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !m_impl->hasMediaAcc( mediaId))
       {
@@ -476,7 +459,7 @@ namespace zypp
                           std::list<std::string> & retlist,
                           const Pathname & dirname, bool dots) const
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !m_impl->hasMediaAcc( mediaId))
       {
@@ -494,7 +477,7 @@ namespace zypp
                           filesystem::DirContent & retlist,
                           const Pathname & dirname, bool dots) const
     {
-      MutexLock lock(g_Mutex);
+      MutexLock glock(g_Mutex);
 
       if( !m_impl->hasMediaAcc( mediaId))
       {
@@ -505,6 +488,30 @@ namespace zypp
 
       m_impl->mediaAccMap[mediaId]->dirInfo(retlist, dirname, dots);
     }
+
+
+    // ---------------------------------------------------------------
+    AttachedMedia
+    MediaManager::findAttachedMedia(const MediaSourceRef &media) const
+    {
+      MutexLock glock(g_Mutex);
+
+      if( !media || media->type.empty())
+        return AttachedMedia();
+
+      MediaAccMap::const_iterator a(m_impl->mediaAccMap.begin());
+      for( ; a != m_impl->mediaAccMap.end(); ++a)
+      {
+        if( !a->second->isAttached())
+          continue;
+
+        AttachedMedia ret = a->second->attachedMedia();
+        if( ret.mediaSource && ret.mediaSource->equals( *media))
+            return ret;
+      }
+      return AttachedMedia();
+    }
+
 
     //////////////////////////////////////////////////////////////////
   } // namespace media

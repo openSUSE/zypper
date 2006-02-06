@@ -16,6 +16,7 @@
 #include "zypp/ExternalProgram.h"
 #include "zypp/media/Mount.h"
 #include "zypp/media/MediaCD.h"
+#include "zypp/media/MediaManager.h"
 #include "zypp/Url.h"
 
 #include <cstring> // strerror
@@ -147,16 +148,15 @@ namespace zypp {
     //
     void MediaCD::attachTo(bool next)
     {
+      DBG << "next " << next << " last " << _lastdev << endl;
+      if (next && _lastdev == -1)
+	ZYPP_THROW(MediaNotSupportedException(url()));
+
       Mount mount;
       string mountpoint = attachPoint().asString();
       bool mountsucceeded = false;
       int count = 0;
-    
-      DBG << "next " << next << " last " << _lastdev << " lastdevice " << _mounteddevice << endl;
-    
-      if (next && _lastdev == -1)
-	ZYPP_THROW(MediaNotSupportedException(url()));
-    
+
       string options = _url.getQueryParam("mountoptions");
       if (options.empty())
       {
@@ -183,7 +183,41 @@ namespace zypp {
     		DBG << "skip" << endl;
     		continue;
     	}
-    
+	PathInfo dev_info( *it);
+	if( !dev_info.isBlk())
+	{
+    		DBG << "skip " << *it << " - is not a block device" << endl;
+		continue;
+	}
+
+	MediaSourceRef media( new MediaSource(
+	  "cdrom", *it, dev_info.major(), dev_info.minor()
+	));
+
+	AttachedMedia ret( findAttachedMedia( media));
+
+	if( ret.attachPoint &&
+	    ret.mediaSource &&
+	   !ret.attachPoint->empty() &&
+	    media->equals( *ret.mediaSource))
+	{
+    		DBG << "Using a shared media "
+		    << ret.mediaSource->name
+		    << " attached on "
+		    << ret.attachPoint->path
+		    << endl;
+                removeAttachPoint();
+		setAttachPoint(ret.attachPoint);
+		_mediaSource = ret.mediaSource;
+    		_lastdev = count;
+		mountsucceeded = true;
+		break;
+	}
+	// FIXME: hmm... we may also
+	// - check against hal/mtab if still mounted
+	// - if !ret, check if already mounted (e.g.
+	//   by automounter) and reuse (!temp) ?
+
     	// close tray
     	closeTray( *it );
     
@@ -193,9 +227,21 @@ namespace zypp {
     	    ; ++fsit)
     	{
 	  try {
+	    // FIXME: verify, if this mountpoint isn't already in use.
+	    if( mountpoint.empty() || mountpoint == "/")
+	    {
+	      mountpoint = createAttachPoint().asString();
+	      setAttachPoint( mountpoint, true);
+	      if( mountpoint.empty())
+	      {
+		ZYPP_THROW( MediaBadAttachPointException(url()));
+	      }
+	    }
+
     	    mount.mount (*it, mountpoint.c_str(), *fsit, options);
-	    _mounteddevice = *it;
+
 	    _lastdev = count;
+	    _mediaSource = media;
 	    mountsucceeded = true;
 	  }
 	  catch (const MediaException & excpt_r)
@@ -207,7 +253,6 @@ namespace zypp {
     
       if (!mountsucceeded)
       {
-    	_mounteddevice.erase();
     	_lastdev = -1;
         ZYPP_THROW(MediaMountException(_url.asString(), mountpoint, "Mounting media failed"));
       }
@@ -225,7 +270,13 @@ namespace zypp {
     //
     void MediaCD::releaseFrom( bool eject )
     {
-      if (_mounteddevice.empty())		// no device mounted
+      DBG << "Release CD ... use count = "
+          << _mediaSource.use_count()
+	  << (_mediaSource.unique() ? ", unique" : ", not unique")
+	  << std::endl;
+
+      // check if a device is mounted
+      if ( !_mediaSource)
       {
     	if (eject)			// eject wanted -> eject all devices
     	{
@@ -239,17 +290,20 @@ namespace zypp {
 	}
 	ZYPP_THROW(MediaNotAttachedException(url()));
       }
-    
-      Mount mount;
-      mount.umount(attachPoint().asString());
-    
-      // eject device
-      if (eject)
+      else
+      if( _mediaSource.unique())
       {
-	openTray( _mounteddevice );
-      }
+        Mount mount;
+        mount.umount(attachPoint().asString());
     
-      _mounteddevice.erase();
+        // eject device
+        if (eject)
+        {
+	  openTray( _mediaSource->name );
+        }
+      }
+
+      _mediaSource.reset();
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -262,7 +316,7 @@ namespace zypp {
     //
     void MediaCD::forceEject()
     {
-      if ( _mounteddevice.empty() ) {	// no device mounted
+      if ( !_mediaSource) {	// no device mounted
 	for ( DeviceList::iterator it = _devices.begin(); it != _devices.end(); ++it ) {
 	  if ( openTray( *it ) )
 	    break; // on 1st success
@@ -324,3 +378,4 @@ namespace zypp {
 
   } // namespace media
 } // namespace zypp
+// vim: set ts=8 sts=2 sw=2 ai noet:

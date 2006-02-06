@@ -55,6 +55,13 @@ MediaAccess::~MediaAccess()
   close(); // !!! make sure handler gets properly deleted.
 }
 
+AttachedMedia
+MediaAccess::attachedMedia() const
+{
+	return _handler ? _handler->attachedMedia()
+	                : AttachedMedia();
+}
+
 // open URL
 void
 MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)

@@ -25,6 +25,8 @@
 #include "zypp/PathInfo.h"
 
 #include "zypp/media/MediaException.h"
+#include "zypp/media/MediaSource.h"
+
 #include "zypp/Url.h"
 #include "zypp/base/Logger.h"
 
@@ -62,6 +64,9 @@ namespace zypp {
 	 * == 0 if not open
 	 **/
 	MediaHandler * _handler;
+
+    	friend class MediaManager;
+	AttachedMedia        attachedMedia() const;
 
     public:
 

@@ -13,6 +13,7 @@
 #define ZYPP_MEDIA_MEDIACD_H
 
 #include "zypp/media/MediaHandler.h"
+#include "zypp/media/MediaManager.h"
 
 namespace zypp {
   namespace media {
@@ -28,18 +29,13 @@ namespace zypp {
     
       private:
     
-        unsigned long _mountflags;
-    
         typedef std::list<std::string> DeviceList;
         /** list of devices to try to mount */
         DeviceList _devices;
     
-        /** which device has been mounted */
-        std::string _mounteddevice;
-    
         /** number of last successful mounted device in list */
-        int _lastdev;
-    
+        int        _lastdev;
+
         static bool openTray( const std::string & device_r );
         static bool closeTray( const std::string & device_r );
     

@@ -17,6 +17,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/media/MediaHandler.h"
+#include "zypp/media/MediaManager.h"
 
 using namespace std;
 
@@ -25,6 +26,8 @@ using namespace std;
 
 namespace zypp {
   namespace media {
+
+
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -44,71 +47,25 @@ MediaHandler::MediaHandler ( const Url &      url_r,
 			     const Pathname & attach_point_r,
 			     const Pathname & urlpath_below_attachpoint_r,
 			     const bool       does_download_r )
-    : _attachPoint( attach_point_r )
-    , _tmp_attachPoint( false )
+    : _attachPoint( new AttachPoint())
+    , _relativeRoot( urlpath_below_attachpoint_r)
     , _does_download( does_download_r )
     , _isAttached( false )
     , _url( url_r )
 {
-  if ( _attachPoint.empty() ) {
-    ///////////////////////////////////////////////////////////////////
-    // provide a default attachpoint
-    ///////////////////////////////////////////////////////////////////
-
-    Pathname aroot;
-    PathInfo adir;
-    const char * defmounts[] = { "/var/adm/mount", "/var/tmp", /**/NULL/**/ };
-    for ( const char ** def = defmounts; *def; ++def ) {
-      adir( *def );
-      if ( adir.isDir() && adir.userMayRWX() ) {
-	aroot = adir.path();
-	break;
-      }
-    }
-    if ( aroot.empty() ) {
-      ERR << "Create attach point: Can't find a writable directory to create an attach point" << endl;
-      return;
-    }
-
-    Pathname abase( aroot + "AP_" );
-    Pathname apoint;
-
-    for ( unsigned i = 1; i < 1000; ++i ) {
-      adir( Pathname::extend( abase, str::hexstring( i ) ) );
-      if ( ! adir.isExist() && mkdir( adir.path() ) == 0 ) {
-	apoint = adir.path();
-	break;
-      }
-    }
-
-    if ( apoint.empty() ) {
-      ERR << "Unable to create an attach point below " << aroot << endl;
-      return;
-    }
-
-    // success
-    _attachPoint = apoint;
-    _tmp_attachPoint = true;
-    MIL << "Created default attach point " << _attachPoint << endl;
-
-  } else {
+  if ( !attach_point_r.empty() ) {
     ///////////////////////////////////////////////////////////////////
     // check if provided attachpoint is usable.
     ///////////////////////////////////////////////////////////////////
-    PathInfo adir( _attachPoint );
-    if ( !adir.isDir() ) {
+
+    PathInfo adir( attach_point_r );
+    // FIXME: verify if attach_point_r isn't a mountpoint of other device
+    if ( attach_point_r.asString() == "/" || !adir.isDir() ) {
       ERR << "Provided attach point is not a directory: " << adir << endl;
-      _attachPoint = Pathname();
     }
-
-  }
-
-  ///////////////////////////////////////////////////////////////////
-  // must init _localRoot after _attachPoint is determined.
-  ///////////////////////////////////////////////////////////////////
-
-  if ( !_attachPoint.empty() ) {
-    _localRoot = _attachPoint + urlpath_below_attachpoint_r;
+    else {
+      setAttachPoint( attach_point_r, false);
+    }
   }
 }
 
@@ -122,21 +79,179 @@ MediaHandler::MediaHandler ( const Url &      url_r,
 //
 MediaHandler::~MediaHandler()
 {
+  removeAttachPoint();
+}
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : MediaHandler::removeAttachPoint
+//	METHOD TYPE : void
+//
+//	DESCRIPTION :
+//
+void
+MediaHandler::removeAttachPoint()
+{
   if ( _isAttached ) {
     INT << "MediaHandler deleted with media attached." << endl;
     return; // no cleanup if media still mounted!
   }
 
-  if ( _tmp_attachPoint ) {
-    int res = recursive_rmdir( _attachPoint );
+  if ( _attachPoint.unique() &&
+       _attachPoint->temp    &&
+       !_attachPoint->path.empty())
+  {
+    int res = recursive_rmdir( _attachPoint->path );
     if ( res == 0 ) {
-      MIL << "Deleted default attach point " << _attachPoint << endl;
+      MIL << "Deleted default attach point " << _attachPoint->path << endl;
     } else {
-      ERR << "Failed to Delete default attach point " << _attachPoint
+      ERR << "Failed to Delete default attach point " << _attachPoint->path
 	<< " errno(" << res << ")" << endl;
     }
   }
 }
+
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : MediaHandler::attachPoint
+//	METHOD TYPE : Pathname
+//
+//	DESCRIPTION :
+//
+Pathname
+MediaHandler::attachPoint() const
+{
+  return _attachPoint->path;
+}
+
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : MediaHandler::attachPoint
+//	METHOD TYPE :
+//
+//	DESCRIPTION :
+//
+void
+MediaHandler::setAttachPoint(const Pathname &path, bool temporary)
+{
+  _localRoot = Pathname();
+
+  _attachPoint.reset( new AttachPoint(path, temporary));
+
+  if( !_attachPoint->path.empty())
+    _localRoot = _attachPoint->path + _relativeRoot;
+}
+
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : MediaHandler::attachPoint
+//	METHOD TYPE :
+//
+//	DESCRIPTION :
+//
+void
+MediaHandler::setAttachPoint(const AttachPointRef &ref)
+{
+  _localRoot = Pathname();
+
+  if( ref)
+    AttachPointRef(ref).swap(_attachPoint);
+  else
+    _attachPoint.reset( new AttachPoint());
+
+  if( !_attachPoint->path.empty())
+    _localRoot = _attachPoint->path + _relativeRoot;
+}
+
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : MediaHandler::findAttachedMedia
+//	METHOD TYPE : AttachedMedia
+//
+//	DESCRIPTION :
+//
+AttachedMedia
+MediaHandler::findAttachedMedia(const MediaSourceRef &media) const
+{
+	return MediaManager().findAttachedMedia(media);
+}
+
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : MediaHandler::attach
+//	METHOD TYPE : Pathname
+//
+//	DESCRIPTION :
+//
+Pathname
+MediaHandler::createAttachPoint() const
+{
+  /////////////////////////////////////////////////////////////////
+  // provide a default (temporary) attachpoint
+  /////////////////////////////////////////////////////////////////
+  const char * defmounts[] = {
+      "/var/adm/mount", "/var/tmp", /**/NULL/**/
+  };
+
+  Pathname aroot;
+  PathInfo adir;
+  for ( const char ** def = defmounts; *def; ++def ) {
+    adir( *def );
+    if ( adir.isDir() && adir.userMayRWX() ) {
+      aroot = adir.path();
+      break;
+    }
+  }
+  if ( aroot.empty() ) {
+    ERR << "Create attach point: Can't find a writable directory to create an attach point" << std::endl;
+    return aroot;
+  }
+
+  Pathname abase( aroot + "AP_" );
+  Pathname apoint;
+  for ( unsigned i = 1; i < 1000; ++i ) {
+    adir( Pathname::extend( abase, str::hexstring( i ) ) );
+    if ( ! adir.isExist() && mkdir( adir.path() ) == 0 ) {
+            apoint = adir.path();
+            break;
+    }
+  }
+  if ( apoint.empty() ) {
+    ERR << "Unable to create an attach point below " << aroot << std::endl;
+  } else {
+    MIL << "Created default attach point " << apoint << std::endl;
+  }
+  return apoint;
+}
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : MediaHandler::attachedMedia
+//	METHOD TYPE : AttachedMedia
+//
+//	DESCRIPTION :
+//
+AttachedMedia
+MediaHandler::attachedMedia() const
+{
+  if ( _isAttached && _mediaSource && _attachPoint)
+    return AttachedMedia(_mediaSource, _attachPoint);
+  else
+    return AttachedMedia();
+}
+
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -151,10 +266,12 @@ void MediaHandler::attach( bool next )
   if ( _isAttached )
     return;
 
-  if ( _attachPoint.empty() ) {
+/**
+  if ( _attachPoint->empty() ) {
     ERR << "Bad Attachpoint" << endl;
     ZYPP_THROW( MediaBadAttachPointException(url()));
   }
+*/
 
   attachTo( next ); // pass to concrete handler
   _isAttached = true;
@@ -302,7 +419,7 @@ void MediaHandler::provideDirTree( Pathname dirname ) const
 //
 void MediaHandler::releasePath( Pathname pathname ) const
 {
-  if ( ! _does_download || _attachPoint.empty() )
+  if ( ! _does_download || _attachPoint->empty() )
     return;
 
   PathInfo info( localPath( pathname ) );
