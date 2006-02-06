@@ -1,7 +1,9 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS = catalogs
+noinst_PROGRAMS =	\
+	catalogs	\
+	sources
 
 ## ##################################################
 
@@ -14,4 +16,7 @@ CFLAGS = $(SQLITE_CFLAGS)
 ## ##################################################
 
 catalogs_SOURCES = catalogs.cc
+
+sources_SOURCES = sources.cc
+
 
