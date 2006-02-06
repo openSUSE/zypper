@@ -24,7 +24,6 @@
 #include "zypp/CapFactory.h"
 
 #include "zypp/parser/yum/YUMParser.h"
-#include "zypp/SourceFactory.h"
 
 #include <fstream>
 
@@ -101,8 +100,7 @@ namespace zypp
 
       void YUMSourceImpl::storeMetadata(const Pathname & cache_dir_r)
       {
-INT << "Storing data to cache" << endl;
-	resolvables(SourceFactory().createFrom(this));
+	resolvables();
 	for (std::list<Pathname>::const_iterator it = _metadata_files.begin();
 	  it != _metadata_files.end(); it++)
 	{
@@ -114,7 +112,7 @@ INT << "Storing data to cache" << endl;
 	}
       }
 
-      void YUMSourceImpl::createResolvables(Source_Ref source_r)
+      void YUMSourceImpl::createResolvables()
       {
        std::list<YUMRepomdData_Ptr> repo_primary;
        std::list<YUMRepomdData_Ptr> repo_files;
@@ -249,7 +247,6 @@ INT << "Storing data to cache" << endl;
 	    YUMFileListData filelist_empty;
 	    YUMOtherData other_empty;
 	    Package::Ptr p = createPackage(
-	      source_r,
 	      **prim,
 	      found_files != files_data.end()
 	        ? *found_files->second
@@ -287,7 +284,6 @@ INT << "Storing data to cache" << endl;
 	       ++group)
 	  {
 	    Selection::Ptr p = createGroup(
-	      source_r,
 	      **group
 	    );
 	    _store.insert (p);
@@ -319,7 +315,6 @@ INT << "Storing data to cache" << endl;
 	       ++pattern)
 	  {
 	    Pattern::Ptr p = createPattern(
-	      source_r,
 	      **pattern
 	    );
 	    _store.insert (p);
@@ -351,7 +346,6 @@ INT << "Storing data to cache" << endl;
 	       ++product)
 	  {
 	    Product::Ptr p = createProduct(
-	      source_r,
 	      **product
 	    );
 	    _store.insert (p);
@@ -407,7 +401,6 @@ INT << "Storing data to cache" << endl;
 	        ++ptch)
 	    {
 	      Patch::Ptr p = createPatch(
-	        source_r,
 		**ptch
 	      );
 	      _store.insert (p);
@@ -430,7 +423,6 @@ INT << "Storing data to cache" << endl;
       }
 
 	Package::Ptr YUMSourceImpl::createPackage(
-	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPrimaryData & parsed,
 	  const zypp::parser::yum::YUMFileListData & filelist,
 	  const zypp::parser::yum::YUMOtherData & other
@@ -439,7 +431,7 @@ INT << "Storing data to cache" << endl;
 	  try
 	  {
 	    shared_ptr<YUMPackageImpl> impl(
-	      new YUMPackageImpl(source_r, parsed, filelist, other));
+	      new YUMPackageImpl(selfSourceRef(), parsed, filelist, other));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -461,13 +453,12 @@ INT << "Storing data to cache" << endl;
 	}
 
 	Package::Ptr YUMSourceImpl::createPackage(
-	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchPackage & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMPackageImpl> impl(new YUMPackageImpl(source_r, parsed));
+	    shared_ptr<YUMPackageImpl> impl(new YUMPackageImpl(selfSourceRef(), parsed));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -489,13 +480,12 @@ INT << "Storing data to cache" << endl;
 	}
 
 	Selection::Ptr YUMSourceImpl::createGroup(
-	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMGroupData & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMGroupImpl> impl(new YUMGroupImpl(source_r, parsed));
+	    shared_ptr<YUMGroupImpl> impl(new YUMGroupImpl(selfSourceRef(), parsed));
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.groupId,
                                Edition::noedition,
@@ -514,13 +504,12 @@ INT << "Storing data to cache" << endl;
 	}
 
 	Pattern::Ptr YUMSourceImpl::createPattern(
-	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatternData & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMPatternImpl> impl(new YUMPatternImpl(source_r, parsed));
+	    shared_ptr<YUMPatternImpl> impl(new YUMPatternImpl(selfSourceRef(), parsed));
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.patternId,
                                Edition::noedition,
@@ -539,13 +528,12 @@ INT << "Storing data to cache" << endl;
 	}
 
 	Message::Ptr YUMSourceImpl::createMessage(
-	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchMessage & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMMessageImpl> impl(new YUMMessageImpl(source_r, parsed));
+	    shared_ptr<YUMMessageImpl> impl(new YUMMessageImpl(selfSourceRef(), parsed));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -567,13 +555,12 @@ INT << "Storing data to cache" << endl;
 	}
 
 	Script::Ptr YUMSourceImpl::createScript(
-	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchScript & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMScriptImpl> impl(new YUMScriptImpl(source_r, parsed));
+	    shared_ptr<YUMScriptImpl> impl(new YUMScriptImpl(selfSourceRef(), parsed));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -595,13 +582,12 @@ INT << "Storing data to cache" << endl;
 	}
 
 	Product::Ptr YUMSourceImpl::createProduct(
-	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMProductData & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMProductImpl> impl(new YUMProductImpl(source_r, parsed));
+	    shared_ptr<YUMProductImpl> impl(new YUMProductImpl(selfSourceRef(), parsed));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -623,13 +609,12 @@ INT << "Storing data to cache" << endl;
 	}
 
 	Patch::Ptr YUMSourceImpl::createPatch(
-	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchData & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMPatchImpl> impl(new YUMPatchImpl(source_r, parsed, *this));
+	    shared_ptr<YUMPatchImpl> impl(new YUMPatchImpl(selfSourceRef(), parsed, *this));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,

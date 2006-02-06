@@ -52,40 +52,32 @@ namespace zypp
 
         virtual void storeMetadata(const Pathname & cache_dir_r);
 
-	virtual void createResolvables(Source_Ref source_r);
+	virtual void createResolvables();
 
 	Package::Ptr createPackage(
-	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPrimaryData & parsed,
 	  const zypp::parser::yum::YUMFileListData & filelist,
 	  const zypp::parser::yum::YUMOtherData & other
 	);
 	Package::Ptr createPackage(
-	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchPackage & parsed
 	);
 	Selection::Ptr createGroup(
-	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMGroupData & parsed
 	);
 	Pattern::Ptr createPattern(
-	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatternData & parsed
 	);
 	Message::Ptr createMessage(
-	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchMessage & parsed
 	);
 	Script::Ptr createScript(
-	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchScript & parsed
 	);
 	Patch::Ptr createPatch(
-	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchData & parsed
 	);
 	Product::Ptr createProduct(
-	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMProductData & parsed
 	);
 

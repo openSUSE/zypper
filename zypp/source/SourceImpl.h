@@ -190,7 +190,7 @@ namespace zypp
 
     private:
       /** Late initialize the ResStore. */
-      virtual void createResolvables(Source_Ref source_r);
+      virtual void createResolvables();
       /** Whether the ResStore is initialized. */
       bool _res_store_initialized;
 
