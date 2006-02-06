@@ -45,7 +45,59 @@ namespace zypp
 
       void SuseTagsImpl::factoryInit()
       {
-#warning TODO check if the source is of this type
+        media::MediaManager media_mgr;
+	
+	std::string vendor;
+	std::string media_id;
+
+        try {
+	  Pathname media_file = Pathname("media.1/media");
+	  media_mgr.provideFile (_media, 1, media_file);
+	  media_file = media_mgr.localPath (_media, media_file);
+	  
+	  std::ifstream pfile( media_file.asString().c_str() );
+
+    	  if ( pfile.bad() ) {
+    	    ERR << "Error parsing media.1/media" << endl;
+    	    ZYPP_THROW(Exception("Error parsing media.1/media") );
+	  }
+
+	  vendor = str::getline( pfile, str::TRIM );
+
+    	  if ( pfile.fail() ) {
+    	    ERR << "Error parsing media.1/media" << endl;
+    	    ZYPP_THROW(Exception("Error parsing media.1/media") );
+	  }
+
+	  media_id = str::getline( pfile, str::TRIM );
+	  
+    	  if ( pfile.fail() ) {
+    	    ERR << "Error parsing media.1/media" << endl;
+    	    ZYPP_THROW(Exception("Error parsing media.1/media") );
+	  }
+
+	}
+	catch ( const Exception & excpt_r )
+	{
+	  ERR << "Cannot read /media.1/media file, cannot initialize source" << endl;
+	  ZYPP_THROW( Exception("Cannot read /media.1/media file, cannot initialize source") );
+	}
+
+        try {
+          MIL << "Adding susetags media verifier: " << endl;
+          MIL << "Vendor: " << vendor << endl;
+          MIL << "Media ID: " << media_id << endl;
+
+          media_mgr.delVerifier(_media);
+          media_mgr.addVerifier(_media, media::MediaVerifierRef(
+	    new SourceImpl::Verifier (vendor, media_id) ));
+        }
+        catch (const Exception & excpt_r)
+        {
+#warning FIXME: If media data is not set, verifier is not set. Should the media
+          ZYPP_CAUGHT(excpt_r);
+          WAR << "Verifier not found" << endl;
+        }
       }
 
       void SuseTagsImpl::createResolvables(Source_Ref source_r)

@@ -18,6 +18,7 @@
 #include "zypp/SourceFactory.h"
 #include "zypp/source/Builtin.h"
 #include "zypp/media/MediaAccess.h"
+#include "zypp/ZYppCallbacks.h"
 
 using std::endl;
 using namespace zypp::source;
@@ -106,6 +107,10 @@ media::MediaManager media_mgr;
     if (! url_r.isValid())
       ZYPP_THROW( Exception("Empty URL passed to SourceFactory") );
 
+    callback::SendReport<CreateSourceReport> report;
+
+    report->startProbe (url_r);
+    
     // open the media
     media::MediaId id = media_mgr.open(url_r);
 
@@ -117,6 +122,9 @@ media::MediaManager media_mgr;
       MIL << "Trying the YUM source" << endl;
       Source_Ref::Impl_Ptr impl( Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r) );
       MIL << "Found the YUM source" << endl;
+      
+      report->endProbe (url_r);
+      
       return Source_Ref(impl);
     }
     catch (const Exception & excpt_r)
@@ -130,6 +138,9 @@ media::MediaManager media_mgr;
 #warning TODO pass cache_dir_r once constructor adapted
       Source_Ref::Impl_Ptr impl( Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r) );
       MIL << "Found the SUSE tags source" << endl;
+      
+      report->endProbe (url_r);
+
       return Source_Ref(impl);
     }
     catch (const Exception & excpt_r)
@@ -137,6 +148,9 @@ media::MediaManager media_mgr;
       ZYPP_CAUGHT(excpt_r);
       MIL << "Not SUSE tags source, trying next type" << endl;
     }
+    
+    report->endProbe (url_r);
+
     ERR << "No next type of source" << endl;
     ZYPP_THROW(Exception("Cannot create the installation source"));
     return Source_Ref(); // not reached!!

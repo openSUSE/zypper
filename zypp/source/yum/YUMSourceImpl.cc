@@ -74,10 +74,6 @@ namespace zypp
 	Pathname filename;
 	if (_cache_dir.empty())
 	{
-	  // check only first
-#warning What did the following line mean? With it uncommented, it doesn't compile
-//	  filename = provideFile(_path + "/repomd.xml", 0, false, true);
-
 	  // now, the file exists, try to read it
 	  filename = provideFile(_path + "/repomd.xml");
 	}

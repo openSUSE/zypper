@@ -145,12 +145,16 @@ namespace zypp
 	IO,		// IO error
 	INVALID		// th source is invalid
       };
-      virtual void start(
-	Source_Ref source
-	, Url url
-      ) {}
 
-      virtual bool progress(int value, Url url) 
+      virtual void startData(
+	Url source_url
+      ) {}
+      
+      virtual void startProbe(Url url) {}
+
+      virtual void endProbe(Url url) {}
+
+      virtual bool progressData(int value, Url url) 
       { return true; }
 
       virtual Action problem(
@@ -159,7 +163,7 @@ namespace zypp
 	, std::string description
       ) { return ABORT; }
 
-      virtual void finish(
+      virtual void finishData(
         Url url
         , Error error
 	, std::string reason
