@@ -48,7 +48,21 @@ class HelixSourceImpl : public zypp::source::SourceImpl {
   public:
 
     /** Default ctor */
-    HelixSourceImpl(media::MediaId & mediaid_r, const Pathname & path_r = "/", const std::string & alias_r = "");
+    HelixSourceImpl();
+
+ private:
+    /** Ctor substitute.
+     * Actually get the metadata.
+     * \throw EXCEPTION on fail
+     */
+    virtual void factoryInit();
+
+
+ public:
+    void factoryCtor( const media::MediaId & media_r,
+                        const Pathname & path_r = "/",
+                        const std::string & alias_r = "",
+                        const Pathname cache_dir_r = "");
 
     virtual const bool valid() const
     { return true; }
@@ -66,7 +80,7 @@ class HelixSourceImpl : public zypp::source::SourceImpl {
 
   private:
     Source_Ref _source;
-    const Pathname _pathname;
+    Pathname _pathname;
     void createResolvables(Source_Ref source_r);
 
 };

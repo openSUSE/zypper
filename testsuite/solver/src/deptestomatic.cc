@@ -381,6 +381,7 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
     bool operator()( PoolItem_Ref p)
     {
 	Source_Ref s = p->source();
+
 	if (s.alias() != source.alias()) {
 	    return true;
 	}
@@ -552,7 +553,7 @@ void
 print_pool (const string & prefix = "")
 {
     SortItem info;
-
+    cout << "Current pool:" << endl;
     invokeOnEach( God->pool().begin( ),
 		  God->pool().end ( ),
 		  functor::functorRef<bool,PoolItem> (info) );
@@ -574,19 +575,21 @@ load_source (const string & alias, const string & filename, const string & type,
     int count = 0;
 
     try {
-	media::MediaManager mmgr;
-	media::MediaId mediaid = mmgr.open(Url("file://"));
-	Source_Ref::Impl_Ptr impl = new HelixSourceImpl (mediaid, pathname, alias);
-	SourceFactory _f;
-	Source_Ref s = _f.createFrom( impl );
+	Url url("file://");
 
-	if (s != Source_Ref::noSource) {
-	    count = impl->resolvables (s).size();
-	    unsigned snum = manager->addSource (s);
-	    cout << "Added source '" << alias << "' as #" << snum  << ":[" << s.alias() << "]" << endl;
-	    God->addResolvables( impl->resolvables (s), (alias == "@system") );
-	    print_pool ();
-	}
+	media::MediaManager mmgr;
+	media::MediaId mediaid = mmgr.open(url);
+	HelixSourceImpl *impl = new HelixSourceImpl ();
+	impl->factoryCtor (mediaid, pathname, alias);
+        Source_Ref src( SourceFactory().createFrom(impl) );
+
+	unsigned snum = manager->addSource (src);
+
+	count = src.resolvables().size();
+	cout << "Added source '" << alias << "' as #" << snum  << ":[" << src.alias() << "] with " << count << " resolvables" << endl;
+	God->addResolvables( src.resolvables(), (alias == "@system") );
+	print_pool ();
+
 	cout << "Loaded " << count << " package(s) from " << pathname << endl;
     }
     catch ( Exception & excpt_r ) {

@@ -38,19 +38,49 @@ using namespace zypp;
 
 //---------------------------------------------------------------------------
 
-HelixSourceImpl::HelixSourceImpl(media::MediaId & mediaid_r, const Pathname & path_r, const std::string & alias_r)
-    : SourceImpl (mediaid_r, path_r, alias_r)
-    , _source (Source_Ref::noSource)
-    , _pathname (path_r)
+HelixSourceImpl::HelixSourceImpl()
 {
+    MIL << "HelixSourceImpl::HelixSourceImpl()" << endl;
 }
 
 
 void
-HelixSourceImpl::createResolvables(Source_Ref source_r)
+HelixSourceImpl::factoryInit()
 {
-    _source = source_r;
-    MIL << "HelixSourceImpl::createResolvables()" << endl;
+    MIL << "HelixSourceImpl::factoryInit()" << endl;
+
+    try {
+	media::MediaManager media_mgr;
+	MIL << "Adding no media verifier" << endl;
+	media_mgr.delVerifier(_media);
+	media_mgr.addVerifier(_media, media::MediaVerifierRef(new media::NoVerifier()));
+    }
+    catch (const Exception & excpt_r)
+    {
+#warning FIXME: If media data is not set, verifier is not set. Should the media be refused instead?
+	ZYPP_CAUGHT(excpt_r);
+	WAR << "Verifier not found" << endl;
+    }
+    return;
+}
+
+void
+HelixSourceImpl::factoryCtor( const media::MediaId & media_r, const Pathname & path_r, const std::string & alias_r, const Pathname cache_dir_r)
+{
+    MIL << "HelixSourceImpl::factoryCtor(<media>, " << path_r << ", " << alias_r << ", " << cache_dir_r << ")" << endl;
+    _media = media_r;
+    _pathname = path_r;
+    _alias = alias_r;
+    _cache_dir = cache_dir_r;
+}
+
+
+void
+HelixSourceImpl::createResolvables(Source_Ref source)
+{
+    _source = source;
+
+    MIL << "HelixSourceImpl::createResolvables(" << _pathname << ", for source " << source.alias() << ")" << endl;
     extractHelixFile (_pathname.asString(), this);
 }
 
