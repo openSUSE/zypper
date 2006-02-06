@@ -158,6 +158,7 @@ XMLFilesBackend::isBackendInitialized() const
     Resolvable::Kind kind = (*it_kinds);
     ok = ok && exists(dirForResolvableKind(kind));
   }
+  ok = ok && exists( path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("source-cache") );
   return ok;
 }
 
@@ -181,6 +182,14 @@ XMLFilesBackend::initBackend()
       MIL << "Created..." << p.string() << std::endl;
     }
   }
+  // create source-cache
+  path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("source-cache");
+  if (!exists(source_p))
+  {
+    create_directory(source_p);
+    MIL << "Created..." << source_p.string() << std::endl;
+  }
+  
 }
 
 void XMLFilesBackend::setRandomFileNameEnabled( bool enabled )
@@ -583,7 +592,26 @@ std::ostream & operator<<( std::ostream & str, const XMLFilesBackend & obj )
 std::set<PersistentStorage::SourceData>
 XMLFilesBackend::storedSources() const
 {
-  return std::set<PersistentStorage::SourceData>();
+  path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("source-cache");
+  std::set<PersistentStorage::SourceData> sources;
+  DBG << "Reading source cache in " << source_p.string() << std::endl;
+  directory_iterator end_iter;
+  // return empty list if the dir does not exist
+  if ( !exists( source_p ) )
+  {
+    ERR << "path " << source_p.string() << " does not exists. Required to read source cache " << std::endl;
+    return std::set<PersistentStorage::SourceData>();
+  }
+
+  for ( directory_iterator dir_itr( source_p ); dir_itr != end_iter; ++dir_itr )
+  {
+    DBG << "[source-cache] - " << dir_itr->leaf() << std::endl;
+    //sources.insert( sourceDataFromCacheFile( source_p + "/" + dir_itr->leaf() ) );
+    //sources.insert(PersistentStorage::SourceData());
+  }
+  MIL << "done reading source cache" << std::endl;
+  return sources;
+
 }
 
 PersistentStorage::SourceData
