@@ -42,6 +42,15 @@ namespace zypp
       /** Dtor */
       ~PersistentStorage();
       void doTest();
+      
+      struct SourceData
+      {
+        bool enabled;
+        bool autorefresh;
+        std::string product_dir;
+        std::string type;
+        std::string url;
+      };
 
     public:
       /**
@@ -70,6 +79,30 @@ namespace zypp
        * \a partial_match allows for text search.
        */
       std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind kind, const std::string & name, bool partial_match = false) const;
+
+      /////////////////////////////////////////////////////////
+      // SOURCES API
+      ////////////////////////////////////////////////////////
+      /**
+       * Query for installed Sources
+       */
+      std::set<SourceData> storedSources() const;
+      /**
+       * Query for installed Source
+       */
+      SourceData storedSource(const std::string &alias) const;
+      /**
+       * Query for installed Sources
+       */
+      void storeSource(const SourceData &data);
+      /**
+       * Query for installed Sources
+       */
+      void deleteSource(const std::string &alias);
+      /**
+       * enable disable source
+       */
+      void setSourceEnabled(const std::string &alias, bool enabled);
 
     private:
       class Private;

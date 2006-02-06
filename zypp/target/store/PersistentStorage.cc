@@ -110,6 +110,41 @@ PersistentStorage::storedObjects(const Resolvable::Kind kind, const std::string 
   return d->backend->storedObjects(kind, name, partial_match);
 }
 
+/////////////////////////////////////////////////////////
+// SOURCES API
+////////////////////////////////////////////////////////
+
+std::set<PersistentStorage::SourceData>
+PersistentStorage::storedSources() const
+{
+  return d->backend->storedSources();
+}
+
+PersistentStorage::SourceData
+PersistentStorage::storedSource(const std::string &alias) const
+{
+  return d->backend->storedSource(alias);
+}
+
+void
+PersistentStorage::storeSource(const PersistentStorage::SourceData &data)
+{
+  d->backend->storeSource(data);
+}
+
+void
+PersistentStorage::deleteSource(const std::string &alias)
+{
+  d->backend->deleteSource(alias);
+}
+
+void
+PersistentStorage::setSourceEnabled(const std::string &alias, bool enabled)
+{
+  d->backend->setSourceEnabled(alias, enabled);
+}
+
+
 /******************************************************************
 **
 **	FUNCTION NAME : operator<<
@@ -121,8 +156,8 @@ std::ostream & operator<<( std::ostream & str, const PersistentStorage & obj )
   return str;
 }
   /////////////////////////////////////////////////////////////////
-} // namespace devel.dmacvicar
+} // namespace storage
 ///////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
-} // namespace devel
+} // namespace zypp
 ///////////////////////////////////////////////////////////////////

@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	devel/devel.dmacvicar/Backend.h
+/** \file	zypp/target/store/Backend.h
 *
 */
 #ifndef ZYPP_STORAGE_BACKEND_H
@@ -17,6 +17,8 @@
 #include "zypp/base/PtrTypes.h"
 #include <zypp/Pathname.h>
 #include <zypp/Patch.h>
+
+#include <zypp/target/store/PersistentStorage.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -74,6 +76,31 @@ public:
   */
   virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false) const = 0;
 
+
+  /////////////////////////////////////////////////////////
+  // SOURCES API
+  ////////////////////////////////////////////////////////
+  /**
+    * Query for installed Sources
+    */
+  virtual std::set<PersistentStorage::SourceData> storedSources() const = 0;
+  /**
+    * Query for installed Source
+    */
+  virtual PersistentStorage::SourceData storedSource(const std::string &alias) const = 0;
+  /**
+    * Query for installed Sources
+    */
+  virtual void storeSource(const PersistentStorage::SourceData &data) = 0;
+  /**
+    * Query for installed Sources
+    */
+  virtual void deleteSource(const std::string &alias) = 0;
+  /**
+    * enable disable source
+    */
+  virtual void setSourceEnabled(const std::string &alias, bool enabled) = 0;
+
 private:
   /** Pointer to implementation */
   class Private;
@@ -85,9 +112,9 @@ private:
 std::ostream & operator<<( std::ostream & str, const Backend & obj );
 
 /////////////////////////////////////////////////////////////////
-} // namespace devel.dmacvicar
+} // namespace storage
 ///////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
-} // namespace devel
+} // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // DEVEL_DEVEL_DMACVICAR_BACKEND_H

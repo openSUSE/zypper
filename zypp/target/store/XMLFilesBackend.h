@@ -84,6 +84,31 @@ public:
     */
   virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false) const;
 
+  /////////////////////////////////////////////////////////
+  // SOURCES API
+  ////////////////////////////////////////////////////////
+  /**
+    * Query for installed Sources
+    */
+  virtual std::set<PersistentStorage::SourceData> storedSources() const;
+  /**
+    * Query for installed Source
+    */
+  virtual PersistentStorage::SourceData storedSource(const std::string &alias) const;
+  /**
+    * Query for installed Sources
+    */
+  virtual void storeSource(const PersistentStorage::SourceData &data);
+  /**
+    * Query for installed Sources
+    */
+  virtual void deleteSource(const std::string &alias);
+  /**
+    * enable disable source
+    */
+  virtual void setSourceEnabled(const std::string &alias, bool enabled);
+
+
   protected:
   std::string randomString(int length) const;
   int random() const;
