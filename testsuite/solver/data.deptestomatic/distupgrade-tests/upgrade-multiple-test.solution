@@ -2,3 +2,6 @@
 >!>1: I___[package]A-1.0-1.
 >!>2: U___[package]A-2.0-1.
 >!>3: U_Tl_[package]A-2.0-2.
+>!> Solution #1:
+>!> upgrade A-1.0-1 => A-2.0-2[upgrade2]
+>!> installs=0, upgrades=1, uninstalls=0
