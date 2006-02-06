@@ -75,7 +75,7 @@ CATALOGS = @CATALOGS@
 	mv t-$@ $@
 
 
-all: #all-@USE_NLS@
+all: all-@USE_NLS@
 
 all-yes: stamp-po
 all-no:
@@ -143,15 +143,15 @@ $(srcdir)/$(DOMAIN).pot:
 
 # This target rebuilds a PO file if $(DOMAIN).pot has changed.
 # Note that a PO file is not touched if it doesn't need to be changed.
-$(POFILES): $(srcdir)/$(DOMAIN).pot
-	@lang=`echo $@ | sed -e 's,.*/,,' -e 's/\.po$$//'`; \
-	if test -f "$(srcdir)/$${lang}.po"; then \
-	  test "$(srcdir)" = . && cdcmd="" || cdcmd="cd $(srcdir) && "; \
-	  echo "$${cdcmd}$(MSGMERGE_UPDATE) $${lang}.po $(DOMAIN).pot"; \
-	  cd $(srcdir) && $(MSGMERGE_UPDATE) $${lang}.po $(DOMAIN).pot; \
-	else \
-	  $(MAKE) $${lang}.po-create; \
-	fi
+#$(POFILES): $(srcdir)/$(DOMAIN).pot
+#	@lang=`echo $@ | sed -e 's,.*/,,' -e 's/\.po$$//'`; \
+#	if test -f "$(srcdir)/$${lang}.po"; then \
+#	  test "$(srcdir)" = . && cdcmd="" || cdcmd="cd $(srcdir) && "; \
+#	  echo "$${cdcmd}$(MSGMERGE_UPDATE) $${lang}.po $(DOMAIN).pot"; \
+#	  cd $(srcdir) && $(MSGMERGE_UPDATE) $${lang}.po $(DOMAIN).pot; \
+#	else \
+#	  $(MAKE) $${lang}.po-create; \
+#	fi
 
 
 install: install-exec install-data
