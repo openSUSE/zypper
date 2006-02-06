@@ -225,7 +225,12 @@ Resolver::problems (void) const
 		// TranslatorExplanation %s = name of package,patch,...				
 		what = str::form (_("Cannot install %s due dependency problems"), who.c_str());
 		details = misc_info->message();
-		// currently no solution available
+		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		// Uninstall it; 
+		problem->addSolution (new ProblemSolutionUninstall (problem, item));
+		// currently no solution concerning "ignore" is available		
+		problems.push_back (problem);
+		problem_created = true;
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_INSTALL_TO_BE_UNINSTALLED: {	// Can't install p since it is already marked as needing to be uninstalled
