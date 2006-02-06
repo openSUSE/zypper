@@ -9,6 +9,7 @@ urlincludedir = $(pkgincludedir)/url
 
 urlinclude_HEADERS =	\
 	UrlBase.h	\
+	UrlException.h	\
 	UrlUtils.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_url.la
