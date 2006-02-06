@@ -61,6 +61,7 @@ int main()
 
   Pathname root("."); 
   XMLFilesBackend backend(root);
+
   //backend.setRandomFileNameEnabled(true);
   clock_t time_start, curr_time;
   time_start = clock();
@@ -69,7 +70,7 @@ int main()
   DBG << "Writing objects..." << std::endl;
   for (ResStore::const_iterator it = store.begin(); it != store.end(); it++)
   {
-    //DBG << **it << endl;
+    DBG << **it << endl;
     backend.storeObject(*it);
   }
   
@@ -80,5 +81,23 @@ int main()
   std::list<Resolvable::Ptr> objs = backend.storedObjects();
   curr_time = clock() - time_start;           // time in micro seconds
   MIL << "Read " << objs.size() << " patches in " << (double) curr_time / CLOCKS_PER_SEC << " seconds" << std::endl;
+
+  INT << "===[SOURCES]==========================================" << endl;
+  PersistentStorage::SourceData data;
+  data.url = "http://localhost/rpms";
+  data.type = "yum";
+  data.alias = "duncan bugfree rpms";
+
+  backend.storeSource(data);
+
+  data.url = "http://localhost/debd";
+  data.type = "yum";
+  data.alias = "duncan bugfree 2";
+
+  backend.storeSource(data);
+
+  MIL << "Wrote 2 sources" << std::endl;
+  std::list<PersistentStorage::SourceData> sources = backend.storedSources();
+  MIL << "Read " << sources.size() << " sources" << std::endl;
   return 0;
 }
