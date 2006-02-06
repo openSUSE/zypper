@@ -280,6 +280,8 @@ Resolver::verifySystem (void)
 static void
 solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
 {
+    _DEBUG("solution_to_pool(" << item << ", " << status << ")");
+
     if (status.isToBeInstalled()) {
 	item.status().setToBeInstalled(ResStatus::SOLVER);
     }
@@ -599,7 +601,8 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
 	if (status.isIncomplete()) {			// incomplete (re-install needed)
 	    PoolItem_Ref reinstall = Helper::findReinstallItem (resolver.pool(), item);
 	    if (reinstall) {
-		resolver.addPoolItemToInstall(item);	// -> install! 
+		MIL << "Reinstall " << reinstall << " for incomplete " << item << endl;
+		resolver.addPoolItemToInstall(reinstall);	// -> install! 
 	    }
 	    else {
 		WAR << "Can't find " << item << " for re-installation" << endl;
