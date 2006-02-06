@@ -2,7 +2,7 @@
 ## ##################################################
 
 SUBDIRS = base thread url media capability detail pool parser \
-	source solver zypp_detail ui
+	source target solver zypp_detail ui
 
 ## ##################################################
 
