@@ -1,5 +1,5 @@
-load_lib "libzypp_init.exp"
+load_lib "zmd_init.exp"
 
-proc libzypp_exit {} {}
-proc libzypp_version {} {}
+proc zmd_exit {} {}
+proc zmd_version {} {}
 
