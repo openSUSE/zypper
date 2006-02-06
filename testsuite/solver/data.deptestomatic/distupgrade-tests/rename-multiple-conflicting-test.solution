@@ -7,6 +7,3 @@
 >!> remove  A-1.0-1
 >!> |unflag A_new-2.0-1[upgrade]
 >!> installs=1, upgrades=0, uninstalls=1
->!> Solution #2:
->!> This solution is a duplicate.
->!> installs=1, upgrades=0, uninstalls=1
