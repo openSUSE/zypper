@@ -9,7 +9,7 @@ using std::endl;
 using namespace zypp;
 
 #include <sqlite3.h>
-#include "resolvable-writer.h"
+#include "dbsource/DbAccess.h"
 
 int
 main (int argc, char **argv)
@@ -30,7 +30,8 @@ main (int argc, char **argv)
 	return 1;
     }
 
-    write_store_to_db (argv[1], God->target()->resolvables(), true);
+    DbAccess db (argv[1]);
+    db.writeStore (God->target()->resolvables(), true);
 
     return 0;
 }

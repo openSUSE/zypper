@@ -1,46 +1,27 @@
-/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+\---------------------------------------------------------------------*/
+/** \file zmd/backend/dbsource/DbAccess.cc
+ *
+*/
 
-#include "resolvable-writer.h"
-#include <sqlite3.h>
 #include <iostream>
 
-#include "zypp/base/Exception.h"
 #include "zypp/base/Logger.h"
-#include "zypp/CapSet.h"
-#include "zypp/Rel.h"
-#include "zypp/Edition.h"
-#include "zypp/Package.h"
-#include "zypp/ResObject.h"
-#include "zypp/Source.h"
+#include "DbAccess.h"
 
-#include <cstdlib>
-#include <string>
+IMPL_PTR_TYPE(DbAccess);
 
-using namespace zypp;
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "DbAccess"
+
 using namespace std;
-
-using std::endl;
-using std::string;
-
-//----------------------------------------------------------------------------
-typedef enum {
-    RC_DEP_TYPE_REQUIRE = 0,
-    RC_DEP_TYPE_PROVIDE,
-    RC_DEP_TYPE_CONFLICT,
-    RC_DEP_TYPE_OBSOLETE,
-    RC_DEP_TYPE_PREREQUIRE,
-    RC_DEP_TYPE_FRESHEN,
-    RC_DEP_TYPE_RECOMMEND,
-    RC_DEP_TYPE_SUGGEST,
-    RC_DEP_TYPE_ENHANCE
-} RCDependencyType;
-
-typedef struct {
-    sqlite3 *db;
-    sqlite3_stmt *insert_res_handle;
-    sqlite3_stmt *insert_pkg_handle;
-    sqlite3_stmt *insert_dep_handle;
-} RCDB;
+using namespace zypp;
 
 //----------------------------------------------------------------------------
 
@@ -154,8 +135,89 @@ desc2str (const Text t)
     s = string (t, 0, authors);
     return s;
 }
-//----------------------------------------------------------------------------
 
+//----------------------------------------------------------------------------
+  /** Ctor */
+DbAccess::DbAccess( const std::string & dbfile_r )
+    : _dbfile( dbfile_r )
+    , _db( NULL )
+    , _insert_res_handle( NULL )
+    , _insert_pkg_handle( NULL )
+    , _insert_dep_handle( NULL )
+{
+    MIL << "DbAccess::DbAccess(" << dbfile_r << ")" << endl;
+}
+
+  /** Dtor */
+DbAccess::~DbAccess( )
+{
+    closeDb();
+}
+
+std::ostream &
+DbAccess::dumpOn( std::ostream & str ) const
+{
+    str << "DbAccess(" << _dbfile << ")" << endl;
+    return str;
+}
+
+
+bool
+DbAccess::openDb(bool for_writing)
+{
+    MIL << "DbAccess::openDb(" << (for_writing?"write":"read") << ")" << endl;
+
+    if (_db) {
+	WAR << "Db already open" << endl;
+	return true;
+    }
+
+    int rc = sqlite3_open (_dbfile.c_str(), &_db);
+    if (rc != SQLITE_OK) {
+	ERR << "Can not open SQL database: " << sqlite3_errmsg (_db) << endl;
+	return false;
+    }
+
+    MIL << "begin" << endl;
+    sqlite3_exec (_db, "BEGIN", NULL, NULL, NULL);
+
+    return true;
+}
+
+void
+DbAccess::closeDb(void)
+{
+    MIL << "DbAccess::closeDb()" << endl;
+
+    commit();
+
+    if (_insert_res_handle) {
+	sqlite3_finalize (_insert_res_handle);
+	_insert_res_handle = NULL;
+    }
+    if (_insert_pkg_handle) {
+	sqlite3_finalize (_insert_pkg_handle);
+	_insert_pkg_handle = NULL;
+    }
+    if (_insert_dep_handle) {
+	sqlite3_finalize (_insert_dep_handle);
+	_insert_dep_handle = NULL;
+    }
+    if (_db) {
+	sqlite3_close (_db);
+	_db = NULL;
+    }
+    return;
+}
+
+void
+DbAccess::commit(void)
+{
+    if (_db)
+	sqlite3_exec (_db, "COMMIT", NULL, NULL, NULL);
+}
+
+//----------------------------------------------------------------------------
 static sqlite3_stmt *
 prepare_res_insert (sqlite3 *db)
 {
@@ -227,101 +289,65 @@ prepare_dep_insert (sqlite3 *db)
     return handle;
 }
 
-//----------------------------------------------------------------------------- 
-
-static void
-rc_db_close (RCDB *rcdb)
+bool
+DbAccess::prepareWrite(void)
 {
-    sqlite3_finalize (rcdb->insert_res_handle);
-    sqlite3_finalize (rcdb->insert_pkg_handle);
-    sqlite3_finalize (rcdb->insert_dep_handle);
-    sqlite3_close (rcdb->db);
-}
+    MIL << "DbAccess::prepareWrite()" << endl;
 
+    bool result = openDb(true);
+    if (!result) return false;
 
-static RCDB *
-rc_db_new (const string & path)
-{
-    RCDB *rcdb;
-    sqlite3 *db = NULL;
-    int rc;
-    bool error = false;
+    sqlite3_exec (_db, "PRAGMA synchronous = 0", NULL, NULL, NULL);
 
-    rcdb = new (RCDB);
-
-    rc = sqlite3_open (path.c_str(), &db);
-    if (rc != SQLITE_OK) {
-	ERR << "Can not open SQL database: " << sqlite3_errmsg (db) << endl;
-	error = true;
+    _insert_res_handle = prepare_res_insert (_db);
+    if (_insert_res_handle == NULL) {
+	result = false;
 	goto cleanup;
     }
 
-    rcdb->db = db;
-
-    sqlite3_exec (rcdb->db, "PRAGMA synchronous = 0", NULL, NULL, NULL);
-#if 0
-    if (!create_tables (rcdb)) {
-	error = true;
-	goto cleanup;
-    }
-#endif
-
-    rcdb->insert_res_handle = prepare_res_insert (db);
-    if (rcdb->insert_res_handle == NULL) {
-	error = true;
+    _insert_pkg_handle = prepare_pkg_insert (_db);
+    if (_insert_pkg_handle == NULL) {
+	result = false;
 	goto cleanup;
     }
 
-    rcdb->insert_pkg_handle = prepare_pkg_insert (db);
-    if (rcdb->insert_pkg_handle == NULL) {
-	error = true;
-	goto cleanup;
-    }
-
-    rcdb->insert_dep_handle = prepare_dep_insert (db);
-    if (rcdb->insert_dep_handle == NULL) {
-	error = true;
+    _insert_dep_handle = prepare_dep_insert (_db);
+    if (_insert_dep_handle == NULL) {
+	result = false;
 	goto cleanup;
     }
 
  cleanup:
-    if (error) {
-	rc_db_close (rcdb);
-	delete (rcdb);
-	rcdb = NULL;
+    if (result == false) {
+	closeDb();
     }
 
-    return rcdb;
+    return true;
 }
 
 
-static void
-rc_db_begin (RCDB *rcdb)
+bool
+DbAccess::prepareRead(void)
 {
-    sqlite3_exec (rcdb->db, "BEGIN", NULL, NULL, NULL);
+    return openDb(false);
 }
 
+//----------------------------------------------------------------------------
 
-static void
-rc_db_commit (RCDB *rcdb)
+void
+DbAccess::writeDependency( sqlite_int64 res_id, RCDependencyType type, const zypp::CapSet & capabilities)
 {
-    sqlite3_exec (rcdb->db, "COMMIT", NULL, NULL, NULL);
-}
+    MIL << "DbAccess::writeDependency(" << res_id << ", " << type << ", ...)" << endl;
 
-//-----------------------------------------------------------------------------
-
-static void
-write_deps (RCDB *rcdb, sqlite_int64 pkg_id, int type, const zypp::CapSet & capabilities)
-{
     int rc;
-    sqlite3_stmt *handle = rcdb->insert_dep_handle;
+    sqlite3_stmt *handle = _insert_dep_handle;
 
     if (capabilities.empty())
 	return;
 
     for (zypp::CapSet::const_iterator iter = capabilities.begin(); iter != capabilities.end(); ++iter) {
-	
-	sqlite3_bind_int64 (handle, 1, pkg_id);
+
+	sqlite3_bind_int64 (handle, 1, res_id);
 	sqlite3_bind_int (handle, 2, type);
 	sqlite3_bind_text (handle, 3, iter->index().c_str(), -1, SQLITE_STATIC);
 
@@ -349,32 +375,36 @@ write_deps (RCDB *rcdb, sqlite_int64 pkg_id, int type, const zypp::CapSet & capa
 	sqlite3_reset (handle);
 
 	if (rc != SQLITE_DONE) {
-	    ERR << "Error adding package to SQL: " << sqlite3_errmsg (rcdb->db) << endl;
+	    ERR << "Error adding package to SQL: " << sqlite3_errmsg (_db) << endl;
 	}
     }
+    return;
 }
 
 
-static void
-write_resolvable_deps (RCDB *rcdb, sqlite_int64 id, Resolvable::constPtr res)
+void
+DbAccess::writeDependencies(sqlite_int64 id, Resolvable::constPtr res)
 {
-    write_deps (rcdb, id, RC_DEP_TYPE_REQUIRE, res->dep (Dep::REQUIRES));
-    write_deps (rcdb, id, RC_DEP_TYPE_PROVIDE, res->dep (Dep::PROVIDES));
-    write_deps (rcdb, id, RC_DEP_TYPE_CONFLICT, res->dep (Dep::CONFLICTS));
-    write_deps (rcdb, id, RC_DEP_TYPE_OBSOLETE, res->dep (Dep::OBSOLETES));
-    write_deps (rcdb, id, RC_DEP_TYPE_PREREQUIRE, res->dep (Dep::PREREQUIRES));
-    write_deps (rcdb, id, RC_DEP_TYPE_FRESHEN, res->dep (Dep::FRESHENS));
-    write_deps (rcdb, id, RC_DEP_TYPE_RECOMMEND, res->dep (Dep::RECOMMENDS));
-    write_deps (rcdb, id, RC_DEP_TYPE_SUGGEST, res->dep (Dep::SUGGESTS));
-    write_deps (rcdb, id, RC_DEP_TYPE_ENHANCE, res->dep (Dep::ENHANCES));
+    MIL << "DbAccess::writeDependencies(" << id << ", " << *res << ")" << endl;
+
+    writeDependency( id, RC_DEP_TYPE_REQUIRE, res->dep (Dep::REQUIRES));
+    writeDependency( id, RC_DEP_TYPE_PROVIDE, res->dep (Dep::PROVIDES));
+    writeDependency( id, RC_DEP_TYPE_CONFLICT, res->dep (Dep::CONFLICTS));
+    writeDependency( id, RC_DEP_TYPE_OBSOLETE, res->dep (Dep::OBSOLETES));
+    writeDependency( id, RC_DEP_TYPE_PREREQUIRE, res->dep (Dep::PREREQUIRES));
+    writeDependency( id, RC_DEP_TYPE_FRESHEN, res->dep (Dep::FRESHENS));
+    writeDependency( id, RC_DEP_TYPE_RECOMMEND, res->dep (Dep::RECOMMENDS));
+    writeDependency( id, RC_DEP_TYPE_SUGGEST, res->dep (Dep::SUGGESTS));
+    writeDependency( id, RC_DEP_TYPE_ENHANCE, res->dep (Dep::ENHANCES));
 }
 
 
-static sqlite_int64
-write_package (RCDB *rcdb, sqlite_int64 id, Package::constPtr pkg)
+sqlite_int64
+DbAccess::writePackage (sqlite_int64 id, Package::constPtr pkg)
 {
+    MIL <<  "DbAccess::writePackage(" << id << ", " << *pkg << ")" << endl;
     int rc;
-    sqlite3_stmt *handle = rcdb->insert_pkg_handle;
+    sqlite3_stmt *handle = _insert_pkg_handle;
 
     sqlite3_bind_int64 (handle, 1, id);
     sqlite3_bind_int (handle, 2, 1);							// FIXME section is an INTEGER ?!
@@ -388,21 +418,25 @@ write_package (RCDB *rcdb, sqlite_int64 id, Package::constPtr pkg)
     sqlite3_reset (handle);
 
     if (rc != SQLITE_DONE) {
-	ERR << "Error adding package to SQL: " << sqlite3_errmsg (rcdb->db) << endl;
+	ERR << "Error adding package to SQL: " << sqlite3_errmsg (_db) << endl;
 	return -1;
     }
-    sqlite_int64 rowid = sqlite3_last_insert_rowid (rcdb->db);
-//fprintf (stderr, "%s-%s-%s : %lld\n", pkg->tag_name().c_str(),pkg->tag_version().c_str(),pkg->tag_release().c_str(), rowid);fflush(stderr);
+    sqlite_int64 rowid = sqlite3_last_insert_rowid (_db);
 
     return rowid;
 }
 
 
-static sqlite_int64
-write_resolvable (RCDB *rcdb, ResObject::constPtr obj, Package::constPtr pkg, bool is_installed)
+sqlite_int64
+DbAccess::writeResObject (ResObject::constPtr obj, bool is_installed)
 {
+    MIL << "DbAccess::writeResObject (" << *obj << ", " << (is_installed?"installed":"uninstalled") << ")" << endl;
+
+    Resolvable::constPtr res = obj;
+    Package::constPtr pkg = asKind<Package>(res);
+
     int rc;
-    sqlite3_stmt *handle = rcdb->insert_res_handle;
+    sqlite3_stmt *handle = _insert_res_handle;
 
     sqlite3_bind_text (handle, 1, obj->name().c_str(), -1, SQLITE_STATIC);
     Edition ed = obj->edition();
@@ -437,66 +471,25 @@ write_resolvable (RCDB *rcdb, ResObject::constPtr obj, Package::constPtr pkg, bo
     sqlite3_reset (handle);
 
     if (rc != SQLITE_DONE) {
-	ERR << "Error adding package to SQL: " << sqlite3_errmsg (rcdb->db) << endl;
+	ERR << "Error adding package to SQL: " << sqlite3_errmsg (_db) << endl;
 	return -1;
     }
-    sqlite_int64 rowid = sqlite3_last_insert_rowid (rcdb->db);
+    sqlite_int64 rowid = sqlite3_last_insert_rowid (_db);
+
+    if (pkg != NULL)
+	writePackage (rowid, pkg);
+
+    writeDependencies (rowid, obj);
 
     return rowid;
 }
 
 
-//-----------------------------------------------------------------------------
-
-static
-RCDB *init_db (const string & db_file)
-{
-    RCDB *db;
-
-    db = rc_db_new (db_file);
-    if (db == NULL) {
-	ERR << "Can't access database '" << db_file << "'" << endl;
-	return NULL;
-    }
-    rc_db_begin (db);
-
-    return db;
-}
-
-
-static void
-finish_db (RCDB *db)
-{
-    rc_db_commit (db);
-
-    rc_db_close (db);
-    delete (db);
-}
-
-
-static bool
-write_resolvable_to_db (RCDB *db, ResObject::constPtr obj, bool is_installed)
-{
-    Resolvable::constPtr res = obj;
-    Package::constPtr pkg = asKind<Package>(res);
-
-    sqlite_int64 id = write_resolvable (db, obj, pkg, is_installed);
-    if (id <= 0) return false;
-
-    write_package (db, id, pkg);
-    write_resolvable_deps (db, id, obj);
-
-    return true;
-}
-
-//-----------------------------------------------------------------------------
-
+//----------------------------------------------------------------------------
 void
-write_store_to_db (const string & db_file, const ResStore & store, bool is_target)
+DbAccess::writeStore( const zypp::ResStore & store, bool is_installed )
 {
-    RCDB *db = init_db (db_file);
-    if (db == NULL) return;
-    MIL << "write_store_to_db()" << endl;
+    MIL << "DbAccess::writeStore()" << endl;
 
     if (store.empty()) {
 	ERR << "Couldn't access the packaging system:" << endl;
@@ -504,28 +497,27 @@ write_store_to_db (const string & db_file, const ResStore & store, bool is_targe
     }
 
     for (ResStore::const_iterator iter = store.begin(); iter != store.end(); ++iter) {
-	if (!write_resolvable_to_db (db, *iter, is_target))
+	if (!writeResObject( *iter, is_installed))
 	    break;
     }
 
-    finish_db (db);
     return;
 }
 
-#if 0
 void
-write_resolvables_to_db (const std::string & db_file, const ResolvableList & resolvables, bool is_installed)
+DbAccess::writeResObjects( const ResObjectList & resolvables, bool is_installed )
 {
-    RCDB *db = init_db (db_file);
-    if (db == NULL) return;
-    MIL << "write_resolvables_to_db()" << endl;
+    MIL << "DbAccess::writeResObjects()" << endl;
 
-    for (ResolvableList::const_iterator iter = resolvables.begin(); iter != resolvables.end(); ++iter) {
-	if (!write_resolvable_to_db (db, *iter, is_installed))
+    prepareWrite();
+
+    for (ResObjectList::const_iterator iter = resolvables.begin(); iter != resolvables.end(); ++iter) {
+	if (!writeResObject( *iter, is_installed)) {
 	    break;
+	}
     }
 
-    finish_db (db);
+    commit();
+
     return;
 }
-#endif

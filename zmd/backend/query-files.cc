@@ -17,12 +17,12 @@ using namespace zypp;
 
 #include <sys/stat.h>
 
-#include "resolvable-writer.h"
+#include "dbsource/DbAccess.h"
 
-static ResolvableList
+static ResObjectList
 query_file (Target_Ptr target, const char *path)
 {
-    ResolvableList resolvables;
+    ResObjectList resolvables;
 #if 0
     Resolvable::constPtr resolvable = target->rpm-qp (path);	// FIXME, needs rpm -qp
     if (resolvable != NULL) {
@@ -72,10 +72,10 @@ parse_query (const char *query, bool *recursive)
 #endif
 }
 
-static ResolvableList
+static ResObjectList
 query_directory (Target_Ptr target, const char *path, bool recursive)
 {
-    ResolvableList resolvables;
+    ResObjectList resolvables;
 #warning Unclear semantics
 #if 0
     rc_extract_packages_from_directory (path, channel,
@@ -89,12 +89,12 @@ query_directory (Target_Ptr target, const char *path, bool recursive)
 
 //----------------------------------------------------------------------------
 
-static ResolvableList
+static ResObjectList
 query (Target_Ptr target, const char *uri, const char *channel_id)
 {
     char *query_part;
     char *path = NULL;
-    ResolvableList resolvables;
+    ResObjectList resolvables;
 
     /* The magic 7 is strlen ("file://") */
 
@@ -162,9 +162,11 @@ main (int argc, char **argv)
 	return 1;
     }
 
-    ResolvableList resolvables = query (God->target(), argv[2], argc == 4 ? argv[3] : NULL);
+    DbAccess db(argv[1]);
+
+    ResObjectList resolvables = query (God->target(), argv[2], argc == 4 ? argv[3] : NULL);
     if (!resolvables.empty()) {
-//	write_resolvables_to_db (argv[1], resolvables, true);
+	db.writeResObjects( resolvables, true);
     }
 
     return 0;
