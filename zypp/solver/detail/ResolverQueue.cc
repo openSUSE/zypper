@@ -212,7 +212,7 @@ ResolverQueue::processOnce ()
     int max_priority;
     bool did_something = false;
 
-    _DEBUG("ResolverQueue::processOnce()" << (int) _qitems.size() << " items");
+    _XDEBUG("ResolverQueue::processOnce()" << (int) _qitems.size() << " items");
     while ( (max_priority = qitemlist_max_priority (_qitems)) >= 0
 	    && _context->isValid () ) {
 
@@ -220,7 +220,7 @@ ResolverQueue::processOnce ()
 
 	for (QueueItemList::iterator iter = _qitems.begin(); iter != _qitems.end() && _context->isValid();) {
 	    QueueItem_Ptr qitem = *iter;
-	    _DEBUG( "=====> 1st pass: [" << *qitem << "]");
+	    _XDEBUG( "=====> 1st pass: [" << *qitem << "]");
 	    QueueItemList::iterator next = iter; ++next;
 	    if (qitem && qitem->priority() == max_priority) {
 		if (qitem->process (_context, new_qitems)) {
@@ -237,7 +237,7 @@ ResolverQueue::processOnce ()
     }
 
     _qitems = new_qitems;
-    _DEBUG(_qitems.size() << " qitems after first pass");
+    _XDEBUG(_qitems.size() << " qitems after first pass");
 
     /*
        Now make a second pass over the queue, removing any super-branches.
@@ -249,15 +249,15 @@ ResolverQueue::processOnce ()
 	QueueItemList::iterator next = iter; next++;
 	QueueItem_Ptr qitem = *iter;
 
-	_DEBUG( "=====> 2nd pass: [" << *qitem << "]");
+	_XDEBUG( "=====> 2nd pass: [" << *qitem << "]");
 	if (qitem->isBranch()) {
-	    _DEBUG("ResolverQueue::processOnce() is branch");
+	    _XDEBUG("ResolverQueue::processOnce() is branch");
 	    QueueItemBranch_Ptr branch = dynamic_pointer_cast<QueueItemBranch>(qitem);
 	    for (QueueItemList::const_iterator iter2 = _qitems.begin(); iter2 != _qitems.end(); iter2++) {
-		_DEBUG("Compare branch with [" << *(*iter2) << "]");
+		_XDEBUG("Compare branch with [" << *(*iter2) << "]");
 		if (iter != iter2
 		    && branch->contains (*iter2)) {
-		    _DEBUG("Contained within, removing");
+		    _XDEBUG("Contained within, removing");
 		    _qitems.erase (iter);
 		    break;
 		}
@@ -279,7 +279,7 @@ ResolverQueue::processOnce ()
 void
 ResolverQueue::process ()
 {
-	  _DEBUG("----- Processing -----");
+	  _XDEBUG("----- Processing -----");
 	  spew ();
 
     while (_context->isValid ()
@@ -413,15 +413,15 @@ ResolverQueue::splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueLi
 void
 ResolverQueue::spew ()
 {
-    _DEBUG("Resolver Queue: " << (_context->isInvalid() ? "INVALID" : ""));
+    _XDEBUG("Resolver Queue: " << (_context->isInvalid() ? "INVALID" : ""));
 
     if (_qitems.empty()) {
 
-	      _DEBUG( "  (empty)");
+	      _XDEBUG( "  (empty)");
 
     } else {
 	      for (QueueItemList::const_iterator iter = _qitems.begin(); iter != _qitems.end(); ++iter) {
-		  _DEBUG("  " << *(*iter));
+		  _XDEBUG("  " << *(*iter));
 	      }
 
     }
