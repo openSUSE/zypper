@@ -181,6 +181,12 @@ namespace zypp
         { return _dptr.get(); }
 
       public:
+        bool      unique() const
+	{ return _dptr.unique(); }
+
+	long      use_count() const
+	{ return _dptr.use_count(); }
+
         _constPtr getPtr() const
         { return _dptr; }
 
