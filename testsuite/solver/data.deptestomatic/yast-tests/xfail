@@ -5,3 +5,6 @@ exercise-obscureobsoletes-03-test.xml
 exercise-02conflict-06-test.xml
 exercise-alternatives-1-test.xml
 exercise-alternatives-3-test.xml
+# ppc and s390
+exercise-05reallive-2-test.xml
+exercise-bug21829-5-test.xml

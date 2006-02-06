@@ -2,3 +2,8 @@ exercise-5f-test.xml
 exercise-1f-test.xml
 exercise-9-test.xml
 exercise-12-test.xml
+#ppc
+exercise-7f-test.xml
+exercise-6f-test.xml
+#s390
+exercise-7-test.xml

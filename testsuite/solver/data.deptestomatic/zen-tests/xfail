@@ -3,3 +3,12 @@
 12-test.xml
 13-test.xml
 14-test.xml
+#ppc 
+8-test.xml
+#s390
+2-test.xml
+1-test.xml
+4-test.xml
+11-test.xml
+3-test.xml
+7-test.xml

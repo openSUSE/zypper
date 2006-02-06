@@ -1,1 +1,3 @@
 exercise-sles10-beta3-test.xml
+#ppc and s390
+exercise-stable-test.xml
