@@ -93,6 +93,8 @@ namespace zypp
       if ( it != others.end() )
         return it;
 
+#warning Support sub-locales like el_GR
+
       // not found: Remember a new code
       CodeMap::value_type nval( code_r, std::string() );
 
