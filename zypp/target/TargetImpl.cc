@@ -83,6 +83,8 @@ namespace zypp
 
     void TargetImpl::commit(ResPool pool_r)
     {
+      MIL << "TargetImpl::commit(<pool>)" << endl;
+
       PoolItemList to_uninstall;
       PoolItemList to_install;
       PoolItemList installed;
@@ -130,6 +132,7 @@ namespace zypp
 
     void TargetImpl::commit(const PoolItemList & items_r)
     {
+      MIL << "TargetImpl::commit(<list>)" << endl;
       for (PoolItemList::const_iterator it = items_r.begin();
 	it != items_r.end(); it++)
       {
