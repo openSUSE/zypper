@@ -634,6 +634,12 @@ Resolver::resolvePool ()
 
     CollectTransact info (*this);
     MIL << "Resolver::resolvePool()" << endl;
+    MIL << "Pool before resolve" << endl;
+    MIL << "---------------------------------------" << endl;
+    for (ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it) {
+	MIL << *it << endl;
+    }
+    MIL << "---------------------------------------" << endl;
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
 		   functor::functorRef<bool,PoolItem>(info) );
@@ -644,6 +650,13 @@ Resolver::resolvePool ()
 	MIL << "Have solution, copying back to pool" << endl;
 	ResolverContext_Ptr solution = bestContext();
 	solution->foreachMarked (solution_to_pool, NULL);
+
+	MIL << "Pool after resolve" << endl;
+	MIL << "---------------------------------------" << endl;
+	for (ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it) {
+	    MIL << *it << endl;
+	}
+	MIL << "---------------------------------------" << endl;
     }
     else {
 	MIL << "!!! Have NO solution !!!" << endl;
