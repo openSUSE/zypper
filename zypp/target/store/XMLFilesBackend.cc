@@ -31,12 +31,15 @@
 #include <sstream>
 #include <streambuf>
 
+#include <list>
+
 #include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
 #include "boost/filesystem/fstream.hpp"    // ditto
 
 #include "XMLFilesBackend.h"
 #include "serialize.h"
-#include <list>
+
+#include "md5.hh"
 
 #define ZYPP_DB_DIR "/var/lib/zypp_db"
 
@@ -168,7 +171,8 @@ XMLFilesBackend::initBackend()
   // FIXME duncan * handle exceptions
   DBG << "Creating directory structure..." << std::endl;
   path topdir = path(d->root.asString()) / path(ZYPP_DB_DIR);
-  create_directory(topdir);
+  if (!exists(topdir))
+    create_directory(topdir);
   MIL << "Created..." << topdir.string() << std::endl;
   std::set<Resolvable::Kind>::const_iterator it_kinds;
   for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
@@ -227,9 +231,17 @@ XMLFilesBackend::storeObject( Resolvable::constPtr resolvable )
   //DBG << std::endl << xml << std::endl;
   std::ofstream file;
   //DBG << filename << std::endl;
-  file.open(filename.c_str());
-  file << xml;
-  file.close();
+  try
+  {
+    file.open(filename.c_str());
+    file << xml;
+    file.close();
+  }
+  catch(std::exception &e)
+  {
+    ERR << "Error saving resolvable " << resolvable << std::endl;
+    ZYPP_THROW(Exception(e.what()));
+  }
 }
 
 void
@@ -589,41 +601,63 @@ std::ostream & operator<<( std::ostream & str, const XMLFilesBackend & obj )
 // SOURCES API
 ////////////////////////////////////////////////////////
 
-std::set<PersistentStorage::SourceData>
+std::list<PersistentStorage::SourceData>
 XMLFilesBackend::storedSources() const
 {
   path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("source-cache");
-  std::set<PersistentStorage::SourceData> sources;
+  std::list<PersistentStorage::SourceData> sources;
   DBG << "Reading source cache in " << source_p.string() << std::endl;
   directory_iterator end_iter;
   // return empty list if the dir does not exist
   if ( !exists( source_p ) )
   {
     ERR << "path " << source_p.string() << " does not exists. Required to read source cache " << std::endl;
-    return std::set<PersistentStorage::SourceData>();
+    return std::list<PersistentStorage::SourceData>();
   }
 
   for ( directory_iterator dir_itr( source_p ); dir_itr != end_iter; ++dir_itr )
   {
     DBG << "[source-cache] - " << dir_itr->leaf() << std::endl;
     //sources.insert( sourceDataFromCacheFile( source_p + "/" + dir_itr->leaf() ) );
-    //sources.insert(PersistentStorage::SourceData());
+    PersistentStorage::SourceData data;
+    sources.push_back(data);
   }
   MIL << "done reading source cache" << std::endl;
   return sources;
 
 }
 
-PersistentStorage::SourceData
-XMLFilesBackend::storedSource(const std::string &alias) const
-{
-  return PersistentStorage::SourceData();
-}
-
 void
 XMLFilesBackend::storeSource(const PersistentStorage::SourceData &data)
 {
+  std::string xml = toXML(data);
+  path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("source-cache");
+
+  // generate a filename
+  if (data.alias.size() == 0)
+  {
+    ZYPP_THROW(Exception("Cant save source with empty alias"));
+  }
+
+  stringstream ss(data.alias);
+  MD5 md5(ss);
   
+  //DBG << std::endl << xml << std::endl;
+  std::ofstream file;
+  //DBG << filename << std::endl;
+  try
+  {
+    std::string full_path = (source_p / md5.hex_digest()).string();
+    
+    file.open(full_path.c_str());
+    file << xml;
+    file.close();
+  }
+  catch ( std::exception &e )
+  {
+    ERR << "Error saving source " << data.alias << " in the cache" << std::endl;
+    ZYPP_THROW(Exception(e.what()));
+  }
 }
 
 void
@@ -631,13 +665,6 @@ XMLFilesBackend::deleteSource(const std::string &alias)
 {
   
 }
-
-void
-XMLFilesBackend::setSourceEnabled(const std::string &alias, bool enabled)
-{
-  
-}
-
 
 /////////////////////////////////////////////////////////////////
 } // namespace storage

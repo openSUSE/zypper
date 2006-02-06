@@ -90,11 +90,7 @@ public:
   /**
     * Query for installed Sources
     */
-  virtual std::set<PersistentStorage::SourceData> storedSources() const;
-  /**
-    * Query for installed Source
-    */
-  virtual PersistentStorage::SourceData storedSource(const std::string &alias) const;
+  virtual std::list<PersistentStorage::SourceData> storedSources() const;
   /**
     * Query for installed Sources
     */
@@ -103,11 +99,7 @@ public:
     * Query for installed Sources
     */
   virtual void deleteSource(const std::string &alias);
-  /**
-    * enable disable source
-    */
-  virtual void setSourceEnabled(const std::string &alias, bool enabled);
-
+  
 
   protected:
   std::string randomString(int length) const;

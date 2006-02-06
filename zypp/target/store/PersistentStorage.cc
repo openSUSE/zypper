@@ -89,7 +89,6 @@ PersistentStorage::deleteObject( Resolvable::Ptr resolvable )
 
 }
 
-
 std::list<Resolvable::Ptr>
 PersistentStorage::storedObjects() const
 {
@@ -114,16 +113,10 @@ PersistentStorage::storedObjects(const Resolvable::Kind kind, const std::string 
 // SOURCES API
 ////////////////////////////////////////////////////////
 
-std::set<PersistentStorage::SourceData>
+std::list<PersistentStorage::SourceData>
 PersistentStorage::storedSources() const
 {
   return d->backend->storedSources();
-}
-
-PersistentStorage::SourceData
-PersistentStorage::storedSource(const std::string &alias) const
-{
-  return d->backend->storedSource(alias);
 }
 
 void
@@ -137,13 +130,6 @@ PersistentStorage::deleteSource(const std::string &alias)
 {
   d->backend->deleteSource(alias);
 }
-
-void
-PersistentStorage::setSourceEnabled(const std::string &alias, bool enabled)
-{
-  d->backend->setSourceEnabled(alias, enabled);
-}
-
 
 /******************************************************************
 **

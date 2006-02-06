@@ -45,11 +45,18 @@ namespace zypp
       
       struct SourceData
       {
+        SourceData()
+        {
+          enabled = false;
+          autorefresh = false;
+        };
+
         bool enabled;
         bool autorefresh;
         std::string product_dir;
         std::string type;
         std::string url;
+        std::string alias;
       };
 
     public:
@@ -86,11 +93,7 @@ namespace zypp
       /**
        * Query for installed Sources
        */
-      std::set<SourceData> storedSources() const;
-      /**
-       * Query for installed Source
-       */
-      SourceData storedSource(const std::string &alias) const;
+      std::list<SourceData> storedSources() const;
       /**
        * Query for installed Sources
        */
@@ -99,10 +102,6 @@ namespace zypp
        * Query for installed Sources
        */
       void deleteSource(const std::string &alias);
-      /**
-       * enable disable source
-       */
-      void setSourceEnabled(const std::string &alias, bool enabled);
 
     private:
       class Private;

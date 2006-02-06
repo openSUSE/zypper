@@ -314,6 +314,7 @@ std::string toXML( const PersistentStorage::SourceData &obj )
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
   out << "<source-cache  xmlns=\"http://novell.com/package/metadata/suse/source-cache\">" << std::endl;
+  out << "  <enabled>" << obj.enabled << "</enabled>" << std::endl;
   out << "  <auto-refresh>" << obj.autorefresh << "</auto-refresh>" << std::endl;
   out << "  <product-dir>" << obj.product_dir << "</product-dir>" << std::endl;
   out << "  <type>" << obj.type << "</type>" << std::endl;
