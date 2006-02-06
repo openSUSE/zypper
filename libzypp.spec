@@ -63,6 +63,8 @@ make check
 
 %install
 make install DESTDIR=$RPM_BUILD_ROOT
+# Create filelist with translatins
+%{find_lang} zypp
 
 %post
 %run_ldconfig
@@ -73,7 +75,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f zypp.lang
 %defattr(-,root,root)
 %dir %{_libdir}/libzypp*so.*
 %dir %{_libdir}/zmd
