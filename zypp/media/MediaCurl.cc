@@ -272,7 +272,6 @@ void MediaCurl::attachTo (bool next)
     if ( ret != 0 ) {
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
-
   }
 
   /*---------------------------------------------------------------*
@@ -302,6 +301,10 @@ void MediaCurl::attachTo (bool next)
   if ( ret != 0 ) {
     ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
+
+  // FIXME: need a derived class to propelly compare url's
+  MediaSourceRef media( new MediaSource(_url.getScheme(), _url.asString()));
+  setMediaSource(media);
 }
 
 ///////////////////////////////////////////////////////////////////

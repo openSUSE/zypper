@@ -61,7 +61,30 @@ namespace zypp {
     	ZYPP_THROW(MediaBadUrlEmptyHostException(_url));
       if(next)
 	ZYPP_THROW(MediaNotSupportedException(_url));
-    
+
+      string path = _url.getHost();
+      path += ':';
+      path += _url.getPathName();
+
+      MediaSourceRef media( new MediaSource("nfs", path));
+      AttachedMedia  ret( findAttachedMedia( media));
+
+      if( ret.mediaSource &&
+	  ret.attachPoint &&
+	  !ret.attachPoint->empty())
+      {
+	DBG << "Using a shared media "
+	    << ret.mediaSource->name
+	    << " attached on "
+	    << ret.attachPoint->path
+	    << endl;
+
+	removeAttachPoint();
+	setAttachPoint(ret.attachPoint);
+	setMediaSource(ret.mediaSource);
+	return;
+      }
+
       const char* const filesystem = "nfs";
       std::string       mountpoint = attachPoint().asString();
       Mount mount;
@@ -74,10 +97,6 @@ namespace zypp {
 	setAttachPoint( mountpoint, true);
       }
 
-      string path = _url.getHost();
-      path += ':';
-      path += _url.getPathName();
-    
       string options = _url.getQueryParam("mountoptions");
       if(options.empty())
       {
@@ -97,8 +116,10 @@ namespace zypp {
     	optionList.push_back( "nolock" );
     	options = str::join( optionList, "," );
       }
-    
+
       mount.mount(path,mountpoint.c_str(),filesystem,options);
+
+      setMediaSource(media);
     }
 
 
@@ -115,8 +136,8 @@ namespace zypp {
       Mount mount;
       mount.umount(attachPoint().asString());
     }
-    
-    
+
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : MediaNFS::getFile

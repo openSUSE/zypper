@@ -59,6 +59,8 @@ namespace zypp {
     {
       if(next)
 	ZYPP_THROW(MediaNotSupportedException(url()));
+      MediaSourceRef media(new MediaSource("dir", _url.getPathName()));
+      setMediaSource(media);
     }
 
 

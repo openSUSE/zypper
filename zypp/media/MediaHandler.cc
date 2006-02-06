@@ -50,7 +50,6 @@ MediaHandler::MediaHandler ( const Url &      url_r,
     : _attachPoint( new AttachPoint())
     , _relativeRoot( urlpath_below_attachpoint_r)
     , _does_download( does_download_r )
-    , _isAttached( false )
     , _url( url_r )
 {
   if ( !attach_point_r.empty() ) {
@@ -93,7 +92,7 @@ MediaHandler::~MediaHandler()
 void
 MediaHandler::removeAttachPoint()
 {
-  if ( _isAttached ) {
+  if ( _mediaSource ) {
     INT << "MediaHandler deleted with media attached." << endl;
     return; // no cleanup if media still mounted!
   }
@@ -238,6 +237,22 @@ MediaHandler::createAttachPoint() const
 ///////////////////////////////////////////////////////////////////
 //
 //
+//	METHOD NAME : MediaHandler::setMediaSource
+//	METHOD TYPE : void
+//
+//	DESCRIPTION :
+//
+void
+MediaHandler::setMediaSource(const MediaSourceRef &ref)
+{
+  _mediaSource.reset();
+  if( ref && !ref->type.empty() && !ref->name.empty())
+    _mediaSource = ref;
+}
+
+///////////////////////////////////////////////////////////////////
+//
+//
 //	METHOD NAME : MediaHandler::attachedMedia
 //	METHOD TYPE : AttachedMedia
 //
@@ -246,7 +261,7 @@ MediaHandler::createAttachPoint() const
 AttachedMedia
 MediaHandler::attachedMedia() const
 {
-  if ( _isAttached && _mediaSource && _attachPoint)
+  if ( _mediaSource && _attachPoint)
     return AttachedMedia(_mediaSource, _attachPoint);
   else
     return AttachedMedia();
@@ -263,7 +278,7 @@ MediaHandler::attachedMedia() const
 //
 void MediaHandler::attach( bool next )
 {
-  if ( _isAttached )
+  if ( isAttached() )
     return;
 
 /**
@@ -274,7 +289,6 @@ void MediaHandler::attach( bool next )
 */
 
   attachTo( next ); // pass to concrete handler
-  _isAttached = true;
   MIL << "Attached: " << *this << endl;
 }
 
@@ -310,7 +324,7 @@ Pathname MediaHandler::localPath( const Pathname & pathname ) const {
 //
 void MediaHandler::disconnect()
 {
-  if ( !_isAttached )
+  if ( !isAttached() )
     return;
 
   disconnectFrom(); // pass to concrete handler
@@ -327,14 +341,25 @@ void MediaHandler::disconnect()
 //
 void MediaHandler::release( bool eject )
 {
-  if ( !_isAttached ) {
+  if ( !isAttached() ) {
+    DBG << "Request to release media - not attached" << std::endl;
     if ( eject )
       forceEject();
     return;
   }
 
-  releaseFrom( eject ); // pass to concrete handler
-  _isAttached = false;
+  DBG << "Request to release attached media "
+      << _mediaSource->asString()
+      << (_mediaSource.unique() ? ", unique" : ", not unique")
+      << std::endl;
+
+  if( _mediaSource.unique())
+  {
+    DBG << "Releasing media " << _mediaSource->asString() << std::endl;
+    releaseFrom( eject ); // pass to concrete handler
+  }
+
+  _mediaSource.reset();
   MIL << "Released: " << *this << endl;
 }
 
@@ -349,7 +374,7 @@ void MediaHandler::release( bool eject )
 void MediaHandler::provideFileCopy( Pathname srcFilename,
                                        Pathname targetFilename ) const
 {
-  if ( !_isAttached ) {
+  if ( !isAttached() ) {
     INT << "Media not_attached on provideFileCopy(" << srcFilename
         << "," << targetFilename << ")" << endl;
     ZYPP_THROW(MediaNotAttachedException(url()));
@@ -361,7 +386,7 @@ void MediaHandler::provideFileCopy( Pathname srcFilename,
 
 void MediaHandler::provideFile( Pathname filename ) const
 {
-  if ( !_isAttached ) {
+  if ( !isAttached() ) {
     INT << "Error: Not attached on provideFile(" << filename << ")" << endl;
     ZYPP_THROW(MediaNotAttachedException(url()));
   }
@@ -381,7 +406,7 @@ void MediaHandler::provideFile( Pathname filename ) const
 //
 void MediaHandler::provideDir( Pathname dirname ) const
 {
-  if ( !_isAttached ) {
+  if ( !isAttached() ) {
     INT << "Error: Not attached on provideDir(" << dirname << ")" << endl;
     ZYPP_THROW(MediaNotAttachedException(url()));
   }
@@ -400,7 +425,7 @@ void MediaHandler::provideDir( Pathname dirname ) const
 //
 void MediaHandler::provideDirTree( Pathname dirname ) const
 {
-  if ( !_isAttached ) {
+  if ( !isAttached() ) {
     INT << "Error Not attached on provideDirTree(" << dirname << ")" << endl;
     ZYPP_THROW(MediaNotAttachedException(url()));
   }
@@ -448,7 +473,7 @@ void MediaHandler::dirInfo( list<string> & retlist,
 {
   retlist.clear();
 
-  if ( !_isAttached ) {
+  if ( !isAttached() ) {
     INT << "Error: Not attached on dirInfo(" << dirname << ")" << endl;
     ZYPP_THROW(MediaNotAttachedException(url()));
   }
@@ -470,7 +495,7 @@ void MediaHandler::dirInfo( filesystem::DirContent & retlist,
 {
   retlist.clear();
 
-  if ( !_isAttached ) {
+  if ( !isAttached() ) {
     INT << "Error: Not attached on dirInfo(" << dirname << ")" << endl;
     ZYPP_THROW(MediaNotAttachedException(url()));
   }

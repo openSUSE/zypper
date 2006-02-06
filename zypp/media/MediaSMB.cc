@@ -122,6 +122,28 @@ namespace zypp {
       if(next)
 	ZYPP_THROW(MediaNotSupportedException(_url));
     
+      string path = "//";
+      path += _url.getHost() + "/" + getShare( _url.getPathName() );
+   
+      MediaSourceRef media( new MediaSource( _vfstype, path));
+      AttachedMedia  ret( findAttachedMedia( media));
+
+      if( ret.mediaSource &&
+	  ret.attachPoint &&
+	  !ret.attachPoint->empty())
+      {
+	DBG << "Using a shared media "
+	    << ret.mediaSource->name
+	    << " attached on "
+	    << ret.attachPoint->path
+	    << endl;
+
+	removeAttachPoint();
+	setAttachPoint(ret.attachPoint);
+	setMediaSource(ret.mediaSource);
+	return;
+      }
+
       std::string mountpoint = attachPoint().asString();
       if( mountpoint.empty() || mountpoint == "/")
       {
@@ -133,9 +155,6 @@ namespace zypp {
 
       Mount mount;
  
-      string path = "//";
-      path += _url.getHost() + "/" + getShare( _url.getPathName() );
-   
       Mount::Options options( _url.getQueryParam("mountoptions") );
       string username = _url.getUsername();
       string password = _url.getPassword();
@@ -209,6 +228,8 @@ namespace zypp {
     
       mount.mount( path, mountpoint.c_str(), _vfstype,
 		   options.asString(), environment );
+
+      setMediaSource(media);
     }
 
     ///////////////////////////////////////////////////////////////////

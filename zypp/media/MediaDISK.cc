@@ -46,7 +46,7 @@ namespace zypp {
     		    url_r.getPathName(), // urlpath below attachpoint
     		    false ) // does_download
     {
-      _device = _url.getQueryParam("device");
+      _device = Pathname(_url.getQueryParam("device")).asString();
       _filesystem = _url.getQueryParam("filesystem");
       if(_filesystem.empty())
 	_filesystem="auto";
@@ -74,9 +74,35 @@ namespace zypp {
       if(_device.empty())
 	ZYPP_THROW(MediaBadUrlEmptyDestinationException(url()));
     
+      PathInfo dev_info(_device);
+      if(!dev_info.isBlk())
+        ZYPP_THROW(MediaBadUrlEmptyDestinationException(url()));
+
       if(_filesystem.empty())
 	ZYPP_THROW(MediaBadUrlEmptyFilesystemException(url()));
-    
+
+      MediaSourceRef media( new MediaSource(
+      	"disk", _device, dev_info.major(), dev_info.minor()
+      ));
+      AttachedMedia  ret( findAttachedMedia( media));
+
+      if( ret.mediaSource &&
+	  ret.attachPoint &&
+	  !ret.attachPoint->empty())
+      {
+	DBG << "Using a shared media "
+	    << ret.mediaSource->name
+	    << " attached on "
+	    << ret.attachPoint->path
+	    << endl;
+
+	removeAttachPoint();
+	setAttachPoint(ret.attachPoint);
+	setMediaSource(ret.mediaSource);
+	return;
+      }
+
+ 
       Mount mount;
       std::string mountpoint = attachPoint().asString();
       if( mountpoint.empty() || mountpoint == "/")
@@ -92,8 +118,10 @@ namespace zypp {
       {
     	options="ro";
       }
-    
+
       mount.mount(_device,mountpoint.c_str(),_filesystem,options);
+
+      setMediaSource(media);
     }
 
 
@@ -108,7 +136,6 @@ namespace zypp {
     void MediaDISK::releaseFrom( bool eject )
     {
       Mount mount;
-    
       mount.umount(attachPoint().asString());
     }
 

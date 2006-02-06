@@ -57,6 +57,11 @@ class MediaHandler {
 	friend class MediaAccess;
 
 	/**
+	 * The attached media source.
+	 */
+        MediaSourceRef _mediaSource;
+
+	/**
 	 * Returns the attached media. Used by MediaManager
 	 * to find other handlers using the same source.
 	 */
@@ -90,18 +95,7 @@ class MediaHandler {
 	 **/
 	bool _does_download;
 
-        /**
-	 * True, if media is attached.
-	 **/
-	bool _isAttached;
-
     protected:
-    	// FIXME: private...?
-	/**
-	 * The attached media source.
-	 */
-        MediaSourceRef _mediaSource;
-
         /**
 	 * Url to handle
 	 **/
@@ -132,6 +126,13 @@ class MediaHandler {
 	 * Remove unused attach point.
 	 */
 	void             removeAttachPoint();
+
+	std::string      mediaSourceName() const
+	{
+	  return _mediaSource ? _mediaSource->name : "";
+	}
+
+	void             setMediaSource(const MediaSourceRef &ref);
 
 	/**
 	 * Ask the media manager if specified media source
@@ -359,7 +360,7 @@ class MediaHandler {
 	/**
 	 * True if media is attached.
 	 **/
-	bool isAttached() const { return _isAttached; }
+	bool isAttached() const { return _mediaSource; }
 
 	/**
 	 * Return the local directory that corresponds to medias url,

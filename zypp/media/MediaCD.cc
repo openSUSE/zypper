@@ -196,36 +196,34 @@ namespace zypp {
 
 	AttachedMedia ret( findAttachedMedia( media));
 
-	if( ret.attachPoint &&
-	    ret.mediaSource &&
-	   !ret.attachPoint->empty() &&
-	    media->equals( *ret.mediaSource))
+	if( ret.mediaSource && ret.attachPoint &&
+	   !ret.attachPoint->empty())
 	{
-    		DBG << "Using a shared media "
-		    << ret.mediaSource->name
-		    << " attached on "
-		    << ret.attachPoint->path
-		    << endl;
-                removeAttachPoint();
-		setAttachPoint(ret.attachPoint);
-		_mediaSource = ret.mediaSource;
-    		_lastdev = count;
-		mountsucceeded = true;
-		break;
+	  DBG << "Using a shared media "
+	      << ret.mediaSource->name
+	      << " attached on "
+	      << ret.attachPoint->path
+	      << endl;
+	  removeAttachPoint();
+	  setAttachPoint(ret.attachPoint);
+	  setMediaSource(ret.mediaSource);
+	  _lastdev = count;
+	  mountsucceeded = true;
+	  break;
 	}
 	// FIXME: hmm... we may also
 	// - check against hal/mtab if still mounted
 	// - if !ret, check if already mounted (e.g.
 	//   by automounter) and reuse (!temp) ?
 
-    	// close tray
-    	closeTray( *it );
-    
-    	// try all filesystems in sequence
-    	for(list<string>::iterator fsit = filesystems.begin()
-    	    ; !mountsucceeded && fsit != filesystems.end()
-    	    ; ++fsit)
-    	{
+	// close tray
+	closeTray( *it );
+
+	// try all filesystems in sequence
+	for(list<string>::iterator fsit = filesystems.begin()
+	    ; !mountsucceeded && fsit != filesystems.end()
+	    ; ++fsit)
+	{
 	  try {
 	    // FIXME: verify, if this mountpoint isn't already in use.
 	    if( mountpoint.empty() || mountpoint == "/")
@@ -241,7 +239,7 @@ namespace zypp {
     	    mount.mount (*it, mountpoint.c_str(), *fsit, options);
 
 	    _lastdev = count;
-	    _mediaSource = media;
+	    setMediaSource(media);
 	    mountsucceeded = true;
 	  }
 	  catch (const MediaException & excpt_r)
@@ -270,40 +268,14 @@ namespace zypp {
     //
     void MediaCD::releaseFrom( bool eject )
     {
-      DBG << "Release CD ... use count = "
-          << _mediaSource.use_count()
-	  << (_mediaSource.unique() ? ", unique" : ", not unique")
-	  << std::endl;
-
-      // check if a device is mounted
-      if ( !_mediaSource)
-      {
-    	if (eject)			// eject wanted -> eject all devices
-    	{
-    	    for (DeviceList::iterator it = _devices.begin()
-    		; it != _devices.end()
-    		; ++it )
-    	    {
-    	        openTray( *it );
-    	    }
-    	    return;
-	}
-	ZYPP_THROW(MediaNotAttachedException(url()));
-      }
-      else
-      if( _mediaSource.unique())
-      {
-        Mount mount;
-        mount.umount(attachPoint().asString());
+      Mount mount;
+      mount.umount(attachPoint().asString());
     
-        // eject device
-        if (eject)
-        {
-	  openTray( _mediaSource->name );
-        }
+      // eject device
+      if (eject)
+      {
+        openTray( mediaSourceName() );
       }
-
-      _mediaSource.reset();
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -316,10 +288,22 @@ namespace zypp {
     //
     void MediaCD::forceEject()
     {
-      if ( !_mediaSource) {	// no device mounted
+      if ( !isAttached()) {	// no device mounted in this instance
 	for ( DeviceList::iterator it = _devices.begin(); it != _devices.end(); ++it ) {
-	  if ( openTray( *it ) )
-	    break; // on 1st success
+	  PathInfo dev_info( *it);
+	  if( !dev_info.isBlk())
+		continue;
+
+	  MediaSourceRef media( new MediaSource(
+	    "cdrom", *it, dev_info.major(), dev_info.minor()
+	  ));
+
+	  AttachedMedia ret( findAttachedMedia( media));
+	  if( !ret.mediaSource)
+	  {
+	    if ( openTray( *it ) )
+	      break; // on 1st success
+	  }
 	}
       }
     }
