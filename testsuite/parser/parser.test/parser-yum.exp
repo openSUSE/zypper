@@ -25,10 +25,12 @@
 # are expected to fail
 #
 #
-if { [catch {  set filenames [glob $srcdir/tests/*.xml] } ] } {
-    puts "No .xml files found"
-} else {
-    # foreach file, call multi-run (from testsuite/lib)
+  return
 
-    foreach file $filenames { runYumTest $file }
-}
+#if { [catch {  set filenames [glob $srcdir/tests/*.xml] } ] } {
+#    puts "No .xml files found"
+#} else {
+#    # foreach file, call multi-run (from testsuite/lib)
+#
+#    foreach file $filenames { runYumTest $file }
+#}
