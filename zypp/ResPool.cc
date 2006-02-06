@@ -21,6 +21,25 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  namespace
+  {
+    /** the empty pool used by ResPool::ResPool() */
+    pool::PoolTraits::Impl_constPtr noPool()
+    {
+      static pool::PoolTraits::Impl_constPtr _noPool( new pool::PoolImpl );
+      return _noPool;
+    }
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : ResPool::ResPool
+  //	METHOD TYPE : Ctor
+  //
+  ResPool::ResPool()
+  : _pimpl( noPool() )
+  {}
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : ResPool::ResPool

@@ -47,6 +47,8 @@ namespace zypp
     typedef pool::PoolTraits::const_nameiterator const_nameiterator;
 
   public:
+    /** Default ctor: empty pool */
+    ResPool();
     /** Dtor */
     ~ResPool();
 

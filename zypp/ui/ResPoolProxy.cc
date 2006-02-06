@@ -10,7 +10,7 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+#include "zypp/base/Logger.h"
 
 #include "zypp/ui/ResPoolProxy.h"
 
@@ -30,6 +30,26 @@ namespace zypp
     /** ResPoolProxy implementation. */
     struct ResPoolProxy::Impl
     {
+    public:
+      Impl()
+      {}
+
+      Impl( ResPool_Ref pool_r )
+      : _pool( pool_r )
+      {
+#if 0
+        ui::PP collect;
+        for_each( query.begin(), query.end(),
+                  functorRef<void,ResPool::Item>( collect ) );
+        collect.dumpOn();
+#endif
+
+      }
+
+
+
+    private:
+      ResPool_Ref _pool;
 
     public:
       /** Offer default Impl. */
@@ -38,12 +58,6 @@ namespace zypp
         static shared_ptr<Impl> _nullimpl( new Impl );
         return _nullimpl;
       }
-
-    private:
-      friend Impl * rwcowClone<Impl>( const Impl * rhs );
-      /** clone for RWCOW_pointer */
-      Impl * clone() const
-      { return new Impl( *this ); }
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -66,6 +80,15 @@ namespace zypp
     //
     ResPoolProxy::ResPoolProxy()
     : _pimpl( Impl::nullimpl() )
+    {}
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : ResPoolProxy::ResPoolProxy
+    //	METHOD TYPE : Ctor
+    //
+    ResPoolProxy::ResPoolProxy( ResPool_Ref pool_r )
+    : _pimpl( new Impl( pool_r ) )
     {}
 
     ///////////////////////////////////////////////////////////////////
