@@ -464,18 +464,22 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 #endif
 	initial_queue->addPoolItemToInstall (r);
     }
+    _items_to_install.clear();
 
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
 	initial_queue->addPoolItemToRemove (*iter, true /* remove-only mode */);
     }
+    _items_to_remove.clear();
 
     for (PoolItemList::const_iterator iter = _items_to_verify.begin(); iter != _items_to_verify.end(); iter++) {
 	initial_queue->addPoolItemToVerify (*iter);
     }
+    _items_to_verify.clear();
 
     for (PoolItemList::const_iterator iter = _items_to_establish.begin(); iter != _items_to_establish.end(); iter++) {
 	initial_queue->addPoolItemToEstablish (*iter);
     }
+    _items_to_establish.clear();
 
     for (CapSet::const_iterator iter = _extra_caps.begin(); iter != _extra_caps.end(); iter++) {
 	initial_queue->addExtraCapability (*iter);
