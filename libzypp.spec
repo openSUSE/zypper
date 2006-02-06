@@ -76,13 +76,15 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %dir %{_libdir}/libzypp*so.*
+%dir %{_libdir}/zmd
+%{_libdir}/zmd/*
 
 %files devel
 %defattr(-,root,root)
 %dir %{_libdir}/libzypp.so
 %dir %{_libdir}/libzypp.la
-#%dir %{_docdir}/zypp
-#%{_docdir}/zypp/*
+%dir %{_docdir}/zypp
+%{_docdir}/zypp/*
 %dir %{prefix}/include/zypp
 %{prefix}/include/zypp/*
 %dir %{prefix}/share/zypp
