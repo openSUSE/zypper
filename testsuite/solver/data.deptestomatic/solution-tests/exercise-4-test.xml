@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <!--
    install package A and B, A conflicts B
+   Returns only RESOLVER_INFO_TYPE_REJECT_INSTALL, so no ignore
+   solution would be able.
 -->
 <test>
 <setup>

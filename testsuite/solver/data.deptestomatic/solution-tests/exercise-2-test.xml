@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <!--
-   install package with unfulfilled dependency
+   Install package with unfulfilled dependency. It returns "only"
+   RESOLVER_INFO_TYPE_REJECT_INSTALL; We have no possibility ignoring
+   the dependencies.
 -->
 <test>
 <setup>

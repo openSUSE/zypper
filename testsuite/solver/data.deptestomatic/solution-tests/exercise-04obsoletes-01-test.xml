@@ -5,8 +5,10 @@
   <channel name="test" file="exercise-04obsoletes-packages.xml"/>
 </setup>
 
-<!-- foo is installed, but obsoleted by candidate foonew; 
-     reinstalling foo should results to error RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL; -->
+<!-- foo is installed, but obsoleted by candidate foonew which is set for installation. 
+     Reinstalling foo should results to error -->
+<!-- RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL  cause obsoletes means that they -->
+<!-- are conflicting each other too -->
 <!-- Better solution would be RESOLVER_INFO_TYPE_INSTALL_TO_BE_UNINSTALLED - -->
 <!-- "Can't install p since it is already marked as needing to be uninstalled" -->
 
