@@ -98,7 +98,7 @@ proc multi-run { src } {
   # check if we're run with an absolute or an relative path
   # if relative ($src ="./xxx"), set $prefix relative
   set prefix ""
-  if {root == "."} {
+  if {$root == "."} {
 	set prefix "../../"
   }
 
