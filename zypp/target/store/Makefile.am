@@ -7,7 +7,7 @@ SUBDIRS = xml
 
 targetstoreincludedir = $(pkgincludedir)/target/store
 
-targetstoreinclude_HEADERS = PersistentStorage.h Backend.h XMLFilesBackend.h serialize.h xml_escape_parser.hpp parser_utils.hpp
+targetstoreinclude_HEADERS = PersistentStorage.h Backend.h XMLFilesBackend.h serialize.h xml_escape_parser.hpp parser_utils.hpp md5.hh
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_target_store.la
 
