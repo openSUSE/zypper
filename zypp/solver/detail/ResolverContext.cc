@@ -967,6 +967,7 @@ void
 ResolverContext::addError (ResolverInfo_Ptr info)
 {
     info->flagAsError ();
+    WAR << "******** Error: " << *info << endl;
     addInfo (info);
 }
 
