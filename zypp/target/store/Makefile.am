@@ -13,7 +13,7 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_target_store.la
 
 ## ##################################################
 
-lib@PACKAGE@_target_store_la_SOURCES = PersistentStorage.cc Backend.cc XMLFilesBackend.cc serialize.cc xml_escape_parser.cpp
+lib@PACKAGE@_target_store_la_SOURCES = PersistentStorage.cc Backend.cc XMLFilesBackend.cc serialize.cc xml_escape_parser.cpp md5.cc
 
 lib@PACKAGE@_target_store_la_LIBADD = -lboost_regex -lboost_filesystem \
 	xml/lib@PACKAGE@_target_xml.la
