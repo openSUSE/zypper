@@ -19,83 +19,274 @@
  * 02111-1307, USA.
  */
 
-#include "DbExtract.h"
 #include "DbSourceImpl.h"
+
 #include "DbPackageImpl.h"
+#if 0
 #include "DbScriptImpl.h"
 #include "DbMessageImpl.h"
 #include "DbPatchImpl.h"
 #include "DbPatternImpl.h"
 #include "DbProductImpl.h"
+#endif
 
 #include "zypp/source/SourceImpl.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
+#include "zypp/CapFactory.h"
 
 using namespace std;
 using namespace zypp;
 
 //---------------------------------------------------------------------------
 
-DbSourceImpl::DbSourceImpl(media::MediaAccess::Ptr & media_r, const Pathname & path_r, const std::string & alias_r)
-    : SourceImpl (media_r, path_r, alias_r)
-    , _source (Source_Ref::noSource)
-    , _pathname (path_r)
+DbSourceImpl::DbSourceImpl()
+    : _db (NULL)
 {
+}
+
+
+void
+DbSourceImpl::factoryInit()
+{
+    MIL << "DbSourceImpl::factoryInit()" << endl;
+
+    try {
+	media::MediaManager media_mgr;
+	MIL << "Adding no media verifier" << endl;
+	media_mgr.delVerifier(_media);
+	media_mgr.addVerifier(_media, media::MediaVerifierRef(new media::NoVerifier()));
+    }
+    catch (const Exception & excpt_r)
+    {
+#warning FIXME: If media data is not set, verifier is not set. Should the media be refused instead?
+	ZYPP_CAUGHT(excpt_r);
+	WAR << "Verifier not found" << endl;
+    }
+    return;
+}
+
+void
+DbSourceImpl::factoryCtor( const media::MediaId & media_r, const Pathname & path_r, const std::string & alias_r, const Pathname cache_dir_r)
+{
+    MIL << "DbSourceImpl::factoryCtor(<media>, " << path_r << ", " << alias_r << ", " << cache_dir_r << ")" << endl;
+    _media = media_r;
+    _alias = alias_r;
+    _cache_dir = cache_dir_r;
+}
+
+void
+DbSourceImpl::attachDatabase( sqlite3 *db)
+{
+    _db = db;
+}
+
+//-----------------------------------------------------------------------------
+
+static sqlite3_stmt *
+create_dependency_handle (sqlite3 *db)
+{
+    const char *query;
+    int rc;
+    sqlite3_stmt *handle = NULL;
+
+    query =
+	//	0         1     2        3        4      5     6
+        "SELECT dep_type, name, version, release, epoch, arch, relation "
+        "FROM dependencies "
+        "WHERE resolvable_id = ?";
+
+    rc = sqlite3_prepare (db, query, -1, &handle, NULL);
+    if (rc != SQLITE_OK) {
+	ERR << "Can not prepare dependency selection clause: " << sqlite3_errmsg (db) << endl;
+        sqlite3_finalize (handle);
+        return NULL;
+    }
+
+    return handle;
+}
+
+static sqlite3_stmt *
+create_package_handle (sqlite3 *db)
+{
+    const char *query;
+    int rc;
+    sqlite3_stmt *handle = NULL;
+
+    query = 
+	//      0   1     2        3        4      5
+        "SELECT id, name, version, release, epoch, arch, "
+	//      6               7
+        "       installed_size, catalog,"
+	//      8          9      10       11
+        "       installed, local, section, file_size,"
+	//      12       13           14
+        "       summary, description, package_filename,"
+	//      15
+        "       install_only "
+        "FROM packages "
+        "WHERE catalog = ?";
+
+    rc = sqlite3_prepare (db, query, -1, &handle, NULL);
+    if (rc != SQLITE_OK) {
+	ERR << "Can not prepare package_details selection clause: " << sqlite3_errmsg (db) << endl;
+        sqlite3_finalize (handle);
+        return NULL;
+    }
+
+    return handle;
 }
 
 
 void
 DbSourceImpl::createResolvables(Source_Ref source_r)
 {
+    MIL << "DbSourceImpl::createResolvables(" << source_r.id() << ")" << endl;
     _source = source_r;
-    extractDbFile (_pathname.asString(), this);
+    if (_db == NULL) {
+	ERR << "Must call attachDatabase() first" << endl;
+	return;
+    }
+
+    _dependency_handle = create_dependency_handle (_db);
+    if (_dependency_handle == NULL) return;
+
+    createPackages();
+
+    return;
+}
+
+
+void
+DbSourceImpl::createPackages(void)
+{
+    sqlite3_stmt *handle = create_package_handle (_db);
+    if (handle == NULL) return;
+
+    sqlite3_bind_text (handle, 1, _source.id().c_str(), -1, SQLITE_STATIC);
+
+    int rc;
+    while ((rc = sqlite3_step (handle)) == SQLITE_ROW) {
+
+	string name;
+
+	try
+	{
+	    shared_ptr<DbPackageImpl> impl(new DbPackageImpl( _source ));
+
+	    sqlite_int64 id = sqlite3_column_int64( handle, 0 );
+	    name = (const char *) sqlite3_column_text (handle, 1);
+	    string version ((const char *) sqlite3_column_text (handle, 2));
+	    string release ((const char *) sqlite3_column_text (handle, 3));
+	    unsigned epoch = sqlite3_column_int (handle, 4);
+	    Arch arch (DbAccess::Rc2Arch( (RCArch)(sqlite3_column_int (handle, 5)) ) );
+
+	    impl->readHandle( handle );
+
+	    // Collect basic Resolvable data
+	    NVRAD dataCollect( name,
+			Edition( version, release, epoch ),
+			arch,
+			createDependencies (id));
+
+	    Package::Ptr package = detail::makeResolvableFromImpl(dataCollect, impl);
+	    _store.insert( package );
+	}
+	catch (const Exception & excpt_r)
+	{
+	    ERR << "Cannot create package object '"+name+"' from catalog '"+_source.id()+"'" << endl;
+	    sqlite3_reset (handle);
+	    ZYPP_RETHROW (excpt_r);
+	}
+    }
+
+    sqlite3_reset (handle);
+    return;
 }
 
 //-----------------------------------------------------------------------------
 
 Dependencies
-DbSourceImpl::createDependencies (const DbReader & parsed)
+DbSourceImpl::createDependencies (sqlite_int64 resolvable_id)
 {
     Dependencies deps;
+    CapFactory factory;
 
-    deps[Dep::PROVIDES] = parsed.provides;
-    deps[Dep::PREREQUIRES] = parsed.prerequires;
-    deps[Dep::REQUIRES] = parsed.requires;
-    deps[Dep::CONFLICTS] = parsed.conflicts;
-    deps[Dep::OBSOLETES] = parsed.obsoletes;
-    deps[Dep::RECOMMENDS] = parsed.recommends;
-    deps[Dep::SUGGESTS] = parsed.suggests;
-    deps[Dep::FRESHENS] = parsed.freshens;
-    deps[Dep::ENHANCES] = parsed.enhances;
+    sqlite3_bind_int64 (_dependency_handle, 1, resolvable_id);
 
+    RCDependencyType dep_type;
+    string name, version, release;
+    unsigned epoch;
+    Arch arch;
+    Rel rel;
+    Capability cap;
+    Resolvable::Kind dkind = ResTraits<Package>::kind;  // default to package
+
+    const char *text;
+    int rc;
+    while ((rc = sqlite3_step( _dependency_handle)) == SQLITE_ROW) {
+	try {
+	    dep_type = (RCDependencyType)sqlite3_column_int( _dependency_handle, 0);
+	    name = string ( (const char *)sqlite3_column_text( _dependency_handle, 1) );
+	    text = (const char *)sqlite3_column_text( _dependency_handle, 2);
+	    if (text != NULL)
+		version = text;
+	    else
+		version.clear();
+	    text = (const char *)sqlite3_column_text( _dependency_handle, 3);
+	    if (text != NULL)
+		release = text;
+	    else
+		release.clear();
+	    epoch = sqlite3_column_int( _dependency_handle, 4 );
+	    arch = DbAccess::Rc2Arch( (RCArch) sqlite3_column_int( _dependency_handle, 5 ) );
+	    rel = DbAccess::Rc2Rel( (RCResolvableRelation) sqlite3_column_int( _dependency_handle, 6 ) );
+
+	    cap = factory.parse( dkind, name, rel, Edition( version, release, epoch ) );
+	    switch (dep_type) {
+		case RC_DEP_TYPE_REQUIRE:
+		    deps[Dep::REQUIRES].insert( cap );
+		break;
+		case RC_DEP_TYPE_PROVIDE:
+		    deps[Dep::PROVIDES].insert( cap );
+		break;
+		case RC_DEP_TYPE_CONFLICT:
+		    deps[Dep::CONFLICTS].insert( cap );
+		break;
+		case RC_DEP_TYPE_OBSOLETE:
+		    deps[Dep::OBSOLETES].insert( cap );
+		break;
+		case RC_DEP_TYPE_PREREQUIRE:
+		    deps[Dep::PREREQUIRES].insert( cap );
+		break;
+		case RC_DEP_TYPE_FRESHEN:
+		    deps[Dep::FRESHENS].insert( cap );
+		break;
+		case RC_DEP_TYPE_RECOMMEND:
+		    deps[Dep::RECOMMENDS].insert( cap );
+		break;
+		case RC_DEP_TYPE_SUGGEST:
+		    deps[Dep::SUGGESTS].insert( cap );
+		break;
+		case RC_DEP_TYPE_ENHANCE:
+		    deps[Dep::ENHANCES].insert( cap );
+		break;
+		default:
+		   ERR << "Unhandled dep_type " << dep_type << endl;
+		break;
+	    }
+	}
+	catch ( Exception & excpt_r ) {
+	    ERR << "Can't parse dependencies for resolvable_id " << resolvable_id << ", name " << name << endl;
+	    ZYPP_RETHROW( excpt_r );
+	}
+    }
+
+    sqlite3_reset (_dependency_handle);
     return deps;
 }
 
-
-Package::Ptr
-DbSourceImpl::createPackage (const DbReader & parsed)
-{
-    try
-    {
-	shared_ptr<DbPackageImpl> impl(new DbPackageImpl(_source, parsed));
-
-	// Collect basic Resolvable data
-	NVRAD dataCollect( parsed.name,
-			Edition( parsed.version, parsed.release, parsed.epoch ),
-			Arch( parsed.arch ),
-			createDependencies (parsed));
-	Package::Ptr package = detail::makeResolvableFromImpl(dataCollect, impl);
-	return package;
-    }
-    catch (const Exception & excpt_r)
-    {
-	ERR << excpt_r << endl;
-	throw "Cannot create package object";
-    }
-    return NULL;
-}
-
+#if 0
 
 Message::Ptr
 DbSourceImpl::createMessage (const DbReader & parsed)
@@ -255,6 +446,7 @@ DbSourceImpl::parserCallback (const DbReader & parsed)
     ZYPP_CAUGHT (excpt_r);
   }
 }
+#endif
 
 //-----------------------------------------------------------------------------
 

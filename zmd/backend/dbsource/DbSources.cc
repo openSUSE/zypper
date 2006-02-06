@@ -42,7 +42,8 @@ using namespace zypp;
 
 DbSources::DbSources (sqlite3 *db)
     : _db (db)
-{
+{ 
+    MIL << "DbSources::DbSources(" << db << ")" << endl;
 }
 
 DbSources::~DbSources ()
@@ -54,6 +55,9 @@ DbSources::sources (bool refresh)
 {
     MIL << "DbSources::sources(" << (refresh ? "refresh" : "") << ")" << endl;
 
+    if (_db == NULL)
+	return _sources;
+
     if (!refresh
 	&& !_sources.empty())
     {
@@ -61,9 +65,6 @@ DbSources::sources (bool refresh)
     }
 
     _sources.clear();
-
-    media::MediaManager mmgr;
-    media::MediaId mediaid = mmgr.open(Url("file://"));
 
     const char *query =
         "SELECT id, name, alias, description, priority, priority_unsubd "
@@ -73,8 +74,12 @@ DbSources::sources (bool refresh)
     int rc = sqlite3_prepare (_db, query, -1, &handle, NULL);
     if (rc != SQLITE_OK) {
 	ERR << "Can not read 'channels': " << sqlite3_errmsg (_db) << endl;
-	goto cleanup;
+	return _sources;
     }
+
+    media::MediaManager mmgr;
+    media::MediaId mediaid = mmgr.open(Url("file://"));
+    SourceFactory factory;
 
     while ((rc = sqlite3_step (handle)) == SQLITE_ROW) {
 	string id ((const char *) sqlite3_column_text (handle, 0));
@@ -89,39 +94,35 @@ DbSources::sources (bool refresh)
 	    << ", alias " << alias
 	    << ", desc " << desc
 	    << ", prio " << priority
-	    << ", pr. un" << priority_unsub
+	    << ", pr. un " << priority_unsub
 	    << endl;
-#if 0
 
 	try {
 
-	    Source_Ref::Impl_Ptr impl = new DbSourceImpl (mediaid, pathname, alias);
+	    DbSourceImpl *impl = new DbSourceImpl ();
+	    impl->factoryCtor (mediaid, Pathname(), alias);
 	    impl->setId( id );
-	    impl->setName( name );
+	    impl->setZmdName( name );
+	    impl->setZmdDescription ( desc );
 	    impl->setPriority( priority );
 	    impl->setPriorityUnsubscribed( priority_unsub );
-	    SourceFactory _f;
-	    Source_Ref s = _f.createFrom( impl );
+
+	    impl->attachDatabase (_db);
+
+	    Source_Ref src( factory.createFrom( impl ) );
+	    _sources.push_back( src );
 	}
 	catch (Exception & excpt_r) {
 	    ZYPP_CAUGHT(excpt_r);
 	}
-        if (!strcmp (rc_channel_get_id (ch), "@system")) {
-            rc_channel_set_system (ch);
-            rc_channel_set_hidden (ch);
-        }
-#endif
+
     }
 
     if (rc != SQLITE_DONE) {
 	ERR << "Error while reading 'channels': " << sqlite3_errmsg (_db) << endl;
 	_sources.clear();
-        goto cleanup;
     }
 
- cleanup:
-    if (handle)
-        sqlite3_finalize (handle);
-
+    MIL << "Read " << _sources.size() << " catalogs" << endl;
     return _sources;
 }

@@ -23,72 +23,8 @@ IMPL_PTR_TYPE(DbAccess);
 using namespace std;
 using namespace zypp;
 
-//----------------------------------------------------------------------------
 
-// Convert ZYPP relation operator to ZMD int
-static int
-Rel2Int (Rel op)
-{
-#define RELATION_ANY 0
-#define RELATION_EQUAL (1 << 0)
-#define RELATION_LESS (1 << 1)
-#define RELATION_GREATER (1 << 2)
-#define RELATION_NONE (1 << 3)
-
-   /* This enum is here so that gdb can give us pretty strings */
-
-    typedef enum {
-	RC_RELATION_INVALID            = -1,
-	RC_RELATION_ANY                = RELATION_ANY,
-	RC_RELATION_EQUAL              = RELATION_EQUAL,
-	RC_RELATION_LESS               = RELATION_LESS,
-	RC_RELATION_LESS_EQUAL         = RELATION_LESS | RELATION_EQUAL,
-	RC_RELATION_GREATER            = RELATION_GREATER,
-	RC_RELATION_GREATER_EQUAL      = RELATION_GREATER | RELATION_EQUAL,
-	RC_RELATION_NOT_EQUAL          = RELATION_LESS | RELATION_GREATER,
-	RC_RELATION_NONE               = RELATION_NONE,
-    } RCResolvableRelation;
-
-    switch (op.inSwitch()) {
-	case Rel::EQ_e:	   return RC_RELATION_EQUAL; break;
-	case Rel::NE_e:    return RC_RELATION_NOT_EQUAL; break;
-	case Rel::LT_e:    return RC_RELATION_LESS; break;
-	case Rel::LE_e:    return RC_RELATION_LESS_EQUAL; break;
-	case Rel::GT_e:    return RC_RELATION_GREATER; break;
-	case Rel::GE_e:    return RC_RELATION_GREATER_EQUAL; break;
-	case Rel::ANY_e:   return RC_RELATION_ANY; break;
-	case Rel::NONE_e:  return RC_RELATION_NONE; break;
-    }
-    return RC_RELATION_INVALID;
-}
-
-//----------------------------------------------------------------------------
-
-// convert ZYPP architecture string to ZMD int
-
-typedef enum {
-    RC_ARCH_UNKNOWN = -1,
-    RC_ARCH_NOARCH = 0,
-    RC_ARCH_I386,
-    RC_ARCH_I486,
-    RC_ARCH_I586,
-    RC_ARCH_I686,
-    RC_ARCH_X86_64,
-    RC_ARCH_IA32E,
-    RC_ARCH_ATHLON,
-    RC_ARCH_PPC,
-    RC_ARCH_PPC64,
-    RC_ARCH_S390,
-    RC_ARCH_S390X,
-    RC_ARCH_IA64,
-    RC_ARCH_SPARC,
-    RC_ARCH_SPARC64,
-} RCArch;
-
-static int
-arch2zmd (string str)
-{
-    struct archrc {
+static struct archrc {
 	char *arch;
 	RCArch rc;
     } archtable[] = {
@@ -110,13 +46,81 @@ arch2zmd (string str)
 	{ NULL,		RC_ARCH_UNKNOWN }
     };
 
+
+//----------------------------------------------------------------------------
+
+// Convert ZYPP relation operator to ZMD RCResolvableRelation
+
+RCResolvableRelation
+DbAccess::Rel2Rc (Rel op)
+{
+
+   /* This enum is here so that gdb can give us pretty strings */
+
+    switch (op.inSwitch()) {
+	case Rel::EQ_e:	   return RC_RELATION_EQUAL; break;
+	case Rel::NE_e:    return RC_RELATION_NOT_EQUAL; break;
+	case Rel::LT_e:    return RC_RELATION_LESS; break;
+	case Rel::LE_e:    return RC_RELATION_LESS_EQUAL; break;
+	case Rel::GT_e:    return RC_RELATION_GREATER; break;
+	case Rel::GE_e:    return RC_RELATION_GREATER_EQUAL; break;
+	case Rel::ANY_e:   return RC_RELATION_ANY; break;
+	case Rel::NONE_e:  return RC_RELATION_NONE; break;
+    }
+    return RC_RELATION_INVALID;
+}
+
+
+Rel
+DbAccess::Rc2Rel (RCResolvableRelation rel)
+{
+    switch (rel) {
+	case RC_RELATION_INVALID:	return Rel::NONE; break;
+	case RC_RELATION_ANY:		return Rel::ANY; break;
+	case RC_RELATION_EQUAL:		return Rel::EQ; break;
+	case RC_RELATION_LESS:		return Rel::LT; break;
+	case RC_RELATION_LESS_EQUAL:	return Rel::LE; break;
+	case RC_RELATION_GREATER:	return Rel::GT; break;
+	case RC_RELATION_GREATER_EQUAL:	return Rel::GE; break;
+	case RC_RELATION_NOT_EQUAL:	return Rel::NE; break;
+	case RC_RELATION_NONE:		return Rel::NONE; break;
+    }
+    return Rel::NONE;
+}
+
+//----------------------------------------------------------------------------
+
+// convert ZYPP architecture string to ZMD int
+
+RCArch
+DbAccess::Arch2Rc (const Arch & arch)
+{
+    string arch_str = arch.asString();
     struct archrc *aptr = archtable;
     while (aptr->arch != NULL) {
-	break;
+	if (arch_str == aptr->arch)
+	    break;
 	aptr++;
     }
 
     return aptr->rc;
+}
+
+Arch
+DbAccess::Rc2Arch (RCArch rc)
+{
+    if (rc == RC_ARCH_UNKNOWN)
+	return Arch();
+
+    struct archrc *aptr = archtable;
+    while (aptr->arch != NULL) {
+	if (aptr->rc == rc) {
+	    return Arch (aptr->arch);
+	}
+	aptr++;
+    }
+    WAR << "DbAccess::Rc2Arch(" << rc << ") unknown" << endl;
+    return Arch ();
 }
 
 
@@ -369,7 +373,7 @@ DbAccess::writeDependency( sqlite_int64 res_id, RCDependencyType type, const zyp
 	}
 
 	sqlite3_bind_int (handle, 7, 0);				// arch
-	sqlite3_bind_int (handle, 8, Rel2Int(iter->op()));
+	sqlite3_bind_int (handle, 8, Rel2Rc( iter->op() ));
 
 	rc = sqlite3_step (handle);
 	sqlite3_reset (handle);
@@ -448,7 +452,7 @@ DbAccess::writeResObject (ResObject::constPtr obj, bool is_installed)
 	sqlite3_bind_int (handle, 4, ed.epoch());
     }
 
-    sqlite3_bind_int (handle, 5, arch2zmd (obj->arch().asString()));
+    sqlite3_bind_int (handle, 5, Arch2Rc (obj->arch()));
     if (pkg != NULL) {
 	sqlite3_bind_int64 (handle, 7, pkg->archivesize());
 	sqlite3_bind_int64 (handle, 8, pkg->size());

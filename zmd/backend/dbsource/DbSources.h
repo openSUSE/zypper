@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef ZYPP_ZMD_BACKEND_DBSOURCES_H
-#define ZYPP_ZMD_BACKEND_DBSOURCES_H
+#ifndef ZMD_BACKEND_DBSOURCES_H
+#define ZMD_BACKEND_DBSOURCES_H
 
 #include <iosfwd>
 #include <string>
@@ -28,8 +28,6 @@
 
 #include <sqlite3.h>
 #include "zypp/Source.h"
-
-namespace zypp {
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -51,6 +49,4 @@ class DbSources
     const SourcesList & sources (bool refresh = false);
 };
 
-} // namespace zypp
-
-#endif  // ZYPP_ZMD_BACKEND_DBSOURCES_H
+#endif  // ZMD_BACKEND_DBSOURCES_H

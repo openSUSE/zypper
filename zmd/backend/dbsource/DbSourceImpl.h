@@ -19,16 +19,16 @@
  * 02111-1307, USA.
  */
 
-#ifndef ZYPP_ZMD_BACKEND_DBSOURCEIMPL_H
-#define ZYPP_ZMD_BACKEND_DBSOURCEIMPL_H
+#ifndef ZMD_BACKEND_DBSOURCEIMPL_H
+#define ZMD_BACKEND_DBSOURCEIMPL_H
 
 #include <iosfwd>
 #include <string>
 
 #include "zypp/source/SourceImpl.h"
+#include "zypp/media/MediaManager.h"
 
-class DbReader;
-//#include "DbReader.h"
+#include "DbAccess.h"
 
 #include "zypp/Package.h"
 #include "zypp/Message.h"
@@ -37,39 +37,58 @@ class DbReader;
 #include "zypp/Product.h"
 #include "zypp/Selection.h"
 #include "zypp/Pattern.h"
-
-namespace zypp {
-        
+       
 ///////////////////////////////////////////////////////////////////
 //
 //	CLASS NAME : DbSourceImpl
 
 class DbSourceImpl : public zypp::source::SourceImpl {
 
-  public:
-
+ public:
     /** Default ctor */
-    DbSourceImpl(media::MediaAccess::Ptr & media_r, const Pathname & path_r = "/", const std::string & alias_r = "");
+    DbSourceImpl();
+
+ private:
+    /** Ctor substitute.
+     * Actually get the metadata.
+     * \throw EXCEPTION on fail
+     */
+    virtual void factoryInit();
+
+    sqlite3 *_db;
+    sqlite3_stmt *_dependency_handle;
+    sqlite3_stmt *_patch_handle;
+    sqlite3_stmt *_pattern_handle;
+    sqlite3_stmt *_product_handle;
+
+    void createPackages(void);
+
+    zypp::Dependencies createDependencies (sqlite_int64 resolvable_id);
+
+#if 0
+    zypp::Message::Ptr createMessage (const DbReader & data);
+    zypp::Script::Ptr  createScript (const DbReader & data);
+    zypp::Patch::Ptr   createPatch (const DbReader & data);
+    zypp::Pattern::Ptr createPattern (const DbReader & data);
+    zypp::Product::Ptr createProduct (const DbReader & data);
+#endif
+
+ public:
+    void factoryCtor( const zypp::media::MediaId & media_r,
+                      const zypp::Pathname & path_r = "/",
+                      const std::string & alias_r = "",
+                      const zypp::Pathname cache_dir_r = "");
+
 
     virtual const bool valid() const
     { return true; }
 
-    Package::Ptr createPackage (const DbReader & data);
-    Message::Ptr createMessage (const DbReader & data);
-    Script::Ptr  createScript (const DbReader & data);
-    Patch::Ptr   createPatch (const DbReader & data);
-    Pattern::Ptr createPattern (const DbReader & data);
-    Product::Ptr createProduct (const DbReader & data);
-
-    Dependencies createDependencies (const DbReader & data);
+    void attachDatabase( sqlite3 *db );
 
   private:
-    Source_Ref _source;
-    const Pathname _pathname;
-    void createResolvables(Source_Ref source_r);
+    zypp::Source_Ref _source;
+    void createResolvables( zypp::Source_Ref source_r );
 };
 
 
-} // namespace zypp
-
-#endif // ZYPP_ZMD_BACKEND_DBSOURCEIMPL_H
+#endif // ZMD_BACKEND_DBSOURCEIMPL_H
