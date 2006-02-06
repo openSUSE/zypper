@@ -1,5 +1,5 @@
 #
-# spec file for package libzypp (Version 0.0.3)
+# spec file for package libzypp (Version 0.0.7)
 #
 # Copyright (c) 2006 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -17,7 +17,7 @@ Group:        System/Packages
 BuildRoot:    %{_tmppath}/%{name}-%{version}-build
 Autoreqprov:  on
 Summary:      Package, Patch, Pattern, and Product Management
-Version:      0.0.6
+Version:      0.0.7
 Release:      1
 Source:       zypp-0.0.0.tar.bz2
 Prefix:       /usr
