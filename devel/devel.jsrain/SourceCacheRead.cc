@@ -6,6 +6,7 @@
 #include "zypp/Source.h"
 #include "zypp/source/SourceImpl.h"
 #include "zypp/SourceCache.h"
+#include "zypp/SourceManager.h"
 
 using namespace std;
 using namespace zypp;
@@ -21,20 +22,14 @@ using namespace zypp;
 int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
-  SourceFactory _f;
-  Pathname p = "/";
-//  Url url = Url("ftp://cml.suse.cz/netboot/find/SUSE-10.1-CD-OSS-i386-Beta1-CD1");
-  Url url = Url("http://lide.suse.cz/~~jsrain/devel.jsrain");
-//  Url url = Url("dir:/local/zypp/libzypp/devel/devel.jsrain");
-  Source_Ref s = _f.createFrom( url, p );
+  SourceCache().restoreSources();
+  Source_Ref s = SourceManager::sourceManager()->findSource(0);
   ResStore store = s.resolvables();
   for (ResStore::const_iterator it = store.begin();
        it != store.end(); it++)
   {
     ERR << **it << endl;
   }
-  SourceCache().storeSource(s);
-  ERR << store << endl;
-  INT << "===[END]============================================" << endl;
+ 
   return 0;
 }
