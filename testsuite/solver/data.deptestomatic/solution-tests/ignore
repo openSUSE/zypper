@@ -1,9 +1,9 @@
-exercise-4-test.xml
-exercise-1-test.xml
-exercise-2-test.xml
-exercise-3-test.xml
-exercise-04obsoletes-01-test.xml
+conflict-test.xml
+not_found-test.xml
+obsoletes-test.xml
 other-architect-test.xml
 parallel-test.xml
 require-test.xml
+unfulfilled-2-test.xml
+unfulfilled-3-test.xml
 uninstall-test.xml
