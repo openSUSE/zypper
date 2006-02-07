@@ -49,17 +49,21 @@ ResolverInfoMissingReq::dumpOn( std::ostream & os ) const
 {
     ResolverInfo::dumpOn (os);
 
-    ostringstream affected_str;
-    affected_str << ResolverInfo::toString (affected());
+    os << message();
 
-    ostringstream mis_str;
-    mis_str << _missing;
+    return os;
+}
+
+
+string
+ResolverInfoMissingReq::message( ) const
+{
+    string affected_str = ResolverInfo::toString(affected());
 
     // Translator: 1.%s = name of package,patch,...; 2.%s = dependency
-    os << str::form (_("%s is missing the requirement %s"),
-			    affected_str.str().c_str(),
-			    mis_str.str().c_str());
-    return os;
+    return str::form (_("%s is missing the requirement %s"),
+			    affected_str.c_str(),
+			    _missing.asString().c_str());
 }
 
 //---------------------------------------------------------------------------

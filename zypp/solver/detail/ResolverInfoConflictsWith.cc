@@ -58,6 +58,20 @@ ResolverInfoConflictsWith::dumpOn( std::ostream & os ) const
     return os;
 }
 
+
+string
+ResolverInfoConflictsWith::message( ) const
+{
+    string affected_str = ResolverInfo::toString(affected());
+    string container_str = itemsToString( false );
+
+    // TranslatorExplanation: 1.%s name of package, 2.%s list of names
+    // TranslatorExplanation: 1.%s is conflicting with multiple others
+    return str::form (_("%s conflicts with %s"),
+			affected_str.c_str(),
+			container_str.c_str());
+}
+
 //---------------------------------------------------------------------------
 
 ResolverInfoConflictsWith::ResolverInfoConflictsWith (PoolItem_Ref item, PoolItem_Ref with)

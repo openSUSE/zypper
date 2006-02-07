@@ -59,6 +59,19 @@ ResolverInfoNeededBy::dumpOn( std::ostream & os ) const
     return os;
 }
 
+string
+ResolverInfoNeededBy::message( ) const
+{
+    string affected_str = ResolverInfo::toString(affected());
+    string container_str = itemsToString( false );
+
+    // TranslatorExplanation: 1.%s name of package, 2.%s list of names
+    // TranslatorExplanation: 1.%s is needed by multiple others
+    return str::form (_("%s needed by %s"),
+			affected_str.c_str(),
+			container_str.c_str());
+}
+
 //---------------------------------------------------------------------------
 
 ResolverInfoNeededBy::ResolverInfoNeededBy (PoolItem_Ref item)

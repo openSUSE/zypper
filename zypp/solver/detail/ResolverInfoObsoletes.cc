@@ -58,6 +58,19 @@ ResolverInfoObsoletes::dumpOn( std::ostream & os ) const
     return os;
 }
 
+string
+ResolverInfoObsoletes::message( ) const
+{
+    string affected_str = ResolverInfo::toString(affected());
+    string container_str = itemsToString( false );
+
+    // TranslatorExplanation: 1.%s name of package, 2.%s list of names
+    // TranslatorExplanation: 1.%s is replaced by others
+    return str::form (_("%s replaced by %s"),
+			affected_str.c_str(),
+			container_str.c_str());
+}
+
 //---------------------------------------------------------------------------
 
 ResolverInfoObsoletes::ResolverInfoObsoletes (PoolItem_Ref item, PoolItem_Ref obsoletes)

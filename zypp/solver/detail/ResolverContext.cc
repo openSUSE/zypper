@@ -1325,7 +1325,7 @@ dup_name_check_cb (PoolItem_Ref item, const ResStatus & status, void *data)
     if (! info->flag
 	&& status.isToBeInstalled ()
 	&& info->other->name() == item->name()
-	&& !compareByNVR (item.resolvable(), info->other.resolvable()))
+	&& item->edition().compare(info->other->edition()) != 0)
     {
 	info->flag = true;
 	info->foundItem = item;
@@ -1340,7 +1340,9 @@ ResolverContext::isParallelInstall (PoolItem_Ref item) const
     info.other = item;
     info.flag = false;
     foreachMarked (dup_name_check_cb, (void *)&info);
-    _XDEBUG("isParallelInstall(" << item << ") = " << (info.flag ? "Y" : "N"));
+    if (info.flag) {
+	DBG << "isParallelInstall!!(" << item << ", " << info.foundItem << ")" << endl;
+    }
     return info.flag;
 }
 
