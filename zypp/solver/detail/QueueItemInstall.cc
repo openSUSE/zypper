@@ -385,11 +385,12 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 			continue;
 		    }
 
-		    // If the package is installed, let the user decide deleting 
-		    // conflicting package 
+		    // If the package is installed or is set to be installed by the user,
+		    // let the user decide deleting conflicting package 
 		    // 
 		    ResStatus statusConflict = context->getStatus(conflicting_item);
-		    if (statusConflict.staysInstalled())
+		    if (statusConflict.staysInstalled()
+			|| statusConflict.isToBeInstalled())
 		    {
 			ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL,
 									       _item, RESOLVER_INFO_PRIORITY_VERBOSE, cap);
