@@ -22,6 +22,7 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/Pathname.h"
+#include "zypp/TranslatedText.h"
 #include <string>
 #include <list>
 #include <iostream>
@@ -99,19 +100,6 @@ namespace zypp {
         FileData();
         FileData(const std::string &name,
                  const std::string &type);
-      };
-
-      /**
-       * @short A Multi-language text
-       * (usually you have a list<MultiLang>)
-       **/
-      class MultiLang {
-      public:
-        MultiLang();
-        MultiLang(const std::string& langugage,
-                  const std::string& text);
-        std::string language;
-        std::string text;
       };
 
       /**
@@ -341,10 +329,10 @@ namespace zypp {
 
         YUMGroupData();
         std::string groupId;
-        std::list<MultiLang> name;
+        TranslatedText name;
         std::string default_;
         std::string userVisible;
-        std::list<MultiLang> description;
+        TranslatedText description;
         std::list<MetaPkg> grouplist;
         std::list<PackageReq> packageList;
       };
@@ -358,10 +346,10 @@ namespace zypp {
 
         YUMPatternData();
         std::string patternId;
-        std::list<MultiLang> name;
+        TranslatedText name;
         std::string default_;
         std::string userVisible;
-        std::list<MultiLang> description;
+        TranslatedText description;
         std::list<MetaPkg> patternlist;
         std::list<PackageReq> packageList;
       };
@@ -410,8 +398,8 @@ namespace zypp {
         std::string patchId;
         std::string timestamp;
         std::string engine;
-        std::list<MultiLang> summary;
-        std::list<MultiLang> description;
+        TranslatedText summary;
+        TranslatedText description;
         std::string category;
         bool rebootNeeded;
         bool packageManager;
@@ -432,14 +420,14 @@ namespace zypp {
 
       class YUMProductData : public YUMObjectData {
       public:
-	YUMProductData() {};
-	~YUMProductData() {};
+        YUMProductData() {};
+         ~YUMProductData() {};
 
-	std::string type;
-	std::string vendor;
-	std::string name;
-	std::list<MultiLang> displayname;
-        std::list<MultiLang> description;
+        std::string type;
+        std::string vendor;
+        std::string name; 
+        TranslatedText displayname;
+        TranslatedText description;
       };
 
       /* Easy output */
@@ -447,7 +435,6 @@ namespace zypp {
       std::ostream& operator<<(std::ostream &out, const YUMDirSize& data);
       std::ostream& operator<<(std::ostream &out, const YUMRepomdData& data);
       std::ostream& operator<<(std::ostream &out, const FileData& data);
-      std::ostream& operator<<(std::ostream &out, const MultiLang& data);
       std::ostream& operator<<(std::ostream &out, const MetaPkg& data);
       std::ostream& operator<<(std::ostream &out, const PackageReq& data);
       std::ostream& operator<<(std::ostream &out, const ChangelogEntry& data);

@@ -82,15 +82,6 @@ namespace zypp {
       YUMPatternData::YUMPatternData()
       { }
 
-      MultiLang::MultiLang()
-      { }
-
-      MultiLang::MultiLang(const std::string& language,
-                           const std::string& text)
-      : language(language), text(text)
-      { }
-
-
       MetaPkg::MetaPkg()
       { }
 
@@ -213,14 +204,6 @@ namespace zypp {
         if (! data.type.empty()) {
           out << ": " << data.type;
         }
-        return out;
-      }
-
-      ostream& operator<<(ostream &out, const MultiLang& data)
-      {
-        if (!data.language.empty())
-          out << "[" << data.language << "] ";
-        out << data.text;
         return out;
       }
 

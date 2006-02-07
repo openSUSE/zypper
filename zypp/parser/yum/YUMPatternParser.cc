@@ -62,9 +62,7 @@ namespace zypp {
                    dataPtr->patternId = _helper.content(child);
                  }
                  else if (name == "name") {
-                   dataPtr->name.push_back
-                     (MultiLang(_helper.attribute(child,"lang"),
-                                _helper.content(child)));
+                   dataPtr->name.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
                  }
                  else if (name == "default") {
                    dataPtr->default_ = _helper.content(child);
@@ -73,9 +71,7 @@ namespace zypp {
                    dataPtr->userVisible = _helper.content(child);
                  }
                  else if (name == "description") {
-                   dataPtr->description.push_back
-                     (MultiLang(_helper.attribute(child,"lang"),
-                                _helper.content(child)));
+                   dataPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
                  }
                  else if (name == "patternlist") {
                    parsePatternlist(dataPtr, child);

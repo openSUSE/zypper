@@ -78,14 +78,10 @@ namespace zypp {
       	patchPtr->name = _helper.content(child);
             }
             else if (name == "summary") {
-              patchPtr->summary.push_back(MultiLang(
-      	                               _helper.attribute(child,"lang"),
-                                       _helper.content(child)));
+              patchPtr->summary.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
             }
             else if (name == "description") {
-              patchPtr->description.push_back(MultiLang(
-                                       _helper.attribute(child,"lang"),
-                                       _helper.content(child)));
+              patchPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
             }
             else if (name == "version") {
               patchPtr->epoch = _helper.attribute(child,"epoch");
