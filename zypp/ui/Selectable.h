@@ -47,12 +47,9 @@ namespace zypp
       typedef intrusive_ptr<const Selectable>  constPtr;
       typedef unsigned                         size_type;
 
-      typedef ResObject                        Object;
-      typedef Object::constPtr                 Object_Ptr;
-
     public:
       /**  */
-      Object::Kind kind() const;
+      ResObject::Kind kind() const;
 
       /**  */
       const std::string & name() const;
@@ -64,13 +61,13 @@ namespace zypp
       bool set_status( const Status state_r );
 
       /** Installed object. */
-      Object_Ptr installedObj() const;
+      ResObject::constPtr installedObj() const;
 
       /** Best among available objects. */
-      Object_Ptr candidateObj() const;
+      ResObject::constPtr candidateObj() const;
 
       /** Best among all objects. */
-      Object_Ptr theObj() const;
+      ResObject::constPtr theObj() const;
 
       /** Number of available objects. */
       size_type availableObjs() const;
@@ -83,6 +80,7 @@ namespace zypp
       typedef shared_ptr<Impl> Impl_Ptr;
       /** Default ctor */
       Selectable( Impl_Ptr pimpl_r );
+    private:
       /** Dtor */
       ~Selectable();
     private:

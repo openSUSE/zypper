@@ -29,12 +29,14 @@ namespace zypp
     /**  */
     struct PoolImplInserter
     {
-      void operator()( ResObject::constPtr ptr_r, bool installed = false );
+      void operator()( ResObject::constPtr ptr_r );
 
-      PoolImplInserter( PoolImpl & poolImpl_r )
+      PoolImplInserter( PoolImpl & poolImpl_r, bool installed_r )
       : _poolImpl( poolImpl_r )
+      , _installed( installed_r )
       {}
       PoolImpl & _poolImpl;
+      bool       _installed;
     };
 
     /**  */

@@ -48,12 +48,12 @@ namespace zypp
   public:
     /**  */
     void insert( ResObject::constPtr ptr_r, bool installed = false )
-    { inserter()( ptr_r, installed ); }
+    { inserter(installed)( ptr_r ); }
 
     /**  */
     template <class _InputIterator>
       void insert( _InputIterator first_r, _InputIterator last_r, bool installed = false )
-      { while (first_r != last_r) { inserter()( *first_r, installed ); ++first_r; } }
+      { std::for_each( first_r, last_r, inserter(installed) ); }
 
     /**  */
     void erase( ResObject::constPtr ptr_r )
@@ -77,8 +77,8 @@ namespace zypp
     /** Pointer to implementation */
     RW_pointer<pool::PoolTraits::Impl> _pimpl;
     /**  */
-    Inserter inserter()
-    { return Inserter( *_pimpl ); }
+    Inserter inserter( bool installed )
+    { return Inserter( *_pimpl, installed ); }
     /**  */
     Deleter deleter()
     { return Deleter( *_pimpl ); }

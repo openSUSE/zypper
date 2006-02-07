@@ -50,9 +50,9 @@ namespace zypp
       return str << "PoolImpl " << obj.size();
     }
 
-    void PoolImplInserter::operator()( ResObject::constPtr ptr_r, bool installed )
+    void PoolImplInserter::operator()( ResObject::constPtr ptr_r )
     {
-      PoolImpl::Item item ( ptr_r, ResStatus (installed) );
+      PoolImpl::Item item ( ptr_r, ResStatus (_installed) );
       _poolImpl.store().insert( item );
       _poolImpl.namestore().insert( PoolImpl::NameContainerT::value_type (item->name(), item ) );
       CapSet provides = item->dep( Dep::PROVIDES );

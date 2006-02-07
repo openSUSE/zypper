@@ -130,7 +130,7 @@ namespace zypp
     /** Dtor. */
     ~ResStatus();
 
-  private:
+  public:
 
     bool isInstalled() const
     { return fieldValueIs<StateField>( INSTALLED ); }
@@ -222,7 +222,7 @@ namespace zypp
 	    return false;
 	}
     }
-      
+
     bool maySetNoTransact (TransactByValue causer)
     {
 	bit::BitField<FieldType> savBitfield = _bitfield;
@@ -233,16 +233,16 @@ namespace zypp
 
     bool setTransact (bool val_r, TransactByValue causer)
     {
-	if (!isGreaterThan<TransactByField>( causer )) {	
+	if (!isGreaterThan<TransactByField>( causer )) {
 	    fieldValueAssign<TransactField>( val_r ? TRANSACT : KEEP_STATE );
 	    if (val_r) fieldValueAssign<TransactByField>( causer );			// remember the causer on set
 	    else fieldValueAssign<TransactByField>( SOLVER );				// clear it on reset
 	    return true;
-	} else if (fieldValueIs<TransactField>(val_r ? TRANSACT : KEEP_STATE)) { 
+	} else if (fieldValueIs<TransactField>(val_r ? TRANSACT : KEEP_STATE)) {
 	    return true; // is already set
 	} else {
 	    return false;
-	}	    
+	}
     }
 
     bool maySetTransact (bool val_r, TransactByValue causer)
@@ -265,7 +265,7 @@ namespace zypp
 	bool ret = setToBeInstalled (causer);
 	_bitfield = savBitfield;
 	return ret;
-    }      
+    }
 
     bool setToBeUninstalled (TransactByValue causer)
     {
@@ -279,7 +279,7 @@ namespace zypp
 	bool ret = setToBeUninstalled (causer);
 	_bitfield = savBitfield;
 	return ret;
-    }            
+    }
 
     //------------------------------------------------------------------------
     // *** These are only for the Resolver ***
@@ -304,7 +304,7 @@ namespace zypp
       fieldValueAssign<TransactDetailField>(SOFT_INSTALL);
       return true;
     }
-      
+
     bool setToBeUninstalledSoft ( )
     {
       if (!setToBeUninstalled(SOLVER)) return false;
@@ -314,21 +314,21 @@ namespace zypp
 
     bool isSoftInstall () {
         return fieldValueIs<TransactDetailField> (SOFT_INSTALL);
-    }      
+    }
 
     bool isSoftUninstall () {
         return fieldValueIs<TransactDetailField> (SOFT_REMOVE);
-    }      
+    }
 
     bool setSoftInstall (bool flag) {
         fieldValueAssign<TransactDetailField>(flag?SOFT_INSTALL:0);
 	return true;
-    }      
+    }
 
     bool setSoftUninstall (bool flag) {
         fieldValueAssign<TransactDetailField>(flag?SOFT_REMOVE:0);
 	return true;
-    }      
+    }
 
     bool setUndetermined ()
     {
