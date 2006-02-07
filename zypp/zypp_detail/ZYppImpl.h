@@ -64,8 +64,9 @@ namespace zypp
 
       /**
        * \throws Exception
+       * if commit_only == true, just init the target, dont populate store or pool
        */
-      void initTarget(const Pathname & root);
+      void initTarget(const Pathname & root, bool commit_only = false);
 
       /**
        * \throws Exception

@@ -64,12 +64,13 @@ namespace zypp
       return _target;
      }
 
-    void ZYppImpl::initTarget(const Pathname & root)
+    void ZYppImpl::initTarget(const Pathname & root, bool commit_only)
     {
       if (_target)
 	_target = Target_Ptr();
       _target = new Target(root);
-      addResolvables (_target->resolvables(), true);
+      if (!commit_only)
+	addResolvables (_target->resolvables(), true);
     }
 
     void ZYppImpl::finishTarget()
