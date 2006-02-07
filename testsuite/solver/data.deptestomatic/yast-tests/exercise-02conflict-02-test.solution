@@ -1,5 +1,14 @@
 >!> Installing sendmail from channel test
->!> Solution #1:
->!> install sendmail-2.0-1[test]
->!> remove  smail-1.0-1
->!> installs=1, upgrades=0, uninstalls=1
+>!> 1 problems found:
+>!> Problem:
+>!> Cannot install sendmail because it is conflicting with smail
+>!> A conflict over [package] (namedcap) MTA ([] (nullcap) ) requires the removal of to-be-installed sendmail-2.0-1[test]
+>!>    Solution:
+>!>       Deleting sendmail
+>!>       Deleting U___[package]sendmail-2.0-1.
+>!>    Solution:
+>!>       Deleting smail
+>!>       Deleting I___[package]smail-1.0-1.
+>!>    Solution:
+>!>       Ignoring conflict of sendmail
+>!>       
