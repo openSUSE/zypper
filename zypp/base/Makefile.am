@@ -9,6 +9,7 @@ baseincludedir = $(pkgincludedir)/base
 
 baseinclude_HEADERS =	\
 	Debug.h		\
+	Deprecated.h	\
 	\
 	Algorithm.h	\
 	Exception.h	\
