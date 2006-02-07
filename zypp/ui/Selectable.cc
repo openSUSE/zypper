@@ -14,10 +14,6 @@
 
 #include "zypp/ui/Selectable.h"
 #include "zypp/ui/SelectableImpl.h"
-#include "zypp/ResPool.h"
-#include "zypp/PoolItem.h"
-
-using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -45,7 +41,8 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    // Forward to implementation
+    // Forward to implementation.
+    // Restrict PoolItems to ResObject::constPtr!
     //
     ///////////////////////////////////////////////////////////////////
 
@@ -74,10 +71,12 @@ namespace zypp
     { return _pimpl->availableObjs(); }
 
     Selectable::available_iterator Selectable::availableBegin() const
-    { return _pimpl->availableBegin(); }
+    { return make_transform_iterator( _pimpl->availableBegin(),
+                                      SelectableTraits::TransformToResObjectPtr() ); }
 
     Selectable::available_iterator Selectable::availableEnd() const
-    { return _pimpl->availableEnd(); }
+    { return make_transform_iterator( _pimpl->availableEnd(),
+                                      SelectableTraits::TransformToResObjectPtr() ); }
 
     /******************************************************************
     **

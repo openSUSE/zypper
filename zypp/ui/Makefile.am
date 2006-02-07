@@ -8,9 +8,10 @@ SUBDIRS =
 uiincludedir = $(pkgincludedir)/ui
 
 uiinclude_HEADERS = \
-	Status.h	\
-	Selectable.h	\
-	ResPoolProxy.h	\
+	Status.h		\
+	Selectable.h		\
+	SelectableTraits.h	\
+	ResPoolProxy.h		\
 	\
 	SelectableImpl.h
 

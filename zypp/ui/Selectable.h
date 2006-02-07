@@ -19,8 +19,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/Iterator.h"
 
-#include "zypp/ResObject.h"
-#include "zypp/PoolItem.h"
+#include "zypp/ui/SelectableTraits.h"
 #include "zypp/ui/Status.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -29,16 +28,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace ui
   { /////////////////////////////////////////////////////////////////
-
-    namespace ui_detail
-    {
-      /** Transform PoolItem to ResObject::constPtr. */
-      struct TransformToResObjectPtr : public std::unary_function<PoolItem,ResObject::constPtr>
-      {
-        ResObject::constPtr operator()( const PoolItem & obj ) const
-        { return obj; }
-      };
-    }
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -54,18 +43,14 @@ namespace zypp
     class Selectable : public base::ReferenceCounted, private base::NonCopyable
     {
       friend std::ostream & operator<<( std::ostream & str, const Selectable & obj );
-      typedef std::set<PoolItem>               AvialableItemSet;
 
     public:
       typedef intrusive_ptr<Selectable>        Ptr;
       typedef intrusive_ptr<const Selectable>  constPtr;
 
-      /** UI likes to iterate on ResObject::constPtr,
-       * independent from what the implementation uses. */
-      typedef transform_iterator<ui_detail::TransformToResObjectPtr,
-                                 AvialableItemSet::const_iterator>
-                                 available_iterator;
-      typedef AvialableItemSet::size_type      size_type;
+      /** Iterates over ResObject::constPtr */
+      typedef SelectableTraits::available_iterator      available_iterator;
+      typedef SelectableTraits::availableItem_size_type size_type;
 
     public:
       /** The ResObjects kind. */

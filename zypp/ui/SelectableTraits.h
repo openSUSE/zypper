@@ -6,15 +6,17 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/ui/SelectableImpl.cc
+/** \file	zypp/ui/SelectableTraits.h
  *
 */
-#include <iostream>
-//#include "zypp/base/Logger.h"
+#ifndef ZYPP_UI_SELECTABLETRAITS_H
+#define ZYPP_UI_SELECTABLETRAITS_H
 
-#include "zypp/ui/SelectableImpl.h"
+#include <set>
 
-using std::endl;
+#include "zypp/base/Iterator.h"
+#include "zypp/PoolItem.h"
+#include "zypp/ResObject.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -23,29 +25,30 @@ namespace zypp
   namespace ui
   { /////////////////////////////////////////////////////////////////
 
-    /**
-     * \todo Still open questions in state calculation;
-     * neglecting TABOO/PROTECTED
-    */
-    Status Selectable::Impl::status() const
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : SelectableTraits
+    //
+    /** */
+    struct SelectableTraits
     {
-      PoolItem cand( candidateObj() );
+      typedef std::set<PoolItem>               AvialableItemSet;
+      typedef AvialableItemSet::iterator       availableItem_iterator;
+      typedef AvialableItemSet::const_iterator availableItem_const_iterator;
+      typedef AvialableItemSet::size_type      availableItem_size_type;
 
-      if ( cand && cand.status().transacts() )
-        {
-          if ( cand.status().isByUser() )
-            return( installedObj() ? S_Update : S_Install );
-          else
-            return( installedObj() ? S_AutoUpdate : S_AutoInstall );
-        }
+      /** Transform PoolItem to ResObject::constPtr. */
+      struct TransformToResObjectPtr : public std::unary_function<PoolItem,ResObject::constPtr>
+      {
+        ResObject::constPtr operator()( const PoolItem & obj ) const
+        { return obj; }
+      };
 
-      if ( installedObj() && installedObj().status().transacts() )
-        {
-          return( installedObj().status().isByUser() ? S_Del : S_AutoDel );
-        }
+      typedef transform_iterator<TransformToResObjectPtr, availableItem_const_iterator>
+              available_iterator;
 
-      return( installedObj() ? S_KeepInstalled : S_NoInst );
-    }
+  };
+    ///////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////
   } // namespace ui
@@ -53,3 +56,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_UI_SELECTABLETRAITS_H
