@@ -39,12 +39,12 @@ namespace zypp
       };
 
       virtual void start(
-        Resolvable::Ptr resolvable_ptr
+        Resolvable::constPtr resolvable_ptr
 	, Url url
       ) {}
 
       // return false if the download should be aborted right now
-      virtual bool progress(int value, Resolvable::Ptr resolvable_ptr) 
+      virtual bool progress(int value, Resolvable::constPtr resolvable_ptr) 
       { return true; }
 
       virtual Action problem(
@@ -53,7 +53,7 @@ namespace zypp
 	, std::string description
       ) { return ABORT; }
 
-      virtual void finish(Resolvable::Ptr resolvable_ptr
+      virtual void finish(Resolvable::constPtr resolvable_ptr
         , Error error
 	, std::string reason
       ) {}
@@ -205,6 +205,39 @@ namespace zypp
       ) { return ABORT; }
     };
 
+    // progress for downloading a file
+    struct DownloadProgressReport : public callback::ReportBase
+    {
+        enum Action { 
+          ABORT,  // abort and return error
+          RETRY,	// retry
+	  IGNORE	// ignore the failure
+        }; 
+      
+        enum Error {
+	  NO_ERROR,
+          NOT_FOUND, 	// the requested Url was not found
+	  IO		// IO error
+        };
+      
+        virtual void start( Url file, Pathname localfile ) {}
+
+        virtual bool progress(int value, Url file) 
+        { return true; }
+
+        virtual Action problem(
+          Url file
+  	  , Error error
+  	  , std::string description
+        ) { return ABORT; }
+
+        virtual void finish(
+          Url file
+          , Error error
+	  , std::string reason
+        ) {}
+    };
+    
     /////////////////////////////////////////////////////////////////
   } // namespace media
   ///////////////////////////////////////////////////////////////////
