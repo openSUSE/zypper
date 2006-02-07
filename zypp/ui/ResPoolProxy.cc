@@ -68,36 +68,38 @@ namespace zypp
                                               ) );
       }
 
-      /** Build Selectable::Ptr and feed them to some container. */
-      template<class _OutputIterator>
-        void feed( _OutputIterator result_r )
-        {
-          for ( KindC::const_iterator kindIt = _kinds.begin(); kindIt != _kinds.end(); ++kindIt )
-            {
-              for ( NameC::const_iterator nameIt = kindIt->second.begin(); nameIt != kindIt->second.end(); ++nameIt )
-                {
-                  const ItemC & installed( nameIt->second.installed );
-                  const ItemC & available( nameIt->second.available );
+      /** Build Selectable::Ptr and feed them to some container.
+       * \todo Cleanup typedefs
+      */
+      typedef std::set<Selectable::Ptr>                 SelectableIndex;
+      typedef std::map<ResObject::Kind,SelectableIndex> SelectablePool;
 
-                  if ( installed.empty() )
-                    {
-                      if ( available.empty() )
-                        continue;
-                      *result_r = buildSelectable( kindIt->first, nameIt->first, PoolItem(), available );
-                      ++result_r;
-                    }
-                  else
-                    {
-                      // ui want's one Selectable per installed item
-                      for ( ItemC::const_iterator instIt = installed.begin(); instIt != installed.end(); ++instIt )
-                        {
-                          *result_r = buildSelectable( kindIt->first, nameIt->first, *instIt, available );
-                          ++result_r;
-                        }
-                    }
-                }
-            }
-        }
+      void feed( SelectablePool & _selPool )
+      {
+        for ( KindC::const_iterator kindIt = _kinds.begin(); kindIt != _kinds.end(); ++kindIt )
+          {
+            for ( NameC::const_iterator nameIt = kindIt->second.begin(); nameIt != kindIt->second.end(); ++nameIt )
+              {
+                const ItemC & installed( nameIt->second.installed );
+                const ItemC & available( nameIt->second.available );
+
+                if ( installed.empty() )
+                  {
+                    if ( available.empty() )
+                      continue;
+                    _selPool[kindIt->first].insert( buildSelectable( kindIt->first, nameIt->first, PoolItem(), available ) );
+                  }
+                else
+                  {
+                    // ui want's one Selectable per installed item
+                    for ( ItemC::const_iterator instIt = installed.begin(); instIt != installed.end(); ++instIt )
+                      {
+                        _selPool[kindIt->first].insert( buildSelectable( kindIt->first, nameIt->first, *instIt, available ) );
+                      }
+                  }
+              }
+          }
+      }
     };
 
     ///////////////////////////////////////////////////////////////////
@@ -107,10 +109,6 @@ namespace zypp
     /** ResPoolProxy implementation. */
     struct ResPoolProxy::Impl
     {
-    public:
-
-      typedef std::set<Selectable::Ptr> SelPool;
-
     public:
       Impl()
       {}
@@ -122,12 +120,26 @@ namespace zypp
         SelPoolHelper collect;
         std::for_each( _pool.begin(), _pool.end(),
                        functor::functorRef<void,ResPool::Item>( collect ) );
-        collect.feed( std::inserter( _selectables, _selectables.end() ) );
+        collect.feed( _selPool );
       }
 
-    private:
+    public:
+
+      bool empty( const ResObject::Kind & kind_r ) const
+      { return _selPool[kind_r].empty(); }
+
+      size_type size( const ResObject::Kind & kind_r ) const
+      { return _selPool[kind_r].size(); }
+
+      const_iterator byKindBegin( const ResObject::Kind & kind_r ) const
+      { return _selPool[kind_r].begin(); }
+
+      const_iterator byKindEnd( const ResObject::Kind & kind_r ) const
+      { return _selPool[kind_r].end(); }
+
+   private:
       ResPool_Ref _pool;
-      SelPool     _selectables;
+      mutable SelectablePool _selPool;
 
     public:
       /** Offer default Impl. */
@@ -176,6 +188,24 @@ namespace zypp
     //
     ResPoolProxy::~ResPoolProxy()
     {}
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    // forward to implementation
+    //
+    ///////////////////////////////////////////////////////////////////
+
+    bool ResPoolProxy::empty( const ResObject::Kind & kind_r ) const
+    { return _pimpl->empty( kind_r ); }
+
+    ResPoolProxy::size_type ResPoolProxy::size( const ResObject::Kind & kind_r ) const
+    { return _pimpl->size( kind_r ); }
+
+    ResPoolProxy::const_iterator ResPoolProxy::byKindBegin( const ResObject::Kind & kind_r ) const
+    { return _pimpl->byKindBegin( kind_r ); }
+
+    ResPoolProxy::const_iterator ResPoolProxy::byKindEnd( const ResObject::Kind & kind_r ) const
+    { return _pimpl->byKindEnd( kind_r ); }
 
     /******************************************************************
     **

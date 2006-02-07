@@ -38,9 +38,16 @@ namespace zypp
     {
       friend std::ostream & operator<<( std::ostream & str, const ResPoolProxy & obj );
 
+      typedef std::set<Selectable::Ptr>                 SelectableIndex;
+      typedef std::map<ResObject::Kind,SelectableIndex> SelectablePool;
+
     public:
       /** Implementation  */
       class Impl;
+
+      typedef SelectableIndex::iterator       iterator;
+      typedef SelectableIndex::const_iterator const_iterator;
+      typedef SelectableIndex::size_type      size_type;
 
     public:
       /** Default ctor: no pool */
@@ -52,8 +59,35 @@ namespace zypp
 
     public:
 
+      /**  */
+      bool empty( const ResObject::Kind & kind_r ) const;
+
+      template<class _Res>
+        bool empty() const
+        { return empty( ResTraits<_Res>::kind ); }
+
+      /**  */
+      size_type size( const ResObject::Kind & kind_r ) const;
+
+      template<class _Res>
+        size_type size() const
+        { return size( ResTraits<_Res>::kind ); }
+
+      /** \name Iterate through all Selectables of a certain kind. */
+      //@{
+      const_iterator byKindBegin( const ResObject::Kind & kind_r ) const;
+
+      template<class _Res>
+        const_iterator byKindBegin() const
+        { return make_filter_begin( resfilter::byKind<_Res>(), *this ); }
 
 
+      const_iterator byKindEnd( const ResObject::Kind & kind_r ) const;
+
+      template<class _Res>
+        const_iterator byKindEnd() const
+        { return make_filter_end( resfilter::byKind<_Res>(), *this ); }
+      //@}
 
     private:
       /** Pointer to implementation */
