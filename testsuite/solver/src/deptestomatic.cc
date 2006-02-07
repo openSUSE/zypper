@@ -45,6 +45,9 @@
 #include "zypp/Capability.h"
 #include "zypp/CapSet.h"
 #include "zypp/CapFactory.h"
+#include "zypp/ResolverProblem.h"
+#include "zypp/ProblemSolution.h"
+
 
 #include "zypp/Source.h"
 #include "zypp/SourceFactory.h"
@@ -1149,7 +1152,19 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		ResolverProblemList problems = resolver->problems ();
 		RESULT << problems.size() << " problems found:" << endl;
 		for (ResolverProblemList::iterator iter = problems.begin(); iter != problems.end(); ++iter) {
-		    cout << **iter << endl;
+                    ResolverProblem problem = **iter;
+                    RESULT << "Problem:" << endl;
+                    RESULT << problem.description() << endl;
+                    RESULT << problem.details() << endl;
+                    
+                    ProblemSolutionList solutions = problem.solutions();
+                    for (ProblemSolutionList::const_iterator iter = solutions.begin();
+                         iter != solutions.end(); ++iter) {
+                        ProblemSolution solution = **iter;
+                        RESULT << "   Solution:" << endl;
+                        RESULT << "      " << solution.description() << endl;
+                        RESULT << "      " << solution.details() << endl;
+                    }
 		}
 	    }
 	} else if (node->equals ("takesolution")) {
