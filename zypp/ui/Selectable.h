@@ -17,8 +17,10 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/Iterator.h"
 
 #include "zypp/ResObject.h"
+#include "zypp/PoolItem.h"
 #include "zypp/ui/Status.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -28,11 +30,22 @@ namespace zypp
   namespace ui
   { /////////////////////////////////////////////////////////////////
 
+    namespace ui_detail
+    {
+      /** Transform PoolItem to ResObject::constPtr. */
+      struct TransformToResObjectPtr : public std::unary_function<PoolItem,ResObject::constPtr>
+      {
+        ResObject::constPtr operator()( const PoolItem & obj ) const
+        { return obj; }
+      };
+    }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : Selectable
     //
-    /**
+    /** Collects ResObject of same kind and name.
+     *
      * \note There's one Selectable per installed item, in case more
      * than one item is intalled.
      *
@@ -41,23 +54,32 @@ namespace zypp
     class Selectable : public base::ReferenceCounted, private base::NonCopyable
     {
       friend std::ostream & operator<<( std::ostream & str, const Selectable & obj );
+      typedef std::set<PoolItem>               AvialableItemSet;
 
     public:
       typedef intrusive_ptr<Selectable>        Ptr;
       typedef intrusive_ptr<const Selectable>  constPtr;
-      typedef unsigned                         size_type;
+
+      /** UI likes to iterate on ResObject::constPtr,
+       * independent from what the implementation uses. */
+      typedef transform_iterator<ui_detail::TransformToResObjectPtr,
+                                 AvialableItemSet::const_iterator>
+                                 available_iterator;
+      typedef AvialableItemSet::size_type      size_type;
 
     public:
-      /**  */
+      /** The ResObjects kind. */
       ResObject::Kind kind() const;
 
-      /**  */
+      /** The ResObjects name.  */
       const std::string & name() const;
 
-      /**  */
+      /** Return the current Status */
       Status status() const;
 
-      /**  */
+      /** Try to set a new Status.
+       * Returns \c false if the transitions is not allowed.
+      */
       bool set_status( const Status state_r );
 
       /** Installed object. */
@@ -72,7 +94,11 @@ namespace zypp
       /** Number of available objects. */
       size_type availableObjs() const;
 
-      // iterators
+      /** */
+      available_iterator availableBegin() const;
+
+      /** */
+      available_iterator availableEnd() const;
 
     public:
       /** Implementation  */

@@ -73,6 +73,12 @@ namespace zypp
     Selectable::size_type Selectable::availableObjs() const
     { return _pimpl->availableObjs(); }
 
+    Selectable::available_iterator Selectable::availableBegin() const
+    { return _pimpl->availableBegin(); }
+
+    Selectable::available_iterator Selectable::availableEnd() const
+    { return _pimpl->availableEnd(); }
+
     /******************************************************************
     **
     **	FUNCTION NAME : operator<<

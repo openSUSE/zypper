@@ -36,17 +36,19 @@ namespace zypp
     {
       friend std::ostream & operator<<( std::ostream & str, const Selectable::Impl & obj );
 
-      typedef ResPool::Item                    PoolItem;
-      typedef std::set<PoolItem>               AvialableItemSet;
-      typedef AvialableItemSet::const_iterator available_iterator;
-      typedef AvialableItemSet::size_type      size_type;
+    public:
+
+      /** This iterates PoolItems. Dont mix it with available_iterator,
+       * which transforms the PoolItems to ResObject::constPtr.
+      */
+      typedef AvialableItemSet::const_iterator availableItem_iterator;
 
     public:
       Impl( const ResObject::Kind & kind_r,
             const std::string & name_r,
             const PoolItem & installedItem_r,
-            available_iterator availableBegin_r,
-            available_iterator availableEnd_r )
+            availableItem_iterator availableBegin_r,
+            availableItem_iterator availableEnd_r )
       : _kind( kind_r )
       , _name( name_r )
       , _installedItem( installedItem_r )
@@ -81,12 +83,18 @@ namespace zypp
 
       /** . */
       size_type availableObjs() const
-      { return 0; }
+      { return _availableItems.size(); }
+
+      available_iterator availableBegin() const
+      { return make_transform_iterator( _availableItems.begin(), ui_detail::TransformToResObjectPtr() ); }
+
+      available_iterator availableEnd() const
+      { return make_transform_iterator( _availableItems.end(), ui_detail::TransformToResObjectPtr() ); }
 
     private:
-      ResObject::Kind _kind;
-      std::string _name;
-      PoolItem _installedItem;
+      ResObject::Kind  _kind;
+      std::string      _name;
+      PoolItem         _installedItem;
       AvialableItemSet _availableItems;
     };
     ///////////////////////////////////////////////////////////////////
