@@ -285,6 +285,16 @@ Resolvable::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Reso
       break;
     }
   }
+  else if ( kind == ResTraits<zypp::Selection>::kind )
+  {
+    YUMGroupParser iter(res_file,"");
+    for (; !iter.atEnd(); ++iter)
+    {
+      DBG << "here..." << std::endl;
+      resolvable = createSelection(**iter);
+      break;
+    }
+  }
   /*
   else if ( kind == ResTraits<zypp::Message>::kind )
   {

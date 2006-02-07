@@ -52,10 +52,13 @@ namespace zypp
 
         /** */
 	virtual Label order() const PURE_VIRTUAL;
+
+  virtual std::set<std::string> suggests() const PURE_VIRTUAL;
+  virtual std::set<std::string> recommends() const PURE_VIRTUAL;
+  virtual std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
+      
 #if 0
         // NOTE LangCode id zypp:Locale
-      virtual std::list<std::string> suggests() const;
-      virtual std::list<std::string> recommends() const;
       virtual std::list<std::string> insnotify( const LangCode & lang = LangCode("") ) const;
       virtual std::list<std::string> delnotify( const LangCode & lang = LangCode("") ) const;
       virtual ByteCount size() const;

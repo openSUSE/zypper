@@ -174,6 +174,23 @@ std::string toXML( const Message::constPtr &obj )
   return out.str();
 }
 
+/*
+
+NOT NEEDED FOR NOW, WE JUST LOSE THE TRANSLATION AT STORAGE TIME
+
+static std::string localizedXMLTags( const TranslatedText &text, const std::string &tagname)
+{
+  stringstream out;
+  std::set<Locale> locales = text.locales();
+  for(std::set<Locale>::const_iterator it = locales.begin(); it != locales.end(); ++it)
+  {
+    Locale lcl = *it;
+    out << "    <" << tagname << " lang='" << lcl.name() << "'>" << text.text(lcl) << "</" << tagname <<">" << std::endl;
+  }
+  return out.str();
+}
+*/
+
 template<> // or constPtr?
 std::string toXML( const Selection::constPtr &obj )
 {
@@ -181,22 +198,30 @@ std::string toXML( const Selection::constPtr &obj )
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
   out << "<groups  xmlns=\"http://linux.duke.edu/metadata/groups\">" << std::endl;
   out << "  <group>" << std::endl;
-  out << "    <groupid>foo</groupid>" << std::endl;
-  out << "    <name>foobar</name>" << std::endl;
-  out << "    <name lang='en.US'>foobar</name>" << std::endl;
-  out << "    <default>false</default>" << std::endl;
-  out << "    <uservisible>true</uservisible>" << std::endl;
-  out << "    <description>This is my group, it is soooooooo coool!</description>" << std::endl;
-  out << "    <description lang='en.US'>Duh</description>" << std::endl;
+  out << "    <groupid>" << obj->name() << "</groupid>" << std::endl;
+  out << "    <name>" << obj->name() << "</name>" << std::endl;
+  //out << "    <default>"<< (obj->default() ? "true" : "false" ) << "</default>" << std::endl;
+  out << "    <uservisible>"<< (obj->visible() ? "true" : "false" ) << "</uservisible>" << std::endl;
+
   out << "    <grouplist>" << std::endl;
-  out << "       <metapkg type=\"mandatory\">othergroup</metapkg>" << std::endl;
-  out << "       <metapkg type=\"optional\">stillother</metapkg>" << std::endl;
-  out << "       <metapkg type=\"default\">stillmore</metapkg>" << std::endl;
-  out << "       <metapkg>other</metapkg>" << std::endl;
+  //recommended selections
+  std::set<std::string>::const_iterator it = obj->recommends().begin();
+  for (; it != obj->recommends().end(); ++it)
+    out << "       <metapkg type=\"optional\">" << *it << "</metapkg>" << std::endl;
+
+  it = obj->suggests().begin();
+  for (; it != obj->suggests().end(); ++it)
+    out << "       <metapkg type=\"optional\">" << *it << "</metapkg>" << std::endl;
+
   out << "    </grouplist>" << std::endl;
+
   out << "    <packagelist>" << std::endl;
-  out << "       <packagereq type=\"mandatory\" epoch=\"0\" ver=\"1\" rel=\"1\">pkgname</packagereq>" << std::endl;
-  out << "       <packagereq epoch=\"1\" ver=\"2\" rel=\"0\">otherpkgname</packagereq>" << std::endl;
+
+  it = obj->install_packages().begin();
+  for (; it != obj->install_packages().end(); ++it)
+  {
+    out << "       <packagereq type=\"optional\">" << *it << "</packagereq>" << std::endl;
+  }
   out << "    </packagelist>" << std::endl;
   out << "  </group>" << std::endl;
   out << "</groups>" << std::endl;

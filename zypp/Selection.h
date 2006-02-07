@@ -52,6 +52,10 @@ namespace zypp
     /** selection presentation order */
     Label order() const;
 
+    std::set<std::string> suggests() const;
+    std::set<std::string> recommends() const;
+    std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
+
   protected:
     /** Ctor */
     Selection( const NVRAD & nvrad_r );

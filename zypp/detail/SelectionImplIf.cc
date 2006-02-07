@@ -41,6 +41,15 @@ namespace zypp
     Label SelectionImplIf::order() const
     { return Label(); }
 
+    std::set<std::string> SelectionImplIf::suggests() const
+    { return std::set<std::string>(); }
+
+    std::set<std::string> SelectionImplIf::recommends() const
+    { return std::set<std::string>(); }
+
+    std::set<std::string> SelectionImplIf::install_packages( const Locale & lang) const
+    { return std::set<std::string>(); }
+
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////
