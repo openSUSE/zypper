@@ -49,6 +49,21 @@ Authors:
     Duncan Mac-Vicar <dmacvicar@suse.de>
     Klaus Kaempf <kkaempf@suse.de>
 
+%package zmd-backend
+Requires:     libzypp
+Provides:     zmd-backend
+Provides:     zmd-librc-backend
+Obsoletes:    zmd-librc-backend
+Summary:      ZMD backend for Package, Patch, Pattern, and Product Management - developers files
+Group:        System/Management
+
+%description -n libzypp-zmd-backend
+This package provides backend binaries for ZMD
+
+Authors:
+--------
+    Klaus Kaempf <kkaempf@suse.de>
+
 %prep
 %setup -q -n zypp-0.0.0
 
@@ -91,6 +106,11 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/include/zypp/*
 %dir %{prefix}/share/zypp
 %{prefix}/share/zypp/*
+
+%files zmd-backend
+%defattr(-,root,root)
+%dir %{_libdir}/zmd
+%{_libdir}/zmd/*
 
 %changelog -n libzypp
 * Fri Feb 03 2006 - schubi@suse.de
