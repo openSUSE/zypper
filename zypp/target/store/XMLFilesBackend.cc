@@ -173,30 +173,36 @@ XMLFilesBackend::initBackend()
 {
   // FIXME duncan * handle exceptions
   DBG << "Creating directory structure..." << std::endl;
-  path topdir = path(d->root.asString()) / path(ZYPP_DB_DIR);
-  if (!exists(topdir))
-    create_directory(topdir);
-  MIL << "Created..." << topdir.string() << std::endl;
-  std::set<Resolvable::Kind>::const_iterator it_kinds;
-  for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
+  try
   {
-    Resolvable::Kind kind = (*it_kinds);
-    # warning "add exception handling here"
-    path p(topdir / path(resolvableKindToString(kind, true /* plural */)));
-    if (!exists(p))
+    path topdir = path(d->root.asString()) / path(ZYPP_DB_DIR);
+    if (!exists(topdir))
+      create_directory(topdir);
+    MIL << "Created..." << topdir.string() << std::endl;
+    std::set<Resolvable::Kind>::const_iterator it_kinds;
+    for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
     {
-      create_directory(p);
-      MIL << "Created..." << p.string() << std::endl;
+      Resolvable::Kind kind = (*it_kinds);
+      # warning "add exception handling here"
+      path p(topdir / path(resolvableKindToString(kind, true /* plural */)));
+      if (!exists(p))
+      {
+        create_directory(p);
+        MIL << "Created..." << p.string() << std::endl;
+      }
+    }
+    // create source-cache
+    path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("source-cache");
+    if (!exists(source_p))
+    {
+      create_directory(source_p);
+      MIL << "Created..." << source_p.string() << std::endl;
     }
   }
-  // create source-cache
-  path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("source-cache");
-  if (!exists(source_p))
+  catch(std::exception &e)
   {
-    create_directory(source_p);
-    MIL << "Created..." << source_p.string() << std::endl;
+    ZYPP_RETHROW(Exception(e.what()));
   }
-  
 }
 
 void XMLFilesBackend::setRandomFileNameEnabled( bool enabled )
