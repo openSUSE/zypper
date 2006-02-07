@@ -56,6 +56,7 @@ namespace zypp
 namespace storage
 { /////////////////////////////////////////////////////////////////
 
+
 ///////////////////////////////////////////////////////////////////
 //
 //	CLASS NAME : XMLFilesBackend::Private
@@ -91,7 +92,7 @@ XMLFilesBackend::XMLFilesBackend(const Pathname &root) : Backend(root)
   d->kinds.insert(ResTraits<zypp::Patch>::kind);
   //d->kinds.insert(ResTraits<zypp::Message>::kind);
   //d->kinds.insert(ResTraits<zypp::Script>::kind);
-  //d->kinds.insert(ResTraits<zypp::Selection>::kind);
+  d->kinds.insert(ResTraits<zypp::Selection>::kind);
   d->kinds.insert(ResTraits<zypp::Product>::kind);
 
 	// check if the db exists
@@ -472,6 +473,40 @@ XMLFilesBackend::createProduct( const zypp::parser::yum::YUMProductData & parsed
   {
     ERR << excpt_r << endl;
     throw "Cannot create product object";
+  }
+}
+
+Selection::Ptr
+XMLFilesBackend::createSelection( const zypp::parser::yum::YUMGroupData & parsed ) const
+{
+  try
+  {
+    shared_ptr<XMLSelectionImpl> impl(new XMLSelectionImpl());
+      /*
+      YUMGroupData();
+        std::string groupId;
+        std::list<MultiLang> name;
+        std::string default_;
+        std::string userVisible;
+        std::list<MultiLang> description;
+        std::list<MetaPkg> grouplist;
+        std::list<PackageReq> packageList;
+      */
+    impl->_summary = parsed.description;
+    impl->_name = parsed.groupId;
+    //impl->_order = parsed.summary;
+    //impl->_category = parsed.summary;
+    impl->_visible = ((parsed.userVisible == "true") ? true : false);
+
+    // Collect basic Resolvable data
+    NVRAD dataCollect( parsed.groupId, Edition::noedition, Arch_noarch, createGroupDependencies(parsed) );
+    Selection::Ptr selection = detail::makeResolvableFromImpl( dataCollect, impl );
+    return selection;
+  }
+  catch (const Exception & excpt_r)
+  {
+    ERR << excpt_r << endl;
+    throw "Cannot create selection object";
   }
 }
 
