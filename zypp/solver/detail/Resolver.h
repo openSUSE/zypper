@@ -160,7 +160,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void addIgnoreArchitecture (const PoolItem_Ref item);
     void addIgnoreInstalledItem (const PoolItem_Ref item);
 
-    void verifySystem (void);
+    bool verifySystem (void);
     void establishState (const ResolverContext_Ptr context = NULL);
     void establishPool (void);
     bool resolveDependencies (const ResolverContext_Ptr context = NULL);

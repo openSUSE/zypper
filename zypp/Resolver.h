@@ -51,7 +51,7 @@ namespace zypp
      * Verify consistency of system
      *
      **/
-    void verifySystem (void);
+    bool verifySystem (void);
 
     /**
      * Establish state of 'higher level' Resolvables in Pool
@@ -76,7 +76,7 @@ namespace zypp
     bool resolvePool (void);
 
     /*
-     * Get the latest resolver context
+     * Get the most recent resolver context
      *
      * It will be NULL if resolvePool() or establishPool() was never called.
      * Depending on the return code of the last resolvePool() call,

@@ -56,7 +56,7 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  void Resolver::verifySystem ()
+  bool Resolver::verifySystem ()
   { return _pimpl->verifySystem(); }
   void Resolver::establishPool ()
   { return _pimpl->establishPool(); }
@@ -70,8 +70,6 @@ namespace zypp
   { return _pimpl->applySolutions (solutions); }      
   void Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   { return _pimpl->doUpgrade(opt_stats_r); }
-
-  // ResolverContext_constPtr bestContext (void) const;
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

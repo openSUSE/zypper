@@ -261,7 +261,7 @@ struct VerifySystem : public resfilter::PoolItemFilterFunctor
 };
 
 
-void
+bool
 Resolver::verifySystem (void)
 {
     DBG <<  "Resolver::verifySystem()" << endl;
@@ -276,9 +276,7 @@ Resolver::verifySystem (void)
 
     _verifying = true;
 
-    resolveDependencies ();
-
-    return;
+    return resolveDependencies ();
 }
 
 
