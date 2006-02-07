@@ -1310,6 +1310,8 @@ main (int argc, char *argv[])
     ZYppFactory zf;
     God = zf.getZYpp();
 
+    God->resolver()->setArchitecture(Arch(""));		// override ZYpp
+
     globalPath = argv[1];
     globalPath = globalPath.substr (0, globalPath.find_last_of ("/") +1);
 
