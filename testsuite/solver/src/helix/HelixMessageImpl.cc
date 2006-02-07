@@ -38,7 +38,7 @@ Source_Ref
 HelixMessageImpl::source() const
 { return _source; }
 
-std::string
+TranslatedText
 HelixMessageImpl::text () const
 { return _text; }
 

@@ -34,7 +34,7 @@ public:
 	*/
 	HelixMessageImpl( Source_Ref source_r, const zypp::HelixParser & data );
 
-	std::string text () const;
+	TranslatedText text () const;
 	std::string type () const;
 	virtual ByteCount size() const;
 	/** */
@@ -42,7 +42,7 @@ public:
 
 protected:
 	Source_Ref _source;
-	std::string _text;
+	TranslatedText _text;
 	std::string _type;
 	ByteCount _size_installed;
 
