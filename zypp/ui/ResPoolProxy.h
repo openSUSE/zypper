@@ -31,7 +31,6 @@ namespace zypp
     //	CLASS NAME : ResPoolProxy
     //
     /**
-
      * \todo Make it a _Ref.
     */
     class ResPoolProxy
@@ -79,14 +78,14 @@ namespace zypp
 
       template<class _Res>
         const_iterator byKindBegin() const
-        { return make_filter_begin( resfilter::byKind<_Res>(), *this ); }
+        { return byKindBegin( ResTraits<_Res>::kind ); }
 
 
       const_iterator byKindEnd( const ResObject::Kind & kind_r ) const;
 
       template<class _Res>
         const_iterator byKindEnd() const
-        { return make_filter_end( resfilter::byKind<_Res>(), *this ); }
+        { return byKindEnd( ResTraits<_Res>::kind ); }
       //@}
 
     private:
