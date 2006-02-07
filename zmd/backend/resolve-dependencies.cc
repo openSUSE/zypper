@@ -1,11 +1,13 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 
+#include <string>
+
 #include "zypp/ZYpp.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 
-using std::endl;
+using namespace std;
 using namespace zypp;
 
 #include <sqlite3.h>
@@ -13,12 +15,41 @@ using namespace zypp;
 #include "dbsource/DbSources.h"
 
 #include "transactions.h"
+#include "zypp/solver/detail/ResolverInfo.h"
+
+using solver::detail::ResolverInfo_Ptr;
+
+static void
+append_dep_info (ResolverInfo_Ptr info, void *user_data)
+{
+    string *dep_failure_info = (string *)user_data;
+    bool debug = false;
+
+    if (info == NULL) {
+	ERR << "append_dep_info(NULL)" << endl;
+	return;
+    }
+
+    if (getenv ("RCD_DEBUG_DEPS"))
+        debug = true;
+
+    if (debug || info->important()) {
+	dep_failure_info->append( "\n" );
+	if (debug && info->error())
+	    dep_failure_info->append( "ERR " );
+	if (debug && info->important())
+	    dep_failure_info->append( "IMP " );
+	dep_failure_info->append( info->message() );
+    }
+    return;
+}
+
 
 int
 main (int argc, char **argv)
 {
     if (argc != 2) {
-	ERR << "usage: " << argv[0] << " <database>" << endl;
+	ERR << "usage: " << argv[0] << " <database> [verify]" << endl;
 	return 1;
     }
 
@@ -50,7 +81,31 @@ main (int argc, char **argv)
     if (!read_transactions (God->pool(), db.db(), dbs))
 	return 1;
 
-    God->resolver()->resolvePool();
+    bool success;
+    if (argc == 3) {
+	success = God->resolver()->verifySystem();
+    }
+    else {
+	success = God->resolver()->resolvePool();
+    }
+    MIL << "Solver " << (success?"was":"NOT") << " successful" << endl;
 
-    return 0;
+    solver::detail::ResolverContext_Ptr context = God->resolver()->context();
+    if (context == NULL) {
+	ERR << "No context ?!" << endl;
+	return 1;
+    }
+    if (success) {
+	success = write_transactions (God->pool(), db.db(), context);
+    }
+    else {
+	string dep_failure_info( "Unresolved dependencies:\n" );
+
+	context->foreachInfo (PoolItem_Ref(), -1, append_dep_info, &dep_failure_info);
+
+	cout << dep_failure_info;
+	cout.flush();
+    }
+
+    return (success ? 0 : 1);
 }

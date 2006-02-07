@@ -17,6 +17,9 @@
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
 
+#include "zypp/solver/detail/ResolverContext.h"
+#include "zypp/solver/detail/ResolverInfo.h"
+
 using std::endl;
 using namespace zypp;
 
@@ -32,6 +35,10 @@ typedef enum {
 
 using namespace std;
 using namespace zypp;
+using solver::detail::ResolverInfo_Ptr;
+using solver::detail::ResolverContext_Ptr;
+
+typedef std::set<PoolItem_Ref> PoolItemSet;
 
 //-----------------------------------------------------------------------------
 
@@ -44,7 +51,7 @@ read_transactions (const ResPool & pool, sqlite3 *db, const DbSources & sources)
     const char  *sql = "SELECT action, id FROM transactions";
     int rc = sqlite3_prepare (db, sql, -1, &handle, NULL);
     if (rc != SQLITE_OK) {
-	ERR << "Can not prepare transaction insertion clause: " << sqlite3_errmsg (db) << endl;
+	ERR << "Can not prepare transaction selection clause: " << sqlite3_errmsg (db) << endl;
         return false;
     }
 
@@ -96,6 +103,101 @@ read_transactions (const ResPool & pool, sqlite3 *db, const DbSources & sources)
 
     return true;
 }
+
+//-----------------------------------------------------------------------------
+
+static void
+insert_item( PoolItem_Ref item, const ResStatus & status, void *data)
+{
+    PoolItemSet *pis = (PoolItemSet *)data;
+    pis->insert( item );
+}
+
+static void
+insert_item_pair (PoolItem_Ref install, const ResStatus & status1, PoolItem_Ref remove, const ResStatus & status2, void *data)
+{
+    PoolItemSet *pis = (PoolItemSet *)data;
+    pis->insert( install );		// only the install
+}
+
+
+
+static void
+dep_get_package_info_cb (ResolverInfo_Ptr info, void *user_data)
+{
+    string *msg = (string *)user_data;
+
+    msg->append( info->message() );
+    msg->append( "|" );
+
+} /* dep_get_package_info_cb */
+
+
+static string
+dep_get_package_info (ResolverContext_Ptr context, PoolItem_Ref item)
+{
+    string info;
+
+    context->foreachInfo (item, RESOLVER_INFO_PRIORITY_USER, dep_get_package_info_cb, &info);
+
+    return info;
+} /* dep_get_package_info */
+
+
+bool
+write_resobject_set( sqlite3_stmt *handle, const PoolItemSet & objects, PackageOpType op_type, ResolverContext_Ptr context)
+{
+    int rc = SQLITE_DONE;
+
+    for (PoolItemSet::const_iterator iter = objects.begin(); iter != objects.end(); ++iter) {
+
+	string details = dep_get_package_info( context, *iter );
+
+        sqlite3_bind_int (handle, 1, (int) op_type);
+        sqlite3_bind_int (handle, 2, iter->resolvable()->zmdid());
+        sqlite3_bind_text (handle, 3, details.c_str(), -1, SQLITE_STATIC);
+
+        rc = sqlite3_step (handle);
+        sqlite3_reset (handle);
+    }
+    return (rc == SQLITE_DONE);
+}
+
+
+bool
+write_transactions (const ResPool & pool, sqlite3 *db, ResolverContext_Ptr context)
+{
+    MIL << "write_transactions" << endl;
+
+    sqlite3_stmt *handle = NULL;
+    const char *sql = "INSERT INTO transactions (action, id, details) VALUES (?, ?, ?)";
+    int rc = sqlite3_prepare (db, sql, -1, &handle, NULL);
+    if (rc != SQLITE_OK) {
+	ERR << "Can not prepare transaction insertion clause: " << sqlite3_errmsg (db) << endl;
+        return false;
+    }
+    PoolItemSet install_set;
+    PoolItemSet remove_set;
+
+    context->foreachInstall( insert_item, &install_set);
+    context->foreachUninstall( insert_item, &remove_set);
+    context->foreachUpgrade( insert_item_pair, &install_set);
+
+    bool result;
+    result = write_resobject_set (handle, install_set, PACKAGE_OP_INSTALL, context);
+    if (!result) {
+	ERR << "Error writing transaction install set: " << sqlite3_errmsg (db) << endl;
+    }
+    result = write_resobject_set (handle, remove_set, PACKAGE_OP_REMOVE, context);
+    if (!result) {
+	ERR << "Error writing transaction remove set: " << sqlite3_errmsg (db) << endl;
+    }
+
+    sqlite3_finalize (handle);
+
+    return result;
+}
+
 
 
 
