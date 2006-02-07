@@ -200,6 +200,10 @@ namespace zypp
 	  }
 	  else
 	  {
+    	    RpmRemovePackageReceiver progress(it->resolvable());
+	    
+	    progress.connect();
+
 	    try {
 		rpm().removePackage(p);
 	    }
@@ -208,7 +212,9 @@ namespace zypp
 		WAR << "Remove failed, retrying with --nodeps" << endl;
 		rpm().removePackage(p, rpm::RpmDb::RPMINST_NODEPS);
 	    }
+	    progress.disconnect();
 	  }
+
 	  MIL << "Successful, resetting transact for " << *it << endl;
 	  it->status().setNoTransact(ResStatus::USER);
 	}

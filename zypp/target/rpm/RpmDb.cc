@@ -747,19 +747,22 @@ void RpmDb::closeDatabase()
 //
 void RpmDb::rebuildDatabase()
 {
-  RebuildDbReport report;
+  callback::SendReport<RebuildDBReport> report;
+  
+  report->start( root() + dbPath() );
+  
   try {
     doRebuildDatabase(report);
   }
   catch (RpmException & excpt_r)
   {
-    report.end(excpt_r);
+    report->finish(root() + dbPath(), RebuildDBReport::FAILED, excpt_r.msg());
     ZYPP_RETHROW(excpt_r);
   }
-  report.end();
+  report->finish(root() + dbPath(), RebuildDBReport::NO_ERROR, "");
 }
 
-void RpmDb::doRebuildDatabase(RebuildDbReport & report)
+void RpmDb::doRebuildDatabase(callback::SendReport<RebuildDBReport> & report)
 {
   FAILIFNOTINITIALIZED;
 
@@ -792,7 +795,7 @@ void RpmDb::doRebuildDatabase(RebuildDbReport & report)
   while ( systemReadLine( line ) ) {
     if ( newMaster() ) { // file is removed at the end of rebuild.
       // current size should be upper limit for new db
-      report.progress( (100 * newMaster.size()) / dbMaster.size());
+      report->progress( (100 * newMaster.size()) / dbMaster.size(), root() + dbPath());
     }
 
     if ( line.compare( 0, 2, "D:" ) ) {
@@ -807,7 +810,7 @@ void RpmDb::doRebuildDatabase(RebuildDbReport & report)
   if ( rpm_status != 0 ) {
     ZYPP_THROW(RpmSubprocessException(string("rpm failed with message: ") + errmsg));
   } else {
-    report.progress( 100 ); // 100%
+    report->progress( 100, root() + dbPath() ); // 100%
   }
 }
 
@@ -972,15 +975,18 @@ bool RpmDb::packagesValid() const
 //
 const std::list<Package::Ptr> & RpmDb::getPackages()
 {
-  ScanDbReport report;
+  callback::SendReport<ScanDBReport> report;
+  
+  report->start ();
+  
   try {
     const std::list<Package::Ptr> & ret = doGetPackages(report);
-    report.end();
+    report->finish(ScanDBReport::NO_ERROR, "");
     return ret;
   }
   catch (RpmException & excpt_r)
   {
-    report.end(excpt_r);
+    report->finish(ScanDBReport::FAILED, excpt_r.msg ());
     ZYPP_RETHROW(excpt_r);
   }
 #warning fixme
@@ -989,7 +995,7 @@ const std::list<Package::Ptr> & RpmDb::getPackages()
 }
 
 
-const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
+const std::list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDBReport> & report)
 {
   if ( packagesValid() ) {
     return _packages._list;
@@ -1021,7 +1027,7 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(ScanDbReport & report)
   unsigned current = 0;
 
   CapFactory _f;
-  for ( iter.findAll(); *iter; ++iter, ++current, report.progress( (100*current)/expect)) {
+  for ( iter.findAll(); *iter; ++iter, ++current, report->progress( (100*current)/expect)) {
 
     string name = iter->tag_name();
     if ( name == string( "gpg-pubkey" ) ) {
@@ -1841,20 +1847,23 @@ void RpmDb::removePackage( Package::constPtr package, unsigned flags )
 //
 void RpmDb::removePackage( const string & name_r, unsigned flags )
 {
-  RpmRemoveReport report;
+  callback::SendReport<RpmRemoveReport> report;
+  
+  report->start( name_r );
+
   try {
     doRemovePackage(name_r, flags, report);
   }
   catch (RpmException & excpt_r)
   {
-    report.end(excpt_r);
+    report->finish(excpt_r);
     ZYPP_RETHROW(excpt_r);
   }
-  report.end();
+  report->finish();
 }
 
 
-void RpmDb::doRemovePackage( const string & name_r, unsigned flags, RpmRemoveReport & report )
+void RpmDb::doRemovePackage( const string & name_r, unsigned flags, callback::SendReport<RpmRemoveReport> & report )
 {
     FAILIFNOTINITIALIZED;
     Logfile progresslog;
@@ -1868,9 +1877,9 @@ void RpmDb::doRemovePackage( const string & name_r, unsigned flags, RpmRemoveRep
       if ( ! backupPackage( name_r ) ) {
 	ERR << "backup of " << name_r << " failed" << endl;
       }
-      report.progress( 0 );
+      report->progress( 0 );
     } else {
-      report.progress( 100 );
+      report->progress( 100 );
     }
 
     // run rpm
@@ -1901,12 +1910,12 @@ void RpmDb::doRemovePackage( const string & name_r, unsigned flags, RpmRemoveRep
     // 5  - command started
     // 50 - command completed
     // 100 if no error
-    report.progress( 5 );
+    report->progress( 5 );
     while (systemReadLine(line))
     {
 	rpmmsg += line+'\n';
     }
-    report.progress( 50 );
+    report->progress( 50 );
     int rpm_status = systemStatus();
 
     if ( rpm_status != 0 ) {

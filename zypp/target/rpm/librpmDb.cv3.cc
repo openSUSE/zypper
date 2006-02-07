@@ -17,6 +17,7 @@
 
 #include "zypp/target/rpm/librpmDb.h"
 #include "zypp/target/rpm/RpmCallbacks.h"
+#include "zypp/ZYppCallbacks.h"
 
 extern "C" {
 #include <string.h>
@@ -337,7 +338,7 @@ using namespace std;
 **	FUNCTION TYPE : int
 */
 void internal_convertV3toV4( const Pathname & v3db_r, const librpmDb::constPtr & v4db_r,
-				ConvertDbReport & report )
+				callback::SendReport<ConvertDBReport> & report )
 {
 //  Timecount _t( "convert V3 to V4" );
   MIL << "Convert rpm3 database to rpm4" << endl;
@@ -387,7 +388,7 @@ void internal_convertV3toV4( const Pathname & v3db_r, const librpmDb::constPtr &
   unsigned failed      = 0;
   unsigned ignored     = 0;
   unsigned alreadyInV4 = 0;
-  report.progress( (100 * (failed + ignored + alreadyInV4) / max) );
+  report->progress( (100 * (failed + ignored + alreadyInV4) / max), v3db_r );
 
   if ( !max ) {
     Fclose( fd );
@@ -401,7 +402,7 @@ void internal_convertV3toV4( const Pathname & v3db_r, const librpmDb::constPtr &
   bool proceed = true;
   for ( int offset = fadFirstOffset(fd); offset && proceed /*!= CBSuggest::CANCEL*/;
 	offset = fadNextOffset(fd, offset),
-	report.progress( (100 * (failed + ignored + alreadyInV4) / max) ) )
+	report->progress( (100 * (failed + ignored + alreadyInV4) / max), v3db_r ) )
   {
 
     // have to use lseek instead of Fseek because headerRead
@@ -496,17 +497,17 @@ void internal_convertV3toV4( const Pathname & v3db_r, const librpmDb::constPtr &
       void convertV3toV4( const Pathname & v3db_r, const librpmDb::constPtr & v4db_r )
       {
         // report
-        ConvertDbReport report;
-        report.start();
+        callback::SendReport<ConvertDBReport> report;
+        report->start(v3db_r);
 	try { 
 	  internal_convertV3toV4( v3db_r, v4db_r, report );
 	}
 	catch (RpmException & excpt_r)
 	{
-	  report.end(excpt_r);
+	  report->finish(v3db_r, ConvertDBReport::FAILED,excpt_r.msg());
 	  ZYPP_RETHROW(excpt_r);
 	}
-        report.end();
+        report->finish(v3db_r, ConvertDBReport::NO_ERROR, "");
       }
 
     } // namespace rpm

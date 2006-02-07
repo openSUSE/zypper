@@ -59,6 +59,40 @@ namespace zypp
         virtual void finish( Exception & excpt_r );
     };
 	
+    class RpmRemovePackageReceiver 
+	: public callback::ReceiveReport<rpm::RpmRemoveReport>
+    {
+	callback::SendReport <rpm::RemoveResolvableReport> _report;
+	Resolvable::constPtr _resolvable;
+
+      public:
+
+	RpmRemovePackageReceiver (Resolvable::constPtr res);
+	virtual ~RpmRemovePackageReceiver ();
+	
+	virtual void reportbegin();
+	
+	virtual void reportend();
+
+        /** Start the operation */
+        virtual void start( const Pathname & name );
+	
+        /**
+         * Inform about progress
+         * Return true on abort
+         */
+        virtual bool progress( unsigned percent );
+
+	/** inform user about a problem */
+	virtual rpm::RpmRemoveReport::Action problem( Exception & excpt_r );
+
+        /** Finish operation in case of success */
+        virtual void finish();
+
+        /** Finish operatin in case of fail, report fail exception */
+        virtual void finish( Exception & excpt_r );
+    };
+	
     /////////////////////////////////////////////////////////////////
   } // namespace target
   ///////////////////////////////////////////////////////////////////

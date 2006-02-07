@@ -27,10 +27,14 @@ namespace zypp {
       ///////////////////////////////////////////////////////////////////
       // Reporting progress of package removing
       ///////////////////////////////////////////////////////////////////
-      class RpmRemoveReport : public HACK::Callback {
-      public:
-        virtual ~RpmRemoveReport()
-        {}
+      struct RpmRemoveReport : public callback::ReportBase {
+
+	enum Action {
+          ABORT,  // abort and return error
+          RETRY,   // retry
+	  IGNORE   // ignore
+        };
+
         /** Start the operation */
         virtual void start( const std::string & name )
         { }
@@ -40,16 +44,18 @@ namespace zypp {
          */
         virtual bool progress( unsigned percent )
         { return false; }
+
+	virtual Action problem( Exception & excpt_r )
+	 { return ABORT; }
+
         /** Finish operation in case of success */
-        virtual void end()
+        virtual void finish()
         { }
-        /** Finish operatino in case of fail, report fail exception */
-        virtual void end( Exception & excpt_r )
+        /** Finish operation in case of fail, report fail exception */
+        virtual void finish( Exception & excpt_r )
         { }
       };
 
-      extern RpmRemoveReport rpmRemoveReport;
-  
       ///////////////////////////////////////////////////////////////////
       // Reporting progress of package installation
       ///////////////////////////////////////////////////////////////////
@@ -82,84 +88,6 @@ namespace zypp {
         virtual void finish( Exception & excpt_r )
         { }
       };
-
-      ///////////////////////////////////////////////////////////////////
-      // Reporting database scanning
-      ///////////////////////////////////////////////////////////////////
-      class ScanDbReport : public HACK::Callback {
-      public:
-        virtual ~ScanDbReport()
-        {}
-        /** Start the operation */
-        virtual void start() 
-        { }
-        /**
-         * Inform about progress
-         * Return true on abort
-         */
-        virtual bool progress( unsigned percent )
-        { return false; }
-        /** Finish operation in case of success */
-        virtual void end()
-        { }
-        /** Finish operatino in case of fail, report fail exception */
-        virtual void end( Exception & excpt_r )
-        { }
-      };
-  
-      extern ScanDbReport scanDbReport;
-
-      ///////////////////////////////////////////////////////////////////
-      // Reporting progress of database rebuild
-      ///////////////////////////////////////////////////////////////////
-      class RebuildDbReport : public HACK::Callback {
-      public:
-        virtual ~RebuildDbReport()
-        {}
-        /** Start the operation */
-        virtual void start() 
-        { }
-        /**
-         * Inform about progress
-         * Return true on abort
-         */
-        virtual bool progress( unsigned percent )
-        { return false; }
-        /** Finish operation in case of success */
-        virtual void end()
-        { }
-        /** Finish operatino in case of fail, report fail exception */
-        virtual void end( Exception & excpt_r )
-        { }
-      };
-  
-      extern RebuildDbReport rebuildDbReport;
-
-      ///////////////////////////////////////////////////////////////////
-      // Reporting progress of database rebuild
-      ///////////////////////////////////////////////////////////////////
-      class ConvertDbReport : public HACK::Callback {
-      public:
-        virtual ~ConvertDbReport()
-        {}
-        /** Start the operation */
-        virtual void start() 
-        { }
-        /**
-         * Inform about progress
-         * Return true on abort
-         */
-        virtual bool progress( unsigned percent )
-        { return false; }
-        /** Finish operation in case of success */
-        virtual void end()
-        { }
-        /** Finish operatino in case of fail, report fail exception */
-        virtual void end( Exception & excpt_r )
-        { }
-      };
-  
-      extern ConvertDbReport convertDbReport;
 
     } // namespace rpm
   } // namespace target

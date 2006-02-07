@@ -94,6 +94,77 @@ namespace zypp
 	    _level = level_r;
 	}
 
+
+	/////////////////////////////////////////////////////////////////
+	///  RpmRemovePackageReceiver
+	/////////////////////////////////////////////////////////////////
+
+	RpmRemovePackageReceiver::RpmRemovePackageReceiver (Resolvable::constPtr res)
+	    : callback::ReceiveReport<rpm::RpmRemoveReport> ()
+	    , _resolvable (res)
+	{
+	}
+
+	RpmRemovePackageReceiver::~RpmRemovePackageReceiver ()
+	{
+	}
+	
+	void RpmRemovePackageReceiver::reportbegin() 
+	{
+	}
+	
+	void RpmRemovePackageReceiver::reportend() 
+	{
+	}
+
+        /** Start the operation */
+        void RpmRemovePackageReceiver::start( const Pathname & name ) 
+	{
+	    _report->start( _resolvable );
+	}
+
+        /**
+         * Inform about progress
+         * Return true on abort
+         */
+        bool RpmRemovePackageReceiver::progress( unsigned percent )
+	{
+	    return _report->progress( percent, _resolvable );
+	}
+	
+	rpm::RpmRemoveReport::Action 
+	RpmRemovePackageReceiver::problem( Exception & excpt_r )
+	{
+	    rpm::RemoveResolvableReport::Action user = 
+		_report->problem( _resolvable
+		    , rpm::RemoveResolvableReport::INVALID
+		    , excpt_r.msg()
+		);
+		
+	    switch (user) {
+		case rpm::RemoveResolvableReport::RETRY: 
+		    return rpm::RpmRemoveReport::RETRY;
+		case rpm::RemoveResolvableReport::ABORT: 
+		    return rpm::RpmRemoveReport::ABORT;
+		case rpm::RemoveResolvableReport::IGNORE: 
+		    return rpm::RpmRemoveReport::IGNORE;
+	    }
+	    
+	    return rpm::RpmRemoveReport::problem( excpt_r );
+	}
+
+        /** Finish operation in case of success */
+        void RpmRemovePackageReceiver::finish()
+	{
+	    _report->finish( _resolvable, rpm::RemoveResolvableReport::NO_ERROR, std::string() );
+	}
+
+        /** Finish operation in case of success */
+        void RpmRemovePackageReceiver::finish( Exception & excpt_r )
+	{
+	    _report->finish( _resolvable, rpm::RemoveResolvableReport::INVALID, std::string() );
+	}
+
     /////////////////////////////////////////////////////////////////
   } // namespace target
   ///////////////////////////////////////////////////////////////////

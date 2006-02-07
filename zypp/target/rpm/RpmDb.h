@@ -27,6 +27,7 @@
 
 #include "zypp/target/rpm/RpmHeader.h"
 #include "zypp/target/rpm/RpmCallbacks.h"
+#include "zypp/ZYppCallbacks.h"
 
 namespace zypp {
   namespace target {
@@ -545,10 +546,10 @@ namespace zypp {
           static bool setInstallationLogfile( const Pathname & filename );
 
 	protected:
-	  void doRemovePackage( const std::string & name_r, unsigned flags, RpmRemoveReport & report );
+	  void doRemovePackage( const std::string & name_r, unsigned flags, callback::SendReport<RpmRemoveReport> & report );
 	  void doInstallPackage( const Pathname & filename, unsigned flags, callback::SendReport<RpmInstallReport> & report );
-	  const std::list<Package::Ptr> & doGetPackages(ScanDbReport & report);
-	  void doRebuildDatabase(RebuildDbReport & report);
+	  const std::list<Package::Ptr> & doGetPackages(callback::SendReport<ScanDBReport> & report);
+	  void doRebuildDatabase(callback::SendReport<RebuildDBReport> & report);
 	  
       
       };

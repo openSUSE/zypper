@@ -48,7 +48,7 @@ namespace zypp
       { return true; }
 
       virtual Action problem(
-        Resolvable::Ptr resolvable_ptr
+        Resolvable::constPtr resolvable_ptr
 	, Error error
 	, std::string description
       ) { return ABORT; }
@@ -312,20 +312,20 @@ namespace zypp
         };
       
         virtual void start(
-	  Resolvable::Ptr resolvable
+	  Resolvable::constPtr resolvable
         ) {}
 
-        virtual bool progress(int value, Resolvable::Ptr resolvable) 
+        virtual bool progress(int value, Resolvable::constPtr resolvable) 
         { return true; }
 
         virtual Action problem(
-          Resolvable::Ptr resolvable
+          Resolvable::constPtr resolvable
   	  , Error error
   	  , std::string description
         ) { return ABORT; }
 
         virtual void finish(
-          Resolvable::Ptr resolvable
+          Resolvable::constPtr resolvable
           , Error error
 	  , std::string reason
         ) {}
@@ -342,21 +342,17 @@ namespace zypp
       
         enum Error {
 	  NO_ERROR,
-          NOT_FOUND, 	// the requested Url was not found
-	  IO,		// IO error
-	  INVALID		// th resolvable is invalid
+	  FAILED		// failed to rebuild
         };
       
-        virtual void start(
-	  Pathname path
-        ) {}
+        virtual void start(Pathname path) {}
 
         virtual bool progress(int value, Pathname path) 
         { return true; } 
 
         virtual Action problem(
 	  Pathname path
-  	  , Error error
+  	 , Error error
   	 , std::string description
         ) { return ABORT; }
 
@@ -378,9 +374,7 @@ namespace zypp
       
         enum Error {
 	  NO_ERROR,
-          NOT_FOUND, 	// the requested Url was not found
-	  IO,		// IO error
-	  INVALID		// th resolvable is invalid
+	  FAILED		// conversion failed
         };
       
         virtual void start(
@@ -399,6 +393,37 @@ namespace zypp
         virtual void finish(
 	  Pathname path
           , Error error
+	  , std::string reason
+        ) {}
+      };
+
+       // progress for scanning the database
+      struct ScanDBReport : public callback::ReportBase
+      {
+        enum Action { 
+          ABORT,  // abort and return error
+          RETRY,	// retry
+	  IGNORE	// ignore the failure
+        }; 
+      
+        enum Error {
+	  NO_ERROR,
+	  FAILED		// conversion failed
+        };
+      
+        virtual void start(
+        ) {}
+
+        virtual bool progress(int value) 
+        { return true; }
+
+        virtual Action problem(
+  	  Error error
+  	 , std::string description
+        ) { return ABORT; }
+
+        virtual void finish(
+          Error error
 	  , std::string reason
         ) {}
       };
