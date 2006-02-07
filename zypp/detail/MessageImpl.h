@@ -36,14 +36,10 @@ namespace zypp
 
     public:
       /** Get the text of the message */
-      virtual std::string text() const;
-      /** Get the type of the message (YesNo / OK) */
-      virtual std::string type() const;
+      virtual TranslatedText text() const;
     protected:
       /** The text of the message */
-      std::string _text;
-      /** The type of the message (YesNo / OK) */
-      std::string _type;
+      TranslatedText _text;
     };
     ///////////////////////////////////////////////////////////////////
 

@@ -34,11 +34,7 @@ namespace zypp
     MessageImpl::~MessageImpl()
     {}
 
-    std::string MessageImpl::type() const {
-      return _type;
-    }
-
-    std::string MessageImpl::text() const {
+    TranslatedText MessageImpl::text() const {
       return _text;
     }
 

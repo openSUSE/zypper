@@ -62,8 +62,7 @@ element-message =
   element message {
     element-name,
     element-version,    
-    attribute type { "OK" | "YesNo" },
-    element text { xsd:string },
+    element text { localized-string }+,
     dependency-block
   }
 

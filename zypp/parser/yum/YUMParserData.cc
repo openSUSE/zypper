@@ -439,7 +439,6 @@ namespace zypp {
       {
         out << "Message Data: " << endl
           << "  name: " << data.name << endl
-          << "  type: " << data.type << endl
           << "  epoch: " << data.epoch << endl
           << "  version: " << data.ver << endl
           << "  release: " << data.rel << endl

@@ -37,9 +37,7 @@ namespace zypp
 
     public:
       /** Get the text of the message */
-      virtual std::string text() const = 0;
-      /** Get the type of the message (YesNo / OK) */
-      virtual std::string type() const = 0;
+      virtual TranslatedText text() const = 0;
       /** */
       virtual ByteCount size() const;
     };

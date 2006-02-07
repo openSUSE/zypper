@@ -412,7 +412,6 @@ XMLFilesBackend::createMessage( const zypp::parser::yum::YUMPatchMessage & parse
   try
   {
     shared_ptr<XMLMessageImpl> impl(new XMLMessageImpl());
-    impl->_type = parsed.type;
     impl->_text = parsed.text;
 
     // Collect basic Resolvable data

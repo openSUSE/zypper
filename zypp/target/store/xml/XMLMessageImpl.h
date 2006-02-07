@@ -35,14 +35,10 @@ namespace zypp
       virtual ~XMLMessageImpl();
 
       /** Get the text of the message */
-      virtual std::string text() const;
-      /** Get the type of the message (YesNo / OK) */
-      virtual std::string type() const;
+      virtual TranslatedText text() const;
     
       /** The text of the message */
-      std::string _text;
-      /** The type of the message (YesNo / OK) */
-      std::string _type;
+      TranslatedText _text;
     };
     ///////////////////////////////////////////////////////////////////
 

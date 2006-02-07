@@ -262,8 +262,7 @@ namespace zypp {
       public:
         YUMPatchMessage() {};
         virtual AtomType atomType() { return Message; };
-        std::string type;
-        std::string text;
+        TranslatedText text;
       };
 
 

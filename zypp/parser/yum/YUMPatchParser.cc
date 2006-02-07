@@ -494,7 +494,6 @@ namespace zypp {
                                      xmlNodePtr formatNode)
       {
 	shared_ptr<YUMPatchMessage> message(new YUMPatchMessage);
-        message->type = _helper.attribute(formatNode,"type");
       
         // FIXME move the respective method to a common class, inherit it  
         YUMPrimaryParser prim;
@@ -505,7 +504,7 @@ namespace zypp {
           if (_helper.isElement(child)) {
             string name = _helper.name(child);
             if (name == "name") {
-      	message->name = _helper.content(child);
+	      message->name = _helper.content(child);
             }
             else if (name == "version") {
               message->epoch = _helper.attribute(child,"epoch");
@@ -513,7 +512,7 @@ namespace zypp {
               message->rel = _helper.attribute(child,"rel");
             }
             else if (name == "text") {
-      	message->text = _helper.content(child);
+	      message->text.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
             }
             else if (name == "provides") {
               prim.parseDependencyEntries(& message->provides, child);

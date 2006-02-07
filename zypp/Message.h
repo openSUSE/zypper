@@ -36,9 +36,7 @@ namespace zypp
 
   public:
     /** Get the text of the message */
-    std::string text() const;
-    /** Get the type of the message (YesNo / OK) */
-    std::string type() const;
+    TranslatedText text() const;
 
   protected:
     Message( const NVRAD & nvrad_r );

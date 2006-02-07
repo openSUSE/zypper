@@ -40,9 +40,7 @@ namespace zypp
 	  const zypp::parser::yum::YUMPatchMessage & parsed
 	);
 	/** Get the text of the message */
-	virtual std::string text() const;
-	/** Get the type of the message (YesNo / OK) */
-	virtual std::string type() const;
+	virtual TranslatedText text() const;
 	/** */
 	virtual TranslatedText summary() const;
 	/** */
@@ -61,9 +59,7 @@ namespace zypp
 
       protected:
 	/** The text of the message */
-	std::string _text;
-	/** The type of the message (YesNo / OK) */
-	std::string _type;
+	TranslatedText _text;
       private:
 	Source_Ref _source;
       public:

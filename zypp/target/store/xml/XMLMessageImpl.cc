@@ -34,11 +34,7 @@ namespace zypp
     XMLMessageImpl::~XMLMessageImpl()
     {}
 
-    std::string XMLMessageImpl::type() const {
-      return _type;
-    }
-
-    std::string XMLMessageImpl::text() const {
+    TranslatedText XMLMessageImpl::text() const {
       return _text;
     }
 

@@ -166,7 +166,7 @@ template<> // or constPtr?
 std::string toXML( const Message::constPtr &obj )
 {
   stringstream out;
-  out << "<message type=\"" << obj->type() << "\">" << std::endl;
+  out << "<message>" << std::endl;
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
   out << "  <text>" << obj->text() << "</text>" << std::endl;

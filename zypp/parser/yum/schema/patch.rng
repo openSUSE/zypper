@@ -141,15 +141,11 @@
     <element name="message">
       <ref name="element-name"/>
       <ref name="element-version"/>
-      <attribute name="type">
-        <choice>
-          <value>OK</value>
-          <value>YesNo</value>
-        </choice>
-      </attribute>
-      <element name="text">
-        <data type="string"/>
-      </element>
+      <oneOrMore>
+        <element name="text">
+          <ref name="localized-string"/>
+        </element>
+      </oneOrMore>
       <ref name="dependency-block"/>
     </element>
   </define>

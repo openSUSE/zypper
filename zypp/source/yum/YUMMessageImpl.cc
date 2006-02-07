@@ -38,15 +38,10 @@ namespace zypp
       : _source(source_r)
       {
 	_text = parsed.text;
-	_type = parsed.type;
       }
       /** Get the text of the message */
-      std::string YUMMessageImpl::text() const {
+      TranslatedText YUMMessageImpl::text() const {
 	return _text;
-      }
-      /** Get the type of the message (YesNo / OK) */
-      std::string YUMMessageImpl::type() const {
-	return _type;
       }
       TranslatedText YUMMessageImpl::summary() const
       { return ResObjectImplIf::summary(); }
