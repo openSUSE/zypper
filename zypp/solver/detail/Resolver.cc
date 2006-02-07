@@ -491,13 +491,13 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
     DBG << "Initial Queue: [" << *initial_queue << "]" << endl;
 
-    _best_context = NULL;
-
     if (initial_queue->isEmpty()) {
 	INT << "Empty Queue, nothing to resolve" << endl;
 
 	return true;
     }
+
+    _best_context = NULL;
 
     _pending_queues.push_front (initial_queue);
 
@@ -544,7 +544,6 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
 	    if (_best_context == NULL
 		|| _best_context->compare (context) < 0) {
-
 		_best_context = context;
 	    }
 
