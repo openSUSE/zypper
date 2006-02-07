@@ -64,7 +64,7 @@ string
 ResolverInfoChildOf::message( ) const
 {
     string affected_str = ResolverInfo::toString(affected());
-    string container_str = itemsToString( false );
+    string container_str = itemsToString( true );
 
     // TranslatorExplanation: 1.%s name of package, 2.%s list of names
     // TranslatorExplanation: 1.%s is part of 'bundles', the bundles are listed in 2.%s

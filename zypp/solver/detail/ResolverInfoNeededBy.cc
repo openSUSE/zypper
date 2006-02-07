@@ -55,7 +55,7 @@ ResolverInfoNeededBy::dumpOn( std::ostream & os ) const
 	  // Translator: all.%s = name of package,patch,...
     os << str::form (_("%s is needed by %s"),
 			    affected_str.str().c_str(),
-			    itemsToString(false).c_str());
+			    itemsToString(true).c_str());
     return os;
 }
 

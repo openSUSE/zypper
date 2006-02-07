@@ -99,6 +99,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     std::set<Source_Ref> _subscribed;
 
+    Arch _architecture;
+
     // helpers
     bool doesObsoleteCapability (PoolItem_Ref candidate, const Capability & cap);
     bool doesObsoleteItem (PoolItem_Ref candidate, PoolItem_Ref installed);
@@ -172,6 +174,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool applySolutions (const ProblemSolutionList &solutions);
 
     void reset (void);
+
+    Arch architecture() const { return _architecture; }
+    void setArchitecture( const Arch & arch) { _architecture = arch; }
 };
 
 ///////////////////////////////////////////////////////////////////

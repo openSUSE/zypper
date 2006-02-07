@@ -188,7 +188,7 @@ struct UninstallProcess: public resfilter::OnCapMatchCallbackFunctor
 	if (context->requirementIsMet (match, false))			// its provided by another installed resolvable -> dont care
 	    return true;
 
-	if (requirer.status().isSatisfied()) {			// it is just satisfied, check freshens
+	if (context->getStatus(requirer).isSatisfied()) {		// it is just satisfied, check freshens
 #warning If an uninstall incompletes a satisfied, the uninstall should be cancelled
 	    QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, requirer, soft);	// re-check if its still needed
 	    qil.push_back (establish_item);
@@ -264,6 +264,8 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	Capability c = *iter;
 	ResPool::const_indexiterator rend = pool().requiresend(c.index());
 	for (ResPool::const_indexiterator it = pool().requiresbegin(c.index()); it != rend; ++it) {
+	    if (it->second.second->arch() == Arch_src)
+		continue;
 	    if (c.matches (it->second.first) == CapMatch::yes) {
 		if (!info( it->second.second, it->second.first))
 		    break;
@@ -330,6 +332,8 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	Capability c = *iter;
 	ResPool::const_indexiterator rend = pool().requiresend(c.index());
 	for (ResPool::const_indexiterator it = pool().requiresbegin(c.index()); it != rend; ++it) {
+	    if (it->second.second->arch() == Arch_src)
+		continue;
 	    if (c.matches (it->second.first) == CapMatch::yes) {
 		if (!info( it->second.second, it->second.first))
 		    break;

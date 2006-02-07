@@ -11,7 +11,6 @@
 */
 #include <iostream>
 #include <set>
-#include <sys/utsname.h>
 
 #include "zypp/Arch.h"
 
@@ -110,12 +109,8 @@ namespace zypp
 
 #undef DEF_BUILTIN
 
- static const string system_arch (void);
  static const string canonical_arch (const string & arch);
 
-    
-  const Arch Arch::System = Arch(system_arch ());
-      
  //---------------------------------------------------------------------------
  // architecture stuff
       
@@ -127,7 +122,7 @@ namespace zypp
      static canonical canonical_archs[] = {
 	 { "noarch",  "noarch" },
 	 { "unknown", "unknown" },
-	 { "any",	 "any" },
+	 { "any",     "any" },
 	 { "all",     "any" },
 	 { "i386",    "i386" },
 	 { "ix86",    "i386" }, /* OpenPKG uses this */
@@ -161,27 +156,7 @@ namespace zypp
      return "canonical";
  }
       
-      
- static const string
- system_arch (void)
- {
-     static struct utsname buf;
-     static bool checked = false;
-      
-     if (!checked) {
-	 if (uname (&buf) < 0) {
-	     return NULL;
-	 }
-	 checked = true;
-     }
-      
-     return string (buf.machine);
- }
-      
-      
- //---------------------------------------------------------------------------
-
-
+//---------------------------------------------------------------------------
     
   ///////////////////////////////////////////////////////////////////
 
@@ -201,7 +176,9 @@ namespace zypp
   //
   bool Arch::compatibleWith( const Arch & rhs ) const
   {
-    return CompatTable::compatible( *this, rhs );
+    return _value.empty()
+	|| *this == rhs
+	|| CompatTable::compatible( *this, rhs );
   }
 
   /////////////////////////////////////////////////////////////////

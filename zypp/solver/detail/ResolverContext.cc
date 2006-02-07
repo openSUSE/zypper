@@ -72,7 +72,7 @@ operator<<( ostream& os, const ResolverContext & context)
 
 //---------------------------------------------------------------------------
 
-ResolverContext::ResolverContext (const ResPool & pool, ResolverContext_Ptr parent)
+ResolverContext::ResolverContext (const ResPool & pool, const Arch & arch, ResolverContext_Ptr parent)
     : _parent (parent)
     , _pool (pool)
     , _download_size (0)
@@ -84,6 +84,7 @@ ResolverContext::ResolverContext (const ResPool & pool, ResolverContext_Ptr pare
     , _verifying (false)
     , _establishing (false)
     , _invalid (false)
+    , _architecture(arch)
 {
 _DEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
     if (parent != NULL) {
@@ -131,9 +132,15 @@ _XDEBUG( "[" << context << "]:" << it->second );
 	}
 	context = context->_parent;			// N: go up the chain
     }
-    _last_checked_status = item.status();
-_XDEBUG( "[NULL]:" << item.status() );
-    return item.status();				// Not part of context, return Pool status
+    ResStatus status;
+    if (item.status().isInstalled())
+	status = ResStatus::installed;
+    else
+	status = ResStatus::uninstalled;
+
+    _last_checked_status = status;
+_XDEBUG( "[NULL]:" << status );
+    return status;				// Not part of context, return Pool status
 }
 
 
@@ -273,14 +280,14 @@ ResolverContext::upgrade (PoolItem_Ref item, PoolItem_Ref old_item, bool is_soft
 	setStatus (item, ResStatus::toBeInstalled);
     }
 
-    if (old_item.status().wasUninstalled()) {
-	Resolvable::constPtr res = old_item.resolvable();
-	Package::constPtr pkg = asKind<Package>(res);			// try to access it as a package
-	if (pkg) {							// if its !=NULL, get size information
+    Resolvable::constPtr res = old_item.resolvable();
+    Package::constPtr pkg = asKind<Package>(res);			// try to access it as a package
+    if (pkg) {							// if its !=NULL, get size information
 
-	    _install_size -= pkg->size();
-	}
+	_install_size -= pkg->size();
+    }
 
+    if (status == ResStatus::uninstalled) {
 	res = item.resolvable();
 	pkg = asKind<Package>(res);					// try to access it as a package
 	if (pkg) {							// if its !=NULL, get size information
@@ -304,7 +311,6 @@ ResolverContext::upgrade (PoolItem_Ref item, PoolItem_Ref old_item, bool is_soft
 
 	_other_penalties += other_penalty;
     }
-
     return true;
 }
 
@@ -540,12 +546,15 @@ typedef struct {
 } InstallInfo;
 
 static void
-install_pkg_cb (PoolItem_Ref item, const ResStatus & status, void *data)
+install_item_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     InstallInfo *info = (InstallInfo *)data;
+MIL << "install_item_cb " << item << ": " << status << endl;
     if (status.isToBeInstalled()
+	&& !item.status().isInstalled()
 	&& !Helper::findInstalledItem( info->pool, item))
     {
+MIL << "install !" << endl;
 	if (info->fn) info->fn (item, status, info->rl);
 	++info->count;
     }
@@ -558,7 +567,7 @@ ResolverContext::foreachInstall (MarkedPoolItemFn fn, void *data) const
     PoolItemList *rl = (PoolItemList *)data;
     InstallInfo info = { _pool, fn, rl, 0 };
 
-    foreachMarked (install_pkg_cb, (void *)&info);
+    foreachMarked (install_item_cb, (void *)&info);
 
     return info.count;
 }
@@ -598,7 +607,7 @@ typedef struct {
 } SatisfyInfo;
 
 static void
-satisfy_pkg_cb (PoolItem_Ref item, const ResStatus & status, void *data)
+satisfy_item_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     SatisfyInfo *info = (SatisfyInfo *)data;
     if (status.isSatisfied()
@@ -617,7 +626,7 @@ ResolverContext::foreachSatisfy (MarkedPoolItemFn fn, void *data) const
     PoolItemList *rl = (PoolItemList *)data;
     SatisfyInfo info = { _pool, fn, rl, 0 };
 
-    foreachMarked (satisfy_pkg_cb, (void *)&info);
+    foreachMarked (satisfy_item_cb, (void *)&info);
 
     return info.count;
 }
@@ -656,7 +665,7 @@ typedef struct {
 } IncompleteInfo;
 
 static void
-incomplete_pkg_cb (PoolItem_Ref item, const ResStatus & status, void *data)
+incomplete_item_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     IncompleteInfo *info = (IncompleteInfo *)data;
 
@@ -673,7 +682,7 @@ ResolverContext::foreachIncomplete (MarkedPoolItemFn fn, void *data) const
     PoolItemList *rl = (PoolItemList *)data;
     IncompleteInfo info = { _pool, fn, rl, 0 };
 
-    foreachMarked (incomplete_pkg_cb, (void *)&info);
+    foreachMarked (incomplete_item_cb, (void *)&info);
 
     return info.count;
 }
@@ -713,18 +722,21 @@ typedef struct {
 } UpgradeInfo;
 
 static void
-upgrade_pkg_cb (PoolItem_Ref item, const ResStatus & status, void *data)
+upgrade_item_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     UpgradeInfo *info = (UpgradeInfo *)data;
 
     PoolItem_Ref to_be_upgraded;
 
+MIL << "upgrade_item_cb " << item << ": " << status << endl;
     if (status.isToBeInstalled()
-	&& ! status.staysInstalled ())
+	&& ! item.status().isInstalled ())
     {
+MIL << "upgrade_item_cb which ?" << endl;
 
 	to_be_upgraded = Helper::findInstalledItem(info->pool, item);
 	if (to_be_upgraded) {
+MIL << "upgrade_item_cb ! " << to_be_upgraded << endl;
 	    if (info->fn) {
 		info->fn (item, status, to_be_upgraded, info->context->getStatus(to_be_upgraded), info->data);
 	    }
@@ -739,7 +751,7 @@ ResolverContext::foreachUpgrade (MarkedPoolItemPairFn fn, void *data)
 {
     UpgradeInfo info = { _pool, fn, data, this, 0 };
 
-    foreachMarked (upgrade_pkg_cb, (void *)&info);
+    foreachMarked (upgrade_item_cb, (void *)&info);
 
     return info.count;
 }
@@ -777,15 +789,17 @@ typedef struct {
 } UninstallInfo;
 
 static void
-uninstall_pkg_cb (PoolItem_Ref item, const ResStatus & status, void *data)
+uninstall_item_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     UninstallInfo *info = (UninstallInfo *)data;
 
+MIL << "uninstall_item_cb " << item << ": " << status << endl;
     UpgradeTable::const_iterator pos = info->upgrade_hash.find(item->name());
 
     if (status.isToBeUninstalled ()
 	&& pos == info->upgrade_hash.end())		// dont count upgrades
     {
+MIL << "uninstall_item_cb! " << endl;
 	if (info->fn)
 	    info->fn (item, status, info->rl);
 	++info->count;
@@ -811,7 +825,7 @@ ResolverContext::foreachUninstall (MarkedPoolItemFn fn, void *data)
     info.count = 0;
 
     foreachUpgrade (build_upgrade_hash_cb, (void *)&(info.upgrade_hash));
-    foreachMarked (uninstall_pkg_cb, (void *)&info);
+    foreachMarked (uninstall_item_cb, (void *)&info);
 
     return info.count;
 }
@@ -839,7 +853,7 @@ typedef struct {
 } ImpossibleInfo;
 
 static void
-impossible_pkg_cb (PoolItem_Ref item, const ResStatus & status, void *data)
+impossible_item_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     ImpossibleInfo *info = (ImpossibleInfo *)data;
 
@@ -855,7 +869,7 @@ ResolverContext::foreachImpossible (MarkedPoolItemFn fn, void *data)
 {
     ImpossibleInfo info = { _pool, fn, 0, data };
 
-    foreachMarked (impossible_pkg_cb, (void *)&info);
+    foreachMarked (impossible_item_cb, (void *)&info);
 
     return info.count;
 }
@@ -867,7 +881,7 @@ static void
 install_count_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     int *count = (int *)data;
-    if (item.status().wasUninstalled ()) {
+    if (!item.status().isInstalled ()) {
 	++*count;
     }
 }
@@ -887,7 +901,7 @@ static void
 uninstall_count_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     int *count = (int *)data;
-    if (item.status().wasInstalled ()) {
+    if (item.status().isInstalled ()) {
 	++*count;
     }
 }
@@ -915,7 +929,7 @@ static void
 satisfy_count_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     int *count = (int *)data;
-    if (item.status().wasUninstalled ()) {
+    if (!item.status().isInstalled ()) {
 	++*count;
     }
 }

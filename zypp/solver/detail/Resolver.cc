@@ -19,6 +19,8 @@
  * 02111-1307, USA.
  */
 
+#include <sys/utsname.h>
+
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/Helper.h"
 
@@ -64,6 +66,14 @@ Resolver::Resolver (const ResPool & pool)
     , _best_context (NULL)
     , _timed_out (false)
 {
+    struct utsname buf;
+    if (uname (&buf) < 0) {
+	ERR << "Can't determine system architecture" << endl;
+    }
+    else {
+	MIL << "System architecture is '" << buf.machine << "'" << endl;
+	_architecture = Arch(buf.machine);
+    }
 }
 
 
@@ -350,7 +360,7 @@ Resolver::establishState (ResolverContext_Ptr context)
     }
 
     if (context == NULL)
-	context = new ResolverContext(_pool);
+	context = new ResolverContext(_pool, _architecture);
 
     context->setEstablishing (true);
 
@@ -443,7 +453,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
     // create initial_queue
 
-    ResolverQueue_Ptr initial_queue = new ResolverQueue(_pool, context);
+    ResolverQueue_Ptr initial_queue = new ResolverQueue(_pool, _architecture, context);
 
     /* If this is a verify, we do a "soft resolution" */
 
@@ -650,7 +660,7 @@ Resolver::resolvePool ()
 {
 
     CollectTransact info (*this);
-#if 0
+#if 1
     MIL << "Resolver::resolvePool()" << endl;
     MIL << "Pool before resolve" << endl;
     MIL << "---------------------------------------" << endl;
@@ -669,7 +679,7 @@ Resolver::resolvePool ()
 	MIL << "Have solution, copying back to pool" << endl;
 	ResolverContext_Ptr solution = bestContext();
 	solution->foreachMarked (solution_to_pool, NULL);
-#if 0
+#if 1
 	MIL << "Pool after resolve" << endl;
 	MIL << "---------------------------------------" << endl;
 	for (ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it) {

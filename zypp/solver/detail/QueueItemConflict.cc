@@ -220,6 +220,8 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 #endif
 	ResPool::const_indexiterator pend = pool.providesend(maybe_upgrade_cap.index());
 	for (ResPool::const_indexiterator it = pool.providesbegin(maybe_upgrade_cap.index()); it != pend; ++it) {
+	    if (it->second.second->arch() == Arch_src)
+		continue;
 	    if (maybe_upgrade_cap.matches (it->second.first) == CapMatch::yes) {
 		if (!upgrade_info( it->second.second, it->second.first))
 		    break;

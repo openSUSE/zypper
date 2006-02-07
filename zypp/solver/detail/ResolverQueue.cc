@@ -64,12 +64,12 @@ operator<<( ostream& os, const ResolverQueue & resolverqueue)
 
 //---------------------------------------------------------------------------
 
-ResolverQueue::ResolverQueue (const ResPool & pool, ResolverContext_Ptr context)
+ResolverQueue::ResolverQueue (const ResPool & pool, const Arch & arch, ResolverContext_Ptr context)
     : _context (context)
 {
     _DEBUG("ResolverQueue::ResolverQueue(pool, " << context << ")");
     if (context == NULL)
-	_context = new ResolverContext(pool);
+	_context = new ResolverContext(pool, arch);
 }
 
 
@@ -293,16 +293,16 @@ ResolverQueue::process ()
 
 //---------------------------------------------------------------------------
 
-static ResolverQueue_Ptr
-copy_queue_except_for_branch (ResolverQueue_Ptr queue, QueueItem_Ptr branch_qitem, QueueItem_Ptr subqitem)
+ResolverQueue_Ptr
+ResolverQueue::copy_queue_except_for_branch (QueueItem_Ptr branch_qitem, QueueItem_Ptr subqitem) const
 {
     ResolverContext_Ptr new_context;
     ResolverQueue_Ptr new_queue;
     _DEBUG("copy_queue_except_for_branch");
-    new_context = new ResolverContext (queue->context()->pool(), queue->context());
-    new_queue = new ResolverQueue (new_context->pool(), new_context);
+    new_context = new ResolverContext (_context->pool(), _context->architecture(), _context);
+    new_queue = new ResolverQueue (new_context->pool(), new_context->architecture(), new_context);
 
-    QueueItemList qil = queue->qitems();
+    QueueItemList qil = _qitems;
     for (QueueItemList::const_iterator iter = qil.begin(); iter != qil.end(); ++iter) {
 	QueueItem_Ptr qitem = *iter;
 	QueueItem_Ptr new_qitem;
@@ -312,14 +312,13 @@ copy_queue_except_for_branch (ResolverQueue_Ptr queue, QueueItem_Ptr branch_qite
 
 	    if (new_qitem->isInstall()) {
 		QueueItemInstall_Ptr install_qitem = dynamic_pointer_cast<QueueItemInstall>(new_qitem);
-#warning needs Source backref
-#if 0
+
 		/* Penalties are negative priorities */
 		int penalty;
-		penalty = - queue->context()->getChannelPriority (install_qitem->poolItem()->channel());
+		Source_Ref src = install_qitem->item()->source();
+		penalty = - src.priority();
 
 		install_qitem->setOtherPenalty (penalty);
-#endif
 	    }
 
 	} else {
@@ -397,7 +396,7 @@ ResolverQueue::splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueLi
 	ResolverQueue_Ptr new_queue;
 	QueueItem_Ptr new_qitem = *iter;
 
-	new_queue = copy_queue_except_for_branch (this, (QueueItem_Ptr) first_branch, new_qitem);
+	new_queue = copy_queue_except_for_branch ((QueueItem_Ptr) first_branch, new_qitem);
 
 	DeferTable::const_iterator pos = to_defer.find (new_qitem);
 	if (pos != to_defer.end()) {

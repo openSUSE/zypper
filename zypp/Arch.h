@@ -55,13 +55,6 @@ namespace zypp
     int compare( const Arch & rhs ) const
     { return _value.compare( rhs._value ); }
 
-    /** Architecture of the current working system
-     * \return \c Arch.
-     * \todo Eliminate this, it's not task of a data type to
-     * detect and define what the system architecture is.
-    */
-    static const Arch System;
-
   private:
     /** String representation of Arch. */
     std::string _value;

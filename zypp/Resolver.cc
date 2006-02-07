@@ -70,6 +70,10 @@ namespace zypp
   { return _pimpl->applySolutions (solutions); }      
   void Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   { return _pimpl->doUpgrade(opt_stats_r); }
+  Arch Resolver::architecture() const
+  { return _pimpl->architecture(); }
+  void Resolver::setArchitecture( const Arch & arch )
+  { _pimpl->setArchitecture( arch ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

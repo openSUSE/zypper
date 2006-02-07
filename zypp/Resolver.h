@@ -112,6 +112,9 @@ namespace zypp
      **/
     bool applySolutions( const ProblemSolutionList & solutions );
 
+    Arch architecture() const;
+    void setArchitecture( const Arch & arch);
+
   protected:
 
   private:

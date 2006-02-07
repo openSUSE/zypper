@@ -63,8 +63,10 @@ class ResolverQueue : public base::ReferenceCounted, private base::NonCopyable {
     IgnoreMap _ignoreConflicts;
     IgnoreMap _ignoreRequires;
 
+    ResolverQueue_Ptr copy_queue_except_for_branch (QueueItem_Ptr branch_qitem, QueueItem_Ptr subqitem) const;
+
   public:
-    ResolverQueue (const ResPool & pool, ResolverContext_Ptr context = NULL);
+    ResolverQueue (const ResPool & pool, const Arch & arch, ResolverContext_Ptr context = NULL);
     virtual ~ResolverQueue();
 
     // ---------------------------------- I/O
@@ -77,7 +79,6 @@ class ResolverQueue : public base::ReferenceCounted, private base::NonCopyable {
     QueueItemList qitems(void) const { return _qitems; }
 
     // ---------------------------------- methods
-
 
     void addPoolItemToInstall (PoolItem_Ref poolItem);
     void addPoolItemToEstablish (PoolItem_Ref poolItem);

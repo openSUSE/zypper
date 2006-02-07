@@ -79,8 +79,10 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     PoolItem_Ref _last_checked_item;		// cache for {get,set}Status
     ResStatus _last_checked_status;
 
+    Arch _architecture;
+
   public:
-    ResolverContext (const ResPool & pool, ResolverContext_Ptr parent = NULL);
+    ResolverContext (const ResPool & pool, const Arch & arch, ResolverContext_Ptr parent = NULL);
     virtual ~ResolverContext();
 
     // ---------------------------------- I/O
@@ -106,6 +108,8 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     void setEstablishing (bool establishing) { _establishing = establishing; }
 
     inline ResPool pool() const { return _pool; }
+
+    inline Arch architecture() const { return _architecture; }
 
     // ---------------------------------- methods
 

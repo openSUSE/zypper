@@ -140,6 +140,7 @@ lib@PACKAGE@_la_SOURCES = \
 	TranslatedText.cc \
 	ZYppFactory.cc
 
+
 lib@PACKAGE@_la_LDFLAGS =	@LIBZYPP_VERSION_INFO@
 
 lib@PACKAGE@_la_LIBADD =        base/lib@PACKAGE@_base.la	\

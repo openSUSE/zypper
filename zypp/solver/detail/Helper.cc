@@ -86,7 +86,7 @@ Helper::findInstalledByNameAndKind (const ResPool & pool, const string & name, c
 	ResPool::const_nameiterator pend = pool.nameend(name);
 	for (ResPool::const_nameiterator it = pool.namebegin(name); it != pend; ++it) {
 	    PoolItem item = it->second;
-	    if (item.status().staysInstalled()
+	    if (item.status().isInstalled()
 		&& item->kind() == kind) {
 		if (!info( it->second ))
 		    break;

@@ -175,6 +175,11 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 	    return true;
 	}
 
+	if (!provider->arch().compatibleWith( context->architecture() )) {
+	    MIL << "provider " << provider << " has incompatible arch '" << provider->arch() << "'" << endl;
+	    return true;
+	}
+
 	if (! (status.isToBeUninstalled() || status.isImpossible())
 	    && ! context->isParallelInstall (provider)
 	    && ! uniq.has(provider)
@@ -312,6 +317,8 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	// world->foreachProvidingResItem (_capability, require_process_cb, &info);
 	ResPool::const_indexiterator pend = pool().providesend(_capability.index());
 	for (ResPool::const_indexiterator it = pool().providesbegin(_capability.index()); it != pend; ++it) {
+	    if (it->second.second->arch() == Arch_src)
+		continue;
 	    if (_capability.matches (it->second.first) == CapMatch::yes) {
 		if (!info( it->second.second, it->second.first))
 		    break;
@@ -375,12 +382,23 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	    // Maybe we can add some extra info on why none of the providers are suitable.
 
 	    // pool()->foreachProvidingResItem (_capability, no_installable_providers_info_cb, (void *)&info);
-
+#if 0
 	    Dep dep( Dep::PROVIDES );
 
 	    invokeOnEach( pool().byCapabilityIndexBegin( _capability.index(), dep ), // begin()
 			  pool().byCapabilityIndexEnd( _capability.index(), dep ),   // end()
 			  resfilter::callOnCapMatchIn( dep, _capability, functor::functorRef<bool,PoolItem,Capability>(info)) );
+#endif
+		// world->foreachProvidingResItem (_capability, require_process_cb, &info);
+		ResPool::const_indexiterator pend = pool().providesend(_capability.index());
+		for (ResPool::const_indexiterator it = pool().providesbegin(_capability.index()); it != pend; ++it) {
+		    if (it->second.second->arch() == Arch_src)
+			continue;
+		    if (_capability.matches (it->second.first) == CapMatch::yes) {
+			if (!info( it->second.second, it->second.first))
+			    break;
+		    }
+		}
 
 	}
 
@@ -398,8 +416,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 #if 0	// **!!!** re-enable editon check in LookForUpgrades()
 
 	    invokeOnEach( pool().byNameBegin( _requiring_item->name() ), pool().byNameEnd( _requiring_item->name() ),
-			  functor::chain( resfilter::ByUninstalled(),
-					  resfilter::ByKind( _requiring_item->kind() ) ),
+			  resfilter::ByKind( _requiring_item->kind() ),
 #if 0
 	// CompareByGT is broken		  resfilter::byEdition<CompareByGT<Edition> >( _requiring_item->edition() )),
 #endif
@@ -408,8 +425,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	ResPool::const_nameiterator pend = pool().nameend(_requiring_item->name());
 	for (ResPool::const_nameiterator it = pool().namebegin(_requiring_item->name()); it != pend; ++it) {
 	    PoolItem pos = it->second;
-	    if (pos.status().staysUninstalled()
-		&& pos->kind() == _requiring_item->kind()
+	    if (pos->kind() == _requiring_item->kind()
 		&& _requiring_item->edition().compare(pos->edition()) < 0)
 	    {
 		if (!info( pos ))
