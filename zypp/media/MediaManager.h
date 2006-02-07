@@ -15,6 +15,7 @@
 #include <zypp/media/MediaAccess.h>
 
 #include <zypp/base/NonCopyable.h>
+#include <zypp/base/Deprecated.h>
 #include <zypp/base/PtrTypes.h>
 #include <zypp/Pathname.h>
 #include <zypp/Url.h>
@@ -33,7 +34,8 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     typedef zypp::RW_pointer<MediaAccess> MediaAccessRef;
-    typedef unsigned int                  MediaId;
+    typedef unsigned int                  MediaAccessId;
+    typedef MediaAccessId                 MediaId;
     typedef unsigned int                  MediaNr;
 
 
@@ -109,6 +111,10 @@ namespace zypp
     //
     // CLASS NAME : MediaManager
     //
+    /**
+     * Manages coordinated access to media, e.g. CDROM drives.
+     * \todo document me!
+     */
     class MediaManager: public zypp::base::NonCopyable
     {
     public:
@@ -118,59 +124,59 @@ namespace zypp
       /**
        * open the media, return the ID, throw exception on fail
        */
-      MediaId
+      MediaAccessId
       open(const Url &url, const Pathname & preferred_attach_point = "");
 
       /**
        * close the media
        */
       void
-      close(MediaId mediaId);
+      close(MediaAccessId accessId);
 
       /**
        * Query if media is open.
        * \return true, if media id is known.
        */
       bool
-      isOpen(MediaId mediaId) const;
+      isOpen(MediaAccessId accessId) const;
 
       /**
        * Used Protocol if media is opened, otherwise 'unknown'.
        */
       std::string
-      protocol(MediaId mediaId) const;
+      protocol(MediaAccessId accessId) const;
 
       /**
        * Url of the media, otherwise empty.
        */
       Url
-      url(MediaId mediaId) const;
+      url(MediaAccessId accessId) const;
 
     public:
       /**
        * Add verifier for specified media id.
        */
       void
-      addVerifier(MediaId mediaId, const MediaVerifierRef &ref);
+      addVerifier(MediaAccessId accessId, const MediaVerifierRef &ref);
 
       /**
        * Remove verifier for specified media id.
        */
       void
-      delVerifier(MediaId mediaId);
+      delVerifier(MediaAccessId accessId);
 
     public:
       /**
        * attach the media using the concrete handler
        */
       void
-      attach(MediaId mediaId, bool next = false);
+      attach(MediaAccessId accessId, bool next = false);
 
       /**
        * Release the attached media and optionally eject.
        */
       void
-      release(MediaId mediaId, bool eject = false);
+      release(MediaAccessId accessId, bool eject = false);
 
       /**
        * Disconnect a remote media.
@@ -186,14 +192,14 @@ namespace zypp
        * \throws MediaException
        */
       void
-      disconnect(MediaId mediaId);
+      disconnect(MediaAccessId accessId);
 
       /**
        * Check if media is attached or not.
        * \return True if media is attached.
        */
       bool
-      isAttached(MediaId mediaId) const;
+      isAttached(MediaAccessId accessId) const;
 
       /**
        * Ask the registered verifier if the attached
@@ -201,7 +207,7 @@ namespace zypp
        * \return True if desired media is attached.
        */
       bool
-      isDesiredMedia(MediaId mediaId, MediaNr mediaNr) const;
+      isDesiredMedia(MediaAccessId accessId, MediaNr mediaNr) const;
 
       /**
        * Return the local directory that corresponds to medias url,
@@ -212,7 +218,7 @@ namespace zypp
        * If media is not open an empty pathname is returned.
        */
       Pathname
-      localRoot(MediaId mediaId) const;
+      localRoot(MediaAccessId accessId) const;
 
       /**
        * Shortcut for 'localRoot() + pathname', but returns an empty
@@ -220,7 +226,7 @@ namespace zypp
        * Files provided will be available at 'localPath(filename)'.
        */
       Pathname
-      localPath(MediaId mediaId, const Pathname & pathname) const;
+      localPath(MediaAccessId accessId, const Pathname & pathname) const;
 
     public:
       /**
@@ -228,12 +234,12 @@ namespace zypp
        * 'attach point' of the specified media and the path prefix
        * on the media.
        *
-       * \param mediaId The media source id to use.
-       * \param mediaNr The desired media number that should be in the source.
-       * \param cached  If cached is set to true, the function checks, if
-       *                the file already exists and doesn't download it again
-       *                if it does. Currently only the existence is checked,
-       *                no other file attributes.
+       * \param accessId  The media access id to use.
+       * \param mediaNr   The desired media number that should be on the media.
+       * \param cached    If cached is set to true, the function checks, if
+       *                  the file already exists and doesn't download it again
+       *                  if it does. Currently only the existence is checked,
+       *                  no other file attributes.
        * \param checkonly If this and 'cached' are set to true only the
        *                  existence of the file is checked but it's not
        *                  downloaded. If 'cached' is unset an errer is
@@ -241,57 +247,77 @@ namespace zypp
        *
        * \throws MediaException
        *
+       * \deprecated checking the media number on each access.
        */
       void
-      provideFile(MediaId mediaId,
-                  MediaNr mediaNr,
+      provideFile(MediaAccessId   accessId,
+                  MediaNr         mediaNr,
+                  const Pathname &filename,
+                  bool            cached    = false,
+                  bool            checkonly = false) const ZYPP_DEPRECATED;
+
+      void
+      provideFile(MediaAccessId   accessId,
                   const Pathname &filename,
                   bool            cached    = false,
                   bool            checkonly = false) const;
 
       /**
+       * \deprecated checking the media number on each access.
        */
       void
-      provideDir(MediaId mediaId,
-                 MediaNr mediaNr,
-                 const Pathname & dirname ) const;
+      provideDir(MediaAccessId   accessId,
+                 MediaNr         mediaNr,
+                 const Pathname &dirname) const ZYPP_DEPRECATED;
+
+      void
+      provideDir(MediaAccessId   accessId,
+                 const Pathname &dirname) const;
+
+      /**
+       * \deprecated checking the media number on each access.
+       */
+      void
+      provideDirTree(MediaAccessId  accessId,
+                     MediaNr        mediaNr,
+                     const Pathname &dirname) const ZYPP_DEPRECATED;
+
+      void
+      provideDirTree(MediaAccessId  accessId,
+                     const Pathname &dirname) const;
+
+      /**
+       * \deprecated checking the media number on each access.
+       */
+      void
+      releaseFile(MediaAccessId   accessId,
+                  const Pathname &filename) const;
 
       /**
        */
       void
-      provideDirTree(MediaId mediaId,
-                     MediaNr mediaNr,
-                     const Pathname & dirname ) const;
+      releaseDir(MediaAccessId   accessId,
+                 const Pathname &dirname) const;
 
       /**
        */
       void
-      releaseFile(MediaId mediaId,
-                  const Pathname & filename) const;
+      releasePath(MediaAccessId   accessId,
+                  const Pathname &pathname) const;
 
       /**
        */
-      void
-      releaseDir(MediaId mediaId,
-                 const Pathname & dirname ) const;
+      void dirInfo(MediaAccessId           accessId,
+                   std::list<std::string> &retlist,
+                   const Pathname         &dirname,
+                   bool                    dots = true) const;
 
       /**
        */
-      void
-      releasePath(MediaId mediaId,
-                  const Pathname & pathname ) const;
-
-      /**
-       */
-      void dirInfo(MediaId mediaId,
-                   std::list<std::string> & retlist,
-                   const Pathname & dirname, bool dots = true ) const;
-
-      /**
-       */
-      void dirInfo(MediaId mediaId,
-                   filesystem::DirContent & retlist,
-                   const Pathname & dirname, bool dots = true ) const;
+      void dirInfo(MediaAccessId           accessId,
+                   filesystem::DirContent &retlist,
+                   const Pathname         &dirname,
+                   bool                   dots = true) const;
 
 
     private:
