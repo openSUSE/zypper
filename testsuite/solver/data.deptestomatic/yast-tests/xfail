@@ -8,3 +8,5 @@ exercise-alternatives-3-test.xml
 # ppc and s390
 exercise-05reallive-2-test.xml
 exercise-bug21829-5-test.xml
+#conflicting; should be solved by upgrade --> check it
+exercise-02conflict-09-test.xml
