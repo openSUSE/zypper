@@ -38,10 +38,10 @@ rpm -Uhv * > /dev/null
 	<suse:entry kind="package" name="foo-devel" epoch="3" ver="4" rel="5" flags="LE"/>
       </suse:freshen>
     </script>
-    <message type="OK">
+    <message>
       <yum:name>foo-patch-message-1</yum:name>
       <yum:version epoch="0" ver="1" rel="2"/>
-      <text>Just note that the very critical package foo will be installed just now</text>
+      <text lang="en">Just note that the very critical package foo will be installed just now</text>
       <suse:freshen>
 	<suse:entry kind="package" name="foo" epoch="2" ver="3" rel="4" flags="LE"/>
 	<suse:entry kind="package" name="foo-devel" epoch="3" ver="4" rel="5" flags="LE"/>
