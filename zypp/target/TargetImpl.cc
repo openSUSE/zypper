@@ -80,6 +80,21 @@ namespace zypp
       // TODO objects from the XML store
       return _store;
     }
+    
+    Pathname TargetImpl::getRpmFile(Package::constPtr package)
+    {
+	callback::SendReport<source::DownloadResolvableReport> report;
+
+	// FIXME: error handling
+	// FIXME: Url	
+	report->start( package, Url() );
+
+	Pathname file = package->getPlainRpm();
+
+	report->finish( package, source::DownloadResolvableReport::NO_ERROR, "" );
+	
+	return file;
+    }
 
     void TargetImpl::commit(ResPool pool_r)
     {
@@ -141,8 +156,10 @@ namespace zypp
 	  Package::constPtr p = dynamic_pointer_cast<const Package>(it->resolvable());
 	  if (it->status().isToBeInstalled())
 	  {
+	    Pathname localfile = getRpmFile(p);
+	    
 #warning Exception handling
-	    // create a progress report proxy
+	    // create a installation progress report proxy
     	    RpmInstallPackageReceiver progress(it->resolvable());
 	    
 	    progress.connect();
@@ -150,7 +167,7 @@ namespace zypp
 	    try {
 		progress.tryLevel( target::rpm::InstallResolvableReport::RPM );
 		
-		rpm().installPackage(p->getPlainRpm(),
+		rpm().installPackage(localfile,
 		    p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : 0);
 	    }
 	    catch (Exception & excpt_r) {
@@ -159,7 +176,7 @@ namespace zypp
 		WAR << "Install failed, retrying with --nodeps" << endl;
 		try {
 		    progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS );
-		    rpm().installPackage(p->getPlainRpm(),
+		    rpm().installPackage(localfile,
 			p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : rpm::RpmDb::RPMINST_NODEPS);
 		}
 		catch (Exception & excpt_r) {
@@ -168,7 +185,7 @@ namespace zypp
 
 		    try {
 			progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE );
-			rpm().installPackage(p->getPlainRpm(),
+			rpm().installPackage(localfile,
 			    p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : (rpm::RpmDb::RPMINST_NODEPS|rpm::RpmDb::RPMINST_FORCE));
 		    }
 		    catch (Exception & excpt_r) {
