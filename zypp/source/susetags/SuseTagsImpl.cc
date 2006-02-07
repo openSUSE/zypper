@@ -100,9 +100,8 @@ namespace zypp
         }
       }
 
-      void SuseTagsImpl::createResolvables()
+      void SuseTagsImpl::createResolvables(Source_Ref source_r)
       {
-        Source_Ref source_r = SourceFactory().createFrom(this);
 #warning We use suse instead of <DATADIR> for now
         Pathname p = provideFile(_path + "suse/setup/descr/packages");
         DBG << "Going to parse " << p << endl;

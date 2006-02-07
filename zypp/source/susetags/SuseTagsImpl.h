@@ -49,7 +49,7 @@ namespace zypp
         ~SuseTagsImpl();
 
       public:
-	virtual void createResolvables();
+	virtual void createResolvables(Source_Ref source_r);
 
 	Pathname sourceDir( const NVRAD& nvrad );
 

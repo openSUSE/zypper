@@ -91,7 +91,7 @@ namespace zypp
       {
         // cast away const to allow late init
         Source_Ref self( const_cast<SourceImpl*>(this)->selfSourceRef() );
-	const_cast<SourceImpl*>(this)->createResolvables();
+	const_cast<SourceImpl*>(this)->createResolvables(self);
 	const_cast<SourceImpl*>(this)->_res_store_initialized = true;
       }
       return _store;
@@ -152,7 +152,7 @@ namespace zypp
       return media_mgr.localPath(_media, path_r);
     }
 
-    void SourceImpl::createResolvables()
+    void SourceImpl::createResolvables(Source_Ref source_r)
     {}
 
     void SourceImpl::storeMetadata(const Pathname & cache_dir_r)

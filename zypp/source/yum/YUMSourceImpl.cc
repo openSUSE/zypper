@@ -24,6 +24,7 @@
 #include "zypp/CapFactory.h"
 
 #include "zypp/parser/yum/YUMParser.h"
+#include "zypp/SourceFactory.h"
 
 #include <fstream>
 
@@ -100,7 +101,8 @@ namespace zypp
 
       void YUMSourceImpl::storeMetadata(const Pathname & cache_dir_r)
       {
-	resolvables();
+INT << "Storing data to cache" << endl;
+	resolvables(SourceFactory().createFrom(this));
 	for (std::list<Pathname>::const_iterator it = _metadata_files.begin();
 	  it != _metadata_files.end(); it++)
 	{
@@ -112,7 +114,7 @@ namespace zypp
 	}
       }
 
-      void YUMSourceImpl::createResolvables()
+      void YUMSourceImpl::createResolvables(Source_Ref source_r)
       {
        std::list<YUMRepomdData_Ptr> repo_primary;
        std::list<YUMRepomdData_Ptr> repo_files;
@@ -247,6 +249,7 @@ namespace zypp
 	    YUMFileListData filelist_empty;
 	    YUMOtherData other_empty;
 	    Package::Ptr p = createPackage(
+	      source_r,
 	      **prim,
 	      found_files != files_data.end()
 	        ? *found_files->second
@@ -284,6 +287,7 @@ namespace zypp
 	       ++group)
 	  {
 	    Selection::Ptr p = createGroup(
+	      source_r,
 	      **group
 	    );
 	    _store.insert (p);
@@ -315,6 +319,7 @@ namespace zypp
 	       ++pattern)
 	  {
 	    Pattern::Ptr p = createPattern(
+	      source_r,
 	      **pattern
 	    );
 	    _store.insert (p);
@@ -346,6 +351,7 @@ namespace zypp
 	       ++product)
 	  {
 	    Product::Ptr p = createProduct(
+	      source_r,
 	      **product
 	    );
 	    _store.insert (p);
@@ -401,6 +407,7 @@ namespace zypp
 	        ++ptch)
 	    {
 	      Patch::Ptr p = createPatch(
+	        source_r,
 		**ptch
 	      );
 	      _store.insert (p);
@@ -423,6 +430,7 @@ namespace zypp
       }
 
 	Package::Ptr YUMSourceImpl::createPackage(
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPrimaryData & parsed,
 	  const zypp::parser::yum::YUMFileListData & filelist,
 	  const zypp::parser::yum::YUMOtherData & other
@@ -431,7 +439,7 @@ namespace zypp
 	  try
 	  {
 	    shared_ptr<YUMPackageImpl> impl(
-	      new YUMPackageImpl(selfSourceRef(), parsed, filelist, other));
+	      new YUMPackageImpl(source_r, parsed, filelist, other));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -453,12 +461,13 @@ namespace zypp
 	}
 
 	Package::Ptr YUMSourceImpl::createPackage(
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchPackage & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMPackageImpl> impl(new YUMPackageImpl(selfSourceRef(), parsed));
+	    shared_ptr<YUMPackageImpl> impl(new YUMPackageImpl(source_r, parsed));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -480,12 +489,13 @@ namespace zypp
 	}
 
 	Selection::Ptr YUMSourceImpl::createGroup(
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMGroupData & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMGroupImpl> impl(new YUMGroupImpl(selfSourceRef(), parsed));
+	    shared_ptr<YUMGroupImpl> impl(new YUMGroupImpl(source_r, parsed));
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.groupId,
                                Edition::noedition,
@@ -504,12 +514,13 @@ namespace zypp
 	}
 
 	Pattern::Ptr YUMSourceImpl::createPattern(
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatternData & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMPatternImpl> impl(new YUMPatternImpl(selfSourceRef(), parsed));
+	    shared_ptr<YUMPatternImpl> impl(new YUMPatternImpl(source_r, parsed));
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.patternId,
                                Edition::noedition,
@@ -528,12 +539,13 @@ namespace zypp
 	}
 
 	Message::Ptr YUMSourceImpl::createMessage(
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchMessage & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMMessageImpl> impl(new YUMMessageImpl(selfSourceRef(), parsed));
+	    shared_ptr<YUMMessageImpl> impl(new YUMMessageImpl(source_r, parsed));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -555,12 +567,13 @@ namespace zypp
 	}
 
 	Script::Ptr YUMSourceImpl::createScript(
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchScript & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMScriptImpl> impl(new YUMScriptImpl(selfSourceRef(), parsed));
+	    shared_ptr<YUMScriptImpl> impl(new YUMScriptImpl(source_r, parsed));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -582,12 +595,13 @@ namespace zypp
 	}
 
 	Product::Ptr YUMSourceImpl::createProduct(
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMProductData & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMProductImpl> impl(new YUMProductImpl(selfSourceRef(), parsed));
+	    shared_ptr<YUMProductImpl> impl(new YUMProductImpl(source_r, parsed));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -609,12 +623,13 @@ namespace zypp
 	}
 
 	Patch::Ptr YUMSourceImpl::createPatch(
+	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchData & parsed
 	)
 	{
 	  try
 	  {
-	    shared_ptr<YUMPatchImpl> impl(new YUMPatchImpl(selfSourceRef(), parsed, *this));
+	    shared_ptr<YUMPatchImpl> impl(new YUMPatchImpl(source_r, parsed, *this));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,

@@ -89,21 +89,21 @@ namespace zypp
             case YUMPatchAtom::Package: {
               shared_ptr<YUMPatchPackage> package_data
                 = dynamic_pointer_cast<YUMPatchPackage>(*it);
-              Package::Ptr package = srcimpl_r.createPackage(*package_data);
+              Package::Ptr package = srcimpl_r.createPackage(_source, *package_data);
               _atoms.push_back(package);
               break;
             }
             case YUMPatchAtom::Message: {
               shared_ptr<YUMPatchMessage> message_data
                 = dynamic_pointer_cast<YUMPatchMessage>(*it);
-              Message::Ptr message = srcimpl_r.createMessage(*message_data);
+              Message::Ptr message = srcimpl_r.createMessage(_source, *message_data);
               _atoms.push_back(message);
               break;
             }
             case YUMPatchAtom::Script: {
               shared_ptr<YUMPatchScript> script_data
                 = dynamic_pointer_cast<YUMPatchScript>(*it);
-              Script::Ptr script = srcimpl_r.createScript(*script_data);
+              Script::Ptr script = srcimpl_r.createScript(_source, *script_data);
               _atoms.push_back(script);
               break;
             }
