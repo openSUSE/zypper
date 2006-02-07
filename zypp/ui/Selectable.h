@@ -103,11 +103,11 @@ namespace zypp
     public:
 
       /** True if installed object is present. */
-      bool has_installed() const
+      bool hasInstalledObj() const
       { return installedObj(); }
 
       /** True if candidate object is present. */
-      bool has_candidate() const
+      bool hasCandidateObj() const
       { return candidateObj(); }
 
     public:
