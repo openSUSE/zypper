@@ -349,19 +349,24 @@ void MediaCurl::getFile( const Pathname & filename ) const
 
 void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target) const
 {
-  DownloadProgressReport report;
+  callback::SendReport<DownloadProgressReport> report;
+  
+  Url url( _url );
+  
   try {
     doGetFileCopy(filename, target, report);
   }
   catch (MediaException & excpt_r)
   {
-    report.end(excpt_r);
+    // FIXME: this will not match the first URL
+    // FIXME: error number fix
+    report->finish(url, zypp::media::DownloadProgressReport::NOT_FOUND, excpt_r.msg());
     ZYPP_RETHROW(excpt_r);
   }
-  report.end();
+  report->finish(url, zypp::media::DownloadProgressReport::NO_ERROR, "");
 }
 
-void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & target, DownloadProgressReport & report) const
+void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & target, callback::SendReport<DownloadProgressReport> & report) const
 {
     DBG << filename.asString() << endl;
 
@@ -431,7 +436,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     }
 
     // Set callback and perform.
-    report.start(url, dest);
+    report->start(url, dest);
     if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, &report ) != 0 ) {
       WAR << "Can't set CURLOPT_PROGRESSDATA: " << _curlError << endl;;
     }
@@ -595,14 +600,17 @@ void MediaCurl::getDirInfo( filesystem::DirContent & retlist,
 int MediaCurl::progressCallback( void *clientp, double dltotal, double dlnow,
                                  double ultotal, double ulnow )
 {
-  DownloadProgressReport *report = reinterpret_cast<DownloadProgressReport*>( clientp );
+  callback::SendReport<DownloadProgressReport> *report 
+    = reinterpret_cast<callback::SendReport<DownloadProgressReport>*>( clientp );
   if (report)
   {
-    if (report->progress(int( dlnow * 100 / dltotal )))
+    // FIXME: empty URL
+    if (! (*report)->progress(int( dlnow * 100 / dltotal ), Url() ))
       return 1;
   }
   return 0;
 }
+
 
   } // namespace media
 } // namespace zypp

@@ -13,7 +13,7 @@
 #define ZYPP_MEDIA_MEDIACURL_H
 
 #include "zypp/media/MediaHandler.h"
-#include "zypp/media/MediaCallbacks.h"
+#include "zypp/ZYppCallbacks.h"
 
 #include <curl/curl.h>
 
@@ -50,7 +50,7 @@ class MediaCurl : public MediaHandler {
      * \throws MediaException
      *
      */
-    virtual void doGetFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, DownloadProgressReport & _report) const;
+    virtual void doGetFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, callback::SendReport<DownloadProgressReport> & _report) const;
 
 
 

@@ -13,7 +13,6 @@ mediainclude_HEADERS = 		\
 	MediaException.h	\
 	MediaAccess.h		\
 	MediaHandler.h		\
-	MediaCallbacks.h	\
 	MediaSource.h		\
 	Mount.h			\
 	MediaNFS.h		\
