@@ -1308,7 +1308,7 @@ main (int argc, char *argv[])
 
     manager = SourceManager::sourceManager();
     ZYppFactory zf;
-    God = zf.letsTest();
+    God = zf.getZYpp();
 
     globalPath = argv[1];
     globalPath = globalPath.substr (0, globalPath.find_last_of ("/") +1);

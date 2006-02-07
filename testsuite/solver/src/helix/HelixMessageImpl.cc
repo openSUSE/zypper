@@ -38,9 +38,13 @@ Source_Ref
 HelixMessageImpl::source() const
 { return _source; }
 
-TranslatedText
+std::string
 HelixMessageImpl::text () const
 { return _text; }
+
+std::string
+HelixMessageImpl::type () const
+{ return _type; }
 
 ByteCount
 HelixMessageImpl::size() const
