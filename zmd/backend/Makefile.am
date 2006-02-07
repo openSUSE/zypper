@@ -14,8 +14,11 @@ bindir = $(libdir)/zmd
 bin_PROGRAMS =	\
 	query-system		\
 	query-files		\
-	resolve-dependencies
+	resolve-dependencies	\
+	transact
 
 query_system_SOURCES = query-system.cc
 query_files_SOURCES = query-files.cc
 resolve_dependencies_SOURCES = resolve-dependencies.cc transactions.cc transactions.h
+transact_SOURCES = transact.cc transactions.cc transactions.h
+
