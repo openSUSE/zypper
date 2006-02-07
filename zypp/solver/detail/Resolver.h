@@ -126,6 +126,10 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     ResolverContext_Ptr bestContext (void) const { return _best_context; }
 
+    /** depending on the last solver result, either return bestContext()
+        of the first invalid context */
+    ResolverContext_Ptr context (void) const;
+
     // ---------------------------------- methods
 
     void setTimeout (int seconds) { _timeout_seconds = seconds; }

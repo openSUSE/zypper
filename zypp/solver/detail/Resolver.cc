@@ -112,6 +112,15 @@ Resolver::reset (void)
 }
 
 
+ResolverContext_Ptr
+Resolver::context (void) const
+{
+    if (_best_context) return _best_context;
+    if (_invalid_queues.empty()) return NULL;
+    ResolverQueue_Ptr invalid = _invalid_queues.front();
+    return invalid->context();
+}
+
 //---------------------------------------------------------------------------
 
 void
@@ -643,6 +652,7 @@ Resolver::resolvePool ()
 {
 
     CollectTransact info (*this);
+#if 0
     MIL << "Resolver::resolvePool()" << endl;
     MIL << "Pool before resolve" << endl;
     MIL << "---------------------------------------" << endl;
@@ -650,6 +660,7 @@ Resolver::resolvePool ()
 	MIL << *it << endl;
     }
     MIL << "---------------------------------------" << endl;
+#endif
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
 		   functor::functorRef<bool,PoolItem>(info) );
@@ -660,13 +671,14 @@ Resolver::resolvePool ()
 	MIL << "Have solution, copying back to pool" << endl;
 	ResolverContext_Ptr solution = bestContext();
 	solution->foreachMarked (solution_to_pool, NULL);
-
+#if 0
 	MIL << "Pool after resolve" << endl;
 	MIL << "---------------------------------------" << endl;
 	for (ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it) {
 	    MIL << *it << endl;
 	}
 	MIL << "---------------------------------------" << endl;
+#endif
     }
     else {
 	MIL << "!!! Have NO solution !!!" << endl;

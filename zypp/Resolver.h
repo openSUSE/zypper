@@ -75,6 +75,15 @@ namespace zypp
      **/
     bool resolvePool (void);
 
+    /*
+     * Get the latest resolver context
+     *
+     * It will be NULL if resolvePool() or establishPool() was never called.
+     * Depending on the return code of the last resolvePool() call,
+     * it _either_ points to a valid or an invalid solution.
+     */
+    solver::detail::ResolverContext_Ptr context (void) const;
+
     /**
      * Do an distribution upgrade
      *
@@ -102,8 +111,6 @@ namespace zypp
      * can be applied.
      **/
     bool applySolutions( const ProblemSolutionList & solutions );
-
-    // ResolverContext_constPtr bestContext (void) const;
 
   protected:
 

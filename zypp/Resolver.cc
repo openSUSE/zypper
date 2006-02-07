@@ -62,6 +62,8 @@ namespace zypp
   { return _pimpl->establishPool(); }
   bool Resolver::resolvePool ()
   { return _pimpl->resolvePool (); }
+  solver::detail::ResolverContext_Ptr Resolver::context (void) const
+  { return _pimpl->context(); }
   ResolverProblemList Resolver::problems ()
   { return _pimpl->problems (); }
   bool Resolver::applySolutions( const ProblemSolutionList & solutions )
