@@ -40,6 +40,16 @@ namespace zypp
     std::string text( const Locale &lang = Locale() ) const
     { return translations[lang]; }
 
+    std::set<Locale> locales() const
+    {
+      std::set<Locale> lcls;
+      for(std::map<Locale, std::string>::const_iterator it = translations.begin(); it != translations.end(); ++it)
+      {
+        lcls.insert((*it).first);
+      }
+      return lcls;
+    }
+
     void setText( const std::string &text, const Locale &lang)
     { translations[lang] = text; }
 

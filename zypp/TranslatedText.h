@@ -15,6 +15,7 @@
 #include <iosfwd>
 #include <map>
 #include <list>
+#include <set>
 #include <string>
 
 #include "zypp/base/PtrTypes.h"
@@ -69,6 +70,7 @@ namespace zypp
     { return text(lang); }
 
     std::string text( const Locale &lang = Locale() ) const;
+    std::set<Locale> locales() const;
 
     void setText( const std::string &text, const Locale &lang = Locale());
     void setText( const std::list<std::string> &text, const Locale &lang = Locale());
