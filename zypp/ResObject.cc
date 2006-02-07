@@ -61,6 +61,9 @@ namespace zypp
   Source_Ref ResObject::source() const
   { return pimpl().source(); }
 
+  ZmdId ResObject::zmdid () const
+  { return pimpl().zmdid(); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

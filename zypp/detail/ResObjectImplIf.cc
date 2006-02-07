@@ -46,6 +46,9 @@ namespace zypp
       Source_Ref ResObjectImplIf::source() const
       { return Source_Ref::noSource; }
 
+      ZmdId ResObjectImplIf::zmdid() const
+      { return 0; }
+
       Label ResObjectImplIf::instSrcLabel() const
       { return Label(); }
 

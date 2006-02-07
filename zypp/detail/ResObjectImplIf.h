@@ -84,6 +84,9 @@ namespace zypp
       /** Installation source which provides the package */
       virtual Source_Ref source() const PURE_VIRTUAL;
 
+      /** Id used inside ZMD */
+      virtual ZmdId zmdid() const PURE_VIRTUAL;
+
       /** \name deprecated
        * \todo These should be replaced by a offering a
        * Ptr to the Source.

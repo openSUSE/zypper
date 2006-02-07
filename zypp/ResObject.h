@@ -60,6 +60,9 @@ namespace zypp
     /** */
     Source_Ref source() const;
 
+    /** */
+    ZmdId zmdid () const;
+
   protected:
     /** Ctor */
     ResObject( const Kind & kind_r,
