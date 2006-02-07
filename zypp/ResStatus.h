@@ -235,8 +235,7 @@ namespace zypp
     {
 	if (!isGreaterThan<TransactByField>( causer )) {
 	    fieldValueAssign<TransactField>( val_r ? TRANSACT : KEEP_STATE );
-	    if (val_r) fieldValueAssign<TransactByField>( causer );			// remember the causer on set
-	    else fieldValueAssign<TransactByField>( SOLVER );				// clear it on reset
+	    fieldValueAssign<TransactByField>( causer );			// remember the causer on set
 	    return true;
 	} else if (fieldValueIs<TransactField>(val_r ? TRANSACT : KEEP_STATE)) {
 	    return true; // is already set
