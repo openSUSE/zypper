@@ -151,7 +151,11 @@ ResolverInfo::toString (const Capability & capability)
     return os.str();
 }
 
-
+string
+ResolverInfo::message( ) const
+{
+    return string(info_type_to_string(_type)) + " " + toString(_affected);
+}
 //---------------------------------------------------------------------------
 
 std::ostream &

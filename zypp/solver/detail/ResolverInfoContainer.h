@@ -66,6 +66,7 @@ class ResolverInfoContainer : public ResolverInfo {
 
     // ---------------------------------- methods
 
+    virtual std::string message (void) const;
     virtual bool merge (ResolverInfoContainer_Ptr to_be_merged);
     virtual ResolverInfo_Ptr copy (void) const;
 

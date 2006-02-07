@@ -70,7 +70,7 @@ class ResolverInfoMisc : public ResolverInfoContainer {
 
 	  // ---------------------------------- accessors
 
-	  std::string message (void) const;
+	  virtual std::string message (void) const;
 	  std::string action (void) const { return _action; }
 	  std::string trigger (void) const { return _trigger; }
 

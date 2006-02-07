@@ -59,6 +59,7 @@ class ResolverInfoDependsOn : public ResolverInfoContainer {
 
     // ---------------------------------- methods
 
+    virtual std::string message (void) const;
     virtual ResolverInfo_Ptr copy (void) const;
 
 };

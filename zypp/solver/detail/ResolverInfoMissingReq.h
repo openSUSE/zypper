@@ -64,6 +64,7 @@ class ResolverInfoMissingReq : public ResolverInfo {
     // ---------------------------------- methods
 
     virtual ResolverInfo_Ptr copy (void) const;
+    virtual std::string message (void) const;
 
 };
 

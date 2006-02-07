@@ -131,6 +131,7 @@ class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
 
     // ---------------------------------- methods
 
+    virtual std::string message (void) const;
     bool merge (ResolverInfo_Ptr to_be_merged);
     virtual ResolverInfo_Ptr copy (void) const;
 
