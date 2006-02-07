@@ -14,6 +14,7 @@
 
 #include <iosfwd>
 #include <map>
+#include <list>
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
@@ -49,6 +50,22 @@ namespace zypp
     ~SourceManager();
 
   public:
+  
+    /**
+     * Store the current state to the given path
+     *
+     * \throws Exception
+     */    
+    void store(Pathname root_r);
+    
+    /**
+     * Restore the sources state to the given path. If the sources
+     * database is not empty, it throws an exception
+     *
+     * \throws Exception
+     */
+    void restore(Pathname root_r);
+    
     /**
      * Find a source with a specified ID
      *
@@ -62,6 +79,12 @@ namespace zypp
      * \throws Exception
      */
     Source_Ref findSource(const std::string & alias_r);
+    
+    /**
+     * Return the list of the currently enabled sources
+     *
+     */
+    std::list<unsigned int> enabledSources() const;
 
     /**
      * Add a new source
@@ -98,7 +121,7 @@ namespace zypp
     void disableAllSources();
 
   private:
-#warning move data to a PIMPL or anonymous namespace as it's a Singlreton
+#warning move data to a PIMPL or anonymous namespace as it's a Singleton
     typedef std::map<unsigned, RW_pointer<Source_Ref> > SourceMap;
 
     SourceMap _sources;

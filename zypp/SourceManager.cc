@@ -16,7 +16,7 @@
 #include "zypp/SourceFactory.h"
 #include "zypp/Source.h"
 #include "zypp/source/SourceImpl.h"
-
+#include "zypp/target/store/PersistentStorage.h"
 
 using std::endl;
 
@@ -92,6 +92,55 @@ namespace zypp
     for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
     {
 	it->second->disable ();
+    }
+  }
+
+  std::list<unsigned int> SourceManager::enabledSources() const
+  {
+    std::list<unsigned int> res;
+    
+    for( SourceMap::const_iterator it = _sources.begin(); it != _sources.end(); it++)
+    {
+	if( it->second->enabled() )
+	    res.push_back(it->first);
+    }
+    
+    return res;
+  }
+
+  void SourceManager::store(Pathname root_r)
+  {
+    storage::PersistentStorage store;    
+    store.init( root_r );
+  
+    for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
+    {
+	storage::PersistentStorage::SourceData descr;
+	
+	descr.url = it->second->url().asString();
+        descr.enabled = it->second->enabled();
+        descr.alias = it->second->alias();
+	
+	// FIXME: product_dir, autorefresh, type
+	store.storeSource( descr );
+    }
+  }
+
+  void SourceManager::restore(Pathname root_r)
+  {
+    if (! _sources.empty() )
+	ZYPP_THROW(Exception ("At least one source already registered, cannot restore sources from persistent store.") );
+    
+    storage::PersistentStorage store;    
+    store.init( root_r );
+    
+    std::list<storage::PersistentStorage::SourceData> new_sources = store.storedSources();
+
+    for( std::list<storage::PersistentStorage::SourceData>::iterator it = new_sources.begin();
+	it != new_sources.end(); ++it)
+    {
+	unsigned id = addSource(it->url);
+	// FIXME: enable, autorefresh
     }
   }
 
