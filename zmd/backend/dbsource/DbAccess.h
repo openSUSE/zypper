@@ -32,6 +32,9 @@
 DEFINE_PTR_TYPE(DbAccess);
 
 typedef std::list<zypp::ResObject::constPtr> ResObjectList;
+typedef std::map<sqlite_int64, zypp::ResObject::constPtr> IdMap;
+//-----------------------------------------------------------------------------
+// relations
 
 #define RELATION_ANY 0
 #define RELATION_EQUAL (1 << 0)
@@ -51,6 +54,8 @@ typedef enum {
 	RC_RELATION_NONE               = RELATION_NONE,
 } RCResolvableRelation;
 
+//-----------------------------------------------------------------------------
+// architectures
 
 typedef enum {
     RC_ARCH_UNKNOWN = -1,
@@ -70,6 +75,9 @@ typedef enum {
     RC_ARCH_SPARC,
     RC_ARCH_SPARC64,
 } RCArch;
+
+//-----------------------------------------------------------------------------
+// dependencies
 
 typedef enum {
 	RC_DEP_TYPE_REQUIRE = 0,

@@ -50,6 +50,17 @@ DbSources::~DbSources ()
 {
 }
 
+
+ResObject::constPtr
+DbSources::getById (sqlite_int64 id) const
+{
+    IdMap::const_iterator it = _idmap.find(id);
+    if (it == _idmap.end())
+	return NULL;
+    return it->second;
+}
+
+
 const SourcesList &
 DbSources::sources (bool refresh)
 {
@@ -81,6 +92,8 @@ DbSources::sources (bool refresh)
     media::MediaId mediaid = mmgr.open(Url("file://"));
     SourceFactory factory;
 
+    // read catalogs table
+
     while ((rc = sqlite3_step (handle)) == SQLITE_ROW) {
 	string id ((const char *) sqlite3_column_text (handle, 0));
 	string name ((const char *) sqlite3_column_text (handle, 1));
@@ -108,6 +121,7 @@ DbSources::sources (bool refresh)
 	    impl->setPriorityUnsubscribed( priority_unsub );
 
 	    impl->attachDatabase (_db);
+	    impl->attachIdMap (&_idmap);
 
 	    Source_Ref src( factory.createFrom( impl ) );
 	    _sources.push_back( src );

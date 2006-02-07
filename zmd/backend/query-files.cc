@@ -146,7 +146,7 @@ int
 main (int argc, char **argv)
 {
     ZYppFactory zf;
-    ZYpp::Ptr God = zf.letsTest();
+    ZYpp::Ptr God = zf.getZYpp();
 
     try {
 	God->initTarget("/");

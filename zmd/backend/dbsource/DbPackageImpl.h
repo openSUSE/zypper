@@ -33,7 +33,7 @@ public:
 	/** Default ctor
 	*/
 	DbPackageImpl( Source_Ref source_r );
-	void readHandle( sqlite3_stmt *handle );
+	void readHandle( sqlite_int64 id, sqlite3_stmt *handle );
 
 	/** Package summary */
 	virtual TranslatedText summary() const;
@@ -48,6 +48,8 @@ public:
 	virtual bool installOnly() const;
 	/** */
 	virtual Source_Ref source() const;
+        /** */
+	virtual ZmdId zmdid() const;
 
 protected:
 	Source_Ref _source;
@@ -55,6 +57,7 @@ protected:
 	TranslatedText _description;
 	PackageGroup _group;
 	bool _install_only;
+	ZmdId _zmdid;
 
 	ByteCount _size_installed;
 	ByteCount _size_archive;

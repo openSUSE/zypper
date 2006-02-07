@@ -25,9 +25,13 @@
 #include <iosfwd>
 #include <string>
 #include <list>
+#include <map>
 
 #include <sqlite3.h>
 #include "zypp/Source.h"
+#include "zypp/PoolItem.h"
+
+#include "DbAccess.h"
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -40,6 +44,7 @@ class DbSources
   private:
      sqlite3 *_db;
      SourcesList _sources;
+     IdMap _idmap;
 
   public:
 
@@ -47,6 +52,7 @@ class DbSources
     virtual ~DbSources();
 
     const SourcesList & sources (bool refresh = false);
+    zypp::ResObject::constPtr getById (sqlite_int64 id) const;
 };
 
 #endif  // ZMD_BACKEND_DBSOURCES_H

@@ -45,8 +45,10 @@ DbPackageImpl::DbPackageImpl (Source_Ref source_r)
  */
 
 void
-DbPackageImpl::readHandle( sqlite3_stmt *handle )
+DbPackageImpl::readHandle( sqlite_int64 id, sqlite3_stmt *handle )
 {
+    _zmdid = id;
+
     const char * text = (const char *) sqlite3_column_text (handle, 12);
     if (text != NULL)
 	_summary = TranslatedText( string( text ) );
@@ -77,6 +79,9 @@ PackageGroup DbPackageImpl::group() const
 
 ByteCount DbPackageImpl::size() const
 { return _size_installed; }
+
+ZmdId DbPackageImpl::zmdid() const
+{ return _zmdid; }
 
 /** */
 ByteCount DbPackageImpl::archivesize() const

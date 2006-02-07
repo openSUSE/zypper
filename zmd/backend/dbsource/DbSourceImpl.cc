@@ -42,6 +42,7 @@ using namespace zypp;
 
 DbSourceImpl::DbSourceImpl()
     : _db (NULL)
+    , _idmap (NULL)
 {
 }
 
@@ -69,7 +70,7 @@ DbSourceImpl::factoryInit()
 void
 DbSourceImpl::factoryCtor( const media::MediaId & media_r, const Pathname & path_r, const std::string & alias_r, const Pathname cache_dir_r)
 {
-    MIL << "DbSourceImpl::factoryCtor(<media>, " << path_r << ", " << alias_r << ", " << cache_dir_r << ")" << endl;
+//    MIL << "DbSourceImpl::factoryCtor(<media>, " << path_r << ", " << alias_r << ", " << cache_dir_r << ")" << endl;
     _media = media_r;
     _alias = alias_r;
     _cache_dir = cache_dir_r;
@@ -79,6 +80,12 @@ void
 DbSourceImpl::attachDatabase( sqlite3 *db)
 {
     _db = db;
+}
+
+void
+DbSourceImpl::attachIdMap (IdMap *idmap)
+{
+  _idmap = idmap;
 }
 
 //-----------------------------------------------------------------------------
@@ -181,7 +188,7 @@ DbSourceImpl::createPackages(void)
 	    unsigned epoch = sqlite3_column_int (handle, 4);
 	    Arch arch (DbAccess::Rc2Arch( (RCArch)(sqlite3_column_int (handle, 5)) ) );
 
-	    impl->readHandle( handle );
+	    impl->readHandle( id, handle );
 
 	    // Collect basic Resolvable data
 	    NVRAD dataCollect( name,
@@ -191,6 +198,8 @@ DbSourceImpl::createPackages(void)
 
 	    Package::Ptr package = detail::makeResolvableFromImpl(dataCollect, impl);
 	    _store.insert( package );
+	    if (_idmap != 0)
+		(*_idmap)[id] = package;
 	}
 	catch (const Exception & excpt_r)
 	{
@@ -277,7 +286,7 @@ DbSourceImpl::createDependencies (sqlite_int64 resolvable_id)
 	    }
 	}
 	catch ( Exception & excpt_r ) {
-	    ERR << "Can't parse dependencies for resolvable_id " << resolvable_id << ", name " << name << endl;
+	    ERR << "Can't parse dependencies for resolvable_id " << resolvable_id << ", name '" << name << "', version '" << version << "', release '" << release << "'" << endl;
 	    ZYPP_CAUGHT( excpt_r );
 	}
     }

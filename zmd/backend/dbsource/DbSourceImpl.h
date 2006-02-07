@@ -84,9 +84,11 @@ class DbSourceImpl : public zypp::source::SourceImpl {
     { return true; }
 
     void attachDatabase( sqlite3 *db );
+    void attachIdMap (IdMap *idmap);
 
   private:
     zypp::Source_Ref _source;
+    IdMap *_idmap;
     void createResolvables( zypp::Source_Ref source_r );
 };
 
