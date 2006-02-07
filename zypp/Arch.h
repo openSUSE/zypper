@@ -77,6 +77,7 @@ namespace zypp
   //@{
   /** \relates Arch */
   extern const Arch Arch_noarch;
+  extern const Arch Arch_src;
 
   /** \relates Arch */
   extern const Arch Arch_x86_64;

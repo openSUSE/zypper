@@ -91,6 +91,7 @@ namespace zypp
 #define DEF_BUILTIN(A) const Arch Arch_##A( #A )
 
   DEF_BUILTIN( noarch );
+  DEF_BUILTIN( src );
 
   DEF_BUILTIN( x86_64 );
   DEF_BUILTIN( athlon );
