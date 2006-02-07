@@ -441,8 +441,9 @@ Resolver::problems (void) const
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
 		// Uninstall p
 		problem->addSolution (new ProblemSolutionUninstall (problem, item));
+		// Uninstall q
+		problem->addSolution (new ProblemSolutionUninstall (problem, misc_info->other()));
 		// Remove conflict in the resolvable which has to be installed
-		
 		problem->addSolution (new ProblemSolutionIgnoreConflicts (problem, item, misc_info->capability(),
 									  misc_info->other())); 
 		problems.push_back (problem);

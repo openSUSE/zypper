@@ -128,22 +128,6 @@ QueueItemInstall::isSatisfied (ResolverContext_Ptr context) const
 
 //---------------------------------------------------------------------------
 
-// Handle system item's that conflict with us -> uninstall them
-
-struct BuildConflictList : public resfilter::OnCapMatchCallbackFunctor
-{
-    PoolItemList items;
-
-    bool operator()( PoolItem_Ref provider, const Capability & match )
-    {
-	items.push_front (provider);
-	return true;
-    }
-};
-
-
-//---------------------------------------------------------------------------
-
 // Handle items which freshen us -> re-establish them
 
 struct EstablishFreshens : public resfilter::OnCapMatchCallbackFunctor
@@ -376,55 +360,56 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	}
 
-	/* Construct uninstall items for system item's that conflict with us. */
+	// Searching item that conflict with us and try to uninstall it if it is useful 
 
-	BuildConflictList conflicts;
 	caps = _item->dep (Dep::PROVIDES);
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 	    const Capability cap = *iter;
 
-	    // pool()->foreachConflictingResItem (dep, build_conflict_list, &conflicts);
-#if 0
-	    Dep dep( Dep::CONFLICTS);
-	    invokeOnEach( pool().byCapabilityIndexBegin( cap.index(), dep ), // begin()
-			  pool().byCapabilityIndexEnd( cap.index(), dep ),   // end()
-			  resfilter::callOnCapMatchIn( dep, cap, functor::functorRef<bool,PoolItem,Capability>(conflicts)) );
-#endif
-	ResPool::const_indexiterator cend = pool().conflictsend(cap.index());
-	for (ResPool::const_indexiterator it = pool().conflictsbegin(cap.index()); it != cend; ++it) {
-	    if (cap.matches (it->second.first) == CapMatch::yes) {
-		if (!conflicts( it->second.second, it->second.first))
-		    break;
+	    ResPool::const_indexiterator cend = pool().conflictsend(cap.index());
+	    for (ResPool::const_indexiterator it = pool().conflictsbegin(cap.index()); it != cend; ++it) {
+		if (cap.matches (it->second.first) == CapMatch::yes) {
+		    // conflicting item found
+		    PoolItem_Ref conflicting_item = it->second.second;
+		    const Capability conflicting_cap = it->second.first;
+		    ResolverInfo_Ptr log_info;
+		    QueueItemUninstall_Ptr uninstall_item;
+
+		    /* Check to see if we conflict with ourself and don't create
+		     * an uninstall item for it if we do.  This is Debian's way of
+		     * saying that one and only one item with this provide may
+		     * exist on the system at a time.
+		     */
+
+		    if (compareByNVR (conflicting_item.resolvable(), _item.resolvable()) == 0) {
+			continue;
+		    }
+
+		    // If the package is installed, let the user decide deleting 
+		    // conflicting package 
+		    // 
+		    ResStatus statusConflict = context->getStatus(conflicting_item);
+		    if (statusConflict.staysInstalled())
+		    {
+			ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL,
+									       _item, RESOLVER_INFO_PRIORITY_VERBOSE, cap);
+
+			misc_info->setOtherPoolItem (conflicting_item);
+			misc_info->setOtherCapability (conflicting_cap);
+			context->addError (misc_info);
+			continue;
+		    }
+
+		    _XDEBUG("because: '" << conflicting_item << "'");
+
+		    uninstall_item = new QueueItemUninstall (pool(), conflicting_item, QueueItemUninstall::CONFLICT, _soft);
+		    uninstall_item->setDueToConflict ();
+		    log_info = new ResolverInfoConflictsWith (conflicting_item, _item);
+		    uninstall_item->addInfo (log_info);
+		    qil.push_front (uninstall_item);
+		}
 	    }
 	}
-
-	}
-
-	for (PoolItemList::const_iterator iter = conflicts.items.begin(); iter != conflicts.items.end(); ++iter) {
-
-	    PoolItem_Ref conflicting_item = *iter;
-	    ResolverInfo_Ptr log_info;
-	    QueueItemUninstall_Ptr uninstall_item;
-
-	    /* Check to see if we conflict with ourself and don't create
-	     * an uninstall item for it if we do.  This is Debian's way of
-	     * saying that one and only one item with this provide may
-	     * exist on the system at a time.
-	     */
-
-	    if (compareByNVR (conflicting_item.resolvable(), _item.resolvable()) == 0) {
-		continue;
-	    }
-
-	    _XDEBUG("because: '" << conflicting_item << "'");
-
-	    uninstall_item = new QueueItemUninstall (pool(), conflicting_item, QueueItemUninstall::CONFLICT, _soft);
-	    uninstall_item->setDueToConflict ();
-	    log_info = new ResolverInfoConflictsWith (conflicting_item, _item);
-	    uninstall_item->addInfo (log_info);
-	    qil.push_front (uninstall_item);
-	}
-
 
 	/* Construct establish items for each of those which freshen this resolvable. */
 
