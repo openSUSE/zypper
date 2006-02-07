@@ -101,6 +101,16 @@ namespace zypp
       available_iterator availableEnd() const;
 
     public:
+
+      /** True if installed object is present. */
+      bool has_installed() const
+      { return installedObj(); }
+
+      /** True if candidate object is present. */
+      bool has_candidate() const
+      { return candidateObj(); }
+
+    public:
       /** Implementation  */
       class Impl;
       typedef shared_ptr<Impl> Impl_Ptr;
