@@ -9,6 +9,7 @@
 <!-- installed smail conflicts with candidate sendmail via provided MTA -->
 <trial>
   <install channel="test" package="sendmail"/>
+  <reportproblems/>
 </trial>
 
 </test>

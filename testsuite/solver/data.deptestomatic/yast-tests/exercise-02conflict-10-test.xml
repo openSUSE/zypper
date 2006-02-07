@@ -10,6 +10,7 @@
      conflicts, so this should fail -->
 <trial>
   <install channel="test" package="baz3"/>
+  <reportproblems/>
 </trial>
 
 </test>

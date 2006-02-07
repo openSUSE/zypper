@@ -1,2 +1,14 @@
 >!> Installing B from channel test
 >!> 1 problems found:
+>!> Problem:
+>!> Cannot install B because it is conflicting with A
+>!> A conflict over [package] (namedcap) B == 1.0-1 ([] (nullcap) ) requires the removal of to-be-installed B-1.0-1[test]
+>!>    Solution:
+>!>       Deleting B
+>!>       Deleting U___[package]B-1.0-1.
+>!>    Solution:
+>!>       Deleting A
+>!>       Deleting I___[package]A-1.0-1.
+>!>    Solution:
+>!>       Ignoring conflict of B
+>!>       

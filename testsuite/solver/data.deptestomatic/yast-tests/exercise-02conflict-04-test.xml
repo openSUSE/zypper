@@ -9,6 +9,7 @@
 <!-- conflict by upgrade (1): installed smail conflicts with newer version of libident -->
 <trial>
   <install channel="test" package="libident-dev"/>
+  <reportproblems/>
 </trial>
 
 </test>

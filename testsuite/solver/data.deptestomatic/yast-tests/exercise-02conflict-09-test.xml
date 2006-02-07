@@ -11,6 +11,7 @@
      baz21 anymore (only with baz22 still) -->
 <trial>
   <install channel="test" package="baz2"/>
+  <reportproblems/>
 </trial>
 
 </test>

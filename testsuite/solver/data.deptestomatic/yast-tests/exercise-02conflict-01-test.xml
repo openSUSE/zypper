@@ -9,6 +9,7 @@
 <!-- installed p1 directly conflicts with candidate p2 -->
 <trial>
   <install channel="test" package="p2"/>
+  <reportproblems/>
 </trial>
 
 </test>
