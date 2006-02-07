@@ -617,7 +617,12 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
     {
 	ResStatus status = item.status();
 	DBG << "CollectTransact(" << item << ")" << endl;
-	item.status().setNoTransact(ResStatus::SOLVER);// clear any solver/establish transactions
+	bool by_solver = status.isBySolver();
+
+	if (by_solver) {
+	    item.status().setNoTransact(ResStatus::SOLVER);// clear any solver/establish transactions
+	    return true;				// back out here, dont re-queue former solver result
+	}
 
 	if (status.isToBeInstalled()) {
 	    resolver.addPoolItemToInstall(item);	// -> install! 

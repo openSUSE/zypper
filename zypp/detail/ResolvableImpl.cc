@@ -47,10 +47,11 @@ namespace zypp
   , _arch( nvrad_r.arch )
   , _deps( nvrad_r )
   {
+    if (_arch != Arch_src) {
     // assert self provides
     _deps[Dep::PROVIDES].insert( CapFactory()
                                  .parse( _kind, _name, Rel::EQ, _edition ) );
-
+    }
     // Filter 'rpmlib(...)' requirements (refill from nvrad_r)
     filterUnwantedReq( nvrad_r[Dep::PREREQUIRES], _deps[Dep::PREREQUIRES] );
     filterUnwantedReq( nvrad_r[Dep::REQUIRES], _deps[Dep::REQUIRES] );
