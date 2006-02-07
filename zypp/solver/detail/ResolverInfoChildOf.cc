@@ -60,6 +60,19 @@ ResolverInfoChildOf::dumpOn( std::ostream & os ) const
     return os;
 }
 
+string
+ResolverInfoChildOf::message( ) const
+{
+    string affected_str = ResolverInfo::toString(affected());
+    string container_str = itemsToString( false );
+
+    // TranslatorExplanation: 1.%s name of package, 2.%s list of names
+    // TranslatorExplanation: 1.%s is part of 'bundles', the bundles are listed in 2.%s
+    return str::form (_("%s part of %s"),
+			affected_str.c_str(),
+			container_str.c_str());
+}
+
 //---------------------------------------------------------------------------
 
 ResolverInfoChildOf::ResolverInfoChildOf (PoolItem_Ref item, PoolItem_Ref dependency)
