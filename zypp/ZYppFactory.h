@@ -37,13 +37,19 @@ namespace zypp
     ~ZYppFactory();
 
   public:
-    /** Dummy */
-    ZYpp::Ptr letsTest() const;
+    /** \return Pointer to the ZYpp instance. */
+    ZYpp::Ptr getZYpp() const;
   };
   ///////////////////////////////////////////////////////////////////
 
   /** \relates ZYppFactory Stream output */
   std::ostream & operator<<( std::ostream & str, const ZYppFactory & obj );
+
+  /** \relates ZYppFactory Convenience to get the Pointer
+   * to the ZYpp instance.
+  */
+  inline ZYpp::Ptr getZYpp()
+  { return ZYppFactory().getZYpp(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

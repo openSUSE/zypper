@@ -45,7 +45,7 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  ZYpp::Ptr ZYppFactory::letsTest() const
+  ZYpp::Ptr ZYppFactory::getZYpp() const
   {
     static ZYpp::Ptr _instance( new ZYpp( ZYpp::Impl_Ptr(new ZYpp::Impl) ) );
     return _instance;
