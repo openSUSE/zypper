@@ -6,5 +6,6 @@
 </setup>
 <trial>
   <install channel="test" package="W"/>
+  <reportproblems/>
 </trial>
 </test>

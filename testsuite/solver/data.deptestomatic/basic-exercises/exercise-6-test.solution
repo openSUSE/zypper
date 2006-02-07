@@ -1,6 +1,14 @@
 >!> Installing CC from channel test
->!> Solution #1:
->!> install AA-1.0-1[test]
->!> install CC-1.0-1[test]
->!> remove  A-1.0-1
->!> installs=2, upgrades=0, uninstalls=1
+>!> 1 problems found:
+>!> Problem:
+>!> Cannot install AA because it is conflicting with A
+>!> A conflict over [package] (namedcap) a == 2.3 ([] (nullcap) ) requires the removal of to-be-installed AA-1.0-1[test]
+>!>    Solution:
+>!>       Deleting AA
+>!>       Deleting U___[package]AA-1.0-1.
+>!>    Solution:
+>!>       Deleting A
+>!>       Deleting I___[package]A-1.0-1.
+>!>    Solution:
+>!>       Ignoring conflict of AA
+>!>       

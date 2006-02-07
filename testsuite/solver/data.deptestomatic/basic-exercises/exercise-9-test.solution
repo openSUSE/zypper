@@ -1,7 +1,14 @@
 >!> Installing Y from channel test
->!> Solution #1:
->!> install AA-1.0-1[test]
->!> install AAA-1.0-1[test]
->!> install Y-1.0-1[test]
->!> remove  A-1.0-1
->!> installs=3, upgrades=0, uninstalls=1
+>!> 1 problems found:
+>!> Problem:
+>!> Cannot install AA because it is conflicting with A
+>!> A conflict over [package] (namedcap) a == 1.1 ([] (nullcap) ) requires the removal of to-be-installed AA-1.0-1[test]
+>!>    Solution:
+>!>       Deleting AA
+>!>       Deleting U___[package]AA-1.0-1.
+>!>    Solution:
+>!>       Deleting A
+>!>       Deleting I___[package]A-1.0-1.
+>!>    Solution:
+>!>       Ignoring conflict of AA
+>!>       

@@ -38,3 +38,8 @@ exercise-14-test.xml
 exercise-1-test.xml
 exercise-16-test.xml
 exercise-23-test.xml
+#Debian packages can provide something and conflict with that same
+#thing.  It's Debian's way of showing that there can be one and
+#only one provider of something.
+exercise-60-test.xml
+exercise-24-test.xml
