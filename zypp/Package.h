@@ -19,6 +19,8 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  DEFINE_PTR_TYPE(Package);
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Package
@@ -27,6 +29,7 @@ namespace zypp
   */
   class Package : public ResObject
   {
+    
   public:
     typedef detail::PackageImplIf    Impl;
     typedef Package                  Self;
