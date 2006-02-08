@@ -97,6 +97,10 @@ _DEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
 	_other_penalties = parent->_other_penalties;
 	_verifying	 = parent->_verifying;
 	_establishing	 = parent->_establishing;
+	_ignoreConflicts  = parent->_ignoreConflicts;
+	_ignoreRequires   = parent->_ignoreRequires;
+	_ignoreArchitecture = parent->_ignoreArchitecture;
+	_ignoreInstalledItem = parent->_ignoreInstalledItem;
     } else {
 	_min_priority = MAXINT;
     }

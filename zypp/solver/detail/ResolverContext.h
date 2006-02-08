@@ -46,7 +46,7 @@ namespace zypp
 typedef void (*ResolverContextFn) (ResolverContext_Ptr ctx, void *data);
 typedef void (*MarkedPoolItemFn) (PoolItem_Ref item, const ResStatus & status, void *data);
 typedef void (*MarkedPoolItemPairFn) (PoolItem_Ref item1, const ResStatus & status1, PoolItem_Ref item2, const ResStatus & status2, void *data);
-
+typedef std::multimap<PoolItem_Ref,Capability> IgnoreMap;
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -81,6 +81,15 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     Arch _architecture;
 
+    // These conflict should be ignored of the concering item
+    IgnoreMap _ignoreConflicts;
+    // These conflict should be ignored of the concering item    
+    IgnoreMap _ignoreRequires;
+    // Ignore architecture of the item
+    PoolItemList _ignoreArchitecture;
+    // Ignore the status "installed" of the item
+    PoolItemList _ignoreInstalledItem;    
+
   public:
     ResolverContext (const ResPool & pool, const Arch & arch, ResolverContext_Ptr parent = NULL);
     virtual ~ResolverContext();
@@ -111,6 +120,21 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     inline Arch architecture() const { return _architecture; }
 
+    // ---------------------------------- ignore capabilities
+    void setIgnoreCababilities(const IgnoreMap ignoreConflicts,
+			       const IgnoreMap ignoreRequires,
+			       const PoolItemList ignoreArchitecture,
+			       const PoolItemList ignoreInstalledItem)
+	{_ignoreConflicts = ignoreConflicts;
+	_ignoreRequires = ignoreRequires;
+	_ignoreArchitecture = ignoreArchitecture;
+	_ignoreInstalledItem = ignoreInstalledItem;}
+
+    const IgnoreMap getIgnoreConflicts() const { return _ignoreConflicts; }
+    const IgnoreMap getIgnoreRequires() const { return _ignoreRequires; }
+    const PoolItemList getIgnoreArchitecture() const { return _ignoreArchitecture; }
+    const PoolItemList getIgnoreInstalledItem() const { return _ignoreInstalledItem; }
+    
     // ---------------------------------- methods
 
     /**

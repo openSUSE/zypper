@@ -383,6 +383,10 @@ Resolver::establishState (ResolverContext_Ptr context)
 	context = new ResolverContext(_pool, _architecture);
 
     context->setEstablishing (true);
+    context->setIgnoreCababilities(_ignoreConflicts,
+				   _ignoreRequires,
+				   _ignoreArchitecture,
+				   _ignoreInstalledItem);
 
     for (KindList::const_iterator iter = ordered.begin(); iter != ordered.end(); iter++) {
 	const Resolvable::Kind kind = *iter;
@@ -482,6 +486,12 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     // create initial_queue
 
     ResolverQueue_Ptr initial_queue = new ResolverQueue(_pool, _architecture, context);
+
+    // Initialize all ignoring dependencies
+    initial_queue->context()->setIgnoreCababilities (_ignoreConflicts,
+				    _ignoreRequires,
+				    _ignoreArchitecture,
+				    _ignoreInstalledItem);
 
     /* If this is a verify, we do a "soft resolution" */
 
