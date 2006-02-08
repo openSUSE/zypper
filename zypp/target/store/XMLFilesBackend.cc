@@ -700,8 +700,16 @@ XMLFilesBackend::storedSources() const
 
 }
 
-static std::string hexDigest(const md5_byte_t *digest)
+static std::string hexDigest(const std::string &message)
 {
+  md5_state_t state;
+  md5_byte_t digest[16];
+
+  md5_init(&state);
+  /* Append a string to the message. */
+  md5_append(&state, (md5_byte_t*) message.c_str(), message.size());  /* Finish the message and return the digest. */
+  md5_finish(&state, digest);
+
   char s[33];
   int i;
   for (i=0; i<16; i++)
@@ -714,6 +722,7 @@ static std::string hexDigest(const md5_byte_t *digest)
 void
 XMLFilesBackend::storeSource(const PersistentStorage::SourceData &data)
 {
+  // serialize and save a file
   std::string xml = toXML(data);
   path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("source-cache");
 
@@ -722,22 +731,13 @@ XMLFilesBackend::storeSource(const PersistentStorage::SourceData &data)
   {
     ZYPP_THROW(Exception("Cant save source with empty alias"));
   }
-  //MD5 md5(ss);
-  md5_state_t state;
-  md5_byte_t digest[16];
 
-  md5_init(&state);
-  /* Append a string to the message. */
-  std::string alias = data.alias;
-  md5_append(&state, (md5_byte_t*) alias.c_str(), alias.size());  /* Finish the message and return the digest. */
-  md5_finish(&state, digest);
-  
   //DBG << std::endl << xml << std::endl;
   std::ofstream file;
   //DBG << filename << std::endl;
   try
   {
-    std::string full_path = (source_p / hexDigest(digest)).string();
+    std::string full_path = (source_p / hexDigest(data.alias)).string();
     
     file.open(full_path.c_str());
     file << xml;
@@ -753,7 +753,18 @@ XMLFilesBackend::storeSource(const PersistentStorage::SourceData &data)
 void
 XMLFilesBackend::deleteSource(const std::string &alias)
 {
-  
+  // just delete the files
+  path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("source-cache");
+  try
+  {
+    std::string full_path = (source_p / hexDigest(alias)).string();
+    remove(full_path);
+  }
+  catch ( std::exception &e )
+  {
+    ERR << "Error deleting source " << alias << " in the cache" << std::endl;
+    ZYPP_THROW(Exception(e.what()));
+  }
 }
 
 /////////////////////////////////////////////////////////////////
