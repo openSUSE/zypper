@@ -18,6 +18,7 @@
 
 #include "zypp/source/susetags/SuseTagsImpl.h"
 #include "zypp/source/susetags/PackagesParser.h"
+#include "zypp/source/susetags/PackagesLangParser.h"
 #include "zypp/source/susetags/SelectionTagFileParser.h"
 #include "zypp/source/susetags/PatternTagFileParser.h"
 
@@ -105,8 +106,17 @@ namespace zypp
 #warning We use suse instead of <DATADIR> for now
         Pathname p = provideFile(_path + "suse/setup/descr/packages");
         DBG << "Going to parse " << p << endl;
-        std::list<Package::Ptr> content( parsePackages( source_r, this, p ) );
-        _store.insert( content.begin(), content.end() );
+        PkgContent content( parsePackages( source_r, this, p ) );
+#warning Should use correct locale
+	Locale lang;
+        p = provideFile(_path + "suse/setup/descr/packages.en");
+        DBG << "Going to parse " << p << endl;
+	parsePackagesLang( p, lang, content );
+
+	for (PkgContent::const_iterator it = content.begin(); it != content.end(); ++it) {
+	    Package::Ptr pkg = detail::makeResolvableFromImpl( it->first, it->second );
+	    _store.insert( pkg );
+	}
         DBG << "SuseTagsImpl (fake) from " << p << ": "
             << content.size() << " packages" << endl;
 

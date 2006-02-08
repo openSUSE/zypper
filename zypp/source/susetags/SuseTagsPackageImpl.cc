@@ -39,6 +39,13 @@ namespace zypp
       SuseTagsPackageImpl::~SuseTagsPackageImpl()
       {}
 
+
+      TranslatedText SuseTagsPackageImpl::summary() const
+      { return _summary; }
+
+      TranslatedText SuseTagsPackageImpl::description() const
+      { return _description; }
+
       Date SuseTagsPackageImpl::buildtime() const
       { return Date(); }
 

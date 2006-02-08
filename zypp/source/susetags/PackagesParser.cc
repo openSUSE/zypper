@@ -15,7 +15,6 @@
 #include "zypp/source/susetags/PackagesParser.h"
 #include "zypp/parser/tagfile/TagFileParser.h"
 #include "zypp/Package.h"
-#include "zypp/source/susetags/SuseTagsPackageImpl.h"
 #include "zypp/CapFactory.h"
 #include "zypp/CapSet.h"
 
@@ -36,12 +35,12 @@ namespace zypp
 
       struct PackagesParser : public parser::tagfile::TagFileParser
       {
-        std::list<Package::Ptr> result;
+        PkgContent result;
 
 	Source_Ref _source;
 	SuseTagsImpl::Ptr _sourceImpl;
 
-        shared_ptr<source::susetags::SuseTagsPackageImpl> pkgImpl;
+        PkgImplPtr pkgImpl;
         NVRAD nvrad;
 
         bool pkgPending() const
@@ -52,7 +51,7 @@ namespace zypp
         {
           if ( pkgPending() )
             {
-              result.push_back( detail::makeResolvableFromImpl( nvrad, pkgImpl ) );
+              result[nvrad] = pkgImpl;
             }
           pkgImpl = nextPkg_r;
         }
@@ -167,7 +166,7 @@ namespace zypp
 
       ////////////////////////////////////////////////////////////////////////////
 
-      std::list<Package::Ptr> parsePackages( Source_Ref source_r, SuseTagsImpl::Ptr sourceImpl_r, const Pathname & file_r )
+      PkgContent parsePackages( Source_Ref source_r, SuseTagsImpl::Ptr sourceImpl_r, const Pathname & file_r )
       {
         PackagesParser p;
 	p._source = source_r;

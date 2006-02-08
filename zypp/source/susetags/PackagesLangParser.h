@@ -6,24 +6,19 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/source/susetags/PackagesParser.h
+/** \file	zypp/source/susetags/PackagesLangParser.h
  *
 */
-#ifndef ZYPP_SOURCE_SUSETAGS_PACKAGESPARSER_H
-#define ZYPP_SOURCE_SUSETAGS_PACKAGESPARSER_H
+#ifndef ZYPP_SOURCE_SUSETAGS_PACKAGESLANGPARSER_H
+#define ZYPP_SOURCE_SUSETAGS_PACKAGESLANGPARSER_H
 
 #include <iosfwd>
 #include <list>
 
-#include "zypp/base/PtrTypes.h"
 #include "zypp/Pathname.h"
 #include "zypp/Package.h"
-#include "zypp/NVRAD.h"
+#include "zypp/source/susetags/PackagesParser.h"
 #include "zypp/source/susetags/SuseTagsImpl.h"
-#include "zypp/source/susetags/SuseTagsPackageImpl.h"
-
-typedef zypp::shared_ptr<zypp::source::susetags::SuseTagsPackageImpl> PkgImplPtr;
-typedef std::map<zypp::NVRAD, PkgImplPtr> PkgContent;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -38,7 +33,7 @@ namespace zypp
       /** \deprecated Just temporary.
        * \throws ParseException and others.
       */
-      PkgContent parsePackages( Source_Ref source_r, SuseTagsImpl::Ptr, const Pathname & file_r );
+      void parsePackagesLang( const Pathname & file_r, const Locale & lang_r, const PkgContent & content_r );
 
       /////////////////////////////////////////////////////////////////
     } // namespace susetags
@@ -49,4 +44,4 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SOURCE_SUSETAGS_PACKAGESPARSER_H
+#endif // ZYPP_SOURCE_SUSETAGS_PACKAGESLANGPARSER_H

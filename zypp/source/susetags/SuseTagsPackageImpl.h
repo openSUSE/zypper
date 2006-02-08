@@ -37,6 +37,9 @@ namespace zypp
 
         /** \name Rpm Package Attributes. */
         //@{
+	virtual TranslatedText summary() const;
+	virtual TranslatedText description() const;
+
         /** */
         virtual Date buildtime() const;
         /** */
@@ -87,6 +90,8 @@ namespace zypp
 
         virtual License licenseToConfirm() const;
 
+	TranslatedText _summary;
+	TranslatedText _description;
         PackageGroup _group;
         std::list<std::string> _authors;
         std::list<std::string> _keywords;
