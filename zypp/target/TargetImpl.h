@@ -47,6 +47,14 @@ namespace zypp
     {
       friend std::ostream & operator<<( std::ostream & str, const TargetImpl & obj );
 
+    private:
+      /** Sort according to prereqs and media numbers */
+      void getResolvablesToInsDel ( const ResPool pool_r,
+				    PoolItemList & dellist_r,
+				    PoolItemList & instlist_r,
+				    PoolItemList & srclist_r );
+
+
     public:
       /** Ctor. */
       TargetImpl(const Pathname & root_r = "/");
@@ -61,18 +69,13 @@ namespace zypp
       /** All resolvables in the target. */
       const ResStore & resolvables();
 
-      /** Sort according to prereqs and media numbers */
-      void getResolvablesToInsDel ( ResPool pool_r,
-				    PoolItemList & dellist_r,
-				    PoolItemList & instlist_r,
-				    PoolItemList & srclist_r );
-
-      /** Commit changes in the pool */
-#warning Add support for multiple medias - eg. limit only to CD1
-      void commit(ResPool pool_r);
+      /** Commit changes in the pool
+	  media = 0 means any/all medias
+	  media > 0 means limit commits to this media */
+      void commit( ResPool pool_r, int medianr, PoolItemList & errors_r, PoolItemList & remaining_r, PoolItemList & srcremaining_r );
 
       /** Commit ordered changes */
-      void commit(const PoolItemList & items_r);
+      void commit( const PoolItemList & items_r );
 
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const
