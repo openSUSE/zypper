@@ -401,12 +401,13 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 			continue;
 		    }
 
+#warning Make behaviour configurable
 		    // If the package is installed or is set to be installed by the user,
 		    // let the user decide deleting conflicting package 
 		    // 
-		    ResStatus statusConflict = context->getStatus(conflicting_item);
-		    if (statusConflict.staysInstalled()
-			|| statusConflict.isToBeInstalled())
+		    if (context->getStatus(conflicting_item).isToBeInstalled()			// scheduled for installation
+			&& !context->getStatus(conflicting_item).isToBeUninstalled()		// not scheduled for uninstallation
+			|| conflicting_item.status().staysInstalled())				// not scheduled at all but installed
 		    {
 			ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL,
 									       _item, RESOLVER_INFO_PRIORITY_VERBOSE, cap);
