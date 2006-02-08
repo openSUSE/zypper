@@ -82,7 +82,8 @@ main (int argc, char **argv)
 	return 1;
     try {
 	God->initTarget("/", true);
-	God->target()->commit(God->pool());
+	PoolItemList x,y,z;
+	God->target()->commit(God->pool(), 0, x, y, z);
     }
     catch ( Exception & expt_r ) {
 	ZYPP_CAUGHT( expt_r );
