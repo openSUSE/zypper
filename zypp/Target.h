@@ -20,6 +20,8 @@
 #include "zypp/Pathname.h"
 #include "zypp/ResPool.h"
 
+#include "zypp/solver/detail/Types.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -53,8 +55,12 @@ namespace zypp
     static Target_Ptr nullimpl();
     /** Refference to the RPM database */
     target::rpm::RpmDb & rpmDb();
-    /** Commit changes in the pool */
-    void commit(ResPool pool_r);
+    /** Commit changes in the pool 
+     *  \param medianr 0 = all/any media
+     *                 > 0 means only the given media number
+    */
+    void commit( ResPool pool_r, int medianr, PoolItemList & errors_r
+        , PoolItemList & remaining_r, PoolItemList & srcremaining_r );
 
       /** If the package is installed and provides the file
 	  Needed to evaluate split provides during Resolver::Upgrade() */
