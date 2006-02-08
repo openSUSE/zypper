@@ -136,12 +136,12 @@ _XDEBUG( "[" << context << "]:" << it->second );
 	}
 	context = context->_parent;			// N: go up the chain
     }
-#if 0
+#if 1
     ResStatus status;
     if (item.status().isInstalled())
-	status = ResStatus::installed;
+	status = ResStatus::installed;			// return _is_ state, not _to be_ state
     else
-	status = ResStatus::uninstalled;
+	status = ResStatus::uninstalled;		// return _is_ state, not _to be_ state
 
     _last_checked_status = status;
     _XDEBUG( "[NULL]:" << status );    
