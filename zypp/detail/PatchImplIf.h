@@ -44,7 +44,7 @@ namespace zypp
       /** Patch ID */
       virtual std::string id() const = 0;
       /** Patch time stamp */
-      virtual unsigned int timestamp() const = 0;
+      virtual Date timestamp() const = 0;
       /** Patch category (recommended, security,...) */
       virtual std::string category() const = 0;
       /** Does the system need to reboot to finish the update process? */

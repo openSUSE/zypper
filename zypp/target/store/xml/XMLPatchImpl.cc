@@ -42,7 +42,7 @@ namespace zypp
     {
       return _patch_id;
     }
-    unsigned int XMLPatchImpl::timestamp() const
+    Date XMLPatchImpl::timestamp() const
     {
       return _timestamp;
     }

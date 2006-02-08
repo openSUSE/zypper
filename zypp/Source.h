@@ -21,6 +21,8 @@
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
 
+#include "zypp/media/MediaManager.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -102,6 +104,12 @@ namespace zypp
     const Pathname & path (void) const;
 
   public:
+    /**
+     * Change the media of the source (in case original media is not available)
+     * The media must be ready-to-use (in the same form as when passing to SourceImpl constructor)
+     */
+    void changeMedia(const media::MediaId & media_r, const Pathname & path_r);
+
     /** Conversion to bool to allow pointer style tests
      *  for nonNULL \ref source impl.
      * \todo fix by providing a safebool basecalss, doing the 'nasty'

@@ -43,7 +43,7 @@ namespace zypp
   std::string Patch::id() const
   { return pimpl().id(); }
 
-  unsigned int Patch::timestamp() const
+  Date Patch::timestamp() const
   { return pimpl().timestamp(); }
 
   std::string Patch::category() const

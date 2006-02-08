@@ -44,7 +44,7 @@ namespace zypp
 	/** Patch ID */
 	std::string id() const;
 	/** Patch time stamp */
-	unsigned int timestamp() const;
+	Date timestamp() const;
 	/** Patch category (recommended, security,...) */
 	std::string category() const;
 	/** Does the system need to reboot to finish the update process? */
@@ -76,7 +76,7 @@ namespace zypp
 	/** Patch ID */
 	std::string _patch_id;
 	/** Patch time stamp */
-	int _timestamp;
+	Date _timestamp;
 	/** Patch summary */
 	TranslatedText _summary;
 	/** Patch description */

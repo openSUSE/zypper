@@ -748,6 +748,8 @@ INT << "Storing data to cache" << endl;
 	{
 	  Dependencies _deps;
 
+/* FIXME
+
 	  for (std::list<PackageReq>::const_iterator it = parsed.packageList.begin();
 	    it != parsed.packageList.end();
 	    it++)
@@ -783,7 +785,7 @@ INT << "Storing data to cache" << endl;
 		),
 		ResTraits<Selection>::kind));
 	    }
-	  }
+	  }*/
 	  return _deps;
 	}
 

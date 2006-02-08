@@ -614,7 +614,9 @@ Dependencies
 XMLFilesBackend::createPatternDependencies( const zypp::parser::yum::YUMPatternData & parsed ) const
 {
   Dependencies _deps;
-
+#warning FIXME once pattern class is ready
+/*
+FIXME
   for (std::list<PackageReq>::const_iterator it = parsed.packageList.begin(); it != parsed.packageList.end(); it++)
   {
     if (it->type == "mandatory" || it->type == "")
@@ -628,7 +630,7 @@ XMLFilesBackend::createPatternDependencies( const zypp::parser::yum::YUMPatternD
     {
       _deps[Dep::REQUIRES].insert(createCapability(YUMDependency( "", it->name, "", "", "", "", "" ), ResTraits<Selection>::kind));
     }
-  }
+  }*/
   return _deps;
 }
 

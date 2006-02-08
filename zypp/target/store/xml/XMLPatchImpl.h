@@ -33,7 +33,7 @@ namespace zypp
       /** Patch ID */
       std::string id() const;
       /** Patch time stamp */
-      unsigned int timestamp() const;
+      Date timestamp() const;
       /** Patch summary */
       TranslatedText summary() const;
       /** Patch description */
@@ -60,7 +60,7 @@ namespace zypp
       /** Patch ID */
       std::string _patch_id;
       /** Patch time stamp */
-      int _timestamp;
+      Date _timestamp;
       /** Patch summary */
       TranslatedText _summary;
       /** Patch description */

@@ -40,6 +40,7 @@ namespace zypp
       : _user_visible(parsed.userVisible == "true")
       , _source(source_r)
       {
+/* FIXME
 	CapFactory _f;
 	for (std::list<PackageReq>::const_iterator it = parsed.packageList.begin();
 	  it != parsed.packageList.end();
@@ -79,7 +80,7 @@ namespace zypp
 	    _optional_req.insert(_cap);
 	  } 
 	}
-
+*/
 
 // to name        std::string patternId;
 // as _summary        std::list<multilang> name;

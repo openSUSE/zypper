@@ -124,7 +124,7 @@ namespace zypp
       {
         return _patch_id;
       }
-      unsigned int YUMPatchImpl::timestamp() const
+      Date YUMPatchImpl::timestamp() const
       {
         return _timestamp;
       }

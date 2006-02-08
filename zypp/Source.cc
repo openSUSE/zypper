@@ -114,6 +114,9 @@ namespace zypp
   const Pathname & Source_Ref::path (void) const
   { return _pimpl->path (); }
 
+  void Source_Ref::changeMedia(const media::MediaId & media_r, const Pathname & path_r)
+  { _pimpl->changeMedia(media_r, path_r); }
+
   /******************************************************************
    **
    **	FUNCTION NAME : operator<<

@@ -152,6 +152,12 @@ namespace zypp
       return media_mgr.localPath(_media, path_r);
     }
 
+    void SourceImpl::changeMedia(const media::MediaId & media_r, const Pathname & path_r)
+    {
+      _media = media_r;
+      _path = path_r;
+    }
+
     void SourceImpl::createResolvables(Source_Ref source_r)
     {}
 

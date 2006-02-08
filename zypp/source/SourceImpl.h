@@ -100,6 +100,8 @@ namespace zypp
 				const unsigned media_nr = 1,
 				const bool recursive = false);
 
+      void changeMedia(const media::MediaId & media_r, const Pathname & path_r);
+
       const bool enabled() const
       { return _enabled; }
 
