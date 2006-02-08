@@ -215,7 +215,7 @@ namespace zypp
 	    progress.disconnect();
 	  }
 
-	  it->status().setStatus( ResStatus::uninstalled )
+	  it->status().setStatus( ResStatus::uninstalled );
 	  MIL << "Successful remove, " << *it << " is now uninstalled " << endl;
 	}
 #warning FIXME other resolvables
