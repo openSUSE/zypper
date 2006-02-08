@@ -31,4 +31,5 @@ pattern =
     element-freshen?,
     element-requires?,
     element-suggests?,
+    element-enhances?,
     element-recommends?

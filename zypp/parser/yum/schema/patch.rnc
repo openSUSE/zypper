@@ -44,7 +44,8 @@ dependency-block =
   element-freshen?,
   element-requires?,
   element-recommends?,
-  element-suggests?
+  element-suggests?,
+  element-enhances?
 
 element-category =
   element category { "youfix" | "security" | "recommended" | "bonus" | "beta" }

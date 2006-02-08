@@ -89,6 +89,9 @@
       <ref name="element-suggests"/>
     </optional>
     <optional>
+      <ref name="element-enhances"/>
+    </optional>
+    <optional>
       <ref name="element-recommends"/>
     </optional>
   </define>

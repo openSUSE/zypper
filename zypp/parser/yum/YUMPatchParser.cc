@@ -106,6 +106,9 @@ namespace zypp {
             else if (name == "suggests") {
               prim.parseDependencyEntries(& patchPtr->suggests, child);
             }
+            else if (name == "enhances") {
+              prim.parseDependencyEntries(& patchPtr->enhances, child);
+            }
             else if (name == "freshen") {
               prim.parseDependencyEntries(& patchPtr->freshen, child);
             }
@@ -215,6 +218,9 @@ namespace zypp {
             }
             else if (name == "suggests") {
               prim.parseDependencyEntries(& dataPtr->suggests, child);
+            }
+            else if (name == "enhances") {
+              prim.parseDependencyEntries(& dataPtr->enhances, child);
             }
             else if (name == "file") {
               dataPtr->files.push_back
@@ -494,6 +500,9 @@ namespace zypp {
             else if (name == "suggests") {
               prim.parseDependencyEntries(& script->suggests, child);
             }
+            else if (name == "enhances") {
+              prim.parseDependencyEntries(& script->enhances, child);
+            }
             else if (name == "freshen") {
               prim.parseDependencyEntries(& script->freshen, child);
             }
@@ -549,6 +558,9 @@ namespace zypp {
             }
             else if (name == "suggests") {
               prim.parseDependencyEntries(& message->suggests, child);
+            }
+            else if (name == "enhances") {
+              prim.parseDependencyEntries(& message->enhances, child);
             }
             else if (name == "freshen") {
               prim.parseDependencyEntries(& message->freshen, child);

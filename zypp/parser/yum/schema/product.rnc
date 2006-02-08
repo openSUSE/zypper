@@ -74,6 +74,17 @@ element ns1:product {
       empty
     }*
   }?,
+  element enhances {
+    element entry {
+      attribute name { text },
+      attribute kind { "package" | "patch" | "script" | "message" | "product"}?,
+      (attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" },
+       attribute epoch { xsd:nonNegativeInteger },
+       attribute ver { text },
+       attribute rel { text }?)?,
+      empty
+    }*
+  }?,
   element suggests {
     element entry {
       attribute name { text },

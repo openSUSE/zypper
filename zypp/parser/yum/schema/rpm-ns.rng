@@ -28,6 +28,9 @@
       <ref name="element-recommends"/>
     </optional>
     <optional>
+      <ref name="element-enhances"/>
+    </optional>
+    <optional>
       <ref name="element-suggests"/>
     </optional>
     <zeroOrMore>
@@ -221,6 +224,31 @@
     </element>
   </define>
   <define name="recommends">
+    <zeroOrMore>
+      <element name="entry">
+        <ref name="attribute-name"/>
+        <optional>
+          <ref name="shared-entry-attributes"/>
+          <attribute name="flags">
+            <choice>
+              <value>EQ</value>
+              <value>LE</value>
+              <value>GE</value>
+              <value>LT</value>
+              <value>GT</value>
+            </choice>
+          </attribute>
+        </optional>
+        <empty/>
+      </element>
+    </zeroOrMore>
+  </define>
+  <define name="element-enhances">
+    <element name="enhances">
+      <ref name="enhances"/>
+    </element>
+  </define>
+  <define name="enhances">
     <zeroOrMore>
       <element name="entry">
         <ref name="attribute-name"/>

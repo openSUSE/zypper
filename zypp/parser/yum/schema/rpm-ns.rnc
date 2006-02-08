@@ -17,6 +17,7 @@ format =
     element-obsoletes?,
     element-requires?,
     element-recommends?,
+    element-enhances?,
     element-suggests?,
     element-file*
 
@@ -123,6 +124,19 @@ element-recommends =
     element recommends { recommends }
 
 recommends =
+    element entry {
+      attribute-name,
+      (
+        shared-entry-attributes,
+        attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" }
+      )?,
+      empty
+      }*
+
+element-enhances =
+    element enhances { enhances }
+
+enhances =
     element entry {
       attribute-name,
       (

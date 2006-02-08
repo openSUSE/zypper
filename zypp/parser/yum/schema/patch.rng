@@ -111,6 +111,9 @@
     <optional>
       <ref name="element-suggests"/>
     </optional>
+    <optional>
+      <ref name="element-enhances"/>
+    </optional>
   </define>
   <define name="element-category">
     <element name="category">

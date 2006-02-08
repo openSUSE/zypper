@@ -285,6 +285,8 @@ namespace zypp {
           << data.recommends << endl
           << "suggests:" << endl
           << data.suggests << endl
+          << "enhances:" << endl
+          << data.enhances << endl
           << "files:" << endl
           << data.files << endl
           << "authors: " << join(data.authors,", ") << endl
@@ -335,6 +337,7 @@ namespace zypp {
           << "requires:" << endl << data.requires << endl
           << "recommends:" << endl << data.recommends << endl
           << "suggests:" << endl << data.suggests << endl
+          << "enhances:" << endl << data.enhances << endl
           << "freshen: " << endl << data.freshen << endl;
         return out;
       }
@@ -383,6 +386,7 @@ namespace zypp {
           << "  requires: " << data.requires << endl
           << "  recommends:" << endl << data.recommends << endl
           << "  suggests:" << endl << data.suggests << endl
+          << "  enhances:" << endl << data.enhances << endl
           << "  category: " << data.category << endl
           << "  reboot needed: " << data.rebootNeeded << endl
           << "  affects package manager: " << data.packageManager << endl
@@ -421,7 +425,8 @@ namespace zypp {
           << "  freshen: " << data.freshen << endl
           << "  requires: " << data.requires << endl
           << "  recommends:" << endl << data.recommends << endl
-          << "  suggests:" << endl << data.suggests << endl;
+          << "  suggests:" << endl << data.suggests << endl
+          << "  enhances:" << endl << data.enhances << endl;
         return out;
       }
 
@@ -462,6 +467,7 @@ namespace zypp {
           << "  requires: " << data.requires << endl
           << "  recommends:" << endl << data.recommends << endl
           << "  suggests:" << endl << data.suggests << endl
+          << "  enhances:" << endl << data.enhances << endl
           << "  text: " << data.text << endl;
         return out;
       }
@@ -480,6 +486,7 @@ namespace zypp {
           << "  requires: " << data.requires << endl
           << "  recommends:" << endl << data.recommends << endl
           << "  suggests:" << endl << data.suggests << endl
+          << "  enhances:" << endl << data.enhances << endl
           << "  do script: " << data.do_script << endl
           << "  undo script: " << data.undo_script << endl;
         return out;
@@ -524,6 +531,8 @@ namespace zypp {
 	  << data.recommends << endl
           << "  suggests:" << endl
 	  << data.suggests << endl
+          << "  enhances:" << endl
+	  << data.enhances << endl
           << "  files:" << endl
           << data.files << endl
           << "  authors: " << join(data.authors,", ") << endl

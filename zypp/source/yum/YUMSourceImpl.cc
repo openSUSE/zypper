@@ -698,6 +698,13 @@ INT << "Storing data to cache" << endl;
 	    _deps[Dep::SUGGESTS].insert(createCapability(*it, my_kind));
 	  }
 
+	  for (std::list<YUMDependency>::const_iterator it = parsed.enhances.begin();
+	       it != parsed.enhances.end();
+	       it++)
+	  {
+	    _deps[Dep::ENHANCES].insert(createCapability(*it, my_kind));
+	  }
+
 	  for (std::list<YUMDependency>::const_iterator it = parsed.requires.begin();
 	       it != parsed.requires.end();
 	       it++)

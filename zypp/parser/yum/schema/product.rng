@@ -227,6 +227,45 @@
     </element>
   </optional>
   <optional>
+    <element name="enhances">
+      <zeroOrMore>
+        <element name="entry">
+          <attribute name="name"/>
+          <optional>
+            <attribute name="kind">
+              <choice>
+                <value>package</value>
+                <value>patch</value>
+                <value>script</value>
+                <value>message</value>
+                <value>product</value>
+              </choice>
+            </attribute>
+          </optional>
+          <optional>
+            <attribute name="flags">
+              <choice>
+                <value>EQ</value>
+                <value>LE</value>
+                <value>GE</value>
+                <value>LT</value>
+                <value>GT</value>
+              </choice>
+            </attribute>
+            <attribute name="epoch">
+              <data type="nonNegativeInteger"/>
+            </attribute>
+            <attribute name="ver"/>
+            <optional>
+              <attribute name="rel"/>
+            </optional>
+          </optional>
+          <empty/>
+        </element>
+      </zeroOrMore>
+    </element>
+  </optional>
+  <optional>
     <element name="suggests">
       <zeroOrMore>
         <element name="entry">
