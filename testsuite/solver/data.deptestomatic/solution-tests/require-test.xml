@@ -5,12 +5,12 @@
 </setup>
 
 <!-- Install packages which requires a none exist package -->
-<!-- RESOLVER_INFO_TYPE_REJECT_INSTALL will be returned -->
-<!-- RRESOLVER_INFO_TYPE_NO_PROVIDER would be better -->
+<!-- RRESOLVER_INFO_TYPE_NO_PROVIDER will be returned -->
 
 <trial>
   <install channel="test" package="foonew"/> 
   <reportproblems/>
+  <takesolution problem="0" solution="1"/>
 </trial>
 
 </test>
