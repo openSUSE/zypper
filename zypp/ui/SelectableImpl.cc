@@ -23,6 +23,9 @@ namespace zypp
   namespace ui
   { /////////////////////////////////////////////////////////////////
 
+    /**
+     * \todo Support non USER level mipulation.
+    */
     struct StatusHelper
     {
       StatusHelper( const Selectable::Impl & impl )
@@ -31,6 +34,9 @@ namespace zypp
       , cand( impl.candidateObj() )
       {}
 
+      //
+      // Queries
+      //
       bool hasInstalled() const
       { return inst; }
 
@@ -46,22 +52,42 @@ namespace zypp
       bool hasBoth() const
       { return inst && cand; }
 
+      //
+      // ResStatus manip
+      //
+      /** \todo fix it, handle avaialable list */
+      bool setInstall( ResStatus::TransactByValue by_r ) const
+      {
+        if ( cand )
+          {
+            if ( inst )
+              inst.status().setTransact( false, by_r );
+            return cand.status().setTransact( true, by_r );
+          }
+        return false;
+      }
 
-      bool userSetInstall() const
-      { return false; }
+      bool setDelete( ResStatus::TransactByValue by_r ) const
+      {
+        if ( inst )
+          {
+            if ( cand )
+              cand.status().setTransact( false, by_r );
+            return inst.status().setTransact( true, by_r );
+          }
+        return false;
+      }
 
-      bool userSetDelete() const
-      { return false; }
+      bool unset( ResStatus::TransactByValue by_r ) const
+      {
+        if ( inst )
+          inst.status().setTransact( false, by_r );
+        if ( cand )
+          cand.status().setTransact( false, by_r );
+        return true;
+      }
 
-      bool userUnset() const
-      { return false; }
-
-      bool autoSetInstall() const
-      { return false; }
-
-      bool autoSetDelete() const
-      { return false; }
-
+    public:
       const Selectable::Impl & _impl;
       PoolItem inst;
       PoolItem cand;
@@ -105,36 +131,31 @@ namespace zypp
         case S_Taboo:
           return false;
 
+        case S_AutoDel:
+        case S_AutoInstall:
+        case S_AutoUpdate:
+          // Auto level is SOLVER level. UI may query, but not
+          // set at this level.
+          break;
+
         case S_Del:
-          return self.userSetDelete();
+          return self.setDelete( ResStatus::USER );
           break;
 
         case S_Install:
-          return self.hasCandidateOnly() && self.userSetInstall();
+          return self.hasCandidateOnly() && self.setInstall( ResStatus::USER );
           break;
 
         case S_Update:
-          return self.hasBoth() && self.userSetInstall();
-          break;
-
-        case S_AutoDel:
-          return self.autoSetDelete();
-          break;
-
-        case S_AutoInstall:
-          return self.hasCandidateOnly() && self.autoSetInstall();
-          break;
-
-        case S_AutoUpdate:
-          return self.hasBoth() && self.autoSetInstall();
+          return self.hasBoth() && self.setInstall( ResStatus::USER );
           break;
 
         case S_KeepInstalled:
-          return self.hasInstalled() && self.userUnset();
+          return self.hasInstalled() && self.unset( ResStatus::USER );
           break;
 
         case S_NoInst:
-          return !self.hasInstalled() && self.userUnset();
+          return !self.hasInstalled() && self.unset( ResStatus::USER );
           break;
         }
 
