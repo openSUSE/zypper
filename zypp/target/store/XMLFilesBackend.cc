@@ -228,7 +228,9 @@ std::string
 XMLFilesBackend::fullPathForResolvable( Resolvable::constPtr resolvable ) const
 {
   std::string filename;
-  filename = d->randomFileName ? randomString(40) : (resolvable->name() + "-" + resolvable->edition().version());
+  // only append edition if there is one
+  std::string suffix = ( (resolvable->edition() == Edition::noedition) ? std::string() : ("-" + resolvable->edition().version() + "-" + resolvable->edition().release()) );
+  filename = d->randomFileName ? randomString(40) : (resolvable->name() + suffix);
   return path( path(dirForResolvable(resolvable)) / path(filename)).string();
 }
 
@@ -512,7 +514,18 @@ XMLFilesBackend::createSelection( const zypp::parser::yum::YUMGroupData & parsed
     //impl->_order = parsed.summary;
     //impl->_category = parsed.summary;
     impl->_visible = ((parsed.userVisible == "true") ? true : false);
-
+    
+    for( std::list<MetaPkg>::const_iterator it = parsed.grouplist.begin(); it != parsed.grouplist.end(); ++it)
+    {
+      if ((*it).type == "optional" )
+        impl->_suggests.insert((*it).name);
+      if ((*it).type == "mandatory" )
+        impl->_recommends.insert((*it).name);
+    }
+    for( std::list<PackageReq>::const_iterator it = parsed.packageList.begin(); it != parsed.packageList.end(); ++it)
+    {
+        impl->_install_packages.insert((*it).name);
+    }
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.groupId, Edition::noedition, Arch_noarch, createGroupDependencies(parsed) );
     Selection::Ptr selection = detail::makeResolvableFromImpl( dataCollect, impl );

@@ -47,6 +47,10 @@ namespace zypp
       /** selection presentation order */
       Label order() const;
       
+      std::set<std::string> suggests() const;
+      std::set<std::string> recommends() const;
+      std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
+
       TranslatedText _summary;
       std::string _name;
       std::string _version;
@@ -55,6 +59,10 @@ namespace zypp
       std::string _order;
       std::string _category;
       bool _visible;
+
+      std::set<std::string> _suggests;
+      std::set<std::string> _recommends;
+      std::set<std::string> _install_packages;
     };
     ///////////////////////////////////////////////////////////////////
 

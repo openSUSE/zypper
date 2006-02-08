@@ -50,6 +50,16 @@ namespace zypp
 
     Label XMLSelectionImpl::order() const
     { return _order; }
+
+    std::set<std::string> XMLSelectionImpl::suggests() const
+    { return _suggests; }
+
+    std::set<std::string> XMLSelectionImpl::recommends() const
+    { return _recommends; }
+
+    std::set<std::string> XMLSelectionImpl::install_packages( const Locale & lang ) const
+    { return _install_packages; }
+
     /////////////////////////////////////////////////////////////////
   } // namespace storage
   ///////////////////////////////////////////////////////////////////
