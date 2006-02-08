@@ -172,6 +172,12 @@ namespace zypp {
             else if (name == "requires") {
               parseDependencyEntries(& dataPtr->requires, child);
             }
+            else if (name == "recommends") {
+              parseDependencyEntries(& dataPtr->recommends, child);
+            }
+            else if (name == "suggests") {
+              parseDependencyEntries(& dataPtr->suggests, child);
+            }
             else if (name == "file") {
               dataPtr->files.push_back
                 (FileData(_helper.content(child),

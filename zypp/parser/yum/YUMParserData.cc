@@ -281,6 +281,10 @@ namespace zypp {
           << data.obsoletes << endl
           << "requires:" << endl
           << data.requires << endl
+          << "recommends:" << endl
+          << data.recommends << endl
+          << "suggests:" << endl
+          << data.suggests << endl
           << "files:" << endl
           << data.files << endl
           << "authors: " << join(data.authors,", ") << endl
@@ -321,12 +325,17 @@ namespace zypp {
           << data.name << endl
           << "default: '" << data.default_  << "'" << endl
           << "user-visible: '" << data.userVisible  << "'" << endl
-          << "description:" << endl
-          << data.description << endl
-          << "patternlist:" << endl
-          << data.patternlist << endl
-          << "packageList:" << endl
-          << data.packageList << endl;
+          << "description:" << endl << data.description << endl
+	  << "category: " << data.category << endl
+	  << "icon: " << data.icon << endl
+	  << "script: " << data.script << endl
+          << "provides:" << endl << data.provides << endl
+          << "conflicts:" << endl << data.conflicts << endl
+          << "obsoletes:" << endl << data.obsoletes << endl
+          << "requires:" << endl << data.requires << endl
+          << "recommends:" << endl << data.recommends << endl
+          << "suggests:" << endl << data.suggests << endl
+          << "freshen: " << endl << data.freshen << endl;
         return out;
       }
 
@@ -372,6 +381,8 @@ namespace zypp {
           << "  obsoletes: " << data.obsoletes << endl
           << "  freshen: " << data.freshen << endl
           << "  requires: " << data.requires << endl
+          << "  recommends:" << endl << data.recommends << endl
+          << "  suggests:" << endl << data.suggests << endl
           << "  category: " << data.category << endl
           << "  reboot needed: " << data.rebootNeeded << endl
           << "  affects package manager: " << data.packageManager << endl
@@ -408,7 +419,9 @@ namespace zypp {
           << "  conflicts: " << data.conflicts << endl
           << "  obsoletes: " << data.obsoletes << endl
           << "  freshen: " << data.freshen << endl
-          << "  requires: " << data.requires << endl;
+          << "  requires: " << data.requires << endl
+          << "  recommends:" << endl << data.recommends << endl
+          << "  suggests:" << endl << data.suggests << endl;
         return out;
       }
 
@@ -447,6 +460,8 @@ namespace zypp {
           << "  obsoletes: " << data.obsoletes << endl
           << "  freshen: " << data.freshen << endl
           << "  requires: " << data.requires << endl
+          << "  recommends:" << endl << data.recommends << endl
+          << "  suggests:" << endl << data.suggests << endl
           << "  text: " << data.text << endl;
         return out;
       }
@@ -463,6 +478,8 @@ namespace zypp {
           << "  obsoletes: " << data.obsoletes << endl
           << "  freshen: " << data.freshen << endl
           << "  requires: " << data.requires << endl
+          << "  recommends:" << endl << data.recommends << endl
+          << "  suggests:" << endl << data.suggests << endl
           << "  do script: " << data.do_script << endl
           << "  undo script: " << data.undo_script << endl;
         return out;
@@ -503,6 +520,10 @@ namespace zypp {
           << data.obsoletes << endl
           << "  requires:" << endl
           << data.requires << endl
+          << "  recommends:" << endl
+	  << data.recommends << endl
+          << "  suggests:" << endl
+	  << data.suggests << endl
           << "  files:" << endl
           << data.files << endl
           << "  authors: " << join(data.authors,", ") << endl

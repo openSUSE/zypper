@@ -57,10 +57,6 @@ namespace zypp {
       private:
         virtual bool isInterested(const xmlNodePtr nodePtr);
         virtual YUMPatternData_Ptr process(const xmlTextReaderPtr reader);
-        void parsePatternlist(YUMPatternData_Ptr dataPtr,
-                            xmlNodePtr node);
-        void parsePackageList(YUMPatternData_Ptr dataPtr,
-                              xmlNodePtr node);
         
         LibXMLHelper _helper;
       };

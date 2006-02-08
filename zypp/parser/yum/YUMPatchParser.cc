@@ -100,6 +100,12 @@ namespace zypp {
             else if (name == "requires") {
               prim.parseDependencyEntries(& patchPtr->requires, child);
             }
+            else if (name == "recommends") {
+              prim.parseDependencyEntries(& patchPtr->recommends, child);
+            }
+            else if (name == "suggests") {
+              prim.parseDependencyEntries(& patchPtr->suggests, child);
+            }
             else if (name == "freshen") {
               prim.parseDependencyEntries(& patchPtr->freshen, child);
             }
@@ -203,6 +209,12 @@ namespace zypp {
             }
             else if (name == "requires") {
               prim.parseDependencyEntries(& dataPtr->requires, child);
+            }
+            else if (name == "recommends") {
+              prim.parseDependencyEntries(& dataPtr->recommends, child);
+            }
+            else if (name == "suggests") {
+              prim.parseDependencyEntries(& dataPtr->suggests, child);
             }
             else if (name == "file") {
               dataPtr->files.push_back
@@ -476,8 +488,14 @@ namespace zypp {
             else if (name == "requires") {
               prim.parseDependencyEntries(& script->requires, child);
             }
+            else if (name == "recommends") {
+              prim.parseDependencyEntries(& script->recommends, child);
+            }
+            else if (name == "suggests") {
+              prim.parseDependencyEntries(& script->suggests, child);
+            }
             else if (name == "freshen") {
-              prim.parseDependencyEntries(& script->requires, child);
+              prim.parseDependencyEntries(& script->freshen, child);
             }
             else {
               WAR << "YUM <atoms/script> contains the unknown element <"
@@ -526,8 +544,14 @@ namespace zypp {
             else if (name == "requires") {
               prim.parseDependencyEntries(& message->requires, child);
             }
+            else if (name == "recommends") {
+              prim.parseDependencyEntries(& message->recommends, child);
+            }
+            else if (name == "suggests") {
+              prim.parseDependencyEntries(& message->suggests, child);
+            }
             else if (name == "freshen") {
-              prim.parseDependencyEntries(& message->requires, child);
+              prim.parseDependencyEntries(& message->freshen, child);
             }
             else {
               WAR << "YUM <atoms/message> contains the unknown element <"

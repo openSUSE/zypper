@@ -170,6 +170,8 @@ namespace zypp {
         std::list<YUMDependency> obsoletes;
         std::list<YUMDependency> freshen;
         std::list<YUMDependency> requires;
+        std::list<YUMDependency> recommends;
+        std::list<YUMDependency> suggests;
       };
 
       class YUMPatchAtom : public YUMObjectData {
@@ -340,7 +342,7 @@ namespace zypp {
       * @short Describes the patterns in a YUM repository
       **/
 
-      class YUMPatternData : public base::ReferenceCounted, private base::NonCopyable {
+      class YUMPatternData : public YUMObjectData {
       public:
 
         YUMPatternData();
@@ -349,8 +351,9 @@ namespace zypp {
         std::string default_;
         std::string userVisible;
         TranslatedText description;
-        std::list<MetaPkg> patternlist;
-        std::list<PackageReq> packageList;
+	std::string category;
+	std::string icon;
+	std::string script;
       };
 
       /**

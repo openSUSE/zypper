@@ -97,6 +97,15 @@ namespace zypp {
             else if (name == "requires") {
               prim.parseDependencyEntries(& productPtr->requires, child);
             }
+            else if (name == "recommends") {
+              prim.parseDependencyEntries(& productPtr->recommends, child);
+            }
+            else if (name == "suggests") {
+              prim.parseDependencyEntries(& productPtr->suggests, child);
+            }
+            else if (name == "freshen") {
+              prim.parseDependencyEntries(& productPtr->freshen, child);
+            }
             else {
               WAR << "YUM <data> contains the unknown element <" << name << "> "
                 << _helper.positionInfo(child) << ", skipping" << endl;

@@ -56,6 +56,7 @@ namespace zypp {
         // FIXME move needed method to a common class, inherit it
         friend class YUMPatchParser;
         friend class YUMProductParser;
+        friend class YUMPatternParser;
         virtual bool isInterested(const xmlNodePtr nodePtr);
         virtual YUMPrimaryData_Ptr process(const xmlTextReaderPtr reader);
         void parseFormatNode(YUMPrimaryData_Ptr dataPtr,

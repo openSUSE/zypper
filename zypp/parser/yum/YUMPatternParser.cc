@@ -11,6 +11,7 @@
 */
 
 #include <zypp/parser/yum/YUMPatternParser.h>
+#include <zypp/parser/yum/YUMPrimaryParser.h>
 #include <zypp/parser/LibXMLHelper.h>
 #include <istream>
 #include <string>
@@ -52,6 +53,9 @@ namespace zypp {
         YUMPatternData_Ptr dataPtr = new YUMPatternData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         assert(dataNode);
+
+        // FIXME move the respective method to a common class, inherit it  
+        YUMPrimaryParser prim;
         
         for (xmlNodePtr child = dataNode->children;
              child && child != dataNode;
@@ -73,12 +77,36 @@ namespace zypp {
                  else if (name == "description") {
                    dataPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
                  }
-                 else if (name == "patternlist") {
-                   parsePatternlist(dataPtr, child);
-                 }
-                 else if (name == "packagelist") {
-                   parsePackageList(dataPtr, child);
-                 }
+		 else if (name == "category") {
+		   dataPtr->category = _helper.content(child);
+		 }
+		 else if (name == "icon") {
+		   dataPtr->icon = _helper.content(child);
+		 }
+		 else if (name == "script") {
+		   dataPtr->script = _helper.content(child);
+		 }
+                 else if (name == "provides") {
+		   prim.parseDependencyEntries(& dataPtr->provides, child);
+		 }
+		 else if (name == "conflicts") {
+		   prim.parseDependencyEntries(& dataPtr->conflicts, child);
+		 }
+		 else if (name == "obsoletes") {
+		   prim.parseDependencyEntries(& dataPtr->obsoletes, child);
+		 }
+		 else if (name == "requires") {
+		   prim.parseDependencyEntries(& dataPtr->requires, child);
+		 }
+		 else if (name == "recommends") {
+		   prim.parseDependencyEntries(& dataPtr->recommends, child);
+		 }
+		 else if (name == "suggests") {
+		   prim.parseDependencyEntries(& dataPtr->suggests, child);
+		 }
+		 else if (name == "freshen") {
+		   prim.parseDependencyEntries(& dataPtr->freshen, child);
+		 }
                  else {
                    WAR << "YUM <pattern> contains the unknown element <" << name << "> "
                      << _helper.positionInfo(child) << ", skipping" << endl;
@@ -87,59 +115,6 @@ namespace zypp {
              }
         return dataPtr;
       } /* end process */
-      
-      void YUMPatternParser::parsePatternlist(YUMPatternData_Ptr dataPtr,
-                                                xmlNodePtr node)
-      {
-        assert(dataPtr);
-        assert(node);
-        
-        for (xmlNodePtr child = node->children;
-             child != 0;
-             child = child ->next) {
-               if (_helper.isElement(child)) {
-                 string name = _helper.name(child);
-                 if (name == "metapkg" || name == "patternreq") {
-                   dataPtr->patternlist.push_back
-                     (MetaPkg(_helper.attribute(child,"type"),
-                              _helper.content(child)));
-                 }
-                 else {
-                   WAR << "YUM <patternlist> contains the unknown element <" << name << "> "
-                     << _helper.positionInfo(child) << ", skipping" << endl;
-                 }
-               }
-             }
-      }
-      
-      
-      void YUMPatternParser::parsePackageList(YUMPatternData_Ptr dataPtr,
-                                                  xmlNodePtr node)
-      {
-        assert(dataPtr);
-        assert(node);
-        
-        for (xmlNodePtr child = node->children;
-             child != 0;
-             child = child ->next) {
-               if (_helper.isElement(child)) {
-                 string name = _helper.name(child);
-                 if (name == "packagereq") {
-                 dataPtr->packageList.push_back
-                   (PackageReq(_helper.attribute(child,"type"),
-                               _helper.attribute(child,"epoch"),
-                               _helper.attribute(child,"ver"),
-                               _helper.attribute(child,"rel"),
-                               _helper.content(child)));
-                 }
-                 else {
-                   WAR << "YUM <packagelist> contains the unknown element <" << name << "> "
-                     << _helper.positionInfo(child) << ", skipping" << endl;
-                 }
-               }
-             }
-      }
-      
       
       
       YUMPatternParser::YUMPatternParser(istream &is, const string &baseUrl)
