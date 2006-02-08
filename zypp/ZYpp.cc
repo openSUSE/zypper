@@ -69,8 +69,8 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  SourceFeed_Ref ZYpp::sourceFeed() const
-  { return _pimpl->sourceFeed(); }
+  //SourceFeed_Ref ZYpp::sourceFeed() const
+  //{ return _pimpl->sourceFeed(); }
 
   void ZYpp::addResolvables (const ResStore& store, bool installed)
   {

@@ -59,7 +59,7 @@ namespace zypp
     ResPoolProxy poolProxy() const;
 
     /**  */
-    SourceFeed_Ref sourceFeed() const;
+    //SourceFeed_Ref sourceFeed() const;
 
     void addResolvables (const ResStore& store, bool installed = false);
 
@@ -81,9 +81,7 @@ namespace zypp
      */
     void finishTarget();
 
-    /**
-     *
-     */
+    /** */
     Resolver_Ptr resolver() const;
 
   protected:

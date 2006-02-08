@@ -16,6 +16,7 @@ baseinclude_HEADERS =	\
 	Functional.h	\
 	Iterator.h	\
 	Logger.h	\
+	LogControl.h	\
 	\
 	Fd.h		\
 	KindOf.h	\
@@ -36,7 +37,7 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_base.la
 ## ##################################################
 
 lib@PACKAGE@_base_la_SOURCES =	\
-	Logger.cc	\
+	LogControl.cc	\
 	Exception.cc	\
 	Fd.cc		\
 	Gettext.cc	\

@@ -46,6 +46,8 @@ namespace zypp
     ResPool accessor() const
     { return ResPool( _pimpl.getPtr() ); }
 
+    /** \todo Speedup by using a data mamaber invaidated only
+     * whenever the pool content changes */
     ResPoolProxy proxy() const
     { return ResPoolProxy( accessor() ); }
 
