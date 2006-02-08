@@ -38,8 +38,6 @@ using namespace zypp;
 using solver::detail::ResolverInfo_Ptr;
 using solver::detail::ResolverContext_Ptr;
 
-typedef std::set<PoolItem_Ref> PoolItemSet;
-
 //-----------------------------------------------------------------------------
 
 bool
