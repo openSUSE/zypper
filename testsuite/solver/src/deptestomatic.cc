@@ -1210,7 +1210,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
                 RESULT << "Wrong solution number (0-" << solutionCounter-1 << ")" <<endl;
             } else {
                 // resolve and check it again
-                if (resolver->resolveDependencies (established) == true) {
+                if (resolver->resolveDependencies (NULL) == true) {
                     RESULT << "No problems so far" << endl;
                 }
                 else {
@@ -1240,7 +1240,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	resolver->resolvePool();
     else
 	resolver->resolveDependencies (established);
-
+    
     report_solutions (resolver, instorder);
 }
 
