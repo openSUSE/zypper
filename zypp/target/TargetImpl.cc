@@ -125,11 +125,12 @@ namespace zypp
       commit (to_uninstall);
 
       if (medianr == 0) {			// commit all
-	commit( to_install );
-	commit( to_srcinstall );
+	remaining_r = commit( to_install );
+	srcremaining_r = commit( to_srcinstall );
       }
       else {
 	PoolItemList current_install;
+	PoolItemList current_srcinstall;
 
 	for (PoolItemList::iterator it = to_install.begin(); it != to_install.end(); ++it) {
 	    Resolvable::constPtr res( it->resolvable() );
@@ -144,7 +145,10 @@ namespace zypp
 		current_install.push_back( *it );
 	    }
 	}
-	for (PoolItemList::iterator it = to_install.begin(); it != to_install.end(); ++it) {
+	PoolItemList bad = commit (current_install);
+	remaining_r.insert(remaining_r.end(), bad.begin(), bad.end());
+
+	for (PoolItemList::iterator it = to_srcinstall.begin(); it != to_srcinstall.end(); ++it) {
 	    Resolvable::constPtr res( it->resolvable() );
 	    Package::constPtr pkg( asKind<Package>(res) );
 	    if (pkg
@@ -154,18 +158,22 @@ namespace zypp
 		srcremaining_r.push_back( *it );
 	    }
 	    else {
-		current_install.push_back( *it );
+		current_srcinstall.push_back( *it );
 	    }
 	}
-	commit (current_install);
+	bad = commit (current_srcinstall);
+	srcremaining_r.insert(remaining_r.end(), bad.begin(), bad.end());
       }
 
       return;
     }
 
 
-    void TargetImpl::commit(const PoolItemList & items_r)
+    PoolItemList
+    TargetImpl::commit( const PoolItemList & items_r)
     {
+      PoolItemList remaining;
+
       MIL << "TargetImpl::commit(<list>)" << endl;
       for (PoolItemList::const_iterator it = items_r.begin();
 	it != items_r.end(); it++)
@@ -182,6 +190,7 @@ namespace zypp
     	    RpmInstallPackageReceiver progress(it->resolvable());
 	    
 	    progress.connect();
+	    bool success = true;
 
 	    try {
 		progress.tryLevel( target::rpm::InstallResolvableReport::RPM );
@@ -208,12 +217,15 @@ namespace zypp
 			    p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : (rpm::RpmDb::RPMINST_NODEPS|rpm::RpmDb::RPMINST_FORCE));
 		    }
 		    catch (Exception & excpt_r) {
-			progress.disconnect();
-			ZYPP_RETHROW(excpt_r);
+			remaining.push_back( *it );
+			success = false;
+			ZYPP_CAUGHT(excpt_r);
 		    }
 		}
 	    }
-	      
+	    if (success) {
+		it->status().setStatus( ResStatus::installed );
+	    }
 	    progress.disconnect();
 
 	  }
@@ -232,13 +244,14 @@ namespace zypp
 		rpm().removePackage(p, rpm::RpmDb::RPMINST_NODEPS);
 	    }
 	    progress.disconnect();
+	    it->status().setStatus( ResStatus::uninstalled );
 	  }
 
-	  it->status().setStatus( ResStatus::uninstalled );
-	  MIL << "Successful remove, " << *it << " is now uninstalled " << endl;
 	}
 #warning FIXME other resolvables
       }
+
+      return remaining;
 
     }
 

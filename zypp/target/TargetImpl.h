@@ -74,8 +74,9 @@ namespace zypp
 	  media > 0 means limit commits to this media */
       void commit( ResPool pool_r, unsigned int medianr, PoolItemList & errors_r, PoolItemList & remaining_r, PoolItemList & srcremaining_r );
 
-      /** Commit ordered changes */
-      void commit( const PoolItemList & items_r );
+      /** Commit ordered changes
+	  return uncommitted ones (due to error) */
+      PoolItemList commit( const PoolItemList & items_r );
 
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const
