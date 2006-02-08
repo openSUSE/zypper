@@ -75,7 +75,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     CapSet _extra_caps;
     CapSet _extra_conflicts;
 
-    //typedef std::map<PoolItem_Ref,Capability> IgnoreMap;
+    //typedef std::multimap<PoolItem_Ref,Capability> IgnoreMap;
 
     // These conflict should be ignored of the concering item
     IgnoreMap _ignoreConflicts;
