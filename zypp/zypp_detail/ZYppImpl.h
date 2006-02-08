@@ -46,6 +46,9 @@ namespace zypp
       ResPool pool() const
       { return _pool.accessor(); }
 
+      ResPoolProxy poolProxy() const
+      { return _pool.proxy(); }
+
       /** */
       SourceFeed_Ref sourceFeed() const
       { return _sourceFeed; }

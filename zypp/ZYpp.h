@@ -31,6 +31,7 @@ namespace zypp
 
   class ZYppFactory;
   class ResPool;
+  class ResPoolProxy;
   class SourceFeed_Ref;
   class ResStore;
 
@@ -48,11 +49,17 @@ namespace zypp
 
   public:
 
-    /**  */
-    SourceFeed_Ref sourceFeed() const;
+    /** Pool of ResStatus for individual ResObjetcs. */
+    ResPool pool() const;
+
+    /** Pool of ui::Selectable.
+     * Based on the ResPool, ui::Selectable groups ResObjetcs of
+     * same kind and name.
+    */
+    ResPoolProxy poolProxy() const;
 
     /**  */
-    ResPool pool() const;
+    SourceFeed_Ref sourceFeed() const;
 
     void addResolvables (const ResStore& store, bool installed = false);
 
@@ -73,7 +80,7 @@ namespace zypp
      * \throws Exception
      */
     void finishTarget();
-    
+
     /**
      *
      */

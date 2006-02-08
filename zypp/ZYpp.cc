@@ -54,11 +54,11 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  SourceFeed_Ref ZYpp::sourceFeed() const
-  { return _pimpl->sourceFeed(); }
-
   ResPool ZYpp::pool() const
   { return _pimpl->pool(); }
+
+  ResPoolProxy ZYpp::poolProxy() const
+  { return _pimpl->poolProxy(); }
 
   Resolver_Ptr ZYpp::resolver() const
   { return _pimpl->resolver(); }
@@ -68,6 +68,9 @@ namespace zypp
   // Forward to Impl:
   //
   ///////////////////////////////////////////////////////////////////
+
+  SourceFeed_Ref ZYpp::sourceFeed() const
+  { return _pimpl->sourceFeed(); }
 
   void ZYpp::addResolvables (const ResStore& store, bool installed)
   {

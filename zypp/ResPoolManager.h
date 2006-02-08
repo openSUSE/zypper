@@ -15,6 +15,7 @@
 #include <iosfwd>
 
 #include <zypp/ResPool.h>
+#include <zypp/ResPoolProxy.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -44,6 +45,9 @@ namespace zypp
 
     ResPool accessor() const
     { return ResPool( _pimpl.getPtr() ); }
+
+    ResPoolProxy proxy() const
+    { return ResPoolProxy( accessor() ); }
 
   public:
     /**  */
