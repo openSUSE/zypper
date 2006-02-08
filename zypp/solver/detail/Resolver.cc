@@ -142,7 +142,17 @@ Resolver::addSubscribedSource (Source_Ref source)
 void
 Resolver::addPoolItemToInstall (PoolItem_Ref item)
 {
-    _items_to_install.push_back (item);
+    bool found = false;
+    for (PoolItemList::const_iterator iter = _items_to_remove.begin();
+	 iter != _items_to_remove.end(); iter++) {
+	if (*iter == item) {
+	    _items_to_remove.remove(*iter);
+	    found = true;
+	    break;
+	}
+    }
+    if (!found)
+	_items_to_install.push_back (item);
 }
 
 
@@ -158,7 +168,17 @@ Resolver::addPoolItemsToInstallFromList (PoolItemList & rl)
 void
 Resolver::addPoolItemToRemove (PoolItem_Ref item)
 {
-    _items_to_remove.push_back (item);
+    bool found = false;
+    for (PoolItemList::const_iterator iter = _items_to_install.begin();
+	 iter != _items_to_install.end(); iter++) {
+	if (*iter == item) {
+	    _items_to_install.remove(*iter);
+	    found = true;
+	    break;
+	}
+    }
+    if (!found)
+	_items_to_remove.push_back (item);
 }
 
 
@@ -417,6 +437,14 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
     MIL << "Resolver::resolveDependencies()" << endl;
 
+    _pending_queues.clear();
+    _pruned_queues.clear();
+    _complete_queues.clear();
+    _deferred_queues.clear();
+    _invalid_queues.clear();
+    _valid_solution_count = 0;
+    _best_context = NULL;    
+
 #warning local items disabled
 #if 0
     bool have_local_items = false;
@@ -464,7 +492,6 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     for (QueueItemList::const_iterator iter = _initial_items.begin(); iter != _initial_items.end(); iter++) {
 	initial_queue->addItem (*iter);
     }
-    _initial_items.clear();
 
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
 	PoolItem_Ref r = *iter;
@@ -481,22 +508,18 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 #endif
 	initial_queue->addPoolItemToInstall (r);
     }
-    _items_to_install.clear();
 
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
 	initial_queue->addPoolItemToRemove (*iter, true /* remove-only mode */);
     }
-    _items_to_remove.clear();
 
     for (PoolItemList::const_iterator iter = _items_to_verify.begin(); iter != _items_to_verify.end(); iter++) {
 	initial_queue->addPoolItemToVerify (*iter);
     }
-    _items_to_verify.clear();
 
     for (PoolItemList::const_iterator iter = _items_to_establish.begin(); iter != _items_to_establish.end(); iter++) {
 	initial_queue->addPoolItemToEstablish (*iter);
     }
-    _items_to_establish.clear();
 
     for (CapSet::const_iterator iter = _extra_caps.begin(); iter != _extra_caps.end(); iter++) {
 	initial_queue->addExtraCapability (*iter);
@@ -663,8 +686,12 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
 bool
 Resolver::resolvePool ()
 {
-
+    
     CollectTransact info (*this);
+    
+    // cleanup before next run
+    reset();
+    
 #if 1
     MIL << "Resolver::resolvePool()" << endl;
     MIL << "Pool before resolve" << endl;

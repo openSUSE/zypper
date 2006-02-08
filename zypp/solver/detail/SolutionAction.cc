@@ -138,13 +138,22 @@ TransactionSolutionAction::execute(Resolver & resolver) const
     switch (action()) {
 	case KEEP:
 	    ret = _item.status().setTransact (false, ResStatus::USER);
+	    // this is only needed, if the internal Resolver.h will
+	    // be used by testcases
+	    resolver.addPoolItemToInstall (_item);	   
 	    break;
 	case INSTALL:
 	case UPDATE:
 	    _item.status().setToBeInstalled (ResStatus::USER);
+	    // this is only needed, if the internal Resolver.h will
+	    // be used by testcases
+	    resolver.addPoolItemToInstall (_item);	    
 	    break;
 	case REMOVE:
 	    _item.status().setToBeUninstalled (ResStatus::USER);
+	    // this is only needed, if the internal Resolver.h will
+	    // be used by testcases
+	    resolver.addPoolItemToRemove (_item);
 	    break;
 	case UNLOCK:
 	    ERR << "Not implemented yet" << endl;
