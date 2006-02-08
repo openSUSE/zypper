@@ -51,7 +51,6 @@ MediaAccess::MediaAccess ()
 // destructor
 MediaAccess::~MediaAccess()
 {
-  DBG << *this << endl;
   close(); // !!! make sure handler gets properly deleted.
 }
 
