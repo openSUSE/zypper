@@ -620,7 +620,7 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
 	bool by_solver = status.isBySolver();
 
 	if (by_solver) {
-	    item.status().setNoTransact(ResStatus::SOLVER);// clear any solver/establish transactions
+	    item.status().setTransact(false, ResStatus::SOLVER);// clear any solver/establish transactions
 	    return true;				// back out here, dont re-queue former solver result
 	}
 

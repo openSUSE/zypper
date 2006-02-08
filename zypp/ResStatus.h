@@ -210,32 +210,11 @@ namespace zypp
     // The may functions checks only, if the action would return true
     // if it is called.
 
-    bool setNoTransact (TransactByValue causer)
-    {
-	if (!isGreaterThan<TransactByField>( causer )) {
-	    setTransact (false, causer);
-	    fieldValueAssign<TransactDetailField>(0);
-	    return true;
-	} else if (!transacts()) {
-	    return true; // is already set
-	} else {
-	    return false;
-	}
-    }
-
-    bool maySetNoTransact (TransactByValue causer)
-    {
-	bit::BitField<FieldType> savBitfield = _bitfield;
-	bool ret = setNoTransact (causer);
-	_bitfield = savBitfield;
-	return ret;
-    }
-
     bool setTransact (bool val_r, TransactByValue causer)
     {
 	if (!isGreaterThan<TransactByField>( causer )) {
 	    fieldValueAssign<TransactField>( val_r ? TRANSACT : KEEP_STATE );
-	    fieldValueAssign<TransactByField>( causer );			// remember the causer on set
+	    fieldValueAssign<TransactByField>( causer );			// remember the causer
 	    return true;
 	} else if (fieldValueIs<TransactField>(val_r ? TRANSACT : KEEP_STATE)) {
 	    return true; // is already set
@@ -384,8 +363,8 @@ namespace zypp
     static const ResStatus toBeUninstalledSoft;
     static const ResStatus toBeUninstalledDueToUnlink;
     static const ResStatus toBeUninstalledDueToObsolete;
-    static const ResStatus installed;	// just for testsuite!
-    static const ResStatus uninstalled;	// just for testsuite!
+    static const ResStatus installed;	// installed, status after successful target 'install' commit
+    static const ResStatus uninstalled;	// uninstalled, status after successful target 'uninstall' commit
     static const ResStatus satisfied;	// uninstalled, satisfied
     static const ResStatus complete;	// installed, satisfied
     static const ResStatus unneeded;	// uninstalled, unneeded

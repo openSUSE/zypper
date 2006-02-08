@@ -230,7 +230,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
     PoolItem_Ref item = *it;
     PoolItem_Ref candidate;
     PoolItem_Ref installed;
-    item.status().setNoTransact(ResStatus::APPL_HIGH);
 
     if ( item.status().isToBeUninstalled() ) {
       MIL << "doUpgrade available: SKIP to delete " << item << endl;

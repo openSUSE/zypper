@@ -137,7 +137,7 @@ TransactionSolutionAction::execute(Resolver & resolver) const
     bool ret = true;
     switch (action()) {
 	case KEEP:
-	    ret = _item.status().setNoTransact (ResStatus::USER);
+	    ret = _item.status().setTransact (false, ResStatus::USER);
 	    break;
 	case INSTALL:
 	case UPDATE:

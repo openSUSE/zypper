@@ -215,8 +215,8 @@ namespace zypp
 	    progress.disconnect();
 	  }
 
-	  MIL << "Successful, resetting transact for " << *it << endl;
-	  it->status().setNoTransact(ResStatus::USER);
+	  it->status().setStatus( ResStatus::uninstalled )
+	  MIL << "Successful remove, " << *it << " is now uninstalled " << endl;
 	}
 #warning FIXME other resolvables
       }
