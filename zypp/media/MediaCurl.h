@@ -59,7 +59,7 @@ class MediaCurl : public MediaHandler {
     MediaCurl( const Url &      url_r,
 	       const Pathname & attach_point_hint_r );
 
-    virtual ~MediaCurl() { release(); }
+    virtual ~MediaCurl() { try { release(); } catch(...) {} }
 
     static void setCookieFile( const Pathname & );
 

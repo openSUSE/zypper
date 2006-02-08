@@ -26,31 +26,31 @@ namespace zypp {
      * @see MediaHandler
      **/
     class MediaCD : public MediaHandler {
-    
+
       private:
-    
+
         typedef std::list<std::string> DeviceList;
         /** list of devices to try to mount */
         DeviceList _devices;
-    
+
         /** number of last successful mounted device in list */
         int        _lastdev;
 
         static bool openTray( const std::string & device_r );
         static bool closeTray( const std::string & device_r );
-    
+
       protected:
-    
+
         MEDIA_HANDLER_API;
-    
+
         virtual void forceEject();
-    
+
       public:
-    
+
         MediaCD( const Url &      url_r,
 		 const Pathname & attach_point_hint_r );
-    
-        virtual ~MediaCD() { release(); }
+
+        virtual ~MediaCD() { try { release(); } catch(...) {} }
     };
 
 ///////////////////////////////////////////////////////////////////

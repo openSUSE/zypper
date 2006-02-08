@@ -78,7 +78,11 @@ MediaHandler::MediaHandler ( const Url &      url_r,
 //
 MediaHandler::~MediaHandler()
 {
-  removeAttachPoint();
+  try
+    {
+      removeAttachPoint();
+    }
+  catch(...) {}
 }
 
 ///////////////////////////////////////////////////////////////////

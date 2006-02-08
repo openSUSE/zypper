@@ -29,31 +29,31 @@ namespace zypp {
      * @see MediaHandler
      **/
     class MediaSMB : public MediaHandler {
-    
+
     private:
-    
+
       /**
        * vfstype for mount. This is either "smbfs"
        * or "cifs" (rewritten by MediaCIFS).
        **/
       const char* _vfstype;
-    
+
     protected:
-    
+
       MEDIA_HANDLER_API;
-    
+
       /**
        * MediaCIFS rewrites the vfstype to "cifs"
        * within it's constructor.
        **/
       void mountAsCIFS() { _vfstype = "cifs"; }
-    
+
     public:
-    
+
       MediaSMB( const Url&       url_r,
 		const Pathname & attach_point_hint_r );
-    
-      virtual ~MediaSMB() { release(); }
+
+      virtual ~MediaSMB() { try { release(); } catch(...) {} }
     };
 
 ///////////////////////////////////////////////////////////////////A

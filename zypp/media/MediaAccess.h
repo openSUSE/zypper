@@ -366,6 +366,7 @@ namespace zypp {
 		ZYPP_CAUGHT(excpt_r);
 		INT << "Exception raised while releasing file" << std::endl;
 	      }
+              catch(...) {} // No exception from dtor!
 	    }
 	  }
 

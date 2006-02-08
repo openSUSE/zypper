@@ -51,7 +51,11 @@ MediaAccess::MediaAccess ()
 // destructor
 MediaAccess::~MediaAccess()
 {
-  close(); // !!! make sure handler gets properly deleted.
+  try
+    {
+      close(); // !!! make sure handler gets properly deleted.
+    }
+  catch(...) {}
 }
 
 AttachedMedia

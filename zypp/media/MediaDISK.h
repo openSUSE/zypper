@@ -25,24 +25,24 @@ namespace zypp {
      * @see MediaHandler
      **/
     class MediaDISK : public MediaHandler {
-    
+
       private:
-    
+
         unsigned long _mountflags;
-    
+
         std::string _device;
         std::string _filesystem;
-    
+
       protected:
-    
+
         MEDIA_HANDLER_API;
-    
+
       public:
-    
+
         MediaDISK( const Url &      url_r,
 		   const Pathname & attach_point_hint_r );
-    
-        virtual ~MediaDISK() { release(); }
+
+        virtual ~MediaDISK() { try { release(); } catch(...) {} }
     };
 
 ///////////////////////////////////////////////////////////////////

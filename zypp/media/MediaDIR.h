@@ -20,25 +20,25 @@ namespace zypp {
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : MediaDIR
-    
+
     /**
      * @short Implementation class for DIR MediaHandler
      * @see MediaHandler
      **/
     class MediaDIR : public MediaHandler {
-    
+
       protected:
-    
+
 	MEDIA_HANDLER_API;
-    
+
       public:
-    
+
         MediaDIR( const Url &      url_r,
 		  const Pathname & attach_point_hint_r );
-    
-        virtual ~MediaDIR() { release(); }
+
+        virtual ~MediaDIR() { try { release(); } catch(...) {} }
     };
-    
+
     ///////////////////////////////////////////////////////////////////
 
   } // namespace media
