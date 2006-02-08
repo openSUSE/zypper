@@ -59,13 +59,13 @@ namespace zypp
         /** */
         virtual ByteCount size() const;
         /** */
-	virtual bool YUMPatternImpl::isDefault() const;
+	virtual bool isDefault() const;
         /** */
-	virtual std::string YUMPatternImpl::category() const;
+	virtual std::string category() const;
         /** */
-	virtual Pathname YUMPatternImpl::icon() const;
+	virtual Pathname icon() const;
         /** */
-	virtual Pathname YUMPatternImpl::script() const;
+	virtual Pathname script() const;
 
 
       protected:
