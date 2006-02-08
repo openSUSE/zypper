@@ -41,7 +41,7 @@
 #include "XMLFilesBackend.h"
 #include "serialize.h"
 
-#include "md5.hh"
+#include "md5.h"
 
 #define ZYPP_DB_DIR "/var/lib/zypp_db"
 
@@ -700,6 +700,17 @@ XMLFilesBackend::storedSources() const
 
 }
 
+static std::string hexDigest(const md5_byte_t *digest)
+{
+  char s[33];
+  int i;
+  for (i=0; i<16; i++)
+    sprintf(s+i*2, "%02x", digest[i]);
+
+  s[32]='\0';
+  return std::string(s);
+}
+
 void
 XMLFilesBackend::storeSource(const PersistentStorage::SourceData &data)
 {
@@ -711,16 +722,22 @@ XMLFilesBackend::storeSource(const PersistentStorage::SourceData &data)
   {
     ZYPP_THROW(Exception("Cant save source with empty alias"));
   }
+  //MD5 md5(ss);
+  md5_state_t state;
+  md5_byte_t digest[16];
 
-  stringstream ss(data.alias);
-  MD5 md5(ss);
+  md5_init(&state);
+  /* Append a string to the message. */
+  std::string alias = data.alias;
+  md5_append(&state, (md5_byte_t*) alias.c_str(), alias.size());  /* Finish the message and return the digest. */
+  md5_finish(&state, digest);
   
   //DBG << std::endl << xml << std::endl;
   std::ofstream file;
   //DBG << filename << std::endl;
   try
   {
-    std::string full_path = (source_p / md5.hex_digest()).string();
+    std::string full_path = (source_p / hexDigest(digest)).string();
     
     file.open(full_path.c_str());
     file << xml;
