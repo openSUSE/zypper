@@ -105,53 +105,62 @@ namespace zypp
     }
 
 
-    void TargetImpl::commit(ResPool pool_r, int medianr, PoolItemList & errors_r, PoolItemList & remaining_r, PoolItemList & srcremaining_r)
+    void TargetImpl::commit(ResPool pool_r, unsigned int medianr, PoolItemList & errors_r, PoolItemList & remaining_r, PoolItemList & srcremaining_r)
     {
       MIL << "TargetImpl::commit(<pool>, " << medianr << ")" << endl;
 
+      errors_r.clear();
+      remaining_r.clear();
+      srcremaining_r.clear();
+
       PoolItemList to_uninstall;
       PoolItemList to_install;
-      PoolItemList installed;
-      for (ResPool::const_iterator it = pool_r.begin();
-           it != pool_r.end(); it++)
-      {
-	if (it->status().isToBeInstalled())
-	{
-	  to_install.push_back(*it);
-	}
-	else if (it->status().isToBeUninstalled()
-		 && !it->status().isToBeUninstalledDueToObsolete())	// leave out obsoletes
-	{
-	  to_uninstall.push_back(*it);
-	}
-	else if (it->status().staysInstalled())
-	{
-	  installed.push_back(*it);
-	}
+      PoolItemList to_srcinstall;
+      getResolvablesToInsDel( pool_r, to_uninstall, to_install, to_srcinstall );
+
+      if ( medianr ) {
+	MIL << "Restrict to media number " << medianr << endl;
       }
 
-      if (to_uninstall.size() > 0 ) {
+      commit (to_uninstall);
 
-	// sort delete list...
+      if (medianr == 0) {			// commit all
+	commit( to_install );
+	commit( to_srcinstall );
+      }
+      else {
+	PoolItemList current_install;
 
-	InstallOrder order(pool_r, to_uninstall, installed);
-	order.init();
-	const PoolItemList & uninstallorder(order.getTopSorted());
-
-	to_uninstall.clear();
-	for (PoolItemList::const_reverse_iterator it = uninstallorder.rbegin(); it != uninstallorder.rend(); ++it ) {
-	    to_uninstall.push_back (*it);
+	for (PoolItemList::iterator it = to_install.begin(); it != to_install.end(); ++it) {
+	    Resolvable::constPtr res( it->resolvable() );
+	    Package::constPtr pkg( asKind<Package>(res) );
+	    if (pkg
+		&& medianr != pkg->mediaId())								// check medianr for packages only
+	    {
+		MIL << "Package " << *pkg << ", wrong media " << pkg->mediaId() << endl;
+		remaining_r.push_back( *it );
+	    }
+	    else {
+		current_install.push_back( *it );
+	    }
 	}
-
-	// first uninstall what is to be uninstalled
-	commit(to_uninstall);
+	for (PoolItemList::iterator it = to_install.begin(); it != to_install.end(); ++it) {
+	    Resolvable::constPtr res( it->resolvable() );
+	    Package::constPtr pkg( asKind<Package>(res) );
+	    if (pkg
+		&& medianr != pkg->mediaId())								// check medianr for packages only
+	    {
+		MIL << "Package " << *pkg << ", wrong media " << pkg->mediaId() << endl;
+		srcremaining_r.push_back( *it );
+	    }
+	    else {
+		current_install.push_back( *it );
+	    }
+	}
+	commit (current_install);
       }
 
-      // now install what is to be installed
-      InstallOrder order(pool_r, to_install, installed);
-      order.init();
-      const PoolItemList & installorder(order.getTopSorted());
-      commit(installorder);
+      return;
     }
 
 
