@@ -197,6 +197,13 @@ std::string toXML( const Selection::constPtr &obj )
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
   out << "<groups  xmlns=\"http://linux.duke.edu/metadata/groups\">" << std::endl;
+  if (obj == 0L)
+  {
+    ERR << "Null selection" << std::endl;
+    out << "</groups>" << std::endl;
+    return out.str();
+  }
+
   out << "  <group>" << std::endl;
   out << "    <groupid>" << obj->name() << "</groupid>" << std::endl;
   out << "    <name>" << obj->name() << "</name>" << std::endl;
@@ -205,20 +212,23 @@ std::string toXML( const Selection::constPtr &obj )
 
   out << "    <grouplist>" << std::endl;
   //recommended selections
-  std::set<std::string>::const_iterator it = obj->recommends().begin();
-  for (; it != obj->recommends().end(); ++it)
+  std::set<std::string> rec_sel = obj->recommends();
+  std::set<std::string>::const_iterator it;
+  for (it = rec_sel.begin(); it != rec_sel.end(); ++it)
     out << "       <metapkg type=\"optional\">" << *it << "</metapkg>" << std::endl;
 
-  it = obj->suggests().begin();
-  for (; it != obj->suggests().end(); ++it)
+  std::set<std::string> sug_sel = obj->suggests();
+  it = sug_sel.begin();
+  for (; it != sug_sel.end(); ++it)
     out << "       <metapkg type=\"optional\">" << *it << "</metapkg>" << std::endl;
 
   out << "    </grouplist>" << std::endl;
 
   out << "    <packagelist>" << std::endl;
 
-  it = obj->install_packages().begin();
-  for (; it != obj->install_packages().end(); ++it)
+  std::set<std::string> ins_pkg = obj->install_packages();
+  it = ins_pkg.begin();
+  for (; it != ins_pkg.end(); ++it)
   {
     out << "       <packagereq type=\"optional\">" << *it << "</packagereq>" << std::endl;
   }
