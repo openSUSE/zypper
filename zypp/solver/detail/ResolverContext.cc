@@ -136,6 +136,7 @@ _XDEBUG( "[" << context << "]:" << it->second );
 	}
 	context = context->_parent;			// N: go up the chain
     }
+#if 0
     ResStatus status;
     if (item.status().isInstalled())
 	status = ResStatus::installed;
@@ -143,8 +144,12 @@ _XDEBUG( "[" << context << "]:" << it->second );
 	status = ResStatus::uninstalled;
 
     _last_checked_status = status;
-_XDEBUG( "[NULL]:" << status );
-    return status;				// Not part of context, return Pool status
+    _XDEBUG( "[NULL]:" << status );    
+#else
+    _last_checked_status = item.status();    
+#endif
+
+    return _last_checked_status;				// Not part of context, return Pool status
 }
 
 
