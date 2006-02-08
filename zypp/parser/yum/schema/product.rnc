@@ -71,7 +71,6 @@ element ns1:product {
        attribute epoch { xsd:nonNegativeInteger },
        attribute ver { text },
        attribute rel { text }?)?,
-      attribute pre { "1" | "0" }?,
       empty
     }*
   }?,
@@ -83,7 +82,6 @@ element ns1:product {
        attribute epoch { xsd:nonNegativeInteger },
        attribute ver { text },
        attribute rel { text }?)?,
-      attribute pre { "1" | "0" }?,
       empty
     }*
   }?

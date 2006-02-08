@@ -116,8 +116,7 @@ suggests =
         shared-entry-attributes,
         attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" }
       )?,
-      attribute pre { "1" | "0" }?,
-        empty
+      empty
       }*
 
 element-recommends =
@@ -130,8 +129,7 @@ recommends =
         shared-entry-attributes,
         attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" }
       )?,
-      attribute pre { "1" | "0" }?,
-        empty
+      empty
       }*
 
 element-file =

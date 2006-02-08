@@ -221,14 +221,6 @@
               <attribute name="rel"/>
             </optional>
           </optional>
-          <optional>
-            <attribute name="pre">
-              <choice>
-                <value>1</value>
-                <value>0</value>
-              </choice>
-            </attribute>
-          </optional>
           <empty/>
         </element>
       </zeroOrMore>
@@ -267,14 +259,6 @@
             <optional>
               <attribute name="rel"/>
             </optional>
-          </optional>
-          <optional>
-            <attribute name="pre">
-              <choice>
-                <value>1</value>
-                <value>0</value>
-              </choice>
-            </attribute>
           </optional>
           <empty/>
         </element>

@@ -211,14 +211,6 @@
             </choice>
           </attribute>
         </optional>
-        <optional>
-          <attribute name="pre">
-            <choice>
-              <value>1</value>
-              <value>0</value>
-            </choice>
-          </attribute>
-        </optional>
         <empty/>
       </element>
     </zeroOrMore>
@@ -241,14 +233,6 @@
               <value>GE</value>
               <value>LT</value>
               <value>GT</value>
-            </choice>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="pre">
-            <choice>
-              <value>1</value>
-              <value>0</value>
             </choice>
           </attribute>
         </optional>
