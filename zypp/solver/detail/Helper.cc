@@ -116,13 +116,17 @@ class LookForUpdate : public resfilter::OnCapMatchCallbackFunctor, public resfil
 
     bool operator()( PoolItem_Ref provider )
     {
-	uninstalled = provider;
-	return false;				// stop here, we found it
+	if (!uninstalled							// none yet
+	    || uninstalled->edition().compare( provider->edition() ) < 0)	// or a better one
+	{
+	    uninstalled = provider;						// store 
+	}
+	return true;
     }
 };
 
 
-// just find installed item with same kind/name as item
+// just find best (according to edition) uninstalled item with same kind/name as item
 // *DOES* check edition
 
 PoolItem_Ref
