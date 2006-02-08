@@ -23,7 +23,10 @@
 #include "zypp/media/MediaAccess.h"
 #include "zypp/Target.h"
 #include "zypp/target/rpm/RpmDb.h"
+#include "zypp/target/store/PersistentStorage.h"
 #include "zypp/solver/detail/Types.h"
+
+#define STORAGE_DISABLED
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -100,6 +103,9 @@ namespace zypp
       Pathname _root;
       /** RPM database */
       rpm::RpmDb _rpm;
+#ifndef STORAGE_DISABLED
+      zypp::storage::PersistentStorage _storage;
+#endif
     private:
       /** Null implementation */
       static TargetImpl_Ptr _nullimpl;

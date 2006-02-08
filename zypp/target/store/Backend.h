@@ -56,25 +56,25 @@ public:
   /**
   * Stores a Resolvable in the active backend.
   */
-  virtual void storeObject( Resolvable::constPtr resolvable )  = 0;
+  virtual void storeObject( ResObject::constPtr resolvable )  = 0;
   /**
   * Deletes a Resolvable from the active backend.
   */
-  virtual void deleteObject( Resolvable::Ptr resolvable ) = 0;
+  virtual void deleteObject( ResObject::constPtr resolvable ) = 0;
 
   /**
   * Query for installed Resolvables.
   */
-  virtual std::list<Resolvable::Ptr> storedObjects() const = 0;
+  virtual std::list<ResObject::Ptr> storedObjects() const = 0;
   /**
   * Query for installed Resolvables of a certain kind
   */
-  virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind) const = 0;
+  virtual std::list<ResObject::Ptr> storedObjects(const Resolvable::Kind) const = 0;
   /**
   * Query for installed Resolvables of a certain kind by name
   * \a partial_match allows for text search.
   */
-  virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false) const = 0;
+  virtual std::list<ResObject::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false) const = 0;
 
 
   /////////////////////////////////////////////////////////

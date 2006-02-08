@@ -66,24 +66,24 @@ public:
   /**
     * Stores a Resolvable in the active backend.
     */
-  virtual void storeObject( Resolvable::constPtr resolvable ) ;
+  virtual void storeObject( ResObject::constPtr resolvable ) ;
   /**
     * Deletes a Resolvable from the active backend.
     */
-  virtual void deleteObject( Resolvable::Ptr resolvable );
+  virtual void deleteObject( ResObject::constPtr resolvable );
   /**
     * Deletes a Resolvable from the active backend.
     */
-  virtual std::list<Resolvable::Ptr> storedObjects() const;
+  virtual std::list<ResObject::Ptr> storedObjects() const;
    /**
     * Query for installed Resolvables of a certain kind
     */
-  virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind) const;
+  virtual std::list<ResObject::Ptr> storedObjects(const Resolvable::Kind) const;
   /**
     * Query for installed Resolvables of a certain kind by name
     * \a partial_match allows for text search.
     */
-  virtual std::list<Resolvable::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false) const;
+  virtual std::list<ResObject::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false) const;
 
   /////////////////////////////////////////////////////////
   // SOURCES API
@@ -110,7 +110,7 @@ public:
   /**
     * Directory where the xml file is stored (for the given resolvable)
     */
-  std::string dirForResolvable( Resolvable::constPtr resolvable ) const;
+  std::string dirForResolvable( ResObject::constPtr resolvable ) const;
   /**
     * Directory where the xml file is stored (for the given resolvable kind)
     */
@@ -119,12 +119,12 @@ public:
     * Full path to the xml file for a given resolvable
     * Does not care if the resolvable is yet stored or not
     */
-  std::string fullPathForResolvable( Resolvable::constPtr resolvable ) const;
+  std::string fullPathForResolvable( ResObject::constPtr resolvable ) const;
    /**
     * Full path to the xml file for a given resolvable
     * Does not care if the resolvable is yet stored or not
     */
-  Resolvable::Ptr resolvableFromFile( std::string file_path, Resolvable::Kind kind ) const;
+  ResObject::Ptr resolvableFromFile( std::string file_path, Resolvable::Kind kind ) const;
 
   Patch::Ptr createPatch( const zypp::parser::yum::YUMPatchData & parsed ) const;
   Message::Ptr createMessage( const zypp::parser::yum::YUMPatchMessage & parsed ) const;

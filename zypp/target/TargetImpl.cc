@@ -59,6 +59,9 @@ namespace zypp
     : _root(root_r)
     {
       _rpm.initDatabase(_root);
+#ifndef STORAGE_DISABLED
+      _storage.init(root_r);
+#endif
       MIL << "Initialized target on " << _root << endl;
     }
 
@@ -84,7 +87,18 @@ namespace zypp
       {
         _store.insert(*it);
       }
-      // TODO objects from the XML store
+
+#ifndef STORAGE_DISABLED
+      // resolvables stored in the zypp storage database
+      std::list<ResObject::Ptr> resolvables = _storage.storedObjects();
+      for (std::list<ResObject::Ptr>::iterator it = resolvables.begin();
+           it != resolvables.end();
+           it++)
+      {
+        _store.insert(*it);
+      }
+#endif
+
       return _store;
     }
 
@@ -119,52 +133,53 @@ namespace zypp
       getResolvablesToInsDel( pool_r, to_uninstall, to_install, to_srcinstall );
 
       if ( medianr ) {
-	MIL << "Restrict to media number " << medianr << endl;
+        MIL << "Restrict to media number " << medianr << endl;
       }
 
       commit (to_uninstall);
 
       if (medianr == 0) {			// commit all
-	remaining_r = commit( to_install );
-	srcremaining_r = commit( to_srcinstall );
+        remaining_r = commit( to_install );
+        srcremaining_r = commit( to_srcinstall );
       }
-      else {
-	PoolItemList current_install;
-	PoolItemList current_srcinstall;
+      else
+      {
+        PoolItemList current_install;
+        PoolItemList current_srcinstall;
 
-	for (PoolItemList::iterator it = to_install.begin(); it != to_install.end(); ++it) {
-	    Resolvable::constPtr res( it->resolvable() );
-	    Package::constPtr pkg( asKind<Package>(res) );
-	    if (pkg
-		&& medianr != pkg->mediaId())								// check medianr for packages only
-	    {
-		MIL << "Package " << *pkg << ", wrong media " << pkg->mediaId() << endl;
-		remaining_r.push_back( *it );
-	    }
-	    else {
-		current_install.push_back( *it );
-	    }
-	}
-	PoolItemList bad = commit (current_install);
-	remaining_r.insert(remaining_r.end(), bad.begin(), bad.end());
+        for (PoolItemList::iterator it = to_install.begin(); it != to_install.end(); ++it)
+        {
+          Resolvable::constPtr res( it->resolvable() );
+          Package::constPtr pkg( asKind<Package>(res) );
+          if (pkg && medianr != pkg->mediaId())								// check medianr for packages only
+          {
+            MIL << "Package " << *pkg << ", wrong media " << pkg->mediaId() << endl;
+            remaining_r.push_back( *it );
+          }
+          else
+          {
+            current_install.push_back( *it );
+          }
+        }
+        PoolItemList bad = commit (current_install);
+        remaining_r.insert(remaining_r.end(), bad.begin(), bad.end());
 
-	for (PoolItemList::iterator it = to_srcinstall.begin(); it != to_srcinstall.end(); ++it) {
-	    Resolvable::constPtr res( it->resolvable() );
-	    Package::constPtr pkg( asKind<Package>(res) );
-	    if (pkg
-		&& medianr != pkg->mediaId())								// check medianr for packages only
-	    {
-		MIL << "Package " << *pkg << ", wrong media " << pkg->mediaId() << endl;
-		srcremaining_r.push_back( *it );
-	    }
-	    else {
-		current_srcinstall.push_back( *it );
-	    }
-	}
-	bad = commit (current_srcinstall);
-	srcremaining_r.insert(remaining_r.end(), bad.begin(), bad.end());
+        for (PoolItemList::iterator it = to_srcinstall.begin(); it != to_srcinstall.end(); ++it)
+        {
+          Resolvable::constPtr res( it->resolvable() );
+          Package::constPtr pkg( asKind<Package>(res) );
+          if (pkg && medianr != pkg->mediaId()) // check medianr for packages only
+          {
+            MIL << "Package " << *pkg << ", wrong media " << pkg->mediaId() << endl;
+            srcremaining_r.push_back( *it );
+          }
+          else {
+            current_srcinstall.push_back( *it );
+          }
+        }
+        bad = commit (current_srcinstall);
+        srcremaining_r.insert(remaining_r.end(), bad.begin(), bad.end());
       }
-
       return;
     }
 
@@ -175,84 +190,111 @@ namespace zypp
       PoolItemList remaining;
 
       MIL << "TargetImpl::commit(<list>)" << endl;
-      for (PoolItemList::const_iterator it = items_r.begin();
-	it != items_r.end(); it++)
+      for (PoolItemList::const_iterator it = items_r.begin(); it != items_r.end(); it++)
       {
-	if (isKind<Package>(it->resolvable()))
-	{
-	  Package::constPtr p = dynamic_pointer_cast<const Package>(it->resolvable());
-	  if (it->status().isToBeInstalled())
-	  {
-	    Pathname localfile = getRpmFile(p);
-	    
+        if (isKind<Package>(it->resolvable()))
+        {
+          Package::constPtr p = dynamic_pointer_cast<const Package>(it->resolvable());
+          if (it->status().isToBeInstalled())
+          {
+            Pathname localfile = getRpmFile(p);
 #warning Exception handling
-	    // create a installation progress report proxy
-    	    RpmInstallPackageReceiver progress(it->resolvable());
-	    
-	    progress.connect();
-	    bool success = true;
+        // create a installation progress report proxy
+            RpmInstallPackageReceiver progress(it->resolvable());
+            progress.connect();
+            bool success = true;
 
-	    try {
-		progress.tryLevel( target::rpm::InstallResolvableReport::RPM );
-		
-		rpm().installPackage(localfile,
-		    p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : 0);
-	    }
-	    catch (Exception & excpt_r) {
-		ZYPP_CAUGHT(excpt_r);
-
-		WAR << "Install failed, retrying with --nodeps" << endl;
-		try {
-		    progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS );
-		    rpm().installPackage(localfile,
-			p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : rpm::RpmDb::RPMINST_NODEPS);
-		}
-		catch (Exception & excpt_r) {
-		    ZYPP_CAUGHT(excpt_r);
-		    WAR << "Install failed again, retrying with --force --nodeps" << endl;
-
-		    try {
-			progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE );
-			rpm().installPackage(localfile,
-			    p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : (rpm::RpmDb::RPMINST_NODEPS|rpm::RpmDb::RPMINST_FORCE));
-		    }
-		    catch (Exception & excpt_r) {
-			remaining.push_back( *it );
-			success = false;
-			ZYPP_CAUGHT(excpt_r);
-		    }
-		}
-	    }
-	    if (success) {
-		it->status().setStatus( ResStatus::installed );
-	    }
-	    progress.disconnect();
-
-	  }
-	  else
-	  {
-    	    RpmRemovePackageReceiver progress(it->resolvable());
-	    
-	    progress.connect();
-
-	    try {
-		rpm().removePackage(p);
-	    }
-	    catch (Exception & excpt_r) {
-		ZYPP_CAUGHT(excpt_r);
-		WAR << "Remove failed, retrying with --nodeps" << endl;
-		rpm().removePackage(p, rpm::RpmDb::RPMINST_NODEPS);
-	    }
-	    progress.disconnect();
-	    it->status().setStatus( ResStatus::uninstalled );
-	  }
-
-	}
-#warning FIXME other resolvables
-      }
-
+            try {
+              progress.tryLevel( target::rpm::InstallResolvableReport::RPM );
+                
+              rpm().installPackage(localfile,
+                  p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : 0);
+            }
+            catch (Exception & excpt_r) {
+              ZYPP_CAUGHT(excpt_r);
+              WAR << "Install failed, retrying with --nodeps" << endl;
+              try {
+                progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS );
+                rpm().installPackage(localfile,
+                p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : rpm::RpmDb::RPMINST_NODEPS);
+              }
+              catch (Exception & excpt_r) 
+              {
+                ZYPP_CAUGHT(excpt_r);
+                WAR << "Install failed again, retrying with --force --nodeps" << endl;
+    
+                try {
+                  progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE );
+                  rpm().installPackage(localfile,
+                      p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : (rpm::RpmDb::RPMINST_NODEPS|rpm::RpmDb::RPMINST_FORCE));
+                }
+                catch (Exception & excpt_r) {
+                  remaining.push_back( *it );
+                  success = false;
+                  ZYPP_CAUGHT(excpt_r);
+                }
+              }
+            }
+            if (success) {
+              it->status().setStatus( ResStatus::installed );
+            }
+            progress.disconnect();
+          }
+          else
+          {
+            RpmRemovePackageReceiver progress(it->resolvable());
+            progress.connect();
+            try {
+              rpm().removePackage(p);
+            }
+            catch (Exception & excpt_r) {
+              ZYPP_CAUGHT(excpt_r);
+              WAR << "Remove failed, retrying with --nodeps" << endl;
+              rpm().removePackage(p, rpm::RpmDb::RPMINST_NODEPS);
+            }
+            progress.disconnect();
+            it->status().setStatus( ResStatus::uninstalled );
+          }
+        }
+#ifndef STORAGE_DISABLED
+        else // other resolvables
+        {
+          if (it->status().isToBeInstalled())
+          { 
+            bool success = false;
+            try
+            {
+              _storage.storeObject(it->resolvable());
+              success = true;
+            }
+            catch (Exception & excpt_r)
+            {
+              ZYPP_CAUGHT(excpt_r);
+              WAR << "Install of Resolvable from storage failed" << endl;
+            }
+            if (success)
+              it->status().setStatus( ResStatus::installed );
+          }
+          else
+          {
+            bool success = false;
+            try
+            {
+              _storage.deleteObject(it->resolvable());
+              success = true;
+            }
+            catch (Exception & excpt_r)
+            {
+              ZYPP_CAUGHT(excpt_r);
+              WAR << "Uninstall of Resolvable from storage failed" << endl;
+            }
+            if (success)
+              it->status().setStatus( ResStatus::uninstalled );
+          }
+        }
+    #endif
+      }   
       return remaining;
-
     }
 
     rpm::RpmDb & TargetImpl::rpm()

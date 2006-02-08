@@ -219,13 +219,13 @@ XMLFilesBackend::dirForResolvableKind( Resolvable::Kind kind ) const
 }
 
 std::string
-XMLFilesBackend::dirForResolvable( Resolvable::constPtr resolvable ) const
+XMLFilesBackend::dirForResolvable( ResObject::constPtr resolvable ) const
 {
   return dirForResolvableKind(resolvable->kind());
 }
 
 std::string
-XMLFilesBackend::fullPathForResolvable( Resolvable::constPtr resolvable ) const
+XMLFilesBackend::fullPathForResolvable( ResObject::constPtr resolvable ) const
 {
   std::string filename;
   // only append edition if there is one
@@ -235,7 +235,7 @@ XMLFilesBackend::fullPathForResolvable( Resolvable::constPtr resolvable ) const
 }
 
 void
-XMLFilesBackend::storeObject( Resolvable::constPtr resolvable )
+XMLFilesBackend::storeObject( ResObject::constPtr resolvable )
 {
   std::string xml = castedToXML(resolvable);
   std::string filename = fullPathForResolvable(resolvable);
@@ -256,7 +256,7 @@ XMLFilesBackend::storeObject( Resolvable::constPtr resolvable )
 }
 
 void
-XMLFilesBackend::deleteObject( Resolvable::Ptr resolvable )
+XMLFilesBackend::deleteObject( ResObject::constPtr resolvable )
 {
   // only remove the file
   std::string filename = fullPathForResolvable(resolvable);
@@ -271,10 +271,10 @@ XMLFilesBackend::deleteObject( Resolvable::Ptr resolvable )
   }
 }
 
-Resolvable::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Resolvable::Kind kind ) const
+ResObject::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Resolvable::Kind kind ) const
 {
   //DBG << "[" << resolvableKindToString( kind, false ) << "] - " << file_path << std::endl;
-  Resolvable::Ptr resolvable;
+  ResObject::Ptr resolvable;
   std::ifstream res_file(file_path.c_str());
   if ( kind == ResTraits<zypp::Patch>::kind )
   {
@@ -338,18 +338,18 @@ Resolvable::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Reso
   return resolvable;
 }
 
-std::list<Resolvable::Ptr>
+std::list<ResObject::Ptr>
 XMLFilesBackend::storedObjects() const
 {
   DBG << std::endl;
-  std::list<Resolvable::Ptr> objects;
+  std::list<ResObject::Ptr> objects;
 
   std::set<Resolvable::Kind>::const_iterator it_kinds;
   for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
   {
     Resolvable::Kind kind = (*it_kinds);
-    std::list<Resolvable::Ptr> objects_for_kind = storedObjects(kind);
-    std::list<Resolvable::Ptr>::iterator it;
+    std::list<ResObject::Ptr> objects_for_kind = storedObjects(kind);
+    std::list<ResObject::Ptr>::iterator it;
     for( it = objects_for_kind.begin(); it != objects_for_kind.end(); ++it)
     {
       //DBG << "adding objects back" << std::endl;
@@ -359,10 +359,10 @@ XMLFilesBackend::storedObjects() const
   return objects;
 }
 
-std::list<Resolvable::Ptr>
+std::list<ResObject::Ptr>
 XMLFilesBackend::storedObjects(const Resolvable::Kind kind) const
 {
-  std::list<Resolvable::Ptr> objects;
+  std::list<ResObject::Ptr> objects;
   std::string dir_path = dirForResolvableKind(kind);
   DBG << "Reading objects of kind " << resolvableKindToString(kind) << " in " << dir_path << std::endl;
   directory_iterator end_iter;
@@ -370,7 +370,7 @@ XMLFilesBackend::storedObjects(const Resolvable::Kind kind) const
   if ( !exists( dir_path ) )
   {
     ERR << "path " << dir_path << " does not exists. Required to read objects of kind " << resolvableKindToString(kind) << std::endl;
-    return std::list<Resolvable::Ptr>();
+    return std::list<ResObject::Ptr>();
   }
 
   for ( directory_iterator dir_itr( dir_path ); dir_itr != end_iter; ++dir_itr )
@@ -382,16 +382,16 @@ XMLFilesBackend::storedObjects(const Resolvable::Kind kind) const
   return objects;
 }
 
-std::list<Resolvable::Ptr>
+std::list<ResObject::Ptr>
 XMLFilesBackend::storedObjects(const Resolvable::Kind kind, const std::string & name, bool partial_match) const
 {
-  std::list<Resolvable::Ptr> result;
-  std::list<Resolvable::Ptr> all;
+  std::list<ResObject::Ptr> result;
+  std::list<ResObject::Ptr> all;
   all = storedObjects(kind);
-  std::list<Resolvable::Ptr>::const_iterator it;
+  std::list<ResObject::Ptr>::const_iterator it;
   for( it = all.begin(); it != all.end(); ++it)
   {
-    Resolvable::Ptr item = *it;
+    ResObject::Ptr item = *it;
     if (item->name() == name )
       result.push_back(item);
   }
