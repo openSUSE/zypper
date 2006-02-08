@@ -30,6 +30,7 @@
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
+#include "zypp/ResStatus.h"
 
 #include "zypp/solver/detail/QueueItemRequire.h"
 #include "zypp/solver/detail/QueueItemBranch.h"
@@ -511,10 +512,16 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	} /* if (_upgrade_item && _requiring_item) ... */
 
-	// We always consider uninstalling when in verification mode.
-
+	ResStatus status = context->getStatus(_requiring_item);
+	
 	if (context->verifying()) {
+	    // We always consider uninstalling when in verification mode.
 	    explore_uninstall_branch = true;
+	} else if (status.transacts()
+		   && !status.isToBeUninstalled()) {
+	    // The item has to be set for installing/updating explicity.
+	    // So the uninstall branch is not useful.
+	    explore_uninstall_branch = false;
 	}
 
 	if (explore_uninstall_branch && _requiring_item) {
