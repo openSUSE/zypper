@@ -272,7 +272,6 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 	}
 	else if (status.isToBeInstalled()) {
 	    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL, provider, RESOLVER_INFO_PRIORITY_VERBOSE, provides);
-
 	    if (conflict_issuer) {
 		misc_info->setOtherPoolItem (conflict_issuer);
 		misc_info->setOtherCapability (conflict_capability);
@@ -313,6 +312,19 @@ bool
 QueueItemConflict::process (ResolverContext_Ptr context, QueueItemList & new_items)
 {
     _DEBUG("QueueItemConflict::process(" << *this << ")");
+
+    // checking for ignoring dependencies
+    IgnoreMap ignoreMap = context->getIgnoreConflicts();    
+    for (IgnoreMap::iterator it = ignoreMap.begin();
+	 it != ignoreMap.end(); it++) {
+	if (it->first == _conflicting_item
+	    && it->second == _capability) {
+	    _XDEBUG("Found ignoring requires " << _capability << " for " << _conflicting_item);
+	    return true;
+	} else {
+	    _XDEBUG("Ignoring requires " << it->second << " for " <<  it->first << " does not fit");	    
+	}
+    }
 
     ConflictProcess info (pool(), _conflicting_item, _capability, context, new_items, _actually_an_obsolete);
 

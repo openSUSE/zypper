@@ -558,6 +558,7 @@ ResolverInfoMisc::copy (void) const
 
     ((ResolverInfoContainer_Ptr)cpy)->copy (this);
     cpy->_other_item = _other_item;
+    cpy->_other_capability = _other_capability;
     return cpy;
 }
 

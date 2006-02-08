@@ -360,8 +360,9 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	}
 
-	// Searching item that conflict with us and try to uninstall it if it is useful 
+	// Searching item that conflict with us and try to uninstall it if it is useful
 
+	IgnoreMap ignoreMap = context->getIgnoreConflicts();
 	caps = _item->dep (Dep::PROVIDES);
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 	    const Capability cap = *iter;
@@ -377,6 +378,18 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 		    const Capability conflicting_cap = it->second.first;
 		    ResolverInfo_Ptr log_info;
 		    QueueItemUninstall_Ptr uninstall_item;
+
+		    // checking for ignoring dependencies
+		    for (IgnoreMap::iterator it = ignoreMap.begin();
+			 it != ignoreMap.end(); it++) {
+			if (it->first == conflicting_item
+			    && it->second == conflicting_cap) {
+			    _XDEBUG("Found ignoring requires " << conflicting_cap << " for " << conflicting_item);
+			    return true;
+			} else {
+			    _XDEBUG("Ignoring requires " << it->second << " for " <<  it->first << " does not fit");	    
+			}
+		    }
 
 		    /* Check to see if we conflict with ourself and don't create
 		     * an uninstall item for it if we do.  This is Debian's way of
@@ -397,7 +410,6 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 		    {
 			ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL,
 									       _item, RESOLVER_INFO_PRIORITY_VERBOSE, cap);
-
 			misc_info->setOtherPoolItem (conflicting_item);
 			misc_info->setOtherCapability (conflicting_cap);
 			context->addError (misc_info);

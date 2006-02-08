@@ -444,7 +444,7 @@ Resolver::problems (void) const
 		// Uninstall q
 		problem->addSolution (new ProblemSolutionUninstall (problem, misc_info->other()));
 		// Remove conflict in the resolvable which has to be installed
-		problem->addSolution (new ProblemSolutionIgnoreConflicts (problem, item, misc_info->capability(),
+		problem->addSolution (new ProblemSolutionIgnoreConflicts (problem, item, misc_info->other_capability(),
 									  misc_info->other())); 
 		problems.push_back (problem);
 		problem_created = true;
