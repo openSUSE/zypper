@@ -17,8 +17,8 @@
 #include <iostream>
 #include <sstream>
 #include "zypp/base/Logger.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/ResObject.h"
+//#include "zypp/base/PtrTypes.h"
+//#include "zypp/ResObject.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -43,11 +43,12 @@ namespace zypp
     struct TraceCADBase
     {
       enum What { CTOR, COPYCTOR, ASSIGN, DTOR, PING };
+      std::string _ident;
     };
 
     /** \relates TraceCADBase Stream output. */
     inline std::ostream & operator<<( std::ostream & str, const TraceCADBase & obj )
-    { return str << "TraceCAD[" << &obj << "] "; }
+    { return str << obj._ident << "[" << &obj << "] "; }
 
     /** \relates TraceCADBase Stream output of TraceCADBase::What. */
     inline std::ostream & operator<<( std::ostream & str, TraceCADBase::What obj )
@@ -87,7 +88,8 @@ namespace zypp
       struct TraceCAD : public TraceCADBase
       {
         TraceCAD()
-        { traceCAD( CTOR, *this, *this ); }
+        { _ident = __PRETTY_FUNCTION__;
+          traceCAD( CTOR, *this, *this ); }
 
         TraceCAD( const TraceCAD & rhs )
         { traceCAD( COPYCTOR, *this, rhs ); }
@@ -115,17 +117,17 @@ namespace zypp
           case TraceCADBase::CTOR:
           case TraceCADBase::DTOR:
           case TraceCADBase::PING:
-            INT << self_r << what_r << std::endl;
+            std::cerr << self_r << what_r << std::endl;
             break;
           case TraceCADBase::COPYCTOR:
           case TraceCADBase::ASSIGN:
-            INT << self_r << what_r << "( " << rhs_r << ")" << std::endl;
+            std::cerr << self_r << what_r << "( " << rhs_r << ")" << std::endl;
             break;
           }
       }
     //@}
     ///////////////////////////////////////////////////////////////////
-
+#if 0
     ///////////////////////////////////////////////////////////////////
     /** \defgroup DBG_FAKED_RESOLVABLES Faked Resolvables
      * \ingroup DEBUG
@@ -184,7 +186,7 @@ namespace zypp
       }
     //@}
     ///////////////////////////////////////////////////////////////////
-
+#endif
     /////////////////////////////////////////////////////////////////
   } // namespace debug
   ///////////////////////////////////////////////////////////////////

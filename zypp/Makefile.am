@@ -145,8 +145,7 @@ lib@PACKAGE@_la_SOURCES = \
 
 lib@PACKAGE@_la_LDFLAGS =	@LIBZYPP_VERSION_INFO@
 
-lib@PACKAGE@_la_LIBADD =        base/lib@PACKAGE@_base.la	\
-				thread/lib@PACKAGE@_thread.la	\
+lib@PACKAGE@_la_LIBADD =        thread/lib@PACKAGE@_thread.la	\
 				detail/lib@PACKAGE@_detail.la	\
 				capability/lib@PACKAGE@_capability.la	\
 				pool/lib@PACKAGE@_pool.la	\
@@ -159,7 +158,9 @@ lib@PACKAGE@_la_LIBADD =        base/lib@PACKAGE@_base.la	\
 				zypp_detail/lib@PACKAGE@_zypp_detail.la	\
 				ui/lib@PACKAGE@_ui.la	\
 				\
+				base/lib@PACKAGE@_base.la	\
 				-lutil
+# !!! base/lib@PACKAGE@_base.la MUST BE THE LAST zypp lib linked
 
 ## ##################################################
 
