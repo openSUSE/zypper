@@ -38,7 +38,7 @@ public:
       /** Patch ID */
       virtual std::string id() const ;
       /** Patch time stamp */
-      virtual unsigned int timestamp() const ;
+      virtual Date timestamp() const ;
       /** Patch category (recommended, security,...) */
       virtual std::string category() const ;
       /** Does the system need to reboot to finish the update process? */

@@ -990,6 +990,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    poolItem = get_poolItem (source_alias, package_name, kind_name);
 	    if (poolItem) {
 		RESULT << "Installing " << package_name << " from channel " << source_alias << endl;;
+		poolItem.status().setToBeInstalled(ResStatus::USER);
 		if (!soft.empty())
 		    poolItem.status().setSoftInstall(true);
 		resolver->addPoolItemToInstall (poolItem);
@@ -1008,6 +1009,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    poolItem = get_poolItem ("@system", package_name, kind_name);
 	    if (poolItem) {
 		RESULT << "Uninstalling " << package_name << endl;
+		poolItem.status().setToBeUninstalled(ResStatus::USER);
 		if (!soft.empty())
 		    poolItem.status().setSoftUninstall(true);
 		resolver->addPoolItemToRemove (poolItem);

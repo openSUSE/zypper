@@ -47,7 +47,7 @@ std::string HelixPatchImpl::id() const
 { return ""; }
 
       /** Patch time stamp */
-unsigned int HelixPatchImpl::timestamp() const 
+Date HelixPatchImpl::timestamp() const 
 { return 0; }
 
       /** Patch category (recommended, security,...) */
