@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+   install package B, A conflicts B
+-->
+<test>
+<setup>
+  <system file="conflicting-system.xml"/>
+  <channel name="test" file="conflicting2-packages.xml"/>
+</setup>
+<trial>
+  <install channel="test" package="B"/>
+  <uninstall package="A"/>
+  <reportproblems/>
+</trial>
+</test>
