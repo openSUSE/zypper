@@ -209,7 +209,9 @@ std::string toXML( const Selection::constPtr &obj )
   out << "    <name>" << obj->name() << "</name>" << std::endl;
   //out << "    <default>"<< (obj->default() ? "true" : "false" ) << "</default>" << std::endl;
   out << "    <uservisible>"<< (obj->visible() ? "true" : "false" ) << "</uservisible>" << std::endl;
-
+  
+  out << "    <description>"<< (obj->description()) << "</description>" << std::endl;
+  
   out << "    <grouplist>" << std::endl;
   //recommended selections
   std::set<std::string> rec_sel = obj->recommends();

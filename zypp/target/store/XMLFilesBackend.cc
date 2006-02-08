@@ -398,11 +398,10 @@ XMLFilesBackend::createPatch( const zypp::parser::yum::YUMPatchData & parsed ) c
     impl->_category = parsed.category;
     impl->_reboot_needed = parsed.rebootNeeded;
     impl->_affects_pkg_manager = parsed.packageManager;
-    /* impl._atoms -> std::list<shared_ptr<YUMPatchAtom> > parsed.atoms */
-    /*
-    impl._summary from parsed.summary (list of MultiLang.(lang and text));
-    impl._description from parsed.summary (list of MultiLang.(lang and text));
-    */
+    // impl._atoms -> std::list<shared_ptr<YUMPatchAtom> > parsed.atoms */
+    
+    impl->_summary = parsed.summary;
+    impl->_description = parsed.summary;
     
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name,
@@ -498,6 +497,7 @@ XMLFilesBackend::createSelection( const zypp::parser::yum::YUMGroupData & parsed
 {
   try
   {
+    DBG << parsed << std::endl;
     shared_ptr<XMLSelectionImpl> impl(new XMLSelectionImpl());
       /*
       YUMGroupData();
@@ -510,6 +510,7 @@ XMLFilesBackend::createSelection( const zypp::parser::yum::YUMGroupData & parsed
         std::list<PackageReq> packageList;
       */
     impl->_summary = parsed.description;
+    //impl->_description = parsed.description;
     impl->_name = parsed.groupId;
     //impl->_order = parsed.summary;
     //impl->_category = parsed.summary;
@@ -517,6 +518,7 @@ XMLFilesBackend::createSelection( const zypp::parser::yum::YUMGroupData & parsed
     
     for( std::list<MetaPkg>::const_iterator it = parsed.grouplist.begin(); it != parsed.grouplist.end(); ++it)
     {
+      DBG << "Selection dependencies" << std::endl;
       if ((*it).type == "optional" )
         impl->_suggests.insert((*it).name);
       if ((*it).type == "mandatory" )
@@ -524,6 +526,7 @@ XMLFilesBackend::createSelection( const zypp::parser::yum::YUMGroupData & parsed
     }
     for( std::list<PackageReq>::const_iterator it = parsed.packageList.begin(); it != parsed.packageList.end(); ++it)
     {
+        DBG << "Selection package dependencies" << std::endl;
         impl->_install_packages.insert((*it).name);
     }
     // Collect basic Resolvable data
