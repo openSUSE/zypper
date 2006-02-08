@@ -2,7 +2,7 @@
 >!> 1 problems found:
 >!> Problem:
 >!> Cannot install AA because it is conflicting with A
->!> A conflict over [package] (namedcap) a == 2.3 ([] (nullcap) ) requires the removal of to-be-installed AA-1.0-1[test]
+>!> A conflict over [package] (namedcap) a == 2.3 ([package] (namedcap) a != 2.0) requires the removal of to-be-installed AA-1.0-1[test]
 >!>    Solution:
 >!>       Deleting AA
 >!>       Deleting U___[package]AA-1.0-1.
