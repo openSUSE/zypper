@@ -8,9 +8,11 @@ noinst_PROGRAMS = \
 	selectiontagparsertest	\
 	patterntagparsertest	\
 	producttagparsertest	\
-	mediatagparsertest
+	mediatagparsertest	\
+	suseparser
 	
 selectiontagparsertest_SOURCES = SelectionTagParserTest.cc
 patterntagparsertest_SOURCES = PatternTagParserTest.cc
 producttagparsertest_SOURCES = ProductMetadataParserTest.cc
 mediatagparsertest_SOURCES = MediaMetadataParserTest.cc
+suseparser_SOURCES = suseparser.cc
