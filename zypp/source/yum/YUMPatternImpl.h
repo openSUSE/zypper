@@ -42,10 +42,6 @@ namespace zypp
 	);
 	/** Is to be visible for user? */
 	virtual bool userVisible() const;
-        /** optional requirements */
-	virtual CapSet optionalReq() const;
-	/** default requirements */
-	virtual CapSet defaultReq() const;
 	/** */
 	virtual TranslatedText summary() const;
 	/** */
@@ -62,14 +58,26 @@ namespace zypp
 	virtual Vendor instSrcVendor() const;
         /** */
         virtual ByteCount size() const;
+        /** */
+	virtual bool YUMPatternImpl::isDefault() const;
+        /** */
+	virtual std::string YUMPatternImpl::category() const;
+        /** */
+	virtual Pathname YUMPatternImpl::icon() const;
+        /** */
+	virtual Pathname YUMPatternImpl::script() const;
 
 
       protected:
 // _summary
 // _description;
         bool _user_visible;
-	CapSet _optional_req;
-	CapSet _default_req;
+	TranslatedText _summary;
+	TranslatedText _description;
+	bool _default;
+	std::string _category;
+	Pathname _icon;
+	Pathname _script;
       private:
 	Source_Ref _source;
       public:

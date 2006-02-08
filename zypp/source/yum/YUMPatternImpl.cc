@@ -38,49 +38,14 @@ namespace zypp
 	const zypp::parser::yum::YUMPatternData & parsed
       )
       : _user_visible(parsed.userVisible == "true")
+      , _summary(parsed.name)
+      , _description(parsed.description)
+      , _default(parsed.default_ == "true")
+      , _category(parsed.category)
+      , _icon(parsed.icon)
+      , _script(parsed.script)
       , _source(source_r)
       {
-/* FIXME
-	CapFactory _f;
-	for (std::list<PackageReq>::const_iterator it = parsed.packageList.begin();
-	  it != parsed.packageList.end();
-	  it++)
-	{
-          Capability _cap = _f.parse(
-            ResTraits<Package>::kind,
-            it->name,
-            Rel("EQ"),
-            Edition(it->ver, it->rel, it->epoch)
-          );
-	  if (it->type == "default")
-	  {
-	    _default_req.insert(_cap);
-	  }
-	  else if (it->type == "optional")
-	  {
-	    _optional_req.insert(_cap);
-	  } 
-	}
-	for (std::list<MetaPkg>::const_iterator it = parsed.patternlist.begin();
-	    it != parsed.patternlist.end();
-	    it++)
-	{
-          Capability _cap = _f.parse(
-            ResTraits<Selection>::kind,
-            it->name,
-            Rel(),
-            Edition()
-          );
-	  if (it->type == "default")
-	  {
-	    _default_req.insert(_cap);
-	  }
-	  else if (it->type == "optional")
-	  {
-	    _optional_req.insert(_cap);
-	  } 
-	}
-*/
 
 // to name        std::string patternId;
 // as _summary        std::list<multilang> name;
@@ -90,17 +55,12 @@ namespace zypp
       bool YUMPatternImpl::userVisible() const {
 	return _user_visible;
       }
-      CapSet YUMPatternImpl::optionalReq() const
-      { return _optional_req; }
-
-      CapSet YUMPatternImpl::defaultReq() const
-      { return _default_req; }
 
       TranslatedText YUMPatternImpl::summary() const
-      { return ResObjectImplIf::summary(); }
+      { return _summary; }
 
       TranslatedText YUMPatternImpl::description() const
-      { return ResObjectImplIf::description(); }
+      { return _description; }
 
       Text YUMPatternImpl::insnotify() const
       { return ResObjectImplIf::insnotify(); }
@@ -122,6 +82,19 @@ namespace zypp
 
       Source_Ref YUMPatternImpl::source() const
       { return _source; }
+
+      /** */
+      bool YUMPatternImpl::isDefault() const
+      { return _default; }
+      /** */
+      std::string YUMPatternImpl::category() const
+      { return _category; }
+      /** */
+      Pathname YUMPatternImpl::icon() const
+      { return _icon; }
+      /** */
+      Pathname YUMPatternImpl::script() const
+      { return _script; }
 
 
     } // namespace yum

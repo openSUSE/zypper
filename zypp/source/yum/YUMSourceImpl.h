@@ -99,10 +99,6 @@ namespace zypp
 	  const zypp::parser::yum::YUMGroupData & parsed
 	);
 
-	Dependencies createPatternDependencies(
-	  const zypp::parser::yum::YUMPatternData & parsed
-	);
-
 	Capability createCapability(const YUMDependency & dep,
 				    const Resolvable::Kind & my_kind);
       private:

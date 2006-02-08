@@ -525,7 +525,7 @@ INT << "Storing data to cache" << endl;
             NVRAD dataCollect( parsed.patternId,
                                Edition::noedition,
                                Arch_noarch,
-                               createPatternDependencies(parsed));
+                               createDependencies(parsed, ResTraits<Pattern>::kind));
  	    Pattern::Ptr pattern = detail::makeResolvableFromImpl(
 	      dataCollect, impl
 	    );
@@ -684,6 +684,20 @@ INT << "Storing data to cache" << endl;
 	    _deps[Dep::FRESHENS].insert(createCapability(*it, my_kind));
 	  }
 
+	  for (std::list<YUMDependency>::const_iterator it = parsed.recommends.begin();
+	       it != parsed.recommends.end();
+	       it++)
+	  {
+	    _deps[Dep::RECOMMENDS].insert(createCapability(*it, my_kind));
+	  }
+
+	  for (std::list<YUMDependency>::const_iterator it = parsed.suggests.begin();
+	       it != parsed.suggests.end();
+	       it++)
+	  {
+	    _deps[Dep::SUGGESTS].insert(createCapability(*it, my_kind));
+	  }
+
 	  for (std::list<YUMDependency>::const_iterator it = parsed.requires.begin();
 	       it != parsed.requires.end();
 	       it++)
@@ -739,53 +753,6 @@ INT << "Storing data to cache" << endl;
 		ResTraits<Selection>::kind));
 	    }
 	  }
-	  return _deps;
-	}
-
-	Dependencies YUMSourceImpl::createPatternDependencies(
-	  const zypp::parser::yum::YUMPatternData & parsed
-	)
-	{
-	  Dependencies _deps;
-
-/* FIXME
-
-	  for (std::list<PackageReq>::const_iterator it = parsed.packageList.begin();
-	    it != parsed.packageList.end();
-	    it++)
-	  {
-	    if (it->type == "mandatory" || it->type == "")
-	    {
-	      _deps[Dep::REQUIRES].insert(createCapability(YUMDependency(
-		  "",
-		  it->name,
-		  "EQ",
-		  it->epoch,
-		  it->ver,
-		  it->rel,
-		  ""
-		),
-		ResTraits<Package>::kind));
-	    }
-	  }
-	  for (std::list<MetaPkg>::const_iterator it = parsed.patternlist.begin();
-	    it != parsed.patternlist.end();
-	    it++)
-	  {
-	    if (it->type == "mandatory" || it->type == "")
-	    {
-	      _deps[Dep::REQUIRES].insert(createCapability(YUMDependency(
-		  "",
-		  it->name,
-		  "",
-		  "",
-		  "",
-		  "",
-		  ""
-		),
-		ResTraits<Selection>::kind));
-	    }
-	  }*/
 	  return _deps;
 	}
 
