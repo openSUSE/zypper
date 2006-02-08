@@ -45,6 +45,8 @@ namespace zypp
 
     /** selection category */
     Label category() const;
+    inline bool isBase() const
+    { return category() == "base"; }
 
     /** selection visibility (for hidden selections) */
     bool visible() const;
