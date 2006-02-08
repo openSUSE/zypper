@@ -993,7 +993,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		poolItem.status().setToBeInstalled(ResStatus::USER);
 		if (!soft.empty())
 		    poolItem.status().setSoftInstall(true);
-		resolver->addPoolItemToInstall (poolItem);
+//		resolver->addPoolItemToInstall (poolItem);
 	    } else {
 		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
 	    }
@@ -1012,7 +1012,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		poolItem.status().setToBeUninstalled(ResStatus::USER);
 		if (!soft.empty())
 		    poolItem.status().setSoftUninstall(true);
-		resolver->addPoolItemToRemove (poolItem);
+//		resolver->addPoolItemToRemove (poolItem);
 	    } else {
 		cerr << "Unknown system package " << package_name << endl;
 	    }
@@ -1238,11 +1238,17 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 
     if (verify)
 	resolver->verifySystem ();
+#if 0
     else if (distupgrade)
 	resolver->resolvePool();
     else
 	resolver->resolveDependencies (established);
-    
+#else
+    else
+	resolver->resolvePool();
+
+#endif
+
     report_solutions (resolver, instorder);
 }
 
