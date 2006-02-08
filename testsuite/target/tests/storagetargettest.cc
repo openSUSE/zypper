@@ -78,7 +78,7 @@ int main()
   MIL << "Wrote " << store.size() << " objects in " << (double) curr_time / CLOCKS_PER_SEC << " seconds" << std::endl;
   
   time_start = clock();
-  std::list<Resolvable::Ptr> objs = backend.storedObjects();
+  std::list<ResObject::Ptr> objs = backend.storedObjects();
   curr_time = clock() - time_start;           // time in micro seconds
   MIL << "Read " << objs.size() << " patches in " << (double) curr_time / CLOCKS_PER_SEC << " seconds" << std::endl;
 
