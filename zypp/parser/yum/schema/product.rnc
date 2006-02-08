@@ -62,5 +62,29 @@ element ns1:product {
       attribute pre { "1" | "0" }?,
       empty
     }*
+  }?,
+  element recommends {
+    element entry {
+      attribute name { text },
+      attribute kind { "package" | "patch" | "script" | "message" | "product"}?,
+      (attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" },
+       attribute epoch { xsd:nonNegativeInteger },
+       attribute ver { text },
+       attribute rel { text }?)?,
+      attribute pre { "1" | "0" }?,
+      empty
+    }*
+  }?,
+  element suggests {
+    element entry {
+      attribute name { text },
+      attribute kind { "package" | "patch" | "script" | "message" | "product"}?,
+      (attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" },
+       attribute epoch { xsd:nonNegativeInteger },
+       attribute ver { text },
+       attribute rel { text }?)?,
+      attribute pre { "1" | "0" }?,
+      empty
+    }*
   }?
 }

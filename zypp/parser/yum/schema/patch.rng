@@ -105,6 +105,12 @@
     <optional>
       <ref name="element-requires"/>
     </optional>
+    <optional>
+      <ref name="element-recommends"/>
+    </optional>
+    <optional>
+      <ref name="element-suggests"/>
+    </optional>
   </define>
   <define name="element-category">
     <element name="category">

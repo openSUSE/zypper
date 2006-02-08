@@ -42,7 +42,9 @@ dependency-block =
   element-conflicts?,
   element-obsoletes?,
   element-freshen?,
-  element-requires?
+  element-requires?,
+  element-recommends?,
+  element-suggests?
 
 element-category =
   element category { "youfix" | "security" | "recommended" | "bonus" | "beta" }

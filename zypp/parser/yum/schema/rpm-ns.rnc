@@ -16,6 +16,8 @@ format =
     element-conflicts?,
     element-obsoletes?,
     element-requires?,
+    element-recommends?,
+    element-suggests?,
     element-file*
 
 
@@ -94,6 +96,34 @@ element-requires =
     element requires { requires }
 
 requires =
+    element entry {
+      attribute-name,
+      (
+        shared-entry-attributes,
+        attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" }
+      )?,
+      attribute pre { "1" | "0" }?,
+        empty
+      }*
+
+element-suggests =
+    element suggests { suggests }
+
+suggests =
+    element entry {
+      attribute-name,
+      (
+        shared-entry-attributes,
+        attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" }
+      )?,
+      attribute pre { "1" | "0" }?,
+        empty
+      }*
+
+element-recommends =
+    element recommends { recommends }
+
+recommends =
     element entry {
       attribute-name,
       (

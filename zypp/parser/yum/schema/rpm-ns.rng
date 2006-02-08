@@ -24,6 +24,12 @@
     <optional>
       <ref name="element-requires"/>
     </optional>
+    <optional>
+      <ref name="element-recommends"/>
+    </optional>
+    <optional>
+      <ref name="element-suggests"/>
+    </optional>
     <zeroOrMore>
       <ref name="element-file"/>
     </zeroOrMore>
@@ -157,6 +163,72 @@
     </element>
   </define>
   <define name="requires">
+    <zeroOrMore>
+      <element name="entry">
+        <ref name="attribute-name"/>
+        <optional>
+          <ref name="shared-entry-attributes"/>
+          <attribute name="flags">
+            <choice>
+              <value>EQ</value>
+              <value>LE</value>
+              <value>GE</value>
+              <value>LT</value>
+              <value>GT</value>
+            </choice>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="pre">
+            <choice>
+              <value>1</value>
+              <value>0</value>
+            </choice>
+          </attribute>
+        </optional>
+        <empty/>
+      </element>
+    </zeroOrMore>
+  </define>
+  <define name="element-suggests">
+    <element name="suggests">
+      <ref name="suggests"/>
+    </element>
+  </define>
+  <define name="suggests">
+    <zeroOrMore>
+      <element name="entry">
+        <ref name="attribute-name"/>
+        <optional>
+          <ref name="shared-entry-attributes"/>
+          <attribute name="flags">
+            <choice>
+              <value>EQ</value>
+              <value>LE</value>
+              <value>GE</value>
+              <value>LT</value>
+              <value>GT</value>
+            </choice>
+          </attribute>
+        </optional>
+        <optional>
+          <attribute name="pre">
+            <choice>
+              <value>1</value>
+              <value>0</value>
+            </choice>
+          </attribute>
+        </optional>
+        <empty/>
+      </element>
+    </zeroOrMore>
+  </define>
+  <define name="element-recommends">
+    <element name="recommends">
+      <ref name="recommends"/>
+    </element>
+  </define>
+  <define name="recommends">
     <zeroOrMore>
       <element name="entry">
         <ref name="attribute-name"/>

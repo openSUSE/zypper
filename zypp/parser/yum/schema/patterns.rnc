@@ -1,7 +1,16 @@
-default namespace = "http://linux.duke.edu/metadata/patterns"
+default namespace = "http://novell.com/package/metadata/suse/pattern"
 
-element patterns {
-  element pattern {
+include "suse-primary.rnc" {
+  start = element-pattern
+  # names in dependencies can include a "kind". Should not be used for packages.
+  attribute-name =
+    attribute kind { "package" | "patch" | "script" | "message" | "product" }?,
+    attribute name { text }
+}
+
+element-pattern = element pattern { pattern }
+
+pattern =
     element patternid { text },
     element name {
       attribute lang { text }?,
@@ -9,26 +18,17 @@ element patterns {
     }+,
     element default { "true" | "false" }?,
     element uservisible { "true" | "false" },
+    element category { text },
+    element icon { text },
+    element script { text }?,
     element description {
       attribute lang { text }?,
       text
     }+,
-    element patternlist {
-      element metapkg {
-        attribute type { text }?,
-        text
-      }+
-    }?,
-    element packagelist {
-      element packagereq {
-        attribute type { text }?,
-        attribute epoch { xsd:nonNegativeInteger },
-        attribute ver { text },
-        attribute rel { text },
-        text
-      }+
-    }?,
-    empty
-  }+,
-  empty
-}
+    element-provides?,
+    element-conflicts?,
+    element-obsoletes?,
+    element-freshen?,
+    element-requires?,
+    element-suggests?,
+    element-recommends?
