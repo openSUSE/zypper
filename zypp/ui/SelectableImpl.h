@@ -70,15 +70,15 @@ namespace zypp
       Status status() const;
 
       /**  */
-      bool set_status( const Status state_r )
-      { return false; }
+      bool set_status( const Status state_r );
 
       /** Installed object. */
       PoolItem installedObj() const
       { return _installedItem; }
 
       /** Best among available objects.
-       * \nore Transacted Objects prefered, Status calculation relies on it.
+       * \note Transacted Objects prefered, Status calculation relies on it.
+       * \note Need sort order based on (arch,edition), requires arch compat lists.
       */
       PoolItem candidateObj() const
       { return( _availableItems.empty() ? PoolItem() : *_availableItems.begin() ); }
