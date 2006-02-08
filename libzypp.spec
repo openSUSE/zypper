@@ -21,6 +21,8 @@ Version:      0.0.7
 Release:      1
 Source:       zypp-0.0.0.tar.bz2
 Prefix:       /usr
+Provides:     yast2-packagemanager
+Obsoletes:    yast2-packagemanager
 
 %description
 Package, Patch, Pattern, and Product Management
@@ -37,6 +39,8 @@ Authors:
 Requires:     libzypp
 Summary:      Package, Patch, Pattern, and Product Management - developers files
 Group:        System/Packages
+Provides:     yast2-packagemanager-devel
+Obsoletes:    yast2-packagemanager-devel
 
 %description -n libzypp-devel
 Package, Patch, Pattern, and Product Management - developers files
