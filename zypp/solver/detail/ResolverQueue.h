@@ -47,7 +47,7 @@ namespace zypp
     { ///////////////////////////////////////////////////////////////////
 
 typedef std::list <ResolverQueue_Ptr> ResolverQueueList;
-typedef std::map<PoolItem_Ref,Capability> IgnoreMap;
+typedef std::multimap<PoolItem_Ref,Capability> IgnoreMap;
 	    
 
 ///////////////////////////////////////////////////////////////////

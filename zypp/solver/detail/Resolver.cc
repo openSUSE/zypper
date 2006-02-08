@@ -230,7 +230,7 @@ void
 Resolver::addIgnoreConflict (const PoolItem_Ref item,
 		   const Capability & capability)
 {
-    _ignoreConflicts[item] = capability;
+    _ignoreConflicts.insert(make_pair(item, capability));
 }
 
 
@@ -238,7 +238,7 @@ void
 Resolver::addIgnoreRequires (const PoolItem_Ref item,
 			     const Capability & capability)
 {
-    _ignoreRequires[item] = capability;
+    _ignoreRequires.insert(make_pair(item, capability));
 }
 
 void
