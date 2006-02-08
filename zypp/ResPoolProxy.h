@@ -18,6 +18,7 @@
 
 #include "zypp/ResPool.h"
 #include "zypp/ui/Selectable.h"
+#include "zypp/ui/SelFilters.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -91,8 +92,8 @@ namespace zypp
     */
     bool hasInstalledObj( const ResObject::Kind & kind_r ) const
     {
-      return(    make_begin<selfilter::ByHasInstalledObj>()
-              != make_end<selfilter::ByHasInstalledObj>() );
+      return(    make_begin<ui::selfilter::ByHasInstalledObj>( kind_r )
+              != make_end<ui::selfilter::ByHasInstalledObj>( kind_r ) );
     }
 
     template<class _Res>

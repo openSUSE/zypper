@@ -12,6 +12,8 @@
 #ifndef ZYPP_UI_SELFILTERS_H
 #define ZYPP_UI_SELFILTERS_H
 
+#include <string>
+
 #include "zypp/base/Functional.h"
 #include "zypp/ui/Selectable.h"
 
@@ -25,7 +27,7 @@ namespace zypp
     namespace selfilter
     { /////////////////////////////////////////////////////////////////
 
-      typedef std::unary_function<ui::Selectable::constPtr,bool> SelectableFilterFunctor;
+      typedef std::unary_function<Selectable::constPtr,bool> SelectableFilterFunctor;
 
       /** */
       struct ByKind : public SelectableFilterFunctor
@@ -34,7 +36,7 @@ namespace zypp
         : _kind( kind_r )
         {}
 
-        bool operator()( const ui::Selectable::constPtr & obj ) const
+        bool operator()( const Selectable::constPtr & obj ) const
         {
           return obj && obj->kind() == _kind;
         }
@@ -52,7 +54,7 @@ namespace zypp
         bool operator()( const ui::Selectable::constPtr & obj ) const
         { return obj && obj->name() == _name; }
 
-        std::string _name:
+        std::string _name;
       };
 
       /** */
@@ -79,7 +81,7 @@ namespace zypp
         bool operator()( const ui::Selectable::constPtr & obj ) const
         { return obj && obj->status() == _status; }
 
-        Status _status:
+        Status _status;
       };
 
       /////////////////////////////////////////////////////////////////

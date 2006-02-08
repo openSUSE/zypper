@@ -20,7 +20,6 @@
 #include "zypp/base/Iterator.h"
 
 #include "zypp/ui/SelectableTraits.h"
-#include "zypp/ui/SelFilters.h"
 #include "zypp/ui/Status.h"
 
 ///////////////////////////////////////////////////////////////////
