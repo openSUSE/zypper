@@ -10,6 +10,7 @@ uiincludedir = $(pkgincludedir)/ui
 uiinclude_HEADERS = \
 	Status.h		\
 	Selectable.h		\
+	SelFilters.h		\
 	SelectableTraits.h	\
 	\
 	SelectableImpl.h

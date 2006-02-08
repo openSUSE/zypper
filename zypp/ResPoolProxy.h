@@ -55,14 +55,14 @@ namespace zypp
 
   public:
 
-    /**  */
+    /** True if there are items of a certain kind. */
     bool empty( const ResObject::Kind & kind_r ) const;
 
     template<class _Res>
       bool empty() const
       { return empty( ResTraits<_Res>::kind ); }
 
-    /**  */
+    /** Number of Items of a certain kind.  */
     size_type size( const ResObject::Kind & kind_r ) const;
 
     template<class _Res>
@@ -85,7 +85,23 @@ namespace zypp
       { return byKindEnd( ResTraits<_Res>::kind ); }
     //@}
 
+  public:
+    /** Test whether there is at least one ui::Selectable with
+     * an installed object.
+    */
+    bool hasInstalledObj( const ResObject::Kind & kind_r ) const
+    {
+      return(    make_begin<selfilter::ByHasInstalledObj>()
+              != make_end<selfilter::ByHasInstalledObj>() );
+    }
 
+    template<class _Res>
+      bool hasInstalledObj() const
+      { return hasInstalledObj( ResTraits<_Res>::kind ); }
+
+
+
+  public:
     /** \name Save and restore state.
      * \todo make it work.
     */
@@ -97,6 +113,38 @@ namespace zypp
     //@}
 
   private:
+    template<class _Filter>
+      filter_iterator<_Filter,const_iterator>
+      make_begin( _Filter filter_r, const ResObject::Kind & kind_r ) const
+      {
+        return make_filter_iterator( filter_r,
+                                     byKindBegin(kind_r),
+                                     byKindEnd(kind_r) );
+      }
+    template<class _Filter>
+      filter_iterator<_Filter,const_iterator>
+      make_begin( const ResObject::Kind & kind_r ) const
+      {
+        return make_begin( _Filter(), kind_r );
+      }
+
+
+    template<class _Filter>
+      filter_iterator<_Filter,const_iterator>
+      make_end( _Filter filter_r, const ResObject::Kind & kind_r ) const
+      {
+        return make_filter_iterator( filter_r,
+                                     byKindEnd(kind_r),
+                                     byKindEnd(kind_r) );
+      }
+    template<class _Filter>
+      filter_iterator<_Filter,const_iterator>
+      make_end( const ResObject::Kind & kind_r ) const
+      {
+        return make_end( _Filter(), kind_r );
+      }
+
+
     /** Pointer to implementation */
     RW_pointer<Impl> _pimpl;
   };
