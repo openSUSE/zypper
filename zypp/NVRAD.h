@@ -63,6 +63,25 @@ namespace zypp
     NVRAD( Resolvable::constPtr res_r );
   };
   ///////////////////////////////////////////////////////////////////
+  inline bool operator<( const NVRAD & lhs, const NVRAD & rhs )
+  { if (lhs.name >= rhs.name
+	&& lhs.edition >= rhs.edition
+	&& lhs.arch == rhs.arch)
+    {
+	return false;
+    }
+    return true;
+  }
+
+  inline bool operator==( const NVRAD & lhs, const NVRAD & rhs )
+  { if (lhs.name == rhs.name
+	&& lhs.edition == rhs.edition
+	&& lhs.arch == rhs.arch)
+    {
+	return true;
+    }
+    return false;
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
