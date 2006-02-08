@@ -41,6 +41,21 @@ namespace zypp
   //	Pattern interface forwarded to implementation
   //
   ///////////////////////////////////////////////////////////////////
+  /** */
+  bool Pattern::isDefault() const
+  { return pimpl().isDefault(); }
+  /** */
+  bool Pattern::userVisible() const
+  { return pimpl().userVisible(); }
+  /** */
+  std::string Pattern::category() const
+  { return pimpl().category(); }
+  /** */
+  Pathname Pattern::icon() const
+  { return pimpl().icon(); }
+  /** */
+  Pathname Pattern::script() const
+  { return pimpl().script(); }
 
 
   /////////////////////////////////////////////////////////////////

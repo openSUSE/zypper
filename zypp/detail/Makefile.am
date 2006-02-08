@@ -39,6 +39,7 @@ lib@PACKAGE@_detail_la_SOURCES = \
 	ResObjectImplIf.cc	\
 	PackageImplIf.cc	\
 	SelectionImplIf.cc	\
+	PatternImplIf.cc	\
 	MessageImplIf.cc	\
 	ScriptImplIf.cc		\
 	PatchImplIf.cc		\

@@ -14,6 +14,7 @@
 
 #include "zypp/ResObject.h"
 #include "zypp/detail/PatternImplIf.h"
+#include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -35,6 +36,18 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
+    /** */
+    std::string patternId() const;
+    /** */
+    bool isDefault() const;
+    /** */
+    bool userVisible() const;
+    /** */
+    std::string category() const;
+    /** */
+    Pathname icon() const;
+    /** */
+    Pathname script() const;
     /** */
     // data here:
 

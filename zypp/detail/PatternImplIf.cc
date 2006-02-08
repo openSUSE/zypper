@@ -6,49 +6,34 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/detail/PatternImplIf.h
+/** \file	zypp/detail/PatternImplIf.cc
  *
 */
-#ifndef ZYPP_DETAIL_PATTERNIMPLIF_H
-#define ZYPP_DETAIL_PATTERNIMPLIF_H
 
-#include "zypp/detail/ResObjectImplIf.h"
-#include "zypp/Pathname.h"
-#include <string>
+#include "zypp/detail/PatternImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  class Pattern;
-
   ///////////////////////////////////////////////////////////////////
   namespace detail
   { /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : PatternImplIf
-    //
-    /** Abstact Pattern implementation interface.
-    */
-    class PatternImplIf : public ResObjectImplIf
-    {
-    public:
-      typedef Pattern ResType;
+    bool PatternImplIf::isDefault() const
+    { return false; }
 
-    public:
-      virtual bool isDefault() const PURE_VIRTUAL;
+    bool PatternImplIf::userVisible() const
+    { return true; }
 
-      virtual bool userVisible() const PURE_VIRTUAL;
+    std::string PatternImplIf::category() const
+    { return std::string(); }
 
-      virtual std::string category() const PURE_VIRTUAL;
+    Pathname PatternImplIf::icon() const
+    { return Pathname(); }
 
-      virtual Pathname icon() const PURE_VIRTUAL;
-
-      virtual Pathname script() const PURE_VIRTUAL;
-    };
-    ///////////////////////////////////////////////////////////////////
+    Pathname PatternImplIf::script() const
+    { return Pathname(); }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail
@@ -56,4 +41,3 @@ namespace zypp
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_DETAIL_PATTERNIMPLIF_H
