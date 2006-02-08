@@ -94,7 +94,6 @@ static ZYpp::Ptr God;
 static SourceManager_Ptr manager;
 
 typedef list<unsigned int> ChecksumList;
-typedef std::set <zypp::PoolItem_Ref> PoolItemSet;
 
 #define RESULT cout << ">!> "
 
