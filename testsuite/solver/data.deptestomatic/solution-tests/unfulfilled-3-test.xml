@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
 <!--
-   install package with unfulfilled dependency. It returns "only"
-   RESOLVER_INFO_TYPE_REJECT_INSTALL; We have no possibility ignoring
-   the dependencies.
-   Additional only the first problem (unfulfilled1) will be displayed.
+   install package with unfulfilled dependency. 
+   Only the FIRST problem (unfulfilled4) will be displayed.
 -->
 <test>
 <setup>

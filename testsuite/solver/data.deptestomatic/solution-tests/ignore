@@ -2,7 +2,5 @@ not_found-test.xml
 obsoletes-test.xml
 other-architect-test.xml
 parallel-test.xml
-require-test.xml
-unfulfilled-2-test.xml
 unfulfilled-3-test.xml
 uninstall-test.xml
