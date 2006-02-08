@@ -75,11 +75,11 @@ namespace zypp
 	if (_cache_dir.empty())
 	{
 	  // now, the file exists, try to read it
-	  filename = provideFile(_path + "/repomd.xml");
+	  filename = provideFile(_path + "/repodata/repomd.xml");
 	}
 	else
 	{
-	  filename = _cache_dir + "/repomd.xml";
+	  filename = _cache_dir + "/repodata/repomd.xml";
 	}
 
 	DBG << "Reading file " << filename << endl;
@@ -127,9 +127,9 @@ INT << "Storing data to cache" << endl;
        try {
 	// first read list of all files in the reposotory
         Pathname filename = _cache_dir.empty()
-	  ? provideFile(_path + "/repomd.xml")
-	  : _cache_dir + "/repomd.xml";
-	_metadata_files.push_back("/repomd.xml");
+	  ? provideFile(_path + "/repodata/repomd.xml")
+	  : _cache_dir + "/repodata/repomd.xml";
+	_metadata_files.push_back("/repodata/repomd.xml");
 	DBG << "Reading file " << filename << endl;
 	ifstream repo_st(filename.asString().c_str());
 	YUMRepomdParser repomd(repo_st, "");
