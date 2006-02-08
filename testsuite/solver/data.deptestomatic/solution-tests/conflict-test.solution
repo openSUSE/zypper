@@ -13,3 +13,10 @@
 >!>    Solution:
 >!>       Ignoring conflict of B
 >!>       
+>!> Taking solution: 0
+>!> For problem:     0
+>!> No problems so far
+>!> Solution #1:
+>!> install A-1.0-1[test]
+>!> |unflag B-1.0-1[test]
+>!> installs=1, upgrades=0, uninstalls=0
