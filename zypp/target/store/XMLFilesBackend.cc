@@ -257,7 +257,19 @@ XMLFilesBackend::storeObject( Resolvable::constPtr resolvable )
 
 void
 XMLFilesBackend::deleteObject( Resolvable::Ptr resolvable )
-{}
+{
+  // only remove the file
+  std::string filename = fullPathForResolvable(resolvable);
+  try
+  {
+    remove(path(filename));
+  }
+  catch(std::exception &e)
+  {
+    ERR << "Error removing resolvable " << resolvable << std::endl;
+    ZYPP_THROW(Exception(e.what()));
+  }
+}
 
 Resolvable::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Resolvable::Kind kind ) const
 {
