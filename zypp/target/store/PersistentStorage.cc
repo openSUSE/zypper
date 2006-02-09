@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	devel/devel.dmacvicar/PersistentStorage.cc
+/** \file	zypp/target/store/PersistentStorage.cc
 *
 */
 #include <iostream>
@@ -15,7 +15,6 @@
 #include "PersistentStorage.h"
 #include "Backend.h"
 #include "XMLFilesBackend.h"
-//#include "devel/devel.dmacvicar/BDBBackend.h"
 
 using std::endl;
 

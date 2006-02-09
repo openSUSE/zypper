@@ -19,6 +19,8 @@
 #include "zypp/base/Exception.h"
 
 #include "zypp/CapFactory.h"
+#include "zypp/Digest.h"
+
 
 #include "zypp/target/store/xml/XMLPatchImpl.h"
 #include "zypp/target/store/xml/XMLMessageImpl.h"
@@ -41,8 +43,6 @@
 
 #include "XMLFilesBackend.h"
 #include "serialize.h"
-
-#include "md5.h"
 
 #define ZYPP_DB_DIR "/var/lib/zypp_db"
 
@@ -751,25 +751,6 @@ XMLFilesBackend::storedSources() const
 
 }
 
-static std::string hexDigest(const std::string &message)
-{
-  md5_state_t state;
-  md5_byte_t digest[16];
-
-  md5_init(&state);
-  /* Append a string to the message. */
-  md5_append(&state, (md5_byte_t*) message.c_str(), message.size());  /* Finish the message and return the digest. */
-  md5_finish(&state, digest);
-
-  char s[33];
-  int i;
-  for (i=0; i<16; i++)
-    sprintf(s+i*2, "%02x", digest[i]);
-
-  s[32]='\0';
-  return std::string(s);
-}
-
 void
 XMLFilesBackend::storeSource(const PersistentStorage::SourceData &data)
 {
@@ -788,7 +769,8 @@ XMLFilesBackend::storeSource(const PersistentStorage::SourceData &data)
   //DBG << filename << std::endl;
   try
   {
-    std::string full_path = (source_p / hexDigest(data.alias)).string();
+    std::stringstream message_stream(data.alias);
+    std::string full_path = (source_p / Digest::digest("MD5", message_stream)).string();
     
     file.open(full_path.c_str());
     file << xml;
@@ -808,7 +790,8 @@ XMLFilesBackend::deleteSource(const std::string &alias)
   path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("source-cache");
   try
   {
-    std::string full_path = (source_p / hexDigest(alias)).string();
+    std::stringstream message_stream(alias);
+    std::string full_path = (source_p / Digest::digest("MD5", message_stream)).string();
     remove(full_path);
   }
   catch ( std::exception &e )

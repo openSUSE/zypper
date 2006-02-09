@@ -244,13 +244,24 @@ template<> // or constPtr?
 std::string toXML( const Pattern::constPtr &obj )
 {
   stringstream out;
-  /*
-  out << "<message type=\"" << obj->type() << "\">" << std::endl;
-  // reuse Resolvable information serialize function
-  out << toXML(static_cast<Resolvable::constPtr>(obj));
-  out << "  <text>" << obj->text() << "</text>" << std::endl;
-  out << "</message>" << std::endl;
-  */
+  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
+  out << "<pattern" << std::endl;
+  out << "  xmlns=\"http://novell.com/package/metadata/suse/pattern\"" << std::endl;
+  out << "  xmlns:yum=\"http://linux.duke.edu/metadata/common\"" << std::endl;
+  out << "  xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\"" << std::endl;
+  out << "  xmlns:suse=\"http://novell.com/package/metadata/suse/common\">" << std::endl;
+  out << "  <patternid>" << obj->patternId() << "</patternid>" << std::endl;
+  out << "  <name>" << obj->name() << "</name>" << std::endl;
+  //out << "  <name lang='en.US'>foobar</name>" << std::endl;
+  out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << std::endl;
+  out << "  <uservisible>" << (obj->userVisible() ? "true" : "false" ) << "</uservisible>" << std::endl;
+  out << "  <category>" << obj->category() << "</category>" << std::endl;
+  out << "  <icon>" << obj->icon() << "</icon>" << std::endl;
+  out << "  <script>" << obj->script() << "</script>" << std::endl;
+  //out << "  <description lang='cs.CZ'>This is my pattern, it is soooooooo coool!</description>" << std::endl;
+  //out << "  <description lang='en.US'>Duh</description>" << std::endl;
+  out << toXML(obj->deps()) << std::endl;
+  out << "</pattern>" << std::endl;
   return out.str();
 }
 
