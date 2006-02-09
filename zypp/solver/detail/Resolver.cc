@@ -636,6 +636,31 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
 
 //----------------------------------------------------------------------------
+// undo
+
+struct UndoTransact : public resfilter::PoolItemFilterFunctor
+{
+    UndoTransact ()
+    { }
+
+    bool operator()( PoolItem_Ref item )		// only transacts() items go here
+    {
+	item.status().setTransact(false, ResStatus::SOLVER);// clear any solver/establish transactions
+	return true;
+    }
+};
+
+void
+Resolver::undo(void)
+{
+    UndoTransact info;
+    invokeOnEach ( _pool.begin(), _pool.end(),
+		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
+		   functor::functorRef<bool,PoolItem>(info) );
+    return;
+}
+
+//----------------------------------------------------------------------------
 // resolvePool
 
 struct CollectTransact : public resfilter::PoolItemFilterFunctor

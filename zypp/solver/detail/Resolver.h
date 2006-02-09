@@ -173,6 +173,10 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     ResolverProblemList problems (void) const;
     void applySolutions (const ProblemSolutionList &solutions);
 
+    // reset all SOLVER transaction in pool
+    void undo(void);
+
+    // only for testsuite
     void reset (void);
 
     Arch architecture() const { return _architecture; }
