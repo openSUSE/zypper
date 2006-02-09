@@ -724,11 +724,12 @@ Resolver::resolvePool ()
     reset();
     
 #if 1
+    int count = 0;
     MIL << "Resolver::resolvePool()" << endl;
     MIL << "Pool before resolve" << endl;
     MIL << "---------------------------------------" << endl;
     for (ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it) {
-	MIL << *it << endl;
+	MIL << ++count << ": " << *it << endl;
     }
     MIL << "---------------------------------------" << endl;
 #endif
