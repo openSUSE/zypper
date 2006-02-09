@@ -53,7 +53,7 @@ namespace zypp
 
         try {
 	  Pathname media_file = Pathname("media.1/media");
-	  media_mgr.provideFile (_media, 1, media_file);
+	  media_mgr.provideFile (_media, media_file);
 	  media_file = media_mgr.localPath (_media, media_file);
 	  
 	  std::ifstream pfile( media_file.asString().c_str() );
@@ -107,11 +107,17 @@ namespace zypp
         Pathname p = provideFile(_path + "suse/setup/descr/packages");
         DBG << "Going to parse " << p << endl;
         PkgContent content( parsePackages( source_r, this, p ) );
-#warning Should use correct locale
-	Locale lang;
-        p = provideFile(_path + "suse/setup/descr/packages.en");
-        DBG << "Going to parse " << p << endl;
-	parsePackagesLang( p, lang, content );
+
+#warning Should use correct locale and locale fallback list
+	try {
+	    Locale lang;
+	    p = provideFile(_path + "suse/setup/descr/packages.en");
+	    DBG << "Going to parse " << p << endl;
+	    parsePackagesLang( p, lang, content );
+	}
+	catch (Exception & excpt_r) {
+	    WAR << "packages.en not found" << endl;
+	}
 
 	for (PkgContent::const_iterator it = content.begin(); it != content.end(); ++it) {
 	    Package::Ptr pkg = detail::makeResolvableFromImpl( it->first, it->second );
