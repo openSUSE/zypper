@@ -113,20 +113,37 @@ InstallOrder::computeNextSet()
 void
 InstallOrder::setInstalled(PoolItem_Ref item )
 {
-    _dirty = true;
-
-    PoolItemSet adj = _rgraph[item];
-
     DBG << "InstallOrder::setInstalled " << item << endl;
 
+    Graph::const_iterator git( _rgraph.find(item) );
+    if (git == _rgraph.end()) {
+	ERR << "Not in _rgraph" << endl;
+	return;
+    }
+
+    _dirty = true;
+
+
+    PoolItemSet adj = git->second;		//    adj = _rgraph[item];
+
     // order will be < 0
-    _nodes[item].order--;
+    Nodes::iterator nit( _nodes.find(item) );
+    if (nit == _nodes.end()) {
+	ERR << "Not in _nodes" << endl;
+	return;
+    }
+    nit->second.order--;			//    _nodes[item].order--;
     _installed.insert (item);
     _toinstall.erase (item);
 
     for (PoolItemSet::iterator it = adj.begin(); it != adj.end(); ++it)
     {
-	NodeInfo& info = _nodes[*it];
+	nit = _nodes.find(*it);
+	if (nit == _nodes.end()) {
+	    ERR << "Not in _nodes:" << *it << endl;
+	    continue;
+	}
+	NodeInfo& info = nit->second;		// _nodes[*it];
 	info.order--;
 	if (info.order < 0)
 	{
@@ -166,7 +183,7 @@ InstallOrder::startrdfs()
     for (PoolItemSet::iterator it = _toinstall.begin(); it != _toinstall.end(); ++it)
     {
 	PoolItem_Ref item = *it;
-	_nodes[item] = NodeInfo (item);
+	_nodes.insert( Nodes::value_type( item, NodeInfo (item) ) );
 	_rgraph[item] = PoolItemSet();
 	_graph[item] = PoolItemSet();
     }
@@ -175,7 +192,12 @@ InstallOrder::startrdfs()
     for (PoolItemSet::iterator it = _toinstall.begin(); it != _toinstall.end(); ++it)
     {
 	const PoolItem_Ref item = *it;
-	if (_nodes[item].visited == false)
+	Nodes::const_iterator nit( _nodes.find(item) );
+	if (nit == _nodes.end()) {
+	    ERR << "Can't find " << item << " in _nodes" << endl;
+	    continue;
+	}
+	if (nit->second.visited == false)
 	{
 	    DBG << "start recursion on " << item << endl;
 	    rdfsvisit (item);
@@ -232,7 +254,12 @@ InstallOrder::rdfsvisit (const PoolItem_Ref  item)
 
     DBG << "InstallOrder::rdfsvisit, visiting " << item << endl;
 
-    NodeInfo& nodeinfo = _nodes[item];
+    Nodes::iterator nit( _nodes.find( item ) );
+    if (nit == _nodes.end()) {
+	ERR << "Can't find " << item << " in _nodes" << endl;
+	return;
+    }
+    NodeInfo& nodeinfo = nit->second;
 
     nodeinfo.visited = true;
     nodeinfo.begintime = _rdfstime;
@@ -282,14 +309,19 @@ InstallOrder::rdfsvisit (const PoolItem_Ref  item)
 	for (PoolItemSet::iterator it = tovisit.begin(); it != tovisit.end(); ++it)
 	{
 	    const PoolItem_Ref must_visit = *it;
-	    if (_nodes[must_visit].visited == false)
+	    nit = _nodes.find( must_visit );
+	    if (nit == _nodes.end()) {
+		ERR << "Can't find " << must_visit << " in _nodes" << endl;
+		continue;
+	    }
+	    if (nit->second.visited == false)
 	    {
 		nodeinfo.order++;
 		_rgraph[must_visit].insert (item);
 		_graph[item].insert (must_visit);
 		rdfsvisit(must_visit);
 	    }
-	    else if (_nodes[must_visit].endtime == 0)
+	    else if (nit->second.endtime == 0)
 	    {
 		if (must_visit != item)
 		{
@@ -316,7 +348,13 @@ InstallOrder::rdfsvisit (const PoolItem_Ref  item)
     }
     DBG << "_topsorted.push_back(" << item << ")" << endl;
     _topsorted.push_back(item);
-    _nodes[item].endtime = _rdfstime;
+    nit = _nodes.find( item );
+    if (nit == _nodes.end())  {
+	ERR << "Can't find " << item << " in nodes" << endl;
+    }
+    else {
+	nit->second.endtime = _rdfstime;
+    }
     _rdfstime++;
 
     DBG << item << " done" << endl;
