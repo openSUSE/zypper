@@ -164,6 +164,11 @@ namespace zypp
     void SourceImpl::storeMetadata(const Pathname & cache_dir_r)
     {}
 
+    void SourceImpl::redirect(unsigned media_nr, const Url & new_url)
+    {
+#warning TODO implement URL redirect
+    }
+    
     /////////////////////////////////////////////////////////////////
     // attribute accessors
 

@@ -117,6 +117,9 @@ namespace zypp
   void Source_Ref::changeMedia(const media::MediaId & media_r, const Pathname & path_r)
   { _pimpl->changeMedia(media_r, path_r); }
 
+  void Source_Ref::redirect(unsigned media_nr, const Url & new_url)
+  { _pimpl->redirect(media_nr, new_url); }
+  
   /******************************************************************
    **
    **	FUNCTION NAME : operator<<

@@ -109,6 +109,11 @@ namespace zypp
      * The media must be ready-to-use (in the same form as when passing to SourceImpl constructor)
      */
     void changeMedia(const media::MediaId & media_r, const Pathname & path_r);
+    
+    /**
+     * Redirect the given media to the given URL instead of the standard one.
+     */
+    void redirect(unsigned media_nr, const Url & new_url);
 
     /** Conversion to bool to allow pointer style tests
      *  for nonNULL \ref source impl.

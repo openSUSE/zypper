@@ -136,6 +136,8 @@ namespace zypp
       virtual std::string zmdDescription (void) const;
       virtual void setZmdDescription (const std::string desc_r);
 
+      virtual void redirect(unsigned media_nr, const Url & new_url);
+
     protected:
       /** Provide Source_Ref back to \c this. */
       Source_Ref selfSourceRef()
