@@ -136,6 +136,14 @@ namespace zypp
              const Pathname & preferred_attach_point = "");
 
       /**
+       * Swap access handlers of idOne and idTwo.
+       *
+       * \returns True, if idOne and and idTwo was both valid.
+      bool
+      swap(MediaAccessId idOne, MediaAccessId idTwo);
+       */
+
+      /**
        * close the media
        */
       void

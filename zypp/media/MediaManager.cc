@@ -175,6 +175,28 @@ namespace zypp
     }
 
     // ---------------------------------------------------------------
+    /*
+    bool
+    MediaManager::swap(MediaAccessId idOne, MediaAccessId idTwo)
+    {
+      MutexLock glock(g_Mutex);
+
+      if( m_impl->hasMediaAcc(idOne) &&  m_impl->hasMediaAcc(idTwo))
+      {
+        MediaAccessRef tmp( m_impl->mediaAccMap[idOne]);
+
+        m_impl->mediaAccMap[idOne] = m_impl->mediaAccMap[idTwo];
+        m_impl->mediaAccMap[idTwo] = tmp;
+
+        DBG << "Swapped media access ids "
+            << idOne << " and " << idTwo << std::endl;
+        return true;
+      }
+      return false;
+    }
+    */
+
+    // ---------------------------------------------------------------
     void
     MediaManager::close(MediaAccessId accessId)
     {
