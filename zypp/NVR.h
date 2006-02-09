@@ -17,6 +17,7 @@
 
 #include "zypp/Edition.h"
 #include "zypp/ResTraits.h"
+#include "zypp/RelCompare.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -49,11 +50,33 @@ namespace zypp
     std::string name;
     /**  */
     Edition edition;
+
+  public:
+    /** Comparison mostly for std::container */
+    static int compare( const NVR & lhs, const NVR & rhs )
+    {
+      int res = lhs.name.compare( rhs.name );
+      if ( res )
+        return res;
+      return lhs.edition.compare( rhs.edition );
+    }
   };
   ///////////////////////////////////////////////////////////////////
 
   /** \relates NVR Stream output */
   std::ostream & operator<<( std::ostream & str, const NVR & obj );
+
+  /** \relates NVR */
+  inline bool operator==( const NVR & lhs, const NVR & rhs )
+  { return compareByRel( Rel::EQ, lhs, rhs ); }
+
+  /** \relates NVR */
+  inline bool operator!=( const NVR & lhs, const NVR & rhs )
+  { return compareByRel( Rel::NE, lhs, rhs ); }
+
+  /** \relates NVR Order in std::container */
+  inline bool operator<( const NVR & lhs, const NVR & rhs )
+  { return compareByRel( Rel::LT, lhs, rhs ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

@@ -55,11 +55,33 @@ namespace zypp
 
     /**  */
     Arch arch;
+
+  public:
+    /** Comparison mostly for std::container */
+    static int compare( const NVRA & lhs, const NVRA & rhs )
+    {
+      int res = NVR::compare( lhs, rhs );
+      if ( res )
+        return res;
+      return lhs.arch.compare( rhs.arch );
+    }
   };
   ///////////////////////////////////////////////////////////////////
 
   /** \relates NVRA Stream output */
   std::ostream & operator<<( std::ostream & str, const NVRA & obj );
+
+  /** \relates NVRA */
+  inline bool operator==( const NVRA & lhs, const NVRA & rhs )
+  { return compareByRel( Rel::EQ, lhs, rhs ); }
+
+  /** \relates NVRA */
+  inline bool operator!=( const NVRA & lhs, const NVRA & rhs )
+  { return compareByRel( Rel::NE, lhs, rhs ); }
+
+  /** \relates NVRA Order in std::container */
+  inline bool operator<( const NVRA & lhs, const NVRA & rhs )
+  { return compareByRel( Rel::LT, lhs, rhs ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
