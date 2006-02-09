@@ -104,10 +104,6 @@ Resolver::reset (void)
 
     _extra_caps.clear();
     _extra_conflicts.clear();
-    _ignoreConflicts.clear();
-    _ignoreRequires.clear();
-    _ignoreArchitecture.clear();
-    _ignoreInstalledItem.clear();
 
     _pending_queues.clear();
     _pruned_queues.clear();
