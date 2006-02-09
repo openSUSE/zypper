@@ -96,6 +96,7 @@ InstallOrder::computeNextSet()
 
     for (Nodes::iterator it = _nodes.begin(); it != _nodes.end(); ++it)
     {
+	DBG << "Looking at node " << it->first << " order " << it->second.order << ":" << it->second.item << endl;
 	if (it->second.order == 0)
 	{
 	    DBG << "InstallOrder::computeNextSet found " << it->second.item << endl;
@@ -159,7 +160,7 @@ InstallOrder::startrdfs()
     _topsorted.clear();
 
     _numrun++;
-    DBG << "run #" << _numrun << endl;
+    DBG << "startrdfs run #" << _numrun << endl;
 
     // initialize all nodes
     for (PoolItemSet::iterator it = _toinstall.begin(); it != _toinstall.end(); ++it)
@@ -213,6 +214,7 @@ struct CollectProviders : public resfilter::OnCapMatchCallbackFunctor
 	    && (!provider.status().staysInstalled())			// only visit if provider is not already installed
 	    && (toinstall.find(provider) != toinstall.end()		// only look at resolvables
 		|| installed.find(provider) != installed.end())) {	//   we are currently considering anyways
+	    DBG << "tovisit " << provider << endl;
 	    tovisit.insert (provider);
 	}
 
@@ -228,7 +230,7 @@ InstallOrder::rdfsvisit (const PoolItem_Ref  item)
     typedef list<Capability> CapList;
     CapList requires;
 
-    _DBG ("RC_SPEW") << "InstallOrder::rdfsvisit, visiting " << item << endl;
+    DBG << "InstallOrder::rdfsvisit, visiting " << item << endl;
 
     NodeInfo& nodeinfo = _nodes[item];
 
@@ -312,6 +314,7 @@ InstallOrder::rdfsvisit (const PoolItem_Ref  item)
 	    }
 	}
     }
+    DBG << "_topsorted.push_back(" << item << ")" << endl;
     _topsorted.push_back(item);
     _nodes[item].endtime = _rdfstime;
     _rdfstime++;
