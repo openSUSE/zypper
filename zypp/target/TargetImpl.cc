@@ -525,9 +525,10 @@ MIL << "order.computeNextSet: " << pkgs.size() << " packages" << endl;
       {
 	Resolvable::constPtr res( cit->resolvable() );
 	Package::constPtr cpkg( asKind<Package>(res) );
-	if (!cpkg)
+	if (!cpkg) {
+	    order.setInstalled( *cit );
 	    continue;
-
+	}
 MIL << "Packge " << cpkg << ", media " << cpkg->mediaId() << endl;
 	if ( 									//  rankPriority[cpkg->instSrcRank()] == last_prio &&
 	     cpkg->mediaId() == last_medianum ) {
