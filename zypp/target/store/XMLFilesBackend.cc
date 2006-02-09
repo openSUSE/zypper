@@ -237,6 +237,15 @@ XMLFilesBackend::fullPathForResolvable( ResObject::constPtr resolvable ) const
 void
 XMLFilesBackend::storeObject( ResObject::constPtr resolvable )
 {
+  // only ignore if it is not a supported resolvable kind
+  std::set<Resolvable::Kind>::const_iterator it;
+  it = find(d->kinds.begin(), d->kinds.end(), resolvable->kind() );
+  if (it == d->kinds.end())
+  {
+    ERR << "This backend was not designed to store resolvable of kind " << resolvableKindToString(resolvable->kind()) << ", ignoring..." << std::endl;
+    return;
+  }
+
   std::string xml = castedToXML(resolvable);
   std::string filename = fullPathForResolvable(resolvable);
   //DBG << std::endl << xml << std::endl;
