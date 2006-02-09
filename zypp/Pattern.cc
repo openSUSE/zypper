@@ -42,7 +42,7 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
   /** */
-  std::string patternId() const
+  std::string Pattern::patternId() const
   { return pimpl().patternId(); }
   /** */
   bool Pattern::isDefault() const
