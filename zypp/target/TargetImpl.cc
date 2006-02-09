@@ -394,9 +394,15 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
     dellist_r.clear();
     instlist_r.clear();
     srclist_r.clear();
+    PoolItemList nonpkglist;
 
     for ( ResPool::const_iterator it = pool_r.begin(); it != pool_r.end(); ++it )
     {
+	if ((*it)->kind() != ResTraits<Package>::kind) {
+	    nonpkglist.push_back( *it );
+	    continue;
+	}
+
 	if (it->status().isToBeInstalled())
 	{
 	    if (it->resolvable()->arch() == Arch_src)
@@ -417,7 +423,8 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
 
     MIL << "ResolvablesToInsDel: delete " << dellist_r.size()
       << ", install " << instlist_r.size()
-	<< ", srcinstall " << srclist_r.size() << endl;
+	<< ", srcinstall " << srclist_r.size()
+	  << ", nonpkg " << nonpkglist.size() << endl;
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -529,12 +536,12 @@ MIL << "order.computeNextSet: " << items.size() << " resolvables" << endl;
 	Resolvable::constPtr res( cit->resolvable() );
 	Package::constPtr cpkg( asKind<Package>(res) );
 	if (!cpkg) {
-MIL << "Not a package " << res << endl;
+MIL << "Not a package " << *cit << endl;
 	    order.setInstalled( *cit );
 	    other_list.push_back( *cit );
 	    continue;
 	}
-MIL << "Packge " << cpkg << ", media " << cpkg->mediaId() << endl;
+MIL << "Package " << *cpkg << ", media " << cpkg->mediaId() << endl;
 	if ( 									//  rankPriority[cpkg->instSrcRank()] == last_prio &&
 	     cpkg->mediaId() == last_medianum ) {
 	  // prefer packages on current media.
@@ -613,7 +620,7 @@ MIL << "Packge " << cpkg << ", media " << cpkg->mediaId() << endl;
     {
 	INT << "Lost packages in InstallOrder sort." << endl;
     }
-
+    instlist_r.splice( instlist_r.end(), nonpkglist );
 }
 
 
