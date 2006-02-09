@@ -226,12 +226,13 @@ MediaHandler::createAttachPoint() const
       adir( Pathname::extend( abase, str::hexstring( i ) ) );
       if ( ! adir.isExist() ) {
 	int err = mkdir( adir.path() );
-	if (err == EROFS)			// readonly fs, dont try further
-	   break;
 	if (err == 0 ) {
             apoint = adir.path();
             break;
 	}
+	else
+	if (err != EEXIST)	// readonly fs or other, dont try further
+	   break;
       }
     }
   }
