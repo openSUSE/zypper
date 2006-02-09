@@ -28,11 +28,32 @@ namespace zypp
     //
     /**
     */
-    class XMLPatternImpl : public zypp::detail::PatternImplIf
+    struct XMLPatternImpl : public zypp::detail::PatternImplIf
     {
-    public:
       XMLPatternImpl();
       virtual ~XMLPatternImpl();
+
+      virtual bool userVisible() const;
+      virtual TranslatedText summary() const;
+      virtual TranslatedText description() const;
+      virtual Text insnotify() const;
+      virtual Text delnotify() const;
+      virtual bool providesSources() const;
+      virtual Label instSrcLabel() const;
+      virtual Vendor instSrcVendor() const;
+      virtual ByteCount size() const;
+      virtual bool isDefault() const;
+      virtual std::string category() const;
+      virtual Pathname icon() const;
+      virtual Pathname script() const;
+
+      bool _user_visible;
+      TranslatedText _summary;
+      TranslatedText _description;
+      bool _default;
+      std::string _category;
+      Pathname _icon;
+      Pathname _script;
     };
     ///////////////////////////////////////////////////////////////////
 

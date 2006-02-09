@@ -20,6 +20,7 @@
 #include "zypp/Script.h"
 #include "zypp/Product.h"
 #include "zypp/Selection.h"
+#include "zypp/Pattern.h"
 
 #include "zypp/parser/yum/YUMParser.h"
 #include "zypp/parser/yum/YUMParserData.h"
@@ -131,7 +132,7 @@ public:
   Script::Ptr createScript(const zypp::parser::yum::YUMPatchScript & parsed ) const;
   Product::Ptr createProduct( const zypp::parser::yum::YUMProductData & parsed ) const;
   Selection::Ptr createSelection( const zypp::parser::yum::YUMGroupData & parsed ) const;
-
+  Pattern::Ptr createPattern( const zypp::parser::yum::YUMPatternData & parsed ) const;
 
   Dependencies createDependencies( const zypp::parser::yum::YUMObjectData & parsed, const Resolvable::Kind my_kind ) const;
   Dependencies createGroupDependencies( const zypp::parser::yum::YUMGroupData & parsed ) const;

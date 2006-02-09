@@ -36,6 +36,47 @@ namespace zypp
     XMLPatternImpl::~XMLPatternImpl()
     {}
 
+      bool XMLPatternImpl::userVisible() const {
+        return _user_visible;
+      }
+
+      TranslatedText XMLPatternImpl::summary() const
+      { return _summary; }
+
+      TranslatedText XMLPatternImpl::description() const
+      { return _description; }
+
+      Text XMLPatternImpl::insnotify() const
+      { return ResObjectImplIf::insnotify(); }
+
+      Text XMLPatternImpl::delnotify() const
+      { return ResObjectImplIf::delnotify(); }
+
+      bool XMLPatternImpl::providesSources() const
+      { return ResObjectImplIf::providesSources(); }
+
+      Label XMLPatternImpl::instSrcLabel() const
+      { return ResObjectImplIf::instSrcLabel(); }
+
+      Vendor XMLPatternImpl::instSrcVendor() const
+      { return ResObjectImplIf::instSrcVendor(); }
+
+      ByteCount XMLPatternImpl::size() const
+      { return ResObjectImplIf::size(); }
+
+      /** */
+      bool XMLPatternImpl::isDefault() const
+      { return _default; }
+      /** */
+      std::string XMLPatternImpl::category() const
+      { return _category; }
+      /** */
+      Pathname XMLPatternImpl::icon() const
+      { return _icon; }
+      /** */
+      Pathname XMLPatternImpl::script() const
+      { return _script; }
+
     /////////////////////////////////////////////////////////////////
   } // namespace storage
   ///////////////////////////////////////////////////////////////////

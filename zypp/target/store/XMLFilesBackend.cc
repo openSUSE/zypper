@@ -25,6 +25,7 @@
 #include "zypp/target/store/xml/XMLScriptImpl.h"
 #include "zypp/target/store/xml/XMLSelectionImpl.h"
 #include "zypp/target/store/xml/XMLProductImpl.h"
+#include "zypp/target/store/xml/XMLPatternImpl.h"
 
 #include <iostream>
 #include <fstream>
@@ -94,6 +95,7 @@ XMLFilesBackend::XMLFilesBackend(const Pathname &root) : Backend(root)
   //d->kinds.insert(ResTraits<zypp::Script>::kind);
   d->kinds.insert(ResTraits<zypp::Selection>::kind);
   d->kinds.insert(ResTraits<zypp::Product>::kind);
+  d->kinds.insert(ResTraits<zypp::Pattern>::kind);
 
 	// check if the db exists
 	if (!isBackendInitialized())
@@ -318,6 +320,16 @@ ResObject::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Resol
       break;
     }
   }
+  else if ( kind == ResTraits<zypp::Pattern>::kind )
+  {
+    YUMPatternParser iter(res_file,"");
+    for (; !iter.atEnd(); ++iter)
+    {
+      DBG << "here..." << std::endl;
+      resolvable = createPattern(**iter);
+      break;
+    }
+  }
   /*
   else if ( kind == ResTraits<zypp::Message>::kind )
   {
@@ -513,6 +525,33 @@ XMLFilesBackend::createProduct( const zypp::parser::yum::YUMProductData & parsed
   }
 }
 
+Pattern::Ptr
+XMLFilesBackend::createPattern( const zypp::parser::yum::YUMPatternData & parsed ) const
+{
+  try
+  {
+    shared_ptr<XMLPatternImpl> impl(new XMLPatternImpl());
+
+    impl->_user_visible = ((parsed.userVisible == "false" ) ? false : true );
+    impl->_summary = parsed.name;
+    impl->_description = parsed.description;
+    impl->_default = ((parsed.default_ == "false" ) ? false : true );
+    impl->_category = parsed.category;
+    impl->_icon = parsed.icon;
+    impl->_script = parsed.script;    
+
+    // Collect basic Resolvable data
+    NVRAD dataCollect( parsed.patternId, Edition::noedition, Arch_noarch,           createDependencies( parsed, ResTraits<Pattern>::kind));
+    Pattern::Ptr pattern = detail::makeResolvableFromImpl( dataCollect, impl );
+    return pattern;
+  }
+  catch (const Exception & excpt_r)
+  {
+    ERR << excpt_r << endl;
+    throw "Cannot create installation pattern object";
+  }
+}
+
 Selection::Ptr
 XMLFilesBackend::createSelection( const zypp::parser::yum::YUMGroupData & parsed ) const
 {
@@ -570,12 +609,11 @@ XMLFilesBackend::createDependencies( const zypp::parser::yum::YUMObjectData & pa
   {
     _deps[Dep::PROVIDES].insert(createCapability(*it, my_kind));
   }
-
   for (std::list<YUMDependency>::const_iterator it = parsed.conflicts.begin(); it != parsed.conflicts.end(); it++)
   {
     _deps[Dep::CONFLICTS].insert(createCapability(*it, my_kind));
   }
-  
+
   for (std::list<YUMDependency>::const_iterator it = parsed.obsoletes.begin(); it != parsed.obsoletes.end(); it++)
   {
     _deps[Dep::OBSOLETES].insert(createCapability(*it, my_kind));
@@ -586,6 +624,21 @@ XMLFilesBackend::createDependencies( const zypp::parser::yum::YUMObjectData & pa
     _deps[Dep::FRESHENS].insert(createCapability(*it, my_kind));
   }
 
+  for (std::list<YUMDependency>::const_iterator it = parsed.recommends.begin(); it != parsed.recommends.end(); it++)
+  {
+    _deps[Dep::RECOMMENDS].insert(createCapability(*it, my_kind));
+  }
+
+  for (std::list<YUMDependency>::const_iterator it = parsed.suggests.begin(); it != parsed.suggests.end(); it++)
+  {
+    _deps[Dep::SUGGESTS].insert(createCapability(*it, my_kind));
+  }
+
+  for (std::list<YUMDependency>::const_iterator it = parsed.enhances.begin(); it != parsed.enhances.end(); it++)
+  {
+    _deps[Dep::ENHANCES].insert(createCapability(*it, my_kind));
+  }
+
   for (std::list<YUMDependency>::const_iterator it = parsed.requires.begin(); it != parsed.requires.end(); it++)
   {
     if (it->pre == "1")
@@ -593,9 +646,8 @@ XMLFilesBackend::createDependencies( const zypp::parser::yum::YUMObjectData & pa
     else
       _deps[Dep::REQUIRES].insert(createCapability(*it, my_kind));
   }
-
-    return _deps;
-  }
+  return _deps;
+}
 
 Dependencies 
 XMLFilesBackend::createGroupDependencies( const zypp::parser::yum::YUMGroupData & parsed ) const
@@ -616,30 +668,6 @@ XMLFilesBackend::createGroupDependencies( const zypp::parser::yum::YUMGroupData 
       _deps[Dep::REQUIRES].insert(createCapability(YUMDependency("", it->name, "", "", "", "", "" ), ResTraits<Selection>::kind));
     }
   }
-  return _deps;
-}
-
-Dependencies
-XMLFilesBackend::createPatternDependencies( const zypp::parser::yum::YUMPatternData & parsed ) const
-{
-  Dependencies _deps;
-#warning FIXME once pattern class is ready
-/*
-FIXME
-  for (std::list<PackageReq>::const_iterator it = parsed.packageList.begin(); it != parsed.packageList.end(); it++)
-  {
-    if (it->type == "mandatory" || it->type == "")
-    {
-      _deps[Dep::REQUIRES].insert(createCapability(YUMDependency( "", it->name, "EQ", it->epoch, it->ver, it->rel, "" ), ResTraits<Package>::kind));
-    }
-  }
-  for (std::list<MetaPkg>::const_iterator it = parsed.patternlist.begin(); it != parsed.patternlist.end(); it++)
-  {
-    if (it->type == "mandatory" || it->type == "")
-    {
-      _deps[Dep::REQUIRES].insert(createCapability(YUMDependency( "", it->name, "", "", "", "", "" ), ResTraits<Selection>::kind));
-    }
-  }*/
   return _deps;
 }
 
