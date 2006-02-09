@@ -128,6 +128,14 @@ namespace zypp
       open(const Url &url, const Pathname & preferred_attach_point = "");
 
       /**
+       * Open new access handler with specifier url and attach
+       * point reusing the specified accessId.
+       */
+      void
+      reopen(MediaAccessId accessId, const Url &url,
+             const Pathname & preferred_attach_point = "");
+
+      /**
        * close the media
        */
       void
@@ -157,7 +165,8 @@ namespace zypp
        * Add verifier for specified media id.
        */
       void
-      addVerifier(MediaAccessId accessId, const MediaVerifierRef &ref);
+      addVerifier(MediaAccessId accessId,
+                  const MediaVerifierRef &verifier);
 
       /**
        * Remove verifier for specified media id.
@@ -167,13 +176,30 @@ namespace zypp
 
     public:
       /**
-       * attach the media using the concrete handler
+       * Attach the media using the concrete handler.
        */
       void
       attach(MediaAccessId accessId, bool next = false);
 
       /**
+       * Attach the media if needed and verify, if desired
+       * media number is avaliable. If the access handler
+       * supports multiple drives (e.g. CD/DVD), all drives
+       * are verified.
+       *
+       * \throws MediaNotDesiredException if unable to find
+       *         desired media in any drive.
+       * \throws FIXME if all drives are in use and no one
+       *         was ejected.
+       */
+      void
+      attachMediaNr(MediaAccessId accessId, MediaNr mediaNr,
+                                            bool eject = true);
+
+      /**
        * Release the attached media and optionally eject.
+       * \throws exception if eject is true and media is
+       * shared.
        */
       void
       release(MediaAccessId accessId, bool eject = false);
@@ -208,6 +234,15 @@ namespace zypp
        */
       bool
       isDesiredMedia(MediaAccessId accessId, MediaNr mediaNr) const;
+
+      /**
+       * Ask the specified verifier if the attached
+       * media is the desired one or not.
+       * \return True if desired media is attached.
+       */
+      bool
+      isDesiredMedia(MediaAccessId accessId, MediaNr mediaNr,
+                     const MediaVerifierRef &verifier) const;
 
       /**
        * Return the local directory that corresponds to medias url,

@@ -147,6 +147,33 @@ namespace zypp
 
     // ---------------------------------------------------------------
     void
+    MediaManager::reopen(MediaAccessId accessId, const Url &url,
+                         const Pathname & preferred_attach_point)
+    {
+      MutexLock glock(g_Mutex);
+
+      if( !m_impl->hasMediaAcc(accessId))
+      {
+        ZYPP_THROW(MediaNotOpenException(
+          "Invalid media access id " + str::numstring(accessId)
+        ));
+      }
+
+      MediaAccessRef   accRef( new MediaAccess());
+
+      accRef->open(url, preferred_attach_point);
+
+      // release and close the old one
+      m_impl->mediaAccMap[accessId]->close();
+
+      // assign new one
+      m_impl->mediaAccMap[accessId] = accRef;
+
+      DBG << "Reopened media access id " << accessId << std::endl;
+    }
+
+    // ---------------------------------------------------------------
+    void
     MediaManager::close(MediaAccessId accessId)
     {
       MutexLock glock(g_Mutex);
@@ -199,13 +226,13 @@ namespace zypp
 
     // ---------------------------------------------------------------
     void
-    MediaManager::addVerifier(MediaAccessId accessId,
-                              const MediaVerifierRef &ref)
+    MediaManager::addVerifier(MediaAccessId           accessId,
+                              const MediaVerifierRef &verifier)
     {
       MutexLock glock(g_Mutex);
 
-      if( !ref)
-        ZYPP_THROW(MediaException("Invalid (empty) verifier reference"));
+      if( !verifier)
+        ZYPP_THROW(MediaException("Invalid verifier reference"));
 
       if( !m_impl->hasMediaAcc(accessId))
       {
@@ -214,7 +241,7 @@ namespace zypp
         ));
       }
 
-      m_impl->mediaVfyMap[accessId] = ref;
+      m_impl->mediaVfyMap[accessId] = verifier;
     }
 
     // ---------------------------------------------------------------
@@ -248,6 +275,24 @@ namespace zypp
       }
 
       m_impl->mediaAccMap[accessId]->attach(next);
+    }
+
+    // ---------------------------------------------------------------
+    void
+    MediaManager::attachMediaNr(MediaAccessId accessId,
+                                MediaNr       mediaNr,
+                                bool          eject)
+    {
+      MutexLock glock(g_Mutex);
+
+      if( !m_impl->hasMediaAcc( accessId))
+      {
+        ZYPP_THROW(MediaNotOpenException(
+          "Invalid media access id " + str::numstring(accessId)
+        ));
+      }
+
+      // FIXME: implement it.
     }
 
     // ---------------------------------------------------------------
@@ -315,6 +360,31 @@ namespace zypp
       bool ok;
       try {
         ok = m_impl->mediaVfyMap[accessId]->isDesiredMedia(
+          m_impl->mediaAccMap[accessId], mediaNr
+        );
+      }
+      catch( ... ) { ok = false; }
+      return ok;
+    }
+
+    // ---------------------------------------------------------------
+    bool
+    MediaManager::isDesiredMedia(MediaAccessId           accessId,
+                                 MediaNr                 mediaNr,
+                                 const MediaVerifierRef &verifier) const
+    {
+      MutexLock glock(g_Mutex);
+
+      if( !isAttached(accessId))
+        return false;
+
+      MediaVerifierRef v( verifier);
+      if( !v)
+        ZYPP_THROW(MediaException("Invalid verifier reference"));
+
+      bool ok;
+      try {
+        ok = v->isDesiredMedia(
           m_impl->mediaAccMap[accessId], mediaNr
         );
       }
