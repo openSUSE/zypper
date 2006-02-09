@@ -141,7 +141,8 @@ namespace zypp
       m_impl->mediaAccMap[nextId] = accRef;
       m_impl->mediaVfyMap[nextId] = vfyRef;
 
-      DBG << "Opened new media access using id " << nextId << std::endl;
+      DBG << "Opened new media access using id " << nextId
+          << " to " << url.asString() << std::endl;
       return nextId;
     }
 
@@ -169,7 +170,8 @@ namespace zypp
       // assign new one
       m_impl->mediaAccMap[accessId] = accRef;
 
-      DBG << "Reopened media access id " << accessId << std::endl;
+      DBG << "Reopened media access id " << accessId
+          << " to " << url.asString() << std::endl;
     }
 
     // ---------------------------------------------------------------
