@@ -87,6 +87,12 @@ namespace zypp
     std::list<unsigned int> enabledSources() const;
 
     /**
+     * Return ids of all sources
+     *
+     */
+    std::list<unsigned int> allSources() const;
+
+    /**
      * Add a new source
      *
      * \throws Exception

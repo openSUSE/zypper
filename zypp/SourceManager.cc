@@ -108,6 +108,18 @@ namespace zypp
     return res;
   }
 
+  std::list<unsigned int> SourceManager::allSources() const
+  {
+    std::list<unsigned int> res;
+    
+    for( SourceMap::const_iterator it = _sources.begin(); it != _sources.end(); it++)
+    {
+	res.push_back(it->first);
+    }
+    
+    return res;
+  }
+
   void SourceManager::store(Pathname root_r)
   {
     storage::PersistentStorage store;    
