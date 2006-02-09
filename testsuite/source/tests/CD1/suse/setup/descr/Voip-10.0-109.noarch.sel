@@ -1,0 +1,69 @@
+# SuSE-Linux-Package-Selection 10.0-109.noarch -- (c) 2004 SuSE Linux AG
+# Needs parser version 4.0 or greater
+# generated on Mon Jan 30 17:22:25 UTC 2006
+
+=Ver: 4.0
+
+=Sel:  Voip 10.0 109 noarch
+
+=Sum: Voice over IP
+=Sum.bg: VoIP
+=Sum.cs: IP telefonie
+=Sum.da: Internettelefoni (VoIP)
+=Sum.de: Voice over IP
+=Sum.el: Φωνή μέσω IP(VoIP)
+=Sum.en: Voice over IP
+=Sum.es: Voz sobre IP
+=Sum.fr: Système vocal via Internet
+=Sum.gl: Voice over IP
+=Sum.hu: IP-telefónia (VoIP)
+=Sum.it: VoIP
+=Sum.ja: VoIP (Voice over IP)
+=Sum.ko: Voice over IP
+=Sum.lt: Balsas per IP
+=Sum.nl: Voice over IP
+=Sum.no: Voice over IP
+=Sum.pl: Telefonia internetowa
+=Sum.pt: Vóz sobre IP
+=Sum.pt_BR: Voz por IP
+=Sum.ru: Voice over IP
+=Sum.sk: Voice over IP
+=Sum.sl: Internetna telefonija (Voice over IP)
+=Sum.sv: Voice over IP
+=Sum.zh_CN: Voice over IP
+=Sum.zh_TW: 藉由 IP 傳送語音
+
+=Cat: addon
+
+=Vis: true
+
+=Ord: 20
+
++Ins:
+apache2
+apache2-prefork
+asterisk
+asterisk-alsa
+asterisk-capi
+asterisk-odbc
+asterisk-pgsql
+asterisk-spandsp
+asterisk-zaptel
+gnomemeeting
+kcall
+kphone
+libosip2
+libpri
+linphone
+openh323
+openh323-devel
+siproxd
+sipset
+spandsp
+twinkle
+unixODBC
+unixODBC-32bit
+vocalbin
+zaptel
+-Ins:
+

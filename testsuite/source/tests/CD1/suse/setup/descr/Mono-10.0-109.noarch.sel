@@ -1,0 +1,222 @@
+# SuSE-Linux-Package-Selection 10.0-109.noarch -- (c) 2004 SuSE Linux AG
+# Needs parser version 4.0 or greater
+# generated on Mon Jan 30 17:22:09 UTC 2006
+
+=Ver: 4.0
+
+=Sel:  Mono 10.0 109 noarch
+
+=Sum: Mono/CLR
+=Sum.bg: Mono/CLR
+=Sum.cs: Mono/CLR
+=Sum.da: Mono/CLR
+=Sum.de: Mono/CLR
+=Sum.el: Mono/CLR
+=Sum.en: Mono/CLR
+=Sum.es: Mono/CLR
+=Sum.fr: Mono/CLR
+=Sum.gl: Mono/CLR
+=Sum.hu: Mono/CLR
+=Sum.it: Mono/CLR
+=Sum.ja: Mono/CLR
+=Sum.ko: Mono/CLR
+=Sum.lt: Mono/CLR
+=Sum.nl: Mono/CLR
+=Sum.no: Mono/CLR
+=Sum.pl: Mono/CLR
+=Sum.pt: Mono/CLR
+=Sum.pt_BR: Mono/CLR
+=Sum.ru: Mono/CLR
+=Sum.sk: Mono/CLR
+=Sum.sl: Mono/CLR
+=Sum.sv: Mono/CLR
+=Sum.zh_CN: Mono/CLR
+=Sum.zh_TW: Mono/CLR
+
+=Cat: addon
+
+=Vis: true
+
+=Ord: 86
+
++Ins:
+OpenEXR
+OpenEXR-32bit
+OpenOffice_org
+OpenOffice_org-mono
+arts
+arts-32bit
+aspell
+aspell-32bit
+audiofile
+audiofile-32bit
+baselibs
+boo
+bytefx-data-mysql
+control-center2
+cups-libs
+cups-libs-32bit
+dbus-1-mono
+dbus-1-qt
+dbus-1-qt-32bit
+desktop-file-utils
+eel
+eel-32bit
+esound
+esound-32bit
+evolution-data-server
+evolution-data-server-32bit
+evolution-sharp
+fam
+fam-32bit
+gail
+gail-32bit
+gamin
+gconf2
+gconf2-32bit
+gecko-sharp
+gecko-sharp-2_0
+gnome-desktop
+gnome-desktop-32bit
+gnome-icon-theme
+gnome-keyring
+gnome-keyring-32bit
+gnome-menus
+gnome-menus-32bit
+gnome-mime-data
+gnome-panel
+gnome-panel-32bit
+gnome-spell2
+gnome-vfs2
+gnome-vfs2-32bit
+gnome2-user-docs
+gsf-sharp
+gstreamer
+gstreamer-32bit
+gstreamer-plugins
+gstreamer-plugins-32bit
+gtk-sharp
+gtk-sharp-32bit
+gtk-sharp-gapi
+gtk-sharp2
+gtk-sharp2-32bit
+gtk-sharp2-gapi
+gtkhtml2
+gtksourceview
+gtksourceview-sharp
+gtksourceview-sharp-2_0
+ibm-data-db2
+ikvm
+ipod-sharp
+jack
+jack-32bit
+java-1_4_2-sun
+jpackage-utils
+kdebase3
+kdebase3-32bit
+kdebase3-ksysguardd
+kdelibs3
+kdelibs3-32bit
+kdelibs3-doc
+libbeagle
+libbeagle-32bit
+libbonobo
+libbonobo-32bit
+libbonoboui
+libbonoboui-32bit
+libcroco
+libcroco-32bit
+libexif
+libexif-32bit
+libgda
+libgdiplus
+libglade2
+libglade2-32bit
+libgnome
+libgnome-32bit
+libgnomecanvas
+libgnomecanvas-32bit
+libgnomecups
+libgnomecups-32bit
+libgnomedb
+libgnomeprint
+libgnomeprint-32bit
+libgnomeprintui
+libgnomeprintui-32bit
+libgnomesu
+libgnomeui
+libgnomeui-32bit
+libgsf
+libgsf-32bit
+libidl
+libidl-32bit
+libidn
+libidn-32bit
+libipoddevice
+libipoddevice-32bit
+libjasper
+libjasper-32bit
+libogg
+libogg-32bit
+librsvg
+librsvg-32bit
+libsmbclient
+libsmbclient-32bit
+libsndfile
+libsndfile-32bit
+libsoup
+libsoup-32bit
+libvorbis
+libvorbis-32bit
+libwnck
+libxklavier
+mDNSResponder
+mDNSResponder-32bit
+metacity
+mod_mono
+mono-basic
+mono-core
+mono-core-32bit
+mono-data
+mono-data-oracle
+mono-data-postgresql
+mono-data-sqlite
+mono-data-sybase
+mono-debugger
+mono-devel
+mono-extras
+mono-ikvm
+mono-locale-extras
+mono-tools
+mono-web
+mono-winforms
+monodevelop
+monodoc-core
+mozilla
+mozilla-nspr
+mozilla-nspr-32bit
+mozilla-nss
+mozilla-nss-32bit
+nautilus
+nautilus-32bit
+neon
+neon-32bit
+orbit2
+orbit2-32bit
+pkgconfig
+python
+python-32bit
+qtsharp
+rrdtool
+sax2-libsax-csharp
+sensors
+shared-mime-info
+sqlite2
+sqlite2-32bit
+startup-notification
+startup-notification-32bit
+update-alternatives
+vte
+xsp
+-Ins:
+

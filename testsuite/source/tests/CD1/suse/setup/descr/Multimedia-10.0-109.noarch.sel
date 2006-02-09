@@ -1,0 +1,212 @@
+# SuSE-Linux-Package-Selection 10.0-109.noarch -- (c) 2004 SuSE Linux AG
+# Needs parser version 4.0 or greater
+# generated on Mon Jan 30 17:22:10 UTC 2006
+
+=Ver: 4.0
+
+=Sel:  Multimedia 10.0 109 noarch
+
+=Sum: Multimedia
+=Sum.bg: Мултимедия
+=Sum.cs: Multimédia
+=Sum.da: Multimedie
+=Sum.de: Multimedia
+=Sum.el: Πολυμέσα
+=Sum.en: Multimedia
+=Sum.es: Multimedia
+=Sum.fr: Multimédia
+=Sum.gl: Multimedia
+=Sum.hu: Multimédia
+=Sum.it: Multimedia
+=Sum.ja: マルチメディア
+=Sum.ko: 멀티미디어
+=Sum.lt: Multimedija
+=Sum.nl: Multimedia
+=Sum.no: Multimedia
+=Sum.pl: Multimedia
+=Sum.pt: Multimédia
+=Sum.pt_BR: Multimídia
+=Sum.ru: Мультимедиа
+=Sum.sk: Multimédiá
+=Sum.sl: Večpredstavnost
+=Sum.sv: Multimedia
+=Sum.zh_CN: 多媒体
+=Sum.zh_TW: 多媒體
+
++Req:
+X11
+Basis-Sound
+-Req:
+
+=Cat: addon
+
+=Vis: true
+
+=Ord: 17
+
++Ins:
+FA_clalsadrv
+FA_clthreads
+FA_clxclient
+ImageMagick
+MPlayer
+MainActor-5
+SDL
+SDL-32bit
+ZynAddSubFX
+aalib
+aalib-32bit
+aeolus
+alevt
+alsa-tools
+alsa-tools-gui
+alsamixergui
+alsamodular
+amarok
+amarok-helix
+amarok-helix-backend
+amarok-libvisual
+amarok-xine
+arcad_eval
+arts
+arts-32bit
+aseqview
+atk
+atk-32bit
+audiofile
+audiofile-32bit
+aumix
+blender
+cdda2wav
+cdparanoia
+cdparanoia-32bit
+cdrdao
+cdrecord
+cecilia
+coriander
+csound
+cups-libs
+cups-libs-32bit
+fam
+fam-32bit
+festival
+fftw
+fftw3
+flac
+flac-32bit
+fltk
+fluidsynth
+freqtweak
+gamix
+gd
+gle
+glib2
+glib2-32bit
+gramofile
+grip
+gtk2
+gtk2-32bit
+gtkam
+gtkglarea
+gwenview
+gxmhtml
+hydrogen
+id3lib
+jaaa
+jack
+jack-32bit
+jack-rack
+jackEQ
+jamin
+kaffeine
+kalsatools
+kdelibs3
+kdelibs3-32bit
+kdetv
+ladcca
+ladcca-libs
+ladspa
+libao
+libavc1394
+libavc1394-32bit
+libdv
+libexif
+libexif-32bit
+libexif-gtk
+libghttp
+libgphoto2
+libgphoto2-32bit
+libjasper
+libjasper-32bit
+libmikmod
+libmikmod-32bit
+libquicktime
+libraw1394
+libraw1394-32bit
+libsidplay
+libsndfile
+libsndfile-32bit
+libtool
+libtool-32bit
+libwmf
+libxml
+libxml-32bit
+libxslt
+libxslt-32bit
+lirc
+lirc-32bit
+meterbridge
+mkisofs
+muse
+noteedit
+openmotif
+orbit
+orbit-32bit
+pango
+pango-32bit
+pbm2l7k
+pcsc-lite
+perl-Parse-RecDescent
+pia
+pixmp
+pmidi
+povray
+psgplay
+pyecasound
+python
+python-32bit
+qamix
+qjackconnect
+qjackctl
+qmidiarp
+seq24
+sidplay
+slang
+slang-32bit
+snd_sf2
+solfege
+sox
+timidity
+tse3
+tv-common
+tv-fonts
+v4l-conf
+vkeybd
+vorbis-tools
+wsndpref
+wsndsrv
+wxGTK
+xanim
+xawtv
+xgrabsc
+xine-ui
+xmms
+xmms-jack
+xmms-plugins
+xsidplay
+xv
+zapping
+zisofs-tools
+zvbi
+-Ins:
+

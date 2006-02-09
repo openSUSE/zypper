@@ -1,0 +1,76 @@
+# SuSE-Linux-Package-Selection 10.0-109.noarch -- (c) 2004 SuSE Linux AG
+# Needs parser version 4.0 or greater
+# generated on Mon Jan 30 17:22:24 UTC 2006
+
+=Ver: 4.0
+
+=Sel:  Tcl-Development 10.0 109 noarch
+
+=Sum: Tcl/Tk Development System
+=Sum.bg: Система за разработка на Tcl/Tk
+=Sum.cs: Vývojový systém Tcl/Tk
+=Sum.da: Tcl/Tk udviklingssystem
+=Sum.de: Tcl/Tk-Entwicklungssystem
+=Sum.el: Σύστημα Ανάπτυξης Tcl/Tk
+=Sum.en: Tcl/Tk Development System
+=Sum.es: Sistema de desarrollo Tcl/Tk
+=Sum.fr: Système de développement Tcl/Tk
+=Sum.gl: Tcl/Tk Development System
+=Sum.hu: Tcl/Tk fejlesztőrendszer
+=Sum.it: Ambiente di sviluppo Tcl/Tk
+=Sum.ja: Tcl/Tk の開発システム
+=Sum.ko: Tcl/Tk 개발 시스템
+=Sum.lt: Tcl/Tk programavimo sistema
+=Sum.nl: Tcl/Tk ontwikkelingssysteem
+=Sum.no: Tcl/Tk ontwikkelingssysteem
+=Sum.pl: Tworzenie oprogramowania w Tcl/Tk
+=Sum.pt: Sistema de Desenvolvimento Tcl/Tk
+=Sum.pt_BR: Tcl/Tk Sistema de Desenvolvimento
+=Sum.ru: Система разработки программ для Tcl/Tk
+=Sum.sk: Vývoj Tcl/Tk
+=Sum.sl: Razvojni sistem Tcl/Tk
+=Sum.sv: Utvecklingssystem för Tcl/Tk
+=Sum.zh_CN: Tcl/Tk 开发系统
+=Sum.zh_TW: Tcl/Tk 開發系統
+
++Req:
+Basis-Sound
+X11
+-Req:
+
+=Cat: addon
+
+=Vis: true
+
+=Ord: 64
+
++Ins:
+blt
+bwidget
+dejagnu
+expect
+frink
+itcl
+itcl-32bit
+iwidgets
+scotty
+spectcl
+tcl
+tcl-32bit
+tcl-devel
+tcllib
+tclplug
+tclplug-32bit
+tclx
+tix
+tk
+tk-32bit
+tk-devel
+tkcon
+tkimg
+tktable
+tls
+vtcl
+websh
+-Ins:
+

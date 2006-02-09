@@ -1,0 +1,121 @@
+# SuSE-Linux-Package-Selection 10.0-109.noarch -- (c) 2004 SuSE Linux AG
+# Needs parser version 4.0 or greater
+# generated on Mon Jan 30 17:22:20 UTC 2006
+
+=Ver: 4.0
+
+=Sel:  SuSE-Documentation 10.0 109 noarch
+
+=Sum: Help and Support Documentation
+=Sum.bg: Документация за помощ и поддръжка
+=Sum.cs: Nápověda a dokumentace
+=Sum.da: Hjælp og diverse dokumentation
+=Sum.de: Hilfe und Support-Dokumentation
+=Sum.el: Κείμενα Βοήθειας και Υποστήριξης
+=Sum.en: Help and Support Documentation
+=Sum.es: Documentación de ayuda y asistencia
+=Sum.fr: Documentation Aide et Support
+=Sum.gl: Help and Support Documentation
+=Sum.hu: Súgó és támogatási dokumentáció
+=Sum.it: Guida e documentazione di supporto
+=Sum.ja: ヘルプとサポートマニュアル
+=Sum.ko: Help and Support Documentation
+=Sum.lt: Pagalbos ir palaikymo dokumentacija
+=Sum.nl: Documentatie en ondersteuning
+=Sum.no: Documentatie en ondersteuning
+=Sum.pl: Pomoc i dokumentacja
+=Sum.pt: Documentação de Ajuda e Suporte
+=Sum.pt_BR: Ajuda e Documentação de Suporte
+=Sum.ru: Help and Support Documentation
+=Sum.sk: Help and Support Documentation
+=Sum.sl: Dokumentacija za pomoč in podporo
+=Sum.sv: Help and Support Documentation
+=Sum.zh_CN: 帮助和支持文档
+=Sum.zh_TW: 說明與支援文件
+
+=Cat: addon
+
+=Vis: true
+
+=Ord: 14
+
++Ins:
+htdig
+info2html
+susehelp
+wget
+-Ins:
+
++Ins.cs:
+man-pages-cz (man-pages)
+susehelp_cz (susehelp_en)
+suselinux-manual_cs (suselinux-manual_en)
+-Ins.cs:
+
++Ins.de:
+man-pages-de (man-pages)
+susehelp_de (susehelp_en)
+suselinux-manual_de (suselinux-manual_en)
+-Ins.de:
+
++Ins.default:
+man-pages
+susehelp_en
+suselinux-manual_en
+-Ins.default:
+
++Ins.es:
+man-pages-es (man-pages)
+susehelp_es (susehelp_en)
+suselinux-manual_es (suselinux-manual_en)
+-Ins.es:
+
++Ins.fr:
+man-pages-fr (man-pages)
+susehelp_fr (susehelp_en)
+suselinux-manual_fr (suselinux-manual_en)
+-Ins.fr:
+
++Ins.hu:
+man-pages-hu (man-pages)
+susehelp_hu (susehelp_en)
+suselinux-manual_hu (suselinux-manual_en)
+-Ins.hu:
+
++Ins.it:
+man-pages-it (man-pages)
+susehelp_it (susehelp_en)
+suselinux-manual_it (suselinux-manual_en)
+-Ins.it:
+
++Ins.ja:
+man-pages-ja (man-pages)
+susehelp_ja (susehelp_en)
+suselinux-manual_ja (suselinux-manual_en)
+xmanja
+-Ins.ja:
+
++Ins.ko:
+man-pages-ko (man-pages)
+susehelp_ko (susehelp_en)
+suselinux-manual_ko (suselinux-manual_en)
+-Ins.ko:
+
++Ins.sk:
+man-pages-cz (man-pages)
+susehelp_cz (susehelp_en)
+suselinux-manual_cs (suselinux-manual_en)
+-Ins.sk:
+
++Ins.zh_CN:
+man-pages-zh_CN (man-pages)
+susehelp_zh_CN (susehelp_en)
+suselinux-manual_zh_CN (suselinux-manual_en)
+-Ins.zh_CN:
+
++Ins.zh_TW:
+man-pages-zh_TW (man-pages)
+susehelp_zh_TW (susehelp_en)
+suselinux-manual_zh_TW (suselinux-manual_en)
+-Ins.zh_TW:
+

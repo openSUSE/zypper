@@ -1,0 +1,243 @@
+# SuSE-Linux-Package-Selection 10.0-109.noarch -- (c) 2004 SuSE Linux AG
+# Needs parser version 4.0 or greater
+# generated on Mon Jan 30 17:21:34 UTC 2006
+
+=Ver: 4.0
+
+=Sel:  Java 10.0 109 noarch
+
+=Sum: Java
+=Sum.bg: Java
+=Sum.cs: Java
+=Sum.da: Java
+=Sum.de: Java
+=Sum.el: Java
+=Sum.en: Java
+=Sum.es: Java
+=Sum.fr: Java
+=Sum.gl: Java
+=Sum.hu: Java
+=Sum.it: Java
+=Sum.ja: Java
+=Sum.ko: Java
+=Sum.lt: Java
+=Sum.nl: Java
+=Sum.no: Java
+=Sum.pl: Java
+=Sum.pt: Java
+=Sum.pt_BR: Java
+=Sum.ru: Java
+=Sum.sk: Java
+=Sum.sl: Java
+=Sum.sv: Java
+=Sum.zh_CN: Java
+=Sum.zh_TW: Java
+
++Req:
+X11
+-Req:
+
+=Cat: addon
+
+=Vis: true
+
+=Ord: 65
+
++Ins:
+adaptx
+adaptx-doc
+adaptx-javadoc
+ant
+ant-antlr
+ant-apache-bcel
+ant-apache-bsf
+ant-apache-log4j
+ant-apache-oro
+ant-apache-regexp
+ant-apache-resolver
+ant-javadoc
+ant-javamail
+ant-jdepend
+ant-jmf
+ant-junit
+ant-manual
+ant-nodeps
+ant-scripts
+ant-swing
+ant-trax
+antlr
+antlr-javadoc
+antlr-jedit
+antlr-manual
+avalon-framework
+avalon-framework-javadoc
+avalon-framework-manual
+avalon-logkit
+avalon-logkit-javadoc
+bcel
+bcel-javadoc
+bcel-manual
+bsf
+bsf-javadoc
+bsh
+bsh-demo
+bsh-javadoc
+bsh-manual
+castor
+castor-demo
+castor-doc
+castor-javadoc
+castor-test
+castor-xml
+concurrent
+concurrent-javadoc
+cryptix
+cryptix-asn1
+cryptix-asn1-javadoc
+cryptix-javadoc
+eclipse
+eclipse-gtk2
+eclipse-jdt
+eclipse-pde
+eclipse-platform
+eclipse-scripts
+ejb
+ejb-javadoc
+gnu-getopt
+gnu-getopt-javadoc
+jaf
+jaf-demo
+jaf-javadoc
+jaf-manual
+jakarta-commons-beanutils
+jakarta-commons-beanutils-javadoc
+jakarta-commons-collections
+jakarta-commons-collections-javadoc
+jakarta-commons-daemon
+jakarta-commons-daemon-javadoc
+jakarta-commons-daemon-jsvc
+jakarta-commons-dbcp
+jakarta-commons-dbcp-javadoc
+jakarta-commons-digester
+jakarta-commons-digester-javadoc
+jakarta-commons-discovery
+jakarta-commons-discovery-javadoc
+jakarta-commons-el
+jakarta-commons-el-javadoc
+jakarta-commons-fileupload
+jakarta-commons-fileupload-javadoc
+jakarta-commons-lang
+jakarta-commons-lang-javadoc
+jakarta-commons-launcher
+jakarta-commons-launcher-javadoc
+jakarta-commons-logging
+jakarta-commons-logging-javadoc
+jakarta-commons-modeler
+jakarta-commons-modeler-javadoc
+jakarta-commons-pool
+jakarta-commons-pool-javadoc
+jakarta-commons-validator
+jakarta-commons-validator-javadoc
+jakarta-taglibs-standard
+jakarta-taglibs-standard-javadoc
+jasper5
+jasper5-javadoc
+java-1_4_2-sun
+java-1_4_2-sun-alsa
+java-1_4_2-sun-demo
+java-1_4_2-sun-devel
+java-1_4_2-sun-jdbc
+java-1_4_2-sun-plugin
+java-1_4_2-sun-src
+java_cup
+java_cup-javadoc
+java_cup-manual
+javagroups
+javagroups-demo
+javagroups-javadoc
+javamail
+javamail-demo
+javamail-javadoc
+javamail-manual
+javamail-monolithic
+jboss
+jlex
+jlex-javadoc
+jms
+jms-javadoc
+jmx
+jmx-javadoc
+jonas
+jonas-client
+jonas-docs
+jonas-examples
+jpackage-utils
+jta
+jta-javadoc
+junit
+junit-demo
+junit-javadoc
+junit-manual
+jython
+jython-demo
+jython-javadoc
+jython-manual
+ldapjdk
+ldapjdk-javadoc
+libreadline-java
+libreadline-java-javadoc
+libswt3-gtk2
+log4j
+log4j-javadoc
+log4j-manual
+mx4j
+mx4j-javadoc
+mx4j-manual
+mysql-connector-java
+netcomponents
+netcomponents-javadoc
+oldrhino
+oldrhino-javadoc
+oldrhino-manual
+oro
+oro-javadoc
+puretls
+puretls-demo
+puretls-javadoc
+regexp
+regexp-javadoc
+servletapi3
+servletapi3-javadoc
+servletapi4
+servletapi4-javadoc
+servletapi5
+servletapi5-javadoc
+struts
+struts-javadoc
+struts-manual
+struts-webapps-tomcat5
+wsdl4j
+wsdl4j-javadoc
+xalan-j2
+xalan-j2-demo
+xalan-j2-javadoc
+xalan-j2-manual
+xalan-j2-xsltc
+xerces-j2
+xerces-j2-demo
+xerces-j2-javadoc-apis
+xerces-j2-javadoc-dom3
+xerces-j2-javadoc-impl
+xerces-j2-javadoc-other
+xerces-j2-javadoc-xni
+xerces-j2-scripts
+xml-commons
+xml-commons-apis
+xml-commons-apis-javadoc
+xml-commons-apis-manual
+xml-commons-resolver
+xml-commons-resolver-javadoc
+xml-commons-which
+xml-commons-which-javadoc
+-Ins:
+

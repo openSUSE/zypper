@@ -1,0 +1,140 @@
+# SuSE-Linux-Package-Selection 10.0-109.noarch -- (c) 2004 SuSE Linux AG
+# Needs parser version 4.0 or greater
+# generated on Mon Jan 30 17:21:17 UTC 2006
+
+=Ver: 4.0
+
+=Sel:  Games 10.0 109 noarch
+
+=Sum: Games
+=Sum.bg: Игри
+=Sum.cs: Hry
+=Sum.da: Spil
+=Sum.de: Spiele
+=Sum.el: Παιχνίδια
+=Sum.en: Games
+=Sum.es: Juegos
+=Sum.fr: Jeux
+=Sum.gl: Xogos
+=Sum.hu: Játékok
+=Sum.it: Giochi
+=Sum.ja: ゲーム
+=Sum.ko: 게임
+=Sum.lt: Žaidimai
+=Sum.nl: Spellen
+=Sum.no: Spellen
+=Sum.pl: Gry
+=Sum.pt: Jogos
+=Sum.pt_BR: Jogos
+=Sum.ru: Игры
+=Sum.sk: Hry
+=Sum.sl: Igre
+=Sum.sv: Spel
+=Sum.zh_CN: 游戏
+=Sum.zh_TW: 遊戲
+
+=Cat: addon
+
+=Vis: true
+
+=Ord: 16
+
++Ins:
+BASS
+FOTAQ
+FooBillard
+Maelstrom
+SDL
+SDL-32bit
+SDL_gfx
+SDL_image
+SDL_mixer
+SDL_mixer-32bit
+SDL_net
+SDL_perl
+SDL_ttf
+aalib
+aalib-32bit
+armagetron
+atk
+atk-32bit
+bos
+briquolo
+bzflag
+cairo
+cairo-32bit
+chromium
+circuslinux
+clanbomber
+clanlib
+crafty
+csmash
+enigma
+freeciv
+frozen-bubble
+gl-117
+glchess
+glest
+glest-data
+glitz
+glitz-32bit
+gtk2
+gtk2-32bit
+jack
+jack-32bit
+joy2key
+kdegames3-arcade
+kdegames3-board
+kdegames3-card
+kdegames3-tactic
+khunphan
+lbreakout
+libmikmod
+libmikmod-32bit
+libogg
+libogg-32bit
+libsndfile
+libsndfile-32bit
+libvorbis
+libvorbis-32bit
+lincity
+lincity-ng
+ltris
+lua
+madbomber
+marbles
+methane
+neverball
+openal
+openal-32bit
+pachi
+pango
+pango-32bit
+penguin-command
+physfs
+pingus
+python
+python-32bit
+python-pygame
+scummvm
+slang
+slang-32bit
+solarwolf
+stratagus
+supertux
+timidity
+torcs
+torcs-data
+trackballs
+tuxpaint
+tuxracer
+wesnoth
+wesnoth-UnderTheBurningSuns
+wesnoth-data-full
+wesnoth-data-small
+xboard
+xlogical
+xmahjong
+xmoto
+-Ins:
+

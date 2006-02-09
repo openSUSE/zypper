@@ -1,0 +1,55 @@
+# SuSE-Linux-Package-Selection 10.0-109.noarch -- (c) 2004 SuSE Linux AG
+# Needs parser version 4.0 or greater
+# generated on Mon Jan 30 17:22:05 UTC 2006
+
+=Ver: 4.0
+
+=Sel:  Minimal+X11 10.0 109 noarch
+
+=Sum: Minimum Graphical System (without GNOME and KDE)
+=Sum.bg: Минимална графична система (без GNOME и KDE)
+=Sum.cs: Minimální grafický systém bez GNOME a KDE
+=Sum.da: Minimalt grafisk system (uden GNOME og KDE)
+=Sum.de: Minimales grafisches System (ohne GNOME/KDE)
+=Sum.el: Ελάχιστο Γραφικό Σύστημα (χωρίς GNOME και KDE)
+=Sum.en: Minimum Graphical System (without GNOME and KDE)
+=Sum.es: Sistema gráfico mínimo (sin GNOME ni KDE)
+=Sum.fr: Système graphique minimum (sans GNOME ni KDE)
+=Sum.gl: Minimum Graphical System (without GNOME and KDE)
+=Sum.hu: Minimális grafikus rendszer (GNOME/KDE nélkül)
+=Sum.it: Sistema grafico minimo (senza GNOME e KDE)
+=Sum.ja: 最小限のグラフィカルシステム(GNOMEとKDEは除く)
+=Sum.ko: Minimum Graphical System (without GNOME and KDE)
+=Sum.lt: Minimali grafinė sistema (be GNOME ir KDE)
+=Sum.nl: Minimaal grafisch systeem (zonder GNOME en KDE)
+=Sum.no: Minimaal grafisch systeem (zonder GNOME en KDE)
+=Sum.pl: Minimalny system graficzny (bez GNOME i KDE)
+=Sum.pt: Sistema Gráfico Mínimo (sem GNOME e KDE)
+=Sum.pt_BR: Sistema Gráfico Mínimo (sem GNOME e KDE)
+=Sum.ru: Minimum Graphical System (without GNOME and KDE)
+=Sum.sk: Minimum Graphical System (without GNOME and KDE)
+=Sum.sl: Minimalni sistem z grafiko (brez GNOME inKDE)
+=Sum.sv: Minimum Graphical System (without GNOME and KDE)
+=Sum.zh_CN: 最小图形系统（不带 GNOME 和 KDE）
+=Sum.zh_TW: 最小圖形系統 (不含 GNOME 及 KDE)
+
++Req:
+Min
+X11
+-Req:
+
++Con:
+Minimal
+default
+default-Gnome
+-Con:
+
+=Cat: baseconf
+
+=Vis: true
+
+=Ord: 02
+
++Ins:
+-Ins:
+

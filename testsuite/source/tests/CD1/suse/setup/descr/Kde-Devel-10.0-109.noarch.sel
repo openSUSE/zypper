@@ -1,0 +1,302 @@
+# SuSE-Linux-Package-Selection 10.0-109.noarch -- (c) 2004 SuSE Linux AG
+# Needs parser version 4.0 or greater
+# generated on Mon Jan 30 17:21:50 UTC 2006
+
+=Ver: 4.0
+
+=Sel:  Kde-Devel 10.0 109 noarch
+
+=Sum: KDE Development
+=Sum.bg: KDE разработка
+=Sum.cs: Vývoj KDE
+=Sum.da: KDE Udvikling
+=Sum.de: KDE Entwicklung
+=Sum.el: Ανάπτυξη KDE
+=Sum.en: KDE Development
+=Sum.es: Desarrollo de KDE
+=Sum.fr: Développement KDE
+=Sum.gl: KDE Development
+=Sum.hu: KDE-fejlesztés
+=Sum.it: Sviluppo KDE
+=Sum.ja: KDE の開発システム
+=Sum.ko: KDE 개발
+=Sum.lt: KDE vystymas
+=Sum.nl: KDE-ontwikkeling
+=Sum.no: KDE-ontwikkeling
+=Sum.pl: Tworzenie oprogramowania KDE
+=Sum.pt: Desenvolvimento KDE
+=Sum.pt_BR: Desenvolvimento KDE
+=Sum.ru: KDE Development
+=Sum.sk: Vývoj KDE
+=Sum.sl: Razvoj za okolje KDE
+=Sum.sv: KDE-utveckling
+=Sum.zh_CN: KDE 开发
+=Sum.zh_TW: KDE 開發
+
++Req:
+Kde-Desktop
+Basis-Devel
+-Req:
+
+=Cat: addon
+
+=Vis: true
+
+=Ord: 62
+
++Ins:
+ImageMagick-devel
+Mesa-devel
+Mesa-devel-32bit
+OpenEXR-devel
+SDL-devel
+SDL-devel-32bit
+a2ps
+aalib-devel
+aalib-devel-32bit
+agg-devel
+alsa-devel
+arts-devel
+aspell-devel
+atk-devel
+audiofile-devel
+bluez-libs
+capi4linux
+capi4linux-32bit
+ccache
+cdk-devel
+cdparanoia
+cdparanoia-32bit
+colorgcc
+compat
+compat-32bit
+cppunit-devel
+ctags
+cups-devel
+curl-devel
+cyrus-sasl-devel
+cyrus-sasl-devel-32bit
+db-devel
+dbus-1-devel
+dbus-1-qt
+dbus-1-qt-32bit
+dclib-devel
+doxygen
+e2fsprogs-devel
+e2fsprogs-devel-32bit
+eric
+esound-devel
+fam-devel
+festival
+ffmpeg-devel
+flac-devel
+fontconfig-devel
+fontconfig-devel-32bit
+freeglut-devel
+freeglut-devel-32bit
+freetype2-devel
+freetype2-devel-32bit
+fribidi-devel
+fuse-devel
+gambas
+gconf2-devel
+gdbm-devel
+gdbm-devel-32bit
+gettext-devel
+giflib-devel
+giflib-devel-32bit
+glib-devel
+glib-devel-32bit
+glib2-devel
+glibc-html
+glitz-devel
+gnokii
+gnome-vfs2-devel
+gnutls-devel
+gnutls-devel-32bit
+graphviz
+gstreamer-devel
+gstreamer-plugins-devel
+gtk-devel
+gtk2-devel
+hal-devel
+hk_classes
+hk_classes-devel
+hp-officeJet
+hwinfo-devel
+icecream
+icecream-monitor
+id3lib-devel
+imlib-config
+imlib-devel
+imlib2
+imlib2-devel
+jack
+jack-32bit
+jack-devel
+java-1_4_2-sun
+java-1_4_2-sun-devel
+joe
+kdbg
+kdebase3-devel
+kdebindings3-java
+kdebindings3-javascript
+kdebindings3-perl
+kdegraphics3-devel
+kdelibs3-devel
+kdelibs3-devel-doc
+kdemultimedia3-devel
+kdemultimedia3-video
+kdepim3-devel
+kdesdk3
+kdesdk3-devel
+kdesdk3-profile
+kdesdk3-translate
+kdeutils3-devel
+kdevelop3
+km_tpctl
+krb5-devel
+krb5-devel-32bit
+krpmbuilder
+lame
+lib3ds
+libacl-devel
+libakode-devel
+libao-devel
+libart_lgpl
+libart_lgpl-32bit
+libart_lgpl-devel
+libattr-devel
+libbonobo-devel
+libbonoboui-devel
+libchipcard-devel
+libdar-devel
+libgcrypt-devel
+libgcrypt-devel-32bit
+libgpg-error-devel
+libgpg-error-devel-32bit
+libgsf-devel
+libidn-devel
+libieee1284
+libieee1284-32bit
+libjasper
+libjasper-32bit
+libjpeg-devel
+libjpeg-devel-32bit
+libkexif
+libkipi-devel
+liblcms-devel
+liblcms-devel-32bit
+liblrdf-devel
+libmal-devel
+libmng-devel
+libmusicbrainz-devel
+libogg-devel
+libpixman-devel
+libpng-devel
+libpng-devel-32bit
+libpqxx-devel
+libsamplerate-devel
+libsmbclient-devel
+libsndfile-devel
+libtheora-devel
+libtiff-devel
+libtiff-devel-32bit
+libtunepimp-devel
+libvisual-devel
+libvorbis-devel
+libwnck-devel
+libxml2-devel
+libxml2-devel-32bit
+libxslt-devel
+libxslt-devel-32bit
+libyaz-devel
+lineakd-devel
+lua-devel
+mDNSResponder-devel
+mad-devel
+meanwhile-devel
+mpg321
+mysql-devel
+neon-devel
+net-snmp-devel
+openal-devel
+openldap2-devel
+openldap2-devel-32bit
+openobex-devel
+openslp-devel
+openssl-devel
+openssl-devel-32bit
+openwbem-devel
+orbit2-devel
+pam-devel
+pango-devel
+pcre-devel
+pilot-link-devel
+pkgconfig
+poppler
+poppler-devel
+poppler-qt
+popt-devel
+popt-devel-32bit
+postgresql-devel
+python-devel
+qca-devel
+qscintilla
+qt3-devel
+qt3-devel-32bit
+qt3-devel-doc
+qt3-devel-tools
+qt3-examples
+qt3-man
+qtc
+raptor
+raptor-devel
+rcs
+readline-devel
+readline-devel-32bit
+rpm-devel
+ruby
+samba-client
+scpm-devel
+sensors
+slang-devel
+slang-devel-32bit
+speex-devel
+sqlite-devel
+sqlite2-devel
+steak
+strace
+strace-32bit
+subversion-devel
+taglib-devel
+tcpd-devel
+unixODBC-devel
+unixODBC-devel-32bit
+unsermake
+unzip
+update-alternatives
+update-desktop-files
+valgrind
+valgrind2
+wv2-devel
+xbase
+xbsql
+xemacs
+xemacs-info
+xemacs-packages
+xemacs-packages-info
+xine-devel
+xorg-x11-Xnest
+xorg-x11-Xvfb
+xorg-x11-devel
+xorg-x11-devel-32bit
+xosd-devel
+xpdf-config
+zvbi-devel
+-Ins:
+
++Ins.ja:
+ddskk-xemacs
+-Ins.ja:
+

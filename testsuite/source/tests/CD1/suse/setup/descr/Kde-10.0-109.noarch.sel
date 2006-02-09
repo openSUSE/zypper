@@ -1,0 +1,308 @@
+# SuSE-Linux-Package-Selection 10.0-109.noarch -- (c) 2004 SuSE Linux AG
+# Needs parser version 4.0 or greater
+# generated on Mon Jan 30 17:21:35 UTC 2006
+
+=Ver: 4.0
+
+=Sel:  Kde 10.0 109 noarch
+
+=Sum: All of KDE
+=Sum.bg: Всичко от KDE
+=Sum.cs: Vše z KDE
+=Sum.da: Alt KDE relateret
+=Sum.de: KDE komplett
+=Sum.el: Όλο το KDE
+=Sum.en: All of KDE
+=Sum.es: Todo KDE
+=Sum.fr: Tout de KDE
+=Sum.gl: Todo o KDE
+=Sum.hu: Minden, ami KDE
+=Sum.it: Tutto KDE
+=Sum.ja: KDE システム
+=Sum.ko: KDE 전체
+=Sum.lt: Visas KDE
+=Sum.nl: KDE compleet
+=Sum.no: KDE compleet
+=Sum.pl: Wszystko z KDE
+=Sum.pt: Todo o KDE
+=Sum.pt_BR: Tudo do KDE
+=Sum.ru: Весь KDE
+=Sum.sk: Celé KDE
+=Sum.sl: Celoten KDE
+=Sum.sv: Hela KDE
+=Sum.zh_CN: 所有 KDE
+=Sum.zh_TW: KDE 全部
+
++Req:
+Kde-Desktop
+X11
+-Req:
+
+=Cat: addon
+
+=Vis: true
+
+=Ord: 12
+
++Ins:
+AdobeICCProfiles
+NetworkManager-kde
+amarok
+barcode
+basket
+boson
+cdda2wav
+dar
+datakiosk
+digikam
+digikam-doc
+digikamimageplugins
+dragonegg
+eric
+free-ttf-fonts
+fuse-kio
+gettext
+gettext-32bit
+gmp
+gmp-32bit
+gwenview
+i4l-vbox
+imgSeek
+indeview
+k3b
+kadslwatch
+kaffeine
+kamix
+kat
+katalog
+kbarcode
+kbear
+kbiff
+kbilliards
+kcall
+kcfgcreator
+kchmviewer
+kconfigeditor
+kdar
+kdbg
+kdeaccessibility3
+kdeaddons3-games
+kdeaddons3-kate
+kdeaddons3-kicker
+kdeaddons3-konqueror
+kdeaddons3-kontact
+kdeaddons3-sound
+kdeadmin3
+kdeartwork3
+kdeartwork3-sound
+kdeartwork3-xscreensaver
+kdebase3
+kdebase3-32bit
+kdebase3-SuSE
+kdebase3-devel
+kdebase3-extra
+kdebase3-kdm
+kdebase3-ksysguardd
+kdebase3-nsplugin64
+kdebase3-samba
+kdebase3-session
+kdebindings3
+kdebindings3-javascript
+kdebindings3-perl
+kdebindings3-python
+kdebindings3-ruby
+kdebluetooth
+kdeedu3
+kdegames3
+kdegames3-arcade
+kdegames3-board
+kdegames3-card
+kdegames3-tactic
+kdegraphics3
+kdegraphics3-3D
+kdegraphics3-devel
+kdegraphics3-extra
+kdegraphics3-fax
+kdegraphics3-imaging
+kdegraphics3-kamera
+kdegraphics3-pdf
+kdegraphics3-postscript
+kdegraphics3-scan
+kdegraphics3-tex
+kdelibs3
+kdelibs3-32bit
+kdelibs3-devel
+kdelibs3-devel-doc
+kdelibs3-doc
+kdemultimedia3
+kdemultimedia3-CD
+kdemultimedia3-devel
+kdemultimedia3-extra
+kdemultimedia3-jukebox
+kdemultimedia3-midi
+kdemultimedia3-mixer
+kdemultimedia3-sound
+kdemultimedia3-video
+kdemultimedia3-video-xine
+kdenetwork3
+kdenetwork3-IRC
+kdenetwork3-InstantMessenger
+kdenetwork3-dialup
+kdenetwork3-lan
+kdenetwork3-lisa
+kdenetwork3-news
+kdenetwork3-query
+kdenetwork3-vnc
+kdenetwork3-wireless
+kdepim3
+kdepim3-devel
+kdepim3-kpilot
+kdepim3-mobile
+kdepim3-networkstatus
+kdepim3-sync
+kdepim3-time-management
+kdesdk3
+kdesdk3-devel
+kdesdk3-kdecvs
+kdesdk3-translate
+kdesvn
+kdetoys3
+kdetv
+kdeutils3
+kdeutils3-devel
+kdeutils3-extra
+kdeutils3-laptop
+kdevelop3
+kdewebdev3
+kdiff3
+kdirstat
+kdissert
+kerry
+kfs
+kile
+kim-browser
+kimdaba
+kio-locate
+kio_beagle
+kio_ipodslave
+kiosktool
+kipi-plugins
+kisdnwatch
+klipsi
+kmldonkey
+kmobiletools
+kmymoney
+knights
+knoda
+knx
+koffice
+koffice-illustration
+koffice-planning
+koffice-presentation
+koffice-spreadsheet
+koffice-wordprocessing
+kompose
+konserve
+konversation
+kover
+kphone
+kpl
+kpsion
+kradio
+krecord
+krename
+krpmbuilder
+krusader
+kscpm
+kseg
+ksimus
+kssh
+kst
+ksteak
+ksudoko
+ksudoku
+ksystemlog
+ktorrent
+ktray
+ktunes
+kvdr
+kvim
+kvirc
+kvocabs
+kvpnc
+kwatch
+kwebget
+kxmleditor
+kyum
+libart_lgpl
+libart_lgpl-32bit
+myldapklient
+netpbm
+noteedit
+perl-Tk
+pgcalc
+plptools-kde
+postgresql-libs
+postgresql-libs-32bit
+pwmanager
+python
+python-32bit
+qt
+qt3
+qt3-32bit
+qt3-mysql
+qt3-sqlite
+rekall
+scribus
+smb4k
+steak
+susevbox
+synce
+synce-kde
+taskjuggler
+taskjuggler-kde
+tellico
+thinkeramik
+tse3
+valknut
+viki
+vym
+xmms-kde
+-Ins:
+
++Ins.cs:
+koffice-i18n-cs
+-Ins.cs:
+
++Ins.de:
+koffice-i18n-de
+-Ins.de:
+
++Ins.es:
+koffice-i18n-es
+-Ins.es:
+
++Ins.fr:
+koffice-i18n-fr
+-Ins.fr:
+
++Ins.hu:
+koffice-i18n-hu
+-Ins.hu:
+
++Ins.it:
+koffice-i18n-it
+-Ins.it:
+
++Ins.nl:
+koffice-i18n-nl
+-Ins.nl:
+
++Ins.pt_BR:
+koffice-i18n-pt_BR
+-Ins.pt_BR:
+
++Ins.sk:
+koffice-i18n-sk
+-Ins.sk:
+

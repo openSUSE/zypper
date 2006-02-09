@@ -1,0 +1,97 @@
+# SuSE-Linux-Package-Selection 10.0-109.noarch -- (c) 2004 SuSE Linux AG
+# Needs parser version 4.0 or greater
+# generated on Mon Jan 30 17:22:12 UTC 2006
+
+=Ver: 4.0
+
+=Sel:  Non-OSS 10.0 109 noarch
+
+=Sum: Non-Open Source Packages
+=Sum.bg: Non-Open Source Packages
+=Sum.cs: Non-Open Source Packages
+=Sum.da: Non-Open Source Packages
+=Sum.de: Non-Open Source Packages
+=Sum.el: Non-Open Source Packages
+=Sum.en: Non-Open Source Packages
+=Sum.es: Non-Open Source Packages
+=Sum.fr: Non-Open Source Packages
+=Sum.gl: Non-Open Source Packages
+=Sum.hu: Non-Open Source Packages
+=Sum.it: Non-Open Source Packages
+=Sum.ja: Non-Open Source Packages
+=Sum.ko: Non-Open Source Packages
+=Sum.lt: Non-Open Source Packages
+=Sum.nl: Niet-opensource pakketten
+=Sum.no: Niet-opensource pakketten
+=Sum.pl: Non-Open Source Packages
+=Sum.pt: Non-Open Source Packages
+=Sum.pt_BR: Non-Open Source Packages
+=Sum.ru: Non-Open Source Packages
+=Sum.sk: Non-Open Source Packages
+=Sum.sl: Non-Open Source Packages
+=Sum.sv: Non-Open Source Packages
+=Sum.zh_CN: Non-Open Source Packages
+=Sum.zh_TW: Non-Open Source Packages
+
++Req:
+-Req:
+
+=Cat: addon
+
+=Vis: true
+
+=Ord: 93
+
++Ins:
+IPAGothic
+IPAMincho
+IPAPGothic
+IPAPMincho
+IPAUIGothic
+Intel-536ep
+RealPlayer
+acroread
+ant-antlr
+ant-javamail
+atmel-firmware
+avm_fcdsl
+avmfritzcapi
+bitstream-vera
+flash-player
+ipw-firmware
+iscan
+jaf
+jaf-demo
+jaf-javadoc
+jaf-manual
+java-1_5_0-sun
+java-1_5_0-sun-alsa
+java-1_5_0-sun-demo
+java-1_5_0-sun-devel
+java-1_5_0-sun-jdbc
+java-1_5_0-sun-plugin
+java-1_5_0-sun-src
+javamail
+javamail-demo
+javamail-javadoc
+javamail-manual
+javamail-monolithic
+jms
+jms-javadoc
+jta
+jta-javadoc
+kernel-bigsmp-nongpl
+kernel-debug-nongpl
+kernel-default-nongpl
+kernel-smp-nongpl
+kernel-um-nongpl
+km_fcdsl
+km_fritzcapi
+km_smartlink-softmodem
+smartlink-softmodem
+ttf-founder
+ttf-founder-simplified
+ttf-founder-traditional
+xv
+-Ins:
+
