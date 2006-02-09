@@ -11,8 +11,8 @@ include "suse-primary.rnc" {
 element-pattern = element pattern { pattern }
 
 pattern =
-    element patternid { text },
-    element name {
+    element name { text },
+    element summary {
       attribute lang { text }?,
       text
     }+,

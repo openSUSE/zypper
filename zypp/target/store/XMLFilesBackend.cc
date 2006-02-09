@@ -533,7 +533,7 @@ XMLFilesBackend::createPattern( const zypp::parser::yum::YUMPatternData & parsed
     shared_ptr<XMLPatternImpl> impl(new XMLPatternImpl());
 
     impl->_user_visible = ((parsed.userVisible == "false" ) ? false : true );
-    impl->_summary = parsed.name;
+    impl->_summary = parsed.summary;
     impl->_description = parsed.description;
     impl->_default = ((parsed.default_ == "false" ) ? false : true );
     impl->_category = parsed.category;
@@ -541,7 +541,7 @@ XMLFilesBackend::createPattern( const zypp::parser::yum::YUMPatternData & parsed
     impl->_script = parsed.script;    
 
     // Collect basic Resolvable data
-    NVRAD dataCollect( parsed.patternId, Edition::noedition, Arch_noarch,           createDependencies( parsed, ResTraits<Pattern>::kind));
+    NVRAD dataCollect( parsed.name, Edition::noedition, Arch_noarch,           createDependencies( parsed, ResTraits<Pattern>::kind));
     Pattern::Ptr pattern = detail::makeResolvableFromImpl( dataCollect, impl );
     return pattern;
   }

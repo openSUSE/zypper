@@ -38,19 +38,15 @@ namespace zypp
 	const zypp::parser::yum::YUMPatternData & parsed
       )
       : _user_visible(parsed.userVisible == "true")
-      , _summary(parsed.name)
+      , _summary(parsed.summary)
       , _description(parsed.description)
       , _default(parsed.default_ == "true")
       , _category(parsed.category)
       , _icon(parsed.icon)
       , _script(parsed.script)
       , _source(source_r)
-      {
+      { }
 
-// to name        std::string patternId;
-// as _summary        std::list<multilang> name;
-// _description
-      }
       /** Is to be visible for user? */
       bool YUMPatternImpl::userVisible() const {
 	return _user_visible;

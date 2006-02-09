@@ -26,11 +26,11 @@
     </element>
   </define>
   <define name="pattern">
-    <element name="patternid">
+    <element name="name">
       <text/>
     </element>
     <oneOrMore>
-      <element name="name">
+      <element name="summary">
         <optional>
           <attribute name="lang"/>
         </optional>

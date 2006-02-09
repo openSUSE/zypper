@@ -37,8 +37,6 @@ namespace zypp
 
   public:
     /** */
-    std::string patternId() const;
-    /** */
     bool isDefault() const;
     /** */
     bool userVisible() const;

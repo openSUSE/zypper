@@ -522,7 +522,7 @@ INT << "Storing data to cache" << endl;
 	  {
 	    shared_ptr<YUMPatternImpl> impl(new YUMPatternImpl(source_r, parsed));
             // Collect basic Resolvable data
-            NVRAD dataCollect( parsed.patternId,
+            NVRAD dataCollect( parsed.name,
                                Edition::noedition,
                                Arch_noarch,
                                createDependencies(parsed, ResTraits<Pattern>::kind));

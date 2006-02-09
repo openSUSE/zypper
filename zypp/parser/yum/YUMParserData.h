@@ -347,8 +347,8 @@ namespace zypp {
       public:
 
         YUMPatternData();
-        std::string patternId;
-        TranslatedText name;
+        std::string name;
+        TranslatedText summary;
         std::string default_;
         std::string userVisible;
         TranslatedText description;

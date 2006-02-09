@@ -62,11 +62,11 @@ namespace zypp {
              child = child->next) {
                if (_helper.isElement(child)) {
                  string name = _helper.name(child);
-                 if (name == "patternid") {
-                   dataPtr->patternId = _helper.content(child);
+                 if (name == "name") {
+                   dataPtr->name = _helper.content(child);
                  }
-                 else if (name == "name") {
-                   dataPtr->name.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
+                 else if (name == "summary") {
+                   dataPtr->summary.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
                  }
                  else if (name == "default") {
                    dataPtr->default_ = _helper.content(child);

@@ -322,9 +322,8 @@ namespace zypp {
       {
         out << "-------------------------------------------------" << endl
           << "Pattern Data: " << endl
-          << "pattern-id: '" << data.patternId << "'" << endl
-          << "name:" << endl
-          << data.name << endl
+          << "name:" << data.name << endl
+          << "summary: '" << data.summary << "'" << endl
           << "default: '" << data.default_  << "'" << endl
           << "user-visible: '" << data.userVisible  << "'" << endl
           << "description:" << endl << data.description << endl
