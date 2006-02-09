@@ -204,7 +204,7 @@ MediaHandler::createAttachPoint() const
   // provide a default (temporary) attachpoint
   /////////////////////////////////////////////////////////////////
   const char * defmounts[] = {
-      "/var/tmp", "/var/adm/mount", /**/NULL/**/
+      "/var/adm/mount", "/var/tmp", /**/NULL/**/
   };
 
   Pathname apoint;
@@ -222,11 +222,16 @@ MediaHandler::createAttachPoint() const
     DBG << "Trying to create attachPoint in " << aroot << std::endl;
 
     Pathname abase( aroot + "AP_" );
-    for ( unsigned i = 1; i < 10; ++i ) {
+    for ( unsigned i = 1; i < 42; ++i ) {
       adir( Pathname::extend( abase, str::hexstring( i ) ) );
-      if ( ! adir.isExist() && mkdir( adir.path() ) == 0 ) {
+      if ( ! adir.isExist() ) {
+	int err = mkdir( adir.path() );
+	if (err == EROFS)			// readonly fs, dont try further
+	   break;
+	if (err == 0 ) {
             apoint = adir.path();
             break;
+	}
       }
     }
   }
