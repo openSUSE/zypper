@@ -415,7 +415,7 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
 	}
     }
 
-    MIL << "PackagesToInsDel: delete " << dellist_r.size()
+    MIL << "ResolvablesToInsDel: delete " << dellist_r.size()
       << ", install " << instlist_r.size()
 	<< ", srcinstall " << srclist_r.size() << endl;
 
@@ -492,8 +492,8 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
 
     PoolItemList ilist; // for install order
     PoolItemList installed; // dummy, empty, should contain already installed
-    for ( PoolItemList::iterator pkgIt = instbackup_r.begin(); pkgIt != instbackup_r.end(); ++pkgIt ) {
-      ilist.push_back( *pkgIt );
+    for ( PoolItemList::iterator resIt = instbackup_r.begin(); resIt != instbackup_r.end(); ++resIt ) {
+      ilist.push_back( *resIt );
     }
     InstallOrder order( pool_r, ilist, installed );
     // start recursive depth-first-search
@@ -510,23 +510,28 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
 //    unsigned last_prio     = 0;
     unsigned last_medianum = 0;
 
-    for ( PoolItemList pkgs = order.computeNextSet(); ! pkgs.empty(); pkgs = order.computeNextSet() )
+    PoolItemList other_list;
+
+    for ( PoolItemList items = order.computeNextSet(); ! items.empty(); items = order.computeNextSet() )
     {
-MIL << "order.computeNextSet: " << pkgs.size() << " packages" << endl;
+MIL << "order.computeNextSet: " << items.size() << " resolvables" << endl;
       ///////////////////////////////////////////////////////////////////
-      // pkgs contains all packages we could install now. Pick all packages
+      // items contains all packages we could install now. Pick all packages
       // from current media, or best media if none for current.
       ///////////////////////////////////////////////////////////////////
 
       best_list.clear();
       last_list.clear();
+      other_list.clear();
 
-      for ( PoolItemList::iterator cit = pkgs.begin(); cit != pkgs.end(); ++cit )
+      for ( PoolItemList::iterator cit = items.begin(); cit != items.end(); ++cit )
       {
 	Resolvable::constPtr res( cit->resolvable() );
 	Package::constPtr cpkg( asKind<Package>(res) );
 	if (!cpkg) {
+MIL << "Not a package " << res << endl;
 	    order.setInstalled( *cit );
+	    other_list.push_back( *cit );
 	    continue;
 	}
 MIL << "Packge " << cpkg << ", media " << cpkg->mediaId() << endl;
@@ -596,7 +601,10 @@ MIL << "Packge " << cpkg << ", media " << cpkg->mediaId() << endl;
 	order.setInstalled( *it );
 	MIL << "SET isrc " << (*it) << endl;
       }
+      // move everthing from take_list to the end of instlist_r, clean take_list
       instlist_r.splice( instlist_r.end(), take_list );
+      // same for other_list
+      instlist_r.splice( instlist_r.end(), other_list );
 
     } // for all sets computed
 
