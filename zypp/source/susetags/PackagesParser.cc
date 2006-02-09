@@ -51,7 +51,7 @@ namespace zypp
         {
           if ( pkgPending() )
             {
-              result[nvrad] = pkgImpl;
+              result.insert(PkgContent::value_type( nvrad, pkgImpl ) );
             }
           pkgImpl = nextPkg_r;
         }
@@ -66,7 +66,12 @@ namespace zypp
           for ( std::list<std::string>::const_iterator it = depstr_r.begin();
                 it != depstr_r.end(); ++it )
             {
-              capset.insert( CapFactory().parse( ResTraits<Package>::kind, *it ) );
+	      try {
+                capset.insert( CapFactory().parse( ResTraits<Package>::kind, *it ) );
+	      }
+	      catch (Exception & excpt_r) {
+		ZYPP_CAUGHT(excpt_r);
+	      }
             }
         }
 
