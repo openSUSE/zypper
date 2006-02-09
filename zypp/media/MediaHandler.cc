@@ -207,29 +207,35 @@ MediaHandler::createAttachPoint() const
       "/var/adm/mount", "/var/tmp", /**/NULL/**/
   };
 
+  Pathname apoint;
   Pathname aroot;
   PathInfo adir;
-  for ( const char ** def = defmounts; *def; ++def ) {
+  for ( const char ** def = defmounts; *def && apoint.empty(); ++def ) {
     adir( *def );
-    if ( adir.isDir() && adir.userMayRWX() ) {
-      aroot = adir.path();
-      break;
+    if ( !adir.isDir() || !adir.userMayRWX() )
+      continue;
+
+    aroot = adir.path();
+    if( aroot.empty())
+      continue;
+
+    DBG << "Trying to create attachPoint in " << aroot << std::endl;
+
+    Pathname abase( aroot + "AP_" );
+    for ( unsigned i = 1; i < 1000; ++i ) {
+      adir( Pathname::extend( abase, str::hexstring( i ) ) );
+      if ( ! adir.isExist() && mkdir( adir.path() ) == 0 ) {
+            apoint = adir.path();
+            break;
+      }
     }
   }
+
   if ( aroot.empty() ) {
     ERR << "Create attach point: Can't find a writable directory to create an attach point" << std::endl;
     return aroot;
   }
 
-  Pathname abase( aroot + "AP_" );
-  Pathname apoint;
-  for ( unsigned i = 1; i < 1000; ++i ) {
-    adir( Pathname::extend( abase, str::hexstring( i ) ) );
-    if ( ! adir.isExist() && mkdir( adir.path() ) == 0 ) {
-            apoint = adir.path();
-            break;
-    }
-  }
   if ( apoint.empty() ) {
     ERR << "Unable to create an attach point below " << aroot << std::endl;
   } else {
