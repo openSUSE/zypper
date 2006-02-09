@@ -55,18 +55,7 @@ AC_SUBST(LIBZYPP_VERSION_INFO)
 
 dnl ==================================================
 
-CXXFLAGS="-g -O2 -Wall -Wformat"
 AC_SYS_LARGEFILE
-if test "$enable_largefile" != no ; then
-	enable_largefile=yes
-
-	if test "$ac_cv_sys_file_offset_bits" != no; then
-		CXXFLAGS="$CXXFLAGS -D_FILE_OFFSET_BITS=$ac_cv_sys_file_offset_bits"
-	fi
-	if test "$ac_cv_sys_large_files" != no; then
-		CXXFLAGS="$CXXFLAGS -D_LARGE_FILES=$ac_cv_sys_large_files"
-	fi
-fi
 
 dnl ==================================================
 
@@ -153,7 +142,7 @@ if test "x$devel_faked_zmd" = "xyes"; then
 else
  AM_CONDITIONAL(BUILD_ZMD, true)
  PKG_CHECK_MODULES(SQLITE, sqlite3, pkg_sqlite=yes, pkg_sqlite=no)
- if test ! -f $SQLITE_LIBS/libsqlite3.so; then
+ if test $pkg_sqlite = no; then
    echo
    AC_MSG_ERROR([Could not find sqlite3 library, please install sqlite-devel])
  fi
