@@ -59,17 +59,19 @@ namespace zypp
   bool Resolver::verifySystem ()
   { return _pimpl->verifySystem(); }
   void Resolver::establishPool ()
-  { return _pimpl->establishPool(); }
+  { _pimpl->establishPool(); }
   bool Resolver::resolvePool ()
   { return _pimpl->resolvePool (); }
+  void Resolver::undo()
+  { _pimpl->undo(); }
   solver::detail::ResolverContext_Ptr Resolver::context (void) const
   { return _pimpl->context(); }
   ResolverProblemList Resolver::problems ()
   { return _pimpl->problems (); }
-  bool Resolver::applySolutions( const ProblemSolutionList & solutions )
-  { return _pimpl->applySolutions (solutions); }      
+  void Resolver::applySolutions( const ProblemSolutionList & solutions )
+  { _pimpl->applySolutions (solutions); }      
   void Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
-  { return _pimpl->doUpgrade(opt_stats_r); }
+  { _pimpl->doUpgrade(opt_stats_r); }
   Arch Resolver::architecture() const
   { return _pimpl->architecture(); }
   void Resolver::setArchitecture( const Arch & arch )

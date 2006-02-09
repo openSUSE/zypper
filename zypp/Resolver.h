@@ -76,6 +76,11 @@ namespace zypp
     bool resolvePool (void);
 
     /*
+     * Undo solver changes done in resolvePool()
+     */
+    void undo( void );
+
+    /*
      * Get the most recent resolver context
      *
      * It will be NULL if resolvePool() or establishPool() was never called.
@@ -110,7 +115,7 @@ namespace zypp
      * Apply problem solutions. No more than one solution per problem
      * can be applied.
      **/
-    bool applySolutions( const ProblemSolutionList & solutions );
+    void applySolutions( const ProblemSolutionList & solutions );
 
     Arch architecture() const;
     void setArchitecture( const Arch & arch);
