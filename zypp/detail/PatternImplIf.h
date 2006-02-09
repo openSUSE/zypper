@@ -38,6 +38,8 @@ namespace zypp
       typedef Pattern ResType;
 
     public:
+      virtual std::string patternId() const PURE_VIRTUAL;
+
       virtual bool isDefault() const PURE_VIRTUAL;
 
       virtual bool userVisible() const PURE_VIRTUAL;

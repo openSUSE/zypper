@@ -20,6 +20,9 @@ namespace zypp
   namespace detail
   { /////////////////////////////////////////////////////////////////
 
+    bool PatternImplIf::patternId() const
+    { return ""; }
+
     bool PatternImplIf::isDefault() const
     { return false; }
 
