@@ -73,6 +73,18 @@ MediaCurl::MediaCurl( const Url &      url_r,
       _curl( 0 ), _connected( false )
 {
   MIL << "MediaCurl::MediaCurl(" << url_r << ", " << attach_point_hint_r << ")" << endl;
+
+  if( !attachPoint().empty())
+  {
+    PathInfo ainfo(attachPoint());
+    if( !ainfo.isDir() || !ainfo.userMayRWX())
+    {
+      WAR << "attach point " << ainfo.path()
+          << " is not useable for " << url_r.getScheme() << endl;
+      setAttachPoint("", true);
+    }
+  }
+
   if ( ! _globalInit )
     {
       _globalInit = true;
