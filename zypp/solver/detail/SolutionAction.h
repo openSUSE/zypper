@@ -59,14 +59,13 @@ namespace zypp
 
 	/**
 	 * A problem solution action that performs a transaction
-	 * (installs, updates, removes, ...)  one resolvable
+	 * (installs, removes, keep ...)  one resolvable
 	 * (package, patch, pattern, product).
 	 **/
 	typedef enum
 	{
 	    KEEP,
 	    INSTALL,
-	    UPDATE,
 	    REMOVE,
 	    UNLOCK
 	} TransactionKind;

@@ -404,7 +404,8 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 #warning Make behaviour configurable
 		    // If the package is installed or is set to be installed by the user,
 		    // let the user decide deleting conflicting package 
-		    // 
+		    //
+		    _XDEBUG("GETTING STATUS:");
 		    if (context->getStatus(conflicting_item).isToBeInstalled()			// scheduled for installation
 			&& !context->getStatus(conflicting_item).isToBeUninstalled()		// not scheduled for uninstallation
 			|| conflicting_item.status().staysInstalled())				// not scheduled at all but installed

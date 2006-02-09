@@ -171,7 +171,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
 
     ResolverProblemList problems (void) const;
-    bool applySolutions (const ProblemSolutionList &solutions);
+    void applySolutions (const ProblemSolutionList &solutions);
 
     void reset (void);
 

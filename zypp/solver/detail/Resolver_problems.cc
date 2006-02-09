@@ -473,19 +473,15 @@ Resolver::problems (void) const
     return problems;
 }
 
-
-bool
+void
 Resolver::applySolutions (const ProblemSolutionList & solutions)
 {
-    bool ret = true;
     for (ProblemSolutionList::const_iterator iter = solutions.begin();
 	 iter != solutions.end(); ++iter) {
 	ProblemSolution_Ptr solution = *iter;
-	ret = solution->apply (*this);
-	if (ret == false)
+	if (!solution->apply (*this))
 	    break;
     }    
-    return ret;
 }
 
 ///////////////////////////////////////////////////////////////////

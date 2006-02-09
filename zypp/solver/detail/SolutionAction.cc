@@ -65,7 +65,6 @@ TransactionSolutionAction::dumpOn( ostream& os) const
     switch (_action) {
 	case KEEP:	os << "Keep"; break;
 	case INSTALL:	os << "Install"; break;
-	case UPDATE:	os << "Update"; break;
 	case REMOVE:	os << "Remove"; break;
 	case UNLOCK:	os << "Unlock"; break;	    
     }
@@ -137,23 +136,17 @@ TransactionSolutionAction::execute(Resolver & resolver) const
     bool ret = true;
     switch (action()) {
 	case KEEP:
-	    ret = _item.status().setTransact (false, ResStatus::USER);
-	    // this is only needed, if the internal Resolver.h will
-	    // be used by testcases
-	    resolver.addPoolItemToInstall (_item);	   
-	    break;
 	case INSTALL:
-	case UPDATE:
-	    _item.status().setToBeInstalled (ResStatus::USER);
-	    // this is only needed, if the internal Resolver.h will
-	    // be used by testcases
-	    resolver.addPoolItemToInstall (_item);	    
+	    if (_item.status().isToBeUninstalled())
+		ret = _item.status().setTransact (false, ResStatus::USER);
+	    else
+		_item.status().setToBeInstalled (ResStatus::USER);
 	    break;
 	case REMOVE:
-	    _item.status().setToBeUninstalled (ResStatus::USER);
-	    // this is only needed, if the internal Resolver.h will
-	    // be used by testcases
-	    resolver.addPoolItemToRemove (_item);
+	    if (_item.status().isToBeInstalled())
+		_item.status().setTransact (false,ResStatus::USER);
+	    else
+		_item.status().setToBeUninstalled (ResStatus::USER);
 	    break;
 	case UNLOCK:
 	    ERR << "Not implemented yet" << endl;
