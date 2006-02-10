@@ -1,6 +1,1 @@
 >!> Installing test4 from channel test
->!> Solution #1:
->!> install test4-1.0-1[test]
->!> remove  test2-1.0-1
->!> |unflag test3-1.0-1[test]
->!> installs=1, upgrades=0, uninstalls=1

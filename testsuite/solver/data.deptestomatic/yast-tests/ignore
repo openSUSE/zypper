@@ -1,3 +1,8 @@
-parallel-test.xml
-require-test.xml
-uninstall-test.xml
+exercise-02conflict-14-test.xml
+exercise-obscureobsoletes-02-test.xml
+exercise-obscureobsoletes-03-test.xml
+exercise-obscureobsoletes-06-test.xml
+#output has been canceled
+exercise-05reallive-4-test.xml
+#solution ordering is not the same
+exercise-alternatives-1-test.xml

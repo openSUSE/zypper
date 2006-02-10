@@ -5,7 +5,7 @@
 >!> There are no installable providers of [package] (namedcap) foo for foonew-2.0-1[test]
 >!>    Solution:
 >!>       Deleting foonew
->!>       Deleting U_Tl_[package]foonew-2.0-1.
+>!>       Deleting U_Tu_[package]foonew-2.0-1.
 >!>    Solution:
 >!>       Ignoring this requirement
 >!>       

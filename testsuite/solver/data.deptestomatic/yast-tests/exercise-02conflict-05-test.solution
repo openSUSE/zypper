@@ -1,5 +1,1 @@
 >!> Installing libc6 from channel test
->!> Solution #1:
->!> remove  smail-1.0-1
->!> upgrade libc6-2.0.7-2 => libc6-2.1.0-1[test]
->!> installs=0, upgrades=1, uninstalls=1

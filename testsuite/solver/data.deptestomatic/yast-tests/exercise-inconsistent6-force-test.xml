@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="exercise-inconsistent6-system.xml"/>
+  <channel name="test" file="exercise-inconsistent6-packages.xml"/>
+</setup>
+
+<!-- 
+# installed kaffeine has an open dependeny, kaffeine is available in older version
+JUST_SOLVE
+ -->
+<trial>
+  <verify/>
+</trial>
+
+</test>

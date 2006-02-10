@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<test allow_virtual_conflicts="yes">
+<setup>
+  <system file="exercise-4-system.xml"/>
+  <channel name="test" file="exercise-4-packages.xml"/>
+</setup>
+<trial>
+  <install channel="test" package="N"/>
+</trial>
+</test>

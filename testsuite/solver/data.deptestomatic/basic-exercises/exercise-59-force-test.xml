@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<test>
+
+<!--
+
+Debian packages can provide something and conflict with that same
+thing.  It's Debian's way of showing that there can be one and
+only one provider of something.
+
+This test should correctly install A and remove B, as B is installed
+and provides a.
+
+-->
+
+
+<setup>
+  <system file="exercise-59-system.xml"/>
+  <channel name="test" file="exercise-21-packages.xml"/>
+</setup>
+<trial>
+  <install channel="test" package="A"/>
+</trial>
+</test>

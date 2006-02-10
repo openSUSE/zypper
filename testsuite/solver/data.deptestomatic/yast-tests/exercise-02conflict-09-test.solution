@@ -1,5 +1,14 @@
 >!> Installing baz2 from channel test
->!> Solution #1:
->!> install baz2-1.0-1[test]
->!> remove  foo2-1.0-1
->!> installs=1, upgrades=0, uninstalls=1
+>!> 1 problems found:
+>!> Problem:
+>!> Cannot install baz2 because it is conflicting with foo2
+>!> A conflict over [package] (namedcap) baz21 ([package] (namedcap) baz21) requires the removal of to-be-installed baz2-1.0-1[test]
+>!>    Solution:
+>!>       Deleting baz2
+>!>       Deleting U_Tu_[package]baz2-1.0-1.
+>!>    Solution:
+>!>       Deleting foo2
+>!>       Deleting I___[package]foo2-1.0-1.
+>!>    Solution:
+>!>       Ignoring conflict of baz2
+>!>       
