@@ -417,14 +417,12 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
 
     for ( ResPool::const_iterator it = pool_r.begin(); it != pool_r.end(); ++it )
     {
-	if ((*it)->kind() != ResTraits<Package>::kind) {
-	    nonpkglist.push_back( *it );
-	    continue;
-	}
-
 	if (it->status().isToBeInstalled())
 	{
-	    if (it->resolvable()->arch() == Arch_src)
+	    if ((*it)->kind() != ResTraits<Package>::kind) {
+		nonpkglist.push_back( *it );
+	    }
+	    else if (it->resolvable()->arch() == Arch_src)
 		srclist_r.push_back( *it );
 	    else
 		instlist_r.push_back( *it );
