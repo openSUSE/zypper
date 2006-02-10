@@ -48,6 +48,7 @@ namespace zypp
     friend std::ostream & operator<<( std::ostream & str, const ResStatus & obj );
     friend bool operator==( const ResStatus & lhs, const ResStatus & rhs );
 
+  public:
     /** \name BitField range definitions.
      *
      * \note Enlarge FieldType if more bit's needed. It's not yet
@@ -55,6 +56,7 @@ namespace zypp
      */
     //@{
     typedef short FieldType;
+    typedef bit::BitField<FieldType> BitFieldType;
     // Bit Ranges within FieldType defined by 1st bit and size:
     typedef bit::Range<FieldType,0,                    1> StateField;
     typedef bit::Range<FieldType,StateField::end,      2> EstablishField;
@@ -76,46 +78,46 @@ namespace zypp
     //@{
     enum StateValue
       {
-        UNINSTALLED = 0,
-        INSTALLED   = StateField::minval
+        UNINSTALLED = bit::RangeValue<StateField,0>::value,
+        INSTALLED   = bit::RangeValue<StateField,1>::value
       };
     enum EstablishValue
       {
-        UNDETERMINED = 0,
-        UNNEEDED     = EstablishField::minval,		// has freshens, none trigger
-        SATISFIED,					// has none or triggered freshens, all requirements fulfilled
-        INCOMPLETE					// installed: has none or triggered freshens, requirements unfulfilled
+        UNDETERMINED = bit::RangeValue<EstablishField,0>::value,
+        UNNEEDED     = bit::RangeValue<EstablishField,1>::value, // has freshens, none trigger
+        SATISFIED    = bit::RangeValue<EstablishField,2>::value, // has none or triggered freshens, all requirements fulfilled
+        INCOMPLETE   = bit::RangeValue<EstablishField,3>::value	 // installed: has none or triggered freshens, requirements unfulfilled
       };
     enum TransactValue
       {
-        KEEP_STATE = 0,
-        TRANSACT = TransactField::minval		// change state installed <-> uninstalled
+        KEEP_STATE = bit::RangeValue<TransactField,0>::value,
+        TRANSACT   = bit::RangeValue<TransactField,1>::value // change state installed <-> uninstalled
       };
     enum TransactByValue
       {
-        SOLVER = 0,
-        APPL_LOW  = TransactByField::minval,
-        APPL_HIGH,
-        USER
+        SOLVER    = bit::RangeValue<TransactByField,0>::value,
+        APPL_LOW  = bit::RangeValue<TransactByField,1>::value,
+        APPL_HIGH = bit::RangeValue<TransactByField,2>::value,
+        USER      = bit::RangeValue<TransactByField,3>::value
       };
 
     enum InstallDetailValue
       {
-        EXPLICIT_INSTALL = 0,
-        SOFT_INSTALL = TransactDetailField::minval
+        EXPLICIT_INSTALL = bit::RangeValue<TransactDetailField,0>::value,
+        SOFT_INSTALL     = bit::RangeValue<TransactDetailField,1>::value
       };
     enum RemoveDetailValue
       {
-        EXPLICIT_REMOVE = 0,
-	SOFT_REMOVE = TransactDetailField::minval,
-        DUE_TO_OBSOLETE,
-        DUE_TO_UNLINK
+        EXPLICIT_REMOVE = bit::RangeValue<TransactDetailField,0>::value,
+	SOFT_REMOVE     = bit::RangeValue<TransactDetailField,1>::value,
+        DUE_TO_OBSOLETE = bit::RangeValue<TransactDetailField,2>::value,
+        DUE_TO_UNLINK   = bit::RangeValue<TransactDetailField,3>::value
       };
     enum SolverStateValue
       {
-	NORMAL = 0,					// default, notthing special
-	SEEN = SolverStateField::minval,		// already seen during ResolverUpgrade
-	IMPOSSIBLE					// impossible to install
+	NORMAL     = bit::RangeValue<SolverStateField,0>::value, // default, notthing special
+	SEEN       = bit::RangeValue<SolverStateField,1>::value, // already seen during ResolverUpgrade
+	IMPOSSIBLE = bit::RangeValue<SolverStateField,2>::value	 // impossible to install
       };
     //@}
 
@@ -129,6 +131,14 @@ namespace zypp
 
     /** Dtor. */
     ~ResStatus();
+
+    /** Debug helper returning the bitfield.
+     * It's save to expose the bitfield, as it can't be used to
+     * recreate a ResStatus. So it is not possible to bypass
+     * transition rules.
+    */
+    BitFieldType bitfield() const
+    { return _bitfield; }
 
   public:
 
@@ -401,7 +411,7 @@ namespace zypp
 	  { return _bitfield.value<_Field>() > val_r; }
 
   private:
-    bit::BitField<FieldType> _bitfield;
+    BitFieldType _bitfield;
   };
   ///////////////////////////////////////////////////////////////////
 

@@ -107,10 +107,8 @@ namespace zypp
      * \todo make it work.
     */
     //@{
-    void SaveState()
-    {}
-    void RestoreState()
-    {}
+    void SaveState();
+    void RestoreState();
     //@}
 
   private:

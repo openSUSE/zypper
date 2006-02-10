@@ -46,6 +46,19 @@ namespace zypp
     mutable ResStatus   _status;
     ResObject::constPtr _resolvable;
 
+    /** \name Poor man's save/restore state.
+     * \todo There may be better save/restore state strategies.
+    */
+    //@{
+  public:
+    void saveState() const
+    { _savedStatus = _status; }
+    void restoreState() const
+    { _status = _savedStatus; }
+  private:
+    mutable ResStatus   _savedStatus;
+    //@}
+
   public:
     /** Offer default Impl. */
     static shared_ptr<Impl> nullimpl()

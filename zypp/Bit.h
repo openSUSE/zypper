@@ -48,7 +48,8 @@ namespace zypp
     template<class _IntT>
       struct MaxBits
       {
-        static const unsigned value = (sizeof(_IntT)*8);
+        typedef _IntT IntT;
+        static const unsigned value = (sizeof(IntT)*8);
       };
 
     /** For printing bits. */
@@ -70,22 +71,22 @@ namespace zypp
     template<class _IntT, unsigned _begin, unsigned _size>
       struct Mask
       {
-        static const _IntT value    = bit_detail::Gen1Bits<_IntT,_size>::value << _begin;
-        static const _IntT inverted = ~value;
+        typedef _IntT IntT;
+        static const IntT value    = bit_detail::Gen1Bits<IntT,_size>::value << _begin;
+        static const IntT inverted = ~value;
       };
 
     /** Range of bits starting at bit \_begin with length \a _size. */
     template<class _IntT, unsigned _begin, unsigned _size>
       struct Range
       {
-        typedef MaxBits<_IntT>           MaxBits;
-        typedef Mask<_IntT,_begin,_size> Mask;
+        typedef _IntT IntT;
+        typedef MaxBits<IntT>           MaxBits;
+        typedef Mask<IntT,_begin,_size> Mask;
 
         static const unsigned begin  = _begin;
         static const unsigned size   = _size;
         static const unsigned end    = _begin + _size;
-
-        static const unsigned minval = 1 << _begin;
       };
     /** Range specialisation for (illegal) zero \a _size.
      * Fore error at compiletime. Currently because types
@@ -94,6 +95,25 @@ namespace zypp
     template<class _IntT, unsigned _begin>
       struct Range<_IntT, _begin, 0>
       {};
+
+    /** A value with in a Range.
+     * \code
+     * typedef Range<char,2,3> SubField; // bits 2,3,4 in a char field
+     * SubField::Mask::value;            // 00011100
+     * RangeValue<SubField,0>::value;    // 00000000
+     * RangeValue<SubField,1>::value;    // 00000100
+     * RangeValue<SubField,2>::value;    // 00001000
+     * RangeValue<SubField,3>::value;    // 00001100
+     * \endcode
+    */
+    template<class _Range, typename _Range::IntT _value>
+      struct RangeValue
+      {
+        typedef _Range                RangeT;
+        typedef typename _Range::IntT IntT;
+
+        static const IntT value = _value << RangeT::begin;
+      };
 
     ///////////////////////////////////////////////////////////////////
     //

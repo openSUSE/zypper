@@ -5,7 +5,11 @@
 #include <map>
 #include <set>
 
+#include "Measure.h"
+#include "Printing.h"
+
 #include <zypp/base/Logger.h>
+#include <zypp/base/LogControl.h>
 #include <zypp/base/String.h>
 #include <zypp/base/Exception.h>
 #include <zypp/base/PtrTypes.h>
@@ -13,6 +17,7 @@
 #include <zypp/base/Algorithm.h>
 #include <zypp/base/Functional.h>
 
+#include "zypp/NVRAD.h"
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
@@ -21,23 +26,14 @@
 #include <zypp/source/susetags/SuseTagsImpl.h>
 
 #include "zypp/ResPoolManager.h"
-#include "zypp/ui/Selectable.h"
+#include "zypp/ResPoolProxy.h"
 
 using namespace std;
 using namespace zypp;
+using namespace zypp::ui;
 using namespace zypp::functor;
-using namespace zypp::resfilter;
 
 ///////////////////////////////////////////////////////////////////
-
-struct Print : public std::unary_function<ResObject::constPtr, bool>
-{
-  bool operator()( ResObject::constPtr ptr )
-  {
-    USR << *ptr << endl;
-    return true;
-  }
-};
 
 ///////////////////////////////////////////////////////////////////
 
@@ -51,6 +47,7 @@ template<class _IntT>
     Counter( _IntT value_r )
     : _value( _IntT( value_r ) )
     {}
+
 
     operator _IntT &()
     { return _value; }
@@ -95,53 +92,53 @@ template<class _Iterator>
 
 ///////////////////////////////////////////////////////////////////
 
-namespace zypp { namespace ui
+struct XByInstalled : public std::unary_function<ui::Selectable::constPtr,bool>
 {
-
-  struct PP
+  bool operator()( const ui::Selectable::constPtr & obj ) const
   {
-    typedef std::set<ResPool::Item>         ItemC;
-    struct SelC
-    {
-      void add( ResPool::Item it )
-      { available.insert( it ); }
-      ItemC installed;
-      ItemC available;
-    };
-    typedef std::map<std::string,SelC>      NameC;
-    typedef std::map<ResObject::Kind,NameC> KindC;
+    return obj->hasInstalledObj();
+  }
+};
 
-    KindC _kinds;
-
-    void operator()( ResPool::Item it )
-    {
-      _kinds[it->kind()][it->name()].add( it );
-    }
-
-    void dumpOn() const
-    {
-      for ( KindC::const_iterator it = _kinds.begin(); it != _kinds.end(); ++it )
-        {
-          ERR << it->first << endl;
-          for ( NameC::const_iterator nit = it->second.begin(); nit != it->second.end(); ++nit )
-            {
-              WAR << nit->first << endl;
-              MIL << "i " << nit->second.installed.size()
-                  << " a " << nit->second.available.size() << endl;
-            }
-        }
-    }
-  };
-
-  class ResPoolProxy
+template<class FT>
+  void fieldInfo()
   {
-  public:
+    MIL << bit::asString(FT::Mask::value)    << '|' << FT::begin << '-' << FT::end << '|' << FT::size << endl;
+    MIL << bit::asString(FT::Mask::inverted) << endl;
+  }
 
-  };
 
-
-
-}}
+void testr()
+{
+  fieldInfo<ResStatus::StateField>();
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::UNINSTALLED) << endl;
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::INSTALLED) << endl;
+  fieldInfo<ResStatus::EstablishField>();
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::UNDETERMINED) << endl;
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::UNNEEDED) << endl;
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::SATISFIED) << endl;
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::INCOMPLETE) << endl;
+  fieldInfo<ResStatus::TransactField>();
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::KEEP_STATE) << endl;
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::TRANSACT) << endl;
+  fieldInfo<ResStatus::TransactByField>();
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::SOLVER) << endl;
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::APPL_LOW) << endl;
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::APPL_HIGH) << endl;
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::USER) << endl;
+  fieldInfo<ResStatus::TransactDetailField>();
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::EXPLICIT_INSTALL) << endl;
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::SOFT_INSTALL) << endl;
+  DBG << endl;
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::EXPLICIT_REMOVE) << endl;
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::SOFT_REMOVE) << endl;
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::DUE_TO_OBSOLETE) << endl;
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::DUE_TO_UNLINK) << endl;
+  fieldInfo<ResStatus::SolverStateField>();
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::NORMAL) << endl;
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::SEEN) << endl;
+  DBG << bit::asString((ResStatus::FieldType)ResStatus::IMPOSSIBLE) << endl;
+}
 
 
 
@@ -154,30 +151,57 @@ namespace zypp { namespace ui
 */
 int main( int argc, char * argv[] )
 {
+  INT << "===[START]==========================================" << endl;
+
   string infile( "p" );
   if (argc >= 2 )
     infile = argv[1];
 
-  Source_Ref src( SourceFactory().createFrom( new source::susetags::SuseTagsImpl(infile) ) );
-  MIL << src.resolvables().size() << endl;
+  MIL << ResStatus::toBeUninstalledDueToUnlink << endl;
+  MIL << ResStatus::toBeUninstalledDueToObsolete << endl;
+  testr();
+  return 0;
+
+  NVRAD a( "foo", Edition("1.1") );
+  NVRAD b( "foo", Edition("1.0") );
+  SEC << (a==b) << endl;
+  SEC << (a!=b) << endl;
+  SEC << (a<b) << endl;
+  set<NVRAD> s;
+  s.insert(a);
+  s.insert(b);
+  SEC << s.size() << endl;
+  return 0;
+
+  Url url("dir:/Local/ma/zypp/libzypp/devel/devel.ma/CD1");
+  Measure x( "SourceFactory.create" );
+  Source_Ref src( SourceFactory().createFrom( url ) );
+  x.stop();
+  Source_Ref trg( SourceFactory().createFrom( url ) );
+
+  //Source_Ref src( SourceFactory().createFrom( new source::susetags::SuseTagsImpl(infile) ) );
+  //MIL << src.resolvables().size() << endl;
 
   ResPoolManager pool;
+  x.start( "pool.insert" );
   pool.insert( src.resolvables().begin(), src.resolvables().end() );
+  x.stop();
   MIL << pool << endl;
 
   ResPool query( pool.accessor() );
   rstats( query.begin(), query.end() );
 
-  ui::PP collect;
-  for_each( query.begin(), query.end(),
-            functorRef<void,ResPool::Item>( collect ) );
-  collect.dumpOn();
+  ResPoolProxy y2pm( query );
+
+  pool.insert( trg.resolvables().begin(), trg.resolvables().end(), true );
+  y2pm = ResPoolProxy( query );
+
+  SEC << "----------" << endl;
+  XXX << "----------" << endl;
+  SEC << "----------" << endl;
 
 
-
-
-
-
+  INT << "===[END]============================================" << endl << endl;
   return 0;
 }
 
