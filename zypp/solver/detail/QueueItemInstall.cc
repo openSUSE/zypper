@@ -343,7 +343,9 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    const Capability cap = *iter;
 	    _XDEBUG("this conflicts with '" << cap << "'");
 	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item, _soft);
-	    qil.push_front (conflict_item);
+	    // Push the QueueItem at the END of the list in order to favourite conflicts caused
+	    // by obsolating this item.
+	    qil.push_back (conflict_item);
 
 	}
 
@@ -356,6 +358,9 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    _XDEBUG("this obsoletes " <<  cap);
 	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item, _soft);
 	    conflict_item->setActuallyAnObsolete();
+	    // Push the QueueItem at the BEGIN of the list in order to favourite this confict
+	    // comparing to "normal" conflicts, cause this item will be deleted. So other
+	    // conflicts will not be regarded in the future.
 	    qil.push_front (conflict_item);
 
 	}
