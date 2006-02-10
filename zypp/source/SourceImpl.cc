@@ -240,8 +240,9 @@ namespace zypp
     , _media_id(id_r)
     {}
 
-    bool SourceImpl::Verifier::isDesiredMedia(const media::MediaAccessRef &ref, media::MediaNr mediaNr)
+    bool SourceImpl::Verifier::isDesiredMedia(const media::MediaAccessRef &ref)
     {
+      media::MediaNr mediaNr = 1; // FIXME!!
       if (_media_vendor.empty() || _media_id.empty())
 	return true;
 #warning TODO define what does missing media_id/media_vendor mean

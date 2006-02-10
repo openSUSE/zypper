@@ -244,7 +244,7 @@ namespace zypp
 	 ** the desired media number (e.g. SLES10 CD1).
 	 */
 	virtual bool
-	isDesiredMedia(const media::MediaAccessRef &ref, media::MediaNr mediaNr);
+	isDesiredMedia(const media::MediaAccessRef &ref);
 
       private:
 	std::string _media_vendor;

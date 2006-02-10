@@ -96,7 +96,7 @@ media::MediaManager media_mgr;
     media::MediaId id = media_mgr.open(url_r);
     media_mgr.attach(id);
     Pathname products_file = Pathname("media.1/products");
-    media_mgr.provideFile (id, 1, products_file);
+    media_mgr.provideFile (id, products_file);
     products_file = media_mgr.localPath (id, products_file);
     scanProductsFile (products_file, products_r);
     media_mgr.release(id);
