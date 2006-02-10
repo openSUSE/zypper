@@ -9,7 +9,8 @@ sourceincludedir = $(pkgincludedir)/source
 
 sourceinclude_HEADERS =	\
 	SourceImpl.h	\
-	Builtin.h
+	Builtin.h	\
+	MediaSet.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_source.la
 
