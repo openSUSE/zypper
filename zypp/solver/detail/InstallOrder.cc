@@ -96,7 +96,7 @@ InstallOrder::computeNextSet()
 
     for (Nodes::iterator it = _nodes.begin(); it != _nodes.end(); ++it)
     {
-	DBG << "Looking at node " << it->first << " order " << it->second.order << ":" << it->second.item << endl;
+	XXX << "Looking at node " << it->first << " order " << it->second.order << ":" << it->second.item << endl;
 	if (it->second.order == 0)
 	{
 	    DBG << "InstallOrder::computeNextSet found " << it->second.item << endl;
