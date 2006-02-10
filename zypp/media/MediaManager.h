@@ -15,7 +15,6 @@
 #include <zypp/media/MediaAccess.h>
 
 #include <zypp/base/NonCopyable.h>
-#include <zypp/base/Deprecated.h>
 #include <zypp/base/PtrTypes.h>
 #include <zypp/Pathname.h>
 #include <zypp/Url.h>
@@ -35,6 +34,8 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     typedef zypp::RW_pointer<MediaAccess> MediaAccessRef;
     typedef unsigned int                  MediaAccessId;
+
+    // OBSOLETE HERE:
     typedef MediaAccessId                 MediaId;
     typedef unsigned int                  MediaNr;
 
@@ -58,13 +59,10 @@ namespace zypp
 
       /*
       ** Check if the specified attached media contains
-      ** the desired media number (e.g. SLES10 CD1).
+      ** the desired media (e.g. SLES10 CD1).
       */
       virtual bool
-      isDesiredMedia(const MediaAccessRef &ref, MediaNr mediaNr)
-      {
-        return false;
-      }
+      isDesiredMedia(const MediaAccessRef &ref) = 0;
     };
 
 
@@ -90,8 +88,9 @@ namespace zypp
       ** the desired media number. Always return true.
       */
       virtual bool
-      isDesiredMedia(const MediaAccessRef &ref, MediaNr mediaNr)
+      isDesiredMedia(const MediaAccessRef &ref)
       {
+        (void)ref;
         return true;
       }
     };
@@ -130,10 +129,10 @@ namespace zypp
       /**
        * Open new access handler with specifier url and attach
        * point reusing the specified accessId.
-       */
       void
       reopen(MediaAccessId accessId, const Url &url,
              const Pathname & preferred_attach_point = "");
+       */
 
       /**
        * Swap access handlers of idOne and idTwo.
@@ -190,24 +189,28 @@ namespace zypp
       attach(MediaAccessId accessId, bool next = false);
 
       /**
+       * FIXME: Jiri, do you want this one?
+       *
        * Attach the media if needed and verify, if desired
-       * media number is avaliable. If the access handler
-       * supports multiple drives (e.g. CD/DVD), all drives
-       * are verified.
+       * media is avaliable. If the access handler supports
+       * multiple drives (e.g. CD/DVD), all drives will be
+       * verified.
+       * On success, the media is attached and verified.
+       * On failure, the media is released and optionally
+       * ejected if possible (not shared).
        *
        * \throws MediaNotDesiredException if unable to find
        *         desired media in any drive.
        * \throws FIXME if all drives are in use and no one
        *         was ejected.
-       */
       void
-      attachMediaNr(MediaAccessId accessId, MediaNr mediaNr,
-                                            bool eject = true);
+      attachDesiredMedia(MediaAccessId accessId, bool eject = true);
+       */
 
       /**
        * Release the attached media and optionally eject.
-       * \throws exception if eject is true and media is
-       * shared.
+       * \throws MediaIsSharedException if eject is true
+       *         and media is shared.
        */
       void
       release(MediaAccessId accessId, bool eject = false);
@@ -241,7 +244,7 @@ namespace zypp
        * \return True if desired media is attached.
        */
       bool
-      isDesiredMedia(MediaAccessId accessId, MediaNr mediaNr) const;
+      isDesiredMedia(MediaAccessId accessId) const;
 
       /**
        * Ask the specified verifier if the attached
@@ -249,7 +252,7 @@ namespace zypp
        * \return True if desired media is attached.
        */
       bool
-      isDesiredMedia(MediaAccessId accessId, MediaNr mediaNr,
+      isDesiredMedia(MediaAccessId           accessId,
                      const MediaVerifierRef &verifier) const;
 
       /**
@@ -278,7 +281,6 @@ namespace zypp
        * on the media.
        *
        * \param accessId  The media access id to use.
-       * \param mediaNr   The desired media number that should be on the media.
        * \param cached    If cached is set to true, the function checks, if
        *                  the file already exists and doesn't download it again
        *                  if it does. Currently only the existence is checked,
@@ -289,16 +291,7 @@ namespace zypp
        *                  returned always.
        *
        * \throws MediaException
-       *
-       * \deprecated checking the media number on each access.
        */
-      void
-      provideFile(MediaAccessId   accessId,
-                  MediaNr         mediaNr,
-                  const Pathname &filename,
-                  bool            cached    = false,
-                  bool            checkonly = false) const ZYPP_DEPRECATED;
-
       void
       provideFile(MediaAccessId   accessId,
                   const Pathname &filename,
@@ -306,31 +299,18 @@ namespace zypp
                   bool            checkonly = false) const;
 
       /**
-       * \deprecated checking the media number on each access.
        */
-      void
-      provideDir(MediaAccessId   accessId,
-                 MediaNr         mediaNr,
-                 const Pathname &dirname) const ZYPP_DEPRECATED;
-
       void
       provideDir(MediaAccessId   accessId,
                  const Pathname &dirname) const;
 
       /**
-       * \deprecated checking the media number on each access.
        */
-      void
-      provideDirTree(MediaAccessId  accessId,
-                     MediaNr        mediaNr,
-                     const Pathname &dirname) const ZYPP_DEPRECATED;
-
       void
       provideDirTree(MediaAccessId  accessId,
                      const Pathname &dirname) const;
 
       /**
-       * \deprecated checking the media number on each access.
        */
       void
       releaseFile(MediaAccessId   accessId,

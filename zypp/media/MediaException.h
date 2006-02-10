@@ -354,18 +354,32 @@ namespace zypp
     class MediaNotDesiredException : public MediaException
     {
     public:
-      MediaNotDesiredException(const Url & url_r,
-                             unsigned int mediaNr)
+      MediaNotDesiredException(const Url & url_r)
       : MediaException()
       , _url(url_r.asString())
-      , _nr(mediaNr)
       {}
       virtual ~MediaNotDesiredException() throw() {};
     protected:
       virtual std::ostream & dumpOn( std::ostream & str ) const;
     private:
       std::string  _url;
-      unsigned int _nr;
+    };
+
+    class MediaIsSharedException : public MediaException
+    {
+    public:
+      /**
+       * \param name A media source as string (see MediaSource class).
+       */
+      MediaIsSharedException(const std::string &name)
+      : MediaException()
+      , _name(name)
+      {}
+      virtual ~MediaIsSharedException() throw() {};
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+    private:
+      std::string _name;
     };
 
   /////////////////////////////////////////////////////////////////

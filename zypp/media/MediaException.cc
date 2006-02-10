@@ -136,7 +136,12 @@ namespace zypp
 
     std::ostream & MediaNotDesiredException::dumpOn( std::ostream & str ) const
     {
-      return str << "Media source " << _url << " does not contain the desired media number: " << _nr << endl;
+      return str << "Media source " << _url << " does not contain the desired media" << endl;
+    }
+
+    std::ostream & MediaIsSharedException::dumpOn( std::ostream & str ) const
+    {
+      return str << "Media " << _name << " is in use by another instance" << endl;
     }
 
   /////////////////////////////////////////////////////////////////
