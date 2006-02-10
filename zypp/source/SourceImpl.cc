@@ -136,6 +136,11 @@ namespace zypp
 	    media_mgr.release (_media, true);
 	    // FIXME: this will not work, probably
 	  }
+	  else if ( user == media::MediaChangeReport::CHANGE_URL )
+	  {
+	    // retry
+	    break;
+	  }
 
 	  // FIXME: IGNORE
         }
