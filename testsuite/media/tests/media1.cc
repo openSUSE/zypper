@@ -73,7 +73,8 @@ int main(void)
   try
   {
 
-    id = mm.open(zypp::Url("cd:"));
+    //id = mm.open(zypp::Url("cd:"));
+    id = mm.open(zypp::Url("http://download.opensuse.org/distribution/SL-OSS-factory/inst-source/"));
 
     mm.addVerifier( id, verifier);
 
