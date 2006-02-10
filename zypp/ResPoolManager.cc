@@ -47,6 +47,10 @@ namespace zypp
   void ResPoolManager::clear()
   { _pimpl->clear(); }
 
+  /** \todo FIXIT */
+  ResPoolProxy ResPoolManager::proxy() const
+  { return _pimpl->proxy( accessor() ); }
+
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<

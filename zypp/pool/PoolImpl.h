@@ -15,6 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/pool/PoolTraits.h"
+#include "zypp/ResPoolProxy.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -190,6 +191,18 @@ namespace zypp
       IndexContainerT _requiresstore;
       IndexContainerT _conflictsstore;
       NameContainerT _namestore;
+
+    public:
+      ResPoolProxy proxy( ResPool self ) const
+      {
+        if ( !_poolProxy )
+          _poolProxy.reset( new ResPoolProxy( self ) );
+        return *_poolProxy;
+      }
+      void invalidateProxy()
+      { _poolProxy.reset(); }
+
+      mutable shared_ptr<ResPoolProxy> _poolProxy;
     };
     ///////////////////////////////////////////////////////////////////
 

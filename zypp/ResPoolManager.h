@@ -48,8 +48,7 @@ namespace zypp
 
     /** \todo Speedup by using a data mamaber invaidated only
      * whenever the pool content changes */
-    ResPoolProxy proxy() const
-    { return ResPoolProxy( accessor() ); }
+    ResPoolProxy proxy() const;
 
   public:
     /**  */

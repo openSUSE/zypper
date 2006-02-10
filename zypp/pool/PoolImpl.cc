@@ -67,6 +67,9 @@ namespace zypp
       for (CapSet::iterator ic = conflicts.begin(); ic != conflicts.end(); ++ic) {
 	_poolImpl.conflictsstore().insert( PoolImpl::IndexContainerT::value_type (ic->index(), std::make_pair( *ic, item ) ) );
       }
+
+      // don't miss to invalidate ResPoolProxy
+      _poolImpl.invalidateProxy();
     }
 
     void PoolImplDeleter::operator()( ResObject::constPtr ptr_r )
@@ -106,6 +109,9 @@ namespace zypp
 		_poolImpl.conflictsstore().erase( iit );
 	}
       }
+
+      // don't miss to invalidate ResPoolProxy
+      _poolImpl.invalidateProxy();
     }
 
     /////////////////////////////////////////////////////////////////
