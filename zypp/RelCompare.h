@@ -117,16 +117,16 @@ namespace zypp
         return compare( lhs, rhs ) != 0;
         break;
       case Rel::LT_e:
-        return compare( lhs, rhs ) == -1;
+        return compare( lhs, rhs ) < 0;
         break;
       case Rel::LE_e:
-        return compare( lhs, rhs ) != 1;
+        return compare( lhs, rhs ) <= 0;
         break;
       case Rel::GT_e:
-        return compare( lhs, rhs ) == 1;
+        return compare( lhs, rhs ) > 0;
         break;
       case Rel::GE_e:
-        return compare( lhs, rhs ) != -1;
+        return compare( lhs, rhs ) >= 0;
         break;
       case Rel::ANY_e:
         return true;
