@@ -521,8 +521,8 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
     }
     InstallOrder order( pool_r, ilist, installed );
     // start recursive depth-first-search
-    order.startrdfs();
-
+    order.init();
+MIL << "order.init() done" << endl;
     ///////////////////////////////////////////////////////////////////
     // build install list in install order
     ///////////////////////////////////////////////////////////////////
@@ -551,6 +551,7 @@ MIL << "order.computeNextSet: " << items.size() << " resolvables" << endl;
       for ( PoolItemList::iterator cit = items.begin(); cit != items.end(); ++cit )
       {
 	Resolvable::constPtr res( cit->resolvable() );
+	if (!res) continue;
 	Package::constPtr cpkg( asKind<Package>(res) );
 	if (!cpkg) {
 MIL << "Not a package " << *cit << endl;
