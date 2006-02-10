@@ -45,7 +45,7 @@ namespace zypp
 
 	int _count;
 
-	PackagesParser::PackagesParser(Source_Ref source, SuseTagsImpl::Ptr sourceimpl)
+	PackagesParser(Source_Ref source, SuseTagsImpl::Ptr sourceimpl)
 	    : _source( source )
 	    , _sourceImpl( sourceimpl )
 	    , _count( 0 )
