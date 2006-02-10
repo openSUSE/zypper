@@ -100,13 +100,20 @@ namespace zypp
       }
 
 #ifndef STORAGE_DISABLED
-      // resolvables stored in the zypp storage database
-      std::list<ResObject::Ptr> resolvables = _storage.storedObjects();
-      for (std::list<ResObject::Ptr>::iterator it = resolvables.begin();
-           it != resolvables.end();
-           it++)
+      if ( isStorageEnabled() )
       {
-        _store.insert(*it);
+        // resolvables stored in the zypp storage database
+        std::list<ResObject::Ptr> resolvables = _storage.storedObjects();
+        for (std::list<ResObject::Ptr>::iterator it = resolvables.begin();
+            it != resolvables.end();
+            it++)
+        {
+          _store.insert(*it);
+        }
+      }
+      else
+      {
+        WAR << "storage target not enabled" << std::endl;
       }
 #endif
 
@@ -270,37 +277,44 @@ namespace zypp
 #ifndef STORAGE_DISABLED
         else // other resolvables
         {
-          if (it->status().isToBeInstalled())
-          { 
-            bool success = false;
-            try
-            {
-              _storage.storeObject(it->resolvable());
-              success = true;
+          if ( isStorageEnabled() )
+          {
+            if (it->status().isToBeInstalled())
+            { 
+              bool success = false;
+              try
+              {
+                _storage.storeObject(it->resolvable());
+                success = true;
+              }
+              catch (Exception & excpt_r)
+              {
+                ZYPP_CAUGHT(excpt_r);
+                WAR << "Install of Resolvable from storage failed" << endl;
+              }
+              if (success)
+                it->status().setStatus( ResStatus::installed );
             }
-            catch (Exception & excpt_r)
+            else
             {
-              ZYPP_CAUGHT(excpt_r);
-              WAR << "Install of Resolvable from storage failed" << endl;
+              bool success = false;
+              try
+              {
+                _storage.deleteObject(it->resolvable());
+                success = true;
+              }
+              catch (Exception & excpt_r)
+              {
+                ZYPP_CAUGHT(excpt_r);
+                WAR << "Uninstall of Resolvable from storage failed" << endl;
+              }
+              if (success)
+                it->status().setStatus( ResStatus::uninstalled );
             }
-            if (success)
-              it->status().setStatus( ResStatus::installed );
           }
           else
           {
-            bool success = false;
-            try
-            {
-              _storage.deleteObject(it->resolvable());
-              success = true;
-            }
-            catch (Exception & excpt_r)
-            {
-              ZYPP_CAUGHT(excpt_r);
-              WAR << "Uninstall of Resolvable from storage failed" << endl;
-            }
-            if (success)
-              it->status().setStatus( ResStatus::uninstalled );
+            WAR << "storage target disabled" << std::endl;
           }
         }
     #endif
