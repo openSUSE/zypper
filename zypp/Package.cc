@@ -139,7 +139,7 @@ namespace zypp
 
   /** */
   Pathname Package::getPlainRpm() const
-  { return source().provideFile(plainRpm()); }
+  { return source().provideFile(plainRpm(), mediaId()); }
 
   /** */
   Pathname Package::getDeltaRpm(BaseVersion & base_r) const
