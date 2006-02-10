@@ -175,7 +175,7 @@ namespace zypp
         }
       } while( *R_pci++ );
 
-      delete Buf_aci;
+      delete[] Buf_aci;
       name_t = Tprfx + Stack_Ci.str();
     }
 
