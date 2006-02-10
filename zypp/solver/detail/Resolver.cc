@@ -317,26 +317,26 @@ solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
 
     if (status.isToBeInstalled()) {
 	r = item.status().setToBeInstalled(ResStatus::SOLVER);
-	_DEBUG("solution_to_pool(" << item << ", " << status << ") install !" << r);
+	_XDEBUG("solution_to_pool(" << item << ", " << status << ") install !" << r);
     }
     else if (status.isToBeUninstalled()) {
 	r = item.status().setToBeUninstalled(ResStatus::SOLVER);
-	_DEBUG("solution_to_pool(" << item << ", " << status << ") remove !" << r);
+	_XDEBUG("solution_to_pool(" << item << ", " << status << ") remove !" << r);
     }
     else if (status.isIncomplete()
 	     || status.isNeeded()) {
 	r = item.status().setIncomplete();
-	_DEBUG("solution_to_pool(" << item << ", " << status << ") incomplete !" << r);
+	_XDEBUG("solution_to_pool(" << item << ", " << status << ") incomplete !" << r);
     }
     else if (status.isUnneeded()) {
 	r = item.status().setUnneeded();
-	_DEBUG("solution_to_pool(" << item << ", " << status << ") unneeded !" << r);
+	_XDEBUG("solution_to_pool(" << item << ", " << status << ") unneeded !" << r);
     }
     else if (status.isSatisfied()) {
 	r = item.status().setSatisfied();
-	_DEBUG("solution_to_pool(" << item << ", " << status << ") satisfied !" << r);
+	_XDEBUG("solution_to_pool(" << item << ", " << status << ") satisfied !" << r);
     } else {
-	_DEBUG("solution_to_pool(" << item << ", " << status << ") unchanged !");
+	_XDEBUG("solution_to_pool(" << item << ", " << status << ") unchanged !");
     }
     return;
 }
