@@ -9,16 +9,15 @@ sourceincludedir = $(pkgincludedir)/source
 
 sourceinclude_HEADERS =	\
 	SourceImpl.h	\
-	Builtin.h	\
-	MediaSet.h
+	Builtin.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_source.la
 
 ## ##################################################
 
 lib@PACKAGE@_source_la_SOURCES =	\
-	SourceImpl.cc			\
-	MediaSet.cc
+	SourceImpl.cc
+
 
 lib@PACKAGE@_source_la_LIBADD = \
 		susetags/lib@PACKAGE@_source_susetags.la	\

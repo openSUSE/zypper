@@ -35,25 +35,47 @@ namespace zypp
 
       struct PackagesParser : public parser::tagfile::TagFileParser
       {
-        PkgContent result;
+        PkgContent _result;
 
 	Source_Ref _source;
 	SuseTagsImpl::Ptr _sourceImpl;
 
-        PkgImplPtr pkgImpl;
-        NVRAD nvrad;
+        PkgImplPtr _pkgImpl;
+        NVRAD _nvrad;
+
+	int _count;
+
+	PackagesParser::PackagesParser(Source_Ref source, SuseTagsImpl::Ptr sourceimpl)
+	    : _source( source )
+	    , _sourceImpl( sourceimpl )
+	    , _count( 0 )
+	{ }
+
+	PkgContent result() const
+	{
+	 MIL << "result(), _count " << _count << ", _result.size() " << _result.size() << endl;
+	 if (_count != _result.size()) {
+	    ERR << "*********************" << endl;
+	 }
+	 return _result;
+	}
 
         bool pkgPending() const
-        { return pkgImpl; }
+        { return _pkgImpl; }
 
         void collectPkg( const shared_ptr<source::susetags::SuseTagsPackageImpl> & nextPkg_r
                          = shared_ptr<source::susetags::SuseTagsPackageImpl>() )
         {
           if ( pkgPending() )
             {
-              result.insert(PkgContent::value_type( nvrad, pkgImpl ) );
+	      _count++;
+	      PkgContent::iterator it = _result.find( _nvrad );
+	      if (it != _result.end()) {
+		ERR << (NVRA)_nvrad << " already in _result" << endl;
+	      }
+              _result.insert(PkgContent::value_type( _nvrad, _pkgImpl ) );
             }
-          pkgImpl = nextPkg_r;
+          _pkgImpl = nextPkg_r;
         }
 
         void newPkg()
@@ -87,19 +109,19 @@ namespace zypp
               ZYPP_THROW( ParseException( "Pkg" ) );
 
             newPkg();
-            nvrad = NVRAD( words[0], Edition(words[1],words[2]), Arch(words[3]) );
+            _nvrad = NVRAD( words[0], Edition(words[1],words[2]), Arch(words[3]) );
           }
           if ( stag_r.name == "Grp" )
           {
-            pkgImpl->_group = stag_r.value;
+            _pkgImpl->_group = stag_r.value;
           }
           if ( stag_r.name == "Lic" )
           {
-            pkgImpl->_license = stag_r.value;
+            _pkgImpl->_license = stag_r.value;
           }
           if ( stag_r.name == "Tim" )
           {
-            pkgImpl->_buildtime = Date(str::strtonum<time_t>(stag_r.value));
+            _pkgImpl->_buildtime = Date(str::strtonum<time_t>(stag_r.value));
           }
           if ( stag_r.name == "Siz" )
           {
@@ -107,18 +129,18 @@ namespace zypp
             if ( str::split( stag_r.value, std::back_inserter(words) ) != 2 )
               ZYPP_THROW( ParseException( "Siz" ) );
 
-            pkgImpl->_sourcesize = str::strtonum<unsigned long>(words[0]);
-            pkgImpl->_archivesize = str::strtonum<unsigned long>(words[1]);
+            _pkgImpl->_sourcesize = str::strtonum<unsigned long>(words[0]);
+            _pkgImpl->_archivesize = str::strtonum<unsigned long>(words[1]);
           }
           if ( stag_r.name == "Loc" )
           {
             std::vector<std::string> words;
             unsigned int howmany = str::split( stag_r.value, std::back_inserter(words) );
-            pkgImpl->_media_number = 1;
+            _pkgImpl->_media_number = 1;
             if ( howmany >= 2 )
             {
-              pkgImpl->_media_number = str::strtonum<unsigned int>(words[0]);
-              pkgImpl->_location = _sourceImpl->sourceDir(nvrad) + words[1];
+              _pkgImpl->_media_number = str::strtonum<unsigned int>(words[0]);
+              _pkgImpl->_location = _sourceImpl->sourceDir(_nvrad) + words[1];
             }
             else
             {
@@ -136,32 +158,32 @@ namespace zypp
 
           if ( mtag_r.name == "Prv" )
             {
-              collectDeps( mtag_r.values, nvrad[Dep::PROVIDES] );
+              collectDeps( mtag_r.values, _nvrad[Dep::PROVIDES] );
             }
           else if ( mtag_r.name == "Prq" )
             {
-              collectDeps( mtag_r.values, nvrad[Dep::PREREQUIRES] );
+              collectDeps( mtag_r.values, _nvrad[Dep::PREREQUIRES] );
             }
           else if ( mtag_r.name == "Req" )
             {
-              collectDeps( mtag_r.values, nvrad[Dep::REQUIRES] );
+              collectDeps( mtag_r.values, _nvrad[Dep::REQUIRES] );
             }
           else if ( mtag_r.name == "Con" )
             {
-              collectDeps( mtag_r.values, nvrad[Dep::CONFLICTS] );
+              collectDeps( mtag_r.values, _nvrad[Dep::CONFLICTS] );
             }
           else if ( mtag_r.name == "Obs" )
             {
-              collectDeps( mtag_r.values, nvrad[Dep::OBSOLETES] );
+              collectDeps( mtag_r.values, _nvrad[Dep::OBSOLETES] );
             }
           else if ( mtag_r.name == "Key" )
             {
-               pkgImpl->_keywords = mtag_r.values;
+               _pkgImpl->_keywords = mtag_r.values;
             }
           else if ( mtag_r.name == "Aut" )
             {
               // MultiTag is a Set but author is a list
-              pkgImpl->_authors = mtag_r.values;
+              _pkgImpl->_authors = mtag_r.values;
             }
         }
 
@@ -173,11 +195,9 @@ namespace zypp
 
       PkgContent parsePackages( Source_Ref source_r, SuseTagsImpl::Ptr sourceImpl_r, const Pathname & file_r )
       {
-        PackagesParser p;
-	p._source = source_r;
-	p._sourceImpl = sourceImpl_r;
+        PackagesParser p( source_r, sourceImpl_r );
         p.parse( file_r );
-        return p.result;
+        return p.result();
       }
 
       /////////////////////////////////////////////////////////////////

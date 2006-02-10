@@ -37,10 +37,12 @@ namespace zypp
         const PkgContent & _content;
 	const Locale & _lang;
 	PkgImplPtr _current;
+	int _count;
 
 	PackagesLangParser (const PkgContent & content_r, const Locale & lang_r)
 	    : _content( content_r )
 	    , _lang( lang_r)
+	    , _count( 0 )
         { }
 
         /* Consume SingleTag data. */
@@ -61,6 +63,7 @@ namespace zypp
 		_current.reset();
 	    }
 	    else {
+		_count++;
 		_current = it->second;
 	    }
 
@@ -70,6 +73,7 @@ namespace zypp
 	    if (_current != NULL) {
 	      _current->_summary = TranslatedText( stag_r.value, _lang);
 	    }
+	    else ERR << "No current for " << stag_r.value << endl;
           }
         }
 
@@ -78,8 +82,10 @@ namespace zypp
         {
           if ( mtag_r.name == "Des" )
             {
-	       if ( _current != NULL )
+	      if ( _current != NULL )
                  _current->_description = TranslatedText (mtag_r.values, _lang);
+	      else
+		ERR << "No current for Des" << endl;
             }
         }
       };
@@ -89,7 +95,9 @@ namespace zypp
       void parsePackagesLang( const Pathname & file_r, const Locale & lang_r, const PkgContent & content_r )
       {
         PackagesLangParser p (content_r, lang_r);
+	MIL << "Starting with " << content_r.size() << " packages" << endl;
         p.parse( file_r );
+	MIL << "Ending after " << p._count << " langs with " << content_r.size() << " packages" <<endl;
         return;
       }
 
