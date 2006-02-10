@@ -68,11 +68,11 @@ namespace zypp
 	  std::string line = tag.value;
 	  std::vector<std::string> words;
 	  str::split( line, std::back_inserter(words), " " );
-	  XXX << "[" << words[0] << "]" << "[" << words[1] << "]" << "[" << words[2] << "]" << "[" << words[3] << "]" << std::endl;
+
 	  selImpl->_name = words[0];
 	  selImpl->_version = words[1];
 	  selImpl->_release = words[2];
-	  selImpl->_arch = words[3];
+	  if (words.size() > 3) selImpl->_arch = words[3];
 	}
 	else if ( tag.name == "Vis" )
 	{
