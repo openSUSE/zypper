@@ -1,4 +1,5 @@
 
+#include <iostream>
 #include "zypp/source/susetags/ProductMetadataParser.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
