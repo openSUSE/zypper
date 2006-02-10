@@ -48,10 +48,10 @@ void
 HelixSourceImpl::factoryInit()
 {
     MIL << "HelixSourceImpl::factoryInit()" << endl;
-#if 0
     try {
 	media::MediaManager media_mgr;
 	MIL << "Adding no media verifier" << endl;
+	media::MediaAccessId _media = _media_set->getMediaAccessId(1);
 	media_mgr.delVerifier(_media);
 	media_mgr.addVerifier(_media, media::MediaVerifierRef(new media::NoVerifier()));
     }
@@ -61,15 +61,15 @@ HelixSourceImpl::factoryInit()
 	ZYPP_CAUGHT(excpt_r);
 	WAR << "Verifier not found" << endl;
     }
-#endif
     return;
 }
+
 
 void
 HelixSourceImpl::factoryCtor( const media::MediaId & media_r, const Pathname & path_r, const std::string & alias_r, const Pathname cache_dir_r)
 {
     MIL << "HelixSourceImpl::factoryCtor(<media>, " << path_r << ", " << alias_r << ", " << cache_dir_r << ")" << endl;
-    _media = media_r;
+//    _media = media_r;
     _pathname = path_r;
     _alias = alias_r;
     _cache_dir = cache_dir_r;
