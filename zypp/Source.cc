@@ -120,6 +120,9 @@ namespace zypp
   void Source_Ref::redirect(unsigned media_nr, const Url & new_url)
   { _pimpl->redirect(media_nr, new_url); }
   
+  media::MediaVerifierRef Source_Ref::verifier(unsigned media_nr)
+  { _pimpl->verifier(media_nr); }
+  
   /******************************************************************
    **
    **	FUNCTION NAME : operator<<

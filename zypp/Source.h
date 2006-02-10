@@ -115,6 +115,11 @@ namespace zypp
      */
     void redirect(unsigned media_nr, const Url & new_url);
 
+    /**
+     * Provide a media verifier suitable for the given media number
+     */
+    media::MediaVerifierRef verifier(unsigned media_nr);
+
     /** Conversion to bool to allow pointer style tests
      *  for nonNULL \ref source impl.
      * \todo fix by providing a safebool basecalss, doing the 'nasty'

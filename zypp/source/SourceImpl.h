@@ -24,6 +24,7 @@
 
 #include "zypp/Pathname.h"
 #include "zypp/media/MediaManager.h"
+#include "zypp/source/MediaSet.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -137,6 +138,10 @@ namespace zypp
       virtual void setZmdDescription (const std::string desc_r);
 
       virtual void redirect(unsigned media_nr, const Url & new_url);
+      /**
+       * Get media verifier for the specified media
+       */
+      virtual media::MediaVerifierRef verifier(unsigned media_nr);
 
     protected:
       /** Provide Source_Ref back to \c this. */
@@ -146,8 +151,8 @@ namespace zypp
     protected:
       /** All resolvables provided by this source. */
       ResStore _store;
-      /** Handle to media which contains this source */
-      media::MediaId _media;
+      /** URL of the media */
+      Url _url;
       /** Path to the source on the media */
       Pathname _path;
       /** The source is enabled */
@@ -191,6 +196,9 @@ namespace zypp
 
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const;
+
+      /** Set of medias of the product */
+      intrusive_ptr<MediaSet> _media_set;
 
     private:
       /** Late initialize the ResStore. */

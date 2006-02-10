@@ -54,7 +54,9 @@ namespace zypp
                                   const std::string & alias_r,
                                   const Pathname cache_dir_r )
     {
-      _media     = media_r;
+      _media_set = new MediaSet(selfSourceRef());
+      _url = media_mgr.url(media_r);
+      _media_set->redirect(1, media_r);
       _path      = path_r;
       _alias     = alias_r;
       _cache_dir = cache_dir_r;
@@ -107,9 +109,11 @@ namespace zypp
 
       SourceFactory source_factory;
 
+      media::MediaAccessId _media;
       do {
         try {
-	  media_mgr.provideFile (_media, media_nr, file_r, cached, checkonly);
+	  _media = _media_set->getMediaAccessId(media_nr); // in case of redirect
+	  media_mgr.provideFile (_media, file_r, cached, checkonly);
 	  break;
         }
 	catch ( Exception & excp )
@@ -145,16 +149,19 @@ namespace zypp
 					  const unsigned media_nr,
 					  const bool recursive)
     {
+      media::MediaAccessId _media = _media_set->getMediaAccessId(media_nr);
       if (recursive)
-	media_mgr.provideDirTree(_media, media_nr, path_r);
+	media_mgr.provideDirTree(_media, path_r);
       else
-	media_mgr.provideDir(_media, media_nr, path_r);
+	media_mgr.provideDir(_media, path_r);
       return media_mgr.localPath(_media, path_r);
     }
 
     void SourceImpl::changeMedia(const media::MediaId & media_r, const Pathname & path_r)
     {
-      _media = media_r;
+      _url = media_mgr.url(media_r);
+      _media_set->reset();
+      _media_set->redirect(1, media_r);
       _path = path_r;
     }
 
@@ -166,8 +173,12 @@ namespace zypp
 
     void SourceImpl::redirect(unsigned media_nr, const Url & new_url)
     {
-#warning TODO implement URL redirect
+      media::MediaAccessId id = media_mgr.open(new_url);
+      _media_set->redirect(media_nr, id);
     }
+
+    media::MediaVerifierRef SourceImpl::verifier(unsigned media_nr)
+    { return media::MediaVerifierRef(new media::NoVerifier()); }
     
     /////////////////////////////////////////////////////////////////
     // attribute accessors
@@ -191,7 +202,7 @@ namespace zypp
     { _priority_unsubscribed = p; }
 
     Url SourceImpl::url (void) const
-    { return media_mgr.url(_media); }
+    { return _url; }
 
     const Pathname & SourceImpl::path (void) const
     { return _path; }

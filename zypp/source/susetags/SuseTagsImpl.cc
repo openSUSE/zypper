@@ -52,6 +52,7 @@ namespace zypp
 	std::string media_id;
 
         try {
+	  media::MediaAccessId _media = _media_set->getMediaAccessId(1);
 	  Pathname media_file = Pathname("media.1/media");
 	  media_mgr.provideFile (_media, media_file);
 	  media_file = media_mgr.localPath (_media, media_file);
@@ -89,6 +90,7 @@ namespace zypp
           MIL << "Vendor: " << vendor << endl;
           MIL << "Media ID: " << media_id << endl;
 
+	  media::MediaAccessId _media = _media_set->getMediaAccessId(1);
           media_mgr.delVerifier(_media);
           media_mgr.addVerifier(_media, media::MediaVerifierRef(
 	    new SourceImpl::Verifier (vendor, media_id) ));

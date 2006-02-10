@@ -29,7 +29,6 @@ namespace zypp
 
     IMPL_PTR_TYPE(MediaSet);
 
-    media::MediaManager media_mgr;
     MediaSet::MediaSet(const Source_Ref & source_r)
     {
       _source = source_r;
@@ -47,7 +46,9 @@ namespace zypp
 
     media::MediaAccessId MediaSet::getMediaAccessId (media::MediaNr medianr)
     {
-      if (medias.find(medianr) != medias.end())
+     media::MediaManager media_mgr;
+
+     if (medias.find(medianr) != medias.end())
       {
 	media::MediaAccessId id = medias[medianr];
 	if (! media_mgr.isAttached(id))
