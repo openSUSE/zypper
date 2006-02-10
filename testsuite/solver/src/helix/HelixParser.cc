@@ -56,6 +56,9 @@ string2kind (const std::string & str)
 	else if (str == "pattern") {
 	    kind = ResTraits<Pattern>::kind;
 	}
+	else if (str == "selection") {
+	    kind = ResTraits<Selection>::kind;
+	}
 	else if (str == "script") {
 	    kind = ResTraits<Script>::kind;
 	}
@@ -433,6 +436,7 @@ HelixParser::toplevelStart(const std::string & token, const xmlChar **attrs)
 
     if ((token == "package")
 	|| (token == "pattern")
+	|| (token == "selection")
 	|| (token == "script")
 	|| (token == "message")
 	|| (token == "patch")
@@ -602,6 +606,7 @@ HelixParser::resolvableEnd (const std::string & token)
 
     if ((token == "package")
 	|| (token == "pattern")
+	|| (token == "selection")
 	|| (token == "script")
 	|| (token == "message")
 	|| (token == "patch")
