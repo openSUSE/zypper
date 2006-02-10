@@ -187,7 +187,7 @@ namespace zypp
             }
         }
 
-        virtual void parseEnd()
+        virtual void endParse()
         { collectPkg(); }
       };
 
