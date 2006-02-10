@@ -73,7 +73,6 @@ namespace zypp
       MIL << "Targets closed" << endl;
     }
 
-#ifndef STORAGE_DISABLED
     bool TargetImpl::isStorageEnabled() const
     {
       return _storage.isInitialized();
@@ -85,7 +84,6 @@ namespace zypp
       
       _storage.init(root_r);
     }
-#endif
   
     const ResStore & TargetImpl::resolvables()
     {
@@ -99,7 +97,6 @@ namespace zypp
         _store.insert(*it);
       }
 
-#ifndef STORAGE_DISABLED
       if ( isStorageEnabled() )
       {
         // resolvables stored in the zypp storage database
@@ -115,7 +112,6 @@ namespace zypp
       {
         WAR << "storage target not enabled" << std::endl;
       }
-#endif
 
       return _store;
     }
@@ -274,7 +270,6 @@ namespace zypp
             it->status().setStatus( ResStatus::uninstalled );
           }
         }
-#ifndef STORAGE_DISABLED
         else // other resolvables
         {
           if ( isStorageEnabled() )
@@ -317,7 +312,6 @@ namespace zypp
             WAR << "storage target disabled" << std::endl;
           }
         }
-    #endif
       }   
       return remaining;
     }

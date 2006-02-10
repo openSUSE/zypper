@@ -58,7 +58,7 @@ void PersistentStorage::init(const Pathname &root)
   d->backend = new XMLFilesBackend(root);
 }
 
-bool PersistentStorage::isInitalized()
+bool PersistentStorage::isInitialized() const
 {
   return ! (d->backend == 0L);
 }

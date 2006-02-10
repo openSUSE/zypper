@@ -69,7 +69,7 @@ namespace zypp
       /**
        * true is backend was already initialized
        */
-       bool isInitalized();
+       bool isInitialized() const;
 
       /**
        * Stores a Resolvable in the active backend.

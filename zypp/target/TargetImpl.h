@@ -26,8 +26,6 @@
 #include "zypp/target/store/PersistentStorage.h"
 #include "zypp/solver/detail/Types.h"
 
-#define STORAGE_DISABLED
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -77,11 +75,9 @@ namespace zypp
 	  media > 0 means limit commits to this media */
       void commit( ResPool pool_r, unsigned int medianr, PoolItemList & errors_r, PoolItemList & remaining_r, PoolItemList & srcremaining_r );
 
-#ifndef STORAGE_DISABLED
       /** enables the storage target */
       bool isStorageEnabled() const;
       void enableStorage(const Pathname &root_r);
-#endif
 
       /** Commit ordered changes
 	  return uncommitted ones (due to error) */
