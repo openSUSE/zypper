@@ -60,7 +60,8 @@ namespace zypp
       try {
 	MIL << "Adding media verifier" << endl;
 	media_mgr.delVerifier(id);
-	media_mgr.addVerifier(id, _source.verifier(medianr));
+#warning *************FIXME****************
+//	media_mgr.addVerifier(id, _source.verifier(medianr));
       }
       catch (const Exception & excpt_r)
       {
