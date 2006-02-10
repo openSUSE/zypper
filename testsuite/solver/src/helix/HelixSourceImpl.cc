@@ -48,7 +48,7 @@ void
 HelixSourceImpl::factoryInit()
 {
     MIL << "HelixSourceImpl::factoryInit()" << endl;
-
+#if 0
     try {
 	media::MediaManager media_mgr;
 	MIL << "Adding no media verifier" << endl;
@@ -61,6 +61,7 @@ HelixSourceImpl::factoryInit()
 	ZYPP_CAUGHT(excpt_r);
 	WAR << "Verifier not found" << endl;
     }
+#endif
     return;
 }
 
