@@ -558,12 +558,11 @@ static void
 install_item_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     InstallInfo *info = (InstallInfo *)data;
-MIL << "install_item_cb " << item << ": " << status << endl;
+
     if (status.isToBeInstalled()
 	&& !item.status().isInstalled()
 	&& !Helper::findInstalledItem( info->pool, item))
     {
-MIL << "install !" << endl;
 	if (info->fn) info->fn (item, status, info->rl);
 	++info->count;
     }
@@ -737,15 +736,11 @@ upgrade_item_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 
     PoolItem_Ref to_be_upgraded;
 
-MIL << "upgrade_item_cb " << item << ": " << status << endl;
     if (status.isToBeInstalled()
 	&& ! item.status().isInstalled ())
     {
-MIL << "upgrade_item_cb which ?" << endl;
-
 	to_be_upgraded = Helper::findInstalledItem(info->pool, item);
 	if (to_be_upgraded) {
-MIL << "upgrade_item_cb ! " << to_be_upgraded << endl;
 	    if (info->fn) {
 		info->fn (item, status, to_be_upgraded, info->context->getStatus(to_be_upgraded), info->data);
 	    }
@@ -802,13 +797,11 @@ uninstall_item_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 {
     UninstallInfo *info = (UninstallInfo *)data;
 
-MIL << "uninstall_item_cb " << item << ": " << status << endl;
     UpgradeTable::const_iterator pos = info->upgrade_hash.find(item->name());
 
     if (status.isToBeUninstalled ()
 	&& pos == info->upgrade_hash.end())		// dont count upgrades
     {
-MIL << "uninstall_item_cb! " << endl;
 	if (info->fn)
 	    info->fn (item, status, info->rl);
 	++info->count;
