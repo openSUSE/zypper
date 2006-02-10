@@ -16,7 +16,6 @@
 #include <map>
 #include <list>
 
-#include "zypp/parser/tagfile/Tags.h"
 #include "zypp/parser/tagfile/ParseException.h"
 #include "zypp/Pathname.h"
 

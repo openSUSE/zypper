@@ -11,10 +11,7 @@ parserincludedir = $(pkgincludedir)/parser
 
 parserinclude_HEADERS = \
 	XMLNodeIterator.h	\
-	LibXMLHelper.h		\
-	\
-	Spirit.h
-
+	LibXMLHelper.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_parser.la
 
@@ -23,9 +20,7 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_parser.la
 
 lib@PACKAGE@_parser_la_SOURCES = \
 	XMLNodeIterator.cc	\
-	LibXMLHelper.cc		\
-	\
-	Spirit.cc
+	LibXMLHelper.cc
 
 lib@PACKAGE@_parser_la_LIBADD =	yum/lib@PACKAGE@_parser_yum.la	\
 				-lxml2	\

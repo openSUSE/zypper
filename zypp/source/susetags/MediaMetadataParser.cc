@@ -23,7 +23,6 @@
 
 #include "zypp/source/susetags/MediaMetadataParser.h"
 #include <boost/regex.hpp>
-#include "zypp/parser/tagfile/Grammar.h"
 
 using namespace std;
 using namespace boost;
