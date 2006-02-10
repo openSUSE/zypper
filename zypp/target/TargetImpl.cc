@@ -133,7 +133,7 @@ namespace zypp
     }
 
 
-    void TargetImpl::commit(ResPool pool_r, unsigned int medianr, PoolItemList & errors_r, PoolItemList & remaining_r, PoolItemList & srcremaining_r)
+    int TargetImpl::commit(ResPool pool_r, unsigned int medianr, PoolItemList & errors_r, PoolItemList & remaining_r, PoolItemList & srcremaining_r)
     {
       MIL << "TargetImpl::commit(<pool>, " << medianr << ")" << endl;
 
@@ -192,9 +192,9 @@ namespace zypp
           }
         }
         bad = commit (current_srcinstall);
-        srcremaining_r.insert(remaining_r.end(), bad.begin(), bad.end());
+        srcremaining_r.insert(srcremaining_r.end(), bad.begin(), bad.end());
       }
-      return;
+      return to_install.size() - remaining_r.size();
     }
 
 

@@ -58,8 +58,9 @@ namespace zypp
     /** Commit changes in the pool 
      *  \param medianr 0 = all/any media
      *                 > 0 means only the given media number
+     * return number of successfully committed resolvables
     */
-    void commit( ResPool pool_r, int medianr, PoolItemList & errors_r
+    int commit( ResPool pool_r, int medianr, PoolItemList & errors_r
         , PoolItemList & remaining_r, PoolItemList & srcremaining_r );
 
       /** If the package is installed and provides the file
