@@ -99,7 +99,6 @@ namespace zypp
       { return false; }
 
       unsigned PackageImplIf::mediaId() const
-#warning FIXME: What's the first media? 1 or 0?
       { return 1; }
 
     /////////////////////////////////////////////////////////////////
