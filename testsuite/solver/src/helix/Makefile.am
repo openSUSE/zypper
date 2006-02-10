@@ -20,6 +20,7 @@ noinst_HEADERS = \
 	HelixScriptImpl.h			\
 	HelixMessageImpl.h			\
 	HelixPatchImpl.h			\
+	HelixSelectionImpl.h			\
 	HelixPatternImpl.h			\
 	HelixProductImpl.h
 
@@ -35,6 +36,7 @@ lib@PACKAGE@_helix_la_SOURCES =			\
 	HelixScriptImpl.cc			\
 	HelixMessageImpl.cc			\
 	HelixPatchImpl.cc			\
+	HelixSelectionImpl.cc			\
 	HelixPatternImpl.cc			\
 	HelixProductImpl.cc
 

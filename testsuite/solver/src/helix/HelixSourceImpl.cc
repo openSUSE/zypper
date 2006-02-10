@@ -25,6 +25,7 @@
 #include "HelixScriptImpl.h"
 #include "HelixMessageImpl.h"
 #include "HelixPatchImpl.h"
+#include "HelixSelectionImpl.h"
 #include "HelixPatternImpl.h"
 #include "HelixProductImpl.h"
 
@@ -204,6 +205,30 @@ HelixSourceImpl::createPatch (const HelixParser & parsed)
 }
 
 
+Selection::Ptr
+HelixSourceImpl::createSelection (const HelixParser & parsed)
+{
+    try
+    {
+	shared_ptr<HelixSelectionImpl> impl(new HelixSelectionImpl(_source, parsed));
+
+	// Collect basic Resolvable data
+	NVRAD dataCollect( parsed.name,
+			Edition( parsed.version, parsed.release, parsed.epoch ),
+			Arch( parsed.arch ),
+			createDependencies (parsed));
+	Selection::Ptr pattern = detail::makeResolvableFromImpl(dataCollect, impl);
+	return pattern;
+    }
+    catch (const Exception & excpt_r)
+    {
+	ERR << excpt_r << endl;
+	throw "Cannot create selection object";
+    }
+    return NULL;
+}
+
+
 Pattern::Ptr
 HelixSourceImpl::createPattern (const HelixParser & parsed)
 {
@@ -272,6 +297,10 @@ HelixSourceImpl::parserCallback (const HelixParser & parsed)
     else if (parsed.kind == ResTraits<Patch>::kind) {
 	Patch::Ptr p = createPatch (parsed);
 	_store.insert (p);
+    }
+    else if (parsed.kind == ResTraits<Selection>::kind) {
+	Selection::Ptr s = createSelection(parsed);
+	_store.insert (s);
     }
     else if (parsed.kind == ResTraits<Pattern>::kind) {
 	Pattern::Ptr p = createPattern (parsed);

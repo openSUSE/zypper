@@ -75,7 +75,7 @@ end
 class Package
 	attr_accessor :name, :epoch, :version, :release, :architecture
 	attr_accessor :summary, :description, :group, :rpmsize, :installsize
-	attr_accessor :requires, :prerequires, :provides, :conflicts, :obsoletes
+	attr_accessor :requires, :prerequires, :provides, :conflicts, :obsoletes, :suggests, :enhances
 	attr_accessor :location
 	attr_accessor :skip
 
@@ -124,6 +124,8 @@ class Package
 		add_dependencies "provides", provides
 		add_dependencies "conflicts", conflicts
 		add_dependencies "obsoletes", obsoletes
+		add_dependencies "suggests", suggests
+		add_dependencies "enhances", enhances
 
 		@channel.puts "</package>"
 	end
@@ -263,6 +265,10 @@ class Parser
 							package.conflicts = parse_dependencies f, "-Con"
 						when "+Obs"
 							package.obsoletes = parse_dependencies f, "-Obs"
+						when "+Sug"
+							package.suggests = parse_dependencies f, "-Sug"
+						when "+Enh"
+							package.enhances = parse_dependencies f, "-Enh"
 						else
 							STDERR.puts "Unknown '#{key}'"
 

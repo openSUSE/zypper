@@ -135,6 +135,9 @@ string2kind (const std::string & str)
 	else if (str == "pattern") {
 	    kind = ResTraits<zypp::Pattern>::kind;
 	}
+	else if (str == "selection") {
+	    kind = ResTraits<zypp::Selection>::kind;
+	}
 	else if (str == "script") {
 	    kind = ResTraits<zypp::Script>::kind;
 	}
@@ -382,6 +385,7 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
 
     bool operator()( PoolItem_Ref p)
     {
+MIL << p << " ?" << endl;
 	Source_Ref s = p->source();
 
 	if (s.alias() != source.alias()) {
@@ -399,20 +403,24 @@ get_poolItem (const string & source_alias, const string & package_name, const st
 {
     PoolItem_Ref poolItem;
     Resolvable::Kind kind = string2kind (kind_name);
+    Source_Ref source;
 
     try {
-	Source_Ref source = manager->findSource (source_alias);
-	if (!source) {
-	    cerr << "Can't find source '" << source_alias << "'" << endl;
-	    return poolItem;
-	}
+	source = manager->findSource (source_alias);
+    }
+    catch (Exception & excpt_r) {
+	ZYPP_CAUGHT (excpt_r);
+	cerr << "Can't find source '" << source_alias << "'" << endl;
+	return poolItem;
+    }
 
+    try {
 	FindPackage info (source, kind);
 
 	invokeOnEach( God->pool().byNameBegin( package_name ),
 		      God->pool().byNameEnd( package_name ),
-//		      functor::chain( resfilter::BySource(source), resfilter::ByKind (kind) ),
-		      resfilter::ByKind (kind),
+		      functor::chain( resfilter::BySource(source), resfilter::ByKind (kind) ),
+//		      resfilter::ByKind (kind),
 		      functor::functorRef<bool,PoolItem> (info) );
 
 	poolItem = info.poolItem;
@@ -590,7 +598,7 @@ load_source (const string & alias, const string & filename, const string & type,
 	count = src.resolvables().size();
 	cout << "Added source '" << alias << "' as #" << snum  << ":[" << src.alias() << "] with " << count << " resolvables" << endl;
 	God->addResolvables( src.resolvables(), (alias == "@system") );
-	print_pool ();
+//	print_pool ();
 
 	cout << "Loaded " << count << " package(s) from " << pathname << endl;
     }
@@ -981,40 +989,44 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	} else if (node->equals ("install")) {
 
 	    string source_alias = node->getProp ("channel");
-	    string package_name = node->getProp ("package");
+	    string name = node->getProp ("name");
+	    if (name.empty())
+		name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 	    string soft = node->getProp ("soft");
 
 	    PoolItem_Ref poolItem;
 
-	    poolItem = get_poolItem (source_alias, package_name, kind_name);
+	    poolItem = get_poolItem (source_alias, name, kind_name);
 	    if (poolItem) {
-		RESULT << "Installing " << package_name << " from channel " << source_alias << endl;;
+		RESULT << "Installing " << name << " from channel " << source_alias << endl;;
 		poolItem.status().setToBeInstalled(ResStatus::USER);
 		if (!soft.empty())
 		    poolItem.status().setSoftInstall(true);
 //		resolver->addPoolItemToInstall (poolItem);
 	    } else {
-		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
+		cerr << "Unknown item " << source_alias << "::" << name << endl;
 	    }
 
 	} else if (node->equals ("uninstall")) {
 
-	    string package_name = node->getProp ("package");
+	    string name = node->getProp ("name");
+	    if (name.empty())
+		name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
 	    string soft = node->getProp ("soft");
 
 	    PoolItem_Ref poolItem;
 
-	    poolItem = get_poolItem ("@system", package_name, kind_name);
+	    poolItem = get_poolItem ("@system", name, kind_name);
 	    if (poolItem) {
-		RESULT << "Uninstalling " << package_name << endl;
+		RESULT << "Uninstalling " << name << endl;
 		poolItem.status().setToBeUninstalled(ResStatus::USER);
 		if (!soft.empty())
 		    poolItem.status().setSoftUninstall(true);
 //		resolver->addPoolItemToRemove (poolItem);
 	    } else {
-		cerr << "Unknown system package " << package_name << endl;
+		cerr << "Unknown system item " << name << endl;
 	    }
 
 	} else if (node->equals ("upgrade")) {

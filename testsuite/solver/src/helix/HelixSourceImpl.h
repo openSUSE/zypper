@@ -72,6 +72,7 @@ class HelixSourceImpl : public zypp::source::SourceImpl {
     Script::Ptr  createScript (const HelixParser & data);
     Patch::Ptr   createPatch (const HelixParser & data);
     Pattern::Ptr createPattern (const HelixParser & data);
+    Selection::Ptr createSelection (const HelixParser & data);
     Product::Ptr createProduct (const HelixParser & data);
 
     Dependencies createDependencies (const HelixParser & data);
