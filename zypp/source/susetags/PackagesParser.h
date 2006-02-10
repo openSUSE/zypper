@@ -22,9 +22,6 @@
 #include "zypp/source/susetags/SuseTagsImpl.h"
 #include "zypp/source/susetags/SuseTagsPackageImpl.h"
 
-typedef zypp::shared_ptr<zypp::source::susetags::SuseTagsPackageImpl> PkgImplPtr;
-typedef std::map<zypp::NVRAD, PkgImplPtr> PkgContent;
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -34,6 +31,9 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace susetags
     { /////////////////////////////////////////////////////////////////
+
+      typedef shared_ptr<SuseTagsPackageImpl> PkgImplPtr;
+      typedef std::map<NVRAD, PkgImplPtr> PkgContent;
 
       /** \deprecated Just temporary.
        * \throws ParseException and others.
