@@ -335,18 +335,52 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
     _XDEBUG( "ResolverContext[" << this << "]::uninstall("
 		    << item << " " << (part_of_upgrade ? "part_of_upgrade" : "") << " "
 		    << (due_to_obsolete ? "due_to_obsolete": "") << " "
-		    << (due_to_unlink ? "due_to_unlink" : "") << ")" );
+	     << (due_to_unlink ? "due_to_unlink" : "") << ")" << "pool-status:" << item.status());
 
     assert (! (due_to_obsolete && due_to_unlink));
 
     status = getStatus(item);
-
-    if (status.isToBeInstalled()) {
-	ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_REJECT_INSTALL, item, RESOLVER_INFO_PRIORITY_VERBOSE);
-	addError (misc_info);
+    
+    if ((status.staysInstalled() || status.isToBeInstalled()) 
+	&& (item.status().staysInstalled() || item.status().isToBeInstalled())
+	&& !part_of_upgrade
+	&& !due_to_obsolete
+	&& !due_to_unlink)
+    {
+	// find the reason why the solver has tried to delete this item in a run before
+	// Canditates are RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL
+	//                RESOLVER_INFO_TYPE_NO_PROVIDER
+	//                RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER
+	//                RESOLVER_INFO_TYPE_CANT_SATISFY
+	bool found = false;
+	ResolverInfoList addList;
+	for (ResolverInfoList::const_iterator iter = _log.begin(); iter != _log.end(); iter++) {
+	    ResolverInfo_Ptr info = *iter;
+	    if (info->type() == RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL
+		|| info->type() == RESOLVER_INFO_TYPE_NO_PROVIDER
+		|| info->type() == RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER
+		|| info->type() == RESOLVER_INFO_TYPE_CANT_SATISFY		
+		)
+	    {
+		// put the info on the end as error
+		found = true;
+		addList.push_back (info);
+	    }
+	}
+	if (!found) {
+	    // generating a default problem
+	    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_REJECT_INSTALL, item, RESOLVER_INFO_PRIORITY_VERBOSE);
+	    addError (misc_info);
+	} else {
+	    // Put the info at the end of the list, flagged as error
+	    for (ResolverInfoList::const_iterator iter = addList.begin(); iter != addList.end(); iter++) {
+		ResolverInfo_Ptr info = *iter;
+		addError (info);
+	    }
+	}
+	
 	return false;
     }
-
     if (status.isToBeUninstalled()
 	&& !status.isToBeUninstalledDueToUnlink())
     {

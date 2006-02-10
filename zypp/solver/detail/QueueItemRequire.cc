@@ -386,7 +386,10 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	QueueItemBranch_Ptr branch_item = NULL;
 	bool explore_uninstall_branch = true;
 
-	if (!_upgraded_item) {
+	
+
+	if (!_upgraded_item
+	    || _lost_item) {
 
 	    ResolverInfo_Ptr err_info;
 	    NoInstallableProviders info;
@@ -420,7 +423,10 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	// If this is an upgrade, we might be able to avoid removing stuff by upgrading it instead.
 	//
 
-	if (_upgraded_item
+	if ((_upgraded_item
+	     || _lost_item // foo-devel requires foo; foo is lost due obsolete --> try to upgrade foo-devel
+	     || context->verifying()) // We are in the verify mode. So there could be already missing requirements
+	                              // So try to solve it via update
 	    && _requiring_item) {
 
 	    LookForUpgrades info (_requiring_item);
@@ -453,7 +459,11 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		branch_item = new QueueItemBranch (pool());
 
 		ostringstream req_str;	req_str << _requiring_item;
-		ostringstream up_str; up_str << _upgraded_item;
+		ostringstream up_str;
+		if (_upgraded_item)
+		    up_str << _upgraded_item;
+		else
+		    up_str << _requiring_item;
 		ostringstream cap_str; cap_str << _capability;
 
 		 // Translator: 1.%s = dependency; 2.%s and 3.%s = name of package,patch,...
@@ -473,7 +483,8 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 			branch_item->addItem (install_item);
 
 			ResolverInfoNeededBy_Ptr upgrade_info = new ResolverInfoNeededBy (upgrade_item);
-			upgrade_info->addRelatedPoolItem (_upgraded_item);
+			if (_upgraded_item)
+			    upgrade_info->addRelatedPoolItem (_upgraded_item);
 			install_item->addInfo (upgrade_info);
 
 			// If an upgrade item has its requirements met, don't do the uninstall branch.
@@ -518,6 +529,8 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	    } else if (!info.upgrades.empty()
 		       && explore_uninstall_branch
+		       && _requiring_item
+		       && _upgraded_item
 		       && codependent_items (_requiring_item, _upgraded_item)
 		       && !_lost_item) {
 		explore_uninstall_branch = false;
@@ -530,11 +543,29 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	if (context->verifying()) {
 	    // We always consider uninstalling when in verification mode.
 	    explore_uninstall_branch = true;
-	} else if (status.transacts()
-		   && !status.isToBeUninstalled()) {
+	}
+	else if (status.isToBeInstalled()           // scheduled for installation
+		 && !status.isToBeUninstalled()     // not scheduled for uninstallation
+		 || _requiring_item.status().staysInstalled()) // not scheduled at all but installed
+	{
 	    // The item has to be set for installing/updating explicity.
-	    // So the uninstall branch is not useful.
-	    explore_uninstall_branch = false;
+	    // So the uninstall branch could be not useful if upgrade is not successful.
+	    // Adding the info for solution handling at the end of solving
+	    ResolverInfo_Ptr misc_info;
+	    if (!_upgraded_item) {
+		if (_remove_only) {
+		    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER,
+						     _requiring_item, RESOLVER_INFO_PRIORITY_VERBOSE, _capability);
+		} else {
+		    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NO_PROVIDER,
+						     _requiring_item, RESOLVER_INFO_PRIORITY_VERBOSE, _capability);
+		}
+	    } else {
+		misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CANT_SATISFY,
+						  _requiring_item, RESOLVER_INFO_PRIORITY_VERBOSE,
+						  _capability);
+	    }	    
+	    context->addInfo (misc_info);
 	}
 
 	if (explore_uninstall_branch && _requiring_item) {

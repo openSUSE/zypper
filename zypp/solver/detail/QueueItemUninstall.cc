@@ -194,7 +194,6 @@ struct UninstallProcess: public resfilter::OnCapMatchCallbackFunctor
 	    qil.push_back (establish_item);
 	    return true;
 	}
-
 	QueueItemRequire_Ptr require_item = new QueueItemRequire (pool, match);	// issue a new require to fulfill this dependency
 	require_item->addPoolItem (requirer);
 	if (remove_only) {

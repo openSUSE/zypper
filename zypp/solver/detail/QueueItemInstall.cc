@@ -403,9 +403,9 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 #warning Make behaviour configurable
 		    // If the package is installed or is set to be installed by the user,
-		    // let the user decide deleting conflicting package 
+		    // let the user decide deleting conflicting package. This is only an info.
+		    // Try at first updating packages.
 		    //
-		    _XDEBUG("GETTING STATUS:");
 		    if (context->getStatus(conflicting_item).isToBeInstalled()			// scheduled for installation
 			&& !context->getStatus(conflicting_item).isToBeUninstalled()		// not scheduled for uninstallation
 			|| conflicting_item.status().staysInstalled())				// not scheduled at all but installed
@@ -414,8 +414,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 									       _item, RESOLVER_INFO_PRIORITY_VERBOSE, cap);
 			misc_info->setOtherPoolItem (conflicting_item);
 			misc_info->setOtherCapability (conflicting_cap);
-			context->addError (misc_info);
-			continue;
+			context->addInfo (misc_info);
 		    }
 
 		    _XDEBUG("because: '" << conflicting_item << "'");
