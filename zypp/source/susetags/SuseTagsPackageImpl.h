@@ -89,6 +89,8 @@ namespace zypp
         virtual bool installOnly() const;
 
         virtual License licenseToConfirm() const;
+	
+	virtual unsigned mediaId() const;
 
 	TranslatedText _summary;
 	TranslatedText _description;

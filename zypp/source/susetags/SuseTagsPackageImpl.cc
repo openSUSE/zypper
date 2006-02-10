@@ -123,6 +123,9 @@ namespace zypp
       Source_Ref SuseTagsPackageImpl::source() const
       { return _source; }
 
+      unsigned SuseTagsPackageImpl::mediaId() const
+      { return _media_number; }
+
       /////////////////////////////////////////////////////////////////
     } // namespace susetags
     ///////////////////////////////////////////////////////////////////
