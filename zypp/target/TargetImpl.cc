@@ -59,9 +59,6 @@ namespace zypp
     : _root(root_r)
     {
       _rpm.initDatabase(_root);
-#ifndef STORAGE_DISABLED
-      _storage.init(root_r);
-#endif
       MIL << "Initialized target on " << _root << endl;
     }
 
@@ -76,6 +73,20 @@ namespace zypp
       MIL << "Targets closed" << endl;
     }
 
+#ifndef STORAGE_DISABLED
+    bool TargetImpl::isStorageEnabled() const
+    {
+      return _storage.isInitialized();
+    }
+
+    
+    void TargetImpl::enableStorage(const Pathname &root_r)
+    {
+      
+      _storage.init(root_r);
+    }
+#endif
+  
     const ResStore & TargetImpl::resolvables()
     {
       _store.clear();

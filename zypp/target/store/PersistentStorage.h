@@ -65,6 +65,12 @@ namespace zypp
        * root path. THIS MUST BE CALLED BEFORE DOING ANY OPERATION
        */
        void init(const Pathname &root);
+
+      /**
+       * true is backend was already initialized
+       */
+       bool isInitalized();
+
       /**
        * Stores a Resolvable in the active backend.
        */
@@ -112,9 +118,9 @@ namespace zypp
     std::ostream & operator<<( std::ostream & str, const PersistentStorage & obj );
 
     /////////////////////////////////////////////////////////////////
-  } // namespace devel.dmacvicar
+  } // namespace storage
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
-} // namespace devel
+} // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // DEVEL_DEVEL_DMACVICAR_PERSISTENTSTORAGE_H
+#endif // ZYPP_TARGET_PERSISTENTSTORAGE_H
