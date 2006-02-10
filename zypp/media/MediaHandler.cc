@@ -221,8 +221,13 @@ MediaHandler::createAttachPoint() const
 
     DBG << "Trying to create attachPoint in " << aroot << std::endl;
 
+    //
+    // FIXME: use mkdtemp
+    //
     Pathname abase( aroot + "AP_" );
-    for ( unsigned i = 1; i < 42; ++i ) {
+    //        ma and sh need more than 42 for debugging :-)
+    //        since the readonly fs are handled now, ...
+    for ( unsigned i = 1; i < 1000; ++i ) {
       adir( Pathname::extend( abase, str::hexstring( i ) ) );
       if ( ! adir.isExist() ) {
 	int err = mkdir( adir.path() );
