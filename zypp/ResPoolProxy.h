@@ -100,15 +100,22 @@ namespace zypp
       bool hasInstalledObj() const
       { return hasInstalledObj( ResTraits<_Res>::kind ); }
 
-
-
   public:
-    /** \name Save and restore state.
-     * \todo make it work.
+    /** \name Save and restore state per kind of resolvable.
+     * Simple version, no savety net.
     */
     //@{
-    void SaveState();
-    void RestoreState();
+    void saveState( const ResObject::Kind & kind_r ) const;
+
+    template<class _Res>
+      void saveState() const
+      { return saveState( ResTraits<_Res>::kind ); }
+
+    void restoreState( const ResObject::Kind & kind_r ) const;
+
+    template<class _Res>
+      void restoreState() const
+      { return restoreState( ResTraits<_Res>::kind ); }
     //@}
 
   private:

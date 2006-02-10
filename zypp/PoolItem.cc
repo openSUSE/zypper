@@ -133,6 +133,12 @@ namespace zypp
   ResObject::constPtr PoolItem_Ref::resolvable() const
   { return _pimpl->resolvable(); }
 
+  void PoolItem_Ref::saveState() const
+  { _pimpl->saveState(); }
+
+  void PoolItem_Ref::restoreState() const
+  { _pimpl->restoreState(); }
+
   /******************************************************************
    **
    **	FUNCTION NAME : operator<<

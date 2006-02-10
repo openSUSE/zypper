@@ -90,6 +90,15 @@ namespace zypp
   private:
     /** Pointer to implementation */
     RW_pointer<Impl> _pimpl;
+
+  private:
+    /** \name tmp hack for save/restore state. */
+    /** \todo get rid of it. */
+    //@{
+    friend class PoolItemSaver;
+    void saveState() const;
+    void restoreState() const;
+    //@}
   };
   ///////////////////////////////////////////////////////////////////
 

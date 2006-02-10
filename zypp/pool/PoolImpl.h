@@ -176,6 +176,14 @@ namespace zypp
       }
 
     public:
+      /** \name Save and restore state. */
+      //@{
+      void SaveState( const ResObject::Kind & kind_r );
+
+      void RestoreState( const ResObject::Kind & kind_r );
+      //@}
+
+    public:
       /** */
       ContainerT _store;
       IndexContainerT _providesstore;

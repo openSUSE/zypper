@@ -25,6 +25,22 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  /** Tem. friend of PoolItem */
+  struct PoolItemSaver
+  {
+    void saveState( ResPool_Ref pool_r, const ResObject::Kind & kind_r )
+    {
+      std::for_each( pool_r.byKindBegin(kind_r), pool_r.byKindEnd(kind_r),
+                     std::mem_fun_ref(&PoolItem::saveState) );
+    }
+
+    void restoreState( ResPool_Ref pool_r, const ResObject::Kind & kind_r )
+    {
+      std::for_each( pool_r.byKindBegin(kind_r), pool_r.byKindEnd(kind_r),
+                     std::mem_fun_ref(&PoolItem::restoreState) );
+    }
+  };
+
   struct SelPoolHelper
   {
     typedef std::set<ResPool::Item>         ItemC;
@@ -134,6 +150,15 @@ namespace zypp
     const_iterator byKindEnd( const ResObject::Kind & kind_r ) const
     { return _selPool[kind_r].end(); }
 
+
+  public:
+
+    void saveState( const ResObject::Kind & kind_r ) const
+    { PoolItemSaver().saveState( _pool, kind_r ); }
+
+    void restoreState( const ResObject::Kind & kind_r ) const
+    { PoolItemSaver().restoreState( _pool, kind_r ); }
+
   private:
     ResPool_Ref _pool;
     mutable SelectablePool _selPool;
@@ -203,6 +228,12 @@ namespace zypp
 
   ResPoolProxy::const_iterator ResPoolProxy::byKindEnd( const ResObject::Kind & kind_r ) const
   { return _pimpl->byKindEnd( kind_r ); }
+
+  void ResPoolProxy::saveState( const ResObject::Kind & kind_r ) const
+  { _pimpl->saveState( kind_r ); }
+
+  void ResPoolProxy::restoreState( const ResObject::Kind & kind_r ) const
+  { _pimpl->restoreState( kind_r ); }
 
   /******************************************************************
    **
