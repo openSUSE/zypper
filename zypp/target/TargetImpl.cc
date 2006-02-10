@@ -408,7 +408,7 @@ void
 TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
 				    PoolItemList & dellist_r,
 				    PoolItemList & instlist_r,
-				    PoolItemList & srclist_r )
+				    PoolItemList & srclist_r ) const
 {
     dellist_r.clear();
     instlist_r.clear();
@@ -560,7 +560,7 @@ MIL << "Not a package " << *cit << endl;
 	    other_list.push_back( *cit );
 	    continue;
 	}
-MIL << "Package " << *cpkg << ", media " << cpkg->mediaId() << endl;
+MIL << "Package " << *cpkg << ", media " << cpkg->mediaId() << " last_medianum " << last_medianum << " best_medianum " << best_medianum << endl;
 	if ( 									//  rankPriority[cpkg->instSrcRank()] == last_prio &&
 	     cpkg->mediaId() == last_medianum ) {
 	  // prefer packages on current media.

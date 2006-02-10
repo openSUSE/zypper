@@ -48,12 +48,13 @@ namespace zypp
     {
       friend std::ostream & operator<<( std::ostream & str, const TargetImpl & obj );
 
-    private:
+    public:
+      /** JUST FOR TESTSUITE */
       /** Sort according to prereqs and media numbers */
       void getResolvablesToInsDel ( const ResPool pool_r,
 				    PoolItemList & dellist_r,
 				    PoolItemList & instlist_r,
-				    PoolItemList & srclist_r );
+				    PoolItemList & srclist_r ) const;
 
 
     public:
