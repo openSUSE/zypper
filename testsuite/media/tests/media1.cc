@@ -13,8 +13,8 @@ using namespace zypp::media;
 /*
 ** Very basic example verifier.
 **
-** This one does not know anything about the product,
-** it just checks if /media.<mediaNr> exists...
+** This one does not know anything about the product, it
+** just checks if /media.1 (limited to 1st CD) exists...
 */
 class MyMediaVerifier: public MediaVerifierBase
 {
@@ -31,27 +31,28 @@ public:
   {}
 
   virtual bool
-  isDesiredMedia(const MediaAccessRef &ref, MediaNr mediaNr)
+  isDesiredMedia(const MediaAccessRef &ref)
   {
-    DBG << "isDesiredMedia(): for media nr " << mediaNr << std::endl;
+    DBG << "isDesiredMedia(): for media nr 1 " << std::endl;
 
     if( !ref)
       DBG << "isDesiredMedia(): invalid media handle" << std::endl;
 
     std::list<std::string> lst;
-    Pathname               dir("/media." + str::numstring(mediaNr));
+    Pathname               dir("/media.1");
 
     DBG << "isDesiredMedia(): checking " << dir.asString() << std::endl;
 
-    // FIXME: check the product e.g. via /media.X/products as well,
-    //        not only if the media nr is the correct one.
+    // check the product e.g. via /media.1/products as well...
     try
     {
       if( ref)
         ref->dirInfo(lst, dir, false);
     }
-    catch( ... )
-    {}
+    catch(const zypp::Exception &e)
+    {
+      ZYPP_CAUGHT(e);
+    }
     DBG << "isDesiredMedia(): media "
         << (lst.empty() ? "does not contain" : "contains")
         << " the " << dir.asString() << " directory."
@@ -78,7 +79,7 @@ int main(void)
 
     mm.attach(id);
 
-    mm.provideFile(id, 1, Pathname("/directory.yast"));
+    mm.provideFile(id, Pathname("/directory.yast"));
   }
   catch(const MediaException &e)
   {
