@@ -35,7 +35,7 @@
 #include "zypp/PoolItem.h"
 
 #define _DEBUG(x) DBG << x << std::endl;
-#define _XDEBUG(x) DBG << x << std::endl;
+#define _XDEBUG(x) XXX << x << std::endl;
 //#define _DEBUG(x)
 
 /////////////////////////////////////////////////////////////////////////
