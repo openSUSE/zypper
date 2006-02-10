@@ -77,16 +77,21 @@ MediaCurl::MediaCurl( const Url &      url_r,
   if( !attachPoint().empty())
   {
     PathInfo ainfo(attachPoint());
-    Pathname atest(attachPoint() + "test");
-    int      rtest = -1;
-    if( !ainfo.isDir() || !ainfo.userMayRWX() || (rtest=mkdir(atest)) != 0)
+    Pathname apath(attachPoint() + "XXXXXX");
+    char    *atemp = ::strdup( apath.asString().c_str());
+    char    *atest = NULL;
+    if( !ainfo.isDir() || !ainfo.userMayRWX() ||
+         atemp == NULL || (atest=::mkdtemp(atemp)) == NULL)
     {
       WAR << "attach point " << ainfo.path()
           << " is not useable for " << url_r.getScheme() << endl;
       setAttachPoint("", true);
     }
-    else if( rtest)
-      rmdir(atest);
+    else if( atest != NULL)
+      ::rmdir(atest);
+
+    if( atemp != NULL)
+      ::free(NULL);
   }
 
   if ( ! _globalInit )
