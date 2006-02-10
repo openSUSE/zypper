@@ -80,7 +80,7 @@ class InstallOrder
 
 	    PoolItem_Ref item;
 
-//	    NodeInfo() : begintime(0), endtime(0), visited(false), order(0) {}
+	    NodeInfo() : begintime(0), endtime(0), visited(false), order(0) {}
 	    NodeInfo(PoolItem_Ref item) : begintime(0), endtime(0), visited(false), order(0), item(item) {}
 	};
 	
