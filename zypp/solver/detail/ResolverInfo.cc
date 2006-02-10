@@ -184,7 +184,7 @@ ResolverInfo::ResolverInfo (ResolverInfoType type, PoolItem_Ref item, int priori
     , _error (false)
     , _important (false)
 {
-    _DEBUG(*this);
+    _XDEBUG(*this);
 }
 
 
