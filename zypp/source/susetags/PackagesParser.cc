@@ -43,36 +43,24 @@ namespace zypp
         PkgImplPtr _pkgImpl;
         NVRAD _nvrad;
 
-	int _count;
-
 	PackagesParser(Source_Ref source, SuseTagsImpl::Ptr sourceimpl)
 	    : _source( source )
 	    , _sourceImpl( sourceimpl )
-	    , _count( 0 )
 	{ }
-
-	PkgContent result() const
-	{
-	 MIL << "result(), _count " << _count << ", _result.size() " << _result.size() << endl;
-	 if (_count != _result.size()) {
-	    ERR << "*********************" << endl;
-	 }
-	 return _result;
-	}
 
         bool pkgPending() const
         { return _pkgImpl; }
+
+        PkgContent result() const
+        {
+	  return _result;
+        }
 
         void collectPkg( const shared_ptr<source::susetags::SuseTagsPackageImpl> & nextPkg_r
                          = shared_ptr<source::susetags::SuseTagsPackageImpl>() )
         {
           if ( pkgPending() )
             {
-	      _count++;
-	      PkgContent::iterator it = _result.find( _nvrad );
-	      if (it != _result.end()) {
-		ERR << (NVRA)_nvrad << " already in _result" << endl;
-	      }
               _result.insert(PkgContent::value_type( _nvrad, _pkgImpl ) );
             }
           _pkgImpl = nextPkg_r;
