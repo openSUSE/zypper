@@ -70,6 +70,15 @@ namespace zypp
   target::rpm::RpmDb & Target::rpmDb()
   { return _pimpl->rpm(); }
 
+#ifndef STORAGE_DISABLED
+      /** enables the storage target */
+  bool Target::isStorageEnabled() const
+  { return _pimpl->isStorageEnabled(); }
+
+  void Target::enableStorage(const Pathname &root_r)
+  { _pimpl->enableStorage(root_r); }
+#endif
+
   void Target::commit(ResPool pool_r, int medianr, PoolItemList & errors_r
         , PoolItemList & remaining_r, PoolItemList & srcremaining_r)
   { _pimpl->commit(pool_r, medianr, errors_r, remaining_r, srcremaining_r); }

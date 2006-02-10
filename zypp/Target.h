@@ -68,6 +68,12 @@ namespace zypp
 
       ResObject::constPtr whoOwnsFile (const std::string & path_str) const;
 
+#ifndef STORAGE_DISABLED
+    /** enables the storage target */
+    bool isStorageEnabled() const;
+    void enableStorage(const Pathname &root_r);
+#endif
+
   public:
     /** Ctor */
     explicit
