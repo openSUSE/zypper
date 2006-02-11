@@ -4,11 +4,11 @@
 >!> B has missing dependencies
 >!> There are no alternative installed providers of [package] (namedcap) A for B-1.0-1
 >!>    Solution:
->!>       Keeping A
->!>       Keeping I_Tu_[package]A-1.0-1.
+>!>       keep A
+>!>       keep I_Tu_[package]A-1.0-1.
 >!>    Solution:
->!>       Deleting B
->!>       Deleting I___[package]B-1.0-1.
+>!>       delete B
+>!>       delete I___[package]B-1.0-1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       

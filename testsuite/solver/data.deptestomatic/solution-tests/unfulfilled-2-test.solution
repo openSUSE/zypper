@@ -4,8 +4,8 @@
 >!> unfulfilled cannot be installed due missing dependencies
 >!> There are no installable providers of [package] (namedcap) nothere for unfulfilled-1.0-1[test]
 >!>    Solution:
->!>       Deleting unfulfilled
->!>       Deleting U_Tu_[package]unfulfilled-1.0-1.
+>!>       delete unfulfilled
+>!>       delete U_Tu_[package]unfulfilled-1.0-1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       

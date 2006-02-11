@@ -4,8 +4,8 @@
 >!> foonew cannot be installed due missing dependencies
 >!> There are no installable providers of [package] (namedcap) foo for foonew-2.0-1[test]
 >!>    Solution:
->!>       Deleting foonew
->!>       Deleting U_Tu_[package]foonew-2.0-1.
+>!>       delete foonew
+>!>       delete U_Tu_[package]foonew-2.0-1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       

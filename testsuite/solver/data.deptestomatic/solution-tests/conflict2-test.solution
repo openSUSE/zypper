@@ -4,11 +4,11 @@
 >!> Cannot install B because it is conflicting with A
 >!> A conflict over [package] (namedcap) B == 1.0-1 ([package] (namedcap) B) requires the removal of to-be-installed B-1.0-1[test]
 >!>    Solution:
->!>       Deleting B
->!>       Deleting U_Tu_[package]B-1.0-1.
+>!>       delete B
+>!>       delete U_Tu_[package]B-1.0-1.
 >!>    Solution:
->!>       Deleting A
->!>       Deleting I___[package]A-1.0-1.
+>!>       delete A
+>!>       delete I___[package]A-1.0-1.
 >!>    Solution:
 >!>       Ignore this conflict of B.
 >!>       

@@ -4,11 +4,11 @@
 >!> Cannot install p2 because it is conflicting with p1
 >!> A conflict over [package] (namedcap) p2 == 1.0-1 ([package] (namedcap) p2) requires the removal of to-be-installed p2-1.0-1[test]
 >!>    Solution:
->!>       Deleting p2
->!>       Deleting U_Tu_[package]p2-1.0-1.
+>!>       delete p2
+>!>       delete U_Tu_[package]p2-1.0-1.
 >!>    Solution:
->!>       Deleting p1
->!>       Deleting I___[package]p1-1.0-1.
+>!>       delete p1
+>!>       delete I___[package]p1-1.0-1.
 >!>    Solution:
 >!>       Ignore this conflict of p2.
 >!>       
