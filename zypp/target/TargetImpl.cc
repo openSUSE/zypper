@@ -24,7 +24,6 @@
 #include "zypp/target/TargetImpl.h"
 #include "zypp/target/TargetCallbackReceiver.h"
 
-#include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/InstallOrder.h"
 
 using namespace std;
@@ -133,7 +132,7 @@ namespace zypp
     }
 
 
-    int TargetImpl::commit(ResPool pool_r, unsigned int medianr, PoolItemList & errors_r, PoolItemList & remaining_r, PoolItemList & srcremaining_r)
+    int TargetImpl::commit(ResPool pool_r, unsigned int medianr, TargetImpl::PoolItemList & errors_r, TargetImpl::PoolItemList & remaining_r, TargetImpl::PoolItemList & srcremaining_r)
     {
       MIL << "TargetImpl::commit(<pool>, " << medianr << ")" << endl;
 
@@ -141,9 +140,9 @@ namespace zypp
       remaining_r.clear();
       srcremaining_r.clear();
 
-      PoolItemList to_uninstall;
-      PoolItemList to_install;
-      PoolItemList to_srcinstall;
+      TargetImpl::PoolItemList to_uninstall;
+      TargetImpl::PoolItemList to_install;
+      TargetImpl::PoolItemList to_srcinstall;
       getResolvablesToInsDel( pool_r, to_uninstall, to_install, to_srcinstall );
 
       if ( medianr ) {
@@ -158,10 +157,10 @@ namespace zypp
       }
       else
       {
-        PoolItemList current_install;
-        PoolItemList current_srcinstall;
+        TargetImpl::PoolItemList current_install;
+        TargetImpl::PoolItemList current_srcinstall;
 
-        for (PoolItemList::iterator it = to_install.begin(); it != to_install.end(); ++it)
+        for (TargetImpl::PoolItemList::iterator it = to_install.begin(); it != to_install.end(); ++it)
         {
           Resolvable::constPtr res( it->resolvable() );
           Package::constPtr pkg( asKind<Package>(res) );
@@ -175,10 +174,10 @@ namespace zypp
             current_install.push_back( *it );
           }
         }
-        PoolItemList bad = commit (current_install);
+        TargetImpl::PoolItemList bad = commit (current_install);
         remaining_r.insert(remaining_r.end(), bad.begin(), bad.end());
 
-        for (PoolItemList::iterator it = to_srcinstall.begin(); it != to_srcinstall.end(); ++it)
+        for (TargetImpl::PoolItemList::iterator it = to_srcinstall.begin(); it != to_srcinstall.end(); ++it)
         {
           Resolvable::constPtr res( it->resolvable() );
           Package::constPtr pkg( asKind<Package>(res) );
@@ -198,13 +197,13 @@ namespace zypp
     }
 
 
-    PoolItemList
-    TargetImpl::commit( const PoolItemList & items_r)
+    TargetImpl::PoolItemList
+    TargetImpl::commit( const TargetImpl::PoolItemList & items_r)
     {
-      PoolItemList remaining;
+      TargetImpl::PoolItemList remaining;
 
       MIL << "TargetImpl::commit(<list>)" << endl;
-      for (PoolItemList::const_iterator it = items_r.begin(); it != items_r.end(); it++)
+      for (TargetImpl::PoolItemList::const_iterator it = items_r.begin(); it != items_r.end(); it++)
       {
         if (isKind<Package>(it->resolvable()))
         {
@@ -350,15 +349,15 @@ namespace zypp
 ** obsoleting package likes to save whatever...
 */
 static void
-strip_obsoleted_to_delete( PoolItemList & deleteList_r,
-				const PoolItemList & instlist_r )
+strip_obsoleted_to_delete( TargetImpl::PoolItemList & deleteList_r,
+				const TargetImpl::PoolItemList & instlist_r )
 {
   if ( deleteList_r.size() == 0 || instlist_r.size() == 0 )
     return; // ---> nothing to do
 
   // build obsoletes from instlist_r
   CapSet obsoletes;
-  for ( PoolItemList::const_iterator it = instlist_r.begin();
+  for ( TargetImpl::PoolItemList::const_iterator it = instlist_r.begin();
 	it != instlist_r.end(); ++it )
   {
     PoolItem_Ref item( *it );
@@ -368,9 +367,9 @@ strip_obsoleted_to_delete( PoolItemList & deleteList_r,
     return; // ---> nothing to do
 
   // match them... ;(
-  PoolItemList undelayed;
+  TargetImpl::PoolItemList undelayed;
   // forall applDelete Packages...
-  for ( PoolItemList::iterator it = deleteList_r.begin();
+  for ( TargetImpl::PoolItemList::iterator it = deleteList_r.begin();
 	it != deleteList_r.end(); ++it )
   {
     PoolItem_Ref ipkg( *it );
@@ -406,14 +405,14 @@ MIL << "undelayed " << ipkg << endl;
 
 void
 TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
-				    PoolItemList & dellist_r,
-				    PoolItemList & instlist_r,
-				    PoolItemList & srclist_r ) const
+				    TargetImpl::PoolItemList & dellist_r,
+				    TargetImpl::PoolItemList & instlist_r,
+				    TargetImpl::PoolItemList & srclist_r ) const
 {
     dellist_r.clear();
     instlist_r.clear();
     srclist_r.clear();
-    PoolItemList nonpkglist;
+    TargetImpl::PoolItemList nonpkglist;
 
     for ( ResPool::const_iterator it = pool_r.begin(); it != pool_r.end(); ++it )
     {
@@ -458,20 +457,20 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
       // sort delete list...
       //
       ///////////////////////////////////////////////////////////////////
-      PoolItemList dlist;  // for delete order
-      PoolItemList dummy; // dummy, empty, should contain already installed
-      for ( PoolItemList::iterator pkgIt = dellist_r.begin();
+      TargetImpl::PoolItemSet delset;  // for delete order
+      TargetImpl::PoolItemSet dummy; // dummy, empty, should contain already installed
+      for ( TargetImpl::PoolItemList::iterator pkgIt = dellist_r.begin();
 	    pkgIt != dellist_r.end(); ++pkgIt )
       {
-	dlist.push_back( *pkgIt );
+	delset.insert( *pkgIt );
       }
 
-      InstallOrder order( pool_r, dlist, dummy ); // sort according top prereq
+      InstallOrder order( delset, dummy ); // sort according top prereq
       order.init();
-      const PoolItemList dsorted( order.getTopSorted() );
+      const TargetImpl::PoolItemList dsorted( order.getTopSorted() );
 
       dellist_r.clear();
-      for ( PoolItemList::const_reverse_iterator cit = dsorted.rbegin();
+      for ( TargetImpl::PoolItemList::const_reverse_iterator cit = dsorted.rbegin();
 	    cit != dsorted.rend(); ++cit )
       {
 	dellist_r.push_back( *cit );
@@ -511,32 +510,33 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
     ///////////////////////////////////////////////////////////////////
     // backup list for debug purpose.
     // You can as well build the set, clear the list and rebuild it in install order.
-    PoolItemList instbackup_r;
+    TargetImpl::PoolItemList instbackup_r;
     instbackup_r.swap( instlist_r );
 
-    PoolItemList ilist; // for install order
-    PoolItemList installed; // dummy, empty, should contain already installed
-    for ( PoolItemList::iterator resIt = instbackup_r.begin(); resIt != instbackup_r.end(); ++resIt ) {
-      ilist.push_back( *resIt );
+    TargetImpl::PoolItemSet insset; // for install order
+    TargetImpl::PoolItemSet installed; // dummy, empty, should contain already installed
+    for ( TargetImpl::PoolItemList::iterator resIt = instbackup_r.begin(); resIt != instbackup_r.end(); ++resIt ) {
+      insset.insert( *resIt );
     }
-    InstallOrder order( pool_r, ilist, installed );
+    InstallOrder order( insset, installed );
     // start recursive depth-first-search
     order.init();
 MIL << "order.init() done" << endl;
+    order.printAdj( cerr, false );
     ///////////////////////////////////////////////////////////////////
     // build install list in install order
     ///////////////////////////////////////////////////////////////////
-    PoolItemList best_list;
+    TargetImpl::PoolItemList best_list;
 //    unsigned best_prio     = 0;
     unsigned best_medianum = 0;
 
-    PoolItemList last_list;
+    TargetImpl::PoolItemList last_list;
 //    unsigned last_prio     = 0;
     unsigned last_medianum = 0;
 
-    PoolItemList other_list;
+    TargetImpl::PoolItemList other_list;
 
-    for ( PoolItemList items = order.computeNextSet(); ! items.empty(); items = order.computeNextSet() )
+    for ( TargetImpl::PoolItemList items = order.computeNextSet(); ! items.empty(); items = order.computeNextSet() )
     {
 MIL << "order.computeNextSet: " << items.size() << " resolvables" << endl;
       ///////////////////////////////////////////////////////////////////
@@ -548,7 +548,7 @@ MIL << "order.computeNextSet: " << items.size() << " resolvables" << endl;
       last_list.clear();
       other_list.clear();
 
-      for ( PoolItemList::iterator cit = items.begin(); cit != items.end(); ++cit )
+      for ( TargetImpl::PoolItemList::iterator cit = items.begin(); cit != items.end(); ++cit )
       {
 	Resolvable::constPtr res( cit->resolvable() );
 	if (!res) continue;
@@ -609,7 +609,7 @@ MIL << "Package " << *cpkg << ", media " << cpkg->mediaId() << " last_medianum "
       // remove packages picked from install order and append them to
       // install list.
       ///////////////////////////////////////////////////////////////////
-      PoolItemList & take_list( last_list.empty() ? best_list : last_list );
+      TargetImpl::PoolItemList & take_list( last_list.empty() ? best_list : last_list );
       if ( last_list.empty() )
       {
 	MIL << "SET NEW media " << best_medianum << endl;
@@ -621,10 +621,10 @@ MIL << "Package " << *cpkg << ", media " << cpkg->mediaId() << " last_medianum "
 	MIL << "SET CONTINUE" << endl;
       }
 
-      for ( PoolItemList::iterator it = take_list.begin(); it != take_list.end(); ++it )
+      for ( TargetImpl::PoolItemList::iterator it = take_list.begin(); it != take_list.end(); ++it )
       {
 	order.setInstalled( *it );
-	MIL << "SET isrc " << (*it) << endl;
+	MIL << "SET isrc " << (*it)->name() << endl;
       }
       // move everthing from take_list to the end of instlist_r, clean take_list
       instlist_r.splice( instlist_r.end(), take_list );
@@ -636,7 +636,7 @@ MIL << "Package " << *cpkg << ", media " << cpkg->mediaId() << " last_medianum "
 
     if ( instbackup_r.size() != instlist_r.size() )
     {
-	INT << "Lost packages in InstallOrder sort." << endl;
+	ERR << "***************** Lost packages in InstallOrder sort." << endl;
     }
     instlist_r.splice( instlist_r.end(), nonpkglist );
 }

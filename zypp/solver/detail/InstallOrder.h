@@ -30,6 +30,9 @@
 #ifndef ZYPP_SOLVER_DETAIL_INSTALLORDER_H
 #define ZYPP_SOLVER_DETAIL_INSTALLORDER_H
 
+#include <list>
+#include <map>
+
 #include "zypp/PoolItem.h"
 #include "zypp/ResPool.h"
 #include "zypp/CapSet.h"
@@ -57,13 +60,11 @@ namespace zypp
 class InstallOrder
 {
     private:
-	ResPool _pool;
-
 	PoolItemSet _toinstall;
 	PoolItemSet _installed;
 
 	/** adjacency list type */
-	typedef std::map<PoolItem_Ref, PoolItemSet> Graph;
+	typedef std::map<PoolItem_Ref, PoolItemList> Graph;
 
 	/** adjacency list, package -> requirements */
 	Graph _graph;
@@ -99,6 +100,9 @@ class InstallOrder
     private:
 	void rdfsvisit (PoolItem_Ref item);
 
+	PoolItem_Ref findProviderInSet( const Capability requirement, const PoolItemSet & candidates ) const;
+	bool doesProvide( const Capability requirement, PoolItem_Ref item ) const;
+
     public:
 
 	/** 
@@ -107,7 +111,7 @@ class InstallOrder
 	 * @param toinstall Set of ResItems that have to be installed
 	 * @param installed Set of ResItems that are already installed
 	 * */
-	InstallOrder (const ResPool & pool, const PoolItemList & toinstall, const PoolItemList & installed);
+	InstallOrder( const PoolItemSet & toinstall, const PoolItemSet & installed);
 
 	/**
 	 * Compute a list of ResItems which have no requirements and can be

@@ -20,8 +20,6 @@
 #include "zypp/Pathname.h"
 #include "zypp/ResPool.h"
 
-#include "zypp/solver/detail/Types.h"
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -46,6 +44,7 @@ namespace zypp
   public:
     typedef target::TargetImpl  Impl;
     typedef intrusive_ptr<Impl> Impl_Ptr;
+    typedef std::list<PoolItem_Ref> PoolItemList;
 
   public:
 

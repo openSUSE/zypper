@@ -103,8 +103,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   typedef PoolItem_Ref PoolItem;
-  typedef std::list<PoolItem> PoolItemList;
-  typedef std::set<PoolItem> PoolItemSet;
 
   /** \relates PoolItem_Ref Stream output */
   std::ostream & operator<<( std::ostream & str, const PoolItem_Ref & obj );

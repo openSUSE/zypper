@@ -13,18 +13,20 @@
 #define ZYPP_TARGET_TARGETIMPL_H
 
 #include <iosfwd>
+#include <list>
+#include <set>
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/ResStore.h"
+#include "zypp/PoolItem.h"
 
 #include "zypp/Pathname.h"
 #include "zypp/media/MediaAccess.h"
 #include "zypp/Target.h"
 #include "zypp/target/rpm/RpmDb.h"
 #include "zypp/target/store/PersistentStorage.h"
-#include "zypp/solver/detail/Types.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -47,6 +49,13 @@ namespace zypp
     class TargetImpl : public base::ReferenceCounted, private base::NonCopyable
     {
       friend std::ostream & operator<<( std::ostream & str, const TargetImpl & obj );
+
+    public:
+      /** list of pool items  */
+      typedef std::list<PoolItem_Ref> PoolItemList;
+
+      /** set of pool items  */
+      typedef std::set<PoolItem_Ref> PoolItemSet;
 
     public:
       /** JUST FOR TESTSUITE */
