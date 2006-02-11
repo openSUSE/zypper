@@ -117,7 +117,7 @@ InstallOrder::setInstalled(PoolItem_Ref item )
 
     PoolItemList adj = _rgraph[item];
 
-    DBG << "InstallOrder::setInstalled " << item << endl;
+    DBG << "InstallOrder::setInstalled " << ITEMNAME(item) << endl;
 
     // order will be < 0
     _nodes[item].order--;
