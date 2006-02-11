@@ -24,7 +24,7 @@ using namespace zypp;
 int main( int argc, char * argv[] )
 {
     if (argc < 2) {
-	cerr << "Usage: suseparse <susedir>" << endl;
+	cerr << "Usage: suseparse <susedir> <full>" << endl;
 	exit (1);
     }
 
@@ -40,9 +40,18 @@ int main( int argc, char * argv[] )
 
     ResStore store = src.resolvables();
     INT << "Found " << store.size() << " packages" << endl;
+    if (argc > 2) {
+	int count = 0;
+	for (ResStore::iterator it = store.begin(); it != store.end(); ++it) {
+	    MIL << ++count << **it << endl;
+	}
+
+    }
+    else {
     if (store.size() > 0) {
 	ResStore::iterator it = store.begin();
 	MIL << "First " << (*it)->name() << ":" << (*it)->summary() << endl << (*it)->description() << endl;
+    }
     }
     INT << "===[END]============================================" << endl;
     return 0;
