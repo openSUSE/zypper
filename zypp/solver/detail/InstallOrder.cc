@@ -177,10 +177,10 @@ struct CollectProviders : public resfilter::OnCapMatchCallbackFunctor
 {
     const PoolItem_Ref requestor;
     PoolItemList & tovisit;   
-    PoolItemSet & toinstall;
-    PoolItemSet & installed;
+    const PoolItemSet & toinstall;
+    const PoolItemSet & installed;
 
-    CollectProviders (const PoolItem_Ref pi, PoolItemList & tv, PoolItemSet & ti, PoolItemSet & i)
+    CollectProviders (const PoolItem_Ref pi, PoolItemList & tv, const PoolItemSet & ti, const PoolItemSet & i)
 	: requestor (pi)
 	, tovisit (tv)
 	, toinstall (ti)
@@ -255,11 +255,11 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
 #if 1
 	CollectProviders info ( item, tovisit, _toinstall, _installed );
 
-	ResPool::const_indexiterator pend = _pool.providesend(requirement.index());
-	for (ResPool::const_indexiterator it = _pool.providesbegin(requirement.index()); it != pend; ++it) {
+	ResPool::const_indexiterator pend = _pool.providesend( requirement.index() );
+	for (ResPool::const_indexiterator it = _pool.providesbegin( requirement.index() ); it != pend; ++it) {
 	    if (it->second.second->arch() == Arch_src)
 		continue;
-	    if (requirement.matches (it->second.first) == CapMatch::yes) {
+	    if (it->second.first.matches (requirement) == CapMatch::yes) {
 		if (!info( it->second.second, it->second.first))
 		    break;
 	    }
