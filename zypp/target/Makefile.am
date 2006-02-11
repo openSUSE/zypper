@@ -3,6 +3,8 @@
 
 SUBDIRS = hal rpm store
 
+INCLUDES = -DZYPP_BASE_LOGGER_LOGGROUP=\"target\"
+
 ## ##################################################
 
 targetincludedir = $(pkgincludedir)/target
