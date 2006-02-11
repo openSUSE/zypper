@@ -50,11 +50,11 @@ ProblemSolutionInstall::ProblemSolutionInstall( ResolverProblem_Ptr parent,
     : ProblemSolution (parent, "", "")
 {
     // TranslatorExplanation %s = name of package, patch, selection ...    
-    _description = str::form (_("Installing %s"), item->name().c_str() );
+    _description = str::form (_("install %s"), item->name().c_str() );
     ostringstream item_str;
     item_str << item;
     // TranslatorExplanation %s = name of package, patch, selection ...      
-    _details = str::form (_("Installing %s"), item_str.str().c_str() );
+    _details = str::form (_("install %s"), item_str.str().c_str() );
 
     addAction ( new TransactionSolutionAction (item,
 					       INSTALL));
@@ -64,7 +64,7 @@ ProblemSolutionInstall::ProblemSolutionInstall( ResolverProblem_Ptr parent,
 						PoolItemList & itemList )
     : ProblemSolution (parent, "", "")
 {
-    _description = _("Installing missing resolvables");
+    _description = _("Install missing resolvables.");
 
     for (PoolItemList::iterator iter = itemList.begin();
 	 iter != itemList.end(); iter++) {

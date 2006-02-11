@@ -50,11 +50,11 @@ ProblemSolutionKeep::ProblemSolutionKeep( ResolverProblem_Ptr parent,
     : ProblemSolution (parent, "", "")
 {
     // TranslatorExplanation %s = name of package, patch, selection ...    
-    _description = str::form (_("Keeping %s"), item->name().c_str() );
+    _description = str::form (_("keep %s"), item->name().c_str() );
     ostringstream item_str;
     item_str << item;
     // TranslatorExplanation %s = name of package, patch, selection ...      
-    _details = str::form (_("Keeping %s"), item_str.str().c_str() );
+    _details = str::form (_("keep %s"), item_str.str().c_str() );
 
     addAction ( new TransactionSolutionAction (item,
 					       KEEP));
@@ -64,7 +64,7 @@ ProblemSolutionKeep::ProblemSolutionKeep( ResolverProblem_Ptr parent,
 					  PoolItemList & itemList )
     : ProblemSolution (parent, "", "")
 {
-    _description = _("Keeping missing resolvables");
+    _description = _("Keep missing resolvables.");
 
     for (PoolItemList::iterator iter = itemList.begin();
 	 iter != itemList.end(); iter++) {

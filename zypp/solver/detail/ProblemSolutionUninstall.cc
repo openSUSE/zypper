@@ -49,11 +49,11 @@ ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent,
     : ProblemSolution (parent, "", "")
 {
     // TranslatorExplanation %s = name of package, patch, selection ...	
-    _description = str::form (_("Deleting %s"), item->name().c_str() );
+    _description = str::form (_("delete %s"), item->name().c_str() );
     ostringstream item_str;
     item_str << item;
     // TranslatorExplanation %s = name of package, patch, selection ...	    
-    _details = str::form (_("Deleting %s"), item_str.str().c_str() );
+    _details = str::form (_("delete %s"), item_str.str().c_str() );
 
     addAction ( new TransactionSolutionAction (item, REMOVE));
 }
@@ -62,7 +62,7 @@ ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent,
 						    PoolItemList & itemlist)
     : ProblemSolution (parent, "", "")
 {
-    _description = _("Removing conflicting resolvables");
+    _description = _("Delete conflicting resolvables.");
 
     for (PoolItemList::iterator iter = itemlist.begin();
 	 iter != itemlist.end(); iter++) {

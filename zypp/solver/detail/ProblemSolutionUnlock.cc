@@ -49,7 +49,7 @@ ProblemSolutionUnlock::ProblemSolutionUnlock( ResolverProblem_Ptr parent,
     : ProblemSolution (parent, "", "")
 {
     // TranslatorExplanation %s = name of package, patch, selection ...	
-    _description = str::form (_("Unlock %s"), item->name().c_str() );
+    _description = str::form (_("unlock %s"), item->name().c_str() );
 
     addAction ( new TransactionSolutionAction (item, UNLOCK));
 }
@@ -58,7 +58,7 @@ ProblemSolutionUnlock::ProblemSolutionUnlock( ResolverProblem_Ptr parent,
 					      PoolItemList & itemlist)
     : ProblemSolution (parent, "", "")
 {
-    _description = _("Unlocking these resolvables");
+    _description = _("Unlock these resolvables.");
 
     for (PoolItemList::iterator iter = itemlist.begin();
 	 iter != itemlist.end(); iter++) {
