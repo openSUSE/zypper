@@ -176,15 +176,12 @@ InstallOrder::findProviderInSet( const Capability requirement, const PoolItemSet
 struct CollectProviders : public resfilter::OnCapMatchCallbackFunctor
 {
     const PoolItem_Ref requestor;
-    PoolItemList & tovisit;   
-    const PoolItemSet & toinstall;
-    const PoolItemSet & installed;
+    PoolItemList result;   
+    const PoolItemSet & limitto;		// limit search to members of this set
 
-    CollectProviders (const PoolItem_Ref pi, PoolItemList & tv, const PoolItemSet & ti, const PoolItemSet & i)
+    CollectProviders (const PoolItem_Ref pi, const PoolItemSet & limit)
 	: requestor (pi)
-	, tovisit (tv)
-	, toinstall (ti)
-	, installed (i)
+	, limitto (limit)
     { }
 
 
@@ -196,10 +193,10 @@ struct CollectProviders : public resfilter::OnCapMatchCallbackFunctor
 	//
 XXX << "info(" << provider <<")"<< endl;
 	if ((provider.resolvable() != requestor.resolvable())		// resolvable could provide its own requirement
-	    && (toinstall.find( provider ) != toinstall.end()		// only look at resolvables
-		|| installed.find( provider ) != installed.end())) {	//   we are currently considering anyways
+	    && (limitto.find( provider ) != limitto.end()))		// limit to members of 'limitto' set
+	{
 	    XXX << "tovisit " << ITEMNAME(provider) << endl;
-	    tovisit.push_back (provider);
+	    result.push_back (provider);
 	}
 
 	return true;
@@ -253,7 +250,9 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
 		      resfilter::callOnCapMatchIn( dep, requirement, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 #endif
 #if 1
-	CollectProviders info ( item, tovisit, _toinstall, _installed );
+	// first, look in _installed
+
+	CollectProviders info ( item, _installed );
 
 	ResPool::const_indexiterator pend = _pool.providesend( requirement.index() );
 	for (ResPool::const_indexiterator it = _pool.providesbegin( requirement.index() ); it != pend; ++it) {
@@ -263,6 +262,23 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
 		if (!info( it->second.second, it->second.first))
 		    break;
 	    }
+	}
+
+	// if not found in _iustalled, look in _toinstall
+
+	if (info.result.empty()) {
+	    CollectProviders info1 ( item, _toinstall );
+
+	    ResPool::const_indexiterator pend = _pool.providesend( requirement.index() );
+	    for (ResPool::const_indexiterator it = _pool.providesbegin( requirement.index() ); it != pend; ++it) {
+		if (it->second.second->arch() == Arch_src)
+		    continue;
+		if (it->second.first.matches (requirement) == CapMatch::yes) {
+		    if (!info1( it->second.second, it->second.first))
+			break;
+		}
+	    }
+	    tovisit = info1.result;
 	}
 #endif
 #if 0
