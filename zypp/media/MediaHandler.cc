@@ -379,6 +379,15 @@ void MediaHandler::release( bool eject )
     DBG << "Releasing media " << _mediaSource->asString() << std::endl;
     releaseFrom( eject ); // pass to concrete handler
   }
+  else if( eject) {
+    //
+    // Can't eject a shared media
+    //
+    ZYPP_THROW(MediaIsSharedException(_mediaSource->asString()));
+  }
+  else {
+    DBG << "Releasing shared media reference only" << std::endl;
+  }
 
   _mediaSource.reset();
   MIL << "Released: " << *this << endl;
