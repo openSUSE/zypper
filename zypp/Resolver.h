@@ -120,6 +120,14 @@ namespace zypp
     Arch architecture() const;
     void setArchitecture( const Arch & arch);
 
+    /**      
+     * Remove resolvables which are conflicts with others or
+     * have unfulfilled requirements.
+     * This behaviour is favourited by ZMD.
+     **/
+    void setForceResolve (const bool force);
+    const bool forceResolve();
+
   protected:
 
   private:

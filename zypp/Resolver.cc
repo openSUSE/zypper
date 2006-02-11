@@ -76,6 +76,10 @@ namespace zypp
   { return _pimpl->architecture(); }
   void Resolver::setArchitecture( const Arch & arch )
   { _pimpl->setArchitecture( arch ); }
+  void Resolver::setForceResolve( const bool force )
+  { _pimpl->setForceResolve( force ); }
+  const bool Resolver::forceResolve()
+  { return _pimpl->forceResolve(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
