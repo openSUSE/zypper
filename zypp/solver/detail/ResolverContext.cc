@@ -88,19 +88,20 @@ ResolverContext::ResolverContext (const ResPool & pool, const Arch & arch, Resol
 {
 _DEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
     if (parent != NULL) {
-	_pool		 = parent->_pool;
-	_download_size   = parent->_download_size;
-	_install_size    = parent->_install_size;
-	_total_priority  = parent->_total_priority;
-	_max_priority    = parent->_max_priority;
-	_min_priority    = parent->_min_priority;
-	_other_penalties = parent->_other_penalties;
-	_verifying	 = parent->_verifying;
-	_establishing	 = parent->_establishing;
-	_ignoreConflicts  = parent->_ignoreConflicts;
-	_ignoreRequires   = parent->_ignoreRequires;
-	_ignoreArchitecture = parent->_ignoreArchitecture;
+	_pool		     = parent->_pool;
+	_download_size       = parent->_download_size;
+	_install_size        = parent->_install_size;
+	_total_priority      = parent->_total_priority;
+	_max_priority        = parent->_max_priority;
+	_min_priority        = parent->_min_priority;
+	_other_penalties     = parent->_other_penalties;
+	_verifying	     = parent->_verifying;
+	_establishing	     = parent->_establishing;
+	_ignoreConflicts     = parent->_ignoreConflicts;
+	_ignoreRequires      = parent->_ignoreRequires;
+	_ignoreArchitecture  = parent->_ignoreArchitecture;
 	_ignoreInstalledItem = parent->_ignoreInstalledItem;
+	_forceResolve        = parent->_forceResolve;
     } else {
 	_min_priority = MAXINT;
     }
@@ -341,12 +342,16 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 
     status = getStatus(item);
     
-    if ((status.staysInstalled() || status.isToBeInstalled()) 
-	&& (item.status().staysInstalled() || item.status().isToBeInstalled())
-	&& !part_of_upgrade
-	&& !due_to_obsolete
-	&& !due_to_unlink)
-    {
+    if ( (forceResolve() // This is the behaviour of ZMD
+	  && (status.isToBeInstalled()             // \ The resolvable will be installed
+	      || item.status().isToBeInstalled())) // / explicit.
+	 
+	 || (!forceResolve() // This is the bahaviour of YaST
+	     && (status.staysInstalled() || status.isToBeInstalled())               //   \ We will have the resolvable
+	     && (item.status().staysInstalled() || item.status().isToBeInstalled()) //   / available.
+	     && !part_of_upgrade
+	     && !due_to_obsolete
+	     && !due_to_unlink)) {
 	// find the reason why the solver has tried to delete this item in a run before
 	// Canditates are RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL
 	//                RESOLVER_INFO_TYPE_NO_PROVIDER
@@ -381,6 +386,7 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 	
 	return false;
     }
+
     if (status.isToBeUninstalled()
 	&& !status.isToBeUninstalledDueToUnlink())
     {

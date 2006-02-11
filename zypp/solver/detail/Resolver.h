@@ -101,6 +101,10 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     Arch _architecture;
 
+    bool _forceResolve; // remove items which are conflicts with others or
+                        // have unfulfilled requirements.
+                        // This behaviour is favourited by ZMD
+
     // helpers
     bool doesObsoleteCapability (PoolItem_Ref candidate, const Capability & cap);
     bool doesObsoleteItem (PoolItem_Ref candidate, PoolItem_Ref installed);
@@ -161,6 +165,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 			    const Capability & capability);
     void addIgnoreArchitecture (const PoolItem_Ref item);
     void addIgnoreInstalledItem (const PoolItem_Ref item);
+
+    void setForceResolve (const bool force) { _forceResolve = force; }
+    const bool forceResolve() { return _forceResolve; }
 
     bool verifySystem (void);
     void establishState (const ResolverContext_Ptr context = NULL);

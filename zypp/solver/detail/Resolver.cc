@@ -65,6 +65,7 @@ Resolver::Resolver (const ResPool & pool)
     , _valid_solution_count (0)
     , _best_context (NULL)
     , _timed_out (false)
+    , _forceResolve (false)
 {
     struct utsname buf;
     if (uname (&buf) < 0) {
@@ -379,11 +380,12 @@ Resolver::establishState (ResolverContext_Ptr context)
 	context = new ResolverContext(_pool, _architecture);
 
     context->setEstablishing (true);
-    context->setIgnoreCababilities(_ignoreConflicts,
-				   _ignoreRequires,
-				   _ignoreArchitecture,
-				   _ignoreInstalledItem);
-
+    context->setIgnoreCababilities (_ignoreConflicts,
+				    _ignoreRequires,
+				    _ignoreArchitecture,
+				    _ignoreInstalledItem);
+    context->setForceResolve (_forceResolve);
+    
     for (KindList::const_iterator iter = ordered.begin(); iter != ordered.end(); iter++) {
 	const Resolvable::Kind kind = *iter;
 
@@ -488,6 +490,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 				    _ignoreRequires,
 				    _ignoreArchitecture,
 				    _ignoreInstalledItem);
+    initial_queue->context()->setForceResolve (_forceResolve);    
 
     /* If this is a verify, we do a "soft resolution" */
 

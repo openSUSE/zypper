@@ -88,7 +88,11 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     // Ignore architecture of the item
     PoolItemList _ignoreArchitecture;
     // Ignore the status "installed" of the item
-    PoolItemList _ignoreInstalledItem;    
+    PoolItemList _ignoreInstalledItem;
+
+    bool _forceResolve; // remove items which are conflicts with others or
+                        // have unfulfilled requirements.
+                        // This behaviour is favourited by ZMD    
 
   public:
     ResolverContext (const ResPool & pool, const Arch & arch, ResolverContext_Ptr parent = NULL);
@@ -134,6 +138,9 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     const IgnoreMap getIgnoreRequires() const { return _ignoreRequires; }
     const PoolItemList getIgnoreArchitecture() const { return _ignoreArchitecture; }
     const PoolItemList getIgnoreInstalledItem() const { return _ignoreInstalledItem; }
+    
+    void setForceResolve (const bool force) { _forceResolve = force; }
+    const bool forceResolve() { return _forceResolve; }    
     
     // ---------------------------------- methods
 
