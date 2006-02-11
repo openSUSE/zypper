@@ -37,6 +37,7 @@ HelixPackageImpl::HelixPackageImpl (Source_Ref source_r, const zypp::HelixParser
     , _install_only(parsed.installOnly)
     , _size_installed(parsed.installedSize)
     , _size_archive(parsed.fileSize)
+    , _mediaid(parsed.location)
 {
 }
 
@@ -64,6 +65,9 @@ ByteCount HelixPackageImpl::archivesize() const
 
 bool HelixPackageImpl::installOnly() const
 { return _install_only; }
+
+unsigned int HelixPackageImpl::mediaId() const
+{ return _mediaid; }
 
 
   /////////////////////////////////////////////////////////////////

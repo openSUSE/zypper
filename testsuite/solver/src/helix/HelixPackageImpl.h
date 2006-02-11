@@ -46,6 +46,8 @@ public:
 	/** */
 	virtual bool installOnly() const;
 	/** */
+	virtual unsigned mediaId() const;
+	/** */
 	virtual Source_Ref source() const;
 
 protected:
@@ -58,6 +60,7 @@ protected:
 	ByteCount _size_installed;
 	ByteCount _size_archive;
 
+	unsigned int _mediaid;
 
  };
   /////////////////////////////////////////////////////////////////

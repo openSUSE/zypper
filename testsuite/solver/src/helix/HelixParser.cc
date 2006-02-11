@@ -686,7 +686,7 @@ HelixParser::resolvableEnd (const std::string & token)
     } else if (token == "installedsize") {	installedSize = str::strtonum<long>(_text_buffer);
     } else if (token == "install_only") {	installOnly = true;
     } else if (token == "md5sum") {		// ignore
-    } else if (token == "location") {		// ignore
+    } else if (token == "location") {		location = str::strtonum<unsigned int>(_text_buffer);
     } else if (token == "deps") {		// ignore, see resolvableStart
     } else {
 	_DBG("HelixParser") << "HelixParser::resolvableEnd(" << token << ") unknown" << endl;
@@ -724,7 +724,6 @@ HelixParser::updateEnd (const std::string & token)
     } else if (token == "release") {		release = _text_buffer;
     } else if (token == "arch") {		arch = _text_buffer;
     } else if (token == "filename") {		// ignore
-    } else if (token == "location") {		// ignore
     } else if (token == "filesize") {		fileSize = str::strtonum<long>(_text_buffer);
     } else if (token == "installedsize") {	installedSize = str::strtonum<long>(_text_buffer);
     } else if (token == "signaturename") {	// ignore

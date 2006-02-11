@@ -88,6 +88,7 @@ class HelixParser
     int installedSize;
     bool installOnly;
     bool installed;
+    unsigned int location;
 
     CapSet provides;
     CapSet prerequires;
