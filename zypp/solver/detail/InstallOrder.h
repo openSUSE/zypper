@@ -60,6 +60,7 @@ namespace zypp
 class InstallOrder
 {
     private:
+	const ResPool & _pool;
 	PoolItemSet _toinstall;
 	PoolItemSet _installed;
 
@@ -111,7 +112,7 @@ class InstallOrder
 	 * @param toinstall Set of ResItems that have to be installed
 	 * @param installed Set of ResItems that are already installed
 	 * */
-	InstallOrder( const PoolItemSet & toinstall, const PoolItemSet & installed);
+	InstallOrder( const ResPool & pool, const PoolItemSet & toinstall, const PoolItemSet & installed);
 
 	/**
 	 * Compute a list of ResItems which have no requirements and can be

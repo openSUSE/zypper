@@ -465,7 +465,7 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
 	delset.insert( *pkgIt );
       }
 
-      InstallOrder order( delset, dummy ); // sort according top prereq
+      InstallOrder order( pool_r, delset, dummy ); // sort according top prereq
       order.init();
       const TargetImpl::PoolItemList dsorted( order.getTopSorted() );
 
@@ -518,7 +518,7 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
     for ( TargetImpl::PoolItemList::iterator resIt = instbackup_r.begin(); resIt != instbackup_r.end(); ++resIt ) {
       insset.insert( *resIt );
     }
-    InstallOrder order( insset, installed );
+    InstallOrder order( pool_r, insset, installed );
     // start recursive depth-first-search
     order.init();
 MIL << "order.init() done" << endl;

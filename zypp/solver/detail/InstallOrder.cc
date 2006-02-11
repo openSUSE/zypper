@@ -51,8 +51,9 @@ using namespace zypp;
 #define ITEMNAME(item) (item)->name()
 //-----------------------------------------------------------------------------
 
-InstallOrder::InstallOrder( const PoolItemSet & toinstall, const PoolItemSet & installed )
-    : _toinstall( toinstall )
+InstallOrder::InstallOrder( const ResPool & pool, const PoolItemSet & toinstall, const PoolItemSet & installed )
+    : _pool( pool )
+    , _toinstall( toinstall )
     , _installed( installed )
     , _dirty (true)
     , _numrun (0)
@@ -172,6 +173,40 @@ InstallOrder::findProviderInSet( const Capability requirement, const PoolItemSet
     return PoolItem_Ref();
 }
 
+struct CollectProviders : public resfilter::OnCapMatchCallbackFunctor
+{
+    const PoolItem_Ref requestor;
+    PoolItemList & tovisit;   
+    PoolItemSet & toinstall;
+    PoolItemSet & installed;
+
+    CollectProviders (const PoolItem_Ref pi, PoolItemList & tv, PoolItemSet & ti, PoolItemSet & i)
+	: requestor (pi)
+	, tovisit (tv)
+	, toinstall (ti)
+	, installed (i)
+    { }
+
+
+    bool operator()( PoolItem_Ref provider, const Capability & match )
+    {
+	// item provides cap which matches a requirement from info->requestor
+	//   this function gets _all_ providers and filter out those which are
+	//   either installed or in our toinstall input list
+	//
+XXX << "info(" << provider <<")"<< endl;
+	if ((provider.resolvable() != requestor.resolvable())		// resolvable could provide its own requirement
+	    && (toinstall.find( provider ) != toinstall.end()		// only look at resolvables
+		|| installed.find( provider ) != installed.end())) {	//   we are currently considering anyways
+	    XXX << "tovisit " << ITEMNAME(provider) << endl;
+	    tovisit.push_back (provider);
+	}
+
+	return true;
+    }
+
+};
+
 //-----------------------------------------------------------------------------
 
 
@@ -217,7 +252,7 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
 		      _pool.byCapabilityIndexEnd( requirement.index(), dep ),
 		      resfilter::callOnCapMatchIn( dep, requirement, functor::functorRef<bool,PoolItem,Capability>(info) ) );
 #endif
-#if 0
+#if 1
 	CollectProviders info ( item, tovisit, _toinstall, _installed );
 
 	ResPool::const_indexiterator pend = _pool.providesend(requirement.index());
@@ -230,6 +265,7 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
 	    }
 	}
 #endif
+#if 0
 	// item could provide its own requirement
 	if( doesProvide( requirement, item ) ) {
 		XXX << "self-provides " << endl;
@@ -247,7 +283,7 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
 		}
 	    }
 	}
-
+#endif
 	for (PoolItemList::iterator it = tovisit.begin(); it != tovisit.end(); ++it)
 	{
 	    const PoolItem_Ref must_visit = *it;
