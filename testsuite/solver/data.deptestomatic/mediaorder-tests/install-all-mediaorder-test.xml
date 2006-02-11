@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+  install minmal selection
+-->
+<test>
+<setup>
+  <channel name="packages" file="sl10.1-beta3-packages.xml"/>
+  <channel name="selections" file="sl10.1-beta3-selections.xml"/>
+  <mediaid/>
+</setup>
+<trial>
+  <install channel="selections" kind="selection" name="Basis-Devel"/>
+  <install channel="selections" kind="selection" name="Basis-Sound"/>
+  <install channel="selections" kind="selection" name="default"/>
+  <install channel="selections" kind="selection" name="DVD-Asia"/>
+  <install channel="selections" kind="selection" name="Fonts"/>
+  <install channel="selections" kind="selection" name="Games"/>
+  <install channel="selections" kind="selection" name="Gnome"/>
+  <install channel="selections" kind="selection" name="Gnome-Devel"/>
+  <install channel="selections" kind="selection" name="Hacker"/>
+  <install channel="selections" kind="selection" name="Java"/>
+  <install channel="selections" kind="selection" name="Kde"/>
+  <install channel="selections" kind="selection" name="Kde-Desktop"/>
+  <install channel="selections" kind="selection" name="Kde-Devel"/>
+  <install channel="selections" kind="selection" name="Kernel-Devel"/>
+  <install channel="selections" kind="selection" name="LAMP2"/>
+  <install channel="selections" kind="selection" name="Laptop"/>
+  <install channel="selections" kind="selection" name="Latex"/>
+  <install channel="selections" kind="selection" name="LDAP-Server"/>
+  <install channel="selections" kind="selection" name="Mobile"/>
+  <install channel="selections" kind="selection" name="Mono"/>
+  <install channel="selections" kind="selection" name="Multimedia"/>
+  <install channel="selections" kind="selection" name="Network"/>
+  <install channel="selections" kind="selection" name="Non-OSS"/>
+  <install channel="selections" kind="selection" name="Office"/>
+  <install channel="selections" kind="selection" name="SuSE-Documentation"/>
+  <install channel="selections" kind="selection" name="Tcl-Development"/>
+  <install channel="selections" kind="selection" name="Voip"/>
+  <install channel="selections" kind="selection" name="X11"/>
+  <install channel="selections" kind="selection" name="Xen"/>
+  <mediaorder/>
+</trial>
+</test>
