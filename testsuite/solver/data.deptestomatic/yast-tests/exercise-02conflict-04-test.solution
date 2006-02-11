@@ -5,10 +5,10 @@
 >!> A conflict over [package] (namedcap) libident == 2.0-1 ([package] (namedcap) libident >= 2.0) requires the removal of to-be-installed libident-2.0-1[test]
 >!>    Solution:
 >!>       delete libident
->!>       delete U___[package]libident-2.0-1.
+>!>       delete [package]libident-2.0-1.
 >!>    Solution:
 >!>       delete smail
->!>       delete I___[package]smail-1.0-1.
+>!>       delete [package]smail-1.0-1.
 >!>    Solution:
 >!>       Ignore this conflict of libident.
 >!>       

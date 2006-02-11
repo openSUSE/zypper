@@ -5,10 +5,10 @@
 >!> A conflict over [package] (namedcap) a == 2.0 ([package] (namedcap) a != 1.0) requires the removal of to-be-installed AA-1.0-1[test]
 >!>    Solution:
 >!>       delete AA
->!>       delete U___[package]AA-1.0-1.
+>!>       delete [package]AA-1.0-1.
 >!>    Solution:
 >!>       delete A
->!>       delete I___[package]A-1.0-1.
+>!>       delete [package]A-1.0-1.
 >!>    Solution:
 >!>       Ignore this conflict of AA.
 >!>       

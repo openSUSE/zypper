@@ -5,10 +5,10 @@
 >!> There are no alternative installed providers of [package] (namedcap) A for B-1.0-1
 >!>    Solution:
 >!>       keep A
->!>       keep I_Tu_[package]A-1.0-1.
+>!>       keep [package]A-1.0-1.
 >!>    Solution:
 >!>       delete B
->!>       delete I___[package]B-1.0-1.
+>!>       delete [package]B-1.0-1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       

@@ -5,10 +5,10 @@
 >!> A conflict over [package] (namedcap) p2 == 1.0-1 ([package] (namedcap) p2) requires the removal of to-be-installed p2-1.0-1[test]
 >!>    Solution:
 >!>       delete p2
->!>       delete U_Tu_[package]p2-1.0-1.
+>!>       delete [package]p2-1.0-1.
 >!>    Solution:
 >!>       delete p1
->!>       delete I___[package]p1-1.0-1.
+>!>       delete [package]p1-1.0-1.
 >!>    Solution:
 >!>       Ignore this conflict of p2.
 >!>       

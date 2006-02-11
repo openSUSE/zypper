@@ -5,10 +5,10 @@
 >!> A conflict over [package] (namedcap) baz31 ([package] (namedcap) baz31) requires the removal of to-be-installed baz3-1.0-1[test]
 >!>    Solution:
 >!>       delete baz3
->!>       delete U_Tu_[package]baz3-1.0-1.
+>!>       delete [package]baz3-1.0-1.
 >!>    Solution:
 >!>       delete foo3
->!>       delete I___[package]foo3-1.0-1.
+>!>       delete [package]foo3-1.0-1.
 >!>    Solution:
 >!>       Ignore this conflict of baz3.
 >!>       
