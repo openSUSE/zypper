@@ -64,11 +64,30 @@ namespace zypp
 using namespace std;
 
 typedef map<PoolItem_Ref, ResolverInfo_Ptr> ProblemMap;
+typedef multimap<PoolItem_Ref, Capability> ItemCapabilityMap;
 
+// match template over ItemCapabilityMap
+template <class K, class V>
+class cap_equals {
+  private:
+    V value;
+public:
+    cap_equals (const V& v)
+	: value(v) {
+    }
+    // comparison
+    bool operator() (pair<const K, V> elem) {
+	return value.matches (elem.second) == CapMatch::yes;
+    }
+};
+	
 // set resolvables with errors
 
 typedef struct {
     ProblemMap problems;
+    // A map of PoolItems which provides a capability but are set
+    // for uninstallation
+    ItemCapabilityMap provideAndDeleteMap;  
 } ResItemCollector;
 
 
@@ -80,6 +99,21 @@ collector_cb (ResolverInfo_Ptr info, void *data)
     if (item
 	&& info->error()) {
 	collector->problems[item] = info;
+    }
+    // Collicting items which are providing requirements but they
+    // are set for uninstall
+    if (info->type() == RESOLVER_INFO_TYPE_UNINSTALL_PROVIDER) {
+	ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+	// does entry already exists ?
+	ItemCapabilityMap::iterator pos = find_if (collector->provideAndDeleteMap.begin(),
+						   collector->provideAndDeleteMap.end(),
+						   cap_equals<PoolItem_Ref, Capability>(misc_info->capability()));
+	
+	if (pos == collector->provideAndDeleteMap.end()) {
+	    _XDEBUG ("Inserting " << misc_info->capability() << "/" <<  misc_info->other()
+		     << " into provideAndDelete map");
+	    collector->provideAndDeleteMap.insert (make_pair( misc_info->other(), misc_info->capability()));
+	}
     }
 }
 
@@ -95,7 +129,6 @@ struct AllRequires : public resfilter::OnCapMatchCallbackFunctor
 	return true;
     }
 };
-	
 
 
 ResolverProblemList
@@ -310,14 +343,26 @@ Resolver::problems (void) const
 	    case RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER: {		// There are no alternative installed providers of c [for p]
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("%s cannot be uninstalled due missing dependencies"), who.c_str());
+		what = str::form (_("%s has missing dependencies"), who.c_str());
 		details = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 
-		// keep installed
-		problem->addSolution (new ProblemSolutionKeep (problem, item)); 
-		
-		// Unflag require
+		// Searching for another item which provides this requires BUT has been set to uninstall
+		for (ItemCapabilityMap::const_iterator it = collector.provideAndDeleteMap.begin();
+		     it != collector.provideAndDeleteMap.end(); ++it) {
+		    if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
+			// Do not delete
+			problem->addSolution (new ProblemSolutionKeep (problem, it->first));
+		    }
+		}
+
+		// uninstall
+		problem->addSolution (new ProblemSolutionUninstall (problem, item));
+
+		// Unflag require ONLY for this item
+		problem->addSolution (new ProblemSolutionIgnoreRequires (problem, item, misc_info->capability()));		
+
+		// Unflag ALL require
 		// Evaluating all require Items
 		AllRequires info;
 		Dep dep( Dep::REQUIRES );
@@ -326,7 +371,8 @@ Resolver::problems (void) const
 			      _pool.byCapabilityIndexEnd( misc_info->capability().index(), dep ),   // end()
 			      resfilter::callOnCapMatchIn( dep, misc_info->capability(),
 							   functor::functorRef<bool,PoolItem,Capability>(info)) );
-		problem->addSolution (new ProblemSolutionIgnoreRequires (problem, info.requirers, misc_info->capability()));
+		if (info.requirers.size() > 1)
+		    problem->addSolution (new ProblemSolutionIgnoreRequires (problem, info.requirers, misc_info->capability()));
 
 		problems.push_back (problem);
 		problem_created = true;

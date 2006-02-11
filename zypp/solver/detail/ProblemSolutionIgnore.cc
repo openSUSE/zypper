@@ -51,7 +51,7 @@ ProblemSolutionIgnoreRequires::ProblemSolutionIgnoreRequires( ResolverProblem_Pt
 							      const Capability & capability)
     : ProblemSolution (parent, "", "")
 {
-	_description = _("Ignoring this requirement");
+	_description = _("Ignore this requirement.");
 	addAction ( new InjectSolutionAction (item, capability, REQUIRES));
 }
 
@@ -60,7 +60,7 @@ ProblemSolutionIgnoreRequires::ProblemSolutionIgnoreRequires( ResolverProblem_Pt
 							      const Capability & capability)
     : ProblemSolution (parent, "", "")
 {
-	_description = _("Ignoring this requirement");
+	_description = _("Ignore this requirement for all other resolvables.");
 	for (PoolItemList::const_iterator iter = itemList.begin();
 	     iter != itemList.end(); iter++) {
 	    addAction ( new InjectSolutionAction (*iter, capability, REQUIRES));
@@ -74,7 +74,7 @@ ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_
     : ProblemSolution (parent, "", "")
 {
 	// TranslatorExplanation %s = name of package, patch, selection ...
-	_description = str::form (_("Ignoring conflict of %s"),
+	_description = str::form (_("Ignore this conflict of %s."),
 				  item->name().c_str());
 	addAction (new InjectSolutionAction (item, capability, CONFLICTS, otherItem));	
 }
@@ -83,7 +83,7 @@ ProblemSolutionIgnoreArch::ProblemSolutionIgnoreArch( ResolverProblem_Ptr parent
 						      PoolItem_Ref item )
     : ProblemSolution (parent, "", "")
 {
-    _description = _("Ignoring Architecture");
+    _description = _("ignore architecture");
     addAction ( new InjectSolutionAction (item, Capability(), ARCHITECTURE));
 }
 
@@ -93,7 +93,7 @@ ProblemSolutionIgnoreInstalled::ProblemSolutionIgnoreInstalled( ResolverProblem_
     : ProblemSolution (parent, "", "")
 {
 	// TranslatorExplanation %s = name of package, patch, selection ...
-	_description = str::form (_("Ignoring that %s is already set to install"),
+	_description = str::form (_("Ignore that %s is already set to install."),
 				  item->name().c_str());
 	addAction (new InjectSolutionAction (item, Capability(), INSTALLED, otherItem));	
 }
