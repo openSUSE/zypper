@@ -66,9 +66,13 @@ namespace zypp {
        */
       virtual std::string asString() const
       {
-        return type + ":" + name      + "(" +
-               str::numstring(maj_nr) + "," +
-               str::numstring(min_nr) + ")";
+	std::string tmp;
+        if(maj_nr != 0)
+	{
+	  tmp = "[" + str::numstring(maj_nr) + "," +
+	              str::numstring(min_nr) + "]";
+	}
+        return type + "<" + name + tmp + ">";
       }
 
       unsigned int maj_nr;  //!< A major number if source is a device.
