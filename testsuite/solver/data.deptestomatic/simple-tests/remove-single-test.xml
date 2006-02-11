@@ -4,7 +4,7 @@
 -->
 <test>
 <setup>
-  <system file="single-package.xml"/>
+  <system file="single-package2.xml"/>
 </setup>
 <trial>
   <uninstall package="A"/>
