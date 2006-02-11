@@ -88,6 +88,9 @@ using zypp::solver::detail::ResolverQueue_Ptr;
 using zypp::solver::detail::InstallOrder;
 using zypp::ResolverProblemList;
 
+//-----------------------------------------------------------------------------
+
+static bool show_mediaid = false;
 static string globalPath;
 
 static ZYpp::Ptr God;
@@ -95,12 +98,20 @@ static SourceManager_Ptr manager;
 static bool forceResolve;
 
 typedef list<unsigned int> ChecksumList;
+typedef set<PoolItem_Ref> PoolItemSet;
 
 #define RESULT cout << ">!> "
+
+//-----------------------------------------------------------------------------
 
 static std::ostream &
 printRes ( std::ostream & str, ResObject::constPtr r )
 {
+    if (show_mediaid) {
+	Resolvable::constPtr res = r;
+	Package::constPtr pkg = asKind<Package>(res);
+	if (pkg) str << "[" << pkg->mediaId() << "]";
+    }
     if (r->kind() != ResTraits<zypp::Package>::kind)
 	str << r->kind() << ':';
     str  << r->name() << '-' << r->edition();
@@ -280,7 +291,7 @@ print_important (const string & str)
 
 
 static void
-print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum_list, bool instorder)
+print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum_list, bool instorder, bool mediaorder)
 {
     if (context->isValid ()) {
 
@@ -349,14 +360,34 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
     if (instorder) {
 	cout << endl;
 	RESULT << "Installation Order:" << endl << endl;
-	PoolItemList installs = context->getMarked(1);
-	PoolItemList dummy;
+	solver::detail::PoolItemList inslist = context->getMarked(1);
+	solver::detail::PoolItemSet dummy;
 
-	InstallOrder order( context->pool(), installs, dummy );		 // sort according top prereq
+	solver::detail::PoolItemSet insset( inslist.begin(), inslist.end() );
+	InstallOrder order( insset, dummy );		 // sort according top prereq
 	order.init();
-	const PoolItemList & installorder ( order.getTopSorted() );
-	for (PoolItemList::const_iterator iter = installorder.begin(); iter != installorder.end(); iter++) {
+	const solver::detail::PoolItemList & installorder ( order.getTopSorted() );
+	for (solver::detail::PoolItemList::const_iterator iter = installorder.begin(); iter != installorder.end(); iter++) {
 		RESULT; printRes (cout, (*iter)); cout << endl;
+	}
+	cout << "- - - - - - - - - -" << endl;
+    }
+
+    if (mediaorder) {
+	cout << endl;
+	RESULT << "Media Order:" << endl << endl;
+	God->initTarget("/", true);			// init, but don't populate pool
+	Target::PoolItemList dellist;
+	Target::PoolItemList inslist;
+	Target::PoolItemList srclist;
+	God->target()->getResolvablesToInsDel( context->pool(), dellist, inslist, srclist );
+	int count = 0;
+	for (Target::PoolItemList::const_iterator iter = dellist.begin(); iter != dellist.end(); iter++) {
+		RESULT << "DEL " << ++count << ".: "; printRes (cout, (*iter)); cout << endl;
+	}
+	count = 0;
+	for (Target::PoolItemList::const_iterator iter = inslist.begin(); iter != inslist.end(); iter++) {
+		RESULT << "INS " << ++count << ".:"; printRes (cout, (*iter)); cout << endl;
 	}
 	cout << "- - - - - - - - - -" << endl;
     }
@@ -723,6 +754,8 @@ parse_xml_setup (XmlNode_Ptr node)
 		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
 	    }
 
+	} else if (node->equals ("mediaid")) {
+	    show_mediaid = true;
 	} else {
 	    cerr << "Unrecognized tag '" << node->name() << "' in setup" << endl;
 	}
@@ -735,7 +768,7 @@ parse_xml_setup (XmlNode_Ptr node)
 // trial related functions
 
 static void
-report_solutions ( solver::detail::Resolver_Ptr resolver, bool instorder)
+report_solutions ( solver::detail::Resolver_Ptr resolver, bool instorder, bool mediaorder)
 {
     int count = 1;
     ChecksumList checksum_list;
@@ -760,7 +793,7 @@ report_solutions ( solver::detail::Resolver_Ptr resolver, bool instorder)
     
     if (resolver->bestContext()) {
 	cout << endl << "Best Solution:" << endl;
-	print_solution (resolver->bestContext(), &count, checksum_list, instorder);
+	print_solution (resolver->bestContext(), &count, checksum_list, instorder, mediaorder);
 
 	ResolverQueueList complete = resolver->completeQueues();
 	if (complete.size() > 1)
@@ -770,7 +803,7 @@ report_solutions ( solver::detail::Resolver_Ptr resolver, bool instorder)
 	    for (ResolverQueueList::const_iterator iter = complete.begin(); iter != complete.end(); iter++) {
 		ResolverQueue_Ptr queue = (*iter);
 		if (queue->context() != resolver->bestContext()) 
-		    print_solution (queue->context(), &count, checksum_list, instorder);
+		    print_solution (queue->context(), &count, checksum_list, instorder, mediaorder);
 	    }
 	}
     }
@@ -932,6 +965,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 {
     bool verify = false;
     bool instorder = false;
+    bool mediaorder = false;
     bool distupgrade = false;
 
     if (!node->equals ("trial")) {
@@ -1085,6 +1119,12 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    RESULT << "Calculating installation order ..." << endl;
 
 	    instorder = true;
+
+	} else if (node->equals ("mediaorder")) {
+
+	    RESULT << "Calculating media installation order ..." << endl;
+
+	    mediaorder = true;
 
 	} else if (node->equals ("solvedeps")) {
 #if 0
@@ -1266,7 +1306,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 
 #endif
 
-    report_solutions (resolver, instorder);
+    report_solutions (resolver, instorder, mediaorder);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
