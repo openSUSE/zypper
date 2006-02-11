@@ -364,7 +364,7 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 	solver::detail::PoolItemSet dummy;
 
 	solver::detail::PoolItemSet insset( inslist.begin(), inslist.end() );
-	InstallOrder order( insset, dummy );		 // sort according top prereq
+	InstallOrder order( context->pool(), insset, dummy );		 // sort according top prereq
 	order.init();
 	const solver::detail::PoolItemList & installorder ( order.getTopSorted() );
 	for (solver::detail::PoolItemList::const_iterator iter = installorder.begin(); iter != installorder.end(); iter++) {
