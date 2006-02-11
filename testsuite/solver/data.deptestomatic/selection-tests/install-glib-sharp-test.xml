@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+  install glib-sharp2 from CD2
+-->
+<test>
+<setup>
+  <channel name="packages" file="sl10.1-beta3-packages.xml"/>
+  <channel name="selections" file="sl10.1-beta3-selections.xml"/>
+  <mediaid/>
+</setup>
+<trial>
+  <install channel="packages" kind="package" name="libvisual-plugins"/>
+  <mediaorder/>
+</trial>
+</test>
