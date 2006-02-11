@@ -4,7 +4,8 @@
 
 LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
 
-noinst_PROGRAMS = media1
+noinst_PROGRAMS = media1 media2
 
 media1_SOURCES = media1.cc
+media2_SOURCES = media2.cc
 
