@@ -1,0 +1,6 @@
+>!> Installing baz2 from channel test
+>!> No problems so far
+>!> Solution #1:
+>!> install baz2-1.0-1[test]
+>!> remove  foo2-1.0-1
+>!> installs=1, upgrades=0, uninstalls=1

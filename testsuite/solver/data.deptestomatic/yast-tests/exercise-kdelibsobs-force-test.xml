@@ -3,6 +3,7 @@
 <setup>
   <system file="exercise-kdelibsobs-system.xml"/>
   <channel name="test" file="exercise-kdelibsobs-packages.xml"/>
+  <forceResolve/>
 </setup>
 
 <!-- 

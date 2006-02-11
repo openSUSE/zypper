@@ -3,6 +3,7 @@
 <setup>
   <system file="exercise-alternatives-system.xml"/>
   <channel name="test" file="exercise-alternatives-packages.xml"/>
+  <forceResolve/>
 </setup>
 
 <!-- 

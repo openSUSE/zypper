@@ -3,6 +3,7 @@
 <setup>
   <system file="exercise-02conflict-system.xml"/>
   <channel name="test" file="exercise-02conflict-packages.xml"/>
+  <forceResolve/>
 </setup>
 
 <!-- eek... this time a downgrade is available :-) -->

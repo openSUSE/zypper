@@ -3,6 +3,7 @@
 <setup>
   <system file="exercise-inconsistent6-system.xml"/>
   <channel name="test" file="exercise-inconsistent6-packages.xml"/>
+  <forceResolve/>
 </setup>
 
 <!-- 

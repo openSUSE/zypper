@@ -3,6 +3,7 @@
 <setup>
   <system file="exercise-04obsoletes-system.xml"/>
   <channel name="test" file="exercise-04obsoletes-packages.xml"/>
+  <forceResolve/>
 </setup>
 
 <!-- 

@@ -92,6 +92,7 @@ static string globalPath;
 
 static ZYpp::Ptr God;
 static SourceManager_Ptr manager;
+static bool forceResolve;
 
 typedef list<unsigned int> ChecksumList;
 
@@ -638,8 +639,10 @@ parse_xml_setup (XmlNode_Ptr node)
 	    node = node->next();
 	    continue;
 	}
-
-	if (node->equals ("system")) {
+	if (node->equals ("forceResolve")) {
+            
+            forceResolve = true;
+        } else if (node->equals ("system")) {
 
 	    string file = node->getProp ("file");
 	    load_source ("@system", file, "helix", true);
@@ -945,6 +948,8 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
     print_sep ();
 
     solver::detail::Resolver_Ptr resolver = new solver::detail::Resolver (pool);
+
+    resolver->setForceResolve (forceResolve);
 
     ResolverContext_Ptr established = NULL;
 
@@ -1324,7 +1329,7 @@ main (int argc, char *argv[])
 	cerr << "Usage: deptestomatic testfile.xml" << endl;
 	exit (0);
     }
-
+    forceResolve = false;
     manager = SourceManager::sourceManager();
     ZYppFactory zf;
     God = zf.getZYpp();

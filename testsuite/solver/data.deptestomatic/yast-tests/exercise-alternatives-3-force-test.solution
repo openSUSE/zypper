@@ -1,0 +1,25 @@
+>!> Installing alt-conflict from channel test
+>!> Solution #1:
+>!> install WindowMaker-1.0-1[test]
+>!> install alt-conflict-1.0-1[test]
+>!> install sendmail-1.0-1[test]
+>!> remove  foo-1.0-1
+>!> installs=3, upgrades=0, uninstalls=1
+>!> Solution #2:
+>!> install alt-conflict-1.0-1[test]
+>!> install icewm-1.0-1[test]
+>!> install sendmail-1.0-1[test]
+>!> remove  foo-1.0-1
+>!> installs=3, upgrades=0, uninstalls=1
+>!> Solution #3:
+>!> install WindowMaker-1.0-1[test]
+>!> install alt-conflict-1.0-1[test]
+>!> install postfix-1.0-1[test]
+>!> remove  foo-1.0-1
+>!> installs=3, upgrades=0, uninstalls=1
+>!> Solution #4:
+>!> install alt-conflict-1.0-1[test]
+>!> install icewm-1.0-1[test]
+>!> install postfix-1.0-1[test]
+>!> remove  foo-1.0-1
+>!> installs=3, upgrades=0, uninstalls=1
