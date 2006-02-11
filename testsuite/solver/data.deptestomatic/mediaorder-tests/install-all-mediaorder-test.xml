@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <!--
-  install minmal selection
+  install all selections expect
+   - Mobile (multiple)
+   - DVD-Asia
 -->
 <test>
 <setup>
@@ -12,7 +14,6 @@
   <install channel="selections" kind="selection" name="Basis-Devel"/>
   <install channel="selections" kind="selection" name="Basis-Sound"/>
   <install channel="selections" kind="selection" name="default"/>
-  <install channel="selections" kind="selection" name="DVD-Asia"/>
   <install channel="selections" kind="selection" name="Fonts"/>
   <install channel="selections" kind="selection" name="Games"/>
   <install channel="selections" kind="selection" name="Gnome"/>
