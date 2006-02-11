@@ -5,6 +5,7 @@
 <test>
 <setup>
   <system file="single-package.xml"/>
+  <forceResolve/>
 </setup>
 <trial>
   <uninstall package="A"/>

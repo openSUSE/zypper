@@ -3,6 +3,7 @@
 <setup>
   <system file="exercise-4-system.xml"/>
   <channel name="test" file="exercise-4-packages.xml"/>
+  <forceResolve/>
 </setup>
 <trial>
   <install channel="test" package="N"/>

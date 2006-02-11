@@ -16,6 +16,7 @@ and provides a.
 <setup>
   <system file="exercise-59-system.xml"/>
   <channel name="test" file="exercise-21-packages.xml"/>
+  <forceResolve/>
 </setup>
 <trial>
   <install channel="test" package="A"/>
