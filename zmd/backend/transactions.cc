@@ -4,6 +4,7 @@
     read/write 'transactions' table to/from ResPool
  */
 
+#include <set>
 #include "transactions.h"
 
 #include "zypp/ZYpp.h"
@@ -37,6 +38,8 @@ using namespace std;
 using namespace zypp;
 using solver::detail::ResolverInfo_Ptr;
 using solver::detail::ResolverContext_Ptr;
+
+typedef std::set<PoolItem> PoolItemSet;
 
 //-----------------------------------------------------------------------------
 

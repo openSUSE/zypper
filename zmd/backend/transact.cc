@@ -1,6 +1,7 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 
 #include <string>
+#include <list>
 
 #include "zypp/ZYpp.h"
 #include "zypp/ZYppFactory.h"
@@ -18,6 +19,10 @@ using namespace zypp;
 #include "zypp/solver/detail/ResolverInfo.h"
 
 using solver::detail::ResolverInfo_Ptr;
+
+typedef std::list<PoolItem> PoolItemList;
+
+//-----------------------------------------------------------------------------
 
 static void
 append_dep_info (ResolverInfo_Ptr info, void *user_data)
