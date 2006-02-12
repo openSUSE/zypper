@@ -141,8 +141,9 @@ namespace zypp
 	    // retry
 	    break;
 	  }
-
-	  // FIXME: IGNORE
+	  else {
+	    ZYPP_RETHROW ( excp );
+	  }
         }
       } while( true );
 
