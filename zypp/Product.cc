@@ -45,6 +45,13 @@ namespace zypp
   std::string Product::category() const
   { return pimpl().category(); }
 
+  Label Product::vendor() const
+  { return pimpl().vendor(); }
+
+  Label Product::displayName() const
+  { return pimpl().displayName(); }
+
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

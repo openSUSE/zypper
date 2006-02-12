@@ -38,6 +38,12 @@ namespace zypp
     /** Get the product categoty (base, add-on) */
     std::string category() const;
 
+    /** Get the vendor of the product */
+    Label vendor() const;
+
+    /** Get the name of the product to be presented to user */
+    Label displayName() const;
+
   protected:
     /** Ctor */
     Product( const NVRAD & nvrad_r );
