@@ -43,6 +43,7 @@ lib@PACKAGE@_detail_la_SOURCES = \
 	MessageImplIf.cc	\
 	ScriptImplIf.cc		\
 	PatchImplIf.cc		\
+	ProductImplIf.cc	\
 	\
 	\
 	\

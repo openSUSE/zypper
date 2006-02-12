@@ -14,6 +14,10 @@
 
 #include "zypp/detail/ResObjectImplIf.h"
 
+#ifndef PURE_VIRTUAL
+#define PURE_VIRTUAL = 0
+#endif
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -36,12 +40,14 @@ namespace zypp
       typedef Product ResType;
 
     public:
-#if 0
-      /** Get the category of the product */
-      virtual std::string category() const = 0;
-      virtual Label vendor() const = 0;
-      virtual Label displayName() const = 0;
-#endif
+      /** Get the category of the product - addon or base*/
+      virtual std::string category() const PURE_VIRTUAL;
+
+      /** Get the vendor of the product */
+      virtual Label vendor() const PURE_VIRTUAL;
+
+      /** Get the name of the product to be presented to user */
+      virtual Label displayName() const PURE_VIRTUAL;
     };
     ///////////////////////////////////////////////////////////////////
 

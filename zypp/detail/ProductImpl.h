@@ -32,11 +32,6 @@ namespace zypp
     public:
       ProductImpl();
       ~ProductImpl();
-    public:
-      /** Get the category of the product */
-      virtual std::string category() const;
-    protected:
-      std::string _category;
     };
     ///////////////////////////////////////////////////////////////////
 
