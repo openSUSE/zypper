@@ -93,7 +93,7 @@ XMLFilesBackend::XMLFilesBackend(const Pathname &root) : Backend(root)
   d->kinds.insert(ResTraits<zypp::Patch>::kind);
   //d->kinds.insert(ResTraits<zypp::Message>::kind);
   //d->kinds.insert(ResTraits<zypp::Script>::kind);
-  d->kinds.insert(ResTraits<zypp::Selection>::kind);
+  //d->kinds.insert(ResTraits<zypp::Selection>::kind);
   d->kinds.insert(ResTraits<zypp::Product>::kind);
   d->kinds.insert(ResTraits<zypp::Pattern>::kind);
 
