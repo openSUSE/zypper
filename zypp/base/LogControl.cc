@@ -16,6 +16,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/LogControl.h"
 #include "zypp/base/String.h"
+#include "zypp/Date.h"
 
 using std::endl;
 
@@ -25,14 +26,35 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace base
   { /////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    // LineFormater
+    ///////////////////////////////////////////////////////////////////
+    std::string LogControl::LineFormater::format( const std::string & group_r,
+                                                  logger::LogLevel    level_r,
+                                                  const char *        file_r,
+                                                  const char *        func_r,
+                                                  int                 line_r,
+                                                  const std::string & message_r )
+    {
+      static char hostname[1024];
+      static char nohostname[] = "unknown";
+      std::string now( Date::now().form( "%Y-%m-%d %H:%M:%S" ) );
+      return str::form( "%s <%d> %s(%d) [%s] %s(%s):%d %s",
+                        now.c_str(), level_r,
+                        ( gethostname( hostname, 1024 ) ? nohostname : hostname ),
+                        getpid(),
+                        group_r.c_str(),
+                        file_r, func_r, line_r,
+                        message_r.c_str() );
+    }
+
     ///////////////////////////////////////////////////////////////////
     namespace logger
     { /////////////////////////////////////////////////////////////////
 
-      void logFormat( const std::string & group_r, LogLevel level_r,
-                      const char * file_r, const char * func_r, int line_r,
-                      const std::string & buffer_r );
-
+      ///////////////////////////////////////////////////////////////////
+      // LineWriter
       ///////////////////////////////////////////////////////////////////
       struct StdErrWriter : public LogControl::LineWriter
       {
@@ -55,6 +77,11 @@ namespace zypp
           outs << formated_r << endl;
         }
       };
+      ///////////////////////////////////////////////////////////////////
+
+      inline void putStream( const std::string & group_r, LogLevel level_r,
+                             const char * file_r, const char * func_r, int line_r,
+                             const std::string & buffer_r );
 
       ///////////////////////////////////////////////////////////////////
       //
@@ -110,7 +137,7 @@ namespace zypp
                 {
                   if ( *c == '\n' ) {
                     _buffer += std::string( s, c-s );
-                    logger::logFormat( _group, _level, _file, _func, _line, _buffer );
+                    logger::putStream( _group, _level, _file, _func, _line, _buffer );
                     _buffer = std::string();
                     s = c+1;
                   }
@@ -178,24 +205,33 @@ namespace zypp
         void setLineWriter( const shared_ptr<LogControl::LineWriter> & writer_r )
         { _lineWriter = writer_r; }
 
+        void setLineFormater( const shared_ptr<LogControl::LineFormater> & format_r )
+        {
+          if ( format_r )
+            _lineFormater = format_r;
+          else
+            _lineFormater.reset( new LogControl::LineFormater );
+        }
+
       private:
         std::ostream _no_stream;
         bool         _excessive;
 
-        shared_ptr<LogControl::LineWriter> _lineWriter;
+        shared_ptr<LogControl::LineFormater> _lineFormater;
+        shared_ptr<LogControl::LineWriter>   _lineWriter;
 
       public:
-        /** Provide the stream to write (logger interface) */
+        /** Provide the log stream to write (logger interface) */
         std::ostream & getStream( const std::string & group_r,
                                   LogLevel            level_r,
                                   const char *        file_r,
                                   const char *        func_r,
                                   const int           line_r )
         {
+          if ( ! _lineWriter )
+            return _no_stream;
           if ( level_r == E_XXX && !_excessive )
-            {
-              return _no_stream;
-            }
+            return _no_stream;
 
           if ( !_streamtable[group_r][level_r] )
             {
@@ -204,11 +240,18 @@ namespace zypp
           return _streamtable[group_r][level_r]->getStream( file_r, func_r, line_r );
         }
 
-        /** Write out formated line from Loglinebuf. */
-        void writeLine( const std::string & formated_r )
+        /** Format and write out a logline from Loglinebuf. */
+        void putStream( const std::string & group_r,
+                        LogLevel            level_r,
+                        const char *        file_r,
+                        const char *        func_r,
+                        int                 line_r,
+                        const std::string & message_r )
         {
           if ( _lineWriter )
-            _lineWriter->writeOut( formated_r );
+            _lineWriter->writeOut( _lineFormater->format( group_r, level_r,
+                                                          file_r, func_r, line_r,
+                                                          message_r ) );
         }
 
       private:
@@ -223,7 +266,9 @@ namespace zypp
         LogControlImpl()
         : _no_stream( 0 )
         , _excessive( getenv("ZYPP_FULLLOG") )
-        , _lineWriter( getenv("ZYPP_NOLOG") ? NULL : new StdErrWriter )
+        , _lineFormater( new LogControl::LineFormater )
+        , _lineWriter( getenv("ZYPP_NOLOG") ? NULL
+                                            : new StdErrWriter )
         {}
 
       public:
@@ -269,14 +314,13 @@ namespace zypp
       }
 
       /** That's what Loglinebuf calls.  */
-      inline void logFormat( const std::string & group_r, LogLevel level_r,
+      inline void putStream( const std::string & group_r, LogLevel level_r,
                              const char * file_r, const char * func_r, int line_r,
                              const std::string & buffer_r )
       {
-        LogControlImpl::instance.writeLine( str::form( "<%d> [%s] %s(%s):%d %s",
-                                                       level_r, group_r.c_str(),
-                                                       file_r, func_r, line_r,
-                                                       buffer_r.c_str() ) );
+        LogControlImpl::instance.putStream( group_r, level_r,
+                                            file_r, func_r, line_r,
+                                            buffer_r );
       }
 
       /////////////////////////////////////////////////////////////////
@@ -293,7 +337,14 @@ namespace zypp
     using logger::LogControlImpl;
 
     void LogControl::logfile( const Pathname & logfile_r )
-    { LogControlImpl::instance.setLineWriter( shared_ptr<LineWriter>( new logger::FileWriter(logfile_r) ) ); }
+    {
+      if ( logfile_r.empty() )
+        logNothing();
+      else if ( logfile_r == Pathname( "-" ) )
+        logToStdErr();
+      else
+        LogControlImpl::instance.setLineWriter( shared_ptr<LineWriter>( new logger::FileWriter(logfile_r) ) );
+    }
 
     void LogControl::setLineWriter( const shared_ptr<LineWriter> & writer_r )
     { LogControlImpl::instance.setLineWriter( writer_r ); }

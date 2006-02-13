@@ -43,7 +43,7 @@ namespace zypp
     //Date( const std::string & seconds_r ) : _date( fromSECONDS (seconds_r) ) {}
 
     /** Return the current time. */
-    static time_t now()
+    static Date now()
     { return ::time( 0 ); }
 
   public:
