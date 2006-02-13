@@ -43,3 +43,5 @@ exercise-23-test.xml
 #only one provider of something.
 exercise-60-test.xml
 exercise-24-test.xml
+exercise-44-delete-glibc-test.xml
+
