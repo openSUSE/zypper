@@ -1236,17 +1236,19 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
             RESULT << "For problem:     " << problemNr << endl;
             ResolverProblemList problems = resolver->problems ();
             
-            int problemCounter = 0;
-            int solutionCounter = 0;
+            int problemCounter = -1;
+            int solutionCounter = -1;
             // find problem
             for (ResolverProblemList::iterator probIter = problems.begin();
                  probIter != problems.end(); ++probIter) {
+                problemCounter++;
                 if (problemCounter == problemNr) {
                     ResolverProblem problem = **probIter;
                     ProblemSolutionList solutionList = problem.solutions();
                     //find solution
                     for (ProblemSolutionList::iterator solIter = solutionList.begin();
                          solIter != solutionList.end(); ++solIter) {
+                        solutionCounter++;
                         if (solutionCounter == solutionNr) {
                             ProblemSolution_Ptr solution = *solIter;
                             cout << "Taking solution: " << endl << *solution << endl;
@@ -1256,17 +1258,15 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
                             resolver->applySolutions (doList);
                             break;
                         }
-                        solutionCounter++;
                     }
                     break;
                 }
-                problemCounter++;
             }
 
             if (problemCounter != problemNr) {
-                RESULT << "Wrong problem number (0-" << problemCounter-1 << ")" << endl;
+                RESULT << "Wrong problem number (0-" << problemCounter << ")" << endl;
             } else if (solutionCounter != solutionNr) {
-                RESULT << "Wrong solution number (0-" << solutionCounter-1 << ")" <<endl;
+                RESULT << "Wrong solution number (0-" << solutionCounter << ")" <<endl;
             } else {
                 // resolve and check it again
                 if (resolver->resolvePool() == true) {
