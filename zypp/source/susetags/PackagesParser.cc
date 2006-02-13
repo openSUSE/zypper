@@ -95,6 +95,9 @@ namespace zypp
 
             if ( str::split( stag_r.value, std::back_inserter(words) ) != 4 )
               ZYPP_THROW( ParseException( "Pkg" ) );
+#warning FIXME, do proper filtering from content:ARCH line
+	    if (words[3] == "src" || words[3] == "nosrc")
+		_pkgImpl.reset();
 
             newPkg();
             _nvrad = NVRAD( words[0], Edition(words[1],words[2]), Arch(words[3]) );
