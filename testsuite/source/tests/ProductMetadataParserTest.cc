@@ -13,10 +13,13 @@ int main()
 {
   ProductMetadataParser parser;
   Product::Ptr product;
+
+  Source_Ref src;
+
   try {
-  product = parseContentFile(Pathname("products/content.1.txt"));
+  product = parseContentFile(Pathname("products/content.1.txt"), src);
   //DBG << "arch: " << entry.arch["x86_64"].size() << std::endl;
-  product = parseContentFile(Pathname("products/NOTTHERE.txt"));
+  product = parseContentFile(Pathname("products/NOTTHERE.txt"), src);
   //DBG << "arch: " << entry.arch["x86_64"].size() << std::endl;
   }
   catch (Exception & excpt_r) {
