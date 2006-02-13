@@ -42,7 +42,7 @@ namespace zypp
 	);
 	std::string category() const;
 	Label vendor() const;
-	TranslatedText displayName() const;
+	Label displayName(const Locale & locale_r = Locale()) const;
 	TranslatedText summary() const;
 	TranslatedText description() const;
 	Text insnotify() const;

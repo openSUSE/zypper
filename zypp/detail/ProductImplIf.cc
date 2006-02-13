@@ -29,8 +29,8 @@ namespace zypp
       { return Label(); } 
 
       /** Get the name of the product to be presented to user */
-      TranslatedText ProductImplIf::displayName() const 
-      { return TranslatedText(); }
+      Label ProductImplIf::displayName( const Locale & ) const 
+      { return Label(); }
 
     ///////////////////////////////////////////////////////////////////
 

@@ -12,6 +12,7 @@
 #ifndef ZYPP_DETAIL_PRODUCTIMPLIF_H
 #define ZYPP_DETAIL_PRODUCTIMPLIF_H
 
+#include "zypp/Locale.h"
 #include "zypp/detail/ResObjectImplIf.h"
 
 #ifndef PURE_VIRTUAL
@@ -47,7 +48,7 @@ namespace zypp
       virtual Label vendor() const PURE_VIRTUAL;
 
       /** Get the name of the product to be presented to user */
-      virtual TranslatedText displayName() const PURE_VIRTUAL;
+      virtual Label displayName( const Locale & locale_r = Locale() ) const PURE_VIRTUAL;
     };
     ///////////////////////////////////////////////////////////////////
 

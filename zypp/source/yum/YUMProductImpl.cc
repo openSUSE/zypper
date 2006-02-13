@@ -59,8 +59,8 @@ namespace zypp
       Label YUMProductImpl::vendor() const
       { return _vendor; }
 
-      TranslatedText YUMProductImpl::displayName() const
-      { return _displayname; }
+      Label YUMProductImpl::displayName(const Locale & locale_r) const
+      { return _displayname.text(locale_r); }
 
       TranslatedText YUMProductImpl::summary() const
       { return ResObjectImplIf::summary(); }

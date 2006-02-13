@@ -44,8 +44,11 @@ namespace zypp
     Label SuseTagsProductImpl::vendor() const
     { return _vendor; }
 
-    TranslatedText SuseTagsProductImpl::displayName() const
-    { return _label; }
+    Label SuseTagsProductImpl::displayName( const Locale & locale_r ) const
+    { return _label.text(locale_r); }
+
+    Source_Ref SuseTagsProductImpl::source() const
+    { return _source; }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail
