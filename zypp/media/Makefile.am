@@ -3,7 +3,8 @@
 
 SUBDIRS = proxyinfo
 
-INCLUDES = -I$(oldincludedir)/libxml2
+INCLUDES = -I$(oldincludedir)/libxml2			\
+	-DZYPP_BASE_LOGGER_LOGGROUP=\"media\"
 
 ## ##################################################
 
