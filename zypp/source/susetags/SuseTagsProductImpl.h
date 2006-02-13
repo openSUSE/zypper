@@ -13,6 +13,7 @@
 #define ZYPP_DETAIL_SUSETAGS_PRODUCTIMPL_H
 
 #include "zypp/detail/ProductImplIf.h"
+#include "zypp/Source.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -37,7 +38,8 @@ namespace zypp
 
       virtual std::string category() const;
       virtual Label vendor() const;
-      virtual TranslatedText displayName() const;
+      virtual Label displayName( const Locale & locale_r = Locale() ) const;
+      virtual Source_Ref source() const;
 
       std::string _category;
 
@@ -62,6 +64,8 @@ namespace zypp
       std::list<std::string> _flags;
       std::string _language;
       std::string _timezone;
+      
+      Source_Ref _source;
     };
     ///////////////////////////////////////////////////////////////////
 

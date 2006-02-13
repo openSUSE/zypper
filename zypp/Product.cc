@@ -50,7 +50,7 @@ namespace zypp
   Label Product::vendor() const
   { return pimpl().vendor(); }
 
-  TranslatedText Product::displayName() const
+  Label Product::displayName() const
   { return pimpl().displayName(); }
 
 
