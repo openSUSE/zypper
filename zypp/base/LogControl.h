@@ -41,17 +41,31 @@ namespace zypp
       static LogControl instance()
       { return LogControl(); }
 
-    public:
-      /** Return path to the logfile.
-       * An emty pathname for std::err.
-      */
-      const Pathname & logfile() const;
 
+      /** If you want to log the (formated) loglines by yourself,
+       * derive from this, and overload \c writeOut. */
+      struct LineWriter
+      {
+        virtual void writeOut( const std::string & /*formated_r*/ )
+        {}
+
+        virtual ~LineWriter() {}
+      };
+
+    public:
       /** Set path for the logfile.
        * An emty pathname for std::err.
        * \throw if \a logfile_r is not usable.
       */
       void logfile( const Pathname & logfile_r );
+
+      void logNothing();
+
+      void logToStdErr();
+
+      /** Assign a LineWriter.
+       * If you want to log the (formated) loglines by yourself. */
+      void setLineWriter( const shared_ptr<LogControl::LineWriter> & writer_r );
 
     public:
       /** Turn on excessive logging for the lifetime of this object.*/
