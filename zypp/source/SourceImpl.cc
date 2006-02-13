@@ -127,6 +127,8 @@ namespace zypp
 		excp.msg()
 	    );
 
+	  DBG << "ProvideFile exception caught, callback answer: " << user << endl;
+	  
 	  if( user == media::MediaChangeReport::ABORT )
 	  {
 	    ZYPP_RETHROW ( excp );

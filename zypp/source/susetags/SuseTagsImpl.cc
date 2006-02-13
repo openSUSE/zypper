@@ -23,6 +23,7 @@
 #include "zypp/source/susetags/PatternTagFileParser.h"
 
 #include "zypp/SourceFactory.h"
+#include "zypp/ZYppCallbacks.h"
 
 using std::endl;
 
@@ -105,6 +106,10 @@ namespace zypp
 
       void SuseTagsImpl::createResolvables(Source_Ref source_r)
       {
+        callback::SendReport<CreateSourceReport> report;
+	
+	report->startData( url() );
+	
 #warning We use suse instead of <DATADIR> for now
         Pathname p = provideFile(_path + "suse/setup/descr/packages");
         DBG << "Going to parse " << p << endl;
@@ -134,7 +139,7 @@ namespace zypp
 	// parse selections
 	try {
 	  p = provideFile(_path + "suse/setup/descr/selections");
-	} catch (...)
+	} catch (Exception & excpt_r)
 	{
 	    MIL << "'selections' file not found" << endl;
 
@@ -174,7 +179,7 @@ namespace zypp
 
 	try {
 	    p = provideFile(_path + "suse/setup/descr/patterns");
-	} catch (...)
+	} catch (Exception & excpt_r)
 	{
 	    MIL << "'patterns' file not found" << endl;
 	    file_found = false;
@@ -207,6 +212,8 @@ namespace zypp
 		DBG << "Parsing of " << file << " done" << endl;
 	    }
         }
+
+	report->finishData( url(), CreateSourceReport::NO_ERROR, "" );
       }
       ///////////////////////////////////////////////////////////////////
       //

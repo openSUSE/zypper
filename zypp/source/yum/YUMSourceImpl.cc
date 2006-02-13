@@ -25,6 +25,7 @@
 
 #include "zypp/parser/yum/YUMParser.h"
 #include "zypp/SourceFactory.h"
+#include "zypp/ZYppCallbacks.h"
 
 #include <fstream>
 
@@ -123,6 +124,10 @@ INT << "Storing data to cache" << endl;
        std::list<YUMRepomdData_Ptr> repo_pattern;
        std::list<YUMRepomdData_Ptr> repo_product;
        std::list<YUMRepomdData_Ptr> repo_patches;
+
+       callback::SendReport<CreateSourceReport> report;
+       
+       report->startData( url() );
 
        try {
 	// first read list of all files in the reposotory
@@ -427,6 +432,8 @@ INT << "Storing data to cache" << endl;
        {
 	ERR << "Cannot read patch metadata" << endl;
        }
+
+	report->finishData( url(), CreateSourceReport::NO_ERROR, "" );
       }
 
 	Package::Ptr YUMSourceImpl::createPackage(
