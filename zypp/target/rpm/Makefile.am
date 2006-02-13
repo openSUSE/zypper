@@ -3,6 +3,9 @@
 
 SUBDIRS = 
 
+INCLUDES = 						\
+	-DZYPP_BASE_LOGGER_LOGGROUP=\"rpm\"
+
 ## ##################################################
 
 targetrpmincludedir = $(pkgincludedir)/target/rpm
