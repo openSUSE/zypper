@@ -21,6 +21,7 @@
 #include "zypp/source/susetags/PackagesLangParser.h"
 #include "zypp/source/susetags/SelectionTagFileParser.h"
 #include "zypp/source/susetags/PatternTagFileParser.h"
+#include "zypp/source/susetags/ProductMetadataParser.h"
 
 #include "zypp/SourceFactory.h"
 #include "zypp/ZYppCallbacks.h"
@@ -110,8 +111,24 @@ namespace zypp
 	
 	report->startData( url() );
 	
+        Pathname p = provideFile(_path + "content");
+
+	SourceFactory factory;
+
+	try {
+    	    DBG << "Going to parse content file " << p << endl;
+	    
+	    Product::Ptr product = parseContentFile( p, factory.createFrom(this) );
+
+	    MIL << "Product: " << product->displayName() << endl;
+	    _store.insert( product );
+	}
+	catch (Exception & excpt_r) {
+	    ERR << "cannot parse content file" << endl;
+	}
+	
 #warning We use suse instead of <DATADIR> for now
-        Pathname p = provideFile(_path + "suse/setup/descr/packages");
+        p = provideFile(_path + "suse/setup/descr/packages");
         DBG << "Going to parse " << p << endl;
         PkgContent content( parsePackages( source_r, this, p ) );
 

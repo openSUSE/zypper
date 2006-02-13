@@ -53,7 +53,7 @@ namespace zypp
       //	METHOD NAME : Parser::parse
       //	METHOD TYPE : void
       //
-      void ProductMetadataParser::parse( const Pathname & file_r )
+      void ProductMetadataParser::parse( const Pathname & file_r, Source_Ref source_r )
       {
         std::ifstream file(file_r.asString().c_str());
 
@@ -146,6 +146,8 @@ namespace zypp
           ERR << excpt_r << endl;
           throw "Cannot create product object";
         }
+	
+	prodImpl->_source = source_r;
       }
 
       void ProductMetadataParser::parseLine( const string &key, const string &modif, const string &value, map< string, list<string> > &container)
@@ -177,10 +179,10 @@ namespace zypp
           str::split( value, std::back_inserter(container), " ");
       }
 
-      Product::Ptr parseContentFile( const Pathname & file_r )
+      Product::Ptr parseContentFile( const Pathname & file_r, Source_Ref source_r )
       {
         ProductMetadataParser p;
-        p.parse( file_r );
+        p.parse( file_r, source_r );
         return p.result;
       }
       /////////////////////////////////////////////////////////////////

@@ -36,7 +36,7 @@ namespace zypp
        * Please access the parser using this method.
        * Returns a product from a content file \a file_r
        */
-      Product::Ptr parseContentFile( const Pathname & file_r );
+      Product::Ptr parseContentFile( const Pathname & file_r, Source_Ref source_r );
   
       ///////////////////////////////////////////////////////////////////
       //
@@ -55,7 +55,7 @@ namespace zypp
          * \throw ParseException
          * \todo more doc on Ecaptions.
         */
-        void parse( const Pathname & file_r);
+        void parse( const Pathname & file_r, Source_Ref source_r);
         /* Parse a key.modifier (std::list of std::strings)
          * That means, translatable tag with multiple values
          * the default modifier will get the modifier of default (LABEL.de, LABEL as LANGUAGE.default)
