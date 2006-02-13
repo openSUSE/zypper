@@ -1,0 +1,20 @@
+>!> Uninstalling A
+>!> 1 problems found:
+>!> Problem:
+>!> B has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) A for B-1.0-1
+>!>    Solution:
+>!>       keep A
+>!>       keep [package]A-1.0-1.
+>!>    Solution:
+>!>       delete B
+>!>       delete [package]B-1.0-1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!> Taking solution: 2
+>!> For problem:     0
+>!> No problems so far
+>!> Solution #1:
+>!> remove  A-1.0-1
+>!> installs=0, upgrades=0, uninstalls=1

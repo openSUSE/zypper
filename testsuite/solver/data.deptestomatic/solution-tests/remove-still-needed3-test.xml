@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+   remove single package from system
+-->
+<test>
+<setup>
+  <system file="single-package.xml"/>
+</setup>
+<trial>
+  <uninstall package="A"/>
+  <reportproblems/>
+  <takesolution problem="0" solution="1"/>
+</trial>
+</test>
