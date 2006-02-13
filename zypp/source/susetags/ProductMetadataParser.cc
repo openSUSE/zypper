@@ -156,6 +156,14 @@ namespace zypp
           parseLine( key, value, container[modif]);
       }
 
+      void ProductMetadataParser::parseLine( const std::string &key, const std::string &lang, const std::string &value, TranslatedText &container)
+      {
+        if ( lang.size() == 0)
+          container.setText(value, Locale());   
+        else
+          container.setText(value, Locale(lang));
+      }
+
       void ProductMetadataParser::parseLine( const string &key, const string &modif, const string &value, map< string, string > &container)
       {
         if( modif.size() == 0)

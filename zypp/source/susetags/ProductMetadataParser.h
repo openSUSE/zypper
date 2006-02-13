@@ -61,6 +61,8 @@ namespace zypp
          * the default modifier will get the modifier of default (LABEL.de, LABEL as LANGUAGE.default)
         */ 
         void parseLine( const std::string &key, const std::string &modif, const std::string &value, std::map< std::string, std::list<std::string> > &container);
+
+        void parseLine( const std::string &key, const std::string &lang, const std::string &value, TranslatedText &container);
         /*
          * same as above, but the value is a single std::string, this means, translatable tags, with only 1 value
         */

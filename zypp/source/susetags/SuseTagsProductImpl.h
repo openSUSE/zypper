@@ -58,7 +58,7 @@ namespace zypp
       std::string _default_base;
       std::list<std::string> _requires;
       std::list<std::string> _languages;
-      std::map< std::string, std::string > _label;
+      TranslatedText _label;
       std::string _description_dir;
       std::string _data_dir;
       std::list<std::string> _flags;
