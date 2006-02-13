@@ -91,8 +91,19 @@ namespace zypp
   void ZYpp::finishTarget()
   { _pimpl->finishTarget(); }
 
+  ///////////////////////////////////////////////////////////////////
 
+  void ZYpp::setTextLocale( const Locale & textLocale_r )
+  { _pimpl->setTextLocale( textLocale_r ); }
 
+  Locale ZYpp::getTextLocale() const
+  { return _pimpl->getTextLocale(); }
+
+  void ZYpp::setRequestedLocales( const LocaleSet & locales_r )
+  { _pimpl->setRequestedLocales( locales_r ); }
+
+  ZYpp::LocaleSet ZYpp::getRequestedLocales() const
+  { return _pimpl->getRequestedLocales(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

@@ -76,6 +76,23 @@ namespace zypp
        */
       void finishTarget();
 
+    public:
+      /** */
+      void setTextLocale( const Locale & textLocale_r )
+      {}
+      /** */
+      Locale getTextLocale() const
+      { return Locale(); }
+
+    public:
+      typedef std::set<Locale> LocaleSet;
+      /** */
+      void setRequestedLocales( const LocaleSet & locales_r )
+      {}
+      /** */
+      LocaleSet getRequestedLocales() const
+      { return LocaleSet(); }
+
     private:
       /** */
       ResPoolManager _pool;

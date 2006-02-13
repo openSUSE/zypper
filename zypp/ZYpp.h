@@ -34,6 +34,7 @@ namespace zypp
   class ResPoolProxy;
   class SourceFeed_Ref;
   class ResStore;
+  class Locale;
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -83,6 +84,24 @@ namespace zypp
 
     /** */
     Resolver_Ptr resolver() const;
+
+  public:
+    /** Set the preferd locale for translated labels, descriptions,
+     *  etc. passed to the UI.
+     */
+    void setTextLocale( const Locale & textLocale_r );
+    /** */
+    Locale getTextLocale() const;
+
+  public:
+    typedef std::set<Locale> LocaleSet;
+    /** Set the requested locales.
+     * Languages to be supported by the system, e.g. language specific
+     * packages to be installed.
+    */
+    void setRequestedLocales( const LocaleSet & locales_r );
+    /** */
+    LocaleSet getRequestedLocales() const;
 
   protected:
     /** Dtor */
