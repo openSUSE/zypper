@@ -60,9 +60,25 @@ namespace zypp
       class HalContext
       {
       public:
-        HalContext();
+        typedef
+        zypp::RW_pointer<HalContext_Impl>::unspecified_bool_type  bool_type;
+
+        HalContext(bool autoconnect=false);
         HalContext(const HalContext &context);
         ~HalContext();
+
+        HalContext&
+        operator=(const HalContext &context);
+
+        /**
+         * Verifies if the context is initialized.
+         */
+        operator bool_type() const;
+
+        /**
+         */
+        void
+        connect();
 
         /**
          * Retrieve UDI's of all devices.
@@ -96,6 +112,9 @@ namespace zypp
         getVolumeFromUDI(const std::string &udi) const;
 
       private:
+        //friend HalMonitor;
+        HalContext(bool,bool);
+
         zypp::RW_pointer<HalContext_Impl> h_impl;
       };
 
@@ -111,8 +130,17 @@ namespace zypp
       class HalDrive
       {
       public:
+        typedef
+        zypp::RW_pointer<HalDrive_Impl>::unspecified_bool_type    bool_type;
+
+        HalDrive();
         HalDrive(const HalDrive &drive);
         ~HalDrive();
+
+        HalDrive&
+        operator=(const HalDrive &drive);
+
+        operator bool_type() const;
 
         /**
          * Retrieve UDI's of all volumes of this drive.
@@ -146,10 +174,11 @@ namespace zypp
         usesRemovableMedia() const;
 
       private:
-        zypp::RW_pointer<HalDrive_Impl> d_impl;
-
         friend class HalContext;
-        HalDrive(HalDrive_Impl *impl = NULL);
+
+        HalDrive(HalDrive_Impl *impl);
+
+        zypp::RW_pointer<HalDrive_Impl>   d_impl;
       };
 
 
@@ -164,8 +193,17 @@ namespace zypp
       class HalVolume
       {
       public:
+        typedef
+        zypp::RW_pointer<HalVolume_Impl>::unspecified_bool_type   bool_type;
+
+        HalVolume();
         HalVolume(const HalVolume &volume);
         ~HalVolume();
+
+        HalVolume&
+        operator=(const HalVolume &volume);
+
+        operator bool_type() const;
 
         /**
          * \return The Volume drive's device file name.
@@ -198,11 +236,11 @@ namespace zypp
         getMountPoint() const;
 
       private:
-        zypp::RW_pointer<HalVolume_Impl> v_impl;
-
         friend class HalContext;
         friend class HalDrive;
-        HalVolume(HalVolume_Impl *impl = NULL);
+        HalVolume(HalVolume_Impl *impl);
+
+        zypp::RW_pointer<HalVolume_Impl>  v_impl;
       };
 
 

@@ -45,7 +45,7 @@ namespace zypp
       { //////////////////////////////////////////////////////////////
 
 
-        // ----------------------------------------------------------
+        //////////////////////////////////////////////////////////////
         // STATIC
         /**
          ** hmm... currently a global one..
@@ -54,44 +54,76 @@ namespace zypp
 
 
         //////////////////////////////////////////////////////////////
+        /**
+         * Internal hal (dbus ) error helper class.
+         */
+        class HalError
+        {
+        public:
+          DBusError error;
+
+          HalError()  { dbus_error_init(&error); }
+          ~HalError() { dbus_error_free(&error); }
+
+          inline std::string toString() const
+          {
+            if( error.name != NULL && error.message != NULL) {
+              return std::string(error.name) +
+                     std::string(": ")       +
+                     std::string(error.message);
+            } else {
+              return std::string();
+            }
+          }
+        };
+
+
+        // -----------------------------------------------------------
+        inline void
+        VERIFY_CONTEXT(const zypp::RW_pointer<HalContext_Impl> &h)
+        {
+          if( !h)
+          {
+            ZYPP_THROW(HalException("HalContext not connected"));
+          }
+        }
+
+        // -----------------------------------------------------------
+        inline void
+        VERIFY_DRIVE(const zypp::RW_pointer<HalDrive_Impl> &d)
+        {
+          if( !d)
+          {
+            ZYPP_THROW(HalException("HalDrive not initialized"));
+          }
+        }
+
+        // -----------------------------------------------------------
+        inline void
+        VERIFY_VOLUME(const zypp::RW_pointer<HalVolume_Impl> &v)
+        {
+          if( !v)
+          {
+            ZYPP_THROW(HalException("HalVolume not initialized"));
+          }
+        }
+
+        //////////////////////////////////////////////////////////////
       } // anonymous
       ////////////////////////////////////////////////////////////////
 
 
       ////////////////////////////////////////////////////////////////
-      /**
-       * Internal hal (dbus ) error helper class.
-       */
-      class HalError
-      {
-      public:
-        DBusError error;
-
-        HalError()  { dbus_error_init(&error); }
-        ~HalError() { dbus_error_free(&error); }
-
-        inline std::string toString() const
-        {
-          if( error.name != NULL && error.message != NULL) {
-            return std::string(error.name) +
-                   std::string(": ")       +
-                   std::string(error.message);
-          } else {
-            return std::string();
-          }
-        }
-      };
-
-      ////////////////////////////////////////////////////////////////
       class HalContext_Impl
       {
       public:
-        HalContext_Impl();
+        HalContext_Impl(bool monitorable = false);
         ~HalContext_Impl();
 
         DBusConnection *conn;
         LibHalContext  *hctx;
       };
+
 
       ////////////////////////////////////////////////////////////////
       class HalDrive_Impl
@@ -118,6 +150,7 @@ namespace zypp
         }
       };
 
+
       ////////////////////////////////////////////////////////////////
       class HalVolume_Impl
       {
@@ -138,7 +171,7 @@ namespace zypp
 
 
       ////////////////////////////////////////////////////////////////
-      HalContext_Impl::HalContext_Impl()
+      HalContext_Impl::HalContext_Impl(bool monitorable)
         : conn(NULL)
         , hctx(NULL)
       {
@@ -148,6 +181,9 @@ namespace zypp
         if( !conn) {
           ZYPP_THROW(HalException(err.toString()));
         }
+
+        if( monitorable)
+          dbus_connection_setup_with_g_main(conn, NULL);
 
         hctx = libhal_ctx_new();
         if( !hctx)
@@ -204,12 +240,15 @@ namespace zypp
         }
       }
 
-      // -------------------------------------------------------------
-      HalContext::HalContext()
+
+      ////////////////////////////////////////////////////////////////
+      HalContext::HalContext(bool autoconnect)
         : h_impl( NULL)
       {
         MutexLock lock(g_Mutex);
-        h_impl.reset( new HalContext_Impl());
+
+        if( autoconnect)
+          h_impl.reset( new HalContext_Impl());
       }
 
       // -------------------------------------------------------------
@@ -217,15 +256,56 @@ namespace zypp
         : h_impl( NULL)
       {
         MutexLock lock(g_Mutex);
-        //h_impl = context.h_impl;
+
         zypp::RW_pointer<HalContext_Impl>(context.h_impl).swap(h_impl);
+      }
+
+      // -------------------------------------------------------------
+      HalContext::HalContext(bool autoconnect, bool monitorable)
+        : h_impl( NULL)
+      {
+        MutexLock lock(g_Mutex);
+
+        if( autoconnect)
+          h_impl.reset( new HalContext_Impl(monitorable));
       }
 
       // -------------------------------------------------------------
       HalContext::~HalContext()
       {
         MutexLock  lock(g_Mutex);
+
         h_impl.reset();
+      }
+
+      // --------------------------------------------------------------
+      HalContext &
+      HalContext::operator=(const HalContext &context)
+      {
+        MutexLock  lock(g_Mutex);
+
+        if( this == &context)
+          return *this;
+
+        zypp::RW_pointer<HalContext_Impl>(context.h_impl).swap(h_impl);
+      }
+
+      // --------------------------------------------------------------
+      HalContext::operator HalContext::bool_type() const
+      {
+        MutexLock  lock(g_Mutex);
+
+        return h_impl;
+      }
+
+      // --------------------------------------------------------------
+      void
+      HalContext::connect()
+      {
+        MutexLock lock(g_Mutex);
+
+        if( !h_impl)
+          h_impl.reset( new HalContext_Impl());
       }
 
       // --------------------------------------------------------------
@@ -233,6 +313,8 @@ namespace zypp
       HalContext::getAllDevices() const
       {
         MutexLock  lock(g_Mutex);
+        VERIFY_CONTEXT(h_impl);
+
         HalError   err;
         char     **names;
         int        count = 0;
@@ -253,6 +335,8 @@ namespace zypp
       HalContext::findDevicesByCapability(const std::string &capability) const
       {
         MutexLock  lock(g_Mutex);
+        VERIFY_CONTEXT(h_impl);
+
         HalError   err;
         char     **names;
         int        count = 0;
@@ -275,6 +359,8 @@ namespace zypp
       HalContext::getDriveFromUDI(const std::string &udi) const
       {
         MutexLock  lock(g_Mutex);
+        VERIFY_CONTEXT(h_impl);
+
         LibHalDrive *drv = libhal_drive_from_udi(h_impl->hctx, udi.c_str());
         if( drv != NULL)
           return HalDrive(new HalDrive_Impl( h_impl, drv));
@@ -287,22 +373,37 @@ namespace zypp
       HalContext::getVolumeFromUDI(const std::string &udi) const
       {
         MutexLock  lock(g_Mutex);
-        return HalVolume( new HalVolume_Impl(
-          libhal_volume_from_udi(h_impl->hctx, udi.c_str())
-        ));
+        VERIFY_CONTEXT(h_impl);
+
+        LibHalVolume *vol = libhal_volume_from_udi(h_impl->hctx, udi.c_str());
+        if( vol)
+          return HalVolume( new HalVolume_Impl(vol));
+        else
+          return HalVolume();
       }
 
 
       ////////////////////////////////////////////////////////////////
+      HalDrive::HalDrive()
+        : d_impl( NULL)
+      {
+      }
+
+      // --------------------------------------------------------------
       HalDrive::HalDrive(HalDrive_Impl *impl)
-        : d_impl( impl ? impl : new HalDrive_Impl())
-      {}
+        : d_impl( NULL)
+      {
+        MutexLock  lock(g_Mutex);
+
+        d_impl.reset(impl);
+      }
 
       // --------------------------------------------------------------
       HalDrive::HalDrive(const HalDrive &drive)
         : d_impl( NULL)
       {
         MutexLock  lock(g_Mutex);
+
         zypp::RW_pointer<HalDrive_Impl>(drive.d_impl).swap(d_impl);
       }
 
@@ -310,7 +411,28 @@ namespace zypp
       HalDrive::~HalDrive()
       {
         MutexLock  lock(g_Mutex);
+
         d_impl.reset();
+      }
+
+      // --------------------------------------------------------------
+      HalDrive &
+      HalDrive::operator=(const HalDrive &drive)
+      {
+        MutexLock  lock(g_Mutex);
+
+        if( this == &drive)
+          return *this;
+
+        zypp::RW_pointer<HalDrive_Impl>(drive.d_impl).swap(d_impl);
+      }
+
+      // --------------------------------------------------------------
+      HalDrive::operator HalDrive::bool_type() const
+      {
+        MutexLock  lock(g_Mutex);
+
+        return d_impl;
       }
 
       // --------------------------------------------------------------
@@ -318,7 +440,8 @@ namespace zypp
       HalDrive::findAllVolumes() const
       {
         MutexLock  lock(g_Mutex);
-        HalError   err;
+        VERIFY_DRIVE(d_impl);
+
         char     **names;
         int        count = 0;
 
@@ -337,6 +460,8 @@ namespace zypp
       HalDrive::usesRemovableMedia() const
       {
         MutexLock  lock(g_Mutex);
+        VERIFY_DRIVE(d_impl);
+
         return libhal_drive_uses_removable_media(d_impl->drv);
       }
 
@@ -345,6 +470,8 @@ namespace zypp
       HalDrive::getDeviceFile() const
       {
         MutexLock  lock(g_Mutex);
+        VERIFY_DRIVE(d_impl);
+
         return std::string(libhal_drive_get_device_file(d_impl->drv));
       }
 
@@ -353,6 +480,8 @@ namespace zypp
       HalDrive::getDeviceMajor() const
       {
         MutexLock  lock(g_Mutex);
+        VERIFY_DRIVE(d_impl);
+
         return libhal_drive_get_device_major(d_impl->drv);
       }
 
@@ -361,20 +490,31 @@ namespace zypp
       HalDrive::getDeviceMinor() const
       {
         MutexLock  lock(g_Mutex);
+        VERIFY_DRIVE(d_impl);
+
         return libhal_drive_get_device_minor(d_impl->drv);
       }
 
 
       ////////////////////////////////////////////////////////////////
-      HalVolume::HalVolume(HalVolume_Impl *impl)
-        : v_impl( impl ? impl : new HalVolume_Impl())
+      HalVolume::HalVolume()
+        : v_impl( NULL)
       {}
+
+      HalVolume::HalVolume(HalVolume_Impl *impl)
+        : v_impl( NULL)
+      {
+        MutexLock  lock(g_Mutex);
+
+        v_impl.reset(impl);
+      }
 
       // --------------------------------------------------------------
       HalVolume::HalVolume(const HalVolume &volume)
         : v_impl( NULL)
       {
         MutexLock  lock(g_Mutex);
+
         zypp::RW_pointer<HalVolume_Impl>(volume.v_impl).swap(v_impl);
       }
 
@@ -382,7 +522,28 @@ namespace zypp
       HalVolume::~HalVolume()
       {
         MutexLock  lock(g_Mutex);
+
         v_impl.reset();
+      }
+
+      // --------------------------------------------------------------
+      HalVolume &
+      HalVolume::operator=(const HalVolume &volume)
+      {
+        MutexLock  lock(g_Mutex);
+
+        if( this == &volume)
+          return *this;
+
+        zypp::RW_pointer<HalVolume_Impl>(volume.v_impl).swap(v_impl);
+      }
+
+      // --------------------------------------------------------------
+      HalVolume::operator HalVolume::bool_type() const
+      {
+        MutexLock  lock(g_Mutex);
+
+        return v_impl;
       }
 
       // --------------------------------------------------------------
@@ -390,6 +551,8 @@ namespace zypp
       HalVolume::getDeviceFile() const
       {
         MutexLock  lock(g_Mutex);
+        VERIFY_VOLUME(v_impl);
+
         return std::string(libhal_volume_get_device_file(v_impl->vol));
       }
 
@@ -398,6 +561,8 @@ namespace zypp
       HalVolume::getDeviceMajor() const
       {
         MutexLock  lock(g_Mutex);
+        VERIFY_VOLUME(v_impl);
+
         return libhal_volume_get_device_major(v_impl->vol);
       }
 
@@ -406,6 +571,8 @@ namespace zypp
       HalVolume::getDeviceMinor() const
       {
         MutexLock  lock(g_Mutex);
+        VERIFY_VOLUME(v_impl);
+
         return libhal_volume_get_device_minor(v_impl->vol);
       }
 
@@ -414,6 +581,8 @@ namespace zypp
       HalVolume::getFSType() const
       {
         MutexLock  lock(g_Mutex);
+        VERIFY_VOLUME(v_impl);
+
         return std::string( libhal_volume_get_fstype(v_impl->vol));
       }
 
@@ -421,6 +590,8 @@ namespace zypp
       std::string
       HalVolume::getMountPoint() const
       {
+        VERIFY_VOLUME(v_impl);
+
         return std::string( libhal_volume_get_mount_point(v_impl->vol));
       }
 
