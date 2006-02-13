@@ -3,6 +3,9 @@
 
 SUBDIRS = xml
 
+INCLUDES = 						\
+	-DZYPP_BASE_LOGGER_LOGGROUP=\"store\"
+
 ## ##################################################
 
 targetstoreincludedir = $(pkgincludedir)/target/store
