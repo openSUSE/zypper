@@ -20,7 +20,8 @@
 #include "zypp/parser/tagfile/ParseException.h"
 
 #include "zypp/Pathname.h"
-
+#include "zypp/Product.h"
+#include "zypp/source/susetags/SuseTagsProductImpl.h"
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -31,6 +32,12 @@ namespace zypp
     namespace susetags
     { /////////////////////////////////////////////////////////////////
 
+      /**
+       * Please access the parser using this method.
+       * Returns a product from a content file \a file_r
+       */
+      Product::Ptr parseContentFile( const Pathname & file_r );
+  
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : ProductMetadataParser
@@ -38,30 +45,9 @@ namespace zypp
       /** Tagfile parser. */
       struct ProductMetadataParser
       {
-        struct ProductEntry {
-          std::string name;
-          std::string version;
-          std::string dist;
-          std::string dist_version;
-          std::string base_product;
-          std::string base_version;
-          std::string you_type;
-          std::string you_path;
-          std::string you_url;
-          std::string vendor;
-          std::string release_notes_url;
-          std::map< std::string, std::list<std::string> > arch;
-          std::string default_base;
-          std::list<std::string> requires;
-          std::list<std::string> languages;
-          std::map< std::string, std::string > label;
-          std::string description_dir;
-          std::string data_dir;
-          std::list<std::string> flags;
-          std::string language;
-          std::string timezone;
-        };
-
+        Product::Ptr result;
+        shared_ptr<SuseTagsProductImpl> prodImpl;
+        ProductMetadataParser();
         virtual ~ProductMetadataParser()
         {}
 
@@ -69,7 +55,7 @@ namespace zypp
          * \throw ParseException
          * \todo more doc on Ecaptions.
         */
-        void parse( const Pathname & file_r, ProductEntry &entry_r );
+        void parse( const Pathname & file_r);
         /* Parse a key.modifier (std::list of std::strings)
          * That means, translatable tag with multiple values
          * the default modifier will get the modifier of default (LABEL.de, LABEL as LANGUAGE.default)

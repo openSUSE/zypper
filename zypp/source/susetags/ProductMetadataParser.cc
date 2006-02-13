@@ -21,8 +21,14 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/String.h"
 
+#include "zypp/CapFactory.h"
+
 #include "zypp/source/susetags/ProductMetadataParser.h"
+#include "zypp/source/susetags/SuseTagsProductImpl.h"
 #include <boost/regex.hpp>
+
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "ProductMetadataParser"
 
 using namespace std;
 using namespace boost;
@@ -38,19 +44,22 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace susetags
     { /////////////////////////////////////////////////////////////////
-
+      ProductMetadataParser::ProductMetadataParser()
+      {
+        prodImpl = shared_ptr<SuseTagsProductImpl>(new SuseTagsProductImpl);
+      }
       ///////////////////////////////////////////////////////////////////
       //
       //	METHOD NAME : Parser::parse
       //	METHOD TYPE : void
       //
-      void ProductMetadataParser::parse( const Pathname & file_r, ProductEntry &entry_r )
+      void ProductMetadataParser::parse( const Pathname & file_r )
       {
         std::ifstream file(file_r.asString().c_str());
 
-	if (!file) {
-	    ZYPP_THROW (Exception("Can't read product file :" + file_r.asString()));
-	}
+        if (!file) {
+            ZYPP_THROW (Exception("Can't read product file :" + file_r.asString()));
+        }
 
         std::string buffer;
         while(file && !file.eof())
@@ -67,47 +76,47 @@ namespace zypp
             std::string value = what[5];
             std::string modifier = what[4];
             if(key == "PRODUCT")
-              entry_r.name = value;
+              prodImpl->_name = value;
             else if(key == "VERSION")
-              entry_r.version = value;
+              prodImpl->_version = value;
             else if(key == "DISTPRODUCT")
-              entry_r.dist = value;
+              prodImpl->_dist = value;
             else if(key == "DISTVERSION")
-              entry_r.dist_version = value;
+              prodImpl->_dist_version = value;
              else if(key == "BASEPRODUCT")
-              entry_r.base_product = value;
+              prodImpl->_base_product = value;
             else if(key == "BASEVERSION")
-              entry_r.base_version = value;
+              prodImpl->_base_version = value;
             else if(key == "YOUTYPE")
-              entry_r.you_type = value;
+              prodImpl->_you_type = value;
             else if(key == "YOUPATH")
-              entry_r.you_path = value;
+              prodImpl->_you_path = value;
             else if(key == "YOUURL")
-              entry_r.you_url = value;
+              prodImpl->_you_url = value;
             else if(key == "VENDOR")
-              entry_r.vendor = value;
+              prodImpl->_vendor = value;
             else if(key == "RELNOTESURL")
-              entry_r.release_notes_url = value;
+              prodImpl->_release_notes_url = value;
             else if(key == "ARCH")
-              parseLine( key, modifier, value, entry_r.arch);
+              parseLine( key, modifier, value, prodImpl->_arch);
             else if(key == "DEFAULTBASE")
-              entry_r.default_base = value;
+              prodImpl->_default_base = value;
             else if(key == "REQUIRES")
-              parseLine( key, value, entry_r.requires);
+              parseLine( key, value, prodImpl->_requires);
             else if(key == "LINGUAS")
-              parseLine( key, value, entry_r.languages);
+              parseLine( key, value, prodImpl->_languages);
             else if(key == "LABEL")
-              parseLine( key, modifier, value, entry_r.label);
+              parseLine( key, modifier, value, prodImpl->_label);
             else if(key == "DESCRDIR")
-              entry_r.description_dir = value;
+              prodImpl->_description_dir = value;
             else if(key == "DATADIR")
-              entry_r.data_dir = value;
+              prodImpl->_data_dir = value;
             else if(key == "FLAGS")
-              parseLine( key, value, entry_r.flags);
+              parseLine( key, value, prodImpl->_flags);
             else if(key == "LANGUAGE")
-              entry_r.language = value;
+              prodImpl->_language = value;
             else if(key == "TIMEZONE")
-              entry_r.timezone = value;
+              prodImpl->_timezone = value;
             else
               DBG << "parse error" << std::endl;
           }
@@ -115,6 +124,27 @@ namespace zypp
           {
             DBG << "** No Match found:  " << buffer << std::endl;
           }
+        } // end while
+        // finished parsing, store result
+        // Collect basic Resolvable data
+        CapFactory _f;
+        Dependencies deps;
+        try
+        {
+          // it seems the only dependencies of a Product are required products
+          for (std::list<std::string>::const_iterator it = prodImpl->_requires.begin(); it != prodImpl->_requires.end(); it++)
+          {
+            Capability _cap = _f.parse( ResTraits<Package>::kind, *it );
+            deps[Dep::REQUIRES].insert(_cap);
+          }
+
+          NVRAD dataCollect( prodImpl->_name, Edition( prodImpl->_version ), Arch_noarch, deps );
+          result = detail::makeResolvableFromImpl( dataCollect, prodImpl);
+        }
+        catch (const Exception & excpt_r)
+        {
+          ERR << excpt_r << endl;
+          throw "Cannot create product object";
         }
       }
 
@@ -139,12 +169,17 @@ namespace zypp
           str::split( value, std::back_inserter(container), " ");
       }
 
-
+      Product::Ptr parseContentFile( const Pathname & file_r )
+      {
+        ProductMetadataParser p;
+        p.parse( file_r );
+        return p.result;
+      }
       /////////////////////////////////////////////////////////////////
-    } // namespace tagfile
+    } // namespace susetags
     ///////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////
-  } // namespace parser
+  } // namespace source
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
