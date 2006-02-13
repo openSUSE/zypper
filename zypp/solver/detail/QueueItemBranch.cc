@@ -131,7 +131,7 @@ QueueItemBranch::contains (QueueItem_Ptr possible_subbranch)
 bool
 QueueItemBranch::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
-    _DEBUG("QueueItemBranch::process(" << *this << ")");
+    _XDEBUG("QueueItemBranch::process(" << *this << ")");
 
     QueueItemList live_branches;
     unsigned int branch_count;

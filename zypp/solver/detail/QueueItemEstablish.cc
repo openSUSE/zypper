@@ -96,7 +96,7 @@ QueueItemEstablish::isSatisfied (ResolverContext_Ptr context) const
 bool
 QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
-    _DEBUG("QueueItemEstablish::process(" << *this << ")");
+    _XDEBUG("QueueItemEstablish::process(" << *this << ")");
 
     CapSet freshens = _item->dep(Dep::FRESHENS);
 

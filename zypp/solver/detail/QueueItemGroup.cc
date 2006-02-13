@@ -65,7 +65,7 @@ QueueItemGroup::~QueueItemGroup()
 bool
 QueueItemGroup::process (ResolverContext_Ptr context, QueueItemList & new_items)
 {
-    DBG << "QueueItemGroup::process" << endl;
+    _DEBUG( "QueueItemGroup::process" );
 
     bool did_something = false;
 

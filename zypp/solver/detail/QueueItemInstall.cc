@@ -164,7 +164,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
     ResStatus status = context->getStatus(_item);
 
-    _DEBUG( "QueueItemInstall::process(" << *this << "):" << status);
+    _XDEBUG( "QueueItemInstall::process(" << *this << "):" << status);
 
     /* If we are trying to upgrade item A with item B and they both have the
 	same version number, do nothing.  This shouldn't happen in general with

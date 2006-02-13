@@ -311,7 +311,7 @@ struct ConflictProcess : public resfilter::OnCapMatchCallbackFunctor
 bool
 QueueItemConflict::process (ResolverContext_Ptr context, QueueItemList & new_items)
 {
-    _DEBUG("QueueItemConflict::process(" << *this << ")");
+    _XDEBUG("QueueItemConflict::process(" << *this << ")");
 
     // checking for ignoring dependencies
     IgnoreMap ignoreMap = context->getIgnoreConflicts();    

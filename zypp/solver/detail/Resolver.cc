@@ -291,7 +291,7 @@ struct VerifySystem : public resfilter::PoolItemFilterFunctor
 bool
 Resolver::verifySystem (void)
 {
-    DBG <<  "Resolver::verifySystem()" << endl;
+    _DEBUG( "Resolver::verifySystem()" );
 
     VerifySystem info (*this);
 
@@ -367,7 +367,7 @@ struct EstablishState : public resfilter::OnCapMatchCallbackFunctor
 void
 Resolver::establishState (ResolverContext_Ptr context)
 {
-    DBG << "Resolver::establishState ()" << endl;
+    _DEBUG( "Resolver::establishState ()" );
     typedef list<Resolvable::Kind> KindList; 
     static KindList ordered;
     if (ordered.empty()) {
@@ -538,7 +538,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	initial_queue->addExtraConflict (*iter);
     }
 
-    DBG << "Initial Queue: [" << *initial_queue << "]" << endl;
+    _DEBUG( "Initial Queue: [" << *initial_queue << "]" );
 
     if (initial_queue->isEmpty()) {
 	INT << "Empty Queue, nothing to resolve" << endl;
@@ -554,11 +554,11 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
     while (!_pending_queues.empty()) {
 
-	DBG << "Pend " << (long) _pending_queues.size()
+	_DEBUG( "Pend " << (long) _pending_queues.size()
 			      << " / Cmpl " << (long) _complete_queues.size()
 			      << " / Prun " << (long) _pruned_queues.size()
 			      << " / Defr " << (long) _deferred_queues.size()
-			      << " / Invl " << (long) _invalid_queues.size() << endl;
+			      << " / Invl " << (long) _invalid_queues.size() );
 
 	      if (_timeout_seconds > 0) {
 		    time (&t_now);
@@ -624,11 +624,11 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	    _pending_queues.push_back(_deferred_queues.front());
 	}
     }
-    DBG << "Pend " << (long) _pending_queues.size()
+    _DEBUG("Pend " << (long) _pending_queues.size()
 		   << " / Cmpl " << (long) _complete_queues.size()
 		   << " / Prun " << (long) _pruned_queues.size()
 		   << " / Defr " << (long) _deferred_queues.size()
-		   << " / Invl " << (long) _invalid_queues.size() << endl;
+		   << " / Invl " << (long) _invalid_queues.size() );
 
     return _best_context && _best_context->isValid();
 }
