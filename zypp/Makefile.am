@@ -85,6 +85,7 @@ lib_LTLIBRARIES =	lib@PACKAGE@.la
 ## ##################################################
 
 lib@PACKAGE@_la_SOURCES = \
+	LanguageCode.cc	\
 	Arch.cc		\
 	ByteCount.cc	\
 	Capability.cc	\
@@ -96,7 +97,6 @@ lib@PACKAGE@_la_SOURCES = \
 	Dep.cc		\
 	Dependencies.cc	\
 	Edition.cc	\
-	LanguageCode.cc	\
 	Locale.cc	\
 	NVR.cc		\
 	NVRA.cc		\

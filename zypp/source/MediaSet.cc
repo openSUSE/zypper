@@ -79,6 +79,9 @@ namespace zypp
       std::string scheme = url_r.getScheme();
       if (scheme == "cd" || scheme == "dvd")
 	return url_r;
+
+      DBG << "Rewriting url " << url_r << endl;
+
       std::string pathname = url_r.getPathName();
       boost::regex e("^(.*)[0-9]+$");
       boost::smatch what;
@@ -88,6 +91,10 @@ namespace zypp
 	pathname = base + str::numstring(medianr);
 	Url url = url_r;
 	url.setPathName (pathname);
+
+        DBG << "Url rewrite result: " << url << endl;
+
+	return url;
       }
       return url_r;
     }
