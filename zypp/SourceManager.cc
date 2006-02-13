@@ -151,7 +151,8 @@ namespace zypp
     for( std::list<storage::PersistentStorage::SourceData>::iterator it = new_sources.begin();
 	it != new_sources.end(); ++it)
     {
-	unsigned id = addSource(it->url);
+	MIL << "Restoring source: " << it->url << it->product_dir << " with alias " << it->alias << endl;
+	unsigned id = addSource(it->url, it->product_dir, it->alias);
 	// FIXME: enable, autorefresh
     }
   }

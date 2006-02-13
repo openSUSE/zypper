@@ -367,6 +367,7 @@ std::string toXML( const PersistentStorage::SourceData &obj )
   out << "  <product-dir>" << obj.product_dir << "</product-dir>" << std::endl;
   out << "  <type>" << obj.type << "</type>" << std::endl;
    out << "  <url>" << obj.url << "</url>" << std::endl;
+   out << "  <alias>" << obj.alias << "</alias>" << std::endl;
   out << "</source-cache>" << std::endl;
   return out.str();
 }
