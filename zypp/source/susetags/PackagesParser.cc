@@ -33,6 +33,57 @@ namespace zypp
 
       using namespace parser::tagfile;
 
+
+      struct PackageDiskUsageParser : public parser::tagfile::TagFileParser
+      {
+        PkgDiskUsage result;
+        NVRAD _current_nvrad;
+        bool _pkg_pending;
+
+        virtual void beginParse()
+        {
+          _pkg_pending = false;
+        }          
+
+        /* Consume SingleTag data. */
+        virtual void consume( const SingleTag & stag_r )
+        {
+          if ( stag_r.name == "Pkg" )
+          {
+            std::vector<std::string> words;
+            str::split( stag_r.value, std::back_inserter(words) );
+
+            if ( str::split( stag_r.value, std::back_inserter(words) ) != 4 )
+              ZYPP_THROW( ParseException( "Pkg" ) );
+
+            _pkg_pending = true;
+            _current_nvrad = NVRAD( words[0], Edition(words[1],words[2]), Arch(words[3]) );
+          }
+          else
+          {
+            //ZYPP_THROW( ParseException( "Loc" ) );
+            ERR << "warning found unexpected tag " << stag_r.name << std::endl;
+          }
+        }
+
+        /* Consume MulitTag data. */
+        virtual void consume( const MultiTag & mtag_r )
+        {
+          if ( ! _pkg_pending )
+            return;
+
+          if ( mtag_r.name == "Dir" )
+          {
+            //collectDeps( mtag_r.values, _nvrad[Dep::PROVIDES] );
+          }
+        }
+
+        virtual void endParse()
+        {}
+
+      };
+
+     
       struct PackagesParser : public parser::tagfile::TagFileParser
       {
         PkgContent _result;

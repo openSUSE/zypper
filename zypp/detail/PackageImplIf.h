@@ -20,6 +20,7 @@
 #include "zypp/Changelog.h"
 #include "zypp/PatchRpm.h"
 #include "zypp/DeltaRpm.h"
+#include "zypp/DiskUsage.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -100,6 +101,8 @@ namespace zypp
       virtual ByteCount sourcesize() const PURE_VIRTUAL;
       /** */
       virtual ByteCount archivesize() const PURE_VIRTUAL;
+      /** */
+      virtual DiskUsage diskusage() const PURE_VIRTUAL;
       /** */
       virtual std::list<std::string> authors() const PURE_VIRTUAL;
       /** */

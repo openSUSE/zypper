@@ -80,6 +80,9 @@ namespace zypp
       ByteCount PackageImplIf::archivesize() const
       { return ByteCount(); }
 
+      DiskUsage PackageImplIf::diskusage() const
+      { return DiskUsage(); }      
+
       std::list<std::string> PackageImplIf::authors() const
       { return std::list<std::string>(); }
 

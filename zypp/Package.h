@@ -77,6 +77,10 @@ namespace zypp
     std::list<std::string> authors() const;
     /** */
     std::list<std::string> filenames() const;
+
+    /** Disk usage per directory */
+    DiskUsage diskusage() const;
+    
     /** */
     License licenseToConfirm() const;
     /** */

@@ -18,6 +18,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Pathname.h"
 #include "zypp/Package.h"
+#include "zypp/DiskUsage.h"
 #include "zypp/NVRAD.h"
 #include "zypp/source/susetags/SuseTagsImpl.h"
 #include "zypp/source/susetags/SuseTagsPackageImpl.h"
@@ -34,6 +35,7 @@ namespace zypp
 
       typedef shared_ptr<SuseTagsPackageImpl> PkgImplPtr;
       typedef std::map<NVRAD, PkgImplPtr> PkgContent;
+      typedef std::map<NVRAD, DiskUsage> PkgDiskUsage;
 
       /** \deprecated Just temporary.
        * \throws ParseException and others.

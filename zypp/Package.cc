@@ -113,6 +113,9 @@ namespace zypp
   ByteCount Package::archivesize() const
   { return pimpl().archivesize(); }
 
+  DiskUsage Package::diskusage() const
+  { return pimpl().diskusage(); }
+
   /** */
   std::list<std::string> Package::authors() const
   { return pimpl().authors(); }
