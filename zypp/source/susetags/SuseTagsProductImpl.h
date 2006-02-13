@@ -37,11 +37,9 @@ namespace zypp
 
       virtual std::string category() const;
       virtual Label vendor() const;
-      virtual Label displayName() const;
+      virtual TranslatedText displayName() const;
 
-      //std::string _vendor;
       std::string _category;
-      std::string _displayName;
 
       std::string _name;
       std::string _version;

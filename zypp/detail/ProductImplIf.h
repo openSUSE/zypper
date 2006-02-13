@@ -47,7 +47,7 @@ namespace zypp
       virtual Label vendor() const PURE_VIRTUAL;
 
       /** Get the name of the product to be presented to user */
-      virtual Label displayName() const PURE_VIRTUAL;
+      virtual TranslatedText displayName() const PURE_VIRTUAL;
     };
     ///////////////////////////////////////////////////////////////////
 

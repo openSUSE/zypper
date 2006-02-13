@@ -44,7 +44,7 @@ namespace zypp
     Label vendor() const;
 
     /** Get the name of the product to be presented to user */
-    Label displayName() const;
+    TranslatedText displayName() const;
 
   protected:
     /** Ctor */
