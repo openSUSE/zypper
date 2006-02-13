@@ -23,16 +23,42 @@ namespace zypp
   namespace zypp_detail
   { /////////////////////////////////////////////////////////////////
 
+    inline Locale defaultTextLocale()
+    {
+      Locale ret( "en" );
+      char * envlist[] = { "LC_ALL", "LC_CTYPE", "LANG", NULL };
+      for ( char ** envvar = envlist; *envvar; ++envvar )
+        {
+          char * envlang = getenv( *envvar );
+          if ( envlang )
+            {
+              std::string envstr( envlang );
+              if ( envstr != "POSIX" && envstr != "C" )
+                {
+                  Locale lang( envlang );
+                  if ( lang != Locale::noCode )
+                    {
+                      ret = lang;
+                      break;
+                    }
+                }
+            }
+        }
+      return ret;
+    }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : ZYppImpl::ZYppImpl
     //	METHOD TYPE : Constructor
     //
     ZYppImpl::ZYppImpl()
-    : _pool()
+    : _textLocale( defaultTextLocale() )
+    , _pool()
     , _sourceFeed( _pool )
     , _resolver( new Resolver(_pool.accessor()) )
     {
+      MIL << "defaultTextLocale: '" << _textLocale << "'" << endl;
     }
 
     ///////////////////////////////////////////////////////////////////

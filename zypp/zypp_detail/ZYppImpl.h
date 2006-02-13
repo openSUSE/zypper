@@ -18,6 +18,7 @@
 #include "zypp/SourceFeed.h"
 #include "zypp/Target.h"
 #include "zypp/Resolver.h"
+#include "zypp/Locale.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -77,12 +78,14 @@ namespace zypp
       void finishTarget();
 
     public:
-      /** */
+      /** \todo Signal locale change. */
       void setTextLocale( const Locale & textLocale_r )
-      {}
+      { _textLocale = textLocale_r; }
       /** */
       Locale getTextLocale() const
-      { return Locale(); }
+      { return _textLocale; }
+    private:
+      Locale _textLocale;
 
     public:
       typedef std::set<Locale> LocaleSet;
