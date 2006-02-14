@@ -1,0 +1,24 @@
+>!> Installing liboaf0 from channel ximian
+>!> No problems so far
+>!> Solution #1:
+>!> install oaf-0.6.9-1.ximian.1[ximian]
+>!> remove  libgnome-vfs0-devel-1.0.2-2mdk
+>!> remove  liboaf0-devel-0.6.6-3mdk
+>!> upgrade liboaf0-0.6.6-3mdk => liboaf0-0.6.9-1.ximian.1[ximian]
+>!> installs=1, upgrades=1, uninstalls=2
+>!> Solution #2:
+>!> install gnome-mime-data-1.0.5-1.ximian.1[ximian]
+>!> install oaf-0.6.9-1.ximian.1[ximian]
+>!> remove  liboaf0-devel-0.6.6-3mdk
+>!> upgrade libgnome-vfs0-1.0.2-2mdk => libgnome-vfs0-1.0.4-2.ximian.4[ximian]
+>!> upgrade libgnome-vfs0-devel-1.0.2-2mdk => libgnome-vfs0-devel-1.0.4-2.ximian.4[ximian]
+>!> upgrade liboaf0-0.6.6-3mdk => liboaf0-0.6.9-1.ximian.1[ximian]
+>!> installs=2, upgrades=3, uninstalls=1
+>!> Solution #3:
+>!> install gnome-mime-data-1.0.5-1.ximian.1[ximian]
+>!> install oaf-0.6.9-1.ximian.1[ximian]
+>!> remove  liboaf0-devel-0.6.6-3mdk
+>!> upgrade gnome-vfs-1.0.2-2mdk => gnome-vfs-1.0.4-2.ximian.4[ximian]
+>!> upgrade libgnome-vfs0-devel-1.0.2-2mdk => libgnome-vfs0-devel-1.0.4-2.ximian.4[ximian]
+>!> upgrade liboaf0-0.6.6-3mdk => liboaf0-0.6.9-1.ximian.1[ximian]
+>!> installs=2, upgrades=3, uninstalls=1

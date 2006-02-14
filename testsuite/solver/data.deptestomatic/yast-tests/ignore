@@ -8,3 +8,6 @@ exercise-05reallive-4-test.xml
 exercise-alternatives-1-test.xml
 exercise-04obsoletes-03-test.xml
 exercise-alternatives-3-force-test.xml
+#s390
+exercise-05reallive-2-test.xml
+exercise-bug21829-5-test.xml

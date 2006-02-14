@@ -1,11 +1,18 @@
-exercise-46-test.xml
-exercise-42-test.xml
+# has to be checked
 exercise-31-test.xml
+# we are solving over pool. So "adding" installing packages
 exercise-18-test.xml
+# we are solving over pool. So "adding" installing packages
 exercise-48-test.xml
+#installing from channel redhat
 exercise-45-test.xml
+# installing gnome-vfs from channel ximian but suggest gnome2 too
 exercise-34-test.xml
+#has to be checked. It seems that the solution is not correct
 exercise-30-test.xml
+#subscribe not implemented
 exercise-43-test.xml
 #solving over pool now
 exercise-19-test.xml
+#solving over pool now
+exercise-20-test.xml

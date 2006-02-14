@@ -17,7 +17,7 @@
 >!>       
 >!> Problem:
 >!> tux has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for tux-2.2.0-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for tux-2.2.0-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -32,7 +32,7 @@
 >!>       
 >!> Problem:
 >!> make has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for make-1:3.79.1-8
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for make-1:3.79.1-8
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -62,28 +62,13 @@
 >!>       
 >!> Problem:
 >!> diffutils has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for diffutils-2.7.2-2
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for diffutils-2.7.2-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete diffutils
 >!>       delete [package]diffutils-2.7.2-2.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> gftp has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for gftp-1:2.0.11-ximian.1
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete gftp
->!>       delete [package]gftp-1:2.0.11-ximian.1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -106,8 +91,23 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> gftp has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gftp-1:2.0.11-ximian.1
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete gftp
+>!>       delete [package]gftp-1:2.0.11-ximian.1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> nautilus-mozilla has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for nautilus-mozilla-1.0.6-ximian.4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for nautilus-mozilla-1.0.6-ximian.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -137,7 +137,7 @@
 >!>       
 >!> Problem:
 >!> gq has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gq-0.4.0-3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gq-0.4.0-3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -167,7 +167,7 @@
 >!>       
 >!> Problem:
 >!> pwdb has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for pwdb-0.61.1-3
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for pwdb-0.61.1-3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -182,7 +182,7 @@
 >!>       
 >!> Problem:
 >!> gnome-media has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gnome-media-1.2.3-ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnome-media-1.2.3-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -197,7 +197,7 @@
 >!>       
 >!> Problem:
 >!> stat has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for stat-2.5-2
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for stat-2.5-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -257,7 +257,7 @@
 >!>       
 >!> Problem:
 >!> tcsh has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for tcsh-6.10-6
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for tcsh-6.10-6
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -272,7 +272,7 @@
 >!>       
 >!> Problem:
 >!> NVIDIA_GLX has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6 for NVIDIA_GLX-1.0-2802
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for NVIDIA_GLX-1.0-2802
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -287,7 +287,7 @@
 >!>       
 >!> Problem:
 >!> mozilla-mail has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for mozilla-mail-35:0.9.8-1.ximian.4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for mozilla-mail-35:0.9.8-1.ximian.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -302,7 +302,7 @@
 >!>       
 >!> Problem:
 >!> grub has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for grub-0.90-11
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for grub-0.90-11
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -317,7 +317,7 @@
 >!>       
 >!> Problem:
 >!> vnc has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for vnc-3.3.3r2-18.4
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for vnc-3.3.3r2-18.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -347,7 +347,7 @@
 >!>       
 >!> Problem:
 >!> ncompress has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for ncompress-4.2.4-24
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ncompress-4.2.4-24
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -377,28 +377,13 @@
 >!>       
 >!> Problem:
 >!> pine has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for pine-4.44-1.72.0
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for pine-4.44-1.72.0
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete pine
 >!>       delete [package]pine-4.44-1.72.0.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> micq has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for micq-0.4.6.p1-2
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete micq
->!>       delete [package]micq-0.4.6.p1-2.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -436,6 +421,36 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> micq has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for micq-0.4.6.p1-2
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete micq
+>!>       delete [package]micq-0.4.6.p1-2.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> finger-server has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for finger-server-0.17-9
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete finger-server
+>!>       delete [package]finger-server-0.17-9.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> quota has missing dependencies
 >!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for quota-1:3.01pre9-3
 >!>    Solution:
@@ -452,7 +467,7 @@
 >!>       
 >!> Problem:
 >!> xscreensaver has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for xscreensaver-1:4.01-1.ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for xscreensaver-1:4.01-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -482,7 +497,7 @@
 >!>       
 >!> Problem:
 >!> gnome-print has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gnome-print-1:0.35-1.ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnome-print-1:0.35-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -497,7 +512,7 @@
 >!>       
 >!> Problem:
 >!> ypbind has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for ypbind-3:1.8-1
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ypbind-3:1.8-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -511,23 +526,8 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> finger-server has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for finger-server-0.17-9
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete finger-server
->!>       delete [package]finger-server-0.17-9.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> unixODBC has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for unixODBC-2.0.7-3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for unixODBC-2.0.7-3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -542,7 +542,7 @@
 >!>       
 >!> Problem:
 >!> GConf has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for GConf-1.0.8-1.ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for GConf-1.0.8-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -557,13 +557,28 @@
 >!>       
 >!> Problem:
 >!> xsane has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for xsane-0.84-1.ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for xsane-0.84-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete xsane
 >!>       delete [package]xsane-0.84-1.ximian.1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> tetex-xdvi has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for tetex-xdvi-1.0.7-38.2
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete tetex-xdvi
+>!>       delete [package]tetex-xdvi-1.0.7-38.2.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -586,23 +601,8 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> tetex-xdvi has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for tetex-xdvi-1.0.7-38.2
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete tetex-xdvi
->!>       delete [package]tetex-xdvi-1.0.7-38.2.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> krbafs has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for krbafs-1.0.9-2
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for krbafs-1.0.9-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -632,7 +632,7 @@
 >!>       
 >!> Problem:
 >!> gnome-utils has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gnome-utils-1:1.4.1.2-1.ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnome-utils-1:1.4.1.2-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -692,7 +692,7 @@
 >!>       
 >!> Problem:
 >!> ctags has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for ctags-5.0.1-2
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ctags-5.0.1-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -722,7 +722,7 @@
 >!>       
 >!> Problem:
 >!> autofs has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for autofs-1:3.1.7-21
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for autofs-1:3.1.7-21
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -752,7 +752,7 @@
 >!>       
 >!> Problem:
 >!> nmap-frontend has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for nmap-frontend-2.54BETA22-3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for nmap-frontend-2.54BETA22-3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -782,7 +782,7 @@
 >!>       
 >!> Problem:
 >!> rep-gtk-gnome has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for rep-gtk-gnome-1:0.15-ximian.7
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for rep-gtk-gnome-1:0.15-ximian.7
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -827,7 +827,7 @@
 >!>       
 >!> Problem:
 >!> php-pgsql has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libnsl.so.1 for php-pgsql-4.0.6-15
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for php-pgsql-4.0.6-15
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -842,13 +842,28 @@
 >!>       
 >!> Problem:
 >!> libao has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for libao-0.8.0-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for libao-0.8.0-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete libao
 >!>       delete [package]libao-0.8.0-1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> gimp-perl has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gimp-perl-1:1.2.3-1.ximian.2
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete gimp-perl
+>!>       delete [package]gimp-perl-1:1.2.3-1.ximian.2.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -872,7 +887,7 @@
 >!>       
 >!> Problem:
 >!> rep-gtk has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for rep-gtk-1:0.15-ximian.7
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for rep-gtk-1:0.15-ximian.7
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -886,23 +901,8 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> gimp-perl has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for gimp-perl-1:1.2.3-1.ximian.2
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete gimp-perl
->!>       delete [package]gimp-perl-1:1.2.3-1.ximian.2.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> mozilla has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for mozilla-35:0.9.8-1.ximian.4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for mozilla-35:0.9.8-1.ximian.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -917,7 +917,7 @@
 >!>       
 >!> Problem:
 >!> mount has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for mount-2.11g-5
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for mount-2.11g-5
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -962,7 +962,7 @@
 >!>       
 >!> Problem:
 >!> logrotate has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for logrotate-3.5.9-1
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for logrotate-3.5.9-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -977,7 +977,7 @@
 >!>       
 >!> Problem:
 >!> isdn4k-utils has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for isdn4k-utils-3.1-46
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for isdn4k-utils-3.1-46
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1007,7 +1007,7 @@
 >!>       
 >!> Problem:
 >!> bash has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for bash-2.05-8
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for bash-2.05-8
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1022,7 +1022,7 @@
 >!>       
 >!> Problem:
 >!> ppp has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ppp-2.4.1-2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for ppp-2.4.1-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1052,28 +1052,13 @@
 >!>       
 >!> Problem:
 >!> gnupg has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for gnupg-1.0.6-3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for gnupg-1.0.6-3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete gnupg
 >!>       delete [package]gnupg-1.0.6-3.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> squid has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for squid-7:2.4.STABLE3-1.7.2
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete squid
->!>       delete [package]squid-7:2.4.STABLE3-1.7.2.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -1089,6 +1074,21 @@
 >!>    Solution:
 >!>       delete setserial
 >!>       delete [package]setserial-2.17-4.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> squid has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for squid-7:2.4.STABLE3-1.7.2
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete squid
+>!>       delete [package]squid-7:2.4.STABLE3-1.7.2.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -1112,7 +1112,7 @@
 >!>       
 >!> Problem:
 >!> control-center-plus has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for control-center-plus-1.5.11-ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for control-center-plus-1.5.11-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1157,7 +1157,7 @@
 >!>       
 >!> Problem:
 >!> gdb has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gdb-5.1-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for gdb-5.1-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1172,7 +1172,7 @@
 >!>       
 >!> Problem:
 >!> libnspr4 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for libnspr4-35:0.9.8-1.ximian.4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for libnspr4-35:0.9.8-1.ximian.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1216,53 +1216,8 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> gtop has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for gtop-1:1.0.13-ximian.1
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete gtop
->!>       delete [package]gtop-1:1.0.13-ximian.1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> ximian-utils has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for ximian-utils-0.2-ximian.1
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete ximian-utils
->!>       delete [package]ximian-utils-0.2-ximian.1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> m4 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for m4-1.4.1-5
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete m4
->!>       delete [package]m4-1.4.1-5.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> patch has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for patch-2.5.4-10
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for patch-2.5.4-10
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1276,8 +1231,53 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> ximian-utils has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for ximian-utils-0.2-ximian.1
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete ximian-utils
+>!>       delete [package]ximian-utils-0.2-ximian.1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> gtop has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gtop-1:1.0.13-ximian.1
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete gtop
+>!>       delete [package]gtop-1:1.0.13-ximian.1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> m4 has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for m4-1.4.1-5
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete m4
+>!>       delete [package]m4-1.4.1-5.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> gdm has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gdm-1:2.2.5.4-1.ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gdm-1:2.2.5.4-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1292,7 +1292,7 @@
 >!>       
 >!> Problem:
 >!> mtools has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for mtools-3.9.8-2
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for mtools-3.9.8-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1307,7 +1307,7 @@
 >!>       
 >!> Problem:
 >!> w3c-libwww has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for w3c-libwww-5.2.8-10
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for w3c-libwww-5.2.8-10
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1322,7 +1322,7 @@
 >!>       
 >!> Problem:
 >!> control-center has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for control-center-1:1.5.12-ximian.2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for control-center-1:1.5.12-ximian.2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1337,13 +1337,43 @@
 >!>       
 >!> Problem:
 >!> ical has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ical-2.2-25
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for ical-2.2-25
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete ical
 >!>       delete [package]ical-2.2-25.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> gnumeric has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for gnumeric-1:1.0.4-0.ximian.1
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete gnumeric
+>!>       delete [package]gnumeric-1:1.0.4-0.ximian.1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> webalizer has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for webalizer-2.01_09-0.72
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete webalizer
+>!>       delete [package]webalizer-2.01_09-0.72.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -1359,51 +1389,6 @@
 >!>    Solution:
 >!>       delete netpbm
 >!>       delete [package]netpbm-9.14-2.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> gnumeric has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for gnumeric-1:1.0.4-0.ximian.1
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete gnumeric
->!>       delete [package]gnumeric-1:1.0.4-0.ximian.1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> webalizer has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for webalizer-2.01_09-0.72
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete webalizer
->!>       delete [package]webalizer-2.01_09-0.72.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> tkinter has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for tkinter-1.5.2-35
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete tkinter
->!>       delete [package]tkinter-1.5.2-35.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -1427,28 +1412,13 @@
 >!>       
 >!> Problem:
 >!> gnome-core has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gnome-core-1:1.4.0.6-1.ximian.2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnome-core-1:1.4.0.6-1.ximian.2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete gnome-core
 >!>       delete [package]gnome-core-1:1.4.0.6-1.ximian.2.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> libgal7 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for libgal7-1:0.8-6
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete libgal7
->!>       delete [package]libgal7-1:0.8-6.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -1471,8 +1441,38 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> libgal7 has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for libgal7-1:0.8-6
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete libgal7
+>!>       delete [package]libgal7-1:0.8-6.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> tkinter has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for tkinter-1.5.2-35
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete tkinter
+>!>       delete [package]tkinter-1.5.2-35.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> ximian-connector has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for ximian-connector-1.0.0-1.ximian.4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for ximian-connector-1.0.0-1.ximian.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1502,7 +1502,7 @@
 >!>       
 >!> Problem:
 >!> gnome-vfs has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for gnome-vfs-1.0.4-ximian.4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnome-vfs-1.0.4-ximian.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1517,7 +1517,7 @@
 >!>       
 >!> Problem:
 >!> Omni has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for Omni-0.5.0-4
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for Omni-0.5.0-4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1591,8 +1591,23 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> lv has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for lv-4.49.4-3
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete lv
+>!>       delete [package]lv-4.49.4-3.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> cyrus-sasl has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for cyrus-sasl-1.5.24-23
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for cyrus-sasl-1.5.24-23
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1607,7 +1622,7 @@
 >!>       
 >!> Problem:
 >!> sed has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for sed-3.02-10
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for sed-3.02-10
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1637,7 +1652,7 @@
 >!>       
 >!> Problem:
 >!> postgresql-server has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for postgresql-server-7.2-5
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for postgresql-server-7.2-5
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1651,23 +1666,8 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> lv has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for lv-4.49.4-3
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete lv
->!>       delete [package]lv-4.49.4-3.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> mozilla-xmlterm has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for mozilla-xmlterm-35:0.9.8-1.ximian.4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for mozilla-xmlterm-35:0.9.8-1.ximian.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1712,7 +1712,7 @@
 >!>       
 >!> Problem:
 >!> Guppi has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for Guppi-0.40.3-ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for Guppi-0.40.3-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1802,7 +1802,7 @@
 >!>       
 >!> Problem:
 >!> netscape-common has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for netscape-common-3:4.78-2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for netscape-common-3:4.78-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1817,7 +1817,7 @@
 >!>       
 >!> Problem:
 >!> gnome-vfs-extras has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for gnome-vfs-extras-0.1.3-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for gnome-vfs-extras-0.1.3-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1831,8 +1831,23 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> libbonobo-conf0 has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for libbonobo-conf0-0.14-ximian.1
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete libbonobo-conf0
+>!>       delete [package]libbonobo-conf0-0.14-ximian.1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> ntsysv has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ntsysv-1.2.24-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for ntsysv-1.2.24-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1861,23 +1876,8 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> libbonobo-conf0 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for libbonobo-conf0-0.14-ximian.1
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete libbonobo-conf0
->!>       delete [package]libbonobo-conf0-0.14-ximian.1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> mm has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for mm-1.1.3-1
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for mm-1.1.3-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1907,7 +1907,7 @@
 >!>       
 >!> Problem:
 >!> sendmail has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for sendmail-8.11.6-3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for sendmail-8.11.6-3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1922,7 +1922,7 @@
 >!>       
 >!> Problem:
 >!> eog has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libnsl.so.1 for eog-1:0.6-ximian.8
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for eog-1:0.6-ximian.8
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1937,7 +1937,7 @@
 >!>       
 >!> Problem:
 >!> tar has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for tar-1.13.19-6
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for tar-1.13.19-6
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1952,7 +1952,7 @@
 >!>       
 >!> Problem:
 >!> mtr-gtk has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for mtr-gtk-1:0.44-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for mtr-gtk-1:0.44-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -1982,7 +1982,7 @@
 >!>       
 >!> Problem:
 >!> mozilla-devel has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for mozilla-devel-35:0.9.8-1.ximian.4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for mozilla-devel-35:0.9.8-1.ximian.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2027,7 +2027,7 @@
 >!>       
 >!> Problem:
 >!> bonobo has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for bonobo-1:1.0.19-ximian.2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for bonobo-1:1.0.19-ximian.2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2042,7 +2042,7 @@
 >!>       
 >!> Problem:
 >!> ucd-snmp has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for ucd-snmp-4.2.3-1.7.2.3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for ucd-snmp-4.2.3-1.7.2.3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2057,7 +2057,7 @@
 >!>       
 >!> Problem:
 >!> gimp has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for gimp-1:1.2.3-1.ximian.2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gimp-1:1.2.3-1.ximian.2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2072,7 +2072,7 @@
 >!>       
 >!> Problem:
 >!> rsync has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for rsync-2.4.6-13
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for rsync-2.4.6-13
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2116,21 +2116,6 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> gedit has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for gedit-1:0.9.7-ximian.1
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete gedit
->!>       delete [package]gedit-1:0.9.7-ximian.1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> flex has missing dependencies
 >!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for flex-2.5.4a-15
 >!>    Solution:
@@ -2139,6 +2124,21 @@
 >!>    Solution:
 >!>       delete flex
 >!>       delete [package]flex-2.5.4a-15.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> gedit has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gedit-1:0.9.7-ximian.1
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete gedit
+>!>       delete [package]gedit-1:0.9.7-ximian.1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -2206,8 +2206,23 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> setuptool has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for setuptool-1.8-2
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete setuptool
+>!>       delete [package]setuptool-1.8-2.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> libgtkhtml18 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for libgtkhtml18-0.15.0-ximian.2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for libgtkhtml18-0.15.0-ximian.2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2222,7 +2237,7 @@
 >!>       
 >!> Problem:
 >!> libgtkhtml19 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for libgtkhtml19-0.16.1-ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for libgtkhtml19-0.16.1-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2236,38 +2251,8 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> setuptool has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for setuptool-1.8-2
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete setuptool
->!>       delete [package]setuptool-1.8-2.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> gawk has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for gawk-3.1.0-3
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete gawk
->!>       delete [package]gawk-3.1.0-3.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> imlib-cfgeditor has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for imlib-cfgeditor-1:1.9.13-2.7.x.ximian.2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for imlib-cfgeditor-1:1.9.13-2.7.x.ximian.2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2281,14 +2266,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> VMwareWorkstation has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6 for VMwareWorkstation-3.0.0-1455
+>!> gawk has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for gawk-3.1.0-3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete VMwareWorkstation
->!>       delete [package]VMwareWorkstation-3.0.0-1455.
+>!>       delete gawk
+>!>       delete [package]gawk-3.1.0-3.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -2297,13 +2282,28 @@
 >!>       
 >!> Problem:
 >!> fetchmail has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for fetchmail-5.9.0-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for fetchmail-5.9.0-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete fetchmail
 >!>       delete [package]fetchmail-5.9.0-1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> VMwareWorkstation has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for VMwareWorkstation-3.0.0-1455
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete VMwareWorkstation
+>!>       delete [package]VMwareWorkstation-3.0.0-1455.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -2327,7 +2327,7 @@
 >!>       
 >!> Problem:
 >!> RealPlayer has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for RealPlayer-8.0-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for RealPlayer-8.0-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2357,7 +2357,7 @@
 >!>       
 >!> Problem:
 >!> php-ldap has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for php-ldap-4.0.6-15
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for php-ldap-4.0.6-15
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2372,7 +2372,7 @@
 >!>       
 >!> Problem:
 >!> xmms has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for xmms-1:1.2.6-ximian.3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for xmms-1:1.2.6-ximian.3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2387,7 +2387,7 @@
 >!>       
 >!> Problem:
 >!> rsh-server has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for rsh-server-0.17-5
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for rsh-server-0.17-5
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2402,7 +2402,7 @@
 >!>       
 >!> Problem:
 >!> ggv has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ggv-1.0.1-ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for ggv-1.0.1-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2447,7 +2447,7 @@
 >!>       
 >!> Problem:
 >!> sudo has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for sudo-1.6.4-0.7x.2
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for sudo-1.6.4-0.7x.2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2462,7 +2462,7 @@
 >!>       
 >!> Problem:
 >!> gnome-pim has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gnome-pim-1:1.4.0-ximian.7
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnome-pim-1:1.4.0-ximian.7
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2477,7 +2477,7 @@
 >!>       
 >!> Problem:
 >!> XFree86-libs has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for XFree86-libs-4.1.0-15
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for XFree86-libs-4.1.0-15
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2507,7 +2507,7 @@
 >!>       
 >!> Problem:
 >!> libgtkhtml20 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for libgtkhtml20-1.0.2-ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for libgtkhtml20-1.0.2-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2537,7 +2537,7 @@
 >!>       
 >!> Problem:
 >!> gnome-guile has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for gnome-guile-0.20-ximian.3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnome-guile-0.20-ximian.3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2597,7 +2597,7 @@
 >!>       
 >!> Problem:
 >!> tcl has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for tcl-8.3.3-65
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for tcl-8.3.3-65
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2611,14 +2611,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> e2fsprogs has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for e2fsprogs-1.26-1.72
+>!> perl-DBD-Pg has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for perl-DBD-Pg-1.01-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete e2fsprogs
->!>       delete [package]e2fsprogs-1.26-1.72.
+>!>       delete perl-DBD-Pg
+>!>       delete [package]perl-DBD-Pg-1.01-1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -2626,14 +2626,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> perl-DBD-Pg has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libnsl.so.1 for perl-DBD-Pg-1.01-1
+>!> e2fsprogs has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for e2fsprogs-1.26-1.72
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete perl-DBD-Pg
->!>       delete [package]perl-DBD-Pg-1.01-1.
+>!>       delete e2fsprogs
+>!>       delete [package]e2fsprogs-1.26-1.72.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -2657,7 +2657,7 @@
 >!>       
 >!> Problem:
 >!> timeconfig has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for timeconfig-3.2.2-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for timeconfig-3.2.2-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2747,43 +2747,13 @@
 >!>       
 >!> Problem:
 >!> mouseconfig has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for mouseconfig-4.23-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for mouseconfig-4.23-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete mouseconfig
 >!>       delete [package]mouseconfig-4.23-1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> gnome-spell has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libnsl.so.1 for gnome-spell-0.4-ximian.2
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete gnome-spell
->!>       delete [package]gnome-spell-0.4-ximian.2.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> ImageMagick has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for ImageMagick-5.3.8-3
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete ImageMagick
->!>       delete [package]ImageMagick-5.3.8-3.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -2799,6 +2769,36 @@
 >!>    Solution:
 >!>       delete XFree86-twm
 >!>       delete [package]XFree86-twm-4.1.0-15.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> gnome-spell has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnome-spell-0.4-ximian.2
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete gnome-spell
+>!>       delete [package]gnome-spell-0.4-ximian.2.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> ImageMagick has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ImageMagick-5.3.8-3
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete ImageMagick
+>!>       delete [package]ImageMagick-5.3.8-3.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -2822,7 +2822,7 @@
 >!>       
 >!> Problem:
 >!> newt has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for newt-0.50.33-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for newt-0.50.33-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2912,7 +2912,7 @@
 >!>       
 >!> Problem:
 >!> extace has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for extace-1.5.1-3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for extace-1.5.1-3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2927,7 +2927,7 @@
 >!>       
 >!> Problem:
 >!> galeon has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for galeon-1.0.3-1.ximian.2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for galeon-1.0.3-1.ximian.2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2942,7 +2942,7 @@
 >!>       
 >!> Problem:
 >!> guile has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for guile-3:1.3.4-16
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for guile-3:1.3.4-16
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -2972,28 +2972,13 @@
 >!>       
 >!> Problem:
 >!> smpeg has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for smpeg-0.4.4-3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for smpeg-0.4.4-3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete smpeg
 >!>       delete [package]smpeg-0.4.4-3.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> passwd has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libnsl.so.1 for passwd-0.64.1-7
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete passwd
->!>       delete [package]passwd-0.64.1-7.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -3016,8 +3001,23 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> passwd has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for passwd-0.64.1-7
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete passwd
+>!>       delete [package]passwd-0.64.1-7.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> gnome-libs has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for gnome-libs-1:1.4.1.4-1.ximian.3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnome-libs-1:1.4.1.4-1.ximian.3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3047,7 +3047,7 @@
 >!>       
 >!> Problem:
 >!> patchutils has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for patchutils-0.2.8-0.1
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for patchutils-0.2.8-0.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3092,7 +3092,7 @@
 >!>       
 >!> Problem:
 >!> vim-minimal has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for vim-minimal-1:6.0-7.13
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for vim-minimal-1:6.0-7.13
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3107,7 +3107,7 @@
 >!>       
 >!> Problem:
 >!> pygtk has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for pygtk-1:0.6.9-1.ximian.2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for pygtk-1:0.6.9-1.ximian.2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3122,7 +3122,7 @@
 >!>       
 >!> Problem:
 >!> monkeytalk has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for monkeytalk-1.0.4-1.ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for monkeytalk-1.0.4-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3137,7 +3137,7 @@
 >!>       
 >!> Problem:
 >!> oaf has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for oaf-0.6.8-1.ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for oaf-0.6.8-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3152,7 +3152,7 @@
 >!>       
 >!> Problem:
 >!> findutils has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for findutils-1:4.1.7-1
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for findutils-1:4.1.7-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3167,7 +3167,7 @@
 >!>       
 >!> Problem:
 >!> krb5-libs has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for krb5-libs-1.2.2-13
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for krb5-libs-1.2.2-13
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3182,7 +3182,7 @@
 >!>       
 >!> Problem:
 >!> rp3 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for rp3-1.1.10-3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for rp3-1.1.10-3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3197,7 +3197,7 @@
 >!>       
 >!> Problem:
 >!> grdb has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for grdb-0.2.4-ximian.4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for grdb-0.2.4-ximian.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3212,7 +3212,7 @@
 >!>       
 >!> Problem:
 >!> qt has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for qt-1:2.3.1-5
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for qt-1:2.3.1-5
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3227,7 +3227,7 @@
 >!>       
 >!> Problem:
 >!> abiword has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for abiword-1:0.99.3-1.ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for abiword-1:0.99.3-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3257,7 +3257,7 @@
 >!>       
 >!> Problem:
 >!> gnome-applets has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gnome-applets-1:1.4.0.1-ximian.6
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnome-applets-1:1.4.0.1-ximian.6
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3286,14 +3286,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> libtool-libs has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for libtool-libs-1.4-8
+>!> diffstat has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for diffstat-1.28-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete libtool-libs
->!>       delete [package]libtool-libs-1.4-8.
+>!>       delete diffstat
+>!>       delete [package]diffstat-1.28-1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -3302,7 +3302,7 @@
 >!>       
 >!> Problem:
 >!> postgresql-devel has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for postgresql-devel-7.2-5
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for postgresql-devel-7.2-5
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3331,14 +3331,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> ncurses has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for ncurses-5.2-12
+>!> libtool-libs has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for libtool-libs-1.4-8
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete ncurses
->!>       delete [package]ncurses-5.2-12.
+>!>       delete libtool-libs
+>!>       delete [package]libtool-libs-1.4-8.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -3346,14 +3346,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> diffstat has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for diffstat-1.28-1
+>!> ncurses has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ncurses-5.2-12
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete diffstat
->!>       delete [package]diffstat-1.28-1.
+>!>       delete ncurses
+>!>       delete [package]ncurses-5.2-12.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -3377,7 +3377,7 @@
 >!>       
 >!> Problem:
 >!> screen has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for screen-3.9.9-3
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for screen-3.9.9-3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3467,7 +3467,7 @@
 >!>       
 >!> Problem:
 >!> esound has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for esound-1:0.2.23-ximian.3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for esound-1:0.2.23-ximian.3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3482,7 +3482,7 @@
 >!>       
 >!> Problem:
 >!> SDL_mixer has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for SDL_mixer-1.2.0-4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for SDL_mixer-1.2.0-4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3527,7 +3527,7 @@
 >!>       
 >!> Problem:
 >!> imlib has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for imlib-1:1.9.13-2.7.x.ximian.2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for imlib-1:1.9.13-2.7.x.ximian.2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3541,74 +3541,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> libmng has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for libmng-1.0.2-1
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete libmng
->!>       delete [package]libmng-1.0.2-1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> xawtv has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for xawtv-3.54-5
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for xawtv-3.54-5
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete xawtv
 >!>       delete [package]xawtv-3.54-5.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> fileutils has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for fileutils-4.1-4
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete fileutils
->!>       delete [package]fileutils-4.1-4.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> ghostscript has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for ghostscript-6.51-16
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete ghostscript
->!>       delete [package]ghostscript-6.51-16.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> grep has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for grep-2.4.2-7
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete grep
->!>       delete [package]grep-2.4.2-7.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -3631,14 +3571,59 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> gtkhtml has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libnsl.so.1 for gtkhtml-1.0.2-ximian.1
+>!> libmng has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for libmng-1.0.2-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete gtkhtml
->!>       delete [package]gtkhtml-1.0.2-ximian.1.
+>!>       delete libmng
+>!>       delete [package]libmng-1.0.2-1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> fileutils has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for fileutils-4.1-4
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete fileutils
+>!>       delete [package]fileutils-4.1-4.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> ghostscript has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for ghostscript-6.51-16
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete ghostscript
+>!>       delete [package]ghostscript-6.51-16.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> grep has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for grep-2.4.2-7
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete grep
+>!>       delete [package]grep-2.4.2-7.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -3647,13 +3632,28 @@
 >!>       
 >!> Problem:
 >!> netconfig has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for netconfig-0.8.11-7
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for netconfig-0.8.11-7
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete netconfig
 >!>       delete [package]netconfig-0.8.11-7.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> gtkhtml has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gtkhtml-1.0.2-ximian.1
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete gtkhtml
+>!>       delete [package]gtkhtml-1.0.2-ximian.1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -3677,7 +3677,7 @@
 >!>       
 >!> Problem:
 >!> rpm has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for rpm-4.0.3-1.03
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for rpm-4.0.3-1.03
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3692,13 +3692,28 @@
 >!>       
 >!> Problem:
 >!> xsri has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for xsri-1:2.0.3-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for xsri-1:2.0.3-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete xsri
 >!>       delete [package]xsri-1:2.0.3-1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> gnomeicu has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnomeicu-1:0.98.2-1.ximian.1
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete gnomeicu
+>!>       delete [package]gnomeicu-1:0.98.2-1.ximian.1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -3714,21 +3729,6 @@
 >!>    Solution:
 >!>       delete radvd
 >!>       delete [package]radvd-0.6.2pl4-1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> gnomeicu has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for gnomeicu-1:0.98.2-1.ximian.1
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete gnomeicu
->!>       delete [package]gnomeicu-1:0.98.2-1.ximian.1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -3797,7 +3797,7 @@
 >!>       
 >!> Problem:
 >!> locale_config has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for locale_config-0.3.2-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for locale_config-0.3.2-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3812,7 +3812,7 @@
 >!>       
 >!> Problem:
 >!> LPRng has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for LPRng-3.7.4-28
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for LPRng-3.7.4-28
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3827,7 +3827,7 @@
 >!>       
 >!> Problem:
 >!> iproute has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for iproute-2.2.4-14
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for iproute-2.2.4-14
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3857,7 +3857,7 @@
 >!>       
 >!> Problem:
 >!> memprof has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for memprof-1:0.4.1-ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for memprof-1:0.4.1-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3887,7 +3887,7 @@
 >!>       
 >!> Problem:
 >!> libgal14 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for libgal14-1:0.14-ximian.2
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for libgal14-1:0.14-ximian.2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3902,7 +3902,7 @@
 >!>       
 >!> Problem:
 >!> gmc has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gmc-4.5.55-1.ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gmc-4.5.55-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3917,7 +3917,7 @@
 >!>       
 >!> Problem:
 >!> libgal18 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for libgal18-1:0.18.1-ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for libgal18-1:0.18.1-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3931,38 +3931,8 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> cdp has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for cdp-0.33-21
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete cdp
->!>       delete [package]cdp-0.33-21.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> tk has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for tk-8.3.3-65
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete tk
->!>       delete [package]tk-8.3.3-65.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> links has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for links-0.96-2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for links-0.96-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -3976,8 +3946,23 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> tk has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for tk-8.3.3-65
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete tk
+>!>       delete [package]tk-8.3.3-65.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> usermode has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for usermode-1.46-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for usermode-1.46-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4007,7 +3992,7 @@
 >!>       
 >!> Problem:
 >!> libgal19 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for libgal19-1:0.19.1-1.ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for libgal19-1:0.19.1-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4021,14 +4006,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> gnomemm has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for gnomemm-1.2.2-1.ximian.1
+>!> cdp has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for cdp-0.33-21
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete gnomemm
->!>       delete [package]gnomemm-1.2.2-1.ximian.1.
+>!>       delete cdp
+>!>       delete [package]cdp-0.33-21.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -4051,8 +4036,23 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> gnomemm has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnomemm-1.2.2-1.ximian.1
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete gnomemm
+>!>       delete [package]gnomemm-1.2.2-1.ximian.1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> mod_ssl has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for mod_ssl-2.8.5-4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for mod_ssl-2.8.5-4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4067,7 +4067,7 @@
 >!>       
 >!> Problem:
 >!> openssh has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for openssh-3.1p1-2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for openssh-3.1p1-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4097,7 +4097,7 @@
 >!>       
 >!> Problem:
 >!> openssl has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for openssl-0.9.6b-8
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for openssl-0.9.6b-8
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4142,7 +4142,7 @@
 >!>       
 >!> Problem:
 >!> db2 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for db2-2.4.14-7
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for db2-2.4.14-7
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4157,7 +4157,7 @@
 >!>       
 >!> Problem:
 >!> db3 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for db3-3.2.9-4
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for db3-3.2.9-4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4202,7 +4202,7 @@
 >!>       
 >!> Problem:
 >!> util-linux has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for util-linux-2.11f-17
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for util-linux-2.11f-17
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4232,7 +4232,7 @@
 >!>       
 >!> Problem:
 >!> shadow-utils has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for shadow-utils-1:20000902-4
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for shadow-utils-1:20000902-4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4261,14 +4261,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> sane-frontends has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for sane-frontends-1.0.7-1.ximian.1
+>!> gphoto has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gphoto-1:0.4.3-ximian.5
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete sane-frontends
->!>       delete [package]sane-frontends-1.0.7-1.ximian.1.
+>!>       delete gphoto
+>!>       delete [package]gphoto-1:0.4.3-ximian.5.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -4276,14 +4276,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> gphoto has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gphoto-1:0.4.3-ximian.5
+>!> sane-frontends has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for sane-frontends-1.0.7-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete gphoto
->!>       delete [package]gphoto-1:0.4.3-ximian.5.
+>!>       delete sane-frontends
+>!>       delete [package]sane-frontends-1.0.7-1.ximian.1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -4307,7 +4307,7 @@
 >!>       
 >!> Problem:
 >!> openssh-clients has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for openssh-clients-3.1p1-2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for openssh-clients-3.1p1-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4322,7 +4322,7 @@
 >!>       
 >!> Problem:
 >!> pspell has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for pspell-2:0.12.2-3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for pspell-2:0.12.2-3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4352,13 +4352,43 @@
 >!>       
 >!> Problem:
 >!> cyrus-sasl-plain has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for cyrus-sasl-plain-1.5.24-23
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for cyrus-sasl-plain-1.5.24-23
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete cyrus-sasl-plain
 >!>       delete [package]cyrus-sasl-plain-1.5.24-23.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> libesmtp has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for libesmtp-0.8.4-2
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete libesmtp
+>!>       delete [package]libesmtp-0.8.4-2.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> gtkmm has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gtkmm-1.2.8-1.ximian.1
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete gtkmm
+>!>       delete [package]gtkmm-1.2.8-1.ximian.1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -4381,23 +4411,8 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> libesmtp has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for libesmtp-0.8.4-2
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete libesmtp
->!>       delete [package]libesmtp-0.8.4-2.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> perl has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for perl-1:5.6.1-26.72.3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for perl-1:5.6.1-26.72.3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4411,14 +4426,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> gtkmm has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gtkmm-1.2.8-1.ximian.1
+>!> bind-utils has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for bind-utils-9.1.3-4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete gtkmm
->!>       delete [package]gtkmm-1.2.8-1.ximian.1.
+>!>       delete bind-utils
+>!>       delete [package]bind-utils-9.1.3-4.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -4442,7 +4457,7 @@
 >!>       
 >!> Problem:
 >!> tix has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for tix-8.2.0b1-65
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for tix-8.2.0b1-65
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4457,7 +4472,7 @@
 >!>       
 >!> Problem:
 >!> stunnel has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for stunnel-3.22-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for stunnel-3.22-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4486,23 +4501,8 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> db3-utils has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for db3-utils-3.2.9-4
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete db3-utils
->!>       delete [package]db3-utils-3.2.9-4.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> lokkit has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for lokkit-0.50-6
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for lokkit-0.50-6
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4516,8 +4516,23 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> libgtop has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for libgtop-1:1.0.12-ximian.3
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete libgtop
+>!>       delete [package]libgtop-1:1.0.12-ximian.3.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> ucd-snmp-utils has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ucd-snmp-utils-4.2.3-1.7.2.3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for ucd-snmp-utils-4.2.3-1.7.2.3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4531,14 +4546,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> bind-utils has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for bind-utils-9.1.3-4
+>!> db3-utils has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for db3-utils-3.2.9-4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete bind-utils
->!>       delete [package]bind-utils-9.1.3-4.
+>!>       delete db3-utils
+>!>       delete [package]db3-utils-3.2.9-4.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -4561,14 +4576,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> aspell has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for aspell-2:0.33.7-1
+>!> gob has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gob-1.0.12-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete aspell
->!>       delete [package]aspell-2:0.33.7-1.
+>!>       delete gob
+>!>       delete [package]gob-1.0.12-1.ximian.1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -4576,14 +4591,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> libgtop has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for libgtop-1:1.0.12-ximian.3
+>!> aspell has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for aspell-2:0.33.7-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete libgtop
->!>       delete [package]libgtop-1:1.0.12-ximian.3.
+>!>       delete aspell
+>!>       delete [package]aspell-2:0.33.7-1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -4606,59 +4621,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> bug-buddy has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for bug-buddy-1:2.0.8-ximian.1
+>!> switchdesk-gnome has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for switchdesk-gnome-3.9.7-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete bug-buddy
->!>       delete [package]bug-buddy-1:2.0.8-ximian.1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> rwho has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for rwho-0.17-11
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete rwho
->!>       delete [package]rwho-0.17-11.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> rsh has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for rsh-0.17-5
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete rsh
->!>       delete [package]rsh-0.17-5.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> pan has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for pan-1:0.11.2-1.ximian.1
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete pan
->!>       delete [package]pan-1:0.11.2-1.ximian.1.
+>!>       delete switchdesk-gnome
+>!>       delete [package]switchdesk-gnome-3.9.7-1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -4681,14 +4651,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> gob has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gob-1.0.12-1.ximian.1
+>!> pan has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for pan-1:0.11.2-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete gob
->!>       delete [package]gob-1.0.12-1.ximian.1.
+>!>       delete pan
+>!>       delete [package]pan-1:0.11.2-1.ximian.1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -4697,43 +4667,13 @@
 >!>       
 >!> Problem:
 >!> pax has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for pax-1.5-4
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for pax-1.5-4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete pax
 >!>       delete [package]pax-1.5-4.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> rarpd has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for rarpd-ss981107-9
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete rarpd
->!>       delete [package]rarpd-ss981107-9.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> SDL has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for SDL-1.2.2-3
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete SDL
->!>       delete [package]SDL-1.2.2-3.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -4756,8 +4696,53 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> rsh has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for rsh-0.17-5
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete rsh
+>!>       delete [package]rsh-0.17-5.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> SDL has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for SDL-1.2.2-3
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete SDL
+>!>       delete [package]SDL-1.2.2-3.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> rwho has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for rwho-0.17-11
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete rwho
+>!>       delete [package]rwho-0.17-11.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> pam has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for pam-0.75-19
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for pam-0.75-19
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4771,14 +4756,29 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> switchdesk-gnome has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for switchdesk-gnome-3.9.7-1
+>!> bug-buddy has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for bug-buddy-1:2.0.8-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete switchdesk-gnome
->!>       delete [package]switchdesk-gnome-3.9.7-1.
+>!>       delete bug-buddy
+>!>       delete [package]bug-buddy-1:2.0.8-ximian.1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> rarpd has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for rarpd-ss981107-9
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete rarpd
+>!>       delete [package]rarpd-ss981107-9.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -4787,7 +4787,7 @@
 >!>       
 >!> Problem:
 >!> staroffice has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for staroffice-5.2-ximian.4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for staroffice-5.2-ximian.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4817,7 +4817,7 @@
 >!>       
 >!> Problem:
 >!> mikmod has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for mikmod-3.1.6-12
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for mikmod-3.1.6-12
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4847,7 +4847,7 @@
 >!>       
 >!> Problem:
 >!> grip has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for grip-1:2.96-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for grip-1:2.96-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4862,28 +4862,13 @@
 >!>       
 >!> Problem:
 >!> xchat has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for xchat-1:1.8.7-ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for xchat-1:1.8.7-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete xchat
 >!>       delete [package]xchat-1:1.8.7-ximian.1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> ftp has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ftp-0.17-12
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete ftp
->!>       delete [package]ftp-0.17-12.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -4899,6 +4884,21 @@
 >!>    Solution:
 >!>       delete traceroute
 >!>       delete [package]traceroute-1.4a12-1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> ftp has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ftp-0.17-12
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete ftp
+>!>       delete [package]ftp-0.17-12.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -4922,7 +4922,7 @@
 >!>       
 >!> Problem:
 >!> kbdconfig has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for kbdconfig-1.9.14-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for kbdconfig-1.9.14-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4967,7 +4967,7 @@
 >!>       
 >!> Problem:
 >!> sodipodi has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for sodipodi-0.24.1-ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for sodipodi-0.24.1-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -4997,7 +4997,7 @@
 >!>       
 >!> Problem:
 >!> red-carpet has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for red-carpet-1.3-1.ximian.3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for red-carpet-1.3-1.ximian.3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5027,7 +5027,7 @@
 >!>       
 >!> Problem:
 >!> sawfish has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for sawfish-1:1.0-ximian.4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for sawfish-1:1.0-ximian.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5042,7 +5042,7 @@
 >!>       
 >!> Problem:
 >!> kudzu has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for kudzu-0.99.23-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for kudzu-0.99.23-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5072,7 +5072,7 @@
 >!>       
 >!> Problem:
 >!> Mesa has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for Mesa-3:3.4.2-10
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for Mesa-3:3.4.2-10
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5117,7 +5117,7 @@
 >!>       
 >!> Problem:
 >!> curl has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for curl-7.8-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for curl-7.8-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5147,7 +5147,7 @@
 >!>       
 >!> Problem:
 >!> ORBit-devel has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ORBit-devel-1:0.5.13-ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for ORBit-devel-1:0.5.13-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5162,7 +5162,7 @@
 >!>       
 >!> Problem:
 >!> pmake has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for pmake-1:1.45-4
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for pmake-1:1.45-4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5177,7 +5177,7 @@
 >!>       
 >!> Problem:
 >!> ddd has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for ddd-3.3.1-5
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ddd-3.3.1-5
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5192,7 +5192,7 @@
 >!>       
 >!> Problem:
 >!> gnome-lokkit has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gnome-lokkit-0.50-6
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnome-lokkit-0.50-6
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5222,7 +5222,7 @@
 >!>       
 >!> Problem:
 >!> parted has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for parted-1.4.16-8
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for parted-1.4.16-8
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5237,7 +5237,7 @@
 >!>       
 >!> Problem:
 >!> kernel-utils has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for kernel-utils-1:2.4-5
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for kernel-utils-1:2.4-5
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5282,28 +5282,13 @@
 >!>       
 >!> Problem:
 >!> XFree86-tools has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for XFree86-tools-4.1.0-15
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for XFree86-tools-4.1.0-15
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete XFree86-tools
 >!>       delete [package]XFree86-tools-4.1.0-15.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> nmh has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for nmh-1.0.4-9
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete nmh
->!>       delete [package]nmh-1.0.4-9.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -5326,8 +5311,23 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> nmh has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for nmh-1.0.4-9
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete nmh
+>!>       delete [package]nmh-1.0.4-9.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> apache has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for apache-1.3.22-2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for apache-1.3.22-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5342,7 +5342,7 @@
 >!>       
 >!> Problem:
 >!> mkisofs has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for mkisofs-7:1.10-4
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for mkisofs-7:1.10-4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5372,7 +5372,7 @@
 >!>       
 >!> Problem:
 >!> xinetd has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for xinetd-2.3.3-1
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for xinetd-2.3.3-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5387,7 +5387,7 @@
 >!>       
 >!> Problem:
 >!> asp2php-gtk has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for asp2php-gtk-0.75.17-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for asp2php-gtk-0.75.17-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5402,7 +5402,7 @@
 >!>       
 >!> Problem:
 >!> postgresql-libs has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for postgresql-libs-7.2-5
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for postgresql-libs-7.2-5
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5417,7 +5417,7 @@
 >!>       
 >!> Problem:
 >!> postgresql has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for postgresql-7.2-5
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for postgresql-7.2-5
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5432,7 +5432,7 @@
 >!>       
 >!> Problem:
 >!> mpg321 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for mpg321-0.1.5-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for mpg321-0.1.5-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5447,7 +5447,7 @@
 >!>       
 >!> Problem:
 >!> textutils has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for textutils-1:2.0.14-2
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for textutils-1:2.0.14-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5462,7 +5462,7 @@
 >!>       
 >!> Problem:
 >!> pam_krb5 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for pam_krb5-1.46-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for pam_krb5-1.46-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5477,7 +5477,7 @@
 >!>       
 >!> Problem:
 >!> Xconfigurator has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for Xconfigurator-4.9.39-2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for Xconfigurator-4.9.39-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5522,7 +5522,7 @@
 >!>       
 >!> Problem:
 >!> iptables-ipv6 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for iptables-ipv6-1.2.4-2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for iptables-ipv6-1.2.4-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5552,7 +5552,7 @@
 >!>       
 >!> Problem:
 >!> mutt has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for mutt-5:1.2.5.1-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for mutt-5:1.2.5.1-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5567,7 +5567,7 @@
 >!>       
 >!> Problem:
 >!> reiserfs-utils has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for reiserfs-utils-3.x.0j-2
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for reiserfs-utils-3.x.0j-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5597,7 +5597,7 @@
 >!>       
 >!> Problem:
 >!> ash has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for ash-0.3.7-2
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ash-0.3.7-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5612,7 +5612,7 @@
 >!>       
 >!> Problem:
 >!> ltrace has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ltrace-0.3.10-7
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for ltrace-0.3.10-7
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5627,7 +5627,7 @@
 >!>       
 >!> Problem:
 >!> cdrecord has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for cdrecord-7:1.10-4
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for cdrecord-7:1.10-4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5657,7 +5657,7 @@
 >!>       
 >!> Problem:
 >!> acroread has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for acroread-4.05-6
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for acroread-4.05-6
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5687,7 +5687,7 @@
 >!>       
 >!> Problem:
 >!> procmail has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for procmail-3.21-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for procmail-3.21-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5732,7 +5732,7 @@
 >!>       
 >!> Problem:
 >!> bzip2 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for bzip2-1.0.1-4
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for bzip2-1.0.1-4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5747,7 +5747,7 @@
 >!>       
 >!> Problem:
 >!> pidentd has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for pidentd-3.0.14-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for pidentd-3.0.14-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5762,7 +5762,7 @@
 >!>       
 >!> Problem:
 >!> nss_ldap has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for nss_ldap-172-2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for nss_ldap-172-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5791,66 +5791,6 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> vim-X11 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for vim-X11-1:6.0-7.13
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete vim-X11
->!>       delete [package]vim-X11-1:6.0-7.13.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> gaim has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for gaim-1:0.52-1.ximian.2
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete gaim
->!>       delete [package]gaim-1:0.52-1.ximian.2.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> losetup has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for losetup-2.11g-5
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete losetup
->!>       delete [package]losetup-2.11g-5.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> sh-utils has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for sh-utils-2.0.11-5
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete sh-utils
->!>       delete [package]sh-utils-2.0.11-5.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> python-xmlrpc has missing dependencies
 >!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for python-xmlrpc-1.5.1-7.x.3
 >!>    Solution:
@@ -5866,44 +5806,74 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> vim-X11 has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for vim-X11-1:6.0-7.13
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete vim-X11
+>!>       delete [package]vim-X11-1:6.0-7.13.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> gaim has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for gaim-1:0.52-1.ximian.2
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete gaim
+>!>       delete [package]gaim-1:0.52-1.ximian.2.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> sh-utils has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for sh-utils-2.0.11-5
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete sh-utils
+>!>       delete [package]sh-utils-2.0.11-5.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> losetup has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for losetup-2.11g-5
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete losetup
+>!>       delete [package]losetup-2.11g-5.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> vorbis has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for vorbis-1.0rc2-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for vorbis-1.0rc2-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete vorbis
 >!>       delete [package]vorbis-1.0rc2-1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> iptables has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for iptables-1.2.4-2
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete iptables
->!>       delete [package]iptables-1.2.4-2.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> SysVinit has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for SysVinit-2.78-19
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete SysVinit
->!>       delete [package]SysVinit-2.78-19.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -5926,8 +5896,38 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> iptables has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for iptables-1.2.4-2
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete iptables
+>!>       delete [package]iptables-1.2.4-2.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> SysVinit has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for SysVinit-2.78-19
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete SysVinit
+>!>       delete [package]SysVinit-2.78-19.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> gnome-games has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gnome-games-1:1.4.0.1-ximian.14
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnome-games-1:1.4.0.1-ximian.14
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5942,7 +5942,7 @@
 >!>       
 >!> Problem:
 >!> battstat_applet has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for battstat_applet-2.0.9-ximian.7
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for battstat_applet-2.0.9-ximian.7
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5972,7 +5972,7 @@
 >!>       
 >!> Problem:
 >!> wget has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for wget-1.7-3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for wget-1.7-3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -5987,7 +5987,7 @@
 >!>       
 >!> Problem:
 >!> python has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for python-1.5.2-35
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for python-1.5.2-35
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6032,7 +6032,7 @@
 >!>       
 >!> Problem:
 >!> ghex has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ghex-1.2.1-ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for ghex-1.2.1-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6047,7 +6047,7 @@
 >!>       
 >!> Problem:
 >!> mod_perl has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for mod_perl-1.26-2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for mod_perl-1.26-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6077,28 +6077,13 @@
 >!>       
 >!> Problem:
 >!> libuser has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for libuser-0.32-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for libuser-0.32-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete libuser
 >!>       delete [package]libuser-0.32-1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> bdflush has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for bdflush-1.5-17
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete bdflush
->!>       delete [package]bdflush-1.5-17.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -6122,7 +6107,7 @@
 >!>       
 >!> Problem:
 >!> arpwatch has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for arpwatch-12:2.1a11-9
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for arpwatch-12:2.1a11-9
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6137,7 +6122,7 @@
 >!>       
 >!> Problem:
 >!> at has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for at-3.1.8-23
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for at-3.1.8-23
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6151,8 +6136,23 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> bdflush has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for bdflush-1.5-17
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete bdflush
+>!>       delete [package]bdflush-1.5-17.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> libgnomeprint15 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for libgnomeprint15-1:0.35-1.ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for libgnomeprint15-1:0.35-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6181,6 +6181,51 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> less has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for less-358-21
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete less
+>!>       delete [package]less-358-21.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> openssh-server has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for openssh-server-3.1p1-2
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete openssh-server
+>!>       delete [package]openssh-server-3.1p1-2.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> vnc-server has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for vnc-server-3.3.3r2-18.4
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete vnc-server
+>!>       delete [package]vnc-server-3.3.3r2-18.4.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> time has missing dependencies
 >!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for time-1.7-14
 >!>    Solution:
@@ -6196,44 +6241,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> less has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for less-358-21
+>!> gdk-pixbuf-gnome has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gdk-pixbuf-gnome-1:0.16.0-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete less
->!>       delete [package]less-358-21.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> openssh-server has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for openssh-server-3.1p1-2
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete openssh-server
->!>       delete [package]openssh-server-3.1p1-2.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> vnc-server has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for vnc-server-3.3.3r2-18.4
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete vnc-server
->!>       delete [package]vnc-server-3.3.3r2-18.4.
+>!>       delete gdk-pixbuf-gnome
+>!>       delete [package]gdk-pixbuf-gnome-1:0.16.0-ximian.1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -6256,89 +6271,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> gdk-pixbuf-gnome has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for gdk-pixbuf-gnome-1:0.16.0-ximian.1
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete gdk-pixbuf-gnome
->!>       delete [package]gdk-pixbuf-gnome-1:0.16.0-ximian.1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> bonobo-conf has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libnsl.so.1 for bonobo-conf-0.14-ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for bonobo-conf-0.14-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete bonobo-conf
 >!>       delete [package]bonobo-conf-0.14-ximian.1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> bc has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for bc-1.06-5
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete bc
->!>       delete [package]bc-1.06-5.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> bcm5820 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for bcm5820-1.17-6
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete bcm5820
->!>       delete [package]bcm5820-1.17-6.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> libglade has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for libglade-1:0.17-1.ximian.1
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete libglade
->!>       delete [package]libglade-1:0.17-1.ximian.1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> xsane-gimp has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for xsane-gimp-0.84-1.ximian.1
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete xsane-gimp
->!>       delete [package]xsane-gimp-0.84-1.ximian.1.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -6361,8 +6301,68 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> bcm5820 has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for bcm5820-1.17-6
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete bcm5820
+>!>       delete [package]bcm5820-1.17-6.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> bc has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for bc-1.06-5
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete bc
+>!>       delete [package]bc-1.06-5.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> libglade has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for libglade-1:0.17-1.ximian.1
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete libglade
+>!>       delete [package]libglade-1:0.17-1.ximian.1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> xsane-gimp has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for xsane-gimp-0.84-1.ximian.1
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete xsane-gimp
+>!>       delete [package]xsane-gimp-0.84-1.ximian.1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> libpanel-applet0 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libnsl.so.1 for libpanel-applet0-1:1.4.0.6-1.ximian.2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for libpanel-applet0-1:1.4.0.6-1.ximian.2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6392,7 +6392,7 @@
 >!>       
 >!> Problem:
 >!> gnome-pilot has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for gnome-pilot-0.1.64-ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnome-pilot-0.1.64-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6422,7 +6422,7 @@
 >!>       
 >!> Problem:
 >!> dateconfig has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for dateconfig-0.7.4-6
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for dateconfig-0.7.4-6
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6437,7 +6437,7 @@
 >!>       
 >!> Problem:
 >!> php has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for php-4.0.6-15
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for php-4.0.6-15
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6452,7 +6452,7 @@
 >!>       
 >!> Problem:
 >!> arts has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for arts-6:2.2.2-2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for arts-6:2.2.2-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6466,8 +6466,23 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> libodbc++ has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for libodbc++-0.2.2pre4-12
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete libodbc++
+>!>       delete [package]libodbc++-0.2.2pre4-12.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> dia has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for dia-1:0.88.1-ximian.2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for dia-1:0.88.1-ximian.2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6482,7 +6497,7 @@
 >!>       
 >!> Problem:
 >!> cyrus-sasl-devel has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for cyrus-sasl-devel-1.5.24-23
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for cyrus-sasl-devel-1.5.24-23
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6497,28 +6512,13 @@
 >!>       
 >!> Problem:
 >!> tmpwatch has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for tmpwatch-2.8.1-1
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for tmpwatch-2.8.1-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete tmpwatch
 >!>       delete [package]tmpwatch-2.8.1-1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> libodbc++ has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for libodbc++-0.2.2pre4-12
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete libodbc++
->!>       delete [package]libodbc++-0.2.2pre4-12.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -6556,23 +6556,8 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> alchemist has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for alchemist-1.0.18-1
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete alchemist
->!>       delete [package]alchemist-1.0.18-1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> nmap has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for nmap-2.54BETA22-3
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for nmap-2.54BETA22-3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6586,8 +6571,23 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> alchemist has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for alchemist-1.0.18-1
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete alchemist
+>!>       delete [package]alchemist-1.0.18-1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> libnss3 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for libnss3-35:0.9.8-1.ximian.4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for libnss3-35:0.9.8-1.ximian.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6602,7 +6602,7 @@
 >!>       
 >!> Problem:
 >!> njamd has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for njamd-0.8.1-2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for njamd-0.8.1-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6632,7 +6632,7 @@
 >!>       
 >!> Problem:
 >!> licq has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for licq-1.0.3-7
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for licq-1.0.3-7
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6647,7 +6647,7 @@
 >!>       
 >!> Problem:
 >!> imap has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for imap-1:2000c-15
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for imap-1:2000c-15
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6691,6 +6691,21 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> openssh-askpass-gnome has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for openssh-askpass-gnome-3.1p1-2
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete openssh-askpass-gnome
+>!>       delete [package]openssh-askpass-gnome-3.1p1-2.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> pinfo has missing dependencies
 >!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for pinfo-0.6.1-2
 >!>    Solution:
@@ -6706,23 +6721,8 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> openssh-askpass-gnome has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for openssh-askpass-gnome-3.1p1-2
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete openssh-askpass-gnome
->!>       delete [package]openssh-askpass-gnome-3.1p1-2.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> eel has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for eel-1.0.2-ximian.3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for eel-1.0.2-ximian.3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6752,7 +6752,7 @@
 >!>       
 >!> Problem:
 >!> gaim-applet has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for gaim-applet-1:0.52-1.ximian.2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for gaim-applet-1:0.52-1.ximian.2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6767,7 +6767,7 @@
 >!>       
 >!> Problem:
 >!> magicdev has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for magicdev-0.3.6-2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for magicdev-0.3.6-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6782,7 +6782,7 @@
 >!>       
 >!> Problem:
 >!> SDL_image has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for SDL_image-1.2.0-3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for SDL_image-1.2.0-3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6812,7 +6812,7 @@
 >!>       
 >!> Problem:
 >!> gqview has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gqview-0.10.1-ximian.3
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gqview-0.10.1-ximian.3
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6857,7 +6857,7 @@
 >!>       
 >!> Problem:
 >!> vim-enhanced has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for vim-enhanced-1:6.0-7.13
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for vim-enhanced-1:6.0-7.13
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6871,23 +6871,8 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> authconfig has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for authconfig-4.1.19-1
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete authconfig
->!>       delete [package]authconfig-4.1.19-1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> fam has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for fam-2.6.4-11
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for fam-2.6.4-11
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6901,8 +6886,23 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> authconfig has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for authconfig-4.1.19-1
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete authconfig
+>!>       delete [package]authconfig-4.1.19-1.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> usbview has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for usbview-1.0-2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for usbview-1.0-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6947,7 +6947,7 @@
 >!>       
 >!> Problem:
 >!> binutils has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for binutils-2.11.90.0.8-12
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for binutils-2.11.90.0.8-12
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6977,7 +6977,7 @@
 >!>       
 >!> Problem:
 >!> netscape-communicator has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for netscape-communicator-3:4.78-2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for netscape-communicator-3:4.78-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -6992,28 +6992,13 @@
 >!>       
 >!> Problem:
 >!> sane-backends has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for sane-backends-1.0.7-1.ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for sane-backends-1.0.7-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete sane-backends
 >!>       delete [package]sane-backends-1.0.7-1.ximian.1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> xmms-gnome has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for xmms-gnome-1:1.2.6-ximian.3
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete xmms-gnome
->!>       delete [package]xmms-gnome-1:1.2.6-ximian.3.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -7029,6 +7014,21 @@
 >!>    Solution:
 >!>       delete rpm-build
 >!>       delete [package]rpm-build-4.0.3-1.03.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> xmms-gnome has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for xmms-gnome-1:1.2.6-ximian.3
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete xmms-gnome
+>!>       delete [package]xmms-gnome-1:1.2.6-ximian.3.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -7067,7 +7067,7 @@
 >!>       
 >!> Problem:
 >!> mozilla-psm has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for mozilla-psm-35:0.9.8-1.ximian.4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for mozilla-psm-35:0.9.8-1.ximian.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7081,23 +7081,8 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> eject has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for eject-2.0.9-2
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete eject
->!>       delete [package]eject-2.0.9-2.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> gnucash has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for gnucash-1.6.5-ximian.2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for gnucash-1.6.5-ximian.2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7126,8 +7111,23 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> eject has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for eject-2.0.9-2
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete eject
+>!>       delete [package]eject-2.0.9-2.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> gdk-pixbuf has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gdk-pixbuf-1:0.16.0-ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gdk-pixbuf-1:0.16.0-ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7157,7 +7157,7 @@
 >!>       
 >!> Problem:
 >!> nautilus has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for nautilus-1.0.6-ximian.4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for nautilus-1.0.6-ximian.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7172,7 +7172,7 @@
 >!>       
 >!> Problem:
 >!> SDL_net has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for SDL_net-1.2.2-1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for SDL_net-1.2.2-1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7201,21 +7201,6 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> ee has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ee-0.3.12-5
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete ee
->!>       delete [package]ee-0.3.12-5.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
 >!> ed has missing dependencies
 >!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ed-0.2-21
 >!>    Solution:
@@ -7231,14 +7216,14 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> soup has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for soup-0.7.0-1.ximian.3
+>!> ee has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for ee-0.3.12-5
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete soup
->!>       delete [package]soup-0.7.0-1.ximian.3.
+>!>       delete ee
+>!>       delete [package]ee-0.3.12-5.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -7261,8 +7246,23 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
+>!> soup has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for soup-0.7.0-1.ximian.3
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete soup
+>!>       delete [package]soup-0.7.0-1.ximian.3.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
 >!> XFree86 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for XFree86-4.1.0-15
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for XFree86-4.1.0-15
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7292,7 +7292,7 @@
 >!>       
 >!> Problem:
 >!> cyrus-sasl-md5 has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for cyrus-sasl-md5-1.5.24-23
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for cyrus-sasl-md5-1.5.24-23
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7307,7 +7307,7 @@
 >!>       
 >!> Problem:
 >!> gtk+ has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for gtk+-1:1.2.10-ximian.21
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gtk+-1:1.2.10-ximian.21
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7322,7 +7322,7 @@
 >!>       
 >!> Problem:
 >!> glade has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for glade-1:0.6.4-1.ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for glade-1:0.6.4-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7337,7 +7337,7 @@
 >!>       
 >!> Problem:
 >!> gnapster has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gnapster-1.4.2-ximian.4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnapster-1.4.2-ximian.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7352,7 +7352,7 @@
 >!>       
 >!> Problem:
 >!> ypserv has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for ypserv-1.3.12-2
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ypserv-1.3.12-2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7457,7 +7457,7 @@
 >!>       
 >!> Problem:
 >!> gzip has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for gzip-1.3-15
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gzip-1.3-15
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7487,7 +7487,7 @@
 >!>       
 >!> Problem:
 >!> cpp has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for cpp-2.96-98
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for cpp-2.96-98
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7577,7 +7577,7 @@
 >!>       
 >!> Problem:
 >!> librep has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for librep-1:0.15.2-1.ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for librep-1:0.15.2-1.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7607,7 +7607,7 @@
 >!>       
 >!> Problem:
 >!> pygtk-libglade has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1.3) for pygtk-libglade-1:0.6.9-1.ximian.2
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for pygtk-libglade-1:0.6.9-1.ximian.2
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7637,7 +7637,7 @@
 >!>       
 >!> Problem:
 >!> anaconda has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for anaconda-7.2-11
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for anaconda-7.2-11
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7652,7 +7652,7 @@
 >!>       
 >!> Problem:
 >!> ximian-doorman has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for ximian-doorman-1:1.0.8-ximian.4
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for ximian-doorman-1:1.0.8-ximian.4
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
@@ -7667,13 +7667,28 @@
 >!>       
 >!> Problem:
 >!> rcs has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for rcs-5.7-15
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for rcs-5.7-15
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete rcs
 >!>       delete [package]rcs-5.7-15.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> libtermcap has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for libtermcap-2.0.8-28
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete libtermcap
+>!>       delete [package]libtermcap-2.0.8-28.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -7689,21 +7704,6 @@
 >!>    Solution:
 >!>       delete foomatic
 >!>       delete [package]foomatic-1.1-0.20011218.3.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> gnorpm has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for gnorpm-0.96-11
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete gnorpm
->!>       delete [package]gnorpm-0.96-11.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -7727,28 +7727,13 @@
 >!>       
 >!> Problem:
 >!> mrproject has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libpthread.so.0 for mrproject-0.5.1-for.ximian.1
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for mrproject-0.5.1-for.ximian.1
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete mrproject
 >!>       delete [package]mrproject-0.5.1-for.ximian.1.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> slang has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for slang-1.4.4-4
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete slang
->!>       delete [package]slang-1.4.4-4.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -7771,14 +7756,29 @@
 >!>       Ignore this requirement for all other resolvables.
 >!>       
 >!> Problem:
->!> libtermcap has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for libtermcap-2.0.8-28
+>!> gnorpm has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for gnorpm-0.96-11
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
->!>       delete libtermcap
->!>       delete [package]libtermcap-2.0.8-28.
+>!>       delete gnorpm
+>!>       delete [package]gnorpm-0.96-11.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> slang has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for slang-1.4.4-4
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete slang
+>!>       delete [package]slang-1.4.4-4.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -7787,13 +7787,43 @@
 >!>       
 >!> Problem:
 >!> licq-gnome has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for licq-gnome-1.0.3-7
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2(GLIBC_2.0) for licq-gnome-1.0.3-7
 >!>    Solution:
 >!>       keep glibc
 >!>       keep [package]glibc-2.2.4-19.3.
 >!>    Solution:
 >!>       delete licq-gnome
 >!>       delete [package]licq-gnome-1.0.3-7.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> tcpdump has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for tcpdump-12:3.6.2-9
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete tcpdump
+>!>       delete [package]tcpdump-12:3.6.2-9.
+>!>    Solution:
+>!>       Ignore this requirement.
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement for all other resolvables.
+>!>       
+>!> Problem:
+>!> evolution has missing dependencies
+>!> There are no alternative installed providers of [package] (namedcap) libdl.so.2 for evolution-1.0.3-ximian.4
+>!>    Solution:
+>!>       keep glibc
+>!>       keep [package]glibc-2.2.4-19.3.
+>!>    Solution:
+>!>       delete evolution
+>!>       delete [package]evolution-1.0.3-ximian.4.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       
@@ -7809,36 +7839,6 @@
 >!>    Solution:
 >!>       delete file
 >!>       delete [package]file-3.35-2.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> tcpdump has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.1) for tcpdump-12:3.6.2-9
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete tcpdump
->!>       delete [package]tcpdump-12:3.6.2-9.
->!>    Solution:
->!>       Ignore this requirement.
->!>       
->!>    Solution:
->!>       Ignore this requirement for all other resolvables.
->!>       
->!> Problem:
->!> evolution has missing dependencies
->!> There are no alternative installed providers of [package] (namedcap) libc.so.6(GLIBC_2.2) for evolution-1.0.3-ximian.4
->!>    Solution:
->!>       keep glibc
->!>       keep [package]glibc-2.2.4-19.3.
->!>    Solution:
->!>       delete evolution
->!>       delete [package]evolution-1.0.3-ximian.4.
 >!>    Solution:
 >!>       Ignore this requirement.
 >!>       

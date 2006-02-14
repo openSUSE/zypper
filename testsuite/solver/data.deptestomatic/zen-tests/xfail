@@ -1,8 +1,6 @@
 # cannot be an update cause there is no system installed: 12-system.xml
 # --> mistake in 12-test.solution
 12-test.xml
-13-test.xml
-14-test.xml
 #ppc 
 8-test.xml
 #s390
@@ -12,3 +10,5 @@
 11-test.xml
 3-test.xml
 7-test.xml
+14-test.xml
+13-test.xml
