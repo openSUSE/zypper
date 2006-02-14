@@ -49,6 +49,9 @@ namespace zypp
   Capability::~Capability()
   {}
 
+  const Capability::Kind & Capability::kind() const
+  { return _pimpl->kind(); }
+
   const Resolvable::Kind & Capability::refers() const
   { return _pimpl->refers(); }
 

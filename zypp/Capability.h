@@ -16,7 +16,7 @@
 #include <functional>
 
 #include "zypp/base/PtrTypes.h"
-
+#include "zypp/capability/CapTraits.h"
 #include "zypp/Resolvable.h"
 #include "zypp/CapMatch.h"
 
@@ -70,27 +70,16 @@ namespace zypp
   */
   class Capability
   {
-    /** Factory */
-    friend class CapFactory;
-
     /** Ordering for use in CapSet */
     friend class CapOrder;
     friend bool operator==( const Capability & lhs, const Capability & rhs );
     friend std::ostream & operator<<( std::ostream & str, const Capability & obj );
 
-  private:
-    typedef capability::CapabilityImpl          Impl;
-    typedef capability::CapabilityImpl_Ptr      Impl_Ptr ;
-    typedef capability::CapabilityImpl_constPtr Impl_constPtr;
-
-    /** Factory ctor */
-    explicit
-    Capability( Impl_Ptr impl_r );
+  public:
+    /** */
+    typedef capability::CapabilityTraits::KindType  Kind;
 
   public:
-    /** Factory */
-    typedef CapFactory Factory;
-
     /** DefaultCtor creating \ref noCap. */
     Capability();
 
@@ -104,6 +93,9 @@ namespace zypp
     static const Capability noCap;
 
   public:
+    /** Kind of Capability.  */
+    const Kind & kind() const;
+
     /** Kind of Resolvable the Capability refers to. */
     const Resolvable::Kind & refers() const;
 
@@ -132,9 +124,29 @@ namespace zypp
     Edition edition() const;
 
   private:
+    typedef capability::CapabilityImpl          Impl;
+    typedef capability::CapabilityImpl_Ptr      Impl_Ptr ;
+    typedef capability::CapabilityImpl_constPtr Impl_constPtr;
+
+    /** Factory */
+    friend class CapFactory;
+
+    /** Factory ctor */
+    explicit
+    Capability( Impl_Ptr impl_r );
+
+  private:
+    /** */
+    friend class capability::CapabilityImpl;
     /** Pointer to implementation */
     RW_pointer<Impl,rw_pointer::Intrusive<Impl> > _pimpl;
   };
+  ///////////////////////////////////////////////////////////////////
+
+  template<class _Cap>
+    inline bool isKind( const Capability & cap )
+    { return cap.kind() == capability::CapTraits<_Cap>::kind; }
+
   ///////////////////////////////////////////////////////////////////
 
   /** Ordering relation used by ::CapSet. */
