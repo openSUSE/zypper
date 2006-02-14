@@ -70,6 +70,7 @@ Authors:
 
 %prep
 %setup -q -n zypp-0.0.0
+rm -rf 'testsuite/solver/data.deptestomatic/*-tests'
 
 %build
 mv configure.ac x
