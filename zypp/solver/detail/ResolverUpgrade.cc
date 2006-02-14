@@ -112,9 +112,6 @@ struct FindObsoletes : public resfilter::OnCapMatchCallbackFunctor
 
     bool operator()( PoolItem_Ref provider, const Capability & match )
     {
-	if (provider->arch() == Arch_src)
-	    return true;
-
 	obsoletes = true;				// we have a match
 	return false;					// stop looping here
     }

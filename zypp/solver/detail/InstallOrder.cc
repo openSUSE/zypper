@@ -256,8 +256,6 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
 
 	ResPool::const_indexiterator pend = _pool.providesend( requirement.index() );
 	for (ResPool::const_indexiterator it = _pool.providesbegin( requirement.index() ); it != pend; ++it) {
-	    if (it->second.second->arch() == Arch_src)
-		continue;
 	    if (it->second.first.matches (requirement) == CapMatch::yes) {
 		if (!info( it->second.second, it->second.first))
 		    break;
@@ -271,8 +269,6 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
 
 	    ResPool::const_indexiterator pend = _pool.providesend( requirement.index() );
 	    for (ResPool::const_indexiterator it = _pool.providesbegin( requirement.index() ); it != pend; ++it) {
-		if (it->second.second->arch() == Arch_src)
-		    continue;
 		if (it->second.first.matches (requirement) == CapMatch::yes) {
 		    if (!info1( it->second.second, it->second.first))
 			break;

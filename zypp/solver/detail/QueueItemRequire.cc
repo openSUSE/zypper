@@ -331,8 +331,6 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	// world->foreachProvidingResItem (_capability, require_process_cb, &info);
 	ResPool::const_indexiterator pend = pool().providesend(_capability.index());
 	for (ResPool::const_indexiterator it = pool().providesbegin(_capability.index()); it != pend; ++it) {
-	    if (it->second.second->arch() == Arch_src)
-		continue;
 	    if (_capability.matches (it->second.first) == CapMatch::yes) {
 		if (!info( it->second.second, it->second.first))
 		    break;
@@ -409,8 +407,6 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		// world->foreachProvidingResItem (_capability, require_process_cb, &info);
 		ResPool::const_indexiterator pend = pool().providesend(_capability.index());
 		for (ResPool::const_indexiterator it = pool().providesbegin(_capability.index()); it != pend; ++it) {
-		    if (it->second.second->arch() == Arch_src)
-			continue;
 		    if (_capability.matches (it->second.first) == CapMatch::yes) {
 			if (!info( it->second.second, it->second.first))
 			    break;

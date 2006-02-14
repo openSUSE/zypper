@@ -374,8 +374,6 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	    ResPool::const_indexiterator cend = pool().conflictsend(cap.index());
 	    for (ResPool::const_indexiterator it = pool().conflictsbegin(cap.index()); it != cend; ++it) {
-		if (it->second.second->arch() == Arch_src)
-		    continue;
 
 		if (cap.matches (it->second.first) == CapMatch::yes) {
 		    // conflicting item found

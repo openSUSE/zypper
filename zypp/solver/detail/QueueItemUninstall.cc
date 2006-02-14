@@ -263,8 +263,6 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	Capability c = *iter;
 	ResPool::const_indexiterator rend = pool().requiresend(c.index());
 	for (ResPool::const_indexiterator it = pool().requiresbegin(c.index()); it != rend; ++it) {
-	    if (it->second.second->arch() == Arch_src)
-		continue;
 	    if (c.matches (it->second.first) == CapMatch::yes) {
 		if (!info( it->second.second, it->second.first))
 		    break;
@@ -331,8 +329,6 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	Capability c = *iter;
 	ResPool::const_indexiterator rend = pool().requiresend(c.index());
 	for (ResPool::const_indexiterator it = pool().requiresbegin(c.index()); it != rend; ++it) {
-	    if (it->second.second->arch() == Arch_src)
-		continue;
 	    if (c.matches (it->second.first) == CapMatch::yes) {
 		if (!info( it->second.second, it->second.first))
 		    break;
