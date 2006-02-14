@@ -112,6 +112,12 @@ namespace zypp
       void disable()
       { _enabled = false; }
 
+      const bool autorefresh() const
+      { return _autorefresh; }
+      
+      void setAutorefresh( const bool enable_r )
+      { _autorefresh = enable_r; }
+
       virtual void storeMetadata(const Pathname & cache_dir_r);
 
       std::string alias (void) const
@@ -123,6 +129,8 @@ namespace zypp
       virtual void setPriority (unsigned p);
       virtual unsigned priorityUnsubscribed (void) const;
       virtual void setPriorityUnsubscribed (unsigned p);
+
+      virtual std::string type(void) const;
 
       Url url (void) const;
 
@@ -156,7 +164,9 @@ namespace zypp
       /** Path to the source on the media */
       Pathname _path;
       /** The source is enabled */
-      bool _enabled;
+      bool _enabled;      
+      /** If the source metadata should be autorefreshed */
+      bool _autorefresh;
       /** (user defined) alias of the source */
       std::string _alias;
       /** Directory holding metadata cache */

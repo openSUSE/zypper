@@ -72,11 +72,20 @@ namespace zypp
   void Source_Ref::disable()
   { _pimpl->disable(); }
 
+  const bool Source_Ref::autorefresh() const
+  { return _pimpl->autorefresh(); }
+
+  void Source_Ref::setAutorefresh( const bool enable_r )
+  { _pimpl->setAutorefresh( enable_r ); }
+
   void Source_Ref::storeMetadata(const Pathname & cache_dir_r)
   { _pimpl->storeMetadata(cache_dir_r); }
 
   string Source_Ref::alias (void) const
   { return _pimpl->alias(); }
+
+  string Source_Ref::type (void) const
+  { return _pimpl->type(); }
 
   string Source_Ref::id (void) const
   { return _pimpl->id(); }

@@ -191,6 +191,9 @@ namespace zypp
     /////////////////////////////////////////////////////////////////
     // attribute accessors
 
+    std::string SourceImpl::type (void) const
+    { return "undefined"; }
+
     std::string SourceImpl::id (void) const
     { return _id; }
 

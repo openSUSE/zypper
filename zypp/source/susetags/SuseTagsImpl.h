@@ -50,6 +50,9 @@ namespace zypp
 
       public:
 	virtual void createResolvables(Source_Ref source_r);
+	
+	virtual std::string type(void) const
+        { return "UnitedLinux"; }
 
 	Pathname sourceDir( const NVRAD& nvrad );
 

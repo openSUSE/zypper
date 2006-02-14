@@ -51,6 +51,9 @@ namespace zypp
       public:
 
         virtual void storeMetadata(const Pathname & cache_dir_r);
+	
+	virtual std::string type(void) const
+	{ return "YUM"; }
 
 	virtual void createResolvables(Source_Ref source_r);
 

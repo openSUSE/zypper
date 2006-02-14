@@ -81,9 +81,15 @@ namespace zypp
 
     void disable();
 
+    const bool autorefresh() const;
+    void setAutorefresh( const bool enable_r );
+
     void storeMetadata(const Pathname & cache_dir_r);
 
     std::string alias (void) const;
+    
+    // string description of the source type, e.g. "YUM" or "UnitedLinux"
+    std::string type (void) const;
 
     // generic information get/set
     std::string id (void) const;

@@ -132,8 +132,10 @@ namespace zypp
 	descr.url = it->second->url().asString();
         descr.enabled = it->second->enabled();
         descr.alias = it->second->alias();
+	descr.autorefresh = it->second->autorefresh();
+	descr.type = it->second->type();
 	
-	// FIXME: product_dir, autorefresh, type
+	// FIXME: product_dir
 	store.storeSource( descr );
     }
   }
