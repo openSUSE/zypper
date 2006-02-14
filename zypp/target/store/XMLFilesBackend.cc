@@ -57,8 +57,6 @@ namespace zypp
 namespace storage
 { /////////////////////////////////////////////////////////////////
 
-typedef std::map< Resolvable::Kind, std::list<ResObject::Ptr> > res_by_kind_index;
-typedef std::list<ResObject::Ptr> res_list;
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -72,8 +70,6 @@ class XMLFilesBackend::Private
   { }
   bool randomFileName;
   std::set<Resolvable::Kind> kinds;
-  res_by_kind_index resolvables_by_kind;
-  res_list resolvables;
   Pathname root;
 };
 
@@ -163,7 +159,7 @@ bool
 XMLFilesBackend::isBackendInitialized() const
 {
   bool ok = true;
-  ok = ok && exists( path(d->root.asString()) / ZYPP_DB_DIR );
+  ok = ok && exists( ZYPP_DB_DIR );
   std::set<Resolvable::Kind>::const_iterator it_kinds;
   for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
   {
@@ -204,8 +200,6 @@ XMLFilesBackend::initBackend()
       create_directory(source_p);
       MIL << "Created..." << source_p.string() << std::endl;
     }
-    // read the objects
-    readStoredObjects();
   }
   catch(std::exception &e)
   {
@@ -245,7 +239,6 @@ XMLFilesBackend::fullPathForResolvable( ResObject::constPtr resolvable ) const
 void
 XMLFilesBackend::storeObject( ResObject::constPtr resolvable )
 {
-  DBG << "Before store: " << d->resolvables.size() << " resolvables." << std::endl;
   // only ignore if it is not a supported resolvable kind
   std::set<Resolvable::Kind>::const_iterator it;
   it = find(d->kinds.begin(), d->kinds.end(), resolvable->kind() );
@@ -257,7 +250,6 @@ XMLFilesBackend::storeObject( ResObject::constPtr resolvable )
 
   std::string xml = castedToXML(resolvable);
   std::string filename = fullPathForResolvable(resolvable);
-
   //DBG << std::endl << xml << std::endl;
   std::ofstream file;
   //DBG << filename << std::endl;
@@ -266,74 +258,28 @@ XMLFilesBackend::storeObject( ResObject::constPtr resolvable )
     file.open(filename.c_str());
     file << xml;
     file.close();
-
-    // make it inmediately available in the cache
-    ResObject::Ptr stored_resolvable = findResolvable( resolvable->kind(), resolvable->name(), resolvable->edition(), resolvable->arch());
-    
-    // if there was the same stored before, remove it and store a new one.
-    if ( stored_resolvable )
-    {
-      d->resolvables.remove(stored_resolvable);
-      d->resolvables_by_kind[resolvable->kind()].remove(stored_resolvable);
-    }
-   
-    try
-    {
-      ResObject::Ptr new_resolvable = resolvableFromFile( filename, resolvable->kind() );
-      d->resolvables.push_back(new_resolvable);
-      d->resolvables_by_kind[resolvable->kind()].push_back(new_resolvable);
-    }
-    catch(std::exception &e)
-    {
-      ERR << "Error storing new resolvable!" << resolvable << std::endl;
-      ZYPP_THROW(Exception(e.what()));
-    }
   }
   catch(std::exception &e)
   {
     ERR << "Error saving resolvable " << resolvable << std::endl;
     ZYPP_THROW(Exception(e.what()));
   }
-  DBG << "After store: " << d->resolvables.size() << " resolvables." << std::endl;
-}
-
-ResObject::Ptr
-XMLFilesBackend::findResolvable(const Resolvable::Kind &kind, const std::string &name, const Edition &edition, const Arch &arch) const
-{
-  for ( res_list::iterator it = d->resolvables_by_kind[kind].begin(); it != d->resolvables_by_kind[kind].end(); ++it )
-  {
-    ResObject::Ptr res = *it;
-    if ( (res->arch() == arch) && (res->name() == name) && (res->edition() == edition))
-     return res;
-  }
-  return 0L;
 }
 
 void
 XMLFilesBackend::deleteObject( ResObject::constPtr resolvable )
 {
-  DBG << "Before delete: " << d->resolvables.size() << " resolvables." << std::endl;
-  ResObject::Ptr stored_resolvable = findResolvable( resolvable->kind(), resolvable->name(), resolvable->edition(), resolvable->arch());
-  if (! stored_resolvable )
-  {
-    ERR << "You are trying to delete a resolvable that does not exists in the storage: " << resolvable << std::endl;
-    return;
-  }
-
   // only remove the file
-  std::string filename = fullPathForResolvable(stored_resolvable);
+  std::string filename = fullPathForResolvable(resolvable);
   try
   {
     remove(path(filename));
-    d->resolvables.remove(stored_resolvable);
-    d->resolvables_by_kind[stored_resolvable->kind()].remove(stored_resolvable);
   }
   catch(std::exception &e)
   {
     ERR << "Error removing resolvable " << resolvable << std::endl;
     ZYPP_THROW(Exception(e.what()));
   }
-  DBG << "After delete: " << d->resolvables.size() << " resolvables." << std::endl;
 }
 
 ResObject::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Resolvable::Kind kind ) const
@@ -413,28 +359,31 @@ ResObject::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Resol
   return resolvable;
 }
 
-void
-XMLFilesBackend::readStoredObjects()
+std::list<ResObject::Ptr>
+XMLFilesBackend::storedObjects() const
 {
   DBG << std::endl;
+  std::list<ResObject::Ptr> objects;
+
   std::set<Resolvable::Kind>::const_iterator it_kinds;
   for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
   {
     Resolvable::Kind kind = (*it_kinds);
-    // fill the resolvables by kind index
-    readStoredObjects(kind);
+    std::list<ResObject::Ptr> objects_for_kind = storedObjects(kind);
     std::list<ResObject::Ptr>::iterator it;
-    for( it = d->resolvables_by_kind[kind].begin(); it != d->resolvables_by_kind[kind].end(); ++it)
+    for( it = objects_for_kind.begin(); it != objects_for_kind.end(); ++it)
     {
       //DBG << "adding objects back" << std::endl;
-      d->resolvables.push_back(*it);
+      objects.push_back(*it);
     }
   }
+  return objects;
 }
 
-void
-XMLFilesBackend::readStoredObjects(const Resolvable::Kind &kind)
+std::list<ResObject::Ptr>
+XMLFilesBackend::storedObjects(const Resolvable::Kind kind) const
 {
+  std::list<ResObject::Ptr> objects;
   std::string dir_path = dirForResolvableKind(kind);
   DBG << "Reading objects of kind " << resolvableKindToString(kind) << " in " << dir_path << std::endl;
   directory_iterator end_iter;
@@ -442,30 +391,18 @@ XMLFilesBackend::readStoredObjects(const Resolvable::Kind &kind)
   if ( !exists( dir_path ) )
   {
     ERR << "path " << dir_path << " does not exists. Required to read objects of kind " << resolvableKindToString(kind) << std::endl;
-    return;
+    return std::list<ResObject::Ptr>();
   }
 
   for ( directory_iterator dir_itr( dir_path ); dir_itr != end_iter; ++dir_itr )
   {
     DBG << "[" << resolvableKindToString( kind, false ) << "] - " << dir_itr->leaf() << std::endl;
-    d->resolvables_by_kind[kind].push_back( resolvableFromFile( dir_path + "/" + dir_itr->leaf(), kind) );
+    objects.push_back( resolvableFromFile( dir_path + "/" + dir_itr->leaf(), kind) );
   }
   MIL << "done reading stored objecs of kind " << resolvableKindToString(kind) << std::endl;
+  return objects;
 }
 
-const std::list<ResObject::Ptr> &
-XMLFilesBackend::storedObjects() const
-{
-  return d->resolvables;
-}
-
-const std::list<ResObject::Ptr> &
-XMLFilesBackend::storedObjects(const Resolvable::Kind &kind) const
-{
-  return d->resolvables_by_kind[kind];
-}
-
-/*
 std::list<ResObject::Ptr>
 XMLFilesBackend::storedObjects(const Resolvable::Kind kind, const std::string & name, bool partial_match) const
 {
@@ -482,7 +419,6 @@ XMLFilesBackend::storedObjects(const Resolvable::Kind kind, const std::string & 
   MIL << "done reading stored objecs of kind " << resolvableKindToString(kind) << " and keyword [" << name <<"]" << std::endl;
   return result;
 }
-*/
 
 Patch::Ptr
 XMLFilesBackend::createPatch( const zypp::parser::yum::YUMPatchData & parsed ) const

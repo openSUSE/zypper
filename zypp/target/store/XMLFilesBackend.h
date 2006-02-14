@@ -75,11 +75,16 @@ public:
   /**
     * Deletes a Resolvable from the active backend.
     */
-  virtual const std::list<ResObject::Ptr> &storedObjects() const;
+  virtual std::list<ResObject::Ptr> storedObjects() const;
    /**
     * Query for installed Resolvables of a certain kind
     */
-  virtual const std::list<ResObject::Ptr> &storedObjects(const Resolvable::Kind &kind) const;
+  virtual std::list<ResObject::Ptr> storedObjects(const Resolvable::Kind) const;
+  /**
+    * Query for installed Resolvables of a certain kind by name
+    * \a partial_match allows for text search.
+    */
+  virtual std::list<ResObject::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false) const;
 
   /////////////////////////////////////////////////////////
   // SOURCES API
@@ -101,9 +106,8 @@ public:
   protected:
   std::string randomString(int length) const;
   int random() const;
-  void readStoredObjects();
-  void readStoredObjects(const Resolvable::Kind &kind);
-  ResObject::Ptr findResolvable(const Resolvable::Kind &kind, const std::string &name, const Edition &edition, const Arch &arch) const;
+
+  
   /**
     * Directory where the xml file is stored (for the given resolvable)
     */

@@ -65,11 +65,17 @@ public:
   /**
   * Query for installed Resolvables.
   */
-  virtual const std::list<ResObject::Ptr> &storedObjects() const = 0;
+  virtual std::list<ResObject::Ptr> storedObjects() const = 0;
   /**
   * Query for installed Resolvables of a certain kind
   */
-  virtual const std::list<ResObject::Ptr> &storedObjects(const Resolvable::Kind &kind) const = 0;
+  virtual std::list<ResObject::Ptr> storedObjects(const Resolvable::Kind) const = 0;
+  /**
+  * Query for installed Resolvables of a certain kind by name
+  * \a partial_match allows for text search.
+  */
+  virtual std::list<ResObject::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false) const = 0;
+
 
   /////////////////////////////////////////////////////////
   // SOURCES API

@@ -93,18 +93,24 @@ PersistentStorage::deleteObject( ResObject::constPtr resolvable )
   d->backend->deleteObject(resolvable);
 }
 
-const std::list<ResObject::Ptr> &
+std::list<ResObject::Ptr>
 PersistentStorage::storedObjects() const
 {
   return d->backend->storedObjects();
 }
 
-const std::list<ResObject::Ptr> &
-PersistentStorage::storedObjects(const Resolvable::Kind &kind) const
+std::list<ResObject::Ptr>
+PersistentStorage::storedObjects(const Resolvable::Kind kind) const
 {
   //list<ResObject::Ptr>::iterator it;
   //it = find(nums.begin(), nums.end(), 3); // Search the list.
   return d->backend->storedObjects(kind);
+}
+
+std::list<ResObject::Ptr>
+PersistentStorage::storedObjects(const Resolvable::Kind kind, const std::string & name, bool partial_match) const
+{
+  return d->backend->storedObjects(kind, name, partial_match);
 }
 
 /////////////////////////////////////////////////////////

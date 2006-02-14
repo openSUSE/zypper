@@ -82,11 +82,16 @@ namespace zypp
       /**
        * Query for installed Resolvables.
        */
-      const std::list<ResObject::Ptr> &storedObjects() const;
+      std::list<ResObject::Ptr> storedObjects() const;
        /**
        * Query for installed Resolvables of a certain kind.
        */
-      const std::list<ResObject::Ptr> &storedObjects(const Resolvable::Kind &kind) const;
+      std::list<ResObject::Ptr> storedObjects(const Resolvable::Kind kind) const;
+       /**
+       * Query for installed Resolvables of a certain kind by name
+       * \a partial_match allows for text search.
+       */
+      std::list<ResObject::Ptr> storedObjects(const Resolvable::Kind kind, const std::string & name, bool partial_match = false) const;
 
       /////////////////////////////////////////////////////////
       // SOURCES API
