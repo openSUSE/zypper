@@ -20,6 +20,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/String.h"
 #include "zypp/CapFactory.h"
+#include "zypp/ZYppFactory.h"
 
 #include "zypp/source/susetags/SelectionTagFileParser.h"
 #include <boost/regex.hpp>
@@ -51,6 +52,8 @@ namespace zypp
       SelectionTagFileParser::SelectionTagFileParser()
       {
 	selImpl = shared_ptr<SuseTagsSelectionImpl>(new SuseTagsSelectionImpl);
+	ZYppFactory zf;
+	_locale = zf.getZYpp()->getTextLocale();
       }
 
       void SelectionTagFileParser::consume( const SingleTag &tag )
@@ -118,11 +121,11 @@ namespace zypp
 
       void SelectionTagFileParser::endParse()
       {
-	#warning FIXME how to insert the specific language packages
+#warning Dont do this language stuff in selections
 	CapFactory _f;
 	Dependencies _deps;
 
-	for (std::list<std::string>::const_iterator it = selImpl->_inspacks[Locale()].begin(); it != selImpl->_inspacks[Locale()].end(); it++)
+	for (std::list<std::string>::const_iterator it = selImpl->_inspacks[_locale].begin(); it != selImpl->_inspacks[_locale].end(); it++)
 	{
 	  Capability _cap = _f.parse( ResTraits<Package>::kind, *it);
 	  _deps[Dep::RECOMMENDS].insert(_cap);

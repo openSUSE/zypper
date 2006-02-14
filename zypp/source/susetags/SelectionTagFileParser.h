@@ -51,6 +51,8 @@ namespace zypp
         void consume( const SingleTag &tag );
         void consume( const MultiTag &tag );
         void endParse();
+	private:
+	    Locale _locale;
       };
       ///////////////////////////////////////////////////////////////////
       Selection::Ptr parseSelection( const Pathname & file_r );
