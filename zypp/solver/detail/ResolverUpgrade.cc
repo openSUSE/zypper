@@ -41,6 +41,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
+#include "zypp/base/Exception.h"
 
 #include "zypp/base/Algorithm.h"
 #include "zypp/ResPool.h"
@@ -51,6 +52,9 @@
 #include "zypp/CapFactory.h"
 #include "zypp/VendorAttr.h"
 #include "zypp/Package.h"
+
+#include "zypp/capability/CapabilityImpl.h"
+#include "zypp/ZYppFactory.h"
 
 #include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/Helper.h"
@@ -190,7 +194,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   typedef map<PoolItem_Ref,PoolItem_Ref> CandidateMap;
 
   typedef intrusive_ptr<const SplitCap> SplitCapPtr;
-  typedef map<SplitCapPtr,PoolItemSet>  SplitMap;
+  typedef map<PoolItem_Ref,PoolItemSet> SplitMap;
   typedef map<PoolItem_Ref,PoolItemSet> TodoMap;
 
   CandidateMap candidatemap;
@@ -202,6 +206,17 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   TodoMap     addSplitted;
   TodoMap     addProvided;
   TodoMap     addMultiProvided;
+
+  Target_Ptr target;
+  try {
+	ZYppFactory zf;
+	target = zf.getZYpp()->target();
+  }
+  catch( const Exception & excpt_r) {
+	ERR << "Huh, no target ?";
+	ZYPP_CAUGHT(excpt_r);
+  }
+MIL << "target at " << target << endl;
 
   MIL << "doUpgrade start... "
     << "(delete_unmaintained:" << (opt_stats_r.delete_unmaintained?"yes":"no") << ")"
@@ -218,7 +233,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   // Reset all auto states and build PoolItemSet of available candidates
   // (those that do not belong to PoolItems set to delete).
   //
-  // On the fly rememeber splitprovides and afterwards check, which
+  // On the fly remember splitprovides and afterwards check, which
   // of them do apply.
   ///////////////////////////////////////////////////////////////////
   PoolItemSet available; // candidates available for install (no matter if selected for install or not)
@@ -292,19 +307,25 @@ MIL << "installed " << installed << ", candidate " << candidate << endl;
     // remember any splitprovides to packages actually installed.
     CapSet caps = candidate->dep (Dep::PROVIDES);
     for (CapSet::iterator cit = caps.begin(); cit != caps.end(); ++cit ) {
-#warning How do I get to the SplitCap ?
-#if 0
-      SplitCapPtr scap (asKind<SplitCap>(*cit));
-      if (scap) {
-MIL << "has split cap " << *scap << endl;
-	if (!installed) {
-	    installed = Helper::findInstalledByNameAndKind (_pool, scap->name_str(), ResTraits<zypp::Package>::kind);
+	if (isKind<capability::SplitCap>( *cit ) ) {
+
+	    capability::CapabilityImpl::SplitInfo splitinfo = capability::CapabilityImpl::getSplitInfo( *cit );
+
+	    PoolItem splititem = Helper::findInstalledByNameAndKind (_pool, splitinfo.name, ResTraits<zypp::Package>::kind);
+MIL << "has split cap " << splitinfo.name << ":" << splitinfo.path << ", splititem:" << splititem << endl;
+	    if (splititem) {
+		if (target) {
+		    ResObject::constPtr robj = target->whoOwnsFile( splitinfo.path );
+MIL << "whoOwnsFile(): " << robj << endl;
+		    if (robj
+			&& robj->name() == splitinfo.name)
+		    {
+MIL << "split matched !" << endl;
+			splitmap[splititem].insert( candidate );
+		    }
+		}
+	    }
 	}
-	if ( installed ) {
-	    splitmap[scap].insert( candidate );
-	}
-      }
-#endif
     }
 
   } // iterate over the complete pool
@@ -344,13 +365,13 @@ MIL << "has split cap " << *scap << endl;
   MIL << "doUpgrade: " << opt_stats_r.pre_nocand << " packages without candidate (foreign, replaced or dropped)" << endl;
   MIL << "doUpgrade: " << opt_stats_r.pre_avcand << " packages available for update" << endl;
 
-  MIL << "doUpgrade: going to check " << splitmap.size() << " probabely splitted packages" << endl;
+  MIL << "doUpgrade: going to check " << splitmap.size() << " probably splitted packages" << endl;
   {
     ///////////////////////////////////////////////////////////////////
     // splitmap entries are gouped by PoolItems (we know this). So get the
-    // filelist as a new PoolItem occurres, and use it for consecutive entries.
+    // filelist as a new PoolItem occures, and use it for consecutive entries.
     //
-    // On the fly buld SplitPkgMap from splits that do apply (i.e. file is
+    // On the fly build SplitPkgMap from splits that do apply (i.e. file is
     // in PoolItems's filelist). The way splitmap was created, candidates added
     // are not initially tagged to delete!
     ///////////////////////////////////////////////////////////////////
@@ -358,17 +379,8 @@ MIL << "has split cap " << *scap << endl;
     PoolItem_Ref citem;
 
     for ( SplitMap::iterator it = splitmap.begin(); it != splitmap.end(); ++it ) {
-#warning How to access the target ?
-#if 0
-      if (Target::providesFile (it->first->name_str(), it->first->path_str())) {
-	_DEBUG("  " << it->second.size() << " package(s) for " << it->first);
-	applyingSplits[citem].insert( it->second.begin(), it->second.end() );
-	_DEBUG("  split count for " << citem->name() << " now " << applyingSplits[citem].size());
-      }
-      else {
-	_DEBUG("  " << it-> first << " does not apply");
-      }
-#endif
+	applyingSplits[it->first].insert( it->second.begin(), it->second.end() );
+	_DEBUG("  split count for " << it->first->name() << " now " << applyingSplits[it->first].size());
     }
     splitmap.clear();
   }
