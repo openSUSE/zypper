@@ -52,7 +52,7 @@ namespace zypp
 	virtual void createResolvables(Source_Ref source_r);
 	
 	virtual std::string type(void) const
-        { return "UnitedLinux"; }
+        { return "YaST"; }
 
 	Pathname sourceDir( const NVRAD& nvrad );
 
