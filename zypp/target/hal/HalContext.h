@@ -88,14 +88,6 @@ namespace zypp
         getAllDevices() const;
 
         /**
-         * Retrieve UDI's of all devices with a capability.
-         * \param  The \p capability name
-         * \return Vector with device UDI's.
-         */
-        std::vector<std::string>
-        findDevicesByCapability(const std::string &capability) const;
-
-        /**
          * Construct a HalDrive object for the specified UDI.
          * \param  The \p udi of the drive.
          * \return The HalDrive object.
@@ -110,6 +102,14 @@ namespace zypp
          */
         HalVolume
         getVolumeFromUDI(const std::string &udi) const;
+
+        /**
+         * Retrieve UDI's of all devices with a capability.
+         * \param  The \p capability name
+         * \return Vector with device UDI's.
+         */
+        std::vector<std::string>
+        findDevicesByCapability(const std::string &capability) const;
 
       private:
         //friend HalMonitor;
@@ -142,12 +142,11 @@ namespace zypp
 
         operator bool_type() const;
 
-        /**
-         * Retrieve UDI's of all volumes of this drive.
-         * \return Vector with volume UDI's.
-         */
-        std::vector<std::string>
-        findAllVolumes() const;
+        std::string
+        getUDI() const;
+
+        std::string
+        getTypeName() const;
 
         /**
          * \return The drive's device file name.
@@ -172,6 +171,27 @@ namespace zypp
          */
         bool
         usesRemovableMedia() const;
+
+        /*
+        ** Returns the media type names supported by the drive.
+        **
+        ** Since hal does not implement a textual form here, we
+        ** are using the drive type and property names from
+        ** "storage.cdrom.*" namespace:
+        **   cdrom, cdr, cdrw, dvd, dvdr, dvdrw, dvdram,
+        **   dvdplusr, dvdplusrw, dvdplusrdl
+        **
+        ** FIXME: Should we provide own LibHalDriveCdromCaps?
+        */
+        std::vector<std::string>
+        getCdromCapabilityNames() const;
+
+        /**
+         * Retrieve UDI's of all volumes of this drive.
+         * \return Vector with volume UDI's.
+         */
+        std::vector<std::string>
+        findAllVolumes() const;
 
       private:
         friend class HalContext;
@@ -204,6 +224,9 @@ namespace zypp
         operator=(const HalVolume &volume);
 
         operator bool_type() const;
+
+        std::string
+        getUDI() const;
 
         /**
          * \return The Volume drive's device file name.
