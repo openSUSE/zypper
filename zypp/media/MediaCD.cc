@@ -62,7 +62,7 @@ namespace zypp {
       {
 	ERR << "Unsupported schema in the Url: " << url_r.asString()
 	                                         << std::endl;
-	ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
+	ZYPP_THROW(MediaUnsupportedUrlSchemeException(_url));
       }
 
       MIL << "MediaCD::MediaCD(" << url_r << ", " << attach_point_hint_r << ")" << endl;
