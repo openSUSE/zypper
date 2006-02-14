@@ -49,7 +49,8 @@ namespace zypp
     /** */
     Pathname script() const;
     /** */
-    // data here:
+
+    std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
 
   protected:
     /** Ctor */

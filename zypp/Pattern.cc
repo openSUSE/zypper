@@ -59,6 +59,10 @@ namespace zypp
   Pathname Pattern::script() const
   { return pimpl().script(); }
 
+  std::set<std::string> Pattern::install_packages( const Locale & lang ) const
+  {
+     return pimpl().install_packages();
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

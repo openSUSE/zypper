@@ -10,6 +10,7 @@
  *
 */
 #include "zypp/detail/SelectionImplIf.h"
+#include "zypp/ResTraits.h"
 #include <iostream>
 
 using namespace std;
@@ -41,14 +42,26 @@ namespace zypp
     Label SelectionImplIf::order() const
     { return Label(); }
 
-    std::set<std::string> SelectionImplIf::suggests() const
-    { return std::set<std::string>(); }
-
-    std::set<std::string> SelectionImplIf::recommends() const
-    { return std::set<std::string>(); }
+    static void copycaps( std::set<std::string> & out, const CapSet & in)
+    {
+	for (CapSet::const_iterator it = in.begin(); it != in.end(); ++it) {
+	    if (isKind<capability::NamedCap>( *it )
+		&& it->refers() == ResTraits<zypp::Package>::kind )
+	    {
+		out.insert( it->index() );
+	    }
+	}
+    }
 
     std::set<std::string> SelectionImplIf::install_packages( const Locale & lang) const
-    { return std::set<std::string>(); }
+    {
+	std::set<std::string> result;
+#warning does not honor language packs
+	copycaps( result, self()->dep( Dep::REQUIRES ) );
+	copycaps( result, self()->dep( Dep::RECOMMENDS) );
+
+	return result;
+    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail
