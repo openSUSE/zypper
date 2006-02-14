@@ -442,6 +442,9 @@ Resolver::problems (void) const
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		what = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		// uninstall
+		problem->addSolution (new ProblemSolutionUninstall (problem, item)); 
+		
 		// Unflag requirement
 		problem->addSolution (new ProblemSolutionIgnoreRequires (problem, item, misc_info->capability())); 
 		problems.push_back (problem);
