@@ -23,8 +23,9 @@ baseinclude_HEADERS =	\
 	Gettext.h	\
 	IOStream.h	\
 	NonCopyable.h	\
-	PtrTypes.h	\
+	ProvideNumericId.h	\
 	ReferenceCounted.h	\
+	PtrTypes.h	\
 	String.h	\
 	Unit.h		\
 		\

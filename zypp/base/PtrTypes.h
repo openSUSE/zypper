@@ -72,9 +72,12 @@ namespace zypp
         {
           typedef shared_ptr<_D>       _Ptr;
           typedef shared_ptr<const _D> _constPtr;
-          /** Check whether pointer is shared. */
-          bool isShared( const _constPtr & ptr_r )
-          { return ptr_r.use_count() > 1; }
+          /** Check whether pointer is not shared. */
+          bool unique( const _constPtr & ptr_r )
+          { return ptr_r.unique(); }
+          /** Return number of references. */
+          long use_count( const _constPtr & ptr_r ) const
+          { return ptr_r.use_count(); }
         };
 
       template<class _D>
@@ -82,9 +85,12 @@ namespace zypp
         {
           typedef intrusive_ptr<_D>       _Ptr;
           typedef intrusive_ptr<const _D> _constPtr;
-          /** Check whether pointer is shared. */
-          bool isShared( const _constPtr & ptr_r )
-          { return ptr_r && (ptr_r->refCount() > 1); }
+          /** Check whether pointer is not shared. */
+          bool unique( const _constPtr & ptr_r )
+          { return !ptr_r || (ptr_r->refCount() <= 1); }
+          /** Return number of references. */
+          long use_count( const _constPtr & ptr_r ) const
+          { return ptr_r ? ptr_r->refCount() : 0; }
         };
     }
     ///////////////////////////////////////////////////////////////////
@@ -181,11 +187,11 @@ namespace zypp
         { return _dptr.get(); }
 
       public:
-        bool      unique() const
-	{ return _dptr.unique(); }
+        bool unique() const
+	{ return _Traits().unique( _dptr ); }
 
-	long      use_count() const
-	{ return _dptr.use_count(); }
+	long use_count() const
+	{ return _Traits().use_count( _dptr ); }
 
         _constPtr getPtr() const
         { return _dptr; }
@@ -276,6 +282,12 @@ namespace zypp
         { assertUnshared(); return _dptr.get(); }
 
       public:
+        bool unique() const
+	{ return _Traits().unique( _dptr ); }
+
+	long use_count() const
+	{ return _Traits().use_count( _dptr ); }
+
         _constPtr getPtr() const
         { return _dptr; }
 
@@ -286,10 +298,8 @@ namespace zypp
 
         void assertUnshared()
         {
-          if ( _Traits().isShared( _dptr ) )
-            {
-              _dptr.reset( rwcowClone( _dptr.get() ) );
-            }
+          if ( !unique() )
+            _dptr.reset( rwcowClone( _dptr.get() ) );
         }
 
       private:
