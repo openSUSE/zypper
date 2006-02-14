@@ -161,7 +161,7 @@ bool
 XMLFilesBackend::isBackendInitialized() const
 {
   bool ok = true;
-  ok = ok && exists( ZYPP_DB_DIR );
+  ok = ok && exists( path(d->root.asString()) / ZYPP_DB_DIR );
   std::set<Resolvable::Kind>::const_iterator it_kinds;
   for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
   {
