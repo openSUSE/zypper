@@ -316,19 +316,29 @@ template<> // or constPtr?
 std::string toXML( const Patch::constPtr &obj )
 {
   stringstream out;
-  out << "<patch>" << std::endl;
+  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
+  out << "<patch" << std::endl; 
+  out << "    xmlns=\"http://novell.com/package/metadata/suse/patch\"" << std::endl;
+  out << "    xmlns:patch=\"http://novell.com/package/metadata/suse/patch\"" << std::endl;
+  out << "    xmlns:yum=\"http://linux.duke.edu/metadata/common\"" << std::endl; 
+  out << "    xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\"" << std::endl;
+  out << "    xmlns:suse=\"http://novell.com/package/metadata/suse/common\"" << std::endl;
+  out << "    patchid=\"" << obj->id() << "\"" << std::endl;
+  out << "    timestamp=\"" << obj->timestamp() << "\"" << std::endl;
+  out << "    engine=\"1.0\">" << std::endl;
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
   Patch::AtomList at = obj->atoms();
+  out << "  <atoms>" << std::endl;
   for (Patch::AtomList::iterator it = at.begin(); it != at.end(); it++)
   {
     // atoms tag here looks weird but lets follow YUM
-    out << "  <atoms>" << std::endl;
+    
     // I have a better idea to avoid the cast here (Michaels code in his tmp/)
     Resolvable::Ptr one_atom = *it;
     out << castedToXML(one_atom) << std::endl;
-    out << "  </atoms>" << std::endl;
   }
+  out << "  </atoms>" << std::endl;
   out << "</patch>" << std::endl;
   return out.str();
 }

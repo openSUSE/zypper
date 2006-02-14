@@ -75,7 +75,17 @@ namespace zypp
 	return pimpl().order();    
     }
 
-    std::set<std::string> Selection::install_packages( const Locale & lang ) const
+    const std::set<std::string> Selection::suggests() const
+    {
+      return pimpl().suggests();
+    }
+
+    const std::set<std::string> Selection::recommends() const
+    {
+      return pimpl().recommends();
+    }
+
+    const std::set<std::string> Selection::install_packages( const Locale & lang) const
     {
       return pimpl().install_packages();
     }

@@ -53,6 +53,25 @@ namespace zypp
     Label SuseTagsSelectionImpl::order() const
     { return _order; }
 
+    const std::set<std::string> SuseTagsSelectionImpl::suggests() const
+    {
+      return _suggests;
+    }
+
+    const std::set<std::string> SuseTagsSelectionImpl::recommends() const
+    {
+      return _recommends;
+    }
+
+    const std::set<std::string> SuseTagsSelectionImpl::install_packages( const Locale & lang) const
+    {
+      //_inspacks[lang];
+      //if(_inspacks.contains(lang))
+       return ( _inspacks.find(lang)->second);
+      //else
+       //return std::set<std::string>();
+    }
+
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////

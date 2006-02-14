@@ -42,6 +42,9 @@ namespace zypp
     Label SelectionImplIf::order() const
     { return Label(); }
 
+    const std::set<std::string> SelectionImplIf::suggests() const
+    { return std::set<std::string>(); }
+
     static void copycaps( std::set<std::string> & out, const CapSet & in)
     {
 	for (CapSet::const_iterator it = in.begin(); it != in.end(); ++it) {
@@ -53,14 +56,17 @@ namespace zypp
 	}
     }
 
-    std::set<std::string> SelectionImplIf::install_packages( const Locale & lang) const
-    {
-	std::set<std::string> result;
-#warning does not honor language packs
-	copycaps( result, self()->dep( Dep::REQUIRES ) );
-	copycaps( result, self()->dep( Dep::RECOMMENDS) );
+    const std::set<std::string> SelectionImplIf::recommends() const
+    { return std::set<std::string>(); }
 
-	return result;
+    const std::set<std::string> SelectionImplIf::install_packages( const Locale & lang) const
+    {
+	 std::set<std::string> result;
+      #warning does not honor language packs
+	 copycaps( result, self()->dep( Dep::REQUIRES ) );
+	 copycaps( result, self()->dep( Dep::RECOMMENDS) );
+
+	 return result;
     }
 
     /////////////////////////////////////////////////////////////////

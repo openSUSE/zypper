@@ -95,27 +95,27 @@ namespace zypp
       {
 	if ( tag.name == "Req" )
 	{
-	  selImpl->_requires = tag.values;
+	  selImpl->_requires.insert( tag.values.begin(), tag.values.end());
 	}
 	else if ( tag.name == "Rec" )
 	{
-	  selImpl->_recommends = tag.values;
+	  selImpl->_recommends.insert( tag.values.begin(), tag.values.end());
 	}
 	else if ( tag.name == "Prv" )
 	{
-	  selImpl->_provides = tag.values;
+	  selImpl->_provides.insert( tag.values.begin(), tag.values.end());
 	}
 	else if ( tag.name == "Con" )
 	{
-	  selImpl->_conflicts = tag.values;
+	  selImpl->_conflicts.insert( tag.values.begin(), tag.values.end());
 	}
 	else if ( tag.name == "Obs" )
 	{
-	  selImpl->_obsoletes = tag.values;
+	  selImpl->_obsoletes.insert( tag.values.begin(), tag.values.end());
 	}
 	else if ( tag.name == "Ins" )
 	{
-	  selImpl->_inspacks[Locale(tag.modifier)] = tag.values;
+	  selImpl->_inspacks[Locale(tag.modifier)].insert( tag.values.begin(), tag.values.end());
 	}
       }
 
@@ -125,37 +125,37 @@ namespace zypp
 	CapFactory _f;
 	Dependencies _deps;
 
-	for (std::list<std::string>::const_iterator it = selImpl->_inspacks[_locale].begin(); it != selImpl->_inspacks[_locale].end(); it++)
+	for (std::set<std::string>::const_iterator it = selImpl->_inspacks[_locale].begin(); it != selImpl->_inspacks[_locale].end(); it++)
 	{
 	  Capability _cap = _f.parse( ResTraits<Package>::kind, *it);
 	  _deps[Dep::RECOMMENDS].insert(_cap);
 	}
 
-	for (std::list<std::string>::const_iterator it = selImpl->_recommends.begin(); it != selImpl->_recommends.end(); it++)
+	for (std::set<std::string>::const_iterator it = selImpl->_recommends.begin(); it != selImpl->_recommends.end(); it++)
 	{
 	  Capability _cap = _f.parse( ResTraits<Selection>::kind, *it );
 	  _deps[Dep::RECOMMENDS].insert(_cap);
 	}
 
-	for (std::list<std::string>::const_iterator it = selImpl->_requires.begin(); it != selImpl->_requires.end(); it++)
+	for (std::set<std::string>::const_iterator it = selImpl->_requires.begin(); it != selImpl->_requires.end(); it++)
 	{
 	  Capability _cap = _f.parse( ResTraits<Selection>::kind, *it );
 	  _deps[Dep::REQUIRES].insert(_cap);
 	}
 
-	for (std::list<std::string>::const_iterator it = selImpl->_provides.begin(); it != selImpl->_provides.end(); it++)
+	for (std::set<std::string>::const_iterator it = selImpl->_provides.begin(); it != selImpl->_provides.end(); it++)
 	{
 	  Capability _cap = _f.parse( ResTraits<Selection>::kind, *it );
 	  _deps[Dep::PROVIDES].insert(_cap);
 	}
 
-	for (std::list<std::string>::const_iterator it = selImpl->_conflicts.begin(); it != selImpl->_conflicts.end(); it++)
+	for (std::set<std::string>::const_iterator it = selImpl->_conflicts.begin(); it != selImpl->_conflicts.end(); it++)
 	{
 	  Capability _cap = _f.parse( ResTraits<Selection>::kind, *it );
 	  _deps[Dep::CONFLICTS].insert(_cap);
 	}
 
-	for (std::list<std::string>::const_iterator it = selImpl->_obsoletes.begin(); it != selImpl->_obsoletes.end(); it++)
+	for (std::set<std::string>::const_iterator it = selImpl->_obsoletes.begin(); it != selImpl->_obsoletes.end(); it++)
 	{
 	  Capability _cap = _f.parse( ResTraits<Selection>::kind, *it );
 	  _deps[Dep::OBSOLETES].insert(_cap);

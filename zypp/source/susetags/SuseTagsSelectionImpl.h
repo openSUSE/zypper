@@ -63,6 +63,10 @@ namespace zypp
       virtual bool visible() const;
       virtual Label order() const;
 
+      virtual const std::set<std::string> suggests() const PURE_VIRTUAL;
+      virtual const std::set<std::string> recommends() const PURE_VIRTUAL;
+      virtual const std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
+
       TranslatedText _summary;
       std::string _parser_version;
       std::string _name;
@@ -73,17 +77,17 @@ namespace zypp
       std::string _category;
       bool _visible;
 
-      std::list<std::string> _suggests;
-      std::list<std::string> _recommends;
-      std::list<std::string> _requires;
-      std::list<std::string> _conflicts;
-      std::list<std::string> _provides;
-      std::list<std::string> _obsoletes;
-      std::list<std::string> _supported_locales;
-      std::map< Locale, std::list<std::string> > _insnotify;
-      std::map< Locale, std::list<std::string> > _delnotify;
-      std::map< Locale, std::list<std::string> > _inspacks;
-      std::map< Locale, std::list<std::string> > _delpacks;
+      std::set<std::string> _suggests;
+      std::set<std::string> _recommends;
+      std::set<std::string> _requires;
+      std::set<std::string> _conflicts;
+      std::set<std::string> _provides;
+      std::set<std::string> _obsoletes;
+      std::set<std::string> _supported_locales;
+      std::map< Locale, std::set<std::string> > _insnotify;
+      std::map< Locale, std::set<std::string> > _delnotify;
+      std::map< Locale, std::set<std::string> > _inspacks;
+      std::map< Locale, std::set<std::string> > _delpacks;
 
     };
     ///////////////////////////////////////////////////////////////////
