@@ -64,8 +64,11 @@ namespace zypp
       /**  <tt>name:/path</tt> */
       virtual std::string encode() const;
 
-      virtual std::string name_str(void) const { return _name; }
-      virtual std::string path_str(void) const { return _path; }
+      const std::string & name() const
+      { return _name; }
+
+      const std::string & path() const
+      { return _path; }
 
     private:
       /**  */

@@ -20,21 +20,21 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     template<>
-      const CapTraitsBase::KindType CapTraits<NullCap>       ::kind( "NullCap" );
+      const CapabilityTraits::KindType CapTraits<NullCap>       ::kind( "NullCap" );
     template<>
-      const CapTraitsBase::KindType CapTraits<FileCap>       ::kind( "FileCap" );
+      const CapabilityTraits::KindType CapTraits<FileCap>       ::kind( "FileCap" );
     template<>
-      const CapTraitsBase::KindType CapTraits<NamedCap>      ::kind( "NamedCap" );
+      const CapabilityTraits::KindType CapTraits<NamedCap>      ::kind( "NamedCap" );
     template<>                                               // VersionedCap IsA NamedCap
-      const CapTraitsBase::KindType CapTraits<VersionedCap>  ::kind( "NamedCap" );
+      const CapabilityTraits::KindType CapTraits<VersionedCap>  ::kind( "NamedCap" );
     template<>
-      const CapTraitsBase::KindType CapTraits<SplitCap>      ::kind( "SplitCap" );
+      const CapabilityTraits::KindType CapTraits<SplitCap>      ::kind( "SplitCap" );
     template<>
-      const CapTraitsBase::KindType CapTraits<HalCap>        ::kind( "HalCap" );
+      const CapabilityTraits::KindType CapTraits<HalCap>        ::kind( "HalCap" );
     template<>
-      const CapTraitsBase::KindType CapTraits<OrCap>         ::kind( "OrCap" );
+      const CapabilityTraits::KindType CapTraits<OrCap>         ::kind( "OrCap" );
     template<>
-      const CapTraitsBase::KindType CapTraits<ConditionalCap>::kind( "ConditionalCap" );
+      const CapabilityTraits::KindType CapTraits<ConditionalCap>::kind( "ConditionalCap" );
 
     /////////////////////////////////////////////////////////////////
   } // namespace capability

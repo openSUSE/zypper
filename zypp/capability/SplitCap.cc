@@ -31,6 +31,21 @@ namespace zypp
     std::string SplitCap::encode() const
     { return _name + ":" + _path; }
 
+    ///////////////////////////////////////////////////////////////////
+    //	CLASS NAME : CapabilityImpl
+    ///////////////////////////////////////////////////////////////////
+    /** Solver hack. */
+    CapabilityImpl::SplitInfo CapabilityImpl::getSplitInfo( const Capability & cap )
+    {
+      SplitInfo ret;
+      intrusive_ptr<const SplitCap> splitPtr( asKind<SplitCap>( cap._pimpl.getPtr() ) );
+      if ( splitPtr )
+        {
+          ret.name = splitPtr->name();
+          ret.path = splitPtr->path();
+        }
+      return ret;
+    }
     /////////////////////////////////////////////////////////////////
   } // namespace capability
   ///////////////////////////////////////////////////////////////////

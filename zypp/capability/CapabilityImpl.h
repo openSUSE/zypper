@@ -15,9 +15,8 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 
-#include "zypp/capability/CapTraits.h"
-
-#include "zypp/Resolvable.h" // maybe ResTraits are sufficient?
+#include "zypp/Capability.h"
+#include "zypp/Resolvable.h"
 #include "zypp/CapMatch.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -41,15 +40,15 @@ namespace zypp
       typedef CapabilityImpl_Ptr       Ptr;
       typedef CapabilityImpl_constPtr  constPtr;
 
-      typedef CapTraitsBase::KindType  Kind;
+      typedef CapabilityTraits::KindType  Kind;
 
     public:
+      /** Kind of capabiliy.  */
+      virtual const Kind & kind() const = 0;
+
       /** Kind of Resolvable \c this refers to. */
       const Resolvable::Kind & refers() const
       { return _refers; }
-
-      /** Kind of capabiliy.  */
-      virtual const Kind & kind() const = 0;
 
       /** Relevant per default. */
       virtual bool relevant() const
@@ -74,7 +73,7 @@ namespace zypp
       { return encode(); }
 
       /** \deprecated A string representation usg. without
-       * edition range. All Capabilities that match each other
+       * edition range. All Capabilities that may match each other
        * must have the same index. That's ugly, but the way the
        * solver currently uses it.
       */
@@ -86,6 +85,16 @@ namespace zypp
       /** \deprecated, defaults to Edition::noedition */
       virtual Edition edition() const
       { return Edition::noedition; }
+
+    public:
+      /** Solver hack. */
+      struct SplitInfo
+      {
+        std::string name;
+        std::string path;
+      };
+      /** Solver hack. */
+      static SplitInfo getSplitInfo( const Capability & cap );
 
     protected:
       /** Ctor taking the kind of Resolvable \c this refers to.*/

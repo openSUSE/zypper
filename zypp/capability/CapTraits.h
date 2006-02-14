@@ -18,16 +18,17 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  class Capability;
+
   ///////////////////////////////////////////////////////////////////
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
-    class CapabilityImpl;
-
-    /** Base of CapTraits. Defines the Resolvable::Kind type. */
-    struct CapTraitsBase
+    /** Base of CapTraits. Defines the Capability::Kind type. */
+    struct CapabilityTraits
     {
-      typedef KindOf<CapabilityImpl>  KindType;
+      typedef KindOf<Capability>  KindType;
     };
 
     class NullCap;
@@ -41,7 +42,7 @@ namespace zypp
 
     /** CapTraits. Defines common types and the Kind value. */
     template<typename _Cap>
-      struct CapTraits : public CapTraitsBase
+      struct CapTraits : public CapabilityTraits
       {
         static const KindType kind;
       };
