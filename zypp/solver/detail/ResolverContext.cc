@@ -86,7 +86,7 @@ ResolverContext::ResolverContext (const ResPool & pool, const Arch & arch, Resol
     , _invalid (false)
     , _architecture(arch)
 {
-_DEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
+_XDEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
     if (parent != NULL) {
 	_pool		     = parent->_pool;
 	_download_size       = parent->_download_size;

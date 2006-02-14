@@ -293,7 +293,7 @@ codependent_items (const PoolItem_Ref item1, const PoolItem_Ref item2)
 bool
 QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_items)
 {
-    _DEBUG("QueueItemRequire::process(" << *this << ")");
+    _XDEBUG("QueueItemRequire::process(" << *this << ")");
 
     if (context->requirementIsMet (_capability, _is_child)) {
 	_XDEBUG("requirement is already met in current context");
