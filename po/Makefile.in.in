@@ -351,21 +351,21 @@ update-po: Makefile
 	test "$(srcdir)" = . && cdcmd="" || cdcmd="cd $(srcdir) && "; \
 	echo "$${cdcmd}$(MSGMERGE) $$lang.po $(DOMAIN).pot -o $$lang.new.po"; \
 	cd $(srcdir); \
-	if $(MSGMERGE) $$lang.po $(DOMAIN).pot -o $$tmpdir/$$lang.new.po; then \
-	  if cmp $$lang.po $$tmpdir/$$lang.new.po >/dev/null 2>&1; then \
-	    rm -f $$tmpdir/$$lang.new.po; \
-	  else \
-	    if mv -f $$tmpdir/$$lang.new.po $$lang.po; then \
-	      :; \
-	    else \
-	      echo "msgmerge for $$lang.po failed: cannot move $$tmpdir/$$lang.new.po to $$lang.po" 1>&2; \
-	      exit 1; \
-	    fi; \
-	  fi; \
-	else \
-	  echo "msgmerge for $$lang.po failed!" 1>&2; \
-	  rm -f $$tmpdir/$$lang.new.po; \
-	fi
+#	if $(MSGMERGE) $$lang.po $(DOMAIN).pot -o $$tmpdir/$$lang.new.po; then \
+#	  if cmp $$lang.po $$tmpdir/$$lang.new.po >/dev/null 2>&1; then \
+#	    rm -f $$tmpdir/$$lang.new.po; \
+#	  else \
+#	    if mv -f $$tmpdir/$$lang.new.po $$lang.po; then \
+#	      :; \
+#	    else \
+#	      echo "msgmerge for $$lang.po failed: cannot move $$tmpdir/$$lang.new.po to $$lang.po" 1>&2; \
+#	      exit 1; \
+#	    fi; \
+#	  fi; \
+#	else \
+#	  echo "msgmerge for $$lang.po failed!" 1>&2; \
+#	  rm -f $$tmpdir/$$lang.new.po; \
+#	fi
 
 $(DUMMYPOFILES):
 
