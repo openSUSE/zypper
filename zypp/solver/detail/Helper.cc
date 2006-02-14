@@ -57,14 +57,14 @@ operator<< (ostream & os, const PoolItemList & itemlist)
 }
 
 
-class LookForInstalled : public resfilter::OnCapMatchCallbackFunctor, public resfilter::PoolItemFilterFunctor
+class LookFor : public resfilter::OnCapMatchCallbackFunctor, public resfilter::PoolItemFilterFunctor
 {
   public:
-    PoolItem_Ref installed;
+    PoolItem_Ref item;
 
     bool operator()( PoolItem_Ref provider )
     {
-	installed = provider;
+	item = provider;
 	return false;				// stop here, we found it
     }
 };
@@ -75,7 +75,7 @@ class LookForInstalled : public resfilter::OnCapMatchCallbackFunctor, public res
 PoolItem_Ref
 Helper::findInstalledByNameAndKind (const ResPool & pool, const string & name, const Resolvable::Kind & kind)
 {
-    LookForInstalled info;
+    LookFor info;
 #if 0
     invokeOnEach( pool.byNameBegin( name ),
 		  pool.byNameEnd( name ),
@@ -93,8 +93,36 @@ Helper::findInstalledByNameAndKind (const ResPool & pool, const string & name, c
 	    }
 	}
 
-    _XDEBUG("Helper::findInstalledByNameAndKind (" << name << ", " << kind << ") => " << info.installed);
-    return info.installed;
+    _XDEBUG("Helper::findInstalledByNameAndKind (" << name << ", " << kind << ") => " << info.item);
+    return info.item;
+}
+
+
+// just find uninstalled item with same kind/name as item
+
+PoolItem_Ref
+Helper::findUninstalledByNameAndKind (const ResPool & pool, const string & name, const Resolvable::Kind & kind)
+{
+    LookFor info;
+#if 0
+    invokeOnEach( pool.byNameBegin( name ),
+		  pool.byNameEnd( name ),
+		  functor::chain (resfilter::ByInstalled (),			// ByInstalled
+				  resfilter::ByKind( kind ) ),			// equal kind
+		  functor::functorRef<bool,PoolItem> (info) );
+#endif
+	ResPool::const_nameiterator pend = pool.nameend(name);
+	for (ResPool::const_nameiterator it = pool.namebegin(name); it != pend; ++it) {
+	    PoolItem item = it->second;
+	    if (item.status().isUninstalled()
+		&& item->kind() == kind) {
+		if (!info( it->second ))
+		    break;
+	    }
+	}
+
+    _XDEBUG("Helper::findUninstalledByNameAndKind (" << name << ", " << kind << ") => " << info.item);
+    return info.item;
 }
 
 

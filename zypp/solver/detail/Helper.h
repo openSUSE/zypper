@@ -52,6 +52,9 @@ class Helper {
     // for name, find installed item which has same name
     static PoolItem_Ref findInstalledByNameAndKind (const ResPool & pool, const std::string & name, const Resolvable::Kind & kind);
 
+    // for name, find uninstalled item which has same name
+    static PoolItem_Ref findUninstalledByNameAndKind (const ResPool & pool, const std::string & name, const Resolvable::Kind & kind);
+
     // for item, find installed item which has same name
     // does *NOT* check edition
     //  FIXME: should probably take provides/obsoletes into account for
