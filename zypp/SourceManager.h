@@ -131,6 +131,7 @@ namespace zypp
     typedef std::map<unsigned, RW_pointer<Source_Ref> > SourceMap;
 
     SourceMap _sources;
+    SourceMap _deleted_sources;
 
     static unsigned _next_id;
 

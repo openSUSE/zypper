@@ -72,6 +72,9 @@ namespace zypp
     SourceMap::iterator it = _sources.find(id);
     if (it != _sources.end())
     {
+      RW_pointer<Source_Ref> src_ptr = RW_pointer<Source_Ref>(new Source_Ref(*(it->second)));
+      _deleted_sources[id] = src_ptr;
+
       _sources.erase(it);
     }
   }
@@ -81,6 +84,9 @@ namespace zypp
     for (SourceMap::iterator it = _sources.begin(); it != _sources.end(); ++it)
     {
 	if (it->second->alias() == alias_r) {
+            RW_pointer<Source_Ref> src_ptr = RW_pointer<Source_Ref>(new Source_Ref(*(it->second)));
+            _deleted_sources[it->first] = src_ptr;
+
 	    _sources.erase(it);
 	    break;
 	}
@@ -138,6 +144,14 @@ namespace zypp
 	// FIXME: product_dir
 	store.storeSource( descr );
     }
+
+    for( SourceMap::iterator it = _deleted_sources.begin(); it != _deleted_sources.end(); it++)
+    {
+	MIL << "Deleting source " << it->second << " from persistent store" << endl;
+	store.deleteSource( it->second->alias() );
+    }
+    
+    _deleted_sources.clear();
   }
 
   void SourceManager::restore(Pathname root_r)
