@@ -147,7 +147,7 @@ string
 ResolverInfo::toString (const Capability & capability)
 {
     ostringstream os;
-    os << capability;
+    os << capability.asString();
     return os.str();
 }
 
