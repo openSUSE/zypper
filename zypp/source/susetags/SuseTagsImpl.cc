@@ -143,7 +143,19 @@ namespace zypp
 	    WAR << "packages.en not found" << endl;
 	}
 
-	for (PkgContent::const_iterator it = content.begin(); it != content.end(); ++it) {
+    PkgDiskUsage du;
+    try
+    {
+      du = parsePackagesDiskUsage(provideFile(_path + "suse/setup/descr/packages.DU"));
+    }
+    catch (Exception & excpt_r)
+    {
+        WAR << "Problem trying to parse the disk usage info" << endl;
+    }
+
+	for (PkgContent::const_iterator it = content.begin(); it != content.end(); ++it)
+    {
+        it->second->_diskusage = du[it->first /* NVRAD */];
 	    Package::Ptr pkg = detail::makeResolvableFromImpl( it->first, it->second );
 	    _store.insert( pkg );
 	}

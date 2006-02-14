@@ -41,6 +41,7 @@ namespace zypp
        * \throws ParseException and others.
       */
       PkgContent parsePackages( Source_Ref source_r, SuseTagsImpl::Ptr, const Pathname & file_r );
+      PkgDiskUsage parsePackagesDiskUsage( const Pathname & file_r );
 
       /////////////////////////////////////////////////////////////////
     } // namespace susetags

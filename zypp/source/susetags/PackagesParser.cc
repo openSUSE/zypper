@@ -10,6 +10,9 @@
  *
 */
 #include <iostream>
+
+#include <boost/regex.hpp>
+
 #include "zypp/base/Logger.h"
 
 #include "zypp/source/susetags/PackagesParser.h"
@@ -39,10 +42,12 @@ namespace zypp
         PkgDiskUsage result;
         NVRAD _current_nvrad;
         bool _pkg_pending;
+        boost::regex sizeEntryRX;
 
         virtual void beginParse()
         {
           _pkg_pending = false;
+          sizeEntryRX = boost::regex("^(.*/)[[:space:]]([[:digit:]]+)[[:space:]]([[:digit:]]+)[[:space:]]([[:digit:]]+)[[:space:]]([[:digit:]]+)$");
         }          
 
         /* Consume SingleTag data. */
@@ -51,8 +56,6 @@ namespace zypp
           if ( stag_r.name == "Pkg" )
           {
             std::vector<std::string> words;
-            str::split( stag_r.value, std::back_inserter(words) );
-
             if ( str::split( stag_r.value, std::back_inserter(words) ) != 4 )
               ZYPP_THROW( ParseException( "Pkg" ) );
 
@@ -71,16 +74,32 @@ namespace zypp
         {
           if ( ! _pkg_pending )
             return;
-
+          
           if ( mtag_r.name == "Dir" )
           {
-            //collectDeps( mtag_r.values, _nvrad[Dep::PROVIDES] );
+            for (std::list<std::string>::const_iterator it = mtag_r.values.begin(); it != mtag_r.values.end(); ++it )
+            {
+              boost::smatch what;
+              if(boost::regex_match(*it, what, sizeEntryRX, boost::match_extra))
+              {
+                //zypp::parser::tagfile::dumpRegexpResults(what);
+                // build the disk usage info
+                DiskUsage usage;
+                usage.add( what[1], str::strtonum<unsigned int>(what[2]) + str::strtonum<unsigned int>(what[3]), str::strtonum<unsigned int>(what[4]) + str::strtonum<unsigned  int>(what[5]));
+                result[_current_nvrad] = usage;
+              }
+              else
+              {
+                ERR << "Error parsing package size entry" << "[" << *it << "]" << std::endl;
+                ZYPP_THROW( ParseException( "Dir" ) );
+              }
+            }
+            _pkg_pending = false;
           }
         }
 
         virtual void endParse()
         {}
-
       };
 
      
@@ -240,6 +259,13 @@ namespace zypp
         PackagesParser p( source_r, sourceImpl_r );
         p.parse( file_r );
         return p.result();
+      }
+
+      PkgDiskUsage parsePackagesDiskUsage( const Pathname & file_r )
+      {
+        PackageDiskUsageParser duParser;
+        duParser.parse(file_r);
+        return duParser.result;
       }
 
       /////////////////////////////////////////////////////////////////

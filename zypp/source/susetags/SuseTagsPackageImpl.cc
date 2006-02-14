@@ -100,6 +100,9 @@ namespace zypp
       ByteCount SuseTagsPackageImpl::archivesize() const
       { return _archivesize; }
 
+      DiskUsage SuseTagsPackageImpl::diskusage() const
+      { return _diskusage; }
+
       std::list<std::string> SuseTagsPackageImpl::authors() const
       {
         return _authors;

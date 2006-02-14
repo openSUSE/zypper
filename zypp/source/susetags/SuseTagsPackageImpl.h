@@ -14,6 +14,7 @@
 
 #include "zypp/detail/PackageImplIf.h"
 #include "zypp/Source.h"
+#include "zypp/DiskUsage.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -78,6 +79,8 @@ namespace zypp
         /** */
         virtual ByteCount archivesize() const;
         /** */
+        virtual DiskUsage diskusage() const;
+        /** */
         virtual std::list<std::string> authors() const;
         /** */
         virtual std::list<std::string> filenames() const;
@@ -103,7 +106,7 @@ namespace zypp
         Date _buildtime;
         unsigned int _media_number;
         Pathname _location;
-
+        DiskUsage _diskusage;
       private:
         Source_Ref _source;
       public:

@@ -21,6 +21,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/String.h"
 
+#include "zypp/parser/tagfile/TagFileParser.h"
 #include "zypp/source/susetags/MediaPatchesMetadataParser.h"
 #include <boost/regex.hpp>
 
@@ -36,14 +37,6 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace susetags
     { /////////////////////////////////////////////////////////////////
-
-      static void dumpRegexpResults( const boost::smatch &what )
-      {
-        for ( unsigned int k=0; k < what.size(); k++)
-        {
-          DBG << "[match "<< k << "] [" << what[k] << "]" << std::endl; 
-        }
-      }
       
       /*
         File:  media
@@ -101,7 +94,7 @@ namespace zypp
           rx = boost::regex("^(.+)-(.+)$");
           if(boost::regex_match(buffer, what, rx, boost::match_extra))
           {
-            dumpRegexpResults(what);
+            zypp::parser::tagfile::dumpRegexpResults(what);
             entry_r.products.insert(std::pair<std::string, std::string>(what[1],what[2])); 
           }
           else

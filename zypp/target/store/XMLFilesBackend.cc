@@ -70,6 +70,8 @@ class XMLFilesBackend::Private
   { }
   bool randomFileName;
   std::set<Resolvable::Kind> kinds;
+  std::map< Resolvable::Kind, std::list<ResObject::Ptr> > resolvables_by_kind;
+  std::list<ResObject::Ptr> resolvables;
   Pathname root;
 };
 
@@ -200,6 +202,8 @@ XMLFilesBackend::initBackend()
       create_directory(source_p);
       MIL << "Created..." << source_p.string() << std::endl;
     }
+    // read the objects
+    readStoredObjects();
   }
   catch(std::exception &e)
   {
@@ -359,31 +363,28 @@ ResObject::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Resol
   return resolvable;
 }
 
-std::list<ResObject::Ptr>
-XMLFilesBackend::storedObjects() const
+void
+XMLFilesBackend::readStoredObjects()
 {
   DBG << std::endl;
-  std::list<ResObject::Ptr> objects;
-
   std::set<Resolvable::Kind>::const_iterator it_kinds;
   for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
   {
     Resolvable::Kind kind = (*it_kinds);
-    std::list<ResObject::Ptr> objects_for_kind = storedObjects(kind);
+    // fill the resolvables by kind index
+    readStoredObjects(kind);
     std::list<ResObject::Ptr>::iterator it;
-    for( it = objects_for_kind.begin(); it != objects_for_kind.end(); ++it)
+    for( it = d->resolvables_by_kind[kind].begin(); it != d->resolvables_by_kind[kind].end(); ++it)
     {
       //DBG << "adding objects back" << std::endl;
-      objects.push_back(*it);
+      d->resolvables.push_back(*it);
     }
   }
-  return objects;
 }
 
-std::list<ResObject::Ptr>
-XMLFilesBackend::storedObjects(const Resolvable::Kind kind) const
+void
+XMLFilesBackend::readStoredObjects(const Resolvable::Kind &kind)
 {
-  std::list<ResObject::Ptr> objects;
   std::string dir_path = dirForResolvableKind(kind);
   DBG << "Reading objects of kind " << resolvableKindToString(kind) << " in " << dir_path << std::endl;
   directory_iterator end_iter;
@@ -391,18 +392,30 @@ XMLFilesBackend::storedObjects(const Resolvable::Kind kind) const
   if ( !exists( dir_path ) )
   {
     ERR << "path " << dir_path << " does not exists. Required to read objects of kind " << resolvableKindToString(kind) << std::endl;
-    return std::list<ResObject::Ptr>();
+    return;
   }
 
   for ( directory_iterator dir_itr( dir_path ); dir_itr != end_iter; ++dir_itr )
   {
     DBG << "[" << resolvableKindToString( kind, false ) << "] - " << dir_itr->leaf() << std::endl;
-    objects.push_back( resolvableFromFile( dir_path + "/" + dir_itr->leaf(), kind) );
+    d->resolvables_by_kind[kind].push_back( resolvableFromFile( dir_path + "/" + dir_itr->leaf(), kind) );
   }
   MIL << "done reading stored objecs of kind " << resolvableKindToString(kind) << std::endl;
-  return objects;
 }
 
+const std::list<ResObject::Ptr> &
+XMLFilesBackend::storedObjects() const
+{
+  return d->resolvables;
+}
+
+const std::list<ResObject::Ptr> &
+XMLFilesBackend::storedObjects(const Resolvable::Kind &kind) const
+{
+  return d->resolvables_by_kind[kind];
+}
+
+/*
 std::list<ResObject::Ptr>
 XMLFilesBackend::storedObjects(const Resolvable::Kind kind, const std::string & name, bool partial_match) const
 {
@@ -419,6 +432,7 @@ XMLFilesBackend::storedObjects(const Resolvable::Kind kind, const std::string & 
   MIL << "done reading stored objecs of kind " << resolvableKindToString(kind) << " and keyword [" << name <<"]" << std::endl;
   return result;
 }
+*/
 
 Patch::Ptr
 XMLFilesBackend::createPatch( const zypp::parser::yum::YUMPatchData & parsed ) const

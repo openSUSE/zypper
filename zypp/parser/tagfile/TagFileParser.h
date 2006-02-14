@@ -16,6 +16,8 @@
 #include <map>
 #include <list>
 
+#include <boost/regex.hpp>
+
 #include "zypp/parser/tagfile/ParseException.h"
 #include "zypp/Pathname.h"
 
@@ -29,6 +31,8 @@ namespace zypp
     namespace tagfile
     { /////////////////////////////////////////////////////////////////
 
+      void dumpRegexpResults( const boost::smatch &what );
+      void dumpRegexpResults2( const boost::smatch &what );
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : TagFileParser

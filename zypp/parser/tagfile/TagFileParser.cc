@@ -23,7 +23,7 @@
 
 #include "zypp/parser/tagfile/TagFileParser.h"
 #include "zypp/parser/tagfile/ParseException.h"
-#include <boost/regex.hpp>
+
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "TagFileParser"
@@ -41,11 +41,19 @@ namespace zypp
     namespace tagfile
     { /////////////////////////////////////////////////////////////////
 
-      static void dumpRegexpResults( const boost::smatch &what )
+      void dumpRegexpResults( const boost::smatch &what )
       {
         for ( unsigned int k=0; k < what.size(); k++)
         {
           XXX << "[match "<< k << "] [" << what[k] << "]" << std::endl;
+        }
+      }
+
+      void dumpRegexpResults2( const boost::smatch &what )
+      {
+        for ( unsigned int k=0; k < what.size(); k++)
+        {
+          DBG << "[match "<< k << "] [" << what[k] << "]" << std::endl;
         }
       }
 

@@ -21,6 +21,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/String.h"
 
+#include "zypp/parser/tagfile/TagFileParser.h"
 #include "zypp/source/susetags/MediaMetadataParser.h"
 #include <boost/regex.hpp>
 
