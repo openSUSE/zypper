@@ -90,7 +90,7 @@ PersistentStorage::storeObject( ResObject::constPtr resolvable )
 void
 PersistentStorage::deleteObject( ResObject::constPtr resolvable )
 {
-
+  d->backend->deleteObject(resolvable);
 }
 
 const std::list<ResObject::Ptr> &

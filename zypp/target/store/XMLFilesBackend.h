@@ -103,7 +103,7 @@ public:
   int random() const;
   void readStoredObjects();
   void readStoredObjects(const Resolvable::Kind &kind);
-  
+  ResObject::Ptr findResolvable(const Resolvable::Kind &kind, const std::string &name, const Edition &edition, const Arch &arch) const;
   /**
     * Directory where the xml file is stored (for the given resolvable)
     */
