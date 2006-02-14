@@ -91,6 +91,12 @@ namespace zypp
     // string description of the source type, e.g. "YUM" or "UnitedLinux"
     std::string type (void) const;
 
+    unsigned numberOfMedia(void) const;
+
+    std::string vendor (void) const;
+
+    std::string unique_id (void) const;
+
     // generic information get/set
     std::string id (void) const;
     void setId (const std::string id_r);

@@ -218,6 +218,15 @@ namespace zypp
     const Pathname & SourceImpl::path (void) const
     { return _path; }
 
+    unsigned SourceImpl::numberOfMedia(void) const
+    { return 1; }
+
+    std::string SourceImpl::vendor (void) const
+    { return ""; }
+
+    std::string SourceImpl::unique_id (void) const
+    { return ""; }
+
     /////////////////////////////////////////////////////////////////
     /**
      * ZMD specific stuff

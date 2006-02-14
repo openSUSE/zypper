@@ -131,6 +131,15 @@ namespace zypp
   
   media::MediaVerifierRef Source_Ref::verifier(unsigned media_nr)
   { return _pimpl->verifier(media_nr); }
+
+  unsigned Source_Ref::numberOfMedia(void) const
+  { return _pimpl->numberOfMedia(); }
+
+  std::string Source_Ref::vendor (void) const
+  { return _pimpl->vendor(); }
+
+  std::string Source_Ref::unique_id (void) const
+  { return _pimpl->unique_id(); }
   
   /******************************************************************
    **

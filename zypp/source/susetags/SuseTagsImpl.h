@@ -53,6 +53,12 @@ namespace zypp
 	
 	virtual std::string type(void) const
         { return "YaST"; }
+	
+	virtual unsigned numberOfMedia(void) const;
+	
+	virtual std::string vendor (void) const;
+	
+	virtual std::string unique_id (void) const;
 
 	Pathname sourceDir( const NVRAD& nvrad );
 
@@ -66,6 +72,12 @@ namespace zypp
          * \throw EXCEPTION on fail
         */
         virtual void factoryInit();
+	
+	unsigned _media_count;
+	
+	std::string _vendor;
+	
+	std::string _media_id;
       };
       ///////////////////////////////////////////////////////////////////
 

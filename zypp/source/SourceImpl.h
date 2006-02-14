@@ -136,6 +136,12 @@ namespace zypp
 
       const Pathname & path (void) const;
 
+      virtual unsigned numberOfMedia(void) const;
+
+      virtual std::string vendor (void) const;
+
+      virtual std::string unique_id (void) const;
+
       /**
        * ZMD backend specific stuff
        * default source only provides dummy implementations
