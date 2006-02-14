@@ -763,6 +763,32 @@ Resolver::resolvePool ()
 
 
 //
+// transact list of capabilities, return false if one couldn't be matched
+//
+
+static bool
+transactCaps( const ResPool & pool, const CapSet & caps, bool install )
+{
+    bool result = true;
+
+    for (CapSet::const_iterator it = caps.begin(); it != caps.end(); ++it) {
+
+	PoolItem_Ref installed = Helper::findInstalledByNameAndKind( pool, it->index(), it->refers() );
+	PoolItem_Ref uninstalled = Helper::findUninstalledByNameAndKind( pool, it->index(), it->refers() );
+
+	if (uninstalled) uninstalled.status().setTransact( install, ResStatus::SOLVER );
+	if (installed) installed.status().setTransact( false, ResStatus::SOLVER );
+
+	if (!uninstalled
+	    && !installed)
+	{
+	    result = false;
+	}
+    }
+    return result;
+}
+
+//
 // transact a single object
 // -> do a 'single step' resolving either installing or removing
 //    required and recommended PoolItems
@@ -770,7 +796,8 @@ Resolver::resolvePool ()
 bool
 Resolver::transactResObject( ResObject::constPtr robj, bool install)
 {
-    return true;
+    transactCaps( _pool, robj->dep( Dep::RECOMMENDS ), install );
+    return transactCaps( _pool, robj->dep( Dep::REQUIRES ), install );
 }
 
 ///////////////////////////////////////////////////////////////////
