@@ -128,6 +128,18 @@ namespace zypp
     void setForceResolve (const bool force);
     const bool forceResolve();
 
+    /**
+     * transact a single ResObject
+     *
+     * Installs (install == true) or removes (install == false) all required
+     * and recommended packages(!) of \c robj
+     * (More or less a 'single step' resolver call
+     *
+     * returns false if requirements are not all fulfillable
+     *
+     */
+    bool transactResObject( ResObject::constPtr robj, bool install = true);
+
   protected:
 
   private:

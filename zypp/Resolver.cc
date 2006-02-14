@@ -80,6 +80,8 @@ namespace zypp
   { _pimpl->setForceResolve( force ); }
   const bool Resolver::forceResolve()
   { return _pimpl->forceResolve(); }
+  bool Resolver::transactResObject( ResObject::constPtr robj, bool install)
+  { return _pimpl->transactResObject( robj, install ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

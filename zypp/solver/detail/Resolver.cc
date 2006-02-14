@@ -761,6 +761,18 @@ Resolver::resolvePool ()
     return have_solution;
 }
 
+
+//
+// transact a single object
+// -> do a 'single step' resolving either installing or removing
+//    required and recommended PoolItems
+
+bool
+Resolver::transactResObject( ResObject::constPtr robj, bool install)
+{
+    return true;
+}
+
 ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

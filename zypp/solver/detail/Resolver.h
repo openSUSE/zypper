@@ -175,6 +175,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool resolveDependencies (const ResolverContext_Ptr context = NULL);
     bool resolvePool (void);
 
+    bool transactResObject( ResObject::constPtr robj, bool install = true);
+
     void doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
 
     ResolverProblemList problems (void) const;
