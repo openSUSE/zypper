@@ -11,6 +11,7 @@
 ./zypp/solver/detail/ResolverInfoConflictsWith.cc
 ./zypp/solver/detail/ResolverInfoMisc.cc
 ./zypp/solver/detail/ResolverInfo.cc
+./zypp/solver/detail/ProblemSolutionKeep.cc
 ./zypp/solver/detail/ProblemSolutionInstall.cc
 ./zypp/solver/detail/ResolverInfoDependsOn.cc
 ./zypp/solver/detail/ResolverInfoNeededBy.cc
