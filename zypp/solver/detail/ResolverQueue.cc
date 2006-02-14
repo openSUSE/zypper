@@ -298,7 +298,7 @@ ResolverQueue::copy_queue_except_for_branch (QueueItem_Ptr branch_qitem, QueueIt
 {
     ResolverContext_Ptr new_context;
     ResolverQueue_Ptr new_queue;
-    _DEBUG("copy_queue_except_for_branch");
+    _XDEBUG("copy_queue_except_for_branch");
     new_context = new ResolverContext (_context->pool(), _context->architecture(), _context);
       
     new_queue = new ResolverQueue (new_context->pool(), new_context->architecture(), new_context);
