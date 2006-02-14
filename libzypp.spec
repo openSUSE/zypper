@@ -17,7 +17,7 @@ Group:        System/Packages
 BuildRoot:    %{_tmppath}/%{name}-%{version}-build
 Autoreqprov:  on
 Summary:      Package, Patch, Pattern, and Product Management
-Version:      0.0.7
+Version:      0.0.8
 Release:      1
 Source:       zypp-0.0.0.tar.bz2
 Prefix:       /usr
