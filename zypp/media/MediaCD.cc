@@ -18,6 +18,7 @@
 #include "zypp/media/MediaCD.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/Url.h"
+#include "zypp/target/hal/HalContext.h"
 
 #include <cstring> // strerror
 
@@ -57,7 +58,18 @@ namespace zypp {
     		    false ), // does_download
       _lastdev(-1)
     {
-	MIL << "MediaCD::MediaCD(" << url_r << ", " << attach_point_hint_r << ")" << endl;
+      if( url_r.getScheme() != "dvd" && url_r.getScheme() != "cdrom")
+      {
+	ERR << "Unsupported schema in the Url: " << url_r.asString()
+	                                         << std::endl;
+	ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
+      }
+
+      MIL << "MediaCD::MediaCD(" << url_r << ", " << attach_point_hint_r << ")" << endl;
+
+      DeviceList detected( detectDevices(
+	url_r.getScheme() == "dvd" ? true : false
+      ));
 
       string devices = _url.getQueryParam("devices");
       if (!devices.empty())
@@ -70,8 +82,31 @@ namespace zypp {
     	    string device = devices.substr(0,pos);
     	    if (!device.empty())
     	    {
-    		_devices.push_back(device);
-    		DBG << "use device " << device << endl;
+	      bool is_ok = false;
+	      PathInfo dinfo(device);
+	      if( dinfo.isBlk())
+	      {
+		MediaSource media("cdrom", device, dinfo.major(),
+	                                           dinfo.minor());
+
+	        DeviceList::const_iterator d( detected.begin());
+	        for( ; d != detected.end(); ++d)
+	        {
+	          if( media.equals( *d))
+		  {
+		    is_ok = true;
+	            _devices.push_back( *d);
+    		    DBG << "use device " << device << endl;
+		  }
+	        }
+	      }
+
+	      if( !is_ok)
+	      {
+	        ERR << "Device " << device << " is not acceptable "
+	            << "for " << _url.getScheme() << std::endl;
+	        ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
+	      }
     	    }
     	    if (pos!=string::npos)
     		devices=devices.substr(pos+1);
@@ -82,13 +117,39 @@ namespace zypp {
       else
       {
     	//default is /dev/cdrom; for dvd: /dev/dvd if it exists
-    	//TODO: make configurable
-          string device( "/dev/cdrom" );
+        string device( "/dev/cdrom" );
     	if ( _url.getScheme() == "dvd" && PathInfo( "/dev/dvd" ).isBlk() ) {
     	  device = "/dev/dvd";
     	}
-    	DBG << "use default device " << device << endl;
-    	_devices.push_back(device);
+
+    	DBG << "going to use default device list" << endl;
+	PathInfo dinfo(device);
+	if( dinfo.isBlk())
+	{
+	  MediaSource media("cdrom", device, dinfo.major(), dinfo.minor());
+
+	  DeviceList::const_iterator d( detected.begin());
+	  for( ; d != detected.end(); ++d)
+	  {
+	    // /dev/cdrom or /dev/dvd to the front
+	    if( media.equals( *d))
+	      _devices.push_front( *d);
+	    else
+	      _devices.push_back( *d);
+	  }
+	}
+	else
+	{
+	  // no /dev/cdrom or /dev/dvd link
+	  _devices = detected;
+	}
+      }
+
+      if( _devices.empty())
+      {
+	ERR << "Unable to find any cdrom drive for " << _url.asString()
+	                                             << std::endl;
+	ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
       }
     }
 
@@ -138,6 +199,65 @@ namespace zypp {
       return true;
     }
 
+    MediaCD::DeviceList
+    MediaCD::detectDevices(bool supportingDVD)
+    {
+      using namespace zypp::target::hal;
+
+      DeviceList devices;
+      try
+      {
+	HalContext hal(true);
+
+	std::vector<std::string> drv_udis;
+	drv_udis = hal.findDevicesByCapability("storage.cdrom");
+
+	DBG << "Found " << drv_udis.size() << " cdrom drive udis" << std::endl;
+	for(size_t d = 0; d < drv_udis.size(); d++)
+	{
+	  HalDrive drv( hal.getDriveFromUDI( drv_udis[d]));
+
+	  if( drv)
+	  {
+	    if( supportingDVD)
+	    {
+	      std::vector<std::string> caps;
+	      try {
+		caps = drv.getCdromCapabilityNames();
+	      }
+	      catch(const HalException &e)
+	      {
+		ZYPP_CAUGHT(e);
+	      }
+
+	      bool found=false;
+	      std::vector<std::string>::const_iterator ci;
+	      for( ci=caps.begin(); ci != caps.end(); ++ci)
+	      {
+		if( *ci == "dvd")
+		  found = true;
+	      }
+	      if( !found)
+		continue;
+	    }
+
+	    MediaSource media("cdrom", drv.getDeviceFile(),
+				       drv.getDeviceMajor(),
+				       drv.getDeviceMinor());
+	    DBG << "Found " << drv_udis[d] << ": "
+			    << media.asString() << std::endl;
+	    devices.push_back(media);
+	  }
+	}
+      }
+      catch(const zypp::target::hal::HalException &e)
+      {
+	ZYPP_CAUGHT(e);
+      }
+      return devices;
+    }
+
+
     ///////////////////////////////////////////////////////////////////
     //
     //
@@ -183,16 +303,8 @@ namespace zypp {
     		DBG << "skip" << endl;
     		continue;
     	}
-	PathInfo dev_info( *it);
-	if( !dev_info.isBlk())
-	{
-    		DBG << "skip " << *it << " - is not a block device" << endl;
-		continue;
-	}
 
-	MediaSourceRef media( new MediaSource(
-	  "cdrom", *it, dev_info.major(), dev_info.minor()
-	));
+	MediaSourceRef media( new MediaSource( *it));
 
 	AttachedMedia ret( findAttachedMedia( media));
 
@@ -217,7 +329,7 @@ namespace zypp {
 	//   by automounter) and reuse (!temp) ?
 
 	// close tray
-	closeTray( *it );
+	closeTray( it->name );
 
 	// try all filesystems in sequence
 	for(list<string>::iterator fsit = filesystems.begin()
@@ -236,7 +348,7 @@ namespace zypp {
 	      }
 	    }
 
-    	    mount.mount (*it, mountpoint.c_str(), *fsit, options);
+    	    mount.mount (it->name, mountpoint.c_str(), *fsit, options);
 
 	    _lastdev = count;
 	    setMediaSource(media);
@@ -290,18 +402,13 @@ namespace zypp {
     {
       if ( !isAttached()) {	// no device mounted in this instance
 	for ( DeviceList::iterator it = _devices.begin(); it != _devices.end(); ++it ) {
-	  PathInfo dev_info( *it);
-	  if( !dev_info.isBlk())
-		continue;
+	  MediaSourceRef media( new MediaSource( *it));
 
-	  MediaSourceRef media( new MediaSource(
-	    "cdrom", *it, dev_info.major(), dev_info.minor()
-	  ));
-
+	  // FIXME: we have also to check if it is mounted in the system
 	  AttachedMedia ret( findAttachedMedia( media));
 	  if( !ret.mediaSource)
 	  {
-	    if ( openTray( *it ) )
+	    if ( openTray( it->name ) )
 	      break; // on 1st success
 	  }
 	}

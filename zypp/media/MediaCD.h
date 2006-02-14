@@ -29,7 +29,7 @@ namespace zypp {
 
       private:
 
-        typedef std::list<std::string> DeviceList;
+        typedef std::list<MediaSource> DeviceList;
         /** list of devices to try to mount */
         DeviceList _devices;
 
@@ -38,6 +38,8 @@ namespace zypp {
 
         static bool openTray( const std::string & device_r );
         static bool closeTray( const std::string & device_r );
+
+	DeviceList  detectDevices(bool supportingDVD);
 
       protected:
 
