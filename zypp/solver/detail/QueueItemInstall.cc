@@ -378,6 +378,15 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 		if (cap.matches (it->second.first) == CapMatch::yes) {
 		    // conflicting item found
 		    PoolItem_Ref conflicting_item = it->second.second;
+
+		    if (conflicting_item == _item) {
+			WAR << "Ignoring self-conflicts" << endl;
+			continue;
+		    }
+		    if (conflicting_item == _upgrades) {
+			_XDEBUG("We're upgrading the conflicting item");
+			continue;
+		    }
 		    const Capability conflicting_cap = it->second.first;
 		    ResolverInfo_Ptr log_info;
 		    QueueItemUninstall_Ptr uninstall_item;
@@ -420,7 +429,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 			context->addInfo (misc_info);
 		    }
 
-		    _XDEBUG("because: '" << conflicting_item << "'");
+		    _XDEBUG("because: '" << conflicting_item << "' provides " << cap);
 
 		    uninstall_item = new QueueItemUninstall (pool(), conflicting_item, QueueItemUninstall::CONFLICT, _soft);
 		    uninstall_item->setDueToConflict ();
