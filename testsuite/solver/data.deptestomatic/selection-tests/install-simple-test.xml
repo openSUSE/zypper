@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+  install minmal selection
+-->
+<test>
+<setup>
+  <channel name="packages" file="sl10.1-beta38-packages.xml"/>
+  <channel name="selections" file="sl10.1-beta38-selections.xml"/>
+  <mediaid/>
+</setup>
+<trial>
+  <install channel="selections" kind="selection" name="default"/>
+  <install channel="packages" package="kernel-default"/>
+  <reportproblems/>
+  <instorder/>
+</trial>
+</test>
