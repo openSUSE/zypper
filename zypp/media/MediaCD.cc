@@ -58,7 +58,7 @@ namespace zypp {
     		    false ), // does_download
       _lastdev(-1)
     {
-      if( url_r.getScheme() != "dvd" && url_r.getScheme() != "cdrom")
+      if( url_r.getScheme() != "dvd" && url_r.getScheme() != "cd")
       {
 	ERR << "Unsupported schema in the Url: " << url_r.asString()
 	                                         << std::endl;
