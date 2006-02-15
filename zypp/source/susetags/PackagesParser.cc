@@ -190,8 +190,8 @@ namespace zypp
             if ( str::split( stag_r.value, std::back_inserter(words) ) != 2 )
               ZYPP_THROW( ParseException( "Siz" ) );
 
-            _pkgImpl->_sourcesize = str::strtonum<unsigned long>(words[0]);
-            _pkgImpl->_archivesize = str::strtonum<unsigned long>(words[1]);
+            _pkgImpl->_archivesize = str::strtonum<unsigned long>(words[0]);
+            _pkgImpl->_size = str::strtonum<unsigned long>(words[1]);
           }
           if ( stag_r.name == "Loc" )
           {

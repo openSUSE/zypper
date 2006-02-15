@@ -40,6 +40,7 @@ namespace zypp
       virtual Label vendor() const;
       virtual Label displayName( const Locale & locale_r = Locale() ) const;
       virtual Source_Ref source() const;
+      virtual Url releaseNotesUrl() const;
 
       std::string _category;
 
@@ -53,7 +54,7 @@ namespace zypp
       std::string _you_path;
       std::string _you_url;
       std::string _vendor;
-      std::string _release_notes_url;
+      Url _release_notes_url;
       std::map< std::string, std::list<std::string> > _arch;
       std::string _default_base;
       std::list<std::string> _requires;

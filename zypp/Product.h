@@ -46,6 +46,9 @@ namespace zypp
     /** Get the name of the product to be presented to user */
     Label displayName() const;
 
+    /** The URL to download the release notes for this product */
+    Url releaseNotesUrl() const;
+
   protected:
     /** Ctor */
     Product( const NVRAD & nvrad_r );

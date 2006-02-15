@@ -96,7 +96,18 @@ namespace zypp
             else if(key == "VENDOR")
               prodImpl->_vendor = value;
             else if(key == "RELNOTESURL")
-              prodImpl->_release_notes_url = value;
+	    {
+		// Url class throws in case of invalid URL
+		try
+    		{
+    		    Url url (value) ;
+    		    prodImpl->_release_notes_url = url;
+    		}
+    		catch( ... )
+    		{
+		    prodImpl->_release_notes_url = Url();
+    		}
+	    }
             else if(key == "ARCH")
               parseLine( key, modifier, value, prodImpl->_arch);
             else if(key == "DEFAULTBASE")

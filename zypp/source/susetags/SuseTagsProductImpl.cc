@@ -49,6 +49,9 @@ namespace zypp
 
     Source_Ref SuseTagsProductImpl::source() const
     { return _source; }
+    
+    Url SuseTagsProductImpl::releaseNotesUrl() const
+    { return _release_notes_url; }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

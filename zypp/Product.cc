@@ -52,7 +52,9 @@ namespace zypp
 
   Label Product::displayName() const
   { return pimpl().displayName(); }
-
+  
+  Url Product::releaseNotesUrl() const
+  { return pimpl().releaseNotesUrl(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

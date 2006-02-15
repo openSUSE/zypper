@@ -94,8 +94,12 @@ namespace zypp
       Text SuseTagsPackageImpl::postun() const
       { return Text(); }
 
+      ByteCount SuseTagsPackageImpl::size() const
+      { return _size; }
+
       ByteCount SuseTagsPackageImpl::sourcesize() const
-      { return _sourcesize; }
+	// FIXME
+      { return 0; }
 
       ByteCount SuseTagsPackageImpl::archivesize() const
       { return _archivesize; }

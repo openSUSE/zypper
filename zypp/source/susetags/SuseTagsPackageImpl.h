@@ -75,6 +75,8 @@ namespace zypp
         /** */
         virtual Text postun() const;
         /** */
+        virtual ByteCount size() const;
+        /** */
         virtual ByteCount sourcesize() const;
         /** */
         virtual ByteCount archivesize() const;
@@ -100,7 +102,7 @@ namespace zypp
         PackageGroup _group;
         std::list<std::string> _authors;
         std::list<std::string> _keywords;
-        ByteCount _sourcesize;
+	ByteCount _size;
         ByteCount _archivesize;
         Label _license;
         Date _buildtime;
