@@ -29,6 +29,16 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
+  //	METHOD NAME : ZYppFactory::instance
+  //	METHOD TYPE : ZYppFactory
+  //
+  ZYppFactory ZYppFactory::instance()
+  {
+    return ZYppFactory();
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  //
   //	METHOD NAME : ZYppFactory::ZYppFactory
   //	METHOD TYPE : Ctor
   //

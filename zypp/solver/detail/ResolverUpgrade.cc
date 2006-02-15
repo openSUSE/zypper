@@ -209,8 +209,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
   Target_Ptr target;
   try {
-	ZYppFactory zf;
-	target = zf.getZYpp()->target();
+	target = getZYpp()->target();
   }
   catch( const Exception & excpt_r) {
 	ERR << "Huh, no target ?";
@@ -471,7 +470,7 @@ MIL << "split matched !" << endl;
 		    _pool.byCapabilityIndexEnd( installed->name(), dep ),
 		    resfilter::ByUninstalled (),
 		    resfilter::callOnCapMatchIn( dep, installedCap, functor::functorRef<bool,PoolItem,Capability>(info) ) );
-#endif		
+#endif
 	ResPool::const_indexiterator pend = pool().providesend(installed->name());
 	for (ResPool::const_indexiterator it = pool().providesbegin(installed->name()); it != pend; ++it) {
 	    if (it->second.second.status().staysUninstalled()

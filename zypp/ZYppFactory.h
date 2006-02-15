@@ -31,14 +31,18 @@ namespace zypp
     friend std::ostream & operator<<( std::ostream & str, const ZYppFactory & obj );
 
   public:
-    /** Default ctor */
-    ZYppFactory();
+    /** Singleton ctor */
+    static ZYppFactory instance();
     /** Dtor */
     ~ZYppFactory();
 
   public:
     /** \return Pointer to the ZYpp instance. */
     ZYpp::Ptr getZYpp() const;
+
+  private:
+    /** Default ctor. */
+    ZYppFactory();
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -49,7 +53,7 @@ namespace zypp
    * to the ZYpp instance.
   */
   inline ZYpp::Ptr getZYpp()
-  { return ZYppFactory().getZYpp(); }
+  { return ZYppFactory::instance().getZYpp(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
