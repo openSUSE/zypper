@@ -484,6 +484,8 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
     //
     ///////////////////////////////////////////////////////////////////
     if ( instlist_r.empty() ) {
+      instlist_r.splice( instlist_r.end(), nonpkglist );
+
       return;
     }
 #warning Source Rank Priority ?
