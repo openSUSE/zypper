@@ -235,7 +235,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
     if (!_upgrades) {
 
 	_XDEBUG("simple install of " <<  _item);
-	context->install (_item, context->verifying() /* is_soft */, _other_penalty);
+	context->install (_item, context->verifying() || _soft, _other_penalty);
 
     }
     else {
@@ -244,7 +244,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	_XDEBUG("upgrade install of " << _item);
 
-	context->upgrade (_item, _upgrades, context->verifying() /* is_soft */, _other_penalty);
+	context->upgrade (_item, _upgrades, context->verifying() || _soft, _other_penalty);
 
 	// the upgrade will uninstall the installed one, take care of this
 

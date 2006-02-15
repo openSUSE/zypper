@@ -207,7 +207,12 @@ ResolverContext::install (PoolItem_Ref item, bool is_soft, int other_penalty)
 
     if (status.isImpossible()) {
 	ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALLABLE, item, RESOLVER_INFO_PRIORITY_VERBOSE);
-	addError (misc_info);
+	// it is only an error, if the user wants to install explicity.
+	if (is_soft) {
+	    addInfo (misc_info);
+	} else {
+	    addError (misc_info);
+	}
 	return false;
     }
 
