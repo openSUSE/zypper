@@ -22,6 +22,7 @@
 #include "zypp/Selection.h"
 #include "zypp/source/susetags/SuseTagsSelectionImpl.h"
 
+#include "zypp/ZYpp.h"
 #include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -51,8 +52,9 @@ namespace zypp
         void consume( const SingleTag &tag );
         void consume( const MultiTag &tag );
         void endParse();
+
 	private:
-	    Locale _locale;
+	    ZYpp::LocaleSet _locales;
       };
       ///////////////////////////////////////////////////////////////////
       Selection::Ptr parseSelection( const Pathname & file_r );

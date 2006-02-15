@@ -20,7 +20,6 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/String.h"
 #include "zypp/CapFactory.h"
-#include "zypp/ZYppFactory.h"
 
 #include "zypp/source/susetags/SelectionTagFileParser.h"
 #include <boost/regex.hpp>
@@ -52,7 +51,7 @@ namespace zypp
       SelectionTagFileParser::SelectionTagFileParser()
       {
 	selImpl = shared_ptr<SuseTagsSelectionImpl>(new SuseTagsSelectionImpl);
-	_locale = getZYpp()->getTextLocale();
+	_locales = getZYpp()->getRequestedLocales();
       }
 
       void SelectionTagFileParser::consume( const SingleTag &tag )
@@ -124,11 +123,24 @@ namespace zypp
 	CapFactory _f;
 	Dependencies _deps;
 
-	for (std::set<std::string>::const_iterator it = selImpl->_inspacks[_locale].begin(); it != selImpl->_inspacks[_locale].end(); it++)
+	// get the inspacks without locale modifier
+
+	for (std::set<std::string>::const_iterator it = selImpl->_inspacks[Locale()].begin(); it != selImpl->_inspacks[Locale()].end(); it++)
 	{
 	  Capability _cap = _f.parse( ResTraits<Package>::kind, *it);
 	  _deps[Dep::RECOMMENDS].insert(_cap);
 	}
+
+	// for every requested locale, get the corresponding locale-specific inspacks
+	for (ZYpp::LocaleSet::const_iterator loc = _locales.begin(); loc != _locales.end(); ++loc) {
+	    for (std::set<std::string>::const_iterator it = selImpl->_inspacks[*loc].begin(); it != selImpl->_inspacks[*loc].end(); it++)
+	    {
+		Capability _cap = _f.parse( ResTraits<Package>::kind, *it);
+		_deps[Dep::RECOMMENDS].insert(_cap);
+	    }
+	}
+
+	// now the real recommends
 
 	for (std::set<std::string>::const_iterator it = selImpl->_recommends.begin(); it != selImpl->_recommends.end(); it++)
 	{
@@ -159,7 +171,7 @@ namespace zypp
 	  Capability _cap = _f.parse( ResTraits<Selection>::kind, *it );
 	  _deps[Dep::OBSOLETES].insert(_cap);
 	}
-
+#warning: The set<string> dependencies are still kept in the selImpl but are not needed anymore
 	NVRAD nvrad = NVRAD( selImpl->_name, Edition(selImpl->_version, selImpl->_release, std::string()), Arch(selImpl->_arch), _deps );
 	result = detail::makeResolvableFromImpl( nvrad, selImpl );
       }
