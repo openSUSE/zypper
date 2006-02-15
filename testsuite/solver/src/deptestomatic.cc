@@ -1371,8 +1371,7 @@ main (int argc, char *argv[])
     }
     forceResolve = false;
     manager = SourceManager::sourceManager();
-    ZYppFactory zf;
-    God = zf.getZYpp();
+    God = zypp::getZYpp();
 
     God->resolver()->setArchitecture(Arch(""));		// override ZYpp
 
