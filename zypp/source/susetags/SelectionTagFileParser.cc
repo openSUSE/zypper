@@ -116,6 +116,10 @@ namespace zypp
 	{
 	  selImpl->_inspacks[Locale(tag.modifier)].insert( tag.values.begin(), tag.values.end());
 	}
+    else if ( tag.name == "Del" )
+    {
+      selImpl->_delpacks[Locale(tag.modifier)].insert( tag.values.begin(), tag.values.end());
+    }
       }
 
       void SelectionTagFileParser::endParse()
@@ -140,6 +144,23 @@ namespace zypp
 		_deps[Dep::RECOMMENDS].insert(_cap);
 	    }
 	}
+
+    // get the delpacks without locale modifier
+
+    for (std::set<std::string>::const_iterator it = selImpl->_delpacks[Locale()].begin(); it != selImpl->_delpacks[Locale()].end(); it++)
+    {
+      Capability _cap = _f.parse( ResTraits<Package>::kind, *it);
+      _deps[Dep::OBSOLETES].insert(_cap);
+    }
+
+    // for every requested locale, get the corresponding locale-specific delpacks
+    for (ZYpp::LocaleSet::const_iterator loc = _locales.begin(); loc != _locales.end(); ++loc) {
+        for (std::set<std::string>::const_iterator it = selImpl->_delpacks[*loc].begin(); it != selImpl->_delpacks[*loc].end(); it++)
+        {
+        Capability _cap = _f.parse( ResTraits<Package>::kind, *it);
+        _deps[Dep::OBSOLETES].insert(_cap);
+        }
+    }
 
 	// now the real recommends
 
