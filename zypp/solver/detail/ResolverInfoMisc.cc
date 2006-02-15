@@ -48,12 +48,8 @@ IMPL_PTR_TYPE(ResolverInfoMisc);
 std::ostream &
 ResolverInfoMisc::dumpOn( std::ostream & os ) const
 {
-    ResolverInfo::dumpOn (os);
+    ResolverInfo::dumpOn (os);		// this already shows the affected item
 
-    ostringstream affected_str;
-    affected_str << ResolverInfo::toString(affected());
-
-    if (!affected_str.str().empty()) os << affected_str.str();
     os << ">>" << message() << "<<";
     os << itemsToString(true);
     if (!_action.empty()) {
