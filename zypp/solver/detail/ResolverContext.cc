@@ -366,6 +366,11 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 	//                                         RESOLVER_INFO_TYPE_NO_PROVIDER
  	//                                         RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER
 	//                                         RESOLVER_INFO_TYPE_CANT_SATISFY
+	//
+	// Testcases are:
+	// conflict2-test.xml  conflict-test.xml              remove-still-needed2-test.xml  require-test.xml
+	// conflict3-test.xml  remove-still-needed1-test.xml  remove-still-needed3-test.xml  unfulfilled-2-test.xml
+	//
 	bool found = false;
 	ResolverInfoList addList;
 	for (ResolverInfoList::const_iterator iter = _log.begin(); iter != _log.end(); iter++) {
