@@ -214,7 +214,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
     ResStatus status = context->getStatus(_item);
 
-    _DEBUG("QueueItemUninstall::process(<" << status << ">" << _item << ( _unlink ? "[unlink]" : ""));
+    _XDEBUG("QueueItemUninstall::process(<" << status << ">" << _item << ( _unlink ? "[unlink]" : ""));
 
     /* In the case of an unlink, we only want to uninstall the item if it is
        being used by something else.  We can't really determine this with 100%

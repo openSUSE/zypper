@@ -246,14 +246,14 @@ ResolverQueue::processOnce ()
     */
 
     for (QueueItemList::iterator iter = _qitems.begin(); iter != _qitems.end();) {
-	QueueItemList::iterator next = iter; next++;
+	QueueItemList::iterator next = iter; ++next;
 	QueueItem_Ptr qitem = *iter;
 
 	_XDEBUG( "=====> 2nd pass: [" << *qitem << "]");
 	if (qitem->isBranch()) {
 	    _XDEBUG("ResolverQueue::processOnce() is branch");
 	    QueueItemBranch_Ptr branch = dynamic_pointer_cast<QueueItemBranch>(qitem);
-	    for (QueueItemList::const_iterator iter2 = _qitems.begin(); iter2 != _qitems.end(); iter2++) {
+	    for (QueueItemList::const_iterator iter2 = _qitems.begin(); iter2 != _qitems.end(); ++iter2) {
 		_XDEBUG("Compare branch with [" << *(*iter2) << "]");
 		if (iter != iter2
 		    && branch->contains (*iter2)) {
@@ -413,15 +413,15 @@ ResolverQueue::splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueLi
 void
 ResolverQueue::spew ()
 {
-    _XDEBUG("Resolver Queue: " << (_context->isInvalid() ? "INVALID" : ""));
+    _DEBUG("Resolver Queue: " << (_context->isInvalid() ? "INVALID" : ""));
 
     if (_qitems.empty()) {
 
-	      _XDEBUG( "  (empty)");
+	      _DEBUG( "  (empty)");
 
     } else {
 	      for (QueueItemList::const_iterator iter = _qitems.begin(); iter != _qitems.end(); ++iter) {
-		  _XDEBUG("  " << *(*iter));
+		  _DEBUG("  " << *(*iter));
 	      }
 
     }
