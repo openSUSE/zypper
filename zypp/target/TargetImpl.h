@@ -117,6 +117,7 @@ namespace zypp
       rpm::RpmDb _rpm;
 #ifndef STORAGE_DISABLED
       zypp::storage::PersistentStorage _storage;
+      bool _storage_enabled;
 #endif
     private:
       /** Null implementation */
