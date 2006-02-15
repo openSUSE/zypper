@@ -43,10 +43,6 @@ namespace zypp
 	
 	virtual ~YUMGroupImpl();
 
-        /** Other requested groups */
-	virtual CapSet optionalReq() const;
-	/** Requested packages */
-	virtual CapSet defaultReq() const;
 	/** */
 	virtual TranslatedText summary() const;
 	/** */
@@ -74,8 +70,6 @@ namespace zypp
 // _summary
 // _description;
         bool _user_visible;
-	CapSet _optional_req;
-	CapSet _default_req;
       private:
 	Source_Ref _source;
       public:

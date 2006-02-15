@@ -735,9 +735,20 @@ INT << "Storing data to cache" << endl;
 	    it != parsed.packageList.end();
 	    it++)
 	  {
+	    Dep _dep_kind = Dep::REQUIRES;
 	    if (it->type == "mandatory" || it->type == "")
 	    {
-	      _deps[Dep::REQUIRES].insert(createCapability(YUMDependency(
+	      _dep_kind = Dep::REQUIRES;
+	    }
+	    else if (it->type == "default")
+	    {
+	      _dep_kind = Dep::RECOMMENDS;
+	    }
+	    else if (it->type == "optional")
+	    {
+	      _dep_kind = Dep::SUGGESTS;
+	    }
+	    _deps[_dep_kind].insert(createCapability(YUMDependency(
 		  "",
 		  it->name,
 		  "EQ",
@@ -745,17 +756,27 @@ INT << "Storing data to cache" << endl;
 		  it->ver,
 		  it->rel,
 		  ""
-		),
-		ResTraits<Package>::kind));
-	    }
+	      ),
+	      ResTraits<Package>::kind));
 	  }
 	  for (std::list<MetaPkg>::const_iterator it = parsed.grouplist.begin();
 	    it != parsed.grouplist.end();
 	    it++)
 	  {
+	    Dep _dep_kind = Dep::REQUIRES;
 	    if (it->type == "mandatory" || it->type == "")
 	    {
-	      _deps[Dep::REQUIRES].insert(createCapability(YUMDependency(
+	      _dep_kind = Dep::REQUIRES;
+	    }
+	    else if (it->type == "default")
+	    {
+	      _dep_kind = Dep::RECOMMENDS;
+	    }
+	    else if (it->type == "optional")
+	    {
+	      _dep_kind = Dep::SUGGESTS;
+	    }
+	    _deps[_dep_kind].insert(createCapability(YUMDependency(
 		  "",
 		  it->name,
 		  "",
@@ -763,9 +784,8 @@ INT << "Storing data to cache" << endl;
 		  "",
 		  "",
 		  ""
-		),
-		ResTraits<Selection>::kind));
-	    }
+	      ),
+	      ResTraits<Selection>::kind));
 	  }
 	  return _deps;
 	}

@@ -40,47 +40,6 @@ namespace zypp
       : _user_visible(parsed.userVisible == "true")
       , _source(source_r)
       {
-	CapFactory _f;
-	for (std::list<PackageReq>::const_iterator it = parsed.packageList.begin();
-	  it != parsed.packageList.end();
-	  it++)
-	{
-          Capability _cap = _f.parse(
-            ResTraits<Package>::kind,
-            it->name,
-            Rel("EQ"),
-            Edition(it->ver, it->rel, it->epoch)
-          );
-	  if (it->type == "default")
-	  {
-	    _default_req.insert(_cap);
-	  }
-	  else if (it->type == "optional")
-	  {
-	    _optional_req.insert(_cap);
-	  } 
-	}
-	for (std::list<MetaPkg>::const_iterator it = parsed.grouplist.begin();
-	    it != parsed.grouplist.end();
-	    it++)
-	{
-          Capability _cap = _f.parse(
-            ResTraits<Selection>::kind,
-            it->name,
-            Rel(),
-            Edition()
-          );
-	  if (it->type == "default")
-	  {
-	    _default_req.insert(_cap);
-	  }
-	  else if (it->type == "optional")
-	  {
-	    _optional_req.insert(_cap);
-	  } 
-	}
-
-
 // to name        std::string groupId;
 // as _summary        std::list<multilang> name;
 // _description
@@ -93,11 +52,6 @@ namespace zypp
       bool YUMGroupImpl::visible() const {
 	return _user_visible;
       }
-      CapSet YUMGroupImpl::optionalReq() const
-      { return _optional_req; }
-
-      CapSet YUMGroupImpl::defaultReq() const
-      { return _default_req; }
 
       TranslatedText YUMGroupImpl::summary() const
       { return ResObjectImplIf::summary(); }
