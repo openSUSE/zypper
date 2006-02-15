@@ -51,7 +51,7 @@ namespace zypp
 
       SelectionTagFileParser::SelectionTagFileParser()
       {
-	selImpl = shared_ptr<SuseTagsSelectionImpl>(new SuseTagsSelectionImpl);
+	selImpl = new SuseTagsSelectionImpl;
 	_locales = zypp::getZYpp()->getRequestedLocales();
       }
 

@@ -72,16 +72,16 @@ int main( int argc, char * argv[] )
   try
     {
       for_each( depList.begin(), depList.end(),
-                CapSetInsert<Package>(dataCollect.provides) );
+                CapSetInsert<Package>(dataCollect[Dep::PROVIDES]) );
     }
   catch(...)
     {
-      INT << dataCollect.provides << endl;
+      INT << dataCollect[Dep::PROVIDES] << endl;
     }
   // ...parse other deps
 
   // create the object
-  shared_ptr<detail::PackageImpl> pkgImpl;
+  detail::ResImplTraits<detail::PackageImpl>::Ptr pkgImpl;
   Package::Ptr pkg( detail::makeResolvableAndImpl( dataCollect, pkgImpl ) );
   DBG << *pkg << endl;
   DBG << pkg->deps() << endl;

@@ -114,7 +114,7 @@ HelixSourceImpl::createPackage (const HelixParser & parsed)
 {
     try
     {
-	shared_ptr<HelixPackageImpl> impl(new HelixPackageImpl(_source, parsed));
+	detail::ResImplTraits<HelixPackageImpl>::Ptr impl(new HelixPackageImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,
@@ -138,7 +138,7 @@ HelixSourceImpl::createMessage (const HelixParser & parsed)
 {
     try
     {
-	shared_ptr<HelixMessageImpl> impl(new HelixMessageImpl(_source, parsed));
+	detail::ResImplTraits<HelixMessageImpl>::Ptr impl(new HelixMessageImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,
@@ -162,7 +162,7 @@ HelixSourceImpl::createScript (const HelixParser & parsed)
 {
     try
     {
-	shared_ptr<HelixScriptImpl> impl(new HelixScriptImpl(_source, parsed));
+	detail::ResImplTraits<HelixScriptImpl>::Ptr impl(new HelixScriptImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,
@@ -186,7 +186,7 @@ HelixSourceImpl::createPatch (const HelixParser & parsed)
 {
     try
     {
-	shared_ptr<HelixPatchImpl> impl(new HelixPatchImpl(_source, parsed));
+	detail::ResImplTraits<HelixPatchImpl>::Ptr impl(new HelixPatchImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,
@@ -210,7 +210,7 @@ HelixSourceImpl::createSelection (const HelixParser & parsed)
 {
     try
     {
-	shared_ptr<HelixSelectionImpl> impl(new HelixSelectionImpl(_source, parsed));
+	detail::ResImplTraits<HelixSelectionImpl>::Ptr impl(new HelixSelectionImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,
@@ -234,7 +234,7 @@ HelixSourceImpl::createPattern (const HelixParser & parsed)
 {
     try
     {
-	shared_ptr<HelixPatternImpl> impl(new HelixPatternImpl(_source, parsed));
+	detail::ResImplTraits<HelixPatternImpl>::Ptr impl(new HelixPatternImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,
@@ -258,7 +258,7 @@ HelixSourceImpl::createProduct (const HelixParser & parsed)
 {
     try
     {
-	shared_ptr<HelixProductImpl> impl(new HelixProductImpl(_source, parsed));
+	detail::ResImplTraits<HelixProductImpl>::Ptr impl(new HelixProductImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,

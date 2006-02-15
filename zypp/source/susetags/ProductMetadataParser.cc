@@ -46,7 +46,7 @@ namespace zypp
     { /////////////////////////////////////////////////////////////////
       ProductMetadataParser::ProductMetadataParser()
       {
-        prodImpl = shared_ptr<SuseTagsProductImpl>(new SuseTagsProductImpl);
+        prodImpl = new SuseTagsProductImpl;
       }
       ///////////////////////////////////////////////////////////////////
       //
@@ -71,7 +71,7 @@ namespace zypp
           {
             if ( what.size() < 5 )
               std::cout << "ups!!!!" << std::endl;
-            
+
             std::string key = what[2];
             std::string value = what[5];
             std::string modifier = what[4];
@@ -157,14 +157,14 @@ namespace zypp
           ERR << excpt_r << endl;
           throw "Cannot create product object";
         }
-	
+
 	prodImpl->_source = source_r;
       }
 
       void ProductMetadataParser::parseLine( const string &key, const string &modif, const string &value, map< string, list<string> > &container)
       {
         if ( modif.size() == 0)
-          parseLine( key, value, container["default"]); 
+          parseLine( key, value, container["default"]);
         else
           parseLine( key, value, container[modif]);
       }
@@ -172,7 +172,7 @@ namespace zypp
       void ProductMetadataParser::parseLine( const std::string &key, const std::string &lang, const std::string &value, TranslatedText &container)
       {
         if ( lang.size() == 0)
-          container.setText(value, Locale());   
+          container.setText(value, Locale());
         else
           container.setText(value, Locale(lang));
       }

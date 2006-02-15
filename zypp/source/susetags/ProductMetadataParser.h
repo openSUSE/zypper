@@ -37,7 +37,7 @@ namespace zypp
        * Returns a product from a content file \a file_r
        */
       Product::Ptr parseContentFile( const Pathname & file_r, Source_Ref source_r );
-  
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : ProductMetadataParser
@@ -46,7 +46,7 @@ namespace zypp
       struct ProductMetadataParser
       {
         Product::Ptr result;
-        shared_ptr<SuseTagsProductImpl> prodImpl;
+        detail::ResImplTraits<SuseTagsProductImpl>::Ptr prodImpl;
         ProductMetadataParser();
         virtual ~ProductMetadataParser()
         {}
@@ -59,7 +59,7 @@ namespace zypp
         /* Parse a key.modifier (std::list of std::strings)
          * That means, translatable tag with multiple values
          * the default modifier will get the modifier of default (LABEL.de, LABEL as LANGUAGE.default)
-        */ 
+        */
         void parseLine( const std::string &key, const std::string &modif, const std::string &value, std::map< std::string, std::list<std::string> > &container);
 
         void parseLine( const std::string &key, const std::string &lang, const std::string &value, TranslatedText &container);

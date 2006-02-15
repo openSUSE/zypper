@@ -42,8 +42,8 @@ namespace zypp
       struct PatternTagFileParser : public zypp::parser::tagfile::TagFileParser
       {
         Pattern::Ptr result;
-        shared_ptr<SuseTagsPatternImpl> selImpl;
-        
+        detail::ResImplTraits<SuseTagsPatternImpl>::Ptr selImpl;
+
         PatternTagFileParser();
         virtual ~PatternTagFileParser()
         {}

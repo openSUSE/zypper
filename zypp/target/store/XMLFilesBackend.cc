@@ -425,17 +425,17 @@ XMLFilesBackend::createPatch( const zypp::parser::yum::YUMPatchData & parsed ) c
 {
   try
   {
-    shared_ptr<XMLPatchImpl> impl(new XMLPatchImpl());
+    detail::ResImplTraits<XMLPatchImpl>::Ptr impl(new XMLPatchImpl());
     impl->_patch_id = parsed.patchId;
     impl->_timestamp = str::strtonum<time_t>(parsed.timestamp);
     impl->_category = parsed.category;
     impl->_reboot_needed = parsed.rebootNeeded;
     impl->_affects_pkg_manager = parsed.packageManager;
     // impl._atoms -> std::list<shared_ptr<YUMPatchAtom> > parsed.atoms */
-    
+
     impl->_summary = parsed.summary;
     impl->_description = parsed.summary;
-    
+
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name,
                        Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch,
@@ -473,7 +473,7 @@ XMLFilesBackend::createPatch( const zypp::parser::yum::YUMPatchData & parsed ) c
         }
         default:
           ERR << "Unknown type of atom" << endl;
-      }  
+      }
     }
 
     Patch::AtomList atoms = patch->atoms();
@@ -496,7 +496,7 @@ XMLFilesBackend::createMessage( const zypp::parser::yum::YUMPatchMessage & parse
 {
   try
   {
-    shared_ptr<XMLMessageImpl> impl(new XMLMessageImpl());
+    detail::ResImplTraits<XMLMessageImpl>::Ptr impl(new XMLMessageImpl());
     impl->_text = parsed.text;
 
     // Collect basic Resolvable data
@@ -516,7 +516,7 @@ XMLFilesBackend::createScript(const zypp::parser::yum::YUMPatchScript & parsed )
 {
   try
   {
-    shared_ptr<XMLScriptImpl> impl(new XMLScriptImpl());
+    detail::ResImplTraits<XMLScriptImpl>::Ptr impl(new XMLScriptImpl());
     impl->_do_script = parsed.do_script;
     impl->_undo_script = parsed.undo_script;
     // Collect basic Resolvable data
@@ -546,7 +546,7 @@ XMLFilesBackend::createProduct( const zypp::parser::yum::YUMProductData & parsed
 {
   try
   {
-    shared_ptr<XMLProductImpl> impl(new XMLProductImpl());
+    detail::ResImplTraits<XMLProductImpl>::Ptr impl(new XMLProductImpl());
 
     impl->_category = parsed.type;
     impl->_vendor = parsed.vendor;
@@ -572,7 +572,7 @@ XMLFilesBackend::createPattern( const zypp::parser::yum::YUMPatternData & parsed
 {
   try
   {
-    shared_ptr<XMLPatternImpl> impl(new XMLPatternImpl());
+    detail::ResImplTraits<XMLPatternImpl>::Ptr impl(new XMLPatternImpl());
 
     impl->_user_visible = ((parsed.userVisible == "false" ) ? false : true );
     impl->_summary = parsed.summary;
@@ -580,7 +580,7 @@ XMLFilesBackend::createPattern( const zypp::parser::yum::YUMPatternData & parsed
     impl->_default = ((parsed.default_ == "false" ) ? false : true );
     impl->_category = parsed.category;
     impl->_icon = parsed.icon;
-    impl->_script = parsed.script;    
+    impl->_script = parsed.script;
 
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition::noedition, Arch_noarch,           createDependencies( parsed, ResTraits<Pattern>::kind));
@@ -599,7 +599,7 @@ XMLFilesBackend::createSelection( const zypp::parser::yum::YUMPatternData & pars
 {
   try
   {
-    shared_ptr<XMLSelectionImpl> impl(new XMLSelectionImpl());
+    detail::ResImplTraits<XMLSelectionImpl>::Ptr impl(new XMLSelectionImpl());
 
     impl->_visible = ((parsed.userVisible == "false" ) ? false : true );
     impl->_summary = parsed.summary;
@@ -607,7 +607,7 @@ XMLFilesBackend::createSelection( const zypp::parser::yum::YUMPatternData & pars
     impl->_description = parsed.description;
     //impl->_default = ((parsed.default_ == "false" ) ? false : true );
     impl->_category = parsed.category;
-    
+
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition::noedition, Arch_noarch, createDependencies( parsed, ResTraits<Pattern>::kind));
     Selection::Ptr selection = detail::makeResolvableFromImpl( dataCollect, impl );
@@ -620,7 +620,7 @@ XMLFilesBackend::createSelection( const zypp::parser::yum::YUMPatternData & pars
   }
 }
 
-Dependencies 
+Dependencies
 XMLFilesBackend::createDependencies( const zypp::parser::yum::YUMObjectData & parsed, const Resolvable::Kind my_kind ) const
 {
   Dependencies _deps;
@@ -668,7 +668,7 @@ XMLFilesBackend::createDependencies( const zypp::parser::yum::YUMObjectData & pa
   return _deps;
 }
 
-Dependencies 
+Dependencies
 XMLFilesBackend::createGroupDependencies( const zypp::parser::yum::YUMGroupData & parsed ) const
 {
   Dependencies _deps;
@@ -790,7 +790,7 @@ XMLFilesBackend::storeSource(const PersistentStorage::SourceData &data)
   {
     std::stringstream message_stream(data.alias);
     std::string full_path = (source_p / Digest::digest("MD5", message_stream)).string();
-    
+
     file.open(full_path.c_str());
     file << xml;
     file.close();

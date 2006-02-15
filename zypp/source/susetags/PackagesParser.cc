@@ -48,7 +48,7 @@ namespace zypp
         {
           _pkg_pending = false;
           sizeEntryRX = boost::regex("^(.*/)[[:space:]]([[:digit:]]+)[[:space:]]([[:digit:]]+)[[:space:]]([[:digit:]]+)[[:space:]]([[:digit:]]+)$");
-        }          
+        }
 
         /* Consume SingleTag data. */
         virtual void consume( const SingleTag & stag_r )
@@ -74,7 +74,7 @@ namespace zypp
         {
           if ( ! _pkg_pending )
             return;
-          
+
           if ( mtag_r.name == "Dir" )
           {
             for (std::list<std::string>::const_iterator it = mtag_r.values.begin(); it != mtag_r.values.end(); ++it )
@@ -102,7 +102,7 @@ namespace zypp
         {}
       };
 
-     
+
       struct PackagesParser : public parser::tagfile::TagFileParser
       {
         PkgContent _result;
@@ -126,8 +126,8 @@ namespace zypp
 	  return _result;
         }
 
-        void collectPkg( const shared_ptr<source::susetags::SuseTagsPackageImpl> & nextPkg_r
-                         = shared_ptr<source::susetags::SuseTagsPackageImpl>() )
+        void collectPkg( const PkgImplPtr & nextPkg_r
+                         = PkgImplPtr() )
         {
           if ( pkgPending() )
             {
@@ -138,7 +138,7 @@ namespace zypp
 
         void newPkg()
         {
-          collectPkg( shared_ptr<source::susetags::SuseTagsPackageImpl>(new source::susetags::SuseTagsPackageImpl(_source)) );
+          collectPkg( PkgImplPtr(new source::susetags::SuseTagsPackageImpl(_source)) );
         }
 
         void collectDeps( const std::list<std::string> & depstr_r, CapSet & capset )
@@ -167,7 +167,7 @@ namespace zypp
               ZYPP_THROW( ParseException( "Pkg" ) );
 #warning FIXME, do proper filtering from content:ARCH line
 	    if (words[3] == "src" || words[3] == "nosrc")
-		_pkgImpl.reset();
+		_pkgImpl = NULL;
 
             newPkg();
             _nvrad = NVRAD( words[0], Edition(words[1],words[2]), Arch(words[3]) );

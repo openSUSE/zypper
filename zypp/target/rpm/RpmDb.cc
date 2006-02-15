@@ -748,9 +748,9 @@ void RpmDb::closeDatabase()
 void RpmDb::rebuildDatabase()
 {
   callback::SendReport<RebuildDBReport> report;
-  
+
   report->start( root() + dbPath() );
-  
+
   try {
     doRebuildDatabase(report);
   }
@@ -976,9 +976,9 @@ bool RpmDb::packagesValid() const
 const std::list<Package::Ptr> & RpmDb::getPackages()
 {
   callback::SendReport<ScanDBReport> report;
-  
+
   report->start ();
-  
+
   try {
     const std::list<Package::Ptr> & ret = doGetPackages(report);
     report->finish(ScanDBReport::NO_ERROR, "");
@@ -1049,7 +1049,7 @@ This prevented from having packages multiple times
 #endif
 
     // create dataprovider
-    shared_ptr<RPMPackageImpl> impl(new RPMPackageImpl(*iter));
+    detail::ResImplTraits<RPMPackageImpl>::Ptr impl(new RPMPackageImpl(*iter));
 
     Edition edition;
     Arch arch;
@@ -1704,7 +1704,7 @@ void RpmDb::installPackage( const Pathname & filename, unsigned flags )
 
   report->start(filename);
 
-  do 
+  do
     try {
       doInstallPackage(filename, flags, report);
       report->finish();
@@ -1713,7 +1713,7 @@ void RpmDb::installPackage( const Pathname & filename, unsigned flags )
     catch (RpmException & excpt_r)
     {
       RpmInstallReport::Action user = report->problem( excpt_r );
-      
+
       if( user == RpmInstallReport::ABORT ) {
         report->finish( excpt_r );
         ZYPP_RETHROW(excpt_r);
@@ -1848,7 +1848,7 @@ void RpmDb::removePackage( Package::constPtr package, unsigned flags )
 void RpmDb::removePackage( const string & name_r, unsigned flags )
 {
   callback::SendReport<RpmRemoveReport> report;
-  
+
   report->start( name_r );
 
   try {

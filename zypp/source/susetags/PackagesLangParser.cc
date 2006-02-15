@@ -60,7 +60,7 @@ namespace zypp
 	    PkgContent::const_iterator it = _content.find(nvrad);
 	    if (it == _content.end()) {
 		WAR << words[0] << " " << words[1] << " " << words[2] << "  " << Arch(words[3]) << " not found" << endl;
-		_current.reset();
+		_current = NULL;
 	    }
 	    else {
 		_count++;

@@ -126,7 +126,7 @@ INT << "Storing data to cache" << endl;
        std::list<YUMRepomdData_Ptr> repo_patches;
 
        callback::SendReport<CreateSourceReport> report;
-       
+
        report->startData( url() );
 
        try {
@@ -445,7 +445,7 @@ INT << "Storing data to cache" << endl;
 	{
 	  try
 	  {
-	    shared_ptr<YUMPackageImpl> impl(
+	    ResImplTraits<YUMPackageImpl>::Ptr impl(
 	      new YUMPackageImpl(source_r, parsed, filelist, other));
 
             // Collect basic Resolvable data
@@ -474,7 +474,7 @@ INT << "Storing data to cache" << endl;
 	{
 	  try
 	  {
-	    shared_ptr<YUMPackageImpl> impl(new YUMPackageImpl(source_r, parsed));
+	    ResImplTraits<YUMPackageImpl>::Ptr impl(new YUMPackageImpl(source_r, parsed));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -502,7 +502,7 @@ INT << "Storing data to cache" << endl;
 	{
 	  try
 	  {
-	    shared_ptr<YUMGroupImpl> impl(new YUMGroupImpl(source_r, parsed));
+	    ResImplTraits<YUMGroupImpl>::Ptr impl(new YUMGroupImpl(source_r, parsed));
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.groupId,
                                Edition::noedition,
@@ -527,7 +527,7 @@ INT << "Storing data to cache" << endl;
 	{
 	  try
 	  {
-	    shared_ptr<YUMPatternImpl> impl(new YUMPatternImpl(source_r, parsed));
+	    ResImplTraits<YUMPatternImpl>::Ptr impl(new YUMPatternImpl(source_r, parsed));
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
                                Edition::noedition,
@@ -552,7 +552,7 @@ INT << "Storing data to cache" << endl;
 	{
 	  try
 	  {
-	    shared_ptr<YUMMessageImpl> impl(new YUMMessageImpl(source_r, parsed));
+	    ResImplTraits<YUMMessageImpl>::Ptr impl(new YUMMessageImpl(source_r, parsed));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -580,7 +580,7 @@ INT << "Storing data to cache" << endl;
 	{
 	  try
 	  {
-	    shared_ptr<YUMScriptImpl> impl(new YUMScriptImpl(source_r, parsed));
+	    ResImplTraits<YUMScriptImpl>::Ptr impl(new YUMScriptImpl(source_r, parsed));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -608,7 +608,7 @@ INT << "Storing data to cache" << endl;
 	{
 	  try
 	  {
-	    shared_ptr<YUMProductImpl> impl(new YUMProductImpl(source_r, parsed));
+	    ResImplTraits<YUMProductImpl>::Ptr impl(new YUMProductImpl(source_r, parsed));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,
@@ -636,7 +636,7 @@ INT << "Storing data to cache" << endl;
 	{
 	  try
 	  {
-	    shared_ptr<YUMPatchImpl> impl(new YUMPatchImpl(source_r, parsed, *this));
+	    ResImplTraits<YUMPatchImpl>::Ptr impl(new YUMPatchImpl(source_r, parsed, *this));
 
             // Collect basic Resolvable data
             NVRAD dataCollect( parsed.name,

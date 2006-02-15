@@ -12,15 +12,16 @@
 #ifndef ZYPP_RESOBJECT_H
 #define ZYPP_RESOBJECT_H
 
+#include "zypp/detail/ResObjectImplIf.h"
 #include "zypp/Resolvable.h"
 #include "zypp/TranslatedText.h"
-//#include "zypp/detail/ResObjectImplIf.h"
 #include "zypp/NeedAType.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   namespace detail {
+    class ImplConnect;
     class ResObjectImplIf;
   }
   class Source_Ref;
@@ -71,6 +72,7 @@ namespace zypp
     virtual ~ResObject();
 
   private:
+    friend class detail::ImplConnect;
     /** Access implementation */
     virtual Impl & pimpl() = 0;
     /** Access implementation */

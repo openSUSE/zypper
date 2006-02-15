@@ -6,50 +6,46 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/source/susetags/PackagesParser.h
+/** \file	zypp/detail/ImplConnect.h
  *
 */
-#ifndef ZYPP_SOURCE_SUSETAGS_PACKAGESPARSER_H
-#define ZYPP_SOURCE_SUSETAGS_PACKAGESPARSER_H
-
-#include <iosfwd>
-#include <list>
-
-#include "zypp/base/PtrTypes.h"
-#include "zypp/Pathname.h"
-#include "zypp/Package.h"
-#include "zypp/DiskUsage.h"
-#include "zypp/NVRAD.h"
-#include "zypp/source/susetags/SuseTagsImpl.h"
-#include "zypp/source/susetags/SuseTagsPackageImpl.h"
+#ifndef ZYPP_DETAIL_IMPLCONNECT_H
+#define ZYPP_DETAIL_IMPLCONNECT_H
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace source
+  namespace detail
   { /////////////////////////////////////////////////////////////////
+
     ///////////////////////////////////////////////////////////////////
-    namespace susetags
-    { /////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : ImplConnect
+    //
+    /** */
+    struct ImplConnect
+    {
+      template<class _Res>
+        static typename _Res::Impl & resimpl( _Res & obj )
+        { return dynamic_cast<typename _Res::Impl &>( static_cast<ResObject &>(obj) ); }
 
-      typedef detail::ResImplTraits<SuseTagsPackageImpl>::Ptr PkgImplPtr;
-      typedef std::map<NVRAD, PkgImplPtr>                     PkgContent;
-      typedef std::map<NVRAD, DiskUsage>                      PkgDiskUsage;
+      template<class _Res>
+        static const typename _Res::Impl & resimpl( const _Res & obj )
+        { return dynamic_cast<const typename _Res::Impl &>( static_cast<const ResObject &>(obj) ); }
 
-      /** \deprecated Just temporary.
-       * \throws ParseException and others.
-      */
-      PkgContent parsePackages( Source_Ref source_r, SuseTagsImpl::Ptr, const Pathname & file_r );
-      PkgDiskUsage parsePackagesDiskUsage( const Pathname & file_r );
+      static ResObject::Impl & resimpl( ResObject & obj )
+      { return obj.pimpl(); }
 
-      /////////////////////////////////////////////////////////////////
-    } // namespace susetags
+      static const ResObject::Impl & resimpl( const ResObject & obj )
+      { return obj.pimpl(); }
+     };
     ///////////////////////////////////////////////////////////////////
+
     /////////////////////////////////////////////////////////////////
-  } // namespace source
+  } // namespace detail
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SOURCE_SUSETAGS_PACKAGESPARSER_H
+#endif // ZYPP_DETAIL_IMPLCONNECT_H

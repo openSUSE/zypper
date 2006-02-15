@@ -43,8 +43,8 @@ namespace zypp
       struct SelectionTagFileParser : public zypp::parser::tagfile::TagFileParser
       {
         Selection::Ptr result;
-        shared_ptr<SuseTagsSelectionImpl> selImpl;
-        
+        detail::ResImplTraits<SuseTagsSelectionImpl>::Ptr selImpl;
+
         SelectionTagFileParser();
         virtual ~SelectionTagFileParser()
         {}

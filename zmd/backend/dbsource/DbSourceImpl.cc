@@ -121,7 +121,7 @@ create_package_handle (sqlite3 *db)
     int rc;
     sqlite3_stmt *handle = NULL;
 
-    query = 
+    query =
 	//      0   1     2        3        4      5
         "SELECT id, name, version, release, epoch, arch, "
 	//      6               7
@@ -180,7 +180,7 @@ DbSourceImpl::createPackages(void)
 
 	try
 	{
-	    shared_ptr<DbPackageImpl> impl(new DbPackageImpl( _source ));
+	    detail::ResImplTraits<DbPackageImpl>::Ptr impl(new DbPackageImpl( _source ));
 
 	    sqlite_int64 id = sqlite3_column_int64( handle, 0 );
 	    name = (const char *) sqlite3_column_text (handle, 1);
@@ -303,7 +303,7 @@ DbSourceImpl::createMessage (const DbReader & parsed)
 {
     try
     {
-	shared_ptr<DbMessageImpl> impl(new DbMessageImpl(_source, parsed));
+	detail::ResImplTraits<DbMessageImpl>::Ptr impl(new DbMessageImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,
@@ -327,7 +327,7 @@ DbSourceImpl::createScript (const DbReader & parsed)
 {
     try
     {
-	shared_ptr<DbScriptImpl> impl(new DbScriptImpl(_source, parsed));
+	detail::ResImplTraits<DbScriptImpl>::Ptr impl(new DbScriptImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,
@@ -351,7 +351,7 @@ DbSourceImpl::createPatch (const DbReader & parsed)
 {
     try
     {
-	shared_ptr<DbPatchImpl> impl(new DbPatchImpl(_source, parsed));
+	detail::ResImplTraits<DbPatchImpl>::Ptr impl(new DbPatchImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,
@@ -375,7 +375,7 @@ DbSourceImpl::createPattern (const DbReader & parsed)
 {
     try
     {
-	shared_ptr<DbPatternImpl> impl(new DbPatternImpl(_source, parsed));
+	detail::ResImplTraits<DbPatternImpl>::Ptr impl(new DbPatternImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,
@@ -399,7 +399,7 @@ DbSourceImpl::createProduct (const DbReader & parsed)
 {
     try
     {
-	shared_ptr<DbProductImpl> impl(new DbProductImpl(_source, parsed));
+	detail::ResImplTraits<DbProductImpl>::Ptr impl(new DbProductImpl(_source, parsed));
 
 	// Collect basic Resolvable data
 	NVRAD dataCollect( parsed.name,

@@ -50,7 +50,7 @@ namespace zypp
 
       PatternTagFileParser::PatternTagFileParser()
       {
-        selImpl = shared_ptr<SuseTagsPatternImpl>(new SuseTagsPatternImpl);
+        selImpl = new SuseTagsPatternImpl;
       }
 
       void PatternTagFileParser::consume( const SingleTag &tag )

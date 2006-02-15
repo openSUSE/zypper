@@ -12,7 +12,7 @@
 #ifndef ZYPP_DETAIL_RESOBJECTFACTORY_H
 #define ZYPP_DETAIL_RESOBJECTFACTORY_H
 
-#include "zypp/base/PtrTypes.h"
+#include "zypp/detail/ResImplTraits.h"
 #include "zypp/NVRAD.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -35,12 +35,9 @@ namespace zypp
         class ResImplConnect : public _Res
         {
         public:
-          typedef ResImplConnect      Self;
-          typedef typename _Res::Impl Impl;
-          typedef shared_ptr<Impl>    Impl_Ptr;
-          // Ptr types not needed
-          // typedef intrusive_ptr<Self>       Ptr;
-          // typedef intrusive_ptr<const Self> constPtr;
+          typedef ResImplConnect                    Self;
+          typedef typename _Res::Impl               Impl;
+          typedef typename ResImplTraits<Impl>::Ptr Impl_Ptr;
         public:
           /** Ctor */
           ResImplConnect( const NVRAD & nvrad_r,
@@ -65,9 +62,9 @@ namespace zypp
     template<class _Impl>
       typename _Impl::ResType::Ptr
       makeResolvableAndImpl( const NVRAD & nvrad_r,
-                             shared_ptr<_Impl> & impl_r )
+                             intrusive_ptr<_Impl> & impl_r )
       {
-        impl_r.reset( new _Impl );
+        impl_r = new _Impl;
         return new
                _resobjectfactory_detail::ResImplConnect<typename _Impl::ResType>
                ( nvrad_r, impl_r );
@@ -76,7 +73,7 @@ namespace zypp
     template<class _Impl>
       typename _Impl::ResType::Ptr
       makeResolvableFromImpl( const NVRAD & nvrad_r,
-                              shared_ptr<_Impl> impl_r )
+                              intrusive_ptr<_Impl> impl_r )
       {
         if ( ! impl_r )
           throw ( "makeResolvableFromImpl: NULL Impl " );

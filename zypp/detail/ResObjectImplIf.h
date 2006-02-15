@@ -15,7 +15,9 @@
 #include <list>
 #include <string>
 
+#include "zypp/detail/ResImplTraits.h"
 #include "zypp/detail/ResObjectFactory.h"
+
 #include "zypp/Locale.h"
 #include "zypp/ByteCount.h"
 #include "zypp/Date.h"
@@ -48,7 +50,7 @@ namespace zypp
      * and interface methods returning them for each datum). The todo hook is
      * here, because it#s the common base of the *Impl classes.
     */
-    class ResObjectImplIf
+    class ResObjectImplIf : public base::ReferenceCounted, private base::NonCopyable
     {
     public:
       /** \name Common Attributes.

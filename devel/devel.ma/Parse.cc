@@ -16,6 +16,7 @@
 #include <zypp/base/Iterator.h>
 #include <zypp/base/Algorithm.h>
 #include <zypp/base/Functional.h>
+#include <zypp/base/ProvideNumericId.h>
 
 #include "zypp/NVRAD.h"
 #include "zypp/ResPool.h"
@@ -100,50 +101,58 @@ struct XByInstalled : public std::unary_function<ui::Selectable::constPtr,bool>
   }
 };
 
-template<class FT>
-  void fieldInfo()
-  {
-    MIL << bit::asString(FT::Mask::value)    << '|' << FT::begin << '-' << FT::end << '|' << FT::size << endl;
-    MIL << bit::asString(FT::Mask::inverted) << endl;
-  }
+///////////////////////////////////////////////////////////////////
+namespace zypp
+{ /////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
+  namespace resfilter
+  { /////////////////////////////////////////////////////////////////
+    /** Select ResObject by kind. */
+    struct Mtest : public PoolItemFilterFunctor
+    {
+      bool operator()( const PoolItem & p ) const
+      {
+        p.status().setTransact(true, ResStatus::USER );
+        return true;
+      }
+    };
 
-
-void testr()
-{
-  fieldInfo<ResStatus::StateField>();
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::UNINSTALLED) << endl;
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::INSTALLED) << endl;
-  fieldInfo<ResStatus::EstablishField>();
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::UNDETERMINED) << endl;
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::UNNEEDED) << endl;
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::SATISFIED) << endl;
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::INCOMPLETE) << endl;
-  fieldInfo<ResStatus::TransactField>();
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::KEEP_STATE) << endl;
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::TRANSACT) << endl;
-  fieldInfo<ResStatus::TransactByField>();
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::SOLVER) << endl;
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::APPL_LOW) << endl;
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::APPL_HIGH) << endl;
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::USER) << endl;
-  fieldInfo<ResStatus::TransactDetailField>();
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::EXPLICIT_INSTALL) << endl;
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::SOFT_INSTALL) << endl;
-  DBG << endl;
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::EXPLICIT_REMOVE) << endl;
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::SOFT_REMOVE) << endl;
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::DUE_TO_OBSOLETE) << endl;
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::DUE_TO_UNLINK) << endl;
-  fieldInfo<ResStatus::SolverStateField>();
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::NORMAL) << endl;
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::SEEN) << endl;
-  DBG << bit::asString((ResStatus::FieldType)ResStatus::IMPOSSIBLE) << endl;
-}
-
-
-
+    /////////////////////////////////////////////////////////////////
+  } // namespace resfilter
+  ///////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////
+} // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
+struct X : public base::ProvideNumericId<X>
+{
+
+};
+
+template<class _Who>
+  void who( _Who & w )
+  {
+    INT << __PRETTY_FUNCTION__ << endl;
+  }
+
+ostream & operator<<( ostream & str, const X & obj )
+{
+  return str << "ID(" << obj.numericId() << ")";
+}
+
+#include "zypp/detail/ImplConnect.h"
+#include "zypp/detail/ResObjectImplIf.h"
+#include "zypp/Package.h"
+struct ImplTest
+{
+  void operator()( const PoolItem & pi )
+  {
+    who( detail::ImplConnect::resimpl( *pi.resolvable() ) );
+    Package::constPtr p( dynamic_pointer_cast<const Package>(pi.resolvable()) );
+    if ( p )
+      who( detail::ImplConnect::resimpl( *p ) );
+  }
+};
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -151,27 +160,12 @@ void testr()
 */
 int main( int argc, char * argv[] )
 {
+  //zypp::base::LogControl::instance().logfile( "xxx" );
   INT << "===[START]==========================================" << endl;
 
   string infile( "p" );
   if (argc >= 2 )
     infile = argv[1];
-
-  MIL << ResStatus::toBeUninstalledDueToUnlink << endl;
-  MIL << ResStatus::toBeUninstalledDueToObsolete << endl;
-  testr();
-  return 0;
-
-  NVRAD a( "foo", Edition("1.1") );
-  NVRAD b( "foo", Edition("1.0") );
-  SEC << (a==b) << endl;
-  SEC << (a!=b) << endl;
-  SEC << (a<b) << endl;
-  set<NVRAD> s;
-  s.insert(a);
-  s.insert(b);
-  SEC << s.size() << endl;
-  return 0;
 
   Url url("dir:/Local/ma/zypp/libzypp/devel/devel.ma/CD1");
   Measure x( "SourceFactory.create" );
@@ -184,7 +178,9 @@ int main( int argc, char * argv[] )
 
   ResPoolManager pool;
   x.start( "pool.insert" );
-  pool.insert( src.resolvables().begin(), src.resolvables().end() );
+  ResStore::const_iterator last = src.resolvables().begin();
+  std::advance( last, 5 );
+  pool.insert( src.resolvables().begin(), last );
   x.stop();
   MIL << pool << endl;
 
@@ -192,13 +188,14 @@ int main( int argc, char * argv[] )
   rstats( query.begin(), query.end() );
 
   ResPoolProxy y2pm( query );
-
-  pool.insert( trg.resolvables().begin(), trg.resolvables().end(), true );
+  y2pm.saveState<Package>();
+  //pool.insert( trg.resolvables().begin(), trg.resolvables().end(), true );
   y2pm = ResPoolProxy( query );
-
-  SEC << "----------" << endl;
-  XXX << "----------" << endl;
-  SEC << "----------" << endl;
+  std::for_each( query.begin(), query.end(), Print<PoolItem>() );
+  std::for_each( query.begin(), query.end(), resfilter::Mtest() );
+  y2pm.restoreState<Package>();
+  std::for_each( query.begin(), query.end(), Print<PoolItem>() );
+  std::for_each( query.begin(), query.end(), ImplTest() );
 
 
   INT << "===[END]============================================" << endl << endl;

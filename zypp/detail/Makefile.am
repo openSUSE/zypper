@@ -8,6 +8,8 @@ SUBDIRS =
 detailincludedir = $(pkgincludedir)/detail
 
 detailinclude_HEADERS = \
+	ImplConnect.h		\
+	ResImplTraits.h		\
 	ResolvableImpl.h	\
 	ResObjectImplIf.h	\
 	ResObjectFactory.h	\
@@ -18,6 +20,7 @@ detailinclude_HEADERS = \
 	ScriptImplIf.h		\
 	PatchImplIf.h		\
 	ProductImplIf.h		\
+
 	\
 	\
 	\
