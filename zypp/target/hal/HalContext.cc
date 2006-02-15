@@ -288,6 +288,7 @@ namespace zypp
           return *this;
 
         zypp::RW_pointer<HalContext_Impl>(context.h_impl).swap(h_impl);
+        return *this;
       }
 
       // --------------------------------------------------------------
@@ -352,6 +353,21 @@ namespace zypp
         VERIFY_CONTEXT(h_impl);
 
         LibHalVolume *vol = libhal_volume_from_udi(h_impl->hctx, udi.c_str());
+        if( vol)
+          return HalVolume( new HalVolume_Impl(vol));
+        else
+          return HalVolume();
+      }
+
+      // --------------------------------------------------------------
+      HalVolume
+      HalContext::getVolumeFromDeviceFile(const std::string &device_file) const
+      {
+        MutexLock  lock(g_Mutex);
+        VERIFY_CONTEXT(h_impl);
+
+        LibHalVolume *vol = libhal_volume_from_device_file(h_impl->hctx,
+                                                           device_file.c_str());
         if( vol)
           return HalVolume( new HalVolume_Impl(vol));
         else
@@ -425,6 +441,7 @@ namespace zypp
           return *this;
 
         zypp::RW_pointer<HalDrive_Impl>(drive.d_impl).swap(d_impl);
+        return *this;
       }
 
       // --------------------------------------------------------------
@@ -648,6 +665,7 @@ namespace zypp
           return *this;
 
         zypp::RW_pointer<HalVolume_Impl>(volume.v_impl).swap(v_impl);
+        return *this;
       }
 
       // --------------------------------------------------------------
@@ -700,6 +718,36 @@ namespace zypp
       }
 
       // --------------------------------------------------------------
+      bool
+      HalVolume::isDisc() const
+      {
+        MutexLock  lock(g_Mutex);
+        VERIFY_VOLUME(v_impl);
+
+        return libhal_volume_is_disc(v_impl->vol);
+      }
+
+      // --------------------------------------------------------------
+      bool
+      HalVolume::isPartition() const
+      {
+        MutexLock  lock(g_Mutex);
+        VERIFY_VOLUME(v_impl);
+
+        return libhal_volume_is_partition(v_impl->vol);
+      }
+
+      // --------------------------------------------------------------
+      bool
+      HalVolume::isMounted() const
+      {
+        MutexLock  lock(g_Mutex);
+        VERIFY_VOLUME(v_impl);
+
+        return libhal_volume_is_mounted(v_impl->vol);
+      }
+
+      // --------------------------------------------------------------
       std::string
       HalVolume::getFSType() const
       {
@@ -707,6 +755,36 @@ namespace zypp
         VERIFY_VOLUME(v_impl);
 
         return std::string( libhal_volume_get_fstype(v_impl->vol));
+      }
+
+      // --------------------------------------------------------------
+      std::string
+      HalVolume::getFSUsage() const
+      {
+        MutexLock  lock(g_Mutex);
+        VERIFY_VOLUME(v_impl);
+
+        LibHalVolumeUsage usage( libhal_volume_get_fsusage(v_impl->vol));
+        std::string       ret;
+        switch( usage)
+        {
+          case  LIBHAL_VOLUME_USAGE_MOUNTABLE_FILESYSTEM:
+            ret = "filesystem";
+          break;
+          case LIBHAL_VOLUME_USAGE_PARTITION_TABLE:
+            ret = "partitiontable";
+          break;
+          case LIBHAL_VOLUME_USAGE_RAID_MEMBER:
+            return "raid";
+          break;
+          case LIBHAL_VOLUME_USAGE_CRYPTO:
+            ret = "crypto";
+          break;
+          case LIBHAL_VOLUME_USAGE_UNKNOWN:
+          default:
+          break;
+        }
+        return ret;
       }
 
       // --------------------------------------------------------------
@@ -739,6 +817,7 @@ namespace zypp
     namespace hal
     { ////////////////////////////////////////////////////////////////
 
+      // --------------------------------------------------------------
       class HalContext_Impl
       {};
       class HalDrive_Impl
@@ -746,35 +825,111 @@ namespace zypp
       class HalVolume_Impl
       {};
 
+      // --------------------------------------------------------------
       HalContext::HalContext(bool)
       {}
       HalContext::~HalContext()
       {}
-      HalDrive
-      HalContext::getDriveFromUDI(const std::string &udi) const
-      { return HalDrive(); }
+      HalContext &
+      HalContext::operator=(const HalContext &)
+      { return *this; }
+      HalContext::operator HalContext::bool_type() const
+      { return 0; }
+      void
+      HalContext::connect()
+      {}
       std::vector<std::string>
-      HalContext::findDevicesByCapability(const std::string &capability) const
+      HalContext::getAllDevices() const
+      { return std::vector<std::string>(); }
+      HalDrive
+      HalContext::getDriveFromUDI(const std::string &) const
+      { return HalDrive(); }
+      HalVolume
+      HalContext::getVolumeFromUDI(const std::string &) const
+      { return HalVolume(); }
+      HalVolume
+      HalContext::getVolumeFromDeviceFile(const std::string &) const
+      { return HalVolume(); }
+      std::vector<std::string>
+      HalContext::findDevicesByCapability(const std::string &) const
       { return std::vector<std::string>(); }
 
+      // --------------------------------------------------------------
       HalDrive::HalDrive()
       {}
       HalDrive::~HalDrive()
       {}
+      HalDrive &
+      HalDrive::operator=(const HalDrive &)
+      { return *this; }
+      HalDrive::operator HalDrive::bool_type() const
+      { return 0; }
+      std::string
+      HalDrive::getUDI() const
+      { return std::string(); }
+      std::string
+      HalDrive::getTypeName() const
+      { return std::string(); }
+      std::string
+      HalDrive::getDeviceFile() const
+      { return std::string(); }
       unsigned int
       HalDrive::getDeviceMinor() const
       { return 0; }
       unsigned int
       HalDrive::getDeviceMajor() const
       { return 0; }
+      bool
+      HalDrive::usesRemovableMedia() const
+      { return false; }
       std::vector<std::string>
       HalDrive::getCdromCapabilityNames() const
       { return std::vector<std::string>(); }
-      std::string
-      HalDrive::getDeviceFile() const
-      { return std::string(); }
-      HalDrive::operator bool_type() const
+      std::vector<std::string>
+      HalDrive::findAllVolumes() const
+      { return std::vector<std::string>(); }
+
+      // --------------------------------------------------------------
+      HalVolume::HalVolume()
+      {}
+      HalVolume::~HalVolume()
+      {}
+      HalVolume &
+      HalVolume::operator=(const HalVolume &)
+      { return *this; }
+      HalVolume::operator HalVolume::bool_type() const
       { return 0; }
+      std::string
+      HalVolume::getUDI() const
+      { return std::string(); }
+      std::string
+      HalVolume::getDeviceFile() const
+      { return std::string(); }
+      unsigned int
+      HalVolume::getDeviceMinor() const
+      { return 0; }
+      unsigned int
+      HalVolume::getDeviceMajor() const
+      { return 0; }
+      bool
+      HalVolume::isDisc() const
+      { return false; }
+      bool
+      HalVolume::isPartition() const
+      { return false; }
+      bool
+      HalVolume::isMounted() const
+      { return false; }
+      std::string
+      HalVolume::getFSType() const
+      { return std::string(); }
+      std::string
+      HalVolume::getFSUsage() const
+      { return std::string(); }
+      std::string
+      HalVolume::getMountPoint() const
+      { return std::string(); }
+
       ////////////////////////////////////////////////////////////////
     } // namespace hal
     //////////////////////////////////////////////////////////////////

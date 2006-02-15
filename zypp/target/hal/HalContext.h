@@ -100,6 +100,9 @@ namespace zypp
         HalVolume
         getVolumeFromUDI(const std::string &udi) const;
 
+        HalVolume
+        getVolumeFromDeviceFile(const std::string &device_file) const;
+
         /**
          * Retrieve UDI's of all devices with a capability.
          * \param  The \p capability name
@@ -243,11 +246,26 @@ namespace zypp
         unsigned int
         getDeviceMinor() const;
 
+        bool
+        isDisc() const;
+
+        bool
+        isPartition() const;
+
+        bool
+        isMounted() const;
+
         /**
          * \return The filesystem name on the volume.
          */
         std::string
         getFSType() const;
+
+        /**
+         * \return The filesystem usage purpose.
+         */
+        std::string
+        getFSUsage() const;
 
         /**
          * \return The mount point of the volume.
