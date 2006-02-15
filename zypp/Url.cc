@@ -177,6 +177,7 @@ namespace zypp
 
         ref->config("with_authority"    "n");   // disallow host & port
         addUrlByScheme("mailto", ref);
+        addUrlByScheme("urn",    ref);
       }
 
       bool
