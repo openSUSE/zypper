@@ -357,11 +357,15 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 	     && !part_of_upgrade
 	     && !due_to_obsolete
 	     && !due_to_unlink)) {
-	// find the reason why the solver has tried to delete this item in a run before
-	// Canditates are RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL
-	//                RESOLVER_INFO_TYPE_NO_PROVIDER
-	//                RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER
-	//                RESOLVER_INFO_TYPE_CANT_SATISFY
+	// We have a resolvable which should be kept on the system or is set to be installed explicit.
+	// So we are not allowed deleting it. The reason WHY this resolvable has to be deleted here
+	// is not show. We go back to the ResolverInfo to evaluate the reason. This reason (marked as an info)
+	// will be stored at the end of ResolverInfo and will be marked as an error which is shown 
+	// to the UI (solution included)
+	// Canditates of searched ResolverInfo are RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL
+	//                                         RESOLVER_INFO_TYPE_NO_PROVIDER
+ 	//                                         RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER
+	//                                         RESOLVER_INFO_TYPE_CANT_SATISFY
 	bool found = false;
 	ResolverInfoList addList;
 	for (ResolverInfoList::const_iterator iter = _log.begin(); iter != _log.end(); iter++) {
