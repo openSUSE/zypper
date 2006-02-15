@@ -22,7 +22,7 @@
 #include "zypp/Selection.h"
 #include "zypp/source/susetags/SuseTagsSelectionImpl.h"
 
-#include "zypp/ZYpp.h"
+#include "zypp/ZYppFactory.h"
 #include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////

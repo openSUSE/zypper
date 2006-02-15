@@ -20,6 +20,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/String.h"
 #include "zypp/CapFactory.h"
+#include "zypp/ZYpp.h"
 
 #include "zypp/source/susetags/SelectionTagFileParser.h"
 #include <boost/regex.hpp>
@@ -51,7 +52,7 @@ namespace zypp
       SelectionTagFileParser::SelectionTagFileParser()
       {
 	selImpl = shared_ptr<SuseTagsSelectionImpl>(new SuseTagsSelectionImpl);
-	_locales = getZYpp()->getRequestedLocales();
+	_locales = zypp::getZYpp()->getRequestedLocales();
       }
 
       void SelectionTagFileParser::consume( const SingleTag &tag )
