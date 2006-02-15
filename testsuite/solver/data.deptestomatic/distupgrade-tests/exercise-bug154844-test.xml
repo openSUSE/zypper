@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+  full SLES SP3 upgrade (Bug 150844)
+-->
+<test>
+<setup>
+  <system file="sles9-sp3-150844-packages.xml"/>
+  <channel name="pkg" file="bug150844-packages.xml"/>
+  <channel name="sel" file="bug150844-selections.xml"/>
+</setup>
+<trial>
+  <distupgrade/>
+</trial>
+</test>
