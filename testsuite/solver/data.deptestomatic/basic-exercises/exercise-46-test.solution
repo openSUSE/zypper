@@ -1,7 +1,7 @@
 >!> Installing liboaf0 from channel ximian
 >!> 1 problems found:
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) liboaf0 == 0.6.6 for liboaf0-devel-0.6.6-3mdk
+>!> Can't satisfy requirement liboaf0 == 0.6.6 for liboaf0-devel-0.6.6-3mdk
 >!> 
 >!>    Solution:
 >!>       delete liboaf0-devel

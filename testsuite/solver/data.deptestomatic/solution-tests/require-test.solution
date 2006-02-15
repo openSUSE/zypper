@@ -2,7 +2,7 @@
 >!> 1 problems found:
 >!> Problem:
 >!> foonew cannot be installed due missing dependencies
->!> There are no installable providers of [package] (namedcap) foo for foonew-2.0-1[test]
+>!> There are no installable providers of foo for foonew-2.0-1[test]
 >!>    Solution:
 >!>       delete foonew
 >!>       delete [package]foonew-2.0-1.

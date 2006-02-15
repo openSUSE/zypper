@@ -2,7 +2,7 @@
 >!> 1 problems found:
 >!> Problem:
 >!> Cannot install sendmail because it is conflicting with smail
->!> A conflict over [package] (namedcap) MTA ([package] (namedcap) MTA) requires the removal of to-be-installed sendmail-2.0-1[test]
+>!> A conflict over MTA (MTA) requires the removal of to-be-installed sendmail-2.0-1[test]
 >!>    Solution:
 >!>       delete sendmail
 >!>       delete [package]sendmail-2.0-1.

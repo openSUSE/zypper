@@ -1,7 +1,7 @@
 >!> Installing GConf2 from channel gnome2snaps
 >!> 23 problems found:
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for eel2-1.1.7.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for eel2-1.1.7.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete eel2
@@ -10,7 +10,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for gnome-terminal-1.9.1.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for gnome-terminal-1.9.1.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete gnome-terminal
@@ -19,7 +19,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for gedit2-1:1.115.0.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for gedit2-1:1.115.0.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete gedit2
@@ -28,7 +28,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for gnome-desktop-1.5.12.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for gnome-desktop-1.5.12.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete gnome-desktop
@@ -37,7 +37,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for nautilus2-1.1.9.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for nautilus2-1.1.9.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete nautilus2
@@ -46,7 +46,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for gnome-panel-1.5.13.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for gnome-panel-1.5.13.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete gnome-panel
@@ -55,7 +55,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for gnome-panel-libs-1.5.13.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for gnome-panel-libs-1.5.13.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete gnome-panel-libs
@@ -64,7 +64,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for libbonoboui-1.112.1.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for libbonoboui-1.112.1.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete libbonoboui
@@ -73,7 +73,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for gdm2-1:2.3.90.1.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for gdm2-1:2.3.90.1.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete gdm2
@@ -82,7 +82,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for gnome-utils2-1:1.101.0.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for gnome-utils2-1:1.101.0.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete gnome-utils2
@@ -91,7 +91,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for gnome-vfs2-1.9.9.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for gnome-vfs2-1.9.9.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete gnome-vfs2
@@ -100,7 +100,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for gnome-applets2-1:1.96.0.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for gnome-applets2-1:1.96.0.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete gnome-applets2
@@ -109,7 +109,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for bug-buddy2-1:2.1.3.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for bug-buddy2-1:2.1.3.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete bug-buddy2
@@ -118,7 +118,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for gnome-media2-1.176.0.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for gnome-media2-1.176.0.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete gnome-media2
@@ -127,7 +127,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for gnome-system-monitor-1.1.5.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for gnome-system-monitor-1.1.5.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete gnome-system-monitor
@@ -136,7 +136,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for eog2-1:0.114.0.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for eog2-1:0.114.0.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete eog2
@@ -145,7 +145,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for nautilus-gtkhtml-0.3.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for nautilus-gtkhtml-0.3.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete nautilus-gtkhtml
@@ -154,7 +154,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for gnome-games2-1:1.90.2.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for gnome-games2-1:1.90.2.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete gnome-games2
@@ -163,7 +163,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for gnome-desktop-libs-1.5.12.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for gnome-desktop-libs-1.5.12.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete gnome-desktop-libs
@@ -172,7 +172,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for libgnomeui-1.112.1.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for libgnomeui-1.112.1.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete libgnomeui
@@ -181,7 +181,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for control-center2-1:1.99.4.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for control-center2-1:1.99.4.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete control-center2
@@ -190,7 +190,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for libgnome-1.112.1.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for libgnome-1.112.1.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete libgnome
@@ -199,7 +199,7 @@
 >!>       Ignore this requirement.
 >!>       
 >!> Problem:
->!> Can't satisfy requirement [package] (namedcap) libgconf-2.so.4 for gnome-session-1.5.11.0.200203140655-snap.ximian.1
+>!> Can't satisfy requirement libgconf-2.so.4 for gnome-session-1.5.11.0.200203140655-snap.ximian.1
 >!> 
 >!>    Solution:
 >!>       delete gnome-session
