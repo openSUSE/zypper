@@ -324,7 +324,7 @@ std::string toXML( const Patch::constPtr &obj )
   out << "    xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\"" << std::endl;
   out << "    xmlns:suse=\"http://novell.com/package/metadata/suse/common\"" << std::endl;
   out << "    patchid=\"" << obj->id() << "\"" << std::endl;
-  out << "    timestamp=\"" << obj->timestamp() << "\"" << std::endl;
+  out << "    timestamp=\"" << obj->timestamp().asSeconds() << "\"" << std::endl;
   out << "    engine=\"1.0\">" << std::endl;
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
