@@ -61,8 +61,7 @@ main (int argc, char **argv)
 
     // start ZYPP
 
-    ZYppFactory zf;
-    ZYpp::Ptr God = zf.getZYpp();
+    ZYpp::Ptr God = zypp::getZYpp();
 
     // load the catalogs and resolvables from sqlite db
 

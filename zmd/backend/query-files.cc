@@ -145,8 +145,7 @@ query (Target_Ptr target, const char *uri, const char *channel_id)
 int
 main (int argc, char **argv)
 {
-    ZYppFactory zf;
-    ZYpp::Ptr God = zf.getZYpp();
+    ZYpp::Ptr God = zypp::getZYpp();
 
     try {
 	God->initTarget("/");

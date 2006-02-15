@@ -19,8 +19,7 @@ main (int argc, char **argv)
 	return 1;
     }
 
-    ZYppFactory zf;
-    ZYpp::Ptr God = zf.getZYpp();
+    ZYpp::Ptr God = zypp::getZYpp();
 
     try {
 	God->initTarget("/");
