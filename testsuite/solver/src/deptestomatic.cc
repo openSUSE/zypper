@@ -982,7 +982,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
     print_sep ();
 
     solver::detail::Resolver_Ptr resolver = new solver::detail::Resolver (pool);
-
+    resolver->setTesting ( true );
     resolver->setForceResolve (forceResolve);
 
     ResolverContext_Ptr established = NULL;
