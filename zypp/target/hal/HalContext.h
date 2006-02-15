@@ -13,9 +13,6 @@
 #ifndef ZYPP_TARGET_HAL_HALCONTEXT_H
 #define ZYPP_TARGET_HAL_HALCONTEXT_H
 
-// disables zypp's HAL dependency
-#ifndef FAKE_HAL
-
 #include <zypp/target/hal/HalException.h>
 #include <zypp/base/PtrTypes.h>
 #include <string>
@@ -277,7 +274,6 @@ namespace zypp
 } // namespace zypp
 //////////////////////////////////////////////////////////////////////
 
-#endif // FAKE_HAL
 #endif // ZYPP_TARGET_HAL_HALCONTEXT_H
 
 /*

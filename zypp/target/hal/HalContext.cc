@@ -343,7 +343,7 @@ namespace zypp
         else
           return HalDrive();
       }
-      
+
       // --------------------------------------------------------------
       HalVolume
       HalContext::getVolumeFromUDI(const std::string &udi) const
@@ -719,6 +719,62 @@ namespace zypp
       }
 
 
+      ////////////////////////////////////////////////////////////////
+    } // namespace hal
+    //////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////
+  } // namespace target
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+} // namespace zypp
+//////////////////////////////////////////////////////////////////////
+#else // FAKE_HAL
+#include <zypp/target/hal/HalContext.h>
+namespace zypp
+{ ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  namespace target
+  { //////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////
+    namespace hal
+    { ////////////////////////////////////////////////////////////////
+
+      class HalContext_Impl
+      {};
+      class HalDrive_Impl
+      {};
+      class HalVolume_Impl
+      {};
+
+      HalContext::HalContext(bool)
+      {}
+      HalContext::~HalContext()
+      {}
+      HalDrive
+      HalContext::getDriveFromUDI(const std::string &udi) const
+      { return HalDrive(); }
+      std::vector<std::string>
+      HalContext::findDevicesByCapability(const std::string &capability) const
+      { return std::vector<std::string>(); }
+
+      HalDrive::HalDrive()
+      {}
+      HalDrive::~HalDrive()
+      {}
+      unsigned int
+      HalDrive::getDeviceMinor() const
+      { return 0; }
+      unsigned int
+      HalDrive::getDeviceMajor() const
+      { return 0; }
+      std::vector<std::string>
+      HalDrive::getCdromCapabilityNames() const
+      { return std::vector<std::string>(); }
+      std::string
+      HalDrive::getDeviceFile() const
+      { return std::string(); }
+      HalDrive::operator bool_type() const
+      { return 0; }
       ////////////////////////////////////////////////////////////////
     } // namespace hal
     //////////////////////////////////////////////////////////////////
