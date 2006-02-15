@@ -93,7 +93,7 @@ XMLFilesBackend::XMLFilesBackend(const Pathname &root) : Backend(root)
   d->kinds.insert(ResTraits<zypp::Patch>::kind);
   //d->kinds.insert(ResTraits<zypp::Message>::kind);
   //d->kinds.insert(ResTraits<zypp::Script>::kind);
-  //d->kinds.insert(ResTraits<zypp::Selection>::kind);
+  d->kinds.insert(ResTraits<zypp::Selection>::kind);
   d->kinds.insert(ResTraits<zypp::Product>::kind);
   d->kinds.insert(ResTraits<zypp::Pattern>::kind);
 
@@ -312,7 +312,7 @@ ResObject::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Resol
   }
   else if ( kind == ResTraits<zypp::Selection>::kind )
   {
-    YUMGroupParser iter(res_file,"");
+    YUMPatternParser iter(res_file,"");
     for (; !iter.atEnd(); ++iter)
     {
       DBG << "here..." << std::endl;
@@ -595,51 +595,28 @@ XMLFilesBackend::createPattern( const zypp::parser::yum::YUMPatternData & parsed
 }
 
 Selection::Ptr
-XMLFilesBackend::createSelection( const zypp::parser::yum::YUMGroupData & parsed ) const
+XMLFilesBackend::createSelection( const zypp::parser::yum::YUMPatternData & parsed ) const
 {
   try
   {
-    DBG << parsed << std::endl;
     shared_ptr<XMLSelectionImpl> impl(new XMLSelectionImpl());
-      /*
-      YUMGroupData();
-        std::string groupId;
-        std::list<MultiLang> name;
-        std::string default_;
-        std::string userVisible;
-        std::list<MultiLang> description;
-        std::list<MetaPkg> grouplist;
-        std::list<PackageReq> packageList;
-      */
-    impl->_summary = parsed.description;
-    //impl->_description = parsed.description;
-    impl->_name = parsed.groupId;
-    //impl->_order = parsed.summary;
-    //impl->_category = parsed.summary;
-    impl->_visible = ((parsed.userVisible == "true") ? true : false);
+
+    impl->_visible = ((parsed.userVisible == "false" ) ? false : true );
+    impl->_summary = parsed.summary;
+    impl->_name = parsed.name;
+    impl->_description = parsed.description;
+    //impl->_default = ((parsed.default_ == "false" ) ? false : true );
+    impl->_category = parsed.category;
     
-    for( std::list<MetaPkg>::const_iterator it = parsed.grouplist.begin(); it != parsed.grouplist.end(); ++it)
-    {
-      DBG << "Selection dependencies" << std::endl;
-      if ((*it).type == "optional" )
-        impl->_suggests.insert((*it).name);
-      if ((*it).type == "mandatory" )
-        impl->_recommends.insert((*it).name);
-    }
-    for( std::list<PackageReq>::const_iterator it = parsed.packageList.begin(); it != parsed.packageList.end(); ++it)
-    {
-        DBG << "Selection package dependencies" << std::endl;
-        impl->_install_packages.insert((*it).name);
-    }
     // Collect basic Resolvable data
-    NVRAD dataCollect( parsed.groupId, Edition::noedition, Arch_noarch, createGroupDependencies(parsed) );
+    NVRAD dataCollect( parsed.name, Edition::noedition, Arch_noarch, createDependencies( parsed, ResTraits<Pattern>::kind));
     Selection::Ptr selection = detail::makeResolvableFromImpl( dataCollect, impl );
     return selection;
   }
   catch (const Exception & excpt_r)
   {
     ERR << excpt_r << endl;
-    throw "Cannot create selection object";
+    throw "Cannot create installation selection object";
   }
 }
 

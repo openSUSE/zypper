@@ -131,7 +131,7 @@ public:
   Message::Ptr createMessage( const zypp::parser::yum::YUMPatchMessage & parsed ) const;
   Script::Ptr createScript(const zypp::parser::yum::YUMPatchScript & parsed ) const;
   Product::Ptr createProduct( const zypp::parser::yum::YUMProductData & parsed ) const;
-  Selection::Ptr createSelection( const zypp::parser::yum::YUMGroupData & parsed ) const;
+  Selection::Ptr createSelection( const zypp::parser::yum::YUMPatternData & parsed ) const;
   Pattern::Ptr createPattern( const zypp::parser::yum::YUMPatternData & parsed ) const;
 
   Dependencies createDependencies( const zypp::parser::yum::YUMObjectData & parsed, const Resolvable::Kind my_kind ) const;

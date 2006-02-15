@@ -79,7 +79,7 @@ std::string resolvableTypeToString( const Resolvable::constPtr &resolvable, bool
 /**
  * lack of instrospection sucks
  */
-std::string resolvableKindToString( Resolvable::Kind kind, bool plural = false );
+std::string resolvableKindToString( const Resolvable::Kind &kind, bool plural = false );
 
 template<> // or constPtr?
 std::string toXML( const Package::constPtr &obj );

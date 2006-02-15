@@ -40,7 +40,7 @@ namespace zypp
     { return _summary; }
 
     TranslatedText XMLSelectionImpl::description() const
-    { return _summary; }
+    { return _description; }
 
     Label XMLSelectionImpl::category() const
     { return _category; }

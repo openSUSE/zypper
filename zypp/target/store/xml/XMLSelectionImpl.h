@@ -52,6 +52,8 @@ namespace zypp
       const std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
 
       TranslatedText _summary;
+      TranslatedText _description;
+      
       std::string _name;
       std::string _version;
       std::string _release;

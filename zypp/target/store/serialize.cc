@@ -196,24 +196,19 @@ std::string toXML( const Selection::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<groups  xmlns=\"http://linux.duke.edu/metadata/groups\">" << std::endl;
-  if (obj == 0L)
-  {
-    ERR << "Null selection" << std::endl;
-    out << "</groups>" << std::endl;
-    return out.str();
-  }
-
-  out << "  <group>" << std::endl;
-  out << "    <groupid>" << obj->name() << "</groupid>" << std::endl;
-  out << "    <name>" << obj->name() << "</name>" << std::endl;
-  //out << "    <default>"<< (obj->default() ? "true" : "false" ) << "</default>" << std::endl;
-  out << "    <uservisible>"<< (obj->visible() ? "true" : "false" ) << "</uservisible>" << std::endl;
-  
-  out << "    <description>"<< (obj->description()) << "</description>" << std::endl;
-  
-  out << "  </group>" << std::endl;
-  out << "</groups>" << std::endl;
+  out << "<pattern" << std::endl;
+  out << "  xmlns=\"http://novell.com/package/metadata/suse/pattern\"" << std::endl;
+  out << "  xmlns:yum=\"http://linux.duke.edu/metadata/common\"" << std::endl;
+  out << "  xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\"" << std::endl;
+  out << "  xmlns:suse=\"http://novell.com/package/metadata/suse/common\">" << std::endl;
+  out << "  <name>" << obj->name() << "</name>" << std::endl;
+  out << "  <summary>" << obj->summary() << "</summary>" << std::endl;
+  //out << "  <summary lang='en.US'>foobar</summary>" << std::endl;
+  //out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << std::endl;
+  out << "  <uservisible>" << (obj->visible() ? "true" : "false" ) << "</uservisible>" << std::endl;
+  out << "  <category>" << obj->category() << "</category>" << std::endl;
+  out << toXML(obj->deps()) << std::endl;
+  out << "</pattern>" << std::endl;
   return out.str();
 }
 
@@ -292,7 +287,7 @@ std::string resolvableTypeToString( const Resolvable::constPtr &resolvable, bool
   return resolvableKindToString(resolvable->kind(), plural);
 }
 
-std::string resolvableKindToString( Resolvable::Kind kind, bool plural)
+std::string resolvableKindToString( const Resolvable::Kind &kind, bool plural)
 {
   if ( kind == ResTraits<zypp::Package>::kind )
      return plural ? "packages" : "package";
