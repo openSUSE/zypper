@@ -437,6 +437,10 @@ namespace zypp
                 }
               }
             }
+            else if( opts.has(ViewOptions::EMPTY_AUTHORITY))
+            {
+              url += "//";
+            }
           }
           else if( opts.has(ViewOptions::EMPTY_AUTHORITY))
           {
@@ -450,8 +454,8 @@ namespace zypp
         tmp.pathname = getPathName(zypp::url::E_ENCODED);
         if( !tmp.pathname.empty())
         {
-          if( (!tmp.host.empty() || opts.has(ViewOptions::EMPTY_AUTHORITY))
-              && (tmp.pathname.at(0) != '/'))
+          if(url.find("/") != std::string::npos &&
+             tmp.pathname.at(0) != '/')
           {
             url += "/";
           }
@@ -470,7 +474,8 @@ namespace zypp
             }
           }
         }
-        else if( opts.has(ViewOptions::EMPTY_PATH_NAME))
+        else if( opts.has(ViewOptions::EMPTY_PATH_NAME)
+                 && url.find("/") != std::string::npos)
         {
           url += "/";
           if( opts.has(ViewOptions::EMPTY_PATH_PARAMS))
@@ -971,6 +976,9 @@ namespace zypp
           m_data->host = zypp::url::encode(
             temp, config("safe_hostname")
           );
+
+          temp = getPathName(zypp::url::E_DECODED);
+          setPathName( temp, zypp::url::E_DECODED);
         }
         else
         {
@@ -1034,6 +1042,16 @@ namespace zypp
         else
         {
           data = cleanupPathName(path);
+        }
+
+        if( !getHost(zypp::url::E_ENCODED).empty())
+        {
+          if(data.at(0) != '/')
+          {
+            ZYPP_THROW(UrlNotAllowedException(
+              std::string("Relative path not allowed if authority exists")
+            ));
+          }
         }
 
         m_data->pathname = zypp::url::encode(
