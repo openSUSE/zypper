@@ -65,6 +65,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     int _timeout_seconds;
     bool _verifying;
+    bool _testing;
 
     QueueItemList _initial_items;
     PoolItemList _items_to_install;
@@ -190,6 +191,9 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     Arch architecture() const { return _architecture; }
     void setArchitecture( const Arch & arch) { _architecture = arch; }
+
+    bool testing(void) const { return _testing; }
+    void setTesting( bool testing ) { _testing = testing; }
 };
 
 ///////////////////////////////////////////////////////////////////
