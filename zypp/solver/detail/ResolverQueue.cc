@@ -57,7 +57,7 @@ ostream&
 operator<<( ostream& os, const ResolverQueue & resolverqueue)
 {
     os << str::form ("Context [%p]", (const void *)resolverqueue._context.get());
-    os <<  ", Items:" << endl << "\t";
+    os <<  ", " << resolverqueue._qitems.size() << " Items:" << endl << "\t";
     os << resolverqueue._qitems;
     return os;
 }
