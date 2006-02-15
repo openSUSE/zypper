@@ -34,10 +34,19 @@ namespace zypp
     XMLProductImpl::~XMLProductImpl()
     {}
 
-    std::string XMLProductImpl::category() const {
-      return _category;
-    }
+    std::string XMLProductImpl::category() const 
+    { return _category; } 
 
+    Label XMLProductImpl::vendor() const 
+    { return _vendor; } 
+
+    Label XMLProductImpl::displayName( const Locale & ) const 
+    { return _displayname.text(); }
+    
+    Url XMLProductImpl::releaseNotesUrl() const
+    { return _release_notes_url; }
+
+    
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////

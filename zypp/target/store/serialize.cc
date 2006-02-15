@@ -246,7 +246,6 @@ template<> // or constPtr?
 std::string toXML( const Product::constPtr &obj )
 {
   stringstream out;
-   #warning "FIXME add properties to public interface of products"
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
   out << "<product";
   out << "    xmlns=\"http://novell.com/package/metadata/suse/product\"" << std::endl;
@@ -254,12 +253,13 @@ std::string toXML( const Product::constPtr &obj )
   out << "    xmlns:yum=\"http://linux.duke.edu/metadata/common\" " << std::endl;
   out << "    xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\" " << std::endl;
   out << "    xmlns:suse=\"http://novell.com/package/metadata/suse/common\"" << std::endl;
-  out << "    type=\"category\">" << std::endl;
-  out << "  <vendor>the vendor</vendor>" << std::endl;
+  out << "    type=\"" << obj->category() << "\">" << std::endl;
+  out << "  <vendor>" << obj->vendor() << "</vendor>" << std::endl;
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
   #warning "FIXME description and displayname of products"
-  out << "  <displayname lang=\"en\">Open Enterprise Server</displayname>" << std::endl;
-  out << "  <description lang=\"en\">Opens your server to enterprise</description>" << std::endl;
+  out << "  <displayname lang=\"en\">" << obj->displayName() << "</displayname>" << std::endl;
+  out << "  <release-notes-url>" << obj->releaseNotesUrl() << "</release-notes-url>" << std::endl;
+  out << "  <description></description>" << std::endl;
   out << "</product>" << std::endl;
 
   return out.str();

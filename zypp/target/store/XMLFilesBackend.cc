@@ -441,6 +441,47 @@ XMLFilesBackend::createPatch( const zypp::parser::yum::YUMPatchData & parsed ) c
                        Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch,
                        createDependencies(parsed, ResTraits<Patch>::kind) );
     Patch::Ptr patch = detail::makeResolvableFromImpl( dataCollect, impl );
+
+    // now process the atoms
+    CapFactory _f;
+    Capability cap( _f.parse(ResTraits<Patch>::kind, parsed.name, Rel::EQ, Edition(parsed.ver, parsed.rel, parsed.epoch) ));
+    for (std::list<shared_ptr<YUMPatchAtom> >::const_iterator it = parsed.atoms.begin(); it != parsed.atoms.end(); it++)
+    {
+      switch ((*it)->atomType())
+      {
+        case YUMPatchAtom::Package:
+        {
+          shared_ptr<YUMPatchPackage> package_data = dynamic_pointer_cast<YUMPatchPackage>(*it);
+          //Package::Ptr package = srcimpl_r.createPackage(_source, *package_data); //_atoms.push_back(package);
+          // I can't create a package for a installed patch, because the installed package is in the rpm target, so as a HACK lets make the patch depend on the package.
+          Capability cap( _f.parse(ResTraits<Package>::kind, package_data->name, Rel::EQ, Edition(package_data->ver, package_data->rel, package_data->epoch) ));
+          break;
+        }
+        case YUMPatchAtom::Message:
+        {
+          shared_ptr<YUMPatchMessage> message_data = dynamic_pointer_cast<YUMPatchMessage>(*it);
+          Message::Ptr message = createMessage(*message_data);
+          patch->atoms().push_back(message);
+          break;
+        }
+        case YUMPatchAtom::Script:
+        {
+          shared_ptr<YUMPatchScript> script_data = dynamic_pointer_cast<YUMPatchScript>(*it);
+          Script::Ptr script = createScript(*script_data);
+          patch->atoms().push_back(script);
+          break;
+        }
+        default:
+          ERR << "Unknown type of atom" << endl;
+      }  
+    }
+
+    Patch::AtomList atoms = patch->atoms();
+    for (Patch::AtomList::iterator at = atoms.begin(); at != atoms.end(); at++)
+    {
+      (*at)->injectRequires(cap);
+      //_store.insert (*at);
+    }
     return patch;
   }
   catch (const Exception & excpt_r)
@@ -510,8 +551,9 @@ XMLFilesBackend::createProduct( const zypp::parser::yum::YUMProductData & parsed
     impl->_category = parsed.type;
     impl->_vendor = parsed.vendor;
     #warning "FIX when YUM parser uses TranslatedString"
-    //impl->_displayname = parsed.displayname;
-    //impl->_description = parsed.description;
+    impl->_displayname = parsed.displayname;
+    impl->_description = parsed.description;
+    impl->_release_notes_url = parsed.releasenotesurl;
 
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch, createDependencies(parsed, ResTraits<Product>::kind) );

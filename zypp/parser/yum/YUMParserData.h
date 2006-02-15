@@ -431,6 +431,7 @@ namespace zypp {
         std::string name; 
         TranslatedText displayname;
         TranslatedText description;
+        std::string releasenotesurl;
       };
 
       /* Easy output */
