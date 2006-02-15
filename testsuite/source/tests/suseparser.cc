@@ -4,6 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include "zypp/ResObject.h"
+#include "zypp/Dependencies.h"
 #include "zypp/base/Logger.h"
 #include "zypp/SourceFactory.h"
 #include "zypp/Source.h"
@@ -24,7 +26,7 @@ using namespace zypp;
 int main( int argc, char * argv[] )
 {
     if (argc < 2) {
-	cerr << "Usage: suseparse <susedir> <full>" << endl;
+	cerr << "Usage: suseparse <susedir> [all|reallyall]" << endl;
 	exit (1);
     }
 
@@ -43,7 +45,12 @@ int main( int argc, char * argv[] )
     if (argc > 2) {
 	int count = 0;
 	for (ResStore::iterator it = store.begin(); it != store.end(); ++it) {
-	    MIL << ++count << **it << endl;
+	    ResObject::Ptr robj = *it;
+	    MIL << ++count << *robj << endl;
+	    if (strcmp(argv[2], "reallyall") == 0) {
+		const Dependencies & deps = robj->deps();
+		MIL << deps << endl;
+	    }
 	}
 
     }

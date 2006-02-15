@@ -4,6 +4,9 @@
 
 LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
 
+INCLUDES = 						\
+	-DZYPP_BASE_LOGGER_LOGGROUP=\"testsuite\"
+
 noinst_PROGRAMS = \
 	selectiontagparsertest	\
 	patterntagparsertest	\
