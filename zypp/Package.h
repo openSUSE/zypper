@@ -105,6 +105,8 @@ namespace zypp
     bool installOnly() const;
     /** ID of the media */
     unsigned mediaId() const;
+    /** location in source */
+    Pathname location() const;
 
     // data here:
  

@@ -184,6 +184,9 @@ namespace zypp
   unsigned Package::mediaId() const
   { return pimpl().mediaId(); }
 
+  Pathname Package::location() const
+  { return pimpl().location(); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

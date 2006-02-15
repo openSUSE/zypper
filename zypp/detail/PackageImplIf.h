@@ -132,8 +132,6 @@ namespace zypp
       /** */
       virtual void du( PkgDu & dudata_r ) const PURE_VIRTUAL;
       /** */
-      virtual std::string location() const PURE_VIRTUAL;
-      /** */
       virtual unsigned int medianr() const PURE_VIRTUAL;
       /** */
       virtual PackageKeywords keywords() const PURE_VIRTUAL;
