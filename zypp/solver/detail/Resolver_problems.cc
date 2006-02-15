@@ -250,7 +250,10 @@ Resolver::problems (void) const
 		what = misc_info->message();
 		// TranslatorExplanation %s = name of package,patch,...		
 		details = str::form (_("%s is not installed and has been marked as uninstallable"), who.c_str());
-		// it is only a info --> no solution needed
+		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		problem->addSolution (new ProblemSolutionInstall (problem, item)); // Install resolvable again
+		problems.push_back (problem);
+		problem_created = true;
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_REJECT_INSTALL: {			// p is scheduled to be installed, but this is not possible because of dependency problems.
