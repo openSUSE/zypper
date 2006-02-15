@@ -214,6 +214,7 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
   catch( const Exception & excpt_r) {
 	ERR << "Huh, no target ?";
 	ZYPP_CAUGHT(excpt_r);
+	return;				// can't continue without target
   }
 MIL << "target at " << target << endl;
 
