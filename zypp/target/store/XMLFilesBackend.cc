@@ -230,10 +230,18 @@ std::string
 XMLFilesBackend::fullPathForResolvable( ResObject::constPtr resolvable ) const
 {
   std::string filename;
-  // only append edition if there is one
-  std::string suffix = ( (resolvable->edition() == Edition::noedition) ? std::string() : ("-" + resolvable->edition().version() + "-" + resolvable->edition().release()) );
-  filename = d->randomFileName ? randomString(40) : (resolvable->name() + suffix);
-  return path( path(dirForResolvable(resolvable)) / path(filename)).string();
+  //filename = d->randomFileName ? randomString(40) : (resolvable->name() + suffix);
+  filename = resolvable->name();
+  if (resolvable->edition() != Edition::noedition )
+  {
+     filename += "-" + resolvable->edition().asString();
+  }
+  // get rid of spaces and other characters
+  std::stringstream filename_stream(filename);
+  std::string filename_encoded = Digest::digest("MD5", filename_stream);
+
+  return path( path(dirForResolvable(resolvable)) / path(filename_encoded)).string();
+  
 }
 
 void
@@ -553,7 +561,11 @@ XMLFilesBackend::createProduct( const zypp::parser::yum::YUMProductData & parsed
     #warning "FIX when YUM parser uses TranslatedString"
     impl->_displayname = parsed.displayname;
     impl->_description = parsed.description;
-    impl->_release_notes_url = parsed.releasenotesurl;
+    
+    if ( parsed.releasenotesurl.size() > 0 )
+      impl->_release_notes_url = parsed.releasenotesurl;
+    else
+      impl->_release_notes_url = Url();
 
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch, createDependencies(parsed, ResTraits<Product>::kind) );
