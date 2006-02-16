@@ -138,7 +138,13 @@ namespace zypp
 
 	// for every requested locale, get the corresponding locale-specific inspacks
 	for (ZYpp::LocaleSet::const_iterator loc = _locales.begin(); loc != _locales.end(); ++loc) {
-	    for (std::set<std::string>::const_iterator it = selImpl->_inspacks[*loc].begin(); it != selImpl->_inspacks[*loc].end(); it++)
+	    Locale l( *loc );
+	    std::set<std::string> locale_packs = selImpl->_inspacks[l];
+	    if (locale_packs.empty()) {
+		l = Locale( l.language().code() );
+		locale_packs = selImpl->_inspacks[l];
+	    }
+	    for (std::set<std::string>::const_iterator it = locale_packs.begin(); it != locale_packs.end(); it++)
 	    {
 		Capability _cap = _f.parse( ResTraits<Package>::kind, *it);
 		_deps[Dep::RECOMMENDS].insert(_cap);
@@ -154,6 +160,7 @@ namespace zypp
     }
 
     // for every requested locale, get the corresponding locale-specific delpacks
+#warning fallback to LanguageCode (i.e. en) if Locale (i.e. en_US) doesn't match
     for (ZYpp::LocaleSet::const_iterator loc = _locales.begin(); loc != _locales.end(); ++loc) {
         for (std::set<std::string>::const_iterator it = selImpl->_delpacks[*loc].begin(); it != selImpl->_delpacks[*loc].end(); it++)
         {
