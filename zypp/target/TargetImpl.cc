@@ -261,13 +261,13 @@ namespace zypp
             RpmRemovePackageReceiver progress(it->resolvable());
             progress.connect();
             try {
-              rpm().removePackage(p);
+              rpm().removePackage( p );
             }
             catch (Exception & excpt_r) {
               ZYPP_CAUGHT(excpt_r);
               WAR << "Remove failed, retrying with --nodeps" << endl;
 	      try {
-		rpm().removePackage(p, rpm::RpmDb::RPMINST_NODEPS);
+		rpm().removePackage( p, rpm::RpmDb::RPMINST_NODEPS);
 	      }
 	      catch (Exception & excpt_r) {
 		ZYPP_CAUGHT(excpt_r);

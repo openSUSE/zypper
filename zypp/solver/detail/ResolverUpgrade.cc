@@ -106,7 +106,7 @@ downgrade_allowed (PoolItem_Ref installed, PoolItem_Ref candidate)
 
 
 
-struct FindObsoletes : public resfilter::OnCapMatchCallbackFunctor
+struct FindObsoletes
 {
     bool obsoletes;
 
@@ -114,7 +114,7 @@ struct FindObsoletes : public resfilter::OnCapMatchCallbackFunctor
 	: obsoletes (false)
     { }
 
-    bool operator()( PoolItem_Ref provider, const Capability & match )
+    bool operator()( const CapAndItem & cai )
     {
 	obsoletes = true;				// we have a match
 	return false;					// stop looping here
@@ -133,7 +133,8 @@ Resolver::doesObsoleteCapability (PoolItem_Ref candidate, const Capability & cap
     FindObsoletes info;
     invokeOnEach( _pool.byCapabilityIndexBegin( cap.index(), dep ),
 		  _pool.byCapabilityIndexEnd( cap.index(), dep ),
-		  resfilter::callOnCapMatchIn( dep, cap, functor::functorRef<bool,PoolItem_Ref,Capability>(info) ) );
+		  resfilter::ByCapMatch( cap ),
+		  functor::functorRef<bool,CapAndItem>(info) );
 
     _DEBUG((info.obsoletes ? "YES" : "NO"));
     return info.obsoletes;
@@ -155,20 +156,21 @@ Resolver::doesObsoleteItem (PoolItem_Ref candidate, PoolItem_Ref installed)
 
 // find all available providers for installed name
 
-struct FindProviders : public resfilter::OnCapMatchCallbackFunctor
+struct FindProviders
 {
     PoolItemSet providers;		// the providers which matched
 
     FindProviders ()
     { }
 
-    bool operator()( PoolItem_Ref provider, const Capability & match )
+    bool operator()( const CapAndItem & cai )
     {
+	PoolItem provider( cai.item );
 	if ( provider.status().isToBeUninstalled() ) {
-	    MIL << "  IGNORE relation match (package is tagged to delete): " << match << " ==> " << provider << endl;
+	    MIL << "  IGNORE relation match (package is tagged to delete): " << cai.cap << " ==> " << provider << endl;
 	}
 	else {
-	    MIL << "  relation match: " << match << " ==> " << provider << endl;
+	    MIL << "  relation match: " << cai.cap << " ==> " << provider << endl;
 	    providers.insert (provider);
 	}
 	return true;
@@ -467,20 +469,12 @@ MIL << "split matched !" << endl;
       Capability installedCap =  factory.parse ( installed->kind(), installed->name(), Rel::EQ, installed->edition());
 
       FindProviders info;
-#if 0
+
       invokeOnEach( _pool.byCapabilityIndexBegin( installed->name(), dep ),
 		    _pool.byCapabilityIndexEnd( installed->name(), dep ),
-		    resfilter::ByUninstalled (),
-		    resfilter::callOnCapMatchIn( dep, installedCap, functor::functorRef<bool,PoolItem,Capability>(info) ) );
-#endif
-	ResPool::const_indexiterator pend = pool().providesend(installed->name());
-	for (ResPool::const_indexiterator it = pool().providesbegin(installed->name()); it != pend; ++it) {
-	    if (it->second.second.status().staysUninstalled()
-		&& installedCap.matches (it->second.first) == CapMatch::yes) {
-		if (!info( it->second.second, it->second.first))
-		    break;
-	    }
-	}
+		    functor::chain( resfilter::ByCaIUninstalled (),
+				    resfilter::ByCapMatch( installedCap ) ),
+		    functor::functorRef<bool,CapAndItem>(info) );
 
       int num_providers = info.providers.size();
 

@@ -34,6 +34,7 @@
 
 #include "zypp/ResFilters.h"
 #include "zypp/ResStatus.h"
+#include "zypp/CapAndItem.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -173,7 +174,7 @@ InstallOrder::findProviderInSet( const Capability requirement, const PoolItemSet
     return PoolItem_Ref();
 }
 
-struct CollectProviders : public resfilter::OnCapMatchCallbackFunctor
+struct CollectProviders
 {
     const PoolItem_Ref requestor;
     PoolItemList result;   
@@ -185,18 +186,18 @@ struct CollectProviders : public resfilter::OnCapMatchCallbackFunctor
     { }
 
 
-    bool operator()( PoolItem_Ref provider, const Capability & match )
+    bool operator()( const CapAndItem & c_and_i )
     {
 	// item provides cap which matches a requirement from info->requestor
 	//   this function gets _all_ providers and filter out those which are
 	//   either installed or in our toinstall input list
 	//
-XXX << "info(" << provider <<")"<< endl;
-	if ((provider.resolvable() != requestor.resolvable())		// resolvable could provide its own requirement
-	    && (limitto.find( provider ) != limitto.end()))		// limit to members of 'limitto' set
+XXX << "info(" << c_and_i.item <<")"<< endl;
+	if ((c_and_i.item.resolvable() != requestor.resolvable())	// resolvable could provide its own requirement
+	    && (limitto.find( c_and_i.item ) != limitto.end()))		// limit to members of 'limitto' set
 	{
-	    XXX << "tovisit " << ITEMNAME(provider) << endl;
-	    result.push_back (provider);
+	    XXX << "tovisit " << ITEMNAME(c_and_i.item) << endl;
+	    result.push_back (c_and_i.item);
 	}
 
 	return true;
@@ -242,60 +243,30 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
 	XXX << "check requirement " << requirement << " of " << ITEMNAME(item) << endl;
 	PoolItemList tovisit;
 
-#if 0
 	// _world->foreachProvidingResItem (requirement, collect_providers, &info);
 	Dep dep (Dep::PROVIDES);
-	invokeOnEach( _pool.byCapabilityIndexBegin( requirement.index(), dep ),
-		      _pool.byCapabilityIndexEnd( requirement.index(), dep ),
-		      resfilter::callOnCapMatchIn( dep, requirement, functor::functorRef<bool,PoolItem,Capability>(info) ) );
-#endif
-#if 1
-	// first, look in _installed
 
+	// first, look in _installed
 	CollectProviders info ( item, _installed );
 
-	ResPool::const_indexiterator pend = _pool.providesend( requirement.index() );
-	for (ResPool::const_indexiterator it = _pool.providesbegin( requirement.index() ); it != pend; ++it) {
-	    if (it->second.first.matches (requirement) == CapMatch::yes) {
-		if (!info( it->second.second, it->second.first))
-		    break;
-	    }
-	}
+	invokeOnEach( _pool.byCapabilityIndexBegin( requirement.index(), dep ),
+		      _pool.byCapabilityIndexEnd( requirement.index(), dep ),
+		      resfilter::ByCapMatch( requirement ),
+		      functor::functorRef<bool,CapAndItem>(info) );
 
 	// if not found in _iustalled, look in _toinstall
 
 	if (info.result.empty()) {
 	    CollectProviders info1 ( item, _toinstall );
 
-	    ResPool::const_indexiterator pend = _pool.providesend( requirement.index() );
-	    for (ResPool::const_indexiterator it = _pool.providesbegin( requirement.index() ); it != pend; ++it) {
-		if (it->second.first.matches (requirement) == CapMatch::yes) {
-		    if (!info1( it->second.second, it->second.first))
-			break;
-		}
-	    }
+	    invokeOnEach( _pool.byCapabilityIndexBegin( requirement.index(), dep ),
+			  _pool.byCapabilityIndexEnd( requirement.index(), dep ),
+			  resfilter::ByCapMatch( requirement ),
+			  functor::functorRef<bool,CapAndItem>(info1) );
+
 	    tovisit = info1.result;
 	}
-#endif
-#if 0
-	// item could provide its own requirement
-	if( doesProvide( requirement, item ) ) {
-		XXX << "self-provides " << endl;
-//		tovisit.push_back(node);
-	}
-	else {
-	    PoolItem_Ref provider = findProviderInSet( requirement, _installed );
 
-	    if (!provider)
-	    {
-		provider = findProviderInSet( requirement, _toinstall );
-		if (provider) {
-		    XXX << "provided by " << ITEMNAME(provider) << endl;
-		    tovisit.push_back( provider );
-		}
-	    }
-	}
-#endif
 	for (PoolItemList::iterator it = tovisit.begin(); it != tovisit.end(); ++it)
 	{
 	    const PoolItem_Ref must_visit = *it;

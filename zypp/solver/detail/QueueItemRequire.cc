@@ -140,7 +140,7 @@ struct UniqTable
 };
 //---------------------------------------------------------------------------
 
-struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
+struct RequireProcess
 {
     PoolItem_Ref requirer;
     const Capability capability;
@@ -157,10 +157,12 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 	, pool (p)
     { }
 
-    bool operator()( PoolItem_Ref provider, const Capability & match )
+    bool operator()( const CapAndItem & cai )
     {
 	//const Capability match;
 	ResStatus status;
+	PoolItem provider = cai.item;
+	Capability match = cai.cap;
 
 	status = context->getStatus( provider );
 
@@ -222,13 +224,16 @@ MIL << "replacing " << *it << " with " << provider << endl;
 };
 
 
-struct NoInstallableProviders : public resfilter::OnCapMatchCallbackFunctor
+struct NoInstallableProviders
 {
     PoolItem_Ref requirer;
     ResolverContext_Ptr context;
 
-    bool operator()( PoolItem_Ref provider, const Capability & match )
+    bool operator()( const CapAndItem cai)
     {
+	PoolItem provider = cai.item;
+	Capability match = cai.cap;
+
 	string msg_str;
 	//const Capability match;
 
@@ -263,7 +268,7 @@ struct NoInstallableProviders : public resfilter::OnCapMatchCallbackFunctor
 };
 
 
-struct LookForUpgrades : public resfilter::OnCapMatchCallbackFunctor
+struct LookForUpgrades
 {
     PoolItem_Ref installed;
     PoolItemList upgrades;
@@ -274,11 +279,8 @@ struct LookForUpgrades : public resfilter::OnCapMatchCallbackFunctor
 
     bool operator()( PoolItem_Ref provider )
     {
-//	if (installed->edition().compare (provider->edition()) < 0) {
-	    upgrades.push_front (provider);
-	    return true;
-//	}
-//	return false;
+	upgrades.push_front (provider);
+	return true;
     }
 };
 
@@ -343,23 +345,15 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
     if (! _remove_only) {
 
-#if 0
 	Dep dep( Dep::PROVIDES );
 	MIL << "Look for providers of " << _capability << endl;
 	// world->foreachProvidingResItem (_capability, require_process_cb, &info);
 	invokeOnEach( pool().byCapabilityIndexBegin( _capability.index(), dep ),
 		      pool().byCapabilityIndexEnd( _capability.index(), dep ),
-		      resfilter::callOnCapMatchIn( dep, _capability, functor::functorRef<bool,PoolItem,Capability>(info) ) );
-#endif
+		      resfilter::ByCapMatch( _capability ),
+		      functor::functorRef<bool,CapAndItem>(info) );
+
 	_XDEBUG("Look for providers of " << _capability);
-	// world->foreachProvidingResItem (_capability, require_process_cb, &info);
-	ResPool::const_indexiterator pend = pool().providesend(_capability.index());
-	for (ResPool::const_indexiterator it = pool().providesbegin(_capability.index()); it != pend; ++it) {
-	    if (_capability.matches (it->second.first) == CapMatch::yes) {
-		if (!info( it->second.second, it->second.first))
-		    break;
-	    }
-	}
 
 	num_providers = info.providers.size();
 
@@ -421,21 +415,13 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	    // Maybe we can add some extra info on why none of the providers are suitable.
 
 	    // pool()->foreachProvidingResItem (_capability, no_installable_providers_info_cb, (void *)&info);
-#if 0
+
 	    Dep dep( Dep::PROVIDES );
 
 	    invokeOnEach( pool().byCapabilityIndexBegin( _capability.index(), dep ), // begin()
 			  pool().byCapabilityIndexEnd( _capability.index(), dep ),   // end()
-			  resfilter::callOnCapMatchIn( dep, _capability, functor::functorRef<bool,PoolItem,Capability>(info)) );
-#endif
-		// world->foreachProvidingResItem (_capability, require_process_cb, &info);
-		ResPool::const_indexiterator pend = pool().providesend(_capability.index());
-		for (ResPool::const_indexiterator it = pool().providesbegin(_capability.index()); it != pend; ++it) {
-		    if (_capability.matches (it->second.first) == CapMatch::yes) {
-			if (!info( it->second.second, it->second.first))
-			    break;
-		    }
-		}
+			  resfilter::ByCapMatch( _capability ),
+			  functor::functorRef<bool,CapAndItem>(info) );
 
 	}
 
@@ -453,25 +439,10 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 //	    pool()->foreachUpgrade (_requiring_item, new Channel(CHANNEL_TYPE_ANY), look_for_upgrades_cb, (void *)&upgrade_list);
 
-#if 0	// **!!!** re-enable editon check in LookForUpgrades()
-
 	    invokeOnEach( pool().byNameBegin( _requiring_item->name() ), pool().byNameEnd( _requiring_item->name() ),
-			  resfilter::ByKind( _requiring_item->kind() ),
-#if 0
-	// CompareByGT is broken		  resfilter::byEdition<CompareByGT<Edition> >( _requiring_item->edition() )),
-#endif
+			  functor::chain (resfilter::ByKind( _requiring_item->kind() ),
+					  resfilter::byEdition<CompareByGT<Edition> >( _requiring_item->edition() ) ),
 					  functor::functorRef<bool,PoolItem>(info) );
-#endif
-	ResPool::const_nameiterator pend = pool().nameend(_requiring_item->name());
-	for (ResPool::const_nameiterator it = pool().namebegin(_requiring_item->name()); it != pend; ++it) {
-	    PoolItem pos = it->second;
-	    if (pos->kind() == _requiring_item->kind()
-		&& _requiring_item->edition().compare(pos->edition()) < 0)
-	    {
-		if (!info( pos ))
-		    break;
-	    }
-	}
 
 	    if (!info.upgrades.empty()) {
 		string label;

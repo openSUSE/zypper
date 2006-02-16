@@ -75,29 +75,17 @@ namespace zypp
   ResPool::const_iterator ResPool::end() const
   { return _pimpl->end(); }
 
-  ResPool::const_indexiterator ResPool::providesbegin(const std::string & tag_r) const
-  { return _pimpl->providesbegin(tag_r); }
+  ResPool::byName_iterator ResPool::byNameBegin( const std::string & name_r ) const
+  { return make_filter_iterator( ByName( name_r ), _pimpl->_namehash.begin( name_r ), _pimpl->_namehash.end( name_r ) ); }
 
-  ResPool::const_indexiterator ResPool::providesend(const std::string & tag_r) const
-  { return _pimpl->providesend(tag_r); }
+  ResPool::byName_iterator ResPool::byNameEnd( const std::string & name_r ) const
+  { return make_filter_iterator( ByName( name_r ), _pimpl->_namehash.end( name_r ), _pimpl->_namehash.end( name_r ) ); }
 
-  ResPool::const_indexiterator ResPool::requiresbegin(const std::string & tag_r) const
-  { return _pimpl->requiresbegin(tag_r); }
+  ResPool::byCapabilityIndex_iterator ResPool::byCapabilityIndexBegin( const std::string & index_r, Dep depType_r ) const
+  { return make_filter_iterator( ByCapabilityIndex(), _pimpl->_caphash.begin( index_r, depType_r ), _pimpl->_caphash.end( index_r, depType_r ) ); }
 
-  ResPool::const_indexiterator ResPool::requiresend(const std::string & tag_r) const
-  { return _pimpl->requiresend(tag_r); }
-
-  ResPool::const_indexiterator ResPool::conflictsbegin(const std::string & tag_r) const
-  { return _pimpl->conflictsbegin(tag_r); }
-
-  ResPool::const_indexiterator ResPool::conflictsend(const std::string & tag_r) const
-  { return _pimpl->conflictsend(tag_r); }
-
-  ResPool::const_nameiterator ResPool::namebegin(const std::string & tag_r) const
-  { return _pimpl->namebegin(tag_r); }
-
-  ResPool::const_nameiterator ResPool::nameend(const std::string & tag_r) const
-  { return _pimpl->nameend(tag_r); }
+  ResPool::byCapabilityIndex_iterator ResPool::byCapabilityIndexEnd( const std::string & index_r, Dep depType_r ) const
+  { return make_filter_iterator( ByCapabilityIndex(), _pimpl->_caphash.end( index_r, depType_r ), _pimpl->_caphash.end( index_r, depType_r ) ); }
 
   /******************************************************************
   **

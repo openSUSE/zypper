@@ -117,14 +117,14 @@ collector_cb (ResolverInfo_Ptr info, void *data)
     }
 }
 
-struct AllRequires : public resfilter::OnCapMatchCallbackFunctor
+struct AllRequires
 {
     PoolItemList requirers;
 
-    bool operator()( PoolItem_Ref requirer, const Capability & match )
+    bool operator()( const CapAndItem & cai )
     {
-	DBG << requirer << " requires " << match << endl;
-	requirers.push_back (requirer);
+	DBG << cai.item << " requires " << cai.cap << endl;
+	requirers.push_back( cai.item );
 
 	return true;
     }
@@ -372,8 +372,8 @@ Resolver::problems (void) const
 
 		invokeOnEach( _pool.byCapabilityIndexBegin( misc_info->capability().index(), dep ), // begin()
 			      _pool.byCapabilityIndexEnd( misc_info->capability().index(), dep ),   // end()
-			      resfilter::callOnCapMatchIn( dep, misc_info->capability(),
-							   functor::functorRef<bool,PoolItem,Capability>(info)) );
+			      resfilter::ByCapMatch( misc_info->capability() ),
+			      functor::functorRef<bool,CapAndItem>(info) );
 		if (info.requirers.size() > 1)
 		    problem->addSolution (new ProblemSolutionIgnoreRequires (problem, info.requirers, misc_info->capability()));
 

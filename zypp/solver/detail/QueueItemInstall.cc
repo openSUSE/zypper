@@ -130,7 +130,7 @@ QueueItemInstall::isSatisfied (ResolverContext_Ptr context) const
 
 // Handle items which freshen us -> re-establish them
 
-struct EstablishFreshens : public resfilter::OnCapMatchCallbackFunctor
+struct EstablishFreshens
 {
     const ResPool & pool;
     QueueItemList & qil;
@@ -146,16 +146,108 @@ struct EstablishFreshens : public resfilter::OnCapMatchCallbackFunctor
     // provider has a freshens on a just to-be-installed item
     //   re-establish provider, maybe its incomplete now
 
-    bool operator()( PoolItem_Ref provider, const Capability & match )
+    bool operator()( const CapAndItem & cai )
     {
-	_XDEBUG("EstablishFreshens (" << provider << ", " << match << ")");
+	_XDEBUG("EstablishFreshens (" << cai.item << ", " << cai.cap << ")");
 
-	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, provider, soft);
+	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, cai.item, soft);
 	qil.push_back (establish_item);
 	return true;
     }
 };
 
+
+
+//---------------------------------------------------------------------------
+
+// Handle items which conflict us -> uninstall them
+
+struct UninstallConflicting
+{
+    ResolverContext_Ptr _context;
+    const Capability _provided_cap;
+    PoolItem _install_item;
+    PoolItem _upgrade_item;
+    QueueItemList & _qil;
+    bool ignored;
+
+    UninstallConflicting( ResolverContext_Ptr ctx, const Capability & provided_cap, PoolItem install_item, PoolItem upgrade_item, QueueItemList & qil )
+	: _context( ctx )
+	, _provided_cap( provided_cap )
+	, _install_item( install_item )
+	, _upgrade_item( upgrade_item )
+	, _qil( qil )
+	, ignored( false )
+    { }
+
+    bool operator()( const CapAndItem & cai)
+    {
+	PoolItem_Ref conflicting_item = cai.item;
+
+	if (conflicting_item == _install_item) {				// self conflict ?
+	    WAR << "Ignoring self-conflicts" << endl;
+	    return true;
+	}
+	if (conflicting_item == _upgrade_item) {				// upgrade conflict ?
+	    _XDEBUG("We're upgrading the conflicting item");
+	    return true;
+	}
+
+	const Capability conflicting_cap = cai.cap;
+	ResolverInfo_Ptr log_info;
+	QueueItemUninstall_Ptr uninstall_item;
+
+	IgnoreMap ignoreMap = _context->getIgnoreConflicts();		// ignored conflict ?
+	// checking for ignoring dependencies
+	for (IgnoreMap::iterator it = ignoreMap.begin(); it != ignoreMap.end(); it++) {
+	    if (it->first == conflicting_item
+		&& it->second == conflicting_cap)
+	    {
+		_XDEBUG("Found ignoring requires " << conflicting_cap << " for " << conflicting_item);
+		ignored = true;
+		return false;		// stop iteration
+	    } else {
+		_XDEBUG("Ignoring requires " << it->second << " for " <<  it->first << " does not fit");	    
+	    }
+	}
+
+	/* Check to see if we conflict with ourself and don't create
+	 * an uninstall item for it if we do.  This is Debian's way of
+	 * saying that one and only one item with this provide may
+	 * exist on the system at a time.
+	 */
+
+	if (compareByNVR (conflicting_item.resolvable(), _install_item.resolvable()) == 0) {
+		return true;
+	}
+
+#warning Make behaviour configurable
+	// If the package is installed or is set to be installed by the user,
+	// let the user decide deleting conflicting package. This is only an info.
+	// Try at first updating packages.
+	//
+	if (_context->getStatus(conflicting_item).isToBeInstalled()			// scheduled for installation
+	    && !_context->getStatus(conflicting_item).isToBeUninstalled()		// not scheduled for uninstallation
+	    || conflicting_item.status().staysInstalled())				// not scheduled at all but installed
+	{
+	    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL,
+									       _install_item, RESOLVER_INFO_PRIORITY_VERBOSE, _provided_cap);
+	    misc_info->setOtherPoolItem (conflicting_item);
+	    misc_info->setOtherCapability (conflicting_cap);
+	    _context->addInfo (misc_info);
+	}
+
+	_XDEBUG("because: '" << conflicting_item << "' provides " << conflicting_cap);
+
+	QueueItemUninstall_Ptr uninstall_qitem = new QueueItemUninstall (_context->pool(), conflicting_item, QueueItemUninstall::CONFLICT);
+	uninstall_qitem->setDueToConflict ();
+	log_info = new ResolverInfoConflictsWith (conflicting_item, _install_item);
+	uninstall_qitem->addInfo (log_info);
+	_qil.push_front (uninstall_qitem);
+
+	return true;
+    }
+};
 
 //---------------------------------------------------------------------------------------
 
@@ -367,77 +459,20 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	// Searching item that conflict with us and try to uninstall it if it is useful
 
-	IgnoreMap ignoreMap = context->getIgnoreConflicts();
 	caps = _item->dep (Dep::PROVIDES);
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 	    const Capability cap = *iter;
 
-	    ResPool::const_indexiterator cend = pool().conflictsend(cap.index());
-	    for (ResPool::const_indexiterator it = pool().conflictsbegin(cap.index()); it != cend; ++it) {
+	    UninstallConflicting info( context, cap, _item, _upgrades, qil );
 
-		if (cap.matches (it->second.first) == CapMatch::yes) {
-		    // conflicting item found
-		    PoolItem_Ref conflicting_item = it->second.second;
+	    Dep dep( Dep::CONFLICTS );
+	    invokeOnEach( pool().byCapabilityIndexBegin( cap.index(), dep ),
+			  pool().byCapabilityIndexEnd( cap.index(), dep ),
+			  resfilter::ByCapMatch( cap ),
+			  functor::functorRef<bool,CapAndItem>(info) );
 
-		    if (conflicting_item == _item) {
-			WAR << "Ignoring self-conflicts" << endl;
-			continue;
-		    }
-		    if (conflicting_item == _upgrades) {
-			_XDEBUG("We're upgrading the conflicting item");
-			continue;
-		    }
-		    const Capability conflicting_cap = it->second.first;
-		    ResolverInfo_Ptr log_info;
-		    QueueItemUninstall_Ptr uninstall_item;
-
-		    // checking for ignoring dependencies
-		    for (IgnoreMap::iterator it = ignoreMap.begin();
-			 it != ignoreMap.end(); it++) {
-			if (it->first == conflicting_item
-			    && it->second == conflicting_cap) {
-			    _XDEBUG("Found ignoring requires " << conflicting_cap << " for " << conflicting_item);
-			    return true;
-			} else {
-			    _XDEBUG("Ignoring requires " << it->second << " for " <<  it->first << " does not fit");	    
-			}
-		    }
-
-		    /* Check to see if we conflict with ourself and don't create
-		     * an uninstall item for it if we do.  This is Debian's way of
-		     * saying that one and only one item with this provide may
-		     * exist on the system at a time.
-		     */
-
-		    if (compareByNVR (conflicting_item.resolvable(), _item.resolvable()) == 0) {
-			continue;
-		    }
-
-#warning Make behaviour configurable
-		    // If the package is installed or is set to be installed by the user,
-		    // let the user decide deleting conflicting package. This is only an info.
-		    // Try at first updating packages.
-		    //
-		    if (context->getStatus(conflicting_item).isToBeInstalled()			// scheduled for installation
-			&& !context->getStatus(conflicting_item).isToBeUninstalled()		// not scheduled for uninstallation
-			|| conflicting_item.status().staysInstalled())				// not scheduled at all but installed
-		    {
-			ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL,
-									       _item, RESOLVER_INFO_PRIORITY_VERBOSE, cap);
-			misc_info->setOtherPoolItem (conflicting_item);
-			misc_info->setOtherCapability (conflicting_cap);
-			context->addInfo (misc_info);
-		    }
-
-		    _XDEBUG("because: '" << conflicting_item << "' provides " << cap);
-
-		    uninstall_item = new QueueItemUninstall (pool(), conflicting_item, QueueItemUninstall::CONFLICT, _soft);
-		    uninstall_item->setDueToConflict ();
-		    log_info = new ResolverInfoConflictsWith (conflicting_item, _item);
-		    uninstall_item->addInfo (log_info);
-		    qil.push_front (uninstall_item);
-		}
-	    }
+	    if (info.ignored)		// user choose to ignore these conflitcs
+		return true;
 	}
 
 	/* Construct establish items for each of those which freshen this resolvable. */
@@ -451,7 +486,8 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	Dep dep( Dep::FRESHENS);
 	invokeOnEach( pool().byCapabilityIndexBegin( cap.index(), dep ), // begin()
 		      pool().byCapabilityIndexEnd( cap.index(), dep ),   // end()
-		      resfilter::callOnCapMatchIn( dep, cap, functor::functorRef<bool,PoolItem,Capability>(info)) );
+		      resfilter::ByCapMatch( cap ),
+		      functor::functorRef<bool,CapAndItem>(info) );
 
     } // end of block
 

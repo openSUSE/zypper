@@ -57,7 +57,7 @@ operator<< (ostream & os, const PoolItemList & itemlist)
 }
 
 
-class LookFor : public resfilter::OnCapMatchCallbackFunctor, public resfilter::PoolItemFilterFunctor
+class LookFor : public resfilter::PoolItemFilterFunctor
 {
   public:
     PoolItem_Ref item;
@@ -76,22 +76,12 @@ PoolItem_Ref
 Helper::findInstalledByNameAndKind (const ResPool & pool, const string & name, const Resolvable::Kind & kind)
 {
     LookFor info;
-#if 0
+
     invokeOnEach( pool.byNameBegin( name ),
 		  pool.byNameEnd( name ),
 		  functor::chain (resfilter::ByInstalled (),			// ByInstalled
 				  resfilter::ByKind( kind ) ),			// equal kind
 		  functor::functorRef<bool,PoolItem> (info) );
-#endif
-	ResPool::const_nameiterator pend = pool.nameend(name);
-	for (ResPool::const_nameiterator it = pool.namebegin(name); it != pend; ++it) {
-	    PoolItem item = it->second;
-	    if (item.status().isInstalled()
-		&& item->kind() == kind) {
-		if (!info( it->second ))
-		    break;
-	    }
-	}
 
     _XDEBUG("Helper::findInstalledByNameAndKind (" << name << ", " << kind << ") => " << info.item);
     return info.item;
@@ -104,22 +94,12 @@ PoolItem_Ref
 Helper::findUninstalledByNameAndKind (const ResPool & pool, const string & name, const Resolvable::Kind & kind)
 {
     LookFor info;
-#if 0
+
     invokeOnEach( pool.byNameBegin( name ),
 		  pool.byNameEnd( name ),
-		  functor::chain (resfilter::ByInstalled (),			// ByInstalled
+		  functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
 				  resfilter::ByKind( kind ) ),			// equal kind
 		  functor::functorRef<bool,PoolItem> (info) );
-#endif
-	ResPool::const_nameiterator pend = pool.nameend(name);
-	for (ResPool::const_nameiterator it = pool.namebegin(name); it != pend; ++it) {
-	    PoolItem item = it->second;
-	    if (item.status().isUninstalled()
-		&& item->kind() == kind) {
-		if (!info( it->second ))
-		    break;
-	    }
-	}
 
     _XDEBUG("Helper::findUninstalledByNameAndKind (" << name << ", " << kind << ") => " << info.item);
     return info.item;
@@ -137,7 +117,7 @@ Helper::findInstalledItem (const ResPool & pool, PoolItem_Ref item)
 
 //----------------------------------------------------------------------------
 
-class LookForUpdate : public resfilter::OnCapMatchCallbackFunctor, public resfilter::PoolItemFilterFunctor
+class LookForUpdate : public resfilter::PoolItemFilterFunctor
 {
   public:
     PoolItem_Ref uninstalled;
@@ -162,25 +142,13 @@ Helper::findUpdateItem (const ResPool & pool, PoolItem_Ref item)
 {
     LookForUpdate info;
 #warning FIXME, should not report locked update candidates.
-#if 0
+
     invokeOnEach( pool.byNameBegin( item->name() ),
 		  pool.byNameEnd( item->name() ),
 		  functor::chain (functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
 						  resfilter::ByKind( item->kind() ) ),		// equal kind
 				  resfilter::byEdition<CompareByGT<Edition> >( item->edition() )),
 		  functor::functorRef<bool,PoolItem> (info) );
-#endif
-	ResPool::const_nameiterator pend = pool.nameend(item->name());
-	for (ResPool::const_nameiterator it = pool.namebegin(item->name()); it != pend; ++it) {
-	    PoolItem pos = it->second;
-	    if (pos.status().staysUninstalled()
-		&& pos->kind() == item->kind()
-		&& item->edition().compare(pos->edition()) < 0)
-	    {
-		if (!info( pos ))
-		    break;
-	    }
-	}
 
     _XDEBUG("Helper::findUpdateItem(" << item << ") => " << info.uninstalled);
     return info.uninstalled;
@@ -189,7 +157,7 @@ Helper::findUpdateItem (const ResPool & pool, PoolItem_Ref item)
 
 //----------------------------------------------------------------------------
 
-class LookForReinstall : public resfilter::OnCapMatchCallbackFunctor, public resfilter::PoolItemFilterFunctor
+class LookForReinstall : public resfilter::PoolItemFilterFunctor
 {
   public:
     PoolItem_Ref uninstalled;
@@ -207,25 +175,13 @@ Helper::findReinstallItem (const ResPool & pool, PoolItem_Ref item)
 {
     LookForReinstall info;
 #warning FIXME, should not report locked update candidates.
-#if 0
+
     invokeOnEach( pool.byNameBegin( item->name() ),
 		  pool.byNameEnd( item->name() ),
 		  functor::chain (functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
 						  resfilter::ByKind( item->kind() ) ),		// equal kind
 				  resfilter::byEdition<CompareByEQ<Edition> >( item->edition() )),
 		  functor::functorRef<bool,PoolItem> (info) );
-#endif
-	ResPool::const_nameiterator pend = pool.nameend(item->name());
-	for (ResPool::const_nameiterator it = pool.namebegin(item->name()); it != pend; ++it) {
-	    PoolItem pos = it->second;
-	    if (pos.status().staysUninstalled()
-		&& pos->kind() == item->kind()
-		&& item->edition().compare(pos->edition()) == 0)
-	    {
-		if (!info( pos ))
-		    break;
-	    }
-	}
 
     _XDEBUG("Helper::findReinstallItem(" << item << ") => " << info.uninstalled);
     return info.uninstalled;

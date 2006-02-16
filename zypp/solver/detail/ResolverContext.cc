@@ -1258,7 +1258,7 @@ ResolverContext::spewInfo (void) const
 //---------------------------------------------------------------------------
 // requirements
 
-struct RequirementMet : public resfilter::OnCapMatchCallbackFunctor
+struct RequirementMet
 {
     ResolverContext_Ptr context;
     const Capability capability;
@@ -1271,8 +1271,10 @@ struct RequirementMet : public resfilter::OnCapMatchCallbackFunctor
     { }
 
 
-    bool operator()( PoolItem_Ref provider, const Capability & match )
+    bool operator()( const CapAndItem & cai )
     {
+	Capability match( cai.cap );
+	PoolItem provider( cai.item );
 	// capability is set for item set children. If it is set, query the
 	//   exact version only.
 	if ((capability == Capability::noCap
@@ -1296,29 +1298,22 @@ ResolverContext::requirementIsMet (const Capability & dependency, bool is_child)
     RequirementMet info (this, is_child ? dependency : Capability::noCap);
 
     //    world()->foreachProviding (dependency, requirement_met_cb, (void *)&info);
-#if 0
+
     Dep dep( Dep::PROVIDES );
 
     // world->foreachProvidingResItem (dependency, require_process_cb, &info);
 
     invokeOnEach( pool().byCapabilityIndexBegin( dependency.index(), dep ),
 		  pool().byCapabilityIndexEnd( dependency.index(), dep ),
-		  resfilter::callOnCapMatchIn( dep, dependency, functor::functorRef<bool,PoolItem,Capability>(info) ) );
-#endif
-	ResPool::const_indexiterator pend = pool().providesend(dependency.index());
-	for (ResPool::const_indexiterator it = pool().providesbegin(dependency.index()); it != pend; ++it) {
-	    if (dependency.matches (it->second.first) == CapMatch::yes) {
-		if (!info( it->second.second, it->second.first))
-		    break;
-	    }
-	}
+		  resfilter::ByCapMatch( dependency ),
+		  functor::functorRef<bool,CapAndItem>(info) );
     return info.flag;
 }
 
 
 //---------------------------------------------------------------------------
 
-struct RequirementPossible : public resfilter::OnCapMatchCallbackFunctor
+struct RequirementPossible
 {
     ResolverContext_Ptr context;
     bool flag;
@@ -1328,8 +1323,9 @@ struct RequirementPossible : public resfilter::OnCapMatchCallbackFunctor
 	, flag (false)
     { }
 
-    bool operator()( PoolItem_Ref provider, const Capability & match )
+    bool operator()( const CapAndItem & cai )
     {
+	PoolItem provider( cai.item );
 	ResStatus status = context->getStatus( provider );
 
 	if (! (status.isToBeUninstalled () || status.isImpossible())
@@ -1349,20 +1345,13 @@ ResolverContext::requirementIsPossible (const Capability & dependency)
     RequirementPossible info( this );
 
     // world()->foreachProviding (dep, requirement_possible_cb, (void *)&info);
-#if 0
+
     Dep dep( Dep::PROVIDES );
 
     invokeOnEach( pool().byCapabilityIndexBegin( dependency.index(), dep ),
 		  pool().byCapabilityIndexEnd( dependency.index(), dep ),
-		  resfilter::callOnCapMatchIn( dep, dependency, functor::functorRef<bool,PoolItem,Capability>(info) ) );
-#endif
-	ResPool::const_indexiterator pend = pool().providesend(dependency.index());
-	for (ResPool::const_indexiterator it = pool().providesbegin(dependency.index()); it != pend; ++it) {
-	    if (dependency.matches (it->second.first) == CapMatch::yes) {
-		if (!info( it->second.second, it->second.first))
-		    break;
-	    }
-	}
+		  resfilter::ByCapMatch( dependency ),
+		  functor::functorRef<bool,CapAndItem>(info) );
     _XDEBUG("requirementIsPossible( " << dependency << ") = " << (info.flag ? "Y" : "N"));
     return info.flag;
 }

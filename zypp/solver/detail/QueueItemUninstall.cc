@@ -126,7 +126,7 @@ QueueItemUninstall::setUnlink ()
 
 //---------------------------------------------------------------------------
 
-struct UnlinkCheck: public resfilter::OnCapMatchCallbackFunctor
+struct UnlinkCheck
 {
     ResolverContext_Ptr context;
     bool cancel_unlink;
@@ -138,15 +138,15 @@ struct UnlinkCheck: public resfilter::OnCapMatchCallbackFunctor
     //	   or if the uninstall breaks the requirer
     //	     in this case, we have to cancel the uninstallation
 
-    bool operator()( PoolItem_Ref requirer, const Capability & match )
+    bool operator()( const CapAndItem & cai )
     {
 	if (cancel_unlink)				// already cancelled
 	    return true;
 
-	if (! context->isPresent (requirer))		// item is not (to-be-)installed
+	if (! context->isPresent (cai.item))		// item is not (to-be-)installed
 	    return true;
 
-	if (context->requirementIsMet (match))		// another resolvable provided match
+	if (context->requirementIsMet (cai.cap))	// another resolvable provided match
 	    return true;
 
 	cancel_unlink = true;				// cancel, as this would break dependencies
@@ -158,7 +158,7 @@ struct UnlinkCheck: public resfilter::OnCapMatchCallbackFunctor
 //---------------------------------------------------------------------------
 
 
-struct UninstallProcess: public resfilter::OnCapMatchCallbackFunctor
+struct UninstallProcess
 {
     ResPool pool;
     ResolverContext_Ptr context;
@@ -180,12 +180,13 @@ struct UninstallProcess: public resfilter::OnCapMatchCallbackFunctor
 
     // the uninstall of uninstalled_item breaks the dependency 'match' of resolvable 'requirer'
 
-    bool operator()( PoolItem_Ref requirer, const Capability & match )
+    bool operator()( const CapAndItem & cai )
     {
+	PoolItem requirer( cai.item );
 	if (! context->isPresent (requirer))				// its not installed -> dont care
 	    return true;
 
-	if (context->requirementIsMet (match, false))			// its provided by another installed resolvable -> dont care
+	if (context->requirementIsMet( cai.cap, false ))		// its provided by another installed resolvable -> dont care
 	    return true;
 
 	if (context->getStatus(requirer).isSatisfied()) {		// it is just satisfied, check freshens
@@ -194,7 +195,7 @@ struct UninstallProcess: public resfilter::OnCapMatchCallbackFunctor
 	    qil.push_back (establish_item);
 	    return true;
 	}
-	QueueItemRequire_Ptr require_item = new QueueItemRequire (pool, match);	// issue a new require to fulfill this dependency
+	QueueItemRequire_Ptr require_item = new QueueItemRequire( pool, cai.cap );	// issue a new require to fulfill this dependency
 	require_item->addPoolItem (requirer);
 	if (remove_only) {
 	    require_item->setRemoveOnly ();
@@ -253,22 +254,13 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    for (CapSet::const_iterator iter = provides.begin(); iter != provides.end() && ! info.cancel_unlink; iter++) {
 
 		//world()->foreachRequiringPoolItem (*iter, unlink_check_cb, &info);
-#if 1
+
 		Dep dep( Dep::REQUIRES);
 
 		invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
 			      pool().byCapabilityIndexEnd( iter->index(), dep ),
-			      resfilter::callOnCapMatchIn( dep, *iter, functor::functorRef<bool,PoolItem,Capability>(info) ) );
-#else
-	Capability c = *iter;
-	ResPool::const_indexiterator rend = pool().requiresend(c.index());
-	for (ResPool::const_indexiterator it = pool().requiresbegin(c.index()); it != rend; ++it) {
-	    if (c.matches (it->second.first) == CapMatch::yes) {
-		if (!info( it->second.second, it->second.first))
-		    break;
-	    }
-	}
-#endif
+			      resfilter::ByCapMatch( *iter ),
+			      functor::functorRef<bool,CapAndItem>(info) );
 
 	    }
 
@@ -318,22 +310,14 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	for (CapSet::const_iterator iter = provides.begin(); iter != provides.end(); iter++) {
 	    UninstallProcess info ( pool(), context, _item, _upgraded_to, qil, _remove_only, _soft);
-#if 0
+
 	    //world()->foreachRequiringPoolItem (*iter, uninstall_process_cb, &info);
 	    Dep dep( Dep::REQUIRES);
 
 	    invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
 			  pool().byCapabilityIndexEnd( iter->index(), dep ),
-			  resfilter::callOnCapMatchIn( dep, *iter, functor::functorRef<bool,PoolItem,Capability>(info) ) );
-#endif
-	Capability c = *iter;
-	ResPool::const_indexiterator rend = pool().requiresend(c.index());
-	for (ResPool::const_indexiterator it = pool().requiresbegin(c.index()); it != rend; ++it) {
-	    if (c.matches (it->second.first) == CapMatch::yes) {
-		if (!info( it->second.second, it->second.first))
-		    break;
-	    }
-	}
+			  resfilter::ByCapMatch( *iter ),
+			  functor::functorRef<bool,CapAndItem>(info) );
 
 	}
     }

@@ -73,7 +73,7 @@ namespace zypp
 
   private:
     /**  */
-    typedef pool::PoolTraits::ContainerT  ContainerT;
+    typedef pool::PoolTraits::ItemContainerT  ContainerT;
     typedef pool::PoolTraits::Impl        Impl;
     typedef pool::PoolTraits::Inserter    Inserter;
     typedef pool::PoolTraits::Deleter     Deleter;

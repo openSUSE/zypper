@@ -476,7 +476,7 @@ get_poolItem (const string & source_alias, const string & package_name, const st
 // whatdependson
 
 
-struct RequiringPoolItem : public resfilter::OnCapMatchCallbackFunctor
+struct RequiringPoolItem
 {
     PoolItemSet itemset;
     PoolItem_Ref provider;
@@ -487,8 +487,10 @@ struct RequiringPoolItem : public resfilter::OnCapMatchCallbackFunctor
 	: provider (p)
     { }
 
-    bool operator()( PoolItem_Ref requirer, const Capability & match )
+    bool operator()( const CapAndItem & cai )
     {
+	PoolItem_Ref requirer( cai.item );
+	Capability cap( cai.cap );
 	if (itemset.insert (requirer).second) {
 	    if (first) {
 		cout << "\t" << provider.resolvable() << " provides " << cap << " required by" << endl;
@@ -521,7 +523,8 @@ whatdependson (PoolItem_Ref poolItem)
 	Dep dep( Dep::REQUIRES );
 	invokeOnEach( God->pool().byCapabilityIndexBegin( info.cap.index(), dep ),
 		      God->pool().byCapabilityIndexEnd( info.cap.index(), dep ),
-		      resfilter::callOnCapMatchIn( dep, info.cap, functor::functorRef<bool,PoolItem,Capability>(info) ) );
+		      resfilter::ByCapMatch( info.cap ),
+		      functor::functorRef<bool,CapAndItem>(info) );
 
     }
 
@@ -533,13 +536,13 @@ whatdependson (PoolItem_Ref poolItem)
 // whatprovides
 
 
-struct ProvidingPoolItem : public resfilter::OnCapMatchCallbackFunctor
+struct ProvidingPoolItem
 {
     PoolItemSet itemset;
 
-    bool operator()( PoolItem_Ref provider, const Capability & match )
+    bool operator()( const CapAndItem & cai )
     {
-	itemset.insert (provider);
+	itemset.insert( cai.item );
 	return true;
     }
 };
@@ -561,7 +564,8 @@ get_providing_poolItems (const string & prov_name, const string & kind_name = ""
 
     invokeOnEach( God->pool().byCapabilityIndexBegin( cap.index(), dep ),
 		  God->pool().byCapabilityIndexEnd( cap.index(), dep ),
-		  resfilter::callOnCapMatchIn( dep, cap, functor::functorRef<bool,PoolItem,Capability>(info) ) );
+		  resfilter::ByCapMatch( cap ),
+		  functor::functorRef<bool,CapAndItem>(info) );
 
     return info.itemset;
 }
@@ -863,7 +867,7 @@ uniquelyInstalled (void)
 typedef pair<PoolItem_Ref,PoolItem_Ref> UpgradePair;
 typedef map<string,UpgradePair > UpgradeMap;
 
-struct DoUpgrades : public resfilter::OnCapMatchCallbackFunctor, public resfilter::PoolItemFilterFunctor
+struct DoUpgrades : public resfilter::PoolItemFilterFunctor
 {
     PoolItem_Ref installed;
     UpgradeMap upgrades;

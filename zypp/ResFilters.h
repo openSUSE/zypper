@@ -20,6 +20,7 @@
 #include "zypp/source/SourceImpl.h"
 
 #include "zypp/PoolItem.h"
+#include "zypp/CapAndItem.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -241,33 +242,6 @@ namespace zypp
       { return byEdition( edition_r, _Compare() ); }
 
 
-    /** Select ResObject if at least one Capability with
-     *  index \a index_r was found in dependency \a depType_r.
-    */
-    struct ByCapabilityIndex : public ResObjectFilterFunctor
-    {
-      ByCapabilityIndex( const std::string & index_r, Dep depType_r )
-      : _dep( depType_r )
-      , _index( index_r )
-      {}
-      ByCapabilityIndex( const Capability & cap_r, Dep depType_r )
-      : _dep( depType_r )
-      , _index( cap_r.index() )
-      {}
-
-      bool operator()( ResObject::constPtr p ) const
-      {
-        using capfilter::ByIndex;
-        return(    make_filter_begin( ByIndex(_index), p->dep( _dep ) )
-                != make_filter_end( ByIndex(_index), p->dep( _dep ) ) );
-      }
-
-      Dep         _dep;
-      std::string _index;
-    };
-
-
-
     ///////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
@@ -309,61 +283,52 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
 
-    typedef std::binary_function<PoolItem,Capability,
-                                 bool> OnCapMatchCallbackFunctor;
-
-    /** Find matching Capabilities in a ResObjects dependency and invoke a
-     *  callback on matches.
-     *
-     * Iterates through the PoolItem (in fact the ResObject it holds)
-     * CapSet denoted by \a dep_r. For each Capability matching the
-     * provided \a cap_r the callback functor \a fnc_r is called with
-     * the PoolItem and the PoolItem's matching Capability.
-     *
-     * \returns \c true, unless an invokation of the callback functor
-     * returned \c false.
-     *
-     * \todo Unfortunately a pure PoolItem Filter, but woud be usefull with
-     * plain ResObjects too. But the Solver urgently needs the PoolItem in
-     * the OnCapMatchCallback.
+    /** Select ResObject if at least one Capability with
+     *  index \a index_r was found in dependency \a depType_r.
     */
-    template<class _OnCapMatchCallback>
-      struct CallOnCapMatchIn
+    struct ByCapabilityIndex
+    {
+      bool operator()( const CapAndItem & cai ) const
       {
-        bool operator()( const PoolItem & p ) const
-        {
-          const CapSet & depSet( p->dep( _dep ) ); // dependency set in p to iterate
-          capfilter::ByCapMatch matching( _cap );  // predicate: true if match with _cap
-
-          int res
-          = invokeOnEach( depSet.begin(), depSet.end(), // iterate this set
-                          matching,                     // Filter: if match
-                          std::bind1st(_fnc,p) );       // Action: invoke _fnc(p,match)
-          // Maybe worth to note: Filter and Action are invoked with the same
-          // iterator, thus Action will use the same capability that cause
-          // the match in Filter.
-          return ( res >= 0 );
-        }
-
-        CallOnCapMatchIn( Dep dep_r, const Capability & cap_r,
-                          _OnCapMatchCallback fnc_r )
-        : _dep( dep_r )
-        , _cap( cap_r )
-        , _fnc( fnc_r )
-        {}
-        Dep                 _dep;
-        const Capability &  _cap;
-        _OnCapMatchCallback _fnc;
-      };
-
-    /** */
-    template<class _OnCapMatchCallback>
-      inline CallOnCapMatchIn<_OnCapMatchCallback>
-      callOnCapMatchIn( Dep dep_r, const Capability & cap_r,
-                        _OnCapMatchCallback fnc_r )
-      {
-        return CallOnCapMatchIn<_OnCapMatchCallback>( dep_r, cap_r, fnc_r );
+	return true;			// its all in the PoolImpl !
       }
+    };
+
+
+    /** Select ResObject if at least one Capability with
+     *  index \a index_r was found in dependency \a depType_r.
+    */
+    struct ByCapMatch
+    {
+      bool operator()( const CapAndItem & cai ) const
+      {
+	return cai.cap.matches( _cap ) == CapMatch::yes;
+      }
+      ByCapMatch( const Capability & cap_r )
+	: _cap( cap_r )
+      {}
+      const Capability &  _cap;
+    };
+
+
+    /** Select PoolItem by uninstalled. */
+    struct ByCaIUninstalled
+    {
+      bool operator()( const CapAndItem & cai ) const
+      {
+	return cai.item.status().staysUninstalled();
+      }
+    };
+
+    /** Select PoolItem by transact. */
+    struct ByCaITransact
+    {
+      bool operator()( const CapAndItem & cai ) const
+      {
+	return cai.item.status().transacts();
+      }
+    };
+
 
     ///////////////////////////////////////////////////////////////////
 

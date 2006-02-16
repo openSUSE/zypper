@@ -13,6 +13,7 @@
 #define ZYPP_POOL_POOLIMPL_H
 
 #include <iosfwd>
+#include <map>
 
 #include "zypp/pool/PoolTraits.h"
 #include "zypp/ResPoolProxy.h"
@@ -23,6 +24,153 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace pool
   { /////////////////////////////////////////////////////////////////
+
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : NameHash
+    //
+    /** */
+    class NameHash
+    {
+    public:
+      /** Default ctor */
+      NameHash();
+      /** Dtor */
+      ~NameHash();
+
+      public:
+
+      typedef PoolTraits::ItemContainerT	ItemContainerT;
+      typedef PoolTraits::NameItemContainerT	ContainerT;
+      typedef PoolTraits::size_type		size_type;
+      typedef PoolTraits::iterator		iterator;
+      typedef PoolTraits::const_iterator	const_iterator;
+
+      private:
+	ItemContainerT & getItemContainer( const std::string & tag_r );
+	const ItemContainerT & getConstItemContainer( const std::string & tag_r ) const;
+
+      public:
+      /**  */
+      ContainerT & store()
+      { return _store; }
+      /**  */
+      const ContainerT & store() const
+      { return _store; }
+
+      /**  */
+      bool empty() const
+      { return _store.empty(); }
+      /**  */
+      size_type size() const
+      { return _store.size(); }
+
+      /** */
+      iterator begin( const std::string & tag_r )
+      { return getItemContainer( tag_r ).begin(); }
+      /** */
+      const_iterator begin( const std::string & tag_r ) const
+      { return getConstItemContainer( tag_r ).begin(); }
+
+      /** */
+      iterator end( const std::string & tag_r )
+      { return getItemContainer( tag_r ).end(); }
+      /** */
+      const_iterator end( const std::string & tag_r ) const
+      { return getConstItemContainer( tag_r ).end(); }
+
+      /** */
+      void clear()
+      { _store.clear(); }
+
+      /** */
+      void insert( const PoolItem & item_r );
+      /** */
+      void erase( const PoolItem & item_r );
+
+      private:
+	ContainerT _store;
+	ItemContainerT _empty;	// for begin(), end() if tag_r can't be found
+    };
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : CapHash
+    //
+    /** */
+    class CapHash
+    {
+    public:
+      /** Default ctor */
+      CapHash();
+      /** Dtor */
+      ~CapHash();
+
+      public:
+
+      typedef PoolTraits::DepCapItemContainerT	ContainerT;
+      typedef PoolTraits::capitemsize_type	size_type;
+      typedef PoolTraits::capitemiterator	iterator;
+      typedef PoolTraits::const_capitemiterator	const_iterator;
+
+      private:
+
+      typedef PoolTraits::CapItemStoreT		CapItemStoreT;
+      typedef PoolTraits::CapItemContainerT	CapItemContainerT;
+
+      // Dep -> CapItemStoreT
+      const CapItemStoreT & capItemStore ( Dep cap_r ) const;
+
+      // CapItemStoreT, index -> CapItemContainerT
+      const CapItemContainerT & capItemContainer( const CapItemStoreT & cis, const std::string & tag_r ) const;
+
+      public:
+
+      /**  */
+      ContainerT & store()
+      { return _store; }
+      /**  */
+      const ContainerT & store() const
+      { return _store; }
+
+      /**  */
+      bool empty() const
+      { return _store.empty(); }
+      /**  */
+      size_type size() const
+      { return _store.size(); }
+
+      /** */
+      iterator begin( const std::string & tag_r, Dep cap_r )
+      { return _store[cap_r][tag_r].begin(); }
+      /** */
+      const_iterator begin( const std::string & tag_r, Dep cap_r ) const
+      { const CapItemStoreT & capitemstore = capItemStore( cap_r );
+	const CapItemContainerT & capcontainer = capItemContainer ( capitemstore, tag_r );
+	return capcontainer.begin(); }
+
+      /** */
+      iterator end( const std::string & tag_r, Dep cap_r )
+      { return _store[cap_r][tag_r].begin(); }
+      /** */
+      const_iterator end( const std::string & tag_r, Dep cap_r ) const
+      { const CapItemStoreT & capitemstore = capItemStore( cap_r );
+	const CapItemContainerT & capcontainer = capItemContainer ( capitemstore, tag_r );
+	return capcontainer.end(); }
+
+      /** */
+      void clear()
+      { _store.clear(); }
+
+      /** */
+      void insert( const PoolItem & item_r );
+      /** */
+      void erase( const PoolItem & item_r );
+
+      private:
+	PoolTraits::DepCapItemContainerT _store;
+    };
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -35,19 +183,13 @@ namespace zypp
 
     public:
     /** */
-    typedef PoolTraits::Item           Item;
-    typedef PoolTraits::ContainerT     ContainerT;
-    typedef PoolTraits::IndexContainerT    IndexContainerT;
-    typedef PoolTraits::NameContainerT    NameContainerT;
-    typedef PoolTraits::size_type      size_type;
-    typedef PoolTraits::iterator       iterator;
-    typedef PoolTraits::const_iterator const_iterator;
-    typedef PoolTraits::indexiterator       indexiterator;
-    typedef PoolTraits::const_indexiterator const_indexiterator;
-    typedef PoolTraits::nameiterator       nameiterator;
-    typedef PoolTraits::const_nameiterator const_nameiterator;
-    typedef PoolTraits::Inserter       Inserter;
-    typedef PoolTraits::Deleter        Deleter;
+    typedef PoolTraits::Item			Item;
+    typedef PoolTraits::ItemContainerT		ContainerT;
+    typedef PoolTraits::iterator		iterator;
+    typedef PoolTraits::const_iterator		const_iterator;
+    typedef PoolTraits::size_type		size_type;
+    typedef PoolTraits::Inserter		Inserter;
+    typedef PoolTraits::Deleter			Deleter;
 
     public:
       /** Default ctor */
@@ -64,32 +206,6 @@ namespace zypp
       { return _store; }
 
       /**  */
-      IndexContainerT & providesstore()
-      { return _providesstore; }
-      /**  */
-      const IndexContainerT & providesstore() const
-      { return _providesstore; }
-
-      IndexContainerT & requiresstore()
-      { return _requiresstore; }
-      /**  */
-      const IndexContainerT & requiresstore() const
-      { return _requiresstore; }
-
-      IndexContainerT & conflictsstore()
-      { return _conflictsstore; }
-      /**  */
-      const IndexContainerT & conflictsstore() const
-      { return _conflictsstore; }
-
-      /**  */
-      NameContainerT & namestore()
-      { return _namestore; }
-      /**  */
-      const NameContainerT & namestore() const
-      { return _namestore; }
-
-      /**  */
       bool empty() const
       { return _store.empty(); }
       /**  */
@@ -104,34 +220,6 @@ namespace zypp
       { return _store.begin(); }
 
       /** */
-      indexiterator providesbegin(const std::string & tag_r)
-      { return _providesstore.lower_bound (tag_r); }
-      /** */
-      const_indexiterator providesbegin(const std::string & tag_r) const
-      { return _providesstore.lower_bound (tag_r); }
-
-      /** */
-      indexiterator requiresbegin(const std::string & tag_r)
-      { return _requiresstore.lower_bound (tag_r); }
-      /** */
-      const_indexiterator requiresbegin(const std::string & tag_r) const
-      { return _requiresstore.lower_bound (tag_r); }
-
-      /** */
-      indexiterator conflictsbegin(const std::string & tag_r)
-      { return _conflictsstore.lower_bound (tag_r); }
-      /** */
-      const_indexiterator conflictsbegin(const std::string & tag_r) const
-      { return _conflictsstore.lower_bound (tag_r); }
-
-      /** */
-      nameiterator namebegin(const std::string & tag_r)
-      { return _namestore.lower_bound (tag_r); }
-      /** */
-      const_nameiterator namebegin(const std::string & tag_r) const
-      { return _namestore.lower_bound (tag_r); }
-
-      /** */
       iterator end()
       { return _store.end(); }
       /** */
@@ -139,40 +227,10 @@ namespace zypp
       { return _store.end(); }
 
       /** */
-      indexiterator providesend(const std::string & tag_r)
-      { return _providesstore.upper_bound (tag_r); }
-      /** */
-      const_indexiterator providesend(const std::string & tag_r) const
-      { return _providesstore.upper_bound (tag_r); }
-
-      /** */
-      indexiterator requiresend(const std::string & tag_r)
-      { return _requiresstore.upper_bound (tag_r); }
-      /** */
-      const_indexiterator requiresend(const std::string & tag_r) const
-      { return _requiresstore.upper_bound (tag_r); }
-
-      /** */
-      indexiterator conflictsend(const std::string & tag_r)
-      { return _conflictsstore.upper_bound (tag_r); }
-      /** */
-      const_indexiterator conflictsend(const std::string & tag_r) const
-      { return _conflictsstore.upper_bound (tag_r); }
-
-      /** */
-      nameiterator nameend(const std::string & tag_r)
-      { return _namestore.upper_bound (tag_r); }
-      /** */
-      const_nameiterator nameend(const std::string & tag_r) const
-      { return _namestore.upper_bound (tag_r); }
-
-      /** */
       void clear()
       { _store.clear();
-	_providesstore.clear();
-	_requiresstore.clear();
-	_conflictsstore.clear();
-	_namestore.clear();
+	_caphash.clear();
+	_namehash.clear();
 	return;
       }
 
@@ -187,10 +245,8 @@ namespace zypp
     public:
       /** */
       ContainerT _store;
-      IndexContainerT _providesstore;
-      IndexContainerT _requiresstore;
-      IndexContainerT _conflictsstore;
-      NameContainerT _namestore;
+      NameHash _namehash;
+      CapHash _caphash;
 
     public:
       ResPoolProxy proxy( ResPool self ) const

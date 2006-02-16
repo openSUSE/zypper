@@ -348,7 +348,7 @@ solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
 
 // establish state
 
-struct EstablishState : public resfilter::OnCapMatchCallbackFunctor
+struct EstablishState
 {
     Resolver & resolver;
 

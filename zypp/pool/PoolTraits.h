@@ -16,6 +16,9 @@
 #include <map>
 
 #include "zypp/PoolItem.h"
+#include "zypp/Capability.h"
+#include "zypp/CapAndItem.h"
+#include "zypp/Dep.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -59,17 +62,28 @@ namespace zypp
     {
     public:
       /** */
-      typedef PoolItem                   Item;
-      typedef std::set<Item>             ContainerT;
-      typedef std::multimap<std::string,std::pair<Capability,Item> > IndexContainerT;
-      typedef std::multimap<std::string,Item> NameContainerT;
-      typedef ContainerT::size_type      size_type;
-      typedef ContainerT::iterator       iterator;
-      typedef ContainerT::const_iterator const_iterator;
-      typedef IndexContainerT::iterator       indexiterator;
-      typedef IndexContainerT::const_iterator const_indexiterator;
-      typedef NameContainerT::iterator       nameiterator;
-      typedef NameContainerT::const_iterator const_nameiterator;
+      typedef PoolItem				Item;
+
+      /** pure items  */
+      typedef std::set<Item>				ItemContainerT;
+      typedef ItemContainerT::iterator			iterator;
+      typedef ItemContainerT::const_iterator		const_iterator;
+      typedef ItemContainerT::size_type			size_type;
+
+      /** hashed by name */
+							// use same iterators as above
+	// internal organization
+      typedef std::map<std::string,ItemContainerT>	NameItemContainerT;
+
+      /** hashed by capability index */
+      typedef std::list<CapAndItem>			CapItemContainerT;	// (why,who) pairs
+      typedef CapItemContainerT::iterator		capitemiterator;
+      typedef CapItemContainerT::const_iterator		const_capitemiterator;
+      typedef CapItemContainerT::size_type		capitemsize_type;
+
+	// internal organization
+      typedef std::map<std::string,CapItemContainerT>	CapItemStoreT;		// capability.index -> (why,who) pairs
+      typedef std::map<Dep,CapItemStoreT>		DepCapItemContainerT;	// Dep -> (capability.index -> (why,who) pairs)
 
       typedef PoolImpl                   Impl;
       typedef shared_ptr<PoolImpl>       Impl_Ptr;
