@@ -80,6 +80,22 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
+  /** Convert ResObject::Ptr into Ptr of a certain Kind.
+   * \return \c NULL iff \a p is \c NULL or points to a Resolvable
+   * not of the specified Kind.
+   * \relates ResObject
+   * \code
+   * asKind<Package>(resPtr);
+   * \endcode
+  */
+  template<class _Res>
+    inline typename ResTraits<_Res>::PtrType asKind( const ResObject::Ptr & p )
+    { return dynamic_pointer_cast<_Res>(p); }
+
+  template<class _Res>
+    inline typename ResTraits<_Res>::constPtrType asKind( const ResObject::constPtr & p )
+    { return dynamic_pointer_cast<const _Res>(p); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
