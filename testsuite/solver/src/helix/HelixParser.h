@@ -99,7 +99,7 @@ class HelixParser
     CapSet suggests;
     CapSet freshens;
     CapSet enhances;
-    CapSet extends;
+    CapSet supplements;
 
   private:
     // these point to one of the Dependency sets during dependency parsing
