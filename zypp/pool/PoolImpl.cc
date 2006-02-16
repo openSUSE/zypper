@@ -67,20 +67,20 @@ namespace zypp
     NameHash::ItemContainerT & NameHash::getItemContainer( const std::string & tag_r )
 	{ ContainerT::iterator it = _store.find( tag_r );
 	  if (it == _store.end()) {
-XXX << "item container for " << tag_r << " not found" << endl;
+//XXX << "item container for " << tag_r << " not found" << endl;
 	    return _empty;
 	  }
-XXX << "item container for " << tag_r << " contains " << it->second.size() << " items" << endl;
+//XXX << "item container for " << tag_r << " contains " << it->second.size() << " items" << endl;
 	  return it->second;
 	}
 
     const NameHash::ItemContainerT & NameHash::getConstItemContainer( const std::string & tag_r ) const
 	{ ContainerT::const_iterator it = _store.find( tag_r );
 	  if (it == _store.end()) {
-XXX << "const item container for " << tag_r << " not found" << endl;
+//XXX << "const item container for " << tag_r << " not found" << endl;
 	    return _empty;
 	  }
-XXX << "const item container for " << tag_r << " contains " << it->second.size() << " items" << endl;
+//XXX << "const item container for " << tag_r << " contains " << it->second.size() << " items" << endl;
 	  return it->second;
 	}
 
@@ -148,10 +148,10 @@ XXX << "const item container for " << tag_r << " contains " << it->second.size()
       { static CapItemStoreT capitemstore;
 	ContainerT::const_iterator it = store().find( cap_r );
 	if (it == store().end()) {
-XXX << "CapItemStoreT for " << cap_r << " not found" << endl;
+//XXX << "CapItemStoreT for " << cap_r << " not found" << endl;
 	    return capitemstore;
 	}
-XXX << "CapItemStoreT for " << cap_r << " contains " << it->second.size() << " items" << endl;
+//XXX << "CapItemStoreT for " << cap_r << " contains " << it->second.size() << " items" << endl;
 	return it->second;
       }
 
@@ -160,11 +160,11 @@ XXX << "CapItemStoreT for " << cap_r << " contains " << it->second.size() << " i
       { static CapItemContainerT captemcontainer;
 	CapItemStoreT::const_iterator it = cis.find( tag_r );
 	if (it == cis.end()) {
-XXX << "CapItemContainerT for " << tag_r << " not found" << endl;
+//XXX << "CapItemContainerT for " << tag_r << " not found" << endl;
 	    return captemcontainer;
 	}
-XXX << "CapItemContainerT for " << tag_r << " contains " << it->second.size() << " items" << endl;
-for (CapItemContainerT::const_iterator cai = it->second.begin(); cai != it->second.end(); ++cai) XXX << *cai << endl;
+//XXX << "CapItemContainerT for " << tag_r << " contains " << it->second.size() << " items" << endl;
+//for (CapItemContainerT::const_iterator cai = it->second.begin(); cai != it->second.end(); ++cai) XXX << *cai << endl;
 	return it->second;
       }
 
