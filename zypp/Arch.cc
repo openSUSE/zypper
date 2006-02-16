@@ -11,6 +11,7 @@
 */
 #include <iostream>
 #include <set>
+#include <map>
 
 #include "zypp/Arch.h"
 
@@ -167,7 +168,28 @@ namespace zypp
   //
   Arch::Arch( const std::string & rhs )
   : _value( rhs )
-  {}
+  , _score( 0 )
+  {
+      static map<string,int> arch_scores;
+      if (arch_scores.empty()) {
+	arch_scores["noarch"] = 0;
+	arch_scores["src"] = 0;
+	arch_scores["i386"] = 1;
+	arch_scores["i486"] = 2;
+	arch_scores["i586"] = 3;
+	arch_scores["i686"] = 4;
+	arch_scores["athlon"] = 4;
+	arch_scores["x86_64"] = 5;
+	arch_scores["ia64"] = 1;
+	arch_scores["ppc"] = 1;
+	arch_scores["ppc64"] = 2;
+	arch_scores["s390"] = 1;
+	arch_scores["s390x"] = 2;
+      };
+      map<string,int>::const_iterator it = arch_scores.find( rhs );
+      if (it != arch_scores.end())
+	_score = it->second;
+  }
 
   ///////////////////////////////////////////////////////////////////
   //

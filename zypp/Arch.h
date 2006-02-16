@@ -53,11 +53,12 @@ namespace zypp
      * \todo Adjust logical operators below to follow compare.
     */
     int compare( const Arch & rhs ) const
-    { return _value.compare( rhs._value ); }
+    { return (_score < rhs._score) ? -1 : ((_score > rhs._score ) ? 1 : 0); }
 
   private:
     /** String representation of Arch. */
     std::string _value;
+    int _score;
   };
   ///////////////////////////////////////////////////////////////////
 
