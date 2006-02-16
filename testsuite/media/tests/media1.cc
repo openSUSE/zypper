@@ -73,14 +73,21 @@ int main(void)
   try
   {
 
-    //id = mm.open(zypp::Url("cd:"));
-    id = mm.open(zypp::Url("http://download.opensuse.org/distribution/SL-OSS-factory/inst-source/"));
+    //id = mm.open(zypp::Url("cd:/"), "");
+    id = mm.open(zypp::Url("http://ftp.opensuse.org/pub/opensuse/distribution/SL-OSS-factory/inst-source/"), "");
 
     mm.addVerifier( id, verifier);
 
     mm.attach(id);
 
     mm.provideFile(id, Pathname("/directory.yast"));
+
+    mm.release(id);
+
+    mm.attach(id);
+
+    mm.provideFile(id, Pathname("/directory.yast"));
+
   }
   catch(const MediaException &e)
   {
