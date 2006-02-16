@@ -277,13 +277,21 @@ namespace zypp
 
   // -----------------------------------------------------------------
   Url::Url(const std::string &encodedUrl)
-    : m_impl( parseUrl(encodedUrl))
+    : m_impl()
   {
-    if( !m_impl)
+    if( encodedUrl.empty())
     {
-      ZYPP_THROW(url::UrlParsingException(
-        "Unable to parse Url components"
-      ));
+      m_impl.reset( new UrlBase());
+    }
+    else
+    {
+      m_impl = parseUrl(encodedUrl);
+      if( !m_impl)
+      {
+        ZYPP_THROW(url::UrlParsingException(
+          "Unable to parse Url components"
+        ));
+      }
     }
   }
 
@@ -292,14 +300,21 @@ namespace zypp
   Url&
   Url::operator = (const std::string &encodedUrl)
   {
-    UrlRef  url( parseUrl(encodedUrl));
-    if( !url)
+    if( encodedUrl.empty())
     {
-      ZYPP_THROW(url::UrlParsingException(
-        "Unable to parse Url components"
-      ));
+      m_impl.reset( new UrlBase());
     }
-    m_impl = url;
+    else
+    {
+      UrlRef url( parseUrl(encodedUrl));
+      if( !url)
+      {
+        ZYPP_THROW(url::UrlParsingException(
+          "Unable to parse Url components"
+        ));
+      }
+      m_impl = url;
+    }
     return *this;
   }
 
