@@ -396,7 +396,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	if (_soft) goto finished;			// don't care for soft requires
 
-	_DEBUG( "Unfulfilled requirement, try different solution");
+	_DEBUG( "Unfulfilled requirement '" << _capability << "'. trying different solution");
 
 	QueueItemUninstall_Ptr uninstall_item = NULL;
 	QueueItemBranch_Ptr branch_item = NULL;
