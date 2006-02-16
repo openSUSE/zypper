@@ -57,7 +57,7 @@ std::string toXML( const Edition &edition )
 {
   stringstream out;
   // sad the yum guys did not acll it edition
-  out << "<version ver=\"" << edition.version() << "\" rel=\"" << edition.release() << "\"/>";
+  out << "<version ver=\"" << xml_escape(edition.version()) << "\" rel=\"" << xml_escape(edition.release()) << "\"/>";
   return out.str();
 }
 
@@ -65,7 +65,7 @@ template<> // or constPtr?
 std::string toXML( const Arch &arch )
 {
   stringstream out;
-  out << xml_tag_enclose(arch.asString(), "arch");
+  out << xml_tag_enclose(xml_escape(arch.asString()), "arch");
   return out.str();
 }
 
@@ -121,7 +121,7 @@ std::string toXML( const Resolvable::constPtr &obj )
 {
   stringstream out;
 
-  out << "  <name>" << obj->name() << "</name>" << std::endl;
+  out << "  <name>" << xml_escape(obj->name()) << "</name>" << std::endl;
   // is this shared? uh
   out << "  " << toXML(obj->edition()) << std::endl;
   out << "  " << toXML(obj->arch()) << std::endl;
@@ -151,12 +151,12 @@ std::string toXML( const Script::constPtr &obj )
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
   out << "  <do>" << std::endl;
-  out << "      " << obj->do_script() << std::endl;
+  out << "      " << xml_escape(obj->do_script()) << std::endl;
   out << "  </do>" << std::endl;
   if ( obj->undo_available() )
   {
     out << "  <undo>" << std::endl;
-    out << "      " << obj->undo_script() << std::endl;
+    out << "      " << xml_escape(obj->undo_script()) << std::endl;
     out << "  </undo>" << std::endl;
   }
   out << "</script>" << std::endl;
@@ -170,7 +170,7 @@ std::string toXML( const Message::constPtr &obj )
   out << "<message>" << std::endl;
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
-  out << "  <text>" << obj->text() << "</text>" << std::endl;
+  out << "  <text>" << xml_escape(obj->text().text()) << "</text>" << std::endl;
   out << "</message>" << std::endl;
   return out.str();
 }
@@ -202,12 +202,12 @@ std::string toXML( const Selection::constPtr &obj )
   out << "  xmlns:yum=\"http://linux.duke.edu/metadata/common\"" << std::endl;
   out << "  xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\"" << std::endl;
   out << "  xmlns:suse=\"http://novell.com/package/metadata/suse/common\">" << std::endl;
-  out << "  <name>" << obj->name() << "</name>" << std::endl;
-  out << "  <summary>" << obj->summary() << "</summary>" << std::endl;
+  out << "  <name>" << xml_escape(obj->name()) << "</name>" << std::endl;
+  out << "  <summary>" << xml_escape(obj->summary()) << "</summary>" << std::endl;
   //out << "  <summary lang='en.US'>foobar</summary>" << std::endl;
   //out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << std::endl;
   out << "  <uservisible>" << (obj->visible() ? "true" : "false" ) << "</uservisible>" << std::endl;
-  out << "  <category>" << obj->category() << "</category>" << std::endl;
+  out << "  <category>" << xml_escape(obj->category()) << "</category>" << std::endl;
   out << toXML(obj->deps()) << std::endl;
   out << "</pattern>" << std::endl;
   return out.str();
@@ -223,14 +223,14 @@ std::string toXML( const Pattern::constPtr &obj )
   out << "  xmlns:yum=\"http://linux.duke.edu/metadata/common\"" << std::endl;
   out << "  xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\"" << std::endl;
   out << "  xmlns:suse=\"http://novell.com/package/metadata/suse/common\">" << std::endl;
-  out << "  <name>" << obj->name() << "</name>" << std::endl;
-  out << "  <summary>" << obj->summary() << "</summary>" << std::endl;
+  out << "  <name>" << xml_escape(obj->name()) << "</name>" << std::endl;
+  out << "  <summary>" << xml_escape(obj->summary()) << "</summary>" << std::endl;
   //out << "  <summary lang='en.US'>foobar</summary>" << std::endl;
   out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << std::endl;
   out << "  <uservisible>" << (obj->userVisible() ? "true" : "false" ) << "</uservisible>" << std::endl;
-  out << "  <category>" << obj->category() << "</category>" << std::endl;
-  out << "  <icon>" << obj->icon() << "</icon>" << std::endl;
-  out << "  <script>" << obj->script() << "</script>" << std::endl;
+  out << "  <category>" << xml_escape(obj->category()) << "</category>" << std::endl;
+  out << "  <icon>" << xml_escape(obj->icon().asString()) << "</icon>" << std::endl;
+  out << "  <script>" << xml_escape(obj->script().asString()) << "</script>" << std::endl;
   //out << "  <description lang='cs.CZ'>This is my pattern, it is soooooooo coool!</description>" << std::endl;
   //out << "  <description lang='en.US'>Duh</description>" << std::endl;
   out << toXML(obj->deps()) << std::endl;
@@ -249,13 +249,13 @@ std::string toXML( const Product::constPtr &obj )
   out << "    xmlns:yum=\"http://linux.duke.edu/metadata/common\" " << std::endl;
   out << "    xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\" " << std::endl;
   out << "    xmlns:suse=\"http://novell.com/package/metadata/suse/common\"" << std::endl;
-  out << "    type=\"" << obj->category() << "\">" << std::endl;
-  out << "  <vendor>" << obj->vendor() << "</vendor>" << std::endl;
-  out << "  <suse:source>" << obj->source().alias() << "</suse:source>" << std::endl;
+  out << "    type=\"" << xml_escape(obj->category()) << "\">" << std::endl;
+  out << "  <vendor>" << xml_escape(obj->vendor()) << "</vendor>" << std::endl;
+  out << "  <suse:source>" << xml_escape(obj->source().alias()) << "</suse:source>" << std::endl;
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
   #warning "FIXME description and displayname of products"
-  out << "  <displayname lang=\"en\">" << obj->displayName() << "</displayname>" << std::endl;
-  out << "  <suse:release-notes-url>" << obj->releaseNotesUrl() << "</suse:release-notes-url>" << std::endl;
+  out << "  <displayname>" << xml_escape(obj->displayName()) << "</displayname>" << std::endl;
+  out << "  <suse:release-notes-url>" << xml_escape(obj->releaseNotesUrl().asString()) << "</suse:release-notes-url>" << std::endl;
   out << "  <description></description>" << std::endl;
   out << "</product>" << std::endl;
 
@@ -320,7 +320,7 @@ std::string toXML( const Patch::constPtr &obj )
   out << "    xmlns:yum=\"http://linux.duke.edu/metadata/common\"" << std::endl; 
   out << "    xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\"" << std::endl;
   out << "    xmlns:suse=\"http://novell.com/package/metadata/suse/common\"" << std::endl;
-  out << "    patchid=\"" << obj->id() << "\"" << std::endl;
+  out << "    patchid=\"" << xml_escape(obj->id()) << "\"" << std::endl;
   out << "    timestamp=\"" << obj->timestamp().asSeconds() << "\"" << std::endl;
   out << "    engine=\"1.0\">" << std::endl;
   // reuse Resolvable information serialize function
@@ -346,12 +346,12 @@ std::string toXML( const PersistentStorage::SourceData &obj )
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
   out << "<source-cache  xmlns=\"http://novell.com/package/metadata/suse/source-cache\">" << std::endl;
-  out << "  <enabled>" << obj.enabled << "</enabled>" << std::endl;
-  out << "  <auto-refresh>" << obj.autorefresh << "</auto-refresh>" << std::endl;
-  out << "  <product-dir>" << obj.product_dir << "</product-dir>" << std::endl;
-  out << "  <type>" << obj.type << "</type>" << std::endl;
-   out << "  <url>" << obj.url << "</url>" << std::endl;
-   out << "  <alias>" << obj.alias << "</alias>" << std::endl;
+  out << "  <enabled>" << (obj.enabled ? "true" : "false" ) << "</enabled>" << std::endl;
+  out << "  <auto-refresh>" << ( obj.autorefresh ? "true" : "false" ) << "</auto-refresh>" << std::endl;
+  out << "  <product-dir>" << xml_escape(obj.product_dir) << "</product-dir>" << std::endl;
+  out << "  <type>" << xml_escape(obj.type) << "</type>" << std::endl;
+   out << "  <url>" << xml_escape(obj.url) << "</url>" << std::endl;
+   out << "  <alias>" << xml_escape(obj.alias) << "</alias>" << std::endl;
   out << "</source-cache>" << std::endl;
   return out.str();
 }
