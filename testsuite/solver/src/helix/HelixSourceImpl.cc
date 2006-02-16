@@ -104,6 +104,7 @@ HelixSourceImpl::createDependencies (const HelixParser & parsed)
     deps[Dep::SUGGESTS] = parsed.suggests;
     deps[Dep::FRESHENS] = parsed.freshens;
     deps[Dep::ENHANCES] = parsed.enhances;
+    deps[Dep::EXTENDS] = parsed.extends;
 
     return deps;
 }

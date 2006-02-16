@@ -471,6 +471,7 @@ HelixParser::toplevelStart(const std::string & token, const xmlChar **attrs)
 	suggests.clear();
 	freshens.clear();
 	enhances.clear();
+	extends.clear();
 
     }
     else {
@@ -546,6 +547,10 @@ HelixParser::resolvableStart(const std::string & token, const xmlChar **attrs)
     else if (token == "enhances") {
 	_state = PARSER_DEP;
 	_dep_set = _toplevel_dep_set = &enhances;
+    }
+    else if (token == "extends") {
+	_state = PARSER_DEP;
+	_dep_set = _toplevel_dep_set = &extends;
     }
     else {
 //	_XXX("HelixParser") << "! Not handling " << token << " in package start" << endl;
