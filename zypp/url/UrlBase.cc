@@ -243,8 +243,15 @@ namespace zypp
       config("safe_querystr",   "~!$&'()*+=,:;@/?");
       config("safe_fragment",   "~!$&'()*+=,:;@/?");
 
+      // y=yes (allowed)
+      // n=no  (disallowed, exception if !empty)
       config("with_authority",  "y");
-      config("require_scheme",  "y");
+
+      // y=yes (required but don't throw if empty)
+      // n=no  (not required, ignore if empty)
+      // m=mandatory (exception if empty)
+      config("require_host",    "n");
+      config("require_pathname","n");
 
       config("rx_username",     "^([a-zA-Z0-9!$&'\\(\\)*+=,;~\\._-]|%[a-fA-F0-9]{2})+$");
       config("rx_password",     "^([a-zA-Z0-9!$&'\\(\\)*+=,:;~\\._-]|%[a-fA-F0-9]{2})+$");
@@ -351,7 +358,7 @@ namespace zypp
       catch( ... )
       {}
 
-      if((scheme.empty() && config("require_scheme") != "y") || valid)
+      if(valid)
       {
         std::string    lscheme( str::toLower(scheme));
         UrlSchemes     schemes( getKnownSchemes());
@@ -374,7 +381,31 @@ namespace zypp
     bool
     UrlBase::isValid() const
     {
-      return !getScheme().empty();
+      /*
+      ** scheme is the only mandatory component
+      ** for all url's and is already verified,
+      ** (except for empty Url instances), so
+      ** Url with empty scheme is never valid.
+      */
+      if( getScheme().empty())
+        return false;
+
+      std::string host( getHost(zypp::url::E_ENCODED));
+      if( host.empty() && config("require_host")     != "n")
+        return false;
+
+      std::string path( getPathName(zypp::url::E_ENCODED));
+      if( path.empty() && config("require_pathname") != "n")
+        return false;
+
+      /*
+      ** path has to begin with "/" if authority avaliable
+      ** if host is set after the pathname, we can't throw
+      */
+      if( !host.empty() && !path.empty() && path.at(0) != '/')
+        return false;
+
+      return true;
     }
 
 
@@ -946,6 +977,12 @@ namespace zypp
     {
       if( host.empty())
       {
+        if(config("require_host") == "m")
+        {
+          ZYPP_THROW(UrlNotAllowedException(
+            std::string("Url scheme requires a host")
+          ));
+        }
         m_data->host = host;
       }
       else
@@ -976,9 +1013,6 @@ namespace zypp
           m_data->host = zypp::url::encode(
             temp, config("safe_hostname")
           );
-
-          temp = getPathName(zypp::url::E_DECODED);
-          setPathName( temp, zypp::url::E_DECODED);
         }
         else
         {
@@ -1028,6 +1062,12 @@ namespace zypp
     {
       if( path.empty())
       {
+        if(config("require_pathname") == "m")
+        {
+          ZYPP_THROW(UrlNotAllowedException(
+            std::string("Url scheme requires path name")
+          ));
+        }
         m_data->pathname = path;
       }
       else
