@@ -112,41 +112,57 @@ namespace zypp
       media::MediaAccessId _media;
       do {
         try {
+	  DBG << "Going to try provide file " << file_r << " from " << media_nr << endl;
 	  _media = _media_set->getMediaAccessId(media_nr); // in case of redirect
 	  media_mgr.provideFile (_media, file_r, cached, checkonly);
 	  break;
         }
 	catch ( Exception & excp )
         {
-	  media::MediaChangeReport::Action user
-	    = checkonly ? media::MediaChangeReport::ABORT :
+	    media::MediaChangeReport::Action user;
+  	  do {
+	    user  = checkonly ? media::MediaChangeReport::ABORT :
 	      report->requestMedia (
 		source_factory.createFrom(this),
 		media_nr,
 		media::MediaChangeReport::WRONG, // FIXME: proper error
 		excp.msg()
-	    );
+	      );
 
-	  DBG << "ProvideFile exception caught, callback answer: " << user << endl;
+	    DBG << "ProvideFile exception caught, callback answer: " << user << endl;
 	  
-	  if( user == media::MediaChangeReport::ABORT )
-	  {
-	    ZYPP_RETHROW ( excp );
-	  }
-	  else if ( user == media::MediaChangeReport::EJECT )
-	  {
-	    media_mgr.release (_media, true);
-	    // FIXME: this will not work, probably
-	  }
-	  else if ( user == media::MediaChangeReport::CHANGE_URL )
-	  {
-	    // retry
-	    break;
-	  }
-	  else {
-	    ZYPP_RETHROW ( excp );
-	  }
+	    if( user == media::MediaChangeReport::ABORT )
+	    {
+	      DBG << "Aborting" << endl;
+	      ZYPP_RETHROW ( excp );
+	    }
+	    else if ( user == media::MediaChangeReport::EJECT )
+	    {
+	      DBG << "Eject: try to release" << endl;
+
+	      media_mgr.release (_media, true);
+	      // FIXME: this will not work, probably
+	    }
+	    else if ( user == media::MediaChangeReport::RETRY  ||
+	    user == media::MediaChangeReport::CHANGE_URL )
+	    {
+	      // retry
+	      DBG << "Going to release and attach again" << endl;
+	    
+	      media_mgr.release (_media, false);
+	      media_mgr.attach( _media );
+
+	      break;
+	    }
+	    else {
+	      DBG << "Don't know, let's ABORT" << endl;
+
+    	      ZYPP_RETHROW ( excp );
+	    }
+          } while( user == media::MediaChangeReport::EJECT );
         }
+
+	// retry or change URL
       } while( true );
 
       return media_mgr.localPath(_media, file_r);
