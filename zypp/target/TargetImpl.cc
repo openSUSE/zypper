@@ -256,6 +256,8 @@ namespace zypp
           }
           else
           {
+	    bool success = true;
+
             RpmRemovePackageReceiver progress(it->resolvable());
             progress.connect();
             try {
@@ -264,10 +266,18 @@ namespace zypp
             catch (Exception & excpt_r) {
               ZYPP_CAUGHT(excpt_r);
               WAR << "Remove failed, retrying with --nodeps" << endl;
-              rpm().removePackage(p, rpm::RpmDb::RPMINST_NODEPS);
+	      try {
+		rpm().removePackage(p, rpm::RpmDb::RPMINST_NODEPS);
+	      }
+	      catch (Exception & excpt_r) {
+		ZYPP_CAUGHT(excpt_r);
+		success = false;
+	      }
             }
+	    if (success) {
+	      it->status().setStatus( ResStatus::uninstalled );
+	    }
             progress.disconnect();
-            it->status().setStatus( ResStatus::uninstalled );
           }
         }
         else // other resolvables
