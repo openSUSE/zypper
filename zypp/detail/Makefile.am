@@ -20,7 +20,6 @@ detailinclude_HEADERS = \
 	ScriptImplIf.h		\
 	PatchImplIf.h		\
 	ProductImplIf.h		\
-
 	\
 	\
 	\
