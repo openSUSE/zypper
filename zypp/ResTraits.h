@@ -29,6 +29,7 @@ namespace zypp
   class Patch;
   class Script;
   class Message;
+  class Language;
 
   class System;
 

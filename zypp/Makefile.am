@@ -22,6 +22,7 @@ pkginclude_HEADERS = NeedAType.h \
 	Dep.h		\
 	Dependencies.h	\
 	Edition.h	\
+	Language.h	\
 	LanguageCode.h	\
 	Locale.h	\
 	NVR.h		\
@@ -99,6 +100,7 @@ lib@PACKAGE@_la_SOURCES = \
 	Dep.cc		\
 	Dependencies.cc	\
 	Edition.cc	\
+	Language.cc	\
 	Locale.cc	\
 	NVR.cc		\
 	NVRA.cc		\

@@ -6,36 +6,30 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/ResTraits.cc
+/** \file	zypp/detail/LanguageImplIf.cc
  *
 */
+#include "zypp/detail/LanguageImplIf.h"
+#include <iostream>
 
-#include "zypp/ResTraits.h"
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
+  namespace detail
+  { /////////////////////////////////////////////////////////////////
 
-  template<>
-    const ResolvableTraits::KindType ResTraits<Package>  ::kind( "Package" );
-  template<>
-    const ResolvableTraits::KindType ResTraits<Selection>::kind( "Selection" );
-  template<>
-    const ResolvableTraits::KindType ResTraits<Pattern>  ::kind( "Pattern" );
-  template<>
-    const ResolvableTraits::KindType ResTraits<Product>  ::kind( "Product" );
-  template<>
-    const ResolvableTraits::KindType ResTraits<Patch>    ::kind( "Patch" );
-  template<>
-    const ResolvableTraits::KindType ResTraits<Script>   ::kind( "Script" );
-  template<>
-    const ResolvableTraits::KindType ResTraits<Message>  ::kind( "Message" );
-  template<>
-    const ResolvableTraits::KindType ResTraits<Language> ::kind( "Language" );
+    /////////////////////////////////////////////////////////////////
+    // Default implementation of LanguageImplIf attributes,
+    // as far as reasonable.
+    /////////////////////////////////////////////////////////////////
 
-  template<>
-    const ResolvableTraits::KindType ResTraits<System>  ::kind( "System" );
 
+    /////////////////////////////////////////////////////////////////
+  } // namespace detail
+  ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

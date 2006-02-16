@@ -6,35 +6,40 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/ResTraits.cc
+/** \file	zypp/Language.cc
  *
 */
-
-#include "zypp/ResTraits.h"
+#include "zypp/Language.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  template<>
-    const ResolvableTraits::KindType ResTraits<Package>  ::kind( "Package" );
-  template<>
-    const ResolvableTraits::KindType ResTraits<Selection>::kind( "Selection" );
-  template<>
-    const ResolvableTraits::KindType ResTraits<Pattern>  ::kind( "Pattern" );
-  template<>
-    const ResolvableTraits::KindType ResTraits<Product>  ::kind( "Product" );
-  template<>
-    const ResolvableTraits::KindType ResTraits<Patch>    ::kind( "Patch" );
-  template<>
-    const ResolvableTraits::KindType ResTraits<Script>   ::kind( "Script" );
-  template<>
-    const ResolvableTraits::KindType ResTraits<Message>  ::kind( "Message" );
-  template<>
-    const ResolvableTraits::KindType ResTraits<Language> ::kind( "Language" );
+  IMPL_PTR_TYPE(Language);
 
-  template<>
-    const ResolvableTraits::KindType ResTraits<System>  ::kind( "System" );
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Language::Language
+  //	METHOD TYPE : Ctor
+  //
+  Language::Language( const NVRAD & nvrad_r )
+  : ResObject( TraitsType::kind, nvrad_r )
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : Language::~Language
+  //	METHOD TYPE : Dtor
+  //
+  Language::~Language()
+  {}
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	Language interface forwarded to implementation
+  //
+  ///////////////////////////////////////////////////////////////////
+
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
