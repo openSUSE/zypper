@@ -349,6 +349,9 @@ namespace zypp
       AttachedMedia
       findAttachedMedia(const MediaSourceRef &media) const;
 
+      void
+      forceMediaRelease(const MediaSourceRef &media);
+
     private:
       class  Impl;
       static zypp::RW_pointer<MediaManager::Impl> m_impl;

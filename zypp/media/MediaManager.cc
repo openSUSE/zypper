@@ -669,6 +669,26 @@ namespace zypp
       return AttachedMedia();
     }
 
+    // ---------------------------------------------------------------
+    void
+    MediaManager::forceMediaRelease(const MediaSourceRef &media)
+    {
+      MutexLock glock(g_Mutex);
+
+      if( !media || media->type.empty())
+        return;
+
+      ManagedMediaMap::iterator m(m_impl->mediaMap.begin());
+      for( ; m != m_impl->mediaMap.end(); ++m)
+      {
+        if( !m->second.handler->isAttached())
+          continue;
+
+        AttachedMedia ret = m->second.handler->attachedMedia();
+        if( ret.mediaSource && ret.mediaSource->equals( *media))
+            m->second.handler->release(false);
+      }
+    }
 
     //////////////////////////////////////////////////////////////////
   } // namespace media

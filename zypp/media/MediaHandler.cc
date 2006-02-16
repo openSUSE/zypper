@@ -101,9 +101,12 @@ MediaHandler::removeAttachPoint()
     return; // no cleanup if media still mounted!
   }
 
-  if ( _attachPoint.unique() &&
+  INT << "MediaHandler - checking if to remove attach point" << endl;
+//  if ( _attachPoint.unique() &&
+    if(_attachPoint.use_count() <= 2 &&
        _attachPoint->temp    &&
-       !_attachPoint->path.empty())
+       !_attachPoint->path.empty() &&
+       PathInfo(_attachPoint->path).isExist())
   {
     int res = recursive_rmdir( _attachPoint->path );
     if ( res == 0 ) {
@@ -112,6 +115,12 @@ MediaHandler::removeAttachPoint()
       ERR << "Failed to Delete default attach point " << _attachPoint->path
 	<< " errno(" << res << ")" << endl;
     }
+    //setAttachPoint("", true);
+  }
+  else
+  {
+    if( !_attachPoint->temp)
+      INT << "MediaHandler - attachpoint is not temporary" << endl;
   }
 }
 
@@ -371,25 +380,40 @@ void MediaHandler::release( bool eject )
 
   DBG << "Request to release attached media "
       << _mediaSource->asString()
-      << (_mediaSource.unique() ? ", unique" : ", not unique")
+      << ", use count=" << _mediaSource.use_count()
       << std::endl;
 
-  if( _mediaSource.unique())
+//  if( _mediaSource.unique())
+  if( _mediaSource.use_count() <= 2)
   {
     DBG << "Releasing media " << _mediaSource->asString() << std::endl;
     releaseFrom( eject ); // pass to concrete handler
+    _mediaSource.reset(NULL);
+    removeAttachPoint();
   }
   else if( eject) {
     //
     // Can't eject a shared media
     //
-    ZYPP_THROW(MediaIsSharedException(_mediaSource->asString()));
+    //ZYPP_THROW(MediaIsSharedException(_mediaSource->asString()));
+
+    MediaSourceRef media( new MediaSource(*_mediaSource));
+    _mediaSource.reset(NULL);
+
+    MediaManager manager;
+    manager.forceMediaRelease(media);
+
+    setMediaSource(media);
+    DBG << "Releasing media (forced) " << _mediaSource->asString() << std::endl;
+    releaseFrom( eject ); // pass to concrete handler
+    _mediaSource.reset(NULL);
+    removeAttachPoint();
   }
   else {
     DBG << "Releasing shared media reference only" << std::endl;
+    _mediaSource.reset(NULL);
+    //setAttachPoint("", true);
   }
-
-  _mediaSource.reset();
   MIL << "Released: " << *this << endl;
 }
 
