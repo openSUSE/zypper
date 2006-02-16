@@ -182,15 +182,28 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 	}
 
 	if (! (status.isToBeUninstalled() || status.isImpossible())
-	    && ! context->isParallelInstall (provider)
-	    && ! uniq.has(provider)
-	    && context->itemIsPossible (provider)
+	    && ! context->isParallelInstall( provider )
+	    && context->itemIsPossible( provider )
 #warning Locks not implemented
-//	    && ! pool->itemIsLocked (provider)
+//	    && ! pool->itemIsLocked( provider )
 	) {
 
-	    providers.push_front (provider);
-	    uniq.remember(provider);
+	    // if we already have same name and edition, check for better architecture
+
+	    if (uniq.has( provider )) {
+		for (PoolItemList::iterator it = providers.begin(); it != providers.end(); ++it) {
+		    PoolItemList::iterator next = it; ++next;
+		    if ((*it)->arch().compare( provider->arch() ) < 0) {		// new provider is better
+MIL << "replacing " << *it << " with " << provider << endl;
+			providers.erase( it );
+			providers.push_front( provider );
+		    } 
+		}
+	    }
+	    else {
+		providers.push_front( provider );
+		uniq.remember( provider );
+	    }
 	}
 
 	return true;
