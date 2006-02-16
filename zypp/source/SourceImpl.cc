@@ -266,19 +266,19 @@ namespace zypp
     std::ostream & SourceImpl::dumpOn( std::ostream & str ) const
     { return str << (_alias.empty() ? "SourceImpl" : _alias); }
 
-    SourceImpl::Verifier::Verifier(const std::string & vendor_r, const std::string & id_r)
+    SourceImpl::Verifier::Verifier(const std::string & vendor_r, const std::string & id_r, const media::MediaNr media_nr)
     : _media_vendor(vendor_r)
     , _media_id(id_r)
+    , _media_nr(media_nr)
     {}
 
     bool SourceImpl::Verifier::isDesiredMedia(const media::MediaAccessRef &ref)
     {
-      media::MediaNr mediaNr = 1; // FIXME!!
       if (_media_vendor.empty() || _media_id.empty())
 	return true;
 #warning TODO define what does missing media_id/media_vendor mean
 
-      Pathname media_file = "/media." + str::numstring(mediaNr) + "/media";
+      Pathname media_file = "/media." + str::numstring(_media_nr) + "/media";
       ref->provideFile (media_file);
       media_file = ref->localPath(media_file);
       std::ifstream str(media_file.asString().c_str());

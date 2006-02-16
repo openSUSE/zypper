@@ -254,7 +254,7 @@ namespace zypp
       {
       public:
 	/** ctor */
-	Verifier (const std::string & vendor_r, const std::string & id_r);
+	Verifier (const std::string & vendor_r, const std::string & id_r, const media::MediaNr media_nr = 1);
 	/*
 	 ** Check if the specified attached media contains
 	 ** the desired media number (e.g. SLES10 CD1).
@@ -265,6 +265,7 @@ namespace zypp
       private:
 	std::string _media_vendor;
 	std::string _media_id;
+	media::MediaNr _media_nr;
 	SourceImpl_Ptr _source;
       };
 

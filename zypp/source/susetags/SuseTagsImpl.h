@@ -62,6 +62,11 @@ namespace zypp
 
 	Pathname sourceDir( const NVRAD& nvrad );
 
+        /**
+         * Get media verifier for the specified media
+         */
+        virtual media::MediaVerifierRef verifier(media::MediaNr media_nr);
+
       protected:
         /** Stream output. */
         virtual std::ostream & dumpOn( std::ostream & str ) const;

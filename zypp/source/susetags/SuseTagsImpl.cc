@@ -267,6 +267,12 @@ namespace zypp
         return Pathname( "/suse/" + nvrad.arch.asString() + "/");
       }
 
+      media::MediaVerifierRef SuseTagsImpl::verifier(media::MediaNr media_nr)
+      {
+	  return media::MediaVerifierRef(
+	    new SourceImpl::Verifier (_vendor, _media_id, media_nr));
+      }
+
       unsigned SuseTagsImpl::numberOfMedia(void) const
       { return _media_count; }
 
