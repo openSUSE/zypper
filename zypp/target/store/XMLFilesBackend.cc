@@ -20,7 +20,8 @@
 
 #include "zypp/CapFactory.h"
 #include "zypp/Digest.h"
-
+#include "zypp/Source.h"
+#include "zypp/SourceManager.h"
 
 #include "zypp/target/store/xml/XMLPatchImpl.h"
 #include "zypp/target/store/xml/XMLMessageImpl.h"
@@ -159,7 +160,7 @@ bool
 XMLFilesBackend::isBackendInitialized() const
 {
   bool ok = true;
-  ok = ok && exists( ZYPP_DB_DIR );
+  ok = ok && exists( path(d->root.asString()) / ZYPP_DB_DIR );
   std::set<Resolvable::Kind>::const_iterator it_kinds;
   for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
   {
@@ -566,6 +567,18 @@ XMLFilesBackend::createProduct( const zypp::parser::yum::YUMProductData & parsed
       impl->_release_notes_url = parsed.releasenotesurl;
     else
       impl->_release_notes_url = Url();
+
+    //unsigned int sourceid = str::strtonum<unsigned int>(parsed.sourceid);
+    std::string sourceid = parsed.sourceid;
+    try
+    {
+      impl->_source = SourceManager::sourceManager()->findSource(sourceid);
+    }
+    catch (const Exception & excpt_r)
+    {
+      ZYPP_CAUGHT(excpt_r);
+      impl->_source = Source_Ref::noSource;
+    }
 
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch, createDependencies(parsed, ResTraits<Product>::kind) );

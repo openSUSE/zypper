@@ -17,6 +17,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/CapFactory.h"
+#include "zypp/Source.h"
 
 #include "serialize.h"
 #include "xml_escape_parser.hpp"
@@ -250,10 +251,11 @@ std::string toXML( const Product::constPtr &obj )
   out << "    xmlns:suse=\"http://novell.com/package/metadata/suse/common\"" << std::endl;
   out << "    type=\"" << obj->category() << "\">" << std::endl;
   out << "  <vendor>" << obj->vendor() << "</vendor>" << std::endl;
+  out << "  <suse:source>" << obj->source().alias() << "</suse:source>" << std::endl;
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
   #warning "FIXME description and displayname of products"
   out << "  <displayname lang=\"en\">" << obj->displayName() << "</displayname>" << std::endl;
-  out << "  <release-notes-url>" << obj->releaseNotesUrl() << "</release-notes-url>" << std::endl;
+  out << "  <suse:release-notes-url>" << obj->releaseNotesUrl() << "</suse:release-notes-url>" << std::endl;
   out << "  <description></description>" << std::endl;
   out << "</product>" << std::endl;
 

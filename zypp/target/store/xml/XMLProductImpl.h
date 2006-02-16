@@ -12,6 +12,7 @@
 #ifndef ZYPP_STORAGE_XMLPRODUCTIMPL_H
 #define ZYPP_STORAGE_XMLPRODUCTIMPL_H
 
+#include "zypp/Source.h"
 #include "zypp/detail/ProductImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -42,6 +43,7 @@ namespace zypp
       Url _release_notes_url;
       TranslatedText _displayname;
       TranslatedText _description;
+      Source_Ref _source;
     };
     ///////////////////////////////////////////////////////////////////
 
