@@ -170,11 +170,6 @@ namespace zypp
         // don't show empty authority
         ref->setViewOptions( zypp::url::ViewOption::DEFAULTS -
                              zypp::url::ViewOption::EMPTY_AUTHORITY);
-        ref->config("rx_username",      "");  // disallow username
-        ref->config("rx_password",      "");  // disallow password
-        // FIXME: hmm... also host+port?
-        addUrlByScheme("nfs",    ref);
-
         ref->config("with_authority"    "n");   // disallow host & port
         addUrlByScheme("mailto", ref);
         addUrlByScheme("urn",    ref);
