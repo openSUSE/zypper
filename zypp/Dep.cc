@@ -39,7 +39,7 @@ namespace zypp
           _table["suggests"]    = Dep::SUGGESTS_e;
           _table["freshens"]    = Dep::FRESHENS_e;
           _table["enhances"]    = Dep::ENHANCES_e;
-          _table["extends"]	= Dep::EXTENDS_e;
+          _table["supplements"]	= Dep::SUPPLEMENTS_e;
         }
 
       std::map<std::string,Dep::for_use_in_switch>::const_iterator it
@@ -63,7 +63,7 @@ namespace zypp
   const Dep Dep::SUGGESTS   ( Dep::SUGGESTS_e );
   const Dep Dep::FRESHENS   ( Dep::FRESHENS_e );
   const Dep Dep::ENHANCES   ( Dep::ENHANCES_e );
-  const Dep Dep::EXTENDS    ( Dep::EXTENDS_e );
+  const Dep Dep::SUPPLEMENTS( Dep::SUPPLEMENTS_e );
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -94,7 +94,7 @@ namespace zypp
         _table[SUGGESTS_e]    = "suggests";
         _table[FRESHENS_e]    = "freshens";
         _table[ENHANCES_e]    = "enhances";
-        _table[EXTENDS_e]     = "extends";
+        _table[SUPPLEMENTS_e] = "supplements";
       }
     return _table[_type];
   }

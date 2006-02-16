@@ -48,7 +48,7 @@ namespace zypp
     static const Dep SUGGESTS;
     static const Dep FRESHENS;
     static const Dep ENHANCES;
-    static const Dep EXTENDS;
+    static const Dep SUPPLEMENTS;
     //@}
 
     /** Enumarators provided \b only for use \ref inSwitch statement.
@@ -64,7 +64,7 @@ namespace zypp
       SUGGESTS_e,
       FRESHENS_e,
       ENHANCES_e,
-      EXTENDS_e,
+      SUPPLEMENTS_e,
     };
 
     /** Ctor from string.

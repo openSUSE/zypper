@@ -116,7 +116,7 @@ XXX << "const item container for " << tag_r << " contains " << it->second.size()
       storeInsert( _store, item_r, Dep::CONFLICTS );
       storeInsert( _store, item_r, Dep::OBSOLETES );
       storeInsert( _store, item_r, Dep::FRESHENS );
-      storeInsert( _store, item_r, Dep::EXTENDS );
+      storeInsert( _store, item_r, Dep::SUPPLEMENTS );
     }
 
     static void
@@ -141,7 +141,7 @@ XXX << "const item container for " << tag_r << " contains " << it->second.size()
       storeDelete( _store, item_r, Dep::CONFLICTS );
       storeDelete( _store, item_r, Dep::OBSOLETES );
       storeDelete( _store, item_r, Dep::FRESHENS );
-      storeDelete( _store, item_r, Dep::EXTENDS );
+      storeDelete( _store, item_r, Dep::SUPPLEMENTS );
     }
 
       const CapHash::CapItemStoreT & CapHash::capItemStore ( Dep cap_r ) const
