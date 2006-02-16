@@ -418,14 +418,7 @@ namespace zypp
        *
        * To include a password in the resulting Url string, use:
        * \code
-       *    url.asString(url::ViewOptions() +
-       *                 url::ViewOptions::WITH_PASSWORD);
-       * \endcode
-       *
-       * or its equivalent:
-       *
-       * \code
-       *    url.asString(url::ViewOptions::DEFAULTS +
+       *    url.asString(url.getViewOptions() +
        *                 url::ViewOptions::WITH_PASSWORD);
        * \endcode
        *
