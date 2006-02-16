@@ -724,6 +724,19 @@ namespace zypp
     m_impl->setQueryParam(param, value);
   }
 
+  // -----------------------------------------------------------------
+  ViewOptions
+  Url::getViewOptions() const
+  {
+    return m_impl->getViewOptions();
+  }
+
+  // -----------------------------------------------------------------
+  void
+  Url::setViewOptions(const ViewOptions &vopts)
+  {
+    m_impl->setViewOptions(vopts);
+  }
 
   // -----------------------------------------------------------------
   std::ostream & operator<<( std::ostream & str, const Url & url )

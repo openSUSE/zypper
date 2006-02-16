@@ -276,14 +276,7 @@ namespace zypp
      *
      * To include a password in the resulting Url string, use:
      * \code
-     *    url.asString(url::ViewOptions() +
-     *                 url::ViewOptions::WITH_PASSWORD);
-     * \endcode
-     *
-     * or its equivalent:
-     *
-     * \code
-     *    url.asString(url::ViewOptions::DEFAULTS +
+     *    url.asString(url.getViewOptions() +
      *                 url::ViewOptions::WITH_PASSWORD);
      * \endcode
      *
@@ -737,6 +730,29 @@ namespace zypp
     setFragment(const std::string &fragment,
                 EEncoding         eflag = zypp::url::E_DECODED);
 
+
+    // -----------------
+    /**
+     * Return the view options of the current object.
+     *
+     * This method is used to query the view options
+     * used by the asString() method.
+     *
+     * \return The current view option combination.
+     */
+    ViewOptions
+    getViewOptions() const;
+
+    /**
+     * Change the view options of the current object.
+     *
+     * This method is used to change the view options
+     * used by the asString() method.
+     *
+     * \param vopts New view options combination.
+     */
+    void
+    setViewOptions(const ViewOptions &vopts);
 
   private:
     url::UrlRef m_impl;
