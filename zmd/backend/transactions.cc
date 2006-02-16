@@ -43,6 +43,41 @@ typedef std::set<PoolItem> PoolItemSet;
 
 //-----------------------------------------------------------------------------
 
+struct CopyTransaction
+{
+    ResObject::constPtr _obj;
+    PackageOpType _action;
+
+    CopyTransaction( ResObject::constPtr obj, PackageOpType action )
+	: _obj( obj )
+	, _action( action )
+    { }
+
+    bool operator()( PoolItem_Ref item )
+    {
+	if (item.resolvable() == _obj)
+	{
+	    switch (_action) {
+		case PACKAGE_OP_REMOVE:
+		    item.status().setToBeUninstalled(ResStatus::USER);
+		    break;
+		case PACKAGE_OP_INSTALL:
+		    item.status().setToBeInstalled(ResStatus::USER);
+		    break;
+		case PACKAGE_OP_UPGRADE:
+		    item.status().setToBeInstalled(ResStatus::USER);
+		    break;
+		default:
+		    ERR << "Ignoring unknown action " << _action << endl;
+		    break;
+	    }
+	    return false;			// stop looking
+	}
+	return true;		// continue looking
+    }
+};
+
+
 bool
 read_transactions (const ResPool & pool, sqlite3 *db, const DbSources & sources)
 {
@@ -70,29 +105,11 @@ read_transactions (const ResPool & pool, sqlite3 *db, const DbSources & sources)
 	    break;
 	}
 
-	ResPool::const_nameiterator pend = pool.nameend(obj->name());
-	for (ResPool::const_nameiterator it = pool.namebegin(obj->name()); it != pend; ++it) {
-	    PoolItem pos = it->second;
-	    if (pos.resolvable() == obj)
-	    {
-		MIL << "Found item " << id << ": " << pos << ", action " << action << endl;
-		switch (action) {
-		    case PACKAGE_OP_REMOVE:
-			pos.status().setToBeUninstalled(ResStatus::USER);
-			break;
-		    case PACKAGE_OP_INSTALL:
-			pos.status().setToBeInstalled(ResStatus::USER);
-			break;
-		    case PACKAGE_OP_UPGRADE:
-			pos.status().setToBeInstalled(ResStatus::USER);
-			break;
-		    default:
-			ERR << "Ignoring unknown action " << action << endl;
-			break;
-		}
-		break;
-	    }
-	}
+	CopyTransaction info( obj, action );
+
+	invokeOnEach( pool.byNameBegin( obj->name() ),
+		      pool.byNameEnd( obj->name() ),
+		      functor::functorRef<bool,PoolItem> (info) );
     }
 
     sqlite3_finalize (handle);
