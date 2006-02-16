@@ -10,6 +10,7 @@ pkginclude_HEADERS = NeedAType.h \
 	Arch.h		\
 	Bit.h		\
 	ByteCount.h	\
+	CapAndItem.h	\
 	Capability.h	\
 	CapFactory.h	\
 	CapMatch.h	\
