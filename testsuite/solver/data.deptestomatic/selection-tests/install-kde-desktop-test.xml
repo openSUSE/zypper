@@ -5,12 +5,13 @@
 <test>
 <setup>
   <arch name="i686"/>
-  <channel name="packages" file="sl10.1-beta3-packages.xml"/>
-  <channel name="selections" file="sl10.1-beta3-selections.xml"/>
+  <locale name="de"/>
+  <channel name="packages" file="sl10.1-beta38-packages.xml"/>
+  <channel name="selections" file="sl10.1-beta38-selections.xml"/>
   <mediaid/>
 </setup>
 <trial>
-  <install channel="selections" kind="selection" name="Kde-Desktop"/>
+  <install channel="selections" kind="selection" name="kde"/>
   <instorder/>
 </trial>
 </test>
