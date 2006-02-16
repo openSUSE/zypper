@@ -162,9 +162,9 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 	//const Capability match;
 	ResStatus status;
 
-	status = context->getStatus(provider);
+	status = context->getStatus( provider );
 
-//	MIL << "RequireProcessInfo (" << provider << " provides " << match << ", is " << status << ")" << endl;
+	MIL << "RequireProcessInfo (" << provider << " provides " << match << ", is " << status << ")" << endl;
 // ERR << "RequireProcessInfo(required: " << *capability << ")" << endl;
 // ERR << "require_process_cb(itemIsPossible -> " <<  context->itemIsPossible (*provider) << ")" << endl;
 
@@ -188,15 +188,26 @@ struct RequireProcess : public resfilter::OnCapMatchCallbackFunctor
 //	    && ! pool->itemIsLocked( provider )
 	) {
 
+	    // if we found a to-be-installed provider, choose this and drop all others
+	    if (status.isToBeInstalled()			// scheduled for install
+		|| (status.isUninstalled()
+		    && provider.status().isToBeInstalled()))	// or will-be-scheduled 
+	    {
+		providers.clear();
+		providers.push_front( provider );
+		return false;
+	    }
+
+
 	    // if we already have same name and edition, check for better architecture
 
 	    if (uniq.has( provider )) {
 		for (PoolItemList::iterator it = providers.begin(); it != providers.end(); ++it) {
-		    PoolItemList::iterator next = it; ++next;
 		    if ((*it)->arch().compare( provider->arch() ) < 0) {		// new provider is better
 MIL << "replacing " << *it << " with " << provider << endl;
-			providers.erase( it );
 			providers.push_front( provider );
+			providers.erase( it );
+			break;
 		    } 
 		}
 	    }
@@ -627,7 +638,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	_XDEBUG( "Found exactly one resolvable, installing it.");
 
-	QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), info.providers.front(), _soft);
+	QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), info.providers.front());
 	install_item->addDependency (_capability);
 
 	// The requiring item could be NULL if the requirement was added as an extra dependency.
@@ -649,7 +660,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	QueueItemBranch_Ptr branch_item = new QueueItemBranch (pool());
 
 	for (PoolItemList::const_iterator iter = info.providers.begin(); iter != info.providers.end(); iter++) {
-	    QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), *iter, _soft);
+	    QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), *iter);
 	    install_item->addDependency (_capability);
 	    branch_item->addItem (install_item);
 
