@@ -92,6 +92,7 @@ using zypp::ResolverProblemList;
 
 static bool show_mediaid = false;
 static string globalPath;
+static string architecture;			// run with this architecture
 
 static ZYpp::Ptr God;
 static SourceManager_Ptr manager;
@@ -459,12 +460,12 @@ get_poolItem (const string & source_alias, const string & package_name, const st
     }
     catch (Exception & excpt_r) {
 	ZYPP_CAUGHT (excpt_r);
-	cerr << "Can't find resolvable '" << package_name << "': source '" << source_alias << "' not defined" << endl;
+	cerr << "Can't find " << kind_name << ":'" << package_name << "': source '" << source_alias << "' not defined" << endl;
 	return poolItem;
     }
 
     if (!poolItem) {
-	cerr << "Can't find resolvable '" << package_name << "' in source '" << source_alias << "': no such name/kind" << endl;
+	cerr << "Can't find " << kind_name << ":'" << package_name << "' in source '" << source_alias << "': no such name/kind" << endl;
     }
 
     return poolItem;
@@ -756,6 +757,8 @@ parse_xml_setup (XmlNode_Ptr node)
 
 	} else if (node->equals ("mediaid")) {
 	    show_mediaid = true;
+	} else if (node->equals ("arch")) {
+	    architecture = node->getProp ("name");
 	} else {
 	    cerr << "Unrecognized tag '" << node->name() << "' in setup" << endl;
 	}
@@ -984,6 +987,10 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
     solver::detail::Resolver_Ptr resolver = new solver::detail::Resolver (pool);
     resolver->setTesting ( true );
     resolver->setForceResolve (forceResolve);
+
+    if (!architecture.empty()) {
+	resolver->setArchitecture( Arch( architecture ) );
+    }
 
     ResolverContext_Ptr established = NULL;
 
@@ -1372,8 +1379,6 @@ main (int argc, char *argv[])
     forceResolve = false;
     manager = SourceManager::sourceManager();
     God = zypp::getZYpp();
-
-    God->resolver()->setArchitecture(Arch(""));		// override ZYpp
 
     globalPath = argv[1];
     globalPath = globalPath.substr (0, globalPath.find_last_of ("/") +1);
