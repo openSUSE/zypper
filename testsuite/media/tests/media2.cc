@@ -172,6 +172,15 @@ int main(int argc, char *argv[])
     ONE_STEP("TWO: provideFile(/ls-lR.gz)")
     mm.provideFile(two, Pathname("/ls-lR.gz"));
 
+    ONE_STEP("TWO: release()")
+    mm.release(two, false);
+
+    ONE_STEP("ONE: REATTACH IT")
+    mm.attach(one);
+
+    ONE_STEP("ONE: provideFile(/INDEX.gz)")
+    mm.provideFile(one, Pathname("/INDEX.gz"));
+
     ONE_STEP("CLEANUP")
   }
   catch(const MediaException &e)
