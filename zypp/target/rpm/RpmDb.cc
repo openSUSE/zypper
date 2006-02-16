@@ -1836,7 +1836,9 @@ void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, callbac
 //
 void RpmDb::removePackage( Package::constPtr package, unsigned flags )
 {
-  return removePackage( package->name(), flags );
+  return removePackage( package->name()
+			+ "-" + package->edition().asString()
+			+ "." + package->arch().asString(), flags );
 }
 
 ///////////////////////////////////////////////////////////////////
