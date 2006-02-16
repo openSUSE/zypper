@@ -40,7 +40,9 @@ namespace zypp
   //
   //	CLASS NAME : ZYpp
   //
-  /** */
+  /**
+   * \todo define Exceptions
+  */
   class ZYpp : public base::ReferenceCounted, private base::NonCopyable
   {
   public:
@@ -66,6 +68,7 @@ namespace zypp
 
     void removeResolvables (const ResStore& store);
 
+  public:
     /**
      * \throws Exception
      */
@@ -82,6 +85,20 @@ namespace zypp
      */
     void finishTarget();
 
+
+  public:
+    /** Result returned from ZYpp::commit. */
+    struct CommitResult;
+
+    /** Commit changes and transactions.
+     * \param medianr 0 = all/any media
+     *                 > 0 means only the given media number
+     * \return \ref CommitResult
+     * \throws Exception
+    */
+    CommitResult commit( int medianr_r );
+
+  public:
     /** */
     Resolver_Ptr resolver() const;
 

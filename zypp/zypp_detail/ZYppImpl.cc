@@ -107,6 +107,29 @@ namespace zypp
       _target = 0;
     }
 
+    /** \todo Remove workflow from target, lot's of it could be done here,
+    * and target used for transact. */
+    ZYpp::CommitResult ZYppImpl::commit( int medianr_r )
+    {
+      MIL << "Attempt to commit (medianr " << medianr_r << ")" << endl;
+      if (! _target)
+	ZYPP_THROW( Exception("Target not initialized.") );
+
+      ZYpp::CommitResult res;
+      // must redirect to Target::Impl. This kind of commit should not be
+      // in the Target interface.
+      res._result = _target->commit( pool(), medianr_r,
+                                     res._errors, res._remaining, res._srcremaining );
+
+      MIL << "Commit (medianr " << medianr_r << ") returned: "
+          << res._result
+          << " (errors " << res._errors.size()
+          << ", remaining " << res._remaining.size()
+          << ", srcremaining " << res._srcremaining.size()
+          << ")" << endl;
+      return res;
+    }
+
     /******************************************************************
      **
      **	FUNCTION NAME : operator<<

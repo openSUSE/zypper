@@ -19,6 +19,7 @@
 #include "zypp/Target.h"
 #include "zypp/Resolver.h"
 #include "zypp/Locale.h"
+#include "zypp/ZYppCommitResult.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -61,6 +62,8 @@ namespace zypp
 
       void removeResolvables (const ResStore& store);
 
+    public:
+      /** \todo Signal locale change. */
       /**
        * \throws Exception
        */
@@ -76,6 +79,9 @@ namespace zypp
        * \throws Exception
        */
       void finishTarget();
+
+      /** Commit changes and transactions. */
+      ZYpp::CommitResult commit( int medianr_r );
 
     public:
       /** \todo Signal locale change. */

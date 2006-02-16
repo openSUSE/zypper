@@ -73,8 +73,9 @@ pkginclude_HEADERS = NeedAType.h \
 	DeltaRpm.h	\
 	VendorAttr.h	\
 	UpgradeStatistics.h	\
-	ZYpp.h		\
 	TranslatedText.h \
+	ZYpp.h		\
+	ZYppCommitResult.h	\
 	ZYppFactory.h	\
 	ZYppCallbacks.h
 

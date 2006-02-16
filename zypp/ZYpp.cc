@@ -82,6 +82,8 @@ namespace zypp
     _pimpl->addResolvables (store);
   }
 
+  ///////////////////////////////////////////////////////////////////
+
   Target_Ptr ZYpp::target() const
   { return _pimpl->target(); }
 
@@ -90,6 +92,9 @@ namespace zypp
 
   void ZYpp::finishTarget()
   { _pimpl->finishTarget(); }
+
+  ZYpp::CommitResult ZYpp::commit( int medianr_r )
+  { return _pimpl->commit( medianr_r ); }
 
   ///////////////////////////////////////////////////////////////////
 
