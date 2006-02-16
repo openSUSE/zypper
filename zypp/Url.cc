@@ -73,6 +73,11 @@ namespace zypp
         config("psep_querystr",   "?");
         config("vsep_querystr",   "");
 
+        // host is required (isValid=>false)
+        // but not mandatory (see RFC 2255),
+        // that is, accept empty host.
+        config("require_host",    "y");
+
         // not allowed here
         config("rx_username",     "");
         config("rx_password",     "");
@@ -166,13 +171,28 @@ namespace zypp
         addUrlByScheme("ldap", ref);
         addUrlByScheme("ldaps", ref);
 
+
         ref.reset( new UrlBase());
+        ref->config("with_authority",   "n");   // disallow host,...
+        ref->config("require_pathname", "m");   // path is mandatory
+        addUrlByScheme("hd",     ref);
+        addUrlByScheme("cd",     ref);
+        addUrlByScheme("dvd",    ref);
+        addUrlByScheme("dir",    ref);
+        addUrlByScheme("file",   ref);
+
         // don't show empty authority
         ref->setViewOptions( zypp::url::ViewOption::DEFAULTS -
                              zypp::url::ViewOption::EMPTY_AUTHORITY);
-        ref->config("with_authority"    "n");   // disallow host & port
         addUrlByScheme("mailto", ref);
         addUrlByScheme("urn",    ref);
+
+
+        ref.reset( new UrlBase());
+        ref->config("require_host",     "m");   // host is mandatory
+        addUrlByScheme("ftp",    ref);
+        addUrlByScheme("http",   ref);
+        addUrlByScheme("https",  ref);
       }
 
       bool
@@ -272,21 +292,13 @@ namespace zypp
 
   // -----------------------------------------------------------------
   Url::Url(const std::string &encodedUrl)
-    : m_impl()
+    : m_impl( parseUrl(encodedUrl))
   {
-    if( encodedUrl.empty())
+    if( !m_impl)
     {
-      m_impl.reset( new UrlBase());
-    }
-    else
-    {
-      m_impl = parseUrl(encodedUrl);
-      if( !m_impl)
-      {
-        ZYPP_THROW(url::UrlParsingException(
-          "Unable to parse Url components"
-        ));
-      }
+      ZYPP_THROW(url::UrlParsingException(
+        "Unable to parse Url components"
+      ));
     }
   }
 
@@ -295,21 +307,14 @@ namespace zypp
   Url&
   Url::operator = (const std::string &encodedUrl)
   {
-    if( encodedUrl.empty())
+    UrlRef url( parseUrl(encodedUrl));
+    if( !url)
     {
-      m_impl.reset( new UrlBase());
+      ZYPP_THROW(url::UrlParsingException(
+        "Unable to parse Url components"
+      ));
     }
-    else
-    {
-      UrlRef url( parseUrl(encodedUrl));
-      if( !url)
-      {
-        ZYPP_THROW(url::UrlParsingException(
-          "Unable to parse Url components"
-        ));
-      }
-      m_impl = url;
-    }
+    m_impl = url;
     return *this;
   }
 
