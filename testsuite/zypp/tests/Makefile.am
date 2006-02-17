@@ -8,6 +8,7 @@ SUBDIRS =
 ## ##################################################
 
 noinst_PROGRAMS = Arch Url1 Url2 Url3 Url4 Url5 \
+	RWPtr \
 	Edition			\
 	Capabilities
 
@@ -23,6 +24,7 @@ Url2_SOURCES = Url2.cc
 Url3_SOURCES = Url3.cc
 Url4_SOURCES = Url4.cc
 Url5_SOURCES = Url5.cc
+RWPtr_SOURCES = RWPtr.cc
 Edition_SOURCES = Edition.cc
 Capabilities_SOURCES = Capabilities.cc
 
