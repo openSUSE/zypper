@@ -65,6 +65,11 @@ namespace zypp
     //	RW_pointer traits
     //
     ///////////////////////////////////////////////////////////////////
+    /**
+     * Don't forgett to provide versions for _Ptr and _constPtr,
+     * esp. if creation a of temporary is not acceptable (eg. when
+     * checking the ref count value).
+    */
     namespace rw_pointer {
 
       template<class _D>
