@@ -1,0 +1,34 @@
+>!> Installing default from channel selections
+>!> Installing apparmor from channel selections
+>!> Installing base from channel selections
+>!> Installing x11 from channel selections
+>!> Installing gnome from channel selections
+>!> Installing print_server from channel selections
+>!> Installing sendmail from channel packages
+>!> Installing postfix from channel packages
+>!> Installing kernel-default from channel packages
+>!> Installing libusb from channel packages
+>!> Installing sax2-libsax from channel packages
+>!> Installing sax2 from channel packages
+>!> Installing sax2-gui from channel packages
+>!> Installing sax2-ident from channel packages
+>!> Installing sax2-libsax-perl from channel packages
+>!> Installing sax2-tools from channel packages
+>!> Installing xorg-x11 from channel packages
+>!> Installing xorg-x11-server from channel packages
+>!> Installing xorg-x11-server-glx from channel packages
+>!> Installing yast2-trans-en_US from channel packages
+>!> 1 problems found:
+>!> Problem:
+>!> Cannot install sendmail because it is conflicting with postfix
+>!> A conflict over sendmail == 8.13.5-5 (sendmail) requires the removal of to-be-installed sendmail-8.13.5-5.i586[packages]
+>!>    Solution:
+>!>       delete sendmail
+>!>       delete [package]sendmail-8.13.5-5.i586
+>!>    Solution:
+>!>       delete postfix
+>!>       delete [package]postfix-2.2.6-6.i586
+>!>    Solution:
+>!>       Ignore this conflict of sendmail.
+>!>       
+>!> Calculating installation order ...

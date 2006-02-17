@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
   install default selection and sendmail. Postfix will be set
-  to not installed cause it is a recommend only.
+  to install by the user. So the user has to decide.
 -->
 <test>
 <setup>
@@ -17,6 +17,7 @@
   <install channel="selections" kind="selection" name="gnome"/>
   <install channel="selections" kind="selection" name="print_server"/>
   <install channel="packages" package="sendmail"/>
+  <install channel="packages" package="postfix"/>
   <install channel="packages" package="kernel-default"/>
   <install channel="packages" package="libusb"/>
   <install channel="packages" package="sax2-libsax"/>
