@@ -128,15 +128,15 @@ QueueItemInstall::isSatisfied (ResolverContext_Ptr context) const
 
 //---------------------------------------------------------------------------
 
-// Handle items which freshen us -> re-establish them
+// Handle items which freshen or supplement us -> re-establish them
 
-struct EstablishFreshens
+struct EstablishItem
 {
     const ResPool & pool;
     QueueItemList & qil;
     bool soft;
 
-    EstablishFreshens (const ResPool & p, QueueItemList &l, bool s)
+    EstablishItem (const ResPool & p, QueueItemList &l, bool s)
 	: pool (p)
 	, qil (l)
 	, soft (s)
@@ -148,7 +148,7 @@ struct EstablishFreshens
 
     bool operator()( const CapAndItem & cai )
     {
-	_XDEBUG("EstablishFreshens (" << cai.item << ", " << cai.cap << ")");
+	_XDEBUG("EstablishItem (" << cai.item << ", " << cai.cap << ")");
 
 	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, cai.item, soft);
 	qil.push_back (establish_item);
@@ -475,15 +475,22 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 		return true;
 	}
 
-	/* Construct establish items for each of those which freshen this resolvable. */
+	/* Construct establish items for each of those which
+	   freshen or supplement this resolvable. */
 
-	EstablishFreshens info( pool(), qil, _soft );
+	EstablishItem info( pool(), qil, _soft );
 
 	CapFactory factory;
 	Capability cap = factory.parse (_item->kind(), _item->name(), Rel::EQ, _item->edition());
 	_XDEBUG("Re-establish all freshens on " << cap);
 	// pool ()->foreachFresheningResItem (cap, establish_freshens_cb, &info);
 	Dep dep( Dep::FRESHENS);
+	invokeOnEach( pool().byCapabilityIndexBegin( cap.index(), dep ), // begin()
+		      pool().byCapabilityIndexEnd( cap.index(), dep ),   // end()
+		      resfilter::ByCapMatch( cap ),
+		      functor::functorRef<bool,CapAndItem>(info) );
+
+	dep = Dep::SUPPLEMENTS;
 	invokeOnEach( pool().byCapabilityIndexBegin( cap.index(), dep ), // begin()
 		      pool().byCapabilityIndexEnd( cap.index(), dep ),   // end()
 		      resfilter::ByCapMatch( cap ),

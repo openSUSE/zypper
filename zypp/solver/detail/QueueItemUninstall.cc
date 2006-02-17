@@ -189,7 +189,7 @@ struct UninstallProcess
 	if (context->requirementIsMet( cai.cap, false ))		// its provided by another installed resolvable -> dont care
 	    return true;
 
-	if (context->getStatus(requirer).isSatisfied()) {		// it is just satisfied, check freshens
+	if (context->getStatus(requirer).isSatisfied()) {		// it is just satisfied, check freshens and supplements
 #warning If an uninstall incompletes a satisfied, the uninstall should be cancelled
 	    QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, requirer, soft);	// re-check if its still needed
 	    qil.push_back (establish_item);
@@ -208,6 +208,38 @@ struct UninstallProcess
 	return true;
     }
 };
+
+
+// Handle items which freshen or supplement us -> re-establish them
+
+struct EstablishItem
+{
+    const ResPool & pool;
+    QueueItemList & qil;
+    bool soft;
+
+    EstablishItem (const ResPool & p, QueueItemList &l, bool s)
+	: pool(p)
+	, qil(l)
+	, soft(s)
+    { }
+
+
+    // provider has a freshens on a just to-be-installed item
+    //   re-establish provider, maybe its incomplete now
+
+    bool operator()( const CapAndItem & cai )
+    {
+	_XDEBUG("EstablishItem (" << cai.item << ", " << cai.cap << ")");
+
+	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, cai.item, soft);
+	qil.push_back (establish_item);
+	return true;
+    }
+};
+
+
+//-----------------------------------------------------------------------------
 
 
 bool
@@ -301,7 +333,6 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    context->addInfo (info);
 	}
 
-
 	// we're uninstalling an installed item
 	//   loop over all its provides and check if any installed item requires
 	//   one of these provides
@@ -312,13 +343,28 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    UninstallProcess info ( pool(), context, _item, _upgraded_to, qil, _remove_only, _soft);
 
 	    //world()->foreachRequiringPoolItem (*iter, uninstall_process_cb, &info);
-	    Dep dep( Dep::REQUIRES);
+	    Dep dep( Dep::REQUIRES );
 
 	    invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
 			  pool().byCapabilityIndexEnd( iter->index(), dep ),
 			  resfilter::ByCapMatch( *iter ),
 			  functor::functorRef<bool,CapAndItem>(info) );
 
+	    // re-establish all which supplement or freshen the just uninstalled item
+
+	    EstablishItem establish( pool(), qil, _soft );
+
+	    dep = Dep::SUPPLEMENTS;
+	    invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
+			  pool().byCapabilityIndexEnd( iter->index(), dep ),
+			  resfilter::ByCapMatch( *iter ),
+			  functor::functorRef<bool,CapAndItem>( establish ) );
+
+	    dep = Dep::FRESHENS;
+	    invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
+			  pool().byCapabilityIndexEnd( iter->index(), dep ),
+			  resfilter::ByCapMatch( *iter ),
+			  functor::functorRef<bool,CapAndItem>( establish ) );
 	}
     }
 
