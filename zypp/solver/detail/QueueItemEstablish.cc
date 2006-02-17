@@ -144,7 +144,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    context->satisfy (_item, _other_penalty);
 	}
 	else {
-	    _DEBUG("unfulfilled requirements -> incomplete");
+	    _DEBUG("unfulfilled requirement " << *iter << " -> incomplete");
 
 	    // we could issue a QueueItemInstall (_item) here but better lets blame the user
 	    context->incomplete (_item, _other_penalty);
