@@ -1,0 +1,4 @@
+# PtrTypes.exp
+# run tests for PtrTypes
+
+  shouldPass "PtrTypes"

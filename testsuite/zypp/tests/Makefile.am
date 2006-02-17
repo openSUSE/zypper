@@ -3,14 +3,15 @@
 
 # Do NOT list devel.* in subdirs. It's developers playgound and
 # must not prevent anything from building.
-SUBDIRS = 
+SUBDIRS =
 
 ## ##################################################
 
 noinst_PROGRAMS = Arch Url1 Url2 Url3 Url4 Url5 \
 	RWPtr \
-	Edition			\
-	Capabilities
+	Edition		\
+	Capabilities	\
+	PtrTypes
 
 ## ##################################################
 
@@ -27,6 +28,7 @@ Url5_SOURCES = Url5.cc
 RWPtr_SOURCES = RWPtr.cc
 Edition_SOURCES = Edition.cc
 Capabilities_SOURCES = Capabilities.cc
+PtrTypes_SOURCES = PtrTypes.cc
 
 ## ##################################################
 
