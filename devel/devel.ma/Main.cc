@@ -17,6 +17,24 @@ using namespace std;
 using namespace zypp;
 using namespace zypp::functor;
 
+inline const char * compResult( int res )
+{
+  return( res ? ( res < 0 ? "<" : ">" ) : "=" );
+}
+
+template<class _Iter, class _Function>
+  inline void sym_compare( _Iter begin, _Iter end, _Function fnc )
+  {
+    for ( _Iter l = begin; l != end; ++l )
+      for ( _Iter r = begin; r != end; ++r )
+        fnc( *l, *r );
+  }
+template<class _Iter, class _Function>
+  inline void sym_compare( _Iter begin, _Iter end )
+  {
+    sym_compare( begin, end, _Function() );
+  }
+
 inline list<Arch> archList()
 {
   list<Arch> ret;
@@ -35,17 +53,12 @@ inline list<Arch> archList()
   ret.push_back( Arch_ia64 );
   ret.push_back( Arch( "unknown" ) );
   ret.push_back( Arch( "unknown2" ) );
+  ret.push_back( Arch() );
   return ret;
 }
 
 static list<Arch> archlist( archList() );
 static set<Arch>  archset( archlist.begin(), archlist.end() );
-
-inline const char * compResult( int res )
-{
-  return( res ? ( res < 0 ? "<" : ">" ) : "=" );
-}
-
 
 struct CompatTest
 {
@@ -62,19 +75,11 @@ struct CompatTest
   }
 };
 
-template<class _Iter, class _Function>
-  inline void sym_compare( _Iter begin, _Iter end, _Function fnc )
-  {
-    for ( _Iter l = begin; l != end; ++l )
-      for ( _Iter r = begin; r != end; ++r )
-        fnc( *l, *r );
-  }
-template<class _Iter, class _Function>
-  inline void sym_compare( _Iter begin, _Iter end )
-  {
-    sym_compare( begin, end, _Function() );
-  }
-
+struct OrderByCompare : public std::binary_function<Arch, Arch, bool>
+{
+  bool operator()( const Arch & lhs, const Arch & rhs ) const
+  { return lhs.compare( rhs ) < 0; }
+};
 
 /******************************************************************
 **
@@ -94,6 +99,13 @@ int main( int argc, char * argv[] )
   // compatibleWith
   sym_compare( archset.begin(), archset.end(), CompatTest() );
 
+  // compare order
+  typedef set<Arch,OrderByCompare> OrderedArch;
+
+  OrderedArch a( archset.begin(), archset.end() );
+  print( a );
+  OrderedArch b( archset.rbegin(), archset.rend() );
+  print( b );
 
   INT << "===[END]============================================" << endl << endl;
   return 0;
