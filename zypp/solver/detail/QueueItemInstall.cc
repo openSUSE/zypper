@@ -237,7 +237,7 @@ struct UninstallConflicting
 	    _context->addInfo (misc_info);
 	}
 
-	_XDEBUG("because: '" << conflicting_item << "' provides " << conflicting_cap);
+	_XDEBUG("because: '" << conflicting_item << "'conflicts " << conflicting_cap);
 
 	QueueItemUninstall_Ptr uninstall_qitem = new QueueItemUninstall (_context->pool(), conflicting_item, QueueItemUninstall::CONFLICT);
 	uninstall_qitem->setDueToConflict ();
@@ -326,17 +326,23 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     if (!_upgrades) {
 
-	_XDEBUG("simple install of " <<  _item);
-	context->install (_item, context->verifying() || _soft, _other_penalty);
+	_XDEBUG("trying simple install of " <<  _item);
+	if (!context->install (_item, context->verifying() || _soft, _other_penalty))
+	    goto finished;
 
     }
     else {
 
 	QueueItemUninstall_Ptr uninstall_item;
 
-	_XDEBUG("upgrade install of " << _item);
+	_XDEBUG("trying upgrade install of " << _item);
 
-	context->upgrade (_item, _upgrades, context->verifying() || _soft, _other_penalty);
+	if (!context->upgrade (_item, _upgrades, context->verifying() || _soft, _other_penalty)) {
+	    // invalid solution
+	    ResolverInfo_Ptr info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INVALID_SOLUTION, PoolItem_Ref(), RESOLVER_INFO_PRIORITY_VERBOSE);
+	    context->addError (info);
+	    goto finished;
+	}
 
 	// the upgrade will uninstall the installed one, take care of this
 
