@@ -312,6 +312,7 @@ Resolver::verifySystem (void)
 //---------------------------------------------------------------------------
 
 // copy marked item from solution back to pool
+// if data != NULL, set as APPL_HIGH (from establishPool())
 
 static void
 solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
@@ -319,11 +320,11 @@ solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
     bool r;
 
     if (status.isToBeInstalled()) {
-	r = item.status().setToBeInstalled(ResStatus::SOLVER);
+	r = item.status().setToBeInstalled( (data != NULL) ? ResStatus::APPL_HIGH : ResStatus::SOLVER );
 	_XDEBUG("solution_to_pool(" << item << ", " << status << ") install !" << r);
     }
     else if (status.isToBeUninstalled()) {
-	r = item.status().setToBeUninstalled(ResStatus::SOLVER);
+	r = item.status().setToBeUninstalled( (data != NULL) ? ResStatus::APPL_HIGH : ResStatus::SOLVER );
 	_XDEBUG("solution_to_pool(" << item << ", " << status << ") remove !" << r);
     }
     else if (status.isIncomplete()
@@ -423,7 +424,7 @@ Resolver::establishPool ()
     ResolverContext_Ptr solution = bestContext();
 
     if (solution) {						// copy solution back to pool
-	solution->foreachMarked (solution_to_pool, NULL);
+	solution->foreachMarked (solution_to_pool, (void *)1);	// as APPL_HIGH
     }
     else {
 	ERR << "establishState did not return a bestContext" << endl;
