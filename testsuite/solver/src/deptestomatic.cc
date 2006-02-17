@@ -101,7 +101,8 @@ static bool forceResolve;
 typedef list<unsigned int> ChecksumList;
 typedef set<PoolItem_Ref> PoolItemSet;
 
-#define RESULT cout << ">!> "
+#define MARKER ">!> "
+#define RESULT cout << MARKER
 
 //-----------------------------------------------------------------------------
 
@@ -580,15 +581,22 @@ typedef multimap<string,PoolItem_Ref> ItemMap;
 struct SortItem : public resfilter::PoolItemFilterFunctor
 {
     ItemMap sorted;
+    bool _show_all;
 
-    SortItem()
+    SortItem( bool show_all )
+	: _show_all( show_all )
     { }
 
     bool operator()( PoolItem_Ref poolItem )
     {
 	ostringstream ostr;
-	printRes (ostr, poolItem);
-	sorted.insert (ItemMap::value_type(ostr.str(), poolItem));
+	if (_show_all
+	    || (!poolItem.status().isUndetermined()
+		|| poolItem.status().transacts()))
+	{
+	    printRes (ostr, poolItem);
+	    sorted.insert (ItemMap::value_type(ostr.str(), poolItem));
+	}
 	return true;
     }
 };
@@ -597,9 +605,9 @@ struct SortItem : public resfilter::PoolItemFilterFunctor
 // collect all installed items in a set
 
 void
-print_pool (const string & prefix = "")
+print_pool( const string & prefix = "", bool show_all = true )
 {
-    SortItem info;
+    SortItem info( show_all );
     cout << "Current pool:" << endl;
     invokeOnEach( God->pool().begin( ),
 		  God->pool().end ( ),
@@ -996,8 +1004,6 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	resolver->setArchitecture( Arch( architecture ) );
     }
 
-    ResolverContext_Ptr established = NULL;
-
     node = node->children();
     while (node) {
 	if (!node->isElement()) {
@@ -1104,24 +1110,23 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 
 	    resolver->doUpgrade(stats);
 
-	    print_pool(">!>");
+	    print_pool( MARKER );
 
 	} else if (node->equals ("establish")
 		   || node->equals ("freshen")) {
 
 	    RESULT << "Establishing state ..." << endl;
 
-	    resolver->establishState (established);
-//cerr << "established<" << established << "> -> <" << resolver->bestContext() << ">" << endl;
-	    established = resolver->bestContext();
-	    if (established == NULL)
+	    if (!resolver->establishPool()) {
 		RESULT << "Established NO context !" << endl;
+	    }
 	    else {
 		RESULT << "Established context" << endl;
-		established->foreachMarked (print_marked_cb, NULL);
+		resolver->context()->foreachMarked (print_marked_cb, NULL);
+//		print_pool( MARKER, false );
 		if (node->equals ("freshen")) {
 		    RESULT << "Freshening ..." << endl;
-		    established->foreachMarked (freshen_marked_cb, &resolver);
+		    resolver->context()->foreachMarked (freshen_marked_cb, &resolver);
 		}
 	    }
 
