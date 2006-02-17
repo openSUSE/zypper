@@ -989,7 +989,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
     print_sep ();
 
     solver::detail::Resolver_Ptr resolver = new solver::detail::Resolver (pool);
-    resolver->setTesting ( true );
+    resolver->setTesting ( true ); // continue although without target
     resolver->setForceResolve (forceResolve);
 
     if (!architecture.empty()) {
