@@ -166,6 +166,9 @@ namespace zypp
     bool isToBeUninstalled() const
     { return isInstalled() && transacts(); }
 
+    bool isUndetermined() const
+    { return fieldValueIs<EstablishField>( UNDETERMINED ); }
+
     bool isUnneeded() const
     { return isUninstalled() && fieldValueIs<EstablishField>( UNNEEDED ); }
 
