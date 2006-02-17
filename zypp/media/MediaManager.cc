@@ -686,7 +686,10 @@ namespace zypp
 
         AttachedMedia ret = m->second.handler->attachedMedia();
         if( ret.mediaSource && ret.mediaSource->equals( *media))
-            m->second.handler->release(false);
+        {
+          m->second.handler->release(false);
+          m->second.desired  = false;
+        }
       }
     }
 
