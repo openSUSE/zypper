@@ -526,7 +526,8 @@ _XDEBUG("ResolverContext::itemIsPresent(<" << status << ">" << item << ")");
 
     return (status.staysInstalled()
 	    || (status.isToBeInstalled() && !status.isNeeded())
-	    || status.isSatisfied ());
+	    || status.isUnneeded()
+	    || status.isSatisfied());
 }
 
 
