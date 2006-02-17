@@ -93,7 +93,8 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     bool _forceResolve; // remove items which are conflicts with others or
                         // have unfulfilled requirements.
                         // This behaviour is favourited by ZMD    
-
+    bool _upgradeMode;  // Resolver has been called with doUpgrade
+    
   public:
     ResolverContext (const ResPool & pool, const Arch & arch, ResolverContext_Ptr parent = NULL);
     virtual ~ResolverContext();
@@ -140,7 +141,10 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     const PoolItemList getIgnoreInstalledItem() const { return _ignoreInstalledItem; }
     
     void setForceResolve (const bool force) { _forceResolve = force; }
-    const bool forceResolve() { return _forceResolve; }    
+    const bool forceResolve() { return _forceResolve; }
+
+    void setUpgradeMode (const bool upgrade) { _upgradeMode = upgrade; }
+    const bool upgradeMode() { return _upgradeMode; }    
     
     // ---------------------------------- methods
 

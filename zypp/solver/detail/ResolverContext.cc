@@ -85,6 +85,9 @@ ResolverContext::ResolverContext (const ResPool & pool, const Arch & arch, Resol
     , _establishing (false)
     , _invalid (false)
     , _architecture(arch)
+    , _forceResolve(false)
+    , _upgradeMode(false)
+      
 {
 _XDEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
     if (parent != NULL) {
@@ -102,6 +105,7 @@ _XDEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
 	_ignoreArchitecture  = parent->_ignoreArchitecture;
 	_ignoreInstalledItem = parent->_ignoreInstalledItem;
 	_forceResolve        = parent->_forceResolve;
+	_upgradeMode         = parent->_upgradeMode;
     } else {
 	_min_priority = MAXINT;
     }
@@ -346,12 +350,14 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
     assert (! (due_to_obsolete && due_to_unlink));
 
     status = getStatus(item);
-    
-    if ( (forceResolve() // This is the behaviour of ZMD
+
+    if ( ( (forceResolve() // This is the behaviour of ZMD
+	    || upgradeMode())
 	  && (status.isToBeInstalled()             // \ The resolvable will be installed
 	      || item.status().isToBeInstalled())) // / explicit.
 	 
-	 || (!forceResolve() // This is the bahaviour of YaST
+	 || ( (!forceResolve() // This is the bahaviour of YaST
+	       && !upgradeMode())
 	     && (status.staysInstalled() || status.isToBeInstalled())               //   \ We will have the resolvable
 	     && (item.status().staysInstalled() || item.status().isToBeInstalled()) //   / available.
 	     && !part_of_upgrade
@@ -375,12 +381,11 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 	ResolverInfoList addList;
 	for (ResolverInfoList::const_iterator iter = _log.begin(); iter != _log.end(); iter++) {
 	    ResolverInfo_Ptr info = *iter;
-	    if (info->affected() == item
-		&& (info->type() == RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL
+//	    if (info->affected() == item
+	    if (info->type() == RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL
 		    || info->type() == RESOLVER_INFO_TYPE_NO_PROVIDER
 		    || info->type() == RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER
 		    || info->type() == RESOLVER_INFO_TYPE_CANT_SATISFY)
-		)
 	    {
 		// put the info on the end as error
 		found = true;

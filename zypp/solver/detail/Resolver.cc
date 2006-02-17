@@ -62,10 +62,12 @@ Resolver::Resolver (const ResPool & pool)
     : _pool (pool)
     , _timeout_seconds (0)
     , _verifying (false)
+    , _testing (false)
     , _valid_solution_count (0)
     , _best_context (NULL)
     , _timed_out (false)
     , _forceResolve (false)
+    , _upgradeMode (false)
 {
     struct utsname buf;
     if (uname (&buf) < 0) {
@@ -385,6 +387,7 @@ Resolver::establishState (ResolverContext_Ptr context)
 				    _ignoreArchitecture,
 				    _ignoreInstalledItem);
     context->setForceResolve (_forceResolve);
+    context->setUpgradeMode (_upgradeMode);        
     
     for (KindList::const_iterator iter = ordered.begin(); iter != ordered.end(); iter++) {
 	const Resolvable::Kind kind = *iter;
@@ -490,7 +493,8 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 				    _ignoreRequires,
 				    _ignoreArchitecture,
 				    _ignoreInstalledItem);
-    initial_queue->context()->setForceResolve (_forceResolve);    
+    initial_queue->context()->setForceResolve (_forceResolve);
+    initial_queue->context()->setUpgradeMode (_upgradeMode);        
 
     /* If this is a verify, we do a "soft resolution" */
 

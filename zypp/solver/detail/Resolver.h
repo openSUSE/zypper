@@ -105,6 +105,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool _forceResolve; // remove items which are conflicts with others or
                         // have unfulfilled requirements.
                         // This behaviour is favourited by ZMD
+    bool _upgradeMode;  // Resolver has been called with doUpgrade    
 
     // helpers
     bool doesObsoleteCapability (PoolItem_Ref candidate, const Capability & cap);
