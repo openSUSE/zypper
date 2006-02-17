@@ -64,6 +64,7 @@ namespace zypp
       virtual Label order() const;
 
       TranslatedText _summary;
+      TranslatedText _description;
       std::string _parser_version;
       std::string _name;
       std::string _version;
@@ -71,6 +72,7 @@ namespace zypp
       std::string _arch;
       std::string _order;
       std::string _category;
+      
       bool _visible;
 
       std::list<std::string> _suggests;

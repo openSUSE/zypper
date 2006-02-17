@@ -49,18 +49,18 @@ namespace zypp
         ~SuseTagsImpl();
 
       public:
-	virtual void createResolvables(Source_Ref source_r);
+        virtual void createResolvables(Source_Ref source_r);
 	
-	virtual std::string type(void) const
+        virtual std::string type(void) const
         { return "YaST"; }
 	
-	virtual unsigned numberOfMedia(void) const;
+        virtual unsigned numberOfMedia(void) const;
+        virtual std::string vendor (void) const;
 	
-	virtual std::string vendor (void) const;
-	
-	virtual std::string unique_id (void) const;
-
-	Pathname sourceDir( const NVRAD& nvrad );
+        virtual std::string unique_id (void) const;
+        
+        Pathname sourceDir( const NVRAD& nvrad );
+        virtual void storeMetadata(const Pathname & cache_dir_r);
 
         /**
          * Get media verifier for the specified media
@@ -70,7 +70,7 @@ namespace zypp
       protected:
         /** Stream output. */
         virtual std::ostream & dumpOn( std::ostream & str ) const;
-
+        bool isCacheValid() const;
       private:
         /** Ctor substitute.
          * Actually get the metadata.
