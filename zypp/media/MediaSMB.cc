@@ -97,7 +97,7 @@ namespace zypp {
         : MediaHandler( url_r, attach_point_hint_r,
     		    stripShare( url_r.getPathName() ), // urlpath WITHOUT share name at attachpoint
     		    false )       // does_download
-        , _vfstype( "smbfs" )
+        , _vfstype( "cifs" )
     {
 	MIL << "MediaSMB::MediaSMB(" << url_r << ", " << attach_point_hint_r << ")" << endl;
     }
@@ -111,9 +111,9 @@ namespace zypp {
     //	DESCRIPTION : Asserted that not already attached, and attachPoint
     //      is a directory.
     //
-    //      NOTE: The implementation currently serves both, "smbfs"
-    //      and "cifs". The only difference is the vfstype passed to
-    //      the mount command.
+    //      NOTE: The implementation currently serves both, "smb" and
+    //      and "cifs" URL's, but passes "cifs" to the mount command
+    //      in any case.
     //
     void MediaSMB::attachTo(bool next)
     {

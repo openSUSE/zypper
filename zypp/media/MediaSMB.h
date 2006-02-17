@@ -23,9 +23,9 @@ namespace zypp {
     /**
      * @short Implementation class for SMB MediaHandler
      *
-     * NOTE: The implementation currently serves both, "smbfs"
-     * and "cifs". The only difference is the vfstype passed to
-     * the mount command.
+     * NOTE: The implementation currently serves both, "smb"
+     * and "cifs" URL's, but passes "cifs" to the mount command
+     * in any case.
      * @see MediaHandler
      **/
     class MediaSMB : public MediaHandler {
@@ -35,6 +35,7 @@ namespace zypp {
       /**
        * vfstype for mount. This is either "smbfs"
        * or "cifs" (rewritten by MediaCIFS).
+       * Obsolete: vfstype is allways "cifs".
        **/
       const char* _vfstype;
 
