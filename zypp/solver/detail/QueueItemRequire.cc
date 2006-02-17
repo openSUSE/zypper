@@ -469,7 +469,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 		    if (context->itemIsPossible (upgrade_item)) {
 
-			install_item = new QueueItemInstall (pool(), upgrade_item);
+			install_item = new QueueItemInstall (pool(), upgrade_item, _soft);
 		    	install_item->setUpgrades (_requiring_item);
 			branch_item->addItem (install_item);
 
@@ -609,7 +609,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	_XDEBUG( "Found exactly one resolvable, installing it.");
 
-	QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), info.providers.front());
+	QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), info.providers.front(), _soft);
 	install_item->addDependency (_capability);
 
 	// The requiring item could be NULL if the requirement was added as an extra dependency.
@@ -631,7 +631,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	QueueItemBranch_Ptr branch_item = new QueueItemBranch (pool());
 
 	for (PoolItemList::const_iterator iter = info.providers.begin(); iter != info.providers.end(); iter++) {
-	    QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), *iter);
+	    QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), *iter, _soft);
 	    install_item->addDependency (_capability);
 	    branch_item->addItem (install_item);
 
