@@ -24,7 +24,7 @@ template<class _Tp>
   };
 
 template<class _Tp>
-  struct PPrint : public std::unary_function<_Tp, bool>
+  struct PrintPtr : public std::unary_function<_Tp, bool>
   {
     bool operator()( const _Tp & obj )
     {
@@ -39,15 +39,17 @@ template<class _Tp>
 template<class _Container>
   void print( const _Container & c )
   {
+    INT << c.size() << " " << __PRETTY_FUNCTION__ << std::endl;
     std::for_each( c.begin(), c.end(),
                    Print<typename _Container::value_type>() );
   }
 
 template<class _Container>
-  void pprint( const _Container & c )
+  void printPtr( const _Container & c )
   {
+    INT << c.size() << " " << __PRETTY_FUNCTION__ << std::endl;
     std::for_each( c.begin(), c.end(),
-                   PPrint<typename _Container::value_type>() );
+                   PrintPtr<typename _Container::value_type>() );
   }
 
 ///////////////////////////////////////////////////////////////////

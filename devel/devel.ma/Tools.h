@@ -1,0 +1,82 @@
+#ifndef Tools_h
+#define Tools_h
+
+#include <iostream>
+
+#include "Measure.h"
+#include "Printing.h"
+
+#include <zypp/ResObject.h>
+
+#include <zypp/SourceFactory.h>
+#include <zypp/source/susetags/SuseTagsImpl.h>
+
+using namespace zypp;
+using std::endl;
+
+///////////////////////////////////////////////////////////////////
+// rstats
+template<class _IntT>
+  struct Counter
+  {
+    Counter()                : _value( _IntT(0) )         {}
+    Counter( _IntT value_r ) : _value( _IntT( value_r ) ) {}
+    operator       _IntT &()       { return _value; }
+    operator const _IntT &() const { return _value; }
+
+    _IntT _value;
+  };
+
+struct Rstats : public std::unary_function<ResObject::constPtr, void>
+{
+  void operator()( ResObject::constPtr ptr )
+  {
+    ++_total;
+    ++_perKind[ptr->kind()];
+  }
+
+  typedef std::map<ResolvableTraits::KindType,Counter<unsigned> > KindMap;
+  Counter<unsigned> _total;
+  KindMap           _perKind;
+};
+
+std::ostream & operator<<( std::ostream & str, const Rstats & obj )
+{
+  str << "Total: " << obj._total;
+  for( Rstats::KindMap::const_iterator it = obj._perKind.begin(); it != obj._perKind.end(); ++it )
+    {
+      str << endl << "  " << it->first << ":\t" << it->second;
+    }
+  return str;
+}
+
+template<class _Iterator>
+  void rstats( _Iterator begin, _Iterator end )
+  {
+    DBG << __PRETTY_FUNCTION__ << endl;
+    Rstats stats;
+    for_each( begin, end, functor::functorRef<void,ResObject::constPtr>(stats) );
+    MIL << stats << endl;
+  }
+
+template<class _Container>
+  void rstats( const _Container & c )
+  {
+    rstats( c.begin(), c.end() );
+  }
+
+///////////////////////////////////////////////////////////////////
+inline Source_Ref createSource( const std::string & url_r )
+{
+  Measure x( "createSource: " + url_r );
+  Source_Ref ret( SourceFactory().createFrom( Url(url_r) ) );
+  x.start( "parseSource: " + url_r );
+  ret.resolvables();
+  x.stop();
+  rstats( ret.resolvables() );
+
+  return ret;
+}
+
+
+#endif // Tools_h

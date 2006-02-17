@@ -7,6 +7,7 @@
 
 #include "Measure.h"
 #include "Printing.h"
+#include "Tools.h"
 
 #include <zypp/base/Logger.h>
 #include <zypp/base/LogControl.h>
@@ -37,59 +38,6 @@ using namespace zypp::functor;
 ///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
-
-template<class _IntT>
-  struct Counter
-  {
-    Counter()
-    : _value( _IntT(0) )
-    {}
-
-    Counter( _IntT value_r )
-    : _value( _IntT( value_r ) )
-    {}
-
-
-    operator _IntT &()
-    { return _value; }
-
-    operator const _IntT &() const
-    { return _value; }
-
-    _IntT _value;
-  };
-
-struct Rstats : public std::unary_function<ResObject::constPtr, void>
-{
-  void operator()( ResObject::constPtr ptr )
-  {
-    ++_total;
-    ++_perKind[ptr->kind()];
-  }
-
-  typedef std::map<ResolvableTraits::KindType,Counter<unsigned> > KindMap;
-  Counter<unsigned> _total;
-  KindMap           _perKind;
-};
-
-std::ostream & operator<<( std::ostream & str, const Rstats & obj )
-{
-  str << "Total: " << obj._total;
-  for( Rstats::KindMap::const_iterator it = obj._perKind.begin(); it != obj._perKind.end(); ++it )
-    {
-      str << endl << "  " << it->first << ":\t" << it->second;
-    }
-  return str;
-}
-
-template<class _Iterator>
-  void rstats( _Iterator begin, _Iterator end )
-  {
-    DBG << __PRETTY_FUNCTION__ << endl;
-    Rstats stats;
-    for_each( begin, end, functorRef<void,ResObject::constPtr>(stats) );
-    MIL << stats << endl;
-  }
 
 ///////////////////////////////////////////////////////////////////
 
@@ -140,19 +88,21 @@ ostream & operator<<( ostream & str, const X & obj )
   return str << "ID(" << obj.numericId() << ")";
 }
 
-#include "zypp/detail/ImplConnect.h"
-#include "zypp/detail/ResObjectImplIf.h"
-#include "zypp/Package.h"
-struct ImplTest
-{
-  void operator()( const PoolItem & pi )
+template<>
+  struct PrintPtr<ui::Selectable::Ptr> : public std::unary_function<ui::Selectable::Ptr, bool>
   {
-    who( detail::ImplConnect::resimpl( *pi.resolvable() ) );
-    Package::constPtr p( dynamic_pointer_cast<const Package>(pi.resolvable()) );
-    if ( p )
-      who( detail::ImplConnect::resimpl( *p ) );
-  }
-};
+    bool operator()( const ui::Selectable::Ptr & obj )
+    {
+      if ( obj ) {
+        USR << *obj << std::endl;
+        std::for_each( obj->availableBegin(), obj->availableEnd(),
+                       PrintPtr<ResObject::constPtr>() );
+      }
+      else
+        USR << "(NULL)" << std::endl;
+      return true;
+    }
+  };
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -167,35 +117,20 @@ int main( int argc, char * argv[] )
   if (argc >= 2 )
     infile = argv[1];
 
-  Url url("dir:/Local/ma/zypp/libzypp/devel/devel.ma/CD1");
-  Measure x( "SourceFactory.create" );
-  Source_Ref src( SourceFactory().createFrom( url ) );
-  x.stop();
-  Source_Ref trg( SourceFactory().createFrom( url ) );
-
-  //Source_Ref src( SourceFactory().createFrom( new source::susetags::SuseTagsImpl(infile) ) );
-  //MIL << src.resolvables().size() << endl;
+  Source_Ref src( createSource("dir:/Local/ma/zypp/libzypp/devel/devel.ma/SOURCE") );
+  Source_Ref trg( createSource("dir:/Local/ma/zypp/libzypp/devel/devel.ma/TARGET") );
 
   ResPoolManager pool;
-  x.start( "pool.insert" );
-  ResStore::const_iterator last = src.resolvables().begin();
-  std::advance( last, 5 );
-  pool.insert( src.resolvables().begin(), last );
-  x.stop();
-  MIL << pool << endl;
+  pool.insert( src.resolvables().begin(), src.resolvables().end() );
+  pool.insert( trg.resolvables().begin(), trg.resolvables().end(), true );
 
   ResPool query( pool.accessor() );
   rstats( query.begin(), query.end() );
+  std::for_each( query.begin(), query.end(), Print<PoolItem>() );
 
   ResPoolProxy y2pm( query );
-  y2pm.saveState<Package>();
-  //pool.insert( trg.resolvables().begin(), trg.resolvables().end(), true );
-  y2pm = ResPoolProxy( query );
-  std::for_each( query.begin(), query.end(), Print<PoolItem>() );
-  std::for_each( query.begin(), query.end(), resfilter::Mtest() );
-  y2pm.restoreState<Package>();
-  std::for_each( query.begin(), query.end(), Print<PoolItem>() );
-  std::for_each( query.begin(), query.end(), ImplTest() );
+  std::for_each( y2pm.byKindBegin<Package>(), y2pm.byKindEnd<Package>(),
+                 PrintPtr<ui::Selectable::Ptr>() );
 
 
   INT << "===[END]============================================" << endl << endl;

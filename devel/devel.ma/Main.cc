@@ -1,10 +1,6 @@
-#include <ctime>
-
 #include <iostream>
 #include <list>
-#include <map>
 #include <set>
-#include <vector>
 
 #include "Printing.h"
 
@@ -15,148 +11,70 @@
 #include <zypp/base/Iterator.h>
 #include <zypp/base/Algorithm.h>
 
-#include <zypp/PathInfo.h>
-#include <zypp/SourceFactory.h>
-#include <zypp/source/Builtin.h>
-#include <zypp/source/susetags/SuseTagsImpl.h>
-
-#include <zypp/Resolvable.h>
-#include <zypp/Package.h>
-#include <zypp/detail/PackageImpl.h>
-#include <zypp/Selection.h>
-#include <zypp/detail/SelectionImpl.h>
-#include <zypp/Patch.h>
-#include <zypp/detail/PatchImpl.h>
-
-#include <zypp/CapFactory.h>
-
-#include <zypp/ResFilters.h>
-#include <zypp/ResStatus.h>
-#include <zypp/ResPoolManager.h>
-
-#include <zypp/ZYppFactory.h>
-#include <zypp/Callback.h>
+#include <zypp/Arch.h>
 
 using namespace std;
 using namespace zypp;
 using namespace zypp::functor;
-using namespace zypp::resfilter;
 
-///////////////////////////////////////////////////////////////////
-namespace zypp
+inline list<Arch> archList()
 {
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : NumImpl
-    //
-    /** Num implementation. */
-    struct NumImpl
-    {
-      NumImpl()
-      : _i( -1 )
-      { SEC << "NumImpl(" << _i << ")" << std::endl; }
-
-      NumImpl( int i_r )
-      : _i( i_r )
-      { INT << "NumImpl(" << _i << ")" << std::endl; }
-
-      ~NumImpl()
-      { ERR << "---NumImpl(" << _i << ")" << std::endl; }
-
-      int i() const { return _i; }
-
-      int _i;
-
-    public:
-      /** Offer default Impl. */
-      static shared_ptr<NumImpl> nullimpl()
-      {
-        static shared_ptr<NumImpl> _nullimpl( new NumImpl );
-        return _nullimpl;
-      }
-    };
-    ///////////////////////////////////////////////////////////////////
-
-    /** \relates Num::Impl Stream output */
-    inline std::ostream & operator<<( std::ostream & str, const NumImpl & obj )
-    {
-      return str << "Num(" << obj._i << ")";
-    }
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : Num
-    //
-    /** */
-    class Num
-    {
-      friend std::ostream & operator<<( std::ostream & str, const Num & obj );
-
-    public:
-      /** Implementation  */
-      typedef NumImpl Impl;
-
-    public:
-      /** Default ctor */
-      Num()
-      : _pimpl( Impl::nullimpl() )
-      {}
-      /** Dtor */
-      ~Num()
-      {}
-
-    public:
-      Num( const shared_ptr<Impl> & pimpl_r )
-      : _pimpl( pimpl_r ? pimpl_r : Impl::nullimpl() )
-      {}
-
-      int i() const { return _pimpl->i(); }
-
-    private:
-      /** Pointer to implementation */
-      RWCOW_pointer<Impl> _pimpl;
-    };
-    ///////////////////////////////////////////////////////////////////
-
-    /** \relates Num Stream output */
-    std::ostream & operator<<( std::ostream & str, const Num & obj )
-    { return str << *obj._pimpl; }
-
-    ///////////////////////////////////////////////////////////////////
-
-
-    struct NumPool
-    {
-      NumPool()
-      : _pool(10)
-      {}
-
-      Num get( int i )
-      {
-        Num r( _get( i ) );
-        MIL << i << " -> " << r << std::endl;
-        return r;
-      }
-      Num _get( int i )
-      {
-        if ( i < 0 || i >= 10 )
-          return Num();
-        if ( ! _pool[i] )
-          _pool[i] = shared_ptr<NumImpl>( new NumImpl( i ) );
-        return _pool[i];
-      }
-
-      vector<shared_ptr<NumImpl> > _pool;
-    };
-
-    std::ostream & operator<<( std::ostream & str, const NumPool & obj )
-    {
-      pprint( obj._pool );
-      return str;
-    }
-
+  list<Arch> ret;
+  ret.push_back( Arch_noarch );
+  ret.push_back( Arch_src );
+  ret.push_back( Arch_x86_64 );
+  ret.push_back( Arch_athlon );
+  ret.push_back( Arch_i686 );
+  ret.push_back( Arch_i586 );
+  ret.push_back( Arch_i486 );
+  ret.push_back( Arch_i386 );
+  ret.push_back( Arch_s390x );
+  ret.push_back( Arch_s390 );
+  ret.push_back( Arch_ppc64 );
+  ret.push_back( Arch_ppc );
+  ret.push_back( Arch_ia64 );
+  ret.push_back( Arch( "unknown" ) );
+  ret.push_back( Arch( "unknown2" ) );
+  return ret;
 }
-///////////////////////////////////////////////////////////////////
+
+static list<Arch> archlist( archList() );
+static set<Arch>  archset( archlist.begin(), archlist.end() );
+
+inline const char * compResult( int res )
+{
+  return( res ? ( res < 0 ? "<" : ">" ) : "=" );
+}
+
+
+struct CompatTest
+{
+  void operator()( const Arch & lhs, const Arch & rhs ) const
+  {
+
+    DBG << str::form( "%-10s --> %-10s : %6s : %s",
+                      lhs.asString().c_str(),
+                      rhs.asString().c_str(),
+                      ( lhs.compatibleWith( rhs ) ? "COMPAT" : "no" ),
+                      compResult( lhs.compare( rhs ) ) )
+
+        << std::endl;
+  }
+};
+
+template<class _Iter, class _Function>
+  inline void sym_compare( _Iter begin, _Iter end, _Function fnc )
+  {
+    for ( _Iter l = begin; l != end; ++l )
+      for ( _Iter r = begin; r != end; ++r )
+        fnc( *l, *r );
+  }
+template<class _Iter, class _Function>
+  inline void sym_compare( _Iter begin, _Iter end )
+  {
+    sym_compare( begin, end, _Function() );
+  }
+
 
 /******************************************************************
 **
@@ -167,12 +85,14 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  NumPool a;
-  DBG << a << endl;
-  DBG << a.get( -2 ) << endl;
-  DBG << a.get( 3 ) << endl;
-  DBG << a.get( 13 ) << endl;
-  DBG << a << endl;
+  // All archs in test
+  print( archlist );
+
+  // set ordering
+  print( archset );
+
+  // compatibleWith
+  sym_compare( archset.begin(), archset.end(), CompatTest() );
 
 
   INT << "===[END]============================================" << endl << endl;
