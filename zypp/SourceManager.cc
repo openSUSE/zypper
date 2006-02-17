@@ -126,7 +126,7 @@ namespace zypp
     return res;
   }
 
-  void SourceManager::store(Pathname root_r)
+  void SourceManager::store(Pathname root_r, bool metadata_cache )
   {
     storage::PersistentStorage store;    
     store.init( root_r );
@@ -154,7 +154,7 @@ namespace zypp
     _deleted_sources.clear();
   }
 
-  void SourceManager::restore(Pathname root_r)
+  void SourceManager::restore(Pathname root_r, bool use_caches )
   {
     if (! _sources.empty() )
 	ZYPP_THROW(Exception ("At least one source already registered, cannot restore sources from persistent store.") );

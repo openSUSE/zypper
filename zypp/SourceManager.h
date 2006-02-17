@@ -54,17 +54,25 @@ namespace zypp
     /**
      * Store the current state to the given path
      *
+     * \param root_r root path for storing the source definitions
+     * \param metadata_cache if true, this will also store/update
+     * metadata caches for the sources.
+     *
      * \throws Exception
      */    
-    void store(Pathname root_r);
+    void store(Pathname root_r, bool metadata_cache );
     
     /**
      * Restore the sources state to the given path. If the sources
      * database is not empty, it throws an exception
      *
+     * \param use_caches  if true, source creation will try to use source cache
+     * and it's behavior on autorefresh. If false, it will not use
+     * the cache at all.
+     *
      * \throws Exception
      */
-    void restore(Pathname root_r);
+    void restore(Pathname root_r, bool use_caches = true);
     
     /**
      * Find a source with a specified ID
