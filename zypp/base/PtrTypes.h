@@ -167,10 +167,10 @@ namespace zypp
         {}
 
         void reset()
-        { _dptr.reset(); }
+        { _Ptr().swap( _dptr ); }
 
         void reset( typename _Ptr::element_type * dptr )
-        { _dptr.reset( dptr ); }
+        { _Ptr( dptr ).swap( _dptr ); }
 
         void swap( RW_pointer & rhs )
         { _dptr.swap( rhs._dptr ); }
@@ -262,10 +262,10 @@ namespace zypp
         {}
 
         void reset()
-        { _dptr.reset(); }
+        { _Ptr().swap( _dptr ); }
 
         void reset( typename _Ptr::element_type * dptr )
-        { _dptr.reset( dptr ); }
+        { _Ptr( dptr ).swap( _dptr ); }
 
         void swap( RWCOW_pointer & rhs )
         { _dptr.swap( rhs._dptr ); }
@@ -312,7 +312,7 @@ namespace zypp
         void assertUnshared()
         {
           if ( !unique() )
-            _dptr.reset( rwcowClone( _dptr.get() ) );
+            _Ptr( rwcowClone( _dptr.get() ) ).swap( _dptr );
         }
 
       private:

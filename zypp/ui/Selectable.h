@@ -33,7 +33,12 @@ namespace zypp
     //
     //	CLASS NAME : Selectable
     //
-    /** Collects ResObject of same kind and name.
+    /** Collects PoolItems of same kind and name.
+     *
+     * Selectable is a status wrapper. That's why it offers the
+     * PoolItems ResObjects but hides their individual ResStatus.
+     * The ui::Status is calculated from (and transated to)
+     * PoolItems individual ResStatus values.
      *
      * \note There's one Selectable per installed item, in case more
      * than one item is intalled.
