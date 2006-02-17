@@ -56,6 +56,7 @@ namespace zypp
         std::string product_dir;
         std::string type;
         std::string url;
+        std::string cache_dir;
         std::string alias;
       };
 

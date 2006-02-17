@@ -381,6 +381,7 @@ std::string toXML( const PersistentStorage::SourceData &obj )
   out << "  <enabled>" << (obj.enabled ? "true" : "false" ) << "</enabled>" << std::endl;
   out << "  <auto-refresh>" << ( obj.autorefresh ? "true" : "false" ) << "</auto-refresh>" << std::endl;
   out << "  <product-dir>" << xml_escape(obj.product_dir) << "</product-dir>" << std::endl;
+  out << "  <cache-dir>" << xml_escape(obj.cache_dir) << "</cache-dir>" << std::endl;
   out << "  <type>" << xml_escape(obj.type) << "</type>" << std::endl;
    out << "  <url>" << xml_escape(obj.url) << "</url>" << std::endl;
    out << "  <alias>" << xml_escape(obj.alias) << "</alias>" << std::endl;

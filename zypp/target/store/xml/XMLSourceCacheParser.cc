@@ -75,6 +75,10 @@ namespace zypp {
             {
               dataPtr->product_dir = _helper.content(child);
             }
+            else if (name == "cache-dir")
+            {
+              dataPtr->cache_dir = _helper.content(child);
+            }
             else if (name == "alias")
             {
               dataPtr->alias = _helper.content(child);
