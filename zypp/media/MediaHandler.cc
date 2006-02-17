@@ -106,16 +106,19 @@ MediaHandler::removeAttachPoint()
     if(_attachPoint.use_count() <= 2 &&
        _attachPoint->temp    &&
        !_attachPoint->path.empty() &&
-       PathInfo(_attachPoint->path).isExist())
+       PathInfo(_attachPoint->path).isDir())
   {
-    int res = recursive_rmdir( _attachPoint->path );
+    Pathname path(_attachPoint->path);
+
+    setAttachPoint("", true);
+
+    int res = recursive_rmdir( path );
     if ( res == 0 ) {
-      MIL << "Deleted default attach point " << _attachPoint->path << endl;
+      MIL << "Deleted default attach point " << path << endl;
     } else {
-      ERR << "Failed to Delete default attach point " << _attachPoint->path
+      ERR << "Failed to Delete default attach point " << path
 	<< " errno(" << res << ")" << endl;
     }
-    //setAttachPoint("", true);
   }
   else
   {
