@@ -122,7 +122,7 @@ ResolverContext::~ResolverContext()
 ResStatus
 ResolverContext::getStatus (PoolItem_Ref item)
 {
-//_XDEBUG( "[" << this << "]getStatus(" << item << ")" );
+_XDEBUG( "[" << this << "]getStatus(" << item << ")" );
 
     if (item == _last_checked_item) return _last_checked_status;
 
@@ -135,7 +135,7 @@ ResolverContext::getStatus (PoolItem_Ref item)
 
 	it = context->_context.find(item);		// part of local context ?
 	if (it != context->_context.end()) {
-//_XDEBUG( "[" << context << "]:" << it->second );
+_XDEBUG( "[" << context << "]:" << it->second );
 	    _last_checked_status = it->second;
 	    return it->second;				// Y: return
 	}
@@ -149,7 +149,7 @@ ResolverContext::getStatus (PoolItem_Ref item)
 	status = ResStatus::uninstalled;		// return _is_ state, not _to be_ state
 
     _last_checked_status = status;
-//    _XDEBUG( "[NULL]:" << status );    
+    _XDEBUG( "[NULL]:" << status );    
 #else
     _last_checked_status = item.status();    
 #endif
