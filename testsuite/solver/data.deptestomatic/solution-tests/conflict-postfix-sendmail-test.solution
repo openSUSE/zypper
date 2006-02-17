@@ -20,7 +20,7 @@
 >!> 1 problems found:
 >!> Problem:
 >!> Cannot install postfix because it is conflicting with sendmail
->!> A conflict over postfix == 2.2.6-6 (postfix) requires the removal of to-be-installed postfix-2.2.6-6.i586[packages]
+>!> A conflict over postfix == 2.2.6 (postfix) requires the removal of to-be-installed postfix-2.2.6-6.i586[packages]
 >!>    Solution:
 >!>       delete postfix
 >!>       delete [package]postfix-2.2.6-6.i586
