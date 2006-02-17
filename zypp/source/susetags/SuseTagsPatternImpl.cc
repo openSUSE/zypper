@@ -53,6 +53,9 @@ namespace zypp
     Label SuseTagsPatternImpl::order() const
     { return _order; }
 
+    Pathname SuseTagsPatternImpl::icon() const
+    { return _icon; }
+
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////

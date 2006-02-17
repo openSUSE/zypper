@@ -62,9 +62,11 @@ namespace zypp
       virtual Label category() const;
       virtual bool visible() const;
       virtual Label order() const;
+      virtual Pathname icon() const;
 
       TranslatedText _summary;
       TranslatedText _description;
+      Pathname _icon;
       std::string _parser_version;
       std::string _name;
       std::string _version;

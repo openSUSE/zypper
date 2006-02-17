@@ -82,6 +82,10 @@ namespace zypp
         {
           selImpl->_category = tag.value;
         }
+        else if ( tag.name == "Ico" )
+        {
+          selImpl->_icon = tag.value;
+        }
          else if ( tag.name == "Ord" )
         {
           selImpl->_order = tag.value;
