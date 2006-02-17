@@ -59,8 +59,15 @@ namespace zypp
      * Must be called when dealing with non-package resolvables,
      * like Patches, Patterns, and Products
      *
+     * Must be called with a 'plain' pool, e.g. no additonal
+     * transacts set.
+     *
+     * return true if it was successful
+     * return false if not (this will only happen if other
+     *   transactions are in the pool which will lead to
+     *   no solution)
      **/
-    void establishPool (void);
+    bool establishPool (void);
 
     /**
      * Resolve package dependencies:

@@ -173,7 +173,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     bool verifySystem (void);
     void establishState (const ResolverContext_Ptr context = NULL);
-    void establishPool (void);
+    bool establishPool (void);
     bool resolveDependencies (const ResolverContext_Ptr context = NULL);
     bool resolvePool (void);
 

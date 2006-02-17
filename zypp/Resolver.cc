@@ -58,8 +58,8 @@ namespace zypp
 
   bool Resolver::verifySystem ()
   { return _pimpl->verifySystem(); }
-  void Resolver::establishPool ()
-  { _pimpl->establishPool(); }
+  bool Resolver::establishPool ()
+  { return _pimpl->establishPool(); }
   bool Resolver::resolvePool ()
   { return _pimpl->resolvePool (); }
   void Resolver::undo()

@@ -416,7 +416,7 @@ Resolver::establishState (ResolverContext_Ptr context)
 }
 
 
-void
+bool
 Resolver::establishPool ()
 {
     establishState ();						// establish !
@@ -427,9 +427,10 @@ Resolver::establishPool ()
     }
     else {
 	ERR << "establishState did not return a bestContext" << endl;
+	return false;
     }
 
-    return;
+    return true;
 }
 
 //---------------------------------------------------------------------------
