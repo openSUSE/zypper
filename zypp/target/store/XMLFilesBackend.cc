@@ -569,6 +569,7 @@ XMLFilesBackend::createProduct( const zypp::parser::yum::YUMProductData & parsed
       impl->_release_notes_url = Url();
 
     //unsigned int sourceid = str::strtonum<unsigned int>(parsed.sourceid);
+    /*
     std::string sourceid = parsed.sourceid;
     try
     {
@@ -579,6 +580,7 @@ XMLFilesBackend::createProduct( const zypp::parser::yum::YUMProductData & parsed
       ZYPP_CAUGHT(excpt_r);
       impl->_source = Source_Ref::noSource;
     }
+    */
 
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch, createDependencies(parsed, ResTraits<Product>::kind) );

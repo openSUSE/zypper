@@ -77,9 +77,6 @@ namespace zypp {
             else if (name == "release-notes-url") {
           productPtr->releasenotesurl = _helper.content(child);
             }
-            else if (name == "source") {
-          productPtr->sourceid = _helper.content(child);
-            }
             else if (name == "displayname") {
               productPtr->displayname.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
             }

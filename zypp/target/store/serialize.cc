@@ -19,6 +19,11 @@
 #include "zypp/CapFactory.h"
 #include "zypp/Source.h"
 
+#include "zypp/ResObject.h"
+#include "zypp/detail/ImplConnect.h"
+#include "zypp/detail/ResObjectImplIf.h"
+#include "zypp/detail/SelectionImplIf.h"
+
 #include "serialize.h"
 #include "xml_escape_parser.hpp"
 
@@ -47,6 +52,28 @@ std::string xml_tag_enclose( const std::string &text, const std::string &tag, bo
 
   result += "</" + tag + ">";
   return result;
+}
+
+/**
+ * helper function that builds
+ * <tagname lang="code">text</tagname>
+ *
+ *
+ */
+static std::string translatedTextToXML(const TranslatedText &text, const std::string &tagname)
+{
+  std::set<Locale> locales = text.locales();
+  //ERR << "locale contains " << locales.size() << " translations" << std::endl;
+  std::stringstream out;
+  for ( std::set<Locale>::const_iterator it = locales.begin(); it != locales.end(); ++it)
+  {
+    //ERR << "serializing " << (*it).code() << std::endl;
+    if ( *it == Locale() )
+      out << "<" << tagname << ">" << xml_escape(text.text(*it)) << "</" << tagname << ">" << std::endl;
+    else
+      out << "<" << tagname << " lang=\"" << (*it).code() << "\">" << xml_escape(text.text(*it)) << "</" << tagname << ">" << std::endl;
+  }
+  return out.str();
 }
 
 template<class T>
@@ -203,8 +230,11 @@ std::string toXML( const Selection::constPtr &obj )
   out << "  xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\"" << std::endl;
   out << "  xmlns:suse=\"http://novell.com/package/metadata/suse/common\">" << std::endl;
   out << "  <name>" << xml_escape(obj->name()) << "</name>" << std::endl;
-  out << "  <summary>" << xml_escape(obj->summary()) << "</summary>" << std::endl;
-  //out << "  <summary lang='en.US'>foobar</summary>" << std::endl;
+
+  // access implementation
+  detail::ResImplTraits<Selection::Impl>::constPtr sipp( detail::ImplConnect::resimpl( obj ) );
+  out << translatedTextToXML(sipp->summary(), "summary");
+  out << translatedTextToXML(sipp->description(), "description");
   //out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << std::endl;
   out << "  <uservisible>" << (obj->visible() ? "true" : "false" ) << "</uservisible>" << std::endl;
   out << "  <category>" << xml_escape(obj->category()) << "</category>" << std::endl;
@@ -224,15 +254,17 @@ std::string toXML( const Pattern::constPtr &obj )
   out << "  xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\"" << std::endl;
   out << "  xmlns:suse=\"http://novell.com/package/metadata/suse/common\">" << std::endl;
   out << "  <name>" << xml_escape(obj->name()) << "</name>" << std::endl;
-  out << "  <summary>" << xml_escape(obj->summary()) << "</summary>" << std::endl;
-  //out << "  <summary lang='en.US'>foobar</summary>" << std::endl;
+
+  // access implementation
+  detail::ResImplTraits<Pattern::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
+  out << translatedTextToXML(pipp->summary(), "summary");
+  out << translatedTextToXML(pipp->description(), "description");
+
   out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << std::endl;
   out << "  <uservisible>" << (obj->userVisible() ? "true" : "false" ) << "</uservisible>" << std::endl;
   out << "  <category>" << xml_escape(obj->category()) << "</category>" << std::endl;
   out << "  <icon>" << xml_escape(obj->icon().asString()) << "</icon>" << std::endl;
   out << "  <script>" << xml_escape(obj->script().asString()) << "</script>" << std::endl;
-  //out << "  <description lang='cs.CZ'>This is my pattern, it is soooooooo coool!</description>" << std::endl;
-  //out << "  <description lang='en.US'>Duh</description>" << std::endl;
   out << toXML(obj->deps()) << std::endl;
   out << "</pattern>" << std::endl;
   return out.str();

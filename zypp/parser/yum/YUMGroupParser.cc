@@ -72,6 +72,7 @@ namespace zypp {
                  }
                  else if (name == "description") {
                    dataPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
+                   ERR << "description has " << dataPtr->description.locales().size() << std::endl;
                  }
                  else if (name == "grouplist") {
                    parseGrouplist(dataPtr, child);

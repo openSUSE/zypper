@@ -67,8 +67,8 @@ namespace zypp
 	virtual Label order() const;
 
       protected:
-// _summary
-// _description;
+      TranslatedText _summary;
+      TranslatedText _description;
         bool _user_visible;
       private:
 	Source_Ref _source;

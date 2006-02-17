@@ -138,6 +138,11 @@ namespace zypp
   void TranslatedText::setText( const std::string &text, const Locale &lang )
   { _pimpl->setText( text, lang ); }
 
+  std::set<Locale> TranslatedText::locales() const
+  {
+    return _pimpl->locales();
+  }
+
   void TranslatedText::setText( const std::list<std::string> &text, const Locale &lang )
   { _pimpl->setText( text, lang ); }
 

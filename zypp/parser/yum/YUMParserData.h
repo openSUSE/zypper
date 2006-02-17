@@ -433,9 +433,6 @@ namespace zypp {
         TranslatedText description;
         // those are suse specific tags
         std::string releasenotesurl;
-        // source alias is required when saving in yum format to the backend
-        // for a normal yum repository, the source is the repo itself.
-        std::string sourceid;
       };
 
       /* Easy output */

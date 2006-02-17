@@ -51,15 +51,6 @@ namespace zypp
     /** Dtor */
     ~TranslatedText();
 
-    /** \todo Think about eliminating them. The default text is nothing
-     * special. It's strange to allow to alter it in a different manner
-     * than the other ones. IMO more confusing than convenient.
-    */
-    //void operator=(const std::string &text)
-    //{ setText(text); }
-    //void operator=(const std::list<std::string> &text)
-    //{ setText(text); }
-
     /**  */
     static const TranslatedText notext;
 

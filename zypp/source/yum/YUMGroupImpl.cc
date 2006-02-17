@@ -38,6 +38,8 @@ namespace zypp
 	const zypp::parser::yum::YUMGroupData & parsed
       )
       : _user_visible(parsed.userVisible == "true")
+      , _description(parsed.description)
+      , _summary(parsed.name)
       , _source(source_r)
       {
 // to name        std::string groupId;
@@ -54,10 +56,10 @@ namespace zypp
       }
 
       TranslatedText YUMGroupImpl::summary() const
-      { return ResObjectImplIf::summary(); }
+      { return _summary; }
 
       TranslatedText YUMGroupImpl::description() const
-      { return ResObjectImplIf::description(); }
+      { return _description; }
 
       Text YUMGroupImpl::insnotify() const
       { return ResObjectImplIf::insnotify(); }
