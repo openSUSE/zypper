@@ -63,7 +63,7 @@ namespace zypp
       virtual bool visible() const;
       virtual Label order() const;
       virtual Pathname icon() const;
-
+      
       TranslatedText _summary;
       TranslatedText _description;
       Pathname _icon;

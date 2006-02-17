@@ -35,6 +35,9 @@ namespace zypp
     Pathname PatternImplIf::script() const
     { return Pathname(); }
 
+    Label PatternImplIf::order() const
+    { return Label(); }
+    
     static void copycaps( std::set<std::string> & out, const CapSet & in)
     {
 	for (CapSet::const_iterator it = in.begin(); it != in.end(); ++it) {
