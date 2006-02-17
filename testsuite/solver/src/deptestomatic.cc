@@ -622,7 +622,7 @@ load_source (const string & alias, const string & filename, const string & type,
     int count = 0;
 
     try {
-	Url url("file://");
+	Url url("file:/");
 
 	media::MediaManager mmgr;
 	media::MediaId mediaid = mmgr.open(url);

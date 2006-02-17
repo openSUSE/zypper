@@ -33,7 +33,7 @@ int main( int argc, char * argv[] )
     INT << "===[START]==========================================" << endl;
 
     Pathname p = argv[1];
-    Url url("file://");
+    Url url("file:/");
     string alias("helixparse");
 
 #if 0	// old SourceManager
