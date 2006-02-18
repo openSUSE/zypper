@@ -122,7 +122,7 @@ ResolverContext::~ResolverContext()
 ResStatus
 ResolverContext::getStatus (PoolItem_Ref item)
 {
-_XDEBUG( "[" << this << "]getStatus(" << item << ")" );
+//_XDEBUG( "[" << this << "]getStatus(" << item << ")" );
 
     if (item == _last_checked_item) return _last_checked_status;
 
@@ -135,7 +135,7 @@ _XDEBUG( "[" << this << "]getStatus(" << item << ")" );
 
 	it = context->_context.find(item);		// part of local context ?
 	if (it != context->_context.end()) {
-_XDEBUG( "[" << context << "]:" << it->second );
+//_XDEBUG( "[" << context << "]:" << it->second );
 	    _last_checked_status = it->second;
 	    return it->second;				// Y: return
 	}
@@ -149,7 +149,7 @@ _XDEBUG( "[" << context << "]:" << it->second );
 	status = ResStatus::uninstalled;		// return _is_ state, not _to be_ state
 
     _last_checked_status = status;
-    _XDEBUG( "[NULL]:" << status );    
+//    _XDEBUG( "[NULL]:" << status );    
 #else
     _last_checked_status = item.status();    
 #endif
@@ -1457,24 +1457,58 @@ churn_factor (ResolverContext_Ptr a)
     return a->upgradeCount() + (2.0 * a->installCount ()) + (4.0 * a->uninstallCount ());
 }
 
+typedef struct {
+    PoolItemList *rl;
+    int cmp;	
+} HigherVersionInfo;
+
+static void
+compare_version (PoolItem_Ref item, const ResStatus & status, void *data)
+{
+    HigherVersionInfo *info = (HigherVersionInfo *)data;
+    PoolItemList compareList= *(info->rl);
+    PoolItemList::const_iterator it;
+    for ( it = compareList.begin();
+	  it != compareList.end(); it++ )
+    {
+	if (compareByN ( item.resolvable(), it->resolvable()) == 0) {
+	    info->cmp += item.resolvable()->edition().compare( it->resolvable()->edition());
+	    break;
+	}
+    }
+
+    if (it != compareList.end()) {
+	// this item has already been regarded --> delete it
+	compareList.remove (*it);
+    }
+}
+
 int
 ResolverContext::partialCompare (ResolverContext_Ptr context)
 {
     int cmp = 0;
     if (this != context) {
 
-	// High numbers are good... we don't want solutions containing low-priority channels.
-	cmp = num_cmp (_min_priority, context->_min_priority);
-
-	if (cmp == 0) {
-
-	    // High numbers are bad.  Less churn is better.
-	    cmp = rev_num_cmp (churn_factor (this), churn_factor (context));
+	// evalutate which result has the newest versions
+	PoolItemList compList = context->getInstalls();
+	HigherVersionInfo info = { &compList, 0};
+	foreachInstall (compare_version, (void *)&info);
+	cmp = info.cmp;
+	
+	if (cmp == 0) { 
+	    // High numbers are good... we don't want solutions containing low-priority channels.
+	    cmp = num_cmp (_min_priority, context->_min_priority);
 
 	    if (cmp == 0) {
 
-		// High numbers are bad.  Bigger #s means more penalties.
-		cmp = rev_num_cmp (_other_penalties, context->_other_penalties);
+		// High numbers are bad.  Less churn is better.
+		cmp = rev_num_cmp (churn_factor (this), churn_factor (context));
+
+		if (cmp == 0) {
+
+		    // High numbers are bad.  Bigger #s means more penalties.
+		    cmp = rev_num_cmp (_other_penalties, context->_other_penalties);
+		}
 	    }
 	}
     }
@@ -1486,24 +1520,24 @@ int
 ResolverContext::compare (ResolverContext_Ptr context)
 {
     int cmp;
-
+    
     if (this == context)
 	return 0;
-
+    
     cmp = partialCompare (context);
     if (cmp)
 	return cmp;
-
+    
     /* High numbers are bad.  Smaller downloads are best. */
     cmp = rev_num_cmp (_download_size, context->_download_size);
     if (cmp)
 	return cmp;
-
+    
     /* High numbers are bad.  Less disk space consumed is good. */
     cmp = rev_num_cmp (_install_size, context->_install_size);
     if (cmp)
 	return cmp;
-
+    
     return 0;
 }
 
