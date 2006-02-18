@@ -64,7 +64,7 @@ ProblemSolutionInstall::ProblemSolutionInstall( ResolverProblem_Ptr parent,
 						PoolItemList & itemList )
     : ProblemSolution (parent, "", "")
 {
-    _description = _("Install missing resolvables.");
+    _description = _("Install missing resolvables");
 
     for (PoolItemList::iterator iter = itemList.begin();
 	 iter != itemList.end(); iter++) {

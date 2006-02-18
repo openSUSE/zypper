@@ -62,7 +62,7 @@ ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent,
 						    PoolItemList & itemlist)
     : ProblemSolution (parent, "", "")
 {
-    _description = _("Delete conflicting resolvables.");
+    _description = _("Delete conflicting resolvables");
 
     for (PoolItemList::iterator iter = itemlist.begin();
 	 iter != itemlist.end(); iter++) {

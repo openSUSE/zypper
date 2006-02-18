@@ -58,7 +58,7 @@ ProblemSolutionUnlock::ProblemSolutionUnlock( ResolverProblem_Ptr parent,
 					      PoolItemList & itemlist)
     : ProblemSolution (parent, "", "")
 {
-    _description = _("Unlock these resolvables.");
+    _description = _("Unlock these resolvables");
 
     for (PoolItemList::iterator iter = itemlist.begin();
 	 iter != itemlist.end(); iter++) {
