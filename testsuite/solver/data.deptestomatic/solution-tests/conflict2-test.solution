@@ -10,5 +10,5 @@
 >!>       delete A
 >!>       delete [package]A-1.0-1.
 >!>    Solution:
->!>       Ignore this conflict of B.
+>!>       Ignore this conflict of B
 >!>       

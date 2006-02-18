@@ -7,7 +7,7 @@
 >!>       delete foonew
 >!>       delete [package]foonew-2.0-1.
 >!>    Solution:
->!>       Ignore this requirement.
+>!>       Ignore this requirement just here
 >!>       
 >!> Taking solution: 1
 >!> For problem:     0

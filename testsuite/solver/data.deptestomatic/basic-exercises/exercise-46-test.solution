@@ -7,5 +7,5 @@
 >!>       delete liboaf0-devel
 >!>       delete [package]liboaf0-devel-0.6.6-3mdk.
 >!>    Solution:
->!>       Ignore this requirement.
+>!>       Ignore this requirement just here
 >!>       

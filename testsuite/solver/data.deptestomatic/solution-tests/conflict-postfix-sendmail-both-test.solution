@@ -29,6 +29,6 @@
 >!>       delete postfix
 >!>       delete [package]postfix-2.2.6-6.i586
 >!>    Solution:
->!>       Ignore this conflict of sendmail.
+>!>       Ignore this conflict of sendmail
 >!>       
 >!> Calculating installation order ...

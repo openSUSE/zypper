@@ -10,5 +10,5 @@
 >!>       delete p1
 >!>       delete [package]p1-1.0-1.
 >!>    Solution:
->!>       Ignore this conflict of p2.
+>!>       Ignore this conflict of p2
 >!>       

@@ -7,5 +7,5 @@
 >!>       delete unfulfilled
 >!>       delete [package]unfulfilled-1.0-1.
 >!>    Solution:
->!>       Ignore this requirement.
+>!>       Ignore this requirement just here
 >!>       

@@ -10,7 +10,7 @@
 >!>       delete B
 >!>       delete [package]B-1.0-1.
 >!>    Solution:
->!>       Ignore this requirement.
+>!>       Ignore this requirement just here
 >!>       
 >!> Taking solution: 0
 >!> For problem:     0

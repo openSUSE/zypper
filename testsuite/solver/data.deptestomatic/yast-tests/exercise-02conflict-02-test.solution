@@ -10,5 +10,5 @@
 >!>       delete smail
 >!>       delete [package]smail-1.0-1.
 >!>    Solution:
->!>       Ignore this conflict of sendmail.
+>!>       Ignore this conflict of sendmail
 >!>       

@@ -10,5 +10,5 @@
 >!>       delete foo3
 >!>       delete [package]foo3-1.0-1.
 >!>    Solution:
->!>       Ignore this conflict of baz3.
+>!>       Ignore this conflict of baz3
 >!>       
