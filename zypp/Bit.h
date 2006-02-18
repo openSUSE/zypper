@@ -15,6 +15,8 @@
 #include <iosfwd>
 #include <string>
 
+#include "zypp/base/SafeBool.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -89,7 +91,7 @@ namespace zypp
         static const unsigned end    = _begin + _size;
       };
     /** Range specialisation for (illegal) zero \a _size.
-     * Fore error at compiletime. Currently because types
+     * Force error at compiletime. Currently because types
      * and values are undefined
     */
     template<class _IntT, unsigned _begin>
@@ -113,6 +115,24 @@ namespace zypp
         typedef typename _Range::IntT IntT;
 
         static const IntT value = _value << RangeT::begin;
+      };
+
+    /** A single 1-bit within a Range.
+     * \code
+     * typedef Range<char,2,3> SubField; // bits 2,3,4 in a char field
+     * SubField::Mask::value;            // 00011100
+     * RangeBit<SubField,0>::value;      // 00000100
+     * RangeBit<SubField,1>::value;      // 00001000
+     * RangeBit<SubField,2>::value;      // 00010000
+     * \endcode
+    */
+    template<class _Range, unsigned _pos>
+      struct RangeBit
+      {
+        typedef _Range                RangeT;
+        typedef typename _Range::IntT IntT;
+
+        static const IntT value = IntT(1) << (RangeT::begin + _pos);
       };
 
     ///////////////////////////////////////////////////////////////////
@@ -139,6 +159,7 @@ namespace zypp
     */
     template<class _IntT>
       class BitField  : public Range<_IntT, 0, MaxBits<_IntT>::value>
+                      , public base::SafeBool<BitField<_IntT> >
       {
       public:
         /** Default ctor: zero. */
@@ -150,6 +171,12 @@ namespace zypp
         : _value( value_r )
         {}
 
+      public:
+        /** SafeBool. \see zypp::base::SafeBool */
+        bool boolTest() const
+        { return _value; }
+
+      public:
         /** Return the value. */
         template<class _Range>
           _IntT value() const
@@ -197,6 +224,28 @@ namespace zypp
         {
           return _value == rhs;
         }
+      public:
+
+        BitField & operator=( const BitField & rhs )
+        { _value = rhs._value; return *this; }
+
+        BitField & operator&=( const BitField & rhs )
+        { _value &= rhs._value; return *this; }
+
+        BitField & operator|=( const BitField & rhs )
+        { _value |= rhs._value; return *this; }
+
+        BitField & operator^=( const BitField & rhs )
+        { _value ^= rhs._value; return *this; }
+
+        BitField & operator<<=( unsigned num )
+        { _value <<= num; return *this; }
+
+        BitField & operator>>=( unsigned num )
+        { _value >>= num; return *this; }
+
+        BitField operator~() const
+        { return ~_value; }
 
       private:
         _IntT _value;
@@ -210,6 +259,7 @@ namespace zypp
         return str << obj.asString();
       }
 
+
     /** \relates BitField */
     template<class _IntT>
       inline bool operator==( const BitField<_IntT> & lhs, const BitField<_IntT> & rhs )
@@ -219,6 +269,32 @@ namespace zypp
     template<class _IntT>
       inline bool operator!=( const BitField<_IntT> & lhs, const BitField<_IntT> & rhs )
       { return ! (lhs == rhs); }
+
+
+    /** \relates BitField */
+    template<class _IntT>
+      inline BitField<_IntT> operator&( const BitField<_IntT> & lhs, const BitField<_IntT> & rhs )
+      { return BitField<_IntT>(lhs) &= rhs; }
+
+    /** \relates BitField */
+    template<class _IntT>
+      inline BitField<_IntT> operator|( const BitField<_IntT> & lhs, const BitField<_IntT> & rhs )
+      { return BitField<_IntT>(lhs) |= rhs; }
+
+    /** \relates BitField */
+    template<class _IntT>
+      inline BitField<_IntT> operator^( const BitField<_IntT> & lhs, const BitField<_IntT> & rhs )
+      { return BitField<_IntT>(lhs) ^= rhs; }
+
+    /** \relates BitField */
+    template<class _IntT>
+      inline BitField<_IntT> operator<<( const BitField<_IntT> & lhs, unsigned num )
+      { return BitField<_IntT>(lhs) <<= num; }
+
+    /** \relates BitField */
+    template<class _IntT>
+      inline BitField<_IntT> operator>>( const BitField<_IntT> & lhs, unsigned num )
+      { return BitField<_IntT>(lhs) >>= num; }
 
     /////////////////////////////////////////////////////////////////
   } // namespace bit
