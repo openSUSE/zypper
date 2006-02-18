@@ -1,6 +1,6 @@
 >!> Doing distribution upgrade ...
->!>1: I_Th_[package]A-1.0-1.
->!>2: U_Th_[package]A_new-2.0-1.
+>!> 1: I_Th_[package]A-1.0-1.
+>!> 2: U_Th_[package]A_new-2.0-1.
 >!> Solution #1:
 >!> install A_new-2.0-1[upgrade]
 >!> remove  A-1.0-1

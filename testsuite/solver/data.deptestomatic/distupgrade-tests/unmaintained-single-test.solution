@@ -1,6 +1,6 @@
 >!> Doing distribution upgrade ...
->!>1: I_Th_[package]A-1.0-1.
->!>2: U___[package]B-2.0-1.
+>!> 1: I_Th_[package]A-1.0-1.
+>!> 2: U___[package]B-2.0-1.
 >!> Solution #1:
 >!> remove  A-1.0-1
 >!> installs=0, upgrades=0, uninstalls=1
