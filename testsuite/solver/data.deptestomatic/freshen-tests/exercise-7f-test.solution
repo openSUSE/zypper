@@ -6,12 +6,12 @@
 >!> Established context
 >!> Freshening ...
 >!> Solution #1:
->!> install A-1.1-1[test]
+>!> install A-1.2-1[core]
 >!> install B-1.0-1[core]
 >!> |satisfied patch:Patch-A-1.1-1[test]
 >!> installs=2, upgrades=0, uninstalls=0, satisfied=1
 >!> Solution #2:
->!> install A-1.2-1[core]
+>!> install A-1.1-1[test]
 >!> install B-1.0-1[core]
 >!> |satisfied patch:Patch-A-1.1-1[test]
 >!> installs=2, upgrades=0, uninstalls=0, satisfied=1
