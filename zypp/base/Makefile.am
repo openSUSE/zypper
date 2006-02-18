@@ -25,6 +25,7 @@ baseinclude_HEADERS =	\
 	NonCopyable.h	\
 	ProvideNumericId.h	\
 	ReferenceCounted.h	\
+	SafeBool.h	\
 	PtrTypes.h	\
 	String.h	\
 	Unit.h		\
