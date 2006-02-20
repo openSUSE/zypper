@@ -399,7 +399,7 @@ MediaHandler::checkAttached(bool aDevice) const
         }
 	else
 	{
-          MediaSource media(ref.mediaSource->type, e->src);
+          MediaSource media(e->type, e->src);
 
     	  if( ref.mediaSource->equals( media) &&
     	      ref.attachPoint->path == Pathname(e->dir))
