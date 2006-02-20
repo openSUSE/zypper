@@ -290,7 +290,14 @@ namespace zypp
        *                  downloaded. If 'cached' is unset an errer is
        *                  returned always.
        *
-       * \throws MediaException
+       * \throws MediaNotOpenException in case of invalid access id.
+       * \throws MediaNotAttachedException in case, that the media is not attached.
+       * \throws MediaNotDesiredException in case, that the media verification failed.
+       * \throws MediaNotAFileException in case, that the requested filename is not a file.
+       * \throws MediaFileNotFoundException in case, that the requested filenamedoes not exists.
+       * \throws MediaWriteException in case, that the file can't be copied from from remote source.
+       * \throws MediaSystemException in case a system operation fails.
+       * \throws MediaException derived exception, depending on the url (handler).
        */
       void
       provideFile(MediaAccessId   accessId,
