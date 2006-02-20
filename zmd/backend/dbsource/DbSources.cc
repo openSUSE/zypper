@@ -89,7 +89,7 @@ DbSources::sources (bool refresh)
     }
 
     media::MediaManager mmgr;
-    media::MediaId mediaid = mmgr.open(Url("file://"));
+    media::MediaId mediaid = mmgr.open(Url("file:/"));
     SourceFactory factory;
 
     // read catalogs table

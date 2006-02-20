@@ -20,7 +20,11 @@ bin_PROGRAMS =	\
 	transact
 
 query_system_SOURCES = query-system.cc
+query_system_INCLUDES = -DZYPP_BASE_LOGGER_LOGGROUP=\"query-system\"
 query_files_SOURCES = query-files.cc
+query_files_INCLUDES = -DZYPP_BASE_LOGGER_LOGGROUP=\"query-files\"
 resolve_dependencies_SOURCES = resolve-dependencies.cc transactions.cc transactions.h
+resolve_dependencies_INCLUDES = -DZYPP_BASE_LOGGER_LOGGROUP=\"resolve-dependencies\"
 transact_SOURCES = transact.cc transactions.cc transactions.h
+transact_INCLUDES = -DZYPP_BASE_LOGGER_LOGGROUP=\"transact\"
 
