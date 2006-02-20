@@ -19,6 +19,7 @@
 #include "zypp/source/yum/YUMGroupImpl.h"
 #include "zypp/source/yum/YUMPatternImpl.h"
 
+#include "zypp/PathInfo.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 #include "zypp/CapFactory.h"
@@ -79,6 +80,9 @@ namespace zypp
             filename = _cache_dir + "/repodata/repomd.xml";
           }
         
+          if ( ! PathInfo(filename).isExist() )
+            ZYPP_THROW(Exception("repodata/repomd.xml not found"));
+
           DBG << "Reading file " << filename << endl;
           ifstream repo_st(filename.asString().c_str());
           YUMRepomdParser repomd(repo_st, "");
