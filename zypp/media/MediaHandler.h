@@ -48,24 +48,10 @@ class MediaHandler {
 	typedef shared_ptr<const MediaHandler> constPtr;
 
     private:
-        /**
-	 * MediaAccess (MediaManager) needs access to the
-	 * attachedMedia() function to deliver a shared
-	 * media source and its attach point to other
-	 * media handler instances.
-	 */
-	friend class MediaAccess;
-
 	/**
 	 * The attached media source.
 	 */
         MediaSourceRef _mediaSource;
-
-	/**
-	 * Returns the attached media. Used by MediaManager
-	 * to find other handlers using the same source.
-	 */
-	AttachedMedia        attachedMedia() const;
 
 	/**
 	 * this is where the media will be actually "mounted"
@@ -94,6 +80,9 @@ class MediaHandler {
 	 * filesystem. If true releaseFile/Dir will delete them.
 	 **/
 	bool _does_download;
+
+        /** timestamp of the the last attach verification */
+        mutable time_t _attach_mtime;
 
     protected:
         /**
@@ -127,6 +116,8 @@ class MediaHandler {
 	 */
 	void             removeAttachPoint();
 
+        bool             isUseableAttachPoint(const Pathname &path) const;
+
 	std::string      mediaSourceName() const
 	{
 	  return _mediaSource ? _mediaSource->name : "";
@@ -134,12 +125,28 @@ class MediaHandler {
 
 	void             setMediaSource(const MediaSourceRef &ref);
 
+        /**
+	 * MediaAccess (MediaManager) needs access to the
+	 * attachedMedia() function to deliver a shared
+	 * media source and its attach point to other
+	 * media handler instances.
+	 */
+	friend class MediaAccess;
+
 	/**
 	 * Ask the media manager if specified media source
 	 * is already attached.
 	 */
 	AttachedMedia
 	findAttachedMedia(const MediaSourceRef &media) const;
+
+	/**
+	 * Returns the attached media. Used by MediaManager
+	 * to find other handlers using the same source.
+	 */
+	AttachedMedia        attachedMedia() const;
+
+        bool                 checkAttached(bool aDevice) const;
 
     protected:
 
@@ -360,7 +367,7 @@ class MediaHandler {
 	/**
 	 * True if media is attached.
 	 **/
-	bool isAttached() const { return _mediaSource; }
+	virtual bool isAttached() const { return _mediaSource; }
 
 	/**
 	 * Return the local directory that corresponds to medias url,

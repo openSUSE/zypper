@@ -18,6 +18,7 @@
 #include "zypp/base/String.h"
 #include "zypp/media/MediaHandler.h"
 #include "zypp/media/MediaManager.h"
+#include "zypp/media/Mount.h"
 
 using namespace std;
 
@@ -50,6 +51,7 @@ MediaHandler::MediaHandler ( const Url &      url_r,
     : _attachPoint( new AttachPoint())
     , _relativeRoot( urlpath_below_attachpoint_r)
     , _does_download( does_download_r )
+    , _attach_mtime(0)
     , _url( url_r )
 {
   if ( !attach_point_r.empty() ) {
@@ -266,6 +268,51 @@ MediaHandler::createAttachPoint() const
   return apoint;
 }
 
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : MediaHandler::isUseableAttachPoint
+//	METHOD TYPE : bool
+//
+//	DESCRIPTION :
+//
+bool
+MediaHandler::isUseableAttachPoint(const Pathname &path) const
+{
+  if( path.empty() || path == "/" || !PathInfo(path).isDir())
+    return false;
+
+  MediaManager  manager;
+  MountEntries  entries( manager.getMountEntries());
+  MountEntries::const_iterator e;
+
+  for( e = entries.begin(); e != entries.end(); ++e)
+  {
+    std::string mnt(Pathname(e->dir).asString());
+
+    if( path == mnt)
+    {
+      // already used as mountpoint
+      return false;
+    }
+    else
+    {
+      std::string our(path.asString());
+
+      // mountpoint is bellow of path
+      // (would hide the content)
+      if( mnt.size() > our.size()   &&
+          mnt.at(our.size()) == '/' &&
+         !mnt.compare(0, our.size(), our))
+        return false;
+    }
+  }
+
+  return true;
+}
+
+
 ///////////////////////////////////////////////////////////////////
 //
 //
@@ -303,6 +350,83 @@ MediaHandler::attachedMedia() const
 ///////////////////////////////////////////////////////////////////
 //
 //
+//	METHOD NAME : MediaHandler::checkAttached
+//	METHOD TYPE : bool
+//
+//	DESCRIPTION :
+//
+bool
+MediaHandler::checkAttached(bool aDevice) const
+{
+  bool _isAttached = false;
+
+  AttachedMedia ref( attachedMedia());
+  if( ref.mediaSource)
+  {
+    MediaManager  manager;
+
+    time_t old = _attach_mtime;
+    _attach_mtime = manager.getMountTableMTime();
+    if( !(old <= 0 || _attach_mtime != old))
+    {
+      // OK, skip the check
+      _isAttached = true;
+    }
+    else
+    {
+      DBG << "Mount table changed - rereading it" << std::endl;
+      MountEntries  entries( manager.getMountEntries());
+      MountEntries::const_iterator e;
+      for( e = entries.begin(); e != entries.end(); ++e)
+      {
+	bool isDevice = (Pathname(e->src).dirname() == "/dev");
+        if( aDevice == isDevice)
+        {
+          PathInfo    dinfo(e->src);
+          MediaSource media(ref.mediaSource->type, e->src,
+	                    dinfo.major(), dinfo.minor());
+
+    	  if( ref.mediaSource->equals( media) &&
+    	      ref.attachPoint->path == Pathname(e->dir))
+    	  {
+    	    DBG << "Found media "
+    	        << ref.mediaSource->asString()
+    	        << " in the mount table" << std::endl;
+    	    _isAttached = true;
+    	    break;
+    	  }
+    	  // differs
+        }
+	else
+	{
+          MediaSource media(ref.mediaSource->type, e->src);
+
+    	  if( ref.mediaSource->equals( media) &&
+    	      ref.attachPoint->path == Pathname(e->dir))
+    	  {
+    	    DBG << "Found media "
+    	        << ref.mediaSource->asString()
+    	        << " in the mount table" << std::endl;
+    	    _isAttached = true;
+    	    break;
+    	  }
+    	  // differs
+	}
+      }
+
+      if( !_isAttached)
+      {
+        ERR << "Attached media not in mount entry table any more"
+            << std::endl;
+      }
+    }
+  }
+  return _isAttached;
+}
+
+///////////////////////////////////////////////////////////////////
+//
+//
 //	METHOD NAME : MediaHandler::attach
 //	METHOD TYPE : PMError
 //
@@ -313,14 +437,9 @@ void MediaHandler::attach( bool next )
   if ( isAttached() )
     return;
 
+  // reset it in case of overloaded isAttached()
+  // that checks the media against /etc/mtab ...
   setMediaSource(MediaSourceRef());
-
-/**
-  if ( _attachPoint->empty() ) {
-    ERR << "Bad Attachpoint" << endl;
-    ZYPP_THROW( MediaBadAttachPointException(url()));
-  }
-*/
 
   attachTo( next ); // pass to concrete handler
   MIL << "Attached: " << *this << endl;
