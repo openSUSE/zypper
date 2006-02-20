@@ -3,6 +3,8 @@
 
 SUBDIRS =
 
+INCLUDES = -DZYPP_BASE_LOGGER_LOGGROUP=\"zypp_detail\"
+
 ## ##################################################
 
 baseincludedir = $(pkgincludedir)/zypp_detail
