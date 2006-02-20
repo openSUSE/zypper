@@ -70,9 +70,11 @@ namespace zypp
      * and it's behavior on autorefresh. If false, it will not use
      * the cache at all.
      *
+     * \return true on success
+     *
      * \throws Exception
      */
-    void restore(Pathname root_r, bool use_caches = true);
+    bool restore(Pathname root_r, bool use_caches = true);
     
     /**
      * Find a source with a specified ID

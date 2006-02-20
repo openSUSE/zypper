@@ -154,11 +154,13 @@ namespace zypp
     _deleted_sources.clear();
   }
 
-  void SourceManager::restore(Pathname root_r, bool use_caches )
+  bool SourceManager::restore(Pathname root_r, bool use_caches )
   {
     if (! _sources.empty() )
 	ZYPP_THROW(Exception ("At least one source already registered, cannot restore sources from persistent store.") );
-    
+
+    bool error = false;
+        
     storage::PersistentStorage store;    
     store.init( root_r );
     
@@ -168,9 +170,31 @@ namespace zypp
 	it != new_sources.end(); ++it)
     {
 	MIL << "Restoring source: " << it->url << it->product_dir << " with alias " << it->alias << endl;
-	unsigned id = addSource(it->url, it->product_dir, it->alias);
+	
+	unsigned id = 0;
+	
+	try {
+	    id = addSource(it->url, it->product_dir, it->alias);
+	}
+	catch ( const Exception & expt ){
+	    ERR << "Unable to restore source from " << it->url << endl;
+	    error = true;
+	    continue;
+	}
+	
+	// should not throw, we've just created the source
+	Source_Ref src = findSource( id );
+	    
 	// FIXME: enable, autorefresh
+	if ( it->enabled )
+	    src.enable();
+	else
+	    src.disable();
+
+	src.setAutorefresh ( it->autorefresh );
     }
+    
+    return !error;
   }
 
   /******************************************************************
