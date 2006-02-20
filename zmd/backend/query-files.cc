@@ -1,9 +1,12 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 
+#include <cstring>
 #include <list>
 
 #include "zypp/ZYpp.h"
 #include "zypp/ZYppFactory.h"
+#include "zypp/SourceManager.h"
+#include "zypp/Source.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 
@@ -19,17 +22,19 @@ using namespace zypp;
 
 #include "dbsource/DbAccess.h"
 
-static ResObjectList
+//-----------------------------------------------------------------------------
+
+static ResStore
 query_file (Target_Ptr target, const char *path)
 {
-    ResObjectList resolvables;
+    ResStore store;
 #if 0
     Resolvable::constPtr resolvable = target->rpm-qp (path);	// FIXME, needs rpm -qp
     if (resolvable != NULL) {
-	resolvables.push_back (resolvable);
+	store.insert( resolvable );
     }
 #endif
-    return resolvables;
+    return store;
 }
 
 static char *
@@ -72,10 +77,10 @@ parse_query (const char *query, bool *recursive)
 #endif
 }
 
-static ResObjectList
+static ResStore
 query_directory (Target_Ptr target, const char *path, bool recursive)
 {
-    ResObjectList resolvables;
+    ResStore store;
 #warning Unclear semantics
 #if 0
     rc_extract_packages_from_directory (path, channel,
@@ -84,23 +89,23 @@ query_directory (Target_Ptr target, const char *path, bool recursive)
 		                        prepend_package,
 		                        &packages);
 #endif
-    return resolvables;
+    return store;
 }
 
 //----------------------------------------------------------------------------
 
-static ResObjectList
+static ResStore
 query (Target_Ptr target, const char *uri, const char *channel_id)
 {
     char *query_part;
     char *path = NULL;
-    ResObjectList resolvables;
+    ResStore store;
 
     /* The magic 7 is strlen ("file://") */
 
     if (strncasecmp (uri, "file://", 7) != 0) {
 	ERR << "Invalid uri '" << uri << "'" << endl;
-	return resolvables;
+	return store;
     }
 
     /* Find the path. The "+ 7" part moves past "file://" */
@@ -125,7 +130,7 @@ query (Target_Ptr target, const char *uri, const char *channel_id)
     }
     else if (S_ISREG(buf.st_mode)) {
 	/* Single file */
-	resolvables = query_file (target, path);
+	store = query_file (target, path);
     } else if (S_ISDIR(buf.st_mode)) {
 	/* Directory */
 	bool recursive = false;
@@ -134,13 +139,44 @@ query (Target_Ptr target, const char *uri, const char *channel_id)
 	    /* + 1 to move past the "?" */
 	    parse_query (query_part + 1, &recursive);
 
-	resolvables = query_directory (target, path, recursive);
+	store = query_directory (target, path, recursive);
     }
 
-    return resolvables;
+    return store;
 }
 
 //----------------------------------------------------------------------------
+// upload all zypp sources as catalogs to the database
+
+static void
+sync_source( DbAccess & db, Source_Ref source )
+{
+    DBG << "sync_source, alias '" << source.alias() << "'" << endl;
+
+    return;
+}
+
+static void
+sync_catalogs( DbAccess & db )
+{
+    SourceManager_Ptr manager = SourceManager::sourceManager();
+
+    std::list<unsigned int> sources = manager->allSources();
+
+    for (std::list<unsigned int>::const_iterator it = sources.begin(); it != sources.end(); ++it) {
+	Source_Ref source = manager->findSource( *it );
+	if (!source) {
+	    ERR << "SourceManager can't find source " << *it << endl;
+	    continue;
+	}
+	sync_source( db, source );
+    }
+    return;
+}
+
+//----------------------------------------------------------------------------
+
+#define CATALOGSYNC "/installation"
 
 int
 main (int argc, char **argv)
@@ -163,9 +199,14 @@ main (int argc, char **argv)
 
     DbAccess db(argv[1]);
 
-    ResObjectList resolvables = query (God->target(), argv[2], argc == 4 ? argv[3] : NULL);
-    if (!resolvables.empty()) {
-	db.writeResObjects( resolvables, true);
+    if (strcmp( argv[2], CATALOGSYNC ) == 0) {
+	sync_catalogs( db );
+    }
+    else {
+	ResStore store = query (God->target(), argv[2], argc == 4 ? argv[3] : NULL);
+	if (!store.empty()) {
+	    db.writeStore( store, ResStatus::uninstalled );
+	}
     }
 
     return 0;
