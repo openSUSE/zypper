@@ -124,7 +124,7 @@ void MediaCurl::attachTo (bool next)
   if ( !_url.isValid() )
     ZYPP_THROW(MediaBadUrlException(_url));
 
-  if( attachPoint().empty() || attachPoint().asString() == "/")
+  if( !isUseableAttachPoint(attachPoint()))
   {
     std::string mountpoint = createAttachPoint().asString();
     if( mountpoint.empty())

@@ -89,7 +89,7 @@ namespace zypp {
       std::string       mountpoint = attachPoint().asString();
       Mount mount;
 
-      if( mountpoint.empty() || mountpoint == "/")
+      if( !isUseableAttachPoint(attachPoint()))
       {
 	mountpoint = createAttachPoint().asString();
 	if( mountpoint.empty())
@@ -120,8 +120,45 @@ namespace zypp {
       mount.mount(path,mountpoint.c_str(),filesystem,options);
 
       setMediaSource(media);
+
+      // wait for /etc/mtab update ...
+      // (shouldn't be needed)
+      int limit = 10;
+      bool mountsucceeded;
+      while( !(mountsucceeded=isAttached()) && limit--)
+      {
+        sleep(1);
+      }
+
+      if( !mountsucceeded)
+      {
+        setMediaSource(MediaSourceRef());
+        try
+        {
+          mount.umount(attachPoint().asString());
+        }
+        catch (const MediaException & excpt_r)
+        {
+          ZYPP_CAUGHT(excpt_r);
+        }
+        ZYPP_THROW(MediaMountException(path, mountpoint,
+          "Unable to verify that the media was mounted"
+        ));
+      }
     }
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : MediaNFS::isAttached
+    //	METHOD TYPE : bool
+    //
+    //	DESCRIPTION : Override check if media is attached.
+    //
+    bool
+    MediaNFS::isAttached() const
+    {
+      return checkAttached(false);
+    }
 
     ///////////////////////////////////////////////////////////////////
     //

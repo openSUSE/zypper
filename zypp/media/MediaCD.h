@@ -53,6 +53,8 @@ namespace zypp {
 		 const Pathname & attach_point_hint_r );
 
         virtual ~MediaCD() { try { release(); } catch(...) {} }
+
+	virtual bool isAttached() const;
     };
 
 ///////////////////////////////////////////////////////////////////

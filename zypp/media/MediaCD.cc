@@ -55,8 +55,9 @@ namespace zypp {
     		  const Pathname & attach_point_hint_r )
       : MediaHandler( url_r, attach_point_hint_r,
     		    url_r.getPathName(), // urlpath below attachpoint
-    		    false ), // does_download
-      _lastdev(-1)
+    		    false )
+      //, does_download
+      , _lastdev(-1)
     {
       if( url_r.getScheme() != "dvd" && url_r.getScheme() != "cd")
       {
@@ -199,6 +200,12 @@ namespace zypp {
       return true;
     }
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    //
+    //	METHOD NAME : MediaCD::detectDevices
+    //	METHOD TYPE : MediaCD::DeviceList
+    //
     MediaCD::DeviceList
     MediaCD::detectDevices(bool supportingDVD)
     {
@@ -337,8 +344,7 @@ namespace zypp {
 	    ; ++fsit)
 	{
 	  try {
-	    // FIXME: verify, if this mountpoint isn't already in use.
-	    if( mountpoint.empty() || mountpoint == "/")
+	    if( !isUseableAttachPoint(Pathname(mountpoint)))
 	    {
 	      mountpoint = createAttachPoint().asString();
 	      setAttachPoint( mountpoint, true);
@@ -350,9 +356,35 @@ namespace zypp {
 
     	    mount.mount (it->name, mountpoint.c_str(), *fsit, options);
 
-	    _lastdev = count;
 	    setMediaSource(media);
-	    mountsucceeded = true;
+
+	    // wait for /etc/mtab update ...
+	    // (shouldn't be needed)
+	    int limit = 10;
+	    while( !(mountsucceeded=isAttached()) && limit--)
+	    {
+	      sleep(1);
+	    }
+
+	    if( mountsucceeded)
+	    {
+	      _lastdev = count;
+	    }
+	    else
+	    {
+	      setMediaSource(MediaSourceRef());
+	      try
+	      {
+		mount.umount(attachPoint().asString());
+	      }
+	      catch (const MediaException & excpt_r)
+	      {
+		ZYPP_CAUGHT(excpt_r);
+	      }
+	      ZYPP_THROW(MediaMountException(it->name, mountpoint,
+	        "Unable to verify that the media was mounted"
+	      ));
+	    }
 	  }
 	  catch (const MediaException & excpt_r)
 	  {
@@ -413,6 +445,19 @@ namespace zypp {
 	  }
 	}
       }
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : MediaCD::isAttached
+    //	METHOD TYPE : bool
+    //
+    //	DESCRIPTION : Override check if media is attached.
+    //
+    bool
+    MediaCD::isAttached() const
+    {
+      return checkAttached(true);
     }
 
     ///////////////////////////////////////////////////////////////////
