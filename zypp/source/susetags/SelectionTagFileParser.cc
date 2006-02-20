@@ -201,7 +201,11 @@ namespace zypp
 	  _deps[Dep::OBSOLETES].insert(_cap);
 	}
 #warning: The set<string> dependencies are still kept in the selImpl but are not needed anymore
-	NVRAD nvrad = NVRAD( selImpl->_name, Edition(selImpl->_version, selImpl->_release, std::string()), Arch(selImpl->_arch), _deps );
+  Arch arch;
+  if (!selImpl->_arch.empty())
+    arch = Arch(selImpl->_arch);
+  
+	NVRAD nvrad = NVRAD( selImpl->_name, Edition(selImpl->_version, selImpl->_release, std::string()), arch, _deps );
 	result = detail::makeResolvableFromImpl( nvrad, selImpl );
       }
        /////////////////////////////////////////////////////////////////
