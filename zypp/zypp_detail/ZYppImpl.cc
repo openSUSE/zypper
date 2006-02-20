@@ -96,7 +96,10 @@ namespace zypp
 	_target = Target_Ptr();
       _target = new Target(root);
       if (!commit_only)
+      {
+	_target->enableStorage(root);
 	addResolvables (_target->resolvables(), true);
+      }
     }
 
     void ZYppImpl::finishTarget()
