@@ -98,7 +98,7 @@ namespace zypp
 
             if( !desired)
             {
-              ZYPP_THROW(MediaNotAttachedException(
+              ZYPP_THROW(MediaNotDesiredException(
                 handler->url()
               ));
             }
