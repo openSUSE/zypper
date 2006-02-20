@@ -304,7 +304,6 @@ ResObject::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Resol
     YUMPatchParser iter(res_file,"");
     for (; !iter.atEnd(); ++iter)
     {
-      DBG << "here..." << std::endl;
       resolvable = createPatch(**iter);
       break;
     }
@@ -314,7 +313,6 @@ ResObject::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Resol
     YUMProductParser iter(res_file,"");
     for (; !iter.atEnd(); ++iter)
     {
-      DBG << "here..." << std::endl;
       resolvable = createProduct(**iter);
       break;
     }
@@ -324,7 +322,6 @@ ResObject::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Resol
     YUMPatternParser iter(res_file,"");
     for (; !iter.atEnd(); ++iter)
     {
-      DBG << "here..." << std::endl;
       resolvable = createSelection(**iter);
       break;
     }
@@ -334,7 +331,6 @@ ResObject::Ptr XMLFilesBackend::resolvableFromFile( std::string file_path, Resol
     YUMPatternParser iter(res_file,"");
     for (; !iter.atEnd(); ++iter)
     {
-      DBG << "here..." << std::endl;
       resolvable = createPattern(**iter);
       break;
     }
