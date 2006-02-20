@@ -29,8 +29,8 @@ main (int argc, char **argv)
 	return 1;
     }
 
-    DbAccess db (argv[1]);
-    db.writeStore (God->target()->resolvables(), true);
+    DbAccess db( argv[1] );
+    db.writeStore( God->target()->resolvables(), ResStatus::installed );
 
     return 0;
 }
