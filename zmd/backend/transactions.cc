@@ -182,6 +182,14 @@ write_resobject_set( sqlite3_stmt *handle, const PoolItemSet & objects, PackageO
 }
 
 
+static void
+print_set( const PoolItemSet & objects )
+{
+    for (PoolItemSet::const_iterator iter = objects.begin(); iter != objects.end(); ++iter) {
+	MIL << *iter << endl;
+    }
+}
+
 bool
 write_transactions (const ResPool & pool, sqlite3 *db, ResolverContext_Ptr context)
 {
@@ -198,8 +206,11 @@ write_transactions (const ResPool & pool, sqlite3 *db, ResolverContext_Ptr conte
     PoolItemSet remove_set;
 
     context->foreachInstall( insert_item, &install_set);
+//MIL << "foreachInstall" << endl; print_set( install_set );
     context->foreachUninstall( insert_item, &remove_set);
+//MIL << "foreachUninstall" << endl; print_set( remove_set );
     context->foreachUpgrade( insert_item_pair, &install_set);
+//MIL << "foreachUpgrade" << endl; print_set( install_set );
 
     bool result;
     result = write_resobject_set (handle, install_set, PACKAGE_OP_INSTALL, context);
