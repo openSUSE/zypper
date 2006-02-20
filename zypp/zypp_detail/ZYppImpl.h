@@ -102,6 +102,15 @@ namespace zypp
       LocaleSet getRequestedLocales() const
       { return LocaleSet(); }
 
+    public:
+      /** Get the system architecture.   */
+      Arch architecture() const
+      { return _architecture; }
+      /** Set the system architecture.
+	  This should be used for testing/debugging only since the Target backend
+	  won't be able to install incompatible packages ;-)   */
+      void setArchitecture( const Arch & arch );
+
     private:
       /** */
       ResPoolManager _pool;
@@ -111,6 +120,8 @@ namespace zypp
       Target_Ptr _target;
       /** */
       Resolver_Ptr _resolver;
+      /** */
+      Arch _architecture;
     };
     ///////////////////////////////////////////////////////////////////
 

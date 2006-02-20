@@ -9,6 +9,8 @@
 /** \file	zypp/zypp_detail/ZYppImpl.cc
  *
 */
+
+#include <sys/utsname.h>
 #include <iostream>
 //#include "zypp/base/Logger.h"
 
@@ -59,6 +61,16 @@ namespace zypp
     , _resolver( new Resolver(_pool.accessor()) )
     {
       MIL << "defaultTextLocale: '" << _textLocale << "'" << endl;
+
+      struct utsname buf;
+      if (uname (&buf) < 0) {
+	ERR << "Can't determine system architecture" << endl;
+      }
+      else {
+	MIL << "System architecture is '" << buf.machine << "'" << endl;
+	_architecture = Arch(buf.machine);
+      }
+
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -131,6 +143,13 @@ namespace zypp
           << ", srcremaining " << res._srcremaining.size()
           << ")" << endl;
       return res;
+    }
+
+
+    void ZYppImpl::setArchitecture( const Arch & arch )
+    {
+	_architecture = arch;
+	if (_resolver) _resolver->setArchitecture( arch );
     }
 
     /******************************************************************
