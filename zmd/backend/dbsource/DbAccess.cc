@@ -141,22 +141,61 @@ desc2str (const Text t)
 }
 
 //----------------------------------------------------------------------------
+// convert ZYPP Resolvable kind to ZMD RCDependencyTarget
+
+static RCDependencyTarget
+kind2target( Resolvable::Kind kind )
+{
+    if (kind == ResTraits<Package>::kind)	 return RC_DEP_TARGET_PACKAGE;
+    else if (kind == ResTraits<Script>::kind)	 return RC_DEP_TARGET_SCRIPT;
+    else if (kind == ResTraits<Message>::kind)	 return RC_DEP_TARGET_MESSAGE;
+    else if (kind == ResTraits<Patch>::kind)	 return RC_DEP_TARGET_PATCH;
+    else if (kind == ResTraits<Selection>::kind) return RC_DEP_TARGET_SELECTION;
+    else if (kind == ResTraits<Pattern>::kind)	 return RC_DEP_TARGET_PATTERN;
+    else if (kind == ResTraits<Product>::kind)	 return RC_DEP_TARGET_PRODUCT;
+
+    WAR << "Unknown resolvable kind " << kind << endl;
+    return RC_DEP_TARGET_PACKAGE;
+}
+
+//----------------------------------------------------------------------------
+// convert ZYPP ResStatus to ZMD RCResolvableStatus
+
+static RCResolvableStatus
+resstatus2rcstatus( ResStatus status )
+{
+    if (status.isUnneeded()) return RC_RES_STATUS_UNNEEDED;
+    else if (status.isSatisfied()
+	     || status.isComplete()) return RC_RES_STATUS_SATISFIED;
+    else if (status.isIncomplete()
+	     || status.isNeeded()) return RC_RES_STATUS_BROKEN;
+    return RC_RES_STATUS_UNDETERMINED;
+}
+
+//----------------------------------------------------------------------------
+
   /** Ctor */
 DbAccess::DbAccess( const std::string & dbfile_r )
     : _dbfile( dbfile_r )
     , _db( NULL )
     , _insert_res_handle( NULL )
     , _insert_pkg_handle( NULL )
+    , _insert_patch_handle( NULL )
+    , _insert_selection_handle( NULL )
+    , _insert_pattern_handle( NULL )
+    , _insert_product_handle( NULL )
     , _insert_dep_handle( NULL )
 {
     MIL << "DbAccess::DbAccess(" << dbfile_r << ")" << endl;
 }
+
 
   /** Dtor */
 DbAccess::~DbAccess( )
 {
     closeDb();
 }
+
 
 std::ostream &
 DbAccess::dumpOn( std::ostream & str ) const
@@ -166,79 +205,19 @@ DbAccess::dumpOn( std::ostream & str ) const
 }
 
 
-bool
-DbAccess::openDb(bool for_writing)
-{
-    MIL << "DbAccess::openDb(" << (for_writing?"write":"read") << ")" << endl;
-
-    if (_db) {
-	WAR << "Db already open" << endl;
-	return true;
-    }
-
-    int rc = sqlite3_open (_dbfile.c_str(), &_db);
-    if (rc != SQLITE_OK) {
-	ERR << "Can not open SQL database: " << sqlite3_errmsg (_db) << endl;
-	return false;
-    }
-
-    MIL << "begin" << endl;
-    sqlite3_exec (_db, "BEGIN", NULL, NULL, NULL);
-
-    return true;
-}
-
-void
-DbAccess::closeDb(void)
-{
-    MIL << "DbAccess::closeDb()" << endl;
-
-    commit();
-
-    if (_insert_res_handle) {
-	sqlite3_finalize (_insert_res_handle);
-	_insert_res_handle = NULL;
-    }
-    if (_insert_pkg_handle) {
-	sqlite3_finalize (_insert_pkg_handle);
-	_insert_pkg_handle = NULL;
-    }
-    if (_insert_dep_handle) {
-	sqlite3_finalize (_insert_dep_handle);
-	_insert_dep_handle = NULL;
-    }
-    if (_db) {
-	sqlite3_close (_db);
-	_db = NULL;
-    }
-    return;
-}
-
-void
-DbAccess::commit(void)
-{
-    if (_db)
-	sqlite3_exec (_db, "COMMIT", NULL, NULL, NULL);
-}
-
 //----------------------------------------------------------------------------
+
 static sqlite3_stmt *
-prepare_res_insert (sqlite3 *db)
+prepare_handle( sqlite3 *db, const string & query )
 {
     int rc;
     sqlite3_stmt *handle = NULL;
 
-    string query (
-        "INSERT INTO resolvables (name, version, release, epoch, arch,"
-        "                         file_size, installed_size, catalog,"
-        "                         installed, local, install_only) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
     rc = sqlite3_prepare (db, query.c_str(), -1, &handle, NULL);
 
     if (rc != SQLITE_OK) {
-	ERR << "Can not prepare resolvable insertion clause: " << sqlite3_errmsg (db) << endl;
-        sqlite3_finalize (handle);
+	ERR << "Can not prepare '" << query << "': " << sqlite3_errmsg (db) << endl;
+        sqlite3_finalize( handle);
         handle = NULL;
     }
 
@@ -247,61 +226,116 @@ prepare_res_insert (sqlite3 *db)
 
 
 static sqlite3_stmt *
+prepare_res_insert (sqlite3 *db)
+{
+    string query (
+	//			  1     2        3        4      5
+        "INSERT INTO resolvables (name, version, release, epoch, arch,"
+	//			  6               7
+        "                         installed_size, catalog,"
+	//			  8          9
+        "                         installed, local) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+    return prepare_handle( db, query );
+}
+
+
+static sqlite3_stmt *
 prepare_pkg_insert (sqlite3 *db)
 {
-    int rc;
-    sqlite3_stmt *handle = NULL;
-
     string query (
-        "INSERT INTO package_details (resolvable_id, section, summary, "
-        "                             description, package_filename,"
-        "                             signature_filename) "
-        "VALUES (?, ?, ?, ?, ?, ?)"
+	//			      1              2          3
+        "INSERT INTO package_details (resolvable_id, rpm_group, summary, "
+	//			      4            5		     6
+        "                             description, package_filename, signature_filename,"
+ 	//			      7          8
+        "                             file_size, install_only) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
 	"");
 
-    rc = sqlite3_prepare (db, query.c_str(), -1, &handle, NULL);
+    return prepare_handle( db, query );
+}
 
-    if (rc != SQLITE_OK) {
-	ERR << "Can not prepare package insertion clause: " << sqlite3_errmsg (db) << endl;
-	sqlite3_finalize (handle);
-	handle = NULL;
-    }
 
-    return handle;
+static sqlite3_stmt *
+prepare_patch_insert (sqlite3 *db)
+{
+    string query (
+	//			    1              2         3
+        "INSERT INTO patch_details (resolvable_id, patch_id, status, "
+	//			    4              5
+        "                           creation_time, category,"
+	//			    6       7        8
+        "                           reboot, restart, interactive) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+	"");
+
+    return prepare_handle( db, query );
+}
+
+
+static sqlite3_stmt *
+prepare_selection_insert (sqlite3 *db)
+{
+    string query (
+	//			        1              2
+//        "INSERT INTO selection_details (resolvable_id, status) "
+        "INSERT INTO pattern_details (resolvable_id, status) "
+        "VALUES (?, ?)"
+	"");
+
+    return prepare_handle( db, query );
+}
+
+
+static sqlite3_stmt *
+prepare_pattern_insert (sqlite3 *db)
+{
+    string query (
+	//			      1              2
+        "INSERT INTO pattern_details (resolvable_id, status) "
+        "VALUES (?, ?)"
+	"");
+
+    return prepare_handle( db, query );
+}
+
+
+static sqlite3_stmt *
+prepare_product_insert (sqlite3 *db)
+{
+    string query (
+	//			      1              2       3
+        "INSERT INTO product_details (resolvable_id, status, category) "
+        "VALUES (?, ?, ?)"
+	"");
+
+    return prepare_handle( db, query );
 }
 
 
 static sqlite3_stmt *
 prepare_dep_insert (sqlite3 *db)
 {
-    int rc;
-    sqlite3_stmt *handle = NULL;
-
     string query (
 	"INSERT INTO dependencies "
-	"  (resolvable_id, dep_type, name, version, release, epoch, arch, relation) "
-	"VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+	//  1              2         3     4        5        6      7     8         9
+	"  (resolvable_id, dep_type, name, version, release, epoch, arch, relation, dep_target) "
+	"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-    rc = sqlite3_prepare (db, query.c_str(), -1, &handle, NULL);
-
-    if (rc != SQLITE_OK) {
-	ERR << "Can not prepare dependency insertion clause: " << sqlite3_errmsg (db) << endl;
-	sqlite3_finalize (handle);
-	handle = NULL;
-    }
-
-    return handle;
+    return prepare_handle( db, query );
 }
+
 
 bool
 DbAccess::prepareWrite(void)
 {
-    MIL << "DbAccess::prepareWrite()" << endl;
-
-    bool result = openDb(true);
-    if (!result) return false;
+    XXX << "DbAccess::prepareWrite()" << endl;
 
     sqlite3_exec (_db, "PRAGMA synchronous = 0", NULL, NULL, NULL);
+
+    bool result = true;
 
     _insert_res_handle = prepare_res_insert (_db);
     if (_insert_res_handle == NULL) {
@@ -311,6 +345,30 @@ DbAccess::prepareWrite(void)
 
     _insert_pkg_handle = prepare_pkg_insert (_db);
     if (_insert_pkg_handle == NULL) {
+	result = false;
+	goto cleanup;
+    }
+
+    _insert_patch_handle = prepare_patch_insert (_db);
+    if (_insert_patch_handle == NULL) {
+	result = false;
+	goto cleanup;
+    }
+#if 0
+    _insert_selection_handle = prepare_selection_insert (_db);
+    if (_insert_selection_handle == NULL) {
+	result = false;
+	goto cleanup;
+    }
+#endif
+    _insert_pattern_handle = prepare_pattern_insert (_db);
+    if (_insert_pattern_handle == NULL) {
+	result = false;
+	goto cleanup;
+    }
+
+    _insert_product_handle = prepare_product_insert (_db);
+    if (_insert_product_handle == NULL) {
 	result = false;
 	goto cleanup;
     }
@@ -330,18 +388,83 @@ DbAccess::prepareWrite(void)
 }
 
 
+//----------------------------------------------------------------------------
+
 bool
-DbAccess::prepareRead(void)
+DbAccess::openDb( bool for_writing )
 {
-    return openDb(false);
+    XXX << "DbAccess::openDb(" << (for_writing?"write":"read") << ")" << endl;
+
+    if (_db) {
+	WAR << "Db already open" << endl;
+	return true;
+    }
+
+    int rc = sqlite3_open (_dbfile.c_str(), &_db);
+    if (rc != SQLITE_OK) {
+	ERR << "Can not open SQL database: " << sqlite3_errmsg (_db) << endl;
+	return false;
+    }
+
+    if (for_writing) {
+	if (!prepareWrite())
+	    return false;
+    }
+
+    sqlite3_exec (_db, "BEGIN", NULL, NULL, NULL);
+
+    return true;
+}
+
+
+static void
+close_handle( sqlite3_stmt **handle )
+{
+    if (*handle) {
+	sqlite3_finalize (*handle);
+	*handle = NULL;
+    }
+    return;
+}
+
+
+void
+DbAccess::closeDb(void)
+{
+    XXX << "DbAccess::closeDb()" << endl;
+
+    commit();
+
+    close_handle( &_insert_res_handle );
+    close_handle( &_insert_pkg_handle );
+    close_handle( &_insert_patch_handle );
+//    close_handle( &_insert_selection_handle );
+    close_handle( &_insert_pattern_handle );
+    close_handle( &_insert_product_handle );
+    close_handle( &_insert_dep_handle );
+
+    if (_db) {
+	sqlite3_close (_db);
+	_db = NULL;
+    }
+    return;
+}
+
+
+void
+DbAccess::commit(void)
+{
+    if (_db)
+	sqlite3_exec (_db, "COMMIT", NULL, NULL, NULL);
 }
 
 //----------------------------------------------------------------------------
+// dependency
 
 void
 DbAccess::writeDependency( sqlite_int64 res_id, RCDependencyType type, const zypp::CapSet & capabilities)
 {
-    MIL << "DbAccess::writeDependency(" << res_id << ", " << type << ", ...)" << endl;
+    XXX << "DbAccess::writeDependency(" << res_id << ", " << type << ", ...)" << endl;
 
     int rc;
     sqlite3_stmt *handle = _insert_dep_handle;
@@ -351,32 +474,33 @@ DbAccess::writeDependency( sqlite_int64 res_id, RCDependencyType type, const zyp
 
     for (zypp::CapSet::const_iterator iter = capabilities.begin(); iter != capabilities.end(); ++iter) {
 
-	sqlite3_bind_int64 (handle, 1, res_id);
-	sqlite3_bind_int (handle, 2, type);
-	sqlite3_bind_text (handle, 3, iter->index().c_str(), -1, SQLITE_STATIC);
+	sqlite3_bind_int64( handle, 1, res_id);
+	sqlite3_bind_int( handle, 2, type);
+	sqlite3_bind_text( handle, 3, iter->index().c_str(), -1, SQLITE_STATIC);
 
 	Edition edition = iter->edition();
 
 	if (edition != Edition::noedition) {
-	    sqlite3_bind_text (handle, 4, edition.version().c_str(), -1, SQLITE_STATIC);
-	    sqlite3_bind_text (handle, 5, edition.release().c_str(), -1, SQLITE_STATIC);
+	    sqlite3_bind_text( handle, 4, edition.version().c_str(), -1, SQLITE_STATIC);
+	    sqlite3_bind_text( handle, 5, edition.release().c_str(), -1, SQLITE_STATIC);
 	    Edition::epoch_t epoch = edition.epoch();
 	    if (epoch != Edition::noepoch) {
-		sqlite3_bind_int (handle, 6, epoch);
+		sqlite3_bind_int( handle, 6, epoch);
 	    }
 	    else {
-		sqlite3_bind_int (handle, 6, 0);
+		sqlite3_bind_int( handle, 6, 0);
 	    }
 	}
 	else {
-	    sqlite3_bind_int (handle, 6, 0);
+	    sqlite3_bind_int( handle, 6, 0);
 	}
 
-	sqlite3_bind_int (handle, 7, 0);				// arch
-	sqlite3_bind_int (handle, 8, Rel2Rc( iter->op() ));
+	sqlite3_bind_int( handle, 7, 0);				// arch
+	sqlite3_bind_int( handle, 8, Rel2Rc( iter->op() ));
+	sqlite3_bind_int( handle, 9, kind2target( iter->refers() ));
 
-	rc = sqlite3_step (handle);
-	sqlite3_reset (handle);
+	rc = sqlite3_step( handle);
+	sqlite3_reset( handle);
 
 	if (rc != SQLITE_DONE) {
 	    ERR << "Error adding package to SQL: " << sqlite3_errmsg (_db) << endl;
@@ -389,37 +513,42 @@ DbAccess::writeDependency( sqlite_int64 res_id, RCDependencyType type, const zyp
 void
 DbAccess::writeDependencies(sqlite_int64 id, Resolvable::constPtr res)
 {
-    MIL << "DbAccess::writeDependencies(" << id << ", " << *res << ")" << endl;
+    XXX << "DbAccess::writeDependencies(" << id << ", " << *res << ")" << endl;
 
-    writeDependency( id, RC_DEP_TYPE_REQUIRE, res->dep (Dep::REQUIRES));
-    writeDependency( id, RC_DEP_TYPE_PROVIDE, res->dep (Dep::PROVIDES));
-    writeDependency( id, RC_DEP_TYPE_CONFLICT, res->dep (Dep::CONFLICTS));
-    writeDependency( id, RC_DEP_TYPE_OBSOLETE, res->dep (Dep::OBSOLETES));
+    writeDependency( id, RC_DEP_TYPE_REQUIRE,	 res->dep (Dep::REQUIRES));
+    writeDependency( id, RC_DEP_TYPE_PROVIDE,	 res->dep (Dep::PROVIDES));
+    writeDependency( id, RC_DEP_TYPE_CONFLICT,	 res->dep (Dep::CONFLICTS));
+    writeDependency( id, RC_DEP_TYPE_OBSOLETE,	 res->dep (Dep::OBSOLETES));
     writeDependency( id, RC_DEP_TYPE_PREREQUIRE, res->dep (Dep::PREREQUIRES));
-    writeDependency( id, RC_DEP_TYPE_FRESHEN, res->dep (Dep::FRESHENS));
-    writeDependency( id, RC_DEP_TYPE_RECOMMEND, res->dep (Dep::RECOMMENDS));
-    writeDependency( id, RC_DEP_TYPE_SUGGEST, res->dep (Dep::SUGGESTS));
-    writeDependency( id, RC_DEP_TYPE_ENHANCE, res->dep (Dep::ENHANCES));
+    writeDependency( id, RC_DEP_TYPE_FRESHEN,	 res->dep (Dep::FRESHENS));
+    writeDependency( id, RC_DEP_TYPE_RECOMMEND,  res->dep (Dep::RECOMMENDS));
+    writeDependency( id, RC_DEP_TYPE_SUGGEST,	 res->dep (Dep::SUGGESTS));
+    writeDependency( id, RC_DEP_TYPE_SUPPLEMENT, res->dep (Dep::SUPPLEMENTS));
+    writeDependency( id, RC_DEP_TYPE_ENHANCE,	 res->dep (Dep::ENHANCES));
 }
 
 
+//----------------------------------------------------------------------------
+// package
+
 sqlite_int64
-DbAccess::writePackage (sqlite_int64 id, Package::constPtr pkg)
+DbAccess::writePackage (sqlite_int64 id, Package::constPtr pkg, ResStatus status )
 {
-    MIL <<  "DbAccess::writePackage(" << id << ", " << *pkg << ")" << endl;
+    XXX <<  "DbAccess::writePackage(" << id << ", " << *pkg << ")" << endl;
     int rc;
     sqlite3_stmt *handle = _insert_pkg_handle;
 
-    sqlite3_bind_int64 (handle, 1, id);
-    sqlite3_bind_int (handle, 2, 1);							// FIXME section is an INTEGER ?!
-    sqlite3_bind_text (handle, 3, pkg->summary().c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_text (handle, 4, desc2str(pkg->description()).c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_text (handle, 5, pkg->plainRpm().asString().c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_text (handle, 6, "signature_filename", -1, SQLITE_STATIC);		// FIXME
-//    sqlite3_bind_text (handle, 6, pkg->signature_filename, -1, SQLITE_STATIC);
+    sqlite3_bind_int64( handle, 1, id);
+    sqlite3_bind_text( handle, 2, pkg->group().c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text( handle, 3, pkg->summary().c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text( handle, 4, desc2str(pkg->description()).c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text( handle, 5, pkg->plainRpm().asString().c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text( handle, 6, NULL, -1, SQLITE_STATIC);
+    sqlite3_bind_int( handle, 7, pkg->size());
+    sqlite3_bind_int( handle, 8, pkg->installOnly() ? 1 : 0);
 
-    rc = sqlite3_step (handle);
-    sqlite3_reset (handle);
+    rc = sqlite3_step( handle);
+    sqlite3_reset( handle);
 
     if (rc != SQLITE_DONE) {
 	ERR << "Error adding package to SQL: " << sqlite3_errmsg (_db) << endl;
@@ -431,48 +560,149 @@ DbAccess::writePackage (sqlite_int64 id, Package::constPtr pkg)
 }
 
 
+//----------------------------------------------------------------------------
+// patch
+
 sqlite_int64
-DbAccess::writeResObject (ResObject::constPtr obj, bool is_installed)
+DbAccess::writePatch (sqlite_int64 id, Patch::constPtr patch, ResStatus status )
 {
-    MIL << "DbAccess::writeResObject (" << *obj << ", " << (is_installed?"installed":"uninstalled") << ")" << endl;
+    XXX <<  "DbAccess::writePatch(" << id << ", " << *patch << ")" << endl;
+    int rc;
+    sqlite3_stmt *handle = _insert_patch_handle;
+
+    sqlite3_bind_int64( handle, 1, id );
+    sqlite3_bind_text( handle, 2, patch->id().c_str(), -1, SQLITE_STATIC );
+    sqlite3_bind_int( handle, 3, resstatus2rcstatus( status ) );
+    sqlite3_bind_int64( handle, 4, patch->timestamp() );
+    sqlite3_bind_text( handle, 5, patch->category().c_str(), -1, SQLITE_STATIC );
+    sqlite3_bind_int( handle, 6, patch->reboot_needed() ? 1 : 0 );
+    sqlite3_bind_int( handle, 7, patch->affects_pkg_manager() ? 1 : 0 );
+    sqlite3_bind_int( handle, 8, patch->interactive() ? 1 : 0 );
+
+
+    rc = sqlite3_step( handle);
+    sqlite3_reset( handle);
+
+    if (rc != SQLITE_DONE) {
+	ERR << "Error adding patch to SQL: " << sqlite3_errmsg (_db) << endl;
+	return -1;
+    }
+    sqlite_int64 rowid = sqlite3_last_insert_rowid (_db);
+
+    return rowid;
+}
+
+
+//----------------------------------------------------------------------------
+// selection
+
+sqlite_int64
+DbAccess::writeSelection( sqlite_int64 id, Selection::constPtr selection, ResStatus status )
+{
+    XXX <<  "DbAccess::writeSelection(" << id << ", " << *selection << ")" << endl;
+    int rc;
+    sqlite3_stmt *handle = _insert_selection_handle;
+
+    sqlite3_bind_int64( handle, 1, id);
+    sqlite3_bind_int( handle, 2, resstatus2rcstatus( status ) );
+
+    rc = sqlite3_step( handle);
+    sqlite3_reset( handle);
+
+    if (rc != SQLITE_DONE) {
+	ERR << "Error adding selection to SQL: " << sqlite3_errmsg (_db) << endl;
+	return -1;
+    }
+    sqlite_int64 rowid = sqlite3_last_insert_rowid (_db);
+
+    return rowid;
+}
+
+
+//----------------------------------------------------------------------------
+// pattern
+
+sqlite_int64
+DbAccess::writePattern (sqlite_int64 id, Pattern::constPtr pattern, ResStatus status )
+{
+    XXX <<  "DbAccess::writePattern(" << id << ", " << *pattern << ")" << endl;
+    int rc;
+    sqlite3_stmt *handle = _insert_pattern_handle;
+
+    sqlite3_bind_int64( handle, 1, id);
+    sqlite3_bind_int( handle, 2, resstatus2rcstatus( status ) );
+
+    rc = sqlite3_step( handle);
+    sqlite3_reset( handle);
+
+    if (rc != SQLITE_DONE) {
+	ERR << "Error adding pattern to SQL: " << sqlite3_errmsg (_db) << endl;
+	return -1;
+    }
+    sqlite_int64 rowid = sqlite3_last_insert_rowid (_db);
+
+    return rowid;
+}
+
+
+//----------------------------------------------------------------------------
+// product
+
+sqlite_int64
+DbAccess::writeProduct (sqlite_int64 id, Product::constPtr product, ResStatus status )
+{
+    XXX <<  "DbAccess::writeProduct(" << id << ", " << *product << ")" << endl;
+    int rc;
+    sqlite3_stmt *handle = _insert_product_handle;
+
+    sqlite3_bind_int64( handle, 1, id);
+    sqlite3_bind_int( handle, 2, resstatus2rcstatus( status ) );
+    sqlite3_bind_text( handle, 3, product->category().c_str(), -1, SQLITE_STATIC );
+
+    rc = sqlite3_step( handle);
+    sqlite3_reset( handle);
+
+    if (rc != SQLITE_DONE) {
+	ERR << "Error adding product to SQL: " << sqlite3_errmsg (_db) << endl;
+	return -1;
+    }
+    sqlite_int64 rowid = sqlite3_last_insert_rowid (_db);
+
+    return rowid;
+}
+
+
+//----------------------------------------------------------------------------
+// resolvable
+
+sqlite_int64
+DbAccess::writeResObject (ResObject::constPtr obj, ResStatus status)
+{
+    XXX << "DbAccess::writeResObject (" << *obj << ", " << status << ")" << endl;
 
     Resolvable::constPtr res = obj;
-    Package::constPtr pkg = asKind<Package>(res);
 
     int rc;
     sqlite3_stmt *handle = _insert_res_handle;
 
-    sqlite3_bind_text (handle, 1, obj->name().c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text( handle, 1, obj->name().c_str(), -1, SQLITE_STATIC);
     Edition ed = obj->edition();
-    sqlite3_bind_text (handle, 2, ed.version().c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_text (handle, 3, ed.release().c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text( handle, 2, ed.version().c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text( handle, 3, ed.release().c_str(), -1, SQLITE_STATIC);
     if (ed.epoch() == Edition::noepoch) {
-	sqlite3_bind_int (handle, 4, 0);
+	sqlite3_bind_int( handle, 4, 0);
     } else {
-	sqlite3_bind_int (handle, 4, ed.epoch());
+	sqlite3_bind_int( handle, 4, ed.epoch());
     }
 
-    sqlite3_bind_int (handle, 5, Arch2Rc (obj->arch()));
-    if (pkg != NULL) {
-	sqlite3_bind_int64 (handle, 7, pkg->archivesize());
-	sqlite3_bind_int64 (handle, 8, pkg->size());
-    }
-    else {
-	sqlite3_bind_int64 (handle, 7, 0);
-	sqlite3_bind_int64 (handle, 8, 0);
-    }
-    sqlite3_bind_text (handle, 9, obj->source().alias().c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_int (handle, 15, is_installed ? 1 : 0);		//pkg->installed
-    sqlite3_bind_int (handle, 16, 0);					//pkg->local_package
-    if (pkg != NULL) {
-	sqlite3_bind_int (handle, 17, pkg->installOnly() ? 1 : 0);
-    }
-    else {
-	sqlite3_bind_int (handle, 17, 0);
-    }
+    sqlite3_bind_int( handle, 5, Arch2Rc (obj->arch()));
+    sqlite3_bind_int64( handle, 7, obj->size());
+    sqlite3_bind_text( handle, 9, obj->source().alias().c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_int( handle, 15, status.isInstalled() ? 1 : 0);
+    sqlite3_bind_int( handle, 16, 0);					//pkg->local_package
 
-    rc = sqlite3_step (handle);
-    sqlite3_reset (handle);
+    rc = sqlite3_step( handle);
+    sqlite3_reset( handle);
 
     if (rc != SQLITE_DONE) {
 	ERR << "Error adding package to SQL: " << sqlite3_errmsg (_db) << endl;
@@ -480,8 +710,24 @@ DbAccess::writeResObject (ResObject::constPtr obj, bool is_installed)
     }
     sqlite_int64 rowid = sqlite3_last_insert_rowid (_db);
 
-    if (pkg != NULL)
-	writePackage (rowid, pkg);
+    Package::constPtr pkg = asKind<Package>(res);
+    if (pkg != NULL) writePackage (rowid, pkg, status);
+    else {
+	Patch::constPtr patch = asKind<Patch>(res);
+	if (patch != NULL) writePatch (rowid, patch, status);
+	else {
+	    Selection::constPtr selection = asKind<Selection>(res);
+	    if (selection != NULL) writeSelection (rowid, selection, status);
+	    else {
+		Pattern::constPtr pattern = asKind<Pattern>(res);
+		if (pattern != NULL) writePattern (rowid, pattern, status);
+		else {
+		    Product::constPtr product = asKind<Product>(res);
+		    if (product != NULL) writeProduct (rowid, product, status);
+		}
+	    }
+	}
+    }
 
     writeDependencies (rowid, obj);
 
@@ -490,38 +736,59 @@ DbAccess::writeResObject (ResObject::constPtr obj, bool is_installed)
 
 
 //----------------------------------------------------------------------------
+// store
+
 void
-DbAccess::writeStore( const zypp::ResStore & store, bool is_installed )
+DbAccess::writeStore( const zypp::ResStore & store, ResStatus status )
 {
-    MIL << "DbAccess::writeStore()" << endl;
+    XXX << "DbAccess::writeStore()" << endl;
 
     if (store.empty()) {
 	ERR << "Couldn't access the packaging system:" << endl;
 	return;
     }
 
+    openDb( true );
+
+    int count = 0;
     for (ResStore::const_iterator iter = store.begin(); iter != store.end(); ++iter) {
-	if (!writeResObject( *iter, is_installed))
+	if (writeResObject( *iter, status) < 0)
 	    break;
+	++count;
     }
 
+    closeDb();
+
+    MIL << "Wrote " << count << " resolvables to database" << endl;
     return;
 }
+
+//----------------------------------------------------------------------------
+// pool
 
 void
-DbAccess::writeResObjects( const ResObjectList & resolvables, bool is_installed )
+DbAccess::writePool( const zypp::ResPool & pool )
 {
-    MIL << "DbAccess::writeResObjects()" << endl;
+    XXX << "DbAccess::writePool()" << endl;
 
-    prepareWrite();
-
-    for (ResObjectList::const_iterator iter = resolvables.begin(); iter != resolvables.end(); ++iter) {
-	if (!writeResObject( *iter, is_installed)) {
-	    break;
-	}
+    if (pool.empty()) {
+	ERR << "Pool is empty" << endl;
+	return;
     }
 
-    commit();
+    openDb( true );
 
+    int count = 0;
+    for (ResPool::const_iterator iter = pool.begin(); iter != pool.end(); ++iter) {
+	if (!writeResObject( iter->resolvable(), iter->status()))
+	    break;
+	++count;
+    }
+
+    closeDb();
+
+    MIL << "Wrote " << count << " resolvables to database" << endl;
     return;
 }
+
+

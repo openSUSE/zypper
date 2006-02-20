@@ -19,9 +19,14 @@
 
 #include "zypp/base/PtrTypes.h"
 
+#include "zypp/ResStatus.h"
 #include "zypp/ResStore.h"
 #include "zypp/Resolvable.h"
 #include "zypp/Package.h"
+#include "zypp/Patch.h"
+#include "zypp/Selection.h"
+#include "zypp/Pattern.h"
+#include "zypp/Product.h"
 #include "zypp/Pathname.h"
 #include "zypp/ResPool.h"
 #include "zypp/CapSet.h"
@@ -81,15 +86,40 @@ typedef enum {
 
 typedef enum {
 	RC_DEP_TYPE_REQUIRE = 0,
-	RC_DEP_TYPE_PROVIDE,
-	RC_DEP_TYPE_CONFLICT,
-	RC_DEP_TYPE_OBSOLETE,
-	RC_DEP_TYPE_PREREQUIRE,
-	RC_DEP_TYPE_FRESHEN,
-	RC_DEP_TYPE_RECOMMEND,
-	RC_DEP_TYPE_SUGGEST,
-	RC_DEP_TYPE_ENHANCE
+	RC_DEP_TYPE_PROVIDE,			// 1
+	RC_DEP_TYPE_CONFLICT,			// 2
+	RC_DEP_TYPE_OBSOLETE,			// 3
+	RC_DEP_TYPE_PREREQUIRE,			// 4
+	RC_DEP_TYPE_FRESHEN,			// 5
+	RC_DEP_TYPE_RECOMMEND,			// 6
+	RC_DEP_TYPE_SUGGEST,			// 7
+	RC_DEP_TYPE_SUPPLEMENT,			// 8
+	RC_DEP_TYPE_ENHANCE			// 9
 } RCDependencyType;
+
+//-----------------------------------------------------------------------------
+// kinds (dependencies.dep_target
+
+typedef enum {
+	RC_DEP_TARGET_PACKAGE = 0,
+	RC_DEP_TARGET_SCRIPT,			// 1
+	RC_DEP_TARGET_MESSAGE,			// 2
+	RC_DEP_TARGET_PATCH,			// 3
+	RC_DEP_TARGET_SELECTION,		// 4
+	RC_DEP_TARGET_PATTERN,			// 5
+	RC_DEP_TARGET_PRODUCT			// 6
+} RCDependencyTarget;
+
+//-----------------------------------------------------------------------------
+// status (mostly for patches)
+//   to be evaluated together with resolvables.installed
+
+typedef enum {
+	RC_RES_STATUS_UNDETERMINED = 0,
+	RC_RES_STATUS_UNNEEDED,			// not needed
+	RC_RES_STATUS_SATISFIED,		// needed, dependencies complete
+	RC_RES_STATUS_BROKEN			// needed, dependencies incomplete
+} RCResolvableStatus;
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -106,17 +136,26 @@ class DbAccess : public zypp::base::ReferenceCounted, public zypp::base::NonCopy
     sqlite3 *_db;
     sqlite3_stmt *_insert_res_handle;
     sqlite3_stmt *_insert_pkg_handle;
+    sqlite3_stmt *_insert_patch_handle;
+    sqlite3_stmt *_insert_selection_handle;
+    sqlite3_stmt *_insert_pattern_handle;
+    sqlite3_stmt *_insert_product_handle;
     sqlite3_stmt *_insert_dep_handle;
-
-    bool prepareWrite(void);
-    bool prepareRead(void);
 
     void commit();
 
-    sqlite_int64 writeResObject( zypp::ResObject::constPtr obj, bool is_installed);
-    sqlite_int64 writePackage( sqlite_int64 id, zypp::Package::constPtr pkg);
+    sqlite_int64 writeResObject( zypp::ResObject::constPtr obj, zypp::ResStatus status );
+
+    sqlite_int64 writePackage( sqlite_int64 id, zypp::Package::constPtr package, zypp::ResStatus status );
+    sqlite_int64 writePatch( sqlite_int64 id, zypp::Patch::constPtr patch, zypp::ResStatus status );
+    sqlite_int64 writeSelection( sqlite_int64 id, zypp::Selection::constPtr selection, zypp::ResStatus status );
+    sqlite_int64 writePattern( sqlite_int64 id, zypp::Pattern::constPtr pattern, zypp::ResStatus status );
+    sqlite_int64 writeProduct( sqlite_int64 id, zypp::Product::constPtr product, zypp::ResStatus status );
+
     void writeDependencies( sqlite_int64 id, zypp::Resolvable::constPtr res);
     void writeDependency( sqlite_int64 pkg_id, RCDependencyType type, const zypp::CapSet & capabilities);
+
+    bool prepareWrite( void );
 
 public:
     /** Ctor */
@@ -130,11 +169,11 @@ public:
     static zypp::Arch Rc2Arch (RCArch rc);
 
     sqlite3 *db() const { return _db; }
-    bool openDb(bool for_writing);
-    void closeDb(void);
+    bool openDb( bool for_writing );
+    void closeDb( void );
 
-    void writeStore( const zypp::ResStore & resolvables, bool is_installed );
-    void writeResObjects( const ResObjectList & resolvables, bool is_installed );
+    void writeStore( const zypp::ResStore & resolvables, zypp::ResStatus status );
+    void writePool( const zypp::ResPool & pool );
 
 private:
     friend std::ostream & operator<<( std::ostream & str, const DbAccess & obj );
