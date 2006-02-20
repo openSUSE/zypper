@@ -121,6 +121,11 @@ namespace zypp
     LocaleSet getRequestedLocales() const;
 
   public:
+    /** Get the path where zypp related plugins store persistent data and caches   */
+    Pathname homePath() const;
+    /** set the home, if you need to change it */
+    void setHomePath( const Pathname & path );
+    
     /** Get the system architecture.   */
     Arch architecture() const;
     /** Set the system architecture.

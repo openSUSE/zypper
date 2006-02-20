@@ -152,6 +152,11 @@ namespace zypp
 	if (_resolver) _resolver->setArchitecture( arch );
     }
 
+    Pathname ZYppImpl::homePath() const
+    { return _home_path.empty() ? Pathname("/var/lib/zypp") : _home_path; }
+    void ZYppImpl::setHomePath( const Pathname & path )
+    { _home_path = path; }  
+    
     /******************************************************************
      **
      **	FUNCTION NAME : operator<<

@@ -115,6 +115,11 @@ namespace zypp
   void ZYpp::setArchitecture( const Arch & arch )
   { _pimpl->setArchitecture( arch ); }
 
+  Pathname ZYpp::homePath() const
+  { return _pimpl->homePath(); }
+  void ZYpp::setHomePath( const Pathname & path )
+  { _pimpl->setHomePath(path); }  
+  
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

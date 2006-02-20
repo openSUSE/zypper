@@ -111,6 +111,11 @@ namespace zypp
 	  won't be able to install incompatible packages ;-)   */
       void setArchitecture( const Arch & arch );
 
+      /** Get the path where zypp related plugins store persistent data and caches   */
+      Pathname homePath() const;
+      /** set the home, if you need to change it */
+      void setHomePath( const Pathname & path );
+    
     private:
       /** */
       ResPoolManager _pool;
@@ -122,6 +127,7 @@ namespace zypp
       Resolver_Ptr _resolver;
       /** */
       Arch _architecture;
+      Pathname _home_path;
     };
     ///////////////////////////////////////////////////////////////////
 
