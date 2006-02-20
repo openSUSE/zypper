@@ -51,6 +51,8 @@ namespace zypp
     */
     class SourceImpl : public base::ReferenceCounted, private base::NonCopyable
     {
+      media::MediaManager media_mgr;
+
       friend std::ostream & operator<<( std::ostream & str, const SourceImpl & obj );
 
     public:

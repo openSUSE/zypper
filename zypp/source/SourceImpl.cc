@@ -29,7 +29,6 @@ namespace zypp
 
     IMPL_PTR_TYPE(SourceImpl);
 
-    media::MediaManager media_mgr;
 
     ///////////////////////////////////////////////////////////////////
     //
