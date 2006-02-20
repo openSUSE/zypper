@@ -63,7 +63,7 @@ namespace zypp
     typedef bit::Range<FieldType,EstablishField::end,  1> TransactField;
     typedef bit::Range<FieldType,TransactField::end,   2> TransactByField;
     typedef bit::Range<FieldType,TransactByField::end, 2> TransactDetailField;
-    typedef bit::Range<FieldType,TransactDetailField::end, 2> SolverStateField;
+    typedef bit::Range<FieldType,TransactDetailField::end, 3> SolverStateField;
     // enlarge FieldType if more bit's needed. It's not yet
     // checked by the compiler.
     //@}
@@ -111,7 +111,8 @@ namespace zypp
         EXPLICIT_REMOVE = bit::RangeValue<TransactDetailField,0>::value,
 	SOFT_REMOVE     = bit::RangeValue<TransactDetailField,1>::value,
         DUE_TO_OBSOLETE = bit::RangeValue<TransactDetailField,2>::value,
-        DUE_TO_UNLINK   = bit::RangeValue<TransactDetailField,3>::value
+        DUE_TO_UNLINK   = bit::RangeValue<TransactDetailField,3>::value,
+        DUE_TO_UPGRADE  = bit::RangeValue<TransactDetailField,4>::value
       };
     enum SolverStateValue
       {
@@ -203,7 +204,10 @@ namespace zypp
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_OBSOLETE ); }
 
     bool isToBeUninstalledDueToUnlink() const
-    { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_UNLINK); }
+    { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_UNLINK ); }
+
+    bool isToBeUninstalledDueToUpgrade() const
+    { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_UPGRADE ); }
 
     bool isToBeInstalledSoft () const
     { return isToBeInstalled() && fieldValueIs<TransactDetailField>( SOFT_INSTALL ); }
@@ -286,6 +290,13 @@ namespace zypp
     {
       if (!setToBeUninstalled (SOLVER)) return false;
       fieldValueAssign<TransactDetailField>(DUE_TO_OBSOLETE);
+      return true;
+    }
+
+    bool setToBeUninstalledDueToUpgrade ( )
+    {
+      if (!setToBeUninstalled (SOLVER)) return false;
+      fieldValueAssign<TransactDetailField>(DUE_TO_UPGRADE);
       return true;
     }
 
@@ -376,6 +387,7 @@ namespace zypp
     static const ResStatus toBeUninstalledSoft;
     static const ResStatus toBeUninstalledDueToUnlink;
     static const ResStatus toBeUninstalledDueToObsolete;
+    static const ResStatus toBeUninstalledDueToUpgrade;
     static const ResStatus installed;	// installed, status after successful target 'install' commit
     static const ResStatus uninstalled;	// uninstalled, status after successful target 'uninstall' commit
     static const ResStatus satisfied;	// uninstalled, satisfied

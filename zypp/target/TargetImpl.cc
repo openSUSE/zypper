@@ -443,7 +443,12 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
 	    if ( it->status().isToBeUninstalledDueToObsolete() )
 	    {
 		DBG << "Ignore auto_delete (should be obsoleted): " << *it << endl;
-	    } else {
+	    }
+	    else if ( it->status().isToBeUninstalledDueToUpgrade() )
+	    {
+		DBG << "Ignore auto_delete (should be upgraded): " << *it << endl;
+	    }
+	    else {
 		dellist_r.push_back( *it );
 	    }
 	}

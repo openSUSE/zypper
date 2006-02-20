@@ -27,6 +27,7 @@ namespace zypp
   const ResStatus ResStatus::toBeUninstalledSoft	 (INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, SOFT_REMOVE);
   const ResStatus ResStatus::toBeUninstalledDueToUnlink	 (INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_UNLINK);
   const ResStatus ResStatus::toBeUninstalledDueToObsolete(INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_OBSOLETE);
+  const ResStatus ResStatus::toBeUninstalledDueToUpgrade (INSTALLED,   UNDETERMINED, TRANSACT, EXPLICIT_INSTALL, DUE_TO_UPGRADE);
   const ResStatus ResStatus::installed			 (INSTALLED,   UNDETERMINED);
   const ResStatus ResStatus::uninstalled		 (UNINSTALLED, UNDETERMINED);
   const ResStatus ResStatus::incomplete			 (INSTALLED,   INCOMPLETE);
@@ -99,8 +100,9 @@ namespace zypp
     }
 
     str << (obj.isToBeUninstalledDueToObsolete() ? "O" :
-	( obj.isToBeUninstalledDueToUnlink() ? "U" :
-	( obj.isToBeInstalledSoft() ? "S" : "_" ) ) );
+	( obj.isToBeUninstalledDueToUnlink() ? "L" :
+	( obj.isToBeUninstalledDueToUpgrade() ? "U" :
+	( obj.isToBeInstalledSoft() ? "S" : "_" ) ) ) );
 
     str << (obj.isSeen() ? "@" :
 	( obj.isImpossible() ? "X" : "" ) );
@@ -110,6 +112,7 @@ namespace zypp
     if (obj == ResStatus::toBeUninstalled)		str << "<tobeuninstalled>";
     if (obj == ResStatus::toBeUninstalledDueToUnlink)	str << "<tobeuninstalledduetounlink>";
     if (obj == ResStatus::toBeUninstalledDueToObsolete)	str << "<tobeuninstalledduetoobsolete>";
+    if (obj == ResStatus::toBeUninstalledDueToUpgrade)	str << "<tobeuninstalledduetoupgrade>";
     if (obj == ResStatus::satisfied)			str << "<satisfied>";			// uninstalled, satisfied
     if (obj == ResStatus::complete)			str << "<complete>";			// installed, satisfied
     if (obj == ResStatus::unneeded)			str << "<uneeded>";			// uninstalled, unneeded

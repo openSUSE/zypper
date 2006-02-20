@@ -430,6 +430,9 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
     else if (status.wasUninstalled()) {
 	setStatus (item, ResStatus::impossible);
     }
+    else if (part_of_upgrade) {
+	setStatus (item, ResStatus::toBeUninstalledDueToUpgrade);
+    }
     else {
 	setStatus (item, ResStatus::toBeUninstalled);
     }
