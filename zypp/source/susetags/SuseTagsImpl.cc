@@ -46,25 +46,51 @@ namespace zypp
       SuseTagsImpl::SuseTagsImpl()
       {}
 
+      void SuseTagsImpl::initCacheDir(const Pathname & cache_dir_r)
+      {
+        //if (0 != assert_dir(cache_dir_r.dirname(), 0700))
+        //  ZYPP_THROW(Exception("Cannot create cache directory"));
+        
+        filesystem::clean_dir(cache_dir_r);
+        filesystem::mkdir(cache_dir_r + "DATA");
+        filesystem::mkdir(cache_dir_r + "MEDIA");
+        filesystem::mkdir(cache_dir_r + "DESCRIPTION");
+      }
+      
       void SuseTagsImpl::storeMetadata(const Pathname & cache_dir_r)
       {
+        initCacheDir(cache_dir_r);
         //suse/setup/descr
         //packages.* *.sel
         media::MediaManager media_mgr;
         media::MediaAccessId media_num = _media_set->getMediaAccessId(1);
         INT << "Storing data to cache" << endl;
         media_mgr.provideDirTree(media_num, "suse/setup/descr");
-        Pathname src = media_mgr.localPath(media_num, "suse/setup/descr"); 
-        if (0 != assert_dir(cache_dir_r.dirname(), 0700))
+        Pathname descr_src = media_mgr.localPath(media_num, "suse/setup/descr"); 
+        Pathname media_src = media_mgr.localPath(media_num, "media.1"); 
+        
+        if (0 != assert_dir((cache_dir_r + "DATA").dirname(), 0700))
+        {
           ZYPP_THROW(Exception("Cannot create cache directory"));
+        }
         else
-          filesystem::copy_dir(src, cache_dir_r);
+        {
+          filesystem::copy_dir(descr_src, cache_dir_r + "DATA");
+          filesystem::copy_dir(media_src, cache_dir_r + "MEDIA");
+        }
         
         //releaseDir(media_num, "suse/setup/descr");
       }
       
-      bool SuseTagsImpl::isCacheValid() const
-      { return false; }
+      bool SuseTagsImpl::cacheExists()
+      {
+        bool exists = true;
+        exists = exists && PathInfo(_cache_dir + "DATA").isExist();
+        exists = exists && PathInfo(_cache_dir + "DESCRIPTION").isExist();
+        exists = exists && PathInfo(_cache_dir + "MEDIA").isExist();
+        DBG << exists << std::endl;
+        return exists;
+      }
       
       void SuseTagsImpl::factoryInit()
       {
@@ -73,6 +99,10 @@ namespace zypp
         std::string vendor;
         std::string media_id;
 
+        // dont initialize media if we are reading from cache
+        if ( cacheExists() )
+          return;
+        
         try {
           media::MediaAccessId _media = _media_set->getMediaAccessId(1);
           Pathname media_file = Pathname("media.1/media");
@@ -137,16 +167,28 @@ namespace zypp
       void SuseTagsImpl::createResolvables(Source_Ref source_r)
       {
         callback::SendReport<CreateSourceReport> report;
-  
+        Pathname p;
         report->startData( url() );
-  
-        Pathname p = provideFile(_path + "content");
+        
+        bool cache = cacheExists();
+        
+        if ( cache )
+        {
+          DBG << "Cached metadata found. Reading from " << _cache_dir << endl;  
+          _data_dir  = _cache_dir + "DATA/descr";
+        }
+        else
+        {
+          DBG << "Cached metadata not found. Reading from " << _path << endl;  
+          _data_dir = _path + "suse/setup/descr";
+          _content_file = provideFile(_path + "content");
+        }
 
         SourceFactory factory;
 
         try {
-          DBG << "Going to parse content file " << p << endl;  
-          Product::Ptr product = parseContentFile( p, factory.createFrom(this) );
+          DBG << "Going to parse content file " << _content_file << endl;  
+          Product::Ptr product = parseContentFile( _content_file, factory.createFrom(this) );
       
           MIL << "Product: " << product->displayName() << endl;
           _store.insert( product );
@@ -156,14 +198,14 @@ namespace zypp
         }
   
 #warning We use suse instead of <DATADIR> for now
-        p = provideFile(_path + "suse/setup/descr/packages");
+        p = cache ? _data_dir + "packages" : provideFile( _data_dir + "packages");
         DBG << "Going to parse " << p << endl;
         PkgContent content( parsePackages( source_r, this, p ) );
 
 #warning Should use correct locale and locale fallback list
         try {
           Locale lang;
-          p = provideFile(_path + "suse/setup/descr/packages.en");
+          p = cache ? _data_dir + "packages.en" : provideFile( _data_dir + "packages.en");
           DBG << "Going to parse " << p << endl;
           parsePackagesLang( p, lang, content );
         }
@@ -174,7 +216,8 @@ namespace zypp
         PkgDiskUsage du;
         try
         {
-          du = parsePackagesDiskUsage(provideFile(_path + "suse/setup/descr/packages.DU"));
+          p = cache ? _data_dir + "packages.DU" : provideFile( _data_dir + "packages.DU");
+          du = parsePackagesDiskUsage(p);
         }
         catch (Exception & excpt_r)
         {
@@ -193,7 +236,7 @@ namespace zypp
         bool file_found = true;
         // parse selections
         try {
-          p = provideFile(_path + "suse/setup/descr/selections");
+          p = cache ? _data_dir + "selections" : provideFile( _data_dir + "selections");
         }
         catch (Exception & excpt_r)
         {
@@ -213,7 +256,7 @@ namespace zypp
             if (selfile.empty() ) continue;
               DBG << "Going to parse selection " << selfile << endl;
       
-            Pathname file = provideFile(_path + "suse/setup/descr/" + selfile);
+              Pathname file = cache ? _data_dir + selfile : provideFile( _data_dir + selfile);
             MIL << "Selection file to parse " << file << endl;
             Selection::Ptr sel( parseSelection( file ) );
       
@@ -230,7 +273,7 @@ namespace zypp
         file_found = true;
 
         try {
-          p = provideFile(_path + "suse/setup/descr/patterns");
+          p = provideFile( _data_dir + "patterns");
         }
         catch (Exception & excpt_r)
         {
@@ -251,7 +294,7 @@ namespace zypp
       
             DBG << "Going to parse pattern " << patfile << endl;
       
-            Pathname file = provideFile(_path + "suse/setup/descr/" + patfile);
+            Pathname file = cache ? _data_dir + patfile : provideFile( _data_dir + patfile);
             MIL << "Pattern file to parse " << file << endl;
       
             Pattern::Ptr pat( parsePattern( file ) );

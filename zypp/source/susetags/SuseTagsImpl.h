@@ -61,7 +61,7 @@ namespace zypp
         
         Pathname sourceDir( const NVRAD& nvrad );
         virtual void storeMetadata(const Pathname & cache_dir_r);
-
+        
         /**
          * Get media verifier for the specified media
          */
@@ -70,7 +70,8 @@ namespace zypp
       protected:
         /** Stream output. */
         virtual std::ostream & dumpOn( std::ostream & str ) const;
-        bool isCacheValid() const;
+        void initCacheDir(const Pathname & cache_dir_r);
+        bool cacheExists();
       private:
         /** Ctor substitute.
          * Actually get the metadata.
@@ -78,11 +79,14 @@ namespace zypp
         */
         virtual void factoryInit();
 	
-	unsigned _media_count;
+        unsigned _media_count;
 	
-	std::string _vendor;
-	
-	std::string _media_id;
+        Pathname _data_dir;
+        Pathname _content_file;
+        
+        std::string _vendor;
+        std::string _media_id;
+        
       };
       ///////////////////////////////////////////////////////////////////
 
