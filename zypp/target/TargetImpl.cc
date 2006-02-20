@@ -359,6 +359,7 @@ namespace zypp
 ** to_install (i.e. delay deletion in case the
 ** obsoleting package likes to save whatever...
 */
+
 static void
 strip_obsoleted_to_delete( TargetImpl::PoolItemList & deleteList_r,
 				const TargetImpl::PoolItemList & instlist_r )
@@ -385,7 +386,7 @@ strip_obsoleted_to_delete( TargetImpl::PoolItemList & deleteList_r,
   {
     PoolItem_Ref ipkg( *it );
     bool delayPkg = false;
-    // ...check whether an obsolets....
+    // ...check whether an obsoletes....
     for ( CapSet::iterator obs = obsoletes.begin();
 	  ! delayPkg && obs != obsoletes.end(); ++obs )
     {
