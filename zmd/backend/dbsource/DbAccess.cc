@@ -738,6 +738,48 @@ DbAccess::writeResObject (ResObject::constPtr obj, ResStatus status, const char 
 
 
 //----------------------------------------------------------------------------
+/** check if catalog exists */
+bool
+DbAccess::haveCatalog( const std::string & catalog )
+{
+    string query ("SELECT * FROM catalogs WHERE id = ? ");
+
+    openDb( false );
+
+    sqlite3_stmt *handle = prepare_handle( _db, query );
+    if (handle == NULL) {
+	return false;
+    }
+
+    sqlite3_bind_text( handle, 1, catalog.c_str(), -1, SQLITE_STATIC );
+
+    int rc = sqlite3_step( handle);
+    if (rc != SQLITE_DONE) {
+	ERR << "Error finding catalog: " << sqlite3_errmsg (_db) << endl;
+	return false;
+    }
+    sqlite3_reset( handle);
+
+
+    return true;
+}
+
+
+/** insert catalog */
+bool
+DbAccess::insertCatalog( const std::string & catalog )
+{
+}
+
+
+/** remove catalog, remove all resolvables of this catalog */
+bool
+DbAccess::removeCatalog( const std::string & catalog )
+{
+}
+
+
+//----------------------------------------------------------------------------
 // store
 
 void

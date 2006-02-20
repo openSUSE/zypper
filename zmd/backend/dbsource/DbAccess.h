@@ -172,7 +172,16 @@ public:
     bool openDb( bool for_writing );
     void closeDb( void );
 
+    /** check if catalog exists */
+    bool haveCatalog( const std::string & catalog );
+    /** insert catalog */
+    bool insertCatalog( const std::string & catalog );
+    /** remove catalog, remove all resolvables of this catalog */
+    bool removeCatalog( const std::string & catalog );
+
+    /** write resolvables from store to db */
     void writeStore( const zypp::ResStore & resolvables, zypp::ResStatus status, const char *catalog = NULL );
+    /** write resolvables from pool to db */
     void writePool( const zypp::ResPool & pool, const char *catalog = NULL );
 
 private:
