@@ -9,6 +9,8 @@ PKG_MANAGEMENT_CFLAGS = -I$(top_srcdir)
 CFLAGS = $(PKG_MANAGEMENT_CFLAGS) $(SQLITE_CFLAGS)
 LDADD = $(PKG_MANAGEMENT_LIBS) $(SQLITE_LIBS)
 
+noinst_HEADERS = zmd-backend.h
+
 bindir = $(libdir)/zmd
 
 bin_PROGRAMS =	\

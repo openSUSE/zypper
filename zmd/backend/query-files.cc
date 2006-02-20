@@ -1,7 +1,10 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 
+#include <iostream>
 #include <cstring>
 #include <list>
+
+#include "zmd-backend.h"
 
 #include "zypp/ZYpp.h"
 #include "zypp/ZYppFactory.h"
@@ -181,6 +184,8 @@ sync_catalogs( DbAccess & db )
 int
 main (int argc, char **argv)
 {
+    zypp::base::LogControl::instance().logfile( ZMD_BACKEND_LOG );
+
     ZYpp::Ptr God = zypp::getZYpp();
 
     try {
@@ -193,7 +198,7 @@ main (int argc, char **argv)
     }
 
     if (argc < 3 || argc > 4) {
-	ERR << "usage: " << argv[0] << " <database> <uri> [catalog id]" << endl;
+	std::cerr << "usage: " << argv[0] << " <database> <uri> [catalog id]" << endl;
 	return 1;
     }
 
