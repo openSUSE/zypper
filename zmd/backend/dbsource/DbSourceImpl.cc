@@ -99,8 +99,8 @@ create_dependency_handle (sqlite3 *db)
     sqlite3_stmt *handle = NULL;
 
     query =
-	//	0         1     2        3        4      5     6
-        "SELECT dep_type, name, version, release, epoch, arch, relation "
+	//	0         1     2        3        4      5     6         7
+        "SELECT dep_type, name, version, release, epoch, arch, relation, dep_target "
         "FROM dependencies "
         "WHERE resolvable_id = ?";
 
@@ -126,8 +126,8 @@ create_package_handle (sqlite3 *db)
         "SELECT id, name, version, release, epoch, arch, "
 	//      6               7
         "       installed_size, catalog,"
-	//      8          9      10       11
-        "       installed, local, section, file_size,"
+	//      8          9      10         11
+        "       installed, local, rpm_group, file_size,"
 	//      12       13           14
         "       summary, description, package_filename,"
 	//      15
@@ -216,6 +216,36 @@ DbSourceImpl::createPackages(void)
 
 //-----------------------------------------------------------------------------
 
+// convert ZMD RCDependencyTarget to ZYPP Resolvable kind
+static Resolvable::Kind 
+target2kind( RCDependencyTarget dep_target )
+{
+    Resolvable::Kind kind;
+
+    switch (dep_target)
+    {
+	case RC_DEP_TARGET_PACKAGE:	kind = ResTraits<Package>::kind;
+	break;
+	case RC_DEP_TARGET_SCRIPT:	kind = ResTraits<Package>::kind;
+	break;
+	case RC_DEP_TARGET_MESSAGE:	kind = ResTraits<Message>::kind;
+	break;
+	case RC_DEP_TARGET_PATCH:	kind = ResTraits<Patch>::kind;
+	break;
+	case RC_DEP_TARGET_SELECTION:	kind = ResTraits<Selection>::kind;
+	break;
+	case RC_DEP_TARGET_PATTERN:	kind = ResTraits<Pattern>::kind;
+	break;
+	case RC_DEP_TARGET_PRODUCT:	kind = ResTraits<Product>::kind;
+        break;
+	default:			WAR << "Unknown dep_target " << dep_target << endl;
+					kind = ResTraits<Package>::kind;
+	break;
+    }
+    return kind;
+}
+
+
 Dependencies
 DbSourceImpl::createDependencies (sqlite_int64 resolvable_id)
 {
@@ -230,8 +260,8 @@ DbSourceImpl::createDependencies (sqlite_int64 resolvable_id)
     Arch arch;
     Rel rel;
     Capability cap;
-    Resolvable::Kind dkind = ResTraits<Package>::kind;  // default to package
-
+    Resolvable::Kind dkind;
+    
     const char *text;
     int rc;
     while ((rc = sqlite3_step( _dependency_handle)) == SQLITE_ROW) {
@@ -239,20 +269,25 @@ DbSourceImpl::createDependencies (sqlite_int64 resolvable_id)
 	    dep_type = (RCDependencyType)sqlite3_column_int( _dependency_handle, 0);
 	    name = string ( (const char *)sqlite3_column_text( _dependency_handle, 1) );
 	    text = (const char *)sqlite3_column_text( _dependency_handle, 2);
-	    if (text != NULL)
-		version = text;
-	    else
-		version.clear();
-	    text = (const char *)sqlite3_column_text( _dependency_handle, 3);
-	    if (text != NULL)
-		release = text;
-	    else
-		release.clear();
-	    epoch = sqlite3_column_int( _dependency_handle, 4 );
-	    arch = DbAccess::Rc2Arch( (RCArch) sqlite3_column_int( _dependency_handle, 5 ) );
-	    rel = DbAccess::Rc2Rel( (RCResolvableRelation) sqlite3_column_int( _dependency_handle, 6 ) );
+	    dkind = target2kind( (RCDependencyTarget)sqlite3_column_int( _dependency_handle, 7 ) );
 
-	    cap = factory.parse( dkind, name, rel, Edition( version, release, epoch ) );
+	    if (text == NULL) {
+		cap = factory.parse( dkind, name );
+	    }
+	    else {
+		version = text;
+	        text = (const char *)sqlite3_column_text( _dependency_handle, 3);
+		if (text != NULL)
+		    release = text;
+		else
+		    release.clear();
+		epoch = sqlite3_column_int( _dependency_handle, 4 );
+		arch = DbAccess::Rc2Arch( (RCArch) sqlite3_column_int( _dependency_handle, 5 ) );
+		rel = DbAccess::Rc2Rel( (RCResolvableRelation) sqlite3_column_int( _dependency_handle, 6 ) );
+
+		cap = factory.parse( dkind, name, rel, Edition( version, release, epoch ) );
+	    }
+
 	    switch (dep_type) {
 		case RC_DEP_TYPE_REQUIRE:
 		    deps[Dep::REQUIRES].insert( cap );
@@ -277,6 +312,9 @@ DbSourceImpl::createDependencies (sqlite_int64 resolvable_id)
 		break;
 		case RC_DEP_TYPE_SUGGEST:
 		    deps[Dep::SUGGESTS].insert( cap );
+		break;
+		case RC_DEP_TYPE_SUPPLEMENT:
+		    deps[Dep::SUPPLEMENTS].insert( cap );
 		break;
 		case RC_DEP_TYPE_ENHANCE:
 		    deps[Dep::ENHANCES].insert( cap );

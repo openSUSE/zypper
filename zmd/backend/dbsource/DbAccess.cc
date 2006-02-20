@@ -83,7 +83,7 @@ DbAccess::Rc2Rel (RCResolvableRelation rel)
 	case RC_RELATION_GREATER:	return Rel::GT; break;
 	case RC_RELATION_GREATER_EQUAL:	return Rel::GE; break;
 	case RC_RELATION_NOT_EQUAL:	return Rel::NE; break;
-	case RC_RELATION_NONE:		return Rel::NONE; break;
+	case RC_RELATION_NONE:		return Rel::ANY; break;
     }
     return Rel::NONE;
 }
@@ -480,7 +480,10 @@ DbAccess::writeDependency( sqlite_int64 res_id, RCDependencyType type, const zyp
 
 	Edition edition = iter->edition();
 
-	if (edition != Edition::noedition) {
+	if (iter->op() != Rel::NONE
+	    && iter->op() != Rel::ANY
+	    && edition != Edition::noedition)
+	{
 	    sqlite3_bind_text( handle, 4, edition.version().c_str(), -1, SQLITE_STATIC );
 	    sqlite3_bind_text( handle, 5, edition.release().c_str(), -1, SQLITE_STATIC );
 	    Edition::epoch_t epoch = edition.epoch();
@@ -490,13 +493,17 @@ DbAccess::writeDependency( sqlite_int64 res_id, RCDependencyType type, const zyp
 	    else {
 		sqlite3_bind_int( handle, 6, 0);
 	    }
+	    sqlite3_bind_int( handle, 7, -1);				// arch
+	    sqlite3_bind_int( handle, 8, Rel2Rc( iter->op() ));
 	}
 	else {
+	    sqlite3_bind_text( handle, 4, NULL, -1, SQLITE_STATIC );
+	    sqlite3_bind_text( handle, 5, NULL, -1, SQLITE_STATIC );
 	    sqlite3_bind_int( handle, 6, 0);
+	    sqlite3_bind_int( handle, 7, -1);				// arch
+	    sqlite3_bind_int( handle, 8, RC_RELATION_NONE );
 	}
 
-	sqlite3_bind_int( handle, 7, -1);				// arch
-	sqlite3_bind_int( handle, 8, Rel2Rc( iter->op() ));
 	sqlite3_bind_int( handle, 9, kind2target( iter->refers() ));
 
 	rc = sqlite3_step( handle);
