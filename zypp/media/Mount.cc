@@ -271,13 +271,14 @@ Mount::getEntries(const std::string &mtab)
             ent.mnt_type   && *ent.mnt_type   &&
             ent.mnt_opts   && *ent.mnt_opts)
         {
-          entries.push_back(
-            MountEntry(
-              ent.mnt_fsname, ent.mnt_dir,
-              ent.mnt_type,   ent.mnt_opts,
-              ent.mnt_freq,   ent.mnt_passno
-            )
+          MountEntry entry(
+            ent.mnt_fsname, ent.mnt_dir,
+            ent.mnt_type,   ent.mnt_opts,
+            ent.mnt_freq,   ent.mnt_passno
           );
+
+          entries.push_back(entry);
+
           memset(buf,  0, sizeof(buf));
           memset(&ent, 0, sizeof(ent));
         }
