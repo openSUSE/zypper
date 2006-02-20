@@ -352,9 +352,9 @@ namespace zypp {
         std::string default_;
         std::string userVisible;
         TranslatedText description;
-	std::string category;
-	std::string icon;
-	std::string script;
+        TranslatedText category;
+        std::string icon;
+        std::string script;
       };
 
       /**

@@ -44,7 +44,7 @@ namespace zypp
     TranslatedText SuseTagsPatternImpl::description() const
     { return _description; }
 
-    Label SuseTagsPatternImpl::category() const
+    TranslatedText SuseTagsPatternImpl::category() const
     { return _category; }
 
     bool SuseTagsPatternImpl::visible() const

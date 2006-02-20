@@ -629,7 +629,7 @@ XMLFilesBackend::createSelection( const zypp::parser::yum::YUMPatternData & pars
     impl->_name = parsed.name;
     impl->_description = parsed.description;
     //impl->_default = ((parsed.default_ == "false" ) ? false : true );
-    impl->_category = parsed.category;
+    impl->_category = parsed.category.text();
 
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition::noedition, Arch_noarch, createDependencies( parsed, ResTraits<Pattern>::kind));

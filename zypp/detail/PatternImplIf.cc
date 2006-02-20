@@ -26,8 +26,8 @@ namespace zypp
     bool PatternImplIf::userVisible() const
     { return true; }
 
-    std::string PatternImplIf::category() const
-    { return std::string(); }
+    TranslatedText PatternImplIf::category() const
+    { return TranslatedText(); }
 
     Pathname PatternImplIf::icon() const
     { return Pathname(); }

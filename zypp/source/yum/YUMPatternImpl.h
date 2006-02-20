@@ -61,7 +61,7 @@ namespace zypp
         /** */
 	virtual bool isDefault() const;
         /** */
-	virtual std::string category() const;
+	virtual TranslatedText category() const;
         /** */
 	virtual Pathname icon() const;
         /** */
@@ -75,7 +75,7 @@ namespace zypp
 	TranslatedText _summary;
 	TranslatedText _description;
 	bool _default;
-	std::string _category;
+	TranslatedText _category;
 	Pathname _icon;
 	Pathname _script;
       private:

@@ -68,7 +68,7 @@ namespace zypp
       bool XMLPatternImpl::isDefault() const
       { return _default; }
       /** */
-      std::string XMLPatternImpl::category() const
+      TranslatedText XMLPatternImpl::category() const
       { return _category; }
       /** */
       Pathname XMLPatternImpl::icon() const

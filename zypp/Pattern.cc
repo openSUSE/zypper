@@ -51,7 +51,7 @@ namespace zypp
   { return pimpl().userVisible(); }
   /** */
   std::string Pattern::category() const
-  { return pimpl().category(); }
+  { return pimpl().category().text(); }
   /** */
   Pathname Pattern::icon() const
   { return pimpl().icon(); }

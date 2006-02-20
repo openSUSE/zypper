@@ -42,7 +42,7 @@ namespace zypp
 
       virtual bool userVisible() const PURE_VIRTUAL;
 
-      virtual std::string category() const PURE_VIRTUAL;
+      virtual TranslatedText category() const PURE_VIRTUAL;
 
       virtual Pathname icon() const PURE_VIRTUAL;
 

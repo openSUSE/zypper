@@ -59,7 +59,7 @@ namespace zypp
 
       virtual TranslatedText summary() const;
       virtual TranslatedText description() const;
-      virtual Label category() const;
+      virtual TranslatedText category() const;
       virtual bool visible() const;
       virtual Label order() const;
       virtual Pathname icon() const;
@@ -73,7 +73,7 @@ namespace zypp
       std::string _release;
       std::string _arch;
       std::string _order;
-      std::string _category;
+      TranslatedText _category;
       
       bool _visible;
 

@@ -83,7 +83,7 @@ namespace zypp
       bool YUMPatternImpl::isDefault() const
       { return _default; }
       /** */
-      std::string YUMPatternImpl::category() const
+      TranslatedText YUMPatternImpl::category() const
       { return _category; }
       /** */
       Pathname YUMPatternImpl::icon() const

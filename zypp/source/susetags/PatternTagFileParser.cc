@@ -80,7 +80,7 @@ namespace zypp
         }
         else if ( tag.name == "Cat" )
         {
-          selImpl->_category = tag.value;
+          selImpl->_category.setText(tag.value, Locale(tag.modifier));
         }
         else if ( tag.name == "Ico" )
         {
