@@ -195,22 +195,42 @@ namespace zypp
       //
       //	CLASS NAME : LogControlImpl
       //
-      /** LogControl implementation (Singleton). */
+      /** LogControl implementation (Singleton).
+       *
+       * \note There is a slight difference in using the _lineFormater and _lineWriter!
+       * \li \c _lineFormater must not be NULL (create default LogControl::LineFormater)
+       * \li \c _lineWriter is NULL if no logging is performed, this way we can pass
+       *        _no_stream as logstream to the application, and avoid unnecessary formating
+       *        of logliles, which would then be discarded when passed to some dummy
+       *        LineWriter.
+      */
       struct LogControlImpl
       {
       public:
         void excessive( bool onOff_r )
         { _excessive = onOff_r; }
 
+        /** NULL _lineWriter indicates no loggin. */
         void setLineWriter( const shared_ptr<LogControl::LineWriter> & writer_r )
         { _lineWriter = writer_r; }
 
+        /** Assert \a _lineFormater is not NULL. */
         void setLineFormater( const shared_ptr<LogControl::LineFormater> & format_r )
         {
           if ( format_r )
             _lineFormater = format_r;
           else
             _lineFormater.reset( new LogControl::LineFormater );
+        }
+
+        void logfile( const Pathname & logfile_r )
+        {
+          if ( logfile_r.empty() )
+            setLineWriter( shared_ptr<LogControl::LineWriter>() );
+          else if ( logfile_r == Pathname( "-" ) )
+            setLineWriter( shared_ptr<LogControl::LineWriter>(new StdErrWriter) );
+          else
+            setLineWriter( shared_ptr<LogControl::LineWriter>(new FileWriter(logfile_r)) );
         }
 
       private:
@@ -262,14 +282,17 @@ namespace zypp
         StreamTable _streamtable;
 
       private:
-        /** Singleton */
+        /** Singleton ctor.
+         * No logging per default, unless enabled via $ZYPP_LOGFILE.
+        */
         LogControlImpl()
-        : _no_stream( 0 )
+        : _no_stream( NULL )
         , _excessive( getenv("ZYPP_FULLLOG") )
         , _lineFormater( new LogControl::LineFormater )
-        , _lineWriter( getenv("ZYPP_NOLOG") ? NULL
-                                            : new StdErrWriter )
-        {}
+        {
+          if ( getenv("ZYPP_LOGFILE") )
+            logfile( getenv("ZYPP_LOGFILE") );
+        }
 
       public:
         /** The LogControlImpl singleton
@@ -337,14 +360,7 @@ namespace zypp
     using logger::LogControlImpl;
 
     void LogControl::logfile( const Pathname & logfile_r )
-    {
-      if ( logfile_r.empty() )
-        logNothing();
-      else if ( logfile_r == Pathname( "-" ) )
-        logToStdErr();
-      else
-        LogControlImpl::instance.setLineWriter( shared_ptr<LineWriter>( new logger::FileWriter(logfile_r) ) );
-    }
+    { LogControlImpl::instance.logfile( logfile_r ); }
 
     void LogControl::setLineWriter( const shared_ptr<LineWriter> & writer_r )
     { LogControlImpl::instance.setLineWriter( writer_r ); }
