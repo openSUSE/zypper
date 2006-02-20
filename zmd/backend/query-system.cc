@@ -30,7 +30,7 @@ main (int argc, char **argv)
     }
 
     DbAccess db( argv[1] );
-    db.writeStore( God->target()->resolvables(), ResStatus::installed );
+    db.writeStore( God->target()->resolvables(), ResStatus::installed, "@system" );
 
     return 0;
 }
