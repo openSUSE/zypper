@@ -10,6 +10,7 @@ INCLUDES = -DZYPP_BASE_LOGGER_LOGGROUP=\"zypp\"
 
 pkginclude_HEADERS = NeedAType.h \
 	Arch.h		\
+	ArchCompat.h	\
 	Bit.h		\
 	ByteCount.h	\
 	CapAndItem.h	\
@@ -92,6 +93,7 @@ lib_LTLIBRARIES =	lib@PACKAGE@.la
 lib@PACKAGE@_la_SOURCES = \
 	LanguageCode.cc	\
 	Arch.cc		\
+	ArchCompat.cc	\
 	ByteCount.cc	\
 	Capability.cc	\
 	CapFactory.cc	\
