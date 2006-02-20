@@ -120,6 +120,14 @@ namespace zypp
     /** */
     LocaleSet getRequestedLocales() const;
 
+  public:
+    /** Get the system architecture.   */
+    Arch architecture() const;
+    /** Set the system architecture.
+	This should be used for testing/debugging only since the Target backend
+	won't be able to install incompatible packages ;-)   */
+    void setArchitecture( const Arch & arch );
+
   protected:
     /** Dtor */
     virtual ~ZYpp();
