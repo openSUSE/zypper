@@ -32,6 +32,10 @@ namespace zypp
 
 
     ///////////////////////////////////////////////////////////////////
+    class MountEntry;
+
+
+    ///////////////////////////////////////////////////////////////////
     typedef zypp::RW_pointer<MediaAccess> MediaAccessRef;
     typedef unsigned int                  MediaAccessId;
 
@@ -127,22 +131,6 @@ namespace zypp
       open(const Url &url, const Pathname & preferred_attach_point = "");
 
       /**
-       * Open new access handler with specifier url and attach
-       * point reusing the specified accessId.
-      void
-      reopen(MediaAccessId accessId, const Url &url,
-             const Pathname & preferred_attach_point = "");
-       */
-
-      /**
-       * Swap access handlers of idOne and idTwo.
-       *
-       * \returns True, if idOne and and idTwo was both valid.
-      bool
-      swap(MediaAccessId idOne, MediaAccessId idTwo);
-       */
-
-      /**
        * close the media
        */
       void
@@ -187,25 +175,6 @@ namespace zypp
        */
       void
       attach(MediaAccessId accessId, bool next = false);
-
-      /**
-       * FIXME: Jiri, do you want this one?
-       *
-       * Attach the media if needed and verify, if desired
-       * media is avaliable. If the access handler supports
-       * multiple drives (e.g. CD/DVD), all drives will be
-       * verified.
-       * On success, the media is attached and verified.
-       * On failure, the media is released and optionally
-       * ejected if possible (not shared).
-       *
-       * \throws MediaNotDesiredException if unable to find
-       *         desired media in any drive.
-       * \throws FIXME if all drives are in use and no one
-       *         was ejected.
-      void
-      attachDesiredMedia(MediaAccessId accessId, bool eject = true);
-       */
 
       /**
        * Release the attached media and optionally eject.
@@ -337,18 +306,27 @@ namespace zypp
 
       /**
        */
-      void dirInfo(MediaAccessId           accessId,
-                   std::list<std::string> &retlist,
-                   const Pathname         &dirname,
-                   bool                    dots = true) const;
+      void
+      dirInfo(MediaAccessId           accessId,
+              std::list<std::string> &retlist,
+              const Pathname         &dirname,
+              bool                    dots = true) const;
 
       /**
        */
-      void dirInfo(MediaAccessId           accessId,
-                   filesystem::DirContent &retlist,
-                   const Pathname         &dirname,
-                   bool                   dots = true) const;
+      void
+      dirInfo(MediaAccessId           accessId,
+              filesystem::DirContent &retlist,
+              const Pathname         &dirname,
+              bool                   dots = true) const;
 
+
+    public:
+      time_t
+      getMountTableMTime() const;
+
+      std::vector<MountEntry>
+      getMountEntries() const;
 
     private:
       friend class MediaHandler;
