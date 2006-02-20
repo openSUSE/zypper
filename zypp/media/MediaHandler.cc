@@ -102,8 +102,7 @@ MediaHandler::removeAttachPoint()
   }
 
   INT << "MediaHandler - checking if to remove attach point" << endl;
-//  if ( _attachPoint.unique() &&
-    if(_attachPoint.use_count() <= 2 &&
+  if ( _attachPoint.unique() &&
        _attachPoint->temp    &&
        !_attachPoint->path.empty() &&
        PathInfo(_attachPoint->path).isDir())
@@ -314,6 +313,8 @@ void MediaHandler::attach( bool next )
   if ( isAttached() )
     return;
 
+  setMediaSource(MediaSourceRef());
+
 /**
   if ( _attachPoint->empty() ) {
     ERR << "Bad Attachpoint" << endl;
@@ -386,8 +387,7 @@ void MediaHandler::release( bool eject )
       << ", use count=" << _mediaSource.use_count()
       << std::endl;
 
-//  if( _mediaSource.unique())
-  if( _mediaSource.use_count() <= 2)
+  if( _mediaSource.unique())
   {
     DBG << "Releasing media " << _mediaSource->asString() << std::endl;
     releaseFrom( eject ); // pass to concrete handler
