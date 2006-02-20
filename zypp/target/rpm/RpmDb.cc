@@ -1088,15 +1088,15 @@ This prevented from having packages multiple times
          filename != filenames.end();
          filename++)
     {
-      if (filename->find("/bin/")
-	|| filename->find("/sbin/")
-	|| filename->find("/lib/")
-	|| filename->find("/lib64/")
-	|| filename->find("/etc/")
-        || filename->find("/usr/games/")
-        || filename->find("/usr/share/dict/words")
-        || filename->find("/usr/share/magic.mime")
-        || filename->find("/opt/gnome/games"))
+      if (filename->find("/bin/") != string::npos
+	|| filename->find("/sbin/") != string::npos
+	|| filename->find("/lib/") != string::npos
+	|| filename->find("/lib64/") != string::npos
+	|| filename->find("/etc/") != string::npos
+        || filename->find("/usr/games/") != string::npos
+        || filename->find("/usr/share/dict/words") != string::npos
+        || filename->find("/usr/share/magic.mime") != string::npos
+        || filename->find("/opt/gnome/games") != string::npos)
       {
 	try {
 	  dataCollect[Dep::PROVIDES].insert(_f.parse(ResTraits<Package>::kind, *filename));
