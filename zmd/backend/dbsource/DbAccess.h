@@ -144,7 +144,7 @@ class DbAccess : public zypp::base::ReferenceCounted, public zypp::base::NonCopy
 
     void commit();
 
-    sqlite_int64 writeResObject( zypp::ResObject::constPtr obj, zypp::ResStatus status );
+    sqlite_int64 writeResObject( zypp::ResObject::constPtr obj, zypp::ResStatus status, const char *catalog = NULL );
 
     sqlite_int64 writePackage( sqlite_int64 id, zypp::Package::constPtr package, zypp::ResStatus status );
     sqlite_int64 writePatch( sqlite_int64 id, zypp::Patch::constPtr patch, zypp::ResStatus status );
@@ -172,8 +172,8 @@ public:
     bool openDb( bool for_writing );
     void closeDb( void );
 
-    void writeStore( const zypp::ResStore & resolvables, zypp::ResStatus status );
-    void writePool( const zypp::ResPool & pool );
+    void writeStore( const zypp::ResStore & resolvables, zypp::ResStatus status, const char *catalog = NULL );
+    void writePool( const zypp::ResPool & pool, const char *catalog = NULL );
 
 private:
     friend std::ostream & operator<<( std::ostream & str, const DbAccess & obj );

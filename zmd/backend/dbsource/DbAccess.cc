@@ -476,13 +476,13 @@ DbAccess::writeDependency( sqlite_int64 res_id, RCDependencyType type, const zyp
 
 	sqlite3_bind_int64( handle, 1, res_id);
 	sqlite3_bind_int( handle, 2, type);
-	sqlite3_bind_text( handle, 3, iter->index().c_str(), -1, SQLITE_STATIC);
+	sqlite3_bind_text( handle, 3, iter->index().c_str(), -1, SQLITE_STATIC );
 
 	Edition edition = iter->edition();
 
 	if (edition != Edition::noedition) {
-	    sqlite3_bind_text( handle, 4, edition.version().c_str(), -1, SQLITE_STATIC);
-	    sqlite3_bind_text( handle, 5, edition.release().c_str(), -1, SQLITE_STATIC);
+	    sqlite3_bind_text( handle, 4, edition.version().c_str(), -1, SQLITE_STATIC );
+	    sqlite3_bind_text( handle, 5, edition.release().c_str(), -1, SQLITE_STATIC );
 	    Edition::epoch_t epoch = edition.epoch();
 	    if (epoch != Edition::noepoch) {
 		sqlite3_bind_int( handle, 6, epoch);
@@ -495,7 +495,7 @@ DbAccess::writeDependency( sqlite_int64 res_id, RCDependencyType type, const zyp
 	    sqlite3_bind_int( handle, 6, 0);
 	}
 
-	sqlite3_bind_int( handle, 7, 0);				// arch
+	sqlite3_bind_int( handle, 7, -1);				// arch
 	sqlite3_bind_int( handle, 8, Rel2Rc( iter->op() ));
 	sqlite3_bind_int( handle, 9, kind2target( iter->refers() ));
 
@@ -539,11 +539,11 @@ DbAccess::writePackage (sqlite_int64 id, Package::constPtr pkg, ResStatus status
     sqlite3_stmt *handle = _insert_pkg_handle;
 
     sqlite3_bind_int64( handle, 1, id);
-    sqlite3_bind_text( handle, 2, pkg->group().c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_text( handle, 3, pkg->summary().c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_text( handle, 4, desc2str(pkg->description()).c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_text( handle, 5, pkg->plainRpm().asString().c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_text( handle, 6, NULL, -1, SQLITE_STATIC);
+    sqlite3_bind_text( handle, 2, pkg->group().c_str(), -1, SQLITE_STATIC );
+    sqlite3_bind_text( handle, 3, pkg->summary().c_str(), -1, SQLITE_STATIC );
+    sqlite3_bind_text( handle, 4, desc2str(pkg->description()).c_str(), -1, SQLITE_STATIC );
+    sqlite3_bind_text( handle, 5, pkg->plainRpm().asString().c_str(), -1, SQLITE_STATIC );
+    sqlite3_bind_text( handle, 6, NULL, -1, SQLITE_STATIC );
     sqlite3_bind_int( handle, 7, pkg->size());
     sqlite3_bind_int( handle, 8, pkg->installOnly() ? 1 : 0);
 
@@ -578,7 +578,6 @@ DbAccess::writePatch (sqlite_int64 id, Patch::constPtr patch, ResStatus status )
     sqlite3_bind_int( handle, 6, patch->reboot_needed() ? 1 : 0 );
     sqlite3_bind_int( handle, 7, patch->affects_pkg_manager() ? 1 : 0 );
     sqlite3_bind_int( handle, 8, patch->interactive() ? 1 : 0 );
-
 
     rc = sqlite3_step( handle);
     sqlite3_reset( handle);
@@ -676,7 +675,7 @@ DbAccess::writeProduct (sqlite_int64 id, Product::constPtr product, ResStatus st
 // resolvable
 
 sqlite_int64
-DbAccess::writeResObject (ResObject::constPtr obj, ResStatus status)
+DbAccess::writeResObject (ResObject::constPtr obj, ResStatus status, const char *catalog)
 {
     XXX << "DbAccess::writeResObject (" << *obj << ", " << status << ")" << endl;
 
@@ -685,21 +684,24 @@ DbAccess::writeResObject (ResObject::constPtr obj, ResStatus status)
     int rc;
     sqlite3_stmt *handle = _insert_res_handle;
 
-    sqlite3_bind_text( handle, 1, obj->name().c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text( handle, 1, obj->name().c_str(), -1, SQLITE_STATIC );
     Edition ed = obj->edition();
-    sqlite3_bind_text( handle, 2, ed.version().c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_text( handle, 3, ed.release().c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text( handle, 2, ed.version().c_str(), -1, SQLITE_STATIC );
+    sqlite3_bind_text( handle, 3, ed.release().c_str(), -1, SQLITE_STATIC );
     if (ed.epoch() == Edition::noepoch) {
 	sqlite3_bind_int( handle, 4, 0);
     } else {
 	sqlite3_bind_int( handle, 4, ed.epoch());
     }
 
-    sqlite3_bind_int( handle, 5, Arch2Rc (obj->arch()));
-    sqlite3_bind_int64( handle, 7, obj->size());
-    sqlite3_bind_text( handle, 9, obj->source().alias().c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_int( handle, 15, status.isInstalled() ? 1 : 0);
-    sqlite3_bind_int( handle, 16, 0);					//pkg->local_package
+    sqlite3_bind_int( handle, 5, Arch2Rc (obj->arch()) );
+    sqlite3_bind_int64( handle, 6, obj->size() );
+    if (catalog != NULL)
+	sqlite3_bind_text( handle, 7, catalog, -1, SQLITE_STATIC );
+    else
+	sqlite3_bind_text( handle, 7, obj->source().alias().c_str(), -1, SQLITE_STATIC );
+    sqlite3_bind_int( handle,  8, status.isInstalled() ? 1 : 0);
+    sqlite3_bind_int( handle, 9, 0);					//pkg->local_package
 
     rc = sqlite3_step( handle);
     sqlite3_reset( handle);
@@ -739,7 +741,7 @@ DbAccess::writeResObject (ResObject::constPtr obj, ResStatus status)
 // store
 
 void
-DbAccess::writeStore( const zypp::ResStore & store, ResStatus status )
+DbAccess::writeStore( const zypp::ResStore & store, ResStatus status, const char *catalog )
 {
     XXX << "DbAccess::writeStore()" << endl;
 
@@ -752,7 +754,7 @@ DbAccess::writeStore( const zypp::ResStore & store, ResStatus status )
 
     int count = 0;
     for (ResStore::const_iterator iter = store.begin(); iter != store.end(); ++iter) {
-	if (writeResObject( *iter, status) < 0)
+	if (writeResObject( *iter, status, catalog ) < 0)
 	    break;
 	++count;
     }
@@ -767,7 +769,7 @@ DbAccess::writeStore( const zypp::ResStore & store, ResStatus status )
 // pool
 
 void
-DbAccess::writePool( const zypp::ResPool & pool )
+DbAccess::writePool( const zypp::ResPool & pool, const char *catalog )
 {
     XXX << "DbAccess::writePool()" << endl;
 
@@ -780,7 +782,7 @@ DbAccess::writePool( const zypp::ResPool & pool )
 
     int count = 0;
     for (ResPool::const_iterator iter = pool.begin(); iter != pool.end(); ++iter) {
-	if (!writeResObject( iter->resolvable(), iter->status()))
+	if (!writeResObject( iter->resolvable(), iter->status(), catalog ))
 	    break;
 	++count;
     }
