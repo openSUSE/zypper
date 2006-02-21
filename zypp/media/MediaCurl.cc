@@ -37,6 +37,8 @@ Pathname MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
 
 bool MediaCurl::_globalInit = false;
 
+std::string _agent = "Novell ZYPP Installer";
+
 ///////////////////////////////////////////////////////////////////
 
 static inline void escape( string & str_r,
@@ -160,6 +162,10 @@ void MediaCurl::attachTo (bool next)
     if ( ret != 0) {
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
+    ret = curl_easy_setopt ( _curl, CURLOPT_USERAGENT, _agent.c_str() );
+    if ( ret != 0) {
+      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+    }
   }
 
   if ( _url.getScheme() == "https" ) {
@@ -173,6 +179,10 @@ void MediaCurl::attachTo (bool next)
     }
     ret = curl_easy_setopt( _curl, CURLOPT_SSL_VERIFYHOST, 2 );
     if ( ret != 0 ) {
+      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+    }
+    ret = curl_easy_setopt ( _curl, CURLOPT_USERAGENT, _agent.c_str() );
+    if ( ret != 0) {
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
   }

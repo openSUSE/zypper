@@ -89,6 +89,8 @@ class MediaCurl : public MediaHandler {
     bool _connected;
 
     static bool _globalInit;
+
+    static std::string _agent;
 };
 
 ///////////////////////////////////////////////////////////////////
