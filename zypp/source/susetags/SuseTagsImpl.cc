@@ -48,6 +48,10 @@ namespace zypp
 
       void SuseTagsImpl::initCacheDir(const Pathname & cache_dir_r)
       {
+        // refuse to use stupid paths as cache dir
+        if (cache_dir_r == Pathname("/") )
+          ZYPP_THROW(Exception("I refuse to use / as cache dir"));
+          
         if (0 != assert_dir(cache_dir_r.dirname(), 0700))
           ZYPP_THROW(Exception("Cannot create cache directory"));
         
