@@ -774,8 +774,29 @@ DbAccess::haveCatalog( const std::string & catalog )
 
 /** insert catalog */
 bool
-DbAccess::insertCatalog( const std::string & catalog )
+DbAccess::insertCatalog( const std::string & catalog, const string & name, const string & alias, const string & description )
 {
+    string query ("INSERT INTO catalogs(id,name,alias,description) VALUES (?,?,?,?) ");
+
+    openDb( false );
+
+    sqlite3_stmt *handle = prepare_handle( _db, query );
+    if (handle == NULL) {
+	return false;
+    }
+
+    sqlite3_bind_text( handle, 1, catalog.c_str(), -1, SQLITE_STATIC );
+    sqlite3_bind_text( handle, 2, name.c_str(), -1, SQLITE_STATIC );
+    sqlite3_bind_text( handle, 3, alias.c_str(), -1, SQLITE_STATIC );
+    sqlite3_bind_text( handle, 4, description.c_str(), -1, SQLITE_STATIC );
+
+    int rc = sqlite3_step( handle);
+    if (rc != SQLITE_DONE) {
+	ERR << "Error writing catalog: " << sqlite3_errmsg (_db) << endl;
+	return false;
+    }
+    sqlite3_reset( handle);
+
     return true;
 }
 
@@ -784,6 +805,24 @@ DbAccess::insertCatalog( const std::string & catalog )
 bool
 DbAccess::removeCatalog( const std::string & catalog )
 {
+    string query ("DELETE FROM catalogs where id = ? ");
+
+    openDb( false );
+
+    sqlite3_stmt *handle = prepare_handle( _db, query );
+    if (handle == NULL) {
+	return false;
+    }
+
+    sqlite3_bind_text( handle, 1, catalog.c_str(), -1, SQLITE_STATIC );
+
+    int rc = sqlite3_step( handle);
+    if (rc != SQLITE_DONE) {
+	ERR << "Error removing catalog: " << sqlite3_errmsg (_db) << endl;
+	return false;
+    }
+    sqlite3_reset( handle);
+
     return true;
 }
 

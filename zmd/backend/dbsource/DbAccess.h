@@ -175,7 +175,7 @@ public:
     /** check if catalog exists */
     bool haveCatalog( const std::string & catalog );
     /** insert catalog */
-    bool insertCatalog( const std::string & catalog );
+    bool insertCatalog( const std::string & catalog, const std::string & name, const std::string & alias, const std::string & description );
     /** remove catalog, remove all resolvables of this catalog */
     bool removeCatalog( const std::string & catalog );
 
