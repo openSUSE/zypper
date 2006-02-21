@@ -404,7 +404,7 @@ XMLFilesBackend::storedObjects(const Resolvable::Kind kind) const
     DBG << "[" << resolvableKindToString( kind, false ) << "] - " << dir_itr->leaf() << std::endl;
     objects.push_back( resolvableFromFile( dir_path + "/" + dir_itr->leaf(), kind) );
   }
-  MIL << "done reading stored objecs of kind " << resolvableKindToString(kind) << std::endl;
+  MIL << "done reading stored objects of kind " << resolvableKindToString(kind) << std::endl;
   return objects;
 }
 
@@ -421,7 +421,7 @@ XMLFilesBackend::storedObjects(const Resolvable::Kind kind, const std::string & 
     if (item->name() == name )
       result.push_back(item);
   }
-  MIL << "done reading stored objecs of kind " << resolvableKindToString(kind) << " and keyword [" << name <<"]" << std::endl;
+  MIL << "done reading stored objects of kind " << resolvableKindToString(kind) << " and keyword [" << name <<"]" << std::endl;
   return result;
 }
 
