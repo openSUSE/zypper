@@ -62,8 +62,8 @@ namespace zypp
     typedef bit::Range<FieldType,StateField::end,      2> EstablishField;
     typedef bit::Range<FieldType,EstablishField::end,  1> TransactField;
     typedef bit::Range<FieldType,TransactField::end,   2> TransactByField;
-    typedef bit::Range<FieldType,TransactByField::end, 2> TransactDetailField;
-    typedef bit::Range<FieldType,TransactDetailField::end, 3> SolverStateField;
+    typedef bit::Range<FieldType,TransactByField::end, 3> TransactDetailField;
+    typedef bit::Range<FieldType,TransactDetailField::end, 2> SolverStateField;
     // enlarge FieldType if more bit's needed. It's not yet
     // checked by the compiler.
     //@}
