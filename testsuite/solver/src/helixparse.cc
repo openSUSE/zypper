@@ -5,6 +5,7 @@
 #include <fstream>
 #include <map>
 #include "zypp/base/Logger.h"
+#include "zypp/base/LogControl.h"
 #include "zypp/SourceFactory.h"
 #include "zypp/Source.h"
 #include "zypp/source/SourceImpl.h"
@@ -29,6 +30,8 @@ int main( int argc, char * argv[] )
 	cerr << "Usage: rcparse <helixname>" << endl;
 	exit (1);
     }
+
+    zypp::base::LogControl::instance().logfile( "-" );
 
     INT << "===[START]==========================================" << endl;
 

@@ -56,6 +56,7 @@
 
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/LogControl.h"
 #include "zypp/base/Exception.h"
 
 #include "zypp/base/Algorithm.h"
@@ -93,6 +94,7 @@ using zypp::ResolverProblemList;
 static bool show_mediaid = false;
 static string globalPath;
 static string architecture;			// run with this architecture
+static list<string> locales;
 
 static ZYpp::Ptr God;
 static SourceManager_Ptr manager;
@@ -632,6 +634,11 @@ load_source (const string & alias, const string & filename, const string & type,
     try {
 	Url url("file:/");
 
+	if (type == "url") {
+	    url = Url( filename );
+	    pathname = "";
+	}
+
 	media::MediaManager mmgr;
 	media::MediaId mediaid = mmgr.open(url);
 	HelixSourceImpl *impl = new HelixSourceImpl ();
@@ -697,6 +704,12 @@ parse_xml_setup (XmlNode_Ptr node)
 	    string file = node->getProp ("file");
 	    string type = node->getProp ("type");
 	    load_source (name, file, type, false);
+
+	} else if (node->equals ("source")) {
+
+	    string url = node->getProp ("url");
+	    string alias = node->getProp ("name");
+	    load_source( alias, url, "url", false );
 
 	} else if (node->equals ("undump")) {
 
@@ -771,6 +784,8 @@ parse_xml_setup (XmlNode_Ptr node)
 	    show_mediaid = true;
 	} else if (node->equals ("arch")) {
 	    architecture = node->getProp ("name");
+	} else if (node->equals ("locale")) {
+	    locales.push_back( node->getProp ("name") );
 	} else {
 	    cerr << "Unrecognized tag '" << node->name() << "' in setup" << endl;
 	}
@@ -1001,7 +1016,14 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
     resolver->setForceResolve (forceResolve);
 
     if (!architecture.empty()) {
-	resolver->setArchitecture( Arch( architecture ) );
+	God->setArchitecture( Arch( architecture ) );
+    }
+
+    if (!locales.empty()) {
+	ZYpp::LocaleSet lset;
+	for (list<string>::iterator it = locales.begin(); it != locales.end(); ++it)
+	    lset.insert( Locale( *it ) );
+	God->setRequestedLocales( lset );
     }
 
     node = node->children();
@@ -1385,6 +1407,8 @@ main (int argc, char *argv[])
 	cerr << "Usage: deptestomatic testfile.xml" << endl;
 	exit (0);
     }
+    zypp::base::LogControl::instance().logfile( "-" );
+
     forceResolve = false;
     manager = SourceManager::sourceManager();
     God = zypp::getZYpp();
