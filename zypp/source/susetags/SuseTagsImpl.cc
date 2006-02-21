@@ -85,9 +85,11 @@ namespace zypp
       bool SuseTagsImpl::cacheExists()
       {
         bool exists = true;
+	
         exists = exists && PathInfo(_cache_dir + "DATA").isExist();
         exists = exists && PathInfo(_cache_dir + "DESCRIPTION").isExist();
         exists = exists && PathInfo(_cache_dir + "MEDIA").isExist();
+
         DBG << exists << std::endl;
         return exists;
       }
@@ -171,7 +173,7 @@ namespace zypp
         report->startData( url() );
         
         bool cache = cacheExists();
-        
+
         if ( cache )
         {
           DBG << "Cached metadata found. Reading from " << _cache_dir << endl;  
@@ -273,7 +275,7 @@ namespace zypp
         file_found = true;
 
         try {
-          p = provideFile( _data_dir + "patterns");
+          p = cache ? _data_dir + "patterns" : provideFile( _data_dir + "patterns");
         }
         catch (Exception & excpt_r)
         {
