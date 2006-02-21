@@ -776,6 +776,7 @@ DbAccess::haveCatalog( const std::string & catalog )
 bool
 DbAccess::insertCatalog( const std::string & catalog )
 {
+    return true;
 }
 
 
@@ -783,6 +784,7 @@ DbAccess::insertCatalog( const std::string & catalog )
 bool
 DbAccess::removeCatalog( const std::string & catalog )
 {
+    return true;
 }
 
 
