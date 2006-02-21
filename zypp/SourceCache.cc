@@ -19,6 +19,7 @@
 #include "zypp/source/Builtin.h"
 #include "zypp/media/MediaAccess.h"
 #include "zypp/SourceManager.h"
+#include "zypp/Pathname.h"
 
 using std::endl;
 using namespace zypp::source;
@@ -33,7 +34,7 @@ namespace zypp
   //	CLASS NAME : SourceCache
   //
   ///////////////////////////////////////////////////////////////////
-  const Pathname SourceCache::_cache_dir = "/var/adm/ZYPP/SourceCache";
+  Pathname SourceCache::_cache_dir = "/var/adm/ZYPP/SourceCache";
   unsigned SourceCache::_next_cache_id = 0;
 
   ///////////////////////////////////////////////////////////////////
@@ -51,6 +52,11 @@ namespace zypp
   //
   SourceCache::~SourceCache()
   {}
+  
+  void SourceCache::setCacheDir( const Pathname & dir_r )
+  {
+    _cache_dir = dir_r;
+  }
 
   void SourceCache::storeSource(Source_Ref src)
   {

@@ -30,6 +30,8 @@ namespace zypp
   //
   //	CLASS NAME : SourceCache
   //
+  //	singleton
+  //
   class SourceCache
   {
     friend std::ostream & operator<<( std::ostream & str, const SourceCache & obj );
@@ -39,6 +41,8 @@ namespace zypp
     SourceCache();
     /** Dtor */
     ~SourceCache();
+    
+    void setCacheDir(const Pathname& dir_r);
 
   public:
     void storeSource(Source_Ref src);
@@ -51,7 +55,7 @@ namespace zypp
 
   private:
     /** directory to store cached data */
-    static const Pathname _cache_dir;
+    static Pathname _cache_dir;
     /** counter of caches */
     static unsigned _next_cache_id;
 
