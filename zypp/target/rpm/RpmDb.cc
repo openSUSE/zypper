@@ -1025,12 +1025,14 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDB
     }
   }
   unsigned current = 0;
+  DBG << "Expecting " << expect << " packages" << endl;
 
   CapFactory _f;
   for ( iter.findAll(); *iter; ++iter, ++current, report->progress( (100*current)/expect)) {
 
     string name = iter->tag_name();
     if ( name == string( "gpg-pubkey" ) ) {
+      DBG << "Ignoring pseudo package " << name << endl;
       // pseudo package filtered, as we can't handle multiple instances
       // of 'gpg-pubkey-VERS-REL'.
       continue;
