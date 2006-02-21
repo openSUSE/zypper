@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS =	Main Main.debug Parse
+noinst_PROGRAMS =	Main Parse Test
 
 ## ##################################################
 
@@ -16,15 +16,18 @@ LDADD =		-L$(top_srcdir)/zypp/.libs -lzypp -lboost_regex
 
 ## ##################################################
 
-Main_SOURCES = 		Main.cc
-
-Main_debug_SOURCES = 	$(Main_SOURCES)
-Main_debug_LDFLAGS =	-static
+Main_SOURCES = 	Main.cc
+Main_LDFLAGS =	-static
 
 ## ##################################################
 
-Parse_SOURCES = 	Parse.cc
-Parse_LDFLAGS =		-static
+Parse_SOURCES = Parse.cc
+Parse_LDFLAGS =	-static
+
+## ##################################################
+
+Test_SOURCES = Test.cc
+Test_LDFLAGS =	-static
 
 ## ##################################################
 

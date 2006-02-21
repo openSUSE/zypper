@@ -4,7 +4,7 @@
 
 #include "Printing.h"
 
-#include <zypp/base/Logger.h>
+#include <zypp/base/LogControl.h>
 #include <zypp/base/String.h>
 #include <zypp/base/Exception.h>
 #include <zypp/base/PtrTypes.h>
@@ -29,6 +29,26 @@ template<class _Iter, class _Function>
       for ( _Iter r = begin; r != end; ++r )
         fnc( *l, *r );
   }
+
+template<class _LIter, class _RIter, class _BinaryFunction>
+  inline _BinaryFunction
+  nest_for_earch( _LIter lbegin, _LIter lend,
+                  _RIter rbegin, _RIter rend,
+                  _BinaryFunction fnc )
+  {
+    for ( ; lbegin != lend; ++lbegin )
+      for ( _RIter r = rbegin; r != rend; ++r )
+        fnc( *lbegin, *r );
+    return fnc;
+  }
+
+template<class _Iter, class _BinaryFunction>
+  inline _BinaryFunction
+  nest_for_earch( _Iter begin, _Iter end,
+                  _BinaryFunction fnc )
+  { return nest_for_earch( begin, end, begin, end, fnc ); }
+
+
 template<class _Iter, class _Function>
   inline void sym_compare( _Iter begin, _Iter end )
   {
@@ -54,6 +74,7 @@ inline list<Arch> archList()
   ret.push_back( Arch( "unknown" ) );
   ret.push_back( Arch( "unknown2" ) );
   ret.push_back( Arch() );
+  ret.push_back( Arch("") );
   return ret;
 }
 

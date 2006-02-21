@@ -52,5 +52,31 @@ template<class _Container>
                    PrintPtr<typename _Container::value_type>() );
   }
 
+template<class _Container>
+  void printMK( const _Container & c )
+  {
+    for ( typename _Container::const_iterator it = c.begin(); it != c.end(); ++it )
+      {
+        USR << it->first << std::endl;
+      }
+  }
+template<class _Container>
+  void printMV( const _Container & c )
+  {
+    for ( typename _Container::const_iterator it = c.begin(); it != c.end(); ++it )
+      {
+        USR << it->second << std::endl;
+      }
+  }
+
+template<class _Container>
+  void printMKV( const _Container & c )
+  {
+    for ( typename _Container::const_iterator it = c.begin(); it != c.end(); ++it )
+      {
+        USR << it->first << '\t' << it->second << std::endl;
+      }
+  }
+
 ///////////////////////////////////////////////////////////////////
 #endif // MA_PRINTING_H
