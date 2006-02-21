@@ -265,12 +265,12 @@ ResolverQueue::processOnce ()
 	}
 	iter = next;
     }
-	  if (did_something) {
-	      _DEBUG( "did something: " << _qitems.size() << " qitems");
-	  }
-	  else {
-	      _DEBUG( "did nothing: " << _qitems.size() << " qitems"); 
-	  }
+    if (did_something) {
+      _DEBUG( "did something: " << _qitems.size() << " qitems");
+    }
+    else {
+      _DEBUG( "did nothing: " << _qitems.size() << " qitems"); 
+    }
 
     return did_something;
 }
@@ -279,8 +279,8 @@ ResolverQueue::processOnce ()
 void
 ResolverQueue::process ()
 {
-	  _XDEBUG("----- Processing -----");
-	  spew ();
+    _XDEBUG("----- Processing -----");
+    spew ();
 
     while (_context->isValid ()
 		 && ! isEmpty ()
@@ -417,12 +417,12 @@ ResolverQueue::spew ()
 
     if (_qitems.empty()) {
 
-	      _DEBUG( "  (empty)");
+	_DEBUG( "  (empty)");
 
     } else {
-	      for (QueueItemList::const_iterator iter = _qitems.begin(); iter != _qitems.end(); ++iter) {
-		  _DEBUG("  " << *(*iter));
-	      }
+	for (QueueItemList::const_iterator iter = _qitems.begin(); iter != _qitems.end(); ++iter) {
+	    _DEBUG("  " << *(*iter));
+	}
 
     }
 }
