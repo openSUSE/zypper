@@ -45,6 +45,7 @@ dependency-block =
   element-requires?,
   element-recommends?,
   element-suggests?,
+  element-supplements?,
   element-enhances?
 
 element-category =

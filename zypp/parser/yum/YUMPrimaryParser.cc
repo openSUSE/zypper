@@ -178,6 +178,9 @@ namespace zypp {
             else if (name == "suggests") {
               parseDependencyEntries(& dataPtr->suggests, child);
             }
+            else if (name == "supplements") {
+              parseDependencyEntries(& dataPtr->supplements, child);
+            }
             else if (name == "enhances") {
               parseDependencyEntries(& dataPtr->enhances, child);
             }

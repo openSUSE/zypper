@@ -112,6 +112,9 @@
       <ref name="element-suggests"/>
     </optional>
     <optional>
+      <ref name="element-supplements"/>
+    </optional>
+    <optional>
       <ref name="element-enhances"/>
     </optional>
   </define>

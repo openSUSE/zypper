@@ -105,6 +105,9 @@ namespace zypp {
 		 else if (name == "suggests") {
 		   prim.parseDependencyEntries(& dataPtr->suggests, child);
 		 }
+		 else if (name == "supplements") {
+		   prim.parseDependencyEntries(& dataPtr->supplements, child);
+		 }
 		 else if (name == "enhances") {
 		   prim.parseDependencyEntries(& dataPtr->enhances, child);
 		 }

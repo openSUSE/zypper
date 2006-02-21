@@ -18,6 +18,7 @@ format =
     element-requires?,
     element-recommends?,
     element-enhances?,
+    element-supplements?,
     element-suggests?,
     element-file*
 
@@ -137,6 +138,19 @@ element-enhances =
     element enhances { enhances }
 
 enhances =
+    element entry {
+      attribute-name,
+      (
+        shared-entry-attributes,
+        attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" }
+      )?,
+      empty
+      }*
+
+element-supplements =
+    element supplements { supplements }
+
+supplements =
     element entry {
       attribute-name,
       (

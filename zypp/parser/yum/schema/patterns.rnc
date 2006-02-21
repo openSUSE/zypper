@@ -32,4 +32,5 @@ pattern =
     element-requires?,
     element-suggests?,
     element-enhances?,
+    element-supplements?,
     element-recommends?

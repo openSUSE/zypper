@@ -172,6 +172,7 @@ namespace zypp {
         std::list<YUMDependency> requires;
         std::list<YUMDependency> recommends;
         std::list<YUMDependency> suggests;
+        std::list<YUMDependency> supplements;
         std::list<YUMDependency> enhances;
       };
 
