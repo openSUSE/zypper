@@ -160,6 +160,8 @@ namespace zypp
         {
           if ( stag_r.name == "Pkg" )
           {
+            newPkg();				// collect previous package
+
             std::vector<std::string> words;
             str::split( stag_r.value, std::back_inserter(words) );
 
@@ -169,7 +171,6 @@ namespace zypp
 	    if (words[3] == "src" || words[3] == "nosrc")
 		_pkgImpl = NULL;
 
-            newPkg();
             _nvrad = NVRAD( words[0], Edition(words[1],words[2]), Arch(words[3]) );
           }
           if ( stag_r.name == "Grp" )
