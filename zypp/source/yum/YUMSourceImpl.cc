@@ -705,6 +705,13 @@ namespace zypp
       _deps[Dep::SUGGESTS].insert(createCapability(*it, my_kind));
     }
 
+    for (std::list<YUMDependency>::const_iterator it = parsed.supplements.begin();
+        it != parsed.supplements.end();
+        it++)
+    {
+      _deps[Dep::SUPPLEMENTS].insert(createCapability(*it, my_kind));
+    }
+
     for (std::list<YUMDependency>::const_iterator it = parsed.enhances.begin();
         it != parsed.enhances.end();
         it++)
