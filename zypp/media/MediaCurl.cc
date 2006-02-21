@@ -37,7 +37,7 @@ Pathname MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
 
 bool MediaCurl::_globalInit = false;
 
-std::string _agent = "Novell ZYPP Installer";
+std::string MediaCurl::_agent = "Novell ZYPP Installer";
 
 ///////////////////////////////////////////////////////////////////
 
