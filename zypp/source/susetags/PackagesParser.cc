@@ -64,11 +64,11 @@ namespace zypp
             _current_nvrad = NVRAD( words[0], Edition(words[1],words[2]), Arch(words[3]) );
           }
           else if ( stag_r.name == "Ver" )
-	  {
-	    if (stag_r.value != "2.0")
-		WAR << "packages.DU " << stag_r.name << "=" << stag_r.value << ", should be 2.0" << endl;
-	  }
-	  else
+          {
+            if (stag_r.value != "2.0")
+              WAR << "packages.DU " << stag_r.name << "=" << stag_r.value << ", should be 2.0" << endl;
+          }
+          else
           {
             //ZYPP_THROW( ParseException( "Loc" ) );
             ERR << "warning found unexpected tag " << stag_r.name << std::endl;
@@ -105,7 +105,9 @@ namespace zypp
         }
 
         virtual void endParse()
-        {}
+        {
+        
+        }
       };
 
 
@@ -113,57 +115,47 @@ namespace zypp
       {
         PkgContent _result;
 
-	Source_Ref _source;
-	SuseTagsImpl::Ptr _sourceImpl;
+        Source_Ref _source;
+        SuseTagsImpl::Ptr _sourceImpl;
 
+        bool _isPendingPkg;
         PkgImplPtr _pkgImpl;
         NVRAD _nvrad;
 
-	PackagesParser(Source_Ref source, SuseTagsImpl::Ptr sourceimpl)
-	    : _source( source )
-	    , _sourceImpl( sourceimpl )
-	{ }
-
-        bool pkgPending() const
-        { return _pkgImpl; }
+        PackagesParser(Source_Ref source, SuseTagsImpl::Ptr sourceimpl)
+	       : _source( source )
+	       , _sourceImpl( sourceimpl )
+         , _isPendingPkg( false )
+        { }
 
         PkgContent result() const
-        {
-	  return _result;
-        }
+        { return _result; }
 
-        void collectPkg( const PkgImplPtr & nextPkg_r
-                         = PkgImplPtr() )
+        void collectPkg()
         {
-          if ( pkgPending() )
+          if ( _isPendingPkg )
+          {
+            #warning FIXME, do proper filtering from content:ARCH line
+            if (_nvrad.arch.asString() != "src" && _nvrad.arch.asString() != "nosrc")
             {
-#warning FIXME, do proper filtering from content:ARCH line
-		if (_nvrad.arch.asString() != "src"
-		    && _nvrad.arch.asString() != "nosrc")
-		{
-		  _result.insert(PkgContent::value_type( _nvrad, _pkgImpl ) );
-		}
+              _result.insert(PkgContent::value_type( _nvrad, _pkgImpl ) );
             }
-          _pkgImpl = nextPkg_r;
-        }
-
-        void newPkg()
-        {
-          collectPkg( PkgImplPtr(new source::susetags::SuseTagsPackageImpl(_source)) );
+            _isPendingPkg = false;
+          }
         }
 
         void collectDeps( const std::list<std::string> & depstr_r, CapSet & capset )
         {
           for ( std::list<std::string>::const_iterator it = depstr_r.begin();
                 it != depstr_r.end(); ++it )
-            {
-	      try {
-                capset.insert( CapFactory().parse( ResTraits<Package>::kind, *it ) );
-	      }
-	      catch (Exception & excpt_r) {
-		ZYPP_CAUGHT(excpt_r);
-	      }
+          {
+            try {
+              capset.insert( CapFactory().parse( ResTraits<Package>::kind, *it ) );
             }
+            catch (Exception & excpt_r) {
+              ZYPP_CAUGHT(excpt_r);
+            }
+          }
         }
 
         /* Consume SingleTag data. */
@@ -171,8 +163,12 @@ namespace zypp
         {
           if ( stag_r.name == "Pkg" )
           {
-            newPkg();				// collect previous package
-
+            // this means this is either the first package, or we just finished parsing a package and a new one is starting
+            // collect previous pending package if needed
+            collectPkg();
+            _pkgImpl = PkgImplPtr(new source::susetags::SuseTagsPackageImpl(_source));				
+            _isPendingPkg = true;
+            
             std::vector<std::string> words;
             str::split( stag_r.value, std::back_inserter(words) );
 
@@ -223,7 +219,7 @@ namespace zypp
         /* Consume MulitTag data. */
         virtual void consume( const MultiTag & mtag_r )
         {
-          if ( ! pkgPending() )
+          if ( ! _isPendingPkg )
             return;
 
           if ( mtag_r.name == "Prv" )
@@ -262,7 +258,10 @@ namespace zypp
         }
 
         virtual void endParse()
-        { collectPkg(); }
+        {
+          // collect last package if there is one
+          collectPkg();
+        }
       };
 
       ////////////////////////////////////////////////////////////////////////////
