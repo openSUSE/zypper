@@ -5,8 +5,13 @@
 #include <fstream>
 #include <map>
 #include "zypp/ResObject.h"
+#include "zypp/Package.h"
+#include "zypp/Selection.h"
+#include "zypp/Pattern.h"
+#include "zypp/Product.h"
 #include "zypp/Dependencies.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/LogControl.h"
 #include "zypp/SourceFactory.h"
 #include "zypp/Source.h"
 #include "zypp/source/SourceImpl.h"
@@ -29,6 +34,7 @@ int main( int argc, char * argv[] )
 	cerr << "Usage: suseparse <susedir> [all|reallyall]" << endl;
 	exit (1);
     }
+    zypp::base::LogControl::instance().logfile( "-" );
 
     INT << "===[START]==========================================" << endl;
 
@@ -41,7 +47,27 @@ int main( int argc, char * argv[] )
     Source_Ref src( SourceFactory().createFrom(url, p, alias, cache_dir) );
 
     ResStore store = src.resolvables();
-    INT << "Found " << store.size() << " packages" << endl;
+    INT << "Found " << store.size() << " resolvables" << endl;
+    int pkgcount = 0;
+    int selcount = 0;
+    int patcount = 0;
+    int prdcount = 0;
+    for (ResStore::iterator it = store.begin(); it != store.end(); ++it) {
+	Package::constPtr pkg = asKind<Package>(*it);
+	Selection::constPtr sel = asKind<Selection>(*it);
+	Pattern::constPtr pat = asKind<Pattern>(*it);
+	Product::constPtr prd = asKind<Product>(*it);
+	if (pkg != NULL) ++pkgcount;
+	if (sel != NULL) ++selcount;
+	if (pat != NULL) ++patcount;
+	if (prd != NULL) ++prdcount;
+    }
+    INT << "Found " << store.size() << " resolvables" << endl;
+    INT << "\t" << pkgcount << " packages" << endl;
+    INT << "\t" << selcount << " selections" << endl;
+    INT << "\t" << patcount << " patterns" << endl;
+    INT << "\t" << prdcount << " products" << endl;
+
     if (argc > 2) {
 	int count = 0;
 	for (ResStore::iterator it = store.begin(); it != store.end(); ++it) {
