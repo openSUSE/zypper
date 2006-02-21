@@ -9,6 +9,8 @@
 /** \file	zypp/ArchCompat.cc
  *
 */
+
+#include <assert.h>
 #include <iostream>
 //#include "zypp/base/Logger.h"
 
