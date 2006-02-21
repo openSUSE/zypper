@@ -575,11 +575,11 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	if (uninstall_item && branch_item) {
 	    branch_item->addItem (uninstall_item);
-	    new_items.push_front (branch_item);
+	    new_items.push_back (branch_item);
 	} else if (uninstall_item) {
 	    new_items.push_front (uninstall_item);
 	} else if (branch_item) {
-	    new_items.push_front (branch_item);
+	    new_items.push_back (branch_item);
 	} else {
 	    // We can't do anything to resolve the missing requirement, so we fail.
 	    ResolverInfo_Ptr misc_info;
@@ -641,7 +641,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	    }
 	}
 
-	new_items.push_front (branch_item);
+	new_items.push_back (branch_item);
 
     } else {
 	abort ();
