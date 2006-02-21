@@ -45,7 +45,7 @@
 #include "XMLFilesBackend.h"
 #include "serialize.h"
 
-#define ZYPP_DB_DIR "/var/lib/zypp_db"
+#define ZYPP_DB_DIR "/var/lib/zypp_db/"
 
 using std::endl;
 using namespace boost::filesystem;
