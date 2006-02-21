@@ -17,6 +17,7 @@
 
 #include "zypp/source/susetags/PackagesParser.h"
 #include "zypp/parser/tagfile/TagFileParser.h"
+#include "zypp/Arch.h"
 #include "zypp/Package.h"
 #include "zypp/CapFactory.h"
 #include "zypp/CapSet.h"
@@ -62,7 +63,12 @@ namespace zypp
             _pkg_pending = true;
             _current_nvrad = NVRAD( words[0], Edition(words[1],words[2]), Arch(words[3]) );
           }
-          else
+          else if ( stag_r.name == "Ver" )
+	  {
+	    if (stag_r.value != "2.0")
+		WAR << "packages.DU " << stag_r.name << "=" << stag_r.value << ", should be 2.0" << endl;
+	  }
+	  else
           {
             //ZYPP_THROW( ParseException( "Loc" ) );
             ERR << "warning found unexpected tag " << stag_r.name << std::endl;
@@ -131,7 +137,12 @@ namespace zypp
         {
           if ( pkgPending() )
             {
-              _result.insert(PkgContent::value_type( _nvrad, _pkgImpl ) );
+#warning FIXME, do proper filtering from content:ARCH line
+		if (_nvrad.arch.asString() != "src"
+		    && _nvrad.arch.asString() != "nosrc")
+		{
+		  _result.insert(PkgContent::value_type( _nvrad, _pkgImpl ) );
+		}
             }
           _pkgImpl = nextPkg_r;
         }
@@ -167,9 +178,6 @@ namespace zypp
 
             if ( str::split( stag_r.value, std::back_inserter(words) ) != 4 )
               ZYPP_THROW( ParseException( "Pkg" ) );
-#warning FIXME, do proper filtering from content:ARCH line
-	    if (words[3] == "src" || words[3] == "nosrc")
-		_pkgImpl = NULL;
 
             _nvrad = NVRAD( words[0], Edition(words[1],words[2]), Arch(words[3]) );
           }
