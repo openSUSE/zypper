@@ -374,9 +374,21 @@ namespace zypp
       return true;
     }
 
-    void setStatus (ResStatus status)
+    bool setStatus (ResStatus status)
     {
-	_bitfield = status._bitfield;
+	if ( ((isInstalled() && status.isInstalled())
+	       || (isUninstalled() && status.isUninstalled()))
+	     && _bitfield.value<TransactByField>() <=  status._bitfield.value<TransactByField>() // regarding priority
+	     )
+	{
+	    _bitfield = status._bitfield;
+	    return true;
+	}
+	else
+	{
+	    // The type is not correct ( system/source)
+	    return false;
+	}
     }
 
     /** \name Builtin ResStatus constants. */
