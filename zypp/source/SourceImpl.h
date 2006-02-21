@@ -131,6 +131,8 @@ namespace zypp
       virtual void setPriority (unsigned p);
       virtual unsigned priorityUnsubscribed (void) const;
       virtual void setPriorityUnsubscribed (unsigned p);
+      virtual const Pathname & cacheDir (void);
+
 
       virtual std::string type(void) const;
 

@@ -123,6 +123,9 @@ namespace zypp
   const Pathname & Source_Ref::path (void) const
   { return _pimpl->path (); }
 
+  const Pathname & Source_Ref::cacheDir (void) const
+  { return _pimpl->cacheDir (); }
+
   void Source_Ref::changeMedia(const media::MediaId & media_r, const Pathname & path_r)
   { _pimpl->changeMedia(media_r, path_r); }
 

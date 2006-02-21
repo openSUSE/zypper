@@ -111,6 +111,7 @@ media::MediaManager media_mgr;
 
     report->startProbe (url_r);
     
+#warning if cache_dir is provided, no need to open the original url
     // open the media
     media::MediaId id = media_mgr.open(url_r);
 

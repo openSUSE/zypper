@@ -12,13 +12,23 @@
 #include <iostream>
 #include "zypp/base/Logger.h"
 
+#include "zypp/ZYpp.h"
+#include "zypp/ZYppFactory.h"
 #include "zypp/SourceManager.h"
 #include "zypp/SourceFactory.h"
 #include "zypp/Source.h"
 #include "zypp/source/SourceImpl.h"
 #include "zypp/target/store/PersistentStorage.h"
+#include "zypp/Pathname.h"
+#include "zypp/PathInfo.h"
+
+#include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
+#include "boost/filesystem/fstream.hpp"    // ditto
+
+#define ZYPP_METADATA_PREFIX ( getZYpp()->homePath().asString()+"/cache/" )
 
 using std::endl;
+using namespace boost::filesystem;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -130,7 +140,22 @@ namespace zypp
   {
     storage::PersistentStorage store;    
     store.init( root_r );
-  
+    
+
+    // make sure to create the source metadata cache
+    if( metadata_cache )
+    {
+	// make sure our root exists
+	
+	filesystem::assert_dir ( root_r.asString() + "/" + getZYpp()->homePath().asString() );
+	
+	path topdir = path(root_r.asString()) / path(ZYPP_METADATA_PREFIX);
+	if (!exists(topdir))
+      	    create_directory(topdir);
+    	MIL << "Created..." << topdir.string() << std::endl;
+    }
+
+    unsigned id = 0;  
     for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
     {
 	storage::PersistentStorage::SourceData descr;
@@ -141,8 +166,17 @@ namespace zypp
 	descr.autorefresh = it->second->autorefresh();
 	descr.type = it->second->type();
 	
+	descr.cache_dir = it->second->cacheDir().empty() ?
+	    root_r.asString() + ZYPP_METADATA_PREFIX + str::numstring(id)
+	    : it->second->cacheDir().asString();
+
+	filesystem::assert_dir ( descr.cache_dir );
+
 	// FIXME: product_dir
 	store.storeSource( descr );
+
+	if( metadata_cache )
+		it->second->storeMetadata( descr.cache_dir );
     }
 
     for( SourceMap::iterator it = _deleted_sources.begin(); it != _deleted_sources.end(); it++)
@@ -174,7 +208,7 @@ namespace zypp
 	unsigned id = 0;
 	
 	try {
-	    id = addSource(it->url, it->product_dir, it->alias);
+	    id = addSource(it->url, it->product_dir, it->alias, it->cache_dir);
 	}
 	catch ( const Exception & expt ){
 	    ERR << "Unable to restore source from " << it->url << endl;

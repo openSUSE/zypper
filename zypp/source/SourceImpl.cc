@@ -227,6 +227,9 @@ namespace zypp
     void SourceImpl::setPriorityUnsubscribed (unsigned p)
     { _priority_unsubscribed = p; }
 
+    const Pathname & SourceImpl::cacheDir (void) 
+    { return _cache_dir; }
+
     Url SourceImpl::url (void) const
     { return _url; }
 
