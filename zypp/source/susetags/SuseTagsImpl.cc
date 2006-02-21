@@ -53,7 +53,7 @@ namespace zypp
           ZYPP_THROW(Exception("I refuse to use / as cache dir"));
           
         if (0 != assert_dir(cache_dir_r.dirname(), 0700))
-          ZYPP_THROW(Exception("Cannot create cache directory"));
+          ZYPP_THROW(Exception("Cannot create cache directory" + cache_dir_r.asString()));
         
         filesystem::clean_dir(cache_dir_r);
         filesystem::mkdir(cache_dir_r + "DATA");
@@ -68,14 +68,14 @@ namespace zypp
         //packages.* *.sel
         media::MediaManager media_mgr;
         media::MediaAccessId media_num = _media_set->getMediaAccessId(1);
-        INT << "Storing data to cache" << endl;
+        INT << "Storing data to cache " << cache_dir_r << endl;
         media_mgr.provideDirTree(media_num, "suse/setup/descr");
         Pathname descr_src = media_mgr.localPath(media_num, "suse/setup/descr"); 
         Pathname media_src = media_mgr.localPath(media_num, "media.1"); 
         Pathname content_src = media_mgr.localPath(media_num, "content"); 
         if (0 != assert_dir((cache_dir_r + "DATA").dirname(), 0700))
         {
-          ZYPP_THROW(Exception("Cannot create cache directory"));
+          ZYPP_THROW(Exception("Cannot create cache directory: " + cache_dir_r.asString()));
         }
         else
         {
@@ -187,7 +187,7 @@ namespace zypp
         }
         else
         {
-          DBG << "Cached metadata not found. Reading from " << _path << endl;  
+          DBG << "Cached metadata not found in [" << _cache_dir << "]. Reading from " << _path << endl;  
           _data_dir = _path + "suse/setup/descr";
           _content_file = provideFile(_path + "content");
         }
