@@ -14,7 +14,12 @@
 
 #include <iosfwd>
 #include <functional>
+#include <set>
 #include <string>
+
+#include "zypp/RelCompare.h"
+#include "zypp/base/String.h"
+#include "zypp/base/Iterator.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -25,8 +30,6 @@ namespace zypp
   //	CLASS NAME : Arch
   //
   /** Architecture.
-   * \todo improve compatibleWith implementation
-   * \todo unify strings and optimize opertor==
   */
   class Arch
   {
@@ -36,29 +39,63 @@ namespace zypp
     /** Ctor from string. */
     explicit
     Arch( const std::string & rhs );
-    /** Dtor */
-    ~Arch()
-    {}
-    /** String representation of Arch. */
-    const std::string & asString() const
-    { return _value; }
 
   public:
-    /** Compatibility relation.
-     * \return \c True iff \c this is compatible with \a rhs.
-    */
-    bool compatibleWith( const Arch & rhs ) const;
-
-    /** Order on Arch (arbitrary).
-     * \todo Adjust logical operators below to follow compare.
-    */
-    int compare( const Arch & rhs ) const
-    { return (_score < rhs._score) ? -1 : ((_score > rhs._score ) ? 1 : 0); }
-
-  private:
     /** String representation of Arch. */
-    std::string _value;
-    int _score;
+    const std::string & asString() const;
+
+    /** Compatibility relation.
+     * \return \c True iff \c this is compatible with \a targetArch_r.
+     * \code
+     * Arch_noarch.compatibleWith( ... )       ==> always true;
+     * Arch_i686.compatibleWith( Arch_x86_64 ) ==> true;
+     * Arch_x86_64.compatibleWith( Arch_i686 ) ==> false;
+     * \endcode
+    */
+    bool compatibleWith( const Arch & targetArch_r ) const;
+
+    /** Arch comparison.
+     * Primary key is the number of compatible Archs, then
+     * the string representation. Thus Arch_noarch is the
+     * least Arch.
+    */
+    int compare( const Arch & rhs ) const;
+
+    /** Arch comparison (static version). */
+    static int compare( const Arch & lhs, const Arch & rhs )
+    { return lhs.compare( rhs ); }
+
+  public:
+    /** Reversed arch order, best Arch first. */
+    typedef std::set<Arch,CompareByGT<Arch> > CompatSet;
+
+    /** Return a set of all Arch's \compatible with a targetArch_r.
+     * \note The set is ordered according to compare, thus iterating
+     * will start at Arch_noarch.
+     * \code
+     * Arch::CompatSet cset( Arch::compatSet( Arch_x86_64 ) );
+     *
+     * cout << str::join( make_transform_iterator( cset.begin(), std::mem_fun_ref(&Arch::asString) ),
+     *                    make_transform_iterator( cset.end(), std::mem_fun_ref(&Arch::asString) ) )
+     *      << endl;
+     *
+     * // Prints: x86_64 athlon i686 i586 i486 i386 noarch
+     * \endcode
+    */
+    static CompatSet compatSet( const Arch & targetArch_r );
+
+    /** */
+    static std::string asString( const CompatSet & cset )
+    {
+      return str::join( make_transform_iterator( cset.begin(), std::mem_fun_ref(&Arch::asString) ),
+                        make_transform_iterator( cset.end(), std::mem_fun_ref(&Arch::asString) ) );
+    }
+
+  public:
+    struct CompatEntry;
+  private:
+    Arch( const CompatEntry & );
+    const CompatEntry * _entry;
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -71,6 +108,7 @@ namespace zypp
   //@{
   /** \relates Arch */
   extern const Arch Arch_noarch;
+  /** \todo actually not an Arch but kind of resolvable. */
   extern const Arch Arch_src;
 
   /** \relates Arch */
@@ -102,17 +140,11 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
 
-  inline Arch::Arch()
-  : _value( Arch_noarch._value )
-  {}
-
-  ///////////////////////////////////////////////////////////////////
-
   /** \relates Arch stream output. */
   inline std::ostream & operator<<( std::ostream & str, const Arch & obj )
   { return str << obj.asString(); }
 
-  /** \name Comparison based on string value. */
+  /** \name Equality based on string value. */
   //@{
   /** \relates Arch */
   inline bool operator==( const Arch & lhs, const Arch & rhs )
@@ -164,10 +196,10 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 namespace std
 { /////////////////////////////////////////////////////////////////
-  /** \relates Arch Default order for std::container based on string value.*/
+  /** \relates Arch Default order for std::container based Arch::compare.*/
   template<>
     inline bool less<zypp::Arch>::operator()( const zypp::Arch & lhs, const zypp::Arch & rhs ) const
-    { return lhs.asString() < rhs.asString(); }
+    { return lhs.compare( rhs ) < 0; }
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
