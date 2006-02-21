@@ -108,6 +108,9 @@ namespace zypp
 	  return NULL if no resolvable provides this file  */
       ResObject::constPtr whoOwnsFile (const std::string & path_str) const;
 
+      /** Set the log file for target */
+      bool setInstallationLogfile(const Pathname & path_r);
+
     protected:
       /** All resolvables provided by the target. */
       ResStore _store;

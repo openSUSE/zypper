@@ -98,6 +98,9 @@ namespace zypp
 				    PoolItemList & srclist_r ) const
   { _pimpl->getResolvablesToInsDel( pool_r, dellist_r, instlist_r, srclist_r ); }
 
+  bool Target::setInstallationLogfile(const Pathname & path_r)
+  { return _pimpl->setInstallationLogfile(path_r); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

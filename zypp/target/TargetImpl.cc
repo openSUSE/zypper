@@ -348,6 +348,12 @@ namespace zypp
 	return NULL;
     }
 
+    /** Set the log file for target */
+    bool TargetImpl::setInstallationLogfile(const Pathname & path_r)
+    {
+      return rpm::RpmDb::setInstallationLogfile(path_r);
+    }
+
 //-----------------------------------------------------------------------------
 /******************************************************************
 **

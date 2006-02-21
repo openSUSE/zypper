@@ -86,6 +86,9 @@ namespace zypp
     void enableStorage(const Pathname &root_r);
 #endif
 
+    /** Set the log file for target */
+    bool setInstallationLogfile(const Pathname & path_r);
+
   public:
     /** Ctor */
     explicit
