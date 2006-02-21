@@ -238,6 +238,10 @@ namespace zypp
             {
               collectDeps( mtag_r.values, _nvrad[Dep::OBSOLETES] );
             }
+          else if ( mtag_r.name == "Sup" )
+            {
+              collectDeps( mtag_r.values, _nvrad[Dep::SUPPLEMENTS] );
+            }
           else if ( mtag_r.name == "Key" )
             {
                _pkgImpl->_keywords = mtag_r.values;
