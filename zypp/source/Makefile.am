@@ -3,6 +3,9 @@
 
 SUBDIRS = susetags yum
 
+INCLUDES = 					\
+	-DZYPP_BASE_LOGGER_LOGGROUP=\"source\"
+
 ## ##################################################
 
 sourceincludedir = $(pkgincludedir)/source

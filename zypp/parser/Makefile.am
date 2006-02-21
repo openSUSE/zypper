@@ -3,7 +3,8 @@
 
 SUBDIRS = yum tagfile
 
-INCLUDES = -I$(oldincludedir)/libxml2
+INCLUDES = -I$(oldincludedir)/libxml2	\
+	-DZYPP_BASE_LOGGER_LOGGROUP=\"parser\"
 
 ## ##################################################
 
