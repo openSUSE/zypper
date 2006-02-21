@@ -180,11 +180,9 @@ QueueItemBranch::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     } else if (branch_count == _possible_qitems.size()) {
 	_XDEBUG("Nothing was eliminated");
-	/* Nothing was eliminated, so just pass the branch through (and set it to
-	   NULL so that it won't get freed when we exit. */
+	/* Nothing was eliminated, so just pass the branch through. */
 
 	qil.push_front (this);
-// FIXME: dont free	item = NULL;
 	did_something = false;
 
     } else {
