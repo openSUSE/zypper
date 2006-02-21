@@ -156,6 +156,27 @@ sync_source( DbAccess & db, Source_Ref source )
 {
     DBG << "sync_source, alias '" << source.alias() << "'" << endl;
 
+    std::string catalog = source.alias();
+
+    if (db.haveCatalog( catalog ) ) {
+	db.removeCatalog( catalog );		// clean old entries first
+    }
+
+    std::string name = source.zmdName();
+    if (name.empty()) name = source.url().asString();
+    std::string desc = source.zmdDescription();
+    if (desc.empty()) desc = source.vendor();
+
+    if (db.insertCatalog( catalog, name, catalog, desc )) {		// create catalog
+
+	ResStore store = source.resolvables();
+
+	DBG << "Source provides " << store.size() << " resolvables" << endl;
+
+	db.writeStore( store, ResStatus::uninstalled, source.alias().c_str() );	// store all resolvables
+
+    }
+
     return;
 }
 
@@ -164,7 +185,17 @@ sync_catalogs( DbAccess & db )
 {
     SourceManager_Ptr manager = SourceManager::sourceManager();
 
+    try {
+	manager->restore("/");
+    }
+    catch (Exception & excpt_r) {
+	ZYPP_CAUGHT (excpt_r);
+	ERR << "Couldn't restore sources" << endl;
+	return;
+    }
+
     std::list<unsigned int> sources = manager->allSources();
+    MIL << "Found " << sources.size() << " sources" << endl;
 
     for (std::list<unsigned int>::const_iterator it = sources.begin(); it != sources.end(); ++it) {
 	Source_Ref source = manager->findSource( *it );
@@ -184,18 +215,13 @@ sync_catalogs( DbAccess & db )
 int
 main (int argc, char **argv)
 {
-    zypp::base::LogControl::instance().logfile( ZMD_BACKEND_LOG );
+    const char *logfile = getenv("ZYPP_LOGFILE");
+    if (logfile != NULL)
+	zypp::base::LogControl::instance().logfile( logfile );
+    else
+	zypp::base::LogControl::instance().logfile( ZMD_BACKEND_LOG );
 
     ZYpp::Ptr God = zypp::getZYpp();
-
-    try {
-	God->initTarget("/");
-    }
-    catch (Exception & excpt_r) {
-	ZYPP_CAUGHT (excpt_r);
-	ERR << "Couldn't access the packaging system" << endl;
-	return 1;
-    }
 
     if (argc < 3 || argc > 4) {
 	std::cerr << "usage: " << argv[0] << " <database> <uri> [catalog id]" << endl;
@@ -204,15 +230,21 @@ main (int argc, char **argv)
 
     DbAccess db(argv[1]);
 
+    db.openDb( true );		// open for writing
+
     if (strcmp( argv[2], CATALOGSYNC ) == 0) {
+	MIL << "Doing a catalog sync" << endl;
 	sync_catalogs( db );
     }
     else {
+	MIL << "Doing a file query" << endl;
 	ResStore store = query (God->target(), argv[2], argc == 4 ? argv[3] : NULL);
 	if (!store.empty()) {
 	    db.writeStore( store, ResStatus::uninstalled );
 	}
     }
+
+    db.closeDb();
 
     return 0;
 }

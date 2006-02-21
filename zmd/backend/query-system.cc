@@ -36,7 +36,11 @@ main (int argc, char **argv)
     }
 
     DbAccess db( argv[1] );
+    db.openDb( true );
+
     db.writeStore( God->target()->resolvables(), ResStatus::installed, "@system" );
+
+    db.closeDb();
 
     return 0;
 }

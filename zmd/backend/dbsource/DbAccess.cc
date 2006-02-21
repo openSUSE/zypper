@@ -751,8 +751,6 @@ DbAccess::haveCatalog( const std::string & catalog )
 {
     string query ("SELECT * FROM catalogs WHERE id = ? ");
 
-    openDb( false );
-
     sqlite3_stmt *handle = prepare_handle( _db, query );
     if (handle == NULL) {
 	return false;
@@ -761,14 +759,15 @@ DbAccess::haveCatalog( const std::string & catalog )
     sqlite3_bind_text( handle, 1, catalog.c_str(), -1, SQLITE_STATIC );
 
     int rc = sqlite3_step( handle);
-    if (rc != SQLITE_DONE) {
-	ERR << "Error finding catalog: " << sqlite3_errmsg (_db) << endl;
-	return false;
+    if (rc == SQLITE_ROW) {
+	DBG << "Found catalog" << endl;
+    }
+    else if (rc != SQLITE_DONE) {
+	ERR << "rc " << rc << ": " << sqlite3_errmsg (_db) << endl;
     }
     sqlite3_reset( handle);
 
-
-    return true;
+    return (rc == SQLITE_ROW);
 }
 
 
@@ -777,8 +776,6 @@ bool
 DbAccess::insertCatalog( const std::string & catalog, const string & name, const string & alias, const string & description )
 {
     string query ("INSERT INTO catalogs(id,name,alias,description) VALUES (?,?,?,?) ");
-
-    openDb( false );
 
     sqlite3_stmt *handle = prepare_handle( _db, query );
     if (handle == NULL) {
@@ -792,12 +789,11 @@ DbAccess::insertCatalog( const std::string & catalog, const string & name, const
 
     int rc = sqlite3_step( handle);
     if (rc != SQLITE_DONE) {
-	ERR << "Error writing catalog: " << sqlite3_errmsg (_db) << endl;
-	return false;
+	ERR << "rc " << rc << "Error writing catalog: " << sqlite3_errmsg (_db) << endl;
     }
     sqlite3_reset( handle);
 
-    return true;
+    return (rc == SQLITE_DONE);
 }
 
 
@@ -806,8 +802,6 @@ bool
 DbAccess::removeCatalog( const std::string & catalog )
 {
     string query ("DELETE FROM catalogs where id = ? ");
-
-    openDb( false );
 
     sqlite3_stmt *handle = prepare_handle( _db, query );
     if (handle == NULL) {
@@ -818,12 +812,11 @@ DbAccess::removeCatalog( const std::string & catalog )
 
     int rc = sqlite3_step( handle);
     if (rc != SQLITE_DONE) {
-	ERR << "Error removing catalog: " << sqlite3_errmsg (_db) << endl;
-	return false;
+	ERR << "rc " << rc << ", Error removing catalog: " << sqlite3_errmsg (_db) << endl;
     }
     sqlite3_reset( handle);
 
-    return true;
+    return (rc == SQLITE_DONE);
 }
 
 
@@ -840,16 +833,12 @@ DbAccess::writeStore( const zypp::ResStore & store, ResStatus status, const char
 	return;
     }
 
-    openDb( true );
-
     int count = 0;
     for (ResStore::const_iterator iter = store.begin(); iter != store.end(); ++iter) {
 	if (writeResObject( *iter, status, catalog ) < 0)
 	    break;
 	++count;
     }
-
-    closeDb();
 
     MIL << "Wrote " << count << " resolvables to database" << endl;
     return;
@@ -868,16 +857,12 @@ DbAccess::writePool( const zypp::ResPool & pool, const char *catalog )
 	return;
     }
 
-    openDb( true );
-
     int count = 0;
     for (ResPool::const_iterator iter = pool.begin(); iter != pool.end(); ++iter) {
 	if (!writeResObject( iter->resolvable(), iter->status(), catalog ))
 	    break;
 	++count;
     }
-
-    closeDb();
 
     MIL << "Wrote " << count << " resolvables to database" << endl;
     return;

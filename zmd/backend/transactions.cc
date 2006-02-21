@@ -226,7 +226,3 @@ write_transactions (const ResPool & pool, sqlite3 *db, ResolverContext_Ptr conte
 
     return result;
 }
-
-
-
-

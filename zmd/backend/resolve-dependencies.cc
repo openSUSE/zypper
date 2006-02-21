@@ -111,5 +111,7 @@ main (int argc, char **argv)
 	cout.flush();
     }
 
+    db.closeDb();
+
     return (success ? 0 : 1);
 }

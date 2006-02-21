@@ -98,5 +98,8 @@ main (int argc, char **argv)
 	ZYPP_CAUGHT( expt_r );
 	return 1;
     }
+
+    db.closeDb();
+
     return 0;
 }
