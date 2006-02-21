@@ -48,8 +48,8 @@ namespace zypp
 
       void SuseTagsImpl::initCacheDir(const Pathname & cache_dir_r)
       {
-        //if (0 != assert_dir(cache_dir_r.dirname(), 0700))
-        //  ZYPP_THROW(Exception("Cannot create cache directory"));
+        if (0 != assert_dir(cache_dir_r.dirname(), 0700))
+          ZYPP_THROW(Exception("Cannot create cache directory"));
         
         filesystem::clean_dir(cache_dir_r);
         filesystem::mkdir(cache_dir_r + "DATA");
@@ -68,7 +68,7 @@ namespace zypp
         media_mgr.provideDirTree(media_num, "suse/setup/descr");
         Pathname descr_src = media_mgr.localPath(media_num, "suse/setup/descr"); 
         Pathname media_src = media_mgr.localPath(media_num, "media.1"); 
-        
+        Pathname content_src = media_mgr.localPath(media_num, "content"); 
         if (0 != assert_dir((cache_dir_r + "DATA").dirname(), 0700))
         {
           ZYPP_THROW(Exception("Cannot create cache directory"));
@@ -76,6 +76,7 @@ namespace zypp
         else
         {
           filesystem::copy_dir(descr_src, cache_dir_r + "DATA");
+          filesystem::copy(content_src, cache_dir_r + "DATA/content");
           filesystem::copy_dir(media_src, cache_dir_r + "MEDIA");
         }
         
@@ -178,6 +179,7 @@ namespace zypp
         {
           DBG << "Cached metadata found. Reading from " << _cache_dir << endl;  
           _data_dir  = _cache_dir + "DATA/descr";
+          _content_file = _cache_dir + "DATA/content";
         }
         else
         {
