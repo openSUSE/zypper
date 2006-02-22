@@ -91,7 +91,7 @@ parse_dep_attrs(bool *is_obsolete, bool *is_pre, const xmlChar **attrs)
     int depoch = Edition::noepoch;
     string dversion;
     string drelease;
-    string darch = "";
+    string darch = "noarch";
     Rel relation = Rel::ANY;
 
     *is_obsolete = false;
@@ -451,7 +451,7 @@ HelixParser::toplevelStart(const std::string & token, const xmlChar **attrs)
 	epoch = 0;
 	version.clear();
 	release.clear();
-	arch.clear();
+	arch = "noarch";
 	summary.clear();
 	description.clear();
 	section.clear();
