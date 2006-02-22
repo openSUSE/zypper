@@ -22,6 +22,12 @@ using namespace zypp;
 
 using solver::detail::ResolverInfo_Ptr;
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "resolve-dependencies"
+
+
+//-----------------------------------------------------------------------------
+
 static void
 append_dep_info (ResolverInfo_Ptr info, void *user_data)
 {

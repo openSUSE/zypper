@@ -25,6 +25,9 @@ using namespace zypp;
 
 #include "dbsource/DbAccess.h"
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "query-files"
+
 //-----------------------------------------------------------------------------
 
 static ResStore

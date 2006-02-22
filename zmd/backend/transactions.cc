@@ -41,6 +41,9 @@ using solver::detail::ResolverContext_Ptr;
 
 typedef std::set<PoolItem> PoolItemSet;
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "transactions"
+
 //-----------------------------------------------------------------------------
 
 struct CopyTransaction

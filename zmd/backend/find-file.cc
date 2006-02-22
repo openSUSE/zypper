@@ -8,6 +8,9 @@
 using std::endl;
 using namespace zypp;
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "find-file"
+
 #include <sqlite3.h>
 #include "resolvable-writer.h"
 

@@ -25,6 +25,9 @@ using solver::detail::ResolverInfo_Ptr;
 
 typedef std::list<PoolItem> PoolItemList;
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "transact"
+
 //-----------------------------------------------------------------------------
 
 static void
