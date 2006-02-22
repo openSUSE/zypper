@@ -37,6 +37,10 @@
 
 #include <list>
 
+#include <zypp/ZYppFactory.h>
+#include <zypp/ZYpp.h>
+#include <zypp/PathInfo.h>
+
 #include <zypp/target/store/xml/XMLSourceCacheParser.h>
 
 #include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
@@ -45,11 +49,13 @@
 #include "XMLFilesBackend.h"
 #include "serialize.h"
 
-#define ZYPP_DB_DIR "/var/lib/zypp_db/"
+//#define ZYPP_DB_DIR "/var/lib/zypp_db/"
+#define ZYPP_DB_DIR ( getZYpp()->homePath().asString()+"/db/" )
 
 using std::endl;
 using namespace boost::filesystem;
 using namespace zypp;
+using namespace zypp::filesystem;
 using namespace zypp::parser::yum;
 
 ///////////////////////////////////////////////////////////////////
@@ -98,21 +104,21 @@ XMLFilesBackend::XMLFilesBackend(const Pathname &root) : Backend(root)
   d->kinds.insert(ResTraits<zypp::Product>::kind);
   d->kinds.insert(ResTraits<zypp::Pattern>::kind);
 
-	// check if the db exists
-	if (!isBackendInitialized())
-	{
-		DBG << "Database not initialized" << std::endl;
-		initBackend();
+  // check if the db exists
+  if (!isBackendInitialized())
+  {
+    DBG << "Database not initialized" << std::endl;
+    initBackend();
     // should be initialized now...
-		if (!isBackendInitialized())
-			DBG << "Error, cant init database" << std::endl;
-		else
-			DBG << "Database initialized" << std::endl;
-	}
-	else
-	{
-		DBG << "Database already initialized" << std::endl;
-	}
+    if (!isBackendInitialized())
+      DBG << "Error, cant init database" << std::endl;
+    else
+      DBG << "Database initialized" << std::endl;
+   }
+   else
+   {
+     DBG << "Database already initialized" << std::endl;
+   }
 }
 
 // Taken from KApplication
@@ -155,57 +161,48 @@ std::string XMLFilesBackend::randomString(int length) const
    return str;
 }
 
-
 bool
 XMLFilesBackend::isBackendInitialized() const
 {
   bool ok = true;
   ok = ok && exists( path(d->root.asString()) / ZYPP_DB_DIR );
+
   std::set<Resolvable::Kind>::const_iterator it_kinds;
   for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
   {
     Resolvable::Kind kind = (*it_kinds);
     ok = ok && exists(dirForResolvableKind(kind));
   }
-  ok = ok && exists( path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("source-cache") );
+  ok = ok && exists( path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("sources") );
   return ok;
 }
 
 void
 XMLFilesBackend::initBackend()
 {
-  // FIXME duncan * handle exceptions
-  DBG << "Creating directory structure..." << std::endl;
-  try
+  Pathname topdir = d->root + Pathname(ZYPP_DB_DIR);
+  DBG << "Creating directory structure " << topdir << std::endl;
+  
+  if (0 != assert_dir(topdir, 0700))
+      ZYPP_THROW(Exception("Cannot create XMLBackend db directory" + topdir.asString()));
+  
+  // create dir for resolvables
+  std::set<Resolvable::Kind>::const_iterator it_kinds;
+  for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
   {
-    path topdir = path(d->root.asString()) / path(ZYPP_DB_DIR);
-    if (!exists(topdir))
-      create_directory(topdir);
-    MIL << "Created..." << topdir.string() << std::endl;
-    std::set<Resolvable::Kind>::const_iterator it_kinds;
-    for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
-    {
-      Resolvable::Kind kind = (*it_kinds);
-      # warning "add exception handling here"
-      path p(topdir / path(resolvableKindToString(kind, true /* plural */)));
-      if (!exists(p))
-      {
-        create_directory(p);
-        MIL << "Created..." << p.string() << std::endl;
-      }
-    }
-    // create source-cache
-    path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("source-cache");
-    if (!exists(source_p))
-    {
-      create_directory(source_p);
-      MIL << "Created..." << source_p.string() << std::endl;
-    }
+    Resolvable::Kind kind = (*it_kinds);
+    Pathname p = topdir + Pathname("/" + resolvableKindToString(kind, true /* plural */) + "/");
+    if (0 != assert_dir(p, 0700))
+      ZYPP_THROW(Exception("Cannot create directory" + p.asString()));
+    else
+      MIL << "Created " << p.asString() << std::endl;
   }
-  catch(std::exception &e)
-  {
-    ZYPP_RETHROW(Exception(e.what()));
-  }
+  // create dir for source list
+  Pathname source_p = d->root + Pathname(ZYPP_DB_DIR) + Pathname("/sources/");
+  if (0 != assert_dir(source_p, 0700))
+    ZYPP_THROW(Exception("Cannot create directory" + source_p.asString()));
+  else
+    MIL << "Created " << source_p.asString() << std::endl;
 }
 
 void XMLFilesBackend::setRandomFileNameEnabled( bool enabled )
@@ -217,7 +214,7 @@ std::string
 XMLFilesBackend::dirForResolvableKind( Resolvable::Kind kind ) const
 {
   std::string dir;
-  dir += path( path(d->root.asString()) / path(ZYPP_DB_DIR) / path(resolvableKindToString(kind, true)) ).string();
+  dir += Pathname( d->root + Pathname(ZYPP_DB_DIR) + Pathname(resolvableKindToString(kind, true)) ).asString();
   return dir;
 }
 
@@ -765,7 +762,7 @@ std::ostream & operator<<( std::ostream & str, const XMLFilesBackend & obj )
 std::list<PersistentStorage::SourceData>
 XMLFilesBackend::storedSources() const
 {
-  path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("source-cache");
+  path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("sources");
   std::list<PersistentStorage::SourceData> sources;
   DBG << "Reading source cache in " << source_p.string() << std::endl;
   directory_iterator end_iter;
@@ -778,7 +775,7 @@ XMLFilesBackend::storedSources() const
 
   for ( directory_iterator dir_itr( source_p ); dir_itr != end_iter; ++dir_itr )
   {
-    DBG << "[source-cache] - " << dir_itr->leaf() << std::endl;
+    DBG << "[source-list] - " << dir_itr->leaf() << std::endl;
     //sources.insert( sourceDataFromCacheFile( source_p + "/" + dir_itr->leaf() ) );
     std::string full_path = (source_p / dir_itr->leaf()).string();
     std::ifstream anIstream(full_path.c_str());
@@ -798,7 +795,7 @@ XMLFilesBackend::storeSource(const PersistentStorage::SourceData &data)
 {
   // serialize and save a file
   std::string xml = toXML(data);
-  path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("source-cache");
+  path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("sources");
 
   // generate a filename
   if (data.alias.size() == 0)
@@ -829,7 +826,7 @@ void
 XMLFilesBackend::deleteSource(const std::string &alias)
 {
   // just delete the files
-  path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("source-cache");
+  path source_p = path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("sources");
   try
   {
     std::stringstream message_stream(alias);
