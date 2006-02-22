@@ -119,7 +119,7 @@ InstallOrder::setInstalled(PoolItem_Ref item )
 
     PoolItemList adj = _rgraph[item];
 
-    DBG << "InstallOrder::setInstalled " << ITEMNAME(item) << endl;
+    XXX << "InstallOrder::setInstalled " << ITEMNAME(item) << endl;
 
     // order will be < 0
     _nodes[item].order--;
@@ -214,7 +214,7 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
     typedef list<Capability> CapList;
     CapList requires;
 
-    DBG << "InstallOrder::rdfsvisit, visiting " << ITEMNAME(item) << endl;
+    XXX << "InstallOrder::rdfsvisit, visiting " << ITEMNAME(item) << endl;
 
     NodeInfo& nodeinfo = _nodes[item];
 
@@ -306,7 +306,7 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
     _nodes[item].endtime = _rdfstime;
     _rdfstime++;
 
-    DBG << ITEMNAME(item) << " done" << endl;
+    XXX << ITEMNAME(item) << " done" << endl;
 }
 
 
@@ -322,7 +322,7 @@ InstallOrder::startrdfs()
     _topsorted.clear();
 
     _numrun++;
-    DBG << "run #" << _numrun << endl;
+    XXX << "run #" << _numrun << endl;
 
     // initialize all nodes
     for (PoolItemSet::iterator it = _toinstall.begin(); it != _toinstall.end(); ++it)
@@ -339,7 +339,7 @@ InstallOrder::startrdfs()
 	const PoolItem_Ref item = *it;
 	if (_nodes[item].visited == false)
 	{
-	    DBG << "start recursion on " << ITEMNAME(item) << endl;
+	    XXX << "start recursion on " << ITEMNAME(item) << endl;
 	    rdfsvisit (item);
 	}
     }
