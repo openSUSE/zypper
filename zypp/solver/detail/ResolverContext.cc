@@ -1491,12 +1491,14 @@ ResolverContext::partialCompare (ResolverContext_Ptr context)
 {
     int cmp = 0;
     if (this != context) {
-
+#if 0 // It is too much time consuming
+	
 	// evalutate which result has the newest versions
 	PoolItemList compList = context->getInstalls();
 	HigherVersionInfo info = { &compList, 0};
 	foreachInstall (compare_version, (void *)&info);
 	cmp = info.cmp;
+#endif
 	
 	if (cmp == 0) { 
 	    // High numbers are good... we don't want solutions containing low-priority channels.
