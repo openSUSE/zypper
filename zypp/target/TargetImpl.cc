@@ -216,7 +216,6 @@ namespace zypp
         // create a installation progress report proxy
             RpmInstallPackageReceiver progress(it->resolvable());
             progress.connect();
-            bool success = true;
 
             try {
               progress.tryLevel( target::rpm::InstallResolvableReport::RPM );
@@ -244,20 +243,14 @@ namespace zypp
                 }
                 catch (Exception & excpt_r) {
                   remaining.push_back( *it );
-                  success = false;
                   ZYPP_CAUGHT(excpt_r);
                 }
               }
-            }
-            if (success) {
-              it->status().setStatus( ResStatus::installed );
             }
             progress.disconnect();
           }
           else
           {
-	    bool success = true;
-
             RpmRemovePackageReceiver progress(it->resolvable());
             progress.connect();
             try {
@@ -271,12 +264,8 @@ namespace zypp
 	      }
 	      catch (Exception & excpt_r) {
 		ZYPP_CAUGHT(excpt_r);
-		success = false;
 	      }
             }
-	    if (success) {
-	      it->status().setStatus( ResStatus::uninstalled );
-	    }
             progress.disconnect();
           }
         }
@@ -286,35 +275,27 @@ namespace zypp
           {
             if (it->status().isToBeInstalled())
             { 
-              bool success = false;
               try
               {
                 _storage.storeObject(it->resolvable());
-                success = true;
               }
               catch (Exception & excpt_r)
               {
                 ZYPP_CAUGHT(excpt_r);
                 WAR << "Install of Resolvable from storage failed" << endl;
               }
-              if (success)
-                it->status().setStatus( ResStatus::installed );
             }
             else
             {
-              bool success = false;
               try
               {
                 _storage.deleteObject(it->resolvable());
-                success = true;
               }
               catch (Exception & excpt_r)
               {
                 ZYPP_CAUGHT(excpt_r);
                 WAR << "Uninstall of Resolvable from storage failed" << endl;
               }
-              if (success)
-                it->status().setStatus( ResStatus::uninstalled );
             }
           }
           else
