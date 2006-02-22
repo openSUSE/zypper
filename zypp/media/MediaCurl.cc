@@ -21,6 +21,7 @@
 #include "zypp/media/ProxyInfo.h"
 
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <sys/mount.h>
 #include <errno.h>
 #include <dirent.h>
@@ -441,13 +442,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     Url url( _url );
     url.setPathName( path );
 
-    // FIXME: use mkstemp!!
     Pathname dest = target.absolutename();
-    string destNew = target.asString() + ".new.zypp.37456";
-
-    DBG << "dest: " << dest << endl;
-    DBG << "destNew: " << destNew << endl;
-
     if( assert_dir( dest.dirname() ) )
     {
       DBG << "assert_dir " << dest.dirname() << " failed" << endl;
@@ -471,15 +466,41 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
 
-    FILE *file = fopen( destNew.c_str(), "w" );
+    string destNew = target.asString() + ".new.zypp.XXXXXX";
+    char *buf = ::strdup( destNew.c_str());
+    if( !buf)
+    {
+      ERR << "out of memory for temp file name" << endl;
+      ZYPP_THROW(MediaSystemException(
+        _url, "out of memory for temp file name"
+      ));
+    }
+
+    int tmp_fd = ::mkstemp( buf );
+    if( tmp_fd == -1)
+    {
+      free( buf);
+      ERR << "mkstemp failed for file '" << destNew << "'" << endl;
+      ZYPP_THROW(MediaWriteException(destNew));
+    }
+    destNew = buf;
+    free( buf);
+
+    FILE *file = ::fdopen( tmp_fd, "w" );
     if ( !file ) {
+      ::close( tmp_fd);
+      filesystem::unlink( destNew );
       ERR << "fopen failed for file '" << destNew << "'" << endl;
       ZYPP_THROW(MediaWriteException(destNew));
     }
 
+    DBG << "dest: " << dest << endl;
+    DBG << "temp: " << destNew << endl;
+
     ret = curl_easy_setopt( _curl, CURLOPT_WRITEDATA, file );
     if ( ret != 0 ) {
-      fclose( file );
+      ::fclose( file );
+      filesystem::unlink( destNew );
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
 
@@ -490,13 +511,13 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     }
 
     ret = curl_easy_perform( _curl );
-    fclose( file );
 
     if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, NULL ) != 0 ) {
       WAR << "Can't unset CURLOPT_PROGRESSDATA: " << _curlError << endl;;
     }
 
     if ( ret != 0 ) {
+      ::fclose( file );
       filesystem::unlink( destNew );
 
       ERR << "curl error: " << ret << ": " << _curlError << endl;
@@ -562,6 +583,16 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
 	ZYPP_RETHROW(excpt_r);
       }
     }
+
+    mode_t mask;
+    // getumask() would be fine, but does not exist
+    // [ the linker can't find it in glibc :-( ].
+    mask = ::umask(0022); ::umask(mask);
+    if ( ::fchmod( ::fileno(file), 0644 & ~mask))
+    {
+      ERR << "Failed to chmod file " << destNew << endl;
+    }
+    ::fclose( file );
 
     if ( rename( destNew, dest ) != 0 ) {
       ERR << "Rename failed" << endl;
