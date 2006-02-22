@@ -32,7 +32,35 @@ namespace zypp
     /** */
     struct SelectableTraits
     {
-      typedef std::set<PoolItem>               AvialableItemSet;
+      /** Oder on AvialableItemSet.
+       * \li best Arch
+       * \li best Edition
+       * \li ResObject::constPtr as fallback.
+      */
+      struct AVOrder : public std::binary_function<PoolItem,PoolItem,bool>
+      {
+        // NOTE: operator() provides LESS semantics to order the set.
+        // So LESS means 'prior in set'. We want 'better' archs and
+        // 'better' editions at the beginning of the set. So we return
+        // TRUE if (lhs > rhs)!
+        //
+        bool operator()( const PoolItem & lhs, const PoolItem & rhs ) const
+        {
+          int res = lhs->arch().compare( rhs->arch() );
+          if ( res )
+            return res > 0;
+          res = lhs->edition().compare( rhs->edition() );
+          if ( res )
+            return res > 0;
+
+          // no more criteria, still equal:
+          // use the ResObject::constPtr (the poiner value)
+          // (here it's arbitrary whether < or > )
+          return lhs.resolvable() < rhs.resolvable();
+        }
+      };
+
+      typedef std::set<PoolItem,AVOrder>       AvialableItemSet;
       typedef AvialableItemSet::iterator       availableItem_iterator;
       typedef AvialableItemSet::const_iterator availableItem_const_iterator;
       typedef AvialableItemSet::size_type      availableItem_size_type;
