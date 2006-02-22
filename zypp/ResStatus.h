@@ -387,6 +387,7 @@ namespace zypp
 	else
 	{
 	    // The type is not correct ( system/source)
+	    // or has not enough priority
 	    return false;
 	}
     }
