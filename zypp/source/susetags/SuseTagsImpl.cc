@@ -105,21 +105,26 @@ namespace zypp
   
         std::string vendor;
         std::string media_id;
-
-        // dont initialize media if we are reading from cache
-        if ( cacheExists() )
-          return;
+        bool cache = cacheExists();
         
         try {
           media::MediaAccessId _media = _media_set->getMediaAccessId(1);
           Pathname media_file = Pathname("media.1/media");
-          media_mgr.provideFile (_media, media_file);
-          media_file = media_mgr.localPath (_media, media_file);
+          
+          if (cache)
+          {
+            media_file = _cache_dir + "MEDIA" + media_file; 
+          }
+          else
+          {
+            media_mgr.provideFile (_media, media_file);
+            media_file = media_mgr.localPath (_media, media_file);
+          }
     
           std::ifstream pfile( media_file.asString().c_str() );
 
           if ( pfile.bad() ) {
-            ERR << "Error parsing media.1/media" << endl;
+            ERR << "Error parsing media.1/media from file" << media_file << endl;
             ZYPP_THROW(Exception("Error parsing media.1/media") );
           }
 
