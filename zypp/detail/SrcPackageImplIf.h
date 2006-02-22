@@ -16,6 +16,7 @@
 
 #include "zypp/detail/ResObjectImplIf.h"
 #include "zypp/Pathname.h"
+#include "zypp/DiskUsage.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -39,6 +40,10 @@ namespace zypp
       typedef SrcPackage ResType;
 
     public:
+      /** */
+      virtual ByteCount archivesize() const PURE_VIRTUAL;
+      /** */
+      virtual DiskUsage diskusage() const PURE_VIRTUAL;
       /** */
       virtual Pathname location() const PURE_VIRTUAL;
       /** */

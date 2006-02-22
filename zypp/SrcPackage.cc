@@ -44,6 +44,12 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
+  ByteCount SrcPackage::archivesize() const
+  { return pimpl().archivesize(); }
+
+  DiskUsage SrcPackage::diskusage() const
+  { return pimpl().diskusage(); }
+
   unsigned SrcPackage::mediaId() const
   { return pimpl().mediaId(); }
 

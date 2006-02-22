@@ -38,6 +38,10 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
+    /** */
+    ByteCount archivesize() const;
+    /** Disk usage per directory */
+    DiskUsage diskusage() const;
     /** ID of the media */
     unsigned mediaId() const;
     /** location in source */

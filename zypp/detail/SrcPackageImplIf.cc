@@ -26,6 +26,12 @@ namespace zypp
     // as far as resonable.
     /////////////////////////////////////////////////////////////////
 
+      ByteCount SrcPackageImplIf::archivesize() const
+      { return ByteCount(); }
+
+      DiskUsage SrcPackageImplIf::diskusage() const
+      { return DiskUsage(); }      
+
       Pathname SrcPackageImplIf::location() const
       { return Pathname(); }
 
