@@ -380,9 +380,9 @@ namespace zypp
       return true;
     }
 
-    bool setToBeUninstalledDueToUpgrade ( )
+    bool setToBeUninstalledDueToUpgrade ( TransactByValue causer )
     {
-      if (!setToBeUninstalled (SOLVER)) return false;
+      if (!setToBeUninstalled (causer)) return false;
       fieldValueAssign<TransactDetailField>(DUE_TO_UPGRADE);
       return true;
     }
