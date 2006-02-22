@@ -90,7 +90,8 @@ namespace zypp
 	( obj.isSatisfied() ? "S" :
 	( obj.isIncomplete() ? "I" : "_") ) );
 
-    str << (obj.transacts () ? "T" : "_");
+    str << (obj.transacts () ? "T"
+                             : (obj.isLocked() ? "L" : "_") );
 
     if (obj.transacts ()) {
 	if (obj.isBySolver()) str << "s";
