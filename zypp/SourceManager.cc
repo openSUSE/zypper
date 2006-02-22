@@ -167,16 +167,16 @@ namespace zypp
 	descr.type = it->second->type();
 	
 	descr.cache_dir = it->second->cacheDir().empty() ?
-	    root_r.asString() + ZYPP_METADATA_PREFIX + str::numstring(id)
-	    : it->second->cacheDir().asString();
+	    ZYPP_METADATA_PREFIX + str::numstring(id)
+	    : it->second->cacheDir().asString(); // we should strip root here
 
-	filesystem::assert_dir ( descr.cache_dir );
+	filesystem::assert_dir ( root_r.asString() + descr.cache_dir );
 
 	// FIXME: product_dir
 	store.storeSource( descr );
 
 	if( metadata_cache )
-		it->second->storeMetadata( descr.cache_dir );
+		it->second->storeMetadata( root_r.asString() + descr.cache_dir );
     }
 
     for( SourceMap::iterator it = _deleted_sources.begin(); it != _deleted_sources.end(); it++)
