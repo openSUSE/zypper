@@ -17,6 +17,7 @@
 
 #include "zypp/pool/PoolTraits.h"
 #include "zypp/ResPoolProxy.h"
+#include "zypp/ZYppFactory.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -196,6 +197,10 @@ namespace zypp
       PoolImpl();
       /** Dtor */
       ~PoolImpl();
+
+      /** \todo no poll, but make ZYpp distribute it. */
+      Arch targetArch() const
+      { return getZYpp()->architecture(); }
 
     public:
       /**  */

@@ -194,15 +194,22 @@ namespace zypp
       return str << "PoolImpl " << obj.size();
     }
 
+    /** Bottleneck inserting ResObjects in to the pool.
+     * Filters arch incomatible available(!) objects.
+    */
     void PoolImplInserter::operator()( ResObject::constPtr ptr_r )
     {
-      PoolImpl::Item item ( ptr_r, ResStatus (_installed) );
-      _poolImpl._store.insert( item );
-      _poolImpl._namehash.insert( item );
-      _poolImpl._caphash.insert( item );
+      if ( ptr_r && (    _installed
+                      || ptr_r->arch().compatibleWith( _poolImpl.targetArch() ) ) )
+        {
+          PoolImpl::Item item ( ptr_r, ResStatus (_installed) );
+          _poolImpl._store.insert( item );
+          _poolImpl._namehash.insert( item );
+          _poolImpl._caphash.insert( item );
 
-      // don't miss to invalidate ResPoolProxy
-      _poolImpl.invalidateProxy();
+          // don't miss to invalidate ResPoolProxy
+          _poolImpl.invalidateProxy();
+        }
     }
 
     void PoolImplDeleter::operator()( ResObject::constPtr ptr_r )
