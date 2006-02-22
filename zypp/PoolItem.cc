@@ -55,8 +55,17 @@ namespace zypp
     { _savedStatus = _status; }
     void restoreState() const
     { _status = _savedStatus; }
+    bool sameState() const
+    {
+      if (    _status.getTransactValue() != _savedStatus.getTransactValue()
+           && !_status.isBySolver() )
+        return false;
+      if ( _status.isLicenceConfirmed() != _savedStatus.isLicenceConfirmed() )
+        return false;
+      return true;
+    }
   private:
-    mutable ResStatus   _savedStatus;
+    mutable ResStatus _savedStatus;
     //@}
 
   public:
@@ -138,6 +147,9 @@ namespace zypp
 
   void PoolItem_Ref::restoreState() const
   { _pimpl->restoreState(); }
+
+  bool PoolItem_Ref::sameState() const
+  { _pimpl->sameState(); }
 
   /******************************************************************
    **

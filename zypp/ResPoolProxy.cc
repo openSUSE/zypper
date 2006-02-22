@@ -39,6 +39,13 @@ namespace zypp
       std::for_each( pool_r.byKindBegin(kind_r), pool_r.byKindEnd(kind_r),
                      std::mem_fun_ref(&PoolItem::restoreState) );
     }
+
+    bool diffState( ResPool_Ref pool_r, const ResObject::Kind & kind_r ) const
+    {
+      // return whether some PoolItem::sameState reported \c false.
+      return( invokeOnEach( pool_r.byKindBegin(kind_r), pool_r.byKindEnd(kind_r),
+                            std::mem_fun_ref(&PoolItem::sameState) ) < 0 );
+    }
   };
 
   struct SelPoolHelper
@@ -159,6 +166,9 @@ namespace zypp
     void restoreState( const ResObject::Kind & kind_r ) const
     { PoolItemSaver().restoreState( _pool, kind_r ); }
 
+    bool diffState( const ResObject::Kind & kind_r ) const
+    { return PoolItemSaver().diffState( _pool, kind_r ); }
+
   private:
     ResPool_Ref _pool;
     mutable SelectablePool _selPool;
@@ -234,6 +244,9 @@ namespace zypp
 
   void ResPoolProxy::restoreState( const ResObject::Kind & kind_r ) const
   { _pimpl->restoreState( kind_r ); }
+
+  bool ResPoolProxy::diffState( const ResObject::Kind & kind_r ) const
+  { _pimpl->diffState( kind_r ); }
 
   /******************************************************************
    **

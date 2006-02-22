@@ -102,7 +102,11 @@ namespace zypp
 
   public:
     /** \name Save and restore state per kind of resolvable.
-     * Simple version, no savety net.
+     * Simple version, no savety net. So don't restore or diff,
+     * if you didn't save before.
+     *
+     * Diff returns true, if current stat differs from the saved
+     * state.
     */
     //@{
     void saveState( const ResObject::Kind & kind_r ) const;
@@ -116,6 +120,12 @@ namespace zypp
     template<class _Res>
       void restoreState() const
       { return restoreState( ResTraits<_Res>::kind ); }
+
+    bool diffState( const ResObject::Kind & kind_r ) const;
+
+    template<class _Res>
+      bool diffState() const
+      { return diffState( ResTraits<_Res>::kind ); }
     //@}
 
   private:

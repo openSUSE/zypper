@@ -98,6 +98,7 @@ namespace zypp
     friend class PoolItemSaver;
     void saveState() const;
     void restoreState() const;
+    bool sameState() const;
     //@}
   };
   ///////////////////////////////////////////////////////////////////
