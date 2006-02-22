@@ -210,10 +210,13 @@ namespace zypp
     { return isUninstalled() && fieldValueIs<EstablishField>( INCOMPLETE ); }
 
     bool isLocked() const
-    { return fieldValueIs<TransactField>( LOCKED );}
+    { return fieldValueIs<TransactField>( LOCKED ); }
 
     bool transacts() const
     { return fieldValueIs<TransactField>( TRANSACT ); }
+
+    TransactValue getTransactValue() const
+    { return (TransactValue)_bitfield.value<TransactField>(); }
 
     bool isBySolver() const
     { return fieldValueIs<TransactByField>( SOLVER ); }
@@ -226,6 +229,9 @@ namespace zypp
 
     bool isByUser() const
     { return fieldValueIs<TransactByField>( USER ); }
+
+    TransactByValue getTransactByValue() const
+    { return (TransactByValue)_bitfield.value<TransactByField>(); }
 
     bool isToBeUninstalledDueToObsolete () const
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( DUE_TO_OBSOLETE ); }
@@ -254,6 +260,30 @@ namespace zypp
     // The may functions checks only, if the action would return true
     // if it is called.
 
+    bool setTransactValue( TransactValue newVal_r, TransactByValue causer_r )
+    {
+      switch ( newVal_r )
+        {
+        case KEEP_STATE:
+          return setTransact( false, causer_r );
+          break;
+        case LOCKED:
+          return setLock( true, causer_r );
+          break;
+        case TRANSACT:
+          return setTransact( true, causer_r );
+          break;
+        }
+      return false;
+    }
+
+    bool maySetTransactValue( TransactValue newVal_r, TransactByValue causer_r )
+    {
+	bit::BitField<FieldType> savBitfield = _bitfield;
+	bool ret = setTransactValue( newVal_r, causer_r );
+	_bitfield = savBitfield;
+	return ret;
+    }
 
     /** Apply a lock (prevent transaction).
      * Currently by USER only, but who knows... Set LOCKED
@@ -289,7 +319,6 @@ namespace zypp
 	_bitfield = savBitfield;
 	return ret;
     }
-
 
     /** Toggle between TRANSACT and KEEP_STATE.
      * LOCKED state means KEEP_STATE. But in contrary to KEEP_STATE,
@@ -461,21 +490,18 @@ namespace zypp
       return true;
     }
 
-    bool setStatus (ResStatus status)
+    bool setStatus( ResStatus newStatus_r )
     {
-	if ( ((isInstalled() && status.isInstalled())
-	       || (isUninstalled() && status.isUninstalled()))
-	     && _bitfield.value<TransactByField>() <=  status._bitfield.value<TransactByField>() // regarding priority
-	     )
-	{
-	    _bitfield = status._bitfield;
-	    return true;
-	}
-	else
-	{
-	    // The type is not correct ( system/source)
-	    return false;
-	}
+      // State field is immutable!
+      if ( _bitfield.value<StateField>() != newStatus_r._bitfield.value<StateField>() )
+        return false;
+      // Transaction state change allowed?
+      if ( ! setTransactValue( newStatus_r.getTransactValue(), newStatus_r.getTransactByValue() ) )
+        return false;
+
+      // Ok, we take it all..
+      _bitfield = newStatus_r._bitfield;
+      return true;
     }
 
     /** \name Builtin ResStatus constants. */
