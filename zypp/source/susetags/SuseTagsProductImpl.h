@@ -12,6 +12,7 @@
 #ifndef ZYPP_DETAIL_SUSETAGS_PRODUCTIMPL_H
 #define ZYPP_DETAIL_SUSETAGS_PRODUCTIMPL_H
 
+#include "zypp/CapSet.h"
 #include "zypp/detail/ProductImplIf.h"
 #include "zypp/Source.h"
 
@@ -57,7 +58,7 @@ namespace zypp
       Url _release_notes_url;
       std::map< std::string, std::list<std::string> > _arch;
       std::string _default_base;
-      std::list<std::string> _requires;
+      CapSet _requires;
       std::list<std::string> _languages;
       TranslatedText _label;
       std::string _description_dir;

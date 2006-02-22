@@ -113,7 +113,7 @@ namespace zypp
             else if(key == "DEFAULTBASE")
               prodImpl->_default_base = value;
             else if(key == "REQUIRES")
-              parseLine( key, value, prodImpl->_requires);
+              parseRequires( key, value, prodImpl->_requires);
             else if(key == "LINGUAS")
               parseLine( key, value, prodImpl->_languages);
             else if(key == "LABEL")
@@ -131,7 +131,7 @@ namespace zypp
             else
               DBG << "parse error" << std::endl;
           }
-          else
+          else if (!buffer.empty())
           {
             DBG << "** No Match found:  " << buffer << std::endl;
           }
@@ -142,11 +142,9 @@ namespace zypp
         Dependencies deps;
         try
         {
-          // it seems the only dependencies of a Product are required products
-          for (std::list<std::string>::const_iterator it = prodImpl->_requires.begin(); it != prodImpl->_requires.end(); it++)
+          for (CapSet::const_iterator it = prodImpl->_requires.begin(); it != prodImpl->_requires.end(); it++)
           {
-            Capability _cap = _f.parse( ResTraits<Package>::kind, *it );
-            deps[Dep::REQUIRES].insert(_cap);
+            deps[Dep::REQUIRES].insert( *it );
           }
 
           NVRAD dataCollect( prodImpl->_name, Edition( prodImpl->_version ), Arch_noarch, deps );
@@ -188,6 +186,51 @@ namespace zypp
       void ProductMetadataParser::parseLine( const string &key, const string &value, std::list<std::string> &container)
       {
           str::split( value, std::back_inserter(container), " ");
+      }
+
+      void ProductMetadataParser::parseRequires( const string &key, const string &value, CapSet &container)
+      {
+	  std::list<std::string> splitted;
+          str::split( value, std::back_inserter(splitted), " ");
+	  Resolvable::Kind kind;
+	  std::string name;
+	  CapFactory f;
+	  for (std::list<std::string>::const_iterator it = splitted.begin(); it != splitted.end(); ++it) {
+	    string name = *it;
+	    string::size_type colon = name.find(":");
+	    kind  = ResTraits<Package>::kind;
+	    if (colon != string::npos) {
+		string skind( name, 0, colon );
+		name.erase( 0, colon+1 );
+		DBG << "kind " << skind << ", name " << name << endl;
+		if (skind == "pattern") kind = ResTraits<Pattern>::kind;
+		else if (skind == "patch") kind = ResTraits<Patch>::kind;
+		else if (skind == "selection") kind = ResTraits<Selection>::kind;
+		else if (skind == "product") kind = ResTraits<Product>::kind;
+		else if (skind != "package") ERR << "Bad kind in content::REQUIRES '" << skind << "'" << endl;
+	    }
+	    std::list<std::string>::const_iterator next = it;
+	    ++next;
+	    if (next != splitted.end()) {			// check for "op edition"
+		string val = *next;
+		if (val.find_first_of("<>=") != string::npos)
+		{
+		    if (++next != splitted.end()) {
+			name += val;
+			name += *next;
+			it = next;
+		    }
+		}
+	    }
+	    DBG << "capability " << kind << ":" << name << endl;
+	    try {
+		container.insert( f.parse( kind, name ) );
+	    }
+	    catch (Exception & excpt_r) {
+		ZYPP_CAUGHT( excpt_r );
+		ERR << "Ignoring invalid REQUIRES entry '" << name << "'" << endl;
+	    }
+	  }
       }
 
       Product::Ptr parseContentFile( const Pathname & file_r, Source_Ref source_r )

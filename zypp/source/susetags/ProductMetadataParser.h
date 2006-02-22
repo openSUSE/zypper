@@ -71,6 +71,10 @@ namespace zypp
          * Non translatable tag with multiple values
          */
         void parseLine( const std::string &key, const std::string &value, std::list<std::string> &container);
+        /*
+         * REQUIRES line
+         */
+        void parseRequires( const std::string &key, const std::string &value, zypp::CapSet &container);
       };
       ///////////////////////////////////////////////////////////////////
 
