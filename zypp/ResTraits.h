@@ -23,6 +23,7 @@ namespace zypp
   class ResObject;
 
   class Package;
+  class SrcPackage;
   class Selection;
   class Pattern;
   class Product;

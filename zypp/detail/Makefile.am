@@ -21,10 +21,12 @@ detailinclude_HEADERS = \
 	ScriptImplIf.h		\
 	PatchImplIf.h		\
 	ProductImplIf.h		\
+	SrcPackageImplIf.h	\
 	\
 	\
 	\
 	PackageImpl.h		\
+	SrcPackageImpl.h	\
 	SelectionImpl.h		\
 	PatternImpl.h		\
 	MessageImpl.h		\
@@ -48,10 +50,12 @@ lib@PACKAGE@_detail_la_SOURCES = \
 	ScriptImplIf.cc		\
 	PatchImplIf.cc		\
 	ProductImplIf.cc	\
+	SrcPackageImplIf.cc	\
 	\
 	\
 	\
 	PackageImpl.cc		\
+	SrcPackageImpl.cc	\
 	SelectionImpl.cc	\
 	PatternImpl.cc		\
 	MessageImpl.cc		\
