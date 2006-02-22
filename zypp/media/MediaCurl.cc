@@ -151,6 +151,22 @@ void MediaCurl::attachTo (bool next)
     ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
 
+  ret = curl_easy_setopt( _curl, CURLOPT_NOSIGNAL, 1 );
+  if ( ret != 0 ) {
+    ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+  }
+
+  /*
+  ** Don't block "forever" on system calls. Curl seems to
+  ** recover nicely, if the ftp server has e.g. a 30sec
+  ** timeout. If required, it closes the connection, trys
+  ** to reopen and fetch it without to report any error.
+  */
+  ret = curl_easy_setopt( _curl, CURLOPT_TIMEOUT, 60 );
+  if ( ret != 0 ) {
+    ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+  }
+
   if ( _url.getScheme() == "http" ) {
     // follow any Location: header that the server sends as part of
     // an HTTP header (#113275)
@@ -425,6 +441,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     Url url( _url );
     url.setPathName( path );
 
+    // FIXME: use mkstemp!!
     Pathname dest = target.absolutename();
     string destNew = target.asString() + ".new.zypp.37456";
 
