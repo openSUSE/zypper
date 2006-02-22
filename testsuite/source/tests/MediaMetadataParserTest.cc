@@ -2,6 +2,7 @@
 #include "zypp/source/susetags/MediaMetadataParser.h"
 #include "zypp/source/susetags/MediaPatchesMetadataParser.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/LogControl.h"
 #include "zypp/base/Exception.h"
 #include "zypp/Pathname.h"
 
@@ -12,6 +13,8 @@ int main()
 {
   MediaMetadataParser parser;
   MediaMetadataParser::MediaEntry entry;
+
+  zypp::base::LogControl::instance().logfile( "-" );
 
   try {
     parser.parse(Pathname("mediafiles/SUSE-10.1-Beta3_i386_CD1_media1"), entry);

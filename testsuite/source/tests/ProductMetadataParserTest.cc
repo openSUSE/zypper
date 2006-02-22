@@ -2,6 +2,7 @@
 #include <iostream>
 #include "zypp/source/susetags/ProductMetadataParser.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/LogControl.h"
 #include "zypp/base/Exception.h"
 #include "zypp/Pathname.h"
 #include "zypp/Product.h"
@@ -16,8 +17,13 @@ int main()
 
   Source_Ref src;
 
+  zypp::base::LogControl::instance().logfile( "-" );
+
   try {
   product = parseContentFile(Pathname("products/content.1.txt"), src);
+  product = parseContentFile(Pathname("products/content.2.txt"), src);
+  product = parseContentFile(Pathname("products/content.3.txt"), src);
+  product = parseContentFile(Pathname("products/content.4.txt"), src);
   //DBG << "arch: " << entry.arch["x86_64"].size() << std::endl;
   product = parseContentFile(Pathname("products/NOTTHERE.txt"), src);
   //DBG << "arch: " << entry.arch["x86_64"].size() << std::endl;

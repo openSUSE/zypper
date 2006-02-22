@@ -1,6 +1,7 @@
 #include <iostream>
 #include "zypp/source/susetags/SelectionTagFileParser.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/LogControl.h"
 #include "zypp/base/Exception.h"
 #include "zypp/Pathname.h"
 
@@ -10,6 +11,8 @@ using namespace zypp;
 int main()
 {
   Selection::Ptr selection;
+
+  zypp::base::LogControl::instance().logfile( "-" );
 
   try {
   selection = zypp::source::susetags::parseSelection (Pathname("selfiles/default.sel"));

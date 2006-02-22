@@ -1,6 +1,7 @@
 #include <iostream>
 #include "zypp/source/susetags/PatternTagFileParser.h"
 #include "zypp/base/Logger.h"
+#include "zypp/base/LogControl.h"
 #include "zypp/base/Exception.h"
 #include "zypp/Pathname.h"
 
@@ -9,6 +10,8 @@ using namespace zypp;
 
 int main()
 {
+  zypp::base::LogControl::instance().logfile( "-" );
+
   Pattern::Ptr pattern;
   try {
     pattern = zypp::source::susetags::parsePattern (Pathname("patfiles/default.pat"));
