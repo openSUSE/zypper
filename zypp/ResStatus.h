@@ -26,8 +26,7 @@ namespace zypp
   //
   /** Status bitfield.
    *
-   * \li \c StateField Whether the resolvable is currently installed
-   *        or uninstalled (available).
+   * \li \c StateField Whether the resolvable is or uninstalled (available).
    * \li \c EstablishField Established status computed by the solver as
    *        unneeded (have freshens but none of them trigger)
    *	    satisfied (no freshen or at least one triggered freshen and
@@ -36,6 +35,8 @@ namespace zypp
    *	    NOT all requires fulfilled)
    * \li \c TransactField Wheter to transact this resolvable
    *        (delete if installed install if uninstalled).
+   *        In case the resolvable is locked, only USER may modify the
+   *        transact bit.
    * \li \c TransactByField Who triggered the transaction. Transaction
    *        bit may be reset by higer levels only.
    * \li \c TransactDetailField Reason why the Resolvable transacts.
@@ -55,15 +56,16 @@ namespace zypp
      * checked by the compiler.
      */
     //@{
-    typedef short FieldType;
+    typedef uint16_t FieldType;
     typedef bit::BitField<FieldType> BitFieldType;
     // Bit Ranges within FieldType defined by 1st bit and size:
-    typedef bit::Range<FieldType,0,                    1> StateField;
-    typedef bit::Range<FieldType,StateField::end,      2> EstablishField;
-    typedef bit::Range<FieldType,EstablishField::end,  1> TransactField;
-    typedef bit::Range<FieldType,TransactField::end,   2> TransactByField;
-    typedef bit::Range<FieldType,TransactByField::end, 3> TransactDetailField;
+    typedef bit::Range<FieldType,0,                        1> StateField;
+    typedef bit::Range<FieldType,StateField::end,          2> EstablishField;
+    typedef bit::Range<FieldType,EstablishField::end,      2> TransactField;
+    typedef bit::Range<FieldType,TransactField::end,       2> TransactByField;
+    typedef bit::Range<FieldType,TransactByField::end,     3> TransactDetailField;
     typedef bit::Range<FieldType,TransactDetailField::end, 2> SolverStateField;
+    typedef bit::Range<FieldType,SolverStateField::end,    1> LicenceConfirmedField;
     // enlarge FieldType if more bit's needed. It's not yet
     // checked by the compiler.
     //@}
@@ -91,7 +93,8 @@ namespace zypp
     enum TransactValue
       {
         KEEP_STATE = bit::RangeValue<TransactField,0>::value,
-        TRANSACT   = bit::RangeValue<TransactField,1>::value // change state installed <-> uninstalled
+        LOCKED     = bit::RangeValue<TransactField,1>::value, // locked, must not transact
+        TRANSACT   = bit::RangeValue<TransactField,2>::value  // transact according to state
       };
     enum TransactByValue
       {
@@ -99,6 +102,12 @@ namespace zypp
         APPL_LOW  = bit::RangeValue<TransactByField,1>::value,
         APPL_HIGH = bit::RangeValue<TransactByField,2>::value,
         USER      = bit::RangeValue<TransactByField,3>::value
+      };
+
+    enum DetailValue
+      {
+        /** Detail for no transact, i.e. reset any Install/RemoveDetailValue. */
+        NO_DETAIL = bit::RangeValue<TransactDetailField,0>::value,
       };
 
     enum InstallDetailValue
@@ -119,6 +128,12 @@ namespace zypp
 	NORMAL     = bit::RangeValue<SolverStateField,0>::value, // default, notthing special
 	SEEN       = bit::RangeValue<SolverStateField,1>::value, // already seen during ResolverUpgrade
 	IMPOSSIBLE = bit::RangeValue<SolverStateField,2>::value	 // impossible to install
+      };
+
+    enum LicenceConfirmedValue
+      {
+        LICENCE_UNCONFIRMED = bit::RangeValue<LicenceConfirmedField,0>::value,
+        LICENCE_CONFIRMED   = bit::RangeValue<LicenceConfirmedField,1>::value
       };
     //@}
 
@@ -142,6 +157,15 @@ namespace zypp
     { return _bitfield; }
 
   public:
+
+    bool isLicenceConfirmed() const
+    { return fieldValueIs<LicenceConfirmedField>( LICENCE_CONFIRMED ); }
+
+    void setLicenceConfirmed( bool toVal_r = true )
+    { fieldValueAssign<LicenceConfirmedField>( toVal_r ? LICENCE_CONFIRMED : LICENCE_UNCONFIRMED ); }
+
+  public:
+    // These two are IMMUTABLE!
 
     bool isInstalled() const
     { return fieldValueIs<StateField>( INSTALLED ); }
@@ -185,6 +209,9 @@ namespace zypp
     bool isNeeded() const
     { return isUninstalled() && fieldValueIs<EstablishField>( INCOMPLETE ); }
 
+    bool isLocked() const
+    { return fieldValueIs<TransactField>( LOCKED );}
+
     bool transacts() const
     { return fieldValueIs<TransactField>( TRANSACT ); }
 
@@ -227,17 +254,77 @@ namespace zypp
     // The may functions checks only, if the action would return true
     // if it is called.
 
-    bool setTransact (bool val_r, TransactByValue causer)
+
+    /** Apply a lock (prevent transaction).
+     * Currently by USER only, but who knows... Set LOCKED
+     * from KEEP_STATE to be shure all taransaction details
+     * were reset properly.
+    */
+    bool setLock( bool toLock_r, TransactByValue causer_r )
     {
-	if (!isGreaterThan<TransactByField>( causer )) {
-	    fieldValueAssign<TransactField>( val_r ? TRANSACT : KEEP_STATE );
-	    fieldValueAssign<TransactByField>( causer );			// remember the causer
-	    return true;
-	} else if (fieldValueIs<TransactField>(val_r ? TRANSACT : KEEP_STATE)) {
-	    return true; // is already set
-	} else {
-	    return false;
-	}
+      if ( toLock_r == isLocked() )
+        {
+          // we're already in the desired state, but in case of
+          // LOCKED, remember a superior causer.
+          if ( isLocked() && isLessThan<TransactByField>( causer_r ) )
+            fieldValueAssign<TransactByField>( causer_r );
+           return true;
+        }
+      // Here: Lock status is to be changed:
+      if ( causer_r != USER )
+        return false;
+      // Setting no transact removes an existing lock,
+      // or brings this into KEEP_STATE, and we apply the lock.
+      if ( ! setTransact( false, causer_r ) )
+        return false;
+      if ( toLock_r )
+        fieldValueAssign<TransactField>( LOCKED );
+      return true;
+    }
+
+    bool maySetLock( bool to_r, TransactByValue causer_r )
+    {
+	bit::BitField<FieldType> savBitfield = _bitfield;
+	bool ret = setLock( to_r, causer_r );
+	_bitfield = savBitfield;
+	return ret;
+    }
+
+
+    /** Toggle between TRANSACT and KEEP_STATE.
+     * LOCKED state means KEEP_STATE. But in contrary to KEEP_STATE,
+     * LOCKED state is immutable for \a causer_r less than TransactByValue.
+    */
+    bool setTransact( bool toTansact_r, TransactByValue causer_r )
+    {
+      if ( toTansact_r == transacts() )
+        {
+          // we're already in the desired state, but in case of
+          // TRANSACT, remember a superior causer.
+          if ( transacts() && isLessThan<TransactByField>( causer_r ) )
+            {
+              fieldValueAssign<TransactByField>( causer_r );
+              // ??? adapt TransactDetailField ?
+            }
+          return true;
+        }
+      // Here: transact status is to be changed:
+      if (    ! fieldValueIs<TransactField>( KEEP_STATE )
+           && isGreaterThan<TransactByField>( causer_r ) )
+        return false;
+
+      if ( toTansact_r )
+        {
+          fieldValueAssign<TransactField>( TRANSACT );
+          // ??? adapt TransactDetailField ?
+        }
+      else
+        {
+          fieldValueAssign<TransactField>( KEEP_STATE );
+          fieldValueAssign<TransactDetailField>( NO_DETAIL );
+        }
+      fieldValueAssign<TransactByField>( causer_r );
+      return true;
     }
 
     bool maySetTransact (bool val_r, TransactByValue causer)
@@ -387,7 +474,6 @@ namespace zypp
 	else
 	{
 	    // The type is not correct ( system/source)
-	    // or has not enough priority
 	    return false;
 	}
     }
@@ -437,6 +523,10 @@ namespace zypp
     template<class _Field>
       bool isGreaterThan( FieldType val_r )
 	  { return _bitfield.value<_Field>() > val_r; }
+
+    template<class _Field>
+      bool isLessThan( FieldType val_r )
+	  { return _bitfield.value<_Field>() < val_r; }
 
   private:
     BitFieldType _bitfield;
