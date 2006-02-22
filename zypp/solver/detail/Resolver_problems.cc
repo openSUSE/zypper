@@ -147,11 +147,11 @@ Resolver::problems (void) const
     MIL << invalid.size() << " invalid queues" << endl;
 
     if (invalid.empty()) {
-	WAR << "No solver problems, other error" << endl;
+	WAR << "No solver problems, but there is also no valid solution." << endl;
+	return problems;
     }
 
     ResolverContext_Ptr context = invalid.front()->context();
-
     ResItemCollector collector;
     context->foreachInfo (PoolItem(), RESOLVER_INFO_PRIORITY_VERBOSE, collector_cb, &collector);
 
