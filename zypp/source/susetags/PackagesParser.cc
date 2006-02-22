@@ -59,7 +59,7 @@ namespace zypp
           {
             std::vector<std::string> words;
             if ( str::split( stag_r.value, std::back_inserter(words) ) != 4 )
-              ZYPP_THROW( ParseException( "Pkg" ) );
+              ZYPP_THROW( ParseException( "Expected [name version release arch], got [" + stag_r.value +"]") );
 
             _pkg_pending = true;
             _current_nvrad = NVRAD( words[0], Edition(words[1],words[2]), Arch(words[3]) );
@@ -84,6 +84,7 @@ namespace zypp
 
           if ( mtag_r.name == "Dir" )
           {
+            DiskUsage usage;
             for (std::list<std::string>::const_iterator it = mtag_r.values.begin(); it != mtag_r.values.end(); ++it )
             {
               boost::smatch what;
@@ -91,9 +92,7 @@ namespace zypp
               {
                 //zypp::parser::tagfile::dumpRegexpResults(what);
                 // build the disk usage info
-                DiskUsage usage;
                 usage.add( what[1], str::strtonum<unsigned int>(what[2]) + str::strtonum<unsigned int>(what[3]), str::strtonum<unsigned int>(what[4]) + str::strtonum<unsigned  int>(what[5]));
-                result[_current_nvrad] = usage;
               }
               else
               {
@@ -101,13 +100,14 @@ namespace zypp
                 ZYPP_THROW( ParseException( "Dir" ) );
               }
             }
+            result[_current_nvrad] = usage;
             _pkg_pending = false;
           }
         }
 
         virtual void endParse()
         {
-        
+          
         }
       };
 
