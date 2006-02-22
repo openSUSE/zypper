@@ -166,7 +166,7 @@ struct RequireProcess
 
 	status = context->getStatus( provider );
 
-	MIL << "RequireProcessInfo (" << provider << " provides " << match << ", is " << status << ")" << endl;
+	XXX << "RequireProcessInfo (" << provider << " provides " << match << ", is " << status << ")" << endl;
 // ERR << "RequireProcessInfo(required: " << *capability << ")" << endl;
 // ERR << "require_process_cb(itemIsPossible -> " <<  context->itemIsPossible (*provider) << ")" << endl;
 
@@ -206,7 +206,6 @@ struct RequireProcess
 	    if (uniq.has( provider )) {
 		for (PoolItemList::iterator it = providers.begin(); it != providers.end(); ++it) {
 		    if ((*it)->arch().compare( provider->arch() ) < 0) {		// new provider is better
-MIL << "replacing " << *it << " with " << provider << endl;
 			providers.push_front( provider );
 			providers.erase( it );
 			break;
@@ -346,7 +345,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
     if (! _remove_only) {
 
 	Dep dep( Dep::PROVIDES );
-	MIL << "Look for providers of " << _capability << endl;
+	XXX << "Look for providers of " << _capability << endl;
 	// world->foreachProvidingResItem (_capability, require_process_cb, &info);
 	invokeOnEach( pool().byCapabilityIndexBegin( _capability.index(), dep ),
 		      pool().byCapabilityIndexEnd( _capability.index(), dep ),
