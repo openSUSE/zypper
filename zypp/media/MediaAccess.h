@@ -68,6 +68,8 @@ namespace zypp {
     	friend class MediaManager;
 	AttachedMedia        attachedMedia() const;
 
+	bool                 isSharedMedia() const;
+
     public:
 
        /**

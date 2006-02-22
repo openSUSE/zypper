@@ -208,6 +208,14 @@ namespace zypp
       isAttached(MediaAccessId accessId) const;
 
       /**
+       * Returns information if media is on a shared
+       * physical device or not.
+       * \return True if it is shared, false if not.
+       */
+      bool
+      isSharedMedia(MediaAccessId accessId) const;
+
+      /**
        * Ask the registered verifier if the attached
        * media is the desired one or not.
        * \return True if desired media is attached.

@@ -146,7 +146,9 @@ class MediaHandler {
 	 */
 	AttachedMedia        attachedMedia() const;
 
-        bool                 checkAttached(bool aDevice) const;
+	bool                 isSharedMedia() const;
+
+	bool                 checkAttached(bool aDevice) const;
 
     protected:
 

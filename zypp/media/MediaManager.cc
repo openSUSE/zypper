@@ -360,6 +360,16 @@ namespace zypp
     }
 
     // ---------------------------------------------------------------
+    bool MediaManager::isSharedMedia(MediaAccessId accessId) const
+    {
+      MutexLock glock(g_Mutex);
+
+      ManagedMedia &ref( m_impl->findMM(accessId));
+
+      return ref.handler->isSharedMedia();
+    }
+
+    // ---------------------------------------------------------------
     bool
     MediaManager::isDesiredMedia(MediaAccessId accessId) const
     {

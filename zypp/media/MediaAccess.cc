@@ -65,6 +65,13 @@ MediaAccess::attachedMedia() const
 	                : AttachedMedia();
 }
 
+bool
+MediaAccess::isSharedMedia() const
+{
+	return _handler ? _handler->isSharedMedia()
+	                : false;
+}
+
 // open URL
 void
 MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)

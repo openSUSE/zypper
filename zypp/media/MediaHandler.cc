@@ -346,6 +346,19 @@ MediaHandler::attachedMedia() const
     return AttachedMedia();
 }
 
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : MediaHandler::isSharedMedia
+//	METHOD TYPE : bool
+//
+//	DESCRIPTION :
+//
+bool
+MediaHandler::isSharedMedia() const
+{
+  return !_mediaSource.unique();
+}
 
 ///////////////////////////////////////////////////////////////////
 //
