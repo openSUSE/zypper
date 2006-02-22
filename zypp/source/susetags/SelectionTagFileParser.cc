@@ -43,83 +43,84 @@ namespace zypp
 
       Selection::Ptr parseSelection( const Pathname & file_r )
       {
-	SelectionTagFileParser p;
-	p.parse( file_r );
-	return p.result;
+        MIL << "Starting to parse selection " << file_r << std::endl;
+        SelectionTagFileParser p;
+        p.parse( file_r );
+        return p.result;
 
       }
 
       SelectionTagFileParser::SelectionTagFileParser()
       {
-	selImpl = new SuseTagsSelectionImpl;
-	_locales = zypp::getZYpp()->getRequestedLocales();
+        selImpl = new SuseTagsSelectionImpl;
+        _locales = zypp::getZYpp()->getRequestedLocales();
       }
 
       void SelectionTagFileParser::consume( const SingleTag &tag )
       {
-	if ( tag.name == "Sum" )
-	{
-	  selImpl->_summary.setText(tag.value, Locale(tag.modifier));
-	}
-	else if ( tag.name == "Ver" )
-	{
-	  selImpl->_parser_version = tag.value;
-	}
-	else if ( tag.name == "Sel" )
-	{
-	  std::string line = tag.value;
-	  std::vector<std::string> words;
-	  str::split( line, std::back_inserter(words), " " );
-
-	  selImpl->_name = words[0];
-	  selImpl->_version = words[1];
-	  selImpl->_release = words[2];
-	  if (words.size() > 3) selImpl->_arch = words[3];
-	}
-	else if ( tag.name == "Vis" )
-	{
-	  selImpl->_visible = (tag.value == "true") ? true : false;
-	}
-	else if ( tag.name == "Cat" )
-	{
-	  selImpl->_category = tag.value;
-	}
-	 else if ( tag.name == "Ord" )
-	{
-	  selImpl->_order = tag.value;
-	}
+        if ( tag.name == "Sum" )
+        {
+          selImpl->_summary.setText(tag.value, Locale(tag.modifier));
+        }
+        else if ( tag.name == "Ver" )
+        {
+          selImpl->_parser_version = tag.value;
+        }
+        else if ( tag.name == "Sel" )
+        {
+          std::string line = tag.value;
+          std::vector<std::string> words;
+          str::split( line, std::back_inserter(words), " " );
+      
+          selImpl->_name = words[0];
+          selImpl->_version = words[1];
+          selImpl->_release = words[2];
+          if (words.size() > 3) selImpl->_arch = words[3];
+        }
+        else if ( tag.name == "Vis" )
+        {
+          selImpl->_visible = (tag.value == "true") ? true : false;
+        }
+        else if ( tag.name == "Cat" )
+        {
+          selImpl->_category = tag.value;
+        }
+        else if ( tag.name == "Ord" )
+        {
+          selImpl->_order = tag.value;
+        }
       }
-
+      
       void SelectionTagFileParser::consume( const MultiTag &tag )
       {
-	if ( tag.name == "Req" )
-	{
-	  selImpl->_requires.insert( tag.values.begin(), tag.values.end());
-	}
-	else if ( tag.name == "Rec" )
-	{
-	  selImpl->_recommends.insert( tag.values.begin(), tag.values.end());
-	}
-	else if ( tag.name == "Prv" )
-	{
-	  selImpl->_provides.insert( tag.values.begin(), tag.values.end());
-	}
-	else if ( tag.name == "Con" )
-	{
-	  selImpl->_conflicts.insert( tag.values.begin(), tag.values.end());
-	}
-	else if ( tag.name == "Obs" )
-	{
-	  selImpl->_obsoletes.insert( tag.values.begin(), tag.values.end());
-	}
-	else if ( tag.name == "Ins" )
-	{
-	  selImpl->_inspacks[Locale(tag.modifier)].insert( tag.values.begin(), tag.values.end());
-	}
-    else if ( tag.name == "Del" )
-    {
-      selImpl->_delpacks[Locale(tag.modifier)].insert( tag.values.begin(), tag.values.end());
-    }
+        if ( tag.name == "Req" )
+        {
+          selImpl->_requires.insert( tag.values.begin(), tag.values.end());
+        }
+        else if ( tag.name == "Rec" )
+        {
+          selImpl->_recommends.insert( tag.values.begin(), tag.values.end());
+        }
+        else if ( tag.name == "Prv" )
+        {
+          selImpl->_provides.insert( tag.values.begin(), tag.values.end());
+        }
+        else if ( tag.name == "Con" )
+        {
+          selImpl->_conflicts.insert( tag.values.begin(), tag.values.end());
+        }
+        else if ( tag.name == "Obs" )
+        {
+          selImpl->_obsoletes.insert( tag.values.begin(), tag.values.end());
+        }
+        else if ( tag.name == "Ins" )
+        {
+          selImpl->_inspacks[Locale(tag.modifier)].insert( tag.values.begin(), tag.values.end());
+        }
+        else if ( tag.name == "Del" )
+        {
+          selImpl->_delpacks[Locale(tag.modifier)].insert( tag.values.begin(), tag.values.end());
+        }
       }
 
       void SelectionTagFileParser::endParse()

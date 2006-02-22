@@ -42,6 +42,7 @@ namespace zypp
 
       Pattern::Ptr parsePattern( const Pathname & file_r )
       {
+        MIL << "Starting to parse pattern " << file_r << std::endl;
         PatternTagFileParser p;
         p.parse( file_r );
         return p.result;

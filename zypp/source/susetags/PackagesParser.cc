@@ -273,6 +273,7 @@ namespace zypp
 
       PkgContent parsePackages( Source_Ref source_r, SuseTagsImpl::Ptr sourceImpl_r, const Pathname & file_r )
       {
+        MIL << "Starting to parse packages " << file_r << std::endl;
         PackagesParser p( source_r, sourceImpl_r );
         p.parse( file_r );
         return p.result();
@@ -280,6 +281,7 @@ namespace zypp
 
       PkgDiskUsage parsePackagesDiskUsage( const Pathname & file_r )
       {
+        MIL << "Starting to parse packages disk usage " << file_r << std::endl;
         PackageDiskUsageParser duParser;
         duParser.parse(file_r);
         return duParser.result;
