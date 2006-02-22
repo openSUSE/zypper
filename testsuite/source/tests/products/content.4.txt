@@ -11,7 +11,7 @@ VENDOR SUSE LINUX AG
 RELNOTESURL http://www.suse.com/relnotes/x86_64/SUSE-SLES/9/release-notes.rpm
 ARCH.x86_64 x86_64 i686 i586 i486 i386 noarch
 DEFAULTBASE x86_64
-REQUIRES sles-release
+REQUIRES pattern:sles-release >= 9 product:foo bar patch:baz!=5.3-37
 LINGUAS de en
 LABEL SUSE SLES Version 9
 LABEL.de SUSE SLES in der Version 9
