@@ -323,6 +323,10 @@ solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
 	r = item.status().setToBeInstalled( (data != NULL) ? ResStatus::APPL_HIGH : ResStatus::SOLVER );
 	_XDEBUG("solution_to_pool(" << item << ", " << status << ") install !" << r);
     }
+    else if (status.isToBeUninstalledDueToUpgrade()) {
+	r = item.status().setToBeUninstalledDueToUpgrade( (data != NULL) ? ResStatus::APPL_HIGH : ResStatus::SOLVER );
+	_XDEBUG("solution_to_pool(" << item << ", " << status << ") upgrade !" << r);
+    }
     else if (status.isToBeUninstalled()) {
 	r = item.status().setToBeUninstalled( (data != NULL) ? ResStatus::APPL_HIGH : ResStatus::SOLVER );
 	_XDEBUG("solution_to_pool(" << item << ", " << status << ") remove !" << r);
