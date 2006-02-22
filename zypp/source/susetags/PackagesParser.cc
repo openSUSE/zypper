@@ -22,6 +22,7 @@
 #include "zypp/CapFactory.h"
 #include "zypp/CapSet.h"
 
+#include "zypp/ZYppFactory.h"
 
 using std::endl;
 
@@ -122,11 +123,16 @@ namespace zypp
         PkgImplPtr _pkgImpl;
         NVRAD _nvrad;
 
+	Arch _system_arch;
+
         PackagesParser(Source_Ref source, SuseTagsImpl::Ptr sourceimpl)
 	       : _source( source )
 	       , _sourceImpl( sourceimpl )
-         , _isPendingPkg( false )
-        { }
+               , _isPendingPkg( false )
+        {
+	    ZYpp::Ptr z = getZYpp();
+	    _system_arch = z->architecture();
+	}
 
         PkgContent result() const
         { return _result; }
@@ -135,8 +141,7 @@ namespace zypp
         {
           if ( _isPendingPkg )
           {
-            #warning FIXME, do proper filtering from content:ARCH line
-            if (_nvrad.arch.asString() != "src" && _nvrad.arch.asString() != "nosrc")
+            if (_nvrad.arch.compatibleWith( _system_arch ) )
             {
               _result.insert(PkgContent::value_type( _nvrad, _pkgImpl ) );
             }
