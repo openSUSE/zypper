@@ -353,9 +353,6 @@ namespace zypp
 
   const Arch Arch_ia64  ( _ia64 );
 
-  // not a built in but a hack
-  const Arch Arch_src( "src" );
-
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Arch::Arch

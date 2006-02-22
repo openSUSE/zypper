@@ -108,8 +108,6 @@ namespace zypp
   //@{
   /** \relates Arch */
   extern const Arch Arch_noarch;
-  /** \todo actually not an Arch but kind of resolvable. */
-  extern const Arch Arch_src;
 
   /** \relates Arch */
   extern const Arch Arch_x86_64;
