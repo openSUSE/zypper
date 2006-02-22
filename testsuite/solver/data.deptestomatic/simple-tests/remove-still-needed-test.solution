@@ -2,13 +2,13 @@
 >!> 1 problems found:
 >!> Problem:
 >!> B has missing dependencies
->!> There are no alternative installed providers of A for B-1.0-1
+>!> There are no alternative installed providers of A for B-1.0-1.noarch
 >!>    Solution:
 >!>       keep A
->!>       keep [package]A-1.0-1.
+>!>       keep [package]A-1.0-1.noarch
 >!>    Solution:
 >!>       delete B
->!>       delete [package]B-1.0-1.
+>!>       delete [package]B-1.0-1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       

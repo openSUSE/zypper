@@ -3,8 +3,8 @@
 >!> Installing libfoo-dev from channel test
 >!> Installing libfoog from channel test
 >!> Solution #1:
->!> install libfoog-1.1-1[test]
->!> upgrade foouser-1.0-1 => foouser-1.0-2[test]
->!> upgrade libfoo-1.0-1 => libfoo-1.1-1[test]
->!> upgrade libfoo-dev-1.0-1 => libfoo-dev-1.1-1[test]
+>!> install libfoog-1.1-1.noarch[test]
+>!> upgrade foouser-1.0-1.noarch => foouser-1.0-2.noarch[test]
+>!> upgrade libfoo-1.0-1.noarch => libfoo-1.1-1.noarch[test]
+>!> upgrade libfoo-dev-1.0-1.noarch => libfoo-dev-1.1-1.noarch[test]
 >!> installs=1, upgrades=3, uninstalls=0

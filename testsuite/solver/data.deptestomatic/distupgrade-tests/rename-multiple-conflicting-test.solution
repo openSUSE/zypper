@@ -1,9 +1,9 @@
 >!> Doing distribution upgrade ...
->!> 1: I___[package]A-1.0-1.
->!> 2: U_Th_[package]A2-2.0-1.
->!> 3: U___[package]A_new-2.0-1.
+>!> 1: I___[package]A-1.0-1.noarch
+>!> 2: U_Th_[package]A2-2.0-1.noarch
+>!> 3: U___[package]A_new-2.0-1.noarch
 >!> Solution #1:
->!> install A2-2.0-1[upgrade]
->!> remove  A-1.0-1
->!> |unflag A_new-2.0-1[upgrade]
+>!> install A2-2.0-1.noarch[upgrade]
+>!> remove  A-1.0-1.noarch
+>!> |unflag A_new-2.0-1.noarch[upgrade]
 >!> installs=1, upgrades=0, uninstalls=1

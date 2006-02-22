@@ -2,13 +2,13 @@
 >!> 1 problems found:
 >!> Problem:
 >!> Cannot install p2 because it is conflicting with p1
->!> A conflict over p2 == 1.0-1 (p2) requires the removal of to-be-installed p2-1.0-1[test]
+>!> A conflict over p2 == 1.0-1 (p2) requires the removal of to-be-installed p2-1.0-1.noarch[test]
 >!>    Solution:
 >!>       delete p2
->!>       delete [package]p2-1.0-1.
+>!>       delete [package]p2-1.0-1.noarch
 >!>    Solution:
 >!>       delete p1
->!>       delete [package]p1-1.0-1.
+>!>       delete [package]p1-1.0-1.noarch
 >!>    Solution:
 >!>       Ignore this conflict of p2
 >!>       

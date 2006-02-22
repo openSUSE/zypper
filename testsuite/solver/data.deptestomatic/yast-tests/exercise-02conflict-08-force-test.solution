@@ -1,10 +1,10 @@
 >!> Installing baz from channel test
 >!> Solution #1:
->!> install baz-1.0-1[test]
->!> upgrade foo-1.0-1 => foo-2.0-1[test]
->!> |unflag bar-2.0-1[test]
+>!> install baz-1.0-1.noarch[test]
+>!> upgrade foo-1.0-1.noarch => foo-2.0-1.noarch[test]
+>!> |unflag bar-2.0-1.noarch[test]
 >!> installs=1, upgrades=1, uninstalls=0
 >!> Solution #2:
->!> install baz-1.0-1[test]
->!> remove  foo-1.0-1
+>!> install baz-1.0-1.noarch[test]
+>!> remove  foo-1.0-1.noarch
 >!> installs=1, upgrades=0, uninstalls=1

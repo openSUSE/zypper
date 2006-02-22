@@ -1,4 +1,4 @@
 >!> Installing A from channel test
 >!> Solution #1:
->!> upgrade A-1.0-1 => A-1.0-2[test]
+>!> upgrade A-1.0-1.noarch => A-1.0-2.noarch[test]
 >!> installs=0, upgrades=1, uninstalls=0

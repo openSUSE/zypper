@@ -1,3 +1,3 @@
 >!> Doing distribution upgrade ...
->!> 1: I___[package]A-1.0-1.
->!> 2: U___[package]B-2.0-1.
+>!> 1: I___[package]A-1.0-1.noarch
+>!> 2: U___[package]B-2.0-1.noarch

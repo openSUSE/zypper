@@ -1,6 +1,6 @@
 >!> Doing distribution upgrade ...
->!> 1: I___[package]A-1.0-1.
->!> 2: U_Th_[package]A-2.0-1.
+>!> 1: I___[package]A-1.0-1.noarch
+>!> 2: U_Th_[package]A-2.0-1.noarch
 >!> Solution #1:
->!> upgrade A-1.0-1 => A-2.0-1[upgrade]
+>!> upgrade A-1.0-1.noarch => A-2.0-1.noarch[upgrade]
 >!> installs=0, upgrades=1, uninstalls=0

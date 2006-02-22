@@ -1,8 +1,8 @@
 >!> Establishing state ...
 >!> Established context
->!> patch:Patch-A-1.1-1[test] UU__<uneeded>
+>!> patch:Patch-A-1.1-1.noarch[test] UU__<uneeded>
 >!> Installing Patch-A from channel test
 >!> Solution #1:
->!> install A-1.1-1[test]
->!> install patch:Patch-A-1.1-1[test]
+>!> install A-1.1-1.noarch[test]
+>!> install patch:Patch-A-1.1-1.noarch[test]
 >!> installs=2, upgrades=0, uninstalls=0

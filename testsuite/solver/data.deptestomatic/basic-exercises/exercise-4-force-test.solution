@@ -1,6 +1,6 @@
 >!> Installing N from channel test
 >!> Solution #1:
->!> install N-1.0-1[test]
->!> remove  L-1.0-1
->!> remove  M-1.0-1
+>!> install N-1.0-1.noarch[test]
+>!> remove  L-1.0-1.noarch
+>!> remove  M-1.0-1.noarch
 >!> installs=1, upgrades=0, uninstalls=2

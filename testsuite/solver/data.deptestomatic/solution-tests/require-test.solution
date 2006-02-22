@@ -2,10 +2,10 @@
 >!> 1 problems found:
 >!> Problem:
 >!> foonew cannot be installed due missing dependencies
->!> There are no installable providers of foo for foonew-2.0-1[test]
+>!> There are no installable providers of foo for foonew-2.0-1.noarch[test]
 >!>    Solution:
 >!>       delete foonew
->!>       delete [package]foonew-2.0-1.
+>!>       delete [package]foonew-2.0-1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       
@@ -13,5 +13,5 @@
 >!> For problem:     0
 >!> No problems so far
 >!> Solution #1:
->!> install foonew-2.0-1[test]
+>!> install foonew-2.0-1.noarch[test]
 >!> installs=1, upgrades=0, uninstalls=0

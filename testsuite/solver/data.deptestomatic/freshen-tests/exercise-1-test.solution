@@ -1,7 +1,7 @@
 >!> Establishing state ...
 >!> Established context
->!> patch:Patch-A-1.1-1[test] U_Ts_<needed>
+>!> patch:Patch-A-1.1-1.noarch[test] U_Ts_<needed>
 >!> Solution #1:
->!> install patch:Patch-A-1.1-1[test]
->!> upgrade A-1.0-1 => A-1.1-1[test]
+>!> install patch:Patch-A-1.1-1.noarch[test]
+>!> upgrade A-1.0-1.noarch => A-1.1-1.noarch[test]
 >!> installs=1, upgrades=1, uninstalls=0

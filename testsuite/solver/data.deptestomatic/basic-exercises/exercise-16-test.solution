@@ -1,18 +1,18 @@
 >!> Installing H from channel test
 >!> Solution #1:
->!> install A-1.0-1[test]
->!> install E-1.0-1[test]
->!> install G-1.0-1[test]
->!> install H-1.0-1[test]
+>!> install A-1.0-1.noarch[test]
+>!> install E-1.0-1.noarch[test]
+>!> install G-1.0-1.noarch[test]
+>!> install H-1.0-1.noarch[test]
 >!> installs=4, upgrades=0, uninstalls=0
 >!> Installing B from channel test
 >!> Installing H from channel test
 >!> Solution #1:
->!> install A-1.0-1[test]
->!> install B-1.0-1[test]
->!> install E-1.0-1[test]
->!> install G-1.0-1[test]
->!> install H-1.0-1[test]
+>!> install A-1.0-1.noarch[test]
+>!> install B-1.0-1.noarch[test]
+>!> install E-1.0-1.noarch[test]
+>!> install G-1.0-1.noarch[test]
+>!> install H-1.0-1.noarch[test]
 >!> installs=5, upgrades=0, uninstalls=0
 >!> Installing C from channel test
 >!> Installing G from channel test

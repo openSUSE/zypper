@@ -1,5 +1,5 @@
 >!> Installing required3 from channel test
 >!> Solution #1:
->!> remove  requirerer3-2.0-1
->!> upgrade required3-1.0-1 => required3-2.0-1[test]
+>!> remove  requirerer3-2.0-1.noarch
+>!> upgrade required3-1.0-1.noarch => required3-2.0-1.noarch[test]
 >!> installs=0, upgrades=1, uninstalls=1

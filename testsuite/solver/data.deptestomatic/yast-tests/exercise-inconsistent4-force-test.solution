@@ -1,4 +1,4 @@
 >!> Solution #1:
->!> remove  at-1-1
->!> remove  shadow-1.0-1
+>!> remove  at-1-1.noarch
+>!> remove  shadow-1.0-1.noarch
 >!> installs=0, upgrades=0, uninstalls=2

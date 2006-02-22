@@ -1,5 +1,5 @@
 >!> Installing foo3 from channel test
 >!> Solution #1:
->!> install bash-2.0.2-1[test]
->!> install foo3-1.0-1[test]
+>!> install bash-2.0.2-1.noarch[test]
+>!> install foo3-1.0-1.noarch[test]
 >!> installs=2, upgrades=0, uninstalls=0

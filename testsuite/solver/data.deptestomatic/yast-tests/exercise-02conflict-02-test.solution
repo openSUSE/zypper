@@ -2,13 +2,13 @@
 >!> 1 problems found:
 >!> Problem:
 >!> Cannot install sendmail because it is conflicting with smail
->!> A conflict over MTA (MTA) requires the removal of to-be-installed sendmail-2.0-1[test]
+>!> A conflict over MTA (MTA) requires the removal of to-be-installed sendmail-2.0-1.noarch[test]
 >!>    Solution:
 >!>       delete sendmail
->!>       delete [package]sendmail-2.0-1.
+>!>       delete [package]sendmail-2.0-1.noarch
 >!>    Solution:
 >!>       delete smail
->!>       delete [package]smail-1.0-1.
+>!>       delete [package]smail-1.0-1.noarch
 >!>    Solution:
 >!>       Ignore this conflict of sendmail
 >!>       

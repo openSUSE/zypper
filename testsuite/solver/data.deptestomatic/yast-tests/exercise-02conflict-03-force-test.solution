@@ -1,6 +1,6 @@
 >!> Installing bar from channel test
 >!> Solution #1:
->!> install bar-2.0-1[test]
->!> remove  foo-1.0-1
->!> |unflag foo-2.0-1[test]
+>!> install bar-2.0-1.noarch[test]
+>!> remove  foo-1.0-1.noarch
+>!> |unflag foo-2.0-1.noarch[test]
 >!> installs=1, upgrades=0, uninstalls=1

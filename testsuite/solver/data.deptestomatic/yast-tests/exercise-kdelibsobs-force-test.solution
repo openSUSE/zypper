@@ -1,9 +1,9 @@
 >!> Installing kdelibs3-devel from channel test
 >!> Installing kdelibs3 from channel test
 >!> Solution #1:
->!> install kdelibs3-EDITION-UNSPEC[test]
->!> install kdelibs3-devel-EDITION-UNSPEC[test]
->!> remove  kdelibs-devel-2.0.1-4
->!> remove  kdesupport-2.0.1-5
->!> remove  kdesupport-devel-2.0.1-5
+>!> install kdelibs3-EDITION-UNSPEC.noarch[test]
+>!> install kdelibs3-devel-EDITION-UNSPEC.noarch[test]
+>!> remove  kdelibs-devel-2.0.1-4.noarch
+>!> remove  kdesupport-2.0.1-5.noarch
+>!> remove  kdesupport-devel-2.0.1-5.noarch
 >!> installs=2, upgrades=0, uninstalls=3

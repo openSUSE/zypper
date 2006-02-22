@@ -2435,7 +2435,7 @@
 >!> install Mesa-devel-6.4.2-2.i586[pkg]
 >!> install OpenEXR-1.2.2-5.i586[pkg]
 >!> install aspell-0.60.3-8.i586[pkg]
->!> install aspell-af-0.50.0-12.i586[pkg]
+>!> install aspell-am-0.03.1-5.i586[pkg]
 >!> install atk-devel-1.10.3-4.i586[pkg]
 >!> install bind-libs-9.3.2-5.i586[pkg]
 >!> install blocxx-1.0.0-2.i586[pkg]
