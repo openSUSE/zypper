@@ -115,6 +115,8 @@ namespace zypp
 	std::list<std::string>_keywords;
 	std::list<std::string> _filenames;
 	DiskUsage _disk_usage;
+	ByteCount _size;
+	ByteCount _archivesize;
        };
       ///////////////////////////////////////////////////////////////////
     } // namespace rpm

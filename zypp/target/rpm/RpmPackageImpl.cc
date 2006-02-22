@@ -51,10 +51,11 @@ namespace zypp
 	_type("rpm"), // FIXME in the future
 //	_authors(data->authors),
 //	_keywords(data->keywords),
-	_filenames(data->tag_filenames())
+	_filenames(data->tag_filenames()),
+//	_disk_usage(data->diskusage),
+	_size(data->tag_size()),
+	_archivesize(data->tag_archivesize())
 #if 0
-      : _size_package( strtol(parsed.sizePackage.c_str(), 0, 10)),
-	_size_archive( strtol(parsed.sizeArchive.c_str(), 0, 10)),
 	_size_installed( strtol(parsed.sizeInstalled.c_str(), 0, 10)),
 	_sourcepkg( parsed.sourcerpm),
 	_dir_sizes(parsed.dirSizes),
@@ -63,7 +64,6 @@ namespace zypp
 	_description.setText(data->tag_description());
 	data->tag_du(_disk_usage);
       }
-
 
       /** Package summary */
       TranslatedText RPMPackageImpl::summary() const
@@ -82,8 +82,7 @@ namespace zypp
       { return ResObjectImplIf::delnotify(); }
 
       ByteCount RPMPackageImpl::size() const
-#warning fixme
-      { return 0; }
+      { return _size; }
 
       bool RPMPackageImpl::providesSources() const
       { return ResObjectImplIf::providesSources(); }
@@ -168,8 +167,7 @@ namespace zypp
 
       /** */
       ByteCount RPMPackageImpl::archivesize() const
-#warning fixme
-      { return 0; }
+      { return _archivesize; }
 
       /** */
       std::list<std::string> RPMPackageImpl::authors() const
