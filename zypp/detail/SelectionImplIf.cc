@@ -42,9 +42,6 @@ namespace zypp
     Label SelectionImplIf::order() const
     { return Label(); }
 
-    const std::set<std::string> SelectionImplIf::suggests() const
-    { return std::set<std::string>(); }
-
     static void copycaps( std::set<std::string> & out, const CapSet & in)
     {
 	for (CapSet::const_iterator it = in.begin(); it != in.end(); ++it) {
@@ -55,9 +52,6 @@ namespace zypp
 	    }
 	}
     }
-
-    const std::set<std::string> SelectionImplIf::recommends() const
-    { return std::set<std::string>(); }
 
     const std::set<std::string> SelectionImplIf::install_packages( const Locale & lang) const
     {

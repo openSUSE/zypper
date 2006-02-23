@@ -53,8 +53,6 @@ namespace zypp
         /** */
 	virtual Label order() const PURE_VIRTUAL;
 
-  virtual const std::set<std::string> suggests() const PURE_VIRTUAL;
-  virtual const std::set<std::string> recommends() const PURE_VIRTUAL;
   virtual const std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
       
 #if 0

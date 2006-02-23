@@ -56,8 +56,6 @@ namespace zypp
     /** selection presentation order */
     Label order() const;
 
-    const std::set<std::string> suggests() const;
-    const std::set<std::string> recommends() const;
     const std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
 
   protected:

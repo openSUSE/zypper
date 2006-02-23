@@ -173,10 +173,6 @@ namespace zypp
         /** */
         virtual std::list<std::string> filenames() const;
         /** */
-        virtual std::list<std::string> recommends() const;
-        /** */
-        virtual std::list<std::string> suggests() const;
-        /** */
         virtual unsigned int medianr() const;
         /** */
         virtual std::string md5sum() const;

@@ -445,12 +445,6 @@ namespace zypp
       std::list<std::string> YUMPackageImpl::filenames() const
       {}
       /** */
-      std::list<std::string> YUMPackageImpl::recommends() const
-      {}
-      /** */
-      std::list<std::string> YUMPackageImpl::suggests() const
-      {}
-      /** */
       std::string YUMPackageImpl::location() const
       {}
       /** */
