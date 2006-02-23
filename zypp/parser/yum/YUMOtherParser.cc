@@ -84,7 +84,7 @@ namespace zypp {
                    dataPtr->ver = _helper.attribute(child,"ver");
                    dataPtr->rel = _helper.attribute(child,"rel");
                  }
-                 else if (name == "file") {
+                 else if (name == "changelog") {
                    dataPtr->changelog.push_back
                      (ChangelogEntry(_helper.attribute(child,"author"),
                                      _helper.attribute(child,"date"),
