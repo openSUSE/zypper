@@ -88,7 +88,12 @@ class MediaHandler {
         /**
 	 * Url to handle
 	 **/
-	const Url _url;
+	const Url        _url;
+
+	/**
+	 * Access Id of media handler we depend on.
+	 */
+	MediaAccessId    _parentId;
 
         /**
 	 * Return the currently used attach point.
@@ -140,6 +145,8 @@ class MediaHandler {
 	AttachedMedia
 	findAttachedMedia(const MediaSourceRef &media) const;
 
+	bool                 dependsOnParent(MediaAccessId parentId);
+
 	/**
 	 * Returns the attached media. Used by MediaManager
 	 * to find other handlers using the same source.
@@ -148,7 +155,8 @@ class MediaHandler {
 
 	bool                 isSharedMedia() const;
 
-	bool                 checkAttached(bool aDevice) const;
+	bool                 checkAttached(bool aDevice,
+	                                   bool fsType=false) const;
 
     protected:
 

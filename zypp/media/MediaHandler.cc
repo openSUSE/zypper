@@ -53,6 +53,7 @@ MediaHandler::MediaHandler ( const Url &      url_r,
     , _does_download( does_download_r )
     , _attach_mtime(0)
     , _url( url_r )
+    , _parentId(0)
 {
   if ( !attach_point_r.empty() ) {
     ///////////////////////////////////////////////////////////////////
@@ -369,7 +370,7 @@ MediaHandler::isSharedMedia() const
 //	DESCRIPTION :
 //
 bool
-MediaHandler::checkAttached(bool aDevice) const
+MediaHandler::checkAttached(bool isDevice,  bool fsType) const
 {
   bool _isAttached = false;
 
@@ -392,39 +393,39 @@ MediaHandler::checkAttached(bool aDevice) const
       MountEntries::const_iterator e;
       for( e = entries.begin(); e != entries.end(); ++e)
       {
-	bool isDevice = (Pathname(e->src).dirname() == "/dev");
-        if( aDevice == isDevice)
+        bool is_device = (Pathname(e->src).dirname() == "/dev");
+        if( is_device == isDevice)
         {
           PathInfo    dinfo(e->src);
-          MediaSource media(ref.mediaSource->type, e->src,
-	                    dinfo.major(), dinfo.minor());
+          std::string mtype(fsType ? e->type : ref.mediaSource->type);
+          MediaSource media(mtype, e->src, dinfo.major(), dinfo.minor());
 
-    	  if( ref.mediaSource->equals( media) &&
-    	      ref.attachPoint->path == Pathname(e->dir))
-    	  {
-    	    DBG << "Found media "
-    	        << ref.mediaSource->asString()
-    	        << " in the mount table" << std::endl;
-    	    _isAttached = true;
-    	    break;
-    	  }
-    	  // differs
+          if( ref.mediaSource->equals( media) &&
+              ref.attachPoint->path == Pathname(e->dir))
+          {
+            DBG << "Found media "
+                << ref.mediaSource->asString()
+                << " in the mount table" << std::endl;
+            _isAttached = true;
+            break;
+          }
+          // differs
         }
-	else
-	{
-          MediaSource media(e->type, e->src);
-
-    	  if( ref.mediaSource->equals( media) &&
-    	      ref.attachPoint->path == Pathname(e->dir))
-    	  {
-    	    DBG << "Found media "
-    	        << ref.mediaSource->asString()
-    	        << " in the mount table" << std::endl;
-    	    _isAttached = true;
-    	    break;
-    	  }
-    	  // differs
-	}
+        else
+        {
+          std::string mtype(fsType ? e->type : ref.mediaSource->type);
+          MediaSource media(mtype, e->src);
+          if( ref.mediaSource->equals( media) &&
+              ref.attachPoint->path == Pathname(e->dir))
+          {
+            DBG << "Found media "
+                << ref.mediaSource->asString()
+                << " in the mount table" << std::endl;
+            _isAttached = true;
+            break;
+          }
+          // differs
+        }
       }
 
       if( !_isAttached)
@@ -550,6 +551,32 @@ void MediaHandler::release( bool eject )
     //setAttachPoint("", true);
   }
   MIL << "Released: " << *this << endl;
+}
+
+///////////////////////////////////////////////////////////////////
+//
+//	METHOD NAME : MediaHandler::dependsOnParent
+//	METHOD TYPE : bool
+//
+//	DESCRIPTION :
+//
+bool
+MediaHandler::dependsOnParent(MediaAccessId parentId)
+{
+  if( _parentId != 0)
+  {
+    if(parentId == _parentId)
+      return true;
+ 
+    MediaManager mm;
+    AttachedMedia am1 = mm.getAttachedMedia(_parentId);
+    AttachedMedia am2 = mm.getAttachedMedia(parentId);
+    if( am1.mediaSource && am2.mediaSource)
+    {
+      return am1.mediaSource->equals( *(am2.mediaSource));
+    }
+  }
+  return false;
 }
 
 ///////////////////////////////////////////////////////////////////
