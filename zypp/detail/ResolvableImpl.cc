@@ -68,9 +68,9 @@ namespace zypp
 	while (pos < provides.size()) {
 	    next = provides.find( ",", pos );			// look for , separator
 	    if (next == string::npos)
-		next = provides.size();				// none left, set next to end (will strip trailing ')' )
+		next = provides.size()-1;			// none left, set next to end-1 (strip trailing ')' )
 
-	    deps[Dep::FRESHENS].insert( f.parse( ResTraits<Language>::kind, string( provides, pos, next-pos+1 ) ) );
+	    deps[Dep::FRESHENS].insert( f.parse( ResTraits<Language>::kind, string( provides, pos, next-pos ) ) );
 	    pos = next + 1;
 	}
 	return true;
@@ -80,7 +80,6 @@ namespace zypp
     void filterLocaleProvides( const Dependencies & from, Dependencies & to )
     {
 
-      MIL << "filterLocaleProvides(" << from << ")" << endl;
       CapSet provides;
       FilterLocaleProvides flp( to );
 
@@ -88,8 +87,6 @@ namespace zypp
                            std::inserter( provides, provides.end() ),
                            flp );
       to[Dep::PROVIDES] = provides;
-
-      MIL << "=> (" << to << ")" << endl;
     }
   }
 
@@ -104,7 +101,7 @@ namespace zypp
     // check if we provide any 'locale(...)' tags and split them
     //  up to freshens/supplements
 
-//    filterLocaleProvides( nvrad_r, _deps );
+    filterLocaleProvides( nvrad_r, _deps );
 
     // assert self provides
     _deps[Dep::PROVIDES].insert( CapFactory()

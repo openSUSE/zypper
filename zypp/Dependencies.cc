@@ -42,10 +42,12 @@ namespace zypp
       str << "RECOMMENDS:" << endl << obj[Dep::RECOMMENDS];
     if ( ! obj[Dep::SUGGESTS].empty() )
       str << "SUGGESTS:" << endl << obj[Dep::SUGGESTS];
-    if ( ! obj[Dep::FRESHENS].empty() )
-      str << "FRESHENS:" << endl << obj[Dep::FRESHENS];
+    if ( ! obj[Dep::SUPPLEMENTS].empty() )
+      str << "SUPPLEMENTS:" << endl << obj[Dep::SUPPLEMENTS];
     if ( ! obj[Dep::ENHANCES].empty() )
       str << "ENHANCES:" << endl << obj[Dep::ENHANCES];
+    if ( ! obj[Dep::FRESHENS].empty() )
+      str << "FRESHENS:" << endl << obj[Dep::FRESHENS];
     return str << "]";
   }
 
