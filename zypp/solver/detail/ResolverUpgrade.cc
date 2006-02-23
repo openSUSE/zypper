@@ -101,7 +101,9 @@ downgrade_allowed (PoolItem_Ref installed, PoolItem_Ref candidate)
 	&& va->isKnown( cpkg->vendor() ) )
     {
 #warning Had Y2PM::runningFromSystem
-	return( ipkg->buildtime() >= cpkg->buildtime() );
+	//return( ipkg->buildtime() >= cpkg->buildtime() );
+	MIL << "allowed downgrade " << installed << " to " << candidate << endl;
+	return true;						// see bug #152760
     }
     return false;
 }
