@@ -757,10 +757,11 @@ Resolver::resolvePool ()
 	ResolverContext_Ptr solution = bestContext();
 	solution->foreachMarked (solution_to_pool, NULL);
 #if 1
+	count = 0;
 	MIL << "Pool after resolve" << endl;
 	MIL << "---------------------------------------" << endl;
 	for (ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it) {
-	    MIL << *it << endl;
+	    MIL << ++count << ". " << *it << endl;
 	}
 	MIL << "---------------------------------------" << endl;
 #endif
