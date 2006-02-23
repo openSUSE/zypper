@@ -2,7 +2,7 @@
 ## ##################################################
 
 SUBDIRS = base thread url media capability detail pool parser \
-	source target solver zypp_detail ui
+	source target solver zypp_detail ui gzstream
 
 INCLUDES = -DZYPP_BASE_LOGGER_LOGGROUP=\"zypp\"
 
@@ -153,20 +153,21 @@ lib@PACKAGE@_la_SOURCES = \
 
 lib@PACKAGE@_la_LDFLAGS =	@LIBZYPP_VERSION_INFO@
 
-lib@PACKAGE@_la_LIBADD =        thread/lib@PACKAGE@_thread.la	\
-				detail/lib@PACKAGE@_detail.la	\
+lib@PACKAGE@_la_LIBADD =        thread/lib@PACKAGE@_thread.la		\
+				detail/lib@PACKAGE@_detail.la		\
 				capability/lib@PACKAGE@_capability.la	\
-				pool/lib@PACKAGE@_pool.la	\
-				parser/lib@PACKAGE@_parser.la	\
-				source/lib@PACKAGE@_source.la	\
-				media/lib@PACKAGE@_media.la	\
-				url/lib@PACKAGE@_url.la		\
-				target/lib@PACKAGE@_target.la	\
-				solver/lib@PACKAGE@_solver.la	\
+				pool/lib@PACKAGE@_pool.la		\
+				parser/lib@PACKAGE@_parser.la		\
+				source/lib@PACKAGE@_source.la		\
+				media/lib@PACKAGE@_media.la		\
+				url/lib@PACKAGE@_url.la			\
+				target/lib@PACKAGE@_target.la		\
+				solver/lib@PACKAGE@_solver.la		\
 				zypp_detail/lib@PACKAGE@_zypp_detail.la	\
-				ui/lib@PACKAGE@_ui.la	\
+				ui/lib@PACKAGE@_ui.la			\
+				gzstream/lib@PACKAGE@_gzstream.la	\
 				\
-				base/lib@PACKAGE@_base.la	\
+				base/lib@PACKAGE@_base.la		\
 				-lutil
 # !!! base/lib@PACKAGE@_base.la MUST BE THE LAST zypp lib linked
 

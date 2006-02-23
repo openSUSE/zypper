@@ -28,6 +28,8 @@
 #include "zypp/SourceFactory.h"
 #include "zypp/ZYppCallbacks.h"
 
+#include "zypp/gzstream/gzstream.h"
+
 #include <fstream>
 
 using namespace std;
@@ -181,8 +183,11 @@ namespace zypp
       : _cache_dir + (*it)->location;
     _metadata_files.push_back((*it)->location);
     DBG << "Reading file " << filename << endl;
-    ifstream st(filename.asString().c_str());
-    YUMFileListParser filelist(st, "");
+
+    if (filename.asString().find( ".gz", filename.asString().size()-3) != string::npos) {
+	igzstream st ( filename.asString().c_str() );
+
+    YUMFileListParser filelist ( st, "" );
     for (;
         ! filelist.atEnd();
         ++filelist)
@@ -195,6 +200,25 @@ namespace zypp
     }
     if (filelist.errorStatus())
       throw *filelist.errorStatus();
+
+    }
+    else {
+      ifstream st( filename.asString().c_str() );
+    YUMFileListParser filelist ( st, "" );
+    for (;
+        ! filelist.atEnd();
+        ++filelist)
+    {
+      PackageID id((*filelist)->name,
+                  (*filelist)->ver,
+                  (*filelist)->rel,
+                  (*filelist)->arch);
+      files_data[id] = *filelist;
+    }
+    if (filelist.errorStatus())
+      throw *filelist.errorStatus();
+
+    }
   }
 
   for (std::list<YUMRepomdData_Ptr>::const_iterator it
@@ -208,6 +232,24 @@ namespace zypp
       : _cache_dir + (*it)->location;
     _metadata_files.push_back((*it)->location);
     DBG << "Reading file " << filename << endl;
+
+    if (filename.asString().find( ".gz", filename.asString().size()-3) != string::npos) {
+	igzstream st ( filename.asString().c_str() );
+    YUMOtherParser other(st, "");
+    for (;
+        ! other.atEnd();
+        ++other)
+    {
+      PackageID id((*other)->name,
+                  (*other)->ver,
+                  (*other)->rel,
+                  (*other)->arch);
+      other_data[id] = *other;
+    }
+    if (other.errorStatus())
+      throw *other.errorStatus();
+    }
+    else {
     ifstream st(filename.asString().c_str());
     YUMOtherParser other(st, "");
     for (;
@@ -222,6 +264,7 @@ namespace zypp
     }
     if (other.errorStatus())
       throw *other.errorStatus();
+    }
   }
 
   // now read primary data, merge them with filelist and changelog
@@ -236,6 +279,40 @@ namespace zypp
       : _cache_dir + (*it)->location;
     _metadata_files.push_back((*it)->location);
     DBG << "Reading file " << filename << endl;
+    if (filename.asString().find( ".gz", filename.asString().size()-3) != string::npos) {
+	igzstream st ( filename.asString().c_str() );
+    YUMPrimaryParser prim(st, "");
+    for (;
+        !prim.atEnd();
+        ++prim)
+    {
+      PackageID id((*prim)->name,
+                  (*prim)->ver,
+                  (*prim)->rel,
+                  (*prim)->arch);
+      map<PackageID, YUMOtherData_Ptr>::iterator found_other
+          = other_data.find(id);
+      map<PackageID, YUMFileListData_Ptr>::iterator found_files
+          = files_data.find(id);
+
+      YUMFileListData filelist_empty;
+      YUMOtherData other_empty;
+      Package::Ptr p = createPackage(
+        source_r,
+        **prim,
+        found_files != files_data.end()
+          ? *found_files->second
+          : filelist_empty,
+        found_other != other_data.end()
+          ? *found_other->second
+          : other_empty
+      );
+      _store.insert (p);
+    }
+    if (prim.errorStatus())
+      throw *prim.errorStatus();
+    }
+    else {
     ifstream st(filename.asString().c_str());
     YUMPrimaryParser prim(st, "");
     for (;
@@ -267,6 +344,7 @@ namespace zypp
     }
     if (prim.errorStatus())
       throw *prim.errorStatus();
+    }
   }
       }
       catch (...) {
