@@ -377,7 +377,7 @@ std::string toXML( const PersistentStorage::SourceData &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<source-cache  xmlns=\"http://novell.com/package/metadata/suse/source-cache\">" << std::endl;
+  out << "<source  xmlns=\"http://novell.com/package/metadata/suse/source\">" << std::endl;
   out << "  <enabled>" << (obj.enabled ? "true" : "false" ) << "</enabled>" << std::endl;
   out << "  <auto-refresh>" << ( obj.autorefresh ? "true" : "false" ) << "</auto-refresh>" << std::endl;
   out << "  <product-dir>" << xml_escape(obj.product_dir) << "</product-dir>" << std::endl;
@@ -385,7 +385,7 @@ std::string toXML( const PersistentStorage::SourceData &obj )
   out << "  <type>" << xml_escape(obj.type) << "</type>" << std::endl;
    out << "  <url>" << xml_escape(obj.url) << "</url>" << std::endl;
    out << "  <alias>" << xml_escape(obj.alias) << "</alias>" << std::endl;
-  out << "</source-cache>" << std::endl;
+  out << "</source>" << std::endl;
   return out.str();
 }
 

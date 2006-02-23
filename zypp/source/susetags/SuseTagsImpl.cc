@@ -210,7 +210,6 @@ namespace zypp
           ERR << "cannot parse content file" << endl;
         }
   
-#warning We use suse instead of <DATADIR> for now
         p = cache ? _data_dir + "packages" : provideFile( _data_dir + "packages");
         DBG << "Going to parse " << p << endl;
         PkgContent content( parsePackages( source_r, this, p ) );

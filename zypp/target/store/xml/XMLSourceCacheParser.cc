@@ -42,7 +42,7 @@ namespace zypp {
       bool 
       XMLSourceCacheParser::isInterested(const xmlNodePtr nodePtr)
       {
-        return _helper.isElement(nodePtr) && _helper.name(nodePtr) == "source-cache";
+        return _helper.isElement(nodePtr) && _helper.name(nodePtr) == "source";
       }
       
       // do the actual processing
