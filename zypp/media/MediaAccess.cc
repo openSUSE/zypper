@@ -27,6 +27,7 @@
 #include "zypp/media/MediaSMB.h"
 #include "zypp/media/MediaCIFS.h"
 #include "zypp/media/MediaCurl.h"
+#include "zypp/media/MediaISO.h"
 
 using namespace std;
 
@@ -72,6 +73,13 @@ MediaAccess::isSharedMedia() const
 	                : false;
 }
 
+bool
+MediaAccess::dependsOnParent(MediaAccessId parentId) const
+{
+	return _handler ? _handler->dependsOnParent(parentId)
+	                : false;
+}
+
 // open URL
 void
 MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
@@ -91,8 +99,8 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
         _handler = new MediaCD (url,preferred_attach_point);
     else if (scheme == "nfs")
         _handler = new MediaNFS (url,preferred_attach_point);
-//    else if (scheme == "iso")
-//        _handler = new MediaISO (url,preferred_attach_point);
+    else if (scheme == "iso")
+        _handler = new MediaISO (url,preferred_attach_point);
     else if (scheme == "file" || scheme == "dir")
         _handler = new MediaDIR (url,preferred_attach_point);
     else if (scheme == "hd")

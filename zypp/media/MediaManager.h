@@ -37,7 +37,6 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     typedef zypp::RW_pointer<MediaAccess> MediaAccessRef;
-    typedef unsigned int                  MediaAccessId;
 
     // OBSOLETE HERE:
     typedef MediaAccessId                 MediaId;
@@ -338,6 +337,9 @@ namespace zypp
 
     private:
       friend class MediaHandler;
+
+      AttachedMedia
+      getAttachedMedia(MediaAccessId &accessId) const;
 
       AttachedMedia
       findAttachedMedia(const MediaSourceRef &media) const;

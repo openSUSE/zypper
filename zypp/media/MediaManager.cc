@@ -333,6 +333,25 @@ namespace zypp
 
       ManagedMedia &ref( m_impl->findMM(accessId));
 
+      if( eject)
+      {
+        ManagedMediaMap::iterator m(m_impl->mediaMap.begin());
+        for( ; m != m_impl->mediaMap.end(); ++m)
+        {
+          if( m->second.handler->dependsOnParent(accessId))
+          {
+            try
+            {
+              m->second.handler->release(!eject);
+              m->second.desired  = false;
+            }
+            catch(const MediaException &e)
+            {
+              ZYPP_CAUGHT(e);
+            }
+          }
+        }
+      }
       ref.handler->release(eject);
       ref.desired  = false;
     }
@@ -585,6 +604,17 @@ namespace zypp
       MutexLock glock(g_Mutex);
 
       return m_impl->getMountEntries();
+    }
+
+    // ---------------------------------------------------------------
+    AttachedMedia
+    MediaManager::getAttachedMedia(MediaAccessId &accessId) const
+    {
+      MutexLock glock(g_Mutex);
+
+      ManagedMedia &ref( m_impl->findMM(accessId));
+
+      return ref.handler->attachedMedia();
     }
 
     // ---------------------------------------------------------------

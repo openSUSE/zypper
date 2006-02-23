@@ -70,6 +70,8 @@ namespace zypp {
 
 	bool                 isSharedMedia() const;
 
+	bool                 dependsOnParent(MediaAccessId parentId) const;
+
     public:
 
        /**
