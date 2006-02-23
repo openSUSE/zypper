@@ -131,6 +131,13 @@ namespace zypp
     void removeSource(const std::string & alias_r);
 
     /**
+     * Release all medias held by all sources
+     *
+     * \throws Exception
+     */
+    void releaseAllSources();
+
+    /**
      * Disable all registered sources
      */
 #warning: this could be done by providing iterator-like methods

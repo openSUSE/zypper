@@ -129,6 +129,11 @@ namespace zypp
     void redirect(unsigned media_nr, const Url & new_url);
 
     /**
+     * Release all medias attached by the source
+     */
+    void release();
+
+    /**
      * Provide a media verifier suitable for the given media number
      */
     media::MediaVerifierRef verifier(unsigned media_nr);

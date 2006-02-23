@@ -157,6 +157,10 @@ namespace zypp
 
       virtual void redirect(unsigned media_nr, const Url & new_url);
       /**
+       * Release all medias attached by the source
+       */
+      void release();
+      /**
        * Get media verifier for the specified media
        */
       virtual media::MediaVerifierRef verifier(unsigned media_nr);

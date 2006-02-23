@@ -89,6 +89,15 @@ namespace zypp
     }
   }
 
+  void SourceManager::releaseAllSources()
+  {
+    for (SourceMap::iterator it = _sources.begin();
+	 it != _sources.end(); it++)
+    {
+      it->second->release();
+    }
+  }
+
   void SourceManager::removeSource(const std::string & alias_r)
   {
     for (SourceMap::iterator it = _sources.begin(); it != _sources.end(); ++it)

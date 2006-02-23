@@ -200,6 +200,11 @@ namespace zypp
       _media_set->redirect(media_nr, id);
     }
 
+    void SourceImpl::release()
+    {
+      _media_set->release();
+    }
+
     media::MediaVerifierRef SourceImpl::verifier(unsigned media_nr)
     { return media::MediaVerifierRef(new media::NoVerifier()); }
     

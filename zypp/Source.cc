@@ -131,6 +131,9 @@ namespace zypp
 
   void Source_Ref::redirect(unsigned media_nr, const Url & new_url)
   { _pimpl->redirect(media_nr, new_url); }
+
+  void Source_Ref::release()
+  { _pimpl->release(); }
   
   media::MediaVerifierRef Source_Ref::verifier(unsigned media_nr)
   { return _pimpl->verifier(media_nr); }

@@ -44,6 +44,18 @@ namespace zypp
       medias = MediaMap();
     }
 
+    void MediaSet::release()
+    {
+      media::MediaManager media_mgr;
+      for (MediaMap::iterator it = medias.begin(); it != medias.end(); it++)
+      {
+	if (media_mgr.isAttached(it->second))
+	{
+	  media_mgr.release(it->second, false);
+	}
+      }
+    }
+
     media::MediaAccessId MediaSet::getMediaAccessId (media::MediaNr medianr)
     {
      media::MediaManager media_mgr;

@@ -48,6 +48,10 @@ namespace zypp
       void redirect (media::MediaNr medianr, media::MediaAccessId media_id);
       /** Reset the handles to the medias */
       void reset();
+      /**
+       * Release all medias in the set
+       */
+      void release();
 
     protected:
 
