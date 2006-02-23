@@ -89,7 +89,7 @@ namespace zypp
         boost::regex rxComment("^[[:space:]]*#(.*)$");
         boost::regex rxMStart("^\\+([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:$");
         boost::regex rxMEnd("^\\-([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:$");
-        boost::regex rxSStart("^=([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:[[:space:]]+(.*)$");
+        boost::regex rxSStart("^=([^[:space:]^\\.]+)(\\.([^[:space:]]+))?:[[:space:]]*(.*)$");
         boost::regex rxEmpty("^([[:space:]]*)$");
 
 	if (!file) {
