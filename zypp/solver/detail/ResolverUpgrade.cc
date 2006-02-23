@@ -323,7 +323,7 @@ MIL << "has split cap " << splitinfo.name << ":" << splitinfo.path << ", splitit
 	    if (splititem) {
 		if (target) {
 		    ResObject::constPtr robj = target->whoOwnsFile( splitinfo.path );
-MIL << "whoOwnsFile(): " << robj << endl;
+if (robj) MIL << "whoOwnsFile(): " << *robj << endl;
 		    if (robj
 			&& robj->name() == splitinfo.name)
 		    {
