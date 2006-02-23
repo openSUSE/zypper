@@ -53,10 +53,6 @@ namespace zypp
 
         virtual bool
         isAttached() const;
-/*
-	      virtual bool
-        attachesMediaSource(const MediaSourceRef &media) const;
-*/
     };
 
 
