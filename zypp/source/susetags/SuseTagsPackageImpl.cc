@@ -47,13 +47,13 @@ namespace zypp
       { return _description; }
 
       Date SuseTagsPackageImpl::buildtime() const
-      { return Date(); }
+      { return _buildtime; }
 
       std::string SuseTagsPackageImpl::buildhost() const
       { return std::string(); }
 
       Date SuseTagsPackageImpl::installtime() const
-      { return _buildtime; }
+      { return Date(); }				// it was never installed
 
       std::string SuseTagsPackageImpl::distribution() const
       { return std::string(); }
