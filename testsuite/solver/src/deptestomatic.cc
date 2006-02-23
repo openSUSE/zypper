@@ -368,12 +368,39 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 	solver::detail::PoolItemSet dummy;
 
 	solver::detail::PoolItemSet insset( inslist.begin(), inslist.end() );
+#if 0
 	InstallOrder order( context->pool(), insset, dummy );		 // sort according top prereq
 	order.init();
 	const solver::detail::PoolItemList & installorder ( order.getTopSorted() );
 	for (solver::detail::PoolItemList::const_iterator iter = installorder.begin(); iter != installorder.end(); iter++) {
 		RESULT; printRes (cout, (*iter)); cout << endl;
 	}
+#else
+        int counter = 1;
+        InstallOrder order( context->pool(), insset, dummy );		 // sort according top prereq
+	order.init();
+        for ( solver::detail::PoolItemList items = order.computeNextSet(); ! items.empty(); items = order.computeNextSet() )
+        {
+            RESULT << endl;
+            RESULT << counter << ". set with " << items.size() << " resolvables" << endl;
+            StringList itemList;
+            itemList.clear();
+            
+            for ( solver::detail::PoolItemList::iterator iter = items.begin(); iter != items.end(); ++iter )
+            {
+                ostringstream s;
+                printRes (s, iter->resolvable());
+                itemList.push_back (s.str());
+            }
+            itemList.sort();
+            for (StringList::const_iterator iter = itemList.begin(); iter != itemList.end(); iter++) {
+		print_important (*iter);
+	    }
+            counter++;
+            order.setInstalled (items);
+        }
+#endif
+        
 	cout << "- - - - - - - - - -" << endl;
     }
 
