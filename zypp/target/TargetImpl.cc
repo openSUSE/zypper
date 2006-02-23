@@ -430,7 +430,7 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
     {
 	if (it->status().isToBeInstalled())
 	{
-	    if ((*it)->kind() != ResTraits<SrcPackage>::kind) {
+	    if ((*it)->kind() == ResTraits<SrcPackage>::kind) {
 		srclist_r.push_back( *it );
 	    }
 	    else if ((*it)->kind() != ResTraits<Package>::kind) {
