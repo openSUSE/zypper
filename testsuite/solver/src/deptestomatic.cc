@@ -106,6 +106,14 @@ typedef set<PoolItem_Ref> PoolItemSet;
 #define MARKER ">!> "
 #define RESULT cout << MARKER
 
+
+class compare_problems {
+public:
+    int operator() (const boost::intrusive_ptr<zypp::ResolverProblem> & p1,
+                    const boost::intrusive_ptr<zypp::ResolverProblem> & p2) const
+        { return p1->description() < p2->description(); }
+};
+
 //-----------------------------------------------------------------------------
 
 static std::ostream &
@@ -1273,6 +1281,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    }
 	    else {
 		ResolverProblemList problems = resolver->problems ();
+                problems.sort(compare_problems());
 		RESULT << problems.size() << " problems found:" << endl;
 		for (ResolverProblemList::iterator iter = problems.begin(); iter != problems.end(); ++iter) {
                     ResolverProblem problem = **iter;
