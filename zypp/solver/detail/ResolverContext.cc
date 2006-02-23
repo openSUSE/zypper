@@ -141,7 +141,7 @@ ResolverContext::getStatus (PoolItem_Ref item)
 	}
 	context = context->_parent;			// N: go up the chain
     }
-#if 1
+
     ResStatus status;
     if (item.status().isInstalled())
 	status = ResStatus::installed;			// return _is_ state, not _to be_ state
@@ -150,9 +150,6 @@ ResolverContext::getStatus (PoolItem_Ref item)
 
     _last_checked_status = status;
 //    _XDEBUG( "[NULL]:" << status );    
-#else
-    _last_checked_status = item.status();    
-#endif
 
     return _last_checked_status;				// Not part of context, return Pool status
 }
@@ -166,22 +163,12 @@ ResolverContext::setStatus (PoolItem_Ref item, const ResStatus & status)
 {
     if (_invalid) return;
 
-_XDEBUG( "[" << this << "]setStatus(" << item << ", " << status << ")" );
-    if (status == item.status()) {		// same as original status
-	Context::iterator it;
-	it = _context.find(item);		// part of local context ?
-	if (it != _context.end()) {
-_XDEBUG( "UNMARK" );
-	    _context.erase (it);		// erase it !
-	}
-    }
-    else {
-	ResStatus old_status = getStatus (item);
+    _XDEBUG( "[" << this << "]setStatus(" << item << ", " << status << ")" );
+    ResStatus old_status = getStatus (item);
 
-	if (old_status != status) {		// new status ?
-_XDEBUG( "MARK" );
-	    _context[item] = status;		// set it !
-	}
+    if (old_status != status) {		// new status ?
+	_XDEBUG( "MARK" );
+	_context[item] = status;		// set it !
     }
 
     _last_checked_item = item;
@@ -291,14 +278,26 @@ ResolverContext::upgrade (PoolItem_Ref item, PoolItem_Ref old_item, bool is_soft
     
     if (status.isToBeInstalled())
 	return true;
-    
+
+    ResStatus::TransactByValue by = ResStatus::SOLVER;
+    if (item.status().isToBeInstalled()
+	&& item.status().getTransactByValue() > ResStatus::SOLVER) {
+	// if the item has already has been set for installation by 
+	// user, or other applications with higher priority
+	// We will use this priority
+	by = item.status().getTransactByValue();
+    }
+
     if (is_soft) {
-	setStatus (item, ResStatus::toBeInstalledSoft);
+	ResStatus newStatus = ResStatus::toBeInstalledSoft; // This can only be done by the solver
+	setStatus (item, newStatus);
     }
     else {
-	setStatus (item, ResStatus::toBeInstalled);
+	ResStatus newStatus;
+	newStatus.setToBeInstalled (by);
+	setStatus (item, newStatus);
     }
-    
+
     Resolvable::constPtr res = old_item.resolvable();
     Package::constPtr pkg = asKind<Package>(res);			// try to access it as a package
     if (pkg) {							// if its !=NULL, get size information
