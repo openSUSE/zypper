@@ -239,6 +239,9 @@ namespace zypp
 	return;
       }
 
+      /** erase all resolvables coming from the target  */
+      void eraseInstalled();
+
     public:
       /** \name Save and restore state. */
       //@{

@@ -186,6 +186,29 @@ namespace zypp
 
     /******************************************************************
     **
+    **	FUNCTION NAME : eraseInstalled
+    **	FUNCTION TYPE : void
+    */
+    void PoolImpl::eraseInstalled( )
+    {
+	MIL << "eraseInstalled()" << endl;
+	for (ContainerT::iterator it = _store.begin(); it != _store.end();) {
+	    PoolItem item = *it;
+	    if (item.status().isInstalled()) {
+		ContainerT::iterator next = it; ++next;
+		_store.erase( item );
+		_namehash.erase( item );
+		_caphash.erase( item );
+		it = next;
+	    }
+	    else {
+		++it;
+	    }
+	}
+    }
+
+    /******************************************************************
+    **
     **	FUNCTION NAME : operator<<
     **	FUNCTION TYPE : std::ostream &
     */
@@ -194,6 +217,12 @@ namespace zypp
       return str << "PoolImpl " << obj.size();
     }
 
+
+    /******************************************************************
+    **
+    **	FUNCTION NAME : PoolImplInserter::operator()
+    **	FUNCTION TYPE : void
+    */
     /** Bottleneck inserting ResObjects in to the pool.
      * Filters arch incomatible available(!) objects.
     */
@@ -212,6 +241,11 @@ namespace zypp
         }
     }
 
+    /******************************************************************
+    **
+    **	FUNCTION NAME : PoolImplDeleter::operator()
+    **	FUNCTION TYPE : void
+    */
     void PoolImplDeleter::operator()( ResObject::constPtr ptr_r )
     {
       PoolImpl::Item item( ptr_r );
