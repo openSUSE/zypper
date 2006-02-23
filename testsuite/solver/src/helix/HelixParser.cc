@@ -68,6 +68,9 @@ string2kind (const std::string & str)
 	else if (str == "product") {
 	    kind = ResTraits<Product>::kind;
 	}
+	else if (str == "language") {
+	    kind = ResTraits<Language>::kind;
+	}
 	else {
 	    ERR << "get_resItem unknown kind '" << str << "'" << endl;
 	}
@@ -439,6 +442,7 @@ HelixParser::toplevelStart(const std::string & token, const xmlChar **attrs)
 	|| (token == "selection")
 	|| (token == "script")
 	|| (token == "message")
+	|| (token == "language")
 	|| (token == "patch")
 	|| (token == "product")) {
 
@@ -614,6 +618,7 @@ HelixParser::resolvableEnd (const std::string & token)
 	|| (token == "selection")
 	|| (token == "script")
 	|| (token == "message")
+	|| (token == "language")
 	|| (token == "patch")
 	|| (token == "product")) {
 
