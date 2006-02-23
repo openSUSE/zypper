@@ -185,40 +185,39 @@ namespace zypp
     DBG << "Reading file " << filename << endl;
 
     if (filename.asString().find( ".gz", filename.asString().size()-3) != string::npos) {
-	igzstream st ( filename.asString().c_str() );
+      igzstream st ( filename.asString().c_str() );
 
-    YUMFileListParser filelist ( st, "" );
-    for (;
-        ! filelist.atEnd();
-        ++filelist)
-    {
-      PackageID id((*filelist)->name,
-                  (*filelist)->ver,
-                  (*filelist)->rel,
-                  (*filelist)->arch);
-      files_data[id] = *filelist;
-    }
-    if (filelist.errorStatus())
-      throw *filelist.errorStatus();
-
+      YUMFileListParser filelist ( st, "" );
+      for (;
+          ! filelist.atEnd();
+          ++filelist)
+      {
+        PackageID id((*filelist)->name,
+                    (*filelist)->ver,
+                    (*filelist)->rel,
+                    (*filelist)->arch);
+        files_data[id] = *filelist;
+      }
+      if (filelist.errorStatus())
+        throw *filelist.errorStatus();
     }
     else {
       ifstream st( filename.asString().c_str() );
-    YUMFileListParser filelist ( st, "" );
-    for (;
-        ! filelist.atEnd();
-        ++filelist)
-    {
-      PackageID id((*filelist)->name,
-                  (*filelist)->ver,
-                  (*filelist)->rel,
-                  (*filelist)->arch);
-      files_data[id] = *filelist;
-    }
-    if (filelist.errorStatus())
-      throw *filelist.errorStatus();
-
-    }
+      YUMFileListParser filelist ( st, "" );
+      for (;
+          ! filelist.atEnd();
+          ++filelist)
+      {
+        PackageID id((*filelist)->name,
+                    (*filelist)->ver,
+                    (*filelist)->rel,
+                    (*filelist)->arch);
+        files_data[id] = *filelist;
+      }
+      if (filelist.errorStatus())
+        throw *filelist.errorStatus();
+  
+      }
   }
 
   for (std::list<YUMRepomdData_Ptr>::const_iterator it
@@ -234,37 +233,37 @@ namespace zypp
     DBG << "Reading file " << filename << endl;
 
     if (filename.asString().find( ".gz", filename.asString().size()-3) != string::npos) {
-	igzstream st ( filename.asString().c_str() );
-    YUMOtherParser other(st, "");
-    for (;
-        ! other.atEnd();
-        ++other)
-    {
-      PackageID id((*other)->name,
-                  (*other)->ver,
-                  (*other)->rel,
-                  (*other)->arch);
-      other_data[id] = *other;
-    }
-    if (other.errorStatus())
-      throw *other.errorStatus();
+      igzstream st ( filename.asString().c_str() );
+      YUMOtherParser other(st, "");
+      for (;
+          ! other.atEnd();
+          ++other)
+      {
+        PackageID id((*other)->name,
+                    (*other)->ver,
+                    (*other)->rel,
+                    (*other)->arch);
+        other_data[id] = *other;
+      }
+      if (other.errorStatus())
+        throw *other.errorStatus();
     }
     else {
-    ifstream st(filename.asString().c_str());
-    YUMOtherParser other(st, "");
-    for (;
-        ! other.atEnd();
-        ++other)
-    {
-      PackageID id((*other)->name,
-                  (*other)->ver,
-                  (*other)->rel,
-                  (*other)->arch);
-      other_data[id] = *other;
-    }
-    if (other.errorStatus())
-      throw *other.errorStatus();
-    }
+      ifstream st(filename.asString().c_str());
+      YUMOtherParser other(st, "");
+      for (;
+          ! other.atEnd();
+          ++other)
+      {
+        PackageID id((*other)->name,
+                    (*other)->ver,
+                    (*other)->rel,
+                    (*other)->arch);
+        other_data[id] = *other;
+      }
+      if (other.errorStatus())
+        throw *other.errorStatus();
+      }
   }
 
   // now read primary data, merge them with filelist and changelog
@@ -280,70 +279,70 @@ namespace zypp
     _metadata_files.push_back((*it)->location);
     DBG << "Reading file " << filename << endl;
     if (filename.asString().find( ".gz", filename.asString().size()-3) != string::npos) {
-	igzstream st ( filename.asString().c_str() );
-    YUMPrimaryParser prim(st, "");
-    for (;
-        !prim.atEnd();
-        ++prim)
-    {
-      PackageID id((*prim)->name,
-                  (*prim)->ver,
-                  (*prim)->rel,
-                  (*prim)->arch);
-      map<PackageID, YUMOtherData_Ptr>::iterator found_other
-          = other_data.find(id);
-      map<PackageID, YUMFileListData_Ptr>::iterator found_files
-          = files_data.find(id);
-
-      YUMFileListData filelist_empty;
-      YUMOtherData other_empty;
-      Package::Ptr p = createPackage(
-        source_r,
-        **prim,
-        found_files != files_data.end()
-          ? *found_files->second
-          : filelist_empty,
-        found_other != other_data.end()
-          ? *found_other->second
-          : other_empty
-      );
-      _store.insert (p);
-    }
-    if (prim.errorStatus())
-      throw *prim.errorStatus();
+      igzstream st ( filename.asString().c_str() );
+      YUMPrimaryParser prim(st, "");
+      for (;
+          !prim.atEnd();
+          ++prim)
+      {
+        PackageID id((*prim)->name,
+                    (*prim)->ver,
+                    (*prim)->rel,
+                    (*prim)->arch);
+        map<PackageID, YUMOtherData_Ptr>::iterator found_other
+            = other_data.find(id);
+        map<PackageID, YUMFileListData_Ptr>::iterator found_files
+            = files_data.find(id);
+  
+        YUMFileListData filelist_empty;
+        YUMOtherData other_empty;
+        Package::Ptr p = createPackage(
+          source_r,
+          **prim,
+          found_files != files_data.end()
+            ? *found_files->second
+            : filelist_empty,
+          found_other != other_data.end()
+            ? *found_other->second
+            : other_empty
+        );
+        _store.insert (p);
+      }
+      if (prim.errorStatus())
+        throw *prim.errorStatus();
     }
     else {
-    ifstream st(filename.asString().c_str());
-    YUMPrimaryParser prim(st, "");
-    for (;
-        !prim.atEnd();
-        ++prim)
-    {
-      PackageID id((*prim)->name,
-                  (*prim)->ver,
-                  (*prim)->rel,
-                  (*prim)->arch);
-      map<PackageID, YUMOtherData_Ptr>::iterator found_other
-          = other_data.find(id);
-      map<PackageID, YUMFileListData_Ptr>::iterator found_files
-          = files_data.find(id);
-
-      YUMFileListData filelist_empty;
-      YUMOtherData other_empty;
-      Package::Ptr p = createPackage(
-        source_r,
-        **prim,
-        found_files != files_data.end()
-          ? *found_files->second
-          : filelist_empty,
-        found_other != other_data.end()
-          ? *found_other->second
-          : other_empty
-      );
-      _store.insert (p);
-    }
-    if (prim.errorStatus())
-      throw *prim.errorStatus();
+      ifstream st(filename.asString().c_str());
+      YUMPrimaryParser prim(st, "");
+      for (;
+          !prim.atEnd();
+          ++prim)
+      {
+        PackageID id((*prim)->name,
+                    (*prim)->ver,
+                    (*prim)->rel,
+                    (*prim)->arch);
+        map<PackageID, YUMOtherData_Ptr>::iterator found_other
+            = other_data.find(id);
+        map<PackageID, YUMFileListData_Ptr>::iterator found_files
+            = files_data.find(id);
+  
+        YUMFileListData filelist_empty;
+        YUMOtherData other_empty;
+        Package::Ptr p = createPackage(
+          source_r,
+          **prim,
+          found_files != files_data.end()
+            ? *found_files->second
+            : filelist_empty,
+          found_other != other_data.end()
+            ? *found_other->second
+            : other_empty
+        );
+        _store.insert (p);
+      }
+      if (prim.errorStatus())
+        throw *prim.errorStatus();
     }
   }
       }
@@ -363,20 +362,40 @@ namespace zypp
       : _cache_dir + (*it)->location;
     _metadata_files.push_back((*it)->location);
     DBG << "Reading file " << filename << endl;
-    ifstream st(filename.asString().c_str());
-    YUMGroupParser group(st, "");
-    for (;
-        !group.atEnd();
-        ++group)
+    if (filename.asString().find( ".gz", filename.asString().size()-3) != string::npos)
     {
-      Selection::Ptr p = createGroup(
-        source_r,
-        **group
-      );
-      _store.insert (p);
+      igzstream st ( filename.asString().c_str() );
+      YUMGroupParser group(st, "");
+      for (;
+          !group.atEnd();
+          ++group)
+      {
+        Selection::Ptr p = createGroup(
+          source_r,
+          **group
+        );
+        _store.insert (p);
+      }
+      if (group.errorStatus())
+        throw *group.errorStatus();
     }
-    if (group.errorStatus())
-      throw *group.errorStatus();
+    else
+    {
+      ifstream st(filename.asString().c_str());
+      YUMGroupParser group(st, "");
+      for (;
+          !group.atEnd();
+          ++group)
+      {
+        Selection::Ptr p = createGroup(
+          source_r,
+          **group
+        );
+        _store.insert (p);
+      }
+      if (group.errorStatus())
+        throw *group.errorStatus();
+    }
   }
       }
       catch (...) {
@@ -395,20 +414,40 @@ namespace zypp
       : _cache_dir + (*it)->location;
     _metadata_files.push_back((*it)->location);
     DBG << "Reading file " << filename << endl;
-    ifstream st(filename.asString().c_str());
-    YUMPatternParser pattern(st, "");
-    for (;
-        !pattern.atEnd();
-        ++pattern)
+    if (filename.asString().find( ".gz", filename.asString().size()-3) != string::npos)
     {
-      Pattern::Ptr p = createPattern(
-        source_r,
-        **pattern
-      );
-      _store.insert (p);
+      igzstream st ( filename.asString().c_str() );
+      YUMPatternParser pattern(st, "");
+      for (;
+          !pattern.atEnd();
+          ++pattern)
+      {
+        Pattern::Ptr p = createPattern(
+          source_r,
+          **pattern
+        );
+        _store.insert (p);
+      }
+      if (pattern.errorStatus())
+        throw *pattern.errorStatus();
     }
-    if (pattern.errorStatus())
-      throw *pattern.errorStatus();
+    else
+    {
+      ifstream st(filename.asString().c_str());
+      YUMPatternParser pattern(st, "");
+      for (;
+          !pattern.atEnd();
+          ++pattern)
+      {
+        Pattern::Ptr p = createPattern(
+          source_r,
+          **pattern
+        );
+        _store.insert (p);
+      }
+      if (pattern.errorStatus())
+        throw *pattern.errorStatus();
+    }
   }
       }
       catch (...) {
@@ -427,20 +466,40 @@ namespace zypp
       : _cache_dir + (*it)->location;
     _metadata_files.push_back((*it)->location);
     DBG << "Reading file " << filename << endl;
-    ifstream st(filename.asString().c_str());
-    YUMProductParser product(st, "");
-    for (;
-        !product.atEnd();
-        ++product)
+    if (filename.asString().find( ".gz", filename.asString().size()-3) != string::npos)
     {
-      Product::Ptr p = createProduct(
-        source_r,
-        **product
-      );
-      _store.insert (p);
+      igzstream st ( filename.asString().c_str() );
+      YUMProductParser product(st, "");
+      for (;
+          !product.atEnd();
+          ++product)
+      {
+        Product::Ptr p = createProduct(
+          source_r,
+          **product
+        );
+        _store.insert (p);
+      }
+      if (product.errorStatus())
+        throw *product.errorStatus();
     }
-    if (product.errorStatus())
-      throw *product.errorStatus();
+    else
+    {
+      ifstream st(filename.asString().c_str());
+      YUMProductParser product(st, "");
+      for (;
+          !product.atEnd();
+          ++product)
+      {
+        Product::Ptr p = createProduct(
+          source_r,
+          **product
+        );
+        _store.insert (p);
+      }
+      if (product.errorStatus())
+        throw *product.errorStatus();
+    }
   }
       }
       catch (...) {
@@ -460,18 +519,36 @@ namespace zypp
       : _cache_dir + (*it)->location;
     _metadata_files.push_back((*it)->location);
     DBG << "Reading file " << filename << endl;
-    ifstream st(filename.asString().c_str());
-    YUMPatchesParser patch(st, "");
-    for (;
-        !patch.atEnd();
-        ++patch)
+    if (filename.asString().find( ".gz", filename.asString().size()-3) != string::npos)
     {
-      // TODO check checksum
-      string filename = (*patch)->location;
-      patch_files.push_back(filename);
+      igzstream st ( filename.asString().c_str() );
+      YUMPatchesParser patch(st, "");
+      for (;
+          !patch.atEnd();
+          ++patch)
+      {
+        // TODO check checksum
+        string filename = (*patch)->location;
+        patch_files.push_back(filename);
+      }
+      if (patch.errorStatus())
+        throw *patch.errorStatus();
     }
-    if (patch.errorStatus())
-      throw *patch.errorStatus();
+    else
+    {
+      ifstream st(filename.asString().c_str());
+      YUMPatchesParser patch(st, "");
+      for (;
+          !patch.atEnd();
+          ++patch)
+      {
+        // TODO check checksum
+        string filename = (*patch)->location;
+        patch_files.push_back(filename);
+      }
+      if (patch.errorStatus())
+        throw *patch.errorStatus();
+    }
   }
 
   for (std::list<std::string>::const_iterator it = patch_files.begin();
@@ -483,27 +560,54 @@ namespace zypp
         : _cache_dir + *it;
       _metadata_files.push_back(*it);
       DBG << "Reading file " << filename << endl;
-      ifstream st(filename.asString().c_str());
-      YUMPatchParser ptch(st, "");
-      for(;
-          !ptch.atEnd();
-          ++ptch)
+      if (filename.asString().find( ".gz", filename.asString().size()-3) != string::npos)
       {
-        Patch::Ptr p = createPatch(
-          source_r,
-    **ptch
-        );
-        _store.insert (p);
-        Patch::AtomList atoms = p->atoms();
-        for (Patch::AtomList::iterator at = atoms.begin();
-    at != atoms.end();
-    at++)
+        igzstream st ( filename.asString().c_str() );
+        YUMPatchParser ptch(st, "");
+        for(;
+            !ptch.atEnd();
+            ++ptch)
         {
-          _store.insert (*at);
+          Patch::Ptr p = createPatch(
+            source_r,
+	    **ptch
+          );
+          _store.insert (p);
+          Patch::AtomList atoms = p->atoms();
+          for (Patch::AtomList::iterator at = atoms.begin();
+	      at != atoms.end();
+	      at++)
+          {
+            _store.insert (*at);
+          }
         }
+        if (ptch.errorStatus())
+          throw *ptch.errorStatus();
       }
-      if (ptch.errorStatus())
-        throw *ptch.errorStatus();
+      else
+      {
+        ifstream st(filename.asString().c_str());
+        YUMPatchParser ptch(st, "");
+        for(;
+            !ptch.atEnd();
+            ++ptch)
+        {
+          Patch::Ptr p = createPatch(
+            source_r,
+	    **ptch
+          );
+          _store.insert (p);
+          Patch::AtomList atoms = p->atoms();
+          for (Patch::AtomList::iterator at = atoms.begin();
+	      at != atoms.end();
+	      at++)
+          {
+            _store.insert (*at);
+          }
+        }
+        if (ptch.errorStatus())
+          throw *ptch.errorStatus();
+      }
   }
       }
       catch (...)
