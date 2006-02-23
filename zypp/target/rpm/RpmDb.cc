@@ -1872,7 +1872,7 @@ void RpmDb::doRemovePackage( const string & name_r, unsigned flags, callback::Se
     FAILIFNOTINITIALIZED;
     Logfile progresslog;
 
-    MIL << "RpmDb::removePackage(" << name_r << "," << flags << ")" << endl;
+    MIL << "RpmDb::doRemovePackage(" << name_r << "," << flags << ")" << endl;
 
     // backup
     if ( _packagebackups ) {
