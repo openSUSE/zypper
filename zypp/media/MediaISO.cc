@@ -77,17 +77,17 @@ namespace zypp
             << src.asString() << std::endl;
         ZYPP_THROW(MediaUnsupportedUrlSchemeException(src));
       }
-#if 0
-      /*
-      ** FIXME: should we really support this?
-      */
+#if 1
       else
-      if( src.getScheme() == "ftp"   ||
-          src.getScheme() == "http"  ||
-          src.getScheme() == "https")
+      if( !(src.getScheme() == "hd"   ||
+            src.getScheme() == "dir"  ||
+            src.getScheme() == "file" ||
+            src.getScheme() == "nfs"  ||
+            src.getScheme() == "smb"  ||
+            src.getScheme() == "cifs"))
       {
         ERR << "ISO filename source media url scheme is not supported: "
-            << src.asString() << endl;
+            << src.asString() << std::endl;
         ZYPP_THROW(MediaUnsupportedUrlSchemeException(src));
       }
 #endif
