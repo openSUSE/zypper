@@ -95,8 +95,10 @@ downgrade_allowed (PoolItem_Ref installed, PoolItem_Ref candidate)
     Resolvable::constPtr cres = candidate.resolvable();
     Package::constPtr cpkg = asKind<Package>(cres);
 
-    if ( va->isKnown( ipkg->vendor() )
-	 && va->isKnown( cpkg->vendor() ) )
+    if ( ipkg
+	&& cpkg
+	&& va->isKnown( ipkg->vendor() )
+	&& va->isKnown( cpkg->vendor() ) )
     {
 #warning Had Y2PM::runningFromSystem
 	return( ipkg->buildtime() >= cpkg->buildtime() );
