@@ -226,7 +226,7 @@ namespace zypp {
       //
       //////////////////////////////////////////////////////
     
-      mount.mount( path, mountpoint.c_str(), _vfstype,
+      mount.mount( path, mountpoint, _vfstype,
 		   options.asString(), environment );
 
       setMediaSource(media);
@@ -251,8 +251,9 @@ namespace zypp {
         {
           ZYPP_CAUGHT(excpt_r);
         }
-        ZYPP_THROW(MediaMountException(path, mountpoint,
-          "Unable to verify that the media was mounted"
+        ZYPP_THROW(MediaMountException(
+          "Unable to verify that the media was mounted",
+	  path, mountpoint
         ));
       }
     }
@@ -267,7 +268,7 @@ namespace zypp {
     bool
     MediaSMB::isAttached() const
     {
-      return checkAttached(false);
+      return checkAttached(false, true);
     }
 
     ///////////////////////////////////////////////////////////////////

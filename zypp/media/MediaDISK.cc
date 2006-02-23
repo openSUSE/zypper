@@ -119,7 +119,7 @@ namespace zypp {
     	options="ro";
       }
 
-      mount.mount(_device,mountpoint.c_str(),_filesystem,options);
+      mount.mount(_device,mountpoint,_filesystem,options);
 
       setMediaSource(media);
 
@@ -143,8 +143,9 @@ namespace zypp {
         {
           ZYPP_CAUGHT(excpt_r);
         }
-        ZYPP_THROW(MediaMountException(_device, mountpoint,
-          "Unable to verify that the media was mounted"
+        ZYPP_THROW(MediaMountException(
+          "Unable to verify that the media was mounted",
+	  _device, mountpoint
         ));
       }
     }
