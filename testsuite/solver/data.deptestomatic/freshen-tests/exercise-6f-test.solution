@@ -4,6 +4,7 @@
 >!> Installing B from channel core
 >!> Establishing state ...
 >!> Established context
+>!> patch:Patch-A-1.1-1.noarch[test] UU__<uneeded>
 >!> Freshening ...
 >!> Solution #1:
 >!> install A-1.1-1.noarch[test]
