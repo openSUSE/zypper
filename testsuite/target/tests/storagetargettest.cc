@@ -12,6 +12,7 @@
 #include "zypp/SourceFactory.h"
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/Exception.h"
 ///////////////////////////////////////////////////////////////////
 
 #include "zypp/target/store/PersistentStorage.h"
@@ -22,6 +23,7 @@
 #include "zypp/SourceFactory.h"
 #include "zypp/Source.h"
 #include "zypp/source/SourceImpl.h"
+#include "zypp/PathInfo.h"
 
 #include <map>
 #include <set>
@@ -45,21 +47,33 @@ using namespace boost::filesystem;
 
 //using namespace DbXml;
 
-int main()
+static int assert_dir_is_broken()
 {
+  Pathname p("./1/2/3/4/5");
+  if (0 != assert_dir(p, 0700))
+    ZYPP_THROW(Exception("Cannot create directory" + p.asString()));
+  else
+    MIL << "created " << p << std::endl;
+}
 
+static int readAndStore()
+{
+  
   /* Read YUM resolvables from a source */
   INT << "===[START]==========================================" << endl;
   SourceFactory _f;
   Pathname p = "/";
   //  Url url = Url("ftp://cml.suse.cz/netboot/find/SUSE-10.1-CD-OSS-i386-Beta1-CD1");
   Url url = Url("dir:/space/sources/zypp-trunk/trunk/libzypp/devel/devel.jsrain");
-  //  Url url = Url("dir:/local/zypp/libzypp/devel/devel.jsrain");
-  Source_Ref s = _f.createFrom( url, p );
+  //Url url = Url("dir:/mounts/dist/next-i386");
+  //Url url = Url("dir:/space/zypp-test/sles-beta5");
+  //Source_Ref s = _f.createFrom( url, p, "testsource", "./source-cache" );
+  Source_Ref s = _f.createFrom( url, p, "testsource");
   ResStore store = s.resolvables();
-  MIL << "done reading YUM source: " << store <<  std::endl;
-
+  MIL << "done reading source type " << s.type() << ": " << store <<  std::endl;
+  s.storeMetadata("./source-cache");
   Pathname root("."); 
+  //exit(1);
   XMLFilesBackend backend(root);
 
   //backend.setRandomFileNameEnabled(true);
@@ -99,5 +113,38 @@ int main()
   MIL << "Wrote 2 sources" << std::endl;
   std::list<PersistentStorage::SourceData> sources = backend.storedSources();
   MIL << "Read " << sources.size() << " sources" << std::endl;
+  return 0;
+}
+
+int nld10TestCase()
+{
+  SourceFactory _f;
+  Pathname p = "/";
+  Url url = Url("dir:/mounts/dist/install/SLP/NLD-10-Beta4/i386/CD1");
+  Source_Ref s = _f.createFrom( url, p, "testsource");
+  ResStore store = s.resolvables();
+  MIL << "done reading source type " << s.type() << ": " << store <<  std::endl;
+  Pathname root("."); 
+  XMLFilesBackend backend(root);
+
+  DBG << "Writing objects..." << std::endl;
+  for (ResStore::const_iterator it = store.begin(); it != store.end(); it++)
+  {
+    DBG << **it << endl;
+    backend.storeObject(*it);
+  }
+  MIL << "Wrote " << store.size() << " objects" << std::endl;
+  
+  std::list<ResObject::Ptr> objs = backend.storedObjects(ResTraits<zypp::Selection>::kind);
+  MIL << "Read " << objs.size() << " patches" << std::endl;
+  return 0;
+}
+
+int main()
+{
+  int error = 0;
+  if ((error = readAndStore()) != 0) return error;
+  //if ((error = assert_dir_is_broken()) != 0) return error;
+  //if ((error = nld10TestCase()) != 0) return error;  
   return 0;
 }
