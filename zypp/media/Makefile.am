@@ -24,6 +24,7 @@ mediainclude_HEADERS = 		\
 	MediaCIFS.h		\
 	ProxyInfo.h		\
 	MediaCurl.h		\
+	MediaISO.h		\
 	MediaManager.h		
 
 
@@ -44,6 +45,7 @@ lib@PACKAGE@_media_la_SOURCES = \
 	MediaCIFS.cc		\
 	ProxyInfo.cc		\
 	MediaCurl.cc		\
+	MediaISO.cc		\
 	MediaManager.cc		
 
 
