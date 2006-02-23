@@ -67,8 +67,17 @@ namespace zypp
       /** Installed object. */
       ResObject::constPtr installedObj() const;
 
-      /** Best among available objects. */
+      /** Best among available objects.
+       + The user selected candiate, or a default.
+      */
       ResObject::constPtr candidateObj() const;
+
+      /** Set a candidate (out of available objects).
+       * \return The new candidate, or NULL if choice was invalid
+       * (NULL or not among availableObjs). An invalid choice
+       * selects the default candidate.
+       */
+      ResObject::constPtr setCandidate( ResObject::constPtr byUser_r );
 
       /** Best among all objects. */
       ResObject::constPtr theObj() const;

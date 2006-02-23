@@ -23,6 +23,10 @@ namespace zypp
   namespace ui
   { /////////////////////////////////////////////////////////////////
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : StatusHelper
+    //
     /**
      * \todo Support non USER level mipulation.
     */
@@ -92,6 +96,13 @@ namespace zypp
       PoolItem inst;
       PoolItem cand;
     };
+    ///////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	CLASS NAME : Selectable::Impl
+    //
+    ///////////////////////////////////////////////////////////////////
 
     /**
      * \todo Still open questions in state calculation;
@@ -116,7 +127,6 @@ namespace zypp
 
       return( installedObj() ? S_KeepInstalled : S_NoInst );
     }
-
 
     /**
      * \todo Neglecting TABOO/PROTECTED
@@ -162,6 +172,25 @@ namespace zypp
       return false;
     }
 
+    PoolItem Selectable::Impl::setCandidate( ResObject::constPtr byUser_r )
+    {
+      _candidate = PoolItem();
+      for ( availableItem_const_iterator it = availableBegin();
+            it != availableEnd(); ++it )
+        {
+          if ( it->resolvable() == byUser_r )
+            {
+              _candidate = *it;
+              break;
+            }
+        }
+      if ( ! ( _candidate || _availableItems.empty() ) )
+        {
+#warning actually select with respect to an installed items arch
+          _candidate = *_availableItems.begin();
+        }
+      return _candidate;
+    }
 
     /////////////////////////////////////////////////////////////////
   } // namespace ui

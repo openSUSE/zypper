@@ -64,8 +64,11 @@ namespace zypp
     ResObject::constPtr Selectable::candidateObj() const
     { return _pimpl->candidateObj(); }
 
+    ResObject::constPtr Selectable::setCandidate( ResObject::constPtr byUser_r )
+    { return _pimpl->setCandidate( byUser_r ); }
+
     ResObject::constPtr Selectable::theObj() const
-     { return _pimpl->theObj(); }
+    { return _pimpl->theObj(); }
 
     Selectable::size_type Selectable::availableObjs() const
     { return _pimpl->availableObjs(); }

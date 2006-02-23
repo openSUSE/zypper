@@ -55,7 +55,9 @@ namespace zypp
       , _name( name_r )
       , _installedItem( installedItem_r )
       , _availableItems( availableBegin_r, availableEnd_r )
-      {}
+      {
+        setCandidate( NULL );
+      }
 
     public:
       /**  */
@@ -77,11 +79,21 @@ namespace zypp
       { return _installedItem; }
 
       /** Best among available objects.
+       * The _candiate if set, or the first available.
        * \note Transacted Objects prefered, Status calculation relies on it.
-       * \note Need sort order based on (arch,edition), requires arch compat lists.
       */
       PoolItem candidateObj() const
-      { return( _availableItems.empty() ? PoolItem() : *_availableItems.begin() ); }
+      {
+        if ( _candidate )
+          return _candidate;
+        return( _availableItems.empty() ? PoolItem() : *_availableItems.begin() );
+      }
+
+      /** Set a userCandidate (out of available objects).
+       * \return The new userCandidate or NULL if choice was invalid
+       * (not among availableObjs).
+       */
+      PoolItem setCandidate( ResObject::constPtr byUser_r );
 
       /** Best among all objects. */
       PoolItem theObj() const
@@ -107,6 +119,7 @@ namespace zypp
       std::string      _name;
       PoolItem         _installedItem;
       AvialableItemSet _availableItems;
+      PoolItem         _candidate;
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -115,7 +128,8 @@ namespace zypp
     {
       return str << '[' << obj.kind() << ']' << obj.name() << ": " << obj.status()
                  << " (I " << obj._installedItem << ")"
-                 << " (A " << obj._availableItems.size() << ")";
+                 << " (A " << obj._availableItems.size() << ")"
+                 << obj._candidate;
     }
 
     /////////////////////////////////////////////////////////////////
