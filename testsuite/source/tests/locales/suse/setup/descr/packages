@@ -1,0 +1,93 @@
+=Ver: 2.0
+##----------------------------------------
+=Pkg: locale1 0.729 3 i586
++Prv:
+foo
+locale(de)
+-Prv:
+=Grp: System/Base
+=Lic: GPL
+=Src: 3ddiag 0.729 3 src
+=Tim: 1138664270
+=Loc: 1 3ddiag-0.729-3.i586.rpm
+=Siz: 29291 47245
++Aut:
+Stefan Dirsch <sndirsch@suse.de>
+-Aut:
+##----------------------------------------
+=Pkg: locale2 0.729 3 i586
++Prv:
+foo
+locale(de_DE)
+bar
+-Prv:
+=Grp: System/Base
+=Lic: GPL
+=Src: 3ddiag 0.729 3 src
+=Tim: 1138664270
+=Loc: 1 3ddiag-0.729-3.i586.rpm
+=Siz: 29291 47245
++Aut:
+Stefan Dirsch <sndirsch@suse.de>
+-Aut:
+
+##----------------------------------------
+=Pkg: locale3 0.729 3 i586
++Prv:
+first
+next
+locale(de_DE,en,en_US,zh)
+lastbutone
+last
+-Prv:
+=Grp: System/Base
+=Lic: GPL
+=Src: 3ddiag 0.729 3 src
+=Tim: 1138664270
+=Loc: 1 3ddiag-0.729-3.i586.rpm
+=Siz: 29291 47245
++Aut:
+Stefan Dirsch <sndirsch@suse.de>
+-Aut:
+
+
+##----------------------------------------
+=Pkg: locale4 0.729 3 i586
++Prv:
+a
+b
+c
+locale(foo:de_DE)
+x
+y
+locale(bar:de_DE)
+z
+-Prv:
+=Grp: System/Base
+=Lic: GPL
+=Src: 3ddiag 0.729 3 src
+=Tim: 1138664270
+=Loc: 1 3ddiag-0.729-3.i586.rpm
+=Siz: 29291 47245
++Aut:
+Stefan Dirsch <sndirsch@suse.de>
+-Aut:
+
+
+##----------------------------------------
+=Pkg: locale5 0.729 3 i586
++Prv:
+locale(foo:de_DE,en,en_US,zh)
+-Prv:
+=Grp: System/Base
+=Lic: GPL
+=Src: 3ddiag 0.729 3 src
+=Tim: 1138664270
+=Loc: 1 3ddiag-0.729-3.i586.rpm
+=Siz: 29291 47245
++Aut:
+Stefan Dirsch <sndirsch@suse.de>
+-Aut:
+
+
+
