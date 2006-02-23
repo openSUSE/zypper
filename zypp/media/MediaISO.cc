@@ -78,6 +78,9 @@ namespace zypp
         ZYPP_THROW(MediaUnsupportedUrlSchemeException(src));
       }
 #if 0
+      /*
+      ** FIXME: should we really support this?
+      */
       else
       if( src.getScheme() == "ftp"   ||
           src.getScheme() == "http"  ||
