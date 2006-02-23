@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
   media::MediaId   two;
   zypp::Url        url;
 
-  url = "cd:";
+  url = "cd:/";
 
   try
   {
@@ -152,12 +152,8 @@ int main(int argc, char *argv[])
     catch(const MediaException &e)
     {
       ZYPP_CAUGHT(e);
-      DBG << "ONE: OK, EXPECTED IT (try to eject shared media)" << std::endl;
+      ERR << "ONE: HUH? Eject hasn't worked?!" << std::endl;
     }
-
-    ONE_STEP("ONE: release()")
-    mm.release(one, false);
-
 
     try {
       ONE_STEP("ONE: provideFile(/content)")
@@ -169,17 +165,21 @@ int main(int argc, char *argv[])
       DBG << "ONE: OK, EXPECTED IT (released)" << std::endl;
     }
 
-    ONE_STEP("TWO: provideFile(/ls-lR.gz)")
-    mm.provideFile(two, Pathname("/ls-lR.gz"));
+    try {
+      ONE_STEP("TWO: provideFile(/ls-lR.gz)")
+      mm.provideFile(two, Pathname("/ls-lR.gz"));
+    }
+    catch(const MediaException &e)
+    {
+      ZYPP_CAUGHT(e);
+      DBG << "TWO: OK, EXPECTED IT (released)" << std::endl;
+    }
 
-    ONE_STEP("TWO: release()")
-    mm.release(two, false);
+    ONE_STEP("TWO: (RE)ATTACH IT")
+    mm.attach(two);
 
-    ONE_STEP("ONE: REATTACH IT")
-    mm.attach(one);
-
-    ONE_STEP("ONE: provideFile(/INDEX.gz)")
-    mm.provideFile(one, Pathname("/INDEX.gz"));
+    ONE_STEP("TWO: provideFile(/INDEX.gz)")
+    mm.provideFile(two, Pathname("/INDEX.gz"));
 
     ONE_STEP("CLEANUP")
   }
