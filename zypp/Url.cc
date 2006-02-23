@@ -179,6 +179,7 @@ namespace zypp
         addUrlByScheme("cd",     ref);
         addUrlByScheme("dvd",    ref);
         addUrlByScheme("dir",    ref);
+        addUrlByScheme("iso",    ref);
         addUrlByScheme("file",   ref);
 
         // don't show empty authority
@@ -190,6 +191,9 @@ namespace zypp
 
         ref.reset( new UrlBase());
         ref->config("require_host",     "m");   // host is mandatory
+        addUrlByScheme("nfs",    ref);
+        addUrlByScheme("smb",    ref);
+        addUrlByScheme("cifs",   ref);
         addUrlByScheme("ftp",    ref);
         addUrlByScheme("http",   ref);
         addUrlByScheme("https",  ref);
