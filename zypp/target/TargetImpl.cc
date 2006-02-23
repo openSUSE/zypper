@@ -216,6 +216,7 @@ namespace zypp
         // create a installation progress report proxy
             RpmInstallPackageReceiver progress(it->resolvable());
             progress.connect();
+            bool success = true;
 
             try {
               progress.tryLevel( target::rpm::InstallResolvableReport::RPM );
@@ -243,29 +244,33 @@ namespace zypp
                 }
                 catch (Exception & excpt_r) {
                   remaining.push_back( *it );
+                  success = false;
                   ZYPP_CAUGHT(excpt_r);
                 }
               }
+            }
+            if (success) {
+	      it->status().setTransact( false, ResStatus::USER );
             }
             progress.disconnect();
           }
           else
           {
+	    bool success = true;
+
             RpmRemovePackageReceiver progress(it->resolvable());
             progress.connect();
             try {
-              rpm().removePackage( p );
+              rpm().removePackage( p, rpm::RpmDb::RPMINST_NODEPS );
             }
             catch (Exception & excpt_r) {
-              ZYPP_CAUGHT(excpt_r);
-              WAR << "Remove failed, retrying with --nodeps" << endl;
-	      try {
-		rpm().removePackage( p, rpm::RpmDb::RPMINST_NODEPS);
-	      }
-	      catch (Exception & excpt_r) {
-		ZYPP_CAUGHT(excpt_r);
-	      }
+	      WAR << "removal of " << p << " failed";
+	      success = false;
+              ZYPP_CAUGHT( excpt_r );
             }
+	    if (success) {
+	      it->status().setTransact( false, ResStatus::USER );
+	    }
             progress.disconnect();
           }
         }
@@ -275,27 +280,35 @@ namespace zypp
           {
             if (it->status().isToBeInstalled())
             { 
+              bool success = false;
               try
               {
                 _storage.storeObject(it->resolvable());
+                success = true;
               }
               catch (Exception & excpt_r)
               {
                 ZYPP_CAUGHT(excpt_r);
                 WAR << "Install of Resolvable from storage failed" << endl;
               }
+              if (success)
+		it->status().setTransact( false, ResStatus::USER );
             }
             else
             {
+              bool success = false;
               try
               {
                 _storage.deleteObject(it->resolvable());
+                success = true;
               }
               catch (Exception & excpt_r)
               {
                 ZYPP_CAUGHT(excpt_r);
                 WAR << "Uninstall of Resolvable from storage failed" << endl;
               }
+              if (success)
+		it->status().setTransact( false, ResStatus::USER );
             }
           }
           else
@@ -417,12 +430,11 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
     {
 	if (it->status().isToBeInstalled())
 	{
-	    if ((*it)->kind() != ResTraits<SrcPackage>::kind) {
-		srclist_r.push_back( *it );
-	    }
-	    else if ((*it)->kind() != ResTraits<Package>::kind) {
+	    if ((*it)->kind() != ResTraits<Package>::kind) {
 		nonpkglist.push_back( *it );
 	    }
+	    else if (it->resolvable()->arch() == Arch_src)
+		srclist_r.push_back( *it );
 	    else
 		instlist_r.push_back( *it );
 	}
