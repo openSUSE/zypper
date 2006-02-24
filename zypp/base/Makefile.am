@@ -24,6 +24,7 @@ baseinclude_HEADERS =	\
 	Fd.h		\
 	KindOf.h	\
 	Gettext.h	\
+	GzStream.h	\
 	IOStream.h	\
 	NonCopyable.h	\
 	ProvideNumericId.h	\
@@ -44,6 +45,7 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_base.la
 lib@PACKAGE@_base_la_SOURCES =	\
 	Fd.cc			\
 	Gettext.cc		\
+	GzStream.cc		\
 	IOStream.cc		\
 	ReferenceCounted.cc	\
 	String.cc		\
