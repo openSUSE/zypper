@@ -104,8 +104,8 @@ namespace zypp
 
     void ZYppImpl::initTarget(const Pathname & root, bool commit_only)
     {
-      if (_target) {
-	WAR << "Repeated call to initTarget()" << endl;
+      if (_target && _target->root() == root) {
+	MIL << "Repeated call to initTarget()" << endl;
         return;
       }
 

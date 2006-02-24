@@ -84,6 +84,11 @@ namespace zypp
       _storage.init(root_r);
       _storage_enabled = true;
     }
+
+    Pathname TargetImpl::root() const
+    {
+      return _root;
+    }
   
     const ResStore & TargetImpl::resolvables()
     {

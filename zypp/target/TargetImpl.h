@@ -80,6 +80,9 @@ namespace zypp
       /** All resolvables in the target. */
       const ResStore & resolvables();
 
+      /** The root set for this target */
+      Pathname root() const;
+
       /** Commit changes in the pool
 	  media = 0 means any/all medias
 	  media > 0 means limit commits to this media */

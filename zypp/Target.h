@@ -89,6 +89,9 @@ namespace zypp
     /** Set the log file for target */
     bool setInstallationLogfile(const Pathname & path_r);
 
+    /** Return the root set for this target */
+    Pathname root() const;
+
   public:
     /** Ctor */
     explicit
