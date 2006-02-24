@@ -104,13 +104,13 @@ class fgzstreambuf : public std::streambuf {
     { return( _mode == std::ios_base::out ); }
 
     fgzstreambuf *
-    open( const char * name_r, std::ios_base::openmode mode_r );
+    open( const char * name_r, std::ios_base::openmode mode_r = std::ios_base::in );
 
     fgzstreambuf *
     close();
 
     /**
-     * The last error returned retuned fron zlib.
+     * The last error returned fron zlib.
      **/
     ZlibError
     zError() const
@@ -178,7 +178,7 @@ class fgzstreambuf : public std::streambuf {
  * reading/writing gzip files.
  *
  * Don't use fXstream directly, but @ref ifgzstream or
- * @ref ofgzstream. fXstream is just to aviod almost
+ * @ref ofgzstream. fXstream is just to avoid almost
  * duplicate code.
  **/
 template<class _BStream,class _StreamBuf>
