@@ -9,6 +9,9 @@
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for control-center2-1:1.99.4.0.200203140655-snap.ximian.1.noarch
 >!> 
@@ -17,6 +20,9 @@
 >!>       delete [package]control-center2-1:1.99.4.0.200203140655-snap.ximian.1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
 >!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for eel2-1.1.7.0.200203140655-snap.ximian.1.noarch
@@ -27,6 +33,9 @@
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for eog2-1:0.114.0.0.200203140655-snap.ximian.1.noarch
 >!> 
@@ -35,6 +44,9 @@
 >!>       delete [package]eog2-1:0.114.0.0.200203140655-snap.ximian.1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
 >!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for gdm2-1:2.3.90.1.0.200203140655-snap.ximian.1.noarch
@@ -45,6 +57,9 @@
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for gedit2-1:1.115.0.0.200203140655-snap.ximian.1.noarch
 >!> 
@@ -53,6 +68,9 @@
 >!>       delete [package]gedit2-1:1.115.0.0.200203140655-snap.ximian.1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
 >!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for gnome-applets2-1:1.96.0.0.200203140655-snap.ximian.1.noarch
@@ -63,6 +81,9 @@
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for gnome-desktop-1.5.12.0.200203140655-snap.ximian.1.noarch
 >!> 
@@ -71,6 +92,9 @@
 >!>       delete [package]gnome-desktop-1.5.12.0.200203140655-snap.ximian.1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
 >!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for gnome-desktop-libs-1.5.12.0.200203140655-snap.ximian.1.noarch
@@ -81,6 +105,9 @@
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for gnome-games2-1:1.90.2.0.200203140655-snap.ximian.1.noarch
 >!> 
@@ -89,6 +116,9 @@
 >!>       delete [package]gnome-games2-1:1.90.2.0.200203140655-snap.ximian.1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
 >!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for gnome-media2-1.176.0.0.200203140655-snap.ximian.1.noarch
@@ -99,6 +129,9 @@
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for gnome-panel-1.5.13.0.200203140655-snap.ximian.1.noarch
 >!> 
@@ -107,6 +140,9 @@
 >!>       delete [package]gnome-panel-1.5.13.0.200203140655-snap.ximian.1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
 >!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for gnome-panel-libs-1.5.13.0.200203140655-snap.ximian.1.noarch
@@ -117,6 +153,9 @@
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for gnome-session-1.5.11.0.200203140655-snap.ximian.1.noarch
 >!> 
@@ -125,6 +164,9 @@
 >!>       delete [package]gnome-session-1.5.11.0.200203140655-snap.ximian.1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
 >!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for gnome-system-monitor-1.1.5.0.200203140655-snap.ximian.1.noarch
@@ -135,6 +177,9 @@
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for gnome-terminal-1.9.1.0.200203140655-snap.ximian.1.noarch
 >!> 
@@ -143,6 +188,9 @@
 >!>       delete [package]gnome-terminal-1.9.1.0.200203140655-snap.ximian.1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
 >!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for gnome-utils2-1:1.101.0.0.200203140655-snap.ximian.1.noarch
@@ -153,6 +201,9 @@
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for gnome-vfs2-1.9.9.0.200203140655-snap.ximian.1.noarch
 >!> 
@@ -161,6 +212,9 @@
 >!>       delete [package]gnome-vfs2-1.9.9.0.200203140655-snap.ximian.1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
 >!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for libbonoboui-1.112.1.0.200203140655-snap.ximian.1.noarch
@@ -171,6 +225,9 @@
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for libgnome-1.112.1.0.200203140655-snap.ximian.1.noarch
 >!> 
@@ -179,6 +236,9 @@
 >!>       delete [package]libgnome-1.112.1.0.200203140655-snap.ximian.1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
 >!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for libgnomeui-1.112.1.0.200203140655-snap.ximian.1.noarch
@@ -189,6 +249,9 @@
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for nautilus-gtkhtml-0.3.0.200203140655-snap.ximian.1.noarch
 >!> 
@@ -198,6 +261,9 @@
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
 >!> Problem:
 >!> Can't satisfy requirement libgconf-2.so.4 for nautilus2-1.1.9.0.200203140655-snap.ximian.1.noarch
 >!> 
@@ -206,4 +272,7 @@
 >!>       delete [package]nautilus2-1.1.9.0.200203140655-snap.ximian.1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
 >!>       
