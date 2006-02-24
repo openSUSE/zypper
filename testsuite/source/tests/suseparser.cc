@@ -10,7 +10,10 @@
 #include "zypp/Package.h"
 #include "zypp/Selection.h"
 #include "zypp/Pattern.h"
+#include "zypp/Patch.h"
 #include "zypp/Product.h"
+#include "zypp/Script.h"
+#include "zypp/Message.h"
 #include "zypp/Dependencies.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/LogControl.h"
@@ -64,21 +67,33 @@ int main( int argc, char * argv[] )
     int pkgcount = 0;
     int selcount = 0;
     int patcount = 0;
+    int pchcount = 0;
     int prdcount = 0;
+    int scrcount = 0;
+    int msgcount = 0;
     for (ResStore::iterator it = store.begin(); it != store.end(); ++it) {
 	Package::constPtr pkg = asKind<Package>(*it);
 	Selection::constPtr sel = asKind<Selection>(*it);
 	Pattern::constPtr pat = asKind<Pattern>(*it);
+	Patch::constPtr pch = asKind<Patch>(*it);
 	Product::constPtr prd = asKind<Product>(*it);
+	Script::constPtr scr = asKind<Script>(*it);
+	Message::constPtr msg = asKind<Message>(*it);
 	if (pkg != NULL) ++pkgcount;
 	if (sel != NULL) ++selcount;
 	if (pat != NULL) ++patcount;
+	if (pch != NULL) ++pchcount;
 	if (prd != NULL) ++prdcount;
+	if (scr != NULL) ++scrcount;
+	if (msg != NULL) ++msgcount;
     }
     INT << "Found " << store.size() << " resolvables" << endl;
     INT << "\t" << pkgcount << " packages" << endl;
     INT << "\t" << selcount << " selections" << endl;
     INT << "\t" << patcount << " patterns" << endl;
+    INT << "\t" << pchcount << " patches" << endl;
+    INT << "\t" << scrcount << " scripts" << endl;
+    INT << "\t" << msgcount << " messages" << endl;
     INT << "\t" << prdcount << " products" << endl;
 
     if (argpos < argc) {
