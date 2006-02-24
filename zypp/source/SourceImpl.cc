@@ -100,7 +100,7 @@ namespace zypp
 
     const ResStore & SourceImpl::resolvables(zypp::Resolvable::Kind kind) const
     {
-      ResStore result;
+      static ResStore result;
       // FIXME      
       return result;
     }
