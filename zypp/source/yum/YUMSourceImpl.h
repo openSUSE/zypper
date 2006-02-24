@@ -13,6 +13,8 @@
 #define ZYPP_SOURCE_YUM_YUMSOURCEIMPL_H
 
 #include "zypp/source/SourceImpl.h"
+#include "zypp/detail/ResImplTraits.h"
+#include "zypp/source/yum/YUMPackageImpl.h"
 #include "zypp/parser/yum/YUMParserData.h"
 #include "zypp/Package.h"
 #include "zypp/Message.h"
@@ -61,10 +63,10 @@ namespace zypp
 	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMPrimaryData & parsed,
 	  const zypp::parser::yum::YUMFileListData & filelist,
-	  const zypp::parser::yum::YUMOtherData & other
+	  const zypp::parser::yum::YUMOtherData & other,
+	  zypp::detail::ResImplTraits<zypp::source::yum::YUMPackageImpl>::Ptr & impl
 	);
-	Package::Ptr createPackage(
-	  Source_Ref source_r,
+	void augmentPackage(
 	  const zypp::parser::yum::YUMPatchPackage & parsed
 	);
 	Selection::Ptr createGroup(
@@ -115,52 +117,15 @@ namespace zypp
 
 	std::list<Pathname> _metadata_files;
 
-	class PackageID {
-	public:
-	  PackageID(std::string name,
-		    std::string ver,
-		    std::string rel,
-		    std::string arch)
-	  : _name(name)
-	  , _ver(ver)
-	  , _rel(rel)
-	  , _arch(arch)
-	  {};
-	  static int compare( const PackageID & lhs, const PackageID & rhs )
-	  {
-	    if (lhs._name < rhs._name)
-	      return 1;
-	    if (lhs._name > rhs._name)
-	      return -1;
-	    if (lhs._ver < rhs._ver)
-	      return 1;
-	    if (lhs._ver > rhs._ver)
-	      return -1;
-	    if (lhs._rel < rhs._rel)
-	      return 1;
-	    if (lhs._rel > rhs._rel)
-	      return -1;
-	    if (lhs._arch < rhs._arch)
-	      return 1;
-	    if (lhs._arch > rhs._arch)
-	      return -1;
-	    return 0;
-	  }
-	  std::string name() { return _name; }
-	  std::string ver() { return _ver; }
-	  std::string rel() { return _rel; }
-	  std::string arch() { return _arch; }
-	private:
-	  std::string _name;
-	  std::string _ver;
-	  std::string _rel;
-	  std::string _arch;
-	};
-	friend inline bool operator<( const YUMSourceImpl::PackageID & lhs, const YUMSourceImpl::PackageID & rhs );
-      };
+	typedef struct {
+	    zypp::detail::ResImplTraits<zypp::source::yum::YUMPackageImpl>::Ptr impl;
+	    zypp::Package::Ptr package;
+	} ImplAndPackage;
 
-      inline bool operator<( const YUMSourceImpl::PackageID & lhs, const YUMSourceImpl::PackageID & rhs )
-      { return YUMSourceImpl::PackageID::compare( lhs, rhs ) == -1; }
+	typedef std::map<zypp::NVRA, ImplAndPackage> PackageImplMapT;
+	PackageImplMapT _package_impl;
+
+      };
 
       ///////////////////////////////////////////////////////////////////
     } // namespace yum

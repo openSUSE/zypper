@@ -19,6 +19,7 @@
 #include "zypp/source/yum/YUMGroupImpl.h"
 #include "zypp/source/yum/YUMPatternImpl.h"
 
+#include "zypp/NVRA.h"
 #include "zypp/PathInfo.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
@@ -177,8 +178,8 @@ namespace zypp
 
       try {
 	  // now put other and filelist data to structures for easier find
-	  map<PackageID, YUMFileListData_Ptr> files_data;
-	  map<PackageID, YUMOtherData_Ptr> other_data;
+	  map<NVRA, YUMFileListData_Ptr> files_data;
+	  map<NVRA, YUMOtherData_Ptr> other_data;
 	  for (std::list<YUMRepomdData_Ptr>::const_iterator it
 		  = repo_files.begin();
 	      it != repo_files.end();
@@ -198,11 +199,10 @@ namespace zypp
 		  ! filelist.atEnd();
 		  ++filelist)
 	    {
-		PackageID id((*filelist)->name,
-			    (*filelist)->ver,
-			    (*filelist)->rel,
-			    (*filelist)->arch);
-		files_data[id] = *filelist;
+		NVRA nvra( (*filelist)->name,
+			   Edition( (*filelist)->ver, (*filelist)->rel, str::strtonum<int>( (*filelist)->epoch ) ),
+			   Arch ( (*filelist)->arch ) );
+		files_data[nvra] = *filelist;
 	    }
 	    if (filelist.errorStatus())
 	      throw *filelist.errorStatus();
@@ -226,11 +226,10 @@ namespace zypp
 		  ! other.atEnd();
 		  ++other)
 	    {
-		PackageID id((*other)->name,
-			    (*other)->ver,
-			    (*other)->rel,
-			    (*other)->arch);
-		other_data[id] = *other;
+		NVRA nvra( (*other)->name,
+			   Edition( (*other)->ver, (*other)->rel, str::strtonum<int>( (*other)->epoch ) ),
+			   Arch( (*other)->arch ) );
+		other_data[nvra] = *other;
 	    }
 	    if (other.errorStatus())
 	      throw *other.errorStatus();
@@ -254,17 +253,17 @@ namespace zypp
 		  !prim.atEnd();
 		  ++prim)
 	    {
-		PackageID id((*prim)->name,
-			 (*prim)->ver,
-			 (*prim)->rel,
-			 (*prim)->arch);
-		map<PackageID, YUMOtherData_Ptr>::iterator found_other
-		    = other_data.find(id);
-		map<PackageID, YUMFileListData_Ptr>::iterator found_files
-		    = files_data.find(id);
+		NVRA nvra( (*prim)->name,
+			   Edition( (*prim)->ver, (*prim)->rel, str::strtonum<int>( (*prim)->epoch ) ),
+			   Arch( (*prim)->arch ) );
+		map<NVRA, YUMOtherData_Ptr>::iterator found_other
+		    = other_data.find( nvra );
+		map<NVRA, YUMFileListData_Ptr>::iterator found_files
+		    = files_data.find( nvra );
   
 		YUMFileListData filelist_empty;
 		YUMOtherData other_empty;
+		ResImplTraits<YUMPackageImpl>::Ptr impl;
 		Package::Ptr p = createPackage(
 		  source_r,
 		  **prim,
@@ -273,8 +272,11 @@ namespace zypp
 		    : filelist_empty,
 		  found_other != other_data.end()
 		    ? *found_other->second
-	       	     : other_empty
+	       	     : other_empty,
+		  impl
 		);
+		ImplAndPackage iap = { impl, p };
+		_package_impl[nvra] = iap;
 		_store.insert (p);
 	    }
 	    if (prim.errorStatus())
@@ -461,21 +463,21 @@ namespace zypp
     Source_Ref source_r,
     const zypp::parser::yum::YUMPrimaryData & parsed,
     const zypp::parser::yum::YUMFileListData & filelist,
-    const zypp::parser::yum::YUMOtherData & other
+    const zypp::parser::yum::YUMOtherData & other,
+    ResImplTraits<YUMPackageImpl>::Ptr & impl
   )
   {
     try
     {
-      ResImplTraits<YUMPackageImpl>::Ptr impl(
-	new YUMPackageImpl(source_r, parsed, filelist, other));
+      impl = new YUMPackageImpl( source_r, parsed, filelist, other );
 
-	    // Collect basic Resolvable data
-	    NVRAD dataCollect( parsed.name,
-		              Edition( parsed.ver, parsed.rel, parsed.epoch ),
-		              Arch( parsed.arch ),
-		              createDependencies(parsed,
-		                                  ResTraits<Package>::kind)
-		            );
+      // Collect basic Resolvable data
+      NVRAD dataCollect( parsed.name,
+			 Edition( parsed.ver, parsed.rel, parsed.epoch ),
+			 Arch( parsed.arch ),
+			 createDependencies( parsed,
+					   ResTraits<Package>::kind )
+		       );
       Package::Ptr package = detail::makeResolvableFromImpl(
 	dataCollect, impl
       );
@@ -488,31 +490,86 @@ namespace zypp
     }
   }
 
-  Package::Ptr YUMSourceImpl::createPackage(
-    Source_Ref source_r,
+  static void augmentCapSet( const CapSet & from, CapSet & to )
+  {
+    for (CapSet::const_iterator it = from.begin(); it != from.end(); ++it) {
+	to.insert( *it );
+    }
+    return;
+  }
+
+  static void augmentDependencies( const Dependencies & from, Dependencies & to )
+  {
+MIL << "augmentDependencies(" << from << ")" << endl;
+#define AUG_CAP_SET(tag) augmentCapSet( from[Dep::tag], to[Dep::tag] )
+      AUG_CAP_SET(PROVIDES);
+      AUG_CAP_SET(REQUIRES);
+      AUG_CAP_SET(PREREQUIRES);
+      AUG_CAP_SET(OBSOLETES);
+      AUG_CAP_SET(CONFLICTS);
+      AUG_CAP_SET(FRESHENS);
+      AUG_CAP_SET(RECOMMENDS);
+      AUG_CAP_SET(SUGGESTS);
+      AUG_CAP_SET(SUPPLEMENTS);
+      AUG_CAP_SET(ENHANCES);
+#undef AUG_CAP_SET
+MIL << "=> (" << to << ")" << endl;
+  }
+
+  void YUMSourceImpl::augmentPackage(
     const zypp::parser::yum::YUMPatchPackage & parsed
   )
   {
     try
     {
-      ResImplTraits<YUMPackageImpl>::Ptr impl(new YUMPackageImpl(source_r, parsed));
+	NVRA nvra( parsed.name,
+		   Edition( parsed.ver, parsed.rel, parsed.epoch ),
+		   Arch( parsed.arch ) );
 
-	    // Collect basic Resolvable data
-	    NVRAD dataCollect( parsed.name,
-		              Edition( parsed.ver, parsed.rel, parsed.epoch ),
-		              Arch( parsed.arch ),
-		              createDependencies(parsed,
-		                                  ResTraits<Package>::kind)
-		            );
-      Package::Ptr package = detail::makeResolvableFromImpl(
-	dataCollect, impl
-      );
-      return package;
+DBG << "augmentPackage(" << nvra << ")" << endl;
+
+	PackageImplMapT::const_iterator it = _package_impl.find( nvra );
+	if (it == _package_impl.end()) {
+	    ERR << "Patch augments non-existant package " << nvra << endl;
+	    return;
+	}
+	ResImplTraits<YUMPackageImpl>::Ptr impl = it->second.impl;
+	Package::Ptr package = it->second.package;
+DBG << "found " << *package << ", impl " << impl << endl;
+
+	_store.erase( package );
+	impl->unmanage();
+DBG << "Erased old package " << endl;
+
+	Dependencies deps = createDependencies( parsed, ResTraits<Package>::kind );
+
+DBG << "augmenting " << deps << endl;
+
+	augmentDependencies( package->deps(), deps );
+
+DBG << "augmenting done " << endl;
+
+	// Collect augmented package data
+	NVRAD dataCollect( nvra, deps );
+
+DBG << "NVRAD " << (NVRA)dataCollect << endl;
+
+	Package::Ptr augmented_package = detail::makeResolvableFromImpl(
+	    dataCollect, impl
+	);
+
+DBG << "augmented_package " << *augmented_package << endl;
+
+DBG << "Inserting augmented package " << endl;
+	_store.insert( augmented_package );
+DBG << "Done" << endl;
+	return;
     }
     catch (const Exception & excpt_r)
     {
       ERR << excpt_r << endl;
-      throw "Cannot create package object";
+      ZYPP_CAUGHT( excpt_r );
+      throw "Cannot create augmented package object";
     }
   }
 
@@ -524,11 +581,11 @@ namespace zypp
     try
     {
       ResImplTraits<YUMGroupImpl>::Ptr impl(new YUMGroupImpl(source_r, parsed));
-	    // Collect basic Resolvable data
-	    NVRAD dataCollect( parsed.groupId,
-		              Edition::noedition,
-		              Arch_noarch,
-		              createGroupDependencies(parsed));
+      // Collect basic Resolvable data
+      NVRAD dataCollect( parsed.groupId,
+		      Edition::noedition,
+		      Arch_noarch,
+		      createGroupDependencies(parsed));
       Selection::Ptr group = detail::makeResolvableFromImpl(
 	dataCollect, impl
       );
@@ -549,11 +606,11 @@ namespace zypp
     try
     {
       ResImplTraits<YUMPatternImpl>::Ptr impl(new YUMPatternImpl(source_r, parsed));
-	    // Collect basic Resolvable data
-	    NVRAD dataCollect( parsed.name,
-		              Edition::noedition,
-		              Arch_noarch,
-		              createDependencies(parsed, ResTraits<Pattern>::kind));
+      // Collect basic Resolvable data
+      NVRAD dataCollect( parsed.name,
+		      Edition::noedition,
+		      Arch_noarch,
+		      createDependencies(parsed, ResTraits<Pattern>::kind));
       Pattern::Ptr pattern = detail::makeResolvableFromImpl(
 	dataCollect, impl
       );
@@ -577,11 +634,11 @@ namespace zypp
 
 	    // Collect basic Resolvable data
 	    NVRAD dataCollect( parsed.name,
-		              Edition( parsed.ver, parsed.rel, parsed.epoch ),
-		              Arch_noarch,
-		              createDependencies(parsed,
-		                                  ResTraits<Message>::kind)
-		            );
+			      Edition( parsed.ver, parsed.rel, parsed.epoch ),
+			      Arch_noarch,
+			      createDependencies(parsed,
+						  ResTraits<Message>::kind)
+			    );
       Message::Ptr message = detail::makeResolvableFromImpl(
 	dataCollect, impl
       );
@@ -603,13 +660,13 @@ namespace zypp
     {
       ResImplTraits<YUMScriptImpl>::Ptr impl(new YUMScriptImpl(source_r, parsed));
 
-	    // Collect basic Resolvable data
-	    NVRAD dataCollect( parsed.name,
-		              Edition( parsed.ver, parsed.rel, parsed.epoch ),
-		              Arch_noarch,
-		              createDependencies(parsed,
-		                                  ResTraits<Script>::kind)
-		            );
+      // Collect basic Resolvable data
+      NVRAD dataCollect( parsed.name,
+		      Edition( parsed.ver, parsed.rel, parsed.epoch ),
+		      Arch_noarch,
+		      createDependencies(parsed,
+					  ResTraits<Script>::kind)
+		    );
       Script::Ptr script = detail::makeResolvableFromImpl(
 	dataCollect, impl
       );
@@ -633,11 +690,11 @@ namespace zypp
 
 	    // Collect basic Resolvable data
 	    NVRAD dataCollect( parsed.name,
-		              Edition( parsed.ver, parsed.rel, parsed.epoch ),
-		              Arch_noarch,
-		              createDependencies(parsed,
-		                                  ResTraits<Product>::kind)
-		            );
+			      Edition( parsed.ver, parsed.rel, parsed.epoch ),
+			      Arch_noarch,
+			      createDependencies(parsed,
+						  ResTraits<Product>::kind)
+			    );
       Product::Ptr product = detail::makeResolvableFromImpl(
 	dataCollect, impl
       );
@@ -659,13 +716,13 @@ namespace zypp
     {
       ResImplTraits<YUMPatchImpl>::Ptr impl(new YUMPatchImpl(source_r, parsed, *this));
 
-	    // Collect basic Resolvable data
-	    NVRAD dataCollect( parsed.name,
-		              Edition( parsed.ver, parsed.rel, parsed.epoch ),
-		              Arch_noarch,
-		              createDependencies(parsed,
-		                                  ResTraits<Patch>::kind)
-		            );
+      // Collect basic Resolvable data
+      NVRAD dataCollect( parsed.name,
+		      Edition( parsed.ver, parsed.rel, parsed.epoch ),
+		      Arch_noarch,
+		      createDependencies( parsed,
+					  ResTraits<Patch>::kind)
+		    );
       Patch::Ptr patch = detail::makeResolvableFromImpl(
 	dataCollect, impl
       );
