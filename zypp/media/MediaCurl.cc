@@ -161,9 +161,10 @@ void MediaCurl::attachTo (bool next)
   ** Don't block "forever" on system calls. Curl seems to
   ** recover nicely, if the ftp server has e.g. a 30sec
   ** timeout. If required, it closes the connection, trys
-  ** to reopen and fetch it without to report any error.
+  ** to reopen and fetch it - this works in many cases
+  ** without to report any error to us.
   */
-  ret = curl_easy_setopt( _curl, CURLOPT_TIMEOUT, 60 );
+  ret = curl_easy_setopt( _curl, CURLOPT_TIMEOUT, 180 );
   if ( ret != 0 ) {
     ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
