@@ -1,6 +1,6 @@
 >!> Locking A from channel test
 >!> Installing B from channel test
 >!> Solution #1:
->!> install AA-1.0-1[test]
->!> install B-1.0-1[test]
+>!> install AA-1.0-1.noarch[test]
+>!> install B-1.0-1.noarch[test]
 >!> installs=2, upgrades=0, uninstalls=0

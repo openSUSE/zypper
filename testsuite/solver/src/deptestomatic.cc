@@ -180,28 +180,6 @@ string2kind (const std::string & str)
 
 //---------------------------------------------------------------------------
 
-#warning Locks not implemented
-#if 0
-static void
-lock_poolItem (PoolItem_Ref poolItem)
-{
-    RCResItemDep *dep;
-    RCResItemMatch *match;
-
-    dep = rc_poolItem_dep_new_from_spec (RC_RESOLVABLE_SPEC (poolItem),
-					RC_RELATION_EQUAL, RC_TYPE_RESOLVABLE,
-					RC_CHANNEL_ANY, false, false);
-
-    match = rc_poolItem_match_new ();
-    rc_poolItem_match_set_dep (match, dep);
-
-    rc_poolItem_dep_unref (dep);
-
-    rc_world_add_lock (rc_get_world (), match);
-}
-
-#endif	// 0
-
 /* ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** */
 
 //==============================================================================================================================
@@ -807,10 +785,7 @@ parse_xml_setup (XmlNode_Ptr node)
 	    poolItem = get_poolItem (source_alias, package_name, kind_name);
 	    if (poolItem) {
 		RESULT << "Locking " << package_name << " from channel " << source_alias << endl;
-#warning Needs locks
-#if 0
-		r->setLocked (true);
-#endif
+		poolItem.status().setLock (true, ResStatus::USER);
 	    } else {
 		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
 	    }

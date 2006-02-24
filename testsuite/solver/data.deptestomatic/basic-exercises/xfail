@@ -22,8 +22,6 @@ exercise-40-test.xml
 exercise-44-test.xml
 # or dependency
 exercise-47-test.xml
-# lock
-exercise-58-test.xml
 # as we solve over the pool the packages will be used ADDITIONALLY
 exercise-22-test.xml
 #s390
