@@ -64,9 +64,12 @@ namespace zypp
       {
         if ( cand )
           {
-            if ( inst )
-              inst.status().setTransact( false, by_r );
-            return cand.status().setTransact( true, by_r );
+	      if ( inst ) {
+		  inst.status().setTransact( false, by_r );
+		  inst.status().setLock( false, by_r );
+	      }
+	      cand.status().setLock( false, by_r );	      
+	      return cand.status().setTransact( true, by_r );
           }
         return false;
       }
@@ -77,6 +80,7 @@ namespace zypp
           {
             if ( cand )
               cand.status().setTransact( false, by_r );
+	    inst.status().setLock( false, by_r );	    
             return inst.status().setTransact( true, by_r );
           }
         return false;
@@ -84,12 +88,35 @@ namespace zypp
 
       bool unset( ResStatus::TransactByValue by_r ) const
       {
-        if ( inst )
-          inst.status().setTransact( false, by_r );
-        if ( cand )
-          cand.status().setTransact( false, by_r );
-        return true;
+	  if ( inst ) {
+	      inst.status().setTransact( false, by_r );
+	      inst.status().setLock( false, by_r );
+	  }
+	  if ( cand ) {
+	      cand.status().setTransact( false, by_r );
+	      cand.status().setLock( false, by_r );
+	  }
+	  return true;
       }
+
+      bool setProtected( ResStatus::TransactByValue by_r ) const
+      {
+	  if ( inst ) {
+	      inst.status().setTransact( false, by_r );	      
+	      return inst.status().setLock( true, by_r );
+	  } else
+	      return false;	  
+      }
+	
+      bool setTaboo( ResStatus::TransactByValue by_r ) const
+      {
+	  if ( cand ) {
+	      cand.status().setTransact( false, by_r );	      
+	      return cand.status().setLock( true, by_r );
+	  } else
+	      return false;
+      }
+	
 
     public:
       const Selectable::Impl & _impl;
@@ -104,10 +131,6 @@ namespace zypp
     //
     ///////////////////////////////////////////////////////////////////
 
-    /**
-     * \todo Still open questions in state calculation;
-     * neglecting TABOO/PROTECTED
-    */
     Status Selectable::Impl::status() const
     {
       PoolItem cand( candidateObj() );
@@ -125,12 +148,15 @@ namespace zypp
           return( installedObj().status().isByUser() ? S_Del : S_AutoDel );
         }
 
+      if ( installedObj() && installedObj().status().isLocked() )
+	  return S_Protected;
+
+      if ( !installedObj() && cand && cand.status().isLocked() )
+	  return S_Taboo;
+      
       return( installedObj() ? S_KeepInstalled : S_NoInst );
     }
 
-    /**
-     * \todo Neglecting TABOO/PROTECTED
-    */
     bool Selectable::Impl::set_status( const Status state_r )
     {
       StatusHelper self( *this );
@@ -138,9 +164,9 @@ namespace zypp
       switch ( state_r )
         {
         case S_Protected:
+	    return self.setProtected( ResStatus::USER );	    
         case S_Taboo:
-          return false;
-
+	    return self.setTaboo( ResStatus::USER );
         case S_AutoDel:
         case S_AutoInstall:
         case S_AutoUpdate:
