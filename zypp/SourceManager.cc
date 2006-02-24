@@ -180,13 +180,21 @@ namespace zypp
 	    : it->second->cacheDir().asString(); // we should strip root here
 
 	// FIXME: product_dir
-	store.storeSource( descr );
 
 	if( metadata_cache && it->second->cacheDir().empty() )
 	{
 	    filesystem::assert_dir ( root_r.asString() + descr.cache_dir );
-	    it->second->storeMetadata( root_r.asString() + descr.cache_dir );
+	    
+	    try {
+		it->second->storeMetadata( root_r.asString() + descr.cache_dir );
+	    }
+	    catch(...) {
+		WAR << "Creating local metadata cache failed, not using cache" << endl;
+		descr.cache_dir = "";
+	    }
 	}
+
+	store.storeSource( descr );
     }
 
     for( SourceMap::iterator it = _deleted_sources.begin(); it != _deleted_sources.end(); it++)
