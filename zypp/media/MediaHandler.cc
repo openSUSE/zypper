@@ -104,7 +104,7 @@ MediaHandler::removeAttachPoint()
     return; // no cleanup if media still mounted!
   }
 
-  INT << "MediaHandler - checking if to remove attach point" << endl;
+  DBG << "MediaHandler - checking if to remove attach point" << endl;
   if ( _attachPoint.unique() &&
        _attachPoint->temp    &&
        !_attachPoint->path.empty() &&
@@ -125,7 +125,7 @@ MediaHandler::removeAttachPoint()
   else
   {
     if( !_attachPoint->temp)
-      INT << "MediaHandler - attachpoint is not temporary" << endl;
+      DBG << "MediaHandler - attachpoint is not temporary" << endl;
   }
 }
 
