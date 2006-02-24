@@ -296,14 +296,11 @@ MIL << "found installed " << installed << " for item " << candidate << endl;
       }
     }
 
-#warning FIXME needs locks
-#if 0
-    if ( item->isLocked() ) {
+    if ( item.status().isLocked() ) {
       MIL << "doUpgrade available: SKIP taboo candidate " << item << endl;
       ++opt_stats_r.pre_nocand;
       continue;
     }
-#endif
 
     ++opt_stats_r.pre_avcand;
 #warning this should add the best candidate
@@ -416,15 +413,12 @@ MIL << "split matched !" << endl;
       continue;
     }
 
-#warning This needs locks
-#if 0
-    if ( (*it)->is_taboo() ) {
-      MIL << "SKIP taboo: " << (*it)->installedObj() << endl;
+    if ( (*it).status().isLocked() ) {
+      MIL << "SKIP taboo: " << (*it) << endl;
       ++opt_stats_r.chk_is_taboo;
       _update_items.push_back ( *it ); // remember in problem list ?
       continue;
     }
-#endif
 
     CandidateMap::iterator cand_it = candidatemap.find(installed);
 

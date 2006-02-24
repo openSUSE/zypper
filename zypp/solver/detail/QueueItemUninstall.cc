@@ -313,16 +313,14 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
     if (status.staysInstalled()) {
 
-#warning Needs Locks
-#if 0
 	if (! _explicitly_requested
-	    && pool().itemIsLocked (_item)) {
+	    && _item.status().isLocked()) {
 
 	    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALL_LOCKED, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
 	    context->addError (misc_info);
 	    goto finished;
 	}
-#endif
+	
 	this->logInfo (context);
 
 	if (_cap_leading_to_uninstall != Capability()		// non-empty _cap_leading_to_uninstall

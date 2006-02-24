@@ -149,9 +149,7 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 		_item.status().setToBeUninstalled (ResStatus::USER);
 	    break;
 	case UNLOCK:
-	    ERR << "Not implemented yet" << endl;
-	    ret = false;
-#warning Unlocking items not implemented
+	    _item.status().setLock (false, ResStatus::USER);
 	    break;
 	default:
 	    ERR << "Wrong TransactionKind" << endl;

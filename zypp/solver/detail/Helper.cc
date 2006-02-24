@@ -124,8 +124,9 @@ class LookForUpdate : public resfilter::PoolItemFilterFunctor
 
     bool operator()( PoolItem_Ref provider )
     {
-	if (!uninstalled							// none yet
+	if ((!uninstalled							// none yet
 	    || uninstalled->edition().compare( provider->edition() ) < 0)	// or a better one
+	    && !provider.status().isLocked())					// is not locked
 	{
 	    uninstalled = provider;						// store 
 	}
@@ -141,7 +142,6 @@ PoolItem_Ref
 Helper::findUpdateItem (const ResPool & pool, PoolItem_Ref item)
 {
     LookForUpdate info;
-#warning FIXME, should not report locked update candidates.
 
     invokeOnEach( pool.byNameBegin( item->name() ),
 		  pool.byNameEnd( item->name() ),
@@ -164,8 +164,12 @@ class LookForReinstall : public resfilter::PoolItemFilterFunctor
 
     bool operator()( PoolItem_Ref provider )
     {
-	uninstalled = provider;
-	return false;				// stop here, we found it
+	if (provider.status().isLocked()) {
+	    return true; // search next
+	} else {
+	    uninstalled = provider;
+	    return false;				// stop here, we found it
+	}
     }
 };
 
@@ -174,7 +178,6 @@ PoolItem_Ref
 Helper::findReinstallItem (const ResPool & pool, PoolItem_Ref item)
 {
     LookForReinstall info;
-#warning FIXME, should not report locked update candidates.
 
     invokeOnEach( pool.byNameBegin( item->name() ),
 		  pool.byNameEnd( item->name() ),

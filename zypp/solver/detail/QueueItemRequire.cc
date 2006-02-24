@@ -186,8 +186,7 @@ struct RequireProcess
 	if (! (status.isToBeUninstalled() || status.isImpossible())
 	    && ! context->isParallelInstall( provider )
 	    && context->itemIsPossible( provider )
-#warning Locks not implemented
-//	    && ! pool->itemIsLocked( provider )
+	    && ! provider.status().isLocked() 
 	) {
 
 	    // if we found a to-be-installed provider, choose this and drop all others
@@ -250,12 +249,9 @@ struct NoInstallableProviders
 		  || ! context->itemIsPossible (provider)) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NOT_INSTALLABLE_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);
-#warning Locks not implemented
-#if 0
-	} else if (pool->itemIsLocked (provider)) {
+	} else if (provider.status().isLocked()) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_LOCKED_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);
-#endif
  	}
 
 	if (misc_info != NULL) {
