@@ -20,6 +20,7 @@
 
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
+#include "zypp/Resolvable.h"
 
 #include "zypp/media/MediaManager.h"
 
@@ -67,6 +68,9 @@ namespace zypp
 
     /** All resolvables provided by this source. */
     const ResStore & resolvables() const;
+
+    /** All resolvables of a given kind provided by this source. */
+    const ResStore & resolvables(zypp::Resolvable::Kind kind) const;
 
     /** Provide a file to local filesystem */
     const Pathname provideFile(const Pathname & file_r,

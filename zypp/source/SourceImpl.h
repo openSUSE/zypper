@@ -81,6 +81,7 @@ namespace zypp
       const ResStore & resolvables(Source_Ref) const
       { return resolvables(); }
       const ResStore & resolvables() const;
+      const ResStore & resolvables(zypp::Resolvable::Kind kind) const;
 
       /**
        * Provide a file to local filesystem

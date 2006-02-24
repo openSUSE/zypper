@@ -98,6 +98,13 @@ namespace zypp
       return _store;
      }
 
+    const ResStore & SourceImpl::resolvables(zypp::Resolvable::Kind kind) const
+    {
+      ResStore result;
+      // FIXME      
+      return result;
+    }
+
     const Pathname SourceImpl::provideFile(const Pathname & file_r,
 					   const unsigned media_nr,
 					   bool cached,
