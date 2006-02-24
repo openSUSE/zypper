@@ -87,14 +87,14 @@ int main( int argc, char * argv[] )
 	if (scr != NULL) ++scrcount;
 	if (msg != NULL) ++msgcount;
     }
-    INT << "Found " << store.size() << " resolvables" << endl;
-    INT << "\t" << pkgcount << " packages" << endl;
-    INT << "\t" << selcount << " selections" << endl;
-    INT << "\t" << patcount << " patterns" << endl;
-    INT << "\t" << pchcount << " patches" << endl;
-    INT << "\t" << scrcount << " scripts" << endl;
-    INT << "\t" << msgcount << " messages" << endl;
-    INT << "\t" << prdcount << " products" << endl;
+    std::cout << "Found " << store.size() << " resolvables" << endl;
+    std::cout << "\t" << pkgcount << " packages" << endl;
+    std::cout << "\t" << selcount << " selections" << endl;
+    std::cout << "\t" << patcount << " patterns" << endl;
+    std::cout << "\t" << pchcount << " patches" << endl;
+    std::cout << "\t" << scrcount << " scripts" << endl;
+    std::cout << "\t" << msgcount << " messages" << endl;
+    std::cout << "\t" << prdcount << " products" << endl;
 
     if (argpos < argc) {
 	int count = 0;
