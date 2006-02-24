@@ -1,6 +1,8 @@
 // test for SUSE Source
 //
 
+#include <string.h>
+
 #include <iostream>
 #include <fstream>
 #include <map>
@@ -14,6 +16,8 @@
 #include "zypp/base/LogControl.h"
 #include "zypp/SourceFactory.h"
 #include "zypp/Source.h"
+#include "zypp/ZYpp.h"
+#include "zypp/ZYppFactory.h"
 #include "zypp/source/SourceImpl.h"
 #include "zypp/media/MediaManager.h"
 
@@ -31,15 +35,24 @@ using namespace zypp;
 int main( int argc, char * argv[] )
 {
     if (argc < 2) {
-	cerr << "Usage: suseparse <susedir> [all|reallyall]" << endl;
+	cerr << "Usage: suseparse [--arch x] <susedir> [all|reallyall]" << endl;
 	exit (1);
     }
     zypp::base::LogControl::instance().logfile( "-" );
 
     INT << "===[START]==========================================" << endl;
 
+    ZYpp::Ptr God = zypp::getZYpp();
+
+    int argpos = 1;
+
+    if (strcmp( argv[argpos], "--arch") == 0) {
+	++argpos;
+	God->setArchitecture( Arch( argv[argpos] ) );
+	++argpos;
+    }
     Pathname p;
-    Url url(argv[1]);
+    Url url( argv[argpos++] );
     string alias("suseparse");
     Locale lang( "en" );
 
@@ -68,12 +81,12 @@ int main( int argc, char * argv[] )
     INT << "\t" << patcount << " patterns" << endl;
     INT << "\t" << prdcount << " products" << endl;
 
-    if (argc > 2) {
+    if (argpos < argc) {
 	int count = 0;
 	for (ResStore::iterator it = store.begin(); it != store.end(); ++it) {
 	    ResObject::Ptr robj = *it;
 	    MIL << ++count << *robj << endl;
-	    if (strcmp(argv[2], "reallyall") == 0) {
+	    if (strcmp(argv[argpos], "reallyall") == 0) {
 		const Dependencies & deps = robj->deps();
 		MIL << deps << endl;
 	    }
