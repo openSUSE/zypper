@@ -380,11 +380,18 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 	ResolverInfoList addList;
 	for (ResolverInfoList::const_iterator iter = _log.begin(); iter != _log.end(); iter++) {
 	    ResolverInfo_Ptr info = *iter;
-//	    if (info->affected() == item
-	    if (info->type() == RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL
-		    || info->type() == RESOLVER_INFO_TYPE_NO_PROVIDER
-		    || info->type() == RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER
-		    || info->type() == RESOLVER_INFO_TYPE_CANT_SATISFY)
+	    if (info->type() == RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL) {
+		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		if (info->affected() == item
+		    || misc_info->other() == item) {
+		    // put the info on the end as error
+		    found = true;
+		    addList.push_back (info);
+		}
+	    } else if (	((info->type() == RESOLVER_INFO_TYPE_NO_PROVIDER
+			  || info->type() == RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER
+			  && info->affected() == item))
+			|| info->type() == RESOLVER_INFO_TYPE_CANT_SATISFY)
 	    {
 		// put the info on the end as error
 		found = true;

@@ -448,8 +448,21 @@ Resolver::problems (void) const
 		// uninstall
 		problem->addSolution (new ProblemSolutionUninstall (problem, item)); 
 		
-		// Unflag requirement
-		problem->addSolution (new ProblemSolutionIgnoreRequires (problem, item, misc_info->capability())); 
+		// Unflag requirement for this item
+		problem->addSolution (new ProblemSolutionIgnoreRequires (problem, item, misc_info->capability()));
+		
+		// Unflag ALL require
+		// Evaluating all require Items
+		AllRequires info;
+		Dep dep( Dep::REQUIRES );
+
+		invokeOnEach( _pool.byCapabilityIndexBegin( misc_info->capability().index(), dep ), // begin()
+			      _pool.byCapabilityIndexEnd( misc_info->capability().index(), dep ),   // end()
+			      resfilter::ByCapMatch( misc_info->capability() ),
+			      functor::functorRef<bool,CapAndItem>(info) );
+		if (info.requirers.size() > 1)
+		    problem->addSolution (new ProblemSolutionIgnoreRequires (problem, info.requirers, misc_info->capability()));
+		
 		problems.push_back (problem);
 		problem_created = true;		
 	    }
