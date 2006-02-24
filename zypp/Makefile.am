@@ -2,7 +2,7 @@
 ## ##################################################
 
 SUBDIRS = base thread url media capability detail pool parser \
-	source target solver zypp_detail ui gzstream
+	source target solver zypp_detail ui
 
 INCLUDES = -DZYPP_BASE_LOGGER_LOGGROUP=\"zypp\"
 
@@ -165,7 +165,6 @@ lib@PACKAGE@_la_LIBADD =        thread/lib@PACKAGE@_thread.la		\
 				solver/lib@PACKAGE@_solver.la		\
 				zypp_detail/lib@PACKAGE@_zypp_detail.la	\
 				ui/lib@PACKAGE@_ui.la			\
-				gzstream/lib@PACKAGE@_gzstream.la	\
 				\
 				base/lib@PACKAGE@_base.la		\
 				-lutil

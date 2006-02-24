@@ -243,7 +243,6 @@ AC_OUTPUT(	 po/Makefile.in\
 	zypp/target/store/xml/Makefile  \
 	zypp/target/hal/Makefile	\
 	zypp/zypp_detail/Makefile	\
-	zypp/gzstream/Makefile		\
 	zmd/Makefile			\
 	zmd/backend/Makefile		\
 	zmd/testsuite/Makefile		\
