@@ -3,7 +3,8 @@
 
 SUBDIRS = schema
 
-INCLUDES = -I$(oldincludedir)/libxml2 -I..
+INCLUDES = -I$(oldincludedir)/libxml2 -I..	\
+	-DZYPP_BASE_LOGGER_LOGGROUP=\"parser-yum\"
 
 ## ##################################################
 
