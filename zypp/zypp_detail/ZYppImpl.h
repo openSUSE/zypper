@@ -43,6 +43,9 @@ namespace zypp
       /** Dtor */
       ~ZYppImpl();
 
+    private:
+      void removeInstalledResolvables ();
+
     public:
       /** */
       ResPool pool() const

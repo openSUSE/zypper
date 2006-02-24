@@ -240,7 +240,7 @@ namespace zypp
       }
 
       /** erase all resolvables coming from the target  */
-      void eraseInstalled();
+      void eraseInstalled() const;
 
     public:
       /** \name Save and restore state. */

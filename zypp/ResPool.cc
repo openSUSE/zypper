@@ -87,10 +87,6 @@ namespace zypp
   ResPool::byCapabilityIndex_iterator ResPool::byCapabilityIndexEnd( const std::string & index_r, Dep depType_r ) const
   { return make_filter_iterator( ByCapabilityIndex(), _pimpl->_caphash.end( index_r, depType_r ), _pimpl->_caphash.end( index_r, depType_r ) ); }
 
-  void ResPool::eraseInstalled()
-  { // doesnotwork (const_pointer_cast<pool::PoolTraits::Impl_constPtr>(_pimpl))->eraseInstalled();
-    return; }
-
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<

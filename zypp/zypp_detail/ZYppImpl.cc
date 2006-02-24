@@ -89,9 +89,18 @@ namespace zypp
 
     void ZYppImpl::removeResolvables (const ResStore& store)
     {
-        for (ResStore::iterator it = store.begin(); it != store.end(); it++)
+        for (ResStore::iterator it = store.begin(); it != store.end(); ++it)
 	{
     	    _pool.erase(*it);
+	}
+    }
+
+    void ZYppImpl::removeInstalledResolvables ()
+    {
+        for (ResPool::const_iterator it = pool().begin(); it != pool().end(); ++it)
+	{
+	    if (it->status().isInstalled())
+		_pool.erase(*it);
 	}
     }
 
@@ -104,24 +113,25 @@ namespace zypp
 
     void ZYppImpl::initTarget(const Pathname & root, bool commit_only)
     {
-      if (_target && _target->root() == root) {
-	MIL << "Repeated call to initTarget()" << endl;
-        return;
+      if (_target) {
+	if (_target->root() == root) {
+	    MIL << "Repeated call to initTarget()" << endl;
+	    return;
+	}
+	removeInstalledResolvables( );
       }
-
-      _target = new Target(root);
+      _target = new Target( root );
       if (!commit_only)
       {
-	_target->enableStorage(root);
-	addResolvables (_target->resolvables(), true);
+	_target->enableStorage( root );
+	addResolvables( _target->resolvables(), true );
       }
     }
 
     void ZYppImpl::finishTarget()
     {
-#warning not removing target resolvables for now
-//      if (_target)
-//	removeResolvables (_target->resolvables());
+      if (_target)
+	removeInstalledResolvables();
       _target = 0;
     }
 
@@ -134,10 +144,17 @@ namespace zypp
 	ZYPP_THROW( Exception("Target not initialized.") );
 
       ZYpp::CommitResult res;
+
       // must redirect to Target::Impl. This kind of commit should not be
       // in the Target interface.
+
       res._result = _target->commit( pool(), medianr_r,
                                      res._errors, res._remaining, res._srcremaining );
+
+      // reload new status from target
+
+      removeInstalledResolvables();
+      addResolvables( _target->resolvables(), true );
 
       MIL << "Commit (medianr " << medianr_r << ") returned: "
           << res._result
@@ -145,6 +162,7 @@ namespace zypp
           << ", remaining " << res._remaining.size()
           << ", srcremaining " << res._srcremaining.size()
           << ")" << endl;
+
       return res;
     }
 

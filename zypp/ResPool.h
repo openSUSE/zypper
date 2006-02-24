@@ -56,8 +56,6 @@ namespace zypp
     bool empty() const;
     /**  */
     size_type size() const;
-    /** erase all installed items (presumably coming from the target) */
-    void eraseInstalled();
 
   public:
 

@@ -184,28 +184,6 @@ namespace zypp
     PoolImpl::~PoolImpl()
     {}
 
-    /******************************************************************
-    **
-    **	FUNCTION NAME : eraseInstalled
-    **	FUNCTION TYPE : void
-    */
-    void PoolImpl::eraseInstalled( )
-    {
-	MIL << "eraseInstalled()" << endl;
-	for (ContainerT::iterator it = _store.begin(); it != _store.end();) {
-	    PoolItem item = *it;
-	    if (item.status().isInstalled()) {
-		ContainerT::iterator next = it; ++next;
-		_store.erase( item );
-		_namehash.erase( item );
-		_caphash.erase( item );
-		it = next;
-	    }
-	    else {
-		++it;
-	    }
-	}
-    }
 
     /******************************************************************
     **
