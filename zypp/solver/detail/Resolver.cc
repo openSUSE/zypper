@@ -385,6 +385,7 @@ Resolver::establishState (ResolverContext_Ptr context)
     typedef list<Resolvable::Kind> KindList; 
     static KindList ordered;
     if (ordered.empty()) {
+	ordered.push_back (ResTraits<zypp::Atom>::kind);
 	ordered.push_back (ResTraits<zypp::Patch>::kind);
 	ordered.push_back (ResTraits<zypp::Pattern>::kind);
 	ordered.push_back (ResTraits<zypp::Product>::kind);
