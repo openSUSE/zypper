@@ -429,8 +429,8 @@ ResolverInfoMisc::message (void) const
 	    // Translator: %s = name of package,patch,...
 	    // TranslatorExample: foo is required by other to-be-installed resolvable, so it won't be unlinked.
 	    // TranslatorExplanation: Cant uninstall foo since it is required by an to-be-installed resolvable
-	    string msg = str::form (_("%s is required by other to-be-installed resolvable, so it won't be unlinked."),
-				    affected()->name().c_str());
+	    msg = str::form (_("%s is required by other to-be-installed resolvable, so it won't be unlinked."),
+			     affected()->name().c_str());
 	}
 	break;
 
@@ -446,8 +446,8 @@ ResolverInfoMisc::message (void) const
 	    // Translator: %s = name of package,patch,...
 	    // TranslatorExample: foo is required by other installed resolvable, so it won't be unlinked.
 	    // TranslatorExplanation: Cant uninstall foo since it is required by an installed resolvable
-	    string msg = str::form (_("%s is required by other installed resolvable, so it won't be unlinked."),
-				    affected()->name().c_str());
+	    msg = str::form (_("%s is required by other installed resolvable, so it won't be unlinked."),
+			     affected()->name().c_str());
 	}
 	break;
 
@@ -463,8 +463,8 @@ ResolverInfoMisc::message (void) const
 	    // Translator: %s = name of package,patch,...
 	    // TranslatorExample: foo is locked and cannot be uninstalled.
 	    // TranslatorExplanation: foo is to-be-uninstalled but it is locked
-	    string msg = str::form (_("%s is locked and cannot be uninstalled."),
-				    affected()->name().c_str());
+	    msg = str::form (_("%s is locked and cannot be uninstalled."),
+			     affected()->name().c_str());
 	}
 	break;
 
