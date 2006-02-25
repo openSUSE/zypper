@@ -10,9 +10,12 @@
 barold2 @bar2 @bar2-devel
  -->
 <trial>
-  <lock package="bar2" channel="test"/>
-  <lock package="bar2-devel" channel="test"/>
+  <lock package="bar2" channel="@system"/>
+  <lock package="bar2-devel" channel="@system"/>
   <install channel="test" package="barold2"/>
+  <reportproblems/>
+  <takesolution problem="0" solution="1"/>
+  <reportproblems/>
 </trial>
 
 </test>

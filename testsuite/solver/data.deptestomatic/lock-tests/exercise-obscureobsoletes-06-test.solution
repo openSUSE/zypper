@@ -1,0 +1,20 @@
+>!> Locking bar2 from channel @system
+>!> Locking bar2-devel from channel @system
+>!> Installing barold2 from channel test
+>!> 1 problems found:
+>!> Problem:
+>!> bar2 is locked and cannot be uninstalled.
+>!> barold2 obsoletes bar2. But bar2 cannot be deleted because it is locked.
+>!>    Solution:
+>!>       unlock bar2
+>!>       
+>!>    Solution:
+>!>       Ignore the obsolete bar2 in barold2
+>!>       
+>!> Taking solution: 1
+>!> For problem:     0
+>!> No problems so far
+>!> No problems so far
+>!> Solution #1:
+>!> install barold2-4.0-1.noarch[test]
+>!> installs=1, upgrades=0, uninstalls=0
