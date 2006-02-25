@@ -15,6 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/Bit.h"
+#include "zypp/base/Logger.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -308,7 +309,9 @@ namespace zypp
       if ( ! setTransact( false, causer_r ) )
         return false;
       if ( toLock_r )
-        fieldValueAssign<TransactField>( LOCKED );
+	  fieldValueAssign<TransactField>( LOCKED );
+      else
+	  fieldValueAssign<TransactField>( KEEP_STATE );
       return true;
     }
 
