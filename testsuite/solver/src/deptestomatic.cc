@@ -93,7 +93,6 @@ using zypp::ResolverProblemList;
 
 static bool show_mediaid = false;
 static string globalPath;
-static string architecture;			// run with this architecture
 static list<string> locales;
 
 static ZYpp::Ptr God;
@@ -634,6 +633,7 @@ print_pool( const string & prefix = "", bool show_all = true )
 	cout << it->second;
 	cout << endl;
     }
+    cout << "Pool End." << endl;
     return;
 }
 
@@ -645,27 +645,30 @@ load_source (const string & alias, const string & filename, const string & type,
     int count = 0;
 
     try {
-	Url url("file:/");
+	Source_Ref src;
 
 	if (type == "url") {
-	    url = Url( filename );
+	    Url url( filename );
 	    pathname = "";
-	}
+	    Pathname cache_dir( "" );
+	    src = Source_Ref( SourceFactory().createFrom( url, pathname, alias, cache_dir ) );
+        }
+        else {
+           Url url("file:/");
 
-	media::MediaManager mmgr;
-	media::MediaId mediaid = mmgr.open(url);
-	HelixSourceImpl *impl = new HelixSourceImpl ();
-	impl->factoryCtor (mediaid, pathname, alias);
-        Source_Ref src( SourceFactory().createFrom(impl) );
-
-	unsigned snum = manager->addSource (src);
-
-	count = src.resolvables().size();
-	cout << "Added source '" << alias << "' as #" << snum  << ":[" << src.alias() << "] with " << count << " resolvables" << endl;
-	God->addResolvables( src.resolvables(), (alias == "@system") );
+           media::MediaManager mmgr;
+           media::MediaId mediaid = mmgr.open(url);
+           HelixSourceImpl *impl = new HelixSourceImpl ();
+           impl->factoryCtor (mediaid, pathname, alias);
+           src = Source_Ref( SourceFactory().createFrom(impl) );
+           manager->addSource (src);
+        }
+        count = src.resolvables().size();
+        cout << "Added source '" << alias << "' with " << count << " resolvables" << endl;
+        God->addResolvables( src.resolvables(), (alias == "@system") );
 //	print_pool ();
 
-	cout << "Loaded " << count << " package(s) from " << pathname << endl;
+	cout << "Loaded " << count << " resolvables from " << (filename.empty()?pathname.asString():filename) << "." << endl;
     }
     catch ( Exception & excpt_r ) {
 	ZYPP_CAUGHT (excpt_r);
@@ -793,7 +796,14 @@ parse_xml_setup (XmlNode_Ptr node)
 	} else if (node->equals ("mediaid")) {
 	    show_mediaid = true;
 	} else if (node->equals ("arch")) {
-	    architecture = node->getProp ("name");
+	    string architecture = node->getProp ("name");
+	    if (architecture.empty()) {
+		cerr << "Property 'name=' in <arch.../> missing or empty" << endl;
+	    }
+	    else {
+		MIL << "Setting architecture to '" << architecture << "'" << endl;
+		God->setArchitecture( Arch( architecture ) );
+	    }
 	} else if (node->equals ("locale")) {
 	    locales.push_back( node->getProp ("name") );
 	} else {
@@ -1022,12 +1032,9 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
     print_sep ();
 
     solver::detail::Resolver_Ptr resolver = new solver::detail::Resolver (pool);
-    resolver->setTesting ( true ); // continue although without target
+    resolver->setArchitecture( God->architecture() );
+    resolver->setTesting ( true );			// continue despite missing target
     resolver->setForceResolve (forceResolve);
-
-    if (!architecture.empty()) {
-	God->setArchitecture( Arch( architecture ) );
-    }
 
     if (!locales.empty()) {
 	ZYpp::LocaleSet lset;
@@ -1329,6 +1336,10 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
                     }
                 }
             }
+	} else if (node->equals ("showpool")) {
+	    string prefix = node->getProp ("prefix");
+	    string all = node->getProp ("all");
+	    print_pool( prefix, !all.empty() );
         } else if (node->equals ("lock")) {
 	    string source_alias = node->getProp ("channel");
 	    string package_name = node->getProp ("package");
