@@ -32,7 +32,7 @@ namespace zypp
     //
     //	CLASS NAME : SrcPackageImplIf
     //
-    /** Abstact SrcPackage implementation interface.
+    /** Abstract SrcPackage implementation interface.
     */
     class SrcPackageImplIf : public ResObjectImplIf
     {

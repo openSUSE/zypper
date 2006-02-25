@@ -28,7 +28,7 @@ namespace zypp
     //
     //	CLASS NAME : AtomImplIf
     //
-    /** Abstact Atom implementation interface.
+    /** Abstract Atom implementation interface.
     */
     class AtomImplIf : public ResObjectImplIf
     {

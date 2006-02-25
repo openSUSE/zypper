@@ -34,7 +34,7 @@ namespace zypp
     //
     //	CLASS NAME : ProductImplIf
     //
-    /** Abstact Product implementation interface.
+    /** Abstract Product implementation interface.
     */
     class ProductImplIf : public ResObjectImplIf
     {

@@ -28,7 +28,7 @@ namespace zypp
     //
     //	CLASS NAME : ScriptImplIf
     //
-    /** Abstact Script implementation interface.
+    /** Abstract Script implementation interface.
     */
     class ScriptImplIf : public ResObjectImplIf
     {

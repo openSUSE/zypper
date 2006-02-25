@@ -29,7 +29,7 @@ namespace zypp
     //
     //	CLASS NAME : SelectionImplIf
     //
-    /** Abstact Selection implementation interface.
+    /** Abstract Selection implementation interface.
     */
     class SelectionImplIf : public ResObjectImplIf
     {

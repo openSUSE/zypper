@@ -30,7 +30,7 @@ namespace zypp
     //
     //	CLASS NAME : PatchImplIf
     //
-    /** Abstact Patch implementation interface.
+    /** Abstract Patch implementation interface.
      */
     class PatchImplIf : public ResObjectImplIf
     {

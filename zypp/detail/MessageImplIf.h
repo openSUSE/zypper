@@ -28,7 +28,7 @@ namespace zypp
     //
     //	CLASS NAME : MessageImplIf
     //
-    /** Abstact Message implementation interface.
+    /** Abstract Message implementation interface.
     */
     class MessageImplIf : public ResObjectImplIf
     {

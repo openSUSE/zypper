@@ -28,7 +28,7 @@ namespace zypp
     //
     //	CLASS NAME : LanguageImplIf
     //
-    /** Abstact Language implementation interface.
+    /** Abstract Language implementation interface.
     */
     class LanguageImplIf : public ResObjectImplIf
     {

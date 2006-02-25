@@ -30,7 +30,7 @@ namespace zypp
     //
     //	CLASS NAME : PatternImplIf
     //
-    /** Abstact Pattern implementation interface.
+    /** Abstract Pattern implementation interface.
     */
     class PatternImplIf : public ResObjectImplIf
     {

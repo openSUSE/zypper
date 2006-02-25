@@ -36,7 +36,7 @@ namespace zypp
     //
     //	CLASS NAME : PackageImplIf
     //
-    /** Abstact Package implementation interface.
+    /** Abstract Package implementation interface.
     */
     class PackageImplIf : public ResObjectImplIf
     {
