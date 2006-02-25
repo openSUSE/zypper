@@ -126,7 +126,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	&& freshens.size() > 0
 	&& iter == freshens.end())
     {
-	_DEBUG("this freshens nothing -> unneeded");
+	_DEBUG(_item << " freshens nothing -> unneeded");
 	context->unneeded (_item, _other_penalty);
     }
     else {							// installed or no freshens or triggered freshens
@@ -140,11 +140,11 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    }
 	}
 	if (iter == requires.end()) {					// all are met
-	    _DEBUG("all requirements met -> satisfied");
+	    _DEBUG("all requirements of " << _item << " met -> satisfied");
 	    context->satisfy (_item, _other_penalty);
 	}
 	else {
-	    _DEBUG("unfulfilled requirement " << *iter << " -> incomplete");
+	    _DEBUG(_item << " has unfulfilled requirement " << *iter << " -> incomplete");
 
 	    // we could issue a QueueItemInstall (_item) here but better lets blame the user
 	    context->incomplete (_item, _other_penalty);
