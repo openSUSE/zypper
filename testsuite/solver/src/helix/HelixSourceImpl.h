@@ -19,8 +19,8 @@
  * 02111-1307, USA.
  */
 
-#ifndef ZYPP_SOLVER_TEMPORARY_HELIXSOURCEIMPL_H
-#define ZYPP_SOLVER_TEMPORARY_HELIXSOURCEIMPL_H
+#ifndef ZYPP_SOLVER_HELIXSOURCEIMPL_H
+#define ZYPP_SOLVER_HELIXSOURCEIMPL_H
 
 #include <iosfwd>
 #include <string>
@@ -30,6 +30,7 @@
 #include "HelixParser.h"
 
 #include "zypp/Package.h"
+#include "zypp/Language.h"
 #include "zypp/Message.h"
 #include "zypp/Script.h"
 #include "zypp/Patch.h"
@@ -69,6 +70,7 @@ class HelixSourceImpl : public zypp::source::SourceImpl {
 
     Package::Ptr createPackage (const HelixParser & data);
     Message::Ptr createMessage (const HelixParser & data);
+    Language::Ptr createLanguage (const HelixParser & data);
     Script::Ptr  createScript (const HelixParser & data);
     Patch::Ptr   createPatch (const HelixParser & data);
     Pattern::Ptr createPattern (const HelixParser & data);
@@ -89,4 +91,4 @@ class HelixSourceImpl : public zypp::source::SourceImpl {
 
 } // namespace zypp
 
-#endif // ZYPP_SOLVER_TEMPORARY_HELIXSOURCEIMPL_H
+#endif // ZYPP_SOLVER_HELIXSOURCEIMPL_H

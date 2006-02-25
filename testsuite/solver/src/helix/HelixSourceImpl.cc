@@ -23,6 +23,7 @@
 #include "HelixSourceImpl.h"
 #include "HelixPackageImpl.h"
 #include "HelixScriptImpl.h"
+#include "HelixLanguageImpl.h"
 #include "HelixMessageImpl.h"
 #include "HelixPatchImpl.h"
 #include "HelixSelectionImpl.h"
@@ -129,6 +130,30 @@ HelixSourceImpl::createPackage (const HelixParser & parsed)
     {
 	ERR << excpt_r << endl;
 	throw "Cannot create package object";
+    }
+    return NULL;
+}
+
+
+Language::Ptr
+HelixSourceImpl::createLanguage (const HelixParser & parsed)
+{
+    try
+    {
+	detail::ResImplTraits<HelixLanguageImpl>::Ptr impl(new HelixLanguageImpl(_source, parsed));
+
+	// Collect basic Resolvable data
+	NVRAD dataCollect( parsed.name,
+			Edition( parsed.version, parsed.release, parsed.epoch ),
+			Arch( parsed.arch ),
+			createDependencies (parsed));
+	Language::Ptr message = detail::makeResolvableFromImpl(dataCollect, impl);
+	return message;
+    }
+    catch (const Exception & excpt_r)
+    {
+	ERR << excpt_r << endl;
+	throw "Cannot create language object";
     }
     return NULL;
 }
@@ -290,6 +315,10 @@ HelixSourceImpl::parserCallback (const HelixParser & parsed)
     else if (parsed.kind == ResTraits<Message>::kind) {
 	Message::Ptr m = createMessage (parsed);
 	_store.insert (m);
+    }
+    else if (parsed.kind == ResTraits<Language>::kind) {
+	Language::Ptr l = createLanguage( parsed );
+	_store.insert (l);
     }
     else if (parsed.kind == ResTraits<Script>::kind) {
 	Script::Ptr s = createScript (parsed);
