@@ -113,6 +113,10 @@ translateResTraits (const Resolvable::Kind & kind)
 	// Translator: Notation for message (part of a patch)
 	return _( "message" );
     }
+    else if (kind == ResTraits<Atom>::kind) {
+	// Translator: Notation for atom (part of a patch)
+	return _( "atom" );
+    }
     else if (kind == ResTraits<System>::kind) {
 	// Translator: Notation for computer system
 	return _( "system" );
