@@ -11,6 +11,7 @@
 */
 
 #include "zypp/source/yum/YUMSourceImpl.h"
+#include "zypp/source/yum/YUMAtomImpl.h"
 #include "zypp/source/yum/YUMPackageImpl.h"
 #include "zypp/source/yum/YUMScriptImpl.h"
 #include "zypp/source/yum/YUMMessageImpl.h"
@@ -490,43 +491,18 @@ namespace zypp
     }
   }
 
-  static void augmentCapSet( const CapSet & from, CapSet & to )
-  {
-    for (CapSet::const_iterator it = from.begin(); it != from.end(); ++it) {
-	to.insert( *it );
-    }
-    return;
-  }
-
-  static void augmentDependencies( const Dependencies & from, Dependencies & to )
-  {
-MIL << "augmentDependencies(" << from << ")" << endl;
-#define AUG_CAP_SET(tag) augmentCapSet( from[Dep::tag], to[Dep::tag] )
-      AUG_CAP_SET(PROVIDES);
-      AUG_CAP_SET(REQUIRES);
-      AUG_CAP_SET(PREREQUIRES);
-      AUG_CAP_SET(OBSOLETES);
-      AUG_CAP_SET(CONFLICTS);
-      AUG_CAP_SET(FRESHENS);
-      AUG_CAP_SET(RECOMMENDS);
-      AUG_CAP_SET(SUGGESTS);
-      AUG_CAP_SET(SUPPLEMENTS);
-      AUG_CAP_SET(ENHANCES);
-#undef AUG_CAP_SET
-MIL << "=> (" << to << ")" << endl;
-  }
-
   void YUMSourceImpl::augmentPackage(
     const zypp::parser::yum::YUMPatchPackage & parsed
   )
   {
     try
     {
+	Edition edition( parsed.ver, parsed.rel, parsed.epoch );
 	NVRA nvra( parsed.name,
-		   Edition( parsed.ver, parsed.rel, parsed.epoch ),
+		   edition,
 		   Arch( parsed.arch ) );
 
-DBG << "augmentPackage(" << nvra << ")" << endl;
+	DBG << "augmentPackage(" << nvra << ")" << endl;
 
 	PackageImplMapT::const_iterator it = _package_impl.find( nvra );
 	if (it == _package_impl.end()) {
@@ -535,34 +511,39 @@ DBG << "augmentPackage(" << nvra << ")" << endl;
 	}
 	ResImplTraits<YUMPackageImpl>::Ptr impl = it->second.impl;
 	Package::Ptr package = it->second.package;
-DBG << "found " << *package << ", impl " << impl << endl;
+	//DBG << "found " << *package << ", impl " << impl << endl;
 
 	_store.erase( package );
 	impl->unmanage();
-DBG << "Erased old package " << endl;
 
+	// create Atom
+
+	CapFactory f;
 	Dependencies deps = createDependencies( parsed, ResTraits<Package>::kind );
-
-DBG << "augmenting " << deps << endl;
-
-	augmentDependencies( package->deps(), deps );
-
-DBG << "augmenting done " << endl;
+	deps[Dep::REQUIRES].insert( f.parse( ResTraits<Package>::kind, parsed.name, Rel::EQ, edition ) );
+	NVRAD atomdata( nvra, deps );
+	ResImplTraits<YUMAtomImpl>::Ptr atomimpl = new YUMAtomImpl( package->source() );
+	Atom::Ptr atom = detail::makeResolvableFromImpl(
+	    atomdata, atomimpl
+	);
+	DBG << "Inserting atom " << *atom << endl;
+	//DBG << "with deps " << deps << endl;
+	_store.insert( atom );
 
 	// Collect augmented package data
-	NVRAD dataCollect( nvra, deps );
+	NVRAD packagedata( nvra, package->deps() );
 
-DBG << "NVRAD " << (NVRA)dataCollect << endl;
+	//DBG << "NVRAD " << (NVRA)packagedata << endl;
 
-	Package::Ptr augmented_package = detail::makeResolvableFromImpl(
-	    dataCollect, impl
+#warning add patchrpm, deltarpm, etc. to YUMPackageImpl here
+	Package::Ptr new_package = detail::makeResolvableFromImpl(
+	    packagedata, impl
 	);
 
-DBG << "augmented_package " << *augmented_package << endl;
+	//DBG << "new_package " << *new_package << endl;
 
-DBG << "Inserting augmented package " << endl;
-	_store.insert( augmented_package );
-DBG << "Done" << endl;
+	_store.insert( new_package );
+
 	return;
     }
     catch (const Exception & excpt_r)

@@ -17,6 +17,7 @@
 #include "zypp/source/yum/YUMPackageImpl.h"
 #include "zypp/parser/yum/YUMParserData.h"
 #include "zypp/Package.h"
+#include "zypp/Atom.h"
 #include "zypp/Message.h"
 #include "zypp/Script.h"
 #include "zypp/Patch.h"
