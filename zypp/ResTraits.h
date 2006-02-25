@@ -22,6 +22,7 @@ namespace zypp
   class Resolvable;
   class ResObject;
 
+  class Atom;
   class Package;
   class SrcPackage;
   class Selection;

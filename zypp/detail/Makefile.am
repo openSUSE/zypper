@@ -14,9 +14,10 @@ detailinclude_HEADERS = \
 	ResObjectImplIf.h	\
 	ResObjectFactory.h	\
 	PackageImplIf.h		\
+	AtomImplIf.h		\
 	LanguageImplIf.h	\
 	SelectionImplIf.h	\
-	PatternImplIf.h	\
+	PatternImplIf.h		\
 	MessageImplIf.h		\
 	ScriptImplIf.h		\
 	PatchImplIf.h		\
@@ -43,6 +44,7 @@ lib@PACKAGE@_detail_la_SOURCES = \
 	ResolvableImpl.cc	\
 	ResObjectImplIf.cc	\
 	PackageImplIf.cc	\
+	AtomImplIf.cc		\
 	LanguageImplIf.cc	\
 	SelectionImplIf.cc	\
 	PatternImplIf.cc	\
