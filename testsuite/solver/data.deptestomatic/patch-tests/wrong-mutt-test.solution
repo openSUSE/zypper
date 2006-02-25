@@ -1,0 +1,11 @@
+>!> Establishing state ...
+>!> Established context
+>!> atom:pine-4.64-10.i586[armstrong] UU__<uneeded>
+>!> patch:patch-pine-1-0.noarch[armstrong] US__<satisfied>
+>!> atom:mutt-1.5.9i-17.i586[armstrong] U_Ts_<needed>
+>!> patch:patch-mutt-1-0.noarch[armstrong] U_Ts_<needed>
+>!> Solution #1:
+>!> install atom:mutt-1.5.9i-17.i586[armstrong]
+>!> install patch:patch-mutt-1-0.noarch[armstrong]
+>!> upgrade mutt-1.5.9i-16.i586 => mutt-1.5.9i-17.i586[armstrong]
+>!> installs=2, upgrades=1, uninstalls=0
