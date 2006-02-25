@@ -1329,6 +1329,20 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
                     }
                 }
             }
+        } else if (node->equals ("lock")) {
+	    string source_alias = node->getProp ("channel");
+	    string package_name = node->getProp ("package");
+	    string kind_name = node->getProp ("kind");
+
+	    PoolItem_Ref poolItem;
+
+	    poolItem = get_poolItem (source_alias, package_name, kind_name);
+	    if (poolItem) {
+		RESULT << "Locking " << package_name << " from channel " << source_alias << endl;
+		poolItem.status().setLock (true, ResStatus::USER);
+	    } else {
+		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
+	    }
 	} else {
 	    cerr << "Unknown tag '" << node->name() << "' in trial" << endl;
 	}
