@@ -94,7 +94,7 @@ lib_LTLIBRARIES =	lib@PACKAGE@.la
 lib@PACKAGE@_la_SOURCES = \
 	LanguageCode.cc	\
 	Arch.cc		\
-	Atom.h		\
+	Atom.cc		\
 	ByteCount.cc	\
 	Capability.cc	\
 	CapFactory.cc	\
