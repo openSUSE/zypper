@@ -32,6 +32,8 @@ detailinclude_HEADERS = \
 	PatternImpl.h		\
 	MessageImpl.h		\
 	ScriptImpl.h		\
+	AtomImpl.h		\
+	LanguageImpl.h		\
 	PatchImpl.h		\
 	ProductImpl.h
 ## last group might be removed.
@@ -62,6 +64,8 @@ lib@PACKAGE@_detail_la_SOURCES = \
 	PatternImpl.cc		\
 	MessageImpl.cc		\
 	ScriptImpl.cc		\
+	AtomImpl.cc		\
+	LanguageImpl.cc		\
 	PatchImpl.cc		\
 	ProductImpl.cc
 ## last group might be removed.
