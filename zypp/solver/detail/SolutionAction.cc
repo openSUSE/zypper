@@ -107,6 +107,7 @@ InjectSolutionAction::dumpOn( ostream& os ) const
     switch (_kind) {
 	case REQUIRES:	os << "Requires"; break;
 	case CONFLICTS:	os << "Conflicts"; break;
+	case OBSOLETES: os << "Obsoletes"; break;
 	case ARCHITECTURE: os << "Architecture"; break;
 	case INSTALLED: os << "Installed"; break;
 	default: os << "Wrong kind"; break;
@@ -149,7 +150,8 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 		_item.status().setToBeUninstalled (ResStatus::USER);
 	    break;
 	case UNLOCK:
-	    _item.status().setLock (false, ResStatus::USER);
+	    ret = _item.status().setLock (false, ResStatus::USER);
+	    if (!ret) ERR << "Cannot unlock " << _item << endl;
 	    break;
 	default:
 	    ERR << "Wrong TransactionKind" << endl;
@@ -181,6 +183,10 @@ InjectSolutionAction::execute(Resolver & resolver) const
 	    // removing the requires dependency from the item
 	    resolver.addIgnoreRequires (_item, _capability);
 	    break;
+        case OBSOLETES:
+	    // removing the obsoletes dependency from the item
+	    resolver.addIgnoreObsoletes (_otherItem, _capability);
+	    break;	    
 	case ARCHITECTURE:
 	    // ignoring architecture
 	    resolver.addIgnoreArchitecture (_item);

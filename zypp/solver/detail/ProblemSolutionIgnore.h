@@ -68,6 +68,19 @@ namespace zypp
 					   const Capability & capability);
 	};
 
+	class ProblemSolutionIgnoreObsoletes : public ProblemSolution
+	{
+	public:
+
+	    /**
+	     * Constructor.
+	     **/
+	    ProblemSolutionIgnoreObsoletes( ResolverProblem_Ptr parent,
+					    PoolItem_Ref item,
+					    const Capability & capability,
+					    PoolItem_Ref otherItem);	    
+	};
+
 	class ProblemSolutionIgnoreArch : public ProblemSolution
 	{
 	public:

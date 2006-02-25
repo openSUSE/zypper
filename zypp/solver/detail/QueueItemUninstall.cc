@@ -81,7 +81,8 @@ QueueItemUninstall::dumpOn( std::ostream & os ) const
     if (_explicitly_requested) os << ", Explicit";
     if (_remove_only) os << ", Remove Only";
     if (_due_to_conflict) os << ", Due To Conflict";
-    if (_due_to_obsolete) os << ", Due To Obsolete";
+    if (_due_to_obsolete)
+	os << ", Due To Obsolete:" << _obsoletes_item;
     if (_unlink) os << ", Unlink";
     os << "]";
     return os;
@@ -101,6 +102,7 @@ QueueItemUninstall::QueueItemUninstall (const ResPool & pool, PoolItem_Ref item,
     , _due_to_conflict (false)
     , _due_to_obsolete (false)
     , _unlink (false)
+    , _obsoletes_item (NULL)
 {
     _XDEBUG("QueueItemUninstall::QueueItemUninstall(" << item << ")");
 }
@@ -316,7 +318,18 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	if (! _explicitly_requested
 	    && _item.status().isLocked()) {
 
-	    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALL_LOCKED, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
+	    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_UNINSTALL_LOCKED,
+								   _item, RESOLVER_INFO_PRIORITY_VERBOSE,
+								   _cap_leading_to_uninstall);
+	    if (_due_to_obsolete)
+	    {
+		misc_info->setOtherPoolItem (_obsoletes_item);
+		misc_info->addTrigger (ResolverInfoMisc::OBSOLETE);
+	    } else if (_due_to_conflict)
+	    {
+		misc_info->addTrigger (ResolverInfoMisc::CONFLICT);		
+	    }
+	    
 	    context->addError (misc_info);
 	    goto finished;
 	}
@@ -404,6 +417,7 @@ QueueItemUninstall::copy (void) const
     new_uninstall->_remove_only               = _remove_only;
     new_uninstall->_due_to_conflict           = _due_to_conflict;
     new_uninstall->_due_to_obsolete           = _due_to_obsolete;
+    new_uninstall->_obsoletes_item	      = _obsoletes_item;
     new_uninstall->_unlink                    = _unlink;
 
     return new_uninstall;

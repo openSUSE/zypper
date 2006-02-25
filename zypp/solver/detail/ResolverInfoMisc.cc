@@ -55,9 +55,14 @@ ResolverInfoMisc::dumpOn( std::ostream & os ) const
     if (!_action.empty()) {
 	os << _(", Action: ") << _action << endl;
     }
-    if (!_trigger.empty()) {
-	os << _(", Trigger: ") << _trigger << endl;
+    os << _(", Trigger: ");
+    switch (_trigger) {
+	case ResolverInfoMisc::NONE:		os << "none"; break;
+	case ResolverInfoMisc::OBSOLETE:	os << "obsoletes"; break;
+	case ResolverInfoMisc::REQUIRE:		os << "requires"; break;	    
+	case ResolverInfoMisc::CONFLICT:	os << "conflicts"; break;
     }
+    os << endl;
     return os;
 }
 
@@ -65,7 +70,8 @@ ResolverInfoMisc::dumpOn( std::ostream & os ) const
 
 ResolverInfoMisc::ResolverInfoMisc  (ResolverInfoType detailedtype, PoolItem_Ref affected, int priority, const Capability & capability)
     : ResolverInfoContainer (detailedtype, affected, priority)
-    , _capability (capability)
+      , _capability (capability)
+      , _trigger (NONE)
 {
 }
 
@@ -555,6 +561,9 @@ ResolverInfoMisc::copy (void) const
     ((ResolverInfoContainer_Ptr)cpy)->copy (this);
     cpy->_other_item = _other_item;
     cpy->_other_capability = _other_capability;
+    cpy->_action = _action;
+    cpy->_trigger = _trigger;
+    
     return cpy;
 }
 
@@ -568,9 +577,9 @@ ResolverInfoMisc::addAction (const std::string & action_msg)
 
 
 void
-ResolverInfoMisc::addTrigger (const std::string & trigger_msg)
+ResolverInfoMisc::addTrigger (const TriggerReason & trigger)
 {
-    _trigger = trigger_msg;
+    _trigger = trigger;
 }
 
 void

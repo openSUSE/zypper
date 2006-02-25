@@ -80,8 +80,10 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 
     // These conflict should be ignored of the concering item
     IgnoreMap _ignoreConflicts;
-    // These conflict should be ignored of the concering item    
+    // These requires should be ignored of the concering item    
     IgnoreMap _ignoreRequires;
+    // These obsoletes should be ignored of the concering item    
+    IgnoreMap _ignoreObsoletes;    
     // Ignore architecture of the item
     PoolItemList _ignoreArchitecture;
     // Ignore the status "installed" of the item
@@ -165,6 +167,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 			    const Capability & capability);
     void addIgnoreRequires (const PoolItem_Ref item,
 			    const Capability & capability);
+    void addIgnoreObsoletes (const PoolItem_Ref item,
+			     const Capability & capability);
     void addIgnoreArchitecture (const PoolItem_Ref item);
     void addIgnoreInstalledItem (const PoolItem_Ref item);
 

@@ -404,10 +404,8 @@ Resolver::problems (void) const
 	    case RESOLVER_INFO_TYPE_UNINSTALL_PROVIDER: {		// p provides c but is scheduled to be uninstalled
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...				
-		ostringstream other_str;
-		other_str << misc_info->other();
 		what =str::form (_("%s fulfil dependencies of %s but will be uninstalled"),
-				 other_str.str().c_str(),
+				 misc_info->other()->name().c_str(),
 				 who.c_str());
 		details = misc_info->message();
 		// It is only an info --> no solution is needed
@@ -487,10 +485,25 @@ Resolver::problems (void) const
 	    case RESOLVER_INFO_TYPE_UNINSTALL_LOCKED: {			// cant uninstall, its locked
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		what = misc_info->message();
+		
+		if (misc_info->trigger() == ResolverInfoMisc::OBSOLETE) {
+		    // TranslatorExplanation %s = name of package, patch, selection ...						    
+		    details = str::form (_("%s obsoletes %s. But %s cannot be deleted because it is locked."),
+					 misc_info->other()->name().c_str(),
+					 who.c_str(), who.c_str());
+		}
+		
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		problem->addSolution (new ProblemSolutionUnlock (problem, item)); // Unlocking resItem
-		// keep installed
-		problem->addSolution (new ProblemSolutionKeep (problem, item)); 
+		if (misc_info->trigger() == ResolverInfoMisc::OBSOLETE) {
+		    // Ignore obsoletes
+		    problem->addSolution (new ProblemSolutionIgnoreObsoletes (problem, item, misc_info->capability(),
+									      misc_info->other())); 
+		} else {
+		    // This is an "default" soltution
+		    // keep installed
+		    problem->addSolution (new ProblemSolutionKeep (problem, item));
+		}
 		problems.push_back (problem);
 		problem_created = true;
 	    }

@@ -79,11 +79,25 @@ ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_
 	addAction (new InjectSolutionAction (item, capability, CONFLICTS, otherItem));	
 }
 
+ProblemSolutionIgnoreObsoletes::ProblemSolutionIgnoreObsoletes( ResolverProblem_Ptr parent,
+								PoolItem_Ref item,
+								const Capability & capability,
+								PoolItem_Ref otherItem)
+    : ProblemSolution (parent, "", "")
+{
+	// TranslatorExplanation %s = name of package, patch, selection ...
+	_description = str::form (_("Ignore the obsolete %s in %s"),
+				  ResolverInfo::toString (capability).c_str(),
+				  otherItem->name().c_str());
+	addAction (new InjectSolutionAction (item, capability, OBSOLETES, otherItem));	
+}
+
+
 ProblemSolutionIgnoreArch::ProblemSolutionIgnoreArch( ResolverProblem_Ptr parent,
 						      PoolItem_Ref item )
     : ProblemSolution (parent, "", "")
 {
-    _description = _("Ignore architecture");
+    _description = _("ignore architecture");
     addAction ( new InjectSolutionAction (item, Capability(), ARCHITECTURE));
 }
 

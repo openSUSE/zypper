@@ -437,30 +437,40 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	caps = _item->dep (Dep::CONFLICTS);
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
-
 	    const Capability cap = *iter;
 	    _XDEBUG("this conflicts with '" << cap << "'");
 	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item, _soft);
 	    // Push the QueueItem at the END of the list in order to favourite conflicts caused
 	    // by obsolating this item.
 	    qil.push_back (conflict_item);
-
 	}
 
 	/* Construct conflict items for each of the item's obsoletes. */
 
 	caps = _item->dep (Dep::OBSOLETES);
+	IgnoreMap ignoreMap = context->getIgnoreObsoletes();
+	
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
-
 	    const Capability cap = *iter;
-	    _XDEBUG("this obsoletes " <<  cap);
-	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item, _soft);
-	    conflict_item->setActuallyAnObsolete();
-	    // Push the QueueItem at the BEGIN of the list in order to favourite this confict
-	    // comparing to "normal" conflicts, cause this item will be deleted. So other
-	    // conflicts will not be regarded in the future.
-	    qil.push_front (conflict_item);
-
+	    bool found = false;
+	    for (IgnoreMap::iterator it = ignoreMap.begin();
+		 it != ignoreMap.end(); it++) {
+		if (it->first == _item
+		    && it->second == cap) {
+		    _XDEBUG("Found ignoring obsoletes " << cap << " for " << _item);
+		    found = true;
+		    break;
+		}
+	    }
+	    if (!found) {	    
+		_XDEBUG("this obsoletes " <<  cap);
+		QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item, _soft);
+		conflict_item->setActuallyAnObsolete();
+		// Push the QueueItem at the BEGIN of the list in order to favourite this confict
+		// comparing to "normal" conflicts, cause this item will be deleted. So other
+		// conflicts will not be regarded in the future.
+		qil.push_front (conflict_item);
+	    }
 	}
 
 	// Searching item that conflict with us and try to uninstall it if it is useful

@@ -102,6 +102,7 @@ _XDEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
 	_establishing	     = parent->_establishing;
 	_ignoreConflicts     = parent->_ignoreConflicts;
 	_ignoreRequires      = parent->_ignoreRequires;
+	_ignoreObsoletes     = parent->_ignoreObsoletes;
 	_ignoreArchitecture  = parent->_ignoreArchitecture;
 	_ignoreInstalledItem = parent->_ignoreInstalledItem;
 	_forceResolve        = parent->_forceResolve;

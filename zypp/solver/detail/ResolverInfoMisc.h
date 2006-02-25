@@ -46,7 +46,16 @@ namespace zypp
 //	CLASS NAME : ResolverInfoMisc
 
 class ResolverInfoMisc : public ResolverInfoContainer {
+        public:
+        typedef enum {
+	    NONE,
+	    CONFLICT,	// conflicts [dep]
+	    OBSOLETE,	// obsoletes [dep]
+	    REQUIRE	// require [dep]
+	} TriggerReason;
 
+    
+    
 	private:
 
 	  Capability _capability;			// capability leading to this info
@@ -55,7 +64,7 @@ class ResolverInfoMisc : public ResolverInfoContainer {
 	  Capability _other_capability;
 
 	  std::string _action;
-	  std::string _trigger;
+	  TriggerReason _trigger;
 
 	public:
 
@@ -72,7 +81,7 @@ class ResolverInfoMisc : public ResolverInfoContainer {
 
 	  virtual std::string message (void) const;
 	  std::string action (void) const { return _action; }
-	  std::string trigger (void) const { return _trigger; }
+	  TriggerReason trigger (void) const { return _trigger; }
 
 	  PoolItem_Ref other (void) const { return _other_item; }
 	  const Capability other_capability (void) const { return _other_capability; }
@@ -84,7 +93,7 @@ class ResolverInfoMisc : public ResolverInfoContainer {
 	  virtual ResolverInfo_Ptr copy (void) const;
 
 	  void addAction (const std::string & action_msg);
-	  void addTrigger (const std::string & trigger_msg);
+	  void addTrigger (const TriggerReason & trigger);
 
 	  void setOtherPoolItem (PoolItem_Ref other);
 	  void setOtherCapability (const Capability & capability);

@@ -261,6 +261,13 @@ Resolver::addIgnoreRequires (const PoolItem_Ref item,
 }
 
 void
+Resolver::addIgnoreObsoletes (const PoolItem_Ref item,
+			      const Capability & capability)
+{
+    _ignoreObsoletes.insert(make_pair(item, capability));
+}
+
+void
 Resolver::addIgnoreArchitecture (const PoolItem_Ref item)
 {
     _ignoreArchitecture.push_back (item);
@@ -389,6 +396,7 @@ Resolver::establishState (ResolverContext_Ptr context)
     context->setEstablishing (true);
     context->setIgnoreCababilities (_ignoreConflicts,
 				    _ignoreRequires,
+				    _ignoreObsoletes,
 				    _ignoreArchitecture,
 				    _ignoreInstalledItem);
     context->setForceResolve (_forceResolve);
@@ -497,6 +505,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     // Initialize all ignoring dependencies
     initial_queue->context()->setIgnoreCababilities (_ignoreConflicts,
 				    _ignoreRequires,
+				    _ignoreObsoletes,
 				    _ignoreArchitecture,
 				    _ignoreInstalledItem);
     initial_queue->context()->setForceResolve (_forceResolve);

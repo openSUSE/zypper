@@ -107,6 +107,7 @@ namespace zypp
 	{
 	    REQUIRES,
 	    CONFLICTS,
+	    OBSOLETES,
 	    ARCHITECTURE,
 	    INSTALLED
 	} InjectSolutionKind;

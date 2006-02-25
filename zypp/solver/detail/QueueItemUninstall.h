@@ -69,6 +69,7 @@ class QueueItemUninstall : public QueueItem {
     bool _due_to_conflict;
     bool _due_to_obsolete;
     bool _unlink;
+    PoolItem_Ref _obsoletes_item; 	// item which has caused (has the obsoletes) this request
 
   public:
 
@@ -90,7 +91,8 @@ class QueueItemUninstall : public QueueItem {
     void setRemoveOnly (void)			{ _remove_only = true; }
     void setUpgradedTo (PoolItem_Ref item)		{ _upgraded_to = item; }
     void setDueToConflict (void)		{ _due_to_conflict = true; }
-    void setDueToObsolete (void)		{ _due_to_obsolete = true; }
+    void setDueToObsolete (const PoolItem_Ref item)
+	{ _due_to_obsolete = true; _obsoletes_item = item; }
     void setUnlink (void);
 
     // ---------------------------------- methods

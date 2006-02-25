@@ -232,7 +232,7 @@ struct ConflictProcess
 	    uninstall->setCapability (conflict_capability);
 
 	    if (actually_an_obsolete) {
-		uninstall->setDueToObsolete ();
+		uninstall->setDueToObsolete (conflict_issuer);
 		log_info = new ResolverInfoObsoletes (provider, conflict_issuer);
 	    } else {
 		uninstall->setDueToConflict ();
