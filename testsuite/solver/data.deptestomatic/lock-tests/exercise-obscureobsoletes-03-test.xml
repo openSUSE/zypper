@@ -6,12 +6,11 @@
 </setup>
 
 <!-- 
-# 3 same but this time via obsoletion of provides
-foo2old
+# obsolete an virtual provides --> no attempt deleting foo and foo-devel  
  -->
 <trial>
-  <lock package="foo" channel="test"/>
-  <lock package="foo-devel" channel="test"/>
+  <lock package="foo" channel="@system"/>
+  <lock package="foo-devel" channel="@system"/>
   <install channel="test" package="foo2old"/>
 </trial>
 
