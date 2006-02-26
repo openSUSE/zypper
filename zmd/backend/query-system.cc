@@ -26,7 +26,11 @@ main (int argc, char **argv)
 	return 1;
     }
 
-    zypp::base::LogControl::instance().logfile( ZMD_BACKEND_LOG );
+    const char *logfile = getenv("ZYPP_LOGFILE");
+    if (logfile != NULL)
+	zypp::base::LogControl::instance().logfile( logfile );
+    else
+	zypp::base::LogControl::instance().logfile( ZMD_BACKEND_LOG );
 
     ZYpp::Ptr God = zypp::getZYpp();
 
