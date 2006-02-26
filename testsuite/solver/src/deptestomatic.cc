@@ -1040,7 +1040,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	ZYpp::LocaleSet lset;
 	for (list<string>::iterator it = locales.begin(); it != locales.end(); ++it)
 	    lset.insert( Locale( *it ) );
-	God->setRequestedLocales( lset );
+	God->setPossibleLocales( lset );
     }
 
     node = node->children();
