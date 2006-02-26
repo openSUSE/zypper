@@ -1,5 +1,7 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
-
+// query-files.cc
+// zmd helper to extract data from .rpm files
+//
 #include <iostream>
 #include <cstring>
 #include <list>
@@ -35,7 +37,9 @@ query_file (Target_Ptr target, const char *path)
 {
     ResStore store;
 #if 0
-    Resolvable::constPtr resolvable = target->rpm-qp (path);	// FIXME, needs rpm -qp
+    RpmHeader::constPtr = RpmHeader::readPackage( path );		// rpm -qp
+			// RpmDb::getData( path );
+    Resolvable::constPtr resolvable = RpmHeader::readPackage( path );
     if (resolvable != NULL) {
 	store.insert( resolvable );
     }
@@ -43,48 +47,255 @@ query_file (Target_Ptr target, const char *path)
     return store;
 }
 
-static char *
-extract_value (char *token)
-{
-    char *eq, *value;
+//
+// extract value from "key=value" token string
+//
 
-    eq = strchr (token, '=');
+static string
+extract_value (const string & token)
+{
+    char *eq;
+
+    eq = strchr (token.c_str(), '=');
 
     if (!eq)
-	return NULL;
+	return string();
 
     while (*(++eq) == ' ');    /* Move past the equals sign and strip leading whitespace */
 
-    return strdup (value);
+    return string (eq);
 }
 
+
+// check query for "recursive=N"
+//   set recursive = true in N numeric and > 0
+//
+
 static void
-parse_query (const char *query, bool *recursive)
+parse_query (const string & query, bool *recursive)
 {
-#if 0
     char **tokens, **t;
 
-    tokens = g_strsplit (query, ";", 0);
+    std::vector<std::string> tokens;
+    str::split( query, std::back_inserter( tokens ), ";" );
 
-    for (t = tokens; t && *t; t++) {
-	if (g_strncasecmp (*t, "recursive", 9) == 0) {
-	    char *tmp = extract_value (*t);
+    for (int pos = 0; pos < tokens.size(); ++pos) {
+	string tok = str.toLower( tokens[pos] );
+	if (strncmp (tok.c_str(), "recursive", 9) == 0) {
+	    string val = extract_value( tok );
 
-	    if (atoi (tmp))
-		*recursive = TRUE;
-
-	    free (tmp);
+	    if (str::strtonum<int>( val ) > 0)
+		*recursive = true;
 	}
 
 	/* Ignore unknown parts */
     }
-
-    g_strfreev (tokens);
-#endif
 }
 
+//-----------------------------------------------------------------------------
+
+#if 0
+typedef struct {
+    RCResolvableFn user_callback;
+    gpointer    user_data;
+    const gchar *path;
+} PackagesFromDirInfo;
+
+static gboolean
+packages_from_dir_cb (RCPackage *package, gpointer user_data)
+{
+    PackagesFromDirInfo *info = user_data;
+    RCPackageUpdate *update;
+
+    /* Set package path */
+    update = rc_package_get_latest_update (package);
+    if (update && update->package_url)
+        package->package_filename = g_build_path (G_DIR_SEPARATOR_S,
+                                                  info->path,
+                                                  update->package_url,
+                                                  NULL);
+    if (info->user_callback)
+        return info->user_callback ((RCResolvable *)package, info->user_data);
+
+    return TRUE;
+}
+
+gint
+rc_extract_packages_from_directory (const char *path,
+                                    RCChannel *channel,
+                                    RCPackman *packman,
+                                    gboolean recursive,
+                                    RCResolvableFn callback,
+                                    gpointer user_data)
+{
+    GDir *dir;
+    GHashTable *hash;
+    struct HashIterInfo info;
+    const char *filename;
+    char *magic;
+    gboolean distro_magic, pkginfo_magic;
+    
+    g_return_val_if_fail (path && *path, -1);
+    g_return_val_if_fail (channel != NULL, -1);
+
+    /*
+      Check for magic files that indicate how to treat the
+      directory.  The files aren't read -- it is sufficient that
+      they exist.
+    */
+
+    magic = g_strconcat (path, "/RC_SKIP", NULL);
+    if (g_file_test (magic, G_FILE_TEST_EXISTS)) {
+        g_free (magic);
+        return 0;
+    }
+    g_free (magic);
+
+    magic = g_strconcat (path, "/RC_RECURSIVE", NULL);
+    if (g_file_test (magic, G_FILE_TEST_EXISTS))
+        recursive = TRUE;
+    g_free (magic);
+    
+    magic = g_strconcat (path, "/RC_BY_DISTRO", NULL);
+    distro_magic = g_file_test (magic, G_FILE_TEST_EXISTS);
+    g_free (magic);
+
+    pkginfo_magic = TRUE;
+    magic = g_strconcat (path, "/RC_IGNORE_PKGINFO", NULL);
+    if (g_file_test (magic, G_FILE_TEST_EXISTS))
+        pkginfo_magic = FALSE;
+    g_free (magic);
+
+    /* If distro_magic is set, we search for packages in two
+       subdirectories of path: path/distro-target (i.e.
+       path/redhat-9-i386) and path/x-cross.
+    */
+
+#if 0      
+    if (distro_magic) {
+        char *distro_path, *cross_distro_path;
+        gboolean found_distro_magic = FALSE;
+        int count = 0, c;
+
+        distro_path = g_strconcat (path, "/", rc_distro_get_target (), NULL);
+        if (g_file_test (distro_path, G_FILE_TEST_IS_DIR)) {
+            found_distro_magic = TRUE;
+
+            c = rc_extract_packages_from_directory (distro_path,
+                                                    channel, packman,
+                                                    callback, user_data);
+            if (c >= 0)
+                count += c;
+        }
+
+        cross_distro_path = g_strconcat (path, "/x-distro", NULL);
+        if (g_file_test (cross_distro_path, G_FILE_TEST_IS_DIR)) {
+            c = rc_extract_packages_from_directory (cross_distro_path,
+                                                    channel, packman,
+                                                    callback, user_data);
+            if (c >= 0)
+                count += c;
+        }
+
+        g_free (cross_distro_path);
+        g_free (distro_path);
+
+        return count;
+    }
+#endif
+
+    /* If pkginfo_magic is set and if a packageinfo.xml or
+       packageinfo.xml.gz file exists in the directory, use it
+       instead of just scanning the files in the directory
+       looking for packages. */
+
+    if (pkginfo_magic) {
+        int i, count;
+        gchar *pkginfo_path = NULL;
+        const gchar *pkginfo[] = { "packageinfo.xml",
+                                   "packageinfo.xml.gz",
+                                   NULL };
+
+        for (i = 0; pkginfo[i]; i++) {
+            pkginfo_path = g_build_path (G_DIR_SEPARATOR_S, path, pkginfo[i], NULL);
+            if (g_file_test (pkginfo_path, G_FILE_TEST_EXISTS))
+                break;
+
+            g_free (pkginfo_path);
+            pkginfo_path = NULL;
+        }
+
+        if (pkginfo_path) {
+            PackagesFromDirInfo info;
+
+            info.user_callback = callback;
+            info.user_data = user_data;
+            info.path = path;
+
+            count = rc_extract_packages_from_helix_file (pkginfo_path,
+                                                         channel,
+                                                         packages_from_dir_cb,
+                                                         &info);
+            g_free (pkginfo_path);
+            return count;
+        }
+    }
+
+    dir = g_dir_open (path, 0, NULL);
+    if (dir == NULL)
+        return -1;
+
+    hash = g_hash_table_new (NULL, NULL);
+
+    while ( (filename = g_dir_read_name (dir)) ) {
+        gchar *file_path;
+
+        file_path = g_strconcat (path, "/", filename, NULL);
+
+        if (recursive && g_file_test (file_path, G_FILE_TEST_IS_DIR)) {
+            rc_extract_packages_from_directory (file_path,
+                                                channel,
+                                                packman,
+                                                TRUE,
+                                                hash_recurse_cb,
+                                                hash);
+        } else if (g_file_test (file_path, G_FILE_TEST_IS_REGULAR)) {
+            RCPackage *pkg;
+
+            pkg = rc_packman_query_file (packman, file_path, TRUE);
+            if (pkg != NULL) {
+                rc_resolvable_set_channel (RC_RESOLVABLE (pkg), channel);
+                pkg->package_filename = g_strdup (file_path);
+                pkg->local_package = FALSE;
+                add_fake_history (pkg);
+                package_into_hash (pkg, hash);
+                g_object_unref (pkg);
+            }
+        }
+
+        g_free (file_path);
+    }
+
+    g_dir_close (dir);
+   
+    info.callback = callback;
+    info.user_data = user_data;
+    info.count = 0;
+
+    /* Walk across the hash and:
+       1) Invoke the callback on each package
+       2) Unref each package
+    */
+    g_hash_table_foreach (hash, hash_iter_cb, &info);
+
+    g_hash_table_destroy (hash);
+
+    return info.count;
+}
+#endif
+
 static ResStore
-query_directory (Target_Ptr target, const char *path, bool recursive)
+query_directory (Target_Ptr target, const Pathname & path, bool recursive)
 {
     ResStore store;
 #warning Unclear semantics
