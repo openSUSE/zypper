@@ -52,25 +52,25 @@ unsigned diffFiles(const std::string file1, const std::string file2, std::string
 {
     const char* argv[] =
     {
-        "diff",
-        "-u",
-        file1.c_str(),
-        file2.c_str(),
-        NULL
+	"diff",
+	"-u",
+	file1.c_str(),
+	file2.c_str(),
+	NULL
     };
     ExternalProgram* prog = new ExternalProgram(argv,ExternalProgram::Discard_Stderr, false, -1, true);
 
     if(!prog)
-        return 2;
+	return 2;
 
     string line;
     int count = 0;
     for(line = prog->receiveLine(), count=0;
-        !line.empty();
-        line = prog->receiveLine(), count++ )
+	!line.empty();
+	line = prog->receiveLine(), count++ )
     {
-        if(maxlines<0?true:count<maxlines)
-            out+=line;
+	if(maxlines<0?true:count<maxlines)
+	    out+=line;
     }
 
     return prog->close();
@@ -252,18 +252,18 @@ class RpmDb::Packages {
     void buildIndex() {
       _index.clear();
       for ( list<Package::Ptr>::iterator iter = _list.begin();
-            iter != _list.end(); ++iter )
+	    iter != _list.end(); ++iter )
       {
-        string name = (*iter)->name();
-        Package::Ptr & nptr = _index[name]; // be shure to get a reference!
+	string name = (*iter)->name();
+	Package::Ptr & nptr = _index[name]; // be shure to get a reference!
 
-        if ( nptr ) {
-          WAR << "Multiple entries for package '" << name << "' in rpmdb" << endl;
-          if ( nptr->installtime() > (*iter)->installtime() )
+	if ( nptr ) {
+	  WAR << "Multiple entries for package '" << name << "' in rpmdb" << endl;
+	  if ( nptr->installtime() > (*iter)->installtime() )
 	    continue;
-          else
+	  else
 	    nptr = *iter;
-        }
+	}
 	else
 	{
 	  nptr = *iter;
@@ -895,7 +895,7 @@ void RpmDb::importPubkey( const Pathname & keyring_r, const string & keyname_r )
     for ( string line( prg.receiveLine() ); line.length(); line = prg.receiveLine() ) {
       ssize_t written = write( tmpfd, line.c_str(), line.length() );
       if ( written == -1 || unsigned(written) != line.length() ) {
-        ZYPP_THROW(RpmSubprocessException(string("Error writing pubkey to ") + tmpname));
+	ZYPP_THROW(RpmSubprocessException(string("Error writing pubkey to ") + tmpname));
       }
       res += written; // empty file indicates key not found
     }
@@ -1081,24 +1081,24 @@ This prevented from having packages multiple times
 
     // Collect basic Resolvable data
     NVRAD dataCollect( iter->tag_name(),
-                       edition,
-                       arch );
+	               edition,
+	               arch );
 
     list<string> filenames = impl->filenames();
     dataCollect[Dep::PROVIDES] = iter->tag_provides ( & _filerequires );
     for (list<string>::const_iterator filename = filenames.begin();
-         filename != filenames.end();
-         filename++)
+	 filename != filenames.end();
+	 filename++)
     {
       if (filename->find("/bin/") != string::npos
 	|| filename->find("/sbin/") != string::npos
 	|| filename->find("/lib/") != string::npos
 	|| filename->find("/lib64/") != string::npos
 	|| filename->find("/etc/") != string::npos
-        || filename->find("/usr/games/") != string::npos
-        || filename->find("/usr/share/dict/words") != string::npos
-        || filename->find("/usr/share/magic.mime") != string::npos
-        || filename->find("/opt/gnome/games") != string::npos)
+	|| filename->find("/usr/games/") != string::npos
+	|| filename->find("/usr/share/dict/words") != string::npos
+	|| filename->find("/usr/share/magic.mime") != string::npos
+	|| filename->find("/opt/gnome/games") != string::npos)
       {
 	try {
 	  dataCollect[Dep::PROVIDES].insert(_f.parse(ResTraits<Package>::kind, *filename));
@@ -1185,6 +1185,34 @@ void RpmDb::traceFileRel( const PkgRelation & rel_r )
   }
 }
 #endif
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : RpmDb::fileList
+//	METHOD TYPE : bool
+//
+//	DESCRIPTION :
+//
+std::list<RpmDb::FileInfo>
+RpmDb::fileList( const std::string & name_r, const Edition & edition_r ) const
+{
+  std::list<FileInfo> result;
+
+  librpmDb::db_const_iterator it;
+  bool found;
+  if (edition_r == Edition::noedition) {
+     found = it.findPackage( name_r );
+  }
+  else {
+     found = it.findPackage( name_r, edition_r );
+  }
+  if (!found)
+    return result;
+
+  return result;
+}
+
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -1717,10 +1745,10 @@ void RpmDb::installPackage( const Pathname & filename, unsigned flags )
       RpmInstallReport::Action user = report->problem( excpt_r );
 
       if( user == RpmInstallReport::ABORT ) {
-        report->finish( excpt_r );
-        ZYPP_RETHROW(excpt_r);
+	report->finish( excpt_r );
+	ZYPP_RETHROW(excpt_r);
       } else if ( user == RpmInstallReport::IGNORE ) {
-        break;
+	break;
       }
     }
   while (true);
