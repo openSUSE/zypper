@@ -1,0 +1,88 @@
+<channel><subchannel>
+<package>
+  <name>mutt</name>
+  <summary>A fake package</summary>
+  <description>A fake package</description>
+  <section>misc</section>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <arch>i586</arch>
+      <epoch>0</epoch>
+      <version>1.5.9i</version>
+      <release>17</release>
+      <filename>foo.bar</filename>
+      <filesize>123</filesize>
+      <installedsize>234</installedsize>
+      <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+      <importance>suggested</importance>
+      <description>Yggdrasil Linux</description>
+    </update>
+  </history>
+</package>
+<patch>
+  <name>patch-mutt</name>
+  <arch>noarch</arch>
+  <version>1</version>
+  <release>0</release>
+  <requires>
+    <dep kind="atom" name="mutt" op="=" version="1.5.9i" release="17"/>
+  </requires>
+</patch>
+<atom>
+  <name>mutt</name>
+  <arch>i586</arch>
+  <version>1.5.9i</version>
+  <release>17</release>
+  <freshens>
+    <dep kind="package" name="mutt"/>
+  </freshens>
+  <requires>
+    <dep kind="package" name="mutt" op="&ge;" version="1.5.9i" release="17"/>
+  </requires>
+</atom>
+<package>
+  <name>mutt-requires</name>
+  <summary>A fake provides</summary>
+  <description>A fake package</description>
+  <section>misc</section>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <epoch>0</epoch>
+      <arch>i586</arch>
+      <version>1.5.9i</version>
+      <release>16</release>
+      <filename>foo.bar</filename>
+      <filesize>123</filesize>
+      <installedsize>234</installedsize>
+      <md5sum>0f55f36a3240858038a281911605024e</md5sum>
+      <importance>suggested</importance>
+      <description>Yggdrasil Linux</description>
+    </update>
+  </history>
+  <provides>
+    <dep name="/usr/bin/perl"/>
+    <dep name="libc.so.6(GLIBC_2.3.4)"/>
+    <dep name="smtp_daemon"/>
+    <dep name="libc.so.6(GLIBC_2.4)"/>
+    <dep name="libc.so.6(GLIBC_2.3)"/>
+    <dep name="libc.so.6(GLIBC_2.2)"/>
+    <dep name="libc.so.6(GLIBC_2.1)"/>
+    <dep name="libc.so.6(GLIBC_2.0)"/>
+    <dep name="libidn.so.11"/>
+    <dep name="libcrypto.so.0.9.8"/>
+    <dep name="/bin/sh"/>
+    <dep name="libsasl2.so.2"/>
+    <dep name="libgdbm.so.3"/>
+    <dep name="libssl.so.0.9.8"/>
+    <dep name="libc.so.6"/>
+    <dep name="libncursesw.so.5"/>
+    <dep name=""/>
+    <dep name=""/>
+    <dep name=""/>
+    <dep name=""/>
+    <dep name=""/>
+  </provides>
+</package>
+</subchannel></channel>

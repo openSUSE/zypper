@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+   load patch data from armstrong.suse.de
+-->
+<test>
+<setup>
+  <arch name="i686"/>
+  <system file="mutt-new-patch-installed.xml"/>
+  <source url="http://zypp:ZYpp@armstrong.suse.de/download/Code/10/update/i386" name="armstrong"/>
+</setup>
+<trial>
+  <showpool all="yes"/>
+  <establish/>
+  <uninstall kind="package" name="mutt"/> 
+</trial>
+</test>
