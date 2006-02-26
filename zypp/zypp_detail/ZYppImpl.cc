@@ -104,10 +104,12 @@ namespace zypp
 
     void ZYppImpl::removeInstalledResolvables ()
     {
-        for (ResPool::const_iterator it = pool().begin(); it != pool().end(); ++it)
+        for (ResPool::const_iterator it = pool().begin(); it != pool().end();)
 	{
+	    ResPool::const_iterator next = it; ++next;
 	    if (it->status().isInstalled())
 		_pool.erase( *it );
+	    it = next;
 	}
     }
 
