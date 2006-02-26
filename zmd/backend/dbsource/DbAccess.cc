@@ -401,7 +401,8 @@ DbAccess::openDb( bool for_writing )
     }
 
     int rc = sqlite3_open (_dbfile.c_str(), &_db);
-    if (rc != SQLITE_OK) {
+    if (rc != SQLITE_OK
+	|| _db == NULL) {
 	ERR << "Can not open SQL database: " << sqlite3_errmsg (_db) << endl;
 	return false;
     }
