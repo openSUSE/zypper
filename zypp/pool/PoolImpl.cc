@@ -123,7 +123,7 @@ namespace zypp
     storeDelete( PoolTraits::DepCapItemContainerT & store_r, const PoolItem & item_r, Dep cap_r )
     {
       CapSet caps = item_r->dep( cap_r );
-XXX << "storeDelete(" << item_r << ")" << endl;
+//XXX << "storeDelete(" << item_r << ")" << endl;
       for (CapSet::iterator ic = caps.begin(); ic != caps.end(); ++ic) {
 	PoolTraits::CapItemContainerT capitems = store_r[cap_r][ic->index()];
 	for (PoolTraits::CapItemContainerT::iterator pos = capitems.begin();
@@ -139,7 +139,7 @@ XXX << "storeDelete(" << item_r << ")" << endl;
 
     void CapHash::erase( const PoolItem & item_r )
     {
-XXX << "CapHash::erase(" << item_r << ")" << endl;
+//XXX << "CapHash::erase(" << item_r << ")" << endl;
       storeDelete( _store, item_r, Dep::PROVIDES );
       storeDelete( _store, item_r, Dep::REQUIRES );
       storeDelete( _store, item_r, Dep::CONFLICTS );
