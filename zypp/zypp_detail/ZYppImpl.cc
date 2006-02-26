@@ -107,7 +107,7 @@ namespace zypp
         for (ResPool::const_iterator it = pool().begin(); it != pool().end(); ++it)
 	{
 	    if (it->status().isInstalled())
-		_pool.erase(*it);
+		_pool.erase( *it );
 	}
     }
 
