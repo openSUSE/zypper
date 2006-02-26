@@ -11,6 +11,6 @@
   <locale name="zh"/>
 </setup>
 <trial>
-  <showpool all="yes"/>
+  <showpool all="yes" prefix=">!>"/>
 </trial>
 </test>
