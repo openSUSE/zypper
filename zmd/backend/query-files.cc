@@ -17,8 +17,8 @@
 
 #include "zypp/Target.h"
 
-using std::endl;
 using namespace zypp;
+using namespace std;
 
 #include <sqlite3.h>
 #include <cstring>
@@ -74,13 +74,11 @@ extract_value (const string & token)
 static void
 parse_query (const string & query, bool *recursive)
 {
-    char **tokens, **t;
-
     std::vector<std::string> tokens;
     str::split( query, std::back_inserter( tokens ), ";" );
 
     for (int pos = 0; pos < tokens.size(); ++pos) {
-	string tok = str.toLower( tokens[pos] );
+	string tok = str::toLower( tokens[pos] );
 	if (strncmp (tok.c_str(), "recursive", 9) == 0) {
 	    string val = extract_value( tok );
 

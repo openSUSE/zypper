@@ -20,8 +20,9 @@
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
 
-#include "zypp/Target.h"
 #include "zypp/target/rpm/RpmHeader.h"
+#include "zypp/target/rpm/RpmDb.h"
+#include "zypp/Target.h"
 
 using namespace zypp;
 using namespace std;
@@ -39,6 +40,8 @@ using target::rpm::RpmHeader;
 
 //-----------------------------------------------------------------------------
 
+// not needed
+#if 0
 class LookFor : public resfilter::PoolItemFilterFunctor
 {
   public:
@@ -46,13 +49,15 @@ class LookFor : public resfilter::PoolItemFilterFunctor
 
     bool operator()( PoolItem_Ref provider )
     {
-        item = provider;
-        return false;                           // stop here, we found it
+	item = provider;
+	return false;                           // stop here, we found it
     }
 };
+#endif
+
 
 static int
-package_files( sqlite3 *db, long id, const ResPool & pool )
+package_files( sqlite3 *db, sqlite_int64 id, Target_Ptr target )
 {
     int result = 0;
 
@@ -60,9 +65,9 @@ package_files( sqlite3 *db, long id, const ResPool & pool )
 MIL << "package_files id " << id << endl;
     sqlite3_stmt *handle = NULL;
     const char *sql =
-        //      0     1        2        3      4
+	//      0     1        2        3      4
 	"SELECT name, version, release, epoch, arch, "
-        //      5          6
+	//      5          6
 	"       installed, package_filename "
 	"FROM packages "
 	"WHERE id = ?";
@@ -110,9 +115,23 @@ MIL << "=> " << name << "-" << version << "-" << release << "." << arch << ": " 
 
     // get package data
 
+    RpmHeader::constPtr header = NULL;
+
     if (installed) {
 
 	Edition edition( version, release, epoch );
+
+	try {
+	    // get data from rpmdb
+	    target->rpmDb().getData( name, edition, header );
+	}
+	catch( const Exception & excpt_r ) {
+	    header = NULL;
+	    ERR << "Can't extract header data from rpmdb." << endl;
+	    ZYPP_CAUGHT( excpt_r );
+	}
+
+#if 0	// not needed
 	LookFor info;
 
 	// find package in pool
@@ -129,23 +148,61 @@ MIL << "=> " << name << "-" << version << "-" << release << "." << arch << ": " 
 	}
 
 	MIL << "Id " << id << ": " << info.item << endl;
+#endif
+
     }
     else {
-	// get data from package_filename
-	RpmHeader::constPtr header = RpmHeader::readPackage( package_filename );
-
+	try {
+	    // get data from package_filename
+	    header = RpmHeader::readPackage( package_filename );
+	}
+	catch( const Exception & excpt_r ) {
+	    header = NULL;
+	    ERR << "Can't extract header data from '" << package_filename << "'." << endl;
+	    ZYPP_CAUGHT( excpt_r );
+	}
     }
 
+    if (header == NULL)
+	return 1;
+
+MIL << "RpmHeader @" << header << endl;
 
     sql =
-        "INSERT INTO files (resolvable_id, filename, size, md5sum, uid, "
-        "                   gid, mode, mtime, ghost, link_target) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	"INSERT INTO files (resolvable_id, filename, size, md5sum, uid, "
+	"                   gid, mode, mtime, ghost, link_target) "
+	"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     rc = sqlite3_prepare (db, sql, -1, &handle, NULL);
     if (rc != SQLITE_OK) {
 	ERR << "Can not prepare insert-into-files clause: " << sqlite3_errmsg (db) << endl;
 	return 1;
     }
+
+    std::list<std::string> files = header->tag_filenames();
+
+    for (std::list<std::string>::const_iterator it = files.begin(); it != files.end(); ++it) {
+
+	sqlite3_bind_int64 (handle, 1, id);
+	sqlite3_bind_text  (handle, 2, it->c_str(), -1, SQLITE_STATIC);
+#if 0
+	sqlite3_bind_int   (handle, 3, f->size);
+	sqlite3_bind_text  (handle, 4, f->md5sum, -1, SQLITE_STATIC);
+	sqlite3_bind_int   (handle, 5, f->uid);
+	sqlite3_bind_int   (handle, 5, f->gid);
+	sqlite3_bind_int   (handle, 6, f->mode);
+	sqlite3_bind_int   (handle, 7, f->mtime);
+	sqlite3_bind_int   (handle, 8, f->ghost);
+	sqlite3_bind_text  (handle, 4, f->link_target, -1, SQLITE_STATIC);
+#endif
+	rc = sqlite3_step (handle);
+	sqlite3_reset (handle);
+
+	if (rc != SQLITE_DONE) {
+	    ERR << "Error adding file to SQL: " << sqlite3_errmsg (db) << endl;
+	}
+    }
+
+    sqlite3_exec (db, "COMMIT", NULL, NULL, NULL);
 
 cleanup:
     sqlite3_finalize (handle);
@@ -174,10 +231,19 @@ main (int argc, char **argv)
     DbAccess db(argv[1]);
 
     db.openDb( true );		// open for writing
+    Target_Ptr target;
 
-    God->initTarget( "/" );
+    try {
+	God->initTarget( "/" );
+	target = God->target();
+    }
+    catch( const Exception & excpt_r ) {    
+	ERR << "Can't initialize target." << endl;
+	ZYPP_CAUGHT( excpt_r );
+	return 1;
+    }
 
-    int result = package_files( db.db(), str::strtonum<long>( argv[2] ), God->pool() );
+    int result = package_files( db.db(), str::strtonum<long long>( argv[2] ), target );
 
     God->finishTarget();
 
