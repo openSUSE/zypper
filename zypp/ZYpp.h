@@ -120,6 +120,13 @@ namespace zypp
     /** */
     LocaleSet getRequestedLocales() const;
 
+    /** Set the available locales.
+     * Languages to be available for selection
+    */
+    void setPossibleLocales( const LocaleSet & locales_r );
+    /** */
+    LocaleSet getPossibleLocales() const;
+
   public:
     /** Get the path where zypp related plugins store persistent data and caches   */
     Pathname homePath() const;

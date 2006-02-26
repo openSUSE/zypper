@@ -100,10 +100,15 @@ namespace zypp
       typedef std::set<Locale> LocaleSet;
       /** */
       void setRequestedLocales( const LocaleSet & locales_r )
-      {}
+      {  _requested_locales = locales_r; }
       /** */
       LocaleSet getRequestedLocales() const
-      { return LocaleSet(); }
+      { return _requested_locales; }
+
+      /** */
+      void setPossibleLocales( const LocaleSet & locales_r );
+      /** */
+      LocaleSet getPossibleLocales() const;
 
     public:
       /** Get the system architecture.   */
@@ -130,7 +135,12 @@ namespace zypp
       Resolver_Ptr _resolver;
       /** */
       Arch _architecture;
+      /** */
       Pathname _home_path;
+      /** this is what the user wants. */
+      LocaleSet _requested_locales;
+      /** this is what is possible. */
+      ResStore _possible_locales;
     };
     ///////////////////////////////////////////////////////////////////
 

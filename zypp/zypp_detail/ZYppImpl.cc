@@ -15,6 +15,10 @@
 //#include "zypp/base/Logger.h"
 
 #include "zypp/zypp_detail/ZYppImpl.h"
+#include "zypp/detail/LanguageImpl.h"
+#include "zypp/detail/ResImplTraits.h"
+#include "zypp/NVRAD.h"
+#include "zypp/Language.h"
 
 using std::endl;
 
@@ -82,6 +86,9 @@ namespace zypp
     {
     }
 
+    //------------------------------------------------------------------------
+    // add/remove resolvables
+
     void ZYppImpl::addResolvables (const ResStore& store, bool installed)
     {
 	_pool.insert(store.begin(), store.end(), installed);
@@ -103,6 +110,9 @@ namespace zypp
 		_pool.erase(*it);
 	}
     }
+
+    //------------------------------------------------------------------------
+    // target
 
     Target_Ptr ZYppImpl::target() const
     {
@@ -134,6 +144,9 @@ namespace zypp
 	removeInstalledResolvables();
       _target = 0;
     }
+
+    //------------------------------------------------------------------------
+    // commit
 
     /** \todo Remove workflow from target, lot's of it could be done here,
     * and target used for transact. */
@@ -167,14 +180,50 @@ namespace zypp
     }
 
 
+    //------------------------------------------------------------------------
+    // locales
+
+    /** */
+    void ZYppImpl::setPossibleLocales( const LocaleSet & locales_r )
+    {
+	removeResolvables( _possible_locales );
+	_possible_locales.clear();
+
+	for (LocaleSet::const_iterator it = locales_r.begin(); it != locales_r.end(); ++it) {
+	    NVRA nvra( it->code(), Edition(), Arch_noarch );
+	    NVRAD ldata( nvra, Dependencies() );
+	    detail::ResImplTraits<detail::LanguageImpl>::Ptr limpl = new detail::LanguageImpl();
+	    Language::Ptr language = detail::makeResolvableFromImpl( ldata, limpl );
+	    _possible_locales.insert( language );
+	}
+	addResolvables( _possible_locales, false );
+    }
+
+    /** */
+    ZYppImpl::LocaleSet ZYppImpl::getPossibleLocales() const
+    {
+	LocaleSet lset;
+	for (ResStore::const_iterator it = _possible_locales.begin(); it != _possible_locales.end(); ++it) {
+	    lset.insert( Locale( (*it)->name() ) );
+	}
+	return lset;
+    }
+
+    //------------------------------------------------------------------------
+    // architecture
+
     void ZYppImpl::setArchitecture( const Arch & arch )
     {
 	_architecture = arch;
 	if (_resolver) _resolver->setArchitecture( arch );
     }
 
+    //------------------------------------------------------------------------
+    // target store path
+
     Pathname ZYppImpl::homePath() const
     { return _home_path.empty() ? Pathname("/var/lib/zypp") : _home_path; }
+
     void ZYppImpl::setHomePath( const Pathname & path )
     { _home_path = path; }  
     
