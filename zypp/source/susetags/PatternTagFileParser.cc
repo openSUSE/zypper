@@ -51,18 +51,18 @@ namespace zypp
 
       PatternTagFileParser::PatternTagFileParser()
       {
-        selImpl = new SuseTagsPatternImpl;
+        patImpl = new SuseTagsPatternImpl;
       }
 
       void PatternTagFileParser::consume( const SingleTag &tag )
       {
         if ( tag.name == "Sum" )
         {
-          selImpl->_summary.setText(tag.value, Locale(tag.modifier));
+          patImpl->_summary.setText(tag.value, Locale(tag.modifier));
         }
         else if ( tag.name == "Ver" )
         {
-          selImpl->_parser_version = tag.value;
+          patImpl->_parser_version = tag.value;
         }
         else if ( tag.name == "Pat" )
         {
@@ -70,26 +70,26 @@ namespace zypp
           std::vector<std::string> words;
           str::split( line, std::back_inserter(words), " " );
 
-          selImpl->_name = words[0];
-          selImpl->_version = words[1];
-          selImpl->_release = words[2];
-          if (words.size() > 3) selImpl->_arch = words[3];
+          patImpl->_name = words[0];
+          patImpl->_version = words[1];
+          patImpl->_release = words[2];
+          if (words.size() > 3) patImpl->_arch = words[3];
         }
         else if ( tag.name == "Vis" )
         {
-          selImpl->_visible = (tag.value == "true") ? true : false;
+          patImpl->_visible = (tag.value == "true") ? true : false;
         }
         else if ( tag.name == "Cat" )
         {
-          selImpl->_category.setText(tag.value, Locale(tag.modifier));
+          patImpl->_category.setText(tag.value, Locale(tag.modifier));
         }
         else if ( tag.name == "Ico" )
         {
-          selImpl->_icon = tag.value;
+          patImpl->_icon = tag.value;
         }
          else if ( tag.name == "Ord" )
         {
-          selImpl->_order = tag.value;
+          patImpl->_order = tag.value;
         }
       }
 
@@ -102,35 +102,35 @@ namespace zypp
           {
             buffer += (*it + "\n");
           }
-          selImpl->_description.setText(buffer, Locale(tag.modifier));
+          patImpl->_description.setText(buffer, Locale(tag.modifier));
         }
         if ( tag.name == "Req" )
         {
-          selImpl->_requires = tag.values;
+          patImpl->_requires = tag.values;
         }
         else if ( tag.name == "Rec" )
         {
-          selImpl->_recommends = tag.values;
+          patImpl->_recommends = tag.values;
         }
         else if ( tag.name == "Prv" )
         {
-          selImpl->_provides = tag.values;
+          patImpl->_provides = tag.values;
         }
         else if ( tag.name == "Obs" )
         {
-          selImpl->_obsoletes = tag.values;
+          patImpl->_obsoletes = tag.values;
         }
         else if ( tag.name == "Con" )
         {
-          selImpl->_conflicts = tag.values;
+          patImpl->_conflicts = tag.values;
         }
         else if ( tag.name == "Prq" )		// package requires
         {
-          selImpl->_pkgrequires = tag.values;
+          patImpl->_pkgrequires = tag.values;
         }
         else if ( tag.name == "Prc" )		// package recommends
         {
-          selImpl->_pkgrecommends = tag.values;
+          patImpl->_pkgrecommends = tag.values;
         }
       }
 
@@ -140,50 +140,50 @@ namespace zypp
         CapFactory _f;
 	Dependencies _deps;
 
-        for (std::list<std::string>::const_iterator it = selImpl->_recommends.begin(); it != selImpl->_recommends.end(); it++)
+        for (std::list<std::string>::const_iterator it = patImpl->_recommends.begin(); it != patImpl->_recommends.end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Pattern>::kind, *it );
 	  _deps[Dep::RECOMMENDS].insert(_cap);
         }
 
-        for (std::list<std::string>::const_iterator it = selImpl->_requires.begin(); it != selImpl->_requires.end(); it++)
+        for (std::list<std::string>::const_iterator it = patImpl->_requires.begin(); it != patImpl->_requires.end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Pattern>::kind, *it );
 	  _deps[Dep::REQUIRES].insert(_cap);
         }
 
-        for (std::list<std::string>::const_iterator it = selImpl->_conflicts.begin(); it != selImpl->_conflicts.end(); it++)
+        for (std::list<std::string>::const_iterator it = patImpl->_conflicts.begin(); it != patImpl->_conflicts.end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Pattern>::kind, *it );
 	  _deps[Dep::CONFLICTS].insert(_cap);
         }
 
-        for (std::list<std::string>::const_iterator it = selImpl->_provides.begin(); it != selImpl->_provides.end(); it++)
+        for (std::list<std::string>::const_iterator it = patImpl->_provides.begin(); it != patImpl->_provides.end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Pattern>::kind, *it );
 	  _deps[Dep::PROVIDES].insert(_cap);
         }
 
-        for (std::list<std::string>::const_iterator it = selImpl->_obsoletes.begin(); it != selImpl->_obsoletes.end(); it++)
+        for (std::list<std::string>::const_iterator it = patImpl->_obsoletes.begin(); it != patImpl->_obsoletes.end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Pattern>::kind, *it );
 	  _deps[Dep::OBSOLETES].insert(_cap);
         }
 
-        for (std::list<std::string>::const_iterator it = selImpl->_pkgrecommends.begin(); it != selImpl->_pkgrecommends.end(); it++)
+        for (std::list<std::string>::const_iterator it = patImpl->_pkgrecommends.begin(); it != patImpl->_pkgrecommends.end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Package>::kind, *it );
 	  _deps[Dep::RECOMMENDS].insert(_cap);
         }
 
-        for (std::list<std::string>::const_iterator it = selImpl->_pkgrequires.begin(); it != selImpl->_pkgrequires.end(); it++)
+        for (std::list<std::string>::const_iterator it = patImpl->_pkgrequires.begin(); it != patImpl->_pkgrequires.end(); it++)
         {
           Capability _cap = _f.parse( ResTraits<Package>::kind, *it );
 	  _deps[Dep::REQUIRES].insert(_cap);
         }
 
-        NVRAD nvrad = NVRAD( selImpl->_name, Edition(selImpl->_version, selImpl->_release, std::string()), Arch(selImpl->_arch), _deps );
-        result = detail::makeResolvableFromImpl( nvrad, selImpl );
+        NVRAD nvrad = NVRAD( patImpl->_name, Edition(patImpl->_version, patImpl->_release, std::string()), Arch(patImpl->_arch), _deps );
+        result = detail::makeResolvableFromImpl( nvrad, patImpl );
       }
        /////////////////////////////////////////////////////////////////
     } // namespace tagfile

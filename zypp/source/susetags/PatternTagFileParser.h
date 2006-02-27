@@ -42,7 +42,7 @@ namespace zypp
       struct PatternTagFileParser : public zypp::parser::tagfile::TagFileParser
       {
         Pattern::Ptr result;
-        detail::ResImplTraits<SuseTagsPatternImpl>::Ptr selImpl;
+        detail::ResImplTraits<SuseTagsPatternImpl>::Ptr patImpl;
 
         PatternTagFileParser();
         virtual ~PatternTagFileParser()
