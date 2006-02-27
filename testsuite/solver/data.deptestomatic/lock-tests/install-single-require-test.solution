@@ -8,8 +8,8 @@
 >!>       unlock B
 >!>       
 >!>    Solution:
->!>       delete A
->!>       delete [package]A-1.0-1.noarch
+>!>       do not install A
+>!>       do not install [package]A-1.0-1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       

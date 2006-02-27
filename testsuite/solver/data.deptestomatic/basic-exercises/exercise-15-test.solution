@@ -4,8 +4,8 @@
 >!> Cannot install AA because it is conflicting with A
 >!> A conflict over a == 2.0 (a != 1.0) requires the removal of to-be-installed AA-1.0-1.noarch[test]
 >!>    Solution:
->!>       delete AA
->!>       delete [package]AA-1.0-1.noarch
+>!>       do not install AA
+>!>       do not install [package]AA-1.0-1.noarch
 >!>    Solution:
 >!>       delete A
 >!>       delete [package]A-1.0-1.noarch

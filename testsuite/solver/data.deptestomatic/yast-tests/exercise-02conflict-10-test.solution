@@ -4,8 +4,8 @@
 >!> Cannot install baz3 because it is conflicting with foo3
 >!> A conflict over baz31 (baz31) requires the removal of to-be-installed baz3-1.0-1.noarch[test]
 >!>    Solution:
->!>       delete baz3
->!>       delete [package]baz3-1.0-1.noarch
+>!>       do not install baz3
+>!>       do not install [package]baz3-1.0-1.noarch
 >!>    Solution:
 >!>       delete foo3
 >!>       delete [package]foo3-1.0-1.noarch

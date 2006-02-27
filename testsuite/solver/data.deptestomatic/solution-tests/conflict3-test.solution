@@ -5,11 +5,11 @@
 >!> Cannot install B because it is conflicting with A
 >!> A conflict over B == 1.0-1 (B) requires the removal of to-be-installed B-1.0-1.noarch[test]
 >!>    Solution:
->!>       delete B
->!>       delete [package]B-1.0-1.noarch
+>!>       do not install B
+>!>       do not install [package]B-1.0-1.noarch
 >!>    Solution:
->!>       delete A
->!>       delete [package]A-1.0-1.noarch
+>!>       do not install A
+>!>       do not install [package]A-1.0-1.noarch
 >!>    Solution:
 >!>       Ignore this conflict of B
 >!>       

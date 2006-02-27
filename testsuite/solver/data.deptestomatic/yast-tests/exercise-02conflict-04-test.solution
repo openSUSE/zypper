@@ -4,8 +4,8 @@
 >!> Cannot install libident because it is conflicting with smail
 >!> A conflict over libident == 2.0-1 (libident >= 2.0) requires the removal of to-be-installed libident-2.0-1.noarch[test]
 >!>    Solution:
->!>       delete libident
->!>       delete [package]libident-2.0-1.noarch
+>!>       do not install libident
+>!>       do not install [package]libident-2.0-1.noarch
 >!>    Solution:
 >!>       delete smail
 >!>       delete [package]smail-1.0-1.noarch
