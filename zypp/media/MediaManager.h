@@ -232,7 +232,6 @@ namespace zypp
        *
        * \param new_attach_point A new attachpoint.
        * \throws MediaNotOpenException
-       * \throws MediaNotAttachedException
        * \throws MediaNotSupportedException
        */
       void reattach(MediaAccessId accessId,

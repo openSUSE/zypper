@@ -133,7 +133,6 @@ namespace zypp {
 	 *
 	 * \param new_attach_point A new attachpoint.
 	 * \throws MediaNotOpenException
-	 * \throws MediaNotAttachedException
 	 * \throws MediaNotSupportedException
 	 */
 	void reattach(const Pathname &new_attach_point);

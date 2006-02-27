@@ -556,17 +556,15 @@ void MediaHandler::release( bool eject )
 void
 MediaHandler::reattach(const Pathname &new_attach_point)
 {
-  if( !isAttached()) {
-    ZYPP_THROW(MediaNotAttachedException(_url));
-  }
   return reattachTo(new_attach_point);
 }
 
 void
 MediaHandler::reattachTo(const Pathname &new_attach_point)
 {
-  (void)new_attach_point;
-  ZYPP_THROW(MediaNotSupportedException(_url));
+  DBG << "Ignoring reattach to '"
+      << new_attach_point.asString()
+      << "'" << std::endl;
 }
 
 
