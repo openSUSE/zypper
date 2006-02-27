@@ -12,6 +12,7 @@
 #ifndef ZYPP_DETAIL_RESOLVABLEIMPL_H
 #define ZYPP_DETAIL_RESOLVABLEIMPL_H
 
+#include "zypp/ZYpp.h"
 #include "zypp/Resolvable.h"
 #include "zypp/CapFactory.h"
 #include "zypp/NVRAD.h"
@@ -30,6 +31,7 @@ namespace zypp
   */
   struct Resolvable::Impl
   {
+    static ZYpp::Ptr _zypp;	// well, where to write the locales ?
     /** Ctor */
     Impl( const Kind & kind_r, const NVRAD & nvrad_r );
 

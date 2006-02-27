@@ -99,8 +99,7 @@ namespace zypp
     public:
       typedef std::set<Locale> LocaleSet;
       /** */
-      void setRequestedLocales( const LocaleSet & locales_r )
-      {  _requested_locales = locales_r; }
+      void setRequestedLocales( const LocaleSet & locales_r );
       /** */
       LocaleSet getRequestedLocales() const
       { return _requested_locales; }
@@ -109,6 +108,10 @@ namespace zypp
       void setPossibleLocales( const LocaleSet & locales_r );
       /** */
       LocaleSet getPossibleLocales() const;
+      /** */
+      LocaleSet getAvailableLocales() const;
+
+      void availableLocale( const Locale & locale_r );
 
     public:
       /** Get the system architecture.   */
@@ -141,6 +144,8 @@ namespace zypp
       LocaleSet _requested_locales;
       /** this is what is possible. */
       ResStore _possible_locales;
+      /** this is what the packages provide. */
+      LocaleSet _available_locales;
     };
     ///////////////////////////////////////////////////////////////////
 

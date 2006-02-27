@@ -116,6 +116,12 @@ namespace zypp
   ZYpp::LocaleSet ZYpp::getPossibleLocales() const
   { return _pimpl->getPossibleLocales(); }
 
+  ZYpp::LocaleSet ZYpp::getAvailableLocales() const
+  { return _pimpl->getAvailableLocales(); }
+
+  void ZYpp::availableLocale( const Locale & locale_r )
+  { _pimpl->availableLocale( locale_r ); }
+
   Arch ZYpp::architecture() const
   { return _pimpl->architecture(); }
   void ZYpp::setArchitecture( const Arch & arch )

@@ -17,6 +17,7 @@
 #include "zypp/zypp_detail/ZYppImpl.h"
 #include "zypp/detail/LanguageImpl.h"
 #include "zypp/detail/ResImplTraits.h"
+#include "zypp/solver/detail/Helper.h"
 #include "zypp/NVRAD.h"
 #include "zypp/Language.h"
 
@@ -186,6 +187,40 @@ namespace zypp
     // locales
 
     /** */
+    void ZYppImpl::setRequestedLocales( const LocaleSet & locales_r )
+    {
+	// check if each requested is also possible.
+
+	LocaleSet possible = getPossibleLocales();
+	bool changed = false;
+	for (LocaleSet::const_iterator it = locales_r.begin(); it != locales_r.end(); ++it) {
+	    changed = possible.insert( *it ).second;
+	}
+
+	// oops, some requested are not possbile, make them possible
+	//  this will actually generate 'uninstalled' language items we need below
+
+	if (changed) {
+	    setPossibleLocales( possible );
+	}
+	
+	// now select the requested items for selection
+
+	for (LocaleSet::const_iterator it = locales_r.begin(); it != locales_r.end(); ++it) {
+// remove unwanted ?	    PoolItem installed( Helper::findInstalledByNameAndKind( _pool.accessor(), it->code(), ResTraits<Language>::kind ) );
+	    PoolItem uninstalled( solver::detail::Helper::findUninstalledByNameAndKind( _pool.accessor(), it->code(), ResTraits<Language>::kind ) );
+	    if (uninstalled) {
+		if (!uninstalled.status().isLocked()) {
+		    uninstalled.status().setTransact( true, ResStatus::USER );
+		}
+	    }
+	}
+
+	_requested_locales = locales_r;
+
+    }
+
+    /** */
     void ZYppImpl::setPossibleLocales( const LocaleSet & locales_r )
     {
 	removeResolvables( _possible_locales );
@@ -209,6 +244,17 @@ namespace zypp
 	    lset.insert( Locale( (*it)->name() ) );
 	}
 	return lset;
+    }
+
+    /** */
+    ZYppImpl::LocaleSet ZYppImpl::getAvailableLocales() const
+    {
+	return _available_locales;
+    }
+
+    void ZYppImpl::availableLocale( const Locale & locale_r )
+    {
+	_available_locales.insert( locale_r );
     }
 
     //------------------------------------------------------------------------

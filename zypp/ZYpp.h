@@ -121,11 +121,26 @@ namespace zypp
     LocaleSet getRequestedLocales() const;
 
     /** Set the possible locales.
-     * Languages to be possible for selection
+     * Languages to be possible for choosing.
+     * This is only useful to restrict the AvailableLocales(),
+     *  adding new locales will be a no-op since there won't be
+     *  any package supporting this. See getAvailableLocales.
     */
     void setPossibleLocales( const LocaleSet & locales_r );
     /** */
     LocaleSet getPossibleLocales() const;
+
+    /**
+     * Get the set of available locales.
+     * This is computed from the package data so it actually
+     * represents all locales packages claim to support.
+     */
+    LocaleSet getAvailableLocales() const;
+
+    /**
+     * internal use only
+     **/
+    void availableLocale( const Locale & locale_r );
 
   public:
     /** Get the path where zypp related plugins store persistent data and caches   */
@@ -148,6 +163,7 @@ namespace zypp
   private:
     /** Factory */
     friend class ZYppFactory;
+
     /** */
     typedef zypp_detail::ZYppImpl Impl;
     typedef shared_ptr<Impl>      Impl_Ptr;
