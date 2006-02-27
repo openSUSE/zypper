@@ -350,11 +350,11 @@
 >!> 349: U___[package]dante-devel-1.1.18-2.i586
 >!> 350: U___[package]dante-server-1.1.18-2.i586
 >!> 351: I___[package]db-4.2.52-86.3.i686
->!> 352: U_Th_[package]db-4.3.29-5.i586
->!> 353: U___[package]db-4.3.29-5.i686
+>!> 352: U___[package]db-4.3.29-5.i586
+>!> 353: U_Th_[package]db-4.3.29-5.i686
 >!> 354: I___[package]db-devel-4.2.52-86.3.i686
->!> 355: U_Th_[package]db-devel-4.3.29-5.i586
->!> 356: U___[package]db-devel-4.3.29-5.i686
+>!> 355: U___[package]db-devel-4.3.29-5.i586
+>!> 356: U_Th_[package]db-devel-4.3.29-5.i686
 >!> 357: I___[package]db-utils-4.2.52-86.3.i586
 >!> 358: U_Th_[package]db-utils-4.3.29-5.i586
 >!> 359: U___[package]db1-1.85-91.i586
@@ -599,11 +599,11 @@
 >!> 598: U___[package]glib2-devel-2.8.5-8.i586
 >!> 599: U___[package]glib2-doc-2.8.5-8.i586
 >!> 600: I___[package]glibc-2.3.3-98.61.i686
->!> 601: U_Th_[package]glibc-2.3.90-65.i586
->!> 602: U___[package]glibc-2.3.90-65.i686
+>!> 601: U___[package]glibc-2.3.90-65.i586
+>!> 602: U_Th_[package]glibc-2.3.90-65.i686
 >!> 603: I___[package]glibc-devel-2.3.3-98.61.i686
->!> 604: U_Th_[package]glibc-devel-2.3.90-65.i586
->!> 605: U___[package]glibc-devel-2.3.90-65.i686
+>!> 604: U___[package]glibc-devel-2.3.90-65.i586
+>!> 605: U_Th_[package]glibc-devel-2.3.90-65.i686
 >!> 606: U___[package]glibc-html-2.3.90-65.i586
 >!> 607: I___[package]glibc-i18ndata-2.3.3-98.61.i586
 >!> 608: U_Th_[package]glibc-i18ndata-2.3.90-65.i586
@@ -2435,7 +2435,7 @@
 >!> install Mesa-devel-6.4.2-2.i586[pkg]
 >!> install OpenEXR-1.2.2-5.i586[pkg]
 >!> install aspell-0.60.3-8.i586[pkg]
->!> install aspell-am-0.03.1-5.i586[pkg]
+>!> install aspell-bg-0.50.0-26.i586[pkg]
 >!> install atk-devel-1.10.3-4.i586[pkg]
 >!> install bind-libs-9.3.2-5.i586[pkg]
 >!> install blocxx-1.0.0-2.i586[pkg]
@@ -2654,8 +2654,8 @@
 >!> upgrade curl-7.11.0-39.9.i586 => curl-7.15.1-5.i586[pkg]
 >!> upgrade cvs-1.11.14-24.10.i586 => cvs-1.12.12-8.i586[pkg]
 >!> upgrade cyrus-sasl-2.1.18-33.8.i586 => cyrus-sasl-2.1.21-6.i586[pkg]
->!> upgrade db-4.2.52-86.3.i686 => db-4.3.29-5.i586[pkg]
->!> upgrade db-devel-4.2.52-86.3.i686 => db-devel-4.3.29-5.i586[pkg]
+>!> upgrade db-4.2.52-86.3.i686 => db-4.3.29-5.i686[pkg]
+>!> upgrade db-devel-4.2.52-86.3.i686 => db-devel-4.3.29-5.i686[pkg]
 >!> upgrade db-utils-4.2.52-86.3.i586 => db-utils-4.3.29-5.i586[pkg]
 >!> upgrade device-mapper-1.01.01-1.6.i586 => device-mapper-1.02.02-4.i586[pkg]
 >!> upgrade devs-9-16.14.i586 => devs-10.0.42-3.i586[pkg]
@@ -2717,8 +2717,8 @@
 >!> upgrade gle-3.0.6-646.1.i586 => gle-3.0.6-650.i586[pkg]
 >!> upgrade glib-1.2.10-586.2.i586 => glib-1.2.10-599.i586[pkg]
 >!> upgrade glib2-2.2.3-117.1.i586 => glib2-2.8.5-8.i586[pkg]
->!> upgrade glibc-2.3.3-98.61.i686 => glibc-2.3.90-65.i586[pkg]
->!> upgrade glibc-devel-2.3.3-98.61.i686 => glibc-devel-2.3.90-65.i586[pkg]
+>!> upgrade glibc-2.3.3-98.61.i686 => glibc-2.3.90-65.i686[pkg]
+>!> upgrade glibc-devel-2.3.3-98.61.i686 => glibc-devel-2.3.90-65.i686[pkg]
 >!> upgrade glibc-i18ndata-2.3.3-98.61.i586 => glibc-i18ndata-2.3.90-65.i586[pkg]
 >!> upgrade glibc-info-2.3.3-98.61.i586 => glibc-info-2.3.90-65.i586[pkg]
 >!> upgrade glibc-locale-2.3.3-98.61.i586 => glibc-locale-2.3.90-65.i586[pkg]
