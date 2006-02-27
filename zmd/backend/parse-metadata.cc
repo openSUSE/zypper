@@ -122,6 +122,8 @@ main (int argc, char **argv)
 	return 1;
     }
 
+    MIL << "START parse-metadata " << argv[1] << " " << argv[2] << " " << argv[3] << " " << argv[4] << endl;
+
     DbAccess db(argv[1]);
 
     db.openDb( true );		// open for writing
@@ -144,6 +146,8 @@ main (int argc, char **argv)
     }
 
     db.closeDb();
+
+    MIL << "END parse-metadata" << endl;
 
     return 0;
 }

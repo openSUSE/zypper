@@ -55,6 +55,8 @@ main (int argc, char **argv)
         return 1;
     }
 
+    MIL << "START find-file " << argv[1] << " " << argv[2] << endl;
+
     ZYppFactory zf;
     ZYpp::Ptr God = zf.getZYpp();
 
@@ -92,6 +94,8 @@ main (int argc, char **argv)
 
     rc_set_world (NULL);
     g_object_unref (packman);
+
+    MIL << "END find-file" << endl;
 
     return ret;
 }

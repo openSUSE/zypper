@@ -26,6 +26,8 @@ main (int argc, char **argv)
 	return 1;
     }
 
+    MIL << "START query-system " << argv[1] << endl;
+
     const char *logfile = getenv("ZYPP_LOGFILE");
     if (logfile != NULL)
 	zypp::base::LogControl::instance().logfile( logfile );
@@ -48,6 +50,8 @@ main (int argc, char **argv)
     db.writeStore( God->target()->resolvables(), ResStatus::installed, "@system" );
 
     db.closeDb();
+
+    MIL << "END query-system" << endl;
 
     return 0;
 }

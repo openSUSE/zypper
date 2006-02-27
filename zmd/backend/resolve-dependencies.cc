@@ -62,6 +62,9 @@ main (int argc, char **argv)
 	return 1;
     }
 
+
+    MIL << "START resolve-dependencies " << argv[1] << endl;
+
     // access the sqlite db
 
     DbAccess db (argv[1]);
@@ -118,6 +121,8 @@ main (int argc, char **argv)
     }
 
     db.closeDb();
+
+    MIL << "END resolve-dependencies" << endl;
 
     return (success ? 0 : 1);
 }

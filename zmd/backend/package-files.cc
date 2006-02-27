@@ -228,6 +228,8 @@ main (int argc, char **argv)
 	return 1;
     }
 
+    MIL << "START package-files " << argv[1] << " " << argv[2] << endl;
+
     DbAccess db(argv[1]);
 
     db.openDb( true );		// open for writing
@@ -248,6 +250,8 @@ main (int argc, char **argv)
     God->finishTarget();
 
     db.closeDb();
+
+    MIL << "END package-files" << endl;
 
     return result;
 }

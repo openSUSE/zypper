@@ -64,6 +64,8 @@ main (int argc, char **argv)
 	return 1;
     }
 
+    MIL << "START transact " << argv[1] << endl;
+
     // access the sqlite db
 
     DbAccess db (argv[1]);
@@ -103,6 +105,8 @@ main (int argc, char **argv)
     }
 
     db.closeDb();
+
+    MIL << "END transact" << endl;
 
     return 0;
 }

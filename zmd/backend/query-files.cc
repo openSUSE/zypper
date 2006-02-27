@@ -121,66 +121,63 @@ packages_from_dir_cb (RCPackage *package, gpointer user_data)
     return TRUE;
 }
 
-gint
-rc_extract_packages_from_directory (const char *path,
-                                    RCChannel *channel,
+
+int
+extract_packages_from_directory (const Pathname & path,
+				 const string & alias,
+				 bool recursive)
+#if 0
+				                      RCChannel *channel,
                                     RCPackman *packman,
                                     gboolean recursive,
                                     RCResolvableFn callback,
                                     gpointer user_data)
+#endif
 {
     GDir *dir;
     GHashTable *hash;
     struct HashIterInfo info;
-    const char *filename;
-    char *magic;
-    gboolean distro_magic, pkginfo_magic;
+    Pathname filename;
+    PathInfo magic;
+    bool distro_magic, pkginfo_magic;
     
-    g_return_val_if_fail (path && *path, -1);
-    g_return_val_if_fail (channel != NULL, -1);
-
     /*
       Check for magic files that indicate how to treat the
       directory.  The files aren't read -- it is sufficient that
       they exist.
     */
 
-    magic = g_strconcat (path, "/RC_SKIP", NULL);
-    if (g_file_test (magic, G_FILE_TEST_EXISTS)) {
-        g_free (magic);
+    magic = PathInfo( path + "/RC_SKIP" );
+    if (!magic.isExist()) {
         return 0;
     }
-    g_free (magic);
 
-    magic = g_strconcat (path, "/RC_RECURSIVE", NULL);
-    if (g_file_test (magic, G_FILE_TEST_EXISTS))
-        recursive = TRUE;
-    g_free (magic);
+    magic = PathInfo( path + "/RC_RECURSIVE" );
+    if (magic.isExists())
+        recursive = true;
     
-    magic = g_strconcat (path, "/RC_BY_DISTRO", NULL);
-    distro_magic = g_file_test (magic, G_FILE_TEST_EXISTS);
-    g_free (magic);
+    magic = PathInfo( path + "/RC_BY_DISTRO" );
+    distro_magic = magic.isExists();
 
-    pkginfo_magic = TRUE;
-    magic = g_strconcat (path, "/RC_IGNORE_PKGINFO", NULL);
-    if (g_file_test (magic, G_FILE_TEST_EXISTS))
-        pkginfo_magic = FALSE;
-    g_free (magic);
+    pkginfo_magic = true;
+    magic = PathInfo( path + "/RC_IGNORE_PKGINFO" );
+    if (magic.isExists())
+        pkginfo_magic = false;
 
     /* If distro_magic is set, we search for packages in two
        subdirectories of path: path/distro-target (i.e.
        path/redhat-9-i386) and path/x-cross.
     */
 
-#if 0      
+#if 0			// commented out it libredcarpet
     if (distro_magic) {
-        char *distro_path, *cross_distro_path;
-        gboolean found_distro_magic = FALSE;
+        Pathname distro_path, cross_distro_path;
+        bool found_distro_magic = false;
         int count = 0, c;
 
-        distro_path = g_strconcat (path, "/", rc_distro_get_target (), NULL);
-        if (g_file_test (distro_path, G_FILE_TEST_IS_DIR)) {
-            found_distro_magic = TRUE;
+        distro_path = path + rc_distro_get_target ();
+        if (PathInfo(distro_path).isDir()) {
+            found_distro_magic = true;
 
             c = rc_extract_packages_from_directory (distro_path,
                                                     channel, packman,
@@ -464,6 +461,8 @@ main (int argc, char **argv)
 	return 1;
     }
 
+    MIL << "START query-files " << argv[1] << " " << argv[2] << " " << ((argc>3)?argv[3]:"") << endl;
+
     DbAccess db(argv[1]);
 
     db.openDb( true );		// open for writing
@@ -481,6 +480,8 @@ main (int argc, char **argv)
     }
 
     db.closeDb();
+
+    MIL << "END query-files" << endl;
 
     return 0;
 }
