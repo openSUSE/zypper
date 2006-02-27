@@ -64,8 +64,6 @@ namespace zypp
       virtual std::string instSrcLabel() const;
       virtual Vendor instSrcVendor() const;
       virtual unsigned instSrcRank() const;
-      virtual std::list<PMSelectionPtr> suggests_ptrs() const;
-      virtual std::list<PMSelectionPtr> recommends_ptrs() const;
       virtual std::list<std::string> inspacks( const LangCode & lang = LangCode("") ) const;
       virtual std::list<std::string> delpacks( const LangCode & lang = LangCode("") ) const;
       virtual PM::LocaleSet supportedLocales() const;
