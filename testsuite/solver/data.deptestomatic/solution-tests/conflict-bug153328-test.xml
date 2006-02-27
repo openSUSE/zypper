@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+   install package B, A conflicts B
+-->
+<test>
+<setup>
+  <channel name="test" file="stable-27-2-2006-packages.xml"/>
+  <channel name="selections" file="default-selection.xml"/>
+</setup>
+<trial>
+  <install channel="selections" kind="selection" name="default"/>
+  <install channel="test" package="desktop-data-SuSE"/>
+  <install channel="test" package="desktop-data-NLD"/>
+  <reportproblems/>
+  <takesolution problem="0" solution="1"/>
+  <reportproblems/>
+
+</trial>
+</test>
