@@ -129,6 +129,16 @@ namespace zypp {
 	void attach(bool next = false);
 
 	/**
+	 * Reattach to a new attach point.
+	 *
+	 * \param new_attach_point A new attachpoint.
+	 * \throws MediaNotOpenException
+	 * \throws MediaNotAttachedException
+	 * \throws MediaNotSupportedException
+	 */
+	void reattach(const Pathname &new_attach_point);
+
+	/**
 	 * True if media is attached.
 	 *
 	 * \throws MediaException

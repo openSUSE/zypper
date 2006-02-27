@@ -553,6 +553,23 @@ void MediaHandler::release( bool eject )
   MIL << "Released: " << *this << endl;
 }
 
+void
+MediaHandler::reattach(const Pathname &new_attach_point)
+{
+  if( !isAttached()) {
+    ZYPP_THROW(MediaNotAttachedException(_url));
+  }
+  return reattachTo(new_attach_point);
+}
+
+void
+MediaHandler::reattachTo(const Pathname &new_attach_point)
+{
+  (void)new_attach_point;
+  ZYPP_THROW(MediaNotSupportedException(_url));
+}
+
+
 ///////////////////////////////////////////////////////////////////
 //
 //	METHOD NAME : MediaHandler::dependsOnParent

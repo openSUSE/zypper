@@ -327,6 +327,18 @@ namespace zypp
 
     // ---------------------------------------------------------------
     void
+    MediaManager::reattach(MediaAccessId accessId,
+                           const Pathname &new_attach_point)
+    {
+      MutexLock glock(g_Mutex);
+
+      ManagedMedia &ref( m_impl->findMM(accessId));
+
+      return ref.handler->reattach(new_attach_point);
+    }
+
+    // ---------------------------------------------------------------
+    void
     MediaManager::release(MediaAccessId accessId, bool eject)
     {
       MutexLock glock(g_Mutex);

@@ -228,6 +228,17 @@ namespace zypp
       attach(MediaAccessId accessId, bool next = false);
 
       /**
+       * Reattach to a new attach point.
+       *
+       * \param new_attach_point A new attachpoint.
+       * \throws MediaNotOpenException
+       * \throws MediaNotAttachedException
+       * \throws MediaNotSupportedException
+       */
+      void reattach(MediaAccessId accessId,
+                    const Pathname &new_attach_point);
+
+      /**
        * Release the attached media and optionally eject.
        *
        * \throws MediaNotOpenException for invalid access id.

@@ -158,6 +158,9 @@ class MediaHandler {
 	bool                 checkAttached(bool aDevice,
 	                                   bool fsType=false) const;
 
+	void                 reattach(const Pathname &new_attach_point);
+	virtual void         reattachTo(const Pathname &new_attach_point);
+
     protected:
 
         ///////////////////////////////////////////////////////////////////
