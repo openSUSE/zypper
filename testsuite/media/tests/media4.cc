@@ -4,6 +4,7 @@
 #include <zypp/Pathname.h>
 #include <zypp/PathInfo.h>
 #include <zypp/TmpPath.h>
+#include <zypp/ExternalProgram.h>
 
 #include <string>
 #include <list>
@@ -11,6 +12,7 @@
 #include <cstdlib>
 
 #include <signal.h>
+#include <stdlib.h>
 
 using namespace zypp;
 using namespace zypp::media;
@@ -66,11 +68,16 @@ int main(int argc, char *argv[])
     mm.attach(id);
 
     ONE_STEP("provideDirTree(" + dir.asString() + ")");
-    mm.provideFile(id, Pathname(dir));
+    mm.provideDirTree(id, Pathname(dir));
 
     zypp::filesystem::TmpDir temp;
 
     zypp::filesystem::copy_dir(mm.localPath(id, dir), temp.path());
+
+    std::string cmd("/bin/ls -lR ");
+                cmd += temp.path().asString();
+
+    system( cmd.c_str());
 
     ONE_STEP("CLEANUP")
   }
