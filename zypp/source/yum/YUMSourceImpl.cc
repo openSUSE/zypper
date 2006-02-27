@@ -106,6 +106,8 @@ namespace zypp
 
       void YUMSourceImpl::storeMetadata(const Pathname & cache_dir_r)
       {
+	_cache_dir = cache_dir_r;
+	
 	INT << "Storing data to cache" << endl;
 	resolvables(SourceFactory().createFrom(this));
 	for (std::list<Pathname>::const_iterator it = _metadata_files.begin();

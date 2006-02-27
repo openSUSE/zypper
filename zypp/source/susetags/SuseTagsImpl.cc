@@ -63,6 +63,8 @@ namespace zypp
       
       void SuseTagsImpl::storeMetadata(const Pathname & cache_dir_r)
       {
+        _cache_dir = cache_dir_r;
+
         initCacheDir(cache_dir_r);
         //suse/setup/descr
         //packages.* *.sel

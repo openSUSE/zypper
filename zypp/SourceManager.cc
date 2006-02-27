@@ -164,7 +164,16 @@ namespace zypp
     	MIL << "Created..." << topdir.string() << std::endl;
     }
 
-    unsigned id = 0;  
+    unsigned id = 0;
+    
+    // first, gather all known cache dirs
+    std::set<std::string> known_caches;
+    for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
+    {
+	if( ! it->second->cacheDir().empty() )
+	    known_caches.insert( it->second->cacheDir().asString() );
+    }
+    
     for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
     {
 	storage::PersistentStorage::SourceData descr;
@@ -174,21 +183,43 @@ namespace zypp
         descr.alias = it->second->alias();
 	descr.autorefresh = it->second->autorefresh();
 	descr.type = it->second->type();
+	descr.product_dir = it->second->path().asString();
 	
-	descr.cache_dir = it->second->cacheDir().empty() ?
-	    ZYPP_METADATA_PREFIX + str::numstring(id)
-	    : it->second->cacheDir().asString(); // we should strip root here
-
-	// FIXME: product_dir
-
+	descr.cache_dir = it->second->cacheDir().asString();
+	
 	if( metadata_cache && it->second->cacheDir().empty() )
 	{
+	    if( descr.cache_dir.empty() ) 
+	    {
+		// generate the new cache name
+		
+		std::string cache = ZYPP_METADATA_PREFIX + str::numstring(id); // we should strip root here
+
+		// generate a new cache dir
+		while( id < 1000 && known_caches.find( cache ) != known_caches.end() ) 
+		{
+		    ++id;
+		    cache = ZYPP_METADATA_PREFIX + str::numstring(id); // we should strip root here		
+		}
+		
+		if ( id == 1000 )
+		{
+		    ERR << "Unable to generate a new cache directory name" << endl;
+		    metadata_cache = false;
+		    continue;
+		}
+		
+		descr.cache_dir = cache;
+	    }
+	    
 	    filesystem::assert_dir ( root_r.asString() + descr.cache_dir );
 	    
+	    MIL << "Storing metadata to (" << root_r.asString() << ")/" << descr.cache_dir << endl;    
+
 	    try {
 		it->second->storeMetadata( root_r.asString() + descr.cache_dir );
 	    }
-	    catch(...) {
+	    catch(const Exception &excp) {
 		WAR << "Creating local metadata cache failed, not using cache" << endl;
 		descr.cache_dir = "";
 	    }
@@ -217,6 +248,8 @@ namespace zypp
     store.init( root_r );
     
     std::list<storage::PersistentStorage::SourceData> new_sources = store.storedSources();
+    
+    MIL << "Found sources: " << new_sources.size() << endl;
 
     for( std::list<storage::PersistentStorage::SourceData>::iterator it = new_sources.begin();
 	it != new_sources.end(); ++it)
