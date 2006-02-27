@@ -15,6 +15,8 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 
+#include "zypp/target/rpm/RpmHeader.h"
+#include "zypp/target/rpm/RpmDb.h"
 #include "zypp/Target.h"
 
 using namespace zypp;
@@ -33,17 +35,18 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 static ResStore
-query_file (Target_Ptr target, const char *path)
+query_file (Target_Ptr target, const Pathname & path)
 {
     ResStore store;
-#if 0
-    RpmHeader::constPtr = RpmHeader::readPackage( path );		// rpm -qp
-			// RpmDb::getData( path );
-    Resolvable::constPtr resolvable = RpmHeader::readPackage( path );
-    if (resolvable != NULL) {
-	store.insert( resolvable );
+
+    target::rpm::RpmHeader::constPtr header = target::rpm::RpmHeader::readPackage( path );
+
+    Package::Ptr package = target::rpm::RpmDb::makePackageFromHeader( header );
+
+    if (package != NULL) {
+	store.insert( package );
     }
-#endif
+
     return store;
 }
 
@@ -310,26 +313,34 @@ query_directory (Target_Ptr target, const Pathname & path, bool recursive)
 //----------------------------------------------------------------------------
 
 static ResStore
-query (Target_Ptr target, const char *uri, const char *channel_id)
+query (Target_Ptr target, const string & uri, const string & channel_id)
 {
-    char *query_part;
-    char *path = NULL;
     ResStore store;
 
     /* The magic 7 is strlen ("file://") */
 
-    if (strncasecmp (uri, "file://", 7) != 0) {
+    if (uri.size() < 7
+	|| uri.compare( 0, 7, "file://") != 0)
+    {
 	ERR << "Invalid uri '" << uri << "'" << endl;
 	return store;
     }
 
     /* Find the path. The "+ 7" part moves past "file://" */
-    query_part = strchr (uri + 7, '?');
+    string::size_type query_part = uri.find( "?" );
 
-    if (query_part)
-	path = strndup (uri + 7, query_part - uri - 7);
-    else
-	path = strdup (uri + 7);
+    Pathname path;
+
+    if (query_part != string::npos) {
+	string p( uri, 7, query_part - 7 );
+	path = p;
+    }
+    else {
+	string p( uri, 7 );
+	path = p;
+    }
+
+    MIL << "query(" << uri << ") path '" << path << "'" << endl;
 
 #if 0
     channel = rc_channel_new (channel_id != NULL ? channel_id : "@local",
@@ -338,22 +349,25 @@ query (Target_Ptr target, const char *uri, const char *channel_id)
 
     struct stat buf;
 
-    int err = stat (path, &buf);
+    int err = stat (path.asString().c_str(), &buf);
 
     if (err != 0) {
 	ERR << "Invalid path '" << path << "'" << endl;
     }
-    else if (S_ISREG(buf.st_mode)) {
-	/* Single file */
+    else if (S_ISREG( buf.st_mode )) {			/* Single file */
+
 	store = query_file (target, path);
-    } else if (S_ISDIR(buf.st_mode)) {
-	/* Directory */
+
+    }
+    else if (S_ISDIR( buf.st_mode )) {			/* Directory */
+
 	bool recursive = false;
 
-	if (query_part)
+	if (query_part != string::npos) {
 	    /* + 1 to move past the "?" */
-	    parse_query (query_part + 1, &recursive);
-
+	    string p( uri, query_part + 1 );
+	    parse_query( p, &recursive );
+	}
 	store = query_directory (target, path, recursive);
     }
 
@@ -435,6 +449,16 @@ main (int argc, char **argv)
 
     ZYpp::Ptr God = zypp::getZYpp();
 
+    try {
+	God->initTarget( "/" );
+//	target = God->target();
+    }
+    catch( const Exception & excpt_r ) {    
+	ERR << "Can't initialize target." << endl;
+	ZYPP_CAUGHT( excpt_r );
+	return 1;
+    }
+
     if (argc < 3 || argc > 4) {
 	std::cerr << "usage: " << argv[0] << " <database> <uri> [catalog id]" << endl;
 	return 1;
@@ -450,7 +474,7 @@ main (int argc, char **argv)
     }
     else {
 	MIL << "Doing a file query" << endl;
-	ResStore store = query (God->target(), argv[2], argc == 4 ? argv[3] : NULL);
+	ResStore store = query (God->target(), argv[2], argc == 4 ? argv[3] : "");
 	if (!store.empty()) {
 	    db.writeStore( store, ResStatus::uninstalled );
 	}

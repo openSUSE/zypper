@@ -835,13 +835,15 @@ DbAccess::writeStore( const zypp::ResStore & store, ResStatus status, const char
     }
 
     int count = 0;
+    sqlite_int64 rowid;
     for (ResStore::const_iterator iter = store.begin(); iter != store.end(); ++iter) {
-	if (writeResObject( *iter, status, catalog ) < 0)
+	rowid = writeResObject( *iter, status, catalog );
+	if (rowid < 0)
 	    break;
 	++count;
     }
 
-    MIL << "Wrote " << count << " resolvables to database" << endl;
+    MIL << "Wrote " << count << " resolvables to database, last rowid " << rowid << endl;
     return;
 }
 
