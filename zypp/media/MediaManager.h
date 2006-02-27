@@ -230,12 +230,18 @@ namespace zypp
       /**
        * Reattach to a new attach point.
        *
-       * \param new_attach_point A new attachpoint.
+       * \param attach_point A new attach point directory.
+       * \param temporary    Whether to reattach to a temporary
+       *      attach point bellow of \p attach_point and cleanup
+       *      it on release (temporary=true), or use the provided
+       *      directory as attach point without to cleanup it on
+       *      release (temporary=false, default behaviour).
        * \throws MediaNotOpenException
        * \throws MediaNotSupportedException
        */
-      void reattach(MediaAccessId accessId,
-                    const Pathname &new_attach_point);
+      void reattach(MediaAccessId   accessId,
+                    const Pathname &attach_point,
+                    bool            temporary = false);
 
       /**
        * Release the attached media and optionally eject.
