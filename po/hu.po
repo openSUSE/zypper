@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2006-02-14 13:29+0100\n"
-"PO-Revision-Date: 2006-01-30 23:23+0100\n"
+"POT-Creation-Date: 2006-02-18 17:25+0100\n"
+"PO-Revision-Date: 2006-02-21 10:08+0100\n"
 "Last-Translator: Szabolcs Varga <shirokuma@shirokuma.hu>\n"
 "Language-Team: Hungarian <i18n@suse.de>\n"
 "MIME-Version: 1.0\n"
@@ -23,10 +23,10 @@ msgstr ""
 msgid "Unknown language: "
 msgstr "Ismeretlen nyelv:"
 
-#: zypp/LanguageCode.cc:226 zypp/CountryCode.cc:215
-#, fuzzy
+#: zypp/LanguageCode.cc:226
+#: zypp/CountryCode.cc:215
 msgid "noCode"
-msgstr "Kód"
+msgstr "noCode"
 
 # clients/printconf.ycp:305
 #: zypp/LanguageCode.cc:227
@@ -157,14 +157,12 @@ msgid "Asturian"
 msgstr "asztúriai"
 
 #: zypp/LanguageCode.cc:288
-#, fuzzy
 msgid "Athapascan languages"
 msgstr "athapaszka nyelvek"
 
 # modules/inst_sw_single.ycp:117
 # clients/inst_sw_single.ycp:1072
 #: zypp/LanguageCode.cc:290
-#, fuzzy
 msgid "Australian languages"
 msgstr "ausztrál nyelvek"
 
@@ -197,7 +195,6 @@ msgstr "banda"
 # modules/inst_sw_single.ycp:117
 # clients/inst_sw_single.ycp:1072
 #: zypp/LanguageCode.cc:304
-#, fuzzy
 msgid "Bamileke languages"
 msgstr "bamileke nyelvek"
 
@@ -381,7 +378,6 @@ msgid "Mari"
 msgstr "mari"
 
 #: zypp/LanguageCode.cc:390
-#, fuzzy
 msgid "Chinook jargon"
 msgstr "csinuk zsargon"
 
@@ -410,7 +406,6 @@ msgid "Cheyenne"
 msgstr "sájenn"
 
 #: zypp/LanguageCode.cc:404
-#, fuzzy
 msgid "Chamic languages"
 msgstr "hámi nyelvek"
 
@@ -428,17 +423,14 @@ msgid "Corsican"
 msgstr "korzikai"
 
 #: zypp/LanguageCode.cc:412
-#, fuzzy
 msgid "Creoles and pidgins, English based (Other)"
 msgstr "angol alapú kreol és pidgin (egyéb)"
 
 #: zypp/LanguageCode.cc:414
-#, fuzzy
 msgid "Creoles and pidgins, French-based (Other)"
 msgstr "francia alapú kreol és pidgin (egyéb)"
 
 #: zypp/LanguageCode.cc:416
-#, fuzzy
 msgid "Creoles and pidgins, Portuguese-based (Other)"
 msgstr "portugál alapú kreol és pidgin (egyéb)"
 
@@ -454,7 +446,6 @@ msgid "Crimean Tatar"
 msgstr "krími tatár"
 
 #: zypp/LanguageCode.cc:422
-#, fuzzy
 msgid "Creoles and pidgins (Other)"
 msgstr "kreol és pidgin (egyéb)"
 
@@ -571,7 +562,7 @@ msgstr "eszperantó"
 
 #: zypp/LanguageCode.cc:478
 msgid "Estonian"
-msgstr "Észt"
+msgstr "észt"
 
 #: zypp/LanguageCode.cc:480
 msgid "Ewe"
@@ -608,7 +599,7 @@ msgstr "fülöp-szigeteki"
 
 #: zypp/LanguageCode.cc:494
 msgid "Finnish"
-msgstr "Finn"
+msgstr "finn"
 
 #: zypp/LanguageCode.cc:496
 msgid "Finno-Ugrian (Other)"
@@ -620,7 +611,7 @@ msgstr "fon"
 
 #: zypp/LanguageCode.cc:500
 msgid "French"
-msgstr "Francia"
+msgstr "francia"
 
 #: zypp/LanguageCode.cc:502
 msgid "French, Middle (ca.1400-1600)"
@@ -668,7 +659,7 @@ msgstr "grúz"
 
 #: zypp/LanguageCode.cc:522
 msgid "German"
-msgstr "Német"
+msgstr "német"
 
 #: zypp/LanguageCode.cc:524
 msgid "Geez"
@@ -806,7 +797,7 @@ msgstr "felső-szorbiai"
 
 #: zypp/LanguageCode.cc:584
 msgid "Hungarian"
-msgstr "Magyar"
+msgstr "magyar"
 
 #: zypp/LanguageCode.cc:586
 msgid "Hupa"
@@ -824,7 +815,7 @@ msgstr "igbo"
 
 #: zypp/LanguageCode.cc:592
 msgid "Icelandic"
-msgstr "Izlandi"
+msgstr "izlandi"
 
 #: zypp/LanguageCode.cc:594
 msgid "Ido"
@@ -882,13 +873,12 @@ msgid "Iranian (Other)"
 msgstr "iráni (egyéb)"
 
 #: zypp/LanguageCode.cc:620
-#, fuzzy
 msgid "Iroquoian languages"
 msgstr "irokéz nyelvek"
 
 #: zypp/LanguageCode.cc:622
 msgid "Italian"
-msgstr "Olasz"
+msgstr "olasz"
 
 # src/trans.h:222
 #: zypp/LanguageCode.cc:624
@@ -964,7 +954,7 @@ msgstr "kabardi"
 
 #: zypp/LanguageCode.cc:658
 msgid "Khasi"
-msgstr "Hászi"
+msgstr "hászi"
 
 #: zypp/LanguageCode.cc:660
 msgid "Khoisan (Other)"
@@ -1133,7 +1123,6 @@ msgid "Luo (Kenya and Tanzania)"
 msgstr "luo (Kenya és Tanzania)"
 
 #: zypp/LanguageCode.cc:738
-#, fuzzy
 msgid "lushai"
 msgstr "lushai"
 
@@ -1219,7 +1208,6 @@ msgid "Minangkabau"
 msgstr "minangkabau"
 
 #: zypp/LanguageCode.cc:778
-#, fuzzy
 msgid "Miscellaneous languages"
 msgstr "vegyes nyelvek"
 
@@ -1248,7 +1236,6 @@ msgid "Manipuri"
 msgstr "manipuri"
 
 #: zypp/LanguageCode.cc:790
-#, fuzzy
 msgid "Manobo languages"
 msgstr "manobo nyelvek"
 
@@ -1271,12 +1258,10 @@ msgstr "mossi"
 # modules/inst_sw_single.ycp:117
 # clients/inst_sw_single.ycp:1072
 #: zypp/LanguageCode.cc:800
-#, fuzzy
 msgid "Multiple languages"
 msgstr "több nyelv"
 
 #: zypp/LanguageCode.cc:802
-#, fuzzy
 msgid "Munda languages"
 msgstr "munda nyelvek"
 
@@ -1294,7 +1279,6 @@ msgid "Marwari"
 msgstr "marvari"
 
 #: zypp/LanguageCode.cc:810
-#, fuzzy
 msgid "Mayan languages"
 msgstr "maja nyelvek"
 
@@ -1317,7 +1301,8 @@ msgstr "észak-amerikai indián"
 msgid "Neapolitan"
 msgstr "nápolyi"
 
-#: zypp/LanguageCode.cc:820 zypp/CountryCode.cc:380
+#: zypp/LanguageCode.cc:820
+#: zypp/CountryCode.cc:380
 msgid "Nauru"
 msgstr "Nauru"
 
@@ -1390,7 +1375,6 @@ msgid "Northern Sotho"
 msgstr "északi sotho"
 
 #: zypp/LanguageCode.cc:854
-#, fuzzy
 msgid "Nubian languages"
 msgstr "núbiai nyelvek"
 
@@ -1448,7 +1432,6 @@ msgid "Turkish, Ottoman (1500-1928)"
 msgstr "török, ottomán (1500-1928)"
 
 #: zypp/LanguageCode.cc:882
-#, fuzzy
 msgid "Otomian languages"
 msgstr "otomi nyelvek"
 
@@ -1516,7 +1499,6 @@ msgid "Portuguese"
 msgstr "Portugál"
 
 #: zypp/LanguageCode.cc:914
-#, fuzzy
 msgid "Prakrit languages"
 msgstr "prakrit nyelvek"
 
@@ -1588,7 +1570,6 @@ msgid "South American Indian (Other)"
 msgstr "dél-amerikai indián (egyéb)"
 
 #: zypp/LanguageCode.cc:948
-#, fuzzy
 msgid "Salishan languages"
 msgstr "salishi nyelvek"
 
@@ -1625,7 +1606,7 @@ msgstr "skót"
 
 #: zypp/LanguageCode.cc:964
 msgid "Croatian"
-msgstr "Horvát"
+msgstr "horvát"
 
 #: zypp/LanguageCode.cc:966
 msgid "Selkup"
@@ -1657,7 +1638,6 @@ msgid "Sinhala"
 msgstr "szinhala"
 
 #: zypp/LanguageCode.cc:980
-#, fuzzy
 msgid "Siouan languages"
 msgstr "sziú nyelvek"
 
@@ -1686,7 +1666,6 @@ msgid "Northern Sami"
 msgstr "északi lapp"
 
 #: zypp/LanguageCode.cc:994
-#, fuzzy
 msgid "Sami languages (Other)"
 msgstr "számi nyelvek (egyéb)"
 
@@ -1852,7 +1831,8 @@ msgid "Tiv"
 msgstr "tiv"
 
 # TK
-#: zypp/LanguageCode.cc:1072 zypp/CountryCode.cc:428
+#: zypp/LanguageCode.cc:1072
+#: zypp/CountryCode.cc:428
 msgid "Tokelau"
 msgstr "Tokelau"
 
@@ -1903,7 +1883,6 @@ msgid "Tumbuka"
 msgstr "tumbuka"
 
 #: zypp/LanguageCode.cc:1096
-#, fuzzy
 msgid "Tupi languages"
 msgstr "tupi nyelvek"
 
@@ -1916,7 +1895,8 @@ msgid "Altaic (Other)"
 msgstr "altáji (egyéb)"
 
 # TV
-#: zypp/LanguageCode.cc:1102 zypp/CountryCode.cc:435
+#: zypp/LanguageCode.cc:1102
+#: zypp/CountryCode.cc:435
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
@@ -1983,7 +1963,6 @@ msgid "Votic"
 msgstr "vóti"
 
 #: zypp/LanguageCode.cc:1134
-#, fuzzy
 msgid "Wakashan languages"
 msgstr "vakasai nyelvek"
 
@@ -2008,7 +1987,6 @@ msgid "Welsh"
 msgstr "velszi"
 
 #: zypp/LanguageCode.cc:1144
-#, fuzzy
 msgid "Sorbian languages"
 msgstr "szorbiai nyelvek"
 
@@ -2046,7 +2024,6 @@ msgid "Yoruba"
 msgstr "joruba"
 
 #: zypp/LanguageCode.cc:1162
-#, fuzzy
 msgid "Yupik languages"
 msgstr "jupik nyelvek"
 
@@ -2086,8 +2063,7 @@ msgstr "%s módosított konfigurációs fájljai:"
 #: zypp/target/rpm/RpmDb.cc:1807
 #, c-format
 msgid "rpm saved %s as %s but it was impossible to determine the difference"
-msgstr ""
-"Az rpm elmentette %s-t, mint %s, de nem sikerült megállapítani a különbséget"
+msgstr "Az rpm elmentette %s-t, mint %s, de nem sikerült megállapítani a különbséget"
 
 #: zypp/target/rpm/RpmDb.cc:1809
 #, c-format
@@ -2101,8 +2077,7 @@ msgstr ""
 #: zypp/target/rpm/RpmDb.cc:1812
 #, c-format
 msgid "rpm created %s as %s but it was impossible to determine the difference"
-msgstr ""
-"Az rpm létrehozta %s-t, mint %s, de nem sikerült megállapítani a különbséget"
+msgstr "Az rpm létrehozta %s-t, mint %s, de nem sikerült megállapítani a különbséget"
 
 #: zypp/target/rpm/RpmDb.cc:1814
 #, c-format
@@ -2118,7 +2093,8 @@ msgstr ""
 msgid "%s install failed"
 msgstr "%s telepítése nem sikerült"
 
-#: zypp/target/rpm/RpmDb.cc:1820 zypp/target/rpm/RpmDb.cc:1924
+#: zypp/target/rpm/RpmDb.cc:1820
+#: zypp/target/rpm/RpmDb.cc:1926
 msgid "rpm output:"
 msgstr "Az rpm parancs kimenete:"
 
@@ -2127,57 +2103,58 @@ msgstr "Az rpm parancs kimenete:"
 msgid "%s installed ok"
 msgstr "%s telepítése OK"
 
-#: zypp/target/rpm/RpmDb.cc:1826 zypp/target/rpm/RpmDb.cc:1929
+#: zypp/target/rpm/RpmDb.cc:1826
+#: zypp/target/rpm/RpmDb.cc:1931
 msgid "Additional rpm output:"
 msgstr "További rpm kimenet:"
 
-#: zypp/target/rpm/RpmDb.cc:1923
+#: zypp/target/rpm/RpmDb.cc:1925
 #, c-format
 msgid "%s remove failed"
 msgstr "%s eltávolítása meghiúsult"
 
-#: zypp/target/rpm/RpmDb.cc:1927
+#: zypp/target/rpm/RpmDb.cc:1929
 #, c-format
 msgid "%s remove ok"
 msgstr "%s eltávolítása OK"
 
-#: zypp/target/rpm/RpmDb.cc:1943
+#: zypp/target/rpm/RpmDb.cc:1945
 msgid "Ok"
 msgstr "OK"
 
-#: zypp/target/rpm/RpmDb.cc:1946
+#: zypp/target/rpm/RpmDb.cc:1948
 msgid "The package is not OK for the following reasons:"
 msgstr "A csomag nem OK a következő okok miatt:"
 
-#: zypp/target/rpm/RpmDb.cc:1952
+#: zypp/target/rpm/RpmDb.cc:1954
 msgid "The package contains different version than expected"
 msgstr "A csomag nem a várt verziót tartalmazza"
 
-#: zypp/target/rpm/RpmDb.cc:1958
+#: zypp/target/rpm/RpmDb.cc:1960
 msgid "The package file has incorrect MD5 sum"
 msgstr "A csomag MD5 ellenőrzőösszege helytelen"
 
-#: zypp/target/rpm/RpmDb.cc:1964
+#: zypp/target/rpm/RpmDb.cc:1966
 msgid "The package is not signed"
 msgstr "A csomag nincs aláírva"
 
-#: zypp/target/rpm/RpmDb.cc:1970
+#: zypp/target/rpm/RpmDb.cc:1972
 msgid "The package has no MD5 sum"
 msgstr "A csomagnak nincs MD5 ellenőrzőösszege"
 
-#: zypp/target/rpm/RpmDb.cc:1976
+#: zypp/target/rpm/RpmDb.cc:1978
 msgid "The package has incorrect signature"
 msgstr "A csomag aláírása helytelen"
 
-#: zypp/target/rpm/RpmDb.cc:1982
+#: zypp/target/rpm/RpmDb.cc:1984
 msgid "The package archive has incorrect MD5 sum"
 msgstr "A csomagarchívum MD5 ellenőrzőösszege helytelen"
 
-#: zypp/target/rpm/RpmDb.cc:1988
+#: zypp/target/rpm/RpmDb.cc:1990
 msgid "rpm failed for unkown reason, see log file"
 msgstr "Az rpm leállt ismeretlen okból, tekintse meg a naplófájlt"
 
-#: zypp/target/rpm/RpmDb.cc:2132
+#: zypp/target/rpm/RpmDb.cc:2134
 #, c-format
 msgid "created backup %s"
 msgstr "%s másolata létrehozva"
@@ -2188,7 +2165,7 @@ msgid "%s is replaced by %s"
 msgstr "A(z) %s csomagot felváltja %s"
 
 #: zypp/solver/detail/ResolverInfoObsoletes.cc:69
-#, fuzzy, c-format
+#, c-format
 msgid "%s replaced by %s"
 msgstr "A(z) %s csomagot felváltja %s"
 
@@ -2281,7 +2258,7 @@ msgstr "Szülője "
 
 # modules/inst_target_part.ycp:676
 #: zypp/solver/detail/Resolver_problems.cc:233
-#: zypp/solver/detail/Resolver_problems.cc:293
+#: zypp/solver/detail/Resolver_problems.cc:296
 #, c-format
 msgid "Cannot install %s"
 msgstr "%s nem telepíthető"
@@ -2300,111 +2277,103 @@ msgstr ""
 "Nem áll rendelkezésre ezt a követelményt kielégítő erőforrás."
 
 #: zypp/solver/detail/Resolver_problems.cc:244
-msgid ""
-"Due problems which are described above/below this resolution will not solve "
-"all dependencies"
-msgstr ""
-"A fent/lent leírt problémák miatt ez a feloldás nem oldja fel az összes "
-"függőséget"
+msgid "Due problems which are described above/below this resolution will not solve all dependencies"
+msgstr "A fent/lent leírt problémák miatt ez a feloldás nem oldja fel az összes függőséget"
 
 #: zypp/solver/detail/Resolver_problems.cc:252
 #, c-format
 msgid "%s is not installed and has been marked as uninstallable"
 msgstr "%s nincs telepítve és eltávolíthatónak lett megjelölve"
 
-#: zypp/solver/detail/Resolver_problems.cc:259
+#: zypp/solver/detail/Resolver_problems.cc:262
 #, c-format
 msgid "Cannot install %s due dependency problems"
 msgstr "%s nem telepíthető függőségi problémák miatt"
 
-#: zypp/solver/detail/Resolver_problems.cc:308
+#: zypp/solver/detail/Resolver_problems.cc:311
 #, c-format
 msgid "%s has unfulfiled requirements"
 msgstr "%s egyes követelményei nincsenek kielégítve"
 
-#: zypp/solver/detail/Resolver_problems.cc:346
-#, fuzzy, c-format
+#: zypp/solver/detail/Resolver_problems.cc:349
+#, c-format
 msgid "%s has missing dependencies"
-msgstr "%s nem telepíthető hiányzó függőségek miatt"
+msgstr "%s függőségei hiányoznak"
 
-#: zypp/solver/detail/Resolver_problems.cc:384
+#: zypp/solver/detail/Resolver_problems.cc:387
 #, c-format
 msgid "%s cannot be installed due missing dependencies"
 msgstr "%s nem telepíthető hiányzó függőségek miatt"
 
-#: zypp/solver/detail/Resolver_problems.cc:406
+#: zypp/solver/detail/Resolver_problems.cc:409
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
 msgstr "%s kielégíti %s függőségeit, de eltávolításra kerül"
 
-#: zypp/solver/detail/Resolver_problems.cc:416
+#: zypp/solver/detail/Resolver_problems.cc:419
 #, c-format
 msgid "No need to install %s"
 msgstr "Nincs szükség %s telepítésére"
 
-#: zypp/solver/detail/Resolver_problems.cc:424
+#: zypp/solver/detail/Resolver_problems.cc:427
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "%s nem telepíthető %s függőségeinek teljesítéséhez"
 
-#: zypp/solver/detail/Resolver_problems.cc:434
+#: zypp/solver/detail/Resolver_problems.cc:437
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
 msgstr "%s nem telepíthető %s függőségeinek teljesítéséhez"
 
-#: zypp/solver/detail/Resolver_problems.cc:458
-#: zypp/solver/detail/Resolver_problems.cc:466
+#: zypp/solver/detail/Resolver_problems.cc:461
+#: zypp/solver/detail/Resolver_problems.cc:469
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
 msgstr "%s nem távolítható el, mert még mindig szükséges"
 
-#: zypp/solver/detail/Resolver_problems.cc:486
+#: zypp/solver/detail/Resolver_problems.cc:489
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
 msgstr "%s nem telepíthető, mert ütközik (%s)"
 
-#: zypp/solver/detail/Resolver_problems.cc:506
+#: zypp/solver/detail/Resolver_problems.cc:509
 #, c-format
 msgid "%s is uninstallable due conflicts with %s"
 msgstr "%s eltávolítható, mivel ütközik (%s)"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:54
-#, fuzzy
-msgid "Ignore this requirement."
-msgstr "Követelmény figyelmen kívül hagyása"
+msgid "Ignore this requirement just here"
+msgstr "Követelmény figyelmen kívül hagyása csak itt"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:63
-#, fuzzy
-msgid "Ignore this requirement for all other resolvables."
-msgstr "A(z) %s csomagot más feloldandók igénylik"
+msgid "Ignore this requirement generally"
+msgstr "Követelmény figyelmen kívül hagyása általában"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:77
-#, fuzzy, c-format
-msgid "Ignore this conflict of %s."
-msgstr "%s ütközése figyelmen kívül marad"
+#, c-format
+msgid "Ignore this conflict of %s"
+msgstr "%s ezen ütközése figyelmen kívül marad"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:86
-#, fuzzy
-msgid "ignore architecture"
-msgstr "Rendszertöltés architektúrája"
+msgid "Ignore architecture"
+msgstr "Architektúra figyelmen kívül marad"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:96
-#, fuzzy, c-format
-msgid "Ignore that %s is already set to install."
-msgstr "A %1 könyvtár már szerepel a listán."
+#, c-format
+msgid "Ignore that %s is already set to install"
+msgstr "%s telepítésre megjelölése figyelmen kívül marad"
 
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:52
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:56
-#, fuzzy, c-format
+#, c-format
 msgid "delete %s"
-msgstr "%1 törlése"
+msgstr "%s törlése"
 
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:65
-#, fuzzy
-msgid "Delete conflicting resolvables."
+msgid "Delete conflicting resolvables"
 msgstr "Ütköző feloldhatók eltávolítása"
 
-#: zypp/solver/detail/QueueItemRequire.cc:470
+#: zypp/solver/detail/QueueItemRequire.cc:461
 #, c-format
 msgid "for requiring %s for %s when upgrading %s"
 msgstr "mert %s szükséges %s esetén, %s frissítésekor"
@@ -2414,202 +2383,187 @@ msgstr "mert %s szükséges %s esetén, %s frissítésekor"
 msgid "%s is missing the requirement %s"
 msgstr "%s követelménye (%s) hiányzik"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:60
+#: zypp/solver/detail/ResolverInfoMisc.cc:56
 msgid ", Action: "
 msgstr ", Művelet"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:63
+#: zypp/solver/detail/ResolverInfoMisc.cc:59
 msgid ", Trigger: "
 msgstr ", trigger: "
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:88
+#: zypp/solver/detail/ResolverInfoMisc.cc:84
 msgid "package"
 msgstr "csomag"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:92
+#: zypp/solver/detail/ResolverInfoMisc.cc:88
 msgid "selection"
 msgstr "kiválasztás"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:96
+#: zypp/solver/detail/ResolverInfoMisc.cc:92
 msgid "pattern"
 msgstr "minta"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:100
+#: zypp/solver/detail/ResolverInfoMisc.cc:96
 msgid "product"
 msgstr "termék"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:104
+#: zypp/solver/detail/ResolverInfoMisc.cc:100
 msgid "patch"
 msgstr "javítás"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:108
+#: zypp/solver/detail/ResolverInfoMisc.cc:104
 msgid "script"
 msgstr "parancsfájl"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:112
+#: zypp/solver/detail/ResolverInfoMisc.cc:108
 msgid "message"
 msgstr "üzenet"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:116
+#: zypp/solver/detail/ResolverInfoMisc.cc:112
 msgid "system"
 msgstr "rendszer"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:120
+#: zypp/solver/detail/ResolverInfoMisc.cc:116
 msgid "Resolvable"
 msgstr "Feloldható"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:138
+#: zypp/solver/detail/ResolverInfoMisc.cc:134
 msgid "Marking this resolution attempt as invalid."
 msgstr "A feloldási kísérlet érvénytelennek jelölése."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:145
+#: zypp/solver/detail/ResolverInfoMisc.cc:141
 #, c-format
 msgid "Marking resolvable %s as uninstallable"
 msgstr "%s feloldható telepíthetetlennek jelölése"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:153
+#: zypp/solver/detail/ResolverInfoMisc.cc:149
 #, c-format
-msgid ""
-"%s is scheduled to be installed, but this is not possible because of "
-"dependency problems."
-msgstr ""
-"%s telepítésre van ütemezve, de ez függőségi problémák miatt nem lehetséges."
+msgid "%s is scheduled to be installed, but this is not possible because of dependency problems."
+msgstr "%s telepítésre van ütemezve, de ez függőségi problémák miatt nem lehetséges."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:161
+#: zypp/solver/detail/ResolverInfoMisc.cc:157
 #, c-format
-msgid ""
-"Can't install %s since it is already marked as needing to be uninstalled"
+msgid "Can't install %s since it is already marked as needing to be uninstalled"
 msgstr "%s nem telepíthető, mert már meg van jelölve eltávolításra"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:173
+#: zypp/solver/detail/ResolverInfoMisc.cc:169
 #, c-format
 msgid "Can't install %s since it is does not apply to this system."
 msgstr "%s nem telepíthető, mert nem ehhez a rendszerhez való."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:184
-#, fuzzy, c-format
+#: zypp/solver/detail/ResolverInfoMisc.cc:180
+#, c-format
 msgid "Can't install %s, since %s is already marked as needing to be installed"
-msgstr "%s nem telepíthető, mert már meg van jelölve eltávolításra"
+msgstr "%s nem telepíthető, mert %s már meg van jelölve telepítésre"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:192
+#: zypp/solver/detail/ResolverInfoMisc.cc:188
 #, c-format
 msgid "This would invalidate %s."
 msgstr "Ennek hatására %s érvénytelenné válna."
 
 # modules/inst_target_part.ycp:676
-#: zypp/solver/detail/ResolverInfoMisc.cc:208
+#: zypp/solver/detail/ResolverInfoMisc.cc:204
 #, c-format
 msgid "Establishing %s"
 msgstr "%s előfeldolgozása"
 
 # modules/inst_target_part.ycp:676
-#: zypp/solver/detail/ResolverInfoMisc.cc:229
+#: zypp/solver/detail/ResolverInfoMisc.cc:225
 #, c-format
 msgid "Installing %s"
 msgstr "%s telepítése"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:246
+#: zypp/solver/detail/ResolverInfoMisc.cc:242
 #, c-format
 msgid "Updating %s to %s"
 msgstr "%s frissítése; az új: %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:264
+#: zypp/solver/detail/ResolverInfoMisc.cc:260
 #, c-format
 msgid "Skipping %s: already installed"
 msgstr "%s kimarad: már telepítve van"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:286
+#: zypp/solver/detail/ResolverInfoMisc.cc:282
 #, c-format
 msgid "There are no alternative installed providers of %s"
 msgstr "%s számára nincs alternatív telepített szolgáltató"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:292
-#: zypp/solver/detail/ResolverInfoMisc.cc:317
+#: zypp/solver/detail/ResolverInfoMisc.cc:288
+#: zypp/solver/detail/ResolverInfoMisc.cc:313
 #, c-format
 msgid "for %s"
 msgstr "%s számára"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:311
+#: zypp/solver/detail/ResolverInfoMisc.cc:307
 #, c-format
 msgid "There are no installable providers of %s"
 msgstr "%s számára nincs telepíthető szolgáltató"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:334
+#: zypp/solver/detail/ResolverInfoMisc.cc:330
 #, c-format
 msgid "Upgrade to %s to avoid removing %s is not possible."
-msgstr ""
-"A(z) %s csomagra frissítés %s eltávolításának elkerülése érdekében nem "
-"lehetséges."
+msgstr "A(z) %s csomagra frissítés %s eltávolításának elkerülése érdekében nem lehetséges."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:350
+#: zypp/solver/detail/ResolverInfoMisc.cc:346
 #, c-format
 msgid "%s provides %s, but is scheduled to be uninstalled."
 msgstr "%s biztosítja %s-t, de eltávolításra van ütemezve."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:366
+#: zypp/solver/detail/ResolverInfoMisc.cc:362
 #, c-format
 msgid "%s provides %s, but another version of that %s is already installed."
 msgstr "%s biztosítja %s-t, de %s egy másik verziója már telepítve van."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:383
+#: zypp/solver/detail/ResolverInfoMisc.cc:379
 #, c-format
-msgid ""
-"%s provides %s, but it is uninstallable.  Try installing it on its own for "
-"more details."
-msgstr ""
-"%s biztosítja %s-t, de eltávolítható. Próbálja meg telepíteni magában a "
-"további részletek érdekében."
+msgid "%s provides %s, but it is uninstallable.  Try installing it on its own for more details."
+msgstr "%s biztosítja %s-t, de eltávolítható. Próbálja meg telepíteni magában a további részletek érdekében."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:399
+#: zypp/solver/detail/ResolverInfoMisc.cc:395
 #, c-format
 msgid "%s provides %s, but it is locked."
 msgstr "%s biztosítja %s-t, de zárolva van."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:415
+#: zypp/solver/detail/ResolverInfoMisc.cc:411
 #, c-format
 msgid "Can't satisfy requirement %s for %s"
 msgstr "%s %s követelménye nem elégíthető ki"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:436
+#: zypp/solver/detail/ResolverInfoMisc.cc:432
 #, c-format
-msgid ""
-"%s is required by other to-be-installed resolvable, so it won't be unlinked."
-msgstr ""
-"%s egy másik telepítendő feloldható igényli, ezért a csatolása nem lesz "
-"megszüntetve."
+msgid "%s is required by other to-be-installed resolvable, so it won't be unlinked."
+msgstr "%s egy másik telepítendő feloldható igényli, ezért a csatolása nem lesz megszüntetve."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:453
+#: zypp/solver/detail/ResolverInfoMisc.cc:449
 #, c-format
 msgid "%s is required by other installed resolvable, so it won't be unlinked."
-msgstr ""
-"%s egy másik telepítendő feloldható igényli, ezért a csatolása nem lesz "
-"megszüntetve."
+msgstr "%s egy másik telepítendő feloldható igényli, ezért a csatolása nem lesz megszüntetve."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:470
+#: zypp/solver/detail/ResolverInfoMisc.cc:466
 #, c-format
 msgid "%s is locked and cannot be uninstalled."
 msgstr "%s zárolva van, ezért nem távolítható el."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:489
+#: zypp/solver/detail/ResolverInfoMisc.cc:485
 #, c-format
 msgid "A conflict over %s (%s) requires the removal of to-be-installed %s"
 msgstr "%s ütközése (%s) a telepítendő %s eltávolítását igényli"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:507
+#: zypp/solver/detail/ResolverInfoMisc.cc:503
 #, c-format
 msgid "Marking %s as uninstallable due to conflicts over %s"
 msgstr "%s telepíthetlennek lesz jelölve, mert ütközik a(z) %s csomaggal"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:515
+#: zypp/solver/detail/ResolverInfoMisc.cc:511
 #, c-format
 msgid "from %s"
 msgstr "%s csomagból"
 
-#: zypp/solver/detail/ResolverInfo.cc:172
+#: zypp/solver/detail/ResolverInfo.cc:189
 msgid " Error!"
 msgstr "Hiba!"
 
-#: zypp/solver/detail/ResolverInfo.cc:173
+#: zypp/solver/detail/ResolverInfo.cc:190
 msgid " Important!"
 msgstr "Fontos!"
 
@@ -2617,22 +2571,20 @@ msgstr "Fontos!"
 #: zypp/solver/detail/ProblemSolutionKeep.cc:57
 #, c-format
 msgid "keep %s"
-msgstr ""
+msgstr "%s megtartása"
 
 #: zypp/solver/detail/ProblemSolutionKeep.cc:67
-#, fuzzy
-msgid "Keep missing resolvables."
+msgid "Keep missing resolvables"
 msgstr "Hiányzó feloldhatók telepítése"
 
 #: zypp/solver/detail/ProblemSolutionInstall.cc:53
 #: zypp/solver/detail/ProblemSolutionInstall.cc:57
-#, fuzzy, c-format
+#, c-format
 msgid "install %s"
-msgstr "%1 telepítése"
+msgstr "%s telepítése"
 
 #: zypp/solver/detail/ProblemSolutionInstall.cc:67
-#, fuzzy
-msgid "Install missing resolvables."
+msgid "Install missing resolvables"
 msgstr "Hiányzó feloldhatók telepítése"
 
 #: zypp/solver/detail/ResolverInfoDependsOn.cc:55
@@ -2641,12 +2593,12 @@ msgid "%s depended on %s"
 msgstr "%s ettől függött: %s"
 
 #: zypp/solver/detail/ResolverInfoDependsOn.cc:69
-#, fuzzy, c-format
+#, c-format
 msgid "%s dependend on %s"
 msgstr "%s ettől függött: %s"
 
 #: zypp/solver/detail/ResolverInfoNeededBy.cc:70
-#, fuzzy, c-format
+#, c-format
 msgid "%s needed by %s"
 msgstr "A(z) %s csomagot igényli %s"
 
@@ -2657,13 +2609,12 @@ msgid "%s part of %s"
 msgstr "%s %s része"
 
 #: zypp/solver/detail/ProblemSolutionUnlock.cc:52
-#, fuzzy, c-format
+#, c-format
 msgid "unlock %s"
 msgstr "%s zárolásának feloldása"
 
 #: zypp/solver/detail/ProblemSolutionUnlock.cc:61
-#, fuzzy
-msgid "Unlock these resolvables."
+msgid "Unlock these resolvables"
 msgstr "E feloldhatók zárolásának feloldása"
 
 #: zypp/CountryCode.cc:135
@@ -2846,7 +2797,8 @@ msgid "Cocos (Keeling) Islands"
 msgstr "Cocos (Keeling) -szigetek"
 
 # CG
-#: zypp/CountryCode.cc:255 zypp/CountryCode.cc:257
+#: zypp/CountryCode.cc:255
+#: zypp/CountryCode.cc:257
 msgid "Congo"
 msgstr "Kongó"
 
@@ -3764,19 +3716,19 @@ msgstr "Zambia"
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
+#, fuzzy
+#~ msgid "Ignore this requirement for all other resolvables."
+#~ msgstr "A(z) %s csomagot más feloldandók igénylik"
 #~ msgid "Deleting %s"
 #~ msgstr "%s törlése"
-
 #~ msgid ""
 #~ "Can't install %s, since a resolvable of the same name is already marked "
 #~ "as needing to be installed"
 #~ msgstr ""
 #~ "%s nem telepíthető, mert egy ugyanilyen nevű feloldható már meg van "
 #~ "jelölve telepítésre"
-
 #~ msgid "%s cannot be uninstalled due missing dependencies"
 #~ msgstr "%s nem távolítható el hiányzó függőségek miatt"
-
 #~ msgid "unknown"
 #~ msgstr "ismeretlen"
 
@@ -3795,3 +3747,4 @@ msgstr "Zimbabwe"
 #, fuzzy
 #~ msgid "to be uninstalled"
 #~ msgstr "újbóli telepítésre van szüksége"
+

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2006-02-14 13:29+0100\n"
+"POT-Creation-Date: 2006-02-18 17:25+0100\n"
 "PO-Revision-Date: 2001-07-18 11:05+0200\n"
 "Last-Translator: Hwang, Sang-Jin <violiet@suse.de>\n"
 "Language-Team: Korean <i18n@suse.de>\n"
@@ -2366,7 +2366,7 @@ msgstr ""
 msgid "%s install failed"
 msgstr "설치 실패."
 
-#: zypp/target/rpm/RpmDb.cc:1820 zypp/target/rpm/RpmDb.cc:1924
+#: zypp/target/rpm/RpmDb.cc:1820 zypp/target/rpm/RpmDb.cc:1926
 #, fuzzy
 msgid "rpm output:"
 msgstr ""
@@ -2379,63 +2379,63 @@ msgid "%s installed ok"
 msgstr "예, 설치진행(&Y)"
 
 #  dialog caption
-#: zypp/target/rpm/RpmDb.cc:1826 zypp/target/rpm/RpmDb.cc:1929
+#: zypp/target/rpm/RpmDb.cc:1826 zypp/target/rpm/RpmDb.cc:1931
 #, fuzzy
 msgid "Additional rpm output:"
 msgstr "추가 그룹 설정"
 
-#: zypp/target/rpm/RpmDb.cc:1923
+#: zypp/target/rpm/RpmDb.cc:1925
 #, fuzzy, c-format
 msgid "%s remove failed"
 msgstr "rpm이 실패했습니다."
 
-#: zypp/target/rpm/RpmDb.cc:1927
+#: zypp/target/rpm/RpmDb.cc:1929
 #, c-format
 msgid "%s remove ok"
 msgstr ""
 
 #  button for message box with help text
-#: zypp/target/rpm/RpmDb.cc:1943
+#: zypp/target/rpm/RpmDb.cc:1945
 msgid "Ok"
 msgstr "확인"
 
-#: zypp/target/rpm/RpmDb.cc:1946
+#: zypp/target/rpm/RpmDb.cc:1948
 msgid "The package is not OK for the following reasons:"
 msgstr ""
 
-#: zypp/target/rpm/RpmDb.cc:1952
+#: zypp/target/rpm/RpmDb.cc:1954
 msgid "The package contains different version than expected"
 msgstr ""
 
-#: zypp/target/rpm/RpmDb.cc:1958
+#: zypp/target/rpm/RpmDb.cc:1960
 #, fuzzy
 msgid "The package file has incorrect MD5 sum"
 msgstr "복구될 패키지"
 
-#: zypp/target/rpm/RpmDb.cc:1964
+#: zypp/target/rpm/RpmDb.cc:1966
 #, fuzzy
 msgid "The package is not signed"
 msgstr "복구될 패키지"
 
-#: zypp/target/rpm/RpmDb.cc:1970
+#: zypp/target/rpm/RpmDb.cc:1972
 msgid "The package has no MD5 sum"
 msgstr ""
 
-#: zypp/target/rpm/RpmDb.cc:1976
+#: zypp/target/rpm/RpmDb.cc:1978
 #, fuzzy
 msgid "The package has incorrect signature"
 msgstr "복구될 패키지"
 
-#: zypp/target/rpm/RpmDb.cc:1982
+#: zypp/target/rpm/RpmDb.cc:1984
 #, fuzzy
 msgid "The package archive has incorrect MD5 sum"
 msgstr "복구될 패키지"
 
-#: zypp/target/rpm/RpmDb.cc:1988
+#: zypp/target/rpm/RpmDb.cc:1990
 msgid "rpm failed for unkown reason, see log file"
 msgstr ""
 
-#: zypp/target/rpm/RpmDb.cc:2132
+#: zypp/target/rpm/RpmDb.cc:2134
 #, fuzzy, c-format
 msgid "created backup %s"
 msgstr "백업을 생성하지 않음"
@@ -2533,7 +2533,7 @@ msgstr ""
 
 #  Frame title for installation target hard disk / partition(s)
 #: zypp/solver/detail/Resolver_problems.cc:233
-#: zypp/solver/detail/Resolver_problems.cc:293
+#: zypp/solver/detail/Resolver_problems.cc:296
 #, fuzzy, c-format
 msgid "Cannot install %s"
 msgstr "설치중:"
@@ -2560,59 +2560,59 @@ msgstr ""
 msgid "%s is not installed and has been marked as uninstallable"
 msgstr "이 패키지는 이미 설치되어 있어서 설치가 되지 않습니다."
 
-#: zypp/solver/detail/Resolver_problems.cc:259
+#: zypp/solver/detail/Resolver_problems.cc:262
 #, c-format
 msgid "Cannot install %s due dependency problems"
 msgstr ""
 
-#: zypp/solver/detail/Resolver_problems.cc:308
+#: zypp/solver/detail/Resolver_problems.cc:311
 #, c-format
 msgid "%s has unfulfiled requirements"
 msgstr ""
 
-#: zypp/solver/detail/Resolver_problems.cc:346
+#: zypp/solver/detail/Resolver_problems.cc:349
 #, fuzzy, c-format
 msgid "%s has missing dependencies"
 msgstr "의존성을 만족하지 못함:"
 
-#: zypp/solver/detail/Resolver_problems.cc:384
+#: zypp/solver/detail/Resolver_problems.cc:387
 #, c-format
 msgid "%s cannot be installed due missing dependencies"
 msgstr ""
 
-#: zypp/solver/detail/Resolver_problems.cc:406
+#: zypp/solver/detail/Resolver_problems.cc:409
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
 msgstr ""
 
 #  text is shown in a line of a package list
-#: zypp/solver/detail/Resolver_problems.cc:416
+#: zypp/solver/detail/Resolver_problems.cc:419
 #, fuzzy, c-format
 msgid "No need to install %s"
 msgstr "다시 설치해야 합니다."
 
-#: zypp/solver/detail/Resolver_problems.cc:424
+#: zypp/solver/detail/Resolver_problems.cc:427
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr ""
 
-#: zypp/solver/detail/Resolver_problems.cc:434
+#: zypp/solver/detail/Resolver_problems.cc:437
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
 msgstr ""
 
-#: zypp/solver/detail/Resolver_problems.cc:458
-#: zypp/solver/detail/Resolver_problems.cc:466
+#: zypp/solver/detail/Resolver_problems.cc:461
+#: zypp/solver/detail/Resolver_problems.cc:469
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
 msgstr ""
 
-#: zypp/solver/detail/Resolver_problems.cc:486
+#: zypp/solver/detail/Resolver_problems.cc:489
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
 msgstr ""
 
-#: zypp/solver/detail/Resolver_problems.cc:506
+#: zypp/solver/detail/Resolver_problems.cc:509
 #, fuzzy, c-format
 msgid "%s is uninstallable due conflicts with %s"
 msgstr "%1은 %2와 충돌합니다"
@@ -2620,27 +2620,29 @@ msgstr "%1은 %2와 충돌합니다"
 #  text is shown in a column of a package list entry
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:54
 #, fuzzy
-msgid "Ignore this requirement."
+msgid "Ignore this requirement just here"
 msgstr "해결할수 없는 요구사항..."
 
+#  text is shown in a column of a package list entry
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:63
-msgid "Ignore this requirement for all other resolvables."
-msgstr ""
+#, fuzzy
+msgid "Ignore this requirement generally"
+msgstr "해결할수 없는 요구사항..."
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:77
 #, fuzzy, c-format
-msgid "Ignore this conflict of %s."
+msgid "Ignore this conflict of %s"
 msgstr "%1은 %2와 충돌합니다"
 
 #  tree node string
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:86
 #, fuzzy
-msgid "ignore architecture"
+msgid "Ignore architecture"
 msgstr "부트 아키텍쳐"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:96
 #, fuzzy, c-format
-msgid "Ignore that %s is already set to install."
+msgid "Ignore that %s is already set to install"
 msgstr "%1 디렉토리는 이미 목록에 있습니다."
 
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:52
@@ -2651,10 +2653,10 @@ msgstr "%1 삭제"
 
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:65
 #, fuzzy
-msgid "Delete conflicting resolvables."
+msgid "Delete conflicting resolvables"
 msgstr "%1은 %2와 충돌합니다"
 
-#: zypp/solver/detail/QueueItemRequire.cc:470
+#: zypp/solver/detail/QueueItemRequire.cc:461
 #, c-format
 msgid "for requiring %s for %s when upgrading %s"
 msgstr ""
@@ -2664,195 +2666,195 @@ msgstr ""
 msgid "%s is missing the requirement %s"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:60
+#: zypp/solver/detail/ResolverInfoMisc.cc:56
 #, fuzzy
 msgid ", Action: "
 msgstr "작동"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:63
+#: zypp/solver/detail/ResolverInfoMisc.cc:59
 msgid ", Trigger: "
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:88
+#: zypp/solver/detail/ResolverInfoMisc.cc:84
 msgid "package"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:92
+#: zypp/solver/detail/ResolverInfoMisc.cc:88
 msgid "selection"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:96
+#: zypp/solver/detail/ResolverInfoMisc.cc:92
 msgid "pattern"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:100
+#: zypp/solver/detail/ResolverInfoMisc.cc:96
 msgid "product"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:104
+#: zypp/solver/detail/ResolverInfoMisc.cc:100
 msgid "patch"
 msgstr "패치"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:108
+#: zypp/solver/detail/ResolverInfoMisc.cc:104
 msgid "script"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:112
+#: zypp/solver/detail/ResolverInfoMisc.cc:108
 msgid "message"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:116
+#: zypp/solver/detail/ResolverInfoMisc.cc:112
 msgid "system"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:120
+#: zypp/solver/detail/ResolverInfoMisc.cc:116
 msgid "Resolvable"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:138
+#: zypp/solver/detail/ResolverInfoMisc.cc:134
 msgid "Marking this resolution attempt as invalid."
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:145
+#: zypp/solver/detail/ResolverInfoMisc.cc:141
 #, c-format
 msgid "Marking resolvable %s as uninstallable"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:153
+#: zypp/solver/detail/ResolverInfoMisc.cc:149
 #, c-format
 msgid ""
 "%s is scheduled to be installed, but this is not possible because of "
 "dependency problems."
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:161
+#: zypp/solver/detail/ResolverInfoMisc.cc:157
 #, c-format
 msgid ""
 "Can't install %s since it is already marked as needing to be uninstalled"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:173
+#: zypp/solver/detail/ResolverInfoMisc.cc:169
 #, c-format
 msgid "Can't install %s since it is does not apply to this system."
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:184
+#: zypp/solver/detail/ResolverInfoMisc.cc:180
 #, c-format
 msgid "Can't install %s, since %s is already marked as needing to be installed"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:192
+#: zypp/solver/detail/ResolverInfoMisc.cc:188
 #, c-format
 msgid "This would invalidate %s."
 msgstr ""
 
 #  Frame title for installation target hard disk / partition(s)
-#: zypp/solver/detail/ResolverInfoMisc.cc:208
+#: zypp/solver/detail/ResolverInfoMisc.cc:204
 #, fuzzy, c-format
 msgid "Establishing %s"
 msgstr "설치중:"
 
 #  Frame title for installation target hard disk / partition(s)
-#: zypp/solver/detail/ResolverInfoMisc.cc:229
+#: zypp/solver/detail/ResolverInfoMisc.cc:225
 #, fuzzy, c-format
 msgid "Installing %s"
 msgstr "설치중:"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:246
+#: zypp/solver/detail/ResolverInfoMisc.cc:242
 #, c-format
 msgid "Updating %s to %s"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:264
+#: zypp/solver/detail/ResolverInfoMisc.cc:260
 #, fuzzy, c-format
 msgid "Skipping %s: already installed"
 msgstr "이미 설치된 스캐너 검사중"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:286
+#: zypp/solver/detail/ResolverInfoMisc.cc:282
 #, c-format
 msgid "There are no alternative installed providers of %s"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:292
-#: zypp/solver/detail/ResolverInfoMisc.cc:317
+#: zypp/solver/detail/ResolverInfoMisc.cc:288
+#: zypp/solver/detail/ResolverInfoMisc.cc:313
 #, c-format
 msgid "for %s"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:311
+#: zypp/solver/detail/ResolverInfoMisc.cc:307
 #, c-format
 msgid "There are no installable providers of %s"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:334
+#: zypp/solver/detail/ResolverInfoMisc.cc:330
 #, c-format
 msgid "Upgrade to %s to avoid removing %s is not possible."
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:350
+#: zypp/solver/detail/ResolverInfoMisc.cc:346
 #, c-format
 msgid "%s provides %s, but is scheduled to be uninstalled."
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:366
+#: zypp/solver/detail/ResolverInfoMisc.cc:362
 #, c-format
 msgid "%s provides %s, but another version of that %s is already installed."
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:383
+#: zypp/solver/detail/ResolverInfoMisc.cc:379
 #, c-format
 msgid ""
 "%s provides %s, but it is uninstallable.  Try installing it on its own for "
 "more details."
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:399
+#: zypp/solver/detail/ResolverInfoMisc.cc:395
 #, c-format
 msgid "%s provides %s, but it is locked."
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:415
+#: zypp/solver/detail/ResolverInfoMisc.cc:411
 #, c-format
 msgid "Can't satisfy requirement %s for %s"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:436
+#: zypp/solver/detail/ResolverInfoMisc.cc:432
 #, c-format
 msgid ""
 "%s is required by other to-be-installed resolvable, so it won't be unlinked."
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:453
+#: zypp/solver/detail/ResolverInfoMisc.cc:449
 #, c-format
 msgid "%s is required by other installed resolvable, so it won't be unlinked."
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:470
+#: zypp/solver/detail/ResolverInfoMisc.cc:466
 #, fuzzy, c-format
 msgid "%s is locked and cannot be uninstalled."
 msgstr "이 패키지는 이미 설치되어 있어서 설치가 되지 않습니다."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:489
+#: zypp/solver/detail/ResolverInfoMisc.cc:485
 #, c-format
 msgid "A conflict over %s (%s) requires the removal of to-be-installed %s"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:507
+#: zypp/solver/detail/ResolverInfoMisc.cc:503
 #, c-format
 msgid "Marking %s as uninstallable due to conflicts over %s"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:515
+#: zypp/solver/detail/ResolverInfoMisc.cc:511
 #, c-format
 msgid "from %s"
 msgstr ""
 
-#: zypp/solver/detail/ResolverInfo.cc:172
+#: zypp/solver/detail/ResolverInfo.cc:189
 #, fuzzy
 msgid " Error!"
 msgstr "에러"
 
-#: zypp/solver/detail/ResolverInfo.cc:173
+#: zypp/solver/detail/ResolverInfo.cc:190
 #, fuzzy
 msgid " Important!"
 msgstr "데이터 불러오기"
@@ -2864,8 +2866,9 @@ msgid "keep %s"
 msgstr ""
 
 #: zypp/solver/detail/ProblemSolutionKeep.cc:67
-msgid "Keep missing resolvables."
-msgstr ""
+#, fuzzy
+msgid "Keep missing resolvables"
+msgstr "누락된 패키지 설치"
 
 #: zypp/solver/detail/ProblemSolutionInstall.cc:53
 #: zypp/solver/detail/ProblemSolutionInstall.cc:57
@@ -2875,7 +2878,7 @@ msgstr "%1 설치"
 
 #: zypp/solver/detail/ProblemSolutionInstall.cc:67
 #, fuzzy
-msgid "Install missing resolvables."
+msgid "Install missing resolvables"
 msgstr "누락된 패키지 설치"
 
 #: zypp/solver/detail/ResolverInfoDependsOn.cc:55
@@ -2906,7 +2909,7 @@ msgstr "시계"
 
 #: zypp/solver/detail/ProblemSolutionUnlock.cc:61
 #, fuzzy
-msgid "Unlock these resolvables."
+msgid "Unlock these resolvables"
 msgstr "%1은 %2와 충돌합니다"
 
 #: zypp/CountryCode.cc:135
