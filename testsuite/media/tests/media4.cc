@@ -70,13 +70,16 @@ int main(int argc, char *argv[])
     ONE_STEP("provideDirTree(" + dir.asString() + ")");
     mm.provideDirTree(id, Pathname(dir));
 
+    ONE_STEP("Create a temporary dir");
     zypp::filesystem::TmpDir temp;
 
+    ONE_STEP("Create a copy of " + dir.asString());
     zypp::filesystem::copy_dir(mm.localPath(id, dir), temp.path());
 
     std::string cmd("/bin/ls -lR ");
                 cmd += temp.path().asString();
 
+    ONE_STEP("Check the directory copy")
     system( cmd.c_str());
 
     ONE_STEP("CLEANUP")
