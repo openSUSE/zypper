@@ -87,7 +87,9 @@ typedef struct {
     ProblemMap problems;
     // A map of PoolItems which provides a capability but are set
     // for uninstallation
-    ItemCapabilityMap provideAndDeleteMap;  
+    ItemCapabilityMap provideAndDeleteMap;
+    // A map of PoolItems which provides a capability but are locked
+    ItemCapabilityMap provideAndLockMap;    
 } ResItemCollector;
 
 
@@ -115,6 +117,21 @@ collector_cb (ResolverInfo_Ptr info, void *data)
 	    collector->provideAndDeleteMap.insert (make_pair( misc_info->other(), misc_info->capability()));
 	}
     }
+    // Collicting items which are providing requirements but they
+    // are locked
+    if (info->type() == RESOLVER_INFO_TYPE_LOCKED_PROVIDER) {
+	ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+	// does entry already exists ?
+	ItemCapabilityMap::iterator pos = find_if (collector->provideAndLockMap.begin(),
+						   collector->provideAndLockMap.end(),
+						   cap_equals<PoolItem_Ref, Capability>(misc_info->capability()));
+	
+	if (pos == collector->provideAndLockMap.end()) {
+	    _XDEBUG ("Inserting " << misc_info->capability() << "/" <<  misc_info->other()
+		     << " into provideAndLockMap map");
+	    collector->provideAndLockMap.insert (make_pair( misc_info->other(), misc_info->capability()));
+	}
+    }   
 }
 
 struct AllRequires
@@ -387,6 +404,16 @@ Resolver::problems (void) const
 		what = str::form (_("%s cannot be installed due missing dependencies"), who.c_str());		
 		details = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		
+		// Searching for another item which provides this requires BUT has been locked
+		for (ItemCapabilityMap::const_iterator it = collector.provideAndLockMap.begin();
+		     it != collector.provideAndLockMap.end(); ++it) {
+		    if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
+			// unlock this item
+			problem->addSolution (new ProblemSolutionUnlock (problem, it->first));
+		    }
+		}
+		
 		// uninstall
 		problem->addSolution (new ProblemSolutionUninstall (problem, item)); 
 		// ignore requirement
