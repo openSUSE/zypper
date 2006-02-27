@@ -28,6 +28,18 @@ namespace zypp {
     namespace rpm {
 
 
+	  typedef struct {
+	    Pathname filename;
+	    ByteCount size;
+	    std::string md5sum;
+	    uid_t uid;
+	    gid_t gid;
+	    mode_t mode;
+	    time_t mtime;
+	    bool ghost;
+	    Pathname link_target;
+          } FileInfo;
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : RpmHeader
@@ -126,7 +138,14 @@ namespace zypp {
 	  std::string tag_postun()       const;
 	  std::string tag_sourcerpm()    const;
 
+	  /** just the list of names  */
 	  std::list<std::string> tag_filenames() const;
+
+	  /**
+	   * complete information about the files
+	   * (extended version of tag_filenames())
+           */
+	  std::list<FileInfo> tag_fileinfos() const;
 
 	  Changelog tag_changelog() const;
 

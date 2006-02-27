@@ -681,6 +681,81 @@ namespace zypp {
       ///////////////////////////////////////////////////////////////////
       //
       //
+      //        METHOD NAME : RpmHeader::tag_fileinfos
+      //        METHOD TYPE : std::list<FileInfo>
+      //
+      //        DESCRIPTION :
+      //
+      std::list<FileInfo> RpmHeader::tag_fileinfos() const
+      {
+        std::list<FileInfo> ret;
+      
+        stringList basenames;
+        if ( string_list( RPMTAG_BASENAMES, basenames ) ) {
+          stringList dirnames;
+          string_list( RPMTAG_DIRNAMES, dirnames );
+          intList  dirindexes;
+          int_list( RPMTAG_DIRINDEXES, dirindexes );
+	  intList filesizes;
+	  int_list( RPMTAG_FILESIZES, filesizes );
+	  stringList md5sums;
+	  string_list( RPMTAG_FILEMD5S, md5sums );
+	  stringList usernames;
+	  string_list( RPMTAG_FILEUSERNAME, usernames );
+	  stringList groupnames;
+	  string_list( RPMTAG_FILEGROUPNAME, groupnames );
+	  intList uids;
+	  int_list( RPMTAG_FILEUIDS, uids );
+	  intList gids;
+	  int_list( RPMTAG_FILEGIDS, gids );
+	  intList filemodes;
+	  int_list( RPMTAG_FILEMODES, filemodes );
+	  intList filemtimes;
+	  int_list( RPMTAG_FILEMTIMES, filemtimes );
+	  intList fileflags;
+	  int_list( RPMTAG_FILEFLAGS, fileflags );
+	  stringList filelinks;
+	  string_list( RPMTAG_FILELINKTOS, filelinks );
+
+          for ( unsigned i = 0; i < basenames.size(); ++ i ) {
+	    uid_t uid;
+	    if (uids.empty()) {
+	      uid = unameToUid( usernames[i].c_str(), &uid );
+	    }
+	    else {
+	      uid =uids[i];
+	    }
+
+	    gid_t gid;
+	    if (gids.empty()) {
+	      gid = gnameToGid( groupnames[i].c_str(), &gid );
+	    }
+	    else {
+	      gid = gids[i];
+	    }
+
+	    FileInfo info = {
+	      dirnames[dirindexes[i]] + basenames[i],
+	      filesizes[i],
+	      md5sums[i],
+	      uid,
+	      gid,
+	      filemodes[i],
+	      filemtimes[i],
+	      fileflags[i] & RPMFILE_GHOST,
+	      filelinks[i]
+	    };
+
+            ret.push_back( info );
+          }
+        }
+      
+        return ret;
+      }
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //
       //        METHOD NAME : RpmHeader::tag_changelog
       //        METHOD TYPE : Changelog
       //

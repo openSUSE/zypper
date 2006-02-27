@@ -1194,7 +1194,7 @@ void RpmDb::traceFileRel( const PkgRelation & rel_r )
 //
 //	DESCRIPTION :
 //
-std::list<RpmDb::FileInfo>
+std::list<FileInfo>
 RpmDb::fileList( const std::string & name_r, const Edition & edition_r ) const
 {
   std::list<FileInfo> result;

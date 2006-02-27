@@ -17,6 +17,7 @@ extern "C" {
 #include <rpm/rpmmacro.h>
 #include <rpm/rpmdb.h>
 #include <rpm/rpmts.h>
+#include <rpm/ugid.h>
 #include <fcntl.h>
 }
 

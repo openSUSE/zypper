@@ -254,18 +254,6 @@ namespace zypp {
 	  ///////////////////////////////////////////////////////////////////
 	public:
 
-	  typedef struct {
-	    Pathname filename;
-	    ByteCount size;
-	    std::string md5sum;
-	    uid_t uid;
-	    gid_t gid;
-	    mode_t mode;
-	    time_t mtime;
-	    bool ghost;
-	    Pathname link_target;
-          } FileInfo;
-
 	  /**
 	   * return complete file list for installed package name_r (in FileInfo.filename)
 	   * if edition_r != Edition::noedition, check for exact edition

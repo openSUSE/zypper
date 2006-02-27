@@ -110,6 +110,7 @@ namespace zypp {
           unsigned set( void * val_r, tag cnt_r, tag type_r );
         public:
           intList();
+	  bool empty() const { return cnt==0; }
           unsigned size() const { return cnt; }
           int operator[]( const unsigned idx_r ) const;
       };
@@ -135,6 +136,7 @@ namespace zypp {
         public:
           stringList();
           ~stringList() { clear(); }
+	  bool empty() const { return cnt==0; }
           unsigned size() const { return cnt; }
           std::string operator[]( const unsigned idx_r ) const;
       };
