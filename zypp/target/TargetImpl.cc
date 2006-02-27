@@ -404,6 +404,7 @@ strip_obsoleted_to_delete( TargetImpl::PoolItemList & deleteList_r,
 	  // if so, delay package deletion
 	  DBG << "Ignore appl_delete (should be obsoleted): " << ipkg << endl;
 	  delayPkg = true;
+	  ipkg.status().setTransact( false, ResStatus::USER );
 	  break;
 	}
       }
