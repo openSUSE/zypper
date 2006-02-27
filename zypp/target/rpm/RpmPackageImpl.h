@@ -68,6 +68,8 @@ namespace zypp
 	virtual PackageGroup group() const;
 	/** */
 	virtual Changelog changelog() const;
+	/** */
+	virtual Pathname location() const;
 	/** Don't ship it as class Url, because it might be
 	 * in fact anything but a legal Url. */
 	virtual std::string url() const;
@@ -98,6 +100,9 @@ namespace zypp
         /** */
         virtual DiskUsage diskUsage() const;
 
+	/** for 'local' RPMs  */
+	void setLocation (const Pathname & pathname) { _location = pathname; }
+
       protected:
 	TranslatedText _summary;
 	TranslatedText _description;
@@ -109,6 +114,7 @@ namespace zypp
 	std::string _packager;
 	PackageGroup _group;
 	Changelog _changelog;
+	Pathname _location;			// for 'local' rpms
 	std::string _type;
 	License _license_to_confirm;
 	std::list<std::string> _authors;

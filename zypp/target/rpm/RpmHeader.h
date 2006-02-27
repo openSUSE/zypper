@@ -118,6 +118,14 @@ namespace zypp {
 	   * @see #tag_provides
 	   **/
 	  CapSet tag_obsoletes( std::set<std::string> * freq_r = 0 ) const;
+	  /**
+	   * @see #tag_provides
+	   **/
+	  CapSet tag_enhances( std::set<std::string> * freq_r = 0 ) const;
+	  /**
+	   * @see #tag_provides
+	   **/
+	  CapSet tag_supplements( std::set<std::string> * freq_r = 0 ) const;
 
 	  ByteCount tag_size()        const;
 	  ByteCount tag_archivesize() const;

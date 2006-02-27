@@ -319,6 +319,14 @@ namespace zypp {
 	  void getData( const std::string & name_r, const Edition & ed_r,
       		     RpmHeader::constPtr & result_r ) const;
       
+
+	  /**
+	   * Create a package from RpmHeader
+	   * return NULL on error
+	   **/
+
+	  static Package::Ptr makePackageFromHeader( const RpmHeader::constPtr header, std::set<std::string> * filerequires = NULL );
+
 	  ///////////////////////////////////////////////////////////////////
 	  //
 	  ///////////////////////////////////////////////////////////////////

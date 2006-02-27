@@ -291,6 +291,17 @@ namespace zypp {
           kindFlags   = RPMTAG_CONFLICTFLAGS;
           kindVersion = RPMTAG_CONFLICTVERSION;
           break;
+        case RPMTAG_ENHANCESNAME:
+          kindFlags   = RPMTAG_ENHANCESFLAGS;
+          kindVersion = RPMTAG_ENHANCESVERSION;
+          break;
+#warning NEEDS RPMTAG_SUPPLEMENTSNAME
+#if 0
+        case RPMTAG_SUPPLEMENTSNAME:
+          kindFlags   = RPMTAG_SUPPLEMENTSFLAGS;
+          kindVersion = RPMTAG_SUPPLEMENTSVERSION;
+          break;
+#endif
         default:
           INT << "Illegal RPMTAG_dependencyNAME " << tag_r << endl;
 	  return ret;
@@ -429,6 +440,36 @@ namespace zypp {
       CapSet RpmHeader::tag_obsoletes( set<string> * freq_r ) const
       {
         return PkgRelList_val( RPMTAG_OBSOLETENAME, false, freq_r );
+      }
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //
+      //        METHOD NAME : RpmHeader::tag_enhances
+      //        METHOD TYPE : CapSet
+      //
+      //        DESCRIPTION :
+      //
+      CapSet RpmHeader::tag_enhances( set<string> * freq_r ) const
+      {
+        return PkgRelList_val( RPMTAG_ENHANCESNAME, false, freq_r );
+      }
+      
+      ///////////////////////////////////////////////////////////////////
+      //
+      //
+      //        METHOD NAME : RpmHeader::tag_supplements
+      //        METHOD TYPE : CapSet
+      //
+      //        DESCRIPTION :
+      //
+      CapSet RpmHeader::tag_supplements( set<string> * freq_r ) const
+      {
+	return CapSet();
+#warning NEEDS RPMTAG_SUPPLEMENTSNAME
+#if 0
+        return PkgRelList_val( RPMTAG_SUPPLEMENTSNAME, false, freq_r );
+#endif
       }
       
       ///////////////////////////////////////////////////////////////////

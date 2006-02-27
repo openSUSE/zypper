@@ -995,6 +995,99 @@ const std::list<Package::Ptr> & RpmDb::getPackages()
 }
 
 
+//
+// make Package::Ptr from RpmHeader
+// return NULL on error
+//
+
+Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, std::set<std::string> * filerequires )
+{
+    Package::Ptr pptr;
+
+    string name = header->tag_name();
+
+    // create dataprovider
+    detail::ResImplTraits<RPMPackageImpl>::Ptr impl( new RPMPackageImpl( header ) );
+
+    Edition edition;
+    Arch arch;
+
+    try {
+	edition = Edition( header->tag_version(),
+			   header->tag_release(),
+			   header->tag_epoch());
+    }
+    catch (Exception & excpt_r) {
+	ZYPP_CAUGHT( excpt_r );
+	WAR << "Package " << name << " has bad edition '"
+	    << (header->tag_epoch().empty()?"":(header->tag_epoch()+":"))
+	    << header->tag_version()
+	    << (header->tag_release().empty()?"":(string("-") + header->tag_release())) << "'";
+	return pptr;
+    }
+
+    try {
+	arch = Arch( header->tag_arch() );
+    }
+    catch (Exception & excpt_r) {
+	ZYPP_CAUGHT( excpt_r );
+	WAR << "Package " << name << " has bad architecture '" << header->tag_arch() << "'";
+	return pptr;
+    }
+
+    // Collect basic Resolvable data
+    NVRAD dataCollect( header->tag_name(),
+	               edition,
+	               arch );
+
+    list<string> filenames = impl->filenames();
+    dataCollect[Dep::PROVIDES] = header->tag_provides ( filerequires );
+    CapFactory capfactory;
+    for (list<string>::const_iterator filename = filenames.begin();
+	 filename != filenames.end();
+	 filename++)
+    {
+      if (filename->find("/bin/") != string::npos
+	|| filename->find("/sbin/") != string::npos
+	|| filename->find("/lib/") != string::npos
+	|| filename->find("/lib64/") != string::npos
+	|| filename->find("/etc/") != string::npos
+	|| filename->find("/usr/games/") != string::npos
+	|| filename->find("/usr/share/dict/words") != string::npos
+	|| filename->find("/usr/share/magic.mime") != string::npos
+	|| filename->find("/opt/gnome/games") != string::npos)
+      {
+	try {
+	  dataCollect[Dep::PROVIDES].insert( capfactory.parse(ResTraits<Package>::kind, *filename) );
+	}
+	catch (Exception & excpt_r)
+	{
+	  ZYPP_CAUGHT( excpt_r );
+	  WAR << "Ignoring invalid capability: " << *filename << endl;
+	}
+      }
+    }
+
+    dataCollect[Dep::REQUIRES]    = header->tag_requires( filerequires );
+    dataCollect[Dep::PREREQUIRES] = header->tag_prerequires( filerequires );
+    dataCollect[Dep::CONFLICTS]   = header->tag_conflicts( filerequires );
+    dataCollect[Dep::OBSOLETES]   = header->tag_obsoletes( filerequires );
+    dataCollect[Dep::ENHANCES]    = header->tag_enhances( filerequires );
+    dataCollect[Dep::SUPPLEMENTS] = header->tag_supplements( filerequires );
+
+    try {
+	// create package from dataprovider
+	pptr = detail::makeResolvableFromImpl( dataCollect, impl );
+    }
+    catch (Exception & excpt_r) {
+	ZYPP_CAUGHT( excpt_r );
+	ERR << "Can't create Package::Ptr" << endl;
+    }
+
+    return pptr;
+}
+
+
 const std::list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDBReport> & report)
 {
   if ( packagesValid() ) {
@@ -1040,7 +1133,7 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDB
     Date installtime = iter->tag_installtime();
 #if 0
 This prevented from having packages multiple times
-    Package::Ptr & nptr = _packages._index[name]; // be shure to get a reference!
+    Package::Ptr & nptr = _packages._index[name]; // be sure to get a reference!
 
     if ( nptr ) {
       WAR << "Multiple entries for package '" << name << "' in rpmdb" << endl;
@@ -1050,75 +1143,9 @@ This prevented from having packages multiple times
     }
 #endif
 
-    // create dataprovider
-    detail::ResImplTraits<RPMPackageImpl>::Ptr impl(new RPMPackageImpl(*iter));
+    Package::Ptr pptr = makePackageFromHeader( *iter, &_filerequires );
 
-    Edition edition;
-    Arch arch;
-
-    try {
-	edition = Edition( iter->tag_version(),
-			   iter->tag_release(),
-			   iter->tag_epoch());
-    }
-    catch (Exception & excpt_r) {
-	ZYPP_CAUGHT(excpt_r);
-	WAR << "Package " << name << " has bad edition '"
-	    << (iter->tag_epoch().empty()?"":(iter->tag_epoch()+":"))
-	    << iter->tag_version()
-	    << (iter->tag_release().empty()?"":(string("-") + iter->tag_release())) << "'";
-	continue;
-    }
-
-    try {
-	arch = Arch (iter->tag_arch());
-    }
-    catch (Exception & excpt_r) {
-	ZYPP_CAUGHT(excpt_r);
-	WAR << "Package " << name << " has bad architecture '" << iter->tag_arch() << "'";
-	continue;
-    }
-
-    // Collect basic Resolvable data
-    NVRAD dataCollect( iter->tag_name(),
-	               edition,
-	               arch );
-
-    list<string> filenames = impl->filenames();
-    dataCollect[Dep::PROVIDES] = iter->tag_provides ( & _filerequires );
-    for (list<string>::const_iterator filename = filenames.begin();
-	 filename != filenames.end();
-	 filename++)
-    {
-      if (filename->find("/bin/") != string::npos
-	|| filename->find("/sbin/") != string::npos
-	|| filename->find("/lib/") != string::npos
-	|| filename->find("/lib64/") != string::npos
-	|| filename->find("/etc/") != string::npos
-	|| filename->find("/usr/games/") != string::npos
-	|| filename->find("/usr/share/dict/words") != string::npos
-	|| filename->find("/usr/share/magic.mime") != string::npos
-	|| filename->find("/opt/gnome/games") != string::npos)
-      {
-	try {
-	  dataCollect[Dep::PROVIDES].insert(_f.parse(ResTraits<Package>::kind, *filename));
-	}
-	catch (Exception & excpt_r)
-	{
-	  ZYPP_CAUGHT(excpt_r);
-	  WAR << "Invalid capability: " << *filename << endl;
-	}
-      }
-    }
-
-    dataCollect[Dep::REQUIRES]    = iter->tag_requires ( &_filerequires );
-    dataCollect[Dep::PREREQUIRES] = iter->tag_prerequires ( &_filerequires );
-    dataCollect[Dep::CONFLICTS]   = iter->tag_conflicts( &_filerequires );
-    dataCollect[Dep::OBSOLETES]   = iter->tag_obsoletes( &_filerequires );
-
-    // create package from dataprovider
-    Package::Ptr nptr = detail::makeResolvableFromImpl( dataCollect, impl );
-    _packages._list.push_back(nptr);
+    _packages._list.push_back( pptr );
   }
   _packages.buildIndex();
   DBG << "Found installed packages: " << _packages._list.size() << endl;

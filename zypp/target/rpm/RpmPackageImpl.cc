@@ -130,6 +130,10 @@ namespace zypp
       Changelog RPMPackageImpl::changelog() const
       { return _changelog; }
 
+      /** */
+      Pathname RPMPackageImpl::location() const
+      { return _location; }
+
       /** Don't ship it as class Url, because it might be
        * in fact anything but a legal Url. */
       std::string RPMPackageImpl::url() const
