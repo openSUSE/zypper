@@ -48,12 +48,23 @@ ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent,
 						    PoolItem_Ref item)
     : ProblemSolution (parent, "", "")
 {
-    // TranslatorExplanation %s = name of package, patch, selection ...	
-    _description = str::form (_("delete %s"), item->name().c_str() );
+    ResStatus status = item.status();
+    if (status.isInstalled())
+	// TranslatorExplanation %s = name of package, patch, selection ...
+	_description = str::form (_("delete %s"), item->name().c_str() );
+    else
+	// TranslatorExplanation %s = name of package, patch, selection ...	
+	_description = str::form (_("do not install %s"), item->name().c_str() );	    
+
     ostringstream item_str;
     item_str << *item.resolvable();
-    // TranslatorExplanation %s = name of package, patch, selection ...	    
-    _details = str::form (_("delete %s"), item_str.str().c_str() );
+    if (status.isInstalled())    
+	// TranslatorExplanation %s = name of package, patch, selection ...	    
+	_details = str::form (_("delete %s"), item_str.str().c_str() );
+    else
+	// TranslatorExplanation %s = name of package, patch, selection ...	    
+	_details = str::form (_("do not install %s"), item_str.str().c_str() );
+	
 
     addAction ( new TransactionSolutionAction (item, REMOVE));
 }
@@ -62,7 +73,7 @@ ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent,
 						    PoolItemList & itemlist)
     : ProblemSolution (parent, "", "")
 {
-    _description = _("Delete conflicting resolvables");
+    _description = _("Do not install or delete concerning resolvables");
 
     for (PoolItemList::iterator iter = itemlist.begin();
 	 iter != itemlist.end(); iter++) {
