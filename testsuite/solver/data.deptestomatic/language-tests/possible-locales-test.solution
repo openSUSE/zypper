@@ -1,5 +1,12 @@
->!>1: U___[language]de-EDITION-UNSPEC.noarch
->!>2: U___[language]de_AT-EDITION-UNSPEC.noarch
->!>3: U___[language]de_DE-EDITION-UNSPEC.noarch
->!>4: U___[language]ja-EDITION-UNSPEC.noarch
->!>5: U___[language]zh-EDITION-UNSPEC.noarch
+>!>1: U_Tu_[language]de-EDITION-UNSPEC.noarch
+>!>2: U_Tu_[language]de_AT-EDITION-UNSPEC.noarch
+>!>3: U_Tu_[language]de_DE-EDITION-UNSPEC.noarch
+>!>4: U_Tu_[language]ja-EDITION-UNSPEC.noarch
+>!>5: U_Tu_[language]zh-EDITION-UNSPEC.noarch
+>!> Solution #1:
+>!> install language:de-EDITION-UNSPEC.noarch
+>!> install language:de_AT-EDITION-UNSPEC.noarch
+>!> install language:de_DE-EDITION-UNSPEC.noarch
+>!> install language:ja-EDITION-UNSPEC.noarch
+>!> install language:zh-EDITION-UNSPEC.noarch
+>!> installs=5, upgrades=0, uninstalls=0
