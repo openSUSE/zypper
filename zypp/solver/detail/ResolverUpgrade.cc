@@ -101,9 +101,10 @@ downgrade_allowed (PoolItem_Ref installed, PoolItem_Ref candidate)
 	&& va->isKnown( cpkg->vendor() ) )
     {
 #warning Had Y2PM::runningFromSystem
-	//return( ipkg->buildtime() >= cpkg->buildtime() );
-	MIL << "allowed downgrade " << installed << " to " << candidate << endl;
-	return true;						// see bug #152760
+	if ( ipkg->buildtime() < cpkg->buildtime() ) {			// installed has older buildtime
+	    MIL << "allowed downgrade " << installed << " to " << candidate << endl;
+	    return true;						// see bug #152760
+	}
     }
     return false;
 }
@@ -435,11 +436,11 @@ MIL << "split matched !" << endl;
 
       if ( ! candidate.status().isToBeInstalled() ) {
 
-	if ( installed->edition().compare (candidate->edition()) < 0 ) {	  // new version
+	if ( installed->edition().compare (candidate->edition()) < 0 ) {	// new edition
 	  candidate.status().setToBeInstalled(ResStatus::APPL_HIGH);
 	  MIL << " ==> INSTALL (new version): " << candidate << endl;
 	  ++opt_stats_r.chk_to_update;
-	} else {
+	} else {								// older or equal edition
 	  // check whether to downgrade:
 
 	  if (!downgrade_allowed (installed, candidate)) {
