@@ -120,8 +120,8 @@ namespace zypp
     /** */
     LocaleSet getRequestedLocales() const;
 
-    /** Set the available locales.
-     * Languages to be available for selection
+    /** Set the possible locales.
+     * Languages to be possible for selection
     */
     void setPossibleLocales( const LocaleSet & locales_r );
     /** */
