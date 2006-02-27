@@ -125,7 +125,8 @@ class LookForUpdate : public resfilter::PoolItemFilterFunctor
     bool operator()( PoolItem_Ref provider )
     {
 	if ((!uninstalled							// none yet
-	    || uninstalled->edition().compare( provider->edition() ) < 0)	// or a better one
+	    || (uninstalled->edition().compare( provider->edition() ) < 0)	// or a better edition
+	    || (uninstalled->arch().compare( provider->arch() ) < 0) ) 		// or a better architecture
 	    && !provider.status().isLocked())					// is not locked
 	{
 	    uninstalled = provider;						// store 
@@ -147,7 +148,7 @@ Helper::findUpdateItem (const ResPool & pool, PoolItem_Ref item)
 		  pool.byNameEnd( item->name() ),
 		  functor::chain (functor::chain (resfilter::ByUninstalled (),			// ByUninstalled
 						  resfilter::ByKind( item->kind() ) ),		// equal kind
-				  resfilter::byEdition<CompareByGT<Edition> >( item->edition() )),
+				  resfilter::byEdition<CompareByGT<Edition> >( item->edition() )),	// only look at better editions
 		  functor::functorRef<bool,PoolItem> (info) );
 
     _XDEBUG("Helper::findUpdateItem(" << item << ") => " << info.uninstalled);

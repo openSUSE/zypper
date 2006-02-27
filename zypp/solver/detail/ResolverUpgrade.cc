@@ -255,14 +255,14 @@ MIL << "target at " << target << endl;
       ++opt_stats_r.pre_todel;
       continue;
     }
-    if ( item.status().staysInstalled() ) {
+    if ( item.status().staysInstalled() ) {	// installed item
       installed = item;
       CandidateMap::const_iterator cand_it = candidatemap.find(installed);
       if (cand_it != candidatemap.end()) {
-	candidate = cand_it->second;
+	candidate = cand_it->second;				// found candidate already
       }
       else {
-	candidate = Helper::findUpdateItem( _pool, installed);
+	candidate = Helper::findUpdateItem( _pool, installed);	// find 'best' upgrade candidate
       }
       if (!candidate) {
 	MIL << "doUpgrade available: SKIP no candidate for " << installed << endl;
@@ -289,7 +289,8 @@ MIL << "item " << item << " is installed, candidate is " << candidate << endl;
 MIL << "found installed " << installed << " for item " << candidate << endl;
 	CandidateMap::const_iterator cand_it = candidatemap.find(installed);
 	if (cand_it == candidatemap.end()					// not in map yet
-	    || cand_it->second->edition().compare (candidate->edition()) < 0)	// or the new is better!
+	    || (cand_it->second->edition().compare (candidate->edition()) < 0)	// or the new has better edition
+	    || (cand_it->second->arch().compare (candidate->arch()) < 0) )	// or the new has better architecture
 	{
 	    candidatemap[installed] = candidate;				// put it in !
 	}
