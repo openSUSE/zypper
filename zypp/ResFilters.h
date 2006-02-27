@@ -242,6 +242,47 @@ namespace zypp
       { return byEdition( edition_r, _Compare() ); }
 
 
+    /** Select ResObject by Arch using \a _Compare functor.
+     *
+     * Selects ResObject if <tt>_Compare( ResObject->arch(), _arch )<\tt>
+     * is \c true.
+     * \code
+     * // use the convenience funktions to create ByArch:
+     *
+     * byArch( somearch ); // selects ResObjects with arch == somearch
+     *
+     * byArch( somearch, CompareByGT<Arch>() ) //  arch >  somearch
+     * \endcode
+    */
+    template<class _Compare = CompareByEQ<Arch> >
+      struct ByArch : public ResObjectFilterFunctor
+      {
+        ByArch( const Arch & arch_r,
+                   _Compare cmp_r )
+        : _arch( arch_r )
+        , _cmp( cmp_r )
+        {}
+
+        bool operator()( ResObject::constPtr p ) const
+        {
+          return _cmp( p->arch(), _arch );
+        }
+
+        Arch  _arch;
+        _Compare _cmp;
+      };
+
+    /** */
+    template<class _Compare>
+      ByArch<_Compare> byArch( const Arch & arch_r, _Compare cmp_r )
+      { return ByArch<_Compare>( arch_r, cmp_r ); }
+
+    /** */
+    template<class _Compare>
+      ByArch<_Compare> byArch( const Arch & arch_r )
+      { return byArch( arch_r, _Compare() ); }
+
+
     ///////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
