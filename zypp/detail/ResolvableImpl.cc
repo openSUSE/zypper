@@ -75,8 +75,14 @@ namespace zypp
 	    if (next == string::npos)
 		next = provides.size()-1;			// none left, set next to end-1 (strip trailing ')' )
 
-	    if (_zypp) _zypp->availableLocale( Locale( provides ) );
-	    deps[Dep::FRESHENS].insert( f.parse( ResTraits<Language>::kind, string( provides, pos, next-pos ) ) );
+	    string loc( provides, pos, next-pos );
+	    if (loc.size() != 2
+		&& loc.size() != 5)
+	    {
+		WAR << "Looks wrong " << cap_r.index() << endl;
+	    }
+	    if (_zypp) _zypp->availableLocale( Locale( loc ) );
+	    deps[Dep::FRESHENS].insert( f.parse( ResTraits<Language>::kind, loc ) );
 	    pos = next + 1;
 	}
 	return true;
@@ -95,6 +101,9 @@ namespace zypp
       to[Dep::PROVIDES] = provides;
     }
   }
+
+  // static backref to ZYpp to inject available locales
+  ZYpp::Ptr Resolvable::Impl::_zypp;
 
   Resolvable::Impl::Impl( const Kind & kind_r,
                           const NVRAD & nvrad_r )
