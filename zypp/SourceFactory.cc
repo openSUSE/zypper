@@ -117,7 +117,16 @@ media::MediaManager media_mgr;
 
     // add dummy verifier
     media_mgr.addVerifier(id, media::MediaVerifierRef(new media::NoVerifier()));
-    media_mgr.attach(id);
+    // attach only if initializing from media and not from cache (#153073)
+    if (cache_dir_r == "")
+    {
+      media_mgr.attach(id);
+    }
+    else
+    {
+      MIL << "Initializing from cache" << endl;
+    }
+
     try
     {
       MIL << "Trying the YUM source" << endl;
