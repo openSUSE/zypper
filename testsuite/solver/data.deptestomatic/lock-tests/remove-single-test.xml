@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+   remove single package from system. A is locked but it will be
+   deleted, cause the user has made BOTH operations. So the lock will
+   be breaked.
+
+-->
+<test>
+<setup>
+  <system file="single-package2.xml"/>
+</setup>
+<trial>
+  <lock package="A" channel="@system"/>
+  <uninstall package="A"/>
+</trial>
+</test>

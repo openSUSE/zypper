@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+   install single package on empty system. A is locked but it will be
+   installed, cause the user has made BOTH operations. So the lock will
+   be breaked.
+-->
+<test>
+<setup>
+  <channel name="test" file="single-package.xml"/>
+</setup>
+<trial>
+  <lock package="A" channel="test"/>
+  <install channel="test" package="A"/>
+</trial>
+</test>

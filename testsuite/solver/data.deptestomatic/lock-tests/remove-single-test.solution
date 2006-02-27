@@ -1,0 +1,5 @@
+>!> Locking A from channel @system
+>!> Uninstalling A
+>!> Solution #1:
+>!> remove  A-1.0-1.noarch
+>!> installs=0, upgrades=0, uninstalls=1

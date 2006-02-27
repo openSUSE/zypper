@@ -1,0 +1,5 @@
+>!> Installing A from channel test
+>!> Solution #1:
+>!> install A-1.0-1.noarch[test]
+>!> install B-1.0-1.noarch[test]
+>!> installs=2, upgrades=0, uninstalls=0
