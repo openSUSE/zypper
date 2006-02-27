@@ -1,4 +1,22 @@
+>!> Locking B from channel test
 >!> Installing A from channel test
+>!> 1 problems found:
+>!> Problem:
+>!> A cannot be installed due missing dependencies
+>!> There are no installable providers of B for A-1.0-1.noarch[test]
+>!>    Solution:
+>!>       unlock B
+>!>       
+>!>    Solution:
+>!>       delete A
+>!>       delete [package]A-1.0-1.noarch
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Taking solution: 0
+>!> For problem:     0
+>!> No problems so far
+>!> No problems so far
 >!> Solution #1:
 >!> install A-1.0-1.noarch[test]
 >!> install B-1.0-1.noarch[test]
