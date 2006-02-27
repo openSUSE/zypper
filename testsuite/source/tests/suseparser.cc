@@ -96,6 +96,14 @@ int main( int argc, char * argv[] )
     std::cout << "\t" << msgcount << " messages" << endl;
     std::cout << "\t" << prdcount << " products" << endl;
 
+    std::cout << "Available locales: ";
+    ZYpp::LocaleSet locales = God->getAvailableLocales();
+    for (ZYpp::LocaleSet::const_iterator it = locales.begin(); it != locales.end(); ++it) {
+	if (it != locales.begin()) std::cout << ", ";
+	std::cout << it->code();
+    }
+    std::cout << endl;
+
     if (argpos < argc) {
 	int count = 0;
 	for (ResStore::iterator it = store.begin(); it != store.end(); ++it) {
