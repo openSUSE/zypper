@@ -41,7 +41,7 @@ query_file (Target_Ptr target, const Pathname & path)
 
     target::rpm::RpmHeader::constPtr header = target::rpm::RpmHeader::readPackage( path );
 
-    Package::Ptr package = target::rpm::RpmDb::makePackageFromHeader( header );
+    Package::Ptr package = target::rpm::RpmDb::makePackageFromHeader( header, NULL, path );
 
     if (package != NULL) {
 	store.insert( package );
