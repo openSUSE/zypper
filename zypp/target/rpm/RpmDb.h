@@ -325,7 +325,7 @@ namespace zypp {
 	   * return NULL on error
 	   **/
 
-	  static Package::Ptr makePackageFromHeader( const RpmHeader::constPtr header, std::set<std::string> * filerequires = NULL );
+	  static Package::Ptr makePackageFromHeader( const RpmHeader::constPtr header, std::set<std::string> * filerequires, const Pathname & location );
 
 	  ///////////////////////////////////////////////////////////////////
 	  //

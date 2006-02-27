@@ -1000,7 +1000,7 @@ const std::list<Package::Ptr> & RpmDb::getPackages()
 // return NULL on error
 //
 
-Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, std::set<std::string> * filerequires )
+Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, std::set<std::string> * filerequires, const Pathname & location )
 {
     Package::Ptr pptr;
 
@@ -1008,6 +1008,9 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, std
 
     // create dataprovider
     detail::ResImplTraits<RPMPackageImpl>::Ptr impl( new RPMPackageImpl( header ) );
+
+    if (!location.empty())
+	impl->setLocation( location );
 
     Edition edition;
     Arch arch;
@@ -1121,6 +1124,8 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDB
   DBG << "Expecting " << expect << " packages" << endl;
 
   CapFactory _f;
+  Pathname location;
+
   for ( iter.findAll(); *iter; ++iter, ++current, report->progress( (100*current)/expect)) {
 
     string name = iter->tag_name();
@@ -1143,7 +1148,7 @@ This prevented from having packages multiple times
     }
 #endif
 
-    Package::Ptr pptr = makePackageFromHeader( *iter, &_filerequires );
+    Package::Ptr pptr = makePackageFromHeader( *iter, &_filerequires, location );
 
     _packages._list.push_back( pptr );
   }
