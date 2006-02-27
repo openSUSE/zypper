@@ -27,6 +27,7 @@
 using namespace zypp;
 using namespace std;
 using target::rpm::RpmHeader;
+using target::rpm::FileInfo;
 
 #include <sqlite3.h>
 #include <cstring>
@@ -178,22 +179,21 @@ MIL << "RpmHeader @" << header << endl;
 	return 1;
     }
 
-    std::list<std::string> files = header->tag_filenames();
+    std::list<FileInfo> files = header->tag_fileinfos();
 
-    for (std::list<std::string>::const_iterator it = files.begin(); it != files.end(); ++it) {
+    for (std::list<FileInfo>::const_iterator it = files.begin(); it != files.end(); ++it) {
 
 	sqlite3_bind_int64 (handle, 1, id);
-	sqlite3_bind_text  (handle, 2, it->c_str(), -1, SQLITE_STATIC);
-#if 0
-	sqlite3_bind_int   (handle, 3, f->size);
-	sqlite3_bind_text  (handle, 4, f->md5sum, -1, SQLITE_STATIC);
-	sqlite3_bind_int   (handle, 5, f->uid);
-	sqlite3_bind_int   (handle, 5, f->gid);
-	sqlite3_bind_int   (handle, 6, f->mode);
-	sqlite3_bind_int   (handle, 7, f->mtime);
-	sqlite3_bind_int   (handle, 8, f->ghost);
-	sqlite3_bind_text  (handle, 4, f->link_target, -1, SQLITE_STATIC);
-#endif
+	sqlite3_bind_text  (handle, 2, it->filename.asString().c_str(), -1, SQLITE_STATIC);
+	sqlite3_bind_int   (handle, 3, it->size);
+	sqlite3_bind_text  (handle, 4, it->md5sum.c_str(), -1, SQLITE_STATIC);
+	sqlite3_bind_int   (handle, 5, it->uid);
+	sqlite3_bind_int   (handle, 5, it->gid);
+	sqlite3_bind_int   (handle, 6, it->mode);
+	sqlite3_bind_int   (handle, 7, it->mtime);
+	sqlite3_bind_int   (handle, 8, it->ghost);
+	sqlite3_bind_text  (handle, 4, it->link_target.asString().c_str(), -1, SQLITE_STATIC);
+
 	rc = sqlite3_step (handle);
 	sqlite3_reset (handle);
 
