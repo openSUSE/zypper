@@ -19,6 +19,7 @@ bin_PROGRAMS =	\
 	resolve-dependencies	\
 	package-files		\
 	parse-metadata		\
+	find-file		\
 	transact
 
 query_system_SOURCES = query-system.cc
@@ -27,3 +28,4 @@ resolve_dependencies_SOURCES = resolve-dependencies.cc transactions.cc transacti
 transact_SOURCES = transact.cc transactions.cc transactions.h
 parse_metadata_SOURCES = parse-metadata.cc
 package_files_SOURCES = package-files.cc
+find_file_SOURCES = find-file.cc

@@ -26,13 +26,13 @@ main (int argc, char **argv)
 	return 1;
     }
 
-    MIL << "START query-system " << argv[1] << endl;
-
     const char *logfile = getenv("ZYPP_LOGFILE");
     if (logfile != NULL)
 	zypp::base::LogControl::instance().logfile( logfile );
     else
 	zypp::base::LogControl::instance().logfile( ZMD_BACKEND_LOG );
+
+    MIL << "START query-system " << argv[1] << endl;
 
     ZYpp::Ptr God = zypp::getZYpp();
 

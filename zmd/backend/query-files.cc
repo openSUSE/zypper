@@ -438,30 +438,29 @@ sync_catalogs( DbAccess & db )
 int
 main (int argc, char **argv)
 {
+    if (argc < 3 || argc > 4) {
+	std::cerr << "usage: " << argv[0] << " <database> <uri> [catalog id]" << endl;
+	return 1;
+    }
+
     const char *logfile = getenv("ZYPP_LOGFILE");
     if (logfile != NULL)
 	zypp::base::LogControl::instance().logfile( logfile );
     else
 	zypp::base::LogControl::instance().logfile( ZMD_BACKEND_LOG );
 
+    MIL << "START query-files " << argv[1] << " " << argv[2] << " " << ((argc>3)?argv[3]:"") << endl;
+
     ZYpp::Ptr God = zypp::getZYpp();
 
     try {
-	God->initTarget( "/" );
-//	target = God->target();
+	God->initTarget( "/", true );
     }
     catch( const Exception & excpt_r ) {    
 	ERR << "Can't initialize target." << endl;
 	ZYPP_CAUGHT( excpt_r );
 	return 1;
     }
-
-    if (argc < 3 || argc > 4) {
-	std::cerr << "usage: " << argv[0] << " <database> <uri> [catalog id]" << endl;
-	return 1;
-    }
-
-    MIL << "START query-files " << argv[1] << " " << argv[2] << " " << ((argc>3)?argv[3]:"") << endl;
 
     DbAccess db(argv[1]);
 

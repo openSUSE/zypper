@@ -109,20 +109,20 @@ sync_catalogs( DbAccess & db )
 int
 main (int argc, char **argv)
 {
+    if (argc != 5) {
+	std::cerr << "usage: " << argv[0] << " <database> <type> <path> <catalog id>" << endl;
+	return 1;
+    }
+
     const char *logfile = getenv("ZYPP_LOGFILE");
     if (logfile != NULL)
 	zypp::base::LogControl::instance().logfile( logfile );
     else
 	zypp::base::LogControl::instance().logfile( ZMD_BACKEND_LOG );
 
-    ZYpp::Ptr God = zypp::getZYpp();
-
-    if (argc != 5) {
-	std::cerr << "usage: " << argv[0] << " <database> <type> <path> <catalog id>" << endl;
-	return 1;
-    }
-
     MIL << "START parse-metadata " << argv[1] << " " << argv[2] << " " << argv[3] << " " << argv[4] << endl;
+
+    ZYpp::Ptr God = zypp::getZYpp();
 
     DbAccess db(argv[1]);
 

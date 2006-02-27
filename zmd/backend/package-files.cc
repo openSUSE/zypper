@@ -215,20 +215,20 @@ cleanup:
 int
 main (int argc, char **argv)
 {
+    if (argc != 3) {
+	std::cerr << "usage: " << argv[0] << " <database> <package id>" << endl;
+	return 1;
+    }
+
     const char *logfile = getenv("ZYPP_LOGFILE");
     if (logfile != NULL)
 	zypp::base::LogControl::instance().logfile( logfile );
     else
 	zypp::base::LogControl::instance().logfile( ZMD_BACKEND_LOG );
 
-    ZYpp::Ptr God = zypp::getZYpp();
-
-    if (argc != 3) {
-	std::cerr << "usage: " << argv[0] << " <database> <package id>" << endl;
-	return 1;
-    }
-
     MIL << "START package-files " << argv[1] << " " << argv[2] << endl;
+
+    ZYpp::Ptr God = zypp::getZYpp();
 
     DbAccess db(argv[1]);
 
@@ -236,7 +236,7 @@ main (int argc, char **argv)
     Target_Ptr target;
 
     try {
-	God->initTarget( "/" );
+	God->initTarget( "/", true );
 	target = God->target();
     }
     catch( const Exception & excpt_r ) {    
