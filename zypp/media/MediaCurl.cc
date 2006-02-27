@@ -94,7 +94,7 @@ MediaCurl::MediaCurl( const Url &      url_r,
       ::rmdir(atest);
 
     if( atemp != NULL)
-      ::free(NULL);
+      ::free(atemp);
   }
 
   if ( ! _globalInit )
