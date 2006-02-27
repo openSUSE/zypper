@@ -93,7 +93,7 @@ using zypp::ResolverProblemList;
 
 static bool show_mediaid = false;
 static string globalPath;
-static list<string> locales;
+static ZYpp::LocaleSet locales;
 
 static ZYpp::Ptr God;
 static SourceManager_Ptr manager;
@@ -805,7 +805,11 @@ parse_xml_setup (XmlNode_Ptr node)
 		God->setArchitecture( Arch( architecture ) );
 	    }
 	} else if (node->equals ("locale")) {
-	    locales.push_back( node->getProp ("name") );
+	    string loc = node->getProp ("name");
+	    if (loc.empty())
+		cerr << "Bad or missing name in <locale...>" << endl;
+	    else
+		locales.insert( Locale( loc ) );
 	} else {
 	    cerr << "Unrecognized tag '" << node->name() << "' in setup" << endl;
 	}
@@ -1037,10 +1041,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
     resolver->setForceResolve (forceResolve);
 
     if (!locales.empty()) {
-	ZYpp::LocaleSet lset;
-	for (list<string>::iterator it = locales.begin(); it != locales.end(); ++it)
-	    lset.insert( Locale( *it ) );
-	God->setPossibleLocales( lset );
+	God->setRequestedLocales( locales );
     }
 
     node = node->children();
