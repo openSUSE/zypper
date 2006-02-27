@@ -32,15 +32,16 @@ namespace zypp
 
 
     ///////////////////////////////////////////////////////////////////
-    class MountEntry;
-
-
-    ///////////////////////////////////////////////////////////////////
     typedef zypp::RW_pointer<MediaAccess> MediaAccessRef;
 
     // OBSOLETE HERE:
     typedef MediaAccessId                 MediaId;
     typedef unsigned int                  MediaNr;
+
+
+    ///////////////////////////////////////////////////////////////////
+    // forward declaration
+    class MountEntry;
 
 
     ///////////////////////////////////////////////////////////////////
@@ -50,7 +51,7 @@ namespace zypp
     /**
      * Interface to implement a media verifier.
      */
-    class MediaVerifierBase //: public zypp::NonCopyable
+    class MediaVerifierBase //: private zypp::NonCopyable
     {
     public:
       MediaVerifierBase()
@@ -74,12 +75,12 @@ namespace zypp
     // CLASS NAME : NoVerifier
     //
     /**
-     * Dummy media verifier, which is always happy.
+     * Dummy default media verifier, which is always happy.
      */
     class NoVerifier : public MediaVerifierBase
     {
     public:
-      NoVerifier()
+      NoVerifier(): MediaVerifierBase()
       {}
 
       virtual
@@ -114,49 +115,96 @@ namespace zypp
     // CLASS NAME : MediaManager
     //
     /**
-     * Manages coordinated access to media, e.g. CDROM drives.
-     * \todo document me!
+     * Manages coordinated access to 'physical' media, e.g CDROM
+     * drives.
+     *
+     * \note The MediaManager class is just an envelope around an
+     * inner singelton like implementation. This means, you can
+     * create as many managers as you want, also temporary in a
+     * function call.
+     *
+     * \note Don't declare static MediaManager instances, unless
+     * you want to force (mutex) initialization order problems!
+     *
      */
-    class MediaManager: public zypp::base::NonCopyable
+    class MediaManager: private zypp::base::NonCopyable
     {
     public:
+      /**
+       * Creates a MediaManager envelope instance.
+       *
+       * In the case, that the inner implementation is not already
+       * allocated, and the MediaManager constructor was unable to
+       * allocate it, a std::bad_alloc exception is thrown.
+       *
+       * All further instances increase the use counter only.
+       *
+       * \throws std::bad_alloc
+       */
       MediaManager();
+
+      /**
+       * Destroys MediaManager envelope instance.
+       * Decreases the use counter of the inner implementation.
+       */
       ~MediaManager();
 
       /**
-       * open the media, return the ID, throw exception on fail
+       * Opens the media access for specified with the url.
+       *
+       * \param  url The media access url.
+       * \param  preferred_attach_point The preferred, already
+       *         existing directory, where the media should be
+       *         attached.
+       * \return a new media access id.
+       * \throws std::bad_alloc
+       * \throws MediaException
        */
       MediaAccessId
       open(const Url &url, const Pathname & preferred_attach_point = "");
 
       /**
-       * close the media
+       * Close the media access with specified id.
+       * \param accessId The media access id to close.
        */
       void
       close(MediaAccessId accessId);
 
       /**
-       * Query if media is open.
-       * \return true, if media id is known.
+       * Query if the media access is open / exists.
+       *
+       * \param accessId The media access id query.
+       * \return true, if access id is known and open.
        */
       bool
       isOpen(MediaAccessId accessId) const;
 
       /**
-       * Used Protocol if media is opened, otherwise 'unknown'.
+       * Query the protocol name used by the media access
+       * handler. Similar to url().getScheme().
+       *
+       * \param accessId The media access id query.
+       * \return The protocol name used by the media access
+       *         handler, otherwise 'unknown'.
+       * \throws MediaNotOpenException for invalid access id.
        */
       std::string
       protocol(MediaAccessId accessId) const;
 
       /**
-       * Url of the media, otherwise empty.
+       * Url of the media access id, otherwise empty Url.
+       *
+       * \throws MediaNotOpenException for invalid access id.
        */
       Url
       url(MediaAccessId accessId) const;
 
     public:
       /**
-       * Add verifier for specified media id.
+       * Add verifier implementation for the specified media id.
+       * By default, the NoVerifier is used.
+       *
+       * \throws MediaNotOpenException for invalid access id.
        */
       void
       addVerifier(MediaAccessId accessId,
@@ -164,6 +212,8 @@ namespace zypp
 
       /**
        * Remove verifier for specified media id.
+       *
+       * \throws MediaNotOpenException for invalid access id.
        */
       void
       delVerifier(MediaAccessId accessId);
@@ -171,14 +221,16 @@ namespace zypp
     public:
       /**
        * Attach the media using the concrete handler.
+       *
+       * \throws MediaNotOpenException for invalid access id.
        */
       void
       attach(MediaAccessId accessId, bool next = false);
 
       /**
        * Release the attached media and optionally eject.
-       * \throws MediaIsSharedException if eject is true
-       *         and media is shared.
+       *
+       * \throws MediaNotOpenException for invalid access id.
        */
       void
       release(MediaAccessId accessId, bool eject = false);
@@ -194,14 +246,16 @@ namespace zypp
        * fetch more data using the provideFile() or provideDir()
        * functions anymore.
        *
-       * \throws MediaException
+       * \throws MediaNotOpenException for invalid access id.
        */
       void
       disconnect(MediaAccessId accessId);
 
       /**
        * Check if media is attached or not.
+       *
        * \return True if media is attached.
+       * \throws MediaNotOpenException for invalid access id.
        */
       bool
       isAttached(MediaAccessId accessId) const;
@@ -209,7 +263,9 @@ namespace zypp
       /**
        * Returns information if media is on a shared
        * physical device or not.
+       *
        * \return True if it is shared, false if not.
+       * \throws MediaNotOpenException for invalid access id.
        */
       bool
       isSharedMedia(MediaAccessId accessId) const;
@@ -217,7 +273,9 @@ namespace zypp
       /**
        * Ask the registered verifier if the attached
        * media is the desired one or not.
-       * \return True if desired media is attached.
+       * \return True if media is attached and desired
+       *         according to the actual verifier.
+       * \throws MediaNotOpenException for invalid access id.
        */
       bool
       isDesiredMedia(MediaAccessId accessId) const;
@@ -225,7 +283,9 @@ namespace zypp
       /**
        * Ask the specified verifier if the attached
        * media is the desired one or not.
-       * \return True if desired media is attached.
+       * \return True if media is attached and desired
+       *         according to the specified verifier.
+       * \throws MediaNotOpenException for invalid access id.
        */
       bool
       isDesiredMedia(MediaAccessId           accessId,
@@ -237,15 +297,22 @@ namespace zypp
        * be available at 'localRoot() + filename' or even better
        * 'localPath( filename )'
        *
-       * If media is not open an empty pathname is returned.
+       * \returns The directory name pointing to the media root
+       *          in local filesystem or an empty pathname if the
+       *          media is not attached.
+       * \throws MediaNotOpenException for invalid access id.
        */
       Pathname
       localRoot(MediaAccessId accessId) const;
 
       /**
        * Shortcut for 'localRoot() + pathname', but returns an empty
-       * pathname if media is not open.
+       * pathname if media is not attached.
        * Files provided will be available at 'localPath(filename)'.
+       * \returns The directory name in local filesystem pointing
+       *          to the desired relative pathname on the media
+       *          or an empty pathname if the media is not attached.
+       * \throws MediaNotOpenException for invalid access id.
        */
       Pathname
       localPath(MediaAccessId accessId, const Pathname & pathname) const;
