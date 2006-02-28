@@ -98,6 +98,8 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
     _XDEBUG("QueueItemEstablish::process(" << *this << ")");
 
+    _item.status().setUndetermined();		// reset any previous establish state
+
     CapSet freshens = _item->dep(Dep::FRESHENS);
 
     _XDEBUG("simple establish of " << _item << " with " << freshens.size() << " freshens");
@@ -123,13 +125,33 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
     // else we look at its requires to set it to satisfied or incomplete
 
     if (status.staysUninstalled()
-	&& freshens.size() > 0
+	&& freshens.size() > 0				// have freshens !
 	&& iter == freshens.end())
     {
 	_DEBUG(_item << " freshens nothing -> unneeded");
-	context->unneeded (_item, _other_penalty);
+	if (_item->kind() != ResTraits<Package>::kind)
+	    context->unneeded (_item, _other_penalty);
     }
     else {							// installed or no freshens or triggered freshens
+
+	CapSet supplements = _item->dep(Dep::SUPPLEMENTS);
+	if (supplements.size() != 0) {					// if we have supplements, they must also trigger
+	    CapSet::const_iterator iter;
+	    for (iter = supplements.begin(); iter != supplements.end(); iter++) {
+		const Capability cap = *iter;
+		if (context->requirementIsMet (cap)) {
+		    _XDEBUG("this supplements " << cap);
+		    break;
+		}
+	    }
+	    if (iter == supplements.end()) {
+		_DEBUG(_item << " none of the supplements match -> unneeded");
+		if (_item->kind() != ResTraits<Package>::kind)
+		    context->unneeded (_item, _other_penalty);
+		return true;
+	    }
+	}
+
 
 	CapSet requires = _item->dep(Dep::REQUIRES);			// check requirements
 	Capability missing;
@@ -140,14 +162,37 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    }
 	}
 	if (iter == requires.end()) {					// all are met
-	    _DEBUG("all requirements of " << _item << " met -> satisfied");
-	    context->satisfy (_item, _other_penalty);
+	    if (_item->kind() == ResTraits<Package>::kind) {
+		if (status.staysUninstalled()) {
+		    _DEBUG("Uninstalled " << _item << " has all requirements -> install");
+		    QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), _item );
+		    qil.push_front( install_item );
+		}
+	    }
+	    else {
+		_DEBUG("all requirements of " << _item << " met -> satisfied");
+		context->satisfy (_item, _other_penalty);
+	    }
 	}
 	else {
-	    _DEBUG(_item << " has unfulfilled requirement " << *iter << " -> incomplete");
-
-	    // we could issue a QueueItemInstall (_item) here but better lets blame the user
-	    context->incomplete (_item, _other_penalty);
+	    // If the item stays installed, blame the user
+	    if (_item->kind() != ResTraits<Package>::kind
+		|| status.staysInstalled()
+		|| context->establishing())
+	    {
+		_DEBUG("Non-Package/Installed/Establishing " << _item << " has unfulfilled requirement " << *iter << " -> incomplete");
+		context->incomplete( _item, _other_penalty );
+	    }
+	    else if (status.staysUninstalled())			// not installed -> schedule for installation
+	    {
+		_DEBUG("Uninstalled " << _item << " has unfulfilled requirement " << *iter << " -> install");
+		QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), _item );
+		qil.push_front( install_item );
+	    }
+	    else {
+		_DEBUG("Transacted " << _item << " has unfulfilled requirement " << *iter << " -> leave");
+		// do nothing, because its either toBeInstalled or toBeUninstalled
+	    }
 	}
     }
 
