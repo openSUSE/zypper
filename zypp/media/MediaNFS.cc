@@ -64,7 +64,7 @@ namespace zypp {
 
       string path = _url.getHost();
       path += ':';
-      path += _url.getPathName();
+      path += Pathname(_url.getPathName()).asString();
 
       MediaSourceRef media( new MediaSource("nfs", path));
       AttachedMedia  ret( findAttachedMedia( media));
