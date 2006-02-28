@@ -110,6 +110,9 @@ DbSources::sources (bool refresh)
 	    << ", pr. un " << priority_unsub
 	    << endl;
 
+	if (alias.empty()) alias = name;
+	if (desc.empty()) desc = alias;
+
 	try {
 
 	    DbSourceImpl *impl = new DbSourceImpl ();
