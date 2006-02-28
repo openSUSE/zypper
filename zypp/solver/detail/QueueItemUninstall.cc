@@ -364,7 +364,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 			      resfilter::ByCapMatch( *iter ),
 			      functor::functorRef<bool,CapAndItem>(info) );
 
-		// re-establish all which supplement or freshen the just uninstalled item
+		// re-establish all which supplement or freshen a provides of the just uninstalled item
 
 		EstablishItem establish( pool(), qil, _soft );
 
