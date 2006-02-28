@@ -144,6 +144,9 @@ main (int argc, char **argv)
 
 	sync_source ( db, source );
     }
+    else {
+	ERR << "Invalid option " << argv[2] << ", expecting '" << SOURCES << "' or '" << YUM << "'" << endl;
+    }
 
     db.closeDb();
 
