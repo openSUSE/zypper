@@ -165,7 +165,8 @@ namespace zypp
           MIL << "Vendor: " << _vendor << endl;
           MIL << "Media ID: " << _media_id << endl;
 
-          media::MediaAccessId _media = _media_set->getMediaAccessId(1);
+	  // get media ID, but not attaching
+          media::MediaAccessId _media = _media_set->getMediaAccessId(1, true);
                 media_mgr.delVerifier(_media);
                 media_mgr.addVerifier(_media, media::MediaVerifierRef(
                 new SourceImpl::Verifier (_vendor, _media_id) ));

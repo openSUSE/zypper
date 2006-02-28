@@ -56,14 +56,14 @@ namespace zypp
       }
     }
 
-    media::MediaAccessId MediaSet::getMediaAccessId (media::MediaNr medianr)
+    media::MediaAccessId MediaSet::getMediaAccessId (media::MediaNr medianr, bool noattach)
     {
      media::MediaManager media_mgr;
 
      if (medias.find(medianr) != medias.end())
       {
 	media::MediaAccessId id = medias[medianr];
-	if (! media_mgr.isAttached(id))
+	if (! noattach && ! media_mgr.isAttached(id))
 	  media_mgr.attach(id);
 	return id;
       }
@@ -82,7 +82,10 @@ namespace zypp
 	WAR << "Verifier not found" << endl;
       }
       medias[medianr] = id;
-      media_mgr.attach(id);
+      
+      if (! noattach)
+        media_mgr.attach(id);
+
       return id;
     }
 

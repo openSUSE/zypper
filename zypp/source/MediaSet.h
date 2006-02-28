@@ -43,7 +43,7 @@ namespace zypp
       MediaSet(const Source_Ref & source_r);
 
       /** Get the media access ID to specified media */
-      media::MediaAccessId getMediaAccessId (media::MediaNr medianr);
+      media::MediaAccessId getMediaAccessId (media::MediaNr medianr, bool no_attach = false);
       /** Redirect specified media to a new MediaId */
       void redirect (media::MediaNr medianr, media::MediaAccessId media_id);
       /** Reset the handles to the medias */
