@@ -438,6 +438,16 @@ namespace zypp
     int copy_dir( const Pathname & srcpath, const Pathname & destpath );
 
     /**
+     * Like 'cp -a srcpath/. destpath'. Copy the content of srcpath recursively
+     * into destpath. Both \p srcpath and \p destpath has to exists.
+     *
+     * @return 0 on success, ENOTDIR if srcpath/destpath is not a directory,
+     * EEXIST if srcpath and destpath are equal, otherwise the commands
+     * return value.
+     */
+    int copy_dir_content( const Pathname & srcpath, const Pathname & destpath);
+
+    /**
      * Return content of directory via retlist. If dots is false
      * entries starting with '.' are not reported. "." and ".."
      * are never reported.
@@ -492,6 +502,15 @@ namespace zypp
      **/
     int readdir( DirContent & retlist, const Pathname & path,
                  bool dots = true, PathInfo::Mode statmode = PathInfo::STAT );
+
+
+    /**
+     * Check if the specified directory is empty.
+     * \param path The path of the directory to check.
+     * \return 0 if directory is empty, -1 if not, errno > 0 on failure.
+     */
+    int is_empty_dir(const Pathname & path);
+
     //@}
 
     ///////////////////////////////////////////////////////////////////

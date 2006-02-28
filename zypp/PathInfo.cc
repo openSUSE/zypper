@@ -465,6 +465,47 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
+    //	METHOD NAME : copy_dir_content
+    //	METHOD TYPE : int
+    //
+    int copy_dir_content(const Pathname & srcpath, const Pathname & destpath)
+    {
+      DBG << "copy_dir " << srcpath << " -> " << destpath << ' ';
+
+      PathInfo sp( srcpath );
+      if ( !sp.isDir() ) {
+        return _Log_Result( ENOTDIR );
+      }
+
+      PathInfo dp( destpath );
+      if ( !dp.isDir() ) {
+        return _Log_Result( ENOTDIR );
+      }
+
+      if ( srcpath == destpath ) {
+        return _Log_Result( EEXIST );
+      }
+
+      std::string src( srcpath.asString());
+      src += "/.";
+      const char *const argv[] = {
+        "/bin/cp",
+        "-dR",
+        "--",
+        src.c_str(),
+        destpath.asString().c_str(),
+        NULL
+      };
+      ExternalProgram prog( argv, ExternalProgram::Stderr_To_Stdout );
+      for ( string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
+        DBG << "  " << output;
+      }
+      int ret = prog.close();
+      return _Log_Result( ret, "returned" );
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
     //	METHOD NAME : readdir
     //  METHOD TYPE : int
     //
@@ -543,6 +584,33 @@ namespace zypp
       }
 
       return res;
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : is_empty_dir
+    //	METHOD TYPE : int
+    //
+    int is_empty_dir(const Pathname & path)
+    {
+      DIR * dir = ::opendir( path.asString().c_str() );
+      if ( ! dir ) {
+        return _Log_Result( errno );
+      }
+
+      struct dirent *entry;
+      while ( (entry = ::readdir( dir )) != NULL )
+      {
+        std::string name(entry->d_name);
+
+        if ( name == "." || name == "..")
+	  continue;
+
+        break;
+      }
+      ::closedir( dir );
+
+      return entry != NULL ? -1 : 0;
     }
 
     ///////////////////////////////////////////////////////////////////
