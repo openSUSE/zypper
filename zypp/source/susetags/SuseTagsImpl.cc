@@ -110,7 +110,6 @@ namespace zypp
         bool cache = cacheExists();
         
         try {
-          media::MediaAccessId _media = _media_set->getMediaAccessId(1);
           Pathname media_file = Pathname("media.1/media");
           
           if (cache)
@@ -119,6 +118,7 @@ namespace zypp
           }
           else
           {
+            media::MediaAccessId _media = _media_set->getMediaAccessId(1);
             media_mgr.provideFile (_media, media_file);
             media_file = media_mgr.localPath (_media, media_file);
           }
