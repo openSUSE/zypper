@@ -138,6 +138,15 @@ namespace zypp
     void releaseAllSources();
 
     /**
+     * Reattach all sources which are not mounted, but downloaded,
+     * to different directory
+     *
+     * \throws Exception
+     */
+    void reattachSources(const Pathname &attach_point,
+			 bool temporary = false);
+
+    /**
      * Disable all registered sources
      */
 #warning: this could be done by providing iterator-like methods

@@ -137,6 +137,10 @@ namespace zypp
 
   void Source_Ref::release()
   { _pimpl->release(); }
+
+  void Source_Ref::reattach(const Pathname &attach_point,
+			    bool temporary)
+  { _pimpl->reattach(attach_point, temporary)
   
   media::MediaVerifierRef Source_Ref::verifier(unsigned media_nr)
   { return _pimpl->verifier(media_nr); }

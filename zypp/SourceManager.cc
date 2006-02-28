@@ -98,6 +98,17 @@ namespace zypp
     }
   }
 
+  void SourceManager::reattachSources(const Pathname &attach_point,
+				      bool temporary)
+  {
+    for (SourceMap::iterator it = _sources.begin();
+	 it != _sources.end(); it++)
+    {
+      it->second->reattach(attach_point, temporary);
+    }
+  }
+
+
   void SourceManager::removeSource(const std::string & alias_r)
   {
     for (SourceMap::iterator it = _sources.begin(); it != _sources.end(); ++it)

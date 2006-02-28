@@ -46,6 +46,14 @@ namespace zypp
       media::MediaAccessId getMediaAccessId (media::MediaNr medianr, bool no_attach = false);
       /** Redirect specified media to a new MediaId */
       void redirect (media::MediaNr medianr, media::MediaAccessId media_id);
+      /**
+       * Reattach the source if it is not mounted, but downloaded,
+       * to different directory
+       *
+       * \throws Exception
+       */
+      void reattach(const Pathname &attach_point,
+		    bool temporary = false);
       /** Reset the handles to the medias */
       void reset();
       /**

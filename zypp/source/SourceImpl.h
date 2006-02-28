@@ -158,6 +158,14 @@ namespace zypp
 
       virtual void redirect(unsigned media_nr, const Url & new_url);
       /**
+       * Reattach the source if it is not mounted, but downloaded,
+       * to different directory
+       *
+       * \throws Exception
+       */
+      void reattach(const Pathname &attach_point,
+		    bool temporary = false);
+      /**
        * Release all medias attached by the source
        */
       void release();

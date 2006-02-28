@@ -138,6 +138,15 @@ namespace zypp
     void release();
 
     /**
+     * Reattach the source if it is not mounted, but downloaded,
+     * to different directory
+     *
+     * \throws Exception
+     */
+    void reattach(const Pathname &attach_point,
+		  bool temporary = false);
+
+    /**
      * Provide a media verifier suitable for the given media number
      */
     media::MediaVerifierRef verifier(unsigned media_nr);
