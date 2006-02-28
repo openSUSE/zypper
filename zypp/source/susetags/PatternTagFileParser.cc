@@ -68,7 +68,9 @@ namespace zypp
         {
           std::string line = tag.value;
           std::vector<std::string> words;
-          str::split( line, std::back_inserter(words), " " );
+
+	  if (str::split( line, std::back_inserter(words), " " ) < 3)
+	    ZYPP_THROW( ParseException( "Expected [name version release [arch] ], got [" + stag_r.value +"]") );
 
           patImpl->_name = words[0];
           patImpl->_version = words[1];
