@@ -35,9 +35,11 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 static ResStore
-query_file (Target_Ptr target, const Pathname & path)
+query_file (const Pathname & path)
 {
     ResStore store;
+
+    MIL << "query_file(" << path << ")" << endl;
 
     target::rpm::RpmHeader::constPtr header = target::rpm::RpmHeader::readPackage( path );
 
@@ -95,51 +97,18 @@ parse_query (const string & query, bool *recursive)
 
 //-----------------------------------------------------------------------------
 
-#if 0
-typedef struct {
-    RCResolvableFn user_callback;
-    gpointer    user_data;
-    const gchar *path;
-} PackagesFromDirInfo;
-
-static gboolean
-packages_from_dir_cb (RCPackage *package, gpointer user_data)
-{
-    PackagesFromDirInfo *info = user_data;
-    RCPackageUpdate *update;
-
-    /* Set package path */
-    update = rc_package_get_latest_update (package);
-    if (update && update->package_url)
-        package->package_filename = g_build_path (G_DIR_SEPARATOR_S,
-                                                  info->path,
-                                                  update->package_url,
-                                                  NULL);
-    if (info->user_callback)
-        return info->user_callback ((RCResolvable *)package, info->user_data);
-
-    return TRUE;
-}
-
 
 int
-extract_packages_from_directory (const Pathname & path,
+extract_packages_from_directory (ResStore & store,
+				 const Pathname & path,
 				 const string & alias,
 				 bool recursive)
-#if 0
-				                      RCChannel *channel,
-                                    RCPackman *packman,
-                                    gboolean recursive,
-                                    RCResolvableFn callback,
-                                    gpointer user_data)
-#endif
 {
-    GDir *dir;
-    GHashTable *hash;
-    struct HashIterInfo info;
     Pathname filename;
     PathInfo magic;
     bool distro_magic, pkginfo_magic;
+
+DBG << "extract_packages_from_directory(.., " << path << ", " << alias << ", " << recursive << ")" << endl;
     
     /*
       Check for magic files that indicate how to treat the
@@ -148,20 +117,20 @@ extract_packages_from_directory (const Pathname & path,
     */
 
     magic = PathInfo( path + "/RC_SKIP" );
-    if (!magic.isExist()) {
+    if (magic.isExist()) {
         return 0;
     }
 
     magic = PathInfo( path + "/RC_RECURSIVE" );
-    if (magic.isExists())
+    if (magic.isExist())
         recursive = true;
     
     magic = PathInfo( path + "/RC_BY_DISTRO" );
-    distro_magic = magic.isExists();
+    distro_magic = magic.isExist();
 
     pkginfo_magic = true;
     magic = PathInfo( path + "/RC_IGNORE_PKGINFO" );
-    if (magic.isExists())
+    if (magic.isExist())
         pkginfo_magic = false;
 
     /* If distro_magic is set, we search for packages in two
@@ -202,6 +171,8 @@ extract_packages_from_directory (const Pathname & path,
     }
 #endif
 
+#if 0	// helix format unsupported
+
     /* If pkginfo_magic is set and if a packageinfo.xml or
        packageinfo.xml.gz file exists in the directory, use it
        instead of just scanning the files in the directory
@@ -238,79 +209,54 @@ extract_packages_from_directory (const Pathname & path,
             return count;
         }
     }
+#endif
 
-    dir = g_dir_open (path, 0, NULL);
-    if (dir == NULL)
+    std::list<std::string> dircontent;
+    if (filesystem::readdir( dircontent, path, false) != 0) {		// dont look for dot files
+	ERR << "readdir " << path << " failed" << endl;
         return -1;
-
-    hash = g_hash_table_new (NULL, NULL);
-
-    while ( (filename = g_dir_read_name (dir)) ) {
-        gchar *file_path;
-
-        file_path = g_strconcat (path, "/", filename, NULL);
-
-        if (recursive && g_file_test (file_path, G_FILE_TEST_IS_DIR)) {
-            rc_extract_packages_from_directory (file_path,
-                                                channel,
-                                                packman,
-                                                TRUE,
-                                                hash_recurse_cb,
-                                                hash);
-        } else if (g_file_test (file_path, G_FILE_TEST_IS_REGULAR)) {
-            RCPackage *pkg;
-
-            pkg = rc_packman_query_file (packman, file_path, TRUE);
-            if (pkg != NULL) {
-                rc_resolvable_set_channel (RC_RESOLVABLE (pkg), channel);
-                pkg->package_filename = g_strdup (file_path);
-                pkg->local_package = FALSE;
-                add_fake_history (pkg);
-                package_into_hash (pkg, hash);
-                g_object_unref (pkg);
-            }
-        }
-
-        g_free (file_path);
     }
 
-    g_dir_close (dir);
-   
-    info.callback = callback;
-    info.user_data = user_data;
-    info.count = 0;
+    for (std::list<std::string>::const_iterator it = dircontent.begin(); it != dircontent.end(); ++it) {
+	Pathname file_path = path + *it;
+	PathInfo file_info( file_path );
+        if (recursive && file_info.isDir()) {
 
-    /* Walk across the hash and:
-       1) Invoke the callback on each package
-       2) Unref each package
-    */
-    g_hash_table_foreach (hash, hash_iter_cb, &info);
+	    extract_packages_from_directory( store, file_path, alias, recursive );
 
-    g_hash_table_destroy (hash);
+        } else if (file_info.isFile()) {
 
-    return info.count;
+	    string::size_type dotpos = it->find_last_of(".");
+	    if (dotpos == string::npos)
+		continue;
+	    if (string(*it, ++dotpos) != "rpm")
+		continue;
+	    target::rpm::RpmHeader::constPtr header = target::rpm::RpmHeader::readPackage( file_path );
+	    Package::Ptr package = target::rpm::RpmDb::makePackageFromHeader( header, NULL, file_path );
+
+	    if (package != NULL) {
+		DBG << "Adding package " << *package << endl;
+		store.insert( package );
+	    }
+        }
+    }
+
 }
-#endif
 
 static ResStore
-query_directory (Target_Ptr target, const Pathname & path, bool recursive)
+query_directory (const Pathname & path, bool recursive)
 {
     ResStore store;
-#warning Unclear semantics
-#if 0
-    rc_extract_packages_from_directory (path, channel,
-		                        rc_packman_get_global (),
-		                        recursive,
-		                        prepend_package,
-		                        &packages);
-#endif
+    MIL << "query_directory( " << path << (recursive?", recursive":"") << ")" << endl;
+    extract_packages_from_directory( store, path, "@local", recursive );
+
     return store;
 }
 
 //----------------------------------------------------------------------------
 
 static ResStore
-query (Target_Ptr target, const string & uri, const string & channel_id)
+query (const string & uri, const string & channel_id)
 {
     ResStore store;
 
@@ -353,7 +299,7 @@ query (Target_Ptr target, const string & uri, const string & channel_id)
     }
     else if (S_ISREG( buf.st_mode )) {			/* Single file */
 
-	store = query_file (target, path);
+	store = query_file( path );
 
     }
     else if (S_ISDIR( buf.st_mode )) {			/* Directory */
@@ -365,7 +311,7 @@ query (Target_Ptr target, const string & uri, const string & channel_id)
 	    string p( uri, query_part + 1 );
 	    parse_query( p, &recursive );
 	}
-	store = query_directory (target, path, recursive);
+	store = query_directory( path, recursive );
     }
 
     return store;
@@ -454,12 +400,12 @@ main (int argc, char **argv)
     ZYpp::Ptr God = zypp::getZYpp();
 
     try {
-	God->initTarget( "/", true );
+       God->initTarget( "/", true );
     }
-    catch( const Exception & excpt_r ) {    
-	ERR << "Can't initialize target." << endl;
-	ZYPP_CAUGHT( excpt_r );
-	return 1;
+    catch( const Exception & excpt_r ) {
+       ERR << "Can't initialize target." << endl;
+       ZYPP_CAUGHT( excpt_r );
+       return 1;
     }
 
     DbAccess db(argv[1]);
@@ -471,8 +417,8 @@ main (int argc, char **argv)
 	sync_catalogs( db );
     }
     else {
-	MIL << "Doing a file query" << endl;
-	ResStore store = query (God->target(), argv[2], argc == 4 ? argv[3] : "");
+	MIL << "Doing a file/directory query" << endl;
+	ResStore store = query( argv[2], argc == 4 ? argv[3] : "" );
 	if (!store.empty()) {
 	    db.writeStore( store, ResStatus::uninstalled );
 	}
