@@ -71,7 +71,7 @@ namespace zypp
 	pos = 0;
 	string::size_type next = pos;
 	while (pos < provides.size()) {
-	    next = provides.find( ",", pos );			// look for , separator
+	    next = provides.find( ";", pos );			// look for ; separator
 	    if (next == string::npos)
 		next = provides.size()-1;			// none left, set next to end-1 (strip trailing ')' )
 
