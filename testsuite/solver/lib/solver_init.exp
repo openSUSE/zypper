@@ -159,7 +159,7 @@ proc multi-run { src } {
 
       # clean old results
 
-      [ exec sh -c "rm -rf $dircase/*.diff $dircase/*.out $dircase/*.mistake" ]
+      exec sh -c "rm -rf $dircase/*.diff $dircase/*.out $dircase/*.mistake"
 
       set xfails [list ]
       set xfailname "$dircase/xfail"
