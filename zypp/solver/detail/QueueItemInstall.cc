@@ -473,46 +473,54 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    }
 	}
 
-	// Searching item that conflict with us and try to uninstall it if it is useful
+	// Go over each provides of the to-be-uninstalled item and
+	// - re-establish any freshens
+	// - re-establish any supplements
+	// - find items that conflict with us and try to uninstall it if it is useful
+
+	EstablishItem establish( pool(), qil, _soft );
 
 	caps = _item->dep (Dep::PROVIDES);
+	bool ignored = false;
+
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 	    const Capability cap = *iter;
 
-	    UninstallConflicting info( context, cap, _item, _upgrades, qil );
+	    /* Construct establish items for each of those which
+		freshen or supplement and provides of this resolvable. */
 
-	    Dep dep( Dep::CONFLICTS );
-	    invokeOnEach( pool().byCapabilityIndexBegin( cap.index(), dep ),
-			  pool().byCapabilityIndexEnd( cap.index(), dep ),
+	    _XDEBUG("Re-establish all freshens on " << cap);
+	    // pool ()->foreachFresheningResItem (cap, establish_freshens_cb, &info);
+
+	    Dep dep( Dep::FRESHENS);
+	    invokeOnEach( pool().byCapabilityIndexBegin( cap.index(), dep ), // begin()
+			  pool().byCapabilityIndexEnd( cap.index(), dep ),   // end()
 			  resfilter::ByCapMatch( cap ),
-			  functor::functorRef<bool,CapAndItem>(info) );
+			  functor::functorRef<bool,CapAndItem>( establish ) );
 
-	    if (info.ignored)		// user choose to ignore these conflitcs
-		return true;
-	}
+	    dep = Dep::SUPPLEMENTS;
+	    invokeOnEach( pool().byCapabilityIndexBegin( cap.index(), dep ), // begin()
+			  pool().byCapabilityIndexEnd( cap.index(), dep ),   // end()
+			  resfilter::ByCapMatch( cap ),
+			  functor::functorRef<bool,CapAndItem>( establish ) );
 
-	/* Construct establish items for each of those which
-	   freshen or supplement this resolvable. */
+	    if (!ignored) {
+		// Search items that conflict with us and try to uninstall it if it is useful
 
-	EstablishItem info( pool(), qil, _soft );
+		UninstallConflicting info( context, cap, _item, _upgrades, qil );
 
-	CapFactory factory;
-	Capability cap = factory.parse (_item->kind(), _item->name(), Rel::EQ, _item->edition());
-	_XDEBUG("Re-establish all freshens on " << cap);
-	// pool ()->foreachFresheningResItem (cap, establish_freshens_cb, &info);
-	Dep dep( Dep::FRESHENS);
-	invokeOnEach( pool().byCapabilityIndexBegin( cap.index(), dep ), // begin()
-		      pool().byCapabilityIndexEnd( cap.index(), dep ),   // end()
-		      resfilter::ByCapMatch( cap ),
-		      functor::functorRef<bool,CapAndItem>(info) );
+		Dep dep( Dep::CONFLICTS );
+		invokeOnEach( pool().byCapabilityIndexBegin( cap.index(), dep ),
+			      pool().byCapabilityIndexEnd( cap.index(), dep ),
+			      resfilter::ByCapMatch( cap ),
+			      functor::functorRef<bool,CapAndItem>( info ) );
 
-	dep = Dep::SUPPLEMENTS;
-	invokeOnEach( pool().byCapabilityIndexBegin( cap.index(), dep ), // begin()
-		      pool().byCapabilityIndexEnd( cap.index(), dep ),   // end()
-		      resfilter::ByCapMatch( cap ),
-		      functor::functorRef<bool,CapAndItem>(info) );
+		ignored = info.ignored;		// user choose to ignore these conflitcs
+	    }
 
-    } // end of block
+	} // iterate over all provides
+
+    } // end of goto-over-definitions-to-finished block
 
  finished:
 
