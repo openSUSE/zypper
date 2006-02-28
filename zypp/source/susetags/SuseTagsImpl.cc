@@ -25,6 +25,7 @@
 
 #include "zypp/SourceFactory.h"
 #include "zypp/ZYppCallbacks.h"
+#include "zypp/ZYppFactory.h"
 
 using std::endl;
 
@@ -284,8 +285,13 @@ namespace zypp
 
 #warning Should use correct locale and locale fallback list
         try {
-          Locale lang;
-          p = cache ? _data_dir + "packages.en" : provideFile( _data_dir + "packages.en");
+	  ZYpp::Ptr z = getZYpp();
+          Locale lang( z->getTextLocale() );
+
+	  std::string packages_lang_name( "packages." );
+	  packages_lang_name += lang.language().code();
+
+          p = cache ? _data_dir + packages_lang_name : provideFile( _data_dir + packages_lang_name);
           DBG << "Going to parse " << p << endl;
           parsePackagesLang( p, lang, content );
         }
