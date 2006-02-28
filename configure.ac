@@ -66,7 +66,7 @@ AC_SUBST(docdir)
 AC_SUBST(pkgdocdir)
 
 zyppdir=${prefix}/share/$PACKAGE
-localedir=${zyppdir}/locale
+localedir=${prefix}/share/locale
 schemadir=${zyppdir}/schema
 
 AC_SUBST(zyppdir)
