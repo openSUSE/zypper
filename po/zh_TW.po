@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2006-02-18 17:25+0100\n"
+"POT-Creation-Date: 2006-02-27 12:42+0100\n"
 "PO-Revision-Date: 2001-06-05 18:04+02:00\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -1920,17 +1920,17 @@ msgstr "祖魯語"
 msgid "Zuni"
 msgstr "祖尼語"
 
-#: zypp/target/rpm/RpmDb.cc:1656
+#: zypp/target/rpm/RpmDb.cc:1718
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "%s 的已變更組態檔："
 
-#: zypp/target/rpm/RpmDb.cc:1807
+#: zypp/target/rpm/RpmDb.cc:1869
 #, c-format
 msgid "rpm saved %s as %s but it was impossible to determine the difference"
 msgstr "rpm 已將 %s 儲存為 %s，但看不出差異"
 
-#: zypp/target/rpm/RpmDb.cc:1809
+#: zypp/target/rpm/RpmDb.cc:1871
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -1939,12 +1939,12 @@ msgstr ""
 "rpm 已將 %s 儲存為 %s。\n"
 "這是前 25 行差異：\n"
 
-#: zypp/target/rpm/RpmDb.cc:1812
+#: zypp/target/rpm/RpmDb.cc:1874
 #, c-format
 msgid "rpm created %s as %s but it was impossible to determine the difference"
 msgstr "rpm 已將 %s 建立為 %s，但看不出差異"
 
-#: zypp/target/rpm/RpmDb.cc:1814
+#: zypp/target/rpm/RpmDb.cc:1876
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -1953,71 +1953,71 @@ msgstr ""
 "rpm 已將 %s 建立為 %s。\n"
 "這是前 25 行差異：\n"
 
-#: zypp/target/rpm/RpmDb.cc:1819
+#: zypp/target/rpm/RpmDb.cc:1881
 #, c-format
 msgid "%s install failed"
 msgstr "%s 安裝失敗"
 
-#: zypp/target/rpm/RpmDb.cc:1820 zypp/target/rpm/RpmDb.cc:1926
+#: zypp/target/rpm/RpmDb.cc:1882 zypp/target/rpm/RpmDb.cc:1988
 msgid "rpm output:"
 msgstr "rpm 輸出："
 
-#: zypp/target/rpm/RpmDb.cc:1824
+#: zypp/target/rpm/RpmDb.cc:1886
 #, c-format
 msgid "%s installed ok"
 msgstr "%s 安裝成功"
 
-#: zypp/target/rpm/RpmDb.cc:1826 zypp/target/rpm/RpmDb.cc:1931
+#: zypp/target/rpm/RpmDb.cc:1888 zypp/target/rpm/RpmDb.cc:1993
 msgid "Additional rpm output:"
 msgstr "其他 rpm 輸出："
 
-#: zypp/target/rpm/RpmDb.cc:1925
+#: zypp/target/rpm/RpmDb.cc:1987
 #, c-format
 msgid "%s remove failed"
 msgstr "%s 移除失敗"
 
-#: zypp/target/rpm/RpmDb.cc:1929
+#: zypp/target/rpm/RpmDb.cc:1991
 #, c-format
 msgid "%s remove ok"
 msgstr "%s 移除成功"
 
-#: zypp/target/rpm/RpmDb.cc:1945
+#: zypp/target/rpm/RpmDb.cc:2007
 msgid "Ok"
 msgstr "確定"
 
-#: zypp/target/rpm/RpmDb.cc:1948
+#: zypp/target/rpm/RpmDb.cc:2010
 msgid "The package is not OK for the following reasons:"
 msgstr "套件會因下列原因無法使用："
 
-#: zypp/target/rpm/RpmDb.cc:1954
+#: zypp/target/rpm/RpmDb.cc:2016
 msgid "The package contains different version than expected"
 msgstr "套件包含的版本與所預期的版本不同"
 
-#: zypp/target/rpm/RpmDb.cc:1960
+#: zypp/target/rpm/RpmDb.cc:2022
 msgid "The package file has incorrect MD5 sum"
 msgstr "套件檔案的 MD5 加總程式不正確"
 
-#: zypp/target/rpm/RpmDb.cc:1966
+#: zypp/target/rpm/RpmDb.cc:2028
 msgid "The package is not signed"
 msgstr "套件未簽名"
 
-#: zypp/target/rpm/RpmDb.cc:1972
+#: zypp/target/rpm/RpmDb.cc:2034
 msgid "The package has no MD5 sum"
 msgstr "套件沒有 MD5 加總程式"
 
-#: zypp/target/rpm/RpmDb.cc:1978
+#: zypp/target/rpm/RpmDb.cc:2040
 msgid "The package has incorrect signature"
 msgstr "套件有的簽名不正確"
 
-#: zypp/target/rpm/RpmDb.cc:1984
+#: zypp/target/rpm/RpmDb.cc:2046
 msgid "The package archive has incorrect MD5 sum"
 msgstr "套件歸檔的 MD5 加總程式不正確"
 
-#: zypp/target/rpm/RpmDb.cc:1990
+#: zypp/target/rpm/RpmDb.cc:2052
 msgid "rpm failed for unkown reason, see log file"
 msgstr "rpm 失敗，原因不明，請參閱記錄檔"
 
-#: zypp/target/rpm/RpmDb.cc:2134
+#: zypp/target/rpm/RpmDb.cc:2196
 #, c-format
 msgid "created backup %s"
 msgstr "已建立備份 %s"
@@ -2032,22 +2032,22 @@ msgstr "%s 已由 %s 取代"
 msgid "%s replaced by %s"
 msgstr "%s 已由 %s 取代"
 
-#: zypp/solver/detail/Resolver_problems.cc:172
+#: zypp/solver/detail/Resolver_problems.cc:189
 msgid "Invalid information"
 msgstr "無效的資訊"
 
-#: zypp/solver/detail/Resolver_problems.cc:179
+#: zypp/solver/detail/Resolver_problems.cc:196
 #, c-format
 msgid "%s is needed by other resolvables"
 msgstr "%s 是其他可解析檔的必要項目"
 
-#: zypp/solver/detail/Resolver_problems.cc:182
+#: zypp/solver/detail/Resolver_problems.cc:199
 #: zypp/solver/detail/ResolverInfoNeededBy.cc:56
 #, c-format
 msgid "%s is needed by %s"
 msgstr "%s 是 %s 的必要項目"
 
-#: zypp/solver/detail/Resolver_problems.cc:183
+#: zypp/solver/detail/Resolver_problems.cc:200
 #, c-format
 msgid ""
 "%s is needed by:\n"
@@ -2056,19 +2056,19 @@ msgstr ""
 "%s 是 \n"
 "%s 的必要項目："
 
-#: zypp/solver/detail/Resolver_problems.cc:190
+#: zypp/solver/detail/Resolver_problems.cc:207
 #, c-format
 msgid "%s conflicts with other resolvables"
 msgstr "%s 與其他可解析檔發生衝突"
 
-#: zypp/solver/detail/Resolver_problems.cc:193
+#: zypp/solver/detail/Resolver_problems.cc:210
 #: zypp/solver/detail/ResolverInfoConflictsWith.cc:55
 #: zypp/solver/detail/ResolverInfoConflictsWith.cc:70
 #, c-format
 msgid "%s conflicts with %s"
 msgstr "%s 與 %s 衝突"
 
-#: zypp/solver/detail/Resolver_problems.cc:194
+#: zypp/solver/detail/Resolver_problems.cc:211
 #, c-format
 msgid ""
 "%s conflicts with:\n"
@@ -2077,22 +2077,22 @@ msgstr ""
 "與 %s 衝突：\n"
 "%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:201
+#: zypp/solver/detail/Resolver_problems.cc:218
 #, c-format
 msgid "%s obsoletes other resolvables"
 msgstr "%s 會汰換其他可解析檔"
 
-#: zypp/solver/detail/Resolver_problems.cc:204
+#: zypp/solver/detail/Resolver_problems.cc:221
 #, c-format
 msgid "%s obsoletes %s"
 msgstr "%s 汰換 %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:206
+#: zypp/solver/detail/Resolver_problems.cc:223
 #, c-format
 msgid "%s obsoletes:%s"
 msgstr "%s 汰換：%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:207
+#: zypp/solver/detail/Resolver_problems.cc:224
 msgid ""
 "\n"
 "These resolvables will be deleted from the system."
@@ -2100,37 +2100,37 @@ msgstr ""
 "\n"
 "這些可解析檔將從系統中刪除。"
 
-#: zypp/solver/detail/Resolver_problems.cc:214
+#: zypp/solver/detail/Resolver_problems.cc:231
 #, c-format
 msgid "%s depends on other resolvables"
 msgstr "%s 取決於其他可解析檔"
 
-#: zypp/solver/detail/Resolver_problems.cc:218
+#: zypp/solver/detail/Resolver_problems.cc:235
 #, c-format
 msgid "%s depends on %s"
 msgstr "%s 取決於 %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:221
+#: zypp/solver/detail/Resolver_problems.cc:238
 #, c-format
 msgid "%s depends on:%s"
 msgstr "%s 取決於：%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:227
+#: zypp/solver/detail/Resolver_problems.cc:244
 msgid "Child of"
 msgstr "子件屬於"
 
-#: zypp/solver/detail/Resolver_problems.cc:233
-#: zypp/solver/detail/Resolver_problems.cc:296
+#: zypp/solver/detail/Resolver_problems.cc:250
+#: zypp/solver/detail/Resolver_problems.cc:313
 #, c-format
 msgid "Cannot install %s"
 msgstr "無法安裝 %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:235
+#: zypp/solver/detail/Resolver_problems.cc:252
 #, c-format
 msgid "None provides %s"
 msgstr "未提供 %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:236
+#: zypp/solver/detail/Resolver_problems.cc:253
 msgid ""
 "\n"
 "There is no resource available which support this requirement."
@@ -2138,69 +2138,74 @@ msgstr ""
 "\n"
 "沒有支援此需求的可用資源。"
 
-#: zypp/solver/detail/Resolver_problems.cc:244
+#: zypp/solver/detail/Resolver_problems.cc:261
 msgid ""
 "Due problems which are described above/below this resolution will not solve "
 "all dependencies"
 msgstr "因為上/下所描述的問題，導致此解析無法解決所有相依性。"
 
-#: zypp/solver/detail/Resolver_problems.cc:252
+#: zypp/solver/detail/Resolver_problems.cc:269
 #, c-format
 msgid "%s is not installed and has been marked as uninstallable"
 msgstr "未安裝 %s 且已將其標示為無法安裝"
 
-#: zypp/solver/detail/Resolver_problems.cc:262
+#: zypp/solver/detail/Resolver_problems.cc:279
 #, c-format
 msgid "Cannot install %s due dependency problems"
 msgstr "因為相依性問題，導致無法安裝 %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:311
+#: zypp/solver/detail/Resolver_problems.cc:328
 #, c-format
 msgid "%s has unfulfiled requirements"
 msgstr "%s 有無法滿足的需求"
 
-#: zypp/solver/detail/Resolver_problems.cc:349
+#: zypp/solver/detail/Resolver_problems.cc:366
 #, fuzzy, c-format
 msgid "%s has missing dependencies"
 msgstr "因為缺少相依性，導致無法安裝 %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:387
+#: zypp/solver/detail/Resolver_problems.cc:404
 #, c-format
 msgid "%s cannot be installed due missing dependencies"
 msgstr "因為缺少相依性，導致無法安裝 %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:409
+#: zypp/solver/detail/Resolver_problems.cc:434
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
 msgstr "%s 滿足對 %s 的相依，但是將無法解除安裝"
 
-#: zypp/solver/detail/Resolver_problems.cc:419
+#: zypp/solver/detail/Resolver_problems.cc:444
 #, c-format
 msgid "No need to install %s"
 msgstr "不需要安裝 %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:427
+#: zypp/solver/detail/Resolver_problems.cc:452
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "無法安裝 %s 以滿足對於 %s 的相依"
 
-#: zypp/solver/detail/Resolver_problems.cc:437
+#: zypp/solver/detail/Resolver_problems.cc:462
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
 msgstr "無法安裝 %s 以滿足對於 %s 的相依"
 
-#: zypp/solver/detail/Resolver_problems.cc:461
-#: zypp/solver/detail/Resolver_problems.cc:469
+#: zypp/solver/detail/Resolver_problems.cc:499
+#: zypp/solver/detail/Resolver_problems.cc:507
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
 msgstr "不會解除安裝 %s，因為仍需使用它"
 
-#: zypp/solver/detail/Resolver_problems.cc:489
+#: zypp/solver/detail/Resolver_problems.cc:518
+#, c-format
+msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
+msgstr ""
+
+#: zypp/solver/detail/Resolver_problems.cc:542
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
 msgstr "無法安裝 %s，因為它與 %s 衝突"
 
-#: zypp/solver/detail/Resolver_problems.cc:509
+#: zypp/solver/detail/Resolver_problems.cc:562
 #, c-format
 msgid "%s is uninstallable due conflicts with %s"
 msgstr "%s 無法解除安裝，因為與 %s 衝突"
@@ -2220,28 +2225,39 @@ msgstr "忽略此需求"
 msgid "Ignore this conflict of %s"
 msgstr "忽略 %s 的衝突"
 
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:86
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:89
+#, fuzzy, c-format
+msgid "Ignore the obsolete %s in %s"
+msgstr "忽略 %s 的衝突"
+
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:100
 #, fuzzy
-msgid "Ignore architecture"
+msgid "ignore architecture"
 msgstr "忽略結構"
 
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:96
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:110
 #, fuzzy, c-format
 msgid "Ignore that %s is already set to install"
 msgstr "忽略 %s 已設定要安裝"
 
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:52
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:56
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:54
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:63
 #, fuzzy, c-format
 msgid "delete %s"
 msgstr "刪除 %1"
 
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:65
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:57
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:66
+#, fuzzy, c-format
+msgid "do not install %s"
+msgstr "無法安裝 %s"
+
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:76
 #, fuzzy
-msgid "Delete conflicting resolvables"
+msgid "Do not install or delete concerning resolvables"
 msgstr "正在移除衝突的可解析檔"
 
-#: zypp/solver/detail/QueueItemRequire.cc:461
+#: zypp/solver/detail/QueueItemRequire.cc:456
 #, c-format
 msgid "for requiring %s for %s when upgrading %s"
 msgstr "必須具備 %s 的 %s，才能升級 %s"
@@ -2255,178 +2271,182 @@ msgstr "%s 缺少需求"
 msgid ", Action: "
 msgstr "，動作："
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:59
+#: zypp/solver/detail/ResolverInfoMisc.cc:58
 msgid ", Trigger: "
 msgstr "，觸發："
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:84
+#: zypp/solver/detail/ResolverInfoMisc.cc:90
 msgid "package"
 msgstr "套件"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:88
+#: zypp/solver/detail/ResolverInfoMisc.cc:94
 msgid "selection"
 msgstr "選項"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:92
+#: zypp/solver/detail/ResolverInfoMisc.cc:98
 msgid "pattern"
 msgstr "模式"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:96
+#: zypp/solver/detail/ResolverInfoMisc.cc:102
 msgid "product"
 msgstr "產品"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:100
+#: zypp/solver/detail/ResolverInfoMisc.cc:106
 msgid "patch"
 msgstr "修補"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:104
+#: zypp/solver/detail/ResolverInfoMisc.cc:110
 msgid "script"
 msgstr "程序檔"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:108
+#: zypp/solver/detail/ResolverInfoMisc.cc:114
 msgid "message"
 msgstr "訊息"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:112
+#: zypp/solver/detail/ResolverInfoMisc.cc:118
+msgid "atom"
+msgstr ""
+
+#: zypp/solver/detail/ResolverInfoMisc.cc:122
 msgid "system"
 msgstr "系統"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:116
+#: zypp/solver/detail/ResolverInfoMisc.cc:126
 msgid "Resolvable"
 msgstr "可解析檔"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:134
+#: zypp/solver/detail/ResolverInfoMisc.cc:144
 msgid "Marking this resolution attempt as invalid."
 msgstr "將這項嘗試解析標示為無效。"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:141
+#: zypp/solver/detail/ResolverInfoMisc.cc:151
 #, c-format
 msgid "Marking resolvable %s as uninstallable"
 msgstr "將可解析 %s 標示為不可安裝"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:149
+#: zypp/solver/detail/ResolverInfoMisc.cc:159
 #, c-format
 msgid ""
 "%s is scheduled to be installed, but this is not possible because of "
 "dependency problems."
 msgstr "無法安裝排定的 %s，發生相依性問題。"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:157
+#: zypp/solver/detail/ResolverInfoMisc.cc:167
 #, c-format
 msgid ""
 "Can't install %s since it is already marked as needing to be uninstalled"
 msgstr "無法安裝 %s，已經標示為待解除安裝"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:169
+#: zypp/solver/detail/ResolverInfoMisc.cc:179
 #, c-format
 msgid "Can't install %s since it is does not apply to this system."
 msgstr "無法安裝 %s，因為它沒有套用到此系統。"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:180
+#: zypp/solver/detail/ResolverInfoMisc.cc:190
 #, c-format
 msgid "Can't install %s, since %s is already marked as needing to be installed"
 msgstr "無法安裝 %s，因為 %s 已經標示為必須安裝"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:188
+#: zypp/solver/detail/ResolverInfoMisc.cc:198
 #, c-format
 msgid "This would invalidate %s."
 msgstr "這將會導致 %s 無效。"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:204
+#: zypp/solver/detail/ResolverInfoMisc.cc:214
 #, c-format
 msgid "Establishing %s"
 msgstr "正在建立 %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:225
+#: zypp/solver/detail/ResolverInfoMisc.cc:235
 #, c-format
 msgid "Installing %s"
 msgstr "正在安裝 %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:242
+#: zypp/solver/detail/ResolverInfoMisc.cc:252
 #, c-format
 msgid "Updating %s to %s"
 msgstr "正在將 %s 更新為 %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:260
+#: zypp/solver/detail/ResolverInfoMisc.cc:270
 #, c-format
 msgid "Skipping %s: already installed"
 msgstr "正在跳過 %s：已安裝"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:282
+#: zypp/solver/detail/ResolverInfoMisc.cc:292
 #, c-format
 msgid "There are no alternative installed providers of %s"
 msgstr "沒有 %s 的其他安裝提供者"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:288
-#: zypp/solver/detail/ResolverInfoMisc.cc:313
+#: zypp/solver/detail/ResolverInfoMisc.cc:298
+#: zypp/solver/detail/ResolverInfoMisc.cc:323
 #, c-format
 msgid "for %s"
 msgstr "適用於 %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:307
+#: zypp/solver/detail/ResolverInfoMisc.cc:317
 #, c-format
 msgid "There are no installable providers of %s"
 msgstr "沒有 %s 的可安裝提供者"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:330
+#: zypp/solver/detail/ResolverInfoMisc.cc:340
 #, c-format
 msgid "Upgrade to %s to avoid removing %s is not possible."
 msgstr "無法在升級至 %s 時，避免移除 %s。"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:346
+#: zypp/solver/detail/ResolverInfoMisc.cc:356
 #, c-format
 msgid "%s provides %s, but is scheduled to be uninstalled."
 msgstr "已經排定解除安裝 %s 提供的 %s。"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:362
+#: zypp/solver/detail/ResolverInfoMisc.cc:372
 #, c-format
 msgid "%s provides %s, but another version of that %s is already installed."
 msgstr "%s 會提供 %s，但已安裝 %s 的其他版本。"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:379
+#: zypp/solver/detail/ResolverInfoMisc.cc:389
 #, c-format
 msgid ""
 "%s provides %s, but it is uninstallable.  Try installing it on its own for "
 "more details."
 msgstr "無法安裝 %s 提供的 %s。 嘗試自行安裝，瞭解更多的資訊。"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:395
+#: zypp/solver/detail/ResolverInfoMisc.cc:405
 #, c-format
 msgid "%s provides %s, but it is locked."
 msgstr "%s 提供的 %s  被鎖定。"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:411
+#: zypp/solver/detail/ResolverInfoMisc.cc:421
 #, c-format
 msgid "Can't satisfy requirement %s for %s"
 msgstr "無法滿足對 %s的 %s 需求"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:432
+#: zypp/solver/detail/ResolverInfoMisc.cc:442
 #, c-format
 msgid ""
 "%s is required by other to-be-installed resolvable, so it won't be unlinked."
 msgstr "其他準備安裝的可解析檔需要 %s，因此不會解除它的連結。"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:449
+#: zypp/solver/detail/ResolverInfoMisc.cc:459
 #, c-format
 msgid "%s is required by other installed resolvable, so it won't be unlinked."
 msgstr "其他安裝的可解析需要 %s，無法取消連結。"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:466
+#: zypp/solver/detail/ResolverInfoMisc.cc:476
 #, c-format
 msgid "%s is locked and cannot be uninstalled."
 msgstr "已鎖住 %s，您無法解除安裝。"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:485
+#: zypp/solver/detail/ResolverInfoMisc.cc:495
 #, c-format
 msgid "A conflict over %s (%s) requires the removal of to-be-installed %s"
 msgstr "%s (%s) 發生衝突，必須移除準備安裝的 %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:503
+#: zypp/solver/detail/ResolverInfoMisc.cc:513
 #, c-format
 msgid "Marking %s as uninstallable due to conflicts over %s"
 msgstr "因為發生 %s 衝突，導致無法將 %s 標示為無法安裝"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:511
+#: zypp/solver/detail/ResolverInfoMisc.cc:521
 #, c-format
 msgid "from %s"
 msgstr "自 %s"
@@ -2447,7 +2467,7 @@ msgstr ""
 
 #: zypp/solver/detail/ProblemSolutionKeep.cc:67
 #, fuzzy
-msgid "Keep missing resolvables"
+msgid "Keep resolvables"
 msgstr "正在安裝缺少的可解析檔"
 
 #: zypp/solver/detail/ProblemSolutionInstall.cc:53

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.bg\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2006-02-18 17:25+0100\n"
+"POT-Creation-Date: 2006-02-27 12:42+0100\n"
 "PO-Revision-Date: 2006-02-20 13:13+0100\n"
 "Last-Translator: Borislav Mitev <morbid_viper@tkzs.org>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
@@ -2021,17 +2021,17 @@ msgstr "Зулу"
 msgid "Zuni"
 msgstr "Зуни"
 
-#: zypp/target/rpm/RpmDb.cc:1656
+#: zypp/target/rpm/RpmDb.cc:1718
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Променени файлове с настройки за %s:"
 
-#: zypp/target/rpm/RpmDb.cc:1807
+#: zypp/target/rpm/RpmDb.cc:1869
 #, c-format
 msgid "rpm saved %s as %s but it was impossible to determine the difference"
 msgstr "rpm запази %s като %s, но е невъзможно да се открие разликата"
 
-#: zypp/target/rpm/RpmDb.cc:1809
+#: zypp/target/rpm/RpmDb.cc:1871
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -2040,12 +2040,12 @@ msgstr ""
 "rpm запази %s като %s.\n"
 "Ето първите 25 реда от разликите:\n"
 
-#: zypp/target/rpm/RpmDb.cc:1812
+#: zypp/target/rpm/RpmDb.cc:1874
 #, c-format
 msgid "rpm created %s as %s but it was impossible to determine the difference"
 msgstr "rpm създаде %s като %s, но е невъзможно да се открие разликата"
 
-#: zypp/target/rpm/RpmDb.cc:1814
+#: zypp/target/rpm/RpmDb.cc:1876
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -2054,72 +2054,72 @@ msgstr ""
 "rpm създаде %s като %s.\n"
 "Ето първите 25 реда от разликите:\n"
 
-#: zypp/target/rpm/RpmDb.cc:1819
+#: zypp/target/rpm/RpmDb.cc:1881
 #, c-format
 msgid "%s install failed"
 msgstr "Инсталирането на %s бе неуспешно"
 
-#: zypp/target/rpm/RpmDb.cc:1820 zypp/target/rpm/RpmDb.cc:1926
+#: zypp/target/rpm/RpmDb.cc:1882 zypp/target/rpm/RpmDb.cc:1988
 msgid "rpm output:"
 msgstr "Изход от rpm:"
 
-#: zypp/target/rpm/RpmDb.cc:1824
+#: zypp/target/rpm/RpmDb.cc:1886
 #, c-format
 msgid "%s installed ok"
 msgstr "Инсталирането на %s бе успешно"
 
-#: zypp/target/rpm/RpmDb.cc:1826 zypp/target/rpm/RpmDb.cc:1931
+#: zypp/target/rpm/RpmDb.cc:1888 zypp/target/rpm/RpmDb.cc:1993
 msgid "Additional rpm output:"
 msgstr "Допълнителен изход от rpm:"
 
-#: zypp/target/rpm/RpmDb.cc:1925
+#: zypp/target/rpm/RpmDb.cc:1987
 #, c-format
 msgid "%s remove failed"
 msgstr "Премахването на %s бе неуспешно"
 
-#: zypp/target/rpm/RpmDb.cc:1929
+#: zypp/target/rpm/RpmDb.cc:1991
 #, c-format
 msgid "%s remove ok"
 msgstr "Премахването на %s бе успешно"
 
-#: zypp/target/rpm/RpmDb.cc:1945
+#: zypp/target/rpm/RpmDb.cc:2007
 msgid "Ok"
 msgstr "Добре"
 
-#: zypp/target/rpm/RpmDb.cc:1948
+#: zypp/target/rpm/RpmDb.cc:2010
 msgid "The package is not OK for the following reasons:"
 msgstr "Пакетът не е наред поради следните причини:"
 
-#: zypp/target/rpm/RpmDb.cc:1954
+#: zypp/target/rpm/RpmDb.cc:2016
 msgid "The package contains different version than expected"
 msgstr "Пакетът съдържа различна от очакваната версия"
 
-#: zypp/target/rpm/RpmDb.cc:1960
+#: zypp/target/rpm/RpmDb.cc:2022
 msgid "The package file has incorrect MD5 sum"
 msgstr "Файлът на пакета има некоректна MD5 сума"
 
-#: zypp/target/rpm/RpmDb.cc:1966
+#: zypp/target/rpm/RpmDb.cc:2028
 msgid "The package is not signed"
 msgstr "Пакетът не е подписан"
 
-#: zypp/target/rpm/RpmDb.cc:1972
+#: zypp/target/rpm/RpmDb.cc:2034
 msgid "The package has no MD5 sum"
 msgstr "Пакетът няма MD5 сума"
 
-#: zypp/target/rpm/RpmDb.cc:1978
+#: zypp/target/rpm/RpmDb.cc:2040
 msgid "The package has incorrect signature"
 msgstr "Пакетът има невалидна сигнатура."
 
-#: zypp/target/rpm/RpmDb.cc:1984
+#: zypp/target/rpm/RpmDb.cc:2046
 msgid "The package archive has incorrect MD5 sum"
 msgstr "Архивът с пакетите има некоректна MD5 сума"
 
-#: zypp/target/rpm/RpmDb.cc:1990
+#: zypp/target/rpm/RpmDb.cc:2052
 msgid "rpm failed for unkown reason, see log file"
 msgstr ""
 "rpm завърши с неуспех поради неизвестна причина, прегледайте файла-дневник"
 
-#: zypp/target/rpm/RpmDb.cc:2134
+#: zypp/target/rpm/RpmDb.cc:2196
 #, c-format
 msgid "created backup %s"
 msgstr "създадено резервно копие %s"
@@ -2134,22 +2134,22 @@ msgstr "%s е заменен от %s"
 msgid "%s replaced by %s"
 msgstr "%s е заменен от %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:172
+#: zypp/solver/detail/Resolver_problems.cc:189
 msgid "Invalid information"
 msgstr "Невалидна информация"
 
-#: zypp/solver/detail/Resolver_problems.cc:179
+#: zypp/solver/detail/Resolver_problems.cc:196
 #, c-format
 msgid "%s is needed by other resolvables"
 msgstr "%s е необходим на друг пакет"
 
-#: zypp/solver/detail/Resolver_problems.cc:182
+#: zypp/solver/detail/Resolver_problems.cc:199
 #: zypp/solver/detail/ResolverInfoNeededBy.cc:56
 #, c-format
 msgid "%s is needed by %s"
 msgstr "%s е необходим на %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:183
+#: zypp/solver/detail/Resolver_problems.cc:200
 #, c-format
 msgid ""
 "%s is needed by:\n"
@@ -2158,19 +2158,19 @@ msgstr ""
 "%s е необходим на:\n"
 "%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:190
+#: zypp/solver/detail/Resolver_problems.cc:207
 #, c-format
 msgid "%s conflicts with other resolvables"
 msgstr "%s е в конфликт с други пакети"
 
-#: zypp/solver/detail/Resolver_problems.cc:193
+#: zypp/solver/detail/Resolver_problems.cc:210
 #: zypp/solver/detail/ResolverInfoConflictsWith.cc:55
 #: zypp/solver/detail/ResolverInfoConflictsWith.cc:70
 #, c-format
 msgid "%s conflicts with %s"
 msgstr "%s е в конфликт с %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:194
+#: zypp/solver/detail/Resolver_problems.cc:211
 #, c-format
 msgid ""
 "%s conflicts with:\n"
@@ -2179,22 +2179,22 @@ msgstr ""
 "%s е в конфликт с:\n"
 "%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:201
+#: zypp/solver/detail/Resolver_problems.cc:218
 #, c-format
 msgid "%s obsoletes other resolvables"
 msgstr "%s прави ненужни други пакети"
 
-#: zypp/solver/detail/Resolver_problems.cc:204
+#: zypp/solver/detail/Resolver_problems.cc:221
 #, c-format
 msgid "%s obsoletes %s"
 msgstr "%s прави ненужно %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:206
+#: zypp/solver/detail/Resolver_problems.cc:223
 #, c-format
 msgid "%s obsoletes:%s"
 msgstr "%s прави ненужно: %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:207
+#: zypp/solver/detail/Resolver_problems.cc:224
 msgid ""
 "\n"
 "These resolvables will be deleted from the system."
@@ -2202,37 +2202,37 @@ msgstr ""
 "\n"
 "Тези пакети ще бъдат изтрити от системата."
 
-#: zypp/solver/detail/Resolver_problems.cc:214
+#: zypp/solver/detail/Resolver_problems.cc:231
 #, c-format
 msgid "%s depends on other resolvables"
 msgstr "%s зависи от други пакети"
 
-#: zypp/solver/detail/Resolver_problems.cc:218
+#: zypp/solver/detail/Resolver_problems.cc:235
 #, c-format
 msgid "%s depends on %s"
 msgstr "%s зависи от %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:221
+#: zypp/solver/detail/Resolver_problems.cc:238
 #, c-format
 msgid "%s depends on:%s"
 msgstr "%s зависи от: %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:227
+#: zypp/solver/detail/Resolver_problems.cc:244
 msgid "Child of"
 msgstr "Дете на"
 
-#: zypp/solver/detail/Resolver_problems.cc:233
-#: zypp/solver/detail/Resolver_problems.cc:296
+#: zypp/solver/detail/Resolver_problems.cc:250
+#: zypp/solver/detail/Resolver_problems.cc:313
 #, c-format
 msgid "Cannot install %s"
 msgstr "%s не може да бъде инсталиран"
 
-#: zypp/solver/detail/Resolver_problems.cc:235
+#: zypp/solver/detail/Resolver_problems.cc:252
 #, c-format
 msgid "None provides %s"
 msgstr "Никой не доставя %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:236
+#: zypp/solver/detail/Resolver_problems.cc:253
 msgid ""
 "\n"
 "There is no resource available which support this requirement."
@@ -2240,7 +2240,7 @@ msgstr ""
 "\n"
 "Няма наличен ресурс за поддръжката на това изискване."
 
-#: zypp/solver/detail/Resolver_problems.cc:244
+#: zypp/solver/detail/Resolver_problems.cc:261
 msgid ""
 "Due problems which are described above/below this resolution will not solve "
 "all dependencies"
@@ -2248,63 +2248,68 @@ msgstr ""
 "Поради проблемите, които са показани по-долу/горе сега няма да могат да "
 "сеудовлетворят всички зависимости."
 
-#: zypp/solver/detail/Resolver_problems.cc:252
+#: zypp/solver/detail/Resolver_problems.cc:269
 #, c-format
 msgid "%s is not installed and has been marked as uninstallable"
 msgstr "%s не е инсталиран и не може да бъде маркиран за деинсталиране."
 
-#: zypp/solver/detail/Resolver_problems.cc:262
+#: zypp/solver/detail/Resolver_problems.cc:279
 #, c-format
 msgid "Cannot install %s due dependency problems"
 msgstr "%s не може да бъде инсталиран поради пробем със зависимостите"
 
-#: zypp/solver/detail/Resolver_problems.cc:311
+#: zypp/solver/detail/Resolver_problems.cc:328
 #, c-format
 msgid "%s has unfulfiled requirements"
 msgstr "%s има незадоволени изискания"
 
-#: zypp/solver/detail/Resolver_problems.cc:349
+#: zypp/solver/detail/Resolver_problems.cc:366
 #, fuzzy, c-format
 msgid "%s has missing dependencies"
 msgstr "%s не може да бъде инсталиран поради липсващи зависимости"
 
-#: zypp/solver/detail/Resolver_problems.cc:387
+#: zypp/solver/detail/Resolver_problems.cc:404
 #, c-format
 msgid "%s cannot be installed due missing dependencies"
 msgstr "%s не може да бъде инсталиран поради липсващи зависимости"
 
-#: zypp/solver/detail/Resolver_problems.cc:409
+#: zypp/solver/detail/Resolver_problems.cc:434
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
 msgstr "%s задоволява зависимостите на %s, но ще бъде деинсталиран"
 
-#: zypp/solver/detail/Resolver_problems.cc:419
+#: zypp/solver/detail/Resolver_problems.cc:444
 #, c-format
 msgid "No need to install %s"
 msgstr "Няма нужда от инсталиране на %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:427
+#: zypp/solver/detail/Resolver_problems.cc:452
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "%s не може да бъде инсталиран за задоволяване на зависимостите на %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:437
+#: zypp/solver/detail/Resolver_problems.cc:462
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
 msgstr "%s не може да бъде инсталиран за задоволяване на зависимостите на %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:461
-#: zypp/solver/detail/Resolver_problems.cc:469
+#: zypp/solver/detail/Resolver_problems.cc:499
+#: zypp/solver/detail/Resolver_problems.cc:507
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
 msgstr "%s няма да бъде деинсталиран, защото все още е необходим"
 
-#: zypp/solver/detail/Resolver_problems.cc:489
+#: zypp/solver/detail/Resolver_problems.cc:518
+#, c-format
+msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
+msgstr ""
+
+#: zypp/solver/detail/Resolver_problems.cc:542
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
 msgstr "%s не може да бъде инсталиран, защото е в конфликт с %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:509
+#: zypp/solver/detail/Resolver_problems.cc:562
 #, c-format
 msgid "%s is uninstallable due conflicts with %s"
 msgstr "%s е деинсталируем поради конфликта с %s"
@@ -2324,28 +2329,39 @@ msgstr "Пренебрегване на тези изисквания"
 msgid "Ignore this conflict of %s"
 msgstr "Пренебрегване на конфликта на %s"
 
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:86
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:89
+#, fuzzy, c-format
+msgid "Ignore the obsolete %s in %s"
+msgstr "Пренебрегване на конфликта на %s"
+
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:100
 #, fuzzy
-msgid "Ignore architecture"
+msgid "ignore architecture"
 msgstr "Архитектура"
 
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:96
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:110
 #, c-format
 msgid "Ignore that %s is already set to install"
 msgstr ""
 
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:52
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:56
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:54
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:63
 #, fuzzy, c-format
 msgid "delete %s"
 msgstr "Изтриване на %1"
 
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:65
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:57
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:66
+#, fuzzy, c-format
+msgid "do not install %s"
+msgstr "%s не може да бъде инсталиран"
+
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:76
 #, fuzzy
-msgid "Delete conflicting resolvables"
+msgid "Do not install or delete concerning resolvables"
 msgstr "Премахване на конфликтните пакети"
 
-#: zypp/solver/detail/QueueItemRequire.cc:461
+#: zypp/solver/detail/QueueItemRequire.cc:456
 #, c-format
 msgid "for requiring %s for %s when upgrading %s"
 msgstr "за изисканото %s за %s, когато се обновява %s"
@@ -2359,56 +2375,60 @@ msgstr "%s липсва изискания %s"
 msgid ", Action: "
 msgstr ", Действие:"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:59
+#: zypp/solver/detail/ResolverInfoMisc.cc:58
 msgid ", Trigger: "
 msgstr ", задействане при:"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:84
+#: zypp/solver/detail/ResolverInfoMisc.cc:90
 msgid "package"
 msgstr "пакет"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:88
+#: zypp/solver/detail/ResolverInfoMisc.cc:94
 msgid "selection"
 msgstr "подбор"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:92
+#: zypp/solver/detail/ResolverInfoMisc.cc:98
 msgid "pattern"
 msgstr "шаблон"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:96
+#: zypp/solver/detail/ResolverInfoMisc.cc:102
 msgid "product"
 msgstr "продукт"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:100
+#: zypp/solver/detail/ResolverInfoMisc.cc:106
 msgid "patch"
 msgstr "кръпка"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:104
+#: zypp/solver/detail/ResolverInfoMisc.cc:110
 msgid "script"
 msgstr "скрипт"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:108
+#: zypp/solver/detail/ResolverInfoMisc.cc:114
 msgid "message"
 msgstr "съобщение"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:112
+#: zypp/solver/detail/ResolverInfoMisc.cc:118
+msgid "atom"
+msgstr ""
+
+#: zypp/solver/detail/ResolverInfoMisc.cc:122
 msgid "system"
 msgstr "система"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:116
+#: zypp/solver/detail/ResolverInfoMisc.cc:126
 msgid "Resolvable"
 msgstr "Пакет"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:134
+#: zypp/solver/detail/ResolverInfoMisc.cc:144
 msgid "Marking this resolution attempt as invalid."
 msgstr "Маркиране на този опит за разрешаване като невалиден."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:141
+#: zypp/solver/detail/ResolverInfoMisc.cc:151
 #, c-format
 msgid "Marking resolvable %s as uninstallable"
 msgstr "Маркиране на пакета %s като деинсталируем"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:149
+#: zypp/solver/detail/ResolverInfoMisc.cc:159
 #, c-format
 msgid ""
 "%s is scheduled to be installed, but this is not possible because of "
@@ -2417,80 +2437,80 @@ msgstr ""
 "%s е подготвен за инсталиране, но това не е възможно заради проблеми със "
 "зависимости."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:157
+#: zypp/solver/detail/ResolverInfoMisc.cc:167
 #, c-format
 msgid ""
 "Can't install %s since it is already marked as needing to be uninstalled"
 msgstr "Не може да се инсталира %s след като вече е маркиран за деинсталиране"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:169
+#: zypp/solver/detail/ResolverInfoMisc.cc:179
 #, c-format
 msgid "Can't install %s since it is does not apply to this system."
 msgstr ""
 "%s не може да се инсталира след като вече не е приложим за тази система."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:180
+#: zypp/solver/detail/ResolverInfoMisc.cc:190
 #, fuzzy, c-format
 msgid "Can't install %s, since %s is already marked as needing to be installed"
 msgstr "Не може да се инсталира %s след като вече е маркиран за деинсталиране"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:188
+#: zypp/solver/detail/ResolverInfoMisc.cc:198
 #, c-format
 msgid "This would invalidate %s."
 msgstr "Това ще направи невалиден %s."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:204
+#: zypp/solver/detail/ResolverInfoMisc.cc:214
 #, c-format
 msgid "Establishing %s"
 msgstr "Откриване на %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:225
+#: zypp/solver/detail/ResolverInfoMisc.cc:235
 #, c-format
 msgid "Installing %s"
 msgstr "Инсталиране на %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:242
+#: zypp/solver/detail/ResolverInfoMisc.cc:252
 #, c-format
 msgid "Updating %s to %s"
 msgstr "Обновяване на %s към %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:260
+#: zypp/solver/detail/ResolverInfoMisc.cc:270
 #, c-format
 msgid "Skipping %s: already installed"
 msgstr "Пропускане на %s: вече е инсталиран"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:282
+#: zypp/solver/detail/ResolverInfoMisc.cc:292
 #, c-format
 msgid "There are no alternative installed providers of %s"
 msgstr "Няма инсталирани алтернативни доставчици на %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:288
-#: zypp/solver/detail/ResolverInfoMisc.cc:313
+#: zypp/solver/detail/ResolverInfoMisc.cc:298
+#: zypp/solver/detail/ResolverInfoMisc.cc:323
 #, c-format
 msgid "for %s"
 msgstr "за %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:307
+#: zypp/solver/detail/ResolverInfoMisc.cc:317
 #, c-format
 msgid "There are no installable providers of %s"
 msgstr "Няма инсталируеми доставчици на %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:330
+#: zypp/solver/detail/ResolverInfoMisc.cc:340
 #, c-format
 msgid "Upgrade to %s to avoid removing %s is not possible."
 msgstr "Не е възможно обновяването към %s за да се избегне премахването на %s."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:346
+#: zypp/solver/detail/ResolverInfoMisc.cc:356
 #, c-format
 msgid "%s provides %s, but is scheduled to be uninstalled."
 msgstr "%s доставя %s, но е планирано за деинсталиране."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:362
+#: zypp/solver/detail/ResolverInfoMisc.cc:372
 #, c-format
 msgid "%s provides %s, but another version of that %s is already installed."
 msgstr "%s доставя %s, но друга версия на %s вече е инсталирана."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:379
+#: zypp/solver/detail/ResolverInfoMisc.cc:389
 #, c-format
 msgid ""
 "%s provides %s, but it is uninstallable.  Try installing it on its own for "
@@ -2499,17 +2519,17 @@ msgstr ""
 "%s доставя %s, но е деинсталируем. Опитайте да го инсталирате ръчно за "
 "повече подробности."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:395
+#: zypp/solver/detail/ResolverInfoMisc.cc:405
 #, c-format
 msgid "%s provides %s, but it is locked."
 msgstr "%s доставя %s, но е заключен."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:411
+#: zypp/solver/detail/ResolverInfoMisc.cc:421
 #, c-format
 msgid "Can't satisfy requirement %s for %s"
 msgstr "Не могат да се удовлетворят изискванията на %s за %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:432
+#: zypp/solver/detail/ResolverInfoMisc.cc:442
 #, c-format
 msgid ""
 "%s is required by other to-be-installed resolvable, so it won't be unlinked."
@@ -2517,29 +2537,29 @@ msgstr ""
 "%s се изисква от друг, маркиран за инсталиране пакет и няма да бъде "
 "премахнат."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:449
+#: zypp/solver/detail/ResolverInfoMisc.cc:459
 #, c-format
 msgid "%s is required by other installed resolvable, so it won't be unlinked."
 msgstr "%s се изисква от друг инсталиран пакет и няма да бъде премахнат."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:466
+#: zypp/solver/detail/ResolverInfoMisc.cc:476
 #, c-format
 msgid "%s is locked and cannot be uninstalled."
 msgstr "%s е заключен и не може да бъде деинсталиран."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:485
+#: zypp/solver/detail/ResolverInfoMisc.cc:495
 #, c-format
 msgid "A conflict over %s (%s) requires the removal of to-be-installed %s"
 msgstr ""
 "Конфликтът с %s (%s) изисква премахването на %s, което е било подготвено за "
 "инсталиране"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:503
+#: zypp/solver/detail/ResolverInfoMisc.cc:513
 #, c-format
 msgid "Marking %s as uninstallable due to conflicts over %s"
 msgstr "Маркиране на %s като деинсталируем поради конфликта с %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:511
+#: zypp/solver/detail/ResolverInfoMisc.cc:521
 #, c-format
 msgid "from %s"
 msgstr "от %s"
@@ -2560,7 +2580,7 @@ msgstr ""
 
 #: zypp/solver/detail/ProblemSolutionKeep.cc:67
 #, fuzzy
-msgid "Keep missing resolvables"
+msgid "Keep resolvables"
 msgstr "Инсталиране на липсващите пакети"
 
 #: zypp/solver/detail/ProblemSolutionInstall.cc:53

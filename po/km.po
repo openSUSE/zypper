@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.km\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2006-02-18 17:25+0100\n"
+"POT-Creation-Date: 2006-02-27 12:42+0100\n"
 "PO-Revision-Date: 2006-02-04 10:47+0700\n"
 "Last-Translator: Hok Kakada <hokkakada@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -1949,17 +1949,17 @@ msgstr "ហ្ស៊ូលូ"
 msgid "Zuni"
 msgstr "ហ្ស៊ូនី"
 
-#: zypp/target/rpm/RpmDb.cc:1656
+#: zypp/target/rpm/RpmDb.cc:1718
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "បាន​ប្ដូរ​ឯកសារ​កំណត់​រចនាសម្ព័ន្ធ​សម្រាប់​ %s ៖"
 
-#: zypp/target/rpm/RpmDb.cc:1807
+#: zypp/target/rpm/RpmDb.cc:1869
 #, c-format
 msgid "rpm saved %s as %s but it was impossible to determine the difference"
 msgstr "rpm បាន​រក្សាទុក​ %s ជា %s ប៉ុន្ដែ​វា​មិន​អាច​កំណត់​ភាព​ខុសគ្នា​បាន"
 
-#: zypp/target/rpm/RpmDb.cc:1809
+#: zypp/target/rpm/RpmDb.cc:1871
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -1968,12 +1968,12 @@ msgstr ""
 "rpm បាន​រក្សាទុក​ %s ជា %s ។\n"
 "នេះ​ជា​បន្ទាត់​ខុសគ្នា ២៥ ជួរ​ដំបូង ៖\n"
 
-#: zypp/target/rpm/RpmDb.cc:1812
+#: zypp/target/rpm/RpmDb.cc:1874
 #, c-format
 msgid "rpm created %s as %s but it was impossible to determine the difference"
 msgstr "rpm បាន​បង្កើត​ %s ជា %s ប៉ុន្តែ​វា​មិន​អាច​កំណត់​ភាព​ខុស​គ្នា"
 
-#: zypp/target/rpm/RpmDb.cc:1814
+#: zypp/target/rpm/RpmDb.cc:1876
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -1982,71 +1982,71 @@ msgstr ""
 "rpm បាន​កំណត់ %s ជា %s ។\n"
 "នេះ​ជា​បន្ទាត់​ខុស​គ្នា ២៥ ជួរ​ដំបូង ៖​\n"
 
-#: zypp/target/rpm/RpmDb.cc:1819
+#: zypp/target/rpm/RpmDb.cc:1881
 #, c-format
 msgid "%s install failed"
 msgstr "ការ​ដំឡើង %s បាន​បរាជ័យ"
 
-#: zypp/target/rpm/RpmDb.cc:1820 zypp/target/rpm/RpmDb.cc:1926
+#: zypp/target/rpm/RpmDb.cc:1882 zypp/target/rpm/RpmDb.cc:1988
 msgid "rpm output:"
 msgstr "លទ្ធផល rpm ៖"
 
-#: zypp/target/rpm/RpmDb.cc:1824
+#: zypp/target/rpm/RpmDb.cc:1886
 #, c-format
 msgid "%s installed ok"
 msgstr "បាន​ដំឡើង %s ដោយ​ជោគជ័យ"
 
-#: zypp/target/rpm/RpmDb.cc:1826 zypp/target/rpm/RpmDb.cc:1931
+#: zypp/target/rpm/RpmDb.cc:1888 zypp/target/rpm/RpmDb.cc:1993
 msgid "Additional rpm output:"
 msgstr "លទ្ធផល​ rpm បន្ថែម​ទៀត ៖"
 
-#: zypp/target/rpm/RpmDb.cc:1925
+#: zypp/target/rpm/RpmDb.cc:1987
 #, c-format
 msgid "%s remove failed"
 msgstr "ការ​យក %s ចេញ​បាន​បរាជ័យ"
 
-#: zypp/target/rpm/RpmDb.cc:1929
+#: zypp/target/rpm/RpmDb.cc:1991
 #, c-format
 msgid "%s remove ok"
 msgstr "បាន​យក %s ចេញ​ដោយ​ជោគជ័យ"
 
-#: zypp/target/rpm/RpmDb.cc:1945
+#: zypp/target/rpm/RpmDb.cc:2007
 msgid "Ok"
 msgstr "យល់ព្រម"
 
-#: zypp/target/rpm/RpmDb.cc:1948
+#: zypp/target/rpm/RpmDb.cc:2010
 msgid "The package is not OK for the following reasons:"
 msgstr "កញ្ចប់​មិន​យល់ព្រម​នឹង​ហេតុផល​ខាងក្រោម​នេះ ៖"
 
-#: zypp/target/rpm/RpmDb.cc:1954
+#: zypp/target/rpm/RpmDb.cc:2016
 msgid "The package contains different version than expected"
 msgstr "កញ្ចប់​មាន​កំណែ​ខុស​គ្នា​មិន​ដូច​ការ​ដែល​រំពឹង​គិត"
 
-#: zypp/target/rpm/RpmDb.cc:1960
+#: zypp/target/rpm/RpmDb.cc:2022
 msgid "The package file has incorrect MD5 sum"
 msgstr "ឯកសារកញ្ចប់​មាន​ MD5 sum មិន​ត្រឹមត្រូវ"
 
-#: zypp/target/rpm/RpmDb.cc:1966
+#: zypp/target/rpm/RpmDb.cc:2028
 msgid "The package is not signed"
 msgstr "កញ្ចប់​មិន​ត្រូវ​បាន​ចុះហត្ថលេខា"
 
-#: zypp/target/rpm/RpmDb.cc:1972
+#: zypp/target/rpm/RpmDb.cc:2034
 msgid "The package has no MD5 sum"
 msgstr "កញ្ចប់​មិន​មាន​ MD5 sum"
 
-#: zypp/target/rpm/RpmDb.cc:1978
+#: zypp/target/rpm/RpmDb.cc:2040
 msgid "The package has incorrect signature"
 msgstr "កញ្ចប់​មិន​មាន​ហត្ថលេខា​ត្រឹមត្រូវ"
 
-#: zypp/target/rpm/RpmDb.cc:1984
+#: zypp/target/rpm/RpmDb.cc:2046
 msgid "The package archive has incorrect MD5 sum"
 msgstr "ប័ណ្ណសារ​កញ្ចប់​មាន​ MD5 sum មិន​ត្រឹមត្រូវ"
 
-#: zypp/target/rpm/RpmDb.cc:1990
+#: zypp/target/rpm/RpmDb.cc:2052
 msgid "rpm failed for unkown reason, see log file"
 msgstr "rpm បាន​បរាជ័យ​ដោយមិន​ដឹង​ហេតុផល សូម​មើល​ឯកសារ​កំណត់​ហេតុ​"
 
-#: zypp/target/rpm/RpmDb.cc:2134
+#: zypp/target/rpm/RpmDb.cc:2196
 #, c-format
 msgid "created backup %s"
 msgstr "បាន​បង្កើត​ព័ត៌មាន​បម្រុង​ %s"
@@ -2061,22 +2061,22 @@ msgstr "%s ត្រូវ​ជំនួស​ដោយ %s"
 msgid "%s replaced by %s"
 msgstr "%s ត្រូវ​ជំនួស​ដោយ %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:172
+#: zypp/solver/detail/Resolver_problems.cc:189
 msgid "Invalid information"
 msgstr "ព័ត៌មាន​មិន​ត្រឹមត្រូវ"
 
-#: zypp/solver/detail/Resolver_problems.cc:179
+#: zypp/solver/detail/Resolver_problems.cc:196
 #, c-format
 msgid "%s is needed by other resolvables"
 msgstr "%s ត្រូវការ​ដោយ​កញ្ចប់​អាស្រ័យ​ផ្សេងៗ"
 
-#: zypp/solver/detail/Resolver_problems.cc:182
+#: zypp/solver/detail/Resolver_problems.cc:199
 #: zypp/solver/detail/ResolverInfoNeededBy.cc:56
 #, c-format
 msgid "%s is needed by %s"
 msgstr "%s ត្រូវការ​ដោយ %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:183
+#: zypp/solver/detail/Resolver_problems.cc:200
 #, c-format
 msgid ""
 "%s is needed by:\n"
@@ -2085,19 +2085,19 @@ msgstr ""
 "%s ត្រូវ​ការ​ដោយ ៖\n"
 "%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:190
+#: zypp/solver/detail/Resolver_problems.cc:207
 #, c-format
 msgid "%s conflicts with other resolvables"
 msgstr "%s ប៉ះទង្គិច​ជាមួយ​កញ្ចប់​អាស្រ័យ​ផ្សេងៗ"
 
-#: zypp/solver/detail/Resolver_problems.cc:193
+#: zypp/solver/detail/Resolver_problems.cc:210
 #: zypp/solver/detail/ResolverInfoConflictsWith.cc:55
 #: zypp/solver/detail/ResolverInfoConflictsWith.cc:70
 #, c-format
 msgid "%s conflicts with %s"
 msgstr "%s ប៉ះ​ទង្គិច​ជាមួយ %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:194
+#: zypp/solver/detail/Resolver_problems.cc:211
 #, c-format
 msgid ""
 "%s conflicts with:\n"
@@ -2106,22 +2106,22 @@ msgstr ""
 "%s ប៉ះ​ទង្គិច​ជាមួយ ៖\n"
 "%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:201
+#: zypp/solver/detail/Resolver_problems.cc:218
 #, c-format
 msgid "%s obsoletes other resolvables"
 msgstr "%s លែង​ប្រើ​កញ្ចប់​អាស្រ័យ​ផ្សេងៗ"
 
-#: zypp/solver/detail/Resolver_problems.cc:204
+#: zypp/solver/detail/Resolver_problems.cc:221
 #, c-format
 msgid "%s obsoletes %s"
 msgstr "%s លែង​ប្រើ %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:206
+#: zypp/solver/detail/Resolver_problems.cc:223
 #, c-format
 msgid "%s obsoletes:%s"
 msgstr "%s លែង​ប្រើ  ៖ %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:207
+#: zypp/solver/detail/Resolver_problems.cc:224
 msgid ""
 "\n"
 "These resolvables will be deleted from the system."
@@ -2129,37 +2129,37 @@ msgstr ""
 "\n"
 "កញ្ចប់​អាស្រ័យ​ទាំងនេះ​នឹង​ត្រូវ​បាន​លុប​ចេញ​ពី​ប្រព័ន្ធ ។"
 
-#: zypp/solver/detail/Resolver_problems.cc:214
+#: zypp/solver/detail/Resolver_problems.cc:231
 #, c-format
 msgid "%s depends on other resolvables"
 msgstr "%s ផ្អែក​លើ​កញ្ចប់​អាស្រ័យ​ផ្សេងៗ"
 
-#: zypp/solver/detail/Resolver_problems.cc:218
+#: zypp/solver/detail/Resolver_problems.cc:235
 #, c-format
 msgid "%s depends on %s"
 msgstr "%s ផ្អែកលើ %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:221
+#: zypp/solver/detail/Resolver_problems.cc:238
 #, c-format
 msgid "%s depends on:%s"
 msgstr "%s ផ្អែកលើ ៖ %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:227
+#: zypp/solver/detail/Resolver_problems.cc:244
 msgid "Child of"
 msgstr "កូន​របស់"
 
-#: zypp/solver/detail/Resolver_problems.cc:233
-#: zypp/solver/detail/Resolver_problems.cc:296
+#: zypp/solver/detail/Resolver_problems.cc:250
+#: zypp/solver/detail/Resolver_problems.cc:313
 #, c-format
 msgid "Cannot install %s"
 msgstr "មិន​អាច​ដំឡើង​ %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:235
+#: zypp/solver/detail/Resolver_problems.cc:252
 #, c-format
 msgid "None provides %s"
 msgstr "គ្មាន​កញ្ចប់​ណា​ផ្ដល់​ %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:236
+#: zypp/solver/detail/Resolver_problems.cc:253
 msgid ""
 "\n"
 "There is no resource available which support this requirement."
@@ -2167,69 +2167,74 @@ msgstr ""
 "\n"
 "មិន​មាន​ធនធាន​ណា​ដែល​គាំទ្រ​តម្រូវការ​នេះ ។"
 
-#: zypp/solver/detail/Resolver_problems.cc:244
+#: zypp/solver/detail/Resolver_problems.cc:261
 msgid ""
 "Due problems which are described above/below this resolution will not solve "
 "all dependencies"
 msgstr "បញ្ហាដែល​បានពណ៌នា​ខាងលើ/ខាងក្រោម​នឹង​មិន​ដោះស្រាយ​បាន​ភាព​អាស្រ័យ​ទាំងអស់​ទេ"
 
-#: zypp/solver/detail/Resolver_problems.cc:252
+#: zypp/solver/detail/Resolver_problems.cc:269
 #, c-format
 msgid "%s is not installed and has been marked as uninstallable"
 msgstr "%s មិន​ត្រូវ​បាន​ដំឡើង និង​ត្រូវ​បាន​សម្គាល់​ជា​មិន​ដំឡើង"
 
-#: zypp/solver/detail/Resolver_problems.cc:262
+#: zypp/solver/detail/Resolver_problems.cc:279
 #, c-format
 msgid "Cannot install %s due dependency problems"
 msgstr "មិន​អាច​ដំឡើង​ %s ដោយសារ​បញ្ហា​ភាព​អាស្រ័យគ្នា"
 
-#: zypp/solver/detail/Resolver_problems.cc:311
+#: zypp/solver/detail/Resolver_problems.cc:328
 #, c-format
 msgid "%s has unfulfiled requirements"
 msgstr "%s មាន​តម្រូវការ​មិន​គ្រប់គ្រាន់"
 
-#: zypp/solver/detail/Resolver_problems.cc:349
+#: zypp/solver/detail/Resolver_problems.cc:366
 #, fuzzy, c-format
 msgid "%s has missing dependencies"
 msgstr "%s មិន​អាច​ដំឡើង ដោយ​សារ​បាត់កញ្ចប់​អាស្រ័យ"
 
-#: zypp/solver/detail/Resolver_problems.cc:387
+#: zypp/solver/detail/Resolver_problems.cc:404
 #, c-format
 msgid "%s cannot be installed due missing dependencies"
 msgstr "%s មិន​អាច​ដំឡើង ដោយ​សារ​បាត់កញ្ចប់​អាស្រ័យ"
 
-#: zypp/solver/detail/Resolver_problems.cc:409
+#: zypp/solver/detail/Resolver_problems.cc:434
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
 msgstr "%s បំពេញ​តាម​ភាព​អាស្រ័យរបស់​ %s ប៉ុន្តែ​នឹង​ត្រូវ​បាន​មិន​ដំឡើងវិញ"
 
-#: zypp/solver/detail/Resolver_problems.cc:419
+#: zypp/solver/detail/Resolver_problems.cc:444
 #, c-format
 msgid "No need to install %s"
 msgstr "មិន​ចាំបាច់​ដំឡើង​ %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:427
+#: zypp/solver/detail/Resolver_problems.cc:452
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "មិន​អាច​ដំឡើង​ %s ដើម្បី​បំពេញ​តាម​ភាព​អាស្រ័យ​នៃ​ %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:437
+#: zypp/solver/detail/Resolver_problems.cc:462
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
 msgstr "មិន​អាច​ដំឡើង​ %s ដើម្បី​បំពេញ​ភាព​អាស្រ័យ​របស់​ %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:461
-#: zypp/solver/detail/Resolver_problems.cc:469
+#: zypp/solver/detail/Resolver_problems.cc:499
+#: zypp/solver/detail/Resolver_problems.cc:507
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
 msgstr "%s នឹង​មិន​ត្រូវ​បាន​មិន​ដំឡើង​វិញ ព្រោះ​គេ​នៅ​តែ​ត្រូវការ​វា"
 
-#: zypp/solver/detail/Resolver_problems.cc:489
+#: zypp/solver/detail/Resolver_problems.cc:518
+#, c-format
+msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
+msgstr ""
+
+#: zypp/solver/detail/Resolver_problems.cc:542
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
 msgstr "មិន​អាច​ដំឡើង​ %s ព្រោះ​វា​កំពុង​ប៉ះ​ទង្គិច​ជាមួយ​ %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:509
+#: zypp/solver/detail/Resolver_problems.cc:562
 #, c-format
 msgid "%s is uninstallable due conflicts with %s"
 msgstr "មិន​អាច​មិន​ដំឡើង %s វិញ​បាន ដោយសារ​ភាពអាស្រ័យ​ជាមួយ %s"
@@ -2249,28 +2254,39 @@ msgstr "មិន​អើពើ​តម្រូវ​ការ​នេះ"
 msgid "Ignore this conflict of %s"
 msgstr "​​មិន​អើពើ​ការ​ប៉ះ​ទង្គិច​​ %s"
 
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:86
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:89
+#, fuzzy, c-format
+msgid "Ignore the obsolete %s in %s"
+msgstr "​​មិន​អើពើ​ការ​ប៉ះ​ទង្គិច​​ %s"
+
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:100
 #, fuzzy
-msgid "Ignore architecture"
+msgid "ignore architecture"
 msgstr "ស្ថាបត្យកម្ម ៖"
 
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:96
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:110
 #, fuzzy, c-format
 msgid "Ignore that %s is already set to install"
 msgstr "ថត %1 មាន​ក្នុង​បញ្ជី​រួច​ហើយ ។"
 
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:52
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:56
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:54
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:63
 #, fuzzy, c-format
 msgid "delete %s"
 msgstr "លុប %1"
 
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:65
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:57
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:66
+#, fuzzy, c-format
+msgid "do not install %s"
+msgstr "មិន​អាច​ដំឡើង​ %s"
+
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:76
 #, fuzzy
-msgid "Delete conflicting resolvables"
+msgid "Do not install or delete concerning resolvables"
 msgstr "កំពុង​យក​កញ្ចប់​អាស្រ័យ​ដែល​ប៉ះ​ទង្គិច​គ្នា​ចេញ"
 
-#: zypp/solver/detail/QueueItemRequire.cc:461
+#: zypp/solver/detail/QueueItemRequire.cc:456
 #, c-format
 msgid "for requiring %s for %s when upgrading %s"
 msgstr "ចំពោះ​តម្រូវការ​ %s សម្រាប់ %s ខណៈពេល​ធ្វើ​ឲ្យ​ %s ទាន់​សម័យ"
@@ -2284,135 +2300,139 @@ msgstr "%s កំពុង​បាត់​តម្រូវការ​ %s"
 msgid ", Action: "
 msgstr ", សកម្មភាព ៖ "
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:59
+#: zypp/solver/detail/ResolverInfoMisc.cc:58
 msgid ", Trigger: "
 msgstr ", គន្លឺះ ៖ "
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:84
+#: zypp/solver/detail/ResolverInfoMisc.cc:90
 msgid "package"
 msgstr "កញ្ចប់"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:88
+#: zypp/solver/detail/ResolverInfoMisc.cc:94
 msgid "selection"
 msgstr "ជម្រើស"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:92
+#: zypp/solver/detail/ResolverInfoMisc.cc:98
 msgid "pattern"
 msgstr "លំនាំ"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:96
+#: zypp/solver/detail/ResolverInfoMisc.cc:102
 msgid "product"
 msgstr "ផលិតផល"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:100
+#: zypp/solver/detail/ResolverInfoMisc.cc:106
 msgid "patch"
 msgstr "បំណះ"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:104
+#: zypp/solver/detail/ResolverInfoMisc.cc:110
 msgid "script"
 msgstr "ស្គ្រីប"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:108
+#: zypp/solver/detail/ResolverInfoMisc.cc:114
 msgid "message"
 msgstr "សារ"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:112
+#: zypp/solver/detail/ResolverInfoMisc.cc:118
+msgid "atom"
+msgstr ""
+
+#: zypp/solver/detail/ResolverInfoMisc.cc:122
 msgid "system"
 msgstr "ប្រព័ន្ធ"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:116
+#: zypp/solver/detail/ResolverInfoMisc.cc:126
 msgid "Resolvable"
 msgstr "ដែល​អាច​ដោះស្រាយ​បាន"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:134
+#: zypp/solver/detail/ResolverInfoMisc.cc:144
 msgid "Marking this resolution attempt as invalid."
 msgstr "សម្គាល់​ការ​ប៉ុងប៉ង​គុណភាពបង្ហាញ​នេះជា មិន​ត្រឹមត្រូវ ។"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:141
+#: zypp/solver/detail/ResolverInfoMisc.cc:151
 #, c-format
 msgid "Marking resolvable %s as uninstallable"
 msgstr "សម្គាល់​​ %s ដែល​អាចដោះស្រាយ​បាន​នេះ ជា​មិន​ដំឡើង​វិញ"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:149
+#: zypp/solver/detail/ResolverInfoMisc.cc:159
 #, c-format
 msgid ""
 "%s is scheduled to be installed, but this is not possible because of "
 "dependency problems."
 msgstr "%s ត្រូវ​បាន​កំណត់​ឲ្យ​ត្រូវ​ដំឡើង ប៉ុន្តែ​មិន​អាច​ដំឡើង​បាន​ដោយសារ​បញ្ហា​ភាព​អាស្រ័យ​គ្នា ។"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:157
+#: zypp/solver/detail/ResolverInfoMisc.cc:167
 #, c-format
 msgid ""
 "Can't install %s since it is already marked as needing to be uninstalled"
 msgstr "មិន​អាច​ដំឡើង​ %s ព្រោះ​វា​បាន​សម្គាល់​ថា​មិន​ចាំបាច់​ដំឡើង"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:169
+#: zypp/solver/detail/ResolverInfoMisc.cc:179
 #, c-format
 msgid "Can't install %s since it is does not apply to this system."
 msgstr "មិន​អាច​ដំឡើង​ %s ព្រោះ​វា​មិន​អាច​អនុវត្ត​បាន​លើ​ប្រព័ន្ធ​នេះ ។​"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:180
+#: zypp/solver/detail/ResolverInfoMisc.cc:190
 #, fuzzy, c-format
 msgid "Can't install %s, since %s is already marked as needing to be installed"
 msgstr "មិន​អាច​ដំឡើង​ %s ព្រោះ​វា​បាន​សម្គាល់​ថា​មិន​ចាំបាច់​ដំឡើង"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:188
+#: zypp/solver/detail/ResolverInfoMisc.cc:198
 #, c-format
 msgid "This would invalidate %s."
 msgstr "នេះ​នឹង​ធ្វើ​ទុព្វលកម្ម​ %s ។"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:204
+#: zypp/solver/detail/ResolverInfoMisc.cc:214
 #, c-format
 msgid "Establishing %s"
 msgstr "កំពុង​ស្ថាបនា​ %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:225
+#: zypp/solver/detail/ResolverInfoMisc.cc:235
 #, c-format
 msgid "Installing %s"
 msgstr "កំពុង​ដំឡើង​ %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:242
+#: zypp/solver/detail/ResolverInfoMisc.cc:252
 #, c-format
 msgid "Updating %s to %s"
 msgstr "កំពុង​ធ្វើ​ឲ្យ​ទាន់​សម័យ​ពី​ %s ទៅ %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:260
+#: zypp/solver/detail/ResolverInfoMisc.cc:270
 #, c-format
 msgid "Skipping %s: already installed"
 msgstr "កំពុង​រំលង​ %s ៖ បាន​ដំឡើង​រួច​ហើយ"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:282
+#: zypp/solver/detail/ResolverInfoMisc.cc:292
 #, c-format
 msgid "There are no alternative installed providers of %s"
 msgstr "មិន​មាន​ជម្រើស​អ្នក​ផ្ដល់​ %s ដែល​បាន​ដំឡើង"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:288
-#: zypp/solver/detail/ResolverInfoMisc.cc:313
+#: zypp/solver/detail/ResolverInfoMisc.cc:298
+#: zypp/solver/detail/ResolverInfoMisc.cc:323
 #, c-format
 msgid "for %s"
 msgstr "សម្រាប់ %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:307
+#: zypp/solver/detail/ResolverInfoMisc.cc:317
 #, c-format
 msgid "There are no installable providers of %s"
 msgstr "មិន​មាន​អ្នក​ផ្ដល់​ %s ដែល​អាច​ដំឡើង​បាន"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:330
+#: zypp/solver/detail/ResolverInfoMisc.cc:340
 #, c-format
 msgid "Upgrade to %s to avoid removing %s is not possible."
 msgstr "ការ​ធ្វើ​ឲ្យ​ទាន់​សម័យ​ទៅ​ %s ដើម្បី​ជៀសវាង​ការ​យក​ %s ចេញ​មិន​អាច​ធ្វើ​បាន ។"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:346
+#: zypp/solver/detail/ResolverInfoMisc.cc:356
 #, c-format
 msgid "%s provides %s, but is scheduled to be uninstalled."
 msgstr "%s ផ្ដល់​ %s ប៉ុន្តែ​ត្រូវ​បាន​កំណត់​ថា​មិន​ដំឡើង​វិញ ។"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:362
+#: zypp/solver/detail/ResolverInfoMisc.cc:372
 #, c-format
 msgid "%s provides %s, but another version of that %s is already installed."
 msgstr "%s ផ្ដល់​ %s ប៉ុន្តែ​កំណែ​មួយ​ផ្សេងរបស់​ %s នោះ​ត្រូវ​បាន​ដំឡើង​រួច​ហើយ ។"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:379
+#: zypp/solver/detail/ResolverInfoMisc.cc:389
 #, c-format
 msgid ""
 "%s provides %s, but it is uninstallable.  Try installing it on its own for "
@@ -2420,46 +2440,46 @@ msgid ""
 msgstr ""
 "%s ផ្ដល់​ %s ប៉ុន្តែ​វា​មិន​អាច​មិន​ដំឡើង​វិញ​បាន ។ ព្យាយាម​ដំឡើង​ដោយ​ផ្ទាល់​សម្រាប់​ព័តមាន​លម្អិតបន្ថែម ។"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:395
+#: zypp/solver/detail/ResolverInfoMisc.cc:405
 #, c-format
 msgid "%s provides %s, but it is locked."
 msgstr "%s ផ្ដល់​ %s ប៉ុន្តែ​វា​ជាប់​សោរ​ហើយ ។"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:411
+#: zypp/solver/detail/ResolverInfoMisc.cc:421
 #, c-format
 msgid "Can't satisfy requirement %s for %s"
 msgstr "មិន​អាច​បំពេញ​តាម​តម្រូវការ​ %s សម្រាប់ %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:432
+#: zypp/solver/detail/ResolverInfoMisc.cc:442
 #, c-format
 msgid ""
 "%s is required by other to-be-installed resolvable, so it won't be unlinked."
 msgstr ""
 "%s ត្រូវការ​ដោយ​កញ្ចប់​ផ្សេង​ដើម្បី​ដំឡើង​កញ្ចប់អាស្រ័យ​ដែល​អាច​ដោះស្រាយ​បាន ដូច្នេះ​វា​នឹង​​ត្រូវ​​បានតភ្ជាប់​​ ។"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:449
+#: zypp/solver/detail/ResolverInfoMisc.cc:459
 #, c-format
 msgid "%s is required by other installed resolvable, so it won't be unlinked."
 msgstr ""
 "%s ត្រូវ​ការ​ដោយ​កញ្ចប់​អាស្រ័យ​ដែល​អាច​ដោះស្រាយ​បាន និងដែល​បាន​ដំឡើង​ហើយ​ផ្សេង ដូចនេះ វា​នឹង​ត្រូវ​បាន​ត​"
 "ភ្ជាប់ ។​"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:466
+#: zypp/solver/detail/ResolverInfoMisc.cc:476
 #, c-format
 msgid "%s is locked and cannot be uninstalled."
 msgstr "%s ជាប់​សោរ និង​មិន​អាច​មិន​ដំឡើង​វិញ​បាន ។"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:485
+#: zypp/solver/detail/ResolverInfoMisc.cc:495
 #, c-format
 msgid "A conflict over %s (%s) requires the removal of to-be-installed %s"
 msgstr "ការ​ប៉ះ​ទង្គិច​លើ​ %s (%s) ត្រូវការ​យក​ចេញ​ដើម្បី​ដំឡើង %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:503
+#: zypp/solver/detail/ResolverInfoMisc.cc:513
 #, c-format
 msgid "Marking %s as uninstallable due to conflicts over %s"
 msgstr "សម្គាល់​ %s ជា​មិន​ដំឡើង ដោយ​សារ​តែ​ការ​ប៉ះទង្គិចលើ​ %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:511
+#: zypp/solver/detail/ResolverInfoMisc.cc:521
 #, c-format
 msgid "from %s"
 msgstr "ពី %s"
@@ -2480,7 +2500,7 @@ msgstr ""
 
 #: zypp/solver/detail/ProblemSolutionKeep.cc:67
 #, fuzzy
-msgid "Keep missing resolvables"
+msgid "Keep resolvables"
 msgstr "កំពុង​ដំឡើង​កញ្ចប់​ដែល​បាត់"
 
 #: zypp/solver/detail/ProblemSolutionInstall.cc:53

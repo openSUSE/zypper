@@ -1,3 +1,4 @@
+# translation of zypp.hu.po to Hungarian
 # Hungarian message File YaST2 (@memory@).
 # Copyright (C) 2005 SUSE Linux Products GmbH.
 # Copyright (C) 2002 SuSE Linux AG.
@@ -6,25 +7,26 @@
 # Sári Gábor <saga@tux.hu>, 2000.
 # Steve Varadi <svaradi@usa.com>, 2000.
 # Zoltán Levárdy <pogacsa@programmer.net>, 1999.
+# Kalman Kemenczy <kkemenczy@novell.com>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: YaST (@memory@)\n"
+"Project-Id-Version: zypp.hu\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2006-02-18 17:25+0100\n"
-"PO-Revision-Date: 2006-02-21 10:08+0100\n"
-"Last-Translator: Szabolcs Varga <shirokuma@shirokuma.hu>\n"
-"Language-Team: Hungarian <i18n@suse.de>\n"
+"POT-Creation-Date: 2006-02-27 12:42+0100\n"
+"PO-Revision-Date: 2006-02-27 16:24+0100\n"
+"Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
+"Language-Team: Hungarian <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.2\n"
 
 #: zypp/LanguageCode.cc:145
 msgid "Unknown language: "
 msgstr "Ismeretlen nyelv:"
 
-#: zypp/LanguageCode.cc:226
-#: zypp/CountryCode.cc:215
+#: zypp/LanguageCode.cc:226 zypp/CountryCode.cc:215
 msgid "noCode"
 msgstr "noCode"
 
@@ -1301,8 +1303,7 @@ msgstr "észak-amerikai indián"
 msgid "Neapolitan"
 msgstr "nápolyi"
 
-#: zypp/LanguageCode.cc:820
-#: zypp/CountryCode.cc:380
+#: zypp/LanguageCode.cc:820 zypp/CountryCode.cc:380
 msgid "Nauru"
 msgstr "Nauru"
 
@@ -1831,8 +1832,7 @@ msgid "Tiv"
 msgstr "tiv"
 
 # TK
-#: zypp/LanguageCode.cc:1072
-#: zypp/CountryCode.cc:428
+#: zypp/LanguageCode.cc:1072 zypp/CountryCode.cc:428
 msgid "Tokelau"
 msgstr "Tokelau"
 
@@ -1895,8 +1895,7 @@ msgid "Altaic (Other)"
 msgstr "altáji (egyéb)"
 
 # TV
-#: zypp/LanguageCode.cc:1102
-#: zypp/CountryCode.cc:435
+#: zypp/LanguageCode.cc:1102 zypp/CountryCode.cc:435
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
@@ -2055,17 +2054,17 @@ msgstr "zuni"
 # modules/dialup/dialup.ycp:231 modules/dialup/dialup.ycp:246
 # modules/dialup/dialup.ycp:259
 # menuentries/menuentry_lan_sendmail.ycp:14
-#: zypp/target/rpm/RpmDb.cc:1656
+#: zypp/target/rpm/RpmDb.cc:1718
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "%s módosított konfigurációs fájljai:"
 
-#: zypp/target/rpm/RpmDb.cc:1807
+#: zypp/target/rpm/RpmDb.cc:1869
 #, c-format
 msgid "rpm saved %s as %s but it was impossible to determine the difference"
 msgstr "Az rpm elmentette %s-t, mint %s, de nem sikerült megállapítani a különbséget"
 
-#: zypp/target/rpm/RpmDb.cc:1809
+#: zypp/target/rpm/RpmDb.cc:1871
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -2074,12 +2073,12 @@ msgstr ""
 "Az rpm elmentette %s-t, mint %s.\n"
 "A különbség első 25 sora:\n"
 
-#: zypp/target/rpm/RpmDb.cc:1812
+#: zypp/target/rpm/RpmDb.cc:1874
 #, c-format
 msgid "rpm created %s as %s but it was impossible to determine the difference"
 msgstr "Az rpm létrehozta %s-t, mint %s, de nem sikerült megállapítani a különbséget"
 
-#: zypp/target/rpm/RpmDb.cc:1814
+#: zypp/target/rpm/RpmDb.cc:1876
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -2088,73 +2087,71 @@ msgstr ""
 "Az rpm létrehozta %s-t, mint %s.\n"
 "A különbség első 25 sora:\n"
 
-#: zypp/target/rpm/RpmDb.cc:1819
+#: zypp/target/rpm/RpmDb.cc:1881
 #, c-format
 msgid "%s install failed"
 msgstr "%s telepítése nem sikerült"
 
-#: zypp/target/rpm/RpmDb.cc:1820
-#: zypp/target/rpm/RpmDb.cc:1926
+#: zypp/target/rpm/RpmDb.cc:1882 zypp/target/rpm/RpmDb.cc:1988
 msgid "rpm output:"
 msgstr "Az rpm parancs kimenete:"
 
-#: zypp/target/rpm/RpmDb.cc:1824
+#: zypp/target/rpm/RpmDb.cc:1886
 #, c-format
 msgid "%s installed ok"
 msgstr "%s telepítése OK"
 
-#: zypp/target/rpm/RpmDb.cc:1826
-#: zypp/target/rpm/RpmDb.cc:1931
+#: zypp/target/rpm/RpmDb.cc:1888 zypp/target/rpm/RpmDb.cc:1993
 msgid "Additional rpm output:"
 msgstr "További rpm kimenet:"
 
-#: zypp/target/rpm/RpmDb.cc:1925
+#: zypp/target/rpm/RpmDb.cc:1987
 #, c-format
 msgid "%s remove failed"
 msgstr "%s eltávolítása meghiúsult"
 
-#: zypp/target/rpm/RpmDb.cc:1929
+#: zypp/target/rpm/RpmDb.cc:1991
 #, c-format
 msgid "%s remove ok"
 msgstr "%s eltávolítása OK"
 
-#: zypp/target/rpm/RpmDb.cc:1945
+#: zypp/target/rpm/RpmDb.cc:2007
 msgid "Ok"
 msgstr "OK"
 
-#: zypp/target/rpm/RpmDb.cc:1948
+#: zypp/target/rpm/RpmDb.cc:2010
 msgid "The package is not OK for the following reasons:"
 msgstr "A csomag nem OK a következő okok miatt:"
 
-#: zypp/target/rpm/RpmDb.cc:1954
+#: zypp/target/rpm/RpmDb.cc:2016
 msgid "The package contains different version than expected"
 msgstr "A csomag nem a várt verziót tartalmazza"
 
-#: zypp/target/rpm/RpmDb.cc:1960
+#: zypp/target/rpm/RpmDb.cc:2022
 msgid "The package file has incorrect MD5 sum"
 msgstr "A csomag MD5 ellenőrzőösszege helytelen"
 
-#: zypp/target/rpm/RpmDb.cc:1966
+#: zypp/target/rpm/RpmDb.cc:2028
 msgid "The package is not signed"
 msgstr "A csomag nincs aláírva"
 
-#: zypp/target/rpm/RpmDb.cc:1972
+#: zypp/target/rpm/RpmDb.cc:2034
 msgid "The package has no MD5 sum"
 msgstr "A csomagnak nincs MD5 ellenőrzőösszege"
 
-#: zypp/target/rpm/RpmDb.cc:1978
+#: zypp/target/rpm/RpmDb.cc:2040
 msgid "The package has incorrect signature"
 msgstr "A csomag aláírása helytelen"
 
-#: zypp/target/rpm/RpmDb.cc:1984
+#: zypp/target/rpm/RpmDb.cc:2046
 msgid "The package archive has incorrect MD5 sum"
 msgstr "A csomagarchívum MD5 ellenőrzőösszege helytelen"
 
-#: zypp/target/rpm/RpmDb.cc:1990
+#: zypp/target/rpm/RpmDb.cc:2052
 msgid "rpm failed for unkown reason, see log file"
 msgstr "Az rpm leállt ismeretlen okból, tekintse meg a naplófájlt"
 
-#: zypp/target/rpm/RpmDb.cc:2134
+#: zypp/target/rpm/RpmDb.cc:2196
 #, c-format
 msgid "created backup %s"
 msgstr "%s másolata létrehozva"
@@ -2169,22 +2166,22 @@ msgstr "A(z) %s csomagot felváltja %s"
 msgid "%s replaced by %s"
 msgstr "A(z) %s csomagot felváltja %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:172
+#: zypp/solver/detail/Resolver_problems.cc:189
 msgid "Invalid information"
 msgstr "Érvénytelen információ"
 
-#: zypp/solver/detail/Resolver_problems.cc:179
+#: zypp/solver/detail/Resolver_problems.cc:196
 #, c-format
 msgid "%s is needed by other resolvables"
 msgstr "A(z) %s csomagot más feloldandók igénylik"
 
-#: zypp/solver/detail/Resolver_problems.cc:182
+#: zypp/solver/detail/Resolver_problems.cc:199
 #: zypp/solver/detail/ResolverInfoNeededBy.cc:56
 #, c-format
 msgid "%s is needed by %s"
 msgstr "A(z) %s csomagot igényli %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:183
+#: zypp/solver/detail/Resolver_problems.cc:200
 #, c-format
 msgid ""
 "%s is needed by:\n"
@@ -2193,19 +2190,19 @@ msgstr ""
 "%s-t igényli:\n"
 "%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:190
+#: zypp/solver/detail/Resolver_problems.cc:207
 #, c-format
 msgid "%s conflicts with other resolvables"
 msgstr "%s ütközik más feloldhatókkal"
 
-#: zypp/solver/detail/Resolver_problems.cc:193
+#: zypp/solver/detail/Resolver_problems.cc:210
 #: zypp/solver/detail/ResolverInfoConflictsWith.cc:55
 #: zypp/solver/detail/ResolverInfoConflictsWith.cc:70
 #, c-format
 msgid "%s conflicts with %s"
 msgstr "%s és %s ütközik"
 
-#: zypp/solver/detail/Resolver_problems.cc:194
+#: zypp/solver/detail/Resolver_problems.cc:211
 #, c-format
 msgid ""
 "%s conflicts with:\n"
@@ -2214,22 +2211,22 @@ msgstr ""
 "%s ütközik az alábbiakkal:\n"
 "%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:201
+#: zypp/solver/detail/Resolver_problems.cc:218
 #, c-format
 msgid "%s obsoletes other resolvables"
 msgstr "%s elavulttá tesz más feloldhatókat"
 
-#: zypp/solver/detail/Resolver_problems.cc:204
+#: zypp/solver/detail/Resolver_problems.cc:221
 #, c-format
 msgid "%s obsoletes %s"
 msgstr "%s elavulttá teszi a(z) %s csomagot"
 
-#: zypp/solver/detail/Resolver_problems.cc:206
+#: zypp/solver/detail/Resolver_problems.cc:223
 #, c-format
 msgid "%s obsoletes:%s"
 msgstr "%s elavulttá teszi: %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:207
+#: zypp/solver/detail/Resolver_problems.cc:224
 msgid ""
 "\n"
 "These resolvables will be deleted from the system."
@@ -2237,38 +2234,38 @@ msgstr ""
 "\n"
 "Ezek a feloldhatók törlésre kerülnek a rendszerből."
 
-#: zypp/solver/detail/Resolver_problems.cc:214
+#: zypp/solver/detail/Resolver_problems.cc:231
 #, c-format
 msgid "%s depends on other resolvables"
 msgstr "%s függ más feloldhatóktól"
 
-#: zypp/solver/detail/Resolver_problems.cc:218
+#: zypp/solver/detail/Resolver_problems.cc:235
 #, c-format
 msgid "%s depends on %s"
 msgstr "%s függ a(z) %s csomagtól"
 
-#: zypp/solver/detail/Resolver_problems.cc:221
+#: zypp/solver/detail/Resolver_problems.cc:238
 #, c-format
 msgid "%s depends on:%s"
 msgstr "%s függ ettől: %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:227
+#: zypp/solver/detail/Resolver_problems.cc:244
 msgid "Child of"
 msgstr "Szülője "
 
 # modules/inst_target_part.ycp:676
-#: zypp/solver/detail/Resolver_problems.cc:233
-#: zypp/solver/detail/Resolver_problems.cc:296
+#: zypp/solver/detail/Resolver_problems.cc:250
+#: zypp/solver/detail/Resolver_problems.cc:313
 #, c-format
 msgid "Cannot install %s"
 msgstr "%s nem telepíthető"
 
-#: zypp/solver/detail/Resolver_problems.cc:235
+#: zypp/solver/detail/Resolver_problems.cc:252
 #, c-format
 msgid "None provides %s"
 msgstr "A(z) %s képességet semmi nem biztosítja"
 
-#: zypp/solver/detail/Resolver_problems.cc:236
+#: zypp/solver/detail/Resolver_problems.cc:253
 msgid ""
 "\n"
 "There is no resource available which support this requirement."
@@ -2276,67 +2273,76 @@ msgstr ""
 "\n"
 "Nem áll rendelkezésre ezt a követelményt kielégítő erőforrás."
 
-#: zypp/solver/detail/Resolver_problems.cc:244
-msgid "Due problems which are described above/below this resolution will not solve all dependencies"
-msgstr "A fent/lent leírt problémák miatt ez a feloldás nem oldja fel az összes függőséget"
+#: zypp/solver/detail/Resolver_problems.cc:261
+msgid ""
+"Due problems which are described above/below this resolution will not solve "
+"all dependencies"
+msgstr ""
+"A fent/lent leírt problémák miatt ez a feloldás nem oldja fel az összes "
+"függőséget"
 
-#: zypp/solver/detail/Resolver_problems.cc:252
+#: zypp/solver/detail/Resolver_problems.cc:269
 #, c-format
 msgid "%s is not installed and has been marked as uninstallable"
 msgstr "%s nincs telepítve és eltávolíthatónak lett megjelölve"
 
-#: zypp/solver/detail/Resolver_problems.cc:262
+#: zypp/solver/detail/Resolver_problems.cc:279
 #, c-format
 msgid "Cannot install %s due dependency problems"
 msgstr "%s nem telepíthető függőségi problémák miatt"
 
-#: zypp/solver/detail/Resolver_problems.cc:311
+#: zypp/solver/detail/Resolver_problems.cc:328
 #, c-format
 msgid "%s has unfulfiled requirements"
 msgstr "%s egyes követelményei nincsenek kielégítve"
 
-#: zypp/solver/detail/Resolver_problems.cc:349
+#: zypp/solver/detail/Resolver_problems.cc:366
 #, c-format
 msgid "%s has missing dependencies"
 msgstr "%s függőségei hiányoznak"
 
-#: zypp/solver/detail/Resolver_problems.cc:387
+#: zypp/solver/detail/Resolver_problems.cc:404
 #, c-format
 msgid "%s cannot be installed due missing dependencies"
 msgstr "%s nem telepíthető hiányzó függőségek miatt"
 
-#: zypp/solver/detail/Resolver_problems.cc:409
+#: zypp/solver/detail/Resolver_problems.cc:434
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
 msgstr "%s kielégíti %s függőségeit, de eltávolításra kerül"
 
-#: zypp/solver/detail/Resolver_problems.cc:419
+#: zypp/solver/detail/Resolver_problems.cc:444
 #, c-format
 msgid "No need to install %s"
 msgstr "Nincs szükség %s telepítésére"
 
-#: zypp/solver/detail/Resolver_problems.cc:427
+#: zypp/solver/detail/Resolver_problems.cc:452
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "%s nem telepíthető %s függőségeinek teljesítéséhez"
 
-#: zypp/solver/detail/Resolver_problems.cc:437
+#: zypp/solver/detail/Resolver_problems.cc:462
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
 msgstr "%s nem telepíthető %s függőségeinek teljesítéséhez"
 
-#: zypp/solver/detail/Resolver_problems.cc:461
-#: zypp/solver/detail/Resolver_problems.cc:469
+#: zypp/solver/detail/Resolver_problems.cc:499
+#: zypp/solver/detail/Resolver_problems.cc:507
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
 msgstr "%s nem távolítható el, mert még mindig szükséges"
 
-#: zypp/solver/detail/Resolver_problems.cc:489
+#: zypp/solver/detail/Resolver_problems.cc:518
+#, c-format
+msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
+msgstr "%s miatt %s elavult, de %s zárolás miatt nem törölhető."
+
+#: zypp/solver/detail/Resolver_problems.cc:542
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
 msgstr "%s nem telepíthető, mert ütközik (%s)"
 
-#: zypp/solver/detail/Resolver_problems.cc:509
+#: zypp/solver/detail/Resolver_problems.cc:562
 #, c-format
 msgid "%s is uninstallable due conflicts with %s"
 msgstr "%s eltávolítható, mivel ütközik (%s)"
@@ -2354,26 +2360,38 @@ msgstr "Követelmény figyelmen kívül hagyása általában"
 msgid "Ignore this conflict of %s"
 msgstr "%s ezen ütközése figyelmen kívül marad"
 
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:86
-msgid "Ignore architecture"
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:89
+#, c-format
+msgid "Ignore the obsolete %s in %s"
+msgstr "%s elavulásának (%s miatt) figyelmen kívül hagyása"
+
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:100
+msgid "ignore architecture"
 msgstr "Architektúra figyelmen kívül marad"
 
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:96
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:110
 #, c-format
 msgid "Ignore that %s is already set to install"
 msgstr "%s telepítésre megjelölése figyelmen kívül marad"
 
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:52
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:56
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:54
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:63
 #, c-format
 msgid "delete %s"
 msgstr "%s törlése"
 
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:65
-msgid "Delete conflicting resolvables"
-msgstr "Ütköző feloldhatók eltávolítása"
+# modules/inst_target_part.ycp:676
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:57
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:66
+#, c-format
+msgid "do not install %s"
+msgstr "%s nem telepíthető"
 
-#: zypp/solver/detail/QueueItemRequire.cc:461
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:76
+msgid "Do not install or delete concerning resolvables"
+msgstr "Ne telepítse vagy törölje a vonatkozó feloldandókat"
+
+#: zypp/solver/detail/QueueItemRequire.cc:456
 #, c-format
 msgid "for requiring %s for %s when upgrading %s"
 msgstr "mert %s szükséges %s esetén, %s frissítésekor"
@@ -2387,174 +2405,190 @@ msgstr "%s követelménye (%s) hiányzik"
 msgid ", Action: "
 msgstr ", Művelet"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:59
+#: zypp/solver/detail/ResolverInfoMisc.cc:58
 msgid ", Trigger: "
 msgstr ", trigger: "
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:84
+#: zypp/solver/detail/ResolverInfoMisc.cc:90
 msgid "package"
 msgstr "csomag"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:88
+#: zypp/solver/detail/ResolverInfoMisc.cc:94
 msgid "selection"
 msgstr "kiválasztás"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:92
+#: zypp/solver/detail/ResolverInfoMisc.cc:98
 msgid "pattern"
 msgstr "minta"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:96
+#: zypp/solver/detail/ResolverInfoMisc.cc:102
 msgid "product"
 msgstr "termék"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:100
+#: zypp/solver/detail/ResolverInfoMisc.cc:106
 msgid "patch"
 msgstr "javítás"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:104
+#: zypp/solver/detail/ResolverInfoMisc.cc:110
 msgid "script"
 msgstr "parancsfájl"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:108
+#: zypp/solver/detail/ResolverInfoMisc.cc:114
 msgid "message"
 msgstr "üzenet"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:112
+#: zypp/solver/detail/ResolverInfoMisc.cc:118
+msgid "atom"
+msgstr "atom"
+
+#: zypp/solver/detail/ResolverInfoMisc.cc:122
 msgid "system"
 msgstr "rendszer"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:116
+#: zypp/solver/detail/ResolverInfoMisc.cc:126
 msgid "Resolvable"
 msgstr "Feloldható"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:134
+#: zypp/solver/detail/ResolverInfoMisc.cc:144
 msgid "Marking this resolution attempt as invalid."
 msgstr "A feloldási kísérlet érvénytelennek jelölése."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:141
+#: zypp/solver/detail/ResolverInfoMisc.cc:151
 #, c-format
 msgid "Marking resolvable %s as uninstallable"
 msgstr "%s feloldható telepíthetetlennek jelölése"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:149
+#: zypp/solver/detail/ResolverInfoMisc.cc:159
 #, c-format
-msgid "%s is scheduled to be installed, but this is not possible because of dependency problems."
+msgid ""
+"%s is scheduled to be installed, but this is not possible because of "
+"dependency problems."
 msgstr "%s telepítésre van ütemezve, de ez függőségi problémák miatt nem lehetséges."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:157
+#: zypp/solver/detail/ResolverInfoMisc.cc:167
 #, c-format
 msgid "Can't install %s since it is already marked as needing to be uninstalled"
 msgstr "%s nem telepíthető, mert már meg van jelölve eltávolításra"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:169
+#: zypp/solver/detail/ResolverInfoMisc.cc:179
 #, c-format
 msgid "Can't install %s since it is does not apply to this system."
 msgstr "%s nem telepíthető, mert nem ehhez a rendszerhez való."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:180
+#: zypp/solver/detail/ResolverInfoMisc.cc:190
 #, c-format
 msgid "Can't install %s, since %s is already marked as needing to be installed"
 msgstr "%s nem telepíthető, mert %s már meg van jelölve telepítésre"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:188
+#: zypp/solver/detail/ResolverInfoMisc.cc:198
 #, c-format
 msgid "This would invalidate %s."
 msgstr "Ennek hatására %s érvénytelenné válna."
 
 # modules/inst_target_part.ycp:676
-#: zypp/solver/detail/ResolverInfoMisc.cc:204
+#: zypp/solver/detail/ResolverInfoMisc.cc:214
 #, c-format
 msgid "Establishing %s"
 msgstr "%s előfeldolgozása"
 
 # modules/inst_target_part.ycp:676
-#: zypp/solver/detail/ResolverInfoMisc.cc:225
+#: zypp/solver/detail/ResolverInfoMisc.cc:235
 #, c-format
 msgid "Installing %s"
 msgstr "%s telepítése"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:242
+#: zypp/solver/detail/ResolverInfoMisc.cc:252
 #, c-format
 msgid "Updating %s to %s"
 msgstr "%s frissítése; az új: %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:260
+#: zypp/solver/detail/ResolverInfoMisc.cc:270
 #, c-format
 msgid "Skipping %s: already installed"
 msgstr "%s kimarad: már telepítve van"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:282
+#: zypp/solver/detail/ResolverInfoMisc.cc:292
 #, c-format
 msgid "There are no alternative installed providers of %s"
 msgstr "%s számára nincs alternatív telepített szolgáltató"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:288
-#: zypp/solver/detail/ResolverInfoMisc.cc:313
+#: zypp/solver/detail/ResolverInfoMisc.cc:298
+#: zypp/solver/detail/ResolverInfoMisc.cc:323
 #, c-format
 msgid "for %s"
 msgstr "%s számára"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:307
+#: zypp/solver/detail/ResolverInfoMisc.cc:317
 #, c-format
 msgid "There are no installable providers of %s"
 msgstr "%s számára nincs telepíthető szolgáltató"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:330
+#: zypp/solver/detail/ResolverInfoMisc.cc:340
 #, c-format
 msgid "Upgrade to %s to avoid removing %s is not possible."
-msgstr "A(z) %s csomagra frissítés %s eltávolításának elkerülése érdekében nem lehetséges."
+msgstr ""
+"A(z) %s csomagra frissítés %s eltávolításának elkerülése érdekében nem "
+"lehetséges."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:346
+#: zypp/solver/detail/ResolverInfoMisc.cc:356
 #, c-format
 msgid "%s provides %s, but is scheduled to be uninstalled."
 msgstr "%s biztosítja %s-t, de eltávolításra van ütemezve."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:362
+#: zypp/solver/detail/ResolverInfoMisc.cc:372
 #, c-format
 msgid "%s provides %s, but another version of that %s is already installed."
 msgstr "%s biztosítja %s-t, de %s egy másik verziója már telepítve van."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:379
+#: zypp/solver/detail/ResolverInfoMisc.cc:389
 #, c-format
-msgid "%s provides %s, but it is uninstallable.  Try installing it on its own for more details."
-msgstr "%s biztosítja %s-t, de eltávolítható. Próbálja meg telepíteni magában a további részletek érdekében."
+msgid ""
+"%s provides %s, but it is uninstallable.  Try installing it on its own for "
+"more details."
+msgstr ""
+"%s biztosítja %s-t, de eltávolítható. Próbálja meg telepíteni magában a "
+"további részletek érdekében."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:395
+#: zypp/solver/detail/ResolverInfoMisc.cc:405
 #, c-format
 msgid "%s provides %s, but it is locked."
 msgstr "%s biztosítja %s-t, de zárolva van."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:411
+#: zypp/solver/detail/ResolverInfoMisc.cc:421
 #, c-format
 msgid "Can't satisfy requirement %s for %s"
 msgstr "%s %s követelménye nem elégíthető ki"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:432
+#: zypp/solver/detail/ResolverInfoMisc.cc:442
 #, c-format
 msgid "%s is required by other to-be-installed resolvable, so it won't be unlinked."
-msgstr "%s egy másik telepítendő feloldható igényli, ezért a csatolása nem lesz megszüntetve."
+msgstr ""
+"%s egy másik telepítendő feloldható igényli, ezért a csatolása nem lesz "
+"megszüntetve."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:449
+#: zypp/solver/detail/ResolverInfoMisc.cc:459
 #, c-format
 msgid "%s is required by other installed resolvable, so it won't be unlinked."
-msgstr "%s egy másik telepítendő feloldható igényli, ezért a csatolása nem lesz megszüntetve."
+msgstr ""
+"%s egy másik telepítendő feloldható igényli, ezért a csatolása nem lesz "
+"megszüntetve."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:466
+#: zypp/solver/detail/ResolverInfoMisc.cc:476
 #, c-format
 msgid "%s is locked and cannot be uninstalled."
 msgstr "%s zárolva van, ezért nem távolítható el."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:485
+#: zypp/solver/detail/ResolverInfoMisc.cc:495
 #, c-format
 msgid "A conflict over %s (%s) requires the removal of to-be-installed %s"
 msgstr "%s ütközése (%s) a telepítendő %s eltávolítását igényli"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:503
+#: zypp/solver/detail/ResolverInfoMisc.cc:513
 #, c-format
 msgid "Marking %s as uninstallable due to conflicts over %s"
 msgstr "%s telepíthetlennek lesz jelölve, mert ütközik a(z) %s csomaggal"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:511
+#: zypp/solver/detail/ResolverInfoMisc.cc:521
 #, c-format
 msgid "from %s"
 msgstr "%s csomagból"
@@ -2574,8 +2608,8 @@ msgid "keep %s"
 msgstr "%s megtartása"
 
 #: zypp/solver/detail/ProblemSolutionKeep.cc:67
-msgid "Keep missing resolvables"
-msgstr "Hiányzó feloldhatók telepítése"
+msgid "Keep resolvables"
+msgstr "Feloldandók megtartása"
 
 #: zypp/solver/detail/ProblemSolutionInstall.cc:53
 #: zypp/solver/detail/ProblemSolutionInstall.cc:57
@@ -2797,8 +2831,7 @@ msgid "Cocos (Keeling) Islands"
 msgstr "Cocos (Keeling) -szigetek"
 
 # CG
-#: zypp/CountryCode.cc:255
-#: zypp/CountryCode.cc:257
+#: zypp/CountryCode.cc:255 zypp/CountryCode.cc:257
 msgid "Congo"
 msgstr "Kongó"
 
@@ -3715,36 +3748,4 @@ msgstr "Zambia"
 #: zypp/CountryCode.cc:457
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
-
-#, fuzzy
-#~ msgid "Ignore this requirement for all other resolvables."
-#~ msgstr "A(z) %s csomagot más feloldandók igénylik"
-#~ msgid "Deleting %s"
-#~ msgstr "%s törlése"
-#~ msgid ""
-#~ "Can't install %s, since a resolvable of the same name is already marked "
-#~ "as needing to be installed"
-#~ msgstr ""
-#~ "%s nem telepíthető, mert egy ugyanilyen nevű feloldható már meg van "
-#~ "jelölve telepítésre"
-#~ msgid "%s cannot be uninstalled due missing dependencies"
-#~ msgstr "%s nem távolítható el hiányzó függőségek miatt"
-#~ msgid "unknown"
-#~ msgstr "ismeretlen"
-
-#, fuzzy
-#~ msgid "installed"
-#~ msgstr "Telepítés"
-
-#, fuzzy
-#~ msgid "uninstalled"
-#~ msgstr "Automatikus telepítés"
-
-#, fuzzy
-#~ msgid "to be installed (soft)"
-#~ msgstr "Nincs telepítve (%1)"
-
-#, fuzzy
-#~ msgid "to be uninstalled"
-#~ msgstr "újbóli telepítésre van szüksége"
 
