@@ -4,7 +4,7 @@
 -->
 <test>
 <setup>
-  <source url="ftp://machcd2.suse.de/kukuk/sles10-dvd-i386/CD1"/>
+  <channel name="beta52" file="beta52-i386-packages.xml"/>
   <locale name="de"/>
   <locale name="de_DE"/>
   <locale name="de_AT"/>
