@@ -22,6 +22,7 @@
 #include "zypp/NVRAD.h"
 #include "zypp/source/susetags/SuseTagsImpl.h"
 #include "zypp/source/susetags/SuseTagsPackageImpl.h"
+#include "zypp/source/susetags/SuseTagsSrcPackageImpl.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -34,6 +35,7 @@ namespace zypp
     { /////////////////////////////////////////////////////////////////
 
       typedef detail::ResImplTraits<SuseTagsPackageImpl>::Ptr PkgImplPtr;
+      typedef detail::ResImplTraits<SuseTagsSrcPackageImpl>::Ptr SrcPkgImplPtr;
       typedef std::map<NVRAD, PkgImplPtr>                     PkgContent;
       typedef std::map<NVRAD, DiskUsage>                      PkgDiskUsage;
 
