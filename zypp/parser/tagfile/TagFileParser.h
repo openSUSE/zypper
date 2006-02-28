@@ -40,6 +40,8 @@ namespace zypp
       /** Tagfile parser. */
       struct TagFileParser
       { 
+        Pathname _file_r;
+
         struct MultiTag
         {
           std::string name;

@@ -256,7 +256,7 @@ namespace zypp
     for( std::list<storage::PersistentStorage::SourceData>::iterator it = new_sources.begin();
 	it != new_sources.end(); ++it)
     {
-	MIL << "Restoring source: " << it->url << it->product_dir << " with alias " << it->alias << endl;
+      MIL << "Restoring source: url:[" << it->url << "] product_dir:[" << it->product_dir << "] alias:[" << it->alias << "] cache_dir:[" << it->cache_dir << "]" << endl;
 	
 	unsigned id = 0;
 	

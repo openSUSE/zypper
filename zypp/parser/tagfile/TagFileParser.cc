@@ -84,6 +84,9 @@ namespace zypp
       //
       void TagFileParser::parse( const Pathname & file_r)
       {
+        // save parsed filename for debug
+        _file_r = file_r;
+        
         std::ifstream file(file_r.asString().c_str());
 
         boost::regex rxComment("^[[:space:]]*#(.*)$");
