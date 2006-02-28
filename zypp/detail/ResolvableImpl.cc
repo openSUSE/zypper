@@ -65,7 +65,7 @@ namespace zypp
 	string provides( cap_r.index(), 7 );			// strip "locale("
 	string::size_type pos = provides.find( ":" );		// colon given ?
 	if (pos != string::npos) {
-	    deps[Dep::ENHANCES].insert( f.parse( ResTraits<Package>::kind, string( provides, 0, pos ) ) );
+	    deps[Dep::SUPPLEMENTS].insert( f.parse( ResTraits<Package>::kind, string( provides, 0, pos ) ) );
 	    provides.erase( 0, pos+1 );
 	}
 	pos = 0;
