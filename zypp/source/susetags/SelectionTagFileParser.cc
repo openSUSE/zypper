@@ -71,7 +71,7 @@ namespace zypp
           std::string line = tag.value;
           std::vector<std::string> words;
 	  if (str::split( line, std::back_inserter(words), " " ) < 3)
-	    ZYPP_THROW( ParseException( "Expected [name version release [arch] ], got [" + stag_r.value +"]") );
+	    ZYPP_THROW( parser::tagfile::ParseException( "Expected [name version release [arch] ], got [" + tag.value +"]") );
       
           selImpl->_name = words[0];
           selImpl->_version = words[1];
