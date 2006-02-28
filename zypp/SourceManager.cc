@@ -210,6 +210,8 @@ namespace zypp
 		}
 		
 		descr.cache_dir = cache;
+		
+		known_caches.insert( cache );
 	    }
 	    
 	    filesystem::assert_dir ( root_r.asString() + descr.cache_dir );
@@ -270,7 +272,6 @@ namespace zypp
 	// should not throw, we've just created the source
 	Source_Ref src = findSource( id );
 	    
-	// FIXME: enable, autorefresh
 	if ( it->enabled )
 	    src.enable();
 	else
