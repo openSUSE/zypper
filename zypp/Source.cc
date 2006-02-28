@@ -54,7 +54,7 @@ namespace zypp
   const ResStore & Source_Ref::resolvables() const
   { return _pimpl->resolvables(); }
 
-  const ResStore & Source_Ref::resolvables(zypp::Resolvable::Kind kind) const
+  const ResStore Source_Ref::resolvables(zypp::Resolvable::Kind kind) const
   { return _pimpl->resolvables(kind); }
 
   const Pathname Source_Ref::provideFile(const Pathname & file_r,

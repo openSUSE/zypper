@@ -70,7 +70,7 @@ namespace zypp
     const ResStore & resolvables() const;
 
     /** All resolvables of a given kind provided by this source. */
-    const ResStore & resolvables(zypp::Resolvable::Kind kind) const;
+    const ResStore resolvables(zypp::Resolvable::Kind kind) const;
 
     /** Provide a file to local filesystem */
     const Pathname provideFile(const Pathname & file_r,

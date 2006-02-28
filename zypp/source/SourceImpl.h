@@ -81,7 +81,7 @@ namespace zypp
       const ResStore & resolvables(Source_Ref) const
       { return resolvables(); }
       const ResStore & resolvables() const;
-      const ResStore & resolvables(zypp::Resolvable::Kind kind) const;
+      const ResStore resolvables(zypp::Resolvable::Kind kind) const;
 
       /**
        * Provide a file to local filesystem
@@ -228,6 +228,10 @@ namespace zypp
     private:
       /** Late initialize the ResStore. */
       virtual void createResolvables(Source_Ref source_r);
+
+      /** Provide only resolvable of a certain kind. */
+      virtual ResStore provideResolvables(Source_Ref source_r, zypp::Resolvable::Kind kind);
+
       /** Whether the ResStore is initialized. */
       bool _res_store_initialized;
 

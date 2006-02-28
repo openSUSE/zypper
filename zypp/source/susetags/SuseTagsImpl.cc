@@ -182,9 +182,69 @@ namespace zypp
       void SuseTagsImpl::createResolvables(Source_Ref source_r)
       {
         callback::SendReport<CreateSourceReport> report;
-        Pathname p;
         report->startData( url() );
-        
+
+	provideProducts ( source_r, _store );        
+	providePackages ( source_r, _store );
+	provideSelections ( source_r, _store );
+	providePatterns ( source_r, _store );
+
+        report->finishData( url(), CreateSourceReport::NO_ERROR, "" );
+      }
+
+      ResStore SuseTagsImpl::provideResolvables(Source_Ref source_r, Resolvable::Kind kind)
+      {
+        callback::SendReport<CreateSourceReport> report;
+        report->startData( url() );
+
+	ResStore store;
+	
+	if ( kind == ResTraits<Product>::kind ) 
+	    provideProducts ( source_r, store );        	
+	else if ( kind == ResTraits<Package>::kind )
+	    providePackages ( source_r, store );
+	else if ( kind == ResTraits<Selection>::kind )
+	    provideSelections ( source_r, store );
+	else if ( kind == ResTraits<Pattern>::kind )
+	    providePatterns ( source_r, store );
+
+        report->finishData( url(), CreateSourceReport::NO_ERROR, "" );
+	
+	return store;
+      }
+
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	METHOD NAME : SuseTagsImpl::~SuseTagsImpl
+      //	METHOD TYPE : Dtor
+      //
+      SuseTagsImpl::~SuseTagsImpl()
+      {}
+
+      Pathname SuseTagsImpl::sourceDir( const NVRAD& nvrad )
+      {
+#warning Not using <DATADIR>
+        return Pathname( "/suse/" + nvrad.arch.asString() + "/");
+      }
+
+      media::MediaVerifierRef SuseTagsImpl::verifier(media::MediaNr media_nr)
+      {
+	return media::MediaVerifierRef(
+    	    new SourceImpl::Verifier (_vendor, _media_id, media_nr));
+      }
+
+      unsigned SuseTagsImpl::numberOfMedia(void) const
+      { return _media_count; }
+
+      std::string SuseTagsImpl::vendor (void) const
+      { return _vendor; }
+
+      std::string SuseTagsImpl::unique_id (void) const
+      { return _media_id; }
+
+      void SuseTagsImpl::provideProducts(Source_Ref source_r, ResStore &store)
+      {
+        Pathname p;
         bool cache = cacheExists();
 
         if ( cache )
@@ -207,13 +267,18 @@ namespace zypp
           Product::Ptr product = parseContentFile( _content_file, factory.createFrom(this) );
       
           MIL << "Product: " << product->displayName() << endl;
-          _store.insert( product );
+          store.insert( product );
         }
         catch (Exception & excpt_r) {
           ERR << "cannot parse content file" << endl;
         }
+      }
   
-        p = cache ? _data_dir + "packages" : provideFile( _data_dir + "packages");
+      void SuseTagsImpl::providePackages(Source_Ref source_r, ResStore &store)
+      {
+        bool cache = cacheExists();
+
+        Pathname p = cache ? _data_dir + "packages" : provideFile( _data_dir + "packages");
         DBG << "Going to parse " << p << endl;
         PkgContent content( parsePackages( source_r, this, p ) );
 
@@ -243,12 +308,20 @@ namespace zypp
         {
           it->second->_diskusage = du[it->first /* NVRAD */];
           Package::Ptr pkg = detail::makeResolvableFromImpl( it->first, it->second );
-          _store.insert( pkg );
+          store.insert( pkg );
         }
         DBG << "SuseTagsImpl (fake) from " << p << ": "
             << content.size() << " packages" << endl;
+      }
+
+      void SuseTagsImpl::provideSelections(Source_Ref source_r, ResStore &store)
+      {
+        bool cache = cacheExists();
+	
+	Pathname p;
 
         bool file_found = true;
+
         // parse selections
         try {
           p = cache ? _data_dir + "selections" : provideFile( _data_dir + "selections");
@@ -278,14 +351,20 @@ namespace zypp
             DBG << "Selection:" << sel << endl;
       
             if (sel)
-              _store.insert( sel );
+              store.insert( sel );
       
             DBG << "Parsing of " << file << " done" << endl;
           }
         }
+      }
+
+      void SuseTagsImpl::providePatterns(Source_Ref source_r, ResStore &store)
+      {
+        bool cache = cacheExists();
+	Pathname p;
 
         // parse patterns
-        file_found = true;
+        bool file_found = true;
 
         try {
           p = cache ? _data_dir + "patterns" : provideFile( _data_dir + "patterns");
@@ -322,38 +401,8 @@ namespace zypp
             DBG << "Parsing of " << file << " done" << endl;
           }
         }
+      }
       
-        report->finishData( url(), CreateSourceReport::NO_ERROR, "" );
-      }
-      ///////////////////////////////////////////////////////////////////
-      //
-      //	METHOD NAME : SuseTagsImpl::~SuseTagsImpl
-      //	METHOD TYPE : Dtor
-      //
-      SuseTagsImpl::~SuseTagsImpl()
-      {}
-
-      Pathname SuseTagsImpl::sourceDir( const NVRAD& nvrad )
-      {
-#warning Not using <DATADIR>
-        return Pathname( "/suse/" + nvrad.arch.asString() + "/");
-      }
-
-      media::MediaVerifierRef SuseTagsImpl::verifier(media::MediaNr media_nr)
-      {
-    return media::MediaVerifierRef(
-      new SourceImpl::Verifier (_vendor, _media_id, media_nr));
-      }
-
-      unsigned SuseTagsImpl::numberOfMedia(void) const
-      { return _media_count; }
-
-      std::string SuseTagsImpl::vendor (void) const
-      { return _vendor; }
-
-      std::string SuseTagsImpl::unique_id (void) const
-      { return _media_id; }
-
       ///////////////////////////////////////////////////////////////////
       //
       //	METHOD NAME : SuseTagsImpl::dumpOn
