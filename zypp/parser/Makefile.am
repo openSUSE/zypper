@@ -12,7 +12,8 @@ parserincludedir = $(pkgincludedir)/parser
 
 parserinclude_HEADERS = \
 	XMLNodeIterator.h	\
-	LibXMLHelper.h
+	LibXMLHelper.h		\
+	xml_parser_assert.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_parser.la
 

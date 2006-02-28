@@ -14,7 +14,7 @@
 #include <zypp/parser/yum/YUMPrimaryParser.h>
 #include <istream>
 #include <string>
-#include <cassert>
+#include "zypp/parser/xml_parser_assert.h"
 #include <libxml/xmlreader.h>
 #include <libxml/tree.h>
 #include <zypp/parser/LibXMLHelper.h>
@@ -54,10 +54,10 @@ namespace zypp {
       YUMPatchData_Ptr
       YUMPatchParser::process(const xmlTextReaderPtr reader)
       {
-	assert(reader);
+	xml_assert(reader);
 	YUMPatchData_Ptr patchPtr = new YUMPatchData;
 	xmlNodePtr dataNode = xmlTextReaderExpand(reader);
-	assert(dataNode);
+	xml_assert(dataNode);
 	patchPtr->timestamp = _helper.attribute(dataNode,"timestamp");
 	patchPtr->patchId = _helper.attribute(dataNode,"patchid");
 	patchPtr->engine = _helper.attribute(dataNode,"engine");
@@ -144,7 +144,7 @@ namespace zypp {
       YUMPatchParser::parseAtomsNode(YUMPatchData_Ptr dataPtr,
 		                     xmlNodePtr formatNode)
       {
-	assert(formatNode);
+	xml_assert(formatNode);
 	for (xmlNodePtr child = formatNode->children; 
 	     child != 0;
 	     child = child ->next) {
@@ -175,7 +175,7 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
       YUMPatchParser::parseFormatNode(YUMPatchPackage *dataPtr,
 		                              xmlNodePtr formatNode)
       {
-	assert(formatNode);
+	xml_assert(formatNode);
 	dataPtr->installOnly = false;
       
 	// FIXME move the respective method to a common class, inherit it  

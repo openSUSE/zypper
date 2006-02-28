@@ -15,7 +15,7 @@
 #include <zypp/parser/yum/YUMFileListParser.h>
 #include <istream>
 #include <string>
-#include <cassert>
+#include "zypp/parser/xml_parser_assert.h"
 #include <libxml/xmlstring.h>
 #include <libxml/xmlreader.h>
 #include <libxml/tree.h>
@@ -68,10 +68,10 @@ namespace zypp {
       YUMFileListData_Ptr
       YUMFileListParser::process(const xmlTextReaderPtr reader)
       {
-        assert(reader);
+        xml_assert(reader);
         YUMFileListData_Ptr dataPtr = new YUMFileListData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
-        assert(dataNode);
+        xml_assert(dataNode);
       
         dataPtr->pkgId = _helper.attribute(dataNode,"pkgid");
         dataPtr->name = _helper.attribute(dataNode,"name");

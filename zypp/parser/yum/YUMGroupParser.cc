@@ -14,7 +14,7 @@
 #include <zypp/parser/LibXMLHelper.h>
 #include <istream>
 #include <string>
-#include <cassert>
+#include "zypp/parser/xml_parser_assert.h"
 #include <libxml/xmlreader.h>
 #include <libxml/tree.h>
 #include <zypp/base/Logger.h>
@@ -48,10 +48,10 @@ namespace zypp {
       YUMGroupData_Ptr
       YUMGroupParser::process(const xmlTextReaderPtr reader)
       {
-        assert(reader);
+        xml_assert(reader);
         YUMGroupData_Ptr dataPtr = new YUMGroupData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
-        assert(dataNode);
+        xml_assert(dataNode);
         
         for (xmlNodePtr child = dataNode->children;
              child && child != dataNode;
@@ -92,8 +92,8 @@ namespace zypp {
       void YUMGroupParser::parseGrouplist(YUMGroupData_Ptr dataPtr,
                                                 xmlNodePtr node)
       {
-        assert(dataPtr);
-        assert(node);
+        xml_assert(dataPtr);
+        xml_assert(node);
         
         for (xmlNodePtr child = node->children;
              child != 0;
@@ -117,8 +117,8 @@ namespace zypp {
       void YUMGroupParser::parsePackageList(YUMGroupData_Ptr dataPtr,
                                                   xmlNodePtr node)
       {
-        assert(dataPtr);
-        assert(node);
+        xml_assert(dataPtr);
+        xml_assert(node);
         
         for (xmlNodePtr child = node->children;
              child != 0;

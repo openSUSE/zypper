@@ -15,7 +15,7 @@
 #include <zypp/parser/yum/YUMOtherParser.h>
 #include <istream>
 #include <string>
-#include <cassert>
+#include "zypp/parser/xml_parser_assert.h"
 #include <libxml/xmlstring.h>
 #include <libxml/xmlreader.h>
 #include <libxml/tree.h>
@@ -65,10 +65,10 @@ namespace zypp {
       YUMOtherData_Ptr
       YUMOtherParser::process(const xmlTextReaderPtr reader)
       {
-        assert(reader);
+        xml_assert(reader);
         YUMOtherData_Ptr dataPtr = new YUMOtherData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
-        assert(dataNode);
+        xml_assert(dataNode);
       
         dataPtr->pkgId = _helper.attribute(dataNode,"pkgid");
         dataPtr->name = _helper.attribute(dataNode,"name");

@@ -15,7 +15,7 @@
 #include <zypp/parser/LibXMLHelper.h>
 #include <istream>
 #include <string>
-#include <cassert>
+#include "zypp/parser/xml_parser_assert.h"
 #include <libxml/xmlreader.h>
 #include <libxml/tree.h>
 #include <zypp/base/Logger.h>
@@ -49,10 +49,10 @@ namespace zypp {
       YUMPatternData_Ptr
       YUMPatternParser::process(const xmlTextReaderPtr reader)
       {
-        assert(reader);
+        xml_assert(reader);
         YUMPatternData_Ptr dataPtr = new YUMPatternData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
-        assert(dataNode);
+        xml_assert(dataNode);
 
         // FIXME move the respective method to a common class, inherit it  
         YUMPrimaryParser prim;

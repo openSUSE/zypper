@@ -12,7 +12,7 @@
 
 #include <istream>
 #include <string>
-#include <cassert>
+#include "zypp/parser/xml_parser_assert.h"
 #include <libxml/xmlreader.h>
 #include <libxml/tree.h>
 #include "zypp/parser/yum/YUMProductParser.h"
@@ -54,10 +54,10 @@ namespace zypp {
       YUMProductData_Ptr
       YUMProductParser::process(const xmlTextReaderPtr reader)
       {
-        assert(reader);
+        xml_assert(reader);
         YUMProductData_Ptr productPtr = new YUMProductData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
-        assert(dataNode);
+        xml_assert(dataNode);
         productPtr->type = _helper.attribute(dataNode,"type");
       
         // FIXME move the respective method to a common class, inherit it  

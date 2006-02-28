@@ -12,7 +12,7 @@
 #include <zypp/parser/LibXMLHelper.h>
 #include <libxml/tree.h>
 #include <libxml/xmlstring.h>
-#include <cassert>
+#include "zypp/parser/xml_parser_assert.h"
 #include <sstream>
 
 namespace zypp {
@@ -31,7 +31,7 @@ namespace zypp {
                                         const string &name, 
                                         const string &defaultValue) const
     {
-      assert(nodePtr);
+      xml_assert(nodePtr);
       xmlChar *xmlRes = xmlGetProp(nodePtr, BAD_CAST(name.c_str()));
       if (xmlRes == 0)
         return defaultValue;
@@ -45,7 +45,7 @@ namespace zypp {
     
     std::string LibXMLHelper::content(xmlNode * nodePtr) const
     {
-      assert(nodePtr);
+      xml_assert(nodePtr);
       xmlChar *xmlRes = xmlNodeGetContent(nodePtr);
       if (xmlRes == 0)
         return string();
@@ -58,7 +58,7 @@ namespace zypp {
     
     std::string LibXMLHelper::name(const xmlNode * nodePtr) const
     {
-      assert(nodePtr);
+      xml_assert(nodePtr);
       return string((const char*) nodePtr->name);
     }
     

@@ -14,7 +14,7 @@
 #include <zypp/parser/yum/YUMPrimaryParser.h>
 #include <istream>
 #include <string>
-#include <cassert>
+#include "zypp/parser/xml_parser_assert.h"
 #include <libxml/xmlreader.h>
 #include <libxml/tree.h>
 #include <zypp/parser/LibXMLHelper.h>
@@ -54,10 +54,10 @@ namespace zypp {
       YUMPatchesData_Ptr
       YUMPatchesParser::process(const xmlTextReaderPtr reader)
       {
-        assert(reader);
+        xml_assert(reader);
         YUMPatchesData_Ptr patchPtr = new YUMPatchesData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
-        assert(dataNode);
+        xml_assert(dataNode);
 
         patchPtr->id = _helper.attribute(dataNode,"id");
       

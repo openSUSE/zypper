@@ -34,9 +34,9 @@ namespace zypp {
                 char *buffer,
                 int bufferLen)
       {
-        assert(buffer);
+        xml_assert(buffer);
         std::istream *streamPtr = (std::istream *) context;
-        assert(streamPtr);
+        xml_assert(streamPtr);
         streamPtr->read(buffer,bufferLen);
         return streamPtr->gcount();
       }
@@ -180,7 +180,7 @@ namespace zypp {
     
     void XMLNodeIteratorBase::fetchNext()
     {
-      assert(_reader);
+      xml_assert(_reader);
       int status;
       /* throw away the old entry */
       setCurrent(0);
@@ -221,7 +221,7 @@ namespace zypp {
     {
       XMLNodeIteratorBase *obj;
       obj = (XMLNodeIteratorBase*) arg;
-      assert(obj);
+      xml_assert(obj);
       xmlTextReaderPtr reader = obj->_reader;
       if (strcmp("%s",msg) == 0) {
           /* This works around a buglet in libxml2, you often get "%s" as message

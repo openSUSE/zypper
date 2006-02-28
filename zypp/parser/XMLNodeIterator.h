@@ -17,7 +17,7 @@
 #include <iostream>
 #include <ostream>
 #include <sstream>
-#include <cassert>
+#include "zypp/parser/xml_parser_assert.h"
 #include <iterator>
 
 extern "C" {
@@ -398,7 +398,7 @@ namespace zypp {
       const ENTRYTYPE *
         operator->()
       {
-        assert(! atEnd());
+        xml_assert(! atEnd());
         return getCurrent();
       }
       

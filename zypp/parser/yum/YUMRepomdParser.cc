@@ -14,7 +14,7 @@
 #include <zypp/parser/LibXMLHelper.h>
 #include <istream>
 #include <string>
-#include <cassert>
+#include "zypp/parser/xml_parser_assert.h"
 #include <libxml/xmlreader.h>
 #include <libxml/tree.h>
 #include <zypp/base/Logger.h>
@@ -47,10 +47,10 @@ namespace zypp {
       YUMRepomdData_Ptr
       YUMRepomdParser::process(const xmlTextReaderPtr reader)
       {
-        assert(reader);
+        xml_assert(reader);
         YUMRepomdData_Ptr repoPtr = new YUMRepomdData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
-        assert(dataNode);
+        xml_assert(dataNode);
         repoPtr->type = _helper.attribute(dataNode,"type");
         
         for (xmlNodePtr child = dataNode->children; 

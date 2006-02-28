@@ -13,7 +13,7 @@
 #include <zypp/parser/yum/YUMPrimaryParser.h>
 #include <istream>
 #include <string>
-#include <cassert>
+#include "zypp/parser/xml_parser_assert.h"
 #include <libxml/xmlstring.h>
 #include <libxml/xmlreader.h>
 #include <libxml/tree.h>
@@ -63,10 +63,10 @@ namespace zypp {
       YUMPrimaryData_Ptr
       YUMPrimaryParser::process(const xmlTextReaderPtr reader)
       {
-        assert(reader);
+        xml_assert(reader);
         YUMPrimaryData_Ptr dataPtr = new YUMPrimaryData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
-        assert(dataNode);
+        xml_assert(dataNode);
       
         dataPtr->type = _helper.attribute(dataNode,"type");
         dataPtr->installOnly = false;
@@ -134,7 +134,7 @@ namespace zypp {
       YUMPrimaryParser::parseFormatNode(YUMPrimaryData_Ptr dataPtr,
                                               xmlNodePtr formatNode)
       {
-        assert(formatNode);
+        xml_assert(formatNode);
         dataPtr->installOnly = false;
         for (xmlNodePtr child = formatNode->children; 
              child != 0;
@@ -221,8 +221,8 @@ namespace zypp {
       YUMPrimaryParser::parseDependencyEntries(list<YUMDependency> *depList,
                                                      xmlNodePtr depNode)
       {
-        assert(depList);
-        assert(depNode);
+        xml_assert(depList);
+        xml_assert(depNode);
       
         for (xmlNodePtr child = depNode->children; 
              child != 0;
@@ -265,8 +265,8 @@ namespace zypp {
       YUMPrimaryParser::parseAuthorEntries(list<string> *authors,
                                                  xmlNodePtr node)
       {
-        assert(authors);
-        assert(node);
+        xml_assert(authors);
+        xml_assert(node);
       
         for (xmlNodePtr child = node->children; 
              child != 0;
@@ -287,8 +287,8 @@ namespace zypp {
       void YUMPrimaryParser::parseKeywordEntries(list<string> *keywords,
                                                        xmlNodePtr node)
       {
-        assert(keywords);
-        assert(node);
+        xml_assert(keywords);
+        xml_assert(node);
       
         for (xmlNodePtr child = node->children; 
              child != 0;
@@ -309,8 +309,8 @@ namespace zypp {
       void YUMPrimaryParser::parseDirsizeEntries(list<YUMDirSize> *sizes,
                                                        xmlNodePtr node)
       {
-        assert(sizes);
-        assert(node);
+        xml_assert(sizes);
+        xml_assert(node);
       
         for (xmlNodePtr child = node->children; 
              child != 0;
