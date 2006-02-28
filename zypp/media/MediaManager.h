@@ -230,6 +230,7 @@ namespace zypp
       /**
        * Reattach to a new attach point.
        *
+       * \param accessId A media access Id.
        * \param attach_point A new attach point directory.
        * \param temporary    Whether to reattach to a temporary
        *      attach point bellow of \p attach_point and cleanup
@@ -239,9 +240,10 @@ namespace zypp
        * \throws MediaNotOpenException
        * \throws MediaNotSupportedException
        */
-      void reattach(MediaAccessId   accessId,
-                    const Pathname &attach_point,
-                    bool            temporary = false);
+      void
+      reattach(MediaAccessId   accessId,
+               const Pathname &attach_point,
+               bool            temporary = false);
 
       /**
        * Release the attached media and optionally eject.
@@ -417,6 +419,9 @@ namespace zypp
 
       std::vector<MountEntry>
       getMountEntries() const;
+
+      bool
+      isUseableAttachPoint(const Pathname &path) const;
 
     private:
       friend class MediaHandler;

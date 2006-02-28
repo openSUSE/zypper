@@ -335,8 +335,19 @@ namespace zypp
 
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      (void)temporary;
-      return ref.handler->reattach(attach_point);
+      ManagedMediaMap::iterator m(m_impl->mediaMap.begin());
+      for( ; m != m_impl->mediaMap.end(); ++m)
+      {
+        // don't allow a reattach if it is the
+        // source for an loop mounted ISO file
+        if( m->second.handler->dependsOnParent(accessId))
+        {
+          ZYPP_THROW(MediaIsSharedException(
+            m->second.handler->url().asString()
+          ));
+        }
+      }
+      return ref.handler->reattach(attach_point, temporary);
     }
 
     // ---------------------------------------------------------------
@@ -618,6 +629,72 @@ namespace zypp
       MutexLock glock(g_Mutex);
 
       return m_impl->getMountEntries();
+    }
+
+    // ---------------------------------------------------------------
+    bool
+    MediaManager::isUseableAttachPoint(const Pathname &path) const
+    {
+      if( path.empty() || path == "/" || !PathInfo(path).isDir())
+        return false;
+
+      MutexLock glock(g_Mutex);
+
+      //
+      // check against our current attach points
+      //
+      ManagedMediaMap::const_iterator m(m_impl->mediaMap.begin());
+      for( ; m != m_impl->mediaMap.end(); ++m)
+      {
+        AttachedMedia ret = m->second.handler->attachedMedia();
+        if( ret.mediaSource && ret.attachPoint)
+        {
+          std::string mnt(ret.attachPoint->path.asString());
+          std::string our(path.asString());
+
+          if( our == mnt)
+          {
+            // already used as attach point
+            return false;
+          }
+          else
+          if( mnt.size() > our.size()   &&
+              mnt.at(our.size()) == '/' &&
+             !mnt.compare(0, our.size(), our))
+          {
+            // mountpoint is bellow of path
+            // (would hide the content)
+            return false;
+          }
+        }
+      }
+
+      //
+      // check against system mount entries
+      //
+      MountEntries  entries( m_impl->getMountEntries());
+      MountEntries::const_iterator e;
+      for( e = entries.begin(); e != entries.end(); ++e)
+      {
+        std::string mnt(Pathname(e->dir).asString());
+        std::string our(path.asString());
+
+        if( our == mnt)
+        {
+          // already used as mountpoint
+          return false;
+        }
+        else
+        if( mnt.size() > our.size()   &&
+            mnt.at(our.size()) == '/' &&
+           !mnt.compare(0, our.size(), our))
+        {
+          // mountpoint is bellow of path
+          // (would hide the content)
+          return false;
+        }
+      }
+      return true;
     }
 
     // ---------------------------------------------------------------
