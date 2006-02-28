@@ -77,6 +77,7 @@ class XMLFilesBackend::Private
   { }
   bool randomFileName;
   std::set<Resolvable::Kind> kinds;
+  std::set<Resolvable::Kind> kinds_flags;
   Pathname root;
 };
 
@@ -96,6 +97,7 @@ XMLFilesBackend::XMLFilesBackend(const Pathname &root) : Backend(root)
   d = new Private;
   d->randomFileName = false;
   d->root = root;
+
   // types of resolvables stored (supported)
   d->kinds.insert(ResTraits<zypp::Patch>::kind);
   //d->kinds.insert(ResTraits<zypp::Message>::kind);
@@ -103,6 +105,16 @@ XMLFilesBackend::XMLFilesBackend(const Pathname &root) : Backend(root)
   d->kinds.insert(ResTraits<zypp::Selection>::kind);
   d->kinds.insert(ResTraits<zypp::Product>::kind);
   d->kinds.insert(ResTraits<zypp::Pattern>::kind);
+
+  // types of resolvables stored (supported)
+  d->kinds_flags.insert(ResTraits<zypp::Package>::kind);
+  d->kinds_flags.insert(ResTraits<zypp::Patch>::kind);
+  //d->kinds.insert(ResTraits<zypp::Message>::kind);
+  //d->kinds.insert(ResTraits<zypp::Script>::kind);
+  d->kinds_flags.insert(ResTraits<zypp::Selection>::kind);
+  d->kinds_flags.insert(ResTraits<zypp::Product>::kind);
+  d->kinds_flags.insert(ResTraits<zypp::Pattern>::kind);
+
 
   // check if the db exists
   if (!isBackendInitialized())
@@ -167,12 +179,21 @@ XMLFilesBackend::isBackendInitialized() const
   bool ok = true;
   ok = ok && exists( path(d->root.asString()) / ZYPP_DB_DIR );
 
+  // folders for resolvables
   std::set<Resolvable::Kind>::const_iterator it_kinds;
   for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
   {
     Resolvable::Kind kind = (*it_kinds);
     ok = ok && exists(dirForResolvableKind(kind));
   }
+
+  // resolvable flags folder flags
+  for ( it_kinds = d->kinds_flags.begin() ; it_kinds != d->kinds_flags.end(); ++it_kinds )
+  {
+    Resolvable::Kind kind = (*it_kinds);
+    ok = ok && exists(dirForResolvableKindFlags(kind));
+  }
+
   ok = ok && exists( path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("sources") );
   return ok;
 }
@@ -191,7 +212,18 @@ XMLFilesBackend::initBackend()
   for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
   {
     Resolvable::Kind kind = (*it_kinds);
-    Pathname p = topdir + Pathname("/" + resolvableKindToString(kind, true /* plural */) + "/");
+    Pathname p(dirForResolvableKind(kind));
+    if (0 != assert_dir(p, 0700))
+      ZYPP_THROW(Exception("Cannot create directory" + p.asString()));
+    else
+      MIL << "Created " << p.asString() << std::endl;
+  }
+
+  // create dir for resolvables flags
+  for ( it_kinds = d->kinds_flags.begin() ; it_kinds != d->kinds_flags.end(); ++it_kinds )
+  {
+    Resolvable::Kind kind = (*it_kinds);
+    Pathname p(dirForResolvableKindFlags(kind));
     if (0 != assert_dir(p, 0700))
       ZYPP_THROW(Exception("Cannot create directory" + p.asString()));
     else
@@ -219,13 +251,27 @@ XMLFilesBackend::dirForResolvableKind( Resolvable::Kind kind ) const
 }
 
 std::string
+XMLFilesBackend::dirForResolvableKindFlags( Resolvable::Kind kind ) const
+{
+  std::string dir;
+  dir += Pathname( d->root + Pathname(ZYPP_DB_DIR) + Pathname("flags") + Pathname(resolvableKindToString(kind, true)) ).asString();
+  return dir;
+}
+
+std::string
 XMLFilesBackend::dirForResolvable( ResObject::constPtr resolvable ) const
 {
   return dirForResolvableKind(resolvable->kind());
 }
 
 std::string
-XMLFilesBackend::fullPathForResolvable( ResObject::constPtr resolvable ) const
+XMLFilesBackend::dirForResolvableFlags( ResObject::constPtr resolvable ) const
+{
+  return dirForResolvableKindFlags(resolvable->kind());
+}
+
+std::string
+XMLFilesBackend::fileNameForResolvable( ResObject::constPtr resolvable ) const
 {
   std::string filename;
   //filename = d->randomFileName ? randomString(40) : (resolvable->name() + suffix);
@@ -237,10 +283,93 @@ XMLFilesBackend::fullPathForResolvable( ResObject::constPtr resolvable ) const
   // get rid of spaces and other characters
   std::stringstream filename_stream(filename);
   std::string filename_encoded = Digest::digest("MD5", filename_stream);
-
-  return path( path(dirForResolvable(resolvable)) / path(filename_encoded)).string();
-  
+  return filename_encoded;
 }
+
+std::string
+XMLFilesBackend::fullPathForResolvable( ResObject::constPtr resolvable ) const
+{
+  return path( path(dirForResolvable(resolvable)) / path(fileNameForResolvable(resolvable))).string();
+}
+
+std::string
+XMLFilesBackend::fullPathForResolvableFlags( ResObject::constPtr resolvable ) const
+{
+  // flags are in a hidden file with the same name
+  return path( path(dirForResolvableFlags(resolvable)) / path(fileNameForResolvable(resolvable))).string();
+}
+
+void
+XMLFilesBackend::setObjectFlag( ResObject::constPtr resolvable, const std::string &flag )
+{
+  std::set<std::string> flags = objectFlags(resolvable);
+  flags.insert(flag);
+  writeObjectFlags(resolvable, flags);
+}
+
+void
+XMLFilesBackend::removeObjectFlag( ResObject::constPtr resolvable, const std::string &flag )
+{
+  std::set<std::string> flags = objectFlags(resolvable);
+  flags.erase(flag);
+  writeObjectFlags(resolvable, flags);
+}
+
+void
+XMLFilesBackend::writeObjectFlags( ResObject::constPtr resolvable, const std::set<std::string> &flags )
+{
+  std::string filename = fullPathForResolvableFlags(resolvable);
+  std::ofstream file(filename.c_str());
+  if (!file) {
+    ZYPP_THROW (Exception( "Can't open " + filename ) );
+  }
+
+  try
+  {
+    for ( std::set<std::string>::const_iterator it = flags.begin(); it != flags.end(); it++)
+    {
+      // dont save empty strings
+      if ( *it == std::string() )
+        continue;
+      else
+        file << *it << std::endl;
+    }
+    file << std::endl;
+    MIL << "Wrote " << flags.size() << " flags for " << resolvable->name() << " " << resolvable->edition() << std::endl;
+  }
+  catch( std::exception &e )
+  {
+    //ZYPP_RETHROW(e);
+  }
+}
+
+std::set<std::string>
+XMLFilesBackend::objectFlags( ResObject::constPtr resolvable )
+{
+  std::set<std::string> flags;
+  std::string filename = fullPathForResolvableFlags(resolvable);
+  // do we have previous saved flags?
+  if (!exists(path(filename)))
+    return flags;
+
+  std::ifstream file(filename.c_str());
+  if (!file) {
+    ZYPP_THROW (Exception( "Can't open " + filename ) );
+  }
+  
+  std::string buffer;
+  while(file && !file.eof())
+  {
+    getline(file, buffer);
+    if (buffer == std::string())
+      continue;
+
+    flags.insert(buffer);
+  }
+  MIL << "Read " << flags.size() << " flags for " << resolvable->name() << " " << resolvable->edition() << std::endl;
+  return flags;
+}
+
 
 void
 XMLFilesBackend::storeObject( ResObject::constPtr resolvable )

@@ -87,8 +87,19 @@ public:
   virtual std::list<ResObject::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false) const;
 
   /////////////////////////////////////////////////////////
+  // Resolvables Flags API
+  ////////////////////////////////////////////////////////
+  public:
+  void setObjectFlag( ResObject::constPtr resolvable, const std::string &flag );
+  void removeObjectFlag( ResObject::constPtr resolvable, const std::string &flag );
+  std::set<std::string> objectFlags( ResObject::constPtr resolvable );
+  
+  protected:
+  void writeObjectFlags( ResObject::constPtr resolvable, const std::set<std::string> &flags );
+  /////////////////////////////////////////////////////////
   // SOURCES API
   ////////////////////////////////////////////////////////
+  public:
   /**
     * Query for installed Sources
     */
@@ -112,10 +123,27 @@ public:
     * Directory where the xml file is stored (for the given resolvable)
     */
   std::string dirForResolvable( ResObject::constPtr resolvable ) const;
+   /**
+    * Directory where the flags are stored (for the given resolvable)
+    */
+  std::string dirForResolvableFlags( ResObject::constPtr resolvable ) const;
+  /**
+    * Encoded filename for a resolvable. Does not take kind into account.
+    */
+  std::string fileNameForResolvable( ResObject::constPtr resolvable ) const;
+  /**
+    * Encoded filename for resolvable flags. Does not take kind into account.
+    */  
+  std::string fullPathForResolvableFlags( ResObject::constPtr resolvable ) const;
+
   /**
     * Directory where the xml file is stored (for the given resolvable kind)
     */
   std::string dirForResolvableKind( Resolvable::Kind kind ) const;
+  /**
+    * Directory where the flags are stored (for the given resolvable kind)
+    */
+  std::string dirForResolvableKindFlags( Resolvable::Kind kind ) const;
   /**
     * Full path to the xml file for a given resolvable
     * Does not care if the resolvable is yet stored or not
