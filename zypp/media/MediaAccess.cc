@@ -201,7 +201,7 @@ MediaAccess::isAttached() const
 
 // local directory that corresponds to medias url
 // If media is not open an empty pathname.
-const Pathname &
+Pathname
 MediaAccess::localRoot() const
 {
   if ( !_handler )

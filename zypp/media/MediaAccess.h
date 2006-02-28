@@ -159,7 +159,7 @@ namespace zypp {
 	 *
 	 * If media is not open an empty pathname is returned.
 	 **/
-	const Pathname & localRoot() const;
+	Pathname localRoot() const;
 
 	/**
 	 * Short for 'localRoot() + pathname', but returns an empty

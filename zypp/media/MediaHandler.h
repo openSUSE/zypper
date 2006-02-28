@@ -71,19 +71,10 @@ class MediaHandler {
 
 	/**
 	 * The relative root directory of the data on the media.
-	 * See also _localRoot and urlpath_below_attachpoint_r
+	 * See also localRoot() and urlpath_below_attachpoint_r
 	 * constructor argument.
 	 */
 	Pathname _relativeRoot;
-
-	/**
-	 * The local directory that corresponds to the media url.
-	 * With NFS it's the '_attachPoint', as the directory on the
-	 * server is mounted. With CD/DVD it's 'attach point+_relativeRoot'
-	 * because the CDs root directory is mounted. And with CIFS
-	 * it's '_url.path() without the shares name'.
-	 **/
-	Pathname _localRoot;
 
 	/**
 	 * True if concrete handler downloads files to the local
@@ -254,7 +245,7 @@ class MediaHandler {
 	 * Call concrete handler to provide file below attach point.
 	 *
 	 * Default implementation provided, that returns whether a file
-	 * is located at '_localRoot + filename'.
+	 * is located at 'localRoot + filename'.
 	 *
 	 * Asserted that media is attached.
 	 *
@@ -285,7 +276,7 @@ class MediaHandler {
 	 * directory content.
 	 *
 	 * Default implementation provided, that returns whether a directory
-	 * is located at '_localRoot + dirname'.
+	 * is located at 'localRoot + dirname'.
 	 *
 	 * Asserted that media is attached.
 	 *
@@ -302,7 +293,7 @@ class MediaHandler {
 	 * directory content.
 	 *
 	 * Default implementation provided, that returns the content of a
-	 * directory at '_localRoot + dirnname' retrieved via 'readdir'.
+	 * directory at 'localRoot + dirnname' retrieved via 'readdir'.
 	 *
 	 * Asserted that media is attached and retlist is empty.
 	 *
@@ -419,7 +410,7 @@ class MediaHandler {
 	 *
 	 * Returns empty pathname if E_bad_attachpoint
 	 **/
-	const Pathname & localRoot() const { return _localRoot; }
+	Pathname localRoot() const;
 
 	/**
 	 * Files provided will be available at 'localPath(filename)'.

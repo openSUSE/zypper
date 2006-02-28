@@ -158,14 +158,17 @@ MediaHandler::attachPoint() const
 void
 MediaHandler::setAttachPoint(const Pathname &path, bool temporary)
 {
-  _localRoot = Pathname();
-
   _attachPoint.reset( new AttachPoint(path, temporary));
-
-  if( !_attachPoint->path.empty())
-    _localRoot = _attachPoint->path + _relativeRoot;
 }
 
+Pathname
+MediaHandler::localRoot() const
+{
+  if( _attachPoint->path.empty())
+    return Pathname();
+  else
+    return _attachPoint->path + _relativeRoot;
+}
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -178,15 +181,10 @@ MediaHandler::setAttachPoint(const Pathname &path, bool temporary)
 void
 MediaHandler::setAttachPoint(const AttachPointRef &ref)
 {
-  _localRoot = Pathname();
-
   if( ref)
     AttachPointRef(ref).swap(_attachPoint);
   else
     _attachPoint.reset( new AttachPoint());
-
-  if( !_attachPoint->path.empty())
-    _localRoot = _attachPoint->path + _relativeRoot;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -489,7 +487,9 @@ void MediaHandler::attach( bool next )
 //	METHOD NAME : MediaHandler::localPath
 //	METHOD TYPE : Pathname
 //
-Pathname MediaHandler::localPath( const Pathname & pathname ) const {
+Pathname MediaHandler::localPath( const Pathname & pathname ) const
+{
+    Pathname _localRoot( localRoot());
     if ( _localRoot.empty() )
         return _localRoot;
 
@@ -808,7 +808,7 @@ void MediaHandler::releasePath( Pathname pathname ) const
   if ( info.isFile() ) {
     unlink( info.path() );
   } else if ( info.isDir() ) {
-    if ( info.path() != _localRoot ) {
+    if ( info.path() != localRoot() ) {
       recursive_rmdir( info.path() );
     } else {
       clean_dir( info.path() );
