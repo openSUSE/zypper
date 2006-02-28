@@ -54,6 +54,7 @@ MediaHandler::MediaHandler ( const Url &      url_r,
     , _attach_mtime(0)
     , _url( url_r )
     , _parentId(0)
+    , _AttachPointHint()
 {
   if ( !attach_point_r.empty() ) {
     ///////////////////////////////////////////////////////////////////
@@ -62,10 +63,11 @@ MediaHandler::MediaHandler ( const Url &      url_r,
 
     PathInfo adir( attach_point_r );
     // FIXME: verify if attach_point_r isn't a mountpoint of other device
-    if ( !adir.isDir() ) {
+    if ( !adir.isDir() || !attach_point_r.absolute()) {
       ERR << "Provided attach point is not a directory: " << adir << endl;
     }
     else {
+      attachPointHint( attach_point_r, false);
       setAttachPoint( attach_point_r, false);
     }
   }
@@ -187,6 +189,34 @@ MediaHandler::setAttachPoint(const AttachPointRef &ref)
     _localRoot = _attachPoint->path + _relativeRoot;
 }
 
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : MediaHandler::attachPointHint
+//	METHOD TYPE : void
+//
+//	DESCRIPTION :
+//
+void
+MediaHandler::attachPointHint(const Pathname &path, bool temporary)
+{
+  _AttachPointHint.path = path;
+  _AttachPointHint.temp = temporary;
+}
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : MediaHandler::attachPointHint
+//	METHOD TYPE : AttachPoint
+//
+//	DESCRIPTION :
+//
+AttachPoint
+MediaHandler::attachPointHint() const
+{
+  return _AttachPointHint;
+}
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -223,37 +253,12 @@ MediaHandler::createAttachPoint() const
 
   Pathname apoint;
   Pathname aroot;
-  PathInfo adir;
   for ( const char ** def = defmounts; *def && apoint.empty(); ++def ) {
-    adir( *def );
-    if ( !adir.isDir() || !adir.userMayRWX() )
-      continue;
-
-    aroot = adir.path();
+    aroot = *def;
     if( aroot.empty())
       continue;
 
-    DBG << "Trying to create attachPoint in " << aroot << std::endl;
-
-    //
-    // FIXME: use mkdtemp
-    //
-    Pathname abase( aroot + "AP_" );
-    //        ma and sh need more than 42 for debugging :-)
-    //        since the readonly fs are handled now, ...
-    for ( unsigned i = 1; i < 1000; ++i ) {
-      adir( Pathname::extend( abase, str::hexstring( i ) ) );
-      if ( ! adir.isExist() ) {
-	int err = mkdir( adir.path() );
-	if (err == 0 ) {
-            apoint = adir.path();
-            break;
-	}
-	else
-	if (err != EEXIST)	// readonly fs or other, dont try further
-	   break;
-      }
-    }
+    apoint = createAttachPoint(aroot);
   }
 
   if ( aroot.empty() ) {
@@ -261,14 +266,58 @@ MediaHandler::createAttachPoint() const
     return aroot;
   }
 
-  if ( apoint.empty() ) {
-    ERR << "Unable to create an attach point below " << aroot << std::endl;
-  } else {
+  if ( !apoint.empty() ) {
     MIL << "Created default attach point " << apoint << std::endl;
   }
   return apoint;
 }
 
+Pathname
+MediaHandler::createAttachPoint(const Pathname &attach_root) const
+{
+  Pathname apoint;
+
+  if( attach_root.empty() || !attach_root.absolute()) {
+    ERR << "Create attach point: invalid attach root: '"
+        << attach_root << "'" << std::endl;
+    return apoint;
+  }
+
+  PathInfo adir( attach_root);
+  if( !adir.isDir() || !adir.userMayRWX()) {
+    DBG << "Create attach point: attach root is not a writable directory: '"
+        << attach_root << "'" << std::endl;
+    return apoint;
+  }
+
+  DBG << "Trying to create attach point in " << attach_root << std::endl;
+
+  //
+  // FIXME: use mkdtemp?
+  //
+  Pathname abase( attach_root + "AP_" );
+  //        ma and sh need more than 42 for debugging :-)
+  //        since the readonly fs are handled now, ...
+  for ( unsigned i = 1; i < 1000; ++i ) {
+    adir( Pathname::extend( abase, str::hexstring( i ) ) );
+    if ( ! adir.isExist() ) {
+      int err = mkdir( adir.path() );
+      if (err == 0 ) {
+        apoint = adir.path();
+        break;
+      }
+      else
+      if (err != EEXIST)	// readonly fs or other, dont try further
+        break;
+    }
+  }
+
+  if ( apoint.empty()) {
+    ERR << "Unable to create an attach point below of "
+        << attach_root << std::endl;
+  }
+  return apoint;
+}
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -281,36 +330,8 @@ MediaHandler::createAttachPoint() const
 bool
 MediaHandler::isUseableAttachPoint(const Pathname &path) const
 {
-  if( path.empty() || path == "/" || !PathInfo(path).isDir())
-    return false;
-
   MediaManager  manager;
-  MountEntries  entries( manager.getMountEntries());
-  MountEntries::const_iterator e;
-
-  for( e = entries.begin(); e != entries.end(); ++e)
-  {
-    std::string mnt(Pathname(e->dir).asString());
-
-    if( path == mnt)
-    {
-      // already used as mountpoint
-      return false;
-    }
-    else
-    {
-      std::string our(path.asString());
-
-      // mountpoint is bellow of path
-      // (would hide the content)
-      if( mnt.size() > our.size()   &&
-          mnt.at(our.size()) == '/' &&
-         !mnt.compare(0, our.size(), our))
-        return false;
-    }
-  }
-
-  return true;
+  return manager.isUseableAttachPoint(path);
 }
 
 
@@ -553,18 +574,122 @@ void MediaHandler::release( bool eject )
   MIL << "Released: " << *this << endl;
 }
 
-void
-MediaHandler::reattach(const Pathname &new_attach_point)
+bool
+MediaHandler::checkAttachPoint(const Pathname &apoint) const
 {
-  return reattachTo(new_attach_point);
+  return checkAttachPoint( apoint, true, false);
+}
+
+bool
+MediaHandler::checkAttachPoint(const Pathname &apoint,
+			       bool            emptydir,
+	                       bool            writeable) const
+{
+  if( apoint.empty() || !apoint.absolute())
+  {
+    ERR << "Attach point '" << apoint << "' is not absolute"
+        << std::endl;
+    return false;
+  }
+
+  PathInfo ainfo(apoint);
+  if( !ainfo.isDir())
+  {
+    ERR << "Attach point '" << apoint << "' is not a directory"
+        << std::endl;
+    return false;
+  }
+
+  if( emptydir)
+  {
+    if( 0 != zypp::filesystem::is_empty_dir(apoint))
+    {
+      ERR << "Attach point '" << apoint << "' is not a empty directory"
+          << std::endl;
+      return false;
+    }
+  }
+
+  if( writeable)
+  {
+    Pathname apath(apoint + "XXXXXX");
+    char    *atemp = ::strdup( apath.asString().c_str());
+    char    *atest = NULL;
+    if( !ainfo.userMayRWX() || atemp == NULL ||
+        (atest=::mkdtemp(atemp)) == NULL)
+    {
+      if( atemp != NULL)
+	::free(atemp);
+
+      ERR << "Attach point '" << ainfo.path()
+          << "' is not a writeable directory" << std::endl;
+      return false;
+    }
+    else if( atest != NULL)
+      ::rmdir(atest);
+
+    if( atemp != NULL)
+      ::free(atemp);
+  }
+  return true;
 }
 
 void
-MediaHandler::reattachTo(const Pathname &new_attach_point)
+MediaHandler::reattach(const Pathname &attach_point,
+                       bool            temporary)
 {
-  DBG << "Ignoring reattach to '"
-      << new_attach_point.asString()
-      << "'" << std::endl;
+  // ignore if it is equal to current attach point hint
+  AttachPoint hint( attachPointHint());
+  if( hint.temp == temporary && hint.path == attach_point)
+  {
+    DBG << "Ignored reattach - equals to current one" << std::endl;
+    return;
+  }
+
+  if( temporary)
+  {
+    if( !attach_point.empty())
+    {
+      // check if the new attach point root hint is
+      // a writable directory; may contains files.
+      if( !checkAttachPoint(attach_point, false, true))
+        ZYPP_THROW( MediaBadAttachPointException(url()));
+    }
+  }
+  else
+  {
+    // use attach_point as non-temporary attach point
+    if( !checkAttachPoint(attach_point))
+      ZYPP_THROW( MediaBadAttachPointException(url()));
+
+    if( !isUseableAttachPoint(attach_point))
+      ZYPP_THROW( MediaBadAttachPointException(url()));
+  }
+
+  // pass new hint to specific handler
+  reattachTo(attach_point, temporary);
+}
+
+void
+MediaHandler::reattachTo(const Pathname &attach_point,
+                         bool            temporary)
+{
+  if( !isAttached())
+  {
+    DBG << "Accepted reattach to '"
+        << attach_point
+        << "' -- as hint for the next attach"
+	<< std::endl;
+
+    attachPointHint(attach_point, temporary);
+  }
+  else
+  {
+    DBG << "Ignoring reattach to '" << attach_point
+        << "'" << (temporary ? " (attach point root)" : "")
+	<< " not supported by this access handler."
+        << std::endl;
+  }
 }
 
 
@@ -946,3 +1071,4 @@ void MediaHandler::getDirInfo( filesystem::DirContent & retlist,
 
   } // namespace media
 } // namespace zypp
+// vim: set ts=8 sts=2 sw=2 ai noet:

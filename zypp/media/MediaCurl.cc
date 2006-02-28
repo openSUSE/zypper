@@ -129,7 +129,14 @@ void MediaCurl::attachTo (bool next)
 
   if( !isUseableAttachPoint(attachPoint()))
   {
-    std::string mountpoint = createAttachPoint().asString();
+    std::string mountpoint;
+
+    AttachPoint hint( attachPointHint());
+    if( hint.temp && !hint.path.empty())
+      mountpoint = createAttachPoint(hint.path).asString();
+    else 
+      mountpoint = createAttachPoint().asString();
+
     if( mountpoint.empty())
       ZYPP_THROW( MediaBadAttachPointException(url()));
       setAttachPoint( mountpoint, true);
@@ -354,6 +361,96 @@ void MediaCurl::attachTo (bool next)
   // FIXME: need a derived class to propelly compare url's
   MediaSourceRef media( new MediaSource(_url.getScheme(), _url.asString()));
   setMediaSource(media);
+}
+
+bool
+MediaCurl::checkAttachPoint(const Pathname &apoint) const
+{
+  return MediaHandler::checkAttachPoint( apoint, true, true);
+}
+
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : MediaCurl::reattachTo
+//	METHOD TYPE : PMError
+//
+void
+MediaCurl::reattachTo(const Pathname &attach_point, bool temporary)
+{
+  //
+  // already checked, just accept as hint
+  //
+  attachPointHint(attach_point, temporary);
+
+  if( !isAttached())
+  {
+    DBG << "Accepted reattach to '"
+        << attach_point
+        << "' -- as hint for the next attach"
+	<< std::endl;
+    return;
+  }
+
+  AttachPointRef aref( new AttachPoint(attach_point, temporary));
+  if( temporary)
+  {
+    aref->path = createAttachPoint(attach_point);
+    if( aref->path.empty())
+    {
+      // reset attach point hint to defaults
+      attachPointHint("", true);
+
+      ZYPP_THROW( MediaBadAttachPointException(url()));
+    }
+  }
+
+  // Copy content into new attach point...
+  if( 0 != zypp::filesystem::copy_dir_content(attachPoint(), aref->path))
+  {
+    ERR << "Unable to copy old attach point content to "
+        << aref->path << std::endl;
+
+    if( temporary)
+    {
+      if( 0 != recursive_rmdir( aref->path))
+      {
+        ERR << "Unable to remove attach point candidate" << std::endl;
+      }
+    }
+    else
+    {
+      if( 0 != clean_dir( aref->path))
+      {
+        ERR << "Unable to cleanup attach point candidate" << std::endl;
+      }
+    }
+    ZYPP_THROW(MediaWriteException(aref->path));
+  }
+
+  // OK, let's switch all instances to the new attach point
+  AttachedMedia old( attachedMedia());
+
+  // FIXME: use removeAttachPoint() ?
+  if( old.attachPoint->temp)
+  {
+    int res = recursive_rmdir( old.attachPoint->path );
+    if( res == 0)
+    {
+      DBG << "Removed old attach point"
+          << old.attachPoint->path << std::endl;
+    }
+    else
+    {
+      ERR << "Unable to remove old attach point"
+          << old.attachPoint->path << std::endl;
+    }
+  }
+  // FIXME: I hope this works propelly - check it:
+  // update the attach point content, so it takes
+  // effect in _all_ shared media instances...
+  old.attachPoint->path = aref->path;
+  old.attachPoint->temp = aref->temp;
 }
 
 ///////////////////////////////////////////////////////////////////

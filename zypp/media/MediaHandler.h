@@ -54,10 +54,20 @@ class MediaHandler {
         MediaSourceRef _mediaSource;
 
 	/**
-	 * this is where the media will be actually "mounted"
-	 * all files are provided 'below' this directory.
+	 * This is where the media will be actually attached ("mounted").
+	 * All files are provided bellow this + _relativeRoot directory.
 	 **/
 	AttachPointRef _attachPoint;
+
+	/**
+	 * The user provided attach point or the last attach point from
+	 * successfull reattach request. It may contain following values:
+	 *
+	 *      "",  true  => create temp attach point in default dir
+	 *      dir, true  => create temp attach point bellow of dir
+	 *      dir, false => user specified attach point (not removed)
+	 */
+	AttachPoint _AttachPointHint;
 
 	/**
 	 * The relative root directory of the data on the media.
@@ -111,15 +121,32 @@ class MediaHandler {
 	void             setAttachPoint(const AttachPointRef &ref);
 
 	/**
+	 * Get the actual attach point hint.
+	 */
+	AttachPoint      attachPointHint() const;
+
+	/**
+	 * Set the attach point hint (e.g. on reattach).
+	 */
+	void             attachPointHint(const Pathname &path, bool _temporary);
+
+	/**
 	 * Try to create a default / temporary attach point.
 	 * \return The name of the new attach point or empty path name.
 	 */
 	Pathname         createAttachPoint() const;
+        Pathname         createAttachPoint(const Pathname &attach_root) const;
 
 	/**
 	 * Remove unused attach point.
 	 */
 	void             removeAttachPoint();
+
+	virtual bool     checkAttachPoint(const Pathname &apoint) const;
+
+	bool             checkAttachPoint(const Pathname &apoint,
+					  bool            empty_dir,
+	                                  bool            writeable) const;
 
         bool             isUseableAttachPoint(const Pathname &path) const;
 
@@ -158,8 +185,10 @@ class MediaHandler {
 	bool                 checkAttached(bool aDevice,
 	                                   bool fsType=false) const;
 
-	void                 reattach(const Pathname &new_attach_point);
-	virtual void         reattachTo(const Pathname &new_attach_point);
+	void                 reattach(const Pathname &attach_point,
+	                              bool            temporary);
+	virtual void         reattachTo(const Pathname &attach_point,
+	                                bool            temporary);
 
     protected:
 

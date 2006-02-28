@@ -183,12 +183,13 @@ void MediaAccess::attach (bool next)
   _handler->attach(next);
 }
 
-void MediaAccess::reattach(const Pathname &new_attach_point)
+void MediaAccess::reattach(const Pathname &attach_point,
+                           bool            temporary)
 {
   if ( !_handler ) {
     ZYPP_THROW(MediaNotOpenException("reattach"));
   }
-  _handler->reattach(new_attach_point);
+  _handler->reattach(attach_point, temporary);
 }
 
 // True if media is open and attached.
