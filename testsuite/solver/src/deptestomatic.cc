@@ -170,6 +170,9 @@ string2kind (const std::string & str)
 	else if (str == "product") {
 	    kind = ResTraits<zypp::Product>::kind;
 	}
+	else if (str == "language") {
+	    kind = ResTraits<zypp::Language>::kind;
+	}
 	else {
 	    cerr << "get_poolItem unknown kind '" << str << "'" << endl;
 	}
