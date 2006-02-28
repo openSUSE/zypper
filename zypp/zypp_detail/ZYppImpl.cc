@@ -195,6 +195,9 @@ namespace zypp
 	bool changed = false;
 	for (LocaleSet::const_iterator it = locales_r.begin(); it != locales_r.end(); ++it) {
 	    changed = possible.insert( *it ).second;
+	    if ( (it->code() != it->language().code()) ) {
+		changed = possible.insert( Locale( it->language().code() ) ).second;
+	    }
 	}
 
 	// oops, some requested are not possbile, make them possible
@@ -207,11 +210,24 @@ namespace zypp
 	// now select the requested items for selection
 
 	for (LocaleSet::const_iterator it = locales_r.begin(); it != locales_r.end(); ++it) {
+	    MIL << "Requested locale '" << *it << "'" << endl;
+
 // remove unwanted ?	    PoolItem installed( Helper::findInstalledByNameAndKind( _pool.accessor(), it->code(), ResTraits<Language>::kind ) );
 	    PoolItem uninstalled( solver::detail::Helper::findUninstalledByNameAndKind( _pool.accessor(), it->code(), ResTraits<Language>::kind ) );
 	    if (uninstalled) {
 		if (!uninstalled.status().isLocked()) {
 		    uninstalled.status().setTransact( true, ResStatus::USER );
+		}
+	    }
+
+	    // if lang_country is given, also enable lang (i.e. if "de_DE" is given, also enable "de")
+	    if ( (it->code() != it->language().code()) ) {
+		MIL << "Auto requesting locale '" << it->language().code() << "'" << endl;
+		uninstalled = solver::detail::Helper::findUninstalledByNameAndKind( _pool.accessor(), it->language().code(), ResTraits<Language>::kind );
+		if (uninstalled) {
+		    if (!uninstalled.status().isLocked()) {
+			uninstalled.status().setTransact( true, ResStatus::USER );
+		    }
 		}
 	    }
 	}
