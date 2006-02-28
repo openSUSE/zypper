@@ -60,7 +60,9 @@ namespace zypp
 	try {
 	  media::MediaManager media_mgr;
 	  MIL << "Adding no media verifier" << endl;
-	  media::MediaAccessId _media = _media_set->getMediaAccessId(1);
+	  
+	  // don't try to attach media
+	  media::MediaAccessId _media = _media_set->getMediaAccessId(1, true);
 	  media_mgr.delVerifier(_media);
 	  media_mgr.addVerifier(_media, media::MediaVerifierRef(new media::NoVerifier()));
 	}
