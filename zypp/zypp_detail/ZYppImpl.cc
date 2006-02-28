@@ -126,6 +126,7 @@ namespace zypp
 
     void ZYppImpl::initTarget(const Pathname & root, bool commit_only)
     {
+      MIL << "initTarget( " << root << ", " << commit_only << ")" << endl;
       if (_target) {
 	if (_target->root() == root) {
 	    MIL << "Repeated call to initTarget()" << endl;
