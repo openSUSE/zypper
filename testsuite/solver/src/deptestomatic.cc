@@ -811,8 +811,10 @@ parse_xml_setup (XmlNode_Ptr node)
 	    string loc = node->getProp ("name");
 	    if (loc.empty())
 		cerr << "Bad or missing name in <locale...>" << endl;
-	    else
+	    else {
+		RESULT << "Requesting locale " << loc << endl;
 		locales.insert( Locale( loc ) );
+	    }
 	} else {
 	    cerr << "Unrecognized tag '" << node->name() << "' in setup" << endl;
 	}
