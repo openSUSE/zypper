@@ -151,7 +151,7 @@ struct EstablishItem
 	_XDEBUG("EstablishItem (" << cai.item << ", " << cai.cap << ")");
 
 	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, cai.item, soft);
-	qil.push_back (establish_item);
+	qil.push_front (establish_item);
 	return true;
     }
 };
