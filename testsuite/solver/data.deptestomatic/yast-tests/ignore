@@ -1,7 +1,3 @@
-#all 3 have lock entries --> does not work currently
-exercise-obscureobsoletes-02-test.xml
-exercise-obscureobsoletes-03-test.xml
-exercise-obscureobsoletes-06-test.xml
 #output has been canceled
 exercise-05reallive-4-test.xml
 #solution ordering is not the same
