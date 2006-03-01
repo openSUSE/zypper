@@ -378,6 +378,7 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 	// conflict3-test.xml  remove-still-needed1-test.xml  remove-still-needed3-test.xml  unfulfilled-2-test.xml
 	//
 	bool found = false;
+
 	ResolverInfoList addList;
 	for (ResolverInfoList::const_iterator iter = _log.begin(); iter != _log.end(); iter++) {
 	    ResolverInfo_Ptr info = *iter;
@@ -389,10 +390,10 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 		    found = true;
 		    addList.push_back (info);
 		}
-	    } else if (	((info->type() == RESOLVER_INFO_TYPE_NO_PROVIDER
-			  || info->type() == RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER
-			  && info->affected() == item))
-			|| info->type() == RESOLVER_INFO_TYPE_CANT_SATISFY)
+	    } else if (	(info->type() == RESOLVER_INFO_TYPE_NO_PROVIDER
+			 || info->type() == RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER
+			 || info->type() == RESOLVER_INFO_TYPE_CANT_SATISFY)
+			&& info->affected() == item)
 	    {
 		// put the info on the end as error
 		found = true;
