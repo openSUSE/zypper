@@ -25,16 +25,16 @@ namespace zypp
   DiskUsage::Entry DiskUsage::extract( const std::string & dirname_r )
   {
     Entry ret( dirname_r );
-  
+
     iterator fst = begin();
     for ( ; fst != end() && !fst->isBelow( ret ); ++fst )
       ; // seek 1st equal or below
   
     if ( fst != end() ) {
       iterator lst = fst;
+      // return the first found, the value is sum of all subdirectories below
+      ret += *lst;
       for ( ; lst != end() && lst->isBelow( ret ); ++lst ) {
-        // collect while below
-        ret += *lst;
       }
       // remove
       _dirs.erase( fst, lst );
