@@ -132,13 +132,7 @@ ResolverInfoMisc::message (void) const
 {
     string msg;
 
-    string affected_str = "";
-    if (affected()) 
-	affected_str = affected()->name();
-
-    string other_str = "";
-    if (other()) 
-	other_str = other()->name();
+    string affected_str = ResolverInfo::toString(affected());
 
     switch (type()) {
 
@@ -195,7 +189,7 @@ ResolverInfoMisc::message (void) const
 	    // Translator: %s = name of package,patch,...
 	    msg = str::form (_("Can't install %s, since %s is already marked as needing to be installed"),
 			     affected_str.c_str(),
-			     other_str.c_str());
+			     toString (other()).c_str());
 	}
 	break;
 
@@ -256,7 +250,7 @@ ResolverInfoMisc::message (void) const
 	    // TranslatorExample: Updating foo-1.1 to foo-1.2
 	    // TranslatorExplanation: Just a progress indicator that something is scheduled for upgrade
 	    msg = str::form (_("Updating %s to %s"),
-			     other_str.c_str(),
+			     ResolverInfo::toString (other()).c_str(),
 			     affected_str.c_str());
 	}
 	break;
@@ -344,7 +338,7 @@ ResolverInfoMisc::message (void) const
 	    // TranslatorExample: Upgrade to foo to avoid removing bar is not possible
 	    // TranslatorExplanation: bar requires something from foo
 	    msg = str::form (_("Upgrade to %s to avoid removing %s is not possible."),
-				    other_str.c_str(),
+				    ResolverInfo::toString (other()).c_str(),
 				    affected_str.c_str());
 	}
 	break;
@@ -360,7 +354,7 @@ ResolverInfoMisc::message (void) const
 
 	    // Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
 	    msg = str::form (_("%s provides %s, but is scheduled to be uninstalled."),
-			     other_str.c_str(),
+			     ResolverInfo::toString (other()).c_str(),
 			     ResolverInfo::toString (_capability).c_str());
 	}
 	break;
@@ -376,7 +370,7 @@ ResolverInfoMisc::message (void) const
 
 	    // Translator: 1.%s = name of package,patch,...; 2.%s = dependency; 3.%s type (package, patch, ...)
 	    msg = str::form (_("%s provides %s, but another version of that %s is already installed."),
-			     other_str.c_str(),
+			     other()->name().c_str(),
 			     ResolverInfo::toString (_capability).c_str(),
 			     translateResTraits(other()->kind()).c_str());
 	}
@@ -393,7 +387,7 @@ ResolverInfoMisc::message (void) const
 
 	    // Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
 	    msg = str::form (_("%s provides %s, but it is uninstallable.  Try installing it on its own for more details."),
-			     other_str.c_str(),
+			     other()->name().c_str(),
 			     ResolverInfo::toString (_capability).c_str());
 	}
 	break;
@@ -409,7 +403,7 @@ ResolverInfoMisc::message (void) const
 
 	    // Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
 	    msg = str::form (_("%s provides %s, but it is locked."),
-			     other_str.c_str(),
+			     other()->name().c_str(),
 			     ResolverInfo::toString (_capability).c_str());
 	}
 	break;
@@ -446,7 +440,7 @@ ResolverInfoMisc::message (void) const
 	    // TranslatorExample: foo is required by other to-be-installed resolvable, so it won't be unlinked.
 	    // TranslatorExplanation: Cant uninstall foo since it is required by an to-be-installed resolvable
 	    msg = str::form (_("%s is required by other to-be-installed resolvable, so it won't be unlinked."),
-			     affected_str.c_str());
+			     affected()->name().c_str());
 	}
 	break;
 
@@ -463,7 +457,7 @@ ResolverInfoMisc::message (void) const
 	    // TranslatorExample: foo is required by other installed resolvable, so it won't be unlinked.
 	    // TranslatorExplanation: Cant uninstall foo since it is required by an installed resolvable
 	    msg = str::form (_("%s is required by other installed resolvable, so it won't be unlinked."),
-			     affected_str.c_str());
+			     affected()->name().c_str());
 	}
 	break;
 
@@ -480,7 +474,7 @@ ResolverInfoMisc::message (void) const
 	    // TranslatorExample: foo is locked and cannot be uninstalled.
 	    // TranslatorExplanation: foo is to-be-uninstalled but it is locked
 	    msg = str::form (_("%s is locked and cannot be uninstalled."),
-			     affected_str.c_str());
+			     affected()->name().c_str());
 	}
 	break;
 
