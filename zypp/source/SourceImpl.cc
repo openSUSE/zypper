@@ -114,10 +114,13 @@ namespace zypp
 
       SourceFactory source_factory;
 
-      media::MediaAccessId _media;
+      // get the mediaId, but don't try to attach it here
+      media::MediaAccessId _media = _media_set->getMediaAccessId(media_nr, true);
       do {
         try {
 	  DBG << "Going to try provide file " << file_r << " from " << media_nr << endl;
+	  
+	  // try to attach the media
 	  _media = _media_set->getMediaAccessId(media_nr); // in case of redirect
 	  media_mgr.provideFile (_media, file_r, cached, checkonly);
 	  break;
