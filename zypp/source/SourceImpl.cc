@@ -131,7 +131,7 @@ namespace zypp
 
   	  do {
 
-	    DBG << "Media couldn't release file, releasing." << endl;
+	    DBG << "Media couldn't provide file, releasing." << endl;
 	    media_mgr.release (_media, false);
 
 	    user  = checkonly ? media::MediaChangeReport::ABORT :
