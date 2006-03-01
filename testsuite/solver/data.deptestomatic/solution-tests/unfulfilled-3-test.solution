@@ -1,0 +1,14 @@
+>!> Installing unfulfilled1 from channel test
+>!> Installing unfulfilled2 from channel test
+>!> Installing unfulfilled3 from channel test
+>!> Installing unfulfilled4 from channel test
+>!> 1 problems found:
+>!> Problem:
+>!> unfulfilled4 cannot be installed due missing dependencies
+>!> There are no installable providers of nothere for unfulfilled4-1.0-1.noarch[test]
+>!>    Solution:
+>!>       do not install unfulfilled4
+>!>       do not install [package]unfulfilled4-1.0-1.noarch
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
