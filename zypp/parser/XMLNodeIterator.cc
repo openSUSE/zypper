@@ -133,7 +133,7 @@ namespace zypp {
       if (_reader && validationPath)
         if (xmlTextReaderRelaxNGValidate
             (_reader,validationPath)==-1)
-          WAR << "Could not enable validation of repomd document" << std::endl;
+          WAR << "Could not enable validation of document" << std::endl;
       
         /* Derived classes must call fetchNext() in their constructors themselves,
            XMLNodeIterator has no access to their virtual functions during
@@ -232,9 +232,11 @@ namespace zypp {
         severity = XML_PARSER_SEVERITY_WARNING;
       }
       const char *errOrWarn = (severity & XML_PARSER_SEVERITY_ERROR) ? "error" : "warning";
+      
       std::ostream& out = (severity & XML_PARSER_SEVERITY_ERROR) ? ERR : WAR;
     
         /* Log it */
+      /*
     out << "XML syntax " << errOrWarn << ": " << msg;
       if (obj->_error.get()) {
         out << "(encountered during error recovery!)" << std::endl;
@@ -247,7 +249,7 @@ namespace zypp {
         << ", column " << xmlTextReaderGetParserColumnNumber(reader);
       }
       out << std::endl;
-      
+      */
         /* save it */
       if ((severity & XML_PARSER_SEVERITY_ERROR)
           && ! obj->_error.get()) {
