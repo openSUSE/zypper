@@ -169,7 +169,6 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
 			    const Capability & capability);
     void addIgnoreObsoletes (const PoolItem_Ref item,
 			     const Capability & capability);
-    void addIgnoreArchitecture (const PoolItem_Ref item);
     void addIgnoreInstalledItem (const PoolItem_Ref item);
 
     void setForceResolve (const bool force) { _forceResolve = force; }

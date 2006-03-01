@@ -268,12 +268,6 @@ Resolver::addIgnoreObsoletes (const PoolItem_Ref item,
 }
 
 void
-Resolver::addIgnoreArchitecture (const PoolItem_Ref item)
-{
-    _ignoreArchitecture.push_back (item);
-}
-
-void
 Resolver::addIgnoreInstalledItem (const PoolItem_Ref item)
 {
     _ignoreInstalledItem.push_back (item);
@@ -398,7 +392,6 @@ Resolver::establishState (ResolverContext_Ptr context)
     context->setIgnoreCababilities (_ignoreConflicts,
 				    _ignoreRequires,
 				    _ignoreObsoletes,
-				    _ignoreArchitecture,
 				    _ignoreInstalledItem);
     context->setForceResolve (_forceResolve);
     context->setUpgradeMode (_upgradeMode);        
@@ -507,7 +500,6 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     initial_queue->context()->setIgnoreCababilities (_ignoreConflicts,
 				    _ignoreRequires,
 				    _ignoreObsoletes,
-				    _ignoreArchitecture,
 				    _ignoreInstalledItem);
     initial_queue->context()->setForceResolve (_forceResolve);
     initial_queue->context()->setUpgradeMode (_upgradeMode);        

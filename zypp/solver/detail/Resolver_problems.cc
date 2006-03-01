@@ -300,11 +300,7 @@ Resolver::problems (void) const
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package,patch,...				
 		what = misc_info->message();
-		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
-		// Ignoring architecture
-		problem->addSolution (new ProblemSolutionIgnoreArch (problem, item));
-		problems.push_back (problem);
-		problem_created = true;		
+		// no solution; it is only a info
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_INSTALL_PARALLEL: {			// Can't install p, since a resolvable of the same name is already marked as needing to be installed.

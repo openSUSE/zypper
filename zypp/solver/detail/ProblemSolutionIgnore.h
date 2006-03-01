@@ -81,17 +81,6 @@ namespace zypp
 					    PoolItem_Ref otherItem);	    
 	};
 
-	class ProblemSolutionIgnoreArch : public ProblemSolution
-	{
-	public:
-
-	    /**
-	     * Constructor.
-	     **/
-	    ProblemSolutionIgnoreArch( ResolverProblem_Ptr parent,
-				       PoolItem_Ref item);
-	};
-
 	class ProblemSolutionIgnoreInstalled : public ProblemSolution
 	{
 	public:

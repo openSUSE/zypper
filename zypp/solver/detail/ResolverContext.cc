@@ -103,7 +103,6 @@ _XDEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
 	_ignoreConflicts     = parent->_ignoreConflicts;
 	_ignoreRequires      = parent->_ignoreRequires;
 	_ignoreObsoletes     = parent->_ignoreObsoletes;
-	_ignoreArchitecture  = parent->_ignoreArchitecture;
 	_ignoreInstalledItem = parent->_ignoreInstalledItem;
 	_forceResolve        = parent->_forceResolve;
 	_upgradeMode         = parent->_upgradeMode;
@@ -210,7 +209,7 @@ ResolverContext::install (PoolItem_Ref item, bool is_soft, int other_penalty)
 
     if (status.isUnneeded()) {
 	ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INSTALL_UNNEEDED, item, RESOLVER_INFO_PRIORITY_VERBOSE);
-	addError (misc_info);
+	addInfo (misc_info);
 	return false;
     }
 

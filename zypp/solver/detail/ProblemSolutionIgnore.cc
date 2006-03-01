@@ -41,7 +41,6 @@ namespace zypp
 
 IMPL_PTR_TYPE(ProblemSolutionIgnoreConflicts);
 IMPL_PTR_TYPE(ProblemSolutionIgnoreRequires);
-IMPL_PTR_TYPE(ProblemSolutionIgnoreArch);
 IMPL_PTR_TYPE(ProblemSolutionIgnoreInstalled);	
 
 //---------------------------------------------------------------------------
@@ -92,14 +91,6 @@ ProblemSolutionIgnoreObsoletes::ProblemSolutionIgnoreObsoletes( ResolverProblem_
 	addAction (new InjectSolutionAction (item, capability, OBSOLETES, otherItem));	
 }
 
-
-ProblemSolutionIgnoreArch::ProblemSolutionIgnoreArch( ResolverProblem_Ptr parent,
-						      PoolItem_Ref item )
-    : ProblemSolution (parent, "", "")
-{
-    _description = _("ignore architecture");
-    addAction ( new InjectSolutionAction (item, Capability(), ARCHITECTURE));
-}
 
 ProblemSolutionIgnoreInstalled::ProblemSolutionIgnoreInstalled( ResolverProblem_Ptr parent,
 								PoolItem_Ref item,

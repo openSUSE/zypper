@@ -108,7 +108,6 @@ InjectSolutionAction::dumpOn( ostream& os ) const
 	case REQUIRES:	os << "Requires"; break;
 	case CONFLICTS:	os << "Conflicts"; break;
 	case OBSOLETES: os << "Obsoletes"; break;
-	case ARCHITECTURE: os << "Architecture"; break;
 	case INSTALLED: os << "Installed"; break;
 	default: os << "Wrong kind"; break;
     }
@@ -188,10 +187,6 @@ InjectSolutionAction::execute(Resolver & resolver) const
 	    // removing the obsoletes dependency from the item
 	    resolver.addIgnoreObsoletes (_otherItem, _capability);
 	    break;	    
-	case ARCHITECTURE:
-	    // ignoring architecture
-	    resolver.addIgnoreArchitecture (_item);
-	    break;
         case INSTALLED:
 	    // ignoring already installed items
 	    resolver.addIgnoreInstalledItem (_item);
