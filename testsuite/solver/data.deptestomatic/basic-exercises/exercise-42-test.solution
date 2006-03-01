@@ -1,7 +1,7 @@
 >!> Installing GConf2 from channel gnome2snaps
 >!> 1 problems found:
 >!> Problem:
->!> Can't satisfy requirement libgconf-2.so.4 for gnome-desktop-libs
+>!> Can't satisfy requirement libgconf-2.so.4 for gnome-desktop-libs-1.5.12.0.200203140655-snap.ximian.1.noarch
 >!> 
 >!>    Solution:
 >!>       delete gnome-desktop-libs
