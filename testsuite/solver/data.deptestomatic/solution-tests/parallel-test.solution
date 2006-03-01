@@ -1,0 +1,12 @@
+>!> Installing foo from channel test1
+>!> Installing foo from channel test2
+>!> 1 problems found:
+>!> Problem:
+>!> Cannot install foo
+>!> Can't install foo-2.0-1.noarch[test2], since foo-2.0-1.noarch[test1] is already marked as needing to be installed
+>!>    Solution:
+>!>       do not install foo
+>!>       do not install [package]foo-2.0-1.noarch
+>!>    Solution:
+>!>       Ignore that foo is already set to install
+>!>       

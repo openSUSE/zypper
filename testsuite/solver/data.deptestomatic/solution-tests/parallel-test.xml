@@ -12,7 +12,6 @@
   <install channel="test1" package="foo"/> 
   <install channel="test2" package="foo"/> 
   <reportproblems/>
-  <takesolution problem="0" solution="1"/>
 </trial>
 
 </test>
