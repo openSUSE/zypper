@@ -19,6 +19,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Target.h"
 #include "zypp/Resolver.h"
+#include "zypp/DiskUsageCounter.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -67,6 +68,10 @@ namespace zypp
     void addResolvables (const ResStore& store, bool installed = false);
 
     void removeResolvables (const ResStore& store);
+
+    DiskUsageCounter::MountPointSet diskUsage();
+
+    void setPartitions(const DiskUsageCounter::MountPointSet &mp);
 
   public:
     /**

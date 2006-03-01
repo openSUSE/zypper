@@ -127,6 +127,10 @@ namespace zypp
       /** set the home, if you need to change it */
       void setHomePath( const Pathname & path );
     
+    public:
+      DiskUsageCounter::MountPointSet diskUsage();
+      void setPartitions(const DiskUsageCounter::MountPointSet &mp);
+
     private:
       /** */
       ResPoolManager _pool;
@@ -146,6 +150,8 @@ namespace zypp
       ResStore _possible_locales;
       /** this is what the packages provide. */
       LocaleSet _available_locales;
+      /** defined mount points, used for disk usage counting */
+      DiskUsageCounter _disk_usage;
     };
     ///////////////////////////////////////////////////////////////////
 

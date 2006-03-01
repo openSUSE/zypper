@@ -20,6 +20,7 @@
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/NVRAD.h"
 #include "zypp/Language.h"
+#include "zypp/DiskUsageCounter.h"
 
 using std::endl;
 
@@ -64,6 +65,7 @@ namespace zypp
     , _pool()
     , _sourceFeed( _pool )
     , _resolver( new Resolver(_pool.accessor()) )
+    , _disk_usage()
     {
       MIL << "defaultTextLocale: '" << _textLocale << "'" << endl;
 
@@ -113,6 +115,12 @@ namespace zypp
 	    it = next;
 	}
     }
+
+    DiskUsageCounter::MountPointSet ZYppImpl::diskUsage()
+    { return _disk_usage.disk_usage(pool()); }
+
+    void ZYppImpl::setPartitions(const DiskUsageCounter::MountPointSet &mp)
+    { _disk_usage.setMountPoints(mp); }
 
     //------------------------------------------------------------------------
     // target

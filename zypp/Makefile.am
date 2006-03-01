@@ -73,6 +73,7 @@ pkginclude_HEADERS = NeedAType.h \
 	KVMap.h		\
 	Callback.h	\
 	DiskUsage.h	\
+	DiskUsageCounter.h	\
 	CheckSum.h	\
 	BaseVersion.h	\
 	PatchRpm.h	\
@@ -146,6 +147,7 @@ lib@PACKAGE@_la_SOURCES = \
 	Url.cc		\
 	TmpPath.cc	\
 	DiskUsage.cc	\
+	DiskUsageCounter.cc	\
 	VendorAttr.cc	\
 	UpgradeStatistics.cc	\
 	ZYpp.cc		\
