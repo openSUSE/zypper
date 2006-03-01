@@ -3,7 +3,7 @@
 >!> 1 problems found:
 >!> Problem:
 >!> A cannot be installed due missing dependencies
->!> There are no installable providers of B for A-1.0-1.noarch[test]
+>!> There are no installable providers of B for A
 >!>    Solution:
 >!>       unlock B
 >!>       

@@ -2,7 +2,7 @@
 >!> 1 problems found:
 >!> Problem:
 >!> foonew cannot be installed due missing dependencies
->!> There are no installable providers of foo for foonew-2.0-1.noarch[test]
+>!> There are no installable providers of foo for foonew
 >!>    Solution:
 >!>       do not install foonew
 >!>       do not install [package]foonew-2.0-1.noarch

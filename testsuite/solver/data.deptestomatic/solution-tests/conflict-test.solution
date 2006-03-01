@@ -3,7 +3,7 @@
 >!> 1 problems found:
 >!> Problem:
 >!> Cannot install B because it is conflicting with A
->!> A conflict over B == 1.0-1 (B) requires the removal of to-be-installed B-1.0-1.noarch[test]
+>!> A conflict over B == 1.0-1 (B) requires the removal of to-be-installed B
 >!>    Solution:
 >!>       do not install B
 >!>       do not install [package]B-1.0-1.noarch

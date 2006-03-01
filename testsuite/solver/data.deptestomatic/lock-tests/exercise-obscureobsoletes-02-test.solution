@@ -3,19 +3,6 @@
 >!> Installing foo2 from channel test
 >!> 1 problems found:
 >!> Problem:
->!> foo is locked and cannot be uninstalled.
->!> foo2 obsoletes foo. But foo cannot be deleted because it is locked.
->!>    Solution:
->!>       unlock foo
->!>       
->!>    Solution:
->!>       Ignore the obsolete foo in foo2
->!>       
->!> Taking solution: 1
->!> For problem:     0
->!> 1 problems found:
->!> 1 problems found:
->!> Problem:
 >!> foo-devel is locked and cannot be uninstalled.
 >!> foo2 obsoletes foo-devel. But foo-devel cannot be deleted because it is locked.
 >!>    Solution:
@@ -24,11 +11,29 @@
 >!>    Solution:
 >!>       Ignore the obsolete foo-devel in foo2
 >!>       
+>!> Taking solution: 1
+>!> For problem:     0
+>!> 1 problems found:
+>!> 1 problems found:
+>!> Problem:
+>!> foo is locked and cannot be uninstalled.
+>!> foo2 obsoletes foo. But foo cannot be deleted because it is locked.
+>!>    Solution:
+>!>       unlock foo
+>!>       
+>!>    Solution:
+>!>       Ignore the obsolete foo in foo2
+>!>       
 >!> Taking solution: 0
 >!> For problem:     0
->!> No problems so far
->!> No problems so far
->!> Solution #1:
->!> install foo2-2.0-1.noarch[test]
->!> remove  foo-devel-1.1-1.noarch
->!> installs=1, upgrades=0, uninstalls=1
+>!> 1 problems found:
+>!> 1 problems found:
+>!> Problem:
+>!> foo-devel is locked and cannot be uninstalled.
+>!> 
+>!>    Solution:
+>!>       unlock foo-devel
+>!>       
+>!>    Solution:
+>!>       keep foo-devel
+>!>       keep [package]foo-devel-1.1-1.noarch

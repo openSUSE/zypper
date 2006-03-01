@@ -2,7 +2,7 @@
 >!> 1 problems found:
 >!> Problem:
 >!> B has missing dependencies
->!> There are no alternative installed providers of A for B-1.0-1.noarch
+>!> There are no alternative installed providers of A for B
 >!>    Solution:
 >!>       keep A
 >!>       keep [package]A-1.0-1.noarch
