@@ -32,6 +32,8 @@
 #include "zypp/CapFilters.h"
 #include "zypp/ResStatus.h"
 
+#include "zypp/ZYppFactory.h"
+
 #include "zypp/solver/detail/QueueItemRequire.h"
 #include "zypp/solver/detail/QueueItemBranch.h"
 #include "zypp/solver/detail/QueueItemUninstall.h"
@@ -354,20 +356,77 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	_XDEBUG( "requirement is met by " << num_providers << " resolvable");
 
-	if (num_providers > 1) {			// prefer to-be-installed providers
+
+	// if there are multiple providers, try to reduce branching by clening up the providers list
+	// first check all providers if they are to-be-installed or uninstalled
+	//   if there are to-be-installed providers, erase all uninstalled providers
+	//   if there are locale providers and none match, try a language fallback
+
+	if (num_providers > 1) {					// prefer to-be-installed providers
 	    MIL << "Have " << num_providers << " providers" << endl;
 	    int to_be_installed = 0;
 	    int uninstalled = 0;
+	    std::map<std::string,PoolItem> language_freshens;
+	    ZYpp::Ptr z = zypp::getZYpp();
+	    ZYpp::LocaleSet requested_locales = z->getRequestedLocales();
+	    bool requested_match = false;
+
 	    for (PoolItemList::iterator it = info.providers.begin(); it != info.providers.end(); ++it) {
 		PoolItem item = *it;
-		if (it->status().isToBeInstalled()) {
+		if (item.status().isToBeInstalled()) {
 		    uninstalled++;
 		}
-		if (it->status().staysUninstalled()) {
+		if (item.status().staysUninstalled()) {
 		    uninstalled++;
 		}
+		if (!requested_match) {
+		    CapSet freshens( item->dep( Dep::FRESHENS ) );
+		    for (CapSet::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
+			if (cit->refers() == ResTraits<Language>::kind) {
+			    string loc = cit->index();
+			    MIL << "Look for language fallback " << loc << ":" << item << endl;
+			    if (requested_locales.find( Locale( loc ) ) != requested_locales.end()) {
+				MIL << "Locale '" << loc << "' is requested, not looking further" << endl;
+				requested_match = true;
+				break;
+			    }
+			    language_freshens[loc] = item;
+			}
+		    }
+		}
+	    } // for
+
+	    if (to_be_installed == 0
+		&& !requested_match)
+	    {
+		// loop over requested locales, loop over their fallbacks, and try to find a matching provider
+
+		for (ZYpp::LocaleSet::const_iterator rit = requested_locales.begin(); rit != requested_locales.end(); ++rit) {
+		    // Locale fallback = rit->fallback();
+		    Locale fallback( "en" );
+		    MIL << "requested " << *rit << " fallback " << fallback << endl;
+		    std::map<std::string,PoolItem>::const_iterator match = language_freshens.find( fallback.code() );
+		    if (match != language_freshens.end()) {
+			MIL << match->second << " matches the fallback" << endl;
+			info.providers.clear();
+			info.providers.push_back( match->second );
+			break;
+		    }
+		}
+#if 0	// just debug
+		std::string mil = "language_freshens ";
+		for (std::map<std::string,PoolItem>::const_iterator it = language_freshens.begin(); it != language_freshens.end(); ++it) {
+		    if (it != language_freshens.begin()) mil += ", ";
+		    mil += it->first;
+		}
+		MIL << mil << endl;
+#endif
 	    }
+
+	    // if we have one or more to-be-installed, erase all uninstalled (if there are any)
+
 	    MIL << to_be_installed << " to-be-installed, " << uninstalled << " uninstalled" << endl;
+
 	    if (to_be_installed > 0
 		&& uninstalled > 0) {
 		PoolItemList::iterator next;
@@ -380,6 +439,9 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		    it = next;
 		}
 	    }
+
+	    num_providers = info.providers.size();
+
 	}
     }
 
