@@ -92,8 +92,8 @@ public:
   public:
   void setObjectFlag( ResObject::constPtr resolvable, const std::string &flag );
   void removeObjectFlag( ResObject::constPtr resolvable, const std::string &flag );
-  std::set<std::string> objectFlags( ResObject::constPtr resolvable );
-  
+  std::set<std::string> objectFlags( ResObject::constPtr resolvable ) const;
+  bool doesObjectHasFlag( ResObject::constPtr resolvable, const std::string &flag ) const;
   protected:
   void writeObjectFlags( ResObject::constPtr resolvable, const std::set<std::string> &flags );
   /////////////////////////////////////////////////////////

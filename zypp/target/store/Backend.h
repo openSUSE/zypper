@@ -76,6 +76,14 @@ public:
   */
   virtual std::list<ResObject::Ptr> storedObjects(const Resolvable::Kind, const std::string & name, bool partial_match = false) const = 0;
 
+  /////////////////////////////////////////////////////////
+  // Resolvables Flags API
+  ////////////////////////////////////////////////////////
+  public:
+  virtual void setObjectFlag( ResObject::constPtr resolvable, const std::string &flag ) = 0;
+  virtual void removeObjectFlag( ResObject::constPtr resolvable, const std::string &flag ) = 0;
+  virtual std::set<std::string> objectFlags( ResObject::constPtr resolvable ) const = 0;
+  virtual bool doesObjectHasFlag( ResObject::constPtr resolvable, const std::string &flag ) const = 0;
 
   /////////////////////////////////////////////////////////
   // SOURCES API

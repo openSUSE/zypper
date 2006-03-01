@@ -93,6 +93,26 @@ namespace zypp
        * \a partial_match allows for text search.
        */
       std::list<ResObject::Ptr> storedObjects(const Resolvable::Kind kind, const std::string & name, bool partial_match = false) const;
+      /////////////////////////////////////////////////////////
+      // Resolvables Flags API
+      ////////////////////////////////////////////////////////
+      public:
+      /**
+       * Set a flag for a resolvable
+       */
+      void setObjectFlag( ResObject::constPtr resolvable, const std::string &flag );
+      /**
+       * Removes a flag for a resolvable
+       */
+      void removeObjectFlag( ResObject::constPtr resolvable, const std::string &flag );
+      /**
+       * Returns a set of flags a resolvable has stored
+       */
+      std::set<std::string> objectFlags( ResObject::constPtr resolvable ) const;
+      /**
+       * True if the resolvable has that flag
+       */
+      bool doesObjectHasFlag( ResObject::constPtr resolvable, const std::string &flag ) const;
 
       /////////////////////////////////////////////////////////
       // SOURCES API

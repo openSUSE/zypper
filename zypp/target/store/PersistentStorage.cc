@@ -114,6 +114,26 @@ PersistentStorage::storedObjects(const Resolvable::Kind kind, const std::string 
 }
 
 /////////////////////////////////////////////////////////
+// FLAGS API
+////////////////////////////////////////////////////////
+
+void
+PersistentStorage::setObjectFlag( ResObject::constPtr resolvable, const std::string &flag )
+{ d->backend->setObjectFlag(resolvable, flag); }
+
+void
+PersistentStorage::removeObjectFlag( ResObject::constPtr resolvable, const std::string &flag )
+{ d->backend->removeObjectFlag(resolvable, flag); }
+
+std::set<std::string>
+PersistentStorage::objectFlags( ResObject::constPtr resolvable ) const
+{ return d->backend->objectFlags(resolvable); }
+
+bool
+PersistentStorage::doesObjectHasFlag( ResObject::constPtr resolvable, const std::string &flag ) const
+{ return d->backend->doesObjectHasFlag(resolvable, flag); }
+
+/////////////////////////////////////////////////////////
 // SOURCES API
 ////////////////////////////////////////////////////////
 

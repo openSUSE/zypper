@@ -344,7 +344,7 @@ XMLFilesBackend::writeObjectFlags( ResObject::constPtr resolvable, const std::se
 }
 
 std::set<std::string>
-XMLFilesBackend::objectFlags( ResObject::constPtr resolvable )
+XMLFilesBackend::objectFlags( ResObject::constPtr resolvable ) const
 {
   std::set<std::string> flags;
   std::string filename = fullPathForResolvableFlags(resolvable);
@@ -366,8 +366,15 @@ XMLFilesBackend::objectFlags( ResObject::constPtr resolvable )
 
     flags.insert(buffer);
   }
-  MIL << "Read " << flags.size() << " flags for " << resolvable->name() << " " << resolvable->edition() << std::endl;
+  //MIL << "Read " << flags.size() << " flags for " << resolvable->name() << " " << resolvable->edition() << std::endl;
   return flags;
+}
+
+bool
+XMLFilesBackend::doesObjectHasFlag( ResObject::constPtr resolvable, const std::string &flag ) const
+{
+  std::set<std::string> flags = objectFlags(resolvable);
+  return (find(flags.begin(), flags.end(), flag) != flags.end());
 }
 
 
