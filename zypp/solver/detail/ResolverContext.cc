@@ -1401,7 +1401,7 @@ dup_name_check_cb (PoolItem_Ref item, const ResStatus & status, void *data)
     if (! info->flag
 	&& status.isToBeInstalled ()
 	&& info->other->name() == item->name()
-	&& item->edition().compare(info->other->edition()) != 0
+	&& item->edition().compare(info->other->edition()) == 0
 	&& item->arch() == info->other->arch())
     {
 	info->flag = true;
