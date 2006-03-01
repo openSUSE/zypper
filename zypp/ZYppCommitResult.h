@@ -32,6 +32,10 @@ namespace zypp
   */
   struct ZYpp::CommitResult
   {
+    CommitResult()
+	: _result(0)
+    { }
+
     typedef std::list<PoolItem_Ref> PoolItemList;
 
     int          _result;
