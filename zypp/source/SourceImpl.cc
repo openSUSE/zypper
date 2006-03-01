@@ -125,10 +125,15 @@ namespace zypp
 	catch ( Exception & excp )
         {
 	    media::MediaChangeReport::Action user;
+
   	  do {
+
+	    DBG << "Media couldn't release file, releasing." << endl;
+	    media_mgr.release (_media, false);
+
 	    user  = checkonly ? media::MediaChangeReport::ABORT :
 	      report->requestMedia (
-		source_factory.createFrom(this),
+		source_factory.createFrom( this ),
 		media_nr,
 		media::MediaChangeReport::WRONG, // FIXME: proper error
 		excp.msg()
@@ -152,9 +157,8 @@ namespace zypp
 	    user == media::MediaChangeReport::CHANGE_URL )
 	    {
 	      // retry
-	      DBG << "Going to release and attach again" << endl;
+	      DBG << "Going to attach again" << endl;
 	    
-	      media_mgr.release (_media, false);
 	      media_mgr.attach( _media );
 
 	      break;
