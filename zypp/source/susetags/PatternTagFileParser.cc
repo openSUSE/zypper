@@ -68,13 +68,15 @@ namespace zypp
         {
           std::string line = tag.value;
           std::vector<std::string> words;
-
-	  if (str::split( line, std::back_inserter(words), " " ) < 3)
-	    ZYPP_THROW( parser::tagfile::ParseException( "Expected [name version release [arch] ], got [" + tag.value +"]") );
-
-          patImpl->_name = words[0];
-          patImpl->_version = words[1];
-          patImpl->_release = words[2];
+          
+          if (str::split( line, std::back_inserter(words), " " ) < 3)
+            WAR << "Broken Pattern, version and release is mandatory, got [" << tag.value << "]" << std::endl;
+          if (str::split( line, std::back_inserter(words), " " ) < 1)
+            ZYPP_THROW( parser::tagfile::ParseException( "Expected [name [version] [release] [arch] ], got [" + tag.value +"]") );
+          
+          if ( words.size() >= 1 ) patImpl->_name = words[0];
+          if ( words.size() >= 2 ) patImpl->_version = words[1];
+          if ( words.size() >= 3 ) patImpl->_release = words[2];
           if (words.size() > 3) patImpl->_arch = words[3];
         }
         else if ( tag.name == "Vis" )

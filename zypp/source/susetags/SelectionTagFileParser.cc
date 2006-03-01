@@ -58,6 +58,7 @@ namespace zypp
 
       void SelectionTagFileParser::consume( const SingleTag &tag )
       {
+        //MIL << "about to consume " << tag.name << " with " << tag.value << std::endl;
         if ( tag.name == "Sum" )
         {
           selImpl->_summary.setText(tag.value, Locale(tag.modifier));
@@ -71,12 +72,18 @@ namespace zypp
           std::string line = tag.value;
           std::vector<std::string> words;
 	  if (str::split( line, std::back_inserter(words), " " ) < 3)
-	    ZYPP_THROW( parser::tagfile::ParseException( "Expected [name version release [arch] ], got [" + tag.value +"]") );
-      
-          selImpl->_name = words[0];
-          selImpl->_version = words[1];
-          selImpl->_release = words[2];
-          if (words.size() > 3) selImpl->_arch = words[3];
+            WAR << "Broken Selection, version and release is mandatory, got [" << tag.value << "]" << std::endl;
+          if (str::split( line, std::back_inserter(words), " " ) < 1)
+            ZYPP_THROW( parser::tagfile::ParseException( "Expected [name [version] [release] [arch] ], got [" + tag.value +"]") );
+          
+          if ( words.size() >= 1 )
+            selImpl->_name = words[0];
+          if ( words.size() >= 2 )
+            selImpl->_version = words[1];
+          if ( words.size() >= 3 )
+            selImpl->_release = words[2];
+          if (words.size() > 3)
+            selImpl->_arch = words[3];
         }
         else if ( tag.name == "Vis" )
         {
@@ -203,11 +210,15 @@ namespace zypp
 	  _deps[Dep::OBSOLETES].insert(_cap);
 	}
 #warning: The set<string> dependencies are still kept in the selImpl but are not needed anymore
-  Arch arch;
-  if (!selImpl->_arch.empty())
-    arch = Arch(selImpl->_arch);
-  
-	NVRAD nvrad = NVRAD( selImpl->_name, Edition(selImpl->_version, selImpl->_release, std::string()), arch, _deps );
+        Arch arch;
+        Edition edition = Edition::noedition;
+        if (!selImpl->_arch.empty())
+          arch = Arch(selImpl->_arch);
+        
+        if ( ! selImpl->_version.empty() )
+          edition = Edition(selImpl->_version, selImpl->_release, std::string());
+              
+	NVRAD nvrad = NVRAD( selImpl->_name, edition, arch, _deps );
 	result = detail::makeResolvableFromImpl( nvrad, selImpl );
       }
        /////////////////////////////////////////////////////////////////
