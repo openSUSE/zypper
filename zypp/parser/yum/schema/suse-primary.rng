@@ -100,15 +100,7 @@
         <ref name="attribute-name"/>
         <optional>
           <ref name="shared-entry-attributes"/>
-          <attribute name="flags">
-            <choice>
-              <value>EQ</value>
-              <value>LE</value>
-              <value>GE</value>
-              <value>LT</value>
-              <value>GT</value>
-            </choice>
-          </attribute>
+          <ref name="attribute-flags"/>
         </optional>
         <empty/>
       </element>

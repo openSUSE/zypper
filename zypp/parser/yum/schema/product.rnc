@@ -1,6 +1,23 @@
 default namespace = "http://linux.duke.edu/metadata/rpm"
 namespace ns1 = "http://novell.com/package/metadata/suse/product"
 
+include "rpm-ns.rnc"
+
+attribute-kind = 
+  attribute kind { "package" | "patch" | "script" | "message" | "product"}
+
+usual-entry-content =
+  (
+    attribute-kind?,		# new compared to rpm-ns
+    attribute-name,
+    (
+      shared-entry-attributes,
+      attribute-flags
+    )?,
+    empty
+  )
+
+start =
 element ns1:product {
   attribute type { text },
   element ns1:vendor { text },
@@ -20,91 +37,55 @@ element ns1:product {
   }+,
   element provides {
     element entry {
-      attribute name { text },
-      attribute kind { "package" | "patch" | "script" | "message" | "product"}?,
-      (attribute flags { "EQ" | "LE" | "GE" },
-       attribute epoch { xsd:nonNegativeInteger },
-       attribute ver { text },
-       attribute rel { text }?)?,
+      attribute-kind?,
+      attribute-name,
+      (
+        shared-entry-attributes,
+        attribute-flags-provides
+      )?,
       empty
     }+
   }?,
   element conflicts {
     element entry {
-      attribute name { text },
-      attribute kind { "package" | "patch" | "script" | "message" | "product"}?,
-      (attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" },
-       attribute epoch { xsd:nonNegativeInteger },
-       attribute ver { text },
-       attribute rel { text }?)?,
-      empty
+      usual-entry-content
     }+
   }?,
   element obsoletes {
     element entry {
-      attribute name { text },
-      attribute kind { "package" | "patch" | "script" | "message" | "product"}?,
-      (attribute flags { "EQ" | "LE" | "GE" | "LT" },
-       attribute epoch { xsd:nonNegativeInteger },
-       attribute ver { text },
-       attribute rel { text }?)?,
+      attribute-kind?,
+      attribute-name,
+      (
+        shared-entry-attributes,
+        attribute-flags-obsoletes
+      )?,
       empty
     }+
   }?,
   element requires {
     element entry {
-      attribute name { text },
-      attribute kind { "package" | "patch" | "script" | "message" | "product"}?,
-      (attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" },
-       attribute epoch { xsd:nonNegativeInteger },
-       attribute ver { text },
-       attribute rel { text }?)?,
       attribute pre { "1" | "0" }?,
-      empty
+      usual-entry-content
     }*
   }?,
   element recommends {
     element entry {
-      attribute name { text },
-      attribute kind { "package" | "patch" | "script" | "message" | "product"}?,
-      (attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" },
-       attribute epoch { xsd:nonNegativeInteger },
-       attribute ver { text },
-       attribute rel { text }?)?,
-      empty
+      usual-entry-content
     }*
   }?,
   element enhances {
     element entry {
-      attribute name { text },
-      attribute kind { "package" | "patch" | "script" | "message" | "product"}?,
-      (attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" },
-       attribute epoch { xsd:nonNegativeInteger },
-       attribute ver { text },
-       attribute rel { text }?)?,
-      empty
+      usual-entry-content
     }*
   }?,
   element supplements {
     element entry {
-      attribute name { text },
-      attribute kind { "package" | "patch" | "script" | "message" | "product"}?,
-      (attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" },
-       attribute epoch { xsd:nonNegativeInteger },
-       attribute ver { text },
-       attribute rel { text }?)?,
-      empty
+      usual-entry-content
     }*
   }?,
   element suggests {
     element entry {
-      attribute name { text },
-      attribute kind { "package" | "patch" | "script" | "message" | "product"}?,
-      (attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" },
-       attribute epoch { xsd:nonNegativeInteger },
-       attribute ver { text },
-       attribute rel { text }?)?,
-      empty
+      usual-entry-content
     }*
   }?
 }

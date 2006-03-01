@@ -63,7 +63,7 @@ freshen =
       attribute-name,
       (
         shared-entry-attributes,
-        attribute flags { "EQ" | "LE" | "GE" | "LT" | "GT" }
+        attribute-flags
       )?,
       empty
     }+

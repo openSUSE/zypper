@@ -93,6 +93,36 @@
       <attribute name="rel"/>
     </optional>
   </define>
+  <define name="attribute-flags-provides">
+    <attribute name="flags">
+      <choice>
+        <value>EQ</value>
+        <value>LE</value>
+        <value>GE</value>
+      </choice>
+    </attribute>
+  </define>
+  <define name="attribute-flags-obsoletes">
+    <attribute name="flags">
+      <choice>
+        <value>EQ</value>
+        <value>LE</value>
+        <value>GE</value>
+        <value>LT</value>
+      </choice>
+    </attribute>
+  </define>
+  <define name="attribute-flags">
+    <attribute name="flags">
+      <choice>
+        <value>EQ</value>
+        <value>LE</value>
+        <value>GE</value>
+        <value>LT</value>
+        <value>GT</value>
+      </choice>
+    </attribute>
+  </define>
   <define name="attribute-name">
     <attribute name="name"/>
   </define>
@@ -102,13 +132,7 @@
         <ref name="attribute-name"/>
         <optional>
           <ref name="shared-entry-attributes"/>
-          <attribute name="flags">
-            <choice>
-              <value>EQ</value>
-              <value>LE</value>
-              <value>GE</value>
-            </choice>
-          </attribute>
+          <ref name="attribute-flags-provides"/>
         </optional>
         <empty/>
       </element>
@@ -125,15 +149,7 @@
         <ref name="attribute-name"/>
         <optional>
           <ref name="shared-entry-attributes"/>
-          <attribute name="flags">
-            <choice>
-              <value>EQ</value>
-              <value>LE</value>
-              <value>GE</value>
-              <value>LT</value>
-              <value>GT</value>
-            </choice>
-          </attribute>
+          <ref name="attribute-flags"/>
         </optional>
         <empty/>
       </element>
@@ -150,14 +166,7 @@
         <ref name="attribute-name"/>
         <optional>
           <ref name="shared-entry-attributes"/>
-          <attribute name="flags">
-            <choice>
-              <value>EQ</value>
-              <value>LE</value>
-              <value>GE</value>
-              <value>LT</value>
-            </choice>
-          </attribute>
+          <ref name="attribute-flags-obsoletes"/>
         </optional>
         <empty/>
       </element>
@@ -174,15 +183,7 @@
         <ref name="attribute-name"/>
         <optional>
           <ref name="shared-entry-attributes"/>
-          <attribute name="flags">
-            <choice>
-              <value>EQ</value>
-              <value>LE</value>
-              <value>GE</value>
-              <value>LT</value>
-              <value>GT</value>
-            </choice>
-          </attribute>
+          <ref name="attribute-flags"/>
         </optional>
         <optional>
           <attribute name="pre">
@@ -207,15 +208,7 @@
         <ref name="attribute-name"/>
         <optional>
           <ref name="shared-entry-attributes"/>
-          <attribute name="flags">
-            <choice>
-              <value>EQ</value>
-              <value>LE</value>
-              <value>GE</value>
-              <value>LT</value>
-              <value>GT</value>
-            </choice>
-          </attribute>
+          <ref name="attribute-flags"/>
         </optional>
         <empty/>
       </element>
@@ -232,15 +225,7 @@
         <ref name="attribute-name"/>
         <optional>
           <ref name="shared-entry-attributes"/>
-          <attribute name="flags">
-            <choice>
-              <value>EQ</value>
-              <value>LE</value>
-              <value>GE</value>
-              <value>LT</value>
-              <value>GT</value>
-            </choice>
-          </attribute>
+          <ref name="attribute-flags"/>
         </optional>
         <empty/>
       </element>
@@ -257,15 +242,7 @@
         <ref name="attribute-name"/>
         <optional>
           <ref name="shared-entry-attributes"/>
-          <attribute name="flags">
-            <choice>
-              <value>EQ</value>
-              <value>LE</value>
-              <value>GE</value>
-              <value>LT</value>
-              <value>GT</value>
-            </choice>
-          </attribute>
+          <ref name="attribute-flags"/>
         </optional>
         <empty/>
       </element>
@@ -282,15 +259,7 @@
         <ref name="attribute-name"/>
         <optional>
           <ref name="shared-entry-attributes"/>
-          <attribute name="flags">
-            <choice>
-              <value>EQ</value>
-              <value>LE</value>
-              <value>GE</value>
-              <value>LT</value>
-              <value>GT</value>
-            </choice>
-          </attribute>
+          <ref name="attribute-flags"/>
         </optional>
         <empty/>
       </element>
