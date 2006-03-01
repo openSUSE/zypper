@@ -14,8 +14,6 @@ exercise-36-test.xml
 exercise-37-test.xml
 # Comparing 0:1.0.0-1 and 1.0.0-1 returns "true"
 exercise-38-test.xml
-# duplicate solutions
-exercise-39-test.xml
 # requires without epoch is treated like 'any' epoch
 exercise-40-test.xml
 # requires without epoch is treated like 'any' epoch
