@@ -97,6 +97,7 @@ namespace zypp
         exists = exists && PathInfo(_cache_dir + "DATA").isExist();
         exists = exists && PathInfo(_cache_dir + "DESCRIPTION").isExist();
         exists = exists && PathInfo(_cache_dir + "MEDIA").isExist();
+        exists = exists && PathInfo(_cache_dir + "MEDIA/media/media.1").isExist();
 
         DBG << exists << std::endl;
         return exists;
