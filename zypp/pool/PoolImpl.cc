@@ -210,8 +210,9 @@ namespace zypp
     */
     void PoolImplInserter::operator()( ResObject::constPtr ptr_r )
     {
-      if ( ptr_r && (    _installed
-                      || ptr_r->arch().compatibleWith( _poolImpl.targetArch() ) ) )
+      if ( ptr_r && ( ptr_r->kind() != ResTraits<SrcPackage>::kind
+		      && ( _installed
+			   || ptr_r->arch().compatibleWith( _poolImpl.targetArch() ) ) ) )
         {
           PoolImpl::Item item ( ptr_r, ResStatus (_installed) );
           _poolImpl._store.insert( item );
