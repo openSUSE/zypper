@@ -3,20 +3,6 @@ namespace ns1 = "http://novell.com/package/metadata/suse/product"
 
 include "rpm-ns.rnc"
 
-attribute-kind = 
-  attribute kind { "package" | "patch" | "script" | "message" | "product"}
-
-usual-entry-content =
-  (
-    attribute-kind?,		# new compared to rpm-ns
-    attribute-name,
-    (
-      shared-entry-attributes,
-      attribute-flags
-    )?,
-    empty
-  )
-
 start =
 element ns1:product {
   attribute type { text },
@@ -36,56 +22,55 @@ element ns1:product {
     text
   }+,
   element provides {
-    element entry {
-      attribute-kind?,
-      attribute-name,
-      (
-        shared-entry-attributes,
-        attribute-flags-provides
-      )?,
-      empty
-    }+
+    (
+      element entry {
+        attribute-kind?,
+        attribute-name,
+        (
+          shared-entry-attributes,
+          attribute-flags-provides
+        )?,
+        empty
+      } |
+      element-capability
+    )+
   }?,
   element conflicts {
-    element entry {
-      usual-entry-content
-    }+
+    usual-entry-or-capability+    
   }?,
   element obsoletes {
-    element entry {
-      attribute-kind?,
-      attribute-name,
-      (
-        shared-entry-attributes,
-        attribute-flags-obsoletes
-      )?,
-      empty
-    }+
+    (
+      element entry {
+        attribute-kind?,
+        attribute-name,
+        (
+          shared-entry-attributes,
+          attribute-flags-obsoletes
+        )?,
+        empty
+      } |
+      element-capability
+    )+
   }?,
   element requires {
-    element entry {
-      attribute pre { "1" | "0" }?,
-      usual-entry-content
-    }*
+    (
+      element entry {
+        attribute pre { "1" | "0" }?,
+        usual-entry-content
+      } |
+      element-capability
+    )*
   }?,
   element recommends {
-    element entry {
-      usual-entry-content
-    }*
+    usual-entry-or-capability*
   }?,
   element enhances {
-    element entry {
-      usual-entry-content
-    }*
+    usual-entry-or-capability*
   }?,
   element supplements {
-    element entry {
-      usual-entry-content
-    }*
+    usual-entry-or-capability*
   }?,
   element suggests {
-    element entry {
-      usual-entry-content
-    }*
+    usual-entry-or-capability*
   }?
 }

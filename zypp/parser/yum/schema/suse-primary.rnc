@@ -1,11 +1,43 @@
 default namespace = "http://novell.com/package/metadata/suse/common"
+namespace suse = "http://novell.com/package/metadata/suse/common"
 namespace ns1 = "http://linux.duke.edu/metadata/common"
+namespace ns2 = "http://linux.duke.edu/metadata/rpm"
 
+include "primary.rnc" 
+include "rpm-ns.rnc"
 
-include "primary.rnc" {
   element-format = 
     element ns1:format { suse-format }
+   
+  element-provides =
+    ( element suse:provides { suse-provides } | element ns2:provides { provides } )
+  element-requires =
+    ( element suse:requires { suse-requires } | element ns2:requires { requires } )
+  element-conflicts =
+    ( element suse:conflicts { suse-conflicts } | element ns2:conflicts { conflicts } )
+  element-recommends =
+    ( element suse:recommends { suse-recommends } | element ns2:recommends { recommends } )
+  element-enhances =
+    ( element suse:enhances { suse-enhances }  | element ns2:enhances { enhances } )
+  element-supplements = 
+    ( element suse:supplements { suse-supplements }  | element ns2:supplements { supplements } )
+  element-suggests =
+    ( element suse:suggests { suse-suggests }  | element ns2:suggests { suggests } )
+  element-obsoletes =
+    ( element suse:obsoletes { suse-obsoletes }  | element ns2:obsoletes { obsoletes } )
+    
+  dependencies = suse-dependencies
+
+element-capability =
+  element ns1:capability {
+    attribute-kind?,
+    text
 }
+
+usual-entry-or-capability = (
+  element-entry |
+  element-capability
+)
 
 suse-format =
     format&
@@ -18,6 +50,26 @@ suse-additional-format =
     element-dirsizes?,
     element-freshen?,
     element-install_only?
+
+suse-provides =
+    usual-entry-or-capability+
+suse-requires =
+    usual-entry-or-capability+
+suse-conflicts =
+    usual-entry-or-capability+
+suse-recommends =
+    usual-entry-or-capability+
+suse-enhances =
+    usual-entry-or-capability+
+suse-supplements =
+    usual-entry-or-capability+
+suse-suggests =
+    usual-entry-or-capability+
+suse-obsoletes =
+    usual-entry-or-capability+
+
+suse-dependencies = 
+    element-provides? & element-conflicts? & element-obsoletes? & freshen? & element-requires? & element-suggests? & element-enhances? & element-supplements? & element-recommends?
 
 element-authors =
   element authors { authors }
@@ -56,17 +108,10 @@ dirsize =
     empty
 
 element-freshen =
-    element freshen { freshen }
+    ( element suse:freshen { freshen } | element freshen { freshen } )
 
 freshen =
-    element entry {
-      attribute-name,
-      (
-        shared-entry-attributes,
-        attribute-flags
-      )?,
-      empty
-    }+
+    usual-entry-or-capability+
 
 element-install_only =
     element install_only { empty }

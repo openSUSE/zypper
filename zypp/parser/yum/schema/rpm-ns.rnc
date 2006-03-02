@@ -46,13 +46,13 @@ header-range =
     attribute end { xsd:nonNegativeInteger },
     empty
 
-element-provides =
-    element provides { provides }
-
 shared-entry-attributes =
      attribute epoch { xsd:nonNegativeInteger },
      attribute ver { text },
      attribute rel { text }?
+
+attribute-kind = 
+  attribute kind { "package" | "patch" | "script" | "message" | "product"}
 
 attribute-flags-provides =
   attribute flags { "EQ" | "LE" | "GE" }
@@ -64,6 +64,25 @@ attribute-flags =
 attribute-name =
      attribute name { text }
 
+usual-entry-content =
+  (
+    attribute-kind?,            # new compared to rpm-ns
+    attribute-name,
+    (
+      shared-entry-attributes,
+      attribute-flags
+    )?,
+    empty
+  )
+  
+element-entry =
+  element entry {
+      usual-entry-content
+}
+
+element-provides =
+    element provides { provides }
+    
 provides =
     element entry {
       attribute-name,
@@ -173,3 +192,6 @@ element-file =
 file =
     attribute type { "dir" | "ghost" }?,
     text
+
+dependencies =
+    element-provides? & element-conflicts? & element-obsoletes? & element-requires? & element-suggests? & element-enhances? & element-supplements? & element-recommends?

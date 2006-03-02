@@ -24,13 +24,5 @@ pattern =
     element description {
       attribute lang { text }?,
       text
-    }+,
-    element-provides?,
-    element-conflicts?,
-    element-obsoletes?,
-    element-freshen?,
-    element-requires?,
-    element-suggests?,
-    element-enhances?,
-    element-supplements?,
-    element-recommends?
+    }+, dependencies
+    
