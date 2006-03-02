@@ -17,6 +17,7 @@
 #include "zypp/Package.h"
 #include "zypp/source/susetags/SuseTagsPackageImpl.h"
 
+#include "zypp/ZYppFactory.h"
 
 using std::endl;
 
@@ -40,12 +41,16 @@ namespace zypp
         NVRAD _nvrad;
 	int _count;
         std::set<NVRAD> _notfound;
+	Arch _system_arch;
 
 	PackagesLangParser (const PkgContent & content_r, const Locale & lang_r)
 	    : _content( content_r )
 	    , _lang( lang_r)
 	    , _count(0)
-        { }
+        {
+	    ZYpp::Ptr z = getZYpp();
+	    _system_arch = z->architecture();
+	}
 
         /* Consume SingleTag data. */
         virtual void consume( const SingleTag & stag_r )
@@ -57,8 +62,14 @@ namespace zypp
 
             if ( str::split( stag_r.value, std::back_inserter(words) ) != 4 )
               ZYPP_THROW( ParseException( "[" + _file_r.asString() + "] Parse error in tag Pkg, expected [name version release arch], found: [" + stag_r.value + "]" ) );
-            
-            _nvrad = NVRAD( words[0], Edition(words[1],words[2]), Arch(words[3]) );
+
+	    Arch arch( words[3] );
+	    if (!arch.compatibleWith( _system_arch )) {
+		_current = NULL;
+		return;
+	    }
+
+            _nvrad = NVRAD( words[0], Edition(words[1],words[2]), arch );
 	    PkgContent::const_iterator it = _content.find(_nvrad);
 	    if (it == _content.end())
             {
