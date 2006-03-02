@@ -126,12 +126,20 @@ namespace zypp
         }
 	catch ( Exception & excp )
         {
+	  ZYPP_CAUGHT(excp);
 	    media::MediaChangeReport::Action user;
 
   	  do {
 
 	    DBG << "Media couldn't provide file, releasing." << endl;
-	    media_mgr.release (_media, false);
+	    try {
+		media_mgr.release (_media, false);
+	    }
+	    catch (const Exception & excpt_r)
+	    {
+		ZYPP_CAUGHT(excpt_r);
+		MIL << "Failed to release media " << _media << endl;
+	    }
 
 	    user  = checkonly ? media::MediaChangeReport::ABORT :
 	      report->requestMedia (

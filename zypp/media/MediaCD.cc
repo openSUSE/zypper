@@ -414,7 +414,18 @@ namespace zypp {
     void MediaCD::releaseFrom( bool eject )
     {
       Mount mount;
-      mount.umount(attachPoint().asString());
+      try {
+	mount.umount(attachPoint().asString());
+      }
+      catch (const Exception & excpt_r)
+      {
+	ZYPP_CAUGHT(excpt_r);
+	if (eject && openTray( mediaSourceName()))
+	{
+	  return;
+	}
+	ZYPP_RETHROW(excpt_r);
+      }
     
       // eject device
       if (eject)
