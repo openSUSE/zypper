@@ -5,10 +5,10 @@
 >!> A conflict over p2 == 1.0-1 (p2) requires the removal of to-be-installed p2-1.0-1.noarch[test]
 >!>    Solution:
 >!>       do not install p2
->!>       do not install [package]p2-1.0-1.noarch
+>!>       do not install p2-1.0-1.noarch[test]
 >!>    Solution:
 >!>       delete p1
->!>       delete [package]p1-1.0-1.noarch
+>!>       delete p1-1.0-1.noarch
 >!>    Solution:
 >!>       Ignore this conflict of p2
 >!>       

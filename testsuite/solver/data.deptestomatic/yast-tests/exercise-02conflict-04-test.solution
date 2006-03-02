@@ -5,10 +5,10 @@
 >!> A conflict over libident == 2.0-1 (libident >= 2.0) requires the removal of to-be-installed libident-2.0-1.noarch[test]
 >!>    Solution:
 >!>       do not install libident
->!>       do not install [package]libident-2.0-1.noarch
+>!>       do not install libident-2.0-1.noarch[test]
 >!>    Solution:
 >!>       delete smail
->!>       delete [package]smail-1.0-1.noarch
+>!>       delete smail-1.0-1.noarch
 >!>    Solution:
 >!>       Ignore this conflict of libident
 >!>       
