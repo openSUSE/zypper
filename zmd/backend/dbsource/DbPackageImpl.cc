@@ -49,16 +49,27 @@ DbPackageImpl::readHandle( sqlite_int64 id, sqlite3_stmt *handle )
 {
     _zmdid = id;
 
-    const char * text = (const char *) sqlite3_column_text (handle, 12);
+    // 1-5: nvra, see DbSourceImpl
+    _size_installed = sqlite3_column_int( handle, 6 );
+    // 7: catalog
+    // 8: installed
+    // 9: local
+    const char * text = ((const char *) sqlite3_column_text( handle, 10 ));
+    if (text != NULL)
+	_group = text;
+    _size_archive = sqlite3_column_int( handle, 11 );
+    text = (const char *) sqlite3_column_text( handle, 12 );
     if (text != NULL)
 	_summary = TranslatedText( string( text ) );
-    text = (const char *) sqlite3_column_text (handle, 13);
+    text = (const char *) sqlite3_column_text( handle, 13 );
     if (text != NULL)
 	_description = TranslatedText( string( text ) );
-    _group = "group";		//FIXME ((const char *) sqlite3_column_text (handle, 10));
-    _size_installed = sqlite3_column_int (handle, 6);
-    _size_archive = sqlite3_column_int (handle, 11);
-    _install_only = (sqlite3_column_int (handle, 15) != 0);
+    text = (const char *) sqlite3_column_text( handle, 14 );
+    if (text != NULL)
+	_location = Pathname( text );
+    _install_only = (sqlite3_column_int( handle, 15 ) != 0);
+
+    return;
 }
 
 
@@ -76,6 +87,9 @@ TranslatedText DbPackageImpl::description() const
 
 PackageGroup DbPackageImpl::group() const
 { return _group; }
+
+Pathname DbPackageImpl::location() const
+{ return _location; }
 
 ByteCount DbPackageImpl::size() const
 { return _size_installed; }

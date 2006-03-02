@@ -45,6 +45,8 @@ public:
 	/** */
 	virtual ByteCount archivesize() const;
 	/** */
+	virtual Pathname location() const;
+	/** */
 	virtual bool installOnly() const;
 	/** */
 	virtual Source_Ref source() const;
@@ -56,6 +58,7 @@ protected:
 	TranslatedText _summary;
 	TranslatedText _description;
 	PackageGroup _group;
+	Pathname _location;
 	bool _install_only;
 	ZmdId _zmdid;
 
