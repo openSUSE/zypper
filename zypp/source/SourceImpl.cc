@@ -53,9 +53,9 @@ namespace zypp
                                   const std::string & alias_r,
                                   const Pathname cache_dir_r )
     {
-      _media_set = new MediaSet(selfSourceRef());
-      _url = media_mgr.url(media_r);
-      _media_set->redirect(1, media_r);
+      _media_set = new MediaSet( selfSourceRef() );
+      _url = media_mgr.url( media_r );
+      _media_set->redirect( 1, media_r );
       _path      = path_r;
       _alias     = alias_r;
       _cache_dir = cache_dir_r;
@@ -109,19 +109,18 @@ namespace zypp
 					   bool cached,
 					   bool checkonly )
     {
-
       callback::SendReport<media::MediaChangeReport> report;
 
       SourceFactory source_factory;
 
       // get the mediaId, but don't try to attach it here
-      media::MediaAccessId _media = _media_set->getMediaAccessId(media_nr, true);
+      media::MediaAccessId _media = _media_set->getMediaAccessId( media_nr, true );
       do {
         try {
 	  DBG << "Going to try provide file " << file_r << " from " << media_nr << endl;
 	  
 	  // try to attach the media
-	  _media = _media_set->getMediaAccessId(media_nr); // in case of redirect
+	  _media = _media_set->getMediaAccessId( media_nr ); // in case of redirect
 	  media_mgr.provideFile (_media, file_r, cached, checkonly);
 	  break;
         }
@@ -177,7 +176,7 @@ namespace zypp
 	// retry or change URL
       } while( true );
 
-      return media_mgr.localPath(_media, file_r);
+      return media_mgr.localPath( _media, file_r );
     }
 
     /** Provide a directory to local filesystem */
@@ -185,19 +184,21 @@ namespace zypp
 					  const unsigned media_nr,
 					  const bool recursive)
     {
-      media::MediaAccessId _media = _media_set->getMediaAccessId(media_nr);
+      DBG << "provideDir(" << path_r << ", " << media_nr << (recursive?", recursive":"") << ")" << endl;
+      media::MediaAccessId _media = _media_set->getMediaAccessId( media_nr );
       if (recursive)
-	media_mgr.provideDirTree(_media, path_r);
+	media_mgr.provideDirTree( _media, path_r );
       else
-	media_mgr.provideDir(_media, path_r);
-      return media_mgr.localPath(_media, path_r);
+	media_mgr.provideDir( _media, path_r );
+      return media_mgr.localPath( _media, path_r );
     }
 
-    void SourceImpl::changeMedia(const media::MediaId & media_r, const Pathname & path_r)
+    void SourceImpl::changeMedia( const media::MediaId & media_r, const Pathname & path_r )
     {
-      _url = media_mgr.url(media_r);
+      DBG << "changeMedia(" << path_r << ")" << endl;
+      _url = media_mgr.url( media_r );
       _media_set->reset();
-      _media_set->redirect(1, media_r);
+      _media_set->redirect( 1, media_r );
       _path = path_r;
     }
 
@@ -215,13 +216,15 @@ namespace zypp
 
     void SourceImpl::redirect(unsigned media_nr, const Url & new_url)
     {
-      media::MediaAccessId id = media_mgr.open(new_url);
-      _media_set->redirect(media_nr, id);
+      DBG << "redirect(" << new_url << ")" << endl;
+      media::MediaAccessId id = media_mgr.open( new_url );
+      _media_set->redirect( media_nr, id );
     }
     void SourceImpl::reattach(const Pathname &attach_point,
 			      bool temporary)
     {
-      _media_set->reattach(attach_point, temporary);
+      DBG << "reattach(" << attach_point << ")" << endl;
+      _media_set->reattach( attach_point, temporary );
     }
 
     void SourceImpl::release()
