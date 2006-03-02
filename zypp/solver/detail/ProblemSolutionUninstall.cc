@@ -27,6 +27,7 @@
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/solver/detail/ProblemSolutionUninstall.h"
+#include "zypp/solver/detail/ResolverInfo.h"
 
 using namespace std;
 
@@ -43,28 +44,32 @@ namespace zypp
 IMPL_PTR_TYPE(ProblemSolutionUninstall);
 
 //---------------------------------------------------------------------------
+ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent, PoolItem_Ref item,
+			  const std::string & descr,
+			  const std::string & detail)
+    : ProblemSolution (parent, descr, detail)
+{
+    addAction ( new TransactionSolutionAction (item, REMOVE));
+}
+
+	
 
 ProblemSolutionUninstall::ProblemSolutionUninstall( ResolverProblem_Ptr parent,
 						    PoolItem_Ref item)
     : ProblemSolution (parent, "", "")
 {
     ResStatus status = item.status();
-    if (status.isInstalled())
+    if (status.isInstalled()) {
 	// TranslatorExplanation %s = name of package, patch, selection ...
 	_description = str::form (_("delete %s"), item->name().c_str() );
-    else
+    	// TranslatorExplanation %s = name of package, patch, selection ...	    
+	_details = str::form (_("delete %s"), ResolverInfo::toString (item).c_str());
+    } else {
 	// TranslatorExplanation %s = name of package, patch, selection ...	
-	_description = str::form (_("do not install %s"), item->name().c_str() );	    
-
-    ostringstream item_str;
-    item_str << *item.resolvable();
-    if (status.isInstalled())    
-	// TranslatorExplanation %s = name of package, patch, selection ...	    
-	_details = str::form (_("delete %s"), item_str.str().c_str() );
-    else
-	// TranslatorExplanation %s = name of package, patch, selection ...	    
-	_details = str::form (_("do not install %s"), item_str.str().c_str() );
-	
+	_description = str::form (_("do not install %s"), item->name().c_str() );
+    	// TranslatorExplanation %s = name of package, patch, selection ...	    
+	_details = str::form (_("do not install %s"), ResolverInfo::toString (item).c_str());
+    }
 
     addAction ( new TransactionSolutionAction (item, REMOVE));
 }

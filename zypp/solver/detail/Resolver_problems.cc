@@ -309,8 +309,27 @@ Resolver::problems (void) const
 		what = str::form (_("Cannot install %s"), who.c_str());
 		details = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		// Uninstall the item
+		ResStatus status = item.status();
+		string description = "";
+		if (status.isInstalled())
+		    // TranslatorExplanation %s = name of package, patch, selection ...
+		    description = str::form (_("delete %s"), ResolverInfo::toString (item).c_str());
+		else
+		    // TranslatorExplanation %s = name of package, patch, selection ...	
+		    description = str::form (_("do not install %s"), ResolverInfo::toString (item).c_str());
+		problem->addSolution (new ProblemSolutionUninstall (problem, item, description, ""));
+		
 		// Uninstall the other
-		problem->addSolution (new ProblemSolutionUninstall (problem, misc_info->other()));
+		status = misc_info->other().status();
+		if (status.isInstalled())
+		    // TranslatorExplanation %s = name of package, patch, selection ...
+		    description = str::form (_("delete %s"), ResolverInfo::toString (misc_info->other()).c_str());
+		else
+		    // TranslatorExplanation %s = name of package, patch, selection ...	
+		    description = str::form (_("do not install %s"), ResolverInfo::toString (misc_info->other()).c_str());		
+		problem->addSolution (new ProblemSolutionUninstall (problem, misc_info->other(), description, ""));
+		
 		// Ignore it
 		problem->addSolution (new ProblemSolutionIgnoreInstalled (problem, item, misc_info->other()));
 		problems.push_back (problem);

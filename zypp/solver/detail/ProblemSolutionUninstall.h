@@ -48,6 +48,9 @@ namespace zypp
 	     * Constructor.
 	     **/
 	    ProblemSolutionUninstall( ResolverProblem_Ptr parent, PoolItem_Ref item);
+	    ProblemSolutionUninstall( ResolverProblem_Ptr parent, PoolItem_Ref item,
+				      const std::string & descr,
+				      const std::string & detail);	    
 	    ProblemSolutionUninstall( ResolverProblem_Ptr parent, PoolItemList & itemlist);	    
 	};
 

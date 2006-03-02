@@ -1412,6 +1412,15 @@ dup_name_check_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 bool
 ResolverContext::isParallelInstall (PoolItem_Ref item) const
 {
+    
+    for (PoolItemList::const_iterator iter = _ignoreInstalledItem.begin();
+	 iter != _ignoreInstalledItem.end(); iter++) {
+	if (item == *iter) {
+	    DBG << "ignore parallel install: " << item << endl;
+	    return false;
+	}
+    }
+    
     DupNameCheckInfo info;
 
     info.other = item;
