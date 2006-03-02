@@ -18,6 +18,7 @@
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
+#include "zypp/base/Gettext.h"
 
 #include "zypp/Source.h"
 #include "zypp/Url.h"
@@ -28,6 +29,26 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   DEFINE_PTR_TYPE(SourceManager)
+
+  class FailedSourcesRestoreException : public Exception 
+  {
+    public:
+      FailedSourcesRestoreException()
+      : Exception(N_("Unable to restore all sources."))
+      , _summary()
+      , _translatedSummary()
+      {}
+      virtual ~FailedSourcesRestoreException() throw() {};
+
+      void append( std::string source, const Exception& problem );
+      bool empty() const;
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+      virtual std::ostream & dumpOnTranslated( std::ostream & str ) const;
+    private:
+      std::string _summary;
+      std::string _translatedSummary;
+  };
 
   ///////////////////////////////////////////////////////////////////
   //

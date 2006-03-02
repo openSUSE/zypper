@@ -11,6 +11,7 @@
 */
 #include <iostream>
 #include "zypp/base/Logger.h"
+#include "zypp/base/Gettext.h"
 
 #include "zypp/ZYpp.h"
 #include "zypp/ZYppFactory.h"
@@ -253,10 +254,10 @@ namespace zypp
   bool SourceManager::restore(Pathname root_r, bool use_caches )
   {
     if (! _sources.empty() )
-	ZYPP_THROW(Exception ("At least one source already registered, cannot restore sources from persistent store.") );
+	ZYPP_THROW(Exception ( N_("At least one source already registered, cannot restore sources from persistent store.") ) );
 
-    bool error = false;
-        
+    FailedSourcesRestoreException report;
+
     storage::PersistentStorage store;    
     store.init( root_r );
     
@@ -274,9 +275,9 @@ namespace zypp
 	try {
 	    id = addSource(it->url, it->product_dir, it->alias, it->cache_dir);
 	}
-	catch ( const Exception & expt ){
+	catch ( Exception expt ){
 	    ERR << "Unable to restore source from " << it->url << endl;
-	    error = true;
+	    report.append( it->url + it->product_dir, expt );
 	    continue;
 	}
 	
@@ -291,7 +292,10 @@ namespace zypp
 	src.setAutorefresh ( it->autorefresh );
     }
     
-    return !error;
+    if( !report.empty() ) 
+    {
+	ZYPP_THROW(report);
+    }
   }
 
   /******************************************************************
@@ -332,6 +336,27 @@ namespace zypp
     return *(it->second); // just to keep gcc happy
   }
 
+  std::ostream & FailedSourcesRestoreException::dumpOn( std::ostream & str ) const
+  {
+	return str << _summary;
+  }
+
+  std::ostream & FailedSourcesRestoreException::dumpOnTranslated( std::ostream & str ) const
+  {
+	return str << Exception::asTranslatedString() << endl << _translatedSummary;
+  }
+
+  bool FailedSourcesRestoreException::empty () const
+  {
+	return _summary.empty();
+  }
+
+  void FailedSourcesRestoreException::append( std::string source, const Exception& expt) 
+  {
+	_summary = _summary + "\n" + source + ": " + expt.asString();
+	_translatedSummary = _translatedSummary + "\n" + source + ": " + expt.asTranslatedString();
+
+  }
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
