@@ -714,6 +714,27 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
 };
 
 
+static void
+show_pool( ResPool pool )
+{
+    int count = 1;
+    static bool full_pool_shown = false;
+
+    MIL << "---------------------------------------" << endl;
+    for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it, ++count) {
+
+	if (!full_pool_shown					// show item if not shown all before
+	    || it->status().transacts()				// or transacts
+	    || !it->status().isUndetermined())			// or established status
+	{
+	    MIL << ++count << ": " << *it << endl;
+	}
+
+    }
+    MIL << "---------------------------------------" << endl;
+    full_pool_shown = true;
+}
+
 //  This function loops over the pool and grabs
 //  all item.status().transacts() and item.status().byUser()
 //  It clears all previous bySolver() states also
@@ -729,6 +750,7 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
 //  ResolverContext has a foreachMarked() iterator function which loops over all
 //  items of the solutions. These must be written back to the pool.
 
+
 bool
 Resolver::resolvePool ()
 {
@@ -739,14 +761,11 @@ Resolver::resolvePool ()
     reset();
     
 #if 1
-    int count = 0;
+
     MIL << "Resolver::resolvePool()" << endl;
     MIL << "Pool before resolve" << endl;
-    MIL << "---------------------------------------" << endl;
-    for (ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it) {
-	MIL << ++count << ": " << *it << endl;
-    }
-    MIL << "---------------------------------------" << endl;
+    show_pool( _pool );
+
 #endif
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
@@ -759,13 +778,8 @@ Resolver::resolvePool ()
 	ResolverContext_Ptr solution = bestContext();
 	solution->foreachMarked (solution_to_pool, NULL);
 #if 1
-	count = 0;
 	MIL << "Pool after resolve" << endl;
-	MIL << "---------------------------------------" << endl;
-	for (ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it) {
-	    MIL << ++count << ". " << *it << endl;
-	}
-	MIL << "---------------------------------------" << endl;
+	show_pool( _pool );
 #endif
     }
     else {
