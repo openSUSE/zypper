@@ -1360,6 +1360,14 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    } else {
 		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
 	    }
+        } else if (node->equals ("availablelocales")) {
+	    RESULT << "Available locales: ";
+	    ZYpp::LocaleSet locales = God->getAvailableLocales();
+	    for (ZYpp::LocaleSet::const_iterator it = locales.begin(); it != locales.end(); ++it) {
+		if (it != locales.begin()) std::cout << ", ";
+		std::cout << it->code();
+	    }
+	    std::cout << endl;
 	} else {
 	    cerr << "Unknown tag '" << node->name() << "' in trial" << endl;
 	}
