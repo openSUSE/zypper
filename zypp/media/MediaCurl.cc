@@ -132,7 +132,7 @@ void MediaCurl::attachTo (bool next)
     std::string mountpoint;
 
     AttachPoint hint( attachPointHint());
-    if( hint.temp && !hint.path.empty())
+    if( hint.temp && !hint.path.empty() && PathInfo(hint.path).isDir())
       mountpoint = createAttachPoint(hint.path).asString();
     else 
       mountpoint = createAttachPoint().asString();
