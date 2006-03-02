@@ -11,8 +11,8 @@
 */
 #include <zypp/media/MediaException.h>
 #include <zypp/media/MediaManager.h>
+#include <zypp/media/MediaHandler.h>
 #include <zypp/media/Mount.h>
-//#include <zypp/media/Hal.h>
 #include <zypp/thread/Mutex.h>
 #include <zypp/thread/MutexLock.h>
 
@@ -312,6 +312,15 @@ namespace zypp
       MediaVerifierRef verifier( new NoVerifier());
       ref.verifier.swap(verifier);
       ref.desired  = false;
+    }
+
+    // ---------------------------------------------------------------
+    bool
+    MediaManager::setAttachPrefix(const Pathname &attach_prefix)
+    {
+      MutexLock glock(g_Mutex);
+
+      return MediaHandler::setAttachPrefix(attach_prefix);
     }
 
     // ---------------------------------------------------------------

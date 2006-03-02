@@ -14,6 +14,7 @@
 
 #include <zypp/media/MediaAccess.h>
 
+#include <zypp/base/Deprecated.h>
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/PtrTypes.h>
 #include <zypp/Pathname.h>
@@ -152,6 +153,12 @@ namespace zypp
       /**
        * Opens the media access for specified with the url.
        *
+       * If the \p preferred_attach_point parameter does not
+       * point to a usable attach point directory, the media
+       * manager automatically creates a temporary attach
+       * point in a default directory. This default directory
+       * can be changed using setAttachPrefix() function.
+       *
        * \param  url The media access url.
        * \param  preferred_attach_point The preferred, already
        *         existing directory, where the media should be
@@ -220,6 +227,21 @@ namespace zypp
 
     public:
       /**
+       * Set or resets the directory name, where the media manager
+       * handlers create their temporary attach points (see open()
+       * function).
+       * It has effect to newly created temporary attach points only.
+       *
+       * \param attach_prefix The new prefix for temporary attach
+       *        points, or empty pathname to reset to defaults.
+       * \return True on success, false if the \p attach_prefix
+       *         parameters contains a path name, that does not
+       *         point to a writable directory.
+       */
+      bool
+      setAttachPrefix(const Pathname &attach_prefix);
+
+      /**
        * Attach the media using the concrete handler.
        *
        * \throws MediaNotOpenException for invalid access id.
@@ -229,6 +251,10 @@ namespace zypp
 
       /**
        * Reattach to a new attach point.
+       *
+       * \deprecated This function will be removed, because the
+       * reattach function has race conditions (e.g. open file
+       * in the old attach point). Use setAttachPrefix() instead.
        *
        * \param accessId A media access Id.
        * \param attach_point A new attach point directory.
@@ -243,7 +269,7 @@ namespace zypp
       void
       reattach(MediaAccessId   accessId,
                const Pathname &attach_point,
-               bool            temporary = false);
+               bool            temporary = false) ZYPP_DEPRECATED;
 
       /**
        * Release the attached media and optionally eject.

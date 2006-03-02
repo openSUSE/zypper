@@ -47,17 +47,24 @@ class MediaHandler {
 	typedef shared_ptr<MediaHandler> Ptr;
 	typedef shared_ptr<const MediaHandler> constPtr;
 
+	static bool setAttachPrefix(const Pathname &attach_prefix);
+
     private:
+        /**
+	 * User defined default attach point prefix.
+	 */
+    	static Pathname _attachPrefix;
+
 	/**
 	 * The attached media source.
 	 */
-        MediaSourceRef _mediaSource;
+        MediaSourceRef  _mediaSource;
 
 	/**
 	 * This is where the media will be actually attached ("mounted").
 	 * All files are provided bellow this + _relativeRoot directory.
 	 **/
-	AttachPointRef _attachPoint;
+	AttachPointRef  _attachPoint;
 
 	/**
 	 * The user provided attach point or the last attach point from
@@ -67,23 +74,23 @@ class MediaHandler {
 	 *      dir, true  => create temp attach point bellow of dir
 	 *      dir, false => user specified attach point (not removed)
 	 */
-	AttachPoint _AttachPointHint;
+	AttachPoint     _AttachPointHint;
 
 	/**
 	 * The relative root directory of the data on the media.
 	 * See also localRoot() and urlpath_below_attachpoint_r
 	 * constructor argument.
 	 */
-	Pathname _relativeRoot;
+	Pathname        _relativeRoot;
 
 	/**
 	 * True if concrete handler downloads files to the local
 	 * filesystem. If true releaseFile/Dir will delete them.
 	 **/
-	bool _does_download;
+	bool            _does_download;
 
         /** timestamp of the the last attach verification */
-        mutable time_t _attach_mtime;
+        mutable time_t  _attach_mtime;
 
     protected:
         /**
@@ -135,9 +142,9 @@ class MediaHandler {
 
 	virtual bool     checkAttachPoint(const Pathname &apoint) const;
 
-	bool             checkAttachPoint(const Pathname &apoint,
+	static bool      checkAttachPoint(const Pathname &apoint,
 					  bool            empty_dir,
-	                                  bool            writeable) const;
+	                                  bool            writeable);
 
         bool             isUseableAttachPoint(const Pathname &path) const;
 

@@ -28,7 +28,7 @@ using namespace std;
 namespace zypp {
   namespace media {
 
-
+  Pathname MediaHandler::_attachPrefix("");
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -230,6 +230,34 @@ MediaHandler::findAttachedMedia(const MediaSourceRef &media) const
 	return MediaManager().findAttachedMedia(media);
 }
 
+///////////////////////////////////////////////////////////////////
+//
+//
+//	METHOD NAME : MediaHandler::setAttachPrefix
+//	METHOD TYPE : void
+//
+//	DESCRIPTION :
+//
+bool
+MediaHandler::setAttachPrefix(const Pathname &attach_prefix)
+{
+  if( attach_prefix.empty())
+  {
+    MIL << "Reseting to built-in attach point prefixes."
+        << std::endl;
+    MediaHandler::_attachPrefix = attach_prefix;
+    return true;
+  }
+  else
+  if( MediaHandler::checkAttachPoint(attach_prefix, false, true))
+  {
+    MIL << "Setting user defined attach point prefix: "
+        << attach_prefix << std::endl;
+    MediaHandler::_attachPrefix = attach_prefix;
+    return true;
+  }
+  return false;
+}
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -250,7 +278,12 @@ MediaHandler::createAttachPoint() const
   };
 
   Pathname apoint;
-  Pathname aroot;
+  Pathname aroot( MediaHandler::_attachPrefix);
+
+  if( !aroot.empty())
+  {
+    apoint = createAttachPoint(aroot);
+  }
   for ( const char ** def = defmounts; *def && apoint.empty(); ++def ) {
     aroot = *def;
     if( aroot.empty())
@@ -474,11 +507,19 @@ void MediaHandler::attach( bool next )
   // that checks the media against /etc/mtab ...
   setMediaSource(MediaSourceRef());
 
+  //
+  // FIXME: special temp handling because reattach
+  //        may set path to a prefix directory
+  //        note: reattach is deprecated....
+  //
+  AttachPoint ap( attachPointHint());
+  if( ap.temp)
+    ap.path = "";
+  setAttachPoint(ap.path, ap.temp);
+
   attachTo( next ); // pass to concrete handler
   MIL << "Attached: " << *this << endl;
 }
-
-
 
 
 ///////////////////////////////////////////////////////////////////
@@ -569,7 +610,7 @@ void MediaHandler::release( bool eject )
   else {
     DBG << "Releasing shared media reference only" << std::endl;
     _mediaSource.reset(NULL);
-    //setAttachPoint("", true);
+    setAttachPoint("", true);
   }
   MIL << "Released: " << *this << endl;
 }
@@ -577,17 +618,24 @@ void MediaHandler::release( bool eject )
 bool
 MediaHandler::checkAttachPoint(const Pathname &apoint) const
 {
-  return checkAttachPoint( apoint, true, false);
+  return MediaHandler::checkAttachPoint( apoint, true, false);
 }
 
+// STATIC
 bool
 MediaHandler::checkAttachPoint(const Pathname &apoint,
 			       bool            emptydir,
-	                       bool            writeable) const
+	                       bool            writeable)
 {
   if( apoint.empty() || !apoint.absolute())
   {
     ERR << "Attach point '" << apoint << "' is not absolute"
+        << std::endl;
+    return false;
+  }
+  if( apoint == "/")
+  {
+    ERR << "Attach point '" << apoint << "' is not allowed"
         << std::endl;
     return false;
   }
@@ -652,7 +700,7 @@ MediaHandler::reattach(const Pathname &attach_point,
     {
       // check if the new attach point root hint is
       // a writable directory; may contains files.
-      if( !checkAttachPoint(attach_point, false, true))
+      if( !MediaHandler::checkAttachPoint(attach_point, false, true))
         ZYPP_THROW( MediaBadAttachPointException(url()));
     }
   }
