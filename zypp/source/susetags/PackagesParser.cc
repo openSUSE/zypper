@@ -142,7 +142,8 @@ namespace zypp
 	{
 	  if ( _isPendingPkg )
 	  {
-	    if (_nvrad.arch.compatibleWith( _system_arch ) )
+	    if (_srcPkgImpl == NULL					// only if its not a src/nosrc
+		&& _nvrad.arch.compatibleWith( _system_arch ) )
 	    {
 	      _result.insert( PkgContent::value_type( _nvrad, _pkgImpl ) );
 	    }
