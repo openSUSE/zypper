@@ -150,6 +150,7 @@ namespace zypp
     /** Error message provided by \ref dumpOn as string. */
     std::string asString() const;
 
+    std::string asTranslatedString() const { return asString(); }
   protected:
 
     /** Overload this to print a proper error message. */
