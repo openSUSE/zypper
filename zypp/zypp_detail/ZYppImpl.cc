@@ -12,6 +12,7 @@
 
 #include <sys/utsname.h>
 #include <iostream>
+#include <fstream>
 //#include "zypp/base/Logger.h"
 
 #include "zypp/zypp_detail/ZYppImpl.h"
@@ -74,8 +75,46 @@ namespace zypp
 	ERR << "Can't determine system architecture" << endl;
       }
       else {
-	MIL << "System architecture is '" << buf.machine << "'" << endl;
-	_architecture = Arch(buf.machine);
+	_architecture = Arch( buf.machine );
+	
+	MIL << "uname architecture is '" << buf.machine << "'" << endl;
+
+	// some CPUs report i686 but dont implement cx8 and cmov
+	// check for both flags in /proc/cpuinfo and downgrade
+	// to i586 if either is missing (cf bug #18885)
+
+	if (_architecture == Arch_i686)
+	{
+	    std::ifstream cpuinfo ("/proc/cpuinfo");
+	    if (!cpuinfo)
+	    {
+		ERR << "Cant open /proc/cpuinfo" << endl;
+	    }
+	    else
+	    {
+		char infoline[1024];
+		while (cpuinfo.good())
+		{
+		    if (!cpuinfo.getline (infoline, 1024, '\n'))
+		    {
+			if (cpuinfo.eof())
+			    break;
+		    }
+		    if (strncmp (infoline, "flags", 5) == 0)
+		    {
+			std::string flagsline (infoline);
+			if ((flagsline.find( "cx8" ) == std::string::npos)
+			    || (flagsline.find( "cmov" ) == std::string::npos))
+			{
+			    _architecture = Arch_i586;
+			}
+			break;
+		    } // flags found
+		} // read proc/cpuinfo
+	    } // proc/cpuinfo opened
+	} // i686 extra flags check
+
+	MIL << "System architecture is '" << _architecture << "'" << endl;
       }
 
     }
