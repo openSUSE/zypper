@@ -41,7 +41,7 @@ namespace zypp {
     MediaDIR::MediaDIR( const Url &      url_r,
     			const Pathname & /*attach_point_hint_r*/ )
         : MediaHandler( url_r, url_r.getPathName(),
-    		    "/", // urlpath at attachpoint
+    		    "/",    // urlpath below attachpoint
     		    false ) // does_download
     {
 	MIL << "MediaDIR::MediaDIR(" << url_r << ")" << endl;
@@ -59,7 +59,7 @@ namespace zypp {
     {
       if(next)
 	ZYPP_THROW(MediaNotSupportedException(url()));
-      MediaSourceRef media(new MediaSource("dir", _url.getPathName()));
+      MediaSourceRef media(new MediaSource("dir", attachPoint().asString()));
       setMediaSource(media);
     }
 
