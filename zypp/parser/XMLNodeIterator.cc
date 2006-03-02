@@ -236,7 +236,7 @@ namespace zypp {
       std::ostream& out = (severity & XML_PARSER_SEVERITY_ERROR) ? ERR : WAR;
     
         /* Log it */
-      /*
+#if 0
     out << "XML syntax " << errOrWarn << ": " << msg;
       if (obj->_error.get()) {
         out << "(encountered during error recovery!)" << std::endl;
@@ -249,7 +249,7 @@ namespace zypp {
         << ", column " << xmlTextReaderGetParserColumnNumber(reader);
       }
       out << std::endl;
-      */
+#endif
         /* save it */
       if ((severity & XML_PARSER_SEVERITY_ERROR)
           && ! obj->_error.get()) {
