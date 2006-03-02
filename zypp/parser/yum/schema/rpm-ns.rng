@@ -79,11 +79,6 @@
     </attribute>
     <empty/>
   </define>
-  <define name="element-provides">
-    <element name="provides">
-      <ref name="provides"/>
-    </element>
-  </define>
   <define name="shared-entry-attributes">
     <attribute name="epoch">
       <data type="nonNegativeInteger"/>
@@ -92,6 +87,17 @@
     <optional>
       <attribute name="rel"/>
     </optional>
+  </define>
+  <define name="attribute-kind">
+    <attribute name="kind">
+      <choice>
+        <value>package</value>
+        <value>patch</value>
+        <value>script</value>
+        <value>message</value>
+        <value>product</value>
+      </choice>
+    </attribute>
   </define>
   <define name="attribute-flags-provides">
     <attribute name="flags">
@@ -125,6 +131,28 @@
   </define>
   <define name="attribute-name">
     <attribute name="name"/>
+  </define>
+  <define name="usual-entry-content">
+    <optional>
+      <ref name="attribute-kind"/>
+    </optional>
+    <!-- new compared to rpm-ns -->
+    <ref name="attribute-name"/>
+    <optional>
+      <ref name="shared-entry-attributes"/>
+      <ref name="attribute-flags"/>
+    </optional>
+    <empty/>
+  </define>
+  <define name="element-entry">
+    <element name="entry">
+      <ref name="usual-entry-content"/>
+    </element>
+  </define>
+  <define name="element-provides">
+    <element name="provides">
+      <ref name="provides"/>
+    </element>
   </define>
   <define name="provides">
     <oneOrMore>
@@ -280,5 +308,33 @@
       </attribute>
     </optional>
     <text/>
+  </define>
+  <define name="dependencies">
+    <interleave>
+      <optional>
+        <ref name="element-provides"/>
+      </optional>
+      <optional>
+        <ref name="element-conflicts"/>
+      </optional>
+      <optional>
+        <ref name="element-obsoletes"/>
+      </optional>
+      <optional>
+        <ref name="element-requires"/>
+      </optional>
+      <optional>
+        <ref name="element-suggests"/>
+      </optional>
+      <optional>
+        <ref name="element-enhances"/>
+      </optional>
+      <optional>
+        <ref name="element-supplements"/>
+      </optional>
+      <optional>
+        <ref name="element-recommends"/>
+      </optional>
+    </interleave>
   </define>
 </grammar>

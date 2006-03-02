@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grammar xmlns:ns1="http://novell.com/package/metadata/suse/product" ns="http://linux.duke.edu/metadata/rpm" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <include href="rpm-ns.rng"/>
-  <define name="attribute-kind">
-    <attribute name="kind">
-      <choice>
-        <value>package</value>
-        <value>patch</value>
-        <value>script</value>
-        <value>message</value>
-        <value>product</value>
-      </choice>
-    </attribute>
-  </define>
-  <define name="usual-entry-content">
-    <optional>
-      <ref name="attribute-kind"/>
-    </optional>
-    <!-- new compared to rpm-ns -->
-    <ref name="attribute-name"/>
-    <optional>
-      <ref name="shared-entry-attributes"/>
-      <ref name="attribute-flags"/>
-    </optional>
-    <empty/>
-  </define>
   <start>
     <element name="ns1:product">
       <attribute name="type"/>
@@ -55,96 +32,95 @@
       <optional>
         <element name="provides">
           <oneOrMore>
-            <element name="entry">
-              <optional>
-                <ref name="attribute-kind"/>
-              </optional>
-              <ref name="attribute-name"/>
-              <optional>
-                <ref name="shared-entry-attributes"/>
-                <ref name="attribute-flags-provides"/>
-              </optional>
-              <empty/>
-            </element>
+            <choice>
+              <element name="entry">
+                <optional>
+                  <ref name="attribute-kind"/>
+                </optional>
+                <ref name="attribute-name"/>
+                <optional>
+                  <ref name="shared-entry-attributes"/>
+                  <ref name="attribute-flags-provides"/>
+                </optional>
+                <empty/>
+              </element>
+              <ref name="element-capability"/>
+            </choice>
           </oneOrMore>
         </element>
       </optional>
       <optional>
         <element name="conflicts">
           <oneOrMore>
-            <element name="entry">
-              <ref name="usual-entry-content"/>
-            </element>
+            <ref name="usual-entry-or-capability"/>
           </oneOrMore>
         </element>
       </optional>
       <optional>
         <element name="obsoletes">
           <oneOrMore>
-            <element name="entry">
-              <optional>
-                <ref name="attribute-kind"/>
-              </optional>
-              <ref name="attribute-name"/>
-              <optional>
-                <ref name="shared-entry-attributes"/>
-                <ref name="attribute-flags-obsoletes"/>
-              </optional>
-              <empty/>
-            </element>
+            <choice>
+              <element name="entry">
+                <optional>
+                  <ref name="attribute-kind"/>
+                </optional>
+                <ref name="attribute-name"/>
+                <optional>
+                  <ref name="shared-entry-attributes"/>
+                  <ref name="attribute-flags-obsoletes"/>
+                </optional>
+                <empty/>
+              </element>
+              <ref name="element-capability"/>
+            </choice>
           </oneOrMore>
         </element>
       </optional>
       <optional>
         <element name="requires">
           <zeroOrMore>
-            <element name="entry">
-              <optional>
-                <attribute name="pre">
-                  <choice>
-                    <value>1</value>
-                    <value>0</value>
-                  </choice>
-                </attribute>
-              </optional>
-              <ref name="usual-entry-content"/>
-            </element>
+            <choice>
+              <element name="entry">
+                <optional>
+                  <attribute name="pre">
+                    <choice>
+                      <value>1</value>
+                      <value>0</value>
+                    </choice>
+                  </attribute>
+                </optional>
+                <ref name="usual-entry-content"/>
+              </element>
+              <ref name="element-capability"/>
+            </choice>
           </zeroOrMore>
         </element>
       </optional>
       <optional>
         <element name="recommends">
           <zeroOrMore>
-            <element name="entry">
-              <ref name="usual-entry-content"/>
-            </element>
+            <ref name="usual-entry-or-capability"/>
           </zeroOrMore>
         </element>
       </optional>
       <optional>
         <element name="enhances">
           <zeroOrMore>
-            <element name="entry">
-              <ref name="usual-entry-content"/>
-            </element>
+            <ref name="usual-entry-or-capability"/>
           </zeroOrMore>
         </element>
       </optional>
       <optional>
         <element name="supplements">
           <zeroOrMore>
-            <element name="entry">
-              <ref name="usual-entry-content"/>
-            </element>
+            <ref name="usual-entry-or-capability"/>
           </zeroOrMore>
         </element>
       </optional>
       <optional>
         <element name="suggests">
           <zeroOrMore>
-            <element name="entry">
-              <ref name="usual-entry-content"/>
-            </element>
+            <ref name="usual-entry-or-capability"/>
           </zeroOrMore>
         </element>
       </optional>

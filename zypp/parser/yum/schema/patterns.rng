@@ -70,32 +70,6 @@
         <text/>
       </element>
     </oneOrMore>
-    <optional>
-      <ref name="element-provides"/>
-    </optional>
-    <optional>
-      <ref name="element-conflicts"/>
-    </optional>
-    <optional>
-      <ref name="element-obsoletes"/>
-    </optional>
-    <optional>
-      <ref name="element-freshen"/>
-    </optional>
-    <optional>
-      <ref name="element-requires"/>
-    </optional>
-    <optional>
-      <ref name="element-suggests"/>
-    </optional>
-    <optional>
-      <ref name="element-enhances"/>
-    </optional>
-    <optional>
-      <ref name="element-supplements"/>
-    </optional>
-    <optional>
-      <ref name="element-recommends"/>
-    </optional>
+    <ref name="dependencies"/>
   </define>
 </grammar>

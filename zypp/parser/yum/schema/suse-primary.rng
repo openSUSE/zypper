@@ -1,12 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grammar xmlns:ns1="http://linux.duke.edu/metadata/common" ns="http://novell.com/package/metadata/suse/common" xmlns="http://relaxng.org/ns/structure/1.0">
-  <include href="primary.rng">
+<grammar xmlns:suse="http://novell.com/package/metadata/suse/common" xmlns:ns1="http://linux.duke.edu/metadata/common" xmlns:ns2="http://linux.duke.edu/metadata/rpm" ns="http://novell.com/package/metadata/suse/common" xmlns="http://relaxng.org/ns/structure/1.0">
+  <include href="primary.rng"/>
+  <include href="rpm-ns.rng">
     <define name="element-format">
       <element name="ns1:format">
         <ref name="suse-format"/>
       </element>
     </define>
+    <define name="element-provides">
+      <choice>
+        <element name="suse:provides">
+          <ref name="suse-provides"/>
+        </element>
+        <element name="ns2:provides">
+          <ref name="provides"/>
+        </element>
+      </choice>
+    </define>
+    <define name="element-requires">
+      <choice>
+        <element name="suse:requires">
+          <ref name="suse-requires"/>
+        </element>
+        <element name="ns2:requires">
+          <ref name="requires"/>
+        </element>
+      </choice>
+    </define>
+    <define name="element-conflicts">
+      <choice>
+        <element name="suse:conflicts">
+          <ref name="suse-conflicts"/>
+        </element>
+        <element name="ns2:conflicts">
+          <ref name="conflicts"/>
+        </element>
+      </choice>
+    </define>
+    <define name="element-recommends">
+      <choice>
+        <element name="suse:recommends">
+          <ref name="suse-recommends"/>
+        </element>
+        <element name="ns2:recommends">
+          <ref name="recommends"/>
+        </element>
+      </choice>
+    </define>
+    <define name="element-enhances">
+      <choice>
+        <element name="suse:enhances">
+          <ref name="suse-enhances"/>
+        </element>
+        <element name="ns2:enhances">
+          <ref name="enhances"/>
+        </element>
+      </choice>
+    </define>
+    <define name="element-supplements">
+      <choice>
+        <element name="suse:supplements">
+          <ref name="suse-supplements"/>
+        </element>
+        <element name="ns2:supplements">
+          <ref name="supplements"/>
+        </element>
+      </choice>
+    </define>
+    <define name="element-suggests">
+      <choice>
+        <element name="suse:suggests">
+          <ref name="suse-suggests"/>
+        </element>
+        <element name="ns2:suggests">
+          <ref name="suggests"/>
+        </element>
+      </choice>
+    </define>
+    <define name="element-obsoletes">
+      <choice>
+        <element name="suse:obsoletes">
+          <ref name="suse-obsoletes"/>
+        </element>
+        <element name="ns2:obsoletes">
+          <ref name="obsoletes"/>
+        </element>
+      </choice>
+    </define>
+    <define name="dependencies">
+      <ref name="suse-dependencies"/>
+    </define>
   </include>
+  <define name="element-capability">
+    <element name="ns1:capability">
+      <optional>
+        <ref name="attribute-kind"/>
+      </optional>
+      <text/>
+    </element>
+  </define>
+  <define name="usual-entry-or-capability">
+    <choice>
+      <ref name="element-entry"/>
+      <ref name="element-capability"/>
+    </choice>
+  </define>
   <define name="suse-format">
     <interleave>
       <ref name="format"/>
@@ -32,6 +130,77 @@
     <optional>
       <ref name="element-install_only"/>
     </optional>
+  </define>
+  <define name="suse-provides">
+    <oneOrMore>
+      <ref name="usual-entry-or-capability"/>
+    </oneOrMore>
+  </define>
+  <define name="suse-requires">
+    <oneOrMore>
+      <ref name="usual-entry-or-capability"/>
+    </oneOrMore>
+  </define>
+  <define name="suse-conflicts">
+    <oneOrMore>
+      <ref name="usual-entry-or-capability"/>
+    </oneOrMore>
+  </define>
+  <define name="suse-recommends">
+    <oneOrMore>
+      <ref name="usual-entry-or-capability"/>
+    </oneOrMore>
+  </define>
+  <define name="suse-enhances">
+    <oneOrMore>
+      <ref name="usual-entry-or-capability"/>
+    </oneOrMore>
+  </define>
+  <define name="suse-supplements">
+    <oneOrMore>
+      <ref name="usual-entry-or-capability"/>
+    </oneOrMore>
+  </define>
+  <define name="suse-suggests">
+    <oneOrMore>
+      <ref name="usual-entry-or-capability"/>
+    </oneOrMore>
+  </define>
+  <define name="suse-obsoletes">
+    <oneOrMore>
+      <ref name="usual-entry-or-capability"/>
+    </oneOrMore>
+  </define>
+  <define name="suse-dependencies">
+    <interleave>
+      <optional>
+        <ref name="element-provides"/>
+      </optional>
+      <optional>
+        <ref name="element-conflicts"/>
+      </optional>
+      <optional>
+        <ref name="element-obsoletes"/>
+      </optional>
+      <optional>
+        <ref name="freshen"/>
+      </optional>
+      <optional>
+        <ref name="element-requires"/>
+      </optional>
+      <optional>
+        <ref name="element-suggests"/>
+      </optional>
+      <optional>
+        <ref name="element-enhances"/>
+      </optional>
+      <optional>
+        <ref name="element-supplements"/>
+      </optional>
+      <optional>
+        <ref name="element-recommends"/>
+      </optional>
+    </interleave>
   </define>
   <define name="element-authors">
     <element name="authors">
@@ -90,20 +259,18 @@
     <empty/>
   </define>
   <define name="element-freshen">
-    <element name="freshen">
-      <ref name="freshen"/>
-    </element>
+    <choice>
+      <element name="suse:freshen">
+        <ref name="freshen"/>
+      </element>
+      <element name="freshen">
+        <ref name="freshen"/>
+      </element>
+    </choice>
   </define>
   <define name="freshen">
     <oneOrMore>
-      <element name="entry">
-        <ref name="attribute-name"/>
-        <optional>
-          <ref name="shared-entry-attributes"/>
-          <ref name="attribute-flags"/>
-        </optional>
-        <empty/>
-      </element>
+      <ref name="usual-entry-or-capability"/>
     </oneOrMore>
   </define>
   <define name="element-install_only">

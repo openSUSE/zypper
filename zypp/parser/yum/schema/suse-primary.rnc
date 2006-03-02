@@ -3,8 +3,7 @@ namespace suse = "http://novell.com/package/metadata/suse/common"
 namespace ns1 = "http://linux.duke.edu/metadata/common"
 namespace ns2 = "http://linux.duke.edu/metadata/rpm"
 
-include "primary.rnc" 
-include "rpm-ns.rnc"
+include "primary.rnc" {
 
   element-format = 
     element ns1:format { suse-format }
@@ -27,6 +26,7 @@ include "rpm-ns.rnc"
     ( element suse:obsoletes { suse-obsoletes }  | element ns2:obsoletes { obsoletes } )
     
   dependencies = suse-dependencies
+}
 
 element-capability =
   element ns1:capability {
