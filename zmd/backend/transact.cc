@@ -98,6 +98,7 @@ main (int argc, char **argv)
 
     if (!read_transactions (God->pool(), db.db(), dbs))
 	return 1;
+
     try {
 	God->initTarget("/", true);
 	PoolItemList x,y,z;
