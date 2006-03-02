@@ -79,6 +79,10 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     PoolItem_Ref _last_checked_item;		// cache for {get,set}Status
     ResStatus _last_checked_status;
 
+    PoolItemList _last_getMarked; 	// status of the last getMarked call
+                                        // it is sorted
+    int _last_getMarked_which;		// which kind of getMarked
+
     Arch _architecture;
 
     // These conflict should be ignored of the concering item
@@ -207,8 +211,8 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     /** iterate over various states */
 
     void foreachMarked (MarkedPoolItemFn fn, void *data) const;
-    PoolItemList getMarked (int which) const;					// <0:uninstalls, 0:all; >0:installs
-
+    PoolItemList getMarked (int which);					// <0:uninstalls, 0:all; >0:installs
+    
     int foreachInstall (MarkedPoolItemFn fn, void *data) const;
     PoolItemList getInstalls (void) const;
     int installCount (void) const;

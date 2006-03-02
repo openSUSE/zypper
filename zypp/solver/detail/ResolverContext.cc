@@ -55,6 +55,16 @@ using namespace std;
 IMPL_PTR_TYPE(ResolverContext);
 
 //---------------------------------------------------------------------------
+	
+class compare_items {
+public:
+    int operator() (PoolItem_Ref p1,
+                    PoolItem_Ref p2) const
+        { return compareByN ( p1.resolvable(), p2.resolvable()); }
+};
+	
+
+//---------------------------------------------------------------------------
 
 ostream&
 operator<<( ostream& os, const ResolverContext & context)
@@ -605,14 +615,20 @@ marked_item_collector (PoolItem_Ref item, const ResStatus & status, void *data)
 
 
 PoolItemList
-ResolverContext::getMarked (int which) const
+ResolverContext::getMarked (int which)
 {
-    PoolItemList rl;
-    MarkedResolvableInfo info = { &rl, which };
+    if ( _last_getMarked_which == which
+	 && _last_getMarked.size() > 0 )
+	return _last_getMarked; // use the last run
+
+    MarkedResolvableInfo info = { &_last_getMarked, which };
 
     foreachMarked (marked_item_collector, &info);
 
-    return rl;
+    _last_getMarked.sort(compare_items());
+    _last_getMarked_which = which;
+
+    return _last_getMarked;
 }
 
 //---------------------------------------------------------------------------
