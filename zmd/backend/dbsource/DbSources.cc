@@ -78,8 +78,8 @@ DbSources::sources (bool refresh)
     _sources.clear();
 
     const char *query =
-        "SELECT id, name, alias, description, priority, priority_unsubd "
-        "FROM catalogs";
+	"SELECT id, name, alias, description, priority, priority_unsubd "
+	"FROM catalogs";
 
     sqlite3_stmt *handle = NULL;
     int rc = sqlite3_prepare (_db, query, -1, &handle, NULL);
@@ -89,18 +89,18 @@ DbSources::sources (bool refresh)
     }
 
     media::MediaManager mmgr;
-    media::MediaId mediaid = mmgr.open(Url("file:/"));
+    media::MediaId mediaid = mmgr.open( Url( "file:/" ) );
     SourceFactory factory;
 
     // read catalogs table
 
     while ((rc = sqlite3_step (handle)) == SQLITE_ROW) {
-	string id ((const char *) sqlite3_column_text (handle, 0));
-	string name ((const char *) sqlite3_column_text (handle, 1));
-        string alias ((const char *) sqlite3_column_text (handle, 2));
-        string desc ((const char *) sqlite3_column_text (handle, 3));
-	unsigned priority = sqlite3_column_int (handle, 4);
-	unsigned priority_unsub = sqlite3_column_int (handle, 5);
+	string id ((const char *) sqlite3_column_text( handle, 0 ));
+	string name ((const char *) sqlite3_column_text( handle, 1 ));
+	string alias ((const char *) sqlite3_column_text( handle, 2 ));
+	string desc ((const char *) sqlite3_column_text( handle, 3 ));
+	unsigned priority = sqlite3_column_int( handle, 4 );
+	unsigned priority_unsub = sqlite3_column_int( handle, 5 );
 
 	MIL << "id " << id
 	    << ", name " << name
@@ -116,15 +116,15 @@ DbSources::sources (bool refresh)
 	try {
 
 	    DbSourceImpl *impl = new DbSourceImpl ();
-	    impl->factoryCtor (mediaid, Pathname(), alias);
+	    impl->factoryCtor( mediaid, Pathname(), alias );
 	    impl->setId( id );
 	    impl->setZmdName( name );
 	    impl->setZmdDescription ( desc );
 	    impl->setPriority( priority );
 	    impl->setPriorityUnsubscribed( priority_unsub );
 
-	    impl->attachDatabase (_db);
-	    impl->attachIdMap (&_idmap);
+	    impl->attachDatabase( _db );
+	    impl->attachIdMap( &_idmap );
 
 	    Source_Ref src( factory.createFrom( impl ) );
 	    _sources.push_back( src );
