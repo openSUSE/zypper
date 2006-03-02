@@ -5,7 +5,7 @@
 >!> 
 >!>    Solution:
 >!>       delete gedit2
->!>       delete [package]gedit2-1:1.112.0.0.200202140152-snap.ximian.1.noarch
+>!>       delete gedit2-1:1.112.0.0.200202140152-snap.ximian.1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       

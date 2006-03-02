@@ -5,7 +5,7 @@
 >!> There are no installable providers of nothere for unfulfilled-1.0-1.noarch[test]
 >!>    Solution:
 >!>       do not install unfulfilled
->!>       do not install [package]unfulfilled-1.0-1.noarch
+>!>       do not install unfulfilled-1.0-1.noarch[test]
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       

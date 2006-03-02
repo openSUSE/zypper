@@ -6,10 +6,10 @@
 >!> A conflict over foo == 2.0-1 (foo) requires the removal of to-be-installed foo-2.0-1.noarch[test]
 >!>    Solution:
 >!>       do not install foo
->!>       do not install [package]foo-2.0-1.noarch
+>!>       do not install foo-2.0-1.noarch[test]
 >!>    Solution:
 >!>       do not install foonew
->!>       do not install [package]foonew-2.0-1.noarch
+>!>       do not install foonew-2.0-1.noarch[test]
 >!>    Solution:
 >!>       Ignore this conflict of foo
 >!>       

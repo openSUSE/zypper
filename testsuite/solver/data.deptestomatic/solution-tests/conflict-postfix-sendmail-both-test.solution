@@ -24,10 +24,10 @@
 >!> A conflict over sendmail == 8.13.5-5 (sendmail) requires the removal of to-be-installed sendmail-8.13.5-5.i586[packages]
 >!>    Solution:
 >!>       do not install sendmail
->!>       do not install [package]sendmail-8.13.5-5.i586
+>!>       do not install sendmail-8.13.5-5.i586[packages]
 >!>    Solution:
 >!>       do not install postfix
->!>       do not install [package]postfix-2.2.6-6.i586
+>!>       do not install postfix-2.2.6-6.i586[packages]
 >!>    Solution:
 >!>       Ignore this conflict of sendmail
 >!>       

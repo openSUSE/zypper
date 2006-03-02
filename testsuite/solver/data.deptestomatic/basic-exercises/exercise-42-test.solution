@@ -5,7 +5,7 @@
 >!> 
 >!>    Solution:
 >!>       delete gnome-desktop-libs
->!>       delete [package]gnome-desktop-libs-1.5.12.0.200203140655-snap.ximian.1.noarch
+>!>       delete gnome-desktop-libs-1.5.12.0.200203140655-snap.ximian.1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       

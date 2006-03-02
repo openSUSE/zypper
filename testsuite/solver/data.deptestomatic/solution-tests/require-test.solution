@@ -5,7 +5,7 @@
 >!> There are no installable providers of foo for foonew-2.0-1.noarch[test]
 >!>    Solution:
 >!>       do not install foonew
->!>       do not install [package]foonew-2.0-1.noarch
+>!>       do not install foonew-2.0-1.noarch[test]
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       

@@ -9,7 +9,7 @@
 >!>       
 >!>    Solution:
 >!>       do not install A
->!>       do not install [package]A-1.0-1.noarch
+>!>       do not install A-1.0-1.noarch[test]
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       

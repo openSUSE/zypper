@@ -5,7 +5,10 @@
 >!> 
 >!>    Solution:
 >!>       delete liboaf0-devel
->!>       delete [package]liboaf0-devel-0.6.6-3mdk.noarch
+>!>       delete liboaf0-devel-0.6.6-3mdk.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
 >!>       

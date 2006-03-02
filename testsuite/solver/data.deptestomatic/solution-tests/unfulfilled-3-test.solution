@@ -8,7 +8,7 @@
 >!> There are no installable providers of nothere for unfulfilled4-1.0-1.noarch[test]
 >!>    Solution:
 >!>       do not install unfulfilled4
->!>       do not install [package]unfulfilled4-1.0-1.noarch
+>!>       do not install unfulfilled4-1.0-1.noarch[test]
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       

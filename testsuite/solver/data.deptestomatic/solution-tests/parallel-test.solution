@@ -5,8 +5,19 @@
 >!> Cannot install foo
 >!> Can't install foo-2.0-1.noarch[test2], since foo-2.0-1.noarch[test1] is already marked as needing to be installed
 >!>    Solution:
->!>       do not install foo
->!>       do not install [package]foo-2.0-1.noarch
+>!>       do not install foo-2.0-1.noarch[test2]
+>!>       
+>!>    Solution:
+>!>       do not install foo-2.0-1.noarch[test1]
+>!>       
 >!>    Solution:
 >!>       Ignore that foo is already set to install
 >!>       
+>!> Taking solution: 2
+>!> For problem:     0
+>!> No problems so far
+>!> No problems so far
+>!> Solution #1:
+>!> install foo-2.0-1.noarch[test1]
+>!> install foo-2.0-1.noarch[test2]
+>!> installs=2, upgrades=0, uninstalls=0
