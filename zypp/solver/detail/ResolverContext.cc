@@ -60,7 +60,7 @@ class compare_items {
 public:
     int operator() (PoolItem_Ref p1,
                     PoolItem_Ref p2) const
-        { return compareByN ( p1.resolvable(), p2.resolvable()); }
+        { return p1.resolvable()->name() < p2.resolvable()->name(); }
 };
 	
 
@@ -297,7 +297,7 @@ ResolverContext::upgrade (PoolItem_Ref item, PoolItem_Ref old_item, bool is_soft
 	// We will use this priority
 	by = item.status().getTransactByValue();
     }
-
+	
     if (is_soft) {
 	ResStatus newStatus = ResStatus::toBeInstalledSoft; // This can only be done by the solver
 	setStatus (item, newStatus);
@@ -1492,29 +1492,129 @@ churn_factor (ResolverContext_Ptr a)
     return a->upgradeCount() + (2.0 * a->installCount ()) + (4.0 * a->uninstallCount ());
 }
 
-typedef struct {
-    PoolItemList *rl;
-    int cmp;	
-} HigherVersionInfo;
-
-static void
-compare_version (PoolItem_Ref item, const ResStatus & status, void *data)
+void
+ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of ACCUMULATED items
+				     int & cmpSource,    // compare of Sources
+				     ResolverContext_Ptr compareContext)
 {
-    HigherVersionInfo *info = (HigherVersionInfo *)data;
-    PoolItemList compareList= *(info->rl);
-    PoolItemList::const_iterator it;
-    for ( it = compareList.begin();
-	  it != compareList.end(); it++ )
+    Source_Ref userSource;         // Source Id of items which have been selected by the user for installation
+                                   // It is empty, if there are different sources
+    bool differentUserSources = false;
+    Source_Ref userSourceCompare;  // Source Id of items which have been selected by the user for installation
+                                   // It is empty, if there are different sources
+    bool differentUserCompareSources = false;    
+    SourceCounter thisMap;         // Map of to be installed sources with an item counter
+    SourceCounter compareMap;      // Map of to be installed sources with an item counter
+    
+    PoolItemList installList = getMarked(1);
+    PoolItemList compareList = compareContext->getMarked(1);; // List of comparing items which has to be installed
+    PoolItemList::const_iterator itCompare = compareList.begin();    
+    for ( PoolItemList::const_iterator thisIt = installList.begin();
+	  thisIt != installList.end(); thisIt++ )
     {
-	if (compareByN ( item.resolvable(), it->resolvable()) == 0) {
-	    info->cmp += item.resolvable()->edition().compare( it->resolvable()->edition());
-	    break;
+	// evaluate, if the user selected packages (items) has the same source
+	ResStatus status = getStatus (*thisIt);
+	if (status.isByUser()
+	    || thisIt->status().isByUser())
+	{
+	    if (userSource == Source_Ref::noSource
+		&& !differentUserSources)
+	    {
+		userSource = thisIt->resolvable()->source();
+	    }
+	    else if (userSource != thisIt->resolvable()->source())
+	    {
+		differentUserSources = true; // there are other items of other sources which have been set by the user
+	    }
+	}
+
+	// collecting relationship between channels and installed items
+	if (thisMap.find (thisIt->resolvable()->source()) == thisMap.end()) {
+	    thisMap[thisIt->resolvable()->source()] = 1;
+	}
+	else {
+	    thisMap[thisIt->resolvable()->source()] += 1;
+	}
+
+	// Comparing versions
+	while (itCompare != compareList.end() )
+	{
+	    int cmp = compareByN ( thisIt->resolvable(), itCompare->resolvable());
+	    if ( cmp == 0) {
+		// comparing the version of both items and "adding" the result
+		// to accumulated compare result.
+		cmpVersion += thisIt->resolvable()->edition().compare( itCompare->resolvable()->edition());
+
+		// evaluate if the user selected packages (items) has the same source
+		ResObject::constPtr sourceItem = itCompare->resolvable();
+		ResStatus compStatus = compareContext->getStatus(*itCompare);
+		if (compStatus.isByUser()
+		    || itCompare->status().isByUser())
+		{
+		    if (userSourceCompare == Source_Ref::noSource
+			&& !differentUserCompareSources)
+			userSourceCompare = sourceItem->source();
+		    else if (userSourceCompare != sourceItem->source())
+			differentUserCompareSources = true; // there are other items of other sources which have been set by the user
+		}
+		// collecting relationship between channels and installed items
+		if (compareMap.find (sourceItem->source()) == compareMap.end()) 
+		    compareMap[sourceItem->source()] = 1;
+		else
+		    compareMap[sourceItem->source()] += 1;
+		itCompare++;
+	    } else if (cmp > 0 )
+		itCompare++;
+	    else break;
 	}
     }
 
-    if (it != compareList.end()) {
-	// this item has already been regarded --> delete it
-	compareList.remove (*it);
+    // comparing the rest of the other install list
+    while (itCompare != compareList.end() )
+    {
+	// evaluate if the user selected packages (items) has the same source
+	ResObject::constPtr sourceItem = itCompare->resolvable();
+	ResStatus compStatus = compareContext->getStatus(*itCompare);
+	if (compStatus.isByUser()
+	    || itCompare->status().isByUser()) 
+	{
+	    if (userSourceCompare == Source_Ref::noSource
+		&& !differentUserCompareSources)
+		    userSourceCompare = sourceItem->source();		
+	    else if (userSourceCompare != sourceItem->source())
+		differentUserCompareSources = true; // there are other items of other sources which have been set by the user		
+	}
+
+	// collecting relationship between channels and installed items
+	if (compareMap.find (sourceItem->source()) == compareMap.end()) 
+	    compareMap[sourceItem->source()] = 1;
+	else
+	    compareMap[sourceItem->source()] += 1;
+	itCompare++;	
+    }
+
+    // evaluate cmpSource
+    cmpSource = 0;
+    int cmpCompare = 0;
+
+    if (!differentUserSources) {
+	// user selected items which has to be installed has only one channel;
+	// cmpSource = number of items of that channel
+	cmpSource = thisMap[userSource];
+    }
+	
+    if (!differentUserCompareSources) {
+	// user selected items which has to be installed has only one channel;	
+	// cmpCompare = number of items of that channel
+	cmpCompare = compareMap[userSourceCompare];
+    }
+
+    cmpSource = cmpSource - cmpCompare;
+
+    if (cmpSource == 0)
+    {
+	// less amount of channels are better
+	cmpSource = compareMap.size() - thisMap.size();
     }
 }
 
@@ -1523,28 +1623,37 @@ ResolverContext::partialCompare (ResolverContext_Ptr context)
 {
     int cmp = 0;
     if (this != context) {
-#if 0 // It is too much time consuming
+
+	// collecting all data for comparing both resultion results
+	int  cmpVersion = 0; // Version compare of ACCUMULATED items
+	int  cmpSource = 0;  // compare of Sources
 	
-	// evalutate which result has the newest versions
-	PoolItemList compList = context->getInstalls();
-	HigherVersionInfo info = { &compList, 0};
-	foreachInstall (compare_version, (void *)&info);
-	cmp = info.cmp;
-#endif
-	
+	collectCompareInfo (cmpVersion, cmpSource, context);
+
+	// comparing versions
+	cmp = cmpVersion;
+	DBG << "Comparing versions returned :" << cmp << endl;
 	if (cmp == 0) { 
 	    // High numbers are good... we don't want solutions containing low-priority channels.
+	    // Source priority which has been set externally
 	    cmp = num_cmp (_min_priority, context->_min_priority);
-
+	    DBG << "Comparing priority returned :" << cmp << endl;
 	    if (cmp == 0) {
 
-		// High numbers are bad.  Less churn is better.
-		cmp = rev_num_cmp (churn_factor (this), churn_factor (context));
+		// Comparing sources regarding the items which has to be installed
+		cmp = cmpSource;
+		DBG << "Comparing sources returned :" << cmp << endl;
+		if (cmp == 0) {		
+		
+		    // High numbers are bad.  Less churn is better.
+		    cmp = rev_num_cmp (churn_factor (this), churn_factor (context));
+		    DBG << "Comparing churn_factor returned :" << cmp << endl;
+		    if (cmp == 0) {
 
-		if (cmp == 0) {
-
-		    // High numbers are bad.  Bigger #s means more penalties.
-		    cmp = rev_num_cmp (_other_penalties, context->_other_penalties);
+			// High numbers are bad.  Bigger #s means more penalties.
+			cmp = rev_num_cmp (_other_penalties, context->_other_penalties);
+			DBG << "Comparing other penalties returned :" << cmp << endl;			
+		    }
 		}
 	    }
 	}
