@@ -179,7 +179,12 @@ namespace zypp
 	      ZYPP_THROW( ParseException( "Pkg" ) );
 
 	    std::string arch = words[3];
-
+#warning read comment in file
+	    // warning: according to autobuild, this is the wrong check
+	    //  a 'src/norsrc' packages is determined by _not_ having a "=Src:" tag in packages
+	    // However, the 'arch' string we're checking here must be remembered since
+	    // it determines the directory below the <DATADIR> where the real package
+	    // can be found.
 	    if (arch == "src"
 		|| arch == "nosrc")
 	    {
