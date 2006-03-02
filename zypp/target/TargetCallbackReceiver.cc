@@ -25,6 +25,7 @@ namespace zypp
 	    : callback::ReceiveReport<rpm::RpmInstallReport> ()
 	    , _resolvable (res)
 	    , _level( target::rpm::InstallResolvableReport::RPM )
+	    , _abort (false)
 	{
 	}
 
@@ -44,6 +45,7 @@ namespace zypp
         void RpmInstallPackageReceiver::start( const Pathname & name ) 
 	{
 	    _report->start( _resolvable );
+	    _abort = false;
 	}
 
         /**
@@ -52,7 +54,8 @@ namespace zypp
          */
         bool RpmInstallPackageReceiver::progress( unsigned percent )
 	{
-	    return _report->progress( percent, _resolvable );
+	    _abort = ! _report->progress( percent, _resolvable );
+	    return _abort;
 	}
 	
 	rpm::RpmInstallReport::Action 

@@ -28,6 +28,7 @@ namespace zypp
 	callback::SendReport <rpm::InstallResolvableReport> _report;
 	Resolvable::constPtr _resolvable;
 	target::rpm::InstallResolvableReport::RpmLevel _level;
+	bool _abort;
 
       public:
 
@@ -42,6 +43,8 @@ namespace zypp
         virtual void start( const Pathname & name );
 	
 	void tryLevel( target::rpm::InstallResolvableReport::RpmLevel level_r );
+	
+	bool aborted() const { return _abort; }
 
         /**
          * Inform about progress

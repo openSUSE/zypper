@@ -16,6 +16,7 @@
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
+#include "zypp/base/Gettext.h"
 #include "zypp/PoolItem.h"
 #include "zypp/Resolvable.h"
 #include "zypp/ResObject.h"
@@ -209,6 +210,9 @@ namespace zypp
       TargetImpl::PoolItemList remaining;
 
       MIL << "TargetImpl::commit(<list>)" << endl;
+      
+      bool abort = false;
+      
       for (TargetImpl::PoolItemList::const_iterator it = items_r.begin(); it != items_r.end(); it++)
       {
         if (isKind<Package>(it->resolvable()))
@@ -228,6 +232,15 @@ namespace zypp
                 
               rpm().installPackage(localfile,
                   p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : 0);
+
+	      if( progress.aborted() )
+	      {
+	        WAR << "commit aborted by the user" << endl;
+		progress.disconnect(); 
+		abort = true;
+		break;
+	      }
+
             }
             catch (Exception & excpt_r) {
               ZYPP_CAUGHT(excpt_r);
@@ -236,6 +249,14 @@ namespace zypp
                 progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS );
                 rpm().installPackage(localfile,
                 p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : rpm::RpmDb::RPMINST_NODEPS);
+
+	        if( progress.aborted() )
+	        {
+	          WAR << "commit aborted by the user" << endl;
+		  abort = true;
+		  progress.disconnect(); 
+		  break;
+	        }
               }
               catch (Exception & excpt_r) 
               {
@@ -252,6 +273,14 @@ namespace zypp
                   success = false;
                   ZYPP_CAUGHT(excpt_r);
                 }
+		
+		if( progress.aborted() )
+		{
+		    WAR << "commit aborted by the user" << endl;
+		    abort = true;
+		    progress.disconnect(); 
+		    break;
+		}
               }
             }
             if (success) {
@@ -322,6 +351,10 @@ namespace zypp
           }
         }
       }   
+      
+      if( abort ) 
+        ZYPP_THROW( Exception( N_("Target commit aborted by user.") ) );
+
       return remaining;
     }
 
