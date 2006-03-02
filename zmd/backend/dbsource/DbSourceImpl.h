@@ -74,11 +74,6 @@ class DbSourceImpl : public zypp::source::SourceImpl {
 #endif
 
  public:
-    void factoryCtor( const zypp::media::MediaId & media_r,
-                      const zypp::Pathname & path_r = "/",
-                      const std::string & alias_r = "",
-                      const zypp::Pathname cache_dir_r = "");
-
 
     virtual const bool valid() const
     { return true; }

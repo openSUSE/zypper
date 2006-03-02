@@ -69,15 +69,6 @@ DbSourceImpl::factoryInit()
 }
 
 void
-DbSourceImpl::factoryCtor( const media::MediaId & media_r, const Pathname & path_r, const std::string & alias_r, const Pathname cache_dir_r)
-{
-//    MIL << "DbSourceImpl::factoryCtor(<media>, " << path_r << ", " << alias_r << ", " << cache_dir_r << ")" << endl;
-//    _media = media_r;
-    _alias = alias_r;
-    _cache_dir = cache_dir_r;
-}
-
-void
 DbSourceImpl::attachDatabase( sqlite3 *db)
 {
     _db = db;
@@ -180,14 +171,14 @@ DbSourceImpl::createPackages(void)
 
 	try
 	{
-	    detail::ResImplTraits<DbPackageImpl>::Ptr impl(new DbPackageImpl( _source ));
+	    detail::ResImplTraits<DbPackageImpl>::Ptr impl( new DbPackageImpl( _source ) );
 
 	    sqlite_int64 id = sqlite3_column_int64( handle, 0 );
-	    name = (const char *) sqlite3_column_text (handle, 1);
-	    string version ((const char *) sqlite3_column_text (handle, 2));
-	    string release ((const char *) sqlite3_column_text (handle, 3));
-	    unsigned epoch = sqlite3_column_int (handle, 4);
-	    Arch arch (DbAccess::Rc2Arch( (RCArch)(sqlite3_column_int (handle, 5)) ) );
+	    name = (const char *) sqlite3_column_text( handle, 1 );
+	    string version ((const char *) sqlite3_column_text( handle, 2 ));
+	    string release ((const char *) sqlite3_column_text( handle, 3 ));
+	    unsigned epoch = sqlite3_column_int( handle, 4 );
+	    Arch arch( DbAccess::Rc2Arch( (RCArch)(sqlite3_column_int( handle, 5 )) ) );
 
 	    impl->readHandle( id, handle );
 
@@ -197,7 +188,7 @@ DbSourceImpl::createPackages(void)
 			arch,
 			createDependencies (id));
 
-	    Package::Ptr package = detail::makeResolvableFromImpl(dataCollect, impl);
+	    Package::Ptr package = detail::makeResolvableFromImpl( dataCollect, impl );
 	    _store.insert( package );
 	    if (_idmap != 0)
 		(*_idmap)[id] = package;
