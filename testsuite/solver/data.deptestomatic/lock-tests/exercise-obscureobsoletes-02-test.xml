@@ -11,12 +11,9 @@ foo2 @foo @foo-devel
  -->
 <trial>
   <lock package="foo" channel="@system"/>
-  <lock package="foo-devel" channel="@system"/>
   <install channel="test" package="foo2"/>
   <reportproblems/>
   <takesolution problem="0" solution="1"/>
-  <reportproblems/>
-  <takesolution problem="0" solution="0"/>
   <reportproblems/>
 </trial>
 
