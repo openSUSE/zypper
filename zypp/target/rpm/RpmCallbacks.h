@@ -10,8 +10,8 @@
  *
 */
 
-#ifndef ZYPP_MEDIA_MEDIACALLBACKS_H
-#define ZYPP_MEDIA_MEDIACALLBACKS_H
+#ifndef ZYPP_TARGET_RPM_RPMCALLBACKS_H
+#define ZYPP_TARGET_RPM_RPMCALLBACKS_H
 
 #include <iosfwd>
 
@@ -93,4 +93,4 @@ namespace zypp {
   } // namespace target
 } // namespace zypp
 
-#endif // ZYPP_MEDIA_MEDIACALLBACKS_H
+#endif // ZYPP_TARGET_RPM_RPMCALLBACKS_H
