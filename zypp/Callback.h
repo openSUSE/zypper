@@ -116,7 +116,7 @@ namespace zypp
    * \endcode
    *
    * \li \c connect Connect this ReceiveReport (in case some other
-   * ReceiveReport is connected, it get disconneced. Remember its
+   * ReceiveReport is connected, it get disconnected. Remember its
    * a Callback light).
    * \li \c disconnect Disconnect this ReceiveReport in case it is
    * connected. If not connected nothing happens.
