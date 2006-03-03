@@ -12,6 +12,8 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 
+#include "zypp/ExternalProgram.h"
+
 using namespace std;
 using namespace zypp;
 
@@ -111,6 +113,9 @@ main (int argc, char **argv)
 	RpmCallbacks callbacks;
 
 	God->target()->commit( God->pool(), 0, x, y, z );
+
+	ExternalProgram suseconfig( "/sbin/SuSEconfig", ExternalProgram::Discard_Stderr );	// should redirect stderr to logfile
+	suseconfig.close();		// discard exit code
     }
     catch ( Exception & expt_r ) {
 	ZYPP_CAUGHT( expt_r );
