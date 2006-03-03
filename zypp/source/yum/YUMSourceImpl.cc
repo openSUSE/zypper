@@ -537,7 +537,17 @@ namespace zypp
 	// Collect augmented package data
 	NVRAD packagedata( nvra, package->deps() );
 
+	if (!parsed.location.empty) {
+	    impl->_location = parsed.location;
+	    impl->_mediaid = str::strtonum<unsigned>( parsed.media );
+	}
+//	if (!parsed->plainRpms.empty()) impl->_plain_rpms = parsed->plainRpms;
+	if (!parsed->patchRpms.empty()) impl->_patch_rpms = parsed->patchRpms;
+	if (!parsed->deltaRpms.empty()) impl->_delta_rpms = parsed->deltaRpms;
+
 	//DBG << "NVRAD " << (NVRA)packagedata << endl;
+
+
 
 #warning add patchrpm, deltarpm, etc. to YUMPackageImpl here
 	Package::Ptr new_package = detail::makeResolvableFromImpl(
