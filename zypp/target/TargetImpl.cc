@@ -173,7 +173,7 @@ namespace zypp
           Package::constPtr pkg( asKind<Package>(res) );
           if (pkg && medianr != pkg->mediaId())								// check medianr for packages only
           {
-            MIL << "Package " << *pkg << ", wrong media " << pkg->mediaId() << endl;
+            XXX << "Package " << *pkg << ", wrong media " << pkg->mediaId() << endl;
             remaining_r.push_back( *it );
           }
           else
@@ -190,7 +190,7 @@ namespace zypp
           Package::constPtr pkg( asKind<Package>(res) );
           if (pkg && medianr != pkg->mediaId()) // check medianr for packages only
           {
-            MIL << "Package " << *pkg << ", wrong media " << pkg->mediaId() << endl;
+            XXX << "Package " << *pkg << ", wrong media " << pkg->mediaId() << endl;
             srcremaining_r.push_back( *it );
           }
           else {
@@ -443,7 +443,7 @@ strip_obsoleted_to_delete( TargetImpl::PoolItemList & deleteList_r,
       }
     }
     if ( ! delayPkg ) {
-MIL << "undelayed " << ipkg << endl;
+      DBG << "undelayed " << ipkg << endl;
       undelayed.push_back( ipkg );
     }
   }
