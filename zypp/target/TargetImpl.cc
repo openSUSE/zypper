@@ -127,8 +127,8 @@ namespace zypp
     {
 	callback::SendReport<source::DownloadResolvableReport> report;
 
-	// FIXME: error handling
-	// FIXME: Url	
+#warning FIXME: error handling
+#warning FIXME: Url	
 	report->start( package, Url() );
 
 	Pathname file = package->getPlainRpm();
