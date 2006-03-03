@@ -80,6 +80,9 @@ namespace zypp
 
   void Source_Ref::setAutorefresh( const bool enable_r )
   { _pimpl->setAutorefresh( enable_r ); }
+  
+  void Source_Ref::refresh()
+  { _pimpl->refresh() ; }
 
   void Source_Ref::storeMetadata(const Pathname & cache_dir_r)
   { _pimpl->storeMetadata(cache_dir_r); }

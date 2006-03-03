@@ -120,6 +120,8 @@ namespace zypp
       
       void setAutorefresh( const bool enable_r )
       { _autorefresh = enable_r; }
+      
+      void refresh();
 
       virtual void storeMetadata(const Pathname & cache_dir_r);
 

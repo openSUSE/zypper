@@ -221,6 +221,13 @@ namespace zypp
 
     void SourceImpl::storeMetadata(const Pathname & cache_dir_r)
     {}
+    
+    void SourceImpl::refresh()
+    {
+	// TODO: will this work in chroot?
+	// TODO: better download somewhere else and then copy over
+	storeMetadata( _cache_dir );
+    }
 
     void SourceImpl::redirect(unsigned media_nr, const Url & new_url)
     {

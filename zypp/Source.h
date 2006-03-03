@@ -87,6 +87,7 @@ namespace zypp
 
     const bool autorefresh() const;
     void setAutorefresh( const bool enable_r );
+    void refresh();
 
     void storeMetadata(const Pathname & cache_dir_r);
 
