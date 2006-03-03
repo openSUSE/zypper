@@ -261,6 +261,9 @@ namespace zypp
     // The may functions checks only, if the action would return true
     // if it is called.
 
+    /** Set TransactValue.
+     * Convenience to set TransactValue from enum.
+     */
     bool setTransactValue( TransactValue newVal_r, TransactByValue causer_r )
     {
       switch ( newVal_r )
@@ -326,6 +329,7 @@ namespace zypp
     /** Toggle between TRANSACT and KEEP_STATE.
      * LOCKED state means KEEP_STATE. But in contrary to KEEP_STATE,
      * LOCKED state is immutable for \a causer_r less than TransactByValue.
+     * KEEP_STATE may be canged by any \a causer_r.
     */
     bool setTransact( bool toTansact_r, TransactByValue causer_r )
     {
@@ -359,13 +363,50 @@ namespace zypp
       return true;
     }
 
-    bool maySetTransact (bool val_r, TransactByValue causer)
+    bool maySetTransact( bool val_r, TransactByValue causer )
     {
 	bit::BitField<FieldType> savBitfield = _bitfield;
 	bool ret = setTransact (val_r, causer);
 	_bitfield = savBitfield;
 	return ret;
     }
+
+    /** Soft toggle between TRANSACT and KEEP_STATE.
+     * Similar to setTransact, but leaving KEEP_STATE also requires
+     * a superior \a causerLimit_r. So this is a kind of soft lock.
+     * \code
+     * // SOLVER wants to set TRANSACT, iff KEEP_STATE is
+     * // not superior to APPL_LOW.
+     * setSoftTransact( true, SOLVER, APPL_LOW );
+     * \endcode
+    */
+    bool setSoftTransact( bool toTansact_r, TransactByValue causer_r,
+                          TransactByValue causerLimit_r )
+    {
+      if ( fieldValueIs<TransactField>( KEEP_STATE )
+           && toTansact_r != transacts()
+           && isGreaterThan<TransactByField>( causerLimit_r ) )
+        {
+          // any transact status change requires a superior causer.
+          return false;
+        }
+      return setTransact( toTansact_r, causer_r );
+    }
+
+    bool setSoftTransact( bool toTansact_r, TransactByValue causer_r )
+    { return setSoftTransact( toTansact_r, causer_r, causer_r ); }
+
+    bool maySetSoftTransact( bool val_r, TransactByValue causer,
+                             TransactByValue causerLimit_r )
+    {
+	bit::BitField<FieldType> savBitfield = _bitfield;
+	bool ret = setSoftTransact( val_r, causer, causerLimit_r );
+	_bitfield = savBitfield;
+	return ret;
+    }
+
+    bool maySetSoftTransact( bool val_r, TransactByValue causer )
+    { return maySetSoftTransact( val_r, causer, causer ); }
 
     bool setToBeInstalled (TransactByValue causer)
     {

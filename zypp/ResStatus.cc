@@ -93,12 +93,10 @@ namespace zypp
     str << (obj.transacts () ? "T"
                              : (obj.isLocked() ? "L" : "_") );
 
-    if (obj.transacts ()) {
-	if (obj.isBySolver()) str << "s";
-	else if (obj.isByApplLow()) str << "l";
-	else if (obj.isByApplHigh()) str << "h";
-	else if (obj.isByUser()) str << "u";
-    }
+    if (obj.isBySolver()) str << "s";
+    else if (obj.isByApplLow()) str << "l";
+    else if (obj.isByApplHigh()) str << "h";
+    else if (obj.isByUser()) str << "u";
 
     str << (obj.isToBeUninstalledDueToObsolete() ? "O" :
 	( obj.isToBeUninstalledDueToUnlink() ? "L" :
