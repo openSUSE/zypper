@@ -257,6 +257,35 @@ namespace zypp
         return Not<_Condition>( cond_r );
       }
 
+    /** Logical functor chaining \a _ACondition \c OR \a _BCondition.
+    */
+    template<class _ACondition, class _BCondition>
+      struct Or
+      {
+        Or( _ACondition conda_r, _BCondition condb_r )
+        : _conda( conda_r )
+        , _condb( condb_r )
+        {}
+
+        template<class _Tp>
+          bool operator()( _Tp t ) const
+          {
+            return _conda( t ) || _condb( t );
+          }
+
+        _ACondition _conda;
+        _BCondition _condb;
+      };
+
+    /** Convenience function for creating a Or from two conditions
+     *  \a conda_r OR \a condb_r.
+    */
+    template<class _ACondition, class _BCondition>
+      inline Or<_ACondition, _BCondition> or_c( _ACondition conda_r, _BCondition condb_r )
+      {
+        return Or<_ACondition, _BCondition>( conda_r, condb_r );
+      }
+
     /** Logical functor chaining \a _ACondition \c AND \a _BCondition.
     */
     template<class _ACondition, class _BCondition>
