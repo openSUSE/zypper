@@ -1508,7 +1508,8 @@ ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of 
     
     PoolItemList installList = getMarked(1);
     PoolItemList compareList = compareContext->getMarked(1);; // List of comparing items which has to be installed
-    PoolItemList::const_iterator itCompare = compareList.begin();    
+    PoolItemList::const_iterator itCompare = compareList.begin();
+    _XDEBUG ("Starting comparing two solutions--------");
     for ( PoolItemList::const_iterator thisIt = installList.begin();
 	  thisIt != installList.end(); thisIt++ )
     {
@@ -1535,6 +1536,7 @@ ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of 
 	else {
 	    thisMap[thisIt->resolvable()->source()] += 1;
 	}
+	_XDEBUG ("Count of left " << thisIt->resolvable()->source() << ": " << thisMap[thisIt->resolvable()->source()]);	
 
 	// Comparing versions
 	while (itCompare != compareList.end() )
@@ -1543,7 +1545,13 @@ ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of 
 	    if ( cmp == 0) {
 		// comparing the version of both items and "adding" the result
 		// to accumulated compare result.
+		// Testcase: freshen-tests/exercise-7f-test
+		// Testcase: freshen-tests/exercise-7-test
 		cmpVersion += thisIt->resolvable()->edition().compare( itCompare->resolvable()->edition());
+		_XDEBUG ("Version: " << *(thisIt->resolvable()) << "[" << thisIt->resolvable()->source() << "]" << endl
+			 << " <--> " << endl 
+			 << "Version: " << *(itCompare->resolvable()) << "[" << itCompare->resolvable()->source() << "]"
+			 << " --> cmpVersion : " << cmpVersion);    		
 
 		// evaluate if the user selected packages (items) has the same source
 		ResObject::constPtr sourceItem = itCompare->resolvable();
@@ -1562,6 +1570,8 @@ ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of 
 		    compareMap[sourceItem->source()] = 1;
 		else
 		    compareMap[sourceItem->source()] += 1;
+		_XDEBUG ("Count of right " << sourceItem->source() << ": " << compareMap[sourceItem->source()]);
+		
 		itCompare++;
 	    } else if (cmp > 0 )
 		itCompare++;
@@ -1590,6 +1600,7 @@ ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of 
 	    compareMap[sourceItem->source()] = 1;
 	else
 	    compareMap[sourceItem->source()] += 1;
+	_XDEBUG ("Count of right" << sourceItem->source() << ": " << compareMap[sourceItem->source()]);	
 	itCompare++;	
     }
 
@@ -1597,22 +1608,31 @@ ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of 
     cmpSource = 0;
     int cmpCompare = 0;
 
-    if (userSource != userSourceCompare) {
-        // diffent Channel. If they are the same we will ragard the size, download time...
-	if (!differentUserSources)
-	{
-	    // user selected items which has to be installed has only one channel;
-	    // cmpSource = number of items of that channel
-	    cmpSource = thisMap[userSource];
-	}
+    if (!differentUserSources)
+    {
+	// user selected items which has to be installed has only one channel;
+	// cmpSource = number of items of that channel
+	cmpSource = thisMap[userSource];
+    }
 	
-	if (!differentUserCompareSources) {
-	    // user selected items which has to be installed has only one channel;	
-	    // cmpCompare = number of items of that channel
-	    cmpCompare = compareMap[userSourceCompare];
-	}
-
-	cmpSource = cmpSource - cmpCompare;
+    if (!differentUserCompareSources) {
+	// user selected items which has to be installed has only one channel;	
+	// cmpCompare = number of items of that channel
+	cmpCompare = compareMap[userSourceCompare];
+    }
+    _XDEBUG ("cmpSource = " << cmpSource << " ; cmpCompare = " << cmpCompare << " ; sizeof compareMap:" <<  compareMap.size());
+    if (compareMap.size() == 1
+	&& thisMap.size() == 1
+	&& userSource == userSourceCompare) {
+	// We have only one source from which all items will be instaled.
+	// So less account of items are better
+	// Testcase basic-exercises/exercise-14-test
+	cmpSource = cmpCompare - cmpSource;	    
+    } else {
+	// The solutions has different channels with user selected items.
+	// Take the solution with the greater account of items in this channel
+	// Testcase basic-exercises/exercise-solution-order-test
+	cmpSource = cmpSource - cmpCompare;	    
     }
 
     if (cmpSource == 0)
@@ -1620,6 +1640,7 @@ ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of 
 	// less amount of channels are better
 	cmpSource = compareMap.size() - thisMap.size();
     }
+    _XDEBUG ("End comparing two solutions-------- Version compare: " << cmpVersion << " Source compare: "<< cmpSource);    
 }
 
 int
