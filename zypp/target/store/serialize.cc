@@ -102,7 +102,7 @@ std::string toXML( const Capability &cap )
   stringstream out;
   CapFactory factory;
 
-  out << "<entry kind=\"" << cap.refers() << "\" >" <<  xml_escape(factory.encode(cap)) << "</entry>";
+  out << "<suse:capability kind=\"" << cap.refers() << "\" >" <<  xml_escape(factory.encode(cap)) << "</suse:capability>" << std::endl;
   return out.str();
 }
 
@@ -123,22 +123,26 @@ std::string toXML( const Dependencies &dep )
 {
   stringstream out;
   if ( dep[Dep::PROVIDES].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::PROVIDES]), "provides") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::PROVIDES]), "suse:provides") << std::endl;
   if ( dep[Dep::PREREQUIRES].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::PREREQUIRES]), "prerequires") << std::endl;
-  if ( dep[Dep::REQUIRES].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::REQUIRES]), "requires") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::PREREQUIRES]), "suse:prerequires") << std::endl;
   if ( dep[Dep::CONFLICTS].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::CONFLICTS]), "conflicts") << std::endl;
-   if ( dep[Dep::OBSOLETES].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::OBSOLETES]), "obsoletes") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::CONFLICTS]), "suse:conflicts") << std::endl;
+  if ( dep[Dep::OBSOLETES].size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::OBSOLETES]), "suse:obsoletes") << std::endl;
   // why the YUM tag is freshen without s????
-   if ( dep[Dep::FRESHENS].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::FRESHENS]), "freshen") << std::endl;
-   if ( dep[Dep::SUGGESTS].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::SUGGESTS]), "suggests") << std::endl;
-   if ( dep[Dep::RECOMMENDS].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::RECOMMENDS]), "recommends") << std::endl;
+  if ( dep[Dep::FRESHENS].size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::FRESHENS]), "suse:freshen") << std::endl;
+  if ( dep[Dep::REQUIRES].size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::REQUIRES]), "suse:requires") << std::endl;  
+  if ( dep[Dep::RECOMMENDS].size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::RECOMMENDS]), "suse:recommends") << std::endl;
+  if ( dep[Dep::ENHANCES].size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::ENHANCES]), "suse:enhances") << std::endl;
+  if ( dep[Dep::SUPPLEMENTS].size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::SUPPLEMENTS]), "suse:supplements") << std::endl;
+  if ( dep[Dep::SUGGESTS].size() > 0 )
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::SUGGESTS]), "suse:suggests") << std::endl;
   return out.str();
 
 }
@@ -234,10 +238,12 @@ std::string toXML( const Selection::constPtr &obj )
   // access implementation
   detail::ResImplTraits<Selection::Impl>::constPtr sipp( detail::ImplConnect::resimpl( obj ) );
   out << translatedTextToXML(sipp->summary(), "summary");
-  out << translatedTextToXML(sipp->description(), "description");
+  
   //out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << std::endl;
   out << "  <uservisible>" << (obj->visible() ? "true" : "false" ) << "</uservisible>" << std::endl;
   out << "  <category>" << xml_escape(obj->category()) << "</category>" << std::endl;
+  out << "  <icon>null</icon>" << std::endl;
+  out << translatedTextToXML(sipp->description(), "description");
   out << toXML(obj->deps()) << std::endl;
   out << "</pattern>" << std::endl;
   return out.str();
@@ -258,13 +264,13 @@ std::string toXML( const Pattern::constPtr &obj )
   // access implementation
   detail::ResImplTraits<Pattern::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
   out << translatedTextToXML(pipp->summary(), "summary");
-  out << translatedTextToXML(pipp->description(), "description");
 
   out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << std::endl;
   out << "  <uservisible>" << (obj->userVisible() ? "true" : "false" ) << "</uservisible>" << std::endl;
   out << "  <category>" << xml_escape(obj->category()) << "</category>" << std::endl;
   out << "  <icon>" << xml_escape(obj->icon().asString()) << "</icon>" << std::endl;
   out << "  <script>" << xml_escape(obj->script().asString()) << "</script>" << std::endl;
+  out << translatedTextToXML(pipp->description(), "description");
   out << toXML(obj->deps()) << std::endl;
   out << "</pattern>" << std::endl;
   return out.str();
