@@ -101,7 +101,7 @@ InstallOrder::computeNextSet()
 	if (it->second.order == 0
 	    && it->second.item)			// the default Nodes constructor leaves this empty 
 	{
-	    DBG << "InstallOrder::computeNextSet found " << ITEMNAME(it->second.item) << endl;
+	    XXX << "InstallOrder::computeNextSet found " << ITEMNAME(it->second.item) << endl;
 
 	    newlist.push_back(it->second.item);
 	}
@@ -132,7 +132,7 @@ InstallOrder::setInstalled(PoolItem_Ref item )
 	info.order--;
 	if (info.order < 0)
 	{
-	    DBG << "order of node " << (*it) << " is < 0" << endl;
+	    WAR << "order of node " << (*it) << " is < 0" << endl;
 	}
     }
 }
@@ -281,7 +281,7 @@ InstallOrder::rdfsvisit (const PoolItem_Ref item)
 	    {
 		if (must_visit != item)
 		{
-		    ERR << "** dependency loop: " << ITEMNAME(item) << " -> " << ITEMNAME(must_visit) << endl;
+		    WAR << "** dependency loop: " << ITEMNAME(item) << " -> " << ITEMNAME(must_visit) << endl;
 		}
 	    }
 	    else
