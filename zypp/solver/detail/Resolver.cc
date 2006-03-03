@@ -685,7 +685,7 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
     bool operator()( PoolItem_Ref item )		// only transacts() items go here
     {
 	ResStatus status = item.status();
-	DBG << "CollectTransact(" << item << ")" << endl;
+	_XDEBUG( "CollectTransact(" << item << ")" );
 	bool by_solver = status.isBySolver();
 
 	if (by_solver) {
