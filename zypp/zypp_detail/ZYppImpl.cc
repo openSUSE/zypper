@@ -131,6 +131,7 @@ namespace zypp
     
     void ZYppImpl::reset()
     {
+	MIL << "Resetting ZYpp instance" << endl;
 	// TODO: check the memory is released
 	_textLocale = defaultTextLocale();
 	_pool = ResPoolManager();
