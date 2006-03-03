@@ -130,11 +130,15 @@ namespace zypp {
     {
       xmlTextReaderSetErrorHandler(_reader, (xmlTextReaderErrorFunc) errorHandler, this);
       // xmlTextReaderSetStructuredErrorHandler(_reader, structuredErrorHandler, this);
-      if (_reader && validationPath)
-        if (xmlTextReaderRelaxNGValidate
-            (_reader,validationPath)==-1)
-          WAR << "Could not enable validation of document" << std::endl;
-      
+      if (_reader )
+      {
+        if ( validationPath )
+        {
+            if (xmlTextReaderRelaxNGValidate(_reader,validationPath)==-1)
+              WAR << "Could not enable validation of document using " << validationPath << std::endl;
+        }
+        // otherwise validation is disabled.
+      }
         /* Derived classes must call fetchNext() in their constructors themselves,
            XMLNodeIterator has no access to their virtual functions during
            construction */
