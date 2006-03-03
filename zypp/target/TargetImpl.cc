@@ -613,12 +613,12 @@ MIL << "order.computeNextSet: " << items.size() << " resolvables" << endl;
 	if (!res) continue;
 	Package::constPtr cpkg( asKind<Package>(res) );
 	if (!cpkg) {
-MIL << "Not a package " << *cit << endl;
+	    XXX << "Not a package " << *cit << endl;
 	    order.setInstalled( *cit );
 	    other_list.push_back( *cit );
 	    continue;
 	}
-MIL << "Package " << *cpkg << ", media " << cpkg->mediaId() << " last_medianum " << last_medianum << " best_medianum " << best_medianum << endl;
+	XXX << "Package " << *cpkg << ", media " << cpkg->mediaId() << " last_medianum " << last_medianum << " best_medianum " << best_medianum << endl;
 	if ( 									//  rankPriority[cpkg->instSrcRank()] == last_prio &&
 	     cpkg->mediaId() == last_medianum ) {
 	  // prefer packages on current media.
@@ -683,7 +683,7 @@ MIL << "Package " << *cpkg << ", media " << cpkg->mediaId() << " last_medianum "
       for ( TargetImpl::PoolItemList::iterator it = take_list.begin(); it != take_list.end(); ++it )
       {
 	order.setInstalled( *it );
-	MIL << "SET isrc " << (*it)->name() << endl;
+	XXX << "SET isrc " << (*it)->name() << endl;
       }
       // move everthing from take_list to the end of instlist_r, clean take_list
       instlist_r.splice( instlist_r.end(), take_list );
