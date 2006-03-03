@@ -1597,19 +1597,23 @@ ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of 
     cmpSource = 0;
     int cmpCompare = 0;
 
-    if (!differentUserSources) {
-	// user selected items which has to be installed has only one channel;
-	// cmpSource = number of items of that channel
-	cmpSource = thisMap[userSource];
-    }
+    if (userSource != userSourceCompare) {
+        // diffent Channel. If they are the same we will ragard the size, download time...
+	if (!differentUserSources)
+	{
+	    // user selected items which has to be installed has only one channel;
+	    // cmpSource = number of items of that channel
+	    cmpSource = thisMap[userSource];
+	}
 	
-    if (!differentUserCompareSources) {
-	// user selected items which has to be installed has only one channel;	
-	// cmpCompare = number of items of that channel
-	cmpCompare = compareMap[userSourceCompare];
-    }
+	if (!differentUserCompareSources) {
+	    // user selected items which has to be installed has only one channel;	
+	    // cmpCompare = number of items of that channel
+	    cmpCompare = compareMap[userSourceCompare];
+	}
 
-    cmpSource = cmpSource - cmpCompare;
+	cmpSource = cmpSource - cmpCompare;
+    }
 
     if (cmpSource == 0)
     {
