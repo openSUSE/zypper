@@ -110,13 +110,12 @@ namespace zypp
     }
   }
 
-  void SourceManager::reattachSources(const Pathname &attach_point,
-				      bool temporary)
+  void SourceManager::reattachSources(const Pathname &attach_point)
   {
     for (SourceMap::iterator it = _sources.begin();
 	 it != _sources.end(); it++)
     {
-      it->second->reattach(attach_point, temporary);
+      it->second->reattach(attach_point);
     }
   }
 

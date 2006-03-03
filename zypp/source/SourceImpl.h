@@ -165,8 +165,7 @@ namespace zypp
        *
        * \throws Exception
        */
-      void reattach(const Pathname &attach_point,
-		    bool temporary = false);
+      void reattach(const Pathname &attach_point);
       /**
        * Release all medias attached by the source
        */

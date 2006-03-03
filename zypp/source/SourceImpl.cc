@@ -235,11 +235,10 @@ namespace zypp
       media::MediaAccessId id = media_mgr.open( new_url );
       _media_set->redirect( media_nr, id );
     }
-    void SourceImpl::reattach(const Pathname &attach_point,
-			      bool temporary)
+    void SourceImpl::reattach(const Pathname &attach_point)
     {
       DBG << "reattach(" << attach_point << ")" << endl;
-      _media_set->reattach( attach_point, temporary );
+      _media_set->reattach( attach_point );
     }
 
     void SourceImpl::release()

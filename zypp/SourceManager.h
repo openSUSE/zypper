@@ -172,8 +172,7 @@ namespace zypp
      *
      * \throws Exception
      */
-    void reattachSources(const Pathname &attach_point,
-			 bool temporary = false);
+    void reattachSources(const Pathname &attach_point);
 
     /**
      * Disable all registered sources

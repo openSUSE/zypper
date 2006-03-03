@@ -39,17 +39,18 @@ namespace zypp
       medias[medianr] = media_id;
     }
 
-    void MediaSet::reattach(const Pathname &attach_point,
-			    bool temporary)
+    void MediaSet::reattach(const Pathname &attach_point)
     {
       media::MediaManager media_mgr;
+      media_mgr.setAttachPrefix(attach_point);
       for (MediaMap::iterator it = medias.begin(); it != medias.end(); it++)
       {
 	Url url = media_mgr.url(it->second);
 	std::string scheme = url.getScheme();
 	if (scheme == "http" || scheme == "ftp" || scheme == "https" || scheme == "ftps")
 	{
-	  media_mgr.reattach(it->second, attach_point, temporary);
+	  media_mgr.release(it->second);
+	  media_mgr.attach(it->second);
 	}
       }
     }
