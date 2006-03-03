@@ -13,6 +13,7 @@
 #include <sstream>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/Gettext.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Exception.h"
 
@@ -56,6 +57,14 @@ namespace zypp
     dumpOn( str );
     return str.str();
   }
+
+  std::string Exception::asUserString() const
+  {
+    std::ostringstream str;
+    dumpOn( str );
+    return _(str.str().c_str());
+  }
+
 
   std::ostream & Exception::dumpOn( std::ostream & str ) const
   { return str << _msg; }

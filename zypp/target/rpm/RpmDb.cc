@@ -756,7 +756,7 @@ void RpmDb::rebuildDatabase()
   }
   catch (RpmException & excpt_r)
   {
-    report->finish(root() + dbPath(), RebuildDBReport::FAILED, excpt_r.msg());
+    report->finish(root() + dbPath(), RebuildDBReport::FAILED, excpt_r.asUserString());
     ZYPP_RETHROW(excpt_r);
   }
   report->finish(root() + dbPath(), RebuildDBReport::NO_ERROR, "");
@@ -986,7 +986,7 @@ const std::list<Package::Ptr> & RpmDb::getPackages()
   }
   catch (RpmException & excpt_r)
   {
-    report->finish(ScanDBReport::FAILED, excpt_r.msg ());
+    report->finish(ScanDBReport::FAILED, excpt_r.asUserString ());
     ZYPP_RETHROW(excpt_r);
   }
 #warning fixme

@@ -64,7 +64,7 @@ namespace zypp
 	    rpm::InstallResolvableReport::Action user = 
 		_report->problem( _resolvable
 		    , rpm::InstallResolvableReport::INVALID
-		    , excpt_r.msg()
+		    , excpt_r.asUserString()
 		    , _level
 		);
 		
@@ -141,7 +141,7 @@ namespace zypp
 	    rpm::RemoveResolvableReport::Action user = 
 		_report->problem( _resolvable
 		    , rpm::RemoveResolvableReport::INVALID
-		    , excpt_r.msg()
+		    , excpt_r.asUserString()
 		);
 		
 	    switch (user) {

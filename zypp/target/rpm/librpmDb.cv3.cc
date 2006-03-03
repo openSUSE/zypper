@@ -504,7 +504,7 @@ void internal_convertV3toV4( const Pathname & v3db_r, const librpmDb::constPtr &
 	}
 	catch (RpmException & excpt_r)
 	{
-	  report->finish(v3db_r, ConvertDBReport::FAILED,excpt_r.msg());
+	  report->finish(v3db_r, ConvertDBReport::FAILED,excpt_r.asUserString());
 	  ZYPP_RETHROW(excpt_r);
 	}
         report->finish(v3db_r, ConvertDBReport::NO_ERROR, "");

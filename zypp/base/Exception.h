@@ -150,7 +150,9 @@ namespace zypp
     /** Error message provided by \ref dumpOn as string. */
     std::string asString() const;
 
-    std::string asTranslatedString() const { return asString(); }
+    /** Translated error message as string suitable for the user. */
+    std::string asUserString() const;
+
   protected:
 
     /** Overload this to print a proper error message. */
@@ -255,6 +257,8 @@ namespace zypp
 #define ZYPP_THROW_ERRNO_MSG1(EXCPTTYPE, ERRNO,MSG)\
   ZYPP_THROW( EXCPTTYPE( ::zypp::Exception::strErrno(ERRNO,MSG) ) )
   //@}
+
+#define ZYPP_DUMPON(msg) ( translated ? _(msg) : msg ) 
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
