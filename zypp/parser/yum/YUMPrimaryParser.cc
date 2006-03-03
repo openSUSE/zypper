@@ -31,6 +31,9 @@ namespace zypp {
       YUMPrimaryParser::YUMPrimaryParser(istream &is, const string& baseUrl)
         : XMLNodeIterator<YUMPrimaryData_Ptr>(is, baseUrl,PRIMARYSCHEMA)
       {
+	if (is.fail()) {
+	    ERR << "Bad stream" << endl;
+	}
         fetchNext();
       }
       
