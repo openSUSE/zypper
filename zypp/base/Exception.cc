@@ -62,6 +62,8 @@ namespace zypp
   {
     std::ostringstream str;
     dumpOn( str );
+    // call gettext to translate the message. This will
+    // not work if dumpOn() uses composed messages.
     return _(str.str().c_str());
   }
 
