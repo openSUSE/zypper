@@ -103,6 +103,17 @@ namespace zypp
       const Pathname provideDir(const Pathname & path,
 				const unsigned media_nr = 1,
 				const bool recursive = false);
+      
+      /**
+       * Provide info about a directory
+       *
+       * \throws Exception
+       *
+       */
+      void dirInfo( const unsigned media_nr,
+                    std::list<std::string> &retlist,
+                    const Pathname         &path_r,
+                    bool                    dots = true) const;
 
       void changeMedia(const media::MediaId & media_r, const Pathname & path_r);
 
@@ -135,7 +146,7 @@ namespace zypp
       virtual unsigned priorityUnsubscribed (void) const;
       virtual void setPriorityUnsubscribed (unsigned p);
       virtual const Pathname & cacheDir (void);
-
+      virtual const std::set<Pathname> publicKeys() const;
 
       virtual std::string type(void) const;
 

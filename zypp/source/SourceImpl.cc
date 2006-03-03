@@ -107,6 +107,16 @@ namespace zypp
       return const_cast<SourceImpl*>(this)->provideResolvables(self, kind);
     }
 
+    void SourceImpl::dirInfo(const unsigned media_nr,
+                             std::list<std::string> &retlist,
+                             const Pathname         &path_r,
+                             bool                    dots ) const
+    {
+      DBG << "reading " << path_r << " file list" << endl;
+      media::MediaAccessId _media = _media_set->getMediaAccessId( media_nr );
+      media_mgr.dirInfo( _media, retlist, path_r, dots );
+    }
+    
     const Pathname SourceImpl::provideFile(const Pathname & file_r,
 					   const unsigned media_nr,
 					   bool cached,
@@ -291,6 +301,9 @@ namespace zypp
     std::string SourceImpl::vendor (void) const
     { return ""; }
 
+    const std::set<Pathname> SourceImpl::publicKeys() const
+    { return std::set<Pathname>(); }
+    
     std::string SourceImpl::unique_id (void) const
     { return ""; }
 

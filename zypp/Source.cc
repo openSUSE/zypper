@@ -153,6 +153,9 @@ namespace zypp
   std::string Source_Ref::vendor (void) const
   { return _pimpl->vendor(); }
 
+  const std::set<Pathname> Source_Ref::publicKeys() const
+  { return _pimpl->publicKeys(); }
+  
   std::string Source_Ref::unique_id (void) const
   { return _pimpl->unique_id(); }
   

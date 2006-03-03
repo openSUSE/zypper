@@ -60,6 +60,7 @@ namespace zypp
         filesystem::mkdir(cache_dir_r + "DATA");
         filesystem::mkdir(cache_dir_r + "MEDIA");
         filesystem::mkdir(cache_dir_r + "DESCRIPTION");
+        filesystem::mkdir(cache_dir_r + "PUBLICKEYS");
       }
       
       void SuseTagsImpl::storeMetadata(const Pathname & cache_dir_r)
@@ -75,7 +76,12 @@ namespace zypp
         media_mgr.provideDirTree(media_num, "suse/setup/descr");
         Pathname descr_src = media_mgr.localPath(media_num, "suse/setup/descr"); 
         Pathname media_src = media_mgr.localPath(media_num, "media.1"); 
-        Pathname content_src = media_mgr.localPath(media_num, "content"); 
+        Pathname content_src = media_mgr.localPath(media_num, "content");
+         
+        // get the list of cache keys
+        //std::list<string> keys;
+        //dirInfo( media_num, keys, 
+        
         if (0 != assert_dir((cache_dir_r + "DATA").dirname(), 0700))
         {
           ZYPP_THROW(Exception("Cannot create cache directory: " + cache_dir_r.asString()));
@@ -194,6 +200,11 @@ namespace zypp
         report->finishData( url(), CreateSourceReport::NO_ERROR, "" );
       }
 
+      const std::set<Pathname> SuseTagsImpl::publicKeys() const
+      {
+        std::set<Pathname>();
+      }
+      
       ResStore SuseTagsImpl::provideResolvables(Source_Ref source_r, Resolvable::Kind kind)
       {
         callback::SendReport<CreateSourceReport> report;
