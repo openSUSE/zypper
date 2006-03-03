@@ -581,7 +581,7 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
     // start recursive depth-first-search
     order.init();
 MIL << "order.init() done" << endl;
-    order.printAdj( DBG, false );
+    order.printAdj( XXX, false );
     ///////////////////////////////////////////////////////////////////
     // build install list in install order
     ///////////////////////////////////////////////////////////////////
