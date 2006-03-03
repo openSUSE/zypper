@@ -145,9 +145,11 @@ TransactionSolutionAction::execute(Resolver & resolver) const
 	case REMOVE:
 	    if (_item.status().isToBeInstalled()) {
 		_item.status().setTransact (false,ResStatus::USER);
-		_item.status().setLock (true,ResStatus::USER); // no other dependency can set it again
-	    } else
+		_item.status().setLock (true,ResStatus::USER); // no other dependency can set it again		
+	    } else if (_item.status().isInstalled())
 		_item.status().setToBeUninstalled (ResStatus::USER);
+	    else
+		_item.status().setLock (true,ResStatus::USER); // no other dependency can set it again		
 	    break;
 	case UNLOCK:
 	    ret = _item.status().setLock (false, ResStatus::USER);
