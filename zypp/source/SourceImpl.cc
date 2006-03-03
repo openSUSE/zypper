@@ -84,7 +84,10 @@ namespace zypp
     //	METHOD TYPE : Dtor
     //
     SourceImpl::~SourceImpl()
-    {}
+    {
+      media::MediaAccessId _media = _media_set->getMediaAccessId( 1 );
+      media_mgr.release (_media, false);
+    }
 
     const ResStore & SourceImpl::resolvables() const
     {
