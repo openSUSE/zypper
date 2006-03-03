@@ -153,9 +153,12 @@ kind2target( Resolvable::Kind kind )
     else if (kind == ResTraits<Selection>::kind) return RC_DEP_TARGET_SELECTION;
     else if (kind == ResTraits<Pattern>::kind)	 return RC_DEP_TARGET_PATTERN;
     else if (kind == ResTraits<Product>::kind)	 return RC_DEP_TARGET_PRODUCT;
+    else if (kind == ResTraits<Language>::kind)	 return RC_DEP_TARGET_LANGUAGE;
+    else if (kind == ResTraits<Atom>::kind)	 return RC_DEP_TARGET_ATOM;
+    else if (kind == ResTraits<SrcPackage>::kind) return RC_DEP_TARGET_SRC;
 
     WAR << "Unknown resolvable kind " << kind << endl;
-    return RC_DEP_TARGET_PACKAGE;
+    return RC_DEP_TARGET_UNKNOWN;
 }
 
 //----------------------------------------------------------------------------
@@ -475,6 +478,9 @@ DbAccess::writeDependency( sqlite_int64 res_id, RCDependencyType type, const zyp
 
     for (zypp::CapSet::const_iterator iter = capabilities.begin(); iter != capabilities.end(); ++iter) {
 
+	RCDependencyTarget refers = kind2target( iter->refers() );
+	if (refers == RC_DEP_TARGET_UNKNOWN) continue;
+
 	sqlite3_bind_int64( handle, 1, res_id);
 	sqlite3_bind_int( handle, 2, type);
 	sqlite3_bind_text( handle, 3, iter->index().c_str(), -1, SQLITE_STATIC );
@@ -505,7 +511,7 @@ DbAccess::writeDependency( sqlite_int64 res_id, RCDependencyType type, const zyp
 	    sqlite3_bind_int( handle, 8, RC_RELATION_NONE );
 	}
 
-	sqlite3_bind_int( handle, 9, kind2target( iter->refers() ));
+	sqlite3_bind_int( handle, 9, refers );
 
 	rc = sqlite3_step( handle);
 	sqlite3_reset( handle);
@@ -835,7 +841,7 @@ DbAccess::writeStore( const zypp::ResStore & store, ResStatus status, const char
     }
 
     int count = 0;
-    sqlite_int64 rowid;
+    sqlite_int64 rowid = 0;
     for (ResStore::const_iterator iter = store.begin(); iter != store.end(); ++iter) {
 	rowid = writeResObject( *iter, status, catalog );
 	if (rowid < 0)

@@ -107,7 +107,11 @@ typedef enum {
 	RC_DEP_TARGET_PATCH,			// 3
 	RC_DEP_TARGET_SELECTION,		// 4
 	RC_DEP_TARGET_PATTERN,			// 5
-	RC_DEP_TARGET_PRODUCT			// 6
+	RC_DEP_TARGET_PRODUCT,			// 6
+	RC_DEP_TARGET_LANGUAGE,			// 7
+	RC_DEP_TARGET_ATOM,			// 8
+	RC_DEP_TARGET_SRC,			// 9
+	RC_DEP_TARGET_UNKNOWN=42		// 42
 } RCDependencyTarget;
 
 //-----------------------------------------------------------------------------
