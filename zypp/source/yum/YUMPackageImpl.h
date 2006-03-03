@@ -210,6 +210,8 @@ namespace zypp
 	CheckSum _checksum;
 	std::list<std::string> _filenames;
 	Pathname _location;
+//	std::list<PlainRpm> _plain_rpms;
+#warning shouldn't be a list
 	std::list<DeltaRpm> _delta_rpms;
 	std::list<PatchRpm> _patch_rpms;
 
