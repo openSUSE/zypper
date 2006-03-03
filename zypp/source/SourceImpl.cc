@@ -146,7 +146,7 @@ namespace zypp
 		source_factory.createFrom( this ),
 		media_nr,
 		media::MediaChangeReport::WRONG, // FIXME: proper error
-		excp.msg()
+		excp.asUserString()
 	      );
 
 	    DBG << "ProvideFile exception caught, callback answer: " << user << endl;
