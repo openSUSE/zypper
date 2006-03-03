@@ -95,10 +95,21 @@ DbSources::sources (bool refresh)
     // read catalogs table
 
     while ((rc = sqlite3_step (handle)) == SQLITE_ROW) {
-	string id ((const char *) sqlite3_column_text( handle, 0 ));
-	string name ((const char *) sqlite3_column_text( handle, 1 ));
-	string alias ((const char *) sqlite3_column_text( handle, 2 ));
-	string desc ((const char *) sqlite3_column_text( handle, 3 ));
+	const char *text = (const char *) sqlite3_column_text( handle, 0 );
+	if (text == NULL) {
+	    ERR << "Catalog id is NULL" << endl;
+	    continue;
+	}
+	string id (text);
+	string name;
+	text = (const char *) sqlite3_column_text( handle, 1 );
+	if (text != NULL) name = text;
+	string alias;
+	text = (const char *) sqlite3_column_text( handle, 2 );
+	if (text != NULL) alias = text;
+	string desc;
+	text = (const char *) sqlite3_column_text( handle, 3 );
+	if (text != NULL) desc = text;
 	unsigned priority = sqlite3_column_int( handle, 4 );
 	unsigned priority_unsub = sqlite3_column_int( handle, 5 );
 
