@@ -68,6 +68,9 @@ namespace zypp
 
   Resolver_Ptr ZYpp::resolver() const
   { return _pimpl->resolver(); }
+  
+  void ZYpp::reset()
+  { _pimpl->reset(); }  
 
   ///////////////////////////////////////////////////////////////////
   //

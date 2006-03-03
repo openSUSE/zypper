@@ -85,6 +85,11 @@ namespace zypp
 
       /** Commit changes and transactions. */
       ZYpp::CommitResult commit( int medianr_r );
+      
+      /** Reset the instance, discard changes
+       * \throws Exception
+       */
+      void reset();
 
     public:
       /** \todo Signal locale change. */

@@ -67,6 +67,7 @@ namespace zypp
     , _sourceFeed( _pool )
     , _resolver( new Resolver(_pool.accessor()) )
     , _disk_usage()
+    , _target(0)
     {
       MIL << "defaultTextLocale: '" << _textLocale << "'" << endl;
 
@@ -126,6 +127,17 @@ namespace zypp
     //
     ZYppImpl::~ZYppImpl()
     {
+    }
+    
+    void ZYppImpl::reset()
+    {
+	// TODO: check the memory is released
+	_textLocale = defaultTextLocale();
+	_pool = ResPoolManager();
+	_sourceFeed = SourceFeed_Ref(_pool);
+	_resolver = new Resolver(_pool.accessor());
+	_disk_usage = DiskUsageCounter();
+	_target = 0;
     }
 
     //------------------------------------------------------------------------
