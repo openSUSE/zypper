@@ -231,6 +231,7 @@ namespace zypp
       public:
 	Source_Ref source() const;
 
+	friend class YUMSourceImpl;
 
        };
       ///////////////////////////////////////////////////////////////////
