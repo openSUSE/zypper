@@ -12,6 +12,7 @@
 #ifndef ZYPP_DETAIL_LANGUAGEIMPL_H
 #define ZYPP_DETAIL_LANGUAGEIMPL_H
 
+#include "zypp/Locale.h"
 #include "zypp/detail/LanguageImplIf.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -30,7 +31,7 @@ namespace zypp
     {
     public:
       /** Default ctor */
-      LanguageImpl();
+      LanguageImpl( Locale loc );
       /** Dtor */
       virtual ~LanguageImpl();
 

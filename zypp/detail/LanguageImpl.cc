@@ -28,8 +28,10 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     /** Default ctor */
-    LanguageImpl::LanguageImpl()
-    {}
+    LanguageImpl::LanguageImpl( Locale loc )
+	: LanguageImplIf( TranslatedText( loc.language().name(), loc ) )
+    {
+    }
     /** Dtor */
     LanguageImpl::~LanguageImpl()
     {}

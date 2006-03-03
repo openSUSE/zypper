@@ -35,7 +35,15 @@ namespace zypp
     public:
       typedef Language ResType;
 
+      LanguageImplIf( const TranslatedText & summary )
+	: _summary( summary )
+      { }
+
     public:
+      virtual TranslatedText summary() const;
+
+    protected:
+      TranslatedText _summary;
 
     };
     ///////////////////////////////////////////////////////////////////
