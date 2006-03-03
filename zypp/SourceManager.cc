@@ -62,6 +62,17 @@ namespace zypp
   //
   SourceManager::~SourceManager()
   {}
+  
+  void SourceManager::reset()
+  {
+    MIL << "Cleaning up all sources" << endl;
+    
+    _sources.clear();
+    _deleted_sources.clear();
+    
+    // don't change the _next_id to avoid using
+    // the same ID for dangling old sources and newly introduced sources
+  }
 
   unsigned SourceManager::addSource(const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r)
   {
@@ -336,6 +347,10 @@ namespace zypp
     return *(it->second); // just to keep gcc happy
   }
 
+  /////////////////////////////////////////////////////////////////
+  // FailedSourcesRestoreException
+  ///////////////////////////////////////////////////////////////////
+
   std::ostream & FailedSourcesRestoreException::dumpOn( std::ostream & str ) const
   {
 	return str << _summary;
@@ -343,7 +358,7 @@ namespace zypp
 
   std::ostream & FailedSourcesRestoreException::dumpOnTranslated( std::ostream & str ) const
   {
-	return str << Exception::asTranslatedString() << endl << _translatedSummary;
+	return str << Exception::asUserString() << endl << _translatedSummary;
   }
 
   bool FailedSourcesRestoreException::empty () const
@@ -354,7 +369,7 @@ namespace zypp
   void FailedSourcesRestoreException::append( std::string source, const Exception& expt) 
   {
 	_summary = _summary + "\n" + source + ": " + expt.asString();
-	_translatedSummary = _translatedSummary + "\n" + source + ": " + expt.asTranslatedString();
+	_translatedSummary = _translatedSummary + "\n" + source + ": " + expt.asUserString();
 
   }
   /////////////////////////////////////////////////////////////////

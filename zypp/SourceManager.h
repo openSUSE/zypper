@@ -73,6 +73,14 @@ namespace zypp
   public:
   
     /**
+     * Reset the manager - discard the sources database,
+     * do not store the changes to the persistent store.
+     *
+     * \throws Exception
+     */    
+    void reset() ;
+
+    /**
      * Store the current state to the given path
      *
      * \param root_r root path for storing the source definitions
