@@ -82,12 +82,6 @@ namespace zypp
     struct MultiLocale : public std::map<Locale,_Val>
     {};
 
-  /** stream reading compessed or uncompress files */
-  typedef std::ifstream ifgzstream;
-
-  /** stream writing compessed or uncompress files */
-  typedef std::ofstream ofgzstream;
-
   //@}
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
