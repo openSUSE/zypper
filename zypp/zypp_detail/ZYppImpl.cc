@@ -21,6 +21,7 @@
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/NVRAD.h"
 #include "zypp/Language.h"
+#include "zypp/LanguageCode.h"
 #include "zypp/DiskUsageCounter.h"
 
 using std::endl;
@@ -306,7 +307,7 @@ namespace zypp
 	for (LocaleSet::const_iterator it = locales_r.begin(); it != locales_r.end(); ++it) {
 	    NVRA nvra( it->code(), Edition(), Arch_noarch );
 	    NVRAD ldata( nvra, Dependencies() );
-	    detail::ResImplTraits<detail::LanguageImpl>::Ptr limpl = new detail::LanguageImpl();
+	    detail::ResImplTraits<detail::LanguageImpl>::Ptr limpl = new detail::LanguageImpl( *it );
 	    Language::Ptr language = detail::makeResolvableFromImpl( ldata, limpl );
 	    _possible_locales.insert( language );
 	}
