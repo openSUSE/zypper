@@ -1,5 +1,6 @@
 /* -*- Mode: C++; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 
+#include <cstdlib>	// setenv
 #include <iostream>
 #include <string>
 #include <list>
@@ -105,9 +106,11 @@ main (int argc, char **argv)
 	God->initTarget("/", true);
 	PoolItemList x,y,z;
 
+	::setenv( "YAST_IS_RUNNING", "1", 1 );
+
 	RpmCallbacks callbacks;
 
-	God->target()->commit(God->pool(), 0, x, y, z);
+	God->target()->commit( God->pool(), 0, x, y, z );
     }
     catch ( Exception & expt_r ) {
 	ZYPP_CAUGHT( expt_r );
