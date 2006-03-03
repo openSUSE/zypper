@@ -190,7 +190,7 @@ namespace zypp {
 	std::string md5sum;
 	std::string buildtime;
       };
-
+#warning duplicate definition, already in zypp/PathRpm.h
       class PatchRpm {
       public:
 	std::string arch;
@@ -201,6 +201,7 @@ namespace zypp {
 	std::list<YUMBaseVersion> baseVersions;
       };
 
+#warning duplicate definition, already in zypp/DeltaRpm.h
       class DeltaRpm {
       public:
 	std::string arch;
