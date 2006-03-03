@@ -14,6 +14,7 @@
 #include "zypp/Product.h"
 #include "zypp/Script.h"
 #include "zypp/Message.h"
+#include "zypp/Atom.h"
 #include "zypp/Dependencies.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/LogControl.h"
@@ -71,6 +72,7 @@ int main( int argc, char * argv[] )
     int prdcount = 0;
     int scrcount = 0;
     int msgcount = 0;
+    int atmcount = 0;
     for (ResStore::iterator it = store.begin(); it != store.end(); ++it) {
 	Package::constPtr pkg = asKind<Package>(*it);
 	Selection::constPtr sel = asKind<Selection>(*it);
@@ -79,6 +81,7 @@ int main( int argc, char * argv[] )
 	Product::constPtr prd = asKind<Product>(*it);
 	Script::constPtr scr = asKind<Script>(*it);
 	Message::constPtr msg = asKind<Message>(*it);
+	Atom::constPtr atm = asKind<Atom>(*it);
 	if (pkg != NULL) ++pkgcount;
 	if (sel != NULL) ++selcount;
 	if (pat != NULL) ++patcount;
@@ -86,6 +89,7 @@ int main( int argc, char * argv[] )
 	if (prd != NULL) ++prdcount;
 	if (scr != NULL) ++scrcount;
 	if (msg != NULL) ++msgcount;
+	if (atm != NULL) ++atmcount;
     }
     std::cout << "Found " << store.size() << " resolvables" << endl;
     std::cout << "\t" << pkgcount << " packages" << endl;
@@ -94,6 +98,7 @@ int main( int argc, char * argv[] )
     std::cout << "\t" << pchcount << " patches" << endl;
     std::cout << "\t" << scrcount << " scripts" << endl;
     std::cout << "\t" << msgcount << " messages" << endl;
+    std::cout << "\t" << atmcount << " atoms" << endl;
     std::cout << "\t" << prdcount << " products" << endl;
 
     std::cout << "Available locales: ";
