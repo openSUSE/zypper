@@ -21,6 +21,8 @@ using namespace zypp;
 #include "transactions.h"
 #include "zypp/solver/detail/ResolverInfo.h"
 
+#include "RpmCallbacks.h"
+
 using solver::detail::ResolverInfo_Ptr;
 
 typedef std::list<PoolItem> PoolItemList;
@@ -102,6 +104,9 @@ main (int argc, char **argv)
     try {
 	God->initTarget("/", true);
 	PoolItemList x,y,z;
+
+	RpmCallbacks callbacks;
+
 	God->target()->commit(God->pool(), 0, x, y, z);
     }
     catch ( Exception & expt_r ) {

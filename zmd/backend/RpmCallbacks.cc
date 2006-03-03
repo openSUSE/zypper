@@ -10,6 +10,9 @@
  *
 */
 
+#ifndef ZMD_BACKEND_RPMCALLBACKS_H
+#define ZMD_BACKEND_RPMCALLBACKS_H
+
 #include <iostream>
 
 #include <zypp/base/Logger.h>
@@ -33,6 +36,10 @@ namespace ZyppRecipients {
 	{
 	}
 
+	~InstallPkgReceive( )
+	{
+	}
+
 	virtual void reportbegin()
 	{
 	}
@@ -43,23 +50,21 @@ namespace ZyppRecipients {
 
 	virtual void start(zypp::Resolvable::constPtr resolvable)
 	{
+DBG << "start(" << *resolvable << ")" << std::endl;
 	  // initialize the counter
 	  last_reported = 0;
-
-#warning install non-package
-	  zypp::Package::constPtr res = zypp::asKind<zypp::Package>(resolvable);
 
 	  // if we have started this resolvable already, don't do it again
 	  if( _last == resolvable )
 	    return;
 
-	  std::cout << "1|" << "1|" << "Installing " << *resolvable;
+	  std::cout << "1|" << "1|" << "Installing " << *resolvable << std::endl;
 	  _last = resolvable;
 	}
 
 	virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
 	{
-	    std::cout << "2|" << value << "|100";
+	    std::cout << "2|" << value << "|100" << std::endl;
 	    return true;
 	}
 
@@ -70,6 +75,7 @@ namespace ZyppRecipients {
 	  , zypp::target::rpm::InstallResolvableReport::RpmLevel level
 	)
 	{
+DBG << "problem(" << *resolvable << "," << description << ")" << std::endl;
 	    if (level != zypp::target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE)
 	    {
 		DBG << "Retrying installation problem with too low severity (" << level << ")" << std::endl;
@@ -94,6 +100,7 @@ namespace ZyppRecipients {
 
 	virtual void finish(zypp::Resolvable::constPtr resolvable, Error error, std::string reason, zypp::target::rpm::InstallResolvableReport::RpmLevel level)
 	{
+DBG << "finish(" << *resolvable << "," << reason << ")" << std::endl;
 	    if (level == zypp::target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE) {
 		std::cout << "3|" << reason << std::endl;
 	    }
@@ -123,11 +130,12 @@ namespace ZyppRecipients {
 
 	virtual void start(zypp::Resolvable::constPtr resolvable)
 	{
+	  std::cout << "1|" << "1|" << "Removing " << *resolvable << std::endl;
 	}
 
 	virtual bool progress(int value, zypp::Resolvable::constPtr resolvable)
 	{
-	    std::cout << "2|" << value << "|100";
+	    std::cout << "2|" << value << "|100" << std::endl;
 	    return true;
 	}
 
@@ -146,3 +154,26 @@ namespace ZyppRecipients {
 ///////////////////////////////////////////////////////////////////
 }; // namespace ZyppRecipients
 ///////////////////////////////////////////////////////////////////
+
+class RpmCallbacks {
+
+  private:
+    ZyppRecipients::InstallPkgReceive _installReceiver;
+    ZyppRecipients::RemovePkgReceive _removeReceiver;
+
+  public:
+    RpmCallbacks()
+    {
+	_installReceiver.connect();
+	_removeReceiver.connect();
+    }
+
+    ~RpmCallbacks()
+    {
+	_installReceiver.disconnect();
+	_removeReceiver.disconnect();
+    }
+
+};
+
+#endif // ZMD_BACKEND_RPMCALLBACKS_H
