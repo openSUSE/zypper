@@ -794,7 +794,7 @@ Resolver::resolvePool ()
 //
 
 static bool
-transactCaps( const ResPool & pool, const CapSet & caps, bool install )
+transactCaps( const ResPool & pool, const CapSet & caps, bool install, bool soft )
 {
     bool result = true;
 
@@ -803,9 +803,22 @@ transactCaps( const ResPool & pool, const CapSet & caps, bool install )
 	PoolItem_Ref installed = Helper::findInstalledByNameAndKind( pool, it->index(), it->refers() );
 	PoolItem_Ref uninstalled = Helper::findUninstalledByNameAndKind( pool, it->index(), it->refers() );
 
-	if (uninstalled) uninstalled.status().setTransact( install, ResStatus::SOLVER );
-	if (installed) installed.status().setTransact( false, ResStatus::SOLVER );
-
+	if (uninstalled
+	    && !uninstalled.status().isLocked())
+	{
+	    if (soft) 
+		uninstalled.status().setSoftTransact( install, ResStatus::SOLVER );
+	    else
+		uninstalled.status().setTransact( install, ResStatus::SOLVER );
+	}
+	if (installed
+	    && !installed.status().isLocked())
+	{
+	    if (soft) 
+		installed.status().setSoftTransact( false, ResStatus::SOLVER );
+	    else
+		installed.status().setTransact( false, ResStatus::SOLVER );
+	}
 	if (!uninstalled
 	    && !installed)
 	{
@@ -823,8 +836,8 @@ transactCaps( const ResPool & pool, const CapSet & caps, bool install )
 bool
 Resolver::transactResObject( ResObject::constPtr robj, bool install)
 {
-    transactCaps( _pool, robj->dep( Dep::RECOMMENDS ), install );
-    return transactCaps( _pool, robj->dep( Dep::REQUIRES ), install );
+    transactCaps( _pool, robj->dep( Dep::RECOMMENDS ), install, true );
+    return transactCaps( _pool, robj->dep( Dep::REQUIRES ), install, false );
 }
 
 ///////////////////////////////////////////////////////////////////
