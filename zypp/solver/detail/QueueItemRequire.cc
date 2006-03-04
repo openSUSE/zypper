@@ -666,7 +666,18 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	_XDEBUG( "Found exactly one resolvable, installing it.");
 
-	QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), info.providers.front(), _soft);
+	PoolItem item = info.providers.front();
+
+	// if this a soft require (a recommends), don't override a KEEP_STATE (-> bug #154650)
+	// see also below
+	if (_soft
+	    && item.status().isUninstalled()
+	    && !item.status().maySetSoftTransact( true, ResStatus::SOLVER ) )
+	{
+	    DBG << "Can't soft-transact " << item << endl;
+	    goto finished;
+	}
+	QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), item, _soft);
 	install_item->addDependency (_capability);
 
 	// The requiring item could be NULL if the requirement was added as an extra dependency.
@@ -685,20 +696,34 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	_DEBUG( "Branching: Found more than provider of " << _capability);
 
-	QueueItemBranch_Ptr branch_item = new QueueItemBranch (pool());
+	QueueItemBranch_Ptr branch_item = new QueueItemBranch( pool() );
 
 	for (PoolItemList::const_iterator iter = info.providers.begin(); iter != info.providers.end(); iter++) {
-	    QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), *iter, _soft);
-	    install_item->addDependency (_capability);
-	    branch_item->addItem (install_item);
+
+	    PoolItem item = *iter;
+
+	    // if this a soft require (a recommends), don't override a KEEP_STATE (-> bug #154650)
+	    // see also above
+	    if (_soft
+		&& item.status().isUninstalled()
+		&& !item.status().maySetSoftTransact( true, ResStatus::SOLVER ) )
+	    {
+		DBG << "Can't soft-transact " << item << endl;
+		continue;
+	    }
+
+	    QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), item, _soft );
+	    install_item->addDependency( _capability );
+	    branch_item->addItem( install_item );
 
 	    // The requiring item could be NULL if the requirement was added as an extra dependency.
 	    if (_requiring_item) {
-		install_item->addNeededBy (_requiring_item);
+		install_item->addNeededBy( _requiring_item );
 	    }
 	}
 
-	new_items.push_back (branch_item);
+	if (!branch_item->isEmpty())
+	    new_items.push_back (branch_item);
 
     } else {
 	abort ();
