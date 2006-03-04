@@ -79,6 +79,7 @@ namespace zypp
     bool setMountPoints(const MountPointSet &m)
     {
 	mps = m;
+	return true;
     }
 
     MountPointSet getMountPoints()
