@@ -212,7 +212,10 @@ namespace zypp
       MIL << "TargetImpl::commit(<list>)" << endl;
       
       bool abort = false;
-      
+
+      // remember the last used source (if any)
+      Source_Ref lastUsedSource;
+
       for (TargetImpl::PoolItemList::const_iterator it = items_r.begin(); it != items_r.end(); it++)
       {
         if (isKind<Package>(it->resolvable()))
@@ -220,10 +223,12 @@ namespace zypp
           Package::constPtr p = dynamic_pointer_cast<const Package>(it->resolvable());
           if (it->status().isToBeInstalled())
           {
-            Pathname localfile = getRpmFile(p);
+            Pathname localfile = getRpmFile( p );
+	    lastUsedSource = p->source();			// remember the package source
+
 #warning Exception handling
-        // create a installation progress report proxy
-            RpmInstallPackageReceiver progress(it->resolvable());
+	    // create a installation progress report proxy
+            RpmInstallPackageReceiver progress( it->resolvable() );
             progress.connect();
             bool success = true;
 
@@ -349,9 +354,21 @@ namespace zypp
           {
             WAR << "storage target disabled" << std::endl;
           }
-        }
-      }   
-      
+
+        }  // other resolvables
+
+      } // for
+
+      // we're done with the commit, release the source media
+      //   In the case of a single media, end of commit means we don't need _this_
+      //   media any more.
+      //   In the case of 'commit any media', end of commit means we're completely
+      //   done and don't need the source's media anyways.
+
+      if (lastUsedSource) {		// if a source was used
+	lastUsedSource.release();	//  release their medias
+      }
+
       if( abort ) 
         ZYPP_THROW( Exception( N_("Target commit aborted by user.") ) );
 
