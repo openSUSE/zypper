@@ -62,13 +62,13 @@ struct CopyTransaction
 	{
 	    switch (_action) {
 		case PACKAGE_OP_REMOVE:
-		    item.status().setToBeUninstalled(ResStatus::USER);
+		    item.status().setToBeUninstalled( ResStatus::USER );
 		    break;
 		case PACKAGE_OP_INSTALL:
-		    item.status().setToBeInstalled(ResStatus::USER);
+		    item.status().setToBeInstalled( ResStatus::USER );
 		    break;
 		case PACKAGE_OP_UPGRADE:
-		    item.status().setToBeInstalled(ResStatus::USER);
+		    item.status().setToBeInstalled( ResStatus::USER );
 		    break;
 		default:
 		    ERR << "Ignoring unknown action " << _action << endl;
@@ -172,14 +172,22 @@ write_resobject_set( sqlite3_stmt *handle, const PoolItemSet & objects, PackageO
 
     for (PoolItemSet::const_iterator iter = objects.begin(); iter != objects.end(); ++iter) {
 
+	PoolItem item = *iter;
+
+	// only write those items back which were set by solver (#154976)
+	if (!item.status().isBySolver()) {
+	    DBG << "Skipping " << item << endl;
+	    continue;
+	}
+
 	string details = dep_get_package_info( context, *iter );
 
-        sqlite3_bind_int (handle, 1, (int) op_type);
-        sqlite3_bind_int (handle, 2, iter->resolvable()->zmdid());
-        sqlite3_bind_text (handle, 3, details.c_str(), -1, SQLITE_STATIC);
+        sqlite3_bind_int( handle, 1, (int) op_type );
+        sqlite3_bind_int( handle, 2, iter->resolvable()->zmdid() );
+        sqlite3_bind_text( handle, 3, details.c_str(), -1, SQLITE_STATIC );
 
-        rc = sqlite3_step (handle);
-        sqlite3_reset (handle);
+        rc = sqlite3_step( handle );
+        sqlite3_reset( handle );
     }
     return (rc == SQLITE_DONE);
 }
@@ -200,7 +208,7 @@ write_transactions (const ResPool & pool, sqlite3 *db, ResolverContext_Ptr conte
 
     sqlite3_stmt *handle = NULL;
     const char *sql = "INSERT INTO transactions (action, id, details) VALUES (?, ?, ?)";
-    int rc = sqlite3_prepare (db, sql, -1, &handle, NULL);
+    int rc = sqlite3_prepare( db, sql, -1, &handle, NULL );
     if (rc != SQLITE_OK) {
 	ERR << "Can not prepare transaction insertion clause: " << sqlite3_errmsg (db) << endl;
         return false;
@@ -209,23 +217,23 @@ write_transactions (const ResPool & pool, sqlite3 *db, ResolverContext_Ptr conte
     PoolItemSet remove_set;
 
     context->foreachInstall( insert_item, &install_set);
-//MIL << "foreachInstall" << endl; print_set( install_set );
+MIL << "foreachInstall" << endl; print_set( install_set );
     context->foreachUninstall( insert_item, &remove_set);
-//MIL << "foreachUninstall" << endl; print_set( remove_set );
+MIL << "foreachUninstall" << endl; print_set( remove_set );
     context->foreachUpgrade( insert_item_pair, &install_set);
-//MIL << "foreachUpgrade" << endl; print_set( install_set );
+MIL << "foreachUpgrade" << endl; print_set( install_set );
 
     bool result;
-    result = write_resobject_set (handle, install_set, PACKAGE_OP_INSTALL, context);
+    result = write_resobject_set( handle, install_set, PACKAGE_OP_INSTALL, context );
     if (!result) {
 	ERR << "Error writing transaction install set: " << sqlite3_errmsg (db) << endl;
     }
-    result = write_resobject_set (handle, remove_set, PACKAGE_OP_REMOVE, context);
+    result = write_resobject_set( handle, remove_set, PACKAGE_OP_REMOVE, context );
     if (!result) {
 	ERR << "Error writing transaction remove set: " << sqlite3_errmsg (db) << endl;
     }
 
-    sqlite3_finalize (handle);
+    sqlite3_finalize( handle );
 
     return result;
 }

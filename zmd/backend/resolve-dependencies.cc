@@ -112,12 +112,12 @@ main (int argc, char **argv)
 	return 1;
     }
     if (success) {
-	success = write_transactions (God->pool(), db.db(), context);
+	success = write_transactions( God->pool(), db.db(), context );
     }
     else {
 	string dep_failure_info( "Unresolved dependencies:\n" );
 
-	context->foreachInfo (PoolItem_Ref(), -1, append_dep_info, &dep_failure_info);
+	context->foreachInfo( PoolItem_Ref(), -1, append_dep_info, &dep_failure_info );
 
 	cout << dep_failure_info;
 	cout.flush();
