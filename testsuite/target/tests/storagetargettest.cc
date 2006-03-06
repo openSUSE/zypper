@@ -75,9 +75,15 @@ struct StorageTargetTest
   
   StorageTargetTest(const Pathname &root)
   {
+    _backend = 0L;
     _root = root;
   }
 
+  ~StorageTargetTest()
+  {
+    delete _backend;
+  }
+  
   void clean()
   {
     Pathname zyppvar = _root + "/var";
@@ -106,12 +112,25 @@ struct StorageTargetTest
     int ret = prog.close();
   }
   
-  void initSource(const Url &url)
+  Pathname sourceCacheDir()
   {
-    Url _url;
+    return _root + "/source-cache";
+  }
+  
+  void initSourceWithCache(const Url &url)
+  {
+    Url _url = url;
     SourceFactory source_factory;
     Pathname p = "/";
-    _source = source_factory.createFrom( _url, p, "testsource", _root + "/source-cache" );
+    _source = source_factory.createFrom( _url, p, "testsource", sourceCacheDir() );
+  }
+  
+  void initSource(const Url &url)
+  {
+    Url _url = url;
+    SourceFactory source_factory;
+    Pathname p = "/";
+    _source = source_factory.createFrom( _url, p, "testsource");
   }
   
   void initStorageBackend()
@@ -119,16 +138,19 @@ struct StorageTargetTest
     _backend = new XMLFilesBackend(_root);
   }
   
-  void readSourceResolvables()
+  ResStore readSourceResolvables()
   {
-    _store = _source.resolvables();
+    ResStore store;
+    store = _source.resolvables();
     MIL << "done reading source type " << _source.type() << ": " << _store <<  std::endl;
+    return store;
   }
   
-  void readStoreResolvables()
+  std::list<ResObject::Ptr> readStoreResolvables()
   {
     std::list<ResObject::Ptr> objs = _backend->storedObjects();
     MIL << "Read " << objs.size() << " objects." << std::endl;
+    return objs;
   }
   
   void writeResolvablesInStore()
@@ -157,12 +179,6 @@ struct StorageTargetTest
     _backend->storeSource(data);
     MIL << "Wrote 1 source" << std::endl;
   }
-  
-  void readKnownSources()
-  {
-    std::list<PersistentStorage::SourceData> sources = _backend->storedSources();
-    MIL << "Read " << sources.size() << " sources" << std::endl;
-  }   
    
   //////////////////////////////////////////////////////////////
   // TESTS
@@ -170,13 +186,72 @@ struct StorageTargetTest
   
   int storage_read_test()
   {
-    Benchmark b(__FUNCTION__);
+    Benchmark b(__PRETTY_FUNCTION__);
     MIL << "===[START: storage_read_test()]==========================================" << endl;
     clean();
     unpackDatabase("db.tar.gz");
     initStorageBackend();
-    readStoreResolvables();
+    std::list<ResObject::Ptr> objs = readStoreResolvables();
     clean();
+    return 0;
+  }
+  
+  void test_read_known_sources()
+  {
+    clean();
+    unpackDatabase("db.tar.gz");
+    initStorageBackend();
+    std::list<PersistentStorage::SourceData> sources = _backend->storedSources();
+    MIL << "Read " << sources.size() << " sources" << std::endl;
+    if ( sources.size() != 2 )
+      ZYPP_THROW(Exception("Known Sources read FAILED")); 
+  }   
+  
+  int read_source_cache_test()
+  {
+    clean();
+    // suse 10.0 metadata cache
+    unpackDatabase("source-metadata-cache-1.tar.gz");
+    initSourceWithCache(Url("dir:/fake-not-available-dir"));
+    ResStore store = readSourceResolvables();
+    clean();
+    return 0;
+  }
+  
+  int named_flags_test()
+  {
+    clean();
+    initStorageBackend();
+    
+    _backend->setFlag("locks", "name=bleh");
+    _backend->setFlag("locks", "all except me");
+  
+    std::set<std::string> flags;
+      
+    flags = _backend->flags("locks");
+    if (flags.size() != 2 )
+      ZYPP_THROW(Exception("wrote 2 flags, read != 2"));
+  
+    _backend->removeFlag("locks", "all except me");
+    flags = _backend->flags("locks");
+    if (flags.size() != 1 )
+      ZYPP_THROW(Exception("wrote 2 flags, deleted 1, read != 1"));
+    
+    return 0;
+  }
+  
+  int publickey_test()
+  {
+    clean();
+    // suse 10.0 metadata cache
+    unpackDatabase("source-metadata-cache-1.tar.gz");
+    initSourceWithCache(Url("dir:/fake-not-available-dir"));
+    std::list<Pathname> keys = _source.publicKeys();
+    if (keys.size() != 4 )
+      ZYPP_THROW(Exception("Read wrong number of keys"));
+    
+    clean();
+    return 0;
   }
   
   int read_test()
@@ -332,14 +407,31 @@ int nld10TestCase()
 }
 
 int main()
-{
-  StorageTargetTest test1("./");
-  test1.storage_read_test();
+{ 
+  try
+  {
+    StorageTargetTest test1("./");
+    test1.storage_read_test();
   
-  int error = 0;
-  //if ((error = only_read()) != 0) return error;
-  //if ((error = readAndStore()) != 0) return error;
-  //if ((error = assert_dir_is_broken()) != 0) return error;
-  //if ((error = nld10TestCase()) != 0) return error;  
-  return 0;
+    StorageTargetTest test2("./");
+    test2.read_source_cache_test();
+  
+    StorageTargetTest test3("./");
+    test3.test_read_known_sources();
+    
+    StorageTargetTest test4("./");
+    test4.named_flags_test();
+    
+    StorageTargetTest test5("./");
+    test5.publickeys_test();
+    
+    MIL << "store testsuite passed" << std::endl;
+    return 0;
+  }
+  catch ( std::exception &e )
+  {
+    ERR << "store testsuite failed" << std::endl;
+    return 1;
+  }
+  return 1;
 }
