@@ -94,7 +94,8 @@ downgrade_allowed (PoolItem_Ref installed, PoolItem_Ref candidate)
     Package::constPtr ipkg = asKind<Package>(ires);
     Resolvable::constPtr cres = candidate.resolvable();
     Package::constPtr cpkg = asKind<Package>(cres);
-
+if (ipkg) DBG << "Installed vendor '" << ipkg->vendor() << "'" << endl;
+if (cpkg) DBG << "Candidate vendor '" << cpkg->vendor() << "'" << endl;
     if ( ipkg
 	&& cpkg
 	&& va->isKnown( ipkg->vendor() )

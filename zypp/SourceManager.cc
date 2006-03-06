@@ -290,15 +290,18 @@ namespace zypp
 	    report.append( it->url + it->product_dir, expt );
 	    continue;
 	}
-	
+	DBG << "Added source as id " << id << endl;
 	// should not throw, we've just created the source
 	Source_Ref src = findSource( id );
 	    
-	if ( it->enabled )
+	if ( it->enabled ) {
+	    DBG << "enable source" << endl;
 	    src.enable();
-	else
+	}
+	else {
+	    DBG << "disable source" << endl;
 	    src.disable();
-
+	}
 	src.setAutorefresh ( it->autorefresh );
     }
     
