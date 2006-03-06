@@ -236,8 +236,10 @@ namespace zypp {
             // For YUM repositories
             // <entry kind="package" name="foo" epoch="2" ver="3" rel="4" flags="LE"/>
             // The slightly modified YUM format the storage backend uses.
-            // <entry kind="package" >foo-devel &lt;= 3:4-5</entry>
-            if (name == "entry") { 
+            // <capability kind="package" >foo-devel &lt;= 3:4-5</capability>
+           
+            if (name == "entry")
+            { 
               if ( _helper.content(child).empty() )
               {
                 depList->push_back
@@ -250,11 +252,17 @@ namespace zypp {
                                 _helper.attribute(child,"pre")));
               }
               else
-              {
+              { // only for backward compat, before we renamed the tag to capability
                 depList->push_back
                   (YUMDependency(_helper.attribute(child,"kind"),
                                 _helper.content(child)));
               }
+            }
+            else if ( name == "capability" )
+            {
+              depList->push_back
+                  (YUMDependency(_helper.attribute(child,"kind"),
+                   _helper.content(child)));
             }
             else {
               WAR << "YUM dependency within <format> contains the unknown element <" << name << "> "

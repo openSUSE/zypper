@@ -59,7 +59,7 @@ namespace zypp
         filesystem::clean_dir(cache_dir_r);
         filesystem::mkdir(cache_dir_r + "DATA");
         filesystem::mkdir(cache_dir_r + "MEDIA");
-        filesystem::mkdir(cache_dir_r + "DESCRIPTION");
+        //filesystem::mkdir(cache_dir_r + "DESCRIPTION");
         filesystem::mkdir(cache_dir_r + "PUBLICKEYS");
       }
       
@@ -79,33 +79,69 @@ namespace zypp
         Pathname content_src = media_mgr.localPath(media_num, "content");
          
         // get the list of cache keys
-        //std::list<string> keys;
-        //dirInfo( media_num, keys, 
+        std::list<std::string> files;
+        dirInfo( media_num, files, "/");
         
-        if (0 != assert_dir((cache_dir_r + "DATA").dirname(), 0700))
+        if (0 != assert_dir((cache_dir_r + "PUBLICKEYS"), 0700))
         {
-          ZYPP_THROW(Exception("Cannot create cache directory: " + cache_dir_r.asString()));
+          ZYPP_THROW(Exception("Cannot create cache PUBLICKEYS directory: " + (cache_dir_r + "PUBLICKEYS").asString()));
+        }
+        else
+        {
+          // cache all the public keys
+          for( std::list<std::string>::const_iterator it = files.begin(); it != files.end(); ++it)
+          {
+            std::string filename = *it;
+            if ( filename.substr(0, 10) == "gpg-pubkey" )
+            {
+              Pathname key_src = media_mgr.localPath(media_num, "/" + filename);
+              filesystem::copy(content_src, cache_dir_r + "PUBLICKEYS/" + filename);
+              MIL << "cached " << filename << std::endl;
+            }
+          }
+        } 
+        
+        if (0 != assert_dir((cache_dir_r + "DATA"), 0700))
+        {
+          ZYPP_THROW(Exception("Cannot create cache DATA directory: " + (cache_dir_r + "DATA").asString()));
         }
         else
         {
           filesystem::copy_dir(descr_src, cache_dir_r + "DATA");
+          MIL << "cached descr directory" << std::endl;
           filesystem::copy(content_src, cache_dir_r + "DATA/content");
-          filesystem::copy_dir(media_src, cache_dir_r + "MEDIA");
+          MIL << "cached content file" << std::endl;          
         }
         
-        //releaseDir(media_num, "suse/setup/descr");
+        if (0 != assert_dir((cache_dir_r + "MEDIA"), 0700))
+        {
+          ZYPP_THROW(Exception("Cannot create cache MEDIA directory: " + (cache_dir_r + "MEDIA").asString()));
+        }
+        else
+        {
+          filesystem::copy_dir(media_src, cache_dir_r + "MEDIA");
+          MIL << "cached media directory" << std::endl;
+        }
       }
       
       bool SuseTagsImpl::cacheExists()
       {
+        MIL << "Checking if source cache exists..." << std::endl;
         bool exists = true;
 	
-        exists = exists && PathInfo(_cache_dir + "DATA").isExist();
-        exists = exists && PathInfo(_cache_dir + "DESCRIPTION").isExist();
-        exists = exists && PathInfo(_cache_dir + "MEDIA").isExist();
-        exists = exists && PathInfo(_cache_dir + "MEDIA/media.1/media").isExist();
+        bool data_exists = PathInfo(_cache_dir + "DATA").isExist();
+        exists = exists && data_exists;
+        
+        //bool description_exists = PathInfo(_cache_dir + "DESCRIPTION").isExist();
+        //exists = exists && description_exists;
+        
+        bool media_exists = PathInfo(_cache_dir + "MEDIA").isExist();
+        exists = exists && media_exists;
+        
+        bool media_file_exists = PathInfo(_cache_dir + "MEDIA/media.1/media").isExist();
+        exists = exists && media_file_exists;
 
-        DBG << exists << std::endl;
+        MIL << "DATA " << (data_exists ? "exists" : "not found") << ", MEDIA " << (media_exists ? "exists" : "not found") << ", MEDIA/media.1/media " <<  (media_file_exists ? "exists" : "not found") << std::endl;
         return exists;
       }
       
