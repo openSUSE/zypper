@@ -47,7 +47,7 @@ namespace zypp
       {
         SourceData()
         {
-          enabled = false;
+          enabled = true;
           autorefresh = false;
         };
        
