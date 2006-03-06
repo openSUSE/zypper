@@ -13,6 +13,7 @@
 #include <iostream>
 
 #include "zypp/base/Logger.h"
+#include "zypp/ZYppFactory.h"
 #include "DbAccess.h"
 
 IMPL_PTR_TYPE(DbAccess);
@@ -836,17 +837,30 @@ DbAccess::writeStore( const zypp::ResStore & store, ResStatus status, const char
     XXX << "DbAccess::writeStore()" << endl;
 
     if (store.empty()) {
-	ERR << "Couldn't access the packaging system:" << endl;
+	ERR << "Store is empty." << endl;
 	return;
     }
+
+    Arch sysarch = getZYpp()->architecture();
 
     int count = 0;
     sqlite_int64 rowid = 0;
     for (ResStore::const_iterator iter = store.begin(); iter != store.end(); ++iter) {
-	rowid = writeResObject( *iter, status, catalog );
-	if (rowid < 0)
-	    break;
-	++count;
+	ResObject::constPtr obj = *iter;
+	if (!obj) {
+	    WAR << "Huh ? No object ?" << endl;
+	    continue;
+	}
+
+	if (obj->kind() != ResTraits<SrcPackage>::kind		// don't write src/nosrc packages
+            && ( status == ResStatus::installed			// installed ones are ok
+		|| obj->arch().compatibleWith( sysarch ) ) )	//   and so are architecturally compatible ones
+	{
+	    rowid = writeResObject( obj, status, catalog );
+	    if (rowid < 0)
+		break;
+	    ++count;
+	}
     }
 
     MIL << "Wrote " << count << " resolvables to database, last rowid " << rowid << endl;
