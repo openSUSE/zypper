@@ -46,11 +46,68 @@ namespace zypp {
     		    url_r.getPathName(), // urlpath below attachpoint
     		    false ) // does_download
     {
+      MIL << "MediaDISK::MediaDISK(" << url_r << ", " << attach_point_hint_r << ")" << endl;
+
       _device = Pathname(_url.getQueryParam("device")).asString();
+      if( _device.empty())
+      {
+	ERR << "Media url does not contain a device specification" << std::endl;
+	ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
+      }
+      verifyIfDiskVolume( _device);
+
       _filesystem = _url.getQueryParam("filesystem");
       if(_filesystem.empty())
 	_filesystem="auto";
-	MIL << "MediaDISK::MediaDISK(" << url_r << ", " << attach_point_hint_r << ")" << endl;
+
+    }
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //	METHOD NAME : MediaDISK::verifyIfDiskVolume
+    //	METHOD TYPE : void
+    //
+    //	DESCRIPTION : Check if specified device file name is
+    //                a disk volume device or throw an error.
+    //
+    void MediaDISK::verifyIfDiskVolume(const Pathname &name)
+    {
+      PathInfo dinfo(name);
+      if( !dinfo.isBlk())
+      {
+	ERR << "Specified device name is not a block device" << std::endl;
+	ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
+      }
+
+      std::list<Pathname> dlist;
+      Pathname            dpath("/dev/disk/by-uuid");
+      if( zypp::filesystem::readdir(dlist, dpath) != 0)
+      {
+	ZYPP_THROW(MediaSystemException(_url,
+	"unable to read list of valid disk volume devices"));
+      }
+      else
+      {
+	bool found = false;
+	std::list<Pathname>::const_iterator it;
+	for(it = dlist.begin(); !found && it != dlist.end(); ++it)
+	{
+	  PathInfo vinfo(*it);
+	  if( vinfo.isBlk() && vinfo.major() == dinfo.major() &&
+	                       vinfo.minor() == dinfo.minor())
+	  {
+	    DBG << "Found volume device: "
+	        << *it << " => " << name << std::endl;
+	    found = true;
+	  }
+	}
+	if( !found)
+	{
+	  ERR << "Specified device name is not disk volume block device"
+	      << std::endl;
+	  ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
+	}
+      }
     }
 
     ///////////////////////////////////////////////////////////////////

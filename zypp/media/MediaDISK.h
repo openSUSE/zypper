@@ -45,6 +45,8 @@ namespace zypp {
         virtual ~MediaDISK() { try { release(); } catch(...) {} }
 
         virtual bool isAttached() const;
+
+        void    verifyIfDiskVolume(const Pathname &name);
     };
 
 ///////////////////////////////////////////////////////////////////
