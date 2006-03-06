@@ -128,24 +128,19 @@ namespace zypp
     class MediaManager::Impl
     {
     private:
-      time_t        mtab_mtime;
-      MountEntries  mtab_table;
       MediaAccessId last_accessid;
 
     public:
       ManagedMediaMap mediaMap;
 
       Impl()
-        : mtab_mtime(0)
-        , mtab_table()
-        , last_accessid(0)
+        : last_accessid(0)
       {}
 
       ~Impl()
       {
         try
         {
-          mtab_table.clear();
           mediaMap.clear();
         }
         catch( ... )
@@ -186,13 +181,7 @@ namespace zypp
       inline MountEntries
       getMountEntries()
       {
-        time_t old = mtab_mtime;
-        mtab_mtime = getMountTableMTime();
-        if( old <= 0 || mtab_mtime != old)
-        {
-          mtab_table = Mount::getEntries("/etc/mtab");
-        }
-        return mtab_table;
+        return Mount::getEntries("/etc/mtab");
       }
 
     };
