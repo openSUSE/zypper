@@ -110,7 +110,7 @@ namespace zypp
     unsigned priorityUnsubscribed (void) const;
     void setPriorityUnsubscribed (unsigned p);
     const Pathname & cacheDir (void) const;
-    const std::set<Pathname> publicKeys() const;
+    const std::list<Pathname> publicKeys();
     
     // for ZMD
     std::string zmdName (void) const;

@@ -94,6 +94,7 @@ namespace zypp
             std::string filename = *it;
             if ( filename.substr(0, 10) == "gpg-pubkey" )
             {
+              media_mgr.provideFile(media_num, "/" + filename);
               Pathname key_src = media_mgr.localPath(media_num, "/" + filename);
               filesystem::copy(content_src, cache_dir_r + "PUBLICKEYS/" + filename);
               MIL << "cached " << filename << std::endl;
@@ -236,9 +237,40 @@ namespace zypp
         report->finishData( url(), CreateSourceReport::NO_ERROR, "" );
       }
 
-      const std::set<Pathname> SuseTagsImpl::publicKeys() const
+      const std::list<Pathname> SuseTagsImpl::publicKeys()
       {
-        std::set<Pathname>();
+        bool cache = cacheExists();
+        std::list<std::string> files;
+        std::list<Pathname> paths;
+        
+        MIL << "Reading public keys..." << std::endl;
+        if (cache)
+        {
+          filesystem::readdir(files, _cache_dir + "PUBLICKEYS");
+          for( std::list<std::string>::const_iterator it = files.begin(); it != files.end(); ++it)
+            paths.push_back(Pathname(*it));
+                        
+          MIL << "read " << files.size() << " keys from cache " << _cache_dir << std::endl;
+        }
+        else
+        {
+          std::list<std::string> allfiles;
+          media::MediaManager media_mgr;
+          media::MediaAccessId media_num = _media_set->getMediaAccessId(1);
+          dirInfo(media_num, allfiles, "/");
+          
+          for( std::list<std::string>::const_iterator it = allfiles.begin(); it != allfiles.end(); ++it)
+          {
+            std::string filename = *it;
+            if ( filename.substr(0, 10) == "gpg-pubkey" )
+            {
+              Pathname key_src = provideFile("/" + filename);
+              paths.push_back(filename);
+            }
+          }
+          MIL << "read " << paths.size() << " keys from media" << std::endl;
+        }
+        return paths;
       }
       
       ResStore SuseTagsImpl::provideResolvables(Source_Ref source_r, Resolvable::Kind kind)

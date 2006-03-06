@@ -59,7 +59,7 @@ namespace zypp
 	
         virtual unsigned numberOfMedia(void) const;
         virtual std::string vendor (void) const;
-        virtual const std::set<Pathname> publicKeys() const;
+        virtual const std::list<Pathname> publicKeys();
         virtual std::string unique_id (void) const;
         
         Pathname sourceDir( const NVRAD& nvrad );

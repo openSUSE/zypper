@@ -303,8 +303,8 @@ namespace zypp
     std::string SourceImpl::vendor (void) const
     { return ""; }
 
-    const std::set<Pathname> SourceImpl::publicKeys() const
-    { return std::set<Pathname>(); }
+    const std::list<Pathname> SourceImpl::publicKeys()
+    { return std::list<Pathname>(); }
     
     std::string SourceImpl::unique_id (void) const
     { return ""; }
