@@ -86,6 +86,15 @@ public:
   virtual bool doesObjectHasFlag( ResObject::constPtr resolvable, const std::string &flag ) const = 0;
 
   /////////////////////////////////////////////////////////
+  // Named Flags API
+  ////////////////////////////////////////////////////////
+  public:
+  virtual void setFlag( const std::string &key, const std::string &flag );
+  virtual void removeFlag( const std::string &key, const std::string &flag );
+  virtual std::set<std::string> flags( const std::string &key ) const;
+  virtual bool hasFlag( const std::string &key, const std::string &flag ) const;
+
+  /////////////////////////////////////////////////////////
   // SOURCES API
   ////////////////////////////////////////////////////////
   /**

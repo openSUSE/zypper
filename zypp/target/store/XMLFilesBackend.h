@@ -94,8 +94,22 @@ public:
   void removeObjectFlag( ResObject::constPtr resolvable, const std::string &flag );
   std::set<std::string> objectFlags( ResObject::constPtr resolvable ) const;
   bool doesObjectHasFlag( ResObject::constPtr resolvable, const std::string &flag ) const;
+
+  /////////////////////////////////////////////////////////
+  // Named Flags API
+  ////////////////////////////////////////////////////////
+  public:
+  void setFlag( const std::string &key, const std::string &flag );
+  void removeFlag( const std::string &key, const std::string &flag );
+  std::set<std::string> flags( const std::string &key ) const;
+  bool hasFlag( const std::string &key, const std::string &flag ) const;
+
   protected:
-  void writeObjectFlags( ResObject::constPtr resolvable, const std::set<std::string> &flags );
+  void writeObjectFlags( ResObject::constPtr resolvable, const std::set<std::string> &pflags );
+  void writeFlags( const std::string &key, const std::set<std::string> &pflags );
+  
+  void writeFlagsInFile( const std::string &filename, const std::set<std::string> &pflags );
+  std::set<std::string> flagsFromFile( const std::string &filename ) const;
   /////////////////////////////////////////////////////////
   // SOURCES API
   ////////////////////////////////////////////////////////
@@ -135,6 +149,15 @@ public:
     * Encoded filename for resolvable flags. Does not take kind into account.
     */  
   std::string fullPathForResolvableFlags( ResObject::constPtr resolvable ) const;
+  /**
+    * dir for named flags
+    */
+  std::string dirForNamedFlags() const;
+  /**
+    * full path for named flags
+    */
+  std::string fullPathForNamedFlags( const std::string &key ) const;
+
 
   /**
     * Directory where the xml file is stored (for the given resolvable kind)

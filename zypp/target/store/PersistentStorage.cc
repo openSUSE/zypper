@@ -134,6 +134,34 @@ PersistentStorage::doesObjectHasFlag( ResObject::constPtr resolvable, const std:
 { return d->backend->doesObjectHasFlag(resolvable, flag); }
 
 /////////////////////////////////////////////////////////
+// Named Flags API
+////////////////////////////////////////////////////////
+
+void 
+PersistentStorage::setFlag( const std::string &key, const std::string &flag )
+{
+  d->backend->setFlag(key, flag);
+}
+
+void
+PersistentStorage::removeFlag( const std::string &key, const std::string &flag )
+{
+  d->backend->removeFlag(key, flag);
+}
+
+std::set<std::string>
+PersistentStorage::flags( const std::string &key ) const
+{
+  return d->backend->flags(key);
+}
+
+bool
+PersistentStorage::hasFlag( const std::string &key, const std::string &flag ) const
+{
+  return d->backend->hasFlag(key, flag);
+}
+
+/////////////////////////////////////////////////////////
 // SOURCES API
 ////////////////////////////////////////////////////////
 

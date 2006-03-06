@@ -115,6 +115,15 @@ namespace zypp
       bool doesObjectHasFlag( ResObject::constPtr resolvable, const std::string &flag ) const;
 
       /////////////////////////////////////////////////////////
+      // Named Flags API
+      ////////////////////////////////////////////////////////
+      public:
+      void setFlag( const std::string &key, const std::string &flag );
+      void removeFlag( const std::string &key, const std::string &flag );
+      std::set<std::string> flags( const std::string &key ) const;
+      bool hasFlag( const std::string &key, const std::string &flag ) const;
+
+      /////////////////////////////////////////////////////////
       // SOURCES API
       ////////////////////////////////////////////////////////
       /**

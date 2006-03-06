@@ -194,6 +194,9 @@ XMLFilesBackend::isBackendInitialized() const
     ok = ok && exists(dirForResolvableKindFlags(kind));
   }
 
+  // named flags
+  ok = ok && exists(dirForNamedFlags());
+
   ok = ok && exists( path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("sources") );
   return ok;
 }
@@ -229,6 +232,14 @@ XMLFilesBackend::initBackend()
     else
       MIL << "Created " << p.asString() << std::endl;
   }
+
+  // dir for named flags
+  Pathname namedflags(dirForNamedFlags());
+  if (0 != assert_dir(namedflags, 0700))
+    ZYPP_THROW(Exception("Cannot create directory" + namedflags.asString()));
+  else
+    MIL << "Created " << namedflags.asString() << std::endl;
+
   // create dir for source list
   Pathname source_p = d->root + Pathname(ZYPP_DB_DIR) + Pathname("/sources/");
   if (0 != assert_dir(source_p, 0700))
@@ -255,6 +266,14 @@ XMLFilesBackend::dirForResolvableKindFlags( Resolvable::Kind kind ) const
 {
   std::string dir;
   dir += Pathname( d->root + Pathname(ZYPP_DB_DIR) + Pathname("flags") + Pathname(resolvableKindToString(kind, true)) ).asString();
+  return dir;
+}
+
+std::string
+XMLFilesBackend::dirForNamedFlags() const
+{
+  std::string dir;
+  dir += Pathname( d->root + Pathname(ZYPP_DB_DIR) + Pathname("named-flags")).asString();
   return dir;
 }
 
@@ -293,6 +312,14 @@ XMLFilesBackend::fullPathForResolvable( ResObject::constPtr resolvable ) const
 }
 
 std::string
+XMLFilesBackend::fullPathForNamedFlags( const std::string &key ) const
+{
+  std::stringstream key_stream(key);
+  std::string key_encoded = Digest::digest("MD5", key_stream);
+  return path( path(dirForNamedFlags()) / path(key_encoded)).string();
+}
+
+std::string
 XMLFilesBackend::fullPathForResolvableFlags( ResObject::constPtr resolvable ) const
 {
   // flags are in a hidden file with the same name
@@ -319,6 +346,73 @@ void
 XMLFilesBackend::writeObjectFlags( ResObject::constPtr resolvable, const std::set<std::string> &flags )
 {
   std::string filename = fullPathForResolvableFlags(resolvable);
+  writeFlagsInFile( filename, flags );
+  MIL << "Wrote " << flags.size() << " flags for " << resolvable->name() << " " << resolvable->edition() << std::endl;
+}
+
+std::set<std::string>
+XMLFilesBackend::objectFlags( ResObject::constPtr resolvable ) const
+{
+  std::string filename = fullPathForResolvableFlags(resolvable);
+  return flagsFromFile(filename);
+}
+
+bool
+XMLFilesBackend::doesObjectHasFlag( ResObject::constPtr resolvable, const std::string &flag ) const
+{
+  std::set<std::string> flags = objectFlags(resolvable);
+  return (find(flags.begin(), flags.end(), flag) != flags.end());
+}
+
+/////////////////////////////////////////////////////////
+// Named Flags API
+////////////////////////////////////////////////////////
+
+void 
+XMLFilesBackend::setFlag( const std::string &key, const std::string &flag )
+{
+  std::set<std::string> _flags = flags(key);
+  _flags.insert(flag);
+  writeFlags(key, _flags);
+}
+
+void
+XMLFilesBackend::removeFlag( const std::string &key, const std::string &flag )
+{
+  std::set<std::string> _flags = flags(key);
+  _flags.erase(flag);
+  writeFlags(key, _flags);
+}
+
+std::set<std::string>
+XMLFilesBackend::flags( const std::string &key ) const
+{
+  std::string filename = fullPathForNamedFlags(key);
+  return flagsFromFile(filename);
+}
+
+bool
+XMLFilesBackend::hasFlag( const std::string &key, const std::string &flag ) const
+{
+  std::set<std::string> _flags = flags(key);
+  return (find(_flags.begin(), _flags.end(), flag) != _flags.end());
+}
+
+void
+XMLFilesBackend::writeFlags( const std::string &key, const std::set<std::string> &pflags )
+{
+  std::string filename = fullPathForNamedFlags(key);
+  writeFlagsInFile( filename, pflags );
+  MIL << "Wrote " << pflags.size() << " flags for " << key << std::endl;
+}
+
+/////////////////////////////////////////////////////////
+// Common functions for both named and resolvable flags
+////////////////////////////////////////////////////////
+
+void
+XMLFilesBackend::writeFlagsInFile( const std::string &filename, const std::set<std::string> &pflags )
+{
   std::ofstream file(filename.c_str());
   if (!file) {
     ZYPP_THROW (Exception( "Can't open " + filename ) );
@@ -326,7 +420,7 @@ XMLFilesBackend::writeObjectFlags( ResObject::constPtr resolvable, const std::se
 
   try
   {
-    for ( std::set<std::string>::const_iterator it = flags.begin(); it != flags.end(); it++)
+    for ( std::set<std::string>::const_iterator it = pflags.begin(); it != pflags.end(); it++)
     {
       // dont save empty strings
       if ( *it == std::string() )
@@ -335,22 +429,21 @@ XMLFilesBackend::writeObjectFlags( ResObject::constPtr resolvable, const std::se
         file << *it << std::endl;
     }
     file << std::endl;
-    MIL << "Wrote " << flags.size() << " flags for " << resolvable->name() << " " << resolvable->edition() << std::endl;
+    MIL << "Wrote " << pflags.size() << " flags in " << filename << std::endl;
   }
   catch( std::exception &e )
   {
     //ZYPP_RETHROW(e);
-  }
+  }  
 }
 
 std::set<std::string>
-XMLFilesBackend::objectFlags( ResObject::constPtr resolvable ) const
+XMLFilesBackend::flagsFromFile( const std::string &filename ) const
 {
-  std::set<std::string> flags;
-  std::string filename = fullPathForResolvableFlags(resolvable);
+  std::set<std::string> _flags;
   // do we have previous saved flags?
   if (!exists(path(filename)))
-    return flags;
+    return _flags;
 
   std::ifstream file(filename.c_str());
   if (!file) {
@@ -364,19 +457,15 @@ XMLFilesBackend::objectFlags( ResObject::constPtr resolvable ) const
     if (buffer == std::string())
       continue;
 
-    flags.insert(buffer);
+    _flags.insert(buffer);
   }
   //MIL << "Read " << flags.size() << " flags for " << resolvable->name() << " " << resolvable->edition() << std::endl;
-  return flags;
+  return _flags;
 }
 
-bool
-XMLFilesBackend::doesObjectHasFlag( ResObject::constPtr resolvable, const std::string &flag ) const
-{
-  std::set<std::string> flags = objectFlags(resolvable);
-  return (find(flags.begin(), flags.end(), flag) != flags.end());
-}
-
+/////////////////////////////////////////////////////////
+// Resolvables storage
+////////////////////////////////////////////////////////
 
 void
 XMLFilesBackend::storeObject( ResObject::constPtr resolvable )
