@@ -435,44 +435,58 @@ MediaHandler::checkAttached(bool isDevice,  bool fsType) const
     _attach_mtime = manager.getMountTableMTime();
     if( !(old <= 0 || _attach_mtime != old))
     {
-      // OK, skip the check
+      // OK, skip the check (we've seen it at least once)
       _isAttached = true;
     }
     else
     {
-      DBG << "Mount table changed - rereading it" << std::endl;
+      if( old)
+        DBG << "Mount table changed - rereading it" << std::endl;
+      else
+        DBG << "Forced check of the mount table" << std::endl;
+
       MountEntries  entries( manager.getMountEntries());
       MountEntries::const_iterator e;
       for( e = entries.begin(); e != entries.end(); ++e)
       {
-        bool is_device = (Pathname(e->src).dirname() == "/dev");
-        if( is_device == isDevice)
+        bool        is_device = false;
+        std::string dev_path(Pathname(e->src).asString());
+        PathInfo    dev_info;
+
+        if( dev_path.compare(0, sizeof("/dev/")-1, "/dev/") == 0 &&
+            dev_info(e->src) && dev_info.isBlk())
         {
-          PathInfo    dinfo(e->src);
+          is_device = true;
+        }
+
+        if( isDevice && is_device)
+        {
           std::string mtype(fsType ? e->type : ref.mediaSource->type);
-          MediaSource media(mtype, e->src, dinfo.major(), dinfo.minor());
+          MediaSource media(mtype, e->src, dev_info.major(), dev_info.minor());
 
           if( ref.mediaSource->equals( media) &&
               ref.attachPoint->path == Pathname(e->dir))
           {
-            DBG << "Found media "
+            DBG << "Found media device "
                 << ref.mediaSource->asString()
-                << " in the mount table" << std::endl;
+                << " in the mount table as " << e->src << std::endl;
             _isAttached = true;
             break;
           }
           // differs
         }
         else
+        if( !isDevice && !is_device)
         {
           std::string mtype(fsType ? e->type : ref.mediaSource->type);
           MediaSource media(mtype, e->src);
+
           if( ref.mediaSource->equals( media) &&
               ref.attachPoint->path == Pathname(e->dir))
           {
-            DBG << "Found media "
+            DBG << "Found media name "
                 << ref.mediaSource->asString()
-                << " in the mount table" << std::endl;
+                << " in the mount table as " << e->src << std::endl;
             _isAttached = true;
             break;
           }
@@ -482,7 +496,11 @@ MediaHandler::checkAttached(bool isDevice,  bool fsType) const
 
       if( !_isAttached)
       {
-        ERR << "Attached media not in mount entry table any more"
+        // reset the mtime and force a new check to make sure,
+        // that we've found the media at least once in the mtab.
+        _attach_mtime = 0;
+
+        ERR << "Attached media not in mount table (any more)"
             << std::endl;
       }
     }
