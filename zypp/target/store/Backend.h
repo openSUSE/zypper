@@ -89,10 +89,10 @@ public:
   // Named Flags API
   ////////////////////////////////////////////////////////
   public:
-  virtual void setFlag( const std::string &key, const std::string &flag );
-  virtual void removeFlag( const std::string &key, const std::string &flag );
-  virtual std::set<std::string> flags( const std::string &key ) const;
-  virtual bool hasFlag( const std::string &key, const std::string &flag ) const;
+  virtual void setFlag( const std::string &key, const std::string &flag ) = 0;
+  virtual void removeFlag( const std::string &key, const std::string &flag ) = 0;
+  virtual std::set<std::string> flags( const std::string &key ) const = 0;
+  virtual bool hasFlag( const std::string &key, const std::string &flag ) const = 0;
 
   /////////////////////////////////////////////////////////
   // SOURCES API
