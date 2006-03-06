@@ -346,7 +346,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	// the upgrade will uninstall the installed one, take care of this
 
-	uninstall_item = new QueueItemUninstall (pool(), _upgrades, QueueItemUninstall::UPGRADE, _soft);
+	uninstall_item = new QueueItemUninstall (pool(), _upgrades, QueueItemUninstall::UPGRADE );
 	uninstall_item->setUpgradedTo (_item);
 
 	if (_explicitly_requested)
@@ -410,7 +410,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	    if (!context->requirementIsMet (cap)) {
 		_XDEBUG("this requirement is still unfulfilled");
-		QueueItemRequire_Ptr req_item = new QueueItemRequire (pool(), cap, _soft);
+		QueueItemRequire_Ptr req_item = new QueueItemRequire (pool(), cap );
 		req_item->addPoolItem (_item);
 		qil.push_front (req_item);
 	    }
@@ -439,7 +439,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	for (CapSet::const_iterator iter = caps.begin(); iter != caps.end(); iter++) {
 	    const Capability cap = *iter;
 	    _XDEBUG("this conflicts with '" << cap << "'");
-	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item, _soft);
+	    QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item );
 	    // Push the QueueItem at the END of the list in order to favourite conflicts caused
 	    // by obsolating this item.
 	    qil.push_back (conflict_item);
@@ -464,7 +464,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    }
 	    if (!found) {	    
 		_XDEBUG("this obsoletes " <<  cap);
-		QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item, _soft);
+		QueueItemConflict_Ptr conflict_item = new QueueItemConflict (pool(), cap, _item );
 		conflict_item->setActuallyAnObsolete();
 		// Push the QueueItem at the BEGIN of the list in order to favourite this confict
 		// comparing to "normal" conflicts, cause this item will be deleted. So other
@@ -478,7 +478,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	// - re-establish any supplements
 	// - find items that conflict with us and try to uninstall it if it is useful
 
-	EstablishItem establish( pool(), qil, _soft );
+	EstablishItem establish( pool(), qil );
 
 	caps = _item->dep (Dep::PROVIDES);
 	bool ignored = false;
