@@ -200,7 +200,7 @@ Resolver::problems (void) const
 		details = str::form (_("%s is needed by:\n%s"), who.c_str(), needed_by->itemsToString(false).c_str());
 	    }
 	    break;
-	    case RESOLVER_INFO_TYPE_CONFLICTS_WITH: { // no solution; it is only a info
+	    case RESOLVER_INFO_TYPE_CONFLICTS_WITH: {
 		ResolverInfoConflictsWith_constPtr conflicts_with = dynamic_pointer_cast<const ResolverInfoConflictsWith>(info);
 		if (conflicts_with->items().size() >= 1)
 		    // TranslatorExplanation %s = name of package, patch, selection ...
@@ -208,7 +208,23 @@ Resolver::problems (void) const
 		else
 		    // TranslatorExplanation %s = name of package, patch, selection ...		
 		    what = str::form (_("%s conflicts with %s"), who.c_str(), conflicts_with->itemsToString(true).c_str());
-		details = str::form (_("%s conflicts with:\n%s"), who.c_str(), conflicts_with->itemsToString(false).c_str());		
+		details = str::form (_("%s conflicts with:\n%s"), who.c_str(), conflicts_with->itemsToString(false).c_str());
+		ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
+		// Uninstall p
+		problem->addSolution (new ProblemSolutionUninstall (problem, item));
+		if (conflicts_with->items().size() == 1) {
+		    // Uninstall q
+		    problem->addSolution (new ProblemSolutionUninstall (problem, *(conflicts_with->items().begin())));
+		} else {
+		    // Uninstall all other
+		    PoolItemList conflict_items = conflicts_with->items();
+		    problem->addSolution (new ProblemSolutionUninstall (problem, conflict_items));
+		}
+		// Remove conflict in the resolvable which has to be installed
+		problem->addSolution (new ProblemSolutionIgnoreConflicts (problem, item, conflicts_with->capability(),
+									  conflicts_with->items())); 
+		problems.push_back (problem);
+		problem_created = true;
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_OBSOLETES: { // no solution; it is only a info

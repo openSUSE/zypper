@@ -310,11 +310,12 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	}
 
     }
-
+    
+    this->logInfo (context);
+    
     context->uninstall (_item, _upgraded_to /*bool*/, _due_to_obsolete, _unlink);
 
     if (status.staysInstalled()) {
-
 	if (! _explicitly_requested
 	    && _item.status().isLocked()) {
 
@@ -333,8 +334,6 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    context->addError (misc_info);
 	    goto finished;
 	}
-	
-	this->logInfo (context);
 
 	if (_cap_leading_to_uninstall != Capability()		// non-empty _cap_leading_to_uninstall
 	    && !_due_to_conflict
@@ -350,7 +349,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
         //   We assuming that the dependencies are satified by the new updated items
         //   Testcase exercise-bug150844-test.xml
         if (!context->upgradeMode())
-        {	
+        {
 	    CapSet provides = _item->dep(Dep::PROVIDES);
 
 	    for (CapSet::const_iterator iter = provides.begin(); iter != provides.end(); iter++) {
@@ -384,7 +383,6 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
     }
 
  finished:
-
     return true;
 }
 

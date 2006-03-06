@@ -233,10 +233,13 @@ struct ConflictProcess
 
 	    if (actually_an_obsolete) {
 		uninstall->setDueToObsolete (conflict_issuer);
-		log_info = new ResolverInfoObsoletes (provider, conflict_issuer);
+		log_info = new ResolverInfoObsoletes (provider,
+						      conflict_issuer);
 	    } else {
 		uninstall->setDueToConflict ();
-		log_info = new ResolverInfoConflictsWith (provider, conflict_issuer);
+		log_info = new ResolverInfoConflictsWith (provider,
+							  conflict_issuer,
+							  conflict_capability);
 	    }
 
 	    uninstall->addInfo (log_info);

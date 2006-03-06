@@ -145,13 +145,17 @@ ResolverInfoContainer::itemsToString (const bool names_only) const
     }
     else
     {
-	// one line for each entry
-	for (PoolItemList::const_iterator iter = _item_list.begin();
-	     iter != _item_list.end(); iter++)
-	{
-	    res << "\n- ";	    
-	    res << ResolverInfo::toString (*iter);
-	}	
+	if (_item_list.size() == 1) {
+	    res << ResolverInfo::toString (*_item_list.begin());
+	} else {
+	    // one line for each entry
+	    for (PoolItemList::const_iterator iter = _item_list.begin();
+		 iter != _item_list.end(); iter++)
+	    {
+		res << "\n- ";	    
+		res << ResolverInfo::toString (*iter);
+	    }
+	}
     }
 
     return res.str();

@@ -39,6 +39,7 @@
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/solver/detail/ResolverContext.h"
 #include "zypp/solver/detail/ResolverInfoMisc.h"
+#include "zypp/solver/detail/ResolverInfoConflictsWith.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -381,6 +382,7 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 	//                                         RESOLVER_INFO_TYPE_NO_PROVIDER
  	//                                         RESOLVER_INFO_TYPE_NO_OTHER_PROVIDER
 	//                                         RESOLVER_INFO_TYPE_CANT_SATISFY
+	//					   RESOLVER_INFO_TYPE_CONFLICTS_WITH
 	//
 	// Testcases are:
 	// conflict2-test.xml  conflict-test.xml              remove-still-needed2-test.xml  require-test.xml
@@ -391,10 +393,56 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 	ResolverInfoList addList;
 	for (ResolverInfoList::const_iterator iter = _log.begin(); iter != _log.end(); iter++) {
 	    ResolverInfo_Ptr info = *iter;
-	    if (info->type() == RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL) {
-		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		if (info->affected() == item
-		    || misc_info->other() == item) {
+
+	    if (info->type() == RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL
+		|| info->type() == RESOLVER_INFO_TYPE_CONFLICTS_WITH) {
+
+		// There is a conflict like "a conflicts with b"
+		// Searching if there is already an error like "b conflicts with a"
+		PoolItem_Ref other_item = PoolItem_Ref();
+		if (info->type() == RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL) {
+		    ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		    other_item = misc_info->other();
+		} else {
+		    ResolverInfoConflictsWith_constPtr conflicts_with = dynamic_pointer_cast<const ResolverInfoConflictsWith>(info);
+		    if (conflicts_with->items().size() == 1) {
+			// It is only useful if there is ONE other item
+			other_item = *(conflicts_with->items().begin());
+		    }
+		}
+
+		bool other_found = false;
+
+		if (other_item != PoolItem_Ref()) {
+		    // searching for other solutions which have the same problem/solution
+		    for (ResolverInfoList::const_iterator iter_other = addList.begin();
+			 iter_other != addList.end(); iter_other++) {
+			
+			if ((*iter_other)->type() == RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL) {
+				ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(*iter_other);
+				if (   (other_item == misc_info->other()
+					&& item == misc_info->affected())
+				    || (other_item == misc_info->affected()
+					&& item == misc_info->other())) 
+				    other_found = true;
+			}
+			else if ((*iter_other)->type() == RESOLVER_INFO_TYPE_CONFLICTS_WITH) {
+			    ResolverInfoConflictsWith_constPtr conflicts_with = dynamic_pointer_cast<const ResolverInfoConflictsWith>(*iter_other);
+			    if (conflicts_with->items().size() == 1) {
+				// It is only useful if there is ONE other item
+				if (   (other_item == *(conflicts_with->items().begin())
+					&& item == conflicts_with->affected())
+				    || (other_item == conflicts_with->affected()
+					&& item == *(conflicts_with->items().begin())))
+				    other_found = true;					
+			    }
+			}
+		    }
+		}
+
+		if ( !other_found
+		     && (info->affected() == item
+			 || other_item == item)) {
 		    // put the info on the end as error
 		    found = true;
 		    addList.push_back (info);
@@ -407,6 +455,11 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 		// put the info on the end as error
 		found = true;
 		addList.push_back (info);
+	    } else if (info->type() == RESOLVER_INFO_TYPE_CONFLICTS_WITH
+		       && info->affected() == item) {
+		// put the info on the end as error
+		found = true;
+		addList.push_back (info);		
 	    }
 	}
 	if (!found) {

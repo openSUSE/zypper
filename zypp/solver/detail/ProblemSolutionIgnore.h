@@ -50,7 +50,11 @@ namespace zypp
 	    ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
 					    PoolItem_Ref item,
 					    const Capability & capability,
-					    PoolItem_Ref otherItem);	    
+					    PoolItem_Ref otherItem);
+	    ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
+					    PoolItem_Ref item,
+					    const Capability & capability,
+					    PoolItemList itemList);	    
 	};
 
 	class ProblemSolutionIgnoreRequires : public ProblemSolution

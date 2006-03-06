@@ -203,11 +203,11 @@ struct UninstallConflicting
 	    if (it->first == conflicting_item
 		&& it->second == conflicting_cap)
 	    {
-		_XDEBUG("Found ignoring requires " << conflicting_cap << " for " << conflicting_item);
+		_XDEBUG("Found ignoring conflicts " << conflicting_cap << " for " << conflicting_item);
 		ignored = true;
 		return false;		// stop iteration
 	    } else {
-		_XDEBUG("Ignoring requires " << it->second << " for " <<  it->first << " does not fit");	    
+		_XDEBUG("Ignoring conflict " << it->second << " for " <<  it->first << " does not fit");	    
 	    }
 	}
 
@@ -241,7 +241,8 @@ struct UninstallConflicting
 
 	QueueItemUninstall_Ptr uninstall_qitem = new QueueItemUninstall (_context->pool(), conflicting_item, QueueItemUninstall::CONFLICT);
 	uninstall_qitem->setDueToConflict ();
-	log_info = new ResolverInfoConflictsWith (conflicting_item, _install_item);
+	log_info = new ResolverInfoConflictsWith (conflicting_item, _install_item,
+						  conflicting_cap);
 	uninstall_qitem->addInfo (log_info);
 	_qil.push_front (uninstall_qitem);
 

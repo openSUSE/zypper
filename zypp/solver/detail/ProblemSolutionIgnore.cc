@@ -78,6 +78,21 @@ ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_
 	addAction (new InjectSolutionAction (item, capability, CONFLICTS, otherItem));	
 }
 
+ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,
+								PoolItem_Ref item,
+								const Capability & capability,
+								PoolItemList itemList)
+    : ProblemSolution (parent, "", "")
+{
+	// TranslatorExplanation %s = name of package, patch, selection ...
+	_description = str::form (_("Ignore this conflict of %s"),
+				  item->name().c_str());
+	for (PoolItemList::const_iterator iter = itemList.begin();
+	     iter != itemList.end(); iter++) {
+	    addAction (new InjectSolutionAction (item, capability, CONFLICTS, *iter));		    
+	}
+}
+
 ProblemSolutionIgnoreObsoletes::ProblemSolutionIgnoreObsoletes( ResolverProblem_Ptr parent,
 								PoolItem_Ref item,
 								const Capability & capability,

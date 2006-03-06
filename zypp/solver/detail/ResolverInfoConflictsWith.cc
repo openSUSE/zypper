@@ -74,8 +74,10 @@ ResolverInfoConflictsWith::message( ) const
 
 //---------------------------------------------------------------------------
 
-ResolverInfoConflictsWith::ResolverInfoConflictsWith (PoolItem_Ref item, PoolItem_Ref with)
+ResolverInfoConflictsWith::ResolverInfoConflictsWith (PoolItem_Ref item, PoolItem_Ref with,
+						      const Capability & capability)
     : ResolverInfoContainer (RESOLVER_INFO_TYPE_CONFLICTS_WITH, item, RESOLVER_INFO_PRIORITY_USER, with)
+    , _capability (capability)
 {
 }
 
@@ -90,7 +92,8 @@ ResolverInfoConflictsWith::~ResolverInfoConflictsWith ()
 ResolverInfo_Ptr
 ResolverInfoConflictsWith::copy (void) const
 {
-    ResolverInfoConflictsWith_Ptr cpy = new ResolverInfoConflictsWith(affected(), PoolItem_Ref());
+    ResolverInfoConflictsWith_Ptr cpy = new ResolverInfoConflictsWith(affected(), PoolItem_Ref(),
+								      capability());
 
     ((ResolverInfoContainer_Ptr)cpy)->copy (this);
 

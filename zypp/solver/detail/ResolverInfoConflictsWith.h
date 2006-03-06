@@ -24,6 +24,7 @@
 
 #include "zypp/solver/detail/Types.h"
 #include "zypp/solver/detail/ResolverInfoContainer.h"
+#include "zypp/Capability.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 
@@ -42,10 +43,13 @@ namespace zypp
 class ResolverInfoConflictsWith : public ResolverInfoContainer {
 
   private:
+    
+	  Capability _capability;			// capability leading to this info
 
   public:
 
-    ResolverInfoConflictsWith (PoolItem_Ref resItem, PoolItem_Ref with);
+    ResolverInfoConflictsWith (PoolItem_Ref resItem, PoolItem_Ref with,
+			       const Capability & capability = Capability::noCap);
     virtual ~ResolverInfoConflictsWith();
 
     // ---------------------------------- I/O
@@ -56,7 +60,8 @@ class ResolverInfoConflictsWith : public ResolverInfoContainer {
 
     // ---------------------------------- accessors
 
-
+    const Capability capability(void) const { return _capability; }
+    
     // ---------------------------------- methods
 
     virtual std::string message (void) const;
