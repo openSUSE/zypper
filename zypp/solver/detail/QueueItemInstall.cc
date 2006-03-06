@@ -479,7 +479,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	// - re-establish any supplements
 	// - find items that conflict with us and try to uninstall it if it is useful
 
-	EstablishItem establish( pool(), qil );
+	EstablishItem establish( pool(), qil, _soft );
 
 	caps = _item->dep (Dep::PROVIDES);
 	bool ignored = false;
