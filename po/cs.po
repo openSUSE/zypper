@@ -11,14 +11,13 @@ msgstr ""
 "Project-Id-Version: zypp.cs\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
 "POT-Creation-Date: 2006-02-27 12:42+0100\n"
-"PO-Revision-Date: 2006-02-18 19:08+0100\n"
+"PO-Revision-Date: 2006-03-05 14:33+0100\n"
 "Last-Translator: Klara Cihlarova <koty@seznam.cz>\n"
 "Language-Team: Czech <suse@suse.cz>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: KBabel 1.10.2\n"
 
 #: zypp/LanguageCode.cc:145
@@ -27,7 +26,7 @@ msgstr "Neznámý jazyk: "
 
 #: zypp/LanguageCode.cc:226 zypp/CountryCode.cc:215
 msgid "noCode"
-msgstr ""
+msgstr "žádný kód"
 
 #: zypp/LanguageCode.cc:227
 msgid "Default"
@@ -1998,7 +1997,7 @@ msgstr "Změněné konfigurační soubory pro %s:"
 #: zypp/target/rpm/RpmDb.cc:1869
 #, c-format
 msgid "rpm saved %s as %s but it was impossible to determine the difference"
-msgstr ""
+msgstr "rpm uložil %s jako %s, ale nebylo možné zjistit rozdíl"
 
 #: zypp/target/rpm/RpmDb.cc:1871
 #, c-format
@@ -2006,6 +2005,8 @@ msgid ""
 "rpm saved %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
+"rpm uložil %s jako %s.\n"
+"Prvních 25 řádek rozdílů:\n"
 
 #: zypp/target/rpm/RpmDb.cc:1874
 #, c-format
@@ -2018,6 +2019,8 @@ msgid ""
 "rpm created %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
+"rpm vytvořil %s jako %s.\n"
+"Prvních odlišných 25 řádek:\n"
 
 #: zypp/target/rpm/RpmDb.cc:1881
 #, c-format
@@ -2054,7 +2057,7 @@ msgstr "Ok"
 
 #: zypp/target/rpm/RpmDb.cc:2010
 msgid "The package is not OK for the following reasons:"
-msgstr ""
+msgstr "Balíček nevyhovuje z následujících důvodů:"
 
 #: zypp/target/rpm/RpmDb.cc:2016
 msgid "The package contains different version than expected"
@@ -2256,7 +2259,7 @@ msgstr ""
 #: zypp/solver/detail/Resolver_problems.cc:507
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
-msgstr ""
+msgstr "%s nebude odinstalován, protože je stále vyžadován"
 
 #: zypp/solver/detail/Resolver_problems.cc:518
 #, c-format
@@ -2266,7 +2269,7 @@ msgstr ""
 #: zypp/solver/detail/Resolver_problems.cc:542
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
-msgstr ""
+msgstr "Nelze nainstalovat %s, protože koliduje s %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:562
 #, c-format
@@ -2274,34 +2277,31 @@ msgid "%s is uninstallable due conflicts with %s"
 msgstr "%s nelze nainstalovat, koliduje s %s"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:54
-#, fuzzy
 msgid "Ignore this requirement just here"
-msgstr "Ignorovat požadavky."
+msgstr "Ignorovat požadavky pouze nyní"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:63
-#, fuzzy
 msgid "Ignore this requirement generally"
-msgstr "Ignorovat požadavky."
+msgstr "Ignorovat požadavky"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:77
-#, fuzzy, c-format
+#, c-format
 msgid "Ignore this conflict of %s"
-msgstr "Ignorovat konflikt %s."
+msgstr "Ignorovat konflikt %s"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:89
-#, fuzzy, c-format
+#, c-format
 msgid "Ignore the obsolete %s in %s"
-msgstr "Ignorovat konflikt %s."
+msgstr "Ignorovat zastaralé %s v %s"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:100
-#, fuzzy
 msgid "ignore architecture"
 msgstr "ignorovat architekturu"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:110
-#, fuzzy, c-format
+#, c-format
 msgid "Ignore that %s is already set to install"
-msgstr "Ignorovat nastavení %s k instalaci."
+msgstr "Ignorovat nastavení %s k instalaci"
 
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:54
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:63
@@ -2311,14 +2311,13 @@ msgstr "smazat %s"
 
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:57
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:66
-#, fuzzy, c-format
+#, c-format
 msgid "do not install %s"
-msgstr "Nelze nainstalovat %s"
+msgstr "neinstalovat %s"
 
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:76
-#, fuzzy
 msgid "Do not install or delete concerning resolvables"
-msgstr "%s koliduje"
+msgstr ""
 
 #: zypp/solver/detail/QueueItemRequire.cc:456
 #, c-format
@@ -2340,19 +2339,19 @@ msgstr ""
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:90
 msgid "package"
-msgstr ""
+msgstr "balíček"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:94
 msgid "selection"
-msgstr ""
+msgstr "výběr"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:98
 msgid "pattern"
-msgstr ""
+msgstr "vzor"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:102
 msgid "product"
-msgstr ""
+msgstr "produkt"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:106
 msgid "patch"
@@ -2360,11 +2359,11 @@ msgstr "aktualizace"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:110
 msgid "script"
-msgstr ""
+msgstr "skript"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:114
 msgid "message"
-msgstr ""
+msgstr "zpráva"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:118
 msgid "atom"
@@ -2372,7 +2371,7 @@ msgstr ""
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:122
 msgid "system"
-msgstr ""
+msgstr "systém"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:126
 msgid "Resolvable"
@@ -2393,22 +2392,23 @@ msgid ""
 "%s is scheduled to be installed, but this is not possible because of "
 "dependency problems."
 msgstr ""
+"%s čeká na instalaci, ale nelze ho nainstalovat kvůli problémům "
+"se závislostmi."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:167
 #, c-format
-msgid ""
-"Can't install %s since it is already marked as needing to be uninstalled"
+msgid "Can't install %s since it is already marked as needing to be uninstalled"
 msgstr ""
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:179
 #, c-format
 msgid "Can't install %s since it is does not apply to this system."
-msgstr ""
+msgstr "Nelze nainstalovat %s, protože nelze aplikovat na systém."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:190
 #, c-format
 msgid "Can't install %s, since %s is already marked as needing to be installed"
-msgstr ""
+msgstr "Nelže nainstalovat %s, protože %s již označen jako potřebný k instalaci"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:198
 #, c-format
@@ -2428,7 +2428,7 @@ msgstr "Instaluje se %s"
 #: zypp/solver/detail/ResolverInfoMisc.cc:252
 #, c-format
 msgid "Updating %s to %s"
-msgstr ""
+msgstr "Aktualizace %s na %s"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:270
 #, c-format
@@ -2444,7 +2444,7 @@ msgstr ""
 #: zypp/solver/detail/ResolverInfoMisc.cc:323
 #, c-format
 msgid "for %s"
-msgstr ""
+msgstr "pro %s"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:317
 #, c-format
@@ -2459,12 +2459,12 @@ msgstr ""
 #: zypp/solver/detail/ResolverInfoMisc.cc:356
 #, c-format
 msgid "%s provides %s, but is scheduled to be uninstalled."
-msgstr ""
+msgstr "%s poskytuje %s, ale čeká na odinstalování."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:372
 #, c-format
 msgid "%s provides %s, but another version of that %s is already installed."
-msgstr ""
+msgstr "%s poskytuje %s, ale je již nainstalována jiná verze %s."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:389
 #, c-format
@@ -2476,7 +2476,7 @@ msgstr ""
 #: zypp/solver/detail/ResolverInfoMisc.cc:405
 #, c-format
 msgid "%s provides %s, but it is locked."
-msgstr ""
+msgstr "%s poskytuje %s, ale je uzamčen."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:421
 #, c-format
@@ -2485,8 +2485,7 @@ msgstr ""
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:442
 #, c-format
-msgid ""
-"%s is required by other to-be-installed resolvable, so it won't be unlinked."
+msgid "%s is required by other to-be-installed resolvable, so it won't be unlinked."
 msgstr ""
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:459
@@ -2512,7 +2511,7 @@ msgstr ""
 #: zypp/solver/detail/ResolverInfoMisc.cc:521
 #, c-format
 msgid "from %s"
-msgstr ""
+msgstr "z %s"
 
 #: zypp/solver/detail/ResolverInfo.cc:189
 msgid " Error!"
@@ -2526,12 +2525,11 @@ msgstr " Důležité!"
 #: zypp/solver/detail/ProblemSolutionKeep.cc:57
 #, c-format
 msgid "keep %s"
-msgstr ""
+msgstr "ponechat %s"
 
 #: zypp/solver/detail/ProblemSolutionKeep.cc:67
-#, fuzzy
 msgid "Keep resolvables"
-msgstr "%s koliduje"
+msgstr ""
 
 #: zypp/solver/detail/ProblemSolutionInstall.cc:53
 #: zypp/solver/detail/ProblemSolutionInstall.cc:57
@@ -2540,30 +2538,29 @@ msgid "install %s"
 msgstr "instalovat %s"
 
 #: zypp/solver/detail/ProblemSolutionInstall.cc:67
-#, fuzzy
 msgid "Install missing resolvables"
-msgstr "Instaluje se %s"
+msgstr ""
 
 #: zypp/solver/detail/ResolverInfoDependsOn.cc:55
 #, c-format
 msgid "%s depended on %s"
-msgstr ""
+msgstr "%s závisí na %s"
 
 #: zypp/solver/detail/ResolverInfoDependsOn.cc:69
 #, c-format
 msgid "%s dependend on %s"
-msgstr ""
+msgstr "%s závisí na %s"
 
 #: zypp/solver/detail/ResolverInfoNeededBy.cc:70
 #, c-format
 msgid "%s needed by %s"
-msgstr ""
+msgstr "%s je vyžadován %s"
 
 #: zypp/solver/detail/ResolverInfoChildOf.cc:56
 #: zypp/solver/detail/ResolverInfoChildOf.cc:71
 #, c-format
 msgid "%s part of %s"
-msgstr ""
+msgstr "%s část ze %s"
 
 #: zypp/solver/detail/ProblemSolutionUnlock.cc:52
 #, c-format
@@ -2571,13 +2568,12 @@ msgid "unlock %s"
 msgstr "odemknout %s"
 
 #: zypp/solver/detail/ProblemSolutionUnlock.cc:61
-#, fuzzy
 msgid "Unlock these resolvables"
-msgstr "%s koliduje"
+msgstr ""
 
 #: zypp/CountryCode.cc:135
 msgid "Unknown country: "
-msgstr ""
+msgstr "Neznámá země: "
 
 # AD
 #: zypp/CountryCode.cc:217
@@ -3670,3 +3666,4 @@ msgstr "Zambia"
 #: zypp/CountryCode.cc:457
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
+

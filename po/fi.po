@@ -1,3 +1,4 @@
+# translation of zypp.po to
 # translation of zypp.fi.po to
 # Copyright (C) 2005 SUSE Linux Products GmbH.
 # Finnish message file for YaST2 (@memory@).
@@ -8,10 +9,10 @@
 # Jyri Palokangas <jmp@netti.fi>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: zypp.fi\n"
+"Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
 "POT-Creation-Date: 2006-02-27 12:42+0100\n"
-"PO-Revision-Date: 2006-02-27 08:10+0200\n"
+"PO-Revision-Date: 2006-02-28 10:40+0200\n"
 "Last-Translator: Jyri Palokangas <jmp@netti.fi>\n"
 "Language-Team:  <yast-trans-fi@kotoistaminen.novell.fi>\n"
 "MIME-Version: 1.0\n"
@@ -2075,8 +2076,7 @@ msgstr ""
 #: zypp/target/rpm/RpmDb.cc:1874
 #, c-format
 msgid "rpm created %s as %s but it was impossible to determine the difference"
-msgstr ""
-"rpm loi tiedoston %s tiedostona %s, mutta erojen selivttäminen on mahdotonta"
+msgstr "rpm loi tiedoston %s tiedostona %s, mutta erojen selivttäminen on mahdotonta"
 
 #: zypp/target/rpm/RpmDb.cc:1876
 #, c-format
@@ -2334,7 +2334,7 @@ msgstr "%s ei poisteta, koska sitä tarvitaan edelleen"
 #: zypp/solver/detail/Resolver_problems.cc:518
 #, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
-msgstr ""
+msgstr "%s vanhentaa %s. Mutta %s ei voida poistaa koska se on lukittu."
 
 #: zypp/solver/detail/Resolver_problems.cc:542
 #, c-format
@@ -2360,14 +2360,13 @@ msgid "Ignore this conflict of %s"
 msgstr "Jätä osan %s ristiriitaa huomiotta"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:89
-#, fuzzy, c-format
+#, c-format
 msgid "Ignore the obsolete %s in %s"
-msgstr "Jätä osan %s ristiriitaa huomiotta"
+msgstr "Jätä osan %s vanhetuminen %s huomiotta"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:100
-#, fuzzy
 msgid "ignore architecture"
-msgstr "Jätä arkkitehtuuri huomiotta"
+msgstr "jätä arkkitehtuuri huomiotta"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:110
 #, c-format
@@ -2382,14 +2381,14 @@ msgstr "poista %s"
 
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:57
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:66
-#, fuzzy, c-format
+#, c-format
 msgid "do not install %s"
-msgstr "Ei voida asentaa %s"
+msgstr "älä asenna %s"
 
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:76
 #, fuzzy
 msgid "Do not install or delete concerning resolvables"
-msgstr "Poista ristiriitaa aiheuttavat osat"
+msgstr "Älä asenna tai poista osia joita tämä koskettaa"
 
 #: zypp/solver/detail/QueueItemRequire.cc:456
 #, c-format
@@ -2439,7 +2438,7 @@ msgstr "sanoma"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:118
 msgid "atom"
-msgstr ""
+msgstr "atomi"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:122
 msgid "system"
@@ -2469,8 +2468,7 @@ msgstr ""
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:167
 #, c-format
-msgid ""
-"Can't install %s since it is already marked as needing to be uninstalled"
+msgid "Can't install %s since it is already marked as needing to be uninstalled"
 msgstr "Ei voida asentaa osaa %s, koska se on jo merkitty poistetttavaksi"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:179
@@ -2481,8 +2479,7 @@ msgstr "Ei voida asentaa osaa %s, koska sitä ei käytetä tässä järjestelmä
 #: zypp/solver/detail/ResolverInfoMisc.cc:190
 #, c-format
 msgid "Can't install %s, since %s is already marked as needing to be installed"
-msgstr ""
-"Ei voida asentaa osaa %s, koska %s on jo merkitty tarvitaan asennettavaksi"
+msgstr "Ei voida asentaa osaa %s, koska %s on jo merkitty tarvitaan asennettavaksi"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:198
 #, c-format
@@ -2561,10 +2558,8 @@ msgstr "Ei voida tyydyttää vaatimusta %s osalle %s"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:442
 #, c-format
-msgid ""
-"%s is required by other to-be-installed resolvable, so it won't be unlinked."
-msgstr ""
-"Muut asennettavat osat vaativat osan %s, joten sen linkitystä ei pureta."
+msgid "%s is required by other to-be-installed resolvable, so it won't be unlinked."
+msgstr "Muut asennettavat osat vaativat osan %s, joten sen linkitystä ei pureta."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:459
 #, c-format
@@ -2579,14 +2574,12 @@ msgstr "%s on lukittu ja sitä ei voida poistaa."
 #: zypp/solver/detail/ResolverInfoMisc.cc:495
 #, c-format
 msgid "A conflict over %s (%s) requires the removal of to-be-installed %s"
-msgstr ""
-"Ristiriita osasta %s (%s) vaatii asennettavaksi päätetyn %s poistamista"
+msgstr "Ristiriita osasta %s (%s) vaatii asennettavaksi päätetyn %s poistamista"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:513
 #, c-format
 msgid "Marking %s as uninstallable due to conflicts over %s"
-msgstr ""
-"Merkitään %s ei asennettavissa olevaksi osasta %s olevan ristiriidan takia"
+msgstr "Merkitään %s ei asennettavissa olevaksi osasta %s olevan ristiriidan takia"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:521
 #, c-format
@@ -2608,9 +2601,8 @@ msgid "keep %s"
 msgstr "pidä %s"
 
 #: zypp/solver/detail/ProblemSolutionKeep.cc:67
-#, fuzzy
 msgid "Keep resolvables"
-msgstr "Pidä puuttuvat osat"
+msgstr "Pidä osat"
 
 #: zypp/solver/detail/ProblemSolutionInstall.cc:53
 #: zypp/solver/detail/ProblemSolutionInstall.cc:57
@@ -3806,3 +3798,4 @@ msgstr "Sambia"
 #: zypp/CountryCode.cc:457
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
+

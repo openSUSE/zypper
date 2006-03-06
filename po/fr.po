@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2006-02-27 12:42+0100\n"
+"POT-Creation-Date: 2006-02-18 17:25+0100\n"
 "PO-Revision-Date: 2003-02-12 09:50+0100\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -1925,19 +1925,19 @@ msgid "Zuni"
 msgstr "Zuni"
 
 # TLABEL sw_single_2002_01_04_0147__11
-#: zypp/target/rpm/RpmDb.cc:1718
+#: zypp/target/rpm/RpmDb.cc:1656
 #, c-format
 msgid "Changed configuration files for %s:"
 msgstr "Fichiers de configuration modifiés pour %s :"
 
-#: zypp/target/rpm/RpmDb.cc:1869
+#: zypp/target/rpm/RpmDb.cc:1807
 #, c-format
 msgid "rpm saved %s as %s but it was impossible to determine the difference"
 msgstr ""
 "rpm a enregistré %s sous le nom de %s mais il a été impossible de déterminer "
 "la différence"
 
-#: zypp/target/rpm/RpmDb.cc:1871
+#: zypp/target/rpm/RpmDb.cc:1809
 #, c-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -1946,14 +1946,14 @@ msgstr ""
 "rpm a enregistré %s sous le nom de %s.\n"
 "Dans les 25 premières lignes, la différence se présente comme suit :\n"
 
-#: zypp/target/rpm/RpmDb.cc:1874
+#: zypp/target/rpm/RpmDb.cc:1812
 #, c-format
 msgid "rpm created %s as %s but it was impossible to determine the difference"
 msgstr ""
 "rpm a créé %s sous le nom de %s mais il a été impossible de déterminer la "
 "différence"
 
-#: zypp/target/rpm/RpmDb.cc:1876
+#: zypp/target/rpm/RpmDb.cc:1814
 #, c-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -1963,80 +1963,80 @@ msgstr ""
 "Dans les 25 premières lignes, la différence se présente comme suit :\n"
 
 # TLABEL online_update_2002_01_04_0147__112
-#: zypp/target/rpm/RpmDb.cc:1881
+#: zypp/target/rpm/RpmDb.cc:1819
 #, c-format
 msgid "%s install failed"
 msgstr "Échec de l'installation de %s"
 
 # TLABEL firewall_2002_03_14_2340__2
-#: zypp/target/rpm/RpmDb.cc:1882 zypp/target/rpm/RpmDb.cc:1988
+#: zypp/target/rpm/RpmDb.cc:1820 zypp/target/rpm/RpmDb.cc:1926
 msgid "rpm output:"
 msgstr "Sortie rpm :"
 
 # TLABEL online_update_2002_01_04_0147__83
-#: zypp/target/rpm/RpmDb.cc:1886
+#: zypp/target/rpm/RpmDb.cc:1824
 #, c-format
 msgid "%s installed ok"
 msgstr "%s installé."
 
 # TLABEL firewall_2002_03_14_2340__51
-#: zypp/target/rpm/RpmDb.cc:1888 zypp/target/rpm/RpmDb.cc:1993
+#: zypp/target/rpm/RpmDb.cc:1826 zypp/target/rpm/RpmDb.cc:1931
 msgid "Additional rpm output:"
 msgstr "Sortie rpm supplémentaire :"
 
 # TLABEL partitioning_2002_01_04_0147__99
-#: zypp/target/rpm/RpmDb.cc:1987
+#: zypp/target/rpm/RpmDb.cc:1925
 #, c-format
 msgid "%s remove failed"
 msgstr "Échec du retrait de %s"
 
-#: zypp/target/rpm/RpmDb.cc:1991
+#: zypp/target/rpm/RpmDb.cc:1929
 #, c-format
 msgid "%s remove ok"
 msgstr "Réussite du retrait de %s"
 
 # TLABEL menu_2002_01_04_0147__28
-#: zypp/target/rpm/RpmDb.cc:2007
+#: zypp/target/rpm/RpmDb.cc:1945
 msgid "Ok"
 msgstr "OK"
 
-#: zypp/target/rpm/RpmDb.cc:2010
+#: zypp/target/rpm/RpmDb.cc:1948
 msgid "The package is not OK for the following reasons:"
 msgstr "Le package ne convient pas pour les raisons suivantes :"
 
-#: zypp/target/rpm/RpmDb.cc:2016
+#: zypp/target/rpm/RpmDb.cc:1954
 msgid "The package contains different version than expected"
 msgstr "La version du package n'est pas celle attendue"
 
-#: zypp/target/rpm/RpmDb.cc:2022
+#: zypp/target/rpm/RpmDb.cc:1960
 msgid "The package file has incorrect MD5 sum"
 msgstr "Le fichier du package présente une somme MD5 incorrecte"
 
 # TLABEL restore_2002_08_07_0216__79
-#: zypp/target/rpm/RpmDb.cc:2028
+#: zypp/target/rpm/RpmDb.cc:1966
 msgid "The package is not signed"
 msgstr "Le package n'est pas signé"
 
 # TLABEL restore_2002_08_07_0216__79
-#: zypp/target/rpm/RpmDb.cc:2034
+#: zypp/target/rpm/RpmDb.cc:1972
 msgid "The package has no MD5 sum"
 msgstr "Le package ne présente aucune somme MD5"
 
 # TLABEL restore_2002_08_07_0216__79
-#: zypp/target/rpm/RpmDb.cc:2040
+#: zypp/target/rpm/RpmDb.cc:1978
 msgid "The package has incorrect signature"
 msgstr "La signature du package est incorrecte"
 
-#: zypp/target/rpm/RpmDb.cc:2046
+#: zypp/target/rpm/RpmDb.cc:1984
 msgid "The package archive has incorrect MD5 sum"
 msgstr "L'archive du package présente une somme MD5 incorrecte"
 
-#: zypp/target/rpm/RpmDb.cc:2052
+#: zypp/target/rpm/RpmDb.cc:1990
 msgid "rpm failed for unkown reason, see log file"
 msgstr "Échec de rpm pour une raison inconnue (voir fichier journal)"
 
 # TLABEL backup_2002_03_14_2340__102
-#: zypp/target/rpm/RpmDb.cc:2196
+#: zypp/target/rpm/RpmDb.cc:2134
 #, c-format
 msgid "created backup %s"
 msgstr "- sauvegarde %s créée"
@@ -2047,26 +2047,25 @@ msgid "%s is replaced by %s"
 msgstr "%s est remplacé par %s"
 
 #: zypp/solver/detail/ResolverInfoObsoletes.cc:69
-#, fuzzy, c-format
 msgid "%s replaced by %s"
-msgstr "%s est remplacé par %s"
+msgstr "%s remplacé par %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:189
+#: zypp/solver/detail/Resolver_problems.cc:172
 msgid "Invalid information"
 msgstr "Informations incorrectes"
 
-#: zypp/solver/detail/Resolver_problems.cc:196
+#: zypp/solver/detail/Resolver_problems.cc:179
 #, c-format
 msgid "%s is needed by other resolvables"
 msgstr "%s est requis par d'autres correctifs"
 
-#: zypp/solver/detail/Resolver_problems.cc:199
+#: zypp/solver/detail/Resolver_problems.cc:182
 #: zypp/solver/detail/ResolverInfoNeededBy.cc:56
 #, c-format
 msgid "%s is needed by %s"
 msgstr "%s est requis par %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:200
+#: zypp/solver/detail/Resolver_problems.cc:183
 #, c-format
 msgid ""
 "%s is needed by:\n"
@@ -2075,19 +2074,19 @@ msgstr ""
 "%s est requis par :\n"
 "%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:207
+#: zypp/solver/detail/Resolver_problems.cc:190
 #, c-format
 msgid "%s conflicts with other resolvables"
 msgstr "%s est en conflit avec d'autres correctifs"
 
-#: zypp/solver/detail/Resolver_problems.cc:210
+#: zypp/solver/detail/Resolver_problems.cc:193
 #: zypp/solver/detail/ResolverInfoConflictsWith.cc:55
 #: zypp/solver/detail/ResolverInfoConflictsWith.cc:70
 #, c-format
 msgid "%s conflicts with %s"
 msgstr "%s en conflit avec %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:211
+#: zypp/solver/detail/Resolver_problems.cc:194
 #, c-format
 msgid ""
 "%s conflicts with:\n"
@@ -2096,22 +2095,22 @@ msgstr ""
 "%s est en conflit avec :\n"
 "%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:218
+#: zypp/solver/detail/Resolver_problems.cc:201
 #, c-format
 msgid "%s obsoletes other resolvables"
 msgstr "%s rend d'autres correctifs obsolètes"
 
-#: zypp/solver/detail/Resolver_problems.cc:221
+#: zypp/solver/detail/Resolver_problems.cc:204
 #, c-format
 msgid "%s obsoletes %s"
 msgstr "%s rend obsolète %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:223
+#: zypp/solver/detail/Resolver_problems.cc:206
 #, c-format
 msgid "%s obsoletes:%s"
 msgstr "%s rend obsolète :%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:224
+#: zypp/solver/detail/Resolver_problems.cc:207
 msgid ""
 "\n"
 "These resolvables will be deleted from the system."
@@ -2119,38 +2118,38 @@ msgstr ""
 "\n"
 "Ces correctifs seront supprimés du système."
 
-#: zypp/solver/detail/Resolver_problems.cc:231
+#: zypp/solver/detail/Resolver_problems.cc:214
 #, c-format
 msgid "%s depends on other resolvables"
 msgstr "%s dépend d'autres correctifs"
 
-#: zypp/solver/detail/Resolver_problems.cc:235
+#: zypp/solver/detail/Resolver_problems.cc:218
 #, c-format
 msgid "%s depends on %s"
 msgstr "%s dépend de %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:238
+#: zypp/solver/detail/Resolver_problems.cc:221
 #, c-format
 msgid "%s depends on:%s"
 msgstr "%s dépend de :%s"
 
-#: zypp/solver/detail/Resolver_problems.cc:244
+#: zypp/solver/detail/Resolver_problems.cc:227
 msgid "Child of"
 msgstr "Enfant de"
 
 # TLABEL partitioning_2002_01_04_0147__180
-#: zypp/solver/detail/Resolver_problems.cc:250
-#: zypp/solver/detail/Resolver_problems.cc:313
+#: zypp/solver/detail/Resolver_problems.cc:233
+#: zypp/solver/detail/Resolver_problems.cc:296
 #, c-format
 msgid "Cannot install %s"
 msgstr "Impossible d'installer %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:252
+#: zypp/solver/detail/Resolver_problems.cc:235
 #, c-format
 msgid "None provides %s"
 msgstr "Aucun ne fournit %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:253
+#: zypp/solver/detail/Resolver_problems.cc:236
 msgid ""
 "\n"
 "There is no resource available which support this requirement."
@@ -2158,7 +2157,7 @@ msgstr ""
 "\n"
 "Aucune ressource disponible qui prenne en charge cette exigence."
 
-#: zypp/solver/detail/Resolver_problems.cc:261
+#: zypp/solver/detail/Resolver_problems.cc:244
 msgid ""
 "Due problems which are described above/below this resolution will not solve "
 "all dependencies"
@@ -2167,124 +2166,99 @@ msgstr ""
 "résoudra pas toutes les dépendances"
 
 # TLABEL autoinst_2002_08_07_0216__335
-#: zypp/solver/detail/Resolver_problems.cc:269
+#: zypp/solver/detail/Resolver_problems.cc:252
 #, c-format
 msgid "%s is not installed and has been marked as uninstallable"
 msgstr "%s n'est pas installé et est marqué comme non installable"
 
-#: zypp/solver/detail/Resolver_problems.cc:279
+#: zypp/solver/detail/Resolver_problems.cc:262
 #, c-format
 msgid "Cannot install %s due dependency problems"
 msgstr "Impossible d'installer %s à cause de problèmes de dépendance"
 
-#: zypp/solver/detail/Resolver_problems.cc:328
+#: zypp/solver/detail/Resolver_problems.cc:311
 #, c-format
 msgid "%s has unfulfiled requirements"
 msgstr "%s possède des exigences non satisfaites"
 
-#: zypp/solver/detail/Resolver_problems.cc:366
-#, fuzzy, c-format
+#: zypp/solver/detail/Resolver_problems.cc:349
 msgid "%s has missing dependencies"
-msgstr "%s ne peut pas être installé à cause de dépendances manquantes"
+msgstr "%s comporte des dépendances manquantes"
 
-#: zypp/solver/detail/Resolver_problems.cc:404
+#: zypp/solver/detail/Resolver_problems.cc:387
 #, c-format
 msgid "%s cannot be installed due missing dependencies"
 msgstr "%s ne peut pas être installé à cause de dépendances manquantes"
 
-#: zypp/solver/detail/Resolver_problems.cc:434
+#: zypp/solver/detail/Resolver_problems.cc:409
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
 msgstr "%s satisfait les dépendances de %s mais sera désinstallé"
 
 # TLABEL online_update_2002_01_04_0147__92
-#: zypp/solver/detail/Resolver_problems.cc:444
+#: zypp/solver/detail/Resolver_problems.cc:419
 #, c-format
 msgid "No need to install %s"
 msgstr "Aucune nécessité d'installer %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:452
+#: zypp/solver/detail/Resolver_problems.cc:427
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
 msgstr "Impossible d'installer %s pour satisfaire les dépendances de %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:462
+#: zypp/solver/detail/Resolver_problems.cc:437
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
 msgstr "Impossible d'installer %s pour satisfaire les dépendances de %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:499
-#: zypp/solver/detail/Resolver_problems.cc:507
+#: zypp/solver/detail/Resolver_problems.cc:461
+#: zypp/solver/detail/Resolver_problems.cc:469
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
 msgstr "%s ne sera pas désinstallé car il est toujours requis"
 
-#: zypp/solver/detail/Resolver_problems.cc:518
-#, c-format
-msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
-msgstr ""
-
-#: zypp/solver/detail/Resolver_problems.cc:542
+#: zypp/solver/detail/Resolver_problems.cc:489
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
 msgstr "Impossible d'installer %s car il est en conflit avec %s"
 
-#: zypp/solver/detail/Resolver_problems.cc:562
+#: zypp/solver/detail/Resolver_problems.cc:509
 #, c-format
 msgid "%s is uninstallable due conflicts with %s"
 msgstr "%s est non installable car il est en conflit avec %s"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:54
-#, fuzzy
 msgid "Ignore this requirement just here"
-msgstr "Non prise en compte de cette exigence"
+msgstr "Ignorer cette exigence cette fois uniquement"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:63
-#, fuzzy
 msgid "Ignore this requirement generally"
-msgstr "Non prise en compte de cette exigence"
+msgstr "Ignorer cette exigence en règle générale"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:77
-#, fuzzy, c-format
 msgid "Ignore this conflict of %s"
-msgstr "Non prise en compte du conflit de %s"
+msgstr "Ignorer ce conflit de %s"
 
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:89
-#, fuzzy, c-format
-msgid "Ignore the obsolete %s in %s"
-msgstr "Non prise en compte du conflit de %s"
-
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:100
-#, fuzzy
-msgid "ignore architecture"
-msgstr "Non prise en compte de l'architecture"
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:86
+msgid "Ignore architecture"
+msgstr "Ignorer l'architecture"
 
 # TLABEL scanner_2002_01_04_0147__15
-#: zypp/solver/detail/ProblemSolutionIgnore.cc:110
-#, fuzzy, c-format
+#: zypp/solver/detail/ProblemSolutionIgnore.cc:96
 msgid "Ignore that %s is already set to install"
-msgstr "Non prise en compte que %s est déjà prêt pour l'installation"
+msgstr "Ignorer que %s est déjà prêt(e) à être installé"
 
 # TLABEL packages_2002_01_04_0147__198
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:54
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:63
-#, fuzzy, c-format
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:52
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:56
 msgid "delete %s"
-msgstr "Suppression de %1"
+msgstr "supprimer %s"
 
-# TLABEL partitioning_2002_01_04_0147__180
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:57
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:66
-#, fuzzy, c-format
-msgid "do not install %s"
-msgstr "Impossible d'installer %s"
+#: zypp/solver/detail/ProblemSolutionUninstall.cc:65
+msgid "Delete conflicting resolvables"
+msgstr "Supprimer les correctifs en conflit"
 
-#: zypp/solver/detail/ProblemSolutionUninstall.cc:76
-#, fuzzy
-msgid "Do not install or delete concerning resolvables"
-msgstr "Suppression des correctifs en conflit"
-
-#: zypp/solver/detail/QueueItemRequire.cc:456
+#: zypp/solver/detail/QueueItemRequire.cc:461
 #, c-format
 msgid "for requiring %s for %s when upgrading %s"
 msgstr "pour l'exigence %s destinée à %s lors de la mise à niveau de %s"
@@ -2299,60 +2273,56 @@ msgstr "%s manque de l'exigence %s"
 msgid ", Action: "
 msgstr ". Action :"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:58
+#: zypp/solver/detail/ResolverInfoMisc.cc:59
 msgid ", Trigger: "
 msgstr ". Déclencheur :"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:90
+#: zypp/solver/detail/ResolverInfoMisc.cc:84
 msgid "package"
 msgstr "package"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:94
+#: zypp/solver/detail/ResolverInfoMisc.cc:88
 msgid "selection"
 msgstr "sélection"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:98
+#: zypp/solver/detail/ResolverInfoMisc.cc:92
 msgid "pattern"
 msgstr "modèle"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:102
+#: zypp/solver/detail/ResolverInfoMisc.cc:96
 msgid "product"
 msgstr "produit"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:106
+#: zypp/solver/detail/ResolverInfoMisc.cc:100
 msgid "patch"
 msgstr "correctif"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:110
+#: zypp/solver/detail/ResolverInfoMisc.cc:104
 msgid "script"
 msgstr "script"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:114
+#: zypp/solver/detail/ResolverInfoMisc.cc:108
 msgid "message"
 msgstr "message"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:118
-msgid "atom"
-msgstr ""
-
-#: zypp/solver/detail/ResolverInfoMisc.cc:122
+#: zypp/solver/detail/ResolverInfoMisc.cc:112
 msgid "system"
 msgstr "système"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:126
+#: zypp/solver/detail/ResolverInfoMisc.cc:116
 msgid "Resolvable"
 msgstr "Correctif"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:144
+#: zypp/solver/detail/ResolverInfoMisc.cc:134
 msgid "Marking this resolution attempt as invalid."
 msgstr "Marquage de cette tentative de résolution comme étant incorrecte."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:151
+#: zypp/solver/detail/ResolverInfoMisc.cc:141
 #, c-format
 msgid "Marking resolvable %s as uninstallable"
 msgstr "Marquage du correctif %s comme étant non installable"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:159
+#: zypp/solver/detail/ResolverInfoMisc.cc:149
 #, c-format
 msgid ""
 "%s is scheduled to be installed, but this is not possible because of "
@@ -2361,7 +2331,7 @@ msgstr ""
 "L'installation de %s est planifiée mais elle est impossible en raison de "
 "problèmes de dépendance."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:167
+#: zypp/solver/detail/ResolverInfoMisc.cc:157
 #, c-format
 msgid ""
 "Can't install %s since it is already marked as needing to be uninstalled"
@@ -2369,80 +2339,80 @@ msgstr ""
 "Impossible de mettre en place %s car le fichier est déjà marqué comme étant "
 "à désinstaller"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:179
+#: zypp/solver/detail/ResolverInfoMisc.cc:169
 #, c-format
 msgid "Can't install %s since it is does not apply to this system."
 msgstr "Impossible d'installer %s parce qu'il ne s'applique pas à ce système."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:190
+#: zypp/solver/detail/ResolverInfoMisc.cc:180
 #, c-format
 msgid "Can't install %s, since %s is already marked as needing to be installed"
 msgstr ""
 "Impossible d'installer %s car %s est déjà marqué comme étant à installer"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:198
+#: zypp/solver/detail/ResolverInfoMisc.cc:188
 #, c-format
 msgid "This would invalidate %s."
 msgstr "Cela invaliderait %s."
 
 # TLABEL partitioning_2002_01_04_0147__180
-#: zypp/solver/detail/ResolverInfoMisc.cc:214
+#: zypp/solver/detail/ResolverInfoMisc.cc:204
 #, c-format
 msgid "Establishing %s"
 msgstr "Mise en place de %s"
 
 # TLABEL partitioning_2002_01_04_0147__180
-#: zypp/solver/detail/ResolverInfoMisc.cc:235
+#: zypp/solver/detail/ResolverInfoMisc.cc:225
 #, c-format
 msgid "Installing %s"
 msgstr "Installation de %s..."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:252
+#: zypp/solver/detail/ResolverInfoMisc.cc:242
 #, c-format
 msgid "Updating %s to %s"
 msgstr "Mise à jour de %s vers %s"
 
 # TLABEL scanner_2002_01_04_0147__15
-#: zypp/solver/detail/ResolverInfoMisc.cc:270
+#: zypp/solver/detail/ResolverInfoMisc.cc:260
 #, c-format
 msgid "Skipping %s: already installed"
 msgstr "%s ignoré : déjà installé."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:292
+#: zypp/solver/detail/ResolverInfoMisc.cc:282
 #, c-format
 msgid "There are no alternative installed providers of %s"
 msgstr "Aucun autre fournisseur de %s n'est défini"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:298
-#: zypp/solver/detail/ResolverInfoMisc.cc:323
+#: zypp/solver/detail/ResolverInfoMisc.cc:288
+#: zypp/solver/detail/ResolverInfoMisc.cc:313
 #, c-format
 msgid "for %s"
 msgstr "pour %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:317
+#: zypp/solver/detail/ResolverInfoMisc.cc:307
 #, c-format
 msgid "There are no installable providers of %s"
 msgstr "Aucun fournisseur de %s définissable"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:340
+#: zypp/solver/detail/ResolverInfoMisc.cc:330
 #, c-format
 msgid "Upgrade to %s to avoid removing %s is not possible."
 msgstr ""
 "Impossible de procéder à une mise à niveau vers %s pour éviter de retirer %s."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:356
+#: zypp/solver/detail/ResolverInfoMisc.cc:346
 #, c-format
 msgid "%s provides %s, but is scheduled to be uninstalled."
 msgstr ""
 "%s fournit %s mais un problème lié à la planification de la désinstallation "
 "se pose."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:372
+#: zypp/solver/detail/ResolverInfoMisc.cc:362
 #, c-format
 msgid "%s provides %s, but another version of that %s is already installed."
 msgstr "%s fournit %s, mais une autre version de %s est déjà installée."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:389
+#: zypp/solver/detail/ResolverInfoMisc.cc:379
 #, c-format
 msgid ""
 "%s provides %s, but it is uninstallable.  Try installing it on its own for "
@@ -2451,17 +2421,17 @@ msgstr ""
 "%s fournit %s mais un problème d'installation se pose. Pour identifier le "
 "problème, tentez de l'installer indépendamment."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:405
+#: zypp/solver/detail/ResolverInfoMisc.cc:395
 #, c-format
 msgid "%s provides %s, but it is locked."
 msgstr "%s fournit %s mais un problème de verrouillage se pose."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:421
+#: zypp/solver/detail/ResolverInfoMisc.cc:411
 #, c-format
 msgid "Can't satisfy requirement %s for %s"
 msgstr "Impossible de satisfaire l'exigence %s pour %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:442
+#: zypp/solver/detail/ResolverInfoMisc.cc:432
 #, c-format
 msgid ""
 "%s is required by other to-be-installed resolvable, so it won't be unlinked."
@@ -2469,7 +2439,7 @@ msgstr ""
 "%s est requis par un autre correctif à installer, donc sa liaison ne sera "
 "pas supprimée."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:459
+#: zypp/solver/detail/ResolverInfoMisc.cc:449
 #, c-format
 msgid "%s is required by other installed resolvable, so it won't be unlinked."
 msgstr ""
@@ -2477,22 +2447,22 @@ msgstr ""
 "liaison."
 
 # TLABEL autoinst_2002_08_07_0216__335
-#: zypp/solver/detail/ResolverInfoMisc.cc:476
+#: zypp/solver/detail/ResolverInfoMisc.cc:466
 #, c-format
 msgid "%s is locked and cannot be uninstalled."
 msgstr "%s est verrouillé et ne peut pas être désinstallé."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:495
+#: zypp/solver/detail/ResolverInfoMisc.cc:485
 #, c-format
 msgid "A conflict over %s (%s) requires the removal of to-be-installed %s"
 msgstr "Un conflit sur %s (%s) nécessite le retrait de %s à installer."
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:513
+#: zypp/solver/detail/ResolverInfoMisc.cc:503
 #, c-format
 msgid "Marking %s as uninstallable due to conflicts over %s"
 msgstr "Marquage de %s comme non installable en raison de conflits sur %s"
 
-#: zypp/solver/detail/ResolverInfoMisc.cc:521
+#: zypp/solver/detail/ResolverInfoMisc.cc:511
 #, c-format
 msgid "from %s"
 msgstr "à partir de %s"
@@ -2511,24 +2481,21 @@ msgstr "Important !"
 #: zypp/solver/detail/ProblemSolutionKeep.cc:57
 #, c-format
 msgid "keep %s"
-msgstr ""
+msgstr "conserver %s"
 
 #: zypp/solver/detail/ProblemSolutionKeep.cc:67
-#, fuzzy
-msgid "Keep resolvables"
-msgstr "Installation des correctifs manquants"
+msgid "Keep missing resolvables"
+msgstr "Conserver les correctifs manquants"
 
 # TLABEL online_update_2002_01_04_0147__8
 #: zypp/solver/detail/ProblemSolutionInstall.cc:53
 #: zypp/solver/detail/ProblemSolutionInstall.cc:57
-#, fuzzy, c-format
 msgid "install %s"
-msgstr "Installer %1"
+msgstr "installer %s"
 
 #: zypp/solver/detail/ProblemSolutionInstall.cc:67
-#, fuzzy
 msgid "Install missing resolvables"
-msgstr "Installation des correctifs manquants"
+msgstr "Installer les correctifs manquants"
 
 #: zypp/solver/detail/ResolverInfoDependsOn.cc:55
 #, c-format
@@ -2536,14 +2503,12 @@ msgid "%s depended on %s"
 msgstr "%s basé sur %s"
 
 #: zypp/solver/detail/ResolverInfoDependsOn.cc:69
-#, fuzzy, c-format
 msgid "%s dependend on %s"
-msgstr "%s basé sur %s"
+msgstr "%s dépendant de %s"
 
 #: zypp/solver/detail/ResolverInfoNeededBy.cc:70
-#, fuzzy, c-format
 msgid "%s needed by %s"
-msgstr "%s est requis par %s"
+msgstr "%s requis par %s"
 
 #: zypp/solver/detail/ResolverInfoChildOf.cc:56
 #: zypp/solver/detail/ResolverInfoChildOf.cc:71
@@ -2552,14 +2517,12 @@ msgid "%s part of %s"
 msgstr "%s - partie de %s"
 
 #: zypp/solver/detail/ProblemSolutionUnlock.cc:52
-#, fuzzy, c-format
 msgid "unlock %s"
-msgstr "Déverrouiller %s"
+msgstr "déverrouiller %s"
 
 #: zypp/solver/detail/ProblemSolutionUnlock.cc:61
-#, fuzzy
 msgid "Unlock these resolvables"
-msgstr "Déverrouillage de ces correctifs"
+msgstr "Déverrouiller ces correctifs"
 
 #: zypp/CountryCode.cc:135
 msgid "Unknown country: "
@@ -3513,7 +3476,6 @@ msgstr "Zambie"
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
-#, fuzzy
 #~ msgid "Ignore this requirement for all other resolvables."
 #~ msgstr "%s est requis par d'autres correctifs"
 
