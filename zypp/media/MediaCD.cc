@@ -360,8 +360,8 @@ namespace zypp {
 
 	    // wait for /etc/mtab update ...
 	    // (shouldn't be needed)
-	    int limit = 10;
-	    while( !(mountsucceeded=isAttached()) && limit--)
+	    int limit = 3;
+	    while( !(mountsucceeded=isAttached()) && --limit)
 	    {
 	      sleep(1);
 	    }
