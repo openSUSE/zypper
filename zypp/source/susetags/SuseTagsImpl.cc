@@ -127,7 +127,7 @@ namespace zypp
       
       bool SuseTagsImpl::cacheExists()
       {
-        MIL << "Checking if source cache exists..." << std::endl;
+        MIL << "Checking if source cache exists in "<< _cache_dir << std::endl;
         bool exists = true;
 	
         bool data_exists = PathInfo(_cache_dir + "DATA").isExist();
