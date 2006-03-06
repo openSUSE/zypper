@@ -106,18 +106,6 @@ namespace zypp
     str << (obj.isSeen() ? "@" :
 	( obj.isImpossible() ? "X" : "" ) );
 
-    if (obj == ResStatus::toBeInstalled)		str << "<tobeinstalled>";
-    if (obj == ResStatus::toBeInstalledSoft)		str << "<tobesoftinstalled>";
-    if (obj == ResStatus::toBeUninstalled)		str << "<tobeuninstalled>";
-    if (obj == ResStatus::toBeUninstalledDueToUnlink)	str << "<tobeuninstalledduetounlink>";
-    if (obj == ResStatus::toBeUninstalledDueToObsolete)	str << "<tobeuninstalledduetoobsolete>";
-    if (obj == ResStatus::toBeUninstalledDueToUpgrade)	str << "<tobeuninstalledduetoupgrade>";
-    if (obj == ResStatus::satisfied)			str << "<satisfied>";			// uninstalled, satisfied
-    if (obj == ResStatus::complete)			str << "<complete>";			// installed, satisfied
-    if (obj == ResStatus::unneeded)			str << "<uneeded>";			// uninstalled, unneeded
-    if (obj == ResStatus::needed)			str << "<needed>";			// uninstalled, incomplete
-    if (obj == ResStatus::incomplete)			str << "<incomplete>";			// installed, incomplete
-
     return str;
   }
 
