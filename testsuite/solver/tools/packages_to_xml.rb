@@ -248,7 +248,8 @@ class Parser
 								if packageFileExist then
 									# Searching for matched packages
 									packageList.each do | packName |
-										writeEntry = true if package.name == packName 
+										fit = packName.index(package.name)
+										writeEntry = true if fit != nil
 									end
 								else
 									writeEntry = true	
@@ -302,7 +303,8 @@ class Parser
 					if File.file?(packageFile) then
 						# Searching for matched packages
 						packageList.each do | packName |
-							writeEntry = true if package.name == packName 
+							fit = packName.index(package.name)
+							writeEntry = true if fit != nil
 						end
 					else
 						writeEntry = true	
