@@ -23,6 +23,9 @@ int main(void)
                      zypp::url::ViewOptions::WITH_PATH_PARAMS);
   std::cout << "URL3: " << str << std::endl << std::endl;
 
+  str = url.asCompleteString();
+  std::cout << "URL4: " << str << std::endl << std::endl;
+
 	return 0;
 }
 
