@@ -1,5 +1,0 @@
-load_lib "zmd_init.exp"
-
-proc zmd_exit {} {}
-proc zmd_version {} {}
-
