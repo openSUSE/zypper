@@ -149,7 +149,7 @@ namespace zypp
   { _pimpl->restoreState(); }
 
   bool PoolItem_Ref::sameState() const
-  { _pimpl->sameState(); }
+  { return _pimpl->sameState(); }
 
   /******************************************************************
    **

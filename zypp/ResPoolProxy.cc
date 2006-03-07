@@ -246,7 +246,7 @@ namespace zypp
   { _pimpl->restoreState( kind_r ); }
 
   bool ResPoolProxy::diffState( const ResObject::Kind & kind_r ) const
-  { _pimpl->diffState( kind_r ); }
+  { return _pimpl->diffState( kind_r ); }
 
   /******************************************************************
    **

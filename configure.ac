@@ -55,6 +55,7 @@ AC_SUBST(LIBZYPP_VERSION_INFO)
 
 dnl ==================================================
 
+CXXFLAGS="${CXXFLAGS} -g -O2 -Wall -Wformat"
 AC_SYS_LARGEFILE
 
 dnl ==================================================
