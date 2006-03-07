@@ -727,7 +727,7 @@ show_pool( ResPool pool )
 	    || it->status().transacts()				// or transacts
 	    || !it->status().isUndetermined())			// or established status
 	{
-	    MIL << ++count << ": " << *it << endl;
+	    MIL << count << ": " << *it << endl;
 	}
 
     }
