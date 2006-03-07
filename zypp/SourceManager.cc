@@ -62,14 +62,14 @@ namespace zypp
   //
   SourceManager::~SourceManager()
   {}
-  
+
   void SourceManager::reset()
   {
     MIL << "Cleaning up all sources" << endl;
-    
+
     _sources.clear();
     _deleted_sources.clear();
-    
+
     // don't change the _next_id to avoid using
     // the same ID for dangling old sources and newly introduced sources
   }
@@ -145,41 +145,41 @@ namespace zypp
   std::list<unsigned int> SourceManager::enabledSources() const
   {
     std::list<unsigned int> res;
-    
+
     for( SourceMap::const_iterator it = _sources.begin(); it != _sources.end(); it++)
     {
 	if( it->second->enabled() )
 	    res.push_back(it->first);
     }
-    
+
     return res;
   }
 
   std::list<unsigned int> SourceManager::allSources() const
   {
     std::list<unsigned int> res;
-    
+
     for( SourceMap::const_iterator it = _sources.begin(); it != _sources.end(); it++)
     {
 	res.push_back(it->first);
     }
-    
+
     return res;
   }
 
   void SourceManager::store(Pathname root_r, bool metadata_cache )
   {
-    storage::PersistentStorage store;    
+    storage::PersistentStorage store;
     store.init( root_r );
-    
+
 
     // make sure to create the source metadata cache
     if( metadata_cache )
     {
 	// make sure our root exists
-	
+
 	filesystem::assert_dir ( root_r.asString() + "/" + getZYpp()->homePath().asString() );
-	
+
 	path topdir = path(root_r.asString()) / path(ZYPP_METADATA_PREFIX);
 	if (!exists(topdir))
       	    create_directory(topdir);
@@ -187,7 +187,7 @@ namespace zypp
     }
 
     unsigned id = 0;
-    
+
     // first, gather all known cache dirs
     std::set<std::string> known_caches;
     for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
@@ -195,50 +195,50 @@ namespace zypp
 	if( ! it->second->cacheDir().empty() )
 	    known_caches.insert( it->second->cacheDir().asString() );
     }
-    
+
     for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
     {
 	storage::PersistentStorage::SourceData descr;
-	
+
 	descr.url = it->second->url().asCompleteString();
         descr.enabled = it->second->enabled();
         descr.alias = it->second->alias();
 	descr.autorefresh = it->second->autorefresh();
 	descr.type = it->second->type();
 	descr.product_dir = it->second->path().asString();
-	
+
 	descr.cache_dir = it->second->cacheDir().asString();
-	
+
 	if( metadata_cache && it->second->cacheDir().empty() )
 	{
-	    if( descr.cache_dir.empty() ) 
+	    if( descr.cache_dir.empty() )
 	    {
 		// generate the new cache name
-		
+
 		std::string cache = ZYPP_METADATA_PREFIX + str::numstring(id); // we should strip root here
 
 		// generate a new cache dir
-		while( id < 1000 && known_caches.find( cache ) != known_caches.end() ) 
+		while( id < 1000 && known_caches.find( cache ) != known_caches.end() )
 		{
 		    ++id;
-		    cache = ZYPP_METADATA_PREFIX + str::numstring(id); // we should strip root here		
+		    cache = ZYPP_METADATA_PREFIX + str::numstring(id); // we should strip root here
 		}
-		
+
 		if ( id == 1000 )
 		{
 		    ERR << "Unable to generate a new cache directory name" << endl;
 		    metadata_cache = false;
 		    continue;
 		}
-		
+
 		descr.cache_dir = cache;
-		
+
 		known_caches.insert( cache );
 	    }
-	    
+
 	    filesystem::assert_dir ( root_r.asString() + descr.cache_dir );
-	    
-	    MIL << "Storing metadata to (" << root_r.asString() << ")/" << descr.cache_dir << endl;    
+
+	    MIL << "Storing metadata to (" << root_r.asString() << ")/" << descr.cache_dir << endl;
 
 	    try {
 		it->second->storeMetadata( root_r.asString() + descr.cache_dir );
@@ -257,10 +257,13 @@ namespace zypp
 	MIL << "Deleting source " << it->second << " from persistent store" << endl;
 	store.deleteSource( it->second->alias() );
     }
-    
+
     _deleted_sources.clear();
   }
 
+  /** \todo Broken design: either use return value or Exception to
+  * indicate errors, not both.
+  */
   bool SourceManager::restore(Pathname root_r, bool use_caches )
   {
     if (! _sources.empty() )
@@ -268,20 +271,20 @@ namespace zypp
 
     FailedSourcesRestoreException report;
 
-    storage::PersistentStorage store;    
+    storage::PersistentStorage store;
     store.init( root_r );
-    
+
     std::list<storage::PersistentStorage::SourceData> new_sources = store.storedSources();
-    
+
     MIL << "Found sources: " << new_sources.size() << endl;
 
     for( std::list<storage::PersistentStorage::SourceData>::iterator it = new_sources.begin();
 	it != new_sources.end(); ++it)
     {
       MIL << "Restoring source: url:[" << it->url << "] product_dir:[" << it->product_dir << "] alias:[" << it->alias << "] cache_dir:[" << it->cache_dir << "]" << endl;
-	
+
 	unsigned id = 0;
-	
+
 	try {
 	    id = addSource(it->url, it->product_dir, it->alias, it->cache_dir);
 	}
@@ -293,7 +296,7 @@ namespace zypp
 	DBG << "Added source as id " << id << endl;
 	// should not throw, we've just created the source
 	Source_Ref src = findSource( id );
-	    
+
 	if ( it->enabled ) {
 	    DBG << "enable source" << endl;
 	    src.enable();
@@ -304,11 +307,12 @@ namespace zypp
 	}
 	src.setAutorefresh ( it->autorefresh );
     }
-    
-    if( !report.empty() ) 
+
+    if( !report.empty() )
     {
 	ZYPP_THROW(report);
     }
+    return true;
   }
 
   /******************************************************************
@@ -368,7 +372,7 @@ namespace zypp
 	return _summary.empty();
   }
 
-  void FailedSourcesRestoreException::append( std::string source, const Exception& expt) 
+  void FailedSourcesRestoreException::append( std::string source, const Exception& expt)
   {
 	_summary = _summary + "\n" + source + ": " + expt.asString();
 	_translatedSummary = _translatedSummary + "\n" + source + ": " + expt.asUserString();
