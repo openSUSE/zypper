@@ -370,7 +370,7 @@ namespace zypp
       }
 
       if( abort ) 
-        ZYPP_THROW( Exception( N_("Target commit aborted by user.") ) );
+        ZYPP_THROW( TargetAbortedException( N_("Target commit aborted by user.") ) );
 
       return remaining;
     }

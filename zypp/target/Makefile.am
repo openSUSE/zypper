@@ -11,7 +11,8 @@ targetincludedir = $(pkgincludedir)/target
 
 targetinclude_HEADERS =			\
 	TargetImpl.h			\
-	TargetCallbackReceiver.h
+	TargetCallbackReceiver.h	\
+	TargetException.h
 
 ## ##################################################
 
@@ -21,7 +22,8 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_target.la
 
 lib@PACKAGE@_target_la_SOURCES =	\
 	TargetImpl.cc			\
-	TargetCallbackReceiver.cc
+	TargetCallbackReceiver.cc	\
+	TargetException.cc
 
 lib@PACKAGE@_target_la_LDFLAGS = @LIBZYPP_VERSION_INFO@
 

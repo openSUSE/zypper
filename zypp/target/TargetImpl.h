@@ -27,6 +27,7 @@
 #include "zypp/Target.h"
 #include "zypp/target/rpm/RpmDb.h"
 #include "zypp/target/store/PersistentStorage.h"
+#include "zypp/target/TargetException.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
