@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+  Bug 155368
+-->
+<test>
+<setup>
+  <system file="bug155368-system.xml"/>
+  <channel name="packages" file="beta6-packages.xml"/>
+  <channel name="selections" file="beta6-selections.xml"/>
+  <mediaid/>
+</setup>
+<trial>
+<uninstall package="OpenOffice_org"/>
+<reportproblems/>
+</trial>
+</test>
