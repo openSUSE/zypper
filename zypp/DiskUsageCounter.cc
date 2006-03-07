@@ -17,7 +17,7 @@
 #include <fstream>
 
 #include <sys/statvfs.h>
-       
+
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -48,32 +48,75 @@ namespace zypp
     {
       bool inst = it->status().isToBeInstalled();
       bool rem = it->status().isToBeUninstalled();
+      bool installed = it->status().isInstalled();
 
       // if the package is not selected for installation or removing
       // it can't affect disk usage
-      if (inst || rem)
+      if ((inst && !installed) || (rem && installed))
       {
 	Package::constPtr pkg = boost::dynamic_pointer_cast<const Package>( it->resolvable() );
 	DiskUsage du = pkg->diskusage();
 
-	// iterate trough all mount points, add usage to each directory
-	// directory tree must be processed from leaves to the root directory
-	// so iterate in reverse order so e.g. /usr is used before /
-	for (MountPointSet::reverse_iterator mpit = result.rbegin();
-	  mpit != result.rend();
-	  mpit++)
-	{
-	  // get usage for the mount point
-	  DiskUsage::Entry entry = du.extract(mpit->dir);
+	bool found_installed = false;
 
-	  // add or subtract it to the current value
-	  if (inst)
+	if (du.size() == 0 || inst)
+	{
+	    // disk usage is unknown for already installed packages
+	    // find the same package from any installation source
+	    std::string name = (*it)->name();
+
+	    for (ResPool::byName_iterator nameit = pool.byNameBegin(name);
+	      nameit != pool.byNameEnd(name);
+	      ++nameit)
+	    {
+		// is version and architecture same?
+		if (isKind<Package>(nameit->resolvable()) && (*it)->edition() == (*nameit)->edition() && (*it)->arch() == (*nameit)->arch())
+		{
+		    if (inst)
+		    {
+			if (nameit->status().isInstalled())
+			{
+			    found_installed = true;
+			    DBG << name << '-' << (*nameit)->edition() << ": found already installed package" << std::endl;
+			}
+		    }
+		    else
+		    {
+			// found the same package
+			Package::constPtr pkg_from_source = boost::dynamic_pointer_cast<const Package>( nameit->resolvable() );
+			du = pkg_from_source->diskusage();
+			if (du.size() > 0)
+			{
+			    DBG << name << '-' << (*nameit)->edition() << ": using DiskUsage from another Package object" << std::endl;
+			    break;
+			}
+		    }
+		}
+	    }
+	}
+
+
+	if (!inst || !found_installed)
+	{
+	  // iterate trough all mount points, add usage to each directory
+	  // directory tree must be processed from leaves to the root directory
+	  // so iterate in reverse order so e.g. /usr is used before /
+	  for (MountPointSet::reverse_iterator mpit = result.rbegin();
+	    mpit != result.rend();
+	    mpit++)
 	  {
-	      mpit->pkg_size += entry._size;
-	  }
-	  else // the package will be uninstalled
-	  {
-	      mpit->pkg_size -= entry._size;
+	    // get usage for the mount point
+	    DiskUsage::Entry entry = du.extract(mpit->dir);
+
+	    // add or subtract it to the current value
+	    if (inst)
+	    {
+		mpit->pkg_size += entry._size;
+	    }
+	    else // the package will be uninstalled
+	    {
+		mpit->pkg_size -= entry._size;
+	    }
 	  }
 	}
       }
