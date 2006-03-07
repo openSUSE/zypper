@@ -233,7 +233,7 @@ struct StorageTargetTest
     return 0;
   }
   
-  void test_read_known_sources()
+  void read_known_sources_test()
   {
     clean();
     unpackDatabase("db.tar.gz");
@@ -291,6 +291,13 @@ struct StorageTargetTest
     return 0;
   }
   
+  int sles10_machcd_source_read_test()
+  {
+    initSource(Url("dir:/mounts/machcd2/kukuk/sles10-sp-i386/CD1"));
+    ResStore store = readSourceResolvables();
+    return 0;
+  }
+    
   int read_test()
   {
     MIL << "===[START: read_test()]==========================================" << endl;
@@ -341,6 +348,13 @@ struct StorageTargetTest
   
 };
 
+#define TEST_FUNC_NAME(a) a##_test()
+
+#define RUN_TEST(name) \
+  do { \
+    StorageTargetTest test("./"); \
+    test.TEST_FUNC_NAME(name); \
+  } while (false)
 
 int nld10TestCase()
 {
@@ -367,24 +381,18 @@ int nld10TestCase()
   return 0;
 }
 
+
+
 int main()
 { 
   try
   {
-    StorageTargetTest test1("./");
-    test1.storage_read_test();
-  
-    StorageTargetTest test2("./");
-    test2.read_source_cache_test();
-  
-    StorageTargetTest test3("./");
-    test3.test_read_known_sources();
-    
-    StorageTargetTest test4("./");
-    test4.named_flags_test();
-    
-    StorageTargetTest test5("./");
-    test5.publickey_test();
+    RUN_TEST(sles10_machcd_source_read);
+    RUN_TEST(storage_read);
+    RUN_TEST(read_source_cache);
+    RUN_TEST(read_known_sources);
+    RUN_TEST(named_flags);
+    RUN_TEST(publickey);
     
     MIL << "store testsuite passed" << std::endl;
     return 0;
