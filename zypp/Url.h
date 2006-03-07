@@ -286,6 +286,18 @@ namespace zypp
     std::string
     asString(const ViewOptions &opts) const;
 
+    /**
+     * Returns a complete string representation of the Url object.
+     *
+     * This function ignores the configuration of the view options
+     * in the current object (see setViewOption()) and forces to
+     * return an string with all URL components included.
+     *
+     * \return A complete string representation of the Url object.
+     */
+    std::string
+    asCompleteString() const;
+
 
     // -----------------
     /**

@@ -428,6 +428,26 @@ namespace zypp
 
   // -----------------------------------------------------------------
   std::string
+  Url::asCompleteString() const
+  {
+    // make sure, all url components are included;
+    // regardless of the current configuration...
+    ViewOptions opts(getViewOptions() +
+                     ViewOption::WITH_SCHEME +
+                     ViewOption::WITH_USERNAME +
+                     ViewOption::WITH_PASSWORD +
+                     ViewOption::WITH_HOST +
+                     ViewOption::WITH_PORT +
+                     ViewOption::WITH_PATH_NAME +
+                     ViewOption::WITH_PATH_PARAMS +
+                     ViewOption::WITH_QUERY_STR +
+                     ViewOption::WITH_FRAGMENT);
+    return m_impl->asString(opts);
+  }
+
+
+  // -----------------------------------------------------------------
+  std::string
   Url::asString(const ViewOptions &opts) const
   {
     return m_impl->asString(opts);
