@@ -200,7 +200,7 @@ namespace zypp
     {
 	storage::PersistentStorage::SourceData descr;
 	
-	descr.url = it->second->url().asString();
+	descr.url = it->second->url().asCompleteString();
         descr.enabled = it->second->enabled();
         descr.alias = it->second->alias();
 	descr.autorefresh = it->second->autorefresh();
