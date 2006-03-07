@@ -114,12 +114,12 @@ namespace zypp
       DBG << "Rewriting url " << url_r << endl;
 
       std::string pathname = url_r.getPathName();
-      boost::regex e("^(.*)[0-9]+(/?)$");
+      boost::regex e("^(.*(cd|dvd))([0-9]+)(/?)$", boost::regex::icase);
       boost::smatch what;
       if(boost::regex_match(pathname, what, e, boost::match_extra))
       {
 	std::string base = what[1];
-	pathname = base + str::numstring(medianr) + what[2];
+	pathname = base + str::numstring(medianr) + what[4];
 	Url url = url_r;
 	url.setPathName (pathname);
 
