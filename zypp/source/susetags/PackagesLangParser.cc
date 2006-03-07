@@ -73,7 +73,7 @@ namespace zypp
 	    PkgContent::const_iterator it = _content.find(_nvrad);
 	    if (it == _content.end())
             {
-              WAR << words[0] << " " << words[1] << " " << words[2] << "  " << Arch(words[3]) << " has a description   in " << _file_r << " but can't find it in package list (" << _content.size() << " packages)" << endl;
+              // package not found in the master package list
 		_current = NULL;
                 _notfound.insert(_nvrad);
 	    }
@@ -89,8 +89,6 @@ namespace zypp
           {
 	    if (_current != NULL)
 	      _current->_summary = TranslatedText( stag_r.value, _lang);
-            else
-              ERR << "Package [" << _nvrad.name << " " << _nvrad.edition << " " << _nvrad.arch << "] was not found in package list. Skipping " << stag_r.name << " tag" << endl;
           }
         }
 
@@ -101,8 +99,6 @@ namespace zypp
             {
 	      if ( _current != NULL )
                  _current->_description = TranslatedText (mtag_r.values, _lang);
-	      else
-                ERR << "Package [" << _nvrad.name << " " << _nvrad.edition << " " << _nvrad.arch << "] was not found in package list. Skipping " << mtag_r.name << " tag" << endl;
             }
         }
       };
