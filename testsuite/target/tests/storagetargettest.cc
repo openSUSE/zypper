@@ -18,6 +18,8 @@
 #include "zypp/target/store/PersistentStorage.h"
 #include "zypp/target/store/XMLFilesBackend.h"
 
+#include "zypp/parser/yum/YUMParser.h"
+
 #include "zypp/base/Logger.h"
 
 #include "zypp/SourceFactory.h"
@@ -298,6 +300,19 @@ struct StorageTargetTest
     return 0;
   }
     
+  //SUSE-Linux-10.1-beta6-x86_64-CD1
+  int sl_101_beta6_x86_64_source_read_test()
+  {
+    clean();
+    //initSource(Url("ftp://cml.suse.cz/netboot/find/SUSE-Linux-10.1-beta6-x86_64-CD1"));
+    unpackDatabase("SUSE-Linux-10.1-beta6-x86_64-source-metadata-cache.tar.gz");
+    initSourceWithCache(Url("dir:/fake-not-available-dir"));
+    
+    ResStore store = readSourceResolvables();
+    clean();
+    return 0;
+  }
+  
   int read_test()
   {
     MIL << "===[START: read_test()]==========================================" << endl;
@@ -346,6 +361,20 @@ struct StorageTargetTest
     
   }
   
+  int parse_store_with_yum_test()
+  {
+    clean();
+    unpackDatabase("db.tar.gz");
+    std::ifstream res_file("var/lib/zypp/db/selections/d9b9b61057cdbcf9cf5c8f21408e3db5");
+    YUMPatternParser iter(res_file,"");
+    for (; !iter.atEnd(); ++iter)
+    {
+      //YUMPatternData data = **iter;
+      //break;
+    }
+    clean();
+  }
+  
 };
 
 #define TEST_FUNC_NAME(a) a##_test()
@@ -356,43 +385,22 @@ struct StorageTargetTest
     test.TEST_FUNC_NAME(name); \
   } while (false)
 
-int nld10TestCase()
-{
-  SourceFactory _f;
-  Pathname p = "/";
-  Pathname root("."); 
-  Url url = Url("dir:/mounts/dist/install/SLP/NLD-10-Beta4/i386/CD1");
-  Source_Ref s = _f.createFrom( url, p, "testsource");
-  ResStore store = s.resolvables();
-  MIL << "done reading source type " << s.type() << ": " << store <<  std::endl;
-  //Pathname root("."); 
-  XMLFilesBackend backend(root);
-
-  DBG << "Writing objects..." << std::endl;
-  for (ResStore::const_iterator it = store.begin(); it != store.end(); it++)
-  {
-    DBG << **it << endl;
-    backend.storeObject(*it);
-  }
-  MIL << "Wrote " << store.size() << " objects" << std::endl;
-  
-  std::list<ResObject::Ptr> objs = backend.storedObjects(ResTraits<zypp::Selection>::kind);
-  MIL << "Read " << objs.size() << " patches" << std::endl;
-  return 0;
-}
-
-
-
 int main()
 { 
   try
   {
+    /*
     RUN_TEST(sles10_machcd_source_read);
     RUN_TEST(storage_read);
     RUN_TEST(read_source_cache);
     RUN_TEST(read_known_sources);
     RUN_TEST(named_flags);
     RUN_TEST(publickey);
+    */
+    
+    //RUN_TEST(parse_store_with_yum);
+    
+    RUN_TEST(sl_101_beta6_x86_64_source_read);
     
     MIL << "store testsuite passed" << std::endl;
     return 0;
