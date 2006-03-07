@@ -228,11 +228,16 @@ ResolverContext::install (PoolItem_Ref item, bool is_soft, int other_penalty)
 	return true;
     }
 
-    if (isParallelInstall (item)) {
-	ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INSTALL_PARALLEL, item, RESOLVER_INFO_PRIORITY_VERBOSE);
-	misc_info->setOtherPoolItem (getParallelInstall (item));
-	addError (misc_info);
+    // if it's exactly the same package, ignore this request silently.
+
+    if (isParallelInstall( item )) {
+	return true;
+#if 0
+	ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc( RESOLVER_INFO_TYPE_INSTALL_PARALLEL, item, RESOLVER_INFO_PRIORITY_VERBOSE );
+	misc_info->setOtherPoolItem( getParallelInstall( item ) );
+	addError( misc_info );
 	return false;
+#endif
     }
 
     if (is_soft)
@@ -1478,6 +1483,7 @@ dup_name_check_cb (PoolItem_Ref item, const ResStatus & status, void *data)
     }
 }
 
+
 bool
 ResolverContext::isParallelInstall (PoolItem_Ref item) const
 {
@@ -1501,6 +1507,7 @@ ResolverContext::isParallelInstall (PoolItem_Ref item) const
     return info.flag;
 }
 
+
 PoolItem_Ref
 ResolverContext::getParallelInstall (PoolItem_Ref item) const
 {
@@ -1508,7 +1515,7 @@ ResolverContext::getParallelInstall (PoolItem_Ref item) const
 
     info.other = item;
     info.flag = false;
-    foreachMarked (dup_name_check_cb, (void *)&info);
+    foreachMarked( dup_name_check_cb, (void *)&info );
     return info.foundItem;
 }
 
