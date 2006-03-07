@@ -1,0 +1,17 @@
+>!> Uninstalling OpenOffice_org
+>!> 1 problems found:
+>!> Problem:
+>!> OpenOffice_org-gnome has missing dependencies
+>!> There are no alternative installed providers of libdbtools680li.so for OpenOffice_org-gnome-2.0.0.99.149-3.i586
+>!>    Solution:
+>!>       keep OpenOffice_org
+>!>       keep OpenOffice_org-2.0.0.99.149-3.i586
+>!>    Solution:
+>!>       delete OpenOffice_org-gnome
+>!>       delete OpenOffice_org-gnome-2.0.0.99.149-3.i586
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
