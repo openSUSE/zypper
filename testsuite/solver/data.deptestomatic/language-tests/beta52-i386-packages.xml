@@ -28951,6 +28951,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:af)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-af' op='=' version='0.50.0' />
   </provides>
@@ -28971,6 +28972,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:br)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-br' op='=' version='0.50.2' />
   </provides>
@@ -28991,6 +28993,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:ca)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-ca' op='=' version='0.50.2' />
   </provides>
@@ -29011,6 +29014,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:cy)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-cy' op='=' version='0.50.3' />
   </provides>
@@ -29031,6 +29035,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:da)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-da' op='=' version='0.50.1' />
   </provides>
@@ -29051,6 +29056,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:de)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-de' op='=' version='0.50.2' />
   </provides>
@@ -29071,6 +29077,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:en)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-en' op='=' version='6.0' />
   </provides>
@@ -29091,6 +29098,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:es)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-es' op='=' version='0.50.2' />
   </provides>
@@ -29111,6 +29119,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:fo)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-fo' op='=' version='0.51.0' />
   </provides>
@@ -29131,6 +29140,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:ga)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-ga' op='=' version='0.50.10' />
   </provides>
@@ -29151,6 +29161,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:hr)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-hr' op='=' version='0.51.0' />
   </provides>
@@ -29171,6 +29182,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:is)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-is' op='=' version='0.51.10' />
   </provides>
@@ -58507,6 +58519,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:cs)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-cs' op='=' version='0.51.0' />
   </provides>
@@ -58527,8 +58540,30 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:fr)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-fr' op='=' version='0.50.3' />
+  </provides>
+</package>
+<package>
+  <name>aspell-fr_FR</name>
+  <section>system</section>
+  <location>3</location>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>0.50.3</version>
+      <release>341</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='aspell' op='&gt;=' version='0.50' />
+  </requires>
+  <provides>
+    <dep name='locale(aspell:fr_FR)' />
+    <dep name='aspell_dictionary' />
+    <dep name='aspell-fr_FR' op='=' version='0.50.3' />
   </provides>
 </package>
 <package>
@@ -58547,6 +58582,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:it)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-it' op='=' version='2.2_20050523' />
   </provides>
@@ -58567,6 +58603,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:nb)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-no' />
     <dep name='aspell-nb' op='=' version='0.50.10' />
@@ -58591,6 +58628,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:pt)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-pt' op='=' version='0.50.2' />
   </provides>
@@ -58611,6 +58649,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:ro)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-ro' op='=' version='0.50.2' />
   </provides>
@@ -58631,6 +58670,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:sk)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-sk' op='=' version='0.52' />
   </provides>
@@ -58651,6 +58691,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:sv)' />
     <dep name='aspell-se' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-sv' op='=' version='0.51.0' />
@@ -58675,6 +58716,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:uk)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-uk' op='=' version='0.51.0' />
   </provides>
@@ -69991,6 +70033,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:eo)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-eo' op='=' version='0.50.2' />
   </provides>
@@ -92303,6 +92346,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:bg)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-bg' op='=' version='0.50.0' />
   </provides>
@@ -92355,6 +92399,7 @@
     <dep name='aspell' op='&gt;=' version='0.50' />
   </requires>
   <provides>
+    <dep name='locale(aspell:nn)' />
     <dep name='aspell_dictionary' />
     <dep name='aspell-nn' op='=' version='0.50.11' />
   </provides>
