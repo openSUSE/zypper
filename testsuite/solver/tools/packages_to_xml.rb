@@ -13,6 +13,7 @@
 #  actually writing it to a file, parsing a 6MB 'packages'
 #  file produced a too large in-memory xml tree :-(
 #
+require 'fileutils'
 
 class Dependency
 	attr_accessor :name, :op, :epoch, :version, :release, :pre
@@ -211,9 +212,18 @@ class Parser
 	# return number of packages
 	#
 
-	def parse_packages( filename, stream )
+	def parse_packages( filename, stream, packageFile )
 		pcount = 0
 		package = nil
+		packageList = []
+		packageFileExist = false
+		
+		if File.file?(packageFile) then
+			IO.foreach(packageFile) {|line| 
+				line = line.rstrip
+				packageList.push(line) }
+			packageFileExist = true
+		end
 
 		stream.puts "<channel><subchannel>"
 
@@ -233,7 +243,20 @@ class Parser
 					case key
 						when "=Pkg"
 							pcount += 1
-							package.save unless package.nil?
+							if !package.nil?  then
+								writeEntry = false
+								if packageFileExist then
+									# Searching for matched packages
+									packageList.each do | packName |
+										writeEntry = true if package.name == packName 
+									end
+								else
+									writeEntry = true	
+								end
+								#saving
+								package.save unless !writeEntry
+							end
+
 							package = Package.new stream
 							skip = false;
 							package.name,package.epoch,package.version,package.release,package.architecture = parse_NEVRA value
@@ -274,7 +297,19 @@ class Parser
 
 					end
 				end # loop
-				package.save unless package.nil?
+				if !package.nil? then
+					writeEntry = false
+					if File.file?(packageFile) then
+						# Searching for matched packages
+						packageList.each do | packName |
+							writeEntry = true if package.name == packName 
+						end
+					else
+						writeEntry = true	
+					end
+					#saving
+					package.save unless !writeEntry
+				end
 			end # File.open()
 		rescue
 			STDERR.puts "Ooops!"
@@ -288,11 +323,17 @@ end
 
 
 def usage
-	STDERR.puts "Usage: packages_to_xml.rb <packages-file>"
+	STDERR.puts "Usage: packages_to_xml.rb <packages-file> [<package-list-file>]"
+	STDERR.puts "<package-list-file> is a file containing package names for which <packages-file>"
+	STDERR.puts "will be scanned."
 	exit 1
 end
 
-usage unless ARGV.size == 1
+usage unless ARGV.size == 1 || ARGV.size == 2
 
 parser = Parser.new
-parser.parse_packages ARGV[0], STDOUT
+if ARGV.size == 1 then
+	parser.parse_packages ARGV[0], STDOUT, ""
+else
+	parser.parse_packages ARGV[0], STDOUT, ARGV[1]
+end
