@@ -70,7 +70,7 @@ namespace zypp
     Pathname path = src.path();
     std::string alias = src.alias();
     std::ofstream data((cache_dir + "source_info").asString().c_str());
-    data << url.asString() << endl;
+    data << url.asCompleteString() << endl;
     data << path.asString() << endl;
     data << alias << endl;
   }
