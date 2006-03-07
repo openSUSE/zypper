@@ -27,20 +27,18 @@ namespace zypp
      * The ctor creates a NumericId from some static counter.
      *
      * \code
-     * struct Foo : public base::ProvideNumericId<Foo>
+     * struct Foo : public base::ProvideNumericId<Foo,unsigned>
      * {};
      * Foo foo;
      * foo.numericId(); // returns foo's NumericId.
      * \endcode
     */
-    template<class _Derived>
+    template<class _Derived, class _NumericIdType>
       struct ProvideNumericId
       {
       public:
-        typedef unsigned long NumericId;
-
         /** \return The objects numeric Id. */
-        NumericId numericId() const
+        _NumericIdType numericId() const
         { return _numericId; }
 
       protected:
@@ -60,13 +58,13 @@ namespace zypp
         {}
       private:
         /**  */
-        static NumericId nextId()
+        static _NumericIdType nextId()
         {
-          static NumericId _staticCounter = 0;
+          static _NumericIdType _staticCounter = 0;
           return ++_staticCounter;
         }
         /**  */
-        const NumericId _numericId;
+        const _NumericIdType _numericId;
       };
     ///////////////////////////////////////////////////////////////////
 
