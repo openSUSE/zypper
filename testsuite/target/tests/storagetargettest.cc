@@ -2,7 +2,6 @@
 #include <fstream>
 #include <sstream>
 #include <streambuf>
- #include <ctime>
 
 #include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
 #include "boost/filesystem/fstream.hpp"    // ditto
@@ -38,6 +37,8 @@
 #include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
 #include "boost/filesystem/fstream.hpp"    // ditto
 
+#include "Benchmark.h"
+
 using namespace zypp::detail;
 using namespace std;
 using namespace zypp;
@@ -60,25 +61,6 @@ static std::string dump( const CapSet &caps )
   }
   return out.str();
 }
-
-
-struct Benchmark
-{
-  clock_t _time_start;
-  clock_t _curr_time;
-  std::string _name;
-  Benchmark( const std::string &name)
-  {
-    _name = name;
-    _time_start = clock();
-  }
-  
-  ~Benchmark()
-  {
-    _curr_time = clock() - _time_start;           // time in micro seconds
-    MIL << _name << " completed in " << (double) _curr_time / CLOCKS_PER_SEC << " seconds" << std::endl;
-  }
-};
 
 struct StorageTargetTest
 {
