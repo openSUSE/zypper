@@ -836,6 +836,11 @@ transactCaps( const ResPool & pool, const CapSet & caps, bool install, bool soft
 bool
 Resolver::transactResObject( ResObject::constPtr robj, bool install)
 {
+    if (robj == NULL) {
+	ERR << "NULL ResObject" << endl;
+    }
+    DBG << "transactResObject(" << *robj << ", " << (install?"install":"remove") << ")" << endl;
+
     transactCaps( _pool, robj->dep( Dep::RECOMMENDS ), install, true );
     return transactCaps( _pool, robj->dep( Dep::REQUIRES ), install, false );
 }
