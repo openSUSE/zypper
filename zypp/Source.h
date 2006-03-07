@@ -16,7 +16,7 @@
 #include <string>
 
 #include "zypp/base/PtrTypes.h"
-#include "zypp/base/Logger.h"
+#include "zypp/base/SafeBool.h"
 
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
@@ -42,7 +42,7 @@ namespace zypp
    * \note Source is a reference to the implementation. No COW
    * is performed.
   */
-  class Source_Ref
+  class Source_Ref : public base::SafeBool<Source_Ref>
   {
     friend std::ostream & operator<<( std::ostream & str, const Source_Ref & obj );
     friend bool operator==( const Source_Ref & lhs, const Source_Ref & rhs );
@@ -63,6 +63,16 @@ namespace zypp
      * \todo provide a _constRef
     */
     static const Source_Ref noSource;
+
+    /** Validate Source_Ref in a boolean context via \ref SafeBool. */
+    bool boolTest() const
+    { return *this != noSource; }
+
+  public:
+    typedef unsigned long NumericId;
+
+    /** Runtime unique numeric Source Id. */
+    NumericId numericId() const;
 
   public:
 
@@ -92,7 +102,7 @@ namespace zypp
     void storeMetadata(const Pathname & cache_dir_r);
 
     std::string alias (void) const;
-    
+
     // string description of the source type, e.g. "YUM" or "UnitedLinux"
     std::string type (void) const;
 
@@ -111,7 +121,7 @@ namespace zypp
     void setPriorityUnsubscribed (unsigned p);
     const Pathname & cacheDir (void) const;
     const std::list<Pathname> publicKeys();
-    
+
     // for ZMD
     std::string zmdName (void) const;
     void setZmdName (const std::string name_r);
@@ -128,7 +138,7 @@ namespace zypp
      * The media must be ready-to-use (in the same form as when passing to SourceImpl constructor)
      */
     void changeMedia(const media::MediaId & media_r, const Pathname & path_r);
-    
+
     /**
      * Redirect the given media to the given URL instead of the standard one.
      */
@@ -151,23 +161,6 @@ namespace zypp
      * Provide a media verifier suitable for the given media number
      */
     media::MediaVerifierRef verifier(unsigned media_nr);
-
-    /** Conversion to bool to allow pointer style tests
-     *  for nonNULL \ref source impl.
-     * \todo fix by providing a safebool basecalss, doing the 'nasty'
-     * things.
-    */
-    // see http://www.c-plusplus.de/forum/viewtopic-var-t-is-113762-and-start-is-0-and-postdays-is-0-and-postorder-is-asc-and-highlight-is-.html
-    // for the glory details
-
-    typedef void (Source_Ref::*unspecified_bool_type)();
-
-    operator unspecified_bool_type() const
-    {
-      if ( *this == noSource )
-        return static_cast<unspecified_bool_type>(0);
-      return &Source_Ref::enable;	// return pointer to a void() function since the typedef is like this
-    }
 
   private:
     /** Factory */

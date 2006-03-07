@@ -51,6 +51,9 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
+  Source_Ref::NumericId Source_Ref::numericId() const
+  { return _pimpl->numericId(); }
+
   const ResStore & Source_Ref::resolvables() const
   { return _pimpl->resolvables(); }
 
@@ -80,7 +83,7 @@ namespace zypp
 
   void Source_Ref::setAutorefresh( const bool enable_r )
   { _pimpl->setAutorefresh( enable_r ); }
-  
+
   void Source_Ref::refresh()
   { _pimpl->refresh() ; }
 
@@ -143,7 +146,7 @@ namespace zypp
 
   void Source_Ref::reattach(const Pathname &attach_point)
   { _pimpl->reattach(attach_point); }
-  
+
   media::MediaVerifierRef Source_Ref::verifier(unsigned media_nr)
   { return _pimpl->verifier(media_nr); }
 
@@ -155,10 +158,10 @@ namespace zypp
 
   const std::list<Pathname> Source_Ref::publicKeys()
   { return _pimpl->publicKeys(); }
-  
+
   std::string Source_Ref::unique_id (void) const
   { return _pimpl->unique_id(); }
-  
+
   /******************************************************************
    **
    **	FUNCTION NAME : operator<<

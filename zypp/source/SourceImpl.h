@@ -18,10 +18,10 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
+#include "zypp/base/ProvideNumericId.h"
+
 #include "zypp/Source.h"
-
 #include "zypp/ResStore.h"
-
 #include "zypp/Pathname.h"
 #include "zypp/media/MediaManager.h"
 #include "zypp/source/MediaSet.h"
@@ -49,7 +49,9 @@ namespace zypp
      * calls \ref factoryInit to let implementations actually retrieve
      * the metadata.
     */
-    class SourceImpl : public base::ReferenceCounted, private base::NonCopyable
+    class SourceImpl : public base::ReferenceCounted
+                     , public base::ProvideNumericId<SourceImpl,Source_Ref::NumericId>
+                     , private base::NonCopyable
     {
       media::MediaManager media_mgr;
 
@@ -103,7 +105,7 @@ namespace zypp
       const Pathname provideDir(const Pathname & path,
 				const unsigned media_nr = 1,
 				const bool recursive = false);
-      
+
       /**
        * Provide info about a directory
        *
@@ -128,10 +130,10 @@ namespace zypp
 
       const bool autorefresh() const
       { return _autorefresh; }
-      
+
       void setAutorefresh( const bool enable_r )
       { _autorefresh = enable_r; }
-      
+
       void refresh();
 
       virtual void storeMetadata(const Pathname & cache_dir_r);
@@ -199,7 +201,7 @@ namespace zypp
       /** Path to the source on the media */
       Pathname _path;
       /** The source is enabled */
-      bool _enabled;      
+      bool _enabled;
       /** If the source metadata should be autorefreshed */
       bool _autorefresh;
       /** (user defined) alias of the source */
