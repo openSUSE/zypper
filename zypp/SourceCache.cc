@@ -116,7 +116,7 @@ namespace zypp
       std::string path;
       getline(data, url);
       getline(data, path);
-      if (url == url_r.asString() && path == path_r)
+      if (url == url_r.asCompleteString() && path == path_r)
       {
 	if (0 != recursive_rmdir(cache_dir))
 	  ZYPP_THROW(Exception("Cannot delete directory with cached metadata"));
