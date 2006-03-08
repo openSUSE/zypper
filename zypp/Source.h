@@ -66,7 +66,7 @@ namespace zypp
 
     /** Validate Source_Ref in a boolean context via \ref SafeBool. */
     bool boolTest() const
-    { return *this != noSource; }
+    { return _pimpl != noSource._pimpl; }
 
   public:
     typedef unsigned long NumericId;
