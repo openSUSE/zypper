@@ -13,7 +13,7 @@ using namespace zypp::base;
 
 /** Logs Ctor, CopyCtor, Assign and Dtor. */
 template<class _Trace>
-  struct Trace : public ProvideNumericId<_Trace>
+  struct Trace : public ProvideNumericId<_Trace,unsigned>
   {
     Trace()                            { TRACE_TAG; }
     Trace( const Trace & )             { TRACE_TAG; }
