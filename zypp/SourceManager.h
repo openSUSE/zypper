@@ -13,7 +13,6 @@
 #define ZYPP_SOURCEMANAGER_H
 
 #include <iosfwd>
-#include <map>
 #include <list>
 
 #include "zypp/base/ReferenceCounted.h"
@@ -30,7 +29,7 @@ namespace zypp
 
   DEFINE_PTR_TYPE(SourceManager)
 
-  class FailedSourcesRestoreException : public Exception 
+  class FailedSourcesRestoreException : public Exception
   {
     public:
       FailedSourcesRestoreException()
@@ -54,30 +53,38 @@ namespace zypp
   //
   //	CLASS NAME : SourceManager
   //
-  /** Manage a ResObject pool. */
+  /** Provide the known Sources.
+   * \todo make it a resl singleton
+   * \todo throwing findSource is not acceptable, return either
+   * a Source or noSource.
+   * \todo Make restore either void or nonthrowing, but two ways of
+   * error reporting is bad.
+  */
   class SourceManager : public base::ReferenceCounted, private base::NonCopyable
   {
     friend std::ostream & operator<<( std::ostream & str, const SourceManager & obj );
 
 
   public:
+    /** Singleton access */
     static SourceManager_Ptr sourceManager();
 
-  private:
-    /** Default ctor */
-    SourceManager();
   public:
     /** Dtor */
     ~SourceManager();
 
   public:
-  
+    /** Runtime unique numeric Source Id. */
+    typedef Source_Ref::NumericId SourceId;
+
+  public:
+
     /**
      * Reset the manager - discard the sources database,
      * do not store the changes to the persistent store.
      *
      * \throws Exception
-     */    
+     */
     void reset() ;
 
     /**
@@ -88,9 +95,9 @@ namespace zypp
      * metadata caches for the sources.
      *
      * \throws Exception
-     */    
+     */
     void store(Pathname root_r, bool metadata_cache );
-    
+
     /**
      * Restore the sources state to the given path. If the sources
      * database is not empty, it throws an exception
@@ -104,13 +111,13 @@ namespace zypp
      * \throws Exception
      */
     bool restore(Pathname root_r, bool use_caches = true);
-    
+
     /**
      * Find a source with a specified ID
      *
      * \throws Exception
      */
-    Source_Ref findSource(const unsigned id);
+    Source_Ref findSource(SourceId id);
 
     /**
      * Find a source with a specified alias
@@ -118,39 +125,39 @@ namespace zypp
      * \throws Exception
      */
     Source_Ref findSource(const std::string & alias_r);
-    
+
     /**
      * Return the list of the currently enabled sources
      *
      */
-    std::list<unsigned int> enabledSources() const;
+    std::list<SourceId> enabledSources() const;
 
     /**
      * Return ids of all sources
      *
      */
-    std::list<unsigned int> allSources() const;
+    std::list<SourceId> allSources() const;
 
     /**
      * Add a new source
      *
      * \throws Exception
      */
-    unsigned addSource(const Url & url_r, const Pathname & path_r = "/", const std::string & name_r = "", const Pathname & cache_dir_r = "");
+    SourceId addSource(const Url & url_r, const Pathname & path_r = "/", const std::string & name_r = "", const Pathname & cache_dir_r = "");
 
     /**
      * Add a new source
      *
      * \throws Exception
      */
-    unsigned addSource(Source_Ref source_r);
+    SourceId addSource(Source_Ref source_r);
 
     /**
      * Remove an existing source by ID
      *
      * \throws Exception
      */
-    void removeSource(const unsigned id);
+    void removeSource(SourceId id);
 
     /**
      * Remove an existing source by Alias
@@ -172,7 +179,7 @@ namespace zypp
      *
      * \throws Exception
      */
-    void reattachSources(const Pathname &attach_point);
+    void reattachSources(const Pathname & attach_point);
 
     /**
      * Disable all registered sources
@@ -180,18 +187,8 @@ namespace zypp
     void disableAllSources();
 
   private:
-    typedef std::map<unsigned, RW_pointer<Source_Ref> > SourceMap;
-
-    SourceMap _sources;
-    SourceMap _deleted_sources;
-
-    static unsigned _next_id;
-
-  private:
-    /** Singleton */
-    static SourceManager_Ptr _source_manager;
-
-
+    /** Singleton ctor */
+    SourceManager();
   };
   ///////////////////////////////////////////////////////////////////
 
