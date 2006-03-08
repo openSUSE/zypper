@@ -10,5 +10,6 @@ hal_SOURCES = hal.cc
 
 librpmDb_SOURCES = librpmDb.cc
 
-storagetargettest_SOURCES = storagetargettest.cc Benchmark.cc
+storagetargettest_SOURCES = storagetargettest.cc Benchmark.cc Benchmark.h
+
 import_old_sources_test_SOURCES = import_old_sources_test.cc
