@@ -133,7 +133,7 @@ namespace zypp
 	{
 	  _filenames.push_back(it->name);
 	}
-	for (std::list<zypp::parser::yum::PatchRpm>::const_iterator it
+	for (std::list<zypp::parser::yum::YUMPatchRpm>::const_iterator it
 		= parsed.patchRpms.begin();
 	     it != parsed.patchRpms.end();
 	     it++)
@@ -160,7 +160,7 @@ namespace zypp
 	  _patch_rpms.push_back(patch);
 	  
 	}
-	for (std::list<zypp::parser::yum::DeltaRpm>::const_iterator it
+	for (std::list<zypp::parser::yum::YUMDeltaRpm>::const_iterator it
 		= parsed.deltaRpms.begin();
 	     it != parsed.deltaRpms.end();
 	     it++)

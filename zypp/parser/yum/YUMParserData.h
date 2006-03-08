@@ -182,7 +182,7 @@ namespace zypp {
         virtual AtomType atomType() = 0;
       };
 
-      class PlainRpm {
+      class YUMPlainRpm {
       public:
 	std::string arch;
 	std::string filename;
@@ -190,8 +190,8 @@ namespace zypp {
 	std::string md5sum;
 	std::string buildtime;
       };
-#warning duplicate definition, already in zypp/PathRpm.h
-      class PatchRpm {
+
+      class YUMPatchRpm {
       public:
 	std::string arch;
 	std::string filename;
@@ -201,8 +201,7 @@ namespace zypp {
 	std::list<YUMBaseVersion> baseVersions;
       };
 
-#warning duplicate definition, already in zypp/DeltaRpm.h
-      class DeltaRpm {
+      class YUMDeltaRpm {
       public:
 	std::string arch;
 	std::string filename;
@@ -250,9 +249,9 @@ namespace zypp {
         // Change Log
         std::list<ChangelogEntry> changelog;
         // Package Files
-	std::list<PlainRpm> plainRpms;
-	std::list<PatchRpm> patchRpms;
-	std::list<DeltaRpm> deltaRpms;
+	std::list<YUMPlainRpm> plainRpms;
+	std::list<YUMPatchRpm> patchRpms;
+	std::list<YUMDeltaRpm> deltaRpms;
       };
 
       class YUMPatchScript : public YUMPatchAtom {
@@ -459,9 +458,9 @@ namespace zypp {
       std::ostream& operator<<(std::ostream& out, const YUMPatchScript& data);
       std::ostream& operator<<(std::ostream& out, const YUMPatchPackage& data);
       std::ostream& operator<<(std::ostream& out, const YUMBaseVersion& data);
-      std::ostream& operator<<(std::ostream& out, const PlainRpm& data);
-      std::ostream& operator<<(std::ostream& out, const PatchRpm& data);
-      std::ostream& operator<<(std::ostream& out, const DeltaRpm& data);
+      std::ostream& operator<<(std::ostream& out, const YUMPlainRpm& data);
+      std::ostream& operator<<(std::ostream& out, const YUMPatchRpm& data);
+      std::ostream& operator<<(std::ostream& out, const YUMDeltaRpm& data);
 
     } // namespace yum
   } // namespace parser

@@ -267,7 +267,7 @@ XXX << "parseFormatNode(" << name << ")" << endl;
       YUMPatchParser::parsePkgPlainRpmNode(YUMPatchPackage *dataPtr,
       				xmlNodePtr formatNode)
       {
-	PlainRpm plainRpm;
+	YUMPlainRpm plainRpm;
 	plainRpm.arch = _helper.attribute( formatNode, "arch" );
 	plainRpm.filename = _helper.attribute( formatNode, "filename" );
 	plainRpm.downloadsize = _helper.attribute( formatNode, "downloadsize" );
@@ -290,7 +290,7 @@ XXX << "parseFormatNode(" << name << ")" << endl;
       YUMPatchParser::parsePkgPatchRpmNode(YUMPatchPackage *dataPtr,
       				xmlNodePtr formatNode)
       {
-	PatchRpm patchRpm;
+	YUMPatchRpm patchRpm;
 	patchRpm.arch = _helper.attribute( formatNode, "arch" );
 	patchRpm.filename = _helper.attribute( formatNode, "filename" );
 	patchRpm.downloadsize = _helper.attribute( formatNode, "downloadsize" );
@@ -320,7 +320,7 @@ XXX << "parseFormatNode(" << name << ")" << endl;
       YUMPatchParser::parsePkgDeltaRpmNode(YUMPatchPackage *dataPtr,
       				xmlNodePtr formatNode)
       {
-	DeltaRpm deltaRpm;
+	YUMDeltaRpm deltaRpm;
 	deltaRpm.arch = _helper.attribute( formatNode, "arch" );
 	deltaRpm.filename = _helper.attribute( formatNode, "filename" );
 	deltaRpm.downloadsize = _helper.attribute( formatNode, "downloadsize" );

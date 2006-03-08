@@ -573,7 +573,7 @@ namespace zypp {
         return out;
       }
 
-      std::ostream& operator<<(std::ostream& out, const PlainRpm& data)
+      std::ostream& operator<<(std::ostream& out, const YUMPlainRpm& data)
       {
         out << "  Plain RPM:" << endl
           << "    arch: " << data.arch << endl
@@ -584,7 +584,7 @@ namespace zypp {
         return out;
       }
 
-      std::ostream& operator<<(std::ostream& out, const PatchRpm& data)
+      std::ostream& operator<<(std::ostream& out, const YUMPatchRpm& data)
       {
         out << "  Patch RPM:" << endl
           << "    arch: " << data.arch << endl
@@ -596,7 +596,7 @@ namespace zypp {
         return out;
       }
 
-      std::ostream& operator<<(std::ostream& out, const DeltaRpm& data)
+      std::ostream& operator<<(std::ostream& out, const YUMDeltaRpm& data)
       {
         out << "  Delta RPM:" << endl
           << "    arch: " << data.arch << endl
