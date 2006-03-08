@@ -10,7 +10,7 @@
   <mediaid/>
 </setup>
 <trial>
-<uninstall package="OpenOffice_org"/>
+<uninstall package="yast2-xml"/>
 <reportproblems/>
 </trial>
 </test>
