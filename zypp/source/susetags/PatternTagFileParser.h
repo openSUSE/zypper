@@ -53,6 +53,9 @@ namespace zypp
         void endParse();
       };
       ///////////////////////////////////////////////////////////////////
+      /**
+       * returns null if parse fails
+       */
       Pattern::Ptr parsePattern( const Pathname & file_r );
       /////////////////////////////////////////////////////////////////
     } // namespace source

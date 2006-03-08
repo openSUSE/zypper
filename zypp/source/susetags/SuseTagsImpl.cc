@@ -434,12 +434,18 @@ namespace zypp
             MIL << "Selection file to parse " << file << endl;
             Selection::Ptr sel( parseSelection( file ) );
       
-            DBG << "Selection:" << sel << endl;
-      
             if (sel)
+            {
+              DBG << "Selection:" << sel << endl;
               store.insert( sel );
+              DBG << "Parsing of " << file << " done" << endl;
+            }
+            else
+            {
+              DBG << "Parsing of " << file << " failed" << endl;
+            }
       
-            DBG << "Parsing of " << file << " done" << endl;
+            
           }
         }
       }
@@ -478,13 +484,17 @@ namespace zypp
             MIL << "Pattern file to parse " << file << endl;
       
             Pattern::Ptr pat( parsePattern( file ) );
-      
-            DBG << "Pattern:" << pat << endl;
-      
+                  
             if (pat)
+            {
+              DBG << "Pattern:" << pat << endl;
               _store.insert( pat );
-      
-            DBG << "Parsing of " << file << " done" << endl;
+              DBG << "Parsing of " << file << " done" << endl;  
+            }
+            else
+            {
+              DBG << "Parsing of " << file << " failed" << endl;
+            }
           }
         }
       }

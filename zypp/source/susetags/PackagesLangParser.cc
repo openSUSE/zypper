@@ -109,7 +109,17 @@ namespace zypp
       {
         PackagesLangParser p (content_r, lang_r);
 	MIL << "Starting with " << content_r.size() << " packages" << endl;
-        p.parse( file_r );
+        try
+        {
+          p.parse( file_r );
+        }
+        catch(zypp::parser::tagfile::ParseException &e)
+        {
+          ZYPP_CAUGHT(e);
+          ERR << "Packages Lang " << file_r << " is broken." << std::endl;
+          return;
+        }
+        
         MIL << "Ending after " << p._count << " langs with " << content_r.size() << " packages and " << p._notfound.size() << " not founds." <<endl;
         WAR << "Not found packages:" << std::endl;
         for ( std::set<NVRAD>::const_iterator it = p._notfound.begin(); it != p._notfound.end(); ++it)

@@ -44,9 +44,17 @@ namespace zypp
       {
         MIL << "Starting to parse pattern " << file_r << std::endl;
         PatternTagFileParser p;
-        p.parse( file_r );
+        try
+        {
+          p.parse( file_r );
+        }
+        catch(zypp::parser::tagfile::ParseException &e)
+        {
+          ZYPP_CAUGHT(e);
+          ERR << "Pattern " << file_r << " is broken." << std::endl;
+          return 0L;
+        }
         return p.result;
-
       }
 
       PatternTagFileParser::PatternTagFileParser()

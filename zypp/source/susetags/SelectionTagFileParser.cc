@@ -45,7 +45,16 @@ namespace zypp
       {
         MIL << "Starting to parse selection " << file_r << std::endl;
         SelectionTagFileParser p;
-        p.parse( file_r );
+        try
+        {
+          p.parse( file_r );
+        }
+        catch(zypp::parser::tagfile::ParseException &e)
+        {
+          ZYPP_CAUGHT(e);
+          ERR << "Selection " << file_r << " is broken." << std::endl;
+          return 0L;
+        }
         return p.result;
 
       }

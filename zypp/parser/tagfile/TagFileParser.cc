@@ -129,8 +129,35 @@ namespace zypp
             boost::smatch element_what;
             getline(file, element);
             // while we dont find the list terminator
-            while( ! boost::regex_match(element, element_what, rxMEnd, boost::match_extra))
+            while(!file.eof())
             {
+              // avoid regexping in most cases.
+              if ( element[0] == '-' )
+              {
+                if ( boost::regex_match(element, element_what, rxMEnd, boost::match_extra) )
+                {
+                  // end list element? we check that it is the same as the opening tag, otherwise it is all broken!
+                  if ( tag.name != element_what[1] )
+                    ZYPP_THROW(ParseException("Expecting tag -" + tag.name + " for closing. Found -" + element_what[1]));
+                  
+                  // no problem, is a real close list tag
+                  break;
+                }
+              }
+              
+              // if we are in a multi tag (list), we cannot start a list inside a list, so if we find a
+              // + sign, we check it. We dont just regexp every entry because it is very expensive
+              if ( element[0] == '+' )
+              {
+                if ( boost::regex_match(element, element_what, rxMStart, boost::match_extra) )
+                {
+                  if ( tag.name != element_what[1] )
+                    ZYPP_THROW(ParseException("MultiTag +" + element_what[1] + " started before closing +" + tag.name));
+                  else
+                    ZYPP_THROW(ParseException("MultiTag +" + tag.name + " duplicate opening tag"));
+                }
+              }
+              
               tag.values.push_back(element);
               XXX << element << std::endl;
               getline(file, element);
@@ -158,7 +185,7 @@ namespace zypp
           }
           else
           {
-            ERR << "parse error: " << buffer << std::endl;
+            ZYPP_THROW(ParseException("parse error: " + buffer));
           }
         }
         endParse();

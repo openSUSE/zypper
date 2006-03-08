@@ -294,7 +294,16 @@ namespace zypp
       {
 	MIL << "Starting to parse packages " << file_r << std::endl;
 	PackagesParser p( source_r, sourceImpl_r );
-	p.parse( file_r );
+        try
+        {
+	  p.parse( file_r );
+        }
+        catch(zypp::parser::tagfile::ParseException &e)
+        {
+          ZYPP_CAUGHT(e);
+          ERR << "Package file " << file_r << " is broken." << std::endl;
+          return PkgContent();
+        }
 	return p.result();
       }
 
@@ -302,7 +311,16 @@ namespace zypp
       {
 	MIL << "Starting to parse packages disk usage " << file_r << std::endl;
 	PackageDiskUsageParser duParser;
-	duParser.parse(file_r);
+        try
+        {
+	  duParser.parse(file_r);
+        }
+        catch(zypp::parser::tagfile::ParseException &e)
+        {
+          ZYPP_CAUGHT(e);
+          ERR << "Disk usage " << file_r << " is broken." << std::endl;
+          return PkgDiskUsage();
+        }
 	return duParser.result;
       }
 
