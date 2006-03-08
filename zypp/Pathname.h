@@ -64,6 +64,12 @@ namespace zypp
       }
 
       /** Concatenate and assing. \see cat */
+      Pathname & operator/=( const Pathname & path_tv )
+      { return( *this = cat( *this, path_tv ) ); }
+
+      /** Concatenate and assing. \see cat
+       * \deprecated: use /=
+      */
       Pathname & operator+=( const Pathname & path_tv )
       { return( *this = cat( *this, path_tv ) ); }
 
@@ -98,10 +104,10 @@ namespace zypp
 
       /** Concatenation of pathnames.
        * \code
-       *   "foo"  + "baa"  ==> "foo/baa"
-       *   "foo/" + "baa"  ==> "foo/baa"
-       *   "foo"  + "/baa" ==> "foo/baa"
-       *   "foo/" + "/baa" ==> "foo/baa"
+       *   "foo"  / "baa"  ==> "foo/baa"
+       *   "foo/" / "baa"  ==> "foo/baa"
+       *   "foo"  / "/baa" ==> "foo/baa"
+       *   "foo/" / "/baa" ==> "foo/baa"
        * \endcode
       */
       Pathname cat( const Pathname & r ) const { return cat( *this, r ); }
@@ -132,6 +138,12 @@ namespace zypp
     { return l.asString() != r.asString(); }
 
     /** \relates Pathname Concatenate two Pathname. */
+    inline Pathname operator/( const Pathname & l, const Pathname & r )
+    { return Pathname::cat( l, r ); }
+
+    /** \relates Pathname Concatenate two Pathname.
+     * \deprecated: use /
+    */
     inline Pathname operator+( const Pathname & l, const Pathname & r )
     { return Pathname::cat( l, r ); }
 
