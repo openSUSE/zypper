@@ -131,6 +131,7 @@ static int import_old_sources()
   }
   
   MIL << "done reading " << dir_path.string() << std::endl;
+  return 0;
 }
 
 int main()
