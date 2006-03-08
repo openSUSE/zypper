@@ -42,7 +42,7 @@ namespace zypp
    * \note Source is a reference to the implementation. No COW
    * is performed.
   */
-  class Source_Ref : public base::SafeBool<Source_Ref>
+  class Source_Ref : protected base::SafeBool<Source_Ref> /* private, but gcc refuses */
   {
     friend std::ostream & operator<<( std::ostream & str, const Source_Ref & obj );
     friend bool operator==( const Source_Ref & lhs, const Source_Ref & rhs );
@@ -64,9 +64,10 @@ namespace zypp
     */
     static const Source_Ref noSource;
 
-    /** Validate Source_Ref in a boolean context via \ref SafeBool. */
-    bool boolTest() const
-    { return _pimpl != noSource._pimpl; }
+    /** Validate Source_Ref in a boolean context.
+     * \c FALSE iff == noSource.
+    */
+    using base::SafeBool<Source_Ref>::operator bool_type;
 
   public:
     typedef unsigned long NumericId;
@@ -163,6 +164,12 @@ namespace zypp
     media::MediaVerifierRef verifier(unsigned media_nr);
 
   private:
+    friend base::SafeBool<Source_Ref>::operator bool_type() const;
+    /** \ref SafeBool test. */
+    bool boolTest() const
+    { return _pimpl != noSource._pimpl; }
+
+  private:
     /** Factory */
     friend class SourceFactory;
     friend class source::SourceImpl;
@@ -184,6 +191,10 @@ namespace zypp
   /** \relates Source_Ref Equal if same implementation class. */
   inline bool operator==( const Source_Ref & lhs, const Source_Ref & rhs )
   { return lhs._pimpl == rhs._pimpl; }
+
+  /** \relates Source_Ref */
+  inline bool operator!=( const Source_Ref & lhs, const Source_Ref & rhs )
+  { return ! (lhs == rhs); }
 
   /** \relates Source_Ref Order in std::conainer based on _pimpl. */
   inline bool operator<( const Source_Ref & lhs, const Source_Ref & rhs )

@@ -43,10 +43,19 @@ namespace zypp
      *
      * Uses CRTP to avoid a virtual function. \c _Derived must provide
      * <tt>bool boolTest() const</tt> preformong the test.
+     *
+     * \note Using SafeBool enables ==/!= comparision for \c Foo, based on
+     * the bool_type values. Make shure you overload \b both operators, in
+     * case an other semantic is desired for ==/!=.
+     *
      * \code
-     * class Foo : public base::SafeBool<Foo>
+     * class Foo : protected base::SafeBool<Foo>
      * {
      * public:
+     *   using base::SafeBool<Foo>::operator bool_type;
+     *
+     * private:
+     *   friend SafeBool<TT>::operator bool_type() const;
      *   bool boolTest() const
      *   {
      *     // Perform Boolean logic here
@@ -54,11 +63,13 @@ namespace zypp
      * };
      * \endcode
      * \todo Investigate why Bit refuses private inheritance
-     * and exposition of operator bool_type.
+     * and exposition of operator bool_type. Seems to be a gcc
+     * bug. protected works.
     */
     template<class _Derived>
-      struct SafeBool : public safebool_detail::SafeBoolBase
+      struct SafeBool : private safebool_detail::SafeBoolBase
       {
+        typedef safebool_detail::SafeBoolBase::bool_type bool_type;
         operator bool_type() const
         {
           return( (static_cast<const _Derived *>(this))->boolTest()

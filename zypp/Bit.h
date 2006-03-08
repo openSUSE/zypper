@@ -159,8 +159,10 @@ namespace zypp
     */
     template<class _IntT>
       class BitField  : public Range<_IntT, 0, MaxBits<_IntT>::value>
-                      , public base::SafeBool<BitField<_IntT> >
+                      , public base::SafeBool<BitField<_IntT> > /* private, but gcc refuses */
       {
+        typedef typename base::SafeBool<BitField<_IntT> >::bool_type bool_type;
+
       public:
         /** Default ctor: zero. */
         BitField()
@@ -172,9 +174,8 @@ namespace zypp
         {}
 
       public:
-        /** SafeBool. \see zypp::base::SafeBool */
-        bool boolTest() const
-        { return _value; }
+        /** Validate in a boolean context. */
+        using base::SafeBool<BitField<_IntT> >::operator bool_type;
 
       public:
         /** Return the value. */
@@ -246,6 +247,12 @@ namespace zypp
 
         BitField operator~() const
         { return ~_value; }
+
+      private:
+        friend base::SafeBool<BitField<_IntT> >::operator bool_type() const;
+        /** \ref SafeBool test. */
+        bool boolTest() const
+        { return _value; }
 
       private:
         _IntT _value;
