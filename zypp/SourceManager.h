@@ -177,11 +177,9 @@ namespace zypp
     /**
      * Disable all registered sources
      */
-#warning: this could be done by providing iterator-like methods
     void disableAllSources();
 
   private:
-#warning move data to a PIMPL or anonymous namespace as it's a Singleton
     typedef std::map<unsigned, RW_pointer<Source_Ref> > SourceMap;
 
     SourceMap _sources;
