@@ -25,7 +25,7 @@ namespace zypp
     //
     /** Base class for objects providing a numeric Id.
      * The ctor creates a NumericId from some static counter.
-     *
+     * The only assertion is that \c 0 is not used as an Id.
      * \code
      * struct Foo : public base::ProvideNumericId<Foo,unsigned>
      * {};
@@ -57,10 +57,11 @@ namespace zypp
         ~ProvideNumericId()
         {}
       private:
-        /**  */
+        /** Provide the next Id to use. */
         static _NumericIdType nextId()
         {
           static _NumericIdType _staticCounter = 0;
+          // Assert not returning 0
           return ++_staticCounter;
         }
         /**  */
