@@ -76,8 +76,8 @@ namespace zypp
 		next = provides.size()-1;			// none left, set next to end-1 (strip trailing ')' )
 
 	    string loc( provides, pos, next-pos );
-	    if (loc.size() != 2
-		&& loc.size() != 5)
+	    if (loc.size() < 2
+		|| loc.size() > 5)
 	    {
 		WAR << "Looks wrong " << cap_r.index() << endl;
 	    }
