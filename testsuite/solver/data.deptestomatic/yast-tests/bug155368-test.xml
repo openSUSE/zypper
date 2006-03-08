@@ -4,13 +4,14 @@
 -->
 <test>
 <setup>
+  <arch name="x86_64"/>
   <system file="bug155368-system.xml"/>
   <channel name="packages" file="beta6-packages.xml"/>
   <channel name="selections" file="beta6-selections.xml"/>
   <mediaid/>
 </setup>
 <trial>
-<uninstall package="yast2-xml"/>
+<uninstall package="yast2-transfer"/>
 <reportproblems/>
 </trial>
 </test>
