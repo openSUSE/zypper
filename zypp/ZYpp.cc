@@ -68,9 +68,9 @@ namespace zypp
 
   Resolver_Ptr ZYpp::resolver() const
   { return _pimpl->resolver(); }
-  
+
   void ZYpp::reset()
-  { _pimpl->reset(); }  
+  { _pimpl->reset(); }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -88,7 +88,7 @@ namespace zypp
 
   void ZYpp::removeResolvables (const ResStore& store)
   {
-    _pimpl->addResolvables (store);
+    _pimpl->removeResolvables (store);
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -139,8 +139,8 @@ namespace zypp
   Pathname ZYpp::homePath() const
   { return _pimpl->homePath(); }
   void ZYpp::setHomePath( const Pathname & path )
-  { _pimpl->setHomePath(path); }  
-  
+  { _pimpl->setHomePath(path); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
