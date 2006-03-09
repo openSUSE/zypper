@@ -48,13 +48,14 @@ MediaHandler::MediaHandler ( const Url &      url_r,
 			     const Pathname & attach_point_r,
 			     const Pathname & urlpath_below_attachpoint_r,
 			     const bool       does_download_r )
-    : _attachPoint( new AttachPoint())
+    : _mediaSource()
+    , _attachPoint( new AttachPoint())
+    , _AttachPointHint()
     , _relativeRoot( urlpath_below_attachpoint_r)
     , _does_download( does_download_r )
     , _attach_mtime(0)
     , _url( url_r )
     , _parentId(0)
-    , _AttachPointHint()
 {
   if ( !attach_point_r.empty() ) {
     ///////////////////////////////////////////////////////////////////
@@ -64,7 +65,8 @@ MediaHandler::MediaHandler ( const Url &      url_r,
     PathInfo adir( attach_point_r );
     // FIXME: verify if attach_point_r isn't a mountpoint of other device
     if ( !adir.isDir() || !attach_point_r.absolute()) {
-      ERR << "Provided attach point is not a directory: " << adir << endl;
+      ERR << "Provided attach point is not a absolute directory: "
+          << adir << endl;
     }
     else {
       attachPointHint( attach_point_r, false);
