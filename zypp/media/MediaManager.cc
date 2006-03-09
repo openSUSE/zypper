@@ -264,6 +264,17 @@ namespace zypp
     }
 
     // ---------------------------------------------------------------
+	  bool
+    MediaManager::downloads(MediaAccessId accessId) const
+    {
+      MutexLock glock(g_Mutex);
+
+      ManagedMedia &ref( m_impl->findMM(accessId));
+
+      return ref.handler->downloads();
+    }
+
+    // ---------------------------------------------------------------
     Url
     MediaManager::url(MediaAccessId accessId) const
     {

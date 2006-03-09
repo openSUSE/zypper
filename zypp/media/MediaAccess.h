@@ -97,6 +97,11 @@ namespace zypp {
 	bool isOpen() const { return( _handler != 0 ); }
 
 	/**
+	 * Hint if files are downloaded or not.
+	 */
+	bool        downloads() const;
+
+	/**
 	 * Used Protocol if media is opened, otherwise 'unknown'.
 	 **/
         std::string protocol() const;

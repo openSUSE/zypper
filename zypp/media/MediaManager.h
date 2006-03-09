@@ -199,6 +199,12 @@ namespace zypp
       protocol(MediaAccessId accessId) const;
 
       /**
+	     * Hint if files are downloaded or not.
+	     */
+	    bool
+      downloads(MediaAccessId accessId) const;
+
+      /**
        * Url of the media access id, otherwise empty Url.
        *
        * \throws MediaNotOpenException for invalid access id.

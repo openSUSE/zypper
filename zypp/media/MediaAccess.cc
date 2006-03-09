@@ -135,6 +135,12 @@ MediaAccess::protocol() const
   return _handler->protocol();
 }
 
+bool
+MediaAccess::downloads() const
+{
+	return _handler ? _handler->downloads() : false;
+}
+
 ///////////////////////////////////////////////////////////////////
 //
 //

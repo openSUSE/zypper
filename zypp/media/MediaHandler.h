@@ -382,6 +382,11 @@ class MediaHandler {
         //
         ///////////////////////////////////////////////////////////////////
 
+	/**
+	 * Hint if files are downloaded or not.
+	 */
+	bool        downloads() const { return _does_download; }
+
         /**
 	 * Protocol hint for MediaAccess.
 	 **/
