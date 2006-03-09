@@ -32,7 +32,7 @@ int main( int argc, char * argv[] )
        it != packages.end();
        it++)
   {
-    DBG << **it << endl;
+//    DBG << **it << endl;
   }
 
   INT << "===[END]============================================" << endl;
