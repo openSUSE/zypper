@@ -122,8 +122,7 @@ namespace zypp
       const bool enabled() const
       { return _enabled; }
 
-      void enable()
-      { _enabled = true; }
+      void enable();
 
       void disable()
       { _enabled = false; }

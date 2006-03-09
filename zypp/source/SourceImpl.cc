@@ -225,6 +225,13 @@ namespace zypp
       _path = path_r;
     }
 
+    void SourceImpl::enable()
+    {
+      if (autorefresh())
+	refresh();
+      _enabled = true;
+    }
+
     void SourceImpl::createResolvables(Source_Ref source_r)
     {}
 
