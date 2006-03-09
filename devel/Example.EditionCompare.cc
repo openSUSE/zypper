@@ -26,7 +26,7 @@ int main( int argc, char * argv[] )
   if ( argc >= 1 )
     lhs = Edition( argv[0] );
   if ( argc >= 2 )
-    lhs = Edition( argv[1] );
+    rhs = Edition( argv[1] );
 
   cerr << "compare: " << lhs << asOp( lhs.compare( rhs ) ) << rhs << endl;
   cerr << "match:   " << lhs << asOp( lhs.match( rhs ) )   << rhs << endl;
