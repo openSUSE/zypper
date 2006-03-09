@@ -120,11 +120,9 @@ namespace zypp
      * drives using \ref MediaAccessUrl's.
      *
      * \note The MediaManager class is just an envelope around an
-     *       inner singelton like implementation.
-     *       <br>
+     *       inner singleton like implementation.<br>
      *       This means, you can create as many managers as you want,
-     *       also temporary in a function call.
-     *       <br>
+     *       also temporary in a function call.<br>
      *       Don't declare static MediaManager instances, unless
      *       you want to force (mutex) initialization order problems!
      *
@@ -379,7 +377,7 @@ namespace zypp
       /**
        * Query if the media access is open / exists.
        *
-       * \param accessId The media access id query.
+       * \param accessId The media access id to query.
        * \return true, if access id is known and open.
        */
       bool
@@ -389,7 +387,7 @@ namespace zypp
        * Query the protocol name used by the media access
        * handler. Similar to url().getScheme().
        *
-       * \param accessId The media access id query.
+       * \param accessId The media access id to query.
        * \return The protocol name used by the media access
        *         handler, otherwise 'unknown'.
        * \throws MediaNotOpenException for invalid access id.
@@ -399,6 +397,8 @@ namespace zypp
 
       /**
 	     * Hint if files are downloaded or not.
+       * \param accessId The media access id to query.
+       * \return True, if provideFile downloads files.
 	     */
 	    bool
       downloads(MediaAccessId accessId) const;
@@ -406,6 +406,8 @@ namespace zypp
       /**
        * Returns the \ref MediaAccessUrl of the media access id.
        *
+       * \param accessId The media access id to query.
+       * \return The \ref MediaAccessUrl used by the media access id.
        * \throws MediaNotOpenException for invalid access id.
        */
       Url
@@ -416,6 +418,8 @@ namespace zypp
        * Add verifier implementation for the specified media id.
        * By default, the NoVerifier is used.
        *
+       * \param accessId A media access id.
+       * \param verifier The new verifier.
        * \throws MediaNotOpenException for invalid access id.
        */
       void
@@ -424,7 +428,9 @@ namespace zypp
 
       /**
        * Remove verifier for specified media id.
+       * It resets the verifier to NoVerifier.
        *
+       * \param accessId A media access id.
        * \throws MediaNotOpenException for invalid access id.
        */
       void
@@ -452,6 +458,8 @@ namespace zypp
        * Remember to release() or close() each id you've attached
        * and not need any more. Attach is like an open of a file!
        *
+       * \param accessId A media access id.
+       * \param next     Whether to try the next drive if avaliable.
        * \throws MediaNotOpenException for invalid access id.
        */
       void
@@ -474,14 +482,26 @@ namespace zypp
        * \throws MediaNotOpenException
        * \throws MediaNotSupportedException
        */
+      private:
       void
       reattach(MediaAccessId   accessId,
                const Pathname &attach_point,
                bool            temporary = false) ZYPP_DEPRECATED;
+      public:
 
       /**
        * Release the attached media and optionally eject.
        *
+       * If the \p eject parameter is set to true and there
+       * is currently an attached drive, all other access
+       * id's are released and the drive (CD/DVD drive) is
+       * ejected.
+       * In case that there is currently no attached drive,
+       * a \p eject set to true causes to eject all drives
+       * that are _not_ used by another access id's.
+       *
+       * \param accessId A media access id.
+       * \param eject    Whether to eject the drive.
        * \throws MediaNotOpenException for invalid access id.
        */
       void
@@ -498,6 +518,7 @@ namespace zypp
        * fetch more data using the provideFile() or provideDir()
        * functions anymore.
        *
+       * \param accessId A media access id.
        * \throws MediaNotOpenException for invalid access id.
        */
       void
@@ -506,6 +527,7 @@ namespace zypp
       /**
        * Check if media is attached or not.
        *
+       * \param accessId A media access id.
        * \return True if media is attached.
        * \throws MediaNotOpenException for invalid access id.
        */
@@ -516,6 +538,7 @@ namespace zypp
        * Returns information if media is on a shared
        * physical device or not.
        *
+       * \param accessId A media access id.
        * \return True if it is shared, false if not.
        * \throws MediaNotOpenException for invalid access id.
        */
@@ -525,6 +548,8 @@ namespace zypp
       /**
        * Ask the registered verifier if the attached
        * media is the desired one or not.
+       *
+       * \param accessId A media access id.
        * \return True if media is attached and desired
        *         according to the actual verifier.
        * \throws MediaNotOpenException for invalid access id.
@@ -535,6 +560,9 @@ namespace zypp
       /**
        * Ask the specified verifier if the attached
        * media is the desired one or not.
+       *
+       * \param accessId A media access id.
+       * \param verifier A verifier to use.
        * \return True if media is attached and desired
        *         according to the specified verifier.
        * \throws MediaNotOpenException for invalid access id.
@@ -549,6 +577,7 @@ namespace zypp
        * be available at 'localRoot() + filename' or even better
        * 'localPath( filename )'
        *
+       * \param accessId A media access id.
        * \returns The directory name pointing to the media root
        *          in local filesystem or an empty pathname if the
        *          media is not attached.
@@ -561,6 +590,9 @@ namespace zypp
        * Shortcut for 'localRoot() + pathname', but returns an empty
        * pathname if media is not attached.
        * Files provided will be available at 'localPath(filename)'.
+       *
+       * \param accessId A media access id.
+       * \param pathname A path name relative to the localRoot().
        * \returns The directory name in local filesystem pointing
        *          to the desired relative pathname on the media
        *          or an empty pathname if the media is not attached.
@@ -576,7 +608,7 @@ namespace zypp
        * on the media.
        *
        * \param accessId  The media access id to use.
-       * \param filename  The filename to provide, relative on the media.
+       * \param filename  The filename to provide, relative to localRoot().
        * \param cached    If cached is set to true, the function checks, if
        *                  the file already exists and doesn't download it again
        *                  if it does. Currently only the existence is checked,
@@ -602,36 +634,42 @@ namespace zypp
                   bool            checkonly = false) const;
 
       /**
+       * FIXME: see MediaAccess class.
        */
       void
       provideDir(MediaAccessId   accessId,
                  const Pathname &dirname) const;
 
       /**
+       * FIXME: see MediaAccess class.
        */
       void
       provideDirTree(MediaAccessId  accessId,
                      const Pathname &dirname) const;
 
       /**
+       * FIXME: see MediaAccess class.
        */
       void
       releaseFile(MediaAccessId   accessId,
                   const Pathname &filename) const;
 
       /**
+       * FIXME: see MediaAccess class.
        */
       void
       releaseDir(MediaAccessId   accessId,
                  const Pathname &dirname) const;
 
       /**
+       * FIXME: see MediaAccess class.
        */
       void
       releasePath(MediaAccessId   accessId,
                   const Pathname &pathname) const;
 
       /**
+       * FIXME: see MediaAccess class.
        */
       void
       dirInfo(MediaAccessId           accessId,
@@ -640,6 +678,7 @@ namespace zypp
               bool                    dots = true) const;
 
       /**
+       * FIXME: see MediaAccess class.
        */
       void
       dirInfo(MediaAccessId           accessId,
@@ -649,29 +688,74 @@ namespace zypp
 
 
     public:
+      /**
+       * Get the modification time of the /etc/mtab file.
+       * \return Modification time of the /etc/mtab file.
+       */
       time_t
       getMountTableMTime() const;
 
+      /**
+       * Get current mount entries from /etc/mtab file.
+       * \return Current mount entries from /etc/mtab file.
+       */
       std::vector<MountEntry>
       getMountEntries() const;
 
+      /**
+       * Check if the specified \p path is useable as
+       * attach point.
+       *
+       * \param path The attach point to check.
+       * \return True, if it is a directory and there are
+       *         no another attach points bellow of it.
+       */
       bool
       isUseableAttachPoint(const Pathname &path) const;
 
     private:
       friend class MediaHandler;
 
+      /**
+       * \internal
+       * Return the attached media reference of the specified
+       * media access id. Used to resolve nested attachments
+       * as used in the MediaISO (iso-loop) handler.
+       * Causes temporary creation of a shared attachment
+       * (increases reference counters on attachedMedia).
+       * \param media A media access id.
+       */
       AttachedMedia
       getAttachedMedia(MediaAccessId &accessId) const;
 
+      /**
+       * \internal
+       * Called by media handler in while attach() to retrieve
+       * attached media reference matching the specified media
+       * source reference.
+       * Causes temporary creation of a shared attachment
+       * (increases reference counters on attachedMedia).
+       * \param media The media source reference to search for.
+       */
       AttachedMedia
       findAttachedMedia(const MediaSourceRef &media) const;
 
+      /**
+       * \internal
+       * Called by media handler in case of relase(eject=true)
+       * to release all access id's using the specified media.
+       * Causes temporary creation of a shared attachment
+       * (increases reference counters on attachedMedia).
+       * \param media The media source reference to release.
+       */
       void
       forceMediaRelease(const MediaSourceRef &media);
 
     private:
       class  Impl;
+      /**
+       * Static reference to the implementation (singleton).
+       */
       static zypp::RW_pointer<MediaManager::Impl> m_impl;
     };
 
