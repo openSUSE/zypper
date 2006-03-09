@@ -1,14 +1,14 @@
->!> Uninstalling yast2-xml
+>!> Uninstalling yast2-transfer
 >!> 1 problems found:
 >!> Problem:
->!> yast2 has missing dependencies
->!> There are no alternative installed providers of yast2-xml for yast2-2.13.33-3.x86_64
+>!> autoyast2-installation has missing dependencies
+>!> There are no alternative installed providers of yast2-transfer for autoyast2-installation-2.13.19-2.noarch
 >!>    Solution:
->!>       keep yast2-xml
->!>       keep yast2-xml-2.13.1-5.x86_64
+>!>       keep yast2-transfer
+>!>       keep yast2-transfer-2.13.3-2.x86_64
 >!>    Solution:
->!>       delete yast2
->!>       delete yast2-2.13.33-3.x86_64
+>!>       delete autoyast2-installation
+>!>       delete autoyast2-installation-2.13.19-2.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       
