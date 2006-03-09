@@ -55,10 +55,21 @@ namespace zypp
       if( _filesystem.empty())
         _filesystem = "auto";
 
-      zypp::Url src;
+      std::string arg;
+      zypp::Url   src;
       try
       {
-        src = _url.getQueryParam("url");
+        arg = _url.getQueryParam("url");
+        if( arg.empty() && _isofile.dirname().absolute())
+        {
+          src = std::string("dir:///");
+          src.setPathName(_isofile.dirname().asString());
+          _isofile = _isofile.basename();
+        }
+        else
+        {
+          src = arg;
+        }
       }
       catch(const zypp::url::UrlException &e)
       {
