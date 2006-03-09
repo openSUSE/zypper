@@ -113,19 +113,38 @@ namespace zypp
 
       DBG << "Rewriting url " << url_r << endl;
 
-      std::string pathname = url_r.getPathName();
-      boost::regex e("^(.*(cd|dvd))([0-9]+)(/?)$", boost::regex::icase);
-      boost::smatch what;
-      if(boost::regex_match(pathname, what, e, boost::match_extra))
+      if( scheme == "iso")
       {
-	std::string base = what[1];
-	pathname = base + str::numstring(medianr) + what[4];
-	Url url = url_r;
-	url.setPathName (pathname);
+	std::string isofile = url_r.getQueryParam("iso");
+	boost::regex e("^(.*(cd|dvd))([0-9]+)(\\.iso)$", boost::regex::icase);
+	boost::smatch what;
+	if(boost::regex_match(isofile, what, e, boost::match_extra))
+	{
+	  Url url( url_r);
 
-        DBG << "Url rewrite result: " << url << endl;
+          isofile = what[1] + str::numstring(medianr) + what[4];
+	  url.setQueryParam("iso", isofile);
 
-	return url;
+          DBG << "Url rewrite result: " << url << endl;
+	  return url;
+	}
+      }
+      else
+      {
+        std::string pathname = url_r.getPathName();
+        boost::regex e("^(.*(cd|dvd))([0-9]+)(/?)$", boost::regex::icase);
+        boost::smatch what;
+        if(boost::regex_match(pathname, what, e, boost::match_extra))
+        {
+	  Url url( url_r);
+
+	  pathname = what[1] + str::numstring(medianr) + what[4];
+	  url.setPathName(pathname);
+
+          DBG << "Url rewrite result: " << url << endl;
+
+	  return url;
+        }
       }
       return url_r;
     }
