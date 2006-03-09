@@ -194,7 +194,11 @@ namespace zypp
 	  _deps[Dep::REQUIRES].insert(_cap);
         }
 
-        NVRAD nvrad = NVRAD( patImpl->_name, Edition(patImpl->_version, patImpl->_release, std::string()), Arch(patImpl->_arch), _deps );
+        Arch arch;
+        if (!patImpl->_arch.empty())
+          arch = Arch(patImpl->_arch);
+        
+        NVRAD nvrad = NVRAD( patImpl->_name, Edition(patImpl->_version, patImpl->_release, std::string()), arch, _deps );
         result = detail::makeResolvableFromImpl( nvrad, patImpl );
       }
        /////////////////////////////////////////////////////////////////
