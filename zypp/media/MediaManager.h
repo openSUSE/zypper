@@ -117,16 +117,212 @@ namespace zypp
     //
     /**
      * Manages coordinated access to 'physical' media, e.g CDROM
-     * drives.
+     * drives using \ref MediaAccessUrl's.
      *
      * \note The MediaManager class is just an envelope around an
-     * inner singelton like implementation. This means, you can
-     * create as many managers as you want, also temporary in a
-     * function call.
+     *       inner singelton like implementation.
+     *       <br>
+     *       This means, you can create as many managers as you want,
+     *       also temporary in a function call.
+     *       <br>
+     *       Don't declare static MediaManager instances, unless
+     *       you want to force (mutex) initialization order problems!
      *
-     * \note Don't declare static MediaManager instances, unless
-     * you want to force (mutex) initialization order problems!
+     * \section MediaAccessUrl Media Access Url
+     * The Media Manager currently supports following access handlers
+     * (backends), that can be specified by the media access URLs in
+     * the media manager's open() method.
      *
+     * - MediaCD:
+     *   Supports multiple CD or DVD drives.
+     *   - Examples:
+     *     \code
+     *       "cd:/"
+     *       "cd:/?devices=/dev/hda,/dev/hdb"
+     *       "cd:/subdir?devices=/dev/hda,/dev/hdb"
+     *       "dvd:/"
+     *       "dvd:/?devices=/dev/hda,/dev/hdb"
+     *       "dvd:/subdir?devices=/dev/hda,/dev/hdb"
+     *     \endcode
+     *   - Scheme:
+     *     - <b>cd</b>: Requires a drive supporting CD media.
+     *     - <b>dvd</b>: Requires a drive supporting DVD media.
+     *   - Authority:
+     *     A non-empty authority URL component (e.g. containing a host
+     *     name) is not allowed.
+     *   - Path name:
+     *     Specifies a subdirectory on the CD/DVD, where the desired files
+     *     are located. In case of "/", the CD/DVD's root directory (the
+     *     mount point) is used.
+     *   - Query parameters:
+     *     - <tt>devices</tt>:
+     *       Optional parameter, containing a comma separated list of block
+     *       device names to use.
+     *       <br>
+     *       The device names will be verified using a HAL query. If one of
+     *       the provided devices is not usable (not a block device, or does
+     *       not support required media type), exception is thrown.
+     *       <br>
+     *       If the devices parameter is not provided (or empty), all
+     *       avaliable CD/DVD drives 'detected' using a HAL query. The
+     *       preferred drive (used as first drive) is the drive pointed to
+     *       by the symlink "/dev/dvd" ("dvd" scheme only) or "/dev/cdrom".
+     *
+     * - MediaNFS:
+     *   - Examples:
+     *     \code
+     *        "nfs://nfs-server/exported/path"
+     *        "nfs://nfs-server/exported/path?mountoptions=ro"
+     *     \endcode
+     *   - Scheme:
+     *     - <b>nfs</b>
+     *   - Authority:
+     *     The authority component has to provide a hostname.
+     *     Username, password and port are currently ignored.
+     *   - Path name:
+     *     Exported (sub-)directory on the NFS server where the desired
+     *     files are located.
+     *   - Query parameters:
+     *     - <tt>mountoptions</tt>:
+     *       The mount options separated by comma ','.
+     *       Default is the "ro" option.
+     *
+     * - MediaCIFS (MediaSMB):
+     *   - Examples:
+     *     \code
+     *       "cifs://servername/share/path/on/the/share"
+     *       "cifs://username:passwd@servername/share/path/on/the/share?mountoptions=ro"
+     *       "smb://servername/share/path/on/the/share"
+     *       "smb://username:passwd@servername/share/path/on/the/share?mountoptions=ro"
+     *     \endcode
+     *   - Scheme:
+     *     - <b>cifs</b>
+     *     - <b>smb</b>: Just an alias for 'cifs'.
+     *   - Authority:
+     *     The authority component has to provide a hostname. Optionally
+     *     also a username and password.
+     *   - Path name:
+     *     The share name with optional subdirectory where the desired
+     *     files are located.
+     *   - Query parameters:
+     *     - <tt>mountoptions</tt>:
+     *       The mount options separated by a comma ','. Default are the
+     *       "ro" and "guest" options.
+     *     - <tt>workgroup</tt>:
+     *       The name of the workgroup.
+     *     - <tt>username</tt>:
+     *       Alternative username to username in URL authority.
+     *     - <tt>password</tt>:
+     *       Alternative password to password in URL authority.
+     *     - <tt>user</tt>:
+     *       Alternative username (cifs specific variant?)
+     *     - <tt>pass</tt>:
+     *       Alternative password (cifs specific variant?)
+     *
+     * - MediaCurl:
+     *   - Examples:
+     *     \code
+     *       "ftp://server/path/on/server"
+     *       "http://server/path/on/server"
+     *       "https://server/path/on/server"
+     *       "http://user:pass@server/path"
+     *       "http://user:pass@server/path?proxy=foo&proxyuser=me&proxypass=pw"
+     *     \endcode
+     *   - Scheme:
+     *     - <b>ftp</b>
+     *     - <b>http</b>
+     *     - <b>https</b>
+     *   - Authority:
+     *     The authority component has to provide a hostname. Optionally
+     *     also a username and password. In case of the 'ftp' scheme,
+     *     username and password defaults to 'anonymous' and 'yast2@'.
+     *   - Path name:
+     *     The path name on the server where the desired files are located.
+     *   - Query parameters:
+     *     - <tt>proxy</tt>:
+     *       A proxy hostname or hostname and port separated by ':'.
+     *     - <tt>proxyport</tt>:
+     *       Alternative way to provide the proxy port.
+     *     - <tt>proxyuser</tt>:
+     *       The proxy username.
+     *     - <tt>proxypass</tt>:
+     *       The proxy password. 
+     *
+     * - MediaDIR:
+     *   - Examples:
+     *     \code
+     *       "dir:/directory/name"
+     *       "file:/directory/name"
+     *     \endcode
+     *   - Scheme:
+     *     - <b>dir</b>
+     *     - <b>file</b>
+     *   - Authority:
+     *     A non-empty authority URL component (e.g. containing
+     *     a host name) is not allowed.
+     *   - Path name:
+     *     Specifies a directory, where the desired files are located.
+     *   - Query parameters:
+     *     none 
+     *
+     * - MediaDISK:
+     *   - Examples:
+     *     \code
+     *       "hd:/?device=/dev/hda1"
+     *       "hd:/subdir?device=/dev/sda1"
+     *       "hd:/subdir?device=/dev/sda1&filesystem=reiserfs"
+     *     \endcode
+     *   - Scheme:
+     *     - <b>hd</b>
+     *   - Authority:
+     *     A non-empty authority URL component is not allowed.
+     *   - Path name:
+     *     Specifies a subdirectory on the disk partition, where the desired
+     *     files are located. In case of "/", the partition's root directory
+     *     (its mount point) is used.
+     *   - Query parameters:
+     *     - <tt>device</tt>:
+     *       Mandatory parameter specifying the name of the block device of
+     *       the partition to mount.
+     *     - <tt>filesystem</tt>:
+     *       The name of the filesystem. Defaults to "auto". 
+     *
+     * - MediaISO:
+     *   - Examples:
+     *     \code
+     *       "iso:/?iso=/local/directory/filename.iso"
+     *       "iso:/?iso=filename.iso&url=nfs://nfs-server/exported/directory"
+     *       "iso:/isoSubdir?iso=urlSubdir/filename.iso&filesystem=iso9660&mnt=/urlAttachPoint&url=nfs://nfs-server/directory"
+     *     \endcode
+     *   - Scheme:
+     *     - <b>iso</b>
+     *   - Authority:
+     *     A non-empty authority URL component is not allowed.
+     *   - Path name:
+     *     Specifies a subdirectory inside of the iso file, where the desired
+     *     files are located. In case of "/", the iso files's root directory
+     *     (its mount point) is used.
+     *   - Query parameters:
+     *     - <tt>iso</tt>:
+     *       Mandatory parameter specifying the name of the iso file.
+     *       - If the url parameter is present, the filename can contain a
+     *        relative path to the iso file below of the location pointed by
+     *        the url parameter.
+     *       - If the url parameter is missed, the iso parameter has to point
+     *         to the absolute iso file name.
+     *     - <tt>url</tt>:
+     *       Optional parameter specifying the iso filename's source media url
+     *       pointing to a directory.
+     *       <br>
+     *       Note: <i>The iso filename's source media url schemes are limited
+     *             to: <b>hd</b>, <b>dir</b>, <b>file</b>,
+     *                 <b>nfs</b>, <b>smb</b>, <b>cifs</b>.</i>
+     *     - <tt>mnt</tt>:
+     *       Optional parameter specifying the prefered attach point for the
+     *       source media url.
+     *     - <tt>filesystem</tt>:
+     *       Optional name of the filesystem used in the iso file. Defaults
+     *       to "auto". 
      */
     class MediaManager: private zypp::base::NonCopyable
     {
@@ -159,7 +355,10 @@ namespace zypp
        * point in a default directory. This default directory
        * can be changed using setAttachPrefix() function.
        *
-       * \param  url The media access url.
+       * Remember to close() each id you've opened and not
+       * need any more. It is like a new and delete!
+       *
+       * \param  url The \ref MediaAccessUrl.
        * \param  preferred_attach_point The preferred, already
        *         existing directory, where the media should be
        *         attached.
@@ -205,7 +404,7 @@ namespace zypp
       downloads(MediaAccessId accessId) const;
 
       /**
-       * Url of the media access id, otherwise empty Url.
+       * Returns the \ref MediaAccessUrl of the media access id.
        *
        * \throws MediaNotOpenException for invalid access id.
        */
@@ -249,6 +448,9 @@ namespace zypp
 
       /**
        * Attach the media using the concrete handler.
+       *
+       * Remember to release() or close() each id you've attached
+       * and not need any more. Attach is like an open of a file!
        *
        * \throws MediaNotOpenException for invalid access id.
        */
@@ -374,6 +576,7 @@ namespace zypp
        * on the media.
        *
        * \param accessId  The media access id to use.
+       * \param filename  The filename to provide, relative on the media.
        * \param cached    If cached is set to true, the function checks, if
        *                  the file already exists and doesn't download it again
        *                  if it does. Currently only the existence is checked,
