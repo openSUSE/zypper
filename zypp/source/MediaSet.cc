@@ -36,6 +36,19 @@ namespace zypp
 
     void MediaSet::redirect (media::MediaNr medianr, media::MediaAccessId media_id)
     {
+      media::MediaManager media_mgr;
+      MediaMap::iterator  it( medias.find(medianr));
+      if( it != medias.end() && media_mgr.isOpen(it->second)) {
+	try {
+	  DBG << "Closing media access id " << it->second << endl;
+	  media_mgr.close(it->second);
+	}
+	// paranoia ...
+	catch (const Exception & excpt_r) {
+	  ZYPP_CAUGHT(excpt_r);
+	}
+      }
+
       medias[medianr] = media_id;
     }
 
@@ -57,6 +70,20 @@ namespace zypp
 
     void MediaSet::reset()
     {
+      media::MediaManager media_mgr;
+      for (MediaMap::iterator it = medias.begin(); it != medias.end(); it++)
+      {
+        if( media_mgr.isOpen(it->second)) {
+	  try {
+	    DBG << "Closing media access id " << it->second << endl;
+	    media_mgr.close(it->second);
+	  }
+	  // paranoia ...
+	  catch (const Exception & excpt_r) {
+	    ZYPP_CAUGHT(excpt_r);
+	  }
+        }
+      }
       medias = MediaMap();
     }
 
