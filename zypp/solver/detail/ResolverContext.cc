@@ -1417,13 +1417,27 @@ struct RequirementPossible
     {
 	PoolItem provider( cai.item );
 	ResStatus status = context->getStatus( provider );
-
 	if (! (status.isToBeUninstalled () || status.isImpossible())
 	    || status.isToBeUninstalledDueToUnlink())
 	{
 	    flag = true;
 	}
 
+	// Checking, if it has already been selected for removing by the user
+	// Bug 155368; Testcase data.deptestomatic/yast-tests/bug155368-test.xml
+	if (flag
+	    && !context->forceResolve()) {
+	    PoolItem installedItem = Helper::findInstalledByNameAndKind (context->pool(), provider->name(), provider->kind() );
+	    if (installedItem) {
+		ResStatus statusInstalled = context->getStatus (installedItem);
+		if (installedItem.status().isToBeUninstalled()
+		    && installedItem.status().isByUser()){
+		    DBG << provider << " would satify the requirement but it has been selected for removing by the user." << endl;
+		    flag = false;
+		}
+	    }
+	}
+	
 	return ! flag;
     }
 };
