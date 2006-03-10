@@ -88,7 +88,7 @@ namespace zypp
       if (_media_set) {
 	media::MediaAccessId _media = _media_set->getMediaAccessId( 1 );
 	media_mgr.release (_media, false);
-      } 
+      }
     }
 
     const ResStore & SourceImpl::resolvables() const
@@ -118,7 +118,7 @@ namespace zypp
       media::MediaAccessId _media = _media_set->getMediaAccessId( media_nr );
       media_mgr.dirInfo( _media, retlist, path_r, dots );
     }
-    
+
     const Pathname SourceImpl::provideFile(const Pathname & file_r,
 					   const unsigned media_nr,
 					   bool cached,
@@ -133,7 +133,7 @@ namespace zypp
       do {
         try {
 	  DBG << "Going to try provide file " << file_r << " from " << media_nr << endl;
-	  
+
 	  // try to attach the media
 	  _media = _media_set->getMediaAccessId( media_nr ); // in case of redirect
 	  media_mgr.provideFile (_media, file_r, cached, checkonly);
@@ -165,7 +165,7 @@ namespace zypp
 	      );
 
 	    DBG << "ProvideFile exception caught, callback answer: " << user << endl;
-	  
+
 	    if( user == media::MediaChangeReport::ABORT )
 	    {
 	      DBG << "Aborting" << endl;
@@ -183,7 +183,7 @@ namespace zypp
 	    {
 	      // retry
 	      DBG << "Going to attach again" << endl;
-	    
+
 	      media_mgr.attach( _media );
 
 	      break;
@@ -243,7 +243,7 @@ namespace zypp
 
     void SourceImpl::storeMetadata(const Pathname & cache_dir_r)
     {}
-    
+
     void SourceImpl::refresh()
     {
 	// TODO: will this work in chroot?
@@ -270,7 +270,7 @@ namespace zypp
 
     media::MediaVerifierRef SourceImpl::verifier(unsigned media_nr)
     { return media::MediaVerifierRef(new media::NoVerifier()); }
-    
+
     /////////////////////////////////////////////////////////////////
     // attribute accessors
 
@@ -295,7 +295,7 @@ namespace zypp
     void SourceImpl::setPriorityUnsubscribed (unsigned p)
     { _priority_unsubscribed = p; }
 
-    const Pathname & SourceImpl::cacheDir (void) 
+    const Pathname & SourceImpl::cacheDir (void)
     { return _cache_dir; }
 
     Url SourceImpl::url (void) const
@@ -330,7 +330,7 @@ namespace zypp
 
     const std::list<Pathname> SourceImpl::publicKeys()
     { return std::list<Pathname>(); }
-    
+
     std::string SourceImpl::unique_id (void) const
     { return ""; }
 
@@ -353,9 +353,21 @@ namespace zypp
 
     /////////////////////////////////////////////////////////////////
 
-
     std::ostream & SourceImpl::dumpOn( std::ostream & str ) const
-    { return str << (_alias.empty() ? "SourceImpl" : _alias); }
+    {
+      str << "Source[" << numericId() << "|" << type();
+      if ( !_alias.empty() )
+        str << "|" << _alias;
+      str << "]";
+
+      str << "{"
+          << _url << "(" << _path << ")";
+      if ( ! _cache_dir.empty() )
+        str << "; cache " << _cache_dir;
+      str << "}";
+
+      return str;
+    }
 
     SourceImpl::Verifier::Verifier(const std::string & vendor_r, const std::string & id_r, const media::MediaNr media_nr)
     : _media_vendor(vendor_r)

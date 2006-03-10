@@ -13,6 +13,7 @@
 #include <map>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/Algorithm.h"
 #include "zypp/base/Gettext.h"
 
 #include "zypp/ZYpp.h"
@@ -24,6 +25,11 @@
 #include "zypp/target/store/PersistentStorage.h"
 #include "zypp/Pathname.h"
 #include "zypp/PathInfo.h"
+
+///////////////////////////////////////////////////////////////////
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::SourceManager"
+///////////////////////////////////////////////////////////////////
 
 #define ZYPP_METADATA_PREFIX ( getZYpp()->homePath().asString()+"/cache/" )
 
@@ -47,6 +53,57 @@ namespace zypp
 
     static SourceMap _sources;
     static SourceMap _deleted_sources;
+
+    struct PrintSourceMapEntry
+    {
+      void operator()( const SourceMap::value_type & el ) const
+      {
+        _str << endl << "    - " << el.second;
+      }
+      PrintSourceMapEntry( std::ostream & str )
+      : _str( str )
+      {}
+      std::ostream & _str;
+    };
+
+    inline std::ostream & dumpSourceTableOn( std::ostream & str, bool trailingENDL = true )
+    {
+      str << "SourceManager: =========================" << endl
+          << "  known Sources " << _sources.size();
+      std::for_each( _sources.begin(), _sources.end(), PrintSourceMapEntry(str) );
+
+      str << endl
+          << "  deleted Sources " << _deleted_sources.size();
+      std::for_each( _deleted_sources.begin(), _deleted_sources.end(), PrintSourceMapEntry(str) );
+      str << endl
+          << "========================================";
+      if ( trailingENDL )
+        str << endl;
+      return str;
+    }
+
+    inline bool sourceTableRemove( SourceMap::iterator it )
+    {
+      if ( it == _sources.end() )
+        return false;
+
+      MIL << "SourceManager remove " << it->second << endl;
+      _deleted_sources[it->second.numericId()] = it->second;
+      _sources.erase(it);
+
+      dumpSourceTableOn( DBG );
+      return true;
+    }
+
+    inline SourceManager::SourceId sourceTableAdd( Source_Ref source_r )
+    {
+      MIL << "SourceManager add " << source_r << endl;
+      _sources[source_r.numericId()] = source_r;
+
+      dumpSourceTableOn( DBG );
+      return source_r.numericId();
+    }
+
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -55,7 +112,9 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   SourceManager::SourceManager()
-  {}
+  {
+    MIL << "Created SourceManager Singleton." << endl;
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -63,79 +122,81 @@ namespace zypp
   //	METHOD TYPE : Dtor
   //
   SourceManager::~SourceManager()
-  {}
+  {
+    MIL << "Deleted SourceManager Singleton." << endl;
+  }
 
   void SourceManager::reset()
   {
-    MIL << "Cleaning up all sources" << endl;
-
+    MIL << "SourceManager reset (forget all sources)" << endl;
     _sources.clear();
     _deleted_sources.clear();
-
-    // don't change the _next_id to avoid using
-    // the same ID for dangling old sources and newly introduced sources
   }
 
+  SourceManager::SourceId SourceManager::addSource( Source_Ref source_r )
+  {
+    return sourceTableAdd( source_r );
+  }
+
+  /** \deprecate SourceManager should operate on built sources. */
   SourceManager::SourceId SourceManager::addSource(const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r)
   {
+    MIL << "SourceManager create and add Source( Url:" << url_r << ", Path:" << path_r << ", Alias:" <<  alias_r << ", Cache:" << cache_dir_r << endl;
     Source_Ref src( SourceFactory().createFrom(url_r, path_r, alias_r, cache_dir_r) );
-    _sources[src.numericId()] = src;
-    return src.numericId();
-  }
-
-  SourceManager::SourceId SourceManager::addSource(Source_Ref source_r)
-  {
-    _sources[source_r.numericId()] = source_r;
-    return source_r.numericId();
+    return sourceTableAdd( src );
   }
 
   void SourceManager::removeSource(SourceManager::SourceId id)
   {
-    SourceMap::iterator it = _sources.find(id);
-    if (it != _sources.end())
-    {
-      _deleted_sources[id] = it->second;
-      _sources.erase(it);
-    }
+    if ( ! sourceTableRemove( _sources.find(id) ) )
+      {
+        WAR << "SourceManager remove: no source with SourceId " << id << endl;
+      }
+  }
+
+  void SourceManager::removeSource( const std::string & alias_r )
+  {
+    SourceMap::iterator it = _sources.begin();
+    for ( ; it != _sources.end() && it->second.alias() != alias_r; ++it )
+      ; // empty body
+
+    if ( ! sourceTableRemove( it ) )
+      {
+        WAR << "SourceManager remove: no source with alias " << alias_r << endl;
+      }
   }
 
   void SourceManager::releaseAllSources()
   {
+    MIL << "SourceManager releasing all sources ..." << endl;
     for (SourceMap::iterator it = _sources.begin();
 	 it != _sources.end(); it++)
     {
       it->second.release();
     }
+    MIL << "SourceManager releasing all sources done." << endl;
   }
 
   void SourceManager::reattachSources(const Pathname &attach_point)
   {
+    MIL << "SourceManager reattach all sources to '" << attach_point << " ..." << endl;
     for (SourceMap::iterator it = _sources.begin();
 	 it != _sources.end(); it++)
     {
       it->second.reattach(attach_point);
     }
+    MIL << "SourceManager reattach all sources to '" << attach_point << " done." << endl;
   }
 
-
-  void SourceManager::removeSource(const std::string & alias_r)
-  {
-    for (SourceMap::iterator it = _sources.begin(); it != _sources.end(); ++it)
-    {
-	if (it->second.alias() == alias_r) {
-            _deleted_sources[it->first] = it->second;
-	    _sources.erase(it);
-	    break;
-	}
-    }
-  }
 
   void SourceManager::disableAllSources()
   {
+    MIL << "SourceManager disable all sources ..." << endl;
     for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
     {
 	it->second.disable();
     }
+    MIL << "SourceManager disable all sources done." << endl;
   }
 
   std::list<SourceManager::SourceId> SourceManager::enabledSources() const
@@ -165,6 +226,9 @@ namespace zypp
 
   void SourceManager::store(Pathname root_r, bool metadata_cache )
   {
+    MIL << "SourceManager store '" << root_r << ( metadata_cache ? "' (metadata_cache)" : "'" )
+        << " ..." << endl;
+
     storage::PersistentStorage store;
     store.init( root_r );
 
@@ -253,13 +317,18 @@ namespace zypp
     }
 
     _deleted_sources.clear();
+
+    MIL << "SourceManager store done." << endl;
   }
 
   /** \todo Broken design: either use return value or Exception to
   * indicate errors, not both.
   */
-  bool SourceManager::restore(Pathname root_r, bool use_caches )
+  bool SourceManager::restore( Pathname root_r, bool use_caches )
   {
+    MIL << "SourceManager restore '" << root_r << ( use_caches ? "' (use_caches)" : "'" )
+        << " ..." << endl;
+
     if (! _sources.empty() )
 	ZYPP_THROW(Exception ( N_("At least one source already registered, cannot restore sources from persistent store.") ) );
 
@@ -306,6 +375,9 @@ namespace zypp
     {
 	ZYPP_THROW(report);
     }
+
+    MIL << "SourceManager restore done." << endl;
+    dumpSourceTableOn( DBG );
     return true;
   }
 
@@ -316,7 +388,7 @@ namespace zypp
   */
   std::ostream & operator<<( std::ostream & str, const SourceManager & obj )
   {
-    return str << "Source Manager has " << " sources" << endl;
+    return dumpSourceTableOn( str, /*tailingENDL*/false );
   }
 
   Source_Ref SourceManager::findSource(SourceId id)
