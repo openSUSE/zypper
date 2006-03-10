@@ -129,6 +129,9 @@ namespace zypp
   Url Source_Ref::url (void) const
   { return _pimpl->url (); }
 
+  bool Source_Ref::remote (void) const
+  { return _pimpl->remote (); }
+
   const Pathname & Source_Ref::path (void) const
   { return _pimpl->path (); }
 

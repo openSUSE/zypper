@@ -131,6 +131,7 @@ namespace zypp
 
     // for YaST
     Url url (void) const;
+    bool remote() const;
     const Pathname & path (void) const;
 
   public:

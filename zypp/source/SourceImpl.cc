@@ -301,6 +301,24 @@ namespace zypp
     Url SourceImpl::url (void) const
     { return _url; }
 
+    bool SourceImpl::remote() const
+    {
+      media::MediaManager  m;
+      media::MediaAccessId id;
+      bool downloads = false;
+      try {
+        id = m.open(_url);
+        downloads = m.downloads(id);
+        m.close(id);
+      }
+      catch(const zypp::Exception &e)
+      {
+        // may happen if url is not valid media Url.
+        ZYPP_CAUGHT(e);
+      }
+      return downloads;
+    }
+
     const Pathname & SourceImpl::path (void) const
     { return _path; }
 
