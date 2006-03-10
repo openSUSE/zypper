@@ -19869,7 +19869,7 @@
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
-    <dep name='kernel-bigsmp' />
+    <dep name='kernel' />
     <dep name='/bin/sh' />
     <dep name='/bin/sh' />
     <dep name='/bin/sh' />
@@ -19889,6 +19889,9 @@
     <dep name='ksym(thinkpad_ppde)' op='=' version='3a9130fd' />
     <dep name='tpctl-kmp-bigsmp' op='=' version='4.17_2.6.16_rc5_git9_2' />
   </provides>
+  <enhances>
+    <dep name='kernel-bigsmp' />
+  </enhances>
 </package>
 <package>
   <name>tpctl-kmp-default</name>
@@ -19906,7 +19909,7 @@
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
-    <dep name='kernel-default' />
+    <dep name='kernel' />
     <dep name='/bin/sh' />
     <dep name='/bin/sh' />
     <dep name='/bin/sh' />
@@ -19925,6 +19928,9 @@
     <dep name='ksym(thinkpad_ppde)' op='=' version='c42fdcb3' />
     <dep name='tpctl-kmp-default' op='=' version='4.17_2.6.16_rc5_git9_2' />
   </provides>
+  <enhances>
+    <dep name='kernel-default' />
+  </enhances>
 </package>
 <package>
   <name>tpctl-kmp-smp</name>
@@ -19942,7 +19948,7 @@
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
-    <dep name='kernel-smp' />
+    <dep name='kernel' />
     <dep name='/bin/sh' />
     <dep name='/bin/sh' />
     <dep name='/bin/sh' />
@@ -19962,6 +19968,9 @@
     <dep name='ksym(thinkpad_ppde)' op='=' version='4f07cad7' />
     <dep name='tpctl-kmp-smp' op='=' version='4.17_2.6.16_rc5_git9_2' />
   </provides>
+  <enhances>
+    <dep name='kernel-smp' />
+  </enhances>
 </package>
 <package>
   <name>tree</name>
