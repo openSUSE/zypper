@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+  install product SLES10 and addon SUSE 10.1
+-->
+<test>
+<setup>
+  <channel name="sl10_packages" file="sl10.1-beta7-packages.xml"/>
+  <channel name="sl10_selections" file="sl10.1-beta7-selections.xml"/>
+  <channel name="sles_packages" file="sles10-beta7-packages.xml"/>
+  <locale name="de"/>
+  <locale name="de_DE"/>
+  <mediaid/>
+</setup>
+<trial>
+  <install channel="sles_packages" kind="product" name="SUSE SLES"/>
+  <install channel="sl10_packages" kind="product" name="SUSE LINUX"/>
+  <install channel="sl10_selections" kind="selection" name="default"/>
+  <install channel="sl10_packages" kind="package" name="grub"/>
+  <install channel="sl10_packages" kind="package" name="kernel-default"/>
+  <reportproblems/>
+  <takesolution problem="0" solution="0"/>
+  <reportproblems/>
+  <takesolution problem="0" solution="2"/>
+</trial>
+</test>
