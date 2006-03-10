@@ -21,6 +21,8 @@
 #include "zypp/Resolvable.h"
 #include "zypp/ResObject.h"
 #include "zypp/Package.h"
+#include "zypp/Source.h"
+#include "zypp/Url.h"
 
 #include "zypp/target/TargetImpl.h"
 #include "zypp/target/TargetCallbackReceiver.h"
@@ -128,8 +130,8 @@ namespace zypp
 	callback::SendReport<source::DownloadResolvableReport> report;
 
 #warning FIXME: error handling
-#warning FIXME: Url	
-	report->start( package, Url() );
+#warning FIXME: Url
+	report->start( package, package->source().url() );
 
 	Pathname file = package->getPlainRpm();
 
