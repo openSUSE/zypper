@@ -117,6 +117,9 @@ namespace zypp
       try
       {
         release();
+
+        MediaManager manager;
+        manager.close(_parentId);
       }
       catch( ... )
       {}
@@ -126,9 +129,7 @@ namespace zypp
     bool
     MediaISO::isAttached() const
     {
-      MediaManager manager;
       return checkAttached(false, false);
-      // FIXME: what's about manager.isAttached(_parentId) ?
     }
 
     // ---------------------------------------------------------------
