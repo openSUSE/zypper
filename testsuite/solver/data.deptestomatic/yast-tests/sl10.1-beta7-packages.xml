@@ -19869,7 +19869,7 @@
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
-    <dep name='kernel' />
+    <dep name='kernel-bigsmp' />
     <dep name='/bin/sh' />
     <dep name='/bin/sh' />
     <dep name='/bin/sh' />
@@ -19906,7 +19906,7 @@
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
-    <dep name='kernel' />
+    <dep name='kernel-default' />
     <dep name='/bin/sh' />
     <dep name='/bin/sh' />
     <dep name='/bin/sh' />
@@ -19942,7 +19942,7 @@
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
-    <dep name='kernel' />
+    <dep name='kernel-smp' />
     <dep name='/bin/sh' />
     <dep name='/bin/sh' />
     <dep name='/bin/sh' />
