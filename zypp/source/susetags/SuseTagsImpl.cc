@@ -364,7 +364,13 @@ namespace zypp
         PkgContent content( parsePackages( source_r, this, p ) );
 
 #warning Should use correct locale and locale fallback list
-        try {
+        try
+        {
+          // note, this locale detection has nothing to do with translated text.
+          // basically we are only loading the data we need. Instead of parsing all
+          // package description we fill the TranslatedText properties only
+          // with the detected locale.
+          
 	  ZYpp::Ptr z = getZYpp();
           Locale lang( z->getTextLocale() );
 
