@@ -42,8 +42,12 @@ namespace zypp
 
     std::string text( const Locale &lang = Locale() ) const
     {
-      // if there is no translation for this
-      if ( translations[lang].empty() )
+      Locale empty_locale;
+      // if there are no translation for the requested locale
+      // or the passed locale is a empty one, we activate the
+      // fallback mechanism, otherwise (else case), we just provide
+      // the (existant) requested locale)
+      if ( translations[lang].empty() || (lang == empty_locale))
       {
           // first, detect the locale
           ZYpp::Ptr z = getZYpp();
@@ -51,7 +55,7 @@ namespace zypp
           if ( translations[detected_lang].empty() )
           {
             Locale fallback_locale = detected_lang.fallback();
-            while ( fallback_locale != Locale() )
+            while ( fallback_locale != empty_locale )
             {
               if ( ! translations[fallback_locale].empty() )
                 return translations[fallback_locale];
@@ -60,7 +64,7 @@ namespace zypp
             }
             // we gave up, there are no translations with fallbacks
             // last try, emtpy locale
-            Locale empty_locale;
+            
             if ( ! translations[empty_locale].empty() )
               return translations[empty_locale];
             else
