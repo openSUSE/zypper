@@ -12,6 +12,9 @@
 #include <iostream>
 //#include "zypp/base/Logger.h"
 
+#include "zypp/ZYppFactory.h"
+#include "zypp/ZYpp.h"
+
 #include "zypp/base/String.h"
 #include "zypp/TranslatedText.h"
 
@@ -38,7 +41,41 @@ namespace zypp
     { setText(text, lang); }
 
     std::string text( const Locale &lang = Locale() ) const
-    { return translations[lang]; }
+    {
+      // if there is no translation for this
+      if ( translations[lang].empty() )
+      {
+          // first, detect the locale
+          ZYpp::Ptr z = getZYpp();
+          Locale detected_lang( z->getTextLocale() );
+          if ( translations[detected_lang].empty() )
+          {
+            Locale fallback_locale = detected_lang.fallback();
+            while ( fallback_locale != Locale() )
+            {
+              if ( ! translations[fallback_locale].empty() )
+                return translations[fallback_locale];
+
+              fallback_locale = fallback_locale.fallback();
+            }
+            // we gave up, there are no translations with fallbacks
+            // last try, emtpy locale
+            Locale empty_locale;
+            if ( ! translations[empty_locale].empty() )
+              return translations[empty_locale];
+            else
+              return std::string();
+          }
+          else
+          {
+            return translations[detected_lang];
+          }
+      }
+      else
+      {
+        return translations[lang]; 
+      }
+    }
 
     std::set<Locale> locales() const
     {

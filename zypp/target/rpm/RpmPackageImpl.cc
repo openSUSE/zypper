@@ -38,7 +38,7 @@ namespace zypp
       RPMPackageImpl::RPMPackageImpl(
 	const RpmHeader::constPtr data
       )
-      : _summary(data->tag_summary()),
+        : _summary(data->tag_summary(), Locale("en")),
 	_description(),
 	_buildtime(data->tag_buildtime()),
 	_buildhost(data->tag_buildhost()),
@@ -61,7 +61,8 @@ namespace zypp
 	_dir_sizes(parsed.dirSizes),
 #endif
       {
-	_description.setText(data->tag_description());
+        // we know we are reading english.
+        _description.setText(data->tag_description(), Locale("en"));
 	data->tag_du(_disk_usage);
       }
 

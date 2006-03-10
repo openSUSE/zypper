@@ -70,6 +70,9 @@ namespace zypp
     /** Return the name made of language and country name. */
     std::string name() const;
 
+    /** Return a fallback locale for this locale, when giving up, returns empty Locale() */
+    Locale fallback() const;
+
   private:
     /** Pointer to implementation */
     RW_pointer<Impl> _pimpl;

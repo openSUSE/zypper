@@ -59,7 +59,7 @@ namespace zypp
       { return std::string(); }
 
       Vendor SuseTagsPackageImpl::vendor() const
-      { return Vendor(); }
+      { return _source.vendor(); }
 
       Label SuseTagsPackageImpl::license() const
       { return _license; }
