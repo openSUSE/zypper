@@ -58,7 +58,8 @@ class MediaHandler {
 	/**
 	 * The attached media source description reference.
 	 */
-        MediaSourceRef  _mediaSource;
+	mutable
+	MediaSourceRef  _mediaSource;
 
 	/**
 	 * This is where the media will be actually attached ("mounted").

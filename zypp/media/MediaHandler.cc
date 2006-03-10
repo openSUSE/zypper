@@ -433,16 +433,16 @@ MediaHandler::checkAttached(bool isDevice,  bool fsType) const
   {
     MediaManager  manager;
 
-    time_t old = _attach_mtime;
+    time_t old_mtime = _attach_mtime;
     _attach_mtime = manager.getMountTableMTime();
-    if( !(old <= 0 || _attach_mtime != old))
+    if( !(old_mtime <= 0 || _attach_mtime != old_mtime))
     {
       // OK, skip the check (we've seen it at least once)
       _isAttached = true;
     }
     else
     {
-      if( old)
+      if( old_mtime > 0)
         DBG << "Mount table changed - rereading it" << std::endl;
       else
         DBG << "Forced check of the mount table" << std::endl;
@@ -498,12 +498,21 @@ MediaHandler::checkAttached(bool isDevice,  bool fsType) const
 
       if( !_isAttached)
       {
+	if( old_mtime > 0)
+	{
+          ERR << "Attached media not in mount table any more - forcing reset!"
+              << std::endl;
+
+	  _mediaSource.reset();
+	}
+	else
+	{
+          WAR << "Attached media not in mount table ..." << std::endl;
+	}
+
         // reset the mtime and force a new check to make sure,
         // that we've found the media at least once in the mtab.
         _attach_mtime = 0;
-
-        ERR << "Attached media not in mount table (any more)"
-            << std::endl;
       }
     }
   }
