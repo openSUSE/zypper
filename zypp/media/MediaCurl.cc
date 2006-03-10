@@ -170,11 +170,15 @@ void MediaCurl::attachTo (bool next)
   ** timeout. If required, it closes the connection, trys
   ** to reopen and fetch it - this works in many cases
   ** without to report any error to us.
-  */
-  ret = curl_easy_setopt( _curl, CURLOPT_TIMEOUT, 180 );
+  **
+  ** Disabled, because it breaks normal operations over a
+  ** slow link :(
+  **
+  ret = curl_easy_setopt( _curl, CURLOPT_TIMEOUT, 600 );
   if ( ret != 0 ) {
     ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
+  */
 
   if ( _url.getScheme() == "http" ) {
     // follow any Location: header that the server sends as part of
