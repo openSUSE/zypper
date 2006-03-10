@@ -56,7 +56,7 @@ class MediaHandler {
     	static Pathname _attachPrefix;
 
 	/**
-	 * The attached media source.
+	 * The attached media source description reference.
 	 */
         MediaSourceRef  _mediaSource;
 
@@ -70,8 +70,9 @@ class MediaHandler {
 	 * The user provided attach point or the last attach point from
 	 * successfull reattach request. It may contain following values:
 	 *
-	 *      "",  true  => create temp attach point in default dir
-	 *      dir, true  => create temp attach point bellow of dir
+	 *      "",  true  => create temporary attach point bellow of
+	 *                    _attachPrefix or a built-in default and
+	 *                    remove it if not needed any more.
 	 *      dir, false => user specified attach point (not removed)
 	 */
 	AttachPoint     _AttachPointHint;
@@ -109,12 +110,15 @@ class MediaHandler {
 	Pathname         attachPoint() const;
 
 	/**
-	 * Set a new attach point and update localRoot.
+	 * Set a new attach point.
+	 * \param path  The attach point directory path.
+	 * \param temp  If to remove the attach point while cleanup.
 	 */
-	void             setAttachPoint(const Pathname &path, bool _temporary);
+	void             setAttachPoint(const Pathname &path, bool temp);
 
 	/**
-	 * Set a (shared) attach point and update localRoot.
+	 * Set a (shared) attach point.
+	 * \param ref New attach point reference.
 	 */
 	void             setAttachPoint(const AttachPointRef &ref);
 
@@ -125,34 +129,74 @@ class MediaHandler {
 
 	/**
 	 * Set the attach point hint (e.g. on reattach).
+	 * \param path  The attach point directory path.
+	 * \param temp  If to remove the attach point while cleanup.
 	 */
-	void             attachPointHint(const Pathname &path, bool _temporary);
+	void             attachPointHint(const Pathname &path, bool temp);
 
 	/**
 	 * Try to create a default / temporary attach point.
+	 * It trys to create it in attachPrefix if avaliable,
+	 * then in built-in directories.
 	 * \return The name of the new attach point or empty path name.
 	 */
 	Pathname         createAttachPoint() const;
+	/**
+	 * Try to create a temporary attach point in specified root.
+	 * \param attach_root The attach root dir where to create the
+	 *                    attach point in.
+	 * \return The name of the new attach point or empty path name.
+	 */
         Pathname         createAttachPoint(const Pathname &attach_root) const;
 
 	/**
-	 * Remove unused attach point.
+	 * Remove unused attach point. If the attach point is temporary,
+	 * the attach point directory and all it content will be removed.
 	 */
 	void             removeAttachPoint();
 
+        /**
+	 * Verify if the specified directory as attach point (root)
+	 * as requires by the particular media handler implementation.
+	 * \param apoint The directory to check.
+	 * \return True, if the directory checks succeeded.
+	 */
 	virtual bool     checkAttachPoint(const Pathname &apoint) const;
 
+	/**
+	 * Verify if the specified directory as attach point (root)
+	 * using requested checks.
+	 * \param apoint The directory to check.
+	 * \param empty_dir Check if the directory is empty.
+	 * \param writeable Check if the directory is writeable.
+	 * \return True, if the directory checks succeeded.
+	 */
 	static bool      checkAttachPoint(const Pathname &apoint,
 					  bool            empty_dir,
 	                                  bool            writeable);
 
+	/**
+	 * Ask media manager, if the specified path is already used
+	 * as attach point or if there are another attach points
+	 * bellow of it.
+	 * \param path The attach point path to check.
+	 * \return True, if the path can be used as attach point.
+	 */
         bool             isUseableAttachPoint(const Pathname &path) const;
 
+	/**
+	 * Get the media source name or an empty string.
+	 * \return media source name or empty string.
+	 */
 	std::string      mediaSourceName() const
 	{
 	  return _mediaSource ? _mediaSource->name : "";
 	}
 
+	/**
+	 * Set new media source reference.
+	 * \param ref The new reference.
+	 */
 	void             setMediaSource(const MediaSourceRef &ref);
 
         /**
@@ -170,21 +214,54 @@ class MediaHandler {
 	AttachedMedia
 	findAttachedMedia(const MediaSourceRef &media) const;
 
+	/**
+	 * Check if the current media handler depends on an
+	 * another handler specified by media access id.
+	 * \param parentId The id of the parent handler to check against.
+	 * \return true if it depends, false if not.
+	 */
 	bool                 dependsOnParent(MediaAccessId parentId);
 
 	/**
 	 * Returns the attached media. Used by MediaManager
 	 * to find other handlers using the same source.
+	 * \note This function increments reference counters
+	 *       on the mediaSource and attachPoint references
+	 *       it contains, for the life time of the returned
+	 *       object. That is, it enables a (temporary) sharing
+	 *       of them.
+	 * \return The AttachedMedia struct containing (shared)
+	 *         references to media source and attach point.
 	 */
 	AttachedMedia        attachedMedia() const;
 
+	/**
+	 * Returns a hint if the media is shared or not.
+	 * \return true, if media is shared.
+	 */
 	bool                 isSharedMedia() const;
 
+	/**
+	 * Check actual mediaSource attachment against the current
+	 * mount table of the system. Used to implement isAttached().
+	 * \param aDevice If to check only against devices in the
+	 *                mount table or only against other mounted
+	 *                sources (nfs, cifs, loop mounted file).
+	 * \param fsType  If to use the filesystem type from the
+	 *                mount table or not (nfs, smb and cifs only).
+	 * \return true, if the media appears in the mount table.
+	 */
 	bool                 checkAttached(bool aDevice,
 	                                   bool fsType=false) const;
 
+	/**
+	 * \deprecated FIXME: remove it
+	 */
 	void                 reattach(const Pathname &attach_point,
 	                              bool            temporary);
+	/**
+	 * \deprecated FIXME: remove it
+	 */
 	virtual void         reattachTo(const Pathname &attach_point,
 	                                bool            temporary);
 
