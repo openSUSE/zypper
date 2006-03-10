@@ -364,27 +364,45 @@ namespace zypp
         PkgContent content( parsePackages( source_r, this, p ) );
 
 #warning Should use correct locale and locale fallback list
-        try
-        {
-          // note, this locale detection has nothing to do with translated text.
-          // basically we are only loading the data we need. Instead of parsing all
-          // package description we fill the TranslatedText properties only
-          // with the detected locale.
+        // note, this locale detection has nothing to do with translated text.
+        // basically we are only loading the data we need. Instead of parsing all
+        // package description we fill the TranslatedText properties only
+        // with the detected locale.
           
-	  ZYpp::Ptr z = getZYpp();
-          Locale lang( z->getTextLocale() );
+	ZYpp::Ptr z = getZYpp();
+        Locale lang( z->getTextLocale() );
 
-	  std::string packages_lang_name( "packages." );
-	  packages_lang_name += lang.language().code();
-
-          p = cache ? _data_dir + packages_lang_name : provideFile( _data_dir + packages_lang_name);
-          DBG << "Going to parse " << p << endl;
-          parsePackagesLang( p, lang, content );
+        std::string packages_lang_prefix( "packages." );
+	std::string packages_lang_name;
+          
+        // find the most apropiate file
+        bool trymore = true;
+        while ( (lang != Locale()) && trymore )
+        {
+          packages_lang_name = packages_lang_prefix + lang.code();
+          MIL << "Going to try " << packages_lang_name << std::endl;
+          try
+          {
+            p = cache ? _data_dir + packages_lang_name : provideFile( _data_dir + packages_lang_name);
+            if ( PathInfo(p).isExist() )
+            {
+              MIL << packages_lang_name << " found" << std::endl;
+              DBG << "Going to parse " << p << endl;
+              parsePackagesLang( p, lang, content );
+              trymore = false;
+            }
+            else
+            {
+              MIL << packages_lang_name << " not found" << endl;
+            }
+          }
+          catch (Exception & excpt_r)
+          {
+            ZYPP_CAUGHT(excpt_r);
+          }
+          lang = lang.fallback();  
         }
-        catch (Exception & excpt_r) {
-          WAR << "packages.en not found" << endl;
-        }
-
+          
         PkgDiskUsage du;
         try
         {
