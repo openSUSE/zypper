@@ -11,13 +11,8 @@
   <mediaid/>
 </setup>
 <trial>
-  <install channel="sl10_packages" kind="product" name="SUSE LINUX"/>
-  <install channel="sl10_selections" kind="selection" name="default"/>
-  <install channel="sl10_selections" kind="selection" name="Laptop"/>
-  <install channel="sl10_packages" kind="package" name="ial"/>
+  <install channel="sl10_packages" kind="package" name="tpctl"/>
   <install channel="sl10_packages" kind="package" name="kernel-default"/>
-  <install channel="sl10_packages" kind="package" name="toshutils"/>
-  <install channel="sl10_packages" kind="package" name="yast2-trans-de"/>
   <reportproblems/>
 </trial>
 </test>
