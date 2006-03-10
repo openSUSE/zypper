@@ -79,7 +79,7 @@ using zypp::capability::SplitCap;
 
 // check if downgrade is allowed
 //
-// both must have allowed vendor (e.g. 'SuSE', 'Novell', ...) and candidates buildtime must be
+// candidate must have allowed vendor (e.g. 'SuSE', 'Novell', ...) and candidates buildtime must be
 // newer.
 
 static bool
@@ -88,17 +88,19 @@ downgrade_allowed (PoolItem_Ref installed, PoolItem_Ref candidate)
     if ( installed->edition().compare (candidate->edition()) > 0 )
 	return false; // candidate is newer
 
+    if (installed.status().isLocked()) {
+	MIL << "Installed " << installed << " is locked, not upgrading" << endl;
+	return false;
+    }
+
     static VendorAttr *va = VendorAttr::vendorAttr();
 
     Resolvable::constPtr ires = installed.resolvable();
     Package::constPtr ipkg = asKind<Package>(ires);
     Resolvable::constPtr cres = candidate.resolvable();
     Package::constPtr cpkg = asKind<Package>(cres);
-if (ipkg) DBG << "Installed vendor '" << ipkg->vendor() << "'" << endl;
 if (cpkg) DBG << "Candidate vendor '" << cpkg->vendor() << "'" << endl;
-    if ( ipkg
-	&& cpkg
-	&& va->isKnown( ipkg->vendor() )
+    if (cpkg
 	&& va->isKnown( cpkg->vendor() ) )
     {
 #warning Had Y2PM::runningFromSystem
