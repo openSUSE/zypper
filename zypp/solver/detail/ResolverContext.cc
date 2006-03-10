@@ -1699,9 +1699,9 @@ ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of 
 	&& thisMap.size() == 1
 	&& userSource == userSourceCompare) {
 	// We have only one source from which all items will be instaled.
-	// So less account of items are better
+	// So we will regards the complete amount of installed/updated packages
 	// Testcase basic-exercises/exercise-14-test
-	cmpSource = cmpCompare - cmpSource;	    
+	cmpSource = 0;
     } else {
 	// The solutions has different channels with user selected items.
 	// Take the solution with the greater account of items in this channel
@@ -1726,7 +1726,7 @@ ResolverContext::partialCompare (ResolverContext_Ptr context)
 	// collecting all data for comparing both resultion results
 	int  cmpVersion = 0; // Version compare of ACCUMULATED items
 	int  cmpSource = 0;  // compare of Sources
-	
+
 	collectCompareInfo (cmpVersion, cmpSource, context);
 
 	// comparing versions
