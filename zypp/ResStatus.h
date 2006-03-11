@@ -195,6 +195,15 @@ namespace zypp
     bool isUndetermined() const
     { return fieldValueIs<EstablishField>( UNDETERMINED ); }
 
+    bool isEstablishedUneeded() const
+    { return fieldValueIs<EstablishField>( UNNEEDED ); }
+
+    bool isEstablishedSatisfied() const
+    { return fieldValueIs<EstablishField>( SATISFIED ); }
+
+    bool isEstablishedIncomplete() const
+    { return fieldValueIs<EstablishField>( INCOMPLETE ); }
+
     bool isUnneeded() const
     { return isUninstalled() && fieldValueIs<EstablishField>( UNNEEDED ); }
 
