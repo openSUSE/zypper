@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-SUBDIRS = hal rpm store
+SUBDIRS = hal modalias rpm store
 
 INCLUDES = -DZYPP_BASE_LOGGER_LOGGROUP=\"target\"
 
