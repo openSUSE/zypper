@@ -41,8 +41,6 @@ namespace zypp
     namespace modalias
     { /////////////////////////////////////////////////////////////////
 
-const char *modalias_matches(const char *pattern);
-
 /*
  * For each file in the directory PATH other than . and .., call
  * FUNC with the arguments PATH, the file's name, and ARG.
@@ -145,6 +143,7 @@ struct Modalias::Impl
 
     /** Ctor. */
     Impl()
+	: _modaliases(0)
     {
 	foreach_file( "/sys/bus", iterate_busses, &_modaliases );
     }
@@ -152,7 +151,12 @@ struct Modalias::Impl
     /** Dtor. */
     ~Impl()
     {
-#warning free() malloced stuff
+	while (_modaliases != NULL) {
+	    struct modalias_list *l = _modaliases;
+	    _modaliases = _modaliases->next;
+	    free(l->modalias);
+	    free(l);
+	}
     }
 
     /**
