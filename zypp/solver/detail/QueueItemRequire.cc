@@ -381,6 +381,10 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		}
 		if (!requested_match) {
 		    CapSet freshens( item->dep( Dep::FRESHENS ) );
+
+		    // try to find a match of the locale freshens with one of the requested locales
+		    //   if we have a match, we're done.
+
 		    for (CapSet::const_iterator cit = freshens.begin(); cit != freshens.end(); ++cit) {
 			if (cit->refers() == ResTraits<Language>::kind) {
 			    string loc = cit->index();
@@ -402,15 +406,25 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		// loop over requested locales, loop over their fallbacks, and try to find a matching provider
 
 		for (ZYpp::LocaleSet::const_iterator rit = requested_locales.begin(); rit != requested_locales.end(); ++rit) {
-		    // Locale fallback = rit->fallback();
-		    Locale fallback( "en" );
-		    MIL << "requested " << *rit << " fallback " << fallback << endl;
-		    std::map<std::string,PoolItem>::const_iterator match = language_freshens.find( fallback.code() );
-		    if (match != language_freshens.end()) {
-			MIL << match->second << " matches the fallback" << endl;
-			info.providers.clear();
-			info.providers.push_back( match->second );
-			break;
+
+		    // loop over possible fallbacks
+		    Locale l = *rit;
+		    for (;;) {
+			Locale fallback = l.fallback();
+			if (fallback == Locale::noCode
+			    || fallback == l)
+			{
+			    break;
+			}
+			MIL << "requested " << l << " fallback " << fallback << endl;
+			std::map<std::string,PoolItem>::const_iterator match = language_freshens.find( fallback.code() );
+			if (match != language_freshens.end()) {
+			    MIL << match->second << " matches the fallback" << endl;
+			    info.providers.clear();
+			    info.providers.push_back( match->second );
+			    break;
+			}
+			l = fallback;
 		    }
 		}
 #if 0	// just debug
