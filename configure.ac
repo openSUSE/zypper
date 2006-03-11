@@ -229,6 +229,7 @@ AC_OUTPUT(	 po/Makefile.in\
 	zypp/target/store/Makefile	\
 	zypp/target/store/xml/Makefile  \
 	zypp/target/hal/Makefile	\
+	zypp/target/modalias/Makefile	\
 	zypp/zypp_detail/Makefile
 )
 dnl ==================================================
