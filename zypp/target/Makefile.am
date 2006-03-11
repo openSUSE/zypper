@@ -30,6 +30,7 @@ lib@PACKAGE@_target_la_LDFLAGS = @LIBZYPP_VERSION_INFO@
 lib@PACKAGE@_target_la_LIBADD = \
 	rpm/lib@PACKAGE@_target_rpm.la	\
 	hal/lib@PACKAGE@_target_hal.la \
+	modalias/lib@PACKAGE@_target_modalias.la \
 	store/lib@PACKAGE@_target_store.la
 
 ## ##################################################
