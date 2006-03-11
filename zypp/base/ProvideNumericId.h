@@ -25,7 +25,15 @@ namespace zypp
     //
     /** Base class for objects providing a numeric Id.
      * The ctor creates a NumericId from some static counter.
-     * The only assertion is that \c 0 is not used as an Id.
+     *
+     * The only assertion is that \c 0 is not used as an Id,
+     * \b unless the derived class explicitly requests this by
+     * using \ref ProvideNumericId( const void *const ).
+     *
+     * Why should you want to use \c 0 as an Id? E.g if your class
+     * provides some (singleton) No-object. Might be desirable to
+     * make the No-object have No-Id.
+     *
      * \code
      * struct Foo : public base::ProvideNumericId<Foo,unsigned>
      * {};
@@ -55,6 +63,13 @@ namespace zypp
         { return *this; }
         /** Dtor */
         ~ProvideNumericId()
+        {}
+      protected:
+        /** No-Id ctor (0).
+         * Explicitly request Id \c 0. Use it with care!
+        */
+        ProvideNumericId( const void *const )
+        : _numericId( 0 )
         {}
       private:
         /** Provide the next Id to use. */

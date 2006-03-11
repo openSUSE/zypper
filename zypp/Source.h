@@ -59,7 +59,7 @@ namespace zypp
     */
     Source_Ref();
 
-    /** A dummy Source providing nothing, doing nothing.
+    /** A dummy Source (Id \c 0) providing nothing, doing nothing.
      * \todo provide a _constRef
     */
     static const Source_Ref noSource;

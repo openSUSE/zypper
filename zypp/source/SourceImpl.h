@@ -48,6 +48,9 @@ namespace zypp
      * \ref factoryCtor initializes the remaining data members and
      * calls \ref factoryInit to let implementations actually retrieve
      * the metadata.
+     *
+     * \todo Provide class NoSourceImpl and protect it against manipulation
+     * of data via set methods (or erase them).
     */
     class SourceImpl : public base::ReferenceCounted
                      , public base::ProvideNumericId<SourceImpl,Source_Ref::NumericId>
@@ -220,7 +223,6 @@ namespace zypp
       // no playground below this line ;)
       ///////////////////////////////////////////////////////////////////
     protected:
-    protected:
       /** Default Ctor.
        * Just create the object and prepare the data members. Then wait
        * for the \ref factoryCtor call to launch the Source.
@@ -261,9 +263,12 @@ namespace zypp
       /** Helper indicating creation of nullimpl. */
       struct null {};
 
-      /** Ctor, excl. for nullimpl only. */
+      /** Ctor, excl. for nullimpl only.
+       * Nullimpl has no Id (\c 0).
+      */
       SourceImpl( const null & )
-      : _res_store_initialized(true)
+      : base::ProvideNumericId<SourceImpl,Source_Ref::NumericId>( NULL )
+      , _res_store_initialized(true)
       {}
 
     public:

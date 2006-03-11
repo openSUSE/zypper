@@ -18,6 +18,7 @@
 #include "zypp/SourceCache.h"
 #include "zypp/source/Builtin.h"
 #include "zypp/media/MediaAccess.h"
+#include "zypp/SourceFactory.h"
 #include "zypp/SourceManager.h"
 #include "zypp/Pathname.h"
 
@@ -52,7 +53,7 @@ namespace zypp
   //
   SourceCache::~SourceCache()
   {}
-  
+
   void SourceCache::setCacheDir( const Pathname & dir_r )
   {
     _cache_dir = dir_r;
@@ -91,7 +92,9 @@ namespace zypp
       getline(data, url);
       getline(data, path);
       getline(data, alias);
-      SourceManager::sourceManager()->addSource(url, path, alias, cache_dir);
+
+      Source_Ref newsrc( SourceFactory().createFrom(url, path, alias, cache_dir) );
+      SourceManager::sourceManager()->addSource(newsrc);
     }
   }
 

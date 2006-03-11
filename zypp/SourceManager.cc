@@ -97,10 +97,19 @@ namespace zypp
 
     inline SourceManager::SourceId sourceTableAdd( Source_Ref source_r )
     {
-      MIL << "SourceManager add " << source_r << endl;
-      _sources[source_r.numericId()] = source_r;
+      if ( source_r.numericId() )
+        {
+          MIL << "SourceManager add " << source_r << endl;
+          _sources[source_r.numericId()] = source_r;
 
-      dumpSourceTableOn( DBG );
+          dumpSourceTableOn( DBG );
+        }
+      else
+        {
+          // Not worth an Exception. Request to add noSource, adds no Source,
+          // and returns the noSource Id.
+          WAR << "SourceManager does not add Source::noSource" << endl;
+        }
       return source_r.numericId();
     }
 
@@ -136,14 +145,6 @@ namespace zypp
   SourceManager::SourceId SourceManager::addSource( Source_Ref source_r )
   {
     return sourceTableAdd( source_r );
-  }
-
-  /** \deprecate SourceManager should operate on built sources. */
-  SourceManager::SourceId SourceManager::addSource(const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r)
-  {
-    MIL << "SourceManager create and add Source( Url:" << url_r << ", Path:" << path_r << ", Alias:" <<  alias_r << ", Cache:" << cache_dir_r << endl;
-    Source_Ref src( SourceFactory().createFrom(url_r, path_r, alias_r, cache_dir_r) );
-    return sourceTableAdd( src );
   }
 
   void SourceManager::removeSource(SourceManager::SourceId id)
@@ -349,7 +350,7 @@ namespace zypp
 	SourceId id = 0;
 
 	try {
-	    id = addSource(it->url, it->product_dir, it->alias, it->cache_dir);
+          id = addSource( SourceFactory().createFrom(it->url, it->product_dir, it->alias, it->cache_dir) );
 	}
 	catch ( Exception expt ){
 	    ERR << "Unable to restore source from " << it->url << endl;

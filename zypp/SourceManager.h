@@ -134,36 +134,20 @@ namespace zypp
 
     /**
      * Return ids of all sources
-     *
      */
     std::list<SourceId> allSources() const;
 
-    /**
-     * Add a new source
-     *
-     * \throws Exception
-     */
-    SourceId addSource(const Url & url_r, const Pathname & path_r = "/", const std::string & name_r = "", const Pathname & cache_dir_r = "");
-
-    /**
-     * Add a new source
-     *
-     * \throws Exception
+    /** Add a new source.
+     * An attempt to add Source_Ref::noSource does nothing but
+     * returning Source_Ref::noSource.numericId(). Thus it
+     * results in adding no Source.
      */
     SourceId addSource(Source_Ref source_r);
 
-    /**
-     * Remove an existing source by ID
-     *
-     * \throws Exception
-     */
+    /** Remove an existing source by ID. */
     void removeSource(SourceId id);
 
-    /**
-     * Remove an existing source by Alias
-     *
-     * \throws Exception
-     */
+    /** Remove an existing source by Alias. */
     void removeSource(const std::string & alias_r);
 
     /**
