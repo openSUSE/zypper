@@ -23,7 +23,9 @@
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
+#include "zypp/Package.h"
 
+#include <zypp/SourceManager.h>
 #include <zypp/SourceFactory.h>
 #include <zypp/source/susetags/SuseTagsImpl.h>
 
@@ -72,7 +74,7 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
-struct X : public base::ProvideNumericId<X>
+struct X : public base::ProvideNumericId<X,unsigned>
 {
 
 };
@@ -94,15 +96,20 @@ template<>
     bool operator()( const ui::Selectable::Ptr & obj )
     {
       if ( obj ) {
+        obj->set_status( ui::S_Install );
         USR << *obj << std::endl;
         std::for_each( obj->availableBegin(), obj->availableEnd(),
                        PrintPtr<ResObject::constPtr>() );
+        if ( obj->availableBegin() != obj->availableEnd() )
+          SEC << PrintPtr<ResObject::constPtr>()(*obj->availableBegin() )
+              << " " << asKind<Package>(*obj->availableBegin())->vendor() << endl;
       }
       else
         USR << "(NULL)" << std::endl;
       return true;
     }
   };
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -117,7 +124,17 @@ int main( int argc, char * argv[] )
   if (argc >= 2 )
     infile = argv[1];
 
-  Source_Ref src( createSource("dir:/Local/ma/zypp/libzypp/devel/devel.ma/SOURCE") );
+  DBG << Source_Ref() << endl;
+  DBG << Source_Ref::noSource << endl;
+  Source_Ref src( createSource("dir:/Local/ma/zypp/libzypp/devel/devel.ma") );
+  DBG << *SourceManager::sourceManager() << endl;
+  SourceManager::sourceManager()->addSource( src );
+  SourceManager::sourceManager()->removeSource( 0 );
+  SourceManager::sourceManager()->removeSource( src.numericId() );
+  return 0;
+
+  //Source_Ref src( createSource("dir:/Local/ma/zypp/libzypp/devel/devel.ma") );
+  //Source_Ref src( createSource("dir:/Local/ma/zypp/libzypp/devel/devel.ma/SOURCE") );
   Source_Ref trg( createSource("dir:/Local/ma/zypp/libzypp/devel/devel.ma/TARGET") );
 
   ResPoolManager pool;
@@ -129,8 +146,14 @@ int main( int argc, char * argv[] )
   std::for_each( query.begin(), query.end(), Print<PoolItem>() );
 
   ResPoolProxy y2pm( query );
+  y2pm.saveState<Package>();
   std::for_each( y2pm.byKindBegin<Package>(), y2pm.byKindEnd<Package>(),
                  PrintPtr<ui::Selectable::Ptr>() );
+
+
+
+  y2pm.saveState<Package>();
+  SEC << y2pm.diffState<Package>() << endl;
 
 
   INT << "===[END]============================================" << endl << endl;

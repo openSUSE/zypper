@@ -68,12 +68,22 @@ template<class _Container>
 ///////////////////////////////////////////////////////////////////
 inline Source_Ref createSource( const std::string & url_r )
 {
+  Source_Ref ret;
   Measure x( "createSource: " + url_r );
-  Source_Ref ret( SourceFactory().createFrom( Url(url_r) ) );
+  try
+    {
+      ret = SourceFactory().createFrom( Url(url_r) );
+    }
+  catch ( const Exception & )
+    {
+      return Source_Ref::noSource;
+    }
   x.start( "parseSource: " + url_r );
   ret.resolvables();
   x.stop();
+  MIL << "Content " << ret << "{" << endl;
   rstats( ret.resolvables() );
+  MIL << "}" << endl;
 
   return ret;
 }
