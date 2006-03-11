@@ -1,0 +1,264 @@
+<channel>
+  <subchannel>
+<package>
+  <name>kernel-default</name>
+  <section>system</section>
+  <location>1</location>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>2.6.1</version>
+      <release>2</release>
+      <arch>x86_64</arch>
+    </update>
+  </history>
+  <provides>
+    <dep name='kernel' op='=' version='2.6.1' />
+    <dep name='kernel-default-nongpl' />
+    <dep name='k_deflt' />
+    <dep name='kernel(arch_i386_kernel_cpu_mtrr)' op='=' version='badf815515a4fe72' />
+    <dep name='kernel(arch_x86_64_ia32)' op='=' version='f2b399f001cd962f' />
+    <dep name='kernel(arch_x86_64_kernel)' op='=' version='3e35902e27909451' />
+    <dep name='kernel(arch_x86_64_kernel_acpi)' op='=' version='b3c4009d03c84eee' />
+    <dep name='kernel(arch_x86_64_lib)' op='=' version='fcba93b45952eb63' />
+    <dep name='kernel(arch_x86_64_mm)' op='=' version='dcbf78f107b35862' />
+    <dep name='kernel(block)' op='=' version='37337a8e12c85963' />
+    <dep name='kernel(crypto)' op='=' version='66b8f65def368586' />
+    <dep name='kernel(drivers)' op='=' version='f651153e9e3fadaf' />
+    <dep name='kernel(drivers_acpi)' op='=' version='5ec6d5de8f0f381c' />
+    <dep name='kernel(drivers_acpi_events)' op='=' version='b91ee280f00884ab' />
+    <dep name='kernel(drivers_acpi_hardware)' op='=' version='205aaa305b7f55f7' />
+    <dep name='kernel(drivers_acpi_namespace)' op='=' version='e139a73aba2ac987' />
+    <dep name='kernel(drivers_acpi_resources)' op='=' version='5329f052bc61f380' />
+    <dep name='kernel(drivers_acpi_tables)' op='=' version='e4dfd911e8c5a4c7' />
+    <dep name='kernel(drivers_acpi_utilities)' op='=' version='fad4d2568d007064' />
+    <dep name='kernel(drivers_base)' op='=' version='61b92107cf4fb75d' />
+    <dep name='kernel(drivers_base_power)' op='=' version='1b1a3d1548732a8c' />
+    <dep name='kernel(drivers_block)' op='=' version='8efb67abcb0d7e92' />
+    <dep name='kernel(drivers_block_paride)' op='=' version='987b705d2b463de0' />
+    <dep name='kernel(drivers_cdrom)' op='=' version='b965e316c28cd36d' />
+    <dep name='kernel(drivers_char)' op='=' version='5e3f19b929848658' />
+    <dep name='kernel(drivers_char_agp)' op='=' version='678d2e935bb3cd66' />
+    <dep name='kernel(drivers_char_drm)' op='=' version='98605d5943f63c7a' />
+    <dep name='kernel(drivers_char_ipmi)' op='=' version='9dd66d230b91ba00' />
+    <dep name='kernel(drivers_char_tpm)' op='=' version='4b97b30d13e4f92e' />
+    <dep name='kernel(drivers_connector)' op='=' version='5ed4adead11686d5' />
+    <dep name='kernel(drivers_cpufreq)' op='=' version='a5acc919f464bdc2' />
+    <dep name='kernel(drivers_dma)' op='=' version='531a12468ce4f3b9' />
+    <dep name='kernel(drivers_edac)' op='=' version='4a9d1950a1b71ac3' />
+    <dep name='kernel(drivers_hwmon)' op='=' version='ea986cb3f0a31a74' />
+    <dep name='kernel(drivers_i2c)' op='=' version='258a6a2e427d3cdf' />
+    <dep name='kernel(drivers_i2c_algos)' op='=' version='4877d3d36a1a1f7c' />
+    <dep name='kernel(drivers_i2c_busses)' op='=' version='94d4caeb4db7457b' />
+    <dep name='kernel(drivers_i2c_chips)' op='=' version='33ce4823821ff688' />
+    <dep name='kernel(drivers_ide)' op='=' version='216fa9959e99c681' />
+    <dep name='kernel(drivers_ieee1394)' op='=' version='d36e5247db3893e6' />
+    <dep name='kernel(drivers_infiniband_core)' op='=' version='e43070cd7b065f8c' />
+    <dep name='kernel(drivers_input)' op='=' version='14303288af9e5c35' />
+    <dep name='kernel(drivers_input_gameport)' op='=' version='103744aa412c3035' />
+    <dep name='kernel(drivers_input_serio)' op='=' version='c9ae2094658a2106' />
+    <dep name='kernel(drivers_isdn_capi)' op='=' version='7aff38820fe80e25' />
+    <dep name='kernel(drivers_isdn_hardware_avm)' op='=' version='88281266e50355ff' />
+    <dep name='kernel(drivers_isdn_hisax)' op='=' version='e131f2ec7f1354a4' />
+    <dep name='kernel(drivers_isdn_i4l)' op='=' version='9ab657911358295a' />
+    <dep name='kernel(drivers_md)' op='=' version='a6641a9cea366bd8' />
+    <dep name='kernel(drivers_media_common)' op='=' version='31840f78168de21b' />
+    <dep name='kernel(drivers_media_dvb_b2c2)' op='=' version='f303c33f8fcb199f' />
+    <dep name='kernel(drivers_media_dvb_bt8xx)' op='=' version='8fb3a2fed4320af2' />
+    <dep name='kernel(drivers_media_dvb_dvb_core)' op='=' version='493fa096137daf8b' />
+    <dep name='kernel(drivers_media_dvb_dvb_usb)' op='=' version='c57b757c4ae75b12' />
+    <dep name='kernel(drivers_media_dvb_frontends)' op='=' version='5f0bc7eb44f8a3f0' />
+    <dep name='kernel(drivers_media_dvb_ttpci)' op='=' version='cd97f9fe14bc4d65' />
+    <dep name='kernel(drivers_media_dvb_ttusb_dec)' op='=' version='475d30a047aa4dce' />
+    <dep name='kernel(drivers_media_video)' op='=' version='6ff08178e14e5114' />
+    <dep name='kernel(drivers_media_video_cx88)' op='=' version='4f4002e9345e6da8' />
+    <dep name='kernel(drivers_media_video_em28xx)' op='=' version='5336cd68bd1cb8a8' />
+    <dep name='kernel(drivers_media_video_saa7134)' op='=' version='430906bff104a08a' />
+    <dep name='kernel(drivers_message_fusion)' op='=' version='f694d89f39a3deb1' />
+    <dep name='kernel(drivers_message_i2o)' op='=' version='0cb2521b3a794169' />
+    <dep name='kernel(drivers_mmc)' op='=' version='5ef82549bd397e06' />
+    <dep name='kernel(drivers_mtd)' op='=' version='e64a157069f57770' />
+    <dep name='kernel(drivers_mtd_chips)' op='=' version='55a372e02d541ada' />
+    <dep name='kernel(drivers_mtd_devices)' op='=' version='a47567ad2b426cbb' />
+    <dep name='kernel(drivers_mtd_maps)' op='=' version='4f561dc821f70258' />
+    <dep name='kernel(drivers_mtd_nand)' op='=' version='b0e6bbeb643cdc77' />
+    <dep name='kernel(drivers_mtd_onenand)' op='=' version='31db587c3d4a4a4f' />
+    <dep name='kernel(drivers_net)' op='=' version='e46e43cd72663732' />
+    <dep name='kernel(drivers_net_arcnet)' op='=' version='931413c1788d9728' />
+    <dep name='kernel(drivers_net_hamradio)' op='=' version='4231a366e382686f' />
+    <dep name='kernel(drivers_net_irda)' op='=' version='d6579df929ced09b' />
+    <dep name='kernel(drivers_net_phy)' op='=' version='04430636ea088465' />
+    <dep name='kernel(drivers_net_tokenring)' op='=' version='5f4bfeece2957aad' />
+    <dep name='kernel(drivers_net_wan)' op='=' version='128c2ed07e00a31b' />
+    <dep name='kernel(drivers_net_wireless)' op='=' version='93ead9d52c9f2443' />
+    <dep name='kernel(drivers_net_wireless_hostap)' op='=' version='8b472b3c9bed6503' />
+    <dep name='kernel(drivers_parport)' op='=' version='2e373244532341a2' />
+    <dep name='kernel(drivers_pci)' op='=' version='5f94c7be39e88392' />
+    <dep name='kernel(drivers_pci_hotplug)' op='=' version='bd1fde994c9e2620' />
+    <dep name='kernel(drivers_pci_pcie)' op='=' version='417b1aa60a6fcdda' />
+    <dep name='kernel(drivers_pcmcia)' op='=' version='d666f5ef2d86814f' />
+    <dep name='kernel(drivers_scsi)' op='=' version='8c8922cea568f250' />
+    <dep name='kernel(drivers_scsi_megaraid)' op='=' version='1252183da1106229' />
+    <dep name='kernel(drivers_scsi_qla2xxx)' op='=' version='b5fca58d3df77060' />
+    <dep name='kernel(drivers_serial)' op='=' version='de1faa331873476d' />
+    <dep name='kernel(drivers_spi)' op='=' version='b0afc1a5b599f19f' />
+    <dep name='kernel(drivers_telephony)' op='=' version='2e697fd6e020df65' />
+    <dep name='kernel(drivers_usb)' op='=' version='7ce4eb38478e14d5' />
+    <dep name='kernel(drivers_usb_core)' op='=' version='0eb8376a5c53d511' />
+    <dep name='kernel(drivers_usb_host)' op='=' version='5c500ad72cc2b374' />
+    <dep name='kernel(drivers_usb_media)' op='=' version='a259f1b66761687d' />
+    <dep name='kernel(drivers_usb_net)' op='=' version='782f968a8e7db96c' />
+    <dep name='kernel(drivers_usb_serial)' op='=' version='2949dec5bb31b552' />
+    <dep name='kernel(drivers_video)' op='=' version='f24045fe145f2206' />
+    <dep name='kernel(drivers_video_backlight)' op='=' version='fe55a5ed7d1627cd' />
+    <dep name='kernel(drivers_video_console)' op='=' version='fa2258517b1e3aea' />
+    <dep name='kernel(drivers_video_matrox)' op='=' version='8777000508f60f9e' />
+    <dep name='kernel(drivers_video_sis)' op='=' version='842ff00fd8292ba5' />
+    <dep name='kernel(drivers_w1)' op='=' version='5abdda113096e826' />
+    <dep name='kernel(fs)' op='=' version='8769d7b3b2d20503' />
+    <dep name='kernel(fs_configfs)' op='=' version='aff27005e1038311' />
+    <dep name='kernel(fs_debugfs)' op='=' version='ac8cb597e6c919ed' />
+    <dep name='kernel(fs_dmapi)' op='=' version='b2254bc695e43b42' />
+    <dep name='kernel(fs_exportfs)' op='=' version='5203e43f852b65a3' />
+    <dep name='kernel(fs_fat)' op='=' version='fd58c14273206043' />
+    <dep name='kernel(fs_jbd)' op='=' version='8d4c77da53c7beeb' />
+    <dep name='kernel(fs_lockd)' op='=' version='730ff381aca2f9c8' />
+    <dep name='kernel(fs_nfs_common)' op='=' version='084ac38677baf5d4' />
+    <dep name='kernel(fs_nfsd)' op='=' version='734862c93171445b' />
+    <dep name='kernel(fs_nls)' op='=' version='c0fe277708f05997' />
+    <dep name='kernel(fs_ocfs2_cluster)' op='=' version='cd29526eec49fe8d' />
+    <dep name='kernel(fs_ocfs2_dlm)' op='=' version='edfc7d3c77fbc1d6' />
+    <dep name='kernel(fs_partitions)' op='=' version='f820d48d050bc503' />
+    <dep name='kernel(fs_proc)' op='=' version='8300316c45370422' />
+    <dep name='kernel(fs_relayfs)' op='=' version='8deb0a4d8db78c2a' />
+    <dep name='kernel(fs_sysfs)' op='=' version='5348d08fdac8a2b4' />
+    <dep name='kernel(fs_xfs)' op='=' version='911615137e7b338f' />
+    <dep name='kernel(fs_xfs_quota)' op='=' version='ddf9f45fe3f633be' />
+    <dep name='kernel(init)' op='=' version='e226ba9ee6c6fe2c' />
+    <dep name='kernel(kernel)' op='=' version='8f34ebe34f37f8bc' />
+    <dep name='kernel(kernel_irq)' op='=' version='431e4323eb58cb5d' />
+    <dep name='kernel(kernel_power)' op='=' version='9ec82957e5139e3c' />
+    <dep name='kernel(lib)' op='=' version='ec1d6fc1c1dd57e7' />
+    <dep name='kernel(lib_reed_solomon)' op='=' version='9c0f8c824af80201' />
+    <dep name='kernel(lib_zlib_deflate)' op='=' version='56c8da4d0170b35b' />
+    <dep name='kernel(lib_zlib_inflate)' op='=' version='afdb99b30893e2c1' />
+    <dep name='kernel(mm)' op='=' version='5fea12518b5cd987' />
+    <dep name='kernel(net)' op='=' version='d4aed4e22f32478c' />
+    <dep name='kernel(net_802)' op='=' version='077c935f43c5ad58' />
+    <dep name='kernel(net_appletalk)' op='=' version='ff8a4806e95ca3b3' />
+    <dep name='kernel(net_ax25)' op='=' version='2ac858c0e388256a' />
+    <dep name='kernel(net_bluetooth)' op='=' version='fb494fabf1ffc4b5' />
+    <dep name='kernel(net_bridge)' op='=' version='21d812b199e82273' />
+    <dep name='kernel(net_bridge_netfilter)' op='=' version='cd3444617c175a82' />
+    <dep name='kernel(net_core)' op='=' version='aae21a368cc4e4b7' />
+    <dep name='kernel(net_dccp)' op='=' version='625d76c49b32d5d2' />
+    <dep name='kernel(net_dccp_ccids_lib)' op='=' version='da1755c5b759cb17' />
+    <dep name='kernel(net_ethernet)' op='=' version='30a890e74b221bf6' />
+    <dep name='kernel(net_ieee80211)' op='=' version='a0153647d40c1ef4' />
+    <dep name='kernel(net_ipv4)' op='=' version='c1a655292f249ac0' />
+    <dep name='kernel(net_ipv4_ipvs)' op='=' version='045bf085f14e17df' />
+    <dep name='kernel(net_ipv4_netfilter)' op='=' version='89663688d82bf4b3' />
+    <dep name='kernel(net_ipv6)' op='=' version='66ff71eae70dc70e' />
+    <dep name='kernel(net_ipv6_netfilter)' op='=' version='41397571eda0196b' />
+    <dep name='kernel(net_irda)' op='=' version='67c9a50db9aa22fe' />
+    <dep name='kernel(net_irda_ircomm)' op='=' version='b4a5136d4130a263' />
+    <dep name='kernel(net_lapb)' op='=' version='6871621e18712689' />
+    <dep name='kernel(net_llc)' op='=' version='d1a97667dd42f5b0' />
+    <dep name='kernel(net_netfilter)' op='=' version='f2421b3399901fcc' />
+    <dep name='kernel(net_netlink)' op='=' version='9cae385ff279d705' />
+    <dep name='kernel(net_rxrpc)' op='=' version='9a31da34f08ff932' />
+    <dep name='kernel(net_sched)' op='=' version='91386066bc767c78' />
+    <dep name='kernel(net_sunrpc)' op='=' version='1338541a906f58cc' />
+    <dep name='kernel(net_sunrpc_auth_gss)' op='=' version='c95b9ce5f99b90d3' />
+    <dep name='kernel(net_wanrouter)' op='=' version='6266a8c7bf33fc1c' />
+    <dep name='kernel(net_xfrm)' op='=' version='355088c6f9e2525c' />
+    <dep name='kernel(security)' op='=' version='f9b42f0ea98d153c' />
+    <dep name='kernel(security_apparmor_aamatch)' op='=' version='45fe30ff858d92c1' />
+    <dep name='kernel(sound)' op='=' version='3adb1daec5b5c27d' />
+    <dep name='kernel(sound_core)' op='=' version='4db79be86146569d' />
+    <dep name='kernel(sound_core_oss)' op='=' version='324fa487e9730973' />
+    <dep name='kernel(sound_core_seq)' op='=' version='5142a86ae962c60c' />
+    <dep name='kernel(sound_core_seq_instr)' op='=' version='8ef8f28f281b86ca' />
+    <dep name='kernel(sound_drivers_mpu401)' op='=' version='03b5e8cb705b4d5d' />
+    <dep name='kernel(sound_drivers_opl3)' op='=' version='46dd13924e99ba09' />
+    <dep name='kernel(sound_drivers_vx)' op='=' version='325835fb7b7079a3' />
+    <dep name='kernel(sound_i2c)' op='=' version='e8bbaace46fe8b4b' />
+    <dep name='kernel(sound_i2c_other)' op='=' version='4051647dedbfd24b' />
+    <dep name='kernel(sound_isa_sb)' op='=' version='bea0ac047d25bcb9' />
+    <dep name='kernel(sound_oss)' op='=' version='b4b94782601153d8' />
+    <dep name='kernel(sound_pci_ac97)' op='=' version='802e202e353de5d6' />
+    <dep name='kernel(sound_pci_emu10k1)' op='=' version='ba073b6883815096' />
+    <dep name='kernel(sound_pci_hda)' op='=' version='8b61a2540d48f588' />
+    <dep name='kernel(sound_pci_ice1712)' op='=' version='3f9feb8c98ab971a' />
+    <dep name='kernel(sound_pci_trident)' op='=' version='b3133c40cf6cc410' />
+    <dep name='kernel(sound_synth)' op='=' version='e4643b5399dee740' />
+    <dep name='kernel(sound_synth_emux)' op='=' version='77d0299ddfa27033' />
+    <dep name='kernel(sound_usb)' op='=' version='7040ed7c72078732' />
+    <dep name='kernel(vmlinux)' op='=' version='d69621333ca199cc' />
+    <dep name='kernel-default' op='=' version='2.6.16_rc5_git2' />
+  </provides>
+  <obsoletes>
+    <dep name='kernel-default-nongpl' />
+    <dep name='k_deflt' />
+  </obsoletes>
+</package>
+<package>
+  <name>wlan-kmp-default</name>
+  <section>system</section>
+  <location>1</location>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>1_2.6.1</version>
+      <release>5</release>
+      <arch>x86_64</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='kernel' />
+  </requires>
+  <provides>
+    <dep name='wlan-kmp' op='=' version='1_2.6.1' />
+    <dep name='ksym(at76c503_delete_device)' op='=' version='8fa38dc7' />
+    <dep name='ksym(at76c503_do_probe)' op='=' version='ff548709' />
+    <dep name='ksym(ieee80211_probe_hidden)' op='=' version='8ee46d79' />
+    <dep name='ksym(ieee80211_r8180_8023_hardstartxmit)' op='=' version='15883cba' />
+    <dep name='ksym(ieee80211_r8180_alloc)' op='=' version='8e9bab5b' />
+    <dep name='ksym(ieee80211_r8180_crypt_deinit_entries)' op='=' version='63952428' />
+    <dep name='ksym(ieee80211_r8180_crypt_deinit_handler)' op='=' version='f0d7c362' />
+    <dep name='ksym(ieee80211_r8180_crypt_delayed_deinit)' op='=' version='487cdd24' />
+    <dep name='ksym(ieee80211_r8180_flush_scan)' op='=' version='37372a11' />
+    <dep name='ksym(ieee80211_r8180_free)' op='=' version='82f5ab5d' />
+    <dep name='ksym(ieee80211_r8180_get_crypto_ops)' op='=' version='a67a9ec5' />
+    <dep name='ksym(ieee80211_r8180_register_crypto_ops)' op='=' version='1df15cef' />
+    <dep name='ksym(ieee80211_r8180_reset_queue)' op='=' version='7e17b051' />
+    <dep name='ksym(ieee80211_r8180_rx)' op='=' version='f25934b4' />
+    <dep name='ksym(ieee80211_r8180_set_master_essid)' op='=' version='2a60d56b' />
+    <dep name='ksym(ieee80211_r8180_stop_queue)' op='=' version='e4d56ba4' />
+    <dep name='ksym(ieee80211_r8180_unregister_crypto_ops)' op='=' version='984f4fe' />
+    <dep name='ksym(ieee80211_r8180_wake_queue)' op='=' version='afdd3a6b' />
+    <dep name='ksym(ieee80211_r8180_wx_get_encode)' op='=' version='c9901c74' />
+    <dep name='ksym(ieee80211_r8180_wx_get_essid)' op='=' version='a3bea819' />
+    <dep name='ksym(ieee80211_r8180_wx_get_rate)' op='=' version='f0535c92' />
+    <dep name='ksym(ieee80211_r8180_wx_get_scan)' op='=' version='e4edb2c5' />
+    <dep name='ksym(ieee80211_r8180_wx_set_encode)' op='=' version='d8cf325f' />
+    <dep name='ksym(ieee80211_r8180_wx_set_essid)' op='=' version='fd9bdfc2' />
+    <dep name='ksym(ieee80211_r8180_wx_set_rate)' op='=' version='bdd89ea' />
+    <dep name='ksym(ieee80211_r8180_wx_set_wap)' op='=' version='5f7b2a3d' />
+    <dep name='ksym(p80211_resume)' op='=' version='73b0fdc5' />
+    <dep name='ksym(p80211_suspend)' op='=' version='f3c8c7ee' />
+    <dep name='ksym(p80211netdev_hwremoved)' op='=' version='e3e698d4' />
+    <dep name='ksym(p80211netdev_rx)' op='=' version='cac2caa3' />
+    <dep name='ksym(p80211skb_free)' op='=' version='f9dab8e7' />
+    <dep name='ksym(p80211skb_rxmeta_attach)' op='=' version='667d1d5b' />
+    <dep name='ksym(register_wlandev)' op='=' version='a3959594' />
+    <dep name='ksym(unregister_wlandev)' op='=' version='b991f99a' />
+    <dep name='ksym(usbdfu_download)' op='=' version='5068db4c' />
+    <dep name='ksym(wlan_frequencies)' op='=' version='c2c41cb7' />
+    <dep name='ksym(wlan_setup)' op='=' version='6ec4c8d' />
+    <dep name='ksym(wlan_unsetup)' op='=' version='82693db' />
+    <dep name='wlan-kmp-default' op='=' version='1_2.6.16_rc5_git2_2' />
+  </provides>
+</package>
+  </subchannel>
+</channel>
