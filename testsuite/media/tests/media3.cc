@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
     new MyMediaVerifier(/* "SUSE-Linux-CORE-i386 9" */)
   );
   MediaManager     mm;
-  media::MediaId   src;
+  media::MediaId   src = 0;
   media::MediaId   iso;
   zypp::Url        src_url;
   zypp::Url        iso_url;

@@ -340,7 +340,7 @@ struct StorageTargetTest
   int store_test()
   {
     MIL << "===[START: store_test()]==========================================" << endl;
-    
+    return 0;    
   }
   
   int parse_store_with_yum_test()
@@ -355,6 +355,7 @@ struct StorageTargetTest
       //break;
     }
     clean();
+    return 0;    
   }
   
 };
