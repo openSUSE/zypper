@@ -14,6 +14,7 @@ capabilityinclude_HEADERS = \
 	\
 	FileCap.h	\
 	HalCap.h	\
+	ModaliasCap.h	\
 	NamedCap.h	\
 	NullCap.h	\
 	SplitCap.h	\
@@ -32,6 +33,7 @@ lib@PACKAGE@_capability_la_SOURCES = \
 	\
 	FileCap.cc	\
 	HalCap.cc	\
+	ModaliasCap.cc	\
 	NamedCap.cc	\
 	NullCap.cc	\
 	SplitCap.cc	\
