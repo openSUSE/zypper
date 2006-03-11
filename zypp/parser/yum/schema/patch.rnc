@@ -41,7 +41,7 @@ dependency-block =
   element-provides?,
   element-conflicts?,
   element-obsoletes?,
-  element-freshen?,
+  element-freshens?,
   element-requires?,
   element-recommends?,
   element-suggests?,

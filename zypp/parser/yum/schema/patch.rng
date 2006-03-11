@@ -100,7 +100,7 @@
       <ref name="element-obsoletes"/>
     </optional>
     <optional>
-      <ref name="element-freshen"/>
+      <ref name="element-freshens"/>
     </optional>
     <optional>
       <ref name="element-requires"/>

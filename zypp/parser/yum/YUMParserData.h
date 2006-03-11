@@ -168,7 +168,7 @@ namespace zypp {
         std::list<YUMDependency> provides;
         std::list<YUMDependency> conflicts;
         std::list<YUMDependency> obsoletes;
-        std::list<YUMDependency> freshen;
+        std::list<YUMDependency> freshens;
         std::list<YUMDependency> requires;
         std::list<YUMDependency> recommends;
         std::list<YUMDependency> suggests;

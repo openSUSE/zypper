@@ -296,8 +296,8 @@ namespace zypp {
           << "media: " << data.media << endl
           << "dirsizes: " << endl
           << data.dirSizes << endl
-          << "freshen: " << endl
-          << data.freshen << endl
+          << "freshens: " << endl
+          << data.freshens << endl
           << "install-only: '" << data.installOnly << "'" << endl;
         return out;
       }
@@ -340,7 +340,7 @@ namespace zypp {
           << "suggests:" << endl << data.suggests << endl
           << "supplements:" << endl << data.supplements << endl
           << "enhances:" << endl << data.enhances << endl
-          << "freshen: " << endl << data.freshen << endl;
+          << "freshens: " << endl << data.freshens << endl;
         return out;
       }
 
@@ -384,7 +384,7 @@ namespace zypp {
           << "  provides: " << data.provides << endl
           << "  conflicts: " << data.conflicts << endl
           << "  obsoletes: " << data.obsoletes << endl
-          << "  freshen: " << data.freshen << endl
+          << "  freshens: " << data.freshens << endl
           << "  requires: " << data.requires << endl
           << "  recommends:" << endl << data.recommends << endl
           << "  suggests:" << endl << data.suggests << endl
@@ -425,7 +425,7 @@ namespace zypp {
           << "  provides: " << data.provides << endl
           << "  conflicts: " << data.conflicts << endl
           << "  obsoletes: " << data.obsoletes << endl
-          << "  freshen: " << data.freshen << endl
+          << "  freshens: " << data.freshens << endl
           << "  requires: " << data.requires << endl
           << "  recommends:" << endl << data.recommends << endl
           << "  suggests:" << endl << data.suggests << endl
@@ -467,7 +467,7 @@ namespace zypp {
           << "  provides: " << data.provides << endl
           << "  conflicts: " << data.conflicts << endl
           << "  obsoletes: " << data.obsoletes << endl
-          << "  freshen: " << data.freshen << endl
+          << "  freshens: " << data.freshens << endl
           << "  requires: " << data.requires << endl
           << "  recommends:" << endl << data.recommends << endl
           << "  suggests:" << endl << data.suggests << endl
@@ -487,7 +487,7 @@ namespace zypp {
           << "  provides: " << data.provides << endl
           << "  conflicts: " << data.conflicts << endl
           << "  obsoletes: " << data.obsoletes << endl
-          << "  freshen: " << data.freshen << endl
+          << "  freshens: " << data.freshens << endl
           << "  requires: " << data.requires << endl
           << "  recommends:" << endl << data.recommends << endl
           << "  suggests:" << endl << data.suggests << endl
@@ -548,8 +548,8 @@ namespace zypp {
           << "  media: " << data.media << endl
           << "  dirsizes: " << endl
           << data.dirSizes << endl
-          << "  freshen: " << endl
-          << data.freshen << endl
+          << "  freshens: " << endl
+          << data.freshens << endl
           << "  install-only: '" << data.installOnly << "'" << endl
           << "  files:" << endl
           << data.files << endl

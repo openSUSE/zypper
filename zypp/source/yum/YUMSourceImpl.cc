@@ -759,8 +759,8 @@ namespace zypp
       _deps[Dep::OBSOLETES].insert(createCapability(*it, my_kind));
     }
 
-    for (std::list<YUMDependency>::const_iterator it = parsed.freshen.begin();
-	it != parsed.freshen.end();
+    for (std::list<YUMDependency>::const_iterator it = parsed.freshens.begin();
+	it != parsed.freshens.end();
 	it++)
     {
       _deps[Dep::FRESHENS].insert(createCapability(*it, my_kind));

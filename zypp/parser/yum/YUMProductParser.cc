@@ -112,8 +112,8 @@ namespace zypp {
             else if (name == "enhances") {
               prim.parseDependencyEntries(& productPtr->enhances, child);
             }
-            else if (name == "freshen") {
-              prim.parseDependencyEntries(& productPtr->freshen, child);
+            else if (name == "freshens") {
+              prim.parseDependencyEntries(& productPtr->freshens, child);
             }
             else {
               WAR << "YUM <data> contains the unknown element <" << name << "> "

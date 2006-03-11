@@ -205,8 +205,8 @@ namespace zypp {
             else if (name == "dirsizes") {
               parseDirsizeEntries(& dataPtr->dirSizes, child);
             }
-            else if (name == "freshen") {
-              parseDependencyEntries(& dataPtr->freshen, child);
+            else if (name == "freshens") {
+              parseDependencyEntries(& dataPtr->freshens, child);
             }
             else if (name == "install_only") {
               dataPtr->installOnly = true;

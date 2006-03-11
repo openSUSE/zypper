@@ -48,7 +48,7 @@ suse-additional-format =
     element-keywords?,
     element-media?,
     element-dirsizes?,
-    element-freshen?,
+    element-freshens?,
     element-install_only?
 
 suse-provides =
@@ -69,7 +69,7 @@ suse-obsoletes =
     usual-entry-or-capability+
 
 suse-dependencies = 
-    element-provides? & element-conflicts? & element-obsoletes? & freshen? & element-requires? & element-suggests? & element-enhances? & element-supplements? & element-recommends?
+    element-provides? & element-conflicts? & element-obsoletes? & freshens? & element-requires? & element-suggests? & element-enhances? & element-supplements? & element-recommends?
 
 element-authors =
   element authors { authors }
@@ -107,10 +107,10 @@ dirsize =
     attribute filecount { text },
     empty
 
-element-freshen =
-    ( element suse:freshen { freshen } | element freshen { freshen } )
+element-freshens =
+    ( element suse:freshens { freshens } | element freshens { freshens } )
 
-freshen =
+freshens =
     usual-entry-or-capability+
 
 element-install_only =

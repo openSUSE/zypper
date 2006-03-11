@@ -113,7 +113,7 @@ namespace zypp {
 	      prim.parseDependencyEntries(& patchPtr->enhances, child);
 	    }
 	    else if (name == "freshens") {
-	      prim.parseDependencyEntries(& patchPtr->freshen, child);
+	      prim.parseDependencyEntries(& patchPtr->freshens, child);
 	    }
 	    else if (name == "category") {
       	patchPtr->category = _helper.content(child);
@@ -249,7 +249,7 @@ XXX << "parseFormatNode(" << name << ")" << endl;
 	      prim.parseDirsizeEntries(& dataPtr->dirSizes, child);
 	    }
 	    else if (name == "freshens") {
-	      prim.parseDependencyEntries(& dataPtr->freshen, child);
+	      prim.parseDependencyEntries(& dataPtr->freshens, child);
 	    }
 	    else if (name == "install_only") {
 	      dataPtr->installOnly = true;
@@ -516,7 +516,7 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	      prim.parseDependencyEntries(& script->enhances, child);
 	    }
 	    else if (name == "freshens") {
-	      prim.parseDependencyEntries(& script->freshen, child);
+	      prim.parseDependencyEntries(& script->freshens, child);
 	    }
 	    else {
 	      WAR << "YUM <atoms/script> contains the unknown element <"
@@ -578,7 +578,7 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	      prim.parseDependencyEntries(& message->enhances, child);
 	    }
 	    else if (name == "freshens") {
-	      prim.parseDependencyEntries(& message->freshen, child);
+	      prim.parseDependencyEntries(& message->freshens, child);
 	    }
 	    else {
 	      WAR << "YUM <atoms/message> contains the unknown element <"

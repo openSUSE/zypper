@@ -125,7 +125,7 @@
       <ref name="element-dirsizes"/>
     </optional>
     <optional>
-      <ref name="element-freshen"/>
+      <ref name="element-freshens"/>
     </optional>
     <optional>
       <ref name="element-install_only"/>
@@ -183,7 +183,7 @@
         <ref name="element-obsoletes"/>
       </optional>
       <optional>
-        <ref name="freshen"/>
+        <ref name="freshens"/>
       </optional>
       <optional>
         <ref name="element-requires"/>
@@ -258,17 +258,17 @@
     <attribute name="filecount"/>
     <empty/>
   </define>
-  <define name="element-freshen">
+  <define name="element-freshens">
     <choice>
-      <element name="suse:freshen">
-        <ref name="freshen"/>
+      <element name="suse:freshens">
+        <ref name="freshens"/>
       </element>
-      <element name="freshen">
-        <ref name="freshen"/>
+      <element name="freshens">
+        <ref name="freshens"/>
       </element>
     </choice>
   </define>
-  <define name="freshen">
+  <define name="freshens">
     <oneOrMore>
       <ref name="usual-entry-or-capability"/>
     </oneOrMore>
