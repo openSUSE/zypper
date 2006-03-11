@@ -37,6 +37,7 @@ namespace zypp
     class VersionedCap;
     class SplitCap;
     class HalCap;
+    class ModaliasCap;
     class OrCap;
     class ConditionalCap;
 

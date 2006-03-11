@@ -75,6 +75,11 @@ namespace zypp
     */
     Capability halEvalCap() const;
 
+    /** Special Capability, triggering evaluation of modalias
+     * capabilities when matched.
+    */
+    Capability modaliasEvalCap() const;
+
   public:
     /** Provide a parsable string representation of \a cap_r. */
     std::string encode( const Capability & cap_r ) const;

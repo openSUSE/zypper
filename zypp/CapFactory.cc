@@ -120,11 +120,12 @@ namespace zypp
    * be inserted into ::_uset, by calling ::usetInsert, \b before
    * the Capability is created.
    *
-   * \li \c file:    /absolute/path
-   * \li \c split:   name:/absolute/path
-   * \li \c name:    name
-   * \li \c vers:    name op edition
-   * \li \c hal:     hal(string)
+   * \li \c file:     /absolute/path
+   * \li \c split:    name:/absolute/path
+   * \li \c name:     name
+   * \li \c vers:     name op edition
+   * \li \c hal:      hal(string)
+   * \li \c modalias: modalias(string)
   */
   struct CapFactory::Impl
   {
@@ -189,6 +190,12 @@ namespace zypp
     static bool isHalSpec( const std::string & name_r )
     {
       return name_r.substr(0,4) == "hal(";
+    }
+
+    /** Test for a ModaliasCap. \a name_r starts with  "modalias(". */
+    static bool isModaliasSpec( const std::string & name_r )
+    {
+      return name_r.substr(0,9) == "modalias(";
     }
 
     static CapabilityImpl::Ptr buildFile( const Resolvable::Kind & refers_r,
@@ -301,6 +308,40 @@ namespace zypp
 	}
       // otherwise
       ZYPP_THROW( Exception("Unsupported kind of Hal Capability") );
+      return NULL; // make gcc happy
+    }
+
+
+    /** Try to build a modalias cap from \a name_r .
+     *
+     * The CapabilityImpl is built here and inserted into _uset.
+     * The final Capability must be created by CapFactory, as it
+     * is a friend of Capability. Here we can't access the ctor.
+     *
+     * \todo Fix incaccuracy.
+    */
+    static CapabilityImpl::Ptr buildModalias( const Resolvable::Kind & refers_r,
+				               const std::string & name_r,
+				               Rel op_r = Rel::ANY,
+				               const std::string & value_r = std::string() )
+    {
+      if ( op_r != Rel::ANY )
+	{
+	  ZYPP_THROW( Exception("Unsupported kind of Modalias Capability") );
+	}
+
+      //split:   modalias(name) [op string]
+      str::regex  rx( "modalias\\(([^)]*)\\)" );
+      str::smatch what;
+      if( str::regex_match( name_r.begin(), name_r.end(), what, rx ) )
+	{
+	  // Modalias always refers to 'System' kind of Resolvable.
+	  return usetInsert
+	  ( new capability::ModaliasCap( ResTraits<System>::kind,
+				    what[1].str() ) );
+	}
+      // otherwise
+      ZYPP_THROW( Exception("Unsupported kind of Modalias Capability") );
       return NULL; // make gcc happy
     }
   };
@@ -446,6 +487,22 @@ namespace zypp
   try
     {
       return Capability( Impl::buildHal( Resolvable::Kind(), "hal()" ) );
+    }
+  catch ( Exception & excpt )
+    {
+      ZYPP_RETHROW( excpt );
+      return Capability(); // not reached
+    }
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	METHOD NAME : CapFactory::modaliasEvalCap
+  //	METHOD TYPE : Capability
+  //
+  Capability CapFactory::modaliasEvalCap() const
+  try
+    {
+      return Capability( Impl::buildModalias( Resolvable::Kind(), "modalias()" ) );
     }
   catch ( Exception & excpt )
     {

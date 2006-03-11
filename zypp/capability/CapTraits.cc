@@ -32,6 +32,8 @@ namespace zypp
     template<>
       const CapabilityTraits::KindType CapTraits<HalCap>        ::kind( "HalCap" );
     template<>
+      const CapabilityTraits::KindType CapTraits<ModaliasCap>   ::kind( "ModaliasCap" );
+    template<>
       const CapabilityTraits::KindType CapTraits<OrCap>         ::kind( "OrCap" );
     template<>
       const CapabilityTraits::KindType CapTraits<ConditionalCap>::kind( "ConditionalCap" );
