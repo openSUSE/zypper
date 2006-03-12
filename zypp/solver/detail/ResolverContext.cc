@@ -1237,10 +1237,16 @@ ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn
     ResolverContext_constPtr context = this;
      // Assemble a list of copies of all of the info objects
     while (context != NULL) {
+
 	for (ResolverInfoList::const_iterator iter = context->_log.begin(); iter != context->_log.end(); iter++) {
-	    if ((item == PoolItem_Ref() || (*iter)->affected() == item)
-		&& (*iter)->priority() >= priority) {
-		info_list.push_back ((*iter)->copy());
+
+	    ResolverInfo_Ptr info = *iter;
+
+	    if ((item == PoolItem_Ref()
+		 || info->affected() == item)
+		&& info->priority() >= priority)
+	    {
+		info_list.push_back( info );
 	    }
 	}
 	context = context->_parent;
@@ -1261,13 +1267,13 @@ ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn
 	}
     }
 #endif
-    mark_important_info (info_list);
+    mark_important_info( info_list );
 
     // Walk across the list of info objects and invoke our callback
 
     for (ResolverInfoList::iterator iter = info_list.begin(); iter != info_list.end(); iter++) {
 	if (*iter != NULL) {
-	    fn (*iter, data);
+	    fn( *iter, data );
 	}
     }
 }
