@@ -303,17 +303,13 @@ namespace zypp
 
     bool SourceImpl::remote() const
     {
-      media::MediaManager  m;
-      media::MediaAccessId id;
       bool downloads = false;
       try {
-        id = m.open(_url);
-        downloads = m.downloads(id);
-        m.close(id);
+        downloads = media::MediaManager::downloads(_url);
       }
       catch(const zypp::Exception &e)
       {
-        // may happen if url is not valid media Url.
+        // should not happen, but ...
         ZYPP_CAUGHT(e);
       }
       return downloads;
