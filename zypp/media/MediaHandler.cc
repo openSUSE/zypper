@@ -536,17 +536,18 @@ void MediaHandler::attach( bool next )
   // that checks the media against /etc/mtab ...
   setMediaSource(MediaSourceRef());
 
-  //
-  // FIXME: special temp handling because reattach
-  //        may set path to a prefix directory
-  //        note: reattach is deprecated....
-  //
   AttachPoint ap( attachPointHint());
-  if( ap.temp)
-    ap.path = "";
   setAttachPoint(ap.path, ap.temp);
 
-  attachTo( next ); // pass to concrete handler
+  try
+  {
+    attachTo( next ); // pass to concrete handler
+  }
+  catch(const MediaException &e)
+  {
+    removeAttachPoint();
+    ZYPP_RETHROW(e);
+  }
   MIL << "Attached: " << *this << endl;
 }
 
@@ -710,65 +711,6 @@ MediaHandler::checkAttachPoint(const Pathname &apoint,
   }
   return true;
 }
-
-void
-MediaHandler::reattach(const Pathname &attach_point,
-                       bool            temporary)
-{
-  // ignore if it is equal to current attach point hint
-  AttachPoint hint( attachPointHint());
-  if( hint.temp == temporary && hint.path == attach_point)
-  {
-    DBG << "Ignored reattach - equals to current one" << std::endl;
-    return;
-  }
-
-  if( temporary)
-  {
-    if( !attach_point.empty())
-    {
-      // check if the new attach point root hint is
-      // a writable directory; may contains files.
-      if( !MediaHandler::checkAttachPoint(attach_point, false, true))
-        ZYPP_THROW( MediaBadAttachPointException(url()));
-    }
-  }
-  else
-  {
-    // use attach_point as non-temporary attach point
-    if( !checkAttachPoint(attach_point))
-      ZYPP_THROW( MediaBadAttachPointException(url()));
-
-    if( !isUseableAttachPoint(attach_point))
-      ZYPP_THROW( MediaBadAttachPointException(url()));
-  }
-
-  // pass new hint to specific handler
-  reattachTo(attach_point, temporary);
-}
-
-void
-MediaHandler::reattachTo(const Pathname &attach_point,
-                         bool            temporary)
-{
-  if( !isAttached())
-  {
-    DBG << "Accepted reattach to '"
-        << attach_point
-        << "' -- as hint for the next attach"
-	<< std::endl;
-
-    attachPointHint(attach_point, temporary);
-  }
-  else
-  {
-    DBG << "Ignoring reattach to '" << attach_point
-        << "'" << (temporary ? " (attach point root)" : "")
-	<< " not supported by this access handler."
-        << std::endl;
-  }
-}
-
 
 ///////////////////////////////////////////////////////////////////
 //

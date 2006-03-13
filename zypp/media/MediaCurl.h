@@ -53,8 +53,6 @@ class MediaCurl : public MediaHandler {
     virtual void doGetFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, callback::SendReport<DownloadProgressReport> & _report) const;
 
 
-    virtual void reattachTo(const Pathname &attach_point, bool temporary);
-
     virtual bool checkAttachPoint(const Pathname &apoint) const;
 
   public:

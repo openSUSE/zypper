@@ -68,12 +68,13 @@ class MediaHandler {
 	AttachPointRef  _attachPoint;
 
 	/**
-	 * The user provided attach point or the last attach point from
-	 * successfull reattach request. It may contain following values:
+	 * The user provided attach preferred point. It may contain
+	 * following values:
 	 *
 	 *      "",  true  => create temporary attach point bellow of
 	 *                    _attachPrefix or a built-in default and
 	 *                    remove it if not needed any more.
+	 *
 	 *      dir, false => user specified attach point (not removed)
 	 */
 	AttachPoint     _AttachPointHint;
@@ -129,7 +130,7 @@ class MediaHandler {
 	AttachPoint      attachPointHint() const;
 
 	/**
-	 * Set the attach point hint (e.g. on reattach).
+	 * Set the attach point hint as specified by the user.
 	 * \param path  The attach point directory path.
 	 * \param temp  If to remove the attach point while cleanup.
 	 */
@@ -254,17 +255,6 @@ class MediaHandler {
 	 */
 	bool                 checkAttached(bool aDevice,
 	                                   bool fsType=false) const;
-
-	/**
-	 * \deprecated FIXME: remove it
-	 */
-	void                 reattach(const Pathname &attach_point,
-	                              bool            temporary);
-	/**
-	 * \deprecated FIXME: remove it
-	 */
-	virtual void         reattachTo(const Pathname &attach_point,
-	                                bool            temporary);
 
     protected:
 

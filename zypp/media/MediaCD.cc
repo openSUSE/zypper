@@ -392,6 +392,7 @@ namespace zypp {
 	  }
 	  catch (const MediaException & excpt_r)
 	  {
+	    removeAttachPoint();
 	    ZYPP_CAUGHT(excpt_r);
 	  }
     	}
