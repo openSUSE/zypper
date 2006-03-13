@@ -78,16 +78,14 @@ using zypp::capability::SplitCap;
 
 
 // check if downgrade is allowed
+// (Invariant on entry: installed.edition >= candidate.edition)
 //
 // candidate must have allowed vendor (e.g. 'SuSE', 'Novell', ...) and candidates buildtime must be
 // newer.
 
 static bool
-downgrade_allowed (PoolItem_Ref installed, PoolItem_Ref candidate)
+downgrade_allowed (PoolItem_Ref installed, PoolItem_Ref candidate, Target_Ptr target)
 {
-    if ( installed->edition().compare (candidate->edition()) > 0 )
-	return false; // candidate is newer
-
     if (installed.status().isLocked()) {
 	MIL << "Installed " << installed << " is locked, not upgrading" << endl;
 	return false;
@@ -99,11 +97,16 @@ downgrade_allowed (PoolItem_Ref installed, PoolItem_Ref candidate)
     Package::constPtr ipkg = asKind<Package>(ires);
     Resolvable::constPtr cres = candidate.resolvable();
     Package::constPtr cpkg = asKind<Package>(cres);
+if (ipkg) DBG << "Installed vendor '" << ipkg->vendor() << "'" << endl;
 if (cpkg) DBG << "Candidate vendor '" << cpkg->vendor() << "'" << endl;
     if (cpkg
 	&& va->isKnown( cpkg->vendor() ) )
     {
-#warning Had Y2PM::runningFromSystem
+	if (target
+	    && target->root().asString() != "/")	// downgrade ok if we're running from inst-sys
+	{
+	    return true;
+	}  
 	if ( ipkg->buildtime() < cpkg->buildtime() ) {			// installed has older buildtime
 	    MIL << "allowed downgrade " << installed << " to " << candidate << endl;
 	    return true;						// see bug #152760
@@ -446,7 +449,7 @@ MIL << "split matched !" << endl;
 	} else {								// older or equal edition
 	  // check whether to downgrade:
 
-	  if (!downgrade_allowed (installed, candidate)) {
+	  if (!downgrade_allowed (installed, candidate, target)) {
 	    MIL << " ==> (keep installed)" << candidate << endl;
 	    ++opt_stats_r.chk_to_keep_installed;
 	  } else {
