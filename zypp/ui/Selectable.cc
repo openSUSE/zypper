@@ -91,6 +91,31 @@ namespace zypp
     { _pimpl->setLicenceConfirmed( val_r ); }
 
 
+    Selectable::Fate Selectable::fate() const
+    {
+      switch ( status() ) {
+      case S_Update:
+      case S_Install:
+      case S_AutoUpdate:
+      case S_AutoInstall:
+        return TO_INSTALL;
+        break;
+
+      case S_Del:
+      case S_AutoDel:
+        return TO_DELETE;
+        break;
+
+      case S_Protected:
+      case S_Taboo:
+      case S_KeepInstalled:
+      case S_NoInst:
+        break;
+      }
+      return UNMODIFIED;
+    };
+
+
     /******************************************************************
     **
     **	FUNCTION NAME : operator<<

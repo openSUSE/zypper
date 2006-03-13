@@ -120,6 +120,35 @@ namespace zypp
       { return ! installedObj() && candidateObj(); }
       //@}
 
+     public:
+      /** \name Query objects fate in case of commit.
+      */
+      //@{
+      enum Fate {
+        TO_DELETE  = -1,
+        UNMODIFIED = 0,
+        TO_INSTALL = 1
+      };
+      /**  */
+      Fate fate() const;
+
+      /** True if either to delete or to install */
+      bool unmodified() const
+      { return fate() == UNMODIFIED; }
+
+      /** True if either to delete or to install */
+      bool toModify() const
+      { return fate() != UNMODIFIED; }
+
+      /** True if to delete */
+      bool toDelete() const
+      { return fate() == TO_DELETE; }
+
+      /** True if to install */
+      bool toInstall() const
+      { return fate() == TO_INSTALL; }
+      //@}
+
     public:
       /** \name Special inteface for Y2UI.
        * \note This interface acts on \ref ResStatus::USER level.
