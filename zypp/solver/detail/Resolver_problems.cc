@@ -292,7 +292,7 @@ Resolver::problems (void) const
 	    case RESOLVER_INFO_TYPE_REJECT_INSTALL: {			// p is scheduled to be installed, but this is not possible because of dependency problems.
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package,patch,...				
-		what = str::form (_("Cannot install %s due dependency problems"), who.c_str());
+		what = str::form (_("Cannot install %s due to dependency problems"), who.c_str());
 		details = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// Uninstall it; 
@@ -432,7 +432,7 @@ Resolver::problems (void) const
 	    case RESOLVER_INFO_TYPE_NO_PROVIDER: {			// There are no installable providers of c [for p]
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("%s cannot be installed due missing dependencies"), who.c_str());		
+		what = str::form (_("%s cannot be installed due to missing dependencies"), who.c_str());		
 		details = misc_info->message();
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		
@@ -590,7 +590,7 @@ Resolver::problems (void) const
 	    case RESOLVER_INFO_TYPE_CONFLICT_UNINSTALLABLE: {		// uninstalled p is marked uninstallable it conflicts [with q] due to c
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		// TranslatorExplanation %s = name of package, patch, selection ...				
-		what = str::form (_("%s is uninstallable due conflicts with %s"),
+		what = str::form (_("%s is uninstallable due to conflicts with %s"),
 				who.c_str(),
 				misc_info->other()->name().c_str());				
 		details = misc_info->message();
