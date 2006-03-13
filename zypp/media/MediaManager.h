@@ -479,30 +479,6 @@ namespace zypp
       attach(MediaAccessId accessId, bool next = false);
 
       /**
-       * Reattach to a new attach point.
-       *
-       * \deprecated This function will be removed, because the
-       * reattach function has race conditions (e.g. open file
-       * in the old attach point). Use setAttachPrefix() instead.
-       *
-       * \param accessId A media access Id.
-       * \param attach_point A new attach point directory.
-       * \param temporary    Whether to reattach to a temporary
-       *      attach point bellow of \p attach_point and cleanup
-       *      it on release (temporary=true), or use the provided
-       *      directory as attach point without to cleanup it on
-       *      release (temporary=false, default behaviour).
-       * \throws MediaNotOpenException
-       * \throws MediaNotSupportedException
-       */
-      private:
-      void
-      reattach(MediaAccessId   accessId,
-               const Pathname &attach_point,
-               bool            temporary = false) ZYPP_DEPRECATED;
-      public:
-
-      /**
        * Release the attached media and optionally eject.
        *
        * If the \p eject parameter is set to true and there

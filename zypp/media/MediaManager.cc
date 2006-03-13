@@ -237,6 +237,32 @@ namespace zypp
 
       ManagedMedia &ref( m_impl->findMM(accessId));
 
+      //
+      // The MediaISO handler internally requests an accessId
+      // of a "parent" handler providing the iso file.
+      // The parent handler accessId is private to MediaISO,
+      // but the attached media source may be shared reference.
+      // This means, that if the accessId belongs to a handler
+      // that is _not_ shared, close was used on uninitialized
+      // accessId variable (or the accessId was guessed).
+      //
+      ManagedMediaMap::iterator m(m_impl->mediaMap.begin());
+      for( ; m != m_impl->mediaMap.end(); ++m)
+      {
+        if( m->second.handler->dependsOnParent(accessId))
+        {
+          if( !ref.handler->isSharedMedia())
+          {
+            ERR << "close attempt on a private id detected "
+                << "-- uninitialized access id variable?!"
+                << std::endl;
+            ZYPP_THROW(MediaIsSharedException(
+              m->second.handler->url().asString()
+            ));
+          }
+        }
+      }
+
       ref.handler->close();
       m_impl->mediaMap.erase(accessId);
     }
@@ -344,31 +370,6 @@ namespace zypp
 
     // ---------------------------------------------------------------
     void
-    MediaManager::reattach(MediaAccessId   accessId,
-                           const Pathname &attach_point,
-                           bool            temporary)
-    {
-      MutexLock glock(g_Mutex);
-
-      ManagedMedia &ref( m_impl->findMM(accessId));
-
-      ManagedMediaMap::iterator m(m_impl->mediaMap.begin());
-      for( ; m != m_impl->mediaMap.end(); ++m)
-      {
-        // don't allow a reattach if it is the
-        // source for an loop mounted ISO file
-        if( m->second.handler->dependsOnParent(accessId))
-        {
-          ZYPP_THROW(MediaIsSharedException(
-            m->second.handler->url().asString()
-          ));
-        }
-      }
-      return ref.handler->reattach(attach_point, temporary);
-    }
-
-    // ---------------------------------------------------------------
-    void
     MediaManager::release(MediaAccessId accessId, bool eject)
     {
       MutexLock glock(g_Mutex);
@@ -377,6 +378,11 @@ namespace zypp
 
       if( eject)
       {
+        //
+        // release MediaISO handlers, that are using the one
+        // specified with accessId, because it provides the
+        // iso file and it will disappear now (forced release).
+        //
         ManagedMediaMap::iterator m(m_impl->mediaMap.begin());
         for( ; m != m_impl->mediaMap.end(); ++m)
         {
@@ -384,6 +390,8 @@ namespace zypp
           {
             try
             {
+              DBG << "Forcing release of handler depending on access id "
+                  << accessId << std::endl;
               m->second.handler->release(!eject);
               m->second.desired  = false;
             }
