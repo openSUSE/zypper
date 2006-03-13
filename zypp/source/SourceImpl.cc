@@ -216,6 +216,26 @@ namespace zypp
       return media_mgr.localPath( _media, path_r );
     }
 
+    const void SourceImpl::releaseFile(const Pathname & file_r,
+				       const unsigned media_nr)
+    {
+      DBG << "releaseFile(" << file_r << ", " << media_nr << ")" << endl;
+      media::MediaAccessId _media = _media_set->getMediaAccessId( media_nr );
+      media_mgr.releaseFile(_media, file_r);
+    }
+
+    const void SourceImpl::releaseDir(const Pathname & path_r,
+				      const unsigned media_nr,
+				      const bool recursive)
+    {
+      DBG << "releaseDir(" << path_r << ", " << media_nr << (recursive?", recursive":"") << ")" << endl;
+      media::MediaAccessId _media = _media_set->getMediaAccessId( media_nr );
+      if (recursive)
+	media_mgr.releasePath(_media, path_r);
+      else
+	media_mgr.releaseDir(_media, path_r);
+    }
+
     void SourceImpl::changeMedia( const media::MediaId & media_r, const Pathname & path_r )
     {
       DBG << "changeMedia(" << path_r << ")" << endl;
@@ -227,8 +247,8 @@ namespace zypp
 
     void SourceImpl::enable()
     {
-      if (autorefresh())
-	refresh();
+//      if (autorefresh())
+//	refresh();
       _enabled = true;
     }
 

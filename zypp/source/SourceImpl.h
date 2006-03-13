@@ -109,6 +109,13 @@ namespace zypp
 				const unsigned media_nr = 1,
 				const bool recursive = false);
 
+      const void releaseFile(const Pathname & file_r,
+			     const unsigned media_nr = 1);
+
+      const void releaseDir(const Pathname & path_r,
+			    const unsigned media_nr = 1,
+			    const bool recursive = false);
+
       /**
        * Provide info about a directory
        *

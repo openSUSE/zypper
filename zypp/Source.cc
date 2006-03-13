@@ -69,6 +69,15 @@ namespace zypp
                                          const bool recursive)
   { return _pimpl->provideDir(dir_r, media_nr, recursive); }
 
+  const void Source_Ref::releaseFile(const Pathname & file_r,
+				     const unsigned media_nr)
+  { _pimpl->releaseFile(file_r, media_nr); }
+
+  const void Source_Ref::releaseDir(const Pathname & dir_r,
+                                    const unsigned media_nr,
+                                    const bool recursive)
+  { _pimpl->releaseDir(dir_r, media_nr, recursive); }
+
   const bool Source_Ref::enabled() const
   { return _pimpl->enabled(); }
 

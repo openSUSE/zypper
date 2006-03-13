@@ -294,6 +294,7 @@ namespace zypp
 	      it->status().setTransact( false, ResStatus::USER );
             }
             progress.disconnect();
+	    p->source().releaseFile(p->plainRpm(), p->mediaId());
           }
           else
           {
