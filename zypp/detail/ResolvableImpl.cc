@@ -45,18 +45,23 @@ namespace zypp
 
   namespace
   {
-    struct FilterLocaleProvides
+    struct FilterExtraProvides
     {
       Dependencies & deps;
       ZYpp::Ptr _zypp;
 
-      FilterLocaleProvides( Dependencies & d, ZYpp::Ptr z )
+      FilterExtraProvides( Dependencies & d, ZYpp::Ptr z )
 	: deps( d )
 	, _zypp( z )
       { }
 
       bool operator()( const Capability & cap_r ) const
       {
+	if (cap_r.index().substr( 0, 9 ) == "modalias(") {
+	    deps[Dep::SUPPLEMENTS].insert( CapFactory().parse( ResTraits<System>::kind, cap_r.index() ) );
+	    return true;	// strip from provides
+	}
+
 	if (cap_r.index().substr( 0, 7 ) != "locale(")
 	    return false;
 
@@ -89,11 +94,11 @@ namespace zypp
       }
     };
 
-    void filterLocaleProvides( const Dependencies & from, Dependencies & to, ZYpp::Ptr z )
+    void filterExtraProvides( const Dependencies & from, Dependencies & to, ZYpp::Ptr z )
     {
 
       CapSet provides;
-      FilterLocaleProvides flp( to, z );
+      FilterExtraProvides flp( to, z );
 
       std::remove_copy_if( from[Dep::PROVIDES].begin(), from[Dep::PROVIDES].end(),
                            std::inserter( provides, provides.end() ),
@@ -115,10 +120,10 @@ namespace zypp
   {
     if (!_zypp) _zypp = zypp::getZYpp();
 
-    // check if we provide any 'locale(...)' tags and split them
-    //  up to freshens/supplements
+    // check if we provide any extra ('locale(...)', 'modalias(...)', ...) tags
+    //  and split them up to freshens/supplements
 
-    filterLocaleProvides( nvrad_r, _deps, _zypp );
+    filterExtraProvides( nvrad_r, _deps, _zypp );
 
     // assert self provides
     _deps[Dep::PROVIDES].insert( CapFactory()
