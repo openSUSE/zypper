@@ -237,28 +237,22 @@ namespace zypp
 
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      //
-      // The MediaISO handler internally requests an accessId
-      // of a "parent" handler providing the iso file.
-      // The parent handler accessId is private to MediaISO,
-      // but the attached media source may be shared reference.
-      // This means, that if the accessId belongs to a handler
-      // that is _not_ shared, close was used on uninitialized
-      // accessId variable (or the accessId was guessed).
-      //
       ManagedMediaMap::iterator m(m_impl->mediaMap.begin());
       for( ; m != m_impl->mediaMap.end(); ++m)
       {
         if( m->second.handler->dependsOnParent(accessId))
         {
-          if( !ref.handler->isSharedMedia())
+          // this may happen on exit (destructor run)
+          try
           {
-            ERR << "close attempt on a private id detected "
-                << "-- uninitialized access id variable?!"
-                << std::endl;
-            ZYPP_THROW(MediaIsSharedException(
-              m->second.handler->url().asString()
-            ));
+            DBG << "Forcing release of handler depending on access id "
+                << accessId << std::endl;
+            m->second.handler->release(false);
+            m->second.desired  = false;
+          }
+          catch(const MediaException &e)
+          {
+            ZYPP_CAUGHT(e);
           }
         }
       }
