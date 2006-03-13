@@ -68,7 +68,7 @@ namespace zypp
 		  inst.status().setTransact( false, by_r );
 		  inst.status().setLock( false, by_r );
 	      }
-	      cand.status().setLock( false, by_r );	      
+	      cand.status().setLock( false, by_r );
 	      return cand.status().setTransact( true, by_r );
           }
         return false;
@@ -80,7 +80,7 @@ namespace zypp
           {
             if ( cand )
               cand.status().setTransact( false, by_r );
-	    inst.status().setLock( false, by_r );	    
+	    inst.status().setLock( false, by_r );
             return inst.status().setTransact( true, by_r );
           }
         return false;
@@ -102,21 +102,21 @@ namespace zypp
       bool setProtected( ResStatus::TransactByValue by_r ) const
       {
 	  if ( inst ) {
-	      inst.status().setTransact( false, by_r );	      
+	      inst.status().setTransact( false, by_r );
 	      return inst.status().setLock( true, by_r );
 	  } else
-	      return false;	  
+	      return false;
       }
-	
+
       bool setTaboo( ResStatus::TransactByValue by_r ) const
       {
 	  if ( cand ) {
-	      cand.status().setTransact( false, by_r );	      
+	      cand.status().setTransact( false, by_r );
 	      return cand.status().setLock( true, by_r );
 	  } else
 	      return false;
       }
-	
+
 
     public:
       const Selectable::Impl & _impl;
@@ -153,7 +153,7 @@ namespace zypp
 
       if ( !installedObj() && cand && cand.status().isLocked() )
 	  return S_Taboo;
-      
+
       return( installedObj() ? S_KeepInstalled : S_NoInst );
     }
 
@@ -164,7 +164,7 @@ namespace zypp
       switch ( state_r )
         {
         case S_Protected:
-	    return self.setProtected( ResStatus::USER );	    
+	    return self.setProtected( ResStatus::USER );
         case S_Taboo:
 	    return self.setTaboo( ResStatus::USER );
         case S_AutoDel:
@@ -216,6 +216,25 @@ namespace zypp
           _candidate = *_availableItems.begin();
         }
       return _candidate;
+    }
+
+    ResStatus::TransactByValue Selectable::Impl::modifiedBy() const
+    {
+      PoolItem cand( candidateObj() );
+
+      if ( cand && cand.status().transacts() )
+        return cand.status().getTransactByValue();
+
+      if ( installedObj() && installedObj().status().transacts() )
+        return installedObj().status().getTransactByValue();
+
+      if ( cand )
+        return cand.status().getTransactByValue();
+
+      if ( installedObj() )
+        return installedObj().status().getTransactByValue();
+
+      return ResStatus::SOLVER;
     }
 
     /////////////////////////////////////////////////////////////////

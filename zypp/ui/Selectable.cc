@@ -81,6 +81,16 @@ namespace zypp
     { return make_transform_iterator( _pimpl->availableEnd(),
                                       SelectableTraits::TransformToResObjectPtr() ); }
 
+    ResStatus::TransactByValue Selectable::modifiedBy() const
+    { return _pimpl->modifiedBy(); }
+
+    bool Selectable::hasLicenceConfirmed() const
+    { return _pimpl->hasLicenceConfirmed(); }
+
+    void Selectable::setLicenceConfirmed( bool val_r )
+    { _pimpl->setLicenceConfirmed( val_r ); }
+
+
     /******************************************************************
     **
     **	FUNCTION NAME : operator<<

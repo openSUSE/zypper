@@ -114,7 +114,18 @@ namespace zypp
       availableItem_const_iterator availableEnd() const
       { return _availableItems.end(); }
 
-    private:
+      /** Return who caused the modification. */
+      ResStatus::TransactByValue modifiedBy() const;
+
+      /** Return value of LicenceConfirmed bit. */
+      bool hasLicenceConfirmed() const
+      { return candidateObj() && candidateObj().status().isLicenceConfirmed(); }
+
+      /** Set LicenceConfirmed bit. */
+      void setLicenceConfirmed( bool val_r )
+      { if ( candidateObj() ) candidateObj().status().setLicenceConfirmed( val_r ); }
+
+     private:
       ResObject::Kind  _kind;
       std::string      _name;
       PoolItem         _installedItem;
