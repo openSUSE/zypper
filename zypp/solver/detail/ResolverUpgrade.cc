@@ -295,9 +295,10 @@ MIL << "item " << item << " is installed, candidate is " << candidate << endl;
       if (installed) {						// check if we already have an installed
 MIL << "found installed " << installed << " for item " << candidate << endl;
 	CandidateMap::const_iterator cand_it = candidatemap.find(installed);
-	if (cand_it == candidatemap.end()					// not in map yet
-	    || (cand_it->second->edition().compare (candidate->edition()) < 0)	// or the new has better edition
-	    || (cand_it->second->arch().compare (candidate->arch()) < 0) )	// or the new has better architecture
+	if (cand_it == candidatemap.end()						// not in map yet
+	    || (cand_it->second->arch().compare (candidate->arch()) < 0)		// or the new has better architecture
+	    || ((cand_it->second->arch().compare (candidate->arch()) == 0)		// or the new has the same architecture
+		&& (cand_it->second->edition().compare (candidate->edition()) < 0) ) )	//   and a better edition (-> 157501)
 	{
 	    candidatemap[installed] = candidate;				// put it in !
 	}
@@ -636,7 +637,7 @@ MIL << "split matched !" << endl;
   MIL << opt_stats_r << endl;
 
   // Setting Resolver to upgrade mode
-  _upgradeMode = true;
+//  _upgradeMode = true;
 }
 
 ///////////////////////////////////////////////////////////////////
