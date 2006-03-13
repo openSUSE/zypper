@@ -44,6 +44,9 @@ namespace zypp
                      url_r.getPathName(), // urlpath below attachpoint
                      false)               // does_download
     {
+      MIL << "MediaISO::MediaISO(" << url_r << ", "
+          << attach_point_hint_r << ")" << std::endl;
+
       _isofile    = _url.getQueryParam("iso");
       if( _isofile.empty())
       {
@@ -106,9 +109,6 @@ namespace zypp
       MediaManager manager;
 
       _parentId = manager.open(src, _url.getQueryParam("mnt"));
-
-      MIL << "MediaISO::MediaISO(" << url_r << ", "
-          << attach_point_hint_r << ")" << std::endl;
     }
 
     // ---------------------------------------------------------------
