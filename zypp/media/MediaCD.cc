@@ -106,7 +106,9 @@ namespace zypp {
 	      {
 	        ERR << "Device " << device << " is not acceptable "
 	            << "for " << _url.getScheme() << std::endl;
-	        ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
+	        ZYPP_THROW(MediaBadUrlException(_url,
+		  "Invalid device name in URL devices argument"
+		));
 	      }
     	    }
     	    if (pos!=string::npos)

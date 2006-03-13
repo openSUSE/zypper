@@ -250,14 +250,17 @@ namespace zypp
     class MediaBadUrlException : public MediaException
     {
     public:
-      MediaBadUrlException(const Url & url_r)
+      MediaBadUrlException(const Url & url_r,
+                           const std::string &msg_r = std::string())
       : MediaException()
       , _url(url_r.asString())
+      , _msg(msg_r)
       {}
       virtual ~MediaBadUrlException() throw() {};
     protected:
       virtual std::ostream & dumpOn( std::ostream & str ) const;
       std::string _url;
+      std::string _msg;
     };
 
     class MediaBadUrlEmptyHostException : public MediaBadUrlException

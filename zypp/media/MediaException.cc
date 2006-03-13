@@ -93,7 +93,14 @@ namespace zypp
 
     std::ostream & MediaBadUrlException::dumpOn( std::ostream & str) const
     {
-      return str << "Malformed URL: " << _url << endl;
+      if( _msg.empty())
+      {
+      	return str << "Malformed URL: " << _url << endl;
+      }
+      else
+      {
+      	return str << _msg << ": " << _url << endl;
+      }
     }
 
     std::ostream & MediaBadUrlEmptyHostException::dumpOn( std::ostream & str) const
