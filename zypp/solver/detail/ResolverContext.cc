@@ -160,7 +160,7 @@ ResolverContext::getStatus (PoolItem_Ref item)
 	status = ResStatus::uninstalled;		// return _is_ state, not _to be_ state
 
     _last_checked_status = status;
-//    _XDEBUG( "[NULL]:" << status );    
+//_XDEBUG( "[NULL]:" << status );    
 
     return _last_checked_status;				// Not part of context, return Pool status
 }
@@ -605,12 +605,14 @@ ResolverContext::isPresent (PoolItem_Ref item)
 {
     ResStatus status = getStatus(item);
 
-_XDEBUG("ResolverContext::itemIsPresent(<" << status << ">" << item << ")");
+    bool res = (status.staysInstalled()
+		|| (status.isToBeInstalled() && !status.isNeeded())
+		|| status.isUnneeded()
+		|| status.isSatisfied());
 
-    return (status.staysInstalled()
-	    || (status.isToBeInstalled() && !status.isNeeded())
-	    || status.isUnneeded()
-	    || status.isSatisfied());
+_XDEBUG("ResolverContext::itemIsPresent(<" << status << ">" << item << ") " << (res?"Y":"N"));
+
+    return res;
 }
 
 
@@ -620,17 +622,17 @@ _XDEBUG("ResolverContext::itemIsPresent(<" << status << ">" << item << ")");
 bool
 ResolverContext::isAbsent (PoolItem_Ref item)
 {
-    ResStatus status;
-
-    status = getStatus(item);
-
-_XDEBUG("ResolverContext::itemIsAbsent(<" << status << ">" << item << ")");
+    ResStatus status = getStatus(item);
 
     // DONT add incomplete here, uninstall requests for incompletes must be handled
 
-    return (status.staysUninstalled()
-	   || status.isToBeUninstalled()
-	   || status.isImpossible());
+    bool res = (status.staysUninstalled()
+		|| status.isToBeUninstalled()
+		|| status.isImpossible());
+
+_XDEBUG("ResolverContext::itemIsAbsent(<" << status << ">" << item << ") " << (res?"Y":"N"));
+
+    return res;
 }
 
 
@@ -1403,6 +1405,7 @@ ResolverContext::requirementIsMet (const Capability & dependency, bool is_child)
 		  pool().byCapabilityIndexEnd( dependency.index(), dep ),
 		  resfilter::ByCapMatch( dependency ),
 		  functor::functorRef<bool,CapAndItem>(info) );
+_XDEBUG( "ResolverContext::requirementIsMet(" << dependency << ") " << (info.flag?"Y":"N") );
     return info.flag;
 }
 
