@@ -59,14 +59,15 @@ namespace zypp {
       //, does_download
       , _lastdev(-1)
     {
+      MIL << "MediaCD::MediaCD(" << url_r << ", "
+          << attach_point_hint_r << ")" << endl;
+
       if( url_r.getScheme() != "dvd" && url_r.getScheme() != "cd")
       {
 	ERR << "Unsupported schema in the Url: " << url_r.asString()
 	                                         << std::endl;
 	ZYPP_THROW(MediaUnsupportedUrlSchemeException(_url));
       }
-
-      MIL << "MediaCD::MediaCD(" << url_r << ", " << attach_point_hint_r << ")" << endl;
 
       DeviceList detected( detectDevices(
 	url_r.getScheme() == "dvd" ? true : false
