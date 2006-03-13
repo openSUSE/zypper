@@ -98,8 +98,22 @@ namespace zypp {
 
 	/**
 	 * Hint if files are downloaded or not.
+	 * @return True, if the files are downloaded.
 	 */
 	bool        downloads() const;
+
+	/**
+	 * Hint if files will be downloaded when using the
+	 * specified media \p url.
+	 *
+	 * @note This hint is based on the \p url scheme
+	 * only and does not imply, that the URL is valid.
+	 *
+	 * @param url The media URL to check.
+	 * @return True, if the files are downloaded.
+	 */
+	static
+	bool        downloads(const Url &url);
 
 	/**
 	 * Used Protocol if media is opened, otherwise 'unknown'.

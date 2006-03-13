@@ -396,12 +396,25 @@ namespace zypp
       protocol(MediaAccessId accessId) const;
 
       /**
-	     * Hint if files are downloaded or not.
+       * Hint if files are downloaded or not.
        * \param accessId The media access id to query.
        * \return True, if provideFile downloads files.
-	     */
-	    bool
+       */
+      bool
       downloads(MediaAccessId accessId) const;
+
+      /**
+       * Hint if files will be downloaded when using the
+       * specified media \p url.
+       *
+       * @note This hint is based on the \p url scheme
+       * only and does not imply, that the URL is valid.
+       *
+       * @param url The media URL to check.
+       * @return True, if the files are downloaded.
+       */
+      static bool
+      downloads(const Url &url);
 
       /**
        * Returns the \ref MediaAccessUrl of the media access id.

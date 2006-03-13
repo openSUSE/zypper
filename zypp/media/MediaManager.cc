@@ -275,6 +275,14 @@ namespace zypp
     }
 
     // ---------------------------------------------------------------
+    // STATIC
+    bool
+    MediaManager::downloads(const Url &url)
+    {
+      return MediaAccess::downloads( url);
+    }
+
+    // ---------------------------------------------------------------
     Url
     MediaManager::url(MediaAccessId accessId) const
     {

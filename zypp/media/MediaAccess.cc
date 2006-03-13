@@ -95,6 +95,10 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
 
     MIL << "Trying scheme '" << scheme << "'" << endl;
 
+    /*
+    ** WARNING: Don't forget to update MediaAccess::downloads(url)
+    **          if you are adding a new url scheme / handler!
+    */
     if (scheme == "cd" || scheme == "dvd")
         _handler = new MediaCD (url,preferred_attach_point);
     else if (scheme == "nfs")
@@ -123,6 +127,14 @@ MediaAccess::open (const Url& url, const Pathname & preferred_attach_point)
     }
 
     MIL << "Opened: " << *this << endl;
+}
+
+// STATIC
+bool
+MediaAccess::downloads(const Url &url)
+{
+    std::string scheme( url.getScheme());
+    return (scheme == "ftp" || scheme == "http" || scheme == "https");
 }
 
 // Type of media if open, otherwise NONE.
