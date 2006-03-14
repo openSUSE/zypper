@@ -1146,7 +1146,7 @@ ResolverContext::addError (ResolverInfo_Ptr info)
 //  (2) An info item is about an important-item is important.
 
 static void
-mark_important_info (ResolverInfoList & il)
+mark_important_info (const ResolverInfoList & il)
 {
     // set of all items mentioned in the ResolverInfoList
     PoolItemSet error_set;
@@ -1156,11 +1156,11 @@ mark_important_info (ResolverInfoList & il)
 
     /* First of all, store all error-items in a set. */
 
-    for (ResolverInfoList::iterator info_iter = il.begin(); info_iter != il.end(); ++info_iter) {
+    for (ResolverInfoList::const_iterator info_iter = il.begin(); info_iter != il.end(); ++info_iter) {
 	ResolverInfo_Ptr info = (*info_iter);
 	if (info != NULL						// list items might be NULL
-	    && info->error ()) {					// only look at error infos
-
+	    && info->error ())						// only look at error infos
+	{
 	    PoolItem_Ref item = info->affected();		// get item from ResolverInfoList
 	    if (item) {
 		error_set.insert (item);
@@ -1193,16 +1193,20 @@ mark_important_info (ResolverInfoList & il)
 
 	did_something = false;
 
-	for (ResolverInfoList::iterator info_iter = il.begin(); info_iter != il.end(); ++info_iter) {
+	for (ResolverInfoList::const_iterator info_iter = il.begin(); info_iter != il.end(); ++info_iter) {
+
 	    ResolverInfo_Ptr info = (*info_iter);
+
 	    if (info != NULL						// list items might be set to NULL
-		&& info->important ()) {				// only look at important ones
+		&& !info->important ())					// only look at ones we didn't consider yet
+	    {
 		bool should_be_important = false;
 
 		for (PoolItemSet::const_iterator res_iter = error_set.begin(); res_iter != error_set.end() && ! should_be_important; ++res_iter) {
 		    ResolverInfoContainer_constPtr c = dynamic_pointer_cast<const ResolverInfoContainer>(*info_iter);
 		    if (c != NULL					// check if it really is a container
-			&& c->mentions (*res_iter)) {
+			&& c->mentions (*res_iter))
+		    {
 			should_be_important = true;
 		    }
 		}
@@ -1240,7 +1244,7 @@ ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn
      // Assemble a list of copies of all of the info objects
     while (context != NULL) {
 
-	for (ResolverInfoList::const_iterator iter = context->_log.begin(); iter != context->_log.end(); iter++) {
+	for (ResolverInfoList::const_iterator iter = context->_log.begin(); iter != context->_log.end(); ++iter) {
 
 	    ResolverInfo_Ptr info = *iter;
 
@@ -1253,18 +1257,21 @@ ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn
 	}
 	context = context->_parent;
     }
-#if 0
+#if 1
     // Merge info objects
-    for (ResolverInfoList::iterator iter = info_list.begin(); iter != info_list.end(); iter++) {
+    for (ResolverInfoList::iterator iter = info_list.begin(); iter != info_list.end(); ++iter) {
 
 	ResolverInfo_Ptr info1 = (*iter);
 	ResolverInfoList::iterator subiter = iter;
+
 	if (info1 != NULL) {
-	    for (subiter++; subiter != info_list.end(); subiter++) {
+	    for (subiter++; subiter != info_list.end();) {
 		ResolverInfo_Ptr info2 = *subiter;
+		ResolverInfoList::iterator next = subiter; ++next;
 		if (info2 && info1->merge (info2)) {
-		    *subiter = NULL;
+		    info_list.erase( subiter );
 		}
+		subiter = next;
 	    }
 	}
     }
@@ -1273,7 +1280,7 @@ ResolverContext::foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn
 
     // Walk across the list of info objects and invoke our callback
 
-    for (ResolverInfoList::iterator iter = info_list.begin(); iter != info_list.end(); iter++) {
+    for (ResolverInfoList::iterator iter = info_list.begin(); iter != info_list.end(); ++iter) {
 	if (*iter != NULL) {
 	    fn( *iter, data );
 	}
