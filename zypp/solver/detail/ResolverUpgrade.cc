@@ -637,7 +637,7 @@ MIL << "split matched !" << endl;
   MIL << opt_stats_r << endl;
 
   // Setting Resolver to upgrade mode
-//  _upgradeMode = true;
+  _upgradeMode = true;
 }
 
 ///////////////////////////////////////////////////////////////////

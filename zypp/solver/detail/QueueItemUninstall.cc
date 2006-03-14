@@ -346,39 +346,34 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	// we're uninstalling an installed item
 	//   loop over all its provides and check if any installed item requires
 	//   one of these provides
-        //   We assuming that the dependencies are satified by the new updated items
-        //   Testcase exercise-bug150844-test.xml
-        if (!context->upgradeMode())
-        {
-	    CapSet provides = _item->dep(Dep::PROVIDES);
+	CapSet provides = _item->dep(Dep::PROVIDES);
 
-	    for (CapSet::const_iterator iter = provides.begin(); iter != provides.end(); iter++) {
-		UninstallProcess info ( pool(), context, _item, _upgraded_to, qil, _remove_only, _soft);
+	for (CapSet::const_iterator iter = provides.begin(); iter != provides.end(); iter++) {
+	    UninstallProcess info ( pool(), context, _item, _upgraded_to, qil, _remove_only, _soft);
 
-		//world()->foreachRequiringPoolItem (*iter, uninstall_process_cb, &info);
-		Dep dep( Dep::REQUIRES );
+	    //world()->foreachRequiringPoolItem (*iter, uninstall_process_cb, &info);
+	    Dep dep( Dep::REQUIRES );
 
-		invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
-			      pool().byCapabilityIndexEnd( iter->index(), dep ),
-			      resfilter::ByCapMatch( *iter ),
-			      functor::functorRef<bool,CapAndItem>(info) );
+	    invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
+			  pool().byCapabilityIndexEnd( iter->index(), dep ),
+			  resfilter::ByCapMatch( *iter ),
+			  functor::functorRef<bool,CapAndItem>(info) );
 
-		// re-establish all which supplement or freshen a provides of the just uninstalled item
+	    // re-establish all which supplement or freshen a provides of the just uninstalled item
 
-		EstablishItem establish( pool(), qil, _soft );
+	    EstablishItem establish( pool(), qil, _soft );
 
-		dep = Dep::SUPPLEMENTS;
-		invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
-			      pool().byCapabilityIndexEnd( iter->index(), dep ),
-			      resfilter::ByCapMatch( *iter ),
-			      functor::functorRef<bool,CapAndItem>( establish ) );
+	    dep = Dep::SUPPLEMENTS;
+	    invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
+			  pool().byCapabilityIndexEnd( iter->index(), dep ),
+			  resfilter::ByCapMatch( *iter ),
+			  functor::functorRef<bool,CapAndItem>( establish ) );
 
-		dep = Dep::FRESHENS;
-		invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
-			      pool().byCapabilityIndexEnd( iter->index(), dep ),
-			      resfilter::ByCapMatch( *iter ),
-			      functor::functorRef<bool,CapAndItem>( establish ) );
-	    }
+	    dep = Dep::FRESHENS;
+	    invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
+			  pool().byCapabilityIndexEnd( iter->index(), dep ),
+			  resfilter::ByCapMatch( *iter ),
+			  functor::functorRef<bool,CapAndItem>( establish ) );
 	}
     }
 

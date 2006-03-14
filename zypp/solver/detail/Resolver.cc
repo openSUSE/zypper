@@ -531,7 +531,15 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     }
 
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
-	initial_queue->addPoolItemToRemove (*iter, true /* remove-only mode */);
+	if (!_upgradeMode)
+	    initial_queue->addPoolItemToRemove (*iter, true /* remove-only mode */);
+	else
+	    //   Checking old dependencies for packages which will be updated.
+	    //   E.g. foo provides a dependecy which foo-new does not provides anymore.
+	    //   So check, if there is a packages installed which requires foo.
+	    //   Testcase exercise-bug150844-test.xml
+	    //   Testcase Bug156439-test.xml
+	    initial_queue->addPoolItemToRemove (*iter, false /* no remove-only mode */);
     }
 
     for (PoolItemList::const_iterator iter = _items_to_verify.begin(); iter != _items_to_verify.end(); iter++) {
