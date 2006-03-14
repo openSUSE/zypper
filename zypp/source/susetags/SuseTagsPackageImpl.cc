@@ -72,7 +72,7 @@ namespace zypp
 
       Changelog SuseTagsPackageImpl::changelog() const
       { return Changelog(); }
-
+      
       Pathname SuseTagsPackageImpl::location() const
       { return _location; }
 
@@ -116,7 +116,7 @@ namespace zypp
       { return std::list<std::string>(); }
 
       License SuseTagsPackageImpl::licenseToConfirm() const
-      { return License(); }
+      { return _license_to_confirm; }
 
       std::list<DeltaRpm> SuseTagsPackageImpl::deltaRpms() const
       { return std::list<DeltaRpm>(); }

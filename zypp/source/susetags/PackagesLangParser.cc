@@ -96,10 +96,20 @@ namespace zypp
         virtual void consume( const MultiTag & mtag_r )
         {
           if ( mtag_r.name == "Des" )
+          {
+	    if ( _current != NULL )
+             _current->_description = TranslatedText (mtag_r.values, _lang);
+          }
+          else if ( mtag_r.name == "Eul" )
+          {
+            if ( _current != NULL )
             {
-	      if ( _current != NULL )
-                 _current->_description = TranslatedText (mtag_r.values, _lang);
+              for ( std::list<std::string>::const_iterator it = mtag_r.values.begin(); it != mtag_r.values.end(); ++it)
+              {
+                _current->_license_to_confirm += *it;
+              }
             }
+          }
         }
       };
 

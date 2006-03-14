@@ -105,6 +105,7 @@ namespace zypp
 	ByteCount _size;
         ByteCount _archivesize;
         Label _license;
+        Label _license_to_confirm;
         Date _buildtime;
         unsigned int _media_number;
         Pathname _location;
