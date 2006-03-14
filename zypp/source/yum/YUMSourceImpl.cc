@@ -258,6 +258,7 @@ namespace zypp
 		  !prim.atEnd();
 		  ++prim)
 	    {
+              MIL << "found package "<< (*prim)->name << std::endl;
 		NVRA nvra( (*prim)->name,
 			   Edition( (*prim)->ver, (*prim)->rel, str::strtonum<int>( (*prim)->epoch ) ),
 			   Arch( (*prim)->arch ) );
@@ -282,6 +283,7 @@ namespace zypp
 		);
 		ImplAndPackage iap = { impl, p };
 		_package_impl[nvra] = iap;
+                MIL << "inserting package "<< p->name() << std::endl;
 		_store.insert (p);
 	    }
 	    if (prim.errorStatus())
@@ -495,7 +497,8 @@ namespace zypp
     }
   }
 
-  void YUMSourceImpl::augmentPackage(
+  Atom::Ptr YUMSourceImpl::augmentPackage(
+    Source_Ref source_r,
     const zypp::parser::yum::YUMPatchPackage & parsed
   )
   {
@@ -507,60 +510,61 @@ namespace zypp
 		   Arch( parsed.arch ) );
 
 	DBG << "augmentPackage(" << nvra << ")" << endl;
-
+        
+        // create Atom
+        CapFactory f;
+        Dependencies deps = createDependencies( parsed, ResTraits<Package>::kind );
+        deps[Dep::REQUIRES].insert( f.parse( ResTraits<Package>::kind, parsed.name, Rel::EQ, edition ) );
+        NVRAD atomdata( nvra, deps );
+        ResImplTraits<YUMAtomImpl>::Ptr atomimpl = new YUMAtomImpl( source_r );
+        Atom::Ptr atom = detail::makeResolvableFromImpl( atomdata, atomimpl);
+        
+        //source_r
 	PackageImplMapT::const_iterator it = _package_impl.find( nvra );
 	if (it == _package_impl.end()) {
 	    ERR << "Patch augments non-existant package " << nvra << endl;
-	    return;
 	}
-	ResImplTraits<YUMPackageImpl>::Ptr impl = it->second.impl;
-	Package::Ptr package = it->second.package;
-	//DBG << "found " << *package << ", impl " << impl << endl;
-
-	_store.erase( package );
-	impl->unmanage();
-
-	// create Atom
-
-	CapFactory f;
-	Dependencies deps = createDependencies( parsed, ResTraits<Package>::kind );
-	deps[Dep::REQUIRES].insert( f.parse( ResTraits<Package>::kind, parsed.name, Rel::EQ, edition ) );
-	NVRAD atomdata( nvra, deps );
-	ResImplTraits<YUMAtomImpl>::Ptr atomimpl = new YUMAtomImpl( package->source() );
-	Atom::Ptr atom = detail::makeResolvableFromImpl(
-	    atomdata, atomimpl
-	);
-	DBG << "Inserting atom " << *atom << endl;
-	//DBG << "with deps " << deps << endl;
-	_store.insert( atom );
-
-	// Collect augmented package data
-	NVRAD packagedata( nvra, package->deps() );
-
-	if (!parsed.location.empty()) {
-	    impl->_location = parsed.location;
-	    impl->_mediaid = str::strtonum<unsigned>( parsed.media );
-	}
-//	if (!parsed.plainRpms.empty()) impl->_plain_rpms = parsed.plainRpms;
-#warning Needs equal PatchRpm and DeltaRpm definition in parser/yum and source/yum
-#if 0
-	if (!parsed.patchRpms.empty()) impl->_patch_rpms = parsed.patchRpms;
-	if (!parsed.deltaRpms.empty()) impl->_delta_rpms = parsed.deltaRpms;
-#endif
-	//DBG << "NVRAD " << (NVRA)packagedata << endl;
-
-
-
-#warning add patchrpm, deltarpm, etc. to YUMPackageImpl here
-	Package::Ptr new_package = detail::makeResolvableFromImpl(
-	    packagedata, impl
-	);
-
-	//DBG << "new_package " << *new_package << endl;
-
-	_store.insert( new_package );
-
-	return;
+        else
+        {
+          ResImplTraits<YUMPackageImpl>::Ptr impl = it->second.impl;
+          Package::Ptr package = it->second.package;
+          //DBG << "found " << *package << ", impl " << impl << endl;
+  
+          _store.erase( package );
+          impl->unmanage();
+   
+          // Atoms are inserted in the store after patch creation
+          //DBG << "Inserting atom " << *atom << endl;
+          //DBG << "with deps " << deps << endl;
+          //_store.insert( atom );
+  
+          // Collect augmented package data
+          NVRAD packagedata( nvra, package->deps() );
+  
+          if (!parsed.location.empty()) {
+              impl->_location = parsed.location;
+              impl->_mediaid = str::strtonum<unsigned>( parsed.media );
+          }
+  //	if (!parsed.plainRpms.empty()) impl->_plain_rpms = parsed.plainRpms;
+  #warning Needs equal PatchRpm and DeltaRpm definition in parser/yum and source/yum
+  #if 0
+          if (!parsed.patchRpms.empty()) impl->_patch_rpms = parsed.patchRpms;
+          if (!parsed.deltaRpms.empty()) impl->_delta_rpms = parsed.deltaRpms;
+  #endif
+          //DBG << "NVRAD " << (NVRA)packagedata << endl;
+  
+  
+  
+  #warning add patchrpm, deltarpm, etc. to YUMPackageImpl here
+          Package::Ptr new_package = detail::makeResolvableFromImpl(
+              packagedata, impl
+          );
+  
+          //DBG << "new_package " << *new_package << endl;
+  
+          _store.insert( new_package );
+        }
+	return atom;
     }
     catch (const Exception & excpt_r)
     {

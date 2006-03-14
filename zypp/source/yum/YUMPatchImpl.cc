@@ -89,7 +89,8 @@ namespace zypp
 	    case YUMPatchAtom::Package: {
 	      shared_ptr<YUMPatchPackage> package_data
 		= dynamic_pointer_cast<YUMPatchPackage>(*it);
-	      srcimpl_r.augmentPackage( *package_data );
+              Atom::Ptr atom = srcimpl_r.augmentPackage( _source, *package_data );
+              _atoms.push_back(atom);
 	      break;
 	    }
 	    case YUMPatchAtom::Message: {

@@ -67,7 +67,8 @@ namespace zypp
 	  const zypp::parser::yum::YUMOtherData & other,
 	  zypp::detail::ResImplTraits<zypp::source::yum::YUMPackageImpl>::Ptr & impl
 	);
-	void augmentPackage(
+        Atom::Ptr augmentPackage(
+          Source_Ref source_r,
 	  const zypp::parser::yum::YUMPatchPackage & parsed
 	);
 	Selection::Ptr createGroup(
