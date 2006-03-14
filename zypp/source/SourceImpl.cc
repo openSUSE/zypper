@@ -15,6 +15,7 @@
 #include "zypp/SourceFactory.h"
 #include "zypp/source/SourceImpl.h"
 #include "zypp/ZYppCallbacks.h"
+#include "zypp/SourceManager.h"
 
 #include <fstream>
 
@@ -155,6 +156,15 @@ namespace zypp
 		ZYPP_CAUGHT(excpt_r);
 		MIL << "Failed to release media " << _media << endl;
 	    }
+	    MIL << "Releasing all medias of all sources" << endl;
+	    try {
+		zypp::SourceManager::sourceManager()->releaseAllSources();
+	    }
+	    catch (const zypp::Exception& excpt_r)
+	    {
+		ZYPP_CAUGHT(excpt_r);
+		ERR << "Failed to release all sources" << endl;
+	    }
 
 	    user  = checkonly ? media::MediaChangeReport::ABORT :
 	      report->requestMedia (
@@ -174,8 +184,15 @@ namespace zypp
 	    else if ( user == media::MediaChangeReport::EJECT )
 	    {
 	      DBG << "Eject: try to release" << endl;
-
-	      media_mgr.release (_media, true);
+	      try {
+		zypp::SourceManager::sourceManager()->releaseAllSources();
+	      }
+	      catch (const zypp::Exception& excpt_r)
+	      {
+		ZYPP_CAUGHT(excpt_r);
+		ERR << "Failed to release all sources" << endl;
+	      }
+	      media_mgr.release (_media, true); // one more release needed for eject
 	      // FIXME: this will not work, probably
 	    }
 	    else if ( user == media::MediaChangeReport::RETRY  ||

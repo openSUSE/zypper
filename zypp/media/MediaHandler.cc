@@ -601,7 +601,7 @@ void MediaHandler::disconnect()
 void MediaHandler::release( bool eject )
 {
   if ( !isAttached() ) {
-    DBG << "Request to release media - not attached" << std::endl;
+    DBG << "Request to release media - not attached; eject " << eject << std::endl;
     if ( eject )
       forceEject();
     return;

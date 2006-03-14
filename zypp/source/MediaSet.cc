@@ -89,12 +89,18 @@ namespace zypp
 
     void MediaSet::release()
     {
+      MIL << "Releasing all medias of source" << endl;
       media::MediaManager media_mgr;
       for (MediaMap::iterator it = medias.begin(); it != medias.end(); it++)
       {
 	if (media_mgr.isAttached(it->second))
 	{
+	  MIL << "Releasing media " << it->second << endl;
 	  media_mgr.release(it->second, false);
+	}
+	else
+	{
+	  MIL << "Media " << it->second << " not attached" << endl;
 	}
       }
     }
