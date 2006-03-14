@@ -388,6 +388,7 @@ namespace zypp
         return false;
       if ( fieldValueIs<TransactField>( KEEP_STATE ) )
         fieldValueAssign<TransactByField>( SOLVER );
+      return true;
     }
 
     /** Soft toggle between TRANSACT and KEEP_STATE.
