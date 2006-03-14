@@ -102,6 +102,9 @@ namespace zypp
   string Source_Ref::alias (void) const
   { return _pimpl->alias(); }
 
+  void Source_Ref::setAlias (const std::string & alias_r)
+  { _pimpl->setAlias( alias_r ); }
+
   string Source_Ref::type (void) const
   { return _pimpl->type(); }
 

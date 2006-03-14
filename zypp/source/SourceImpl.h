@@ -150,6 +150,9 @@ namespace zypp
       std::string alias (void) const
       { return _alias; }
 
+      void setAlias (const std::string & alias)
+      { _alias = alias; }
+
       virtual std::string id (void) const;
       virtual void setId (const std::string id_r);
       virtual unsigned priority (void) const;

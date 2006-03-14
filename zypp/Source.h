@@ -107,18 +107,23 @@ namespace zypp
 
     void storeMetadata(const Pathname & cache_dir_r);
 
+    //! also for ZMD
     std::string alias (void) const;
+    void setAlias (const std::string & alias_r);
 
-    // string description of the source type, e.g. "YUM" or "UnitedLinux"
+    //! string description of the source type, e.g. "YUM" or "UnitedLinux"
     std::string type (void) const;
 
     unsigned numberOfMedia(void) const;
 
+    //! from media.1/media
     std::string vendor (void) const;
-
+    //! from media.1/media
     std::string unique_id (void) const;
 
-    // generic information get/set
+    //! @name generic information get/set
+    //@{
+    //! runtime-unique, not persistent, a "handle" for Pkg::, string?!
     std::string id (void) const;
     void setId (const std::string id_r);
     unsigned priority (void) const;
@@ -127,17 +132,22 @@ namespace zypp
     void setPriorityUnsubscribed (unsigned p);
     const Pathname & cacheDir (void) const;
     const std::list<Pathname> publicKeys();
+    //@}
 
-    // for ZMD
+    //! @name for ZMD
+    //@{
     std::string zmdName (void) const;
     void setZmdName (const std::string name_r);
     std::string zmdDescription (void) const;
     void setZmdDescription (const std::string desc_r);
+    //@}
 
-    // for YaST
+    //! @name for YaST
+    //@{
     Url url (void) const;
     bool remote() const;
     const Pathname & path (void) const;
+    //@}
 
   public:
     /**
