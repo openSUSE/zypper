@@ -9,7 +9,6 @@
   <channel name="packages" file="beta6-packages.xml"/>
   <channel name="selections" file="beta6-selections.xml"/>
   <forceResolve/>
-  <mediaid/>
 </setup>
 <trial>
 <uninstall package="yast2-transfer"/>

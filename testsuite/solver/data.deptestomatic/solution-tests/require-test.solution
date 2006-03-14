@@ -1,7 +1,7 @@
 >!> Installing foonew from channel test
 >!> 1 problems found:
 >!> Problem:
->!> foonew cannot be installed due missing dependencies
+>!> foonew cannot be installed due to missing dependencies
 >!> There are no installable providers of foo for foonew-2.0-1.noarch[test]
 >!>    Solution:
 >!>       do not install foonew

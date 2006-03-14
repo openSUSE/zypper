@@ -1,11 +1,3 @@
 #no solution available
 exercise-sles10-beta3-test.xml
 exercise-sles10-beta3-nodelete-test.xml
-#has to be checked again
-exercise-bug150844-test.xml
-unmaintained-single-test.xml
-rename-multiple-conflicting-test.xml
-upgrade-multiple-test.xml
-rename-multiple-test.xml
-upgrade-single-test.xml
-unmaintained-nodelete-single-test.xml

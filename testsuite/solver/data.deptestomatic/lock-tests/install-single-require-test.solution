@@ -2,7 +2,7 @@
 >!> Installing A from channel test
 >!> 1 problems found:
 >!> Problem:
->!> A cannot be installed due missing dependencies
+>!> A cannot be installed due to missing dependencies
 >!> There are no installable providers of B for A-1.0-1.noarch[test]
 >!>    Solution:
 >!>       unlock B

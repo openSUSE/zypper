@@ -1,53 +1,53 @@
 >!> Uninstalling yast2-transfer
 >!> No problems so far
 >!> Solution #1:
->!> remove  [3215778972]autoyast2-2.13.19-2.noarch
->!> remove  [3215778972]autoyast2-installation-2.13.19-2.noarch
->!> remove  [3215778972]yast2-backup-2.13.1-2.noarch
->!> remove  [3215778972]yast2-bootloader-2.13.18-3.x86_64
->!> remove  [3215778972]yast2-http-server-2.13.9-4.noarch
->!> remove  [3215778972]yast2-inetd-2.13.2-2.noarch
->!> remove  [3215778972]yast2-installation-2.13.28-2.noarch
->!> remove  [3215778972]yast2-network-2.13.29-2.x86_64
->!> remove  [3215778972]yast2-nfs-server-2.13.2-5.noarch
->!> remove  [3215778972]yast2-nis-server-2.13.1-5.noarch
->!> remove  [3215778972]yast2-packager-2.13.39-2.x86_64
->!> remove  [3215778972]yast2-powertweak-2.13.5-4.noarch
->!> remove  [3215778972]yast2-repair-2.13.3-4.noarch
->!> remove  [3215778972]yast2-restore-2.13.1-2.noarch
->!> remove  [3215778972]yast2-samba-server-2.13.6-2.noarch
->!> remove  [3215778972]yast2-storage-2.13.33-2.x86_64
->!> remove  [3215778972]yast2-sysconfig-2.13.5-4.noarch
->!> remove  [3215778972]yast2-transfer-2.13.3-2.x86_64
->!> remove  [3215778972]yast2-tv-2.13.7-2.noarch
->!> remove  [3215778972]yast2-update-2.13.3-2.x86_64
->!> remove  [3215778972]yast2-vm-2.13.22-2.x86_64
+>!> remove  autoyast2-2.13.19-2.noarch
+>!> remove  autoyast2-installation-2.13.19-2.noarch
+>!> remove  yast2-backup-2.13.1-2.noarch
+>!> remove  yast2-bootloader-2.13.18-3.x86_64
+>!> remove  yast2-http-server-2.13.9-4.noarch
+>!> remove  yast2-inetd-2.13.2-2.noarch
+>!> remove  yast2-installation-2.13.28-2.noarch
+>!> remove  yast2-network-2.13.29-2.x86_64
+>!> remove  yast2-nfs-server-2.13.2-5.noarch
+>!> remove  yast2-nis-server-2.13.1-5.noarch
+>!> remove  yast2-packager-2.13.39-2.x86_64
+>!> remove  yast2-powertweak-2.13.5-4.noarch
+>!> remove  yast2-repair-2.13.3-4.noarch
+>!> remove  yast2-restore-2.13.1-2.noarch
+>!> remove  yast2-samba-server-2.13.6-2.noarch
+>!> remove  yast2-storage-2.13.33-2.x86_64
+>!> remove  yast2-sysconfig-2.13.5-4.noarch
+>!> remove  yast2-transfer-2.13.3-2.x86_64
+>!> remove  yast2-tv-2.13.7-2.noarch
+>!> remove  yast2-update-2.13.3-2.x86_64
+>!> remove  yast2-vm-2.13.22-2.x86_64
 >!> installs=0, upgrades=0, uninstalls=21
 >!> Solution #2:
->!> upgrade [3215778972]autoyast2-2.13.19-2.noarch => [1]autoyast2-2.13.23-2.noarch[packages]
->!> upgrade [3215778972]autoyast2-installation-2.13.19-2.noarch => [1]autoyast2-installation-2.13.23-2.noarch[packages]
->!> upgrade [3215778972]yast2-transfer-2.13.3-2.x86_64 => [1]yast2-transfer-2.13.2-4.x86_64[packages]
+>!> upgrade autoyast2-2.13.19-2.noarch => autoyast2-2.13.23-2.noarch[packages]
+>!> upgrade autoyast2-installation-2.13.19-2.noarch => autoyast2-installation-2.13.23-2.noarch[packages]
+>!> upgrade yast2-transfer-2.13.3-2.x86_64 => yast2-transfer-2.13.2-4.x86_64[packages]
 >!> installs=0, upgrades=3, uninstalls=0
 >!> Solution #3:
->!> remove  [3215778972]yast2-backup-2.13.1-2.noarch
->!> remove  [3215778972]yast2-bootloader-2.13.18-3.x86_64
->!> remove  [3215778972]yast2-http-server-2.13.9-4.noarch
->!> remove  [3215778972]yast2-inetd-2.13.2-2.noarch
->!> remove  [3215778972]yast2-installation-2.13.28-2.noarch
->!> remove  [3215778972]yast2-network-2.13.29-2.x86_64
->!> remove  [3215778972]yast2-nfs-server-2.13.2-5.noarch
->!> remove  [3215778972]yast2-nis-server-2.13.1-5.noarch
->!> remove  [3215778972]yast2-packager-2.13.39-2.x86_64
->!> remove  [3215778972]yast2-powertweak-2.13.5-4.noarch
->!> remove  [3215778972]yast2-repair-2.13.3-4.noarch
->!> remove  [3215778972]yast2-restore-2.13.1-2.noarch
->!> remove  [3215778972]yast2-samba-server-2.13.6-2.noarch
->!> remove  [3215778972]yast2-storage-2.13.33-2.x86_64
->!> remove  [3215778972]yast2-sysconfig-2.13.5-4.noarch
->!> remove  [3215778972]yast2-tv-2.13.7-2.noarch
->!> remove  [3215778972]yast2-update-2.13.3-2.x86_64
->!> remove  [3215778972]yast2-vm-2.13.22-2.x86_64
->!> upgrade [3215778972]autoyast2-2.13.19-2.noarch => [1]autoyast2-2.13.23-2.noarch[packages]
->!> upgrade [3215778972]autoyast2-installation-2.13.19-2.noarch => [1]autoyast2-installation-2.13.23-2.noarch[packages]
->!> upgrade [3215778972]yast2-transfer-2.13.3-2.x86_64 => [1]yast2-transfer-2.13.2-4.x86_64[packages]
+>!> remove  yast2-backup-2.13.1-2.noarch
+>!> remove  yast2-bootloader-2.13.18-3.x86_64
+>!> remove  yast2-http-server-2.13.9-4.noarch
+>!> remove  yast2-inetd-2.13.2-2.noarch
+>!> remove  yast2-installation-2.13.28-2.noarch
+>!> remove  yast2-network-2.13.29-2.x86_64
+>!> remove  yast2-nfs-server-2.13.2-5.noarch
+>!> remove  yast2-nis-server-2.13.1-5.noarch
+>!> remove  yast2-packager-2.13.39-2.x86_64
+>!> remove  yast2-powertweak-2.13.5-4.noarch
+>!> remove  yast2-repair-2.13.3-4.noarch
+>!> remove  yast2-restore-2.13.1-2.noarch
+>!> remove  yast2-samba-server-2.13.6-2.noarch
+>!> remove  yast2-storage-2.13.33-2.x86_64
+>!> remove  yast2-sysconfig-2.13.5-4.noarch
+>!> remove  yast2-tv-2.13.7-2.noarch
+>!> remove  yast2-update-2.13.3-2.x86_64
+>!> remove  yast2-vm-2.13.22-2.x86_64
+>!> upgrade autoyast2-2.13.19-2.noarch => autoyast2-2.13.23-2.noarch[packages]
+>!> upgrade autoyast2-installation-2.13.19-2.noarch => autoyast2-installation-2.13.23-2.noarch[packages]
+>!> upgrade yast2-transfer-2.13.3-2.x86_64 => yast2-transfer-2.13.2-4.x86_64[packages]
 >!> installs=0, upgrades=3, uninstalls=18

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--  Bug156439 -->
+<test>
+<setup>
+  <system file="Bug156439-system.xml"/>
+  <channel name="sl10_packages" file="sl10.1-beta7-packages.xml"/>
+  <channel name="sl10_selections" file="sl10.1-beta7-selections.xml"/>
+  <locale name="de"/>
+  <locale name="de_DE"/>
+</setup>
+<trial>
+  <distupgrade/>
+  <reportproblems/>
+  <takesolution problem="0" solution="2"/>
+  <reportproblems/>
+</trial>
+</test>

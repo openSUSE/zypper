@@ -1,6 +1,6 @@
 >!> Doing distribution upgrade ...
 >!> 1: I_Th_[package]A-1.0-1.noarch
->!> 2: U___[package]B-2.0-1.noarch
+>!> 2: U__s_[package]B-2.0-1.noarch
 >!> Solution #1:
 >!> remove  A-1.0-1.noarch
 >!> installs=0, upgrades=0, uninstalls=1

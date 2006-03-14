@@ -1,6 +1,6 @@
 >!> Doing distribution upgrade ...
->!> 1: I___[package]A-1.0-1.noarch
->!> 2: U___[package]A-2.0-1.noarch
+>!> 1: I__s_[package]A-1.0-1.noarch
+>!> 2: U__s_[package]A-2.0-1.noarch
 >!> 3: U_Th_[package]A-2.0-2.noarch
 >!> Solution #1:
 >!> upgrade A-1.0-1.noarch => A-2.0-2.noarch[upgrade2]

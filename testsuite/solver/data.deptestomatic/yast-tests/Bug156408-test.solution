@@ -28,7 +28,7 @@
 >!> 1 problems found:
 >!> 1 problems found:
 >!> Problem:
->!> SUSE LINUX cannot be installed due missing dependencies
+>!> SUSE LINUX cannot be installed due to missing dependencies
 >!> There are no installable providers of suse-release == 10.0.42 for product:SUSE LINUX-1.noarch[sl10_packages]
 >!>    Solution:
 >!>       unlock suse-release

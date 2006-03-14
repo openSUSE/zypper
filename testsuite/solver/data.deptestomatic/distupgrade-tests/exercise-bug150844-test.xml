@@ -10,5 +10,6 @@
 </setup>
 <trial>
   <distupgrade/>
+  <reportproblems/>
 </trial>
 </test>
