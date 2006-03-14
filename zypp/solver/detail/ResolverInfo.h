@@ -126,7 +126,7 @@ class ResolverInfo : public base::ReferenceCounted, private base::NonCopyable {
 
     int error (void) const { return _error; }
     void flagAsError (void) { _error = true; }
-    int important (void) const { return _important; }
+    int important (void) const { return _important || _error; }
     void flagAsImportant (void) { _important = true; }
 
     // ---------------------------------- methods
