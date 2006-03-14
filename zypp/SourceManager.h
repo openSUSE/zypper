@@ -169,6 +169,15 @@ namespace zypp
      * Disable all registered sources
      */
     void disableAllSources();
+    
+    /**
+     * Helper function to disable all sources in the persistent
+     * store on the given location. Does not manipulate with
+     * the current status of the source manager.
+     *
+     * \throws Exception ...
+     */
+    static void disableSourcesAt( const Pathname & root );
 
   private:
     /** Singleton ctor */

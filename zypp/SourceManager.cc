@@ -381,6 +381,24 @@ namespace zypp
     dumpSourceTableOn( DBG );
     return true;
   }
+  
+  void SourceManager::disableSourcesAt( const Pathname & root_r )
+  {
+    storage::PersistentStorage store;
+    store.init( root_r );
+
+    std::list<storage::PersistentStorage::SourceData> new_sources = store.storedSources();
+
+    MIL << "Disabling all sources in store at " << root_r << endl;
+    
+    for( std::list<storage::PersistentStorage::SourceData>::iterator it = new_sources.begin();
+	it != new_sources.end(); ++it)
+    {
+	MIL << "Disabling source " << it->alias << endl;
+	it->enabled = false;
+	store.storeSource( *it );
+    }
+  }
 
   /******************************************************************
   **
