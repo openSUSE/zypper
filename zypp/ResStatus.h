@@ -380,6 +380,16 @@ namespace zypp
 	return ret;
     }
 
+    /** Not the same as setTransact( false ).
+     */
+    bool resetTransact( TransactByValue causer_r )
+    {
+      if ( ! setTransact( false, causer_r ) )
+        return false;
+      if ( fieldValueIs<TransactField>( KEEP_STATE ) )
+        fieldValueAssign<TransactByField>( SOLVER );
+    }
+
     /** Soft toggle between TRANSACT and KEEP_STATE.
      * Similar to setTransact, but leaving KEEP_STATE also requires
      * a superior \a causerLimit_r. So this is a kind of soft lock.
