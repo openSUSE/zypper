@@ -8,7 +8,7 @@ include "suse-primary.rnc" {
   element-summary = element summary { localized-string }+
   element-description = element description { localized-string }+
   # packages in patches have an additional rpmfiles element
-  element-package = element yum:package { package, element-pkgfiles }
+  element-package = element yum:package { package, element-pkgfiles, element license_to_confirm { localized-string }+ }
   # names in dependencies can include a "kind". Should not be used for packages.
   attribute-name =
     attribute kind { "package" | "patch" | "script" | "message" | "product" }?,

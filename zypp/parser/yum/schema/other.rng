@@ -41,6 +41,11 @@
           <text/>
         </element>
       </zeroOrMore>
+      <zeroOrMore>
+        <element name="license_to_confirm">
+          <ref name="localized-string"/>
+        </element>
+      </zeroOrMore>
       <empty/>
     </element>
   </oneOrMore>

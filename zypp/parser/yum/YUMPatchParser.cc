@@ -453,6 +453,10 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	    {
 	      	parsePkgFilesNode (&*package, child);
 	    }
+	    else if (name == "license_to_confirm")
+	    {
+	      package->license_to_confirm.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
+	    }
 	    else {
 	      WAR << "YUM <atoms/package> contains the unknown element <"
       	  << name << "> "

@@ -24,6 +24,11 @@
       <element name="yum:package">
         <ref name="package"/>
         <ref name="element-pkgfiles"/>
+        <oneOrMore>
+          <element name="license_to_confirm">
+            <ref name="localized-string"/>
+          </element>
+        </oneOrMore>
       </element>
     </define>
     <!-- names in dependencies can include a "kind". Should not be used for packages. -->

@@ -233,6 +233,7 @@ namespace zypp {
         std::string sizeArchive;
         std::string location;
         std::string license;
+        TranslatedText license_to_confirm;
         std::string vendor;
         std::string group;
         std::string buildhost;
@@ -388,6 +389,7 @@ namespace zypp {
         std::string ver;
         std::string rel;
         std::list<ChangelogEntry> changelog;
+        TranslatedText license_to_confirm;
       };
 
     /* ** YUMPatchData not yet finalized **/

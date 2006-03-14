@@ -73,6 +73,7 @@ namespace zypp
 #endif
       {
 	_description.setText(parsed.description);
+	_license_to_confirm = other.license_to_confirm.asString();
 	for (std::list<FileData>::const_iterator it = filelist.files.begin();
 	     it != filelist.files.end();
 	     it++)
@@ -105,7 +106,7 @@ namespace zypp
 	_group(parsed.group),
 	_changelog(), // TODO
 	_type(parsed.type),
-	_license_to_confirm(), // TODO add to metadata
+	_license_to_confirm(),
 	_authors(parsed.authors),
 	_keywords( parsed.keywords),
 	_mediaid(strtol(parsed.media.c_str(), 0, 10)),
@@ -127,6 +128,7 @@ namespace zypp
 #endif
       {
 	_description.setText(parsed.description);
+	_license_to_confirm = parsed.license_to_confirm.asString();
 	for (std::list<FileData>::const_iterator it = parsed.files.begin();
 	     it != parsed.files.end();
 	     it++)

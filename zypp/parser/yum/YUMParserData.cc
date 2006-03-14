@@ -364,7 +364,9 @@ namespace zypp {
           << "package: " << data.name << " "
           << data.epoch << "-" << data.ver << "-" << data.rel << endl
           << "Changelog:" << endl
-          << data.changelog << endl;
+          << data.changelog << endl
+	  << "License to confirm:" << endl
+	  << data.license_to_confirm << endl;
         return out;
       }
 
@@ -519,6 +521,8 @@ namespace zypp {
           << "  sizeArchive: '" << data.sizeArchive << "'" << endl
           << "  location: '" << data.location << "'" << endl
           << "  license: '" << data.license << "'" << endl
+	  << "  license to confirm:" << endl
+	  << data.license_to_confirm << endl
           << "  vendor: '" << data.vendor << "'" << endl
           << "  group: '" << data.group << "'" << endl
           << "  buildhost: '" << data.buildhost << "'" << endl

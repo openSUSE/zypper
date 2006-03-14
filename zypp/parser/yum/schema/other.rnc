@@ -31,6 +31,7 @@ element otherdata {
       attribute date { xsd:integer },
       text
     }*,
+    element license_to_confirm { localized-string }*,
     empty
   }+,
   empty

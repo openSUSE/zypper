@@ -90,7 +90,11 @@ namespace zypp {
                                      _helper.attribute(child,"date"),
                                      _helper.content(child)));
                  }
-                 else {
+		 else if (name == "license_to_confirm")
+		 {
+		   dataPtr->license_to_confirm.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
+		 }
+	         else {
                    WAR << "YUM <otherdata> contains the unknown element <" << name << "> "
                      << _helper.positionInfo(child) << ", skipping" << endl;
                  }
