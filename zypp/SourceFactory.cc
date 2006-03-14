@@ -96,9 +96,18 @@ media::MediaManager media_mgr;
     media::MediaId id = media_mgr.open(url_r);
     media_mgr.attach(id);
     Pathname products_file = Pathname("media.1/products");
-    media_mgr.provideFile (id, products_file);
-    products_file = media_mgr.localPath (id, products_file);
-    scanProductsFile (products_file, products_r);
+    
+    try  {
+	media_mgr.provideFile (id, products_file);
+	products_file = media_mgr.localPath (id, products_file);
+	scanProductsFile (products_file, products_r);
+    } 
+    catch ( const Exception & excpt ) {
+	ZYPP_CAUGHT(excpt);
+	
+	MIL << "No products description found on the Url" << endl;
+    }
+    
     media_mgr.release(id);
   }
 
