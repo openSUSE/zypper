@@ -6,6 +6,7 @@
 #include "zypp/Source.h"
 #include "zypp/source/SourceImpl.h"
 #include "zypp/SourceCache.h"
+#include "zypp/Package.h"
 
 using namespace std;
 using namespace zypp;
@@ -32,8 +33,14 @@ int main( int argc, char * argv[] )
        it != store.end(); it++)
   {
     ERR << **it << endl;
+    if (isKind<Package>(*it))
+    {
+      ERR << "Package" << endl;
+      Package::constPtr pkg = boost::dynamic_pointer_cast<const Package>( *it );
+      ERR << "License: " << pkg->licenseToConfirm() << endl;
+    }
   }
-  SourceCache().storeSource(s);
+//  SourceCache().storeSource(s);
   ERR << store << endl;
   INT << "===[END]============================================" << endl;
   return 0;
