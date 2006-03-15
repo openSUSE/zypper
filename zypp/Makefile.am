@@ -4,7 +4,7 @@
 SUBDIRS = base thread url media capability detail pool parser \
 	source target solver zypp_detail ui
 
-INCLUDES = -DZYPP_BASE_LOGGER_LOGGROUP=\"zypp\"
+AM_CXXFLAGS = -DZYPP_BASE_LOGGER_LOGGROUP=\"zypp\"
 
 ## ##################################################
 
