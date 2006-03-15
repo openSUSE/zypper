@@ -92,6 +92,12 @@ MediaHandler::~MediaHandler()
   catch(...) {}
 }
 
+void
+MediaHandler::resetParentId()
+{
+  _parentId = 0;
+}
+
 ///////////////////////////////////////////////////////////////////
 //
 //
@@ -431,10 +437,8 @@ MediaHandler::checkAttached(bool isDevice,  bool fsType) const
   AttachedMedia ref( attachedMedia());
   if( ref.mediaSource)
   {
-    MediaManager  manager;
-
     time_t old_mtime = _attach_mtime;
-    _attach_mtime = manager.getMountTableMTime();
+    _attach_mtime = MediaManager::getMountTableMTime();
     if( !(old_mtime <= 0 || _attach_mtime != old_mtime))
     {
       // OK, skip the check (we've seen it at least once)
@@ -447,7 +451,7 @@ MediaHandler::checkAttached(bool isDevice,  bool fsType) const
       else
         DBG << "Forced check of the mount table" << std::endl;
 
-      MountEntries  entries( manager.getMountEntries());
+      MountEntries  entries( MediaManager::getMountEntries());
       MountEntries::const_iterator e;
       for( e = entries.begin(); e != entries.end(); ++e)
       {
@@ -719,6 +723,12 @@ MediaHandler::checkAttachPoint(const Pathname &apoint,
 //
 //	DESCRIPTION :
 //
+bool
+MediaHandler::dependsOnParent()
+{
+  return _parentId != 0;
+}
+
 bool
 MediaHandler::dependsOnParent(MediaAccessId parentId)
 {

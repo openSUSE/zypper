@@ -107,6 +107,31 @@ class MediaHandler {
 	MediaAccessId    _parentId;
 
         /**
+	 * MediaAccess (MediaManager) needs access to the attachedMedia()
+	 * function to deliver a shared media source and its attach point
+	 * to the media manager and then to other media handler instances.
+	 * Further, is needs to be able to forward the dependsOnParent()
+	 * and resetParentId() functions to the media manager.
+	 */
+	friend class MediaAccess;
+
+	/**
+	 * Check if the current media handler depends on an
+	 * another handler specified by media access id.
+	 * \param parentId The id of the parent handler to check against.
+	 * \return true if it depends, false if not.
+	 */
+	bool             dependsOnParent(MediaAccessId parentId);
+	bool             dependsOnParent();
+
+	/**
+	 * Called in case, where the media manager takes over the
+	 * destruction of the parent id (e.g. while destruction
+	 * of the media manager).
+	 */
+	void             resetParentId();
+
+        /**
 	 * Return the currently used attach point.
 	 **/
 	Pathname         attachPoint() const;
@@ -201,28 +226,12 @@ class MediaHandler {
 	 */
 	void             setMediaSource(const MediaSourceRef &ref);
 
-        /**
-	 * MediaAccess (MediaManager) needs access to the
-	 * attachedMedia() function to deliver a shared
-	 * media source and its attach point to other
-	 * media handler instances.
-	 */
-	friend class MediaAccess;
-
 	/**
 	 * Ask the media manager if specified media source
 	 * is already attached.
 	 */
 	AttachedMedia
 	findAttachedMedia(const MediaSourceRef &media) const;
-
-	/**
-	 * Check if the current media handler depends on an
-	 * another handler specified by media access id.
-	 * \param parentId The id of the parent handler to check against.
-	 * \return true if it depends, false if not.
-	 */
-	bool                 dependsOnParent(MediaAccessId parentId);
 
 	/**
 	 * Returns the attached media. Used by MediaManager
@@ -235,13 +244,13 @@ class MediaHandler {
 	 * \return The AttachedMedia struct containing (shared)
 	 *         references to media source and attach point.
 	 */
-	AttachedMedia        attachedMedia() const;
+	AttachedMedia    attachedMedia() const;
 
 	/**
 	 * Returns a hint if the media is shared or not.
 	 * \return true, if media is shared.
 	 */
-	bool                 isSharedMedia() const;
+	bool             isSharedMedia() const;
 
 	/**
 	 * Check actual mediaSource attachment against the current
@@ -253,8 +262,8 @@ class MediaHandler {
 	 *                mount table or not (nfs, smb and cifs only).
 	 * \return true, if the media appears in the mount table.
 	 */
-	bool                 checkAttached(bool aDevice,
-	                                   bool fsType=false) const;
+	bool             checkAttached(bool aDevice,
+	                               bool fsType=false) const;
 
     protected:
 

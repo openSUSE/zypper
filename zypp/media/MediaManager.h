@@ -43,7 +43,7 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     // forward declaration
     class MountEntry;
-
+    class MediaManager_Impl;
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -681,15 +681,15 @@ namespace zypp
        * Get the modification time of the /etc/mtab file.
        * \return Modification time of the /etc/mtab file.
        */
-      time_t
-      getMountTableMTime() const;
+      static time_t
+      getMountTableMTime();
 
       /**
        * Get current mount entries from /etc/mtab file.
        * \return Current mount entries from /etc/mtab file.
        */
-      std::vector<MountEntry>
-      getMountEntries() const;
+      static std::vector<MountEntry>
+      getMountEntries();
 
       /**
        * Check if the specified \p path is useable as
@@ -741,11 +741,10 @@ namespace zypp
       forceMediaRelease(const MediaSourceRef &media);
 
     private:
-      class  Impl;
       /**
        * Static reference to the implementation (singleton).
        */
-      static zypp::RW_pointer<MediaManager::Impl> m_impl;
+      static zypp::RW_pointer<MediaManager_Impl> m_impl;
     };
 
 

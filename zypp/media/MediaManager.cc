@@ -125,22 +125,43 @@ namespace zypp
 
 
     //////////////////////////////////////////////////////////////////
-    class MediaManager::Impl
+    class MediaManager_Impl
     {
     private:
-      MediaAccessId last_accessid;
+      friend class MediaManager;
 
-    public:
+      MediaAccessId   last_accessid;
       ManagedMediaMap mediaMap;
 
-      Impl()
+      MediaManager_Impl()
         : last_accessid(0)
       {}
 
-      ~Impl()
+    public:
+      ~MediaManager_Impl()
       {
+        MutexLock glock(g_Mutex);
+
         try
         {
+          // remove depending (iso) handlers first
+          ManagedMediaMap::iterator it;
+          bool found;
+          do
+          {
+            found = false;
+            for(it = mediaMap.begin(); it != mediaMap.end(); ++it)
+            {
+              if( it->second.handler->dependsOnParent())
+              {
+                found = true;
+                it->second.handler->resetParentId();
+                mediaMap.erase(it);
+              }
+            }
+          } while(found);
+
+          // remove all other handlers
           mediaMap.clear();
         }
         catch( ... )
@@ -172,13 +193,13 @@ namespace zypp
         return it->second;
       }
 
-      inline time_t
-      getMountTableMTime() const
+      static inline time_t
+      getMountTableMTime()
       {
         return zypp::PathInfo("/etc/mtab").mtime();
       }
 
-      inline MountEntries
+      static inline MountEntries
       getMountEntries()
       {
         return Mount::getEntries("/etc/mtab");
@@ -189,7 +210,7 @@ namespace zypp
 
     //////////////////////////////////////////////////////////////////
     // STATIC
-    zypp::RW_pointer<MediaManager::Impl> MediaManager::m_impl(NULL);
+    zypp::RW_pointer<MediaManager_Impl> MediaManager::m_impl(NULL);
 
 
     //////////////////////////////////////////////////////////////////
@@ -198,7 +219,7 @@ namespace zypp
       MutexLock glock(g_Mutex);
       if( !m_impl)
       {
-        m_impl.reset( new MediaManager::Impl());
+        m_impl.reset( new MediaManager_Impl());
       }
     }
 
@@ -235,19 +256,18 @@ namespace zypp
     {
       MutexLock glock(g_Mutex);
 
-      ManagedMedia &ref( m_impl->findMM(accessId));
-
       ManagedMediaMap::iterator m(m_impl->mediaMap.begin());
       for( ; m != m_impl->mediaMap.end(); ++m)
       {
         if( m->second.handler->dependsOnParent(accessId))
         {
-          // this may happen on exit (destructor run)
+          // Hmm.. throw MediaIsSharedException instead?
           try
           {
             DBG << "Forcing release of handler depending on access id "
                 << accessId << std::endl;
-            m->second.handler->release(false);
+            m->second.handler->resetParentId();
+            m->second.handler->release();
             m->second.desired  = false;
           }
           catch(const MediaException &e)
@@ -257,7 +277,12 @@ namespace zypp
         }
       }
 
+      DBG << "Closing access handler with using id "
+          << accessId << std::endl;
+
+      ManagedMedia &ref( m_impl->findMM(accessId));
       ref.handler->close();
+
       m_impl->mediaMap.erase(accessId);
     }
 
@@ -633,21 +658,22 @@ namespace zypp
     }
 
     // ---------------------------------------------------------------
+    // STATIC
     time_t
-    MediaManager::getMountTableMTime() const
+    MediaManager::getMountTableMTime()
     {
       MutexLock glock(g_Mutex);
-
-      return m_impl->getMountTableMTime();
+      return MediaManager_Impl::getMountTableMTime();
     }
 
     // ---------------------------------------------------------------
+    // STATIC
     MountEntries
-    MediaManager::getMountEntries() const
+    MediaManager::getMountEntries()
     {
       MutexLock glock(g_Mutex);
 
-      return m_impl->getMountEntries();
+      return MediaManager_Impl::getMountEntries();
     }
 
     // ---------------------------------------------------------------

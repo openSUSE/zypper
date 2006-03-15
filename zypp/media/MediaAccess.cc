@@ -73,6 +73,18 @@ MediaAccess::isSharedMedia() const
 	                : false;
 }
 
+void
+MediaAccess::resetParentId()
+{
+	if( _handler) _handler->resetParentId();
+}
+
+bool
+MediaAccess::dependsOnParent() const
+{
+	return _handler ? _handler->dependsOnParent() : false;
+}
+
 bool
 MediaAccess::dependsOnParent(MediaAccessId parentId) const
 {

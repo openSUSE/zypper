@@ -118,8 +118,14 @@ namespace zypp
       {
         release();
 
-        MediaManager manager;
-        manager.close(_parentId);
+        if( _parentId)
+        {
+          DBG << "Closing parent handler..." << std::endl;
+          MediaManager manager;
+          if(manager.isOpen(_parentId))
+            manager.close(_parentId);
+          _parentId = 0;
+        }
       }
       catch( ... )
       {}
@@ -239,8 +245,14 @@ namespace zypp
       Mount mount;
       mount.umount(attachPoint().asString());
 
-      MediaManager manager;
-      manager.release(_parentId);
+      if( _parentId)
+      {
+        MediaManager manager;
+        manager.release(_parentId);
+      }
+      // else:
+      // the media manager has reset the _parentId
+      // and will destroy the parent handler itself.
     }
 
     // ---------------------------------------------------------------

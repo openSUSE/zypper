@@ -66,10 +66,14 @@ namespace zypp {
 	MediaHandler * _handler;
 
     	friend class MediaManager;
+    	friend class MediaManager_Impl;
+
 	AttachedMedia        attachedMedia() const;
 
 	bool                 isSharedMedia() const;
 
+	void                 resetParentId();
+	bool                 dependsOnParent() const;
 	bool                 dependsOnParent(MediaAccessId parentId) const;
 
     public:
