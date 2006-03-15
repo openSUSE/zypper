@@ -360,7 +360,7 @@ namespace zypp {
     	DBG << "count " << count << endl;
     	if (next && count<=_lastdev )
     	{
-    		DBG << "skip" << endl;
+    		DBG << "skipping device " << it->name << endl;
     		continue;
     	}
 #if DELAYED_VERIFY
@@ -385,7 +385,7 @@ namespace zypp {
 	}
 	if( !valid)
 	{
-    		DBG << "skip invalid device" << endl;
+    		DBG << "skipping invalid device: " << it->name << endl;
     		continue;
 	}
 	MediaSourceRef media( new MediaSource(temp));
