@@ -52,17 +52,17 @@ namespace zypp
         // refuse to use stupid paths as cache dir
         if (cache_dir_r == Pathname("/") )
           ZYPP_THROW(Exception("I refuse to use / as cache dir"));
-          
+
         if (0 != assert_dir(cache_dir_r.dirname(), 0700))
           ZYPP_THROW(Exception("Cannot create cache directory" + cache_dir_r.asString()));
-        
+
         filesystem::clean_dir(cache_dir_r);
         filesystem::mkdir(cache_dir_r + "DATA");
         filesystem::mkdir(cache_dir_r + "MEDIA");
         //filesystem::mkdir(cache_dir_r + "DESCRIPTION");
         filesystem::mkdir(cache_dir_r + "PUBLICKEYS");
       }
-      
+
       void SuseTagsImpl::storeMetadata(const Pathname & cache_dir_r)
       {
         _cache_dir = cache_dir_r;
@@ -74,14 +74,14 @@ namespace zypp
         media::MediaAccessId media_num = _media_set->getMediaAccessId(1);
         INT << "Storing data to cache " << cache_dir_r << endl;
         media_mgr.provideDirTree(media_num, "suse/setup/descr");
-        Pathname descr_src = media_mgr.localPath(media_num, "suse/setup/descr"); 
-        Pathname media_src = media_mgr.localPath(media_num, "media.1"); 
+        Pathname descr_src = media_mgr.localPath(media_num, "suse/setup/descr");
+        Pathname media_src = media_mgr.localPath(media_num, "media.1");
         Pathname content_src = media_mgr.localPath(media_num, "content");
-         
+
         // get the list of cache keys
         std::list<std::string> files;
         dirInfo( media_num, files, "/");
-        
+
         if (0 != assert_dir((cache_dir_r + "PUBLICKEYS"), 0700))
         {
           ZYPP_THROW(Exception("Cannot create cache PUBLICKEYS directory: " + (cache_dir_r + "PUBLICKEYS").asString()));
@@ -100,8 +100,8 @@ namespace zypp
               MIL << "cached " << filename << std::endl;
             }
           }
-        } 
-        
+        }
+
         if (0 != assert_dir((cache_dir_r + "DATA"), 0700))
         {
           ZYPP_THROW(Exception("Cannot create cache DATA directory: " + (cache_dir_r + "DATA").asString()));
@@ -111,9 +111,9 @@ namespace zypp
           filesystem::copy_dir(descr_src, cache_dir_r + "DATA");
           MIL << "cached descr directory" << std::endl;
           filesystem::copy(content_src, cache_dir_r + "DATA/content");
-          MIL << "cached content file" << std::endl;          
+          MIL << "cached content file" << std::endl;
         }
-        
+
         if (0 != assert_dir((cache_dir_r + "MEDIA"), 0700))
         {
           ZYPP_THROW(Exception("Cannot create cache MEDIA directory: " + (cache_dir_r + "MEDIA").asString()));
@@ -124,42 +124,42 @@ namespace zypp
           MIL << "cached media directory" << std::endl;
         }
       }
-      
+
       bool SuseTagsImpl::cacheExists()
       {
         MIL << "Checking if source cache exists in "<< _cache_dir << std::endl;
         bool exists = true;
-	
+
         bool data_exists = PathInfo(_cache_dir + "DATA").isExist();
         exists = exists && data_exists;
-        
+
         //bool description_exists = PathInfo(_cache_dir + "DESCRIPTION").isExist();
         //exists = exists && description_exists;
-        
+
         bool media_exists = PathInfo(_cache_dir + "MEDIA").isExist();
         exists = exists && media_exists;
-        
+
         bool media_file_exists = PathInfo(_cache_dir + "MEDIA/media.1/media").isExist();
         exists = exists && media_file_exists;
 
         MIL << "DATA " << (data_exists ? "exists" : "not found") << ", MEDIA " << (media_exists ? "exists" : "not found") << ", MEDIA/media.1/media " <<  (media_file_exists ? "exists" : "not found") << std::endl;
         return exists;
       }
-      
+
       void SuseTagsImpl::factoryInit()
       {
         media::MediaManager media_mgr;
-  
+
         std::string vendor;
         std::string media_id;
         bool cache = cacheExists();
-        
+
         try {
           Pathname media_file = Pathname("media.1/media");
-          
+
           if (cache)
           {
-            media_file = _cache_dir + "MEDIA" + media_file; 
+            media_file = _cache_dir + "MEDIA" + media_file;
           }
           else
           {
@@ -167,7 +167,7 @@ namespace zypp
             media_mgr.provideFile (_media, media_file);
             media_file = media_mgr.localPath (_media, media_file);
           }
-    
+
           std::ifstream pfile( media_file.asString().c_str() );
 
           if ( pfile.bad() ) {
@@ -181,21 +181,21 @@ namespace zypp
             ERR << "Error parsing media.1/media" << endl;
             ZYPP_THROW(Exception("Error parsing media.1/media") );
           }
-  
+
           _media_id = str::getline( pfile, str::TRIM );
-      
+
           if ( pfile.fail() ) {
             ERR << "Error parsing media.1/media" << endl;
             ZYPP_THROW(Exception("Error parsing media.1/media") );
           }
 
           std::string media_count_str = str::getline( pfile, str::TRIM );
-    
+
           if ( pfile.fail() ) {
             ERR << "Error parsing media.1/media" << endl;
             ZYPP_THROW(Exception("Error parsing media.1/media") );
           }
-    
+
           _media_count = str::strtonum<unsigned>( media_count_str );
 
         }
@@ -223,13 +223,13 @@ namespace zypp
           WAR << "Verifier not found" << endl;
         }
       }
-      
+
       void SuseTagsImpl::createResolvables(Source_Ref source_r)
       {
         callback::SendReport<CreateSourceReport> report;
         report->startData( url() );
 
-	provideProducts ( source_r, _store );        
+	provideProducts ( source_r, _store );
 	providePackages ( source_r, _store );
 	provideSelections ( source_r, _store );
 	providePatterns ( source_r, _store );
@@ -242,14 +242,14 @@ namespace zypp
         bool cache = cacheExists();
         std::list<std::string> files;
         std::list<Pathname> paths;
-        
+
         MIL << "Reading public keys..." << std::endl;
         if (cache)
         {
           filesystem::readdir(files, _cache_dir + "PUBLICKEYS");
           for( std::list<std::string>::const_iterator it = files.begin(); it != files.end(); ++it)
             paths.push_back(Pathname(*it));
-                        
+
           MIL << "read " << files.size() << " keys from cache " << _cache_dir << std::endl;
         }
         else
@@ -258,7 +258,7 @@ namespace zypp
           media::MediaManager media_mgr;
           media::MediaAccessId media_num = _media_set->getMediaAccessId(1);
           dirInfo(media_num, allfiles, "/");
-          
+
           for( std::list<std::string>::const_iterator it = allfiles.begin(); it != allfiles.end(); ++it)
           {
             std::string filename = *it;
@@ -272,16 +272,16 @@ namespace zypp
         }
         return paths;
       }
-      
+
       ResStore SuseTagsImpl::provideResolvables(Source_Ref source_r, Resolvable::Kind kind)
       {
         callback::SendReport<CreateSourceReport> report;
         report->startData( url() );
 
 	ResStore store;
-	
-	if ( kind == ResTraits<Product>::kind ) 
-	    provideProducts ( source_r, store );        	
+
+	if ( kind == ResTraits<Product>::kind )
+	    provideProducts ( source_r, store );
 	else if ( kind == ResTraits<Package>::kind )
 	    providePackages ( source_r, store );
 	else if ( kind == ResTraits<Selection>::kind )
@@ -290,7 +290,7 @@ namespace zypp
 	    providePatterns ( source_r, store );
 
         report->finishData( url(), CreateSourceReport::NO_ERROR, "" );
-	
+
 	return store;
       }
 
@@ -330,13 +330,13 @@ namespace zypp
 
         if ( cache )
         {
-          DBG << "Cached metadata found. Reading from " << _cache_dir << endl;  
+          DBG << "Cached metadata found. Reading from " << _cache_dir << endl;
           _data_dir  = _cache_dir + "DATA/descr";
           _content_file = _cache_dir + "DATA/content";
         }
         else
         {
-          DBG << "Cached metadata not found in [" << _cache_dir << "]. Reading from " << _path << endl;  
+          DBG << "Cached metadata not found in [" << _cache_dir << "]. Reading from " << _path << endl;
           _data_dir = _path + "suse/setup/descr";
           _content_file = provideFile(_path + "content");
         }
@@ -344,9 +344,9 @@ namespace zypp
         SourceFactory factory;
 
         try {
-          DBG << "Going to parse content file " << _content_file << endl;  
+          DBG << "Going to parse content file " << _content_file << endl;
           Product::Ptr product = parseContentFile( _content_file, factory.createFrom(this) );
-      
+
           MIL << "Product: " << product->displayName() << endl;
           store.insert( product );
         }
@@ -354,7 +354,7 @@ namespace zypp
           ERR << "cannot parse content file" << endl;
         }
       }
-  
+
       void SuseTagsImpl::providePackages(Source_Ref source_r, ResStore &store)
       {
         bool cache = cacheExists();
@@ -368,13 +368,13 @@ namespace zypp
         // basically we are only loading the data we need. Instead of parsing all
         // package description we fill the TranslatedText properties only
         // with the detected locale.
-          
+
 	ZYpp::Ptr z = getZYpp();
         Locale lang( z->getTextLocale() );
 
         std::string packages_lang_prefix( "packages." );
 	std::string packages_lang_name;
-          
+
         // find the most apropiate file
         bool trymore = true;
         while ( (lang != Locale()) && trymore )
@@ -400,9 +400,9 @@ namespace zypp
           {
             ZYPP_CAUGHT(excpt_r);
           }
-          lang = lang.fallback();  
+          lang = lang.fallback();
         }
-          
+
         PkgDiskUsage du;
         try
         {
@@ -427,7 +427,7 @@ namespace zypp
       void SuseTagsImpl::provideSelections(Source_Ref source_r, ResStore &store)
       {
         bool cache = cacheExists();
-	
+
 	Pathname p;
 
         bool file_found = true;
@@ -445,19 +445,19 @@ namespace zypp
         if (file_found)
         {
           std::ifstream sels (p.asString().c_str());
-      
+
           while (sels && !sels.eof())
           {
             std::string selfile;
             getline(sels,selfile);
-      
+
             if (selfile.empty() ) continue;
               DBG << "Going to parse selection " << selfile << endl;
-      
+
               Pathname file = cache ? _data_dir + selfile : provideFile( _data_dir + selfile);
             MIL << "Selection file to parse " << file << endl;
             Selection::Ptr sel( parseSelection( file ) );
-      
+
             if (sel)
             {
               DBG << "Selection:" << sel << endl;
@@ -468,8 +468,8 @@ namespace zypp
             {
               DBG << "Parsing of " << file << " failed" << endl;
             }
-      
-            
+
+
           }
         }
       }
@@ -494,26 +494,26 @@ namespace zypp
         if ( file_found )
         {
           std::ifstream pats (p.asString().c_str());
-      
+
           while (pats && !pats.eof())
           {
             std::string patfile;
             getline(pats,patfile);
-      
+
             if (patfile.empty() ) continue;
-      
+
             DBG << "Going to parse pattern " << patfile << endl;
-      
+
             Pathname file = cache ? _data_dir + patfile : provideFile( _data_dir + patfile);
             MIL << "Pattern file to parse " << file << endl;
-      
+
             Pattern::Ptr pat( parsePattern( file ) );
-                  
+
             if (pat)
             {
               DBG << "Pattern:" << pat << endl;
               _store.insert( pat );
-              DBG << "Parsing of " << file << " done" << endl;  
+              DBG << "Parsing of " << file << " done" << endl;
             }
             else
             {
@@ -522,7 +522,7 @@ namespace zypp
           }
         }
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //	METHOD NAME : SuseTagsImpl::dumpOn
@@ -530,7 +530,7 @@ namespace zypp
       //
       std::ostream & SuseTagsImpl::dumpOn( std::ostream & str ) const
       {
-        return str << "SuseTagsImpl";
+        return SourceImpl::dumpOn( str );
       }
 
       /////////////////////////////////////////////////////////////////
