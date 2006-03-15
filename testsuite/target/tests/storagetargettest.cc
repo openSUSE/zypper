@@ -17,7 +17,7 @@
 #include "zypp/target/store/PersistentStorage.h"
 #include "zypp/target/store/XMLFilesBackend.h"
 
-#include "zypp/parser/yum/YUMParser.h"
+#include "zypp/parser/xmlstore/XMLPatternParser.h"
 
 #include "zypp/base/Logger.h"
 
@@ -62,6 +62,22 @@ static std::string dump( const CapSet &caps )
   return out.str();
 }
 
+static std::string dump( const ResStore &store )
+{
+  stringstream out;
+  for (ResStore::const_iterator it = store.begin(); it != store.end(); it++)
+  {
+    MIL << **it << endl;
+    if ( isKind<Patch>(*it) )
+    {
+      MIL << asKind<Patch>(*it)->atoms().size() << std::endl;
+    }
+    MIL << "------------------------------------------------" << endl;
+    MIL << (**it).deps() << endl;
+  }
+  return out.str();
+}
+
 struct StorageTargetTest
 {
   Pathname _root;
@@ -90,6 +106,7 @@ struct StorageTargetTest
     
     filesystem::recursive_rmdir( zyppvar );
     filesystem::recursive_rmdir( zyppcache );
+    _store.clear();
   }
   
   void unpackDatabase(const Pathname &name)
@@ -134,11 +151,17 @@ struct StorageTargetTest
     _backend = new XMLFilesBackend(_root);
   }
   
+  
+  
   ResStore readSourceResolvables()
   {
     ResStore store;
     store = _source.resolvables();
-    MIL << "done reading source type " << _source.type() << ": " << _store <<  std::endl;
+    
+    for (ResStore::const_iterator it = store.begin(); it != store.end(); it++)
+      _store.insert(*it);
+    
+    MIL << "done reading " << store.size() << " from source type " << _source.type() << ": Total resolvables now: " << _store.size() <<  std::endl;
     return store;
   }
   
@@ -277,11 +300,58 @@ struct StorageTargetTest
   
   int sles10_machcd_source_read_test()
   {
-    initSource(Url("dir:/mounts/machcd2/kukuk/sles10-sp-i386/CD1"));
+    initSource(Url("ftp://machcd2.suse.de/SLES/SLES-10-i386-Build_603/DVD1"));
     ResStore store = readSourceResolvables();
     return 0;
   }
+  
+  int yumbug_read_test()
+  {
+    unpackDatabase("yum-createrepo-fixed.tar.gz");
+    initSource(Url("dir:/space/sources/zypp-trunk/trunk/libzypp/testsuite/target/tests/repo"));
+    ResStore store = readSourceResolvables();
+    dump(store);
+    return 0;
+  }
+   
+  int huha_yum_patch_bug_read_test()
+  {
+    clean();
+    initStorageBackend();
+    initSource(Url("http://armstrong.suse.de/download/Code/10/update/i386/")); 
+    //initSource(Url("ftp://machcd2.suse.de/SLES/SUSE-Linux-10.1-DVD9-i386+x86_64-Build_704/DVD1"));
+    ResStore store = readSourceResolvables();
     
+    for (ResStore::const_iterator it = _store.begin(); it != _store.end(); it++)
+    {
+      //DBG << **it << endl
+      ResObject::Ptr res = *it;
+      if ( isKind<Patch>(res) )
+      {
+        Patch::Ptr p = asKind<Patch>(res);
+        MIL << "From yum source, patch " << p->name() << "-" << p->edition() << " has " << p->atoms().size() << " atoms." << std::endl;
+      }
+    }
+    dump(store);
+    writeResolvablesInStore();
+    readStoreResolvables();
+    return 0;
+  }
+      
+  int agruenbacher_cap_test()
+  {
+    clean();
+    initSource(Url("http://someurkl")); 
+    ResStore store = readSourceResolvables();
+    
+    //for (ResStore::const_iterator it = _store.begin(); it != _store.end(); it++)
+    //{
+      //ResObject::Ptr res = *it;
+    //}
+    dump(store);
+    return 0;
+  }
+  
   //SUSE-Linux-10.1-beta6-x86_64-CD1
   int sl_101_beta6_x86_64_source_read_test()
   {
@@ -290,6 +360,15 @@ struct StorageTargetTest
     unpackDatabase("SUSE-Linux-10.1-beta6-x86_64-source-metadata-cache.tar.gz");
     initSourceWithCache(Url("dir:/fake-not-available-dir"));
     
+    ResStore store = readSourceResolvables();
+    clean();
+    return 0;
+  }
+  
+  int armstrong_yum_source_source_read_test()
+  {
+    clean();
+    initSource(Url("https://armstrong.suse.de/download/Code/10/update/i386.NEW/"));
     ResStore store = readSourceResolvables();
     clean();
     return 0;
@@ -348,7 +427,7 @@ struct StorageTargetTest
     clean();
     unpackDatabase("db.tar.gz");
     std::ifstream res_file("var/lib/zypp/db/selections/d9b9b61057cdbcf9cf5c8f21408e3db5");
-    YUMPatternParser iter(res_file,"");
+    XMLPatternParser iter(res_file,"");
     for (; !iter.atEnd(); ++iter)
     {
       //YUMPatternData data = **iter;
@@ -371,21 +450,24 @@ struct StorageTargetTest
 int main()
 { 
   try
-  {
+  {  
+    RUN_TEST(huha_yum_patch_bug_read);
+    //RUN_TEST(yumbug_read);
     /*
-    RUN_TEST(sles10_machcd_source_read);
     RUN_TEST(storage_read);
     RUN_TEST(read_source_cache);
     RUN_TEST(read_known_sources);
     RUN_TEST(named_flags);
     RUN_TEST(publickey);
-    */
     
     //RUN_TEST(parse_store_with_yum);
-    
+    RUN_TEST(sles10_machcd_source_read);
     RUN_TEST(sl_101_beta6_x86_64_source_read);
     
+    //RUN_TEST(armstrong_yum_source_source_read);
+    
     MIL << "store testsuite passed" << std::endl;
+    */
     return 0;
   }
   catch ( std::exception &e )
