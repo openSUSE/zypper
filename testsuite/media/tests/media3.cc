@@ -88,7 +88,8 @@ do { \
 
 int main(int argc, char *argv[])
 {
-  bool force_release_src = false;
+  bool eject_src = false;
+  bool close_src = false;
   {
       struct sigaction sa;
       sigemptyset(&sa.sa_mask);
@@ -104,8 +105,11 @@ int main(int argc, char *argv[])
         if( std::string(argv[i]) == "-i")
           do_step = true;
         else
-        if( std::string(argv[i]) == "-r")
-          force_release_src = true;
+        if( std::string(argv[i]) == "-e")
+          eject_src = true;
+        else
+        if( std::string(argv[i]) == "-c")
+          close_src = true;
       }
   }
 
@@ -124,9 +128,14 @@ int main(int argc, char *argv[])
   iso_url.setQueryParam("iso", "SUSE-10.1-Beta5/SUSE-Linux-10.1-beta5-i386-CD1.iso");
   iso_url.setQueryParam("url", src_url.asString());
 
+/*
+  iso_url = "iso:/";
+  iso_url.setQueryParam("iso", "/space/tmp/iso/SUSE-Linux-10.1-beta7-i386-CD1.iso");
+*/
+
   try
   {
-    if( force_release_src)
+    if( eject_src || close_src)
     {
       ONE_STEP("SRC: open " + src_url.asString());
       src = mm.open(src_url);
@@ -147,17 +156,31 @@ int main(int argc, char *argv[])
     ONE_STEP("provideFile(/INDEX.gz)")
     mm.provideFile(iso, Pathname("/INDEX.gz"));
 
-    if( force_release_src)
+    if( eject_src)
     {
       try
       {
-        ONE_STEP("SRC: release()")
+        ONE_STEP("SRC: release(eject=true)")
         mm.release(src, true);
       }
       catch(const MediaException &e)
       {
         ZYPP_CAUGHT(e);
         ERR << "ONE: HUH? Eject hasn't worked?!" << std::endl;
+      }
+    }
+    else
+    if( close_src)
+    {
+      try
+      {
+        ONE_STEP("SRC: close()")
+        mm.close(src);
+      }
+      catch(const MediaException &e)
+      {
+        ZYPP_CAUGHT(e);
+        ERR << "SRC: HUH? Close hasn't worked?!" << std::endl;
       }
     }
 
