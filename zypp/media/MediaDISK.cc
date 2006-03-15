@@ -21,6 +21,8 @@
 #include <errno.h>
 #include <dirent.h>
 
+#define DELAYED_VERIFY 1
+
 using namespace std;
 
 namespace zypp {
@@ -54,7 +56,11 @@ namespace zypp {
 	ERR << "Media url does not contain a device specification" << std::endl;
 	ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
       }
+#if DELAYED_VERIFY
+      DBG << "Verify of " << _device << " delayed" << std::endl;
+#else
       verifyIfDiskVolume( _device);
+#endif
 
       _filesystem = _url.getQueryParam("filesystem");
       if(_filesystem.empty())
@@ -134,6 +140,10 @@ namespace zypp {
       PathInfo dev_info(_device);
       if(!dev_info.isBlk())
         ZYPP_THROW(MediaBadUrlEmptyDestinationException(url()));
+#if DELAYED_VERIFY
+      DBG << "Verifying " << _device << " ..." << std::endl;
+      verifyIfDiskVolume( _device);
+#endif
 
       if(_filesystem.empty())
 	ZYPP_THROW(MediaBadUrlEmptyFilesystemException(url()));
