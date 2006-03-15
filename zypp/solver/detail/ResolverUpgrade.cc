@@ -212,8 +212,6 @@ Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 
   CandidateMap candidatemap;
 
-  PoolItemList _update_items;
-
   SplitMap    splitmap;
   TodoMap     applyingSplits;
   TodoMap     addSplitted;

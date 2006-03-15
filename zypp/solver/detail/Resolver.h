@@ -67,11 +67,16 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool _verifying;
     bool _testing;
 
+    // list populated by calls to addPoolItemTo*()
     QueueItemList _initial_items;
     PoolItemList _items_to_install;
     PoolItemList _items_to_establish;
     PoolItemList _items_to_remove;
     PoolItemList _items_to_verify;
+
+    // list of problematic items after doUpgrade()
+    PoolItemList _update_items;
+
 
     CapSet _extra_caps;
     CapSet _extra_conflicts;
