@@ -86,9 +86,10 @@ MediaAccess::dependsOnParent() const
 }
 
 bool
-MediaAccess::dependsOnParent(MediaAccessId parentId) const
+MediaAccess::dependsOnParent(MediaAccessId parentId,
+                             bool exactIdMatch) const
 {
-	return _handler ? _handler->dependsOnParent(parentId)
+	return _handler ? _handler->dependsOnParent(parentId, exactIdMatch)
 	                : false;
 }
 

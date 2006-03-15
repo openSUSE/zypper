@@ -121,7 +121,8 @@ class MediaHandler {
 	 * \param parentId The id of the parent handler to check against.
 	 * \return true if it depends, false if not.
 	 */
-	bool             dependsOnParent(MediaAccessId parentId);
+	bool             dependsOnParent(MediaAccessId parentId,
+	                                 bool exactIdMatch);
 	bool             dependsOnParent();
 
 	/**

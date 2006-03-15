@@ -730,19 +730,22 @@ MediaHandler::dependsOnParent()
 }
 
 bool
-MediaHandler::dependsOnParent(MediaAccessId parentId)
+MediaHandler::dependsOnParent(MediaAccessId parentId, bool exactIdMatch)
 {
   if( _parentId != 0)
   {
     if(parentId == _parentId)
       return true;
- 
-    MediaManager mm;
-    AttachedMedia am1 = mm.getAttachedMedia(_parentId);
-    AttachedMedia am2 = mm.getAttachedMedia(parentId);
-    if( am1.mediaSource && am2.mediaSource)
+
+    if( !exactIdMatch)
     {
-      return am1.mediaSource->equals( *(am2.mediaSource));
+      MediaManager mm;
+      AttachedMedia am1 = mm.getAttachedMedia(_parentId);
+      AttachedMedia am2 = mm.getAttachedMedia(parentId);
+      if( am1.mediaSource && am2.mediaSource)
+      {
+	return am1.mediaSource->equals( *(am2.mediaSource));
+      }
     }
   }
   return false;
