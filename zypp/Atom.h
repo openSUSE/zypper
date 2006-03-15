@@ -23,8 +23,6 @@ namespace zypp
   //
   //	CLASS NAME : Atom
   //
-  /** Class representing the message to be shown during update.
-  */
   class Atom : public ResObject
   {
   public:
