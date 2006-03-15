@@ -15,7 +15,6 @@
 #include <iosfwd>
 
 #include "zypp/Bit.h"
-#include "zypp/base/Logger.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
