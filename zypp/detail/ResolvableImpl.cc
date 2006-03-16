@@ -57,10 +57,11 @@ namespace zypp
 
       bool operator()( const Capability & cap_r ) const
       {
-	if (cap_r.index().substr( 0, 9 ) == "modalias(") {
-	    deps[Dep::SUPPLEMENTS].insert( CapFactory().parse( ResTraits<System>::kind, cap_r.index() ) );
-	    return true;	// strip from provides
-	}
+	if ( isKind<capability::ModaliasCap>(cap_r) )
+          {
+	    deps[Dep::SUPPLEMENTS].insert( cap_r );
+            return true;	// strip from provides
+          }
 
 	if (cap_r.index().substr( 0, 7 ) != "locale(")
 	    return false;
@@ -81,11 +82,6 @@ namespace zypp
 		next = provides.size()-1;			// none left, set next to end-1 (strip trailing ')' )
 
 	    string loc( provides, pos, next-pos );
-	    if (loc.size() < 2
-		|| loc.size() > 5)
-	    {
-		WAR << "Looks wrong " << cap_r.index() << endl;
-	    }
 	    if (_zypp) _zypp->availableLocale( Locale( loc ) );
 	    deps[Dep::FRESHENS].insert( f.parse( ResTraits<Language>::kind, loc ) );
 	    pos = next + 1;

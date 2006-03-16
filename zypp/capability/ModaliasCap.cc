@@ -9,6 +9,9 @@
 /** \file zypp/capability/ModaliasCap.cc
  *
 */
+#include <iostream>
+#include "zypp/base/Logger.h"
+
 #include "zypp/capability/ModaliasCap.h"
 #include "zypp/target/modalias/Modalias.h"
 
@@ -54,9 +57,7 @@ namespace zypp
 
     std::string ModaliasCap::index() const
     {
-      std::string ret( "modalias(" );
-      ret += _name;
-      return ret += ")";
+      return "modalias()";
     }
 
     bool ModaliasCap::isEvalCmd() const

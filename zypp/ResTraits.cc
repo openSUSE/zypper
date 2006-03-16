@@ -36,7 +36,7 @@ namespace zypp
     const ResolvableTraits::KindType ResTraits<Atom>	 ::kind( "Atom" );
 
   template<>
-    const ResolvableTraits::KindType ResTraits<System>  ::kind( "System" );
+    const ResolvableTraits::KindType ResTraits<SystemResObject>   ::kind( "System" );
 
   template<>
     const ResolvableTraits::KindType ResTraits<SrcPackage>  ::kind( "SrcPackage" );

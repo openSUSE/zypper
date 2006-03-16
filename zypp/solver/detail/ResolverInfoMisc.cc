@@ -59,7 +59,7 @@ ResolverInfoMisc::dumpOn( std::ostream & os ) const
     switch (_trigger) {
 	case ResolverInfoMisc::NONE:		os << "none"; break;
 	case ResolverInfoMisc::OBSOLETE:	os << "obsoletes"; break;
-	case ResolverInfoMisc::REQUIRE:		os << "requires"; break;	    
+	case ResolverInfoMisc::REQUIRE:		os << "requires"; break;
 	case ResolverInfoMisc::CONFLICT:	os << "conflicts"; break;
     }
     os << endl;
@@ -117,7 +117,7 @@ translateResTraits (const Resolvable::Kind & kind)
 	// Translator: Notation for atom (part of a patch)
 	return _( "atom" );
     }
-    else if (kind == ResTraits<System>::kind) {
+    else if (kind == ResTraits<SystemResObject>::kind) {
 	// Translator: Notation for computer system
 	return _( "system" );
     }
@@ -567,7 +567,7 @@ ResolverInfoMisc::copy (void) const
     cpy->_other_capability = _other_capability;
     cpy->_action = _action;
     cpy->_trigger = _trigger;
-    
+
     return cpy;
 }
 

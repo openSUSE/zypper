@@ -35,6 +35,7 @@ pkginclude_HEADERS = NeedAType.h \
 	Rel.h		\
 	RelCompare.h	\
 	ResObject.h	\
+	SystemResObject.h	\
 	Resolvable.h	\
 	ResTraits.h	\
 	ResStatus.h	\
@@ -114,6 +115,7 @@ lib@PACKAGE@_la_SOURCES = \
 	Range.cc	\
 	Rel.cc		\
 	ResObject.cc	\
+	SystemResObject.cc	\
 	Resolvable.cc	\
 	ResTraits.cc	\
 	ResStatus.cc	\

@@ -33,7 +33,7 @@ namespace zypp
   class Message;
   class Language;
 
-  class System;
+  class SystemResObject;
 
   /** Base of ResTraits. Defines the Resolvable::Kind type. */
   struct ResolvableTraits
