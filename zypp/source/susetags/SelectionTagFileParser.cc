@@ -41,7 +41,7 @@ namespace zypp
     namespace susetags
     { /////////////////////////////////////////////////////////////////
 
-      Selection::Ptr parseSelection( const Pathname & file_r )
+      Selection::Ptr parseSelection( Source_Ref source_r, const Pathname & file_r )
       {
         MIL << "Starting to parse selection " << file_r << std::endl;
         SelectionTagFileParser p;
@@ -55,6 +55,8 @@ namespace zypp
           ERR << "Selection " << file_r << " is broken." << std::endl;
           return 0L;
         }
+        // attach the source
+        p.selImpl->_source = source_r;
         return p.result;
 
       }

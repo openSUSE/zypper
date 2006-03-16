@@ -456,7 +456,7 @@ namespace zypp
 
               Pathname file = cache ? _data_dir + selfile : provideFile( _data_dir + selfile);
             MIL << "Selection file to parse " << file << endl;
-            Selection::Ptr sel( parseSelection( file ) );
+            Selection::Ptr sel( parseSelection( source_r, file ) );
 
             if (sel)
             {
@@ -507,7 +507,7 @@ namespace zypp
             Pathname file = cache ? _data_dir + patfile : provideFile( _data_dir + patfile);
             MIL << "Pattern file to parse " << file << endl;
 
-            Pattern::Ptr pat( parsePattern( file ) );
+            Pattern::Ptr pat( parsePattern( source_r, file ) );
 
             if (pat)
             {

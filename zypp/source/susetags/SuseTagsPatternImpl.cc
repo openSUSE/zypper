@@ -37,7 +37,9 @@ namespace zypp
     SuseTagsPatternImpl::~SuseTagsPatternImpl()
     {}
 
-
+    Source_Ref SuseTagsPatternImpl::source() const
+    { return _source; }
+    
     TranslatedText SuseTagsPatternImpl::summary() const
     { return _summary; }
 

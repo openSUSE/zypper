@@ -24,6 +24,7 @@
 
 #include "zypp/ZYppFactory.h"
 #include "zypp/Pathname.h"
+#include "zypp/Source.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -57,7 +58,7 @@ namespace zypp
 	    ZYpp::LocaleSet _locales;
       };
       ///////////////////////////////////////////////////////////////////
-      Selection::Ptr parseSelection( const Pathname & file_r );
+      Selection::Ptr parseSelection(  Source_Ref source_r, const Pathname & file_r );
       /////////////////////////////////////////////////////////////////
     } // namespace source
     ///////////////////////////////////////////////////////////////////

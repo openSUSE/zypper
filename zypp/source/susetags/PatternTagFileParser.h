@@ -56,7 +56,7 @@ namespace zypp
       /**
        * returns null if parse fails
        */
-      Pattern::Ptr parsePattern( const Pathname & file_r );
+      Pattern::Ptr parsePattern( Source_Ref source_r, const Pathname & file_r );
       /////////////////////////////////////////////////////////////////
     } // namespace source
     ///////////////////////////////////////////////////////////////////

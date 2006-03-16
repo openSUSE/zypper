@@ -40,7 +40,7 @@ namespace zypp
     namespace susetags
     { /////////////////////////////////////////////////////////////////
 
-      Pattern::Ptr parsePattern( const Pathname & file_r )
+      Pattern::Ptr parsePattern(  Source_Ref source_r, const Pathname & file_r )
       {
         MIL << "Starting to parse pattern " << file_r << std::endl;
         PatternTagFileParser p;
@@ -54,6 +54,8 @@ namespace zypp
           ERR << "Pattern " << file_r << " is broken." << std::endl;
           return 0L;
         }
+        // attach the source
+        p.patImpl->_source = source_r;
         return p.result;
       }
 

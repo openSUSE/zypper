@@ -71,7 +71,11 @@ namespace zypp
       //else
        //return std::set<std::string>();
     }
-
+  
+    Source_Ref SuseTagsSelectionImpl::source() const
+    {
+      return _source;
+    }
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////
