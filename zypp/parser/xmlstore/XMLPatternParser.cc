@@ -63,6 +63,14 @@ namespace zypp {
                  if (name == "name") {
                    dataPtr->name = _helper.content(child);
                  }
+                 else if (name == "arch") {
+                   dataPtr->arch = _helper.content(child);
+                 }
+                 else if (name == "version") {
+                   dataPtr->epoch = _helper.attribute(child,"epoch");
+                   dataPtr->ver = _helper.attribute(child,"ver");
+                   dataPtr->rel = _helper.attribute(child,"rel");
+                 }
                  else if (name == "summary") {
                    dataPtr->summary.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
                  }
@@ -76,7 +84,6 @@ namespace zypp {
                    dataPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
                  }
 		 else if (name == "category") {
-       #warning FIXME pattern category is translatable
 		   dataPtr->category.setText(_helper.content(child));
 		 }
 		 else if (name == "icon") {

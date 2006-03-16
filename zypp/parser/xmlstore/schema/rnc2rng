@@ -1,0 +1,2 @@
+#!/bin/bash
+for i in *.rnc; do trang -I rnc -O rng $i ${i%.rnc}.rng; done

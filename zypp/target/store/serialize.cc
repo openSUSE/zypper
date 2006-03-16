@@ -228,20 +228,18 @@ std::string toXML( const Selection::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<pattern>" << std::endl;
-  //out << "  <name>" << xml_escape(obj->name()) << "</name>" << std::endl;
-
+  out << "<pattern xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
+  
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
 
   // access implementation
   detail::ResImplTraits<Selection::Impl>::constPtr sipp( detail::ImplConnect::resimpl( obj ) );
   out << translatedTextToXML(sipp->summary(), "summary");
-  
+  out << translatedTextToXML(sipp->description(), "description");
   //out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << std::endl;
   out << "  <uservisible>" << (obj->visible() ? "true" : "false" ) << "</uservisible>" << std::endl;
   out << "  <category>" << xml_escape(obj->category()) << "</category>" << std::endl;
-  out << "  <icon>null</icon>" << std::endl;
-  out << translatedTextToXML(sipp->description(), "description");
+  out << "  <icon></icon>" << std::endl;
   out << "</pattern>" << std::endl;
   return out.str();
 }
@@ -264,21 +262,20 @@ std::string toXML( const Pattern::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<pattern>" << std::endl;
-  out << "  <name>" << xml_escape(obj->name()) << "</name>" << std::endl;
+  out << "<pattern xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
 
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
 
   // access implementation
   detail::ResImplTraits<Pattern::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
   out << translatedTextToXML(pipp->summary(), "summary");
-
+  out << translatedTextToXML(pipp->description(), "description");
+  
   out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << std::endl;
   out << "  <uservisible>" << (obj->userVisible() ? "true" : "false" ) << "</uservisible>" << std::endl;
   out << "  <category>" << xml_escape(obj->category()) << "</category>" << std::endl;
   out << "  <icon>" << xml_escape(obj->icon().asString()) << "</icon>" << std::endl;
   out << "  <script>" << xml_escape(obj->script().asString()) << "</script>" << std::endl;
-  out << translatedTextToXML(pipp->description(), "description");
   out << "</pattern>" << std::endl;
   return out.str();
 }
@@ -288,7 +285,7 @@ std::string toXML( const Product::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<product type=\"" << xml_escape(obj->category()) << "\">" << std::endl;
+  out << "<product xmlns=\"http://www.novell.com/metadata/zypp/xml-store\" type=\"" << xml_escape(obj->category()) << "\">" << std::endl;
   out << "  <vendor>" << xml_escape(obj->vendor()) << "</vendor>" << std::endl;
   out << "  <source>" << xml_escape(obj->source().alias()) << "</source>" << std::endl;
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
@@ -357,7 +354,7 @@ std::string toXML( const Patch::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<patch" << std::endl; 
+  out << "<patch xmlns=\"http://www.novell.com/metadata/zypp/xml-store\"" << std::endl; 
   out << "    patchid=\"" << xml_escape(obj->id()) << "\"" << std::endl;
   out << "    timestamp=\"" << obj->timestamp().asSeconds() << "\"" << std::endl;
   out << "    engine=\"1.0\">" << std::endl;
@@ -383,7 +380,7 @@ std::string toXML( const PersistentStorage::SourceData &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<source  xmlns=\"http://novell.com/package/metadata/suse/source\">" << std::endl;
+  out << "<source  xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">>" << std::endl;
   out << "  <enabled>" << (obj.enabled ? "true" : "false" ) << "</enabled>" << std::endl;
   out << "  <auto-refresh>" << ( obj.autorefresh ? "true" : "false" ) << "</auto-refresh>" << std::endl;
   out << "  <product-dir>" << xml_escape(obj.product_dir) << "</product-dir>" << std::endl;

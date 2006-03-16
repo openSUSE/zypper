@@ -18,7 +18,7 @@ namespace zypp {
   namespace parser {
     namespace yum {
     /* FIXME: How do I do this properly? */
-    #define SCHEMABASE "/usr/share/zypp/schema/"
+    #define SCHEMABASE "/usr/share/zypp/schema/yum/"
     #define REPOMDSCHEMA (SCHEMABASE "repomd.rng")
     #define PRIMARYSCHEMA (SCHEMABASE "suse-primary.rng")
     #define GROUPSCHEMA (SCHEMABASE "groups.rng")

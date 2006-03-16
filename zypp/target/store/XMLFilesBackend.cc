@@ -771,16 +771,6 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
   }
 }
 
-/*
-      std::string groupId;
-      std::list<MultiLang> name;
-      std::string default_;
-      std::string userVisible;
-      std::list<MultiLang> description;
-      std::list<MetaPkg> grouplist;
-      std::list<PackageReq> package_list;
-*/
-
 Product::Ptr
 XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & parsed ) const
 {
@@ -799,22 +789,12 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
     else
       impl->_release_notes_url = Url();
 
-    //unsigned int sourceid = str::strtonum<unsigned int>(parsed.sourceid);
-    /*
-    std::string sourceid = parsed.sourceid;
-    try
-    {
-      impl->_source = SourceManager::sourceManager()->findSource(sourceid);
-    }
-    catch (const Exception & excpt_r)
-    {
-      ZYPP_CAUGHT(excpt_r);
-      impl->_source = Source_Ref::noSource;
-    }
-    */
+    Arch arch;
+    if (!parsed.arch.empty())
+      arch = Arch(parsed.arch);
 
     // Collect basic Resolvable data
-    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch, createDependencies(parsed, ResTraits<Product>::kind) );
+    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies(parsed, ResTraits<Product>::kind) );
     Product::Ptr product = detail::makeResolvableFromImpl( dataCollect, impl );
     return product;
   }
@@ -840,8 +820,12 @@ XMLFilesBackend::createPattern( const zypp::parser::xmlstore::XMLPatternData & p
     impl->_icon = parsed.icon;
     impl->_script = parsed.script;
 
+    Arch arch;
+    if (!parsed.arch.empty())
+      arch = Arch(parsed.arch);
+
     // Collect basic Resolvable data
-    NVRAD dataCollect( parsed.name, Edition::noedition, Arch_noarch,           createDependencies( parsed, ResTraits<Pattern>::kind));
+    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies( parsed, ResTraits<Pattern>::kind));
     Pattern::Ptr pattern = detail::makeResolvableFromImpl( dataCollect, impl );
     return pattern;
   }

@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-#SUBDIRS = schema
+SUBDIRS = schema
 
 INCLUDES = -I$(oldincludedir)/libxml2 -I..	\
 	-DZYPP_BASE_LOGGER_LOGGROUP=\"parser-xml\"

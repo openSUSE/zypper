@@ -1,0 +1,86 @@
+default namespace = "http://www.novell.com/metadata/zypp/xml-store"
+
+boolean = "true" | "false"
+
+attribute-kind = 
+  attribute kind { "pattern" | "package" | "patch" | "script" | "message" | "product" | "atom" }
+
+arch =      
+    "noarch"
+    | "athlon"
+    | "i386"
+    | "i486"
+    | "i586"
+    | "i686"
+    | "ia64"
+    | "ppc"
+    | "ppc64"
+    | "s390"
+    | "s390x"
+    | "x86_64"
+    | "src"
+
+element-version =
+    element version { version }
+
+translated-text =
+  attribute lang { text }?,
+  text
+
+version =
+    attribute ver { text },
+    attribute rel { text },
+    attribute epoch { xsd:nonNegativeInteger }?,
+    empty
+
+element-summary =
+    element summary { translated-text }
+
+element-description =
+    element description { translated-text }
+
+capability = 
+  element capability { attribute-kind,
+  text }
+
+capability-set =
+  capability*
+
+provides =
+  element provides { capability-set }
+requires =
+  element requires { capability-set }
+prerequires =
+  element prerequires { capability-set }
+conflicts =
+  element conflicts { capability-set }  
+suggests =
+  element suggests { capability-set }
+freshens =
+  element freshens { capability-set }  
+supplements =
+  element supplements { capability-set }
+enhances =
+  element enhances { capability-set }
+recommends =
+  element recommends { capability-set }
+obsoletes =
+  element obsoletes { capability-set }
+
+dependencies = 
+  provides?,
+  prerequires?,
+  conflicts?,
+  obsoletes?,
+  freshens?,
+  requires?,
+  recommends?,
+  enhances?,
+  supplements?,
+  suggests?
+
+resolvable-data = 
+  element name { text },
+  element-version,
+  element arch { arch },
+  dependencies

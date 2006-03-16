@@ -68,11 +68,13 @@ AC_SUBST(pkgdocdir)
 
 zyppdir=${prefix}/share/$PACKAGE
 localedir=${prefix}/share/locale
-schemadir=${zyppdir}/schema
+yumschemadir=${zyppdir}/schema/yum
+xmlstoreschemadir=${zyppdir}/schema/xmlstore
 
 AC_SUBST(zyppdir)
 AC_SUBST(localedir)
-AC_SUBST(schemadir)
+AC_SUBST(yumschemadir)
+AC_SUBST(xmlstoreschemadir)
 
 AH_TEMPLATE([LOCALEDIR],[gettext localedir])
 AC_DEFINE_UNQUOTED([LOCALEDIR], ["${localedir}"])
@@ -212,9 +214,10 @@ AC_OUTPUT(	 po/Makefile.in\
 	zypp/capability/Makefile	\
 	zypp/parser/Makefile		\
 	zypp/parser/yum/Makefile	\
-	zypp/parser/yum/schema/Makefile	\
-	zypp/parser/tagfile/Makefile	\
+	zypp/parser/yum/schema/Makefile \
+  zypp/parser/tagfile/Makefile  \
   zypp/parser/xmlstore/Makefile \
+  zypp/parser/xmlstore/schema/Makefile  \
 	zypp/pool/Makefile		\
 	zypp/solver/Makefile		\
 	zypp/solver/detail/Makefile	\
