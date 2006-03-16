@@ -286,11 +286,11 @@ std::string toXML( const Product::constPtr &obj )
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
   out << "<product xmlns=\"http://www.novell.com/metadata/zypp/xml-store\" type=\"" << xml_escape(obj->category()) << "\">" << std::endl;
-  out << "  <vendor>" << xml_escape(obj->vendor()) << "</vendor>" << std::endl;
-  out << "  <source>" << xml_escape(obj->source().alias()) << "</source>" << std::endl;
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
   #warning "FIXME description and displayname of products"
   out << "  <displayname>" << xml_escape(obj->displayName()) << "</displayname>" << std::endl;
+  out << "  <vendor>" << xml_escape(obj->vendor()) << "</vendor>" << std::endl;
+  out << "  <source>" << xml_escape(obj->source().alias()) << "</source>" << std::endl;  
   out << "  <release-notes-url>" << xml_escape(obj->releaseNotesUrl().asString()) << "</release-notes-url>" << std::endl;
   out << "  <description></description>" << std::endl;
   out << "</product>" << std::endl;
