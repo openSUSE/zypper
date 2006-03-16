@@ -48,16 +48,20 @@ namespace zypp
     struct FilterExtraProvides
     {
       Dependencies & deps;
-      ZYpp::Ptr _zypp;
 
-      FilterExtraProvides( Dependencies & d, ZYpp::Ptr z )
+      FilterExtraProvides( Dependencies & d )
 	: deps( d )
-	, _zypp( z )
       { }
 
       bool operator()( const Capability & cap_r ) const
       {
 	if ( isKind<capability::ModaliasCap>(cap_r) )
+          {
+	    deps[Dep::SUPPLEMENTS].insert( cap_r );
+            return true;	// strip from provides
+          }
+
+	if ( isKind<capability::HalCap>(cap_r) )
           {
 	    deps[Dep::SUPPLEMENTS].insert( cap_r );
             return true;	// strip from provides
@@ -82,7 +86,7 @@ namespace zypp
 		next = provides.size()-1;			// none left, set next to end-1 (strip trailing ')' )
 
 	    string loc( provides, pos, next-pos );
-	    if (_zypp) _zypp->availableLocale( Locale( loc ) );
+	    getZYpp()->availableLocale( Locale( loc ) );
 	    deps[Dep::FRESHENS].insert( f.parse( ResTraits<Language>::kind, loc ) );
 	    pos = next + 1;
 	}
@@ -90,11 +94,10 @@ namespace zypp
       }
     };
 
-    void filterExtraProvides( const Dependencies & from, Dependencies & to, ZYpp::Ptr z )
+    void filterExtraProvides( const Dependencies & from, Dependencies & to )
     {
-
       CapSet provides;
-      FilterExtraProvides flp( to, z );
+      FilterExtraProvides flp( to );
 
       std::remove_copy_if( from[Dep::PROVIDES].begin(), from[Dep::PROVIDES].end(),
                            std::inserter( provides, provides.end() ),
@@ -102,9 +105,6 @@ namespace zypp
       to[Dep::PROVIDES] = provides;
     }
   }
-
-  // static backref to ZYpp to inject available locales
-  ZYpp::Ptr Resolvable::Impl::_zypp;
 
   Resolvable::Impl::Impl( const Kind & kind_r,
                           const NVRAD & nvrad_r )
@@ -114,12 +114,10 @@ namespace zypp
   , _arch( nvrad_r.arch )
   , _deps( nvrad_r )
   {
-    if (!_zypp) _zypp = zypp::getZYpp();
-
     // check if we provide any extra ('locale(...)', 'modalias(...)', ...) tags
-    //  and split them up to freshens/supplements
-
-    filterExtraProvides( nvrad_r, _deps, _zypp );
+    // and split them up to freshens/supplements (except for SystemResObject)
+    if ( _kind != ResTraits<SystemResObject>::kind )
+      filterExtraProvides( nvrad_r, _deps );
 
     // assert self provides
     _deps[Dep::PROVIDES].insert( CapFactory()
