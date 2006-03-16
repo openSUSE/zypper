@@ -329,24 +329,7 @@ std::string resolvableTypeToString( const Resolvable::constPtr &resolvable, bool
 
 std::string resolvableKindToString( const Resolvable::Kind &kind, bool plural)
 {
-  if ( kind == ResTraits<zypp::Package>::kind )
-     return plural ? "packages" : "package";
-  else if ( kind == ResTraits<zypp::Patch>::kind )
-     return plural ? "patches" : "patch";
-  else if ( kind == ResTraits<zypp::Atom>::kind )
-     return plural ? "atoms" : "atom";
-  else if ( kind == ResTraits<zypp::Message>::kind )
-     return plural ? "messages" : "message";
-  else if ( kind == ResTraits<zypp::Selection>::kind )
-     return plural ? "selections" : "selection";
-  else if ( kind == ResTraits<zypp::Script>::kind )
-     return plural ? "scripts" : "script";
-  else if ( kind == ResTraits<zypp::Pattern>::kind )
-     return plural ? "patterns" : "pattern";
-  else if ( kind == ResTraits<zypp::Product>::kind )
-     return plural ? "products" : "product";
-  else
-     return "unknown";
+  return kind.asString() + (plural?"s":"");
 }
 
 template<> 
