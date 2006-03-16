@@ -14,7 +14,7 @@
 
 #include <iosfwd>
 
-
+#include "zypp/Atom.h"
 #include "zypp/Message.h"
 #include "zypp/Patch.h"
 #include "zypp/Script.h"
@@ -22,13 +22,13 @@
 #include "zypp/Selection.h"
 #include "zypp/Pattern.h"
 
-#include "zypp/parser/yum/YUMParser.h"
-#include "zypp/parser/yum/YUMParserData.h"
+#include "zypp/parser/xmlstore/XMLParserData.h"
+
 #include "zypp/base/PtrTypes.h"
 #include "Backend.h"
 
 using namespace zypp;
-using namespace zypp::parser::yum;
+using namespace zypp::parser::xmlstore;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -176,20 +176,20 @@ public:
     * Full path to the xml file for a given resolvable
     * Does not care if the resolvable is yet stored or not
     */
-  ResObject::Ptr resolvableFromFile( std::string file_path, Resolvable::Kind kind ) const;
+  std::list<ResObject::Ptr> resolvablesFromFile( std::string file_path, Resolvable::Kind kind ) const;
 
-  Patch::Ptr createPatch( const zypp::parser::yum::YUMPatchData & parsed ) const;
-  Message::Ptr createMessage( const zypp::parser::yum::YUMPatchMessage & parsed ) const;
-  Script::Ptr createScript(const zypp::parser::yum::YUMPatchScript & parsed ) const;
-  Product::Ptr createProduct( const zypp::parser::yum::YUMProductData & parsed ) const;
-  Selection::Ptr createSelection( const zypp::parser::yum::YUMPatternData & parsed ) const;
-  Pattern::Ptr createPattern( const zypp::parser::yum::YUMPatternData & parsed ) const;
+  Patch::Ptr createPatch( const zypp::parser::xmlstore::XMLPatchData & parsed ) const;
+  Message::Ptr createMessage( const zypp::parser::xmlstore::XMLPatchMessageData & parsed ) const;
+  Script::Ptr createScript(const zypp::parser::xmlstore::XMLPatchScriptData & parsed ) const;
+  Product::Ptr createProduct( const zypp::parser::xmlstore::XMLProductData & parsed ) const;
+  Selection::Ptr createSelection( const zypp::parser::xmlstore::XMLPatternData & parsed ) const;
+  Pattern::Ptr createPattern( const zypp::parser::xmlstore::XMLPatternData & parsed ) const;
+  Atom::Ptr createAtom( const zypp::parser::xmlstore::XMLPatchAtomData & parsed ) const;
 
-  Dependencies createDependencies( const zypp::parser::yum::YUMObjectData & parsed, const Resolvable::Kind my_kind ) const;
-  Dependencies createGroupDependencies( const zypp::parser::yum::YUMGroupData & parsed ) const;
-  Dependencies createPatternDependencies( const zypp::parser::yum::YUMPatternData & parsed ) const;
-  Capability createCapability(const YUMDependency & dep, const Resolvable::Kind & my_kind) const;
-
+  Dependencies createDependencies( const zypp::parser::xmlstore::XMLResObjectData & parsed, const Resolvable::Kind my_kind ) const;
+  
+  Capability createCapability(const XMLDependency & dep, const Resolvable::Kind & my_kind) const;
+  
   private:
   class Private;
   Private *d;

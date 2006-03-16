@@ -16,6 +16,7 @@ targetxmlinclude_HEADERS =		\
 	XMLSelectionImpl.h \
 	XMLPatternImpl.h \
 	XMLProductImpl.h \
+	XMLAtomImpl.h \
 	XMLSourceCacheParser.h
 
 
@@ -30,6 +31,7 @@ lib@PACKAGE@_target_xml_la_SOURCES = \
 	XMLSelectionImpl.cc \
 	XMLPatternImpl.cc \
 	XMLProductImpl.cc \
+	XMLAtomImpl.cc \
 	XMLSourceCacheParser.cc
 
 ## ##################################################

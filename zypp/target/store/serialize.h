@@ -22,6 +22,7 @@
 #include <zypp/Patch.h>
 #include <zypp/Package.h>
 #include <zypp/Script.h>
+#include <zypp/Atom.h>
 #include <zypp/Message.h>
 #include <zypp/Pattern.h>
 #include <zypp/Selection.h>
@@ -43,19 +44,19 @@ namespace storage
 template<class T>
 std::string toXML( const T &obj ); //undefined
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Edition &edition );
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Arch &arch );
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Capability &cap );
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const CapSet &caps );
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Dependencies &dep );
 
 /**
@@ -63,7 +64,7 @@ std::string toXML( const Dependencies &dep );
  * NOTE: This wont serialize child classes properties
  * Use castedToXML for that.
  */
-template<> // or constPtr?
+template<> 
 std::string toXML( const Resolvable::constPtr &obj );
 
 /**
@@ -81,25 +82,28 @@ std::string resolvableTypeToString( const Resolvable::constPtr &resolvable, bool
  */
 std::string resolvableKindToString( const Resolvable::Kind &kind, bool plural = false );
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Package::constPtr &obj );
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Script::constPtr &obj );
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Message::constPtr &obj );
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Patch::constPtr &obj );
 
-template<> // or constPtr?
+template<> 
+std::string toXML( const Atom::constPtr &obj );
+
+template<> 
 std::string toXML( const Pattern::constPtr &obj );
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Selection::constPtr &obj );
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Product::constPtr &obj );
 
 template<>

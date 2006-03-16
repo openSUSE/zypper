@@ -79,7 +79,7 @@ static std::string translatedTextToXML(const TranslatedText &text, const std::st
 template<class T>
 std::string toXML( const T &obj ); //undefined
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Edition &edition )
 {
   stringstream out;
@@ -88,7 +88,7 @@ std::string toXML( const Edition &edition )
   return out.str();
 }
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Arch &arch )
 {
   stringstream out;
@@ -96,17 +96,17 @@ std::string toXML( const Arch &arch )
   return out.str();
 }
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Capability &cap )
 {
   stringstream out;
   CapFactory factory;
 
-  out << "<suse:capability kind=\"" << cap.refers() << "\" >" <<  xml_escape(factory.encode(cap)) << "</suse:capability>" << std::endl;
+  out << "<capability kind=\"" << cap.refers() << "\" >" <<  xml_escape(factory.encode(cap)) << "</capability>" << std::endl;
   return out.str();
 }
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const CapSet &caps )
 {
   stringstream out;
@@ -118,36 +118,36 @@ std::string toXML( const CapSet &caps )
   return out.str();
 }
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Dependencies &dep )
 {
   stringstream out;
   if ( dep[Dep::PROVIDES].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::PROVIDES]), "suse:provides") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::PROVIDES]), "provides") << std::endl;
   if ( dep[Dep::PREREQUIRES].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::PREREQUIRES]), "suse:prerequires") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::PREREQUIRES]), "prerequires") << std::endl;
   if ( dep[Dep::CONFLICTS].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::CONFLICTS]), "suse:conflicts") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::CONFLICTS]), "conflicts") << std::endl;
   if ( dep[Dep::OBSOLETES].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::OBSOLETES]), "suse:obsoletes") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::OBSOLETES]), "obsoletes") << std::endl;
   // why the YUM tag is freshen without s????
   if ( dep[Dep::FRESHENS].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::FRESHENS]), "suse:freshen") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::FRESHENS]), "freshens") << std::endl;
   if ( dep[Dep::REQUIRES].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::REQUIRES]), "suse:requires") << std::endl;  
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::REQUIRES]), "requires") << std::endl;  
   if ( dep[Dep::RECOMMENDS].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::RECOMMENDS]), "suse:recommends") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::RECOMMENDS]), "recommends") << std::endl;
   if ( dep[Dep::ENHANCES].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::ENHANCES]), "suse:enhances") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::ENHANCES]), "enhances") << std::endl;
   if ( dep[Dep::SUPPLEMENTS].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::SUPPLEMENTS]), "suse:supplements") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::SUPPLEMENTS]), "supplements") << std::endl;
   if ( dep[Dep::SUGGESTS].size() > 0 )
-    out << "    " << xml_tag_enclose(toXML(dep[Dep::SUGGESTS]), "suse:suggests") << std::endl;
+    out << "    " << xml_tag_enclose(toXML(dep[Dep::SUGGESTS]), "suggests") << std::endl;
   return out.str();
 
 }
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Resolvable::constPtr &obj )
 {
   stringstream out;
@@ -160,7 +160,7 @@ std::string toXML( const Resolvable::constPtr &obj )
   return out.str();
 }
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Package::constPtr &obj )
 {
   stringstream out;
@@ -174,7 +174,7 @@ std::string toXML( const Package::constPtr &obj )
   return out.str();
 }
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Script::constPtr &obj )
 {
   stringstream out;
@@ -194,7 +194,7 @@ std::string toXML( const Script::constPtr &obj )
   return out.str();
 }
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Message::constPtr &obj )
 {
   stringstream out;
@@ -223,17 +223,15 @@ static std::string localizedXMLTags( const TranslatedText &text, const std::stri
 }
 */
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Selection::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<pattern" << std::endl;
-  out << "  xmlns=\"http://novell.com/package/metadata/suse/pattern\"" << std::endl;
-  out << "  xmlns:yum=\"http://linux.duke.edu/metadata/common\"" << std::endl;
-  out << "  xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\"" << std::endl;
-  out << "  xmlns:suse=\"http://novell.com/package/metadata/suse/common\">" << std::endl;
-  out << "  <name>" << xml_escape(obj->name()) << "</name>" << std::endl;
+  out << "<pattern>" << std::endl;
+  //out << "  <name>" << xml_escape(obj->name()) << "</name>" << std::endl;
+
+  out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
 
   // access implementation
   detail::ResImplTraits<Selection::Impl>::constPtr sipp( detail::ImplConnect::resimpl( obj ) );
@@ -244,22 +242,32 @@ std::string toXML( const Selection::constPtr &obj )
   out << "  <category>" << xml_escape(obj->category()) << "</category>" << std::endl;
   out << "  <icon>null</icon>" << std::endl;
   out << translatedTextToXML(sipp->description(), "description");
-  out << toXML(obj->deps()) << std::endl;
   out << "</pattern>" << std::endl;
   return out.str();
 }
 
-template<> // or constPtr?
+template<> 
+std::string toXML( const Atom::constPtr &obj )
+{
+  stringstream out;
+  out << "<atom>" << std::endl;
+  out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
+
+  // access implementation
+  out << toXML(obj->deps()) << std::endl;
+  out << "</atom>" << std::endl;
+  return out.str();
+}
+
+template<> 
 std::string toXML( const Pattern::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<pattern" << std::endl;
-  out << "  xmlns=\"http://novell.com/package/metadata/suse/pattern\"" << std::endl;
-  out << "  xmlns:yum=\"http://linux.duke.edu/metadata/common\"" << std::endl;
-  out << "  xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\"" << std::endl;
-  out << "  xmlns:suse=\"http://novell.com/package/metadata/suse/common\">" << std::endl;
+  out << "<pattern>" << std::endl;
   out << "  <name>" << xml_escape(obj->name()) << "</name>" << std::endl;
+
+  out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
 
   // access implementation
   detail::ResImplTraits<Pattern::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
@@ -271,36 +279,29 @@ std::string toXML( const Pattern::constPtr &obj )
   out << "  <icon>" << xml_escape(obj->icon().asString()) << "</icon>" << std::endl;
   out << "  <script>" << xml_escape(obj->script().asString()) << "</script>" << std::endl;
   out << translatedTextToXML(pipp->description(), "description");
-  out << toXML(obj->deps()) << std::endl;
   out << "</pattern>" << std::endl;
   return out.str();
 }
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Product::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<product";
-  out << "    xmlns=\"http://novell.com/package/metadata/suse/product\"" << std::endl;
-  out << "    xmlns:product=\"http://novell.com/package/metadata/suse/product\"" << std::endl;
-  out << "    xmlns:yum=\"http://linux.duke.edu/metadata/common\" " << std::endl;
-  out << "    xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\" " << std::endl;
-  out << "    xmlns:suse=\"http://novell.com/package/metadata/suse/common\"" << std::endl;
-  out << "    type=\"" << xml_escape(obj->category()) << "\">" << std::endl;
+  out << "<product type=\"" << xml_escape(obj->category()) << "\">" << std::endl;
   out << "  <vendor>" << xml_escape(obj->vendor()) << "</vendor>" << std::endl;
-  out << "  <suse:source>" << xml_escape(obj->source().alias()) << "</suse:source>" << std::endl;
+  out << "  <source>" << xml_escape(obj->source().alias()) << "</source>" << std::endl;
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
   #warning "FIXME description and displayname of products"
   out << "  <displayname>" << xml_escape(obj->displayName()) << "</displayname>" << std::endl;
-  out << "  <suse:release-notes-url>" << xml_escape(obj->releaseNotesUrl().asString()) << "</suse:release-notes-url>" << std::endl;
+  out << "  <release-notes-url>" << xml_escape(obj->releaseNotesUrl().asString()) << "</release-notes-url>" << std::endl;
   out << "  <description></description>" << std::endl;
   out << "</product>" << std::endl;
 
   return out.str();
 }
 
-// or constPtr?
+
 std::string castedToXML( const Resolvable::constPtr &resolvable )
 {
   stringstream out;
@@ -312,6 +313,8 @@ std::string castedToXML( const Resolvable::constPtr &resolvable )
      out << toXML(asKind<const Message>(resolvable)) << std::endl;
   if ( isKind<Script>(resolvable) )
      out << toXML(asKind<const Script>(resolvable)) << std::endl;
+  if ( isKind<Atom>(resolvable) )
+     out << toXML(asKind<const Atom>(resolvable)) << std::endl;
   if ( isKind<Product>(resolvable) )
      out << toXML(asKind<const Product>(resolvable)) << std::endl;
   if ( isKind<Pattern>(resolvable) )
@@ -321,7 +324,7 @@ std::string castedToXML( const Resolvable::constPtr &resolvable )
   return out.str();
 }
 
-// or constPtr?
+
 std::string resolvableTypeToString( const Resolvable::constPtr &resolvable, bool plural )
 {
   return resolvableKindToString(resolvable->kind(), plural);
@@ -333,6 +336,8 @@ std::string resolvableKindToString( const Resolvable::Kind &kind, bool plural)
      return plural ? "packages" : "package";
   else if ( kind == ResTraits<zypp::Patch>::kind )
      return plural ? "patches" : "patch";
+  else if ( kind == ResTraits<zypp::Atom>::kind )
+     return plural ? "atoms" : "atom";
   else if ( kind == ResTraits<zypp::Message>::kind )
      return plural ? "messages" : "message";
   else if ( kind == ResTraits<zypp::Selection>::kind )
@@ -347,17 +352,12 @@ std::string resolvableKindToString( const Resolvable::Kind &kind, bool plural)
      return "unknown";
 }
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const Patch::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
   out << "<patch" << std::endl; 
-  out << "    xmlns=\"http://novell.com/package/metadata/suse/patch\"" << std::endl;
-  out << "    xmlns:patch=\"http://novell.com/package/metadata/suse/patch\"" << std::endl;
-  out << "    xmlns:yum=\"http://linux.duke.edu/metadata/common\"" << std::endl; 
-  out << "    xmlns:rpm=\"http://linux.duke.edu/metadata/rpm\"" << std::endl;
-  out << "    xmlns:suse=\"http://novell.com/package/metadata/suse/common\"" << std::endl;
   out << "    patchid=\"" << xml_escape(obj->id()) << "\"" << std::endl;
   out << "    timestamp=\"" << obj->timestamp().asSeconds() << "\"" << std::endl;
   out << "    engine=\"1.0\">" << std::endl;
@@ -378,7 +378,7 @@ std::string toXML( const Patch::constPtr &obj )
   return out.str();
 }
 
-template<> // or constPtr?
+template<> 
 std::string toXML( const PersistentStorage::SourceData &obj )
 {
   stringstream out;
