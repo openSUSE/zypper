@@ -61,7 +61,7 @@ class compare_items {
 public:
     int operator() (PoolItem_Ref p1,
                     PoolItem_Ref p2) const
-        { return p1.resolvable()->name() < p2.resolvable()->name(); }
+        { return compareByN(p1.resolvable(),p2.resolvable()) < 0 ; }
 };
 	
 
@@ -675,7 +675,7 @@ marked_item_collector (PoolItem_Ref item, const ResStatus & status, void *data)
 
 
 PoolItemList
-ResolverContext::getMarked (int which)
+ResolverContext::getMarked (int which) // <0: uninstalls, ==0: all, >0: installs
 {
     if ( _last_getMarked_which == which
 	 && _last_getMarked.size() > 0 )
@@ -1626,7 +1626,7 @@ ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of 
 	else {
 	    thisMap[thisIt->resolvable()->source()] += 1;
 	}
-	_XDEBUG ("Count of left " << thisIt->resolvable()->source() << ": " << thisMap[thisIt->resolvable()->source()]);	
+	_XDEBUG ("Count of left " << thisIt->resolvable()->source() << ": " << thisMap[thisIt->resolvable()->source()] << " : " << *(thisIt->resolvable()));	
 
 	// Comparing versions
 	while (itCompare != compareList.end() )
@@ -1660,8 +1660,7 @@ ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of 
 		    compareMap[sourceItem->source()] = 1;
 		else
 		    compareMap[sourceItem->source()] += 1;
-		_XDEBUG ("Count of right " << sourceItem->source() << ": " << compareMap[sourceItem->source()]);
-		
+		_XDEBUG ("Count of right " << sourceItem->source() << ": " << compareMap[sourceItem->source()] << " : " << *(itCompare->resolvable()));
 		itCompare++;
 	    } else if (cmp > 0 )
 		itCompare++;
@@ -1690,7 +1689,8 @@ ResolverContext::collectCompareInfo (int & cmpVersion,    // Version compare of 
 	    compareMap[sourceItem->source()] = 1;
 	else
 	    compareMap[sourceItem->source()] += 1;
-	_XDEBUG ("Count of right" << sourceItem->source() << ": " << compareMap[sourceItem->source()]);	
+	_XDEBUG ("Count of right" << sourceItem->source() << ": " << compareMap[sourceItem->source()] << " : "
+		 << *(itCompare->resolvable()));	
 	itCompare++;	
     }
 
