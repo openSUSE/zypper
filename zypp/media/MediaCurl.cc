@@ -267,13 +267,28 @@ void MediaCurl::attachTo (bool next)
            it != proxy_info.noProxyEnd();
            it++)
       {
-	// no proxy: if nope equals host,
-	// or is a suffix preceeded by a '.'
-	string::size_type pos = _url.getHost().find( *it );
-	if ( pos != string::npos
-	     && ( pos + it->size() == _url.getHost().size() )
-	     && ( pos == 0 || _url.getHost()[pos -1] == '.' ) ) {
-	  DBG << "NO_PROXY: " << *it << " matches host " << _url.getHost() << endl;
+	std::string host(_url.getHost());
+
+	// no proxy if it points to a suffix
+	// preceeded by a '.', that maches
+	// the trailing portion of the host.
+	if( it->size() > 1 && it->at(0) == '.')
+	{
+	  if(host.size() > it->size() &&
+             host.compare(host.size() - it->size(), it->size(), *it) == 0)
+	  {
+	    DBG << "NO_PROXY: '" << *it  << "' matches host '"
+	                         << host << "'" << endl;
+	    useproxy = false;
+	    break;
+          }
+	}
+	else
+	// no proxy if we have an exact match
+	if( host == *it)
+	{
+	  DBG << "NO_PROXY: '" << *it  << "' matches host '"
+	                       << host << "'" << endl;
 	  useproxy = false;
 	  break;
 	}
@@ -286,7 +301,7 @@ void MediaCurl::attachTo (bool next)
   }
 
 
-  DBG << "Proxy: " << _proxy << endl;
+  DBG << "Proxy: " << (_proxy.empty() ? "-none-" : _proxy) << endl;
 
   if ( ! _proxy.empty() ) {
 

@@ -82,8 +82,7 @@ namespace zypp {
 	_proxies["ftp"] = it->second;
       it = data.find("NO_PROXY");
       if (it != data.end())
-	_no_proxy.push_back(it->second);
-#warning FIXME once splitting a string is in str:: namespace
+	str::split(it->second, std::back_inserter(_no_proxy), ", \t");
     }
 
     std::string ProxyInfoSysconfig::proxy(const std::string & protocol_r) const
