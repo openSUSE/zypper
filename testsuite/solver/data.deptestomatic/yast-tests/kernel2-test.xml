@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <channel name="packages" file="beta8-packages.xml"/>
+  <channel name="selections" file="beta8-selections.xml"/>
+</setup>
+
+<!-- Problem with kernel modules; more than one kernel are installed bug 156513'-->
+<trial>
+  <install channel="selections" kind="selection" name="default"/>
+  <install channel="selections" kind="selection" name="Laptop"/>
+  <install channel="packages" package="ial"/>
+  <install channel="packages" package="kernel-default"/>
+  <install channel="packages" package="toshutils"/>
+  <install channel="packages" package="yast2-trans-en_US"/>
+  <reportproblems/>
+</trial>
+
+</test>
