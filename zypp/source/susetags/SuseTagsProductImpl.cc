@@ -53,6 +53,9 @@ namespace zypp
     Url SuseTagsProductImpl::releaseNotesUrl() const
     { return _release_notes_url; }
 
+    std::list<std::string> SuseTagsProductImpl::flags() const
+    { return _flags; }
+
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////

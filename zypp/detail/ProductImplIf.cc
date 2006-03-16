@@ -34,6 +34,9 @@ namespace zypp
       
       Url ProductImplIf::releaseNotesUrl() const
       { return Url(); }
+
+      std::list<std::string> ProductImplIf::flags() const
+      { return std::list<std::string>(); }
       
     ///////////////////////////////////////////////////////////////////
 

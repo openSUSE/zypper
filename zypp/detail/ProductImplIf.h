@@ -52,6 +52,9 @@ namespace zypp
       virtual Label displayName( const Locale & locale_r = Locale() ) const PURE_VIRTUAL;
       
       virtual Url releaseNotesUrl() const PURE_VIRTUAL;
+
+      /** The product flags */
+      virtual std::list<std::string> flags() const PURE_VIRTUAL;
     };
     ///////////////////////////////////////////////////////////////////
 

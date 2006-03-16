@@ -56,6 +56,9 @@ namespace zypp
   Url Product::releaseNotesUrl() const
   { return pimpl().releaseNotesUrl(); }
 
+  std::list<std::string> Product::flags() const
+  { return pimpl().flags(); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

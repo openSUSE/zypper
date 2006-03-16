@@ -12,6 +12,9 @@
 #ifndef ZYPP_PRODUCT_H
 #define ZYPP_PRODUCT_H
 
+#include <list>
+#include <string>
+
 #include "zypp/ResObject.h"
 #include "zypp/detail/ProductImplIf.h"
 
@@ -48,6 +51,9 @@ namespace zypp
 
     /** The URL to download the release notes for this product */
     Url releaseNotesUrl() const;
+
+    /** The product flags */
+    std::list<std::string> flags() const;
 
   protected:
     /** Ctor */

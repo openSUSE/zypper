@@ -88,6 +88,10 @@ namespace zypp
 
       Source_Ref YUMProductImpl::source() const
       { return _source; }
+
+#warning the metadata specification doesn't support product flags
+      std::list<std::string> YUMProductImpl::flags() const
+      { return ProductImplIf::flags(); }
  
     } // namespace yum
     /////////////////////////////////////////////////////////////////

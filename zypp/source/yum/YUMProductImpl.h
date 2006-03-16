@@ -51,6 +51,7 @@ namespace zypp
 	bool providesSources() const;
 	Label instSrcLabel() const;
 	Vendor instSrcVendor() const;
+	std::list<std::string> flags() const;
       protected:
 	std::string _category;
 	Label _vendor;
