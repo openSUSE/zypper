@@ -329,7 +329,11 @@ std::string resolvableTypeToString( const Resolvable::constPtr &resolvable, bool
 
 std::string resolvableKindToString( const Resolvable::Kind &kind, bool plural)
 {
-  return kind.asString() + (plural?"s":"");
+  std::string k = kind.asString();
+  if (k.substr(k.size() - 2, 2) == "ch")
+    return k + (plural?"es":"");
+  else
+    return k + (plural?"s":"");
 }
 
 template<> 
