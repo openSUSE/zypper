@@ -95,6 +95,7 @@ namespace zypp {
         TranslatedText description;
         // those are suse specific tags
         std::string releasenotesurl;
+        std::list<std::string> flags;
       };
       
       class XMLPatchAtomData : public XMLResObjectData

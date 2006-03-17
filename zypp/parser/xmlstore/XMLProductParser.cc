@@ -80,12 +80,29 @@ namespace zypp {
             else if (name == "description") {
               productPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
             }
+            else if (name == "product-flags") {
+              parseProductFlags( productPtr, child);
+            }
           }
         }
         return productPtr;
       } /* end process */
       
-      
+      void
+      XMLProductParser::parseProductFlags( XMLProductData_Ptr productPtr, xmlNodePtr node)
+      {
+        for (xmlNodePtr child = node->children; child && child != node; child = child->next)
+        {
+          if (_helper.isElement(child))
+          {
+            string name = _helper.name(child);
+            if (name == "product-flag")
+            {
+              productPtr->flags.push_back(_helper.content(child));
+            }
+          }
+        }
+      }
       
     } // namespace yum
   } // namespace parser

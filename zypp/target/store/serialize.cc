@@ -289,10 +289,18 @@ std::string toXML( const Product::constPtr &obj )
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
   #warning "FIXME description and displayname of products"
   out << "  <displayname>" << xml_escape(obj->displayName()) << "</displayname>" << std::endl;
+  out << "  <description></description>" << std::endl;
   out << "  <vendor>" << xml_escape(obj->vendor()) << "</vendor>" << std::endl;
   out << "  <source>" << xml_escape(obj->source().alias()) << "</source>" << std::endl;  
   out << "  <release-notes-url>" << xml_escape(obj->releaseNotesUrl().asString()) << "</release-notes-url>" << std::endl;
-  out << "  <description></description>" << std::endl;
+  out << "  <product-flags>" << std::endl;
+  std::list<std::string> flags = obj->flags();
+  for ( std::list<std::string>::const_iterator it = flags.begin(); it != flags.end(); ++it)
+  {
+    out << "    <product-flag>" << xml_escape(*it) << "</product-flag>" << std::endl; 
+  }
+  out << "  <product-flags>" << std::endl;
+  
   out << "</product>" << std::endl;
 
   return out.str();
