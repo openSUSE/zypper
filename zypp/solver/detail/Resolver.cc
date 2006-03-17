@@ -33,6 +33,10 @@
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
+#include "zypp/ZYppFactory.h"
+#include "zypp/SystemResObject.h"
+
+
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -55,6 +59,28 @@ Resolver::dumpOn( std::ostream & os ) const
 {
     return os << "<resolver/>";
 }
+
+// Generating a system resolvable in the pool in order to trigger
+// modaliases and hals	
+void assertSystemResObjectInPool()
+{
+  ResPool pool( getZYpp()->pool() );
+  if ( pool.byKindBegin<SystemResObject>()
+       == pool.byKindEnd<SystemResObject>() )
+    {
+      // SystemResObject is missing in the pool ==> insert
+      ResStore store;
+      store.insert( SystemResObject::instance() );
+      getZYpp()->addResolvables( store );
+    }
+
+  // set transact bit
+  if ( ! pool.byKindBegin<SystemResObject>()
+         ->status().setTransact( true, ResStatus::USER ) )
+    {
+      WAR << "Unable to set SystemResObject to transact" << endl;
+    }
+}	
 
 //---------------------------------------------------------------------------
 
@@ -557,6 +583,9 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     for (CapSet::const_iterator iter = _extra_conflicts.begin(); iter != _extra_conflicts.end(); iter++) {
 	initial_queue->addExtraConflict (*iter);
     }
+
+    // Adding System resolvable
+    assertSystemResObjectInPool();    
 
     _DEBUG( "Initial Queue: [" << *initial_queue << "]" );
 
