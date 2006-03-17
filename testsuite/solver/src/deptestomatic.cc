@@ -716,7 +716,12 @@ parse_xml_setup (XmlNode_Ptr node)
 
 	    string file = node->getProp ("file");
 	    load_source ("@system", file, "helix", true);
+            
+        } else if (node->equals ("hardwareInfo")) {
 
+            Pathname pathname = globalPath + node->getProp ("path");
+            setenv ("ZYPP_MODALIAS_SYSFS", pathname.asString().c_str(), 1);
+            RESULT << "setting HardwareInfo to: " << pathname.asString() << endl;            
 	} else if (node->equals ("channel")) {
 
 	    string name = node->getProp ("name");
