@@ -106,6 +106,7 @@ iterate_devices(const char *dir, const char *file, void *arg)
 		goto out;
 	}
 	if ((entry->modalias = strdup(modalias)) == NULL) {
+	        free(entry);	    
 		ret = -1;
 		goto out;
 	}
@@ -146,6 +147,10 @@ struct Modalias::Impl
 	: _modaliases(0)
     {
 	foreach_file( "/sys/bus", iterate_busses, &_modaliases );
+	char path[PATH_MAX];
+	const char *dir = getenv("ZYPP_MODALIAS_SYSFS");
+	snprintf(path, sizeof(path), "%s/bus", dir ? dir : "/sys");
+	foreach_file( path, iterate_busses, &_modaliases );
     }
 
     /** Dtor. */
