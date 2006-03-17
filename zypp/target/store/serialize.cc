@@ -300,7 +300,7 @@ std::string toXML( const Product::constPtr &obj )
   {
     out << "    <product-flag>" << xml_escape(*it) << "</product-flag>" << std::endl; 
   }
-  out << "  <product-flags>" << std::endl;
+  out << "  </product-flags>" << std::endl;
   
   out << "</product>" << std::endl;
 
