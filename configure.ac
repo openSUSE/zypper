@@ -216,7 +216,8 @@ AC_OUTPUT(	 po/Makefile.in\
 	zypp/parser/yum/Makefile	\
 	zypp/parser/yum/schema/Makefile \
   zypp/parser/tagfile/Makefile  \
-  zypp/parser/xmlstore/Makefile \
+	zypp/parser/xmlstore/Makefile   \
+	zypp/parser/xmlstore/schema/Makefile   \
   zypp/parser/xmlstore/schema/Makefile  \
 	zypp/pool/Makefile		\
 	zypp/solver/Makefile		\
