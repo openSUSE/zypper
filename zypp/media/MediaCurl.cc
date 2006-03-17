@@ -238,6 +238,49 @@ void MediaCurl::attachTo (bool next)
     if ( ret != 0 ) {
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
+
+    if( !_url.getQueryParam("auth").empty() &&
+	(_url.getScheme() == "http" || _url.getScheme() == "https"))
+    {
+      std::vector<std::string>                 list;
+      std::vector<std::string>::const_iterator it;
+      str::split(_url.getQueryParam("auth"), std::back_inserter(list), ",");
+
+      long auth = CURLAUTH_NONE;
+      for(it = list.begin(); it != list.end(); ++it)
+      {
+	if(*it == "basic")
+	  auth |= CURLAUTH_BASIC;
+	else
+	if(*it == "digest")
+	  auth |= CURLAUTH_DIGEST;
+	else
+	if(*it == "ntlm")
+	  auth |= CURLAUTH_NTLM;
+	/*
+	else
+	if(*it == "gssnego")
+	  auth |= CURLAUTH_GSSNEGOTIATE;
+	*/
+	else
+	{
+	  ZYPP_THROW(MediaBadUrlException(_url,
+	    std::string("Unsupported HTTP auth method: ") + *it
+	  ));
+	}
+      }
+
+      if( auth != CURLAUTH_NONE)
+      {
+	DBG << "Setting HTTP auth method types to: "
+	    << _url.getQueryParam("auth") << std::endl;
+
+	ret = curl_easy_setopt( _curl, CURLOPT_HTTPAUTH, auth);
+	if ( ret != 0 ) {
+	  ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+	}
+      }
+    }
   }
 
   /*---------------------------------------------------------------*
