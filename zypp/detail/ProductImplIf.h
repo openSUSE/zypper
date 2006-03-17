@@ -48,9 +48,6 @@ namespace zypp
       /** Get the vendor of the product */
       virtual Label vendor() const PURE_VIRTUAL;
 
-      /** Get the name of the product to be presented to user */
-      virtual Label displayName( const Locale & locale_r = Locale() ) const PURE_VIRTUAL;
-      
       virtual Url releaseNotesUrl() const PURE_VIRTUAL;
 
       /** The product flags */

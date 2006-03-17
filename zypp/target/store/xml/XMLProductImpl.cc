@@ -40,8 +40,11 @@ namespace zypp
     Label XMLProductImpl::vendor() const 
     { return _vendor; } 
 
-    Label XMLProductImpl::displayName( const Locale & ) const 
-    { return _displayname.text(); }
+    Label XMLProductImpl::summary( const Locale & ) const 
+    { return _summary.text(); }
+    
+    Label XMLProductImpl::description( const Locale & ) const 
+    { return _description.text(); }
     
     Url XMLProductImpl::releaseNotesUrl() const
     { return _release_notes_url; }

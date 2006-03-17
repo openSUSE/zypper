@@ -50,9 +50,6 @@ namespace zypp
   Label Product::vendor() const
   { return pimpl().vendor(); }
 
-  Label Product::displayName() const
-  { return pimpl().displayName(); }
-  
   Url Product::releaseNotesUrl() const
   { return pimpl().releaseNotesUrl(); }
 

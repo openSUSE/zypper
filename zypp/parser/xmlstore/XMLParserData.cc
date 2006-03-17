@@ -120,7 +120,7 @@ namespace zypp {
           << "  type: " << data.type << endl
           << "  vendor: " << data.vendor << endl
           << "  name: " << data.name << endl
-          << "  display name: " << data.displayname << endl
+          << "  summary: " << data.summary << endl
           << "  description: " << data.description << endl
           << "  epoch: " << data.epoch << endl
           << "  version: " << data.ver << endl

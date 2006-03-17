@@ -781,7 +781,7 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
     impl->_category = parsed.type;
     impl->_vendor = parsed.vendor;
     #warning "FIX when YUM parser uses TranslatedString"
-    impl->_displayname = parsed.displayname;
+    impl->_summary = parsed.summary;
     impl->_description = parsed.description;
     
     if ( parsed.releasenotesurl.size() > 0 )

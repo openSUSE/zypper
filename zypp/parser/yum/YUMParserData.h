@@ -432,7 +432,7 @@ namespace zypp {
         std::string type;
         std::string vendor;
         std::string name; 
-        TranslatedText displayname;
+        TranslatedText summary;
         TranslatedText description;
         // those are suse specific tags
         std::string releasenotesurl;

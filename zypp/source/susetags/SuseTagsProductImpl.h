@@ -39,7 +39,7 @@ namespace zypp
 
       virtual std::string category() const;
       virtual Label vendor() const;
-      virtual Label displayName( const Locale & locale_r = Locale() ) const;
+      virtual Label summary( const Locale & locale_r = Locale() ) const;
       virtual Source_Ref source() const;
       virtual Url releaseNotesUrl() const;
       virtual std::list<std::string> flags() const;

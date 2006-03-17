@@ -46,9 +46,6 @@ namespace zypp
     /** Get the vendor of the product */
     Label vendor() const;
 
-    /** Get the name of the product to be presented to user */
-    Label displayName() const;
-
     /** The URL to download the release notes for this product */
     Url releaseNotesUrl() const;
 

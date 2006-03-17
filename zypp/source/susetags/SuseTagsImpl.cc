@@ -347,7 +347,7 @@ namespace zypp
           DBG << "Going to parse content file " << _content_file << endl;
           Product::Ptr product = parseContentFile( _content_file, factory.createFrom(this) );
 
-          MIL << "Product: " << product->displayName() << endl;
+          MIL << "Product: " << product->summary() << endl;
           store.insert( product );
         }
         catch (Exception & excpt_r) {

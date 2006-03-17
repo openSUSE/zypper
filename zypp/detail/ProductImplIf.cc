@@ -28,10 +28,6 @@ namespace zypp
       Label ProductImplIf::vendor() const 
       { return Label(); } 
 
-      /** Get the name of the product to be presented to user */
-      Label ProductImplIf::displayName( const Locale & ) const 
-      { return Label(); }
-      
       Url ProductImplIf::releaseNotesUrl() const
       { return Url(); }
 
