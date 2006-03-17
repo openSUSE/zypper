@@ -74084,7 +74084,7 @@
   </provides>
   <enhances>
     <dep name='modalias(pci:v00008086d00001043sv0000103Csd00002741bc*sc*i*)' />
-    <dep name='modalias(pci:v00008086d00001043sv00008086sd0000252[0123456789BCD]bc*' />
+    <dep name='modalias(pci:v00008086d00001043sv00008086sd0000252[0123456789BCD]bc*)' />
     <dep name='modalias(pci:v00008086d00001043sv00008086sd0000255[01345]bc*sc*i*)' />
     <dep name='modalias(pci:v00008086d00001043sv00008086sd0000256[0123567]bc*sc*i*)' />
     <dep name='modalias(pci:v00008086d00001043sv00008086sd000025[78]0bc*sc*i*)' />
