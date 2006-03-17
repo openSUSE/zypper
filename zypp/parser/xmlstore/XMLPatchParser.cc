@@ -67,53 +67,20 @@ namespace zypp {
         patchPtr->rebootNeeded = false;
         patchPtr->packageManager = false;
       
+        parseResObjectCommonData( patchPtr, dataNode);
+        parseDependencies( patchPtr, dataNode);
+        
         for (xmlNodePtr child = dataNode->children; child && child != dataNode; child = child->next)
         {
-          if (_helper.isElement(child)) {
+          if (_helper.isElement(child))
+          {
             string name = _helper.name(child);
-            if (name == "name") {
-            patchPtr->name = _helper.content(child);
-            }
-            else if (name == "summary") {
+            
+            if (name == "summary") {
               patchPtr->summary.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
             }
             else if (name == "description") {
               patchPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
-            }
-            else if (name == "version") {
-              patchPtr->epoch = _helper.attribute(child,"epoch");
-              patchPtr->ver = _helper.attribute(child,"ver");
-              patchPtr->rel = _helper.attribute(child,"rel");
-            }
-            else if (name == "provides") {
-              parseDependencyEntries(& patchPtr->provides, child);
-            }
-            else if (name == "conflicts") {
-              parseDependencyEntries(& patchPtr->conflicts, child);
-            }
-            else if (name == "obsoletes") {
-              parseDependencyEntries(& patchPtr->obsoletes, child);
-            }
-            else if (name == "prerequires") {
-              parseDependencyEntries(& patchPtr->prerequires, child);
-            }
-            else if (name == "requires") {
-              parseDependencyEntries(& patchPtr->requires, child);
-            }
-            else if (name == "recommends") {
-              parseDependencyEntries(& patchPtr->recommends, child);
-            }
-            else if (name == "suggests") {
-              parseDependencyEntries(& patchPtr->suggests, child);
-            }
-            else if (name == "supplements") {
-              parseDependencyEntries(& patchPtr->supplements, child);
-            }
-            else if (name == "enhances") {
-              parseDependencyEntries(& patchPtr->enhances, child);
-            }
-            else if (name == "freshens") {
-              parseDependencyEntries(& patchPtr->freshens, child);
             }
             else if (name == "category") {
             patchPtr->category = _helper.content(child);
@@ -129,10 +96,6 @@ namespace zypp {
             }
             else if (name == "atoms") {
               parseAtomsNode(patchPtr, child);
-            }
-            else {
-              WAR << "XML <data> contains the unknown element <" << name << "> "
-                << _helper.positionInfo(child) << ", skipping" << endl;
             }
           }
         }
@@ -162,10 +125,6 @@ namespace zypp {
             {
                 parseMessageNode (dataPtr, child);
             }
-            else {
-              WAR << "XML <atoms> contains the unknown element <" << name << "> "
-                << _helper.positionInfo(child) << ", skipping" << endl;
-            }
           }
         }
       } 
@@ -173,17 +132,21 @@ namespace zypp {
       void
       XMLPatchParser::parseAtomNode(XMLPatchData_Ptr dataPtr, xmlNodePtr formatNode)
       {
-        shared_ptr<XMLPatchAtomData> atom(new XMLPatchAtomData);
+        XMLPatchAtomData_Ptr atom(new XMLPatchAtomData);
         // inject dependencies and other stuff
-        parseResolvableNode( dataPtr, formatNode);        
+        parseResObjectCommonData( atom, formatNode);
+        parseDependencies( atom, formatNode);
+              
         dataPtr->atoms.push_back(atom);
       }
       
       void
       XMLPatchParser::parseScriptNode(XMLPatchData_Ptr dataPtr, xmlNodePtr formatNode)
       {
-        shared_ptr<XMLPatchScriptData> script(new XMLPatchScriptData);
-        parseResolvableNode( dataPtr, formatNode);
+        XMLPatchScriptData_Ptr script(new XMLPatchScriptData);
+        
+        parseResObjectCommonData( script, formatNode);
+        parseDependencies( script, formatNode);
         
         for (xmlNodePtr child = formatNode->children;  child != 0; child = child ->next)
         { 
@@ -197,10 +160,6 @@ namespace zypp {
             {
               script->undo_script = _helper.content(child);
             }
-            else
-            {
-              WAR << "XML <atoms/script> contains the unknown element <" << name << "> " << _helper.positionInfo(child) << ", skipping" << endl;
-            }
           }
         }
         dataPtr->atoms.push_back(script);
@@ -209,7 +168,10 @@ namespace zypp {
       void
       XMLPatchParser::parseMessageNode(XMLPatchData_Ptr dataPtr, xmlNodePtr formatNode)
       {
-        shared_ptr<XMLPatchMessageData> message(new XMLPatchMessageData);
+        XMLPatchMessageData_Ptr message(new XMLPatchMessageData);
+        
+        parseResObjectCommonData( message, formatNode);
+        parseDependencies( message, formatNode);
         
         for (xmlNodePtr child = formatNode->children;  child != 0; child = child ->next)
         {
@@ -219,70 +181,11 @@ namespace zypp {
             if (name == "text") {
               message->text.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
             }
-            else {
-              WAR << "XML <atoms/message> contains the unknown element <" << name << "> " << _helper.positionInfo(child) << ", skipping" << endl;
-            }
           }
         }        
-        parseResolvableNode( dataPtr, formatNode);
         dataPtr->atoms.push_back(message);
       }
 
-      void XMLPatchParser::parseResolvableNode(XMLResObjectData_Ptr dataPtr, xmlNodePtr formatNode)
-      {
-        for (xmlNodePtr child = formatNode->children; child != 0; child = child ->next)
-        {
-          if (_helper.isElement(child))
-          {
-            string name = _helper.name(child);
-            if (name == "name") {
-              dataPtr->name = _helper.content(child);
-            }
-            else if (name == "version") {
-              dataPtr->epoch = _helper.attribute(child,"epoch");
-              dataPtr->ver = _helper.attribute(child,"ver");
-              dataPtr->rel = _helper.attribute(child,"rel");
-            }
-            else if (name == "arch") {
-              dataPtr->arch = _helper.content(child);
-            }
-            else if (name == "provides") {
-              parseDependencyEntries(& dataPtr->provides, child);
-            }
-            else if (name == "conflicts") {
-              parseDependencyEntries(& dataPtr->conflicts, child);
-            }
-            else if (name == "obsoletes") {
-              parseDependencyEntries(& dataPtr->obsoletes, child);
-            }
-            else if (name == "requires") {
-              parseDependencyEntries(& dataPtr->requires, child);
-            }
-            else if (name == "recommends") {
-              parseDependencyEntries(& dataPtr->recommends, child);
-            }
-            else if (name == "suggests") {
-              parseDependencyEntries(& dataPtr->suggests, child);
-            }
-            else if (name == "supplements") {
-              parseDependencyEntries(& dataPtr->supplements, child);
-            }
-            else if (name == "enhances") {
-              parseDependencyEntries(& dataPtr->enhances, child);
-            }
-            else if (name == "freshens") {
-              parseDependencyEntries(& dataPtr->freshens, child);
-            }
-            else {
-              WAR << "XML <atoms/" << _helper.name(formatNode) << "> contains the unknown element <"
-                  << name << "> "
-                  << _helper.positionInfo(child) << ", skipping" << endl;
-            }
-          }
-        }
-      }
-
-      
     } // namespace yum
   } // namespace parser
 } // namespace zypp

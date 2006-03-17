@@ -37,11 +37,75 @@ XMLResObjectParser::~XMLResObjectParser()
 {
 }
 
-void parseResObjectEntries( XMLResObjectData *data,  xmlNodePtr depNode)
+
+void
+XMLResObjectParser::parseResObjectCommonData( XMLResObjectData_Ptr dataPtr, xmlNodePtr node)
 {
-  xml_assert(data);
-  xml_assert(depNode); 
-  
+  xml_assert(node);
+
+  for (xmlNodePtr child = node->children; child != 0; child = child ->next)
+  {
+    if (_helper.isElement(child))
+    {
+      string name = _helper.name(child);
+
+      if (name == "name") {
+        dataPtr->name = _helper.content(child);
+      }
+      else if (name == "arch") {
+        dataPtr->arch = _helper.content(child);
+      }
+      else if (name == "version") {
+        dataPtr->epoch = _helper.attribute(child,"epoch");
+        dataPtr->ver = _helper.attribute(child,"ver");
+        dataPtr->rel = _helper.attribute(child,"rel");
+      }
+    }
+  }
+} 
+
+void
+    XMLResObjectParser::parseDependencies( XMLResObjectData_Ptr dataPtr, xmlNodePtr node)
+{
+  xml_assert(node);
+
+  for (xmlNodePtr child = node->children; child != 0; child = child ->next)
+  {
+    if (_helper.isElement(child))
+    {
+      string name = _helper.name(child);
+      if (name == "provides") {
+        parseDependencyEntries(& dataPtr->provides, child);
+      }
+      else if (name == "conflicts") {
+        parseDependencyEntries(& dataPtr->conflicts, child);
+      }
+      else if (name == "obsoletes") {
+        parseDependencyEntries(& dataPtr->obsoletes, child);
+      }
+      else if (name == "prerequires") {
+        parseDependencyEntries(& dataPtr->prerequires, child);
+      }
+      else if (name == "requires") {
+        parseDependencyEntries(& dataPtr->requires, child);
+      }
+      else if (name == "recommends") {
+        parseDependencyEntries(& dataPtr->recommends, child);
+      }
+      else if (name == "suggests") {
+        parseDependencyEntries(& dataPtr->suggests, child);
+      }
+      else if (name == "supplements") {
+        parseDependencyEntries(& dataPtr->supplements, child);
+      }
+      else if (name == "enhances") {
+        parseDependencyEntries(& dataPtr->enhances, child);
+      }
+      else if (name == "freshens") {
+        parseDependencyEntries(& dataPtr->freshens, child);
+      }
+    }
+  } 
   
 }
 
@@ -49,7 +113,6 @@ void
 XMLResObjectParser::parseDependencyEntries(list<XMLDependency> *depList,
                                               xmlNodePtr depNode)
 {
-  xml_assert(depList);
   xml_assert(depNode);
 
   for (xmlNodePtr child = depNode->children; child != 0; child = child ->next)
@@ -66,7 +129,7 @@ XMLResObjectParser::parseDependencyEntries(list<XMLDependency> *depList,
       }
       else
       {
-        WAR << "XML dependency within <format> contains the unknown element <" << name << "> "
+        WAR << "XML dependency contains the unknown element <" << name << "> "
           << _helper.positionInfo(child) << ", skipping" << endl;
       }
     }

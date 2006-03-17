@@ -59,16 +59,16 @@ namespace zypp {
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         xml_assert(dataNode);
         productPtr->type = _helper.attribute(dataNode,"type");
-      
+              
+        parseResObjectCommonData( productPtr, dataNode);
+        parseDependencies( productPtr, dataNode);
+        
         for (xmlNodePtr child = dataNode->children; child && child != dataNode; child = child->next)
         {
           if (_helper.isElement(child))
           {
             string name = _helper.name(child);
-            if (name == "name") {
-	      productPtr->name = _helper.content(child);
-            }
-            else if (name == "vendor") {
+            if (name == "vendor") {
 	      productPtr->vendor = _helper.content(child);
             }
             else if (name == "release-notes-url") {
@@ -79,45 +79,6 @@ namespace zypp {
             }
             else if (name == "description") {
               productPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
-            }
-            else if (name == "version") {
-              productPtr->epoch = _helper.attribute(child,"epoch");
-              productPtr->ver = _helper.attribute(child,"ver");
-              productPtr->rel = _helper.attribute(child,"rel");
-            }
-            else if (name == "provides") {
-              parseDependencyEntries(& productPtr->provides, child);
-            }
-            else if (name == "conflicts") {
-              parseDependencyEntries(& productPtr->conflicts, child);
-            }
-            else if (name == "obsoletes") {
-              parseDependencyEntries(& productPtr->obsoletes, child);
-            }
-            else if (name == "prerequires") {
-              parseDependencyEntries(& productPtr->prerequires, child);
-            }
-            else if (name == "requires") {
-              parseDependencyEntries(& productPtr->requires, child);
-            }
-            else if (name == "recommends") {
-              parseDependencyEntries(& productPtr->recommends, child);
-            }
-            else if (name == "suggests") {
-              parseDependencyEntries(& productPtr->suggests, child);
-            }
-            else if (name == "supplements") {
-              parseDependencyEntries(& productPtr->supplements, child);
-            }
-            else if (name == "enhances") {
-              parseDependencyEntries(& productPtr->enhances, child);
-            }
-            else if (name == "freshens") {
-              parseDependencyEntries(& productPtr->freshens, child);
-            }
-            else {
-              WAR << "XML <data> contains the unknown element <" << name << "> "
-                << _helper.positionInfo(child) << ", skipping" << endl;
             }
           }
         }

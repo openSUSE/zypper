@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/parser/yum/XMLResObjectParser.h
+/** \file zypp/parser/xmlstore/XMLResObjectParser.h
  *
 */
 
@@ -31,10 +31,8 @@ namespace zypp {
         virtual ~XMLResObjectParser();
     
       protected:
-        // FIXME move needed method to a common class, inherit it
-        friend class XMLProductParser;
-//        friend class XMLPatternParser;
-        //void parseResObjectEntries( XMLResObjectData *data,  xmlNodePtr depNode); 
+        void parseResObjectCommonData( XMLResObjectData_Ptr dataPtr, xmlNodePtr node);
+        void parseDependencies( XMLResObjectData_Ptr dataPtr, xmlNodePtr depNode);
         void parseDependencyEntries(std::list<XMLDependency> *depList,  xmlNodePtr depNode);    
         LibXMLHelper _helper;
       };

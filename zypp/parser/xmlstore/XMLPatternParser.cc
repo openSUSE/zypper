@@ -55,79 +55,39 @@ namespace zypp {
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         xml_assert(dataNode);
         
-        for (xmlNodePtr child = dataNode->children;
-             child && child != dataNode;
-             child = child->next) {
-               if (_helper.isElement(child)) {
-                 string name = _helper.name(child);
-                 if (name == "name") {
-                   dataPtr->name = _helper.content(child);
-                 }
-                 else if (name == "arch") {
-                   dataPtr->arch = _helper.content(child);
-                 }
-                 else if (name == "version") {
-                   dataPtr->epoch = _helper.attribute(child,"epoch");
-                   dataPtr->ver = _helper.attribute(child,"ver");
-                   dataPtr->rel = _helper.attribute(child,"rel");
-                 }
-                 else if (name == "summary") {
-                   dataPtr->summary.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
-                 }
-                 else if (name == "default") {
-                   dataPtr->default_ = _helper.content(child);
-                 }
-                 else if (name == "uservisible") {
-                   dataPtr->userVisible = _helper.content(child);
-                 }
-                 else if (name == "description") {
-                   dataPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
-                 }
-		 else if (name == "category") {
-		   dataPtr->category.setText(_helper.content(child));
-		 }
-		 else if (name == "icon") {
-		   dataPtr->icon = _helper.content(child);
-		 }
-		 else if (name == "script") {
-		   dataPtr->script = _helper.content(child);
-		 }
-                 else if (name == "provides") {
-		   parseDependencyEntries(& dataPtr->provides, child);
-		 }
-		 else if (name == "conflicts") {
-		   parseDependencyEntries(& dataPtr->conflicts, child);
-		 }
-		 else if (name == "obsoletes") {
-		   parseDependencyEntries(& dataPtr->obsoletes, child);
-		 }
-                 else if (name == "prerequires") {
-                   parseDependencyEntries(& dataPtr->prerequires, child);
-                 }
-		 else if (name == "requires") {
-		   parseDependencyEntries(& dataPtr->requires, child);
-		 }
-		 else if (name == "recommends") {
-		   parseDependencyEntries(& dataPtr->recommends, child);
-		 }
-		 else if (name == "suggests") {
-		   parseDependencyEntries(& dataPtr->suggests, child);
-		 }
-		 else if (name == "supplements") {
-		   parseDependencyEntries(& dataPtr->supplements, child);
-		 }
-		 else if (name == "enhances") {
-		   parseDependencyEntries(& dataPtr->enhances, child);
-		 }
-		 else if (name == "freshens") {
-		   parseDependencyEntries(& dataPtr->freshens, child);
-		 }
-                 else {
-                   WAR << "XML <pattern> contains the unknown element <" << name << "> "
-                     << _helper.positionInfo(child) << ", skipping" << endl;
-                 }
-               }
-             }
+        parseResObjectCommonData( dataPtr, dataNode);
+        parseDependencies( dataPtr, dataNode);
+        
+        for (xmlNodePtr child = dataNode->children; child && child != dataNode; child = child->next)
+        {
+          if (_helper.isElement(child))
+          {
+            string name = _helper.name(child);
+            
+            if (name == "summary")
+            {
+              dataPtr->summary.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
+            }
+            else if (name == "default") {
+              dataPtr->default_ = _helper.content(child);
+            }
+            else if (name == "uservisible") {
+              dataPtr->userVisible = _helper.content(child);
+            }
+            else if (name == "description") {
+              dataPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
+            }
+            else if (name == "category") {
+              dataPtr->category.setText(_helper.content(child));
+            }
+            else if (name == "icon") {
+              dataPtr->icon = _helper.content(child);
+            }
+            else if (name == "script") {
+              dataPtr->script = _helper.content(child);
+            }
+          }
+        }
         return dataPtr;
       } /* end process */
       

@@ -664,7 +664,7 @@ XMLFilesBackend::createPatch( const zypp::parser::xmlstore::XMLPatchData & parse
     
     // now process the atoms
     ResObject::Ptr atom;
-    for (std::list<shared_ptr<XMLPatchAtomData> >::const_iterator it = parsed.atoms.begin(); it != parsed.atoms.end(); it++)
+    for (std::list<XMLPatchAtomData_Ptr >::const_iterator it = parsed.atoms.begin(); it != parsed.atoms.end(); it++)
     {
       switch ((*it)->atomType())
       {
@@ -677,21 +677,21 @@ XMLFilesBackend::createPatch( const zypp::parser::xmlstore::XMLPatchData & parse
           // the patch require the atom, the atom require and freshens the package.
           
           // get the parsed patch atom data
-          shared_ptr<XMLPatchAtomData> atom_data = dynamic_pointer_cast<XMLPatchAtomData>(*it);
+          XMLPatchAtomData_Ptr atom_data = dynamic_pointer_cast<XMLPatchAtomData>(*it);
           atom = createAtom(*atom_data);
           impl->_atoms.push_back(atom);
           break;
         }
         case XMLPatchAtomData::Message:
         {
-          shared_ptr<XMLPatchMessageData> message_data = dynamic_pointer_cast<XMLPatchMessageData>(*it);
+          XMLPatchMessageData_Ptr message_data = dynamic_pointer_cast<XMLPatchMessageData>(*it);
           atom = createMessage(*message_data);
           impl->_atoms.push_back(atom);
           break;
         }
         case XMLPatchAtomData::Script:
         {
-          shared_ptr<XMLPatchScriptData> script_data = dynamic_pointer_cast<XMLPatchScriptData>(*it);
+          XMLPatchScriptData_Ptr script_data = dynamic_pointer_cast<XMLPatchScriptData>(*it);
           atom = createScript(*script_data);
           impl->_atoms.push_back(atom);
           break;

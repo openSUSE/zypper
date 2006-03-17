@@ -26,6 +26,14 @@ namespace zypp {
   namespace parser {
     namespace xmlstore {
       
+      DEFINE_PTR_TYPE(XMLResObjectData);
+      DEFINE_PTR_TYPE(XMLProductData);
+      DEFINE_PTR_TYPE(XMLPatternData);
+      DEFINE_PTR_TYPE(XMLPatchData);
+      DEFINE_PTR_TYPE(XMLPatchAtomData);
+      DEFINE_PTR_TYPE(XMLPatchMessageData);
+      DEFINE_PTR_TYPE(XMLPatchScriptData);
+      
       /**
       * @short Holds dependency data
       */
@@ -65,11 +73,11 @@ namespace zypp {
       {
       public:
         XMLPatternData();
-        std::string name;
         TranslatedText summary;
+        TranslatedText description;
+        
         std::string default_;
         std::string userVisible;
-        TranslatedText description;
         TranslatedText category;
         std::string icon;
         std::string script;
@@ -83,7 +91,6 @@ namespace zypp {
 
         std::string type;
         std::string vendor;
-        std::string name; 
         TranslatedText displayname;
         TranslatedText description;
         // those are suse specific tags
@@ -112,17 +119,7 @@ namespace zypp {
           XMLPatchMessageData() {};
           virtual AtomType atomType() { return Message; };
           TranslatedText text;
-      };
-      
-      /*
-      class XMLPatchPackageData : public XMLPatchAtomData
-      {
-        public:
-          XMLPatchPackageData() {};
-          virtual AtomType atomType() { return Package; };
-          TranslatedText text;
-      };
-      */      
+      };     
       
       class XMLPatchData : public XMLResObjectData
       {
@@ -141,7 +138,7 @@ namespace zypp {
           bool rebootNeeded;
           bool packageManager;
           std::string updateScript;
-          std::list<shared_ptr<XMLPatchAtomData> > atoms;
+          std::list<XMLPatchAtomData_Ptr > atoms;
       };
 
             
@@ -150,14 +147,7 @@ namespace zypp {
       std::ostream& operator<<(std::ostream &out, const XMLPatternData& data);
       std::ostream& operator<<(std::ostream& out, const XMLProductData& data);
       
-      DEFINE_PTR_TYPE(XMLResObjectData);
-      DEFINE_PTR_TYPE(XMLProductData);
-      DEFINE_PTR_TYPE(XMLPatternData);
-      DEFINE_PTR_TYPE(XMLPatchData);
-      DEFINE_PTR_TYPE(XMLPatchAtomData);
-      DEFINE_PTR_TYPE(XMLPatchMessageData);
-      DEFINE_PTR_TYPE(XMLPatchScriptData);
-      DEFINE_PTR_TYPE(XMLPatchPackageData);
+      
     } // namespace xmlstore
   } // namespace parser
 } // namespace zypp
