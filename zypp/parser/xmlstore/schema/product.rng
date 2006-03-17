@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="http://www.novell.com/metadata/zypp/xml-store" xmlns="http://relaxng.org/ns/structure/1.0">
+  <include href="resolvable.rng"/>
+  <start>
+    <ref name="element-product"/>
+  </start>
+  <define name="element-product">
+    <element name="product">
+      <attribute name="type"/>
+      <ref name="product"/>
+    </element>
+  </define>
+  <define name="product">
+    <ref name="resolvable-data"/>
+    <oneOrMore>
+      <ref name="element-summary"/>
+    </oneOrMore>
+    <oneOrMore>
+      <ref name="element-description"/>
+    </oneOrMore>
+    <element name="vendor">
+      <text/>
+    </element>
+    <element name="source">
+      <text/>
+    </element>
+    <element name="release-notes-url">
+      <text/>
+    </element>
+    <element name="product-flags">
+      <zeroOrMore>
+        <element name="product-flag">
+          <text/>
+        </element>
+      </zeroOrMore>
+    </element>
+  </define>
+</grammar>

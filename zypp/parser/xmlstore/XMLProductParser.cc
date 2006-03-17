@@ -30,7 +30,7 @@ namespace zypp {
       { }
       
       XMLProductParser::XMLProductParser(istream &is, const string& baseUrl)
-        : XMLNodeIterator<XMLProductData_Ptr>(is, baseUrl /*,PRODUCTSCHEMA*/)
+        : XMLNodeIterator<XMLProductData_Ptr>(is, baseUrl ,PRODUCTSCHEMA)
       {
         fetchNext();
       }

@@ -1,0 +1,18 @@
+default namespace = "http://www.novell.com/metadata/zypp/xml-store"
+
+include "resolvable.rnc"
+
+start = element-product
+
+element-product =
+  element product { attribute type { text }, product }
+  
+product =
+   resolvable-data,
+   element-summary+,
+   element-description+,
+   element vendor { text },
+   element source { text },
+   element release-notes-url { text },
+   element product-flags { element product-flag {text }* }
+   
