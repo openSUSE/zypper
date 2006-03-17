@@ -19,7 +19,8 @@
 #include "zypp/media/MediaCurl.h"
 #include "zypp/media/proxyinfo/ProxyInfos.h"
 #include "zypp/media/ProxyInfo.h"
-
+#include "zypp/thread/Once.h"
+#include <cstdlib>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/mount.h>
@@ -31,13 +32,49 @@
 using namespace std;
 using namespace zypp::base;
 
+namespace
+{
+  zypp::thread::OnceFlag g_InitOnceFlag = PTHREAD_ONCE_INIT;
+  zypp::thread::OnceFlag g_FreeOnceFlag = PTHREAD_ONCE_INIT;
+
+  extern "C" void _do_free_once()
+  {
+    curl_global_cleanup();
+  }
+
+  extern "C" void globalFreeOnce()
+  {
+    zypp::thread::callOnce(g_FreeOnceFlag, _do_free_once);
+  }
+
+  extern "C" void _do_init_once()
+  {
+    CURLcode ret = curl_global_init( CURL_GLOBAL_ALL );
+    if ( ret != 0 )
+    {
+      WAR << "curl global init failed" << endl;
+    }
+
+    //
+    // register at exit handler ?
+    // this may cause trouble, because we can protect it
+    // against ourself only.
+    // if the app sets an atexit handler as well, it will
+    // cause a double free while the second of them runs.
+    //
+    //std::atexit( globalFreeOnce);
+  }
+
+  inline void globalInitOnce()
+  {
+    zypp::thread::callOnce(g_InitOnceFlag, _do_init_once);
+  }
+}
+
 namespace zypp {
   namespace media {
 
-Pathname MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
-
-bool MediaCurl::_globalInit = false;
-
+Pathname    MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
 std::string MediaCurl::_agent = "Novell ZYPP Installer";
 
 ///////////////////////////////////////////////////////////////////
@@ -73,9 +110,11 @@ MediaCurl::MediaCurl( const Url &      url_r,
     : MediaHandler( url_r, attach_point_hint_r,
 		    "/", // urlpath at attachpoint
 		    true ), // does_download
-      _curl( 0 ), _connected( false )
+      _curl( NULL )
 {
   MIL << "MediaCurl::MediaCurl(" << url_r << ", " << attach_point_hint_r << ")" << endl;
+
+  globalInitOnce();
 
   if( !attachPoint().empty())
   {
@@ -96,14 +135,6 @@ MediaCurl::MediaCurl( const Url &      url_r,
     if( atemp != NULL)
       ::free(atemp);
   }
-
-  if ( ! _globalInit )
-    {
-      _globalInit = true;
-      CURLcode ret = curl_global_init( CURL_GLOBAL_ALL );
-      if ( ret != 0 )
-        WAR << "curl global init failed" << endl;
-    }
 }
 
 void MediaCurl::setCookieFile( const Pathname &fileName )
@@ -127,34 +158,59 @@ void MediaCurl::attachTo (bool next)
   if ( !_url.isValid() )
     ZYPP_THROW(MediaBadUrlException(_url));
 
+  curl_version_info_data *curl_info = NULL;
+  curl_info = curl_version_info(CURLVERSION_NOW);
+  // curl_info does not need any free (is static)
+  if (curl_info->protocols)
+  {
+    const char * const *proto;
+    std::string        scheme( _url.getScheme());
+    bool               found = false;
+    for(proto=curl_info->protocols; !found && *proto; ++proto)
+    {
+      if( scheme == std::string((const char *)*proto))
+	found = true;
+    }
+    if( !found)
+    {
+      std::string msg("Unsupported protocol '");
+      msg += scheme;
+      msg += "'";
+      ZYPP_THROW(MediaBadUrlException(_url, msg));
+    }
+  }
+
   if( !isUseableAttachPoint(attachPoint()))
   {
     std::string mountpoint = createAttachPoint().asString();
 
     if( mountpoint.empty())
       ZYPP_THROW( MediaBadAttachPointException(url()));
-      setAttachPoint( mountpoint, true);
+
+    setAttachPoint( mountpoint, true);
   }
 
+  disconnectFrom(); // clean _curl if needed
   _curl = curl_easy_init();
   if ( !_curl ) {
     ZYPP_THROW(MediaCurlInitException(_url));
   }
 
-  _connected = true;
-
   CURLcode ret = curl_easy_setopt( _curl, CURLOPT_ERRORBUFFER, _curlError );
   if ( ret != 0 ) {
+    disconnectFrom();
     ZYPP_THROW(MediaCurlSetOptException(_url, "Error setting error buffer"));
   }
 
   ret = curl_easy_setopt( _curl, CURLOPT_FAILONERROR, true );
   if ( ret != 0 ) {
+    disconnectFrom();
     ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
 
   ret = curl_easy_setopt( _curl, CURLOPT_NOSIGNAL, 1 );
   if ( ret != 0 ) {
+    disconnectFrom();
     ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
 
@@ -170,6 +226,7 @@ void MediaCurl::attachTo (bool next)
   **
   ret = curl_easy_setopt( _curl, CURLOPT_TIMEOUT, 600 );
   if ( ret != 0 ) {
+    disconnectFrom();
     ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
   */
@@ -179,14 +236,17 @@ void MediaCurl::attachTo (bool next)
     // an HTTP header (#113275)
     ret = curl_easy_setopt ( _curl, CURLOPT_FOLLOWLOCATION, true );
     if ( ret != 0) {
+      disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
     ret = curl_easy_setopt ( _curl, CURLOPT_MAXREDIRS, 3L );
     if ( ret != 0) {
+      disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
     ret = curl_easy_setopt ( _curl, CURLOPT_USERAGENT, _agent.c_str() );
     if ( ret != 0) {
+      disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
   }
@@ -194,18 +254,22 @@ void MediaCurl::attachTo (bool next)
   if ( _url.getScheme() == "https" ) {
     ret = curl_easy_setopt( _curl, CURLOPT_SSL_VERIFYPEER, 1 );
     if ( ret != 0 ) {
+      disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
     ret = curl_easy_setopt( _curl, CURLOPT_CAPATH, "/etc/ssl/certs/" );
     if ( ret != 0 ) {
+      disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
     ret = curl_easy_setopt( _curl, CURLOPT_SSL_VERIFYHOST, 2 );
     if ( ret != 0 ) {
+      disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
     ret = curl_easy_setopt ( _curl, CURLOPT_USERAGENT, _agent.c_str() );
     if ( ret != 0) {
+      disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
   }
@@ -236,6 +300,7 @@ void MediaCurl::attachTo (bool next)
     _userpwd = unEscape( _userpwd );
     ret = curl_easy_setopt( _curl, CURLOPT_USERPWD, _userpwd.c_str() );
     if ( ret != 0 ) {
+      disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
 
@@ -250,33 +315,51 @@ void MediaCurl::attachTo (bool next)
       for(it = list.begin(); it != list.end(); ++it)
       {
 	if(*it == "basic")
+	{
 	  auth |= CURLAUTH_BASIC;
+	}
 	else
 	if(*it == "digest")
+	{
 	  auth |= CURLAUTH_DIGEST;
+	}
 	else
-	if(*it == "ntlm")
+	if((curl_info && (curl_info->features & CURL_VERSION_NTLM)) &&
+	   (*it == "ntlm"))
+	{
 	  auth |= CURLAUTH_NTLM;
-	/*
+	}
 	else
-	if(*it == "gssnego")
+	if((curl_info && (curl_info->features & CURL_VERSION_SPNEGO)) &&
+	   (*it == "spnego" || *it == "negotiate"))
+	{
+	  // there is no separate spnego flag for auth
 	  auth |= CURLAUTH_GSSNEGOTIATE;
-	*/
+	}
+	else
+	if((curl_info && (curl_info->features & CURL_VERSION_GSSNEGOTIATE)) &&
+	   (*it == "gssnego" || *it == "negotiate"))
+	{
+	  auth |= CURLAUTH_GSSNEGOTIATE;
+	}
 	else
 	{
-	  ZYPP_THROW(MediaBadUrlException(_url,
-	    std::string("Unsupported HTTP auth method: ") + *it
-	  ));
+	  std::string msg("Unsupported HTTP authentication method '");
+	  msg += *it;
+	  msg += "'";
+      	  disconnectFrom();
+	  ZYPP_THROW(MediaBadUrlException(_url, msg));
 	}
       }
 
       if( auth != CURLAUTH_NONE)
       {
-	DBG << "Setting HTTP auth method types to: "
+	DBG << "Enabling HTTP authentication methods: "
 	    << _url.getQueryParam("auth") << std::endl;
 
 	ret = curl_easy_setopt( _curl, CURLOPT_HTTPAUTH, auth);
 	if ( ret != 0 ) {
+      	  disconnectFrom();
 	  ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
 	}
       }
@@ -351,6 +434,7 @@ void MediaCurl::attachTo (bool next)
 
     ret = curl_easy_setopt( _curl, CURLOPT_PROXY, _proxy.c_str() );
     if ( ret != 0 ) {
+      disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
 
@@ -383,6 +467,7 @@ void MediaCurl::attachTo (bool next)
     _proxyuserpwd = unEscape( _proxyuserpwd );
     ret = curl_easy_setopt( _curl, CURLOPT_PROXYUSERPWD, _proxyuserpwd.c_str() );
     if ( ret != 0 ) {
+      disconnectFrom();
       ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
     }
   }
@@ -395,23 +480,27 @@ void MediaCurl::attachTo (bool next)
   ret = curl_easy_setopt( _curl, CURLOPT_COOKIEFILE,
                           _currentCookieFile.c_str() );
   if ( ret != 0 ) {
+    disconnectFrom();
     ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
 
   ret = curl_easy_setopt( _curl, CURLOPT_COOKIEJAR,
                           _currentCookieFile.c_str() );
   if ( ret != 0 ) {
+    disconnectFrom();
     ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
 
   ret = curl_easy_setopt( _curl, CURLOPT_PROGRESSFUNCTION,
                           &progressCallback );
   if ( ret != 0 ) {
+    disconnectFrom();
     ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
 
   ret = curl_easy_setopt( _curl, CURLOPT_NOPROGRESS, false );
   if ( ret != 0 ) {
+    disconnectFrom();
     ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
   }
 
@@ -434,8 +523,11 @@ MediaCurl::checkAttachPoint(const Pathname &apoint) const
 //
 void MediaCurl::disconnectFrom()
 {
-  if ( _connected ) curl_easy_cleanup( _curl );
-  _connected = false ;
+  if ( _curl )
+  {
+    curl_easy_cleanup( _curl );
+    _curl = NULL;
+  }
 }
 
 ///////////////////////////////////////////////////////////////////

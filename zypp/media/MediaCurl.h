@@ -86,11 +86,6 @@ class MediaCurl : public MediaHandler {
     std::string _currentCookieFile;
 
     static Pathname _cookieFile;
-
-    bool _connected;
-
-    static bool _globalInit;
-
     static std::string _agent;
 };
 
