@@ -2,72 +2,66 @@
 
 #include "zypp/base/LogControl.h"
 
-#include "zypp/Locale.h"
+#include <zypp/Package.h>
+#include <zypp/detail/PackageImpl.h>
+#include <zypp/CapFactory.h>
+#include <zypp/CapSet.h>
 
+#include "zypp/ZYppFactory.h"
+#include "zypp/SystemResObject.h"
+#include "zypp/ResPool.h"
 
-using std::endl;
+#include "Tools.h"
+
+using namespace std;
 using namespace zypp;
 
-inline std::string vstr( const char * str )
-{
-  std::string ret;
-  if ( str )
-    {
-      ret+="\"";
-      ret+=str;
-      ret+="\"";
-    }
-  return ret;
-}
+template<class _LIter, class _RIter, class _BinaryFunction>
+  inline _BinaryFunction
+  nest_for_earch( _LIter lbegin, _LIter lend,
+                  _RIter rbegin, _RIter rend,
+                  _BinaryFunction fnc )
+  {
+    for ( ; lbegin != lend; ++lbegin )
+      for ( _RIter r = rbegin; r != rend; ++r )
+        fnc( *lbegin, *r );
+    return fnc;
+  }
 
-void test( const Locale & val_r )
-{
-  DBG << " <<:        " << (val_r) << endl;
-  DBG << " code:      " << (val_r.code()) << endl;
-  DBG << " name:      " << (val_r.name()) << endl;
-  DBG << " ==noCode:  " << (val_r == Locale::noCode) << endl;
-  DBG << " !=noCode:  " << (val_r != Locale::noCode) << endl;
-  DBG << " Language:  " << (val_r.language()) << endl;
-  DBG << " Country:   " << (val_r.country()) << endl;
-}
+template<class _Iter, class _BinaryFunction>
+  inline _BinaryFunction
+  nest_for_earch( _Iter begin, _Iter end,
+                  _BinaryFunction fnc )
+  { return nest_for_earch( begin, end, begin, end, fnc ); }
 
-void test( const LanguageCode & val_r )
-{
-  DBG << " <<:        " << (val_r) << endl;
-  DBG << " code:      " << (val_r.code()) << endl;
-  DBG << " name:      " << (val_r.name()) << endl;
-  DBG << " ==noCode:  " << (val_r == LanguageCode::noCode) << endl;
-  DBG << " !=noCode:  " << (val_r != LanguageCode::noCode) << endl;
-  DBG << " ==default: " << (val_r == LanguageCode::useDefault) << endl;
-  DBG << " !=default: " << (val_r != LanguageCode::useDefault) << endl;
-}
+///////////////////////////////////////////////////////////////////
+namespace zypp
+{ /////////////////////////////////////////////////////////////////
 
-void test( const CountryCode & val_r )
-{
-  DBG << " <<:       " << (val_r) << endl;
-  DBG << " code:     " << (val_r.code()) << endl;
-  DBG << " name:     " << (val_r.name()) << endl;
-  DBG << " ==noCode: " << (val_r == CountryCode::noCode) << endl;
-  DBG << " !=noCode: " << (val_r != CountryCode::noCode) << endl;
-}
 
-void testLocale( const char * str = 0 )
-{
-  MIL << "Locale(" << vstr(str) << ")" << endl;
-  test( str ? Locale( str ) : Locale() );
-}
+  void matches( const Capability & lhs, const Capability & rhs )
+  {
+    SEC << "matches " << lhs << " <=> " << rhs << endl;
+    SEC << "        " << lhs.matches(rhs) << endl;
+  }
 
-void testLanguage( const char * str = 0 )
-{
-  MIL << "Language(" << vstr(str) << ")" << endl;
-  test( str ? LanguageCode( str ) : LanguageCode() );
-}
+  /////////////////////////////////////////////////////////////////
+} // namespace zypp
+///////////////////////////////////////////////////////////////////
 
-void testCountry( const char * str = 0 )
-{
-  MIL << "Country(" << vstr(str) << ")" << endl;
-  test( str ? CountryCode( str ) : CountryCode() );
-}
+
+
+template<typename _Res>
+  struct CapSetInsert : public std::unary_function<const std::string &, void>
+  {
+    CapSet &   _x;
+    CapFactory _f;
+    CapSetInsert( CapSet & x )
+    : _x(x)
+    {}
+    void operator()( const std::string & v )
+    { _x.insert( _f.parse( ResTraits<_Res>::kind, v ) ); }
+  };
 
 /******************************************************************
 **
@@ -79,23 +73,62 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "xxx" );
   INT << "===[START]==========================================" << endl;
 
-  testLocale();
-  testLocale( "" );
-  testLocale( "en" );
-  testLocale( "de_DE" );
-  testLocale( "C" );
-  testLocale( "POSIX" );
-  testLocale( "default" );
+  ResStore inst;
+  ResStore avail;
 
-  testLanguage();
-  testLanguage( "" );
-  testLanguage( "en" );
-  testLanguage( "default" );
+  // Collect basic Resolvable data
+  NVRAD dataCollect;
 
-  testCountry();
-  testCountry( "" );
-  testCountry( "US" );
-  testCountry( "DE" );
+  dataCollect.name    = "foo";
+  dataCollect.edition = Edition("1.0","42");
+  dataCollect.arch    = Arch_i386;
+
+  const char * depstrings[] = {
+    "hal()",
+    "modalias()",
+    "hal(foo)",
+    "modalias(bab)",
+  };
+
+  for_each( depstrings, ( depstrings + ( sizeof(depstrings) / sizeof(const char *) ) ),
+            CapSetInsert<Package>(dataCollect[Dep::PROVIDES]) );
+
+
+  //nest_for_earch( dataCollect[Dep::PROVIDES].begin(), dataCollect[Dep::PROVIDES].end(),
+  //                &matches );
+
+  // create the Package object
+  detail::ResImplTraits<detail::PackageImpl>::Ptr pkgImpl;
+  Package::Ptr pkg( detail::makeResolvableAndImpl( dataCollect, pkgImpl ) );
+  pkg = detail::makeResolvableAndImpl( dataCollect, pkgImpl );
+  DBG << *pkg << endl;
+  DBG << pkg->deps() << endl;
+  avail.insert( pkg );
+
+  // create the System object
+  SystemResObject::Ptr sys = SystemResObject::instance();
+  DBG << *sys << endl;
+  DBG << sys->deps() << endl;
+  //inst.insert( sys );
+  avail.insert( pkg );
+
+  // feed pool
+  getZYpp()->addResolvables( avail );
+  getZYpp()->addResolvables( inst, true );
+
+  // print stats
+  ResPool query( getZYpp()->pool() );
+  rstats( query.begin(), query.end() );
+
+  // select system resolvable for transact
+  query.byKindBegin<SystemResObject>()->status().setTransact( true, ResStatus::USER );
+  std::for_each( query.begin(), query.end(), Print<PoolItem>() );
+
+  SEC << getZYpp()->resolver()->establishPool() << endl;
+  std::for_each( query.begin(), query.end(), Print<PoolItem>() );
+
+  SEC << getZYpp()->resolver()->resolvePool() << endl;
+  std::for_each( query.begin(), query.end(), Print<PoolItem>() );
 
   INT << "===[END]============================================" << endl;
   return 0;
