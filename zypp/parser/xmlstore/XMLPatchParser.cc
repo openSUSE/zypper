@@ -31,7 +31,7 @@ namespace zypp {
       { }
       
       XMLPatchParser::XMLPatchParser(istream &is, const string& baseUrl)
-        : XMLNodeIterator<XMLPatchData_Ptr>(is, baseUrl /*,PATCHSCHEMA*/)
+        : XMLNodeIterator<XMLPatchData_Ptr>(is, baseUrl ,PATCHSCHEMA)
       {
         fetchNext();
       }
@@ -59,10 +59,7 @@ namespace zypp {
         XMLPatchData_Ptr patchPtr = new XMLPatchData();
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         xml_assert(dataNode);
-        patchPtr->timestamp = _helper.attribute(dataNode,"timestamp");
-        patchPtr->patchId = _helper.attribute(dataNode,"patchid");
-        patchPtr->engine = _helper.attribute(dataNode,"engine");
-      
+        
         // default values for optional entries
         patchPtr->rebootNeeded = false;
         patchPtr->packageManager = false;
@@ -82,17 +79,23 @@ namespace zypp {
             else if (name == "description") {
               patchPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
             }
+            else if (name == "id") {
+              patchPtr->patchId = _helper.content(child);
+            }
+            else if (name == "timestamp") {
+              patchPtr->timestamp = _helper.content(child);
+            }
             else if (name == "category") {
             patchPtr->category = _helper.content(child);
             }
-            else if (name == "reboot_needed") {
+            else if (name == "reboot-needed") {
             patchPtr->rebootNeeded = true;
             }
-            else if (name == "package_manager") {
+            else if (name == "affects-package-manager") {
               patchPtr->packageManager = true;
             }
-            else if (name == "update_script") {
-              patchPtr->updateScript = _helper.content(child);
+            else if (name == "interactive") {
+              patchPtr->interactive = true;
             }
             else if (name == "atoms") {
               parseAtomsNode(patchPtr, child);

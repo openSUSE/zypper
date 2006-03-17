@@ -10,9 +10,7 @@
     </element>
   </define>
   <define name="pattern">
-    <optional>
-      <ref name="resolvable-data"/>
-    </optional>
+    <ref name="resolvable-data"/>
     <oneOrMore>
       <ref name="element-summary"/>
     </oneOrMore>

@@ -250,9 +250,6 @@ std::string toXML( const Atom::constPtr &obj )
   stringstream out;
   out << "<atom>" << std::endl;
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
-
-  // access implementation
-  out << toXML(obj->deps()) << std::endl;
   out << "</atom>" << std::endl;
   return out.str();
 }
@@ -349,19 +346,28 @@ std::string toXML( const Patch::constPtr &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<patch xmlns=\"http://www.novell.com/metadata/zypp/xml-store\"" << std::endl; 
-  out << "    patchid=\"" << xml_escape(obj->id()) << "\"" << std::endl;
-  out << "    timestamp=\"" << obj->timestamp().asSeconds() << "\"" << std::endl;
-  out << "    engine=\"1.0\">" << std::endl;
+  out << "<patch xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl; 
+  
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
+  
+  // access implementation
+  detail::ResImplTraits<Patch::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
+  out << translatedTextToXML(pipp->summary(), "summary");
+  out << translatedTextToXML(pipp->description(), "description");
+  
+  out << "<id>" << xml_escape(obj->id()) << "</id>" << std::endl;
+  out << "<timestamp>" << obj->timestamp().asSeconds() << "</timestamp>" << std::endl;
+  
+  out << "<category>" << obj->category() << "</category>" << std::endl;
+  out << "<affects-package-manager>" << ( obj->affects_pkg_manager() ? "true" : "false" ) << "</affects-package-manager>" << std::endl;
+  out << "<reboot-needed>" << ( obj->reboot_needed() ? "true" : "false" ) << "</reboot-needed>" << std::endl;
+  out << "<interactive>" << ( obj->interactive() ? "true" : "false" ) << "</interactive>" << std::endl;
+  
   Patch::AtomList at = obj->atoms();
   out << "  <atoms>" << std::endl;
   for (Patch::AtomList::iterator it = at.begin(); it != at.end(); it++)
   {
-    // atoms tag here looks weird but lets follow YUM
-    
-    // I have a better idea to avoid the cast here (Michaels code in his tmp/)
     Resolvable::Ptr one_atom = *it;
     out << castedToXML(one_atom) << std::endl;
   }

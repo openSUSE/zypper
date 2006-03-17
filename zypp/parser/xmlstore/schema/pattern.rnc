@@ -8,7 +8,7 @@ element-pattern =
   element pattern { pattern }
   
 pattern =
-   resolvable-data?,
+   resolvable-data,
    element-summary+,
    element-description+,
    element default { boolean }?,

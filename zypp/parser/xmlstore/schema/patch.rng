@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="http://www.novell.com/metadata/zypp/xml-store" xmlns="http://relaxng.org/ns/structure/1.0">
+  <include href="resolvable.rng"/>
+  <start>
+    <ref name="element-patch"/>
+  </start>
+  <define name="element-patch">
+    <element name="patch">
+      <ref name="patch"/>
+    </element>
+  </define>
+  <define name="element-message">
+    <element name="message">
+      <ref name="message"/>
+    </element>
+  </define>
+  <define name="message">
+    <ref name="resolvable-data"/>
+    <element name="text">
+      <text/>
+    </element>
+  </define>
+  <define name="element-script">
+    <element name="script">
+      <ref name="script"/>
+    </element>
+  </define>
+  <define name="script">
+    <ref name="resolvable-data"/>
+    <element name="do">
+      <text/>
+    </element>
+    <element name="undo">
+      <text/>
+    </element>
+  </define>
+  <define name="element-atom">
+    <element name="atom">
+      <ref name="atom"/>
+    </element>
+  </define>
+  <define name="atom">
+    <ref name="resolvable-data"/>
+  </define>
+  <define name="atoms">
+    <interleave>
+      <zeroOrMore>
+        <ref name="element-script"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="element-message"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="element-atom"/>
+      </zeroOrMore>
+    </interleave>
+  </define>
+  <define name="patch">
+    <ref name="resolvable-data"/>
+    <oneOrMore>
+      <ref name="element-summary"/>
+    </oneOrMore>
+    <oneOrMore>
+      <ref name="element-description"/>
+    </oneOrMore>
+    <element name="id">
+      <text/>
+    </element>
+    <element name="timestamp">
+      <text/>
+    </element>
+    <element name="category">
+      <text/>
+    </element>
+    <element name="affects-package-manager">
+      <ref name="boolean"/>
+    </element>
+    <element name="reboot-needed">
+      <ref name="boolean"/>
+    </element>
+    <element name="interactive">
+      <ref name="boolean"/>
+    </element>
+    <element name="atoms">
+      <ref name="atoms"/>
+    </element>
+  </define>
+</grammar>

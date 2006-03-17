@@ -138,6 +138,7 @@ namespace zypp {
           std::string category;
           bool rebootNeeded;
           bool packageManager;
+          bool interactive;
           std::string updateScript;
           std::list<XMLPatchAtomData_Ptr > atoms;
       };

@@ -1,0 +1,45 @@
+default namespace = "http://www.novell.com/metadata/zypp/xml-store"
+
+include "resolvable.rnc"
+
+start = element-patch
+
+element-patch =
+  element patch { patch }
+  
+element-message =
+   element message { message }
+   
+message =
+  resolvable-data,
+  element text { text }
+   
+element-script =
+   element script { script }
+   
+script =
+  resolvable-data,
+  element do { text },
+  element undo { text }
+   
+element-atom =
+   element atom { atom }
+   
+atom =
+  resolvable-data
+   
+atoms =
+  element-script* & element-message* & element-atom*
+   
+patch =
+   resolvable-data,
+   element-summary+,
+   element-description+,
+   element id { text },
+   element timestamp { text },
+   element category { text },
+   element affects-package-manager { boolean },
+   element reboot-needed { boolean },
+   element interactive { boolean },
+   element atoms { atoms }
+   
