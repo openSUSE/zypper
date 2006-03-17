@@ -281,7 +281,7 @@ namespace zypp
       }
 
     if ( ret.empty() )
-      return "EDITION-UNSPEC";
+      return "";
 
     return ret;
   }
