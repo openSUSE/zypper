@@ -144,29 +144,30 @@ struct UniqTable
 
 struct RequireProcess
 {
-    PoolItem_Ref requirer;
-    const Capability capability;
-    ResolverContext_Ptr context;
-    ResPool pool;
+    PoolItem_Ref _requirer;
+    const Capability _capability;
+    ResolverContext_Ptr _context;
+    ResPool _pool;
 
     PoolItemList providers;		// the provider which matched
-    UniqTable uniq;
+
+    // only keep 'best' candidate for a package name
+    typedef map<string,PoolItem_Ref> UniqMap;
+    UniqMap uniq;
 
     RequireProcess (PoolItem_Ref r, const Capability & c, ResolverContext_Ptr ctx, const ResPool & p)
-	: requirer (r)
-	, capability (c)
-	, context (ctx)
-	, pool (p)
+	: _requirer (r)
+	, _capability (c)
+	, _context (ctx)
+	, _pool (p)
     { }
 
     bool operator()( const CapAndItem & cai )
     {
-	//const Capability match;
-	ResStatus status;
 	PoolItem provider = cai.item;
 	Capability match = cai.cap;
 
-	status = context->getStatus( provider );
+	ResStatus status = _context->getStatus( provider );
 
 	XXX << "RequireProcessInfo (" << provider << " provides " << match << ", is " << status << ")" << endl;
 // ERR << "RequireProcessInfo(required: " << *capability << ")" << endl;
@@ -175,19 +176,19 @@ struct RequireProcess
 	/* capability is set for item set childern only. If it is set
 	   allow only exactly required version */
 
-	if (capability != Capability()
-	    && capability != match) {		// exact match required
+	if (_capability != Capability()
+	    && _capability != match) {		// exact match required
 	    return true;
 	}
 
-	if (!provider->arch().compatibleWith( context->architecture() )) {
+	if (!provider->arch().compatibleWith( _context->architecture() )) {
 	    MIL << "provider " << provider << " has incompatible arch '" << provider->arch() << "'" << endl;
 	    return true;
 	}
 
 	if (! (status.isToBeUninstalled() || status.isImpossible())
-	    && ! context->isParallelInstall( provider )
-	    && context->itemIsPossible( provider )
+	    && ! _context->isParallelInstall( provider )
+	    && _context->itemIsPossible( provider )
 	    && ! provider.status().isLocked() 
 	) {
 
@@ -202,20 +203,32 @@ struct RequireProcess
 	    }
 
 
-	    // if we already have same name and edition, check for better architecture
+	    // if we already have same name
+	    //   check for better architecture, then edition
+	    //   see yast2-pkg-bindings, Package.cc, ProvideProcess
 
-	    if (uniq.has( provider )) {
-		for (PoolItemList::iterator it = providers.begin(); it != providers.end(); ++it) {
-		    if ((*it)->arch().compare( provider->arch() ) < 0) {		// new provider is better
-			providers.push_front( provider );
-			providers.erase( it );
-			break;
+	    UniqMap::iterator upos = uniq.find( provider->name() );
+	    if (upos != uniq.end()) {
+		if ((upos->second->arch().compare( provider->arch() ) < 0)	// better arch
+		    || ((upos->second->arch().compare( provider->arch() ) == 0)		    // or same arch
+		        && (upos->second->edition().compare( provider->edition() ) < 0) ) ) // and better edition
+		{
+		    // new provider is 'better'
+
+		    // erase the old provider
+		    for (PoolItemList::iterator it = providers.begin(); it != providers.end(); ++it) {
+			if (*it == upos->second) {
+			    DBG << "Kicking " << *it << " for " << provider << endl;
+			    providers.erase( it );
+			    break;
+			}
 		    } 
+		    upos = uniq.end();	// trigger insertion of new provider below
 		}
 	    }
-	    else {
+	    if (upos == uniq.end()) {
 		providers.push_front( provider );
-		uniq.remember( provider );
+		uniq[provider->name()] = provider;
 	    }
 	}
 
@@ -264,7 +277,6 @@ struct NoInstallableProviders
     }
 };
 
-
 struct LookForUpgrades
 {
     PoolItem_Ref installed;
@@ -277,6 +289,26 @@ struct LookForUpgrades
     bool operator()( PoolItem_Ref provider )
     {
 	upgrades.push_front (provider);
+	return true;
+    }
+};
+
+
+// check for an installed or to-be-installed item
+// (used to match supplements/enhances of multiple providers)
+
+struct HintItem
+{
+    PoolItem_Ref match;
+
+    bool operator()( const CapAndItem & cai )
+    {
+	if (cai.item.status().staysInstalled()
+	    || cai.item.status().isToBeInstalled())
+	{
+	    match = cai.item;
+	    return false;		// have one, we're done
+	}
 	return true;
     }
 };
@@ -312,6 +344,26 @@ codependent_items (const PoolItem_Ref item1, const PoolItem_Ref item2)
     return false;
 }
 
+
+// check if we have a match for a (supplements/enhances) hint
+
+static bool
+hint_match( const CapSet & cset, ResPool pool )
+{
+    HintItem info;
+    
+    for (CapSet::const_iterator cit = cset.begin(); cit != cset.end(); ++cit) {
+	Dep dep( Dep::PROVIDES );
+	invokeOnEach( pool.byCapabilityIndexBegin( cit->index(), dep ),
+		      pool.byCapabilityIndexEnd( cit->index(), dep ),
+		      resfilter::ByCapMatch( *cit ),
+		      functor::functorRef<bool,CapAndItem>(info) );
+    }
+    MIL << "hint_match(" << info.match << ")" << endl;
+    return info.match; // as bool !
+}
+
+//----------------------------------------------------------------------------
 
 bool
 QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_items)
@@ -357,10 +409,11 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	_XDEBUG( "requirement is met by " << num_providers << " resolvable");
 
 
-	// if there are multiple providers, try to reduce branching by clening up the providers list
+	// if there are multiple providers, try to reduce branching by cleaning up the providers list
 	// first check all providers if they are to-be-installed or uninstalled
 	//   if there are to-be-installed providers, erase all uninstalled providers
 	//   if there are locale providers and none match, try a language fallback
+	//   prefer providers which enhance an installed or to-be-installed resolvables
 
 	if (num_providers > 1) {					// prefer to-be-installed providers
 	    MIL << "Have " << num_providers << " providers" << endl;
@@ -369,17 +422,18 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	    std::map<std::string,PoolItem> language_freshens;
 	    ZYpp::Ptr z = zypp::getZYpp();
 	    ZYpp::LocaleSet requested_locales = z->getRequestedLocales();
-	    bool requested_match = false;
+	    bool requested_locale_match = false;
+	    PoolItemSet hints;			// those which supplement or enhance an installed or to-be-installed
 
 	    for (PoolItemList::iterator it = info.providers.begin(); it != info.providers.end(); ++it) {
 		PoolItem item = *it;
 		if (item.status().isToBeInstalled()) {
-		    uninstalled++;
+		    to_be_installed++;
 		}
 		if (item.status().staysUninstalled()) {
 		    uninstalled++;
 		}
-		if (!requested_match) {
+		if (!requested_locale_match) {
 		    CapSet freshens( item->dep( Dep::FRESHENS ) );
 
 		    // try to find a match of the locale freshens with one of the requested locales
@@ -391,17 +445,28 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 			    MIL << "Look for language fallback " << loc << ":" << item << endl;
 			    if (requested_locales.find( Locale( loc ) ) != requested_locales.end()) {
 				MIL << "Locale '" << loc << "' is requested, not looking further" << endl;
-				requested_match = true;
+				requested_locale_match = true;
 				break;
 			    }
 			    language_freshens[loc] = item;
 			}
 		    }
 		}
+
+
+		// now check if a provider supplements or enhances an installed or to-be-installed resolvable
+
+		if (hint_match( item->dep( Dep::SUPPLEMENTS ), pool() )
+		    || hint_match( item->dep( Dep::ENHANCES ), pool() ))
+		{
+		    hints.insert( item );
+		}
+
 	    } // for
 
-	    if (to_be_installed == 0
-		&& !requested_match)
+	    if (hints.empty()
+		&& to_be_installed == 0
+		&& !requested_locale_match)
 	    {
 		// loop over requested locales, loop over their fallbacks, and try to find a matching provider
 
@@ -436,13 +501,23 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		MIL << mil << endl;
 #endif
 	    }
+	    else if (to_be_installed == 0
+		     && !hints.empty())
+	    {
+		MIL << "Have " << hints.size() << " hints" << endl;
+		info.providers.clear();
+		for (PoolItemSet::const_iterator it = hints.begin(); it != hints.end(); ++it)
+		    info.providers.push_back( *it );
+	    }
+	    else { 
 
 	    // if we have one or more to-be-installed, erase all uninstalled (if there are any)
 
 	    MIL << to_be_installed << " to-be-installed, " << uninstalled << " uninstalled" << endl;
 
 	    if (to_be_installed > 0
-		&& uninstalled > 0) {
+		&& uninstalled > 0)
+	    {
 		PoolItemList::iterator next;
 		for (PoolItemList::iterator it = info.providers.begin(); it != info.providers.end(); ++it) {
 		    next = it; ++next;
@@ -453,11 +528,13 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		    it = next;
 		}
 	    }
+	    }
 
 	    num_providers = info.providers.size();
 
-	}
-    }
+	} // num_providers > 1
+
+    } // !_remove_only
 
     //
     // No providers found
