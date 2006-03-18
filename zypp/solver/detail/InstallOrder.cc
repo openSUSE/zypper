@@ -101,8 +101,11 @@ InstallOrder::computeNextSet()
 	if (it->second.order == 0
 	    && it->second.item)			// the default Nodes constructor leaves this empty 
 	{
-	    XXX << "InstallOrder::computeNextSet found " << ITEMNAME(it->second.item) << endl;
+	    if (isKind<SystemResObject>( it->second.item.resolvable() ))
+		continue;
 
+	    XXX << "InstallOrder::computeNextSet found " << ITEMNAME(it->second.item) << endl;
+	
 	    newlist.push_back(it->second.item);
 	}
     }
