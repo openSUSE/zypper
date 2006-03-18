@@ -436,7 +436,7 @@ Resolver::establishState (ResolverContext_Ptr context)
 		      functor::functorRef<bool,PoolItem>(info) );
 
 	// process the queue
-	resolveDependencies (context);
+	resolveDependencies( context );
 
 	reset();
     }
