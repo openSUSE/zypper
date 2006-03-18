@@ -302,7 +302,8 @@ namespace zypp
 
     void SourceImpl::release()
     {
-      _media_set->release();
+      if (_media_set)
+	_media_set->release();
     }
 
     media::MediaVerifierRef SourceImpl::verifier(unsigned media_nr)
