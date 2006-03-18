@@ -217,7 +217,8 @@ ResolverInfo::merge (ResolverInfo_Ptr to_be_merged)
     if (to_be_merged == NULL) return false;
 
     if (_type != to_be_merged->_type
-	|| _affected != to_be_merged->_affected) {
+	|| _affected != to_be_merged->_affected
+	|| _error != to_be_merged->_error) {
 	return false;
     }
 
