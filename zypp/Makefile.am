@@ -43,6 +43,7 @@ pkginclude_HEADERS = NeedAType.h \
 	ResFilters.h	\
 	PoolItem.h	\
 	ResPool.h	\
+	NameKindProxy.h	\
 	ResPoolProxy.h	\
 	ResPoolManager.h\
 	Resolver.h	\
@@ -122,6 +123,7 @@ lib@PACKAGE@_la_SOURCES = \
 	ResStore.cc	\
 	PoolItem.cc	\
 	ResPool.cc	\
+	NameKindProxy.cc	\
 	ResPoolProxy.cc	\
 	ResPoolManager.cc\
 	Resolver.cc	\
