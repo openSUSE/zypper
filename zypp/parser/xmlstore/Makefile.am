@@ -11,6 +11,7 @@ INCLUDES = -I$(oldincludedir)/libxml2 -I..	\
 parserxmlincludedir = $(pkgincludedir)/parser/xmlstore
 
 parserxmlinclude_HEADERS = \
+	schemanames.h	   \
 	XMLProductParser.h \
 	XMLPatternParser.h \
 	XMLResObjectParser.h	\
