@@ -357,7 +357,16 @@ namespace zypp
     {
       bool operator()( const CapAndItem & cai ) const
       {
-	return cai.item.status().staysUninstalled();
+	return cai.item.status().isUninstalled();
+      }
+    };
+
+    /** Select PoolItem by installed. */
+    struct ByCaIInstalled
+    {
+      bool operator()( const CapAndItem & cai ) const
+      {
+	return cai.item.status().isInstalled();
       }
     };
 
@@ -370,6 +379,35 @@ namespace zypp
       }
     };
 
+    /** Select PoolItem by not transact. */
+    struct ByCaINotTransact
+    {
+      bool operator()( const CapAndItem & cai ) const
+      {
+	return !(cai.item.status().transacts());
+      }
+    };
+
+
+    /** Select CapAndItem by kind. */
+    struct ByCaIKind
+    {
+      ByCaIKind( const ResObject::Kind & kind_r )
+      : _kind( kind_r )
+      {}
+
+      bool operator()( const CapAndItem & cai ) const
+      {
+        return cai.item->kind() == _kind;
+      }
+
+      ResObject::Kind _kind;
+    };
+
+    /** */
+    template<class _Res>
+      inline ByCaIKind byCaIKind()
+      { return ByCaIKind( ResTraits<_Res>::kind ); }
 
     ///////////////////////////////////////////////////////////////////
 
