@@ -1,6 +1,6 @@
 >!> Establishing state ...
 >!> Established context
->!> patch:Patch-A-1.1-1.noarch[test] U_Ts_<needed>
+>!> patch:Patch-A-1.1-1.noarch[test] U_Ts_
 >!> Freshening ...
 >!> Solution #1:
 >!> install patch:Patch-A-1.1-1.noarch[test]

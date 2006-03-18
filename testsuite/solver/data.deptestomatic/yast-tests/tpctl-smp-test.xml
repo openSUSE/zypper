@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-  install tpctl and kernel-default
+  install tpctl and kernel-smp
   tpctl requires tpctl-kmp which is provided by
     several tpctl-<kernelflavour> packages
   check if the right tpctl-<kernelflavour> package is installed
@@ -15,7 +15,7 @@
 </setup>
 <trial>
   <install channel="sl10_packages" kind="package" name="tpctl"/>
-  <install channel="sl10_packages" kind="package" name="kernel-default"/>
+  <install channel="sl10_packages" kind="package" name="kernel-smp"/>
   <reportproblems/>
 </trial>
 </test>

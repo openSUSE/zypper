@@ -43904,6 +43904,7 @@
     <dep name='madwifi-kmp-bigsmp' op='=' version='1468_2.6.16_rc6_git1_4' />
   </provides>
   <enhances>
+    <dep name='kernel-bigsmp' />
     <dep name='modalias(pci:v000010B7d00000013sv*sd*bc*sc*i*)' />
     <dep name='modalias(pci:v0000168Cd00000007sv*sd*bc*sc*i*)' />
     <dep name='modalias(pci:v0000168Cd0000001[2356789ABCD]sv*sd*bc*sc*i*)' />
@@ -44075,6 +44076,7 @@
     <dep name='madwifi-kmp-default' op='=' version='1468_2.6.16_rc6_git1_4' />
   </provides>
   <enhances>
+    <dep name='kernel-default' />
     <dep name='modalias(pci:v000010B7d00000013sv*sd*bc*sc*i*)' />
     <dep name='modalias(pci:v0000168Cd00000007sv*sd*bc*sc*i*)' />
     <dep name='modalias(pci:v0000168Cd0000001[2356789ABCD]sv*sd*bc*sc*i*)' />
@@ -44247,6 +44249,7 @@
     <dep name='madwifi-kmp-smp' op='=' version='1468_2.6.16_rc6_git1_4' />
   </provides>
   <enhances>
+    <dep name='kernel-smp' />
     <dep name='modalias(pci:v000010B7d00000013sv*sd*bc*sc*i*)' />
     <dep name='modalias(pci:v0000168Cd00000007sv*sd*bc*sc*i*)' />
     <dep name='modalias(pci:v0000168Cd0000001[2356789ABCD]sv*sd*bc*sc*i*)' />
@@ -63799,6 +63802,9 @@
     <dep name='ksym(thinkpad_ppde)' op='=' version='e2783bac' />
     <dep name='tpctl-kmp-bigsmp' op='=' version='4.17_2.6.16_rc6_git1_4' />
   </provides>
+  <enhances>
+    <dep name='kernel-bigsmp' />
+  </enhances>
 </package>
 <package>
   <name>tpctl-kmp-default</name>
@@ -63835,6 +63841,9 @@
     <dep name='ksym(thinkpad_ppde)' op='=' version='c44a5bb9' />
     <dep name='tpctl-kmp-default' op='=' version='4.17_2.6.16_rc6_git1_4' />
   </provides>
+  <enhances>
+    <dep name='kernel-default' />
+  </enhances>
 </package>
 <package>
   <name>tpctl-kmp-smp</name>
@@ -63872,6 +63881,9 @@
     <dep name='ksym(thinkpad_ppde)' op='=' version='289d8815' />
     <dep name='tpctl-kmp-smp' op='=' version='4.17_2.6.16_rc6_git1_4' />
   </provides>
+  <enhances>
+    <dep name='kernel-smp' />
+  </enhances>
 </package>
 <package>
   <name>traffic-vis</name>

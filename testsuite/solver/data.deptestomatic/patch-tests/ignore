@@ -1,4 +1,8 @@
-#has to be checked again
+# these need access to armstrong.suse.de
 load-armstrong-test.xml
+right-mutt-downgrade-test.xml
+right-mutt-patch-install-wrong-test.xml
+right-mutt-patch-uninstall-test.xml
 right-mutt-test.xml
+right-mutt-uninstall-test.xml
 wrong-mutt-test.xml

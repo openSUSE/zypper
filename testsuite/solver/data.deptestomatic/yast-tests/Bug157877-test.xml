@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<!--  Bug156439 -->
+<!--
+  Bug156439
+-->
 <test>
 <setup>
   <system file="Bug157877-system.xml"/>

@@ -1,3 +1,5 @@
 >!> Establishing state ...
 >!> Established context
->!> patch:foo-0-2.noarch[test] UU__<uneeded>
+>!> patch:foo-0-2.noarch[test] UU_s_
+>!> Solution #1:
+>!> installs=0, upgrades=0, uninstalls=0

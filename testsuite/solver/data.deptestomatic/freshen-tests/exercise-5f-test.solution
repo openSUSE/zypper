@@ -1,8 +1,8 @@
 >!> Establishing state ...
 >!> Established context
->!> patch:Patch-A-1.1-1.noarch[test] UU__<uneeded>
+>!> patch:Patch-A-1.1-1.noarch[test] UU_s_
 >!> Installing A from channel core
 >!> Establishing state ...
 >!> Established context
->!> patch:Patch-A-1.1-1.noarch[test] UU__<uneeded>
+>!> patch:Patch-A-1.1-1.noarch[test] UU_s_
 >!> Freshening ...

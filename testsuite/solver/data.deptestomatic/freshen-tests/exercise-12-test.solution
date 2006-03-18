@@ -1,10 +1,10 @@
 >!> Establishing state ...
 >!> Established context
->!> patch:Patch-A-1.1-1.noarch[test] US__<satisfied>
+>!> patch:Patch-A-1.1-1.noarch[test] US_s_
 >!> Uninstalling A
 >!> Establishing state ...
 >!> Established context
->!> patch:Patch-A-1.1-1.noarch[test] US__<satisfied>
+>!> patch:Patch-A-1.1-1.noarch[test] US_s_
 >!> Solution #1:
 >!> remove  A-1.1-1.noarch
 >!> installs=0, upgrades=0, uninstalls=1
