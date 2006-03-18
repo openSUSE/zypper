@@ -99,6 +99,8 @@ static ZYpp::Ptr God;
 static SourceManager_Ptr manager;
 static bool forceResolve;
 
+static int sys_res_install = 0;
+
 typedef list<unsigned int> ChecksumList;
 typedef set<PoolItem_Ref> PoolItemSet;
 
@@ -194,6 +196,10 @@ typedef list<string> StringList;
 static void
 assemble_install_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
+    if (isKind<SystemResObject>( poolItem.resolvable() )) {
+	sys_res_install = 1;
+	return;
+    }
     StringList *slist = (StringList *)data;
     ostringstream s;
     s << str::form ("%-7s ", poolItem.status().staysInstalled() ? "|flag" : "install");
@@ -340,7 +346,7 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 	RESULT << "Failed Attempt:" << endl;
     }
 
-    RESULT << "installs=" << context->installCount() << ", upgrades=" << context->upgradeCount() << ", uninstalls=" << context->uninstallCount();
+    RESULT << "installs=" << context->installCount()-sys_res_install << ", upgrades=" << context->upgradeCount() << ", uninstalls=" << context->uninstallCount();
     int satisfied = context->satisfyCount();
     if (satisfied > 0) cout << ", satisfied=" << satisfied;
     cout << endl;
@@ -436,7 +442,7 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
 
     bool operator()( PoolItem_Ref p)
     {
-MIL << p << " ?" << endl;
+//MIL << p << " ?" << endl;
 	Source_Ref s = p->source();
 
 	if (s.alias() != source.alias()) {
