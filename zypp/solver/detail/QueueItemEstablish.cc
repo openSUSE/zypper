@@ -176,7 +176,8 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	}
 	else {
 	    // If the item stays installed, blame the user
-	    if (_item->kind() != ResTraits<Package>::kind
+	    if ((_item->kind() != ResTraits<Package>::kind
+		 && _item->kind() != ResTraits<Atom>::kind)
 		|| status.staysInstalled()
 		|| context->establishing())
 	    {
