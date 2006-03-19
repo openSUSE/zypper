@@ -34,7 +34,7 @@ namespace zypp
   const ResStatus ResStatus::complete			 (INSTALLED,   SATISFIED);
   const ResStatus ResStatus::satisfied			 (UNINSTALLED, SATISFIED);
   const ResStatus ResStatus::unneeded			 (UNINSTALLED, UNNEEDED);
-  const ResStatus ResStatus::needed			 (UNINSTALLED, INCOMPLETE, TRANSACT);
+  const ResStatus ResStatus::needed			 (UNINSTALLED, INCOMPLETE);
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -86,9 +86,9 @@ namespace zypp
   {
     str << (obj.isInstalled() ? "I" : "U");
 
-    str << (obj.isUnneeded() ? "U" :
-	( obj.isSatisfied() ? "S" :
-	( obj.isIncomplete() ? "I" : "_") ) );
+    str << (obj.isEstablishedUneeded() ? "U" :
+	( obj.isEstablishedSatisfied() ? "S" :
+	( obj.isEstablishedIncomplete() ? "I" : "_") ) );
 
     str << (obj.transacts () ? "T"
                              : (obj.isLocked() ? "L" : "_") );
