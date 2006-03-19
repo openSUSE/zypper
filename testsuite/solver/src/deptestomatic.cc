@@ -157,6 +157,9 @@ string2kind (const std::string & str)
 	else if (str == "patch") {
 	    kind = ResTraits<zypp::Patch>::kind;
 	}
+	else if (str == "atom") {
+	    kind = ResTraits<zypp::Atom>::kind;
+	}
 	else if (str == "pattern") {
 	    kind = ResTraits<zypp::Pattern>::kind;
 	}
