@@ -13,15 +13,16 @@ int main()
   Selection::Ptr selection;
 
   zypp::base::LogControl::instance().logfile( "-" );
+  Source_Ref s;
 
   try {
-  selection = zypp::source::susetags::parseSelection (Pathname("selfiles/default.sel"));
+  selection = zypp::source::susetags::parseSelection( s, Pathname("selfiles/default.sel") );
   cout << *selection << endl;
-  selection = zypp::source::susetags::parseSelection (Pathname("selfiles/Office.sel"));
+  selection = zypp::source::susetags::parseSelection( s, Pathname("selfiles/Office.sel") );
   cout << *selection << endl;
-  selection = zypp::source::susetags::parseSelection (Pathname("selfiles/X11.sel"));
+  selection = zypp::source::susetags::parseSelection( s, Pathname("selfiles/X11.sel") );
   cout << *selection << endl;
-  selection = zypp::source::susetags::parseSelection (Pathname("selfiles/NOTTHERE.sel"));
+  selection = zypp::source::susetags::parseSelection( s, Pathname("selfiles/NOTTHERE.sel") );
   cout << *selection << endl;
   }
   catch (Exception & excpt_r) {

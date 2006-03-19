@@ -56,12 +56,29 @@ int main( int argc, char * argv[] )
 	++argpos;
     }
     Pathname p;
-    Url url( argv[argpos++] );
+    Url url;
+    try {
+	url = ( argv[argpos++] );
+    }
+    catch( const Exception & excpt_r ) {
+      cerr << "Invalid url " << argv[--argpos] << endl;
+      ZYPP_CAUGHT( excpt_r );
+      return 1;
+    }
+    
     string alias("suseparse");
     Locale lang( "en" );
 
     Pathname cache_dir("");
-    Source_Ref src( SourceFactory().createFrom(url, p, alias, cache_dir) );
+    Source_Ref src;
+    try {
+      src = SourceFactory().createFrom(url, p, alias, cache_dir);
+    }
+    catch( const Exception & excpt_r ) {
+      cerr << "Can't access repository" << endl;
+      ZYPP_CAUGHT( excpt_r );
+      return 1;
+    }
 
     ResStore store = src.resolvables();
     INT << "Found " << store.size() << " resolvables" << endl;

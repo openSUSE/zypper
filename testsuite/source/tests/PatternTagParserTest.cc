@@ -13,13 +13,15 @@ int main()
   zypp::base::LogControl::instance().logfile( "-" );
 
   Pattern::Ptr pattern;
+  Source_Ref s;
+
   try {
-    pattern = zypp::source::susetags::parsePattern (Pathname("patfiles/default.pat"));
+    pattern = zypp::source::susetags::parsePattern( s, Pathname("patfiles/default.pat"));
     cout << *pattern << endl;
-    pattern = zypp::source::susetags::parsePattern (Pathname("patfiles/NOTTHERE.pat"));
+    pattern = zypp::source::susetags::parsePattern( s, Pathname("patfiles/NOTTHERE.pat"));
     cout << *pattern << endl;
     
-    pattern = zypp::source::susetags::parsePattern (Pathname("patfiles/base-10-33.i586.pat"));
+    pattern = zypp::source::susetags::parsePattern( s, Pathname("patfiles/base-10-33.i586.pat"));
     if (pattern->userVisible())
     {
       ERR << "Error parsing userVisible" << std::endl;
