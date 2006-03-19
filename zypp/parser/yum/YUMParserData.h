@@ -165,6 +165,7 @@ namespace zypp {
         std::string epoch;
         std::string ver;
         std::string rel;
+	std::string arch;
         std::list<YUMDependency> provides;
         std::list<YUMDependency> conflicts;
         std::list<YUMDependency> obsoletes;
@@ -350,6 +351,10 @@ namespace zypp {
 
         YUMPatternData();
         std::string name;
+        std::string epoch;
+        std::string ver;
+        std::string rel;
+	std::string arch;
         TranslatedText summary;
         std::string default_;
         std::string userVisible;

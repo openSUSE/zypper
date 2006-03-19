@@ -75,7 +75,10 @@ namespace zypp {
 	  if (_helper.isElement(child)) {
 	    string name = _helper.name(child);
 	    if (name == "name") {
-      	patchPtr->name = _helper.content(child);
+		patchPtr->name = _helper.content(child);
+	    }
+	    else if (name == "arch") {
+		patchPtr->arch = _helper.content(child);
 	    }
 	    else if (name == "summary") {
 	      patchPtr->summary.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
@@ -116,16 +119,16 @@ namespace zypp {
 	      prim.parseDependencyEntries(& patchPtr->freshens, child);
 	    }
 	    else if (name == "category") {
-      	patchPtr->category = _helper.content(child);
+		patchPtr->category = _helper.content(child);
 	    }
 	    else if (name == "reboot_needed") {
-      	patchPtr->rebootNeeded = true;
+		patchPtr->rebootNeeded = true;
 	    }
 	    else if (name == "package_manager") {
-      	patchPtr->packageManager = true;
+		patchPtr->packageManager = true;
 	    }
 	    else if (name == "update_script") {
-      	patchPtr->updateScript = _helper.content(child);
+		patchPtr->updateScript = _helper.content(child);
 	    }
 	    else if (name == "atoms") {
 	      parseAtomsNode(patchPtr, child);
@@ -153,15 +156,15 @@ namespace zypp {
 XXX << "parseAtomsNode(" << name << ")" << endl;
 	    if (name == "package")
 	    {
-	      	parsePackageNode (dataPtr, child);
+			parsePackageNode (dataPtr, child);
 	    }
 	    else if (name == "script")
 	    {
-      		parseScriptNode (dataPtr, child);
+			parseScriptNode (dataPtr, child);
 	    }
 	    else if (name == "message")
 	    {
-	      	parseMessageNode (dataPtr, child);
+			parseMessageNode (dataPtr, child);
 	    }
 	    else {
 	      WAR << "YUM <atoms> contains the unknown element <" << name << "> "
@@ -256,7 +259,7 @@ XXX << "parseFormatNode(" << name << ")" << endl;
 	    }
 	    else {
 	      WAR << "YUM <atom/package/format> contains the unknown element <"
-      	  << name << "> "
+		  << name << "> "
 		<< _helper.positionInfo(child) << ", skipping" << endl;
 	    }
 	  }
@@ -265,7 +268,7 @@ XXX << "parseFormatNode(" << name << ")" << endl;
       
       void
       YUMPatchParser::parsePkgPlainRpmNode(YUMPatchPackage *dataPtr,
-      				xmlNodePtr formatNode)
+					xmlNodePtr formatNode)
       {
 	YUMPlainRpm plainRpm;
 	plainRpm.arch = _helper.attribute( formatNode, "arch" );
@@ -279,7 +282,7 @@ XXX << "parseFormatNode(" << name << ")" << endl;
 	  if (_helper.isElement(child)) {
 	    string name = _helper.name(child);
 	    WAR << "YUM <atom/package/pkgfiles/plain> contains the unknown element <"
-      	<< name << "> "
+		<< name << "> "
 	      << _helper.positionInfo(child) << ", skipping" << endl;
 	  }
 	}
@@ -288,7 +291,7 @@ XXX << "parseFormatNode(" << name << ")" << endl;
       
       void
       YUMPatchParser::parsePkgPatchRpmNode(YUMPatchPackage *dataPtr,
-      				xmlNodePtr formatNode)
+					xmlNodePtr formatNode)
       {
 	YUMPatchRpm patchRpm;
 	patchRpm.arch = _helper.attribute( formatNode, "arch" );
@@ -308,7 +311,7 @@ XXX << "parseFormatNode(" << name << ")" << endl;
 	    }
 	    else {
 	      WAR << "YUM <atom/package/pkgfiles/patch> contains the unknown element <"
-      	  << name << "> "
+		  << name << "> "
 		<< _helper.positionInfo(child) << ", skipping" << endl;
 	    }
 	  }
@@ -318,7 +321,7 @@ XXX << "parseFormatNode(" << name << ")" << endl;
       
       void
       YUMPatchParser::parsePkgDeltaRpmNode(YUMPatchPackage *dataPtr,
-      				xmlNodePtr formatNode)
+					xmlNodePtr formatNode)
       {
 	YUMDeltaRpm deltaRpm;
 	deltaRpm.arch = _helper.attribute( formatNode, "arch" );
@@ -336,7 +339,7 @@ XXX << "parseFormatNode(" << name << ")" << endl;
 	    }
 	    else {
 	      WAR << "YUM <atom/package/pkgfiles/delta> contains the unknown element <"
-      	  << name << "> "
+		  << name << "> "
 		<< _helper.positionInfo(child) << ", skipping" << endl;
 	    }
 	  }
@@ -347,7 +350,7 @@ XXX << "parseFormatNode(" << name << ")" << endl;
       
       void
       YUMPatchParser::parsePkgBaseVersionNode(YUMBaseVersion *dataPtr,
-      					xmlNodePtr formatNode)
+						xmlNodePtr formatNode)
       {
 	dataPtr->epoch = _helper.attribute( formatNode, "epoch" );
 	dataPtr->ver = _helper.attribute( formatNode, "ver" );
@@ -359,7 +362,7 @@ XXX << "parseFormatNode(" << name << ")" << endl;
       
       void
       YUMPatchParser::parsePkgFilesNode(YUMPatchPackage *dataPtr,
-      				 xmlNodePtr formatNode)
+					 xmlNodePtr formatNode)
       {
 	for (xmlNodePtr child = formatNode->children; 
 	     child != 0;
@@ -367,17 +370,17 @@ XXX << "parseFormatNode(" << name << ")" << endl;
 	  if (_helper.isElement(child)) {
 	    string name = _helper.name(child);
 	    if (name == "plainrpm") {
-      	parsePkgPlainRpmNode( dataPtr, child );
+		parsePkgPlainRpmNode( dataPtr, child );
 	    }
 	    else if (name == "patchrpm") {
-      	parsePkgPatchRpmNode( dataPtr, child );
+		parsePkgPatchRpmNode( dataPtr, child );
 	    }
 	    else if (name == "deltarpm") {
-      	parsePkgDeltaRpmNode( dataPtr, child );
+		parsePkgDeltaRpmNode( dataPtr, child );
 	    }
 	    else {
 	      WAR << "YUM <atom/package/pkgfiles> contains the unknown element <"
-      	  << name << "> "
+		  << name << "> "
 		<< _helper.positionInfo(child) << ", skipping" << endl;
 	    }
 	  }
@@ -407,7 +410,7 @@ XXX << "parseFormatNode(" << name << ")" << endl;
 	    string name = _helper.name(child);
 XXX << "parsePackageNode(" << name << ")" << endl;
 	    if (name == "name") {
-	      	package->name = _helper.content(child);
+			package->name = _helper.content(child);
 	    }
 	    else if (name == "arch") {
 	      package->arch = _helper.content(child);
@@ -447,11 +450,11 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	      package->location = _helper.attribute(child,"href");
 	    }
 	    else if (name == "format") {
-	      	parseFormatNode (&*package, child);
+			parseFormatNode (&*package, child);
 	    }
 	    else if (name == "pkgfiles")
 	    {
-	      	parsePkgFilesNode (&*package, child);
+			parsePkgFilesNode (&*package, child);
 	    }
 	    else if (name == "license_to_confirm")
 	    {
@@ -459,7 +462,7 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	    }
 	    else {
 	      WAR << "YUM <atoms/package> contains the unknown element <"
-      	  << name << "> "
+		  << name << "> "
 		<< _helper.positionInfo(child) << ", skipping" << endl;
 	    }
 	  }
@@ -482,7 +485,7 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	  if (_helper.isElement(child)) {
 	    string name = _helper.name(child);
 	    if (name == "name") {
-      	script->name = _helper.content(child);
+		script->name = _helper.content(child);
 	    }
 	    else if (name == "version") {
 	      script->epoch = _helper.attribute(child,"epoch");
@@ -490,10 +493,10 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	      script->rel = _helper.attribute(child,"rel");
 	    }
 	    else if (name == "do") {
-      	script->do_script = _helper.content(child);
+		script->do_script = _helper.content(child);
 	    }
 	    else if (name == "undo") {
-      	script->undo_script = _helper.content(child);
+		script->undo_script = _helper.content(child);
 	    }
 	    else if (name == "provides") {
 	      prim.parseDependencyEntries(& script->provides, child);
@@ -524,7 +527,7 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	    }
 	    else {
 	      WAR << "YUM <atoms/script> contains the unknown element <"
-      	  << name << "> "
+		  << name << "> "
 		<< _helper.positionInfo(child) << ", skipping" << endl;
 	    }
 	  }
@@ -586,7 +589,7 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	    }
 	    else {
 	      WAR << "YUM <atoms/message> contains the unknown element <"
-      	  << name << "> "
+		  << name << "> "
 		<< _helper.positionInfo(child) << ", skipping" << endl;
 	    }
 	  }

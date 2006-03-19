@@ -383,6 +383,7 @@ namespace zypp {
           << "  epoch: " << data.epoch << endl
           << "  version: " << data.ver << endl
           << "  release: " << data.rel << endl
+          << "  architecture: " << data.arch << endl
           << "  provides: " << data.provides << endl
           << "  conflicts: " << data.conflicts << endl
           << "  obsoletes: " << data.obsoletes << endl
