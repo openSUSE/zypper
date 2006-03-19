@@ -514,7 +514,7 @@ namespace zypp
         // create Atom
         CapFactory f;
         Dependencies deps = createDependencies( parsed, ResTraits<Package>::kind );
-        deps[Dep::REQUIRES].insert( f.parse( ResTraits<Package>::kind, parsed.name, Rel::EQ, edition ) );
+//        deps[Dep::REQUIRES].insert( f.parse( ResTraits<Package>::kind, parsed.name, Rel::EQ, edition ) );
         NVRAD atomdata( nvra, deps );
         ResImplTraits<YUMAtomImpl>::Ptr atomimpl = new YUMAtomImpl( source_r );
         Atom::Ptr atom = detail::makeResolvableFromImpl( atomdata, atomimpl);
@@ -584,9 +584,9 @@ namespace zypp
       ResImplTraits<YUMGroupImpl>::Ptr impl(new YUMGroupImpl(source_r, parsed));
       // Collect basic Resolvable data
       NVRAD dataCollect( parsed.groupId,
-		      Edition::noedition,
-		      Arch_noarch,
-		      createGroupDependencies(parsed));
+			 Edition::noedition,			// group has just a name,
+			 Arch_noarch,				//   pattern has edition & arch
+			 createGroupDependencies(parsed));
       Selection::Ptr group = detail::makeResolvableFromImpl(
 	dataCollect, impl
       );
@@ -609,9 +609,9 @@ namespace zypp
       ResImplTraits<YUMPatternImpl>::Ptr impl(new YUMPatternImpl(source_r, parsed));
       // Collect basic Resolvable data
       NVRAD dataCollect( parsed.name,
-		      Edition::noedition,
-		      Arch_noarch,
-		      createDependencies(parsed, ResTraits<Pattern>::kind));
+			 Edition( parsed.ver, parsed.rel, parsed.epoch ),
+			 Arch( parsed.arch ),
+			 createDependencies(parsed, ResTraits<Pattern>::kind));
       Pattern::Ptr pattern = detail::makeResolvableFromImpl(
 	dataCollect, impl
       );
@@ -636,7 +636,7 @@ namespace zypp
 	    // Collect basic Resolvable data
 	    NVRAD dataCollect( parsed.name,
 			      Edition( parsed.ver, parsed.rel, parsed.epoch ),
-			      Arch_noarch,
+			      Arch( parsed.arch ),
 			      createDependencies(parsed,
 						  ResTraits<Message>::kind)
 			    );
@@ -664,7 +664,7 @@ namespace zypp
       // Collect basic Resolvable data
       NVRAD dataCollect( parsed.name,
 		      Edition( parsed.ver, parsed.rel, parsed.epoch ),
-		      Arch_noarch,
+		      Arch( parsed.arch ),
 		      createDependencies(parsed,
 					  ResTraits<Script>::kind)
 		    );
@@ -692,7 +692,7 @@ namespace zypp
 	    // Collect basic Resolvable data
 	    NVRAD dataCollect( parsed.name,
 			      Edition( parsed.ver, parsed.rel, parsed.epoch ),
-			      Arch_noarch,
+			      Arch( parsed.arch ),
 			      createDependencies(parsed,
 						  ResTraits<Product>::kind)
 			    );
@@ -720,7 +720,7 @@ namespace zypp
       // Collect basic Resolvable data
       NVRAD dataCollect( parsed.name,
 		      Edition( parsed.ver, parsed.rel, parsed.epoch ),
-		      Arch_noarch,
+		      Arch( parsed.arch ),
 		      createDependencies( parsed,
 					  ResTraits<Patch>::kind)
 		    );

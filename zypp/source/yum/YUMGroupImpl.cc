@@ -37,9 +37,9 @@ namespace zypp
 	Source_Ref source_r,
 	const zypp::parser::yum::YUMGroupData & parsed
       )
-      : _user_visible(parsed.userVisible == "true")
+      : _summary(parsed.name)
       , _description(parsed.description)
-      , _summary(parsed.name)
+      , _user_visible(parsed.userVisible == "true")
       , _source(source_r)
       {
 // to name        std::string groupId;
