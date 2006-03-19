@@ -153,12 +153,14 @@ ResolverContext::getStatus (PoolItem_Ref item)
 	context = context->_parent;			// N: go up the chain
     }
 
-    ResStatus status;
+    ResStatus status( item.status() );			// make a copy of the status
+    status.resetTransact( ResStatus::USER );		//   without transaction
+#if 0
     if (item.status().isInstalled())
 	status = ResStatus::installed;			// return _is_ state, not _to be_ state
     else
 	status = ResStatus::uninstalled;		// return _is_ state, not _to be_ state
-
+#endif
     _last_checked_status = status;
 //_XDEBUG( "[NULL]:" << status );    
 
@@ -1389,7 +1391,7 @@ struct RequirementMet
 	    flag = true;
 	}
 
-//	ERR << "RequirementMet(" <<  item << ", " << cap << ") [capability " <<
+//	ERR << "RequirementMet(" <<  provider << ", " << match << ") [capability " <<
 //	  capability << "] -> " <<  (flag ? "true" : "false") << endl;
 
 	return ! flag;
@@ -1398,21 +1400,21 @@ struct RequirementMet
 
 
 bool
-ResolverContext::requirementIsMet (const Capability & dependency, bool is_child)
+ResolverContext::requirementIsMet (const Capability & capability, bool is_child)
 {
-    RequirementMet info (this, is_child ? dependency : Capability::noCap);
+    RequirementMet info (this, is_child ? capability : Capability::noCap);
 
-    //    world()->foreachProviding (dependency, requirement_met_cb, (void *)&info);
+    //    world()->foreachProviding (capability, requirement_met_cb, (void *)&info);
 
     Dep dep( Dep::PROVIDES );
 
-    // world->foreachProvidingResItem (dependency, require_process_cb, &info);
+    // world->foreachProvidingResItem (capability, require_process_cb, &info);
 
-    invokeOnEach( pool().byCapabilityIndexBegin( dependency.index(), dep ),
-		  pool().byCapabilityIndexEnd( dependency.index(), dep ),
-		  resfilter::ByCapMatch( dependency ),
+    invokeOnEach( pool().byCapabilityIndexBegin( capability.index(), dep ),
+		  pool().byCapabilityIndexEnd( capability.index(), dep ),
+		  resfilter::ByCapMatch( capability ),
 		  functor::functorRef<bool,CapAndItem>(info) );
-_XDEBUG( "ResolverContext::requirementIsMet(" << dependency << ") " << (info.flag?"Y":"N") );
+_XDEBUG( "ResolverContext::requirementIsMet(" << capability << ") " << (info.flag?"Y":"N") );
     return info.flag;
 }
 
@@ -1460,7 +1462,7 @@ struct RequirementPossible
 
 
 bool
-ResolverContext::requirementIsPossible (const Capability & dependency)
+ResolverContext::requirementIsPossible (const Capability & capability)
 {
     RequirementPossible info( this );
 
@@ -1468,11 +1470,11 @@ ResolverContext::requirementIsPossible (const Capability & dependency)
 
     Dep dep( Dep::PROVIDES );
 
-    invokeOnEach( pool().byCapabilityIndexBegin( dependency.index(), dep ),
-		  pool().byCapabilityIndexEnd( dependency.index(), dep ),
-		  resfilter::ByCapMatch( dependency ),
+    invokeOnEach( pool().byCapabilityIndexBegin( capability.index(), dep ),
+		  pool().byCapabilityIndexEnd( capability.index(), dep ),
+		  resfilter::ByCapMatch( capability ),
 		  functor::functorRef<bool,CapAndItem>(info) );
-    _XDEBUG("requirementIsPossible( " << dependency << ") = " << (info.flag ? "Y" : "N"));
+    _XDEBUG("requirementIsPossible( " << capability << ") = " << (info.flag ? "Y" : "N"));
     return info.flag;
 }
 
@@ -1504,6 +1506,7 @@ dup_name_check_cb (PoolItem_Ref item, const ResStatus & status, void *data)
     DupNameCheckInfo *info = (DupNameCheckInfo *)data;
     if (! info->flag
 	&& status.isToBeInstalled ()
+	&& info->other->kind() == item->kind()
 	&& info->other->name() == item->name()
 	&& item->edition().compare(info->other->edition()) == 0
 	&& item->arch() == info->other->arch())
