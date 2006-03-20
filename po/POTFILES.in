@@ -1,7 +1,10 @@
 # List of source files which contain translatable strings.
+./zypp/base/Exception.cc
 ./zypp/media/Mount.cc
 ./zypp/LanguageCode.cc
+./zypp/SourceManager.cc
 ./zypp/target/rpm/RpmDb.cc
+./zypp/target/TargetImpl.cc
 ./zypp/solver/detail/ResolverInfoObsoletes.cc
 ./zypp/solver/detail/Resolver_problems.cc
 ./zypp/solver/detail/ProblemSolutionIgnore.cc
@@ -18,3 +21,4 @@
 ./zypp/solver/detail/ResolverInfoChildOf.cc
 ./zypp/solver/detail/ProblemSolutionUnlock.cc
 ./zypp/CountryCode.cc
+./zypp/SourceManager.h
