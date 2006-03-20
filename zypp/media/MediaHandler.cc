@@ -430,7 +430,7 @@ MediaHandler::isSharedMedia() const
 //	DESCRIPTION :
 //
 bool
-MediaHandler::checkAttached(bool isDevice,  bool fsType) const
+MediaHandler::checkAttached(bool matchMountFs) const
 {
   bool _isAttached = false;
 
@@ -465,9 +465,9 @@ MediaHandler::checkAttached(bool isDevice,  bool fsType) const
           is_device = true;
         }
 
-        if( isDevice && is_device)
+        if( is_device &&  ref.mediaSource->maj_nr)
         {
-          std::string mtype(fsType ? e->type : ref.mediaSource->type);
+          std::string mtype(matchMountFs ? e->type : ref.mediaSource->type);
           MediaSource media(mtype, e->src, dev_info.major(), dev_info.minor());
 
           if( ref.mediaSource->equals( media) &&
@@ -482,9 +482,9 @@ MediaHandler::checkAttached(bool isDevice,  bool fsType) const
           // differs
         }
         else
-        if( !isDevice && !is_device)
+        if(!is_device && !ref.mediaSource->maj_nr)
         {
-          std::string mtype(fsType ? e->type : ref.mediaSource->type);
+          std::string mtype(matchMountFs ? e->type : ref.mediaSource->type);
           MediaSource media(mtype, e->src);
 
           if( ref.mediaSource->equals( media) &&
@@ -633,7 +633,7 @@ void MediaHandler::release( bool eject )
     _mediaSource.reset(NULL);
 
     MediaManager manager;
-    manager.forceMediaRelease(media);
+    manager.forceReleaseShared(media);
 
     setMediaSource(media);
     DBG << "Releasing media (forced) " << _mediaSource->asString() << std::endl;
@@ -647,6 +647,71 @@ void MediaHandler::release( bool eject )
     setAttachPoint("", true);
   }
   MIL << "Released: " << *this << endl;
+}
+
+void MediaHandler::forceRelaseAllMedia(bool matchMountFs)
+{
+  AttachedMedia ref( attachedMedia());
+  if( !ref.mediaSource)
+    return;
+
+  MountEntries  entries( MediaManager::getMountEntries());
+  MountEntries::const_iterator e;
+  for( e = entries.begin(); e != entries.end(); ++e)
+  {
+    bool        is_device = false;
+    std::string dev_path(Pathname(e->src).asString());
+    PathInfo    dev_info;
+
+    if( dev_path.compare(0, sizeof("/dev/")-1, "/dev/") == 0 &&
+        dev_info(e->src) && dev_info.isBlk())
+    {
+      is_device = true;
+    }
+
+    if( is_device &&  ref.mediaSource->maj_nr)
+    {
+      std::string mtype(matchMountFs ? e->type : ref.mediaSource->type);
+      MediaSource media(mtype, e->src, dev_info.major(), dev_info.minor());
+
+      if( ref.mediaSource->equals( media) && e->type != "subfs")
+      {
+        DBG << "Forcing release of media device "
+            << ref.mediaSource->asString()
+            << " in the mount table as "
+	    << e->src << std::endl;
+	Mount mount;
+	try {
+	  mount.umount(e->dir);
+	}
+	catch (const Exception &e)
+	{
+	  ZYPP_CAUGHT(e);
+	}
+      }
+    }
+    else
+    if(!is_device && !ref.mediaSource->maj_nr)
+    {
+      std::string mtype(matchMountFs ? e->type : ref.mediaSource->type);
+      MediaSource media(mtype, e->src);
+      if( ref.mediaSource->equals( media) && e->type != "subfs")
+      {
+	DBG << "Forcing release of media name "
+	    << ref.mediaSource->asString()
+	    << " in the mount table as "
+	    << e->src << std::endl;
+	Mount mount;
+	try {
+	  mount.umount(e->dir);
+	}
+	catch (const Exception &e)
+	{
+	  ZYPP_CAUGHT(e);
+	}
+      }
+    }
+  }
 }
 
 bool

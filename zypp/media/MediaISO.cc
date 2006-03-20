@@ -135,7 +135,7 @@ namespace zypp
     bool
     MediaISO::isAttached() const
     {
-      return checkAttached(false, false);
+      return checkAttached(false);
     }
 
     // ---------------------------------------------------------------

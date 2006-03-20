@@ -227,7 +227,7 @@ namespace zypp {
     bool
     MediaDISK::isAttached() const
     {
-      return checkAttached(true);
+      return checkAttached(false);
     }
 
     ///////////////////////////////////////////////////////////////////

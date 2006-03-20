@@ -780,7 +780,7 @@ namespace zypp
 
     // ---------------------------------------------------------------
     void
-    MediaManager::forceMediaRelease(const MediaSourceRef &media)
+    MediaManager::forceReleaseShared(const MediaSourceRef &media)
     {
       MutexLock glock(g_Mutex);
 

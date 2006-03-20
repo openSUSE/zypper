@@ -31,7 +31,8 @@
 
 #include <linux/cdrom.h>
 
-#define  DELAYED_VERIFY 1
+#define  DELAYED_VERIFY          1
+#define  FORCE_RELEASE_FOREIGN   0
 
 using namespace std;
 
@@ -501,9 +502,13 @@ namespace zypp {
       catch (const Exception & excpt_r)
       {
 	ZYPP_CAUGHT(excpt_r);
-	if (eject && openTray( mediaSourceName()))
+	if (eject)
 	{
-	  return;
+#if FORCE_RELEASE_FOREIGN
+	  forceRelaseAllMedia(false);
+#endif
+	  if(openTray( mediaSourceName()))
+	    return;
 	}
 	ZYPP_RETHROW(excpt_r);
       }
@@ -511,6 +516,9 @@ namespace zypp {
       // eject device
       if (eject)
       {
+#if FORCE_RELEASE_FOREIGN
+        forceRelaseAllMedia(false);
+#endif
         openTray( mediaSourceName() );
       }
     }
@@ -550,7 +558,7 @@ namespace zypp {
     bool
     MediaCD::isAttached() const
     {
-      return checkAttached(true);
+      return checkAttached(false);
     }
 
     ///////////////////////////////////////////////////////////////////

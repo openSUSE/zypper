@@ -738,7 +738,7 @@ namespace zypp
        * \param media The media source reference to release.
        */
       void
-      forceMediaRelease(const MediaSourceRef &media);
+      forceReleaseShared(const MediaSourceRef &media);
 
     private:
       /**

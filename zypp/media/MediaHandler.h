@@ -256,15 +256,22 @@ class MediaHandler {
 	/**
 	 * Check actual mediaSource attachment against the current
 	 * mount table of the system. Used to implement isAttached().
-	 * \param aDevice If to check only against devices in the
-	 *                mount table or only against other mounted
-	 *                sources (nfs, cifs, loop mounted file).
-	 * \param fsType  If to use the filesystem type from the
-	 *                mount table or not (nfs, smb and cifs only).
+	 * \param matchMountFs If to use the filesystem type from the
+	 *        mount table (nfs, smb and cifs) or from mediaSource
+	 *        while compare of a mount entry with mediaSource.
 	 * \return true, if the media appears in the mount table.
 	 */
-	bool             checkAttached(bool aDevice,
-	                               bool fsType=false) const;
+	bool             checkAttached(bool matchMountFs) const;
+
+	/**
+	 * Call to this function will try to release all media matching
+	 * the currenlty attached media source, that it is able to find
+	 * in the mount table. This means also foreign (user) mounts!
+	 * \param matchMountFs If to use the filesystem type from the
+	 *        mount table (nfs, smb and cifs) or from mediaSource
+	 *        while compare of a mount entry with mediaSource.
+	 */
+	void             forceRelaseAllMedia(bool matchMountFs);
 
     protected:
 

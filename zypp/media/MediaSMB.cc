@@ -268,7 +268,7 @@ namespace zypp {
     bool
     MediaSMB::isAttached() const
     {
-      return checkAttached(false, true);
+      return checkAttached(true);
     }
 
     ///////////////////////////////////////////////////////////////////

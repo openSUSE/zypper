@@ -158,7 +158,7 @@ namespace zypp {
     bool
     MediaNFS::isAttached() const
     {
-      return checkAttached(false, true);
+      return checkAttached(true);
     }
 
     ///////////////////////////////////////////////////////////////////
