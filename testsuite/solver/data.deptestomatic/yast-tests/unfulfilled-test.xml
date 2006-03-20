@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- unfulfilled requirement [[Uninstall: U__s_[package]suseRegister-1.0-22.noarch -->
+<!--(unsatisfied dependency), Triggered By [package] (namedcap) lsb]] without -->
+<!--error message -->
+<test>
+<setup>
+  <channel name="sles_packages" file="sles10-beta8-packages.xml"/>
+  <locale name="de"/>
+  <locale name="de_DE"/>
+  <mediaid/>
+</setup>
+<trial>
+  <lock package="lsb" channel="sles_packages"/>
+  <install channel="sles_packages" kind="package" name="yast2-installation"/>
+  <reportproblems/>
+</trial>
+</test>
