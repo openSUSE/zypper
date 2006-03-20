@@ -32,12 +32,6 @@ namespace zypp
     namespace susetags
     { /////////////////////////////////////////////////////////////////
 
-      /**
-       * Please access the parser using this method.
-       * Returns a product from a content file \a file_r
-       */
-      Product::Ptr parseContentFile( const Pathname & file_r, Source_Ref source_r );
-
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : ProductMetadataParser

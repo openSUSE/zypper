@@ -89,6 +89,7 @@ namespace zypp
 	
         unsigned _media_count;
 	
+        Pathname _descr_dir;
         Pathname _data_dir;
         Pathname _content_file;
         

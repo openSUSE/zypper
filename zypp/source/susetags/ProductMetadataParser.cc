@@ -233,12 +233,6 @@ namespace zypp
 	  }
       }
 
-      Product::Ptr parseContentFile( const Pathname & file_r, Source_Ref source_r )
-      {
-        ProductMetadataParser p;
-        p.parse( file_r, source_r );
-        return p.result;
-      }
       /////////////////////////////////////////////////////////////////
     } // namespace susetags
     ///////////////////////////////////////////////////////////////////
