@@ -199,9 +199,10 @@ namespace zypp
 	    user == media::MediaChangeReport::CHANGE_URL )
 	    {
 	      // retry
-	      DBG << "Going to attach again" << endl;
+	      DBG << "Going to try again" << endl;
 
-	      media_mgr.attach( _media );
+	      // not attaching, media set will do that for us
+	      // this could generate uncaught exception (#158620)
 
 	      break;
 	    }
