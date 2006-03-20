@@ -112,6 +112,15 @@ namespace zypp
       
       void SelectionTagFileParser::consume( const MultiTag &tag )
       {
+        if ( tag.name == "Des" )
+        {
+          std::string buffer;
+          for (std::list<std::string>::const_iterator it = tag.values.begin(); it != tag.values.end(); ++it)
+          {
+            buffer += (*it + "\n");
+          }
+          selImpl->_description.setText(buffer, Locale(tag.modifier));
+        }
         if ( tag.name == "Req" )
         {
           selImpl->_requires.insert( tag.values.begin(), tag.values.end());

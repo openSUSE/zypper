@@ -48,6 +48,7 @@ namespace zypp
       virtual Source_Ref source() const;
       
       TranslatedText _summary;
+      TranslatedText _description;
       std::string _parser_version;
       std::string _name;
       std::string _version;

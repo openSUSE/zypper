@@ -42,7 +42,7 @@ namespace zypp
     { return _summary; }
 
     TranslatedText SuseTagsSelectionImpl::description() const
-    { return _summary; }
+    { return _description; }
 
     Label SuseTagsSelectionImpl::category() const
     { return _category; }
