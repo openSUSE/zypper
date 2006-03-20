@@ -38,8 +38,8 @@ extern "C" {
 namespace zypp {
 
   namespace parser {
-   
-    
+
+
     /**
      * @short class for reporting syntax errors in XMLNodeIterator.
      */
@@ -53,54 +53,54 @@ namespace zypp {
                      xmlTextReaderLocatorPtr locator,
                      int docLine,
                      int docColumn) throw();
-    
+
       ~XMLParserError() throw();
-    
+
       /**
        * The message of the errors
        */
       std::string msg() const throw();
-    
+
       /**
        * The severity of this error
        */
       int severity() const throw();
-    
+
       /**
        * See libxml2 documentation
        */
       xmlTextReaderLocatorPtr locator() const throw();
-    
+
       /**
        * The line number in the xml document where the error occurred.
        */
       int docLine() const throw();
-    
+
       /**
        * The column number in the xml document where the error occurred.
        */
       int docColumn() const throw();
-    
+
       /**
        * Gives a string describing the position in the xml document.
        * (either empty, or "at line ..., column ...")
        **/
       std::string position() const throw();
-    
+
     private:
-    
+
       std::string _msg;
       int _severity;
       xmlTextReaderLocatorPtr _locator;
       int _docLine;
       int _docColumn;
     };
-    
-    
+
+
     std::ostream& operator<<(std::ostream &out, const XMLParserError& error);
-    
-    
-    
+
+
+
     /**
      *
      * @short Abstract class to iterate over an xml stream
@@ -128,8 +128,8 @@ namespace zypp {
      * continue parsing, XMLNodeIterator will log it and consider the input as finished.
      * You can query the exit status with errorStatus().
      */
-    
-     
+
+
     class XMLNodeIteratorBase {
     public:
       /**
@@ -138,29 +138,29 @@ namespace zypp {
        * @param baseUrl is the base URL of the xml document
        * FIXME: use XMLParserError::operator<< instead of doing it on my own.
        */
-      XMLNodeIteratorBase(std::istream &input, 
+      XMLNodeIteratorBase(std::istream &input,
                           const std::string &baseUrl,
                           const char *validationPath = 0);
-    
+
       /**
        * Constructor for an empty iterator.
        * An empty iterator is already at its end.
        * This is what end() returns ...
        */
       XMLNodeIteratorBase();
-    
+
       /**
        * Destructor
        */
       virtual ~XMLNodeIteratorBase();
-    
+
       /**
        * Have we reached the end?
        * A parser error also means "end reached"
        * @return whether the end has been reached.
        */
       bool atEnd() const;
-    
+
       /**
        * Two iterators are equal if both are at the end
        * or if they are identical.
@@ -169,20 +169,20 @@ namespace zypp {
        * @param other the other iterator
        * @return true if equal
        */
-      bool 
+      bool
       operator==(const XMLNodeIteratorBase &other) const;
-    
+
       /**
        * Opposit of operator==
        * @param other the other iterator
        * @return true if not equal
        */
-      bool 
+      bool
       operator!=(const XMLNodeIteratorBase &otherNode) const
       {
         return ! operator==(otherNode);
       }
-    
+
       /**
        * returns the error status or 0 if no error
        * the returned pointer is not-owning,
@@ -191,9 +191,9 @@ namespace zypp {
        */
       const XMLParserError *
       errorStatus() const;
-    
+
     protected:
-    
+
       /**
        * filter for the xml nodes
        * The derived class decides which xml nodes it is actually interested in.
@@ -207,14 +207,14 @@ namespace zypp {
        */
       virtual bool
       isInterested(const xmlNodePtr nodePtr) = 0;
-      
+
       /**
        * process an xml node and set it as next element
        * The derived class has to produce the ENTRYTYPE object here.
        * Details about the xml reader is in the libxml2 documentation.
        * You'll most probably want to use xmlTextReaderExpand(reader) to
-       * request the full subtree, and then use the links in the resulting 
-       * node structure to traverse, and class LibXMLHelper to access the 
+       * request the full subtree, and then use the links in the resulting
+       * node structure to traverse, and class LibXMLHelper to access the
        * attributes and element contents.
        * fetchNext() cannot throw an error since it will be called in the constructor.
        * Instead, in case of a fundamental syntax error the error is saved
@@ -223,12 +223,12 @@ namespace zypp {
        */
       virtual void
       _process(const xmlTextReaderPtr readerPtr) = 0;
-      
+
       /**
        * Fetch the next element and save it as next element
        */
       void fetchNext();
-    
+
       /**
        * Internal function to set the _error variable
        * in case of a parser error. It logs the message
@@ -244,55 +244,55 @@ namespace zypp {
                    const char * msg,
                    int severity,
                    xmlTextReaderLocatorPtr locator);
-    
-      
+
+
       virtual void setCurrent(const void *data) = 0;
       virtual void* getCurrent() const = 0;
-    
+
     private:
-    
+
       /**
        * assignment is forbidden.
        * Reason: We can't copy an xmlTextReader
        */
       XMLNodeIteratorBase & operator=(const XMLNodeIteratorBase& otherNode);
-    
+
       /**
        * copy constructor is forbidden.
        * Reason: We can't copy an xmlTextReader
        * FIXME: This prevents implementing the end() method for derived classes.
-       * 
-       * @param otherNode 
-       * @return 
+       *
+       * @param otherNode
+       * @return
        */
       XMLNodeIteratorBase(const XMLNodeIteratorBase& otherNode);
-    
+
       /**
        * if an error occured, this contains the error.
        */
       std::auto_ptr<XMLParserError> _error;
-    
+
       /**
        * contains the istream to read the xml file from.
        * Can be 0 if at end or if the current element is the only element left.
        **/
       std::istream* _input;
-      
+
       /**
        * contains the xmlTextReader used to parse the xml file.
        **/
       xmlTextReaderPtr _reader;
-    
+
       /**
        * contains the base URL of the xml documentation
        */
       std::string _baseUrl;
     }; /* end class XMLNodeIteratorBase */
-    
-    
-    
+
+
+
     /* --------------------------------------------------------------------------- */
-    
+
     template <class ENTRYTYPE>
     class XMLNodeIterator : public XMLNodeIteratorBase,
                             public std::iterator<std::input_iterator_tag, ENTRYTYPE>  {
@@ -312,8 +312,8 @@ namespace zypp {
            XMLNodeIterator has no access to their virtual functions during
            construction */
       }
-      
-      
+
+
       /**
        * Constructor for a trivial iterator.
        * A trivial iterator contains only one element.
@@ -323,10 +323,10 @@ namespace zypp {
        */
       XMLNodeIterator(ENTRYTYPE &entry)
         : XMLNodeIteratorBase()
-      { 
+      {
         setCurrent((void *)& entry);
       }
-      
+
       /**
        * Constructor for an empty iterator.
        * An empty iterator is already at its end.
@@ -335,13 +335,13 @@ namespace zypp {
       XMLNodeIterator()
         : XMLNodeIteratorBase(), _current(0)
       { }
-      
+
       /**
        * Destructor
        */
       virtual ~XMLNodeIterator()
       { }
-      
+
       /**
        * Fetch a pointer to the current element
        * @return pointer to the current element.
@@ -352,7 +352,7 @@ namespace zypp {
         assert (! atEnd());
         return * (ENTRYTYPE *) getCurrent();
       }
-      
+
       /**
        * Fetch the current element
        * @return the current element
@@ -365,7 +365,7 @@ namespace zypp {
         else
           return getCurrent();
       }
-      
+
       /**
        * Go to the next element and return it
        * @return the next element
@@ -375,7 +375,7 @@ namespace zypp {
         fetchNext();
         return *this;
       }
-      
+
       /**
        * remember the current element, go to next and return remembered one.
        * avoid this, usually you need the preinc operator (++iter)
@@ -390,7 +390,7 @@ namespace zypp {
         fetchNext();
         return tmp;
       }
-      
+
       /**
        * similar to operator*, allows direct member access
        * @return pointer to current element
@@ -401,9 +401,9 @@ namespace zypp {
         xml_assert(! atEnd());
         return getCurrent();
       }
-      
+
     protected:
-      
+
       /**
        * filter for the xml nodes
        * The derived class decides which xml nodes it is actually interested in.
@@ -417,7 +417,7 @@ namespace zypp {
        */
       virtual bool
         isInterested(const xmlNodePtr nodePtr) = 0;
-      
+
       /**
        * process an xml node
        * The derived class has to produce the ENTRYTYPE object here.
@@ -434,15 +434,15 @@ namespace zypp {
        */
       virtual ENTRYTYPE
       process(const xmlTextReaderPtr readerPtr) = 0;
-    
+
       void
       _process(const xmlTextReaderPtr readerPtr)
       {
-        setCurrent(new ENTRYTYPE(process(readerPtr)));
+        _current.reset( new ENTRYTYPE(process(readerPtr)));
       }
-    
+
     private:
-    
+
       void setCurrent(const void *data)
       {
         if (data)
@@ -450,12 +450,12 @@ namespace zypp {
         else
           _current.reset(0);
       }
-    
+
       void *getCurrent() const
       {
         return _current.get();
       }
-      
+
       /**
        * contains the current element of the iterator.
        * a pointer is used to be able to handle non-assigneable ENTRYTYPEs.
@@ -464,7 +464,7 @@ namespace zypp {
        **/
       std::auto_ptr<ENTRYTYPE> _current;
     }; /* end class XMLNodeIterator */
-    
+
   }
 }
 

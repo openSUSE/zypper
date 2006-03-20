@@ -37,33 +37,33 @@ namespace zypp {
       {
         fetchNext();
       }
-      
+
       YUMFileListParser::YUMFileListParser()
       { }
-      
+
       YUMFileListParser::YUMFileListParser(YUMFileListData_Ptr& entry)
       : XMLNodeIterator<YUMFileListData_Ptr>(entry)
       { }
-      
-      
-      
+
+
+
       YUMFileListParser::~YUMFileListParser()
       {
       }
-      
-      
-      
-      
+
+
+
+
       // select for which elements process() will be called
-      bool 
+      bool
       YUMFileListParser::isInterested(const xmlNodePtr nodePtr)
       {
         bool result = (_helper.isElement(nodePtr)
                        && _helper.name(nodePtr) == "package");
         return result;
       }
-      
-      
+
+
       // do the actual processing
       YUMFileListData_Ptr
       YUMFileListParser::process(const xmlTextReaderPtr reader)
@@ -72,11 +72,11 @@ namespace zypp {
         YUMFileListData_Ptr dataPtr = new YUMFileListData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         xml_assert(dataNode);
-      
+
         dataPtr->pkgId = _helper.attribute(dataNode,"pkgid");
         dataPtr->name = _helper.attribute(dataNode,"name");
         dataPtr->arch = _helper.attribute(dataNode,"arch");
-      
+
         for (xmlNodePtr child = dataNode->children;
              child != 0;
              child = child->next) {
@@ -88,9 +88,11 @@ namespace zypp {
                    dataPtr->rel = _helper.attribute(child,"rel");
                  }
                  else if (name == "file") {
+#if 0
                    dataPtr->files.push_back
                      (FileData(_helper.content(child),
                                _helper.attribute(child,"type")));
+#endif
                  }
                  else {
                    WAR << "YUM <filelists> contains the unknown element <" << name << "> "
@@ -100,7 +102,7 @@ namespace zypp {
              }
         return dataPtr;
       }
-  
+
 
     } // namespace yum
   } // namespace parser

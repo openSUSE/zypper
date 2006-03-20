@@ -64,7 +64,7 @@ namespace zypp
 
       /** Add a reference. */
       void ref() const
-      { ++_counter; }
+      { ref_to( ++_counter ); }
 
       /** Release a reference.
        * Deletes the object if reference count gets zero.
@@ -74,7 +74,9 @@ namespace zypp
       {
         if ( !_counter )
           unrefException(); // will throw!
-        if ( --_counter == 0 )
+        if ( --_counter )
+          unref_to( _counter );
+        else
           delete this;
       }
 
@@ -93,6 +95,15 @@ namespace zypp
     protected:
       /** Overload to realize std::ostream & operator\<\<. */
       virtual std::ostream & dumpOn( std::ostream & str ) const;
+
+      /** Trigger derived classes after refCount was increased. */
+      virtual void ref_to( unsigned /* rep_cnt_r */ ) const {}
+
+      /** Trigger derived classes after refCount was decreased.
+       * No trigger is sent, if refCount got zero (i.e. the
+       * object is deleted).
+       **/
+      virtual void unref_to( unsigned /* rep_cnt_r */ ) const {}
 
     private:
       /** The reference counter. */

@@ -34,33 +34,33 @@ namespace zypp {
       {
         fetchNext();
       }
-      
+
       YUMOtherParser::YUMOtherParser()
       { }
-      
+
       YUMOtherParser::YUMOtherParser(YUMOtherData_Ptr& entry)
       : XMLNodeIterator<YUMOtherData_Ptr>(entry)
       { }
-      
-      
-      
+
+
+
       YUMOtherParser::~YUMOtherParser()
       {
       }
-      
-      
-      
-      
+
+
+
+
       // select for which elements process() will be called
-      bool 
+      bool
       YUMOtherParser::isInterested(const xmlNodePtr nodePtr)
       {
         bool result = (_helper.isElement(nodePtr)
                        && _helper.name(nodePtr) == "package");
         return result;
       }
-      
-      
+
+
       // do the actual processing
       YUMOtherData_Ptr
       YUMOtherParser::process(const xmlTextReaderPtr reader)
@@ -69,11 +69,11 @@ namespace zypp {
         YUMOtherData_Ptr dataPtr = new YUMOtherData;
         xmlNodePtr dataNode = xmlTextReaderExpand(reader);
         xml_assert(dataNode);
-      
+
         dataPtr->pkgId = _helper.attribute(dataNode,"pkgid");
         dataPtr->name = _helper.attribute(dataNode,"name");
         dataPtr->arch = _helper.attribute(dataNode,"arch");
-      
+
         for (xmlNodePtr child = dataNode->children;
              child != 0;
              child = child->next) {
@@ -85,10 +85,12 @@ namespace zypp {
                    dataPtr->rel = _helper.attribute(child,"rel");
                  }
                  else if (name == "changelog") {
+#if 0
                    dataPtr->changelog.push_back
                      (ChangelogEntry(_helper.attribute(child,"author"),
                                      _helper.attribute(child,"date"),
                                      _helper.content(child)));
+#endif
                  }
 		 else if (name == "license_to_confirm")
 		 {
@@ -102,7 +104,7 @@ namespace zypp {
              }
         return dataPtr;
       }
-      
+
     } // namespace yum
   } // namespace parser
 } // namespace zypp

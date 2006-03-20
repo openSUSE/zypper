@@ -16,9 +16,11 @@
 
 #include <iostream>
 #include <sstream>
+#include <string>
 #include "zypp/base/Logger.h"
-//#include "zypp/base/PtrTypes.h"
-//#include "zypp/ResObject.h"
+#include "zypp/base/String.h"
+#include "zypp/ExternalProgram.h"
+#include "zypp/base/ProvideNumericId.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -31,6 +33,27 @@ namespace zypp
     */
 
 #define TAG INT << __PRETTY_FUNCTION__ << std::endl
+
+    /** 'ps v' */
+    inline std::ostream & dumpMemOn( std::ostream & str, const std::string & msg = std::string() )
+    {
+      static std::string mypid( str::numstring( getpid() ) );
+      const char* argv[] =
+      {
+        "ps",
+        "v",
+        mypid.c_str(),
+        NULL
+      };
+      ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
+
+      str << "MEMUSAGE " << msg << std::endl;
+      for( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )
+          str << line;
+
+      prog.close();
+      return str;
+    }
 
     ///////////////////////////////////////////////////////////////////
     /** \defgroup DBG_TRACER Tracer
@@ -45,10 +68,6 @@ namespace zypp
       enum What { CTOR, COPYCTOR, ASSIGN, DTOR, PING };
       std::string _ident;
     };
-
-    /** \relates TraceCADBase Stream output. */
-    inline std::ostream & operator<<( std::ostream & str, const TraceCADBase & obj )
-    { return str << obj._ident << "[" << &obj << "] "; }
 
     /** \relates TraceCADBase Stream output of TraceCADBase::What. */
     inline std::ostream & operator<<( std::ostream & str, TraceCADBase::What obj )
@@ -85,24 +104,38 @@ namespace zypp
      * \see \c Example.COW_debug.cc.
      */
     template<class _Tp>
-      struct TraceCAD : public TraceCADBase
+      struct TraceCAD : public base::ProvideNumericId<TraceCAD<_Tp>, unsigned long>
+                      , public TraceCADBase
       {
+        static unsigned long & _totalTraceCAD()
+        { static unsigned long _val = 0;
+          return _val; }
+
         TraceCAD()
         { _ident = __PRETTY_FUNCTION__;
+          ++_totalTraceCAD();
           traceCAD( CTOR, *this, *this ); }
 
         TraceCAD( const TraceCAD & rhs )
-        { traceCAD( COPYCTOR, *this, rhs ); }
+        { ++_totalTraceCAD();
+          traceCAD( COPYCTOR, *this, rhs ); }
 
         TraceCAD & operator=( const TraceCAD & rhs )
         { traceCAD( ASSIGN, *this, rhs ); return *this; }
 
         virtual ~TraceCAD()
-        { traceCAD( DTOR, *this, *this ); }
+        { --_totalTraceCAD();
+          traceCAD( DTOR, *this, *this ); }
 
         void _PING() const
         { traceCAD( PING, *this, *this ); }
       };
+
+    /** \relates TraceCAD Stream output. */
+    template<class _Tp>
+      inline std::ostream & operator<<( std::ostream & str, const TraceCAD<_Tp> & obj )
+      { return str << "(ID " << obj.numericId() << ", TOTAL " << obj._totalTraceCAD()
+                   << ") [" << &obj << "] "; }
 
     /** Drop a log line about the traced method. Overload to
      * fit your needs.
@@ -115,78 +148,20 @@ namespace zypp
         switch( what_r )
           {
           case TraceCADBase::CTOR:
-          case TraceCADBase::DTOR:
           case TraceCADBase::PING:
-            std::cerr << self_r << what_r << std::endl;
+          case TraceCADBase::DTOR:
+            std::cerr << what_r << self_r << " (" << self_r._ident << ")" << std::endl;
             break;
+
           case TraceCADBase::COPYCTOR:
           case TraceCADBase::ASSIGN:
-            std::cerr << self_r << what_r << "( " << rhs_r << ")" << std::endl;
+            std::cerr << what_r << self_r << "( " << rhs_r << ")" << " (" << self_r._ident << ")" << std::endl;
             break;
           }
       }
     //@}
     ///////////////////////////////////////////////////////////////////
-#if 0
-    ///////////////////////////////////////////////////////////////////
-    /** \defgroup DBG_FAKED_RESOLVABLES Faked Resolvables
-     * \ingroup DEBUG
-     * \code
-     *   // parse or fill in the values:
-     *   std::string  _name;
-     *   Edition      _edition;
-     *   Arch         _arch;
-     *   Dependencies _deps;
-     *   // Create a faked ResObject claiming to be a Package:
-     *   ResObject::Ptr ptr( debug::fakeResObject<Package>( _name, _edition, _arch, Dependencies() ) );
-     * \endcode
-    */
-    //@{
-    /** Implementation of faked Resolvable. */
-    class ResObjectFakeImpl : public detail::ResObjectImplIf
-    {
-      virtual Label summary() const
-      {
-          std::ostringstream str;
-          str << "FAKED " << *self();
-          return str.str();
-      }
-    };
 
-    /** Faked Resolvable.
-     * Template argument defines the kind of Resolvable.
-    */
-    template<class _Res>
-      class ResObjectFake : public ResObject
-      {
-      public:
-        ResObjectFake( const std::string & name_r,
-                       const Edition & edition_r,
-                       const Arch & arch_r )
-        : ResObject( ResTraits<_Res>::kind, name_r, edition_r, arch_r )
-        {}
-      };
-
-    /** Faked Resolvable factory function.
-     * Provide ready to use NVRA and Dependencies.
-    */
-    template<class _Res>
-      ResObject::Ptr fakeResObject( const std::string & name_r,
-                                    const Edition & edition_r,
-                                    const Arch & arch_r,
-                                    const Dependencies & deps_r )
-      {
-        using detail::_resobjectfactory_detail::ResImplConnect;
-
-        shared_ptr<ResObjectFakeImpl> impl( new ResObjectFakeImpl );
-        ResObject::Ptr ret( new ResImplConnect<ResObjectFake<_Res> >
-                            ( name_r, edition_r, arch_r, impl ) );
-        ret->setDeps( deps_r );
-        return ret;
-      }
-    //@}
-    ///////////////////////////////////////////////////////////////////
-#endif
     /////////////////////////////////////////////////////////////////
   } // namespace debug
   ///////////////////////////////////////////////////////////////////
