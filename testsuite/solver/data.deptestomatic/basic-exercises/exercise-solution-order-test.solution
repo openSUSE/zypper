@@ -5,17 +5,7 @@
 >!> upgrade gnome-vfs-devel-1.0.3-ximian.5.noarch => gnome-vfs-devel-1.0.4-ximian.4.noarch[ximian]
 >!> installs=1, upgrades=2, uninstalls=0
 >!> Solution #2:
->!> install gnome-mime-data-1.0.1-ximian.3.noarch[ximian]
->!> upgrade gnome-vfs-1.0.3-ximian.5.noarch => gnome-vfs-1.0.4-ximian.4.noarch[ximian]
->!> upgrade gnome-vfs-devel-1.0.3-ximian.5.noarch => gnome-vfs-devel-1.0.4-ximian.4.noarch[gnome2]
->!> installs=1, upgrades=2, uninstalls=0
->!> Solution #3:
 >!> install gnome-mime-data-1.0.3.0.200202270245-snap.ximian.1.noarch[gnome2]
 >!> upgrade gnome-vfs-1.0.3-ximian.5.noarch => gnome-vfs-1.0.4-ximian.4.noarch[ximian]
 >!> upgrade gnome-vfs-devel-1.0.3-ximian.5.noarch => gnome-vfs-devel-1.0.4-ximian.4.noarch[gnome2]
->!> installs=1, upgrades=2, uninstalls=0
->!> Solution #4:
->!> install gnome-mime-data-1.0.1-ximian.3.noarch[ximian]
->!> upgrade gnome-vfs-1.0.3-ximian.5.noarch => gnome-vfs-1.0.4-ximian.4.noarch[ximian]
->!> upgrade gnome-vfs-devel-1.0.3-ximian.5.noarch => gnome-vfs-devel-1.0.4-ximian.4.noarch[ximian]
 >!> installs=1, upgrades=2, uninstalls=0
