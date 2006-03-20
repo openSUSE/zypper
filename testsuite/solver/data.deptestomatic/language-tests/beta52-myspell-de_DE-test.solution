@@ -47,8 +47,8 @@
 >!> install insserv-1.04.0-10.i586[beta52]
 >!> install java-1_4_2-gcj-compat-1.4.2.0-15.i586[beta52]
 >!> install krb5-1.4.3-8.i586[beta52]
->!> install language:de-EDITION-UNSPEC.noarch
->!> install language:de_DE-EDITION-UNSPEC.noarch
+>!> install language:de-.noarch
+>!> install language:de_DE-.noarch
 >!> install libacl-2.2.34-4.i586[beta52]
 >!> install libart_lgpl-2.3.17-9.i586[beta52]
 >!> install libattr-2.4.28-5.i586[beta52]
