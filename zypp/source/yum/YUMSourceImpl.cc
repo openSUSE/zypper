@@ -717,10 +717,15 @@ namespace zypp
     {
       ResImplTraits<YUMPatchImpl>::Ptr impl(new YUMPatchImpl(source_r, parsed, *this));
 
+      Arch arch;
+      if (!parsed.arch.empty())
+      {
+        arch = Arch(parsed.arch);
+      }
       // Collect basic Resolvable data
       NVRAD dataCollect( parsed.name,
 		      Edition( parsed.ver, parsed.rel, parsed.epoch ),
-		      Arch( parsed.arch ),
+		      arch,
 		      createDependencies( parsed,
 					  ResTraits<Patch>::kind)
 		    );
