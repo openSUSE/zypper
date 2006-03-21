@@ -70,10 +70,11 @@ namespace zypp
         {}
 
         inline void
-        checkAttached()
+        checkAttached(MediaAccessId id)
         {
           if( !handler->isAttached())
           {
+            DBG << "checkAttached(" << id << ") not attached" << std::endl;
             desired = false;
             ZYPP_THROW(MediaNotAttachedException(
               handler->url()
@@ -82,9 +83,9 @@ namespace zypp
         }
 
         inline void
-        checkDesired()
+        checkDesired(MediaAccessId id)
         {
-          checkAttached();
+          checkAttached(id);
 
           if( !desired)
           {
@@ -98,14 +99,15 @@ namespace zypp
 
             if( !desired)
             {
+              DBG << "checkDesired(" << id << "): not desired" << std::endl;
               ZYPP_THROW(MediaNotDesiredException(
                 handler->url()
               ));
             }
 
-            DBG << "checkDesired(): desired (report)" << std::endl;
+            DBG << "checkDesired(" << id << "): desired (report)" << std::endl;
           } else {
-            DBG << "checkDesired(): desired (cached)" << std::endl;
+            DBG << "checkDesired(" << id << "): desired (cached)" << std::endl;
           }
         }
 
@@ -386,6 +388,7 @@ namespace zypp
 
       ManagedMedia &ref( m_impl->findMM(accessId));
 
+      DBG << "attach(id=" << accessId << ")" << std::endl;
       return ref.handler->attach(next);
     }
 
@@ -397,6 +400,8 @@ namespace zypp
 
       ManagedMedia &ref( m_impl->findMM(accessId));
 
+      DBG << "release(id=" << accessId
+          << (eject ? ", eject)" : ")") << std::endl;
       if( eject)
       {
         //
@@ -550,7 +555,7 @@ namespace zypp
 
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      ref.checkDesired();
+      ref.checkDesired(accessId);
 
       ref.handler->provideFile(filename, cached, checkonly);
     }
@@ -564,7 +569,7 @@ namespace zypp
 
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      ref.checkDesired();
+      ref.checkDesired(accessId);
 
       ref.handler->provideDir(dirname);
     }
@@ -578,7 +583,7 @@ namespace zypp
 
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      ref.checkDesired();
+      ref.checkDesired(accessId);
 
       ref.handler->provideDirTree(dirname);
     }
@@ -592,7 +597,7 @@ namespace zypp
 
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      ref.checkAttached();
+      ref.checkAttached(accessId);
 
       ref.handler->releaseFile(filename);
     }
@@ -606,7 +611,7 @@ namespace zypp
 
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      ref.checkAttached();
+      ref.checkAttached(accessId);
 
       ref.handler->releaseDir(dirname);
     }
@@ -621,7 +626,7 @@ namespace zypp
 
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      ref.checkAttached();
+      ref.checkAttached(accessId);
 
       ref.handler->releasePath(pathname);
     }
@@ -637,8 +642,8 @@ namespace zypp
 
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      // FIXME: ref.checkDesired(); ???
-      ref.checkAttached();
+      // FIXME: ref.checkDesired(accessId); ???
+      ref.checkAttached(accessId);
 
       ref.handler->dirInfo(retlist, dirname, dots);
     }
@@ -654,8 +659,8 @@ namespace zypp
 
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      // FIXME: ref.checkDesired(); ???
-      ref.checkAttached();
+      // FIXME: ref.checkDesired(accessId); ???
+      ref.checkAttached(accessId);
 
       ref.handler->dirInfo(retlist, dirname, dots);
     }
