@@ -359,14 +359,14 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
     ResStatus status, new_status;
     std::string msg;
 
+    status = getStatus(item);
+    
     _XDEBUG( "ResolverContext[" << this << "]::uninstall("
 		    << item << " " << (part_of_upgrade ? "part_of_upgrade" : "") << " "
 		    << (due_to_obsolete ? "due_to_obsolete": "") << " "
-	     << (due_to_unlink ? "due_to_unlink" : "") << ")" << "pool-status:" << item.status());
+	     << (due_to_unlink ? "due_to_unlink" : "") << ")" << "context-status:" << status);
 
     assert (! (due_to_obsolete && due_to_unlink));
-
-    status = getStatus(item);
 
     if ( ( (forceResolve() // This is the behaviour of ZMD
 	    || upgradeMode())
@@ -375,11 +375,12 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 	 
 	 || ( (!forceResolve() // This is the bahaviour of YaST
 	       && !upgradeMode())
-	     && (status.staysInstalled() || status.isToBeInstalled())               //   \ We will have the resolvable
-	     && (item.status().staysInstalled() || item.status().isToBeInstalled()) //   / available.
-	     && !part_of_upgrade
-	     && !due_to_obsolete
-	     && !due_to_unlink)) {
+	      && ((status.staysInstalled() || status.isToBeInstalled())                   //   \ We will have the resolvable
+		  && (item.status().staysInstalled() || item.status().isToBeInstalled())  //   / available.
+		  || status.isToBeInstalled())                                            //   is to be installed e.g. due solver requirement
+	      && !part_of_upgrade
+	      && !due_to_obsolete
+	      && !due_to_unlink)) {
 	// We have a resolvable which should be kept on the system or is set to be installed explicit.
 	// So we are not allowed deleting it. The reason WHY this resolvable has to be deleted here
 	// is not show. We go back to the ResolverInfo to evaluate the reason. This reason (marked as an info)
