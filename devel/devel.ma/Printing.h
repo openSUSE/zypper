@@ -14,6 +14,28 @@
 ///////////////////////////////////////////////////////////////////
 
 template<class _Tp>
+  struct PrintOn : public std::unary_function<_Tp, bool>
+  {
+    bool operator()( const _Tp & obj )
+    {
+      if ( _leadNL )
+        _str << std::endl << _prfx << obj;
+      else
+        _str << _prfx << obj << std::endl;
+      return true;
+    }
+
+    PrintOn( std::ostream & str, const std::string & prfx = std::string(), bool leadNL = false )
+    : _str( str )
+    , _prfx( prfx )
+    , _leadNL( leadNL )
+    {}
+    std::ostream & _str;
+    std::string _prfx;
+    bool _leadNL;
+  };
+
+template<class _Tp>
   struct Print : public std::unary_function<_Tp, bool>
   {
     bool operator()( const _Tp & obj )

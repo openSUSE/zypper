@@ -29,7 +29,6 @@ else
 	MAKE=make
 fi
 
-#$MAKE -C ../../zypp || exit 1
 $MAKE $PRG || exit 1
 
 export ZYPP_LOGFILE=-

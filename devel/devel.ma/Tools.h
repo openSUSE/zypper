@@ -66,19 +66,19 @@ template<class _Container>
   }
 
 ///////////////////////////////////////////////////////////////////
-inline Source_Ref createSource( const std::string & url_r )
+inline Source_Ref createSource( const Url & url_r )
 {
   Source_Ref ret;
-  Measure x( "createSource: " + url_r );
+  Measure x( "createSource: " + url_r.asString() );
   try
     {
-      ret = SourceFactory().createFrom( Url(url_r) );
+      ret = SourceFactory().createFrom( url_r );
     }
   catch ( const Exception & )
     {
       return Source_Ref::noSource;
     }
-  x.start( "parseSource: " + url_r );
+  x.start( "parseSource: " + url_r.asString() );
   ret.resolvables();
   x.stop();
   MIL << "Content " << ret << "{" << endl;
@@ -87,6 +87,16 @@ inline Source_Ref createSource( const std::string & url_r )
 
   return ret;
 }
-
+inline Source_Ref createSource( const std::string & url_r )
+{
+  try
+    {
+      return createSource( Url(url_r) );
+    }
+  catch ( const Exception & )
+    {
+      return Source_Ref::noSource;
+    }
+}
 
 #endif // Tools_h

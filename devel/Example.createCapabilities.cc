@@ -61,7 +61,7 @@ void collect( const std::string & linre_r )
  Line processing is prepared by providing 'virtual void doConsume(std::string)'.
  That's what a derived Collector will overload.
  */
-struct Collector : public std::unary_function<const std::string &, void>
+struct Collector : public std::unary_function<const std::string &, bool>
 {
   unsigned _lineNo;
   Collector()
@@ -71,12 +71,13 @@ struct Collector : public std::unary_function<const std::string &, void>
   {}
   virtual void doConsume( const std::string & line_r )
   {}
-  void operator()( const std::string & line_r )
+  bool operator()( const std::string & line_r )
   {
     ++_lineNo;
     if ( ! (_lineNo % 10000) )
       DBG << "Got " << _lineNo << " lines..." << endl;
     doConsume( line_r );
+    return true;
   }
 };
 ///////////////////////////////////////////////////////////////////
