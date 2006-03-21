@@ -651,7 +651,7 @@ void MediaHandler::release( bool eject )
 
 void MediaHandler::forceRelaseAllMedia(bool matchMountFs)
 {
-  return forceRelaseAllMedia( attachedMedia().mediaSource, matchMountFs);
+  forceRelaseAllMedia( attachedMedia().mediaSource, matchMountFs);
 }
 
 void MediaHandler::forceRelaseAllMedia(const MediaSourceRef &ref,
