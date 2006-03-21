@@ -44,6 +44,10 @@ namespace zypp
     /** String representation of Arch. */
     const std::string & asString() const;
 
+    /** Test for an empty Arch (this is "", not Arch_noarch). */
+    bool empty() const
+    { return asString().empty(); }
+
     /** Compatibility relation.
      * \return \c True iff \c this is compatible with \a targetArch_r.
      * \code

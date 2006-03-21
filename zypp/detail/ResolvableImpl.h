@@ -58,6 +58,9 @@ namespace zypp
     { _deps[Dep::REQUIRES].insert( cap_r ); }
     //@}
 
+    /** Helper for stream output */
+    std::ostream & dumpOn( std::ostream & str ) const;
+
   private:
     /**  */
     Kind _kind;

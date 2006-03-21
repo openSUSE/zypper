@@ -10,15 +10,15 @@
  *
 */
 #include <iostream>
+#include "zypp/base/Logger.h"
 
 #include "zypp/ZYpp.h"
 #include "zypp/ZYppFactory.h"
 
 #include "zypp/base/Algorithm.h"
-#include "zypp/base/Logger.h"
 #include "zypp/detail/ResolvableImpl.h"
 
-using namespace std;
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -72,20 +72,20 @@ namespace zypp
 
 	CapFactory f;
 
-	string provides( cap_r.index(), 7 );			// strip "locale("
-	string::size_type pos = provides.find( ":" );		// colon given ?
-	if (pos != string::npos) {
-	    deps[Dep::SUPPLEMENTS].insert( f.parse( ResTraits<Package>::kind, string( provides, 0, pos ) ) );
+	std::string provides( cap_r.index(), 7 );			// strip "locale("
+	std::string::size_type pos = provides.find( ":" );		// colon given ?
+	if (pos != std::string::npos) {
+	    deps[Dep::SUPPLEMENTS].insert( f.parse( ResTraits<Package>::kind, std::string( provides, 0, pos ) ) );
 	    provides.erase( 0, pos+1 );
 	}
 	pos = 0;
-	string::size_type next = pos;
+	std::string::size_type next = pos;
 	while (pos < provides.size()) {
 	    next = provides.find( ";", pos );			// look for ; separator
-	    if (next == string::npos)
+	    if (next == std::string::npos)
 		next = provides.size()-1;			// none left, set next to end-1 (strip trailing ')' )
 
-	    string loc( provides, pos, next-pos );
+	    std::string loc( provides, pos, next-pos );
 	    getZYpp()->availableLocale( Locale( loc ) );
 	    deps[Dep::FRESHENS].insert( f.parse( ResTraits<Language>::kind, loc ) );
 	    pos = next + 1;
@@ -131,6 +131,15 @@ namespace zypp
     _deps[Dep::REQUIRES].insert( _deps[Dep::PREREQUIRES].begin(),
                                  _deps[Dep::PREREQUIRES].end() );
 
+
+    if ( _arch.empty() )
+      dumpOn( WAR << "Has empty Arch: " ) << std::endl;
+  }
+
+  std::ostream & Resolvable::Impl::dumpOn( std::ostream & str ) const
+  {
+    return str << '[' << kind() << ']'
+               << name() << '-' << edition() << '.' << arch();
   }
 
   /////////////////////////////////////////////////////////////////

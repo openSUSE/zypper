@@ -40,20 +40,12 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	METHOD NAME : Resolvable::dumpOn
-  //	METHOD TYPE : std::ostream
-  //
-  std::ostream & Resolvable::dumpOn( std::ostream & str ) const
-  {
-    return str << '[' << kind() << ']'
-    << name() << '-' << edition() << '.' << arch();
-  }
-
-  ///////////////////////////////////////////////////////////////////
-  //
   //	Resolvable interface forwarded to implementation
   //
   ///////////////////////////////////////////////////////////////////
+
+  std::ostream & Resolvable::dumpOn( std::ostream & str ) const
+  { return _pimpl->dumpOn( str ); }
 
   const Resolvable::Kind & Resolvable::kind() const
   { return _pimpl->kind(); }
