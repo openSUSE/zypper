@@ -272,6 +272,8 @@ class MediaHandler {
 	 *        while compare of a mount entry with mediaSource.
 	 */
 	void             forceRelaseAllMedia(bool matchMountFs);
+	void             forceRelaseAllMedia(const MediaSourceRef &ref,
+	                                     bool matchMountFs);
 
     protected:
 

@@ -651,8 +651,13 @@ void MediaHandler::release( bool eject )
 
 void MediaHandler::forceRelaseAllMedia(bool matchMountFs)
 {
-  AttachedMedia ref( attachedMedia());
-  if( !ref.mediaSource)
+  return forceRelaseAllMedia( attachedMedia().mediaSource, matchMountFs);
+}
+
+void MediaHandler::forceRelaseAllMedia(const MediaSourceRef &ref,
+                                       bool                  matchMountFs)
+{
+  if( !ref)
     return;
 
   MountEntries  entries( MediaManager::getMountEntries());
@@ -669,15 +674,15 @@ void MediaHandler::forceRelaseAllMedia(bool matchMountFs)
       is_device = true;
     }
 
-    if( is_device &&  ref.mediaSource->maj_nr)
+    if( is_device &&  ref->maj_nr)
     {
-      std::string mtype(matchMountFs ? e->type : ref.mediaSource->type);
+      std::string mtype(matchMountFs ? e->type : ref->type);
       MediaSource media(mtype, e->src, dev_info.major(), dev_info.minor());
 
-      if( ref.mediaSource->equals( media) && e->type != "subfs")
+      if( ref->equals( media) && e->type != "subfs")
       {
         DBG << "Forcing release of media device "
-            << ref.mediaSource->asString()
+            << ref->asString()
             << " in the mount table as "
 	    << e->src << std::endl;
 	Mount mount;
@@ -691,14 +696,14 @@ void MediaHandler::forceRelaseAllMedia(bool matchMountFs)
       }
     }
     else
-    if(!is_device && !ref.mediaSource->maj_nr)
+    if(!is_device && !ref->maj_nr)
     {
-      std::string mtype(matchMountFs ? e->type : ref.mediaSource->type);
+      std::string mtype(matchMountFs ? e->type : ref->type);
       MediaSource media(mtype, e->src);
-      if( ref.mediaSource->equals( media) && e->type != "subfs")
+      if( ref->equals( media) && e->type != "subfs")
       {
 	DBG << "Forcing release of media name "
-	    << ref.mediaSource->asString()
+	    << ref->asString()
 	    << " in the mount table as "
 	    << e->src << std::endl;
 	Mount mount;

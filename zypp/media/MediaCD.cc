@@ -376,7 +376,6 @@ namespace zypp {
 	  DeviceList::const_iterator d( detected.begin());
 	  for( ; d != detected.end(); ++d)
 	  {
-	    // /dev/cdrom or /dev/dvd to the front
 	    if( temp.equals( *d))
 	    {
 	      valid = true;
@@ -534,13 +533,78 @@ namespace zypp {
     void MediaCD::forceEject()
     {
       if ( !isAttached()) {	// no device mounted in this instance
-	for ( DeviceList::iterator it = _devices.begin(); it != _devices.end(); ++it ) {
+#if DELAYED_VERIFY
+	DeviceList detected( detectDevices(
+	  _url.getScheme() == "dvd" ? true : false
+	));
+
+	if(_devices.empty())
+	{
+	  DBG << "creating on-demand device list" << endl;
+	  //default is /dev/cdrom; for dvd: /dev/dvd if it exists
+	  string device( "/dev/cdrom" );
+	  if ( _url.getScheme() == "dvd" && PathInfo( "/dev/dvd" ).isBlk() ) {
+	   device = "/dev/dvd";
+	  }
+
+	  PathInfo dinfo(device);
+	  if( dinfo.isBlk())
+	  {
+	    MediaSource media("cdrom", device, dinfo.major(), dinfo.minor());
+
+	    DeviceList::const_iterator d( detected.begin());
+	    for( ; d != detected.end(); ++d)
+	    {
+	      // /dev/cdrom or /dev/dvd to the front
+	      if( media.equals( *d))
+		_devices.push_front( *d);
+	      else
+		_devices.push_back( *d);
+	    }
+	  }
+	  else
+	  {
+	    // no /dev/cdrom or /dev/dvd link
+	    _devices = detected;
+	  }
+	}
+#endif
+
+	DeviceList::iterator it;
+	for( it = _devices.begin(); it != _devices.end(); ++it ) {
 	  MediaSourceRef media( new MediaSource( *it));
+#if DELAYED_VERIFY
+	  bool        valid=false;
+	  PathInfo    dinfo(media->name);
+	  if( dinfo.isBlk())
+	  {
+	    media->maj_nr = dinfo.major();
+	    media->min_nr = dinfo.minor();
+
+	    DeviceList::const_iterator d( detected.begin());
+	    for( ; d != detected.end(); ++d)
+	    {
+	      if( media->equals( *d))
+	      {
+		valid = true;
+		break;
+	      }
+	    }
+	  }
+	  if( !valid)
+	  {
+	    DBG << "skipping invalid device: " << it->name << endl;
+	    continue;
+	  }
+#endif
 
 	  // FIXME: we have also to check if it is mounted in the system
 	  AttachedMedia ret( findAttachedMedia( media));
 	  if( !ret.mediaSource)
 	  {
+#if FORCE_RELEASE_FOREIGN
+	    forceRelaseAllMedia(media, false);
+#endif
 	    if ( openTray( it->name ) )
 	      break; // on 1st success
 	  }
