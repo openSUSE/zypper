@@ -1,0 +1,17 @@
+>!> Requesting locale de
+>!> Requesting locale de_DE
+>!> Locking lsb from channel sles_packages
+>!> Installing yast2-installation from channel sles_packages
+>!> 1 problems found:
+>!> Problem:
+>!> suseRegister cannot be installed due to missing dependencies
+>!> There are no installable providers of lsb for suseRegister-1.0-22.noarch[sles_packages]
+>!>    Solution:
+>!>       unlock lsb
+>!>       
+>!>    Solution:
+>!>       do not install suseRegister
+>!>       do not install suseRegister-1.0-22.noarch[sles_packages]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       

@@ -10,5 +10,6 @@
 </setup>
 <trial>
   <install channel="beta52" name="OpenOffice_org"/>
+  <reportproblems/>
 </trial>
 </test>
