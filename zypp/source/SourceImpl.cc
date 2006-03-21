@@ -165,12 +165,26 @@ namespace zypp
 		ZYPP_CAUGHT(excpt_r);
 		ERR << "Failed to release all sources" << endl;
 	    }
+	    
+	    // set up the reason
+	    media::MediaChangeReport::Error reason 
+		= media::MediaChangeReport::INVALID;
+
+	    if( typeid(excp) == typeid( media::MediaFileNotFoundException )  ||
+	      typeid(excp) == typeid( media::MediaNotAFileException ) )
+	    {
+		reason = media::MediaChangeReport::NOT_FOUND;
+	    } else if( typeid(excp) == typeid( media::MediaNotDesiredException)  ||
+	      typeid(excp) == typeid( media::MediaNotAttachedException) )
+	    {
+		reason = media::MediaChangeReport::WRONG;
+	    }
 
 	    user  = checkonly ? media::MediaChangeReport::ABORT :
 	      report->requestMedia (
 		source_factory.createFrom( this ),
 		media_nr,
-		media::MediaChangeReport::WRONG, // FIXME: proper error
+		reason, 
 		excp.asUserString()
 	      );
 
