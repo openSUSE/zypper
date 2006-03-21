@@ -39,7 +39,7 @@ namespace zypp
       virtual TranslatedText summary() const;
       virtual TranslatedText description() const;
       virtual TranslatedText category() const;
-      virtual bool visible() const;
+      virtual bool userVisible() const;
       virtual Label order() const;
       virtual Pathname icon() const;
       virtual Source_Ref source() const;

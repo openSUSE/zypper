@@ -49,7 +49,7 @@ namespace zypp
     TranslatedText SuseTagsPatternImpl::category() const
     { return _category; }
 
-    bool SuseTagsPatternImpl::visible() const
+    bool SuseTagsPatternImpl::userVisible() const
     { return _visible; }
 
     Label SuseTagsPatternImpl::order() const
