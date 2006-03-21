@@ -32,7 +32,7 @@
 #include <linux/cdrom.h>
 
 #define  DELAYED_VERIFY          1
-#define  FORCE_RELEASE_FOREIGN   0
+#define  FORCE_RELEASE_FOREIGN   1
 
 using namespace std;
 
