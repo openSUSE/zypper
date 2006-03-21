@@ -34,9 +34,9 @@ namespace zypp
       ~XMLScriptImpl();
 
       /** Get the script to perform the change */
-      std::string do_script() const;
+      Pathname do_script() const;
       /** Get the script to undo the change */
-      std::string undo_script() const;
+      Pathname undo_script() const;
       /** Check whether script to undo the change is available */
       virtual bool undo_available() const;
 

@@ -34,12 +34,14 @@ namespace zypp
     ScriptImpl::~ScriptImpl()
     {}
 
-    std::string ScriptImpl::do_script() const {
-      return _do_script;
+    Pathname ScriptImpl::do_script() const {
+	return Pathname();
+//      return _do_script;
     }
 
-    std::string ScriptImpl::undo_script() const {
-      return _undo_script;
+    Pathname ScriptImpl::undo_script() const {
+	return Pathname();
+//      return _undo_script;
     }
 
     bool ScriptImpl::undo_available() const {

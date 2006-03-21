@@ -40,10 +40,10 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  std::string Script::do_script() const
+  Pathname Script::do_script() const
   { return pimpl().do_script(); }
 
-  std::string Script::undo_script() const
+  Pathname Script::undo_script() const
   { return pimpl().undo_script(); }
 
   bool Script::undo_available() const

@@ -182,12 +182,14 @@ std::string toXML( const Script::constPtr &obj )
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
   out << "  <do>" << std::endl;
-  out << "      " << xml_escape(obj->do_script()) << std::endl;
+  out << "      " << xml_escape(obj->do_script().asString()) << std::endl;
+#warning FIXME line above
   out << "  </do>" << std::endl;
   if ( obj->undo_available() )
   {
     out << "  <undo>" << std::endl;
-    out << "      " << xml_escape(obj->undo_script()) << std::endl;
+    out << "      " << xml_escape(obj->undo_script().asString()) << std::endl;
+#warning FIXME line above
     out << "  </undo>" << std::endl;
   }
   out << "</script>" << std::endl;

@@ -13,6 +13,7 @@
 #define ZYPP_DETAIL_SCRIPTIMPLIF_H
 
 #include "zypp/detail/ResObjectImplIf.h"
+#include "zypp/Pathname.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -37,9 +38,9 @@ namespace zypp
 
     public:
       /** Get the script to perform the change */
-      virtual std::string do_script() const = 0;
+      virtual Pathname do_script() const = 0;
       /** Get the script to undo the change */
-      virtual std::string undo_script() const = 0;
+      virtual Pathname undo_script() const = 0;
       /** Check whether script to undo the change is available */
       virtual bool undo_available() const = 0;
       /** */

@@ -21,6 +21,8 @@
 #include "zypp/Resolvable.h"
 #include "zypp/ResObject.h"
 #include "zypp/Package.h"
+#include "zypp/Script.h"
+#include "zypp/Message.h"
 #include "zypp/Source.h"
 #include "zypp/Url.h"
 
@@ -326,13 +328,39 @@ namespace zypp
               try
               {
                 _storage.storeObject(it->resolvable());
+		if (isKind<Message>(it->resolvable()))
+		{
+		  Message::constPtr m = dynamic_pointer_cast<const Message>(it->resolvable());
+		  std::string text = m->text().asString();
+		  ERR << "Displaying the text " << text << endl;
+#warning FIXME pass the text to UI
+		}
+		else if (isKind<Script>(it->resolvable()))
+		{
+		  Script::constPtr s = dynamic_pointer_cast<const Script>(it->resolvable());
+		  Pathname p = s->do_script();
+		  if (p != "" && p != "/")
+		  {
+		    ExternalProgram* prog = new ExternalProgram(p.asString(), ExternalProgram::Discard_Stderr, false, -1, true);
+		    if (! prog)
+		      ZYPP_THROW(Exception("Cannot run the script"));
+		    int retval = prog->close();
+		    delete prog;
+		    if (retval != 0)
+		      ZYPP_THROW(Exception("Exit code of script is non-zero"));
+		  }
+		  else
+		  {
+		    ERR << "Do script not defined" << endl;
+		  }
+		}
                 success = true;
               }
               catch (Exception & excpt_r)
               {
                 ZYPP_CAUGHT(excpt_r);
                 WAR << "Install of Resolvable from storage failed" << endl;
-              }
+	      }
               if (success)
 		it->status().setTransact( false, ResStatus::USER );
             }
@@ -342,6 +370,33 @@ namespace zypp
               try
               {
                 _storage.deleteObject(it->resolvable());
+		if (isKind<Message>(it->resolvable()))
+		{
+		  DBG << "Uninstalling message - no-op" << endl;
+		}
+		else if (isKind<Script>(it->resolvable()))
+		{
+		  Script::constPtr s = dynamic_pointer_cast<const Script>(it->resolvable());
+		  Pathname p = s->undo_script();
+		  if (! s->undo_available())
+		  {
+		    DBG << "Undo script not available" << endl;
+		  }
+		  if (p != "" && p != "/")
+		  {
+		    ExternalProgram* prog = new ExternalProgram(p.asString(), ExternalProgram::Discard_Stderr, false, -1, true);
+		    if (! prog)
+		      ZYPP_THROW(Exception("Cannot run the script"));
+		    int retval = prog->close();
+		    delete prog;
+		    if (retval != 0)
+		      ZYPP_THROW(Exception("Exit code of script is non-zero"));
+		  }
+		  else
+		  {
+		    ERR << "Undo script not defined" << endl;
+		  }
+		}
                 success = true;
               }
               catch (Exception & excpt_r)
@@ -349,7 +404,7 @@ namespace zypp
                 ZYPP_CAUGHT(excpt_r);
                 WAR << "Uninstall of Resolvable from storage failed" << endl;
               }
-              if (success)
+	      if (success)
 		it->status().setTransact( false, ResStatus::USER );
             }
           }

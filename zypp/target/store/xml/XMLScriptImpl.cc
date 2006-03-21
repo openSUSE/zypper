@@ -34,12 +34,16 @@ namespace zypp
     XMLScriptImpl::~XMLScriptImpl()
     {}
 
-    std::string XMLScriptImpl::do_script() const {
-      return _do_script;
+    Pathname XMLScriptImpl::do_script() const {
+	return Pathname();
+#warning FIXME
+//      return _do_script;
     }
 
-    std::string XMLScriptImpl::undo_script() const {
-      return _undo_script;
+    Pathname XMLScriptImpl::undo_script() const {
+	return Pathname();
+#warning FIXME
+//      return _undo_script;
     }
 
     bool XMLScriptImpl::undo_available() const {

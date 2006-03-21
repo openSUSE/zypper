@@ -13,6 +13,8 @@
 #include "zypp/Arch.h"
 #include "zypp/Edition.h"
 
+#include <fstream>
+
 
 using namespace std;
 using namespace zypp::detail;
@@ -43,16 +45,38 @@ namespace zypp
 	_do_script = parsed.do_script;
 	_undo_script = parsed.undo_script;
       }
-      std::string YUMScriptImpl::do_script() const {
-	return _do_script;
+      Pathname YUMScriptImpl::do_script() const {
+	if (_do_script != "")
+	{
+	  _tmp_file = filesystem::TmpFile();
+	  Pathname pth = _tmp_file.path();
+	  ofstream st(pth.asString().c_str());
+	  st << _undo_script << endl;
+	  return pth;
+	}
+	else
+	{
+	  return Pathname();
+	}
       }
       /** Get the script to undo the change */
-      std::string YUMScriptImpl::undo_script() const {
-	return _undo_script;
+     Pathname YUMScriptImpl::undo_script() const {
+	if (_undo_script != "")
+	{
+	  _tmp_file = filesystem::TmpFile();
+	  Pathname pth = _tmp_file.path();
+	  ofstream st(pth.asString().c_str());
+	  st << _undo_script << endl;
+	  return pth;
+	}
+	else
+	{
+	  return Pathname();
+	}
       }
       /** Check whether script to undo the change is available */
       bool YUMScriptImpl::undo_available() const {
-	return _undo_script != "";
+	return _undo_script != ""; // FIXME
       }
       TranslatedText YUMScriptImpl::summary() const
       { return ResObjectImplIf::summary(); }
