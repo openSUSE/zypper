@@ -345,18 +345,56 @@ namespace zypp
     for( std::list<storage::PersistentStorage::SourceData>::iterator it = new_sources.begin();
 	it != new_sources.end(); ++it)
     {
-      MIL << "Restoring source: url:[" << it->url << "] product_dir:[" << it->product_dir << "] alias:[" << it->alias << "] cache_dir:[" << it->cache_dir << "]" << endl;
+      // Note: Url(it->url).asString() to hide password in logs
+      MIL << "Restoring source: url:[" << Url(it->url).asString() << "] product_dir:[" << it->product_dir << "] alias:[" << it->alias << "] cache_dir:[" << it->cache_dir << "]" << endl;
 
 	SourceId id = 0;
 
 	try {
           id = addSource( SourceFactory().createFrom(it->url, it->product_dir, it->alias, it->cache_dir) );
 	}
-	catch ( Exception expt ){
-	    ERR << "Unable to restore source from " << it->url << endl;
-	    report.append( it->url + it->product_dir, expt );
-	    continue;
+	catch (const Exception &expt )
+	{
+	    // Note: Url(it->url).asString() to hide password in logs
+	    ERR << "Unable to restore source from " << Url(it->url).asString()
+	        << endl;
+
+	    id = 0;
+	    Url url2;
+	    try {
+		url2 = it->url;
+		std::string scheme( url2.getScheme());
+
+		if( (scheme == "cd" || scheme == "dvd") &&
+		    !url2.getQueryParam("devices").empty())
+		{
+		    url2.setQueryParam("devices", "");
+
+		    DBG << "CD/DVD devices changed - try again without a devices list"
+		        << std::endl;
+
+		    id = addSource( SourceFactory().createFrom(url2, it->product_dir, it->alias, it->cache_dir) );
+
+		    // This worked ... update it->url ?
+		    //it->url = url2.asCompleteString();
+		}
+	    }
+	    catch (const Exception &e2)
+	    {
+		// Note: Url(it->url).asString() to hide password in logs
+		ERR << "Unable to restore source from " << url2.asString()
+	            << endl;
+		id = 0;
+		ZYPP_CAUGHT(e2);
+	    }
+	
+	    if( id == 0)
+	    {
+		report.append( it->url + it->product_dir, expt );
+		continue;
+	    }
 	}
+
 	DBG << "Added source as id " << id << endl;
 	// should not throw, we've just created the source
 	Source_Ref src = findSource( id );
