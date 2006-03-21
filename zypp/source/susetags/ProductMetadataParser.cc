@@ -117,7 +117,7 @@ namespace zypp
             else if(key == "LINGUAS")
               parseLine( key, value, prodImpl->_languages);
             else if(key == "LABEL")
-              parseLine( key, modifier, value, prodImpl->_label);
+              parseLine( key, modifier, value, prodImpl->_summary);
             else if(key == "DESCRDIR")
               prodImpl->_description_dir = value;
             else if(key == "DATADIR")

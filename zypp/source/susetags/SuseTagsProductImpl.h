@@ -15,6 +15,7 @@
 #include "zypp/CapSet.h"
 #include "zypp/detail/ProductImplIf.h"
 #include "zypp/Source.h"
+#include "zypp/TranslatedText.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -39,7 +40,7 @@ namespace zypp
 
       virtual std::string category() const;
       virtual Label vendor() const;
-      virtual Label summary( const Locale & locale_r = Locale() ) const;
+      virtual TranslatedText summary() const;
       virtual Source_Ref source() const;
       virtual Url releaseNotesUrl() const;
       virtual std::list<std::string> flags() const;
@@ -61,7 +62,7 @@ namespace zypp
       std::string _default_base;
       CapSet _requires;
       std::list<std::string> _languages;
-      TranslatedText _label;
+      TranslatedText _summary;
       std::string _description_dir;
       std::string _data_dir;
       std::list<std::string> _flags;
