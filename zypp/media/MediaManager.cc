@@ -356,8 +356,8 @@ namespace zypp
 
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      MediaVerifierRef(verifier).swap(ref.verifier);
       ref.desired = false;
+      MediaVerifierRef(verifier).swap(ref.verifier);
     }
 
     // ---------------------------------------------------------------
@@ -369,8 +369,8 @@ namespace zypp
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       MediaVerifierRef verifier( new NoVerifier());
-      ref.verifier.swap(verifier);
       ref.desired  = false;
+      ref.verifier.swap(verifier);
     }
 
     // ---------------------------------------------------------------
@@ -421,8 +421,8 @@ namespace zypp
             {
               DBG << "Forcing release of handler depending on access id "
                   << accessId << std::endl;
-              m->second.handler->release(!eject);
               m->second.desired  = false;
+              m->second.handler->release(!eject);
             }
             catch(const MediaException &e)
             {
@@ -431,8 +431,8 @@ namespace zypp
           }
         }
       }
-      ref.handler->release(eject);
       ref.desired  = false;
+      ref.handler->release(eject);
     }
 
     // ---------------------------------------------------------------
