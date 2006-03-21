@@ -231,9 +231,13 @@ namespace zypp
 		  ! other.atEnd();
 		  ++other)
 	    {
+                Arch arch;
+                if (!(*other)->arch.empty())
+                  arch = Arch((*other)->arch);
+              
 		NVRA nvra( (*other)->name,
 			   Edition( (*other)->ver, (*other)->rel, str::strtonum<int>( (*other)->epoch ) ),
-			   Arch( (*other)->arch ) );
+			   arch );
 		other_data[nvra] = *other;
 	    }
 	    if (other.errorStatus())
@@ -259,9 +263,14 @@ namespace zypp
 		  ++prim)
 	    {
               MIL << "found package "<< (*prim)->name << std::endl;
+              
+                Arch arch;
+                if (!(*prim)->arch.empty())
+                  arch = Arch((*prim)->arch);
+              
 		NVRA nvra( (*prim)->name,
 			   Edition( (*prim)->ver, (*prim)->rel, str::strtonum<int>( (*prim)->epoch ) ),
-			   Arch( (*prim)->arch ) );
+			   arch );
 		map<NVRA, YUMOtherData_Ptr>::iterator found_other
 		    = other_data.find( nvra );
 		map<NVRA, YUMFileListData_Ptr>::iterator found_files
@@ -478,10 +487,14 @@ namespace zypp
     {
       impl = new YUMPackageImpl( source_r, parsed, filelist, other );
 
+      Arch arch;
+      if (!parsed.arch.empty())
+        arch = Arch(parsed.arch);
+      
       // Collect basic Resolvable data
       NVRAD dataCollect( parsed.name,
 			 Edition( parsed.ver, parsed.rel, parsed.epoch ),
-			 Arch( parsed.arch ),
+			 arch,
 			 createDependencies( parsed,
 					   ResTraits<Package>::kind )
 		       );
@@ -504,10 +517,14 @@ namespace zypp
   {
     try
     {
+        Arch arch;
+        if (!parsed.arch.empty())
+          arch = Arch(parsed.arch);
+      
 	Edition edition( parsed.ver, parsed.rel, parsed.epoch );
 	NVRA nvra( parsed.name,
 		   edition,
-		   Arch( parsed.arch ) );
+		   arch );
 
 	DBG << "augmentPackage(" << nvra << ")" << endl;
         
@@ -608,9 +625,13 @@ namespace zypp
     {
       ResImplTraits<YUMPatternImpl>::Ptr impl(new YUMPatternImpl(source_r, parsed));
       // Collect basic Resolvable data
+      Arch arch;
+      if (!parsed.arch.empty())
+        arch = Arch(parsed.arch);
+      
       NVRAD dataCollect( parsed.name,
 			 Edition( parsed.ver, parsed.rel, parsed.epoch ),
-			 Arch( parsed.arch ),
+			 arch,
 			 createDependencies(parsed, ResTraits<Pattern>::kind));
       Pattern::Ptr pattern = detail::makeResolvableFromImpl(
 	dataCollect, impl
@@ -632,11 +653,13 @@ namespace zypp
     try
     {
       ResImplTraits<YUMMessageImpl>::Ptr impl(new YUMMessageImpl(source_r, parsed));
-
-	    // Collect basic Resolvable data
-	    NVRAD dataCollect( parsed.name,
+      Arch arch;
+      if (!parsed.arch.empty())
+        arch = Arch(parsed.arch);
+      // Collect basic Resolvable data
+      NVRAD dataCollect( parsed.name,
 			      Edition( parsed.ver, parsed.rel, parsed.epoch ),
-			      Arch( parsed.arch ),
+			      arch,
 			      createDependencies(parsed,
 						  ResTraits<Message>::kind)
 			    );
@@ -660,11 +683,13 @@ namespace zypp
     try
     {
       ResImplTraits<YUMScriptImpl>::Ptr impl(new YUMScriptImpl(source_r, parsed));
-
+      Arch arch;
+      if (!parsed.arch.empty())
+        arch = Arch(parsed.arch);
       // Collect basic Resolvable data
       NVRAD dataCollect( parsed.name,
 		      Edition( parsed.ver, parsed.rel, parsed.epoch ),
-		      Arch( parsed.arch ),
+		      arch,
 		      createDependencies(parsed,
 					  ResTraits<Script>::kind)
 		    );
@@ -690,9 +715,12 @@ namespace zypp
       ResImplTraits<YUMProductImpl>::Ptr impl(new YUMProductImpl(source_r, parsed));
 
 	    // Collect basic Resolvable data
-	    NVRAD dataCollect( parsed.name,
+      Arch arch;
+      if (!parsed.arch.empty())
+        arch = Arch(parsed.arch);
+      NVRAD dataCollect( parsed.name,
 			      Edition( parsed.ver, parsed.rel, parsed.epoch ),
-			      Arch( parsed.arch ),
+			      arch,
 			      createDependencies(parsed,
 						  ResTraits<Product>::kind)
 			    );
@@ -719,9 +747,8 @@ namespace zypp
 
       Arch arch;
       if (!parsed.arch.empty())
-      {
         arch = Arch(parsed.arch);
-      }
+      
       // Collect basic Resolvable data
       NVRAD dataCollect( parsed.name,
 		      Edition( parsed.ver, parsed.rel, parsed.epoch ),
