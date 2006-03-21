@@ -56,11 +56,12 @@ namespace zypp
     NameHash::erase( const PoolItem & item_r )
     {
       PoolTraits::ItemContainerT items = _store[item_r->name()];
-      for (PoolTraits::iterator nit = items.begin();
-		    nit != items.end(); ++nit)
+      for ( PoolTraits::iterator nit = items.begin(); nit != items.end(); /**/ )
       {
-	if (*nit == item_r)
-	    items.erase( nit );
+	if ( *nit == item_r )
+          items.erase( nit++ ); // postfix! Incrementing before erase
+        else
+          ++nit;
       }
     }
 
@@ -124,17 +125,17 @@ namespace zypp
     {
       CapSet caps = item_r->dep( cap_r );
 //XXX << "storeDelete(" << item_r << ")" << endl;
-      for (CapSet::iterator ic = caps.begin(); ic != caps.end(); ++ic) {
-	PoolTraits::CapItemContainerT capitems = store_r[cap_r][ic->index()];
-	for (PoolTraits::CapItemContainerT::iterator pos = capitems.begin();
-					     pos != capitems.end();)
-	{
-	    PoolTraits::CapItemContainerT::iterator next = pos; ++next;
-	    if (pos->item == item_r)
-		capitems.erase( pos );
-	    pos = next;
-	}
-      }
+      for ( CapSet::iterator ic = caps.begin(); ic != caps.end(); ++ic )
+        {
+          PoolTraits::CapItemContainerT capitems = store_r[cap_r][ic->index()];
+          for ( PoolTraits::CapItemContainerT::iterator pos = capitems.begin(); pos != capitems.end(); /**/ )
+            {
+              if ( pos->item == item_r )
+                capitems.erase( pos++ ); // postfix! Incrementing before erase
+              else
+                ++pos;
+            }
+        }
     }
 
     void CapHash::erase( const PoolItem & item_r )

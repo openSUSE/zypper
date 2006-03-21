@@ -64,9 +64,10 @@ namespace zypp
     void erase( ResObject::constPtr ptr_r )
     { deleter()( ptr_r ); }
 
-    /**  */
+    /** unsafe
     void erase( iterator first_r, iterator last_r )
     { std::for_each( first_r, last_r, deleter() ); }
+    */
 
     /**  */
     void clear();

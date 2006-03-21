@@ -152,7 +152,7 @@ namespace zypp
           do
           {
             found = false;
-            for(it = mediaMap.begin(); it != mediaMap.end(); ++it)
+            for(it = mediaMap.begin(); it != mediaMap.end(); /**/)
             {
               if( it->second.handler->dependsOnParent())
               {
@@ -160,7 +160,9 @@ namespace zypp
                 // let it forget its parent, we will
                 // destroy it later (in clear())...
                 it->second.handler->resetParentId();
-                mediaMap.erase(it);
+                mediaMap.erase( it++ ); // postfix! Incrementing before erase
+              } else {
+                ++it;
               }
             }
           } while(found);
