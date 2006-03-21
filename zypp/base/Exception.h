@@ -214,7 +214,7 @@ namespace zypp
     {
       Exception::log( excpt_r, where_r, "RETHROW: " );
       excpt_r.relocate( where_r );
-      throw excpt_r;
+      throw;
     }
 
   ///////////////////////////////////////////////////////////////////
