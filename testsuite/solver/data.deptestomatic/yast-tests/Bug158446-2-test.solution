@@ -1,0 +1,7 @@
+>!> Requesting locale de
+>!> Requesting locale de_DE
+>!> Installing kernel-default from channel update
+>!> No problems so far
+>!> Solution #1:
+>!> upgrade kernel-default-2.6.16_rc5_git14-2.i586 => kernel-default-2.6.16_rc5_git14-3.i586[update]
+>!> installs=0, upgrades=1, uninstalls=0
