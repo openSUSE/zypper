@@ -16,6 +16,7 @@
 #include "zypp/Resolvable.h"
 #include "zypp/Source.h"
 #include "zypp/Pathname.h"
+#include "zypp/Message.h"
 #include "zypp/Url.h"
 
 ///////////////////////////////////////////////////////////////////
