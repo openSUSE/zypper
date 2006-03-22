@@ -14,10 +14,13 @@
 
 #include <iosfwd>
 #include <list>
+#include <map>
 
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
-#include "zypp/base/Gettext.h"
+//#include "zypp/base/Iterator.h"
+
+#include "zypp/base/Gettext.h" // move with FailedSourcesRestoreException
 
 #include "zypp/Source.h"
 #include "zypp/Url.h"
@@ -28,7 +31,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   DEFINE_PTR_TYPE(SourceManager)
-
+  /** \todo move to separate header file.*/
   class FailedSourcesRestoreException : public Exception
   {
     public:
@@ -64,7 +67,6 @@ namespace zypp
   {
     friend std::ostream & operator<<( std::ostream & str, const SourceManager & obj );
 
-
   public:
     /** Singleton access */
     static SourceManager_Ptr sourceManager();
@@ -76,6 +78,39 @@ namespace zypp
   public:
     /** Runtime unique numeric Source Id. */
     typedef Source_Ref::NumericId SourceId;
+
+  private:
+    /** exposition only */
+    typedef std::map<SourceId, Source_Ref> SourceMap;
+
+    /** \name Iterate over all (SourceId,Source_Ref) pairs. */
+    //@{
+    typedef SourceMap::const_iterator const_iterator;
+
+    const_iterator begin() const;
+
+    const_iterator end() const;
+    //@}
+
+  public:
+    /** \name Iterate over all known SourceIds. */
+    //@{
+    typedef MapKVIteratorTraits<SourceMap>::Key_const_iterator SourceId_const_iterator;
+
+    SourceId_const_iterator SourceId_begin() const;
+
+    SourceId_const_iterator SourceId_end() const;
+    //@}
+
+  public:
+    /** \name Iterate over all known Sources. */
+    //@{
+    typedef MapKVIteratorTraits<SourceMap>::Value_const_iterator Source_const_iterator;
+
+    Source_const_iterator Source_begin() const;
+
+    Source_const_iterator Source_end() const;
+    //@}
 
   public:
 
@@ -169,7 +204,7 @@ namespace zypp
      * Disable all registered sources
      */
     void disableAllSources();
-    
+
     /**
      * Helper function to disable all sources in the persistent
      * store on the given location. Does not manipulate with

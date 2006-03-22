@@ -150,12 +150,12 @@ namespace zypp
           case TraceCADBase::CTOR:
           case TraceCADBase::PING:
           case TraceCADBase::DTOR:
-            std::cerr << what_r << self_r << " (" << self_r._ident << ")" << std::endl;
+            _DBG("DEBUG") << what_r << self_r << " (" << self_r._ident << ")" << std::endl;
             break;
 
           case TraceCADBase::COPYCTOR:
           case TraceCADBase::ASSIGN:
-            std::cerr << what_r << self_r << "( " << rhs_r << ")" << " (" << self_r._ident << ")" << std::endl;
+            _DBG("DEBUG") << what_r << self_r << "( " << rhs_r << ")" << " (" << self_r._ident << ")" << std::endl;
             break;
           }
       }

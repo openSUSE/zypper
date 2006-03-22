@@ -135,6 +135,24 @@ namespace zypp
     MIL << "Deleted SourceManager Singleton." << endl;
   }
 
+  SourceManager::const_iterator SourceManager::begin() const
+  { return _sources.begin(); }
+
+  SourceManager::const_iterator SourceManager::end() const
+  { return _sources.end();  }
+
+  SourceManager::SourceId_const_iterator SourceManager::SourceId_begin() const
+  { return make_map_key_begin( _sources ); }
+
+  SourceManager::SourceId_const_iterator SourceManager::SourceId_end() const
+  { return make_map_key_end( _sources ); }
+
+  SourceManager::Source_const_iterator SourceManager::Source_begin() const
+  { return make_map_value_begin( _sources ); }
+
+  SourceManager::Source_const_iterator SourceManager::Source_end() const
+  { return make_map_value_end( _sources ); }
+
   void SourceManager::reset()
   {
     MIL << "SourceManager reset (forget all sources)" << endl;
@@ -387,7 +405,7 @@ namespace zypp
 		id = 0;
 		ZYPP_CAUGHT(e2);
 	    }
-	
+
 	    if( id == 0)
 	    {
 		report.append( it->url + it->product_dir, expt );
@@ -419,7 +437,7 @@ namespace zypp
     dumpSourceTableOn( DBG );
     return true;
   }
-  
+
   void SourceManager::disableSourcesAt( const Pathname & root_r )
   {
     storage::PersistentStorage store;
@@ -428,7 +446,7 @@ namespace zypp
     std::list<storage::PersistentStorage::SourceData> new_sources = store.storedSources();
 
     MIL << "Disabling all sources in store at " << root_r << endl;
-    
+
     for( std::list<storage::PersistentStorage::SourceData>::iterator it = new_sources.begin();
 	it != new_sources.end(); ++it)
     {
