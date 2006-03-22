@@ -8129,4 +8129,229 @@ already included in the ncurses package.
 Authors:
 --------
     Eric S. Raymond &lt;esr@thyrsus.com&gt;</description><arch>i586</arch><section>system</section><filesize>0</filesize><installedsize>1506454</installedsize><history><update><version>5.5</version><release>10</release><filename>dummy.rpm</filename><filesize>0</filesize><installedsize>0</installedsize><importance>suggested</importance><description>No information available.</description></update></history><deps><requires/><conflicts/><obsoletes/><provides><dep name="terminfo" op="eq" version="5.5" release="10"/></provides></deps></package><package><name>providers</name><version>2006.1.25</version><release>4</release><summary>A list of internet service providers</summary><description>A list of predefined internet service providers which are used for
-configuration with YaST2.</description><arch>noarch</arch><section>system</section><filesize>0</filesize><installedsize>139098</installedsize><history><update><version>2006.1.25</version><release>4</release><filename>dummy.rpm</filename><filesize>0</filesize><installedsize>0</installedsize><importance>suggested</importance><description>No information available.</description></update></history><deps><requires/><conflicts/><obsoletes/><provides><dep name="providers" op="eq" version="2006.1.25" release="4"/></provides></deps></package><package><name>bootloader-theme-SUSELinux-Prof</name><version>2006.3.9</version><release>2</release><summary>Bootloader background picture</summary><description>Bootloader background picture</description><arch>noarch</arch><section>system</section><filesize>0</filesize><installedsize>36484</installedsize><history><update><version>2006.3.9</version><release>2</release><filename>dummy.rpm</filename><filesize>0</filesize><installedsize>0</installedsize><importance>suggested</importance><description>No information available.</description></update></history><deps><requires/><conflicts/><obsoletes/><provides><dep name="/etc/bootsplash/themes/SuSE/bootloader/background.jpg"/><dep name="/etc/bootsplash/themes/SuSE/bootloader"/><dep name="/etc/bootsplash/themes/SuSE"/><dep name="/etc/bootsplash/themes"/><dep name="/etc/bootsplash"/><dep name="bootloader-theme-SUSELinux-Prof" op="eq" version="2006.3.9" release="2"/><dep name="bootloader-theme"/></provides></deps></package></subchannel></channel>
+configuration with
+YaST2.</description><arch>noarch</arch><section>system</section><filesize>0</filesize><installedsize>139098</installedsize><history><update><version>2006.1.25</version><release>4</release><filename>dummy.rpm</filename><filesize>0</filesize><installedsize>0</installedsize><importance>suggested</importance><description>No
+information
+available.</description></update></history><deps><requires/><conflicts/><obsoletes/><provides><dep
+name="providers" op="eq" version="2006.1.25"
+release="4"/></provides></deps></package><package><name>bootloader-theme-SUSELinux-Prof</name><version>2006.3.9</version><release>2</release><summary>Bootloader
+background picture</summary><description>Bootloader background
+picture</description><arch>noarch</arch><section>system</section><filesize>0</filesize><installedsize>36484</installedsize><history><update><version>2006.3.9</version><release>2</release><filename>dummy.rpm</filename><filesize>0</filesize><installedsize>0</installedsize><importance>suggested</importance><description>No
+information
+available.</description></update></history><deps><requires/><conflicts/><obsoletes/><provides><dep
+name="/etc/bootsplash/themes/SuSE/bootloader/background.jpg"/><dep
+name="/etc/bootsplash/themes/SuSE/bootloader"/><dep
+name="/etc/bootsplash/themes/SuSE"/><dep name="/etc/bootsplash/themes"/><dep
+name="/etc/bootsplash"/><dep name="bootloader-theme-SUSELinux-Prof" op="eq"
+version="2006.3.9" release="2"/><dep
+name="bootloader-theme"/></provides></deps></package>
+<selection>
+  <name>SuSE-Documentation</name>
+  <summary>Help and Support Documentation</summary>
+  <section>system</section>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10</version>
+      <release>46</release>
+      <arch>noarch</arch>
+    </update>
+  </history>
+  <recommends>
+    <dep kind='package' name='htdig' />
+    <dep kind='package' name='info2html' />
+    <dep kind='package' name='man-pages' />
+    <dep kind='package' name='susehelp' />
+    <dep kind='package' name='susehelp_en' />
+    <dep kind='package' name='wget' />
+    <dep kind='package' name='suselinux-manual_en' />
+  </recommends>
+</selection>
+<selection>
+  <name>default</name>
+  <summary>Standard System with KDE</summary>
+  <section>system</section>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10</version>
+      <release>46</release>
+      <arch>noarch</arch>
+    </update>
+  </history>
+  <requires>
+    <dep kind='selection' name='Min' />
+    <dep kind='selection' name='X11' />
+  </requires>
+  <conflicts>
+    <dep kind='selection' name='Minimal+X11' />
+    <dep kind='selection' name='Minimal' />
+    <dep kind='selection' name='default-Gnome' />
+  </conflicts>
+  <recommends>
+    <dep kind='selection' name='Kde-Desktop' />
+    <dep kind='selection' name='SuSE-Documentation' />
+    <dep kind='package' name='a2ps' />
+    <dep kind='package' name='alsa-firmware' />
+    <dep kind='package' name='amarok-xine' />
+    <dep kind='package' name='apparmor-parser' />
+    <dep kind='package' name='autofs' />
+    <dep kind='package' name='avm_fcdsl' />
+    <dep kind='package' name='bluez-libs' />
+    <dep kind='package' name='bluez-utils' />
+    <dep kind='package' name='bootsplash' />
+    <dep kind='package' name='bootsplash-theme-SuSE-NLD' />
+    <dep kind='package' name='capi4linux' />
+    <dep kind='package' name='cdrdao' />
+    <dep kind='package' name='cdrecord' />
+    <dep kind='package' name='cifs-mount' />
+    <dep kind='package' name='compat' />
+    <dep kind='package' name='compat-curl2' />
+    <dep kind='package' name='cups' />
+    <dep kind='package' name='cups-SUSE-ppds-dat' />
+    <dep kind='package' name='cups-backends' />
+    <dep kind='package' name='cups-client' />
+    <dep kind='package' name='cups-drivers' />
+    <dep kind='package' name='cups-drivers-stp' />
+    <dep kind='package' name='cups-libs' />
+    <dep kind='package' name='dbus-1-qt3' />
+    <dep kind='package' name='dbus-1-x11' />
+    <dep kind='package' name='dcraw' />
+    <dep kind='package' name='dos2unix' />
+    <dep kind='package' name='dosbootdisk' />
+    <dep kind='package' name='dosfstools' />
+    <dep kind='package' name='expat' />
+    <dep kind='package' name='filters' />
+    <dep kind='package' name='fontconfig' />
+    <dep kind='package' name='foomatic-filters' />
+    <dep kind='package' name='freetype2' />
+    <dep kind='package' name='gail' />
+    <dep kind='package' name='gdb' />
+    <dep kind='package' name='ghostscript-fonts-other' />
+    <dep kind='package' name='ghostscript-fonts-std' />
+    <dep kind='package' name='ghostscript-library' />
+    <dep kind='package' name='ghostscript-x11' />
+    <dep kind='package' name='gle' />
+    <dep kind='package' name='glib' />
+    <dep kind='package' name='gnome-desktop' />
+    <dep kind='package' name='gnome-filesystem' />
+    <dep kind='package' name='gnome-icon-theme' />
+    <dep kind='package' name='gnome-keyring' />
+    <dep kind='package' name='gpg2' />
+    <dep kind='package' name='hplip' />
+    <dep kind='package' name='hplip-hpijs' />
+    <dep kind='package' name='i4l-base' />
+    <dep kind='package' name='i4l-isdnlog' />
+    <dep kind='package' name='i4lfirm' />
+    <dep kind='package' name='id3lib' />
+    <dep kind='package' name='ispell' />
+    <dep kind='package' name='ispell-american' />
+    <dep kind='package' name='ispell-british' />
+    <dep kind='package' name='joe' />
+    <dep kind='package' name='jpeg' />
+    <dep kind='package' name='kdelibs3-doc' />
+    <dep kind='package' name='libao' />
+    <dep kind='package' name='libbonoboui' />
+    <dep kind='package' name='libcap' />
+    <dep kind='package' name='libcroco' />
+    <dep kind='package' name='libevent' />
+    <dep kind='package' name='libgimpprint' />
+    <dep kind='package' name='libglade2' />
+    <dep kind='package' name='libgnomecanvas' />
+    <dep kind='package' name='libgnomecups' />
+    <dep kind='package' name='libgnomeprint' />
+    <dep kind='package' name='libgnomeprintui' />
+    <dep kind='package' name='libgnomesu' />
+    <dep kind='package' name='libgnomeui' />
+    <dep kind='package' name='libgsf' />
+    <dep kind='package' name='libgssapi' />
+    <dep kind='package' name='libgtkhtml' />
+    <dep kind='package' name='libimnxcert' />
+    <dep kind='package' name='libjpeg' />
+    <dep kind='package' name='libkexif' />
+    <dep kind='package' name='libkipi' />
+    <dep kind='package' name='liblcms' />
+    <dep kind='package' name='libmal' />
+    <dep kind='package' name='libmng' />
+    <dep kind='package' name='libnetpbm' />
+    <dep kind='package' name='libpcap' />
+    <dep kind='package' name='libpng' />
+    <dep kind='package' name='librpcsecgss' />
+    <dep kind='package' name='librsvg' />
+    <dep kind='package' name='libsamplerate' />
+    <dep kind='package' name='libtiff' />
+    <dep kind='package' name='libvisual' />
+    <dep kind='package' name='libwmf' />
+    <dep kind='package' name='linux-atm-lib' />
+    <dep kind='package' name='linux32' />
+    <dep kind='package' name='log4net' />
+    <dep kind='package' name='man-pages' />
+    <dep kind='package' name='manufacturer-PPDs' />
+    <dep kind='package' name='mc' />
+    <dep kind='package' name='microcode_ctl' />
+    <dep kind='package' name='mtools' />
+    <dep kind='package' name='net-snmp' />
+    <dep kind='package' name='nfs-utils' />
+    <dep kind='package' name='nfsidmap' />
+    <dep kind='package' name='ntfsprogs' />
+    <dep kind='package' name='ocrad' />
+    <dep kind='package' name='openct' />
+    <dep kind='package' name='openobex' />
+    <dep kind='package' name='opensc' />
+    <dep kind='package' name='perl-DBD-SQLite' />
+    <dep kind='package' name='perl-DBI' />
+    <dep kind='package' name='perl-TermReadKey' />
+    <dep kind='package' name='perl-TimeDate' />
+    <dep kind='package' name='pico' />
+    <dep kind='package' name='pin' />
+    <dep kind='package' name='powerpc32' />
+    <dep kind='package' name='ppp' />
+    <dep kind='package' name='pptp' />
+    <dep kind='package' name='python' />
+    <dep kind='package' name='python-qt' />
+    <dep kind='package' name='python-xml' />
+    <dep kind='package' name='qca' />
+    <dep kind='package' name='qscintilla' />
+    <dep kind='package' name='rug' />
+    <dep kind='package' name='samba-client' />
+    <dep kind='package' name='screen' />
+    <dep kind='package' name='setserial' />
+    <dep kind='package' name='sgml-skel' />
+    <dep kind='package' name='shared-mime-info' />
+    <dep kind='package' name='smpppd' />
+    <dep kind='package' name='strace' />
+    <dep kind='package' name='submount' />
+    <dep kind='package' name='sudo' />
+    <dep kind='package' name='sumf' />
+    <dep kind='package' name='tiff' />
+    <dep kind='package' name='ulimit' />
+    <dep kind='package' name='unrar' />
+    <dep kind='package' name='unzip' />
+    <dep kind='package' name='update-alternatives' />
+    <dep kind='package' name='v4l-conf' />
+    <dep kind='package' name='vacation' />
+    <dep kind='package' name='wdiff' />
+    <dep kind='package' name='wget' />
+    <dep kind='package' name='wireless-tools' />
+    <dep kind='package' name='words' />
+    <dep kind='package' name='wvdial' />
+    <dep kind='package' name='wvstreams' />
+    <dep kind='package' name='xinetd' />
+    <dep kind='package' name='xntp' />
+    <dep kind='package' name='xorg-x11-libs' />
+    <dep kind='package' name='xpdf-config' />
+    <dep kind='package' name='yast2-printer' />
+    <dep kind='package' name='yast2-samba-server' />
+    <dep kind='package' name='yp-tools' />
+    <dep kind='package' name='ypbind' />
+    <dep kind='package' name='zen-updater' />
+    <dep kind='package' name='zip' />
+    <dep kind='package' name='ziptool' />
+    <dep kind='package' name='zisofs-tools' />
+    <dep kind='package' name='zmd' />
+    <dep kind='package' name='zmd-librc-backend' />
+    <dep kind='package' name='zsh' />
+  </recommends>
+</selection>
+
+</subchannel></channel>

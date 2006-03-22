@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <channel name="packages" file="beta8-packages.xml"/>
+  <channel name="selections" file="beta8-selections.xml"/>
+  <system file="bata8-kde-system.xml"/>
+</setup>
+
+<!-- Problem with kernel modules; more than one kernel are installed bug 156513'-->
+<trial>
+  <uninstall kind="selection" name="SuSE-Documentation"/>
+  <reportproblems/>
+</trial>
+
+</test>
