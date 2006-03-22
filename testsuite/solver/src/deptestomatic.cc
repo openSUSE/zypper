@@ -1139,6 +1139,12 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		poolItem.status().setToBeUninstalled(ResStatus::USER);
 		if (!soft.empty())
 		    poolItem.status().setSoftUninstall(true);
+                if ( kind_name== "selection"
+                     || kind_name == "pattern" ) {
+                       // -> do a 'single step' resolving either installing or removing
+                       //    required and recommended PoolItems; this will be used by the YaST UI
+                    resolver->transactResObject ( poolItem, false);
+                }
 //		resolver->addPoolItemToRemove (poolItem);
 	    } else {
 		cerr << "Unknown system item " << name << endl;
