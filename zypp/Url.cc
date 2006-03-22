@@ -167,11 +167,13 @@ namespace zypp
       {
         UrlRef ref;
 
+        // =====================================
         ref.reset( new LDAPUrl());
         addUrlByScheme("ldap", ref);
         addUrlByScheme("ldaps", ref);
 
 
+        // =====================================
         ref.reset( new UrlBase());
         ref->config("with_authority",   "n");   // disallow host,...
         ref->config("require_pathname", "m");   // path is mandatory
@@ -180,7 +182,6 @@ namespace zypp
         addUrlByScheme("dvd",    ref);
         addUrlByScheme("dir",    ref);
         addUrlByScheme("iso",    ref);
-        addUrlByScheme("file",   ref);
 
         // don't show empty authority
         ref->setViewOptions( zypp::url::ViewOption::DEFAULTS -
@@ -188,7 +189,14 @@ namespace zypp
         addUrlByScheme("mailto", ref);
         addUrlByScheme("urn",    ref);
 
+        // RFC1738, 3.10: may contain a host
+        ref->config("with_authority",   "y");   // allow host,
+        ref->config("with_port",        "n");   // but no port,
+        ref->config("rx_username",      "");    // username or
+        ref->config("rx_password",      "");    // password ...
+        addUrlByScheme("file",   ref);
 
+        // =====================================
         ref.reset( new UrlBase());
         ref->config("require_host",     "m");   // host is mandatory
         addUrlByScheme("nfs",    ref);

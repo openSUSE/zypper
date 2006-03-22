@@ -246,6 +246,7 @@ namespace zypp
       // y=yes (allowed)
       // n=no  (disallowed, exception if !empty)
       config("with_authority",  "y");
+      config("with_port",       "y");
 
       // y=yes (required but don't throw if empty)
       // n=no  (not required, ignore if empty)
@@ -1034,7 +1035,8 @@ namespace zypp
       }
       else
       {
-        if( config("with_authority") != "y")
+        if( config("with_authority") != "y" ||
+            config("with_port")      != "y")
         {
           ZYPP_THROW(UrlNotAllowedException(
             std::string("Url scheme does not allow a port")
