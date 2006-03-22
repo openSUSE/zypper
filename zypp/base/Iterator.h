@@ -13,6 +13,8 @@
 #define ZYPP_BASE_ITERATOR_H
 
 #include <iterator>
+#include <functional>
+#include <utility>
 
 #include <boost/iterator/filter_iterator.hpp>
 #include <boost/iterator/transform_iterator.hpp>
@@ -127,6 +129,101 @@ namespace zypp
   */
   using boost::transform_iterator;
   using boost::make_transform_iterator;
+
+  /** Functor taking a \c std::pair returning \cstd::pair.first.
+   * \see MapKVIteratorTraits
+  */
+  template<class _Pair>
+    struct GetPairFirst : public std::unary_function<_Pair, typename _Pair::first_type>
+    {
+      const typename _Pair::first_type & operator()( const _Pair pair_r ) const
+      { return pair_r.first; }
+    };
+
+  /** Functor taking a \c std::pair returning \cstd::pair.second .
+   * \see MapKVIteratorTraits
+  */
+  template<class _Pair>
+    struct GetPairSecond : public std::unary_function<_Pair, typename _Pair::second_type>
+    {
+      const typename _Pair::second_type & operator()( const _Pair pair_r ) const
+      { return pair_r.second; }
+    };
+
+  /** Traits for std::map key and value iterators.
+   *
+   * \ref GetPairFirst and \ref GetPairSecond help building a transform_iterator
+   * that iterates over keys or values of a std::map. Class MapKVIteratorTraits
+   * provides some typedefs, you usg. do not want to write explicitly.
+   *
+   * \code
+   * // typedefs
+   * typedef std::map<K,V> MapType;
+   *
+   * // transform_iterator<GetPairFirst<MapType::value_type>,  MapType::const_iterator>
+   * typedef MapKVIteratorTraits<MapType>::Key_iterator MapTypeKey_iterator;
+   * // transform_iterator<GetPairSecond<MapType::value_type>, MapType::const_iterator>
+   * typedef MapKVIteratorTraits<MapType>::Value_iterator  MapTypeValue_iterator;
+   *
+   * // usage
+   * MapType mymap;
+   *
+   * MapTypeKey_iterator keyBegin( make_map_key_begin( mymap ) );
+   * MapTypeKey_iterator keyEnd  ( make_map_key_end( mymap ) );
+   *
+   * MapTypeKey_iterator valBegin( make_map_value_begin( mymap ) );
+   * MapTypeKey_iterator valEnd  ( make_map_value_end( mymap ) );
+   *
+   * std::for_each( keyBegin, keyEnd, DoSomething() );
+   * std::for_each( valBegin, valEnd, DoSomething() );
+   * \endcode
+   *
+   * Or short:
+   *
+   * \code
+   * typedef std::map<K,V> MapType;
+   * MapType mymap;
+   *
+   * std::for_each( make_map_key_begin( mymap ),   make_map_key_end( mymap ),   DoSomething() );
+   * std::for_each( make_map_value_begin( mymap ), make_map_value_end( mymap ), DoSomething() );
+   * \endcode
+   */
+  template<class _Map>
+    struct MapKVIteratorTraits
+    {
+      /** The map type */
+      typedef _Map                       MapType;
+      /** The maps key type */
+      typedef typename _Map::key_type    KeyType;
+      /** The key iterator type */
+      typedef transform_iterator<GetPairFirst<typename MapType::value_type>,
+                                 typename MapType::const_iterator> Key_iterator;
+      /** The maps value (mapped) type */
+      typedef typename _Map::mapped_type ValueType;
+      /** The value iterator type */
+      typedef transform_iterator<GetPairSecond<typename MapType::value_type>,
+                                 typename MapType::const_iterator> Value_iterator;
+    };
+
+  /** Convenience to create the key iterator from container::begin() */
+  template<class _Map>
+    inline typename MapKVIteratorTraits<_Map>::Key_iterator make_map_key_begin( const _Map & map_r )
+    { return make_transform_iterator( map_r.begin(), GetPairFirst<typename _Map::value_type>() ); }
+
+  /** Convenience to create the key iterator from container::end() */
+  template<class _Map>
+    inline typename MapKVIteratorTraits<_Map>::Key_iterator make_map_key_end( const _Map & map_r )
+    { return make_transform_iterator( map_r.end(), GetPairFirst<typename _Map::value_type>() ); }
+
+  /** Convenience to create the value iterator from container::begin() */
+  template<class _Map>
+    inline typename MapKVIteratorTraits<_Map>::Value_iterator make_map_value_begin( const _Map & map_r )
+    { return make_transform_iterator( map_r.begin(), GetPairSecond<typename _Map::value_type>() ); }
+
+  /** Convenience to create the value iterator from container::end() */
+  template<class _Map>
+    inline typename MapKVIteratorTraits<_Map>::Value_iterator make_map_value_end( const _Map & map_r )
+    { return make_transform_iterator( map_r.end(), GetPairSecond<typename _Map::value_type>() ); }
 
   /** \class function_output_iterator
    * An output iterator wrapping a unary function object; each time an
