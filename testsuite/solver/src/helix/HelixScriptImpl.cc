@@ -40,11 +40,11 @@ HelixScriptImpl::source() const
 { return _source; }
 
 /** Get the script to perform the change */
-std::string HelixScriptImpl::do_script() const
+Pathname HelixScriptImpl::do_script() const
 { return "do_script"; }
 
 /** Get the script to undo the change */
-std::string HelixScriptImpl::undo_script() const
+Pathname HelixScriptImpl::undo_script() const
 { return "undo_script"; }
 
 /** Check whether script to undo the change is available */
