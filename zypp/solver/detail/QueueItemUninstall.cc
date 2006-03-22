@@ -240,6 +240,33 @@ struct EstablishItem
     }
 };
 
+// Handle items which provides a recommend -> remove it soft
+
+struct ProvidesItem
+{
+    const ResPool & pool;
+    QueueItemList & qil;
+    bool soft;
+
+    ProvidesItem (const ResPool & p, QueueItemList &l, bool s)
+	: pool(p)
+	, qil(l)
+	, soft(s)
+    { }
+
+
+    bool operator()( const CapAndItem & cai )
+    {
+	_XDEBUG("remove soft item (" << cai.item << ", " << cai.cap << ")");
+
+	QueueItemUninstall_Ptr uninstall_item = new QueueItemUninstall (pool, cai.item, QueueItemUninstall::EXPLICIT, soft);
+	uninstall_item->setUnlink ();
+	qil.push_back (uninstall_item);
+	return true;
+    }
+};
+
+
 
 //-----------------------------------------------------------------------------
 
@@ -314,7 +341,6 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
     this->logInfo (context);
     
     context->uninstall (_item, _upgraded_to /*bool*/, _due_to_obsolete, _unlink);
-
     if (status.staysInstalled()) {
 	if (! _explicitly_requested
 	    && _item.status().isLocked()) {
@@ -375,6 +401,21 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 			  resfilter::ByCapMatch( *iter ),
 			  functor::functorRef<bool,CapAndItem>( establish ) );
 	}
+
+	// remove the items which have been recommended by the 
+	CapSet recomments = _item->dep (Dep::RECOMMENDS);
+	for (CapSet::const_iterator iter = recomments.begin(); iter != recomments.end(); iter++) {
+	    const Capability cap = *iter;
+	    _XDEBUG("this recommends " << cap);
+	    ProvidesItem provides( pool(), qil, true ); // soft
+
+	    Dep dep(Dep::PROVIDES);
+	    invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
+			  pool().byCapabilityIndexEnd( iter->index(), dep ),
+			  resfilter::ByCapMatch( *iter ),
+			  functor::functorRef<bool,CapAndItem>( provides ) );
+	}
+	
     }
 
  finished:

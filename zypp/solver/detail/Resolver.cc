@@ -840,21 +840,41 @@ transactCaps( const ResPool & pool, const CapSet & caps, bool install, bool soft
 	PoolItem_Ref installed = Helper::findInstalledByNameAndKind( pool, it->index(), it->refers() );
 	PoolItem_Ref uninstalled = Helper::findUninstalledByNameAndKind( pool, it->index(), it->refers() );
 
-	if (uninstalled
-	    && !uninstalled.status().isLocked())
-	{
-	    if (soft) 
-		uninstalled.status().setSoftTransact( install, ResStatus::SOLVER );
-	    else
-		uninstalled.status().setTransact( install, ResStatus::SOLVER );
-	}
-	if (installed
-	    && !installed.status().isLocked())
-	{
-	    if (soft) 
-		installed.status().setSoftTransact( false, ResStatus::SOLVER );
-	    else
-		installed.status().setTransact( false, ResStatus::SOLVER );
+	if (install) {
+	    if (uninstalled
+		&& !uninstalled.status().isLocked())
+	    {
+		if (soft) 
+		    uninstalled.status().setSoftTransact( install, ResStatus::SOLVER );
+		else
+		    uninstalled.status().setTransact( install, ResStatus::SOLVER );
+	    }
+	    if (installed
+		&& !installed.status().isLocked())
+	    {
+		if (soft) 
+		    installed.status().setSoftTransact( false, ResStatus::SOLVER );
+		else
+		    installed.status().setTransact( false, ResStatus::SOLVER );
+	    }
+	} else {
+	    // uninstall
+	    if (uninstalled
+		&& !uninstalled.status().isLocked())
+	    {
+		if (soft) 
+		    uninstalled.status().setSoftTransact( false, ResStatus::SOLVER );
+		else
+		    uninstalled.status().setTransact( false, ResStatus::SOLVER );
+	    }
+	    if (installed
+		&& !installed.status().isLocked())
+	    {
+		if (soft) 
+		    installed.status().setSoftTransact( true, ResStatus::SOLVER );
+		else
+		    installed.status().setTransact( true, ResStatus::SOLVER );
+	    }	    
 	}
 	if (!uninstalled
 	    && !installed)
