@@ -6,7 +6,7 @@
   <system file="bata8-kde-system.xml"/>
 </setup>
 
-<!-- Problem with kernel modules; more than one kernel are installed bug 156513'-->
+<!-- Uninstalling a selection in an installed system'-->
 <trial>
   <uninstall kind="selection" name="SuSE-Documentation"/>
   <reportproblems/>
