@@ -246,6 +246,14 @@ namespace zypp
   namespace target 
   { 
   
+    // resolvable Message
+    struct MessageResolvableReport : public callback::ReportBase
+    {
+        virtual void show(
+	  Message::constPtr message
+        ) {}	
+    };
+  
     ///////////////////////////////////////////////////////////////////
     namespace rpm 
     { 

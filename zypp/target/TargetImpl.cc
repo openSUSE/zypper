@@ -332,8 +332,12 @@ namespace zypp
 		{
 		  Message::constPtr m = dynamic_pointer_cast<const Message>(it->resolvable());
 		  std::string text = m->text().asString();
-		  ERR << "Displaying the text " << text << endl;
-#warning FIXME pass the text to UI
+		  
+		  callback::SendReport<target::MessageResolvableReport> report;
+		  
+		  report->show( m );
+		  
+		  MIL << "Displaying the text " << text << endl;
 		}
 		else if (isKind<Script>(it->resolvable()))
 		{
