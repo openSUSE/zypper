@@ -183,6 +183,7 @@ dnl ==================================================
 dnl AC_CONFIG_FILES([FILE...])
 AC_OUTPUT(	 po/Makefile.in\
 	Makefile			\
+	libzypp.pc			\
 	devel/Makefile			\
 	devel/genclass			\
 	devel/devel.jsrain/Makefile	\

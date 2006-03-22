@@ -16,5 +16,8 @@ package: dist
 #ACLOCAL_AMFLAGS = -I m4
 ACLOCAL_AMFLAGS =
 
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = libzypp.pc
+
 EXTRA_DIST = mkinstalldirs
 #config.rpath
