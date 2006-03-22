@@ -42,6 +42,8 @@ namespace zypp
     public:
       MediaSet(const Source_Ref & source_r);
 
+      ~MediaSet();
+
       /** Get the media access ID to specified media */
       media::MediaAccessId getMediaAccessId (media::MediaNr medianr, bool no_attach = false);
       /** Redirect specified media to a new MediaId */

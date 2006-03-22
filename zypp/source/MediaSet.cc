@@ -33,6 +33,18 @@ namespace zypp
     {
       _source = source_r;
     }
+    MediaSet::~MediaSet()
+    {
+      MIL << "Called MediaSet destructor" << endl;
+      release();
+      MIL << "Closing all medias of source" << endl;
+      media::MediaManager media_mgr;
+      for (MediaMap::iterator it = medias.begin(); it != medias.end(); it++)
+      {
+	MIL << "Closing media " << it->second << endl;
+	media_mgr.close(it->second);
+      }
+    }
 
     void MediaSet::redirect (media::MediaNr medianr, media::MediaAccessId media_id)
     {
