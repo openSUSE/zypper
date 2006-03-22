@@ -189,7 +189,6 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	     child = child ->next) {
 	  if (_helper.isElement(child)) {
 	    string name = _helper.name(child);
-XXX << "parseFormatNode(" << name << ")" << endl;
 	    if (name == "license") {
 	      dataPtr->license = _helper.content(child);
 	    }
