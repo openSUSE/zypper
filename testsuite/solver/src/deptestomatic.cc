@@ -650,7 +650,7 @@ print_pool( const string & prefix = "", bool show_all = true )
 }
 
 
-static void
+static int
 load_source (const string & alias, const string & filename, const string & type, bool system_packages)
 {
     Pathname pathname = globalPath + filename;
@@ -661,6 +661,7 @@ load_source (const string & alias, const string & filename, const string & type,
 
 	if (type == "url") {
 	    Url url( filename );
+	    cout << "Load from Url '" << url << "' (" << filename << ")" << endl;
 	    pathname = "";
 	    Pathname cache_dir( "" );
 	    src = Source_Ref( SourceFactory().createFrom( url, pathname, alias, cache_dir ) );
@@ -669,10 +670,11 @@ load_source (const string & alias, const string & filename, const string & type,
            Url url("file:/");
 
            media::MediaManager mmgr;
-           media::MediaId mediaid = mmgr.open(url);
+           media::MediaId mediaid = mmgr.open( url );
            HelixSourceImpl *impl = new HelixSourceImpl ();
+	   cout << "Load from File '" << pathname << "'" << endl;
            impl->factoryCtor (mediaid, pathname, alias);
-           src = Source_Ref( SourceFactory().createFrom(impl) );
+           src = Source_Ref( SourceFactory().createFrom( impl ) );
            manager->addSource (src);
         }
         count = src.resolvables().size();
@@ -684,11 +686,14 @@ load_source (const string & alias, const string & filename, const string & type,
     }
     catch ( Exception & excpt_r ) {
 	ZYPP_CAUGHT (excpt_r);
-	cout << "Loaded NO package(s) from " << pathname << endl;
+	cout << "Loaded NO package(s) from " << (pathname.empty() ? filename : pathname) << endl;
     }
+
+    return count;
 }
 
-static void
+
+static int
 undump (const std::string & filename)
 {
     cerr << "undump not really supported" << endl;
@@ -724,7 +729,10 @@ parse_xml_setup (XmlNode_Ptr node)
         } else if (node->equals ("system")) {
 
 	    string file = node->getProp ("file");
-	    load_source ("@system", file, "helix", true);
+	    if (load_source ("@system", file, "helix", true) <= 0) {
+		cerr << "Can't setup 'system'" << endl;
+		exit( 1 );
+	    }
             
         } else if (node->equals ("hardwareInfo")) {
 
@@ -736,13 +744,19 @@ parse_xml_setup (XmlNode_Ptr node)
 	    string name = node->getProp ("name");
 	    string file = node->getProp ("file");
 	    string type = node->getProp ("type");
-	    load_source (name, file, type, false);
+	    if (load_source (name, file, type, false) <= 0) {
+		cerr << "Can't setup 'channel'" << endl;
+		exit( 1 );
+	    }
 
 	} else if (node->equals ("source")) {
 
 	    string url = node->getProp ("url");
 	    string alias = node->getProp ("name");
-	    load_source( alias, url, "url", false );
+	    if (load_source( alias, url, "url", false ) <= 0) {
+		cerr << "Can't setup 'source'" << endl;
+		exit( 1 );
+	    }
 
 	} else if (node->equals ("undump")) {
 
