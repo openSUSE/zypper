@@ -64,10 +64,10 @@ namespace zypp
 				     const unsigned media_nr)
   { return _pimpl->provideFile(file_r, media_nr); }
 
-  const Pathname Source_Ref::provideDir(const Pathname & dir_r,
-                                         const unsigned media_nr,
-                                         const bool recursive)
-  { return _pimpl->provideDir(dir_r, media_nr, recursive); }
+  const Pathname Source_Ref::provideDirTree(const Pathname & dir_r,
+                                            const unsigned media_nr)
+                                         
+  { return _pimpl->provideDirTree(dir_r, media_nr); }
 
   const void Source_Ref::releaseFile(const Pathname & file_r,
 				     const unsigned media_nr)

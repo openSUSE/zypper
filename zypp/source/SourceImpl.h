@@ -105,9 +105,8 @@ namespace zypp
        * \throws Exception
        *
        */
-      const Pathname provideDir(const Pathname & path,
-				const unsigned media_nr = 1,
-				const bool recursive = false);
+      const Pathname provideDirTree(const Pathname & path,
+                                const unsigned media_nr = 1);
 
       const void releaseFile(const Pathname & file_r,
 			     const unsigned media_nr = 1);

@@ -72,11 +72,11 @@ namespace zypp
         //packages.* *.sel
         media::MediaManager media_mgr;
         media::MediaAccessId media_num = _media_set->getMediaAccessId(1);
+        
         INT << "Storing data to cache " << cache_dir_r << endl;
-        media_mgr.provideDirTree(media_num, _descr_dir);
-        Pathname descr_src = media_mgr.localPath(media_num, _descr_dir);
-        Pathname media_src = media_mgr.localPath(media_num, "media.1");
-        Pathname content_src = media_mgr.localPath(media_num, "content");
+        Pathname descr_src = provideDirTree(_descr_dir);
+        Pathname media_src = provideDirTree("media.1");
+        Pathname content_src = provideFile("/content");
 
         // get the list of cache keys
         std::list<std::string> files;
@@ -94,8 +94,7 @@ namespace zypp
             std::string filename = *it;
             if ( filename.substr(0, 10) == "gpg-pubkey" )
             {
-              media_mgr.provideFile(media_num, "/" + filename);
-              Pathname key_src = media_mgr.localPath(media_num, "/" + filename);
+              Pathname key_src = provideFile("/" + filename);
               MIL << "Trying to cache " << key_src << std::endl;
               filesystem::copy(key_src, cache_dir_r + "PUBLICKEYS/" + filename);
               MIL << "cached " << filename << std::endl;
