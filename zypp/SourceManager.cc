@@ -90,6 +90,9 @@ namespace zypp
       MIL << "SourceManager remove " << it->second << endl;
       _deleted_sources[it->second.numericId()] = it->second;
       _sources.erase(it);
+      
+      // release all media of this source, not needed anymore (#159754)
+      it->second.release();
 
       dumpSourceTableOn( DBG );
       return true;
