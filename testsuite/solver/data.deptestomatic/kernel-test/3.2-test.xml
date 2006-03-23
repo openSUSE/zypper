@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+(3) System Installation
+
+    During system installation, we must make sure that only one kernel
+    package gets installed, and that all KMPs that should be installed
+    get installed.
+    (3.2) Package requires a KMP
+
+      A package has a `Requires: some-kmp' tag. Each of the
+      some-kmp-$flavor packages has a `Provides: some-kmp =
+      version-release' tag. The some-kmp-$flavor package matching the
+      installed kernel should get installed.
+
+      The tpctl package employs this mechanism. Make sure that when
+      tpctl is selected, the tpctl-kmp-$flavor package matching the
+      installed kernel is installed as well. (This case is discussed in
+      bug 156513).
+-->
+<test>
+<setup>
+  <channel name="sl10_packages" file="sl10.1-beta7-packages.xml"/>
+  <channel name="sl10_selections" file="sl10.1-beta7-selections.xml"/>
+  <locale name="de"/>
+  <locale name="de_DE"/>
+  <mediaid/>
+</setup>
+<trial>
+  <install channel="sl10_packages" kind="package" name="tpctl"/>
+  <install channel="sl10_packages" kind="package" name="kernel-default"/>
+  <reportproblems/>
+</trial>
+</test>
