@@ -7,7 +7,12 @@ int main(void)
   std::string str, out;
   zypp::Url   url;
 
-  str = "file:/%2f/srv/ftp";
+  str = "file:///%2f/srv/ftp";
+  std::cout << "STR: " << str << std::endl;
+  out = zypp::Url(str).asString();
+  std::cout << "URL: " << out << std::endl << std::endl;
+
+  str = "file:./srv/ftp";
   std::cout << "STR: " << str << std::endl;
   out = zypp::Url(str).asString();
   std::cout << "URL: " << out << std::endl << std::endl;
@@ -32,7 +37,7 @@ int main(void)
   out = zypp::Url(str).asString();
   std::cout << "URL: " << out << std::endl << std::endl;
 
-  str = "nfs:///foo/bar/trala";
+  str = "nfs://nfs-server/foo/bar/trala";
   std::cout << "STR: " << str << std::endl;
   out = zypp::Url(str).asString();
   std::cout << "URL: " << out << std::endl << std::endl;

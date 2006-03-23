@@ -13,7 +13,7 @@ int main(void)
     {"ldap:///dc=foo,dc=bar",      "invalid: no host is ok for ldap", 1},
     {"ftp:///foo/bar",             "throws:  host is mandatory",      2},
     {"http:///%2f/srv/ftp",        "throws:  host is mandatory",      2},
-    {"file://localhost/some/path", "throws:  host not allowed",       2},
+    {"file://localhost/some/path", "valid:   host is allowed",        0},
     {"cd://localhost/some/path",   "throws:  host not allowed",       2},
     {"mailto:",                    "throws:  no path (email)",        2},
     {"cd:",                        "throws:  no path",                2},
@@ -46,7 +46,7 @@ int main(void)
       }
       catch(const zypp::url::UrlException &)
       {
-        std::cout << "ERR: rejected" << std::endl;
+        std::cout << "ERR: exception caught" << std::endl;
         if(test->exp != 2)
           ZYPP_THROW(zypp::Exception("Unexpected result exp != 2"));
       }
