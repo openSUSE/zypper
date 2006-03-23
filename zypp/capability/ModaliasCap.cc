@@ -24,6 +24,36 @@ namespace zypp
   namespace capability
   { /////////////////////////////////////////////////////////////////
 
+    /** If name_r contains 2 ':', the 1st part is a package name. */
+    inline void modsplit( std::string & name_r, std::string & pkgname_r )
+    {
+      std::string::size_type pos1( name_r.find_first_of( ":" ) );
+      std::string::size_type pos2( name_r.find_last_of( ":" ) );
+      if ( pos1 != pos2 )
+        {
+          pkgname_r = name_r.substr( 0, pos1 );
+          name_r.erase( 0, pos1+1 );
+        }
+    }
+
+    /** Ctor */
+    ModaliasCap::ModaliasCap( const Resolvable::Kind & refers_r,
+                              const std::string & name_r )
+    : CapabilityImpl( refers_r )
+    , _name( name_r )
+    { modsplit( _name, _pkgname ); }
+
+    /** Ctor */
+    ModaliasCap::ModaliasCap( const Resolvable::Kind & refers_r,
+                              const std::string & name_r,
+                              Rel op_r,
+                              const std::string & value_r )
+    : CapabilityImpl( refers_r )
+    , _name( name_r )
+    , _op( op_r )
+    , _value( value_r )
+    { modsplit( _name, _pkgname ); }
+
     const CapabilityImpl::Kind & ModaliasCap::kind() const
     { return CapTraits<Self>::kind; }
 
@@ -43,6 +73,11 @@ namespace zypp
     std::string ModaliasCap::encode() const
     {
       std::string ret( "modalias(" );
+      if ( !_pkgname.empty() )
+        {
+          ret += _pkgname;
+          ret += ":";
+        }
       ret += _name;
       ret += ")";
       if ( _op != Rel::ANY )

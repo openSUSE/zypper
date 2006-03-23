@@ -17,6 +17,8 @@
 
 #include "zypp/base/Algorithm.h"
 #include "zypp/detail/ResolvableImpl.h"
+#include "zypp/capability/CapabilityImpl.h"
+#include "zypp/capability/Capabilities.h"
 
 using std::endl;
 
@@ -57,7 +59,12 @@ namespace zypp
       {
 	if ( isKind<capability::ModaliasCap>(cap_r) )
           {
-	    deps[Dep::SUPPLEMENTS].insert( cap_r );
+            // in case cap provides a packagename, inject a SUPPLEMENTS.
+            intrusive_ptr<const capability::ModaliasCap> cap( capability::asKind<capability::ModaliasCap>(cap_r) );
+            if ( cap && ! cap->pkgname().empty() )
+              deps[Dep::SUPPLEMENTS].insert( CapFactory().parse( ResTraits<Package>::kind, cap->pkgname() ) );
+
+            deps[Dep::FRESHENS].insert( cap_r );
             return true;	// strip from provides
           }
 

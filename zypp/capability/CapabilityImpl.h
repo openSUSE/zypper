@@ -96,6 +96,10 @@ namespace zypp
       /** Solver hack. */
       static SplitInfo getSplitInfo( const Capability & cap );
 
+      /** Access to Capability details. */
+      static constPtr backdoor( const Capability & cap )
+      { return cap._pimpl.getPtr(); }
+
     protected:
       /** Ctor taking the kind of Resolvable \c this refers to.*/
       CapabilityImpl( const Resolvable::Kind & refers_r );
@@ -144,6 +148,11 @@ namespace zypp
     template<class _Cap>
       inline intrusive_ptr<const _Cap> asKind( const CapabilityImpl::constPtr & cap )
       { return dynamic_pointer_cast<const _Cap>(cap); }
+
+    /** Access to Capability details. */
+    template<class _Cap>
+      inline intrusive_ptr<const _Cap> asKind( const Capability & cap )
+      { return dynamic_pointer_cast<const _Cap>( CapabilityImpl::backdoor(cap) ); }
 
     ///////////////////////////////////////////////////////////////////
 

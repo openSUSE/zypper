@@ -45,21 +45,13 @@ namespace zypp
 
     public:
       /** Ctor */
-      ModaliasCap( const Resolvable::Kind & refers_r, const std::string & name_r )
-      : CapabilityImpl( refers_r )
-      , _name( name_r )
-      {}
+      ModaliasCap( const Resolvable::Kind & refers_r, const std::string & name_r );
 
       /** Ctor */
       ModaliasCap( const Resolvable::Kind & refers_r,
-              const std::string & name_r,
-              Rel op_r,
-              const std::string & value_r )
-      : CapabilityImpl( refers_r )
-      , _name( name_r )
-      , _op( op_r )
-      , _value( value_r )
-      {}
+                   const std::string & name_r,
+                   Rel op_r,
+                   const std::string & value_r );
 
     public:
       /**  */
@@ -71,8 +63,15 @@ namespace zypp
       /** <tt>modalias(name) [op value]</tt> */
       virtual std::string encode() const;
 
-      /** <tt>modalias(name)</tt> */
+      /** <tt>modalias()</tt> */
       virtual std::string index() const;
+
+    public:
+      const std::string & pkgname() const
+      { return _pkgname; }
+
+      const std::string & querystring() const
+      { return _name; }
 
     private:
       /** Empty ModaliasCap <tt>modalias()</tt> */
@@ -83,6 +82,7 @@ namespace zypp
 
     private:
       /**  */
+      std::string _pkgname;
       std::string _name;
       Rel _op;
       std::string _value;
