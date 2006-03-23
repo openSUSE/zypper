@@ -79,9 +79,9 @@ namespace zypp
           typedef shared_ptr<const _D> _constPtr;
           /** Check whether pointer is not shared. */
           bool unique( const _constPtr & ptr_r )
-          { return ptr_r.unique(); }
+          { return !ptr_r || ptr_r.unique(); }
           bool unique( const _Ptr & ptr_r )
-          { return ptr_r.unique(); }
+          { return !ptr_r || ptr_r.unique(); }
           /** Return number of references. */
           long use_count( const _constPtr & ptr_r ) const
           { return ptr_r.use_count(); }
