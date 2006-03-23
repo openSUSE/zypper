@@ -44,5 +44,13 @@ int main( int argc, char * argv[] )
 
   if (arch_exception() != 0) return 4;
 
+  if ( Arch() != Arch_noarch ) return 5;
+
+  if ( Arch("") == Arch_noarch ) return 6;
+
+  if ( ! Arch("").empty() ) return 7;
+
+  if ( Arch_noarch.empty() ) return 8;
+
   return 0;
 }
