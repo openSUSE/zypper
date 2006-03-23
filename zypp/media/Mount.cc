@@ -109,6 +109,13 @@ void Mount::mount ( const string& source,
 	{
 	    err = "Invalid filesystem on media";
 	}
+	else if  ( value.find ( "Not a directory" ) != string::npos )
+	{
+	    if( filesystem == "nfs")
+	    {
+		err = "Nfs path is not a directory";
+	    }
+	}
 
 	output = process->receiveLine();
     }
