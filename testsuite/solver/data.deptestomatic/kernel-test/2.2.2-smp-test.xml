@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="2.2.2-smp-system.xml"/>
+  <channel name="packages" file="2.2.2-smp-packages.xml"/>
+  <hardwareInfo path="kernel-hardware"/>
+</setup>
+<!-- 
+(2) KMP Update
+
+    This case triggers when a KMP becomes available on an installation
+    source ("catalog") that has a higher [epoch/]version/release number
+    that the installed KMP.
+
+    (2.2) The kABI of the kernel and of the KMP differ
+
+      (2.2.2) A kernel of another flavor with the new kABI is available
+
+	The resolver could propose to remove the current kernel, install
+	the kernel that is compatible with the new KMP, and the new KMP.
+	I don't think it is necessary to offer this solution, though.
+
+-->
+
+<trial>
+  <distupgrade delete_unmaintained="false"/>
+  <reportproblems/>
+</trial>
+
+</test>
