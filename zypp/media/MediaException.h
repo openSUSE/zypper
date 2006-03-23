@@ -385,6 +385,25 @@ namespace zypp
       std::string _name;
     };
 
+    class MediaNotEjectedException: public MediaException
+    {
+    public:
+      MediaNotEjectedException()
+      : MediaException("Can't eject any media")
+      , _name("")
+      {}
+
+      MediaNotEjectedException(const std::string &name)
+      : MediaException("Can't eject media")
+      , _name(name)
+      {}
+      virtual ~MediaNotEjectedException() throw() {};
+    protected:
+      virtual std::ostream & dumpOn( std::ostream & str ) const;
+    private:
+      std::string _name;
+    };
+
   /////////////////////////////////////////////////////////////////
   } // namespace media
 } // namespace zypp

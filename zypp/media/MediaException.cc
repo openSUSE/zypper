@@ -151,6 +151,14 @@ namespace zypp
       return str << "Media " << _name << " is in use by another instance" << endl;
     }
 
+    std::ostream & MediaNotEjectedException::dumpOn( std::ostream & str ) const
+    {
+      if( _name.empty())
+	return str << "Can't eject any media" << endl;
+      else
+	return str << "Can't eject media " << _name << endl;
+    }
+
   /////////////////////////////////////////////////////////////////
   } // namespace media
 } // namespace zypp
