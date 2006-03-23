@@ -55,21 +55,8 @@ namespace zypp
 	_reboot_needed = parsed.rebootNeeded;
 	_affects_pkg_manager = parsed.packageManager;
 	std::string updateScript;
-/*
-	std::string engine;
-	MultiLang description;
-	_summary = parsed.MultiLang summary;
-*/
-
-
-
-
-      /** Patch description */
-//      std::list<std::string> _description;
-
-
-
-
+        _summary = parsed.summary;
+        _description = parsed.description;
 
 	// now process the atoms
 	CapFactory _f;
