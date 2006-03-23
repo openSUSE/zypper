@@ -1,0 +1,230 @@
+<channel><subchannel>
+<package>
+  <name>cloop-kmp-default</name>
+  <section>system</section>
+  <location>1</location>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>2.01_2.6.16_rc5_git14_3c</version>
+      <release>15</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='/bin/sh' pre='1' />
+    <dep name='/bin/sh' pre='1' />
+    <dep name='/bin/sh' pre='1' />
+    <dep name='kernel-default' />
+    <dep name='/bin/sh' />
+    <dep name='/bin/sh' />
+    <dep name='/bin/sh' />
+    <dep name='kernel(kernel)' op='=' version='88bfb689e34ff788' />
+    <dep name='kernel(vmlinux)' op='=' version='4e69c7c19f1121b4' />
+    <dep name='kernel(mm)' op='=' version='b75752b5294446f9' />
+    <dep name='kernel(fs)' op='=' version='e8b3bb08a776f976' />
+    <dep name='kernel(block)' op='=' version='a637a226e0f786f9' />
+    <dep name='kernel(arch_i386_mm)' op='=' version='8bc62df7ea63729c' />
+    <dep name='kernel(arch_i386_kernel)' op='=' version='865f5f6b995e3429' />
+    <dep name='kernel(lib)' op='=' version='277c4352b0756bca' />
+    <dep name='kernel(lib_zlib_inflate)' op='=' version='afdb99b30893e2c1' />
+  </requires>
+  <provides>
+    <dep name='cloop-kmp' op='=' version='2.01_2.6.16_rc5_git14_3c' />
+    <dep name='cloop-kmp-default' op='=' version='2.01_2.6.16_rc5_git14_3c' />
+  </provides>
+</package>
+<package>
+  <name>cloop-kmp-smp</name>
+  <section>system</section>
+  <location>1</location>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>2.01_2.6.16_rc5_git14_3c</version>
+      <release>15</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='/bin/sh' pre='1' />
+    <dep name='/bin/sh' pre='1' />
+    <dep name='/bin/sh' pre='1' />
+    <dep name='kernel-smp' />
+    <dep name='/bin/sh' />
+    <dep name='/bin/sh' />
+    <dep name='/bin/sh' />
+    <dep name='kernel(block)' op='=' version='ce47a299102c0f64' />
+    <dep name='kernel(kernel)' op='=' version='8d2baf5f0784314d' />
+    <dep name='kernel(vmlinux)' op='=' version='286b3d74d4368df0' />
+    <dep name='kernel(mm)' op='=' version='58746e28e1dfb1e0' />
+    <dep name='kernel(arch_i386_mm)' op='=' version='9d18e89996aa1d23' />
+    <dep name='kernel(arch_i386_kernel)' op='=' version='82ced497082e884e' />
+    <dep name='kernel(lib)' op='=' version='b97267ae70d7db3e' />
+    <dep name='kernel(lib_zlib_inflate)' op='=' version='afdb99b30893e2c1' />
+    <dep name='kernel(fs)' op='=' version='9783012b647b4e22' />
+  </requires>
+  <provides>
+    <dep name='cloop-kmp' op='=' version='2.01_2.6.16_rc5_git14_3c' />
+    <dep name='cloop-kmp-smp' op='=' version='2.01_2.6.16_rc5_git14_3c' />
+  </provides>
+</package>
+<package>
+  <name>novfs-kmp-default</name>
+  <section>system</section>
+  <location>1</location>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>1.2.0_2.6.16_rc5_git14_3c</version>
+      <release>8</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='/bin/sh' pre='1' />
+    <dep name='/bin/sh' pre='1' />
+    <dep name='/bin/sh' pre='1' />
+    <dep name='kernel-default' />
+    <dep name='/bin/sh' />
+    <dep name='/bin/sh' />
+    <dep name='/bin/sh' />
+    <dep name='kernel(mm)' op='=' version='b75752b5294446f9' />
+    <dep name='kernel(fs)' op='=' version='e8b3bb08a776f976' />
+    <dep name='kernel(kernel)' op='=' version='88bfb689e34ff788' />
+    <dep name='kernel(vmlinux)' op='=' version='4e69c7c19f1121b4' />
+    <dep name='kernel(arch_i386_mm)' op='=' version='8bc62df7ea63729c' />
+    <dep name='kernel(arch_i386_kernel)' op='=' version='865f5f6b995e3429' />
+    <dep name='kernel(fs_proc)' op='=' version='2fc0b39d91a86bbf' />
+  </requires>
+  <provides>
+    <dep name='novfs-kmp' op='=' version='1.2.0_2.6.16_rc5_git14_3c' />
+    <dep name='novfs-kmp-default' op='=' version='1.2.0_2.6.16_rc5_git14_3c' />
+  </provides>
+  <supplements>
+    <dep name='kernel-default' />
+  </supplements>
+</package>
+<package>
+  <name>novfs-kmp-smp</name>
+  <section>system</section>
+  <location>1</location>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>1.2.0_2.6.16_rc5_git14_3c</version>
+      <release>8</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='/bin/sh' pre='1' />
+    <dep name='/bin/sh' pre='1' />
+    <dep name='/bin/sh' pre='1' />
+    <dep name='kernel-smp' />
+    <dep name='/bin/sh' />
+    <dep name='/bin/sh' />
+    <dep name='/bin/sh' />
+    <dep name='kernel(mm)' op='=' version='58746e28e1dfb1e0' />
+    <dep name='kernel(fs)' op='=' version='9783012b647b4e22' />
+    <dep name='kernel(kernel)' op='=' version='8d2baf5f0784314d' />
+    <dep name='kernel(vmlinux)' op='=' version='286b3d74d4368df0' />
+    <dep name='kernel(fs_proc)' op='=' version='0dfc345d54329f9d' />
+    <dep name='kernel(arch_i386_mm)' op='=' version='9d18e89996aa1d23' />
+    <dep name='kernel(arch_i386_kernel)' op='=' version='82ced497082e884e' />
+  </requires>
+  <provides>
+    <dep name='novfs-kmp' op='=' version='1.2.0_2.6.16_rc5_git14_3c' />
+    <dep name='novfs-kmp-smp' op='=' version='1.2.0_2.6.16_rc5_git14_3c' />
+  </provides>
+  <supplements>
+    <dep name='kernel-smp' />
+  </supplements>
+</package>
+<package>
+  <name>nvidia-gfx-kmp-default</name>
+  <section>system</section>
+  <location>1</location>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>1.0.8178_2.6.16_rc5_git14_3c</version>
+      <release>1</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='/bin/sh' pre='1' />
+    <dep name='/bin/sh' pre='1' />
+    <dep name='/bin/sh' pre='1' />
+    <dep name='kernel-default' />
+    <dep name='/bin/sh' />
+    <dep name='/bin/sh' />
+    <dep name='/bin/sh' />
+    <dep name='kernel(mm)' op='=' version='b75752b5294446f9' />
+    <dep name='kernel(drivers_char_agp)' op='=' version='65e58c17d2bb30ed' />
+    <dep name='kernel(kernel)' op='=' version='88bfb689e34ff788' />
+    <dep name='kernel(vmlinux)' op='=' version='4e69c7c19f1121b4' />
+    <dep name='kernel(drivers)' op='=' version='471ca31ddad5e9cb' />
+    <dep name='kernel(drivers_pci)' op='=' version='4ba79070e5eef93c' />
+    <dep name='kernel(kernel_irq)' op='=' version='dd1d73732d05a591' />
+    <dep name='kernel(arch_i386_kernel)' op='=' version='865f5f6b995e3429' />
+    <dep name='kernel(arch_i386_kernel_cpu)' op='=' version='7e943412451173b6' />
+    <dep name='kernel(arch_i386_kernel_cpu_mtrr)' op='=' version='badf815515a4fe72' />
+    <dep name='kernel(arch_i386_mm)' op='=' version='8bc62df7ea63729c' />
+    <dep name='kernel(fs)' op='=' version='e8b3bb08a776f976' />
+    <dep name='kernel(security)' op='=' version='3c4118c8af4987f4' />
+    <dep name='kernel(fs_proc)' op='=' version='2fc0b39d91a86bbf' />
+  </requires>
+  <provides>
+    <dep name='nvidia-gfx-kmp' op='=' version='1.0.8178_2.6.16_rc5_git14_3c' />
+    <dep name='nvidia-gfx-kmp-default' op='=' version='1.0.8178_2.6.16_rc5_git14_3c' />
+  </provides>
+  <supplements>
+    <dep name='modalias(kernel-default:pci:v000010DEd*sv*sd*bc03sc00i00*)' />
+  </supplements>
+</package>
+<package>
+  <name>nvidia-gfx-kmp-smp</name>
+  <section>system</section>
+  <location>1</location>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>1.0.8178_2.6.16_rc5_git14_3c</version>
+      <release>1</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='/bin/sh' pre='1' />
+    <dep name='/bin/sh' pre='1' />
+    <dep name='/bin/sh' pre='1' />
+    <dep name='kernel-smp' />
+    <dep name='/bin/sh' />
+    <dep name='/bin/sh' />
+    <dep name='/bin/sh' />
+    <dep name='kernel(mm)' op='=' version='58746e28e1dfb1e0' />
+    <dep name='kernel(arch_i386_kernel)' op='=' version='82ced497082e884e' />
+    <dep name='kernel(drivers_char_agp)' op='=' version='16e904148b99750e' />
+    <dep name='kernel(kernel)' op='=' version='8d2baf5f0784314d' />
+    <dep name='kernel(vmlinux)' op='=' version='286b3d74d4368df0' />
+    <dep name='kernel(drivers)' op='=' version='ad1fe3b65c7923a8' />
+    <dep name='kernel(drivers_pci)' op='=' version='71f317601be27dad' />
+    <dep name='kernel(kernel_irq)' op='=' version='38604384a386996c' />
+    <dep name='kernel(arch_i386_kernel_cpu)' op='=' version='7e943412451173b6' />
+    <dep name='kernel(arch_i386_kernel_cpu_mtrr)' op='=' version='badf815515a4fe72' />
+    <dep name='kernel(arch_i386_mm)' op='=' version='9d18e89996aa1d23' />
+    <dep name='kernel(security)' op='=' version='e0eb66928e55d6ad' />
+    <dep name='kernel(fs)' op='=' version='9783012b647b4e22' />
+    <dep name='kernel(fs_proc)' op='=' version='0dfc345d54329f9d' />
+  </requires>
+  <provides>
+    <dep name='nvidia-gfx-kmp' op='=' version='1.0.8178_2.6.16_rc5_git14_3c' />
+    <dep name='nvidia-gfx-kmp-smp' op='=' version='1.0.8178_2.6.16_rc5_git14_3c' />
+  </provides>
+  <supplements>
+    <dep name='modalias(kernel-smp:pci:v000010DEd*sv*sd*bc03sc00i00*)' />
+  </supplements>
+</package>
+</subchannel></channel>
