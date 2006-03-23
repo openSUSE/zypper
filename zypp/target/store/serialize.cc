@@ -387,7 +387,7 @@ std::string toXML( const PersistentStorage::SourceData &obj )
 {
   stringstream out;
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  out << "<source  xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">>" << std::endl;
+  out << "<source  xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
   out << "  <enabled>" << (obj.enabled ? "true" : "false" ) << "</enabled>" << std::endl;
   out << "  <auto-refresh>" << ( obj.autorefresh ? "true" : "false" ) << "</auto-refresh>" << std::endl;
   out << "  <product-dir>" << xml_escape(obj.product_dir) << "</product-dir>" << std::endl;
