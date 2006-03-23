@@ -12,7 +12,7 @@
 -->
 
 <trial>
-  <distupgrade/>
+  <distupgrade delete_unmaintained="false"/>
   <reportproblems/>
 </trial>
 
