@@ -1,5 +1,25 @@
 <channel><subchannel>
 <package>
+  <name>novfs</name>
+  <section>system</section>
+  <location>1</location>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>1468</version>
+      <release>4</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <requires>
+    <dep name='novfs-kmp' />
+  </requires>
+  <provides>
+    <dep name='novfs' op='=' version='1468' />
+  </provides>
+</package>
+
+<package>
   <name>cloop</name>
   <section>system</section>
   <location>1</location>

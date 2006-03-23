@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <channel name="packages1" file="beta8-packages.xml"/>
+  <channel name="packages2" file="2.6.16_rc5_git14-2-packages.xml"/>
+  <hardwareInfo path="kernel-hardware"/>
+</setup>
+<!-- 
+(3) System Installation
+
+    During system installation, we must make sure that only one kernel
+    package gets installed, and that all KMPs that should be installed
+    get installed.
+    (3.4) Multiple kernels selected
+
+      multiple kernel-$flavor selected during installation and someone
+      requires foo-kmp (and no hw supplements) => make sure that multiple
+      foo-kmp-$flavor packages get installed
+
+
+-->
+
+<trial>
+ <install channel="packages2" kind="package" name="kernel-default"/>
+ <install channel="packages2" kind="package" name="kernel-smp"/>
+ <install channel="packages2" kind="package" name="novfs"/>
+
+  <reportproblems/>
+</trial>
+
+</test>
