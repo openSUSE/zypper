@@ -70,15 +70,15 @@ void assertSystemResObjectInPool()
     {
       // SystemResObject is missing in the pool ==> insert
       ResStore store;
-      store.insert( SystemResObject::instance() );
-      getZYpp()->addResolvables( store );
+      store.insert( SystemResObject::instance() ); 
+      getZYpp()->addResolvables( store, true ); // true = is installed
     }
 
-  // set transact bit
+  // set lock
   if ( ! pool.byKindBegin<SystemResObject>()
-         ->status().setTransact( true, ResStatus::USER ) )
+         ->status().setLock( true, ResStatus::USER ) )
     {
-      WAR << "Unable to set SystemResObject to transact" << endl;
+      WAR << "Unable to set SystemResObject to lock" << endl;
     }
 }	
 
