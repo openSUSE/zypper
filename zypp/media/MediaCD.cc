@@ -33,6 +33,7 @@
 
 #define  DELAYED_VERIFY          1
 #define  FORCE_RELEASE_FOREIGN   1
+#define  REPORT_EJECT_ERRORS     0
 
 using namespace std;
 
@@ -518,7 +519,12 @@ namespace zypp {
 #if FORCE_RELEASE_FOREIGN
         forceRelaseAllMedia(false);
 #endif
-        openTray( mediaSourceName() );
+        if( !openTray( mediaSourceName() ))
+	{
+#if REPORT_EJECT_ERRORS
+	  ZYPP_THROW(MediaNotEjectedException(mediaSourceName()));
+#endif
+	}
       }
     }
 
@@ -532,6 +538,7 @@ namespace zypp {
     //
     void MediaCD::forceEject()
     {
+      bool ejected=false;
       if ( !isAttached()) {	// no device mounted in this instance
 #if DELAYED_VERIFY
 	DeviceList detected( detectDevices(
@@ -606,9 +613,18 @@ namespace zypp {
 	    forceRelaseAllMedia(media, false);
 #endif
 	    if ( openTray( it->name ) )
+	    {
+	      ejected = true;
 	      break; // on 1st success
+	    }
 	  }
 	}
+      }
+      if( ejected)
+      {
+#if REPORT_EJECT_ERRORS
+	ZYPP_THROW(MediaNotEjectedException());
+#endif
       }
     }
 

@@ -619,7 +619,20 @@ void MediaHandler::release( bool eject )
   if( _mediaSource.unique())
   {
     DBG << "Releasing media " << _mediaSource->asString() << std::endl;
-    releaseFrom( eject ); // pass to concrete handler
+    try {
+      releaseFrom( eject ); // pass to concrete handler
+    }
+    catch(const MediaNotEjectedException &e)
+    {
+      if( !isAttached())
+      {
+	// not ejected because our
+	// attach point is busy
+	_mediaSource.reset(NULL);
+	removeAttachPoint();
+      }
+      ZYPP_RETHROW(e);
+    }
     _mediaSource.reset(NULL);
     removeAttachPoint();
   }
@@ -637,7 +650,20 @@ void MediaHandler::release( bool eject )
 
     setMediaSource(media);
     DBG << "Releasing media (forced) " << _mediaSource->asString() << std::endl;
-    releaseFrom( eject ); // pass to concrete handler
+    try {
+      releaseFrom( eject ); // pass to concrete handler
+    }
+    catch(const MediaNotEjectedException &e)
+    {
+      if( !isAttached())
+      {
+	// not ejected because our
+	// attach point is busy
+	_mediaSource.reset(NULL);
+	removeAttachPoint();
+      }
+      ZYPP_RETHROW(e);
+    }
     _mediaSource.reset(NULL);
     removeAttachPoint();
   }
