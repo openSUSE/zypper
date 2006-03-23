@@ -620,7 +620,7 @@ namespace zypp {
 	  }
 	}
       }
-      if( ejected)
+      if( !ejected)
       {
 #if REPORT_EJECT_ERRORS
 	ZYPP_THROW(MediaNotEjectedException());
