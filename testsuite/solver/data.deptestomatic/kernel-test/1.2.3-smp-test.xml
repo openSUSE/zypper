@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="1.2.3-smp-system.xml"/>
+  <channel name="packages" file="1.2.3-smp-packages.xml"/>
+  <hardwareInfo path="kernel-hardware"/>
+</setup>
+<!-- 
+    (1.2) Kernel ABI has changed
+
+      The KMPs and the kernel become incompatible. This results in
+      a mismatch in kernel(name) = version Provides of the kernel and
+      requires of the KMP. The resolver should indicate a conflict to
+      be resolved interactively.
+      (1.2.3) An updated some-kmp-$flavor matching the kernel is
+	      available
+
+	The kernel and the KMP should get updated.
+-->
+
+<trial>
+  <distupgrade/>
+  <reportproblems/>
+</trial>
+
+</test>

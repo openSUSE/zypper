@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="1.1.3-smp-system.xml"/>
+  <channel name="packages" file="1.1.3-smp-packages.xml"/>
+</setup>
+<!-- 
+      (1.1.3) An updated some-kmp-$flavor matching the kernel is
+	      available
+
+	The kernel and the KMP should get updated.
+-->
+
+<trial>
+  <distupgrade/>
+  <reportproblems/>
+</trial>
+
+</test>
