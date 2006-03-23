@@ -45,6 +45,12 @@ namespace zypp {
     		    false ) // does_download
     {
 	MIL << "MediaDIR::MediaDIR(" << url_r << ")" << endl;
+	if( !url_r.getHost().empty())
+	{
+	  ZYPP_THROW(MediaBadUrlException(url_r,
+	    "Hostname not allowed in the Url"
+	  ));
+	}
     }
 
     ///////////////////////////////////////////////////////////////////
