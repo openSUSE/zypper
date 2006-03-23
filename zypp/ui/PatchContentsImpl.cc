@@ -46,12 +46,16 @@ namespace zypp
 		{
 		    // DBG << "Found " << (*atom_it)->name() << " " << (*foundNames)->edition().asString() << endl;
 
-		    found = (*atom_it)->edition() == (*foundNames)->edition();
-
-		    if ( found )
+		    if ( (*atom_it)->edition() == (*foundNames)->edition() &&
+			 (*atom_it)->arch()    == (*foundNames)->arch()      )
 		    {
+			found = true;
 			_contents.push_back( *foundNames );
-			// DBG << "Found the right one: " << (*foundNames)->name() << " " << (*foundNames)->edition() << endl;
+
+			MIL << "Found resolvable for patch atom: "
+			    << (*foundNames)->name() << "-" << (*foundNames)->edition()
+			    << " arch: " << (*foundNames)->arch().asString()
+			    << endl;
 		    }
 		    else
 			++foundNames;
@@ -59,7 +63,14 @@ namespace zypp
 
 		if ( ! found )
 		{
-		    WAR << "Can't find resolvable with name " << (*atom_it)->name() << " in pool" << endl;
+		    // It's perfectly legitimate for that corresponding resolvable not to be in the pool:
+		    // The pool only contains resolvables in matching architectures, yet a
+		    // multi-arch patch might as well contain atoms for different architectures.
+
+		    DBG << "No resolvable for patch atom in pool (wrong arch?): "
+			<< (*atom_it)->name() << "-" << (*atom_it)->edition()
+			<< " arch: " << (*atom_it)->arch().asString()
+			<< endl;
 		}
 	    }
 	}
