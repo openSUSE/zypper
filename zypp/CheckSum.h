@@ -33,6 +33,9 @@ namespace zypp
     { return _type; } 
     std::string checksum() const  
     { return _checksum; } 
+    
+    bool empty() const  
+    { return (checksum().empty() || type().empty()); } 
   private:
     std::string _type;
     std::string _checksum;
