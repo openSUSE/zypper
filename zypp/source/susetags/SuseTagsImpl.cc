@@ -359,6 +359,7 @@ namespace zypp
           
           MIL << "Product: " << product->summary() << endl;
           store.insert( product );
+          _prodImpl = p.prodImpl;
         }
         catch (Exception & excpt_r) {
           ERR << "cannot parse content file" << endl;

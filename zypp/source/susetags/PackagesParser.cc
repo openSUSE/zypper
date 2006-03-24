@@ -201,6 +201,14 @@ namespace zypp
 	    _isPendingPkg = true;
 	    
 	  }
+          else if ( stag_r.name == "Cks" )
+          {
+            std::vector<std::string> words;
+            if ( str::split( stag_r.value, std::back_inserter(words) ) != 2 )
+              ZYPP_THROW( ParseException( stag_r.name + " - Expected [type checksum], got [" + stag_r.value +"]") );
+
+            _pkgImpl->_checksum = CheckSum(words[0], words[1]);
+          }
 	  if ( stag_r.name == "Grp" )
 	  {
 	    _pkgImpl->_group = stag_r.value;

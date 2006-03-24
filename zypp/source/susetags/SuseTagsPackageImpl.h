@@ -15,6 +15,7 @@
 #include "zypp/detail/PackageImplIf.h"
 #include "zypp/Source.h"
 #include "zypp/DiskUsage.h"
+#include "zypp/CheckSum.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -110,6 +111,7 @@ namespace zypp
         unsigned int _media_number;
         Pathname _location;
         DiskUsage _diskusage;
+        CheckSum _checksum;
       private:
         Source_Ref _source;
       public:

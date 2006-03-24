@@ -17,6 +17,7 @@
 
 #include "zypp/Pathname.h"
 #include "zypp/source/SourceImpl.h"
+#include "zypp/source/susetags/SuseTagsProductImpl.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -95,7 +96,7 @@ namespace zypp
         
         std::string _vendor;
         std::string _media_id;
-        
+        detail::ResImplTraits<SuseTagsProductImpl>::Ptr _prodImpl;
       };
       ///////////////////////////////////////////////////////////////////
 
