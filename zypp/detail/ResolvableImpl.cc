@@ -47,11 +47,11 @@ namespace zypp
 
   namespace
   {
-    struct FilterExtraProvides
+    struct FilterExtraDependency
     {
       Dependencies & deps;
 
-      FilterExtraProvides( Dependencies & d )
+      FilterExtraDependency( Dependencies & d )
 	: deps( d )
       { }
 
@@ -64,7 +64,7 @@ namespace zypp
             if ( cap && ! cap->pkgname().empty() )
               deps[Dep::SUPPLEMENTS].insert( CapFactory().parse( ResTraits<Package>::kind, cap->pkgname() ) );
 
-            deps[Dep::FRESHENS].insert( CapFactory().parse( ResTraits<Package>::kind, "modalias(" + cap->querystring() +")" ));
+            deps[Dep::FRESHENS].insert(cap_r);
             return true;	// strip from provides
           }
 
@@ -79,20 +79,20 @@ namespace zypp
 
 	CapFactory f;
 
-	std::string provides( cap_r.index(), 7 );			// strip "locale("
-	std::string::size_type pos = provides.find( ":" );		// colon given ?
+	std::string locales( cap_r.index(), 7 );			// strip "locale("
+	std::string::size_type pos = locales.find( ":" );		// colon given ?
 	if (pos != std::string::npos) {
-	    deps[Dep::SUPPLEMENTS].insert( f.parse( ResTraits<Package>::kind, std::string( provides, 0, pos ) ) );
-	    provides.erase( 0, pos+1 );
+	    deps[Dep::SUPPLEMENTS].insert( f.parse( ResTraits<Package>::kind, std::string( locales, 0, pos ) ) );
+	    locales.erase( 0, pos+1 );
 	}
 	pos = 0;
 	std::string::size_type next = pos;
-	while (pos < provides.size()) {
-	    next = provides.find( ";", pos );			// look for ; separator
+	while (pos < locales.size()) {
+	    next = locales.find( ";", pos );			// look for ; separator
 	    if (next == std::string::npos)
-		next = provides.size()-1;			// none left, set next to end-1 (strip trailing ')' )
+		next = locales.size()-1;			// none left, set next to end-1 (strip trailing ')' )
 
-	    std::string loc( provides, pos, next-pos );
+	    std::string loc( locales, pos, next-pos );
 	    getZYpp()->availableLocale( Locale( loc ) );
 	    deps[Dep::FRESHENS].insert( f.parse( ResTraits<Language>::kind, loc ) );
 	    pos = next + 1;
@@ -104,13 +104,26 @@ namespace zypp
     void filterExtraProvides( const Dependencies & from, Dependencies & to )
     {
       CapSet provides;
-      FilterExtraProvides flp( to );
+      FilterExtraDependency flp( to );
 
       std::remove_copy_if( from[Dep::PROVIDES].begin(), from[Dep::PROVIDES].end(),
                            std::inserter( provides, provides.end() ),
                            flp );
       to[Dep::PROVIDES] = provides;
     }
+
+    void filterExtraSupplements( const Dependencies & from, Dependencies & to )
+    {
+      CapSet supplements;
+      to[Dep::SUPPLEMENTS].clear();
+      
+      FilterExtraDependency flp( to );
+
+      std::remove_copy_if( from[Dep::SUPPLEMENTS].begin(), from[Dep::SUPPLEMENTS].end(),
+                           std::inserter( supplements, supplements.end() ),
+                           flp );
+      to[Dep::SUPPLEMENTS].insert(supplements.begin(), supplements.end());
+    }      
   }
 
   Resolvable::Impl::Impl( const Kind & kind_r,
@@ -121,10 +134,12 @@ namespace zypp
   , _arch( nvrad_r.arch )
   , _deps( nvrad_r )
   {
-    // check if we provide any extra ('locale(...)', 'modalias(...)', ...) tags
+    // check if we provide/supplements any extra ('locale(...)', 'modalias(...)', ...) tags
     // and split them up to freshens/supplements (except for SystemResObject)
-    if ( _kind != ResTraits<SystemResObject>::kind )
-      filterExtraProvides( nvrad_r, _deps );
+      if ( _kind != ResTraits<SystemResObject>::kind ) {
+	  filterExtraSupplements( nvrad_r, _deps );
+	  filterExtraProvides( nvrad_r, _deps );
+      }
 
     // assert self provides
     _deps[Dep::PROVIDES].insert( CapFactory()
