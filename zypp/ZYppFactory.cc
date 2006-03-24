@@ -16,7 +16,9 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+
 #include "zypp/base/Logger.h"
+#include "zypp/base/Gettext.h"
 #include "zypp/PathInfo.h"
 
 #include "zypp/ZYppFactory.h"
@@ -30,42 +32,46 @@ using namespace std;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  
+
   ///////////////////////////////////////////////////////////////////
   //
   //    CLASS NAME : ZYppGlobalLock
   //
   ///////////////////////////////////////////////////////////////////
-  
+
   class ZYppGlobalLock
   {
     public:
-    
+
     ZYppGlobalLock() : _zypp_lockfile(0)
     {
-  
+
     }
-    
+
     ~ZYppGlobalLock()
     {
-      pid_t curr_pid = getpid();
-      if ( _zypp_lockfile )
-      {
-        Pathname lock_file = Pathname(ZYPP_LOCK_FILE);
-        unLockFile();
-        closeLockFile();
-        
-        MIL << "Cleaning lock file. (" << curr_pid << ")" << std::endl;
-        if ( filesystem::unlink(lock_file) == 0 )
-          MIL << "Lockfile cleaned. (" << curr_pid << ")" << std::endl;
-        else
-          ERR << "Cant clean lockfile. (" << curr_pid << ")" << std::endl;
-      }
+      try
+        {
+          pid_t curr_pid = getpid();
+          if ( _zypp_lockfile )
+            {
+              Pathname lock_file = Pathname(ZYPP_LOCK_FILE);
+              unLockFile();
+              closeLockFile();
+
+              MIL << "Cleaning lock file. (" << curr_pid << ")" << std::endl;
+              if ( filesystem::unlink(lock_file) == 0 )
+                MIL << "Lockfile cleaned. (" << curr_pid << ")" << std::endl;
+              else
+                ERR << "Cant clean lockfile. (" << curr_pid << ")" << std::endl;
+            }
+        }
+      catch(...) {} // let no exception escape.
     }
-    
+
     private:
     FILE *_zypp_lockfile;
-  
+
     void openLockFile(const char *mode)
     {
       Pathname lock_file = Pathname(ZYPP_LOCK_FILE);
@@ -73,12 +79,12 @@ namespace zypp
       if (_zypp_lockfile == 0)
         ZYPP_THROW (Exception( "Cant open " + lock_file.asString() + " in mode " + std::string(mode) ) );
     }
-  
+
     void closeLockFile()
     {
       fclose(_zypp_lockfile);
     }
-  
+
     void shLockFile()
     {
       int fd = fileno(_zypp_lockfile);
@@ -88,7 +94,7 @@ namespace zypp
       else
         MIL << "locked (shared)" << std::endl;
     }
-      
+
     void exLockFile()
     {
       int fd = fileno(_zypp_lockfile);
@@ -99,7 +105,7 @@ namespace zypp
       else
         MIL << "locked (exclusive)" << std::endl;
     }
-  
+
     void unLockFile()
     {
       int fd = fileno(_zypp_lockfile);
@@ -110,7 +116,7 @@ namespace zypp
       else
         MIL << "unlocked" << std::endl;
     }
-  
+
     bool lockFileExists()
     {
       Pathname lock_file = Pathname(ZYPP_LOCK_FILE);
@@ -118,7 +124,7 @@ namespace zypp
       bool exists = PathInfo(lock_file).isExist();
       return exists;
     }
-  
+
     void createLockFile()
     {
       pid_t curr_pid = getpid();
@@ -130,7 +136,7 @@ namespace zypp
       MIL << "written lockfile with pid " << curr_pid << std::endl;
       closeLockFile();
     }
-  
+
     bool isProcessRunning(pid_t pid)
     {
     // it is another program, not me, see if it is still running
@@ -141,30 +147,30 @@ namespace zypp
       bool still_running = PathInfo(procfile).isExist();
       return still_running;
     }
-  
+
     pid_t lockerPid()
     {
       pid_t locked_pid = 0;
       long readpid = 0;
-    
+
       fscanf(_zypp_lockfile, "%ld", &readpid);
       MIL << "read: Lockfile " << ZYPP_LOCK_FILE << " has pid " << readpid << std::endl;
       locked_pid = (pid_t) readpid;
       return locked_pid;
     }
-  
+
   public:
-  
+
     bool zyppLocked()
     {
       pid_t curr_pid = getpid();
       Pathname lock_file = Pathname(ZYPP_LOCK_FILE);
-    
+
       if ( lockFileExists() )
       {
         openLockFile("r");
         shLockFile();
-      
+
         pid_t locker_pid = lockerPid();
         if ( locker_pid == curr_pid )
         {
@@ -223,11 +229,21 @@ namespace zypp
       }
       return true;
     }
-    
+
   };
-  
+
   static ZYppGlobalLock globalLock;
-  
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : ZYppFactoryException
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  ZYppFactoryException::ZYppFactoryException( const std::string & msg_r )
+  : Exception(N_("Cannot aquire zypp lock."))
+  {}
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : ZYppFactory
@@ -261,29 +277,26 @@ namespace zypp
   //
   ZYppFactory::~ZYppFactory()
   {}
-  
+
   ///////////////////////////////////////////////////////////////////
   //
   ZYpp::Ptr ZYppFactory::getZYpp() const
   {
-    static ZYpp::Ptr _instance;   
-    
-    if ( _instance )
-    {
-      return _instance;
-    }
-    else
+    static ZYpp::Ptr _instance;
+
+    if ( ! _instance )
     {
       if ( globalLock.zyppLocked() )
       {
-        return 0;
+        ZYPP_THROW( ZYppFactoryException(N_("Cannot aquire zypp lock.")) );
       }
       else
       {
         _instance = new ZYpp( ZYpp::Impl_Ptr(new ZYpp::Impl) );
-        return _instance;
       }
     }
+
+    return _instance;
   }
 
   /******************************************************************

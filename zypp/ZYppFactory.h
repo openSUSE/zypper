@@ -14,11 +14,18 @@
 
 #include <iosfwd>
 
+#include "zypp/base/Exception.h"
 #include "zypp/ZYpp.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  class ZYppFactoryException : public Exception
+  {
+  public:
+    ZYppFactoryException( const std::string & msg_r );
+  };
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -37,7 +44,9 @@ namespace zypp
     ~ZYppFactory();
 
   public:
-    /** \return Pointer to the ZYpp instance. */
+    /** \return Pointer to the ZYpp instance.
+     * \throw EXCEPTION In case we can't aquire a lock.
+    */
     ZYpp::Ptr getZYpp() const;
 
   private:
@@ -51,6 +60,7 @@ namespace zypp
 
   /** \relates ZYppFactory Convenience to get the Pointer
    * to the ZYpp instance.
+   * \see ZYppFactory::getZYpp
   */
   inline ZYpp::Ptr getZYpp()
   { return ZYppFactory::instance().getZYpp(); }
