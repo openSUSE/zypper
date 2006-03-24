@@ -130,6 +130,8 @@ namespace zypp
               prodImpl->_timezone = value;
             else if(key == "META")
               parseFileCheckSum( key, value, prodImpl->_descr_files_checksums);
+            else if(key == "KEY")
+              parseFileCheckSum( key, value, prodImpl->_signing_keys);
             else
               DBG << "parse error" << std::endl;
           }
@@ -234,7 +236,7 @@ namespace zypp
 	    }
 	  }
       }
-
+      
       void ProductMetadataParser::parseFileCheckSum( const std::string &key, const std::string &value, std::map<std::string, CheckSum> &container)
       {
         std::list<std::string> splitted;

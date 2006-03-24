@@ -73,6 +73,7 @@ namespace zypp
       std::string _timezone;
       
       std::map<std::string, CheckSum> _descr_files_checksums;
+      std::map<std::string, CheckSum> _signing_keys;
       
       Source_Ref _source;
      
