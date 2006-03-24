@@ -71,7 +71,7 @@ namespace zypp
       Pathname lock_file = Pathname(ZYPP_LOCK_FILE);
       _zypp_lockfile = fopen(lock_file.asString().c_str(), mode);
       if (_zypp_lockfile == 0)
-        ZYPP_THROW (Exception( "Cant open " + lock_file.asString() ) );
+        ZYPP_THROW (Exception( "Cant open " + lock_file.asString() + " in mode " + std::string(mode) ) );
     }
   
     void closeLockFile()
@@ -169,43 +169,59 @@ namespace zypp
         if ( locker_pid == curr_pid )
         {
         // alles ok, we are requesting the instance again
-          MIL << "Lockfile found, but it is myself. Assuming same process getting zypp instance again." << std::endl;
+          //MIL << "Lockfile found, but it is myself. Assuming same process getting zypp instance again." << std::endl;
           return false;
         }
         else
         {
           if ( isProcessRunning(locker_pid) )
           {
-            MIL << locker_pid << " is running and has a ZYpp lock. Sorry" << std::endl;
-            return true;
-          }
-          else
-          {
-            MIL << locker_pid << " has a ZYpp lock, but process is not running. Cleaning lock file." << std::endl;
-            if ( filesystem::unlink(lock_file) == 0 )
+            if ( geteuid() == 0 )
             {
-              createLockFile();
-            // now open it for reading
-              openLockFile("r");
-              shLockFile();
-              return false;
+              // i am root
+              MIL << locker_pid << " is running and has a ZYpp lock. Sorry" << std::endl;
+              return true;
             }
             else
             {
-              ERR << "Can't clean lockfile. Sorry, can't create a new lock. Zypp still locked." << std::endl;
-              return true;
+              MIL << locker_pid << " is running and has a ZYpp lock. Access as normal user allowed." << std::endl;
+              return false;
+            }
+          }
+          else
+          {
+            if ( geteuid() == 0 )
+            {
+              MIL << locker_pid << " has a ZYpp lock, but process is not running. Cleaning lock file." << std::endl;
+              if ( filesystem::unlink(lock_file) == 0 )
+              {
+                createLockFile();
+              // now open it for reading
+                openLockFile("r");
+                shLockFile();
+                return false;
+              }
+              else
+              {
+                ERR << "Can't clean lockfile. Sorry, can't create a new lock. Zypp still locked." << std::endl;
+                return true;
+              }
             }
           }
         }
       }
       else
       {
-        createLockFile();
-      // now open it for reading
-        openLockFile("r");
-        shLockFile();
+        if ( geteuid() == 0 )
+        {
+          createLockFile();
+        // now open it for reading
+          openLockFile("r");
+          shLockFile();
+        }
         return false;
       }
+      return true;
     }
     
   };
@@ -250,11 +266,24 @@ namespace zypp
   //
   ZYpp::Ptr ZYppFactory::getZYpp() const
   {
-    static ZYpp::Ptr _instance( new ZYpp( ZYpp::Impl_Ptr(new ZYpp::Impl) ) );
-    if ( globalLock.zyppLocked() )
-      return 0;
-    else
+    static ZYpp::Ptr _instance;   
+    
+    if ( _instance )
+    {
       return _instance;
+    }
+    else
+    {
+      if ( globalLock.zyppLocked() )
+      {
+        return 0;
+      }
+      else
+      {
+        _instance = new ZYpp( ZYpp::Impl_Ptr(new ZYpp::Impl) );
+        return _instance;
+      }
+    }
   }
 
   /******************************************************************

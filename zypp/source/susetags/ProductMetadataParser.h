@@ -19,6 +19,7 @@
 
 #include "zypp/parser/tagfile/ParseException.h"
 
+#include "zypp/CheckSum.h"
 #include "zypp/Pathname.h"
 #include "zypp/Product.h"
 #include "zypp/source/susetags/SuseTagsProductImpl.h"
@@ -69,6 +70,9 @@ namespace zypp
          * REQUIRES line
          */
         void parseRequires( const std::string &key, const std::string &value, zypp::CapSet &container);
+        
+        void parseFileCheckSum( const std::string &key, const std::string &value, std::map<std::string, CheckSum> &container);
+        
       };
       ///////////////////////////////////////////////////////////////////
 

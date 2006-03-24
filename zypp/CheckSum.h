@@ -12,6 +12,8 @@
 #ifndef ZYPP_CHECKSUM_H
 #define ZYPP_CHECKSUM_H
 
+#include <string>
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -23,8 +25,14 @@ namespace zypp
     : _type(type)
     , _checksum(checksum)
     {}
-    std::string type() { return _type; }
-    std::string checksum() { return _checksum; }
+    
+    CheckSum()
+    {}
+    
+    std::string type() const 
+    { return _type; } 
+    std::string checksum() const  
+    { return _checksum; } 
   private:
     std::string _type;
     std::string _checksum;

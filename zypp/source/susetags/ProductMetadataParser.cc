@@ -128,6 +128,8 @@ namespace zypp
               prodImpl->_language = value;
             else if(key == "TIMEZONE")
               prodImpl->_timezone = value;
+            else if(key == "META")
+              parseFileCheckSum( key, value, prodImpl->_descr_files_checksums);
             else
               DBG << "parse error" << std::endl;
           }
@@ -233,6 +235,26 @@ namespace zypp
 	  }
       }
 
+      void ProductMetadataParser::parseFileCheckSum( const std::string &key, const std::string &value, std::map<std::string, CheckSum> &container)
+      {
+        std::list<std::string> splitted;
+        str::split( value, std::back_inserter(splitted), " ");
+        if (splitted.size() != 3)
+        {
+          ERR << "Parse error in checksum. Expected [type checksum file], got [" << value << "]" << std::endl;
+        }
+        else
+        {
+          std::string checksum_type = splitted.front();
+          splitted.pop_front();
+          std::string checksum_str = splitted.front();
+          splitted.pop_front();
+          std::string filename = splitted.front();
+          splitted.pop_front();
+          MIL << "Checksum for " << filename << " is " << checksum_str << " (" << checksum_type << ")" << std::endl;
+          container[filename] = CheckSum(checksum_type, checksum_str);
+        }
+      }
       /////////////////////////////////////////////////////////////////
     } // namespace susetags
     ///////////////////////////////////////////////////////////////////

@@ -12,6 +12,9 @@
 #ifndef ZYPP_DETAIL_SUSETAGS_PRODUCTIMPL_H
 #define ZYPP_DETAIL_SUSETAGS_PRODUCTIMPL_H
 
+#include <map>
+
+#include "zypp/CheckSum.h"
 #include "zypp/CapSet.h"
 #include "zypp/detail/ProductImplIf.h"
 #include "zypp/Source.h"
@@ -69,7 +72,10 @@ namespace zypp
       std::string _language;
       std::string _timezone;
       
+      std::map<std::string, CheckSum> _descr_files_checksums;
+      
       Source_Ref _source;
+     
     };
     ///////////////////////////////////////////////////////////////////
 
