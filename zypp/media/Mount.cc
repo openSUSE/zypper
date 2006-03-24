@@ -109,6 +109,10 @@ void Mount::mount ( const string& source,
 	{
 	    err = "Invalid filesystem on media";
 	}
+	else if  ( value.find ( "No medium found" ) != string::npos )
+	{
+	    err = "No medium found";
+	}
 	else if  ( value.find ( "Not a directory" ) != string::npos )
 	{
 	    if( filesystem == "nfs")
