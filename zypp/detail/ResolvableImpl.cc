@@ -64,7 +64,7 @@ namespace zypp
             if ( cap && ! cap->pkgname().empty() )
               deps[Dep::SUPPLEMENTS].insert( CapFactory().parse( ResTraits<Package>::kind, cap->pkgname() ) );
 
-            deps[Dep::FRESHENS].insert( cap_r );
+            deps[Dep::FRESHENS].insert( CapFactory().parse( ResTraits<Package>::kind, "modalias(" + cap->querystring() +")" ));
             return true;	// strip from provides
           }
 
