@@ -1,0 +1,16 @@
+>!> Requesting locale de
+>!> Requesting locale de_DE
+>!> Installing kernel-default from channel update
+>!> 1 problems found:
+>!> Problem:
+>!> Cannot install novfs-kmp-default
+>!> Can't install novfs-kmp-default-1.2.0_2.6.16_2-8.i586[update], since novfs-kmp-default-1.2.0_2.6.16_2-8.i586[update2] is already marked as needing to be installed
+>!>    Solution:
+>!>       do not install novfs-kmp-default-1.2.0_2.6.16_2-8.i586[update]
+>!>       
+>!>    Solution:
+>!>       do not install novfs-kmp-default-1.2.0_2.6.16_2-8.i586[update2]
+>!>       
+>!>    Solution:
+>!>       Ignore that novfs-kmp-default is already set to install
+>!>       
