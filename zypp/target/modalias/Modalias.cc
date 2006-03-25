@@ -112,6 +112,7 @@ iterate_devices(const char *dir, const char *file, void *arg)
 	}
 	entry->next = *list;
 	*list = entry;
+	DBG << "system modalias: " << entry->modalias << endl;
 	
 out:
 	(void) close(fd);
@@ -150,6 +151,7 @@ struct Modalias::Impl
 	char path[PATH_MAX];
 	const char *dir = getenv("ZYPP_MODALIAS_SYSFS");
 	snprintf(path, sizeof(path), "%s/bus", dir ? dir : "/sys");
+	DBG << "Using /sys path : " << path << endl;
 	foreach_file( path, iterate_busses, &_modaliases );
     }
 
