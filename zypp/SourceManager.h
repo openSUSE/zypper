@@ -20,7 +20,7 @@
 #include "zypp/base/NonCopyable.h"
 //#include "zypp/base/Iterator.h"
 
-#include "zypp/base/Gettext.h" // move with FailedSourcesRestoreException
+#include "zypp/base/Gettext.h" // move with FailedSourcesRestoreException & SourcesAlreadyRestoredException
 
 #include "zypp/Source.h"
 #include "zypp/Url.h"
@@ -50,6 +50,15 @@ namespace zypp
     private:
       std::string _summary;
       std::string _translatedSummary;
+  };
+  /** \todo move to separate header file.*/
+  class SourcesAlreadyRestoredException : public Exception
+  {
+    public:
+      SourcesAlreadyRestoredException()
+      : Exception(N_("At least one source already registered, cannot restore sources from persistent store."))
+      {}
+      virtual ~SourcesAlreadyRestoredException() throw() {};
   };
 
   ///////////////////////////////////////////////////////////////////

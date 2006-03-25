@@ -352,7 +352,8 @@ namespace zypp
         << " ..." << endl;
 
     if (! _sources.empty() )
-	ZYPP_THROW(Exception ( N_("At least one source already registered, cannot restore sources from persistent store.") ) );
+	ZYPP_THROW(SourcesAlreadyRestoredException());
+//Exception ( N_("At least one source already registered, cannot restore sources from persistent store.") ) );
 
     FailedSourcesRestoreException report;
 
@@ -518,8 +519,8 @@ namespace zypp
   {
 	_summary = _summary + "\n" + source + ": " + expt.asString();
 	_translatedSummary = _translatedSummary + "\n" + source + ": " + expt.asUserString();
-
   }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
