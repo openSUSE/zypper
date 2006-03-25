@@ -232,7 +232,7 @@ struct EstablishItem
 
     bool operator()( const CapAndItem & cai )
     {
-	_XDEBUG("EstablishItem (" << cai.item << ", " << cai.cap << ")");
+	_XDEBUG("QueueItemUninstall::EstablishItem (" << cai.item << ", " << cai.cap << ")");
 
 	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, cai.item, soft);
 	qil.push_back (establish_item);

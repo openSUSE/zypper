@@ -705,6 +705,17 @@ Resolver::undo(void)
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
 		   functor::functorRef<bool,PoolItem>(info) );
+    // These conflict should be ignored of the concering item
+    _ignoreConflicts.clear();
+    // These requires should be ignored of the concering item    
+    _ignoreRequires.clear();
+    // These obsoletes should be ignored of the concering item    
+    _ignoreObsoletes.clear();
+    // Ignore architecture of the item
+    _ignoreArchitecture.clear();
+    // Ignore the status "installed" of the item
+    _ignoreInstalledItem.clear();
+    
     return;
 }
 
