@@ -230,16 +230,11 @@ ResolverContext::install (PoolItem_Ref item, bool is_soft, int other_penalty)
 	return true;
     }
 
-    // if it's exactly the same package, ignore this request silently.
-
     if (isParallelInstall( item )) {
-	return true;
-#if 0
 	ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc( RESOLVER_INFO_TYPE_INSTALL_PARALLEL, item, RESOLVER_INFO_PRIORITY_VERBOSE );
 	misc_info->setOtherPoolItem( getParallelInstall( item ) );
 	addError( misc_info );
 	return false;
-#endif
     }
 
     if (is_soft)
@@ -296,6 +291,13 @@ ResolverContext::upgrade (PoolItem_Ref item, PoolItem_Ref old_item, bool is_soft
     
     if (status.isToBeInstalled())
 	return true;
+
+    if (isParallelInstall( item )) {
+	ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc( RESOLVER_INFO_TYPE_INSTALL_PARALLEL, item, RESOLVER_INFO_PRIORITY_VERBOSE );
+	misc_info->setOtherPoolItem( getParallelInstall( item ) );
+	addError( misc_info );
+	return false;
+    }
 
     ResStatus::TransactByValue by = ResStatus::SOLVER;
     if (item.status().isToBeInstalled()
@@ -1510,7 +1512,8 @@ dup_name_check_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 	&& info->other->kind() == item->kind()
 	&& info->other->name() == item->name()
 	&& item->edition().compare(info->other->edition()) == 0
-	&& item->arch() == info->other->arch())
+	&& item->arch() == info->other->arch()
+	&& item->source() != info->other->source()) // if it's exactly the same package, ignore it silently.
     {
 	info->flag = true;
 	info->foundItem = item;
