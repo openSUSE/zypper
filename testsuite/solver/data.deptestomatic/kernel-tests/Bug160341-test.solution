@@ -1,0 +1,8 @@
+>!> setting HardwareInfo to: ./kernel-hardware
+>!> Installing kernel-default from channel packages2
+>!> No problems so far
+>!> Solution #1:
+>!> upgrade kernel-default-2.6.16_rc5_git14-2.i586 => kernel-default-2.6.16_rc5_git14-3.i586[packages2]
+>!> upgrade novfs-kmp-default-1.2.0_2.6.16_rc5_git14_2-8.i586 => novfs-kmp-default-1.2.0_2.6.16_rc5_git14_3-8.i586[packages2]
+>!> upgrade nvidia-gfx-kmp-default-1.0.8178_2.6.16_rc5_git14_2-1.i586 => nvidia-gfx-kmp-default-1.0.8178_2.6.16_rc5_git14_3-1.i586[packages2]
+>!> installs=0, upgrades=3, uninstalls=0

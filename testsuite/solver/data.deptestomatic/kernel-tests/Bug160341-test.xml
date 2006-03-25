@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <system file="Bug160341-system.xml"/>
+  <channel name="packages2" file="2.6.16_rc5_git14-3-packages.xml"/>
+  <hardwareInfo path="kernel-hardware"/>
+</setup>
+<!-- 
+When doing a "rug install kernel-default", rug installs the following packages:
+  kernel-default-2.6.16_rc5_git14-3
+  novfs-kmp-default-1.2.0_2.6.16_rc5_git14_3-8
+
+The expected result would be to only get kernel-default-2.6.16_rc5_git14-3; all
+-->
+
+<trial>
+ <install channel="packages2" kind="package" name="kernel-default"/>
+  <reportproblems/>
+</trial>
+
+</test>
