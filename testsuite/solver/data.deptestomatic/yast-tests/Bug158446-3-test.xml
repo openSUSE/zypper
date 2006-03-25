@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+  Bug156439 try Nr. 3
+-->
+<test>
+<setup>
+  <system file="Bug158446-3-system.xml"/>
+  <channel name="update" file="Bug158446_update-3-packages.xml"/>
+  <channel name="packages" file="beta8-packages.xml"/>
+  <channel name="update2" file="Bug158446_update-3-packages.xml"/>
+  <locale name="de"/>
+  <locale name="de_DE"/>
+</setup>
+<trial>
+  <install channel="update" kind="package" name="kernel-default"/>
+  <reportproblems/>
+</trial>
+</test>
