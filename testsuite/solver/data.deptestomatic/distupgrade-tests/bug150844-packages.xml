@@ -2967,7 +2967,6 @@
     <dep name='info' pre='1' />
     <dep name='/bin/sh' pre='1' />
     <dep name='/bin/sh' pre='1' />
-    <dep name='aspell_dictionary' />
     <dep name='info' />
     <dep name='/bin/sh' />
     <dep name='/bin/sh' />
