@@ -13,6 +13,7 @@ parserxmlincludedir = $(pkgincludedir)/parser/xmlstore
 parserxmlinclude_HEADERS = \
 	schemanames.h	   \
 	XMLProductParser.h \
+	XMLLanguageParser.h \
 	XMLPatternParser.h \
 	XMLResObjectParser.h	\
 	XMLPatchParser.h	\
@@ -27,6 +28,7 @@ noinst_LTLIBRARIES =	lib@PACKAGE@_parser_xmlstore.la
 lib@PACKAGE@_parser_xmlstore_la_SOURCES = \
 	XMLParserData.cc	\
 	XMLPatternParser.cc	\
+	XMLLanguageParser.cc \
 	XMLResObjectParser.cc	\
 	XMLPatchParser.cc	\
 	XMLProductParser.cc \

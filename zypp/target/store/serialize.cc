@@ -208,6 +208,17 @@ std::string toXML( const Message::constPtr &obj )
   return out.str();
 }
 
+template<> 
+std::string toXML( const Language::constPtr &obj )
+{
+  stringstream out;
+  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
+  out << "<language xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
+  out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
+  out << "</language>" << std::endl;
+  return out.str();
+}
+
 /*
 
 NOT NEEDED FOR NOW, WE JUST LOSE THE TRANSLATION AT STORAGE TIME

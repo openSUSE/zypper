@@ -1,0 +1,13 @@
+default namespace = "http://www.novell.com/metadata/zypp/xml-store"
+
+include "resolvable.rnc"
+
+start = element-language
+
+element-language =
+  element language { language }
+  
+language =
+   resolvable-data,
+   element-summary+,
+   element-description+

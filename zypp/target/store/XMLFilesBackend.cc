@@ -30,6 +30,7 @@
 #include "zypp/target/store/xml/XMLProductImpl.h"
 #include "zypp/target/store/xml/XMLPatternImpl.h"
 #include "zypp/target/store/xml/XMLAtomImpl.h"
+#include "zypp/target/store/xml/XMLLanguageImpl.h"
 
 #include "zypp/parser/xmlstore/XMLProductParser.h"
 #include "zypp/parser/xmlstore/XMLPatternParser.h"
@@ -770,6 +771,31 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
     throw "Cannot create script object";
   }
 }
+
+Language::Ptr
+XMLFilesBackend::createLanguage( const zypp::parser::xmlstore::XMLLanguageData & parsed ) const
+{
+  try
+  {
+    detail::ResImplTraits<XMLLanguageImpl>::Ptr impl(new XMLLanguageImpl());
+    impl->_summary = parsed.summary;
+    impl->_description = parsed.description;
+    
+    Arch arch(parsed.arch);
+    if (arch.empty())
+      arch = Arch_noarch;
+    
+    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies(parsed, ResTraits<Language>::kind) );
+    Language::Ptr language = detail::makeResolvableFromImpl( dataCollect, impl );
+    return language;
+  }
+  catch (const Exception & excpt_r)
+  {
+    ERR << excpt_r << endl;
+    throw "Cannot create language object";
+  }
+}
+    
 
 Product::Ptr
 XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & parsed ) const

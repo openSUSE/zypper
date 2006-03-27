@@ -29,6 +29,7 @@ namespace zypp {
       DEFINE_PTR_TYPE(XMLResObjectData);
       DEFINE_PTR_TYPE(XMLProductData);
       DEFINE_PTR_TYPE(XMLPatternData);
+      DEFINE_PTR_TYPE(XMLLanguageData);
       DEFINE_PTR_TYPE(XMLPatchData);
       DEFINE_PTR_TYPE(XMLPatchAtomData);
       DEFINE_PTR_TYPE(XMLPatchMessageData);
@@ -83,6 +84,16 @@ namespace zypp {
         std::string script;
       };
 
+      class XMLLanguageData : public XMLResObjectData
+      {
+        public:
+          XMLLanguageData() {};
+          ~XMLLanguageData() {};
+
+          TranslatedText summary;
+          TranslatedText description;
+      };
+      
       class XMLProductData : public XMLResObjectData
       {
       public:

@@ -24,6 +24,7 @@
 #include <zypp/Script.h>
 #include <zypp/Atom.h>
 #include <zypp/Message.h>
+#include <zypp/Language.h>
 #include <zypp/Pattern.h>
 #include <zypp/Selection.h>
 #include <zypp/Product.h>
@@ -106,6 +107,9 @@ std::string toXML( const Selection::constPtr &obj );
 template<> 
 std::string toXML( const Product::constPtr &obj );
 
+template<> 
+std::string toXML( const Language::constPtr &obj );
+
 template<>
 std::string toXML( const PersistentStorage::SourceData &obj );
 
@@ -116,3 +120,4 @@ std::string toXML( const PersistentStorage::SourceData &obj );
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 #endif // DEVEL_DEVEL_DMACVICAR_SQLITEBACKEND_H
+

@@ -16,7 +16,8 @@ targetxmlinclude_HEADERS =		\
 	XMLSelectionImpl.h \
 	XMLPatternImpl.h \
 	XMLProductImpl.h \
-	XMLAtomImpl.h
+	XMLAtomImpl.h \
+	XMLLanguageImpl.h
 
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_target_xml.la
@@ -30,6 +31,7 @@ lib@PACKAGE@_target_xml_la_SOURCES = \
 	XMLSelectionImpl.cc \
 	XMLPatternImpl.cc \
 	XMLProductImpl.cc \
-	XMLAtomImpl.cc
+	XMLAtomImpl.cc \
+	XMLLanguageImpl.h
 	
 ## ##################################################

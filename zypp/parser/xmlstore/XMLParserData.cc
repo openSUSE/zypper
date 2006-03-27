@@ -140,6 +140,7 @@ namespace zypp {
       IMPL_PTR_TYPE(XMLResObjectData);
       IMPL_PTR_TYPE(XMLPatternData);
       IMPL_PTR_TYPE(XMLProductData);
+      IMPL_PTR_TYPE(XMLLanguageData);
       IMPL_PTR_TYPE(XMLPatchData);
       IMPL_PTR_TYPE(XMLPatchAtomData);
       IMPL_PTR_TYPE(XMLPatchMessageData);
