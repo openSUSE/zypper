@@ -322,6 +322,16 @@ namespace zypp
       }
     };
 
+    /** Select PoolItem by lock. */
+    struct ByLock : public PoolItemFilterFunctor
+    {
+      bool operator()( const PoolItem & p ) const
+      {
+	return p.status().isLocked();
+      }
+    };
+      
+
     ///////////////////////////////////////////////////////////////////
 
     /** Select ResObject if at least one Capability with
