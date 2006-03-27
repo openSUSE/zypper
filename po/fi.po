@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
 "POT-Creation-Date: 2006-03-20 10:33+0100\n"
-"PO-Revision-Date: 2006-02-28 10:40+0200\n"
+"PO-Revision-Date: 2006-03-24 13:31+0200\n"
 "Last-Translator: Jyri Palokangas <jmp@netti.fi>\n"
 "Language-Team:  <yast-trans-fi@kotoistaminen.novell.fi>\n"
 "MIME-Version: 1.0\n"
@@ -2056,7 +2056,7 @@ msgstr "zuni"
 msgid ""
 "At least one source already registered, cannot restore sources from "
 "persistent store."
-msgstr ""
+msgstr "Ainakin yksi lähde on jo rekisteröity, lähteiden palauttaminen pysyvästä varastosta ei onnistu."
 
 #: zypp/target/rpm/RpmDb.cc:1718
 #, c-format
@@ -2082,8 +2082,7 @@ msgstr ""
 #: zypp/target/rpm/RpmDb.cc:1874
 #, c-format
 msgid "rpm created %s as %s but it was impossible to determine the difference"
-msgstr ""
-"rpm loi tiedoston %s tiedostona %s, mutta erojen selivttäminen on mahdotonta"
+msgstr "rpm loi tiedoston %s tiedostona %s, mutta erojen selivttäminen on mahdotonta"
 
 #: zypp/target/rpm/RpmDb.cc:1876
 #, c-format
@@ -2165,7 +2164,7 @@ msgstr "luotiin varmuuskopio %s"
 
 #: zypp/target/TargetImpl.cc:376
 msgid "Target commit aborted by user."
-msgstr ""
+msgstr "Käyttäjä keskeytti kohteen kirjoituksen."
 
 #: zypp/solver/detail/ResolverInfoObsoletes.cc:55
 #, c-format
@@ -2297,9 +2296,9 @@ msgid "%s is not installed and has been marked as uninstallable"
 msgstr "%s ei asennettu ja se on merkitty ei asennettavissa olevaksi"
 
 #: zypp/solver/detail/Resolver_problems.cc:295
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot install %s due to dependency problems"
-msgstr "Ei voida asentaa %s riippuvuusongelmien takia"
+msgstr "Ei voida asentaa %s riippuvuusongelmien takia."
 
 #: zypp/solver/detail/Resolver_problems.cc:333
 #: zypp/solver/detail/Resolver_problems.cc:343
@@ -2328,7 +2327,7 @@ msgid "%s has missing dependencies"
 msgstr "Osalla %s on puuttuvia riippuvuuksia"
 
 #: zypp/solver/detail/Resolver_problems.cc:435
-#, fuzzy, c-format
+#, c-format
 msgid "%s cannot be installed due to missing dependencies"
 msgstr "Osaa %s ei voida asentaa puuttuvien riippuvuuksien takia"
 
@@ -2369,7 +2368,7 @@ msgid "Cannot install %s because it is conflicting with %s"
 msgstr "Ei voida asentaa osaa %s, koska se on ristiriidassa osan %s kanssa"
 
 #: zypp/solver/detail/Resolver_problems.cc:593
-#, fuzzy, c-format
+#, c-format
 msgid "%s is uninstallable due to conflicts with %s"
 msgstr "%s ei ole poistettavissa, koska se on ristiriidassa osan %s kanssa"
 
@@ -2398,7 +2397,6 @@ msgid "Ignore that %s is already set to install"
 msgstr "Jätä huomiotta että %s on jo asetettu asennettavaksi"
 
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:81
-#, fuzzy
 msgid "Do not install or delete concerning resolvables"
 msgstr "Älä asenna tai poista osia joita tämä koskettaa"
 
@@ -2480,8 +2478,7 @@ msgstr ""
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:167
 #, c-format
-msgid ""
-"Can't install %s since it is already marked as needing to be uninstalled"
+msgid "Can't install %s since it is already marked as needing to be uninstalled"
 msgstr "Ei voida asentaa osaa %s, koska se on jo merkitty poistetttavaksi"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:179
@@ -2492,8 +2489,7 @@ msgstr "Ei voida asentaa osaa %s, koska sitä ei käytetä tässä järjestelmä
 #: zypp/solver/detail/ResolverInfoMisc.cc:190
 #, c-format
 msgid "Can't install %s, since %s is already marked as needing to be installed"
-msgstr ""
-"Ei voida asentaa osaa %s, koska %s on jo merkitty tarvitaan asennettavaksi"
+msgstr "Ei voida asentaa osaa %s, koska %s on jo merkitty tarvitaan asennettavaksi"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:198
 #, c-format
@@ -2572,10 +2568,8 @@ msgstr "Ei voida tyydyttää vaatimusta %s osalle %s"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:442
 #, c-format
-msgid ""
-"%s is required by other to-be-installed resolvable, so it won't be unlinked."
-msgstr ""
-"Muut asennettavat osat vaativat osan %s, joten sen linkitystä ei pureta."
+msgid "%s is required by other to-be-installed resolvable, so it won't be unlinked."
+msgstr "Muut asennettavat osat vaativat osan %s, joten sen linkitystä ei pureta."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:459
 #, c-format
@@ -2590,14 +2584,12 @@ msgstr "%s on lukittu ja sitä ei voida poistaa."
 #: zypp/solver/detail/ResolverInfoMisc.cc:495
 #, c-format
 msgid "A conflict over %s (%s) requires the removal of to-be-installed %s"
-msgstr ""
-"Ristiriita osasta %s (%s) vaatii asennettavaksi päätetyn %s poistamista"
+msgstr "Ristiriita osasta %s (%s) vaatii asennettavaksi päätetyn %s poistamista"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:513
 #, c-format
 msgid "Marking %s as uninstallable due to conflicts over %s"
-msgstr ""
-"Merkitään %s ei asennettavissa olevaksi osasta %s olevan ristiriidan takia"
+msgstr "Merkitään %s ei asennettavissa olevaksi osasta %s olevan ristiriidan takia"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:521
 #, c-format
@@ -3819,7 +3811,5 @@ msgstr "Zimbabwe"
 
 #: zypp/SourceManager.h:36
 msgid "Unable to restore all sources."
-msgstr ""
+msgstr "Kaikkia lähteitä ei voida palauttaa."
 
-#~ msgid "ignore architecture"
-#~ msgstr "jätä arkkitehtuuri huomiotta"

@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypp.pt\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
 "POT-Creation-Date: 2006-03-20 10:33+0100\n"
-"PO-Revision-Date: 2006-02-08 00:44+0000\n"
+"PO-Revision-Date: 2006-03-23 00:33+0000\n"
 "Last-Translator: Antonio Cardoso Martins <digiplan@netvisao.pt>\n"
 "Language-Team: portuguese\n"
 "MIME-Version: 1.0\n"
@@ -23,16 +23,15 @@ msgstr ""
 
 #: zypp/LanguageCode.cc:145
 msgid "Unknown language: "
-msgstr "Linguagem desconhecida:"
+msgstr "Linguagem desconhecida: "
 
 #: zypp/LanguageCode.cc:226 zypp/CountryCode.cc:215
-#, fuzzy
 msgid "noCode"
-msgstr "Código"
+msgstr "noCode"
 
 #: zypp/LanguageCode.cc:227
 msgid "Default"
-msgstr "Pré-definida"
+msgstr "Pré-definido"
 
 #: zypp/LanguageCode.cc:240
 msgid "Afar"
@@ -91,7 +90,6 @@ msgid "Aleut"
 msgstr "Aleut"
 
 #: zypp/LanguageCode.cc:270
-#, fuzzy
 msgid "Algonquian languages"
 msgstr "Idiomas Algonquian"
 
@@ -108,7 +106,6 @@ msgid "English, Old (ca.450-1100)"
 msgstr "Inglês Antigo (ca.450-1100)"
 
 #: zypp/LanguageCode.cc:278
-#, fuzzy
 msgid "Apache languages"
 msgstr "Idiomas Apache"
 
@@ -155,13 +152,11 @@ msgid "Asturian"
 msgstr "Asturiano"
 
 #: zypp/LanguageCode.cc:302
-#, fuzzy
 msgid "Athapascan languages"
 msgstr "Idiomas Athapascan"
 
 # /usr/lib/YaST2/clients/sw_single.ycp:12
 #: zypp/LanguageCode.cc:304
-#, fuzzy
 msgid "Australian languages"
 msgstr "Idiomas Australianos"
 
@@ -193,7 +188,6 @@ msgstr "Banda"
 
 # /usr/lib/YaST2/clients/sw_single.ycp:12
 #: zypp/LanguageCode.cc:318
-#, fuzzy
 msgid "Bamileke languages"
 msgstr "Idiomas Bamileke"
 
@@ -373,7 +367,6 @@ msgid "Mari"
 msgstr "Mari"
 
 #: zypp/LanguageCode.cc:410
-#, fuzzy
 msgid "Chinook jargon"
 msgstr "Chinook Jargon"
 
@@ -402,7 +395,6 @@ msgid "Cheyenne"
 msgstr "Cheyenne"
 
 #: zypp/LanguageCode.cc:424
-#, fuzzy
 msgid "Chamic languages"
 msgstr "Idiomas Chamic"
 
@@ -419,17 +411,14 @@ msgid "Corsican"
 msgstr "Corsicano"
 
 #: zypp/LanguageCode.cc:432
-#, fuzzy
 msgid "Creoles and pidgins, English based (Other)"
 msgstr "Criolo e Pidgins, Baseados em Inglês (Outro)"
 
 #: zypp/LanguageCode.cc:434
-#, fuzzy
 msgid "Creoles and pidgins, French-based (Other)"
 msgstr "Criolo e Pidgins, Baseados em Francês (Outro)"
 
 #: zypp/LanguageCode.cc:436
-#, fuzzy
 msgid "Creoles and pidgins, Portuguese-based (Other)"
 msgstr "Criolo e Pidgins, Baseados em Português (Outro)"
 
@@ -442,7 +431,6 @@ msgid "Crimean Tatar"
 msgstr "Crimean Tatar"
 
 #: zypp/LanguageCode.cc:442
-#, fuzzy
 msgid "Creoles and pidgins (Other)"
 msgstr "Criolo e Pidgins (Outro)"
 
@@ -852,9 +840,8 @@ msgid "Iranian (Other)"
 msgstr "Iraniano (Outro)"
 
 #: zypp/LanguageCode.cc:654
-#, fuzzy
 msgid "Iroquoian languages"
-msgstr "Iroquoians"
+msgstr "Idiomas Iroquoians"
 
 #: zypp/LanguageCode.cc:656
 msgid "Italian"
@@ -1096,7 +1083,6 @@ msgid "Luo (Kenya and Tanzania)"
 msgstr "Luo (Kenia e Tanzânia)"
 
 #: zypp/LanguageCode.cc:772
-#, fuzzy
 msgid "lushai"
 msgstr "Lushai"
 
@@ -1186,7 +1172,6 @@ msgid "Minangkabau"
 msgstr "Minangkabau"
 
 #: zypp/LanguageCode.cc:818
-#, fuzzy
 msgid "Miscellaneous languages"
 msgstr "Idiomas Vários"
 
@@ -1214,9 +1199,8 @@ msgid "Manipuri"
 msgstr "Manipuri"
 
 #: zypp/LanguageCode.cc:830
-#, fuzzy
 msgid "Manobo languages"
-msgstr "Manobos"
+msgstr "Idiomas Manobos"
 
 #: zypp/LanguageCode.cc:832
 msgid "Mohawk"
@@ -1237,14 +1221,12 @@ msgstr "Mossi"
 
 # /usr/lib/YaST2/clients/sw_single.ycp:12
 #: zypp/LanguageCode.cc:840
-#, fuzzy
 msgid "Multiple languages"
 msgstr "Idiomas Múltiplos"
 
 #: zypp/LanguageCode.cc:842
-#, fuzzy
 msgid "Munda languages"
-msgstr "Mundas"
+msgstr "Idiomas Mundas"
 
 #: zypp/LanguageCode.cc:844
 msgid "Creek"
@@ -1261,9 +1243,8 @@ msgid "Marwari"
 msgstr "Marwari"
 
 #: zypp/LanguageCode.cc:850
-#, fuzzy
 msgid "Mayan languages"
-msgstr "Mayans"
+msgstr "Idiomas Mayans"
 
 #: zypp/LanguageCode.cc:852
 msgid "Erzya"
@@ -1357,9 +1338,8 @@ msgid "Northern Sotho"
 msgstr "Sotho do Norte"
 
 #: zypp/LanguageCode.cc:894
-#, fuzzy
 msgid "Nubian languages"
-msgstr "Nubians"
+msgstr "Idiomas Nubians"
 
 #: zypp/LanguageCode.cc:896
 msgid "Classical Newari"
@@ -1414,9 +1394,8 @@ msgid "Turkish, Ottoman (1500-1928)"
 msgstr "Turco, Otomano (1500-1928)"
 
 #: zypp/LanguageCode.cc:922
-#, fuzzy
 msgid "Otomian languages"
-msgstr "Otomians"
+msgstr "Idiomas Otomians"
 
 #: zypp/LanguageCode.cc:924
 msgid "Papuan (Other)"
@@ -1482,9 +1461,8 @@ msgid "Portuguese"
 msgstr "Português"
 
 #: zypp/LanguageCode.cc:956
-#, fuzzy
 msgid "Prakrit languages"
-msgstr "Prakrits"
+msgstr "Idiomas Prakrits"
 
 #: zypp/LanguageCode.cc:958
 msgid "Provencal, Old (to 1500)"
@@ -1554,9 +1532,8 @@ msgid "South American Indian (Other)"
 msgstr "Índio da América so Sul (Outro)"
 
 #: zypp/LanguageCode.cc:992
-#, fuzzy
 msgid "Salishan languages"
-msgstr "Salishano"
+msgstr "Idiomas Salishano"
 
 #: zypp/LanguageCode.cc:994
 msgid "Samaritan Aramaic"
@@ -1621,9 +1598,8 @@ msgid "Sinhala"
 msgstr "Sinhala"
 
 #: zypp/LanguageCode.cc:1028
-#, fuzzy
 msgid "Siouan languages"
-msgstr "Siouans"
+msgstr "Idiomas Siouans"
 
 #: zypp/LanguageCode.cc:1030
 msgid "Sino-Tibetan (Other)"
@@ -1650,9 +1626,8 @@ msgid "Northern Sami"
 msgstr "Sami Setentrional"
 
 #: zypp/LanguageCode.cc:1044
-#, fuzzy
 msgid "Sami languages (Other)"
-msgstr "Sami (Outro)"
+msgstr "Idiomas Sami (Outro)"
 
 # name for WSM
 #: zypp/LanguageCode.cc:1046
@@ -1867,9 +1842,8 @@ msgid "Tumbuka"
 msgstr "Tumbuka"
 
 #: zypp/LanguageCode.cc:1148
-#, fuzzy
 msgid "Tupi languages"
-msgstr "Tupi"
+msgstr "Idiomas Tupi"
 
 #: zypp/LanguageCode.cc:1150
 msgid "Turkish"
@@ -1947,9 +1921,8 @@ msgid "Votic"
 msgstr "Votic"
 
 #: zypp/LanguageCode.cc:1186
-#, fuzzy
 msgid "Wakashan languages"
-msgstr "Wakashans"
+msgstr "Idiomas Wakashans"
 
 #: zypp/LanguageCode.cc:1188
 msgid "Walamo"
@@ -1968,9 +1941,8 @@ msgid "Welsh"
 msgstr "Gaulês"
 
 #: zypp/LanguageCode.cc:1198
-#, fuzzy
 msgid "Sorbian languages"
-msgstr "Sórbio"
+msgstr "Idiomas Sórbio"
 
 #: zypp/LanguageCode.cc:1200
 msgid "Walloon"
@@ -2006,9 +1978,8 @@ msgid "Yoruba"
 msgstr "Yoruba"
 
 #: zypp/LanguageCode.cc:1216
-#, fuzzy
 msgid "Yupik languages"
-msgstr "Yupiks"
+msgstr "Idiomas Yupiks"
 
 #: zypp/LanguageCode.cc:1218
 msgid "Zapotec"
@@ -2158,7 +2129,7 @@ msgid "%s is replaced by %s"
 msgstr "%s é substituido por %s"
 
 #: zypp/solver/detail/ResolverInfoObsoletes.cc:69
-#, fuzzy, c-format
+#, c-format
 msgid "%s replaced by %s"
 msgstr "%s é substituido por %s"
 
@@ -2290,17 +2261,17 @@ msgstr "Não foi possível instalar %s devido a problema com dependências"
 #: zypp/solver/detail/Resolver_problems.cc:343
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:64
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:66
-#, fuzzy, c-format
+#, c-format
 msgid "delete %s"
-msgstr "Apagar %1"
+msgstr "apagar %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:336
 #: zypp/solver/detail/Resolver_problems.cc:346
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:69
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:71
-#, fuzzy, c-format
+#, c-format
 msgid "do not install %s"
-msgstr "Não foi possível instalar %s"
+msgstr "não instalar %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:359
 #, c-format
@@ -2308,9 +2279,9 @@ msgid "%s has unfulfiled requirements"
 msgstr "%s tem requerimentos não satisfeitos"
 
 #: zypp/solver/detail/Resolver_problems.cc:397
-#, fuzzy, c-format
+#, c-format
 msgid "%s has missing dependencies"
-msgstr "%s não pode ser instalado devido à falta de dependências"
+msgstr "%s tem dependências em falta"
 
 #: zypp/solver/detail/Resolver_problems.cc:435
 #, fuzzy, c-format
@@ -2347,6 +2318,7 @@ msgstr "o %s não pode ser desinstalado por ainda é requerido"
 #, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
 msgstr ""
+"%s torna %s obsoleto. Mas %s não pode ser apagado porque está trancado."
 
 #: zypp/solver/detail/Resolver_problems.cc:573
 #, c-format
@@ -2359,40 +2331,37 @@ msgid "%s is uninstallable due to conflicts with %s"
 msgstr "não é possível desinstalar %s devido a conflictos com %s"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:53
-#, fuzzy
 msgid "Ignore this requirement just here"
-msgstr "Ignorar este requisito"
+msgstr "Ignorar este requisito apenas aqui"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:62
-#, fuzzy
 msgid "Ignore this requirement generally"
-msgstr "Ignorar este requisito"
+msgstr "Ignorar este requisito generalizadamente"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:76
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:88
-#, fuzzy, c-format
+#, c-format
 msgid "Ignore this conflict of %s"
-msgstr "A ignorar conflito de %s"
+msgstr "A ignorar este conflito de %s"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:103
-#, fuzzy, c-format
+#, c-format
 msgid "Ignore the obsolete %s in %s"
-msgstr "A ignorar conflito de %s"
+msgstr "A ignorar o %s obsoleto por %s"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:116
-#, fuzzy, c-format
+#, c-format
 msgid "Ignore that %s is already set to install"
-msgstr "O directório %1 já se encontra na lista."
+msgstr "Ignorar que %s já se encontra definido para instalar"
 
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:81
-#, fuzzy
 msgid "Do not install or delete concerning resolvables"
-msgstr "A remover os resolúveis em conflito"
+msgstr "Não instalar ou apagar os resolúveis em causa"
 
 #: zypp/solver/detail/QueueItemRequire.cc:532
 #, c-format
 msgid "for requiring %s for %s when upgrading %s"
-msgstr "requer %s para %s quando esta a actualizar %s"
+msgstr "por requerer %s para %s quando esta a actualizar %s"
 
 #: zypp/solver/detail/ResolverInfoMissingReq.cc:64
 #, c-format
@@ -2437,7 +2406,7 @@ msgstr "mensagem"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:118
 msgid "atom"
-msgstr ""
+msgstr "atom"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:122
 msgid "system"
@@ -2479,11 +2448,11 @@ msgid "Can't install %s since it is does not apply to this system."
 msgstr "Não é possível instalar %s, pois não se aplica a este sistema."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:190
-#, fuzzy, c-format
+#, c-format
 msgid "Can't install %s, since %s is already marked as needing to be installed"
 msgstr ""
-"Não é possível instalar %s desde que este já esteja marcado como necessário "
-"desinstalar "
+"Não é possível instalar %s uma vez que %s já se encontra marcado como "
+"necessitando de ser instalado"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:198
 #, c-format
@@ -2609,23 +2578,21 @@ msgstr "Importante!"
 #: zypp/solver/detail/ProblemSolutionKeep.cc:55
 #, c-format
 msgid "keep %s"
-msgstr ""
+msgstr "manter %s"
 
 #: zypp/solver/detail/ProblemSolutionKeep.cc:65
-#, fuzzy
 msgid "Keep resolvables"
-msgstr "A instalar os resolúveis em falta"
+msgstr "Manter resolúveis"
 
 #: zypp/solver/detail/ProblemSolutionInstall.cc:54
 #: zypp/solver/detail/ProblemSolutionInstall.cc:56
-#, fuzzy, c-format
+#, c-format
 msgid "install %s"
-msgstr "Instalar %1"
+msgstr "instalar %s"
 
 #: zypp/solver/detail/ProblemSolutionInstall.cc:66
-#, fuzzy
 msgid "Install missing resolvables"
-msgstr "A instalar os resolúveis em falta"
+msgstr "Instalar resolúveis em falta"
 
 #: zypp/solver/detail/ResolverInfoDependsOn.cc:55
 #, c-format
@@ -2633,14 +2600,14 @@ msgid "%s depended on %s"
 msgstr "%s depende de %s"
 
 #: zypp/solver/detail/ResolverInfoDependsOn.cc:69
-#, fuzzy, c-format
+#, c-format
 msgid "%s dependend on %s"
 msgstr "%s depende de %s"
 
 #: zypp/solver/detail/ResolverInfoNeededBy.cc:70
-#, fuzzy, c-format
+#, c-format
 msgid "%s needed by %s"
-msgstr "%s necessita o %s"
+msgstr "%s necessitado por %s"
 
 #: zypp/solver/detail/ResolverInfoChildOf.cc:56
 #: zypp/solver/detail/ResolverInfoChildOf.cc:71
@@ -2649,14 +2616,13 @@ msgid "%s part of %s"
 msgstr "%s faz parte de %s"
 
 #: zypp/solver/detail/ProblemSolutionUnlock.cc:52
-#, fuzzy, c-format
+#, c-format
 msgid "unlock %s"
-msgstr "Desbloquear %s"
+msgstr "destrancar %s"
 
 #: zypp/solver/detail/ProblemSolutionUnlock.cc:61
-#, fuzzy
 msgid "Unlock these resolvables"
-msgstr "A destrancar estes resolúveis"
+msgstr "destrancar estes resolúveis"
 
 #: zypp/CountryCode.cc:135
 msgid "Unknown country: "
@@ -3754,23 +3720,5 @@ msgstr "Zimbabué"
 msgid "Unable to restore all sources."
 msgstr ""
 
-#, fuzzy
 #~ msgid "ignore architecture"
-#~ msgstr "Arquitectura de arranque"
-
-#, fuzzy
-#~ msgid "Ignore this requirement for all other resolvables."
-#~ msgstr "%s é necessário por outros resolúveis"
-
-#~ msgid "Deleting %s"
-#~ msgstr "A eliminar %s"
-
-#~ msgid ""
-#~ "Can't install %s, since a resolvable of the same name is already marked "
-#~ "as needing to be installed"
-#~ msgstr ""
-#~ "Não é possível instalar %s, uma vez que um resolúvel do mesmo nome já se "
-#~ "encontra marcado como necessário ser instalado"
-
-#~ msgid "%s cannot be uninstalled due missing dependencies"
-#~ msgstr "%s não pode ser desinstalado devido à falta de dependências"
+#~ msgstr "Ignorar arquitectura"

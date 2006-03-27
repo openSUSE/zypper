@@ -1,29 +1,30 @@
+# translation of zypp.po to Polish
 # Polish message file for YaST2 (@memory@).
 # Copyright (C) 2005 SUSE Linux Products GmbH.
 # Copyright (C) 2003 SuSE Linux AG.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: YaST (@memory@)\n"
+"Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
 "POT-Creation-Date: 2006-03-20 10:33+0100\n"
-"PO-Revision-Date: 2003-10-06 11:28+0200\n"
-"Last-Translator: Polish <i18n@suse.de>\n"
-"Language-Team: Polish <i18n@suse.de>\n"
+"PO-Revision-Date: 2006-02-21 10:06+0100\n"
+"Last-Translator: Marek Stępień\n"
+"Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
+"X-Generator: KBabel 1.11.1\n"
 
 #: zypp/LanguageCode.cc:145
 msgid "Unknown language: "
-msgstr ""
+msgstr "Nieznany język: "
 
 #: zypp/LanguageCode.cc:226 zypp/CountryCode.cc:215
-#, fuzzy
 msgid "noCode"
-msgstr "Kod"
+msgstr "noCode"
 
 #: zypp/LanguageCode.cc:227
 msgid "Default"
@@ -86,7 +87,6 @@ msgid "Aleut"
 msgstr "aleucki"
 
 #: zypp/LanguageCode.cc:270
-#, fuzzy
 msgid "Algonquian languages"
 msgstr "języki algonkińskie"
 
@@ -103,7 +103,6 @@ msgid "English, Old (ca.450-1100)"
 msgstr "staroangielski (ok. 450-1100)"
 
 #: zypp/LanguageCode.cc:278
-#, fuzzy
 msgid "Apache languages"
 msgstr "języki apaczańskie"
 
@@ -120,13 +119,11 @@ msgid "Aragonese"
 msgstr "aragoński"
 
 # AM
-# fuzzy
 #: zypp/LanguageCode.cc:286 zypp/LanguageCode.cc:288
 msgid "Armenian"
 msgstr "ormiański"
 
 # AM
-# fuzzy
 #: zypp/LanguageCode.cc:290
 msgid "Araucanian"
 msgstr "araukański"
@@ -152,12 +149,10 @@ msgid "Asturian"
 msgstr "asturyjski"
 
 #: zypp/LanguageCode.cc:302
-#, fuzzy
 msgid "Athapascan languages"
 msgstr "języki athapaskańskie"
 
 #: zypp/LanguageCode.cc:304
-#, fuzzy
 msgid "Australian languages"
 msgstr "języki australijskie"
 
@@ -170,13 +165,11 @@ msgid "Avestan"
 msgstr "awestyjski"
 
 # SZ
-# fuzzy
 #: zypp/LanguageCode.cc:310
 msgid "Awadhi"
 msgstr "awadhi"
 
 # MM
-# fuzzy
 #: zypp/LanguageCode.cc:312
 msgid "Aymara"
 msgstr "ajmara"
@@ -190,7 +183,6 @@ msgid "Banda"
 msgstr "banda"
 
 #: zypp/LanguageCode.cc:318
-#, fuzzy
 msgid "Bamileke languages"
 msgstr "języki bamileke"
 
@@ -203,13 +195,11 @@ msgid "Baluchi"
 msgstr "beludżyjski"
 
 # MM
-# fuzzy
 #: zypp/LanguageCode.cc:324
 msgid "Bambara"
 msgstr "bambara"
 
 # MV
-# fuzzy
 #: zypp/LanguageCode.cc:326
 msgid "Balinese"
 msgstr "balijski"
@@ -239,7 +229,6 @@ msgid "Bemba"
 msgstr "bemba"
 
 # BZ
-# fuzzy
 #: zypp/LanguageCode.cc:342
 msgid "Bengali"
 msgstr "bengalski"
@@ -369,7 +358,6 @@ msgid "Mari"
 msgstr "maryjski"
 
 #: zypp/LanguageCode.cc:410
-#, fuzzy
 msgid "Chinook jargon"
 msgstr "czinucki"
 
@@ -398,7 +386,6 @@ msgid "Cheyenne"
 msgstr "czejeński"
 
 #: zypp/LanguageCode.cc:424
-#, fuzzy
 msgid "Chamic languages"
 msgstr "języki chamickie"
 
@@ -415,17 +402,14 @@ msgid "Corsican"
 msgstr "korsykański"
 
 #: zypp/LanguageCode.cc:432
-#, fuzzy
 msgid "Creoles and pidgins, English based (Other)"
-msgstr "kreolskie i pidżyny oparte na agielskim (inne)"
+msgstr "kreolskie i pidżyny oparte na angielskim (inne)"
 
 #: zypp/LanguageCode.cc:434
-#, fuzzy
 msgid "Creoles and pidgins, French-based (Other)"
 msgstr "kreolskie i pidżyny oparte na francuskim (inne)"
 
 #: zypp/LanguageCode.cc:436
-#, fuzzy
 msgid "Creoles and pidgins, Portuguese-based (Other)"
 msgstr "kreolskie i pidżyny oparte na portugalskim (inne)"
 
@@ -438,7 +422,6 @@ msgid "Crimean Tatar"
 msgstr "tatarski (krymski)"
 
 #: zypp/LanguageCode.cc:442
-#, fuzzy
 msgid "Creoles and pidgins (Other)"
 msgstr "kreolskie i pidżyny różne"
 
@@ -835,7 +818,6 @@ msgid "Iranian (Other)"
 msgstr "irańskie (inne)"
 
 #: zypp/LanguageCode.cc:654
-#, fuzzy
 msgid "Iroquoian languages"
 msgstr "irokeskie"
 
@@ -904,13 +886,11 @@ msgid "Kawi"
 msgstr "kawi"
 
 # KZ
-# fuzzy
 #: zypp/LanguageCode.cc:688
 msgid "Kazakh"
 msgstr "kazachski"
 
 # MR
-# fuzzy
 #: zypp/LanguageCode.cc:690
 msgid "Kabardian"
 msgstr "kabardyjski"
@@ -1076,7 +1056,6 @@ msgid "Luo (Kenya and Tanzania)"
 msgstr "luo (Kenia i Tanzania)"
 
 #: zypp/LanguageCode.cc:772
-#, fuzzy
 msgid "lushai"
 msgstr "lushai"
 
@@ -1157,7 +1136,6 @@ msgid "Minangkabau"
 msgstr "minangkabau"
 
 #: zypp/LanguageCode.cc:818
-#, fuzzy
 msgid "Miscellaneous languages"
 msgstr "języki różne"
 
@@ -1170,7 +1148,6 @@ msgid "Malagasy"
 msgstr "malgaski"
 
 # MV
-# fuzzy
 #: zypp/LanguageCode.cc:824
 msgid "Maltese"
 msgstr "maltański"
@@ -1184,7 +1161,6 @@ msgid "Manipuri"
 msgstr "manipuri"
 
 #: zypp/LanguageCode.cc:830
-#, fuzzy
 msgid "Manobo languages"
 msgstr "języki manobo"
 
@@ -1205,12 +1181,10 @@ msgid "Mossi"
 msgstr "mossi"
 
 #: zypp/LanguageCode.cc:840
-#, fuzzy
 msgid "Multiple languages"
 msgstr "wielojęzyczność"
 
 #: zypp/LanguageCode.cc:842
-#, fuzzy
 msgid "Munda languages"
 msgstr "języki munda"
 
@@ -1219,7 +1193,6 @@ msgid "Creek"
 msgstr "creek"
 
 # MV
-# fuzzy
 #: zypp/LanguageCode.cc:846
 msgid "Mirandese"
 msgstr "mirandyjski"
@@ -1229,7 +1202,6 @@ msgid "Marwari"
 msgstr "marwari"
 
 #: zypp/LanguageCode.cc:850
-#, fuzzy
 msgid "Mayan languages"
 msgstr "języki majańskie"
 
@@ -1319,7 +1291,6 @@ msgid "Northern Sotho"
 msgstr "sotho północny"
 
 #: zypp/LanguageCode.cc:894
-#, fuzzy
 msgid "Nubian languages"
 msgstr "języki nubijskie"
 
@@ -1356,7 +1327,6 @@ msgid "Ojibwa"
 msgstr "odżibwa"
 
 # SY
-# fuzzy
 #: zypp/LanguageCode.cc:912
 msgid "Oriya"
 msgstr "orija"
@@ -1378,7 +1348,6 @@ msgid "Turkish, Ottoman (1500-1928)"
 msgstr "turecki, osmańskie (1500-1928)"
 
 #: zypp/LanguageCode.cc:922
-#, fuzzy
 msgid "Otomian languages"
 msgstr "języki otomang"
 
@@ -1443,7 +1412,6 @@ msgid "Portuguese"
 msgstr "Portugalski"
 
 #: zypp/LanguageCode.cc:956
-#, fuzzy
 msgid "Prakrit languages"
 msgstr "prakryty"
 
@@ -1512,7 +1480,6 @@ msgid "South American Indian (Other)"
 msgstr "Indian południowoamerykańskich (inne)"
 
 #: zypp/LanguageCode.cc:992
-#, fuzzy
 msgid "Salishan languages"
 msgstr "saliskie"
 
@@ -1577,7 +1544,6 @@ msgid "Sinhala"
 msgstr "syngaleski"
 
 #: zypp/LanguageCode.cc:1028
-#, fuzzy
 msgid "Siouan languages"
 msgstr "języki Siuksów"
 
@@ -1606,7 +1572,6 @@ msgid "Northern Sami"
 msgstr "lapoński północny"
 
 #: zypp/LanguageCode.cc:1044
-#, fuzzy
 msgid "Sami languages (Other)"
 msgstr "języki lapońskie (inne)"
 
@@ -1643,7 +1608,6 @@ msgid "Sogdian"
 msgstr "sogdyjski"
 
 # SO
-# fuzzy
 #: zypp/LanguageCode.cc:1062
 msgid "Somali"
 msgstr "somalijski"
@@ -1661,7 +1625,6 @@ msgid "Spanish"
 msgstr "Hiszpański"
 
 # MR
-# fuzzy
 #: zypp/LanguageCode.cc:1070
 msgid "Sardinian"
 msgstr "sardyńskie"
@@ -1695,7 +1658,6 @@ msgid "Sumerian"
 msgstr "sumeryjski"
 
 # SZ
-# fuzzy
 #: zypp/LanguageCode.cc:1086
 msgid "Swahili"
 msgstr "suahili"
@@ -1759,16 +1721,14 @@ msgid "Tibetan"
 msgstr "tybetański"
 
 # NG
-# fuzzy
 #: zypp/LanguageCode.cc:1118
 msgid "Tigre"
 msgstr "tigre"
 
 # NG
-# fuzzy
 #: zypp/LanguageCode.cc:1120
 msgid "Tigrinya"
-msgstr "tigrinta"
+msgstr "tigrinya"
 
 #: zypp/LanguageCode.cc:1122
 msgid "Tiv"
@@ -1823,7 +1783,6 @@ msgid "Tumbuka"
 msgstr "tubuka"
 
 #: zypp/LanguageCode.cc:1148
-#, fuzzy
 msgid "Tupi languages"
 msgstr "języki tupi"
 
@@ -1900,7 +1859,6 @@ msgid "Votic"
 msgstr "wotski"
 
 #: zypp/LanguageCode.cc:1186
-#, fuzzy
 msgid "Wakashan languages"
 msgstr "języki wakasz"
 
@@ -1921,7 +1879,6 @@ msgid "Welsh"
 msgstr "walijski"
 
 #: zypp/LanguageCode.cc:1198
-#, fuzzy
 msgid "Sorbian languages"
 msgstr "języki łużyckie"
 
@@ -1954,13 +1911,11 @@ msgid "Yiddish"
 msgstr "jidysz"
 
 # CU
-# fuzzy
 #: zypp/LanguageCode.cc:1214
 msgid "Yoruba"
 msgstr "joruba"
 
 #: zypp/LanguageCode.cc:1216
-#, fuzzy
 msgid "Yupik languages"
 msgstr "języki yupik"
 
@@ -1969,7 +1924,6 @@ msgid "Zapotec"
 msgstr "zapoteckie"
 
 # BZ
-# fuzzy
 #: zypp/LanguageCode.cc:1220
 msgid "Zenaga"
 msgstr "zenaga"
@@ -1997,14 +1951,14 @@ msgid ""
 msgstr ""
 
 #: zypp/target/rpm/RpmDb.cc:1718
-#, fuzzy, c-format
+#, c-format
 msgid "Changed configuration files for %s:"
-msgstr "Zapisywanie plików konfiguracyjnych"
+msgstr "Zmienione pliki konfiguracyjne dla %s:"
 
 #: zypp/target/rpm/RpmDb.cc:1869
 #, c-format
 msgid "rpm saved %s as %s but it was impossible to determine the difference"
-msgstr ""
+msgstr "rpm zapisał %s jako %s, ale nie był w stanie określić różnicy"
 
 #: zypp/target/rpm/RpmDb.cc:1871
 #, c-format
@@ -2012,11 +1966,13 @@ msgid ""
 "rpm saved %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
+"rpm zapisał %s jako %s.\n"
+"Oto pierwszych 25 linii różnicy:\n"
 
 #: zypp/target/rpm/RpmDb.cc:1874
 #, c-format
 msgid "rpm created %s as %s but it was impossible to determine the difference"
-msgstr ""
+msgstr "rpm utworzył %s jako %s, ale nie był w stanie określić różnicy"
 
 #: zypp/target/rpm/RpmDb.cc:1876
 #, c-format
@@ -2024,36 +1980,36 @@ msgid ""
 "rpm created %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
+"rpm utworzył %s jako %s.\n"
+"Oto pierwszych 25 linii różnicy:\n"
 
 #: zypp/target/rpm/RpmDb.cc:1881
-#, fuzzy, c-format
+#, c-format
 msgid "%s install failed"
-msgstr "Instalacja zakończona niepowodzeniem."
+msgstr "Instalacja %s nie powiodła się"
 
 #: zypp/target/rpm/RpmDb.cc:1882 zypp/target/rpm/RpmDb.cc:1988
-#, fuzzy
 msgid "rpm output:"
-msgstr "Wyjście programu:\n"
+msgstr "Wyjście rpm:"
 
 #: zypp/target/rpm/RpmDb.cc:1886
-#, fuzzy, c-format
+#, c-format
 msgid "%s installed ok"
-msgstr "Nie zainstalowane (%1)"
+msgstr "%s poprawnie zainstalowane"
 
 #: zypp/target/rpm/RpmDb.cc:1888 zypp/target/rpm/RpmDb.cc:1993
-#, fuzzy
 msgid "Additional rpm output:"
-msgstr "Dodatkowe ustawienia grupy"
+msgstr "Dodatkowe wyjście rpm:"
 
 #: zypp/target/rpm/RpmDb.cc:1987
-#, fuzzy, c-format
+#, c-format
 msgid "%s remove failed"
-msgstr "błąd rpm."
+msgstr "Usunięcie %s nie powiodło się"
 
 #: zypp/target/rpm/RpmDb.cc:1991
 #, c-format
 msgid "%s remove ok"
-msgstr ""
+msgstr "Usuniecie %s powiodło się"
 
 #: zypp/target/rpm/RpmDb.cc:2007
 msgid "Ok"
@@ -2061,45 +2017,40 @@ msgstr "OK"
 
 #: zypp/target/rpm/RpmDb.cc:2010
 msgid "The package is not OK for the following reasons:"
-msgstr ""
+msgstr "Pakiet nie jest prawidłowy z uwagi na poniższe powody:"
 
 #: zypp/target/rpm/RpmDb.cc:2016
 msgid "The package contains different version than expected"
-msgstr ""
+msgstr "Pakiet zawiera inną wersję niż oczekiwana"
 
 #: zypp/target/rpm/RpmDb.cc:2022
-#, fuzzy
 msgid "The package file has incorrect MD5 sum"
-msgstr "Pakiety do usunięcia"
+msgstr "Plik pakietu ma nieprawidłową sumę kontrolną MD5"
 
 #: zypp/target/rpm/RpmDb.cc:2028
-#, fuzzy
 msgid "The package is not signed"
-msgstr "Pakiety do odtworzenia"
+msgstr "Pakiet nie jest podpisany"
 
 #: zypp/target/rpm/RpmDb.cc:2034
-#, fuzzy
 msgid "The package has no MD5 sum"
-msgstr "Pakiety do usunięcia"
+msgstr "Pakiet nie ma sumy kontrolnej MD5"
 
 #: zypp/target/rpm/RpmDb.cc:2040
-#, fuzzy
 msgid "The package has incorrect signature"
-msgstr "Pakiety do odtworzenia"
+msgstr "Pakiet ma nieprawidłowy podpis"
 
 #: zypp/target/rpm/RpmDb.cc:2046
-#, fuzzy
 msgid "The package archive has incorrect MD5 sum"
-msgstr "Pakiety do usunięcia"
+msgstr "Archiwum pakietu ma nieprawidłową sumę kontrolną MD5"
 
 #: zypp/target/rpm/RpmDb.cc:2052
 msgid "rpm failed for unkown reason, see log file"
-msgstr ""
+msgstr "błąd rpm z nieznanych przyczyn, szczegóły w pliku dziennika"
 
 #: zypp/target/rpm/RpmDb.cc:2196
-#, fuzzy, c-format
+#, c-format
 msgid "created backup %s"
-msgstr "Utwórz &kopię zapasową"
+msgstr "utworzono zapasowy %s"
 
 #: zypp/target/TargetImpl.cc:376
 msgid "Target commit aborted by user."
@@ -2108,27 +2059,27 @@ msgstr ""
 #: zypp/solver/detail/ResolverInfoObsoletes.cc:55
 #, c-format
 msgid "%s is replaced by %s"
-msgstr ""
+msgstr "%s jesr zastępowany przez %s"
 
 #: zypp/solver/detail/ResolverInfoObsoletes.cc:69
 #, c-format
 msgid "%s replaced by %s"
-msgstr ""
+msgstr "%s zastąpiony przez %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:189
 msgid "Invalid information"
-msgstr ""
+msgstr "Nieprawidłowa informacja"
 
 #: zypp/solver/detail/Resolver_problems.cc:196
 #, c-format
 msgid "%s is needed by other resolvables"
-msgstr ""
+msgstr "%s jest wymagany przez inne pakiety"
 
 #: zypp/solver/detail/Resolver_problems.cc:199
 #: zypp/solver/detail/ResolverInfoNeededBy.cc:56
 #, c-format
 msgid "%s is needed by %s"
-msgstr ""
+msgstr "%s jest wymagany przez %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:200
 #, c-format
@@ -2136,269 +2087,278 @@ msgid ""
 "%s is needed by:\n"
 "%s"
 msgstr ""
+"%s jest wymagany przez:\n"
+"%s"
 
 #: zypp/solver/detail/Resolver_problems.cc:207
-#, fuzzy, c-format
+#, c-format
 msgid "%s conflicts with other resolvables"
-msgstr "%1 jest w konflikcie z %2"
+msgstr "%s jest w konflikcie z innymi pakietami"
 
 #: zypp/solver/detail/Resolver_problems.cc:210
 #: zypp/solver/detail/ResolverInfoConflictsWith.cc:55
 #: zypp/solver/detail/ResolverInfoConflictsWith.cc:70
-#, fuzzy, c-format
+#, c-format
 msgid "%s conflicts with %s"
-msgstr "%1 jest w konflikcie z %2"
+msgstr "%s jest w konflikcie z %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:211
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s conflicts with:\n"
 "%s"
-msgstr "%1 jest w konflikcie z %2"
+msgstr ""
+"%s jest w konflikcie z:\n"
+"%s"
 
 #: zypp/solver/detail/Resolver_problems.cc:234
 #, c-format
 msgid "%s obsoletes other resolvables"
-msgstr ""
+msgstr "%s dezaktualizuje inne pakiety"
 
 #: zypp/solver/detail/Resolver_problems.cc:237
 #, c-format
 msgid "%s obsoletes %s"
-msgstr ""
+msgstr "%s dezaktualizuje %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:239
 #, c-format
 msgid "%s obsoletes:%s"
-msgstr ""
+msgstr "%s dezaktualizuje:%s"
 
 #: zypp/solver/detail/Resolver_problems.cc:240
 msgid ""
 "\n"
 "These resolvables will be deleted from the system."
 msgstr ""
+"\n"
+"Te pakiety zostaną usunięte z systemu."
 
 #: zypp/solver/detail/Resolver_problems.cc:247
 #, c-format
 msgid "%s depends on other resolvables"
-msgstr ""
+msgstr "%s zależy od innych pakietów"
 
 #: zypp/solver/detail/Resolver_problems.cc:251
 #, c-format
 msgid "%s depends on %s"
-msgstr ""
+msgstr "%s zależy od %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:254
 #, c-format
 msgid "%s depends on:%s"
-msgstr ""
+msgstr "%s zależy od:%s"
 
 #: zypp/solver/detail/Resolver_problems.cc:260
 msgid "Child of"
-msgstr ""
+msgstr "Dziecko "
 
 #: zypp/solver/detail/Resolver_problems.cc:266
 #: zypp/solver/detail/Resolver_problems.cc:325
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot install %s"
-msgstr "Instalowanie na:"
+msgstr "Nie można zainstalować %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:268
 #, c-format
 msgid "None provides %s"
-msgstr ""
+msgstr "Żaden nie dostarcza %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:269
 msgid ""
 "\n"
 "There is no resource available which support this requirement."
 msgstr ""
+"\n"
+"Nie ma dostępnego zasobu, który spełniał by te wymogi."
 
 #: zypp/solver/detail/Resolver_problems.cc:277
 msgid ""
 "Due problems which are described above/below this resolution will not solve "
 "all dependencies"
 msgstr ""
+"Z powodu wyżej opisanych powyżej/poniżej, to rozwiązanie nie będzie w stanie "
+"rozwiązać wszystkich zależności"
 
 #: zypp/solver/detail/Resolver_problems.cc:285
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not installed and has been marked as uninstallable"
-msgstr "Pakiet nie jest i nie będzie zainstalowany."
+msgstr ""
+"%s nie jest zainstalowany i został oznaczony jako nie do odinstalowania"
 
 #: zypp/solver/detail/Resolver_problems.cc:295
-#, c-format
+#, fuzzy, c-format
 msgid "Cannot install %s due to dependency problems"
-msgstr ""
+msgstr "Nie można zainstalować %s z powodu problemów z zależnościami"
 
 #: zypp/solver/detail/Resolver_problems.cc:333
 #: zypp/solver/detail/Resolver_problems.cc:343
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:64
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:66
-#, fuzzy, c-format
+#, c-format
 msgid "delete %s"
-msgstr "Usuń %1"
+msgstr "usuń %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:336
 #: zypp/solver/detail/Resolver_problems.cc:346
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:69
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:71
-#, fuzzy, c-format
+#, c-format
 msgid "do not install %s"
-msgstr "Instalowanie na:"
+msgstr "nie instaluj %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:359
 #, c-format
 msgid "%s has unfulfiled requirements"
-msgstr ""
+msgstr "%s ma niespełnione wymagania"
 
 #: zypp/solver/detail/Resolver_problems.cc:397
-#, fuzzy, c-format
+#, c-format
 msgid "%s has missing dependencies"
-msgstr "Sprawdzanie zależności"
+msgstr "%s ma brakujące zależności"
 
 #: zypp/solver/detail/Resolver_problems.cc:435
 #, fuzzy, c-format
 msgid "%s cannot be installed due to missing dependencies"
-msgstr "Sprawdzanie zależności"
+msgstr "%s nie może zostać zainstalowany z powodu brakujących zależności"
 
 #: zypp/solver/detail/Resolver_problems.cc:465
 #, c-format
 msgid "%s fulfil dependencies of %s but will be uninstalled"
-msgstr ""
+msgstr "%s spełnia zależności %s, ale zostanie odinstalowany"
 
 #: zypp/solver/detail/Resolver_problems.cc:475
-#, fuzzy, c-format
+#, c-format
 msgid "No need to install %s"
-msgstr "wymaga ponownej instalacji"
+msgstr "Nie ma potrzeby instalować %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:483
 #, c-format
 msgid "Cannot install %s to fulfil the dependencies of %s"
-msgstr ""
+msgstr "Nie można zainstalować %s by spełnić zależności %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:493
 #, c-format
 msgid "Cannot be install %s to fulfil the dependencies of %s"
-msgstr ""
+msgstr "Nie można zainstalować %s by spełnić zależności %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:530
 #: zypp/solver/detail/Resolver_problems.cc:538
 #, c-format
 msgid "%s will not be uninstalled cause it is still required"
-msgstr ""
+msgstr "%s nie zostanie odinstalowany, ponieważ jest nadal wymagany"
 
 #: zypp/solver/detail/Resolver_problems.cc:549
 #, c-format
 msgid "%s obsoletes %s. But %s cannot be deleted because it is locked."
 msgstr ""
+"%s dezaktualizuje %s, ale %s nie może zostać usunięty, ponieważ jest "
+"zablokowany."
 
 #: zypp/solver/detail/Resolver_problems.cc:573
 #, c-format
 msgid "Cannot install %s because it is conflicting with %s"
-msgstr ""
+msgstr "Nie można zainstalować %s, ponieważ jest on w konflikcie z %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:593
 #, fuzzy, c-format
 msgid "%s is uninstallable due to conflicts with %s"
-msgstr "%1 jest w konflikcie z %2"
+msgstr "%s jest nie do odinstalowania z powodu konfliktu z %s"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:53
-#, fuzzy
 msgid "Ignore this requirement just here"
-msgstr "ma nierozwiązane wymagania..."
+msgstr "Zignoruj ten wymóg tylko tutaj"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:62
-#, fuzzy
 msgid "Ignore this requirement generally"
-msgstr "ma nierozwiązane wymagania..."
+msgstr "Zignoruj ten wymóg globalnie"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:76
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:88
-#, fuzzy, c-format
+#, c-format
 msgid "Ignore this conflict of %s"
-msgstr "%1 jest w konflikcie z %2"
+msgstr "Zignoruj ten konflikt %s"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:103
-#, fuzzy, c-format
+#, c-format
 msgid "Ignore the obsolete %s in %s"
-msgstr "%1 jest w konflikcie z %2"
+msgstr "Zignoruj dezaktualizację %s w %s"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:116
-#, fuzzy, c-format
+#, c-format
 msgid "Ignore that %s is already set to install"
-msgstr "Katalog %1 znajduje się już na liście."
+msgstr "Zignoruj fakt, że %s jest już zaznaczony do instalacji"
 
 #: zypp/solver/detail/ProblemSolutionUninstall.cc:81
-#, fuzzy
 msgid "Do not install or delete concerning resolvables"
-msgstr "%1 jest w konflikcie z %2"
+msgstr "Nie instaluj ani nie usuwaj danych pakietów"
 
 #: zypp/solver/detail/QueueItemRequire.cc:532
 #, c-format
 msgid "for requiring %s for %s when upgrading %s"
-msgstr ""
+msgstr "dla wymagania %s dla %s podczas aktualizacji %s"
 
 #: zypp/solver/detail/ResolverInfoMissingReq.cc:64
 #, c-format
 msgid "%s is missing the requirement %s"
-msgstr ""
+msgstr "w %s brakuje wymogu %s"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:56
-#, fuzzy
 msgid ", Action: "
-msgstr "Czynność"
+msgstr ", Czynność: "
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:58
 msgid ", Trigger: "
-msgstr ""
+msgstr ", wyzwalacz: "
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:90
 msgid "package"
-msgstr ""
+msgstr "pakiet"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:94
 msgid "selection"
-msgstr ""
+msgstr "wybor"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:98
 msgid "pattern"
-msgstr ""
+msgstr "wzorzec"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:102
 msgid "product"
-msgstr ""
+msgstr "produkt"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:106
 msgid "patch"
-msgstr "Ścieżka"
+msgstr "poprawka"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:110
 msgid "script"
-msgstr ""
+msgstr "skrypt"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:114
 msgid "message"
-msgstr ""
+msgstr "wiadomość"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:118
 msgid "atom"
-msgstr ""
+msgstr "atom"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:122
 msgid "system"
-msgstr ""
+msgstr "system"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:126
 msgid "Resolvable"
-msgstr ""
+msgstr "Rozwiązywalny pakiet"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:144
 msgid "Marking this resolution attempt as invalid."
-msgstr ""
+msgstr "Oznaczanie tej próby rozwiązania jako nieprawidłowej."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:151
 #, c-format
 msgid "Marking resolvable %s as uninstallable"
-msgstr ""
+msgstr "Oznaczanie pakietu %s jako nie do odinstalowania"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:159
 #, c-format
@@ -2406,78 +2366,81 @@ msgid ""
 "%s is scheduled to be installed, but this is not possible because of "
 "dependency problems."
 msgstr ""
+"%s jest zaplanowany do instalacji, ale nie jest to możliwe z powodu "
+"problemów z zależnościami."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:167
 #, c-format
 msgid ""
 "Can't install %s since it is already marked as needing to be uninstalled"
-msgstr ""
+msgstr "Nie można zainstalować %s, ponieważ jest już zaznaczony do usunięcia"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:179
 #, c-format
 msgid "Can't install %s since it is does not apply to this system."
-msgstr ""
+msgstr "Nie można zainstalować %s, ponieważ nie dotyczy on tego systemu."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:190
 #, c-format
 msgid "Can't install %s, since %s is already marked as needing to be installed"
 msgstr ""
+"Nie można zainstalować %s, ponieważ %s jest już zaznaczony do instalacji"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:198
 #, c-format
 msgid "This would invalidate %s."
-msgstr ""
+msgstr "To unieważniłoby %s."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:214
-#, fuzzy, c-format
+#, c-format
 msgid "Establishing %s"
-msgstr "Instalowanie na:"
+msgstr "Nawiązywanie %s"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:235
-#, fuzzy, c-format
+#, c-format
 msgid "Installing %s"
-msgstr "Instalowanie na:"
+msgstr "Instalowanie %s"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:252
 #, c-format
 msgid "Updating %s to %s"
-msgstr ""
+msgstr "Aktualizacja %s do %s"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:270
-#, fuzzy, c-format
+#, c-format
 msgid "Skipping %s: already installed"
-msgstr "Sprawdzanie zainstalowanych dotychczas skanerów"
+msgstr "Pomijanie %s: już zainstalowany"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:292
 #, c-format
 msgid "There are no alternative installed providers of %s"
-msgstr ""
+msgstr "Nie ma zainstalowanych alternatywnych dostawców %s"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:298
 #: zypp/solver/detail/ResolverInfoMisc.cc:323
 #, c-format
 msgid "for %s"
-msgstr ""
+msgstr "dla %s"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:317
 #, c-format
 msgid "There are no installable providers of %s"
-msgstr ""
+msgstr "Nie ma instalowalnych dostawców %s"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:340
 #, c-format
 msgid "Upgrade to %s to avoid removing %s is not possible."
-msgstr ""
+msgstr "Aktualizacja do %s w celu uniknięcia usunięcia %s nie jest możliwa."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:356
 #, c-format
 msgid "%s provides %s, but is scheduled to be uninstalled."
-msgstr ""
+msgstr "%s dostarcza %s, ale jest zaplanowany do usunięcia."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:372
 #, c-format
 msgid "%s provides %s, but another version of that %s is already installed."
-msgstr ""
+msgstr "%s dostarcza %s, ale inna wersja %s jest już zainstalowana."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:389
 #, c-format
@@ -2485,114 +2448,117 @@ msgid ""
 "%s provides %s, but it is uninstallable.  Try installing it on its own for "
 "more details."
 msgstr ""
+"%s dostarcza %s, ale jest nie do odinstalowania. Należy spróbować "
+"zainstalowaćgo osobno, by uzyskać więcej informacji."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:405
 #, c-format
 msgid "%s provides %s, but it is locked."
-msgstr ""
+msgstr "%s dostarcza %s, ale jest zablokowany."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:421
 #, c-format
 msgid "Can't satisfy requirement %s for %s"
-msgstr ""
+msgstr "Nie można spełnić wymogu %s dla %s"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:442
 #, c-format
 msgid ""
 "%s is required by other to-be-installed resolvable, so it won't be unlinked."
 msgstr ""
+"%s jest wymagany przez inny pakiet do zainstalowania, więc nie zostanie "
+"odlinkowany."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:459
 #, c-format
 msgid "%s is required by other installed resolvable, so it won't be unlinked."
 msgstr ""
+"%s jest wymagany przez inny zainstalowany pakiet, więc nie zostanie "
+"odlinkowany."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:476
-#, fuzzy, c-format
+#, c-format
 msgid "%s is locked and cannot be uninstalled."
-msgstr "Pakiet nie jest i nie będzie zainstalowany."
+msgstr "%s jest zablokowany i nie może zostać odinstalowany."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:495
 #, c-format
 msgid "A conflict over %s (%s) requires the removal of to-be-installed %s"
 msgstr ""
+"Konflikt dotyczący %s (%s) wymaga usunięcia pakietu %s planowanego do "
+"doinstalacji"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:513
 #, c-format
 msgid "Marking %s as uninstallable due to conflicts over %s"
-msgstr ""
+msgstr "Oznaczanie %s jako nie do usunięcia z powodu konfliktów dotyczących %s"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:521
 #, c-format
 msgid "from %s"
-msgstr ""
+msgstr "od %s"
 
 #: zypp/solver/detail/ResolverInfo.cc:189
-#, fuzzy
 msgid " Error!"
-msgstr "Błąd"
+msgstr " Błąd!"
 
 #: zypp/solver/detail/ResolverInfo.cc:190
-#, fuzzy
 msgid " Important!"
-msgstr "Importuj dane"
+msgstr " Ważne!"
 
 #: zypp/solver/detail/ProblemSolutionKeep.cc:53
 #: zypp/solver/detail/ProblemSolutionKeep.cc:55
 #, c-format
 msgid "keep %s"
-msgstr ""
+msgstr "zachowaj %s"
 
 #: zypp/solver/detail/ProblemSolutionKeep.cc:65
-#, fuzzy
 msgid "Keep resolvables"
-msgstr "Zainstaluj brakujące pakiety"
+msgstr "Zachowaj rozwiązywalne pakiety"
 
 #: zypp/solver/detail/ProblemSolutionInstall.cc:54
 #: zypp/solver/detail/ProblemSolutionInstall.cc:56
-#, fuzzy, c-format
+#, c-format
 msgid "install %s"
-msgstr "Instaluj %1"
+msgstr "zainstaluj %s"
 
 #: zypp/solver/detail/ProblemSolutionInstall.cc:66
-#, fuzzy
 msgid "Install missing resolvables"
 msgstr "Zainstaluj brakujące pakiety"
 
 #: zypp/solver/detail/ResolverInfoDependsOn.cc:55
 #, c-format
 msgid "%s depended on %s"
-msgstr ""
+msgstr "%s zależał od %s"
 
 #: zypp/solver/detail/ResolverInfoDependsOn.cc:69
 #, c-format
 msgid "%s dependend on %s"
-msgstr ""
+msgstr "%s zależny od %s"
 
 #: zypp/solver/detail/ResolverInfoNeededBy.cc:70
 #, c-format
 msgid "%s needed by %s"
-msgstr ""
+msgstr "%s wymagany przez %s"
 
 #: zypp/solver/detail/ResolverInfoChildOf.cc:56
 #: zypp/solver/detail/ResolverInfoChildOf.cc:71
 #, c-format
 msgid "%s part of %s"
-msgstr ""
+msgstr "%s jest częścią %s"
 
 #: zypp/solver/detail/ProblemSolutionUnlock.cc:52
-#, fuzzy, c-format
+#, c-format
 msgid "unlock %s"
-msgstr "Zegary"
+msgstr "odblokuj %s"
 
 #: zypp/solver/detail/ProblemSolutionUnlock.cc:61
-#, fuzzy
 msgid "Unlock these resolvables"
-msgstr "%1 jest w konflikcie z %2"
+msgstr "Odblokować te pakiety rozwiązywalne?"
 
 #: zypp/CountryCode.cc:135
 msgid "Unknown country: "
-msgstr ""
+msgstr "Nieznane państwo: "
 
 #: zypp/CountryCode.cc:217
 msgid "Andorra"
@@ -2620,13 +2586,11 @@ msgid "Albania"
 msgstr "Albania"
 
 # AM
-# fuzzy
 #: zypp/CountryCode.cc:223
 msgid "Armenia"
 msgstr "Armenia"
 
 # AN
-# fuzzy
 #: zypp/CountryCode.cc:224
 msgid "Netherlands Antilles"
 msgstr "Antyle Holenderskie"
@@ -2644,7 +2608,6 @@ msgid "Argentina"
 msgstr "Argentyna"
 
 # AS
-# fuzzy
 #: zypp/CountryCode.cc:228
 msgid "American Samoa"
 msgstr "Samoa Amerykańskie"
@@ -2725,7 +2688,6 @@ msgid "Brazil"
 msgstr "Brazylia"
 
 # BS
-# fuzzy
 #: zypp/CountryCode.cc:247
 msgid "Bahamas"
 msgstr "Bahamy"
@@ -2805,7 +2767,6 @@ msgid "Serbia and Montenegro"
 msgstr "Serbia i Czarnogóra"
 
 # CU
-# fuzzy
 #: zypp/CountryCode.cc:267
 msgid "Cuba"
 msgstr "Kuba"
@@ -2875,7 +2836,6 @@ msgid "Spain"
 msgstr "Hiszpania"
 
 # ET
-# fuzzy
 #: zypp/CountryCode.cc:284
 msgid "Ethiopia"
 msgstr "Etiopia"
@@ -2909,7 +2869,6 @@ msgid "Metropolitan France"
 msgstr "Francja metropolitalna"
 
 # GH
-# fuzzy
 #: zypp/CountryCode.cc:292
 msgid "Gabon"
 msgstr "Gabon"
@@ -2931,7 +2890,6 @@ msgid "French Guiana"
 msgstr "Gujana Francuska"
 
 # GH
-# fuzzy
 #: zypp/CountryCode.cc:297
 msgid "Ghana"
 msgstr "Ghana"
@@ -2945,7 +2903,6 @@ msgid "Greenland"
 msgstr "Grenlandia"
 
 # GM
-# fuzzy
 #: zypp/CountryCode.cc:300
 msgid "Gambia"
 msgstr "Gambia"
@@ -2983,7 +2940,6 @@ msgid "Guinea-Bissau"
 msgstr "Gwinea Bissau"
 
 # GH
-# fuzzy
 #: zypp/CountryCode.cc:309
 msgid "Guyana"
 msgstr "Gujana"
@@ -3037,7 +2993,6 @@ msgid "Iraq"
 msgstr "Irak"
 
 # IR
-# fuzzy
 #: zypp/CountryCode.cc:322
 msgid "Iran"
 msgstr "Iran"
@@ -3067,13 +3022,11 @@ msgid "Kenya"
 msgstr "Kenia"
 
 # KZ
-# fuzzy
 #: zypp/CountryCode.cc:329
 msgid "Kyrgyzstan"
 msgstr "Kirgistan"
 
 # KH
-# fuzzy
 #: zypp/CountryCode.cc:330
 msgid "Cambodia"
 msgstr "Kambodża"
@@ -3108,7 +3061,6 @@ msgid "Cayman Islands"
 msgstr "Kajmany"
 
 # KZ
-# fuzzy
 #: zypp/CountryCode.cc:338
 msgid "Kazakhstan"
 msgstr "Kazachstan"
@@ -3122,7 +3074,6 @@ msgid "Lebanon"
 msgstr "Liban"
 
 # LC
-# fuzzy
 #: zypp/CountryCode.cc:341
 msgid "Saint Lucia"
 msgstr "Saint Lucia"
@@ -3136,7 +3087,6 @@ msgid "Sri Lanka"
 msgstr "Sri Lanka"
 
 # LR
-# fuzzy
 #: zypp/CountryCode.cc:344
 msgid "Liberia"
 msgstr "Liberia"
@@ -3188,13 +3138,11 @@ msgid "Macedonia"
 msgstr "Macedonia"
 
 # ML
-# fuzzy
 #: zypp/CountryCode.cc:356
 msgid "Mali"
 msgstr "Mali"
 
 # MM
-# fuzzy
 #: zypp/CountryCode.cc:357
 msgid "Myanmar"
 msgstr "Birma"
@@ -3229,13 +3177,11 @@ msgid "Malta"
 msgstr "Malta"
 
 # MU
-# fuzzy
 #: zypp/CountryCode.cc:365
 msgid "Mauritius"
 msgstr "Mauritius"
 
 # MV
-# fuzzy
 #: zypp/CountryCode.cc:366
 msgid "Maldives"
 msgstr "Malediwy"
@@ -3258,13 +3204,11 @@ msgid "Mozambique"
 msgstr "Mozambik"
 
 # GM
-# fuzzy
 #: zypp/CountryCode.cc:371
 msgid "Namibia"
 msgstr "Namibia"
 
 # NC
-# fuzzy
 #: zypp/CountryCode.cc:372
 msgid "New Caledonia"
 msgstr "Nowa Kaledonia"
@@ -3530,7 +3474,6 @@ msgid "Ukraine"
 msgstr "Ukraina"
 
 # UG
-# fuzzy
 #: zypp/CountryCode.cc:439
 msgid "Uganda"
 msgstr "Uganda"
@@ -3606,7 +3549,6 @@ msgid "South Africa"
 msgstr "Republika Południowej Afryki"
 
 # ZM
-# fuzzy
 #: zypp/CountryCode.cc:456
 msgid "Zambia"
 msgstr "Zambia"
@@ -3619,25 +3561,5 @@ msgstr "Zimbabwe"
 msgid "Unable to restore all sources."
 msgstr ""
 
-#, fuzzy
 #~ msgid "ignore architecture"
-#~ msgstr "Architektura startowa"
-
-#~ msgid "unknown"
-#~ msgstr "nieznany"
-
-#, fuzzy
-#~ msgid "installed"
-#~ msgstr "Instaluj"
-
-#, fuzzy
-#~ msgid "uninstalled"
-#~ msgstr "Autoinstalacja"
-
-#, fuzzy
-#~ msgid "to be installed (soft)"
-#~ msgstr "Nie zainstalowane (%1)"
-
-#, fuzzy
-#~ msgid "to be uninstalled"
-#~ msgstr "wymaga ponownej instalacji"
+#~ msgstr "zignoruj architekturę"
