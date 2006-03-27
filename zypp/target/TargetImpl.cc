@@ -327,7 +327,6 @@ namespace zypp
               bool success = false;
               try
               {
-                _storage.storeObject(it->resolvable());
 		if (isKind<Message>(it->resolvable()))
 		{
 		  Message::constPtr m = dynamic_pointer_cast<const Message>(it->resolvable());
@@ -358,6 +357,10 @@ namespace zypp
 		    ERR << "Do script not defined" << endl;
 		  }
 		}
+                else
+                {
+                  _storage.storeObject(it->resolvable());
+                }
                 success = true;
               }
               catch (Exception & excpt_r)
@@ -373,7 +376,6 @@ namespace zypp
               bool success = false;
               try
               {
-                _storage.deleteObject(it->resolvable());
 		if (isKind<Message>(it->resolvable()))
 		{
 		  DBG << "Uninstalling message - no-op" << endl;
@@ -401,6 +403,10 @@ namespace zypp
 		    ERR << "Undo script not defined" << endl;
 		  }
 		}
+                else
+                {
+                  _storage.deleteObject(it->resolvable());
+                }
                 success = true;
               }
               catch (Exception & excpt_r)
