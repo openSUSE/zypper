@@ -612,17 +612,43 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
       ZYPP_THROW( MediaSystemException(_url, "System error on " + dest.dirname().asString()) );
     }
 
-    DBG << "URL: " << url.asString().c_str() << endl;
+    DBG << "URL: " << url.asString() << endl;
     // Use URL without options (not RFC conform) and without
     // username and passwd (some proxies dislike them in the URL.
     // Curloptions for these were set in attachTo().
     Url curlUrl( url );
+
+    // Use asString + url::ViewOptions instead?
     curlUrl.setUsername( "" );
     curlUrl.setPassword( "" );
-#warning Check whether the call is correct
-//    string urlBuffer = curlUrl.asString(true,false,true); // without options
-    string urlBuffer = curlUrl.asString(); // without options
+    curlUrl.setPathParams( "" );
+    curlUrl.setQueryString( "" );
+    curlUrl.setFragment( "" );
 
+    string urlBuffer;
+    if(curlUrl.getScheme() == "ftp")
+    {
+      //
+      // Bug #154197:
+      // Passing an url "ftp://user@host/foo/bar/file" causes curl
+      // to try to fetch a "foo/bar/file" relatively to the user's
+      // home dir.
+      // Make sure, that it contains an additional slash (at least
+      // one - we use two) at the begin of the path name, e.g.
+      //      ftp://user@host/%2Ffoo/bar/file
+      //      ftp://user@host//foo/bar/file
+      // to force usage of an absolute path name in curl.
+      //
+      urlBuffer  = curlUrl.getScheme();
+      urlBuffer += "://";
+      urlBuffer += curlUrl.getHost(zypp::url::E_ENCODED);
+      urlBuffer += "/%2F";
+      urlBuffer += curlUrl.getPathName(zypp::url::E_ENCODED);
+    }
+    else
+    {
+    	urlBuffer = curlUrl.asString();
+    }
     CURLcode ret = curl_easy_setopt( _curl, CURLOPT_URL,
                                      urlBuffer.c_str() );
     if ( ret != 0 ) {
