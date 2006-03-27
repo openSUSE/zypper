@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="http://www.novell.com/metadata/zypp/xml-store" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <define name="boolean">
+    <choice>
+      <value>true</value>
+      <value>false</value>
+    </choice>
+  </define>
+  <define name="source-type">
+    <text/>
+  </define>
+  <define name="url">
+    <data type="anyURI"/>
+  </define>
+  <start>
+    <ref name="element-source"/>
+  </start>
+  <define name="element-source">
+    <element name="source">
+      <ref name="source"/>
+    </element>
+  </define>
+  <define name="source">
+    <element name="enabled">
+      <ref name="boolean"/>
+    </element>
+    <element name="auto-refresh">
+      <ref name="boolean"/>
+    </element>
+    <element name="product-dir">
+      <text/>
+    </element>
+    <element name="cache-dir">
+      <text/>
+    </element>
+    <element name="type">
+      <ref name="source-type"/>
+    </element>
+    <element name="url">
+      <ref name="url"/>
+    </element>
+    <element name="alias">
+      <text/>
+    </element>
+  </define>
+</grammar>

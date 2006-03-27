@@ -17,14 +17,16 @@
 #include <libxml/xmlreader.h>
 #include <libxml/tree.h>
 #include <zypp/base/Logger.h>
-//#include <zypp/parser/yum/schemanames.h>
+#include <zypp/parser/xmlstore/schemanames.h>
 
-#include <zypp/target/store/xml/XMLSourceCacheParser.h>
+#include <zypp/parser/xmlstore/XMLSourceCacheParser.h>
 
 using namespace std;
+using namespace zypp::storage;
 
 namespace zypp {
-    namespace storage {
+namespace parser {
+namespace xmlstore {
 
       XMLSourceCacheParser::XMLSourceCacheParser()
       { }
@@ -99,10 +101,10 @@ namespace zypp {
       
       
       XMLSourceCacheParser::XMLSourceCacheParser(istream &is, const string &baseUrl)
-      : zypp::parser::XMLNodeIterator<SourceData_Ptr>(is, baseUrl, "")
+  : zypp::parser::XMLNodeIterator<SourceData_Ptr>(is, baseUrl, SOURCESCHEMA)
       { 
         fetchNext();
       }
-      
-  } // namespace storage
+}      
+} // namespace parser
 } // namespace zypp

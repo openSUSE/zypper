@@ -22,8 +22,11 @@ typedef zypp::storage::PersistentStorage::SourceData* SourceData_Ptr;
 
 namespace zypp
 {
-namespace storage
+namespace parser
 {
+namespace xmlstore
+{
+
      /*
       * Use this class as an iterator that produces, one after one,
       * XMLSourceCacheData_Ptr(s) for the XML group elements.
@@ -58,7 +61,8 @@ namespace storage
         void parseSourceList(SourceData_Ptr dataPtr, xmlNodePtr node);
         zypp::parser::LibXMLHelper _helper;
       };
-  } // namespace storage
+  } // namespace parser
+} // namespace xmlstore
 } // namespace zypp
 
 #endif

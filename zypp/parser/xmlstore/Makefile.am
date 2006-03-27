@@ -16,7 +16,8 @@ parserxmlinclude_HEADERS = \
 	XMLPatternParser.h \
 	XMLResObjectParser.h	\
 	XMLPatchParser.h	\
-	XMLParserData.h
+	XMLParserData.h \
+	XMLSourceCacheParser.h
 	
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_parser_xmlstore.la
@@ -28,7 +29,8 @@ lib@PACKAGE@_parser_xmlstore_la_SOURCES = \
 	XMLPatternParser.cc	\
 	XMLResObjectParser.cc	\
 	XMLPatchParser.cc	\
-	XMLProductParser.cc
+	XMLProductParser.cc \
+	XMLSourceCacheParser.cc
 
 
 ## ##################################################

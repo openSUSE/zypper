@@ -28,6 +28,7 @@ namespace zypp {
     #define PATCHSCHEMA (SCHEMABASE "patch.rng")
     //#define PATCHESSCHEMA (SCHEMABASE "patches.rng")
     #define PRODUCTSCHEMA (SCHEMABASE "product.rng")
+#define SOURCESCHEMA (SCHEMABASE "known-source.rng")
     } // namespace xmlstore
   } // namespace parser
 } // namespace zypp
