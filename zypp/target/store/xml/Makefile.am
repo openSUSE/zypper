@@ -32,6 +32,6 @@ lib@PACKAGE@_target_xml_la_SOURCES = \
 	XMLPatternImpl.cc \
 	XMLProductImpl.cc \
 	XMLAtomImpl.cc \
-	XMLLanguageImpl.h
+	XMLLanguageImpl.cc
 	
 ## ##################################################

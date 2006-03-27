@@ -26,6 +26,8 @@ namespace zypp
     //	METHOD TYPE : Ctor
     //
     XMLLanguageImpl::XMLLanguageImpl()
+    : LanguageImplIf(TranslatedText())
+#warning FIXME line above, was added just to compile
     {}
 
     ///////////////////////////////////////////////////////////////////
