@@ -185,7 +185,13 @@ namespace zypp
           }
           else
           {
-            ZYPP_THROW(ParseException("parse error: " + buffer));
+            // https://bugzilla.novell.com/show_bug.cgi?id=160607
+            // before we used to throw a parse error exception if we dont find
+            // a key value line. But package descriptions usually are broken
+            // and contain multiple lines for single line tags, etc.
+            // so now we just skip those lines.
+            //ZYPP_THROW(ParseException("parse error: " + buffer));
+            ERR << "Parse error, unrecognized format [" << buffer << "]. Be sure " << _file_r << "does not contains a single tag with new lines." << std::endl;
           }
         }
         endParse();
