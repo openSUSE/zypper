@@ -182,15 +182,32 @@ std::string toXML( const Script::constPtr &obj )
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
   out << "  <do>" << std::endl;
-  out << "      " << xml_escape(obj->do_script().asString()) << std::endl;
-#warning FIXME line above
+  out << "  <![CDATA[" << std::endl;
+  
+  // read script
+  ifstream infile;
+  infile.open(obj->do_script().asString().c_str());
+  while (infile.good())
+    out << (char) infile.get();
+  infile.close();
+  
+  out << "  ]]>" << std::endl;
   out << "  </do>" << std::endl;
+  infile.close();
   if ( obj->undo_available() )
   {
     out << "  <undo>" << std::endl;
-    out << "      " << xml_escape(obj->undo_script().asString()) << std::endl;
-#warning FIXME line above
+    out << "  <![CDATA[" << std::endl;
+  
+  // read script
+    infile.open(obj->undo_script().asString().c_str());
+    while (infile.good())
+      out << (char) infile.get();
+    infile.close();
+  
+    out << "  ]]>" << std::endl;
     out << "  </undo>" << std::endl;
+    infile.close();
   }
   out << "</script>" << std::endl;
   return out.str();

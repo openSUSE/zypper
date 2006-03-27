@@ -29,21 +29,21 @@ namespace zypp
 
     /** Default ctor */
     XMLScriptImpl::XMLScriptImpl()
-    {}
+    {
+      _do_script = TmpFile( TmpPath::defaultLocation(), "zypp-xmlstore-do-script-");
+      _undo_script = TmpFile( TmpPath::defaultLocation(), "zypp-xmlstore-undo-script-");
+    }
+    
     /** Dtor */
     XMLScriptImpl::~XMLScriptImpl()
     {}
 
     Pathname XMLScriptImpl::do_script() const {
-	return Pathname();
-#warning FIXME
-//      return _do_script;
+      return _do_script.path();
     }
 
     Pathname XMLScriptImpl::undo_script() const {
-	return Pathname();
-#warning FIXME
-//      return _undo_script;
+        return _undo_script.path();
     }
 
     bool XMLScriptImpl::undo_available() const {

@@ -12,7 +12,10 @@
 #ifndef ZYPP_STORE_XMLSCRIPTIMPL_H
 #define ZYPP_STORE_XMLSCRIPTIMPL_H
 
+#include "zypp/TmpPath.h"
 #include "zypp/detail/ScriptImplIf.h"
+
+using namespace zypp::filesystem;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -39,11 +42,9 @@ namespace zypp
       Pathname undo_script() const;
       /** Check whether script to undo the change is available */
       virtual bool undo_available() const;
-
-      /** The script to perform the change */
-      std::string _do_script;
-      /** The script to undo the change */
-      std::string _undo_script;
+      
+      TmpFile _do_script;
+      TmpFile _undo_script;
     };
     ///////////////////////////////////////////////////////////////////
 

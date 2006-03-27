@@ -44,6 +44,7 @@
 
 #include <list>
 
+#include <zypp/TmpPath.h>
 #include <zypp/ZYppFactory.h>
 #include <zypp/ZYpp.h>
 #include <zypp/PathInfo.h>
@@ -770,8 +771,16 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
   try
   {
     detail::ResImplTraits<XMLScriptImpl>::Ptr impl(new XMLScriptImpl());
-    impl->_do_script = parsed.do_script;
-    impl->_undo_script = parsed.undo_script;
+    
+    ofstream file;
+    file.open(impl->_do_script.path().asString().c_str());
+    file << parsed.do_script;;
+    file.close();
+    
+    file.open(impl->_undo_script.path().asString().c_str());
+    file << parsed.undo_script;;
+    file.close();
+    
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch, createDependencies(parsed, ResTraits<Script>::kind));
     Script::Ptr script = detail::makeResolvableFromImpl( dataCollect, impl );
@@ -780,6 +789,11 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
   catch (const Exception & excpt_r)
   {
     ERR << excpt_r << endl;
+    throw "Cannot create script object";
+  }
+  catch (const std::exception & excpt_r)
+  {
+    ERR << excpt_r.what() << endl;
     throw "Cannot create script object";
   }
 }
