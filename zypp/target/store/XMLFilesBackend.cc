@@ -49,7 +49,7 @@
 #include <zypp/ZYpp.h>
 #include <zypp/PathInfo.h>
 
-#include <zypp/target/store/xml/XMLSourceCacheParser.h>
+#include "zypp/parser/xmlstore/XMLSourceCacheParser.h"
 
 #include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
 #include "boost/filesystem/fstream.hpp"    // ditto
@@ -1026,7 +1026,7 @@ XMLFilesBackend::storedSources() const
     //sources.insert( sourceDataFromCacheFile( source_p + "/" + dir_itr->leaf() ) );
     std::string full_path = (source_p / dir_itr->leaf()).string();
     std::ifstream anIstream(full_path.c_str());
-    XMLSourceCacheParser iter(anIstream, "");
+    zypp::parser::xmlstore::XMLSourceCacheParser iter(anIstream, "");
     for (; ! iter.atEnd(); ++iter) {
       PersistentStorage::SourceData data = **iter;
       sources.push_back(data);
