@@ -35,6 +35,7 @@
 #include "zypp/parser/xmlstore/XMLProductParser.h"
 #include "zypp/parser/xmlstore/XMLPatternParser.h"
 #include "zypp/parser/xmlstore/XMLPatchParser.h"
+#include "zypp/parser/xmlstore/XMLLanguageParser.h"
 
 #include <iostream>
 #include <fstream>
@@ -110,6 +111,7 @@ XMLFilesBackend::XMLFilesBackend(const Pathname &root) : Backend(root)
   d->kinds.insert(ResTraits<zypp::Selection>::kind);
   d->kinds.insert(ResTraits<zypp::Product>::kind);
   d->kinds.insert(ResTraits<zypp::Pattern>::kind);
+  d->kinds.insert(ResTraits<zypp::Language>::kind);
 
   // types of resolvables stored (supported)
   d->kinds_flags.insert(ResTraits<zypp::Package>::kind);
@@ -119,6 +121,7 @@ XMLFilesBackend::XMLFilesBackend(const Pathname &root) : Backend(root)
   d->kinds_flags.insert(ResTraits<zypp::Selection>::kind);
   d->kinds_flags.insert(ResTraits<zypp::Product>::kind);
   d->kinds_flags.insert(ResTraits<zypp::Pattern>::kind);
+  d->kinds_flags.insert(ResTraits<zypp::Language>::kind);
 
 
   // check if the db exists
@@ -564,6 +567,15 @@ std::list<ResObject::Ptr> XMLFilesBackend::resolvablesFromFile( std::string file
     for (; !iter.atEnd(); ++iter)
     {
       resolvables.push_back(createPattern(**iter));
+      break;
+    }
+  }
+  else if ( kind == ResTraits<zypp::Language>::kind )
+  {
+    XMLLanguageParser iter(res_file,"");
+    for (; !iter.atEnd(); ++iter)
+    {
+      resolvables.push_back(createLanguage(**iter));
       break;
     }
   }
