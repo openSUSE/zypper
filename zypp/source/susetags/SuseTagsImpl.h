@@ -86,8 +86,20 @@ namespace zypp
 	void provideProducts(Source_Ref source_r, ResStore& store);
 	void providePackages(Source_Ref source_r, ResStore& store);
 	void provideSelections(Source_Ref source_r, ResStore& store);
+        void provideSelection(Source_Ref source_r, ResStore& store);
 	void providePatterns(Source_Ref source_r, ResStore& store);
 	
+         /**
+         * verify media mode (use the new META tags)
+          */
+        bool verifyChecksumsMode();
+        
+        /** 
+         * Verify file checksum
+         * \throw EXCEPTION on verification file
+         */
+        void verifyFile( const Pathname &path, const std::string &key);
+        
         unsigned _media_count;
 	
         Pathname _descr_dir;
@@ -96,7 +108,12 @@ namespace zypp
         
         std::string _vendor;
         std::string _media_id;
+        /**
+         * pointer to the product implementation
+         * we need it to access the checksums if we are in verify mode
+         */
         detail::ResImplTraits<SuseTagsProductImpl>::Ptr _prodImpl;
+       
       };
       ///////////////////////////////////////////////////////////////////
 

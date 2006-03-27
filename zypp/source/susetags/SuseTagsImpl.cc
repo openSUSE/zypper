@@ -15,6 +15,8 @@
 #include "zypp/base/Exception.h"
 
 #include "zypp/PathInfo.h"
+#include "zypp/Digest.h"
+#include "zypp/CheckSum.h"
 
 #include "zypp/source/susetags/SuseTagsImpl.h"
 #include "zypp/source/susetags/PackagesParser.h"
@@ -77,6 +79,8 @@ namespace zypp
         Pathname descr_src = provideDirTree(_descr_dir);
         Pathname media_src = provideDirTree("media.1");
         Pathname content_src = provideFile("/content");
+        Pathname content_src_asc = provideFile("/content.asc");
+        Pathname content_src_key = provideFile("/content.key");
 
         // get the list of cache keys
         std::list<std::string> files;
@@ -112,6 +116,10 @@ namespace zypp
           MIL << "cached descr directory" << std::endl;
           filesystem::copy(content_src, cache_dir_r + "DATA/content");
           MIL << "cached content file" << std::endl;
+          filesystem::copy(content_src_asc, cache_dir_r + "DATA/content.asc");
+          MIL << "cached content file signature" << std::endl;
+          filesystem::copy(content_src_key, cache_dir_r + "DATA/content.key");
+          MIL << "cached content file signature key" << std::endl;
         }
 
         if (0 != assert_dir((cache_dir_r + "MEDIA"), 0700))
@@ -146,6 +154,11 @@ namespace zypp
         return exists;
       }
 
+      bool SuseTagsImpl::verifyChecksumsMode()
+      {
+        return ! _prodImpl->_descr_files_checksums.empty();
+      }
+      
       void SuseTagsImpl::factoryInit()
       {
         media::MediaManager media_mgr;
@@ -366,11 +379,47 @@ namespace zypp
         }
       }
 
+      void SuseTagsImpl::verifyFile( const Pathname &path, const std::string &key)
+      {
+        // for old products, we dont check anything.
+        if ( verifyChecksumsMode() )
+        {
+          MIL << "Going to check " << path << " file checksum" << std::endl;
+          std::ifstream file(path.asString().c_str());
+          if (!file) {
+            ZYPP_THROW (Exception( "Can't open " + path.asString() ) );
+          }  
+          
+          // get the checksum for that file.
+          CheckSum checksum = _prodImpl->_descr_files_checksums[key];
+          if (checksum.empty())
+          {
+            ZYPP_THROW (Exception( "Error, Missing checksum for " + path.asString() ) ); 
+          }
+          else
+          {
+            std::string found_checksum = Digest::digest( checksum.type(), file);
+            if ( found_checksum != checksum.checksum() )
+            {
+              ZYPP_THROW (Exception( "Corrupt source, Expected " + checksum.type() + " " + checksum.checksum() + ", got " + found_checksum + " for " + path.asString() ) );
+            }
+            else
+            {
+              MIL << path << " checksum ok (" << checksum.type() << " " << checksum.checksum() << ")" << std::endl;
+              return;
+            }
+          }
+        }
+      }
+      
       void SuseTagsImpl::providePackages(Source_Ref source_r, ResStore &store)
       {
         bool cache = cacheExists();
 
         Pathname p = cache ? _descr_dir + "packages" : provideFile( _descr_dir + "packages");
+        
+        verifyFile( p, "packages");
+        
         DBG << "Going to parse " << p << endl;
         PkgContent content( parsePackages( source_r, this, p ) );
 
@@ -399,6 +448,7 @@ namespace zypp
             {
               MIL << packages_lang_name << " found" << std::endl;
               DBG << "Going to parse " << p << endl;
+              verifyFile( p, packages_lang_name);
               parsePackagesLang( p, lang, content );
               trymore = false;
             }
@@ -418,6 +468,7 @@ namespace zypp
         try
         {
           p = cache ? _descr_dir + "packages.DU" : provideFile( _descr_dir + "packages.DU");
+          verifyFile( p, "packages.DU");
           du = parsePackagesDiskUsage(p);
         }
         catch (Exception & excpt_r)
@@ -455,6 +506,8 @@ namespace zypp
 
         if (file_found)
         {
+          verifyFile( p, "selections");
+          
           std::ifstream sels (p.asString().c_str());
 
           while (sels && !sels.eof())
@@ -465,7 +518,9 @@ namespace zypp
             if (selfile.empty() ) continue;
               DBG << "Going to parse selection " << selfile << endl;
 
-              Pathname file = cache ? _descr_dir + selfile : provideFile( _descr_dir + selfile);
+            Pathname file = cache ? _descr_dir + selfile : provideFile( _descr_dir + selfile);
+            verifyFile( file, selfile);
+            
             MIL << "Selection file to parse " << file << endl;
             Selection::Ptr sel( parseSelection( source_r, file ) );
 
@@ -504,6 +559,7 @@ namespace zypp
 
         if ( file_found )
         {
+          verifyFile( p, "patterns");
           std::ifstream pats (p.asString().c_str());
 
           while (pats && !pats.eof())
@@ -516,8 +572,9 @@ namespace zypp
             DBG << "Going to parse pattern " << patfile << endl;
 
             Pathname file = cache ? _descr_dir + patfile : provideFile( _descr_dir + patfile);
+            verifyFile( file, patfile);
+            
             MIL << "Pattern file to parse " << file << endl;
-
             Pattern::Ptr pat( parsePattern( source_r, file ) );
 
             if (pat)
