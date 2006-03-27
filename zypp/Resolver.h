@@ -84,6 +84,7 @@ namespace zypp
 
     /*
      * Undo solver changes done in resolvePool()
+     * Throwing away all ignored dependencies.
      */
     void undo( void );
 
