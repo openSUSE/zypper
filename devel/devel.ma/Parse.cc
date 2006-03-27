@@ -32,6 +32,7 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/ResPoolProxy.h"
 #include "zypp/ResPoolProxy.h"
+#include "zypp/target/rpm/RpmDb.h"
 
 using namespace std;
 using namespace zypp;
@@ -41,8 +42,17 @@ using namespace zypp::functor;
 ///////////////////////////////////////////////////////////////////
 
 static const Pathname sysRoot( "/Local/ROOT" );
-//static const Url      instSrc( "dir:/Local/SLES10" );
-static const Url      instSrc( "dir:/Local/FACTORY" );
+static const Url      instSrc( "dir:/Local/SLES10" );
+//static const Url      instSrc( "dir:/Local/FACTORY" );
+
+///////////////////////////////////////////////////////////////////
+
+namespace container
+{
+  template<class _Tp>
+    bool isIn( const std::set<_Tp> & cont, const typename std::set<_Tp>::value_type & val )
+    { return cont.find( val ) != cont.end(); }
+}
 
 ///////////////////////////////////////////////////////////////////
 
@@ -124,6 +134,27 @@ template<>
     }
   };
 
+set<PoolItem> getAvailable()
+{
+  set<PoolItem> ret;
+  ZYpp::LocaleSet rl( getZYpp()->getRequestedLocales() );
+
+  ResPool mpool( getZYpp()->pool() );
+  for ( ResPool::byKind_iterator it = mpool.byKindBegin<Language>();
+        it != mpool.byKindEnd<Language>(); ++it )
+    {
+      if ( container::isIn( rl, Locale((*it)->name()) ) )
+        {
+          ret.insert( *it );
+        }
+    }
+
+  WAR << rl << endl;
+  ERR << ret << endl;
+  return ret;
+}
+
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -138,12 +169,11 @@ int main( int argc, char * argv[] )
   if (argc >= 2 )
     infile = argv[1];
 
-  if ( 0 ) {
+  if ( 1 ) {
     Measure x( "initTarget " + sysRoot.asString() );
     getZYpp()->initTarget( sysRoot );
   }
 
-#if 0
   SourceManager::sourceManager()->restore( sysRoot );
   if ( SourceManager::sourceManager()->allSources().empty() )
     {
@@ -151,10 +181,38 @@ int main( int argc, char * argv[] )
       SourceManager::sourceManager()->addSource( src );
       SourceManager::sourceManager()->store( sysRoot, true );
     }
-#endif
 
-  Source_Ref src( createSource( instSrc ) );
+  Source_Ref src( *SourceManager::sourceManager()->Source_begin() );
+  const std::list<Pathname> srcKeys( src.publicKeys() );
+  MIL << src << endl;
+  DBG << srcKeys << endl;
 
+  target::rpm::RpmDb rpm;
+  rpm.initDatabase( sysRoot );
+  std::set<Edition> rpmKeys( rpm.pubkeys() );
+  MIL << rpm << endl;
+  DBG << rpmKeys << endl;
+
+  ResPool pool( getZYpp()->pool() );
+  getZYpp()->addResolvables( src.resolvables() );
+  SEC << pool << endl;
+
+  getAvailable();
+
+  ZYpp::LocaleSet req;
+  req.insert( Locale("de") );
+  req.insert( Locale("de_DE") );
+  req.insert( Locale("en") );
+  getZYpp()->setRequestedLocales( req );
+  getAvailable();
+
+  req.clear();
+  req.insert( Locale("de_DE") );
+  getZYpp()->setRequestedLocales( req );
+  getAvailable();
+
+
+  rpm.closeDatabase();
 #if 0
   ResPoolManager pool;
   pool.insert( src.resolvables().begin(), src.resolvables().end() );

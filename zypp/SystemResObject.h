@@ -55,6 +55,7 @@ namespace zypp
     typedef TraitsType::PtrType           Ptr;
     typedef TraitsType::constPtrType      constPtr;
 
+  public:
     /** Default SystemResObject instance. */
     static Ptr instance();
 

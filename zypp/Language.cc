@@ -34,12 +34,31 @@ namespace zypp
   Language::~Language()
   {}
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	Language interface forwarded to implementation
-  //
-  ///////////////////////////////////////////////////////////////////
+  Language::Ptr Language::installedInstance( const Locale & locale_r )
+  {
+    static std::map<Locale,Ptr> _ptrmap;
+    Ptr ret( _ptrmap[locale_r] );
+    if ( ! ret )
+      {
+        NVRAD dataCollect( locale_r.code() );
+        detail::ResImplTraits<detail::LanguageImplIf>::Ptr langImpl;
+        ret = _ptrmap[locale_r] = detail::makeResolvableAndImpl( dataCollect, langImpl );
+      }
+    return ret;
+  }
 
+  Language::Ptr Language::availableInstance( const Locale & locale_r )
+  {
+    static std::map<Locale,Ptr> _ptrmap;
+    Ptr ret( _ptrmap[locale_r] );
+    if ( ! ret )
+      {
+        NVRAD dataCollect( locale_r.code() );
+        detail::ResImplTraits<detail::LanguageImplIf>::Ptr langImpl;
+        ret = _ptrmap[locale_r] = detail::makeResolvableAndImpl( dataCollect, langImpl );
+      }
+    return ret;
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

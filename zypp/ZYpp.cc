@@ -119,12 +119,6 @@ namespace zypp
   ZYpp::LocaleSet ZYpp::getRequestedLocales() const
   { return _pimpl->getRequestedLocales(); }
 
-  void ZYpp::setPossibleLocales( const LocaleSet & locales_r )
-  { _pimpl->setPossibleLocales( locales_r ); }
-
-  ZYpp::LocaleSet ZYpp::getPossibleLocales() const
-  { return _pimpl->getPossibleLocales(); }
-
   ZYpp::LocaleSet ZYpp::getAvailableLocales() const
   { return _pimpl->getAvailableLocales(); }
 

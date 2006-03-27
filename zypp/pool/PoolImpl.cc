@@ -13,6 +13,7 @@
 //#include "zypp/base/Logger.h"
 
 #include "zypp/pool/PoolImpl.h"
+#include "zypp/pool/PoolStats.h"
 #include "zypp/CapSet.h"
 
 using std::endl;
@@ -21,10 +22,10 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-    std::ostream & operator<<( std::ostream & str, const CapAndItem & obj )
-    {
-	return str << "{" << obj.cap << ", " << obj.item << "}";
-    }
+  std::ostream & operator<<( std::ostream & str, const CapAndItem & obj )
+  {
+    return str << "{" << obj.cap << ", " << obj.item << "}";
+  }
 
   ///////////////////////////////////////////////////////////////////
   namespace pool
@@ -175,6 +176,12 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
+    //	Class PoolImpl::PoolImpl
+    //
+    ///////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    //
     //	METHOD NAME : PoolImpl::PoolImpl
     //	METHOD TYPE : Ctor
     //
@@ -189,7 +196,6 @@ namespace zypp
     PoolImpl::~PoolImpl()
     {}
 
-
     /******************************************************************
     **
     **	FUNCTION NAME : operator<<
@@ -197,9 +203,10 @@ namespace zypp
     */
     std::ostream & operator<<( std::ostream & str, const PoolImpl & obj )
     {
-      return str << "PoolImpl " << obj.size();
+      PoolStats stats;
+      std::for_each( obj.begin(), obj.end(), functor::functorRef<void,ResObject::constPtr>(stats) );
+      return str << "ResPool " << stats;
     }
-
 
     /******************************************************************
     **

@@ -73,15 +73,15 @@ namespace zypp
 
     void setPartitions(const DiskUsageCounter::MountPointSet &mp);
 
-  public: 
+  public:
     /**
      * Tries to reset the ZYpp instance. It discards the current
      * status without too much house keeping. Might be dangerous to use.
      *
      * \throws Exception
      */
-    void reset(); 
-  
+    void reset();
+
   public:
     /**
      * \throws Exception
@@ -134,16 +134,6 @@ namespace zypp
     /** */
     LocaleSet getRequestedLocales() const;
 
-    /** Set the possible locales.
-     * Languages to be possible for choosing.
-     * This is only useful to restrict the AvailableLocales(),
-     *  adding new locales will be a no-op since there won't be
-     *  any package supporting this. See getAvailableLocales.
-    */
-    void setPossibleLocales( const LocaleSet & locales_r );
-    /** */
-    LocaleSet getPossibleLocales() const;
-
     /**
      * Get the set of available locales.
      * This is computed from the package data so it actually
@@ -161,7 +151,7 @@ namespace zypp
     Pathname homePath() const;
     /** set the home, if you need to change it */
     void setHomePath( const Pathname & path );
-    
+
     /** Get the system architecture.   */
     Arch architecture() const;
     /** Set the system architecture.

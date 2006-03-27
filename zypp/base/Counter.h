@@ -6,39 +6,44 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/LanguageImpl.cc
+/** \file	zypp/base/Counter.h
  *
 */
+#ifndef ZYPP_BASE_COUNTER_H
+#define ZYPP_BASE_COUNTER_H
 
-#include "zypp/detail/LanguageImpl.h"
-
-using namespace std;
+#include <iosfwd>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
   ///////////////////////////////////////////////////////////////////
-  namespace detail
-  { /////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : LanguageImpl
-    //
-    ///////////////////////////////////////////////////////////////////
-
-    /** Default ctor */
-    LanguageImpl::LanguageImpl( Locale loc )
-	: LanguageImplIf( TranslatedText( loc.language().name(), loc ) )
+  //
+  //	CLASS NAME : Counter
+  //
+  /** Integral type with initial value \c 0.
+  */
+  template<class _IntT>
+    class Counter
     {
-    }
-    /** Dtor */
-    LanguageImpl::~LanguageImpl()
-    {}
+    public:
+      Counter( _IntT value_r = _IntT(0) )
+      : _value( _IntT( value_r ) )
+      {}
 
-    /////////////////////////////////////////////////////////////////
-  } // namespace detail
+      operator _IntT &()
+      { return _value; }
+
+      operator const _IntT &() const
+      { return _value; }
+
+    public:
+      _IntT _value;
+    };
   ///////////////////////////////////////////////////////////////////
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_BASE_COUNTER_H

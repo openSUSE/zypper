@@ -56,7 +56,7 @@ namespace zypp
         _ptr = detail::makeResolvableAndImpl( dataCollect, sysImpl );
       }
 
-    return _ptr ;
+    return _ptr;
   }
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

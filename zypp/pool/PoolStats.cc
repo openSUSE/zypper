@@ -6,42 +6,41 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/detail/LanguageImpl.h
+/** \file	zypp/pool/PoolStats.cc
  *
 */
-#ifndef ZYPP_DETAIL_LANGUAGEIMPL_H
-#define ZYPP_DETAIL_LANGUAGEIMPL_H
+#include <iostream>
+//#include "zypp/base/Logger.h"
 
-#include "zypp/Locale.h"
-#include "zypp/detail/LanguageImplIf.h"
+#include "zypp/pool/PoolStats.h"
+
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace detail
+  namespace pool
   { /////////////////////////////////////////////////////////////////
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : LanguageImpl
-    //
-    /** Class representing a locale (== name of resolvable) */
-    class LanguageImpl : public LanguageImplIf
+    /******************************************************************
+    **
+    **	FUNCTION NAME : operator<<
+    **	FUNCTION TYPE : std::ostream &
+    */
+    std::ostream & operator<<( std::ostream & str, const PoolStats & obj )
     {
-    public:
-      /** Default ctor */
-      LanguageImpl( Locale loc );
-      /** Dtor */
-      virtual ~LanguageImpl();
-
-    };
-    ///////////////////////////////////////////////////////////////////
+      str << "Total: " << obj._total;
+      for( PoolStats::KindMap::const_iterator it = obj._perKind.begin(); it != obj._perKind.end(); ++it )
+        {
+          str << endl << "  " << it->first << ":\t" << it->second;
+        }
+      return str;
+    }
 
     /////////////////////////////////////////////////////////////////
-  } // namespace detail
+  } // namespace pool
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_DETAIL_LANGUAGEIMPL_H

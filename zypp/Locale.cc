@@ -78,30 +78,16 @@ namespace zypp
     }
 
     Locale fallback() const
-    {  
-      // blah_BLAH
+    {
       if ( _country.hasCode() )
-      {
-        return Locale(_language.code());
-      }
-      else
-      {
-        if (_language.code() == "en" )
-        { // no fallback for english
-          return Locale();
-        }
-        else if ( (_language.code() == "") )
-        { // for empty locale, we give up
-          return Locale();
-        }
-        else
-        { // for all others, english
-          return Locale("en");
-        }
-      }
-      return Locale();        
+        return _language;
+
+      if ( _language.hasCode() && _language != LanguageCode("en") )
+        return LanguageCode("en");
+
+      return Locale();
     }
-    
+
   private:
 
     LanguageCode _language;

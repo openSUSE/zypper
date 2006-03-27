@@ -25,6 +25,7 @@
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
 #include "zypp/Package.h"
+#include "zypp/Language.h"
 
 #include <zypp/SourceManager.h>
 #include <zypp/SourceFactory.h>
@@ -129,6 +130,7 @@ template<>
     }
   };
 
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -139,40 +141,9 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "xxx" );
   INT << "===[START]==========================================" << endl;
 
-  string infile( "p" );
-  if (argc >= 2 )
-    infile = argv[1];
-
-  if ( 0 ) {
-    Measure x( "initTarget " + sysRoot.asString() );
-    getZYpp()->initTarget( sysRoot );
-  }
-
-  SourceManager::sourceManager()->restore( sysRoot );
-  if ( 0 && SourceManager::sourceManager()->allSources().empty() )
-    {
-      Source_Ref src( createSource( instSrc ) );
-      SourceManager::sourceManager()->addSource( src );
-      //SourceManager::sourceManager()->store( sysRoot, true );
-    }
-
-  target::rpm::RpmDb rpm;
-  rpm.initDatabase( sysRoot );
-  std::set<Edition> pubkeys( rpm.pubkeys() );
-  USR << "RpmDb::pubkeys " << pubkeys << endl;
-
-  Source_Ref src( createSource( instSrc ) );
-  std::list<Pathname> publicKeys( src.publicKeys() );
-  USR << "Source::pubkeys " << publicKeys << endl;
-
-  ResPool pool( getZYpp()->pool() );
-  getZYpp()->addResolvables( src.resolvables() );
-
-  rstats( pool.begin(), pool.end() );
-  //std::for_each( query.begin(), query.end(), Print<PoolItem>() );
-
-
-  rpm.closeDatabase();
+  DBG << Language::availableInstance( Locale() );
+  DBG << Language::availableInstance( Locale("de") );
+  DBG << Language::availableInstance( Locale("de_DE") );
 
   INT << "===[END]============================================" << endl << endl;
   return 0;

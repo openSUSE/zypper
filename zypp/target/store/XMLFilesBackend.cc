@@ -30,7 +30,6 @@
 #include "zypp/target/store/xml/XMLProductImpl.h"
 #include "zypp/target/store/xml/XMLPatternImpl.h"
 #include "zypp/target/store/xml/XMLAtomImpl.h"
-#include "zypp/target/store/xml/XMLLanguageImpl.h"
 
 #include "zypp/parser/xmlstore/XMLProductParser.h"
 #include "zypp/parser/xmlstore/XMLPatternParser.h"
@@ -215,10 +214,10 @@ XMLFilesBackend::initBackend()
 {
   Pathname topdir = d->root + Pathname(ZYPP_DB_DIR);
   DBG << "Creating directory structure " << topdir << std::endl;
-  
+
   if (0 != assert_dir(topdir, 0700))
       ZYPP_THROW(Exception("Cannot create XMLBackend db directory" + topdir.asString()));
-  
+
   // create dir for resolvables
   std::set<Resolvable::Kind>::const_iterator it_kinds;
   for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
@@ -377,7 +376,7 @@ XMLFilesBackend::doesObjectHasFlag( ResObject::constPtr resolvable, const std::s
 // Named Flags API
 ////////////////////////////////////////////////////////
 
-void 
+void
 XMLFilesBackend::setFlag( const std::string &key, const std::string &flag )
 {
   std::set<std::string> _flags = flags(key);
@@ -443,7 +442,7 @@ XMLFilesBackend::writeFlagsInFile( const std::string &filename, const std::set<s
   catch( std::exception &e )
   {
     //ZYPP_RETHROW(e);
-  }  
+  }
 }
 
 std::set<std::string>
@@ -458,7 +457,7 @@ XMLFilesBackend::flagsFromFile( const std::string &filename ) const
   if (!file) {
     ZYPP_THROW (Exception( "Can't open " + filename ) );
   }
-  
+
   std::string buffer;
   while(file && !file.eof())
   {
@@ -540,7 +539,7 @@ std::list<ResObject::Ptr> XMLFilesBackend::resolvablesFromFile( std::string file
       Patch::AtomList atoms = patch->atoms();
       for (Patch::AtomList::iterator at = atoms.begin(); at != atoms.end(); at++)
         resolvables.push_back(*at);
-      
+
       break;
     }
   }
@@ -673,9 +672,9 @@ XMLFilesBackend::createPatch( const zypp::parser::xmlstore::XMLPatchData & parse
                        createDependencies(parsed, ResTraits<Patch>::kind) );
     Patch::Ptr patch = detail::makeResolvableFromImpl( dataCollect, impl );
     CapFactory _f;
-    
+
     //MIL << parsed.atoms.size() << " to process" << std::endl;
-    
+
     // now process the atoms
     ResObject::Ptr atom;
     for (std::list<XMLPatchAtomData_Ptr >::const_iterator it = parsed.atoms.begin(); it != parsed.atoms.end(); it++)
@@ -689,7 +688,7 @@ XMLFilesBackend::createPatch( const zypp::parser::xmlstore::XMLPatchData & parse
           // dont know if the package is in the pool or not. It is different to Scripts and Messages
           // that are actually contributed to the Patch itself, instead we create and atom, make
           // the patch require the atom, the atom require and freshens the package.
-          
+
           // get the parsed patch atom data
           XMLPatchAtomData_Ptr atom_data = dynamic_pointer_cast<XMLPatchAtomData>(*it);
           atom = createAtom(*atom_data);
@@ -732,7 +731,7 @@ XMLFilesBackend::createAtom( const zypp::parser::xmlstore::XMLPatchAtomData & pa
   try
   {
     detail::ResImplTraits<XMLAtomImpl>::Ptr impl(new XMLAtomImpl());
-    
+
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch, createDependencies(parsed, ResTraits<Atom>::kind) );
     Atom::Ptr atom = detail::makeResolvableFromImpl( dataCollect, impl);
@@ -742,7 +741,7 @@ XMLFilesBackend::createAtom( const zypp::parser::xmlstore::XMLPatchAtomData & pa
   {
     ERR << excpt_r << endl;
     throw "Cannot create atom object";
-  }  
+  }
 }
 
 Message::Ptr
@@ -771,16 +770,16 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
   try
   {
     detail::ResImplTraits<XMLScriptImpl>::Ptr impl(new XMLScriptImpl());
-    
+
     ofstream file;
     file.open(impl->_do_script.path().asString().c_str());
     file << parsed.do_script;;
     file.close();
-    
+
     file.open(impl->_undo_script.path().asString().c_str());
     file << parsed.undo_script;;
     file.close();
-    
+
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch, createDependencies(parsed, ResTraits<Script>::kind));
     Script::Ptr script = detail::makeResolvableFromImpl( dataCollect, impl );
@@ -803,17 +802,7 @@ XMLFilesBackend::createLanguage( const zypp::parser::xmlstore::XMLLanguageData &
 {
   try
   {
-    detail::ResImplTraits<XMLLanguageImpl>::Ptr impl(new XMLLanguageImpl());
-    impl->_summary = parsed.summary;
-    impl->_description = parsed.description;
-    
-    Arch arch(parsed.arch);
-    if (arch.empty())
-      arch = Arch_noarch;
-    
-    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies(parsed, ResTraits<Language>::kind) );
-    Language::Ptr language = detail::makeResolvableFromImpl( dataCollect, impl );
-    return language;
+    return Language::installedInstance( Locale(parsed.name) );
   }
   catch (const Exception & excpt_r)
   {
@@ -821,7 +810,7 @@ XMLFilesBackend::createLanguage( const zypp::parser::xmlstore::XMLLanguageData &
     throw "Cannot create language object";
   }
 }
-    
+
 
 Product::Ptr
 XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & parsed ) const
@@ -835,7 +824,7 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
     #warning "FIX when YUM parser uses TranslatedString"
     impl->_summary = parsed.summary;
     impl->_description = parsed.description;
-    
+
     if ( parsed.releasenotesurl.size() > 0 )
       impl->_release_notes_url = parsed.releasenotesurl;
     else
@@ -956,7 +945,7 @@ XMLFilesBackend::createDependencies( const zypp::parser::xmlstore::XMLResObjectD
   {
     _deps[Dep::REQUIRES].insert(createCapability(*it, my_kind));
   }
-  
+
   for (std::list<XMLDependency>::const_iterator it = parsed.prerequires.begin(); it != parsed.prerequires.end(); it++)
   {
     _deps[Dep::PREREQUIRES].insert(createCapability(*it, my_kind));

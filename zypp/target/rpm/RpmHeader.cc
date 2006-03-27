@@ -27,12 +27,18 @@
 
 using namespace std;
 
+#ifndef RPMTAG_ENHANCESNAME
+#define RPMTAG_ENHANCESNAME     1159
+#define RPMTAG_ENHANCESFLAGS    1160
+#define RPMTAG_ENHANCESVERSION  1161
+#endif
+
 namespace zypp {
   namespace target {
     namespace rpm {
 
       ///////////////////////////////////////////////////////////////////
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -45,7 +51,7 @@ namespace zypp {
           : BinHeader( h_r )
       {
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -56,7 +62,7 @@ namespace zypp {
           : BinHeader( rhs )
       {
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -68,7 +74,7 @@ namespace zypp {
       RpmHeader::~RpmHeader()
       {
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -83,7 +89,7 @@ namespace zypp {
           ERR << "Not a file: " << file << endl;
           return (RpmHeader*)0;
         }
-      
+
         FD_t fd = ::Fopen( file.asString().c_str(), "r.ufdio" );
         if ( fd == 0 || ::Ferror(fd) ) {
           ERR << "Can't open file for reading: " << file << " (" << ::Fstrerror(fd) << ")" << endl;
@@ -91,7 +97,7 @@ namespace zypp {
             ::Fclose( fd );
           return (RpmHeader*)0;
         }
-      
+
         rpmts ts = ::rpmtsCreate();
         unsigned vsflag = RPMVSF_DEFAULT;
         if ( verification_r & NODIGEST )
@@ -99,26 +105,26 @@ namespace zypp {
         if ( verification_r & NOSIGNATURE )
           vsflag |= _RPMVSF_NOSIGNATURES;
         ::rpmtsSetVSFlags( ts, rpmVSFlags(vsflag) );
-      
+
         Header nh = 0;
         int res = ::rpmReadPackageFile( ts, fd, path_r.asString().c_str(), &nh );
-      
+
         ts = ::rpmtsFree(ts);
-      
+
         ::Fclose( fd );
-      
+
         if ( ! nh ) {
           WAR << "Error reading header from " << path_r << " error(" << res << ")" << endl;
           return (RpmHeader*)0;
         }
-      
+
         RpmHeader::constPtr h( new RpmHeader( nh ) );
         headerFree( nh ); // clear the reference set in ReadPackageFile
-      
+
         MIL << h << " from " << path_r << endl;
         return h;
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -135,8 +141,8 @@ namespace zypp {
 		<< (tag_release().empty()?"":(string("-")+tag_release()))
 		<< ( isSrc() ? ".src}" : "}");
       }
-      
-      
+
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -147,7 +153,7 @@ namespace zypp {
       {
         return has_tag( RPMTAG_SOURCEPACKAGE );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -160,7 +166,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_NAME );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -173,7 +179,7 @@ namespace zypp {
       {
 	return string_val ( RPMTAG_EPOCH );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -186,7 +192,7 @@ namespace zypp {
       {
 	return string_val ( RPMTAG_VERSION );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -199,7 +205,7 @@ namespace zypp {
       {
 	return string_val( RPMTAG_RELEASE );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -219,7 +225,7 @@ namespace zypp {
 	}
 	return Edition();
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -232,7 +238,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_ARCH );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -245,7 +251,7 @@ namespace zypp {
       {
         return int_val( RPMTAG_INSTALLTIME );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -258,7 +264,7 @@ namespace zypp {
       {
         return int_val( RPMTAG_BUILDTIME );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -270,10 +276,10 @@ namespace zypp {
       CapSet RpmHeader::PkgRelList_val( tag tag_r, bool pre, set<string> * freq_r ) const
       {
         CapSet ret;
-      
+
         int_32  kindFlags   = 0;
         int_32  kindVersion = 0;
-      
+
         switch ( tag_r ) {
         case RPMTAG_REQUIRENAME:
           kindFlags   = RPMTAG_REQUIREFLAGS;
@@ -307,26 +313,26 @@ namespace zypp {
 	  return ret;
           break;
         }
-      
+
         stringList names;
         unsigned count = string_list( tag_r, names );
         if ( !count )
           return ret;
-      
+
         intList  flags;
         int_list( kindFlags, flags );
-      
+
         stringList versions;
         string_list( kindVersion, versions );
-      
+
         for ( unsigned i = 0; i < count; ++i ) {
-      
+
           string n( names[i] );
-      
+
           Rel op = Rel::ANY;
           int_32 f  = flags[i];
           string v  = versions[i];
-      
+
           if ( n[0] == '/' ) {
             if ( freq_r ) {
               freq_r->insert( n );
@@ -373,10 +379,10 @@ namespace zypp {
 	    }
 	  }
         }
-      
+
         return ret;
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -389,7 +395,7 @@ namespace zypp {
       {
         return PkgRelList_val( RPMTAG_PROVIDENAME, false, freq_r );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -402,7 +408,7 @@ namespace zypp {
       {
         return PkgRelList_val( RPMTAG_REQUIRENAME, false, freq_r );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -415,7 +421,7 @@ namespace zypp {
       {
         return PkgRelList_val( RPMTAG_REQUIRENAME, true, freq_r );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -428,7 +434,7 @@ namespace zypp {
       {
         return PkgRelList_val( RPMTAG_CONFLICTNAME, false, freq_r );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -441,7 +447,7 @@ namespace zypp {
       {
         return PkgRelList_val( RPMTAG_OBSOLETENAME, false, freq_r );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -454,7 +460,7 @@ namespace zypp {
       {
         return PkgRelList_val( RPMTAG_ENHANCESNAME, false, freq_r );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -471,7 +477,7 @@ namespace zypp {
         return PkgRelList_val( RPMTAG_SUPPLEMENTSNAME, false, freq_r );
 #endif
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -484,7 +490,7 @@ namespace zypp {
       {
         return int_val( RPMTAG_SIZE );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -497,7 +503,7 @@ namespace zypp {
       {
         return int_val( RPMTAG_ARCHIVESIZE );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -510,7 +516,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_SUMMARY );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -523,7 +529,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_DESCRIPTION );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -536,7 +542,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_GROUP );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -549,7 +555,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_VENDOR );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -562,7 +568,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_DISTRIBUTION );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -575,7 +581,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_LICENSE );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -588,7 +594,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_BUILDHOST );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -601,7 +607,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_PACKAGER );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -614,7 +620,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_URL );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -627,7 +633,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_OS );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -640,7 +646,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_PREIN );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -653,7 +659,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_POSTIN );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -666,7 +672,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_PREUN );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -679,7 +685,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_POSTUN );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -692,7 +698,7 @@ namespace zypp {
       {
         return string_val( RPMTAG_SOURCERPM );
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -704,7 +710,7 @@ namespace zypp {
       std::list<std::string> RpmHeader::tag_filenames() const
       {
         std::list<std::string> ret;
-      
+
         stringList basenames;
         if ( string_list( RPMTAG_BASENAMES, basenames ) ) {
           stringList dirnames;
@@ -715,10 +721,10 @@ namespace zypp {
             ret.push_back( dirnames[dirindexes[i]] + basenames[i] );
           }
         }
-      
+
         return ret;
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -730,7 +736,7 @@ namespace zypp {
       std::list<FileInfo> RpmHeader::tag_fileinfos() const
       {
         std::list<FileInfo> ret;
-      
+
         stringList basenames;
         if ( string_list( RPMTAG_BASENAMES, basenames ) ) {
           stringList dirnames;
@@ -790,10 +796,10 @@ namespace zypp {
             ret.push_back( info );
           }
         }
-      
+
         return ret;
       }
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -805,7 +811,7 @@ namespace zypp {
       Changelog RpmHeader::tag_changelog() const
       {
         Changelog ret;
-      
+
         intList times;
         if ( int_list( RPMTAG_CHANGELOGTIME, times ) ) {
           stringList names;
@@ -816,10 +822,10 @@ namespace zypp {
             ret.push_back( ChangelogEntry( times[i], names[i], texts[i] ) );
           }
         }
-      
+
         return ret;
       }
-     
+
       ///////////////////////////////////////////////////////////////////
       //
       //
@@ -837,7 +843,7 @@ namespace zypp {
           string_list( RPMTAG_DIRNAMES, dirnames );
           intList dirindexes;
           int_list( RPMTAG_DIRINDEXES, dirindexes );
-      
+
           intList filedevices;
           int_list( RPMTAG_FILEDEVICES, filedevices );
           intList fileinodes;
@@ -846,7 +852,7 @@ namespace zypp {
           int_list( RPMTAG_FILESIZES, filesizes );
           intList filemodes;
           int_list( RPMTAG_FILEMODES, filemodes );
-      
+
           ///////////////////////////////////////////////////////////////////
           // Create and collect Entries by index. devino_cache is used to
           // filter out hardliks ( different name but same device and inode ).
@@ -857,7 +863,7 @@ namespace zypp {
           for ( unsigned i = 0; i < dirnames.size(); ++i ) {
             entries[i] = DiskUsage::Entry(dirnames[i]);
           }
-      
+
           for ( unsigned i = 0; i < basenames.size(); ++ i ) {
             filesystem::StatMode mode( filemodes[i] );
             if ( mode.isFile() ) {
@@ -869,7 +875,7 @@ namespace zypp {
               // else: hardlink; already counted this device/inode
             }
           }
-      
+
           ///////////////////////////////////////////////////////////////////
           // Crreate and collect by index Entries. DevInoTrace is used to
           // filter out hardliks ( different name but same device and inode ).

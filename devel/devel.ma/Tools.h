@@ -6,7 +6,11 @@
 #include "Measure.h"
 #include "Printing.h"
 
+#include <zypp/base/Counter.h>
+
+#include <zypp/Date.h>
 #include <zypp/ResObject.h>
+#include <zypp/pool/PoolStats.h>
 
 #include <zypp/SourceFactory.h>
 #include <zypp/source/susetags/SuseTagsImpl.h>
@@ -16,39 +20,8 @@ using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 // rstats
-template<class _IntT>
-  struct Counter
-  {
-    Counter()                : _value( _IntT(0) )         {}
-    Counter( _IntT value_r ) : _value( _IntT( value_r ) ) {}
-    operator       _IntT &()       { return _value; }
-    operator const _IntT &() const { return _value; }
 
-    _IntT _value;
-  };
-
-struct Rstats : public std::unary_function<ResObject::constPtr, void>
-{
-  void operator()( ResObject::constPtr ptr )
-  {
-    ++_total;
-    ++_perKind[ptr->kind()];
-  }
-
-  typedef std::map<ResolvableTraits::KindType,Counter<unsigned> > KindMap;
-  Counter<unsigned> _total;
-  KindMap           _perKind;
-};
-
-std::ostream & operator<<( std::ostream & str, const Rstats & obj )
-{
-  str << "Total: " << obj._total;
-  for( Rstats::KindMap::const_iterator it = obj._perKind.begin(); it != obj._perKind.end(); ++it )
-    {
-      str << endl << "  " << it->first << ":\t" << it->second;
-    }
-  return str;
-}
+typedef zypp::pool::PoolStats Rstats;
 
 template<class _Iterator>
   void rstats( _Iterator begin, _Iterator end )
@@ -72,7 +45,7 @@ inline Source_Ref createSource( const Url & url_r )
   Measure x( "createSource: " + url_r.asString() );
   try
     {
-      ret = SourceFactory().createFrom( url_r );
+      ret = SourceFactory().createFrom( url_r, "/", Date::now().asSeconds() );
     }
   catch ( const Exception & )
     {

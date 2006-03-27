@@ -15,7 +15,6 @@ detailinclude_HEADERS = \
 	ResObjectFactory.h	\
 	PackageImplIf.h		\
 	AtomImplIf.h		\
-	LanguageImplIf.h	\
 	SelectionImplIf.h	\
 	PatternImplIf.h		\
 	MessageImplIf.h		\
@@ -33,7 +32,6 @@ detailinclude_HEADERS = \
 	MessageImpl.h		\
 	ScriptImpl.h		\
 	AtomImpl.h		\
-	LanguageImpl.h		\
 	PatchImpl.h		\
 	ProductImpl.h
 ## last group might be removed.
@@ -47,7 +45,6 @@ lib@PACKAGE@_detail_la_SOURCES = \
 	ResObjectImplIf.cc	\
 	PackageImplIf.cc	\
 	AtomImplIf.cc		\
-	LanguageImplIf.cc	\
 	SelectionImplIf.cc	\
 	PatternImplIf.cc	\
 	MessageImplIf.cc	\
@@ -56,8 +53,6 @@ lib@PACKAGE@_detail_la_SOURCES = \
 	ProductImplIf.cc	\
 	SrcPackageImplIf.cc	\
 	\
-	\
-	\
 	PackageImpl.cc		\
 	SrcPackageImpl.cc	\
 	SelectionImpl.cc	\
@@ -65,9 +60,7 @@ lib@PACKAGE@_detail_la_SOURCES = \
 	MessageImpl.cc		\
 	ScriptImpl.cc		\
 	AtomImpl.cc		\
-	LanguageImpl.cc		\
 	PatchImpl.cc		\
 	ProductImpl.cc
-## last group might be removed.
 
 ## ##################################################

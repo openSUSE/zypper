@@ -16,13 +16,12 @@
 //#include "zypp/base/Logger.h"
 
 #include "zypp/zypp_detail/ZYppImpl.h"
-#include "zypp/detail/LanguageImpl.h"
 #include "zypp/detail/ResImplTraits.h"
 #include "zypp/solver/detail/Helper.h"
 #include "zypp/NVRAD.h"
 #include "zypp/Language.h"
-#include "zypp/LanguageCode.h"
 #include "zypp/DiskUsageCounter.h"
+#include "zypp/NameKindProxy.h"
 
 using std::endl;
 
@@ -66,9 +65,9 @@ namespace zypp
     : _textLocale( defaultTextLocale() )
     , _pool()
     , _sourceFeed( _pool )
+    , _target(0)
     , _resolver( new Resolver(_pool.accessor()) )
     , _disk_usage()
-    , _target(0)
     {
       MIL << "defaultTextLocale: '" << _textLocale << "'" << endl;
 
@@ -78,7 +77,7 @@ namespace zypp
       }
       else {
 	_architecture = Arch( buf.machine );
-	
+
 	MIL << "uname architecture is '" << buf.machine << "'" << endl;
 
 	// some CPUs report i686 but dont implement cx8 and cmov
@@ -129,7 +128,7 @@ namespace zypp
     ZYppImpl::~ZYppImpl()
     {
     }
-    
+
     void ZYppImpl::reset()
     {
 	MIL << "Resetting ZYpp instance" << endl;
@@ -251,88 +250,93 @@ namespace zypp
     /** */
     void ZYppImpl::setRequestedLocales( const LocaleSet & locales_r )
     {
-	// check if each requested is also possible.
+      ResPool mpool( pool() );
+      // assert all requested are available
+      for ( LocaleSet::const_iterator it = locales_r.begin();
+            it != locales_r.end(); ++it )
+        {
+          NameKindProxy select( nameKindProxy<Language>( mpool, it->code() ) );
+          if ( select.installedEmpty() && select.availableEmpty() )
+            _pool.insert( Language::availableInstance( *it ) );
+        }
 
-	LocaleSet possible = getPossibleLocales();
-	bool changed = false;
-	for (LocaleSet::const_iterator it = locales_r.begin(); it != locales_r.end(); ++it) {
-	    changed = possible.insert( *it ).second;
-	    if ( (it->code() != it->language().code()) ) {
-		changed = possible.insert( Locale( it->language().code() ) ).second;
-	    }
-	}
-
-	// oops, some requested are not possbile, make them possible
-	//  this will actually generate 'uninstalled' language items we need below
-
-	if (changed) {
-	    setPossibleLocales( possible );
-	}
-	
-	// now select the requested items for selection
-
-	for (LocaleSet::const_iterator it = locales_r.begin(); it != locales_r.end(); ++it) {
-	    MIL << "Requested locale '" << *it << "'" << endl;
-
-// remove unwanted ?	    PoolItem installed( Helper::findInstalledByNameAndKind( _pool.accessor(), it->code(), ResTraits<Language>::kind ) );
-	    PoolItem uninstalled( solver::detail::Helper::findUninstalledByNameAndKind( _pool.accessor(), it->code(), ResTraits<Language>::kind ) );
-	    if (uninstalled) {
-		if (!uninstalled.status().isLocked()) {
-		    uninstalled.status().setTransact( true, ResStatus::USER );
-		}
-	    }
-
-	    // if lang_country is given, also enable lang (i.e. if "de_DE" is given, also enable "de")
-	    if ( (it->code() != it->language().code()) ) {
-		MIL << "Auto requesting locale '" << it->language().code() << "'" << endl;
-		uninstalled = solver::detail::Helper::findUninstalledByNameAndKind( _pool.accessor(), it->language().code(), ResTraits<Language>::kind );
-		if (uninstalled) {
-		    if (!uninstalled.status().isLocked()) {
-			uninstalled.status().setTransact( true, ResStatus::USER );
-		    }
-		}
-	    }
-	}
-
-	_requested_locales = locales_r;
-
-    }
-
-    /** */
-    void ZYppImpl::setPossibleLocales( const LocaleSet & locales_r )
-    {
-	removeResolvables( _possible_locales );
-	_possible_locales.clear();
-
-	for (LocaleSet::const_iterator it = locales_r.begin(); it != locales_r.end(); ++it) {
-	    NVRA nvra( it->code(), Edition(), Arch_noarch );
-	    NVRAD ldata( nvra, Dependencies() );
-	    detail::ResImplTraits<detail::LanguageImpl>::Ptr limpl = new detail::LanguageImpl( *it );
-	    Language::Ptr language = detail::makeResolvableFromImpl( ldata, limpl );
-	    _possible_locales.insert( language );
-	}
-	addResolvables( _possible_locales, false );
-    }
-
-    /** */
-    ZYppImpl::LocaleSet ZYppImpl::getPossibleLocales() const
-    {
-	LocaleSet lset;
-	for (ResStore::const_iterator it = _possible_locales.begin(); it != _possible_locales.end(); ++it) {
-	    lset.insert( Locale( (*it)->name() ) );
-	}
-	return lset;
+      // now adjust status
+      for ( ResPool::byKind_iterator it = mpool.byKindBegin<Language>();
+            it != mpool.byKindEnd<Language>(); ++it )
+        {
+          NameKindProxy select( nameKindProxy<Language>( mpool, (*it)->name() ) );
+          if ( locales_r.find( Locale( (*it)->name() ) ) != locales_r.end() )
+            {
+              // Language is requested
+              if ( select.installedEmpty() )
+                {
+                  if ( select.availableEmpty() )
+                    {
+                      // no item ==> provide available to install
+                      _pool.insert( Language::availableInstance( Locale((*it)->name()) ) );
+                      select = nameKindProxy<Language>( mpool, (*it)->name() );
+                    }
+                  // available only ==> to install
+                  select.availableBegin()->status().setTransactValue( ResStatus::TRANSACT, ResStatus::USER );
+                }
+              else
+                {
+                  // installed ==> keep it
+                  select.installedBegin()->status().setTransactValue( ResStatus::KEEP_STATE, ResStatus::USER );
+                  if ( ! select.availableEmpty() )
+                    {
+                      // both items ==> keep
+                      select.availableBegin()->status().setTransactValue( ResStatus::KEEP_STATE, ResStatus::USER );
+                    }
+                }
+            }
+          else
+            {
+              // Language is NOT requested
+              if ( ! select.installedEmpty() )
+                select.installedBegin()->status().setTransactValue( ResStatus::TRANSACT, ResStatus::USER );
+              if ( ! select.availableEmpty() )
+                select.availableBegin()->status().setTransactValue( ResStatus::KEEP_STATE, ResStatus::USER );
+            }
+        }
     }
 
     /** */
     ZYppImpl::LocaleSet ZYppImpl::getAvailableLocales() const
     {
-	return _available_locales;
+      ZYpp::LocaleSet ret;
+      ResPool mpool( pool() );
+      for ( ResPool::byKind_iterator it = mpool.byKindBegin<Language>();
+            it != mpool.byKindEnd<Language>(); ++it )
+        {
+          if ( (*it).status().isUninstalled() ) // available!
+            ret.insert( Locale( (*it)->name() ) );
+        }
+      return ret;
+    }
+
+    /** */
+    ZYppImpl::LocaleSet ZYppImpl::getRequestedLocales() const
+    {
+      ZYpp::LocaleSet ret;
+      ResPool mpool( pool() );
+      for ( ResPool::byKind_iterator it = mpool.byKindBegin<Language>();
+            it != mpool.byKindEnd<Language>(); ++it )
+        {
+          NameKindProxy select( nameKindProxy<Language>( mpool, (*it)->name() ) );
+          if ( ! select.installedEmpty()
+               && select.installedBegin()->status().getTransactValue() != ResStatus::TRANSACT )
+            ret.insert( Locale( (*it)->name() ) );
+          else if ( ! select.availableEmpty()
+                    && select.availableBegin()->status().getTransactValue() == ResStatus::TRANSACT )
+            ret.insert( Locale( (*it)->name() ) );
+        }
+      return ret;
     }
 
     void ZYppImpl::availableLocale( const Locale & locale_r )
     {
-	_available_locales.insert( locale_r );
+      _pool.insert( Language::availableInstance( locale_r ) );
     }
 
     //------------------------------------------------------------------------
@@ -351,8 +355,8 @@ namespace zypp
     { return _home_path.empty() ? Pathname("/var/lib/zypp") : _home_path; }
 
     void ZYppImpl::setHomePath( const Pathname & path )
-    { _home_path = path; }  
-    
+    { _home_path = path; }
+
     /******************************************************************
      **
      **	FUNCTION NAME : operator<<

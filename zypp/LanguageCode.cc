@@ -172,7 +172,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   const LanguageCode LanguageCode::noCode;
-  const LanguageCode LanguageCode::useDefault( "default" );
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -224,7 +223,6 @@ namespace zypp
     {
       // Defined LanguageCode constants
       others[""]        = N_( "noCode" );
-      others["default"] = N_( "Default" );
 
       struct LangInit
       {

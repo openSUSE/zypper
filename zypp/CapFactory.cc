@@ -17,6 +17,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Counter.h"
 
 #include "zypp/CapFactory.h"
 #include "zypp/capability/Capabilities.h"
@@ -60,12 +61,7 @@ namespace
   */
   struct USetStatsCollect : public std::unary_function<CapabilityImpl::constPtr, void>
   {
-    struct Counter
-    {
-      unsigned _count;
-      Counter() : _count( 0 ) {}
-      void incr() { ++_count; }
-    };
+    typedef ::zypp::Counter<unsigned> Counter;
 
     Counter _caps;
     std::map<CapabilityImpl::Kind,Counter> _capKind;
@@ -74,25 +70,25 @@ namespace
     void operator()( const CapabilityImpl::constPtr & cap_r )
     {
       //DBG << *cap_r << endl;
-      _caps.incr();
-      _capKind[cap_r->kind()].incr();
-      _capRefers[cap_r->refers()].incr();
+      ++_caps;
+      ++(_capKind[cap_r->kind()]);
+      ++(_capRefers[cap_r->refers()]);
     }
 
     std::ostream & dumpOn( std::ostream & str ) const
     {
-      str << "  Capabilities total: " << _caps._count << endl;
+      str << "  Capabilities total: " << _caps << endl;
       str << "  Capability kinds:" << endl;
       for ( std::map<CapabilityImpl::Kind,Counter>::const_iterator it = _capKind.begin();
 	    it != _capKind.end(); ++it )
 	{
-	  str << "    " << it->first << '\t' << it->second._count << endl;
+	  str << "    " << it->first << '\t' << it->second << endl;
 	}
       str << "  Capability refers:" << endl;
       for ( std::map<Resolvable::Kind,Counter>::const_iterator it = _capRefers.begin();
 	    it != _capRefers.end(); ++it )
 	{
-	  str << "    " << it->first << '\t' << it->second._count << endl;
+	  str << "    " << it->first << '\t' << it->second << endl;
 	}
       return str;
     }

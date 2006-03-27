@@ -58,8 +58,6 @@ namespace zypp
     //@{
     /** No or empty code. */
     static const LanguageCode noCode;
-    /** Advice to use some default code. */
-    static const LanguageCode useDefault;
     //@}
 
   public:
@@ -72,10 +70,6 @@ namespace zypp
     /** <tt>*this != noCode</tt>. */
     inline bool hasCode() const
     { return *this != noCode; }
-
-    /** <tt>*this == useDefault</tt>. */
-    bool useDefaultCode() const
-    { return *this == useDefault; }
 
   private:
     /** Pointer to implementation */

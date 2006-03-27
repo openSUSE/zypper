@@ -85,7 +85,7 @@ namespace zypp
 
       /** Commit changes and transactions. */
       ZYpp::CommitResult commit( int medianr_r );
-      
+
       /** Reset the instance, discard changes
        * \throws Exception
        */
@@ -106,16 +106,11 @@ namespace zypp
       /** */
       void setRequestedLocales( const LocaleSet & locales_r );
       /** */
-      LocaleSet getRequestedLocales() const
-      { return _requested_locales; }
-
-      /** */
-      void setPossibleLocales( const LocaleSet & locales_r );
-      /** */
-      LocaleSet getPossibleLocales() const;
+      LocaleSet getRequestedLocales() const;
       /** */
       LocaleSet getAvailableLocales() const;
 
+      /** internal use */
       void availableLocale( const Locale & locale_r );
 
     public:
@@ -131,7 +126,7 @@ namespace zypp
       Pathname homePath() const;
       /** set the home, if you need to change it */
       void setHomePath( const Pathname & path );
-    
+
     public:
       DiskUsageCounter::MountPointSet diskUsage();
       void setPartitions(const DiskUsageCounter::MountPointSet &mp);
@@ -149,12 +144,6 @@ namespace zypp
       Arch _architecture;
       /** */
       Pathname _home_path;
-      /** this is what the user wants. */
-      LocaleSet _requested_locales;
-      /** this is what is possible. */
-      ResStore _possible_locales;
-      /** this is what the packages provide. */
-      LocaleSet _available_locales;
       /** defined mount points, used for disk usage counting */
       DiskUsageCounter _disk_usage;
     };

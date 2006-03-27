@@ -6,47 +6,51 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/detail/XMLLanguageImpl.cc
+/** \file	zypp/pool/PoolStats.h
  *
 */
-#include "zypp/target/store/xml/XMLLanguageImpl.h"
+#ifndef ZYPP_POOL_POOLSTATS_H
+#define ZYPP_POOL_POOLSTATS_H
 
-using namespace std;
+#include <iosfwd>
+
+#include "zypp/base/Functional.h"
+#include "zypp/base/Counter.h"
+#include "zypp/ResObject.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace storage
+  namespace pool
   { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : XMLLanguageImpl::XMLLanguageImpl
-    //	METHOD TYPE : Ctor
+    //	CLASS NAME : PoolStats
     //
-    XMLLanguageImpl::XMLLanguageImpl()
-    : LanguageImplIf(TranslatedText())
-#warning FIXME line above, was added just to compile
-    {}
-
+    /** */
+    struct PoolStats : public std::unary_function<ResObject::constPtr, void>
+    {
+      void operator()( ResObject::constPtr ptr )
+      {
+        ++_total;
+        ++_perKind[ptr->kind()];
+      }
+    public:
+      typedef std::map<ResolvableTraits::KindType,Counter<unsigned> > KindMap;
+      Counter<unsigned> _total;
+      KindMap           _perKind;
+    };
     ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : XMLLanguageImpl::~XMLLanguageImpl
-    //	METHOD TYPE : Dtor
-    //
-    XMLLanguageImpl::~XMLLanguageImpl()
-    {}
 
-      TranslatedText XMLLanguageImpl::summary() const
-      { return _summary; }
-
-      TranslatedText XMLLanguageImpl::description() const
-      { return _description; }
+    /** \relates PoolStats Stream output */
+    std::ostream & operator<<( std::ostream & str, const PoolStats & obj );
 
     /////////////////////////////////////////////////////////////////
-  } // namespace storage
+  } // namespace pool
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+#endif // ZYPP_POOL_POOLSTATS_H
