@@ -8,14 +8,15 @@
 # Steve Varadi <svaradi@usa.com>, 2000.
 # Zoltán Levárdy <pogacsa@programmer.net>, 1999.
 # Kalman Kemenczy <kkemenczy@novell.com>, 2006.
+# Kéménczy Kálmán <kkemenczy@novell.com>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: zypp.hu\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
 "POT-Creation-Date: 2006-03-20 10:33+0100\n"
-"PO-Revision-Date: 2006-02-27 16:24+0100\n"
-"Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
+"PO-Revision-Date: 2006-03-21 15:17+0100\n"
+"Last-Translator: Kéménczy Kálmán <kkemenczy@novell.com>\n"
 "Language-Team: Hungarian <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2055,7 +2056,7 @@ msgstr "zuni"
 msgid ""
 "At least one source already registered, cannot restore sources from "
 "persistent store."
-msgstr ""
+msgstr "Legalább egy forrás már regisztrálásra került, a források különben nem állíthatók vissza."
 
 # modules/dialup/dialup.ycp:231 modules/dialup/dialup.ycp:246
 # modules/dialup/dialup.ycp:259
@@ -2068,8 +2069,7 @@ msgstr "%s módosított konfigurációs fájljai:"
 #: zypp/target/rpm/RpmDb.cc:1869
 #, c-format
 msgid "rpm saved %s as %s but it was impossible to determine the difference"
-msgstr ""
-"Az rpm elmentette %s-t, mint %s, de nem sikerült megállapítani a különbséget"
+msgstr "Az rpm elmentette %s-t, mint %s, de nem sikerült megállapítani a különbséget"
 
 #: zypp/target/rpm/RpmDb.cc:1871
 #, c-format
@@ -2083,8 +2083,7 @@ msgstr ""
 #: zypp/target/rpm/RpmDb.cc:1874
 #, c-format
 msgid "rpm created %s as %s but it was impossible to determine the difference"
-msgstr ""
-"Az rpm létrehozta %s-t, mint %s, de nem sikerült megállapítani a különbséget"
+msgstr "Az rpm létrehozta %s-t, mint %s, de nem sikerült megállapítani a különbséget"
 
 #: zypp/target/rpm/RpmDb.cc:1876
 #, c-format
@@ -2166,7 +2165,7 @@ msgstr "%s másolata létrehozva"
 
 #: zypp/target/TargetImpl.cc:376
 msgid "Target commit aborted by user."
-msgstr ""
+msgstr "A felhasználó megszakította a cél véglegesítését."
 
 #: zypp/solver/detail/ResolverInfoObsoletes.cc:55
 #, c-format
@@ -2299,7 +2298,7 @@ msgid "%s is not installed and has been marked as uninstallable"
 msgstr "%s nincs telepítve és eltávolíthatónak lett megjelölve"
 
 #: zypp/solver/detail/Resolver_problems.cc:295
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot install %s due to dependency problems"
 msgstr "%s nem telepíthető függőségi problémák miatt"
 
@@ -2331,7 +2330,7 @@ msgid "%s has missing dependencies"
 msgstr "%s függőségei hiányoznak"
 
 #: zypp/solver/detail/Resolver_problems.cc:435
-#, fuzzy, c-format
+#, c-format
 msgid "%s cannot be installed due to missing dependencies"
 msgstr "%s nem telepíthető hiányzó függőségek miatt"
 
@@ -2372,9 +2371,9 @@ msgid "Cannot install %s because it is conflicting with %s"
 msgstr "%s nem telepíthető, mert ütközik (%s)"
 
 #: zypp/solver/detail/Resolver_problems.cc:593
-#, fuzzy, c-format
+#, c-format
 msgid "%s is uninstallable due to conflicts with %s"
-msgstr "%s eltávolítható, mivel ütközik (%s)"
+msgstr "%s nem távolítható el, mivel ütközik (%s)"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:53
 msgid "Ignore this requirement just here"
@@ -2476,13 +2475,11 @@ msgstr "%s feloldható telepíthetetlennek jelölése"
 msgid ""
 "%s is scheduled to be installed, but this is not possible because of "
 "dependency problems."
-msgstr ""
-"%s telepítésre van ütemezve, de ez függőségi problémák miatt nem lehetséges."
+msgstr "%s telepítésre van ütemezve, de ez függőségi problémák miatt nem lehetséges."
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:167
 #, c-format
-msgid ""
-"Can't install %s since it is already marked as needing to be uninstalled"
+msgid "Can't install %s since it is already marked as needing to be uninstalled"
 msgstr "%s nem telepíthető, mert már meg van jelölve eltávolításra"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:179
@@ -2576,8 +2573,7 @@ msgstr "%s %s követelménye nem elégíthető ki"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:442
 #, c-format
-msgid ""
-"%s is required by other to-be-installed resolvable, so it won't be unlinked."
+msgid "%s is required by other to-be-installed resolvable, so it won't be unlinked."
 msgstr ""
 "%s egy másik telepítendő feloldható igényli, ezért a csatolása nem lesz "
 "megszüntetve."
@@ -3767,7 +3763,5 @@ msgstr "Zimbabwe"
 
 #: zypp/SourceManager.h:36
 msgid "Unable to restore all sources."
-msgstr ""
+msgstr "Nem állítható vissza az összes forrás."
 
-#~ msgid "ignore architecture"
-#~ msgstr "Architektúra figyelmen kívül marad"
