@@ -319,9 +319,10 @@ namespace zypp
       // or brings this into KEEP_STATE, and we apply the lock.
       if ( ! setTransact( false, causer_r ) )
         return false;
-      if ( toLock_r )
+      if ( toLock_r ) {
 	  fieldValueAssign<TransactField>( LOCKED );
-      else
+	  fieldValueAssign<TransactByField>( causer_r );
+      } else
 	  fieldValueAssign<TransactField>( KEEP_STATE );
       return true;
     }
