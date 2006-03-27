@@ -474,6 +474,8 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 		                     xmlNodePtr formatNode)
       {
 	shared_ptr<YUMPatchScript> script(new YUMPatchScript);
+	script->do_media = 1;
+	script->undo_media = 1;
       
 	// FIXME move the respective method to a common class, inherit it  
 	YUMPrimaryParser prim;
@@ -496,6 +498,18 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	    }
 	    else if (name == "undo") {
 		script->undo_script = _helper.content(child);
+	    }
+	    else if (name == "do_location") {
+		script->do_location = _helper.content(child);
+	    }
+	    else if (name == "undo_location") {
+		script->undo_location = _helper.content(child);
+	    }
+	    else if (name == "do_media") {
+		script->do_media = _helper.content(child);
+	    }
+	    else if (name == "undo_media") {
+		script->undo_media = _helper.content(child);
 	    }
 	    else if (name == "provides") {
 	      prim.parseDependencyEntries(& script->provides, child);

@@ -57,8 +57,12 @@ element-script =
   element script {
     element-name,
     element-version,    
-    element do { xsd:string },
+    element do { xsd:string }?,
     element undo { xsd:string }?,
+    element do_location { text }?,
+    element do_media { text }?,
+    element undo_location { text }?,
+    element undo_media { text }?,
     dependency-block
   }
 

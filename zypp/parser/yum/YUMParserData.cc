@@ -497,7 +497,11 @@ namespace zypp {
           << "  supplements:" << endl << data.supplements << endl
           << "  enhances:" << endl << data.enhances << endl
           << "  do script: " << data.do_script << endl
-          << "  undo script: " << data.undo_script << endl;
+          << "  undo script: " << data.undo_script << endl
+	  << "  do script location: " << data.do_location << endl
+	  << "  undo script location: " << data.undo_location << endl
+	  << "  do script media: " << data.do_media << endl
+	  << "  undo script media: " << data.undo_media << endl;
         return out;
       }
 

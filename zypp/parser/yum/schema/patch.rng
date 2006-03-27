@@ -143,12 +143,34 @@
     <element name="script">
       <ref name="element-name"/>
       <ref name="element-version"/>
-      <element name="do">
-        <data type="string"/>
-      </element>
+      <optional>
+        <element name="do">
+          <data type="string"/>
+        </element>
+      </optional>
       <optional>
         <element name="undo">
           <data type="string"/>
+        </element>
+      </optional>
+      <optional>
+        <element name="do_location">
+          <text/>
+        </element>
+      </optional>
+      <optional>
+        <element name="do_media">
+          <text/>
+        </element>
+      </optional>
+      <optional>
+        <element name="undo_location">
+          <text/>
+        </element>
+      </optional>
+      <optional>
+        <element name="undo_media">
+          <text/>
         </element>
       </optional>
       <ref name="dependency-block"/>

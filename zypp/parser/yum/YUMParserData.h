@@ -262,6 +262,10 @@ namespace zypp {
         virtual AtomType atomType() { return Script; };
         std::string do_script;
         std::string undo_script;
+	std::string do_location;
+	std::string undo_location;
+        std::string do_media;
+        std::string undo_media;
       };
 
       class YUMPatchMessage : public YUMPatchAtom {

@@ -60,6 +60,14 @@ namespace zypp
 	std::string _do_script;
 	/** The script to undo the change */
 	std::string _undo_script;
+	/** Location of external do script on the medium */
+	Pathname _do_location;
+	/** Location of external undo script on the medium */
+	Pathname _undo_location;
+	/** Media number of the do script */
+	unsigned _do_media;
+	/** Media number of the undo script */
+	unsigned _undo_media;
 	mutable filesystem::TmpFile _tmp_file;
       private:
 	Source_Ref _source;

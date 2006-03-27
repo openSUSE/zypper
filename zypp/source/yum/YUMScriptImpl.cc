@@ -41,10 +41,21 @@ namespace zypp
 	const zypp::parser::yum::YUMPatchScript & parsed
       )
       : _source(source_r)
+      , _do_script(parsed.do_script)
+      , _undo_script(parsed.undo_script)
+      , _do_location(parsed.do_location)
+      , _undo_location(parsed.undo_location)
+      , _do_media(1)
+      , _undo_media(1)
       {
-	_do_script = parsed.do_script;
-	_undo_script = parsed.undo_script;
+	unsigned do_media = strtol(parsed.do_media.c_str(), 0, 10);
+	if (do_media > 0)
+	  _do_media = do_media;
+	unsigned undo_media = strtol(parsed.undo_media.c_str(), 0, 10);
+	if (undo_media > 0)
+	  _undo_media = undo_media;
       }
+
       Pathname YUMScriptImpl::do_script() const {
 	if (_do_script != "")
 	{
@@ -53,6 +64,10 @@ namespace zypp
 	  ofstream st(pth.asString().c_str());
 	  st << _undo_script << endl;
 	  return pth;
+	}
+	else if (_do_location != "" && _do_location != "/")
+	{
+	  return source().provideFile(_do_location, _do_media);
 	}
 	else
 	{
@@ -69,14 +84,16 @@ namespace zypp
 	  st << _undo_script << endl;
 	  return pth;
 	}
-	else
+	else if (_undo_location != "" && _undo_location != "/")
 	{
-	  return Pathname();
+	  return source().provideFile(_undo_location, _undo_media);
 	}
+	else return Pathname();
       }
       /** Check whether script to undo the change is available */
       bool YUMScriptImpl::undo_available() const {
-	return _undo_script != ""; // FIXME
+	return _undo_script != ""
+	  || (_undo_location != "" && _undo_location != "/");
       }
       TranslatedText YUMScriptImpl::summary() const
       { return ResObjectImplIf::summary(); }
