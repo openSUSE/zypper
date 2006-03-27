@@ -133,7 +133,7 @@ namespace zypp
             else if(key == "KEY")
               parseFileCheckSum( key, value, prodImpl->_signing_keys);
             else
-              DBG << "parse error" << std::endl;
+              DBG << "Unknown key [" << key << "] with value [" << value << "]" << std::endl;
           }
           else if (!buffer.empty())
           {
