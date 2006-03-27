@@ -98,6 +98,14 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 {
     _XDEBUG("QueueItemEstablish::process(" << *this << ")");
 
+    ResStatus status = context->getStatus(_item);
+    
+    if (_item.status().isLocked()
+        || status.isLocked()) {
+        _XDEBUG("Item " << _item << " is locked. --> NO establish");
+        return true;
+    }
+
     _item.status().setUndetermined();		// reset any previous establish state
 
     CapSet freshens = _item->dep(Dep::FRESHENS);
@@ -118,8 +126,6 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    break;
 	}
     }
-
-    ResStatus status = context->getStatus(_item);
 
     // if we have freshens but none of the freshen deps were met, mark the _item as unneeded
     // else we look at its requires to set it to satisfied or incomplete
