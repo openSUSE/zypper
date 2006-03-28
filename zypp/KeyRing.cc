@@ -10,7 +10,11 @@
  *
 */
 #include <iostream>
+#include <fstream>
 //#include "zypp/base/Logger.h"
+#include <sys/file.h>
+#include <cstdio>
+#include <unistd.h>
 
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
@@ -20,9 +24,12 @@
 #include "zypp/base/String.h"
 #include "zypp/KeyRing.h"
 #include "zypp/ExternalProgram.h"
+#include "zypp/TmpPath.h"
 
 using std::endl;
 using namespace boost;
+using namespace zypp::filesystem;
+using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -100,7 +107,6 @@ namespace zypp
     return publicKeys( _trusted_kr );
   }
 
-  
   std::list<PublicKey> KeyRing::Impl::publicKeys(const Pathname &keyring)
   {
     const char* argv[] =
@@ -114,15 +120,32 @@ namespace zypp
       keyring.asString().c_str(),
       NULL
     };
+    std::list<PublicKey> keys;
     
     ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
     std::string line;
     int count = 0;
+    
+    boost::regex rxColons("^([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):\n$");
+    
     for(line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
     {
       MIL << line << std::endl;
+      boost::smatch what;
+      if(boost::regex_match(line, what, rxColons, boost::match_extra))
+      {
+        if ( what[1] == "pub" )
+        {
+          PublicKey key;
+          key.id = what[5];
+          key.name = what[10];
+          keys.push_back(key);
+        }
+        //dumpRegexpResults(what);
+      }
     }
     prog.close();
+    return keys;
   }
   
   PublicKey KeyRing::Impl::importKey( const Pathname &keyfile, const Pathname &keyring)
@@ -130,7 +153,11 @@ namespace zypp
     const char* argv[] =
     {
       "gpg",
-      "--batch",
+      "--quiet",
+      "--no-tty",
+      "--no-greeting",
+      "--status-fd",
+      "1",  
       "--homedir",
       keyring.asString().c_str(),
       "--import",
@@ -139,29 +166,26 @@ namespace zypp
     };
     
     ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
-
-    //if(!prog)
-    //  return 2;
-    //"gpg: key 9C800ACA: public key "SuSE Package Signing Key <build@suse.de>" imported"
-    //TODO parse output and return key id
-    MIL << std::endl;
-    boost::regex rxImported("^gpg: key [[[:digit:]][[:word:]]]+ \"(.+)\" imported$");
+    
+    boost::regex rxImported("^\\[GNUPG:\\] IMPORTED ([^[:space:]]+) (.+)\n$");
     std::string line;
     int count = 0;
     for(line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
     {
       MIL << line << std::endl;
-      boost::smatch what;
-      if(boost::regex_match(line, what, rxImported, boost::match_extra))
-      {
-        MIL << std::endl;
-        dumpRegexpResults(what);
-        prog.close();
-        return PublicKey();
-      }
+       boost::smatch what;
+       if(boost::regex_match(line, what, rxImported, boost::match_extra))
+       {
+         MIL << std::endl;
+         PublicKey key;
+         key.id = what[1];
+         key.name = what[2];
+         return key;
+       }
     }
     prog.close();
     throw Exception("failed to import key");
+    return PublicKey();
   }
   
   void KeyRing::Impl::deleteKey( const std::string &id, const Pathname &keyring )
