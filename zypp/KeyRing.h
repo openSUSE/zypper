@@ -25,6 +25,12 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  struct PublicKey
+  {
+    std::string id;
+    std::string name;
+  };
+  
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : KeyRing
@@ -44,8 +50,20 @@ namespace zypp
     KeyRing();
     /** Ctor \todo Make ctor it explicit */
     explicit
-    KeyRing(const Pathname &keyring);
-    void importKey( const Pathname &keyfile);
+    KeyRing(const Pathname &general_kr, const Pathname &trusted_kr);
+    /**
+     * imports a key from a file and returns the imported key.
+     * throw if key was not imported
+     */
+    PublicKey importKey( const Pathname &keyfile, bool trusted = false);
+    /**
+     * removes a key from the keyring. 
+     * If trusted is true, Remove it from trusted keyring too.
+     */
+    void deleteKey( const std::string &id, bool trusted =  false);
+    
+    std::list<PublicKey> publicKeys();
+    std::list<PublicKey> trustedPublicKeys();
     
 /** Dtor */
     ~KeyRing();

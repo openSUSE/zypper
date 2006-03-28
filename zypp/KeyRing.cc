@@ -15,16 +15,27 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
 
+#include <boost/regex.hpp>
+
 #include "zypp/base/String.h"
 #include "zypp/KeyRing.h"
 #include "zypp/ExternalProgram.h"
 
 using std::endl;
+using namespace boost;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  static void dumpRegexpResults( const boost::smatch &what )
+  {
+    for ( unsigned int k=0; k < what.size(); k++)
+    {
+      XXX << "[match "<< k << "] [" << what[k] << "]" << std::endl;
+    }
+  }
+  
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : KeyRing::Impl
@@ -35,16 +46,22 @@ namespace zypp
     Impl()
     {}
 
-    Impl( const Pathname keyring )
+    Impl( const Pathname &general_kr, const Pathname &trusted_kr )
     {
-      _homedir = keyring;
+      _general_kr = general_kr;
+      _trusted_kr = trusted_kr;
     }
 
-    void importKey( const Pathname &keyfile );
-
+    PublicKey importKey( const Pathname &keyfile, bool trusted );
+    void deleteKey( const std::string &id, bool trusted );
   private:
     //mutable std::map<Locale, std::string> translations;
-    Pathname _homedir;
+    
+    PublicKey importKey( const Pathname &keyfile, const Pathname &keyring);
+    void deleteKey( const std::string &id, const Pathname &keyring );
+    
+    Pathname _general_kr;
+    Pathname _trusted_kr;
   public:
     /** Offer default Impl. */
     static shared_ptr<Impl> nullimpl()
@@ -60,13 +77,24 @@ namespace zypp
     { return new Impl( *this ); }
   };
   
-  void KeyRing::Impl::importKey( const Pathname &keyfile)
+  PublicKey KeyRing::Impl::importKey( const Pathname &keyfile, bool trusted)
+  {
+    return importKey( keyfile, trusted ? _trusted_kr : _general_kr );
+  }
+  
+  void KeyRing::Impl::deleteKey( const std::string &id, bool trusted)
+  {
+    deleteKey( id, trusted ? _trusted_kr : _general_kr );
+  }
+  
+  PublicKey KeyRing::Impl::importKey( const Pathname &keyfile, const Pathname &keyring)
   {
     const char* argv[] =
     {
       "gpg",
+      "--batch",
       "--homedir",
-      _homedir.asString().c_str(),
+      keyring.asString().c_str(),
       "--import",
       keyfile.asString().c_str(),
       NULL
@@ -76,10 +104,46 @@ namespace zypp
 
     //if(!prog)
     //  return 2;
-    
+    //"gpg: key 9C800ACA: public key "SuSE Package Signing Key <build@suse.de>" imported"
+    //TODO parse output and return key id
+    MIL << std::endl;
+    boost::regex rxImported("^gpg: key [[[:digit:]][[:word:]]]+ \"(.+)\" imported$");
+    std::string line;
+    int count = 0;
+    for(line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
+    {
+      MIL << std::endl;
+      boost::smatch what;
+      if(boost::regex_match(line, what, rxImported, boost::match_extra))
+      {
+        MIL << std::endl;
+        dumpRegexpResults(what);
+        prog.close();
+        return PublicKey();
+      }
+    }
     prog.close();
+    throw Exception("failed to import key");
   }
   
+  void KeyRing::Impl::deleteKey( const std::string &id, const Pathname &keyring )
+  {
+    const char* argv[] =
+    {
+      "gpg",
+      "--batch",
+      "--yes",
+      "--delete-keys",
+      "--homedir",
+      keyring.asString().c_str(),
+      id.c_str(),
+      NULL
+    };
+    
+    ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
+    prog.close();
+  }    
+      
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
@@ -102,8 +166,8 @@ namespace zypp
   //	METHOD NAME : KeyRing::KeyRing
   //	METHOD TYPE : Ctor
   //
-  KeyRing::KeyRing( const Pathname &keyring )
-  : _pimpl( new Impl(keyring) )
+  KeyRing::KeyRing( const Pathname &general_kr, const Pathname &trusted_kr )
+  : _pimpl( new Impl(general_kr, trusted_kr) )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -120,9 +184,24 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-  void KeyRing::importKey( const Pathname &keyfile)
+  PublicKey KeyRing::importKey( const Pathname &keyfile, bool trusted)
   {
-    _pimpl->importKey(keyfile);
+    return _pimpl->importKey(keyfile, trusted);
+  }
+  
+  void KeyRing::deleteKey( const std::string &id, bool trusted )
+  {
+    _pimpl->deleteKey(id, trusted);
+  }
+  
+  std::list<PublicKey> publicKeys()
+  {
+    return std::list<PublicKey>();
+  }
+  
+  std::list<PublicKey> trustedPublicKeys()
+  {
+    return std::list<PublicKey>();
   }
   
   /*
