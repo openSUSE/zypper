@@ -11,6 +11,7 @@
 */
 #include "zypp/Language.h"
 #include "zypp/TranslatedText.h"
+#include "zypp/CapFactory.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -79,6 +80,15 @@ namespace zypp
       {
         detail::ResImplTraits<detail::LanguageImpl>::Ptr langImpl( new detail::LanguageImpl( locale_r ) );
         NVRAD dataCollect( locale_r.code() );
+
+        if ( locale_r.country().hasCode() )
+          {
+            // Recommend fallback Language
+            Locale fallback( locale_r.fallback() );
+            if ( fallback != Locale::noCode )
+              dataCollect[Dep::RECOMMENDS].insert( CapFactory().parse( ResTraits<Language>::kind, fallback.code() ) );
+          }
+
         ret = _ptrmap[locale_r] = detail::makeResolvableFromImpl( dataCollect, langImpl );
       }
     return ret;
@@ -92,6 +102,15 @@ namespace zypp
       {
         detail::ResImplTraits<detail::LanguageImpl>::Ptr langImpl( new detail::LanguageImpl( locale_r ) );
         NVRAD dataCollect( locale_r.code() );
+
+        if ( locale_r.country().hasCode() )
+          {
+            // Recommend fallback Language
+            Locale fallback( locale_r.fallback() );
+            if ( fallback != Locale::noCode )
+              dataCollect[Dep::RECOMMENDS].insert( CapFactory().parse( ResTraits<Language>::kind, fallback.code() ) );
+          }
+
         ret = _ptrmap[locale_r] = detail::makeResolvableFromImpl( dataCollect, langImpl );
       }
     return ret;
