@@ -380,6 +380,17 @@ namespace zypp
 	return ret;
     }
 
+    /** */
+    bool setSoftLock( TransactByValue causer_r )
+    {
+      if ( ! setTransact( false, causer_r ) )
+        return false;
+      if ( fieldValueIs<TransactField>( KEEP_STATE )
+           && isLessThan<TransactByField>( causer_r ) )
+        fieldValueAssign<TransactByField>( causer_r );
+      return true;
+    }
+
     /** Not the same as setTransact( false ).
      */
     bool resetTransact( TransactByValue causer_r )
