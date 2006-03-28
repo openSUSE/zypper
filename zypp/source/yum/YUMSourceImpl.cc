@@ -213,17 +213,14 @@ namespace zypp
 	      {
 		string filename = (*patch)->location;
 		src = provideFile(_path + filename);
-		if (_cache_dir.empty())
+		if (! checkCheckSum(provideFile(_path + filename), (*patch)->checksumType, (*patch)->checksum))
 		{
-		  if (! checkCheckSum(provideFile(_path + filename), (*patch)->checksumType, (*patch)->checksum))
-		  {
 		    ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-		  }
-		  dst = cache_dir_r + filename;
-		  if (0 != assert_dir(dst.dirname(), 0700))
-		    ZYPP_THROW(Exception("Cannot create cache directory"));
-		  filesystem::copy(src, dst);
 		}
+		dst = cache_dir_r + filename;
+		if (0 != assert_dir(dst.dirname(), 0700))
+		    ZYPP_THROW(Exception("Cannot create cache directory"));
+		filesystem::copy(src, dst);
 	      }
 	    }
 	}
