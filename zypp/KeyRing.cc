@@ -54,11 +54,14 @@ namespace zypp
 
     PublicKey importKey( const Pathname &keyfile, bool trusted );
     void deleteKey( const std::string &id, bool trusted );
+    std::list<PublicKey> trustedPublicKeys();
+    std::list<PublicKey> publicKeys();
   private:
     //mutable std::map<Locale, std::string> translations;
     
     PublicKey importKey( const Pathname &keyfile, const Pathname &keyring);
     void deleteKey( const std::string &id, const Pathname &keyring );
+    std::list<PublicKey> publicKeys(const Pathname &keyring);
     
     Pathname _general_kr;
     Pathname _trusted_kr;
@@ -87,6 +90,41 @@ namespace zypp
     deleteKey( id, trusted ? _trusted_kr : _general_kr );
   }
   
+  std::list<PublicKey> KeyRing::Impl::publicKeys()
+  {
+    return publicKeys( _general_kr );
+  }
+  
+  std::list<PublicKey> KeyRing::Impl::trustedPublicKeys()
+  {
+    return publicKeys( _trusted_kr );
+  }
+
+  
+  std::list<PublicKey> KeyRing::Impl::publicKeys(const Pathname &keyring)
+  {
+    const char* argv[] =
+    {
+      "gpg",
+      "--quiet",
+      "--list-keys",
+      "--with-colons",
+      "--with-fingerprint",
+      "--homedir",
+      keyring.asString().c_str(),
+      NULL
+    };
+    
+    ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
+    std::string line;
+    int count = 0;
+    for(line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
+    {
+      MIL << line << std::endl;
+    }
+    prog.close();
+  }
+  
   PublicKey KeyRing::Impl::importKey( const Pathname &keyfile, const Pathname &keyring)
   {
     const char* argv[] =
@@ -112,7 +150,7 @@ namespace zypp
     int count = 0;
     for(line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
     {
-      MIL << std::endl;
+      MIL << line << std::endl;
       boost::smatch what;
       if(boost::regex_match(line, what, rxImported, boost::match_extra))
       {
@@ -143,7 +181,7 @@ namespace zypp
     ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
     prog.close();
   }    
-      
+  
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
@@ -194,34 +232,15 @@ namespace zypp
     _pimpl->deleteKey(id, trusted);
   }
   
-  std::list<PublicKey> publicKeys()
+  std::list<PublicKey> KeyRing::publicKeys()
   {
-    return std::list<PublicKey>();
+    return _pimpl->publicKeys();
   }
   
-  std::list<PublicKey> trustedPublicKeys()
+  std::list<PublicKey> KeyRing::trustedPublicKeys()
   {
-    return std::list<PublicKey>();
+    return _pimpl->trustedPublicKeys();
   }
-  
-  /*
-  std::string KeyRing::text( const Locale &lang ) const
-  { return _pimpl->text( lang ); }
-
-  void KeyRing::setText( const std::string &text, const Locale &lang )
-  { _pimpl->setText( text, lang ); }
-
-  std::set<Locale> KeyRing::locales() const
-  {
-    return _pimpl->locales();
-  }
-
-  void KeyRing::setText( const std::list<std::string> &text, const Locale &lang )
-  { _pimpl->setText( text, lang ); }
-
-  Locale KeyRing::detectLanguage() const
-  { return _pimpl->detectLanguage(); }
-  */
   
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

@@ -29,6 +29,7 @@ namespace zypp
   {
     std::string id;
     std::string name;
+    std::string fingerprint;
   };
   
   ///////////////////////////////////////////////////////////////////
