@@ -25,12 +25,16 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 #include "zypp/CapFactory.h"
+#include "zypp/Digest.h"
+#include "zypp/ExternalProgram.h"
+#include "zypp/TmpPath.h"
 
 #include "zypp/parser/yum/YUMParser.h"
 #include "zypp/SourceFactory.h"
 #include "zypp/ZYppCallbacks.h"
 
 #include "zypp/base/GzStream.h"
+#include "zypp/base/Gettext.h"
 
 #include <fstream>
 
@@ -89,6 +93,25 @@ namespace zypp
 	  if ( ! PathInfo(filename).isExist() )
 	    ZYPP_THROW(Exception("repodata/repomd.xml not found"));
 
+	  // use tmpfile because of checking integrity - provideFile might release the medium
+	  filesystem::TmpFile tmp;
+	  filesystem::copy(filename, tmp.path());
+	  filename = tmp.path();
+	  if (_cache_dir.empty())
+	  {
+	    MIL << "Checking repomd.xml integrity" << endl;
+	    Pathname asc_local;
+	    try {
+	      asc_local = provideFile(_path + "/repodata/repomd.xml.asc");
+	    }
+	    catch (const Exception & excpt_r)
+	    {
+	      ZYPP_CAUGHT(excpt_r);
+	    }
+	    if (! checkAscIntegrity (filename, asc_local))
+	      ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+	  }
+
 	  DBG << "Reading file " << filename << endl;
 	  ifstream repo_st(filename.asString().c_str());
 	  YUMRepomdParser repomd(repo_st, "");
@@ -97,6 +120,35 @@ namespace zypp
 	      ! repomd.atEnd();
 	      ++repomd)
 	  {
+	    if (_cache_dir.empty())
+	    {
+	      if (! checkCheckSum(provideFile(_path + (*repomd)->location), (*repomd)->checksumType, (*repomd)->checksum))
+	      {
+	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+	      }
+	    }
+	    if ((*repomd)->type == "patches")
+	    {
+	      Pathname filename = _cache_dir.empty()
+		? provideFile(_path + (*repomd)->location)
+		: _cache_dir + (*repomd)->location;
+	      DBG << "reading file " << filename << endl;
+	      ifgzstream st ( filename.asString().c_str() );
+	      YUMPatchesParser patch(st, "");
+	      for (;
+		  !patch.atEnd();
+		  ++patch)
+	      {
+		string filename = (*patch)->location;
+		if (_cache_dir.empty())
+		{
+		  if (! checkCheckSum(provideFile(_path + filename), (*patch)->checksumType, (*patch)->checksum))
+		  {
+		    ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+		  }
+		}
+	      }
+	    }
 	  }
 	}
 	catch (...)
@@ -109,17 +161,71 @@ namespace zypp
       void YUMSourceImpl::storeMetadata(const Pathname & cache_dir_r)
       {
 	_cache_dir = cache_dir_r;
-	
-	INT << "Storing data to cache" << endl;
-	resolvables(SourceFactory().createFrom(this));
-	for (std::list<Pathname>::const_iterator it = _metadata_files.begin();
-	    it != _metadata_files.end(); it++)
+
+	MIL << "Storing data to cache" << endl;
+	// first read list of all files in the repository
+	Pathname filename = provideFile(_path + "/repodata/repomd.xml");
+	if ( ! PathInfo(filename).isExist() )
+	  ZYPP_THROW(Exception("repodata/repomd.xml not found"));
+
+	// use tmpfile because of checking integrity - provideFile might release the medium
+	filesystem::TmpFile tmp;
+	filesystem::copy(filename, tmp.path());
+	filename = tmp.path();
+	MIL << "Checking repomd.xml integrity" << endl;
+	Pathname asc_local;
+	try {
+	  asc_local = provideFile(_path + "/repodata/repomd.xml.asc");
+	}
+	catch (const Exception & excpt_r)
 	{
-	  Pathname src = provideFile(_path + *it);
-	  Pathname dst = cache_dir_r + *it;
-	  if (0 != assert_dir(dst.dirname(), 0700))
-	    ZYPP_THROW(Exception("Cannot create cache directory"));
-	  filesystem::copy(src, dst);
+	  ZYPP_CAUGHT(excpt_r);
+	}
+	if (! checkAscIntegrity (filename, asc_local))
+	  ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+
+	DBG << "Reading file " << filename << endl;
+	ifstream repo_st(filename.asString().c_str());
+	YUMRepomdParser repomd(repo_st, "");
+	
+	for(;
+	      ! repomd.atEnd();
+	      ++repomd)
+	{
+	    Pathname src = provideFile(_path + (*repomd)->location);
+	    if (! checkCheckSum(src, (*repomd)->checksumType, (*repomd)->checksum))
+	    {
+	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+	    }
+	    Pathname dst = cache_dir_r + (*repomd)->location;
+	    if (0 != assert_dir(dst.dirname(), 0700))
+	      ZYPP_THROW(Exception("Cannot create cache directory"));
+	    filesystem::copy(src, dst);
+	    if ((*repomd)->type == "patches")
+	    {
+	      Pathname filename = provideFile(_path + (*repomd)->location);
+	      DBG << "reading file " << filename << endl;
+	      ifgzstream st ( filename.asString().c_str() );
+	      YUMPatchesParser patch(st, "");
+	      for (;
+		  !patch.atEnd();
+		  ++patch)
+	      {
+		string filename = (*patch)->location;
+		src = provideFile(_path + filename);
+		if (_cache_dir.empty())
+		{
+		  if (! checkCheckSum(provideFile(_path + filename), (*patch)->checksumType, (*patch)->checksum))
+		  {
+		    ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+		  }
+		  dst = cache_dir_r + filename;
+		  if (0 != assert_dir(dst.dirname(), 0700))
+		    ZYPP_THROW(Exception("Cannot create cache directory"));
+		  filesystem::copy(src, dst);
+		}
+	      }
+	    }
 	}
       }
 
@@ -142,14 +248,32 @@ namespace zypp
 
       try {
 	  // first read list of all files in the repository
-	Pathname filename = _cache_dir.empty()
+	  Pathname filename = _cache_dir.empty()
 	    ? provideFile(_path + "/repodata/repomd.xml")
 	    : _cache_dir + "/repodata/repomd.xml";
 	  _metadata_files.push_back("/repodata/repomd.xml");
+	  // use tmpfile because of checking integrity - provideFile might release the medium
+	  filesystem::TmpFile tmp;
+	  filesystem::copy(filename, tmp.path());
+	  filename = tmp.path();
+	  if (_cache_dir.empty())
+	  {
+	    MIL << "Checking repomd.xml integrity" << endl;
+	    Pathname asc_local;
+	    try {
+	      asc_local = provideFile(_path + "/repodata/repomd.xml.asc");
+	    }
+	    catch (Exception & excpt_r)
+	    {
+	      ZYPP_CAUGHT(excpt_r);
+	    }
+	    if (! checkAscIntegrity (filename, asc_local))
+	      ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+	  }
+
 	  DBG << "Reading ifgz file " << filename << endl;
 	  ifgzstream repo_st(filename.asString().c_str());
 	  YUMRepomdParser repomd(repo_st, "");
-
 	  for(;
 	      ! repomd.atEnd();
 	      ++repomd)
@@ -190,10 +314,16 @@ namespace zypp
 	      it != repo_files.end();
 	      it++)
 	  {
-	    // TODO check checksum
 	    Pathname filename = _cache_dir.empty()
 	      ? provideFile(_path + (*it)->location)
 	      : _cache_dir + (*it)->location;
+	    if (_cache_dir.empty())
+	    {
+	      if (! checkCheckSum((*it)->location, (*it)->checksumType, (*it)->checksum))
+	      {
+	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+	      }
+	    }
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading ifgz file " << filename << endl;
 
@@ -218,10 +348,16 @@ namespace zypp
 	      it != repo_other.end();
 	      it++)
 	  {
-	    // TODO check checksum
 	    Pathname filename = _cache_dir.empty()
 	      ? provideFile(_path + (*it)->location)
 	      : _cache_dir + (*it)->location;
+	    if (_cache_dir.empty())
+	    {
+	      if (! checkCheckSum((*it)->location, (*it)->checksumType, (*it)->checksum))
+	      {
+	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+	      }
+	    }
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading file " << filename << endl;
 
@@ -250,10 +386,16 @@ namespace zypp
 	      it != repo_primary.end();
 	      it++)
 	{
-	    // TODO check checksum
 	    Pathname filename = _cache_dir.empty()
 			      ? provideFile(_path + (*it)->location)
 			      : _cache_dir + (*it)->location;
+	    if (_cache_dir.empty())
+	    {
+	      if (! checkCheckSum((*it)->location, (*it)->checksumType, (*it)->checksum))
+	      {
+	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+	      }
+	    }
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
@@ -310,10 +452,16 @@ namespace zypp
 	      it != repo_group.end();
 	      it++)
 	{
-	    // TODO check checksum
 	    Pathname filename = _cache_dir.empty()
 	      ? provideFile(_path + (*it)->location)
 	      : _cache_dir + (*it)->location;
+	    if (_cache_dir.empty())
+	    {
+	      if (! checkCheckSum((*it)->location, (*it)->checksumType, (*it)->checksum))
+	      {
+	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+	      }
+	    }
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
@@ -344,10 +492,16 @@ namespace zypp
 	      it != repo_pattern.end();
 	      it++)
 	{
-	    // TODO check checksum
 	    Pathname filename = _cache_dir.empty()
 	      ? provideFile(_path + (*it)->location)
 	      : _cache_dir + (*it)->location;
+	    if (_cache_dir.empty())
+	    {
+	      if (! checkCheckSum((*it)->location, (*it)->checksumType, (*it)->checksum))
+	      {
+	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+	      }
+	    }
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
@@ -378,10 +532,16 @@ namespace zypp
 	      it != repo_product.end();
 	      it++)
 	{
-	    // TODO check checksum
 	    Pathname filename = _cache_dir.empty()
 	      ? provideFile(_path + (*it)->location)
 	      : _cache_dir + (*it)->location;
+	    if (_cache_dir.empty())
+	    {
+	      if (! checkCheckSum((*it)->location, (*it)->checksumType, (*it)->checksum))
+	      {
+	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+	      }
+	    }
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
@@ -412,10 +572,16 @@ namespace zypp
 	      it != repo_patches.end();
 	      it++)
 	  {
-	    // TODO check checksum
 	    Pathname filename = _cache_dir.empty()
 	      ? provideFile(_path + (*it)->location)
 	      : _cache_dir + (*it)->location;
+	    if (_cache_dir.empty())
+	    {
+	      if (! checkCheckSum((*it)->location, (*it)->checksumType, (*it)->checksum))
+	      {
+	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+	      }
+	    }
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
@@ -424,8 +590,14 @@ namespace zypp
 		  !patch.atEnd();
 		  ++patch)
 	    {
-		// TODO check checksum
 		string filename = (*patch)->location;
+		if (_cache_dir.empty())
+		{
+		  if (! checkCheckSum(filename, (*patch)->checksumType, (*patch)->checksum))
+		  {
+		    ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+		  }
+		}
 		patch_files.push_back(filename);
 	    }
 	    if (patch.errorStatus())
@@ -474,6 +646,7 @@ namespace zypp
 
     report->finishData( url(), CreateSourceReport::NO_ERROR, "" );
   }
+
 
   Package::Ptr YUMSourceImpl::createPackage(
     Source_Ref source_r,
@@ -929,6 +1102,58 @@ namespace zypp
     }
     return cap;
   }
+      bool YUMSourceImpl::checkCheckSum (const Pathname & filename, const std::string & csum_type, const std::string & csum)
+      {
+	MIL << "Checking checksum for " << filename << " as type: " << csum_type << "; value: " << csum << endl;
+	ifstream st(filename.asString().c_str());
+	std::string dig = Digest::digest (csum_type, st, 4096);
+	if (dig == "")
+	{
+	  ERR << "Cannot compute the checksum" << endl;
+	  return true;
+#warning TODO Define behavior if checksum computing fails
+	}
+	dig = str::toLower (dig);
+	bool ret = (dig == str::toLower(csum));
+	if (ret)
+	  MIL << "Checksums are the same" << endl;
+	else
+	  WAR << "Checksum missmatch: metadata: " << csum << "; real: " << dig << endl;
+	return true;
+#warning remove line above
+	return ret;
+      }
+
+
+      bool YUMSourceImpl::checkAscIntegrity (const Pathname & filename, const Pathname & asc_file)
+      {
+	MIL << "Checking ASC integrity for " << filename << " using " << asc_file << endl;
+	if ( ! PathInfo(asc_file).isExist() )
+	{
+	  WAR << "ASC file could not be retrieced" << endl;
+	  return true;
+#warning FIXME define behavior if file is missing
+	}
+	if (! PathInfo("/usr/bin/gpgv").isExist())
+	{
+	  WAR << "/usr/bin/gpgv doesn't exist, skipping integrity check" << endl;
+	  return true;
+	}
+
+	ExternalProgram* prog = new ExternalProgram("/usr/bin/gpgv " + asc_file.asString(), ExternalProgram::Discard_Stderr, false, -1, true);
+	if (! prog)
+	  ZYPP_THROW(Exception("Cannot run the script"));
+	int retval = prog->close();
+	delete prog;
+	if (retval != 0)
+	{
+	  ERR << "ASC checking for " << filename << " failed" << endl;
+#warning FIXME remove line below
+	  return true;
+	  return false;
+	}
+	return true;
+      }
 
     } // namespace yum
     /////////////////////////////////////////////////////////////////

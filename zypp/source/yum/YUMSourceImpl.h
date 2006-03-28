@@ -127,6 +127,9 @@ namespace zypp
 	typedef std::map<zypp::NVRA, ImplAndPackage> PackageImplMapT;
 	PackageImplMapT _package_impl;
 
+	static bool checkCheckSum (const Pathname & filename, const std::string & csum_type, const std::string & csum);
+	static bool checkAscIntegrity (const Pathname & filename, const Pathname & asc_file);
+
       };
 
       ///////////////////////////////////////////////////////////////////
