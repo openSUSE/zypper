@@ -497,10 +497,15 @@ namespace zypp
         // parse selections
         try {
           p = cache ? _descr_dir + "selections" : provideFile( _descr_dir + "selections");
+          if (  cache && ( ! PathInfo(p).isExist()) )
+          {
+            MIL << p << " not found." << endl;
+            file_found = false;
+          }
         }
         catch (Exception & excpt_r)
         {
-          MIL << "'selections' file not found" << endl;
+          MIL << "Cannot provide file 'selections'" << endl;
           file_found = false;
         }
 
@@ -550,6 +555,11 @@ namespace zypp
 
         try {
           p = cache ? _descr_dir + "patterns" : provideFile( _descr_dir + "patterns");
+          if (  cache && ( ! PathInfo(p).isExist()) )
+          {
+            MIL << p << " not found." << endl;
+            file_found = false;
+          }
         }
         catch (Exception & excpt_r)
         {
