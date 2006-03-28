@@ -69,6 +69,9 @@ namespace zypp {
        * If environment is provided, varaiables will be added to the childs environment,
        * overwriting existing ones.
        */
+      
+      ExternalProgram();
+      
       ExternalProgram (const char *const *argv,
     		     Stderr_Disposition stderr_disp = Normal_Stderr,
     		     bool use_pty = false, int stderr_fd = -1, bool default_locale = false,

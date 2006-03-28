@@ -33,6 +33,10 @@ using namespace std;
 
 namespace zypp {
 
+    ExternalProgram::ExternalProgram() : use_pty (false)
+    {
+    }
+    
     ExternalProgram::ExternalProgram (string commandline,
     				  Stderr_Disposition stderr_disp, bool use_pty,
     				  int stderr_fd, bool default_locale,
