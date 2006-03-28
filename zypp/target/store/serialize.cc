@@ -236,22 +236,6 @@ std::string toXML( const Language::constPtr &obj )
   return out.str();
 }
 
-/*
-
-NOT NEEDED FOR NOW, WE JUST LOSE THE TRANSLATION AT STORAGE TIME
-
-static std::string localizedXMLTags( const TranslatedText &text, const std::string &tagname)
-{
-  stringstream out;
-  std::set<Locale> locales = text.locales();
-  for(std::set<Locale>::const_iterator it = locales.begin(); it != locales.end(); ++it)
-  {
-    Locale lcl = *it;
-    out << "    <" << tagname << " lang='" << lcl.name() << "'>" << text.text(lcl) << "</" << tagname <<">" << std::endl;
-  }
-  return out.str();
-}
-*/
 
 template<> 
 std::string toXML( const Selection::constPtr &obj )
@@ -359,7 +343,6 @@ std::string castedToXML( const Resolvable::constPtr &resolvable )
      out << toXML(asKind<const Selection>(resolvable)) << std::endl;
   return out.str();
 }
-
 
 std::string resolvableTypeToString( const Resolvable::constPtr &resolvable, bool plural )
 {
