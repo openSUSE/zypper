@@ -58,22 +58,22 @@ unsigned diffFiles(const std::string file1, const std::string file2, std::string
 	file2.c_str(),
 	NULL
     };
-    ExternalProgram* prog = new ExternalProgram(argv,ExternalProgram::Discard_Stderr, false, -1, true);
+    ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
 
-    if(!prog)
-	return 2;
+    //if(!prog)
+    //return 2;
 
     string line;
     int count = 0;
-    for(line = prog->receiveLine(), count=0;
+    for(line = prog.receiveLine(), count=0;
 	!line.empty();
-	line = prog->receiveLine(), count++ )
+	line = prog.receiveLine(), count++ )
     {
 	if(maxlines<0?true:count<maxlines)
 	    out+=line;
     }
-
-    return prog->close();
+    
+    return prog.close();
 }
 
 
