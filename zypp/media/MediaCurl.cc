@@ -609,7 +609,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     if( assert_dir( dest.dirname() ) )
     {
       DBG << "assert_dir " << dest.dirname() << " failed" << endl;
-      ZYPP_THROW( MediaSystemException(_url, "System error on " + dest.dirname().asString()) );
+      ZYPP_THROW( MediaSystemException(url, "System error on " + dest.dirname().asString()) );
     }
 
     DBG << "URL: " << url.asString() << endl;
@@ -652,7 +652,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     CURLcode ret = curl_easy_setopt( _curl, CURLOPT_URL,
                                      urlBuffer.c_str() );
     if ( ret != 0 ) {
-      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+      ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
     }
 
     string destNew = target.asString() + ".new.zypp.XXXXXX";
@@ -661,7 +661,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     {
       ERR << "out of memory for temp file name" << endl;
       ZYPP_THROW(MediaSystemException(
-        _url, "out of memory for temp file name"
+        url, "out of memory for temp file name"
       ));
     }
 
@@ -690,7 +690,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     if ( ret != 0 ) {
       ::fclose( file );
       filesystem::unlink( destNew );
-      ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+      ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
     }
 
     // Set callback and perform.
@@ -736,7 +736,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
 	      {
 		err = "File not found";
 	      }
-	      ZYPP_THROW( MediaCurlException(_url, err, _curlError));
+	      ZYPP_THROW( MediaCurlException(url, err, _curlError));
             }
           }
           break;
@@ -765,7 +765,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
           err = "Unrecognized error";
           break;
        }
-       ZYPP_THROW(MediaCurlException(_url, err, _curlError));
+       ZYPP_THROW(MediaCurlException(url, err, _curlError));
       }
       catch (const MediaException & excpt_r)
       {
