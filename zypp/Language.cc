@@ -10,12 +10,49 @@
  *
 */
 #include "zypp/Language.h"
+#include "zypp/TranslatedText.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  ///////////////////////////////////////////////////////////////////
+  namespace detail
+  { /////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //  CLASS NAME : LanguageImpl
+    //
+    /** Exposition only. */
+    class LanguageImpl : public LanguageImplIf
+    {
+    public:
+      LanguageImpl( const Locale & locale_r )
+      : _locale( locale_r )
+      {}
+
+    public:
+      virtual TranslatedText summary() const
+      { return TranslatedText( _locale.name() ); }
+
+      virtual TranslatedText description() const
+      { return summary(); }
+
+    private:
+       Locale _locale;
+    };
+    ///////////////////////////////////////////////////////////////////
+
+
+    /////////////////////////////////////////////////////////////////
+  } // namespace detail
+  ///////////////////////////////////////////////////////////////////
+
+
   IMPL_PTR_TYPE(Language);
+
+
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -40,9 +77,9 @@ namespace zypp
     Ptr ret( _ptrmap[locale_r] );
     if ( ! ret )
       {
+        detail::ResImplTraits<detail::LanguageImpl>::Ptr langImpl( new detail::LanguageImpl( locale_r ) );
         NVRAD dataCollect( locale_r.code() );
-        detail::ResImplTraits<detail::LanguageImplIf>::Ptr langImpl;
-        ret = _ptrmap[locale_r] = detail::makeResolvableAndImpl( dataCollect, langImpl );
+        ret = _ptrmap[locale_r] = detail::makeResolvableFromImpl( dataCollect, langImpl );
       }
     return ret;
   }
@@ -53,9 +90,9 @@ namespace zypp
     Ptr ret( _ptrmap[locale_r] );
     if ( ! ret )
       {
+        detail::ResImplTraits<detail::LanguageImpl>::Ptr langImpl( new detail::LanguageImpl( locale_r ) );
         NVRAD dataCollect( locale_r.code() );
-        detail::ResImplTraits<detail::LanguageImplIf>::Ptr langImpl;
-        ret = _ptrmap[locale_r] = detail::makeResolvableAndImpl( dataCollect, langImpl );
+        ret = _ptrmap[locale_r] = detail::makeResolvableFromImpl( dataCollect, langImpl );
       }
     return ret;
   }
