@@ -12,7 +12,7 @@
 #ifndef ZYPP_HELIXLANGUAGEIMPL_H
 #define ZYPP_HELIXLANGUAGEIMPL_H
 
-#include "zypp/detail/LanguageImplIf.h"
+#include "zypp/Language.h"
 #include "HelixParser.h"
 
 ///////////////////////////////////////////////////////////////////

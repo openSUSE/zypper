@@ -30,7 +30,7 @@ namespace zypp
 /** Default ctor
 */
 HelixLanguageImpl::HelixLanguageImpl (Source_Ref source_r, const zypp::HelixParser & parsed)
-  : LanguageImplIf( TranslatedText( "dummy" ) )
+  : LanguageImplIf()
 {
 }
 
