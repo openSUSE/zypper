@@ -93,6 +93,7 @@ namespace zypp
 	Source_Ref _source;
       public:
 	Source_Ref source() const;
+	friend class YUMSourceImpl;
        };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum

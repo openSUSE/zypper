@@ -817,12 +817,13 @@ namespace zypp
 
   Message::Ptr YUMSourceImpl::createMessage(
     Source_Ref source_r,
-    const zypp::parser::yum::YUMPatchMessage & parsed
+    const zypp::parser::yum::YUMPatchMessage & parsed,
+    Patch::constPtr patch
   )
   {
     try
     {
-      ResImplTraits<YUMMessageImpl>::Ptr impl(new YUMMessageImpl(source_r, parsed));
+      ResImplTraits<YUMMessageImpl>::Ptr impl(new YUMMessageImpl(source_r, parsed, patch));
       Arch arch;
       if (!parsed.arch.empty())
         arch = Arch(parsed.arch);
@@ -929,6 +930,52 @@ namespace zypp
       Patch::Ptr patch = detail::makeResolvableFromImpl(
 	dataCollect, impl
       );
+	// now process the atoms
+	CapFactory _f;
+	Capability cap( _f.parse(
+	  Patch::TraitsType::kind,
+	  parsed.name,
+	  Rel::EQ,
+	  Edition(parsed.ver, parsed.rel, parsed.epoch)
+	  ));
+	for (std::list<shared_ptr<YUMPatchAtom> >::const_iterator it
+					= parsed.atoms.begin();
+	     it != parsed.atoms.end();
+	     it++)
+	{
+	  switch ((*it)->atomType())
+	  {
+	    case YUMPatchAtom::Package: {
+	      shared_ptr<YUMPatchPackage> package_data
+		= dynamic_pointer_cast<YUMPatchPackage>(*it);
+              Atom::Ptr atom = augmentPackage(source_r, *package_data );
+              impl->_atoms.push_back(atom);
+	      break;
+	    }
+	    case YUMPatchAtom::Message: {
+	      shared_ptr<YUMPatchMessage> message_data
+		= dynamic_pointer_cast<YUMPatchMessage>(*it);
+	      Message::Ptr message = createMessage(source_r, *message_data, patch);
+	      impl->_atoms.push_back(message);
+	      break;
+	    }
+	    case YUMPatchAtom::Script: {
+	      shared_ptr<YUMPatchScript> script_data
+		= dynamic_pointer_cast<YUMPatchScript>(*it);
+	      Script::Ptr script = createScript(source_r, *script_data);
+	      impl->_atoms.push_back(script);
+	      break;
+	    }
+	    default:
+	      ERR << "Unknown type of atom" << endl;
+	  }
+	  for (Patch::AtomList::iterator it = impl->_atoms.begin();
+	       it != impl->_atoms.end();
+	       it++)
+	  {
+	    (*it)->injectRequires(cap);
+	  }
+	}
       return patch;
     }
     catch (const Exception & excpt_r)

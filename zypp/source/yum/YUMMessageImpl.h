@@ -37,7 +37,8 @@ namespace zypp
         /** Default ctor */
         YUMMessageImpl(
 	  Source_Ref source_r,
-	  const zypp::parser::yum::YUMPatchMessage & parsed
+	  const zypp::parser::yum::YUMPatchMessage & parsed,
+	  Patch::constPtr patch
 	);
 	/** Get the text of the message */
 	virtual TranslatedText text() const;

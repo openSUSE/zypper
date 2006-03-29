@@ -42,7 +42,7 @@ namespace zypp
       /** */
       virtual ByteCount size() const;
       /** Patch the message belongs to - if any */
-      Patch::constPtr patch() const; // TODO make it abstract = 0;
+      virtual Patch::constPtr patch() const; // TODO make it abstract = 0;
     };
     ///////////////////////////////////////////////////////////////////
 

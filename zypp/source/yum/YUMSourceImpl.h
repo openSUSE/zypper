@@ -81,7 +81,8 @@ namespace zypp
 	);
 	Message::Ptr createMessage(
 	  Source_Ref source_r,
-	  const zypp::parser::yum::YUMPatchMessage & parsed
+	  const zypp::parser::yum::YUMPatchMessage & parsed,
+	  Patch::constPtr patch
 	);
 	Script::Ptr createScript(
 	  Source_Ref source_r,

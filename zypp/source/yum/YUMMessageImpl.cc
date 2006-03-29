@@ -33,9 +33,11 @@ namespace zypp
       */
       YUMMessageImpl::YUMMessageImpl(
 	Source_Ref source_r,
-	const zypp::parser::yum::YUMPatchMessage & parsed
+	const zypp::parser::yum::YUMPatchMessage & parsed,
+	Patch::constPtr patch
       )
       : _source(source_r)
+      , _patch(patch)
       {
 	_text = parsed.text;
       }

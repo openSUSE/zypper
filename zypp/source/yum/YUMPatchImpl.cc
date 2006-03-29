@@ -57,7 +57,7 @@ namespace zypp
 	std::string updateScript;
         _summary = parsed.summary;
         _description = parsed.description;
-
+/*
 	// now process the atoms
 	CapFactory _f;
 	Capability cap( _f.parse(
@@ -105,6 +105,7 @@ namespace zypp
 	  }
 
 	}
+*/
       }
 
       std::string YUMPatchImpl::id() const
