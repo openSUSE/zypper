@@ -23,26 +23,26 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Locale.h"
 
-DEFINE_PTR_TYPE(KeyRing);
-
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+  DEFINE_PTR_TYPE(KeyRing);
 
   struct KeyRingReport : public callback::ReportBase
   {
     virtual bool askUserToTrustKey( const std::string keyid, const std::string keyname )
     { return false; }
   };
-  
-  
+
+
   struct PublicKey
   {
     std::string id;
     std::string name;
     std::string fingerprint;
   };
-  
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : KeyRing
@@ -63,26 +63,26 @@ namespace zypp
     /** Ctor \todo Make ctor it explicit */
     explicit
     KeyRing(const Pathname &general_kr, const Pathname &trusted_kr);
-    
+
     /**
      * imports a key from a file.
      * throw if key was not imported
      */
     void importKey( const Pathname &keyfile, bool trusted = false);
     PublicKey readPublicKey( const Pathname &keyfile );
-    
+
     /**
-     * removes a key from the keyring. 
+     * removes a key from the keyring.
      * If trusted is true, Remove it from trusted keyring too.
      */
     void deleteKey( const std::string &id, bool trusted =  false);
-    
+
     std::list<PublicKey> publicKeys();
     std::list<PublicKey> trustedPublicKeys();
-    
+
     bool verifyFileSignature( const Pathname &file, const Pathname &signature);
     bool verifyFileTrustedSignature( const Pathname &file, const Pathname &signature);
-    
+
 /** Dtor */
     ~KeyRing();
 
