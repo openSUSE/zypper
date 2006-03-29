@@ -1511,10 +1511,17 @@ dup_name_check_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 	&& status.isToBeInstalled ()
 	&& info->other->kind() == item->kind()
 	&& info->other->name() == item->name()
+#if 0
 	&& item->edition().compare(info->other->edition()) == 0
 	&& item->arch() == info->other->arch()
-	&& item->source() != info->other->source()) // if it's exactly the same package, ignore it silently.
+#endif
+	&& item != info->other) // if it's exactly the same package, ignore it silently.
     {
+	Package::constPtr p1 = asKind<Package>(item.resolvable());
+	Package::constPtr p2 = asKind<Package>(info->other.resolvable());
+	if (p1 && p2 && p1->installOnly() && p2->installOnly())		// both are parallel installable
+	    return;
+
 	info->flag = true;
 	info->foundItem = item;
     }
