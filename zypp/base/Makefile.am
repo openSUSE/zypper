@@ -34,6 +34,7 @@ baseinclude_HEADERS =	\
 	String.h	\
 	Unit.h		\
 		\
+	Counter.h	\
 		\
 	ExternalDataSource.h
 
