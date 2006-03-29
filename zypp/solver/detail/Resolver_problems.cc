@@ -65,6 +65,7 @@ using namespace std;
 
 typedef map<PoolItem_Ref, ResolverInfo_Ptr> ProblemMap;
 typedef multimap<PoolItem_Ref, Capability> ItemCapabilityMap;
+typedef multimap<PoolItem_Ref, PoolItem_Ref> ConflictMap;	
 
 // match template over ItemCapabilityMap
 template <class K, class V>
@@ -80,6 +81,21 @@ public:
 	return value.matches (elem.second) == CapMatch::yes;
     }
 };
+
+// match template over ConflictMap
+template <class K, class V>
+class conflict_equals {
+  private:
+    V value;
+public:
+    conflict_equals (const V& v)
+	: value(v) {
+    }
+    // comparison
+    bool operator() (pair<const K, V> elem) {
+	return value = elem.second;
+    }
+};	
 	
 // set resolvables with errors
 
@@ -89,7 +105,9 @@ typedef struct {
     // for uninstallation
     ItemCapabilityMap provideAndDeleteMap;
     // A map of PoolItems which provides a capability but are locked
-    ItemCapabilityMap provideAndLockMap;    
+    ItemCapabilityMap provideAndLockMap;
+    // A map of conflicting Items
+    ConflictMap conflictMap;
 } ResItemCollector;
 
 
@@ -117,7 +135,7 @@ collector_cb (ResolverInfo_Ptr info, void *data)
 	    collector->provideAndDeleteMap.insert (make_pair( misc_info->other(), misc_info->capability()));
 	}
     }
-    // Collicting items which are providing requirements but they
+    // Collecting items which are providing requirements but they
     // are locked
     if (info->type() == RESOLVER_INFO_TYPE_LOCKED_PROVIDER) {
 	ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
@@ -131,7 +149,25 @@ collector_cb (ResolverInfo_Ptr info, void *data)
 		     << " into provideAndLockMap map");
 	    collector->provideAndLockMap.insert (make_pair( misc_info->other(), misc_info->capability()));
 	}
-    }   
+    }
+
+    // Collecting all conflicting Items
+    if (info->type() == RESOLVER_INFO_TYPE_CONFLICT_UNINSTALLABLE
+	|| info->type() == RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL) {
+	ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+
+	// does entry already exists ?
+	ConflictMap::iterator pos = find_if (collector->conflictMap.lower_bound(misc_info->other()),
+					     collector->conflictMap.upper_bound(misc_info->other()),
+					     conflict_equals<PoolItem_Ref, PoolItem_Ref>(misc_info->affected()));
+	if (pos == collector->conflictMap.end()) {
+	    _XDEBUG ("Inserting " << misc_info->affected() << "/" <<  misc_info->other()
+		     << " into conflictMap map");
+	    collector->conflictMap.insert (make_pair(misc_info->affected(), misc_info->other()));
+	    collector->conflictMap.insert (make_pair(misc_info->other(), misc_info->affected())); // reverse
+	}
+    }
+    
 }
 
 struct AllRequires
@@ -280,13 +316,34 @@ Resolver::problems (void) const
 	    break;
 	    case RESOLVER_INFO_TYPE_UNINSTALLABLE: {			// Marking p as uninstallable
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
-		what = misc_info->message();
-		// TranslatorExplanation %s = name of package,patch,...		
-		details = str::form (_("%s is not installed and has been marked as uninstallable"), who.c_str());
-		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
-		problem->addSolution (new ProblemSolutionInstall (problem, item)); // Install resolvable again
-		problems.push_back (problem);
-		problem_created = true;
+		// Trying to find a concerning conflict
+
+		for (ConflictMap::const_iterator it = collector.conflictMap.begin();
+		     it != collector.conflictMap.end(); ++it) {
+		    if (it->first == item) {
+			what = str::form (_("Cannot install %s because it is conflicting with %s"),
+					  who.c_str(),
+					  it->second->name().c_str());				
+			details = ""; // no further details
+			ResolverProblem_Ptr problem = new ResolverProblem (what, details);		
+			// Uninstall p
+			problem->addSolution (new ProblemSolutionUninstall (problem, item));
+			// Uninstall q
+			problem->addSolution (new ProblemSolutionUninstall (problem, it->second));
+			problems.push_back (problem);
+			problem_created = true;
+		    }
+		}
+		if (!problem_created) {
+		    // default 
+		    what = misc_info->message();
+		    // TranslatorExplanation %s = name of package,patch,...		
+		    details = str::form (_("%s is not installed and has been marked as uninstallable"), who.c_str());
+		    ResolverProblem_Ptr problem = new ResolverProblem (what, details);
+		    problem->addSolution (new ProblemSolutionInstall (problem, item)); // Install resolvable again
+		    problems.push_back (problem);
+		    problem_created = true;
+		}
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_REJECT_INSTALL: {			// p is scheduled to be installed, but this is not possible because of dependency problems.
