@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Mar 29 23:28:13 CEST 2006 - jsrain@suse.de
+
+- fixed checking checksum of YUM metadata, added sha1 vs. sha256
+  detection
+
+-------------------------------------------------------------------
 Wed Mar 29 09:13:51 CEST 2006 - visnov@suse.de
 
 - added support for external scripts to metadata (#159928) (jsrain)

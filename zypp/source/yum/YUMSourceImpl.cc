@@ -213,7 +213,7 @@ namespace zypp
 	      {
 		string filename = (*patch)->location;
 		src = provideFile(_path + filename);
-		if (! checkCheckSum(provideFile(_path + filename), (*patch)->checksumType, (*patch)->checksum))
+		if (! checkCheckSum(src, (*patch)->checksumType, (*patch)->checksum))
 		{
 		    ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 		}
@@ -316,7 +316,7 @@ namespace zypp
 	      : _cache_dir + (*it)->location;
 	    if (_cache_dir.empty())
 	    {
-	      if (! checkCheckSum((*it)->location, (*it)->checksumType, (*it)->checksum))
+	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
 	      {
 	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 	      }
@@ -350,7 +350,7 @@ namespace zypp
 	      : _cache_dir + (*it)->location;
 	    if (_cache_dir.empty())
 	    {
-	      if (! checkCheckSum((*it)->location, (*it)->checksumType, (*it)->checksum))
+	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
 	      {
 	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 	      }
@@ -388,7 +388,7 @@ namespace zypp
 			      : _cache_dir + (*it)->location;
 	    if (_cache_dir.empty())
 	    {
-	      if (! checkCheckSum((*it)->location, (*it)->checksumType, (*it)->checksum))
+	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
 	      {
 	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 	      }
@@ -454,7 +454,7 @@ namespace zypp
 	      : _cache_dir + (*it)->location;
 	    if (_cache_dir.empty())
 	    {
-	      if (! checkCheckSum((*it)->location, (*it)->checksumType, (*it)->checksum))
+	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
 	      {
 	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 	      }
@@ -494,7 +494,7 @@ namespace zypp
 	      : _cache_dir + (*it)->location;
 	    if (_cache_dir.empty())
 	    {
-	      if (! checkCheckSum((*it)->location, (*it)->checksumType, (*it)->checksum))
+	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
 	      {
 	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 	      }
@@ -534,7 +534,7 @@ namespace zypp
 	      : _cache_dir + (*it)->location;
 	    if (_cache_dir.empty())
 	    {
-	      if (! checkCheckSum((*it)->location, (*it)->checksumType, (*it)->checksum))
+	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
 	      {
 	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 	      }
@@ -574,7 +574,7 @@ namespace zypp
 	      : _cache_dir + (*it)->location;
 	    if (_cache_dir.empty())
 	    {
-	      if (! checkCheckSum((*it)->location, (*it)->checksumType, (*it)->checksum))
+	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
 	      {
 	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 	      }
@@ -590,7 +590,7 @@ namespace zypp
 		string filename = (*patch)->location;
 		if (_cache_dir.empty())
 		{
-		  if (! checkCheckSum(filename, (*patch)->checksumType, (*patch)->checksum))
+		  if (! checkCheckSum(provideFile(_path + filename), (*patch)->checksumType, (*patch)->checksum))
 		  {
 		    ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 		  }
@@ -1147,9 +1147,17 @@ namespace zypp
     }
     return cap;
   }
-      bool YUMSourceImpl::checkCheckSum (const Pathname & filename, const std::string & csum_type, const std::string & csum)
+      bool YUMSourceImpl::checkCheckSum (const Pathname & filename, std::string csum_type, const std::string & csum)
       {
 	MIL << "Checking checksum for " << filename << " as type: " << csum_type << "; value: " << csum << endl;
+	if (str::toLower(csum_type) == "sha")
+	{
+	  if (csum.size() == 40)
+	    csum_type = "sha1";
+	  else if (csum.size() == 64)
+	    csum_type = "sha256";
+	  DBG << "Checksum size is " << csum.size() << ", checksum type set to " << csum_type << endl;
+	}
 	ifstream st(filename.asString().c_str());
 	std::string dig = Digest::digest (csum_type, st, 4096);
 	if (dig == "")
