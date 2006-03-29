@@ -732,6 +732,8 @@ namespace zypp
               impl->_location = parsed.location;
               impl->_mediaid = str::strtonum<unsigned>( parsed.media );
           }
+	  impl->_install_only = parsed.installOnly;
+	  }
   //	if (!parsed.plainRpms.empty()) impl->_plain_rpms = parsed.plainRpms;
   #warning Needs equal PatchRpm and DeltaRpm definition in parser/yum and source/yum
   #if 0
