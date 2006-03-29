@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Mar 29 23:12:30 CEST 2006 - ma@suse.de
+
+- Auto protect installed packages from unknown vendor. (#157446)
+
+-------------------------------------------------------------------
 Wed Mar 29 23:28:13 CEST 2006 - jsrain@suse.de
 
 - fixed checking checksum of YUM metadata, added sha1 vs. sha256
@@ -39,7 +44,7 @@ Fri Mar 24 18:16:22 CET 2006 - schubi@suse.de
 - Implement inter process locking in zypp.
 - Added No medium found output
 - splitting modaliases in supplements TOO
-- parse also the available signing keys 
+- parse also the available signing keys
 
 -------------------------------------------------------------------
 Fri Mar 24 10:44:10 CET 2006 - visnov@suse.cz
@@ -48,7 +53,7 @@ Fri Mar 24 10:44:10 CET 2006 - visnov@suse.cz
 - more testsuites (schubi)
 - updated translations (schubi)
 - added MediaNotEjectedException (mt)
-- rev 2652 
+- rev 2652
 
 -------------------------------------------------------------------
 Thu Mar 23 14:10:54 CET 2006 - dmacvicar@suse.de
@@ -70,7 +75,7 @@ Wed Mar 22 19:58:37 CET 2006 - visnov@suse.cz
 
 - pkg-config support (mvidner)
 - close all medias when destructing MediaSet (jsrain)
-- rev 2622 
+- rev 2622
 
 -------------------------------------------------------------------
 Wed Mar 22 15:48:05 CET 2006 - dmacvicar@suse.de
@@ -113,7 +118,7 @@ Tue Mar 21 19:06:56 CET 2006 - mvidner@suse.cz
 Tue Mar 21 09:04:06 CET 2006 - visnov@suse.de
 
 - properly report error for media change callback
-- rev 2579 
+- rev 2579
 
 -------------------------------------------------------------------
 Mon Mar 20 23:02:07 CET 2006 - ma@suse.de

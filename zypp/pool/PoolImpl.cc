@@ -15,6 +15,8 @@
 #include "zypp/pool/PoolImpl.h"
 #include "zypp/pool/PoolStats.h"
 #include "zypp/CapSet.h"
+#include "zypp/Package.h"
+#include "zypp/VendorAttr.h"
 
 using std::endl;
 
@@ -218,18 +220,49 @@ namespace zypp
     */
     void PoolImplInserter::operator()( ResObject::constPtr ptr_r )
     {
-      if ( ptr_r && ( ptr_r->kind() != ResTraits<SrcPackage>::kind
-		      && ( _installed
-			   || ptr_r->arch().compatibleWith( _poolImpl.targetArch() ) ) ) )
-        {
-          PoolImpl::Item item ( ptr_r, ResStatus (_installed) );
-          _poolImpl._store.insert( item );
-          _poolImpl._namehash.insert( item );
-          _poolImpl._caphash.insert( item );
+      /* -------------------------------------------------------------------------------
+       * 1.) Filter unwanted items
+       * ------------------------------------------------------------------------------- */
+       if ( ! ptr_r )
+        return;
 
-          // don't miss to invalidate ResPoolProxy
-          _poolImpl.invalidateProxy();
+      if ( isKind<SrcPackage>( ptr_r ) )
+        return;
+
+      if ( ! _installed )
+        {
+          // filter arch incomatible available(!) objects
+          if ( ! ptr_r->arch().compatibleWith( _poolImpl.targetArch() ) )
+            return;
         }
+
+      /* -------------------------------------------------------------------------------
+       * 2.) Create ResStatus object
+       * ------------------------------------------------------------------------------- */
+      PoolImpl::Item item( ptr_r, ResStatus (_installed) );
+
+
+      /* -------------------------------------------------------------------------------
+       * 3.) Status adjustments
+       * ------------------------------------------------------------------------------- */
+      if ( _installed )
+        {
+          Package::constPtr pkgptr( asKind<Package>( ptr_r ) );
+          if ( pkgptr && VendorAttr::instance().autoProtect( pkgptr->vendor() ) )
+            {
+              item.status().setTransactValue( ResStatus::LOCKED, ResStatus::USER );
+              MIL << "Protect vendor '" << pkgptr->vendor() << "' " << *pkgptr << endl;
+            }
+        }
+
+      /* -------------------------------------------------------------------------------
+       * 3.) Feed
+       * ------------------------------------------------------------------------------- */
+      _poolImpl._store.insert( item );
+      _poolImpl._namehash.insert( item );
+      _poolImpl._caphash.insert( item );
+      // don't miss to invalidate ResPoolProxy
+      _poolImpl.invalidateProxy();
     }
 
     /******************************************************************
