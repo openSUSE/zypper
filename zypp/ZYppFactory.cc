@@ -43,9 +43,9 @@ namespace zypp
   {
     public:
 
-    ZYppGlobalLock() : _zypp_lockfile(0)
+      ZYppGlobalLock() : _zypp_lockfile(0), _clean_lock(false)
     {
-
+      
     }
 
     ~ZYppGlobalLock()
@@ -59,16 +59,21 @@ namespace zypp
               unLockFile();
               closeLockFile();
 
-              MIL << "Cleaning lock file. (" << curr_pid << ")" << std::endl;
-              if ( filesystem::unlink(lock_file) == 0 )
-                MIL << "Lockfile cleaned. (" << curr_pid << ")" << std::endl;
-              else
-                ERR << "Cant clean lockfile. (" << curr_pid << ")" << std::endl;
+              if ( _clean_lock )
+              {
+                MIL << "Cleaning lock file. (" << curr_pid << ")" << std::endl;
+                if ( filesystem::unlink(lock_file) == 0 )
+                  MIL << "Lockfile cleaned. (" << curr_pid << ")" << std::endl;
+                else
+                  ERR << "Cant clean lockfile. (" << curr_pid << ")" << std::endl;
+              }
             }
         }
       catch(...) {} // let no exception escape.
     }
 
+    bool _clean_lock;
+    
     private:
     FILE *_zypp_lockfile;
 
@@ -293,6 +298,7 @@ namespace zypp
       else
       {
         _instance = new ZYpp( ZYpp::Impl_Ptr(new ZYpp::Impl) );
+        globalLock._clean_lock = true;
       }
     }
 
