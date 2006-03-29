@@ -19,6 +19,7 @@ baseinclude_HEADERS =	\
 	Functional.h	\
 	Iterator.h	\
 	Logger.h	\
+	LogTools.h	\
 	LogControl.h	\
 	\
 	Fd.h		\
