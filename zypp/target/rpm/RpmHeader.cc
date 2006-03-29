@@ -27,12 +27,6 @@
 
 using namespace std;
 
-#ifndef RPMTAG_ENHANCESNAME
-#define RPMTAG_ENHANCESNAME     1159
-#define RPMTAG_ENHANCESFLAGS    1160
-#define RPMTAG_ENHANCESVERSION  1161
-#endif
-
 namespace zypp {
   namespace target {
     namespace rpm {
