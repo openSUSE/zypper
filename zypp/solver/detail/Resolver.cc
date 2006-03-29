@@ -452,6 +452,8 @@ Resolver::establishState (ResolverContext_Ptr context)
 bool
 Resolver::establishPool ()
 {
+    MIL << "Resolver::establishPool()" << endl;
+
     establishState ();						// establish !
     ResolverContext_Ptr solution = bestContext();
 
