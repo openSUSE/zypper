@@ -19,6 +19,7 @@
 #include "zypp/Target.h"
 #include "zypp/Resolver.h"
 #include "zypp/Locale.h"
+#include "zypp/KeyRing.h"
 #include "zypp/ZYppCommitResult.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -58,6 +59,11 @@ namespace zypp
       SourceFeed_Ref sourceFeed() const
       { return _sourceFeed; }
 
+      /** */
+      KeyRing_Ptr keyRing() const
+      { return _keyring; }
+
+      
       Resolver_Ptr resolver() const
       { return _resolver; }
 
@@ -140,6 +146,8 @@ namespace zypp
       Target_Ptr _target;
       /** */
       Resolver_Ptr _resolver;
+      
+      KeyRing_Ptr _keyring;
       /** */
       Arch _architecture;
       /** */

@@ -70,7 +70,10 @@ namespace zypp
     , _disk_usage()
     {
       MIL << "defaultTextLocale: '" << _textLocale << "'" << endl;
-
+      
+      MIL << "initializing keyring..." << std::endl;
+      // , _keyring( new KeyRing(homePath() + Pathname("/keyring/all"), homePath() + Pathname("/keyring/trusted")))
+      
       struct utsname buf;
       if (uname (&buf) < 0) {
 	ERR << "Can't determine system architecture" << endl;

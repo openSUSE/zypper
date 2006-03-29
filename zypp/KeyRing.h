@@ -18,13 +18,24 @@
 #include <set>
 #include <string>
 
+#include "zypp/base/ReferenceCounted.h"
+#include "zypp/Callback.h"
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Locale.h"
+
+DEFINE_PTR_TYPE(KeyRing);
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  struct KeyRingReport : public callback::ReportBase
+  {
+    virtual bool askUserToTrustKey( const std::string keyid, const std::string keyname )
+    { return false; }
+  };
+  
+  
   struct PublicKey
   {
     std::string id;
@@ -38,7 +49,7 @@ namespace zypp
   //
   /** Class that represent a text and multiple translations.
   */
-  class KeyRing
+  class KeyRing  : public base::ReferenceCounted, private base::NonCopyable
   {
     friend std::ostream & operator<<( std::ostream & str, const KeyRing & obj );
 
@@ -52,11 +63,14 @@ namespace zypp
     /** Ctor \todo Make ctor it explicit */
     explicit
     KeyRing(const Pathname &general_kr, const Pathname &trusted_kr);
+    
     /**
-     * imports a key from a file and returns the imported key.
+     * imports a key from a file.
      * throw if key was not imported
      */
-    PublicKey importKey( const Pathname &keyfile, bool trusted = false);
+    void importKey( const Pathname &keyfile, bool trusted = false);
+    PublicKey readPublicKey( const Pathname &keyfile );
+    
     /**
      * removes a key from the keyring. 
      * If trusted is true, Remove it from trusted keyring too.
