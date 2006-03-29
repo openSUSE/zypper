@@ -46,7 +46,8 @@ namespace zypp
 		{
 		    // DBG << "Found " << (*atom_it)->name() << " " << (*foundNames)->edition().asString() << endl;
 
-		    if ( (*atom_it)->edition() == (*foundNames)->edition() &&
+		    if ( ! isKind<Atom>( (*foundNames).resolvable() ) &&
+			 (*atom_it)->edition() == (*foundNames)->edition() &&
 			 (*atom_it)->arch()    == (*foundNames)->arch()      )
 		    {
 			found = true;
