@@ -62,12 +62,15 @@ namespace zypp {
       { }
 
       YUMPrimaryData::YUMPrimaryData()
+	: installOnly( false )
       { }
 
       FileData::FileData()
       { }
 
       YUMPatchData::YUMPatchData()
+	: rebootNeeded( false )
+	, packageManager( false )
       { }
 
       FileData::FileData(const std::string &name,

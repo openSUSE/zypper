@@ -215,7 +215,7 @@ namespace zypp {
 
       class YUMPatchPackage : public YUMPatchAtom {
       public:
-        YUMPatchPackage() {};
+        YUMPatchPackage() : installOnly( false ) {};
         virtual AtomType atomType() { return Package; };
         // data for primary
         std::string arch;
