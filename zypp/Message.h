@@ -37,6 +37,8 @@ namespace zypp
   public:
     /** Get the text of the message */
     TranslatedText text() const;
+    /** Patch the message belongs to - if any */
+    Patch::constPtr patch() const;
 
   protected:
     Message( const NVRAD & nvrad_r );

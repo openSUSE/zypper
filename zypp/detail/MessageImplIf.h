@@ -13,6 +13,7 @@
 #define ZYPP_DETAIL_MESSAGEIMPLIF_H
 
 #include "zypp/detail/ResObjectImplIf.h"
+#include "zypp/Patch.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -40,6 +41,8 @@ namespace zypp
       virtual TranslatedText text() const = 0;
       /** */
       virtual ByteCount size() const;
+      /** Patch the message belongs to - if any */
+      Patch::constPtr patch() const; // TODO make it abstract = 0;
     };
     ///////////////////////////////////////////////////////////////////
 

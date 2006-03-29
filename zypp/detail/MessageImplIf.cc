@@ -26,6 +26,10 @@ namespace zypp
       ByteCount MessageImplIf::size() const
       { return ResObjectImplIf::size(); }
 
+      /** Patch the message belongs to - if any */
+      Patch::constPtr MessageImplIf::patch() const
+      { return Patch::constPtr(); }
+
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////

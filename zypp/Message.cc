@@ -43,6 +43,9 @@ namespace zypp
   TranslatedText Message::text() const
   { return pimpl().text(); }
 
+  /** Patch the message belongs to - if any */
+  Patch::constPtr Message::patch() const
+  { return pimpl().patch(); }
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
