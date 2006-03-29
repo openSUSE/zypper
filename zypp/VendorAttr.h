@@ -13,46 +13,34 @@
 #define ZYPP_VENDORATTR_H
 
 #include <iosfwd>
-#include <map>
-#include <list>
 #include <string>
 
+#include "zypp/base/NonCopyable.h"
 #include "zypp/NeedAType.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp {
 //////////////////////////////////////////////////////////////////
 
-class VendorAttr {
+class VendorAttr : private base::NonCopyable
+{
+  public:
+    /** Singleton */
+    static const VendorAttr & instance();
 
-    private:
-	typedef std::map<Vendor,bool> TrustMap;
+    /**
+     * Return whether it's a known vendor
+     **/
+    bool isKnown( const Vendor & vendor_r ) const;
 
-	TrustMap _trustMap;
+    /**
+     * Return whether this vendors packages should be
+     * protected by default.
+     **/
+    bool autoProtect( const Vendor & vendor_r ) const;
 
-	typedef std::list<std::string> VendorList;
-	VendorList _trustedVendors;
-
-    private:
-
-	VendorAttr ();
-	~VendorAttr ();
-
-	bool trusted ( const Vendor & vendor_r );
-
-    public:
-	static VendorAttr *vendorAttr (void);
-
-	/**
-	 * Return whether it's a known vendor
-	 **/
-	bool isKnown( const Vendor & vendor_r );
-
-	/**
-	 * Return whether this vendors packages should be protected by
-	 * default.
-	 **/
-	bool autoProtect( const Vendor & vendor_r );
+  private:
+    VendorAttr();
 };
 
 ///////////////////////////////////////////////////////////////////

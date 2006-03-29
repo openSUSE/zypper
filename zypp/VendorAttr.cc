@@ -17,90 +17,88 @@
 /-*/
 
 #include <iostream>
+#include <set>
+#include <map>
+
+#include "zypp/base/LogTools.h"
 
 #include "zypp/base/String.h"
 #include "zypp/VendorAttr.h"
 
 using namespace std;
 
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::VendorAttr"
+
 ///////////////////////////////////////////////////////////////////
-namespace zypp {
-//////////////////////////////////////////////////////////////////
+namespace zypp
+{ /////////////////////////////////////////////////////////////////
 
-bool
-VendorAttr::trusted ( const Vendor & vendor_r )
-{
-    TrustMap::value_type val( vendor_r, false );
-    pair<TrustMap::iterator, bool> res = _trustMap.insert( val );
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  { /////////////////////////////////////////////////////////////////
 
-    if ( res.second ) {
-	// check the new vendor in map
-	for ( VendorList::const_iterator it = _trustedVendors.begin();
-					  it != _trustedVendors.end(); ++it )
-	{
-	    if ( str::toLower( res.first->first.substr( 0, it->size() ) )
-		 == str::toLower( *it ) ) {
-	  // match
-	  res.first->second = true;
-	  break;
-	}
+    typedef std::map<Vendor,bool> TrustMap;
+    TrustMap _trustMap;
+
+    typedef std::set<std::string> VendorList;
+    VendorList _trustedVendors;
+
+    bool trusted( const Vendor & vendor_r )
+    {
+      TrustMap::value_type val( vendor_r, false );
+      pair<TrustMap::iterator, bool> res = _trustMap.insert( val );
+
+      if ( res.second )
+        {
+          // check the new vendor in map
+          for ( VendorList::const_iterator it = _trustedVendors.begin();
+                it != _trustedVendors.end(); ++it )
+            {
+              if ( str::toLower( res.first->first.substr( 0, it->size() ) )
+                   == str::toLower( *it ) )
+                {
+                  // match
+                  res.first->second = true;
+                  break;
+                }
+            }
+        }
+      return res.first->second;
     }
+
+
+    /////////////////////////////////////////////////////////////////
+  } // namespace
+  ///////////////////////////////////////////////////////////////////
+
+  const VendorAttr & VendorAttr::instance()
+  {
+    static VendorAttr _val;
+    return _val;
   }
 
-  return res.first->second;
-}
-
-VendorAttr::VendorAttr ()
-{
-    char *vendors[] = {
-	"jpackage project",
-	"novell",
-	"sgi",
-	"silicon graphics",
-	"suse",
-	NULL
+  VendorAttr::VendorAttr ()
+  {
+    char * vendors[] = {
+      "jpackage project",
+      "novell",
+      "sgi",
+      "silicon graphics",
+      "suse"
     };
+    _trustedVendors.insert( vendors, vendors+(sizeof(vendors)/sizeof(char *)) );
+    MIL << "Trusted Vendors: " << _trustedVendors << endl;
+  }
 
-    char **vptr = vendors;
-    while (*vptr) {
-	_trustedVendors.push_back (string(*vptr));
-	++vptr;
-    }
-}
-
-VendorAttr::~VendorAttr ()
-{}
+  bool VendorAttr::isKnown( const Vendor & vendor_r ) const
+  { return trusted( vendor_r ); }
 
 
-VendorAttr *
-VendorAttr::vendorAttr (void)
-{
-    static VendorAttr va;
+  bool VendorAttr::autoProtect( const Vendor & vendor_r ) const
+  { return ! trusted( vendor_r ); }
 
-    return &va;
-}
-
-
-/**
- * Return whether it's a known vendor
- **/
-bool
-VendorAttr::isKnown( const Vendor & vendor_r )
-{
-  return trusted( vendor_r );
-}
-
-
-/**
- * Return whether this vendors packages should be protected by
- * default.
- **/
-bool
-VendorAttr::autoProtect( const Vendor & vendor_r )
-{
-  return ! trusted( vendor_r );
-}
-
-///////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
+

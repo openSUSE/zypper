@@ -91,8 +91,6 @@ downgrade_allowed (PoolItem_Ref installed, PoolItem_Ref candidate, Target_Ptr ta
 	return false;
     }
 
-    static VendorAttr *va = VendorAttr::vendorAttr();
-
     Resolvable::constPtr ires = installed.resolvable();
     Package::constPtr ipkg = asKind<Package>(ires);
     Resolvable::constPtr cres = candidate.resolvable();
@@ -100,13 +98,13 @@ downgrade_allowed (PoolItem_Ref installed, PoolItem_Ref candidate, Target_Ptr ta
 if (ipkg) DBG << "Installed vendor '" << ipkg->vendor() << "'" << endl;
 if (cpkg) DBG << "Candidate vendor '" << cpkg->vendor() << "'" << endl;
     if (cpkg
-	&& va->isKnown( cpkg->vendor() ) )
+	&& VendorAttr::instance().isKnown( cpkg->vendor() ) )
     {
 	if (target
 	    && target->root().asString() != "/")	// downgrade ok if we're running from inst-sys
 	{
 	    return true;
-	}  
+	}
 	if ( ipkg->buildtime() < cpkg->buildtime() ) {			// installed has older buildtime
 	    MIL << "allowed downgrade " << installed << " to " << candidate << endl;
 	    return true;						// see bug #152760
