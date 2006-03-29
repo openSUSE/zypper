@@ -3,5 +3,7 @@
 >!> Installing kernel-default from channel update
 >!> No problems so far
 >!> Solution #1:
+>!> install language:de-.noarch
+>!> install language:de_DE-.noarch
 >!> upgrade kernel-default-2.6.16_rc5_git14-2.i586 => kernel-default-2.6.16_rc5_git14-3.i586[update]
->!> installs=0, upgrades=1, uninstalls=0
+>!> installs=2, upgrades=1, uninstalls=0
