@@ -6,4 +6,5 @@ Makefile
 *.lo
 *.a
 *.la
+*.bin
 genclass

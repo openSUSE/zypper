@@ -9,10 +9,10 @@ SUBDIRS =
 ## ##################################################
 
 noinst_PROGRAMS = \
-	Example.createResolvable	\
-	Example.createCapabilities	\
-	Example.COW_debug		\
-	Example.EditionCompare
+	Example.createResolvable.bin	\
+	Example.createCapabilities.bin	\
+	Example.COW_debug.bin		\
+	Example.EditionCompare.bin
 
 ## ##################################################
 
@@ -20,10 +20,10 @@ LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
 
 ## ##################################################
 
-Example_createResolvable_SOURCES 	= Example.createResolvable.cc
-Example_createCapabilities_SOURCES 	= Example.createCapabilities.cc
-Example_COW_debug_SOURCES 		= Example.COW_debug.cc
-Example_EditionCompare_SOURCES 		= Example.EditionCompare.cc
+Example_createResolvable_bin_SOURCES 	= Example.createResolvable.cc
+Example_createCapabilities_bin_SOURCES 	= Example.createCapabilities.cc
+Example_COW_debug_bin_SOURCES 		= Example.COW_debug.cc
+Example_EditionCompare_bin_SOURCES	= Example.EditionCompare.cc
 
 ## ##################################################
 
