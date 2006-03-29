@@ -66,6 +66,9 @@ namespace zypp
     std::list<PublicKey> publicKeys();
     std::list<PublicKey> trustedPublicKeys();
     
+    bool verifyFileSignature( const Pathname &file, const Pathname &signature);
+    bool verifyFileTrustedSignature( const Pathname &file, const Pathname &signature);
+    
 /** Dtor */
     ~KeyRing();
 

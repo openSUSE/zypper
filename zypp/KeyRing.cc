@@ -63,9 +63,11 @@ namespace zypp
     void deleteKey( const std::string &id, bool trusted );
     std::list<PublicKey> trustedPublicKeys();
     std::list<PublicKey> publicKeys();
+    bool verifyFileSignature( const Pathname &file, const Pathname &signature);
+    bool verifyFileTrustedSignature( const Pathname &file, const Pathname &signature);
   private:
     //mutable std::map<Locale, std::string> translations;
-    
+    bool verifyFile( const Pathname &file, const Pathname &signature, const Pathname &keyring);
     PublicKey importKey( const Pathname &keyfile, const Pathname &keyring);
     void deleteKey( const std::string &id, const Pathname &keyring );
     std::list<PublicKey> publicKeys(const Pathname &keyring);
@@ -106,7 +108,17 @@ namespace zypp
   {
     return publicKeys( _trusted_kr );
   }
-
+  
+  bool KeyRing::Impl::verifyFileTrustedSignature( const Pathname &file, const Pathname &signature)
+  {
+    return verifyFile( file, signature, _trusted_kr );
+  }
+  
+  bool KeyRing::Impl::verifyFileSignature( const Pathname &file, const Pathname &signature)
+  {
+    return verifyFile( file, signature, _general_kr );
+  }
+  
   std::list<PublicKey> KeyRing::Impl::publicKeys(const Pathname &keyring)
   {
     const char* argv[] =
@@ -215,6 +227,39 @@ namespace zypp
       MIL << "Deleted key " << id << " from keyring " << keyring << std::endl;
   }    
   
+  bool KeyRing::Impl::verifyFile( const Pathname &file, const Pathname &signature, const Pathname &keyring)
+  {
+    const char* argv[] =
+    {
+      "gpg",
+      "--quiet",
+      "--no-tty",
+      "--batch",
+      "--no-greeting",
+      "--status-fd",
+      "1",
+      "--homedir",
+      keyring.asString().c_str(),
+      "--verify",
+      signature.asString().c_str(),
+      file.asString().c_str(),
+      NULL
+    };
+    
+    // no need to parse output for now
+    //     [GNUPG:] SIG_ID yCc4u223XRJnLnVAIllvYbUd8mQ 2006-03-29 1143618744
+    //     [GNUPG:] GOODSIG A84EDAE89C800ACA SuSE Package Signing Key <build@suse.de>
+    //     gpg: Good signature from "SuSE Package Signing Key <build@suse.de>"
+    //     [GNUPG:] VALIDSIG 79C179B2E1C820C1890F9994A84EDAE89C800ACA 2006-03-29 1143618744 0 3 0 17 2 00 79C179B2E1C820C1890F9994A84EDAE89C800ACA
+    //     [GNUPG:] TRUST_UNDEFINED
+    
+    //     [GNUPG:] ERRSIG A84EDAE89C800ACA 17 2 00 1143618744 9
+    //     [GNUPG:] NO_PUBKEY A84EDAE89C800ACA
+
+    ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
+    return (prog.close() == 0) ? true : false;
+  }
+  
   ///////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
@@ -273,6 +318,16 @@ namespace zypp
   std::list<PublicKey> KeyRing::trustedPublicKeys()
   {
     return _pimpl->trustedPublicKeys();
+  }
+  
+  bool KeyRing::verifyFileSignature( const Pathname &file, const Pathname &signature)
+  {
+    return _pimpl->verifyFileSignature(file, signature);
+  }
+  
+  bool KeyRing::verifyFileTrustedSignature( const Pathname &file, const Pathname &signature)
+  {
+    return _pimpl->verifyFileTrustedSignature(file, signature);
   }
   
   /////////////////////////////////////////////////////////////////
