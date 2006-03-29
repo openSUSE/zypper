@@ -63,11 +63,18 @@ namespace zypp
 
 		if ( ! found )
 		{
-		    // It's perfectly legitimate for that corresponding resolvable not to be in the pool:
-		    // The pool only contains resolvables in matching architectures, yet a
-		    // multi-arch patch might as well contain atoms for different architectures.
+		    Arch system_arch = getZYpp()->architecture();
 
-		    DBG << "No resolvable for patch atom in pool (wrong arch?): "
+		    if (! (*atom_it)->arch().compatibleWith( system_arch) ) {
+
+			// It's perfectly legitimate for that corresponding resolvable not to be in the pool:
+			// The pool only contains resolvables in matching architectures, yet a
+			// multi-arch patch might as well contain atoms for different architectures.
+
+			continue;
+		    }
+
+		    ERR << "No resolvable for patch atom in pool: "
 			<< (*atom_it)->name() << "-" << (*atom_it)->edition()
 			<< " arch: " << (*atom_it)->arch().asString()
 			<< endl;
