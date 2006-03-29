@@ -55,6 +55,8 @@ namespace zypp
 	virtual Label instSrcLabel() const;
 	/** */
 	virtual Vendor instSrcVendor() const;
+        /** Patch the message belongs to - if any */
+        Patch::constPtr patch() const;
 
 
       protected:
@@ -62,8 +64,10 @@ namespace zypp
 	TranslatedText _text;
       private:
 	Source_Ref _source;
+        Patch::constPtr _patch;
       public:
 	Source_Ref source() const;
+	friend class YUMSourceImpl;
       };
       ///////////////////////////////////////////////////////////////////
     } // namespace yum

@@ -67,6 +67,9 @@ namespace zypp
       Source_Ref YUMMessageImpl::source() const
       { return _source; }
 
+      /** Patch the message belongs to - if any */
+      Patch::constPtr YUMMessageImpl::patch() const
+      { return _patch; }
 
     } // namespace yum
     /////////////////////////////////////////////////////////////////
