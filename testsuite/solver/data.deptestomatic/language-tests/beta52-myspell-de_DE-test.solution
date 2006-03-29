@@ -3,16 +3,13 @@
 >!> 1 problems found:
 >!> Problem:
 >!> Cannot install myspell-german-old because it is conflicting with myspell-german
->!> A conflict over myspell-german-old == 20030428 (myspell-german-old) requires the removal of to-be-installed myspell-german-old-20030428-112.noarch[beta52]
+>!> 
 >!>    Solution:
 >!>       do not install myspell-german-old
 >!>       do not install myspell-german-old-20030428-112.noarch[beta52]
 >!>    Solution:
 >!>       do not install myspell-german
 >!>       do not install myspell-german-20051213-7.noarch[beta52]
->!>    Solution:
->!>       Ignore this conflict of myspell-german-old
->!>       
 >!> Taking solution: 0
 >!> For problem:     0
 >!> No problems so far
