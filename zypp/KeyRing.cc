@@ -193,17 +193,26 @@ namespace zypp
     const char* argv[] =
     {
       "gpg",
-      "--batch",
       "--yes",
-      "--delete-keys",
+      "--quiet",
+      "--no-tty",
+      "--batch",
+      "--status-fd",
+      "1",
       "--homedir",
       keyring.asString().c_str(),
+      "--delete-keys",
       id.c_str(),
       NULL
     };
     
     ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
-    prog.close();
+    
+    int code = prog.close();
+    if ( code )
+      ZYPP_THROW(Exception("Failed to delete key."));
+    else    
+      MIL << "Deleted key " << id << " from keyring " << keyring << std::endl;
   }    
   
   ///////////////////////////////////////////////////////////////////
