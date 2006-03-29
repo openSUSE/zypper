@@ -58,4 +58,6 @@
 >!> install [1]util-linux-2.12r-16.i586[sl10_packages]
 >!> install [1]zlib-1.2.3-8.i586[sl10_packages]
 >!> install [2]tpctl-4.17-17.i586[sl10_packages]
->!> installs=54, upgrades=0, uninstalls=0
+>!> install language:de-.noarch
+>!> install language:de_DE-.noarch
+>!> installs=56, upgrades=0, uninstalls=0

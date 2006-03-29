@@ -60,7 +60,9 @@
 >!> install [1]util-linux-2.12r-16.i586[sl10_packages]
 >!> install [1]zlib-1.2.3-8.i586[sl10_packages]
 >!> install [2]tpctl-4.17-17.i586[sl10_packages]
->!> installs=55, upgrades=0, uninstalls=0
+>!> install language:de-.noarch
+>!> install language:de_DE-.noarch
+>!> installs=57, upgrades=0, uninstalls=0
 >!> Solution #2:
 >!> install [1]aaa_base-10.0.42-59.i586[sl10_packages]
 >!> install [1]aaa_skel-2006.2.24-3.i586[sl10_packages]
@@ -117,4 +119,6 @@
 >!> install [1]util-linux-2.12r-16.i586[sl10_packages]
 >!> install [1]zlib-1.2.3-8.i586[sl10_packages]
 >!> install [2]tpctl-4.17-17.i586[sl10_packages]
->!> installs=55, upgrades=0, uninstalls=0
+>!> install language:de-.noarch
+>!> install language:de_DE-.noarch
+>!> installs=57, upgrades=0, uninstalls=0
