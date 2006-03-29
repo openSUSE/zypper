@@ -24,6 +24,7 @@
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
 #include "zypp/Package.h"
+#include "zypp/Language.h"
 
 #include <zypp/SourceManager.h>
 #include <zypp/SourceFactory.h>
@@ -56,24 +57,6 @@ namespace container
 
 ///////////////////////////////////////////////////////////////////
 
-template<class _Tp>
-  ostream & operator<<( ostream & str, const set<_Tp> & obj )
-  {
-    str << "Size(" << obj.size() << ") {";
-    std::for_each( obj.begin(), obj.end(), PrintOn<_Tp>(str,"  ",true) );
-    return str << endl << "}";
-  }
-
-template<class _Tp>
-  ostream & operator<<( ostream & str, const list<_Tp> & obj )
-  {
-    str << "Size(" << obj.size() << ") {";
-    std::for_each( obj.begin(), obj.end(), PrintOn<_Tp>(str,"  ",true) );
-    return str << endl << "}";
-  }
-
-///////////////////////////////////////////////////////////////////
-
 struct XByInstalled : public std::unary_function<ui::Selectable::constPtr,bool>
 {
   bool operator()( const ui::Selectable::constPtr & obj ) const
@@ -81,29 +64,6 @@ struct XByInstalled : public std::unary_function<ui::Selectable::constPtr,bool>
     return obj->hasInstalledObj();
   }
 };
-
-///////////////////////////////////////////////////////////////////
-namespace zypp
-{ /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace resfilter
-  { /////////////////////////////////////////////////////////////////
-    /** Select ResObject by kind. */
-    struct Mtest : public PoolItemFilterFunctor
-    {
-      bool operator()( const PoolItem & p ) const
-      {
-        p.status().setTransact(true, ResStatus::USER );
-        return true;
-      }
-    };
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace resfilter
-  ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
-} // namespace zypp
-///////////////////////////////////////////////////////////////////
 
 template<>
   struct PrintPtr<ui::Selectable::Ptr> : public std::unary_function<ui::Selectable::Ptr, bool>
@@ -134,26 +94,14 @@ template<>
     }
   };
 
-set<PoolItem> getAvailable()
+struct Mpool
 {
-  set<PoolItem> ret;
-  ZYpp::LocaleSet rl( getZYpp()->getRequestedLocales() );
-
-  ResPool mpool( getZYpp()->pool() );
-  for ( ResPool::byKind_iterator it = mpool.byKindBegin<Language>();
-        it != mpool.byKindEnd<Language>(); ++it )
-    {
-      if ( container::isIn( rl, Locale((*it)->name()) ) )
-        {
-          ret.insert( *it );
-        }
-    }
-
-  WAR << rl << endl;
-  ERR << ret << endl;
-  return ret;
-}
-
+  bool operator()( const PoolItem & pi )
+  {
+    return pi.status().isLocked();
+    return true;
+  }
+};
 
 /******************************************************************
 **
@@ -168,11 +116,32 @@ int main( int argc, char * argv[] )
   string infile( "p" );
   if (argc >= 2 )
     infile = argv[1];
+  {
+  target::rpm::RpmDb rpm;
+  rpm.initDatabase( "/" );
+
+  std::list<Package::Ptr> rpmpkgs( rpm.getPackages() );
+  ResStore rpmstore;
+  rpmstore.insert( rpmpkgs.begin(), rpmpkgs.end() );
+
+  ResPool pool( getZYpp()->pool() );
+  getZYpp()->addResolvables( rpmstore, true );
+  rstats( pool.begin(), pool.end() );
+
+  printRange( make_filter_begin( Mpool(), pool ),
+              make_filter_end( Mpool(), pool ),
+              INT ) << endl;
+
+  }
+  INT << "===[END]============================================" << endl << endl;
+  return 0;
+
 
   if ( 1 ) {
     Measure x( "initTarget " + sysRoot.asString() );
     getZYpp()->initTarget( sysRoot );
   }
+
 
   SourceManager::sourceManager()->restore( sysRoot );
   if ( SourceManager::sourceManager()->allSources().empty() )
@@ -197,19 +166,6 @@ int main( int argc, char * argv[] )
   getZYpp()->addResolvables( src.resolvables() );
   SEC << pool << endl;
 
-  getAvailable();
-
-  ZYpp::LocaleSet req;
-  req.insert( Locale("de") );
-  req.insert( Locale("de_DE") );
-  req.insert( Locale("en") );
-  getZYpp()->setRequestedLocales( req );
-  getAvailable();
-
-  req.clear();
-  req.insert( Locale("de_DE") );
-  getZYpp()->setRequestedLocales( req );
-  getAvailable();
 
 
   rpm.closeDatabase();

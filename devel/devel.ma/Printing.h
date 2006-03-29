@@ -5,6 +5,7 @@
 #include <string>
 
 #include "zypp/base/Logger.h"
+#include "zypp/base/LogTools.h"
 #include "zypp/base/PtrTypes.h"
 #include <zypp/base/String.h>
 #include <zypp/base/Iterator.h>

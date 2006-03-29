@@ -26,6 +26,7 @@
 #include "zypp/CapFilters.h"
 #include "zypp/Package.h"
 #include "zypp/Language.h"
+#include "zypp/VendorAttr.h"
 
 #include <zypp/SourceManager.h>
 #include <zypp/SourceFactory.h>
@@ -141,9 +142,7 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "xxx" );
   INT << "===[START]==========================================" << endl;
 
-  DBG << Language::availableInstance( Locale() );
-  DBG << Language::availableInstance( Locale("de") );
-  DBG << Language::availableInstance( Locale("de_DE") );
+  VendorAttr::instance();
 
   INT << "===[END]============================================" << endl << endl;
   return 0;
