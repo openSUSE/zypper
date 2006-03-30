@@ -16,6 +16,7 @@
 #include <boost/tokenizer.hpp>
 #include <boost/algorithm/string.hpp>
 
+#include "zypp/ZYppFactory.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"
 #include "zypp/base/PtrTypes.h"
@@ -151,7 +152,49 @@ namespace zypp
             deps[Dep::REQUIRES].insert( *it );
           }
 
-          NVRAD dataCollect( prodImpl->_name, Edition( prodImpl->_version ), Arch_noarch, deps );
+	  // calculate product architecture by looking through ARCH.xxx lines (key of prodImpl->_arch)
+	  //  and taking the 'best' (first) architectures.
+
+	  Arch sysarch( getZYpp()->architecture() );
+	  Arch prodarch( Arch_noarch );		// default to noarch
+
+	  // find matching ARCH.xxx line
+
+	  std::map< std::string, std::list<std::string> >::const_iterator it = prodImpl->_arch.find( sysarch.asString() );
+
+	  // if no matching ARCH.xxx line found, search best matching
+
+	  if (it == prodImpl->_arch.end()) {
+	    WAR << "Product does not fully support systems architecture (" << sysarch << ")" << endl;
+
+	    for (it = prodImpl->_arch.begin(); it != prodImpl->_arch.end(); ++it) {
+	      Arch arch( it->first );
+	      if (!arch.compatibleWith( sysarch )) {	// filter out incompatbile ones
+		continue;
+	      }
+	      if (arch.compare( prodarch ) > 0) {	// found better than current
+		prodarch = arch;			//  set new current
+	      }
+	    }
+	  }
+
+	  // oops, still no match found ?
+
+	  if (it == prodImpl->_arch.end()
+	      || it->second.empty())
+	  {
+	    ERR << "Product incompatible with systems architecture (" << sysarch << ")" << endl;
+	    prodarch = Arch("");
+	  }
+	  else {
+	    MIL << "Found matching/best arch " << it->first << endl;
+
+	    prodarch = Arch( it->second.front() );	// first arch of matching ARCH.xxx line is best
+	  }
+
+	  MIL << "Product arch is " << prodarch << endl;
+
+          NVRAD dataCollect( prodImpl->_name, Edition( prodImpl->_version ), prodarch, deps );
           result = detail::makeResolvableFromImpl( dataCollect, prodImpl);
         }
         catch (const Exception & excpt_r)
