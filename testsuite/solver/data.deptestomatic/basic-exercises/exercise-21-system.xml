@@ -18,8 +18,5 @@
       <description>Yggdrasil Linux</description>
     </update>
   </history>
-  <provides>
-    <dep name="a" op="(any)" version="1.0"/>
-  </provides>
 </package>
 </subchannel></channel>
