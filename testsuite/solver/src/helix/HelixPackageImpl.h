@@ -50,6 +50,11 @@ public:
 	/** */
 	virtual Source_Ref source() const;
 
+        /** */
+        virtual Vendor vendor() const
+	{ return "SuSE";}
+    
+
 protected:
 	Source_Ref _source;
 	TranslatedText _summary;
