@@ -87,7 +87,7 @@ namespace zypp
       /** Commit changes in the pool
 	  media = 0 means any/all medias
 	  media > 0 means limit commits to this media */
-      int commit( ResPool pool_r, unsigned int medianr, PoolItemList & errors_r, PoolItemList & remaining_r, PoolItemList & srcremaining_r );
+      int commit( ResPool pool_r, unsigned int medianr, PoolItemList & errors_r, PoolItemList & remaining_r, PoolItemList & srcremaining_r, bool dry_run = false );
 
       /** enables the storage target */
       bool isStorageEnabled() const;
@@ -95,7 +95,7 @@ namespace zypp
 
       /** Commit ordered changes
 	  return uncommitted ones (due to error) */
-      PoolItemList commit( const PoolItemList & items_r );
+      PoolItemList commit( const PoolItemList & items_r, bool dry_run = false );
 
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const

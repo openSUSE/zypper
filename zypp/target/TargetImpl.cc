@@ -155,7 +155,9 @@ namespace zypp
     }
 
 
-    int TargetImpl::commit(ResPool pool_r, unsigned int medianr, TargetImpl::PoolItemList & errors_r, TargetImpl::PoolItemList & remaining_r, TargetImpl::PoolItemList & srcremaining_r)
+    int TargetImpl::commit( ResPool pool_r, unsigned int medianr,
+			    TargetImpl::PoolItemList & errors_r, TargetImpl::PoolItemList & remaining_r,
+			    TargetImpl::PoolItemList & srcremaining_r, bool dry_run )
     {
       MIL << "TargetImpl::commit(<pool>, " << medianr << ")" << endl;
 
@@ -175,8 +177,8 @@ namespace zypp
       commit (to_uninstall);
 
       if (medianr == 0) {			// commit all
-        remaining_r = commit( to_install );
-        srcremaining_r = commit( to_srcinstall );
+        remaining_r = commit( to_install, dry_run );
+        srcremaining_r = commit( to_srcinstall, dry_run );
       }
       else
       {
@@ -197,7 +199,7 @@ namespace zypp
             current_install.push_back( *it );
           }
         }
-        TargetImpl::PoolItemList bad = commit (current_install);
+        TargetImpl::PoolItemList bad = commit( current_install, dry_run );
         remaining_r.insert(remaining_r.end(), bad.begin(), bad.end());
 
         for (TargetImpl::PoolItemList::iterator it = to_srcinstall.begin(); it != to_srcinstall.end(); ++it)
@@ -213,7 +215,7 @@ namespace zypp
             current_srcinstall.push_back( *it );
           }
         }
-        bad = commit (current_srcinstall);
+        bad = commit( current_srcinstall, dry_run );
         srcremaining_r.insert(srcremaining_r.end(), bad.begin(), bad.end());
       }
       return to_install.size() - remaining_r.size();
@@ -221,11 +223,11 @@ namespace zypp
 
 
     TargetImpl::PoolItemList
-    TargetImpl::commit( const TargetImpl::PoolItemList & items_r)
+    TargetImpl::commit( const TargetImpl::PoolItemList & items_r, bool dry_run )
     {
       TargetImpl::PoolItemList remaining;
 
-      MIL << "TargetImpl::commit(<list>)" << endl;
+      MIL << "TargetImpl::commit(<list>" << (dry_run?", dry_run" : "") << ")" << endl;
       
       bool abort = false;
 
@@ -247,12 +249,13 @@ namespace zypp
             RpmInstallPackageReceiver progress( it->resolvable() );
             progress.connect();
             bool success = true;
+	    unsigned flags = 0;
 
             try {
               progress.tryLevel( target::rpm::InstallResolvableReport::RPM );
-                
-              rpm().installPackage(localfile,
-                  p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : 0);
+	      if (p->installOnly()) flags |= rpm::RpmDb::RPMINST_NOUPGRADE;
+	      if (dry_run) flags |= rpm::RpmDb::RPMINST_TEST;
+              rpm().installPackage( localfile, flags );
 
 	      if( progress.aborted() )
 	      {
@@ -266,10 +269,17 @@ namespace zypp
             catch (Exception & excpt_r) {
               ZYPP_CAUGHT(excpt_r);
               WAR << "Install failed, retrying with --nodeps" << endl;
+	      if (dry_run) {
+	          WAR << "dry run failed" << endl;
+		  abort = true;
+		  progress.disconnect(); 
+		  break;
+	      }
+
               try {
                 progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS );
-                rpm().installPackage(localfile,
-                p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : rpm::RpmDb::RPMINST_NODEPS);
+		flags |= rpm::RpmDb::RPMINST_NODEPS;
+                rpm().installPackage( localfile, flags );
 
 	        if( progress.aborted() )
 	        {
@@ -286,8 +296,8 @@ namespace zypp
     
                 try {
                   progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE );
-                  rpm().installPackage(localfile,
-                      p->installOnly() ? rpm::RpmDb::RPMINST_NOUPGRADE : (rpm::RpmDb::RPMINST_NODEPS|rpm::RpmDb::RPMINST_FORCE));
+		  flags |= rpm::RpmDb::RPMINST_FORCE;
+                  rpm().installPackage( localfile, flags );
                 }
                 catch (Exception & excpt_r) {
                   remaining.push_back( *it );
@@ -304,33 +314,39 @@ namespace zypp
 		}
               }
             }
-            if (success) {
+            if (success
+		&& !dry_run)
+	    {
 	      it->status().setTransact( false, ResStatus::USER );
             }
             progress.disconnect();
-	    p->source().releaseFile(p->plainRpm(), p->mediaId());
+	    p->source().releaseFile( p->plainRpm(), p->mediaId() );
           }
           else
           {
 	    bool success = true;
 
-            RpmRemovePackageReceiver progress(it->resolvable());
+            RpmRemovePackageReceiver progress( it->resolvable() );
             progress.connect();
+	    unsigned flags = rpm::RpmDb::RPMINST_NODEPS;
+	    if (dry_run) flags |= rpm::RpmDb::RPMINST_TEST;
             try {
-              rpm().removePackage( p, rpm::RpmDb::RPMINST_NODEPS );
+              rpm().removePackage( p, flags );
             }
             catch (Exception & excpt_r) {
 	      WAR << "removal of " << p << " failed";
 	      success = false;
               ZYPP_CAUGHT( excpt_r );
             }
-	    if (success) {
+	    if (success
+		&& !dry_run)
+	    {
 	      it->status().setTransact( false, ResStatus::USER );
 	    }
             progress.disconnect();
           }
         }
-        else // other resolvables
+        else if (!dry_run) // other resolvables
         {
           if ( isStorageEnabled() )
           {
