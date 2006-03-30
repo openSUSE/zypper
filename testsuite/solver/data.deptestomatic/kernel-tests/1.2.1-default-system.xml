@@ -8675,47 +8675,5 @@ name="bootloader-theme"/></provides></deps></package>
     <dep name='kernel-default' />
   </supplements>
 </package>
-<package>
-  <name>nvidia-gfx-kmp-default</name>
-  <section>system</section>
-  <location>1</location>
-  <history>
-    <update>
-      <hid>12345</hid>
-      <version>1.0.8178_2.6.16_rc5_git14_2</version>
-      <release>1</release>
-      <arch>i586</arch>
-    </update>
-  </history>
-  <requires>
-    <dep name='/bin/sh' pre='1' />
-    <dep name='/bin/sh' pre='1' />
-    <dep name='/bin/sh' pre='1' />
-    <dep name='kernel-default' />
-    <dep name='/bin/sh' />
-    <dep name='/bin/sh' />
-    <dep name='/bin/sh' />
-    <dep name='kernel(mm)' op='=' version='7e5668ff91cf755d' />
-    <dep name='kernel(drivers)' op='=' version='2e8ab499f86306ab' />
-    <dep name='kernel(drivers_pci)' op='=' version='11dd90496d14f334' />
-    <dep name='kernel(drivers_char_agp)' op='=' version='da9b8c9bb8588876' />
-    <dep name='kernel(kernel)' op='=' version='f422d0960a93a2a7' />
-    <dep name='kernel(arch_i386_mm)' op='=' version='e39e0ec4f79b30c2' />
-    <dep name='kernel(vmlinux)' op='=' version='6db8808b8c6d1b3f' />
-    <dep name='kernel(fs)' op='=' version='c1c864c12a011e1c' />
-    <dep name='kernel(fs_proc)' op='=' version='6d4935461b682304' />
-    <dep name='kernel(kernel_irq)' op='=' version='dd1d73732d05a591' />
-    <dep name='kernel(arch_i386_kernel)' op='=' version='873cdc57284bb8c9' />
-    <dep name='kernel(arch_i386_kernel_cpu)' op='=' version='7e943412451173b6' />
-    <dep name='kernel(arch_i386_kernel_cpu_mtrr)' op='=' version='badf815515a4fe72' />
-    <dep name='kernel(security)' op='=' version='d71c1bd57155e1a2' />
-  </requires>
-  <provides>
-    <dep name='nvidia-gfx-kmp' op='=' version='1.0.8178_2.6.16_rc5_git14_2' />
-    <dep name='nvidia-gfx-kmp-default' op='=' version='1.0.8178_2.6.16_rc5_git14_2' />
-  </provides>
-  <supplements>
-    <dep name='modalias(kernel-default:pci:v000010DEd*sv*sd*bc03sc00i00*)' />
-  </supplements>
-</package>
+
 </subchannel></channel>

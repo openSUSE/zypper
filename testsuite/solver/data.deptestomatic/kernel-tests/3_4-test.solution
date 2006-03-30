@@ -45,6 +45,8 @@
 >!> install novfs-1468-4.i586[packages2]
 >!> install novfs-kmp-default-1.2.0_2.6.16_rc5_git14_2-8.i586[packages2]
 >!> install novfs-kmp-smp-1.2.0_2.6.16_rc5_git14_2-8.i586[packages2]
+>!> install nvidia-gfx-kmp-default-1.0.8178_2.6.16_rc5_git14_2-1.i586[packages2]
+>!> install nvidia-gfx-kmp-smp-1.0.8178_2.6.16_rc5_git14_2-1.i586[packages2]
 >!> install openldap2-client-2.3.19-10.i586[packages1]
 >!> install openssl-0.9.8a-11.i586[packages1]
 >!> install pam-0.99.3.0-14.i586[packages1]
@@ -60,4 +62,4 @@
 >!> install udev-085-7.i586[packages1]
 >!> install util-linux-2.12r-19.i586[packages1]
 >!> install zlib-1.2.3-8.i586[packages1]
->!> installs=56, upgrades=0, uninstalls=0
+>!> installs=58, upgrades=0, uninstalls=0
