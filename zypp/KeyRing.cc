@@ -66,9 +66,14 @@ namespace zypp
 
     void importKey( const Pathname &keyfile, bool trusted = false);
     PublicKey readPublicKey( const Pathname &keyfile );
+    std::string readSignatureKeyId( const Pathname &keyfile );
+    
     void deleteKey( const std::string &id, bool trusted );
     std::list<PublicKey> trustedPublicKeys();
     std::list<PublicKey> publicKeys();
+    
+    bool verifyFileSignatureWorkflow( const Pathname &file, const Pathname &signature);
+    
     bool verifyFileSignature( const Pathname &file, const Pathname &signature);
     bool verifyFileTrustedSignature( const Pathname &file, const Pathname &signature);
   private:
@@ -77,6 +82,8 @@ namespace zypp
     void importKey( const Pathname &keyfile, const Pathname &keyring);
     void deleteKey( const std::string &id, const Pathname &keyring );
     std::list<PublicKey> publicKeys(const Pathname &keyring);
+    
+    bool publicKeyExists( std::string id, const Pathname &keyring);
     
     Pathname _general_kr;
     Pathname _trusted_kr;
@@ -124,6 +131,24 @@ namespace zypp
   {
     return verifyFile( file, signature, _general_kr );
   }
+  
+  bool KeyRing::Impl::publicKeyExists( std::string id, const Pathname &keyring)
+  {
+    std::list<PublicKey> keys = publicKeys(keyring);
+    for (std::list<PublicKey>::const_iterator it = keys.begin(); it != keys.end(); it++)
+    {
+      if ( id == (*it).id )
+        return true;
+    }
+    return false;
+  }
+  
+  bool KeyRing::Impl::verifyFileSignatureWorkflow( const Pathname &file, const Pathname &signature)
+  {
+    
+    return true;
+  }
+  
   
   PublicKey KeyRing::Impl::readPublicKey( const Pathname &keyfile )
   {  
@@ -177,7 +202,7 @@ namespace zypp
     {
       "gpg",
       "--quiet",
-      "--list-keys",
+      "--list-public-keys",
       "--with-colons",
       "--with-fingerprint",
       "--homedir",
@@ -190,8 +215,7 @@ namespace zypp
     std::string line;
     int count = 0;
     
-    boost::regex rxColons("^([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):\n$");
-    
+    boost::regex rxColons("^([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):\n$");
     for(line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
     {
       //MIL << line << std::endl;
@@ -236,26 +260,6 @@ namespace zypp
     
     if ( code != 0 )
       ZYPP_THROW(Exception("failed to import key"));
-
-//     boost::regex rxImported("^\\[GNUPG:\\] IMPORTED ([^[:space:]]+) (.+)\n$");
-//     std::string line;
-//     int count = 0;
-//     for(line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
-//     {
-//       MIL << line << std::endl;
-//        boost::smatch what;
-//        if(boost::regex_match(line, what, rxImported, boost::match_extra))
-//        {
-//          MIL << std::endl;
-//          PublicKey key;
-//          key.id = what[1];
-//          key.name = what[2];
-//          return key;
-//        }
-//     }
-//     prog.close();
-//     throw Exception("failed to import key");
-//     return PublicKey();
   }
   
   void KeyRing::Impl::deleteKey( const std::string &id, const Pathname &keyring )
@@ -285,6 +289,49 @@ namespace zypp
       MIL << "Deleted key " << id << " from keyring " << keyring << std::endl;
   }    
   
+  
+  std::string KeyRing::Impl::readSignatureKeyId( const Pathname &keyfile )
+  {  
+    // HACK create a tmp keyring with no keys
+    TmpDir dir;
+    
+    const char* argv[] =
+    {
+      "gpg",
+      "--quiet",
+      "--no-tty",
+      "--no-greeting",
+      "--batch",
+      "--status-fd",
+      "1",
+      "--homedir",
+      dir.path().asString().c_str(),
+      keyfile.asString().c_str(),
+      NULL
+    };
+    
+    ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
+    
+    std::string line;
+    int count = 0;
+    
+    boost::regex rxNoKey("^\\[GNUPG:\\] NO_PUBKEY (.+)\n$");
+    std::string id;
+    for(line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
+    {
+      //MIL << "[" << line << "]" << std::endl;
+      boost::smatch what;
+      if(boost::regex_match(line, what, rxNoKey, boost::match_extra))
+      {
+        if ( what.size() > 1 )
+          id = what[1];
+        //dumpRegexpResults(what);
+      }
+    }
+    prog.close();
+    return id;
+  }    
+      
   bool KeyRing::Impl::verifyFile( const Pathname &file, const Pathname &signature, const Pathname &keyring)
   {
     const char* argv[] =
@@ -315,6 +362,7 @@ namespace zypp
     //     [GNUPG:] NO_PUBKEY A84EDAE89C800ACA
 
     ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
+     
     return (prog.close() == 0) ? true : false;
   }
   
@@ -368,6 +416,11 @@ namespace zypp
     return _pimpl->readPublicKey(keyfile);
   }
   
+  std::string KeyRing::readSignatureKeyId( const Pathname &keyfile )
+  {
+    return _pimpl->readSignatureKeyId(keyfile);
+  }
+  
   void KeyRing::deleteKey( const std::string &id, bool trusted )
   {
     _pimpl->deleteKey(id, trusted);
@@ -381,6 +434,11 @@ namespace zypp
   std::list<PublicKey> KeyRing::trustedPublicKeys()
   {
     return _pimpl->trustedPublicKeys();
+  }
+  
+  bool KeyRing::verifyFileSignatureWorkflow( const Pathname &file, const Pathname &signature)
+  {
+    return _pimpl->verifyFileSignatureWorkflow(file, signature);
   }
   
   bool KeyRing::verifyFileSignature( const Pathname &file, const Pathname &signature)

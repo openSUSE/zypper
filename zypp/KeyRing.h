@@ -32,10 +32,18 @@ namespace zypp
   struct KeyRingReport : public callback::ReportBase
   {
     virtual bool askUserToTrustKey( const std::string keyid, const std::string keyname )
-    { return false; }
+    { return true; }
+    
   };
-
-
+  
+  struct KeyRingSignals : public callback::ReportBase
+  {
+    virtual void trustedKeyAdded( const KeyRing &keyring, const std::string keyid, const std::string keyname )
+    {}
+    virtual void trustedKeyRemoved( const KeyRing &keyring, const std::string keyid, const std::string keyname )
+    {}
+  };
+  
   struct PublicKey
   {
     std::string id;
@@ -70,7 +78,8 @@ namespace zypp
      */
     void importKey( const Pathname &keyfile, bool trusted = false);
     PublicKey readPublicKey( const Pathname &keyfile );
-
+    std::string readSignatureKeyId( const Pathname &keyfile );
+    
     /**
      * removes a key from the keyring.
      * If trusted is true, Remove it from trusted keyring too.
@@ -80,6 +89,12 @@ namespace zypp
     std::list<PublicKey> publicKeys();
     std::list<PublicKey> trustedPublicKeys();
 
+    /**
+     * Follows a signature verification interacting with the user.
+     * The boolr eturned depends on user desicion to trust or not.
+     */
+    bool verifyFileSignatureWorkflow( const Pathname &file, const Pathname &signature);
+    
     bool verifyFileSignature( const Pathname &file, const Pathname &signature);
     bool verifyFileTrustedSignature( const Pathname &file, const Pathname &signature);
 
