@@ -1830,6 +1830,8 @@ void RpmDb::doInstallPackage( const Pathname & filename, unsigned flags, callbac
 	opts.push_back ("--ignoresize");
     if(flags & RPMINST_JUSTDB)
 	opts.push_back ("--justdb");
+    if(flags & RPMINST_TEST)
+	opts.push_back ("--test");
 
     opts.push_back("--");
     opts.push_back (filename.asString().c_str());

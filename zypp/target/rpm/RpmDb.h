@@ -420,7 +420,8 @@ namespace zypp {
 	      RPMINST_JUSTDB     = 0x0020,
 	      RPMINST_NODIGEST   = 0x0040,
 	      RPMINST_NOSIGNATURE= 0x0080,
-	      RPMINST_NOUPGRADE  = 0x0100
+	      RPMINST_NOUPGRADE  = 0x0100,
+	      RPMINST_TEST	 = 0x0200
 	    };
       
 	  /**
