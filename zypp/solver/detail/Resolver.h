@@ -186,6 +186,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     bool resolvePool (void);
 
     bool transactResObject( ResObject::constPtr robj, bool install = true);
+    bool transactResKind( Resolvable::Kind kind );
 
     void doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
 

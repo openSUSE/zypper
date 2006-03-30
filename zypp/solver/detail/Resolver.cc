@@ -915,6 +915,51 @@ Resolver::transactResObject( ResObject::constPtr robj, bool install)
     return transactCaps( _pool, robj->dep( Dep::REQUIRES ), install, false );
 }
 
+//
+// transact all objects of a specific kind
+// -> look through the pool and run transactResObject() accordingly
+
+struct TransactKind : public resfilter::PoolItemFilterFunctor
+{
+    Resolver & resolver;
+    bool result;
+
+    TransactKind( Resolver & r )
+	: resolver( r )
+	, result( true )
+    { }
+
+    bool operator()( PoolItem_Ref item )
+    {
+	if (item.status().isToBeInstalled())
+	    result = resolver.transactResObject( item.resolvable(), true );
+	else if (item.status().isToBeUninstalled())
+	    result = resolver.transactResObject( item.resolvable(), false );
+	return false;
+    }
+};
+
+
+bool
+Resolver::transactResKind( Resolvable::Kind kind )
+{
+    TransactKind callback (*this);
+
+    DBG << "transactResKind(" << kind << ")" << endl;
+
+    invokeOnEach( pool().byKindBegin( kind ),
+		  pool().byKindEnd( kind ),
+		  functor::chain( resfilter::ByTransact(), resfilter::ByInstalled ()),
+		  functor::functorRef<bool,PoolItem>( callback ) );
+
+    invokeOnEach( pool().byKindBegin( kind ),
+		  pool().byKindEnd( kind ),
+		  functor::chain( resfilter::ByTransact(), resfilter::ByUninstalled ()),
+		  functor::functorRef<bool,PoolItem>( callback ) );
+
+    return callback.result;
+}
+
 ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////
