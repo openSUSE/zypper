@@ -61,7 +61,7 @@ namespace zypp
       std::string _you_url;
       std::string _vendor;
       Url _release_notes_url;
-      std::map< std::string, std::list<std::string> > _arch;
+      std::map< std::string, std::list<std::string> > _arch;	// map of 'arch : "arch1 arch2 arch3"', arch1 being 'best', arch3 being 'noarch' (ususally)
       std::string _default_base;
       CapSet _requires;
       std::list<std::string> _languages;
