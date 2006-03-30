@@ -23,6 +23,8 @@
 <trial>
   <distupgrade delete_unmaintained="false"/>
   <reportproblems/>
+  <takesolution problem="0" solution="0"/>
+  <reportproblems/>
 </trial>
 
 </test>
