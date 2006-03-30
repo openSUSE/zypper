@@ -154,6 +154,7 @@ namespace zypp
       "--quiet",
       "--no-tty",
       "--no-greeting",
+      "--no-permission-warning",
       "--batch",
       "--homedir",
       keyring.asString().c_str(),
@@ -355,6 +356,7 @@ namespace zypp
       "--quiet",
       "--no-tty",
       "--no-greeting",
+      "--no-permission-warning",
       "--status-fd",
       "1",  
       "--homedir",
@@ -368,8 +370,8 @@ namespace zypp
     ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
     code = prog.close();
     
-    if ( code != 0 )
-      ZYPP_THROW(Exception("failed to import key"));
+    //if ( code != 0 )
+    //  ZYPP_THROW(Exception("failed to import key"));
   }
   
   void KeyRing::Impl::deleteKey( const std::string &id, const Pathname &keyring )
