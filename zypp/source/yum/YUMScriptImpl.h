@@ -16,6 +16,7 @@
 #include "zypp/detail/ScriptImpl.h"
 #include "zypp/parser/yum/YUMParserData.h"
 #include "zypp/TmpPath.h"
+#include "zypp/CheckSum.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -69,6 +70,9 @@ namespace zypp
 	/** Media number of the undo script */
 	unsigned _undo_media;
 	mutable filesystem::TmpFile _tmp_file;
+	
+	CheckSum _do_checksum;
+	CheckSum _undo_checksum;
       private:
 	Source_Ref _source;
       public:

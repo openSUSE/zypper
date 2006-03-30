@@ -61,8 +61,16 @@ element-script =
     element undo { xsd:string }?,
     element do_location { text }?,
     element do_media { text }?,
+    element do_checksum {
+      attribute type { "md5" | "sha" },
+      text
+    }?,
     element undo_location { text }?,
     element undo_media { text }?,
+    element undo_checksum {
+      attribute type { "md5" | "sha" },
+      text
+    }?,
     dependency-block
   }
 

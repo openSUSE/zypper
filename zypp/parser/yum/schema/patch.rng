@@ -164,12 +164,34 @@
         </element>
       </optional>
       <optional>
+        <element name="do_checksum">
+          <attribute name="type">
+            <choice>
+              <value>md5</value>
+              <value>sha</value>
+            </choice>
+          </attribute>
+          <text/>
+        </element>
+      </optional>
+      <optional>
         <element name="undo_location">
           <text/>
         </element>
       </optional>
       <optional>
         <element name="undo_media">
+          <text/>
+        </element>
+      </optional>
+      <optional>
+        <element name="undo_checksum">
+          <attribute name="type">
+            <choice>
+              <value>md5</value>
+              <value>sha</value>
+            </choice>
+          </attribute>
           <text/>
         </element>
       </optional>

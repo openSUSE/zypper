@@ -12,6 +12,9 @@
 #include "zypp/source/yum/YUMScriptImpl.h"
 #include "zypp/Arch.h"
 #include "zypp/Edition.h"
+#include "zypp/base/Gettext.h"
+
+#include "zypp/source/yum/YUMSourceImpl.h"
 
 #include <fstream>
 
@@ -47,6 +50,8 @@ namespace zypp
       , _undo_location(parsed.undo_location)
       , _do_media(1)
       , _undo_media(1)
+      , _do_checksum(parsed.do_checksum_type, parsed.do_checksum)
+      , _undo_checksum(parsed.undo_checksum_type, parsed.undo_checksum)
       {
 	unsigned do_media = strtol(parsed.do_media.c_str(), 0, 10);
 	if (do_media > 0)
@@ -67,7 +72,12 @@ namespace zypp
 	}
 	else if (_do_location != "" && _do_location != "/")
 	{
-	  return source().provideFile(_do_location, _do_media);
+	  Pathname script = source().provideFile(_do_location, _do_media);
+	  if (! YUMSourceImpl::checkCheckSum(script, _do_checksum.type(), _do_checksum.checksum()))
+	  {
+	    ZYPP_THROW(Exception(N_("Failed check for the script file check sum")));
+	  }
+	  return script;
 	}
 	else
 	{
@@ -86,7 +96,12 @@ namespace zypp
 	}
 	else if (_undo_location != "" && _undo_location != "/")
 	{
-	  return source().provideFile(_undo_location, _undo_media);
+	  Pathname script = source().provideFile(_undo_location, _undo_media);
+	  if (! YUMSourceImpl::checkCheckSum(script, _undo_checksum.type(), _undo_checksum.checksum()))
+	  {
+	    ZYPP_THROW(Exception(N_("Failed check for the script file check sum")));
+	  }
+	  return script;
 	}
 	else return Pathname();
       }

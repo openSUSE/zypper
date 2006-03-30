@@ -504,7 +504,11 @@ namespace zypp {
 	  << "  do script location: " << data.do_location << endl
 	  << "  undo script location: " << data.undo_location << endl
 	  << "  do script media: " << data.do_media << endl
-	  << "  undo script media: " << data.undo_media << endl;
+	  << "  undo script media: " << data.undo_media << endl
+          << "  do checksum type: " << data.do_checksum_type << endl
+          << "  do checksum: " << data.do_checksum << endl
+          << "  undo checksum type: " << data.undo_checksum_type << endl
+          << "  undo checksum: " << data.undo_checksum << endl;
         return out;
       }
 

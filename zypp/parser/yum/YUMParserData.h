@@ -266,6 +266,10 @@ namespace zypp {
 	std::string undo_location;
         std::string do_media;
         std::string undo_media;
+        std::string do_checksum_type;
+        std::string do_checksum;
+        std::string undo_checksum_type;
+        std::string undo_checksum;
       };
 
       class YUMPatchMessage : public YUMPatchAtom {

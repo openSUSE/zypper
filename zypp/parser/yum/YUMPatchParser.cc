@@ -511,6 +511,14 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	    else if (name == "undo_media") {
 		script->undo_media = _helper.content(child);
 	    }
+	    else if (name == "do_checksum") {
+	      script->do_checksum_type = _helper.attribute(child,"type");
+	      script->do_checksum = _helper.content(child);
+	    }
+	    else if (name == "undo_checksum") {
+	      script->undo_checksum_type = _helper.attribute(child,"type");
+	      script->undo_checksum = _helper.content(child);
+	    }
 	    else if (name == "provides") {
 	      prim.parseDependencyEntries(& script->provides, child);
 	    }
