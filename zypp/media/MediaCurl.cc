@@ -642,7 +642,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
       urlBuffer  = curlUrl.getScheme();
       urlBuffer += "://";
       urlBuffer += curlUrl.getHost(zypp::url::E_ENCODED);
-      urlBuffer += "/%2F";
+      urlBuffer += "/";
       urlBuffer += curlUrl.getPathName(zypp::url::E_ENCODED);
     }
     else
@@ -712,37 +712,48 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
       ERR << "curl error: " << ret << ": " << _curlError << endl;
       std::string err;
       try {
+       bool err_file_not_found = false;
        switch ( ret ) {
         case CURLE_UNSUPPORTED_PROTOCOL:
         case CURLE_URL_MALFORMAT:
         case CURLE_URL_MALFORMAT_USER:
-	  err = "Bad URL";
-        case CURLE_HTTP_NOT_FOUND:
+	  err = " Bad URL";
+	case CURLE_HTTP_RETURNED_ERROR:
           {
-            long httpReturnCode;
-            CURLcode infoRet = curl_easy_getinfo( _curl, CURLINFO_HTTP_CODE,
+            long httpReturnCode = 0;
+            CURLcode infoRet = curl_easy_getinfo( _curl,
+	                                          CURLINFO_RESPONSE_CODE,
                                                   &httpReturnCode );
             if ( infoRet == CURLE_OK ) {
-              string msg = "HTTP return code: " +
-                           str::numstring( httpReturnCode ) +
-                           " (URL: " + url.asString() + ")";
-              DBG << msg << endl;
+              string msg = "HTTP response: " +
+                           str::numstring( httpReturnCode );
               if ( httpReturnCode == 401 )
 	      {
-		msg = "URL: " + url.asString();
-                err = "Login failed";
+                err = " Login failed";
 	      }
               else
+	      if ( httpReturnCode == 404)
 	      {
-		err = "File not found";
+         	ZYPP_THROW(MediaFileNotFoundException(url, filename));
 	      }
-	      ZYPP_THROW( MediaCurlException(url, err, _curlError));
+
+              msg += err;
+              DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
+	      ZYPP_THROW(MediaCurlException(url, msg, _curlError));
             }
+	    else
+	    {
+	      string msg = "Unable to retrieve HTTP response:";
+	      msg += err;
+              DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
+	      ZYPP_THROW(MediaCurlException(url, msg, _curlError));
+	    }
           }
           break;
         case CURLE_FTP_COULDNT_RETR_FILE:
         case CURLE_FTP_ACCESS_DENIED:
           err = "File not found";
+	  err_file_not_found = true;
           break;
         case CURLE_BAD_PASSWORD_ENTERED:
         case CURLE_FTP_USER_PASSWORD_INCORRECT:
@@ -765,7 +776,14 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
           err = "Unrecognized error";
           break;
        }
-       ZYPP_THROW(MediaCurlException(url, err, _curlError));
+       if( err_file_not_found)
+       {
+         ZYPP_THROW(MediaFileNotFoundException(url, filename));
+       }
+       else
+       {
+         ZYPP_THROW(MediaCurlException(url, err, _curlError));
+       }
       }
       catch (const MediaException & excpt_r)
       {
