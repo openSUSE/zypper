@@ -65,7 +65,7 @@ namespace zypp
      * is able to call Target::I,pl.
     */
     int commit( ResPool pool_r, int medianr, PoolItemList & errors_r
-        , PoolItemList & remaining_r, PoolItemList & srcremaining_r ) ZYPP_DEPRECATED;
+        , PoolItemList & remaining_r, PoolItemList & srcremaining_r, bool dry_run = false ) ZYPP_DEPRECATED;
 
       /** If the package is installed and provides the file
 	  Needed to evaluate split provides during Resolver::Upgrade() */

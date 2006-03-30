@@ -217,7 +217,7 @@ namespace zypp
 
     /** \todo Remove workflow from target, lot's of it could be done here,
     * and target used for transact. */
-    ZYpp::CommitResult ZYppImpl::commit( int medianr_r )
+    ZYpp::CommitResult ZYppImpl::commit( int medianr_r, bool dry_run )
     {
       MIL << "Attempt to commit (medianr " << medianr_r << ")" << endl;
       if (! _target)
@@ -229,12 +229,14 @@ namespace zypp
       // in the Target interface.
 
       res._result = _target->commit( pool(), medianr_r,
-                                     res._errors, res._remaining, res._srcremaining );
+                                     res._errors, res._remaining, res._srcremaining, dry_run );
 
-      // reload new status from target
+      if (!dry_run) {
+	// reload new status from target
 
-      removeInstalledResolvables();
-      addResolvables( _target->resolvables(), true );
+	removeInstalledResolvables();
+	addResolvables( _target->resolvables(), true );
+      }
 
       MIL << "Commit (medianr " << medianr_r << ") returned: "
           << res._result

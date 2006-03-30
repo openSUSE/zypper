@@ -102,8 +102,8 @@ namespace zypp
   void ZYpp::finishTarget()
   { _pimpl->finishTarget(); }
 
-  ZYpp::CommitResult ZYpp::commit( int medianr_r )
-  { return _pimpl->commit( medianr_r ); }
+  ZYpp::CommitResult ZYpp::commit( int medianr_r, bool dry_run )
+  { return _pimpl->commit( medianr_r, dry_run ); }
 
   ///////////////////////////////////////////////////////////////////
 

@@ -90,7 +90,7 @@ namespace zypp
       void finishTarget();
 
       /** Commit changes and transactions. */
-      ZYpp::CommitResult commit( int medianr_r );
+      ZYpp::CommitResult commit( int medianr_r, bool dry_run = false );
 
       /** Reset the instance, discard changes
        * \throws Exception

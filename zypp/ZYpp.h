@@ -110,7 +110,7 @@ namespace zypp
      * \return \ref CommitResult
      * \throws Exception
     */
-    CommitResult commit( int medianr_r );
+    CommitResult commit( int medianr_r, bool dry_run = false );
 
   public:
     /** */
