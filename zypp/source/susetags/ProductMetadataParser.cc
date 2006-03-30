@@ -167,13 +167,14 @@ namespace zypp
 	  if (it == prodImpl->_arch.end()) {
 	    WAR << "Product does not fully support systems architecture (" << sysarch << ")" << endl;
 
-	    for (it = prodImpl->_arch.begin(); it != prodImpl->_arch.end(); ++it) {
-	      Arch arch( it->first );
+	    for (std::map< std::string, std::list<std::string> >::const_iterator it1 = prodImpl->_arch.begin(); it1 != prodImpl->_arch.end(); ++it1) {
+	      Arch arch( it1->first );
 	      if (!arch.compatibleWith( sysarch )) {	// filter out incompatbile ones
 		continue;
 	      }
 	      if (arch.compare( prodarch ) > 0) {	// found better than current
 		prodarch = arch;			//  set new current
+		it = it1;
 	      }
 	    }
 	  }
@@ -184,7 +185,6 @@ namespace zypp
 	      || it->second.empty())
 	  {
 	    ERR << "Product incompatible with systems architecture (" << sysarch << ")" << endl;
-	    prodarch = Arch("");
 	  }
 	  else {
 	    MIL << "Found matching/best arch " << it->first << endl;
