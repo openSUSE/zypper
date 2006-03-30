@@ -80,6 +80,9 @@ namespace zypp
     //mutable std::map<Locale, std::string> translations;
     bool verifyFile( const Pathname &file, const Pathname &signature, const Pathname &keyring);
     void importKey( const Pathname &keyfile, const Pathname &keyring);
+    
+    void exportKey( std::string id, const Pathname &keyring, const Pathname &keyfile);
+    
     void deleteKey( const std::string &id, const Pathname &keyring );
     std::list<PublicKey> publicKeys(const Pathname &keyring);
     
@@ -143,10 +146,117 @@ namespace zypp
     return false;
   }
   
+  void KeyRing::Impl::exportKey( std::string id, const Pathname &keyring, const Pathname &keyfile)
+  {    
+    const char* argv[] =
+    {
+      "gpg",
+      "--quiet",
+      "--no-tty",
+      "--no-greeting",
+      "--batch",
+      "--homedir",
+      keyring.asString().c_str(),
+      "-a",
+      "-o",
+      keyfile.asString().c_str(),
+      "--export",
+      id.c_str(),
+      NULL
+    };
+    ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
+    prog.close();
+  }
+  
   bool KeyRing::Impl::verifyFileSignatureWorkflow( const Pathname &file, const Pathname &signature)
   {
+    callback::SendReport<KeyRingReport> report;
+    callback::SendReport<KeyRingSignals> emitSignal;
+    MIL << "Going to verify signature for " << file << " with " << signature << std::endl; 
+//     struct KeyRingReport : public callback::ReportBase
+//       virtual bool askUserToAcceptUnsignedFile( const Pathname &file )
+//       virtual bool askUserToAcceptUnknownKey( const std::string keyid, const std::string keyname )
+//       virtual bool askUserToTrustKey( const std::string keyid, const std::string keyname )
+//       virtual bool askUserToAcceptVerificationFailed( const Pathname &file, const std::string keyid, const std::string keyname )
+//     
+//     struct KeyRingSignals : public callback::ReportBase
+//       virtual void trustedKeyAdded( const KeyRing &keyring, const std::string keyid, const std::string keyname )
+//       virtual void trustedKeyRemoved( const KeyRing &keyring, const std::string keyid, const std::string keyname )
+//     
+    // get the id of the signature
+    std::string id = readSignatureKeyId(signature);
     
-    return true;
+    // doeskey exists in trusted keyring
+    if ( publicKeyExists( id, _trusted_kr ) )
+    {
+      TmpFile trustedKey;
+      exportKey( id, _trusted_kr, trustedKey.path());
+      PublicKey key = readPublicKey(trustedKey.path());
+      MIL << "Key " << id << " " << key.name << " is trusted" << std::endl;
+      // it exists, is trusted, does it validates?
+      if ( verifyFile( file, signature, _trusted_kr ) )
+        return true;  
+      else
+        return report->askUserToAcceptVerificationFailed( file, key.id, key.name );
+    }
+    else
+    {
+      if ( publicKeyExists( id, _general_kr ) )
+      {
+        TmpFile unKey;
+        exportKey( id, _general_kr, unKey.path());
+        PublicKey key = readPublicKey(unKey.path());
+        MIL << "Key " << id << " " << key.name << " is not trusted" << std::endl;
+        // ok the key is not trusted, ask the user to trust it or not
+        if ( report->askUserToTrustKey(key.id, key.name) )
+        {
+          MIL << "User wants to trust key " << id << " " << key.name << std::endl;
+          TmpFile unKey;
+          exportKey( id, _general_kr, unKey.path());
+          importKey( unKey.path(), _trusted_kr );
+          // emit key added
+          if ( verifyFile( file, signature, _trusted_kr ) )
+          {
+            MIL << "File signature is verified" << std::endl;
+            return true;  
+          }
+          else
+          {
+            MIL << "File signature check fails" << std::endl;
+            if ( report->askUserToAcceptVerificationFailed( file, key.id, key.name ) )
+            {
+              MIL << "User continues anyway." << std::endl;
+              return true;
+            }
+            else
+            {
+              MIL << "User does not want to continue" << std::endl;
+              return false;
+            }
+          }
+        }
+        else
+        {
+          MIL << "User does not want to trust key " << id << " " << key.name << std::endl;
+          return false;
+        }
+      }
+      else
+      {
+        // unknown key...
+        if ( report->askUserToAcceptUnknownKey( id, "Unkown Key" ) )
+        {
+          MIL << "User wants to accept unknown key " << id << std::endl;
+          return true;
+        }
+        else
+        {
+          MIL << "User does not want to accept unknown key " << id << std::endl;
+          return false;
+        }
+      }
+    }
+    return false;
   }
   
   
