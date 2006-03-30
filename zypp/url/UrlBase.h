@@ -990,15 +990,22 @@ namespace zypp
       /**
        * Utility method to cleanup a path name.
        *
-       * By default, this method replaces multiple occurences
-       * of the "/" characeter from the begining of the path,
-       * so the cleaned path begins with at most one "/".
+       * By default, this method encodes the second and further
+       * slashes before the first (non-zero) path segment of an
+       * already encoded path name. For example, it modifies a
+       * "ftp://host///aaa//bbb" to "ftp://host/%2F%2Faaa//bbb".
        *
-       * This operation is required in some cases to not to
-       * missinterpret multiple "/" occurences as an empty
-       * URL authority.
+       * This operation is required to fulfill the path-absolute
+       * rule of RFC3986, if there is no authority. It avoids the
+       * missinterpretation of the path as an authority separator.
        *
-       * \param path   A path name to cleanup.
+       * It is not required if there is an authority ("//" behind
+       * the "scheme:"), that is in the path-abempty rule, but it
+       * is allowed and used e.g. in ftp url's defined by RFC1738.
+       *
+       * We apply this operation in both cases (for all paths).
+       *
+       * \param path   Encoded path name to cleanup.
        * \return A path begining with at most one "/" character.
        */
       virtual std::string

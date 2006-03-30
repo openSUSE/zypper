@@ -1074,21 +1074,14 @@ namespace zypp
       }
       else
       {
-        std::string data;
         if(eflag == zypp::url::E_ENCODED)
         {
           checkUrlData(path, "path name", config("rx_pathname"));
-
-          data = cleanupPathName(zypp::url::decode(path));
-        }
-        else
-        {
-          data = cleanupPathName(path);
         }
 
         if( !getHost(zypp::url::E_ENCODED).empty())
         {
-          if(data.at(0) != '/')
+          if(path.at(0) != '/')
           {
             ZYPP_THROW(UrlNotAllowedException(
               std::string("Relative path not allowed if authority exists")
@@ -1096,9 +1089,18 @@ namespace zypp
           }
         }
 
-        m_data->pathname = zypp::url::encode(
-          data, config("safe_pathname")
-        );
+        if(eflag == zypp::url::E_ENCODED)
+        {
+          m_data->pathname = cleanupPathName(path);
+        }
+        else
+        {
+          m_data->pathname = cleanupPathName(
+            zypp::url::encode(
+              path, config("safe_pathname")
+            )
+          );
+        }
       }
     }
 
@@ -1213,19 +1215,21 @@ namespace zypp
     std::string
     UrlBase::cleanupPathName(const std::string &path)
     {
-      size_t pos = 0;
+      std::string copy( path);
+      size_t      size( copy.size());
 
-      while( pos < path.length() && path.at(pos) == '/')
-        pos++;
-
-      if( pos > 1)
+      if( size >= 2 && copy.at(0) == '/' && copy.at(1) == '/')
       {
-        // make sure, there is not more than
-        // _one_ leading "/" in the path name.
-        return path.substr(pos - 1);
+        size_t pos = 1;
+        // path begins with a double slash ("//"); encode second
+        // and further slashes before the first segment-nz (non
+        // zero), to fulfill the path-absolute rule of RFC 3986.
+        do {
+          copy.replace(pos, 1, "%2F");
+          pos += 3; // go behind "%2F"
+        } while( pos < size && copy.at(pos) == '/');
       }
-
-      return std::string(path);
+      return copy;
     }
 
 
