@@ -82,6 +82,8 @@ namespace zypp
   { return _pimpl->forceResolve(); }
   bool Resolver::transactResObject( ResObject::constPtr robj, bool install)
   { return _pimpl->transactResObject( robj, install ); }
+  bool Resolver::transactResKind( Resolvable::Kind kind )
+  { return _pimpl->transactResKind( kind ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

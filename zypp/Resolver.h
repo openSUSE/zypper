@@ -141,12 +141,24 @@ namespace zypp
      *
      * Installs (install == true) or removes (install == false) all required
      * and recommended packages(!) of \c robj
-     * (More or less a 'single step' resolver call
+     * (More or less a 'single step' resolver call)
      *
      * returns false if requirements are not all fulfillable
      *
      */
     bool transactResObject( ResObject::constPtr robj, bool install = true);
+
+    /**
+     * transact all objects of this kind
+     *
+     * Look through the pool and runs transactResObject, first for removes
+     * then for installs
+     * (More or less a 'single step' resolver call)
+     *
+     * returns false if any transactResObject() call returned false.
+     *
+     */
+    bool transactResKind( Resolvable::Kind kind );
 
   protected:
 
