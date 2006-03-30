@@ -2,6 +2,7 @@
 <!--
   set de
   -> install locale(de) packages
+  This testcase does not run, cause I cannot access the @system pool
 -->
 <test>
 <setup>
