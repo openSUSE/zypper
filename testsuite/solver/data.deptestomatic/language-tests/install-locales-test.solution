@@ -1,0 +1,128 @@
+>!> Requesting locale de
+>!> Requesting locale de_DE
+>!> Requesting locale de_AT
+>!> Requesting locale ja
+>!> Requesting locale zh
+>!>1: U__s_[package]3ddiag-0.729-5.i586
+>!>2: U__s_[package]844-ksc-pcf-19990207-598.noarch
+>!>3: U__s_[package]855resolution-0.4-10.i586
+>!>4: U__s_[package]BitTorrent-4.0.3-7.i586
+>!>5: U__s_[package]CID-keyed-fonts-Munhwa-20021114-207.noarch
+>!>6: U__s_[package]CID-keyed-fonts-Wada-20021114-207.noarch
+>!>7: U__s_[package]CID-keyed-fonts-WadaH-20021114-207.noarch
+>!>8: U__s_[package]CheckHardware-0.1-977.i586
+>!>9: U__s_[package]Crystalcursors-0.5-30.noarch
+>!>10: U__s_[package]DirectFB-0.9.24-7.i586
+>!>11: U__s_[package]ElectricFence-2.2.2-535.i586
+>!>12: U__s_[package]FA_clalsadrv-1.0.3-4.i586
+>!>13: U__s_[package]FA_clthreads-1.0.2-5.i586
+>!>14: U__s_[package]FA_clxclient-1.0.2-6.i586
+>!>15: U__s_[package]FooBillard-3.0a-10.i586
+>!>16: U__s_[package]FreeNX-0.4.4-9.i586
+>!>17: U__s_[package]ImageMagick-6.2.5-6.i586
+>!>18: U__s_[package]ImageMagick-Magick++-6.2.5-6.i586
+>!>19: U__s_[package]ImageMagick-Magick++-devel-6.2.5-6.i586
+>!>20: U__s_[package]ImageMagick-devel-6.2.5-6.i586
+>!>21: U__s_[package]KhmerOS-fonts-3.1-4.noarch
+>!>22: U__s_[package]Maelstrom-3.0.6-7.i586
+>!>23: U__s_[package]Mesa-6.4.2-4.i586
+>!>24: U__s_[package]Mesa-devel-6.4.2-4.i586
+>!>25: U__s_[package]Mesa-devel-static-6.4.2-4.i586
+>!>26: U__s_[package]Modules-3.1.6-41.i586
+>!>27: U__s_[package]MozillaFirefox-1.5.0.1-11.i586
+>!>28: U__s_[package]MozillaFirefox-translations-1.5.0.1-11.i586
+>!>29: U__s_[package]MozillaSunbird-0.2.1-7.i586
+>!>30: U__s_[package]MozillaThunderbird-1.5-14.i586
+>!>31: U__s_[package]MozillaThunderbird-translations-1.5-14.i586
+>!>32: U__s_[package]Mule-UCS-0.84.20040212-61.noarch
+>!>33: U__s_[package]NX-1.5.0-26.i586
+>!>34: U__s_[package]NetworkManager-0.5.1cvs20060227-4.i586
+>!>35: U__s_[package]NetworkManager-glib-0.5.1cvs20060227-4.i586
+>!>36: U__s_[package]NetworkManager-gnome-0.5.1cvs20060227-4.i586
+>!>37: U__s_[package]NetworkManager-kde-0.1r5761-2.i586
+>!>38: U__s_[package]NetworkManager-vpnc-0.5.0cvs20060202-4.i586
+>!>39: U__s_[package]OpenEXR-1.2.2-7.i586
+>!>40: U__s_[package]OpenOffice_org-2.0.2-4.i586
+>!>41: U__s_[package]OpenOffice_org-Quickstarter-1.0-476.i586
+>!>42: U__s_[package]OpenOffice_org-ar-2.0.2-4.i586
+>!>43: U__s_[package]OpenOffice_org-cs-2.0.2-4.i586
+>!>44: U__s_[package]OpenOffice_org-da-2.0.2-4.i586
+>!>45: U__s_[package]OpenOffice_org-de-2.0.2-4.i586
+>!>46: U__s_[package]OpenOffice_org-de-templates-8.2-163.i586
+>!>47: U__s_[package]OpenOffice_org-el-2.0.2-4.i586
+>!>48: U__s_[package]OpenOffice_org-es-2.0.2-4.i586
+>!>49: U__s_[package]OpenOffice_org-et-2.0.2-4.i586
+>!>50: U__s_[package]OpenOffice_org-fr-2.0.2-4.i586
+>!>51: U__s_[package]OpenOffice_org-gnome-2.0.2-4.i586
+>!>52: U__s_[package]OpenOffice_org-hu-2.0.2-4.i586
+>!>53: U__s_[package]OpenOffice_org-it-2.0.2-4.i586
+>!>54: U__s_[package]OpenOffice_org-ja-2.0.2-4.i586
+>!>55: U__s_[package]OpenOffice_org-kde-2.0.2-4.i586
+>!>56: U__s_[package]OpenOffice_org-ko-2.0.2-4.i586
+>!>57: U__s_[package]OpenOffice_org-mono-2.0.2-4.i586
+>!>58: U__s_[package]OpenOffice_org-nl-2.0.2-4.i586
+>!> Solution #1:
+>!> install Mesa-6.4.2-4.i586[beta52]
+>!> install anthy-7307-4.i586[beta52]
+>!> install atk-1.10.3-6.i586[beta52]
+>!> install bash-3.1-10.i586[beta52]
+>!> install bzip2-1.0.3-9.i586[beta52]
+>!> install cairo-1.0.2-14.i586[beta52]
+>!> install canna-libs-3.7p3-15.i586[beta52]
+>!> install coreutils-5.93-12.i586[beta52]
+>!> install cracklib-2.8.6-4.i586[beta52]
+>!> install db-4.3.29-7.i686[beta52]
+>!> install expat-2.0.0-5.i586[beta52]
+>!> install filesystem-10.0.42-9.i586[beta52]
+>!> install fontconfig-2.3.93.20060224-2.i586[beta52]
+>!> install freetype2-2.1.10-8.i586[beta52]
+>!> install fribidi-0.10.4-490.i586[beta52]
+>!> install gconf2-2.12.1-16.i586[beta52]
+>!> install glib2-2.8.5-10.i586[beta52]
+>!> install glibc-2.3.90-69.i686[beta52]
+>!> install glitz-0.4.4-12.i586[beta52]
+>!> install gnome-filesystem-0.1-246.i586[beta52]
+>!> install gtk2-2.8.10-15.i586[beta52]
+>!> install info-4.8-14.i586[beta52]
+>!> install language:de-.noarch
+>!> install language:de_AT-.noarch
+>!> install language:de_DE-.noarch
+>!> install language:ja-.noarch
+>!> install language:zh-.noarch
+>!> install libacl-2.2.34-4.i586[beta52]
+>!> install libattr-2.4.28-5.i586[beta52]
+>!> install libdrm-2.0-7.i586[beta52]
+>!> install libgcc-4.1.0_20060223-3.i586[beta52]
+>!> install libidl-0.8.6-9.i586[beta52]
+>!> install libjpeg-6.2.0-743.i586[beta52]
+>!> install libpng-1.2.8-11.i586[beta52]
+>!> install libstdc++-4.1.0_20060223-3.i586[beta52]
+>!> install libtiff-3.8.0-6.i586[beta52]
+>!> install libtomoe-gtk-0.1.0-6.i586[beta52]
+>!> install libxml2-2.6.23-6.i586[beta52]
+>!> install libzio-0.1-9.i586[beta52]
+>!> install m17n-db-1.3.0.20060113-4.i586[beta52]
+>!> install m17n-lib-1.3.0.20060113-4.i586[beta52]
+>!> install mktemp-1.5-736.i586[beta52]
+>!> install ncurses-5.5-8.i586[beta52]
+>!> install openmotif-libs-2.2.4-9.i586[beta52]
+>!> install orbit2-2.12.4-8.i586[beta52]
+>!> install pam-0.99.3.0-10.i586[beta52]
+>!> install pango-1.10.2-11.i586[beta52]
+>!> install popt-1.7-248.i586[beta52]
+>!> install readline-5.1-10.i586[beta52]
+>!> install scim-1.4.4-7.i586[beta52]
+>!> install scim-anthy-0.8.0-5.i586[beta52]
+>!> install scim-input-pad-0.1.1-5.i586[beta52]
+>!> install scim-m17n-0.2.0-5.i586[beta52]
+>!> install scim-pinyin-0.5.91.20050815-8.i586[beta52]
+>!> install scim-tables-0.5.6-6.i586[beta52]
+>!> install scim-tables-ja-0.5.6-6.i586[beta52]
+>!> install scim-tables-zh-0.5.6-6.i586[beta52]
+>!> install scim-tomoe-0.2.0-8.i586[beta52]
+>!> install scim-uim-0.1.4-7.i586[beta52]
+>!> install tomoe-0.2.1-6.i586[beta52]
+>!> install uim-0.4.8-8.i586[beta52]
+>!> install xorg-x11-libs-6.9.0-20.i586[beta52]
+>!> install zlib-1.2.3-7.i586[beta52]
+>!> installs=63, upgrades=0, uninstalls=0
