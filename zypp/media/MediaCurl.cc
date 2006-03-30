@@ -29,6 +29,8 @@
 
 #include "config.h"
 
+#define  DETECT_DIR_INDEX       0
+
 using namespace std;
 using namespace zypp::base;
 
@@ -734,7 +736,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
               else
 	      if ( httpReturnCode == 404)
 	      {
-         	ZYPP_THROW(MediaFileNotFoundException(url, filename));
+         	ZYPP_THROW(MediaFileNotFoundException(_url, filename));
 	      }
 
               msg += err;
@@ -778,7 +780,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
        }
        if( err_file_not_found)
        {
-         ZYPP_THROW(MediaFileNotFoundException(url, filename));
+         ZYPP_THROW(MediaFileNotFoundException(_url, filename));
        }
        else
        {
@@ -790,6 +792,51 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
 	ZYPP_RETHROW(excpt_r);
       }
     }
+#if DETECT_DIR_INDEX
+    else
+    if(curlUrl.getScheme() == "http" ||
+       curlUrl.getScheme() == "https")
+    {
+      //
+      // try to check the effective url and set the not_a_file flag
+      // if the url path ends with a "/", what usually means, that
+      // we've received a directory index (index.html content).
+      //
+      // Note: This may be dangerous and break file retrieving in
+      //       case of some server redirections ... ?
+      //
+      bool      not_a_file = false;
+      char     *ptr = NULL;
+      CURLcode  ret = curl_easy_getinfo( _curl,
+                                         CURLINFO_EFFECTIVE_URL,
+                                         &ptr);
+      if ( ret == CURLE_OK && ptr != NULL)
+      {
+	try
+	{
+	  Url         eurl( ptr);
+	  std::string path( eurl.getPathName());
+	  if( !path.empty() && path != "/" && *path.rbegin() == '/')
+	  {
+	    DBG << "Effective url ("
+	        << eurl
+	        << ") seems to provide the index of a directory"
+		<< endl;
+	    not_a_file = true;
+	  }
+	}
+	catch( ... )
+	{}
+      }
+
+      if( not_a_file)
+      {
+        ::fclose( file );
+        filesystem::unlink( destNew );
+        ZYPP_THROW(MediaNotAFileException(_url, filename));
+      }
+    }
+#endif // DETECT_DIR_INDEX
 
     mode_t mask;
     // getumask() would be fine, but does not exist
