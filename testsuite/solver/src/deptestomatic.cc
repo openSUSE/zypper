@@ -1040,7 +1040,8 @@ freshen_marked_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
     solver::detail::Resolver_Ptr resolver = *((solver::detail::Resolver_Ptr *)data);
     if (status.isNeeded()) {
-	resolver->addPoolItemToInstall (poolItem);
+        poolItem.status().setToBeInstalled(ResStatus::USER);        
+//	resolver->addPoolItemToInstall (poolItem);
     }
 
     return;
