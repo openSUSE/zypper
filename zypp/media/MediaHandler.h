@@ -271,9 +271,12 @@ class MediaHandler {
 	 *        mount table (nfs, smb and cifs) or from mediaSource
 	 *        while compare of a mount entry with mediaSource.
 	 */
-	void             forceRelaseAllMedia(bool matchMountFs);
+	void             forceRelaseAllMedia(bool matchMountFs,
+	                                     bool autoMountedOny=true);
 	void             forceRelaseAllMedia(const MediaSourceRef &ref,
-	                                     bool matchMountFs);
+	                                     bool matchMountFs,
+	                                     bool autoMountedOnly=true);
+	virtual bool     isAutoMountedMedia(const AttachedMedia &media);
 
     protected:
 

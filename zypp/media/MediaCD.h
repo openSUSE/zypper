@@ -47,6 +47,8 @@ namespace zypp {
 
         virtual void forceEject();
 
+	virtual bool isAutoMountedMedia(const AttachedMedia &media);
+
       public:
 
         MediaCD( const Url &      url_r,

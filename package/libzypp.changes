@@ -1,9 +1,10 @@
 -------------------------------------------------------------------
-Fri Mar 31 14:28:14 CEST 2006 - mt@suse.de
+Fri Mar 31 16:34:51 CEST 2006 - mt@suse.de
 
 - Added disabling of the automounter while MediaManager
   init and restoring of the old state on exit (#154326).
-- rev 2833
+- Implemented check if media (CD) is automounted or not
+- rev 2840
 
 -------------------------------------------------------------------
 Fri Mar 31 13:27:09 CEST 2006 - mt@suse.de

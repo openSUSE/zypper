@@ -31,8 +31,20 @@
 
 #include <linux/cdrom.h>
 
+/*
+** verify devices names as late as possible (while attach)
+*/
 #define  DELAYED_VERIFY          1
+
+/*
+** try umount of foreign (user/automounter) media on eject
+**   0 = don't force, 1 = automounted only, 2 == all
+*/
 #define  FORCE_RELEASE_FOREIGN   1
+
+/*
+** if to throw exception on eject errors or ignore them
+*/
 #define  REPORT_EJECT_ERRORS     1
 
 using namespace std;
@@ -505,7 +517,7 @@ namespace zypp {
 	if (eject)
 	{
 #if FORCE_RELEASE_FOREIGN
-	  forceRelaseAllMedia(false);
+	  forceRelaseAllMedia(false, FORCE_RELEASE_FOREIGN != 2);
 #endif
 	  if(openTray( mediaSourceName()))
 	    return;
@@ -517,7 +529,7 @@ namespace zypp {
       if (eject)
       {
 #if FORCE_RELEASE_FOREIGN
-        forceRelaseAllMedia(false);
+        forceRelaseAllMedia(false, FORCE_RELEASE_FOREIGN != 2);
 #endif
         if( !openTray( mediaSourceName() ))
 	{
@@ -610,7 +622,7 @@ namespace zypp {
 	  if( !ret.mediaSource)
 	  {
 #if FORCE_RELEASE_FOREIGN
-	    forceRelaseAllMedia(media, false);
+	    forceRelaseAllMedia(media, false, FORCE_RELEASE_FOREIGN != 2);
 #endif
 	    if ( openTray( it->name ) )
 	    {
@@ -626,6 +638,40 @@ namespace zypp {
 	ZYPP_THROW(MediaNotEjectedException());
 #endif
       }
+    }
+
+    bool MediaCD::isAutoMountedMedia(const AttachedMedia &media)
+    {
+      bool is_automounted = false;
+      if( media.mediaSource && !media.mediaSource->name.empty())
+      {
+        using namespace zypp::target::hal;
+
+	try
+	{
+	  HalContext hal(true);
+
+	  HalVolume vol = hal.getVolumeFromDeviceFile(media.mediaSource->name);
+	  if( vol)
+	  {
+	    std::string udi = vol.getUDI();
+	    std::string key = "info.hal_mount.created_mount_point";
+	    std::string mnt = hal.getDevicePropertyString(udi, key);
+
+	    if(media.attachPoint->path == mnt)
+	      is_automounted = true;
+	  }
+	}
+        catch(const HalException &e)
+	{
+	  ZYPP_CAUGHT(e);
+	}
+      }
+      DBG << "Media "       << media.mediaSource->asString()
+          << " attached on " << media.attachPoint->path
+          << " is"           << (is_automounted ? "" : " not")
+          << " automounted"  << std::endl;
+      return is_automounted;
     }
 
     ///////////////////////////////////////////////////////////////////
