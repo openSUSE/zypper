@@ -14,6 +14,7 @@ uiinclude_HEADERS = 		\
 	Selectable.h		\
 	SelFilters.h		\
 	SelectableTraits.h	\
+	UserWantedPackages.h	\
 				\
 	PatchContentsImpl.h	\
 	SelectableImpl.h
@@ -26,6 +27,7 @@ lib@PACKAGE@_ui_la_SOURCES = 	\
 	PatchContents.cc	\
 	Status.cc		\
 	Selectable.cc		\
+	UserWantedPackages.cc	\
 				\
 	PatchContentsImpl.cc	\
 	SelectableImpl.cc
