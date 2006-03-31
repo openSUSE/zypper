@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Mar 31 18:53:55 CEST 2006 - schubi@suse.de
+
+- Do not update packages over other architectures
+
+-------------------------------------------------------------------
 Fri Mar 31 18:28:59 CEST 2006 - sh@suse.de
 
 - Added zypp/ui/UserWantedPackages to support the UI's 
