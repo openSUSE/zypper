@@ -212,10 +212,13 @@ XMLFilesBackend::isBackendInitialized() const
 void
 XMLFilesBackend::initBackend()
 {
+  // all directories are 755 except the sources directory which can contain passwords
+  // in urls.
+  
   Pathname topdir = d->root + Pathname(ZYPP_DB_DIR);
   DBG << "Creating directory structure " << topdir << std::endl;
 
-  if (0 != assert_dir(topdir, 0700))
+  if (0 != assert_dir(topdir, 0755))
       ZYPP_THROW(Exception("Cannot create XMLBackend db directory" + topdir.asString()));
 
   // create dir for resolvables
@@ -224,7 +227,7 @@ XMLFilesBackend::initBackend()
   {
     Resolvable::Kind kind = (*it_kinds);
     Pathname p(dirForResolvableKind(kind));
-    if (0 != assert_dir(p, 0700))
+    if (0 != assert_dir(p, 0755))
       ZYPP_THROW(Exception("Cannot create directory" + p.asString()));
     else
       MIL << "Created " << p.asString() << std::endl;
@@ -235,7 +238,7 @@ XMLFilesBackend::initBackend()
   {
     Resolvable::Kind kind = (*it_kinds);
     Pathname p(dirForResolvableKindFlags(kind));
-    if (0 != assert_dir(p, 0700))
+    if (0 != assert_dir(p, 0755))
       ZYPP_THROW(Exception("Cannot create directory" + p.asString()));
     else
       MIL << "Created " << p.asString() << std::endl;
@@ -243,7 +246,7 @@ XMLFilesBackend::initBackend()
 
   // dir for named flags
   Pathname namedflags(dirForNamedFlags());
-  if (0 != assert_dir(namedflags, 0700))
+  if (0 != assert_dir(namedflags, 0755))
     ZYPP_THROW(Exception("Cannot create directory" + namedflags.asString()));
   else
     MIL << "Created " << namedflags.asString() << std::endl;
