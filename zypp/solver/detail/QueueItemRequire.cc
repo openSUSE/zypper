@@ -281,7 +281,6 @@ struct NoInstallableProviders
 								   requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);
 	}
-	return true;
 
 	if (misc_info != NULL) {
 	    context->addInfo (misc_info);
