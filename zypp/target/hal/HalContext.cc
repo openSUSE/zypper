@@ -65,14 +65,17 @@ namespace zypp
           HalError()  { dbus_error_init(&error); }
           ~HalError() { dbus_error_free(&error); }
 
-          inline std::string toString() const
+          inline bool         isSet() const
+          {
+            return dbus_error_is_set(&error);
+          }
+
+          inline HalException halException() const
           {
             if( error.name != NULL && error.message != NULL) {
-              return std::string(error.name) +
-                     std::string(": ")       +
-                     std::string(error.message);
+              return HalException(error.name, error.message);
             } else {
-              return std::string();
+              return HalException();
             }
           }
         };
@@ -112,6 +115,15 @@ namespace zypp
       } // anonymous
       ////////////////////////////////////////////////////////////////
 
+      ////////////////////////////////////////////////////////////////
+      std::ostream &
+      HalException::dumpOn( std::ostream & str ) const
+      {
+        if(!e_name.empty() && !e_msg.empty())
+          return str << msg() << ": " << e_msg << " (" << e_name << ")";
+        else
+          return str << msg();
+      }
 
       ////////////////////////////////////////////////////////////////
       class HalContext_Impl
@@ -179,7 +191,7 @@ namespace zypp
 
         conn = dbus_bus_get(DBUS_BUS_SYSTEM, &err.error);
         if( !conn) {
-          ZYPP_THROW(HalException(err.toString()));
+          ZYPP_THROW(err.halException());
         }
 
         if( monitorable)
@@ -220,7 +232,7 @@ namespace zypp
           dbus_connection_unref(conn);
           conn = NULL;
 
-          ZYPP_THROW(HalException(err.toString()));
+          ZYPP_THROW(err.halException());
         }
       }
 
@@ -323,7 +335,7 @@ namespace zypp
         names = libhal_get_all_devices( h_impl->hctx, &count, &err.error);
         if( !names)
         {
-          ZYPP_THROW(HalException(err.toString()));
+          ZYPP_THROW(err.halException());
         }
 
         std::vector<std::string> ret(names, names + count);
@@ -390,7 +402,7 @@ namespace zypp
                                                  &count, &err.error);
         if( !names)
         {
-          ZYPP_THROW(HalException(err.toString()));
+          ZYPP_THROW(err.halException());
         }
 
         std::vector<std::string> ret(names, names + count);
@@ -398,6 +410,258 @@ namespace zypp
         return ret;
       }
 
+      // --------------------------------------------------------------
+      bool
+      HalContext::getDevicePropertyBool  (const std::string &udi,
+                                          const std::string &key) const
+      {
+        MutexLock  lock(g_Mutex);
+        VERIFY_CONTEXT(h_impl);
+
+        HalError      err;
+        dbus_bool_t   ret;
+
+        ret = libhal_device_get_property_bool  (h_impl->hctx,
+                                                udi.c_str(),
+                                                key.c_str(),
+                                                &err.error);
+        if( err.isSet())
+        {
+          ZYPP_THROW(err.halException());
+        }
+        return ret;
+      }
+
+      // --------------------------------------------------------------
+      int32_t
+      HalContext::getDevicePropertyInt32 (const std::string &udi,
+                                          const std::string &key) const
+      {
+        MutexLock  lock(g_Mutex);
+        VERIFY_CONTEXT(h_impl);
+
+        HalError      err;
+        dbus_int32_t  ret;
+
+        ret = libhal_device_get_property_int   (h_impl->hctx,
+                                                udi.c_str(),
+                                                key.c_str(),
+                                                &err.error);
+        if( err.isSet())
+        {
+          ZYPP_THROW(err.halException());
+        }
+        return ret;
+      }
+
+      // --------------------------------------------------------------
+      uint64_t
+      HalContext::getDevicePropertyUInt64(const std::string &udi,
+                                          const std::string &key) const
+      {
+        MutexLock  lock(g_Mutex);
+        VERIFY_CONTEXT(h_impl);
+
+        HalError      err;
+        dbus_uint64_t ret;
+
+        ret = libhal_device_get_property_uint64(h_impl->hctx,
+                                                udi.c_str(),
+                                                key.c_str(),
+                                                &err.error);
+        if( err.isSet())
+        {
+          ZYPP_THROW(err.halException());
+        }
+        return ret;
+      }
+
+      // --------------------------------------------------------------
+      double
+      HalContext::getDevicePropertyDouble(const std::string &udi,
+                                          const std::string &key) const
+      {
+        MutexLock  lock(g_Mutex);
+        VERIFY_CONTEXT(h_impl);
+
+        HalError      err;
+        double        ret;
+
+        ret = libhal_device_get_property_bool  (h_impl->hctx,
+                                                udi.c_str(),
+                                                key.c_str(),
+                                                &err.error);
+        if( err.isSet())
+        {
+          ZYPP_THROW(err.halException());
+        }
+        return ret;
+      }
+
+
+      // --------------------------------------------------------------
+      std::string
+      HalContext::getDevicePropertyString(const std::string &udi,
+                                          const std::string &key) const
+      {
+        MutexLock  lock(g_Mutex);
+        VERIFY_CONTEXT(h_impl);
+
+        HalError      err;
+        std::string   ret;
+        char         *ptr;
+
+        ptr = libhal_device_get_property_string(h_impl->hctx,
+                                                udi.c_str(),
+                                                key.c_str(),
+                                                &err.error);
+        if( err.isSet())
+        {
+          ZYPP_THROW(err.halException());
+        }
+        if( ptr != NULL)
+        {
+          ret = ptr;
+          free(ptr);
+        }
+        return ret;
+      }
+
+      // --------------------------------------------------------------
+      void
+      HalContext::setDevicePropertyBool  (const std::string &udi,
+                                          const std::string &key,
+                                          bool               value)
+      {
+        MutexLock  lock(g_Mutex);
+        VERIFY_CONTEXT(h_impl);
+
+        HalError      err;
+        dbus_bool_t   ret;
+        
+        ret = libhal_device_set_property_bool  (h_impl->hctx,
+                                                udi.c_str(),
+                                                key.c_str(),
+                                                value ? 1 : 0,
+                                                &err.error);
+        if( !ret)
+        {
+          ZYPP_THROW(err.halException());
+        }
+      }
+
+      // --------------------------------------------------------------
+      void
+      HalContext::setDevicePropertyInt32 (const std::string &udi,
+                                          const std::string &key,
+                                          int32_t            value)
+      {
+        MutexLock  lock(g_Mutex);
+        VERIFY_CONTEXT(h_impl);
+
+        HalError      err;
+        dbus_bool_t   ret;
+
+        ret = libhal_device_set_property_int   (h_impl->hctx,
+                                                udi.c_str(),
+                                                key.c_str(),
+                                                value,
+                                                &err.error);
+        if( !ret)
+        {
+          ZYPP_THROW(err.halException());
+        }
+      }
+
+      // --------------------------------------------------------------
+      void
+      HalContext::setDevicePropertyUInt64(const std::string &udi,
+                                          const std::string &key,
+                                          uint64_t           value)
+      {
+        MutexLock  lock(g_Mutex);
+        VERIFY_CONTEXT(h_impl);
+
+        HalError      err;
+        dbus_bool_t   ret;
+        
+        ret = libhal_device_set_property_uint64(h_impl->hctx,
+                                                udi.c_str(),
+                                                key.c_str(),
+                                                value,
+                                                &err.error);
+        if( !ret)
+        {
+          ZYPP_THROW(err.halException());
+        }
+      }
+
+      // --------------------------------------------------------------
+      void
+      HalContext::setDevicePropertyDouble(const std::string &udi,
+                                          const std::string &key,
+                                          double             value)
+      {
+        MutexLock  lock(g_Mutex);
+        VERIFY_CONTEXT(h_impl);
+
+        HalError      err;
+        dbus_bool_t   ret;
+        
+        ret = libhal_device_set_property_double(h_impl->hctx,
+                                                udi.c_str(),
+                                                key.c_str(),
+                                                value,
+                                                &err.error);
+        if( !ret)
+        {
+          ZYPP_THROW(err.halException());
+        }
+      }
+
+      // --------------------------------------------------------------
+      void
+      HalContext::setDevicePropertyString(const std::string &udi,
+                                          const std::string &key,
+                                          const std::string &value)
+      {
+        MutexLock  lock(g_Mutex);
+        VERIFY_CONTEXT(h_impl);
+
+        HalError      err;
+        dbus_bool_t   ret;
+        
+        ret = libhal_device_set_property_string(h_impl->hctx,
+                                                udi.c_str(),
+                                                key.c_str(),
+                                                value.c_str(),
+                                                &err.error);
+        if( !ret)
+        {
+          ZYPP_THROW(err.halException());
+        }
+      }
+
+      // --------------------------------------------------------------
+      void
+      HalContext::removeDeviceProperty(const std::string &udi,
+                                       const std::string &key)
+      {
+        MutexLock  lock(g_Mutex);
+        VERIFY_CONTEXT(h_impl);
+
+        HalError      err;
+        dbus_bool_t   ret;
+
+        ret = libhal_device_remove_property(h_impl->hctx,
+                                            udi.c_str(),
+                                            key.c_str(),
+                                            &err.error);
+        if( !ret)
+        {
+          ZYPP_THROW(err.halException());
+        }
+      }
 
       ////////////////////////////////////////////////////////////////
       HalDrive::HalDrive()
@@ -571,7 +835,7 @@ namespace zypp
                                                  getUDI().c_str(),
                                                  &err.error);
         if( !props)
-          ZYPP_THROW(HalException(err.toString()));
+          ZYPP_THROW(err.halException());
 
         std::vector<std::string>   ret(1, getTypeName());
         std::string                key;

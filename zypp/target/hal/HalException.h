@@ -45,16 +45,50 @@ namespace zypp
           : zypp::Exception("Hal Exception")
         {}
 
-        /** Constructor taking hal error message.
+        /** Constructor taking complete hal error message.
+         * This constructor is used to generate custom error
+         * messages, in case, that no DBUS error is avaliable.
          * Use \ref ZYPP_THROW to throw exceptions.
          */
-        HalException(const std::string &msg)
-          : zypp::Exception(msg)
+        HalException(const std::string &msg_r)
+          : zypp::Exception("Hal Exception: " + msg_r)
+        {}
+
+        /** Constructor taking HAL (DBUS) error message components.
+         * Use \ref ZYPP_THROW to throw exceptions.
+         */
+        HalException(const std::string &err_name, const std::string &err_msg)
+          : zypp::Exception("Hal Exception")
+          , e_name(err_name)
+          , e_msg(err_msg)
         {}
 
         /** Destructor.
          */
         virtual ~HalException() throw() {};
+
+        /**
+         * \return The HAL (DBUS) error name component.
+         */
+        const std::string & errorName() const
+        {
+          return e_name;
+        }
+
+        /**
+         * \return The HAL (DBUS) error message component.
+         */
+        const std::string & errorMessage() const
+        {
+          return e_msg;
+        }
+
+      protected:
+        virtual std::ostream & dumpOn( std::ostream & str ) const;
+
+      private:
+        std::string e_name;
+        std::string e_msg;
       };
 
 

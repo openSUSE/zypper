@@ -17,7 +17,7 @@
 #include <zypp/base/PtrTypes.h>
 #include <string>
 #include <vector>
-
+#include <stdint.h>
 
 //////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -110,6 +110,55 @@ namespace zypp
          */
         std::vector<std::string>
         findDevicesByCapability(const std::string &capability) const;
+
+        bool
+        getDevicePropertyBool  (const std::string &udi,
+                                const std::string &key) const;
+
+        int32_t
+        getDevicePropertyInt32 (const std::string &udi,
+                                const std::string &key) const;
+
+        uint64_t
+        getDevicePropertyUInt64(const std::string &udi,
+                                const std::string &key) const;
+
+        double
+        getDevicePropertyDouble(const std::string &udi,
+                                const std::string &key) const;
+
+        std::string
+        getDevicePropertyString(const std::string &udi,
+                                const std::string &key) const;
+
+        void
+        setDevicePropertyBool  (const std::string &udi,
+                                const std::string &key,
+                                bool               value);
+
+        void
+        setDevicePropertyInt32 (const std::string &udi,
+                                const std::string &key,
+                                int32_t            value);
+
+        void
+        setDevicePropertyUInt64(const std::string &udi,
+                                const std::string &key,
+                                uint64_t           value);
+
+        void
+        setDevicePropertyDouble(const std::string &udi,
+                                const std::string &key,
+                                double             value);
+
+        void
+        setDevicePropertyString(const std::string &udi,
+                                const std::string &key,
+                                const std::string &value);
+
+        void
+        removeDeviceProperty(const std::string &udi,
+                             const std::string &key);
 
       private:
         //friend HalMonitor;
