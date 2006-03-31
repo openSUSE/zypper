@@ -183,6 +183,11 @@ struct RequireProcess
 	    return true;
 	}
 
+	if (!provider->arch().compatibleWith( _context->architecture() )) {
+	    MIL << "provider " << provider << " has incompatible arch '" << provider->arch() << "'" << endl;
+	    return true;
+	}
+
 	if ( upgrades
 	     && upgrades.resolvable()->arch() != provider->arch()) {
 	    MIL << "provider " << provider << " has OTHER arch '" << provider->arch() << "' than the updated item "
