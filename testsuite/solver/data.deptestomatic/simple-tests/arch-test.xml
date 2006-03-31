@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+   Upgrade leads to architecture change
+
+   A-1.0-1.i686 is installed
+   Install package B which requires A == 1.1
+   A-1.1-2.x86_64 is available
+-->
+<test>
+<setup>
+  <system file="arch-i686-package.xml"/>
+  <channel name="test" file="arch-x86_64-package.xml"/>
+</setup>
+<trial>
+  <install channel="test" package="B"/>
+</trial>
+</test>
