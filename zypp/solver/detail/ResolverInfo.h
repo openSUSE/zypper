@@ -64,6 +64,7 @@ typedef enum {
     RESOLVER_INFO_TYPE_PARALLEL_PROVIDER,		// p provides c but another version is already installed
     RESOLVER_INFO_TYPE_NOT_INSTALLABLE_PROVIDER,	// p provides c but is uninstallable
     RESOLVER_INFO_TYPE_LOCKED_PROVIDER,			// p provides c but is locked
+    RESOLVER_INFO_TYPE_OTHER_ARCH_PROVIDER,		// p provides c but has other architecture
     RESOLVER_INFO_TYPE_CANT_SATISFY,			// Can't satisfy requirement c
 	// from QueueItemUninstall
     RESOLVER_INFO_TYPE_UNINSTALL_TO_BE_INSTALLED,	// p is to-be-installed, so it won't be unlinked.

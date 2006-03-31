@@ -43,6 +43,7 @@
 #include "zypp/solver/detail/ResolverInfoDependsOn.h"
 #include "zypp/solver/detail/ResolverInfoMisc.h"
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
+#include "zypp/solver/detail/Helper.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -168,6 +169,7 @@ struct RequireProcess
 	Capability match = cai.cap;
 
 	ResStatus status = _context->getStatus( provider );
+	PoolItem_Ref upgrades = Helper::findInstalledItem (_pool, provider);
 
 	XXX << "RequireProcessInfo (" << provider << " provides " << match << ", is " << status << ")" << endl;
 // ERR << "RequireProcessInfo(required: " << *capability << ")" << endl;
@@ -181,8 +183,10 @@ struct RequireProcess
 	    return true;
 	}
 
-	if (!provider->arch().compatibleWith( _context->architecture() )) {
-	    MIL << "provider " << provider << " has incompatible arch '" << provider->arch() << "'" << endl;
+	if ( upgrades
+	     && upgrades.resolvable()->arch() != provider->arch()) {
+	    MIL << "provider " << provider << " has OTHER arch '" << provider->arch() << "' than the updated item "
+		<< upgrades << endl;
 	    return true;
 	}
 
@@ -267,7 +271,12 @@ struct NoInstallableProviders
 	} else if (provider.status().isLocked()) {
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_LOCKED_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);
- 	}
+ 	} else	if (provider->arch().compatibleWith( context->architecture() )) {
+	    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_OTHER_ARCH_PROVIDER,
+								   requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
+	    misc_info->setOtherPoolItem (provider);
+	}
+	return true;
 
 	if (misc_info != NULL) {
 	    context->addInfo (misc_info);
@@ -554,7 +563,6 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
 	if (!_upgraded_item
 	    || _lost_item) {
-
 	    ResolverInfo_Ptr err_info;
 	    NoInstallableProviders info;
 	    info.requirer = _requiring_item;
@@ -572,7 +580,6 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 			  functor::functorRef<bool,CapAndItem>(info) );
 
 	}
-
 	//
 	// If this is an upgrade, we might be able to avoid removing stuff by upgrading it instead.
 	//

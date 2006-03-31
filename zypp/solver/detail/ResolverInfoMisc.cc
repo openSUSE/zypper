@@ -409,6 +409,23 @@ ResolverInfoMisc::message (void) const
 	break;
 
 	//-------------------
+	// p provides c but has other architecture
+
+	case RESOLVER_INFO_TYPE_OTHER_ARCH_PROVIDER: {
+	    // affected() = requirer of capability
+	    // _capability = provided by other()
+	    // other() = provider of capability
+	    // other_capability() = - empty -
+
+	    // Translator: 1.%s = name of package,patch,...; 2.%s = dependency;
+	    msg = str::form (_("%s provides %s, but has another architecture."),
+			     other()->name().c_str(),
+			     ResolverInfo::toString (_capability).c_str());
+	}
+	break;
+	
+
+	//-------------------
 	// Can't satisfy requirement
 
 	case RESOLVER_INFO_TYPE_CANT_SATISFY: {
