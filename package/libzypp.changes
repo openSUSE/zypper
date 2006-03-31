@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Mar 31 18:02:05 CEST 2006 - jsrain@suse.de
+
+- use KeyRing class to validate repomd.xml (#160909)
+
+-------------------------------------------------------------------
 Fri Mar 31 17:33:21 CEST 2006 - dmacvicar@suse.de
 
 - Product resolvables should be readable by normal users.
