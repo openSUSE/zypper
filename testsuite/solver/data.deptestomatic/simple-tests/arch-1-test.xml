@@ -11,6 +11,7 @@
 -->
 <test>
 <setup>
+  <arch name="x86_64"/>
   <system file="arch-i686-package.xml"/>
   <channel name="test" file="arch-x86_64-package.xml"/>
 </setup>
