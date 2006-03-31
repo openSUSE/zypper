@@ -25,6 +25,7 @@
 #include "zypp/CapFilters.h"
 #include "zypp/Package.h"
 #include "zypp/Language.h"
+#include "zypp/NameKindProxy.h"
 
 #include <zypp/SourceManager.h>
 #include <zypp/SourceFactory.h>
@@ -113,35 +114,15 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "xxx" );
   INT << "===[START]==========================================" << endl;
 
-  string infile( "p" );
-  if (argc >= 2 )
-    infile = argv[1];
-  {
-  target::rpm::RpmDb rpm;
-  rpm.initDatabase( "/" );
-
-  std::list<Package::Ptr> rpmpkgs( rpm.getPackages() );
-  ResStore rpmstore;
-  rpmstore.insert( rpmpkgs.begin(), rpmpkgs.end() );
-
   ResPool pool( getZYpp()->pool() );
-  getZYpp()->addResolvables( rpmstore, true );
-  rstats( pool.begin(), pool.end() );
 
-  printRange( make_filter_begin( Mpool(), pool ),
-              make_filter_end( Mpool(), pool ),
-              INT ) << endl;
-
-  }
-  INT << "===[END]============================================" << endl << endl;
-  return 0;
-
-
-  if ( 1 ) {
-    Measure x( "initTarget " + sysRoot.asString() );
-    getZYpp()->initTarget( sysRoot );
-  }
-
+  if ( 1 )
+    {
+      Measure x( "initTarget " + sysRoot.asString() );
+      getZYpp()->initTarget( sysRoot );
+      getZYpp()->addResolvables( getZYpp()->target()->resolvables(), true );
+      INT << "Added target: " << pool << endl;
+    }
 
   SourceManager::sourceManager()->restore( sysRoot );
   if ( SourceManager::sourceManager()->allSources().empty() )
@@ -151,6 +132,15 @@ int main( int argc, char * argv[] )
       SourceManager::sourceManager()->store( sysRoot, true );
     }
 
+  Source_Ref src( *SourceManager::sourceManager()->Source_begin() );
+  getZYpp()->addResolvables( src.resolvables() );
+  INT << "Added source: " << pool << endl;
+
+  NameKindProxy s( nameKindProxy<Selection>( pool, "default" ) );
+  MIL << s << endl;
+
+
+#if 0
   Source_Ref src( *SourceManager::sourceManager()->Source_begin() );
   const std::list<Pathname> srcKeys( src.publicKeys() );
   MIL << src << endl;
@@ -166,29 +156,8 @@ int main( int argc, char * argv[] )
   getZYpp()->addResolvables( src.resolvables() );
   SEC << pool << endl;
 
-
-
   rpm.closeDatabase();
-#if 0
-  ResPoolManager pool;
-  pool.insert( src.resolvables().begin(), src.resolvables().end() );
-  pool.insert( trg.resolvables().begin(), trg.resolvables().end(), true );
-
-  ResPool query( pool.accessor() );
-  rstats( query.begin(), query.end() );
-  std::for_each( query.begin(), query.end(), Print<PoolItem>() );
-
-  ResPoolProxy y2pm( query );
-  y2pm.saveState<Package>();
-  std::for_each( y2pm.byKindBegin<Package>(), y2pm.byKindEnd<Package>(),
-                 PrintPtr<ui::Selectable::Ptr>() );
-
-
-
-  y2pm.saveState<Package>();
-  SEC << y2pm.diffState<Package>() << endl;
 #endif
-
   INT << "===[END]============================================" << endl << endl;
   return 0;
 }
