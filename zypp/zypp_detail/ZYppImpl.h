@@ -60,7 +60,7 @@ namespace zypp
       { return _sourceFeed; }
 
       /** */
-      KeyRing* keyRing() const
+      KeyRing_Ptr keyRing() const
       { return _keyring; }
 
 
@@ -142,7 +142,7 @@ namespace zypp
       /** */
       Resolver_Ptr _resolver;
 
-      KeyRing *_keyring;
+      KeyRing_Ptr _keyring;
       /** */
       Arch _architecture;
       /** */

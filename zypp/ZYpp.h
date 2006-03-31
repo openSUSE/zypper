@@ -19,6 +19,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/Target.h"
 #include "zypp/Resolver.h"
+#include "zypp/KeyRing.h"
 #include "zypp/DiskUsageCounter.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -109,7 +110,7 @@ namespace zypp
   public:
     /** */
     Resolver_Ptr resolver() const;
-    KeyRing* keyRing() const;
+    KeyRing_Ptr keyRing() const;
   public:
     /** Set the preferd locale for translated labels, descriptions,
      *  etc. passed to the UI.

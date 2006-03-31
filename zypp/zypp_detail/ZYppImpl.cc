@@ -129,9 +129,7 @@ namespace zypp
     //	METHOD TYPE : Destructor
     //
     ZYppImpl::~ZYppImpl()
-    {
-      delete _keyring;
-    }
+    {}
 
     //------------------------------------------------------------------------
     // add/remove resolvables
