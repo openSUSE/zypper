@@ -60,7 +60,7 @@ namespace zypp
 
 
 	static void addDirectlySelectedPackages	( set<string> & pkgNames );
-        template<class PkgSet_T, class PkgSetPtr_T> void addPkgSetPackages( set<string> & pkgNames );
+        template<class PkgSet_T> void addPkgSetPackages( set<string> & pkgNames );
 
 	static void addSelectionPackages	( set<string> & pkgNames );
 	static void addPatternPackages		( set<string> & pkgNames );
@@ -105,25 +105,27 @@ namespace zypp
 
 
 
-	static void addSelectionPackages	( set<string> & pkgNames )
+	static void addSelectionPackages( set<string> & pkgNames )
 	{
-	    addPkgSetPackages<Selection, Selection::constPtr>( pkgNames );
+	    addPkgSetPackages<Selection>( pkgNames );
 	}
 
 
-	static void addPatternPackages		( set<string> & pkgNames )
+	static void addPatternPackages( set<string> & pkgNames )
 	{
-	    addPkgSetPackages<Pattern, Pattern::constPtr>( pkgNames );
+	    addPkgSetPackages<Pattern>( pkgNames );
 	}
 
 
 	/**
 	 * Template to handle Selections and Patterns
 	 **/
-        template<class PkgSet_T, class PkgSetPtr_T> void addPkgSetPackages( set<string> & pkgNames )
+        template<class PkgSet_T> void addPkgSetPackages( set<string> & pkgNames )
 	{
+	    DBG << getZYpp()->pool() << endl;
+		
 	    for ( PoolProxyIterator pkgSet_it = poolProxyBegin<PkgSet_T>();
-		  pkgSet_it != poolProxyBegin<PkgSet_T>();
+		  pkgSet_it != poolProxyEnd<PkgSet_T>();
 		  ++pkgSet_it )
 	    {
 		// Take all pkg sets (selections or patterns) into account that
@@ -131,17 +133,13 @@ namespace zypp
 		// for that pkg set or if the selection is required by another
 		// pkg set of the same class
 
-		PkgSetPtr_T pkgSet = dynamic_pointer_cast<const PkgSet_T>( (*pkgSet_it)->theObj() );
+		typename PkgSet_T::constPtr pkgSet = dynamic_pointer_cast<const PkgSet_T>( (*pkgSet_it)->theObj() );
 
 		if ( pkgSet && (*pkgSet_it)->toModify() )
 		{
 		    DBG << "Pattern / selection " << pkgSet->name() << " will be transacted" << endl;
 		    set<string> setPkgs = pkgSet->install_packages();
 		    pkgNames.insert( setPkgs.begin(), setPkgs.end() );
-		}
-		else
-		{
-		    DBG << "Pattern / selection " << (*pkgSet_it)->name() << " not modified" << endl;
 		}
 	    }
 	}
