@@ -28,6 +28,8 @@
 #include "zypp/Digest.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/TmpPath.h"
+#include "zypp/ZYppFactory.h"
+#include "zypp/KeyRing.h"
 
 #include "zypp/parser/yum/YUMParser.h"
 #include "zypp/SourceFactory.h"
@@ -99,6 +101,18 @@ namespace zypp
 	  filename = tmp.path();
 	  if (_cache_dir.empty())
 	  {
+	    MIL << "Trying to get the key" << endl;
+	    Pathname key_local;
+	    try {
+	      key_local = provideFile(_path + "/repodata/repomd.xml.key");
+	      MIL << "Importing key " << (_path + "/repodata/repomd.xml.key") << " (locally " << key_local << ")" << endl;
+	      getZYpp()->keyRing()->importKey(key_local , false);
+	    }
+	    catch (const Exception & excpt_r)
+	    {
+	      WAR << "Failed to import key " << _path + ("/repodata/repomd.xml.key") << endl;
+	      ZYPP_CAUGHT(excpt_r);
+	    }
 	    MIL << "Checking repomd.xml integrity" << endl;
 	    Pathname asc_local;
 	    try {
@@ -108,7 +122,8 @@ namespace zypp
 	    {
 	      ZYPP_CAUGHT(excpt_r);
 	    }
-	    if (! checkAscIntegrity (filename, asc_local))
+	
+	    if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, asc_local))
 	      ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 	  }
 
@@ -181,7 +196,7 @@ namespace zypp
 	{
 	  ZYPP_CAUGHT(excpt_r);
 	}
-	if (! checkAscIntegrity (filename, asc_local))
+	if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, asc_local))
 	  ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 
 	DBG << "Reading file " << filename << endl;
@@ -264,7 +279,7 @@ namespace zypp
 	    {
 	      ZYPP_CAUGHT(excpt_r);
 	    }
-	    if (! checkAscIntegrity (filename, asc_local))
+	    if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, asc_local))
 	      ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 	  }
 
@@ -1147,6 +1162,10 @@ namespace zypp
     }
     return cap;
   }
+
+
+
+
       bool YUMSourceImpl::checkCheckSum (const Pathname & filename, std::string csum_type, const std::string & csum)
       {
 	MIL << "Checking checksum for " << filename << " as type: " << csum_type << "; value: " << csum << endl;
@@ -1173,39 +1192,8 @@ namespace zypp
 	else
 	  WAR << "Checksum missmatch: metadata: " << csum << "; real: " << dig << endl;
 	return true;
-#warning remove line above
+#warning remove line above, ask user what to do...
 	return ret;
-      }
-
-
-      bool YUMSourceImpl::checkAscIntegrity (const Pathname & filename, const Pathname & asc_file)
-      {
-	MIL << "Checking ASC integrity for " << filename << " using " << asc_file << endl;
-	if ( ! PathInfo(asc_file).isExist() )
-	{
-	  WAR << "ASC file could not be retrieced" << endl;
-	  return true;
-#warning FIXME define behavior if file is missing
-	}
-	if (! PathInfo("/usr/bin/gpgv").isExist())
-	{
-	  WAR << "/usr/bin/gpgv doesn't exist, skipping integrity check" << endl;
-	  return true;
-	}
-
-	ExternalProgram* prog = new ExternalProgram("/usr/bin/gpgv " + asc_file.asString(), ExternalProgram::Discard_Stderr, false, -1, true);
-	if (! prog)
-	  ZYPP_THROW(Exception("Cannot run the script"));
-	int retval = prog->close();
-	delete prog;
-	if (retval != 0)
-	{
-	  ERR << "ASC checking for " << filename << " failed" << endl;
-#warning FIXME remove line below
-	  return true;
-	  return false;
-	}
-	return true;
       }
 
     } // namespace yum
