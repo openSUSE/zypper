@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Mar 31 17:33:21 CEST 2006 - dmacvicar@suse.de
+
+- Product resolvables should be readable by normal users.
+  (#162474) (dmacvicar)
+- implemented keyring and metadata signature verification
+  in susetags source
+- dont delete the lock if we did not acquire it
+- r2847
+
+-------------------------------------------------------------------
 Fri Mar 31 16:34:51 CEST 2006 - mt@suse.de
 
 - Added disabling of the automounter while MediaManager
