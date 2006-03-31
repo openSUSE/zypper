@@ -33,7 +33,7 @@
 
 #define  DELAYED_VERIFY          1
 #define  FORCE_RELEASE_FOREIGN   1
-#define  REPORT_EJECT_ERRORS     0
+#define  REPORT_EJECT_ERRORS     1
 
 using namespace std;
 
