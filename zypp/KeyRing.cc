@@ -22,6 +22,7 @@
 #include <boost/regex.hpp>
 
 #include "zypp/base/String.h"
+#include "zypp/base/IOStream.h"
 #include "zypp/KeyRing.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/TmpPath.h"
@@ -43,6 +44,17 @@ namespace zypp
     {
       XXX << "[match "<< k << "] [" << what[k] << "]" << std::endl;
     }
+  }
+  
+  static bool printLine( const std::string &line )
+  {
+    MIL <<  line << std::endl;
+  }
+  
+  static void dumpFile(const Pathname &file)
+  {
+    std::ifstream is(file.asString().c_str());
+    iostr::forEachLine( is, printLine);    
   }
   
   ///////////////////////////////////////////////////////////////////
@@ -159,13 +171,19 @@ namespace zypp
       "--homedir",
       keyring.asString().c_str(),
       "-a",
-      "-o",
-      keyfile.asString().c_str(),
       "--export",
       id.c_str(),
       NULL
     };
     ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
+    std::string line;
+    int count;
+    std::ofstream os(keyfile.asString().c_str());
+    for(line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
+    {
+      os << line;
+    }
+    os.close();
     prog.close();
   }
   
@@ -214,6 +232,9 @@ namespace zypp
           MIL << "User wants to trust key " << id << " " << key.name << std::endl;
           TmpFile unKey;
           exportKey( id, _general_kr, unKey.path());
+          MIL << "Exported key " << id << " to " << unKey << std::endl;
+          //dumpFile(unKey.path());
+          
           importKey( unKey.path(), _trusted_kr );
           // emit key added
           if ( verifyFile( file, signature, _trusted_kr ) )

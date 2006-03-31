@@ -41,7 +41,7 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace susetags
     { /////////////////////////////////////////////////////////////////
-
+      
       ///////////////////////////////////////////////////////////////////
       //
       //	METHOD NAME : SuseTagsImpl::SuseTagsImpl
@@ -380,6 +380,7 @@ namespace zypp
         
         if (PathInfo(_content_file_sig).isExist() && PathInfo(_content_file_key).isExist() )
         {
+          MIL << "SuseTags source: checking 'content' file vailidity using digital signature.." << endl;
           // can verify signature
           ZYpp::Ptr z = getZYpp();
           
