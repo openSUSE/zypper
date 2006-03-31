@@ -84,6 +84,8 @@ namespace zypp
     std::list<PublicKey> trustedPublicKeys();
     std::list<PublicKey> publicKeys();
     
+    void dumpPublicKey( const std::string &id, bool trusted, std::ostream &stream );
+    
     bool verifyFileSignatureWorkflow( const Pathname &file, const Pathname &signature);
     
     bool verifyFileSignature( const Pathname &file, const Pathname &signature);
@@ -93,7 +95,7 @@ namespace zypp
     bool verifyFile( const Pathname &file, const Pathname &signature, const Pathname &keyring);
     void importKey( const Pathname &keyfile, const Pathname &keyring);
     
-    void exportKey( std::string id, const Pathname &keyring, const Pathname &keyfile);
+    void exportKey( std::string id, const Pathname &keyfile, bool trusted);
     
     void deleteKey( const std::string &id, const Pathname &keyring );
     std::list<PublicKey> publicKeys(const Pathname &keyring);
@@ -158,8 +160,22 @@ namespace zypp
     return false;
   }
   
-  void KeyRing::Impl::exportKey( std::string id, const Pathname &keyring, const Pathname &keyfile)
-  {    
+  void KeyRing::Impl::exportKey( std::string id, const Pathname &keyfile, bool trusted)
+  { 
+    try {   
+      std::ofstream os(keyfile.asString().c_str());
+      dumpPublicKey( id, trusted, os );
+      os.close();
+    }
+    catch (std::exception &e)
+    {
+      ERR << "Cannot export key " << id << " from " << (trusted ? "trusted" : "untrusted ") << " keyring  to file " << keyfile << std::endl;
+    }
+  }
+  
+  void KeyRing::Impl::dumpPublicKey( const std::string &id, bool trusted, std::ostream &stream )
+  {
+    Pathname keyring = trusted ? _trusted_kr : _general_kr;
     const char* argv[] =
     {
       "gpg",
@@ -178,30 +194,20 @@ namespace zypp
     ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
     std::string line;
     int count;
-    std::ofstream os(keyfile.asString().c_str());
     for(line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
     {
-      os << line;
+      stream << line;
     }
-    os.close();
     prog.close();
   }
+  
   
   bool KeyRing::Impl::verifyFileSignatureWorkflow( const Pathname &file, const Pathname &signature)
   {
     callback::SendReport<KeyRingReport> report;
     callback::SendReport<KeyRingSignals> emitSignal;
     MIL << "Going to verify signature for " << file << " with " << signature << std::endl; 
-//     struct KeyRingReport : public callback::ReportBase
-//       virtual bool askUserToAcceptUnsignedFile( const Pathname &file )
-//       virtual bool askUserToAcceptUnknownKey( const std::string keyid, const std::string keyname )
-//       virtual bool askUserToTrustKey( const std::string keyid, const std::string keyname )
-//       virtual bool askUserToAcceptVerificationFailed( const Pathname &file, const std::string keyid, const std::string keyname )
-//     
-//     struct KeyRingSignals : public callback::ReportBase
-//       virtual void trustedKeyAdded( const KeyRing &keyring, const std::string keyid, const std::string keyname )
-//       virtual void trustedKeyRemoved( const KeyRing &keyring, const std::string keyid, const std::string keyname )
-//     
+
     // get the id of the signature
     std::string id = readSignatureKeyId(signature);
     
@@ -209,7 +215,7 @@ namespace zypp
     if ( publicKeyExists( id, _trusted_kr ) )
     {
       TmpFile trustedKey;
-      exportKey( id, _trusted_kr, trustedKey.path());
+      exportKey( id, trustedKey.path(), true);
       PublicKey key = readPublicKey(trustedKey.path());
       MIL << "Key " << id << " " << key.name << " is trusted" << std::endl;
       // it exists, is trusted, does it validates?
@@ -223,19 +229,20 @@ namespace zypp
       if ( publicKeyExists( id, _general_kr ) )
       {
         TmpFile unKey;
-        exportKey( id, _general_kr, unKey.path());
+        exportKey( id, unKey.path(), false);
+        MIL << "Exported key " << id << " to " << unKey << std::endl;
+        
         PublicKey key = readPublicKey(unKey.path());
         MIL << "Key " << id << " " << key.name << " is not trusted" << std::endl;
         // ok the key is not trusted, ask the user to trust it or not
         if ( report->askUserToTrustKey(key.id, key.name) )
         {
           MIL << "User wants to trust key " << id << " " << key.name << std::endl;
-          TmpFile unKey;
-          exportKey( id, _general_kr, unKey.path());
-          MIL << "Exported key " << id << " to " << unKey << std::endl;
           //dumpFile(unKey.path());
           
           importKey( unKey.path(), _trusted_kr );
+          emitSignal->trustedKeyAdded( (const KeyRing &)(*this), id, key.name );
+          
           // emit key added
           if ( verifyFile( file, signature, _trusted_kr ) )
           {
@@ -582,6 +589,11 @@ namespace zypp
   bool KeyRing::verifyFileTrustedSignature( const Pathname &file, const Pathname &signature)
   {
     return _pimpl->verifyFileTrustedSignature(file, signature);
+  }
+  
+  void KeyRing::dumpPublicKey( const std::string &id, bool trusted, std::ostream &stream )
+  {
+    _pimpl->dumpPublicKey( id, trusted, stream);
   }
   
   /////////////////////////////////////////////////////////////////

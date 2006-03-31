@@ -33,19 +33,19 @@ namespace zypp
   {
     virtual bool askUserToAcceptUnsignedFile( const Pathname &file )
     { return true; }
-    virtual bool askUserToAcceptUnknownKey( const std::string keyid, const std::string keyname )
+    virtual bool askUserToAcceptUnknownKey( const std::string &keyid, const std::string &keyname )
     { return true; }
-    virtual bool askUserToTrustKey( const std::string keyid, const std::string keyname )
+    virtual bool askUserToTrustKey( const std::string &keyid, const std::string &keyname )
     { return true; }
-    virtual bool askUserToAcceptVerificationFailed( const Pathname &file, const std::string keyid, const std::string keyname )
+    virtual bool askUserToAcceptVerificationFailed( const Pathname &file, const std::string &keyid, const std::string &keyname )
     { return true; }
   };
   
   struct KeyRingSignals : public callback::ReportBase
   {
-    virtual void trustedKeyAdded( const KeyRing &keyring, const std::string keyid, const std::string keyname )
+    virtual void trustedKeyAdded( const KeyRing &keyring, const std::string &keyid, const std::string &keyname )
     {}
-    virtual void trustedKeyRemoved( const KeyRing &keyring, const std::string keyid, const std::string keyname )
+    virtual void trustedKeyRemoved( const KeyRing &keyring, const std::string &keyid, const std::string &keyname )
     {}
   };
   
@@ -83,6 +83,15 @@ namespace zypp
      */
     void importKey( const Pathname &keyfile, bool trusted = false);
     PublicKey readPublicKey( const Pathname &keyfile );
+    
+    void dumpTrustedPublicKey( const std::string &id, std::ostream &stream )
+    { dumpPublicKey(id, true, stream); }
+    
+    void dumpUntrustedPublicKey( const std::string &id, std::ostream &stream )
+    { dumpPublicKey(id, false, stream); }
+    
+    void dumpPublicKey( const std::string &id, bool trusted, std::ostream &stream );
+    
     std::string readSignatureKeyId( const Pathname &keyfile );
     
     /**
