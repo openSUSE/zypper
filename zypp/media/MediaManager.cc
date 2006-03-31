@@ -15,6 +15,7 @@
 #include <zypp/media/Mount.h>
 #include <zypp/thread/Mutex.h>
 #include <zypp/thread/MutexLock.h>
+#include <zypp/target/hal/HalContext.h>
 
 #include <zypp/base/String.h>
 #include <zypp/base/Logger.h>
@@ -121,6 +122,137 @@ namespace zypp
       typedef std::map<MediaAccessId, ManagedMedia> ManagedMediaMap;
 
 
+      // -------------------------------------------------------------
+      enum AutoMounterCleanUp
+      {
+        NONE, ENABLE, REMOVE
+      };
+
+      #define HAL_AUTOMOUNTER_UDI  "/org/freedesktop/Hal/devices/computer"
+      #define HAL_AUTOMOUNTER_KEY  "storage.disable_volume_handling"
+
+      // -------------------------------------------------------------
+      AutoMounterCleanUp
+      disableAutoMounter()
+      {
+        using namespace zypp::target::hal;
+
+        AutoMounterCleanUp cleanup(NONE);
+        try
+        {
+          HalContext hal(true);
+          bool disabled(false);
+
+          // query
+          XXX << "Checking HAL volume handling property"
+              << std::endl;
+          try
+          {
+            disabled = hal.getDevicePropertyBool(
+              HAL_AUTOMOUNTER_UDI, HAL_AUTOMOUNTER_KEY
+            );
+
+            if( disabled)
+            {
+              MIL << "HAL volume handling is already disabled"
+                  << std::endl;
+            }
+            else
+            {
+              cleanup = ENABLE;
+              XXX << "HAL volume handling is enabled"
+                  << std::endl;
+            }
+          }
+          catch(const HalException &e)
+          {
+            ZYPP_CAUGHT(e);
+            XXX << "HAL volume handling is enabled (no property)"
+                << std::endl;
+            disabled = false;
+            cleanup  = REMOVE;
+          }
+
+          // disable
+          if( !disabled)
+          {
+            XXX << "Trying to disable HAL volume handling"
+                << std::endl;
+            try
+            {
+              hal.setDevicePropertyBool(
+                HAL_AUTOMOUNTER_UDI, HAL_AUTOMOUNTER_KEY,
+                true
+              );
+
+              MIL << "Disabled HAL volume handling (automounter)"
+                  << std::endl;
+            }
+            catch(const HalException &e)
+            {
+              ZYPP_CAUGHT(e);
+              WAR << "Unable to disable HAL volume handling (automounter)"
+                  << std::endl;
+
+              cleanup  = NONE;
+            }
+          }
+        }
+        catch(const HalException &e)
+        {
+          ZYPP_CAUGHT(e);
+          WAR << "Unable to disable HAL volume handling (automounter)"
+              << std::endl;
+        }
+        return cleanup;
+      }
+
+      // -------------------------------------------------------------
+      void
+      restoreAutoMounter(AutoMounterCleanUp cleanup)
+      {
+        using namespace zypp::target::hal;
+
+        if(cleanup == NONE)
+          return;
+
+        try
+        {
+          HalContext hal(true);
+
+          if(cleanup == ENABLE)
+          {
+            XXX << "Trying to restore HAL volume handling -- enable"
+                << std::endl;
+
+            hal.setDevicePropertyBool(
+              HAL_AUTOMOUNTER_UDI, HAL_AUTOMOUNTER_KEY,
+              false
+            );
+          }
+          else
+          if(cleanup == REMOVE)
+          {
+            XXX << "Trying to restore HAL volume handling -- remove"
+                << std::endl;
+
+            hal.removeDeviceProperty(
+              HAL_AUTOMOUNTER_UDI, HAL_AUTOMOUNTER_KEY
+            );
+          }
+
+          cleanup = NONE;
+          MIL << "Restored HAL volume handling (automounter)"
+              << std::endl;
+        }
+        catch(const HalException &e)
+        {
+          ZYPP_CAUGHT(e);
+          WAR << "Unable to restore HAL volume handling (automounter)"
+              << std::endl;
+        }
+      }
+
       ////////////////////////////////////////////////////////////////
     } // anonymous
     //////////////////////////////////////////////////////////////////
@@ -132,12 +264,16 @@ namespace zypp
     private:
       friend class MediaManager;
 
-      MediaAccessId   last_accessid;
-      ManagedMediaMap mediaMap;
+      MediaAccessId       last_accessid;
+      AutoMounterCleanUp  am_cleanup;
+      ManagedMediaMap     mediaMap;
 
       MediaManager_Impl()
         : last_accessid(0)
-      {}
+      {
+        // disable automounter
+        am_cleanup = disableAutoMounter();
+      }
 
     public:
       ~MediaManager_Impl()
@@ -169,6 +305,9 @@ namespace zypp
 
           // remove all other handlers
           mediaMap.clear();
+
+          // restore automounter state
+          restoreAutoMounter(am_cleanup);
         }
         catch( ... )
         {}
