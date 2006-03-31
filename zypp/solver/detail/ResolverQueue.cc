@@ -375,8 +375,8 @@ ResolverQueue::splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueLi
 		Source_Ref source2 = r2->source();
 		int priority, priority2;
 
-		priority = source.priority();		//channel->isSubscribed());
-		priority2 = source2.priority();		//channel2->isSubscribed());
+		priority = _context->getSourcePriority( source );
+		priority2 = _context->getSourcePriority( source2 );
 
 		if (priority != priority2 && r->name() == r2->name()) {
 		    if (r->edition().compare(r2->edition()) == 0

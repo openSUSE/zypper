@@ -138,6 +138,12 @@ namespace zypp
   void Source_Ref::setPriorityUnsubscribed (unsigned p)
   { return _pimpl->setPriorityUnsubscribed( p ); }
 
+  bool Source_Ref::subscribed(void) const
+  { return _pimpl->subscribed(); }
+
+  void Source_Ref::setSubscribed (bool s)
+  { return _pimpl->setSubscribed( s ); }
+
   Url Source_Ref::url (void) const
   { return _pimpl->url (); }
 

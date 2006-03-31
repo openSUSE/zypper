@@ -41,6 +41,7 @@ namespace zypp
     , _priority (0)
     , _priority_unsubscribed (0)
     , _res_store_initialized(false)
+    , _subscribed(false)
     {
     }
 
@@ -60,6 +61,7 @@ namespace zypp
       _path      = path_r;
       _alias     = alias_r;
       _cache_dir = cache_dir_r;
+      _subscribed = true;
       try
         {
           factoryInit();
@@ -434,6 +436,12 @@ namespace zypp
 
     void SourceImpl::setPriorityUnsubscribed (unsigned p)
     { _priority_unsubscribed = p; }
+
+    bool SourceImpl::subscribed (void) const
+    { return _subscribed; }
+
+    void SourceImpl::setSubscribed (bool s)
+    { _subscribed = s; }
 
     const Pathname & SourceImpl::cacheDir (void)
     { return _cache_dir; }

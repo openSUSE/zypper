@@ -158,6 +158,8 @@ namespace zypp
       virtual void setPriority (unsigned p);
       virtual unsigned priorityUnsubscribed (void) const;
       virtual void setPriorityUnsubscribed (unsigned p);
+      virtual bool subscribed (void) const;
+      virtual void setSubscribed (bool s);
       virtual const Pathname & cacheDir (void);
       virtual const std::list<Pathname> publicKeys();
 
@@ -227,6 +229,8 @@ namespace zypp
       unsigned _priority;
       /** (user defined) unsubscribed priority of the source */
       unsigned _priority_unsubscribed;
+      /** subscribed?, solver prefers subscribed sources */
+      bool _subscribed;
 
       ///////////////////////////////////////////////////////////////////
       // no playground below this line ;)

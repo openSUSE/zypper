@@ -1567,13 +1567,9 @@ ResolverContext::getParallelInstall (PoolItem_Ref item) const
 int
 ResolverContext::getSourcePriority (Source_Ref source) const
 {
-//    bool is_subscribed;
-    int priority = 0;
-#warning getSourcePriority not implemented
-//    is_subscribed = channel->isSubscribed ();
-//    priority = channel->getPriority (is_subscribed);
-
-    return priority;
+    if (source.subscribed())
+	return source.priority();
+    return source.priorityUnsubscribed();
 }
 
 //---------------------------------------------------------------------------
