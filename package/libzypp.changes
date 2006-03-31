@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Mar 31 18:28:59 CEST 2006 - sh@suse.de
+
+- Added zypp/ui/UserWantedPackages to support the UI's 
+  "automatic changes" dialog (bug #152700) 
+
+-------------------------------------------------------------------
 Fri Mar 31 18:02:05 CEST 2006 - jsrain@suse.de
 
 - use KeyRing class to validate repomd.xml (#160909)
