@@ -538,7 +538,7 @@ namespace zypp
 
         HalError      err;
         dbus_bool_t   ret;
-        
+
         ret = libhal_device_set_property_bool  (h_impl->hctx,
                                                 udi.c_str(),
                                                 key.c_str(),
@@ -584,7 +584,7 @@ namespace zypp
 
         HalError      err;
         dbus_bool_t   ret;
-        
+
         ret = libhal_device_set_property_uint64(h_impl->hctx,
                                                 udi.c_str(),
                                                 key.c_str(),
@@ -607,7 +607,7 @@ namespace zypp
 
         HalError      err;
         dbus_bool_t   ret;
-        
+
         ret = libhal_device_set_property_double(h_impl->hctx,
                                                 udi.c_str(),
                                                 key.c_str(),
@@ -630,7 +630,7 @@ namespace zypp
 
         HalError      err;
         dbus_bool_t   ret;
-        
+
         ret = libhal_device_set_property_string(h_impl->hctx,
                                                 udi.c_str(),
                                                 key.c_str(),
@@ -1072,6 +1072,7 @@ namespace zypp
 //////////////////////////////////////////////////////////////////////
 #else // FAKE_HAL
 #include <zypp/target/hal/HalContext.h>
+#include <zypp/target/hal/HalException.h>
 namespace zypp
 { ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
@@ -1080,6 +1081,10 @@ namespace zypp
     //////////////////////////////////////////////////////////////////
     namespace hal
     { ////////////////////////////////////////////////////////////////
+
+      std::ostream &
+      HalException::dumpOn( std::ostream & str ) const
+      { return str; }
 
       // --------------------------------------------------------------
       class HalContext_Impl
@@ -1117,7 +1122,15 @@ namespace zypp
       std::vector<std::string>
       HalContext::findDevicesByCapability(const std::string &) const
       { return std::vector<std::string>(); }
-
+      bool
+      HalContext::getDevicePropertyBool(const std::string &, const std::string &) const
+      { return false; }
+      void
+      HalContext::setDevicePropertyBool  (const std::string &, const std::string &, bool value)
+      {}
+      void
+      HalContext::removeDeviceProperty(const std::string &, const std::string &)
+      {}
       // --------------------------------------------------------------
       HalDrive::HalDrive()
       {}
