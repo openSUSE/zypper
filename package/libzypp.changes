@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Mar 31 12:44:25 CEST 2006 - kkaempf@suse.de
+
+- honor subscription status of catalogs (#162350)
+- rev 2827
+
+-------------------------------------------------------------------
 Fri Mar 31 11:29:05 CEST 2006 - mt@suse.de
 
 - Enabled CD eject error reporting exceptions (#154326)
