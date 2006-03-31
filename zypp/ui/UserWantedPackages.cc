@@ -15,7 +15,7 @@
 
 #include "zypp/ui/UserWantedPackages.h"
 
-#include "zypp/ui/Status.h"
+#include "zypp/base/PtrTypes.h"
 #include "zypp/ui/Selectable.h"
 #include "zypp/ResObject.h"
 #include "zypp/Package.h"
@@ -74,7 +74,7 @@ namespace zypp
 	    set<string> pkgNames;
 
 	    DBG << "Collecting packages the user explicitly asked for" << endl;
-	    
+
 	    addDirectlySelectedPackages	( pkgNames );
 	    addSelectionPackages	( pkgNames );
 	    addPatternPackages		( pkgNames );
@@ -97,8 +97,9 @@ namespace zypp
 
 		if ( (*it)->toModify() && (*it)->modifiedBy() == ResStatus::USER )
 		{
-		    DBG << "Explicit user transaction on pkg \"" << (*it)->theObj()->name() << "\"" << endl;
-		    pkgNames.insert( (*it)->theObj()->name() );
+		    DBG << "Explicit user transaction on pkg \"" << (*it)->name() << "\"" << endl;
+
+		    pkgNames.insert( (*it)->name() );
 		}
 	    }
 	}
@@ -122,20 +123,22 @@ namespace zypp
 	 **/
         template<class PkgSet_T> void addPkgSetPackages( set<string> & pkgNames )
 	{
-	    for ( PoolProxyIterator pkgSet_it = poolProxyBegin<PkgSet_T>();
-		  pkgSet_it != poolProxyEnd<PkgSet_T>();
-		  ++pkgSet_it )
+	    for ( PoolProxyIterator it = poolProxyBegin<PkgSet_T>();
+		  it != poolProxyEnd<PkgSet_T>();
+		  ++it )
 	    {
 		// Take all pkg sets (selections or patterns) into account that
 		// will be transacted, no matter if the user explicitly asked
 		// for that pkg set or if the selection is required by another
 		// pkg set of the same class
 
-		typename PkgSet_T::constPtr pkgSet = dynamic_pointer_cast<const PkgSet_T>( (*pkgSet_it)->theObj() );
+		typename PkgSet_T::constPtr pkgSet = dynamic_pointer_cast<const PkgSet_T>( (*it)->theObj() );
 
-		if ( pkgSet && (*pkgSet_it)->toModify() )
+		if ( pkgSet && (*it)->toModify() )
 		{
-		    DBG << "Pattern / selection \"" << pkgSet->name() << "\" will be transacted" << endl;
+		    DBG << (*it)->theObj()->kind().asString()
+			<< " will be transacted: \"" << pkgSet->name() << "\"" << endl;
+
 		    set<string> setPkgs = pkgSet->install_packages();
 		    pkgNames.insert( setPkgs.begin(), setPkgs.end() );
 		}
@@ -154,12 +157,11 @@ namespace zypp
 		  lang_it != langEnd();
 		  ++lang_it )
 	    {
-		Language::constPtr lang = dynamic_pointer_cast<const Language>( *lang_it );
-
-		if ( lang && (*lang_it)->toModify() )
+		if ( (*lang_it)->toModify() )
 		{
-		    DBG << "Language \"" << lang->name() << "\" will be transacted" << endl;
-		    wantedLanguages.insert( lang->name() );
+		    DBG << "Language will be transacted: \"" << (*lang_it)->name() << "\"" << endl;
+
+		    wantedLanguages.insert( (*lang_it)->name() );
 		}
 	    }
 
@@ -189,18 +191,18 @@ namespace zypp
 
 
 
-	static void addPatchPackages( set<string> & pkgNames )
-	{
-	    for ( PoolProxyIterator patch_it = patchesBegin();
-		  patch_it != patchesEnd();
-		  ++patch_it )
-	    {
-		Patch::constPtr patch = dynamic_pointer_cast<const Patch>( *patch_it );
+        static void addPatchPackages( set<string> & pkgNames )
+        {
+            for ( PoolProxyIterator patch_it = patchesBegin();
+                  patch_it != patchesEnd();
+                  ++patch_it )
+            {
+		Patch::constPtr patch = dynamic_pointer_cast<const Patch>( (*patch_it)->theObj() );
 
-		if ( patch && (*patch_it)->toModify() )
+                if ( patch && (*patch_it)->toModify() )
 		{
-		    DBG << "Patch \"" << patch->name() << "\" (\""
-			<< patch->summary() << "\") will be transacted" << endl;
+		    DBG << "Patch will be transacted: \"" << patch->name()
+			<< "\" - \"" << patch->summary() << "\"" << endl;
 
 		    Patch::AtomList atomList = patch->atoms();
 
@@ -214,5 +216,5 @@ namespace zypp
 	    }
 	}
 
-    }
-}
+    } // namespace ui
+} // namespace zypp
