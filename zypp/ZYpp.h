@@ -36,7 +36,8 @@ namespace zypp
   class SourceFeed_Ref;
   class ResStore;
   class Locale;
-
+  class KeyRing;
+  
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : ZYpp
@@ -115,7 +116,7 @@ namespace zypp
   public:
     /** */
     Resolver_Ptr resolver() const;
-
+    KeyRing* keyRing() const;
   public:
     /** Set the preferd locale for translated labels, descriptions,
      *  etc. passed to the UI.

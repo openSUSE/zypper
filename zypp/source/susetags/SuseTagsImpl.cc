@@ -17,6 +17,7 @@
 #include "zypp/PathInfo.h"
 #include "zypp/Digest.h"
 #include "zypp/CheckSum.h"
+#include "zypp/KeyRing.h"
 
 #include "zypp/source/susetags/SuseTagsImpl.h"
 #include "zypp/source/susetags/PackagesParser.h"
@@ -344,14 +345,58 @@ namespace zypp
         {
           DBG << "Cached metadata found. Reading from " << _cache_dir << endl;
           _content_file = _cache_dir + "DATA/content";
+          
+          if (PathInfo(_cache_dir + "DATA/content.key").isExist())
+            _content_file_key = _cache_dir + "DATA/content.key";
+          
+          if (PathInfo(_cache_dir + "DATA/content.asc").isExist())
+          _content_file_sig = _cache_dir + "DATA/content.asc";
         }
         else
         {
           DBG << "Cached metadata not found in [" << _cache_dir << "]. Reading from " << _path << endl;
  
           _content_file = provideFile(_path + "content");
+          
+          // try to get content.key and content.asc
+          // they are not present in old sources, so we must not 
+          // handle a not found exception as a source failure.
+          try {
+            _content_file_sig = provideFile( _path + "content.asc");
+          }
+          catch (Exception & excpt_r) {
+            MIL << "Cannot provide 'content' file digital signature." << endl;
+          }
+          
+          try {
+            _content_file_key = provideFile( _path + "content.key");
+          }
+          catch (Exception & excpt_r) {
+            MIL << "Cannot provide 'content' file public key." << endl;
+          }
         }
 
+        // now check signature of content file.
+        
+        if (PathInfo(_content_file_sig).isExist() && PathInfo(_content_file_key).isExist() )
+        {
+          // can verify signature
+          ZYpp::Ptr z = getZYpp();
+          
+          // import it to the untrusted keyring.
+          z->keyRing()->importKey(_content_file_key, false);
+          
+          bool valid = z->keyRing()->verifyFileSignatureWorkflow( _content_file, _content_file_sig);
+        }
+        else if (!PathInfo(_content_file_sig).isExist() && !PathInfo(_content_file_key).isExist() )
+        {
+          // old source?
+        }
+        else
+        {
+          ZYPP_THROW (Exception( "Error. New source format with crypto verification. But either key or signature is missing. ") ); 
+        }
+        
         SourceFactory factory;
 
         try {

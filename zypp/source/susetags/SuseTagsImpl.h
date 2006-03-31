@@ -105,6 +105,8 @@ namespace zypp
         Pathname _descr_dir;
         Pathname _data_dir;
         Pathname _content_file;
+        Pathname _content_file_sig;
+        Pathname _content_file_key;
         
         std::string _vendor;
         std::string _media_id;
