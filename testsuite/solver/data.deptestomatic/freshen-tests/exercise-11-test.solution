@@ -3,6 +3,4 @@
 >!> patch:Patch-A-1.1-1.noarch[test] UU_s_
 >!> Installing Patch-A from channel test
 >!> Solution #1:
->!> install A-1.1-1.noarch[test]
->!> install patch:Patch-A-1.1-1.noarch[test]
->!> installs=2, upgrades=0, uninstalls=0
+>!> installs=0, upgrades=0, uninstalls=0

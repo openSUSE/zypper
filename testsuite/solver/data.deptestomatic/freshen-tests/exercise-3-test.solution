@@ -2,5 +2,3 @@
 >!> Established context
 >!> patch:Patch-A-1.1-1.noarch[test] UU_s_
 >!> product:Patchlevel-1.noarch[test] US_s_
->!> Solution #1:
->!> installs=0, upgrades=0, uninstalls=0
