@@ -2,7 +2,8 @@
 Fri Mar 31 06:40:51 CEST 2006 - kkaempf@suse.de
 
 - support "dry run" (#159467)
-- rev 2815
+- implement "transactResKind" (#161400)
+- rev 2817
 
 -------------------------------------------------------------------
 Thu Mar 30 17:22:49 CEST 2006 - jsrain@suse.de
