@@ -23,6 +23,7 @@
 
 #include "zypp/ZYppFactory.h"
 #include "zypp/zypp_detail/ZYppImpl.h"
+#include "zypp/zypp_detail/ZYppReadOnlyHack.h"
 
 #define ZYPP_LOCK_FILE "/var/run/zypp.pid"
 
@@ -34,6 +35,22 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
+  namespace zypp_readonly_hack
+  { /////////////////////////////////////////////////////////////////
+
+    static bool active = false;
+
+    void IWantIt()
+    {
+      active = true;
+      MIL << "ZYPP_READONLY promised." <<  endl;
+    }
+
+    /////////////////////////////////////////////////////////////////
+  } // namespace zypp_readonly_hack
+  ///////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
   //
   //    CLASS NAME : ZYppGlobalLock
   //
@@ -43,10 +60,10 @@ namespace zypp
   {
     public:
 
-      ZYppGlobalLock() : _zypp_lockfile(0), _clean_lock(false)
-    {
-      
-    }
+      ZYppGlobalLock()
+      : _clean_lock(false)
+      , _zypp_lockfile(0)
+    {}
 
     ~ZYppGlobalLock()
     {
@@ -73,7 +90,7 @@ namespace zypp
     }
 
     bool _clean_lock;
-    
+
     private:
     FILE *_zypp_lockfile;
 
@@ -291,6 +308,14 @@ namespace zypp
 
     if ( ! _instance )
     {
+      /*--------------------------------------------------*/
+      if ( zypp_readonly_hack::active )
+        {
+          _instance = new ZYpp( ZYpp::Impl_Ptr(new ZYpp::Impl) );
+          MIL << "ZYPP_READONLY active." << endl;
+          return _instance;
+        }
+      /*--------------------------------------------------*/
       if ( globalLock.zyppLocked() )
       {
         ZYPP_THROW( ZYppFactoryException(N_("Cannot aquire zypp lock.")) );

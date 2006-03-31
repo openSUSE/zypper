@@ -70,10 +70,10 @@ namespace zypp
     , _disk_usage()
     {
       MIL << "defaultTextLocale: '" << _textLocale << "'" << endl;
-      
+
       MIL << "initializing keyring..." << std::endl;
       _keyring = new KeyRing(homePath() + Pathname("/keyring/all"), homePath() + Pathname("/keyring/trusted"));
-      
+
       struct utsname buf;
       if (uname (&buf) < 0) {
 	ERR << "Can't determine system architecture" << endl;
@@ -131,18 +131,6 @@ namespace zypp
     ZYppImpl::~ZYppImpl()
     {
       delete _keyring;
-    }
-
-    void ZYppImpl::reset()
-    {
-	MIL << "Resetting ZYpp instance" << endl;
-	// TODO: check the memory is released
-	_textLocale = defaultTextLocale();
-	_pool = ResPoolManager();
-	_sourceFeed = SourceFeed_Ref(_pool);
-	_resolver = new Resolver(_pool.accessor());
-	_disk_usage = DiskUsageCounter();
-	_target = 0;
     }
 
     //------------------------------------------------------------------------

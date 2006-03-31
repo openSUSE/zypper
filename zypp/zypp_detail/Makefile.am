@@ -10,7 +10,8 @@ INCLUDES = -DZYPP_BASE_LOGGER_LOGGROUP=\"zypp_detail\"
 baseincludedir = $(pkgincludedir)/zypp_detail
 
 baseinclude_HEADERS =	\
-	ZYppImpl.h
+	ZYppImpl.h	\
+	ZYppReadOnlyHack.h
 
 noinst_LTLIBRARIES =	lib@PACKAGE@_zypp_detail.la
 

@@ -63,7 +63,7 @@ namespace zypp
       KeyRing* keyRing() const
       { return _keyring; }
 
-      
+
       Resolver_Ptr resolver() const
       { return _resolver; }
 
@@ -91,11 +91,6 @@ namespace zypp
 
       /** Commit changes and transactions. */
       ZYpp::CommitResult commit( int medianr_r, bool dry_run = false );
-
-      /** Reset the instance, discard changes
-       * \throws Exception
-       */
-      void reset();
 
     public:
       /** \todo Signal locale change. */
@@ -146,7 +141,7 @@ namespace zypp
       Target_Ptr _target;
       /** */
       Resolver_Ptr _resolver;
-      
+
       KeyRing *_keyring;
       /** */
       Arch _architecture;

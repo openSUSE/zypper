@@ -37,7 +37,7 @@ namespace zypp
   class ResStore;
   class Locale;
   class KeyRing;
-  
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : ZYpp
@@ -74,15 +74,8 @@ namespace zypp
 
     void setPartitions(const DiskUsageCounter::MountPointSet &mp);
 
-  public:
-    /**
-     * Tries to reset the ZYpp instance. It discards the current
-     * status without too much house keeping. Might be dangerous to use.
-     *
-     * \throws Exception
-     */
-    void reset();
-
+    /** NOOP */
+    ZYPP_DEPRECATED void reset() {}
   public:
     /**
      * \throws Exception

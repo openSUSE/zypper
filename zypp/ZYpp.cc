@@ -68,12 +68,9 @@ namespace zypp
 
   Resolver_Ptr ZYpp::resolver() const
   { return _pimpl->resolver(); }
-  
+
   KeyRing* ZYpp::keyRing() const
   { return _pimpl->keyRing(); }
-
-  void ZYpp::reset()
-  { _pimpl->reset(); }
 
   ///////////////////////////////////////////////////////////////////
   //
