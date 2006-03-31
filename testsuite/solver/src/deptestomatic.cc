@@ -1153,12 +1153,14 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		poolItem.status().setToBeUninstalled(ResStatus::USER);
 		if (!soft.empty())
 		    poolItem.status().setSoftUninstall(true);
+#if 0 // replaced by 'transact'
                 if ( kind_name== "selection"
                      || kind_name == "pattern" ) {
                        // -> do a 'single step' resolving either installing or removing
                        //    required and recommended PoolItems; this will be used by the YaST UI
                     resolver->transactResObject ( poolItem, false);
                 }
+#endif
 //		resolver->addPoolItemToRemove (poolItem);
 	    } else {
 		cerr << "Unknown system item " << name << endl;
@@ -1402,6 +1404,57 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		std::cout << it->code();
 	    }
 	    std::cout << endl;
+
+	} else if (node->equals ("transact")) {
+
+	    string name = node->getProp ("name");
+	    if (name.empty())
+		name = node->getProp ("package");
+	    string kind_name = node->getProp ("kind");
+
+	    string source_alias = node->getProp ("channel");
+	    if (source_alias.empty())
+		source_alias = "@system";
+
+	    if (!name.empty()
+		&& !kind_name.empty())
+	    {
+		cerr << "transact either takes 'name' or 'kind', but not both" << endl;
+		return;
+	    }
+
+	    if (name.empty()
+		|| kind_name.empty())
+	    {
+		cerr << "transact need either 'name' or 'kind' parameter" << endl;
+		return;
+	    }
+
+	    if (name.empty()) {		// assume kind
+		resolver->transactResKind( string2kind( kind_name ) );
+	    }
+	    else {
+		PoolItem_Ref poolItem;
+
+		poolItem = get_poolItem (source_alias, name, kind_name);
+
+		if (poolItem) {
+		    if (source_alias == "@system") {
+			RESULT << "Removing " << name << " from channel " << source_alias << endl;;
+			poolItem.status().setToBeUninstalled(ResStatus::USER);
+		    }
+		    else {
+			RESULT << "Installing " << name << " from channel " << source_alias << endl;;
+			poolItem.status().setToBeInstalled(ResStatus::USER);
+		    }
+		    resolver->transactResObject ( poolItem, false);
+		}
+		else {
+		    cerr << "Unknown item " << source_alias << "::" << name << endl;
+		}
+
+	     }
+
 	} else {
 	    cerr << "Unknown tag '" << node->name() << "' in trial" << endl;
 	}
