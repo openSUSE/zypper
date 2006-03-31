@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Mar 31 11:29:05 CEST 2006 - mt@suse.de
+
+- Enabled CD eject error reporting exceptions (#154326)
+- rev 2822
+
+-------------------------------------------------------------------
 Fri Mar 31 06:40:51 CEST 2006 - kkaempf@suse.de
 
 - support "dry run" (#159467)
