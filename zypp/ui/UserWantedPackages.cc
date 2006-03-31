@@ -97,7 +97,7 @@ namespace zypp
 
 		if ( (*it)->toModify() && (*it)->modifiedBy() == ResStatus::USER )
 		{
-		    DBG << "Explicit user transaction on pkg " << (*it)->theObj()->name() << endl;
+		    DBG << "Explicit user transaction on pkg \"" << (*it)->theObj()->name() << "\"" << endl;
 		    pkgNames.insert( (*it)->theObj()->name() );
 		}
 	    }
@@ -122,8 +122,6 @@ namespace zypp
 	 **/
         template<class PkgSet_T> void addPkgSetPackages( set<string> & pkgNames )
 	{
-	    DBG << getZYpp()->pool() << endl;
-		
 	    for ( PoolProxyIterator pkgSet_it = poolProxyBegin<PkgSet_T>();
 		  pkgSet_it != poolProxyEnd<PkgSet_T>();
 		  ++pkgSet_it )
@@ -137,7 +135,7 @@ namespace zypp
 
 		if ( pkgSet && (*pkgSet_it)->toModify() )
 		{
-		    DBG << "Pattern / selection " << pkgSet->name() << " will be transacted" << endl;
+		    DBG << "Pattern / selection \"" << pkgSet->name() << "\" will be transacted" << endl;
 		    set<string> setPkgs = pkgSet->install_packages();
 		    pkgNames.insert( setPkgs.begin(), setPkgs.end() );
 		}
@@ -160,7 +158,7 @@ namespace zypp
 
 		if ( lang && (*lang_it)->toModify() )
 		{
-		    DBG << "Language " << lang->name() << " will be transacted" << endl;
+		    DBG << "Language \"" << lang->name() << "\" will be transacted" << endl;
 		    wantedLanguages.insert( lang->name() );
 		}
 	    }
@@ -201,7 +199,8 @@ namespace zypp
 
 		if ( patch && (*patch_it)->toModify() )
 		{
-		    DBG << "Patch " << patch->name() << "(" << patch->summary() << ") will be transacted" << endl;
+		    DBG << "Patch \"" << patch->name() << "\" (\""
+			<< patch->summary() << "\") will be transacted" << endl;
 
 		    Patch::AtomList atomList = patch->atoms();
 
