@@ -299,7 +299,7 @@ namespace zypp
 
     /** Apply a lock (prevent transaction).
      * Currently by USER only, but who knows... Set LOCKED
-     * from KEEP_STATE to be shure all taransaction details
+     * from KEEP_STATE to be shure all transaction details
      * were reset properly.
     */
     bool setLock( bool toLock_r, TransactByValue causer_r )
