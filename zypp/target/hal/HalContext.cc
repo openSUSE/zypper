@@ -1131,6 +1131,9 @@ namespace zypp
       void
       HalContext::removeDeviceProperty(const std::string &, const std::string &)
       {}
+      std::string
+      HalContext::getDevicePropertyString(const std::string &, const std::string &) const
+      { return ""; }
       // --------------------------------------------------------------
       HalDrive::HalDrive()
       {}
