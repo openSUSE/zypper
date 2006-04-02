@@ -18,6 +18,7 @@
 #include <zypp/parser/yum/YUMParserData.h>
 #include <zypp/parser/XMLNodeIterator.h>
 #include <zypp/parser/LibXMLHelper.h>
+#include <zypp/Arch.h>
 #include <list>
 
 namespace zypp {
@@ -71,6 +72,7 @@ namespace zypp {
                                  xmlNodePtr node);
     
         LibXMLHelper _helper;
+	Arch _zypp_architecture;
       };
     } // namespace yum
   } // namespace parser

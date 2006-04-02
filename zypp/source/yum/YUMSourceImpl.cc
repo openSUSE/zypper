@@ -416,7 +416,9 @@ namespace zypp
 		  !prim.atEnd();
 		  ++prim)
 	    {
-              MIL << "found package "<< (*prim)->name << std::endl;
+	      if (*prim == NULL) continue;	// incompatible arch detected during parsing
+
+//              MIL << "found package "<< (*prim)->name << std::endl;
               
                 Arch arch;
                 if (!(*prim)->arch.empty())
@@ -446,7 +448,7 @@ namespace zypp
 		);
 		ImplAndPackage iap = { impl, p };
 		_package_impl[nvra] = iap;
-                MIL << "inserting package "<< p->name() << std::endl;
+//                MIL << "inserting package "<< p->name() << std::endl;
 		_store.insert (p);
 	    }
 	    if (prim.errorStatus())

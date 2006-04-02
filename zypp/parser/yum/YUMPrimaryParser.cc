@@ -20,7 +20,7 @@
 #include <zypp/parser/LibXMLHelper.h>
 #include <zypp/base/Logger.h>
 #include <zypp/parser/yum/schemanames.h>
-
+#include <zypp/ZYppFactory.h>
 
 using namespace std;
 namespace zypp {
@@ -30,6 +30,7 @@ namespace zypp {
       
       YUMPrimaryParser::YUMPrimaryParser(istream &is, const string& baseUrl)
         : XMLNodeIterator<YUMPrimaryData_Ptr>(is, baseUrl,PRIMARYSCHEMA)
+	, _zypp_architecture( getZYpp()->architecture() )
       {
 	if (is.fail()) {
 	    ERR << "Bad stream" << endl;
@@ -38,10 +39,12 @@ namespace zypp {
       }
       
       YUMPrimaryParser::YUMPrimaryParser()
+	: _zypp_architecture( getZYpp()->architecture() )
       { }
       
       YUMPrimaryParser::YUMPrimaryParser(YUMPrimaryData_Ptr& entry)
       : XMLNodeIterator<YUMPrimaryData_Ptr>(entry)
+	, _zypp_architecture( getZYpp()->architecture() )
       { }
       
       
@@ -76,7 +79,8 @@ namespace zypp {
         
         for (xmlNodePtr child = dataNode->children; 
              child != 0;
-             child = child->next) {
+             child = child->next)
+	{
           if (_helper.isElement(child)) {
             string name = _helper.name(child);
             if (name == "name") {
@@ -84,6 +88,18 @@ namespace zypp {
             }
             else if (name == "arch") {
               dataPtr->arch = _helper.content(child);
+	      try {
+		if (!Arch(dataPtr->arch).compatibleWith( _zypp_architecture )) {
+		    dataPtr = NULL;			// skip <package>, incompatible architecture
+		    break;
+		}
+	      }
+	      catch( const Exception & excpt_r ) {
+		ZYPP_CAUGHT( excpt_r );
+		DBG << "Skipping malformed " << dataPtr->arch << endl;
+		dataPtr = NULL;
+		break;
+	      }
             }
             else if (name == "version") {
               dataPtr->epoch = _helper.attribute(child,"epoch");
@@ -137,6 +153,7 @@ namespace zypp {
       YUMPrimaryParser::parseFormatNode(YUMPrimaryData_Ptr dataPtr,
                                               xmlNodePtr formatNode)
       {
+	if (dataPtr == NULL) return;			// skipping
         xml_assert(formatNode);
         dataPtr->installOnly = false;
         for (xmlNodePtr child = formatNode->children; 
