@@ -1009,6 +1009,7 @@ Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, std
     // create dataprovider
     detail::ResImplTraits<RPMPackageImpl>::Ptr impl( new RPMPackageImpl( header ) );
 
+    impl->setSource( source );
     if (!location.empty())
 	impl->setLocation( location );
 
