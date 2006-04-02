@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Sun Apr  2 11:17:56 CEST 2006 - kkaempf@suse.de
+
+- allow setting of source when parsing local .rpm (#147765)
+
+-------------------------------------------------------------------
 Fri Mar 31 18:53:55 CEST 2006 - schubi@suse.de
 
 - Do not update packages over other architectures
