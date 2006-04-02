@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sun Apr  2 22:18:06 CEST 2006 - kkaempf@suse.de
+
+- skip incompatible archs in primary parsing.
+- rev 2883
+
+-------------------------------------------------------------------
 Sun Apr  2 11:17:56 CEST 2006 - kkaempf@suse.de
 
 - allow setting of source when parsing local .rpm (#147765)
