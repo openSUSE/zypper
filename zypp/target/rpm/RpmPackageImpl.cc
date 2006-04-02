@@ -196,6 +196,10 @@ namespace zypp
       /** */
       DiskUsage RPMPackageImpl::diskUsage() const
       { return _disk_usage; }
+
+      /** */
+      Source_Ref RPMPackageImpl::source() const
+      { return _source; }
 #if 0
       /** */
       std::list<std::string> RPMPackageImpl::insnotify() const

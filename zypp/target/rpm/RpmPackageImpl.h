@@ -13,6 +13,7 @@
 #define ZYPP_TARGET_RPM_RPMPACKAGEIMPL_H
 
 #include "zypp/detail/PackageImplIf.h"
+#include "zypp/Source.h"
 #include "zypp/Changelog.h"
 #include "zypp/target/rpm/RpmHeader.h"
 
@@ -99,9 +100,12 @@ namespace zypp
         virtual std::list<std::string> keywords() const;
         /** */
         virtual DiskUsage diskUsage() const;
+        /** */
+        virtual Source_Ref source() const;
 
 	/** for 'local' RPMs  */
 	void setLocation (const Pathname & pathname) { _location = pathname; }
+	void setSource (Source_Ref source) { _source = source; }
 
       protected:
 	TranslatedText _summary;
@@ -123,6 +127,7 @@ namespace zypp
 	DiskUsage _disk_usage;
 	ByteCount _size;
 	ByteCount _archivesize;
+	Source_Ref _source;
        };
       ///////////////////////////////////////////////////////////////////
     } // namespace rpm

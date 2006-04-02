@@ -1000,7 +1000,7 @@ const std::list<Package::Ptr> & RpmDb::getPackages()
 // return NULL on error
 //
 
-Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, std::set<std::string> * filerequires, const Pathname & location )
+Package::Ptr RpmDb::makePackageFromHeader( const RpmHeader::constPtr header, std::set<std::string> * filerequires, const Pathname & location, Source_Ref source )
 {
     Package::Ptr pptr;
 
@@ -1148,7 +1148,7 @@ This prevented from having packages multiple times
     }
 #endif
 
-    Package::Ptr pptr = makePackageFromHeader( *iter, &_filerequires, location );
+    Package::Ptr pptr = makePackageFromHeader( *iter, &_filerequires, location, Source_Ref() );
 
     _packages._list.push_back( pptr );
   }

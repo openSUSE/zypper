@@ -24,6 +24,7 @@
 #include "zypp/ExternalProgram.h"
 
 #include "zypp/Package.h"
+#include "zypp/Source.h"
 
 #include "zypp/target/rpm/RpmHeader.h"
 #include "zypp/target/rpm/RpmCallbacks.h"
@@ -325,7 +326,7 @@ namespace zypp {
 	   * return NULL on error
 	   **/
 
-	  static Package::Ptr makePackageFromHeader( const RpmHeader::constPtr header, std::set<std::string> * filerequires, const Pathname & location );
+	  static Package::Ptr makePackageFromHeader( const RpmHeader::constPtr header, std::set<std::string> * filerequires, const Pathname & location, Source_Ref source );
 
 	  ///////////////////////////////////////////////////////////////////
 	  //
