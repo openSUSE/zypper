@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr  3 19:30:35 CEST 2006 - kkaempf@suse.de
+
+- add Resolver::freshenPool() (#156980)
+- rev 2893
+
+-------------------------------------------------------------------
 Mon Apr  3 08:33:12 CEST 2006 - kkaempf@suse.de
 
 - skip incompatible archs in filelist parsing.
