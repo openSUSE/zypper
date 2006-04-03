@@ -4002,7 +4002,7 @@
 >!> 1 problems found:
 >!> Problem:
 >!> Cannot install lukemftp because it is conflicting with lftp
->!> A conflict over lukemftp == 1.5-586 (lukemftp) requires the removal of to-be-installed lukemftp-1.5-586.i586[sl10_packages]
+>!> A conflict over lukemftp == 1.5 (lukemftp) requires the removal of to-be-installed lukemftp-1.5-586.i586[sl10_packages]
 >!>    Solution:
 >!>       do not install lukemftp
 >!>       do not install lukemftp-1.5-586.i586[sl10_packages]

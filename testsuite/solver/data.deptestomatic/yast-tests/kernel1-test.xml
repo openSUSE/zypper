@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <test>
 <setup>
+  <arch name="x86_64"/>
   <system file="kernel1-system.xml"/>
   <channel name="test" file="kernel1-packages.xml"/>
 </setup>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+  empty solution dialog
+-->
+<test>
+<setup>
+  <channel name="sl10_packages" file="beta9-packages.xml"/>
+  <channel name="sl10_selections" file="beta9-selections.xml"/>
+  <locale name="de_DE"/>
+  <mediaid/>
+</setup>
+<trial>
+  <install channel="sl10_packages" kind="product" name="SUSE LINUX"/>
+  <install channel="sl10_selections" kind="selection" name="Multimedia"/>
+  <install channel="sl10_selections" kind="selection" name="Basis-Devel"/>
+  <install channel="sl10_selections" kind="selection" name="Java"/>
+  <install channel="sl10_selections" kind="selection" name="Hacker"/>
+  <install channel="sl10_selections" kind="selection" name="Kde-Devel"/>
+  <install channel="sl10_selections" kind="selection" name="Games"/>
+  <install channel="sl10_selections" kind="selection" name="Latex"/>
+  <install channel="sl10_selections" kind="selection" name="Kde"/>
+  <install channel="sl10_selections" kind="selection" name="Laptop"/>
+  <install channel="sl10_selections" kind="selection" name="default"/>
+  <install channel="sl10_selections" kind="selection" name="Fonts"/>
+  <install channel="sl10_packages" kind="package" name="OpenOffice_org"/>
+  <install channel="sl10_packages" kind="package" name="acroread"/>
+  <install channel="sl10_packages" kind="package" name="bluez-cups"/>
+  <install channel="sl10_packages" kind="package" name="bluez-firmware"/>
+  <install channel="sl10_packages" kind="package" name="bluez-hcidump"/>
+  <install channel="sl10_packages" kind="package" name="bluez-utils"/>
+  <install channel="sl10_packages" kind="package" name="grub"/>
+  <install channel="sl10_packages" kind="package" name="ial"/>
+  <install channel="sl10_packages" kind="package" name="ipw-firmware"/>
+  <install channel="sl10_packages" kind="package" name="toshutils"/>
+  <install channel="sl10_packages" kind="package" name="unixODBC"/>
+  <install channel="sl10_packages" kind="package" name="wget"/>
+  <install channel="sl10_packages" kind="package" name="yast2-trans-de"/>
+  <reportproblems/>
+</trial>
+</test>
