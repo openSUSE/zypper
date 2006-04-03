@@ -16,4 +16,7 @@
 <trial>
   <establish/>
 </trial>
+<trial>
+  <establish freshen="1"/>
+</trial>
 </test>

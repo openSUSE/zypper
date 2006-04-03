@@ -15,6 +15,6 @@
   <channel name="test" file="exercise-1-packages.xml"/>
 </setup>
 <trial>
-  <freshen/>
+  <establish freshen="1"/>
 </trial>
 </test>

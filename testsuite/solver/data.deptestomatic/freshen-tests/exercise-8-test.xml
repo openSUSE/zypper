@@ -17,4 +17,9 @@
   <establish/>
   <install channel="test" kind="patch" package="Patch-A"/>
 </trial>
+<trial>
+  <establish/>
+  <install channel="test" kind="patch" package="Patch-A"/>
+  <establish freshen="1"/>
+</trial>
 </test>

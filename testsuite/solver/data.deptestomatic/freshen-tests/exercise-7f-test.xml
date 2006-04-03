@@ -24,6 +24,6 @@
 <trial>
   <establish/>
   <install channel="core" package="B"/>
-  <freshen/>
+  <establish freshen="1"/>
 </trial>
 </test>
