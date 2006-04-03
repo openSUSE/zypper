@@ -70,6 +70,21 @@ namespace zypp
     bool establishPool (void);
 
     /**
+     * go through all package 'freshen' dependencies and
+     * schedule matches for installation.
+     *
+     * To be called at begin of installation and upgrade.
+     * Probably also useful after adding a new package
+     * repository.
+     *
+     * return true if it was successful
+     * return false if not (this will only happen if other
+     *   transactions are in the pool which will lead to
+     *   no solution)
+     **/
+    bool freshenPool (void);
+
+    /**
      * Resolve package dependencies:
      *
      * Try to execute all pending transactions (there may be more than

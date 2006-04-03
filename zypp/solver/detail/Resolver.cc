@@ -385,8 +385,6 @@ solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
 
 
 //---------------------------------------------------------------------------
-
-
 // establish state
 
 struct EstablishState
@@ -406,7 +404,7 @@ struct EstablishState
 
 
 void
-Resolver::establishState (ResolverContext_Ptr context)
+Resolver::establishState( ResolverContext_Ptr context )
 {
     _DEBUG( "Resolver::establishState ()" );
     typedef list<Resolvable::Kind> KindList; 
@@ -470,6 +468,83 @@ Resolver::establishPool ()
     }
     else {
 	ERR << "establishState did not return a bestContext" << endl;
+	return false;
+    }
+
+    return true;
+}
+
+
+//---------------------------------------------------------------------------
+// freshen state
+
+struct FreshenState
+{
+    Resolver & resolver;
+
+    FreshenState (Resolver & r)
+	: resolver (r)
+    { }
+
+    bool operator()( PoolItem_Ref item)
+    {
+	CapSet freshens( item->dep( Dep::FRESHENS ) );
+	if (!freshens.empty())
+	    resolver.addPoolItemToEstablish( item );
+	return true;
+    }
+};
+
+
+void
+Resolver::freshenState( ResolverContext_Ptr context )
+{
+    _DEBUG( "Resolver::freshenState ()" );
+
+    if (context == NULL)
+	context = new ResolverContext( _pool, _architecture );
+
+    context->setEstablishing( true );
+    context->setIgnoreCababilities( _ignoreConflicts,
+				    _ignoreRequires,
+				    _ignoreObsoletes,
+				    _ignoreInstalledItem,
+				    _ignoreArchitectureItem );
+    context->setForceResolve( _forceResolve );
+    context->setUpgradeMode( _upgradeMode );        
+
+    FreshenState info( *this );
+
+    invokeOnEach( pool().byKindBegin( ResTraits<zypp::Package>::kind ),
+		      pool().byKindEnd( ResTraits<zypp::Package>::kind ),
+		      functor::functorRef<bool,PoolItem>(info) );
+
+    // process the queue
+    resolveDependencies( context );
+
+    reset();
+
+    context->setEstablishing( false );
+
+    _best_context = context;
+
+    return;
+}
+
+
+bool
+Resolver::freshenPool ()
+{
+    MIL << "Resolver::freshenPool()" << endl;
+
+    freshenState ();						// establish all packages with freshens !
+    ResolverContext_Ptr solution = bestContext();
+
+    if (solution) {						// copy solution back to pool
+	solution->foreachMarked (solution_to_pool, (void *)1);	// as APPL_HIGH
+    }
+    else {
+	ERR << "freshenState did not return a bestContext" << endl;
 	return false;
     }
 

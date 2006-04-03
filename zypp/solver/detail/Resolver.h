@@ -184,8 +184,10 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     const bool forceResolve() { return _forceResolve; }
 
     bool verifySystem (void);
-    void establishState (const ResolverContext_Ptr context = NULL);
+    void establishState (ResolverContext_Ptr context = NULL);
     bool establishPool (void);
+    void freshenState( ResolverContext_Ptr context = NULL );
+    bool freshenPool( void );
     bool resolveDependencies (const ResolverContext_Ptr context = NULL);
     bool resolvePool (void);
 
