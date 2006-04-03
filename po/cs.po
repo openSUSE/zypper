@@ -1,3 +1,4 @@
+# translation of zypp.po to cs_CZ
 # translation of zypp.cs.po to Czech
 # Czech message file for YaST2 (@memory@).
 # Copyright (C) 2005 SUSE Linux Products GmbH.
@@ -8,17 +9,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: zypp.cs\n"
+"Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
 "POT-Creation-Date: 2006-03-20 10:33+0100\n"
-"PO-Revision-Date: 2006-03-05 14:33+0100\n"
+"PO-Revision-Date: 2006-03-28 15:02+0200\n"
 "Last-Translator: Klara Cihlarova <koty@seznam.cz>\n"
-"Language-Team: Czech <suse@suse.cz>\n"
+"Language-Team: cs_CZ <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: KBabel 1.10.2\n"
 
 #: zypp/LanguageCode.cc:145
@@ -2227,7 +2227,7 @@ msgid "%s is not installed and has been marked as uninstallable"
 msgstr "%s nebude nainstalován a byl označen jako nenainstalovatelný"
 
 #: zypp/solver/detail/Resolver_problems.cc:295
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot install %s due to dependency problems"
 msgstr "Vzhledem k problémům se závislostí nelze nainstalovat %s"
 
@@ -2258,7 +2258,7 @@ msgid "%s has missing dependencies"
 msgstr "%s má nesplněné závislosti"
 
 #: zypp/solver/detail/Resolver_problems.cc:435
-#, fuzzy, c-format
+#, c-format
 msgid "%s cannot be installed due to missing dependencies"
 msgstr "%s nelze nainstalovat kvůli nesplněným závislostem"
 
@@ -2299,7 +2299,7 @@ msgid "Cannot install %s because it is conflicting with %s"
 msgstr "Nelze nainstalovat %s, protože koliduje s %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:593
-#, fuzzy, c-format
+#, c-format
 msgid "%s is uninstallable due to conflicts with %s"
 msgstr "%s nelze nainstalovat, koliduje s %s"
 
@@ -2409,8 +2409,7 @@ msgstr ""
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:167
 #, c-format
-msgid ""
-"Can't install %s since it is already marked as needing to be uninstalled"
+msgid "Can't install %s since it is already marked as needing to be uninstalled"
 msgstr ""
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:179
@@ -2421,8 +2420,7 @@ msgstr "Nelze nainstalovat %s, protože nelze aplikovat na systém."
 #: zypp/solver/detail/ResolverInfoMisc.cc:190
 #, c-format
 msgid "Can't install %s, since %s is already marked as needing to be installed"
-msgstr ""
-"Nelže nainstalovat %s, protože %s již označen jako potřebný k instalaci"
+msgstr "Nelže nainstalovat %s, protože %s již označen jako potřebný k instalaci"
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:198
 #, c-format
@@ -2499,8 +2497,7 @@ msgstr ""
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:442
 #, c-format
-msgid ""
-"%s is required by other to-be-installed resolvable, so it won't be unlinked."
+msgid "%s is required by other to-be-installed resolvable, so it won't be unlinked."
 msgstr ""
 
 #: zypp/solver/detail/ResolverInfoMisc.cc:459
@@ -3686,5 +3683,3 @@ msgstr "Zimbabwe"
 msgid "Unable to restore all sources."
 msgstr ""
 
-#~ msgid "ignore architecture"
-#~ msgstr "ignorovat architekturu"
