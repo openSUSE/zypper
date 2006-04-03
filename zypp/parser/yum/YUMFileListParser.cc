@@ -23,7 +23,7 @@
 #include <zypp/parser/yum/schemanames.h>
 #include <iostream>
 #include <zypp/base/Logger.h>
-
+#include <zypp/ZYppFactory.h>
 
 
 using namespace std;
@@ -34,15 +34,18 @@ namespace zypp {
 
       YUMFileListParser::YUMFileListParser(istream &is, const string& baseUrl)
       : XMLNodeIterator<YUMFileListData_Ptr>(is, baseUrl,FILELISTSCHEMA)
+	, _zypp_architecture( getZYpp()->architecture() )
       {
-        fetchNext();
+	fetchNext();
       }
 
       YUMFileListParser::YUMFileListParser()
+	: _zypp_architecture( getZYpp()->architecture() )
       { }
 
       YUMFileListParser::YUMFileListParser(YUMFileListData_Ptr& entry)
       : XMLNodeIterator<YUMFileListData_Ptr>(entry)
+	, _zypp_architecture( getZYpp()->architecture() )
       { }
 
 
@@ -58,9 +61,9 @@ namespace zypp {
       bool
       YUMFileListParser::isInterested(const xmlNodePtr nodePtr)
       {
-        bool result = (_helper.isElement(nodePtr)
-                       && _helper.name(nodePtr) == "package");
-        return result;
+	bool result = (_helper.isElement(nodePtr)
+		       && _helper.name(nodePtr) == "package");
+	return result;
       }
 
 
@@ -68,39 +71,60 @@ namespace zypp {
       YUMFileListData_Ptr
       YUMFileListParser::process(const xmlTextReaderPtr reader)
       {
-        xml_assert(reader);
-        YUMFileListData_Ptr dataPtr = new YUMFileListData;
-        xmlNodePtr dataNode = xmlTextReaderExpand(reader);
-        xml_assert(dataNode);
+	xml_assert(reader);
+	YUMFileListData_Ptr dataPtr = new YUMFileListData;
+	xmlNodePtr dataNode = xmlTextReaderExpand(reader);
+	xml_assert(dataNode);
 
-        dataPtr->pkgId = _helper.attribute(dataNode,"pkgid");
-        dataPtr->name = _helper.attribute(dataNode,"name");
-        dataPtr->arch = _helper.attribute(dataNode,"arch");
+	dataPtr->pkgId = _helper.attribute(dataNode,"pkgid");
+	dataPtr->name = _helper.attribute(dataNode,"name");
+	dataPtr->arch = _helper.attribute(dataNode,"arch");
+	try {
+	    if (!Arch(dataPtr->arch).compatibleWith( _zypp_architecture )) {
+		dataPtr = NULL;			// skip <package>, incompatible architecture
+		return dataPtr;
+	    }
+	}
+	catch( const Exception & excpt_r ) {
+	    ZYPP_CAUGHT( excpt_r );
+	    DBG << "Skipping malformed " << dataPtr->arch << endl;
+	    dataPtr = NULL;
+	    return dataPtr;
+	}
 
-        for (xmlNodePtr child = dataNode->children;
-             child != 0;
-             child = child->next) {
-               if (_helper.isElement(child)) {
-                 string name = _helper.name(child);
-                 if (name == "version") {
-                   dataPtr->epoch = _helper.attribute(child,"epoch");
-                   dataPtr->ver = _helper.attribute(child,"ver");
-                   dataPtr->rel = _helper.attribute(child,"rel");
-                 }
-                 else if (name == "file") {
-#if 0
-                   dataPtr->files.push_back
-                     (FileData(_helper.content(child),
-                               _helper.attribute(child,"type")));
-#endif
-                 }
-                 else {
-                   WAR << "YUM <filelists> contains the unknown element <" << name << "> "
-                     << _helper.positionInfo(child) << ", skipping" << endl;
-                 }
-               }
-             }
-        return dataPtr;
+	for (xmlNodePtr child = dataNode->children;
+	    child != 0;
+	    child = child->next)
+	{
+	    if (_helper.isElement(child)) {
+		string name = _helper.name(child);
+		if (name == "version") {
+		    dataPtr->epoch = _helper.attribute(child,"epoch");
+		    dataPtr->ver = _helper.attribute(child,"ver");
+		    dataPtr->rel = _helper.attribute(child,"rel");
+		}
+		else if (name == "file") {
+		    string filename = _helper.content( child );
+		    if (filename.find("/bin/") != string::npos
+			|| filename.find("/sbin/") != string::npos
+			|| filename.find("/lib/") != string::npos
+			|| filename.find("/lib64/") != string::npos
+			|| filename.find("/etc/") != string::npos
+			|| filename.find("/usr/games/") != string::npos
+			|| filename.find("/usr/share/dict/words") != string::npos
+			|| filename.find("/usr/share/magic.mime") != string::npos
+			|| filename.find("/opt/gnome/games") != string::npos)
+		    {
+			dataPtr->files.push_back( FileData( filename, _helper.attribute( child, "type" ) ) );
+		    }
+		}
+		else {
+		   WAR << "YUM <filelists> contains the unknown element <" << name << "> "
+		     << _helper.positionInfo(child) << ", skipping" << endl;
+		}
+	    }
+	}
+	return dataPtr;
       }
 
 

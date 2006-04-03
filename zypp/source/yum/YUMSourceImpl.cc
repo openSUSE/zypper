@@ -346,6 +346,8 @@ namespace zypp
 		  ! filelist.atEnd();
 		  ++filelist)
 	    {
+		if (*filelist == NULL) continue;	// skip incompatible archs
+
 		NVRA nvra( (*filelist)->name,
 			   Edition( (*filelist)->ver, (*filelist)->rel, str::strtonum<int>( (*filelist)->epoch ) ),
 			   Arch ( (*filelist)->arch ) );
