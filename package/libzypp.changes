@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Apr  3 20:45:55 CEST 2006 - mt@suse.de
+
+- Removed broken forcing of absolute ftp paths added in rev2705 to
+  MediaCurl, refined cleanupPathName/setPathName in url (#154197).
+- rev 2900
+
+-------------------------------------------------------------------
 Mon Apr  3 19:30:35 CEST 2006 - kkaempf@suse.de
 
 - add Resolver::freshenPool() (#156980)
