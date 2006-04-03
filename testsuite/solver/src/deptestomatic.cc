@@ -1194,8 +1194,9 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 
 	    print_pool( MARKER );
 
-	} else if (node->equals ("establish")
-		   || node->equals ("freshen")) {
+	} else if (node->equals ("establish")) {
+
+	    string freshen = node->getProp ("freshen");
 
 	    RESULT << "Establishing state ..." << endl;
 
@@ -1206,10 +1207,22 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		RESULT << "Established context" << endl;
 		resolver->context()->foreachMarked (print_marked_cb, NULL);
 //		print_pool( MARKER, false );
-		if (node->equals ("freshen")) {
+		if (!freshen.empty()) {
 		    RESULT << "Freshening ..." << endl;
 		    resolver->context()->foreachMarked (freshen_marked_cb, &resolver);
 		}
+	    }
+
+	} else if (node->equals ("freshen")) {
+
+	    RESULT << "Freshening pool ..." << endl;
+
+	    if (!resolver->freshenPool()) {
+		RESULT << "Freshened NO context !" << endl;
+	    }
+	    else {
+		RESULT << "Freshened context" << endl;
+		resolver->context()->foreachMarked (print_marked_cb, NULL);
 	    }
 
 	} else if (node->equals ("instorder")) {
