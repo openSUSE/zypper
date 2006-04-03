@@ -92,7 +92,10 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     // Ignore architecture of the item
     PoolItemList _ignoreArchitecture;
     // Ignore the status "installed" of the item
-    PoolItemList _ignoreInstalledItem;    
+    PoolItemList _ignoreInstalledItem;
+    // Ignore the architecture of the item
+    PoolItemList _ignoreArchitectureItem;    
+    
 
     ResolverQueueList _pending_queues;
     ResolverQueueList _pruned_queues;
@@ -175,6 +178,7 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void addIgnoreObsoletes (const PoolItem_Ref item,
 			     const Capability & capability);
     void addIgnoreInstalledItem (const PoolItem_Ref item);
+    void addIgnoreArchitectureItem (const PoolItem_Ref item);    
 
     void setForceResolve (const bool force) { _forceResolve = force; }
     const bool forceResolve() { return _forceResolve; }

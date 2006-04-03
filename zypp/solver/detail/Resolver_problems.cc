@@ -106,6 +106,8 @@ typedef struct {
     ItemCapabilityMap provideAndDeleteMap;
     // A map of PoolItems which provides a capability but are locked
     ItemCapabilityMap provideAndLockMap;
+    // A map of PoolItems which provides a capability but have another architecture
+    ItemCapabilityMap provideAndOtherArchMap;
     // A map of conflicting Items
     ConflictMap conflictMap;
 } ResItemCollector;
@@ -150,6 +152,22 @@ collector_cb (ResolverInfo_Ptr info, void *data)
 	    collector->provideAndLockMap.insert (make_pair( misc_info->other(), misc_info->capability()));
 	}
     }
+    // Collecting items which are providing requirements but they
+    // have another architecture
+    if (info->type() == RESOLVER_INFO_TYPE_OTHER_ARCH_PROVIDER) {
+	ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+	// does entry already exists ?
+	ItemCapabilityMap::iterator pos = find_if (collector->provideAndOtherArchMap.begin(),
+						   collector->provideAndOtherArchMap.end(),
+						   cap_equals<PoolItem_Ref, Capability>(misc_info->capability()));
+	
+	if (pos == collector->provideAndOtherArchMap.end()) {
+	    _XDEBUG ("Inserting " << misc_info->capability() << "/" <<  misc_info->other()
+		     << " into provideAndOtherArchMap map");
+	    collector->provideAndOtherArchMap.insert (make_pair( misc_info->other(), misc_info->capability()));
+	}
+    }
+    
 
     // Collecting all conflicting Items
     if (info->type() == RESOLVER_INFO_TYPE_CONFLICT_UNINSTALLABLE
@@ -499,6 +517,14 @@ Resolver::problems (void) const
 		    if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
 			// unlock this item
 			problem->addSolution (new ProblemSolutionUnlock (problem, it->first));
+		    }
+		}
+		// Searching for another item which provides this requires BUT has another architec
+		for (ItemCapabilityMap::const_iterator it = collector.provideAndOtherArchMap.begin();
+		     it != collector.provideAndOtherArchMap.end(); ++it) {
+		    if (it->second.matches (misc_info->capability()) == CapMatch::yes) {
+			// ignoring architecture
+			problem->addSolution (new ProblemSolutionIgnoreArchitecture (problem, it->first));
 		    }
 		}
 		

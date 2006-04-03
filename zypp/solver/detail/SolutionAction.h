@@ -108,7 +108,8 @@ namespace zypp
 	    REQUIRES,
 	    CONFLICTS,
 	    OBSOLETES,
-	    INSTALLED
+	    INSTALLED,
+	    ARCHITECTURE
 	} InjectSolutionKind;
 	
 
@@ -128,6 +129,12 @@ namespace zypp
 				  const InjectSolutionKind & kind)
 		: SolutionAction(),
 		  _item( item ), _capability( capability ),
+		  _kind( kind ), _otherItem() {}
+	    
+	    InjectSolutionAction( PoolItem_Ref item,
+				  const InjectSolutionKind & kind)
+		: SolutionAction(),
+		  _item( item ), _capability(),
 		  _kind( kind ), _otherItem() {}
 	    
 	    InjectSolutionAction( PoolItem_Ref item,

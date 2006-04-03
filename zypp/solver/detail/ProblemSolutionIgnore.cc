@@ -41,6 +41,7 @@ namespace zypp
 
 IMPL_PTR_TYPE(ProblemSolutionIgnoreConflicts);
 IMPL_PTR_TYPE(ProblemSolutionIgnoreRequires);
+IMPL_PTR_TYPE(ProblemSolutionIgnoreArchitecture);
 IMPL_PTR_TYPE(ProblemSolutionIgnoreInstalled);	
 
 //---------------------------------------------------------------------------
@@ -52,8 +53,8 @@ ProblemSolutionIgnoreRequires::ProblemSolutionIgnoreRequires( ResolverProblem_Pt
 {
 	_description = _("Ignore this requirement just here");
 	addAction ( new InjectSolutionAction (item, capability, REQUIRES));
-}
-
+}	
+	
 ProblemSolutionIgnoreRequires::ProblemSolutionIgnoreRequires( ResolverProblem_Ptr parent,
 							      PoolItemList itemList,	  
 							      const Capability & capability)
@@ -64,6 +65,19 @@ ProblemSolutionIgnoreRequires::ProblemSolutionIgnoreRequires( ResolverProblem_Pt
 	     iter != itemList.end(); iter++) {
 	    addAction ( new InjectSolutionAction (*iter, capability, REQUIRES));
 	}
+}
+
+ProblemSolutionIgnoreArchitecture::ProblemSolutionIgnoreArchitecture( ResolverProblem_Ptr parent,
+								  PoolItem_Ref item)
+    : ProblemSolution (parent, "", "")
+{
+        // TranslatorExplanation %s = name of package, patch, selection ...
+	_description = str::form(_("Install %s although it would change the architecture"),
+				 item->name().c_str());
+	// TranslatorExplanation %s = name of package, patch, selection ...	
+	_details = str::form(_("%s provides this dependency but would changed the architecture of the installed item"),
+			    ResolverInfo::toString (item).c_str());
+	addAction ( new InjectSolutionAction (item, ARCHITECTURE));
 }
 	
 ProblemSolutionIgnoreConflicts::ProblemSolutionIgnoreConflicts( ResolverProblem_Ptr parent,

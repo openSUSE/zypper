@@ -299,6 +299,13 @@ Resolver::addIgnoreInstalledItem (const PoolItem_Ref item)
     _ignoreInstalledItem.push_back (item);
 }
 
+void
+Resolver::addIgnoreArchitectureItem (const PoolItem_Ref item)
+{
+    _ignoreArchitectureItem.push_back (item);
+}
+
+
 //---------------------------------------------------------------------------
 
 struct VerifySystem : public resfilter::PoolItemFilterFunctor
@@ -418,7 +425,8 @@ Resolver::establishState (ResolverContext_Ptr context)
     context->setIgnoreCababilities (_ignoreConflicts,
 				    _ignoreRequires,
 				    _ignoreObsoletes,
-				    _ignoreInstalledItem);
+				    _ignoreInstalledItem,
+				    _ignoreArchitectureItem);
     context->setForceResolve (_forceResolve);
     context->setUpgradeMode (_upgradeMode);        
     
@@ -528,7 +536,8 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     initial_queue->context()->setIgnoreCababilities (_ignoreConflicts,
 				    _ignoreRequires,
 				    _ignoreObsoletes,
-				    _ignoreInstalledItem);
+				    _ignoreInstalledItem,
+				    _ignoreArchitectureItem);
     initial_queue->context()->setForceResolve (_forceResolve);
     initial_queue->context()->setUpgradeMode (_upgradeMode);        
 
@@ -717,6 +726,9 @@ Resolver::undo(void)
     _ignoreArchitecture.clear();
     // Ignore the status "installed" of the item
     _ignoreInstalledItem.clear();
+    // Ignore the architecture of the item
+    _ignoreArchitectureItem.clear();
+    
     
     return;
 }

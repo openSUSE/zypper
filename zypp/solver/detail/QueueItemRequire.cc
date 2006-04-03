@@ -192,7 +192,16 @@ struct RequireProcess
 	     && upgrades.resolvable()->arch() != provider->arch()) {
 	    MIL << "provider " << provider << " has OTHER arch '" << provider->arch() << "' than the updated item "
 		<< upgrades << endl;
-	    return true;
+	    PoolItemList ignore = _context->getIgnoreArchitectureItem();
+	    PoolItemList::iterator it;
+	    for (it = ignore.begin(); it != ignore.end(); ++it) {
+		if (provider == *it) break;
+	    }
+	    if (it != ignore.end()) {
+		MIL << " ---> will be ignored " << endl;
+	    } else {
+		return true;
+	    }
 	}
 
 	if (! (status.isToBeUninstalled() || status.isImpossible())
@@ -277,7 +286,7 @@ struct NoInstallableProviders
 	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_LOCKED_PROVIDER, requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);
  	} else	if (provider->arch().compatibleWith( context->architecture() )) {
-	    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_OTHER_ARCH_PROVIDER,
+	    misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_OTHER_ARCH_PROVIDER,
 								   requirer, RESOLVER_INFO_PRIORITY_VERBOSE, match);
 	    misc_info->setOtherPoolItem (provider);
 	}

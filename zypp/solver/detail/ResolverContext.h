@@ -95,6 +95,9 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     IgnoreMap _ignoreObsoletes;    
     // Ignore the status "installed" of the item
     PoolItemList _ignoreInstalledItem;
+    // Ignore the architecture of the item
+    PoolItemList _ignoreArchitectureItem;
+    
 
     bool _forceResolve; // remove items which are conflicts with others or
                         // have unfulfilled requirements.
@@ -135,16 +138,20 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     void setIgnoreCababilities(const IgnoreMap ignoreConflicts,
 			       const IgnoreMap ignoreRequires,
 			       const IgnoreMap ignoreObsoletes,
-			       const PoolItemList ignoreInstalledItem)
+			       const PoolItemList ignoreInstalledItem,
+			       const PoolItemList ignoreArchitectureItem)
 	{_ignoreConflicts = ignoreConflicts;
 	_ignoreRequires = ignoreRequires;
 	_ignoreObsoletes = ignoreObsoletes;
-	_ignoreInstalledItem = ignoreInstalledItem;}
+	_ignoreInstalledItem = ignoreInstalledItem;
+	_ignoreArchitectureItem = ignoreArchitectureItem;}
 
     const IgnoreMap getIgnoreConflicts() const { return _ignoreConflicts; }
     const IgnoreMap getIgnoreRequires() const { return _ignoreRequires; }
     const IgnoreMap getIgnoreObsoletes() const { return _ignoreObsoletes; }    
     const PoolItemList getIgnoreInstalledItem() const { return _ignoreInstalledItem; }
+    const PoolItemList getIgnoreArchitectureItem() const { return _ignoreArchitectureItem; }
+
     
     void setForceResolve (const bool force) { _forceResolve = force; }
     const bool forceResolve() { return _forceResolve; }

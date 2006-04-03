@@ -115,6 +115,7 @@ _XDEBUG( "ResolverContext[" << this << "]::ResolverContext(" << parent << ")" );
 	_ignoreRequires      = parent->_ignoreRequires;
 	_ignoreObsoletes     = parent->_ignoreObsoletes;
 	_ignoreInstalledItem = parent->_ignoreInstalledItem;
+	_ignoreArchitectureItem = parent->_ignoreArchitectureItem;	
 	_forceResolve        = parent->_forceResolve;
 	_upgradeMode         = parent->_upgradeMode;
     } else {
