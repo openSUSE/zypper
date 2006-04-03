@@ -615,9 +615,10 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     }
 
     DBG << "URL: " << url.asString() << endl;
-    // Use URL without options (not RFC conform) and without
-    // username and passwd (some proxies dislike them in the URL.
-    // Curloptions for these were set in attachTo().
+    // Use URL without options and without username and passwd
+    // (some proxies dislike them in the URL).
+    // Curl seems to need the just scheme, hostname and a path;
+    // the rest was already passed as curl options (in attachTo).
     Url curlUrl( url );
 
     // Use asString + url::ViewOptions instead?
@@ -627,30 +628,15 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     curlUrl.setQueryString( "" );
     curlUrl.setFragment( "" );
 
-    string urlBuffer;
-    if(curlUrl.getScheme() == "ftp")
-    {
-      //
-      // Bug #154197:
-      // Passing an url "ftp://user@host/foo/bar/file" causes curl
-      // to try to fetch a "foo/bar/file" relatively to the user's
-      // home dir.
-      // Make sure, that it contains an additional slash (at least
-      // one - we use two) at the begin of the path name, e.g.
-      //      ftp://user@host/%2Ffoo/bar/file
-      //      ftp://user@host//foo/bar/file
-      // to force usage of an absolute path name in curl.
-      //
-      urlBuffer  = curlUrl.getScheme();
-      urlBuffer += "://";
-      urlBuffer += curlUrl.getHost(zypp::url::E_ENCODED);
-      urlBuffer += "/";
-      urlBuffer += curlUrl.getPathName(zypp::url::E_ENCODED);
-    }
-    else
-    {
-    	urlBuffer = curlUrl.asString();
-    }
+    //
+    // See also Bug #154197 and ftp url definition in RFC 1738:
+    // The url "ftp://user@host/foo/bar/file" contains a path,
+    // that is relative to the user's home.
+    // The url "ftp://user@host//foo/bar/file" (or also with
+    // encoded slash as %2f) "ftp://user@host/%2ffoo/bar/file"
+    // contains an absolute path.
+    //
+    string urlBuffer( curlUrl.asString());
     CURLcode ret = curl_easy_setopt( _curl, CURLOPT_URL,
                                      urlBuffer.c_str() );
     if ( ret != 0 ) {
