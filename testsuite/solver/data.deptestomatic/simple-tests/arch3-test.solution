@@ -1,0 +1,22 @@
+>!> Installing B from channel test
+>!> 1 problems found:
+>!> Problem:
+>!> B cannot be installed due to missing dependencies
+>!> There are no installable providers of A == 1.1 for B-1.0-2.i686[test]
+>!>    Solution:
+>!>       Install A although it would change the architecture
+>!>       A-1.1-2.i686[test] provides this dependency but would changed the architecture of the installed item
+>!>    Solution:
+>!>       do not install B
+>!>       do not install B-1.0-2.i686[test]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Taking solution: 0
+>!> For problem:     0
+>!> No problems so far
+>!> No problems so far
+>!> Solution #1:
+>!> install B-1.0-2.i686[test]
+>!> upgrade A-1.0-1.i386 => A-1.1-2.i686[test]
+>!> installs=1, upgrades=1, uninstalls=0

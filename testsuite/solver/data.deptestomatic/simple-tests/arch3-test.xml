@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+   Upgrade leads to architecture change
+
+   A-1.0-1.i386 is installed
+   Install package B which requires A == 1.1
+   A-1.1.i686 is available - -> error
+-->
+<test>
+<setup>
+  <system file="arch3-i686-package.xml"/>
+  <channel name="test" file="arch3-x86_64-package.xml"/>
+  <arch name="i686"/>
+</setup>
+<trial>
+  <install channel="test" package="B"/>
+  <reportproblems/>
+  <takesolution problem="0" solution="0"/>
+  <reportproblems/>
+</trial>
+</test>
