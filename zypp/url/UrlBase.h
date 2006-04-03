@@ -988,12 +988,14 @@ namespace zypp
 
     protected:
       /**
-       * Utility method to cleanup a path name.
+       * Utility method to cleanup an encoded path name.
        *
-       * By default, this method encodes the second and further
-       * slashes before the first (non-zero) path segment of an
-       * already encoded path name. For example, it modifies a
-       * "ftp://host///aaa//bbb" to "ftp://host/%2F%2Faaa//bbb".
+       * By default, this method makes sure, that the first slash
+       * in the path is not encoded, and that the second slash
+       * before the first path segment, is encoded (to "%2F").
+       * It modifies the path in the url, for example:
+       *   "ftp://host//aaa//bbb" to "ftp://host/%2Faaa//bbb"
+       * or as encoded path only also "%2f/name" to "/%2fname".
        *
        * This operation is required to fulfill the path-absolute
        * rule of RFC3986, if there is no authority. It avoids the
@@ -1005,8 +1007,8 @@ namespace zypp
        *
        * We apply this operation in both cases (for all paths).
        *
-       * \param path   Encoded path name to cleanup.
-       * \return A path begining with at most one "/" character.
+       * \param path   The encoded path name to cleanup.
+       * \return A modified encoded path.
        */
       virtual std::string
       cleanupPathName(const std::string &path);

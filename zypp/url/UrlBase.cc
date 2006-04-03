@@ -1077,24 +1077,36 @@ namespace zypp
         if(eflag == zypp::url::E_ENCODED)
         {
           checkUrlData(path, "path name", config("rx_pathname"));
-        }
 
-        if( !getHost(zypp::url::E_ENCODED).empty())
-        {
-          if(path.at(0) != '/')
+          if( !getHost(zypp::url::E_ENCODED).empty())
           {
-            ZYPP_THROW(UrlNotAllowedException(
-              std::string("Relative path not allowed if authority exists")
-            ));
+            // has to begin with a "/". For consistency with
+            // setPathName while the host is empty, we allow
+            // it in encoded ("%2f") form - cleanupPathName()
+            // will fix / decode the first slash if needed.
+            if(!(path.at(0) == '/' || (path.size() >= 3 &&
+                 str::toLower(path.substr(0, 3)) == "%2f")))
+            {
+              ZYPP_THROW(UrlNotAllowedException(
+                std::string("Relative path not allowed if authority exists")
+              ));
+            }
           }
-        }
 
-        if(eflag == zypp::url::E_ENCODED)
-        {
           m_data->pathname = cleanupPathName(path);
         }
-        else
+        else //     zypp::url::E_DECODED
         {
+          if( !getHost(zypp::url::E_ENCODED).empty())
+          {
+            if(path.at(0) != '/')
+            {
+              ZYPP_THROW(UrlNotAllowedException(
+                std::string("Relative path not allowed if authority exists")
+              ));
+            }
+          }
+
           m_data->pathname = cleanupPathName(
             zypp::url::encode(
               path, config("safe_pathname")
@@ -1216,18 +1228,20 @@ namespace zypp
     UrlBase::cleanupPathName(const std::string &path)
     {
       std::string copy( path);
-      size_t      size( copy.size());
 
-      if( size >= 2 && copy.at(0) == '/' && copy.at(1) == '/')
+      if( copy.size() >= 3 && str::toLower(copy.substr(0, 3)) == "%2f")
       {
-        size_t pos = 1;
-        // path begins with a double slash ("//"); encode second
-        // and further slashes before the first segment-nz (non
-        // zero), to fulfill the path-absolute rule of RFC 3986.
-        do {
-          copy.replace(pos, 1, "%2F");
-          pos += 3; // go behind "%2F"
-        } while( pos < size && copy.at(pos) == '/');
+        // decode the first slash if it is encoded ...
+        copy.replace(0, 3, "/");
+      }
+
+      if( copy.size() >= 2 && copy.at(0) == '/' && copy.at(1) == '/')
+      {
+        // path begins with a double slash ("//"); encode the second
+        // [minimal and IMO sufficient] slash before the first path
+        // segment, to fulfill the path-absolute rule of RFC 3986
+        // disallowing a "//" if no authority is present.
+        copy.replace(1, 1, "%2F");
       }
       return copy;
     }
