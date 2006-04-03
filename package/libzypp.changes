@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Apr  3 08:33:12 CEST 2006 - kkaempf@suse.de
+
+- skip incompatible archs in filelist parsing.
+- restrict pathes to 'interesting' ones (/bin/, /sbin/, /lib/,
+  /lib64/, ...)
+- rev 2886
+
+-------------------------------------------------------------------
 Sun Apr  2 22:18:06 CEST 2006 - kkaempf@suse.de
 
 - skip incompatible archs in primary parsing.
