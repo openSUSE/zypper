@@ -5,14 +5,13 @@
 int main(void)
 {
   std::string str, out;
-  zypp::Url   url;
 
-  str = "file:///%2f/srv/ftp";
+  str = "file:./srv/ftp";
   std::cout << "STR: " << str << std::endl;
   out = zypp::Url(str).asString();
   std::cout << "URL: " << out << std::endl << std::endl;
 
-  str = "file:./srv/ftp";
+  str = "ftp://foo//srv/ftp";
   std::cout << "STR: " << str << std::endl;
   out = zypp::Url(str).asString();
   std::cout << "URL: " << out << std::endl << std::endl;
