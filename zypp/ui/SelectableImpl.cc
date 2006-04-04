@@ -200,21 +200,53 @@ namespace zypp
 
     PoolItem Selectable::Impl::setCandidate( ResObject::constPtr byUser_r )
     {
+      PoolItem oldCand = _candidate;
       _candidate = PoolItem();
-      for ( availableItem_const_iterator it = availableBegin();
-            it != availableEnd(); ++it )
+
+      if ( byUser_r ) // must be in available list
         {
-          if ( it->resolvable() == byUser_r )
+          for ( availableItem_const_iterator it = availableBegin();
+                it != availableEnd(); ++it )
             {
-              _candidate = *it;
-              break;
+              if ( it->resolvable() == byUser_r )
+                {
+                  _candidate = *it;
+                  break;
+                }
             }
         }
+
       if ( ! ( _candidate || _availableItems.empty() ) )
         {
-#warning actually select with respect to an installed items arch
-          _candidate = *_availableItems.begin();
+          if ( installedObj() )
+            {
+              for ( availableItem_const_iterator it = availableBegin();
+                    it != availableEnd(); ++it )
+                {
+                  if ( installedObj()->arch() == (*it)->arch() )
+                    _candidate = *it;
+                  break;
+                }
+            }
+          else
+            _candidate = *_availableItems.begin();
         }
+
+      if ( _candidate != oldCand )
+        {
+          if ( oldCand )
+            {
+              ResStatus::TransactValue tv( oldCand.status().getTransactValue() );
+              ResStatus::TransactByValue tb( oldCand.status().getTransactByValue() );
+              oldCand.status().resetTransact( ResStatus::USER );
+              if ( _candidate )
+                {
+                  _candidate.status().resetTransact( ResStatus::USER );
+                  _candidate.status().setTransactValue( tv, tb );
+                }
+            }
+        }
+
       return _candidate;
     }
 

@@ -84,9 +84,7 @@ namespace zypp
       */
       PoolItem candidateObj() const
       {
-        if ( _candidate )
-          return _candidate;
-        return( _availableItems.empty() ? PoolItem() : *_availableItems.begin() );
+        return _candidate;
       }
 
       /** Set a userCandidate (out of available objects).

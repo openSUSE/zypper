@@ -1,10 +1,15 @@
 -------------------------------------------------------------------
+Tue Apr  4 14:43:15 CEST 2006 - ma@suse.de
+
+- Fixed candidate handling in ui::Selectable. (#156589)
+
+-------------------------------------------------------------------
 Tue Apr  4 14:06:23 CEST 2006 - dmacvicar@suse.de
 
-- fix #162984 , gpg hangs because the matching data file 
+- fix #162984 , gpg hangs because the matching data file
   for the key cannot be find. (dmacvicar)
 - Fix restore of YUM source using the same cache dir semantics as
-Â  susetags instead of assuming there is a cache if a cache_dir
+  susetags instead of assuming there is a cache if a cache_dir
   was given. (dmacvicar)
 
 -------------------------------------------------------------------
@@ -55,8 +60,8 @@ Fri Mar 31 18:53:55 CEST 2006 - schubi@suse.de
 -------------------------------------------------------------------
 Fri Mar 31 18:28:59 CEST 2006 - sh@suse.de
 
-- Added zypp/ui/UserWantedPackages to support the UI's 
-  "automatic changes" dialog (bug #152700) 
+- Added zypp/ui/UserWantedPackages to support the UI's
+  "automatic changes" dialog (bug #152700)
 
 -------------------------------------------------------------------
 Fri Mar 31 18:02:05 CEST 2006 - jsrain@suse.de

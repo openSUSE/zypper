@@ -18,6 +18,7 @@
 #include <zypp/base/Algorithm.h>
 #include <zypp/base/Functional.h>
 #include <zypp/base/ProvideNumericId.h>
+#include <zypp/base/ProvideNumericId.h>
 
 #include "zypp/NVRAD.h"
 #include "zypp/ResPool.h"
@@ -58,49 +59,35 @@ namespace container
 
 ///////////////////////////////////////////////////////////////////
 
-struct XByInstalled : public std::unary_function<ui::Selectable::constPtr,bool>
-{
-  bool operator()( const ui::Selectable::constPtr & obj ) const
+template <class _Iterator, class _Filter, class _Function>
+  inline _Function for_each_if( _Iterator begin_r, _Iterator end_r,
+                                _Filter filter_r,
+                                _Function fnc_r )
   {
-    return obj->hasInstalledObj();
+    for ( _Iterator it = begin_r; it != end_r; ++it )
+      {
+        if ( filter_r( *it ) )
+          {
+            fnc_r( *it );
+          }
+      }
+    return fnc_r;
+  }
+
+struct PoolItemSelect
+{
+  void operator()( const PoolItem & pi ) const
+  {
+    if ( pi->source().numericId() == 2 )
+      pi.status().setTransact( true, ResStatus::USER );
   }
 };
 
-template<>
-  struct PrintPtr<ui::Selectable::Ptr> : public std::unary_function<ui::Selectable::Ptr, bool>
-  {
-    bool operator()( const ui::Selectable::Ptr & obj )
-    {
-      if ( obj ) {
-        MIL << obj->modifiedBy() << " " << obj->hasLicenceConfirmed() << endl;
-        obj->set_status( ui::S_Install );
-        obj->setLicenceConfirmed( true );
-        MIL << "a " << obj->modifiedBy() << " " << obj->hasLicenceConfirmed() << endl;
-        obj->set_status( ui::S_Del );
-        obj->setLicenceConfirmed( false );
-        MIL << "b " << obj->modifiedBy() << " " << obj->hasLicenceConfirmed() << endl;
-
-#if 0
-        USR << *obj << std::endl;
-        std::for_each( obj->availableBegin(), obj->availableEnd(),
-                       PrintPtr<ResObject::constPtr>() );
-        if ( obj->availableBegin() != obj->availableEnd() )
-          SEC << PrintPtr<ResObject::constPtr>()(*obj->availableBegin() )
-              << " " << asKind<Package>(*obj->availableBegin())->vendor() << endl;
-#endif
-      }
-      else
-        USR << "(NULL)" << std::endl;
-      return true;
-    }
-  };
-
-struct Mpool
+struct PrintPoolItem
 {
-  bool operator()( const PoolItem & pi )
+  void operator()( const PoolItem & pi ) const
   {
-    return pi.status().isLocked();
-    return true;
+    USR << pi->source().numericId() << " " << pi << endl;
   }
 };
 
@@ -113,10 +100,9 @@ int main( int argc, char * argv[] )
 {
   //zypp::base::LogControl::instance().logfile( "xxx" );
   INT << "===[START]==========================================" << endl;
-
   ResPool pool( getZYpp()->pool() );
 
-  if ( 1 )
+  if ( 0 )
     {
       Measure x( "initTarget " + sysRoot.asString() );
       getZYpp()->initTarget( sysRoot );
@@ -124,21 +110,47 @@ int main( int argc, char * argv[] )
       INT << "Added target: " << pool << endl;
     }
 
-  SourceManager::sourceManager()->restore( sysRoot );
-  if ( SourceManager::sourceManager()->allSources().empty() )
-    {
-      Source_Ref src( createSource( instSrc ) );
-      SourceManager::sourceManager()->addSource( src );
-      SourceManager::sourceManager()->store( sysRoot, true );
-    }
+  if ( 0 ) {
+    SourceManager::sourceManager()->restore( sysRoot );
+    if ( SourceManager::sourceManager()->allSources().empty() )
+      {
+        Source_Ref src( createSource( instSrc ) );
+        SourceManager::sourceManager()->addSource( src );
+        SourceManager::sourceManager()->store( sysRoot, true );
+      }
 
-  Source_Ref src( *SourceManager::sourceManager()->Source_begin() );
-  getZYpp()->addResolvables( src.resolvables() );
-  INT << "Added source: " << pool << endl;
+    Source_Ref src( *SourceManager::sourceManager()->Source_begin() );
+    getZYpp()->addResolvables( src.resolvables() );
+    INT << "Added source: " << pool << endl;
+  }
+
+
+  Source_Ref src1( createSource( "dir:/mounts/machcd2/CDs/SUSE-Linux-10.1-Build_830-Addon-BiArch/CD1" ) );
+  Source_Ref src2( createSource( "dir:/mounts/machcd2/CDs/SUSE-Linux-10.1-Build_830-i386/CD1" ) );
+  INT << "Pool: " << pool << endl;
+  getZYpp()->addResolvables( src1.resolvables() );
+  INT << "Added source1: " << pool << endl;
+  getZYpp()->addResolvables( src2.resolvables() );
+  INT << "Added source2: " << pool << endl;
 
   NameKindProxy s( nameKindProxy<Selection>( pool, "default" ) );
   MIL << s << endl;
+  if ( ! s.availableEmpty() )
+    {
+      PoolItem def( * s.availableBegin() );
+      def.status().setTransact( true, ResStatus::USER );
+    }
+  MIL << "est " << getZYpp()->resolver()->establishPool() << endl;
+  MIL << "slv " << getZYpp()->resolver()->resolvePool() << endl;
 
+
+  for_each( pool.byKindBegin<Package>(), pool.byKindEnd<Package>(),
+            PoolItemSelect() );
+  INT << "FIN: " << pool << endl;
+
+  for_each_if( pool.begin(), pool.end(),
+               resfilter::ByTransact(),
+               PrintPoolItem() );
 
 #if 0
   Source_Ref src( *SourceManager::sourceManager()->Source_begin() );
