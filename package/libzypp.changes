@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Tue Apr  4 16:57:51 CEST 2006 - dmacvicar@suse.de
+
+- Fix construction of checksum objects when using non-standard
+  checksum algorithms
+- Fix broken YUM cache
+- r2913
+
+-------------------------------------------------------------------
+Tue Apr  4 14:47:14 CEST 2006 - dmacvicar@suse.de
+
+- r2906
+
+-------------------------------------------------------------------
 Tue Apr  4 16:54:44 CEST 2006 - kkaempf@suse.de
 
 - Keep packages with no version upgrade installed during
@@ -17,7 +30,7 @@ Tue Apr  4 14:06:23 CEST 2006 - dmacvicar@suse.de
 - fix #162984 , gpg hangs because the matching data file
   for the key cannot be find. (dmacvicar)
 - Fix restore of YUM source using the same cache dir semantics as
-  susetags instead of assuming there is a cache if a cache_dir
+ susetags instead of assuming there is a cache if a cache_dir
   was given. (dmacvicar)
 
 -------------------------------------------------------------------
