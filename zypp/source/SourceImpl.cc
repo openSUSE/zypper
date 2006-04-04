@@ -125,15 +125,20 @@ namespace zypp
 
     const Pathname SourceImpl::providePackage( Package::constPtr package )
     {
-#warning FIXME: error handling
-#warning FIXME: Url
-        callback::SendReport<source::DownloadResolvableReport> report;
+      bool retry = true;
+      bool digest_ok = false;
+      Pathname file;
+      callback::SendReport<source::DownloadResolvableReport> report;
+      while (retry)
+      {
         report->start( package, package->source().url() );
-        Pathname file = package->source().provideFile( package->location(), package->mediaId());
+        file = package->source().provideFile( package->location(), package->mediaId());
+        report->finish( package, source::DownloadResolvableReport::NO_ERROR, "" );
+        
         CheckSum checksum = package->checksum();
         std::string calculated_digest;
-        // check digest
-       
+        
+        // check digest  
         try
         { 
           std::ifstream is(file.asString().c_str(), std::ifstream::binary);
@@ -144,19 +149,30 @@ namespace zypp
         {
           ERR << "Can't open " << file << " for integrity check." << std::endl;
         }
-        
-        if ( checksum.checksum() != calculated_digest )
-        {
-          ZYPP_THROW(Exception("Package " + package->location().asString() + " fails integrity check. Expected: [" + checksum.checksum() + "] Read: [" + calculated_digest + "] (" + checksum.type() + ")"));
-        }
-        else
+      
+        if ( checksum.checksum() == calculated_digest )
         {
           MIL << package->location() << " ok. [" << calculated_digest << "]" << std::endl;
+          digest_ok = true;  
+          retry = false;
         }
         
+        if (!digest_ok)
+        {
+          std::string  package_str = package->name() + "-" + package->edition().asString();
+          source::DownloadResolvableReport::Action useraction = report->problem(package, source::DownloadResolvableReport::INVALID, "Package " + package_str + " fails integrity check. Do you want to retry downloading it, or abort installation?");
         
-        report->finish( package, source::DownloadResolvableReport::NO_ERROR, "" );
-        return file;
+          if( useraction == source::DownloadResolvableReport::ABORT )
+          {
+            ZYPP_THROW(Exception("Package " + package->location().asString() + " fails integrity check. Expected: [" + checksum.checksum() + "] Read: [" + calculated_digest + "] (" + checksum.type() + ")"));
+          }
+          else if ( useraction == source::DownloadResolvableReport::RETRY )
+          {
+            retry = true;
+          }
+        }
+      }
+      return file;
     }
     
     const Pathname SourceImpl::provideFile(const Pathname & file_r,
