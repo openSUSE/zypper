@@ -117,7 +117,7 @@ namespace zypp
         virtual void factoryInit();
 
       private:
-
+        bool cacheExists();
 	std::list<Pathname> _metadata_files;
 
 	typedef struct {

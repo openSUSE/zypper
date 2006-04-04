@@ -37,6 +37,7 @@
 
 #include "zypp/base/GzStream.h"
 #include "zypp/base/Gettext.h"
+#include "zypp/PathInfo.h"
 
 #include <fstream>
 
@@ -61,6 +62,17 @@ namespace zypp
       YUMSourceImpl::YUMSourceImpl()
       {}
 
+      bool YUMSourceImpl::cacheExists()
+      {
+        bool exists = PathInfo(_cache_dir + "/repodata/repomd.xml").isExist();
+        if (exists)
+          MIL << "YUM cache found at " << _cache_dir << std::endl;
+        else
+          MIL << "YUM cache not found" << std::endl;
+        
+        return exists;
+      }
+      
       void YUMSourceImpl::factoryInit()
       {
 	try {
@@ -82,7 +94,7 @@ namespace zypp
 	try {
 	  // first read list of all files in the repository
 	  Pathname filename;
-	  if (_cache_dir.empty())
+	  if (!cacheExists())
 	  {
 	    // now, the file exists, try to read it
 	    filename = provideFile(_path + "/repodata/repomd.xml");
@@ -99,7 +111,7 @@ namespace zypp
 	  filesystem::TmpFile tmp;
 	  filesystem::copy(filename, tmp.path());
 	  filename = tmp.path();
-	  if (_cache_dir.empty())
+	  if (!cacheExists())
 	  {
 	    MIL << "Trying to get the key" << endl;
 	    Pathname key_local;
@@ -135,7 +147,7 @@ namespace zypp
 	      ! repomd.atEnd();
 	      ++repomd)
 	  {
-	    if (_cache_dir.empty())
+	    if (!cacheExists())
 	    {
 	      if (! checkCheckSum(provideFile(_path + (*repomd)->location), (*repomd)->checksumType, (*repomd)->checksum))
 	      {
@@ -144,9 +156,9 @@ namespace zypp
 	    }
 	    if ((*repomd)->type == "patches")
 	    {
-	      Pathname filename = _cache_dir.empty()
-		? provideFile(_path + (*repomd)->location)
-		: _cache_dir + (*repomd)->location;
+              Pathname filename = cacheExists()
+                  ? _cache_dir + (*repomd)->location
+                  : provideFile(_path + (*repomd)->location);
 	      DBG << "reading file " << filename << endl;
 	      ifgzstream st ( filename.asString().c_str() );
 	      YUMPatchesParser patch(st, "");
@@ -155,7 +167,7 @@ namespace zypp
 		  ++patch)
 	      {
 		string filename = (*patch)->location;
-		if (_cache_dir.empty())
+		if (!cacheExists())
 		{
 		  if (! checkCheckSum(provideFile(_path + filename), (*patch)->checksumType, (*patch)->checksum))
 		  {
@@ -260,15 +272,15 @@ namespace zypp
 
       try {
 	  // first read list of all files in the repository
-	  Pathname filename = _cache_dir.empty()
-	    ? provideFile(_path + "/repodata/repomd.xml")
-	    : _cache_dir + "/repodata/repomd.xml";
+        Pathname filename = cacheExists()
+          ? _cache_dir + "/repodata/repomd.xml"
+          : provideFile(_path + "/repodata/repomd.xml");
 	  _metadata_files.push_back("/repodata/repomd.xml");
 	  // use tmpfile because of checking integrity - provideFile might release the medium
 	  filesystem::TmpFile tmp;
 	  filesystem::copy(filename, tmp.path());
 	  filename = tmp.path();
-	  if (_cache_dir.empty())
+	  if (!cacheExists())
 	  {
 	    MIL << "Checking repomd.xml integrity" << endl;
 	    Pathname asc_local;
@@ -326,10 +338,10 @@ namespace zypp
 	      it != repo_files.end();
 	      it++)
 	  {
-	    Pathname filename = _cache_dir.empty()
-	      ? provideFile(_path + (*it)->location)
-	      : _cache_dir + (*it)->location;
-	    if (_cache_dir.empty())
+            Pathname filename = cacheExists()
+              ? _cache_dir + (*it)->location
+              :  provideFile(_path + (*it)->location);
+            if (!cacheExists())
 	    {
 	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
 	      {
@@ -362,10 +374,10 @@ namespace zypp
 	      it != repo_other.end();
 	      it++)
 	  {
-	    Pathname filename = _cache_dir.empty()
-	      ? provideFile(_path + (*it)->location)
-	      : _cache_dir + (*it)->location;
-	    if (_cache_dir.empty())
+            Pathname filename = cacheExists()
+              ? _cache_dir + (*it)->location
+              : provideFile(_path + (*it)->location);
+            if (!cacheExists())
 	    {
 	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
 	      {
@@ -400,10 +412,10 @@ namespace zypp
 	      it != repo_primary.end();
 	      it++)
 	{
-	    Pathname filename = _cache_dir.empty()
-			      ? provideFile(_path + (*it)->location)
-			      : _cache_dir + (*it)->location;
-	    if (_cache_dir.empty())
+          Pathname filename = cacheExists()
+              ? _cache_dir + (*it)->location
+            : provideFile(_path + (*it)->location);
+          if (!cacheExists())
 	    {
 	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
 	      {
@@ -468,10 +480,10 @@ namespace zypp
 	      it != repo_group.end();
 	      it++)
 	{
-	    Pathname filename = _cache_dir.empty()
-	      ? provideFile(_path + (*it)->location)
-	      : _cache_dir + (*it)->location;
-	    if (_cache_dir.empty())
+          Pathname filename = cacheExists()
+              ? _cache_dir + (*it)->location
+            : provideFile(_path + (*it)->location);
+	    if (!cacheExists())
 	    {
 	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
 	      {
@@ -508,10 +520,10 @@ namespace zypp
 	      it != repo_pattern.end();
 	      it++)
 	{
-	    Pathname filename = _cache_dir.empty()
-	      ? provideFile(_path + (*it)->location)
-	      : _cache_dir + (*it)->location;
-	    if (_cache_dir.empty())
+          Pathname filename = cacheExists()
+              ? _cache_dir + (*it)->location
+            : provideFile(_path + (*it)->location);
+	    if (!cacheExists())
 	    {
 	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
 	      {
@@ -548,10 +560,10 @@ namespace zypp
 	      it != repo_product.end();
 	      it++)
 	{
-	    Pathname filename = _cache_dir.empty()
-	      ? provideFile(_path + (*it)->location)
-	      : _cache_dir + (*it)->location;
-	    if (_cache_dir.empty())
+          Pathname filename = cacheExists()
+              ? _cache_dir + (*it)->location
+            : provideFile(_path + (*it)->location);
+	    if (!cacheExists())
 	    {
 	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
 	      {
@@ -588,10 +600,10 @@ namespace zypp
 	      it != repo_patches.end();
 	      it++)
 	  {
-	    Pathname filename = _cache_dir.empty()
-	      ? provideFile(_path + (*it)->location)
-	      : _cache_dir + (*it)->location;
-	    if (_cache_dir.empty())
+            Pathname filename = cacheExists()
+                ? _cache_dir + (*it)->location
+              : provideFile(_path + (*it)->location);
+	    if (!cacheExists())
 	    {
 	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
 	      {
@@ -607,7 +619,7 @@ namespace zypp
 		  ++patch)
 	    {
 		string filename = (*patch)->location;
-		if (_cache_dir.empty())
+                if (!cacheExists())
 		{
 		  if (! checkCheckSum(provideFile(_path + filename), (*patch)->checksumType, (*patch)->checksum))
 		  {
@@ -627,9 +639,9 @@ namespace zypp
 	  it != patch_files.end();
 	  it++)
 	{
-	    Pathname filename = _cache_dir.empty()
-		? provideFile(_path + *it)
-		: _cache_dir + *it;
+          Pathname filename = cacheExists()
+              ? _cache_dir + *it
+            : provideFile(_path + *it);
 	    _metadata_files.push_back(*it);
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );

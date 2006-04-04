@@ -78,7 +78,7 @@ namespace zypp
 
     void importKey( const Pathname &keyfile, bool trusted = false);
     PublicKey readPublicKey( const Pathname &keyfile );
-    std::string readSignatureKeyId( const Pathname &keyfile );
+    std::string readSignatureKeyId(  const Pathname &data, const Pathname &keyfile );
     
     void deleteKey( const std::string &id, bool trusted );
     std::list<PublicKey> trustedPublicKeys();
@@ -209,7 +209,7 @@ namespace zypp
     MIL << "Going to verify signature for " << file << " with " << signature << std::endl; 
 
     // get the id of the signature
-    std::string id = readSignatureKeyId(signature);
+    std::string id = readSignatureKeyId(file, signature);
     
     // doeskey exists in trusted keyring
     if ( publicKeyExists( id, _trusted_kr ) )
@@ -430,7 +430,7 @@ namespace zypp
   }    
   
   
-  std::string KeyRing::Impl::readSignatureKeyId( const Pathname &keyfile )
+  std::string KeyRing::Impl::readSignatureKeyId( const Pathname &data, const Pathname &keyfile )
   {  
     // HACK create a tmp keyring with no keys
     TmpDir dir;
@@ -446,7 +446,9 @@ namespace zypp
       "1",
       "--homedir",
       dir.path().asString().c_str(),
+      "--verify",
       keyfile.asString().c_str(),
+      data.asString().c_str(),
       NULL
     };
     
@@ -556,9 +558,9 @@ namespace zypp
     return _pimpl->readPublicKey(keyfile);
   }
   
-  std::string KeyRing::readSignatureKeyId( const Pathname &keyfile )
+  std::string KeyRing::readSignatureKeyId(  const Pathname &data, const Pathname &keyfile )
   {
-    return _pimpl->readSignatureKeyId(keyfile);
+    return _pimpl->readSignatureKeyId(data, keyfile);
   }
   
   void KeyRing::deleteKey( const std::string &id, bool trusted )
