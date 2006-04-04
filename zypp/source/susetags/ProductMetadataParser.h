@@ -67,12 +67,13 @@ namespace zypp
          */
         void parseLine( const std::string &key, const std::string &value, std::list<std::string> &container);
         /*
-         * REQUIRES line
+         * Dependency (REQUIRES, PROVIDES, CONFLICTS, ...) capabilites  line
          */
-        void parseRequires( const std::string &key, const std::string &value, zypp::CapSet &container);
-        
+        void parseDependencies( const std::string &key, const std::string &value, zypp::Dependencies & deps, zypp::Dep deptag );
+        /*
+         */
         void parseFileCheckSum( const std::string &key, const std::string &value, std::map<std::string, CheckSum> &container);
-        
+
       };
       ///////////////////////////////////////////////////////////////////
 

@@ -49,6 +49,7 @@ namespace zypp
       {
         prodImpl = new SuseTagsProductImpl;
       }
+
       ///////////////////////////////////////////////////////////////////
       //
       //	METHOD NAME : Parser::parse
@@ -113,8 +114,24 @@ namespace zypp
               parseLine( key, modifier, value, prodImpl->_arch);
             else if(key == "DEFAULTBASE")
               prodImpl->_default_base = value;
+            else if(key == "PREREQUIRES")
+              parseDependencies( key, value, prodImpl->_deps, Dep::PREREQUIRES);
             else if(key == "REQUIRES")
-              parseRequires( key, value, prodImpl->_requires);
+              parseDependencies( key, value, prodImpl->_deps, Dep::REQUIRES);
+            else if(key == "PROVIDES")
+              parseDependencies( key, value, prodImpl->_deps, Dep::PROVIDES);
+            else if(key == "CONFLICTS")
+              parseDependencies( key, value, prodImpl->_deps, Dep::CONFLICTS);
+            else if(key == "OBSOLETES")
+              parseDependencies( key, value, prodImpl->_deps, Dep::OBSOLETES);
+            else if(key == "RECOMMENDS")
+              parseDependencies( key, value, prodImpl->_deps, Dep::RECOMMENDS);
+            else if(key == "SUGGESTS")
+              parseDependencies( key, value, prodImpl->_deps, Dep::SUGGESTS);
+            else if(key == "SUPPLEMENTS")
+              parseDependencies( key, value, prodImpl->_deps, Dep::SUPPLEMENTS);
+            else if(key == "ENHANCES")
+              parseDependencies( key, value, prodImpl->_deps, Dep::ENHANCES);
             else if(key == "LINGUAS")
               parseLine( key, value, prodImpl->_languages);
             else if(key == "LABEL")
@@ -143,15 +160,9 @@ namespace zypp
         } // end while
         // finished parsing, store result
         // Collect basic Resolvable data
-        CapFactory _f;
-        Dependencies deps;
+
         try
         {
-          for (CapSet::const_iterator it = prodImpl->_requires.begin(); it != prodImpl->_requires.end(); it++)
-          {
-            deps[Dep::REQUIRES].insert( *it );
-          }
-
 	  // calculate product architecture by looking through ARCH.xxx lines (key of prodImpl->_arch)
 	  //  and taking the 'best' (first) architectures.
 
@@ -194,8 +205,8 @@ namespace zypp
 
 	  MIL << "Product arch is " << prodarch << endl;
 
-          NVRAD dataCollect( prodImpl->_dist, Edition( prodImpl->_dist_version ), prodarch, deps );
-          result = detail::makeResolvableFromImpl( dataCollect, prodImpl);
+          NVRAD dataCollect( prodImpl->_dist, Edition( prodImpl->_dist_version ), prodarch, prodImpl->_deps );
+          result = detail::makeResolvableFromImpl( dataCollect, prodImpl );
         }
         catch (const Exception & excpt_r)
         {
@@ -235,7 +246,7 @@ namespace zypp
           str::split( value, std::back_inserter(container), " ");
       }
 
-      void ProductMetadataParser::parseRequires( const string &key, const string &value, CapSet &container)
+      void ProductMetadataParser::parseDependencies( const string &key, const string &value, Dependencies & deps, Dep deptag )
       {
 	  std::list<std::string> splitted;
           str::split( value, std::back_inserter(splitted), " ");
@@ -254,7 +265,7 @@ namespace zypp
 		else if (skind == "patch") kind = ResTraits<Patch>::kind;
 		else if (skind == "selection") kind = ResTraits<Selection>::kind;
 		else if (skind == "product") kind = ResTraits<Product>::kind;
-		else if (skind != "package") ERR << "Bad kind in content::REQUIRES '" << skind << "'" << endl;
+		else if (skind != "package") ERR << "Bad kind in content::" << key << " '" << skind << "'" << endl;
 	    }
 	    std::list<std::string>::const_iterator next = it;
 	    ++next;
@@ -269,13 +280,12 @@ namespace zypp
 		    }
 		}
 	    }
-	    DBG << "capability " << kind << ":" << name << endl;
 	    try {
-		container.insert( f.parse( kind, name ) );
+		deps[deptag].insert( f.parse( kind, name ) );
 	    }
 	    catch (Exception & excpt_r) {
 		ZYPP_CAUGHT( excpt_r );
-		ERR << "Ignoring invalid REQUIRES entry '" << name << "'" << endl;
+		ERR << "Ignoring invalid " << key << " entry '" << name << "'" << endl;
 	    }
 	  }
       }
