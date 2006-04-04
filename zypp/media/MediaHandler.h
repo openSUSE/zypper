@@ -208,9 +208,11 @@ class MediaHandler {
 	 * as attach point or if there are another attach points
 	 * bellow of it.
 	 * \param path The attach point path to check.
+	 * \param mtab Whether to check against the mtab, too.
 	 * \return True, if the path can be used as attach point.
 	 */
-        bool             isUseableAttachPoint(const Pathname &path) const;
+        bool             isUseableAttachPoint(const Pathname &path,
+	                                      bool            mtab=true) const;
 
 	/**
 	 * Get the media source name or an empty string.

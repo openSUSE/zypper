@@ -696,11 +696,13 @@ namespace zypp
        * attach point.
        *
        * \param path The attach point to check.
+       * \param mtab Whether to check against the mtab, too.
        * \return True, if it is a directory and there are
        *         no another attach points bellow of it.
        */
       bool
-      isUseableAttachPoint(const Pathname &path) const;
+      isUseableAttachPoint(const Pathname &path,
+                           bool            mtab=true) const;
 
     private:
       friend class MediaHandler;

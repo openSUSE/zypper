@@ -827,7 +827,8 @@ namespace zypp
 
     // ---------------------------------------------------------------
     bool
-    MediaManager::isUseableAttachPoint(const Pathname &path) const
+    MediaManager::isUseableAttachPoint(const Pathname &path,
+                                       bool            mtab) const
     {
       if( path.empty() || path == "/" || !PathInfo(path).isDir())
         return false;
@@ -863,6 +864,9 @@ namespace zypp
         }
       }
 
+      if( !mtab)
+        return true;
+
       //
       // check against system mount entries
       //
@@ -888,6 +892,7 @@ namespace zypp
           return false;
         }
       }
+
       return true;
     }
 

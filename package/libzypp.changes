@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Apr  4 19:19:39 CEST 2006 - mt@suse.de
+
+- Added flag to MediaManager::isUseableAttachPoint, whether
+  to check against system mount entries or not.
+- Disallow to use the attachpoints of another media handlers
+  as source path in MediaDIR.
+- rev 2917
+
+-------------------------------------------------------------------
 Tue Apr  4 18:47:01 CEST 2006 - dmacvicar@suse.de
 
 -implement callbacks for when package verification (checksum) 

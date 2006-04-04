@@ -65,6 +65,24 @@ namespace zypp {
     {
       if(next)
 	ZYPP_THROW(MediaNotSupportedException(url()));
+
+      //
+      // see ctor - attach point is equal source path
+      //
+      // don't allow to specify the attachpoint of an
+      // another media handler as source path, e.g.:
+      //   open("cd:///", "/mnt") && attach()
+      //   open("dir:/mnt", "")   && attach()
+      //
+      // still allows to use hand mounted media paths.
+      //
+      if( !isUseableAttachPoint(attachPoint(), false))
+      {
+	ZYPP_THROW(MediaBadUrlException(url(),
+	  "Specified path is not allowed as media source"
+	));
+      }
+
       MediaSourceRef media(new MediaSource("dir", attachPoint().asString()));
       setMediaSource(media);
     }

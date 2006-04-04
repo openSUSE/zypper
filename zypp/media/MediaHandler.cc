@@ -367,10 +367,10 @@ MediaHandler::createAttachPoint(const Pathname &attach_root) const
 //	DESCRIPTION :
 //
 bool
-MediaHandler::isUseableAttachPoint(const Pathname &path) const
+MediaHandler::isUseableAttachPoint(const Pathname &path, bool mtab) const
 {
   MediaManager  manager;
-  return manager.isUseableAttachPoint(path);
+  return manager.isUseableAttachPoint(path, mtab);
 }
 
 
