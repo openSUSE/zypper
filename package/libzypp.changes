@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Apr  4 14:06:23 CEST 2006 - dmacvicar@suse.de
+
+- fix #162984 , gpg hangs because the matching data file 
+  for the key cannot be find. (dmacvicar)
+- Fix restore of YUM source using the same cache dir semantics as
+  susetags instead of assuming there is a cache if a cache_dir
+  was given. (dmacvicar)
+
+-------------------------------------------------------------------
 Tue Apr  4 12:37:51 CEST 2006 - kkaempf@suse.de
 
 - use DISTPRODUCT/DISTVERSION from content file to generate the
