@@ -438,18 +438,20 @@ MIL << "split matched !" << endl;
       PoolItem_Ref candidate (cand_it->second);
 
       if ( ! candidate.status().isToBeInstalled() ) {
-
-	if ( installed->edition().compare (candidate->edition()) < 0 ) {	// new edition
+	int cmp = installed->edition().compare( candidate->edition() );
+	if ( cmp < 0 ) {						// new edition
 	  candidate.status().setToBeInstalled(ResStatus::APPL_HIGH);
 	  MIL << " ==> INSTALL (new version): " << candidate << endl;
 	  ++opt_stats_r.chk_to_update;
-	} else {								// older or equal edition
+	} else {							// older or equal edition
 	  // check whether to downgrade:
 
-	  if (!downgrade_allowed (installed, candidate, target)) {
-	    MIL << " ==> (keep installed)" << candidate << endl;
+	  if (cmp == 0							// equal
+	      || !downgrade_allowed (installed, candidate, target))	//  or downgrade not allowed
+	  {	
+	    MIL << " ==> (keep installed)" << candidate << endl;	// keep installed
 	    ++opt_stats_r.chk_to_keep_installed;
-	  } else {
+	  } else {							// older and downgrade allowed
 	    candidate.status().setToBeInstalled(ResStatus::APPL_HIGH);
 	    MIL << " ==> INSTALL (SuSE version downgrade): " << candidate << endl;
 	    ++opt_stats_r.chk_to_downgrade;
