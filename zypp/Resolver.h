@@ -175,6 +175,16 @@ namespace zypp
      */
     bool transactResKind( Resolvable::Kind kind );
 
+    /**
+     * reset any transact states
+     *
+     * Look through the pool and clear transact state.
+     * It will only reset states which have an equal or
+     * lower causer
+     *
+     */
+    void transactReset( ResStatus::TransactByValue causer );
+
   protected:
 
   private:

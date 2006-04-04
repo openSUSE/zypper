@@ -1047,6 +1047,33 @@ Resolver::transactResKind( Resolvable::Kind kind )
     return callback.result;
 }
 
+
+struct TransactReset : public resfilter::PoolItemFilterFunctor
+{
+    ResStatus::TransactByValue _causer; 
+    TransactReset( ResStatus::TransactByValue causer )
+	: _causer( causer )
+    { }
+
+    bool operator()( PoolItem_Ref item )		// only transacts() items go here
+    {
+	item.status().setTransact( false, _causer );
+	return true;
+    }
+};
+
+
+void
+Resolver::transactReset( ResStatus::TransactByValue causer )
+{
+    TransactReset info( causer );
+
+    invokeOnEach ( _pool.begin(), _pool.end(),
+		   resfilter::ByTransact( ),
+		   functor::functorRef<bool,PoolItem>(info) );
+    return;
+}
+
 ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

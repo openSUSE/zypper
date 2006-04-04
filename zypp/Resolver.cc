@@ -86,6 +86,8 @@ namespace zypp
   { return _pimpl->transactResObject( robj, install ); }
   bool Resolver::transactResKind( Resolvable::Kind kind )
   { return _pimpl->transactResKind( kind ); }
+  void Resolver::transactReset( ResStatus::TransactByValue causer )
+  { _pimpl->transactReset( causer ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
