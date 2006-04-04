@@ -3,6 +3,8 @@ Tue Apr  4 16:54:44 CEST 2006 - kkaempf@suse.de
 
 - Keep packages with no version upgrade installed during
   distribution upgrade (#162972)
+- add 'transactReset()' helper function for UI.
+- rev 2908
 
 -------------------------------------------------------------------
 Tue Apr  4 14:43:15 CEST 2006 - ma@suse.de
