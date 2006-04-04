@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr  4 12:37:51 CEST 2006 - kkaempf@suse.de
+
+- use DISTPRODUCT/DISTVERSION from content file to generate the
+  product name, version, and release.
+- rev 2902
+
+-------------------------------------------------------------------
 Mon Apr  3 20:45:55 CEST 2006 - mt@suse.de
 
 - Removed broken forcing of absolute ftp paths added in rev2705 to
