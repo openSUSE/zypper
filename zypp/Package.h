@@ -38,6 +38,10 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
+    /**
+     * Checksum the source says this package should have
+     */
+    CheckSum checksum() const;
     /** Time of package installation */
     Date installtime() const;
     /** Get the package change log */
@@ -84,7 +88,7 @@ namespace zypp
     /** */
     License licenseToConfirm() const;
     /** */
-    Pathname plainRpm() const;
+    //Pathname plainRpm() const;
     /** */
     std::list<PatchRpm> patchRpms() const;
     /** */
@@ -92,7 +96,7 @@ namespace zypp
     /**
      * \throws Exception
      */
-    Pathname getPlainRpm() const;
+    //Pathname getPlainRpm() const;
     /**
      * \throws Exception
      */

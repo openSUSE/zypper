@@ -39,7 +39,9 @@ namespace zypp
       SuseTagsPackageImpl::~SuseTagsPackageImpl()
       {}
 
-
+      CheckSum SuseTagsPackageImpl::checksum() const
+      { return _checksum; }
+          
       TranslatedText SuseTagsPackageImpl::summary() const
       { return _summary; }
 

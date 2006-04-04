@@ -10,8 +10,9 @@
  *
 */
 #include <iostream>
+#include <fstream>
 #include "zypp/base/Logger.h"
-
+#include "zypp/Digest.h"
 #include "zypp/SourceFactory.h"
 #include "zypp/source/SourceImpl.h"
 #include "zypp/ZYppCallbacks.h"
@@ -122,6 +123,41 @@ namespace zypp
       media_mgr.dirInfo( _media, retlist, path_r, dots );
     }
 
+    const Pathname SourceImpl::providePackage( Package::constPtr package )
+    {
+#warning FIXME: error handling
+#warning FIXME: Url
+        callback::SendReport<source::DownloadResolvableReport> report;
+        report->start( package, package->source().url() );
+        Pathname file = package->source().provideFile( package->location(), package->mediaId());
+        CheckSum checksum = package->checksum();
+        std::string calculated_digest;
+        // check digest
+        try
+        { 
+          std::ifstream is(file.asString().c_str(), std::ifstream::binary);
+          calculated_digest = Digest::digest(checksum.type(), is);
+          is.close();
+        }
+        catch (std::exception &e)
+        {
+          ERR << "Can't open " << file << " for integrity check." << std::endl;
+        }
+        
+        if ( checksum.checksum() != calculated_digest )
+        {
+          ZYPP_THROW(Exception("Package " + package->location().asString() + " fails integrity check. Expected: [" + checksum.checksum() + "] Read: [" + calculated_digest + "]"));
+        }
+        else
+        {
+          MIL << package->location() << " ok. [" << calculated_digest << "]" << std::endl;
+        }
+        
+        
+        report->finish( package, source::DownloadResolvableReport::NO_ERROR, "" );
+        return file;
+    }
+    
     const Pathname SourceImpl::provideFile(const Pathname & file_r,
 					   const unsigned media_nr,
 					   bool cached,

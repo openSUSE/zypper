@@ -15,6 +15,7 @@
 #include <set>
 
 #include "zypp/detail/ResObjectImplIf.h"
+#include "zypp/CheckSum.h"
 #include "zypp/Edition.h"
 #include "zypp/Arch.h"
 #include "zypp/Changelog.h"
@@ -64,6 +65,8 @@ namespace zypp
     public:
       /** \name Rpm Package Attributes. */
       //@{
+      
+      virtual CheckSum checksum() const PURE_VIRTUAL;
       /** */
       virtual Date buildtime() const PURE_VIRTUAL;
       /** */

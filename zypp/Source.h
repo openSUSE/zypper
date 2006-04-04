@@ -18,6 +18,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/base/SafeBool.h"
 
+#include "zypp/Package.h"
 #include "zypp/Pathname.h"
 #include "zypp/Url.h"
 #include "zypp/Resolvable.h"
@@ -83,6 +84,8 @@ namespace zypp
     /** All resolvables of a given kind provided by this source. */
     const ResStore resolvables(zypp::Resolvable::Kind kind) const;
 
+    const Pathname providePackage( Package::constPtr package );
+    
     /** Provide a file to local filesystem */
     const Pathname provideFile(const Pathname & file_r,
 			       const unsigned media_nr = 1);

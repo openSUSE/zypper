@@ -515,7 +515,12 @@ XMLFilesBackend::deleteObject( ResObject::constPtr resolvable )
   std::string filename = fullPathForResolvable(resolvable);
   try
   {
-    remove(path(filename));
+    int ret = filesystem::unlink(Pathname(filename));
+    if ( ret != 0 )
+    {
+      ERR << "Error removing resolvable " << resolvable << std::endl;
+      ZYPP_THROW(Exception("Error deleting " + filename));
+    }
   }
   catch(std::exception &e)
   {

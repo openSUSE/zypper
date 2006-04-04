@@ -129,9 +129,6 @@ namespace zypp
     private:
       /** Null implementation */
       static TargetImpl_Ptr _nullimpl;
-      
-      /** wrapper with callback around getPlainRpm */
-      Pathname getRpmFile(Package::constPtr package);
     };
     ///////////////////////////////////////////////////////////////////
 

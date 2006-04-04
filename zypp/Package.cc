@@ -59,6 +59,9 @@ namespace zypp
   std::string Package::buildhost() const
   { return pimpl().buildhost(); }
 
+  CheckSum Package::checksum() const
+  { return pimpl().checksum(); }
+
   /** */
   std::string Package::distribution() const
   { return pimpl().distribution(); }
@@ -129,8 +132,8 @@ namespace zypp
   { return pimpl().licenseToConfirm(); }
 
   /** */
-  Pathname Package::plainRpm() const
-  { return pimpl().location(); }
+  //Pathname Package::plainRpm() const
+  //{ return pimpl().location(); }
 
   /** */
   std::list<PatchRpm> Package::patchRpms() const
@@ -141,8 +144,8 @@ namespace zypp
   { return pimpl().deltaRpms(); }
 
   /** */
-  Pathname Package::getPlainRpm() const
-  { return source().provideFile(plainRpm(), mediaId()); }
+  //Pathname Package::getPlainRpm() const
+  //{ return source().provideFile(plainRpm(), mediaId()); }
 
   /** */
   Pathname Package::getDeltaRpm(BaseVersion & base_r) const
@@ -156,7 +159,7 @@ namespace zypp
 	return source().provideFile(it->filename());
     }
     ZYPP_THROW(Exception("No matching delta RPM found"));
-    return source().provideFile(plainRpm()); // never reached
+    return source().provideFile(location()); // never reached
   }
 
   /** */
@@ -175,7 +178,7 @@ namespace zypp
       }
     }
     ZYPP_THROW(Exception("No matching patch RPM found"));
-    return source().provideFile(plainRpm()); // never reached
+    return source().provideFile(location()); // never reached
   }
 
   bool Package::installOnly() const

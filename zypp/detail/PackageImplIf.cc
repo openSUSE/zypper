@@ -29,6 +29,9 @@ namespace zypp
       Date PackageImplIf::buildtime() const
       { return Date(); }
 
+      CheckSum PackageImplIf::checksum() const
+      { return CheckSum(); }
+
       std::string PackageImplIf::buildhost() const
       { return std::string(); }
 

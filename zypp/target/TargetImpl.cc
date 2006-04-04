@@ -138,22 +138,6 @@ namespace zypp
       return _store;
     }
 
-    
-    Pathname TargetImpl::getRpmFile(Package::constPtr package)
-    {
-	callback::SendReport<source::DownloadResolvableReport> report;
-
-#warning FIXME: error handling
-#warning FIXME: Url
-	report->start( package, package->source().url() );
-
-	Pathname file = package->getPlainRpm();
-
-	report->finish( package, source::DownloadResolvableReport::NO_ERROR, "" );
-	
-	return file;
-    }
-
 
     int TargetImpl::commit( ResPool pool_r, unsigned int medianr,
 			    TargetImpl::PoolItemList & errors_r, TargetImpl::PoolItemList & remaining_r,
@@ -241,7 +225,7 @@ namespace zypp
           Package::constPtr p = dynamic_pointer_cast<const Package>(it->resolvable());
           if (it->status().isToBeInstalled())
           {
-            Pathname localfile = getRpmFile( p );
+            Pathname localfile = p->source().providePackage(p);
 	    lastUsedSource = p->source();			// remember the package source
 
 #warning Exception handling
@@ -320,7 +304,7 @@ namespace zypp
 	      it->status().setTransact( false, ResStatus::USER );
             }
             progress.disconnect();
-	    p->source().releaseFile( p->plainRpm(), p->mediaId() );
+	    p->source().releaseFile( p->location(), p->mediaId() );
           }
           else
           {

@@ -41,7 +41,7 @@ namespace zypp
         //@{
 	virtual TranslatedText summary() const;
 	virtual TranslatedText description() const;
-
+        virtual CheckSum checksum() const;
         /** */
         virtual Date buildtime() const;
         /** */

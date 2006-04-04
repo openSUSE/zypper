@@ -115,6 +115,9 @@ namespace zypp
 			    const unsigned media_nr = 1,
 			    const bool recursive = false);
 
+      const Pathname providePackage( Package::constPtr package );
+      const Pathname providePackageInteractive( Package::constPtr package );
+      
       /**
        * Provide info about a directory
        *

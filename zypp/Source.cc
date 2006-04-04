@@ -65,10 +65,12 @@ namespace zypp
   { return _pimpl->provideFile(file_r, media_nr); }
 
   const Pathname Source_Ref::provideDirTree(const Pathname & dir_r,
-                                            const unsigned media_nr)
-                                         
+                                            const unsigned media_nr)                                              
   { return _pimpl->provideDirTree(dir_r, media_nr); }
 
+  const Pathname Source_Ref::providePackage( Package::constPtr package )
+  { return _pimpl->providePackage( package ); }
+  
   const void Source_Ref::releaseFile(const Pathname & file_r,
 				     const unsigned media_nr)
   { _pimpl->releaseFile(file_r, media_nr); }
