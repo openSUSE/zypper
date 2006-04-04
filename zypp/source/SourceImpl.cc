@@ -133,6 +133,7 @@ namespace zypp
         CheckSum checksum = package->checksum();
         std::string calculated_digest;
         // check digest
+       
         try
         { 
           std::ifstream is(file.asString().c_str(), std::ifstream::binary);
@@ -146,7 +147,7 @@ namespace zypp
         
         if ( checksum.checksum() != calculated_digest )
         {
-          ZYPP_THROW(Exception("Package " + package->location().asString() + " fails integrity check. Expected: [" + checksum.checksum() + "] Read: [" + calculated_digest + "]"));
+          ZYPP_THROW(Exception("Package " + package->location().asString() + " fails integrity check. Expected: [" + checksum.checksum() + "] Read: [" + calculated_digest + "] (" + checksum.type() + ")"));
         }
         else
         {

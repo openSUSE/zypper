@@ -189,12 +189,32 @@ namespace zypp
       {
 	_cache_dir = cache_dir_r;
 
+        MIL << "Cleaning up cache dir" << std::endl;
+        
+        // refuse to use stupid paths as cache dir
+        if (cache_dir_r == Pathname("/") )
+          ZYPP_THROW(Exception("I refuse to use / as cache dir"));
+
+        if (0 != assert_dir(cache_dir_r.dirname(), 0700))
+          ZYPP_THROW(Exception("Cannot create cache directory" + cache_dir_r.asString()));
+
+   
+        filesystem::clean_dir(cache_dir_r);
+        
+        Pathname dst = cache_dir_r + "/repodata";
+        if (0 != assert_dir(dst, 0700))
+          ZYPP_THROW(Exception("Cannot create repodata cache directory"));     
+        
 	MIL << "Storing data to cache" << endl;
 	// first read list of all files in the repository
-	Pathname filename = provideFile(_path + "/repodata/repomd.xml");
-	if ( ! PathInfo(filename).isExist() )
-	  ZYPP_THROW(Exception("repodata/repomd.xml not found"));
-
+        Pathname filename;
+        try {
+	   filename = provideFile(_path + "/repodata/repomd.xml");
+        }
+        catch(Exception &e) {
+          return;
+        }
+	
 	// use tmpfile because of checking integrity - provideFile might release the medium
 	filesystem::TmpFile tmp;
 	filesystem::copy(filename, tmp.path());
@@ -208,9 +228,16 @@ namespace zypp
 	{
 	  ZYPP_CAUGHT(excpt_r);
 	}
-	if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, asc_local))
+	
+        if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, asc_local))
+        {
 	  ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-
+        }
+        else
+        {
+          // if it verifies signature, copy the TmpFile back to the file.
+          filesystem::copy( filename, cache_dir_r + "/repodata/repomd.xml");
+        }
 	DBG << "Reading file " << filename << endl;
 	ifstream repo_st(filename.asString().c_str());
 	YUMRepomdParser repomd(repo_st, "");
@@ -224,9 +251,8 @@ namespace zypp
 	    {
 	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 	    }
-	    Pathname dst = cache_dir_r + (*repomd)->location;
-	    if (0 != assert_dir(dst.dirname(), 0700))
-	      ZYPP_THROW(Exception("Cannot create cache directory"));
+	    
+            dst = cache_dir_r + (*repomd)->location;
 	    filesystem::copy(src, dst);
 	    if ((*repomd)->type == "patches")
 	    {
