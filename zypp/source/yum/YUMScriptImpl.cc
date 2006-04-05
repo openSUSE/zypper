@@ -43,8 +43,7 @@ namespace zypp
 	Source_Ref source_r,
 	const zypp::parser::yum::YUMPatchScript & parsed
       )
-      : _source(source_r)
-      , _do_script(parsed.do_script)
+      : _do_script(parsed.do_script)
       , _undo_script(parsed.undo_script)
       , _do_location(parsed.do_location)
       , _undo_location(parsed.undo_location)
@@ -52,6 +51,7 @@ namespace zypp
       , _undo_media(1)
       , _do_checksum(parsed.do_checksum_type, parsed.do_checksum)
       , _undo_checksum(parsed.undo_checksum_type, parsed.undo_checksum)
+      , _source(source_r)
       {
 	unsigned do_media = strtol(parsed.do_media.c_str(), 0, 10);
 	if (do_media > 0)
