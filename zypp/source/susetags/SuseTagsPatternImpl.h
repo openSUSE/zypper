@@ -63,6 +63,8 @@ namespace zypp
       std::list<std::string> _conflicts;
       std::list<std::string> _provides;
       std::list<std::string> _obsoletes;
+      std::list<std::string> _freshens;
+      std::list<std::string> _supplements;
       std::list<std::string> _pkgsuggests;
       std::list<std::string> _pkgrecommends;
       std::list<std::string> _pkgrequires;

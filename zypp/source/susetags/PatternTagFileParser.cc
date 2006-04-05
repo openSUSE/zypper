@@ -138,6 +138,18 @@ namespace zypp
         {
           patImpl->_conflicts = tag.values;
         }
+        else if ( tag.name == "Sup" )
+        {
+          patImpl->_supplements = tag.values;
+        }
+        else if ( tag.name == "Sug" )
+        {
+          patImpl->_suggests = tag.values;
+        }
+        else if ( tag.name == "Fre" )
+        {
+          patImpl->_freshens = tag.values;
+        }
         else if ( tag.name == "Prq" )		// package requires
         {
           patImpl->_pkgrequires = tag.values;
@@ -146,61 +158,45 @@ namespace zypp
         {
           patImpl->_pkgrecommends = tag.values;
         }
+        else if ( tag.name == "Psg" )		// package suggests
+        {
+          patImpl->_pkgsuggests = tag.values;
+        }
+      }
+
+      static void parseDeps( const std::list<std::string> & strdeps, Dependencies & deps, Dep deptag, const Resolvable::Kind & kind = ResTraits<Pattern>::kind )
+      {
+        CapFactory f;
+        for (std::list<std::string>::const_iterator it = strdeps.begin(); it != strdeps.end(); it++)
+        {
+          Capability cap = f.parse( kind, *it );
+	  deps[deptag].insert( cap );
+        }
+	return;
       }
 
       void PatternTagFileParser::endParse()
       {
         #warning FIXME how to insert the specific language packages
-        CapFactory _f;
 	Dependencies _deps;
 
-        for (std::list<std::string>::const_iterator it = patImpl->_recommends.begin(); it != patImpl->_recommends.end(); it++)
-        {
-          Capability _cap = _f.parse( ResTraits<Pattern>::kind, *it );
-	  _deps[Dep::RECOMMENDS].insert(_cap);
-        }
-
-        for (std::list<std::string>::const_iterator it = patImpl->_requires.begin(); it != patImpl->_requires.end(); it++)
-        {
-          Capability _cap = _f.parse( ResTraits<Pattern>::kind, *it );
-	  _deps[Dep::REQUIRES].insert(_cap);
-        }
-
-        for (std::list<std::string>::const_iterator it = patImpl->_conflicts.begin(); it != patImpl->_conflicts.end(); it++)
-        {
-          Capability _cap = _f.parse( ResTraits<Pattern>::kind, *it );
-	  _deps[Dep::CONFLICTS].insert(_cap);
-        }
-
-        for (std::list<std::string>::const_iterator it = patImpl->_provides.begin(); it != patImpl->_provides.end(); it++)
-        {
-          Capability _cap = _f.parse( ResTraits<Pattern>::kind, *it );
-	  _deps[Dep::PROVIDES].insert(_cap);
-        }
-
-        for (std::list<std::string>::const_iterator it = patImpl->_obsoletes.begin(); it != patImpl->_obsoletes.end(); it++)
-        {
-          Capability _cap = _f.parse( ResTraits<Pattern>::kind, *it );
-	  _deps[Dep::OBSOLETES].insert(_cap);
-        }
-
-        for (std::list<std::string>::const_iterator it = patImpl->_pkgrecommends.begin(); it != patImpl->_pkgrecommends.end(); it++)
-        {
-          Capability _cap = _f.parse( ResTraits<Package>::kind, *it );
-	  _deps[Dep::RECOMMENDS].insert(_cap);
-        }
-
-        for (std::list<std::string>::const_iterator it = patImpl->_pkgrequires.begin(); it != patImpl->_pkgrequires.end(); it++)
-        {
-          Capability _cap = _f.parse( ResTraits<Package>::kind, *it );
-	  _deps[Dep::REQUIRES].insert(_cap);
-        }
+	parseDeps( patImpl->_recommends, _deps, Dep::RECOMMENDS );
+	parseDeps( patImpl->_requires, _deps, Dep::REQUIRES );
+	parseDeps( patImpl->_conflicts, _deps, Dep::CONFLICTS );
+	parseDeps( patImpl->_provides, _deps, Dep::PROVIDES );
+	parseDeps( patImpl->_obsoletes, _deps, Dep::OBSOLETES );
+	parseDeps( patImpl->_suggests, _deps, Dep::SUGGESTS );
+	parseDeps( patImpl->_supplements, _deps, Dep::SUPPLEMENTS );
+	parseDeps( patImpl->_freshens, _deps, Dep::FRESHENS );
+	parseDeps( patImpl->_pkgrecommends, _deps, Dep::RECOMMENDS, ResTraits<Package>::kind );
+	parseDeps( patImpl->_pkgrequires, _deps, Dep::REQUIRES, ResTraits<Package>::kind );
+	parseDeps( patImpl->_pkgsuggests, _deps, Dep::SUGGESTS, ResTraits<Package>::kind );
 
         Arch arch;
         if (!patImpl->_arch.empty())
           arch = Arch(patImpl->_arch);
         
-        NVRAD nvrad = NVRAD( patImpl->_name, Edition(patImpl->_version, patImpl->_release, std::string()), arch, _deps );
+        NVRAD nvrad = NVRAD( patImpl->_name, Edition( patImpl->_version, patImpl->_release, std::string() ), arch, _deps );
         result = detail::makeResolvableFromImpl( nvrad, patImpl );
       }
        /////////////////////////////////////////////////////////////////
