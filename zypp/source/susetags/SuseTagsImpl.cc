@@ -77,7 +77,14 @@ namespace zypp
         media::MediaAccessId media_num = _media_set->getMediaAccessId(1);
         
         INT << "Storing data to cache " << cache_dir_r << endl;
-        Pathname descr_src = provideDirTree(_descr_dir);
+        
+        // (#163196)
+        // before we used _descr_dir, which is is wrong if we 
+        // store metadata already running from cache
+        // because it points to a local file and not
+        // to the media. So use the original media descr_dir.
+        Pathname descr_src = provideDirTree(_orig_descr_dir);
+        
         Pathname media_src = provideDirTree("media.1");
         Pathname content_src = provideFile("/content");
         Pathname content_src_asc = provideFile("/content.asc");
@@ -410,11 +417,13 @@ namespace zypp
           // data dir is the same, it is determined by the content file
           _data_dir = _path + p.prodImpl->_data_dir;
           
-          // description dir also changes when using cache          
+          // description dir also changes when using cache  
+          _orig_descr_dir = _path + p.prodImpl->_description_dir;        
+          
           if (cache)
             _descr_dir  = _cache_dir + "DATA/descr";
           else
-            _descr_dir = _path + p.prodImpl->_description_dir;
+            _descr_dir = _orig_descr_dir;
           
           MIL << "Product: " << product->summary() << endl;
           store.insert( product );

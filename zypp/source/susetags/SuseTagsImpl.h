@@ -109,8 +109,17 @@ namespace zypp
         
         unsigned _media_count;
 	
+        // descr dir we are using
+        // depends if we are on media or
+        // cache
         Pathname _descr_dir;
         Pathname _data_dir;
+        
+        // descr dir on media.
+        // we need it if we refresh
+        // already running from cache
+        Pathname _orig_descr_dir;
+        
         Pathname _content_file;
         Pathname _content_file_sig;
         Pathname _content_file_key;
