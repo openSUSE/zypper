@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Apr  5 15:04:31 CEST 2006 - kkaempf@suse.de
+
+- honor optional 3rd parameter to "=Loc:" key of packages (#154337)
+
+-------------------------------------------------------------------
 Wed Apr  5 12:48:19 CEST 2006 - visnov@suse.cz
 
 - only try to create a source of a given type when restoring 
