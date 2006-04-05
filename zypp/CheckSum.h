@@ -33,7 +33,7 @@ namespace zypp
           _type = "sha1";
         else if (checksum.size() == 64)
           _type = "sha256";
-        DBG << "Checksum size is " << checksum.size() << ", checksum type set to " << _type << std::endl;
+//        DBG << "Checksum size is " << checksum.size() << ", checksum type set to " << _type << std::endl;
       }
       else
       {
