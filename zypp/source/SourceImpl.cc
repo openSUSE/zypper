@@ -39,10 +39,11 @@ namespace zypp
     //
     SourceImpl::SourceImpl()
     : _enabled(true)
+    , _autorefresh(true)
     , _priority (0)
     , _priority_unsubscribed (0)
-    , _res_store_initialized(false)
     , _subscribed(false)
+    , _res_store_initialized(false)
     {
     }
 
@@ -63,6 +64,10 @@ namespace zypp
       _alias     = alias_r;
       _cache_dir = cache_dir_r;
       _subscribed = true;
+
+      // for remote sources we enable autorefresh by default
+      _autorefresh = media::MediaAccess::downloads( _url );
+
       try
         {
           factoryInit();
