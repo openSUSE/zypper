@@ -56,6 +56,13 @@ namespace zypp
         virtual void storeMetadata(const Pathname & cache_dir_r);
 	
 	virtual std::string type(void) const
+	{ return typeString(); }
+
+	/** Text used for identifying the type of the source.
+  	 * Used by the \ref SourceFactory when creating a 
+	 * source of a given type only.
+	 */
+	static std::string typeString(void)
 	{ return "YUM"; }
 
 	virtual void createResolvables(Source_Ref source_r);

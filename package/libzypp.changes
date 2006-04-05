@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr  5 12:48:19 CEST 2006 - visnov@suse.cz
+
+- only try to create a source of a given type when restoring 
+  from the persistent store (#162111) 
+
+-------------------------------------------------------------------
 Wed Apr  5 11:36:54 CEST 2006 - kkaempf@suse.de
 
 - parse all dependencies for patterns (.pat) files (#160602)

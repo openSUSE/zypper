@@ -56,7 +56,14 @@ namespace zypp
         virtual ResStore provideResolvables(Source_Ref source_r, zypp::Resolvable::Kind kind);
 	
         virtual std::string type(void) const
-        { return "YaST"; }
+        { return typeString(); }
+
+        /** Text used for identifying the type of the source.
+         * Used by the \ref SourceFactory when creating a
+         * source of a given type only.
+         */
+	static std::string typeString(void)
+	{ return "YaST"; }
 	
         virtual unsigned numberOfMedia(void) const;
         virtual std::string vendor (void) const;

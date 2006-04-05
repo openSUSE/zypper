@@ -175,6 +175,67 @@ media::MediaManager media_mgr;
     return Source_Ref(); // not reached!!
   }
 
+  Source_Ref SourceFactory::createFrom( const std::string & type, const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r )
+  {
+    if (! url_r.isValid())
+      ZYPP_THROW( Exception("Empty URL passed to SourceFactory") );
+
+    callback::SendReport<CreateSourceReport> report;
+
+    report->startProbe (url_r);
+    
+#warning if cache_dir is provided, no need to open the original url
+    // open the media
+    media::MediaId id = media_mgr.open(url_r);
+
+    // add dummy verifier
+    media_mgr.addVerifier(id, media::MediaVerifierRef(new media::NoVerifier()));
+    // attach only if initializing from media and not from cache (#153073)
+    if (cache_dir_r == "")
+    {
+      media_mgr.attach(id);
+    }
+    else
+    {
+      MIL << "Initializing from cache" << endl;
+    }
+
+    try
+    {
+
+      Source_Ref::Impl_Ptr impl;
+
+      if( type == yum::YUMSourceImpl::typeString() ) {
+        MIL << "Trying the YUM source" << endl;
+        impl = Source_Ref::Impl_Ptr( Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r) );
+        MIL << "Found the YUM source" << endl;
+      } else if ( type == susetags::SuseTagsImpl::typeString() ) {
+        MIL << "Trying the SUSE tags source" << endl;
+#warning TODO pass cache_dir_r once constructor adapted
+        impl = Source_Ref::Impl_Ptr( Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r) );
+        MIL << "Found the SUSE tags source" << endl;
+      } else {
+	ZYPP_THROW( Exception ("Cannot create source of unknown type '" + type + "'"));
+      }
+
+      report->endProbe (url_r);
+      
+      return Source_Ref(impl);
+    }
+    catch (const Exception & excpt_r)
+    {
+      ZYPP_CAUGHT(excpt_r);
+      MIL << "Creating a source of type " << type << " failed " << endl;
+    }
+    
+    report->endProbe (url_r);
+
+    ERR << "No next type of source" << endl;
+    ZYPP_THROW(Exception("Cannot create the installation source"));
+    return Source_Ref(); // not reached!!
+  }
+
+
   /******************************************************************
   **
   **	FUNCTION NAME : operator<<

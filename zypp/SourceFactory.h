@@ -55,6 +55,11 @@ namespace zypp
     */
     Source_Ref createFrom( const Url & url_r, const Pathname & path_r = "/", const std::string & alias_r = "", const Pathname & cache_dir_r = "" );
 
+    /** Construct source of a given type.
+     * \throw EXCEPTION on fail
+    */
+    Source_Ref createFrom( const std::string & type,  const Url & url_r, const Pathname & path_r = "/", const std::string & alias_r = "", const Pathname & cache_dir_r = "" );
+
   private:
     /** Implementation  */
     class Impl;

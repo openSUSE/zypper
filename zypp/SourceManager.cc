@@ -373,7 +373,7 @@ namespace zypp
 	SourceId id = 0;
 
 	try {
-          id = addSource( SourceFactory().createFrom(it->url, it->product_dir, it->alias, it->cache_dir) );
+          id = addSource( SourceFactory().createFrom(it->type, it->url, it->product_dir, it->alias, it->cache_dir) );
 	}
 	catch (const Exception &expt )
 	{
