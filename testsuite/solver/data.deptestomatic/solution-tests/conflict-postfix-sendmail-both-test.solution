@@ -18,7 +18,7 @@
 >!> Installing xorg-x11-server from channel packages
 >!> Installing xorg-x11-server-glx from channel packages
 >!> Installing yast2-trans-en_US from channel packages
->!> 1 problems found:
+>!> 8 problems found:
 >!> Problem:
 >!> Cannot install sendmail because it is conflicting with postfix
 >!> A conflict over sendmail == 8.13.5 (sendmail) requires the removal of to-be-installed sendmail-8.13.5-5.i586[packages]
@@ -30,5 +30,71 @@
 >!>       do not install postfix-2.2.6-6.i586[packages]
 >!>    Solution:
 >!>       Ignore this conflict of sendmail
+>!>       
+>!> Problem:
+>!> cron cannot be installed due to missing dependencies
+>!> There are no installable providers of smtp_daemon for cron-4.1-31.i586[packages]
+>!>    Solution:
+>!>       do not install cron
+>!>       do not install cron-4.1-31.i586[packages]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Problem:
+>!> gnome-applets cannot be installed due to missing dependencies
+>!> There are no installable providers of libpanel-applet-2.so.0 for gnome-applets-2.12.2-15.i586[packages]
+>!>    Solution:
+>!>       do not install gnome-applets
+>!>       do not install gnome-applets-2.12.2-15.i586[packages]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Problem:
+>!> gnome-utils cannot be installed due to missing dependencies
+>!> There are no installable providers of libpanel-applet-2.so.0 for gnome-utils-2.12.2-10.i586[packages]
+>!>    Solution:
+>!>       do not install gnome-utils
+>!>       do not install gnome-utils-2.12.2-10.i586[packages]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Problem:
+>!> lsb cannot be installed due to missing dependencies
+>!> There are no installable providers of /usr/sbin/sendmail for lsb-3.0-8.i586[packages]
+>!>    Solution:
+>!>       do not install lsb
+>!>       do not install lsb-3.0-8.i586[packages]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Problem:
+>!> mailx cannot be installed due to missing dependencies
+>!> There are no installable providers of smtp_daemon for mailx-11.25-3.i586[packages]
+>!>    Solution:
+>!>       do not install mailx
+>!>       do not install mailx-11.25-3.i586[packages]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Problem:
+>!> mutt cannot be installed due to missing dependencies
+>!> There are no installable providers of smtp_daemon for mutt-1.5.9i-15.i586[packages]
+>!>    Solution:
+>!>       do not install mutt
+>!>       do not install mutt-1.5.9i-15.i586[packages]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Problem:
+>!> postfix conflicts with other resolvables
+>!> postfix conflicts with:
+>!>    Solution:
+>!>       do not install postfix
+>!>       do not install postfix-2.2.6-6.i586[packages]
+>!>    Solution:
+>!>       do not install sendmail
+>!>       do not install sendmail-8.13.5-5.i586[packages]
+>!>    Solution:
+>!>       Ignore this conflict of postfix
 >!>       
 >!> Calculating installation order ...

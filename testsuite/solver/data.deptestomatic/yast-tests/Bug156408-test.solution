@@ -10,7 +10,19 @@
 >!> Installing Kde-Desktop from channel sl10_selections
 >!> Installing SuSE-Documentation from channel sl10_selections
 >!> Installing Laptop from channel sl10_selections
->!> 1 problems found:
+>!> 2 problems found:
+>!> Problem:
+>!> Cannot install suse-release because it is conflicting with sles-release
+>!> A conflict over suse-release-oss (suse-release-oss) requires the removal of to-be-installed suse-release-10.0.42-18.i586[sl10_packages]
+>!>    Solution:
+>!>       do not install suse-release
+>!>       do not install suse-release-10.0.42-18.i586[sl10_packages]
+>!>    Solution:
+>!>       do not install sles-release
+>!>       do not install sles-release-9.90-19.i586[sles_packages]
+>!>    Solution:
+>!>       Ignore this conflict of suse-release
+>!>       
 >!> Problem:
 >!> sles-release conflicts with other resolvables
 >!> sles-release conflicts with:
@@ -25,24 +37,8 @@
 >!>       
 >!> Taking solution: 0
 >!> For problem:     0
->!> 1 problems found:
->!> 1 problems found:
->!> Problem:
->!> SUSE SLES cannot be installed due to missing dependencies
->!> There are no installable providers of sles-release == 9.90 for product:SUSE SLES-1.noarch[sles_packages]
->!>    Solution:
->!>       unlock sles-release
->!>       
->!>    Solution:
->!>       do not install SUSE SLES
->!>       do not install product:SUSE SLES-1.noarch[sles_packages]
->!>    Solution:
->!>       Ignore this requirement just here
->!>       
->!> Taking solution: 2
->!> For problem:     0
->!> 1 problems found:
->!> 1 problems found:
+>!> 2 problems found:
+>!> 2 problems found:
 >!> Problem:
 >!> Cannot install kde3-i18n-de
 >!> Can't install kde3-i18n-de-3.5.1-9.noarch[sl10_packages], since kde3-i18n-de-3.5.1-9.noarch[sles_packages] is already marked as needing to be installed
@@ -54,4 +50,44 @@
 >!>       
 >!>    Solution:
 >!>       Ignore that kde3-i18n-de is already set to install
+>!>       
+>!> Problem:
+>!> SUSE LINUX cannot be installed due to missing dependencies
+>!> There are no installable providers of suse-release == 10.0.42 for product:SUSE LINUX-1.noarch[sl10_packages]
+>!>    Solution:
+>!>       unlock suse-release
+>!>       
+>!>    Solution:
+>!>       do not install SUSE LINUX
+>!>       do not install product:SUSE LINUX-1.noarch[sl10_packages]
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Taking solution: 2
+>!> For problem:     0
+>!> 2 problems found:
+>!> 2 problems found:
+>!> Problem:
+>!> Cannot install susehelp_de
+>!> Can't install susehelp_de-2006.03.03-2.noarch[sl10_packages], since susehelp_de-2006.03.03-2.noarch[sles_packages] is already marked as needing to be installed
+>!>    Solution:
+>!>       do not install susehelp_de-2006.03.03-2.noarch[sl10_packages]
+>!>       
+>!>    Solution:
+>!>       do not install susehelp_de-2006.03.03-2.noarch[sles_packages]
+>!>       
+>!>    Solution:
+>!>       Ignore that susehelp_de is already set to install
+>!>       
+>!> Problem:
+>!> SUSE LINUX cannot be installed due to missing dependencies
+>!> There are no installable providers of suse-release == 10.0.42 for product:SUSE LINUX-1.noarch[sl10_packages]
+>!>    Solution:
+>!>       unlock suse-release
+>!>       
+>!>    Solution:
+>!>       do not install SUSE LINUX
+>!>       do not install product:SUSE LINUX-1.noarch[sl10_packages]
+>!>    Solution:
+>!>       Ignore this requirement just here
 >!>       

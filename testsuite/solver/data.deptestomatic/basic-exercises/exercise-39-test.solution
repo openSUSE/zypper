@@ -1,11 +1,23 @@
 >!> Installing GConf2 from channel gnome2
->!> 1 problems found:
+>!> 2 problems found:
 >!> Problem:
 >!> Can't satisfy requirement libpangoxft-0.24.so for gedit2-1:1.112.0.0.200202140152-snap.ximian.1.noarch
 >!> 
 >!>    Solution:
 >!>       delete gedit2
 >!>       delete gedit2-1:1.112.0.0.200202140152-snap.ximian.1.noarch
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!>    Solution:
+>!>       Ignore this requirement generally
+>!>       
+>!> Problem:
+>!> Can't satisfy requirement libpangoxft-0.24.so for yelp-0.2.99.0.200202140152-snap.ximian.1.noarch
+>!> 
+>!>    Solution:
+>!>       delete yelp
+>!>       delete yelp-0.2.99.0.200202140152-snap.ximian.1.noarch
 >!>    Solution:
 >!>       Ignore this requirement just here
 >!>       

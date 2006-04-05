@@ -1,5 +1,5 @@
 >!> Installing W from channel test
->!> 1 problems found:
+>!> 5 problems found:
 >!> Problem:
 >!> Cannot install AA because it is conflicting with A
 >!> A conflict over a == 2.0 (a != 1.0) requires the removal of to-be-installed AA-1.0-1.noarch[test]
@@ -11,4 +11,40 @@
 >!>       delete A-1.0-1.noarch
 >!>    Solution:
 >!>       Ignore this conflict of AA
+>!>       
+>!> Problem:
+>!> M cannot be installed due to missing dependencies
+>!> There are no installable providers of a < 2.0 for M-1.0-1.noarch
+>!>    Solution:
+>!>       delete M
+>!>       delete M-1.0-1.noarch
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Problem:
+>!> N cannot be installed due to missing dependencies
+>!> There are no installable providers of m for N-1.0-1.noarch
+>!>    Solution:
+>!>       delete N
+>!>       delete N-1.0-1.noarch
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Problem:
+>!> O cannot be installed due to missing dependencies
+>!> There are no installable providers of n for O-1.0-1.noarch
+>!>    Solution:
+>!>       delete O
+>!>       delete O-1.0-1.noarch
+>!>    Solution:
+>!>       Ignore this requirement just here
+>!>       
+>!> Problem:
+>!> P cannot be installed due to missing dependencies
+>!> There are no installable providers of z for P-1.0-1.noarch
+>!>    Solution:
+>!>       delete P
+>!>       delete P-1.0-1.noarch
+>!>    Solution:
+>!>       Ignore this requirement just here
 >!>       
