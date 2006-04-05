@@ -72,8 +72,9 @@ namespace zypp
       MIL << "defaultTextLocale: '" << _textLocale << "'" << endl;
 
       MIL << "initializing keyring..." << std::endl;
-      _keyring = new KeyRing(homePath() + Pathname("/keyring/all"), homePath() + Pathname("/keyring/trusted"));
-
+      //_keyring = new KeyRing(homePath() + Pathname("/keyring/all"), homePath() + Pathname("/keyring/trusted"));
+      _keyring = new KeyRing();
+      
       struct utsname buf;
       if (uname (&buf) < 0) {
 	ERR << "Can't determine system architecture" << endl;

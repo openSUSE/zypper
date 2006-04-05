@@ -201,17 +201,14 @@ namespace zypp {
 	  void importPubkey( const Pathname & pubkey_r );
       
 	  /**
-	   * Import ascii armored public key keyname_r exported by keyring_r.
-	   *
-	   * \throws RpmException
-	   *
+	   * Return the long ids of all installed public keys.
 	   **/
-	  void importPubkey( const Pathname & keyring_r, const std::string & keyname_r );
-      
-	  /**
-	   * Return the editions of all installed public keys.
-	   **/
-	  std::set<Edition> pubkeys() const;
+          std::set<std::string> pubkeys() const;
+          
+          /**
+           * Return the edition of all installed public keys.
+           **/
+          std::set<Edition> pubkeyEditions() const;
       
 	  ///////////////////////////////////////////////////////////////////
 	  //
@@ -332,7 +329,16 @@ namespace zypp {
 	  //
 	  ///////////////////////////////////////////////////////////////////
 	private:
-      
+          /**
+           * iterates through zypp keyring and import all non existant keys
+           * into rpm keyring
+           */
+          void importZyppKeyRingTrustedKeys();
+          /**
+           * insert all rpm trusted keys into zypp trusted keyring
+           */
+          void exportTrustedKeysInZyppKeyRing();
+          
 	  /**
 	   * The connection to the rpm process.
 	  */

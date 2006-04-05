@@ -51,6 +51,12 @@ namespace zypp
   
   struct PublicKey
   {
+    bool operator==(PublicKey b)
+    { return b.id == id; }
+    
+    bool operator==(std::string sid)
+    { return sid == id; }
+    
     std::string id;
     std::string name;
     std::string fingerprint;
@@ -73,9 +79,8 @@ namespace zypp
   public:
     /** Default ctor */
     KeyRing();
-    /** Ctor \todo Make ctor it explicit */
-    explicit
-    KeyRing(const Pathname &general_kr, const Pathname &trusted_kr);
+    //explicit
+    //KeyRing(const Pathname &general_kr, const Pathname &trusted_kr);
 
     /**
      * imports a key from a file.

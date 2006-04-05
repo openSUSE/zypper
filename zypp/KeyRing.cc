@@ -65,8 +65,12 @@ namespace zypp
   struct KeyRing::Impl
   {
     Impl()
-    {}
+    {
+      _general_kr = _general_tmp_dir.path();
+      _trusted_kr = _trusted_tmp_dir.path();
+    }
 
+    /*
     Impl( const Pathname &general_kr, const Pathname &trusted_kr )
     {
       filesystem::assert_dir(general_kr);
@@ -75,6 +79,7 @@ namespace zypp
       _general_kr = general_kr;
       _trusted_kr = trusted_kr;
     }
+    */
 
     void importKey( const Pathname &keyfile, bool trusted = false);
     PublicKey readPublicKey( const Pathname &keyfile );
@@ -104,6 +109,10 @@ namespace zypp
     
     Pathname _general_kr;
     Pathname _trusted_kr;
+    
+    // Used for trusted and untrusted keyrings
+    TmpDir _trusted_tmp_dir;
+    TmpDir _general_tmp_dir;
   public:
     /** Offer default Impl. */
     static shared_ptr<Impl> nullimpl()
@@ -523,7 +532,7 @@ namespace zypp
   //	METHOD TYPE : Ctor
   //
   KeyRing::KeyRing()
-  : _pimpl( Impl::nullimpl() )
+  : _pimpl( new Impl() )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -531,9 +540,9 @@ namespace zypp
   //	METHOD NAME : KeyRing::KeyRing
   //	METHOD TYPE : Ctor
   //
-  KeyRing::KeyRing( const Pathname &general_kr, const Pathname &trusted_kr )
-  : _pimpl( new Impl(general_kr, trusted_kr) )
-  {}
+  //KeyRing::KeyRing( const Pathname &general_kr, const Pathname &trusted_kr )
+  //: _pimpl( new Impl(general_kr, trusted_kr) )
+  //{}
 
   ///////////////////////////////////////////////////////////////////
   //

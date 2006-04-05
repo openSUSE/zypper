@@ -22,6 +22,7 @@
 #include <set>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include "zypp/base/Logger.h"
 
@@ -37,12 +38,16 @@
 #include "zypp/target/rpm/RpmException.h"
 #include "zypp/CapSet.h"
 #include "zypp/CapFactory.h"
+#include "zypp/KeyRing.h"
+#include "zypp/ZYppFactory.h"
+#include "zypp/TmpPath.h"
 
 #ifndef _
 #define _(X) X
 #endif
 
 using namespace std;
+using namespace zypp::filesystem;
 
 namespace zypp {
   namespace target {
@@ -441,6 +446,11 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
   // by librpm. On demand it will be reopened readonly and should
   // not hold any lock.
   librpmDb::dbRelease( true );
+  
+  MIL << "Syncronizing keys with zypp keyring" << std::endl;
+  importZyppKeyRingTrustedKeys();
+  exportTrustedKeysInZyppKeyRing();
+  
   MIL << "InitDatabase: " << *this << endl;
 }
 
@@ -814,6 +824,114 @@ void RpmDb::doRebuildDatabase(callback::SendReport<RebuildDBReport> & report)
   }
 }
 
+void RpmDb::exportTrustedKeysInZyppKeyRing()
+{
+  MIL << "Exporting rpm keyring into zypp trusted keyring" <<std::endl;
+  
+  std::set<Edition> rpm_keys = pubkeyEditions();
+  
+  std::list<PublicKey> zypp_keys;
+  zypp_keys = getZYpp()->keyRing()->trustedPublicKeys();
+  
+  for ( std::set<Edition>::const_iterator it = rpm_keys.begin(); it != rpm_keys.end(); ++it)
+  {
+    // search the zypp key into the rpm keys
+    // long id is edition version + release
+    std::string id = str::toUpper( (*it).version() + (*it).release());
+    std::list<PublicKey>::iterator ik = find( zypp_keys.begin(), zypp_keys.end(), id);
+    if ( ik != zypp_keys.end() )
+    {
+      MIL << "Key " << (*it) << " is already in zypp database." << std::endl;
+    }
+    else
+    {
+      // we export the rpm key into a file
+      RpmHeader::constPtr result = new RpmHeader();
+      getData( std::string("gpg-pubkey"), *it, result );
+      TmpFile file;
+      std::ofstream os;
+      try
+      {
+        os.open(file.path().asString().c_str());
+        // dump rpm key into the tmp file
+        os << result->tag_description();
+        //MIL << "-----------------------------------------------" << std::endl;
+        //MIL << result->tag_description() <<std::endl;
+        //MIL << "-----------------------------------------------" << std::endl;
+        os.close();
+      }
+      catch (std::exception &e)
+      {
+        ERR << "Could not dump key " << (*it) << " in tmp file " << file.path() << std::endl;
+        // just ignore the key
+      }
+      
+      // now import the key in zypp
+      try
+      {
+        getZYpp()->keyRing()->importKey( file.path(), true /*trusted*/);
+        MIL << "Trusted key " << (*it) << " imported in zypp keyring." << std::endl;
+      }
+      catch (Exception &e)
+      {
+        ERR << "Could not import key " << (*it) << " in zypp keyring" << std::endl;
+      }
+    }
+  }  
+}
+
+void RpmDb::importZyppKeyRingTrustedKeys()
+{
+  MIL << "Importing zypp trusted keyring" << std::endl;
+  
+  std::set<std::string> rpm_keys = pubkeys();
+  
+  std::list<PublicKey> zypp_keys;
+  
+  zypp_keys = getZYpp()->keyRing()->trustedPublicKeys();
+  
+  for ( std::list<PublicKey>::const_iterator it = zypp_keys.begin(); it != zypp_keys.end(); ++it)
+  {
+    std::string id = (*it).id;
+    std::set<std::string>::iterator ik = find( rpm_keys.begin(), rpm_keys.end(), id);
+    if ( ik != rpm_keys.end() )
+    {
+      MIL << "Key " << (*it).id << " (" << (*it).name << ") is already in rpm database." << std::endl;
+    }
+    else
+    {
+      // key does not exists, we need to import it into rpm
+      // create a temporary file
+      TmpFile file;
+      // open the file for writing
+      std::ofstream os;
+      try
+      {
+        os.open(file.path().asString().c_str());
+        // dump zypp key into the tmp file
+        getZYpp()->keyRing()->dumpTrustedPublicKey( id, os );
+        os.close();
+      }
+      catch (std::exception &e)
+      {
+        ERR << "Could not dump key " << (*it).id << " (" << (*it).name << ") in tmp file " << file.path() << std::endl;
+        // just ignore the key
+      }
+      
+      // now import the key in rpm
+      try
+      {
+        importPubkey(file.path());
+        MIL << "Trusted key " << (*it).id << " (" << (*it).name << ") imported in rpm database." << std::endl;
+      }
+      catch (RpmException &e)
+      {
+        ERR << "Could not dump key " << (*it).id << " (" << (*it).name << ") in tmp file " << file.path() << std::endl;
+      }
+    }
+  }
+}
+
 ///////////////////////////////////////////////////////////////////
 //
 //
@@ -856,91 +974,24 @@ void RpmDb::importPubkey( const Pathname & pubkey_r )
 ///////////////////////////////////////////////////////////////////
 //
 //
-//	METHOD NAME : RpmDb::importPubkey
-//	METHOD TYPE : PMError
-//
-void RpmDb::importPubkey( const Pathname & keyring_r, const string & keyname_r )
-{
-  FAILIFNOTINITIALIZED;
-
-  // create tempfile
-  char tmpname[] = "/tmp/zypp.pubkey.XXXXXX";
-  int tmpfd = mkstemp( tmpname );
-  if ( tmpfd == -1 ) {
-    ZYPP_THROW(RpmSubprocessException("Unable to create a unique temporary file for pubkey"));
-  }
-
-  // export keyname from keyring
-  RpmArgVec args;
-  args.push_back( "gpg" );
-  args.push_back( "--armor" );
-  args.push_back( "--no-default-keyring" );
-  args.push_back( "--keyring" );
-  args.push_back( keyring_r.asString().c_str() );
-  args.push_back( "--export" );
-  args.push_back( keyname_r.c_str() );
-
-  const char * argv[args.size() + 1];
-  const char ** p = argv;
-  p = copy( args.begin(), args.end(), p );
-  *p = 0;
-
-  // launch gpg
-  ExternalProgram prg( argv, ExternalProgram::Discard_Stderr, false, -1, true );
-  int res = 0;
-
-  // read key
-
-  try {
-    for ( string line( prg.receiveLine() ); line.length(); line = prg.receiveLine() ) {
-      ssize_t written = write( tmpfd, line.c_str(), line.length() );
-      if ( written == -1 || unsigned(written) != line.length() ) {
-	ZYPP_THROW(RpmSubprocessException(string("Error writing pubkey to ") + tmpname));
-      }
-      res += written; // empty file indicates key not found
-    }
-  }
-  catch (RpmException & excpt_r)
-  {
-    ZYPP_CAUGHT(excpt_r);
-    close( tmpfd );
-    filesystem::unlink( tmpname );
-    ZYPP_RETHROW(excpt_r);
-  }
-  close( tmpfd );
-
-  if ( ! res ) {
-    ZYPP_THROW(RpmSubprocessException(string("gpg: no key '") + keyname_r + string("' found in  '") + keyring_r.asString() + string("'")));
-  }
-
-  // check gpg returncode
-  res = prg.close();
-  if ( res ) {
-    // remove tempfile
-    filesystem::unlink( tmpname );
-    ZYPP_THROW(RpmSubprocessException(string("gpg: export '") + keyname_r + string("' from '") + keyring_r.asString() + "' returned " + str::numstring(res)));
-  }
-
-  MIL << "Exported '" << keyname_r << "' from '" << keyring_r << "' to " << tmpname << endl;
-  try {
-    importPubkey( tmpname );
-  }
-  catch (RpmException & excpt_r)
-  {
-    ZYPP_CAUGHT(excpt_r);
-    filesystem::unlink( tmpname );
-    ZYPP_RETHROW(excpt_r);
-  }
-  filesystem::unlink( tmpname );
-}
-
-///////////////////////////////////////////////////////////////////
-//
-//
 //	METHOD NAME : RpmDb::pubkeys
 //	METHOD TYPE : set<Edition>
 //
-set<Edition> RpmDb::pubkeys() const
+set<std::string> RpmDb::pubkeys() const
+{
+  set<std::string> ret;
+
+  librpmDb::db_const_iterator it;
+  for ( it.findByName( string( "gpg-pubkey" ) ); *it; ++it ) {
+    Edition edition = it->tag_edition();
+    if (edition != Edition::noedition)
+      ret.insert( str::toUpper(edition.version() + edition.release()) );
+  }
+
+  return ret;
+}
+
+set<Edition> RpmDb::pubkeyEditions() const
 {
   set<Edition> ret;
 
@@ -950,7 +1001,6 @@ set<Edition> RpmDb::pubkeys() const
     if (edition != Edition::noedition)
       ret.insert( edition );
   }
-
   return ret;
 }
 
