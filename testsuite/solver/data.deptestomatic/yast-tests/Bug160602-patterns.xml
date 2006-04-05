@@ -11,11 +11,14 @@
     </update>
   </history>
   <supplements>
-   32bit
+     <dep name='32bit'/>
   </supplements>
   <freshens>
-  ha_sles
+     <dep name='ha_sles'/>
   </freshens>
+  <provides>
+    <dep name='ha_sles-32bit' />
+  </provides>
 </pattern>
 <pattern>
   <name>ha_sles</name>
@@ -28,6 +31,9 @@
       <arch>noarch</arch>
     </update>
   </history>
+  <provides>
+    <dep name='ha_sles' />
+  </provides>
 </pattern>
 <pattern>
   <name>32bit</name>
@@ -40,6 +46,9 @@
       <arch>noarch</arch>
     </update>
   </history>
+  <provides>
+    <dep name='32bit' />
+  </provides>
 </pattern>
 
 </subchannel></channel>
