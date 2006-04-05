@@ -173,7 +173,7 @@ ResolverQueue::addItem (QueueItem_Ptr qitem)
 bool
 ResolverQueue::isInvalid ()
 {
-    return _context->isInvalid();
+    return _context->isInvalid() || _context->askUser();
 }
 
 

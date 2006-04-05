@@ -95,6 +95,7 @@ ResolverContext::ResolverContext (const ResPool & pool, const Arch & arch, Resol
     , _verifying (false)
     , _establishing (false)
     , _invalid (false)
+    , _askUser(false)
     , _architecture(arch)
     , _forceResolve(false)
     , _upgradeMode(false)
@@ -476,16 +477,16 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 	if (!found) {
 	    // generating a default problem
 	    ResolverInfo_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_REJECT_INSTALL, item, RESOLVER_INFO_PRIORITY_VERBOSE);
-	    addError (misc_info);
+	    addError (misc_info, true); // true = asking the user
 	} else {
 	    // Put the info at the end of the list, flagged as error
 	    for (ResolverInfoList::const_iterator iter = addList.begin(); iter != addList.end(); iter++) {
 		ResolverInfo_Ptr info = *iter;
-		addError (info);
+		addError (info, true);  // true = asking the user
 	    }
 	}
 	
-	return false;
+//	return false;
     }
 
     if (status.isToBeUninstalled()
@@ -1112,14 +1113,15 @@ ResolverContext::incompleteCount (void) const
 // info
 
 void
-ResolverContext::addInfo (ResolverInfo_Ptr info)
+ResolverContext::addInfo (ResolverInfo_Ptr info, bool askUser)
 {
     _XDEBUG( "ResolverContext[" << this << "]::addInfo(" << *info << ")" );
     _log.push_back (info);
 
     // _propagated_importance = false;
 
-    if (info->error ()) {
+    if (info->error ()
+	&& !askUser) { // Go forward in order to evaluate more problems
 
 	if (! _invalid) {
 	    ResolverInfo_Ptr info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_INVALID_SOLUTION, PoolItem_Ref(), RESOLVER_INFO_PRIORITY_VERBOSE);
@@ -1129,15 +1131,17 @@ ResolverContext::addInfo (ResolverInfo_Ptr info)
 
 	_invalid = true;
     }
+    if (askUser)
+	_askUser = true;
 }
 
 
 void
-ResolverContext::addError (ResolverInfo_Ptr info)
+ResolverContext::addError (ResolverInfo_Ptr info, bool askUser)
 {
     info->flagAsError ();
     WAR << "******** Error: " << *info << endl;
-    addInfo (info);
+    addInfo (info, askUser);
 }
 
 

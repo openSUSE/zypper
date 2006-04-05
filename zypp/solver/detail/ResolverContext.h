@@ -77,6 +77,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     bool _verifying;				// running 'verifySystem'
     bool _establishing;				// running 'establishSystem'
     bool _invalid;				// lead to invalid solution
+    bool _askUser;				// lead to invalid solution too cause we have to ask the user 
 
     PoolItem_Ref _last_checked_item;		// cache for {get,set}Status
     ResStatus _last_checked_status;
@@ -122,6 +123,7 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
     int otherPenalties (void) const { return _other_penalties; }
 
     bool isValid (void) const { return !_invalid; }
+    bool askUser (void) const { return _askUser; }
     bool isInvalid (void) const { return _invalid; }
 
     bool verifying (void) const { return _verifying; }
@@ -247,9 +249,9 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 //    int impossibleCount (void);
 
     // add to the report log
-    void addInfo (ResolverInfo_Ptr info);					// normal progress info
-    void addError (ResolverInfo_Ptr info);					// error progress info
-
+    void addInfo (ResolverInfo_Ptr info, bool askUser = false);	// normal progress info
+    void addError (ResolverInfo_Ptr info, bool askUser = false);// error progress info
+    
     // iterate over report log
     void foreachInfo (PoolItem_Ref item, int priority, ResolverInfoFn fn, void *data) const;
     ResolverInfoList getInfo (void) const;
