@@ -15,6 +15,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/media/Mount.h"
 #include "zypp/media/MediaDISK.h"
+#include "zypp/media/MediaManager.h"
 
 #include <sys/types.h>
 #include <sys/mount.h>
@@ -169,7 +170,34 @@ namespace zypp {
 	return;
       }
 
- 
+      MediaManager  manager;
+      MountEntries  entries( manager.getMountEntries());
+      MountEntries::const_iterator e;
+      for( e = entries.begin(); e != entries.end(); ++e)
+      {
+	bool        is_device = false;
+	std::string dev_path(Pathname(e->src).asString());
+	PathInfo    dev_info;
+
+	if( dev_path.compare(0, sizeof("/dev/")-1, "/dev/") == 0 &&
+	    dev_info(e->src) && dev_info.isBlk())
+	{
+	  is_device = true;
+	}
+
+	if( is_device && media->maj_nr == dev_info.major() &&
+	                 media->min_nr == dev_info.minor())
+	{
+	  /*
+	  if( _filesystem != "auto" && _filesystem != e->type)
+	  {
+	    ZYPP_THROW();
+	  }
+	  */
+	  media->bdir = e->dir;
+	}
+      }
+
       Mount mount;
       std::string mountpoint = attachPoint().asString();
       if( !isUseableAttachPoint(attachPoint()))
@@ -183,10 +211,18 @@ namespace zypp {
       string options = _url.getQueryParam("mountoptions");
       if(options.empty())
       {
-    	options="ro";
+    	options = "ro";
       }
 
-      mount.mount(_device,mountpoint,_filesystem,options);
+      if( !media->bdir.empty())
+      {
+	options += ",bind";
+	mount.mount(media->bdir, mountpoint, "none", options);
+      }
+      else
+      {
+      	mount.mount(_device, mountpoint, _filesystem, options);
+      }
 
       setMediaSource(media);
 

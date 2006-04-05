@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Apr  5 16:28:42 CEST 2006 - mt@suse.de
+
+- Fixed MediaDISK to use a mount -oro,bind id the disk
+  partition is already attached e.g. by the automounter.
+  Try to mount it a second time may fail (#163486).
+- rev 2944
+
+-------------------------------------------------------------------
 Wed Apr  5 15:04:31 CEST 2006 - kkaempf@suse.de
 
 - honor optional 3rd parameter to "=Loc:" key of packages (#154337)
