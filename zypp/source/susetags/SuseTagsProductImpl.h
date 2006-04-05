@@ -57,8 +57,7 @@ namespace zypp
       std::string _base_product;
       std::string _base_version;
       std::string _you_type;
-      std::string _you_path;
-      std::string _you_url;
+      std::string _shortlabel;
       std::string _vendor;
       Url _release_notes_url;
       std::map< std::string, std::list<std::string> > _arch;	// map of 'arch : "arch1 arch2 arch3"', arch1 being 'best', arch3 being 'noarch' (ususally)
