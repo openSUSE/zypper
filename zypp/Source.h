@@ -150,6 +150,11 @@ namespace zypp
     //! @name for YaST
     //@{
     Url url (void) const;
+    /**
+     * required for the parse-metadata helper of libzypp-zmd-backend
+     * which gets local files to parse but the source is really remote.
+     */
+    void setUrl( const Url & url );
     bool remote() const;
     const Pathname & path (void) const;
     //@}

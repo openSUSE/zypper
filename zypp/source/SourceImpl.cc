@@ -507,6 +507,9 @@ namespace zypp
     Url SourceImpl::url (void) const
     { return _url; }
 
+    void SourceImpl::setUrl( const Url & url )
+    { _url = url; }
+
     bool SourceImpl::remote() const
     {
       bool downloads = false;

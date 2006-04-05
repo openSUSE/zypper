@@ -169,6 +169,7 @@ namespace zypp
       virtual std::string type(void) const;
 
       Url url (void) const;
+      void setUrl( const Url & url );
       bool remote () const;
 
       const Pathname & path (void) const;
