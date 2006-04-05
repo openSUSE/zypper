@@ -91,12 +91,10 @@ namespace zypp
               prodImpl->_base_version = value;
             else if(key == "YOUTYPE")
               prodImpl->_you_type = value;
-            else if(key == "YOUPATH")
-              prodImpl->_you_path = value;
-            else if(key == "YOUURL")
-              prodImpl->_you_url = value;
             else if(key == "VENDOR")
               prodImpl->_vendor = value;
+            else if(key == "SHORTLABEL")
+              prodImpl->_shortlabel = value;
             else if(key == "RELNOTESURL")
 	    {
 		// Url class throws in case of invalid URL
