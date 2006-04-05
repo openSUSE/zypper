@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr  5 11:36:54 CEST 2006 - kkaempf@suse.de
+
+- parse all dependencies for patterns (.pat) files (#160602)
+- rev 2924
+
+-------------------------------------------------------------------
 Wed Apr  5 09:27:08 CEST 2006 - visnov@suse.cz
 
 - properly initialize autorefresh for non-remote sources (#154990) 
