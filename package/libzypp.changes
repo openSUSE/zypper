@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Apr  5 19:27:46 CEST 2006 - kkaempf@suse.de
+
+- Dont deny the "/" attach point in MediaDIR, since this is used
+  for all "file:" urls, esp. local packages.
+- rev 2962
+
+-------------------------------------------------------------------
 Wed Apr  5 18:21:58 CEST 2006 - schubi@suse.de
 
 - Bug 159673 - only one conflict solvable per page
