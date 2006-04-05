@@ -275,9 +275,21 @@ namespace zypp
 	    {
 	      collectDeps( mtag_r.values, _nvrad[Dep::OBSOLETES] );
 	    }
+	  else if ( mtag_r.name == "Rec" )
+	    {
+	      collectDeps( mtag_r.values, _nvrad[Dep::RECOMMENDS] );
+	    }
 	  else if ( mtag_r.name == "Sup" )
 	    {
 	      collectDeps( mtag_r.values, _nvrad[Dep::SUPPLEMENTS] );
+	    }
+	  else if ( mtag_r.name == "Sug" )
+	    {
+	      collectDeps( mtag_r.values, _nvrad[Dep::SUGGESTS] );
+	    }
+	  else if ( mtag_r.name == "Fre" )
+	    {
+	      collectDeps( mtag_r.values, _nvrad[Dep::FRESHENS] );
 	    }
 	  else if ( mtag_r.name == "Key" )
 	    {
