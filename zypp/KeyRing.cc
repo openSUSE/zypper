@@ -235,7 +235,8 @@ namespace zypp
         PublicKey key = readPublicKey(unKey.path());
         MIL << "Key " << id << " " << key.name << " is not trusted" << std::endl;
         // ok the key is not trusted, ask the user to trust it or not
-        if ( report->askUserToTrustKey(key.id, key.name) )
+#warning We need the key details passed to the callback
+        if ( report->askUserToTrustKey(key.id, key.name, "") )
         {
           MIL << "User wants to trust key " << id << " " << key.name << std::endl;
           //dumpFile(unKey.path());
@@ -273,7 +274,7 @@ namespace zypp
       else
       {
         // unknown key...
-        if ( report->askUserToAcceptUnknownKey( id, "Unkown Key" ) )
+        if ( report->askUserToAcceptUnknownKey( file, id, "Unknown Key" ) )
         {
           MIL << "User wants to accept unknown key " << id << std::endl;
           return true;
