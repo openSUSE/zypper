@@ -2,6 +2,7 @@
 Wed Apr  5 11:36:54 CEST 2006 - kkaempf@suse.de
 
 - parse all dependencies for patterns (.pat) files (#160602)
+- drop YOUPATH and YOUURL from content file.
 - rev 2924
 
 -------------------------------------------------------------------
