@@ -168,7 +168,9 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    }
 	}
 	if (iter == requires.end()) {					// all are met
-	    if (_item->kind() == ResTraits<Package>::kind) {
+	    if (_item->kind() == ResTraits<Package>::kind
+                || _item->kind() == ResTraits<Pattern>::kind
+                || _item->kind() == ResTraits<Selection>::kind) {
 		if (status.staysUninstalled()) {
 		    _DEBUG("Uninstalled " << _item << " has all requirements -> install");
 		    QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), _item );
