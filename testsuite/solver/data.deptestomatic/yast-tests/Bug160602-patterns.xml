@@ -1,0 +1,45 @@
+<channel><subchannel>
+<pattern>
+  <name>ha_sles-32bit</name>
+  <summary>ha_sles-32bit</summary>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.1</version>
+      <release>35</release>
+      <arch>noarch</arch>
+    </update>
+  </history>
+  <supplements>
+   32bit
+  </supplements>
+  <freshens>
+  ha_sles
+  </freshens>
+</pattern>
+<pattern>
+  <name>ha_sles</name>
+  <summary>ha_sles</summary>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.1</version>
+      <release>35</release>
+      <arch>noarch</arch>
+    </update>
+  </history>
+</pattern>
+<pattern>
+  <name>32bit</name>
+  <summary>32bit</summary>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>10.1</version>
+      <release>35</release>
+      <arch>noarch</arch>
+    </update>
+  </history>
+</pattern>
+
+</subchannel></channel>
