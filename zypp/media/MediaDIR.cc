@@ -35,8 +35,9 @@ namespace zypp {
     //	METHOD NAME : MediaDIR::MediaDIR
     //	METHOD TYPE : Constructor
     //
-    //	DESCRIPTION : Attach point is always '/', as files are not copied.
-    //                    Thus attach_point_hint_r is ignored.
+    //	DESCRIPTION : Attach point is always url_r.getPathName(),
+    //                as files are not copied.
+    //                Thus attach_point_hint_r is ignored.
     //
     MediaDIR::MediaDIR( const Url &      url_r,
     			const Pathname & /*attach_point_hint_r*/ )
