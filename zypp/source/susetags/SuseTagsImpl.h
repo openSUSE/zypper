@@ -70,7 +70,7 @@ namespace zypp
         virtual const std::list<Pathname> publicKeys();
         virtual std::string unique_id (void) const;
         
-        Pathname sourceDir( const NVRAD& nvrad );
+        Pathname sourceDir( const std::string & dir );
         virtual void storeMetadata(const Pathname & cache_dir_r);
         
         /**

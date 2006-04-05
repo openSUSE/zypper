@@ -316,9 +316,9 @@ namespace zypp
       SuseTagsImpl::~SuseTagsImpl()
       {}
 
-      Pathname SuseTagsImpl::sourceDir( const NVRAD& nvrad )
+      Pathname SuseTagsImpl::sourceDir( const std::string & dir )
       {
-        return Pathname( _data_dir + Pathname(nvrad.arch.asString()) + "/");
+        return Pathname( _data_dir + Pathname( dir ) + "/");
       }
 
       media::MediaVerifierRef SuseTagsImpl::verifier(media::MediaNr media_nr)

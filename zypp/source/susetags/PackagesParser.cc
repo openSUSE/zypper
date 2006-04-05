@@ -238,7 +238,8 @@ namespace zypp
 	    if ( howmany >= 2 )
 	    {
 	      _pkgImpl->_media_number = str::strtonum<unsigned int>(words[0]);
-	      _pkgImpl->_location = _sourceImpl->sourceDir(_nvrad) + words[1];
+	      // if a 3rd value is given, use it as the directory specifier, else default to the architecture
+	      _pkgImpl->_location = _sourceImpl->sourceDir( (howmany > 2) ? words[2] : _nvrad.arch.asString() ) + words[1];
 	    }
 	    else
 	    {
