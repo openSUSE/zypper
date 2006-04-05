@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Apr  5 18:21:58 CEST 2006 - schubi@suse.de
+
+- Bug 159673 - only one conflict solvable per page
+
+-------------------------------------------------------------------
 Wed Apr  5 18:01:37 CEST 2006 - kkaempf@suse.de
 
 - parse all dependencies of 'packages' file (#163773)
