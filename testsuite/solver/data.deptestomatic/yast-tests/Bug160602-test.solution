@@ -1,0 +1,8 @@
+>!> Installing 32bit from channel patterns
+>!> Installing ha_sles from channel patterns
+>!> No problems so far
+>!> Solution #1:
+>!> install pattern:32bit-10.1-35.noarch[patterns]
+>!> install pattern:ha_sles-10.1-35.noarch[patterns]
+>!> install pattern:ha_sles-32bit-10.1-35.noarch[patterns]
+>!> installs=3, upgrades=0, uninstalls=0
