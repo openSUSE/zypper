@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr  5 16:44:01 CEST 2006 - dmacvicar@suse.de
+
+- implement rpm keyring / zypp tmp keyring two-way syncronization at rpm
+target init. (dmacvicar)
+
+-------------------------------------------------------------------
 Wed Apr  5 16:44:08 CEST 2006 - kkaempf@suse.de
 
 - add Source::setUrl() for zmd backend helper.
@@ -32,6 +38,7 @@ Wed Apr  5 11:36:54 CEST 2006 - kkaempf@suse.de
 - rev 2924
 
 -------------------------------------------------------------------
+>>>>>>> .r2948
 Wed Apr  5 09:27:08 CEST 2006 - visnov@suse.cz
 
 - properly initialize autorefresh for non-remote sources (#154990) 
