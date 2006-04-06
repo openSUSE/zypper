@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<test>
+<setup>
+  <channel name="packages" file="beta8-packages.xml"/>
+  <channel name="selections" file="beta8-selections.xml"/>
+  <locale name="pt_BR"/>
+</setup>
+
+<!-- en should be taken for fallback; NOT pt-->
+<trial>
+  <install channel="selections" kind="selection" name="default"/>
+  <reportproblems/>
+</trial>
+
+</test>
