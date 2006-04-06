@@ -20,6 +20,7 @@
 #include <zypp/parser/LibXMLHelper.h>
 #include <zypp/base/Logger.h>
 #include <zypp/parser/yum/schemanames.h>
+#include <zypp/ZYppFactory.h>
 
 using namespace std;
 namespace zypp {
@@ -31,15 +32,18 @@ namespace zypp {
       
       YUMPatchParser::YUMPatchParser(istream &is, const string& baseUrl)
       : XMLNodeIterator<YUMPatchData_Ptr>(is, baseUrl,PATCHSCHEMA)
+	, _zypp_architecture( getZYpp()->architecture() )
       {
 	fetchNext();
       }
       
       YUMPatchParser::YUMPatchParser()
+	: _zypp_architecture( getZYpp()->architecture() )
       { }
       
       YUMPatchParser::YUMPatchParser(YUMPatchData_Ptr& entry)
       : XMLNodeIterator<YUMPatchData_Ptr>(entry)
+	, _zypp_architecture( getZYpp()->architecture() )
       { }
       
       
@@ -79,6 +83,18 @@ namespace zypp {
 	    }
 	    else if (name == "arch") {
 		patchPtr->arch = _helper.content(child);
+	      try {
+		if (!Arch(patchPtr->arch).compatibleWith( _zypp_architecture )) {
+		    patchPtr = NULL;			// skip <patch>, incompatible architecture
+		    break;
+		}
+	      }
+	      catch( const Exception & excpt_r ) {
+		ZYPP_CAUGHT( excpt_r );
+		DBG << "Skipping malformed " << patchPtr->arch << endl;
+		patchPtr = NULL;
+		break;
+	      }
 	    }
 	    else if (name == "summary") {
 	      patchPtr->summary.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
@@ -156,15 +172,15 @@ namespace zypp {
 XXX << "parseAtomsNode(" << name << ")" << endl;
 	    if (name == "package")
 	    {
-			parsePackageNode (dataPtr, child);
+		parsePackageNode( dataPtr, child );
 	    }
 	    else if (name == "script")
 	    {
-			parseScriptNode (dataPtr, child);
+		parseScriptNode( dataPtr, child );
 	    }
 	    else if (name == "message")
 	    {
-			parseMessageNode (dataPtr, child);
+		parseMessageNode( dataPtr, child );
 	    }
 	    else {
 	      WAR << "YUM <atoms> contains the unknown element <" << name << "> "
@@ -409,7 +425,7 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	    string name = _helper.name(child);
 XXX << "parsePackageNode(" << name << ")" << endl;
 	    if (name == "name") {
-			package->name = _helper.content(child);
+		package->name = _helper.content(child);
 	    }
 	    else if (name == "arch") {
 	      package->arch = _helper.content(child);
@@ -449,11 +465,11 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	      package->location = _helper.attribute(child,"href");
 	    }
 	    else if (name == "format") {
-			parseFormatNode (&*package, child);
+		parseFormatNode (&*package, child);
 	    }
 	    else if (name == "pkgfiles")
 	    {
-			parsePkgFilesNode (&*package, child);
+		parsePkgFilesNode (&*package, child);
 	    }
 	    else if (name == "license_to_confirm")
 	    {
