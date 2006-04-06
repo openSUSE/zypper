@@ -10,7 +10,7 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+#include <map>
 
 #include "zypp/Locale.h"
 
@@ -20,6 +20,9 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  typedef std::map<std::string, std::string> OtherDefaultLanguage;
+  static OtherDefaultLanguage otherDefaultLanguage;
+    
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Locale::Impl
@@ -79,6 +82,14 @@ namespace zypp
 
     Locale fallback() const
     {
+      if (otherDefaultLanguage.size() == 0) {
+	  // initial inserting map
+	  otherDefaultLanguage["pt_BR"] = "en";
+      }
+
+      if (otherDefaultLanguage.find(code()) != otherDefaultLanguage.end())
+	  return LanguageCode(otherDefaultLanguage[code()]);
+	    
       if ( _country.hasCode() )
         return _language;
 
