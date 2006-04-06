@@ -131,11 +131,11 @@ namespace zypp
        */
       std::list<SourceData> storedSources() const;
       /**
-       * Query for installed Sources
+       * Add a new installed source
        */
       void storeSource(const SourceData &data);
       /**
-       * Query for installed Sources
+       * Delete an installed source
        */
       void deleteSource(const std::string &alias);
 
