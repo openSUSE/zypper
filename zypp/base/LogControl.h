@@ -105,6 +105,15 @@ namespace zypp
         ~TmpExcessive();
       };
 
+      /** Exchange LineWriter for the lifetime of this object. */
+      struct TmpLineWriter
+      {
+        TmpLineWriter( const shared_ptr<LineWriter> & writer_r = shared_ptr<LineWriter>() );
+        ~TmpLineWriter();
+      private:
+        shared_ptr<LineWriter> _writer;
+      };
+
     private:
       /** Default ctor: Singleton */
       LogControl()

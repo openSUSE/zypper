@@ -214,6 +214,9 @@ namespace zypp
         void setLineWriter( const shared_ptr<LogControl::LineWriter> & writer_r )
         { _lineWriter = writer_r; }
 
+        shared_ptr<LogControl::LineWriter> getLineWriter() const
+        { return _lineWriter; }
+
         /** Assert \a _lineFormater is not NULL. */
         void setLineFormater( const shared_ptr<LogControl::LineFormater> & format_r )
         {
@@ -381,6 +384,16 @@ namespace zypp
     LogControl::TmpExcessive::~TmpExcessive()
     { LogControlImpl::instance.excessive( false );  }
 
+    ///////////////////////////////////////////////////////////////////
+    //
+    // LogControl::TmpLineWriter
+    //
+    ///////////////////////////////////////////////////////////////////
+    LogControl::TmpLineWriter::TmpLineWriter( const shared_ptr<LineWriter> & writer_r )
+    : _writer( LogControlImpl::instance.getLineWriter() )
+    { LogControlImpl::instance.setLineWriter( writer_r ); }
+    LogControl::TmpLineWriter::~TmpLineWriter()
+    { LogControlImpl::instance.setLineWriter( _writer ); }
     /******************************************************************
      **
      **	FUNCTION NAME : operator<<
