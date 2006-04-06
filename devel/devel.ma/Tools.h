@@ -52,7 +52,10 @@ inline Source_Ref createSource( const Url & url_r )
       return Source_Ref::noSource;
     }
   x.start( "parseSource: " + url_r.asString() );
-  ret.resolvables();
+  {
+    zypp::base::LogControl::TmpLineWriter shutUp;
+    ret.resolvables();
+  }
   x.stop();
   MIL << "Content " << ret << "{" << endl;
   rstats( ret.resolvables() );

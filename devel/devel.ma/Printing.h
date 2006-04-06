@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-#include "zypp/base/Logger.h"
+#include "zypp/base/LogControl.h"
 #include "zypp/base/LogTools.h"
 #include "zypp/base/PtrTypes.h"
 #include <zypp/base/String.h>
@@ -17,7 +17,7 @@
 template<class _Tp>
   struct PrintOn : public std::unary_function<_Tp, bool>
   {
-    bool operator()( const _Tp & obj )
+    bool operator()( const _Tp & obj ) const
     {
       if ( _leadNL )
         _str << std::endl << _prfx << obj;

@@ -24,6 +24,7 @@
 #include "zypp/ResPool.h"
 #include "zypp/ResFilters.h"
 #include "zypp/CapFilters.h"
+#include "zypp/CapFactory.h"
 #include "zypp/Package.h"
 #include "zypp/Language.h"
 #include "zypp/VendorAttr.h"
@@ -39,98 +40,11 @@
 
 using namespace std;
 using namespace zypp;
-using namespace zypp::ui;
-using namespace zypp::functor;
-using namespace zypp::debug;
+using namespace zypp::base;
 
 ///////////////////////////////////////////////////////////////////
-
-static const Pathname sysRoot( "/Local/ROOT" );
 static const Url      instSrc( "dir:/Local/SLES10" );
-//static const Url      instSrc( "dir:/Local/FACTORY" );
-
 ///////////////////////////////////////////////////////////////////
-
-template<class _Tp>
-  ostream & operator<<( ostream & str, const set<_Tp> & obj )
-  {
-    str << "Size(" << obj.size() << ") {";
-    std::for_each( obj.begin(), obj.end(), PrintOn<_Tp>(str,"  ",true) );
-    return str << endl << "}";
-  }
-
-template<class _Tp>
-  ostream & operator<<( ostream & str, const list<_Tp> & obj )
-  {
-    str << "Size(" << obj.size() << ") {";
-    std::for_each( obj.begin(), obj.end(), PrintOn<_Tp>(str,"  ",true) );
-    return str << endl << "}";
-  }
-
-///////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////
-
-struct XByInstalled : public std::unary_function<ui::Selectable::constPtr,bool>
-{
-  bool operator()( const ui::Selectable::constPtr & obj ) const
-  {
-    return obj->hasInstalledObj();
-  }
-};
-
-///////////////////////////////////////////////////////////////////
-namespace zypp
-{ /////////////////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////////////////////
-  namespace resfilter
-  { /////////////////////////////////////////////////////////////////
-    /** Select ResObject by kind. */
-    struct Mtest : public PoolItemFilterFunctor
-    {
-      bool operator()( const PoolItem & p ) const
-      {
-        p.status().setTransact(true, ResStatus::USER );
-        return true;
-      }
-    };
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace resfilter
-  ///////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////
-} // namespace zypp
-///////////////////////////////////////////////////////////////////
-
-template<>
-  struct PrintPtr<ui::Selectable::Ptr> : public std::unary_function<ui::Selectable::Ptr, bool>
-  {
-    bool operator()( const ui::Selectable::Ptr & obj )
-    {
-      if ( obj ) {
-        MIL << obj->modifiedBy() << " " << obj->hasLicenceConfirmed() << endl;
-        obj->set_status( ui::S_Install );
-        obj->setLicenceConfirmed( true );
-        MIL << "a " << obj->modifiedBy() << " " << obj->hasLicenceConfirmed() << endl;
-        obj->set_status( ui::S_Del );
-        obj->setLicenceConfirmed( false );
-        MIL << "b " << obj->modifiedBy() << " " << obj->hasLicenceConfirmed() << endl;
-
-#if 0
-        USR << *obj << std::endl;
-        std::for_each( obj->availableBegin(), obj->availableEnd(),
-                       PrintPtr<ResObject::constPtr>() );
-        if ( obj->availableBegin() != obj->availableEnd() )
-          SEC << PrintPtr<ResObject::constPtr>()(*obj->availableBegin() )
-              << " " << asKind<Package>(*obj->availableBegin())->vendor() << endl;
-#endif
-      }
-      else
-        USR << "(NULL)" << std::endl;
-      return true;
-    }
-  };
-
 
 /******************************************************************
 **
@@ -139,10 +53,13 @@ template<>
 */
 int main( int argc, char * argv[] )
 {
-  //zypp::base::LogControl::instance().logfile( "xxx" );
-  INT << "===[START]==========================================" << endl;
-
-  VendorAttr::instance();
+  Measure x;
+  Source_Ref src( SourceFactory().createFrom( Url("dir:/Local/SLES10"),
+                                              "/",
+                                              Date::now().asSeconds() ) );
+  src.resolvables();
+  MIL << src.resolvables() << endl;
+  MIL << CapFactory() << endl;
 
   INT << "===[END]============================================" << endl << endl;
   return 0;

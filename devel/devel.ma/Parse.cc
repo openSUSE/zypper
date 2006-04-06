@@ -59,6 +59,29 @@ namespace container
 
 ///////////////////////////////////////////////////////////////////
 
+template<class _Condition>
+  struct SetTrue
+  {
+    SetTrue( _Condition cond_r )
+    : _cond( cond_r )
+    {}
+
+    template<class _Tp>
+      bool operator()( _Tp t ) const
+      {
+        _cond( t );
+        return true;
+      }
+
+    _Condition _cond;
+  };
+
+template<class _Condition>
+  inline SetTrue<_Condition> setTrue_c( _Condition cond_r )
+  {
+    return SetTrue<_Condition>( cond_r );
+  }
+
 template <class _Iterator, class _Filter, class _Function>
   inline _Function for_each_if( _Iterator begin_r, _Iterator end_r,
                                 _Filter filter_r,
@@ -74,6 +97,37 @@ template <class _Iterator, class _Filter, class _Function>
     return fnc_r;
   }
 
+struct PrintPoolItem
+{
+  void operator()( const PoolItem & pi ) const
+  {
+    USR << "S" << pi->source().numericId()
+        << "/M" << mediaId(pi)
+        << " " << pi << endl;
+  }
+  unsigned mediaId( const PoolItem & pi ) const
+  {
+    Package::constPtr pkg( asKind<Package>(pi.resolvable()) );
+    if ( pkg )
+      return pkg->mediaId();
+    return 0;
+  }
+};
+
+template <class _Iterator>
+  std::ostream & vdumpPoolStats( std::ostream & str,
+                                 _Iterator begin_r, _Iterator end_r )
+  {
+    pool::PoolStats stats;
+    std::for_each( begin_r, end_r,
+
+                   functor::chain( setTrue_c(PrintPoolItem()),
+                                   setTrue_c(functor::functorRef<void,ResObject::constPtr>(stats)) )
+
+                 );
+    return str << stats;
+  }
+
 struct PoolItemSelect
 {
   void operator()( const PoolItem & pi ) const
@@ -83,13 +137,113 @@ struct PoolItemSelect
   }
 };
 
-struct PrintPoolItem
+///////////////////////////////////////////////////////////////////
+typedef std::list<PoolItem> PoolItemList;
+typedef std::set<PoolItem>  PoolItemSet;
+#include "zypp/solver/detail/InstallOrder.h"
+using zypp::solver::detail::InstallOrder;
+#include "Iorder.h"
+
+///////////////////////////////////////////////////////////////////
+namespace zypp
 {
-  void operator()( const PoolItem & pi ) const
+  struct CollectTransacting
   {
-    USR << pi->source().numericId() << " " << pi << endl;
+    typedef std::list<PoolItem> PoolItemList;
+
+    void operator()( const PoolItem & pi )
+    {
+      if ( pi.status().isToBeInstalled() )
+        {
+          _toInstall.insert( pi );
+        }
+      else if ( pi.status().isToBeUninstalled() )
+        {
+          if ( pi.status().isToBeUninstalledDueToObsolete()
+               || pi.status().isToBeUninstalledDueToUpgrade() )
+            _skipToDelete.insert( pi );
+          else
+            _toDelete.insert( pi );
+        }
+    }
+
+    PoolItemSet _toInstall;
+    PoolItemSet _toDelete;
+    PoolItemSet _skipToDelete;
+  };
+
+  std::ostream & operator<<( std::ostream & str, const CollectTransacting & obj )
+  {
+    str << "CollectTransacting:" << endl;
+    dumpPoolStats( str << " toInstall: ",
+                   obj._toInstall.begin(), obj._toInstall.end() ) << endl;
+    dumpPoolStats( str << " toDelete: ",
+                   obj._toDelete.begin(), obj._toDelete.end() ) << endl;
+    dumpPoolStats( str << " skipToDelete: ",
+                   obj._skipToDelete.begin(), obj._skipToDelete.end() ) << endl;
+    return str;
   }
-};
+}
+
+///////////////////////////////////////////////////////////////////
+
+template<class _InstIterator, class _DelIterator, class _OutputIterator>
+void strip_obsoleted_to_delete( _InstIterator instBegin_r, _InstIterator instEnd_r,
+                                _DelIterator  delBegin_r,  _DelIterator  delEnd_r,
+                                _OutputIterator skip_r )
+  {
+    if ( instBegin_r == instEnd_r
+         || delBegin_r == delEnd_r )
+    return; // ---> nothing to do
+
+    // build obsoletes from inst
+    CapSet obsoletes;
+    for ( /**/; instBegin_r != instEnd_r; ++instBegin_r )
+    {
+      xxxxx
+      PoolItem_Ref item( *it );
+      obsoletes.insert( item->dep(Dep::OBSOLETES).begin(), item->dep(Dep::OBSOLETES).end() );
+    }
+  if ( obsoletes.size() == 0 )
+    return; // ---> nothing to do
+
+  // match them... ;(
+  PoolItemList undelayed;
+  // forall applDelete Packages...
+  for ( PoolItemList::iterator it = deleteList_r.begin();
+	it != deleteList_r.end(); ++it )
+    {
+      PoolItem_Ref ipkg( *it );
+      bool delayPkg = false;
+      // ...check whether an obsoletes....
+      for ( CapSet::iterator obs = obsoletes.begin();
+            ! delayPkg && obs != obsoletes.end(); ++obs )
+        {
+          // ...matches anything provided by the package?
+          for ( CapSet::const_iterator prov = ipkg->dep(Dep::PROVIDES).begin();
+                prov != ipkg->dep(Dep::PROVIDES).end(); ++prov )
+            {
+              if ( obs->matches( *prov ) == CapMatch::yes )
+                {
+                  // if so, delay package deletion
+                  DBG << "Ignore appl_delete (should be obsoleted): " << ipkg << endl;
+                  delayPkg = true;
+                  ipkg.status().setTransact( false, ResStatus::USER );
+                  break;
+                }
+            }
+        }
+      if ( ! delayPkg ) {
+        DBG << "undelayed " << ipkg << endl;
+        undelayed.push_back( ipkg );
+      }
+    }
+  // Puhh...
+  deleteList_r.swap( undelayed );
+
+}
+
+///////////////////////////////////////////////////////////////////
 
 /******************************************************************
 **
@@ -124,9 +278,8 @@ int main( int argc, char * argv[] )
     INT << "Added source: " << pool << endl;
   }
 
-
-  Source_Ref src1( createSource( "dir:/mounts/machcd2/CDs/SUSE-Linux-10.1-Build_830-Addon-BiArch/CD1" ) );
-  Source_Ref src2( createSource( "dir:/mounts/machcd2/CDs/SUSE-Linux-10.1-Build_830-i386/CD1" ) );
+  Source_Ref src1( createSource( "dir:/Local/SUSE-Linux-10.1-Build_830-Addon-BiArch/CD1" ) );
+  Source_Ref src2( createSource( "dir:/Local/SUSE-Linux-10.1-Build_830-i386/CD1" ) );
   INT << "Pool: " << pool << endl;
   getZYpp()->addResolvables( src1.resolvables() );
   INT << "Added source1: " << pool << endl;
@@ -140,17 +293,39 @@ int main( int argc, char * argv[] )
       PoolItem def( * s.availableBegin() );
       def.status().setTransact( true, ResStatus::USER );
     }
-  MIL << "est " << getZYpp()->resolver()->establishPool() << endl;
-  MIL << "slv " << getZYpp()->resolver()->resolvePool() << endl;
+
+  bool eres, rres;
+  {
+    zypp::base::LogControl::TmpLineWriter shutUp;
+    eres = getZYpp()->resolver()->establishPool();
+    rres = getZYpp()->resolver()->resolvePool();
+  }
+  MIL << "est " << eres << " slv " << rres << endl;
 
 
   for_each( pool.byKindBegin<Package>(), pool.byKindEnd<Package>(),
             PoolItemSelect() );
   INT << "FIN: " << pool << endl;
+  vdumpPoolStats( INT,
+                  make_filter_begin<resfilter::ByTransact>(pool),
+                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
-  for_each_if( pool.begin(), pool.end(),
-               resfilter::ByTransact(),
-               PrintPoolItem() );
+  CollectTransacting toTransact;
+  std::for_each( make_filter_begin<resfilter::ByTransact>(pool),
+                 make_filter_end<resfilter::ByTransact>(pool),
+                 functor::functorRef<void,PoolItem>(toTransact) );
+  MIL << toTransact;
+
+  if ( 0 )
+    {
+      PoolItemList errors_r;
+      PoolItemList remaining_r;
+      PoolItemList srcremaining_r;
+      commit( pool, 0, errors_r, remaining_r, srcremaining_r, false );
+
+      dumpPoolStats( WAR << "remaining_r ", remaining_r.begin(), remaining_r.end() ) << endl;
+      dumpPoolStats( WAR << "srcremaining_r ", srcremaining_r.begin(), srcremaining_r.end() ) << endl;
+    }
 
 #if 0
   Source_Ref src( *SourceManager::sourceManager()->Source_begin() );
@@ -170,6 +345,7 @@ int main( int argc, char * argv[] )
 
   rpm.closeDatabase();
 #endif
+
   INT << "===[END]============================================" << endl << endl;
   return 0;
 }
