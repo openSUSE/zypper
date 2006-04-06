@@ -64,6 +64,7 @@ namespace zypp
         }
 
         std::string buffer;
+	volatile_content = false;
         while(file && !file.eof())
         {
           getline(file, buffer);
@@ -148,6 +149,8 @@ namespace zypp
               parseFileCheckSum( key, value, prodImpl->_descr_files_checksums);
             else if(key == "KEY")
               parseFileCheckSum( key, value, prodImpl->_signing_keys);
+	    else if(key == "VOLATILE_CONTENT")
+	      volatile_content = true;
             else
               DBG << "Unknown key [" << key << "] with value [" << value << "]" << std::endl;
           }

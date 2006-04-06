@@ -119,6 +119,17 @@ namespace zypp {
 	 */
 	static
 	bool        downloads(const Url &url);
+	/**
+	 * Hint whether the media can provide volatile contents
+	 *
+	 * @note This hint is based on the \p url scheme
+	 * only and does not imply, that the URL is valid.
+	 *
+	 * @param url The media URL to check.
+	 * @return True, if the files are downloaded.
+	 */
+	static
+	bool        canBeVolatile(const Url &url);
 
 	/**
 	 * Used Protocol if media is opened, otherwise 'unknown'.

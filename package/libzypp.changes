@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Apr  6 16:37:49 CEST 2006 - jsrain@suse.de
+
+- fixed setting autorefresh flag for installation sources
+
+-------------------------------------------------------------------
 Thu Apr  6 15:53:02 CEST 2006 - kkaempf@suse.de
 
 - drop patches with incompatible architecture.

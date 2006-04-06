@@ -150,6 +150,14 @@ MediaAccess::downloads(const Url &url)
     return (scheme == "ftp" || scheme == "http" || scheme == "https");
 }
 
+// STATIC
+bool
+MediaAccess::canBeVolatile(const Url &url)
+{
+    std::string scheme( url.getScheme());
+    return ! (scheme == "cd" || scheme == "dvd");
+}
+
 // Type of media if open, otherwise NONE.
 std::string
 MediaAccess::protocol() const

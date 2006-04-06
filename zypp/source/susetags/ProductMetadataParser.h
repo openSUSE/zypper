@@ -74,6 +74,9 @@ namespace zypp
          */
         void parseFileCheckSum( const std::string &key, const std::string &value, std::map<std::string, CheckSum> &container);
 
+
+	bool volatile_content;
+
       };
       ///////////////////////////////////////////////////////////////////
 

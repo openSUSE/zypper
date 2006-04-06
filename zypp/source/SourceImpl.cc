@@ -65,8 +65,8 @@ namespace zypp
       _cache_dir = cache_dir_r;
       _subscribed = true;
 
-      // for remote sources we enable autorefresh by default
-      _autorefresh = media::MediaAccess::downloads( _url );
+      // for sources which are neither CD nor DVD we enable autorefresh by default
+      _autorefresh = media::MediaAccess::canBeVolatile( _url );
 
       try
         {
