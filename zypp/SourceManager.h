@@ -31,6 +31,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   DEFINE_PTR_TYPE(SourceManager)
+
   /** \todo move to separate header file.*/
   class FailedSourcesRestoreException : public Exception
   {
@@ -39,18 +40,24 @@ namespace zypp
       : Exception(N_("Unable to restore all sources."))
       , _summary()
       , _translatedSummary()
+      , _aliases()
       {}
       virtual ~FailedSourcesRestoreException() throw() {};
 
-      void append( std::string source, const Exception& problem );
+      void append( std::string source, std::string alias, const Exception& problem );
       bool empty() const;
+      
+      std::set<std::string> aliases() const;
+      
     protected:
       virtual std::ostream & dumpOn( std::ostream & str ) const;
       virtual std::ostream & dumpOnTranslated( std::ostream & str ) const;
     private:
       std::string _summary;
       std::string _translatedSummary;
+      std::set<std::string> _aliases;
   };
+
   /** \todo move to separate header file.*/
   class SourcesAlreadyRestoredException : public Exception
   {

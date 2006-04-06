@@ -336,6 +336,7 @@ namespace zypp
     {
 	MIL << "Deleting source " << it->second << " from persistent store" << endl;
 	store.deleteSource( it->second.alias() );
+	filesystem::recursive_rmdir( it->second.cacheDir() );
     }
 
     _deleted_sources.clear();
@@ -412,7 +413,7 @@ namespace zypp
 
 	    if( id == 0)
 	    {
-		report.append( it->url + it->product_dir, expt );
+		report.append( it->url + it->product_dir, it->alias, expt );
 		continue;
 	    }
 	}
@@ -459,6 +460,7 @@ namespace zypp
 	store.storeSource( *it );
     }
   }
+
 
   /******************************************************************
   **
@@ -515,10 +517,16 @@ namespace zypp
 	return _summary.empty();
   }
 
-  void FailedSourcesRestoreException::append( std::string source, const Exception& expt)
+  std::set<std::string> FailedSourcesRestoreException::aliases () const
+  {
+	return _aliases;
+  }
+
+  void FailedSourcesRestoreException::append( std::string source, std::string alias, const Exception& expt)
   {
 	_summary = _summary + "\n" + source + ": " + expt.asString();
 	_translatedSummary = _translatedSummary + "\n" + source + ": " + expt.asUserString();
+	_aliases.insert( alias );
   }
 
   /////////////////////////////////////////////////////////////////
