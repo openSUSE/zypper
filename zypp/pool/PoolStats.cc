@@ -30,7 +30,7 @@ namespace zypp
     */
     std::ostream & operator<<( std::ostream & str, const PoolStats & obj )
     {
-      str << "Total: " << obj._total;
+      str << "ResObjects: " << obj._total;
       for( PoolStats::KindMap::const_iterator it = obj._perKind.begin(); it != obj._perKind.end(); ++it )
         {
           str << endl << "  " << it->first << ":\t" << it->second;

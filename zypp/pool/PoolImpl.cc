@@ -205,9 +205,8 @@ namespace zypp
     */
     std::ostream & operator<<( std::ostream & str, const PoolImpl & obj )
     {
-      PoolStats stats;
-      std::for_each( obj.begin(), obj.end(), functor::functorRef<void,ResObject::constPtr>(stats) );
-      return str << "ResPool " << stats;
+      return dumpPoolStats( str << "ResPool ",
+                            obj.begin(), obj.end() );
     }
 
     /******************************************************************

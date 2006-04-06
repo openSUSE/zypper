@@ -38,17 +38,17 @@ namespace zypp
    * \encode
    * A comma separated list enclosed in \c () would be
    * \code
-   * printRange( begin, end, stream, "(", "", ", ", "", ")" );
+   * dumpRange( stream, begin, end, "(", "", ", ", "", ")" );
    * \encode
   */
   template<class _Iterator>
-    std::ostream & printRange( _Iterator begin, _Iterator end,
-                               std::ostream & str,
-                               const std::string & intro = "{",
-                               const std::string & pfx   = "\n  ",
-                               const std::string & sep   = "\n  ",
-                               const std::string & sfx   = "\n",
-                               const std::string & extro = "}" )
+    std::ostream & dumpRange( std::ostream & str,
+                              _Iterator begin, _Iterator end,
+                              const std::string & intro = "{",
+                              const std::string & pfx   = "\n  ",
+                              const std::string & sep   = "\n  ",
+                              const std::string & sfx   = "\n",
+                              const std::string & extro = "}" )
     {
       str << intro;
       if ( begin != end )
@@ -63,15 +63,15 @@ namespace zypp
 
   template<class _Tp>
     std::ostream & operator<<( std::ostream & str, const std::vector<_Tp> & obj )
-    { return printRange( obj.begin(), obj.end(), str ); }
+    { return dumpRange( str, obj.begin(), obj.end() ); }
 
   template<class _Tp>
     std::ostream & operator<<( std::ostream & str, const std::set<_Tp> & obj )
-    { return printRange( obj.begin(), obj.end(), str ); }
+    { return dumpRange( str, obj.begin(), obj.end() ); }
 
   template<class _Tp>
     std::ostream & operator<<( std::ostream & str, const std::list<_Tp> & obj )
-    { return printRange( obj.begin(), obj.end(), str ); }
+    { return dumpRange( str, obj.begin(), obj.end() ); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
