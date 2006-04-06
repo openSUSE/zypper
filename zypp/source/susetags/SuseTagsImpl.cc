@@ -86,14 +86,24 @@ namespace zypp
         Pathname descr_src = provideDirTree(_orig_descr_dir);
         
         Pathname media_src = provideDirTree("media.1");
-        Pathname content_src = provideFile("/content");
-        Pathname content_src_asc = provideFile("/content.asc");
-        Pathname content_src_key = provideFile("/content.key");
-
+        Pathname content_src = provideFile( _path + "content"); 
+        
         // get the list of cache keys
         std::list<std::string> files;
-        dirInfo( media_num, files, "/");
+        dirInfo( media_num, files, _path);
                 
+        if (0 != assert_dir((cache_dir_r + "DATA"), 0700))
+        {
+          ZYPP_THROW(Exception("Cannot create cache DATA directory: " + (cache_dir_r + "DATA").asString()));
+        }
+        else
+        {
+          filesystem::copy_dir(descr_src, cache_dir_r + "DATA");
+          MIL << "cached descr directory" << std::endl;
+          filesystem::copy(content_src, cache_dir_r + "DATA/content");
+          MIL << "cached content file" << std::endl;
+        }
+        
         if (0 != assert_dir((cache_dir_r + "PUBLICKEYS"), 0700))
         {
           ZYPP_THROW(Exception("Cannot create cache PUBLICKEYS directory: " + (cache_dir_r + "PUBLICKEYS").asString()));
@@ -106,28 +116,18 @@ namespace zypp
             std::string filename = *it;
             if ( filename.substr(0, 10) == "gpg-pubkey" )
             {
-              Pathname key_src = provideFile("/" + filename);
+              Pathname key_src = provideFile(_path + filename);
               MIL << "Trying to cache " << key_src << std::endl;
               filesystem::copy(key_src, cache_dir_r + "PUBLICKEYS/" + filename);
               MIL << "cached " << filename << std::endl;
             }
+            else if( (filename == "content.asc") || (filename == "content.key"))
+            {
+              Pathname src_data = provideFile(_path + filename);
+              filesystem::copy( src_data, cache_dir_r + "DATA/" + filename);
+              MIL << "cached " << filename << std::endl;
+            }
           }
-        }
-
-        if (0 != assert_dir((cache_dir_r + "DATA"), 0700))
-        {
-          ZYPP_THROW(Exception("Cannot create cache DATA directory: " + (cache_dir_r + "DATA").asString()));
-        }
-        else
-        {
-          filesystem::copy_dir(descr_src, cache_dir_r + "DATA");
-          MIL << "cached descr directory" << std::endl;
-          filesystem::copy(content_src, cache_dir_r + "DATA/content");
-          MIL << "cached content file" << std::endl;
-          filesystem::copy(content_src_asc, cache_dir_r + "DATA/content.asc");
-          MIL << "cached content file signature" << std::endl;
-          filesystem::copy(content_src_key, cache_dir_r + "DATA/content.key");
-          MIL << "cached content file signature key" << std::endl;
         }
 
         if (0 != assert_dir((cache_dir_r + "MEDIA"), 0700))
@@ -278,14 +278,14 @@ namespace zypp
           std::list<std::string> allfiles;
           media::MediaManager media_mgr;
           media::MediaAccessId media_num = _media_set->getMediaAccessId(1);
-          dirInfo(media_num, allfiles, "/");
+          dirInfo(media_num, allfiles, _path);
 
           for( std::list<std::string>::const_iterator it = allfiles.begin(); it != allfiles.end(); ++it)
           {
             std::string filename = *it;
             if ( filename.substr(0, 10) == "gpg-pubkey" )
             {
-              Pathname key_src = provideFile("/" + filename);
+              Pathname key_src = provideFile(_path + filename);
               paths.push_back(filename);
             }
           }
@@ -365,24 +365,26 @@ namespace zypp
  
           _content_file = provideFile(_path + "content");
           
-          // try to get content.key and content.asc
-          // they are not present in old sources, so we must not 
-          // handle a not found exception as a source failure.
-          try {
-            _content_file_sig = provideFile( _path + "content.asc");
-          }
-          catch (Exception & excpt_r) {
-            MIL << "Cannot provide 'content' file digital signature." << endl;
-          }
+          // we need to read the dir to see if content.key and .asc exists
+          media::MediaManager media_mgr;
+          media::MediaAccessId media_num = _media_set->getMediaAccessId(1);
           
-          try {
-            _content_file_key = provideFile( _path + "content.key");
-          }
-          catch (Exception & excpt_r) {
-            MIL << "Cannot provide 'content' file public key." << endl;
+          // get the list of cache keys
+          std::list<std::string> files;
+          dirInfo( media_num, files, _path);
+          
+          for( std::list<std::string>::const_iterator it = files.begin(); it != files.end(); ++it)
+          {
+            std::string filename = *it;
+            // try to get content.key and content.asc
+            // they are not present in old sources, so we must not 
+            // handle them as a failure if they dont exists.
+            if (filename == "content.key")
+              _content_file_key = provideFile( _path + "content.key");
+            else if (filename == "content.asc")
+              _content_file_sig = provideFile( _path + "content.asc");
           }
         }
-
         // now check signature of content file.
         
         if (PathInfo(_content_file_sig).isExist() && PathInfo(_content_file_key).isExist() )
@@ -394,7 +396,20 @@ namespace zypp
           // import it to the untrusted keyring.
           z->keyRing()->importKey(_content_file_key, false);
           
+          // import the gpg-* keys
+          std::list<Pathname> otherkeys = publicKeys();
+          for ( std::list<Pathname>::const_iterator it = otherkeys.begin(); it != otherkeys.end(); ++it)
+          {
+            Pathname key = *it;
+            z->keyRing()->importKey(key, false);
+          }
+              
+          // verify the content file
           bool valid = z->keyRing()->verifyFileSignatureWorkflow( _content_file, _content_file_sig);
+          
+          // the source is not valid and the user did not want to continue
+          if (!valid)
+            ZYPP_THROW (Exception( "Error. Source signature does not validate and user does not want to continue. "));
         }
         else if (!PathInfo(_content_file_sig).isExist() && !PathInfo(_content_file_key).isExist() )
         {
