@@ -69,16 +69,16 @@ namespace zypp
           MIL << "YUM cache found at " << _cache_dir << std::endl;
         else
           MIL << "YUM cache not found" << std::endl;
-        
+
         return exists;
       }
-      
+
       void YUMSourceImpl::factoryInit()
       {
 	try {
 	  media::MediaManager media_mgr;
 	  MIL << "Adding no media verifier" << endl;
-	  
+	
 	  // don't try to attach media
 	  media::MediaAccessId _media = _media_set->getMediaAccessId(1, true);
 	  media_mgr.delVerifier(_media);
@@ -190,7 +190,7 @@ namespace zypp
 	_cache_dir = cache_dir_r;
 
         MIL << "Cleaning up cache dir" << std::endl;
-        
+
         // refuse to use stupid paths as cache dir
         if (cache_dir_r == Pathname("/") )
           ZYPP_THROW(Exception("I refuse to use / as cache dir"));
@@ -198,13 +198,13 @@ namespace zypp
         if (0 != assert_dir(cache_dir_r.dirname(), 0700))
           ZYPP_THROW(Exception("Cannot create cache directory" + cache_dir_r.asString()));
 
-   
+
         filesystem::clean_dir(cache_dir_r);
-        
+
         Pathname dst = cache_dir_r + "/repodata";
         if (0 != assert_dir(dst, 0700))
-          ZYPP_THROW(Exception("Cannot create repodata cache directory"));     
-        
+          ZYPP_THROW(Exception("Cannot create repodata cache directory"));
+
 	MIL << "Storing data to cache" << endl;
 	// first read list of all files in the repository
         Pathname filename;
@@ -251,7 +251,7 @@ namespace zypp
 	    {
 	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 	    }
-	    
+	
             dst = cache_dir_r + (*repomd)->location;
 	    filesystem::copy(src, dst);
 	    if ((*repomd)->type == "patches")
@@ -290,7 +290,7 @@ namespace zypp
 	std::list<YUMRepomdData_Ptr> repo_patches;
 
 	callback::SendReport<CreateSourceReport> report;
-  
+
 	report->startData( url() );
 
     //---------------------------------
@@ -422,7 +422,7 @@ namespace zypp
                 Arch arch;
                 if (!(*other)->arch.empty())
                   arch = Arch((*other)->arch);
-              
+
 		NVRA nvra( (*other)->name,
 			   Edition( (*other)->ver, (*other)->rel, str::strtonum<int>( (*other)->epoch ) ),
 			   arch );
@@ -459,11 +459,11 @@ namespace zypp
 	      if (*prim == NULL) continue;	// incompatible arch detected during parsing
 
 //              MIL << "found package "<< (*prim)->name << std::endl;
-              
+
                 Arch arch;
                 if (!(*prim)->arch.empty())
                   arch = Arch((*prim)->arch);
-              
+
 		NVRA nvra( (*prim)->name,
 			   Edition( (*prim)->ver, (*prim)->rel, str::strtonum<int>( (*prim)->epoch ) ),
 			   arch );
@@ -471,7 +471,7 @@ namespace zypp
 		    = other_data.find( nvra );
 		map<NVRA, YUMFileListData_Ptr>::iterator found_files
 		    = files_data.find( nvra );
-  
+
 		YUMFileListData filelist_empty;
 		YUMOtherData other_empty;
 		ResImplTraits<YUMPackageImpl>::Ptr impl;
@@ -717,7 +717,7 @@ namespace zypp
       Arch arch;
       if (!parsed.arch.empty())
         arch = Arch(parsed.arch);
-      
+
       // Collect basic Resolvable data
       NVRAD dataCollect( parsed.name,
 			 Edition( parsed.ver, parsed.rel, parsed.epoch ),
@@ -746,45 +746,45 @@ namespace zypp
     {
         Arch arch;
         if (!parsed.arch.empty())
-          arch = Arch(parsed.arch);
-      
+          arch = Arch( parsed.arch );
+
 	Edition edition( parsed.ver, parsed.rel, parsed.epoch );
 	NVRA nvra( parsed.name,
 		   edition,
 		   arch );
 
 	DBG << "augmentPackage(" << nvra << ")" << endl;
-        
+
         // create Atom
         CapFactory f;
         Dependencies deps = createDependencies( parsed, ResTraits<Package>::kind );
 //        deps[Dep::REQUIRES].insert( f.parse( ResTraits<Package>::kind, parsed.name, Rel::EQ, edition ) );
         NVRAD atomdata( nvra, deps );
         ResImplTraits<YUMAtomImpl>::Ptr atomimpl = new YUMAtomImpl( source_r );
-        Atom::Ptr atom = detail::makeResolvableFromImpl( atomdata, atomimpl);
-        
+        Atom::Ptr atom = detail::makeResolvableFromImpl( atomdata, atomimpl );
+
         //source_r
 	PackageImplMapT::const_iterator it = _package_impl.find( nvra );
 	if (it == _package_impl.end()) {
-	    ERR << "Patch augments non-existant package " << nvra << endl;
+	    WAR << "Patch augments non-existant package " << nvra << endl;
 	}
         else
         {
           ResImplTraits<YUMPackageImpl>::Ptr impl = it->second.impl;
           Package::Ptr package = it->second.package;
           //DBG << "found " << *package << ", impl " << impl << endl;
-  
+
           _store.erase( package );
           impl->unmanage();
-   
+
           // Atoms are inserted in the store after patch creation
           //DBG << "Inserting atom " << *atom << endl;
           //DBG << "with deps " << deps << endl;
           //_store.insert( atom );
-  
+
           // Collect augmented package data
           NVRAD packagedata( nvra, package->deps() );
-  
+
           if (!parsed.location.empty()) {
               impl->_location = parsed.location;
               impl->_mediaid = str::strtonum<unsigned>( parsed.media );
@@ -797,16 +797,16 @@ namespace zypp
           if (!parsed.deltaRpms.empty()) impl->_delta_rpms = parsed.deltaRpms;
   #endif
           //DBG << "NVRAD " << (NVRA)packagedata << endl;
-  
-  
-  
+
+
+
   #warning add patchrpm, deltarpm, etc. to YUMPackageImpl here
           Package::Ptr new_package = detail::makeResolvableFromImpl(
               packagedata, impl
           );
-  
+
           //DBG << "new_package " << *new_package << endl;
-  
+
           _store.insert( new_package );
         }
 	return atom;
@@ -856,7 +856,7 @@ namespace zypp
       Arch arch;
       if (!parsed.arch.empty())
         arch = Arch(parsed.arch);
-      
+
       NVRAD dataCollect( parsed.name,
 			 Edition( parsed.ver, parsed.rel, parsed.epoch ),
 			 arch,
@@ -977,7 +977,7 @@ namespace zypp
       Arch arch;
       if (!parsed.arch.empty())
         arch = Arch(parsed.arch);
-      
+
       // Collect basic Resolvable data
       NVRAD dataCollect( parsed.name,
 		      Edition( parsed.ver, parsed.rel, parsed.epoch ),
