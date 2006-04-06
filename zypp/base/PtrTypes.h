@@ -60,6 +60,24 @@ namespace zypp
     /**  */
     using boost::dynamic_pointer_cast;
 
+    template<class _D>
+      inline std::ostream &
+      operator<<( std::ostream & str, const shared_ptr<_D> & obj )
+      {
+        if ( obj )
+          return str << *obj;
+        return str << std::string("NULL");
+      }
+
+    template<class _D>
+      inline std::ostream &
+      operator<<( std::ostream & str, const intrusive_ptr<_D> & obj )
+      {
+        if ( obj )
+          return str << *obj;
+        return str << std::string("NULL");
+      }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	RW_pointer traits
