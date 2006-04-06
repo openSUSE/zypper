@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Apr  6 18:14:30 CEST 2006 - jsrain@suse.de
+
+- fixed parsing external reference to script in patch (#163221)
+- r2981
+
+-------------------------------------------------------------------
 Thu Apr  6 17:07:10 CEST 2006 - dmacvicar@suse.de
 
 - cache and provide content.asc/key optionally. Dont show a 

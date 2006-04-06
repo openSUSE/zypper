@@ -155,7 +155,15 @@
       </optional>
       <optional>
         <element name="do_location">
-          <text/>
+          <optional>
+            <attribute name="xml:base">
+              <data type="anyURI"/>
+            </attribute>
+          </optional>
+          <attribute name="href">
+            <data type="anyURI"/>
+          </attribute>
+          <empty/>
         </element>
       </optional>
       <optional>
@@ -176,7 +184,15 @@
       </optional>
       <optional>
         <element name="undo_location">
-          <text/>
+          <optional>
+            <attribute name="xml:base">
+              <data type="anyURI"/>
+            </attribute>
+          </optional>
+          <attribute name="href">
+            <data type="anyURI"/>
+          </attribute>
+          <empty/>
         </element>
       </optional>
       <optional>

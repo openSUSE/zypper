@@ -59,13 +59,21 @@ element-script =
     element-version,    
     element do { xsd:string }?,
     element undo { xsd:string }?,
-    element do_location { text }?,
+    element do_location {
+      attribute xml:base { xsd:anyURI }?,
+      attribute href { xsd:anyURI },
+      empty
+    }?,
     element do_media { text }?,
     element do_checksum {
       attribute type { "md5" | "sha" },
       text
     }?,
-    element undo_location { text }?,
+    element undo_location {
+      attribute xml:base { xsd:anyURI }?,
+      attribute href { xsd:anyURI },
+      empty
+    }?,
     element undo_media { text }?,
     element undo_checksum {
       attribute type { "md5" | "sha" },

@@ -515,11 +515,11 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	    else if (name == "undo") {
 		script->undo_script = _helper.content(child);
 	    }
-	    else if (name == "do_location") {
-		script->do_location = _helper.content(child);
+            else if (name == "do_location") {
+		script->do_location = _helper.attribute(child,"href");
 	    }
-	    else if (name == "undo_location") {
-		script->undo_location = _helper.content(child);
+            else if (name == "undo_location") {
+		script->undo_location = _helper.attribute(child,"href");
 	    }
 	    else if (name == "do_media") {
 		script->do_media = _helper.content(child);
