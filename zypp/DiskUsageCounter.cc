@@ -52,13 +52,19 @@ namespace zypp
 
       // if the package is not selected for installation or removing
       // it can't affect disk usage
-      if ((inst && !installed) || (rem && installed))
+      if (inst || rem)
       {
 	Package::constPtr pkg = boost::dynamic_pointer_cast<const Package>( it->resolvable() );
 	DiskUsage du = pkg->diskusage();
+	DiskUsage du_another_package;
+	Edition edition_another_package;
 
+	// the same package has been selected for installation
 	bool found_installed = false;
+	// the same package has been selected for uninstallation
+	bool found_to_install = false;
 
+	// the du is empty or the package is selected for installation (check whether the package is already installed)
 	if (du.size() == 0 || inst)
 	{
 	    // disk usage is unknown for already installed packages
@@ -70,33 +76,67 @@ namespace zypp
 	      ++nameit)
 	    {
 		// is version and architecture same?
-		if (isKind<Package>(nameit->resolvable()) && (*it)->edition() == (*nameit)->edition() && (*it)->arch() == (*nameit)->arch())
+		if (isKind<Package>(nameit->resolvable()))
 		{
-		    if (inst)
+		    // found a package
+		    Package::constPtr pkg_from_source = boost::dynamic_pointer_cast<const Package>( nameit->resolvable() );
+
+		    if (nameit->status().isToBeInstalled())
 		    {
-			if (nameit->status().isInstalled())
+			found_to_install = true;
+		    }
+
+		    // check the version
+		    if ((*it)->edition() == (*nameit)->edition() && (*it)->arch() == (*nameit)->arch())
+		    {
+			if (inst)
 			{
-			    found_installed = true;
-			    DBG << name << '-' << (*nameit)->edition() << ": found already installed package" << std::endl;
+			    if (nameit->status().isInstalled())
+			    {
+				found_installed = true;
+				DBG << name << '-' << (*it)->edition() << ": found already installed package (" << (*nameit)->edition() << ")" << std::endl;
+			    }
+			}
+			else
+			{
+			    // the package will be uninstalled and du is empty, try to use du from another object
+			    du = pkg_from_source->diskusage();
+			    if (du.size() > 0)
+			    {
+				DBG << name << '-' << (*it)->edition() << ": using DiskUsage from another Package object (" << (*nameit)->edition() << ")" << std::endl;
+				break;
+			    }
 			}
 		    }
 		    else
 		    {
-			// found the same package
-			Package::constPtr pkg_from_source = boost::dynamic_pointer_cast<const Package>( nameit->resolvable() );
-			du = pkg_from_source->diskusage();
-			if (du.size() > 0)
+			if (inst && nameit->status().isInstalled())
 			{
-			    DBG << name << '-' << (*nameit)->edition() << ": using DiskUsage from another Package object" << std::endl;
-			    break;
+			    // just freshen the package, don't change du statistics
+			    found_installed = true;
+			    DBG << name << '-' << (*it)->edition() << ": found already installed package (" << (*nameit)->edition() << ")" << std::endl;
+			}
+			else if (pkg_from_source->diskusage().size() > 0)
+			{
+			    // found different version of the package, remember the disk usage
+			    // it will be used the same version is not found
+			    du_another_package = pkg_from_source->diskusage();
+			    edition_another_package = (*nameit)->edition();
 			}
 		    }
 		}
 	    }
+
+	    // don't subtract the disk usage for updated package
+	    if (du.size() == 0 && du_another_package.size() > 0 && !(rem && found_to_install))
+	    {
+		DBG << name << '-' << (*it)->edition() << ": using DU info from version " << edition_another_package << std::endl;
+		du = du_another_package;
+	    }
 	}
 
-
-	if (!inst || !found_installed)
+	// don't modify du if the installed package is already installed (freshening)
+	if (du.size() > 0 && !(inst && found_installed))
 	{
 	  // iterate trough all mount points, add usage to each directory
 	  // directory tree must be processed from leaves to the root directory
