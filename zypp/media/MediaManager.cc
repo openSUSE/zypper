@@ -25,6 +25,7 @@
 #include <map>
 #include <list>
 #include <iostream>
+#include <typeinfo>
 
 
 //////////////////////////////////////////////////////////////////////
@@ -100,13 +101,15 @@ namespace zypp
 
             if( !desired)
             {
-              DBG << "checkDesired(" << id << "): not desired" << std::endl;
+              DBG << "checkDesired(" << id << "): not desired (report by "
+                  << verifier->info() << ")" << std::endl;
               ZYPP_THROW(MediaNotDesiredException(
                 handler->url()
               ));
             }
 
-            DBG << "checkDesired(" << id << "): desired (report)" << std::endl;
+            DBG << "checkDesired(" << id << "): desired (report by "
+                << verifier->info() << ")" << std::endl;
           } else {
             DBG << "checkDesired(" << id << "): desired (cached)" << std::endl;
           }
@@ -256,6 +259,22 @@ namespace zypp
       ////////////////////////////////////////////////////////////////
     } // anonymous
     //////////////////////////////////////////////////////////////////
+
+
+    //////////////////////////////////////////////////////////////////
+    std::string
+    MediaVerifierBase::info() const
+    {
+      return std::string(typeid((*this)).name());
+    }
+
+
+    //////////////////////////////////////////////////////////////////
+    std::string
+    NoVerifier::info() const
+    {
+      return std::string("zypp::media::NoVerifier");
+    }
 
 
     //////////////////////////////////////////////////////////////////
@@ -497,6 +516,9 @@ namespace zypp
 
       ref.desired = false;
       MediaVerifierRef(verifier).swap(ref.verifier);
+
+      DBG << "MediaVerifier change: id=" << accessId << ", verifier="
+          << verifier->info() << std::endl;
     }
 
     // ---------------------------------------------------------------
@@ -510,6 +532,9 @@ namespace zypp
       MediaVerifierRef verifier( new NoVerifier());
       ref.desired  = false;
       ref.verifier.swap(verifier);
+
+      DBG << "MediaVerifier change: id=" << accessId << ", verifier="
+          << verifier->info() << std::endl;
     }
 
     // ---------------------------------------------------------------
@@ -628,6 +653,10 @@ namespace zypp
           ref.desired = false;
         }
       }
+      DBG << "isDesiredMedia(" << accessId << "): "
+          << (ref.desired ? "" : "not ")
+          << "desired (report by "
+          << ref.verifier->info() << ")" << std::endl;
       return ref.desired;
     }
 
@@ -655,6 +684,10 @@ namespace zypp
           desired = false;
         }
       }
+      DBG << "isDesiredMedia(" << accessId << "): "
+          << (desired ? "" : "not ")
+          << "desired (report by "
+          << v->info() << ")" << std::endl;
       return desired;
     }
 

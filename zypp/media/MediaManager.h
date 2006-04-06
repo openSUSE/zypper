@@ -62,6 +62,13 @@ namespace zypp
       ~MediaVerifierBase()
       {}
 
+      /**
+       * Returns a string with some info about the verifier.
+       * By default, the type info name is returned.
+       */
+      virtual std::string
+      info() const;
+
       /*
       ** Check if the specified attached media contains
       ** the desired media (e.g. SLES10 CD1).
@@ -87,6 +94,12 @@ namespace zypp
       virtual
       ~NoVerifier()
       {}
+
+      /**
+       * Returns the "zypp::media::NoVerifier" string.
+       */
+      virtual std::string
+      info() const;
 
       /*
       ** Don't check if the specified attached media contains
