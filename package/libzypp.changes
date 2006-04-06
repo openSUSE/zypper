@@ -4,6 +4,7 @@ Thu Apr  6 17:07:10 CEST 2006 - dmacvicar@suse.de
 - cache and provide content.asc/key optionally. Dont show a 
   popup if they dont exists. (dmacvicar)
 - Actually abort when verify signature workflow is false. (dmacvicar)
+- r2978
 
 -------------------------------------------------------------------
 Thu Apr  6 16:37:49 CEST 2006 - jsrain@suse.de
