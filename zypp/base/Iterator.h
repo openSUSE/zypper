@@ -101,12 +101,28 @@ namespace zypp
       return make_filter_iterator( f, c.begin(), c.end() );
     }
 
+  /** Convenience to create filter_iterator from container::begin(). */
+  template<class _Filter, class _Container>
+    filter_iterator<_Filter, typename _Container::const_iterator>
+    make_filter_begin( const _Container & c )
+    {
+      return make_filter_iterator( _Filter(), c.begin(), c.end() );
+    }
+
   /** Convenience to create filter_iterator from container::end(). */
   template<class _Filter, class _Container>
     filter_iterator<_Filter, typename _Container::const_iterator>
     make_filter_end( _Filter f, const _Container & c )
     {
       return make_filter_iterator( f, c.end(), c.end() );
+    }
+
+  /** Convenience to create filter_iterator from container::end(). */
+  template<class _Filter, class _Container>
+    filter_iterator<_Filter, typename _Container::const_iterator>
+    make_filter_end( const _Container & c )
+    {
+      return make_filter_iterator( _Filter(), c.end(), c.end() );
     }
 
   /** \class transform_iterator
