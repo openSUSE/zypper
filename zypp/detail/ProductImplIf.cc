@@ -37,6 +37,9 @@ namespace zypp
       License ProductImplIf::licenseToConfirm() const
       { return License(); }
 
+      TranslatedText ProductImplIf::shortName() const
+      { return TranslatedText(); }
+
     ///////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////

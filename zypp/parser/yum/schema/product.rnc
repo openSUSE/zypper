@@ -17,6 +17,10 @@ element ns1:product {
     attribute lang { text },
     text
   }+,
+  element ns1:shortname {
+    attribute lang { text },
+    text
+  }*,
   element ns1:description {
     attribute lang { text },
     text

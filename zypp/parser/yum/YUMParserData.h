@@ -455,6 +455,7 @@ namespace zypp {
         std::string name; 
         TranslatedText summary;
         TranslatedText description;
+	TranslatedText short_name;
         // those are suse specific tags
         std::string releasenotesurl;
       };

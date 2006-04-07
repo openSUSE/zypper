@@ -831,6 +831,7 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
     impl->_vendor = parsed.vendor;
     impl->_summary = parsed.summary;
     impl->_description = parsed.description;
+    impl->_short_name = parsed.short_name;
 
     if ( parsed.releasenotesurl.size() > 0 )
       impl->_release_notes_url = parsed.releasenotesurl;

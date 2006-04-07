@@ -23,6 +23,12 @@
           <text/>
         </element>
       </oneOrMore>
+      <zeroOrMore>
+        <element name="ns1:shortname">
+          <attribute name="lang"/>
+          <text/>
+        </element>
+      </zeroOrMore>
       <oneOrMore>
         <element name="ns1:description">
           <attribute name="lang"/>

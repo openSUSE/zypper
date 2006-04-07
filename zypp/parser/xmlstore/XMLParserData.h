@@ -104,6 +104,7 @@ namespace zypp {
         std::string vendor;
         TranslatedText summary;
         TranslatedText description;
+	TranslatedText short_name;
         // those are suse specific tags
         std::string releasenotesurl;
         std::list<std::string> flags;

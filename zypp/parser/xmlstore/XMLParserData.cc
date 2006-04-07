@@ -122,6 +122,7 @@ namespace zypp {
           << "  name: " << data.name << endl
           << "  summary: " << data.summary << endl
           << "  description: " << data.description << endl
+          << "  short name: " << data.short_name << endl
           << "  epoch: " << data.epoch << endl
           << "  version: " << data.ver << endl
           << "  release: " << data.rel << endl

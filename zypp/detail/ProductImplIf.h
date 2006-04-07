@@ -54,6 +54,8 @@ namespace zypp
       virtual std::list<std::string> flags() const PURE_VIRTUAL;
 
       virtual License licenseToConfirm() const PURE_VIRTUAL;
+
+      virtual TranslatedText shortName() const PURE_VIRTUAL;
     };
     ///////////////////////////////////////////////////////////////////
 

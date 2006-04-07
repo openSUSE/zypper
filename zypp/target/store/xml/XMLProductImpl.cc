@@ -42,6 +42,9 @@ namespace zypp
 
     Label XMLProductImpl::summary( const Locale & ) const 
     { return _summary.text(); }
+
+    Label XMLProductImpl::shortName( const Locale & ) const
+    { return _short_name.text(); }
     
     Label XMLProductImpl::description( const Locale & ) const 
     { return _description.text(); }

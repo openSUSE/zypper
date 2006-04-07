@@ -51,11 +51,13 @@ namespace zypp
 	Label instSrcLabel() const;
 	Vendor instSrcVendor() const;
 	std::list<std::string> flags() const;
+	TranslatedText shortName() const;
       protected:
 	std::string _category;
 	Label _vendor;
 	TranslatedText _summary;
 	TranslatedText _description;
+	TranslatedText _short_name;
 
 
       private:

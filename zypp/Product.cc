@@ -60,6 +60,14 @@ namespace zypp
   License Product::licenseToConfirm() const
   { return pimpl().licenseToConfirm(); }
 
+  /** */
+  Label Product::shortName() const
+  { return pimpl().shortName().text(); }
+
+  /** */
+  Label Product::longName() const
+  { return summary(); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

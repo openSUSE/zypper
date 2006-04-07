@@ -55,6 +55,12 @@ namespace zypp
     /** */
     License licenseToConfirm() const;
 
+    /** */
+    Label shortName() const;
+
+    /** */
+    Label longName() const;
+
   protected:
     /** Ctor */
     Product( const NVRAD & nvrad_r );

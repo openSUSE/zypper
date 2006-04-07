@@ -47,6 +47,7 @@ namespace zypp
       virtual Source_Ref source() const;
       virtual Url releaseNotesUrl() const;
       virtual std::list<std::string> flags() const;
+      virtual TranslatedText shortName() const;
 
       std::string _category;
 

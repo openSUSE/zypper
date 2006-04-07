@@ -56,6 +56,9 @@ namespace zypp
     std::list<std::string> SuseTagsProductImpl::flags() const
     { return _flags; }
 
+    TranslatedText SuseTagsProductImpl::shortName() const
+    { return TranslatedText(_shortlabel); }
+
     /////////////////////////////////////////////////////////////////
   } // namespace detail
   ///////////////////////////////////////////////////////////////////

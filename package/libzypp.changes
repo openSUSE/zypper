@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr  7 23:57:37 CEST 2006 - jsrain@suse.de
+
+- product now provides short name
+- rev 3013
+
+-------------------------------------------------------------------
 Fri Apr  7 20:42:09 CEST 2006 - jsrain@suse.de
 
 - read metadata for packages from correct tags in patches (#163220)

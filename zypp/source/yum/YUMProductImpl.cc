@@ -50,7 +50,8 @@ namespace zypp
 	_vendor(parsed.vendor),
 //	_displayname(parsed.displayname),
 //	_description(parsed.description)
-	_source(source_r)
+	_source(source_r),
+	_short_name(parsed.short_name)
       {}
 
       std::string YUMProductImpl::category() const
@@ -89,6 +90,9 @@ namespace zypp
 #warning the metadata specification doesn't support product flags
       std::list<std::string> YUMProductImpl::flags() const
       { return ProductImplIf::flags(); }
+
+      TranslatedText YUMProductImpl::shortName() const
+      { return _short_name; }
  
     } // namespace yum
     /////////////////////////////////////////////////////////////////

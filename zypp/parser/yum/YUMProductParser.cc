@@ -80,6 +80,9 @@ namespace zypp {
             else if (name == "displayname") {
               productPtr->summary.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
             }
+            else if (name == "shortname") {
+              productPtr->short_name.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
+            }
             else if (name == "description") {
               productPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
             }

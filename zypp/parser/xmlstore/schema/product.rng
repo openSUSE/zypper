@@ -18,6 +18,11 @@
     <oneOrMore>
       <ref name="element-description"/>
     </oneOrMore>
+    <zeroOrMore>
+      <element name="shortname">
+        <ref name="translated-text"/>
+      </element>
+    </zeroOrMore>
     <element name="vendor">
       <text/>
     </element>

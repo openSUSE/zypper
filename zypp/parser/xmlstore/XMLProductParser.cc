@@ -74,6 +74,9 @@ namespace zypp {
             else if (name == "release-notes-url") {
               productPtr->releasenotesurl = _helper.content(child);
             }
+            else if (name == "shortname") {
+              productPtr->short_name.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
+            }
             else if (name == "summary") {
               productPtr->summary.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
             }
