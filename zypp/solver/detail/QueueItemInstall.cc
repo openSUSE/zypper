@@ -264,6 +264,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	zypp, but can come up with the installer & autopull. */
 
     if (_upgrades
+	&& _item->kind() == ResTraits<Package>::kind
 	&& compareByNVRA(_item.resolvable(), _upgrades.resolvable()) == 0)
     {
 	ResolverInfo_Ptr info;
