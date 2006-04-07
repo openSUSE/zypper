@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Apr  7 08:32:32 CEST 2006 - visnov@suse.cz
+
+- honour if user decides to skip a package in commit (#156031) 
+
+-------------------------------------------------------------------
 Thu Apr  6 18:14:30 CEST 2006 - jsrain@suse.de
 
 - fixed parsing external reference to script in patch (#163221)

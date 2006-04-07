@@ -225,7 +225,17 @@ namespace zypp
           Package::constPtr p = dynamic_pointer_cast<const Package>(it->resolvable());
           if (it->status().isToBeInstalled())
           {
-            Pathname localfile = p->source().providePackage(p);
+	    Pathname localfile;
+	    try {
+            	localfile = p->source().providePackage(p);
+	    }
+	    catch( const source::SkipRequestedException & e )
+	    {
+		ZYPP_CAUGHT( e );
+		WAR << "Skipping package " << p << " in commit" << endl;
+		continue;
+	    }
+
 	    lastUsedSource = p->source();			// remember the package source
 
 #warning Exception handling
