@@ -186,7 +186,7 @@ namespace zypp
 }
 
 ///////////////////////////////////////////////////////////////////
-
+#if 0
 template<class _InstIterator, class _DelIterator, class _OutputIterator>
 void strip_obsoleted_to_delete( _InstIterator instBegin_r, _InstIterator instEnd_r,
                                 _DelIterator  delBegin_r,  _DelIterator  delEnd_r,
@@ -200,9 +200,9 @@ void strip_obsoleted_to_delete( _InstIterator instBegin_r, _InstIterator instEnd
     CapSet obsoletes;
     for ( /**/; instBegin_r != instEnd_r; ++instBegin_r )
     {
-      xxxxx
-      PoolItem_Ref item( *it );
-      obsoletes.insert( item->dep(Dep::OBSOLETES).begin(), item->dep(Dep::OBSOLETES).end() );
+      //xxxxx
+      //PoolItem_Ref item( *it );
+      //obsoletes.insert( item->dep(Dep::OBSOLETES).begin(), item->dep(Dep::OBSOLETES).end() );
     }
   if ( obsoletes.size() == 0 )
     return; // ---> nothing to do
@@ -242,7 +242,7 @@ void strip_obsoleted_to_delete( _InstIterator instBegin_r, _InstIterator instEnd
   deleteList_r.swap( undelayed );
 
 }
-
+#endif
 ///////////////////////////////////////////////////////////////////
 
 /******************************************************************
@@ -310,13 +310,7 @@ int main( int argc, char * argv[] )
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
-  CollectTransacting toTransact;
-  std::for_each( make_filter_begin<resfilter::ByTransact>(pool),
-                 make_filter_end<resfilter::ByTransact>(pool),
-                 functor::functorRef<void,PoolItem>(toTransact) );
-  MIL << toTransact;
-
-  if ( 0 )
+  if ( 1 )
     {
       PoolItemList errors_r;
       PoolItemList remaining_r;
@@ -325,6 +319,14 @@ int main( int argc, char * argv[] )
 
       dumpPoolStats( WAR << "remaining_r ", remaining_r.begin(), remaining_r.end() ) << endl;
       dumpPoolStats( WAR << "srcremaining_r ", srcremaining_r.begin(), srcremaining_r.end() ) << endl;
+    }
+  else
+    {
+      CollectTransacting toTransact;
+      std::for_each( make_filter_begin<resfilter::ByTransact>(pool),
+                     make_filter_end<resfilter::ByTransact>(pool),
+                     functor::functorRef<void,PoolItem>(toTransact) );
+      MIL << toTransact;
     }
 
 #if 0
