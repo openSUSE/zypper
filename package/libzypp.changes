@@ -1,7 +1,15 @@
 -------------------------------------------------------------------
+Fri Apr  7 10:36:05 CEST 2006 - ma@suse.de
+
+- Avoid excessive CD hopping on commit. But still far from
+  being perfect. (#159679)
+- Fixed Target::commit: Despite dry_run set True, packages
+  were depeted.
+
+-------------------------------------------------------------------
 Fri Apr  7 08:32:32 CEST 2006 - visnov@suse.cz
 
-- honour if user decides to skip a package in commit (#156031) 
+- honour if user decides to skip a package in commit (#156031)
 
 -------------------------------------------------------------------
 Thu Apr  6 18:14:30 CEST 2006 - jsrain@suse.de
@@ -12,7 +20,7 @@ Thu Apr  6 18:14:30 CEST 2006 - jsrain@suse.de
 -------------------------------------------------------------------
 Thu Apr  6 17:07:10 CEST 2006 - dmacvicar@suse.de
 
-- cache and provide content.asc/key optionally. Dont show a 
+- cache and provide content.asc/key optionally. Dont show a
   popup if they dont exists. (dmacvicar)
 - Actually abort when verify signature workflow is false. (dmacvicar)
 - r2978
@@ -55,7 +63,7 @@ Wed Apr  5 18:01:37 CEST 2006 - kkaempf@suse.de
 -------------------------------------------------------------------
 Wed Apr  5 17:47:04 CEST 2006 - dmacvicar@suse.de
 
-- Use the original media descr_dir on refresh for 
+- Use the original media descr_dir on refresh for
   suse tags source (#163196)
 - r2952
 
@@ -89,8 +97,8 @@ Wed Apr  5 15:04:31 CEST 2006 - kkaempf@suse.de
 -------------------------------------------------------------------
 Wed Apr  5 12:48:19 CEST 2006 - visnov@suse.cz
 
-- only try to create a source of a given type when restoring 
-  from the persistent store (#162111) 
+- only try to create a source of a given type when restoring
+  from the persistent store (#162111)
 
 -------------------------------------------------------------------
 Wed Apr  5 11:36:54 CEST 2006 - kkaempf@suse.de
@@ -102,7 +110,7 @@ Wed Apr  5 11:36:54 CEST 2006 - kkaempf@suse.de
 -------------------------------------------------------------------
 Wed Apr  5 09:27:08 CEST 2006 - visnov@suse.cz
 
-- properly initialize autorefresh for non-remote sources (#154990) 
+- properly initialize autorefresh for non-remote sources (#154990)
 - rev 2919
 
 -------------------------------------------------------------------
@@ -117,7 +125,7 @@ Tue Apr  4 19:19:39 CEST 2006 - mt@suse.de
 -------------------------------------------------------------------
 Tue Apr  4 18:47:01 CEST 2006 - dmacvicar@suse.de
 
--implement callbacks for when package verification (checksum) 
+-implement callbacks for when package verification (checksum)
  fails, offer to retry or abort
 
 -------------------------------------------------------------------
