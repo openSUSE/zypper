@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Apr  7 11:05:30 CEST 2006 - kkaempf@suse.de
+
+- add 'licenceToConfirm()' to Product. (#164375)
+
+-------------------------------------------------------------------
 Fri Apr  7 10:36:05 CEST 2006 - ma@suse.de
 
 - Avoid excessive CD hopping on commit. But still far from
