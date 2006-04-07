@@ -1022,7 +1022,7 @@ struct TransactKind : public resfilter::PoolItemFilterFunctor
 	    result = resolver.transactResObject( item.resolvable(), true );
 	else if (item.status().isToBeUninstalled())
 	    result = resolver.transactResObject( item.resolvable(), false );
-	return false;
+	return true;
     }
 };
 
