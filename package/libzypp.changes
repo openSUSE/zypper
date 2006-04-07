@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr  7 19:57:41 CEST 2006 - kkaempf@suse.de
+
+- more detailed resolver error reports (#162994)
+- rev 3010
+
+-------------------------------------------------------------------
 Fri Apr  7 17:35:07 CEST 2006 - visnov@suse.cz
 
 - report package download progress (#160966)
