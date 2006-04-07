@@ -34,6 +34,9 @@ namespace zypp
       std::list<std::string> ProductImplIf::flags() const
       { return std::list<std::string>(); }
       
+      License ProductImplIf::licenseToConfirm() const
+      { return License(); }
+
     ///////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////

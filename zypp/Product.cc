@@ -56,6 +56,10 @@ namespace zypp
   std::list<std::string> Product::flags() const
   { return pimpl().flags(); }
 
+  /** */
+  License Product::licenseToConfirm() const
+  { return pimpl().licenseToConfirm(); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

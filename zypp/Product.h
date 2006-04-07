@@ -52,6 +52,9 @@ namespace zypp
     /** The product flags */
     std::list<std::string> flags() const;
 
+    /** */
+    License licenseToConfirm() const;
+
   protected:
     /** Ctor */
     Product( const NVRAD & nvrad_r );

@@ -52,6 +52,8 @@ namespace zypp
 
       /** The product flags */
       virtual std::list<std::string> flags() const PURE_VIRTUAL;
+
+      virtual License licenseToConfirm() const PURE_VIRTUAL;
     };
     ///////////////////////////////////////////////////////////////////
 
