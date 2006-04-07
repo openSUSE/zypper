@@ -28,9 +28,6 @@
 #include "zypp/media/MediaSource.h"
 
 #include "zypp/Url.h"
-#include "zypp/base/Logger.h"
-
-#include <iostream> // endl
 
 namespace zypp {
   namespace media {
@@ -403,7 +400,6 @@ namespace zypp {
 	      catch (const MediaException &excpt_r)
 	      {
 		ZYPP_CAUGHT(excpt_r);
-		INT << "Exception raised while releasing file" << std::endl;
 	      }
               catch(...) {} // No exception from dtor!
 	    }
