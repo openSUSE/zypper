@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr  7 15:08:06 CEST 2006 - kkaempf@suse.de
+
+- loop through all affected ResObjects in transactResKind (#163819)
+- rev 3002
+
+-------------------------------------------------------------------
 Fri Apr  7 12:42:35 CEST 2006 - kkaempf@suse.de
 
 - allow re-installation of non-packages (#162906)
