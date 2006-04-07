@@ -230,9 +230,13 @@ namespace zypp
 
       if ( ! _installed )
         {
-          // filter arch incomatible available(!) objects
-          if ( ! ptr_r->arch().compatibleWith( _poolImpl.targetArch() ) )
-            return;
+          // filter arch incomatible available(!) non-atoms
+	  // atoms are allowed since patches are multi-arch and require atoms of all archs
+	  // the atoms themselves will 'filter' the arch via their frehen dependencies
+	  if ( ptr_r->kind() != ResTraits<Atom>::kind ) {
+            if ( ! ptr_r->arch().compatibleWith( _poolImpl.targetArch() ) )
+              return;
+	  }
         }
 
       /* -------------------------------------------------------------------------------
