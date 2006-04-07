@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Apr  7 11:50:22 CEST 2006 - mt@suse.de
+
+- Added loop checking for scsi cdroms (/sys/block/srX) in case
+  HAL does not provide any drives like on iSeries (#163971).
+- rev 2995
+
+-------------------------------------------------------------------
 Fri Apr  7 11:05:30 CEST 2006 - kkaempf@suse.de
 
 - add 'licenceToConfirm()' to Product. (#164375)
