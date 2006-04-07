@@ -291,6 +291,45 @@ namespace zypp {
       {
 	ZYPP_CAUGHT(e);
       }
+
+      //
+      // Bug #163971
+      // Hal does not include (virtual) CDROMs on iSeries ...
+      //
+      if(devices.empty()) // Hmm... always? We can't detect DVD here.
+      {
+	// SCSI cdrom devices (/dev/sr0, ...)
+	std::string sys_name("/sys/block/sr"); 
+	std::string dev_name("/dev/sr"); 
+	for(size_t i=0; i < 16; i++)
+	{
+	  PathInfo sys_info(sys_name + str::numstring(i));
+	  PathInfo dev_info(dev_name + str::numstring(i));
+	  if( sys_info.isDir() && dev_info.isBlk())
+	  {
+	    // Hmm.. how to check if it supports DVDs?
+	    MediaSource media("cdrom", dev_info.asString(),
+	                               dev_info.major(),
+	                               dev_info.minor());
+	    bool is_new = true;
+	    DeviceList::const_iterator d( devices.begin());
+	    for( ; d != devices.end(); ++d)
+	    {
+	      if( media.equals( *d))
+		is_new = false;
+	    }
+	    if( is_new)
+	    {
+	      DBG << "Found SCSI CDROM "
+	          << media.asString()
+	          << std::endl;
+	      devices.push_back(media);
+	    }
+	  }
+	}
+
+	// Other device types?
+      }
       return devices;
     }
 
