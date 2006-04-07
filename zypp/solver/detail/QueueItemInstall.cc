@@ -264,16 +264,19 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	zypp, but can come up with the installer & autopull. */
 
     if (_upgrades
-	&& _item->kind() == ResTraits<Package>::kind
 	&& compareByNVRA(_item.resolvable(), _upgrades.resolvable()) == 0)
     {
-	ResolverInfo_Ptr info;
+	if (_item->kind() == ResTraits<Package>::kind) {
+	    ResolverInfo_Ptr info;
+	    _DEBUG("install of " << _item << " upgrades itself, skipping");
 
-	_XDEBUG("install upgrades itself, skipping");
-
-	info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_SKIPPING, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
-	context->addInfo (info);
-	goto finished;
+	    info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_SKIPPING, _item, RESOLVER_INFO_PRIORITY_VERBOSE);
+	    context->addInfo (info);
+	    goto finished;
+	}
+	else {
+	    _DEBUG("re-install " << _item);
+	}
     }
 
     // check if this install is still needed
