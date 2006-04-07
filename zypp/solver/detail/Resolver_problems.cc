@@ -235,7 +235,7 @@ Resolver::problems (void) const
 	DBG << "Problem: " << *info;
 	DBG << "; Evaluate solutions..." << endl;
 	
-	string who = item->name();
+	string who = ResolverInfo::toString( item );
 	string what;
 	string details;
 	switch (info->type()) {
