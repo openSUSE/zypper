@@ -42,17 +42,17 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////
-    namespace 
+    namespace
     { /////////////////////////////////////////////////////////////////
-    
+
       struct PubKeyHelper
       {
       };
-      
+
       /////////////////////////////////////////////////////////////////
-    } // namespace 
+    } // namespace
     ///////////////////////////////////////////////////////////////////
-    
+
     IMPL_PTR_TYPE(TargetImpl);
 
     TargetImpl_Ptr TargetImpl::_nullimpl;
@@ -95,7 +95,7 @@ namespace zypp
       return _storage_enabled;
     }
 
-    
+
     void TargetImpl::enableStorage(const Pathname &root_r)
     {
       _storage.init(root_r);
@@ -106,7 +106,7 @@ namespace zypp
     {
       return _root;
     }
-  
+
     const ResStore & TargetImpl::resolvables()
     {
       _store.clear();
@@ -158,7 +158,7 @@ namespace zypp
         MIL << "Restrict to media number " << medianr << endl;
       }
 
-      commit (to_uninstall);
+      commit (to_uninstall, dry_run);
 
       if (medianr == 0) {			// commit all
         remaining_r = commit( to_install, dry_run );
@@ -212,7 +212,7 @@ namespace zypp
       TargetImpl::PoolItemList remaining;
 
       MIL << "TargetImpl::commit(<list>" << (dry_run?", dry_run" : "") << ")" << endl;
-      
+
       bool abort = false;
 
       // remember the last used source (if any)
@@ -254,7 +254,7 @@ namespace zypp
 	      if( progress.aborted() )
 	      {
 	        WAR << "commit aborted by the user" << endl;
-		progress.disconnect(); 
+		progress.disconnect();
 		abort = true;
 		break;
 	      }
@@ -266,7 +266,7 @@ namespace zypp
 	      if (dry_run) {
 	          WAR << "dry run failed" << endl;
 		  abort = true;
-		  progress.disconnect(); 
+		  progress.disconnect();
 		  break;
 	      }
 
@@ -279,15 +279,15 @@ namespace zypp
 	        {
 	          WAR << "commit aborted by the user" << endl;
 		  abort = true;
-		  progress.disconnect(); 
+		  progress.disconnect();
 		  break;
 	        }
               }
-              catch (Exception & excpt_r) 
+              catch (Exception & excpt_r)
               {
                 ZYPP_CAUGHT(excpt_r);
                 WAR << "Install failed again, retrying with --force --nodeps" << endl;
-    
+
                 try {
                   progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE );
 		  flags |= rpm::RpmDb::RPMINST_FORCE;
@@ -298,12 +298,12 @@ namespace zypp
                   success = false;
                   ZYPP_CAUGHT(excpt_r);
                 }
-		
+
 		if( progress.aborted() )
 		{
 		    WAR << "commit aborted by the user" << endl;
 		    abort = true;
-		    progress.disconnect(); 
+		    progress.disconnect();
 		    break;
 		}
               }
@@ -345,7 +345,7 @@ namespace zypp
           if ( isStorageEnabled() )
           {
             if (it->status().isToBeInstalled())
-            { 
+            {
               bool success = false;
               try
               {
@@ -353,11 +353,11 @@ namespace zypp
 		{
 		  Message::constPtr m = dynamic_pointer_cast<const Message>(it->resolvable());
 		  std::string text = m->text().asString();
-		  
+
 		  callback::SendReport<target::MessageResolvableReport> report;
-		  
+
 		  report->show( m );
-		  
+
 		  MIL << "Displaying the text " << text << endl;
 		}
 		else if (isKind<Script>(it->resolvable()))
@@ -459,7 +459,7 @@ namespace zypp
 	lastUsedSource.release();	//  release their medias
       }
 
-      if( abort ) 
+      if( abort )
         ZYPP_THROW( TargetAbortedException( N_("Target commit aborted by user.") ) );
 
       return remaining;
@@ -621,13 +621,8 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
       // sort delete list...
       //
       ///////////////////////////////////////////////////////////////////
-      TargetImpl::PoolItemSet delset;  // for delete order
+      TargetImpl::PoolItemSet delset( dellist_r.begin(), dellist_r.end() );  // for delete order
       TargetImpl::PoolItemSet dummy; // dummy, empty, should contain already installed
-      for ( TargetImpl::PoolItemList::iterator pkgIt = dellist_r.begin();
-	    pkgIt != dellist_r.end(); ++pkgIt )
-      {
-	delset.insert( *pkgIt );
-      }
 
       InstallOrder order( pool_r, delset, dummy ); // sort according top prereq
       order.init();
@@ -679,25 +674,23 @@ TargetImpl::getResolvablesToInsDel ( const ResPool pool_r,
     TargetImpl::PoolItemList instbackup_r;
     instbackup_r.swap( instlist_r );
 
-    TargetImpl::PoolItemSet insset; // for install order
+    TargetImpl::PoolItemSet insset( instbackup_r.begin(), instbackup_r.end() ); // for install order
     TargetImpl::PoolItemSet installed; // dummy, empty, should contain already installed
-    for ( TargetImpl::PoolItemList::iterator resIt = instbackup_r.begin(); resIt != instbackup_r.end(); ++resIt ) {
-      insset.insert( *resIt );
-    }
+
     InstallOrder order( pool_r, insset, installed );
     // start recursive depth-first-search
     order.init();
-MIL << "order.init() done" << endl;
+    MIL << "order.init() done" << endl;
     order.printAdj( XXX, false );
     ///////////////////////////////////////////////////////////////////
     // build install list in install order
     ///////////////////////////////////////////////////////////////////
     TargetImpl::PoolItemList best_list;
-//    unsigned best_prio     = 0;
+    unsigned best_prio     = 0;
     unsigned best_medianum = 0;
 
     TargetImpl::PoolItemList last_list;
-//    unsigned last_prio     = 0;
+    unsigned last_prio     = 0;
     unsigned last_medianum = 0;
 
     TargetImpl::PoolItemList other_list;
@@ -726,7 +719,7 @@ MIL << "order.computeNextSet: " << items.size() << " resolvables" << endl;
 	    continue;
 	}
 	XXX << "Package " << *cpkg << ", media " << cpkg->mediaId() << " last_medianum " << last_medianum << " best_medianum " << best_medianum << endl;
-	if ( 									//  rankPriority[cpkg->instSrcRank()] == last_prio &&
+	if ( cpkg->source().numericId() == last_prio &&
 	     cpkg->mediaId() == last_medianum ) {
 	  // prefer packages on current media.
 	  last_list.push_back( *cit );
@@ -738,12 +731,9 @@ MIL << "order.computeNextSet: " << items.size() << " resolvables" << endl;
 
 	  if ( ! best_list.empty() ) {
 
-#if 0
-	    if ( rankPriority[cpkg->instSrcRank()] < best_prio ) {
+	    if ( cpkg->source().numericId() < best_prio ) {
 	      best_list.clear(); // new best
-	    } else if ( rankPriority[cpkg->instSrcRank()] == best_prio ) {
-#endif
-
+	    } else if ( cpkg->source().numericId() == best_prio ) {
 	      if ( cpkg->mediaId() < best_medianum ) {
 		best_list.clear(); // new best
 	      } else if ( cpkg->mediaId() == best_medianum ) {
@@ -752,18 +742,16 @@ MIL << "order.computeNextSet: " << items.size() << " resolvables" << endl;
 	      } else {
 		continue; // worse
 	      }
-#if 0
 	    } else {
 	      continue; // worse
 	    }
-#endif
 	  }
 
 	  if ( best_list.empty() )
 	  {
 	    // first package or new best
 	    best_list.push_back( *cit );
-//	    best_prio     = rankPriority[cpkg->instSrcRank()];
+	    best_prio     = cpkg->source().numericId();
 	    best_medianum = cpkg->mediaId();
 	    continue;
 	  }
@@ -779,7 +767,7 @@ MIL << "order.computeNextSet: " << items.size() << " resolvables" << endl;
       if ( last_list.empty() )
       {
 	MIL << "SET NEW media " << best_medianum << endl;
-//	last_prio     = best_prio;
+	last_prio     = best_prio;
 	last_medianum = best_medianum;
       }
       else
@@ -790,7 +778,7 @@ MIL << "order.computeNextSet: " << items.size() << " resolvables" << endl;
       for ( TargetImpl::PoolItemList::iterator it = take_list.begin(); it != take_list.end(); ++it )
       {
 	order.setInstalled( *it );
-	XXX << "SET isrc " << (*it)->name() << endl;
+	XXX << "SET isrc " << (*it)->source().numericId() << " -> " << (*it) << endl;
       }
       // move everthing from take_list to the end of instlist_r, clean take_list
       instlist_r.splice( instlist_r.end(), take_list );
