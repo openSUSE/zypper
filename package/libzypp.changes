@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr  7 12:42:35 CEST 2006 - kkaempf@suse.de
+
+- allow re-installation of non-packages (#162906)
+- rev 2998
+
+-------------------------------------------------------------------
 Fri Apr  7 11:50:22 CEST 2006 - mt@suse.de
 
 - Added loop checking for scsi cdroms (/sys/block/srX) in case
