@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr  7 17:35:07 CEST 2006 - visnov@suse.cz
+
+- report package download progress (#160966)
+- rev 3007 
+
+-------------------------------------------------------------------
 Fri Apr  7 16:27:35 CEST 2006 - kkaempf@suse.de
 
 - transact also for languages (#163819)

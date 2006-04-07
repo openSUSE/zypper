@@ -32,6 +32,39 @@ namespace zypp
     IMPL_PTR_TYPE(SourceImpl);
 
 
+    class DownloadProgressReceiver
+	: public callback::ReceiveReport<media::DownloadProgressReport>
+    {
+	callback::SendReport <DownloadResolvableReport> & _report;
+	Resolvable::constPtr _resolvable;
+
+      public:
+
+	DownloadProgressReceiver (
+	    callback::SendReport <DownloadResolvableReport> & report_r,
+	    Resolvable::constPtr resolvable_r
+	)
+	: _report (report_r)
+	, _resolvable (resolvable_r)
+	{}
+	
+	virtual ~DownloadProgressReceiver () {} 
+	
+	virtual void reportbegin() {}
+	
+	virtual void reportend() {}
+
+        /**
+         * Inform about progress
+         * Return true on abort
+         */
+        virtual bool progress( int percent, Url )
+	{
+	    return _report->progress( percent, _resolvable );
+	}
+    };
+
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : SourceImpl::SourceImpl
@@ -134,10 +167,16 @@ namespace zypp
       bool digest_ok = false;
       Pathname file;
       callback::SendReport<source::DownloadResolvableReport> report;
+      DownloadProgressReceiver download_report( report, package );
+      
       while (retry)
       {
         report->start( package, package->source().url() );
+	
+	callback::TempConnect<media::DownloadProgressReport> tmp_download( download_report );
+	
         file = package->source().provideFile( package->location(), package->mediaId());
+
         report->finish( package, source::DownloadResolvableReport::NO_ERROR, "" );
         
         CheckSum checksum = package->checksum();
