@@ -32,6 +32,20 @@ namespace zypp
   {
     class SourceImpl;
     DEFINE_PTR_TYPE(SourceImpl);
+
+    ///////////////////////////////////////////////////////////////////
+    //
+    //    CLASS NAME : SkipRequestedException
+    //
+    /**
+     * A specialized exception to inform the caller that user
+     * specifically asked the file/directory providing to be skipped.
+    */
+    class SkipRequestedException : public Exception {
+    public:
+	SkipRequestedException ( const std::string & msg_r ) : Exception( msg_r ) {}
+    };
+
   }
   class ResStore;
 

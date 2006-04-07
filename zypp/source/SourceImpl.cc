@@ -255,6 +255,11 @@ namespace zypp
 	      DBG << "Aborting" << endl;
 	      ZYPP_RETHROW ( excp );
 	    }
+	    else if ( user == media::MediaChangeReport::IGNORE )
+	    {
+	      DBG << "Skipping" << endl;
+	      ZYPP_THROW ( SkipRequestedException("User-requested skipping of a file") );
+ 	    }
 	    else if ( user == media::MediaChangeReport::EJECT )
 	    {
 	      DBG << "Eject: try to release" << endl;
