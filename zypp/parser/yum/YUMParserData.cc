@@ -605,6 +605,10 @@ namespace zypp {
         out << "  Patch RPM:" << endl
           << "    arch: " << data.arch << endl
           << "    filename: " << data.filename << endl
+          << "    location: '" << data.location << "'" <<endl
+          << "    media: " << data.media << endl
+          << "    checksumType: '" << data.checksumType << "'" << endl
+          << "    checksum: '" << data.checksum << "'" << endl
           << "    download size: " << data.downloadsize << endl
           << "    MD5: " << data.md5sum << endl
           << "    build time: " << data.buildtime << endl
@@ -617,6 +621,10 @@ namespace zypp {
         out << "  Delta RPM:" << endl
           << "    arch: " << data.arch << endl
           << "    filename: " << data.filename << endl
+          << "    location: '" << data.location << "'" <<endl
+          << "    media: " << data.media << endl
+          << "    checksumType: '" << data.checksumType << "'" << endl
+          << "    checksum: '" << data.checksum << "'" << endl
           << "    download size: " << data.downloadsize << endl
           << "    MD5: " << data.md5sum << endl
           << "    build time: " << data.buildtime << endl

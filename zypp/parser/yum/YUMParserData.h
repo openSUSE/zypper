@@ -200,6 +200,10 @@ namespace zypp {
 	std::string md5sum;
 	std::string buildtime;
 	std::list<YUMBaseVersion> baseVersions;
+        std::string checksumType;
+        std::string checksum;
+	std::string location;
+	std::string media;
       };
 
       class YUMDeltaRpm {
@@ -210,6 +214,10 @@ namespace zypp {
 	std::string md5sum;
 	std::string buildtime;
 	YUMBaseVersion baseVersion;
+        std::string checksumType;
+        std::string checksum;
+	std::string location;
+	std::string media;
       };
 
 

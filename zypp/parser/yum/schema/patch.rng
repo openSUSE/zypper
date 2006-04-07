@@ -245,6 +245,31 @@
   <define name="element-patchrpm">
     <element name="patchrpm">
       <ref name="shared-rpmfile-attributes"/>
+      <element name="location">
+        <optional>
+          <attribute name="xml:base">
+            <data type="anyURI"/>
+          </attribute>
+        </optional>
+        <attribute name="href">
+          <data type="anyURI"/>
+        </attribute>
+        <empty/>
+      </element>
+      <optional>
+        <element name="media">
+          <text/>
+        </element>
+      </optional>
+      <element name="checksum">
+        <attribute name="type">
+          <choice>
+            <value>md5</value>
+            <value>sha</value>
+          </choice>
+        </attribute>
+        <text/>
+      </element>
       <oneOrMore>
         <ref name="element-base_version"/>
       </oneOrMore>
@@ -253,6 +278,31 @@
   <define name="element-deltarpm">
     <element name="deltarpm">
       <ref name="shared-rpmfile-attributes"/>
+      <element name="location">
+        <optional>
+          <attribute name="xml:base">
+            <data type="anyURI"/>
+          </attribute>
+        </optional>
+        <attribute name="href">
+          <data type="anyURI"/>
+        </attribute>
+        <empty/>
+      </element>
+      <optional>
+        <element name="media">
+          <text/>
+        </element>
+      </optional>
+      <element name="checksum">
+        <attribute name="type">
+          <choice>
+            <value>md5</value>
+            <value>sha</value>
+          </choice>
+        </attribute>
+        <text/>
+      </element>
       <ref name="element-delta-base_version"/>
     </element>
   </define>

@@ -788,19 +788,55 @@ namespace zypp
           if (!parsed.location.empty()) {
               impl->_location = parsed.location;
               impl->_mediaid = str::strtonum<unsigned>( parsed.media );
+	      impl->_checksum = CheckSum(parsed.checksumType, parsed.checksum);
           }
 	  impl->_install_only = parsed.installOnly;
-  //	if (!parsed.plainRpms.empty()) impl->_plain_rpms = parsed.plainRpms;
-  #warning Needs equal PatchRpm and DeltaRpm definition in parser/yum and source/yum
-  #if 0
-          if (!parsed.patchRpms.empty()) impl->_patch_rpms = parsed.patchRpms;
-          if (!parsed.deltaRpms.empty()) impl->_delta_rpms = parsed.deltaRpms;
-  #endif
-          //DBG << "NVRAD " << (NVRA)packagedata << endl;
 
+	  impl->_patch_rpms = std::list<PatchRpm>();
+	  for (std::list<YUMPatchRpm>::const_iterator it = parsed.patchRpms.begin();
+	    it != parsed.patchRpms.end(); ++it)
+	  {
+	    std::list<BaseVersion> bv_list;
+	    for (std::list<YUMBaseVersion>::const_iterator bvit = it->baseVersions.begin();
+	      bvit != it->baseVersions.end(); ++it)
+	    {
+	      BaseVersion bv(
+		Edition (bvit->ver, bvit->rel, bvit->epoch),
+                CheckSum("md5", bvit->md5sum),
+		strtol(bvit->buildtime.c_str(), 0, 10)
+	      );
+	      bv_list.push_back(bv);
+	    }
+	    PatchRpm patch_rpm(
+	      Arch(it->arch),
+	      Pathname(it->location),
+	      strtol(it->downloadsize.c_str(), 0, 10),
+	      CheckSum (it->checksumType, it->checksum),
+	      strtol(it->buildtime.c_str(), 0, 10),
+	      bv_list
+	    );
+	    impl->_patch_rpms.push_back(patch_rpm);
+	  }
 
-
-  #warning add patchrpm, deltarpm, etc. to YUMPackageImpl here
+	  impl->_delta_rpms = std::list<DeltaRpm>();
+	  for (std::list<YUMDeltaRpm>::const_iterator it = parsed.deltaRpms.begin();
+	    it != parsed.deltaRpms.end(); ++it)
+	  {
+	    DeltaRpm delta_rpm(
+	      Arch(it->arch),
+	      Pathname(it->location),
+	      strtol(it->downloadsize.c_str(), 0, 10),
+	      CheckSum (it->checksumType, it->checksum),
+	      strtol(it->buildtime.c_str(), 0, 10),
+	      BaseVersion(
+		Edition (it->baseVersion.ver, it->baseVersion.rel, it->baseVersion.epoch),
+                CheckSum("md5", it->baseVersion.md5sum),
+		strtol(it->baseVersion.buildtime.c_str(), 0, 10)
+	      )
+	    );
+	    impl->_delta_rpms.push_back(delta_rpm);
+	  }
+	
           Package::Ptr new_package = detail::makeResolvableFromImpl(
               packagedata, impl
           );

@@ -324,6 +324,16 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	      parsePkgBaseVersionNode( &base_version, child);
 	      patchRpm.baseVersions.push_back( base_version );
 	    }
+            else if (name == "location") {
+		patchRpm.location = _helper.attribute(child,"href");
+	    }
+	    else if (name == "media") {
+		patchRpm.media = _helper.content(child);
+	    }
+	    else if (name == "checksum") {
+	      patchRpm.checksumType = _helper.attribute(child,"type");
+	      patchRpm.checksum = _helper.content(child);
+	    }
 	    else {
 	      WAR << "YUM <atom/package/pkgfiles/patch> contains the unknown element <"
 		  << name << "> "
@@ -351,6 +361,16 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	    string name = _helper.name(child);
 	    if (name == "base_version") {
 	      parsePkgBaseVersionNode( &(deltaRpm.baseVersion), child);
+	    }
+            else if (name == "location") {
+		deltaRpm.location = _helper.attribute(child,"href");
+	    }
+	    else if (name == "media") {
+		deltaRpm.media = _helper.content(child);
+	    }
+	    else if (name == "checksum") {
+	      deltaRpm.checksumType = _helper.attribute(child,"type");
+	      deltaRpm.checksum = _helper.content(child);
 	    }
 	    else {
 	      WAR << "YUM <atom/package/pkgfiles/delta> contains the unknown element <"

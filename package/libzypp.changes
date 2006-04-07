@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr  7 20:42:09 CEST 2006 - jsrain@suse.de
+
+- read metadata for packages from correct tags in patches (#163220)
+- rev 3011
+
+-------------------------------------------------------------------
 Fri Apr  7 19:57:41 CEST 2006 - kkaempf@suse.de
 
 - more detailed resolver error reports (#162994)
