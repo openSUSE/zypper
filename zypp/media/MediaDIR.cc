@@ -78,10 +78,13 @@ namespace zypp {
       // still allows to use hand mounted media paths.
       //
       if( attachPoint().asString() != "/"
+	  && attachPoint().asString() != "./"
+	  && attachPoint().asString() != "../"
+	  && attachPoint().asString() != ""
 	  && !isUseableAttachPoint(attachPoint(), false))
       {
 	ZYPP_THROW(MediaBadUrlException(url(),
-	  "Specified path is not allowed as media source"
+	  "Specified path '" + attachPoint().asString() + "' is not allowed as media source"
 	));
       }
 
