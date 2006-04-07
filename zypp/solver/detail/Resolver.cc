@@ -1008,7 +1008,7 @@ struct TransactSupplements : public resfilter::PoolItemFilterFunctor
 
     bool operator()( PoolItem_Ref item )
     {
-	MIL << "TransactSupplements(" << item << ")" << endl;
+//	MIL << "TransactSupplements(" << item << ")" << endl;
 	if (item->kind() == _kind
 	    && (item.status().staysInstalled()
 		|| item.status().isToBeInstalled()))
@@ -1044,13 +1044,13 @@ struct TransactLanguage : public resfilter::PoolItemFilterFunctor
 	/* check for supplements, if the item has supplements these also must match  */
 
 	PoolItem_Ref item( cai.item );
-	MIL << "TransactLanguage " << item << ", install " << _install << endl;
+//	MIL << "TransactLanguage " << item << ", install " << _install << endl;
 	CapSet supplements( item->dep( Dep::SUPPLEMENTS ) );
 	if (!supplements.empty()) {
-	    MIL << "has supplements" << endl;
+//	    MIL << "has supplements" << endl;
 	    bool valid = false;
 	    for (CapSet::const_iterator it = supplements.begin(); it != supplements.end(); ++it) {
-		MIL << "Checking " << *it << endl;
+//		MIL << "Checking " << *it << endl;
 		TransactSupplements callback( it->refers() );
 		invokeOnEach( _resolver.pool().byNameBegin( it->index() ),
 			      _resolver.pool().byNameEnd( it->index() ),
@@ -1061,7 +1061,7 @@ struct TransactLanguage : public resfilter::PoolItemFilterFunctor
 		}
 	    }
 	    if (!valid) {
-		MIL << "All supplements false" << endl;
+//		MIL << "All supplements false" << endl;
 		return true;			// no supplements matched, we're done
 	    }
 	}
