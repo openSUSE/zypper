@@ -925,21 +925,11 @@ Resolver::resolvePool ()
     return have_solution;
 }
 
-
-//
-// transact list of capabilities, return false if one couldn't be matched
-//
+//-----------------------------------------------------------------------------
 
 static bool
-transactCaps( const ResPool & pool, const CapSet & caps, bool install, bool soft )
+transactItems( PoolItem_Ref installed, PoolItem_Ref uninstalled, bool install, bool soft )
 {
-    bool result = true;
-
-    for (CapSet::const_iterator it = caps.begin(); it != caps.end(); ++it) {
-
-	PoolItem_Ref installed = Helper::findInstalledByNameAndKind( pool, it->index(), it->refers() );
-	PoolItem_Ref uninstalled = Helper::findUninstalledByNameAndKind( pool, it->index(), it->refers() );
-
 	if (install) {
 	    if (uninstalled
 		&& !uninstalled.status().isLocked())
@@ -979,11 +969,118 @@ transactCaps( const ResPool & pool, const CapSet & caps, bool install, bool soft
 	if (!uninstalled
 	    && !installed)
 	{
-	    result = false;
+	    return false;
 	}
+    return true;
+}
+
+
+//
+// transact list of capabilities, return false if one couldn't be matched
+//
+
+static bool
+transactCaps( const ResPool & pool, const CapSet & caps, bool install, bool soft )
+{
+    bool result = true;
+
+    for (CapSet::const_iterator it = caps.begin(); it != caps.end(); ++it) {
+
+	PoolItem_Ref installed = Helper::findInstalledByNameAndKind( pool, it->index(), it->refers() );
+	PoolItem_Ref uninstalled = Helper::findUninstalledByNameAndKind( pool, it->index(), it->refers() );
+
+	if (!transactItems( installed, uninstalled, install, soft ))
+	    result = false;
     }
     return result;
 }
+
+
+struct TransactSupplements : public resfilter::PoolItemFilterFunctor
+{
+    const Resolvable::Kind &_kind;
+    bool valid;
+
+    TransactSupplements( const Resolvable::Kind & kind )
+	: _kind( kind )
+	, valid( false )
+    { }
+
+    bool operator()( PoolItem_Ref item )
+    {
+	MIL << "TransactSupplements(" << item << ")" << endl;
+	if (item->kind() == _kind
+	    && (item.status().staysInstalled()
+		|| item.status().isToBeInstalled()))
+	{
+	    valid = true;
+	    return false;		// end search here
+	}
+	return true;
+    }
+};
+
+//
+// transact due to a language dependency
+// -> look through the pool and run transactResObject() accordingly
+
+struct TransactLanguage : public resfilter::PoolItemFilterFunctor
+{
+    Resolver & _resolver;
+    ResObject::constPtr _langObj;
+    bool _install;
+
+    TransactLanguage( Resolver & r, ResObject::constPtr langObj, bool install )
+	: _resolver( r )
+	, _langObj( langObj )
+	, _install( install )
+    { }
+
+    /* item has a freshens on _langObj
+	_langObj just transacted to _install (true == to-be-installed, false == to-be-uninstalled)
+    */
+    bool operator()( const CapAndItem & cai )
+    {
+	/* check for supplements, if the item has supplements these also must match  */
+
+	PoolItem_Ref item( cai.item );
+	MIL << "TransactLanguage " << item << ", install " << _install << endl;
+	CapSet supplements( item->dep( Dep::SUPPLEMENTS ) );
+	if (!supplements.empty()) {
+	    MIL << "has supplements" << endl;
+	    bool valid = false;
+	    for (CapSet::const_iterator it = supplements.begin(); it != supplements.end(); ++it) {
+		MIL << "Checking " << *it << endl;
+		TransactSupplements callback( it->refers() );
+		invokeOnEach( _resolver.pool().byNameBegin( it->index() ),
+			      _resolver.pool().byNameEnd( it->index() ),
+			      functor::functorRef<bool,PoolItem>( callback ) );
+		if (callback.valid) {
+		    valid = true;		// found a supplements match
+		    break;
+		}
+	    }
+	    if (!valid) {
+		MIL << "All supplements false" << endl;
+		return true;			// no supplements matched, we're done
+	    }
+	}
+
+	if (_install) {
+	    if (item.status().staysUninstalled()) {
+		transactItems( PoolItem_Ref(), item, _install, true );
+	    }
+	}
+	else {
+	    if (item.status().staysInstalled()) {
+		transactItems( item, PoolItem_Ref(), _install, true );
+	    }
+	}
+	return true;
+    }
+};
+
+
 
 //
 // transact a single object
@@ -998,6 +1095,14 @@ Resolver::transactResObject( ResObject::constPtr robj, bool install)
     }
     DBG << "transactResObject(" << *robj << ", " << (install?"install":"remove") << ")" << endl;
 
+    if (robj->kind() == ResTraits<Language>::kind) {
+	TransactLanguage callback( *this, robj, install );
+	Dep dep( Dep::FRESHENS );
+	invokeOnEach( pool().byCapabilityIndexBegin( robj->name(), dep ),
+		      pool().byCapabilityIndexEnd( robj->name(), dep ),
+		      functor::functorRef<bool,CapAndItem>( callback ) );
+
+    }
     transactCaps( _pool, robj->dep( Dep::RECOMMENDS ), install, true );
     return transactCaps( _pool, robj->dep( Dep::REQUIRES ), install, false );
 }
