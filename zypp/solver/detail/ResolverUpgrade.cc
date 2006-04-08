@@ -508,10 +508,9 @@ MIL << "split matched !" << endl;
 
       invokeOnEach( _pool.byCapabilityIndexBegin( installed->name(), dep ),
 		    _pool.byCapabilityIndexEnd( installed->name(), dep ),
-		    functor::chain( resfilter::ByCaINotTransact(),
-		        functor::chain( resfilter::ByCaIUninstalled(),
-					resfilter::ByCapMatch( installedCap ) ) ),
-		    functor::functorRef<bool,CapAndItem>(info) );
+		    functor::chain( resfilter::ByCaIUninstalled(),
+				    resfilter::ByCapMatch( installedCap ) ) ,
+		    functor::functorRef<bool,CapAndItem>(info) );      
 
       int num_providers = info.providers.size();
 
