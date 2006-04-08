@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Sat Apr  8 10:07:06 CEST 2006 - kkaempf@suse.de
+
+- allow relative paths with url file:
+- dont filter atoms from going into pool, multi-arch patch
+  requirements need them. Instead, treat atoms with incompatible
+  architecture as unneeded.
+- rev 3018
+
+-------------------------------------------------------------------
 Fri Apr  7 23:57:37 CEST 2006 - jsrain@suse.de
 
 - product now provides short name
