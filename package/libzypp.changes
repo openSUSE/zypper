@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sat Apr  8 12:03:37 CEST 2006 - schubi@suse.de
+
+- Bug 164440; Taking wrong architecture while updating obsoletes
+  splitted packages 
+
+-------------------------------------------------------------------
 Sat Apr  8 10:07:06 CEST 2006 - kkaempf@suse.de
 
 - allow relative paths with url file:
