@@ -1063,12 +1063,14 @@ namespace zypp
 	    default:
 	      ERR << "Unknown type of atom" << endl;
 	  }
+#if 0					// atoms require their patch, why ?
 	  for (Patch::AtomList::iterator it = impl->_atoms.begin();
 	       it != impl->_atoms.end();
 	       it++)
 	  {
 	    (*it)->injectRequires(cap);
 	  }
+#endif
 	}
       return patch;
     }
