@@ -105,6 +105,11 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
         _XDEBUG("Item " << _item << " is locked. --> NO establish");
         return true;
     }
+    if ( ! _item->arch().compatibleWith( context->architecture() ) ) {
+	context->unneeded (_item, _other_penalty);
+	_DEBUG( _item << " has incompatible architecture, unneeded" );
+	return true;
+    }
 
     _item.status().setUndetermined();		// reset any previous establish state
 
@@ -170,8 +175,10 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	if (iter == requires.end()) {					// all are met
 	    if (_item->kind() == ResTraits<Package>::kind
                 || _item->kind() == ResTraits<Pattern>::kind
-                || _item->kind() == ResTraits<Selection>::kind) {
-		if (status.staysUninstalled()) {
+                || _item->kind() == ResTraits<Selection>::kind)
+	    {
+		if (status.staysUninstalled())
+		{
 		    _DEBUG("Uninstalled " << _item << " has all requirements -> install");
 		    QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), _item );
 		    qil.push_front( install_item );
