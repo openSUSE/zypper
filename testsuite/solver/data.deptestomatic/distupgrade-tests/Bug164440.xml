@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+   distupgrade single package
+-->
+<test>
+<setup>
+  <arch name="x86_64"/>
+  <system file="x86_64-system.xml"/>
+  <channel name="upgrade" file="SLES-10-x86_64-B906-packages.xml"/>
+</setup>
+<trial>
+  <distupgrade/>
+<reportproblems/>
+<takesolution problem="0" solution="2"/>
+<reportproblems/>
+<takesolution problem="0" solution="2"/>
+<reportproblems/>
+</trial>
+</test>
