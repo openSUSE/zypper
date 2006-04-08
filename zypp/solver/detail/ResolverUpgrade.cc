@@ -77,6 +77,38 @@ using namespace zypp;
 using zypp::capability::SplitCap;
 
 
+/** Oder on AvialableItemSet.
+ * \li best Arch
+ * \li best Edition
+ * \li ResObject::constPtr as fallback.
+*/
+struct AVOrder : public std::binary_function<PoolItem_Ref,PoolItem_Ref,bool>
+{
+    // NOTE: operator() provides LESS semantics to order the set.
+    // So LESS means 'prior in set'. We want 'better' archs and
+    // 'better' editions at the beginning of the set. So we return
+    // TRUE if (lhs > rhs)!
+    //
+    bool operator()( const PoolItem_Ref lhs, const PoolItem_Ref rhs ) const
+        {
+	    int res = lhs->arch().compare( rhs->arch() );
+	    if ( res )
+		return res > 0;
+	    res = lhs->edition().compare( rhs->edition() );
+	    if ( res )
+		return res > 0;
+
+	    // no more criteria, still equal:
+	    // use the ResObject::constPtr (the poiner value)
+	    // (here it's arbitrary whether < or > )
+	    return lhs.resolvable() < rhs.resolvable();
+        }
+};
+	
+typedef std::set<PoolItem_Ref, AVOrder> PoolItemOrderSet;
+	
+
+
 // check if downgrade is allowed
 // (Invariant on entry: installed.edition >= candidate.edition)
 //
@@ -167,7 +199,7 @@ Resolver::doesObsoleteItem (PoolItem_Ref candidate, PoolItem_Ref installed)
 
 struct FindProviders
 {
-    PoolItemSet providers;		// the providers which matched
+    PoolItemOrderSet providers;		// the providers which matched
 
     FindProviders ()
     { }
@@ -203,10 +235,9 @@ void
 Resolver::doUpgrade( UpgradeStatistics & opt_stats_r )
 {
   typedef map<PoolItem_Ref,PoolItem_Ref> CandidateMap;
-
   typedef intrusive_ptr<const SplitCap> SplitCapPtr;
-  typedef map<PoolItem_Ref,PoolItemSet> SplitMap;
-  typedef map<PoolItem_Ref,PoolItemSet> TodoMap;
+  typedef map<PoolItem_Ref,PoolItemOrderSet> SplitMap;
+  typedef map<PoolItem_Ref,PoolItemOrderSet> TodoMap;
 
   CandidateMap candidatemap;
 
@@ -240,13 +271,13 @@ MIL << "target at " << target << endl;
   }
 
   ///////////////////////////////////////////////////////////////////
-  // Reset all auto states and build PoolItemSet of available candidates
+  // Reset all auto states and build PoolItemOrderSet of available candidates
   // (those that do not belong to PoolItems set to delete).
   //
   // On the fly remember splitprovides and afterwards check, which
   // of them do apply.
   ///////////////////////////////////////////////////////////////////
-  PoolItemSet available; // candidates available for install (no matter if selected for install or not)
+  PoolItemOrderSet available; // candidates available for install (no matter if selected for install or not)
 
   for ( ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it ) {
     PoolItem_Ref item = *it;
@@ -340,7 +371,7 @@ MIL << "split matched !" << endl;
   } // iterate over the complete pool
 
   // reset all seen
-  for (PoolItemSet::const_iterator it = available.begin(); it != available.end(); ++it) {
+  for (PoolItemOrderSet::const_iterator it = available.begin(); it != available.end(); ++it) {
 	it->status().setSeen(false);
   }
 
@@ -516,11 +547,11 @@ MIL << "split matched !" << endl;
 
     TodoMap::iterator sit = applyingSplits.find( installed );
     if ( sit != applyingSplits.end() ) {
-      PoolItemSet & toadd( sit->second );
+      PoolItemOrderSet & toadd( sit->second );
       if ( !toadd.size() ) {
 	INT << "Empty SplitPkgMap entry for " << installed << endl;
       } else {
-	for ( PoolItemSet::iterator ait = toadd.begin(); ait != toadd.end(); ++ait ) {
+	for ( PoolItemOrderSet::iterator ait = toadd.begin(); ait != toadd.end(); ++ait ) {
 	  PoolItem_Ref split_candidate = *ait;
 	  MIL << " ==> ADD (splitted): " << split_candidate << endl;
 	  if ( probably_dropped
@@ -560,9 +591,9 @@ MIL << "split matched !" << endl;
 
   for ( TodoMap::iterator it = addProvided.begin(); it != addProvided.end(); ++it ) {
 
-    PoolItemSet & tset( it->second );		// these are the providers (well, just one)
+    PoolItemOrderSet & tset( it->second );		// these are the providers (well, just one)
 
-    for ( PoolItemSet::iterator sit = tset.begin(); sit != tset.end(); ++sit ) {
+    for ( PoolItemOrderSet::iterator sit = tset.begin(); sit != tset.end(); ++sit ) {
       PoolItem_Ref provider (*sit);
 
       if (provider.status().setToBeInstalled(ResStatus::APPL_HIGH)) {
@@ -582,8 +613,8 @@ MIL << "split matched !" << endl;
 
   for ( TodoMap::iterator it = addSplitted.begin(); it != addSplitted.end(); ++it ) {
 
-    PoolItemSet & tset( it->second );
-    for ( PoolItemSet::iterator sit = tset.begin(); sit != tset.end(); ++sit ) {
+    PoolItemOrderSet & tset( it->second );
+    for ( PoolItemOrderSet::iterator sit = tset.begin(); sit != tset.end(); ++sit ) {
       if ((*sit).status().setToBeInstalled(ResStatus::APPL_HIGH)) {
 	++opt_stats_r.chk_add_split;
       }
@@ -597,8 +628,8 @@ MIL << "split matched !" << endl;
     MIL << "GET ONE OUT OF " << it->second.size() << " for " << it->first << endl;
 
     PoolItem_Ref guess;
-    PoolItemSet & gset( it->second );
-    for ( PoolItemSet::iterator git = gset.begin(); git != gset.end(); ++git ) {
+    PoolItemOrderSet & gset( it->second );
+    for ( PoolItemOrderSet::iterator git = gset.begin(); git != gset.end(); ++git ) {
       PoolItem_Ref item (*git);
       if ( item.status().isToBeInstalled()) {
 	MIL << " ==> (pass 2: meanwhile set to install): " << item << endl;
