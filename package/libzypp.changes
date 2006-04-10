@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 10 10:32:22 CEST 2006 - mvidner@suse.cz
+
+- Added Product::updateUrls, from content/UPDATEURLS (#163192).
+- rev 3024
+
+-------------------------------------------------------------------
 Sat Apr  8 12:03:37 CEST 2006 - schubi@suse.de
 
 - Bug 164440; Taking wrong architecture while updating obsoletes

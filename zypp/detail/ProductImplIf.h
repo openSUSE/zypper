@@ -50,6 +50,7 @@ namespace zypp
 
       virtual Url releaseNotesUrl() const PURE_VIRTUAL;
 
+      virtual std::list<Url> updateUrls() const PURE_VIRTUAL;
       /** The product flags */
       virtual std::list<std::string> flags() const PURE_VIRTUAL;
 

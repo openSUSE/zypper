@@ -49,6 +49,10 @@ namespace zypp
     /** The URL to download the release notes for this product */
     Url releaseNotesUrl() const;
 
+    /** Online updates for the product.
+	They are complementary, not alternatives. #163192 */
+    std::list<Url> updateUrls() const;
+
     /** The product flags */
     std::list<std::string> flags() const;
 

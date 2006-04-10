@@ -109,6 +109,28 @@ namespace zypp
 		    prodImpl->_release_notes_url = Url();
     		}
 	    }
+	    else if(key == "UPDATEURL")
+	    {
+		std::list<std::string> items;
+		boost::algorithm::split(items, value, is_space());
+		std::list<std::string>::const_iterator
+		    b = items.begin(),
+		    e = items.end(),
+		    i;
+		for (i = b; i != e; ++i)
+		{
+		    // Url class throws in case of invalid URL
+		    try
+		    {
+			Url url = *i;
+			prodImpl->_update_urls.push_back( url );
+		    }
+		    catch( ... )
+		    {
+			// do not add
+		    }
+		}
+	    }
             else if(key == "ARCH")
               parseLine( key, modifier, value, prodImpl->_arch);
             else if(key == "DEFAULTBASE")

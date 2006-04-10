@@ -309,6 +309,13 @@ std::string toXML( const Product::constPtr &obj )
   out << "  <vendor>" << xml_escape(obj->vendor()) << "</vendor>" << std::endl;
   out << "  <source>" << xml_escape(obj->source().alias()) << "</source>" << std::endl;  
   out << "  <release-notes-url>" << xml_escape(obj->releaseNotesUrl().asString()) << "</release-notes-url>" << std::endl;
+  out << "  <update-urls>" << std::endl;
+  std::list<Url> updateUrls = obj->updateUrls();
+  for ( std::list<Url>::const_iterator it = updateUrls.begin(); it != updateUrls.end(); ++it)
+  {
+    out << "    <update-url>" << xml_escape(it->asString()) << "</update-url>" << std::endl; 
+  }
+  out << "  </update-urls>" << std::endl;
   out << "  <product-flags>" << std::endl;
   std::list<std::string> flags = obj->flags();
   for ( std::list<std::string>::const_iterator it = flags.begin(); it != flags.end(); ++it)
