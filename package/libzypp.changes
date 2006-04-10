@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Apr 10 18:55:03 CEST 2006 - mt@suse.de
+
+- Added detection of iSeries virtual CD (/dev/iseries/vcd[a-h])
+  devices - on powerpc only (#163971)
+- rev 3042
+
+-------------------------------------------------------------------
 Mon Apr 10 18:05:51 CEST 2006 - kkaempf@suse.de
 
 - fix endless loop in patches parsing.
