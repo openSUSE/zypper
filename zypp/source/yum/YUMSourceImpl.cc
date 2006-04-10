@@ -782,13 +782,13 @@ namespace zypp
         {
           ResImplTraits<YUMPackageImpl>::Ptr impl = it->second.impl;
           Package::Ptr package = it->second.package;
-          //DBG << "found " << *package << ", impl " << impl << endl;
+	  //DBG << "found " << *package << ", impl " << impl << endl;
 
           _store.erase( package );
           impl->unmanage();
 
           // Atoms are inserted in the store after patch creation
-          //DBG << "Inserting atom " << *atom << endl;
+	  //DBG << "Inserting atom " << *atom << endl;
           //DBG << "with deps " << deps << endl;
           //_store.insert( atom );
 
@@ -802,13 +802,14 @@ namespace zypp
           }
 	  impl->_install_only = parsed.installOnly;
 
+	  //DBG << "Inserting patch RPMs" << endl;
 	  impl->_patch_rpms = std::list<PatchRpm>();
 	  for (std::list<YUMPatchRpm>::const_iterator it = parsed.patchRpms.begin();
 	    it != parsed.patchRpms.end(); ++it)
 	  {
 	    std::list<BaseVersion> bv_list;
 	    for (std::list<YUMBaseVersion>::const_iterator bvit = it->baseVersions.begin();
-	      bvit != it->baseVersions.end(); ++it)
+	      bvit != it->baseVersions.end(); ++bvit)
 	    {
 	      BaseVersion bv(
 		Edition (bvit->ver, bvit->rel, bvit->epoch),
@@ -827,6 +828,8 @@ namespace zypp
 	    );
 	    impl->_patch_rpms.push_back(patch_rpm);
 	  }
+
+	  //DBG << "Inserting delta RPMs" << endl;
 
 	  impl->_delta_rpms = std::list<DeltaRpm>();
 	  for (std::list<YUMDeltaRpm>::const_iterator it = parsed.deltaRpms.begin();
@@ -851,7 +854,7 @@ namespace zypp
               packagedata, impl
           );
 
-          //DBG << "new_package " << *new_package << endl;
+	  //DBG << "new_package " << *new_package << endl;
 
           _store.insert( new_package );
         }
