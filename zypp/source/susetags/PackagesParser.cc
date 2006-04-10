@@ -291,6 +291,10 @@ namespace zypp
 	    {
 	      collectDeps( mtag_r.values, _nvrad[Dep::FRESHENS] );
 	    }
+	  else if ( mtag_r.name == "Enh" )
+	    {
+	      collectDeps( mtag_r.values, _nvrad[Dep::ENHANCES] );
+	    }
 	  else if ( mtag_r.name == "Key" )
 	    {
 	       _pkgImpl->_keywords = mtag_r.values;
