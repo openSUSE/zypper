@@ -73,8 +73,6 @@ namespace zypp
         initCacheDir(cache_dir_r);
         //suse/setup/descr
         //packages.* *.sel
-        media::MediaManager media_mgr;
-        media::MediaAccessId media_num = _media_set->getMediaAccessId(1);
         
         INT << "Storing data to cache " << cache_dir_r << endl;
         
@@ -90,7 +88,7 @@ namespace zypp
         
         // get the list of cache keys
         std::list<std::string> files;
-        dirInfo( media_num, files, _path);
+        dirInfo( 1, files, _path);
                 
         if (0 != assert_dir((cache_dir_r + "DATA"), 0700))
         {
@@ -276,9 +274,7 @@ namespace zypp
         else
         {
           std::list<std::string> allfiles;
-          media::MediaManager media_mgr;
-          media::MediaAccessId media_num = _media_set->getMediaAccessId(1);
-          dirInfo(media_num, allfiles, _path);
+          dirInfo(1, allfiles, _path);
 
           for( std::list<std::string>::const_iterator it = allfiles.begin(); it != allfiles.end(); ++it)
           {
@@ -366,12 +362,9 @@ namespace zypp
           _content_file = provideFile(_path + "content");
           
           // we need to read the dir to see if content.key and .asc exists
-          media::MediaManager media_mgr;
-          media::MediaAccessId media_num = _media_set->getMediaAccessId(1);
-          
           // get the list of cache keys
           std::list<std::string> files;
-          dirInfo( media_num, files, _path);
+          dirInfo( 1, files, _path);
           
           for( std::list<std::string>::const_iterator it = files.begin(); it != files.end(); ++it)
           {

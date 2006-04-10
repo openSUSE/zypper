@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 10 17:00:05 CEST 2006 - jsrain@suse.de
+
+- fixed media handling in SuSEtags source (#164879)
+- rev 3037
+
+-------------------------------------------------------------------
 Mon Apr 10 16:30:54 CEST 2006 - kkaempf@suse.de
 
 - honor 'dry_run' on package remove (#164732)
