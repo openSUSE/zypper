@@ -78,7 +78,7 @@ namespace zypp
 	virtual void reportend();
 
         /** Start the operation */
-        virtual void start( const Pathname & name );
+        virtual void start( const std::string & name );
 	
         /**
          * Inform about progress
