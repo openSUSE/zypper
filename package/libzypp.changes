@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 10 13:12:49 CEST 2006 - kkaempf@suse.de
+
+- add files from yum filelist as provides to package (#164731)
+- rev 3032
+
+-------------------------------------------------------------------
 Mon Apr 10 11:10:37 CEST 2006 - kkaempf@suse.de
 
 - honor "+Enh:/-Enh:" in packages file (#156513)
