@@ -236,7 +236,7 @@ struct RequireProcess
 		    // erase the old provider
 		    for (PoolItemList::iterator it = providers.begin(); it != providers.end(); ++it) {
 			if (*it == upos->second) {
-			    DBG << "Kicking " << *it << " for " << provider << endl;
+			    _XDEBUG("Kicking " << *it << " for " << provider)
 			    providers.erase( it );
 			    break;
 			}
@@ -785,7 +785,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	    && item.status().isUninstalled()
 	    && !item.status().maySetSoftTransact( true, ResStatus::SOLVER ) )
 	{
-	    DBG << "Can't soft-transact " << item << endl;
+	    _DEBUG("Can't soft-transact " << item);
 	    goto finished;
 	}
 	QueueItemInstall_Ptr install_item = new QueueItemInstall (pool(), item, _soft);
@@ -819,7 +819,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		&& item.status().isUninstalled()
 		&& !item.status().maySetSoftTransact( true, ResStatus::SOLVER ) )
 	    {
-		DBG << "Can't soft-transact " << item << endl;
+		_DEBUG("Can't soft-transact " << item);
 		continue;
 	    }
 
