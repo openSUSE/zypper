@@ -2010,6 +2010,8 @@ void RpmDb::doRemovePackage( const string & name_r, unsigned flags, callback::Se
 	opts.push_back("--nodeps");
     if (flags & RPMINST_JUSTDB)
 	opts.push_back("--justdb");
+    if (flags & RPMINST_TEST)
+	opts.push_back ("--test");
     if (flags & RPMINST_FORCE) {
       WAR << "IGNORE OPTION: 'rpm -e' does not support '--force'" << endl;
     }
