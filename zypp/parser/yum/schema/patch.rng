@@ -270,6 +270,8 @@
         </attribute>
         <text/>
       </element>
+      <ref name="element-time"/>
+      <ref name="element-size"/>
       <oneOrMore>
         <ref name="element-base_version"/>
       </oneOrMore>
@@ -303,6 +305,8 @@
         </attribute>
         <text/>
       </element>
+      <ref name="element-time"/>
+      <ref name="element-size"/>
       <ref name="element-delta-base_version"/>
     </element>
   </define>

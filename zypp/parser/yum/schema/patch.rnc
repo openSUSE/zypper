@@ -111,6 +111,8 @@ element-patchrpm =
       attribute type { "md5" | "sha" },
       text
     },
+    element-time,
+    element-size,
     element-base_version +
   }
 
@@ -128,6 +130,8 @@ element-deltarpm =
       attribute type { "md5" | "sha" },
       text
     },
+    element-time,
+    element-size,
     element-delta-base_version
   }
 

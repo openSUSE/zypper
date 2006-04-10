@@ -334,6 +334,15 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	      patchRpm.checksumType = _helper.attribute(child,"type");
 	      patchRpm.checksum = _helper.content(child);
 	    }
+            else if (name == "time") {
+//              patchRpm.timeFile = _helper.attribute(child,"file");
+              patchRpm.buildtime = _helper.attribute(child,"build");
+            }
+            else if (name == "size") {
+//              patchRpm.sizePackage = _helper.attribute(child,"package");
+//              patchRpm.sizeInstalled = _helper.attribute(child,"installed");
+              patchRpm.downloadsize = _helper.attribute(child,"archive");
+            }
 	    else {
 	      WAR << "YUM <atom/package/pkgfiles/patch> contains the unknown element <"
 		  << name << "> "
@@ -372,6 +381,15 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	      deltaRpm.checksumType = _helper.attribute(child,"type");
 	      deltaRpm.checksum = _helper.content(child);
 	    }
+            else if (name == "time") {
+//              deltaRpm.timeFile = _helper.attribute(child,"file");
+              deltaRpm.buildtime = _helper.attribute(child,"build");
+            }
+            else if (name == "size") {
+//              deltaRpm.sizePackage = _helper.attribute(child,"package");
+//              deltaRpm.sizeInstalled = _helper.attribute(child,"installed");
+              deltaRpm.downloadsize = _helper.attribute(child,"archive");
+            }
 	    else {
 	      WAR << "YUM <atom/package/pkgfiles/delta> contains the unknown element <"
 		  << name << "> "
