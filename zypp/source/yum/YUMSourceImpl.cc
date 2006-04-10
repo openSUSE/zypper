@@ -479,10 +479,10 @@ namespace zypp
 		  source_r,
 		  **prim,
 		  found_files != files_data.end()
-		    ? *found_files->second
+		    ? *(found_files->second)
 		    : filelist_empty,
 		  found_other != other_data.end()
-		    ? *found_other->second
+		    ? *(found_other->second)
 	       	     : other_empty,
 		  impl
 		);
@@ -714,6 +714,17 @@ namespace zypp
     {
       impl = new YUMPackageImpl( source_r, parsed, filelist, other );
 
+      Dependencies deps( createDependencies( parsed, ResTraits<Package>::kind ) );
+
+      CapFactory f;
+
+	for (std::list<FileData>::const_iterator it = filelist.files.begin();
+	     it != filelist.files.end();
+	     it++)
+	{
+	    deps[Dep::PROVIDES].insert( f.parse( ResTraits<Package>::kind, it->name ) );
+	}
+
       Arch arch;
       if (!parsed.arch.empty())
         arch = Arch(parsed.arch);
@@ -722,8 +733,7 @@ namespace zypp
       NVRAD dataCollect( parsed.name,
 			 Edition( parsed.ver, parsed.rel, parsed.epoch ),
 			 arch,
-			 createDependencies( parsed,
-					   ResTraits<Package>::kind )
+			 deps
 		       );
       Package::Ptr package = detail::makeResolvableFromImpl(
 	dataCollect, impl
