@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 10 18:05:51 CEST 2006 - kkaempf@suse.de
+
+- fix endless loop in patches parsing.
+- rev 3039
+
+-------------------------------------------------------------------
 Mon Apr 10 17:00:05 CEST 2006 - jsrain@suse.de
 
 - fixed media handling in SuSEtags source (#164879)
