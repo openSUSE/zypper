@@ -109,17 +109,23 @@ namespace zypp
      * state.
     */
     //@{
+    void saveState() const;
+
     void saveState( const ResObject::Kind & kind_r ) const;
 
     template<class _Res>
       void saveState() const
       { return saveState( ResTraits<_Res>::kind ); }
 
+    void restoreState() const;
+
     void restoreState( const ResObject::Kind & kind_r ) const;
 
     template<class _Res>
       void restoreState() const
       { return restoreState( ResTraits<_Res>::kind ); }
+
+    bool diffState() const;
 
     bool diffState( const ResObject::Kind & kind_r ) const;
 
