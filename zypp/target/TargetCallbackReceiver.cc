@@ -121,7 +121,7 @@ namespace zypp
 	}
 
         /** Start the operation */
-        void RpmRemovePackageReceiver::start( const Pathname & name ) 
+        void RpmRemovePackageReceiver::start( const std::string & name ) 
 	{
 	    _report->start( _resolvable );
 	}

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 10 10:56:24 CEST 2006 - visnov@suse.cz
+
+- fix callback receiver signature to match the callback for removing
+  package 
+
+-------------------------------------------------------------------
 Mon Apr 10 10:32:22 CEST 2006 - mvidner@suse.cz
 
 - Added Product::updateUrls, from content/UPDATEURLS (#163192).
