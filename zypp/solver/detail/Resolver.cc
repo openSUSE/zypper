@@ -491,6 +491,11 @@ struct FreshenState
 	CapSet freshens( item->dep( Dep::FRESHENS ) );
 	if (!freshens.empty())
 	    resolver.addPoolItemToEstablish( item );
+	// Also regarding supplements e.g. in order to recognize
+	// modalias dependencies. Bug #163140
+	CapSet supplements( item->dep( Dep::SUPPLEMENTS ) );
+	if (!supplements.empty())
+	    resolver.addPoolItemToEstablish( item );	
 	return true;
     }
 };
