@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Apr 10 11:10:37 CEST 2006 - kkaempf@suse.de
+
+- honor "+Enh:/-Enh:" in packages file (#156513)
+
+-------------------------------------------------------------------
 Mon Apr 10 10:56:24 CEST 2006 - visnov@suse.cz
 
 - fix callback receiver signature to match the callback for removing
