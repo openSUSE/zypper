@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 11 19:48:51 CEST 2006 - mt@suse.de
+
+- Improved Url path name "//" vs. "/%2f" handling; now if the
+  url has an authority, "/%2f" is used for ftp only (#163784)
+- rev 3062
+
+-------------------------------------------------------------------
 Tue Apr 11 16:41:02 CEST 2006 - jsrain@suse.de
 
 - fixed storing patch scripts to target store (#159928)
