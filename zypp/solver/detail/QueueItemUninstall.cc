@@ -214,13 +214,13 @@ struct UninstallProcess
 
 // Handle items which freshen or supplement us -> re-establish them
 
-struct EstablishItem
+struct UninstallEstablishItem
 {
     const ResPool & pool;
     QueueItemList & qil;
     bool soft;
 
-    EstablishItem (const ResPool & p, QueueItemList &l, bool s)
+    UninstallEstablishItem (const ResPool & p, QueueItemList &l, bool s)
 	: pool(p)
 	, qil(l)
 	, soft(s)
@@ -232,7 +232,7 @@ struct EstablishItem
 
     bool operator()( const CapAndItem & cai )
     {
-	_XDEBUG("QueueItemUninstall::EstablishItem (" << cai.item << ", " << cai.cap << ")");
+	_XDEBUG("QueueItemUninstall::UninstallEstablishItem (" << cai.item << ", " << cai.cap << ")");
 
 	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, cai.item, soft);
 	qil.push_back (establish_item);
@@ -387,7 +387,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	    // re-establish all which supplement or freshen a provides of the just uninstalled item
 
-	    EstablishItem establish( pool(), qil, _soft );
+	    UninstallEstablishItem establish( pool(), qil, _soft );
 
 	    dep = Dep::SUPPLEMENTS;
 	    invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
