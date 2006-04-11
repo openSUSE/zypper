@@ -110,26 +110,6 @@ namespace zypp
 	return _undo_script != ""
 	  || (_undo_location != "" && _undo_location != "/");
       }
-      TranslatedText YUMScriptImpl::summary() const
-      { return ResObjectImplIf::summary(); }
-
-      TranslatedText YUMScriptImpl::description() const
-      { return ResObjectImplIf::description(); }
-
-      Text YUMScriptImpl::insnotify() const
-      { return ResObjectImplIf::insnotify(); }
-
-      Text YUMScriptImpl::delnotify() const
-      { return ResObjectImplIf::delnotify(); }
-
-      bool YUMScriptImpl::providesSources() const
-      { return ResObjectImplIf::providesSources(); }
-
-      Label YUMScriptImpl::instSrcLabel() const
-      { return ResObjectImplIf::instSrcLabel(); }
-
-      Vendor YUMScriptImpl::instSrcVendor() const
-      { return ResObjectImplIf::instSrcVendor(); }
 
       Source_Ref YUMScriptImpl::source() const
       { return _source; }

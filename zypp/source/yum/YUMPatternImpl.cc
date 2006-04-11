@@ -58,24 +58,6 @@ namespace zypp
       TranslatedText YUMPatternImpl::description() const
       { return _description; }
 
-      Text YUMPatternImpl::insnotify() const
-      { return ResObjectImplIf::insnotify(); }
-
-      Text YUMPatternImpl::delnotify() const
-      { return ResObjectImplIf::delnotify(); }
-
-      bool YUMPatternImpl::providesSources() const
-      { return ResObjectImplIf::providesSources(); }
-
-      Label YUMPatternImpl::instSrcLabel() const
-      { return ResObjectImplIf::instSrcLabel(); }
-
-      Vendor YUMPatternImpl::instSrcVendor() const
-      { return ResObjectImplIf::instSrcVendor(); }
-
-      ByteCount YUMPatternImpl::size() const
-      { return ResObjectImplIf::size(); }
-
       Source_Ref YUMPatternImpl::source() const
       { return _source; }
 

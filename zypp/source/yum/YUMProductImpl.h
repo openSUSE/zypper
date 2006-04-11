@@ -44,12 +44,6 @@ namespace zypp
 	Label vendor() const;
 	TranslatedText summary() const;
 	TranslatedText description() const;
-	Text insnotify() const;
-	Text delnotify() const;
-	ByteCount size() const;
-	bool providesSources() const;
-	Label instSrcLabel() const;
-	Vendor instSrcVendor() const;
 	std::list<std::string> flags() const;
 	TranslatedText shortName() const;
       protected:
@@ -58,7 +52,6 @@ namespace zypp
 	TranslatedText _summary;
 	TranslatedText _description;
 	TranslatedText _short_name;
-
 
       private:
 	Source_Ref _source;

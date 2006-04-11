@@ -160,7 +160,7 @@ namespace zypp
 			 base_versions
 	  );
 	  _patch_rpms.push_back(patch);
-	  
+
 	}
 	for (std::list<zypp::parser::yum::YUMDeltaRpm>::const_iterator it
 		= parsed.deltaRpms.begin();
@@ -203,27 +203,10 @@ namespace zypp
       TranslatedText YUMPackageImpl::description() const
       { return _description; }
 
-      Text YUMPackageImpl::insnotify() const
-      // metadata doesn't priovide this attribute
-      { return ResObjectImplIf::insnotify(); }
-
-      Text YUMPackageImpl::delnotify() const
-      // metadata doesn't priovide this attribute
-      { return ResObjectImplIf::delnotify(); }
-
       ByteCount YUMPackageImpl::size() const
 #warning fixme
       { return 0; }
 
-      bool YUMPackageImpl::providesSources() const
-      { return ResObjectImplIf::providesSources(); }
-
-      Label YUMPackageImpl::instSrcLabel() const
-      { return ResObjectImplIf::instSrcLabel(); }
-      
-      Vendor YUMPackageImpl::instSrcVendor() const
-      { return ResObjectImplIf::instSrcVendor(); }
-      
       /** */
       Date YUMPackageImpl::buildtime() const
       { return _buildtime; }
@@ -343,12 +326,6 @@ namespace zypp
       { return _source; }
 
 #if 0
-      /** */
-      std::list<std::string> YUMPackageImpl::insnotify() const
-      { return std::list<std::string>(); }
-      /** */
-      std::list<std::string> YUMPackageImpl::delnotify() const
-      { return std::list<std::string>(); }
       /** */
       unsigned YUMPackageImpl::packageSize() const
       { return _size_package; }

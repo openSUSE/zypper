@@ -45,8 +45,6 @@ namespace zypp
 	virtual TranslatedText summary() const;
 	/** Package description */
 	virtual TranslatedText description() const;
-	virtual Text insnotify() const;
-	virtual Text delnotify() const;
 	virtual ByteCount size() const;
 	virtual bool providesSources() const;
 	virtual Label instSrcLabel() const;

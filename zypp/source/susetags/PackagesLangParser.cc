@@ -100,6 +100,15 @@ namespace zypp
 	    if ( _current != NULL )
              _current->_description = TranslatedText (mtag_r.values, _lang);
           }
+          else if ( mtag_r.name == "Ins" )
+            {
+              _current->_insnotify = TranslatedText (mtag_r.values, _lang);
+            }
+          else if ( mtag_r.name == "Del" )
+            {
+              _current->_delnotify = TranslatedText (mtag_r.values, _lang);
+            }
+
           else if ( mtag_r.name == "Eul" )
           {
             if ( _current != NULL )
@@ -129,7 +138,7 @@ namespace zypp
           ERR << "Packages Lang " << file_r << " is broken." << std::endl;
           return;
         }
-        
+
         MIL << "Ending after " << p._count << " langs with " << content_r.size() << " packages and " << p._notfound.size() << " not founds." <<endl;
         WAR << "Not found packages:" << std::endl;
         for ( std::set<NVRAD>::const_iterator it = p._notfound.begin(); it != p._notfound.end(); ++it)

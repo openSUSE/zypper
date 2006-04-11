@@ -46,18 +46,6 @@ namespace zypp
 	virtual TranslatedText summary() const;
 	/** */
 	virtual TranslatedText description() const;
-	/** */
-	virtual Text insnotify() const;
-	/** */
-	virtual Text delnotify() const;
-	/** */
-	virtual bool providesSources() const;
-	/** */
-	virtual Label instSrcLabel() const;
-	/** */
-	virtual Vendor instSrcVendor() const;
-        /** */
-        virtual ByteCount size() const;
         /** */
 	virtual bool isDefault() const;
         /** */
@@ -69,8 +57,6 @@ namespace zypp
 
 
       protected:
-// _summary
-// _description;
         bool _user_visible;
 	TranslatedText _summary;
 	TranslatedText _description;

@@ -45,26 +45,6 @@ namespace zypp
       TranslatedText YUMMessageImpl::text() const {
 	return _text;
       }
-      TranslatedText YUMMessageImpl::summary() const
-      { return ResObjectImplIf::summary(); }
-
-      TranslatedText YUMMessageImpl::description() const
-      { return ResObjectImplIf::description(); }
-
-      Text YUMMessageImpl::insnotify() const
-      { return ResObjectImplIf::insnotify(); }
-
-      Text YUMMessageImpl::delnotify() const
-      { return ResObjectImplIf::delnotify(); }
-
-      bool YUMMessageImpl::providesSources() const
-      { return ResObjectImplIf::providesSources(); }
-
-      Label YUMMessageImpl::instSrcLabel() const
-      { return ResObjectImplIf::instSrcLabel(); }
-
-      Vendor YUMMessageImpl::instSrcVendor() const
-      { return ResObjectImplIf::instSrcVendor(); }
 
       Source_Ref YUMMessageImpl::source() const
       { return _source; }

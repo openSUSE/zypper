@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Apr 11 14:17:00 CEST 2006 - ma@suse.de
+
+- Susetags:Package: Parse and provide ins/delnotify texts.
+
+-------------------------------------------------------------------
 Tue Apr 11 13:01:31 CEST 2006 - kkaempf@suse.de
 
 - when checking freshens/supplements at install, only consider
@@ -22,7 +27,7 @@ Tue Apr 11 10:23:14 CEST 2006 - schubi@suse.de
 Tue Apr 11 09:30:14 CEST 2006 - visnov@suse.cz
 
 - ask user if a file exists but does not have a checksum (#162797)
-- rev 3044 
+- rev 3044
 
 -------------------------------------------------------------------
 Mon Apr 10 22:39:34 CEST 2006 - jsrain@suse.de
@@ -70,7 +75,7 @@ Mon Apr 10 11:10:37 CEST 2006 - kkaempf@suse.de
 Mon Apr 10 10:56:24 CEST 2006 - visnov@suse.cz
 
 - fix callback receiver signature to match the callback for removing
-  package 
+  package
 
 -------------------------------------------------------------------
 Mon Apr 10 10:32:22 CEST 2006 - mvidner@suse.cz
@@ -82,7 +87,7 @@ Mon Apr 10 10:32:22 CEST 2006 - mvidner@suse.cz
 Sat Apr  8 12:03:37 CEST 2006 - schubi@suse.de
 
 - Bug 164440; Taking wrong architecture while updating obsoletes
-  splitted packages 
+  splitted packages
 - rev 3022
 
 -------------------------------------------------------------------
@@ -116,7 +121,7 @@ Fri Apr  7 19:57:41 CEST 2006 - kkaempf@suse.de
 Fri Apr  7 17:35:07 CEST 2006 - visnov@suse.cz
 
 - report package download progress (#160966)
-- rev 3007 
+- rev 3007
 
 -------------------------------------------------------------------
 Fri Apr  7 16:27:35 CEST 2006 - kkaempf@suse.de

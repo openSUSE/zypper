@@ -20,7 +20,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   DEFINE_PTR_TYPE(Selection);
-  
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : Selection
@@ -37,14 +37,6 @@ namespace zypp
     typedef TraitsType::constPtrType constPtr;
 
   public:
-    // data access:
-
-    /** selection summary (FIXME: localized) */
-    Label summary() const;
-
-    /** */
-    Text description() const;
-
     /** selection category */
     Label category() const;
     inline bool isBase() const

@@ -72,10 +72,10 @@ namespace zypp
       virtual TranslatedText description() const PURE_VIRTUAL;
 
       /** \todo well define! */
-      virtual Text insnotify() const PURE_VIRTUAL;
+      virtual TranslatedText insnotify() const PURE_VIRTUAL;
 
       /** \todo well define! */
-      virtual Text delnotify() const PURE_VIRTUAL;
+      virtual TranslatedText delnotify() const PURE_VIRTUAL;
 
       /** Size.  \todo well define which size. */
       virtual ByteCount size() const PURE_VIRTUAL;

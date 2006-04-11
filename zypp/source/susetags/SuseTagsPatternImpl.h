@@ -43,7 +43,7 @@ namespace zypp
       virtual Label order() const;
       virtual Pathname icon() const;
       virtual Source_Ref source() const;
-      
+
       TranslatedText _summary;
       TranslatedText _description;
       Pathname _icon;
@@ -54,7 +54,7 @@ namespace zypp
       std::string _arch;
       std::string _order;
       TranslatedText _category;
-      
+
       bool _visible;
 
       std::list<std::string> _suggests;
@@ -68,9 +68,6 @@ namespace zypp
       std::list<std::string> _pkgsuggests;
       std::list<std::string> _pkgrecommends;
       std::list<std::string> _pkgrequires;
-      std::list<std::string> _supported_locales;
-      std::map< Locale, std::list<std::string> > _insnotify;
-      std::map< Locale, std::list<std::string> > _delnotify;
 
       Source_Ref _source;
     };

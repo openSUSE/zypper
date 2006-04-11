@@ -50,10 +50,10 @@ namespace zypp
   { return pimpl().description().text(); }
 
   Text ResObject::insnotify() const
-  { return pimpl().insnotify(); }
+  { return pimpl().insnotify().text(); }
 
   Text ResObject::delnotify() const
-  { return pimpl().delnotify(); }
+  { return pimpl().delnotify().text(); }
 
   ByteCount ResObject::size() const
   { return pimpl().size(); }

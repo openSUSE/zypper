@@ -42,20 +42,6 @@ namespace zypp
 	);
 	/** Get the text of the message */
 	virtual TranslatedText text() const;
-	/** */
-	virtual TranslatedText summary() const;
-	/** */
-	virtual TranslatedText description() const;
-	/** */
-	virtual Text insnotify() const;
-	/** */
-	virtual Text delnotify() const;
-	/** */
-	virtual bool providesSources() const;
-	/** */
-	virtual Label instSrcLabel() const;
-	/** */
-	virtual Vendor instSrcVendor() const;
         /** Patch the message belongs to - if any */
         Patch::constPtr patch() const;
 

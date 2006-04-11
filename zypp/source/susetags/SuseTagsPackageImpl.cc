@@ -21,7 +21,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
     namespace susetags
     { /////////////////////////////////////////////////////////////////
-  
+
       ///////////////////////////////////////////////////////////////////
       //
       //	METHOD NAME : PackageImpl::PackageImpl
@@ -30,7 +30,7 @@ namespace zypp
       SuseTagsPackageImpl::SuseTagsPackageImpl(Source_Ref source_r) :
         _source( source_r )
       {}
-  
+
       ///////////////////////////////////////////////////////////////////
       //
       //	METHOD NAME : PackageImpl::~PackageImpl
@@ -41,12 +41,18 @@ namespace zypp
 
       CheckSum SuseTagsPackageImpl::checksum() const
       { return _checksum; }
-          
+
       TranslatedText SuseTagsPackageImpl::summary() const
       { return _summary; }
 
       TranslatedText SuseTagsPackageImpl::description() const
       { return _description; }
+
+      TranslatedText SuseTagsPackageImpl::insnotify() const
+      { return _insnotify; }
+
+      TranslatedText SuseTagsPackageImpl::delnotify() const
+      { return _delnotify; }
 
       Date SuseTagsPackageImpl::buildtime() const
       { return _buildtime; }
@@ -74,7 +80,7 @@ namespace zypp
 
       Changelog SuseTagsPackageImpl::changelog() const
       { return Changelog(); }
-      
+
       Pathname SuseTagsPackageImpl::location() const
       { return _location; }
 
@@ -139,7 +145,7 @@ namespace zypp
     } // namespace susetags
     ///////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////
-  } // namespace 
+  } // namespace
   ///////////////////////////////////////////////////////////////////
 
   /////////////////////////////////////////////////////////////////

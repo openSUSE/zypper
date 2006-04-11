@@ -46,7 +46,7 @@ namespace zypp
 // as _summary        std::list<multilang> name;
 // _description
       }
-      
+
       YUMGroupImpl::~YUMGroupImpl()
       {}
 
@@ -61,24 +61,6 @@ namespace zypp
       TranslatedText YUMGroupImpl::description() const
       { return _description; }
 
-      Text YUMGroupImpl::insnotify() const
-      { return ResObjectImplIf::insnotify(); }
-
-      Text YUMGroupImpl::delnotify() const
-      { return ResObjectImplIf::delnotify(); }
-
-      bool YUMGroupImpl::providesSources() const
-      { return ResObjectImplIf::providesSources(); }
-
-      Label YUMGroupImpl::instSrcLabel() const
-      { return ResObjectImplIf::instSrcLabel(); }
-
-      Vendor YUMGroupImpl::instSrcVendor() const
-      { return ResObjectImplIf::instSrcVendor(); }
-
-      ByteCount YUMGroupImpl::size() const
-      { return ResObjectImplIf::size(); }
-
       Label YUMGroupImpl::order() const {
 #warning Ordering support in YUM?
 	return Label("0");
@@ -92,7 +74,7 @@ namespace zypp
       Source_Ref YUMGroupImpl::source() const
       { return _source; }
 
- 
+
     } // namespace yum
     /////////////////////////////////////////////////////////////////
   } // namespace source

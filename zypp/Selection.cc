@@ -21,7 +21,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   IMPL_PTR_TYPE(Selection);
-  
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Selection::Selection
@@ -45,34 +45,22 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
-    /** selection summary (FIXME: localized) */
-    Label Selection::summary() const
-    {
-	return pimpl().summary().text();    
-    }
-
-    /** */
-    Text Selection::description() const
-    {
-	return pimpl().description().text();    
-    }
-
     /** selection category */
     Label Selection::category() const
     {
-	return pimpl().category();    
+	return pimpl().category();
     }
 
     /** selection visibility (for hidden selections) */
     bool Selection::visible() const
     {
-	return pimpl().visible();    
+	return pimpl().visible();
     }
 
     /** selection presentation order */
     Label Selection::order() const
     {
-	return pimpl().order();    
+	return pimpl().order();
     }
 
     const std::set<std::string> Selection::install_packages( const Locale & lang) const

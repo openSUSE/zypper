@@ -31,11 +31,11 @@ namespace zypp
       TranslatedText ResObjectImplIf::description() const
       { return TranslatedText::notext; }
 
-      Text ResObjectImplIf::insnotify() const
-      { return Text(); }
+      TranslatedText ResObjectImplIf::insnotify() const
+      { return TranslatedText::notext; }
 
-      Text ResObjectImplIf::delnotify() const
-      { return Text(); }
+      TranslatedText ResObjectImplIf::delnotify() const
+      { return TranslatedText::notext; }
 
       ByteCount ResObjectImplIf::size() const
       { return 0; }

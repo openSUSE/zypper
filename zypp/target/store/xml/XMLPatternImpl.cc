@@ -46,24 +46,6 @@ namespace zypp
       TranslatedText XMLPatternImpl::description() const
       { return _description; }
 
-      Text XMLPatternImpl::insnotify() const
-      { return ResObjectImplIf::insnotify(); }
-
-      Text XMLPatternImpl::delnotify() const
-      { return ResObjectImplIf::delnotify(); }
-
-      bool XMLPatternImpl::providesSources() const
-      { return ResObjectImplIf::providesSources(); }
-
-      Label XMLPatternImpl::instSrcLabel() const
-      { return ResObjectImplIf::instSrcLabel(); }
-
-      Vendor XMLPatternImpl::instSrcVendor() const
-      { return ResObjectImplIf::instSrcVendor(); }
-
-      ByteCount XMLPatternImpl::size() const
-      { return ResObjectImplIf::size(); }
-
       /** */
       bool XMLPatternImpl::isDefault() const
       { return _default; }

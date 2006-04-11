@@ -46,7 +46,7 @@ namespace zypp
       virtual const std::set<std::string> recommends() const PURE_VIRTUAL;
       virtual const std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
       virtual Source_Ref source() const;
-      
+
       TranslatedText _summary;
       TranslatedText _description;
       std::string _parser_version;
@@ -64,9 +64,6 @@ namespace zypp
       std::set<std::string> _conflicts;
       std::set<std::string> _provides;
       std::set<std::string> _obsoletes;
-      std::set<std::string> _supported_locales;
-      std::map< Locale, std::set<std::string> > _insnotify;
-      std::map< Locale, std::set<std::string> > _delnotify;
       std::map< Locale, std::set<std::string> > _inspacks;
       std::map< Locale, std::set<std::string> > _delpacks;
 

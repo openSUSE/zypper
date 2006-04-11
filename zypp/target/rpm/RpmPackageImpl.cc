@@ -74,14 +74,6 @@ namespace zypp
       TranslatedText RPMPackageImpl::description() const
       { return _description; }
 
-      Text RPMPackageImpl::insnotify() const
-      // metadata doesn't priovide this attribute
-      { return ResObjectImplIf::insnotify(); }
-
-      Text RPMPackageImpl::delnotify() const
-      // metadata doesn't priovide this attribute
-      { return ResObjectImplIf::delnotify(); }
-
       ByteCount RPMPackageImpl::size() const
       { return _size; }
 
@@ -90,10 +82,10 @@ namespace zypp
 
       Label RPMPackageImpl::instSrcLabel() const
       { return ResObjectImplIf::instSrcLabel(); }
-      
+
       Vendor RPMPackageImpl::instSrcVendor() const
       { return ResObjectImplIf::instSrcVendor(); }
-      
+
       /** */
       Date RPMPackageImpl::buildtime() const
       { return _buildtime; }
@@ -201,12 +193,6 @@ namespace zypp
       Source_Ref RPMPackageImpl::source() const
       { return _source; }
 #if 0
-      /** */
-      std::list<std::string> RPMPackageImpl::insnotify() const
-      { return std::list<std::string>(); }
-      /** */
-      std::list<std::string> RPMPackageImpl::delnotify() const
-      { return std::list<std::string>(); }
       /** */
       unsigned RPMPackageImpl::packageSize() const
       { return _size_package; }

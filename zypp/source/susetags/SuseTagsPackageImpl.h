@@ -25,7 +25,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
     namespace susetags
     { /////////////////////////////////////////////////////////////////
-  
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : PackageImpl
@@ -41,6 +41,9 @@ namespace zypp
         //@{
 	virtual TranslatedText summary() const;
 	virtual TranslatedText description() const;
+        virtual TranslatedText insnotify() const;
+        virtual TranslatedText delnotify() const;
+
         virtual CheckSum checksum() const;
         /** */
         virtual Date buildtime() const;
@@ -95,11 +98,13 @@ namespace zypp
         virtual bool installOnly() const;
 
         virtual License licenseToConfirm() const;
-	
+
 	virtual unsigned mediaId() const;
 
 	TranslatedText _summary;
 	TranslatedText _description;
+	TranslatedText _insnotify;
+	TranslatedText _delnotify;
         PackageGroup _group;
         std::list<std::string> _authors;
         std::list<std::string> _keywords;

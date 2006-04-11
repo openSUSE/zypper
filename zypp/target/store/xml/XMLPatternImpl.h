@@ -36,12 +36,6 @@ namespace zypp
       virtual bool userVisible() const;
       virtual TranslatedText summary() const;
       virtual TranslatedText description() const;
-      virtual Text insnotify() const;
-      virtual Text delnotify() const;
-      virtual bool providesSources() const;
-      virtual Label instSrcLabel() const;
-      virtual Vendor instSrcVendor() const;
-      virtual ByteCount size() const;
       virtual bool isDefault() const;
       virtual TranslatedText category() const;
       virtual Pathname icon() const;

@@ -48,8 +48,6 @@ namespace zypp
       )
       :	_category(parsed.type),
 	_vendor(parsed.vendor),
-//	_displayname(parsed.displayname),
-//	_description(parsed.description)
 	_source(source_r),
 	_short_name(parsed.short_name)
       {}
@@ -66,24 +64,6 @@ namespace zypp
       TranslatedText YUMProductImpl::description() const
       { return _description; }
 
-      Text YUMProductImpl::insnotify() const
-      { return ResObjectImplIf::insnotify(); }
-
-      Text YUMProductImpl::delnotify() const
-      { return ResObjectImplIf::delnotify(); }
-
-      ByteCount YUMProductImpl::size() const
-      { return ResObjectImplIf::size(); }
-
-      bool YUMProductImpl::providesSources() const
-      { return ResObjectImplIf::providesSources(); }
-
-      Label YUMProductImpl::instSrcLabel() const
-      { return ResObjectImplIf::instSrcLabel(); }
-
-      Vendor YUMProductImpl::instSrcVendor() const
-      { return ResObjectImplIf::instSrcVendor(); }
-
       Source_Ref YUMProductImpl::source() const
       { return _source; }
 
@@ -93,7 +73,7 @@ namespace zypp
 
       TranslatedText YUMProductImpl::shortName() const
       { return _short_name; }
- 
+
     } // namespace yum
     /////////////////////////////////////////////////////////////////
   } // namespace source

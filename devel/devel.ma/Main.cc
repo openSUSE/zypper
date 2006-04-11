@@ -1,15 +1,61 @@
 #include <iostream>
-#include <list>
-#include <set>
 
 #include "Tools.h"
 
-#include <zypp/base/LogControl.h>
-#include <zypp/ResStatus.h>
+#include "zypp/Bit.h"
 
 using namespace std;
 using namespace zypp;
 
+namespace zypp 
+{
+  
+  struct RpmFlagsBase
+  {
+    typedef uint16_t                 FieldType;
+    typedef bit::BitField<FieldType> BitFieldType;
+    
+    enum FlagType
+      {
+        ignore,
+        install,
+        erase
+      };
+    enum FlagValue
+      {
+        none
+        //
+        --test
+        --justdb
+        --nodeps
+        --noscripts
+        --notriggers
+        --repackage
+        --force
+        //
+        // install
+        // upgrade
+        -nodigest
+        -nosignature
+        -nosuggest
+        -noorder
+        -replacefiles
+        -replacepkgs
+        -oldpackage
+        -excludedocs
+        -ignoresize
+        -ignorearch
+        -ignoreos
+        //
+        
+        
+      };
+
+    
+  };
+  
+  
+}
 
 /******************************************************************
 **
@@ -23,20 +69,6 @@ int main( int argc, char * argv[] )
   ResStatus stat;
   MIL << stat << endl;
 
-  DBG << stat.setSoftTransact( true, ResStatus::SOLVER, ResStatus::APPL_LOW )
-      << ' ' << stat << endl;
-
-  DBG << stat.setTransact( false, ResStatus::APPL_LOW )
-      << ' ' << stat << endl;
-
-  DBG << stat.setSoftTransact( true, ResStatus::SOLVER, ResStatus::APPL_LOW )
-      << ' ' << stat << endl;
-
-  DBG << stat.setTransact( false, ResStatus::APPL_HIGH )
-      << ' ' << stat << endl;
-
-  DBG << stat.setSoftTransact( true, ResStatus::SOLVER, ResStatus::APPL_LOW )
-      << ' ' << stat << endl;
 
 
   INT << "===[END]============================================" << endl << endl;

@@ -40,25 +40,13 @@ namespace zypp
 	  Source_Ref source_r,
 	  const zypp::parser::yum::YUMGroupData & parsed
 	);
-	
+
 	virtual ~YUMGroupImpl();
 
 	/** */
 	virtual TranslatedText summary() const;
 	/** */
 	virtual TranslatedText description() const;
-	/** */
-	virtual Text insnotify() const;
-	/** */
-	virtual Text delnotify() const;
-	/** */
-	virtual bool providesSources() const;
-	/** */
-	virtual Label instSrcLabel() const;
-	/** */
-	virtual Vendor instSrcVendor() const;
-        /** */
-        virtual ByteCount size() const;	
         /** */
 	virtual Label category() const;
         /** */

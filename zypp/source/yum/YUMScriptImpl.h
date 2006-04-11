@@ -47,15 +47,6 @@ namespace zypp
 	/** Check whether script to undo the change is available */
 	virtual bool undo_available() const;
 
-	virtual TranslatedText summary() const;
-	virtual TranslatedText description() const;
-	virtual Text insnotify() const;
-	virtual Text delnotify() const;
-	virtual bool providesSources() const;
-	virtual Label instSrcLabel() const;
-	virtual Vendor instSrcVendor() const;
-
-
       protected:
 	/** The script to perform the change */
 	std::string _do_script;
@@ -70,7 +61,7 @@ namespace zypp
 	/** Media number of the undo script */
 	unsigned _undo_media;
 	mutable filesystem::TmpFile _tmp_file;
-	
+
 	CheckSum _do_checksum;
 	CheckSum _undo_checksum;
       private:

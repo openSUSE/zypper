@@ -123,23 +123,6 @@ namespace zypp
       TranslatedText YUMPatchImpl::description() const
       { return _description; }
 
-      Text YUMPatchImpl::insnotify() const
-      { return ResObjectImplIf::insnotify(); }
-
-      Text YUMPatchImpl::delnotify() const
-      { return ResObjectImplIf::delnotify(); }
-
-      ByteCount YUMPatchImpl::size() const
-      { return ResObjectImplIf::size(); }
-
-      bool YUMPatchImpl::providesSources() const
-      { return ResObjectImplIf::providesSources(); }
-
-      Label YUMPatchImpl::instSrcLabel() const
-      { return ResObjectImplIf::instSrcLabel(); }
-
-      Vendor YUMPatchImpl::instSrcVendor() const
-      { return ResObjectImplIf::instSrcVendor(); }
 
       std::string YUMPatchImpl::category() const
       {
