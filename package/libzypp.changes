@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 11 13:01:31 CEST 2006 - kkaempf@suse.de
+
+- when checking freshens/supplements at install, only consider
+  best architecture/edition (#164453)
+- rev 3051
+
+-------------------------------------------------------------------
 Tue Apr 11 10:31:41 CEST 2006 - kkaempf@suse.de
 
 - when checking for supplements, only consider best arch, best
