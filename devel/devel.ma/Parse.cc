@@ -278,8 +278,9 @@ int main( int argc, char * argv[] )
     INT << "Added source: " << pool << endl;
   }
 
-  Source_Ref src1( createSource( "dir:/Local/SUSE-Linux-10.1-Build_830-Addon-BiArch/CD1" ) );
   Source_Ref src2( createSource( "dir:/Local/SUSE-Linux-10.1-Build_830-i386/CD1" ) );
+  return 0;
+  Source_Ref src1( createSource( "dir:/Local/SUSE-Linux-10.1-Build_830-Addon-BiArch/CD1" ) );
   INT << "Pool: " << pool << endl;
   getZYpp()->addResolvables( src1.resolvables() );
   INT << "Added source1: " << pool << endl;

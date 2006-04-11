@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 11 15:42:32 CEST 2006 - ma@suse.de
+
+- Susetags:Selections: Allow parsing older .sel file formats. (#159851)
+- Susetags:Pattern: Fixed parser.
+
+-------------------------------------------------------------------
 Tue Apr 11 15:21:48 CEST 2006 - kkaempf@suse.de
 
 - when uninstalling, only re-establish installed items

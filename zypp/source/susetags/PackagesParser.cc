@@ -107,7 +107,7 @@ namespace zypp
 
 	virtual void endParse()
 	{
-	  
+
 	}
       };
 
@@ -190,16 +190,16 @@ namespace zypp
 		|| arch == "nosrc")
 	    {
 		arch = "noarch";
-		_srcPkgImpl = SrcPkgImplPtr( new source::susetags::SuseTagsSrcPackageImpl( _source ) );				
+		_srcPkgImpl = SrcPkgImplPtr( new source::susetags::SuseTagsSrcPackageImpl( _source ) );
 	    }
 	    else
 		_srcPkgImpl = NULL;
 
-	    _pkgImpl = PkgImplPtr( new source::susetags::SuseTagsPackageImpl( _source ) );				
+	    _pkgImpl = PkgImplPtr( new source::susetags::SuseTagsPackageImpl( _source ) );
 	    _nvrad = NVRAD( words[0], Edition( words[1], words[2] ), Arch( arch ) );
 
 	    _isPendingPkg = true;
-	    
+
 	  }
           else if ( stag_r.name == "Cks" )
           {

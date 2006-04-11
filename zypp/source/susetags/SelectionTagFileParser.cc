@@ -82,19 +82,32 @@ namespace zypp
         {
           std::string line = tag.value;
           std::vector<std::string> words;
-	  if (str::split( line, std::back_inserter(words), " " ) < 3)
-            WAR << "Broken Selection, version and release is mandatory, got [" << tag.value << "]" << std::endl;
-          if (str::split( line, std::back_inserter(words), " " ) < 1)
-            ZYPP_THROW( parser::tagfile::ParseException( "Expected [name [version] [release] [arch] ], got [" + tag.value +"]") );
-          
-          if ( words.size() >= 1 )
-            selImpl->_name = words[0];
-          if ( words.size() >= 2 )
-            selImpl->_version = words[1];
-          if ( words.size() >= 3 )
-            selImpl->_release = words[2];
-          if (words.size() > 3)
-            selImpl->_arch = words[3];
+          str::split( line, std::back_inserter(words), " " );
+
+          switch ( words.size() )
+            {
+            case 4: // name version release arch
+              selImpl->_name    = words[0];
+              selImpl->_version = words[1];
+              selImpl->_release = words[2];
+              selImpl->_arch    = words[3];
+              break;
+            case 3: // name version release [arch]
+              selImpl->_name    = words[0];
+              selImpl->_version = words[1];
+              selImpl->_release = words[2];
+              break;
+            case 2: // name [version release] arch
+              selImpl->_name    = words[0];
+              selImpl->_arch    = words[1];
+              break;
+            case 1: // name [version release arch]
+              selImpl->_name    = words[0];
+              break;
+            default:
+              ZYPP_THROW( parser::tagfile::ParseException( "Expected [name [version] [release] [arch] ], got [" + tag.value +"]") );
+              break;
+            }
         }
         else if ( tag.name == "Vis" )
         {
@@ -109,7 +122,7 @@ namespace zypp
           selImpl->_order = tag.value;
         }
       }
-      
+
       void SelectionTagFileParser::consume( const MultiTag &tag )
       {
         if ( tag.name == "Des" )
@@ -234,10 +247,10 @@ namespace zypp
         Edition edition = Edition::noedition;
         if (!selImpl->_arch.empty())
           arch = Arch(selImpl->_arch);
-        
+
         if ( ! selImpl->_version.empty() )
           edition = Edition(selImpl->_version, selImpl->_release, std::string());
-              
+
 	NVRAD nvrad = NVRAD( selImpl->_name, edition, arch, _deps );
 	result = detail::makeResolvableFromImpl( nvrad, selImpl );
       }

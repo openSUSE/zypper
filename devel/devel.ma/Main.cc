@@ -6,15 +6,15 @@
 
 using namespace std;
 using namespace zypp;
-
-namespace zypp 
+#if 0
+namespace zypp
 {
-  
+
   struct RpmFlagsBase
   {
     typedef uint16_t                 FieldType;
     typedef bit::BitField<FieldType> BitFieldType;
-    
+
     enum FlagType
       {
         ignore,
@@ -47,16 +47,16 @@ namespace zypp
         -ignorearch
         -ignoreos
         //
-        
-        
+
+
       };
 
-    
-  };
-  
-  
-}
 
+  };
+
+
+}
+#endif
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -66,8 +66,13 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  ResStatus stat;
-  MIL << stat << endl;
+  //ResStatus stat;
+  //MIL << stat << endl;
+
+  std::string line = " a b c ";
+  std::vector<std::string> words;
+  DBG << str::split( line, std::back_inserter(words), " " ) << " " << words.size() << endl;
+  DBG << str::split( line, std::back_inserter(words), " " ) << " " << words.size() << endl;
 
 
 

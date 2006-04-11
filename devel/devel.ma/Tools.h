@@ -53,7 +53,7 @@ inline Source_Ref createSource( const Url & url_r )
     }
   x.start( "parseSource: " + url_r.asString() );
   {
-    zypp::base::LogControl::TmpLineWriter shutUp;
+    //zypp::base::LogControl::TmpLineWriter shutUp;
     ret.resolvables();
   }
   x.stop();
