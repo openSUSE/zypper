@@ -188,7 +188,11 @@ std::string toXML( const Script::constPtr &obj )
   ifstream infile;
   infile.open(obj->do_script().asString().c_str());
   while (infile.good())
-    out << (char) infile.get();
+  {
+    char c = (char)infile.get();
+    if (! infile.eof())
+      out << c;
+  }
   infile.close();
   
   out << "  ]]>" << std::endl;
@@ -202,7 +206,11 @@ std::string toXML( const Script::constPtr &obj )
   // read script
     infile.open(obj->undo_script().asString().c_str());
     while (infile.good())
-      out << (char) infile.get();
+    {
+      char c = (char)infile.get();
+      if (! infile.eof())
+	out << c;
+    }
     infile.close();
   
     out << "  ]]>" << std::endl;

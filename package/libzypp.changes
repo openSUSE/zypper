@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 11 16:41:02 CEST 2006 - jsrain@suse.de
+
+- fixed storing patch scripts to target store (#159928)
+- rev 3058
+
+-------------------------------------------------------------------
 Tue Apr 11 16:24:26 CEST 2006 - kkaempf@suse.de
 
 - if a patch is bad, only skip this patch, not everything
