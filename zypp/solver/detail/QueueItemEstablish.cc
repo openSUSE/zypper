@@ -161,6 +161,12 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 		    context->unneeded (_item, _other_penalty);
 		return true;
 	    }
+	    // have supplements and at least one triggers
+	    if (_item->kind() == ResTraits<Package>::kind) {		// schedule package for soft install
+		QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), _item, true );
+		qil.push_front( install_item );
+		return true;
+	    }
 	}
 
 

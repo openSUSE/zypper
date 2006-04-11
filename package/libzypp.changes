@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 11 10:31:41 CEST 2006 - kkaempf@suse.de
+
+- when checking for supplements, only consider best arch, best
+  edition for installation (#165111)
+- rev 3047
+
+-------------------------------------------------------------------
 Tue Apr 11 10:23:14 CEST 2006 - schubi@suse.de
 
 - Bug 165117: build 910: Update: Splitted packages are selected for

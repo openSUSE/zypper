@@ -478,24 +478,55 @@ Resolver::establishPool ()
 //---------------------------------------------------------------------------
 // freshen state
 
+typedef map<string, PoolItem_Ref> FreshenMap;
+
+// add item to itemmap
+//  check for item with same name and only keep
+//  best architecture, best version
+
+static void
+addToFreshen( PoolItem_Ref item, FreshenMap & itemmap )
+{
+    FreshenMap::iterator it = itemmap.find( item->name() );
+    if (it != itemmap.end()) {					// item with same name found
+	int cmp = it->second->arch().compare( item->arch() );
+	if (cmp < 0) {						// new item has better arch
+	    it->second = item;
+	}
+	else if (cmp == 0) {					// new item has equal arch
+	    if (it->second->edition().compare( item->edition() ) < 0) {
+		it->second = item;				// new item has better edition
+	    }
+	}
+    }
+    else {
+	itemmap[item->name()] = item;
+    }
+    return;
+}
+
+
 struct FreshenState
 {
-    Resolver & resolver;
+    FreshenMap itemmap;
 
-    FreshenState (Resolver & r)
-	: resolver (r)
+    FreshenState()
     { }
 
     bool operator()( PoolItem_Ref item)
     {
 	CapSet freshens( item->dep( Dep::FRESHENS ) );
-	if (!freshens.empty())
-	    resolver.addPoolItemToEstablish( item );
-	// Also regarding supplements e.g. in order to recognize
-	// modalias dependencies. Bug #163140
-	CapSet supplements( item->dep( Dep::SUPPLEMENTS ) );
-	if (!supplements.empty())
-	    resolver.addPoolItemToEstablish( item );	
+	if (!freshens.empty()) {
+	    addToFreshen( item, itemmap );
+	}
+	else {					// if no freshens, look at supplements
+	    // Also regarding supplements e.g. in order to recognize
+	    // modalias dependencies. Bug #163140
+	    CapSet supplements( item->dep( Dep::SUPPLEMENTS ) );
+	    if (!supplements.empty()) {
+		addToFreshen( item, itemmap );
+	    }
+	}
 	return true;
     }
 };
@@ -518,11 +549,19 @@ Resolver::freshenState( ResolverContext_Ptr context )
     context->setForceResolve( _forceResolve );
     context->setUpgradeMode( _upgradeMode );        
 
-    FreshenState info( *this );
+    FreshenState info;
+
+    // collect items to be established
 
     invokeOnEach( pool().byKindBegin( ResTraits<zypp::Package>::kind ),
 		      pool().byKindEnd( ResTraits<zypp::Package>::kind ),
 		      functor::functorRef<bool,PoolItem>(info) );
+
+    // schedule all collected items for establish
+
+    for (FreshenMap::iterator it = info.itemmap.begin(); it != info.itemmap.end(); ++it) {
+	addPoolItemToEstablish( it->second );
+    }
 
     // process the queue
     resolveDependencies( context );
