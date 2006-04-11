@@ -613,10 +613,17 @@ MIL << "split matched !" << endl;
   for ( TodoMap::iterator it = addSplitted.begin(); it != addSplitted.end(); ++it ) {
 
     PoolItemOrderSet & tset( it->second );
+    PoolItem_Ref lastItem = PoolItem_Ref();
+    
     for ( PoolItemOrderSet::iterator sit = tset.begin(); sit != tset.end(); ++sit ) {
-      if ((*sit).status().setToBeInstalled(ResStatus::APPL_HIGH)) {
-	++opt_stats_r.chk_add_split;
-      }
+	if (!lastItem
+	    || compareByN ( lastItem.resolvable(), sit->resolvable()) != 0) // do not install packages with the same NVR and other architecture
+	{
+	    if ((*sit).status().setToBeInstalled(ResStatus::APPL_HIGH)) {
+		++opt_stats_r.chk_add_split;
+	    }
+	}
+	lastItem = *sit;
     }
 
   }
@@ -628,6 +635,7 @@ MIL << "split matched !" << endl;
 
     PoolItem_Ref guess;
     PoolItemOrderSet & gset( it->second );
+
     for ( PoolItemOrderSet::iterator git = gset.begin(); git != gset.end(); ++git ) {
       PoolItem_Ref item (*git);
       if ( item.status().isToBeInstalled()) {
