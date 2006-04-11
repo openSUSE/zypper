@@ -1357,9 +1357,11 @@ ResolverContext::spew (void)
 static void
 spew_info_cb (ResolverInfo_Ptr info, void *unused)
 {
-    if (info->error ()) MIL << "[ERROR] )";
-    else if (info->important()) MIL << "[>>>>>] )";
-    MIL << *info << endl;
+    if (info == NULL) return;
+
+    if (info->error ()) MIL << "[ERROR] " << *info << endl;
+    else if (info->important()) MIL << "[>>>>>] " << *info << endl;
+    else MIL << *info << endl;
 }
 
 
