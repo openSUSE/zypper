@@ -20,7 +20,8 @@
 #include "zypp/Resolver.h"
 #include "zypp/Locale.h"
 #include "zypp/KeyRing.h"
-#include "zypp/ZYppCommitResult.h"
+#include "zypp/ZYppCommit.h"
+#include "zypp/DiskUsageCounter.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -90,7 +91,7 @@ namespace zypp
       void finishTarget();
 
       /** Commit changes and transactions. */
-      ZYpp::CommitResult commit( int medianr_r, bool dry_run = false );
+      ZYppCommitResult commit( const ZYppCommitPolicy & policy_r );
 
     public:
       /** \todo Signal locale change. */

@@ -6,16 +6,13 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/ZYppCommitResult.h
+/** \file	zypp/ZYppCommitPolicy.h
  *
 */
-#ifndef ZYPP_ZYPPCOMMITRESULT_H
-#define ZYPP_ZYPPCOMMITRESULT_H
+#ifndef ZYPP_ZYPPCOMMITPOLICY_H
+#define ZYPP_ZYPPCOMMITPOLICY_H
 
 #include <iosfwd>
-#include <list>
-
-#include "zypp/PoolItem.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -23,31 +20,50 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
-  //	CLASS NAME : ZYppCommitResult
+  //	CLASS NAME : ZYppCommitPolicy
   //
-  /** Result returned from ZYpp::commit.
-   * \see \ref ZYpp::commit
-   * \todo document fields.
-  */
-  struct ZYppCommitResult
+  /** */
+  class ZYppCommitPolicy
   {
-    ZYppCommitResult()
-    : _result(0)
+  public:
+    ZYppCommitPolicy()
+    : _restrictToMedia( 0 )
+    , _dryRun( false )
     {}
 
-    typedef std::list<PoolItem_Ref> PoolItemList;
+  public:
+    unsigned restrictToMedia() const
+    { return _restrictToMedia; }
 
-    int          _result;
-    PoolItemList _errors;
-    PoolItemList _remaining;
-    PoolItemList _srcremaining;
+    bool dryRun() const
+    { return _dryRun; }
+
+  public:
+    /** Restrict commit to a certain media number
+     * \deprecated
+     */
+    ZYppCommitPolicy & restrictToMedia( unsigned mediaNr_r )
+    { _restrictToMedia = mediaNr_r; return *this; }
+
+    /** Process all media (default) */
+    ZYppCommitPolicy & allMedia()
+    { return restrictToMedia( 0 ); }
+
+    /** Set dry run (default: false) */
+    ZYppCommitPolicy & dryRun( bool yesNo_r = true )
+    { _dryRun = yesNo_r; return *this; }
+
+  private:
+    unsigned _restrictToMedia;
+    bool     _dryRun;
+
   };
   ///////////////////////////////////////////////////////////////////
 
-  /** \relates ZYppCommitResult Stream output. */
-  std::ostream & operator<<( std::ostream & str, const ZYppCommitResult & obj );
+  /** \relates ZYppCommitPolicy Stream output. */
+  std::ostream & operator<<( std::ostream & str, const ZYppCommitPolicy & obj );
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_ZYPPCOMMITRESULT_H
+#endif // ZYPP_ZYPPCOMMITPOLICY_H

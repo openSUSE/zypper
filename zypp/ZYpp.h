@@ -17,6 +17,10 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
+
+#include "zypp/base/Deprecated.h"
+#include "zypp/ZYppCommit.h"
+
 #include "zypp/Target.h"
 #include "zypp/Resolver.h"
 #include "zypp/KeyRing.h"
@@ -96,16 +100,22 @@ namespace zypp
 
 
   public:
-    /** Result returned from ZYpp::commit. */
-    struct CommitResult;
+    typedef ZYppCommitResult CommitResult;
 
     /** Commit changes and transactions.
-     * \param medianr 0 = all/any media
-     *                 > 0 means only the given media number
+     * \param \ref CommitPolicy
      * \return \ref CommitResult
      * \throws Exception
     */
-    CommitResult commit( int medianr_r, bool dry_run = false );
+    ZYppCommitResult commit( const ZYppCommitPolicy & policy_r );
+
+    ZYPP_DEPRECATED ZYppCommitResult commit( int medianr_r, bool dry_run = false )
+    {
+      ZYppCommitPolicy policy;
+      policy.restrictToMedia( medianr_r ).dryRun( dry_run );
+      return commit( policy );
+    }
+
 
   public:
     /** */

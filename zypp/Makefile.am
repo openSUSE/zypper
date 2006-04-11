@@ -84,6 +84,8 @@ pkginclude_HEADERS = NeedAType.h \
 	UpgradeStatistics.h	\
 	TranslatedText.h \
 	ZYpp.h		\
+	ZYppCommit.h		\
+	ZYppCommitPolicy.h	\
 	ZYppCommitResult.h	\
 	ZYppFactory.h	\
 	ZYppCallbacks.h	\
@@ -156,6 +158,8 @@ lib@PACKAGE@_la_SOURCES = \
 	VendorAttr.cc	\
 	UpgradeStatistics.cc	\
 	ZYpp.cc		\
+	ZYppCommitPolicy.cc	\
+	ZYppCommitResult.cc	\
 	TranslatedText.cc \
 	ZYppFactory.cc \
 	KeyRing.cc

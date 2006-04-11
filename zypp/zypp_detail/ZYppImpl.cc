@@ -18,6 +18,8 @@
 #include "zypp/zypp_detail/ZYppImpl.h"
 #include "zypp/detail/ResImplTraits.h"
 #include "zypp/solver/detail/Helper.h"
+#include "zypp/target/TargetImpl.h"
+#include "zypp/ZYpp.h"
 #include "zypp/NVRAD.h"
 #include "zypp/Language.h"
 #include "zypp/DiskUsageCounter.h"
@@ -74,7 +76,7 @@ namespace zypp
       MIL << "initializing keyring..." << std::endl;
       //_keyring = new KeyRing(homePath() + Pathname("/keyring/all"), homePath() + Pathname("/keyring/trusted"));
       _keyring = new KeyRing();
-      
+
       struct utsname buf;
       if (uname (&buf) < 0) {
 	ERR << "Can't determine system architecture" << endl;
@@ -204,35 +206,23 @@ namespace zypp
     // commit
 
     /** \todo Remove workflow from target, lot's of it could be done here,
-    * and target used for transact. */
-    ZYpp::CommitResult ZYppImpl::commit( int medianr_r, bool dry_run )
+     * and target used for transact. */
+    ZYppCommitResult ZYppImpl::commit( const ZYppCommitPolicy & policy_r )
     {
-      MIL << "Attempt to commit (medianr " << medianr_r << ")" << endl;
+      MIL << "Attempt to commit (" << policy_r << ")" << endl;
       if (! _target)
 	ZYPP_THROW( Exception("Target not initialized.") );
 
-      ZYpp::CommitResult res;
+      ZYppCommitResult res = _target->_pimpl->commit( pool(), policy_r );
 
-      // must redirect to Target::Impl. This kind of commit should not be
-      // in the Target interface.
-
-      res._result = _target->commit( pool(), medianr_r,
-                                     res._errors, res._remaining, res._srcremaining, dry_run );
-
-      if (!dry_run) {
+      if (! policy_r.dryRun() ) {
 	// reload new status from target
-
 	removeInstalledResolvables();
 	addResolvables( _target->resolvables(), true );
       }
 
-      MIL << "Commit (medianr " << medianr_r << ") returned: "
-          << res._result
-          << " (errors " << res._errors.size()
-          << ", remaining " << res._remaining.size()
-          << ", srcremaining " << res._srcremaining.size()
-          << ")" << endl;
-
+      MIL << "Commit (" << policy_r << ") returned: "
+          << res << endl;
       return res;
     }
 

@@ -6,48 +6,21 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/ZYppCommitResult.h
+/** \file	zypp/ZYppCommit.h
  *
 */
-#ifndef ZYPP_ZYPPCOMMITRESULT_H
-#define ZYPP_ZYPPCOMMITRESULT_H
+#ifndef ZYPP_ZYPPCOMMIT_H
+#define ZYPP_ZYPPCOMMIT_H
 
 #include <iosfwd>
-#include <list>
 
-#include "zypp/PoolItem.h"
+#include "zypp/ZYppCommitPolicy.h"
+#include "zypp/ZYppCommitResult.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : ZYppCommitResult
-  //
-  /** Result returned from ZYpp::commit.
-   * \see \ref ZYpp::commit
-   * \todo document fields.
-  */
-  struct ZYppCommitResult
-  {
-    ZYppCommitResult()
-    : _result(0)
-    {}
-
-    typedef std::list<PoolItem_Ref> PoolItemList;
-
-    int          _result;
-    PoolItemList _errors;
-    PoolItemList _remaining;
-    PoolItemList _srcremaining;
-  };
-  ///////////////////////////////////////////////////////////////////
-
-  /** \relates ZYppCommitResult Stream output. */
-  std::ostream & operator<<( std::ostream & str, const ZYppCommitResult & obj );
-
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_ZYPPCOMMITRESULT_H
+#endif // ZYPP_ZYPPCOMMIT_H

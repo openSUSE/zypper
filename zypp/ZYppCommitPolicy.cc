@@ -6,48 +6,28 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/ZYppCommitResult.h
+/** \file	zypp/ZYppCommitPolicy.cc
  *
 */
-#ifndef ZYPP_ZYPPCOMMITRESULT_H
-#define ZYPP_ZYPPCOMMITRESULT_H
 
-#include <iosfwd>
-#include <list>
+#include <iostream>
 
-#include "zypp/PoolItem.h"
+#include "zypp/ZYppCommitPolicy.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : ZYppCommitResult
-  //
-  /** Result returned from ZYpp::commit.
-   * \see \ref ZYpp::commit
-   * \todo document fields.
-  */
-  struct ZYppCommitResult
+  std::ostream & operator<<( std::ostream & str, const ZYppCommitPolicy & obj )
   {
-    ZYppCommitResult()
-    : _result(0)
-    {}
-
-    typedef std::list<PoolItem_Ref> PoolItemList;
-
-    int          _result;
-    PoolItemList _errors;
-    PoolItemList _remaining;
-    PoolItemList _srcremaining;
-  };
-  ///////////////////////////////////////////////////////////////////
-
-  /** \relates ZYppCommitResult Stream output. */
-  std::ostream & operator<<( std::ostream & str, const ZYppCommitResult & obj );
+    str << "CommitPolicy(";
+    if ( obj.restrictToMedia() )
+      str << " restrictToMedia:" << obj.restrictToMedia();
+    if ( obj.dryRun() )
+      str << " dryRun" << obj.restrictToMedia();
+    return str << " )";
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_ZYPPCOMMITRESULT_H

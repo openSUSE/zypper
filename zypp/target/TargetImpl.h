@@ -21,6 +21,7 @@
 #include "zypp/base/PtrTypes.h"
 #include "zypp/ResStore.h"
 #include "zypp/PoolItem.h"
+#include "zypp/ZYppCommit.h"
 
 #include "zypp/Pathname.h"
 #include "zypp/media/MediaAccess.h"
@@ -84,10 +85,23 @@ namespace zypp
       /** The root set for this target */
       Pathname root() const;
 
-      /** Commit changes in the pool
-	  media = 0 means any/all medias
-	  media > 0 means limit commits to this media */
-      int commit( ResPool pool_r, unsigned int medianr, PoolItemList & errors_r, PoolItemList & remaining_r, PoolItemList & srcremaining_r, bool dry_run = false );
+      /** Commit changes in the pool */
+      ZYppCommitResult commit( ResPool pool_r, const ZYppCommitPolicy & policy_r );
+
+      ZYPP_DEPRECATED int commit( ResPool pool_r, unsigned int medianr,
+                                  PoolItemList & errors_r,
+                                  PoolItemList & remaining_r,
+                                  PoolItemList & srcremaining_r,
+                                  bool dry_run = false )
+      {
+        ZYppCommitPolicy policy;
+        policy.restrictToMedia( medianr ).dryRun( dry_run );
+        ZYppCommitResult res = commit( pool_r, policy );
+        errors_r.swap( res._errors );
+        remaining_r.swap( res._remaining );
+        srcremaining_r.swap( res._srcremaining );
+        return res._result;
+      }
 
       /** enables the storage target */
       bool isStorageEnabled() const;
@@ -95,7 +109,7 @@ namespace zypp
 
       /** Commit ordered changes
 	  return uncommitted ones (due to error) */
-      PoolItemList commit( const PoolItemList & items_r, bool dry_run = false );
+      PoolItemList commit( const PoolItemList & items_r, const ZYppCommitPolicy & policy_r );
 
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const

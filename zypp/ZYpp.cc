@@ -102,8 +102,8 @@ namespace zypp
   void ZYpp::finishTarget()
   { _pimpl->finishTarget(); }
 
-  ZYpp::CommitResult ZYpp::commit( int medianr_r, bool dry_run )
-  { return _pimpl->commit( medianr_r, dry_run ); }
+  ZYppCommitResult ZYpp::commit( const ZYppCommitPolicy & policy_r )
+  { return _pimpl->commit( policy_r ); }
 
   ///////////////////////////////////////////////////////////////////
 
@@ -127,11 +127,13 @@ namespace zypp
 
   Arch ZYpp::architecture() const
   { return _pimpl->architecture(); }
+
   void ZYpp::setArchitecture( const Arch & arch )
   { _pimpl->setArchitecture( arch ); }
 
   Pathname ZYpp::homePath() const
   { return _pimpl->homePath(); }
+
   void ZYpp::setHomePath( const Pathname & path )
   { _pimpl->setHomePath(path); }
 

@@ -139,30 +139,27 @@ namespace zypp
     }
 
 
-    int TargetImpl::commit( ResPool pool_r, unsigned int medianr,
-			    TargetImpl::PoolItemList & errors_r, TargetImpl::PoolItemList & remaining_r,
-			    TargetImpl::PoolItemList & srcremaining_r, bool dry_run )
-    {
-      MIL << "TargetImpl::commit(<pool>, " << medianr << ")" << endl;
 
-      errors_r.clear();
-      remaining_r.clear();
-      srcremaining_r.clear();
+    ZYppCommitResult TargetImpl::commit( ResPool pool_r, const ZYppCommitPolicy & policy_r )
+    {
+      MIL << "TargetImpl::commit(<pool>, " << policy_r << ")" << endl;
+      ZYppCommitResult result;
+#warning Commit does not provide ZYppCommitResult::_errors
 
       TargetImpl::PoolItemList to_uninstall;
       TargetImpl::PoolItemList to_install;
       TargetImpl::PoolItemList to_srcinstall;
       getResolvablesToInsDel( pool_r, to_uninstall, to_install, to_srcinstall );
 
-      if ( medianr ) {
-        MIL << "Restrict to media number " << medianr << endl;
+      if ( policy_r.restrictToMedia() ) {
+        MIL << "Restrict to media number " << policy_r.restrictToMedia() << endl;
       }
 
-      commit (to_uninstall, dry_run);
+      commit (to_uninstall, policy_r );
 
-      if (medianr == 0) {			// commit all
-        remaining_r = commit( to_install, dry_run );
-        srcremaining_r = commit( to_srcinstall, dry_run );
+      if (policy_r.restrictToMedia() == 0) {			// commit all
+        result._remaining = commit( to_install, policy_r );
+        result._srcremaining = commit( to_srcinstall, policy_r );
       }
       else
       {
@@ -173,45 +170,49 @@ namespace zypp
         {
           Resolvable::constPtr res( it->resolvable() );
           Package::constPtr pkg( asKind<Package>(res) );
-          if (pkg && medianr != pkg->mediaId())								// check medianr for packages only
+          if (pkg && policy_r.restrictToMedia() != pkg->mediaId())								// check medianr for packages only
           {
             XXX << "Package " << *pkg << ", wrong media " << pkg->mediaId() << endl;
-            remaining_r.push_back( *it );
+            result._remaining.push_back( *it );
           }
           else
           {
             current_install.push_back( *it );
           }
         }
-        TargetImpl::PoolItemList bad = commit( current_install, dry_run );
-        remaining_r.insert(remaining_r.end(), bad.begin(), bad.end());
+        TargetImpl::PoolItemList bad = commit( current_install, policy_r );
+        result._remaining.insert(result._remaining.end(), bad.begin(), bad.end());
 
         for (TargetImpl::PoolItemList::iterator it = to_srcinstall.begin(); it != to_srcinstall.end(); ++it)
         {
           Resolvable::constPtr res( it->resolvable() );
           Package::constPtr pkg( asKind<Package>(res) );
-          if (pkg && medianr != pkg->mediaId()) // check medianr for packages only
+          if (pkg && policy_r.restrictToMedia() != pkg->mediaId()) // check medianr for packages only
           {
             XXX << "Package " << *pkg << ", wrong media " << pkg->mediaId() << endl;
-            srcremaining_r.push_back( *it );
+            result._srcremaining.push_back( *it );
           }
           else {
             current_srcinstall.push_back( *it );
           }
         }
-        bad = commit( current_srcinstall, dry_run );
-        srcremaining_r.insert(srcremaining_r.end(), bad.begin(), bad.end());
+        bad = commit( current_srcinstall, policy_r );
+        result._srcremaining.insert(result._srcremaining.end(), bad.begin(), bad.end());
       }
-      return to_install.size() - remaining_r.size();
+
+
+      result._result = (to_install.size() - result._remaining.size());
+      return result;
     }
 
 
     TargetImpl::PoolItemList
-    TargetImpl::commit( const TargetImpl::PoolItemList & items_r, bool dry_run )
+    TargetImpl::commit( const TargetImpl::PoolItemList & items_r,
+                        const ZYppCommitPolicy & policy_r )
     {
       TargetImpl::PoolItemList remaining;
 
-      MIL << "TargetImpl::commit(<list>" << (dry_run?", dry_run" : "") << ")" << endl;
+      MIL << "TargetImpl::commit(<list>" << policy_r << ")" << endl;
 
       bool abort = false;
 
@@ -248,7 +249,7 @@ namespace zypp
             try {
               progress.tryLevel( target::rpm::InstallResolvableReport::RPM );
 	      if (p->installOnly()) flags |= rpm::RpmDb::RPMINST_NOUPGRADE;
-	      if (dry_run) flags |= rpm::RpmDb::RPMINST_TEST;
+	      if (policy_r.dryRun()) flags |= rpm::RpmDb::RPMINST_TEST;
               rpm().installPackage( localfile, flags );
 
 	      if( progress.aborted() )
@@ -263,7 +264,7 @@ namespace zypp
             catch (Exception & excpt_r) {
               ZYPP_CAUGHT(excpt_r);
               WAR << "Install failed, retrying with --nodeps" << endl;
-	      if (dry_run) {
+	      if (policy_r.dryRun()) {
 	          WAR << "dry run failed" << endl;
 		  abort = true;
 		  progress.disconnect();
@@ -309,7 +310,7 @@ namespace zypp
               }
             }
             if (success
-		&& !dry_run)
+		&& !policy_r.dryRun())
 	    {
 	      it->status().setTransact( false, ResStatus::USER );
             }
@@ -323,7 +324,7 @@ namespace zypp
             RpmRemovePackageReceiver progress( it->resolvable() );
             progress.connect();
 	    unsigned flags = rpm::RpmDb::RPMINST_NODEPS;
-	    if (dry_run) flags |= rpm::RpmDb::RPMINST_TEST;
+	    if (policy_r.dryRun()) flags |= rpm::RpmDb::RPMINST_TEST;
             try {
               rpm().removePackage( p, flags );
             }
@@ -333,14 +334,14 @@ namespace zypp
               ZYPP_CAUGHT( excpt_r );
             }
 	    if (success
-		&& !dry_run)
+		&& !policy_r.dryRun())
 	    {
 	      it->status().setTransact( false, ResStatus::USER );
 	    }
             progress.disconnect();
           }
         }
-        else if (!dry_run) // other resolvables
+        else if (!policy_r.dryRun()) // other resolvables
         {
           if ( isStorageEnabled() )
           {

@@ -6,48 +6,28 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/ZYppCommitResult.h
+/** \file	zypp/ZYppCommitResult.cc
  *
 */
-#ifndef ZYPP_ZYPPCOMMITRESULT_H
-#define ZYPP_ZYPPCOMMITRESULT_H
 
-#include <iosfwd>
-#include <list>
+#include <iostream>
 
-#include "zypp/PoolItem.h"
+#include "zypp/ZYppCommitResult.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : ZYppCommitResult
-  //
-  /** Result returned from ZYpp::commit.
-   * \see \ref ZYpp::commit
-   * \todo document fields.
-  */
-  struct ZYppCommitResult
+  std::ostream & operator<<( std::ostream & str, const ZYppCommitResult & obj )
   {
-    ZYppCommitResult()
-    : _result(0)
-    {}
-
-    typedef std::list<PoolItem_Ref> PoolItemList;
-
-    int          _result;
-    PoolItemList _errors;
-    PoolItemList _remaining;
-    PoolItemList _srcremaining;
-  };
-  ///////////////////////////////////////////////////////////////////
-
-  /** \relates ZYppCommitResult Stream output. */
-  std::ostream & operator<<( std::ostream & str, const ZYppCommitResult & obj );
+    str << "CommitResult " << obj._result
+        << " (errors " << obj._errors.size()
+        << ", remaining " << obj._remaining.size()
+        << ", srcremaining " << obj._srcremaining.size()
+        << ")";
+    return str;
+  }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_ZYPPCOMMITRESULT_H
