@@ -130,16 +130,15 @@ QueueItemInstall::isSatisfied (ResolverContext_Ptr context) const
 
 // Handle items which freshen or supplement us -> re-establish them
 
-struct EstablishItem
-{
-    const ResPool & pool;
-    QueueItemList & qil;
-    bool soft;
+// see also FreshenState in Resolver.cc
 
-    EstablishItem (const ResPool & p, QueueItemList &l, bool s)
-	: pool (p)
-	, qil (l)
-	, soft (s)
+typedef map<string, PoolItem_Ref> EstablishMap;
+
+struct InstallEstablishItem
+{
+    EstablishMap establishmap;
+
+    InstallEstablishItem ()
     { }
 
 
@@ -148,10 +147,28 @@ struct EstablishItem
 
     bool operator()( const CapAndItem & cai )
     {
-	_XDEBUG("QueueItemInstall::EstablishItem (" << cai.item << ", " << cai.cap << ")");
+	_XDEBUG("QueueItemInstall::InstallEstablishItem (" << cai.item << ", " << cai.cap << ")");
 
-	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, cai.item, soft);
-	qil.push_front (establish_item);
+	// only consider best architecture, best edition
+
+	PoolItem_Ref item( cai.item );
+
+	EstablishMap::iterator it = establishmap.find( item->name() );
+
+	if (it != establishmap.end()) {					// item with same name found
+	    int cmp = it->second->arch().compare( item->arch() );
+	    if (cmp < 0) {						// new item has better arch
+		it->second = item;
+	    }
+	    else if (cmp == 0) {					// new item has equal arch
+		if (it->second->edition().compare( item->edition() ) < 0) {
+		    it->second = item;				// new item has better edition
+		}
+	    }
+	}
+	else {
+	    establishmap[item->name()] = item;
+	}
 	return true;
     }
 };
@@ -183,6 +200,8 @@ struct UninstallConflicting
     bool operator()( const CapAndItem & cai)
     {
 	PoolItem_Ref conflicting_item = cai.item;
+
+	_XDEBUG("UninstallConflicting(" << conflicting_item << ", cap " << cai.cap << ")");
 
 	if (conflicting_item == _install_item) {				// self conflict ?
 	    WAR << "Ignoring self-conflicts" << endl;
@@ -483,7 +502,7 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	// - re-establish any supplements
 	// - find items that conflict with us and try to uninstall it if it is useful
 
-	EstablishItem establish( pool(), qil, _soft );
+	InstallEstablishItem establish;
 
 	caps = _item->dep (Dep::PROVIDES);
 	bool ignored = false;
@@ -524,6 +543,13 @@ QueueItemInstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    }
 
 	} // iterate over all provides
+
+	// schedule all collected items for establish
+
+	for (EstablishMap::iterator it = establish.establishmap.begin(); it != establish.establishmap.end(); ++it) {
+	    QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool(), it->second, true);
+	    qil.push_front( establish_item );
+	}
 
     } // end of goto-over-definitions-to-finished block
 
