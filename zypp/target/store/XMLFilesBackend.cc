@@ -539,6 +539,7 @@ std::list<ResObject::Ptr> XMLFilesBackend::resolvablesFromFile( std::string file
     // a patch file can contain more than one patch, but we store only
     // one patch, so we break at the first
     // FIXME how can we avoid creating this for every object?
+    try {
     XMLPatchParser iter(res_file,"");
     for (; !iter.atEnd(); ++iter)
     {
@@ -549,6 +550,11 @@ std::list<ResObject::Ptr> XMLFilesBackend::resolvablesFromFile( std::string file
         resolvables.push_back(*at);
 
       break;
+    }
+    }
+    catch (const Exception & excpt_r) {
+	ZYPP_CAUGHT( excpt_r );
+	WAR << "Skipping invalid patch file " << file_path << endl;
     }
   }
   else if ( kind == ResTraits<zypp::Product>::kind )
