@@ -254,6 +254,10 @@ namespace zypp
       config("require_host",    "n");
       config("require_pathname","n");
 
+      // y=yes (encode 2. slash even if authority present)
+      // n=no  (don't encode 2. slash if authority present)
+      config("path_encode_slash2", "n");
+
       config("rx_username",     "^([a-zA-Z0-9!$&'\\(\\)*+=,;~\\._-]|%[a-fA-F0-9]{2})+$");
       config("rx_password",     "^([a-zA-Z0-9!$&'\\(\\)*+=,:;~\\._-]|%[a-fA-F0-9]{2})+$");
 
@@ -486,10 +490,15 @@ namespace zypp
         tmp.pathname = getPathName(zypp::url::E_ENCODED);
         if( !tmp.pathname.empty())
         {
-          if(url.find("/") != std::string::npos &&
-             tmp.pathname.at(0) != '/')
+          if(url.find("/") != std::string::npos)
           {
-            url += "/";
+            // Url contains authority (that may be empty),
+            // we may need a rewrite of the encoded path.
+            tmp.pathname = cleanupPathName(tmp.pathname, true);
+            if(tmp.pathname.at(0) != '/')
+            {
+              url += "/";
+            }
           }
           url += tmp.pathname;
 
@@ -659,7 +668,7 @@ namespace zypp
       if(eflag == zypp::url::E_DECODED)
         return zypp::url::decode(m_data->pathname);
       else
-        return m_data->pathname;
+        return cleanupPathName(m_data->pathname);
     }
 
 
@@ -1225,23 +1234,59 @@ namespace zypp
 
     // ---------------------------------------------------------------
     std::string
-    UrlBase::cleanupPathName(const std::string &path)
+    UrlBase::cleanupPathName(const std::string &path) const
+    {
+      bool authority = !getHost(zypp::url::E_ENCODED).empty();
+      return cleanupPathName(path, authority);
+    }
+
+    // ---------------------------------------------------------------
+    std::string
+    UrlBase::cleanupPathName(const std::string &path, bool authority) const
     {
       std::string copy( path);
 
-      if( copy.size() >= 3 && str::toLower(copy.substr(0, 3)) == "%2f")
+      // decode the first slash if it is encoded ...
+      if(copy.size() >= 3 && copy.at(0) != '/' &&
+         str::toLower(copy.substr(0, 3)) == "%2f")
       {
-        // decode the first slash if it is encoded ...
         copy.replace(0, 3, "/");
       }
 
-      if( copy.size() >= 2 && copy.at(0) == '/' && copy.at(1) == '/')
+      // if path begins with a double slash ("//"); encode the second
+      // slash [minimal and IMO sufficient] before the first path
+      // segment, to fulfill the path-absolute rule of RFC 3986
+      // disallowing a "//" if no authority is present.
+      if( authority)
       {
-        // path begins with a double slash ("//"); encode the second
-        // [minimal and IMO sufficient] slash before the first path
-        // segment, to fulfill the path-absolute rule of RFC 3986
-        // disallowing a "//" if no authority is present.
-        copy.replace(1, 1, "%2F");
+        //
+        // rewrite of "//" to "/%2f" not required, use config
+        //
+        if(config("path_encode_slash2") == "y")
+        {
+          // rewrite "//" ==> "/%2f"
+          if(copy.size() >= 2 && copy.at(0) == '/' && copy.at(1) == '/')
+          {
+            copy.replace(1, 1, "%2F");
+          }
+        }
+        else
+        {
+          // rewrite "/%2f" ==> "//"
+          if(copy.size() >= 4 && copy.at(0) == '/' &&
+             str::toLower(copy.substr(1, 4)) == "%2f")
+          {
+            copy.replace(1, 4, "/");
+          }
+        }
+      }
+      else
+      {
+        // rewrite of "//" to "/%2f" is required (no authority)
+        if(copy.size() >= 2 && copy.at(0) == '/' && copy.at(1) == '/')
+        {
+          copy.replace(1, 1, "%2F");
+        }
       }
       return copy;
     }
@@ -1249,7 +1294,7 @@ namespace zypp
 
     // ---------------------------------------------------------------
     bool
-    UrlBase::isValidHost(const std::string &host)
+    UrlBase::isValidHost(const std::string &host) const
     {
       try
       {
@@ -1278,7 +1323,7 @@ namespace zypp
 
     // ---------------------------------------------------------------
     bool
-    UrlBase::isValidPort(const std::string &port)
+    UrlBase::isValidPort(const std::string &port) const
     {
       try
       {

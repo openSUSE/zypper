@@ -1003,15 +1003,31 @@ namespace zypp
        *
        * It is not required if there is an authority ("//" behind
        * the "scheme:"), that is in the path-abempty rule, but it
-       * is allowed and used e.g. in ftp url's defined by RFC1738.
+       * is used e.g. in ftp url's defined by RFC1738.
+       * 
+       * We apply this operation in both cases (for all paths),
+       * but if \p authority is true, the encoding of the second
+       * slash depends on the schema configuration (for ftp only).
        *
-       * We apply this operation in both cases (for all paths).
-       *
-       * \param path   The encoded path name to cleanup.
+       * \param path      The encoded path name to cleanup.
+       * \param authority Whether the url contains authority or not.
        * \return A modified encoded path.
        */
       virtual std::string
-      cleanupPathName(const std::string &path);
+      cleanupPathName(const std::string &path, bool authority) const;
+
+      /**
+       * Utility method to cleanup an encoded path name.
+       *
+       * This variant of the method checks if the host component
+       * in the url is empty or not to differentiate if there is
+       * an authority.
+       *
+       * \param path      The encoded path name to cleanup.
+       * \return A modified encoded path.
+       */
+      virtual std::string
+      cleanupPathName(const std::string &path) const;
 
       /**
        * \brief Verifies specified host or IP.
@@ -1035,7 +1051,7 @@ namespace zypp
        * \return True, if host seems to be valid.
        */
       virtual bool
-      isValidHost(const std::string &host);
+      isValidHost(const std::string &host) const;
 
       /**
        * \brief Verifies specified port number.
@@ -1044,7 +1060,7 @@ namespace zypp
        * \return True, if port number is valid.
        */
       virtual bool
-      isValidPort(const std::string &port);
+      isValidPort(const std::string &port) const;
 
     private:
       UrlBaseData *m_data;
