@@ -197,7 +197,7 @@ std::string toXML( const Script::constPtr &obj )
   
   out << "  ]]>" << std::endl;
   out << "  </do>" << std::endl;
-  infile.close();
+
   if ( obj->undo_available() )
   {
     out << "  <undo>" << std::endl;
@@ -215,7 +215,7 @@ std::string toXML( const Script::constPtr &obj )
   
     out << "  ]]>" << std::endl;
     out << "  </undo>" << std::endl;
-    infile.close();
+
   }
   out << "</script>" << std::endl;
   return out.str();
