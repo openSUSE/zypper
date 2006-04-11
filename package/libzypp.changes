@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 11 10:23:14 CEST 2006 - schubi@suse.de
+
+- Bug 165117: build 910: Update: Splitted packages are selected for
+  all archs
+
+-------------------------------------------------------------------
 Tue Apr 11 09:30:14 CEST 2006 - visnov@suse.cz
 
 - ask user if a file exists but does not have a checksum (#162797)
