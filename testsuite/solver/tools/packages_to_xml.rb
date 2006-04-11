@@ -76,7 +76,7 @@ end
 class Package
 	attr_accessor :name, :epoch, :version, :release, :architecture
 	attr_accessor :summary, :description, :group, :rpmsize, :installsize
-	attr_accessor :requires, :prerequires, :provides, :conflicts, :obsoletes, :suggests, :enhances, :supplements
+	attr_accessor :requires, :prerequires, :provides, :conflicts, :obsoletes, :suggests, :enhances, :supplements, :recommends
 	attr_accessor :location
 	attr_accessor :skip
 
@@ -272,6 +272,8 @@ class Parser
 							# name,epoch,version,release,architecture = parse_NEVRA value
 						when "=Lic"
 							# package.license = get_license value
+						when "=Cks"
+							# package.checksum = value
 						when "=Loc"
 							package.location = value.split(" ")[0]
 						when "=Tim"
@@ -294,6 +296,8 @@ class Parser
 							package.suggests = parse_dependencies f, "-Sug"
 						when "+Enh"
 							package.enhances = parse_dependencies f, "-Enh"
+						when "+Rec"
+							package.recommends = parse_dependencies f, "-Rec"
 						when "+Sup"
 							package.supplements = parse_dependencies f, "-Sup"
 						else
