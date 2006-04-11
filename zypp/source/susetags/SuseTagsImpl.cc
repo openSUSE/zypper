@@ -458,6 +458,14 @@ namespace zypp
           CheckSum checksum = _prodImpl->_descr_files_checksums[key];
           if (checksum.empty())
           {
+	    callback::SendReport<KeyRingReport> report;
+
+	    if ( report->askUserToAcceptUnsignedFile(path) )
+	    {
+		MIL << path << " user accepted unsigned file " << endl;
+		return;
+	    }
+
             ZYPP_THROW (Exception( "Error, Missing checksum for " + path.asString() ) ); 
           }
           else
