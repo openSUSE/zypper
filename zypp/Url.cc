@@ -202,9 +202,11 @@ namespace zypp
         addUrlByScheme("nfs",    ref);
         addUrlByScheme("smb",    ref);
         addUrlByScheme("cifs",   ref);
-        addUrlByScheme("ftp",    ref);
         addUrlByScheme("http",   ref);
         addUrlByScheme("https",  ref);
+        ref->config("path_encode_slash2", "y"); // always encode 2. slash
+        addUrlByScheme("ftp",    ref);
+        addUrlByScheme("sftp",   ref);
       }
 
       bool
