@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 11 16:24:26 CEST 2006 - kkaempf@suse.de
+
+- if a patch is bad, only skip this patch, not everything
+  (#165200)
+- rev 3057
+
+-------------------------------------------------------------------
 Tue Apr 11 15:42:32 CEST 2006 - ma@suse.de
 
 - Susetags:Selections: Allow parsing older .sel file formats. (#159851)
