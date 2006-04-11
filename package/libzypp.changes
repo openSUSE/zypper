@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 11 15:21:48 CEST 2006 - kkaempf@suse.de
+
+- when uninstalling, only re-establish installed items
+  supplementing the to-be-uninstalled one. (variant of #165111)
+- rev 3054
+
+-------------------------------------------------------------------
 Tue Apr 11 14:17:00 CEST 2006 - ma@suse.de
 
 - Susetags:Package: Parse and provide ins/delnotify texts.

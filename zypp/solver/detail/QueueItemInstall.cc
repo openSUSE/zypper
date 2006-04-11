@@ -131,6 +131,7 @@ QueueItemInstall::isSatisfied (ResolverContext_Ptr context) const
 // Handle items which freshen or supplement us -> re-establish them
 
 // see also FreshenState in Resolver.cc
+// see also UninstallEstablishItem in QueueItemUninstall.cc
 
 typedef map<string, PoolItem_Ref> EstablishMap;
 

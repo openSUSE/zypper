@@ -234,8 +234,12 @@ struct UninstallEstablishItem
     {
 	_XDEBUG("QueueItemUninstall::UninstallEstablishItem (" << cai.item << ", " << cai.cap << ")");
 
-	QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, cai.item, soft);
-	qil.push_back (establish_item);
+	// re-establish only installed items which are not scheduled for removal yet.
+
+	if (cai.item.status().staysInstalled()) {
+	    QueueItemEstablish_Ptr establish_item = new QueueItemEstablish (pool, cai.item, soft);
+	    qil.push_back (establish_item);
+	}
 	return true;
     }
 };
