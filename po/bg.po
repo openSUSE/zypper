@@ -2286,7 +2286,7 @@ msgstr "%s не може да бъде инсталиран"
 
 #: zypp/solver/detail/Resolver_problems.cc:359
 #, c-format
-msgid "%s has unfulfiled requirements"
+msgid "%s has unfulfilled requirements"
 msgstr "%s има незадоволени изискания"
 
 #: zypp/solver/detail/Resolver_problems.cc:397

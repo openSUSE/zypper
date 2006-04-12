@@ -2681,7 +2681,7 @@ msgstr "Kurulan disk:"
 
 #: zypp/solver/detail/Resolver_problems.cc:359
 #, c-format
-msgid "%s has unfulfiled requirements"
+msgid "%s has unfulfilled requirements"
 msgstr ""
 
 # clients/inst_sw_single.ycp:742

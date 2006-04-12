@@ -2196,7 +2196,7 @@ msgstr "មិន​អាច​ដំឡើង %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:359
 #, c-format
-msgid "%s has unfulfiled requirements"
+msgid "%s has unfulfilled requirements"
 msgstr "មិន​បាន​បំពេញ​តម្រូវការ​ឲ្យ %s គ្រប់គ្រាន់"
 
 #: zypp/solver/detail/Resolver_problems.cc:397

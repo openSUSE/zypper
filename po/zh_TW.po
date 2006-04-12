@@ -2156,7 +2156,7 @@ msgstr "因為相依性問題，導致無法安裝 %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:328
 #, c-format
-msgid "%s has unfulfiled requirements"
+msgid "%s has unfulfilled requirements"
 msgstr "%s 有無法滿足的需求"
 
 #: zypp/solver/detail/Resolver_problems.cc:366

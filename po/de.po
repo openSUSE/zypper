@@ -2165,7 +2165,7 @@ msgstr "Installation von %s aufgrund von Abhängigkeitsproblemen nicht möglich"
 
 #: zypp/solver/detail/Resolver_problems.cc:328
 #, c-format
-msgid "%s has unfulfiled requirements"
+msgid "%s has unfulfilled requirements"
 msgstr "%s weist nicht erfüllte Anforderungen auf"
 
 #: zypp/solver/detail/Resolver_problems.cc:366

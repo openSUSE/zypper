@@ -2318,7 +2318,7 @@ msgstr "älä asenna %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:359
 #, c-format
-msgid "%s has unfulfiled requirements"
+msgid "%s has unfulfilled requirements"
 msgstr "Osalla %s on täyttämättömiä vaatimuksia"
 
 #: zypp/solver/detail/Resolver_problems.cc:397

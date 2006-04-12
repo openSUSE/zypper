@@ -2158,7 +2158,7 @@ msgstr "依存関係の問題により、%s をインストールできません
 
 #: zypp/solver/detail/Resolver_problems.cc:328
 #, c-format
-msgid "%s has unfulfiled requirements"
+msgid "%s has unfulfilled requirements"
 msgstr "%s は要求を満たしていません"
 
 #: zypp/solver/detail/Resolver_problems.cc:366

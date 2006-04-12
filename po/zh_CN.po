@@ -2156,7 +2156,7 @@ msgstr "由于依赖性问题，所以无法安装 %s"
 
 #: zypp/solver/detail/Resolver_problems.cc:328
 #, c-format
-msgid "%s has unfulfiled requirements"
+msgid "%s has unfulfilled requirements"
 msgstr "%s 具有无法得到满足的需求"
 
 #: zypp/solver/detail/Resolver_problems.cc:366

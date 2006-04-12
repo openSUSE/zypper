@@ -2416,7 +2416,7 @@ msgstr "ইনস্টল করা হচ্ছে %s: \"%s\" "
 
 #: zypp/solver/detail/Resolver_problems.cc:359
 #, c-format
-msgid "%s has unfulfiled requirements"
+msgid "%s has unfulfilled requirements"
 msgstr ""
 
 # নির্ভরতা
