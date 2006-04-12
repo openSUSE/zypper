@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr 12 13:48:25 CEST 2006 - kkaempf@suse.de
+
+- Only consider best arch/version (#165477)
+- rev 3069
+
+-------------------------------------------------------------------
 Wed Apr 12 10:57:50 CEST 2006 - ma@suse.de
 
 - No need to parse tags at all if there is no item to store values
