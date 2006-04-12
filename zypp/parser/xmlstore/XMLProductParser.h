@@ -33,6 +33,7 @@ namespace zypp {
     
       private:
         void parseProductFlags( XMLProductData_Ptr productPtr, xmlNodePtr node);
+        void parseUpdateUrls( XMLProductData_Ptr productPtr, xmlNodePtr node);
         virtual bool isInterested(const xmlNodePtr nodePtr);
         virtual XMLProductData_Ptr process(const xmlTextReaderPtr reader);
       };

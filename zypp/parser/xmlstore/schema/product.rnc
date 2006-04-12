@@ -15,5 +15,6 @@ product =
    element vendor { text },
    element source { text },
    element release-notes-url { text },
+   element update-urls { element update-url { text }* },
    element product-flags { element product-flag {text }* }
    

@@ -844,6 +844,21 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
     else
       impl->_release_notes_url = Url();
 
+    // update_urls
+    std::list<std::string>::const_iterator
+	b = parsed.update_urls.begin(),
+	e = parsed.update_urls.end(),
+	i;
+    for (i = b; i != e; ++i) {
+	Url u;
+	try {
+	    u = *i;
+	}
+	catch (...) {
+	}
+	impl->_update_urls.push_back (u);
+    }
+
     impl->_flags = parsed.flags;
 
     Arch arch;

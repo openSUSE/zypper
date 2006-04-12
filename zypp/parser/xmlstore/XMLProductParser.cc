@@ -86,6 +86,9 @@ namespace zypp {
             else if (name == "product-flags") {
               parseProductFlags( productPtr, child);
             }
+	    else if (name == "update-urls") {
+              parseUpdateUrls( productPtr, child);
+	    }
           }
         }
         return productPtr;
@@ -107,6 +110,21 @@ namespace zypp {
         }
       }
       
+      void
+      XMLProductParser::parseUpdateUrls( XMLProductData_Ptr productPtr, xmlNodePtr node)
+      {
+        for (xmlNodePtr child = node->children; child && child != node; child = child->next)
+        {
+          if (_helper.isElement(child))
+          {
+            string name = _helper.name(child);
+            if (name == "update-url")
+            {
+              productPtr->update_urls.push_back(_helper.content(child));
+            }
+          }
+        }
+      }
     } // namespace yum
   } // namespace parser
 } // namespace zypp

@@ -52,6 +52,9 @@ namespace zypp
     Url XMLProductImpl::releaseNotesUrl() const
     { return _release_notes_url; }
 
+    std::list<Url> XMLProductImpl::updateUrls() const
+    { return _update_urls; }
+
     std::list<std::string> XMLProductImpl::flags() const
     { return _flags; }
     

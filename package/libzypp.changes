@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Apr 12 16:44:57 CEST 2006 - mvidner@suse.cz
+
+- Product::updateUrls: restore it from the XML store;
+  fixed content parsing (#163192).
+- restore product flags fro the XML store
+- rev 3074
+
+-------------------------------------------------------------------
 Wed Apr 12 13:48:25 CEST 2006 - kkaempf@suse.de
 
 - Only consider best arch/version (#165477)
