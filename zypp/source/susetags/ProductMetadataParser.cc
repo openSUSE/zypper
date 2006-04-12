@@ -109,7 +109,7 @@ namespace zypp
 		    prodImpl->_release_notes_url = Url();
     		}
 	    }
-	    else if(key == "UPDATEURL")
+	    else if(key == "UPDATEURLS")
 	    {
 		std::list<std::string> items;
 		boost::algorithm::split(items, value, is_space());
