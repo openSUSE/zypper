@@ -39,6 +39,8 @@ namespace zypp
     { return true; }
     virtual bool askUserToAcceptVerificationFailed( const Pathname &file, const std::string &keyid, const std::string &keyname )
     { return true; }
+    virtual bool askUserToAcceptFileWithoutChecksum( const zypp::Pathname &file )
+    { return true; }
   };
   
   struct KeyRingSignals : public callback::ReportBase
