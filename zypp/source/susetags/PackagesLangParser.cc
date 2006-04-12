@@ -95,11 +95,13 @@ namespace zypp
         /* Consume MulitTag data. */
         virtual void consume( const MultiTag & mtag_r )
         {
+          if ( _current == NULL )
+            return;
+
           if ( mtag_r.name == "Des" )
-          {
-	    if ( _current != NULL )
-             _current->_description = TranslatedText (mtag_r.values, _lang);
-          }
+            {
+              _current->_description = TranslatedText (mtag_r.values, _lang);
+            }
           else if ( mtag_r.name == "Ins" )
             {
               _current->_insnotify = TranslatedText (mtag_r.values, _lang);
@@ -108,16 +110,12 @@ namespace zypp
             {
               _current->_delnotify = TranslatedText (mtag_r.values, _lang);
             }
-
           else if ( mtag_r.name == "Eul" )
           {
-            if ( _current != NULL )
-            {
-              for ( std::list<std::string>::const_iterator it = mtag_r.values.begin(); it != mtag_r.values.end(); ++it)
+            for ( std::list<std::string>::const_iterator it = mtag_r.values.begin(); it != mtag_r.values.end(); ++it)
               {
                 _current->_license_to_confirm += *it;
               }
-            }
           }
         }
       };
