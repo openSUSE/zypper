@@ -29,6 +29,7 @@ namespace zypp
     ZYppCommitPolicy()
     : _restrictToMedia( 0 )
     , _dryRun( false )
+    , _rpmNoSignature( false )
     {}
 
   public:
@@ -37,6 +38,9 @@ namespace zypp
 
     bool dryRun() const
     { return _dryRun; }
+
+    bool rpmNoSignature() const
+    { return _rpmNoSignature; }
 
   public:
     /** Restrict commit to a certain media number
@@ -53,10 +57,14 @@ namespace zypp
     ZYppCommitPolicy & dryRun( bool yesNo_r = true )
     { _dryRun = yesNo_r; return *this; }
 
+    /** Use rpm option --nosignature (default: false) */
+    ZYppCommitPolicy & rpmNoSignature( bool yesNo_r = true )
+    { _rpmNoSignature = yesNo_r; return *this; }
+
   private:
     unsigned _restrictToMedia;
     bool     _dryRun;
-
+    bool     _rpmNoSignature;
   };
   ///////////////////////////////////////////////////////////////////
 

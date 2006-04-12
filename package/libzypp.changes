@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Apr 12 17:57:21 CEST 2006 - ma@suse.de
+
+- Added 'rpmNoSignature' to ZYppCommitPolicy (#163862)
+
+-------------------------------------------------------------------
 Wed Apr 12 16:44:57 CEST 2006 - mvidner@suse.cz
 
 - Product::updateUrls: restore it from the XML store;

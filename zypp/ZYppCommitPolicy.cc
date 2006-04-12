@@ -24,7 +24,9 @@ namespace zypp
     if ( obj.restrictToMedia() )
       str << " restrictToMedia:" << obj.restrictToMedia();
     if ( obj.dryRun() )
-      str << " dryRun" << obj.restrictToMedia();
+      str << " dryRun";
+    if ( obj.rpmNoSignature() )
+      str << " rpmNoSignature";
     return str << " )";
   }
 

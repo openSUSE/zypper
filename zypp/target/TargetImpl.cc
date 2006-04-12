@@ -245,11 +245,12 @@ namespace zypp
             progress.connect();
             bool success = true;
 	    unsigned flags = 0;
+            if (p->installOnly()) flags |= rpm::RpmDb::RPMINST_NOUPGRADE;
+            if (policy_r.dryRun()) flags |= rpm::RpmDb::RPMINST_TEST;
+            if (policy_r.rpmNoSignature()) flags |= rpm::RpmDb::RPMINST_NOSIGNATURE;
 
             try {
               progress.tryLevel( target::rpm::InstallResolvableReport::RPM );
-	      if (p->installOnly()) flags |= rpm::RpmDb::RPMINST_NOUPGRADE;
-	      if (policy_r.dryRun()) flags |= rpm::RpmDb::RPMINST_TEST;
               rpm().installPackage( localfile, flags );
 
 	      if( progress.aborted() )
