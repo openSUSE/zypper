@@ -32,6 +32,13 @@
     <element name="release-notes-url">
       <text/>
     </element>
+    <element name="update-urls">
+      <zeroOrMore>
+        <element name="update-url">
+          <text/>
+        </element>
+      </zeroOrMore>
+    </element>
     <element name="product-flags">
       <zeroOrMore>
         <element name="product-flag">
