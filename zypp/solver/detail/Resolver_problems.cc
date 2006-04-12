@@ -431,7 +431,7 @@ Resolver::problems (void) const
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
 		what = misc_info->message();
 		// TranslatorExplanation %s = name of package, patch, selection ...				
-		details = str::form (_("%s has unfulfiled requirements"), who.c_str());
+		details = str::form (_("%s has unfulfilled requirements"), who.c_str());
 		ResolverProblem_Ptr problem = new ResolverProblem (what, details);
 		// Uninstall 
 		problem->addSolution (new ProblemSolutionUninstall (problem, item));

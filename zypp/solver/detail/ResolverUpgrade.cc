@@ -195,11 +195,13 @@ Resolver::doesObsoleteItem (PoolItem_Ref candidate, PoolItem_Ref installed)
 //-----------------------------------------------------------------------------
 
 
-// find all available providers for installed name
+// find best available providers for installed name
+
+typedef map<string, PoolItem_Ref> FindMap;
 
 struct FindProviders
 {
-    PoolItemOrderSet providers;		// the providers which matched
+    FindMap providers;		// the best providers which matched
 
     FindProviders ()
     { }
@@ -211,8 +213,22 @@ struct FindProviders
 	    MIL << "  IGNORE relation match (package is tagged to delete): " << cai.cap << " ==> " << provider << endl;
 	}
 	else {
-	    MIL << "  relation match: " << cai.cap << " ==> " << provider << endl;
-	    providers.insert (provider);
+	    FindMap::iterator it = providers.find( provider->name() );
+
+	    if (it != providers.end()) {				// provider with same name found
+		int cmp = it->second->arch().compare( provider->arch() );
+		if (cmp < 0) {						// new provider has better arch
+		    it->second = provider;
+		}
+		else if (cmp == 0) {					// new provider has equal arch
+		    if (it->second->edition().compare( provider->edition() ) < 0) {
+			it->second = provider;				// new provider has better edition
+		    }
+		}
+	    }
+	    else {
+		providers[provider->name()] = provider;
+	    }
 	}
 	return true;
     }
@@ -516,6 +532,12 @@ MIL << "split matched !" << endl;
 
       _DEBUG("lookup " << num_providers << " provides for installed " << installedCap);
 
+      // copy from map to set
+      PoolItemOrderSet providers;
+      for (FindMap::const_iterator mapit = info.providers.begin(); mapit != info.providers.end(); ++mapit) {
+	providers.insert( mapit->second );
+      }
+
       switch ( info.providers.size() ) {
       case 0:
 	MIL << " ==> (dropped)" << endl;
@@ -525,14 +547,14 @@ MIL << "split matched !" << endl;
 	probably_dropped = true;
 	break;
       case 1:
-        addProvided[installed] = info.providers;
-	MIL << " ==> REPLACED by: " << (*info.providers.begin()) << endl;
+        addProvided[installed] = providers;
+	MIL << " ==> REPLACED by: " << (*providers.begin()) << endl;
 	// count stats later
 	// check obsoletes later
 	break;
       default:
-	addMultiProvided[installed] = info.providers;
-	MIL << " ==> pass 2 (" << info.providers.size() << " times provided)" << endl;
+	addMultiProvided[installed] = providers;
+	MIL << " ==> pass 2 (" << providers.size() << " times provided)" << endl;
 	// count stats later
 	// check obsoletes later
 	break;
@@ -638,6 +660,10 @@ MIL << "split matched !" << endl;
 
     for ( PoolItemOrderSet::iterator git = gset.begin(); git != gset.end(); ++git ) {
       PoolItem_Ref item (*git);
+
+      if (git == gset.begin())		// default to first of set; the set is ordered, first is the best
+	guess = item;
+
       if ( item.status().isToBeInstalled()) {
 	MIL << " ==> (pass 2: meanwhile set to install): " << item << endl;
 	if ( ! doesObsoleteItem (item, it->first ) ) {
