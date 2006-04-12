@@ -39,10 +39,12 @@ namespace zypp
       virtual Label shortName( const Locale & locale_r = Locale() ) const;
       virtual Label description( const Locale & locale_r = Locale() ) const;
       virtual Url releaseNotesUrl() const;
+      virtual std::list<std::string> flags() const;
 
       std::string _category;
       std::string _vendor;
       Url _release_notes_url;
+      std::list<std::string> _flags;
       TranslatedText _summary;
       TranslatedText _description;
       TranslatedText _short_name;

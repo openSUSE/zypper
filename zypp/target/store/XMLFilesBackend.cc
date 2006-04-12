@@ -844,6 +844,8 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
     else
       impl->_release_notes_url = Url();
 
+    impl->_flags = parsed.flags;
+
     Arch arch;
     if (!parsed.arch.empty())
       arch = Arch(parsed.arch);
