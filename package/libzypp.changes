@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Apr 12 10:57:50 CEST 2006 - ma@suse.de
+
+- No need to parse tags at all if there is no item to store values
+  (e.g. data for unwanted arch). Fixed segv trying to store data in
+  NULL item. (#165479)
+- rev3065
+
+-------------------------------------------------------------------
 Tue Apr 11 19:48:51 CEST 2006 - mt@suse.de
 
 - Improved Url path name "//" vs. "/%2f" handling; now if the
