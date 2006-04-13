@@ -179,6 +179,13 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    }
 	}
 	if (iter == requires.end()) {					// all are met
+#if 0	// now disabled
+
+// why do we install when requirements are met ?
+// this code should probably be removed completely.
+// if all requirements are met, the item is satisfied
+//  there is no reason to install it.
+
 	    if (_item->kind() == ResTraits<Package>::kind
                 || _item->kind() == ResTraits<Pattern>::kind
                 || _item->kind() == ResTraits<Selection>::kind)
@@ -191,9 +198,12 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 		}
 	    }
 	    else {
+#endif
 		_DEBUG("all requirements of " << _item << " met -> satisfied");
 		context->satisfy (_item, _other_penalty);
+#if 0
 	    }
+#endif
 	}
 	else {
 	    // If the item stays installed, blame the user
