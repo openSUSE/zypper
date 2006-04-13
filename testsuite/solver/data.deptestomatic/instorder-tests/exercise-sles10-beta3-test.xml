@@ -5,6 +5,7 @@
 <test>
 <setup>
   <channel name="test" file="sles10-beta3-i386-packages.xml.gz"/>
+  <arch name="i586"/>
 </setup>
 <trial>
   <install channel="test" package="libgnomeui"/>
