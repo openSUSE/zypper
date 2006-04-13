@@ -346,7 +346,7 @@ Resolver::verifySystem (void)
 //---------------------------------------------------------------------------
 
 // copy marked item from solution back to pool
-// if data != NULL, set as APPL_HIGH (from establishPool())
+// if data != NULL, set as APPL_LOW (from establishPool())
 
 static void
 solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
@@ -354,15 +354,15 @@ solution_to_pool (PoolItem_Ref item, const ResStatus & status, void *data)
     bool r;
 
     if (status.isToBeInstalled()) {
-	r = item.status().setToBeInstalled( (data != NULL) ? ResStatus::APPL_HIGH : ResStatus::SOLVER );
+	r = item.status().setToBeInstalled( (data != NULL) ? ResStatus::APPL_LOW : ResStatus::SOLVER );
 	_XDEBUG("solution_to_pool(" << item << ", " << status << ") install !" << r);
     }
     else if (status.isToBeUninstalledDueToUpgrade()) {
-	r = item.status().setToBeUninstalledDueToUpgrade( (data != NULL) ? ResStatus::APPL_HIGH : ResStatus::SOLVER );
+	r = item.status().setToBeUninstalledDueToUpgrade( (data != NULL) ? ResStatus::APPL_LOW : ResStatus::SOLVER );
 	_XDEBUG("solution_to_pool(" << item << ", " << status << ") upgrade !" << r);
     }
     else if (status.isToBeUninstalled()) {
-	r = item.status().setToBeUninstalled( (data != NULL) ? ResStatus::APPL_HIGH : ResStatus::SOLVER );
+	r = item.status().setToBeUninstalled( (data != NULL) ? ResStatus::APPL_LOW : ResStatus::SOLVER );
 	_XDEBUG("solution_to_pool(" << item << ", " << status << ") remove !" << r);
     }
     else if (status.isIncomplete()
@@ -464,7 +464,7 @@ Resolver::establishPool ()
     ResolverContext_Ptr solution = bestContext();
 
     if (solution) {						// copy solution back to pool
-	solution->foreachMarked (solution_to_pool, (void *)1);	// as APPL_HIGH
+	solution->foreachMarked (solution_to_pool, (void *)1);	// as APPL_LOW
     }
     else {
 	ERR << "establishState did not return a bestContext" << endl;
@@ -585,7 +585,7 @@ Resolver::freshenPool ()
     ResolverContext_Ptr solution = bestContext();
 
     if (solution) {						// copy solution back to pool
-	solution->foreachMarked (solution_to_pool, (void *)1);	// as APPL_HIGH
+	solution->foreachMarked (solution_to_pool, (void *)1);	// as APPL_LOW
     }
     else {
 	ERR << "freshenState did not return a bestContext" << endl;
@@ -979,17 +979,17 @@ transactItems( PoolItem_Ref installed, PoolItem_Ref uninstalled, bool install, b
 		&& !uninstalled.status().isLocked())
 	    {
 		if (soft) 
-		    uninstalled.status().setSoftTransact( install, ResStatus::SOLVER );
+		    uninstalled.status().setSoftTransact( install, ResStatus::APPL_LOW );
 		else
-		    uninstalled.status().setTransact( install, ResStatus::SOLVER );
+		    uninstalled.status().setTransact( install, ResStatus::APPL_LOW );
 	    }
 	    if (installed
 		&& !installed.status().isLocked())
 	    {
 		if (soft) 
-		    installed.status().setSoftTransact( false, ResStatus::SOLVER );
+		    installed.status().setSoftTransact( false, ResStatus::APPL_LOW );
 		else
-		    installed.status().setTransact( false, ResStatus::SOLVER );
+		    installed.status().setTransact( false, ResStatus::APPL_LOW );
 	    }
 	} else {
 	    // uninstall
@@ -997,17 +997,17 @@ transactItems( PoolItem_Ref installed, PoolItem_Ref uninstalled, bool install, b
 		&& !uninstalled.status().isLocked())
 	    {
 		if (soft) 
-		    uninstalled.status().setSoftTransact( false, ResStatus::SOLVER );
+		    uninstalled.status().setSoftTransact( false, ResStatus::APPL_LOW );
 		else
-		    uninstalled.status().setTransact( false, ResStatus::SOLVER );
+		    uninstalled.status().setTransact( false, ResStatus::APPL_LOW );
 	    }
 	    if (installed
 		&& !installed.status().isLocked())
 	    {
 		if (soft) 
-		    installed.status().setSoftTransact( true, ResStatus::SOLVER );
+		    installed.status().setSoftTransact( true, ResStatus::APPL_LOW );
 		else
-		    installed.status().setTransact( true, ResStatus::SOLVER );
+		    installed.status().setTransact( true, ResStatus::APPL_LOW );
 	    }	    
 	}
 	if (!uninstalled
@@ -1032,7 +1032,7 @@ transactCaps( const ResPool & pool, const CapSet & caps, bool install, bool soft
 
 	PoolItem_Ref installed = Helper::findInstalledByNameAndKind( pool, it->index(), it->refers() );
 	PoolItem_Ref uninstalled = Helper::findUninstalledByNameAndKind( pool, it->index(), it->refers() );
-
+	
 	if (!transactItems( installed, uninstalled, install, soft ))
 	    result = false;
     }
@@ -1192,7 +1192,7 @@ Resolver::transactResKind( Resolvable::Kind kind )
 		  pool().byKindEnd( kind ),
 		  functor::chain( resfilter::ByTransact(), resfilter::ByUninstalled ()),
 		  functor::functorRef<bool,PoolItem>( callback ) );
-
+    
     return callback.result;
 }
 
