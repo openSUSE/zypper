@@ -244,7 +244,7 @@ struct UninstallEstablishItem
     }
 };
 
-// Handle items which provides a recommend -> remove it soft
+// Handle installed items which provides a recommend -> remove it soft
 
 struct ProvidesItem
 {
@@ -262,10 +262,12 @@ struct ProvidesItem
     bool operator()( const CapAndItem & cai )
     {
 	_XDEBUG("remove soft item (" << cai.item << ", " << cai.cap << ")");
-
-	QueueItemUninstall_Ptr uninstall_item = new QueueItemUninstall (pool, cai.item, QueueItemUninstall::EXPLICIT, soft);
-	uninstall_item->setUnlink ();
-	qil.push_back (uninstall_item);
+	PoolItem_Ref item( cai.item );
+	if (!item.status().transacts()) {	// not scheduled for transaction yet
+	    QueueItemUninstall_Ptr uninstall_item = new QueueItemUninstall (pool, item, QueueItemUninstall::EXPLICIT, soft);
+	    uninstall_item->setUnlink ();
+	    qil.push_back (uninstall_item);
+	}
 	return true;
     }
 };
@@ -406,7 +408,12 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 			  functor::functorRef<bool,CapAndItem>( establish ) );
 	}
 
-	// remove the items which have been recommended by the 
+	// soft-remove the installed items which have been recommended by the to-be-uninstalled
+	// but not when upgrade
+
+        if (!_upgraded_to)
+	    goto finished;
+
 	CapSet recomments = _item->dep (Dep::RECOMMENDS);
 	for (CapSet::const_iterator iter = recomments.begin(); iter != recomments.end(); iter++) {
 	    const Capability cap = *iter;
@@ -416,10 +423,10 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    Dep dep(Dep::PROVIDES);
 	    invokeOnEach( pool().byCapabilityIndexBegin( iter->index(), dep ),
 			  pool().byCapabilityIndexEnd( iter->index(), dep ),
-			  resfilter::ByCapMatch( *iter ),
+			  functor::chain( resfilter::ByCaIInstalled(), resfilter::ByCapMatch( *iter ) ),
 			  functor::functorRef<bool,CapAndItem>( provides ) );
 	}
-	
+
     }
 
  finished:
