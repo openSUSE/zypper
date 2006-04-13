@@ -575,7 +575,8 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	
 
 	if (!_upgraded_item
-	    || _lost_item) {
+	    || _lost_item)
+	{
 	    ResolverInfo_Ptr err_info;
 	    NoInstallableProviders info;
 	    info.requirer = _requiring_item;
@@ -601,7 +602,8 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	     || _lost_item // foo-devel requires foo; foo is lost due obsolete --> try to upgrade foo-devel
 	     || context->verifying()) // We are in the verify mode. So there could be already missing requirements
 	                              // So try to solve it via update
-	    && _requiring_item) {
+	    && _requiring_item)
+	{
 
 	    LookForUpgrades info (_requiring_item);
 
