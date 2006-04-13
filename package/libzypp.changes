@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Apr 13 16:00:21 CEST 2006 - kkaempf@suse.de
+
+- dont abort on failed "dry_run" (#164583)
+- rev 3091
+
+-------------------------------------------------------------------
 Thu Apr 13 15:19:20 CEST 2006 - visnov@suse.cz
 
 - Ask user if signature file does not exist (#163765)
