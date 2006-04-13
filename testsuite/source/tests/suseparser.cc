@@ -46,7 +46,15 @@ int main( int argc, char * argv[] )
 
     INT << "===[START]==========================================" << endl;
 
-    ZYpp::Ptr God = zypp::getZYpp();
+    ZYpp::Ptr God;
+    try {
+	God = zypp::getZYpp( );
+    }
+    catch( const Exception & excpt_r ) {
+	ZYPP_CAUGHT( excpt_r );
+	cerr << "Can't aquire ZYPP lock" << endl;
+	return 1;
+    }
 
     int argpos = 1;
 
