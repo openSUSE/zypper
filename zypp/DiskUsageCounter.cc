@@ -48,7 +48,6 @@ namespace zypp
     {
       bool inst = it->status().isToBeInstalled();
       bool rem = it->status().isToBeUninstalled();
-      bool installed = it->status().isInstalled();
 
       // if the package is not selected for installation or removing
       // it can't affect disk usage
