@@ -89,6 +89,7 @@ pkginclude_HEADERS = NeedAType.h \
 	ZYppCommitResult.h	\
 	ZYppFactory.h	\
 	ZYppCallbacks.h	\
+	SilentCallbacks.h \
 	KeyRing.h
 
 ## ##################################################

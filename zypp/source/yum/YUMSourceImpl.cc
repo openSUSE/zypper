@@ -34,6 +34,7 @@
 #include "zypp/parser/yum/YUMParser.h"
 #include "zypp/SourceFactory.h"
 #include "zypp/ZYppCallbacks.h"
+#include "zypp/SilentCallbacks.h"
 
 #include "zypp/base/GzStream.h"
 #include "zypp/base/Gettext.h"
@@ -128,10 +129,16 @@ namespace zypp
 	    MIL << "Checking repomd.xml integrity" << endl;
 	    Pathname asc_local;
 	    try {
+	      media::SilentMediaChange report;
+	      callback::TempConnect< media::MediaChangeReport > nochange(report);
+
 	      asc_local = provideFile(_path + "/repodata/repomd.xml.asc");
 	    }
 	    catch (const Exception & excpt_r)
 	    {
+	      // TODO: we should fail on not found only, others
+	      // might not be the case of unsigned repomd.xml, but
+	      // e.g. connection failures
 	      ZYPP_CAUGHT(excpt_r);
 	    }
 	

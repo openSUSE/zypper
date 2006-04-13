@@ -216,6 +216,15 @@ namespace zypp
     callback::SendReport<KeyRingReport> report;
     callback::SendReport<KeyRingSignals> emitSignal;
     MIL << "Going to verify signature for " << file << " with " << signature << std::endl; 
+    
+    if( signature.empty() )
+    {
+	bool res = report->askUserToAcceptUnsignedFile( file );
+	
+	MIL << "User decision on unsigned file: " << res << endl;
+	
+	return res;
+    }
 
     // get the id of the signature
     std::string id = readSignatureKeyId(file, signature);
