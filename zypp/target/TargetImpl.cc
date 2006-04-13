@@ -267,7 +267,6 @@ namespace zypp
               WAR << "Install failed, retrying with --nodeps" << endl;
 	      if (policy_r.dryRun()) {
 	          WAR << "dry run failed" << endl;
-		  abort = true;
 		  progress.disconnect();
 		  break;
 	      }
