@@ -77,7 +77,7 @@ using namespace zypp;
 using zypp::capability::SplitCap;
 
 
-/** Oder on AvialableItemSet.
+/** Order on AvialableItemSet.
  * \li best Arch
  * \li best Edition
  * \li ResObject::constPtr as fallback.
@@ -526,7 +526,7 @@ MIL << "split matched !" << endl;
 		    _pool.byCapabilityIndexEnd( installed->name(), dep ),
 		    functor::chain( resfilter::ByCaIUninstalled(),
 				    resfilter::ByCapMatch( installedCap ) ) ,
-		    functor::functorRef<bool,CapAndItem>(info) );      
+		    functor::functorRef<bool,CapAndItem>(info) );
 
       int num_providers = info.providers.size();
 
@@ -636,7 +636,7 @@ MIL << "split matched !" << endl;
 
     PoolItemOrderSet & tset( it->second );
     PoolItem_Ref lastItem = PoolItem_Ref();
-    
+
     for ( PoolItemOrderSet::iterator sit = tset.begin(); sit != tset.end(); ++sit ) {
 	if (!lastItem
 	    || compareByN ( lastItem.resolvable(), sit->resolvable()) != 0) // do not install packages with the same NVR and other architecture
