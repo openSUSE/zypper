@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Apr 13 17:01:41 CEST 2006 - visnov@suse.cz
+
+- ask for file without a checksum (#165125) 
+
+-------------------------------------------------------------------
 Thu Apr 13 16:00:21 CEST 2006 - kkaempf@suse.de
 
 - dont abort on failed "dry_run" (#164583)

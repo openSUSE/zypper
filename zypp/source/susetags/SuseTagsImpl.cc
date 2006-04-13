@@ -460,7 +460,7 @@ namespace zypp
           {
 	    callback::SendReport<KeyRingReport> report;
 
-	    if ( report->askUserToAcceptUnsignedFile(path) )
+	    if ( report->askUserToAcceptFileWithoutChecksum(path) )
 	    {
 		MIL << path << " user accepted unsigned file " << endl;
 		return;
