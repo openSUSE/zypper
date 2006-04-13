@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Apr 13 16:59:38 CEST 2006 - kkaempf@suse.de
+
+- dont install satisfied resolvables (#165843)
+- rev 3095
+
+-------------------------------------------------------------------
 Thu Apr 13 17:01:41 CEST 2006 - visnov@suse.cz
 
 - ask for file without a checksum (#165125) 
