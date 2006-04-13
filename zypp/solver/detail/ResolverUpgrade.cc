@@ -487,7 +487,7 @@ MIL << "split matched !" << endl;
       if ( ! candidate.status().isToBeInstalled() ) {
 	int cmp = installed->edition().compare( candidate->edition() );
 	if ( cmp < 0 ) {						// new edition
-	  candidate.status().setToBeInstalled(ResStatus::APPL_HIGH);
+	  candidate.status().setToBeInstalled( ResStatus::APPL_HIGH );
 	  MIL << " ==> INSTALL (new version): " << candidate << endl;
 	  ++opt_stats_r.chk_to_update;
 	} else {							// older or equal edition
@@ -499,7 +499,7 @@ MIL << "split matched !" << endl;
 	    MIL << " ==> (keep installed)" << candidate << endl;	// keep installed
 	    ++opt_stats_r.chk_to_keep_installed;
 	  } else {							// older and downgrade allowed
-	    candidate.status().setToBeInstalled(ResStatus::APPL_HIGH);
+	    candidate.status().setToBeInstalled( ResStatus::APPL_HIGH );
 	    MIL << " ==> INSTALL (SuSE version downgrade): " << candidate << endl;
 	    ++opt_stats_r.chk_to_downgrade;
 	  }
@@ -593,7 +593,7 @@ MIL << "split matched !" << endl;
 
     if ( probably_dropped ) {
       if ( opt_stats_r.delete_unmaintained ) {
-	installed.status().setToBeUninstalled(ResStatus::APPL_HIGH);
+	installed.status().setToBeUninstalled( ResStatus::APPL_HIGH );
       }
       ++opt_stats_r.chk_dropped;
       _update_items.push_back ( installed );
@@ -617,14 +617,14 @@ MIL << "split matched !" << endl;
     for ( PoolItemOrderSet::iterator sit = tset.begin(); sit != tset.end(); ++sit ) {
       PoolItem_Ref provider (*sit);
 
-      if (provider.status().setToBeInstalled(ResStatus::APPL_HIGH)) {
+      if (provider.status().setToBeInstalled( ResStatus::APPL_HIGH )) {
 	++opt_stats_r.chk_replaced;
       }
 
       // needs installed
 
       if ( doesObsoleteItem (provider, it->first ) ) {
-	it->first.status().setToBeUninstalled(ResStatus::APPL_HIGH);
+	it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
       }
     }
 
@@ -641,8 +641,17 @@ MIL << "split matched !" << endl;
 	if (!lastItem
 	    || compareByN ( lastItem.resolvable(), sit->resolvable()) != 0) // do not install packages with the same NVR and other architecture
 	{
-	    if ((*sit).status().setToBeInstalled(ResStatus::APPL_HIGH)) {
-		++opt_stats_r.chk_add_split;
+	    PoolItem_Ref item( *sit );
+
+	    // only install split if its actually a different edition
+
+	    PoolItem_Ref already_installed = Helper::findInstalledItem( _pool, item );
+	    if (!already_installed
+		|| already_installed->edition().compare( item->edition() ) != 0 )
+	    {
+		if (item.status().setToBeInstalled( ResStatus::APPL_HIGH )) {
+		    ++opt_stats_r.chk_add_split;
+		}
 	    }
 	}
 	lastItem = *sit;
@@ -667,7 +676,7 @@ MIL << "split matched !" << endl;
       if ( item.status().isToBeInstalled()) {
 	MIL << " ==> (pass 2: meanwhile set to install): " << item << endl;
 	if ( ! doesObsoleteItem (item, it->first ) ) {
-	  it->first.status().setToBeUninstalled(ResStatus::APPL_HIGH);
+	  it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
 	}
 	guess = PoolItem_Ref();
 	break;
@@ -685,10 +694,10 @@ MIL << "split matched !" << endl;
     }
 
     if ( guess ) {
-      guess.status().setToBeInstalled(ResStatus::APPL_HIGH);
+      guess.status().setToBeInstalled( ResStatus::APPL_HIGH );
       MIL << " ==> REPLACED by: (pass 2: guessed): " << guess << endl;
       if ( ! doesObsoleteItem (guess, it->first ) ) {
-	it->first.status().setToBeUninstalled(ResStatus::APPL_HIGH);
+	it->first.status().setToBeUninstalled( ResStatus::APPL_HIGH );
       }
       ++opt_stats_r.chk_replaced_guessed;
     }
