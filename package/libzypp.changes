@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Apr 13 11:57:58 CEST 2006 - kkaempf@suse.de
+
+- Dont do transitive uninstalls on uninstalled or upgraded items.
+  (#165798)
+- rev 3083
+
+-------------------------------------------------------------------
 Wed Apr 12 17:57:21 CEST 2006 - ma@suse.de
 
 - Added 'rpmNoSignature' to ZYppCommitPolicy (#163862)
