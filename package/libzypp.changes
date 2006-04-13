@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Apr 13 13:52:08 CEST 2006 - schubi@suse.de
+
+- Bug 164365 - build 906: Deselecting a selection, all packages are still selected
+
+-------------------------------------------------------------------
 Thu Apr 13 11:57:58 CEST 2006 - kkaempf@suse.de
 
 - Dont do transitive uninstalls on uninstalled or upgraded items.
