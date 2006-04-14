@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 14 16:04:35 CEST 2006 - visnov@suse.cz
+
+- new callbacks for failing digest
+- rev 3098 
+
+-------------------------------------------------------------------
 Thu Apr 13 16:59:38 CEST 2006 - kkaempf@suse.de
 
 - dont install satisfied resolvables (#165843)

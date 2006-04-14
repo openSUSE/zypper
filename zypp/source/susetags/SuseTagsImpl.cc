@@ -407,6 +407,13 @@ namespace zypp
         else if (!PathInfo(_content_file_sig).isExist() && !PathInfo(_content_file_key).isExist() )
         {
           // old source?
+
+          // verify the content file anyway (with empty signature)
+          bool valid = getZYpp()->keyRing()->verifyFileSignatureWorkflow( _content_file, Pathname() );
+          
+          // the source is not valid and the user did not want to continue
+          if (!valid)
+            ZYPP_THROW (Exception( "Error. Source signature does not validate and user does not want to continue. "));
         }
         else
         {
@@ -458,11 +465,11 @@ namespace zypp
           CheckSum checksum = _prodImpl->_descr_files_checksums[key];
           if (checksum.empty())
           {
-	    callback::SendReport<KeyRingReport> report;
+	    callback::SendReport<DigestReport> report;
 
-	    if ( report->askUserToAcceptFileWithoutChecksum(path) )
+	    if ( report->askUserToAcceptNoDigest(path) )
 	    {
-		MIL << path << " user accepted unsigned file " << endl;
+		MIL << path << " user accepted file without a checksum " << endl;
 		return;
 	    }
 

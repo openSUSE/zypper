@@ -18,7 +18,23 @@
 #include <string>
 #include <iosfwd>
 
+#include <zypp/Callback.h>
+#include <zypp/Pathname.h>
+
 namespace zypp {
+
+
+  struct DigestReport : public callback::ReportBase
+  {
+    virtual bool askUserToAcceptNoDigest( const zypp::Pathname &file )
+    { return true; }
+    virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name )
+    { return true; }
+    virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found )
+    { return true; }
+  };
+  
+
 
     /** \brief Compute Message Digests (MD5, SHA1 etc)
      *

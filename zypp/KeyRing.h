@@ -32,15 +32,13 @@ namespace zypp
   struct KeyRingReport : public callback::ReportBase
   {
     virtual bool askUserToAcceptUnsignedFile( const Pathname &file )
-    { return true; }
+    { return false; }
     virtual bool askUserToAcceptUnknownKey( const Pathname &file, const std::string &keyid, const std::string &keyname )
-    { return true; }
+    { return false; }
     virtual bool askUserToTrustKey( const std::string &keyid, const std::string &keyname, const std::string &keydetails )
-    { return true; }
+    { return false; }
     virtual bool askUserToAcceptVerificationFailed( const Pathname &file, const std::string &keyid, const std::string &keyname )
-    { return true; }
-    virtual bool askUserToAcceptFileWithoutChecksum( const zypp::Pathname &file )
-    { return true; }
+    { return false; }
   };
   
   struct KeyRingSignals : public callback::ReportBase
