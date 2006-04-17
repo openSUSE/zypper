@@ -3,8 +3,7 @@
   Bug 155368
 -->
 <test>
-<setup>
-  <arch name="x86_64"/>
+<setup arch="x86_64">
   <system file="bug155368-system.xml"/>
   <channel name="packages" file="beta6-packages.xml"/>
   <channel name="selections" file="beta6-selections.xml"/>
