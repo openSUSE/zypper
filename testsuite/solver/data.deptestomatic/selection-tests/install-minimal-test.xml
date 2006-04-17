@@ -3,8 +3,7 @@
   install minmal selection
 -->
 <test>
-<setup>
-  <arch name="i686"/>
+<setup arch="i686">
   <channel name="packages" file="sl10.1-beta38-packages.xml"/>
   <channel name="selections" file="sl10.1-beta38-selections.xml"/>
   <mediaid/>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+  Bug 166212, transactResKind does not select best item
+-->
+<test>
+<setup arch="x86_64">
+  <channel name="packages" file="beta6-packages.xml"/>
+  <channel name="selections" file="beta6-selections.xml"/>
+</setup>
+<trial>
+  <install channel="selections" kind="selection" name="x11"/>
+  <transact kind="selection"/>
+</trial>
+</test>
