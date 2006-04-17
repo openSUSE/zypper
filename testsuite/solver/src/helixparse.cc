@@ -64,7 +64,9 @@ int main( int argc, char * argv[] )
     for (ResStore::const_iterator it = store.begin();
 	it != store.end(); it++)
     {
-	ERR << **it << endl;
+	ResObject::constPtr ptr( *it );
+	ERR << *ptr << endl;
+	if (argc > 2) ERR << (ptr->deps()) << endl;
     }
     ERR << store << endl;
     INT << "===[END]============================================" << endl;
