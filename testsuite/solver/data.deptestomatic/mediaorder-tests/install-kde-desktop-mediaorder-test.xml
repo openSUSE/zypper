@@ -3,9 +3,10 @@
   install minmal selection
 -->
 <test>
-<setup>
+<setup arch="i686">
   <channel name="packages" file="sl10.1-beta3-packages.xml"/>
   <channel name="selections" file="sl10.1-beta3-selections.xml"/>
+  <locale name="de"/>
   <mediaid/>
 </setup>
 <trial>

@@ -3,9 +3,8 @@
   novell-groupwise-gwclient has some prereqs
 -->
 <test>
-<setup>
+<setup arch="i586">
   <channel name="test" file="stable-i386-packages.xml.gz"/>
-  <arch name="i586"/>
 </setup>
 <trial>
   <install channel="test" package="novell-groupwise-gwclient"/>

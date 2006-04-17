@@ -21458,7 +21458,7 @@
     <dep name='libstdc++.so.6(CXXABI_1.3)' />
     <dep name='libstdc++.so.6(CXXABI_1.3.1)' />
     <dep name='libstdc++.so.6(GLIBCXX_3.4)' />
-    <dep name='liby2pm.so.2' />
+    <dep name='libzypp.so.0' />
     <dep name='libyui.so.2' />
   </requires>
   <provides>
@@ -27435,6 +27435,7 @@
   </requires>
   <provides>
     <dep name='aspell_dictionary' />
+    <dep name='locale(aspell:de)' />
     <dep name='aspell-de' op='=' version='0.50.2' />
   </provides>
 </package>
@@ -27455,6 +27456,7 @@
   </requires>
   <provides>
     <dep name='aspell_dictionary' />
+    <dep name='locale(aspell:en)' />
     <dep name='aspell-en' op='=' version='6.0' />
   </provides>
 </package>
@@ -66548,6 +66550,7 @@
   </requires>
   <provides>
     <dep name='susehelp_lang' />
+    <dep name='locale(susehelp:de)' />
     <dep name='susehelp_de' op='=' version='2006.02.07' />
   </provides>
 </package>
@@ -66568,6 +66571,7 @@
   </requires>
   <provides>
     <dep name='susehelp_lang' />
+    <dep name='locale(susehelp:en)' />
     <dep name='susehelp_en' op='=' version='2006.02.07' />
   </provides>
 </package>
@@ -104896,6 +104900,23 @@
   </requires>
   <provides>
     <dep name='xml-commons-resolver' op='=' version='1.1' />
+  </provides>
+</package>
+<package>
+  <name>fake-libboost</name>
+  <section>system</section>
+  <location>1</location>
+  <history>
+    <update>
+      <hid>12345</hid>
+      <version>1.0</version>
+      <release>42</release>
+      <arch>i586</arch>
+    </update>
+  </history>
+  <provides>
+    <dep name='libboost_filesystem.so.1.33.1' />
+    <dep name='libboost_regex.so.1.33.1' />
   </provides>
 </package>
 </subchannel></channel>

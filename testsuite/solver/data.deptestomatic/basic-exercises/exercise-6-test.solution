@@ -1,7 +1,7 @@
 >!> Installing CC from channel test
 >!> 1 problems found:
 >!> Problem:
->!> Cannot install AA because it is conflicting with A
+>!> Cannot install AA-1.0-1.noarch[test] because it is conflicting with A
 >!> A conflict over a == 2.3 (a != 2.0) requires the removal of to-be-installed AA-1.0-1.noarch[test]
 >!>    Solution:
 >!>       do not install AA

@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 <!--
-  install all selections expect
+  install all selections except
    - Mobile (multiple)
    - DVD-Asia
 -->
 <test>
-<setup>
+<setup arch="i686">
   <channel name="packages" file="sl10.1-beta3-packages.xml"/>
   <channel name="selections" file="sl10.1-beta3-selections.xml"/>
+  <locale name="de"/>
   <mediaid/>
 </setup>
 <trial>

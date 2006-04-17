@@ -311,6 +311,7 @@
     <dep kind='package' name='ziptool' />
     <dep kind='package' name='zisofs-tools' />
     <dep kind='package' name='zmd' />
+    <dep kind='package' name='libzypp-zmd-backend' />
     <dep kind='package' name='zsh' />
   </recommends>
 </selection>
@@ -510,6 +511,7 @@
     <dep kind='package' name='zip' />
     <dep kind='package' name='ziptool' />
     <dep kind='package' name='zmd' />
+    <dep kind='package' name='libzypp-zmd-backend' />
     <dep kind='package' name='zsh' />
   </recommends>
 </selection>
@@ -1792,7 +1794,6 @@
     <dep kind='package' name='xv' />
     <dep kind='package' name='xvkbd' />
     <dep kind='package' name='xzgv' />
-    <dep kind='package' name='y2pmsh' />
     <dep kind='package' name='ypbind' />
     <dep kind='package' name='yudit' />
     <dep kind='package' name='zoo' />
@@ -3451,7 +3452,6 @@
     <dep kind='package' name='yast2-nis-server' />
     <dep kind='package' name='yast2-ntp-client' />
     <dep kind='package' name='yast2-online-update' />
-    <dep kind='package' name='yast2-packagemanager' />
     <dep kind='package' name='yast2-packager' />
     <dep kind='package' name='yast2-pam' />
     <dep kind='package' name='yast2-perl-bindings' />
@@ -3487,7 +3487,7 @@
     <dep kind='package' name='zlib' />
     <dep kind='package' name='zlib-32bit' />
     <dep kind='package' name='zmd' />
-    <dep kind='package' name='zmd-librc-backend' />
+    <dep kind='package' name='libzypp-zmd-backend' />
   </recommends>
 </selection>
 <selection>
@@ -4581,7 +4581,6 @@
   <recommends>
     <dep kind='package' name='kernel-xen' />
     <dep kind='package' name='kernel-xen-nongpl' />
-    <dep kind='package' name='uml-utilities' />
     <dep kind='package' name='xen' />
     <dep kind='package' name='xen-doc-html' />
     <dep kind='package' name='xen-doc-pdf' />

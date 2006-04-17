@@ -32,7 +32,7 @@
           <description>Initial release to Red Carpet</description>
         </update>
      </history>
-<requires><dep name="gnome-libs-devel"/><dep name="control-center" op="=" version="1.5.12"/></requires><provides><dep name="control-center-devel" op="=" epoch="1" version="1.5.12" release="ximian.2"/></provides>   </package>
+<requires><dep name="gnome-libs-devel"/><dep name="control-center" op="=" epoch="1" version="1.5.12"/></requires><provides><dep name="control-center-devel" op="=" epoch="1" version="1.5.12" release="ximian.2"/></provides>   </package>
     <package>
       <name>control-center-plus</name>
       <summary>The GNOME Control Center - extra configuration applets</summary>

@@ -3,7 +3,7 @@
   novell-groupwise-gwclient has some prereqs
 -->
 <test>
-<setup>
+<setup arch="x86_64">
   <channel name="test" file="preview4-x86_64-packages.xml.gz"/>
 </setup>
 <trial>

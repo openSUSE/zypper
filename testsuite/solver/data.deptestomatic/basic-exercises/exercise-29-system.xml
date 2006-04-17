@@ -34393,7 +34393,7 @@ center, you'll want to install this package.</description>
       </history>
       <requires>
         <dep name="gnome-libs-devel"/>
-        <dep name="control-center" op="=" version="1.4.0.2"/>
+        <dep name="control-center" op="=" epoch="1" version="1.4.0.2"/>
       </requires>
       <provides>
         <dep name="control-center-devel" op="=" epoch="1" version="1.4.0.2" release="ximian.1"/>
