@@ -381,7 +381,7 @@ hint_match( const CapSet & cset, ResPool pool )
 		      resfilter::ByCapMatch( *cit ),
 		      functor::functorRef<bool,CapAndItem>(info) );
     }
-    MIL << "hint_match(" << info.match << ")" << endl;
+    if (info.match) MIL << "hint_match(" << info.match << ")" << endl;
     return info.match; // as bool !
 }
 
@@ -807,7 +807,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 
     else if (num_providers > 1) {
 
-	_DEBUG( "Branching: Found more than provider of " << _capability);
+	_DEBUG( "Branching: Found more than one provider of " << _capability);
 
 	QueueItemBranch_Ptr branch_item = new QueueItemBranch( pool() );
 
