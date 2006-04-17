@@ -1504,7 +1504,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    }
 
 	    if (name.empty()
-		|| kind_name.empty())
+		&& kind_name.empty())
 	    {
 		cerr << "transact need either 'name' or 'kind' parameter" << endl;
 		return;
@@ -1516,18 +1516,18 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    else {
 		PoolItem_Ref poolItem;
 
-		poolItem = get_poolItem (source_alias, name, kind_name);
+		poolItem = get_poolItem( source_alias, name, kind_name );
 
 		if (poolItem) {
 		    if (source_alias == "@system") {
 			RESULT << "Removing " << name << " from channel " << source_alias << endl;;
-			poolItem.status().setToBeUninstalled(ResStatus::USER);
+			poolItem.status().setToBeUninstalled( ResStatus::USER );
 		    }
 		    else {
 			RESULT << "Installing " << name << " from channel " << source_alias << endl;;
-			poolItem.status().setToBeInstalled(ResStatus::USER);
+			poolItem.status().setToBeInstalled( ResStatus::USER );
 		    }
-		    resolver->transactResObject ( poolItem, false);
+		    resolver->transactResObject( poolItem, false );
 		}
 		else {
 		    cerr << "Unknown item " << source_alias << "::" << name << endl;
