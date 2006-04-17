@@ -70,7 +70,7 @@ void assertSystemResObjectInPool()
     {
       // SystemResObject is missing in the pool ==> insert
       ResStore store;
-      store.insert( SystemResObject::instance() ); 
+      store.insert( SystemResObject::instance() );
       getZYpp()->addResolvables( store, true ); // true = is installed
     }
 
@@ -407,7 +407,7 @@ void
 Resolver::establishState( ResolverContext_Ptr context )
 {
     _DEBUG( "Resolver::establishState ()" );
-    typedef list<Resolvable::Kind> KindList; 
+    typedef list<Resolvable::Kind> KindList;
     static KindList ordered;
     if (ordered.empty()) {
 	ordered.push_back (ResTraits<zypp::Atom>::kind);
@@ -425,9 +425,9 @@ Resolver::establishState( ResolverContext_Ptr context )
 				    _ignoreObsoletes,
 				    _ignoreInstalledItem,
 				    _ignoreArchitectureItem);
-    context->setForceResolve (_forceResolve);
-    context->setUpgradeMode (_upgradeMode);        
-    
+    context->setForceResolve( _forceResolve );
+    context->setUpgradeMode( _upgradeMode );
+
     for (KindList::const_iterator iter = ordered.begin(); iter != ordered.end(); iter++) {
 	const Resolvable::Kind kind = *iter;
 
@@ -547,7 +547,7 @@ Resolver::freshenState( ResolverContext_Ptr context )
 				    _ignoreInstalledItem,
 				    _ignoreArchitectureItem );
     context->setForceResolve( _forceResolve );
-    context->setUpgradeMode( _upgradeMode );        
+    context->setUpgradeMode( _upgradeMode );
 
     FreshenState info;
 
@@ -611,7 +611,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     _deferred_queues.clear();
     _invalid_queues.clear();
     _valid_solution_count = 0;
-    _best_context = NULL;    
+    _best_context = NULL;
 
 #warning local items disabled
 #if 0
@@ -657,12 +657,12 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 				    _ignoreObsoletes,
 				    _ignoreInstalledItem,
 				    _ignoreArchitectureItem);
-    initial_queue->context()->setForceResolve (_forceResolve);
-    initial_queue->context()->setUpgradeMode (_upgradeMode);        
+    initial_queue->context()->setForceResolve( _forceResolve );
+    initial_queue->context()->setUpgradeMode( _upgradeMode );
 
     /* If this is a verify, we do a "soft resolution" */
 
-    initial_queue->context()->setVerifying (_verifying);
+    initial_queue->context()->setVerifying( _verifying );
 
     /* Add extra items. */
 
@@ -715,7 +715,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     }
 
     // Adding System resolvable
-    assertSystemResObjectInPool();    
+    assertSystemResObjectInPool();
 
     _DEBUG( "Initial Queue: [" << *initial_queue << "]" );
 
@@ -823,7 +823,7 @@ struct UndoTransact : public resfilter::PoolItemFilterFunctor
 
     bool operator()( PoolItem_Ref item )		// only transacts() items go here
     {
-	item.status().setTransact(false, ResStatus::SOLVER);// clear any solver/establish transactions
+	item.status().resetTransact( ResStatus::APPL_LOW );// clear any solver/establish transactions
 	return true;
     }
 };
@@ -837,9 +837,9 @@ Resolver::undo(void)
 		   functor::functorRef<bool,PoolItem>(info) );
     // These conflict should be ignored of the concering item
     _ignoreConflicts.clear();
-    // These requires should be ignored of the concering item    
+    // These requires should be ignored of the concering item
     _ignoreRequires.clear();
-    // These obsoletes should be ignored of the concering item    
+    // These obsoletes should be ignored of the concering item
     _ignoreObsoletes.clear();
     // Ignore architecture of the item
     _ignoreArchitecture.clear();
@@ -847,8 +847,8 @@ Resolver::undo(void)
     _ignoreInstalledItem.clear();
     // Ignore the architecture of the item
     _ignoreArchitectureItem.clear();
-    
-    
+
+
     return;
 }
 
@@ -867,15 +867,15 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
     {
 	ResStatus status = item.status();
 	_XDEBUG( "CollectTransact(" << item << ")" );
-	bool by_solver = status.isBySolver();
+	bool by_solver = (status.isBySolver() || status.isByApplLow());
 
 	if (by_solver) {
-	    item.status().setTransact(false, ResStatus::SOLVER);// clear any solver/establish transactions
+	    item.status().resetTransact( ResStatus::APPL_LOW );// clear any solver/establish transactions
 	    return true;				// back out here, dont re-queue former solver result
 	}
 
 	if (status.isToBeInstalled()) {
-	    resolver.addPoolItemToInstall(item);	// -> install! 
+	    resolver.addPoolItemToInstall(item);	// -> install!
 	}
 	if (status.isToBeUninstalled()) {
 	    resolver.addPoolItemToRemove(item);		// -> remove !
@@ -884,7 +884,7 @@ struct CollectTransact : public resfilter::PoolItemFilterFunctor
 	    PoolItem_Ref reinstall = Helper::findReinstallItem (resolver.pool(), item);
 	    if (reinstall) {
 		MIL << "Reinstall " << reinstall << " for incomplete " << item << endl;
-		resolver.addPoolItemToInstall(reinstall);	// -> install! 
+		resolver.addPoolItemToInstall(reinstall);	// -> install!
 	    }
 	    else {
 		WAR << "Can't find " << item << " for re-installation" << endl;
@@ -935,12 +935,12 @@ show_pool( ResPool pool )
 bool
 Resolver::resolvePool ()
 {
-    
+
     CollectTransact info (*this);
-    
+
     // cleanup before next run
     reset();
-    
+
 #if 1
 
     MIL << "Resolver::resolvePool()" << endl;
@@ -978,7 +978,7 @@ transactItems( PoolItem_Ref installed, PoolItem_Ref uninstalled, bool install, b
 	    if (uninstalled
 		&& !uninstalled.status().isLocked())
 	    {
-		if (soft) 
+		if (soft)
 		    uninstalled.status().setSoftTransact( install, ResStatus::APPL_LOW );
 		else
 		    uninstalled.status().setTransact( install, ResStatus::APPL_LOW );
@@ -986,7 +986,7 @@ transactItems( PoolItem_Ref installed, PoolItem_Ref uninstalled, bool install, b
 	    if (installed
 		&& !installed.status().isLocked())
 	    {
-		if (soft) 
+		if (soft)
 		    installed.status().setSoftTransact( false, ResStatus::APPL_LOW );
 		else
 		    installed.status().setTransact( false, ResStatus::APPL_LOW );
@@ -996,7 +996,7 @@ transactItems( PoolItem_Ref installed, PoolItem_Ref uninstalled, bool install, b
 	    if (uninstalled
 		&& !uninstalled.status().isLocked())
 	    {
-		if (soft) 
+		if (soft)
 		    uninstalled.status().setSoftTransact( false, ResStatus::APPL_LOW );
 		else
 		    uninstalled.status().setTransact( false, ResStatus::APPL_LOW );
@@ -1004,11 +1004,11 @@ transactItems( PoolItem_Ref installed, PoolItem_Ref uninstalled, bool install, b
 	    if (installed
 		&& !installed.status().isLocked())
 	    {
-		if (soft) 
+		if (soft)
 		    installed.status().setSoftTransact( true, ResStatus::APPL_LOW );
 		else
 		    installed.status().setTransact( true, ResStatus::APPL_LOW );
-	    }	    
+	    }
 	}
 	if (!uninstalled
 	    && !installed)
@@ -1019,8 +1019,54 @@ transactItems( PoolItem_Ref installed, PoolItem_Ref uninstalled, bool install, b
 }
 
 
+// find best available providers for name
+
+typedef struct { PoolItem_Ref installed; PoolItem_Ref uninstalled; } IandU;
+typedef map<string, IandU> IandUMap;
+
+struct FindIandU
+{
+    IandUMap iandu;		// install, and best uninstalled
+
+    FindIandU ()
+    { }
+
+    bool operator()( const CapAndItem & cai )
+    {
+	PoolItem item( cai.item );
+	if ( item.status().staysInstalled() ) {
+	    iandu[item->name()].installed = item;
+	}
+	else if ( item.status().staysUninstalled() ) {			// only look at uninstalled
+	    IandUMap::iterator it = iandu.find( item->name() );
+
+	    if (it != iandu.end()
+		&& it->second.uninstalled)
+	    {								// uninstalled with same name found
+		int cmp = it->second.uninstalled->arch().compare( item->arch() );
+		if (cmp < 0) {						// new item has better arch
+		    it->second.uninstalled = item;
+		}
+		else if (cmp == 0) {					// new item has equal arch
+		    if (it->second.uninstalled->edition().compare( item->edition() ) < 0) {
+			it->second.uninstalled = item;			// new item has better edition
+		    }
+		}
+	    }
+	    else {
+		iandu[item->name()].uninstalled = item;
+	    }
+	}
+	return true;
+    }
+};
+
+
 //
-// transact list of capabilities, return false if one couldn't be matched
+// transact list of capabilities (requires or recommends)
+//  return false if one couldn't be matched
+//
+// see Resolver::transactResObject
 //
 
 static bool
@@ -1028,13 +1074,23 @@ transactCaps( const ResPool & pool, const CapSet & caps, bool install, bool soft
 {
     bool result = true;
 
-    for (CapSet::const_iterator it = caps.begin(); it != caps.end(); ++it) {
+    // loop over capabilities and find (best) matching provider
 
-	PoolItem_Ref installed = Helper::findInstalledByNameAndKind( pool, it->index(), it->refers() );
-	PoolItem_Ref uninstalled = Helper::findUninstalledByNameAndKind( pool, it->index(), it->refers() );
+    for (CapSet::const_iterator cit = caps.begin(); cit != caps.end(); ++cit) {
+
+	FindIandU callback;
+	Dep dep( Dep::PROVIDES );
+	invokeOnEach( pool.byCapabilityIndexBegin( cit->index(), dep ),
+		      pool.byCapabilityIndexEnd( cit->index(), dep ),
+		      resfilter::ByCapMatch( *cit ) ,
+		      functor::functorRef<bool,CapAndItem>(callback) );
+
+	for (IandUMap::const_iterator it = callback.iandu.begin(); it !=  callback.iandu.end(); ++it) {
+	    if (!transactItems( it->second.installed, it->second.uninstalled, install, soft )) {
+		result = false;
+	    }
+	}
 	
-	if (!transactItems( installed, uninstalled, install, soft ))
-	    result = false;
     }
     return result;
 }
@@ -1152,25 +1208,25 @@ Resolver::transactResObject( ResObject::constPtr robj, bool install)
 }
 
 //
-// transact all objects of a specific kind
-// -> look through the pool and run transactResObject() accordingly
+// helper to transact all objects of a specific kind
+//  see Resolver::transactResKind
+// item is to-be-installed (install == true) or to-be-uninstalled
+// -> run transactResObject() accordingly
 
 struct TransactKind : public resfilter::PoolItemFilterFunctor
 {
-    Resolver & resolver;
+    Resolver & _resolver;
+    bool install;		// true if to-be-installed, else to-be-uninstalled
     bool result;
 
     TransactKind( Resolver & r )
-	: resolver( r )
+	: _resolver( r )
 	, result( true )
     { }
 
     bool operator()( PoolItem_Ref item )
     {
-	if (item.status().isToBeInstalled())
-	    result = resolver.transactResObject( item.resolvable(), true );
-	else if (item.status().isToBeUninstalled())
-	    result = resolver.transactResObject( item.resolvable(), false );
+	result = _resolver.transactResObject( item.resolvable(), install );
 	return true;
     }
 };
@@ -1183,23 +1239,27 @@ Resolver::transactResKind( Resolvable::Kind kind )
 
     DBG << "transactResKind(" << kind << ")" << endl;
 
+    // check all uninstalls
+    callback.install = false;
     invokeOnEach( pool().byKindBegin( kind ),
 		  pool().byKindEnd( kind ),
 		  functor::chain( resfilter::ByTransact(), resfilter::ByInstalled ()),
 		  functor::functorRef<bool,PoolItem>( callback ) );
 
+    // check all installs
+    callback.install = true;
     invokeOnEach( pool().byKindBegin( kind ),
 		  pool().byKindEnd( kind ),
 		  functor::chain( resfilter::ByTransact(), resfilter::ByUninstalled ()),
 		  functor::functorRef<bool,PoolItem>( callback ) );
-    
+
     return callback.result;
 }
 
 
 struct TransactReset : public resfilter::PoolItemFilterFunctor
 {
-    ResStatus::TransactByValue _causer; 
+    ResStatus::TransactByValue _causer;
     TransactReset( ResStatus::TransactByValue causer )
 	: _causer( causer )
     { }
