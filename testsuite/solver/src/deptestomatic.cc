@@ -111,8 +111,8 @@ typedef set<PoolItem_Ref> PoolItemSet;
 class compare_problems {
 public:
     int operator() (const boost::intrusive_ptr<zypp::ResolverProblem> & p1,
-                    const boost::intrusive_ptr<zypp::ResolverProblem> & p2) const
-        { return p1->description() < p2->description(); }
+		    const boost::intrusive_ptr<zypp::ResolverProblem> & p2) const
+	{ return p1->description() < p2->description(); }
 };
 
 //-----------------------------------------------------------------------------
@@ -291,6 +291,47 @@ print_important (const string & str)
 }
 
 
+/** Order on PoolItem_Ref.
+ * \li kind
+ * \li name
+ * \li edition
+ * \li arch
+ * \li source::alias
+ * \li ResObject::constPtr as fallback.
+*/
+struct KNEAOrder : public std::binary_function<PoolItem_Ref,PoolItem_Ref,bool>
+{
+    // NOTE: operator() provides LESS semantics to order the set.
+    // So LESS means 'prior in set'. We want 'better' archs and
+    // 'better' editions at the beginning of the set. So we return
+    // TRUE if (lhs > rhs)!
+    //
+    bool operator()( const PoolItem_Ref lhs, const PoolItem_Ref rhs ) const
+	{
+	    int res = lhs->kind().compare( rhs->kind() );
+	    if ( res )
+		return res < 0;
+	    res = lhs->name().compare( rhs->name() );
+	    if ( res )
+		return res < 0;
+	    res = lhs->edition().compare( rhs->edition() );
+	    if ( res )
+		return res < 0;
+	    res = lhs->arch().compare( rhs->arch() );
+	    if ( res )
+		return res < 0;
+	    res = lhs->source().alias().compare( rhs->source().alias() );
+	    if ( res )
+		return res < 0;
+	    // no more criteria, still equal:
+	    // use the ResObject::constPtr (the poiner value)
+	    // (here it's arbitrary whether < or > )
+	    return lhs.resolvable() < rhs.resolvable();
+	}
+};
+	
+typedef std::set<PoolItem_Ref, KNEAOrder> PoolItemOrderSet;
+
 static void
 print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum_list, bool instorder, bool mediaorder)
 {
@@ -366,38 +407,34 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 
 	solver::detail::PoolItemSet insset( inslist.begin(), inslist.end() );
 #if 0
-	InstallOrder order( context->pool(), insset, dummy );		 // sort according top prereq
+	InstallOrder order( context->pool(), insset, dummy );		 // sort according to prereq
 	order.init();
 	const solver::detail::PoolItemList & installorder ( order.getTopSorted() );
 	for (solver::detail::PoolItemList::const_iterator iter = installorder.begin(); iter != installorder.end(); iter++) {
 		RESULT; printRes (cout, (*iter)); cout << endl;
 	}
 #else
-        int counter = 1;
-        InstallOrder order( context->pool(), insset, dummy );		 // sort according top prereq
+	int counter = 1;
+	InstallOrder order( context->pool(), insset, dummy );		 // sort according to prereq
 	order.init();
-        for ( solver::detail::PoolItemList items = order.computeNextSet(); ! items.empty(); items = order.computeNextSet() )
-        {
-            RESULT << endl;
-            RESULT << counter << ". set with " << items.size() << " resolvables" << endl;
-            StringList itemList;
-            itemList.clear();
-            
-            for ( solver::detail::PoolItemList::iterator iter = items.begin(); iter != items.end(); ++iter )
-            {
-                ostringstream s;
-                printRes (s, iter->resolvable());
-                itemList.push_back (s.str());
-            }
-            itemList.sort();
-            for (StringList::const_iterator iter = itemList.begin(); iter != itemList.end(); iter++) {
-		print_important (*iter);
+	for ( solver::detail::PoolItemList items = order.computeNextSet(); ! items.empty(); items = order.computeNextSet() )
+	{
+	    RESULT << endl;
+	    RESULT << counter << ". set with " << items.size() << " resolvables" << endl;
+	    PoolItemOrderSet orderedset;
+	    
+	    for ( solver::detail::PoolItemList::iterator iter = items.begin(); iter != items.end(); ++iter )
+	    {
+		orderedset.insert( *iter );
 	    }
-            counter++;
-            order.setInstalled (items);
-        }
+	    for (PoolItemOrderSet::const_iterator iter = orderedset.begin(); iter != orderedset.end(); iter++) {
+		RESULT; printRes( cout,  *iter); cout << endl;
+	    }
+	    counter++;
+	    order.setInstalled( items );
+	}
 #endif
-        
+	
 	cout << "- - - - - - - - - -" << endl;
     }
 
@@ -411,11 +448,11 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 	God->target()->getResolvablesToInsDel( context->pool(), dellist, inslist, srclist );
 	int count = 0;
 	for (Target::PoolItemList::const_iterator iter = dellist.begin(); iter != dellist.end(); iter++) {
-		RESULT << "DEL " << ++count << ".: "; printRes (cout, (*iter)); cout << endl;
+	    cout << "DEL " << ++count << ".: "; printRes (cout, (*iter)); cout << endl;
 	}
 	count = 0;
 	for (Target::PoolItemList::const_iterator iter = inslist.begin(); iter != inslist.end(); iter++) {
-		RESULT << "INS " << ++count << ".:"; printRes (cout, (*iter)); cout << endl;
+	    cout << "INS " << ++count << ".:"; printRes (cout, (*iter)); cout << endl;
 	}
 	cout << "- - - - - - - - - -" << endl;
     }
@@ -665,21 +702,21 @@ load_source (const string & alias, const string & filename, const string & type,
 	    pathname = "";
 	    Pathname cache_dir( "" );
 	    src = Source_Ref( SourceFactory().createFrom( url, pathname, alias, cache_dir ) );
-        }
-        else {
-           Url url("file:/");
+	}
+	else {
+	   Url url("file:/");
 
-           media::MediaManager mmgr;
-           media::MediaId mediaid = mmgr.open( url );
-           HelixSourceImpl *impl = new HelixSourceImpl ();
+	   media::MediaManager mmgr;
+	   media::MediaId mediaid = mmgr.open( url );
+	   HelixSourceImpl *impl = new HelixSourceImpl ();
 	   cout << "Load from File '" << pathname << "'" << endl;
-           impl->factoryCtor (mediaid, pathname, alias);
-           src = Source_Ref( SourceFactory().createFrom( impl ) );
-           manager->addSource (src);
-        }
-        count = src.resolvables().size();
-        cout << "Added source '" << alias << "' with " << count << " resolvables" << endl;
-        God->addResolvables( src.resolvables(), (alias == "@system") );
+	   impl->factoryCtor (mediaid, pathname, alias);
+	   src = Source_Ref( SourceFactory().createFrom( impl ) );
+	   manager->addSource (src);
+	}
+	count = src.resolvables().size();
+	cout << "Added source '" << alias << "' with " << count << " resolvables" << endl;
+	God->addResolvables( src.resolvables(), (alias == "@system") );
 //	print_pool ();
 
 	cout << "Loaded " << count << " resolvables from " << (filename.empty()?pathname.asString():filename) << "." << endl;
@@ -687,6 +724,7 @@ load_source (const string & alias, const string & filename, const string & type,
     catch ( Exception & excpt_r ) {
 	ZYPP_CAUGHT (excpt_r);
 	cout << "Loaded NO package(s) from " << (pathname.empty() ? filename : pathname) << endl;
+	count = -1;
     }
 
     return count;
@@ -717,6 +755,20 @@ parse_xml_setup (XmlNode_Ptr node)
     }
     done_setup = true;
 
+    string architecture = node->getProp( "arch" );				// allow <setup arch="...">
+    if (!architecture.empty()) {
+	MIL << "Setting architecture to '" << architecture << "'" << endl;
+	try {
+	    God->setArchitecture( Arch( architecture ) );
+	}
+	catch( const Exception & excpt_r ) {
+	    ZYPP_CAUGHT( excpt_r );
+	    cerr << "Bad architecture '" << architecture << "' in <setup...>" << endl;
+	    return;
+	}
+    }
+
+
     node = node->children();
     while (node != NULL) {
 	if (!node->isElement()) {
@@ -724,21 +776,21 @@ parse_xml_setup (XmlNode_Ptr node)
 	    continue;
 	}
 	if (node->equals ("forceResolve")) {
-            
-            forceResolve = true;
-        } else if (node->equals ("system")) {
+	    
+	    forceResolve = true;
+	} else if (node->equals ("system")) {
 
 	    string file = node->getProp ("file");
-	    if (load_source ("@system", file, "helix", true) <= 0) {
+	    if (load_source ("@system", file, "helix", true) < 0) {
 		cerr << "Can't setup 'system'" << endl;
 		exit( 1 );
 	    }
-            
-        } else if (node->equals ("hardwareInfo")) {
+	    
+	} else if (node->equals ("hardwareInfo")) {
 
-            Pathname pathname = globalPath + node->getProp ("path");
-            setenv ("ZYPP_MODALIAS_SYSFS", pathname.asString().c_str(), 1);
-            RESULT << "setting HardwareInfo to: " << pathname.asString() << endl;            
+	    Pathname pathname = globalPath + node->getProp ("path");
+	    setenv ("ZYPP_MODALIAS_SYSFS", pathname.asString().c_str(), 1);
+	    RESULT << "setting HardwareInfo to: " << pathname.asString() << endl;            
 	} else if (node->equals ("channel")) {
 
 	    string name = node->getProp ("name");
@@ -827,7 +879,8 @@ parse_xml_setup (XmlNode_Ptr node)
 	} else if (node->equals ("mediaid")) {
 	    show_mediaid = true;
 	} else if (node->equals ("arch")) {
-	    string architecture = node->getProp ("name");
+	    cerr << "<arch...> deprecated, use <setup arch=\"...\"> instead" << endl;
+	    architecture = node->getProp ("name");
 	    if (architecture.empty()) {
 		cerr << "Property 'name=' in <arch.../> missing or empty" << endl;
 	    }
@@ -1040,7 +1093,7 @@ freshen_marked_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
     solver::detail::Resolver_Ptr resolver = *((solver::detail::Resolver_Ptr *)data);
     if (status.isNeeded()) {
-        poolItem.status().setToBeInstalled(ResStatus::USER);        
+	poolItem.status().setToBeInstalled(ResStatus::USER);        
 //	resolver->addPoolItemToInstall (poolItem);
     }
 
@@ -1051,6 +1104,8 @@ freshen_marked_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 static void
 parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 {
+    static bool first_trial = true;
+
     bool verify = false;
     bool instorder = false;
     bool mediaorder = false;
@@ -1062,6 +1117,17 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 
     DBG << "parse_xml_trial()" << endl;
 
+    // reset pool on subsequent trials.
+
+    if (first_trial) {
+	first_trial = false;
+    }
+    else {
+	for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it) {
+	    if (it->status().transacts()) it->status().setTransact( false, ResStatus::USER );
+	}
+    }
+
     if (! done_setup) {
 	cerr << "Any trials must be preceeded by the setup!" << endl;
 	exit (0);
@@ -1069,10 +1135,10 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 
     print_sep ();
 
-    solver::detail::Resolver_Ptr resolver = new solver::detail::Resolver (pool);
+    solver::detail::Resolver_Ptr resolver = new solver::detail::Resolver( pool );
     resolver->setArchitecture( God->architecture() );
     resolver->setTesting ( true );			// continue despite missing target
-    resolver->setForceResolve (forceResolve);
+    resolver->setForceResolve( forceResolve );
 
     if (!locales.empty()) {
 	God->setRequestedLocales( locales );
@@ -1155,12 +1221,12 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		if (!soft.empty())
 		    poolItem.status().setSoftUninstall(true);
 #if 0 // replaced by 'transact'
-                if ( kind_name== "selection"
-                     || kind_name == "pattern" ) {
-                       // -> do a 'single step' resolving either installing or removing
-                       //    required and recommended PoolItems; this will be used by the YaST UI
-                    resolver->transactResObject ( poolItem, false);
-                }
+		if ( kind_name== "selection"
+		     || kind_name == "pattern" ) {
+		       // -> do a 'single step' resolving either installing or removing
+		       //    required and recommended PoolItems; this will be used by the YaST UI
+		    resolver->transactResObject ( poolItem, false);
+		}
 #endif
 //		resolver->addPoolItemToRemove (poolItem);
 	    } else {
@@ -1319,22 +1385,22 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    }
 	    else {
 		ResolverProblemList problems = resolver->problems ();
-                problems.sort(compare_problems());
+		problems.sort(compare_problems());
 		RESULT << problems.size() << " problems found:" << endl;
 		for (ResolverProblemList::iterator iter = problems.begin(); iter != problems.end(); ++iter) {
-                    ResolverProblem problem = **iter;
-                    RESULT << "Problem:" << endl;
-                    RESULT << problem.description() << endl;
-                    RESULT << problem.details() << endl;
-                    
-                    ProblemSolutionList solutions = problem.solutions();
-                    for (ProblemSolutionList::const_iterator iter = solutions.begin();
-                         iter != solutions.end(); ++iter) {
-                        ProblemSolution solution = **iter;
-                        RESULT << "   Solution:" << endl;
-                        RESULT << "      " << solution.description() << endl;
-                        RESULT << "      " << solution.details() << endl;
-                    }
+		    ResolverProblem problem = **iter;
+		    RESULT << "Problem:" << endl;
+		    RESULT << problem.description() << endl;
+		    RESULT << problem.details() << endl;
+		    
+		    ProblemSolutionList solutions = problem.solutions();
+		    for (ProblemSolutionList::const_iterator iter = solutions.begin();
+			 iter != solutions.end(); ++iter) {
+			ProblemSolution solution = **iter;
+			RESULT << "   Solution:" << endl;
+			RESULT << "      " << solution.description() << endl;
+			RESULT << "      " << solution.details() << endl;
+		    }
 		}
 	    }
 	} else if (node->equals ("takesolution")) {
@@ -1342,61 +1408,61 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    string solutionNrStr = node->getProp ("solution");
 	    assert (!problemNrStr.empty());
 	    assert (!solutionNrStr.empty());
-            int problemNr = atoi (problemNrStr.c_str());
-            int solutionNr = atoi (solutionNrStr.c_str());
-            RESULT << "Taking solution: " << solutionNr << endl;
-            RESULT << "For problem:     " << problemNr << endl;
-            ResolverProblemList problems = resolver->problems ();
-            
-            int problemCounter = -1;
-            int solutionCounter = -1;
-            // find problem
-            for (ResolverProblemList::iterator probIter = problems.begin();
-                 probIter != problems.end(); ++probIter) {
-                problemCounter++;
-                if (problemCounter == problemNr) {
-                    ResolverProblem problem = **probIter;
-                    ProblemSolutionList solutionList = problem.solutions();
-                    //find solution
-                    for (ProblemSolutionList::iterator solIter = solutionList.begin();
-                         solIter != solutionList.end(); ++solIter) {
-                        solutionCounter++;
-                        if (solutionCounter == solutionNr) {
-                            ProblemSolution_Ptr solution = *solIter;
-                            cout << "Taking solution: " << endl << *solution << endl;
-                            cout << "For problem: " << endl << problem << endl;
-                            ProblemSolutionList doList;
-                            doList.push_back (solution);
-                            resolver->applySolutions (doList);
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
+	    int problemNr = atoi (problemNrStr.c_str());
+	    int solutionNr = atoi (solutionNrStr.c_str());
+	    RESULT << "Taking solution: " << solutionNr << endl;
+	    RESULT << "For problem:     " << problemNr << endl;
+	    ResolverProblemList problems = resolver->problems ();
+	    
+	    int problemCounter = -1;
+	    int solutionCounter = -1;
+	    // find problem
+	    for (ResolverProblemList::iterator probIter = problems.begin();
+		 probIter != problems.end(); ++probIter) {
+		problemCounter++;
+		if (problemCounter == problemNr) {
+		    ResolverProblem problem = **probIter;
+		    ProblemSolutionList solutionList = problem.solutions();
+		    //find solution
+		    for (ProblemSolutionList::iterator solIter = solutionList.begin();
+			 solIter != solutionList.end(); ++solIter) {
+			solutionCounter++;
+			if (solutionCounter == solutionNr) {
+			    ProblemSolution_Ptr solution = *solIter;
+			    cout << "Taking solution: " << endl << *solution << endl;
+			    cout << "For problem: " << endl << problem << endl;
+			    ProblemSolutionList doList;
+			    doList.push_back (solution);
+			    resolver->applySolutions (doList);
+			    break;
+			}
+		    }
+		    break;
+		}
+	    }
 
-            if (problemCounter != problemNr) {
-                RESULT << "Wrong problem number (0-" << problemCounter << ")" << endl;
-            } else if (solutionCounter != solutionNr) {
-                RESULT << "Wrong solution number (0-" << solutionCounter << ")" <<endl;
-            } else {
-                // resolve and check it again
-                if (resolver->resolvePool() == true) {
-                    RESULT << "No problems so far" << endl;
-                }
-                else {
-                    ResolverProblemList problems = resolver->problems ();
-                    RESULT << problems.size() << " problems found:" << endl;
-                    for (ResolverProblemList::iterator iter = problems.begin(); iter != problems.end(); ++iter) {
-                        cout << **iter << endl;
-                    }
-                }
-            }
+	    if (problemCounter != problemNr) {
+		RESULT << "Wrong problem number (0-" << problemCounter << ")" << endl;
+	    } else if (solutionCounter != solutionNr) {
+		RESULT << "Wrong solution number (0-" << solutionCounter << ")" <<endl;
+	    } else {
+		// resolve and check it again
+		if (resolver->resolvePool() == true) {
+		    RESULT << "No problems so far" << endl;
+		}
+		else {
+		    ResolverProblemList problems = resolver->problems ();
+		    RESULT << problems.size() << " problems found:" << endl;
+		    for (ResolverProblemList::iterator iter = problems.begin(); iter != problems.end(); ++iter) {
+			cout << **iter << endl;
+		    }
+		}
+	    }
 	} else if (node->equals ("showpool")) {
 	    string prefix = node->getProp ("prefix");
 	    string all = node->getProp ("all");
 	    print_pool( prefix, !all.empty() );
-        } else if (node->equals ("lock")) {
+	} else if (node->equals ("lock")) {
 	    string source_alias = node->getProp ("channel");
 	    string package_name = node->getProp ("package");
 	    string kind_name = node->getProp ("kind");
@@ -1410,7 +1476,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    } else {
 		cerr << "Unknown package " << source_alias << "::" << package_name << endl;
 	    }
-        } else if (node->equals ("availablelocales")) {
+	} else if (node->equals ("availablelocales")) {
 	    RESULT << "Available locales: ";
 	    ZYpp::LocaleSet locales = God->getAvailableLocales();
 	    for (ZYpp::LocaleSet::const_iterator it = locales.begin(); it != locales.end(); ++it) {
@@ -1511,10 +1577,10 @@ parse_xml_test (XmlNode_Ptr node, const ResPool & pool)
 
     while (node) {
 	if (node->type() == XML_ELEMENT_NODE) {
-	    if (node->equals("setup")) {
-		parse_xml_setup (node);
-	    } else if (node->equals ("trial")) {
-		parse_xml_trial (node, pool);
+	    if (node->equals( "setup" )) {
+		parse_xml_setup( node );
+	    } else if (node->equals( "trial" )) {
+		parse_xml_trial( node, pool );
 	    } else {
 		cerr << "Unknown tag '" << node->name() << "' in test" << endl;
 	    }
@@ -1562,7 +1628,15 @@ main (int argc, char *argv[])
 
     forceResolve = false;
     manager = SourceManager::sourceManager();
-    God = zypp::getZYpp();
+
+    try {
+	God = zypp::getZYpp();
+    }
+    catch (const Exception & excpt_r ) {
+	ZYPP_CAUGHT( excpt_r );
+	cerr << "Can't aquire ZYpp lock" << endl;
+	return 1;
+    }
 
     globalPath = argv[1];
     globalPath = globalPath.substr (0, globalPath.find_last_of ("/") +1);
