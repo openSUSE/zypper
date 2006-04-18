@@ -305,14 +305,22 @@ MIL << "target at " << target << endl;
       ++opt_stats_r.pre_todel;
       continue;
     }
+    if ( item.status().isLocked() ) {
+      MIL << "doUpgrade available: SKIP locked " << item << endl;
+      if ( item.status().staysInstalled() ) {
+	++opt_stats_r.pre_nocand;
+      }
+      continue;
+    }
+
     if ( item.status().staysInstalled() ) {	// installed item
       installed = item;
-      CandidateMap::const_iterator cand_it = candidatemap.find(installed);
+      CandidateMap::const_iterator cand_it = candidatemap.find( installed );
       if (cand_it != candidatemap.end()) {
 	candidate = cand_it->second;				// found candidate already
       }
       else {
-	candidate = Helper::findUpdateItem( _pool, installed);	// find 'best' upgrade candidate
+	candidate = Helper::findUpdateItem( _pool, installed );	// find 'best' upgrade candidate
       }
       if (!candidate) {
 	MIL << "doUpgrade available: SKIP no candidate for " << installed << endl;
@@ -334,28 +342,26 @@ MIL << "item " << item << " is installed, candidate is " << candidate << endl;
       }
       candidate = item;
       candidate.status().setSeen(true);				// mark as seen
-      installed = Helper::findInstalledItem (_pool, candidate);
+      installed = Helper::findInstalledItem( _pool, candidate );
       if (installed) {						// check if we already have an installed
+	if ( installed.status().isLocked() ) {
+	  MIL << "doUpgrade available: SKIP candidate " << candidate << ", locked " << installed << endl;
+	  continue;
+	}
+
 MIL << "found installed " << installed << " for item " << candidate << endl;
-	CandidateMap::const_iterator cand_it = candidatemap.find(installed);
+	CandidateMap::const_iterator cand_it = candidatemap.find( installed );
 	if (cand_it == candidatemap.end()						// not in map yet
-	    || (cand_it->second->arch().compare (candidate->arch()) < 0)		// or the new has better architecture
-	    || ((cand_it->second->arch().compare (candidate->arch()) == 0)		// or the new has the same architecture
-		&& (cand_it->second->edition().compare (candidate->edition()) < 0) ) )	//   and a better edition (-> 157501)
+	    || (cand_it->second->arch().compare( candidate->arch() ) < 0)		// or the new has better architecture
+	    || ((cand_it->second->arch().compare( candidate->arch() ) == 0)		// or the new has the same architecture
+		&& (cand_it->second->edition().compare( candidate->edition() ) < 0) ) )	//   and a better edition (-> 157501)
 	{
 	    candidatemap[installed] = candidate;				// put it in !
 	}
       }
     }
 
-    if ( item.status().isLocked() ) {
-      MIL << "doUpgrade available: SKIP taboo candidate " << item << endl;
-      ++opt_stats_r.pre_nocand;
-      continue;
-    }
-
     ++opt_stats_r.pre_avcand;
-#warning this should add the best candidate
     available.insert( candidate );
 
 MIL << "installed " << installed << ", candidate " << candidate << endl;
@@ -386,9 +392,9 @@ MIL << "split matched !" << endl;
 
   } // iterate over the complete pool
 
-  // reset all seen
-  for (PoolItemOrderSet::const_iterator it = available.begin(); it != available.end(); ++it) {
-	it->status().setSeen(false);
+  // reset all seen (for next run)
+  for ( ResPool::const_iterator it = _pool.begin(); it != _pool.end(); ++it ) {
+	it->status().setSeen( false );
   }
 
 #warning Cant update from broken install medium like STABLE
@@ -459,20 +465,20 @@ MIL << "split matched !" << endl;
     }
     ++opt_stats_r.chk_installed_total;
 
-    if ( status.transacts() ) {						// we know its installed, if it transacts also
-      MIL << "SKIP to delete: " << it->resolvable() << endl;	// it'll be deleted
+    if ( status.transacts() ) {					// we know its installed, if it transacts also
+      MIL << "SKIP to delete: " << installed.resolvable() << endl;	// it'll be deleted
       ++opt_stats_r.chk_already_todel;
       continue;
     }
 
-    if ( (*it).status().isLocked() ) {
-      MIL << "SKIP taboo: " << (*it) << endl;
+    if ( installed.status().isLocked() ) {			// skip locked
+      MIL << "SKIP taboo: " << installed << endl;
       ++opt_stats_r.chk_is_taboo;
-      _update_items.push_back ( *it ); // remember in problem list ?
+      _update_items.push_back( installed );			// remember in problem list
       continue;
     }
 
-    CandidateMap::iterator cand_it = candidatemap.find(installed);
+    CandidateMap::iterator cand_it = candidatemap.find( installed );
 
     bool probably_dropped = false;
 
@@ -518,7 +524,7 @@ MIL << "split matched !" << endl;
 
       Dep dep (Dep::PROVIDES);
       CapFactory factory;
-      Capability installedCap =  factory.parse ( installed->kind(), installed->name(), Rel::EQ, installed->edition());
+      Capability installedCap = factory.parse( installed->kind(), installed->name(), Rel::EQ, installed->edition() );
 
       FindProviders info;
 
@@ -596,7 +602,7 @@ MIL << "split matched !" << endl;
 	installed.status().setToBeUninstalled( ResStatus::APPL_HIGH );
       }
       ++opt_stats_r.chk_dropped;
-      _update_items.push_back ( installed );
+      _update_items.push_back( installed );
     }
 
   } // pass 1 end
