@@ -698,7 +698,6 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     if ( ret != 0 ) {
       ::fclose( file );
       filesystem::unlink( destNew );
-      ERR << &_curlError << endl;
       ERR << "curl error: " << ret << ": " << _curlError << endl;
       std::string err;
       try {
