@@ -26,7 +26,7 @@ namespace zypp
   /** Print range defined by iterators.
    * \code
    * intro [ pfx ITEM [ { sep ITEM }+ ] sfx ] extro
-   * \encode
+   * \endcode
    * The defaults print the range enclosed in \c {}, one item per
    * line indented by 2 spaces.
    * \code
@@ -35,11 +35,11 @@ namespace zypp
    *   item2
    * }
    * {} // on empty rande
-   * \encode
+   * \endcode
    * A comma separated list enclosed in \c () would be
    * \code
    * dumpRange( stream, begin, end, "(", "", ", ", "", ")" );
-   * \encode
+   * \endcode
   */
   template<class _Iterator>
     std::ostream & dumpRange( std::ostream & str,
