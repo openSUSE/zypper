@@ -37,9 +37,22 @@ namespace zypp
 
     typedef std::list<PoolItem_Ref> PoolItemList;
 
+    /**
+     * number of committed resolvables
+     **/
     int          _result;
+
+    /**
+     * list of resolvables with error
+     **/
     PoolItemList _errors;
+    /**
+     * list of resolvables remaining (due to wrong media)
+     **/
     PoolItemList _remaining;
+    /**
+     * list of kind:source resolvables remaining (due to wrong media)
+     **/
     PoolItemList _srcremaining;
   };
   ///////////////////////////////////////////////////////////////////
