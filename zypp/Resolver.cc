@@ -88,6 +88,8 @@ namespace zypp
   { return _pimpl->transactResKind( kind ); }
   void Resolver::transactReset( ResStatus::TransactByValue causer )
   { _pimpl->transactReset( causer ); }
+  std::list<PoolItem_Ref> Resolver::problematicUpdateItems( void ) const
+  { return _pimpl->problematicUpdateItems(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

@@ -128,6 +128,12 @@ namespace zypp
     void doUpgrade( UpgradeStatistics & opt_stats_r );
 
     /**
+     * Return the list of problematic update items
+     * i.e. locked ones (due to foreign vendor)
+     **/
+    std::list<PoolItem_Ref> problematicUpdateItems( void ) const;
+
+    /**
      * Return the dependency problems found by the last call to
      * resolveDependencies(). If there were no problems, the returned
      * list will be empty.

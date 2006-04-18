@@ -196,6 +196,8 @@ class Resolver : public base::ReferenceCounted, private base::NonCopyable {
     void transactReset( ResStatus::TransactByValue causer );
 
     void doUpgrade( zypp::UpgradeStatistics & opt_stats_r );
+    PoolItemList problematicUpdateItems( void ) const { return _update_items; }
+
 
     ResolverProblemList problems (void) const;
     void applySolutions (const ProblemSolutionList &solutions);
