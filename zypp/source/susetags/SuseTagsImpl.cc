@@ -378,49 +378,34 @@ namespace zypp
               _content_file_key = provideFile( _path + "content.key");
             else if (filename == "content.asc")
               _content_file_sig = provideFile( _path + "content.asc");
+            
+            // if they not exists both will be Pathname()
           }
         }
-        // now check signature of content file.
         
-        if (PathInfo(_content_file_sig).isExist() && PathInfo(_content_file_key).isExist() )
+        ZYpp::Ptr z = getZYpp();
+        // import content.key if it exists
+        if ( PathInfo(_content_file_key).isExist() )
         {
-          MIL << "SuseTags source: checking 'content' file vailidity using digital signature.." << endl;
-          // can verify signature
-          ZYpp::Ptr z = getZYpp();
-          
           // import it to the untrusted keyring.
           z->keyRing()->importKey(_content_file_key, false);
-          
-          // import the gpg-* keys
-          std::list<Pathname> otherkeys = publicKeys();
-          for ( std::list<Pathname>::const_iterator it = otherkeys.begin(); it != otherkeys.end(); ++it)
-          {
-            Pathname key = *it;
-            z->keyRing()->importKey(key, false);
-          }
-              
-          // verify the content file
-          bool valid = z->keyRing()->verifyFileSignatureWorkflow( _content_file, _content_file_sig);
-          
-          // the source is not valid and the user did not want to continue
-          if (!valid)
-            ZYPP_THROW (Exception( "Error. Source signature does not validate and user does not want to continue. "));
         }
-        else if (!PathInfo(_content_file_sig).isExist() && !PathInfo(_content_file_key).isExist() )
+          
+        // import the gpg-* keys
+        std::list<Pathname> otherkeys = publicKeys();
+        for ( std::list<Pathname>::const_iterator it = otherkeys.begin(); it != otherkeys.end(); ++it)
         {
-          // old source?
-
-          // verify the content file anyway (with empty signature)
-          bool valid = getZYpp()->keyRing()->verifyFileSignatureWorkflow( _content_file, Pathname() );
+          Pathname key = *it;
+          z->keyRing()->importKey(key, false);
+        }
+        
+        MIL << "SuseTags source: checking 'content' file vailidity using digital signature.." << endl;
+        // verify the content file
+        bool valid = z->keyRing()->verifyFileSignatureWorkflow( _content_file, _content_file_sig);
           
-          // the source is not valid and the user did not want to continue
-          if (!valid)
-            ZYPP_THROW (Exception( "Error. Source signature does not validate and user does not want to continue. "));
-        }
-        else
-        {
-          ZYPP_THROW (Exception( "Error. New source format with crypto verification. But either key or signature is missing. ") ); 
-        }
+        // the source is not valid and the user did not want to continue
+        if (!valid)
+          ZYPP_THROW (Exception( "Error. Source signature does not validate and user does not want to continue. "));
         
         SourceFactory factory;
 

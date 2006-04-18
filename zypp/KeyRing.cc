@@ -229,12 +229,11 @@ namespace zypp
     callback::SendReport<KeyRingSignals> emitSignal;
     MIL << "Going to verify signature for " << file << " with " << signature << std::endl; 
     
-    if( signature.empty() )
+    // if signature does not exists, ask user if he wants to accept unsigned file.
+    if( signature.empty() || (!PathInfo(signature).isExist()) )
     {
 	bool res = report->askUserToAcceptUnsignedFile( file );
-	
 	MIL << "User decision on unsigned file: " << res << endl;
-	
 	return res;
     }
 
