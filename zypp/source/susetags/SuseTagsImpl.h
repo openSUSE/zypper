@@ -17,6 +17,7 @@
 
 #include "zypp/Pathname.h"
 #include "zypp/source/SourceImpl.h"
+#include "zypp/Product.h"
 #include "zypp/source/susetags/SuseTagsProductImpl.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -90,6 +91,8 @@ namespace zypp
         */
         virtual void factoryInit();
 	
+        void readContentFile();
+        
 	void provideProducts(Source_Ref source_r, ResStore& store);
 	void providePackages(Source_Ref source_r, ResStore& store);
 	void provideSelections(Source_Ref source_r, ResStore& store);
@@ -131,6 +134,7 @@ namespace zypp
          * we need it to access the checksums if we are in verify mode
          */
         detail::ResImplTraits<SuseTagsProductImpl>::Ptr _prodImpl;
+        Product::Ptr _product;
        
       };
       ///////////////////////////////////////////////////////////////////

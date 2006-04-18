@@ -241,6 +241,8 @@ namespace zypp
           ZYPP_CAUGHT(excpt_r);
           WAR << "Verifier not found" << endl;
         }
+        
+        readContentFile();
       }
 
       void SuseTagsImpl::createResolvables(Source_Ref source_r)
@@ -339,7 +341,7 @@ namespace zypp
       std::string SuseTagsImpl::unique_id (void) const
       { return _media_id; }
 
-      void SuseTagsImpl::provideProducts(Source_Ref source_r, ResStore &store)
+      void SuseTagsImpl::readContentFile()
       {
         Pathname p;
         bool cache = cacheExists();
@@ -427,7 +429,7 @@ namespace zypp
           
           ProductMetadataParser p;
           p.parse( _content_file, factory.createFrom(this) );
-          Product::Ptr product = p.result;
+          _product = p.result;
           
           // data dir is the same, it is determined by the content file
           _data_dir = _path + p.prodImpl->_data_dir;
@@ -440,8 +442,8 @@ namespace zypp
           else
             _descr_dir = _orig_descr_dir;
           
-          MIL << "Product: " << product->summary() << endl;
-          store.insert( product );
+          MIL << "Read product: " << _product->summary() << endl;
+          
           _prodImpl = p.prodImpl;
 	  _autorefresh = p.volatile_content && media::MediaAccess::canBeVolatile( _url );
         }
@@ -450,6 +452,12 @@ namespace zypp
         }
       }
 
+      void SuseTagsImpl::provideProducts(Source_Ref source_r, ResStore &store)
+      {
+        MIL << "Adding product: " << _product->summary() << " to the store" << endl;
+        store.insert( _product );
+      }
+      
       void SuseTagsImpl::verifyFile( const Pathname &path, const std::string &key)
       {
         // for old products, we dont check anything.
