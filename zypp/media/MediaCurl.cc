@@ -114,6 +114,8 @@ MediaCurl::MediaCurl( const Url &      url_r,
 		    true ), // does_download
       _curl( NULL )
 {
+  _curlError[0] = '\0';
+
   MIL << "MediaCurl::MediaCurl(" << url_r << ", " << attach_point_hint_r << ")" << endl;
 
   globalInitOnce();
@@ -563,9 +565,9 @@ void MediaCurl::getFile( const Pathname & filename ) const
 void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target) const
 {
   callback::SendReport<DownloadProgressReport> report;
-  
+
   Url url( _url );
-  
+
   try {
     doGetFileCopy(filename, target, report);
   }
@@ -696,7 +698,7 @@ void MediaCurl::doGetFileCopy( const Pathname & filename , const Pathname & targ
     if ( ret != 0 ) {
       ::fclose( file );
       filesystem::unlink( destNew );
-
+      ERR << &_curlError << endl;
       ERR << "curl error: " << ret << ": " << _curlError << endl;
       std::string err;
       try {
@@ -919,7 +921,7 @@ void MediaCurl::getDirInfo( filesystem::DirContent & retlist,
 int MediaCurl::progressCallback( void *clientp, double dltotal, double dlnow,
                                  double ultotal, double ulnow )
 {
-  callback::SendReport<DownloadProgressReport> *report 
+  callback::SendReport<DownloadProgressReport> *report
     = reinterpret_cast<callback::SendReport<DownloadProgressReport>*>( clientp );
   if (report)
   {
