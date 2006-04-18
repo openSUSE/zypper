@@ -1139,7 +1139,21 @@ ResolverContext::addInfo (ResolverInfo_Ptr info, bool askUser)
 void
 ResolverContext::addError (ResolverInfo_Ptr info, bool askUser)
 {
-    info->flagAsError ();
+    bool is_error = true;
+
+    if (info->type() == RESOLVER_INFO_TYPE_UNINSTALL_LOCKED) {
+	for (PoolItemList::const_iterator iter = _ignoreInstalledItem.begin(); iter != _ignoreInstalledItem.end(); iter++) {
+	    if (info->affected() == *iter) {
+		DBG << "ignore keep installed: " << info->affected() << endl;
+		is_error = false;
+		break;
+	    }
+	}
+    }
+
+    if (is_error)
+	info->flagAsError ();
+
     WAR << "******** Error: " << *info << endl;
     addInfo (info, askUser);
 }

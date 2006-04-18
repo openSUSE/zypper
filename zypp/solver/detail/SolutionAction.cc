@@ -137,6 +137,8 @@ TransactionSolutionAction::execute(Resolver & resolver) const
     bool ret = true;
     switch (action()) {
 	case KEEP:
+	    resolver.addIgnoreInstalledItem( _item );
+	    /*FALLTHRU*/
 	case INSTALL:
 	    if (_item.status().isToBeUninstalled())
 		ret = _item.status().setTransact (false, ResStatus::USER);
