@@ -1,5 +1,12 @@
 -------------------------------------------------------------------
-Fri Apr 14 16:04:35 CEST 2006 - visnov@suse.cz
+Tue Apr 18 12:04:35 CEST 2006 - kkaempf@suse.de
+
+- rule out locked items during distribution upgrade as early
+  as possible. (#165670)
+- rev 3110
+
+-------------------------------------------------------------------
+Mon Apr 17 16:04:35 CEST 2006 - kkaempf@suse.de
 
 - Bugfix #166212
   - use APPL_LOW as 'ui initiated, by solver' in transactKind() and
