@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Apr 18 15:14:35 CEST 2006 - kkaempf@suse.de
+
+- Bugfix #165670
+  - Honor keep requests.
+  - Dont flag "locked uninstall" as error if a keep request was
+    issued before.
+- rev 3114
+
+-------------------------------------------------------------------
 Tue Apr 18 12:04:35 CEST 2006 - kkaempf@suse.de
 
 - rule out locked items during distribution upgrade as early
