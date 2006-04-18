@@ -245,6 +245,62 @@ void strip_obsoleted_to_delete( _InstIterator instBegin_r, _InstIterator instEnd
 #endif
 ///////////////////////////////////////////////////////////////////
 
+struct SetTransactValue
+{
+  SetTransactValue( ResStatus::TransactValue newVal_r, ResStatus::TransactByValue causer_r )
+  : _newVal( newVal_r )
+  , _causer( causer_r )
+  {}
+
+  ResStatus::TransactValue   _newVal;
+  ResStatus::TransactByValue _causer;
+
+  bool operator()( const PoolItem & pi ) const
+  { return pi.status().setTransactValue( _newVal, _causer ); }
+};
+
+struct StatusReset : public SetTransactValue
+{
+  StatusReset()
+  : SetTransactValue( ResStatus::KEEP_STATE, ResStatus::USER )
+  {}
+};
+
+inline Source_Ref XcreateSource( const Url & url_r )
+{
+  Source_Ref ret;
+  string a( "createSource: 123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345" );
+  //Measure x( a );
+  //Measure x( "createSource: " );//+ url_r.asString() );
+  try
+    {
+      ret = SourceFactory().createFrom( url_r, "/", Date::now().asSeconds() );
+    }
+  catch ( const Exception & )
+    {
+      return Source_Ref::noSource;
+    }
+  //x.start( "parseSource: " + url_r.asString() );
+  {
+    //zypp::base::LogControl::TmpLineWriter shutUp;
+    ret.resolvables();
+  }
+  //x.stop();
+  MIL << "Content " << ret << "{" << endl;
+  rstats( ret.resolvables() );
+  MIL << "}" << endl;
+
+  return ret;
+}
+
+void checkSource( const Url & url )
+{
+  Source_Ref src( XcreateSource( url ) );
+}
+void checkSource( const std::string & urlstr )
+{ checkSource( Url(urlstr) ); }
+
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -255,6 +311,9 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "xxx" );
   INT << "===[START]==========================================" << endl;
   ResPool pool( getZYpp()->pool() );
+
+  checkSource( "ftp://ftp.gwdg.de/pub/linux/misc/suser-guru/rpm/10.0" );
+  return 0;
 
   if ( 0 )
     {
@@ -278,14 +337,31 @@ int main( int argc, char * argv[] )
     INT << "Added source: " << pool << endl;
   }
 
+
   Source_Ref src2( createSource( "dir:/Local/SUSE-Linux-10.1-Build_830-i386/CD1" ) );
-  return 0;
   Source_Ref src1( createSource( "dir:/Local/SUSE-Linux-10.1-Build_830-Addon-BiArch/CD1" ) );
   INT << "Pool: " << pool << endl;
   getZYpp()->addResolvables( src1.resolvables() );
   INT << "Added source1: " << pool << endl;
   getZYpp()->addResolvables( src2.resolvables() );
   INT << "Added source2: " << pool << endl;
+
+  vdumpPoolStats( INT,
+                  make_filter_begin<resfilter::ByTransact>(pool),
+                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+  MIL << endl;
+  std::for_each( pool.begin(), pool.end(), SetTransactValue( ResStatus::TRANSACT, ResStatus::USER ) );
+  vdumpPoolStats( INT,
+                  make_filter_begin<resfilter::ByTransact>(pool),
+                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+  MIL << endl;
+  std::for_each( pool.begin(), pool.end(), StatusReset() );
+  vdumpPoolStats( INT,
+                  make_filter_begin<resfilter::ByTransact>(pool),
+                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+  MIL << endl;
+
+  return 0;
 
   NameKindProxy s( nameKindProxy<Selection>( pool, "default" ) );
   MIL << s << endl;

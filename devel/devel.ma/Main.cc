@@ -6,57 +6,32 @@
 
 using namespace std;
 using namespace zypp;
-#if 0
-namespace zypp
+
+
+void foreach( boost::function<void (int i, const char * t, double d)> f )
 {
-
-  struct RpmFlagsBase
-  {
-    typedef uint16_t                 FieldType;
-    typedef bit::BitField<FieldType> BitFieldType;
-
-    enum FlagType
-      {
-        ignore,
-        install,
-        erase
-      };
-    enum FlagValue
-      {
-        none
-        //
-        --test
-        --justdb
-        --nodeps
-        --noscripts
-        --notriggers
-        --repackage
-        --force
-        //
-        // install
-        // upgrade
-        -nodigest
-        -nosignature
-        -nosuggest
-        -noorder
-        -replacefiles
-        -replacepkgs
-        -oldpackage
-        -excludedocs
-        -ignoresize
-        -ignorearch
-        -ignoreos
-        //
-
-
-      };
-
-
-  };
-
-
+  f( 1, "2", 3.0 );
 }
-#endif
+
+struct MyFn
+{
+  void operator()( int i, const char * t, double d ) const
+  { MIL << __PRETTY_FUNCTION__ << endl; }
+};
+
+
+struct MyFn2
+{
+  MyFn2( string t )
+  : _t( t )
+  {}
+  string _t;
+
+  char operator()( long i, const char * t, double d ) const
+  { MIL << t << __PRETTY_FUNCTION__ << endl; return 0; }
+};
+
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -66,15 +41,8 @@ int main( int argc, char * argv[] )
 {
   INT << "===[START]==========================================" << endl;
 
-  //ResStatus stat;
-  //MIL << stat << endl;
-
-  std::string line = " a b c ";
-  std::vector<std::string> words;
-  DBG << str::split( line, std::back_inserter(words), " " ) << " " << words.size() << endl;
-  DBG << str::split( line, std::back_inserter(words), " " ) << " " << words.size() << endl;
-
-
+  foreach( MyFn() );
+  foreach( MyFn2("fooo") );
 
   INT << "===[END]============================================" << endl << endl;
   return 0;
