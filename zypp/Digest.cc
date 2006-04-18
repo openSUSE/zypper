@@ -26,6 +26,16 @@
 
 namespace zypp {
 
+    bool DigestReport::askUserToAcceptNoDigest( const zypp::Pathname &file )
+    { return true; }
+
+    bool DigestReport::askUserToAccepUnknownDigest( const Pathname &file, const std::string &name ) 
+    { return true; }
+
+    bool DigestReport::askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found ) 
+    { return true; }
+
+
     // private data
     class Digest::P
     {

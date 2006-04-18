@@ -56,6 +56,18 @@ namespace zypp
     std::ifstream is(file.asString().c_str());
     iostr::forEachLine( is, printLine);    
   }
+
+  bool KeyRingReport::askUserToAcceptUnsignedFile( const Pathname &file )
+  { return true; }
+
+  bool KeyRingReport::askUserToAcceptUnknownKey( const Pathname &file, const std::string &keyid, const std::string &keyname )
+  { return true; }
+
+  bool KeyRingReport::askUserToTrustKey( const std::string &keyid, const std::string &keyname, const std::string &keydetails )
+  { return true; }
+
+  bool KeyRingReport::askUserToAcceptVerificationFailed( const Pathname &file, const std::string &keyid, const std::string &keyname )
+  { return true; }
   
   ///////////////////////////////////////////////////////////////////
   //

@@ -26,12 +26,9 @@ namespace zypp {
 
   struct DigestReport : public callback::ReportBase
   {
-    virtual bool askUserToAcceptNoDigest( const zypp::Pathname &file )
-    { return true; }
-    virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name )
-    { return true; }
-    virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found )
-    { return true; }
+    virtual bool askUserToAcceptNoDigest( const zypp::Pathname &file );
+    virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name );
+    virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found );
   };
   
 

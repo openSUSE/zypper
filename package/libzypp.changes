@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 18 15:46:59 CEST 2006 - visnov@suse.cz
+
+- revert the signature/digest checking callbacks
+- rev 3115
+
+-------------------------------------------------------------------
 Tue Apr 18 15:14:35 CEST 2006 - kkaempf@suse.de
 
 - Bugfix #165670
