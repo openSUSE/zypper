@@ -979,27 +979,21 @@ transactItems( PoolItem_Ref installed, PoolItem_Ref uninstalled, bool install, b
 		&& !uninstalled.status().isLocked())
 	    {
 		if (soft)
-		    uninstalled.status().setSoftTransact( install, ResStatus::APPL_LOW );
+		    uninstalled.status().setSoftTransact( true, ResStatus::APPL_LOW );
 		else
-		    uninstalled.status().setTransact( install, ResStatus::APPL_LOW );
+		    uninstalled.status().setTransact( true, ResStatus::APPL_LOW );
 	    }
 	    if (installed
 		&& !installed.status().isLocked())
 	    {
-		if (soft)
-		    installed.status().setSoftTransact( false, ResStatus::APPL_LOW );
-		else
-		    installed.status().setTransact( false, ResStatus::APPL_LOW );
+		installed.status().resetTransact( ResStatus::APPL_LOW );
 	    }
 	} else {
 	    // uninstall
 	    if (uninstalled
 		&& !uninstalled.status().isLocked())
 	    {
-		if (soft)
-		    uninstalled.status().setSoftTransact( false, ResStatus::APPL_LOW );
-		else
-		    uninstalled.status().setTransact( false, ResStatus::APPL_LOW );
+		uninstalled.status().resetTransact( ResStatus::APPL_LOW );
 	    }
 	    if (installed
 		&& !installed.status().isLocked())
