@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Apr 18 20:41:48 CEST 2006 - kkaempf@suse.de
+
+- fix bugfix 164365, fix bug 167285
+  Actually clear the transcation state instead of locking it
+  to 'dont transact' 
+- rev 3122
+
+-------------------------------------------------------------------
 Tue Apr 18 15:46:59 CEST 2006 - visnov@suse.cz
 
 - revert the signature/digest checking callbacks
@@ -67,6 +75,7 @@ Thu Apr 13 15:19:20 CEST 2006 - visnov@suse.cz
 Thu Apr 13 13:52:08 CEST 2006 - schubi@suse.de
 
 - Bug 164365 - build 906: Deselecting a selection, all packages are still selected
+- rev 3087
 
 -------------------------------------------------------------------
 Thu Apr 13 11:57:58 CEST 2006 - kkaempf@suse.de
