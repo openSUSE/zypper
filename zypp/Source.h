@@ -128,7 +128,7 @@ namespace zypp
     std::string alias (void) const;
     void setAlias (const std::string & alias_r);
 
-    //! string description of the source type, e.g. "YUM" or "UnitedLinux"
+    //! string description of the source type, e.g. "YUM" or "YaST"
     std::string type (void) const;
 
     unsigned numberOfMedia(void) const;
