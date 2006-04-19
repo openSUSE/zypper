@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Wed Apr 19 11:37:47 CEST 2006 - dmacvicar@suse.de
+
+- read content file on construction, and make 
+  provideProduct only insert the already 
+  read product object into the store (#165826)
+  (dmacvicar)
+- When the signature is not found, warn the
+  user about a unsigned source. When the 
+  key is not found, do nothing, it can be in the 
+  keyring already. (#166016) (dmacvicar)
+- enable key verification only if 
+  ZYPP_CHECKSIG env var is set (dmacvicar)  
+- r1529
+
+-------------------------------------------------------------------
 Tue Apr 18 20:41:48 CEST 2006 - kkaempf@suse.de
 
 - fix bugfix 164365, fix bug 167285
