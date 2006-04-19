@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr 19 14:10:10 CEST 2006 - kkaempf@suse.de
+
+- fix Resolver::transactReset() (see rev 3122) (#167285)
+- rev 3140
+
+-------------------------------------------------------------------
 Wed Apr 19 13:48:26 CEST 2006 - ma@suse.de
 
 - Introduced $ZYPP_KEYRING_DEFAULT_ACCEPT_ALL. If this environment
