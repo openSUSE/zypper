@@ -32,16 +32,16 @@ namespace zypp
   struct KeyRingReport : public callback::ReportBase
   {
     virtual bool askUserToAcceptUnsignedFile( const Pathname &file );
-    virtual bool askUserToAcceptUnknownKey( const Pathname &file, const std::string &keyid, const std::string &keyname );
-    virtual bool askUserToTrustKey( const std::string &keyid, const std::string &keyname, const std::string &keydetails );
-    virtual bool askUserToAcceptVerificationFailed( const Pathname &file, const std::string &keyid, const std::string &keyname );
+    virtual bool askUserToAcceptUnknownKey( const Pathname &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint );
+    virtual bool askUserToTrustKey( const std::string &keyid, const std::string &keyname, const std::string &fingerprint);
+    virtual bool askUserToAcceptVerificationFailed( const Pathname &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint );
   };
   
   struct KeyRingSignals : public callback::ReportBase
   {
-    virtual void trustedKeyAdded( const KeyRing &keyring, const std::string &keyid, const std::string &keyname )
+    virtual void trustedKeyAdded( const KeyRing &keyring, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
     {}
-    virtual void trustedKeyRemoved( const KeyRing &keyring, const std::string &keyid, const std::string &keyname )
+    virtual void trustedKeyRemoved( const KeyRing &keyring, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
     {}
   };
   

@@ -21,6 +21,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/IOStream.h"
 #include "zypp/base/String.h"
+#include "zypp/Pathname.h"
 #include "zypp/KeyRing.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/TmpPath.h"
@@ -65,13 +66,13 @@ namespace zypp
   bool KeyRingReport::askUserToAcceptUnsignedFile( const Pathname &file )
   { return _keyRingDefaultAccept; }
 
-  bool KeyRingReport::askUserToAcceptUnknownKey( const Pathname &file, const std::string &keyid, const std::string &keyname )
+  bool KeyRingReport::askUserToAcceptUnknownKey( const Pathname &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
   { return _keyRingDefaultAccept; }
 
-  bool KeyRingReport::askUserToTrustKey( const std::string &keyid, const std::string &keyname, const std::string &keydetails )
+  bool KeyRingReport::askUserToTrustKey( const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
   { return _keyRingDefaultAccept; }
 
-  bool KeyRingReport::askUserToAcceptVerificationFailed( const Pathname &file, const std::string &keyid, const std::string &keyname )
+  bool KeyRingReport::askUserToAcceptVerificationFailed( const Pathname &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
   { return _keyRingDefaultAccept; }
 
   ///////////////////////////////////////////////////////////////////
@@ -262,7 +263,7 @@ namespace zypp
       if ( verifyFile( file, signature, _trusted_kr ) )
         return true;
       else
-        return report->askUserToAcceptVerificationFailed( file, key.id, key.name );
+        return report->askUserToAcceptVerificationFailed( file, key.id, key.name, key.fingerprint );
     }
     else
     {
@@ -276,13 +277,13 @@ namespace zypp
         MIL << "Key " << id << " " << key.name << " is not trusted" << std::endl;
         // ok the key is not trusted, ask the user to trust it or not
 #warning We need the key details passed to the callback
-        if ( report->askUserToTrustKey(key.id, key.name, "") )
+        if ( report->askUserToTrustKey(key.id, key.name, key.fingerprint) )
         {
           MIL << "User wants to trust key " << id << " " << key.name << std::endl;
           //dumpFile(unKey.path());
 
           importKey( unKey.path(), _trusted_kr );
-          emitSignal->trustedKeyAdded( (const KeyRing &)(*this), id, key.name );
+          emitSignal->trustedKeyAdded( (const KeyRing &)(*this), id, key.name, key.fingerprint );
 
           // emit key added
           if ( verifyFile( file, signature, _trusted_kr ) )
@@ -293,7 +294,7 @@ namespace zypp
           else
           {
             MIL << "File signature check fails" << std::endl;
-            if ( report->askUserToAcceptVerificationFailed( file, key.id, key.name ) )
+            if ( report->askUserToAcceptVerificationFailed( file, key.id, key.name, key.fingerprint ) )
             {
               MIL << "User continues anyway." << std::endl;
               return true;
@@ -314,7 +315,7 @@ namespace zypp
       else
       {
         // unknown key...
-        if ( report->askUserToAcceptUnknownKey( file, id, "Unknown Key" ) )
+        if ( report->askUserToAcceptUnknownKey( file, id, "Unknown Key", "No fingerprint" ) )
         {
           MIL << "User wants to accept unknown key " << id << std::endl;
           return true;
@@ -367,7 +368,11 @@ namespace zypp
         {
           key.id = what[5];
           key.name = what[10];
-          return key;
+          //return key;
+        }
+        else if ( what[1] == "fpr" )
+        {
+          key.fingerprint = what[10];
         }
         //dumpRegexpResults(what);
       }
