@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr 19 16:47:34 CEST 2006 - kkaempf@suse.de
+
+- don't add duplicate error infos to ResolverContext (#167309)
+- rev 3146
+
+-------------------------------------------------------------------
 Wed Apr 19 14:10:10 CEST 2006 - kkaempf@suse.de
 
 - fix Resolver::transactReset() (see rev 3122) (#167285)
