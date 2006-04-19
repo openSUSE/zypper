@@ -7,9 +7,10 @@ PACKAGE = parser
 
 LDADD = $(top_srcdir)/zypp/lib@PACKAGE@.la
 
-noinst_PROGRAMS = YUMtest
+noinst_PROGRAMS = YUMtest YUMLeakTest
 
 YUMtest_SOURCES = YUMtest.cc
+YUMLeakTest_SOURCES = YUMLeakTest.cc
 
 EXTRA_DIST = lib/*.exp config/*.exp $(PACKAGE).test/*.exp
 

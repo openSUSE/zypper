@@ -4,11 +4,12 @@
 
 LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la
 
-noinst_PROGRAMS = hal librpmDb storagetargettest import_old_sources_test
+noinst_PROGRAMS = hal librpmDb RpmDb storagetargettest import_old_sources_test
 
 hal_SOURCES = hal.cc
 
-librpmDb_SOURCES = librpmDb.cc
+librpmDb_SOURCES = librpmDb.cc 
+RpmDb_SOURCES = RpmDb.cc
 
 storagetargettest_SOURCES = storagetargettest.cc Benchmark.cc Benchmark.h
 
