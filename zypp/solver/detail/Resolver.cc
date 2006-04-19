@@ -1260,7 +1260,7 @@ struct TransactReset : public resfilter::PoolItemFilterFunctor
 
     bool operator()( PoolItem_Ref item )		// only transacts() items go here
     {
-	item.status().setTransact( false, _causer );
+	item.status().resetTransact( _causer );
 	return true;
     }
 };
@@ -1270,7 +1270,7 @@ void
 Resolver::transactReset( ResStatus::TransactByValue causer )
 {
     TransactReset info( causer );
-
+    MIL << "transactReset(" << causer << ")" << endl;
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   resfilter::ByTransact( ),
 		   functor::functorRef<bool,PoolItem>(info) );
