@@ -12,10 +12,9 @@
 #ifndef ZYPP_CHECKSUM_H
 #define ZYPP_CHECKSUM_H
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
 #include <string>
-#include <iostream>
+
+#include "zypp/base/String.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -33,24 +32,23 @@ namespace zypp
           _type = "sha1";
         else if (checksum.size() == 64)
           _type = "sha256";
-//        DBG << "Checksum size is " << checksum.size() << ", checksum type set to " << _type << std::endl;
       }
       else
       {
         _type = type;
       }
     }
-    
+
     CheckSum()
     {}
-    
-    std::string type() const 
-    { return _type; } 
-    std::string checksum() const  
-    { return _checksum; } 
-    
-    bool empty() const  
-    { return (checksum().empty() || type().empty()); } 
+
+    std::string type() const
+    { return _type; }
+    std::string checksum() const
+    { return _checksum; }
+
+    bool empty() const
+    { return (checksum().empty() || type().empty()); }
   private:
     std::string _type;
     std::string _checksum;

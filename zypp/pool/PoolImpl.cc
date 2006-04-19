@@ -10,7 +10,7 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+#include "zypp/base/Logger.h"
 
 #include "zypp/pool/PoolImpl.h"
 #include "zypp/pool/PoolStats.h"

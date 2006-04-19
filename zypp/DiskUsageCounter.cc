@@ -9,14 +9,19 @@
 /** \file	zypp/DiskUsageCounter.cc
  *
  */
-#include "zypp/DiskUsageCounter.h"
+extern "C"
+{
+#include <sys/statvfs.h>
+}
 
-#include <zypp/Package.h>
-#include <zypp/base/String.h>
-
+#include <iostream>
 #include <fstream>
 
-#include <sys/statvfs.h>
+#include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
+
+#include "zypp/DiskUsageCounter.h"
+#include "zypp/Package.h"
 
 
 ///////////////////////////////////////////////////////////////////
@@ -30,9 +35,9 @@ namespace zypp
     if (mps.empty())
     {
       // partitioning is not set
-      return result;	
+      return result;
     }
-    
+
     // set used size after commit to the current used size
     for (MountPointSet::iterator mpit = result.begin();
       mpit != result.end();
@@ -161,7 +166,7 @@ namespace zypp
       }
     }
 
-    return result;    
+    return result;
   }
 
 
@@ -194,7 +199,7 @@ namespace zypp
 
 	    std::vector<std::string> words;
 	    str::split( l, std::back_inserter(words) );
-	      
+
 	    if ( words.size() < 3 ) {
 	      WAR << "Suspicious entry in /proc/mounts: " << l << std::endl;
 	      continue;
@@ -283,7 +288,7 @@ namespace zypp
 	    }
 	    else
 	    {
-	      ret.insert( DiskUsageCounter::MountPoint( mp, sb.f_bsize, 
+	      ret.insert( DiskUsageCounter::MountPoint( mp, sb.f_bsize,
 		((long long)sb.f_blocks)*sb.f_bsize/1024,
 		((long long)(sb.f_blocks - sb.f_bfree))*sb.f_bsize/1024, 0LL, ro ) );
 	    }

@@ -83,6 +83,7 @@ namespace zypp
     using boost::regex_search;
     using boost::regex_replace;
     using boost::match_results;
+    using boost::match_extra;
     using boost::cmatch;
     using boost::wcmatch;
     using boost::smatch;

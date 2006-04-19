@@ -12,6 +12,8 @@
  *  \author	Stefan Hundhammer <sh@suse.de>
  *
  */
+#include <iostream>
+#include "zypp/base/Logger.h"
 
 #include "zypp/ui/UserWantedPackages.h"
 

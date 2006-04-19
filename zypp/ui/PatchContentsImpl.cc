@@ -13,6 +13,8 @@
  *
  */
 
+#include <iostream>
+#include "zypp/base/Logger.h"
 #include "zypp/ui/PatchContentsImpl.h"
 #include <zypp/ZYppFactory.h>
 #include <zypp/ResPool.h>

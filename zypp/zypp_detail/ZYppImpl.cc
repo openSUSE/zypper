@@ -13,7 +13,7 @@
 #include <sys/utsname.h>
 #include <iostream>
 #include <fstream>
-//#include "zypp/base/Logger.h"
+#include "zypp/base/Logger.h"
 
 #include "zypp/zypp_detail/ZYppImpl.h"
 #include "zypp/detail/ResImplTraits.h"

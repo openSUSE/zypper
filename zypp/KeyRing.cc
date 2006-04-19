@@ -11,7 +11,6 @@
 */
 #include <iostream>
 #include <fstream>
-//#include "zypp/base/Logger.h"
 #include <sys/file.h>
 #include <cstdio>
 #include <unistd.h>
@@ -19,18 +18,19 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
 
-#include <boost/regex.hpp>
-
-#include "zypp/base/String.h"
+#include "zypp/base/Logger.h"
 #include "zypp/base/IOStream.h"
+#include "zypp/base/String.h"
 #include "zypp/KeyRing.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/TmpPath.h"
 
 using std::endl;
-using namespace boost;
 using namespace zypp::filesystem;
 using namespace std;
+
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::KeyRing"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -38,7 +38,7 @@ namespace zypp
 
   IMPL_PTR_TYPE(KeyRing);
 
-  static void dumpRegexpResults( const boost::smatch &what )
+  static void dumpRegexpResults( const str::smatch &what )
   {
     for ( unsigned int k=0; k < what.size(); k++)
     {
@@ -352,7 +352,7 @@ namespace zypp
     std::string line;
     int count = 0;
 
-    boost::regex rxColons("^([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):\n$");
+    str::regex rxColons("^([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):\n$");
 
     // pub:-:1024:17:A84EDAE89C800ACA:2000-10-19:2008-06-21::-:SuSE Package Signing Key <build@suse.de>:
 
@@ -360,8 +360,8 @@ namespace zypp
     for(line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
     {
       //MIL << "[" << line << "]" << std::endl;
-      boost::smatch what;
-      if(boost::regex_match(line, what, rxColons, boost::match_extra))
+      str::smatch what;
+      if(str::regex_match(line, what, rxColons, str::match_extra))
       {
         if ( what[1] == "pub" )
         {
@@ -395,12 +395,12 @@ namespace zypp
     std::string line;
     int count = 0;
 
-    boost::regex rxColons("^([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):\n$");
+    str::regex rxColons("^([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):\n$");
     for(line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
     {
       //MIL << line << std::endl;
-      boost::smatch what;
-      if(boost::regex_match(line, what, rxColons, boost::match_extra))
+      str::smatch what;
+      if(str::regex_match(line, what, rxColons, str::match_extra))
       {
         if ( what[1] == "pub" )
         {
@@ -410,7 +410,7 @@ namespace zypp
           MIL << "Found key " << key.id << " [" << key.name << "]" << std::endl;
           keys.push_back(key);
         }
-        dumpRegexpResults(what);
+        //dumpRegexpResults(what);
       }
     }
     prog.close();
@@ -498,13 +498,13 @@ namespace zypp
     std::string line;
     int count = 0;
 
-    boost::regex rxNoKey("^\\[GNUPG:\\] NO_PUBKEY (.+)\n$");
+    str::regex rxNoKey("^\\[GNUPG:\\] NO_PUBKEY (.+)\n$");
     std::string id;
     for(line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
     {
       //MIL << "[" << line << "]" << std::endl;
-      boost::smatch what;
-      if(boost::regex_match(line, what, rxNoKey, boost::match_extra))
+      str::smatch what;
+      if(str::regex_match(line, what, rxNoKey, str::match_extra))
       {
         if ( what.size() > 1 )
           id = what[1];
