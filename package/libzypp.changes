@@ -1,16 +1,23 @@
 -------------------------------------------------------------------
+Wed Apr 19 13:48:26 CEST 2006 - ma@suse.de
+
+- Introduced $ZYPP_KEYRING_DEFAULT_ACCEPT_ALL. If this environment
+  variable is present, all signature checking callbacks will default
+  to 'accept', in case no recipient is present.
+
+-------------------------------------------------------------------
 Wed Apr 19 11:37:47 CEST 2006 - dmacvicar@suse.de
 
-- read content file on construction, and make 
-  provideProduct only insert the already 
+- read content file on construction, and make
+  provideProduct only insert the already
   read product object into the store (#165826)
   (dmacvicar)
 - When the signature is not found, warn the
-  user about a unsigned source. When the 
-  key is not found, do nothing, it can be in the 
+  user about a unsigned source. When the
+  key is not found, do nothing, it can be in the
   keyring already. (#166016) (dmacvicar)
-- enable key verification only if 
-  ZYPP_CHECKSIG env var is set (dmacvicar)  
+- enable key verification only if
+  ZYPP_CHECKSIG env var is set (dmacvicar)
 - r1529
 
 -------------------------------------------------------------------
@@ -18,7 +25,7 @@ Tue Apr 18 20:41:48 CEST 2006 - kkaempf@suse.de
 
 - fix bugfix 164365, fix bug 167285
   Actually clear the transcation state instead of locking it
-  to 'dont transact' 
+  to 'dont transact'
 - rev 3122
 
 -------------------------------------------------------------------
@@ -60,7 +67,7 @@ Mon Apr 17 16:04:35 CEST 2006 - kkaempf@suse.de
 Fri Apr 14 16:04:35 CEST 2006 - visnov@suse.cz
 
 - new callbacks for failing digest
-- rev 3098 
+- rev 3098
 
 -------------------------------------------------------------------
 Thu Apr 13 16:59:38 CEST 2006 - kkaempf@suse.de
@@ -71,7 +78,7 @@ Thu Apr 13 16:59:38 CEST 2006 - kkaempf@suse.de
 -------------------------------------------------------------------
 Thu Apr 13 17:01:41 CEST 2006 - visnov@suse.cz
 
-- ask for file without a checksum (#165125) 
+- ask for file without a checksum (#165125)
 
 -------------------------------------------------------------------
 Thu Apr 13 16:00:21 CEST 2006 - kkaempf@suse.de
@@ -83,7 +90,7 @@ Thu Apr 13 16:00:21 CEST 2006 - kkaempf@suse.de
 Thu Apr 13 15:19:20 CEST 2006 - visnov@suse.cz
 
 - Ask user if signature file does not exist (#163765)
-- handle repomd.xml.asc as optional file (#163765) 
+- handle repomd.xml.asc as optional file (#163765)
 - rev 3089
 
 -------------------------------------------------------------------

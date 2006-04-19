@@ -9,6 +9,9 @@
 #include "Printing.h"
 #include "Tools.h"
 
+#include <zypp/Digest.h>
+#include <zypp/KeyRing.h>
+
 #include <zypp/base/Logger.h>
 #include <zypp/base/LogControl.h>
 #include <zypp/base/String.h>
@@ -266,36 +269,78 @@ struct StatusReset : public SetTransactValue
   {}
 };
 
-inline Source_Ref XcreateSource( const Url & url_r )
-{
-  Source_Ref ret;
-  string a( "createSource: 123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345" );
-  //Measure x( a );
-  //Measure x( "createSource: " );//+ url_r.asString() );
-  try
-    {
-      ret = SourceFactory().createFrom( url_r, "/", Date::now().asSeconds() );
-    }
-  catch ( const Exception & )
-    {
-      return Source_Ref::noSource;
-    }
-  //x.start( "parseSource: " + url_r.asString() );
-  {
-    //zypp::base::LogControl::TmpLineWriter shutUp;
-    ret.resolvables();
-  }
-  //x.stop();
-  MIL << "Content " << ret << "{" << endl;
-  rstats( ret.resolvables() );
-  MIL << "}" << endl;
 
-  return ret;
-}
+inline bool keyDef( bool def )
+{ return def; }
+
+struct DigestReceive : public zypp::callback::ReceiveReport<zypp::DigestReport>
+{
+  virtual bool askUserToAcceptNoDigest( const zypp::Pathname & file )
+  {
+    bool def = zypp::DigestReport::askUserToAcceptNoDigest( file );
+    SEC << "AcceptNoDigest " << file << " (" << def << ')' << endl;
+    return keyDef( def );
+  }
+};
+struct KeyRingReceive : public zypp::callback::ReceiveReport<zypp::KeyRingReport>
+{
+  virtual bool askUserToTrustKey( const std::string & keyid,
+                                  const std::string & keyname,
+                                  const std::string & keydetails )
+  {
+    bool def = zypp::KeyRingReport::askUserToTrustKey( keyid, keyname, keydetails );
+    SEC << "TrustKey " << keyid << ' ' << keyname << ' ' << keydetails << " (" << def << ')' << endl;
+    return keyDef( def );
+  }
+
+  virtual bool askUserToAcceptUnknownKey( const zypp::Pathname & path,
+                                          const std::string & keyid,
+                                          const std::string & keyname )
+  {
+    bool def = zypp::KeyRingReport::askUserToAcceptUnknownKey( path, keyid, keyname );
+    SEC << "AcceptUnknownKey " << path << ' ' << keyid << ' ' << keyname << " (" << def << ')' << endl;
+    return keyDef( def );
+  }
+
+  virtual bool askUserToAcceptUnsignedFile( const zypp::Pathname & file )
+  {
+    bool def = zypp::KeyRingReport::askUserToAcceptUnsignedFile( file );
+    SEC << "AcceptUnsignedFile " << file << " (" << def << ')' << endl;
+    return keyDef( def );
+  }
+
+  virtual bool askUserToAcceptVerificationFailed( const zypp::Pathname & file,
+                                                  const std::string & keyid,
+                                                  const std::string & keyname )
+  {
+    bool def = zypp::KeyRingReport::askUserToAcceptVerificationFailed( file, keyid, keyname );
+    SEC << "AcceptVerificationFailed " << file << ' ' << keyid << ' ' << keyname << " (" << def << ')' << endl;
+    return keyDef( def );
+  }
+};
+
+struct KeyRingCallbacks
+{
+  KeyRingCallbacks()
+  {
+    _digestReceive.connect();
+    _keyRingReceive.connect();
+  }
+  ~KeyRingCallbacks()
+  {
+    _digestReceive.disconnect();
+    _keyRingReceive.disconnect();
+  }
+
+  DigestReceive _digestReceive;
+  KeyRingReceive _keyRingReceive;
+
+};
+static KeyRingCallbacks cbs;
 
 void checkSource( const Url & url )
 {
-  Source_Ref src( XcreateSource( url ) );
+  Source_Ref src( createSource( url ) );
 }
 void checkSource( const std::string & urlstr )
 { checkSource( Url(urlstr) ); }
