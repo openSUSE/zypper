@@ -37,30 +37,29 @@ POST_UNINSTALL = :
 build_triplet = i686-suse-linux
 host_triplet = i686-suse-linux
 target_triplet = i686-suse-linux
-noinst_PROGRAMS = test2$(EXEEXT) test2_debug$(EXEEXT)
+noinst_PROGRAMS = test$(EXEEXT) lock$(EXEEXT) aj$(EXEEXT)
 subdir = devel/devel.dmacvicar
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-mkinstalldirs = $(install_sh) -d
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 PROGRAMS = $(noinst_PROGRAMS)
-am_test2_OBJECTS = test2.$(OBJEXT) PersistentStorage.$(OBJEXT) \
-	Backend.$(OBJEXT) XMLFilesBackend.$(OBJEXT) \
-	serialize.$(OBJEXT) xml_escape_parser.$(OBJEXT)
-test2_OBJECTS = $(am_test2_OBJECTS)
-test2_LDADD = $(LDADD)
-test2_DEPENDENCIES = $(top_srcdir)/zypp/libzypp.la
-am__objects_1 = test2.$(OBJEXT) PersistentStorage.$(OBJEXT) \
-	Backend.$(OBJEXT) XMLFilesBackend.$(OBJEXT) \
-	serialize.$(OBJEXT) xml_escape_parser.$(OBJEXT)
-am_test2_debug_OBJECTS = $(am__objects_1)
-test2_debug_OBJECTS = $(am_test2_debug_OBJECTS)
-test2_debug_LDADD = $(LDADD)
-test2_debug_DEPENDENCIES = $(top_srcdir)/zypp/libzypp.la
+am_aj_OBJECTS = aj.$(OBJEXT)
+aj_OBJECTS = $(am_aj_OBJECTS)
+aj_LDADD = $(LDADD)
+aj_DEPENDENCIES =
+am_lock_OBJECTS = zypp-lock.$(OBJEXT)
+lock_OBJECTS = $(am_lock_OBJECTS)
+lock_LDADD = $(LDADD)
+lock_DEPENDENCIES =
+am_test_OBJECTS = zypp-keyring.$(OBJEXT)
+test_OBJECTS = $(am_test_OBJECTS)
+test_LDADD = $(LDADD)
+test_DEPENDENCIES =
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -72,12 +71,13 @@ LTCXXCOMPILE = $(LIBTOOL) --tag=CXX --mode=compile $(CXX) $(DEFS) \
 CXXLD = $(CXX)
 CXXLINK = $(LIBTOOL) --tag=CXX --mode=link $(CXXLD) $(AM_CXXFLAGS) \
 	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(test2_SOURCES) $(test2_debug_SOURCES)
-DIST_SOURCES = $(test2_SOURCES) $(test2_debug_SOURCES)
+SOURCES = $(aj_SOURCES) $(lock_SOURCES) $(test_SOURCES)
+DIST_SOURCES = $(aj_SOURCES) $(lock_SOURCES) $(test_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = ${SHELL} /space/sources/zypp-trunk/trunk/libzypp/missing --run aclocal-1.9
+ALLOCA = 
 AMDEP_FALSE = #
 AMDEP_TRUE = 
 AMTAR = ${SHELL} /space/sources/zypp-trunk/trunk/libzypp/missing --run tar
@@ -86,6 +86,8 @@ AUTOCONF = ${SHELL} /space/sources/zypp-trunk/trunk/libzypp/missing --run autoco
 AUTOHEADER = ${SHELL} /space/sources/zypp-trunk/trunk/libzypp/missing --run autoheader
 AUTOMAKE = ${SHELL} /space/sources/zypp-trunk/trunk/libzypp/missing --run automake-1.9
 AWK = gawk
+BUILD_INCLUDED_LIBINTL = no
+CATOBJEXT = .gmo
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
@@ -94,8 +96,9 @@ CPPFLAGS =
 CXX = g++
 CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -g -O2 -Wall -Wformat
+CXXFLAGS =  -g -O2 -Wall -Wformat
 CYGPATH_W = echo
+DATADIRNAME = share
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
 DOCGEN = /usr/bin/doxygen
@@ -107,23 +110,44 @@ EGREP = grep -E
 EXEEXT = 
 F77 = 
 FFLAGS = 
-HAL_CFLAGS = -DDBUS_API_SUBJECT_TO_CHANGE -I/opt/gnome/include/glib-2.0 -I/opt/gnome/lib/glib-2.0/include -I/usr/include/dbus-1.0 -I/usr/lib/dbus-1.0/include -I/usr/include/hal  
+GENCAT = gencat
+GLIBC2 = yes
+GLIBC21 = yes
+GMSGFMT = /usr/bin/msgfmt
+HAL_CFLAGS = -DDBUS_API_SUBJECT_TO_CHANGE -I/usr/include/dbus-1.0 -I/usr/lib/dbus-1.0/include -I/usr/include/hal -I/opt/gnome/include/glib-2.0 -I/opt/gnome/lib/glib-2.0/include  
 HAL_LDADD = 
-HAL_LIBS = -L/opt/gnome/lib -lgobject-2.0 -ldbus-glib-1 -lglib-2.0 -lhal -ldbus-1  
-HAVE_DOT = NO
+HAL_LIBS = -L/opt/gnome/lib -lgobject-2.0 -ldbus-glib-1 -lglib-2.0 -lhal-storage -lhal -ldbus-1  
+HAVE_ASPRINTF = 1
+HAVE_DOT = YES
+HAVE_POSIX_PRINTF = 1
+HAVE_SNPRINTF = 1
+HAVE_WPRINTF = 0
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = ${SHELL} $(install_sh) -c -s
+INSTOBJEXT = .mo
+INTLBISON = bison
+INTLLIBS = 
+INTLOBJS = 
+INTL_LIBTOOL_SUFFIX_PREFIX = 
+INTL_MACOSX_LIBS = 
 LDFLAGS = 
+LIBICONV = 
+LIBINTL = 
 LIBOBJS = 
 LIBS = 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIBZYPP_VERSION = 0.0.0
 LIBZYPP_VERSION_INFO = -version-info 0:0:0
 LN_S = ln -s
+LTLIBICONV = 
+LTLIBINTL = 
 LTLIBOBJS = 
 MAKEINFO = ${SHELL} /space/sources/zypp-trunk/trunk/libzypp/missing --run makeinfo
+MKINSTALLDIRS = $(top_builddir)/./mkinstalldirs
+MSGFMT = /usr/bin/msgfmt
+MSGMERGE = /usr/bin/msgmerge
 MYRUNTEST = /usr/bin/runtest
 OBJEXT = o
 PACKAGE = zypp
@@ -134,10 +158,13 @@ PACKAGE_TARNAME = zypp
 PACKAGE_VERSION = 0.0.0
 PATH_SEPARATOR = :
 PKG_CONFIG = /usr/bin/pkg-config
+POSUB = po
 RANLIB = ranlib
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = strip
+USE_INCLUDED_LIBINTL = no
+USE_NLS = yes
 VERSION = 0.0.0
 XGETTEXT = /usr/bin/xgettext
 ac_ct_AR = ar
@@ -175,7 +202,7 @@ infodir = ${prefix}/info
 install_sh = /space/sources/zypp-trunk/trunk/libzypp/install-sh
 libdir = /usr/lib
 libexecdir = ${exec_prefix}/libexec
-localedir = /usr/share/zypp/locale
+localedir = /usr/share/locale
 localstatedir = ${prefix}/var
 mandir = ${prefix}/man
 mkdir_p = mkdir -p --
@@ -184,7 +211,6 @@ pkgdocdir = ${docdir}/zypp
 prefix = /usr
 program_transform_name = s,x,x,
 sbindir = ${exec_prefix}/sbin
-schemadir = /usr/share/zypp/schema
 sharedstatedir = ${prefix}/com
 sysconfdir = ${prefix}/etc
 target = i686-suse-linux
@@ -192,27 +218,24 @@ target_alias =
 target_cpu = i686
 target_os = linux
 target_vendor = suse
+xmlstoreschemadir = /usr/share/zypp/schema/xmlstore
+yumschemadir = /usr/share/zypp/schema/yum
 zyppdir = /usr/share/zypp
-
-#Main Main.debug Parse
 INCLUDES = 
-AM_LDFLAGS = -pg
+AM_LDFLAGS = 
 AM_CXXFLAGS = 
 # gperf:	-pg
-
-# -ldbxml -lpathan -lxerces-c -lxquery
-LDADD = $(top_srcdir)/zypp/libzypp.la -lboost_regex -lboost_filesystem -ldb -ldb_cxx 
-#LDADD =	-lboost_regex -lsqlite3 -dbxml
-test2_SOURCES = test2.cc PersistentStorage.cc Backend.cc XMLFilesBackend.cc serialize.cc xml_escape_parser.cpp
-test2_debug_SOURCES = $(test2_SOURCES)
-test2_debug_LDFLAGS = -static
-test1_SOURCES = test-sqlite.cc
-test1_debug_SOURCES = $(test1_SOURCES)
-test1_debug_LDFLAGS = -static
+LDADD = -L$(top_srcdir)/zypp/.libs -lzypp -lboost_regex
+test_SOURCES = zypp-keyring.cc
+test_LDFLAGS = -static
+lock_SOURCES = zypp-lock.cc
+lock_LDFLAGS = -static
+aj_SOURCES = aj.cc
+aj_LDFLAGS = -static
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cc .cpp .lo .o .obj
+.SUFFIXES: .cc .lo .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -249,12 +272,15 @@ clean-noinstPROGRAMS:
 	  echo " rm -f $$p $$f"; \
 	  rm -f $$p $$f ; \
 	done
-test2$(EXEEXT): $(test2_OBJECTS) $(test2_DEPENDENCIES) 
-	@rm -f test2$(EXEEXT)
-	$(CXXLINK) $(test2_LDFLAGS) $(test2_OBJECTS) $(test2_LDADD) $(LIBS)
-test2_debug$(EXEEXT): $(test2_debug_OBJECTS) $(test2_debug_DEPENDENCIES) 
-	@rm -f test2_debug$(EXEEXT)
-	$(CXXLINK) $(test2_debug_LDFLAGS) $(test2_debug_OBJECTS) $(test2_debug_LDADD) $(LIBS)
+aj$(EXEEXT): $(aj_OBJECTS) $(aj_DEPENDENCIES) 
+	@rm -f aj$(EXEEXT)
+	$(CXXLINK) $(aj_LDFLAGS) $(aj_OBJECTS) $(aj_LDADD) $(LIBS)
+lock$(EXEEXT): $(lock_OBJECTS) $(lock_DEPENDENCIES) 
+	@rm -f lock$(EXEEXT)
+	$(CXXLINK) $(lock_LDFLAGS) $(lock_OBJECTS) $(lock_LDADD) $(LIBS)
+test$(EXEEXT): $(test_OBJECTS) $(test_DEPENDENCIES) 
+	@rm -f test$(EXEEXT)
+	$(CXXLINK) $(test_LDFLAGS) $(test_OBJECTS) $(test_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -262,12 +288,9 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/Backend.Po
-include ./$(DEPDIR)/PersistentStorage.Po
-include ./$(DEPDIR)/XMLFilesBackend.Po
-include ./$(DEPDIR)/serialize.Po
-include ./$(DEPDIR)/test2.Po
-include ./$(DEPDIR)/xml_escape_parser.Po
+include ./$(DEPDIR)/aj.Po
+include ./$(DEPDIR)/zypp-keyring.Po
+include ./$(DEPDIR)/zypp-lock.Po
 
 .cc.o:
 	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
@@ -284,27 +307,6 @@ include ./$(DEPDIR)/xml_escape_parser.Po
 #	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
 .cc.lo:
-	if $(LTCXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
-	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Plo"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
-#	source='$<' object='$@' libtool=yes \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(LTCXXCOMPILE) -c -o $@ $<
-
-.cpp.o:
-	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
-	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
-#	source='$<' object='$@' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXXCOMPILE) -c -o $@ $<
-
-.cpp.obj:
-	if $(CXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ `$(CYGPATH_W) '$<'`; \
-	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
-#	source='$<' object='$@' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
-
-.cpp.lo:
 	if $(LTCXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
 	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Plo"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
 #	source='$<' object='$@' libtool=yes \
@@ -487,14 +489,6 @@ uninstall-am: uninstall-info-am
 	pdf pdf-am ps ps-am tags uninstall uninstall-am \
 	uninstall-info-am
 
-
-#Main_SOURCES = 		Main.cc
-
-#Main_debug_SOURCES = 	$(Main_SOURCES)
-#Main_debug_LDFLAGS =	-static
-
-#Parse_SOURCES = 	Parse.cc
-#Parse_LDFLAGS =		-static
 
 .PHONY:        always
 
