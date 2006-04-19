@@ -184,7 +184,7 @@ struct StorageTargetTest
   
   void storeSourceMetadata()
   {
-    _source.storeMetadata(_root + "/source-cache");
+    _source.storeMetadata(sourceCacheDir());
   }
   
   void storeKnownSources()
@@ -300,8 +300,14 @@ struct StorageTargetTest
   
   int sles10_machcd_source_read_test()
   {
-    initSource(Url("ftp://machcd2.suse.de/SLES/SLES-10-i386-Build_603/DVD1"));
+    clean();
+    //initSourceWithCache(Url("ftp://machcd2.suse.de/SLES/SLES-10-i386-Beta8/DVD1"));
+    //initSourceWithCache(Url("ftp://10.10.0.5/CDs/SUSE-Linux-10.1-Build_803-Addon-BiArch/CD1"));
+    initSourceWithCache(Url("ftp://machcd2.suse.de/CDs/SLES-10-CD-i386-Build_1001/CD1"));
+    //initSource(Url("dir:/mounts/dist/10.0-i386"));
+    
     ResStore store = readSourceResolvables();
+    storeSourceMetadata();
     return 0;
   }
   
@@ -318,8 +324,8 @@ struct StorageTargetTest
   {
     clean();
     initStorageBackend();
-    initSource(Url("http://armstrong.suse.de/download/Code/10/update/i386/")); 
-    //initSource(Url("ftp://machcd2.suse.de/SLES/SUSE-Linux-10.1-DVD9-i386+x86_64-Build_704/DVD1"));
+    //initSource(Url("http://armstrong.suse.de/download/Code/10/update/i386/")); 
+    initSource(Url("ftp://machcd2.suse.de/CDs/SLES-10-CD-i386-Build_1001/CD1"));
     ResStore store = readSourceResolvables();
     
     for (ResStore::const_iterator it = _store.begin(); it != _store.end(); it++)
@@ -334,14 +340,44 @@ struct StorageTargetTest
     }
     dump(store);
     writeResolvablesInStore();
-    readStoreResolvables();
+    std::list<ResObject::Ptr> objs = readStoreResolvables();
+    for ( std::list<ResObject::Ptr>::const_iterator it = objs.begin(); it != objs.end(); it++ )
+    {
+      _backend->deleteObject(*it);
+    }
+    return 0;
+  }
+      
+  int download_rpm_checksum_test()
+  {
+    clean();
+    //initStorageBackend();
+    initSource(Url("file:///mounts/machcd2/CDs/SLED-10-CD-i386-Beta9/CD1")); 
+    //initSource(Url("http://ftp.chg.ru/pub/Linux/SuSE/suse/update/10.1"));
+    ResStore store = readSourceResolvables();
+    
+    for (ResStore::const_iterator it = _store.begin(); it != _store.end(); it++)
+    {
+      //DBG << **it << endl
+      ResObject::Ptr res = *it;
+      if ( isKind<Package>(res) )
+      {
+        Package::Ptr p = asKind<Package>(res);
+        MIL << "From yum source, package " << p->name() << "-" << p->edition() << std::endl;
+        if ( p->name().substr( 0, 2) == "pa" )
+          _source.providePackage(p);
+      }
+    }
+    //dump(store);
+    //writeResolvablesInStore();
+    //readStoreResolvables();
     return 0;
   }
       
   int agruenbacher_cap_test()
   {
     clean();
-    initSource(Url("http://someurkl")); 
+    initSource(Url("dir:/space/tmp")); 
     ResStore store = readSourceResolvables();
     
     //for (ResStore::const_iterator it = _store.begin(); it != _store.end(); it++)
@@ -368,7 +404,7 @@ struct StorageTargetTest
   int armstrong_yum_source_source_read_test()
   {
     clean();
-    initSource(Url("https://armstrong.suse.de/download/Code/10/update/i386.NEW/"));
+    initSourceWithCache(Url("http://armstrong.suse.de/download/Code/10/update/i386"));
     ResStore store = readSourceResolvables();
     clean();
     return 0;
@@ -451,8 +487,11 @@ int main()
 { 
   try
   {  
+    //RUN_TEST(armstrong_yum_source_source_read);
+    //RUN_TEST(huha_yum_patch_bug_read);
+    //RUN_TEST(yumbug_read);#
+    //RUN_TEST(sles10_machcd_source_read);
     RUN_TEST(huha_yum_patch_bug_read);
-    //RUN_TEST(yumbug_read);
     /*
     RUN_TEST(storage_read);
     RUN_TEST(read_source_cache);
