@@ -466,12 +466,16 @@ ResolverContext::uninstall (PoolItem_Ref item, bool part_of_upgrade, bool due_to
 	    {
 		// put the info on the end as error
 		found = true;
-		addList.push_back (info);
+		// dont duplicate known errors (#167309)
+		if (!info->error())
+		    addList.push_back (info);
 	    } else if (info->type() == RESOLVER_INFO_TYPE_CONFLICTS_WITH
 		       && info->affected() == item) {
 		// put the info on the end as error
 		found = true;
-		addList.push_back (info);		
+		// dont duplicate known errors (#167309)
+		if (!info->error())
+		    addList.push_back (info);		
 	    }
 	}
 	if (!found) {
