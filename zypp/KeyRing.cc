@@ -225,6 +225,12 @@ namespace zypp
   
   bool KeyRing::Impl::verifyFileSignatureWorkflow( const Pathname &file, const Pathname &signature)
   {
+    if ( ! getenv("ZYPP_CHECKSIG") )
+    {
+      MIL << "Digital signature check disabled. Accepting source." << std::endl; 
+      return true;
+    }
+    
     callback::SendReport<KeyRingReport> report;
     callback::SendReport<KeyRingSignals> emitSignal;
     MIL << "Going to verify signature for " << file << " with " << signature << std::endl; 
