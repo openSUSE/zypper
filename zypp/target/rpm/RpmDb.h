@@ -25,6 +25,7 @@
 
 #include "zypp/Package.h"
 #include "zypp/Source.h"
+#include "zypp/KeyRing.h"
 
 #include "zypp/target/rpm/RpmHeader.h"
 #include "zypp/target/rpm/RpmCallbacks.h"
@@ -203,7 +204,7 @@ namespace zypp {
 	  /**
 	   * Return the long ids of all installed public keys.
 	   **/
-          std::set<std::string> pubkeys() const;
+          std::list<PublicKey> pubkeys() const;
           
           /**
            * Return the edition of all installed public keys.

@@ -884,16 +884,16 @@ void RpmDb::importZyppKeyRingTrustedKeys()
 {
   MIL << "Importing zypp trusted keyring" << std::endl;
   
-  std::set<std::string> rpm_keys = pubkeys();
+  std::list<PublicKey> rpm_keys = pubkeys();
   
   std::list<PublicKey> zypp_keys;
   
   zypp_keys = getZYpp()->keyRing()->trustedPublicKeys();
   
   for ( std::list<PublicKey>::const_iterator it = zypp_keys.begin(); it != zypp_keys.end(); ++it)
-  {
-    std::string id = (*it).id;
-    std::set<std::string>::iterator ik = find( rpm_keys.begin(), rpm_keys.end(), id);
+  { 
+    // we find only the left part of the long gpg key, as rpm does not support long ids
+    std::list<PublicKey>::iterator ik = find( rpm_keys.begin(), rpm_keys.end(), (*it));
     if ( ik != rpm_keys.end() )
     {
       MIL << "Key " << (*it).id << " (" << (*it).name << ") is already in rpm database." << std::endl;
@@ -909,7 +909,7 @@ void RpmDb::importZyppKeyRingTrustedKeys()
       {
         os.open(file.path().asString().c_str());
         // dump zypp key into the tmp file
-        getZYpp()->keyRing()->dumpTrustedPublicKey( id, os );
+        getZYpp()->keyRing()->dumpTrustedPublicKey( (*it).id, os );
         os.close();
       }
       catch (std::exception &e)
@@ -977,17 +977,41 @@ void RpmDb::importPubkey( const Pathname & pubkey_r )
 //	METHOD NAME : RpmDb::pubkeys
 //	METHOD TYPE : set<Edition>
 //
-set<std::string> RpmDb::pubkeys() const
+list<PublicKey> RpmDb::pubkeys() const
 {
-  set<std::string> ret;
+  list<PublicKey> ret;
 
   librpmDb::db_const_iterator it;
-  for ( it.findByName( string( "gpg-pubkey" ) ); *it; ++it ) {
+  for ( it.findByName( string( "gpg-pubkey" ) ); *it; ++it )
+  {
     Edition edition = it->tag_edition();
     if (edition != Edition::noedition)
-      ret.insert( str::toUpper(edition.version() + edition.release()) );
+    {
+      // we export the rpm key into a file
+      RpmHeader::constPtr result = new RpmHeader();
+      getData( std::string("gpg-pubkey"), edition, result );
+      TmpFile file;
+      std::ofstream os;
+      try
+      {
+        os.open(file.path().asString().c_str());
+        // dump rpm key into the tmp file
+        os << result->tag_description();
+        //MIL << "-----------------------------------------------" << std::endl;
+        //MIL << result->tag_description() <<std::endl;
+        //MIL << "-----------------------------------------------" << std::endl;
+        os.close();
+        // read the public key from the dumped file
+        PublicKey key = getZYpp()->keyRing()->readPublicKey(file.path());
+        ret.push_back(key);
+      }
+      catch (std::exception &e)
+      {
+        ERR << "Could not dump key " << edition.asString() << " in tmp file " << file.path() << std::endl;
+        // just ignore the key
+      }
+    }
   }
-
   return ret;
 }
 

@@ -48,7 +48,7 @@ namespace zypp
   struct PublicKey
   {
     bool operator==(PublicKey b)
-    { return b.id == id; }
+    { return (b.id == id) && (b.fingerprint == fingerprint); }
     
     bool operator==(std::string sid)
     { return sid == id; }

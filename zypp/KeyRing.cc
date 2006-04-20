@@ -390,6 +390,11 @@ namespace zypp
       "--list-public-keys",
       "--with-colons",
       "--with-fingerprint",
+      "--no-tty",
+      "--no-greeting",
+      "--batch",
+      "--status-fd",
+      "1",
       "--homedir",
       keyring.asString().c_str(),
       NULL
@@ -401,19 +406,35 @@ namespace zypp
     int count = 0;
 
     str::regex rxColons("^([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):\n$");
+    str::regex rxColonsFpr("^([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):([^:]*):\n$");
+
     for(line = prog.receiveLine(), count=0; !line.empty(); line = prog.receiveLine(), count++ )
     {
       //MIL << line << std::endl;
       str::smatch what;
       if(str::regex_match(line, what, rxColons, str::match_extra))
       {
+        PublicKey key;
         if ( what[1] == "pub" )
         {
-          PublicKey key;
           key.id = what[5];
           key.name = what[10];
-          MIL << "Found key " << key.id << " [" << key.name << "]" << std::endl;
+          
+          std::string line2;
+          for(line2 = prog.receiveLine(); !line2.empty(); line2 = prog.receiveLine(), count++ )
+          {
+            str::smatch what2;
+            if (str::regex_match(line2, what2, rxColonsFpr, str::match_extra))
+            {
+              if ( (what2[1] == "fpr") && (what2[1] != "pub") && (what2[1] !="sub"))
+              {
+                key.fingerprint = what2[10];
+                break;
+              }
+            }
+          }
           keys.push_back(key);
+          MIL << "Found key " << "[" << key.id << "]" << " [" << key.name << "]" << " [" << key.fingerprint << "]" << std::endl;
         }
         //dumpRegexpResults(what);
       }

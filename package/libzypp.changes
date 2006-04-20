@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Apr 20 13:01:28 CEST 2006 - dmacvicar@suse.de
+
+- fix #167605 (importing keys to rpm multiple times due to
+  wrong interpretation of rpm gpg versioning.
+- add support for reading the rpm keys, with full id and fingerprint
+
+-------------------------------------------------------------------
 Wed Apr 19 16:47:34 CEST 2006 - kkaempf@suse.de
 
 - don't add duplicate error infos to ResolverContext (#167309)
