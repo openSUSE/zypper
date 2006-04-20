@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Apr 20 14:10:41 CEST 2006 - kkaempf@suse.de
+
+- properly clear transaction flag after successful commit
+  (see rev 3122, #164365, #167285)
+- rev 3157
+
+-------------------------------------------------------------------
 Thu Apr 20 13:14:25 CEST 2006 - kkaempf@suse.de
 
 - recursively soft-uninstall recommended package on real uninstall,
