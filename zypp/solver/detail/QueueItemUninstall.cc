@@ -409,10 +409,13 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	}
 
 	// soft-remove the installed items which have been recommended by the to-be-uninstalled
-	// but not when upgrade
+	// but not when upgrade, and not for packages
 
-        if (_upgraded_to)		// its an upgrade
+        if (_upgraded_to				// its an upgrade
+	    || _item->kind() == ResTraits<Package>::kind)
+	{
 	    goto finished;
+	}
 
 	CapSet recomments = _item->dep (Dep::RECOMMENDS);
 	for (CapSet::const_iterator iter = recomments.begin(); iter != recomments.end(); iter++) {
