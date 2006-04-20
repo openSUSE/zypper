@@ -411,7 +411,7 @@ QueueItemUninstall::process (ResolverContext_Ptr context, QueueItemList & qil)
 	// soft-remove the installed items which have been recommended by the to-be-uninstalled
 	// but not when upgrade
 
-        if (!_upgraded_to)
+        if (_upgraded_to)		// its an upgrade
 	    goto finished;
 
 	CapSet recomments = _item->dep (Dep::RECOMMENDS);
