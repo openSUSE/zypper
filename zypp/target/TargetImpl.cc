@@ -312,7 +312,7 @@ namespace zypp
             if (success
 		&& !policy_r.dryRun())
 	    {
-	      it->status().setTransact( false, ResStatus::USER );
+	      it->status().resetTransact( ResStatus::USER );
             }
             progress.disconnect();
 	    p->source().releaseFile( p->location(), p->mediaId() );
@@ -336,7 +336,7 @@ namespace zypp
 	    if (success
 		&& !policy_r.dryRun())
 	    {
-	      it->status().setTransact( false, ResStatus::USER );
+	      it->status().resetTransact( ResStatus::USER );
 	    }
             progress.disconnect();
           }
@@ -392,10 +392,10 @@ namespace zypp
                 WAR << "Install of Resolvable from storage failed" << endl;
 	      }
               if (success)
-		it->status().setTransact( false, ResStatus::USER );
+		it->status().resetTransact( ResStatus::USER );
             }
             else
-            {
+            {					// isToBeUninstalled
               bool success = false;
               try
               {
@@ -438,7 +438,7 @@ namespace zypp
                 WAR << "Uninstall of Resolvable from storage failed" << endl;
               }
 	      if (success)
-		it->status().setTransact( false, ResStatus::USER );
+		it->status().resetTransact( ResStatus::USER );
             }
           }
           else
@@ -545,7 +545,7 @@ strip_obsoleted_to_delete( TargetImpl::PoolItemList & deleteList_r,
 	  // if so, delay package deletion
 	  DBG << "Ignore appl_delete (should be obsoleted): " << ipkg << endl;
 	  delayPkg = true;
-	  ipkg.status().setTransact( false, ResStatus::USER );
+	  ipkg.status().resetTransact( ResStatus::USER );
 	  break;
 	}
       }
