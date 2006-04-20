@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Apr 20 13:14:25 CEST 2006 - kkaempf@suse.de
+
+- recursively soft-uninstall recommended package on real uninstall,
+  not on update (#167603)
+- rev 3155
+
+-------------------------------------------------------------------
 Thu Apr 20 13:01:28 CEST 2006 - dmacvicar@suse.de
 
 - fix #167605 (importing keys to rpm multiple times due to
