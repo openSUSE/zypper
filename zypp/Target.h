@@ -64,21 +64,6 @@ namespace zypp
     /** Refference to the RPM database */
     target::rpm::RpmDb & rpmDb();
 
-    /** Commit changes in the pool
-     *  \param medianr 0 = all/any media
-     *                 > 0 means only the given media number
-     * return number of successfully committed resolvables
-     *
-     * \todo Interface to commit should be ZYpp::commit( medianr ). This call
-     * should be removed from the targets public interface, as soon as ZYpp::Impl
-     * is able to call Target::Impl.
-    */
-    int commit( ResPool pool_r, int medianr,
-                PoolItemList & errors_r,
-                PoolItemList & remaining_r,
-                PoolItemList & srcremaining_r,
-                bool dry_run = false ) ZYPP_DEPRECATED;
-
     /** If the package is installed and provides the file
      Needed to evaluate split provides during Resolver::Upgrade() */
     bool providesFile (const std::string & name_str, const std::string & path_str) const;

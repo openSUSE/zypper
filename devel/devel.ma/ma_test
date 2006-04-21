@@ -32,4 +32,5 @@ fi
 $MAKE $PRG || exit 1
 
 export ZYPP_LOGFILE=-
+export ZYPP_KEYRING_DEFAULT_ACCEPT_ALL=1
 ./$PRG "$@" 2> $LPIPE

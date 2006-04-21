@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Apr 21 16:36:14 CEST 2006 - ma@suse.de
+
+- Removed deprecated oldstyle commit methods.
+
+-------------------------------------------------------------------
 Fri Apr 21 15:58:14 CEST 2006 - mvidner@suse.cz
 
 - when installing a xml-store resolvable (all except package,

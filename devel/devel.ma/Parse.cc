@@ -1,27 +1,15 @@
 #include <ctime>
-
 #include <iostream>
-#include <list>
-#include <map>
-#include <set>
-
-#include "Measure.h"
-#include "Printing.h"
 #include "Tools.h"
 
-#include <zypp/Digest.h>
-#include <zypp/KeyRing.h>
-
-#include <zypp/base/Logger.h>
-#include <zypp/base/LogControl.h>
-#include <zypp/base/String.h>
-#include <zypp/base/Exception.h>
 #include <zypp/base/PtrTypes.h>
-#include <zypp/base/Iterator.h>
-#include <zypp/base/Algorithm.h>
-#include <zypp/base/Functional.h>
+#include <zypp/base/Exception.h>
 #include <zypp/base/ProvideNumericId.h>
-#include <zypp/base/ProvideNumericId.h>
+
+#include "zypp/ZYppFactory.h"
+#include "zypp/ResPoolProxy.h"
+#include <zypp/SourceManager.h>
+#include <zypp/SourceFactory.h>
 
 #include "zypp/NVRAD.h"
 #include "zypp/ResPool.h"
@@ -31,14 +19,6 @@
 #include "zypp/Language.h"
 #include "zypp/NameKindProxy.h"
 
-#include <zypp/SourceManager.h>
-#include <zypp/SourceFactory.h>
-#include <zypp/source/susetags/SuseTagsImpl.h>
-
-#include "zypp/ZYppFactory.h"
-#include "zypp/ResPoolProxy.h"
-#include "zypp/ResPoolProxy.h"
-#include "zypp/target/rpm/RpmDb.h"
 
 using namespace std;
 using namespace zypp;
@@ -48,8 +28,6 @@ using namespace zypp::functor;
 ///////////////////////////////////////////////////////////////////
 
 static const Pathname sysRoot( "/Local/ROOT" );
-static const Url      instSrc( "dir:/Local/SLES10" );
-//static const Url      instSrc( "dir:/Local/FACTORY" );
 
 ///////////////////////////////////////////////////////////////////
 
@@ -270,81 +248,13 @@ struct StatusReset : public SetTransactValue
 };
 
 
-inline bool keyDef( bool def )
-{ return def; }
-
-struct DigestReceive : public zypp::callback::ReceiveReport<zypp::DigestReport>
+inline bool selectForTransact( const NameKindProxy & nkp )
 {
-  virtual bool askUserToAcceptNoDigest( const zypp::Pathname & file )
-  {
-    bool def = zypp::DigestReport::askUserToAcceptNoDigest( file );
-    SEC << "AcceptNoDigest " << file << " (" << def << ')' << endl;
-    return keyDef( def );
-  }
-};
-struct KeyRingReceive : public zypp::callback::ReceiveReport<zypp::KeyRingReport>
-{
-  virtual bool askUserToTrustKey( const std::string & keyid,
-                                  const std::string & keyname,
-                                  const std::string & keydetails )
-  {
-    bool def = zypp::KeyRingReport::askUserToTrustKey( keyid, keyname, keydetails );
-    SEC << "TrustKey " << keyid << ' ' << keyname << ' ' << keydetails << " (" << def << ')' << endl;
-    return keyDef( def );
-  }
+  if ( nkp.availableEmpty() )
+    return false;
 
-  virtual bool askUserToAcceptUnknownKey( const zypp::Pathname & path,
-                                          const std::string & keyid,
-                                          const std::string & keyname )
-  {
-    bool def = zypp::KeyRingReport::askUserToAcceptUnknownKey( path, keyid, keyname );
-    SEC << "AcceptUnknownKey " << path << ' ' << keyid << ' ' << keyname << " (" << def << ')' << endl;
-    return keyDef( def );
-  }
-
-  virtual bool askUserToAcceptUnsignedFile( const zypp::Pathname & file )
-  {
-    bool def = zypp::KeyRingReport::askUserToAcceptUnsignedFile( file );
-    SEC << "AcceptUnsignedFile " << file << " (" << def << ')' << endl;
-    return keyDef( def );
-  }
-
-  virtual bool askUserToAcceptVerificationFailed( const zypp::Pathname & file,
-                                                  const std::string & keyid,
-                                                  const std::string & keyname )
-  {
-    bool def = zypp::KeyRingReport::askUserToAcceptVerificationFailed( file, keyid, keyname );
-    SEC << "AcceptVerificationFailed " << file << ' ' << keyid << ' ' << keyname << " (" << def << ')' << endl;
-    return keyDef( def );
-  }
-};
-
-struct KeyRingCallbacks
-{
-  KeyRingCallbacks()
-  {
-    _digestReceive.connect();
-    _keyRingReceive.connect();
-  }
-  ~KeyRingCallbacks()
-  {
-    _digestReceive.disconnect();
-    _keyRingReceive.disconnect();
-  }
-
-  DigestReceive _digestReceive;
-  KeyRingReceive _keyRingReceive;
-
-};
-static KeyRingCallbacks cbs;
-
-void checkSource( const Url & url )
-{
-  Source_Ref src( createSource( url ) );
+  return nkp.availableBegin()->status().setTransact( true, ResStatus::USER );
 }
-void checkSource( const std::string & urlstr )
-{ checkSource( Url(urlstr) ); }
-
 
 /******************************************************************
 **
@@ -355,66 +265,27 @@ int main( int argc, char * argv[] )
 {
   //zypp::base::LogControl::instance().logfile( "xxx" );
   INT << "===[START]==========================================" << endl;
+
   ResPool pool( getZYpp()->pool() );
 
-  checkSource( "ftp://ftp.gwdg.de/pub/linux/misc/suser-guru/rpm/10.0" );
-  return 0;
+  getZYpp()->initTarget( sysRoot );
+  getZYpp()->addResolvables( getZYpp()->target()->resolvables(), true );
+  INT << "Added target: " << pool << endl;
 
-  if ( 0 )
-    {
-      Measure x( "initTarget " + sysRoot.asString() );
-      getZYpp()->initTarget( sysRoot );
-      getZYpp()->addResolvables( getZYpp()->target()->resolvables(), true );
-      INT << "Added target: " << pool << endl;
-    }
-
-  if ( 0 ) {
-    SourceManager::sourceManager()->restore( sysRoot );
-    if ( SourceManager::sourceManager()->allSources().empty() )
-      {
-        Source_Ref src( createSource( instSrc ) );
-        SourceManager::sourceManager()->addSource( src );
-        SourceManager::sourceManager()->store( sysRoot, true );
-      }
-
-    Source_Ref src( *SourceManager::sourceManager()->Source_begin() );
-    getZYpp()->addResolvables( src.resolvables() );
-    INT << "Added source: " << pool << endl;
-  }
-
-
-  Source_Ref src2( createSource( "dir:/Local/SUSE-Linux-10.1-Build_830-i386/CD1" ) );
-  Source_Ref src1( createSource( "dir:/Local/SUSE-Linux-10.1-Build_830-Addon-BiArch/CD1" ) );
-  INT << "Pool: " << pool << endl;
+  Source_Ref src1( createSource( "dir:/mounts/machcd2/CDs/SLES-10-CD-i386-Beta10/CD1" ) );
+  Source_Ref src2( createSource( "dir:/mounts/machcd2/kukuk/sles10-sp-i386/CD1" ) );
   getZYpp()->addResolvables( src1.resolvables() );
-  INT << "Added source1: " << pool << endl;
   getZYpp()->addResolvables( src2.resolvables() );
-  INT << "Added source2: " << pool << endl;
+  INT << "Pool: " << pool << endl;
 
-  vdumpPoolStats( INT,
+  selectForTransact( nameKindProxy<Pattern>( pool, "default" ) );
+  selectForTransact( nameKindProxy<Pattern>( pool, "x11" ) );
+  selectForTransact( nameKindProxy<Pattern>( pool, "kde" ) );
+  selectForTransact( nameKindProxy<Pattern>( pool, "OOo" ) );
+
+  vdumpPoolStats( INT << "Transacting: ",
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
-  MIL << endl;
-  std::for_each( pool.begin(), pool.end(), SetTransactValue( ResStatus::TRANSACT, ResStatus::USER ) );
-  vdumpPoolStats( INT,
-                  make_filter_begin<resfilter::ByTransact>(pool),
-                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
-  MIL << endl;
-  std::for_each( pool.begin(), pool.end(), StatusReset() );
-  vdumpPoolStats( INT,
-                  make_filter_begin<resfilter::ByTransact>(pool),
-                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
-  MIL << endl;
-
-  return 0;
-
-  NameKindProxy s( nameKindProxy<Selection>( pool, "default" ) );
-  MIL << s << endl;
-  if ( ! s.availableEmpty() )
-    {
-      PoolItem def( * s.availableBegin() );
-      def.status().setTransact( true, ResStatus::USER );
-    }
 
   bool eres, rres;
   {
@@ -424,51 +295,25 @@ int main( int argc, char * argv[] )
   }
   MIL << "est " << eres << " slv " << rres << endl;
 
-
-  for_each( pool.byKindBegin<Package>(), pool.byKindEnd<Package>(),
-            PoolItemSelect() );
-  INT << "FIN: " << pool << endl;
-  vdumpPoolStats( INT,
+  vdumpPoolStats( INT << "Transacting: ",
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
-  if ( 1 )
-    {
-      PoolItemList errors_r;
-      PoolItemList remaining_r;
-      PoolItemList srcremaining_r;
-      commit( pool, 0, errors_r, remaining_r, srcremaining_r, false );
 
-      dumpPoolStats( WAR << "remaining_r ", remaining_r.begin(), remaining_r.end() ) << endl;
-      dumpPoolStats( WAR << "srcremaining_r ", srcremaining_r.begin(), srcremaining_r.end() ) << endl;
+  ZYppCommitPolicy policy;
+  policy.rpmNoSignature();
+  if ( 0 )
+    {
+      ZYppCommitResult res( getZYpp()->commit( policy ) );
     }
   else
     {
-      CollectTransacting toTransact;
-      std::for_each( make_filter_begin<resfilter::ByTransact>(pool),
-                     make_filter_end<resfilter::ByTransact>(pool),
-                     functor::functorRef<void,PoolItem>(toTransact) );
-      MIL << toTransact;
+      for ( unsigned mnr = 1; mnr < 6; ++mnr )
+        {
+          policy.restrictToMedia( mnr );
+          ZYppCommitResult res( getZYpp()->commit( policy ) );
+        }
     }
-
-#if 0
-  Source_Ref src( *SourceManager::sourceManager()->Source_begin() );
-  const std::list<Pathname> srcKeys( src.publicKeys() );
-  MIL << src << endl;
-  DBG << srcKeys << endl;
-
-  target::rpm::RpmDb rpm;
-  rpm.initDatabase( sysRoot );
-  std::set<Edition> rpmKeys( rpm.pubkeys() );
-  MIL << rpm << endl;
-  DBG << rpmKeys << endl;
-
-  ResPool pool( getZYpp()->pool() );
-  getZYpp()->addResolvables( src.resolvables() );
-  SEC << pool << endl;
-
-  rpm.closeDatabase();
-#endif
 
   INT << "===[END]============================================" << endl << endl;
   return 0;

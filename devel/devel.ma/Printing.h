@@ -13,46 +13,6 @@
 #include <zypp/base/Functional.h>
 
 ///////////////////////////////////////////////////////////////////
-#if 0
-///////////////////////////////////////////////////////////////////
-struct FormatStream
-{
-  explicit
-  FormatStream( std::ostream & stream_r )
-  : _stream( stream_r )
-  {}
-
-  FormatStream & operator<<( std::ostream & (*fnc)( std::ostream & ) )
-  { _stream << fnc; return *this; }
-
-  template<class _Tp>
-    FormatStream & operator<<( const _Tp & obj )
-    { _stream << "@(" << obj << ")@"; return *this; }
-
-  std::ostream & _stream;
-};
-///////////////////////////////////////////////////////////////////
-#undef XXX
-#undef DBG
-#undef MIL
-#undef WAR
-#undef ERR
-#undef SEC
-#undef INT
-#undef USR
-
-#define XXX FormatStream(_XXX( ZYPP_BASE_LOGGER_LOGGROUP ))
-#define DBG FormatStream(_DBG( ZYPP_BASE_LOGGER_LOGGROUP ))
-#define MIL FormatStream(_MIL( ZYPP_BASE_LOGGER_LOGGROUP ))
-#define WAR FormatStream(_WAR( ZYPP_BASE_LOGGER_LOGGROUP ))
-#define ERR FormatStream(_ERR( ZYPP_BASE_LOGGER_LOGGROUP ))
-#define SEC FormatStream(_SEC( ZYPP_BASE_LOGGER_LOGGROUP ))
-#define INT FormatStream(_INT( ZYPP_BASE_LOGGER_LOGGROUP ))
-#define USR FormatStream(_USR( ZYPP_BASE_LOGGER_LOGGROUP ))
-///////////////////////////////////////////////////////////////////
-#endif
-///////////////////////////////////////////////////////////////////
-
 
 template<class _Tp>
   struct PrintOn : public std::unary_function<_Tp, bool>

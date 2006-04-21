@@ -79,8 +79,6 @@ namespace zypp
 
     void setPartitions(const DiskUsageCounter::MountPointSet &mp);
 
-    /** NOOP */
-    ZYPP_DEPRECATED void reset() {}
   public:
     /**
      * \throws Exception
@@ -108,14 +106,6 @@ namespace zypp
      * \throws Exception
     */
     ZYppCommitResult commit( const ZYppCommitPolicy & policy_r );
-
-    ZYPP_DEPRECATED ZYppCommitResult commit( int medianr_r, bool dry_run = false )
-    {
-      ZYppCommitPolicy policy;
-      policy.restrictToMedia( medianr_r ).dryRun( dry_run );
-      return commit( policy );
-    }
-
 
   public:
     /** */
