@@ -48,8 +48,8 @@ namespace zypp
       )
       :	_category(parsed.type),
 	_vendor(parsed.vendor),
-	_source(source_r),
-	_short_name(parsed.short_name)
+	_short_name(parsed.short_name),
+	_source(source_r)
       {}
 
       std::string YUMProductImpl::category() const
