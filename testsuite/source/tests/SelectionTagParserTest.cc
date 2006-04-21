@@ -1,5 +1,6 @@
 #include <iostream>
 #include "zypp/source/susetags/SelectionTagFileParser.h"
+#include "zypp/target/store/serialize.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/LogControl.h"
 #include "zypp/base/Exception.h"
@@ -8,24 +9,31 @@
 using namespace std;
 using namespace zypp;
 
-int main()
-{
-  Selection::Ptr selection;
+void usage() {
+  std::cerr << "SelectionTagFileParserTest usage: "<< endl
+      << "SelectionTagFileParserTest file.sel" << endl;
+}
 
-  zypp::base::LogControl::instance().logfile( "-" );
+int main(int argc, char **argv)
+{
+  if (argc < 2)
+  {
+    usage();
+    return 2;
+  }
+  
+  Selection::constPtr selection;
+
+  //zypp::base::LogControl::instance().logfile( "-" );
   Source_Ref s;
 
-  try {
-  selection = zypp::source::susetags::parseSelection( s, Pathname("selfiles/default.sel") );
-  cout << *selection << endl;
-  selection = zypp::source::susetags::parseSelection( s, Pathname("selfiles/Office.sel") );
-  cout << *selection << endl;
-  selection = zypp::source::susetags::parseSelection( s, Pathname("selfiles/X11.sel") );
-  cout << *selection << endl;
-  selection = zypp::source::susetags::parseSelection( s, Pathname("selfiles/NOTTHERE.sel") );
-  cout << *selection << endl;
+  try
+  {
+    selection = zypp::source::susetags::parseSelection( s, Pathname(argv[1]) );
+    cout << zypp::storage::toXML(selection) << endl;
   }
-  catch (Exception & excpt_r) {
+  catch (Exception & excpt_r)
+  {
     ZYPP_CAUGHT (excpt_r);
   }
   return 0;
