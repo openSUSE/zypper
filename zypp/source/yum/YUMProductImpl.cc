@@ -50,7 +50,9 @@ namespace zypp
 	_vendor(parsed.vendor),
 	_short_name(parsed.short_name),
 	_source(source_r)
-      {}
+      {
+	_category = source_r.baseSource() ? "base" : "add-on";
+      }
 
       std::string YUMProductImpl::category() const
       { return _category; }

@@ -44,13 +44,26 @@ media::MediaManager media_mgr;
       static Source_Ref::Impl_Ptr createSourceImpl( const media::MediaId & media_r,
                                                     const Pathname & path_r,
                                                     const std::string & alias_r,
-                                                    const Pathname & cache_dir_r )
+                                                    const Pathname & cache_dir_r)
       {
         Source_Ref::Impl_Ptr impl( new _SourceImpl );
-        impl->factoryCtor( media_r, path_r, alias_r, cache_dir_r );
+        impl->factoryCtor( media_r, path_r, alias_r, cache_dir_r, false );
         return impl;
       }
 
+    /** Try to create a \a _SourceImpl kind of Source.
+     * \throw EXCEPTION if creation fails
+    */
+    template<class _SourceImpl>
+      static Source_Ref::Impl_Ptr createBaseSourceImpl( const media::MediaId & media_r,
+                                                    const Pathname & path_r,
+                                                    const std::string & alias_r,
+                                                    const Pathname & cache_dir_r)
+      {
+        Source_Ref::Impl_Ptr impl( new _SourceImpl );
+        impl->factoryCtor( media_r, path_r, alias_r, cache_dir_r, true );
+        return impl;
+      }
 
   };
   ///////////////////////////////////////////////////////////////////
@@ -111,7 +124,7 @@ media::MediaManager media_mgr;
     media_mgr.release(id);
   }
 
-  Source_Ref SourceFactory::createFrom( const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r )
+  Source_Ref SourceFactory::createFrom( const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r, const bool base_source )
   {
     if (! url_r.isValid())
       ZYPP_THROW( Exception("Empty URL passed to SourceFactory") );
@@ -139,7 +152,9 @@ media::MediaManager media_mgr;
     try
     {
       MIL << "Trying the YUM source" << endl;
-      Source_Ref::Impl_Ptr impl( Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r) );
+      Source_Ref::Impl_Ptr impl( base_source
+	? Impl::createBaseSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r)
+	: Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r) );
       MIL << "Found the YUM source" << endl;
       
       report->endProbe (url_r);
@@ -154,8 +169,9 @@ media::MediaManager media_mgr;
     try
     {
       MIL << "Trying the SUSE tags source" << endl;
-#warning TODO pass cache_dir_r once constructor adapted
-      Source_Ref::Impl_Ptr impl( Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r) );
+      Source_Ref::Impl_Ptr impl( base_source
+	? Impl::createBaseSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r)
+	: Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r) );
       MIL << "Found the SUSE tags source" << endl;
       
       report->endProbe (url_r);
@@ -175,7 +191,7 @@ media::MediaManager media_mgr;
     return Source_Ref(); // not reached!!
   }
 
-  Source_Ref SourceFactory::createFrom( const std::string & type, const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r )
+  Source_Ref SourceFactory::createFrom( const std::string & type, const Url & url_r, const Pathname & path_r, const std::string & alias_r, const Pathname & cache_dir_r, const bool base_source )
   {
     if (! url_r.isValid())
       ZYPP_THROW( Exception("Empty URL passed to SourceFactory") );
@@ -207,12 +223,16 @@ media::MediaManager media_mgr;
 
       if( type == yum::YUMSourceImpl::typeString() ) {
         MIL << "Trying the YUM source" << endl;
-        impl = Source_Ref::Impl_Ptr( Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r) );
+        impl = Source_Ref::Impl_Ptr( base_source
+	  ? Impl::createBaseSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r)
+	  : Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r) );
         MIL << "Found the YUM source" << endl;
       } else if ( type == susetags::SuseTagsImpl::typeString() ) {
         MIL << "Trying the SUSE tags source" << endl;
 #warning TODO pass cache_dir_r once constructor adapted
-        impl = Source_Ref::Impl_Ptr( Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r) );
+        impl = Source_Ref::Impl_Ptr( base_source
+	  ? Impl::createBaseSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r)
+	  : Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r) );
         MIL << "Found the SUSE tags source" << endl;
       } else {
 	ZYPP_THROW( Exception ("Cannot create source of unknown type '" + type + "'"));

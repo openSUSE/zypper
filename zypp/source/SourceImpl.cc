@@ -77,6 +77,7 @@ namespace zypp
     , _priority_unsubscribed (0)
     , _subscribed(false)
     , _res_store_initialized(false)
+    , _base_source(false)
     {
     }
 
@@ -88,7 +89,8 @@ namespace zypp
     void SourceImpl::factoryCtor( const media::MediaId & media_r,
                                   const Pathname & path_r,
                                   const std::string & alias_r,
-                                  const Pathname cache_dir_r )
+                                  const Pathname cache_dir_r,
+				  const bool base_source)
     {
       _media_set = new MediaSet( selfSourceRef() );
       _url = media_mgr.url( media_r );
@@ -97,6 +99,7 @@ namespace zypp
       _alias     = alias_r;
       _cache_dir = cache_dir_r;
       _subscribed = true;
+      _base_source = base_source;
 
       // for sources which are neither CD nor DVD we enable autorefresh by default
       _autorefresh = media::MediaAccess::canBeVolatile( _url );

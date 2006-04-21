@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 21 22:47:18 CEST 2006 - jsrain@suse.de
+
+- initialize the product category according to source (#168061)
+- rev 3172
+
+-------------------------------------------------------------------
 Fri Apr 21 18:32:00 CEST 2006 - mvidner@suse.cz
 
 - delete only one older version of a xml-store resolvable

@@ -75,7 +75,8 @@ namespace zypp
       void factoryCtor( const media::MediaId & media_r,
                         const Pathname & path_r = "/",
                         const std::string & alias_r = "",
-                        const Pathname cache_dir_r = "");
+                        const Pathname cache_dir_r = "",
+			const bool base_source = false);
 
       /** SourceImpl MediaVerifier. */
       class Verifier;
@@ -171,6 +172,8 @@ namespace zypp
       Url url (void) const;
       void setUrl( const Url & url );
       bool remote () const;
+      bool baseSource () const
+      { return _base_source; }
 
       const Pathname & path (void) const;
 
@@ -235,6 +238,8 @@ namespace zypp
       unsigned _priority_unsubscribed;
       /** subscribed?, solver prefers subscribed sources */
       bool _subscribed;
+      /** source contains base product? */
+      bool _base_source;
 
       ///////////////////////////////////////////////////////////////////
       // no playground below this line ;)

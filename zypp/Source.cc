@@ -158,6 +158,9 @@ namespace zypp
   const Pathname & Source_Ref::path (void) const
   { return _pimpl->path (); }
 
+  const bool Source_Ref::baseSource() const
+  { return _pimpl->baseSource(); }
+
   const Pathname & Source_Ref::cacheDir (void) const
   { return _pimpl->cacheDir (); }
 

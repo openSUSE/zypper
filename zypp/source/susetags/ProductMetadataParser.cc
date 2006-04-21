@@ -238,6 +238,8 @@ namespace zypp
         }
 
 	prodImpl->_source = source_r;
+	prodImpl->_category = source_r.baseSource() ? "base" : "add-on";
+	INT << "Product category set to " << prodImpl->_category << endl;
       }
 
       void ProductMetadataParser::parseLine( const string &key, const string &modif, const string &value, map< string, list<string> > &container)

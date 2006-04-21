@@ -171,6 +171,7 @@ namespace zypp
     void setUrl( const Url & url );
     bool remote() const;
     const Pathname & path (void) const;
+    const bool baseSource() const;
     //@}
 
   public:
