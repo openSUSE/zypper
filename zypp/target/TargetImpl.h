@@ -108,8 +108,10 @@ namespace zypp
       void enableStorage(const Pathname &root_r);
 
       /** Commit ordered changes
-	  return uncommitted ones (due to error) */
-      PoolItemList commit( const PoolItemList & items_r, const ZYppCommitPolicy & policy_r );
+       *  @param pool_r only needed for #160792
+       *  @return uncommitted ones (due to error)
+       */
+      PoolItemList commit( const PoolItemList & items_r, const ZYppCommitPolicy & policy_r, const ResPool & pool_r );
 
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const

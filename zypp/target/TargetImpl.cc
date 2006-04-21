@@ -29,9 +29,11 @@
 #include "zypp/target/TargetImpl.h"
 #include "zypp/target/TargetCallbackReceiver.h"
 
+#include "zypp/solver/detail/Helper.h"
 #include "zypp/solver/detail/InstallOrder.h"
 
 using namespace std;
+using zypp::solver::detail::Helper;
 using zypp::solver::detail::InstallOrder;
 
 ///////////////////////////////////////////////////////////////////
@@ -155,11 +157,11 @@ namespace zypp
         MIL << "Restrict to media number " << policy_r.restrictToMedia() << endl;
       }
 
-      commit (to_uninstall, policy_r );
+      commit (to_uninstall, policy_r, pool_r );
 
       if (policy_r.restrictToMedia() == 0) {			// commit all
-        result._remaining = commit( to_install, policy_r );
-        result._srcremaining = commit( to_srcinstall, policy_r );
+        result._remaining = commit( to_install, policy_r, pool_r );
+        result._srcremaining = commit( to_srcinstall, policy_r, pool_r );
       }
       else
       {
@@ -180,7 +182,7 @@ namespace zypp
             current_install.push_back( *it );
           }
         }
-        TargetImpl::PoolItemList bad = commit( current_install, policy_r );
+        TargetImpl::PoolItemList bad = commit( current_install, policy_r, pool_r );
         result._remaining.insert(result._remaining.end(), bad.begin(), bad.end());
 
         for (TargetImpl::PoolItemList::iterator it = to_srcinstall.begin(); it != to_srcinstall.end(); ++it)
@@ -196,7 +198,7 @@ namespace zypp
             current_srcinstall.push_back( *it );
           }
         }
-        bad = commit( current_srcinstall, policy_r );
+        bad = commit( current_srcinstall, policy_r, pool_r );
         result._srcremaining.insert(result._srcremaining.end(), bad.begin(), bad.end());
       }
 
@@ -208,7 +210,8 @@ namespace zypp
 
     TargetImpl::PoolItemList
     TargetImpl::commit( const TargetImpl::PoolItemList & items_r,
-                        const ZYppCommitPolicy & policy_r )
+                        const ZYppCommitPolicy & policy_r,
+			const ResPool & pool_r )
     {
       TargetImpl::PoolItemList remaining;
 
@@ -382,6 +385,14 @@ namespace zypp
 		}
                 else
                 {
+		  // #160792 do not just add, also remove older versions
+		  if (true) // !installOnly - only on Package?!
+		  {
+		    for (PoolItem_Ref old = Helper::findInstalledItem (pool_r, *it); old; )
+		    {
+		      _storage.deleteObject(old.resolvable());
+		    }
+		  }
                   _storage.storeObject(it->resolvable());
                 }
                 success = true;

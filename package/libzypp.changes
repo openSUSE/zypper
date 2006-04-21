@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Apr 21 12:17:27 CEST 2006 - mvidner@suse.cz
+
+- when installing a xml-store resolvable (all except package,
+  message, script), delete older versions (#160792).
+- rev 3164
+
+-------------------------------------------------------------------
 Thu Apr 20 14:10:41 CEST 2006 - kkaempf@suse.de
 
 - properly clear transaction flag after successful commit
