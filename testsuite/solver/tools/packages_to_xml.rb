@@ -128,6 +128,7 @@ class Package
 		add_dependencies "suggests", suggests
 		add_dependencies "enhances", enhances
 		add_dependencies "supplements", supplements
+		add_dependencies "recommends", recommends
 
 		@channel.puts "</package>"
 	end
