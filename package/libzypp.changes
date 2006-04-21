@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 21 18:32:00 CEST 2006 - mvidner@suse.cz
+
+- delete only one older version of a xml-store resolvable
+  (half-baked, but the previous attempt was charred)
+
+-------------------------------------------------------------------
 Fri Apr 21 17:49:18 CEST 2006 - jsrain@suse.de
 
 - moved license_to_confirm to primary.xml
