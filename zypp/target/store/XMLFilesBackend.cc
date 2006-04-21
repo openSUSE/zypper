@@ -923,7 +923,7 @@ XMLFilesBackend::createSelection( const zypp::parser::xmlstore::XMLPatternData &
     impl->_category = parsed.category.text();
 
     // Collect basic Resolvable data
-    NVRAD dataCollect( parsed.name, Edition::noedition, Arch_noarch, createDependencies( parsed, ResTraits<Pattern>::kind));
+    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch, createDependencies( parsed, ResTraits<Pattern>::kind));
     Selection::Ptr selection = detail::makeResolvableFromImpl( dataCollect, impl );
     return selection;
   }
