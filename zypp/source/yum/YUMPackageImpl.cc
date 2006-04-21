@@ -73,7 +73,7 @@ namespace zypp
 #endif
       {
 	_description.setText(parsed.description);
-	_license_to_confirm = other.license_to_confirm.asString();
+	_license_to_confirm = parsed.license_to_confirm.asString();
 	for (std::list<FileData>::const_iterator it = filelist.files.begin();
 	     it != filelist.files.end();
 	     it++)

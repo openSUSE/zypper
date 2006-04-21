@@ -301,7 +301,9 @@ namespace zypp {
           << data.dirSizes << endl
           << "freshens: " << endl
           << data.freshens << endl
-          << "install-only: '" << data.installOnly << "'" << endl;
+          << "install-only: '" << data.installOnly << "'" << endl
+	  << "License to confirm:" << endl
+	  << data.license_to_confirm << endl;
         return out;
       }
 
@@ -367,9 +369,7 @@ namespace zypp {
           << "package: " << data.name << " "
           << data.epoch << "-" << data.ver << "-" << data.rel << endl
           << "Changelog:" << endl
-          << data.changelog << endl
-	  << "License to confirm:" << endl
-	  << data.license_to_confirm << endl;
+          << data.changelog << endl;
         return out;
       }
 

@@ -228,6 +228,10 @@ namespace zypp {
             else if (name == "install_only") {
               dataPtr->installOnly = true;
             }
+	    else if (name == "license_to_confirm")
+	    {
+	      dataPtr->license_to_confirm.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
+	    }
             else {
               WAR << "YUM <format> contains the unknown element <" << name << "> "
                 << _helper.positionInfo(child) << ", skipping" << endl;

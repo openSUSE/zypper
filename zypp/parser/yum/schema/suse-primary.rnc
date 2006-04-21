@@ -49,7 +49,8 @@ suse-additional-format =
     element-media?,
     element-dirsizes?,
     element-freshens?,
-    element-install_only?
+    element-install_only?,
+    element license_to_confirm { localized-string }*
 
 suse-provides =
     usual-entry-or-capability+

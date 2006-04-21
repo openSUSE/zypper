@@ -339,6 +339,7 @@ namespace zypp {
         std::string  media;
         std::list<YUMDirSize> dirSizes;
         bool installOnly;
+        TranslatedText license_to_confirm;
       };
 
       /**
@@ -410,7 +411,6 @@ namespace zypp {
         std::string ver;
         std::string rel;
         std::list<ChangelogEntry> changelog;
-        TranslatedText license_to_confirm;
       };
 
     /* ** YUMPatchData not yet finalized **/

@@ -129,6 +129,11 @@
     <optional>
       <ref name="element-install_only"/>
     </optional>
+    <zeroOrMore>
+      <element name="license_to_confirm">
+        <ref name="localized-string"/>
+      </element>
+    </zeroOrMore>
   </define>
   <define name="suse-provides">
     <oneOrMore>

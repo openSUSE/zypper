@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 21 17:49:18 CEST 2006 - jsrain@suse.de
+
+- moved license_to_confirm to primary.xml
+- rev 3170
+
+-------------------------------------------------------------------
 Fri Apr 21 16:36:14 CEST 2006 - ma@suse.de
 
 - Removed deprecated oldstyle commit methods.
