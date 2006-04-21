@@ -48,7 +48,7 @@ QueueItemBranch::dumpOn( std::ostream & os ) const
     if (!_label.empty()) {
 	os << _label;
     }
-    os << _possible_qitems.size() << " items." << endl << "\t";
+    os << ", " << _possible_qitems.size() << " items." << endl << "\t";
     os << _possible_qitems << endl << "\t";
     os << "]";
     return os;
