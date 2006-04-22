@@ -383,7 +383,7 @@ namespace zypp
 		    ERR << "Do script not defined" << endl;
 		  }
 		}
-                else
+                else	// this is most probably wrong, see #168610
                 {
 		  // #160792 do not just add, also remove older versions
 		  if (true) // !installOnly - only on Package?!
