@@ -426,6 +426,7 @@ namespace zypp
 		  ! other.atEnd();
 		  ++other)
 	    {
+		if (*other == NULL) continue;	// skip incompatible archs
                 Arch arch;
                 if (!(*other)->arch.empty())
                   arch = Arch((*other)->arch);
@@ -459,13 +460,12 @@ namespace zypp
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
 	    YUMPrimaryParser prim(st, "");
+
 	    for (;
 		  !prim.atEnd();
 		  ++prim)
 	    {
 	      if (*prim == NULL) continue;	// incompatible arch detected during parsing
-
-//              MIL << "found package "<< (*prim)->name << std::endl;
 
                 Arch arch;
                 if (!(*prim)->arch.empty())
