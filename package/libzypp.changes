@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Sun Apr 23 12:28:21 CEST 2006 - kkaempf@suse.de
+
+- If an installed package looses a dependency, the solver tries
+  to upgrade it. Limit the upgrade candidates to best arch, best
+  edition.
+- filter 'other' entries with incompatible arch in yum parser.
+- rev 3177
+
+-------------------------------------------------------------------
 Fri Apr 21 22:47:18 CEST 2006 - jsrain@suse.de
 
 - initialize the product category according to source (#168061)
