@@ -19,6 +19,7 @@
 #include <zypp/parser/XMLNodeIterator.h>
 #include <zypp/parser/LibXMLHelper.h>
 #include <list>
+#include <zypp/Arch.h>
 
 namespace zypp {
   namespace parser {
@@ -81,6 +82,7 @@ namespace zypp {
          * converts the xml stuff to c++ stuff and filters the right namespaces
          */
         LibXMLHelper _helper;
+	Arch _zypp_architecture;
       };
     } // namespace yum
   } // namespace parser

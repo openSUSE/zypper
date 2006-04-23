@@ -22,6 +22,7 @@
 #include <zypp/parser/LibXMLHelper.h>
 #include <zypp/base/Logger.h>
 #include <zypp/parser/yum/schemanames.h>
+#include <zypp/ZYppFactory.h>
 
 using namespace std;
 namespace zypp {
@@ -30,16 +31,19 @@ namespace zypp {
 
 
       YUMOtherParser::YUMOtherParser(istream &is, const string& baseUrl)
-      : XMLNodeIterator<YUMOtherData_Ptr>(is, baseUrl,OTHERSCHEMA)
+	: XMLNodeIterator<YUMOtherData_Ptr>(is, baseUrl,OTHERSCHEMA)
+	, _zypp_architecture( getZYpp()->architecture() )
       {
         fetchNext();
       }
 
       YUMOtherParser::YUMOtherParser()
+	: _zypp_architecture( getZYpp()->architecture() )
       { }
 
       YUMOtherParser::YUMOtherParser(YUMOtherData_Ptr& entry)
-      : XMLNodeIterator<YUMOtherData_Ptr>(entry)
+	: XMLNodeIterator<YUMOtherData_Ptr>(entry)
+	, _zypp_architecture( getZYpp()->architecture() )
       { }
 
 
@@ -73,6 +77,17 @@ namespace zypp {
         dataPtr->pkgId = _helper.attribute(dataNode,"pkgid");
         dataPtr->name = _helper.attribute(dataNode,"name");
         dataPtr->arch = _helper.attribute(dataNode,"arch");
+
+	try {
+	  if (!Arch(dataPtr->arch).compatibleWith( _zypp_architecture )) {
+	    return NULL;			// skip <package>, incompatible architecture
+	  }
+	}
+	catch( const Exception & excpt_r ) {
+	  ZYPP_CAUGHT( excpt_r );
+	  DBG << "Skipping malformed " << dataPtr->arch << endl;
+	  return NULL;
+	}
 
         for (xmlNodePtr child = dataNode->children;
              child != 0;
