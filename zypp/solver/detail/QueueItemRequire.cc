@@ -299,10 +299,12 @@ struct NoInstallableProviders
     }
 };
 
+typedef map<string, PoolItem_Ref> UpgradesMap;
+
 struct LookForUpgrades
 {
     PoolItem_Ref installed;
-    PoolItemList upgrades;
+    UpgradesMap upgrades;
 
     LookForUpgrades (PoolItem_Ref i)
 	: installed (i)
@@ -310,7 +312,22 @@ struct LookForUpgrades
 
     bool operator()( PoolItem_Ref provider )
     {
-	upgrades.push_front (provider);
+	UpgradesMap::iterator it = upgrades.find( provider->name() );
+
+	if (it != upgrades.end()) {				// provider with same name found
+	    int cmp = it->second->arch().compare( provider->arch() );
+	    if (cmp < 0) {						// new provider has better arch
+		it->second = provider;
+	    }
+	    else if (cmp == 0) {					// new provider has equal arch
+		if (it->second->edition().compare( provider->edition() ) < 0) {
+		    it->second = provider;				// new provider has better edition
+		}
+	    }
+	}
+	else {
+	    upgrades[provider->name()] = provider;
+	}
 	return true;
     }
 };
@@ -438,7 +455,7 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	//   prefer providers which enhance an installed or to-be-installed resolvables
 
 	if (num_providers > 1) {					// prefer to-be-installed providers
-	    MIL << "Have " << num_providers << " providers" << endl;
+	    MIL << "Have " << num_providers << " providers for " << _capability << endl;
 	    int to_be_installed = 0;
 	    int uninstalled = 0;
 	    std::map<std::string,PoolItem> language_freshens;
@@ -633,8 +650,8 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		branch_item->setLabel (label);
 		_DEBUG("Branching: " + label)
 
-		for (PoolItemList::const_iterator iter = info.upgrades.begin(); iter != info.upgrades.end(); iter++) {
-		    PoolItem_Ref upgrade_item = *iter;
+		for (UpgradesMap::const_iterator iter = info.upgrades.begin(); iter != info.upgrades.end(); ++iter) {
+		    PoolItem_Ref upgrade_item = iter->second;
 		    QueueItemInstall_Ptr install_item;
 
 		    if (context->itemIsPossible (upgrade_item)) {
@@ -670,15 +687,16 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 	    } /* if (info.upgrades) ... */
 
 	    if (!info.upgrades.empty()
-		&& branch_item->isEmpty ()) {
+		&& branch_item->isEmpty ())
+	    {
 
-		for (PoolItemList::const_iterator iter = info.upgrades.begin(); iter != info.upgrades.end(); iter++) {
+		for (UpgradesMap::const_iterator iter = info.upgrades.begin(); iter != info.upgrades.end(); ++iter) {
 		    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_NO_UPGRADE, _requiring_item, RESOLVER_INFO_PRIORITY_VERBOSE);
 		    if (iter == info.upgrades.begin()) {
-			misc_info->setOtherPoolItem (*iter);
+			misc_info->setOtherPoolItem( iter->second );
 		    }
-		    misc_info->addRelatedPoolItem (*iter);
-		    context->addInfo (misc_info);
+		    misc_info->addRelatedPoolItem( iter->second );
+		    context->addInfo( misc_info );
 
 		    explore_uninstall_branch = true;
 		}
@@ -693,7 +711,8 @@ QueueItemRequire::process (ResolverContext_Ptr context, QueueItemList & new_item
 		       && _requiring_item
 		       && _upgraded_item
 		       && codependent_items (_requiring_item, _upgraded_item)
-		       && !_lost_item) {
+		       && !_lost_item)
+	    {
 		explore_uninstall_branch = false;
 	    }
 
