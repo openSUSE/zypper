@@ -67,7 +67,7 @@ namespace zypp
 	  _tmp_file = filesystem::TmpFile();
 	  Pathname pth = _tmp_file.path();
 	  ofstream st(pth.asString().c_str());
-	  st << _undo_script << endl;
+	  st << _do_script << endl;
 	  return pth;
 	}
 	else if (_do_location != "" && _do_location != "/")
