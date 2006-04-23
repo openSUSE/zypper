@@ -237,10 +237,10 @@ namespace zypp {
       }
       const char *errOrWarn = (severity & XML_PARSER_SEVERITY_ERROR) ? "error" : "warning";
       
+#if 0
       std::ostream& out = (severity & XML_PARSER_SEVERITY_ERROR) ? ERR : WAR;
     
         /* Log it */
-#if 0
     out << "XML syntax " << errOrWarn << ": " << msg;
       if (obj->_error.get()) {
         out << "(encountered during error recovery!)" << std::endl;
