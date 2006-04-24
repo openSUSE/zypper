@@ -134,8 +134,11 @@ namespace zypp
          * we need it to access the checksums if we are in verify mode
          */
         detail::ResImplTraits<SuseTagsProductImpl>::Ptr _prodImpl;
-        Product::Ptr _product;
-       
+        Product::Ptr _product;       
+        public:
+        // packages that have shared data, we need to fill the pointer
+        // of the package that cintains the data
+        std::map<NVRAD, NVRAD> _shared_data_pkg;
       };
       ///////////////////////////////////////////////////////////////////
 

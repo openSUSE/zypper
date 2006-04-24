@@ -177,7 +177,7 @@ namespace zypp
 	    str::split( stag_r.value, std::back_inserter(words) );
 
 	    if ( str::split( stag_r.value, std::back_inserter(words) ) != 4 )
-	      ZYPP_THROW( ParseException( "Pkg" ) );
+              ZYPP_THROW( ParseException( "Pkg error, we expected NVRA here, got: " + stag_r.value ) );
 
 	    std::string arch = words[3];
 #warning read comment in file
@@ -208,6 +208,20 @@ namespace zypp
               ZYPP_THROW( ParseException( stag_r.name + " - Expected [type checksum], got [" + stag_r.value +"]") );
 
             _pkgImpl->_checksum = CheckSum(words[0], words[1]);
+          }
+          else if ( stag_r.name == "Shr" )
+          {
+            XXX << "package shares data with " << _nvrad.name << " " << _nvrad.edition << " " << _nvrad.arch << std::endl;
+            // shared description tags
+            std::vector<std::string> words;
+            str::split( stag_r.value, std::back_inserter(words) );
+
+            if ( str::split( stag_r.value, std::back_inserter(words) ) != 4 )
+              ZYPP_THROW( ParseException( "Shr tag is wrong, expected NVRA, got: " + stag_r.value ) );
+
+            std::string arch = words[3];
+            NVRAD shared_desc( words[0], Edition( words[1], words[2] ), Arch(arch));
+            _sourceImpl->_shared_data_pkg[_nvrad] = shared_desc;
           }
 	  if ( stag_r.name == "Grp" )
 	  {

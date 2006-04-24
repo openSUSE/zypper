@@ -10,6 +10,7 @@
  *
 */
 #include "zypp/source/susetags/SuseTagsPackageImpl.h"
+#include "zypp/detail/ImplConnect.h"
 
 using namespace std;
 
@@ -43,16 +44,51 @@ namespace zypp
       { return _checksum; }
 
       TranslatedText SuseTagsPackageImpl::summary() const
-      { return _summary; }
+      {
+        if( _shared && _summary.empty() )
+        {
+          // access implementation
+          //detail::ResImplTraits<Package::Impl>::constPtr pipp( detail::ImplConnect::resimpl( _shared ) );
+          return _shared->summary();
+        } 
+        
+        return _summary;
+      }
 
       TranslatedText SuseTagsPackageImpl::description() const
-      { return _description; }
+      {         
+        if ( _shared && _description.empty() )
+        {
+          // access implementation
+          //detail::ResImplTraits<Package::Impl>::constPtr pipp( detail::ImplConnect::resimpl( _shared ) );
+          return _shared->description();
+        } 
+        return _description;
+      }
 
       TranslatedText SuseTagsPackageImpl::insnotify() const
-      { return _insnotify; }
+      { 
+        if ( _shared && _insnotify.empty() )
+        {
+          // access implementation
+          //detail::ResImplTraits<Package::Impl>::constPtr pipp( detail::ImplConnect::resimpl( _shared ) );
+          return _shared->insnotify();
+        } 
+          
+        return _insnotify;
+      }
 
       TranslatedText SuseTagsPackageImpl::delnotify() const
-      { return _delnotify; }
+      {
+        if ( _shared && _delnotify.empty() ) 
+        {
+          // access implementation
+          //detail::ResImplTraits<Package::Impl>::constPtr pipp( detail::ImplConnect::resimpl( _shared ) );
+          return _shared->delnotify();
+        } 
+          
+        return _delnotify;
+      }
 
       Date SuseTagsPackageImpl::buildtime() const
       { return _buildtime; }
@@ -117,14 +153,16 @@ namespace zypp
 
       std::list<std::string> SuseTagsPackageImpl::authors() const
       {
-        return _authors;
-       }
+        return ( _shared && _authors.empty() ) ? _shared->authors() : _authors;
+      }
 
       std::list<std::string> SuseTagsPackageImpl::filenames() const
       { return std::list<std::string>(); }
 
       License SuseTagsPackageImpl::licenseToConfirm() const
-      { return _license_to_confirm; }
+      { 
+        return ( _shared && _license_to_confirm.empty() ) ? _shared->licenseToConfirm() : _license_to_confirm;
+      }
 
       std::list<DeltaRpm> SuseTagsPackageImpl::deltaRpms() const
       { return std::list<DeltaRpm>(); }

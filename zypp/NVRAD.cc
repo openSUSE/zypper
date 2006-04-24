@@ -26,6 +26,11 @@ namespace zypp
       }
   }
 
+  std::ostream & operator<<( std::ostream & str, const NVRAD & obj )
+  {
+    return str << obj.name << '-' << obj.edition << '.' << obj.arch;
+  }
+  
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

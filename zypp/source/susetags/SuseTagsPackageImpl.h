@@ -101,6 +101,9 @@ namespace zypp
 
 	virtual unsigned mediaId() const;
 
+        // other package this package shares description and other data with
+        detail::ResImplTraits<SuseTagsPackageImpl>::Ptr _shared;
+        
 	TranslatedText _summary;
 	TranslatedText _description;
 	TranslatedText _insnotify;

@@ -535,7 +535,41 @@ namespace zypp
           }
           lang = lang.fallback();
         }
-
+        
+        for (PkgContent::const_iterator it = content.begin(); it != content.end(); ++it)
+        {
+          ERR << "Content has package " << it->first <<  std::endl;
+        }
+        
+        // now fill the pointers for the packages that have shared data
+        int shared_counter = 0;
+        MIL << content.size() << " packages already parsed. Going to fill shared ones." << std::endl;
+        for ( std::map<NVRAD, NVRAD>::iterator it = _shared_data_pkg.begin(); it != _shared_data_pkg.end(); ++it)
+        {          
+          detail::ResImplTraits<SuseTagsPackageImpl>::Ptr pkg = content[it->first];
+          detail::ResImplTraits<SuseTagsPackageImpl>::Ptr pkg_data = content[it->second];
+          
+          if ( pkg )
+          {
+            if ( pkg_data )
+            {
+              pkg->_shared = pkg_data;
+              shared_counter++;
+              ERR << "Found the package " << it->second  << " which provides data for " <<  it->first << " (found)" << std::endl;
+            }
+            else
+            {
+              ERR << "Did not find the package " << it->second  << " which provides data for " <<  it->first << " (found) "<< std::endl;
+            }
+          }
+          else
+          {
+            ERR << "Could not find the package " << it->second  << " which provides data for " <<  it->first << " (no found)" << std::endl;
+          }
+        }
+        
+        MIL << shared_counter << " packages got their data from another package" << std::endl;
+        
         PkgDiskUsage du;
         try
         {
