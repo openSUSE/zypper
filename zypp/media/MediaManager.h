@@ -140,6 +140,11 @@ namespace zypp
      *       you want to force (mutex) initialization order problems!
      *
      * \section MediaAccessUrl Media Access Url
+     * All MediaAccessUrl's may contain following query parameters,
+     * that are reserved by the Source classes and unused/ignored
+     * by the MediaManager:
+     * - <tt>alias</tt>: A source specific media alias string.
+     *
      * The Media Manager currently supports following access handlers
      * (backends), that can be specified by the media access URLs in
      * the media manager's open() method.
