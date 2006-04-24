@@ -246,9 +246,9 @@ struct UninstallConflicting
 	// let the user decide deleting conflicting package. This is only an info.
 	// Try at first updating packages.
 	//
-	if (_context->getStatus(conflicting_item).isToBeInstalled()			// scheduled for installation
-	    && !_context->getStatus(conflicting_item).isToBeUninstalled()		// not scheduled for uninstallation
-	    || conflicting_item.status().staysInstalled())				// not scheduled at all but installed
+	ResStatus confl_status = _context->getStatus( conflicting_item );
+	if (confl_status.isToBeInstalled()			// scheduled for installation
+	    || confl_status.staysInstalled())			// not scheduled at all but installed
 	{
 	    ResolverInfoMisc_Ptr misc_info = new ResolverInfoMisc (RESOLVER_INFO_TYPE_CONFLICT_CANT_INSTALL,
 									       _install_item, RESOLVER_INFO_PRIORITY_VERBOSE, _provided_cap);
