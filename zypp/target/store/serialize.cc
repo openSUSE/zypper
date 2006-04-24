@@ -18,6 +18,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/CapFactory.h"
 #include "zypp/Source.h"
+#include "zypp/Url.h"
 
 #include "zypp/ResObject.h"
 #include "zypp/detail/ImplConnect.h"
@@ -417,11 +418,11 @@ std::string toXML( const PersistentStorage::SourceData &obj )
   out << "<source  xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
   out << "  <enabled>" << (obj.enabled ? "true" : "false" ) << "</enabled>" << std::endl;
   out << "  <auto-refresh>" << ( obj.autorefresh ? "true" : "false" ) << "</auto-refresh>" << std::endl;
-  out << "  <product-dir>" << xml_escape(obj.product_dir) << "</product-dir>" << std::endl;
-  out << "  <cache-dir>" << xml_escape(obj.cache_dir) << "</cache-dir>" << std::endl;
+  out << "  <product-dir>" << obj.product_dir << "</product-dir>" << std::endl;
+  out << "  <cache-dir>" << obj.cache_dir << "</cache-dir>" << std::endl;
   out << "  <type>" << xml_escape(obj.type) << "</type>" << std::endl;
-   out << "  <url>" << xml_escape(obj.url) << "</url>" << std::endl;
-   out << "  <alias>" << xml_escape(obj.alias) << "</alias>" << std::endl;
+  out << "  <url>" << xml_escape(obj.url.asString()) << "</url>" << std::endl;
+  out << "  <alias>" << xml_escape(obj.alias) << "</alias>" << std::endl;
   out << "</source>" << std::endl;
   return out.str();
 }

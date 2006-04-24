@@ -285,11 +285,11 @@ namespace zypp
         descr.alias = it->second.alias();
 	descr.autorefresh = it->second.autorefresh();
 	descr.type = it->second.type();
-	descr.product_dir = it->second.path().asString();
+	descr.product_dir = it->second.path();
 
-	descr.cache_dir = it->second.cacheDir().asString();
+	descr.cache_dir = it->second.cacheDir();
 
-	if( metadata_cache && it->second.cacheDir().empty() )
+        if( metadata_cache && descr.cache_dir.empty() )
 	{
 	    if( descr.cache_dir.empty() )
 	    {
@@ -413,7 +413,7 @@ namespace zypp
 
 	    if( id == 0)
 	    {
-		report.append( it->url + it->product_dir, it->alias, expt );
+              report.append( it->url.asString() + it->product_dir.asString(), it->alias, expt );
 		continue;
 	    }
 	}

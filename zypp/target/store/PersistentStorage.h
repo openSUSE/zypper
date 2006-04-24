@@ -18,6 +18,7 @@
 #include "zypp/base/NonCopyable.h"
 #include "zypp/base/PtrTypes.h"
 #include <zypp/Pathname.h>
+#include <zypp/Url.h>
 #include <zypp/Patch.h>
 
 ///////////////////////////////////////////////////////////////////
@@ -53,10 +54,10 @@ namespace zypp
        
         bool enabled;
         bool autorefresh;
-        std::string product_dir;
+        Pathname product_dir;
         std::string type;
-        std::string url;
-        std::string cache_dir;
+        Url url;
+        Pathname cache_dir;
         std::string alias;
       };
 
