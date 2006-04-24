@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Apr 24 16:15:02 CEST 2006 - mt@suse.de
+
+- Fixed iseries workaround - interchanged variables for scsi
+  devices, added debug messages about the steps (#163971).
+- Added getenv NULL ptr check and verify of the $HOME dir's
+  and ~/.curlrc file's ownership (#163203).
+- rev 3199
+
+-------------------------------------------------------------------
 Mon Apr 24 15:44:18 CEST 2006 - ma@suse.de
 
 - Use filesystem::TmpDir to create unique and unused Source cache
