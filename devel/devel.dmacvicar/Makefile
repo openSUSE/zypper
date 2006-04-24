@@ -37,7 +37,7 @@ POST_UNINSTALL = :
 build_triplet = i686-suse-linux
 host_triplet = i686-suse-linux
 target_triplet = i686-suse-linux
-noinst_PROGRAMS = test$(EXEEXT) lock$(EXEEXT) aj$(EXEEXT)
+noinst_PROGRAMS = test$(EXEEXT) lock$(EXEEXT) testbed$(EXEEXT)
 subdir = devel/devel.dmacvicar
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -48,10 +48,6 @@ mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 PROGRAMS = $(noinst_PROGRAMS)
-am_aj_OBJECTS = aj.$(OBJEXT)
-aj_OBJECTS = $(am_aj_OBJECTS)
-aj_LDADD = $(LDADD)
-aj_DEPENDENCIES =
 am_lock_OBJECTS = zypp-lock.$(OBJEXT)
 lock_OBJECTS = $(am_lock_OBJECTS)
 lock_LDADD = $(LDADD)
@@ -60,6 +56,10 @@ am_test_OBJECTS = zypp-keyring.$(OBJEXT)
 test_OBJECTS = $(am_test_OBJECTS)
 test_LDADD = $(LDADD)
 test_DEPENDENCIES =
+am_testbed_OBJECTS = testbed.$(OBJEXT)
+testbed_OBJECTS = $(am_testbed_OBJECTS)
+testbed_LDADD = $(LDADD)
+testbed_DEPENDENCIES =
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -71,8 +71,8 @@ LTCXXCOMPILE = $(LIBTOOL) --tag=CXX --mode=compile $(CXX) $(DEFS) \
 CXXLD = $(CXX)
 CXXLINK = $(LIBTOOL) --tag=CXX --mode=link $(CXXLD) $(AM_CXXFLAGS) \
 	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(aj_SOURCES) $(lock_SOURCES) $(test_SOURCES)
-DIST_SOURCES = $(aj_SOURCES) $(lock_SOURCES) $(test_SOURCES)
+SOURCES = $(lock_SOURCES) $(test_SOURCES) $(testbed_SOURCES)
+DIST_SOURCES = $(lock_SOURCES) $(test_SOURCES) $(testbed_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -230,6 +230,8 @@ test_SOURCES = zypp-keyring.cc
 test_LDFLAGS = -static
 lock_SOURCES = zypp-lock.cc
 lock_LDFLAGS = -static
+testbed_SOURCES = testbed.cc
+testbed_LDFLAGS = -static
 aj_SOURCES = aj.cc
 aj_LDFLAGS = -static
 all: all-am
@@ -272,15 +274,15 @@ clean-noinstPROGRAMS:
 	  echo " rm -f $$p $$f"; \
 	  rm -f $$p $$f ; \
 	done
-aj$(EXEEXT): $(aj_OBJECTS) $(aj_DEPENDENCIES) 
-	@rm -f aj$(EXEEXT)
-	$(CXXLINK) $(aj_LDFLAGS) $(aj_OBJECTS) $(aj_LDADD) $(LIBS)
 lock$(EXEEXT): $(lock_OBJECTS) $(lock_DEPENDENCIES) 
 	@rm -f lock$(EXEEXT)
 	$(CXXLINK) $(lock_LDFLAGS) $(lock_OBJECTS) $(lock_LDADD) $(LIBS)
 test$(EXEEXT): $(test_OBJECTS) $(test_DEPENDENCIES) 
 	@rm -f test$(EXEEXT)
 	$(CXXLINK) $(test_LDFLAGS) $(test_OBJECTS) $(test_LDADD) $(LIBS)
+testbed$(EXEEXT): $(testbed_OBJECTS) $(testbed_DEPENDENCIES) 
+	@rm -f testbed$(EXEEXT)
+	$(CXXLINK) $(testbed_LDFLAGS) $(testbed_OBJECTS) $(testbed_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -288,7 +290,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/aj.Po
+include ./$(DEPDIR)/testbed.Po
 include ./$(DEPDIR)/zypp-keyring.Po
 include ./$(DEPDIR)/zypp-lock.Po
 
