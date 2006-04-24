@@ -187,6 +187,7 @@ AC_OUTPUT(	 po/Makefile.in\
 	devel/Makefile			\
 	devel/genclass			\
 	devel/devel.jsrain/Makefile	\
+  devel/devel.dmacvicar/Makefile \
 	devel/devel.jsrain/yum/Makefile	\
 	devel/devel.ma/Makefile		\
 	devel/devel.kkaempf/Makefile	\
