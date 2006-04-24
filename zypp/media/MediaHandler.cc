@@ -137,7 +137,7 @@ MediaHandler::removeAttachPoint()
   }
   else
   {
-    if( !_attachPoint->temp)
+    if( !_attachPoint->path.empty() && !_attachPoint->temp)
       DBG << "MediaHandler - attachpoint is not temporary" << endl;
   }
 }
