@@ -186,7 +186,6 @@ namespace zypp
 	  if ( stag_r.name == "Pkg" )
 	  {
             // reset
-            _isShared = false;
 	    // this means this is either the first package, or we just finished parsing a package and a new one is starting
 	    // collect previous pending package if needed
 	    collectPkg();
