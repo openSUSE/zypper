@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Apr 24 17:45:07 CEST 2006 - dmacvicar@suse.de
+
+- All resolvables must honor arch, so Arch_noarch in
+  target/store/XMLFilesBackend.cc is wrong (#160792)
+- Introduced code to honour shared package descriptions
+  (#159109) 
+- r3204
+
+-------------------------------------------------------------------
 Mon Apr 24 16:43:48 CEST 2006 - jsrain@suse.de
 
 - replace '_' in YUM elements/attributes with '-' (#168762)
