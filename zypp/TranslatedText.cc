@@ -40,6 +40,11 @@ namespace zypp
     Impl(const std::list<std::string> &text, const Locale &lang)
     { setText(text, lang); }
 
+    bool empty() const
+    {
+      return translations.empty();
+    }
+    
     std::string text( const Locale &lang = Locale() ) const
     {
       Locale empty_locale;
@@ -190,6 +195,8 @@ namespace zypp
   Locale TranslatedText::detectLanguage() const
   { return _pimpl->detectLanguage(); }
 
+  bool TranslatedText::empty() const
+  { return _pimpl->empty(); }
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
