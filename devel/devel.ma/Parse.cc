@@ -278,28 +278,6 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "xxx" );
   INT << "===[START]==========================================" << endl;
 
-  map<NVRA,string> nvrmap;
-
-  NVRA a( "foo", Edition(""), Arch_noarch );
-  NVRA b( "baa", Edition(""), Arch_i386 );
-  NVRA c( "kaa", Edition(""), Arch_i486 );
-  NVRA d( "daa", Edition(""), Arch_ppc );
-
-  nvrmap[a] = "A";
-  nvrmap[b] = "B";
-  nvrmap[c] = "C";
-  nvrmap[d] = "D";
-
-  INT << nvrmap.size() << endl;
-  std::for_each( make_map_key_begin( nvrmap ),   make_map_key_end( nvrmap ),
-                 PrintOn<NVRA>(INT) );
-  std::for_each( make_map_key_begin( nvrmap ),   make_map_key_end( nvrmap ),
-                 PrintX(nvrmap) );
-
-  INT << nvrmap[NVRA( "kaa", Edition(""), Arch_i386 )]  << endl;
-
-  return 0;
-
   ResPool pool( getZYpp()->pool() );
 
   if ( 0 )
@@ -309,18 +287,37 @@ int main( int argc, char * argv[] )
       INT << "Added target: " << pool << endl;
     }
 
-  Url myUrl( "dir:/mounts/machcd2/CDs/SLES-10-CD-i386-Beta10/CD1" );
-  Source_Ref src1;
-  USR << src1 << endl;
-  try
-    {
-      src1 = SourceFactory().createFrom( myUrl, "/", Date::now().asSeconds() );
-    }
-  catch ( const Exception & )
-    {
-      ;
-    }
-  USR << src1 << endl;
+  if ( 1 ) {
+    SourceManager::sourceManager()->restore( sysRoot );
+    if ( SourceManager::sourceManager()->allSources().empty() )
+      {
+        Source_Ref src1;
+        if ( 1 )
+          {
+            Url myUrl( "dir:/mounts/machcd2/CDs/SLES-10-CD-i386-Beta10/CD1" );
+            USR << src1 << endl;
+            try
+              {
+                src1 = SourceFactory().createFrom( myUrl, "/", Date::now().asSeconds() );
+              }
+            catch ( const Exception & )
+              {
+                ;
+              }
+            USR << src1 << endl;
+          }
+        SourceManager::sourceManager()->addSource( src1 );
+        SourceManager::sourceManager()->store( sysRoot, true );
+      }
+
+    Source_Ref src( *SourceManager::sourceManager()->Source_begin() );
+  }
+
+  USR << "=======================" << endl;
+
+  SourceManager::sourceManager()->removeSource( SourceManager::sourceManager()->Source_begin()->numericId() );
+  SourceManager::sourceManager()->store( sysRoot, true );
+
 
 #if 0
   Source_Ref src1( createSource( "dir:/mounts/machcd2/CDs/SLES-10-CD-i386-Beta10/CD1" ) );

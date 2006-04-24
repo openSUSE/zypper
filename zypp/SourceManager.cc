@@ -23,6 +23,7 @@
 #include "zypp/Source.h"
 #include "zypp/source/SourceImpl.h"
 #include "zypp/target/store/PersistentStorage.h"
+#include "zypp/TmpPath.h"
 #include "zypp/Pathname.h"
 #include "zypp/PathInfo.h"
 
@@ -90,7 +91,7 @@ namespace zypp
       MIL << "SourceManager remove " << it->second << endl;
       _deleted_sources[it->second.numericId()] = it->second;
       _sources.erase(it);
-      
+
       // release all media of this source, not needed anymore (#159754)
       it->second.release();
 
@@ -266,8 +267,6 @@ namespace zypp
     	MIL << "Created..." << topdir << std::endl;
     }
 
-    unsigned id = 0;
-
     // first, gather all known cache dirs
     std::set<std::string> known_caches;
     for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
@@ -293,27 +292,9 @@ namespace zypp
 	{
 	    if( descr.cache_dir.empty() )
 	    {
-		// generate the new cache name
-
-		std::string cache = ZYPP_METADATA_PREFIX + str::numstring(id); // we should strip root here
-
-		// generate a new cache dir
-		while( id < 1000 && known_caches.find( cache ) != known_caches.end() )
-		{
-		    ++id;
-		    cache = ZYPP_METADATA_PREFIX + str::numstring(id); // we should strip root here
-		}
-
-		if ( id == 1000 )
-		{
-		    ERR << "Unable to generate a new cache directory name" << endl;
-		    metadata_cache = false;
-		    continue;
-		}
-
-		descr.cache_dir = cache;
-
-		known_caches.insert( cache );
+              filesystem::TmpDir newCache( root_r /  ZYPP_METADATA_PREFIX, "Source." );
+              descr.cache_dir = ZYPP_METADATA_PREFIX + newCache.path().basename();
+              known_caches.insert( descr.cache_dir.asString() );
 	    }
 
 	    filesystem::assert_dir ( root_r.asString() + descr.cache_dir );

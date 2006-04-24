@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 24 15:44:18 CEST 2006 - ma@suse.de
+
+- Use filesystem::TmpDir to create unique and unused Source cache
+  directories. (#168051)
+
+-------------------------------------------------------------------
 Mon Apr 24 14:30:41 CEST 2006 - ma@suse.de
 
 - Enable signature checks per default. (#168525)
