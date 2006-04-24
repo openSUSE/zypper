@@ -204,8 +204,16 @@ namespace zypp
        * Release all medias attached by the source
        */
       void release();
+
       /**
-       * Get media verifier for the specified media
+       * Get media verifier for the specified medium. In the
+       * default installation, an instance of media::NoVerifier is 
+       * returned. The specific implementations of the sources
+       * should overload this method to return a proper verifier.
+       *
+       * \param media_nr number of the medium
+       *
+       * \return instance of a media verifier for the given medium.
        */
       virtual media::MediaVerifierRef verifier(unsigned media_nr);
 
@@ -213,6 +221,29 @@ namespace zypp
       /** Provide Source_Ref back to \c this. */
       Source_Ref selfSourceRef()
       { return Source_Ref( this ); }
+
+      /**
+       * Provide a file to local filesystem on the given path,
+       * no checking or progress information redirection.
+       * used by \ref provideFile and \ref providePackage.
+       * If \c checkonly is true, no media change callback 
+       * will be invoked.
+       *
+       * \param path file with a path to be provided by the source
+       * \param media_nr number of the media to look for the path
+       * \param cached provide a cached copy of the file, if available
+       * \param checkonly just check if it is possible to provide the file
+       *
+       * \return the local path for the provided file
+       *
+       * \throws Exception
+       *
+       */
+      const Pathname provideJustFile(const Pathname & path,
+				 const unsigned media_nr = 1,
+				 bool cached = false,
+				 bool checkonly = false);
+
 
     protected:
       /** All resolvables provided by this source. */

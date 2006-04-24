@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Apr 24 11:20:17 CEST 2006 - visnov@suse.cz
+
+- fix callbacks for providing a single file (#160206) 
+
+-------------------------------------------------------------------
 Sun Apr 23 12:28:21 CEST 2006 - kkaempf@suse.de
 
 - If an installed package looses a dependency, the solver tries

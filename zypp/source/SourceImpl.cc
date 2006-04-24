@@ -32,7 +32,7 @@ namespace zypp
     IMPL_PTR_TYPE(SourceImpl);
 
 
-    class DownloadProgressReceiver
+    class DownloadProgressPackageReceiver
 	: public callback::ReceiveReport<media::DownloadProgressReport>
     {
 	callback::SendReport <DownloadResolvableReport> & _report;
@@ -40,7 +40,7 @@ namespace zypp
 
       public:
 
-	DownloadProgressReceiver (
+	DownloadProgressPackageReceiver (
 	    callback::SendReport <DownloadResolvableReport> & report_r,
 	    Resolvable::constPtr resolvable_r
 	)
@@ -48,7 +48,7 @@ namespace zypp
 	, _resolvable (resolvable_r)
 	{}
 	
-	virtual ~DownloadProgressReceiver () {} 
+	virtual ~DownloadProgressPackageReceiver () {} 
 	
 	virtual void reportbegin() {}
 	
@@ -64,6 +64,35 @@ namespace zypp
 	}
     };
 
+
+    class DownloadProgressFileReceiver
+	: public callback::ReceiveReport<media::DownloadProgressReport>
+    {
+	callback::SendReport <DownloadFileReport> & _report;
+
+      public:
+
+	DownloadProgressFileReceiver (
+	    callback::SendReport <DownloadFileReport> & report_r
+	)
+	: _report (report_r)
+	{}
+	
+	virtual ~DownloadProgressFileReceiver () {} 
+	
+	virtual void reportbegin() {}
+	
+	virtual void reportend() {}
+
+        /**
+         * Inform about progress
+         * Return true on abort
+         */
+        virtual bool progress( int percent, Url url )
+	{
+	    return _report->progress( percent, url );
+	}
+    };
 
     ///////////////////////////////////////////////////////////////////
     //
@@ -170,7 +199,7 @@ namespace zypp
       bool digest_ok = false;
       Pathname file;
       callback::SendReport<source::DownloadResolvableReport> report;
-      DownloadProgressReceiver download_report( report, package );
+      DownloadProgressPackageReceiver download_report( report, package );
       
       while (retry)
       {
@@ -178,7 +207,7 @@ namespace zypp
 	
 	callback::TempConnect<media::DownloadProgressReport> tmp_download( download_report );
 	
-        file = package->source().provideFile( package->location(), package->mediaId());
+        file = provideJustFile( package->location(), package->mediaId());
 
         report->finish( package, source::DownloadResolvableReport::NO_ERROR, "" );
         
@@ -223,6 +252,30 @@ namespace zypp
     }
     
     const Pathname SourceImpl::provideFile(const Pathname & file_r,
+					   const unsigned media_nr,
+					   bool cached,
+					   bool checkonly )
+    {    
+      callback::SendReport<source::DownloadFileReport> report;
+      DownloadProgressFileReceiver download_report( report );
+      
+      SourceFactory source_factory;
+      
+      Url file_url( url().asString() + file_r.asString() );
+
+      report->start( source_factory.createFrom(this), file_url );
+	
+      callback::TempConnect<media::DownloadProgressReport> tmp_download( download_report );
+	
+      Pathname file = provideJustFile( file_r, media_nr, cached, checkonly );
+
+      report->finish( file_url, source::DownloadFileReport::NO_ERROR, "" );
+      
+      return file;
+    }
+
+
+    const Pathname SourceImpl::provideJustFile(const Pathname & file_r,
 					   const unsigned media_nr,
 					   bool cached,
 					   bool checkonly )
