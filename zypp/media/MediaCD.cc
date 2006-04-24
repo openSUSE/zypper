@@ -317,8 +317,10 @@ namespace zypp {
 	std::string dev_name;
 
 	// SCSI cdrom devices (/dev/sr0, ...)
-	sys_name = "/dev/sr"; 
-	dev_name = "/sys/block/sr"; 
+	sys_name = "/sys/block/sr";
+	dev_name = "/dev/sr";
+	DBG << "Collecting SCSI CD-ROM devices ("
+	    << dev_name << "X)" << std::endl;
 	for(size_t i=0; i < 16; i++)
 	{
 	  PathInfo sys_info(sys_name + str::numstring(i));
@@ -343,6 +345,8 @@ namespace zypp {
 #if powerpc
 	sys_name = "/sys/block/iseries!vcd";
 	dev_name = "/dev/iseries/vcd";
+	DBG << "Collecting iSeries virtual CD-ROM devices ("
+	    << dev_name << "X)" << std::endl;
 	for(size_t i=0; i < 8; i++)
 	{
 	  char drive_letter = 'a' + i;
