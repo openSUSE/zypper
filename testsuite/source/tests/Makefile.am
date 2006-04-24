@@ -15,6 +15,7 @@ noinst_PROGRAMS = \
 	suseparser
 	
 selectiontagparsertest_SOURCES = SelectionTagParserTest.cc
+packagetagparsertest_SOURCES = PackageTagParserTest.cc
 patterntagparsertest_SOURCES = PatternTagParserTest.cc
 producttagparsertest_SOURCES = ProductMetadataParserTest.cc
 mediatagparsertest_SOURCES = MediaMetadataParserTest.cc
