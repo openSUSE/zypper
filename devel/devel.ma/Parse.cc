@@ -256,6 +256,18 @@ inline bool selectForTransact( const NameKindProxy & nkp )
   return nkp.availableBegin()->status().setTransact( true, ResStatus::USER );
 }
 
+  struct PrintX
+  {
+    PrintX( map<NVRA,string> & nvrmap )
+    : m(nvrmap)
+    {}
+    void operator()( const NVRA & i ) const
+    {
+      INT << i << ": " << m[i] << endl;
+    }
+    map<NVRA,string> & m;
+  };
+
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -266,12 +278,51 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "xxx" );
   INT << "===[START]==========================================" << endl;
 
+  map<NVRA,string> nvrmap;
+
+  NVRA a( "foo", Edition(""), Arch_noarch );
+  NVRA b( "baa", Edition(""), Arch_i386 );
+  NVRA c( "kaa", Edition(""), Arch_i486 );
+  NVRA d( "daa", Edition(""), Arch_ppc );
+
+  nvrmap[a] = "A";
+  nvrmap[b] = "B";
+  nvrmap[c] = "C";
+  nvrmap[d] = "D";
+
+  INT << nvrmap.size() << endl;
+  std::for_each( make_map_key_begin( nvrmap ),   make_map_key_end( nvrmap ),
+                 PrintOn<NVRA>(INT) );
+  std::for_each( make_map_key_begin( nvrmap ),   make_map_key_end( nvrmap ),
+                 PrintX(nvrmap) );
+
+  INT << nvrmap[NVRA( "kaa", Edition(""), Arch_i386 )]  << endl;
+
+  return 0;
+
   ResPool pool( getZYpp()->pool() );
 
-  getZYpp()->initTarget( sysRoot );
-  getZYpp()->addResolvables( getZYpp()->target()->resolvables(), true );
-  INT << "Added target: " << pool << endl;
+  if ( 0 )
+    {
+      getZYpp()->initTarget( sysRoot );
+      getZYpp()->addResolvables( getZYpp()->target()->resolvables(), true );
+      INT << "Added target: " << pool << endl;
+    }
 
+  Url myUrl( "dir:/mounts/machcd2/CDs/SLES-10-CD-i386-Beta10/CD1" );
+  Source_Ref src1;
+  USR << src1 << endl;
+  try
+    {
+      src1 = SourceFactory().createFrom( myUrl, "/", Date::now().asSeconds() );
+    }
+  catch ( const Exception & )
+    {
+      ;
+    }
+  USR << src1 << endl;
+
+#if 0
   Source_Ref src1( createSource( "dir:/mounts/machcd2/CDs/SLES-10-CD-i386-Beta10/CD1" ) );
   Source_Ref src2( createSource( "dir:/mounts/machcd2/kukuk/sles10-sp-i386/CD1" ) );
   getZYpp()->addResolvables( src1.resolvables() );
@@ -314,7 +365,7 @@ int main( int argc, char * argv[] )
           ZYppCommitResult res( getZYpp()->commit( policy ) );
         }
     }
-
+#endif
   INT << "===[END]============================================" << endl << endl;
   return 0;
 }

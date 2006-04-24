@@ -1,7 +1,12 @@
 -------------------------------------------------------------------
+Mon Apr 24 14:30:41 CEST 2006 - ma@suse.de
+
+- Enable signature checks per default. (#168525)
+
+-------------------------------------------------------------------
 Mon Apr 24 11:20:17 CEST 2006 - visnov@suse.cz
 
-- fix callbacks for providing a single file (#160206) 
+- fix callbacks for providing a single file (#160206)
 
 -------------------------------------------------------------------
 Sun Apr 23 12:28:21 CEST 2006 - kkaempf@suse.de

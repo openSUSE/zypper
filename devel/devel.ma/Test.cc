@@ -33,12 +33,12 @@ static const Pathname sysRoot( "/Local/ROOT" );
 
 ///////////////////////////////////////////////////////////////////
 
-struct DebugStats
+struct DebugStats : public std::unary_function<ResObject::constPtr, bool>
 {
   bool operator()( const ResObject::constPtr & ptr )
   {
     Source_Ref::NumericId srcid = ptr->source().numericId();
-    unsigned mediaid = mediaId( ptr )
+    unsigned mediaid = mediaId( ptr );
     USR << "S"  << srcid
         << "/M" << mediaid
         << " "  << ptr
@@ -46,7 +46,7 @@ struct DebugStats
     return true;
   }
 
-  unsigned mediaId( const ResObject::constPtr ptr & ptr ) const
+  unsigned mediaId( const ResObject::constPtr & ptr ) const
   {
     Package::constPtr pkg( asKind<Package>(ptr) );
     return pkg ? pkg->mediaId() : 0;
@@ -59,6 +59,8 @@ struct DebugStats
     KindMap           _perKind;
 };
 
+inline std::ostream & operator<<( std::ostream & str, const DebugStats & obj )
+{ return str; }
 
 template <class _Iterator>
   std::ostream & vdumpPoolStats( std::ostream & str,
@@ -66,11 +68,7 @@ template <class _Iterator>
   {
     DebugStats stats;
     std::for_each( begin_r, end_r,
-
-                   functor::chain( setTrue_c(PrintPoolItem()),
-                                   setTrue_c(functor::functorRef<void,ResObject::constPtr>(stats)) )
-
-                 );
+                   functor::functorRef<bool,ResObject::constPtr>(stats) );
     return str << stats;
   }
 
@@ -83,6 +81,59 @@ inline bool selectForTransact( const NameKindProxy & nkp )
 
   return nkp.availableBegin()->status().setTransact( true, ResStatus::USER );
 }
+///////////////////////////////////////////////////////////////////
+namespace zypp
+{ /////////////////////////////////////////////////////////////////
+#if 0
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : EnumerationClass<_Derived>
+  //
+  /** EnumerationClass.
+  */
+  template<class _Derived>
+    class EnumerationClass
+    {
+    public:
+      /** The enum */
+      typedef _Derived::for_use_in_switch for_use_in_switch;
+
+      /** String representation of enumarator. */
+      const std::string & asString() const;
+
+      /** Enumarator provided for use in \c switch statement. */
+      for_use_in_switch inSwitch() const
+      { return _op };
+
+    protected:
+      /** Ctor */
+      EnumerationClass( for_use_in_switch op_r )
+      : _op( op_r )
+      {}
+    private:
+      /** The enum value. */
+      for_use_in_switch _op;
+    };
+  ///////////////////////////////////////////////////////////////////
+
+  /** \relates EnumerationClass Stream output. */
+  template<class _Derived>
+    inline std::ostream & operator<<( std::ostream & str, const EnumerationClass<_Derived> & obj )
+    { return str << obj.asString(); }
+
+  /** \relates EnumerationClass Stream output. */
+  template<class _Derived>
+    inline bool operator==( const EnumerationClass<_Derived> & lhs, const EnumerationClass<_Derived> & rhs )
+    { return lhs.inSwitch() == rhs.inSwitch(); }
+
+  /** \relates PatchCategory */
+  template<class _Derived>
+    inline bool operator!=( const EnumerationClass<_Derived> & lhs, const EnumerationClass<_Derived> & rhs )
+    { return ! ( lhs == rhs ); }
+#endif
+  /////////////////////////////////////////////////////////////////
+} // namespace zypp
+///////////////////////////////////////////////////////////////////
 
 /******************************************************************
 **
@@ -94,6 +145,21 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "xxx" );
   INT << "===[START]==========================================" << endl;
 
+  enum for_use_in_switch { a, b, c };
+
+  struct Edef
+  {
+    for_use_in_switch _val;
+    const char * _tostr;
+    const char * _fromstr[];
+  };
+
+  const char * fromstr[] = { "a", "A" };
+
+  Edef x[] = { a, "a", "A" };
+
+  return 0;
+  INT << "===[END]============================================" << endl << endl;
   ResPool pool( getZYpp()->pool() );
 
   if ( 0 )
