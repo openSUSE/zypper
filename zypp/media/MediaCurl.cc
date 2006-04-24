@@ -26,6 +26,7 @@
 #include <sys/mount.h>
 #include <errno.h>
 #include <dirent.h>
+#include <unistd.h>
 
 #include "config.h"
 
@@ -459,13 +460,29 @@ void MediaCurl::attachTo (bool next)
       }
 
     } else {
+      char *home = getenv("HOME");
+      if( home && *home)
+      {
+      	Pathname curlrcFile = string( home ) + string( "/.curlrc" );
 
-      string curlrcFile = string( getenv("HOME") ) + string( "/.curlrc" );
-      map<string,string> rc_data
-	= proxyinfo::sysconfigRead(Pathname(curlrcFile));
-      map<string,string>::const_iterator it = rc_data.find("proxy-user");
-      if (it != rc_data.end())
-	_proxyuserpwd = it->second;
+        PathInfo h_info(string(home), PathInfo::LSTAT);
+	PathInfo c_info(curlrcFile,   PathInfo::LSTAT);
+
+        if( h_info.isDir()  && h_info.owner() == getuid() &&
+            c_info.isFile() && c_info.owner() == getuid())
+	{
+      	  map<string,string> rc_data = proxyinfo::sysconfigRead(curlrcFile);
+
+      	  map<string,string>::const_iterator it = rc_data.find("proxy-user");
+      	  if (it != rc_data.end())
+	    _proxyuserpwd = it->second;
+        }
+	else
+	{
+	  WAR << "Not allowed to parse '" << curlrcFile
+	      << "': bad file owner" << std::endl;
+	}
+      }
     }
 
     _proxyuserpwd = unEscape( _proxyuserpwd );
