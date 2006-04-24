@@ -680,9 +680,13 @@ XMLFilesBackend::createPatch( const zypp::parser::xmlstore::XMLPatchData & parse
     impl->_summary = parsed.summary;
     impl->_description = parsed.summary;
 
+    Arch arch;
+    if (!parsed.arch.empty())
+      arch = Arch(parsed.arch);
+    
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name,
-                       Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch,
+                       Edition( parsed.ver, parsed.rel, parsed.epoch ), arch,
                        createDependencies(parsed, ResTraits<Patch>::kind) );
     Patch::Ptr patch = detail::makeResolvableFromImpl( dataCollect, impl );
     CapFactory _f;
@@ -746,8 +750,12 @@ XMLFilesBackend::createAtom( const zypp::parser::xmlstore::XMLPatchAtomData & pa
   {
     detail::ResImplTraits<XMLAtomImpl>::Ptr impl(new XMLAtomImpl());
 
+    Arch arch;
+    if (!parsed.arch.empty())
+      arch = Arch(parsed.arch);
+    
     // Collect basic Resolvable data
-    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch, createDependencies(parsed, ResTraits<Atom>::kind) );
+    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies(parsed, ResTraits<Atom>::kind) );
     Atom::Ptr atom = detail::makeResolvableFromImpl( dataCollect, impl);
     return atom;
   }
@@ -766,8 +774,12 @@ XMLFilesBackend::createMessage( const zypp::parser::xmlstore::XMLPatchMessageDat
     detail::ResImplTraits<XMLMessageImpl>::Ptr impl(new XMLMessageImpl());
     impl->_text = parsed.text;
 
+    Arch arch;
+    if (!parsed.arch.empty())
+      arch = Arch(parsed.arch);
+    
     // Collect basic Resolvable data
-    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch, createDependencies(parsed, ResTraits<Message>::kind) );
+    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies(parsed, ResTraits<Message>::kind) );
     Message::Ptr message = detail::makeResolvableFromImpl( dataCollect, impl);
     return message;
   }
@@ -794,8 +806,12 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
     file << parsed.undo_script;;
     file.close();
 
+    Arch arch;
+    if (!parsed.arch.empty())
+      arch = Arch(parsed.arch);
+    
     // Collect basic Resolvable data
-    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch, createDependencies(parsed, ResTraits<Script>::kind));
+    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies(parsed, ResTraits<Script>::kind));
     Script::Ptr script = detail::makeResolvableFromImpl( dataCollect, impl );
     return script;
   }
@@ -922,8 +938,12 @@ XMLFilesBackend::createSelection( const zypp::parser::xmlstore::XMLPatternData &
     //impl->_default = ((parsed.default_ == "false" ) ? false : true );
     impl->_category = parsed.category.text();
 
+    Arch arch;
+    if (!parsed.arch.empty())
+      arch = Arch(parsed.arch);
+    
     // Collect basic Resolvable data
-    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), Arch_noarch, createDependencies( parsed, ResTraits<Pattern>::kind));
+    NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies( parsed, ResTraits<Pattern>::kind));
     Selection::Ptr selection = detail::makeResolvableFromImpl( dataCollect, impl );
     return selection;
   }
