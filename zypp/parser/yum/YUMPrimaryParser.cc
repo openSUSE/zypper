@@ -225,10 +225,10 @@ namespace zypp {
             else if (name == "freshens") {
               parseDependencyEntries(& dataPtr->freshens, child);
             }
-            else if (name == "install_only") {
+            else if (name == "install-only") {
               dataPtr->installOnly = true;
             }
-	    else if (name == "license_to_confirm")
+	    else if (name == "license-to-confirm")
 	    {
 	      dataPtr->license_to_confirm.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
 	    }

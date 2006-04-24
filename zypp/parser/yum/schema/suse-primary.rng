@@ -127,10 +127,10 @@
       <ref name="element-freshens"/>
     </optional>
     <optional>
-      <ref name="element-install_only"/>
+      <ref name="element-install-only"/>
     </optional>
     <zeroOrMore>
-      <element name="license_to_confirm">
+      <element name="license-to-confirm">
         <ref name="localized-string"/>
       </element>
     </zeroOrMore>
@@ -277,8 +277,8 @@
       <ref name="usual-entry-or-capability"/>
     </oneOrMore>
   </define>
-  <define name="element-install_only">
-    <element name="install_only">
+  <define name="element-install-only">
+    <element name="install-only">
       <empty/>
     </element>
   </define>

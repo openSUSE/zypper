@@ -8,7 +8,7 @@ include "suse-primary.rnc" {
   element-summary = element summary { localized-string }+
   element-description = element description { localized-string }+
   # packages in patches have an additional rpmfiles element
-  element-package = element yum:package { package, element-pkgfiles, element license_to_confirm { localized-string }+ }
+  element-package = element yum:package { package, element-pkgfiles, element license-to-confirm { localized-string }+ }
   # names in dependencies can include a "kind". Should not be used for packages.
   attribute-name =
     attribute kind { "package" | "patch" | "script" | "message" | "product" }?,
@@ -31,9 +31,9 @@ patch =
   element-version,
   dependency-block,
   element-category,
-  element reboot_needed { empty }?,
-  element package_manager { empty }?,
-  element-update_script?,
+  element reboot-needed { empty }?,
+  element package-manager { empty }?,
+  element-update-script?,
   element atoms { (element-package | element-script | element-message)+ }+
 
 dependency-block =
@@ -51,7 +51,7 @@ dependency-block =
 element-category =
   element category { "youfix" | "security" | "recommended" | "bonus" | "beta" }
 
-element-update_script = element update_script { text }
+element-update-script = element update-script { text }
 
 element-script =
   element script {
@@ -59,23 +59,23 @@ element-script =
     element-version,    
     element do { xsd:string }?,
     element undo { xsd:string }?,
-    element do_location {
+    element do-location {
       attribute xml:base { xsd:anyURI }?,
       attribute href { xsd:anyURI },
       empty
     }?,
-    element do_media { text }?,
-    element do_checksum {
+    element do-media { text }?,
+    element do-checksum {
       attribute type { "md5" | "sha" },
       text
     }?,
-    element undo_location {
+    element undo-location {
       attribute xml:base { xsd:anyURI }?,
       attribute href { xsd:anyURI },
       empty
     }?,
-    element undo_media { text }?,
-    element undo_checksum {
+    element undo-media { text }?,
+    element undo-checksum {
       attribute type { "md5" | "sha" },
       text
     }?,
@@ -113,7 +113,7 @@ element-patchrpm =
     },
     element-time,
     element-size,
-    element-base_version +
+    element-base-version +
   }
 
 
@@ -132,7 +132,7 @@ element-deltarpm =
     },
     element-time,
     element-size,
-    element-delta-base_version
+    element-delta-base-version
   }
 
 shared-rpmfile-attributes =
@@ -142,11 +142,11 @@ shared-rpmfile-attributes =
   attribute md5sum { text } ?,
   attribute buildtime { text } ?
 
-element-base_version = 
-  element base_version { version }
+element-base-version = 
+  element base-version { version }
 
-element-delta-base_version =
-  element base_version {
+element-delta-base-version =
+  element base-version {
     version,
     attribute md5sum { text },
     attribute buildtime { text },

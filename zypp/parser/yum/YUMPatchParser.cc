@@ -137,13 +137,13 @@ namespace zypp {
 	    else if (name == "category") {
 		patchPtr->category = _helper.content(child);
 	    }
-	    else if (name == "reboot_needed") {
+	    else if (name == "reboot-needed") {
 		patchPtr->rebootNeeded = true;
 	    }
-	    else if (name == "package_manager") {
+	    else if (name == "package-manager") {
 		patchPtr->packageManager = true;
 	    }
-	    else if (name == "update_script") {
+	    else if (name == "update-script") {
 		patchPtr->updateScript = _helper.content(child);
 	    }
 	    else if (name == "atoms") {
@@ -269,7 +269,7 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	    else if (name == "freshens") {
 	      prim.parseDependencyEntries(& dataPtr->freshens, child);
 	    }
-	    else if (name == "install_only") {
+	    else if (name == "install-only") {
 	      dataPtr->installOnly = true;
 	    }
 	    else {
@@ -319,7 +319,7 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	     child = child ->next) {
 	  if (_helper.isElement(child)) {
 	    string name = _helper.name(child);
-	    if (name == "base_version") {
+	    if (name == "base-version") {
 	      YUMBaseVersion base_version;
 	      parsePkgBaseVersionNode( &base_version, child);
 	      patchRpm.baseVersions.push_back( base_version );
@@ -368,7 +368,7 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	     child = child ->next) {
 	  if (_helper.isElement(child)) {
 	    string name = _helper.name(child);
-	    if (name == "base_version") {
+	    if (name == "base-version") {
 	      parsePkgBaseVersionNode( &(deltaRpm.baseVersion), child);
 	    }
             else if (name == "location") {
@@ -410,7 +410,7 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	dataPtr->rel = _helper.attribute( formatNode, "rel" );
 	dataPtr->md5sum = _helper.attribute( formatNode, "md5sum" );
 	dataPtr->buildtime = _helper.attribute( formatNode, "buildtime" );
-	dataPtr->source_info = _helper.attribute( formatNode, "source_info" );
+	dataPtr->source_info = _helper.attribute( formatNode, "source-info" );
       }
       
       void
@@ -509,7 +509,7 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	    {
 		parsePkgFilesNode (&*package, child);
 	    }
-	    else if (name == "license_to_confirm")
+	    else if (name == "license-to-confirm")
 	    {
 	      package->license_to_confirm.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
 	    }
@@ -553,23 +553,23 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	    else if (name == "undo") {
 		script->undo_script = _helper.content(child);
 	    }
-            else if (name == "do_location") {
+            else if (name == "do-location") {
 		script->do_location = _helper.attribute(child,"href");
 	    }
-            else if (name == "undo_location") {
+            else if (name == "undo-location") {
 		script->undo_location = _helper.attribute(child,"href");
 	    }
-	    else if (name == "do_media") {
+	    else if (name == "do-media") {
 		script->do_media = _helper.content(child);
 	    }
-	    else if (name == "undo_media") {
+	    else if (name == "undo-media") {
 		script->undo_media = _helper.content(child);
 	    }
-	    else if (name == "do_checksum") {
+	    else if (name == "do-checksum") {
 	      script->do_checksum_type = _helper.attribute(child,"type");
 	      script->do_checksum = _helper.content(child);
 	    }
-	    else if (name == "undo_checksum") {
+	    else if (name == "undo-checksum") {
 	      script->undo_checksum_type = _helper.attribute(child,"type");
 	      script->undo_checksum = _helper.content(child);
 	    }

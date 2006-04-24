@@ -25,7 +25,7 @@
         <ref name="package"/>
         <ref name="element-pkgfiles"/>
         <oneOrMore>
-          <element name="license_to_confirm">
+          <element name="license-to-confirm">
             <ref name="localized-string"/>
           </element>
         </oneOrMore>
@@ -69,17 +69,17 @@
     <ref name="dependency-block"/>
     <ref name="element-category"/>
     <optional>
-      <element name="reboot_needed">
+      <element name="reboot-needed">
         <empty/>
       </element>
     </optional>
     <optional>
-      <element name="package_manager">
+      <element name="package-manager">
         <empty/>
       </element>
     </optional>
     <optional>
-      <ref name="element-update_script"/>
+      <ref name="element-update-script"/>
     </optional>
     <oneOrMore>
       <element name="atoms">
@@ -134,8 +134,8 @@
       </choice>
     </element>
   </define>
-  <define name="element-update_script">
-    <element name="update_script">
+  <define name="element-update-script">
+    <element name="update-script">
       <text/>
     </element>
   </define>
@@ -154,7 +154,7 @@
         </element>
       </optional>
       <optional>
-        <element name="do_location">
+        <element name="do-location">
           <optional>
             <attribute name="xml:base">
               <data type="anyURI"/>
@@ -167,12 +167,12 @@
         </element>
       </optional>
       <optional>
-        <element name="do_media">
+        <element name="do-media">
           <text/>
         </element>
       </optional>
       <optional>
-        <element name="do_checksum">
+        <element name="do-checksum">
           <attribute name="type">
             <choice>
               <value>md5</value>
@@ -183,7 +183,7 @@
         </element>
       </optional>
       <optional>
-        <element name="undo_location">
+        <element name="undo-location">
           <optional>
             <attribute name="xml:base">
               <data type="anyURI"/>
@@ -196,12 +196,12 @@
         </element>
       </optional>
       <optional>
-        <element name="undo_media">
+        <element name="undo-media">
           <text/>
         </element>
       </optional>
       <optional>
-        <element name="undo_checksum">
+        <element name="undo-checksum">
           <attribute name="type">
             <choice>
               <value>md5</value>
@@ -273,7 +273,7 @@
       <ref name="element-time"/>
       <ref name="element-size"/>
       <oneOrMore>
-        <ref name="element-base_version"/>
+        <ref name="element-base-version"/>
       </oneOrMore>
     </element>
   </define>
@@ -307,7 +307,7 @@
       </element>
       <ref name="element-time"/>
       <ref name="element-size"/>
-      <ref name="element-delta-base_version"/>
+      <ref name="element-delta-base-version"/>
     </element>
   </define>
   <define name="shared-rpmfile-attributes">
@@ -323,13 +323,13 @@
       <attribute name="buildtime"/>
     </optional>
   </define>
-  <define name="element-base_version">
-    <element name="base_version">
+  <define name="element-base-version">
+    <element name="base-version">
       <ref name="version"/>
     </element>
   </define>
-  <define name="element-delta-base_version">
-    <element name="base_version">
+  <define name="element-delta-base-version">
+    <element name="base-version">
       <ref name="version"/>
       <attribute name="md5sum"/>
       <attribute name="buildtime"/>
