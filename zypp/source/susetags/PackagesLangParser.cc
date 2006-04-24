@@ -15,6 +15,7 @@
 #include "zypp/source/susetags/PackagesLangParser.h"
 #include "zypp/parser/tagfile/TagFileParser.h"
 #include "zypp/Package.h"
+#include "zypp/source/susetags/SuseTagsImpl.h"
 #include "zypp/source/susetags/SuseTagsPackageImpl.h"
 
 #include "zypp/ZYppFactory.h"
@@ -38,15 +39,20 @@ namespace zypp
         const PkgContent & _content;
 	const Locale & _lang;
 	PkgImplPtr _current;
-        NVRAD _nvrad;
+        
+        NVRA _nvra;
 	int _count;
-        std::set<NVRAD> _notfound;
+        std::set<NVRA> _notfound;
 	Arch _system_arch;
 
-	PackagesLangParser (const PkgContent & content_r, const Locale & lang_r)
+        SuseTagsImpl::Ptr _sourceImpl;
+        
+        PackagesLangParser ( SuseTagsImpl::Ptr sourceimpl , const PkgContent & content_r, const Locale & lang_r)
 	    : _content( content_r )
 	    , _lang( lang_r)
 	    , _count(0)
+            , _sourceImpl( sourceimpl )
+               
         {
 	    ZYpp::Ptr z = getZYpp();
 	    _system_arch = z->architecture();
@@ -64,18 +70,21 @@ namespace zypp
               ZYPP_THROW( ParseException( "[" + _file_r.asString() + "] Parse error in tag Pkg, expected [name version release arch], found: [" + stag_r.value + "]" ) );
 
 	    Arch arch( words[3] );
-	    if (!arch.compatibleWith( _system_arch )) {
+            _nvra = NVRA( words[0], Edition(words[1],words[2]), arch );
+            // only discard the package if it is not compatible AND it does not provide data
+            // to other packages
+	    if (!arch.compatibleWith( _system_arch ) && !_sourceImpl->_is_shared[_nvra])
+            {
 		_current = NULL;
 		return;
 	    }
-
-            _nvrad = NVRAD( words[0], Edition(words[1],words[2]), arch );
-	    PkgContent::const_iterator it = _content.find(_nvrad);
+            
+            PkgContent::const_iterator it = _content.find(NVRAD(_nvra));
 	    if (it == _content.end())
             {
               // package not found in the master package list
 		_current = NULL;
-                _notfound.insert(_nvrad);
+                _notfound.insert(_nvra);
 	    }
 	    else
             {
@@ -88,7 +97,7 @@ namespace zypp
 	  else if ( stag_r.name == "Sum" )
           {
 	    if (_current != NULL)
-	      _current->_summary = TranslatedText( stag_r.value, _lang);
+	      _sourceImpl->_package_data[_nvra]._summary = TranslatedText( stag_r.value, _lang);
           }
         }
 
@@ -100,21 +109,21 @@ namespace zypp
 
           if ( mtag_r.name == "Des" )
             {
-              _current->_description = TranslatedText (mtag_r.values, _lang);
+              _sourceImpl->_package_data[_nvra]._description = TranslatedText (mtag_r.values, _lang);
             }
           else if ( mtag_r.name == "Ins" )
             {
-              _current->_insnotify = TranslatedText (mtag_r.values, _lang);
+              _sourceImpl->_package_data[_nvra]._insnotify = TranslatedText (mtag_r.values, _lang);
             }
           else if ( mtag_r.name == "Del" )
             {
-              _current->_delnotify = TranslatedText (mtag_r.values, _lang);
+              _sourceImpl->_package_data[_nvra]._delnotify = TranslatedText (mtag_r.values, _lang);
             }
           else if ( mtag_r.name == "Eul" )
           {
             for ( std::list<std::string>::const_iterator it = mtag_r.values.begin(); it != mtag_r.values.end(); ++it)
               {
-                _current->_license_to_confirm += *it;
+                _sourceImpl->_package_data[_nvra]._license_to_confirm += *it;
               }
           }
         }
@@ -122,9 +131,9 @@ namespace zypp
 
       ////////////////////////////////////////////////////////////////////////////
 
-      void parsePackagesLang( const Pathname & file_r, const Locale & lang_r, const PkgContent & content_r )
+      void parsePackagesLang( SuseTagsImpl::Ptr sourceimpl, const Pathname & file_r, const Locale & lang_r, const PkgContent & content_r )
       {
-        PackagesLangParser p (content_r, lang_r);
+        PackagesLangParser p ( sourceimpl, content_r, lang_r);
 	MIL << "Starting with " << content_r.size() << " packages" << endl;
         try
         {
@@ -139,10 +148,10 @@ namespace zypp
 
         MIL << "Ending after " << p._count << " langs with " << content_r.size() << " packages and " << p._notfound.size() << " not founds." <<endl;
         WAR << "Not found packages:" << std::endl;
-        for ( std::set<NVRAD>::const_iterator it = p._notfound.begin(); it != p._notfound.end(); ++it)
+        for ( std::set<NVRA>::const_iterator it = p._notfound.begin(); it != p._notfound.end(); ++it)
         {
-          NVRAD nvrad = *it;
-          WAR << "-> " << nvrad.name << " " << nvrad.edition << " " << nvrad.arch << std::endl;
+          NVRA nvra = *it;
+          WAR << "-> " << nvra.name << " " << nvra.edition << " " << nvra.arch << std::endl;
         }
         return;
       }

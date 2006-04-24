@@ -19,6 +19,7 @@
 #include "zypp/source/SourceImpl.h"
 #include "zypp/Product.h"
 #include "zypp/source/susetags/SuseTagsProductImpl.h"
+#include "zypp/source/susetags/SuseTagsPackageImpl.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -30,6 +31,20 @@ namespace zypp
     namespace susetags
     { /////////////////////////////////////////////////////////////////
 
+      struct SuseTagsPackageImplData
+      {
+        SuseTagsPackageImplData()
+        {
+        }
+        
+        TranslatedText _summary;
+        TranslatedText _description;
+        TranslatedText _insnotify;
+        TranslatedText _delnotify;
+        License _license_to_confirm;
+        std::list<std::string> _authors;
+      };
+      
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : SuseTagsImpl
@@ -136,9 +151,11 @@ namespace zypp
         detail::ResImplTraits<SuseTagsProductImpl>::Ptr _prodImpl;
         Product::Ptr _product;       
         public:
-        // packages that have shared data, we need to fill the pointer
-        // of the package that cintains the data
-        std::map<NVRAD, NVRAD> _shared_data_pkg;
+        
+        // shared data between packages with same NVRA
+        std::map<NVRA, SuseTagsPackageImplData> _package_data;
+        // list of packages which depend on another package for its data
+        std::map<NVRA, bool> _is_shared;
       };
       ///////////////////////////////////////////////////////////////////
 

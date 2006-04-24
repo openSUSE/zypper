@@ -9,8 +9,9 @@
 /** \file	zypp/detail/PackageImpl.cc
  *
 */
+
+#include "zypp/source/susetags/SuseTagsImpl.h"
 #include "zypp/source/susetags/SuseTagsPackageImpl.h"
-#include "zypp/detail/ImplConnect.h"
 
 using namespace std;
 
@@ -23,6 +24,8 @@ namespace zypp
     namespace susetags
     { /////////////////////////////////////////////////////////////////
 
+      IMPL_PTR_TYPE(SuseTagsImpl);
+      
       ///////////////////////////////////////////////////////////////////
       //
       //	METHOD NAME : PackageImpl::PackageImpl
@@ -45,49 +48,22 @@ namespace zypp
 
       TranslatedText SuseTagsPackageImpl::summary() const
       {
-        if( _shared && _summary.empty() )
-        {
-          // access implementation
-          //detail::ResImplTraits<Package::Impl>::constPtr pipp( detail::ImplConnect::resimpl( _shared ) );
-          return _shared->summary();
-        } 
-        
-        return _summary;
+        return _sourceImpl->_package_data[_data_index]._summary;
       }
 
       TranslatedText SuseTagsPackageImpl::description() const
       {         
-        if ( _shared && _description.empty() )
-        {
-          // access implementation
-          //detail::ResImplTraits<Package::Impl>::constPtr pipp( detail::ImplConnect::resimpl( _shared ) );
-          return _shared->description();
-        } 
-        return _description;
+        return _sourceImpl->_package_data[_data_index]._description;
       }
 
       TranslatedText SuseTagsPackageImpl::insnotify() const
       { 
-        if ( _shared && _insnotify.empty() )
-        {
-          // access implementation
-          //detail::ResImplTraits<Package::Impl>::constPtr pipp( detail::ImplConnect::resimpl( _shared ) );
-          return _shared->insnotify();
-        } 
-          
-        return _insnotify;
+        return _sourceImpl->_package_data[_data_index]._insnotify;
       }
 
       TranslatedText SuseTagsPackageImpl::delnotify() const
       {
-        if ( _shared && _delnotify.empty() ) 
-        {
-          // access implementation
-          //detail::ResImplTraits<Package::Impl>::constPtr pipp( detail::ImplConnect::resimpl( _shared ) );
-          return _shared->delnotify();
-        } 
-          
-        return _delnotify;
+        return _sourceImpl->_package_data[_data_index]._delnotify;
       }
 
       Date SuseTagsPackageImpl::buildtime() const
@@ -153,7 +129,7 @@ namespace zypp
 
       std::list<std::string> SuseTagsPackageImpl::authors() const
       {
-        return ( _shared && _authors.empty() ) ? _shared->authors() : _authors;
+        return _sourceImpl->_package_data[_data_index]._authors;
       }
 
       std::list<std::string> SuseTagsPackageImpl::filenames() const
@@ -161,7 +137,7 @@ namespace zypp
 
       License SuseTagsPackageImpl::licenseToConfirm() const
       { 
-        return ( _shared && _license_to_confirm.empty() ) ? _shared->licenseToConfirm() : _license_to_confirm;
+        return _sourceImpl->_package_data[_data_index]._license_to_confirm;
       }
 
       std::list<DeltaRpm> SuseTagsPackageImpl::deltaRpms() const

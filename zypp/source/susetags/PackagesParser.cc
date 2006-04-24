@@ -123,6 +123,7 @@ namespace zypp
 	PkgImplPtr _pkgImpl;
 	SrcPkgImplPtr _srcPkgImpl;
 	NVRAD _nvrad;
+        bool _isShared;
 
 	Arch _system_arch;
 
@@ -130,6 +131,7 @@ namespace zypp
 	       : _source( source )
 	       , _sourceImpl( sourceimpl )
 	       , _isPendingPkg( false )
+               , _isShared( false )
 	{
 	    ZYpp::Ptr z = getZYpp();
 	    _system_arch = z->architecture();
@@ -142,6 +144,19 @@ namespace zypp
 	{
 	  if ( _isPendingPkg )
 	  {
+            _pkgImpl->_sourceImpl = _sourceImpl;
+            // if the package does not depend on other package for its data
+            // then use its own nvrad as an index
+            if ( !_isShared )
+            {
+              _pkgImpl->_data_index = _nvrad;
+              _sourceImpl->_is_shared[_nvrad] = false;
+            }
+            else
+            {
+              _sourceImpl->_is_shared[_nvrad] = true;
+            }
+          
 	    if (_srcPkgImpl == NULL					// only if its not a src/nosrc
 		&& _nvrad.arch.compatibleWith( _system_arch ) )
 	    {
@@ -170,6 +185,8 @@ namespace zypp
 	{
 	  if ( stag_r.name == "Pkg" )
 	  {
+            // reset
+            _isShared = false;
 	    // this means this is either the first package, or we just finished parsing a package and a new one is starting
 	    // collect previous pending package if needed
 	    collectPkg();
@@ -211,7 +228,6 @@ namespace zypp
           }
           else if ( stag_r.name == "Shr" )
           {
-            XXX << "package shares data with " << _nvrad.name << " " << _nvrad.edition << " " << _nvrad.arch << std::endl;
             // shared description tags
             std::vector<std::string> words;
             str::split( stag_r.value, std::back_inserter(words) );
@@ -220,8 +236,10 @@ namespace zypp
               ZYPP_THROW( ParseException( "Shr tag is wrong, expected NVRA, got: " + stag_r.value ) );
 
             std::string arch = words[3];
-            NVRAD shared_desc( words[0], Edition( words[1], words[2] ), Arch(arch));
-            _sourceImpl->_shared_data_pkg[_nvrad] = shared_desc;
+            NVRA shared_desc( words[0], Edition( words[1], words[2] ), Arch(arch));
+            XXX << "package " << _nvrad << " shares data with " << shared_desc << std::endl;
+            _isShared = true;
+            _pkgImpl->_data_index = shared_desc;
           }
 	  if ( stag_r.name == "Grp" )
 	  {

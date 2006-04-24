@@ -29,11 +29,11 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace susetags
     { /////////////////////////////////////////////////////////////////
-
+      
       /** \deprecated Just temporary.
        * \throws ParseException and others.
       */
-      void parsePackagesLang( const Pathname & file_r, const Locale & lang_r, const PkgContent & content_r );
+      void parsePackagesLang( SuseTagsImpl::Ptr sourceimpl, const Pathname & file_r, const Locale & lang_r, const PkgContent & content_r );
 
       /////////////////////////////////////////////////////////////////
     } // namespace susetags

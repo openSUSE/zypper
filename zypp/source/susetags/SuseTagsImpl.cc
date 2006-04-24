@@ -521,7 +521,7 @@ namespace zypp
               MIL << packages_lang_name << " found" << std::endl;
               DBG << "Going to parse " << p << endl;
               verifyFile( p, packages_lang_name);
-              parsePackagesLang( p, lang, content );
+              parsePackagesLang( this, p, lang, content );
               trymore = false;
             }
             else
@@ -536,39 +536,18 @@ namespace zypp
           lang = lang.fallback();
         }
         
-        for (PkgContent::const_iterator it = content.begin(); it != content.end(); ++it)
+        MIL << _package_data.size() << " packages holding real data" << std::endl;
+        MIL << content.size() << " packages parsed" << std::endl;
+        
+        int counter =0;
+        for ( std::map<NVRA,bool>::const_iterator it = _is_shared.begin(); it != _is_shared.end(); ++it)
         {
-          ERR << "Content has package " << it->first <<  std::endl;
+          if( it->second)
+            counter++;
         }
         
-        // now fill the pointers for the packages that have shared data
-        int shared_counter = 0;
-        MIL << content.size() << " packages already parsed. Going to fill shared ones." << std::endl;
-        for ( std::map<NVRAD, NVRAD>::iterator it = _shared_data_pkg.begin(); it != _shared_data_pkg.end(); ++it)
-        {          
-          detail::ResImplTraits<SuseTagsPackageImpl>::Ptr pkg = content[it->first];
-          detail::ResImplTraits<SuseTagsPackageImpl>::Ptr pkg_data = content[it->second];
-          
-          if ( pkg )
-          {
-            if ( pkg_data )
-            {
-              pkg->_shared = pkg_data;
-              shared_counter++;
-              ERR << "Found the package " << it->second  << " which provides data for " <<  it->first << " (found)" << std::endl;
-            }
-            else
-            {
-              ERR << "Did not find the package " << it->second  << " which provides data for " <<  it->first << " (found) "<< std::endl;
-            }
-          }
-          else
-          {
-            ERR << "Could not find the package " << it->second  << " which provides data for " <<  it->first << " (no found)" << std::endl;
-          }
-        }
+        MIL << counter << " packages sharing data" << std::endl;
         
-        MIL << shared_counter << " packages got their data from another package" << std::endl;
         
         PkgDiskUsage du;
         try
@@ -587,6 +566,11 @@ namespace zypp
           it->second->_diskusage = du[it->first /* NVRAD */];
           Package::Ptr pkg = detail::makeResolvableFromImpl( it->first, it->second );
           store.insert( pkg );
+         
+          //MIL << "Package " << pkg->summary() << std::endl;
+          //MIL << "        " << pkg->description() << std::endl;
+          //MIL << "----------------------------------" << std::endl;
+          
         }
         DBG << "SuseTagsImpl (fake) from " << p << ": "
             << content.size() << " packages" << endl;

@@ -25,7 +25,9 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
     namespace susetags
     { /////////////////////////////////////////////////////////////////
-
+      
+      DEFINE_PTR_TYPE(SuseTagsImpl);
+      
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : PackageImpl
@@ -101,14 +103,11 @@ namespace zypp
 
 	virtual unsigned mediaId() const;
 
-        // other package this package shares description and other data with
-        detail::ResImplTraits<SuseTagsPackageImpl>::Ptr _shared;
+        // which entry in sourceImpl::_package_data has
+        // the shared data for this package
+        NVRA _data_index;
         
-	TranslatedText _summary;
-	TranslatedText _description;
-	TranslatedText _insnotify;
-	TranslatedText _delnotify;
-        PackageGroup _group;
+	PackageGroup _group;
         std::list<std::string> _authors;
         std::list<std::string> _keywords;
 	ByteCount _size;
@@ -120,6 +119,9 @@ namespace zypp
         Pathname _location;
         DiskUsage _diskusage;
         CheckSum _checksum;
+        
+        SuseTagsImpl_Ptr _sourceImpl;
+        
       private:
         Source_Ref _source;
       public:
