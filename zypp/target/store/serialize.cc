@@ -358,6 +358,8 @@ std::string castedToXML( const Resolvable::constPtr &resolvable )
      out << toXML(asKind<const Pattern>(resolvable)) << std::endl;
   if ( isKind<Selection>(resolvable) )
      out << toXML(asKind<const Selection>(resolvable)) << std::endl;
+  if ( isKind<Language>(resolvable) )
+    out << toXML(asKind<const Language>(resolvable)) << std::endl;
   return out.str();
 }
 
