@@ -156,6 +156,9 @@ namespace zypp
         std::map<NVRA, SuseTagsPackageImplData> _package_data;
         // list of packages which depend on another package for its data
         std::map<NVRA, bool> _is_shared;
+        
+        // list of translation files
+        std::list<std::string> _pkg_translations;
       };
       ///////////////////////////////////////////////////////////////////
 

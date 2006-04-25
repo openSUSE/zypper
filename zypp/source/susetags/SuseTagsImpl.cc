@@ -507,26 +507,51 @@ namespace zypp
         std::string packages_lang_prefix( "packages." );
 	std::string packages_lang_name;
 
+        // get the list of available packages.X trsnlation files
+        std::list<std::string> all_files;
+        if (cache)
+          filesystem::readdir(all_files, _descr_dir);
+        else
+          dirInfo(1, all_files, _descr_dir);
+        
+        std::list<std::string> _pkg_translations;
+        for( std::list<std::string>::const_iterator it = all_files.begin(); it != all_files.end(); ++it)
+        {
+          if ( ((*it).substr(0, 9) == "packages." ) && ((*it) != "packages.DU" ))
+          {
+            MIL << *it << " available as package data translation." << std::endl;
+            _pkg_translations.push_back(*it);
+          }
+        }
+        
         // find the most apropiate file
         bool trymore = true;
         while ( (lang != Locale()) && trymore )
         {
           packages_lang_name = packages_lang_prefix + lang.code();
-          MIL << "Going to try " << packages_lang_name << std::endl;
+          MIL << "Translation candidate: " << lang.code() << std::endl;
           try
           {
-            p = cache ? _descr_dir + packages_lang_name : provideFile( _descr_dir + packages_lang_name);
-            if ( PathInfo(p).isExist() )
+            // only provide it if it exists
+            if ( find( _pkg_translations.begin(), _pkg_translations.end(), packages_lang_name ) != _pkg_translations.end() )
             {
-              MIL << packages_lang_name << " found" << std::endl;
-              DBG << "Going to parse " << p << endl;
-              verifyFile( p, packages_lang_name);
-              parsePackagesLang( this, p, lang, content );
-              trymore = false;
+              p = cache ? _descr_dir + packages_lang_name : provideFile( _descr_dir + packages_lang_name);
+              if ( PathInfo(p).isExist() )
+              {
+                MIL << packages_lang_name << " found" << std::endl;
+                DBG << "Going to parse " << p << endl;
+                verifyFile( p, packages_lang_name);
+                parsePackagesLang( this, p, lang, content );
+                trymore = false;
+              }
+              else
+              {
+                ERR << packages_lang_name << " can't be provided, even if it exist in the media" << endl;
+              }
             }
             else
             {
-              MIL << packages_lang_name << " not found" << endl;
+              MIL << "Skipping translation candidate " << packages_lang_name << " (not present in media)" << endl;
             }
           }
           catch (Exception & excpt_r)
