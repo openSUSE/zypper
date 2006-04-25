@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 25 16:59:51 CEST 2006 - dmacvicar@suse.de
+
+- pass empty strings to UI as key properties if unknown key 
+  (#169114)
+- rev 3228
+
+-------------------------------------------------------------------
 Tue Apr 25 16:47:35 CEST 2006 - kkaempf@suse.de
 
 - refrain from parsing 'other.xml' (#159316)
