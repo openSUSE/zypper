@@ -31,10 +31,10 @@ namespace zypp
 
   struct KeyRingReport : public callback::ReportBase
   {
-    virtual bool askUserToAcceptUnsignedFile( const Pathname &file );
-    virtual bool askUserToAcceptUnknownKey( const Pathname &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint );
+    virtual bool askUserToAcceptUnsignedFile( const std::string &file );
+    virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint );
     virtual bool askUserToTrustKey( const std::string &keyid, const std::string &keyname, const std::string &fingerprint);
-    virtual bool askUserToAcceptVerificationFailed( const Pathname &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint );
+    virtual bool askUserToAcceptVerificationFailed( const std::string &file, const std::string &keyid, const std::string &keyname, const std::string &fingerprint );
   };
   
   struct KeyRingSignals : public callback::ReportBase
@@ -111,7 +111,7 @@ namespace zypp
      * Follows a signature verification interacting with the user.
      * The boolr eturned depends on user desicion to trust or not.
      */
-    bool verifyFileSignatureWorkflow( const Pathname &file, const Pathname &signature);
+    bool verifyFileSignatureWorkflow( const Pathname &file, const std::string filedesc, const Pathname &signature);
     
     bool verifyFileSignature( const Pathname &file, const Pathname &signature);
     bool verifyFileTrustedSignature( const Pathname &file, const Pathname &signature);

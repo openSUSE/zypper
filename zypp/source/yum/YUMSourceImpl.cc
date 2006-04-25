@@ -142,7 +142,7 @@ namespace zypp
 	      ZYPP_CAUGHT(excpt_r);
 	    }
 	
-	    if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, asc_local))
+	    if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, "repomd.xml", asc_local))
 	      ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 	  }
 
@@ -236,7 +236,7 @@ namespace zypp
 	  ZYPP_CAUGHT(excpt_r);
 	}
 	
-        if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, asc_local))
+        if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, "repomd.xml", asc_local))
         {
 	  ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
         }
@@ -324,7 +324,7 @@ namespace zypp
 	    {
 	      ZYPP_CAUGHT(excpt_r);
 	    }
-	    if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, asc_local))
+	    if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, "repomd.xml", asc_local))
 	      ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 	  }
 
