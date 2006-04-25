@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 25 19:36:13 CEST 2006 - kkaempf@suse.de
+
+- Only choose best arch of multiple package atoms with identical
+  name (#168840)
+- rev 3231
+
+-------------------------------------------------------------------
 Tue Apr 25 16:59:51 CEST 2006 - dmacvicar@suse.de
 
 - pass empty strings to UI as key properties if unknown key 
