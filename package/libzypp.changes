@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 25 12:28:17 CEST 2006 - kkaempf@suse.de
+
+- dont report conflicts if item is neither installed
+  nor to-be-installed (#168906)
+- rev 3219
+
+-------------------------------------------------------------------
 Tue Apr 25 11:27:09 CEST 2006 - dmacvicar@suse.de
 
 - #168060 , propagate the file description or original
