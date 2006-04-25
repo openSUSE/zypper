@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Apr 25 15:17:15 CEST 2006 - dmacvicar@suse.de
+
+- Check if a file exists before providing it, and just handling the
+  exception is not sufficient, because it can release the media.
+  it nows get all possible packages.X translations an then
+  it selects the candidate from the existing ones (#168654)
+
+-------------------------------------------------------------------
 Tue Apr 25 12:28:17 CEST 2006 - kkaempf@suse.de
 
 - dont report conflicts if item is neither installed
