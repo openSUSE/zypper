@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Apr 25 11:27:09 CEST 2006 - dmacvicar@suse.de
+
+- #168060 , propagate the file description or original
+  name to the UI and not the checked filename path, 
+  which could be a tmp file.
+  Requires changes in pkg-manager, and probably zmd-helpers.
+
+-------------------------------------------------------------------
 Mon Apr 24 18:27:59 CEST 2006 - dmacvicar@suse.de
 
 - /var/lib/zypp/db/languages/* are empty files (##168355)
