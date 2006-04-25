@@ -184,8 +184,8 @@ struct UninstallConflicting
 {
     ResolverContext_Ptr _context;
     const Capability _provided_cap;
-    PoolItem _install_item;
-    PoolItem _upgrade_item;
+    PoolItem _install_item;		// the to-be-installed item issuing the conflict
+    PoolItem _upgrade_item;		// the installed, to-be-upgraded item (might be empty if its a fresh install)
     QueueItemList & _qil;
     bool ignored;
 
@@ -197,6 +197,9 @@ struct UninstallConflicting
 	, _qil( qil )
 	, ignored( false )
     { }
+
+
+    // conflicting_item provides a capability (conflicting_cap), _install_item lists as conflicts.
 
     bool operator()( const CapAndItem & cai)
     {
