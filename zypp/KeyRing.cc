@@ -309,7 +309,7 @@ namespace zypp
       else
       {
         // unknown key...
-        if ( report->askUserToAcceptUnknownKey( filedesc, id, "Unknown Key", "No fingerprint" ) )
+        if ( report->askUserToAcceptUnknownKey( filedesc, id, "", "" ) )
         {
           MIL << "User wants to accept unknown key " << id << std::endl;
           return true;
