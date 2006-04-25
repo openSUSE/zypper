@@ -547,7 +547,17 @@ namespace zypp
     {
 	// TODO: will this work in chroot?
 	// TODO: better download somewhere else and then copy over
-	storeMetadata( _cache_dir );
+	try{ 
+  	  storeMetadata( _cache_dir );
+	}
+	catch( const zypp::Exception & excpt )
+	{
+	  ERR << "Unable to refresh the source cache" << endl;
+	  if( ! _cache_dir.empty() && _cache_dir != "/" )
+	    filesystem::clean_dir( _cache_dir );
+
+	  ZYPP_RETHROW( excpt );
+	}
     }
 
     void SourceImpl::redirect(unsigned media_nr, const Url & new_url)

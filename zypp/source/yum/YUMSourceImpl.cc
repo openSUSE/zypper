@@ -229,6 +229,9 @@ namespace zypp
 	MIL << "Checking repomd.xml integrity" << endl;
 	Pathname asc_local;
 	try {
+          media::SilentMediaChange report;
+          callback::TempConnect< media::MediaChangeReport > nochange(report);
+
 	  asc_local = provideFile(_path + "/repodata/repomd.xml.asc");
 	}
 	catch (const Exception & excpt_r)
@@ -318,6 +321,9 @@ namespace zypp
 	    MIL << "Checking repomd.xml integrity" << endl;
 	    Pathname asc_local;
 	    try {
+              media::SilentMediaChange report;
+              callback::TempConnect< media::MediaChangeReport > nochange(report);
+
 	      asc_local = provideFile(_path + "/repodata/repomd.xml.asc");
 	    }
 	    catch (Exception & excpt_r)

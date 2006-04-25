@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Apr 25 16:34:50 CEST 2006 - visnov@suse.cz
+
+- in source refresh, clean up the cache dir if fails
+- do not require repomd.xml.asc when creating a cache (#163765)
+- rev 3224 
+
+-------------------------------------------------------------------
 Tue Apr 25 15:17:15 CEST 2006 - dmacvicar@suse.de
 
 - Check if a file exists before providing it, and just handling the
