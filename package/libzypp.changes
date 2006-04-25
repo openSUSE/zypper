@@ -5,6 +5,7 @@ Tue Apr 25 15:17:15 CEST 2006 - dmacvicar@suse.de
   exception is not sufficient, because it can release the media.
   it nows get all possible packages.X translations an then
   it selects the candidate from the existing ones (#168654)
+- rev 3221
 
 -------------------------------------------------------------------
 Tue Apr 25 12:28:17 CEST 2006 - kkaempf@suse.de
@@ -20,6 +21,7 @@ Tue Apr 25 11:27:09 CEST 2006 - dmacvicar@suse.de
   name to the UI and not the checked filename path, 
   which could be a tmp file.
   Requires changes in pkg-manager, and probably zmd-helpers.
+- rev 3215
 
 -------------------------------------------------------------------
 Mon Apr 24 18:27:59 CEST 2006 - dmacvicar@suse.de
