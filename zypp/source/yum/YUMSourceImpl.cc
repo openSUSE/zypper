@@ -1061,6 +1061,11 @@ namespace zypp
 	  Rel::EQ,
 	  Edition(parsed.ver, parsed.rel, parsed.epoch)
 	  ));
+
+	// maps name to parser data in order to find 'best' architectureC
+	typedef std::map<std::string, shared_ptr<YUMPatchPackage> > PkgAtomsMap;
+	PkgAtomsMap pkg_atoms;
+
 	for (std::list<shared_ptr<YUMPatchAtom> >::const_iterator it
 					= parsed.atoms.begin();
 	     it != parsed.atoms.end();
@@ -1068,11 +1073,31 @@ namespace zypp
 	{
 	  switch ((*it)->atomType())
 	  {
+	    // for packages, try to find best architecture for name first (#168840)
+
 	    case YUMPatchAtom::Package: {
 	      shared_ptr<YUMPatchPackage> package_data
 		= dynamic_pointer_cast<YUMPatchPackage>(*it);
-              Atom::Ptr atom = augmentPackage(source_r, *package_data );
-              impl->_atoms.push_back(atom);
+	      PkgAtomsMap::iterator pa_pos = pkg_atoms.find( package_data->name );
+	      if (pa_pos != pkg_atoms.end()) {
+		try {
+		  Arch oldarch, newarch;
+		  if (!(pa_pos->second->arch.empty())) oldarch = Arch( pa_pos->second->arch );
+		  if (!(package_data->arch.empty())) newarch = Arch( package_data->arch );
+		  if (newarch.compatibleWith( getZYpp()->architecture() )			// new one is compatible
+		      && oldarch.compare( newarch ) < 0)					// and better
+		  {
+		    pa_pos->second = package_data;
+		  }
+		}
+		catch( const Exception & excpt_r ) {
+		    ZYPP_CAUGHT( excpt_r );
+		    ERR << "Package " << package_data->name << " in patch's atomlist has bad architecture '" << package_data->arch << "'" << endl;
+		}
+	      }
+	      else {
+		pkg_atoms[package_data->name] = package_data;					// first occurence of this name
+	      }
 	      break;
 	    }
 	    case YUMPatchAtom::Message: {
@@ -1101,6 +1126,12 @@ namespace zypp
 	  }
 #endif
 	}
+
+	for (PkgAtomsMap::const_iterator pa_pos = pkg_atoms.begin(); pa_pos != pkg_atoms.end(); ++pa_pos) {
+	  Atom::Ptr atom = augmentPackage( source_r, *(pa_pos->second) );
+	  impl->_atoms.push_back(atom);
+	}
+
       return patch;
     }
     catch (const Exception & excpt_r)
