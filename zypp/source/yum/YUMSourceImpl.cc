@@ -408,6 +408,8 @@ namespace zypp
 	      throw *filelist.errorStatus();
 	  }
 
+#if 0	// don't parse 'other.xml' (#159316)
+
 	  for (std::list<YUMRepomdData_Ptr>::const_iterator it
 		  = repo_other.begin();
 	      it != repo_other.end();
@@ -445,6 +447,7 @@ namespace zypp
 	    if (other.errorStatus())
 	      throw *other.errorStatus();
 	}
+#endif
 
 	// now read primary data, merge them with filelist and changelog
 	  for (std::list<YUMRepomdData_Ptr>::const_iterator it
