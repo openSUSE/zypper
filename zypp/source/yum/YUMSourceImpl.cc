@@ -1084,10 +1084,13 @@ namespace zypp
 		  Arch oldarch, newarch;
 		  if (!(pa_pos->second->arch.empty())) oldarch = Arch( pa_pos->second->arch );
 		  if (!(package_data->arch.empty())) newarch = Arch( package_data->arch );
-		  if (newarch.compatibleWith( getZYpp()->architecture() )			// new one is compatible
-		      && oldarch.compare( newarch ) < 0)					// and better
-		  {
-		    pa_pos->second = package_data;
+		  if (newarch.compatibleWith( getZYpp()->architecture() ) ) {			// new one is compatible (if not, we don't care)
+
+		    if (!oldarch.compatibleWith( getZYpp()->architecture() )			// old one is not compatible
+			|| oldarch.compare( newarch ) < 0)					//  or compatible but worse
+		    {
+		      pa_pos->second = package_data;				// new one is it !
+		    }
 		  }
 		}
 		catch( const Exception & excpt_r ) {
