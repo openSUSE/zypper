@@ -360,9 +360,9 @@ namespace zypp
 
 		  callback::SendReport<target::MessageResolvableReport> report;
 
-		  report->show( m );
+		  report->show( text );
 
-		  MIL << "Displaying the text " << text << endl;
+		  MIL << "Displaying the text '" << text << "'" << endl;
 		}
 		else if (isKind<Script>(it->resolvable()))
 		{
