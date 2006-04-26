@@ -9,6 +9,9 @@
 /** \file	zypp/target/TargetImpl.cc
  *
 */
+#include <sys/types.h>
+#include <sys/stat.h>
+
 #include <iostream>
 #include <string>
 #include <list>
@@ -370,6 +373,7 @@ namespace zypp
 		  Pathname p = s->do_script();
 		  if (p != "" && p != "/")
 		  {
+		    chmod( p.asString().c_str(), S_IRUSR|S_IXUSR );	// "r-x------"
 		    ExternalProgram* prog = new ExternalProgram(p.asString(), ExternalProgram::Discard_Stderr, false, -1, true);
 		    if (! prog)
 		      ZYPP_THROW(Exception("Cannot run the script"));
