@@ -256,6 +256,9 @@ namespace zypp
 	      ! repomd.atEnd();
 	      ++repomd)
 	{
+	    if ((*repomd)->type == "other")	// don't parse 'other.xml' (#159316)
+		continue;
+
 	    Pathname src = provideFile(_path + (*repomd)->location);
 	    if (! checkCheckSum(src, (*repomd)->checksumType, (*repomd)->checksum))
 	    {
