@@ -52,5 +52,7 @@ int main( int argc, char * argv[] )
 
   if ( Arch_noarch.empty() ) return 8;
 
+  if (_arch32.compare(Arch_x86_64) >= 0) return 9;
+
   return 0;
 }
