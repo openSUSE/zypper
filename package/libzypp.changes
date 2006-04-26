@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr 26 10:43:03 CEST 2006 - kkaempf@suse.de
+
+- Improve on last fix, compare only compatible archs.
+- rev 3233
+
+-------------------------------------------------------------------
 Tue Apr 25 19:36:13 CEST 2006 - kkaempf@suse.de
 
 - Only choose best arch of multiple package atoms with identical
