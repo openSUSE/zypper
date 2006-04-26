@@ -360,7 +360,7 @@ namespace zypp
 
 		  callback::SendReport<target::MessageResolvableReport> report;
 
-		  report->show( text );
+		  report->show( m );
 
 		  MIL << "Displaying the text '" << text << "'" << endl;
 		}
