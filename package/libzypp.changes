@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr 26 17:24:33 CEST 2006 - kkaempf@suse.de
+
+- Show the message, not the resolvable in the callback
+- rev 3239
+
+-------------------------------------------------------------------
 Wed Apr 26 10:43:03 CEST 2006 - kkaempf@suse.de
 
 - Improve on last fix, compare only compatible archs.
