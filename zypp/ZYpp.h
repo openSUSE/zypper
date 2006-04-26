@@ -123,7 +123,9 @@ namespace zypp
     typedef std::set<Locale> LocaleSet;
     /** Set the requested locales.
      * Languages to be supported by the system, e.g. language specific
-     * packages to be installed.
+     * packages to be installed. This function operates on the pool,
+     * so only the locales that are available as resolvables
+     * are marked as requested. The rest is ignored.
     */
     void setRequestedLocales( const LocaleSet & locales_r );
     /** */
