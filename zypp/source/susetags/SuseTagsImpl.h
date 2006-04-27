@@ -18,6 +18,7 @@
 #include "zypp/Pathname.h"
 #include "zypp/source/SourceImpl.h"
 #include "zypp/Product.h"
+#include "zypp/CheckSum.h"
 #include "zypp/source/susetags/SuseTagsProductImpl.h"
 #include "zypp/source/susetags/SuseTagsPackageImpl.h"
 

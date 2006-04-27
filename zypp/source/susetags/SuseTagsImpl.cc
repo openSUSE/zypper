@@ -70,21 +70,38 @@ namespace zypp
       {
         _cache_dir = cache_dir_r;
 
-        initCacheDir(cache_dir_r);
         //suse/setup/descr
         //packages.* *.sel
         
-        INT << "Storing data to cache " << cache_dir_r << endl;
+        INT << "Source metadata store..." << cache_dir_r << endl;
+        
+        
+        Pathname new_media_file = provideFile("media.1/media");
+        // before really download all the data and init the cache, check
+        // if the source has really changed, otherwise, make it quick
+        Pathname cached_media_file = _cache_dir + "MEDIA/media.1/media";
+        if ( cacheExists() )
+        {
+          CheckSum old_media_file_checksum( "SHA1", filesystem::sha1sum(cached_media_file));
+          CheckSum new_media_file_checksum( "SHA1", filesystem::sha1sum(new_media_file));
+          if ( (new_media_file_checksum == old_media_file_checksum) && (!new_media_file_checksum.empty()) && (! old_media_file_checksum.empty()))
+          {
+            MIL << "susetags source " << alias() << " has not changed. Refresh completed. SHA1 of media.1/media file is " << old_media_file_checksum.checksum() << std::endl;
+            return;
+          }
+        }
+        MIL << "susetags source " << alias() << " has changed. Re-reading metadata into " << cache_dir_r << endl;
         
         // (#163196)
         // before we used _descr_dir, which is is wrong if we 
         // store metadata already running from cache
         // because it points to a local file and not
         // to the media. So use the original media descr_dir.
-        Pathname descr_src = provideDirTree(_orig_descr_dir);
-        
         Pathname media_src = provideDirTree("media.1");
+        Pathname descr_src = provideDirTree(_orig_descr_dir);        
         Pathname content_src = provideFile( _path + "content"); 
+        
+        initCacheDir(cache_dir_r);
         
         // get the list of cache keys
         std::list<std::string> files;
@@ -407,8 +424,7 @@ namespace zypp
         if (!valid)
           ZYPP_THROW (Exception( "Error. Source signature does not validate and user does not want to continue. "));
         
-        SourceFactory factory;
-
+        SourceFactory factory; 
         try {
           DBG << "Going to parse content file " << _content_file << endl;
           

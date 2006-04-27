@@ -42,6 +42,11 @@ namespace zypp
     CheckSum()
     {}
 
+    inline bool operator==( const CheckSum &rhs )
+    {
+      return ((rhs.type() == _type) && (rhs.checksum() == _checksum));
+    }
+    
     std::string type() const
     { return _type; }
     std::string checksum() const
