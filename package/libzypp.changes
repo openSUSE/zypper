@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Thu Apr 27 20:28:01 CEST 2006 - dmacvicar@suse.de
+
+- try to fix wrong permissions of /var/lib/zypp created
+  by old zypp, only when running as root they are fixed
+  (#169094)
+- YUM: Verify signatures on factoryInit.
+  Dont provide other.xml. Cleanups, better logging.
+  When refreshing signed soruces, don't refresh is source
+  has not changed.
+- YaST sources: don't refresh if media file has not changed.
+- Show full url of index files in sources for signature validation
+  (mentioned in #170139 comment #3)- 
+
+-------------------------------------------------------------------
 Thu Apr 27 18:41:02 CEST 2006 - jsrain@suse.de
 
 - udpated media ID syntax for external scripts (to be consistent
