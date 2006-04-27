@@ -418,7 +418,7 @@ namespace zypp
         
         MIL << "SuseTags source: checking 'content' file vailidity using digital signature.." << endl;
         // verify the content file
-        bool valid = z->keyRing()->verifyFileSignatureWorkflow( _content_file, "content", _content_file_sig);
+        bool valid = z->keyRing()->verifyFileSignatureWorkflow( _content_file, (path() + "content").asString() + " (" + url().asString() + ")", _content_file_sig);
           
         // the source is not valid and the user did not want to continue
         if (!valid)

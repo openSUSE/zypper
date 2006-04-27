@@ -155,10 +155,9 @@ namespace zypp
             
         MIL << "Checking repomd.xml integrity" << endl;
 	
-        if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(repomd_file, (_path + "/repodata/repomd.xml").asString(), _repomd_signature))
+        if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(repomd_file, (_path + "/repodata/repomd.xml").asString()+ " (" + url().asString() + ")", _repomd_signature))
 	   ZYPP_THROW(Exception(N_("Signed repomd.xml file fails signature check")));
 	 
-
 	DBG << "Reading file " << repomd_file << endl;
 	ifstream repo_st(repomd_file.asString().c_str());
 	YUMRepomdParser repomd(repo_st, "");
