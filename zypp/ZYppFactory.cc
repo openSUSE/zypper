@@ -235,6 +235,11 @@ namespace zypp
                 return true;
               }
             }
+            else
+            {
+              MIL << locker_pid << " is running and has a ZYpp lock. Access as normal user allowed." << std::endl;
+              return false;
+            }
           }
         }
       }
