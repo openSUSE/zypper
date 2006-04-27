@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Apr 27 11:55:05 CEST 2006 - kkaempf@suse.de
+
+- If freshen and supplement are fulfilled, install any kind of
+  resolvable if not yet installed (#165746)
+- rev 3249
+
+-------------------------------------------------------------------
 Wed Apr 26 18:00:42 CEST 2006 - kkaempf@suse.de
 
 - make downloaded script executable. (#169191)
