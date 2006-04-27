@@ -22,6 +22,7 @@
 #include "zypp/Digest.h"
 #include "zypp/Source.h"
 #include "zypp/SourceManager.h"
+#include "zypp/ExternalProgram.h"
 
 #include "zypp/target/store/xml/XMLPatchImpl.h"
 #include "zypp/target/store/xml/XMLMessageImpl.h"
@@ -185,27 +186,70 @@ bool
 XMLFilesBackend::isBackendInitialized() const
 {
   bool ok = true;
-  ok = ok && exists( path(d->root.asString()) / ZYPP_DB_DIR );
+  Pathname dbdir = d->root +  ZYPP_DB_DIR;
+  ok = ok && PathInfo(dbdir).isExist();
 
+  bool fixperms = false;
+  
+  // The db dir was created with 700 permissions
+  // see bug #169094
+  if ( ok && PathInfo(dbdir).perm() == 0700 )
+  {
+    if ( geteuid() == 0 )
+    {
+      fixperms = true;
+      WAR << "Wrong permissions for /var/lib/zypp, will fix" << std::endl;
+      
+      const char* argv[] =
+      {
+        "chmod",
+        "-R",
+        "0755",
+        "/var/lib/zypp",
+        NULL
+      };
+      
+      ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
+      prog.close();    
+    }
+    else
+    {
+      WAR << "Wrong permissions for /var/lib/zypp, but can't fix unless you run as root." << std::endl;
+    }
+    
+  }
+    
   // folders for resolvables
   std::set<Resolvable::Kind>::const_iterator it_kinds;
   for ( it_kinds = d->kinds.begin() ; it_kinds != d->kinds.end(); ++it_kinds )
   {
     Resolvable::Kind kind = (*it_kinds);
-    ok = ok && exists(dirForResolvableKind(kind));
+    bool isthere = exists(dirForResolvableKind(kind));
+    ok = ok && isthere;
   }
 
   // resolvable flags folder flags
   for ( it_kinds = d->kinds_flags.begin() ; it_kinds != d->kinds_flags.end(); ++it_kinds )
   {
     Resolvable::Kind kind = (*it_kinds);
-    ok = ok && exists(dirForResolvableKindFlags(kind));
+    bool isthere = exists(dirForResolvableKindFlags(kind));
+    ok = ok && isthere;
   }
 
   // named flags
-  ok = ok && exists(dirForNamedFlags());
-
-  ok = ok && exists( path(d->root.asString()) / path(ZYPP_DB_DIR) / path ("sources") );
+  bool nmthere = exists(dirForNamedFlags());
+  ok = ok && nmthere;
+    
+  Pathname sourcesdir = d->root + ZYPP_DB_DIR + "/sources";
+  bool srcthere = PathInfo(sourcesdir).isExist();
+  ok = ok && srcthere;
+  
+  if (srcthere && fixperms)
+  {
+    MIL << "Making " << sourcesdir << " not readable by others (0700)" << std::endl;
+    filesystem::chmod( sourcesdir, 0700);
+  }
+  
   return ok;
 }
 
