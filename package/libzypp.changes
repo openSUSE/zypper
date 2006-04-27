@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Apr 27 18:33:48 CEST 2006 - jsrain@suse.de
+
+- set media ID to 1 if not specified in YUM metadata (#167452)
+- rev 3255
+
+-------------------------------------------------------------------
 Thu Apr 27 11:55:05 CEST 2006 - kkaempf@suse.de
 
 - If freshen and supplement are fulfilled, install any kind of

@@ -76,6 +76,7 @@ namespace zypp {
       
         dataPtr->type = _helper.attribute(dataNode,"type");
         dataPtr->installOnly = false;
+	dataPtr->media = "1";
         
         for (xmlNodePtr child = dataNode->children; 
              child != 0;
@@ -156,6 +157,7 @@ namespace zypp {
 	if (dataPtr == NULL) return;			// skipping
         xml_assert(formatNode);
         dataPtr->installOnly = false;
+	dataPtr->media = "1";
         for (xmlNodePtr child = formatNode->children; 
              child != 0;
              child = child ->next) {
