@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Apr 27 18:41:02 CEST 2006 - jsrain@suse.de
+
+- udpated media ID syntax for external scripts (to be consistent
+  with packages) (#170247)
+- rev 3256
+
+-------------------------------------------------------------------
 Thu Apr 27 18:33:48 CEST 2006 - jsrain@suse.de
 
 - set media ID to 1 if not specified in YUM metadata (#167452)

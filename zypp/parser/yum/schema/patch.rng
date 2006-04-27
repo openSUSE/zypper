@@ -168,7 +168,8 @@
       </optional>
       <optional>
         <element name="do-media">
-          <text/>
+          <attribute name="mediaid"/>
+          <empty/>
         </element>
       </optional>
       <optional>
@@ -197,7 +198,8 @@
       </optional>
       <optional>
         <element name="undo-media">
-          <text/>
+          <attribute name="mediaid"/>
+          <empty/>
         </element>
       </optional>
       <optional>

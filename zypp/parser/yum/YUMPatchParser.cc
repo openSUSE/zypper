@@ -528,8 +528,8 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 		                     xmlNodePtr formatNode)
       {
 	shared_ptr<YUMPatchScript> script(new YUMPatchScript);
-	script->do_media = 1;
-	script->undo_media = 1;
+	script->do_media = "1";
+	script->undo_media = "1";
       
 	// FIXME move the respective method to a common class, inherit it  
 	YUMPrimaryParser prim;
@@ -560,10 +560,10 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 		script->undo_location = _helper.attribute(child,"href");
 	    }
 	    else if (name == "do-media") {
-		script->do_media = _helper.content(child);
+		script->do_media = _helper.attribute(child,"mediaid");
 	    }
 	    else if (name == "undo-media") {
-		script->undo_media = _helper.content(child);
+		script->undo_media = _helper.attribute(child,"mediaid");
 	    }
 	    else if (name == "do-checksum") {
 	      script->do_checksum_type = _helper.attribute(child,"type");

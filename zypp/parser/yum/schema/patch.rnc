@@ -64,7 +64,10 @@ element-script =
       attribute href { xsd:anyURI },
       empty
     }?,
-    element do-media { text }?,
+    element do-media { 
+      attribute mediaid { text },
+      empty
+    }?,
     element do-checksum {
       attribute type { "md5" | "sha" },
       text
@@ -74,7 +77,10 @@ element-script =
       attribute href { xsd:anyURI },
       empty
     }?,
-    element undo-media { text }?,
+    element undo-media { 
+      attribute mediaid { text },
+      empty
+    }?,
     element undo-checksum {
       attribute type { "md5" | "sha" },
       text
