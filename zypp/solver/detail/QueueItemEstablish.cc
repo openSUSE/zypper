@@ -26,6 +26,7 @@
 #include "zypp/solver/detail/QueueItemRequire.h"
 #include "zypp/solver/detail/QueueItemConflict.h"
 #include "zypp/solver/detail/QueueItem.h"
+#include "zypp/solver/detail/Helper.h"
 #include "zypp/solver/detail/ResolverContext.h"
 #include "zypp/solver/detail/ResolverInfoConflictsWith.h"
 #include "zypp/solver/detail/ResolverInfoNeededBy.h"
@@ -146,7 +147,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
     else {							// installed or no freshens or triggered freshens
 
 	CapSet supplements = _item->dep(Dep::SUPPLEMENTS);
-	if (supplements.size() != 0) {					// if we have supplements, they must also trigger
+	if (supplements.size() != 0) {					// if we have supplements, they must _also_ trigger
 	    CapSet::const_iterator iter;
 	    for (iter = supplements.begin(); iter != supplements.end(); iter++) {
 		const Capability cap = *iter;
@@ -161,8 +162,10 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 		    context->unneeded (_item, _other_penalty);
 		return true;
 	    }
-	    // have supplements and at least one triggers
-	    if (_item->kind() == ResTraits<Package>::kind) {		// schedule package for soft install
+
+	    PoolItem_Ref installed = Helper::findInstalledItem( pool(), _item );
+	    if (!installed) {								// not installed -> install
+		// have supplements and at least one triggers -> install
 		QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), _item, true );
 		qil.push_front( install_item );
 		return true;
