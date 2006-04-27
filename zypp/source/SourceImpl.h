@@ -99,6 +99,16 @@ namespace zypp
 				 const unsigned media_nr = 1,
 				 bool cached = false,
 				 bool checkonly = false);
+      /**
+       * Provide a file to local filesystem
+       * if the file does not exists, throws an exception, but 
+       * does not release the media, useful to provide
+       * optional files you want to check if they exists
+       *
+       * \throws Exception
+       *
+       */
+      const Pathname tryToProvideFile( const Pathname & file, const unsigned media_nr = 1 );
 
       /**
        * Provide a directory to local filesystem

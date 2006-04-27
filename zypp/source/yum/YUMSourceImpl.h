@@ -126,6 +126,8 @@ namespace zypp
       private:
         bool cacheExists();
 	std::list<Pathname> _metadata_files;
+        Pathname _repomd_signature;
+        Pathname _repomd_key;
 
 	typedef struct {
 	    zypp::detail::ResImplTraits<zypp::source::yum::YUMPackageImpl>::Ptr impl;

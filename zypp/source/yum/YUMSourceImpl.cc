@@ -76,119 +76,118 @@ namespace zypp
 
       void YUMSourceImpl::factoryInit()
       {
-	try {
-	  media::MediaManager media_mgr;
-	  MIL << "Adding no media verifier" << endl;
+        bool cache = cacheExists();
+        
+        try
+        {
+          media::MediaManager media_mgr;
+          MIL << "Adding no media verifier" << endl;
+        
+          // don't try to attach media
+          media::MediaAccessId _media = _media_set->getMediaAccessId(1, true);
+          media_mgr.delVerifier(_media);
+          media_mgr.addVerifier(_media, media::MediaVerifierRef(new media::NoVerifier()));
+        }
+        catch (const Exception & excpt_r)
+        {
+          #warning FIXME: If media data is not set, verifier is not set. Should the media be refused instead?
+          ZYPP_CAUGHT(excpt_r);
+          WAR << "Verifier not found" << endl;
+        }
+        
+        Pathname repomd_file;
+        
+        if ( cache )
+        {
+          DBG << "Cached metadata found in [" << _cache_dir << "]." << endl;
+          repomd_file = _cache_dir + "/repodata/repomd.xml";
+          
+          if (PathInfo(_cache_dir + "/repodata/repomd.xml.asc").isExist())
+            _repomd_key = _cache_dir + "/repodata/repomd.xml.asc";
+        
+          if (PathInfo(_cache_dir + "/repodata/repomd.xml.key").isExist())
+            _repomd_signature = _cache_dir + "/repodata/repomd.xml.key";
+        }
+        else
+        {
+          DBG << "Cached metadata not found in [" << _cache_dir << "]. Reading from " << _path << endl;
+          repomd_file = provideFile(_path + "/repodata/repomd.xml");          
+ 
+          // key and signature are optional
+          
+          try {
+            _repomd_key = tryToProvideFile( _path + "/repodata/repomd.xml.key");
+          }
+          catch( const Exception &e ) {
+            WAR << "Repository does not contain repomd signing key" << std::endl;
+          }
+                
+          try {
+            _repomd_signature = tryToProvideFile( _path + "/repodata/repomd.xml.asc");
+          }
+          catch( const Exception &e ) {
+            WAR << "Repository does not contain repomd signature" << std::endl;
+          }  
+          // if they not exists both will be Pathname()
+        }
+        
+        if ( ! PathInfo(repomd_file).isExist() )
+          ZYPP_THROW(Exception("repodata/repomd.xml not found"));
+          
+	MIL << "Trying to get the key" << endl;
+        if ( ! _repomd_key.empty() )
+        {
+          try
+          {
+            MIL << "Importing key " << "/repodata/repomd.xml.key" << endl;
+            getZYpp()->keyRing()->importKey(_repomd_key , false);
+          }
+          catch (const Exception & excpt_r)
+          {
+            WAR << "Failed to import key " << _path + ("/repodata/repomd.xml.key") << endl;
+            ZYPP_CAUGHT(excpt_r);
+          }
+        }
+        else
+        {
+          WAR << "Source provides no key" << std::endl;
+        }
+            
+        MIL << "Checking repomd.xml integrity" << endl;
 	
-	  // don't try to attach media
-	  media::MediaAccessId _media = _media_set->getMediaAccessId(1, true);
-	  media_mgr.delVerifier(_media);
-	  media_mgr.addVerifier(_media, media::MediaVerifierRef(new media::NoVerifier()));
-	}
-	catch (const Exception & excpt_r)
+        if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(repomd_file, (_path + "/repodata/repomd.xml").asString(), _repomd_signature))
+	   ZYPP_THROW(Exception(N_("Signed repomd.xml file fails signature check")));
+	 
+
+	DBG << "Reading file " << repomd_file << endl;
+	ifstream repo_st(repomd_file.asString().c_str());
+	YUMRepomdParser repomd(repo_st, "");
+	
+	for(; ! repomd.atEnd(); ++repomd)
 	{
-#warning FIXME: If media data is not set, verifier is not set. Should the media be refused instead?
-	  ZYPP_CAUGHT(excpt_r);
-	  WAR << "Verifier not found" << endl;
-	}
-
-	try {
-	  // first read list of all files in the repository
-	  Pathname filename;
-	  if (!cacheExists())
+	  if (!cache)
 	  {
-	    // now, the file exists, try to read it
-	    filename = provideFile(_path + "/repodata/repomd.xml");
-	  }
-	  else
-	  {
-	    filename = _cache_dir + "/repodata/repomd.xml";
-	  }
-	
-	  if ( ! PathInfo(filename).isExist() )
-	    ZYPP_THROW(Exception("repodata/repomd.xml not found"));
-
-	  // use tmpfile because of checking integrity - provideFile might release the medium
-	  filesystem::TmpFile tmp;
-	  filesystem::copy(filename, tmp.path());
-	  filename = tmp.path();
-	  if (!cacheExists())
-	  {
-	    MIL << "Trying to get the key" << endl;
-	    Pathname key_local;
-	    try {
-	      key_local = provideFile(_path + "/repodata/repomd.xml.key");
-	      MIL << "Importing key " << (_path + "/repodata/repomd.xml.key") << " (locally " << key_local << ")" << endl;
-	      getZYpp()->keyRing()->importKey(key_local , false);
-	    }
-	    catch (const Exception & excpt_r)
+            Pathname file_to_check = provideFile(_path + (*repomd)->location);
+            if (! checkCheckSum( file_to_check, (*repomd)->checksumType, (*repomd)->checksum))
 	    {
-	      WAR << "Failed to import key " << _path + ("/repodata/repomd.xml.key") << endl;
-	      ZYPP_CAUGHT(excpt_r);
+              ZYPP_THROW(Exception( (*repomd)->location + " " + N_("fails checksum verification") ));
 	    }
-	    MIL << "Checking repomd.xml integrity" << endl;
-	    Pathname asc_local;
-	    try {
-	      media::SilentMediaChange report;
-	      callback::TempConnect< media::MediaChangeReport > nochange(report);
-
-	      asc_local = provideFile(_path + "/repodata/repomd.xml.asc");
-	    }
-	    catch (const Exception & excpt_r)
-	    {
-	      // TODO: we should fail on not found only, others
-	      // might not be the case of unsigned repomd.xml, but
-	      // e.g. connection failures
-	      ZYPP_CAUGHT(excpt_r);
-	    }
-	
-	    if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, "repomd.xml", asc_local))
-	      ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 	  }
-
-	  DBG << "Reading file " << filename << endl;
-	  ifstream repo_st(filename.asString().c_str());
-	  YUMRepomdParser repomd(repo_st, "");
-	
-	  for(;
-	      ! repomd.atEnd();
-	      ++repomd)
+	  if ((*repomd)->type == "patches")
 	  {
-	    if (!cacheExists())
+            Pathname filename = cache ? _cache_dir + (*repomd)->location : provideFile(_path + (*repomd)->location);
+	    DBG << "reading file " << filename << endl;
+	    ifgzstream st ( filename.asString().c_str() );
+	    YUMPatchesParser patch(st, "");
+	    for (; !patch.atEnd(); ++patch)
 	    {
-	      if (! checkCheckSum(provideFile(_path + (*repomd)->location), (*repomd)->checksumType, (*repomd)->checksum))
-	      {
-	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+              string filename = (*patch)->location;
+              if (! checkCheckSum(provideFile(_path + filename), (*patch)->checksumType, (*patch)->checksum))
+              {
+	         ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
 	      }
 	    }
-	    if ((*repomd)->type == "patches")
-	    {
-              Pathname filename = cacheExists()
-                  ? _cache_dir + (*repomd)->location
-                  : provideFile(_path + (*repomd)->location);
-	      DBG << "reading file " << filename << endl;
-	      ifgzstream st ( filename.asString().c_str() );
-	      YUMPatchesParser patch(st, "");
-	      for (;
-		  !patch.atEnd();
-		  ++patch)
-	      {
-		string filename = (*patch)->location;
-		if (!cacheExists())
-		{
-		  if (! checkCheckSum(provideFile(_path + filename), (*patch)->checksumType, (*patch)->checksum))
-		  {
-		    ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-		  }
-		}
-	      }
-	    }
 	  }
-	}
-	catch (...)
-	{
-	  ERR << "Cannot read repomd file, cannot initialize source" << endl;
-	  ZYPP_THROW( Exception("Cannot read repomd file, cannot initialize source") );
 	}
       }
 
@@ -196,7 +195,16 @@ namespace zypp
       {
 	_cache_dir = cache_dir_r;
 
-        MIL << "Cleaning up cache dir" << std::endl;
+        // first read list of all files in the repository
+        Pathname filename;
+        try
+        {
+          filename = provideFile(_path + "/repodata/repomd.xml");
+        }
+        catch(Exception &e)
+        {
+          return;
+        }
 
         // refuse to use stupid paths as cache dir
         if (cache_dir_r == Pathname("/") )
@@ -205,49 +213,44 @@ namespace zypp
         if (0 != assert_dir(cache_dir_r.dirname(), 0700))
           ZYPP_THROW(Exception("Cannot create cache directory" + cache_dir_r.asString()));
 
-
+        // before really download all the data and init the cache, check
+        // if the source has really changed, otherwise, make it quick
+        Pathname cached_repomd = cache_dir_r + "/repodata/repomd.xml";
+        
+        // we can only assume repomd intact means the source changed if the source is signed.
+        if ( cacheExists() && PathInfo( _cache_dir + "/repodata/repomd.xml.asc").isExist() )
+        {
+          CheckSum old_repomd_checksum( "SHA1", filesystem::sha1sum(cached_repomd));
+          CheckSum new_repomd_checksum( "SHA1", filesystem::sha1sum(filename));
+          if ( (new_repomd_checksum == old_repomd_checksum) && (!new_repomd_checksum.empty()) && (! old_repomd_checksum.empty()))
+          {
+            MIL << "YUM source " << alias() << "has not changed. Refresh completed. SHA1 of repomd.xml file is " << old_repomd_checksum.checksum() << std::endl;
+            return;
+          }
+        }
+        MIL << "YUM source " << alias() << "has changed. Re-reading metadata into " << cache_dir_r << endl;
+        
+        
+        MIL << "Cleaning up cache dir" << std::endl;
         filesystem::clean_dir(cache_dir_r);
 
         Pathname dst = cache_dir_r + "/repodata";
         if (0 != assert_dir(dst, 0700))
           ZYPP_THROW(Exception("Cannot create repodata cache directory"));
 
-	MIL << "Storing data to cache" << endl;
-	// first read list of all files in the repository
-        Pathname filename;
-        try {
-	   filename = provideFile(_path + "/repodata/repomd.xml");
-        }
-        catch(Exception &e) {
-          return;
-        }
+        MIL << "Storing data to cache" << endl;
 	
-	// use tmpfile because of checking integrity - provideFile might release the medium
-	filesystem::TmpFile tmp;
-	filesystem::copy(filename, tmp.path());
-	filename = tmp.path();
-	MIL << "Checking repomd.xml integrity" << endl;
-	Pathname asc_local;
-	try {
-          media::SilentMediaChange report;
-          callback::TempConnect< media::MediaChangeReport > nochange(report);
-
-	  asc_local = provideFile(_path + "/repodata/repomd.xml.asc");
-	}
-	catch (const Exception & excpt_r)
-	{
-	  ZYPP_CAUGHT(excpt_r);
-	}
-	
-        if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, "repomd.xml", asc_local))
-        {
-	  ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-        }
-        else
-        {
-          // if it verifies signature, copy the TmpFile back to the file.
-          filesystem::copy( filename, cache_dir_r + "/repodata/repomd.xml");
-        }
+// 	// use tmpfile because of checking integrity - provideFile might release the medium
+// 	filesystem::TmpFile tmp;
+// 	filesystem::copy(filename, tmp.path());
+// 	filename = tmp.path();
+//         MIL << "Checking repomd.xml integrity" << endl;
+//         
+//         if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, "repomd.xml", _repomd_signature))
+//         {
+// 	  ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+//         }
+        
 	DBG << "Reading file " << filename << endl;
 	ifstream repo_st(filename.asString().c_str());
 	YUMRepomdParser repomd(repo_st, "");
@@ -296,7 +299,7 @@ namespace zypp
       {
 	std::list<YUMRepomdData_Ptr> repo_primary;
 	std::list<YUMRepomdData_Ptr> repo_files;
-	std::list<YUMRepomdData_Ptr> repo_other;
+	//std::list<YUMRepomdData_Ptr> repo_other;
 	std::list<YUMRepomdData_Ptr> repo_group;
 	std::list<YUMRepomdData_Ptr> repo_pattern;
 	std::list<YUMRepomdData_Ptr> repo_product;
@@ -315,27 +318,29 @@ namespace zypp
           ? _cache_dir + "/repodata/repomd.xml"
           : provideFile(_path + "/repodata/repomd.xml");
 	  _metadata_files.push_back("/repodata/repomd.xml");
+          
 	  // use tmpfile because of checking integrity - provideFile might release the medium
-	  filesystem::TmpFile tmp;
-	  filesystem::copy(filename, tmp.path());
-	  filename = tmp.path();
-	  if (!cacheExists())
-	  {
-	    MIL << "Checking repomd.xml integrity" << endl;
-	    Pathname asc_local;
-	    try {
-              media::SilentMediaChange report;
-              callback::TempConnect< media::MediaChangeReport > nochange(report);
-
-	      asc_local = provideFile(_path + "/repodata/repomd.xml.asc");
-	    }
-	    catch (Exception & excpt_r)
-	    {
-	      ZYPP_CAUGHT(excpt_r);
-	    }
-	    if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, "repomd.xml", asc_local))
-	      ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-	  }
+// 	  filesystem::TmpFile tmp;
+// 	  filesystem::copy(filename, tmp.path());
+// 	  filename = tmp.path();
+// 	  
+//           if (!cacheExists())
+// 	  {
+// 	    MIL << "Checking repomd.xml integrity" << endl;
+// 	    Pathname asc_local;
+// 	    try {
+//               media::SilentMediaChange report;
+//               callback::TempConnect< media::MediaChangeReport > nochange(report);
+// 
+// 	      asc_local = provideFile(_path + "/repodata/repomd.xml.asc");
+// 	    }
+// 	    catch (Exception & excpt_r)
+// 	    {
+// 	      ZYPP_CAUGHT(excpt_r);
+// 	    }
+// 	    if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, "repomd.xml", asc_local))
+// 	      ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
+// 	  }
 
 	  DBG << "Reading ifgz file " << filename << endl;
 	  ifgzstream repo_st(filename.asString().c_str());
@@ -344,12 +349,12 @@ namespace zypp
 	      ! repomd.atEnd();
 	      ++repomd)
 	  {
+            // note that we skip adding other.xml to the list of files to provide
+            
 	    if ((*repomd)->type == "primary")
 	      repo_primary.push_back(*repomd);
 	    else if ((*repomd)->type == "filelists")
 	      repo_files.push_back(*repomd);
-	    else if ((*repomd)->type == "other")
-	      repo_other.push_back(*repomd);
 	    else if ((*repomd)->type == "group")
 	      repo_group.push_back(*repomd);
 	    else if ((*repomd)->type == "pattern")

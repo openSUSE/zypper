@@ -274,6 +274,13 @@ namespace zypp
       return file;
     }
 
+    const Pathname SourceImpl::tryToProvideFile( const Pathname & file, const unsigned media_nr )
+    {
+      media::MediaAccessId _media = _media_set->getMediaAccessId( media_nr);
+      media_mgr.provideFile (_media, file, false, false);  
+      return media_mgr.localPath( _media, file );
+    }
+    
 
     const Pathname SourceImpl::provideJustFile(const Pathname & file_r,
 					   const unsigned media_nr,
