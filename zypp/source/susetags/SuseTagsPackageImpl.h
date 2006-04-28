@@ -106,6 +106,7 @@ namespace zypp
         // which entry in sourceImpl::_package_data has
         // the shared data for this package
         NVRA _data_index;
+        NVRA _nvra;
         
 	PackageGroup _group;
         std::list<std::string> _authors;

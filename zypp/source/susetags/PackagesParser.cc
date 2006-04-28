@@ -149,12 +149,12 @@ namespace zypp
             // then use its own nvrad as an index
             if ( !_isShared )
             {
-              _pkgImpl->_data_index = _nvrad;
-              _sourceImpl->_is_shared[_nvrad] = false;
+              _pkgImpl->_data_index =  _pkgImpl->_nvra;
+              _sourceImpl->_is_shared[ _pkgImpl->_nvra] = false;
             }
             else
             {
-              _sourceImpl->_is_shared[_nvrad] = true;
+              _sourceImpl->_is_shared[ _pkgImpl->_nvra] = true;
             }
           
 	    if (_srcPkgImpl == NULL					// only if its not a src/nosrc
@@ -189,6 +189,8 @@ namespace zypp
 	    // this means this is either the first package, or we just finished parsing a package and a new one is starting
 	    // collect previous pending package if needed
 	    collectPkg();
+            // reset
+            _isShared = false;
 	    std::vector<std::string> words;
 	    str::split( stag_r.value, std::back_inserter(words) );
 
@@ -213,6 +215,7 @@ namespace zypp
 
 	    _pkgImpl = PkgImplPtr( new source::susetags::SuseTagsPackageImpl( _source ) );
 	    _nvrad = NVRAD( words[0], Edition( words[1], words[2] ), Arch( arch ) );
+            _pkgImpl->_nvra = NVRA( words[0], Edition( words[1], words[2] ), Arch( arch ) );
 
 	    _isPendingPkg = true;
 
