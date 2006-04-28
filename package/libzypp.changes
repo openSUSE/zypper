@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 28 20:15:06 CEST 2006 - dmacvicar@suse.de
+
+- get rid of autobuild check when throwing exceptions without throw
+  but with a macro, returning a null pointer at the end (never reached). 
+
+-------------------------------------------------------------------
 Fri Apr 28 19:50:28 CEST 2006 - ma@suse.de
 
 - Do not violate install order when restricting commit to a certain
