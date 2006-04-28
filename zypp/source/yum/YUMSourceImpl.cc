@@ -1080,12 +1080,18 @@ namespace zypp
 	{
 	  switch ((*it)->atomType())
 	  {
-	    // for packages, try to find best architecture for name first (#168840)
+	    // for packages, try to find best architecture for name-version-release first (#168840)
+	    // we can't use the name alone as there might be different editions for the same name
+	    // with different architecture.
+	    // So we only choose the best architecture if name-version-edition matches (#170098)
 
 	    case YUMPatchAtom::Package: {
 	      shared_ptr<YUMPatchPackage> package_data
 		= dynamic_pointer_cast<YUMPatchPackage>(*it);
-	      PkgAtomsMap::iterator pa_pos = pkg_atoms.find( package_data->name );
+	      string atomkey( package_data->name + "-" + package_data->epoch + ":" + package_data->ver + "-" + package_data->rel );
+
+	      // check if atomkey is already known
+	      PkgAtomsMap::iterator pa_pos = pkg_atoms.find( atomkey );
 	      if (pa_pos != pkg_atoms.end()) {
 		try {
 		  Arch oldarch, newarch;
@@ -1106,7 +1112,7 @@ namespace zypp
 		}
 	      }
 	      else {
-		pkg_atoms[package_data->name] = package_data;					// first occurence of this name
+		pkg_atoms[atomkey] = package_data;					// first occurence of this atomkey
 	      }
 	      break;
 	    }
