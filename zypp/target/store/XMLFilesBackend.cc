@@ -785,6 +785,7 @@ XMLFilesBackend::createPatch( const zypp::parser::xmlstore::XMLPatchData & parse
     ZYPP_CAUGHT(excpt_r);
     ZYPP_THROW(Exception("Cannot create patch object"));
   }
+  return 0L;
 }
 
 Atom::Ptr
@@ -808,6 +809,7 @@ XMLFilesBackend::createAtom( const zypp::parser::xmlstore::XMLPatchAtomData & pa
     ZYPP_CAUGHT(excpt_r);
     ZYPP_THROW(Exception("Cannot create atom object"));
   }
+  return 0L;
 }
 
 Message::Ptr
@@ -832,6 +834,7 @@ XMLFilesBackend::createMessage( const zypp::parser::xmlstore::XMLPatchMessageDat
     ZYPP_CAUGHT(excpt_r);
     ZYPP_THROW(Exception("Cannot create message object"));
   }
+  return 0L;
 }
 
 Script::Ptr
@@ -869,6 +872,7 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
     ERR << excpt_r.what() << endl;
     ZYPP_THROW(Exception("Cannot create script object"));
   }
+  return 0L;
 }
 
 Language::Ptr
@@ -883,6 +887,7 @@ XMLFilesBackend::createLanguage( const zypp::parser::xmlstore::XMLLanguageData &
     ZYPP_CAUGHT(excpt_r);
     ZYPP_THROW(Exception("Cannot create language object"));
   }
+  return 0L;
 }
 
 
@@ -935,6 +940,7 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
     ZYPP_CAUGHT(excpt_r);
     ZYPP_THROW(Exception("Cannot create product object"));
   }
+  return 0L;
 }
 
 Pattern::Ptr
@@ -966,6 +972,7 @@ XMLFilesBackend::createPattern( const zypp::parser::xmlstore::XMLPatternData & p
     ZYPP_CAUGHT(excpt_r);
     ZYPP_THROW(Exception("Cannot create installation pattern object"));
   }
+  return 0L;
 }
 
 Selection::Ptr
@@ -996,6 +1003,7 @@ XMLFilesBackend::createSelection( const zypp::parser::xmlstore::XMLPatternData &
     ZYPP_CAUGHT(excpt_r);
     ZYPP_THROW(Exception("Cannot create installation selection object"));
   }
+  return 0L;
 }
 
 Dependencies

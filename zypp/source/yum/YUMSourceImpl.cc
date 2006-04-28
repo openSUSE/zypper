@@ -768,6 +768,7 @@ namespace zypp
       ZYPP_CAUGHT(excpt_r);
       ZYPP_THROW(Exception("Cannot create package object"));
     }
+    return 0L;
   }
 
   Atom::Ptr YUMSourceImpl::augmentPackage(
@@ -888,6 +889,7 @@ namespace zypp
       ZYPP_CAUGHT(excpt_r);
       ZYPP_THROW(Exception("Cannot create augmented package object"));
     }
+    return 0L;
   }
 
   Selection::Ptr YUMSourceImpl::createGroup(
@@ -913,6 +915,7 @@ namespace zypp
       ZYPP_CAUGHT(excpt_r);
       ZYPP_THROW(Exception("Cannot create package group object"));
     }
+    return 0L;
   }
 
   Pattern::Ptr YUMSourceImpl::createPattern(
@@ -942,6 +945,7 @@ namespace zypp
       ZYPP_CAUGHT(excpt_r);
       ZYPP_THROW(Exception("Cannot create installation pattern object"));
     }
+    return 0L;
   }
 
   Message::Ptr YUMSourceImpl::createMessage(
@@ -973,6 +977,7 @@ namespace zypp
       ZYPP_CAUGHT(excpt_r);
       ZYPP_THROW(Exception("Cannot create message object"));
     }
+    return 0L;
   }
 
   Script::Ptr YUMSourceImpl::createScript(
@@ -1003,6 +1008,7 @@ namespace zypp
       ZYPP_CAUGHT(excpt_r);
       ZYPP_THROW(Exception("Cannot create script object"));
     }
+    return 0L;
   }
 
   Product::Ptr YUMSourceImpl::createProduct(
@@ -1034,6 +1040,7 @@ namespace zypp
       ZYPP_CAUGHT(excpt_r);
       ZYPP_THROW(Exception("Cannot create product object"));
     }
+    return 0L;
   }
 
   Patch::Ptr YUMSourceImpl::createPatch(
@@ -1154,6 +1161,7 @@ namespace zypp
       ZYPP_CAUGHT(excpt_r);
       ZYPP_THROW(Exception("Cannot create patch object"));
     }
+    return 0L;
   }
 
   Dependencies YUMSourceImpl::createDependencies(
