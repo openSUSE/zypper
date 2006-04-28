@@ -233,8 +233,7 @@ namespace zypp
         }
         catch (const Exception & excpt_r)
         {
-          ERR << excpt_r << endl;
-          throw "Cannot create product object";
+          ZYPP_THROW(Exception("Error creating product: " + excpt_r.msg()));
         }
 
 	prodImpl->_source = source_r;

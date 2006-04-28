@@ -412,7 +412,7 @@ namespace zypp
 		files_data[nvra] = *filelist;
 	    }
 	    if (filelist.errorStatus())
-	      throw *filelist.errorStatus();
+              ZYPP_THROW(Exception(filelist.errorStatus()->msg()));
 	  }
 
 #if 0	// don't parse 'other.xml' (#159316)
@@ -515,7 +515,7 @@ namespace zypp
 		_store.insert (p);
 	    }
 	    if (prim.errorStatus())
-		throw *prim.errorStatus();
+              ZYPP_THROW(Exception(prim.errorStatus()->msg()));
 	}
     }
     catch (...) {
@@ -554,7 +554,7 @@ namespace zypp
 		_store.insert (p);
 	    }
 	    if (group.errorStatus())
-		throw *group.errorStatus();
+              ZYPP_THROW(Exception(group.errorStatus()->msg()));
 	}
     }
     catch (...) {
@@ -594,7 +594,7 @@ namespace zypp
 		_store.insert (p);
 	    }
 	    if (pattern.errorStatus())
-		throw *pattern.errorStatus();
+              ZYPP_THROW(Exception(pattern.errorStatus()->msg()));
 	}
     }
     catch (...) {
@@ -634,7 +634,7 @@ namespace zypp
 		_store.insert (p);
 	    }
 	    if (product.errorStatus())
-		throw *product.errorStatus();
+              ZYPP_THROW(Exception(product.errorStatus()->msg()));
   	  }
     }
     catch (...) {
@@ -678,7 +678,7 @@ namespace zypp
 		patch_files.push_back(filename);
 	    }
 	    if (patch.errorStatus())
-		throw *patch.errorStatus();
+              ZYPP_THROW(Exception(patch.errorStatus()->msg()));
 	}
 
 	//---------------------------------
@@ -713,7 +713,7 @@ namespace zypp
 		  }
 	    }
 	    if (ptch.errorStatus())
-		throw *ptch.errorStatus();
+              ZYPP_THROW(Exception(ptch.errorStatus()->msg()));
 	}
     }
     catch (...)
@@ -765,8 +765,8 @@ namespace zypp
     }
     catch (const Exception & excpt_r)
     {
-      ERR << excpt_r << endl;
-      throw "Cannot create package object";
+      ZYPP_CAUGHT(excpt_r);
+      ZYPP_THROW(Exception("Cannot create package object"));
     }
   }
 
@@ -885,9 +885,8 @@ namespace zypp
     }
     catch (const Exception & excpt_r)
     {
-      ERR << excpt_r << endl;
-      ZYPP_CAUGHT( excpt_r );
-      throw "Cannot create augmented package object";
+      ZYPP_CAUGHT(excpt_r);
+      ZYPP_THROW(Exception("Cannot create augmented package object"));
     }
   }
 
@@ -911,8 +910,8 @@ namespace zypp
     }
     catch (const Exception & excpt_r)
     {
-      ERR << excpt_r << endl;
-      throw "Cannot create package group object";
+      ZYPP_CAUGHT(excpt_r);
+      ZYPP_THROW(Exception("Cannot create package group object"));
     }
   }
 
@@ -940,8 +939,8 @@ namespace zypp
     }
     catch (const Exception & excpt_r)
     {
-      ERR << excpt_r << endl;
-      throw "Cannot create installation pattern object";
+      ZYPP_CAUGHT(excpt_r);
+      ZYPP_THROW(Exception("Cannot create installation pattern object"));
     }
   }
 
@@ -971,8 +970,8 @@ namespace zypp
     }
     catch (const Exception & excpt_r)
     {
-      ERR << excpt_r << endl;
-      throw "Cannot create message object";
+      ZYPP_CAUGHT(excpt_r);
+      ZYPP_THROW(Exception("Cannot create message object"));
     }
   }
 
@@ -1001,8 +1000,8 @@ namespace zypp
     }
     catch (const Exception & excpt_r)
     {
-      ERR << excpt_r << endl;
-      throw "Cannot create script object";
+      ZYPP_CAUGHT(excpt_r);
+      ZYPP_THROW(Exception("Cannot create script object"));
     }
   }
 
@@ -1032,8 +1031,8 @@ namespace zypp
     }
     catch (const Exception & excpt_r)
     {
-      ERR << excpt_r << endl;
-      throw "Cannot create product object";
+      ZYPP_CAUGHT(excpt_r);
+      ZYPP_THROW(Exception("Cannot create product object"));
     }
   }
 
@@ -1152,8 +1151,8 @@ namespace zypp
     }
     catch (const Exception & excpt_r)
     {
-      ERR << excpt_r << endl;
-      throw "Cannot create patch object";
+      ZYPP_CAUGHT(excpt_r);
+      ZYPP_THROW(Exception("Cannot create patch object"));
     }
   }
 

@@ -782,8 +782,8 @@ XMLFilesBackend::createPatch( const zypp::parser::xmlstore::XMLPatchData & parse
   }
   catch (const Exception & excpt_r)
   {
-    ERR << excpt_r << endl;
-    throw "Cannot create patch object";
+    ZYPP_CAUGHT(excpt_r);
+    ZYPP_THROW(Exception("Cannot create patch object"));
   }
 }
 
@@ -805,8 +805,8 @@ XMLFilesBackend::createAtom( const zypp::parser::xmlstore::XMLPatchAtomData & pa
   }
   catch (const Exception & excpt_r)
   {
-    ERR << excpt_r << endl;
-    throw "Cannot create atom object";
+    ZYPP_CAUGHT(excpt_r);
+    ZYPP_THROW(Exception("Cannot create atom object"));
   }
 }
 
@@ -829,8 +829,8 @@ XMLFilesBackend::createMessage( const zypp::parser::xmlstore::XMLPatchMessageDat
   }
   catch (const Exception & excpt_r)
   {
-    ERR << excpt_r << endl;
-    throw "Cannot create message object";
+    ZYPP_CAUGHT(excpt_r);
+    ZYPP_THROW(Exception("Cannot create message object"));
   }
 }
 
@@ -861,13 +861,13 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
   }
   catch (const Exception & excpt_r)
   {
-    ERR << excpt_r << endl;
-    throw "Cannot create script object";
+    ZYPP_CAUGHT(excpt_r);
+    ZYPP_THROW(Exception("Cannot create script object"));
   }
   catch (const std::exception & excpt_r)
   {
     ERR << excpt_r.what() << endl;
-    throw "Cannot create script object";
+    ZYPP_THROW(Exception("Cannot create script object"));
   }
 }
 
@@ -880,8 +880,8 @@ XMLFilesBackend::createLanguage( const zypp::parser::xmlstore::XMLLanguageData &
   }
   catch (const Exception & excpt_r)
   {
-    ERR << excpt_r << endl;
-    throw "Cannot create language object";
+    ZYPP_CAUGHT(excpt_r);
+    ZYPP_THROW(Exception("Cannot create language object"));
   }
 }
 
@@ -932,8 +932,8 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
   }
   catch (const Exception & excpt_r)
   {
-    ERR << excpt_r << endl;
-    throw "Cannot create product object";
+    ZYPP_CAUGHT(excpt_r);
+    ZYPP_THROW(Exception("Cannot create product object"));
   }
 }
 
@@ -963,8 +963,8 @@ XMLFilesBackend::createPattern( const zypp::parser::xmlstore::XMLPatternData & p
   }
   catch (const Exception & excpt_r)
   {
-    ERR << excpt_r << endl;
-    throw "Cannot create installation pattern object";
+    ZYPP_CAUGHT(excpt_r);
+    ZYPP_THROW(Exception("Cannot create installation pattern object"));
   }
 }
 
@@ -993,8 +993,8 @@ XMLFilesBackend::createSelection( const zypp::parser::xmlstore::XMLPatternData &
   }
   catch (const Exception & excpt_r)
   {
-    ERR << excpt_r << endl;
-    throw "Cannot create installation selection object";
+    ZYPP_CAUGHT(excpt_r);
+    ZYPP_THROW(Exception("Cannot create installation selection object"));
   }
 }
 

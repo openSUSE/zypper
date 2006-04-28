@@ -449,7 +449,7 @@ namespace zypp
 	  _autorefresh = p.volatile_content && media::MediaAccess::canBeVolatile( _url );
         }
         catch (Exception & excpt_r) {
-          ERR << "cannot parse content file" << endl;
+          ZYPP_THROW (Exception( "cannot parse content file."));
         }
       }
 
