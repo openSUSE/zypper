@@ -85,7 +85,6 @@ make install DESTDIR=$RPM_BUILD_ROOT
 %run_ldconfig
 
 %clean
-rm -rf $RPM_BUILD_ROOT
 
 %files -f zypp.lang
 %defattr(-,root,root)
