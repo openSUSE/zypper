@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Apr 28 14:55:04 CEST 2006 - kkaempf@suse.de
+
+- revert bugfix #168906 (fom rev 3219), it filters too many errors.
+- further improve on #168840 (from rev 3231), match on name-edition
+  when filtering by best arch. (#170098)
+- rev 3268
+
+-------------------------------------------------------------------
 Fri Apr 28 13:01:58 CEST 2006 - dmacvicar@suse.de
 
 - #170093 , lot of package descriptions missing 
