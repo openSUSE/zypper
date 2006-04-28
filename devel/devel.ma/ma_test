@@ -3,6 +3,11 @@
 #export LD_LIBRARY_PATH=/usr/local/lib64
 
 PRG=Main
+SUDO=
+if [ "$1" = -su ]; then
+       SUDO=sudo
+       shift
+fi
 
 if [ -n "$1" ]; then
        PRG=$1
@@ -33,4 +38,4 @@ $MAKE $PRG || exit 1
 
 export ZYPP_LOGFILE=-
 export ZYPP_KEYRING_DEFAULT_ACCEPT_ALL=1
-./$PRG "$@" 2> $LPIPE
+$SUDO ./$PRG "$@" 2> $LPIPE

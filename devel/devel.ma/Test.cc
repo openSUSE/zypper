@@ -145,21 +145,6 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "xxx" );
   INT << "===[START]==========================================" << endl;
 
-  enum for_use_in_switch { a, b, c };
-
-  struct Edef
-  {
-    for_use_in_switch _val;
-    const char * _tostr;
-    const char * _fromstr[];
-  };
-
-  const char * fromstr[] = { "a", "A" };
-
-  Edef x[] = { a, "a", "A" };
-
-  return 0;
-  INT << "===[END]============================================" << endl << endl;
   ResPool pool( getZYpp()->pool() );
 
   if ( 0 )
@@ -169,23 +154,24 @@ int main( int argc, char * argv[] )
       INT << "Added target: " << pool << endl;
     }
 
-  if ( 0 )
+  Source_Ref src1( createSource( "nfs://machcd2/CDs/SLES-10-CD-i386-Beta10/CD1" ) );
+
+  getZYpp()->initTarget( "/" );
+
+  if ( 1 )
     {
-      Source_Ref src1( createSource( "dir:/mounts/machcd2/CDs/SLES-10-CD-i386-Beta10/CD1" ) );
-      Source_Ref src2( createSource( "dir:/mounts/machcd2/kukuk/sles10-sp-i386/CD1" ) );
+      Source_Ref src1( createSource( "dir:/Local/TEST" ) );
       getZYpp()->addResolvables( src1.resolvables() );
-      getZYpp()->addResolvables( src2.resolvables() );
       INT << "Pool: " << pool << endl;
     }
 
-  selectForTransact( nameKindProxy<Pattern>( pool, "default" ) );
-  selectForTransact( nameKindProxy<Pattern>( pool, "x11" ) );
-  selectForTransact( nameKindProxy<Pattern>( pool, "kde" ) );
-  selectForTransact( nameKindProxy<Pattern>( pool, "OOo" ) );
+  selectForTransact( nameKindProxy<Package>( pool, "ccur-su-nslm" ) );
 
   vdumpPoolStats( INT << "Transacting: ",
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+
+  getZYpp()->commit( ZYppCommitPolicy() );
 
   INT << "===[END]============================================" << endl << endl;
   return 0;
