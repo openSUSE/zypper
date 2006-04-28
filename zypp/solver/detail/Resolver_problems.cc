@@ -255,13 +255,6 @@ Resolver::problems (void) const
 	    }
 	    break;
 	    case RESOLVER_INFO_TYPE_CONFLICTS_WITH: {
-		if (item.status().staysUninstalled()
-		    || item.status().isToBeUninstalled())
-		{
-		    // dont warn about internal conflicts which are just used to set an item to "impossible"
-		    // (#168906)
-		    break;
-		}
 		ResolverInfoConflictsWith_constPtr conflicts_with = dynamic_pointer_cast<const ResolverInfoConflictsWith>(info);
 		if (conflicts_with->items().size() >= 1)
 		    // TranslatorExplanation %s = name of package, patch, selection ...
