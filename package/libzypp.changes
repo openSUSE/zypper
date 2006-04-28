@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Apr 28 18:12:26 CEST 2006 - dmacvicar@suse.de
+
+- Don't use throw directly!
+  use ZYPP_THROW with a Exception class, otherwise package bindings
+  will not catch them.
+  Should fix crashes when reading broken sources with yast. 
+- rev 3272
+
+-------------------------------------------------------------------
 Fri Apr 28 15:29:32 CEST 2006 - schubi@suse.de
 
 - Bug 162064 - font packages are not installed for locale, e.g. khmer font not installed after CD1 
