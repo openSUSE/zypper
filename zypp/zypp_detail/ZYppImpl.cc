@@ -269,7 +269,7 @@ namespace zypp
                   if ( ! select.availableEmpty() )
                     {
                       // both items ==> keep
-                      select.availableBegin()->status().setTransactValue( ResStatus::KEEP_STATE, ResStatus::USER );
+                      select.availableBegin()->status().resetTransact( ResStatus::USER );
                     }
                 }
             }
@@ -279,7 +279,7 @@ namespace zypp
               if ( ! select.installedEmpty() )
                 select.installedBegin()->status().setTransactValue( ResStatus::TRANSACT, ResStatus::USER );
               if ( ! select.availableEmpty() )
-                select.availableBegin()->status().setTransactValue( ResStatus::KEEP_STATE, ResStatus::USER );
+                select.availableBegin()->status().resetTransact( ResStatus::USER );
             }
         }
     }
