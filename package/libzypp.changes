@@ -2,6 +2,7 @@
 Fri Apr 28 15:29:32 CEST 2006 - schubi@suse.de
 
 - Bug 162064 - font packages are not installed for locale, e.g. khmer font not installed after CD1 
+  revision 3269
 
 -------------------------------------------------------------------
 Fri Apr 28 14:55:04 CEST 2006 - kkaempf@suse.de
