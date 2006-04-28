@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 28 13:01:58 CEST 2006 - dmacvicar@suse.de
+
+- #170093 , lot of package descriptions missing 
+- rev 3263
+
+-------------------------------------------------------------------
 Thu Apr 27 20:28:01 CEST 2006 - dmacvicar@suse.de
 
 - try to fix wrong permissions of /var/lib/zypp created
