@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="2df44e2bf67d94aea3b3ad4a6747f0e0"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="aaa_base-1283"
+    timestamp="1144942508"
+    engine="1.0">
+  <yum:name>aaa_base</yum:name>
+  <summary lang="en">TEST patch for SL 10.1 - aaa_base</summary>
+  <summary lang="de">TEST patch fuer SL 10.1 - aaa_base</summary>
+  <description lang="en">TEST patch for SL 10.1 - aaa_base post RC1 patch
+</description>
+  <description lang="de">TEST patch fuer SL 10.1 - aaa_base patch nach RC1 erzeugt
+</description>
+  <yum:version ver="1283" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="aaa_base" epoch="0" ver="10.1" rel="21" flags="EQ"/>
+  </rpm:requires>
+  <category>optional</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>aaa_base</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="10.1" rel="21"/>
+      <checksum type="sha" pkgid="YES">8c06be8a88bff7e370b5228160c00b5e3e8ffc42</checksum>
+      <time file="1144946213" build="1144942508"/>
+      <size package="315160" installed="314433" archive="331044"/>
+      <location href="rpm/i586/aaa_base-10.1-21.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="aaa_base" epoch="0" ver="10.1" rel="21" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="aaa_base"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/aaa_base-10.1-21.i586.patch.rpm"/>
+          <checksum type="sha">cc258a8fa69f69fbae108e58600d92ba</checksum>
+          <time file="1144978204" build="1144942508"/>
+          <size package="246233" archive="85112"/>
+          <base-version epoch="0" ver="10.0.42" rel="59"/>
+          <base-version epoch="0" ver="10.1" rel="15"/>
+          <base-version epoch="0" ver="10.1" rel="19"/>
+          <base-version epoch="0" ver="10.1" rel="5"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>aaa_base</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="10.1" rel="21"/>
+      <checksum type="sha" pkgid="YES">c106f52b109be9bc98e3f382326e1ab098752f18</checksum>
+      <time file="1144976830" build="1144976567"/>
+      <size package="315700" installed="315669" archive="332280"/>
+      <location href="rpm/ppc/aaa_base-10.1-21.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="aaa_base" epoch="0" ver="10.1" rel="21" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="aaa_base"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/aaa_base-10.1-21.ppc.patch.rpm"/>
+          <checksum type="sha">12f99ea3c2cbc768c46ed3626cb96d99</checksum>
+          <time file="1144978207" build="1144976567"/>
+          <size package="246783" archive="86348"/>
+          <base-version epoch="0" ver="10.0.42" rel="59"/>
+          <base-version epoch="0" ver="10.1" rel="15"/>
+          <base-version epoch="0" ver="10.1" rel="5"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>aaa_base</name>
+      <arch>ppc64</arch>
+      <version epoch="0" ver="10.1" rel="21"/>
+      <checksum type="sha" pkgid="YES">cc1683c1a0d70dbd6371ffde67242146c6474aa9</checksum>
+      <time file="1144952666" build="1144952233"/>
+      <size package="315788" installed="317629" archive="334240"/>
+      <location href="rpm/ppc64/aaa_base-10.1-21.ppc64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="aaa_base" epoch="0" ver="10.1" rel="21" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="aaa_base"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc64/aaa_base-10.1-21.ppc64.patch.rpm"/>
+          <checksum type="sha">673091af6a5ccd8d219623774cc7e798</checksum>
+          <time file="1144978208" build="1144952233"/>
+          <size package="246866" archive="88308"/>
+          <base-version epoch="0" ver="10.0.42" rel="59"/>
+          <base-version epoch="0" ver="10.1" rel="15"/>
+          <base-version epoch="0" ver="10.1" rel="5"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>aaa_base</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="10.1" rel="21"/>
+      <checksum type="sha" pkgid="YES">9376a3f08cc0b19fc5debfbdd7a24991b37a68dc</checksum>
+      <time file="1144947240" build="1144943754"/>
+      <size package="315462" installed="316237" archive="332848"/>
+      <location href="rpm/x86_64/aaa_base-10.1-21.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="aaa_base" epoch="0" ver="10.1" rel="21" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="aaa_base"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/aaa_base-10.1-21.x86_64.patch.rpm"/>
+          <checksum type="sha">306090c85c9216079f818e8c13ffa330</checksum>
+          <time file="1144978210" build="1144943754"/>
+          <size package="246524" archive="86916"/>
+          <base-version epoch="0" ver="10.0.42" rel="59"/>
+          <base-version epoch="0" ver="10.1" rel="15"/>
+          <base-version epoch="0" ver="10.1" rel="19"/>
+          <base-version epoch="0" ver="10.1" rel="5"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>

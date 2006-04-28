@@ -12,7 +12,8 @@ noinst_PROGRAMS = \
 	patterntagparsertest	\
 	producttagparsertest	\
 	mediatagparsertest	\
-	suseparser
+	suseparser \
+	source_read_test
 	
 selectiontagparsertest_SOURCES = SelectionTagParserTest.cc
 packagetagparsertest_SOURCES = PackageTagParserTest.cc
@@ -20,3 +21,4 @@ patterntagparsertest_SOURCES = PatternTagParserTest.cc
 producttagparsertest_SOURCES = ProductMetadataParserTest.cc
 mediatagparsertest_SOURCES = MediaMetadataParserTest.cc
 suseparser_SOURCES = suseparser.cc
+source_read_test_SOURCES = source-read-test.cc

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patches xmlns="http://novell.com/package/metadata/suse/patches">
+  <patch id="fetchmsttfonts.sh-1282">
+    <checksum type="sha">390fdc9d799c38fa32910712d1a3a0ea417e6325</checksum>
+    <location href="repodata/patch-fetchmsttfonts.sh-1282.xml"/>
+  </patch>
+  <patch id="zypp-1285">
+    <checksum type="sha">addc91ba15ab61d136a5b13d5dea093935a2df31</checksum>
+    <location href="repodata/patch-zypp-1285.xml"/>
+  </patch>
+  <patch id="flash-player-1289">
+    <checksum type="sha">c233e5f7ca5a9922b6578609faad4bc9f15bb4d2</checksum>
+    <location href="repodata/patch-flash-player-1289.xml"/>
+  </patch>
+  <patch id="kernel-1281">
+    <checksum type="sha">cccec48bbc45ba22cf78a13ec4345db4dec03b02</checksum>
+    <location href="repodata/patch-kernel-1281.xml"/>
+  </patch>
+  <patch id="aaa_base-1283">
+    <checksum type="sha">4a7022f669c40ffd67472b7ccad9889f6270e148</checksum>
+    <location href="repodata/patch-aaa_base-1283.xml"/>
+  </patch>
+  <patch id="zypp-1288">
+    <checksum type="sha">78ca7d1ace23b8096c097fb5f0e63de190982aa6</checksum>
+    <location href="repodata/patch-zypp-1288.xml"/>
+  </patch>
+  <patch id="zypp-1291">
+    <checksum type="sha">d41f91ac3cc37c8dcc945ceeac952a147d88965a</checksum>
+    <location href="repodata/patch-zypp-1291.xml"/>
+  </patch>
+  <patch id="gcc-1280">
+    <checksum type="sha">90d204179a54be1c1b11a85931943e66658884aa</checksum>
+    <location href="repodata/patch-gcc-1280.xml"/>
+  </patch>
+</patches>

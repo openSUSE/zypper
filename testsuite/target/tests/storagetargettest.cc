@@ -32,6 +32,8 @@
 
 #include "zypp/CapFactory.h"
 
+#include "zypp/ZYppFactory.h"
+
 #include "zypp/target/store/serialize.h"
 
 #include "boost/filesystem/operations.hpp" // includes boost/filesystem/path.hpp
@@ -311,6 +313,17 @@ struct StorageTargetTest
     return 0;
   }
   
+  int quick_refresh_test()
+  {
+    //clean();
+    
+    //initSourceWithCache(Url("ftp://you.suse.de/pub/suse/update/10.1"));
+    initSourceWithCache(Url("dir:/mounts/dist/install/stable-x86"));
+    
+    storeSourceMetadata();
+    return 0;
+  }
+  
   int yumbug_read_test()
   {
     unpackDatabase("yum-createrepo-fixed.tar.gz");
@@ -485,13 +498,15 @@ struct StorageTargetTest
 
 int main()
 { 
+  getZYpp()->initTarget("/", false);
   try
   {  
     //RUN_TEST(armstrong_yum_source_source_read);
     //RUN_TEST(huha_yum_patch_bug_read);
     //RUN_TEST(yumbug_read);#
     //RUN_TEST(sles10_machcd_source_read);
-    RUN_TEST(huha_yum_patch_bug_read);
+    RUN_TEST(quick_refresh);
+    //RUN_TEST(huha_yum_patch_bug_read);
     /*
     RUN_TEST(storage_read);
     RUN_TEST(read_source_cache);
