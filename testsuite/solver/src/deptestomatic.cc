@@ -488,8 +488,17 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
 	if (s.alias() != source.alias()) {
 	    return true;
 	}
-	poolItem = p;
-	return false;				// stop here, we found it
+	if (!p->arch().compatibleWith( God->architecture() )) {
+	    return true;
+	}
+
+	if (!poolItem							// none yet
+	    || (poolItem->arch().compare( p->arch() ) < 0)		// new has better arch
+	    || (poolItem->edition().compare( p->edition() ) < 0))	// new has better edition
+	{
+	    poolItem = p;
+	}
+	return true;
     }
 };
 
@@ -517,7 +526,6 @@ get_poolItem (const string & source_alias, const string & package_name, const st
 	invokeOnEach( God->pool().byNameBegin( package_name ),
 		      God->pool().byNameEnd( package_name ),
 		      functor::chain( resfilter::BySource(source), resfilter::ByKind (kind) ),
-//		      resfilter::ByKind (kind),
 		      functor::functorRef<bool,PoolItem> (info) );
 
 	poolItem = info.poolItem;
@@ -781,7 +789,7 @@ parse_xml_setup (XmlNode_Ptr node)
 	} else if (node->equals ("system")) {
 
 	    string file = node->getProp ("file");
-	    if (load_source ("@system", file, "helix", true) < 0) {
+	    if (load_source ("@system", file, "helix", true) <= 0) {
 		cerr << "Can't setup 'system'" << endl;
 		exit( 1 );
 	    }
