@@ -365,12 +365,13 @@ namespace zypp
 	      repo_product.push_back(*repomd);
 	    else if ((*repomd)->type == "patches")
 	      repo_patches.push_back(*repomd);
-	    else
+	    else if ((*repomd)->type != "other")	// type "other" is ok, anything else not
 	      ERR << "Unknown type of repo file: " << (*repomd)->type << endl;
 	}
       }
-      catch (...)
+      catch( const Exception &  excpt_r )
       {
+	  ZYPP_CAUGHT( excpt_r );	// log the caught exception
 	  ERR << "Cannot read repomd file, cannot initialize source" << endl;
 	  ZYPP_THROW( Exception("Cannot read repomd file, cannot initialize source") );
       }
