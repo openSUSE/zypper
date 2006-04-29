@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--PATCHINFO id="b1c06e2891ce44ec811e0a4f80931532"!-->
+<patch
+    xmlns="http://novell.com/package/metadata/suse/patch"
+    xmlns:yum="http://linux.duke.edu/metadata/common"
+    xmlns:rpm="http://linux.duke.edu/metadata/rpm"
+    xmlns:suse="http://novell.com/package/metadata/suse/common"
+    patchid="zypp-1291"
+    timestamp="1145801690"
+    engine="1.0">
+  <yum:name>zypp</yum:name>
+  <summary lang="en">Update of the update stack.</summary>
+  <summary lang="de">Update der fÃ¼r das Online Update relevanten Pakete</summary>
+  <description lang="en">Update of the update  stack.  This maintenance update 
+updates the update stack and should only apply this one 
+patch. It should restart the update tool (zen-updater) or 
+suggest to run the update tool again (rug, yast2).
+</description>
+  <description lang="de">Update der fÃ¼r das Online Update relevanten Pakete  Dies 
+Online Update bringt die fÃ¼r das Online Update relevanten 
+Pakete auf den neusten Stand. Es sollte nur diese Update 
+angewendet werden. Anschliesend sollte da Update Toll 
+(zen-updater) neugestartet werden oder eine Meldung sollte 
+empfehlen, daÃ Update-Tool (rug, yast2) noch einmal 
+aufzurufen.
+</description>
+  <yum:version ver="1291" rel="0"/>
+  <rpm:requires>
+  <rpm:entry kind="atom" name="libzypp" epoch="0" ver="0.0.8" rel="116" flags="EQ"/>
+  <rpm:entry kind="atom" name="libzypp-zmd-backend" epoch="0" ver="7.1.1.0" rel="26" flags="EQ"/>
+  <rpm:entry kind="atom" name="rug" epoch="0" ver="7.1.1.0" rel="10" flags="EQ"/>
+  <rpm:entry kind="atom" name="zmd" epoch="0" ver="7.1.1.0" rel="18" flags="EQ"/>
+  <rpm:entry kind="atom" name="zmd-devel" epoch="0" ver="7.1.1.0" rel="18" flags="EQ"/>
+  </rpm:requires>
+  <package-manager/>
+  <category>recommended</category>
+  <atoms>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libzypp</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="0.0.8" rel="116"/>
+      <checksum type="sha" pkgid="YES">9410d9aa3029861c409383183bc2f17621e48282</checksum>
+      <time file="1145832135" build="1145801690"/>
+      <size package="1810460" installed="5599309" archive="5612660"/>
+      <location href="rpm/i586/libzypp-0.0.8-116.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libzypp" epoch="0" ver="0.0.8" rel="116" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libzypp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/libzypp-0.0.8-116.i586.patch.rpm"/>
+          <checksum type="sha">99417d46ac0453760f9b47bacc8b05dd</checksum>
+          <time file="1145835869" build="1145801690"/>
+          <size package="1810686" archive="5612244"/>
+          <base-version epoch="0" ver="0.0.8" rel="39"/>
+          <base-version epoch="0" ver="0.0.8" rel="49"/>
+          <base-version epoch="0" ver="0.0.8" rel="66"/>
+          <base-version epoch="0" ver="0.0.8" rel="94"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/libzypp-0.0.8-66_116.i586.delta.rpm"/>
+          <checksum type="sha">4001e253ae6f6057807a715d59e0efce385d570a</checksum>
+          <time file="1145835875" build="1145801690"/>
+          <size package="1205201" archive="0"/>
+          <base-version epoch="0" ver="0.0.8" rel="66" md5sum="d32605e01acba6728c9f43508679856e" buildtime="1143622519" sequence_info="libzypp-0.0.8-66-e2e936e50311510228d4e27926a87c15ea10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libzypp</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="0.0.8" rel="116"/>
+      <checksum type="sha" pkgid="YES">c45c11c28d8093bad4a5f932bf15c3a1fd8729a4</checksum>
+      <time file="1145832236" build="1145808027"/>
+      <size package="1771493" installed="5839009" archive="5852360"/>
+      <location href="rpm/ppc/libzypp-0.0.8-116.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libzypp" epoch="0" ver="0.0.8" rel="116" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libzypp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libzypp-0.0.8-116.ppc.patch.rpm"/>
+          <checksum type="sha">3cabbf842097ad3796332ab7e5729315</checksum>
+          <time file="1145835884" build="1145808027"/>
+          <size package="1770778" archive="5851944"/>
+          <base-version epoch="0" ver="0.0.8" rel="39"/>
+          <base-version epoch="0" ver="0.0.8" rel="49"/>
+          <base-version epoch="0" ver="0.0.8" rel="66"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libzypp</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="0.0.8" rel="116"/>
+      <checksum type="sha" pkgid="YES">4fe38e5be6b70a4fabc1e1627f38894be2d048f3</checksum>
+      <time file="1145833545" build="1145802195"/>
+      <size package="1814747" installed="5610845" archive="5624196"/>
+      <location href="rpm/x86_64/libzypp-0.0.8-116.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libzypp" epoch="0" ver="0.0.8" rel="116" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libzypp"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libzypp-0.0.8-116.x86_64.patch.rpm"/>
+          <checksum type="sha">f965dcd1573c4f7c34185977f2f2cc31</checksum>
+          <time file="1145835893" build="1145802195"/>
+          <size package="1814252" archive="5623780"/>
+          <base-version epoch="0" ver="0.0.8" rel="39"/>
+          <base-version epoch="0" ver="0.0.8" rel="49"/>
+          <base-version epoch="0" ver="0.0.8" rel="66"/>
+          <base-version epoch="0" ver="0.0.8" rel="94"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/libzypp-0.0.8-66_116.x86_64.delta.rpm"/>
+          <checksum type="sha">a4567bc274bf92908af1f6231c250bd903853b20</checksum>
+          <time file="1145835904" build="1145802195"/>
+          <size package="1185836" archive="0"/>
+          <base-version epoch="0" ver="0.0.8" rel="66" md5sum="90d67e4f4a3311cdc0227c065944b334" buildtime="1143622556" sequence_info="libzypp-0.0.8-66-a9638a12e89de9282e5c1d6a80fc5748ea10"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libzypp-zmd-backend</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="7.1.1.0" rel="26"/>
+      <checksum type="sha" pkgid="YES">d538efc4ac5a3331867e55c90e2fc631fede8aec</checksum>
+      <time file="1145833727" build="1145833325"/>
+      <size package="185726" installed="576479" archive="579308"/>
+      <location href="rpm/i586/libzypp-zmd-backend-7.1.1.0-26.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libzypp-zmd-backend" epoch="0" ver="7.1.1.0" rel="26" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libzypp-zmd-backend"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/libzypp-zmd-backend-7.1.1.0-26.i586.patch.rpm"/>
+          <checksum type="sha">2207387519ffabed93b83156d8243bdd</checksum>
+          <time file="1145835910" build="1145833325"/>
+          <size package="185875" archive="579184"/>
+          <base-version epoch="0" ver="7.1.1" rel="10"/>
+          <base-version epoch="0" ver="7.1.1" rel="2"/>
+          <base-version epoch="0" ver="7.1.1" rel="26"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="9"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/libzypp-zmd-backend-7.1.1_7.1.1.0-26.i586.delta.rpm"/>
+          <checksum type="sha">6b3d6b48ca284c3e9cc88ad1a24dbee1215dba7e</checksum>
+          <time file="1145835910" build="1145833325"/>
+          <size package="171246" archive="0"/>
+          <base-version epoch="0" ver="7.1.1" rel="26" md5sum="a813ce0b333d7518c3950649599ca230" buildtime="1143725118" sequence_info="libzypp-zmd-backend-7.1.1-26-f0b7689d3a6b9444fa4002dfe1e8bf6aa2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libzypp-zmd-backend</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="7.1.1.0" rel="26"/>
+      <checksum type="sha" pkgid="YES">b2dc689df4ee7a595e2ab1185e72e7e2d0e8a6f3</checksum>
+      <time file="1145834585" build="1145833563"/>
+      <size package="197980" installed="667622" archive="670448"/>
+      <location href="rpm/ppc/libzypp-zmd-backend-7.1.1.0-26.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libzypp-zmd-backend" epoch="0" ver="7.1.1.0" rel="26" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libzypp-zmd-backend"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/libzypp-zmd-backend-7.1.1.0-26.ppc.patch.rpm"/>
+          <checksum type="sha">ad8813ff42dffc86023dde0fc737f4a6</checksum>
+          <time file="1145835914" build="1145833563"/>
+          <size package="198133" archive="670324"/>
+          <base-version epoch="0" ver="7.1.1" rel="10"/>
+          <base-version epoch="0" ver="7.1.1" rel="2"/>
+          <base-version epoch="0" ver="7.1.1" rel="26"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>libzypp-zmd-backend</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="7.1.1.0" rel="26"/>
+      <checksum type="sha" pkgid="YES">22ddb5ee15e096cfdb04080a473abe4abaeafdec</checksum>
+      <time file="1145834636" build="1145833136"/>
+      <size package="190006" installed="648131" archive="650988"/>
+      <location href="rpm/x86_64/libzypp-zmd-backend-7.1.1.0-26.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="libzypp-zmd-backend" epoch="0" ver="7.1.1.0" rel="26" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="libzypp-zmd-backend"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/libzypp-zmd-backend-7.1.1.0-26.x86_64.patch.rpm"/>
+          <checksum type="sha">2a913ac86189cd8c12aab322f6e55eec</checksum>
+          <time file="1145835917" build="1145833136"/>
+          <size package="190171" archive="650860"/>
+          <base-version epoch="0" ver="7.1.1" rel="10"/>
+          <base-version epoch="0" ver="7.1.1" rel="2"/>
+          <base-version epoch="0" ver="7.1.1" rel="26"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="9"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rug</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="7.1.1.0" rel="10"/>
+      <checksum type="sha" pkgid="YES">f294117103715ba6ce84842894e78cac696eee70</checksum>
+      <time file="1145834150" build="1145833661"/>
+      <size package="125525" installed="280399" archive="284140"/>
+      <location href="rpm/i586/rug-7.1.1.0-10.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rug" epoch="0" ver="7.1.1.0" rel="10" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rug"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/rug-7.1.1.0-10.i586.patch.rpm"/>
+          <checksum type="sha">e47706c9c14125b84beea0959530b4c5</checksum>
+          <time file="1145835921" build="1145833661"/>
+          <size package="86260" archive="229520"/>
+          <base-version epoch="0" ver="7.1.1" rel="10"/>
+          <base-version epoch="0" ver="7.1.1" rel="13"/>
+          <base-version epoch="0" ver="7.1.1" rel="20"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="5"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/rug-7.1.1_7.1.1.0-20_10.i586.delta.rpm"/>
+          <checksum type="sha">db6b5a7ad9b61b75c41668cafcd7d4a1a606c5eb</checksum>
+          <time file="1145835922" build="1145833661"/>
+          <size package="47339" archive="0"/>
+          <base-version epoch="0" ver="7.1.1" rel="20" md5sum="ec0625c62c30089416345f59fb28e336" buildtime="1143725486" sequence_info="rug-7.1.1-20-252e1b30f43dcbe89c0eeef0eeae137766d1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rug</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="7.1.1.0" rel="10"/>
+      <checksum type="sha" pkgid="YES">9849f2e04bd03ffcbe4ee05e205a3d5b255763e3</checksum>
+      <time file="1145834794" build="1145834437"/>
+      <size package="125484" installed="280399" archive="284140"/>
+      <location href="rpm/ppc/rug-7.1.1.0-10.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rug" epoch="0" ver="7.1.1.0" rel="10" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rug"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/rug-7.1.1.0-10.ppc.patch.rpm"/>
+          <checksum type="sha">fb7e5de0ddd80b1335044611bb379c03</checksum>
+          <time file="1145835925" build="1145834437"/>
+          <size package="86252" archive="229520"/>
+          <base-version epoch="0" ver="7.1.1" rel="10"/>
+          <base-version epoch="0" ver="7.1.1" rel="13"/>
+          <base-version epoch="0" ver="7.1.1" rel="20"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>rug</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="7.1.1.0" rel="10"/>
+      <checksum type="sha" pkgid="YES">df540286cd361a2c9fb5557e48f223e2b25e6cf8</checksum>
+      <time file="1145834756" build="1145834451"/>
+      <size package="125559" installed="280409" archive="284164"/>
+      <location href="rpm/x86_64/rug-7.1.1.0-10.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="rug" epoch="0" ver="7.1.1.0" rel="10" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="rug"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/rug-7.1.1.0-10.x86_64.patch.rpm"/>
+          <checksum type="sha">c3c9cb7e14c9d84a1ab115f863f73f9b</checksum>
+          <time file="1145835928" build="1145834451"/>
+          <size package="86320" archive="229532"/>
+          <base-version epoch="0" ver="7.1.1" rel="10"/>
+          <base-version epoch="0" ver="7.1.1" rel="13"/>
+          <base-version epoch="0" ver="7.1.1" rel="20"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="5"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/rug-7.1.1_7.1.1.0-20_10.x86_64.delta.rpm"/>
+          <checksum type="sha">80bce08c0a713002ce321a38cb14b6efd1eff4fb</checksum>
+          <time file="1145835929" build="1145834451"/>
+          <size package="47126" archive="0"/>
+          <base-version epoch="0" ver="7.1.1" rel="20" md5sum="8571817d1f532959ee302fa93973d339" buildtime="1143725978" sequence_info="rug-7.1.1-20-573773a6486d1cf4dbf79bbc0346ddbc66d1"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>zmd</name>
+      <arch>i586</arch>
+      <version epoch="0" ver="7.1.1.0" rel="18"/>
+      <checksum type="sha" pkgid="YES">948688c73f6302ffc5a97b863662df594816b2d5</checksum>
+      <time file="1145832143" build="1145799556"/>
+      <size package="413018" installed="996982" archive="1007852"/>
+      <location href="rpm/i586/zmd-7.1.1.0-18.i586.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="zmd" epoch="0" ver="7.1.1.0" rel="18" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="zmd"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/i586/zmd-7.1.1.0-18.i586.patch.rpm"/>
+          <checksum type="sha">410dc25afe5726ebf21f5d389bbf2198</checksum>
+          <time file="1145835932" build="1145799556"/>
+          <size package="299748" archive="744348"/>
+          <base-version epoch="0" ver="7.1.1" rel="16"/>
+          <base-version epoch="0" ver="7.1.1" rel="24"/>
+          <base-version epoch="0" ver="7.1.1" rel="36"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="8"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/i586/zmd-7.1.1_7.1.1.0-36_18.i586.delta.rpm"/>
+          <checksum type="sha">940887c41cc25f2d8f4c21b2e5cbb31228c975a1</checksum>
+          <time file="1145835934" build="1145799556"/>
+          <size package="108524" archive="0"/>
+          <base-version epoch="0" ver="7.1.1" rel="36" md5sum="7184c8d80e8a652f632c5dbc43d820bd" buildtime="1143713242" sequence_info="zmd-7.1.1-36-061a161ad7e372a238b14fcfcb203607391b41d2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>zmd</name>
+      <arch>ppc</arch>
+      <version epoch="0" ver="7.1.1.0" rel="18"/>
+      <checksum type="sha" pkgid="YES">8784e4737c1beb655e62d1cb1f0b0818a7fe2b6c</checksum>
+      <time file="1145832242" build="1145824697"/>
+      <size package="414328" installed="1005710" archive="1016580"/>
+      <location href="rpm/ppc/zmd-7.1.1.0-18.ppc.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="zmd" epoch="0" ver="7.1.1.0" rel="18" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="zmd"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/ppc/zmd-7.1.1.0-18.ppc.patch.rpm"/>
+          <checksum type="sha">2d68c6ad576008c5aadbbd14b449af76</checksum>
+          <time file="1145835938" build="1145824697"/>
+          <size package="303120" archive="753076"/>
+          <base-version epoch="0" ver="7.1.1" rel="16"/>
+          <base-version epoch="0" ver="7.1.1" rel="24"/>
+          <base-version epoch="0" ver="7.1.1" rel="36"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>zmd</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="7.1.1.0" rel="18"/>
+      <checksum type="sha" pkgid="YES">908e4957661ef912e5aa432ae4c86c7e1f2c4373</checksum>
+      <time file="1145833568" build="1145774776"/>
+      <size package="413356" installed="1002598" archive="1013608"/>
+      <location href="rpm/x86_64/zmd-7.1.1.0-18.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="zmd" epoch="0" ver="7.1.1.0" rel="18" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="zmd"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/zmd-7.1.1.0-18.x86_64.patch.rpm"/>
+          <checksum type="sha">b1d1b0904c82a2f2cabbc93b9a5240a8</checksum>
+          <time file="1145835942" build="1145774776"/>
+          <size package="300580" archive="749976"/>
+          <base-version epoch="0" ver="7.1.1" rel="16"/>
+          <base-version epoch="0" ver="7.1.1" rel="24"/>
+          <base-version epoch="0" ver="7.1.1" rel="36"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="8"/>
+        </patchrpm>
+        <deltarpm>
+          <location href="rpm/x86_64/zmd-7.1.1_7.1.1.0-36_18.x86_64.delta.rpm"/>
+          <checksum type="sha">10ee8b6fdf331ab7d78c142e9f3aa504e7179f6f</checksum>
+          <time file="1145835943" build="1145774776"/>
+          <size package="108982" archive="0"/>
+          <base-version epoch="0" ver="7.1.1" rel="36" md5sum="82e0d5462161789a0d162946437fa048" buildtime="1143713209" sequence_info="zmd-7.1.1-36-a884e112f52df191b5f7d1b219d8a5d3391c41d2"/>
+        </deltarpm>
+      </pkgfiles>
+    </package>
+    <package xmlns="http://linux.duke.edu/metadata/common" type="rpm">
+      <name>zmd-devel</name>
+      <arch>x86_64</arch>
+      <version epoch="0" ver="7.1.1.0" rel="18"/>
+      <checksum type="sha" pkgid="YES">c17e093c5540a5cf939aeca9a98b2b8b6ca72c07</checksum>
+      <time file="1145833568" build="1145774776"/>
+      <size package="16460" installed="329" archive="596"/>
+      <location href="rpm/x86_64/zmd-devel-7.1.1.0-18.x86_64.rpm"/>
+      <format>
+        <rpm:requires>
+          <rpm:entry kind="package" name="zmd-devel" epoch="0" ver="7.1.1.0" rel="18" flags="GE"/>
+        </rpm:requires>
+        <suse:freshens>
+          <suse:entry kind="package" name="zmd-devel"/>
+        </suse:freshens>
+      </format>
+      <pkgfiles xmlns="http://novell.com/package/metadata/suse/patch">
+        <patchrpm>
+          <location href="rpm/x86_64/zmd-devel-7.1.1.0-18.x86_64.patch.rpm"/>
+          <checksum type="sha">850176f7c0879807486279109c7eb7a8</checksum>
+          <time file="1145835947" build="1145774776"/>
+          <size package="16548" archive="596"/>
+          <base-version epoch="0" ver="7.1.1" rel="36"/>
+          <base-version epoch="0" ver="7.1.1.0" rel="8"/>
+        </patchrpm>
+      </pkgfiles>
+    </package>
+  </atoms>
+</patch>
