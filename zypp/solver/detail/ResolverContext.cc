@@ -1556,7 +1556,7 @@ dup_name_check_cb (PoolItem_Ref item, const ResStatus & status, void *data)
 bool
 ResolverContext::isParallelInstall (PoolItem_Ref item) const
 {
-    if (item.kind() == ResTraits<Atom>::kind) {
+    if (item->kind() == ResTraits<Atom>::kind) {
 	return false;					// Atoms are paralell installable (#170098)
     }
 
