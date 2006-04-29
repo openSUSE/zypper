@@ -24,6 +24,7 @@
 #include "zypp/ZYppFactory.h"
 #include "zypp/source/SourceImpl.h"
 #include "zypp/media/MediaManager.h"
+#include "KeyRingCallbacks.h"
 
 using namespace std;
 using namespace zypp;
@@ -55,6 +56,9 @@ int main( int argc, char * argv[] )
 	cerr << "Can't aquire ZYPP lock" << endl;
 	return 1;
     }
+
+    KeyRingCallbacks keyring_callbacks;
+    DigestCallbacks digest_callbacks;
 
     int argpos = 1;
 

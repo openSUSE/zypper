@@ -20,5 +20,5 @@ packagetagparsertest_SOURCES = PackageTagParserTest.cc
 patterntagparsertest_SOURCES = PatternTagParserTest.cc
 producttagparsertest_SOURCES = ProductMetadataParserTest.cc
 mediatagparsertest_SOURCES = MediaMetadataParserTest.cc
-suseparser_SOURCES = suseparser.cc
+suseparser_SOURCES = suseparser.cc KeyRingCallbacks.h
 source_read_test_SOURCES = source-read-test.cc
