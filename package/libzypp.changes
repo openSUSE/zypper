@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sat Apr 29 21:46:22 CEST 2006 - kkaempf@suse.de
+
+- dont download "other" during key check (#171041)
+- rev 3290
+
+-------------------------------------------------------------------
 Sat Apr 29 11:05:15 CEST 2006 - kkaempf@suse.de
 
 - allow parallel installs of atoms (used to fulfill patch require-
