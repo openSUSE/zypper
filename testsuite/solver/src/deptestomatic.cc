@@ -77,7 +77,7 @@
 #include "zypp/solver/detail/ResolverInfo.h"
 #include "zypp/ResolverProblem.h"
 #include "zypp/solver/detail/InstallOrder.h"
-
+#include "KeyRingCallbacks.h"
 
 using namespace std;
 using namespace zypp;
@@ -1637,6 +1637,9 @@ main (int argc, char *argv[])
 	cerr << "Can't aquire ZYpp lock" << endl;
 	return 1;
     }
+
+    KeyRingCallbacks keyring_callbacks;
+    DigestCallbacks digest_callbacks;
 
     globalPath = argv[1];
     globalPath = globalPath.substr (0, globalPath.find_last_of ("/") +1);

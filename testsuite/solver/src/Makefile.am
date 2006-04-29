@@ -16,7 +16,7 @@ noinst_PROGRAMS = deptestomatic.multi			\
 		helixparse
 
 deptestomatic_multi_SOURCES =				\
-	deptestomatic.cc
+	deptestomatic.cc KeyRingCallbacks.h
 
 helixparse_SOURCES =					\
 	helixparse.cc
