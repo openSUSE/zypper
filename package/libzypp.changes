@@ -3,7 +3,7 @@ Sat Apr 29 11:05:15 CEST 2006 - kkaempf@suse.de
 
 - allow parallel installs of atoms (used to fulfill patch require-
   ments, atoms aren't installed anyways) (#170098)
-. rev 3279
+- rev 3281
 
 -------------------------------------------------------------------
 Fri Apr 28 20:15:06 CEST 2006 - dmacvicar@suse.de
