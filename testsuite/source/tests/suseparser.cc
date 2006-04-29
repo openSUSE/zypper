@@ -95,6 +95,7 @@ int main( int argc, char * argv[] )
     ResStore store;
     try {
 	store = src.resolvables();
+    }
     catch( const Exception & excpt_r ) {
       cerr << "Can't access store" << endl;
       ZYPP_CAUGHT( excpt_r );
