@@ -164,6 +164,9 @@ namespace zypp
 	
 	for(; ! repomd.atEnd(); ++repomd)
 	{
+	  if ((*repomd)->type == "other") {		// dont parse other.xml (#159316)
+	    continue;
+	  }
 	  if (!cache)
 	  {
             Pathname file_to_check = provideFile(_path + (*repomd)->location);
