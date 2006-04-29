@@ -712,8 +712,8 @@ load_source (const string & alias, const string & filename, const string & type,
 	   cout << "Load from File '" << pathname << "'" << endl;
 	   impl->factoryCtor (mediaid, pathname, alias);
 	   src = Source_Ref( SourceFactory().createFrom( impl ) );
-	   manager->addSource (src);
 	}
+	manager->addSource (src);
 	count = src.resolvables().size();
 	cout << "Added source '" << alias << "' with " << count << " resolvables" << endl;
 	God->addResolvables( src.resolvables(), (alias == "@system") );
@@ -1202,6 +1202,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 //		resolver->addPoolItemToInstall (poolItem);
 	    } else {
 		cerr << "Unknown item " << source_alias << "::" << name << endl;
+		exit( 1 );
 	    }
 
 	} else if (node->equals ("uninstall")) {
@@ -1231,6 +1232,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 //		resolver->addPoolItemToRemove (poolItem);
 	    } else {
 		cerr << "Unknown system item " << name << endl;
+		exit( 1 );
 	    }
 
 	} else if (node->equals ("upgrade")) {
