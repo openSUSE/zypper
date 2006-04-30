@@ -832,6 +832,7 @@ void
 Resolver::undo(void)
 {
     UndoTransact info;
+    MIL << "*** undo ***" << endl;
     invokeOnEach ( _pool.begin(), _pool.end(),
 		   resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
 		   functor::functorRef<bool,PoolItem>(info) );
