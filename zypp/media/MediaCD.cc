@@ -372,7 +372,7 @@ namespace zypp {
 
 	// IBM iSeries virtual CD-ROM devices (how many?)
 #if powerpc
-	sys_name = sysfs_path.cat("block/iseries!vcd");
+	sys_name = sysfs_path.cat("block/iseries!vcd").asString();
 	dev_name = "/dev/iseries/vcd";
 	DBG << "Collecting iSeries virtual CD-ROM devices ("
 	    << dev_name << "X)" << std::endl;
