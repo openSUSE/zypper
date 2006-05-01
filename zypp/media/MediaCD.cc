@@ -21,6 +21,7 @@
 #include "zypp/target/hal/HalContext.h"
 
 #include <cstring> // strerror
+#include <cstdlib> // getenv
 
 #include <errno.h>
 #include <dirent.h>
@@ -28,6 +29,7 @@
 #include <sys/ioctl.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <unistd.h> // geteuid, ...
 
 #include <linux/cdrom.h>
 
@@ -53,6 +55,7 @@ namespace zypp {
   namespace media {
 
     namespace {
+
       bool isNewDevice(const std::list<MediaSource> &devices,
                        const MediaSource            &media)
       {
@@ -64,7 +67,29 @@ namespace zypp {
 	}
 	return true;
       }
+
+      inline Pathname get_sysfs_path()
+      {
+	Pathname sysfs_path;
+	if(::getuid() == ::geteuid() && ::getgid() == ::getegid())
+	{
+	  const char *env = ::getenv("SYSFS_PATH");
+	  if( env && *env)
+	  {
+	    sysfs_path = env;
+	    if( PathInfo(sysfs_path, PathInfo::LSTAT).isDir())
+	      return sysfs_path;
+	  }
+	}
+	sysfs_path = "/sys";
+	if( PathInfo(sysfs_path, PathInfo::LSTAT).isDir())
+	  return sysfs_path;
+	else
+	  return Pathname();
+      }
+
     }
+
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -313,11 +338,15 @@ namespace zypp {
       // Hmm... always? We can't detect DVD here.
       if( detected.empty())
       {
+	Pathname    sysfs_path( get_sysfs_path());
+	if(sysfs_path.empty())
+	  return detected;
+
 	std::string sys_name;
 	std::string dev_name;
 
 	// SCSI cdrom devices (/dev/sr0, ...)
-	sys_name = "/sys/block/sr";
+	sys_name = sysfs_path.cat("block/sr").asString();
 	dev_name = "/dev/sr";
 	DBG << "Collecting SCSI CD-ROM devices ("
 	    << dev_name << "X)" << std::endl;
@@ -343,7 +372,7 @@ namespace zypp {
 
 	// IBM iSeries virtual CD-ROM devices (how many?)
 #if powerpc
-	sys_name = "/sys/block/iseries!vcd";
+	sys_name = sysfs_path.cat("block/iseries!vcd");
 	dev_name = "/dev/iseries/vcd";
 	DBG << "Collecting iSeries virtual CD-ROM devices ("
 	    << dev_name << "X)" << std::endl;
