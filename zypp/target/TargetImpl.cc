@@ -364,7 +364,7 @@ namespace zypp
             progress.disconnect();
           }
         }
-        else if (!policy_r.dryRun()) // other resolvables
+        else if (!policy_r.dryRun()) // other resolvables (non-Package)
         {
           if ( isStorageEnabled() )
           {
@@ -404,7 +404,7 @@ namespace zypp
 		    ERR << "Do script not defined" << endl;
 		  }
 		}
-                else	// this is most probably wrong, see #168610
+                else if (!isKind<Atom>(it->resolvable()))	// atoms are re-created from the patch data, no need to save them
                 {
 		  // #160792 do not just add, also remove older versions
 		  if (true) // !installOnly - only on Package?!
