@@ -6,7 +6,7 @@ Mon May  1 04:43:01 CEST 2006 - mt@suse.de
   added a check if it is a directory
 - Added libcurl and libblkid checks to configure.ac
 - Added e2fsprogs(-devel) requires to the spec file
-- rev 3301
+- rev 3303
 
 -------------------------------------------------------------------
 Sat Apr 29 21:46:22 CEST 2006 - kkaempf@suse.de
