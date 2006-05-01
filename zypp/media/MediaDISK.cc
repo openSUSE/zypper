@@ -10,17 +10,21 @@
  *
 */
 
-#include <iostream>
-
 #include "zypp/base/Logger.h"
+#include "zypp/base/String.h"
 #include "zypp/media/Mount.h"
 #include "zypp/media/MediaDISK.h"
 #include "zypp/media/MediaManager.h"
+
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 #include <sys/types.h>
 #include <sys/mount.h>
 #include <errno.h>
 #include <dirent.h>
+#include <blkid/blkid.h>
 
 #define DELAYED_VERIFY 1
 
@@ -60,7 +64,10 @@ namespace zypp {
 #if DELAYED_VERIFY
       DBG << "Verify of " << _device << " delayed" << std::endl;
 #else
-      verifyIfDiskVolume( _device);
+      if( !verifyIfDiskVolume( _device))
+      {
+	ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
+      }
 #endif
 
       _filesystem = _url.getQueryParam("filesystem");
@@ -77,44 +84,122 @@ namespace zypp {
     //	DESCRIPTION : Check if specified device file name is
     //                a disk volume device or throw an error.
     //
-    void MediaDISK::verifyIfDiskVolume(const Pathname &name)
+    bool MediaDISK::verifyIfDiskVolume(const Pathname &dev_name)
     {
-      PathInfo dinfo(name);
-      if( !dinfo.isBlk())
+      if( dev_name.empty() ||
+	  dev_name.asString().compare(0, sizeof("/dev/")-1, "/dev/"))
       {
-	ERR << "Specified device name is not a block device" << std::endl;
-	ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
+	ERR << "Specified device name " << dev_name
+	    << " is not allowed" << std::endl;
+	return false;
       }
 
-      std::list<Pathname> dlist;
-      Pathname            dpath("/dev/disk/by-uuid");
-      if( zypp::filesystem::readdir(dlist, dpath) != 0)
+      PathInfo dev_info(dev_name);
+      if( !dev_info.isBlk())
       {
-	ZYPP_THROW(MediaSystemException(_url,
-	"unable to read list of valid disk volume devices"));
+	ERR << "Specified device name " << dev_name
+	    << " is not a block device" << std::endl;
+	return false;
       }
-      else
+
+      // check using /dev/disk/by-uuid links first
       {
-	bool found = false;
-	std::list<Pathname>::const_iterator it;
-	for(it = dlist.begin(); !found && it != dlist.end(); ++it)
+	Pathname            dpath("/dev/disk/by-uuid");
+	std::list<Pathname> dlist;
+	if( zypp::filesystem::readdir(dlist, dpath) == 0)
 	{
-	  PathInfo vinfo(*it);
-	  if( vinfo.isBlk() && vinfo.major() == dinfo.major() &&
-	                       vinfo.minor() == dinfo.minor())
+	  std::list<Pathname>::const_iterator it;
+	  for(it = dlist.begin(); it != dlist.end(); ++it)
 	  {
-	    DBG << "Found volume device: "
-	        << *it << " => " << name << std::endl;
-	    found = true;
+	    PathInfo vol_info(*it);
+	    if( vol_info.isBlk() && vol_info.major() == dev_info.major() &&
+	                            vol_info.minor() == dev_info.minor())
+	    {
+	      DBG << "Specified device name " << dev_name
+		  << " is a volume (uuid link " << vol_info.path() << ")"
+		  << std::endl;
+	      return true;
+	    }
 	  }
 	}
-	if( !found)
+      }
+
+      // check using libblkid
+      {
+	std::string type, uuid;
+	blkid_cache cache = NULL;
+
+	if( blkid_get_cache(&cache, NULL) < 0)
+	  WAR << "Unable to read blkid cache" << std::endl;
+
+	blkid_dev dev = blkid_get_dev(cache, dev_name.asString().c_str(),
+	                                     BLKID_DEV_NORMAL);
+	if( dev)
 	{
-	  ERR << "Specified device name is not disk volume block device"
-	      << std::endl;
-	  ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
+	  blkid_tag_iterate iter;
+	  const char *key, *val;
+
+	  iter = blkid_tag_iterate_begin(dev);
+	  while( blkid_tag_next( iter, &key, &val) == 0)
+	  {
+	    std::string tag(key);
+	    if(tag == "TYPE")
+	      type = val;
+	    else
+	    if(tag == "UUID")
+	      uuid = val;
+	  }
+	  blkid_tag_iterate_end(iter);
+	}
+	blkid_put_cache(cache);
+
+	if( !type.empty())
+	{
+	  if(type == "swap")
+	  {
+	    //
+	    // Refuse to mount swap devices ...
+	    //
+	    DBG << "Specified device name " << dev_name
+		<< " is a " << type << " device"
+		<< std::endl;
+	    return false;
+	  }
+	  else
+	  if(type == "iso9660" || type == "udf")
+	  {
+	    //
+	    // XEN maps CD/DVD devices using vbd (Bug #158529).
+	    //
+	    DBG << "Specified device name " << dev_name
+		<< " is a CD/DVD volume (type " << type << ")"
+		<< std::endl;
+	    return true;
+	  }
+	  else
+	  if( !uuid.empty())
+	  {
+	    //
+	    // OK, have a filesystem type and a uuid.
+	    //
+	    DBG << "Specified device name " << dev_name
+		<< " is a volume (type " << type << ", uuid " << uuid << ")"
+		<< std::endl;
+	    return true;
+	  }
+	}
+	else
+	{
+	  DBG << "Unable to detect filesystem type on "
+	      << dev_name
+	      << " using libblkid" << std::endl;
 	}
       }
+
+      ERR << "Specified device name " << dev_name
+	  << " is not a usable disk volume"
+          << std::endl;
+      return false;
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -143,7 +228,10 @@ namespace zypp {
         ZYPP_THROW(MediaBadUrlEmptyDestinationException(url()));
 #if DELAYED_VERIFY
       DBG << "Verifying " << _device << " ..." << std::endl;
-      verifyIfDiskVolume( _device);
+      if( !verifyIfDiskVolume( _device))
+      {
+	ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
+      }
 #endif
 
       if(_filesystem.empty())
@@ -335,3 +423,4 @@ namespace zypp {
 
   } // namespace media
 } // namespace zypp
+// vim: set ts=8 sts=2 sw=2 ai noet:

@@ -46,7 +46,7 @@ namespace zypp {
 
         virtual bool isAttached() const;
 
-        void    verifyIfDiskVolume(const Pathname &name);
+        bool    verifyIfDiskVolume(const Pathname &name);
     };
 
 ///////////////////////////////////////////////////////////////////
