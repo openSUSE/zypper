@@ -152,6 +152,16 @@ AC_SUBST(HAL_LDADD)
 AC_SUBST(HAL_LIBS)
 
 dnl ==================================================
+PKG_CHECK_MODULES(CURL, [libcurl])
+AC_SUBST(CURL_CFLAGS)
+AC_SUBST(CURL_LIBS)
+
+dnl ==================================================
+PKG_CHECK_MODULES(BLKID, [blkid])
+AC_SUBST(BLKID_CFLAGS)
+AC_SUBST(BLKID_LIBS)
+
+dnl ==================================================
 dnl checks for header files
 AC_CHECK_HEADERS([boost/scoped_ptr.hpp],
         [],
@@ -159,6 +169,9 @@ AC_CHECK_HEADERS([boost/scoped_ptr.hpp],
 AC_CHECK_HEADERS([curl/curl.h],
         [],
         AC_MSG_ERROR([libcurl header not found. please install curl-devel.]))
+AC_CHECK_HEADERS([blkid/blkid.h],
+        [],
+        AC_MSG_ERROR([libblkid header not found. please install e2fsprogs-devel.]))
 AC_CHECK_HEADERS([rpm/rpmlib.h],
         [],
         AC_MSG_ERROR([rpmlib header not found. please install rpm-devel.]))
