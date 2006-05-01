@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon May  1 17:44:29 CEST 2006 - kkaempf@suse.de
+
+- Don't try to store 'Atom', not needed and the backend store
+  rejects them anyways (addtion to #168610)
+- rev 3306
+
+-------------------------------------------------------------------
 Mon May  1 04:43:01 CEST 2006 - mt@suse.de
 
 - Improved device check in MediaDISK using libblkid (Bug #158529)
