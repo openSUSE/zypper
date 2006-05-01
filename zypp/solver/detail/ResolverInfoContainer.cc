@@ -133,7 +133,7 @@ ResolverInfoContainer::itemsToString (const bool names_only) const
 
     if (names_only)
     {
-	res << " [";
+	if (_item_list.size() > 1) res << " [";
 	for (PoolItemList::const_iterator iter = _item_list.begin();
 	     iter != _item_list.end(); ++iter)
 	{
@@ -141,7 +141,7 @@ ResolverInfoContainer::itemsToString (const bool names_only) const
 		res << ", ";
 	    res << (*iter)->name();
 	}
-	res << "]";
+	if (_item_list.size() > 1) res << "]";
     }
     else
     {
