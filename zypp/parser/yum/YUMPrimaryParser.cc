@@ -139,6 +139,10 @@ namespace zypp {
             else if (name == "format") {
               parseFormatNode(dataPtr, child);
             }
+	    else if (name == "license-to-confirm")
+	    {
+	      dataPtr->license_to_confirm.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
+	    }
             else {
               WAR << "YUM <metadata> contains the unknown element <" << name << "> "
                 << _helper.positionInfo(child) << ", skipping" << endl;
