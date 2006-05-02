@@ -20,7 +20,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   IMPL_PTR_TYPE(Package);
-    
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Package::Package
@@ -130,56 +130,6 @@ namespace zypp
   /** */
   License Package::licenseToConfirm() const
   { return pimpl().licenseToConfirm(); }
-
-  /** */
-  //Pathname Package::plainRpm() const
-  //{ return pimpl().location(); }
-
-  /** */
-  std::list<PatchRpm> Package::patchRpms() const
-  { return pimpl().patchRpms(); }
-
-  /** */
-  std::list<DeltaRpm> Package::deltaRpms() const
-  { return pimpl().deltaRpms(); }
-
-  /** */
-  //Pathname Package::getPlainRpm() const
-  //{ return source().provideFile(plainRpm(), mediaId()); }
-
-  /** */
-  Pathname Package::getDeltaRpm(BaseVersion & base_r) const
-  {
-#warning (2x): TODO: BaseVersion compare checks only Edition
-    std::list<DeltaRpm> deltas = deltaRpms();
-    for (std::list<DeltaRpm>::const_iterator it = deltas.begin();
-         it != deltas.end(); it++)
-    {
-      if (base_r == it->baseVersion())
-	return source().provideFile(it->filename());
-    }
-    ZYPP_THROW(Exception("No matching delta RPM found"));
-    return source().provideFile(location()); // never reached
-  }
-
-  /** */
-  Pathname Package::getPatchRpm(BaseVersion & base_r) const
-  {
-    std::list<PatchRpm> patches = patchRpms();
-    for (std::list<PatchRpm>::const_iterator it = patches.begin();
-         it != patches.end(); it++)
-    {
-      std::list<BaseVersion> bases = it->baseVersions();
-      for (std::list<BaseVersion>::const_iterator bvit = bases.begin();
-	   bvit != bases.end(); bvit++)
-      {
-	if (base_r == *bvit)
-	  return source().provideFile(it->filename());
-      }
-    }
-    ZYPP_THROW(Exception("No matching patch RPM found"));
-    return source().provideFile(location()); // never reached
-  }
 
   bool Package::installOnly() const
   { return pimpl().installOnly(); }

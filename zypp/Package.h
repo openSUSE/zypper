@@ -29,7 +29,7 @@ namespace zypp
   */
   class Package : public ResObject
   {
-    
+
   public:
     typedef detail::PackageImplIf    Impl;
     typedef Package                  Self;
@@ -84,27 +84,10 @@ namespace zypp
 
     /** Disk usage per directory */
     DiskUsage diskusage() const;
-    
+
     /** */
     License licenseToConfirm() const;
-    /** */
-    //Pathname plainRpm() const;
-    /** */
-    std::list<PatchRpm> patchRpms() const;
-    /** */
-    std::list<DeltaRpm> deltaRpms() const;
-    /**
-     * \throws Exception
-     */
-    //Pathname getPlainRpm() const;
-    /**
-     * \throws Exception
-     */
-    Pathname getDeltaRpm(BaseVersion & base_r) const;
-    /**
-     * \throws Exception
-     */
-    Pathname getPatchRpm(BaseVersion & base_r) const;
+
     /** */
     bool installOnly() const;
     /** ID of the media */
@@ -113,7 +96,7 @@ namespace zypp
     Pathname location() const;
 
     // data here:
- 
+
 
   protected:
     Package( const NVRAD & nvrad_r );
