@@ -39,6 +39,7 @@ class Dependency
 			@version = splitted[2]
 			return
 		end
+		@release = evr[1]
 
 		ev = evr[0].split ":"						# check if <epoch>:<version>
 		if ev.size < 2
@@ -66,7 +67,7 @@ class Dependency
 					STDERR.puts "Unkown dep operation '#{@op}'"
 			end
 			out = out + " op='#{op}' version='#{@version}'" unless op.nil?
-			out = out + " release='#{@release}" unless @release.nil?
+			out = out + " release='#{@release}'" unless @release.nil?
 		end
 		out += " pre='1'" if @pre
 		return out + " />"
