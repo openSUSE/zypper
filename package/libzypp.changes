@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May  2 14:58:03 CEST 2006 - kkaempf@suse.de
+
+- parse "license-to-confirm" in primary.xml (#168437)
+- rev 3312
+
+-------------------------------------------------------------------
 Mon May  1 17:44:29 CEST 2006 - kkaempf@suse.de
 
 - Don't try to store 'Atom', not needed and the backend store
