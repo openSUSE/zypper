@@ -532,7 +532,9 @@ get_poolItem (const string & source_alias, const string & package_name, const st
     }
     catch (Exception & excpt_r) {
 	ZYPP_CAUGHT (excpt_r);
-	cerr << "Can't find " << kind_name << ":'" << package_name << "': source '" << source_alias << "' not defined" << endl;
+	cerr << "Can't find kind[" << kind_name << "]:'" << package_name << "': source '" << source_alias << "' not defined" << endl;
+	if (kind_name.empty())
+	    cerr << "Please specify kind=\"...\" in the <install.../> request." << endl;
 	return poolItem;
     }
 
