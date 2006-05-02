@@ -49,6 +49,9 @@ bool CustomSort(const std::string &a, const std::string &b)
 */
 int main( int argc, char * argv[] )
 {
+    bool descr = false;
+    bool deps = false;
+    
     if (argc < 2) {
 	cerr << "Usage: source-read-test [--arch x] <susedir>" << endl;
 	exit (1);
@@ -69,11 +72,26 @@ int main( int argc, char * argv[] )
     God->initTarget("/", false);
     int argpos = 1;
 
-    if (strcmp( argv[argpos], "--arch") == 0) {
-	++argpos;
-	God->setArchitecture( Arch( argv[argpos] ) );
-	++argpos;
+    while ( argpos  < argc - 1 )
+    {
+      if ((strcmp( argv[argpos], "-h") == 0) || (strcmp( argv[argpos], "--help") == 0)) {
+        cerr << "Usage: dumpstore [--descr] [--deps]" << endl;
+        exit (1);
+      }
+      if (strcmp( argv[argpos], "--arch") == 0) {
+        ++argpos;
+        God->setArchitecture( Arch( argv[argpos] ) );
+      }
+      if (strcmp( argv[argpos], "--descr") == 0) {
+        descr = true;
+      }
+      if (strcmp( argv[argpos], "--deps") == 0) {
+        deps = true;     
+      }
+      ++argpos;
     }
+    
+    
     Pathname p;
     Url url;
     try {
@@ -100,6 +118,6 @@ int main( int argc, char * argv[] )
     }
 
     ResStore store = src.resolvables();
-    dump(store);
+    dump(store, descr, deps);
     return 0;
 }
