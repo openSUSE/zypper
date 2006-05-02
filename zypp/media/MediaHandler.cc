@@ -63,9 +63,16 @@ MediaHandler::MediaHandler ( const Url &      url_r,
     ///////////////////////////////////////////////////////////////////
 
     PathInfo adir( attach_point_r );
-    // FIXME: verify if attach_point_r isn't a mountpoint of other device
+    //
+    // The verify if attach_point_r isn't a mountpoint of another
+    // device is done in the particular media handler (if needed).
+    //
+    // We just verify, if attach_point_r is a directory and for
+    // schemes other than "file" and "dir", if it is absolute.
+    //
     if ( !adir.isDir()
 	 || (_url.getScheme() != "file"
+	     && _url.getScheme() != "dir"
 	     && !attach_point_r.absolute()) )
     {
       ERR << "Provided attach point is not a absolute directory: "
