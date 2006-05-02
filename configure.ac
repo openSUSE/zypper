@@ -137,7 +137,16 @@ AC_CHECK_LIB([xml2], [xmlNewTextReader],
         AC_MSG_ERROR([libxml2 not found. please install libxml2-devel]))
 
 dnl ==================================================
+PKG_CHECK_MODULES(CURL, [libcurl])
+AC_SUBST(CURL_CFLAGS)
+AC_SUBST(CURL_LIBS)
 
+dnl ==================================================
+PKG_CHECK_MODULES(BLKID, [blkid])
+AC_SUBST(BLKID_CFLAGS)
+AC_SUBST(BLKID_LIBS)
+
+dnl ==================================================
 if test "x$devel_faked_hal" = "xyes"; then
  HAL_CFLAGS=-DFAKE_HAL
 else
@@ -150,16 +159,6 @@ fi
 AC_SUBST(HAL_CFLAGS)
 AC_SUBST(HAL_LDADD)
 AC_SUBST(HAL_LIBS)
-
-dnl ==================================================
-PKG_CHECK_MODULES(CURL, [libcurl])
-AC_SUBST(CURL_CFLAGS)
-AC_SUBST(CURL_LIBS)
-
-dnl ==================================================
-PKG_CHECK_MODULES(BLKID, [blkid])
-AC_SUBST(BLKID_CFLAGS)
-AC_SUBST(BLKID_LIBS)
 
 dnl ==================================================
 dnl checks for header files
