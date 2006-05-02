@@ -122,10 +122,16 @@ namespace zypp
          * \throw EXCEPTION on fail
         */
         virtual void factoryInit();
+        
+        /** Check checksums of metadata files
+         * \throw EXCEPTION on fail
+         */
+        void checkMetadataChecksums(bool from_cache);
 
       private:
         bool cacheExists();
 	std::list<Pathname> _metadata_files;
+        Pathname _repomd_file;
         Pathname _repomd_signature;
         Pathname _repomd_key;
 

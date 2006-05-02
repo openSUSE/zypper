@@ -95,12 +95,12 @@ namespace zypp
           WAR << "Verifier not found" << endl;
         }
         
-        Pathname repomd_file;
+        Pathname _repomd_file;
         
         if ( cache )
         {
           DBG << "Cached metadata found in [" << _cache_dir << "]." << endl;
-          repomd_file = _cache_dir + "/repodata/repomd.xml";
+          _repomd_file = _cache_dir + "/repodata/repomd.xml";
           
           if (PathInfo(_cache_dir + "/repodata/repomd.xml.asc").isExist())
             _repomd_key = _cache_dir + "/repodata/repomd.xml.asc";
@@ -111,7 +111,7 @@ namespace zypp
         else
         {
           DBG << "Cached metadata not found in [" << _cache_dir << "]. Reading from " << _path << endl;
-          repomd_file = provideFile(_path + "/repodata/repomd.xml");          
+          _repomd_file = provideFile(_path + "/repodata/repomd.xml");          
  
           // key and signature are optional
           
@@ -131,7 +131,7 @@ namespace zypp
           // if they not exists both will be Pathname()
         }
         
-        if ( ! PathInfo(repomd_file).isExist() )
+        if ( ! PathInfo(_repomd_file).isExist() )
           ZYPP_THROW(Exception("repodata/repomd.xml not found"));
           
 	MIL << "Trying to get the key" << endl;
@@ -153,46 +153,57 @@ namespace zypp
           WAR << "Source provides no key" << std::endl;
         }
             
-        MIL << "Checking repomd.xml integrity" << endl;
-	
-        if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(repomd_file, (_path + "/repodata/repomd.xml").asString()+ " (" + url().asString() + ")", _repomd_signature))
-	   ZYPP_THROW(Exception(N_("Signed repomd.xml file fails signature check")));
-	 
-	DBG << "Reading file " << repomd_file << endl;
-	ifstream repo_st(repomd_file.asString().c_str());
-	YUMRepomdParser repomd(repo_st, "");
-	
-	for(; ! repomd.atEnd(); ++repomd)
-	{
-	  if ((*repomd)->type == "other") {		// dont parse other.xml (#159316)
-	    continue;
-	  }
-	  if (!cache)
-	  {
-            Pathname file_to_check = provideFile(_path + (*repomd)->location);
-            if (! checkCheckSum( file_to_check, (*repomd)->checksumType, (*repomd)->checksum))
-	    {
-              ZYPP_THROW(Exception( (*repomd)->location + " " + N_("fails checksum verification") ));
-	    }
-	  }
-	  if ((*repomd)->type == "patches")
-	  {
-            Pathname filename = cache ? _cache_dir + (*repomd)->location : provideFile(_path + (*repomd)->location);
-	    DBG << "reading file " << filename << endl;
-	    ifgzstream st ( filename.asString().c_str() );
-	    YUMPatchesParser patch(st, "");
-	    for (; !patch.atEnd(); ++patch)
-	    {
-              string filename = (*patch)->location;
-              if (! checkCheckSum(provideFile(_path + filename), (*patch)->checksumType, (*patch)->checksum))
-              {
-	         ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-	      }
-	    }
-	  }
-	}
+        checkMetadataChecksums(cache);
       }
 
+      void YUMSourceImpl::checkMetadataChecksums(bool from_cache)
+      {
+        bool cache = from_cache;
+      
+        MIL << "Checking repomd.xml integrity" << endl;
+        
+        if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(_repomd_file, (_path + "/repodata/repomd.xml").asString()+ " (" + url().asString() + ")", _repomd_signature))
+          ZYPP_THROW(Exception(N_("Signed repomd.xml file fails signature check")));
+         
+        DBG << "Reading file " << _repomd_file << " to check integrity of metadata." << endl;
+        ifstream repo_st(_repomd_file.asString().c_str());
+        YUMRepomdParser repomd(repo_st, "");
+        
+        for(; ! repomd.atEnd(); ++repomd)
+        {
+          if ((*repomd)->type == "other")
+          {             // dont parse other.xml (#159316)
+            continue;
+          }
+          else
+          {
+            Pathname file_to_check = cache ? (_cache_dir + _path + (*repomd)->location) : provideFile(_path + (*repomd)->location);
+            if (! checkCheckSum( file_to_check, (*repomd)->checksumType, (*repomd)->checksum))
+            {
+              ZYPP_THROW(Exception( (*repomd)->location + " " + N_("fails checksum verification.") ));
+            }
+            
+            // now parse patches mentioned if we are in patches.xml
+            
+            if ((*repomd)->type == "patches")
+            {
+              Pathname patch_index = file_to_check;
+              DBG << "reading patches from file " << patch_index << endl;
+              ifgzstream st ( patch_index.asString().c_str() );
+              YUMPatchesParser patch(st, "");
+              for (; !patch.atEnd(); ++patch)
+              {
+                Pathname patch_filename = cache ? (_cache_dir + _path + (*patch)->location) : provideFile(_path + (*patch)->location);
+                if (! checkCheckSum(patch_filename, (*patch)->checksumType, (*patch)->checksum))
+                {
+                  ZYPP_THROW(Exception( (*patch)->location + " " + N_("fails checksum verification.") ));
+                }
+              }
+            }  
+          }
+        }
+      }
+      
       void YUMSourceImpl::storeMetadata(const Pathname & cache_dir_r)
       {
 	_cache_dir = cache_dir_r;
@@ -241,17 +252,16 @@ namespace zypp
           ZYPP_THROW(Exception("Cannot create repodata cache directory"));
 
         MIL << "Storing data to cache" << endl;
-	
-// 	// use tmpfile because of checking integrity - provideFile might release the medium
-// 	filesystem::TmpFile tmp;
-// 	filesystem::copy(filename, tmp.path());
-// 	filename = tmp.path();
-//         MIL << "Checking repomd.xml integrity" << endl;
-//         
-//         if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, "repomd.xml", _repomd_signature))
-//         {
-// 	  ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-//         }
+        	
+        // check again all file integrity, on the server
+        checkMetadataChecksums(false);
+        
+        filesystem::copy( _repomd_file, dst + "repomd.xml");
+        
+        if (PathInfo(_repomd_key).isExist())
+          filesystem::copy( _repomd_key, dst + "repomd.xml.key");
+        if (PathInfo(_repomd_signature).isExist())
+          filesystem::copy( _repomd_signature, dst + "repomd.xml.asc");
         
 	DBG << "Reading file " << filename << endl;
 	ifstream repo_st(filename.asString().c_str());
@@ -265,11 +275,7 @@ namespace zypp
 		continue;
 
 	    Pathname src = provideFile(_path + (*repomd)->location);
-	    if (! checkCheckSum(src, (*repomd)->checksumType, (*repomd)->checksum))
-	    {
-	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-	    }
-	
+	    
             dst = cache_dir_r + (*repomd)->location;
 	    filesystem::copy(src, dst);
 	    if ((*repomd)->type == "patches")
@@ -284,13 +290,9 @@ namespace zypp
 	      {
 		string filename = (*patch)->location;
 		src = provideFile(_path + filename);
-		if (! checkCheckSum(src, (*patch)->checksumType, (*patch)->checksum))
-		{
-		    ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-		}
 		dst = cache_dir_r + filename;
 		if (0 != assert_dir(dst.dirname(), 0700))
-		    ZYPP_THROW(Exception("Cannot create cache directory"));
+                  ZYPP_THROW(Exception("Cannot create cache directory: " + dst.dirname().asString()));
 		filesystem::copy(src, dst);
 	      }
 	    }
@@ -321,29 +323,6 @@ namespace zypp
           : provideFile(_path + "/repodata/repomd.xml");
 	  _metadata_files.push_back("/repodata/repomd.xml");
           
-	  // use tmpfile because of checking integrity - provideFile might release the medium
-// 	  filesystem::TmpFile tmp;
-// 	  filesystem::copy(filename, tmp.path());
-// 	  filename = tmp.path();
-// 	  
-//           if (!cacheExists())
-// 	  {
-// 	    MIL << "Checking repomd.xml integrity" << endl;
-// 	    Pathname asc_local;
-// 	    try {
-//               media::SilentMediaChange report;
-//               callback::TempConnect< media::MediaChangeReport > nochange(report);
-// 
-// 	      asc_local = provideFile(_path + "/repodata/repomd.xml.asc");
-// 	    }
-// 	    catch (Exception & excpt_r)
-// 	    {
-// 	      ZYPP_CAUGHT(excpt_r);
-// 	    }
-// 	    if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(filename, "repomd.xml", asc_local))
-// 	      ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-// 	  }
-
 	  DBG << "Reading ifgz file " << filename << endl;
 	  ifgzstream repo_st(filename.asString().c_str());
 	  YUMRepomdParser repomd(repo_st, "");
@@ -391,14 +370,7 @@ namespace zypp
             Pathname filename = cacheExists()
               ? _cache_dir + (*it)->location
               :  provideFile(_path + (*it)->location);
-            if (!cacheExists())
-	    {
-	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
-	      {
-	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-	      }
-	    }
-	    _metadata_files.push_back((*it)->location);
+            _metadata_files.push_back((*it)->location);
 	    DBG << "Reading ifgz file " << filename << endl;
 
 	    ifgzstream st( filename.asString().c_str() );
@@ -469,13 +441,7 @@ namespace zypp
           Pathname filename = cacheExists()
               ? _cache_dir + (*it)->location
             : provideFile(_path + (*it)->location);
-          if (!cacheExists())
-	    {
-	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
-	      {
-	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-	      }
-	    }
+          
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
@@ -536,13 +502,7 @@ namespace zypp
           Pathname filename = cacheExists()
               ? _cache_dir + (*it)->location
             : provideFile(_path + (*it)->location);
-	    if (!cacheExists())
-	    {
-	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
-	      {
-	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-	      }
-	    }
+	    
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
@@ -576,13 +536,7 @@ namespace zypp
           Pathname filename = cacheExists()
               ? _cache_dir + (*it)->location
             : provideFile(_path + (*it)->location);
-	    if (!cacheExists())
-	    {
-	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
-	      {
-	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-	      }
-	    }
+	    
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
@@ -616,13 +570,7 @@ namespace zypp
           Pathname filename = cacheExists()
               ? _cache_dir + (*it)->location
             : provideFile(_path + (*it)->location);
-	    if (!cacheExists())
-	    {
-	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
-	      {
-	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-	      }
-	    }
+	    
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
@@ -656,13 +604,7 @@ namespace zypp
             Pathname filename = cacheExists()
                 ? _cache_dir + (*it)->location
               : provideFile(_path + (*it)->location);
-	    if (!cacheExists())
-	    {
-	      if (! checkCheckSum(filename, (*it)->checksumType, (*it)->checksum))
-	      {
-	        ZYPP_THROW(Exception(N_("Failed check for the metadata file check sum")));
-	      }
-	    }
+	    
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
