@@ -151,11 +151,15 @@ int main( int argc, char * argv[] )
     if (argpos < argc) {
 	int count = 0;
 	for (ResStore::iterator it = store.begin(); it != store.end(); ++it) {
-	    ResObject::Ptr robj = *it;
+	    ResObject::constPtr robj = *it;
 	    MIL << ++count << *robj << endl;
 	    if (strcmp(argv[argpos], "reallyall") == 0) {
 		const Dependencies & deps = robj->deps();
 		MIL << deps << endl;
+		if (isKind<Package>( robj )) {
+		    Package::constPtr pkg( asKind<Package>( robj ) );
+		    MIL << "License[" << pkg->licenseToConfirm() << "]" << endl;
+		}
 	    }
 	}
 
