@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<source xmlns="http://www.novell.com/zypp/testcases/source">
+<resolvable-list xmlns="http://www.novell.com/zypp/testcases/resolvable-list">
  <resolvable kind="patch">
   <name>zypp</name>
   <edition>1291-0</edition>
@@ -23078,4 +23078,4 @@
    </suggests>
   </dependencies>
   </resolvable>
-</source>
+</resolvable-list>

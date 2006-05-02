@@ -208,6 +208,7 @@ AC_OUTPUT(	 po/Makefile.in\
 	doc/autodoc/Makefile		\
 	doc/autodoc/Doxyfile		\
 	testsuite/Makefile		\
+	testsuite/utils/Makefile	\
 	testsuite/zypp/Makefile		\
 	testsuite/zypp/tests/Makefile	\
 	testsuite/solver/Makefile	\

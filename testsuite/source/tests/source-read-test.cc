@@ -26,64 +26,16 @@
 #include "zypp/media/MediaManager.h"
 #include "zypp/Dependencies.h"
 
+#include "testsuite/utils/TestUtils.h"
+
 using namespace std;
 using namespace zypp;
 
+using namespace zypp::testsuite::utils;
 
 bool CustomSort(const std::string &a, const std::string &b)
 {
   return a < b; //example comparison.
-}
-
-static void dumpCapSet( const CapSet &caps, const std::string &deptype)
-{
-  cout << "   " << "<" << deptype << ">" << std::endl;
-  CapSet::iterator it = caps.begin();
-  for ( ; it != caps.end(); ++it)
-  {
-    cout << "    <capability kind=\"" << (*it).kind() << "\" refers=\"" << (*it).refers() << "\">" << (*it).asString() << "</capability>" << std::endl;
-  }
-  cout << "   " << "</" << deptype << ">" << std::endl;
-}
-
-static void dumpDeps( const Dependencies &deps )
-{
-  dumpCapSet( deps[Dep::PROVIDES], "provides" );
-  dumpCapSet( deps[Dep::PREREQUIRES], "prerequires" );
-  dumpCapSet( deps[Dep::CONFLICTS], "conflicts" );
-  dumpCapSet( deps[Dep::OBSOLETES], "obsoletes" );
-  dumpCapSet( deps[Dep::FRESHENS], "freshens" );
-  dumpCapSet( deps[Dep::REQUIRES], "requires" );
-  dumpCapSet( deps[Dep::RECOMMENDS], "recommends" );
-  dumpCapSet( deps[Dep::ENHANCES], "enhances" );
-  dumpCapSet( deps[Dep::SUPPLEMENTS], "supplements" );
-  dumpCapSet( deps[Dep::SUGGESTS], "suggests" );
-}
-
-static void dump( const ResStore &store )
-{
-  std::list<std::string> resolvables;
-  cout << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-  cout << "<source xmlns=\"http://www.novell.com/zypp/testcases/source\">" << std::endl;
-  for (ResStore::const_iterator it = store.begin(); it != store.end(); it++)
-  {
-    //std::string resolvable_line = "[" + (*it)->kind().asString() + "]" + (*it)->name() + " " + (*it)->edition().asString() + " " + (*it)->arch().asString();
-    cout << " <resolvable kind=\"" << (*it)->kind() << "\">" << std::endl;
-    cout <<  "  <name>" << (*it)->name() << "</name>" << std::endl;
-    cout <<  "  <edition>" << (*it)->edition() << "</edition>" << std::endl;
-    cout <<  "  <arch>" << (*it)->arch() << "</arch>" << std::endl;
-    cout <<  "  <dependencies>" << std::endl;
-    dumpDeps((*it)->deps());
-    cout <<  "  </dependencies>" << std::endl;
-    cout << "  </resolvable>" << std::endl;
-    //std::cout << (**it).deps() << endl;
-  }
-  cout << "</source>" << std::endl;
-  //std::sort( resolvables.begin(), resolvables.end(), CustomSort );
-  //for (std::list<std::string>::const_iterator it = resolvables.begin(); it != resolvables.end(); ++it)
-  //{
- //   cout << *it << std::endl;
-  //}
 }
 
 
