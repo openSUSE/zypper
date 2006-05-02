@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue May  2 18:02:46 CEST 2006 - mt@suse.de
+
+- Disabled isUseableAttachPoint check in MediaDIR -- we do not
+  mount here anything, so it is OK to use any dir (171351).
+- rev 3318
+
+-------------------------------------------------------------------
 Tue May  2 14:58:03 CEST 2006 - kkaempf@suse.de
 
 - parse "license-to-confirm" in primary.xml (#168437)
