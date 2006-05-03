@@ -209,10 +209,10 @@ namespace zypp
 	_cache_dir = cache_dir_r;
 
         // first read list of all files in the repository
-        Pathname filename;
+        Pathname remote_repomd;
         try
         {
-          filename = provideFile(_path + "/repodata/repomd.xml");
+          remote_repomd = provideFile(_path + "/repodata/repomd.xml");
         }
         catch(Exception &e)
         {
@@ -234,7 +234,7 @@ namespace zypp
         if ( cacheExists() && PathInfo( _cache_dir + "/repodata/repomd.xml.asc").isExist() )
         {
           CheckSum old_repomd_checksum( "SHA1", filesystem::sha1sum(cached_repomd));
-          CheckSum new_repomd_checksum( "SHA1", filesystem::sha1sum(filename));
+          CheckSum new_repomd_checksum( "SHA1", filesystem::sha1sum(remote_repomd));
           if ( (new_repomd_checksum == old_repomd_checksum) && (!new_repomd_checksum.empty()) && (! old_repomd_checksum.empty()))
           {
             MIL << "YUM source " << alias() << "has not changed. Refresh completed. SHA1 of repomd.xml file is " << old_repomd_checksum.checksum() << std::endl;
@@ -255,16 +255,32 @@ namespace zypp
         	
         // check again all file integrity, on the server
         checkMetadataChecksums(false);
+ 
+        filesystem::copy( remote_repomd, dst + "repomd.xml");
         
-        filesystem::copy( _repomd_file, dst + "repomd.xml");
+        // provide optional files
+        Pathname remote_repomd_key;
+        Pathname remote_repomd_signature;
+        try {
+          remote_repomd_key = tryToProvideFile( _path + "/repodata/repomd.xml.key");
+        }
+        catch( const Exception &e ) {
+          WAR << "Repository does not contain repomd signing key" << std::endl;
+        }
+        try {
+          remote_repomd_signature = tryToProvideFile( _path + "/repodata/repomd.xml.asc");
+        }
+        catch( const Exception &e ) {
+          WAR << "Repository does not contain repomd signinature" << std::endl;
+        }
         
-        if (PathInfo(_repomd_key).isExist())
-          filesystem::copy( _repomd_key, dst + "repomd.xml.key");
-        if (PathInfo(_repomd_signature).isExist())
-          filesystem::copy( _repomd_signature, dst + "repomd.xml.asc");
+        if (PathInfo(remote_repomd_key).isExist())
+          filesystem::copy( remote_repomd_key, dst + "repomd.xml.key");
+        if (PathInfo(remote_repomd_signature).isExist())
+          filesystem::copy( remote_repomd_signature, dst + "repomd.xml.asc");
         
-	DBG << "Reading file " << filename << endl;
-	ifstream repo_st(filename.asString().c_str());
+	DBG << "Reading file " << remote_repomd << endl;
+	ifstream repo_st(remote_repomd.asString().c_str());
 	YUMRepomdParser repomd(repo_st, "");
 	
 	for(;
