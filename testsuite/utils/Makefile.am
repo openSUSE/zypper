@@ -9,8 +9,8 @@ INCLUDES = -DZYPP_BASE_LOGGER_LOGGROUP=\"testsuite_utils\"
 
 ##targetincludedir = $(pkgincludedir)/target
 
-##libtestsuiteinclude_HEADERS =			\
-##	TestUtils.h
+noinst_HEADERS =			\
+	TestUtils.h
 
 ## ##################################################
 
