@@ -207,6 +207,7 @@ namespace zypp
     const char* argv[] =
     {
       "gpg",
+      "--no-default-keyring",
       "--quiet",
       "--no-tty",
       "--no-greeting",
@@ -332,6 +333,7 @@ namespace zypp
     const char* argv[] =
     {
       "gpg",
+      "--no-default-keyring",
       "--with-fingerprint",
       "--with-colons",
       "--quiet",
@@ -382,6 +384,7 @@ namespace zypp
     const char* argv[] =
     {
       "gpg",
+      "--no-default-keyring",
       "--quiet",
       "--list-public-keys",
       "--with-colons",
@@ -444,6 +447,7 @@ namespace zypp
     const char* argv[] =
     {
       "gpg",
+      "--no-default-keyring",
       "--quiet",
       "--no-tty",
       "--no-greeting",
@@ -470,6 +474,7 @@ namespace zypp
     const char* argv[] =
     {
       "gpg",
+      "--no-default-keyring",
       "--yes",
       "--quiet",
       "--no-tty",
@@ -503,6 +508,7 @@ namespace zypp
     const char* argv[] =
     {
       "gpg",
+      "--no-default-keyring",
       "--quiet",
       "--no-tty",
       "--no-greeting",
@@ -545,6 +551,7 @@ namespace zypp
     const char* argv[] =
     {
       "gpg",
+      "--no-default-keyring",
       "--quiet",
       "--no-tty",
       "--batch",
