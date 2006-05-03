@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed May  3 12:23:36 CEST 2006 - kkaempf@suse.de
+
+- backout rev 3246->3275 of TargetImpl.cc
+- add missing testsuite/utils/TestUtils.h
+- rev 3330
+
+-------------------------------------------------------------------
 Wed May  3 12:13:38 CEST 2006 - dmacvicar@suse.de
 
 - more fixes for #171062, there were some files still not being
