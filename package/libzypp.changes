@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed May  3 14:22:02 CEST 2006 - ma@suse.de
+
+- Cleanup index tables when removing items from pool (#170564).
+
+-------------------------------------------------------------------
 Wed May  3 12:23:36 CEST 2006 - kkaempf@suse.de
 
 - backout rev 3246->3275 of TargetImpl.cc
@@ -9,13 +14,13 @@ Wed May  3 12:23:36 CEST 2006 - kkaempf@suse.de
 Wed May  3 12:13:38 CEST 2006 - dmacvicar@suse.de
 
 - more fixes for #171062, there were some files still not being
-  read from cache. 
+  read from cache.
 - r3327
 
 -------------------------------------------------------------------
 Tue May  2 18:41:44 CEST 2006 - dmacvicar@suse.de
 
-- cache keys and signature. Remove lot of duplicated code. (#171062) 
+- cache keys and signature. Remove lot of duplicated code. (#171062)
 - r3320
 
 -------------------------------------------------------------------
@@ -66,7 +71,7 @@ Sat Apr 29 11:05:15 CEST 2006 - kkaempf@suse.de
 Fri Apr 28 20:15:06 CEST 2006 - dmacvicar@suse.de
 
 - get rid of autobuild check when throwing exceptions without throw
-  but with a macro, returning a null pointer at the end (never reached). 
+  but with a macro, returning a null pointer at the end (never reached).
 
 -------------------------------------------------------------------
 Fri Apr 28 19:50:28 CEST 2006 - ma@suse.de

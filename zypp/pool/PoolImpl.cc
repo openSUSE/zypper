@@ -58,7 +58,7 @@ namespace zypp
     void
     NameHash::erase( const PoolItem & item_r )
     {
-      PoolTraits::ItemContainerT items = _store[item_r->name()];
+      PoolTraits::ItemContainerT & items = _store[item_r->name()];
       for ( PoolTraits::iterator nit = items.begin(); nit != items.end(); /**/ )
       {
 	if ( *nit == item_r )
@@ -130,7 +130,7 @@ namespace zypp
 //XXX << "storeDelete(" << item_r << ")" << endl;
       for ( CapSet::iterator ic = caps.begin(); ic != caps.end(); ++ic )
         {
-          PoolTraits::CapItemContainerT capitems = store_r[cap_r][ic->index()];
+          PoolTraits::CapItemContainerT & capitems = store_r[cap_r][ic->index()];
           for ( PoolTraits::CapItemContainerT::iterator pos = capitems.begin(); pos != capitems.end(); /**/ )
             {
               if ( pos->item == item_r )
