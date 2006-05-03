@@ -70,20 +70,21 @@ namespace zypp
       typedef ItemContainerT::const_iterator		const_iterator;
       typedef ItemContainerT::size_type			size_type;
 
-      /** hashed by name */
-							// use same iterators as above
-	// internal organization
+      // internal organization
       typedef std::map<std::string,ItemContainerT>	NameItemContainerT;
+      /** hashed by name */
+      typedef ItemContainerT::const_iterator            byName_iterator;
 
-      /** hashed by capability index */
+      // internal organization
       typedef std::list<CapAndItem>			CapItemContainerT;	// (why,who) pairs
+      typedef std::map<std::string,CapItemContainerT>	CapItemStoreT;		// capability.index -> (why,who) pairs
+      typedef std::map<Dep,CapItemStoreT>		DepCapItemContainerT;	// Dep -> (capability.index -> (why,who) pairs)
+
       typedef CapItemContainerT::iterator		capitemiterator;
       typedef CapItemContainerT::const_iterator		const_capitemiterator;
       typedef CapItemContainerT::size_type		capitemsize_type;
-
-	// internal organization
-      typedef std::map<std::string,CapItemContainerT>	CapItemStoreT;		// capability.index -> (why,who) pairs
-      typedef std::map<Dep,CapItemStoreT>		DepCapItemContainerT;	// Dep -> (capability.index -> (why,who) pairs)
+      /** hashed by capability index */
+      typedef const_capitemiterator                     byCapabilityIndex_iterator;
 
       typedef PoolImpl                   Impl;
       typedef shared_ptr<PoolImpl>       Impl_Ptr;

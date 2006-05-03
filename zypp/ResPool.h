@@ -40,10 +40,11 @@ namespace zypp
 
   public:
     /** \ref zypp::pool::PoolItem */
-    typedef pool::PoolTraits::Item		    Item;
-    typedef pool::PoolTraits::size_type		    size_type;
-    typedef pool::PoolTraits::const_iterator	    const_iterator;
-    typedef pool::PoolTraits::const_capitemiterator const_capitemiterator;
+    typedef pool::PoolTraits::Item		         Item;
+    typedef pool::PoolTraits::size_type		         size_type;
+    typedef pool::PoolTraits::const_iterator	         const_iterator;
+    typedef pool::PoolTraits::byName_iterator            byName_iterator;
+    typedef pool::PoolTraits::byCapabilityIndex_iterator byCapabilityIndex_iterator;
 
   public:
     /** Default ctor: empty pool */
@@ -92,9 +93,6 @@ namespace zypp
   public:
     /** \name Iterate through all ResObjects with a certain name (all kinds). */
     //@{
-    typedef resfilter::ByName ByName;
-    typedef filter_iterator<ByName,const_iterator> byName_iterator;
-
     byName_iterator byNameBegin( const std::string & name_r ) const;
 
     byName_iterator byNameEnd( const std::string & name_r ) const;
@@ -105,9 +103,6 @@ namespace zypp
     *  one Capability with index \a index_r in dependency \a depType_r.
    */
    //@{
-   typedef resfilter::ByCapabilityIndex ByCapabilityIndex;
-   typedef filter_iterator<ByCapabilityIndex,const_capitemiterator> byCapabilityIndex_iterator;
-
    byCapabilityIndex_iterator byCapabilityIndexBegin( const std::string & index_r, Dep depType_r ) const;
 
    byCapabilityIndex_iterator byCapabilityIndexEnd( const std::string & index_r, Dep depType_r ) const;

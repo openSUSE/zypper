@@ -76,16 +76,16 @@ namespace zypp
   { return _pimpl->end(); }
 
   ResPool::byName_iterator ResPool::byNameBegin( const std::string & name_r ) const
-  { return make_filter_iterator( ByName( name_r ), _pimpl->_namehash.begin( name_r ), _pimpl->_namehash.end( name_r ) ); }
+  { return _pimpl->_namehash.begin( name_r ); }
 
   ResPool::byName_iterator ResPool::byNameEnd( const std::string & name_r ) const
-  { return make_filter_iterator( ByName( name_r ), _pimpl->_namehash.end( name_r ), _pimpl->_namehash.end( name_r ) ); }
+  { return _pimpl->_namehash.end( name_r ); }
 
   ResPool::byCapabilityIndex_iterator ResPool::byCapabilityIndexBegin( const std::string & index_r, Dep depType_r ) const
-  { return make_filter_iterator( ByCapabilityIndex(), _pimpl->_caphash.begin( index_r, depType_r ), _pimpl->_caphash.end( index_r, depType_r ) ); }
+  { return _pimpl->_caphash.begin( index_r, depType_r ); }
 
   ResPool::byCapabilityIndex_iterator ResPool::byCapabilityIndexEnd( const std::string & index_r, Dep depType_r ) const
-  { return make_filter_iterator( ByCapabilityIndex(), _pimpl->_caphash.end( index_r, depType_r ), _pimpl->_caphash.end( index_r, depType_r ) ); }
+  { return _pimpl->_caphash.end( index_r, depType_r ); }
 
   /******************************************************************
   **
