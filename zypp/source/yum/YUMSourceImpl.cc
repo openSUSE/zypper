@@ -103,10 +103,10 @@ namespace zypp
           _repomd_file = _cache_dir + "/repodata/repomd.xml";
           
           if (PathInfo(_cache_dir + "/repodata/repomd.xml.asc").isExist())
-            _repomd_key = _cache_dir + "/repodata/repomd.xml.asc";
+            _repomd_signature = _cache_dir + "/repodata/repomd.xml.asc";
         
           if (PathInfo(_cache_dir + "/repodata/repomd.xml.key").isExist())
-            _repomd_signature = _cache_dir + "/repodata/repomd.xml.key";
+            _repomd_key = _cache_dir + "/repodata/repomd.xml.key";
         }
         else
         {

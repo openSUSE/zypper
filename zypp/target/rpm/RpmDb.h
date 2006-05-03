@@ -34,8 +34,7 @@
 namespace zypp {
   namespace target {
     namespace rpm {
-
-
+      
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : RpmDb
@@ -134,7 +133,7 @@ namespace zypp {
 	   * Destructor.
 	   **/
 	  ~RpmDb();
-      
+          
 	  /**
 	   * @return Root directory for all operations (empty if not initialized).
 	   **/
@@ -329,7 +328,7 @@ namespace zypp {
 	  ///////////////////////////////////////////////////////////////////
 	  //
 	  ///////////////////////////////////////////////////////////////////
-	private:
+	public:
           /**
            * iterates through zypp keyring and import all non existant keys
            * into rpm keyring
@@ -339,7 +338,7 @@ namespace zypp {
            * insert all rpm trusted keys into zypp trusted keyring
            */
           void exportTrustedKeysInZyppKeyRing();
-          
+        private:  
 	  /**
 	   * The connection to the rpm process.
 	  */

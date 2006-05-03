@@ -53,6 +53,35 @@ namespace zypp {
   namespace target {
     namespace rpm {
 
+      struct KeyRingSignalReceiver : callback::ReceiveReport<KeyRingSignals>
+      {
+        KeyRingSignalReceiver(RpmDb &rpmdb) : _rpmdb(rpmdb)
+        {
+          connect();
+        }
+        
+        ~KeyRingSignalReceiver()
+        {
+          disconnect();
+        }
+        
+        virtual void trustedKeyAdded( const KeyRing &keyring, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
+        {
+          MIL << "trusted key added to zypp Keyring. Syncronizing keys with rpm keyring" << std::endl;
+          _rpmdb.importZyppKeyRingTrustedKeys();
+          _rpmdb.exportTrustedKeysInZyppKeyRing();
+        }
+        
+        virtual void trustedKeyRemoved( const KeyRing &keyring, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
+        {
+        
+        }
+        
+        RpmDb &_rpmdb;
+      };
+                  
+      static shared_ptr<KeyRingSignalReceiver> sKeyRingReceiver;
+      
 unsigned diffFiles(const std::string file1, const std::string file2, std::string& out, int maxlines)
 {
     const char* argv[] =
@@ -310,6 +339,7 @@ RpmDb::RpmDb()
    // Some rpm versions are patched not to abort installation if
    // symlink creation failed.
    setenv( "RPM_IgnoreFailedSymlinks", "1", 1 );
+   sKeyRingReceiver.reset(new KeyRingSignalReceiver(*this));
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -326,6 +356,7 @@ RpmDb::~RpmDb()
    delete process;
    delete &_packages;
    MIL  << "~RpmDb() end" << endl;
+   sKeyRingReceiver.reset();
 }
 
 ///////////////////////////////////////////////////////////////////

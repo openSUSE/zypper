@@ -94,9 +94,9 @@ namespace zypp
     void dumpPublicKey( const std::string &id, bool trusted, std::ostream &stream );
     
     /**
-     * reads the public key id used to sign file with keyfile
+     * reads the public key id from a signature
      */
-    std::string readSignatureKeyId( const Pathname &data, const Pathname &keyfile );
+    std::string readSignatureKeyId( const Pathname &signature );
     
     /**
      * removes a key from the keyring.

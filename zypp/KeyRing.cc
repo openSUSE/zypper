@@ -101,7 +101,7 @@ namespace zypp
 
     void importKey( const Pathname &keyfile, bool trusted = false);
     PublicKey readPublicKey( const Pathname &keyfile );
-    std::string readSignatureKeyId(  const Pathname &data, const Pathname &keyfile );
+    std::string readSignatureKeyId( const Pathname &signature );
 
     void deleteKey( const std::string &id, bool trusted );
     std::list<PublicKey> trustedPublicKeys();
@@ -178,6 +178,7 @@ namespace zypp
 
   bool KeyRing::Impl::publicKeyExists( std::string id, const Pathname &keyring)
   {
+    MIL << "Searching key [" << id << "] in keyring " << keyring << std::endl;
     std::list<PublicKey> keys = publicKeys(keyring);
     for (std::list<PublicKey>::const_iterator it = keys.begin(); it != keys.end(); it++)
     {
@@ -244,7 +245,7 @@ namespace zypp
     }
 
     // get the id of the signature
-    std::string id = readSignatureKeyId(file, signature);
+    std::string id = readSignatureKeyId(signature);
 
     // doeskey exists in trusted keyring
     if ( publicKeyExists( id, _trusted_kr ) )
@@ -309,6 +310,7 @@ namespace zypp
       else
       {
         // unknown key...
+        MIL << "File [" << file << "] ( " << filedesc << " ) signed with unknown key [" << id << "]" << std::endl;
         if ( report->askUserToAcceptUnknownKey( filedesc, id, "", "" ) )
         {
           MIL << "User wants to accept unknown key " << id << std::endl;
@@ -491,11 +493,13 @@ namespace zypp
   }
 
 
-  std::string KeyRing::Impl::readSignatureKeyId( const Pathname &data, const Pathname &keyfile )
+  std::string KeyRing::Impl::readSignatureKeyId(const Pathname &signature )
   {
+    MIL << "Deetermining key id if signature " << signature << std::endl;
     // HACK create a tmp keyring with no keys
     TmpDir dir;
-
+    TmpFile fakeData;
+    
     const char* argv[] =
     {
       "gpg",
@@ -508,8 +512,8 @@ namespace zypp
       "--homedir",
       dir.path().asString().c_str(),
       "--verify",
-      keyfile.asString().c_str(),
-      data.asString().c_str(),
+      signature.asString().c_str(),
+      fakeData.path().asString().c_str(),
       NULL
     };
 
@@ -531,6 +535,7 @@ namespace zypp
         //dumpRegexpResults(what);
       }
     }
+    MIL << "Determined key id [" << id << "] for signature " << signature << std::endl;
     prog.close();
     return id;
   }
@@ -619,9 +624,9 @@ namespace zypp
     return _pimpl->readPublicKey(keyfile);
   }
 
-  std::string KeyRing::readSignatureKeyId(  const Pathname &data, const Pathname &keyfile )
+  std::string KeyRing::readSignatureKeyId( const Pathname &signature )
   {
-    return _pimpl->readSignatureKeyId(data, keyfile);
+    return _pimpl->readSignatureKeyId(signature);
   }
 
   void KeyRing::deleteKey( const std::string &id, bool trusted )
