@@ -95,8 +95,6 @@ namespace zypp
           WAR << "Verifier not found" << endl;
         }
         
-        Pathname _repomd_file;
-        
         if ( cache )
         {
           DBG << "Cached metadata found in [" << _cache_dir << "]." << endl;
@@ -133,6 +131,8 @@ namespace zypp
         
         if ( ! PathInfo(_repomd_file).isExist() )
           ZYPP_THROW(Exception("repodata/repomd.xml not found"));
+        else
+          MIL << "repomd file is [" << _repomd_file << "]" << std::endl;
           
 	MIL << "Trying to get the key" << endl;
         if ( ! _repomd_key.empty() )
@@ -160,7 +160,7 @@ namespace zypp
       {
         bool cache = from_cache;
       
-        MIL << "Checking repomd.xml integrity" << endl;
+        MIL << "Checking [" << _repomd_file << "] integrity"  << endl;
         
         if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(_repomd_file, (_path + "/repodata/repomd.xml").asString()+ " (" + url().asString() + ")", _repomd_signature))
           ZYPP_THROW(Exception(N_("Signed repomd.xml file fails signature check")));
