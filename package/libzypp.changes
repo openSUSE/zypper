@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed May  3 15:34:00 CEST 2006 - dmacvicar@suse.de
+
+- use --no-default-keyring to avoid creating a
+  default gpg dir in / (#171055) 
+- rev 3335
+
+-------------------------------------------------------------------
 Wed May  3 14:40:25 CEST 2006 - dmacvicar@suse.de
 
 - Fix YUM signature checking, we were passing the key instead of the
