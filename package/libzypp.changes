@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed May  3 14:40:25 CEST 2006 - dmacvicar@suse.de
+
+- Fix YUM signature checking, we were passing the key instead of the
+  signature. 
+- r3332
+
+-------------------------------------------------------------------
 Wed May  3 14:22:02 CEST 2006 - ma@suse.de
 
 - Cleanup index tables when removing items from pool (#170564).
