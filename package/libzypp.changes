@@ -3,6 +3,8 @@ Wed May  3 14:40:25 CEST 2006 - dmacvicar@suse.de
 
 - Fix YUM signature checking, we were passing the key instead of the
   signature. 
+- When the user trust a key, sync again. Bye to the session trusted
+  keys and user being asked all the time. (#171213)
 - r3332
 
 -------------------------------------------------------------------
