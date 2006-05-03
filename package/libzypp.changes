@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed May  3 17:40:45 CEST 2006 - dmacvicar@suse.de
+
+- Fix yum key verification, because a double variable declaration 
+
+-------------------------------------------------------------------
 Wed May  3 15:34:00 CEST 2006 - dmacvicar@suse.de
 
 - use --no-default-keyring to avoid creating a
