@@ -236,6 +236,15 @@ void MediaCurl::attachTo (bool next)
   }
   */
 
+  /*
+  ** Connect timeout
+  */
+  ret = curl_easy_setopt( _curl, CURLOPT_CONNECTTIMEOUT, 60);
+  if ( ret != 0 ) {
+    disconnectFrom();
+    ZYPP_THROW(MediaCurlSetOptException(_url, _curlError));
+  }
+
   if ( _url.getScheme() == "http" ) {
     // follow any Location: header that the server sends as part of
     // an HTTP header (#113275)
