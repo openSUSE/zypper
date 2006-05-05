@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May  5 17:47:14 CEST 2006 - mt@suse.de
+
+- Added a 60 sec connect timeout to MediaCurl (#172860)
+- rev 3348
+
+-------------------------------------------------------------------
 Wed May  3 17:40:45 CEST 2006 - dmacvicar@suse.de
 
 - Fix yum key verification, because a double variable declaration 
