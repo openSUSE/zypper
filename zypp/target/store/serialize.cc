@@ -423,7 +423,7 @@ std::string toXML( const PersistentStorage::SourceData &obj )
   out << "  <product-dir>" << obj.product_dir << "</product-dir>" << std::endl;
   out << "  <cache-dir>" << obj.cache_dir << "</cache-dir>" << std::endl;
   out << "  <type>" << xml_escape(obj.type) << "</type>" << std::endl;
-  out << "  <url>" << xml_escape(obj.url.asString()) << "</url>" << std::endl;
+  out << "  <url>" << xml_escape(obj.url.asCompleteString()) << "</url>" << std::endl;
   out << "  <alias>" << xml_escape(obj.alias) << "</alias>" << std::endl;
   out << "</source>" << std::endl;
   return out.str();
