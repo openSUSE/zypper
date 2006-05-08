@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon May  8 17:28:42 CEST 2006 - kkaempf@suse.de
+
+- fix 'transactResKind' to collect best providers by capability
+  and to recursively transact items of same kind (#170114)
+- rev 3355
+
+-------------------------------------------------------------------
 Mon May  8 16:45:46 CEST 2006 - dmacvicar@suse.de
 
 - serialize the full URL to avoid missing password and other

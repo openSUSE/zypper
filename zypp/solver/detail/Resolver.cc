@@ -972,17 +972,25 @@ Resolver::resolvePool ()
 
 //-----------------------------------------------------------------------------
 
+//
+// UI Helper
+// do a single (install/uninstall) transaction
+//  if a previously uninstalled item was just set to-be-installed, return it as 'added'
+
 static bool
-transactItems( PoolItem_Ref installed, PoolItem_Ref uninstalled, bool install, bool soft )
+transactItems( PoolItem_Ref installed, PoolItem_Ref uninstalled, bool install, bool soft, PoolItem_Ref & added )
 {
 	if (install) {
 	    if (uninstalled
 		&& !uninstalled.status().isLocked())
 	    {
+		bool adding;	// check if we're succeeding with transaction
 		if (soft)
-		    uninstalled.status().setSoftTransact( true, ResStatus::APPL_LOW );
+		    adding = uninstalled.status().setSoftTransact( true, ResStatus::APPL_LOW );
 		else
-		    uninstalled.status().setTransact( true, ResStatus::APPL_LOW );
+		    adding = uninstalled.status().setTransact( true, ResStatus::APPL_LOW );
+		if (adding)	// if succeeded, return it as 'just added'
+		    added = uninstalled;
 	    }
 	    if (installed
 		&& !installed.status().isLocked())
@@ -1014,10 +1022,11 @@ transactItems( PoolItem_Ref installed, PoolItem_Ref uninstalled, bool install, b
 }
 
 
-// find best available providers for name
-
 typedef struct { PoolItem_Ref installed; PoolItem_Ref uninstalled; } IandU;
 typedef map<string, IandU> IandUMap;
+
+// find best available providers for requested capability index
+// (use capability index instead of name in order to find e.g. ccb vs. x11)
 
 struct FindIandU
 {
@@ -1029,11 +1038,16 @@ struct FindIandU
     bool operator()( const CapAndItem & cai )
     {
 	PoolItem item( cai.item );
+	string idx = cai.cap.index();
+
 	if ( item.status().staysInstalled() ) {
-	    iandu[item->name()].installed = item;
+	    iandu[idx].installed = item;
+	}
+	else if ( item.status().isToBeInstalled() ) {			// prefer already to-be-installed
+	    iandu[idx].uninstalled = item;
 	}
 	else if ( item.status().staysUninstalled() ) {			// only look at uninstalled
-	    IandUMap::iterator it = iandu.find( item->name() );
+	    IandUMap::iterator it = iandu.find( idx );
 
 	    if (it != iandu.end()
 		&& it->second.uninstalled)
@@ -1049,7 +1063,7 @@ struct FindIandU
 		}
 	    }
 	    else {
-		iandu[item->name()].uninstalled = item;
+		iandu[idx].uninstalled = item;
 	    }
 	}
 	return true;
@@ -1065,13 +1079,15 @@ struct FindIandU
 //
 
 static bool
-transactCaps( const ResPool & pool, const CapSet & caps, bool install, bool soft )
+transactCaps( const ResPool & pool, const CapSet & caps, bool install, bool soft, std::list<PoolItem_Ref> & added_items )
 {
     bool result = true;
 
     // loop over capabilities and find (best) matching provider
 
     for (CapSet::const_iterator cit = caps.begin(); cit != caps.end(); ++cit) {
+
+	// find best providers of requested capability
 
 	FindIandU callback;
 	Dep dep( Dep::PROVIDES );
@@ -1080,9 +1096,18 @@ transactCaps( const ResPool & pool, const CapSet & caps, bool install, bool soft
 		      resfilter::ByCapMatch( *cit ) ,
 		      functor::functorRef<bool,CapAndItem>(callback) );
 
+	// loop through providers and transact them accordingly
+
 	for (IandUMap::const_iterator it = callback.iandu.begin(); it !=  callback.iandu.end(); ++it) {
-	    if (!transactItems( it->second.installed, it->second.uninstalled, install, soft )) {
+	    PoolItem_Ref just_added;
+	    just_added = PoolItem_Ref();
+	    if (!transactItems( it->second.installed, it->second.uninstalled, install, soft, just_added )) {
 		result = false;
+	    }
+	    else if (just_added) {
+		// transactItems just selected an item of the same kind we're currently processing
+		// add it to the list and handle it equivalent to the origin item
+		added_items.push_back( just_added );
 	    }
 	}
 	
@@ -1161,14 +1186,15 @@ struct TransactLanguage : public resfilter::PoolItemFilterFunctor
 	    }
 	}
 
+	PoolItem_Ref dummy;
 	if (_install) {
 	    if (item.status().staysUninstalled()) {
-		transactItems( PoolItem_Ref(), item, _install, true );
+		transactItems( PoolItem_Ref(), item, _install, true, dummy );
 	    }
 	}
 	else {
 	    if (item.status().staysInstalled()) {
-		transactItems( item, PoolItem_Ref(), _install, true );
+		transactItems( item, PoolItem_Ref(), _install, true, dummy );
 	    }
 	}
 	return true;
@@ -1198,8 +1224,28 @@ Resolver::transactResObject( ResObject::constPtr robj, bool install)
 		      functor::functorRef<bool,CapAndItem>( callback ) );
 
     }
-    transactCaps( _pool, robj->dep( Dep::RECOMMENDS ), install, true );
-    return transactCaps( _pool, robj->dep( Dep::REQUIRES ), install, false );
+    std::list<PoolItem_Ref> added;
+
+    // loop over 'recommends' and 'requires' of this item and collect additional
+    //  items of the same kind on the way
+
+    transactCaps( _pool, robj->dep( Dep::RECOMMENDS ), install, true, added );
+    transactCaps( _pool, robj->dep( Dep::REQUIRES ), install, false, added );
+
+    // if any additional items were collected, call this functions again recursively
+    //   This is guaranteed to finish since additional items are those which were not selected before
+    //   and this function is only called for already selected items. So added really only contains
+    //   'new' items.
+
+    for (std::list<PoolItem_Ref>::const_iterator it = added.begin(); it != added.end(); ++it) {
+	if ((*it)->kind() == robj->kind()) {
+	    MIL << "Added " << *it << endl;
+	    transactResObject( it->resolvable(), install );
+	}
+    }
+
+    // not used anyway
+    return true;
 }
 
 //
