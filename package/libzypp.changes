@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon May  8 16:45:46 CEST 2006 - dmacvicar@suse.de
+
+- serialize the full URL to avoid missing password and other
+  url settings (#148108)
+- rev 3353
+
+-------------------------------------------------------------------
 Fri May  5 17:47:14 CEST 2006 - mt@suse.de
 
 - Added a 60 sec connect timeout to MediaCurl (#172860)
