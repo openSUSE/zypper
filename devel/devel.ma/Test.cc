@@ -146,32 +146,32 @@ int main( int argc, char * argv[] )
   INT << "===[START]==========================================" << endl;
 
   ResPool pool( getZYpp()->pool() );
+  Source_Ref src1( createSource( "dir:/mounts/machcd2/CDs/SLES-10-CD-i386-Beta10/CD1" ) );
+  getZYpp()->addResolvables( src1.resolvables() );
+  INT << "Pool: " << pool << endl;
+  getZYpp()->removeResolvables( src1.resolvables() );
+  INT << "Pool: " << pool << endl;
 
-  if ( 0 )
-    {
-      getZYpp()->initTarget( sysRoot );
-      getZYpp()->addResolvables( getZYpp()->target()->resolvables(), true );
-      INT << "Added target: " << pool << endl;
-    }
+  vdumpPoolStats( INT << "Kind: ",
+                  pool.byKindBegin<Package>(),
+                  pool.byKindEnd<Package>() ) << endl;
 
-  Source_Ref src1( createSource( "nfs://machcd2/CDs/SLES-10-CD-i386-Beta10/CD1" ) );
+  vdumpPoolStats( INT << "Name: ",
+                  pool.byNameBegin( "rpm" ),
+                  pool.byNameEnd( "rpm" ) ) << endl;
 
-  getZYpp()->initTarget( "/" );
+  for_each( pool.byCapabilityIndexBegin( "rpm", Dep::PROVIDES ),
+            pool.byCapabilityIndexEnd( "rpm", Dep::PROVIDES ),
+            PrintOn<CapAndItem>(SEC) );
 
-  if ( 1 )
-    {
-      Source_Ref src1( createSource( "dir:/Local/TEST" ) );
-      getZYpp()->addResolvables( src1.resolvables() );
-      INT << "Pool: " << pool << endl;
-    }
-
-  selectForTransact( nameKindProxy<Package>( pool, "ccur-su-nslm" ) );
+#if 0
 
   vdumpPoolStats( INT << "Transacting: ",
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
-  getZYpp()->commit( ZYppCommitPolicy() );
+#endif
+
 
   INT << "===[END]============================================" << endl << endl;
   return 0;

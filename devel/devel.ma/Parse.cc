@@ -126,6 +126,7 @@ using zypp::solver::detail::InstallOrder;
 #include "Iorder.h"
 
 ///////////////////////////////////////////////////////////////////
+
 namespace zypp
 {
   struct CollectTransacting
@@ -167,63 +168,13 @@ namespace zypp
 }
 
 ///////////////////////////////////////////////////////////////////
-#if 0
-template<class _InstIterator, class _DelIterator, class _OutputIterator>
-void strip_obsoleted_to_delete( _InstIterator instBegin_r, _InstIterator instEnd_r,
-                                _DelIterator  delBegin_r,  _DelIterator  delEnd_r,
-                                _OutputIterator skip_r )
-  {
-    if ( instBegin_r == instEnd_r
-         || delBegin_r == delEnd_r )
-    return; // ---> nothing to do
 
-    // build obsoletes from inst
-    CapSet obsoletes;
-    for ( /**/; instBegin_r != instEnd_r; ++instBegin_r )
-    {
-      //xxxxx
-      //PoolItem_Ref item( *it );
-      //obsoletes.insert( item->dep(Dep::OBSOLETES).begin(), item->dep(Dep::OBSOLETES).end() );
-    }
-  if ( obsoletes.size() == 0 )
-    return; // ---> nothing to do
+struct AddResolvables
+{
+  bool operator()( const Source_Ref & src ) const
+  { getZYpp()->addResolvables( src.resolvables() ); }
+};
 
-  // match them... ;(
-  PoolItemList undelayed;
-  // forall applDelete Packages...
-  for ( PoolItemList::iterator it = deleteList_r.begin();
-	it != deleteList_r.end(); ++it )
-    {
-      PoolItem_Ref ipkg( *it );
-      bool delayPkg = false;
-      // ...check whether an obsoletes....
-      for ( CapSet::iterator obs = obsoletes.begin();
-            ! delayPkg && obs != obsoletes.end(); ++obs )
-        {
-          // ...matches anything provided by the package?
-          for ( CapSet::const_iterator prov = ipkg->dep(Dep::PROVIDES).begin();
-                prov != ipkg->dep(Dep::PROVIDES).end(); ++prov )
-            {
-              if ( obs->matches( *prov ) == CapMatch::yes )
-                {
-                  // if so, delay package deletion
-                  DBG << "Ignore appl_delete (should be obsoleted): " << ipkg << endl;
-                  delayPkg = true;
-                  ipkg.status().setTransact( false, ResStatus::USER );
-                  break;
-                }
-            }
-        }
-      if ( ! delayPkg ) {
-        DBG << "undelayed " << ipkg << endl;
-        undelayed.push_back( ipkg );
-      }
-    }
-  // Puhh...
-  deleteList_r.swap( undelayed );
-
-}
-#endif
 ///////////////////////////////////////////////////////////////////
 
 struct SetTransactValue
@@ -256,18 +207,6 @@ inline bool selectForTransact( const NameKindProxy & nkp )
   return nkp.availableBegin()->status().setTransact( true, ResStatus::USER );
 }
 
-  struct PrintX
-  {
-    PrintX( map<NVRA,string> & nvrmap )
-    : m(nvrmap)
-    {}
-    void operator()( const NVRA & i ) const
-    {
-      INT << i << ": " << m[i] << endl;
-    }
-    map<NVRA,string> & m;
-  };
-
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -280,60 +219,44 @@ int main( int argc, char * argv[] )
 
   ResPool pool( getZYpp()->pool() );
 
-  if ( 0 )
+  if ( 1 )
     {
       getZYpp()->initTarget( sysRoot );
       getZYpp()->addResolvables( getZYpp()->target()->resolvables(), true );
-      INT << "Added target: " << pool << endl;
+      USR << "Added target: " << pool << endl;
     }
 
   if ( 1 ) {
     SourceManager::sourceManager()->restore( sysRoot );
     if ( SourceManager::sourceManager()->allSources().empty() )
       {
-        Source_Ref src1;
-        if ( 1 )
-          {
-            Url myUrl( "dir:/mounts/machcd2/CDs/SLES-10-CD-i386-Beta10/CD1" );
-            USR << src1 << endl;
-            try
-              {
-                src1 = SourceFactory().createFrom( myUrl, "/", Date::now().asSeconds() );
-              }
-            catch ( const Exception & )
-              {
-                ;
-              }
-            USR << src1 << endl;
-          }
+        Source_Ref src1( createSource( "dir:/mounts/machcd2/CDs/SLES-10-CD-i386-Beta10/CD1" ) );
+        Source_Ref src2( createSource( "dir:/mounts/machcd2/kukuk/sles10-sp-i386/CD1" ) );
         SourceManager::sourceManager()->addSource( src1 );
+        SourceManager::sourceManager()->addSource( src2 );
         SourceManager::sourceManager()->store( sysRoot, true );
       }
-
-    Source_Ref src( *SourceManager::sourceManager()->Source_begin() );
+    for_each( SourceManager::sourceManager()->Source_begin(), SourceManager::sourceManager()->Source_end(),
+              AddResolvables() );
+    dumpRange( USR << "Sources: ",
+               SourceManager::sourceManager()->Source_begin(), SourceManager::sourceManager()->Source_end()
+               ) << endl;
   }
 
-  USR << "=======================" << endl;
-
-  SourceManager::sourceManager()->removeSource( SourceManager::sourceManager()->Source_begin()->numericId() );
-  SourceManager::sourceManager()->store( sysRoot, true );
-
-
-#if 0
-  Source_Ref src1( createSource( "dir:/mounts/machcd2/CDs/SLES-10-CD-i386-Beta10/CD1" ) );
-  Source_Ref src2( createSource( "dir:/mounts/machcd2/kukuk/sles10-sp-i386/CD1" ) );
-  getZYpp()->addResolvables( src1.resolvables() );
-  getZYpp()->addResolvables( src2.resolvables() );
-  INT << "Pool: " << pool << endl;
+  USR << pool << endl;
+  //dumpRange( USR << "Pool: " << pool,
+  //           pool.begin(), pool.end()
+  //           ) << endl;
 
   selectForTransact( nameKindProxy<Pattern>( pool, "default" ) );
   selectForTransact( nameKindProxy<Pattern>( pool, "x11" ) );
   selectForTransact( nameKindProxy<Pattern>( pool, "kde" ) );
   selectForTransact( nameKindProxy<Pattern>( pool, "OOo" ) );
 
-  vdumpPoolStats( INT << "Transacting: ",
+  vdumpPoolStats( USR << "Transacting:"<< endl,
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+
 
   bool eres, rres;
   {
@@ -343,26 +266,11 @@ int main( int argc, char * argv[] )
   }
   MIL << "est " << eres << " slv " << rres << endl;
 
-  vdumpPoolStats( INT << "Transacting: ",
+  vdumpPoolStats( USR << "Transacting:"<< endl,
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
 
-  ZYppCommitPolicy policy;
-  policy.rpmNoSignature();
-  if ( 0 )
-    {
-      ZYppCommitResult res( getZYpp()->commit( policy ) );
-    }
-  else
-    {
-      for ( unsigned mnr = 1; mnr < 6; ++mnr )
-        {
-          policy.restrictToMedia( mnr );
-          ZYppCommitResult res( getZYpp()->commit( policy ) );
-        }
-    }
-#endif
   INT << "===[END]============================================" << endl << endl;
   return 0;
 }
