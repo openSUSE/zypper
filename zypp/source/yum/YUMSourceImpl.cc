@@ -252,12 +252,12 @@ namespace zypp
           ZYPP_THROW(Exception("Cannot create repodata cache directory"));
 
         MIL << "Storing data to cache" << endl;
+
+	// source was invalidated
+	// re-read all data
+
+	_repomd_file = remote_repomd;
         	
-        // check again all file integrity, on the server
-        checkMetadataChecksums(false);
- 
-        filesystem::copy( remote_repomd, dst + "repomd.xml");
-        
         // provide optional files
         Pathname remote_repomd_key;
         Pathname remote_repomd_signature;
@@ -267,12 +267,19 @@ namespace zypp
         catch( const Exception &e ) {
           WAR << "Repository does not contain repomd signing key" << std::endl;
         }
+	_repomd_key = remote_repomd_key;
         try {
           remote_repomd_signature = tryToProvideFile( _path + "/repodata/repomd.xml.asc");
         }
         catch( const Exception &e ) {
           WAR << "Repository does not contain repomd signinature" << std::endl;
         }
+        _repomd_signature = remote_repomd_signature;
+
+        // check again all file integrity, on the just downloaded files
+        checkMetadataChecksums(false);
+ 
+        filesystem::copy( remote_repomd, dst + "repomd.xml");
         
         if (PathInfo(remote_repomd_key).isExist())
           filesystem::copy( remote_repomd_key, dst + "repomd.xml.key");
