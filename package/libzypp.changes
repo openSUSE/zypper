@@ -5,6 +5,13 @@ Fri May  5 17:47:14 CEST 2006 - mt@suse.de
 - rev 3348
 
 -------------------------------------------------------------------
+Thu May  4 15:15:37 CEST 2006 - kkaempf@suse.de
+
+- re-fetch also .asc and .key files before checking signature
+  (#172597)
+- rev 3350 (3345-10.1)
+
+-------------------------------------------------------------------
 Wed May  3 17:40:45 CEST 2006 - dmacvicar@suse.de
 
 - Fix yum key verification, because a double variable declaration 
