@@ -566,9 +566,14 @@ Resolver::problems (void) const
 		what = str::form (_("Cannot install %s to fulfil the dependencies of %s"),
 				  misc_info->other()->name().c_str(),
 				  who.c_str());
-		what = misc_info->message();
+		details = misc_info->message();
 		// It is only an info --> no solution is needed		
 	    }
+	    case RESOLVER_INFO_TYPE_OTHER_ARCH_PROVIDER: {		// p provides c but has other architecture
+		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
+		what = misc_info->message();
+		// It is only an info --> no solution is needed		
+	    }		
 	    break;
 	    case RESOLVER_INFO_TYPE_LOCKED_PROVIDER: {			// p provides c but is locked
 		ResolverInfoMisc_constPtr misc_info = dynamic_pointer_cast<const ResolverInfoMisc>(info);
