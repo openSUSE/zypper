@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed May 10 11:39:06 CEST 2006 - jsrain@suse.cz
+
+- set media verifier on redirected medium (#172599)
+- rev 3359
+
+-------------------------------------------------------------------
 Mon May  8 17:28:42 CEST 2006 - kkaempf@suse.de
 
 - fix 'transactResKind' to collect best providers by capability

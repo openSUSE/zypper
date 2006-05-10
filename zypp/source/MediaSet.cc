@@ -60,6 +60,17 @@ namespace zypp
 	  ZYPP_CAUGHT(excpt_r);
 	}
       }
+      try {
+	MIL << "Adding media verifier to redirected medium" << endl;
+	media_mgr.delVerifier(media_id);
+	media_mgr.addVerifier(media_id, _source.verifier(medianr));
+      }
+      catch (const Exception & excpt_r)
+      {
+#warning FIXME: If media data is not set, verifier is not set. Should the media be refused instead?
+	ZYPP_CAUGHT(excpt_r);
+	WAR << "Verifier not found" << endl;
+      }
 
       medias[medianr] = media_id;
     }
