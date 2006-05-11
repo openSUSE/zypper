@@ -981,21 +981,23 @@ static bool
 transactItems( PoolItem_Ref installed, PoolItem_Ref uninstalled, bool install, bool soft, PoolItem_Ref & added )
 {
 	if (install) {
-	    if (uninstalled
-		&& !uninstalled.status().isLocked())
-	    {
-		bool adding;	// check if we're succeeding with transaction
-		if (soft)
-		    adding = uninstalled.status().setSoftTransact( true, ResStatus::APPL_LOW );
-		else
-		    adding = uninstalled.status().setTransact( true, ResStatus::APPL_LOW );
-		if (adding)	// if succeeded, return it as 'just added'
-		    added = uninstalled;
-	    }
-	    if (installed
-		&& !installed.status().isLocked())
-	    {
-		installed.status().resetTransact( ResStatus::APPL_LOW );
+	    if (compareByNVRA (installed.resolvable(), uninstalled.resolvable()) != 0) { // do not update itself Bug 174290
+		if (uninstalled
+		    && !uninstalled.status().isLocked())
+		{
+		    bool adding;	// check if we're succeeding with transaction
+		    if (soft)
+			adding = uninstalled.status().setSoftTransact( true, ResStatus::APPL_LOW );
+		    else
+			adding = uninstalled.status().setTransact( true, ResStatus::APPL_LOW );
+		    if (adding)	// if succeeded, return it as 'just added'
+			added = uninstalled;
+		}
+		if (installed
+		    && !installed.status().isLocked())
+		{
+		    installed.status().resetTransact( ResStatus::APPL_LOW );
+		}
 	    }
 	} else {
 	    // uninstall
