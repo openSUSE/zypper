@@ -267,6 +267,17 @@ namespace zypp
     	MIL << "Created..." << topdir << std::endl;
     }
 
+    // delete before modifying and creating
+    // so that we can recreate a deleted one (#174295)
+    for( SourceMap::iterator it = _deleted_sources.begin(); it != _deleted_sources.end(); it++)
+    {
+	MIL << "Deleting source " << it->second << " from persistent store" << endl;
+	store.deleteSource( it->second.alias() );
+	filesystem::recursive_rmdir( it->second.cacheDir() );
+    }
+
+    _deleted_sources.clear();
+
     for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
     {
 	storage::PersistentStorage::SourceData descr;
@@ -303,15 +314,6 @@ namespace zypp
 
 	store.storeSource( descr );
     }
-
-    for( SourceMap::iterator it = _deleted_sources.begin(); it != _deleted_sources.end(); it++)
-    {
-	MIL << "Deleting source " << it->second << " from persistent store" << endl;
-	store.deleteSource( it->second.alias() );
-	filesystem::recursive_rmdir( it->second.cacheDir() );
-    }
-
-    _deleted_sources.clear();
 
     MIL << "SourceManager store done." << endl;
   }

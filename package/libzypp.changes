@@ -1,8 +1,11 @@
 -------------------------------------------------------------------
-Thu May 11 10:40:21 CEST 2006 - mvidner@suse.cz
+Thu May 11 10:49:36 CEST 2006 - mvidner@suse.cz
 
+- SourceManager: moved source deletion before creation
+  so that we can recreate a deleted one (#174295)
 - removed dead code dealing with known_caches from SourceManager::store
   (see r3195)
+- r3362
 
 -------------------------------------------------------------------
 Thu May 11 10:15:14 CEST 2006 - jsrain@suse.cz
