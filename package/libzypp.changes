@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu May 11 10:15:14 CEST 2006 - jsrain@suse.cz
+
+- fixed returning product short name and summary if product read
+  from target store (#148625)
+- rev 3360
+
+-------------------------------------------------------------------
 Wed May 10 11:39:06 CEST 2006 - jsrain@suse.cz
 
 - set media verifier on redirected medium (#172599)

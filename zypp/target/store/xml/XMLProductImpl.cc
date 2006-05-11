@@ -11,6 +11,7 @@
 */
 
 #include "zypp/target/store/xml/XMLProductImpl.h"
+#include "zypp/base/Logger.h"
 
 using namespace std;
 
@@ -40,14 +41,14 @@ namespace zypp
     Label XMLProductImpl::vendor() const 
     { return _vendor; } 
 
-    Label XMLProductImpl::summary( const Locale & ) const 
-    { return _summary.text(); }
+    TranslatedText XMLProductImpl::summary() const 
+    { return _summary; }
 
-    Label XMLProductImpl::shortName( const Locale & ) const
-    { return _short_name.text(); }
+    TranslatedText XMLProductImpl::shortName() const
+    { return _short_name; }
     
-    Label XMLProductImpl::description( const Locale & ) const 
-    { return _description.text(); }
+    TranslatedText XMLProductImpl::description() const 
+    { return _description; }
     
     Url XMLProductImpl::releaseNotesUrl() const
     { return _release_notes_url; }
