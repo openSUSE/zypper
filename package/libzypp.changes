@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu May 11 16:37:51 CEST 2006 - mt@suse.de
+
+- Reenabled improved large file support flags (unintentionally
+  removed in rev 1544). Fixes bug #173753.
+- Added large file support flags to libzypp.pc file allowing
+  consistence checks in the application using features variable
+- rev 3366
+
+-------------------------------------------------------------------
 Thu May 11 10:49:36 CEST 2006 - mvidner@suse.cz
 
 - SourceManager: moved source deletion before creation
