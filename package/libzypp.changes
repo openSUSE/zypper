@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu May 11 17:42:29 CEST 2006 - schubi@suse.de
+
+- Do not transact itself (update) in the transactResObject mechanism
+  Bug 174290 
+
+-------------------------------------------------------------------
 Thu May 11 16:37:51 CEST 2006 - mt@suse.de
 
 - Reenabled improved large file support flags (unintentionally
