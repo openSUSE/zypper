@@ -57,6 +57,15 @@ dnl ==================================================
 
 CXXFLAGS="${CXXFLAGS} -g -O2 -Wall -Wformat"
 AC_SYS_LARGEFILE
+if test "$enable_largefile" != no ; then
+	enable_largefile=yes
+	if test "$ac_cv_sys_file_offset_bits" != no; then
+		CXXFLAGS="$CXXFLAGS -D_FILE_OFFSET_BITS=$ac_cv_sys_file_offset_bits"
+	fi
+	if test "$ac_cv_sys_large_files" != no; then
+		CXXFLAGS="$CXXFLAGS -D_LARGE_FILES=$ac_cv_sys_large_files"
+	fi
+fi
 
 dnl ==================================================
 
