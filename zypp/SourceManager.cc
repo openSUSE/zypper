@@ -267,14 +267,6 @@ namespace zypp
     	MIL << "Created..." << topdir << std::endl;
     }
 
-    // first, gather all known cache dirs
-    std::set<std::string> known_caches;
-    for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
-    {
-	if( ! it->second.cacheDir().empty() )
-	    known_caches.insert( it->second.cacheDir().asString() );
-    }
-
     for( SourceMap::iterator it = _sources.begin(); it != _sources.end(); it++)
     {
 	storage::PersistentStorage::SourceData descr;
@@ -294,7 +286,6 @@ namespace zypp
 	    {
               filesystem::TmpDir newCache( root_r /  ZYPP_METADATA_PREFIX, "Source." );
               descr.cache_dir = ZYPP_METADATA_PREFIX + newCache.path().basename();
-              known_caches.insert( descr.cache_dir.asString() );
 	    }
 
 	    filesystem::assert_dir ( root_r.asString() + descr.cache_dir );

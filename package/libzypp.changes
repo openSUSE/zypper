@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu May 11 10:40:21 CEST 2006 - mvidner@suse.cz
+
+- removed dead code dealing with known_caches from SourceManager::store
+  (see r3195)
+
+-------------------------------------------------------------------
 Thu May 11 10:15:14 CEST 2006 - jsrain@suse.cz
 
 - fixed returning product short name and summary if product read
