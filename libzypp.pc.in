@@ -8,4 +8,7 @@ Version: @PACKAGE_VERSION@
 Description: Package, Patch, Pattern, and Product Management
 
 Libs: -L${libdir} -lzypp
-Cflags: -I${includedir}
+Cflags: -I${includedir} @ZYPP_CFLAGS@
+
+features=@ZYPP_FEATURES@
+

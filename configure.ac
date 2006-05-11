@@ -55,17 +55,32 @@ AC_SUBST(LIBZYPP_VERSION_INFO)
 
 dnl ==================================================
 
+# libzypp compile time features/option tags,
+# that can be used for consistence checks ...
+ZYPP_FEATURES=""
+AC_SUBST(ZYPP_FEATURES)
+
+# libzypp cflags to add to pkg-config cflags
+ZYPP_CFLAGS=""
+AC_SUBST(ZYPP_CFLAGS)
+
+dnl ==================================================
+
 CXXFLAGS="${CXXFLAGS} -g -O2 -Wall -Wformat"
 AC_SYS_LARGEFILE
 if test "$enable_largefile" != no ; then
 	enable_largefile=yes
 	if test "$ac_cv_sys_file_offset_bits" != no; then
-		CXXFLAGS="$CXXFLAGS -D_FILE_OFFSET_BITS=$ac_cv_sys_file_offset_bits"
+		LFS_CFLAGS="-D_FILE_OFFSET_BITS=$ac_cv_sys_file_offset_bits"
 	fi
 	if test "$ac_cv_sys_large_files" != no; then
-		CXXFLAGS="$CXXFLAGS -D_LARGE_FILES=$ac_cv_sys_large_files"
+		LFS_CFLAGS="-D_LARGE_FILES=$ac_cv_sys_large_files $LFS_CFLAGS"
 	fi
+	ZYPP_FEATURES="LFS $ZYPP_FEATURES"
+	ZYPP_CFLAGS="$LFS_CFLAGS $ZYPP_CFLAGS"
 fi
+AC_SUBST(LFS_CFLAGS)
+test -n "$LFS_CFLAGS" && CXXFLAGS="$CXXFLAGS $LFS_CFLAGS"
 
 dnl ==================================================
 
@@ -269,8 +284,10 @@ Configuration:
   VERSION:              ${VERSION}
   LIBVERSION:           lib${PACKAGE}.so.${LIBZYPP_VERSION}
 
+  FEATURES:             ${ZYPP_FEATURES}
+
   COMPILER:             ${CXX}
-  CXXFLAGS:          	${CXXFLAGS}
+  CXXFLAGS:             ${CXXFLAGS}
 
   PREFIX:               ${prefix}
   LIBDIR:               ${libdir}
