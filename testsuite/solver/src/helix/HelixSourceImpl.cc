@@ -25,6 +25,7 @@
 #include "HelixScriptImpl.h"
 #include "HelixLanguageImpl.h"
 #include "HelixMessageImpl.h"
+#include "HelixAtomImpl.h"
 #include "HelixPatchImpl.h"
 #include "HelixSelectionImpl.h"
 #include "HelixPatternImpl.h"
@@ -207,6 +208,30 @@ HelixSourceImpl::createScript (const HelixParser & parsed)
 }
 
 
+Atom::Ptr
+HelixSourceImpl::createAtom (const HelixParser & parsed)
+{
+    try
+    {
+	detail::ResImplTraits<HelixAtomImpl>::Ptr impl(new HelixAtomImpl(_source, parsed));
+
+	// Collect basic Resolvable data
+	NVRAD dataCollect( parsed.name,
+			Edition( parsed.version, parsed.release, parsed.epoch ),
+			Arch( parsed.arch ),
+			createDependencies (parsed));
+	Atom::Ptr atom = detail::makeResolvableFromImpl(dataCollect, impl);
+	return atom;
+    }
+    catch (const Exception & excpt_r)
+    {
+	ERR << excpt_r << endl;
+	throw "Cannot create atom object";
+    }
+    return NULL;
+}
+
+
 Patch::Ptr
 HelixSourceImpl::createPatch (const HelixParser & parsed)
 {
@@ -339,6 +364,10 @@ HelixSourceImpl::parserCallback (const HelixParser & parsed)
     else if (parsed.kind == ResTraits<Product>::kind) {
 	Product::Ptr p = createProduct (parsed);
 	_store.insert (p);
+    }
+    else if (parsed.kind == ResTraits<Atom>::kind) {
+	Atom::Ptr a = createAtom (parsed);
+	_store.insert (a);
     }
     else {
 	ERR << "Unsupported kind " << parsed.kind << endl;

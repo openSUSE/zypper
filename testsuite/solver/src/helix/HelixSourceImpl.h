@@ -33,6 +33,7 @@
 #include "zypp/Language.h"
 #include "zypp/Message.h"
 #include "zypp/Script.h"
+#include "zypp/Atom.h"
 #include "zypp/Patch.h"
 #include "zypp/Product.h"
 #include "zypp/Selection.h"
@@ -72,6 +73,7 @@ class HelixSourceImpl : public zypp::source::SourceImpl {
     Message::Ptr createMessage (const HelixParser & data);
     Language::Ptr createLanguage (const HelixParser & data);
     Script::Ptr  createScript (const HelixParser & data);
+    Atom::Ptr createAtom (const HelixParser & data);
     Patch::Ptr   createPatch (const HelixParser & data);
     Pattern::Ptr createPattern (const HelixParser & data);
     Selection::Ptr createSelection (const HelixParser & data);
