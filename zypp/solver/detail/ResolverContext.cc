@@ -612,7 +612,7 @@ ResolverContext::incomplete (PoolItem_Ref item, int other_penalty)
 // if yes, install/requires requests are considered done
 
 bool
-ResolverContext::isPresent (PoolItem_Ref item)
+ResolverContext::isPresent (PoolItem_Ref item, bool *unneeded)
 {
     ResStatus status = getStatus(item);
 
@@ -620,6 +620,8 @@ ResolverContext::isPresent (PoolItem_Ref item)
 		|| (status.isToBeInstalled() && !status.isNeeded())
 		|| status.isUnneeded()
 		|| status.isSatisfied());
+
+   if (unneeded) *unneeded = status.isUnneeded();
 
 _XDEBUG("ResolverContext::itemIsPresent(<" << status << ">" << item << ") " << (res?"Y":"N"));
 
@@ -1398,11 +1400,13 @@ struct RequirementMet
     ResolverContext_Ptr context;
     const Capability capability;
     bool flag;
+    bool unneeded;
 
     RequirementMet (ResolverContext_Ptr ctx, const Capability & c)
 	: context (ctx)
 	, capability (c)
 	, flag (false)
+	, unneeded( false )
     { }
 
 
@@ -1412,10 +1416,12 @@ struct RequirementMet
 	PoolItem provider( cai.item );
 	// capability is set for item set children. If it is set, query the
 	//   exact version only.
+	bool my_unneeded = false;
 	if ((capability == Capability::noCap
 	     || capability == match)
-	    && context->isPresent (provider))
+	    && context->isPresent( provider, &my_unneeded ))
 	{
+	    unneeded = my_unneeded;
 	    flag = true;
 	}
 
@@ -1428,7 +1434,7 @@ struct RequirementMet
 
 
 bool
-ResolverContext::requirementIsMet (const Capability & capability, bool is_child)
+ResolverContext::requirementIsMet (const Capability & capability, bool is_child, bool *unneeded)
 {
     RequirementMet info (this, is_child ? capability : Capability::noCap);
 
@@ -1443,6 +1449,8 @@ ResolverContext::requirementIsMet (const Capability & capability, bool is_child)
 		  resfilter::ByCapMatch( capability ),
 		  functor::functorRef<bool,CapAndItem>(info) );
 _XDEBUG( "ResolverContext::requirementIsMet(" << capability << ") " << (info.flag?"Y":"N") );
+    if (unneeded) *unneeded = info.unneeded;
+
     return info.flag;
 }
 

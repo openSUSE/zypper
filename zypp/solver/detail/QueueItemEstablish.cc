@@ -175,38 +175,28 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 
 	CapSet requires = _item->dep(Dep::REQUIRES);			// check requirements
 	Capability missing;
+	bool all_unneeded = true;					// check if all are met because of unneeded
 	for (iter = requires.begin(); iter != requires.end(); iter++) {
 	    missing = *iter;
-	    if (!context->requirementIsMet (missing)) {
+	    bool unneeded;
+	    if (!context->requirementIsMet (missing, false, &unneeded)) {
+		all_unneeded = false;
 		break;
 	    }
+	    if (!unneeded) all_unneeded = false;
 	}
 	if (iter == requires.end()) {					// all are met
-#if 0	// now disabled
-
-// why do we install when requirements are met ?
-// this code should probably be removed completely.
-// if all requirements are met, the item is satisfied
-//  there is no reason to install it.
-
-	    if (_item->kind() == ResTraits<Package>::kind
-                || _item->kind() == ResTraits<Pattern>::kind
-                || _item->kind() == ResTraits<Selection>::kind)
+	    if (all_unneeded
+		&& _item->kind() == ResTraits<Patch>::kind)		// unneeded is transitive only for patches (#171590)
 	    {
-		if (status.staysUninstalled())
-		{
-		    _DEBUG("Uninstalled " << _item << " has all requirements -> install");
-		    QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), _item );
-		    qil.push_front( install_item );
-		}
+		_DEBUG("all requirements of " << _item << " unneeded -> unneeded");
+		context->unneeded( _item, _other_penalty );
 	    }
-	    else {
-#endif
+	    else
+	    {
 		_DEBUG("all requirements of " << _item << " met -> satisfied");
-		context->satisfy (_item, _other_penalty);
-#if 0
+		context->satisfy( _item, _other_penalty );
 	    }
-#endif
 	}
 	else {
 	    // If the item stays installed, blame the user

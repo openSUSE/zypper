@@ -207,13 +207,13 @@ class ResolverContext : public base::ReferenceCounted, private base::NonCopyable
 
     /**
      *\return \c true if \c item is \a installed or \a to-be-installed */
-    bool isPresent (PoolItem_Ref item);
+    bool isPresent (PoolItem_Ref item, bool *unneeded = NULL);
 
     /**
      *\return \c true if \c item is \a uninstalled or \a to-be-uninstalled */
     bool isAbsent (PoolItem_Ref item);
 
-    bool requirementIsMet (const Capability & cap, bool is_child = false);
+    bool requirementIsMet (const Capability & cap, bool is_child = false, bool *unneeded = NULL);
     bool requirementIsPossible (const Capability & cap);
     bool itemIsPossible (const PoolItem_Ref item);
     bool isParallelInstall (const PoolItem_Ref item) const;
