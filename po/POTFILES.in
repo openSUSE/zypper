@@ -3,6 +3,7 @@
 ./zypp/media/Mount.cc
 ./zypp/LanguageCode.cc
 ./zypp/SourceManager.cc
+./zypp/ZYppFactory.cc
 ./zypp/target/rpm/RpmDb.cc
 ./zypp/target/TargetImpl.cc
 ./zypp/solver/detail/ResolverInfoObsoletes.cc
@@ -20,5 +21,7 @@
 ./zypp/solver/detail/ResolverInfoNeededBy.cc
 ./zypp/solver/detail/ResolverInfoChildOf.cc
 ./zypp/solver/detail/ProblemSolutionUnlock.cc
+./zypp/source/yum/YUMSourceImpl.cc
+./zypp/source/yum/YUMScriptImpl.cc
 ./zypp/CountryCode.cc
 ./zypp/SourceManager.h
