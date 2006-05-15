@@ -136,8 +136,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
     // if we have freshens but none of the freshen deps were met, mark the _item as unneeded
     // else we look at its requires to set it to satisfied or incomplete
 
-    if (status.staysUninstalled()
-	&& freshens.size() > 0				// have freshens !
+    if (freshens.size() > 0				// have freshens !
 	&& iter == freshens.end())
     {
 	_DEBUG(_item << " freshens nothing -> unneeded");

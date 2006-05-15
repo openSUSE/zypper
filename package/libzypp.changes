@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon May 15 12:41:39 CEST 2006 - kkaempf@suse.de
+
+- Honor freshens as conditionals independant from the installed/
+  uninstalled status (#174797)
+- rev 3376
+
+-------------------------------------------------------------------
 Mon May 15 11:15:03 CEST 2006 - kkaempf@suse.de
 
 - State modifier "unneeded" is transitive for patches (#171590)
