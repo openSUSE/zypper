@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+  Bug 171590:
+  Patch requirements are all unneeded
+  Old behaviour: Patch satisfied
+  New (correct) behaviour: Patch unneeded
+-->
+<test allow_virtual_conflicts="yes">
+<setup>
+  <system file="exercise-1-system.xml"/>
+  <channel name="test" file="exercise-bug171590-packages.xml"/>
+</setup>
+<trial>
+  <establish/>
+</trial>
+</test>
