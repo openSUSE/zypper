@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May 15 11:15:03 CEST 2006 - kkaempf@suse.de
+
+- State modifier "unneeded" is transitive for patches (#171590)
+- rev 3375
+
+-------------------------------------------------------------------
 Thu May 11 17:42:29 CEST 2006 - schubi@suse.de
 
 - Do not transact itself (update) in the transactResObject mechanism
