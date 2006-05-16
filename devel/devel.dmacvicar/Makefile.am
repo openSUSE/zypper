@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS = test lock testbed
+noinst_PROGRAMS = test lock testbed aj
 
 ## ##################################################
 
