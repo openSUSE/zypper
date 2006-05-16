@@ -108,7 +108,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
     }
     if ( ! _item->arch().compatibleWith( context->architecture() ) ) {
 	context->unneeded (_item, _other_penalty);
-	_DEBUG( _item << " has incompatible architecture, unneeded" );
+	_XDEBUG( _item << " has incompatible architecture, unneeded" );
 	return true;
     }
 
@@ -139,7 +139,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
     if (freshens.size() > 0				// have freshens !
 	&& iter == freshens.end())
     {
-	_DEBUG(_item << " freshens nothing -> unneeded");
+	_XDEBUG(_item << " freshens nothing -> unneeded");
 	if (_item->kind() != ResTraits<Package>::kind)
 	    context->unneeded (_item, _other_penalty);
     }
@@ -156,7 +156,7 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 		}
 	    }
 	    if (iter == supplements.end()) {
-		_DEBUG(_item << " none of the supplements match -> unneeded");
+		_XDEBUG(_item << " none of the supplements match -> unneeded");
 		if (_item->kind() != ResTraits<Package>::kind)
 		    context->unneeded (_item, _other_penalty);
 		return true;
@@ -188,12 +188,12 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 	    if (all_unneeded
 		&& _item->kind() == ResTraits<Patch>::kind)		// unneeded is transitive only for patches (#171590)
 	    {
-		_DEBUG("all requirements of " << _item << " unneeded -> unneeded");
+		_XDEBUG("all requirements of " << _item << " unneeded -> unneeded");
 		context->unneeded( _item, _other_penalty );
 	    }
 	    else
 	    {
-		_DEBUG("all requirements of " << _item << " met -> satisfied");
+		_XDEBUG("all requirements of " << _item << " met -> satisfied");
 		context->satisfy( _item, _other_penalty );
 	    }
 	}
@@ -204,17 +204,17 @@ QueueItemEstablish::process (ResolverContext_Ptr context, QueueItemList & qil)
 		|| status.staysInstalled()
 		|| context->establishing())
 	    {
-		_DEBUG("Non-Package/Installed/Establishing " << _item << " has unfulfilled requirement " << *iter << " -> incomplete");
+		_XDEBUG("Non-Package/Installed/Establishing " << _item << " has unfulfilled requirement " << *iter << " -> incomplete");
 		context->incomplete( _item, _other_penalty );
 	    }
 	    else if (status.staysUninstalled())			// not installed -> schedule for installation
 	    {
-		_DEBUG("Uninstalled " << _item << " has unfulfilled requirement " << *iter << " -> install");
+		_XDEBUG("Uninstalled " << _item << " has unfulfilled requirement " << *iter << " -> install");
 		QueueItemInstall_Ptr install_item = new QueueItemInstall( pool(), _item );
 		qil.push_front( install_item );
 	    }
 	    else {
-		_DEBUG("Transacted " << _item << " has unfulfilled requirement " << *iter << " -> leave");
+		_XDEBUG("Transacted " << _item << " has unfulfilled requirement " << *iter << " -> leave");
 		// do nothing, because its either toBeInstalled or toBeUninstalled
 	    }
 	}

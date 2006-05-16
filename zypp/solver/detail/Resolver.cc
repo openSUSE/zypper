@@ -431,7 +431,7 @@ Resolver::establishState( ResolverContext_Ptr context )
     for (KindList::const_iterator iter = ordered.begin(); iter != ordered.end(); iter++) {
 	const Resolvable::Kind kind = *iter;
 
-	DBG << "establishing state for kind " << kind.asString() << endl;
+	_XDEBUG( "establishing state for kind " << kind.asString() );
 
 	//world()->foreachResItemByKind (kind, trial_establish_cb, this);
 
@@ -717,7 +717,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
     // Adding System resolvable
     assertSystemResObjectInPool();
 
-    _DEBUG( "Initial Queue: [" << *initial_queue << "]" );
+    _XDEBUG( "Initial Queue: [" << *initial_queue << "]" );
 
     if (initial_queue->isEmpty()) {
 	INT << "Empty Queue, nothing to resolve" << endl;
@@ -755,12 +755,12 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 
 	if (queue->isInvalid ()) {
 
-	    DBG << "Invalid Queue\n" << endl;;
+	    _XDEBUG( "Invalid Queue\n" );
 	    _invalid_queues.push_back(queue);
 
 	} else if (queue->isEmpty ()) {
 
-	    DBG <<"Empty Queue\n" << endl;
+	    _XDEBUG( "Empty Queue\n" );
 
 	    _complete_queues.push_back(queue);
 
@@ -771,7 +771,8 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	       be an issue too much of the time. */
 
 	    if (_best_context == NULL
-		|| _best_context->compare (context) < 0) {
+		|| _best_context->compare (context) < 0)
+	    {
 		_best_context = context;
 	    }
 
@@ -781,7 +782,7 @@ Resolver::resolveDependencies (const ResolverContext_Ptr context)
 	    /* If we aren't currently as good as our previous best complete solution,
 	       this solution gets pruned. */
 
-	    DBG << "PRUNED!" << endl;
+	    _XDEBUG( "PRUNED!" );
 
 	    _pruned_queues.push_back(queue);
 
@@ -900,20 +901,19 @@ static void
 show_pool( ResPool pool )
 {
     int count = 1;
-    static bool full_pool_shown = false;
+    static bool full_pool_shown = true;
 
-    MIL << "---------------------------------------" << endl;
+    _XDEBUG( "---------------------------------------" );
     for (ResPool::const_iterator it = pool.begin(); it != pool.end(); ++it, ++count) {
 
 	if (!full_pool_shown					// show item if not shown all before
 	    || it->status().transacts()				// or transacts
 	    || !it->status().isUndetermined())			// or established status
 	{
-	    MIL << count << ": " << *it << endl;
+	    _XDEBUG( count << ": " << *it );
 	}
-
     }
-    MIL << "---------------------------------------" << endl;
+    _XDEBUG( "---------------------------------------" );
     full_pool_shown = true;
 }
 
@@ -945,7 +945,7 @@ Resolver::resolvePool ()
 #if 1
 
     MIL << "Resolver::resolvePool()" << endl;
-    MIL << "Pool before resolve" << endl;
+    _XDEBUG( "Pool before resolve" );
     show_pool( _pool );
 
 #endif
@@ -960,7 +960,7 @@ Resolver::resolvePool ()
 	ResolverContext_Ptr solution = bestContext();
 	solution->foreachMarked (solution_to_pool, NULL);
 #if 1
-	MIL << "Pool after resolve" << endl;
+	_XDEBUG( "Pool after resolve" );
 	show_pool( _pool );
 #endif
     }
@@ -1216,7 +1216,7 @@ Resolver::transactResObject( ResObject::constPtr robj, bool install)
     if (robj == NULL) {
 	ERR << "NULL ResObject" << endl;
     }
-    DBG << "transactResObject(" << *robj << ", " << (install?"install":"remove") << ")" << endl;
+    _XDEBUG( "transactResObject(" << *robj << ", " << (install?"install":"remove") << ")" );
 
     if (robj->kind() == ResTraits<Language>::kind) {
 	TransactLanguage callback( *this, robj, install );
@@ -1241,7 +1241,6 @@ Resolver::transactResObject( ResObject::constPtr robj, bool install)
 
     for (std::list<PoolItem_Ref>::const_iterator it = added.begin(); it != added.end(); ++it) {
 	if ((*it)->kind() == robj->kind()) {
-	    MIL << "Added " << *it << endl;
 	    transactResObject( it->resolvable(), install );
 	}
     }
@@ -1280,7 +1279,7 @@ Resolver::transactResKind( Resolvable::Kind kind )
 {
     TransactKind callback (*this);
 
-    DBG << "transactResKind(" << kind << ")" << endl;
+    _XDEBUG( "transactResKind(" << kind << ")" );
 
     // check all uninstalls
     callback.install = false;

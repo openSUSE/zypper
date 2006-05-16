@@ -266,10 +266,10 @@ ResolverQueue::processOnce ()
 	iter = next;
     }
     if (did_something) {
-      _DEBUG( "did something: " << _qitems.size() << " qitems");
+      _XDEBUG( "did something: " << _qitems.size() << " qitems");
     }
     else {
-      _DEBUG( "did nothing: " << _qitems.size() << " qitems"); 
+      _XDEBUG( "did nothing: " << _qitems.size() << " qitems"); 
     }
 
     return did_something;
@@ -413,15 +413,15 @@ ResolverQueue::splitFirstBranch (ResolverQueueList & new_queues, ResolverQueueLi
 void
 ResolverQueue::spew ()
 {
-    _DEBUG("Resolver Queue: " << (_context->isInvalid() ? "INVALID" : ""));
+    _XDEBUG( "Resolver Queue: " << (_context->isInvalid() ? "INVALID" : "") );
 
     if (_qitems.empty()) {
 
-	_DEBUG( "  (empty)");
+	_XDEBUG( "  (empty)" );
 
     } else {
 	for (QueueItemList::const_iterator iter = _qitems.begin(); iter != _qitems.end(); ++iter) {
-	    _DEBUG("  " << *(*iter));
+	    _XDEBUG( "  " << *(*iter) );
 	}
 
     }
