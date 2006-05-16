@@ -171,6 +171,16 @@ AC_SUBST(BLKID_CFLAGS)
 AC_SUBST(BLKID_LIBS)
 
 dnl ==================================================
+PKG_CHECK_MODULES(IDN, [libidn])
+AC_SUBST(IDN_CFLAGS)
+AC_SUBST(IDN_LIBS)
+
+dnl ==================================================
+PKG_CHECK_MODULES(OPENSSL, [openssl])
+AC_SUBST(OPENSSL_CFLAGS)
+AC_SUBST(OPENSSL_LIBS)
+
+dnl ==================================================
 if test "x$devel_faked_hal" = "xyes"; then
  HAL_CFLAGS=-DFAKE_HAL
 else
@@ -195,6 +205,12 @@ AC_CHECK_HEADERS([curl/curl.h],
 AC_CHECK_HEADERS([blkid/blkid.h],
         [],
         AC_MSG_ERROR([libblkid header not found. please install e2fsprogs-devel.]))
+AC_CHECK_HEADERS([idn-free.h],
+        [],
+        AC_MSG_ERROR([libidn header not found. please install libidn-devel.]))
+AC_CHECK_HEADERS([openssl/evp.h],
+        [],
+        AC_MSG_ERROR([openssl header not found. please install openssl-devel.]))
 AC_CHECK_HEADERS([rpm/rpmlib.h],
         [],
         AC_MSG_ERROR([rpmlib header not found. please install rpm-devel.]))
