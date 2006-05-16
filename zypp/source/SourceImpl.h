@@ -322,6 +322,14 @@ namespace zypp
       /** Whether the ResStore is initialized. */
       bool _res_store_initialized;
 
+    public:
+      /** Whether the ResStore is initialized.
+       * If we know that noone has seen the resolvables yet, we can skip
+       * them too, eg. when deleting a source. (#174840)
+       */      
+      bool resStoreInitialized () const
+      { return _res_store_initialized; }
+
     private:
       /** Helper indicating creation of nullimpl. */
       struct null {};

@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue May 16 09:30:45 CEST 2006 - mvidner@suse.cz
+
+- Added Source_Ref::resStoreInitialized. 
+  If we know that noone has seen the resolvables yet, we can skip
+  them too, eg. when deleting a source. (#174840)
+- rev 3378
+
+-------------------------------------------------------------------
 Mon May 15 12:41:39 CEST 2006 - kkaempf@suse.de
 
 - Honor freshens as conditionals independant from the installed/

@@ -54,6 +54,9 @@ namespace zypp
   Source_Ref::NumericId Source_Ref::numericId() const
   { return _pimpl->numericId(); }
 
+  bool Source_Ref::resStoreInitialized() const
+  { return _pimpl->resStoreInitialized(); }
+
   const ResStore & Source_Ref::resolvables() const
   { return _pimpl->resolvables(); }
 
