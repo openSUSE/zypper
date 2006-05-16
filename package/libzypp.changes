@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue May 16 14:00:57 CEST 2006 - schubi@suse.de
+
+- setCandidate accept candidates with compatible architectures too. Not
+  only with the same architecture. Bug 172594 - If update package has
+  differet arch, UI display is wrong 
+
+-------------------------------------------------------------------
 Tue May 16 09:30:45 CEST 2006 - mvidner@suse.cz
 
 - Added Source_Ref::resStoreInitialized. 
