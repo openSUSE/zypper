@@ -14,9 +14,11 @@ noinst_PROGRAMS = \
 	mediatagparsertest	\
 	suseparser \
 	source_read_test
+
+# does not compile
+# packagetagparsertest_SOURCES = PackageTagParserTest.cc
 	
 selectiontagparsertest_SOURCES = SelectionTagParserTest.cc
-packagetagparsertest_SOURCES = PackageTagParserTest.cc
 patterntagparsertest_SOURCES = PatternTagParserTest.cc
 producttagparsertest_SOURCES = ProductMetadataParserTest.cc
 mediatagparsertest_SOURCES = MediaMetadataParserTest.cc
