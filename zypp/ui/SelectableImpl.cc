@@ -223,7 +223,7 @@ namespace zypp
               for ( availableItem_const_iterator it = availableBegin();
                     it != availableEnd(); ++it )
                 {
-                  if ( installedObj()->arch() == (*it)->arch() )
+                  if ( installedObj()->arch().compatibleWith( (*it)->arch() ))
                     _candidate = *it;
                   break;
                 }
