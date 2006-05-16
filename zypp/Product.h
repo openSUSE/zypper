@@ -23,7 +23,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   DEFINE_PTR_TYPE(Product);
-  
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : ResObject
@@ -55,9 +55,6 @@ namespace zypp
 
     /** The product flags */
     std::list<std::string> flags() const;
-
-    /** */
-    License licenseToConfirm() const;
 
     /** */
     Label shortName() const;

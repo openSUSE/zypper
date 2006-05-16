@@ -56,13 +56,6 @@ namespace zypp
       /** \name Common Attributes.
        * These should be provided by each kind of Resolvable. Call the
        * default implementation if you don't have a value for it.
-       * \todo The UI likes to work on ResObject level, but some of
-       * the values actually make no sense for several kinds of Resolvable,
-       * or may have completely different semantics. See whether we can get
-       * rid of ome stuff.
-       * \todo Some of these are actually tranlated or translatable.
-       * offer some concept to express it.
-       * \todo LICENSE HANDLING!
       */
       //@{
       /** Short label. */
@@ -77,30 +70,40 @@ namespace zypp
       /** \todo well define! */
       virtual TranslatedText delnotify() const PURE_VIRTUAL;
 
+      /** */
+      virtual TranslatedText licenseToConfirm() const PURE_VIRTUAL;
+
+      /** */
+      virtual Vendor vendor() const PURE_VIRTUAL;
+
       /** Size.  \todo well define which size. */
       virtual ByteCount size() const PURE_VIRTUAL;
 
-      /** Wheter there are src.rpm available too. */
-      virtual bool providesSources() const PURE_VIRTUAL;
+      /** */
+      virtual ByteCount archivesize() const PURE_VIRTUAL;
 
-      /** Installation source which provides the package */
+      /** Backlink to the source providing this. */
       virtual Source_Ref source() const PURE_VIRTUAL;
+
+      /** Number of the source media that provides the data
+       *  required for installation. Zero, if no media access
+       *  is required.
+      */
+      virtual unsigned sourceMediaNr() const PURE_VIRTUAL;
+
+      /** */
+      virtual bool installOnly() const PURE_VIRTUAL;
+
+      /** */
+      virtual Date buildtime() const;
+
+      /** Time of installation, or \c 0 */
+      virtual Date installtime() const;
 
       /** Id used inside ZMD */
       virtual ZmdId zmdid() const PURE_VIRTUAL;
-
-      /** \name deprecated
-       * \todo These should be replaced by a offering a
-       * Ptr to the Source.
-      */
-      //@{
-      /** \deprecated */
-      virtual Label instSrcLabel() const PURE_VIRTUAL;
-      /** \deprecated */
-      virtual Vendor instSrcVendor() const PURE_VIRTUAL;
       //@}
 
-      //@}
     public:
       /** Ctor */
       ResObjectImplIf()
@@ -109,19 +112,13 @@ namespace zypp
       /** Dtor. Makes this an abstract class. */
       virtual ~ResObjectImplIf() = 0;
 
+    public:
       /** Test whether \c this is already connected to Resolvable. */
       bool hasBackRef() const
       { return _backRef; }
 
-      void unmanage()
-      { _backRef = NULL; }
-
-    public:
       /** Access to Resolvable data if connected. */
       const Resolvable *const self() const
-      { return _backRef; }
-      /** Access to Resolvable data if connected. */
-      Resolvable *const self()
       { return _backRef; }
 
     private:

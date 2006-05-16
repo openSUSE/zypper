@@ -127,48 +127,6 @@ using zypp::solver::detail::InstallOrder;
 
 ///////////////////////////////////////////////////////////////////
 
-namespace zypp
-{
-  struct CollectTransacting
-  {
-    typedef std::list<PoolItem> PoolItemList;
-
-    void operator()( const PoolItem & pi )
-    {
-      if ( pi.status().isToBeInstalled() )
-        {
-          _toInstall.insert( pi );
-        }
-      else if ( pi.status().isToBeUninstalled() )
-        {
-          if ( pi.status().isToBeUninstalledDueToObsolete()
-               || pi.status().isToBeUninstalledDueToUpgrade() )
-            _skipToDelete.insert( pi );
-          else
-            _toDelete.insert( pi );
-        }
-    }
-
-    PoolItemSet _toInstall;
-    PoolItemSet _toDelete;
-    PoolItemSet _skipToDelete;
-  };
-
-  std::ostream & operator<<( std::ostream & str, const CollectTransacting & obj )
-  {
-    str << "CollectTransacting:" << endl;
-    dumpPoolStats( str << " toInstall: ",
-                   obj._toInstall.begin(), obj._toInstall.end() ) << endl;
-    dumpPoolStats( str << " toDelete: ",
-                   obj._toDelete.begin(), obj._toDelete.end() ) << endl;
-    dumpPoolStats( str << " skipToDelete: ",
-                   obj._skipToDelete.begin(), obj._skipToDelete.end() ) << endl;
-    return str;
-  }
-}
-
-///////////////////////////////////////////////////////////////////
-
 struct AddResolvables
 {
   bool operator()( const Source_Ref & src ) const
@@ -205,6 +163,66 @@ inline bool selectForTransact( const NameKindProxy & nkp )
     return false;
 
   return nkp.availableBegin()->status().setTransact( true, ResStatus::USER );
+}
+
+///////////////////////////////////////////////////////////////////
+
+namespace zypp
+{
+  namespace pool
+  {
+    struct CollectTransacting
+    {
+      CollectTransacting( const ResPool & pool )
+      {
+        dumpPoolStats( SEC,
+                       make_filter_begin<resfilter::ByTransact>(pool),
+                       make_filter_end<resfilter::ByTransact>(pool) );
+      }
+
+      typedef std::list<PoolItem> PoolItemList;
+      PoolItemSet _toInstall;
+      PoolItemSet _toDelete;
+      PoolItemSet _skipToDelete;
+    };
+#if 0
+  struct CollectTransacting
+  {
+    typedef std::list<PoolItem> PoolItemList;
+
+    void operator()( const PoolItem & pi )
+    {
+      if ( pi.status().isToBeInstalled() )
+        {
+          _toInstall.insert( pi );
+        }
+      else if ( pi.status().isToBeUninstalled() )
+        {
+          if ( pi.status().isToBeUninstalledDueToObsolete()
+               || pi.status().isToBeUninstalledDueToUpgrade() )
+            _skipToDelete.insert( pi );
+          else
+            _toDelete.insert( pi );
+        }
+    }
+
+    PoolItemSet _toInstall;
+    PoolItemSet _toDelete;
+    PoolItemSet _skipToDelete;
+  };
+#endif
+  std::ostream & operator<<( std::ostream & str, const CollectTransacting & obj )
+  {
+    str << "CollectTransacting:" << endl;
+    dumpPoolStats( str << " toInstall: ",
+                   obj._toInstall.begin(), obj._toInstall.end() ) << endl;
+    dumpPoolStats( str << " toDelete: ",
+                   obj._toDelete.begin(), obj._toDelete.end() ) << endl;
+    dumpPoolStats( str << " skipToDelete: ",
+                   obj._skipToDelete.begin(), obj._skipToDelete.end() ) << endl;
+    return str;
+  }
+  }
 }
 
 /******************************************************************
@@ -272,6 +290,7 @@ int main( int argc, char * argv[] )
 
 
   INT << "===[END]============================================" << endl << endl;
+  zypp::base::LogControl::instance().logNothing();
   return 0;
 }
 

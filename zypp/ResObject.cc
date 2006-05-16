@@ -55,11 +55,32 @@ namespace zypp
   Text ResObject::delnotify() const
   { return pimpl().delnotify().text(); }
 
+  License ResObject::licenseToConfirm() const
+  { return pimpl().licenseToConfirm().text(); }
+
+  Vendor ResObject::vendor() const
+  { return pimpl().vendor(); }
+
   ByteCount ResObject::size() const
   { return pimpl().size(); }
 
+  ByteCount ResObject::archivesize() const
+  { return pimpl().archivesize(); }
+
   Source_Ref ResObject::source() const
   { return pimpl().source(); }
+
+  unsigned ResObject::sourceMediaNr() const
+  { return pimpl().sourceMediaNr(); }
+
+  bool ResObject::installOnly() const
+  { return pimpl().installOnly(); }
+
+  Date ResObject::buildtime() const
+  { return pimpl().buildtime(); }
+
+  Date ResObject::installtime() const
+  { return pimpl().installtime(); }
 
   ZmdId ResObject::zmdid () const
   { return pimpl().zmdid(); }

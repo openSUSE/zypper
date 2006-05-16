@@ -44,39 +44,15 @@ namespace zypp
     public:
       typedef Package ResType;
 
-#if 0
-    
-      /**
-       * @short Holds Data about file and file type
-       *  (directory, plain)
-       **/
-      class FileData {
-      public:
-        std::string name;
-        std::string type;
-        FileData();
-        FileData(const std::string &name,
-                 const std::string &type)
-	: name(name), type(type)
-	{}
-      };
-#endif
-
     public:
       /** \name Rpm Package Attributes. */
       //@{
-      
+
       virtual CheckSum checksum() const PURE_VIRTUAL;
-      /** */
-      virtual Date buildtime() const PURE_VIRTUAL;
       /** */
       virtual std::string buildhost() const PURE_VIRTUAL;
       /** */
-      virtual Date installtime() const PURE_VIRTUAL;
-      /** */
       virtual std::string distribution() const PURE_VIRTUAL;
-      /** */
-      virtual Vendor vendor() const PURE_VIRTUAL;
       /** */
       virtual Label license() const PURE_VIRTUAL;
       /** */
@@ -103,8 +79,6 @@ namespace zypp
       /** */
       virtual ByteCount sourcesize() const PURE_VIRTUAL;
       /** */
-      virtual ByteCount archivesize() const PURE_VIRTUAL;
-      /** */
       virtual DiskUsage diskusage() const PURE_VIRTUAL;
       /** */
       virtual std::list<std::string> authors() const PURE_VIRTUAL;
@@ -114,54 +88,9 @@ namespace zypp
       virtual std::list<DeltaRpm> deltaRpms() const PURE_VIRTUAL;
       /** */
       virtual std::list<PatchRpm> patchRpms() const PURE_VIRTUAL;
-      /** */
-      virtual bool installOnly() const PURE_VIRTUAL;
-      /** */
-      virtual unsigned mediaId() const PURE_VIRTUAL;
 
       //@}
 
-      /** \name Additional Package Attributes.
-       * \todo review what's actually needed here. Maybe worth grouping
-       * all the package rertieval related stuff in a class. Easier to ship
-       * and handle it.
-      */
-      //@{
-      /** */
-      virtual License licenseToConfirm() const PURE_VIRTUAL;
-#if 0
-      /** */
-      virtual std::string sourceloc() const PURE_VIRTUAL;
-      /** */
-      virtual void du( PkgDu & dudata_r ) const PURE_VIRTUAL;
-      /** */
-      virtual unsigned int medianr() const PURE_VIRTUAL;
-      /** */
-      virtual PackageKeywords keywords() const PURE_VIRTUAL;
-      /** */
-      virtual std::string md5sum() const PURE_VIRTUAL;
-      /** */
-      virtual std::string externalUrl() const PURE_VIRTUAL;
-      /** */
-      virtual std::list<Edition> patchRpmBaseVersions() const PURE_VIRTUAL;
-      /** */
-      virtual ByteCount patchRpmSize() const PURE_VIRTUAL;
-      /** */
-      virtual bool forceInstall() const PURE_VIRTUAL;
-      /** */
-      virtual std::string patchRpmMD5() const PURE_VIRTUAL;
-      /** */
-      virtual bool isRemote() const PURE_VIRTUAL;
-      /** */
-      virtual PMError providePkgToInstall( Pathname& path_r ) const PURE_VIRTUAL;
-      /** */
-      virtual PMError provideSrcPkgToInstall( Pathname& path_r ) const PURE_VIRTUAL;
-      /** */
-      virtual constInstSrcPtr source() const PURE_VIRTUAL;
-      /** */
-      virtual std::list<PMPackageDelta> deltas() const PURE_VIRTUAL;
-#endif
-      //@}
     };
     ///////////////////////////////////////////////////////////////////
 

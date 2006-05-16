@@ -1,14 +1,22 @@
 -------------------------------------------------------------------
+Tue May 16 21:35:27 CEST 2006 - ma@suse.de
+
+- Make basic attributes available through ResObject.
+- Let ResObjects which do not require media access during
+  commit return ZERO sourceMediaNr (required for #173690)
+- Version 1.0.0
+
+-------------------------------------------------------------------
 Tue May 16 14:00:57 CEST 2006 - schubi@suse.de
 
 - setCandidate accept candidates with compatible architectures too. Not
   only with the same architecture. Bug 172594 - If update package has
-  differet arch, UI display is wrong 
+  differet arch, UI display is wrong
 
 -------------------------------------------------------------------
 Tue May 16 09:30:45 CEST 2006 - mvidner@suse.cz
 
-- Added Source_Ref::resStoreInitialized. 
+- Added Source_Ref::resStoreInitialized.
   If we know that noone has seen the resolvables yet, we can skip
   them too, eg. when deleting a source. (#174840)
 - rev 3378
@@ -30,7 +38,7 @@ Mon May 15 11:15:03 CEST 2006 - kkaempf@suse.de
 Thu May 11 17:42:29 CEST 2006 - schubi@suse.de
 
 - Do not transact itself (update) in the transactResObject mechanism
-  Bug 174290 
+  Bug 174290
 
 -------------------------------------------------------------------
 Thu May 11 16:37:51 CEST 2006 - mt@suse.de
@@ -93,20 +101,20 @@ Thu May  4 15:15:37 CEST 2006 - kkaempf@suse.de
 -------------------------------------------------------------------
 Wed May  3 17:40:45 CEST 2006 - dmacvicar@suse.de
 
-- Fix yum key verification, because a double variable declaration 
+- Fix yum key verification, because a double variable declaration
 
 -------------------------------------------------------------------
 Wed May  3 15:34:00 CEST 2006 - dmacvicar@suse.de
 
 - use --no-default-keyring to avoid creating a
-  default gpg dir in / (#171055) 
+  default gpg dir in / (#171055)
 - rev 3335
 
 -------------------------------------------------------------------
 Wed May  3 14:40:25 CEST 2006 - dmacvicar@suse.de
 
 - Fix YUM signature checking, we were passing the key instead of the
-  signature. 
+  signature.
 - When the user trust a key, sync again. Bye to the session trusted
   keys and user being asked all the time. (#171213)
 - r3332

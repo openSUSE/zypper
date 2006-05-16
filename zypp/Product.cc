@@ -20,7 +20,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   IMPL_PTR_TYPE(Product);
-  
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : Product::Product
@@ -58,10 +58,6 @@ namespace zypp
 
   std::list<std::string> Product::flags() const
   { return pimpl().flags(); }
-
-  /** */
-  License Product::licenseToConfirm() const
-  { return pimpl().licenseToConfirm(); }
 
   /** */
   Label Product::shortName() const

@@ -175,9 +175,9 @@ namespace zypp
         {
           Resolvable::constPtr res( it->resolvable() );
           Package::constPtr pkg( asKind<Package>(res) );
-          if (pkg && policy_r.restrictToMedia() != pkg->mediaId())								// check medianr for packages only
+          if (pkg && policy_r.restrictToMedia() != pkg->sourceMediaNr())								// check medianr for packages only
           {
-            XXX << "Package " << *pkg << ", wrong media " << pkg->mediaId() << endl;
+            XXX << "Package " << *pkg << ", wrong media " << pkg->sourceMediaNr() << endl;
             result._remaining.push_back( *it );
           }
           else
@@ -192,9 +192,9 @@ namespace zypp
         {
           Resolvable::constPtr res( it->resolvable() );
           Package::constPtr pkg( asKind<Package>(res) );
-          if (pkg && policy_r.restrictToMedia() != pkg->mediaId()) // check medianr for packages only
+          if (pkg && policy_r.restrictToMedia() != pkg->sourceMediaNr()) // check medianr for packages only
           {
-            XXX << "Package " << *pkg << ", wrong media " << pkg->mediaId() << endl;
+            XXX << "Package " << *pkg << ", wrong media " << pkg->sourceMediaNr() << endl;
             result._srcremaining.push_back( *it );
           }
           else {
@@ -321,7 +321,7 @@ namespace zypp
 	      it->status().resetTransact( ResStatus::USER );
             }
             progress.disconnect();
-	    p->source().releaseFile( p->location(), p->mediaId() );
+	    p->source().releaseFile( p->location(), p->sourceMediaNr() );
           }
           else
           {
@@ -737,9 +737,9 @@ MIL << "order.computeNextSet: " << items.size() << " resolvables" << endl;
 	    other_list.push_back( *cit );
 	    continue;
 	}
-	XXX << "Package " << *cpkg << ", media " << cpkg->mediaId() << " last_medianum " << last_medianum << " best_medianum " << best_medianum << endl;
+	XXX << "Package " << *cpkg << ", media " << cpkg->sourceMediaNr() << " last_medianum " << last_medianum << " best_medianum " << best_medianum << endl;
 	if ( cpkg->source().numericId() == last_prio &&
-	     cpkg->mediaId() == last_medianum ) {
+	     cpkg->sourceMediaNr() == last_medianum ) {
 	  // prefer packages on current media.
 	  last_list.push_back( *cit );
 	  continue;
@@ -753,9 +753,9 @@ MIL << "order.computeNextSet: " << items.size() << " resolvables" << endl;
 	    if ( cpkg->source().numericId() < best_prio ) {
 	      best_list.clear(); // new best
 	    } else if ( cpkg->source().numericId() == best_prio ) {
-	      if ( cpkg->mediaId() < best_medianum ) {
+	      if ( cpkg->sourceMediaNr() < best_medianum ) {
 		best_list.clear(); // new best
-	      } else if ( cpkg->mediaId() == best_medianum ) {
+	      } else if ( cpkg->sourceMediaNr() == best_medianum ) {
 		best_list.push_back( *cit ); // same as best -> add
 		continue;
 	      } else {
@@ -771,7 +771,7 @@ MIL << "order.computeNextSet: " << items.size() << " resolvables" << endl;
 	    // first package or new best
 	    best_list.push_back( *cit );
 	    best_prio     = cpkg->source().numericId();
-	    best_medianum = cpkg->mediaId();
+	    best_medianum = cpkg->sourceMediaNr();
 	    continue;
 	  }
 	}

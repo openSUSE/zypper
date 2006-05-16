@@ -39,20 +39,20 @@ namespace zypp
         const PkgContent & _content;
 	const Locale & _lang;
 	PkgImplPtr _current;
-        
+
         NVRA _nvra;
 	int _count;
         std::set<NVRA> _notfound;
 	Arch _system_arch;
 
         SuseTagsImpl::Ptr _sourceImpl;
-        
+
         PackagesLangParser ( SuseTagsImpl::Ptr sourceimpl , const PkgContent & content_r, const Locale & lang_r)
 	    : _content( content_r )
 	    , _lang( lang_r)
 	    , _count(0)
             , _sourceImpl( sourceimpl )
-               
+
         {
 	    ZYpp::Ptr z = getZYpp();
 	    _system_arch = z->architecture();
@@ -78,7 +78,7 @@ namespace zypp
 		_current = NULL;
 		return;
 	    }
-            
+
             PkgContent::const_iterator it = _content.find(NVRAD(_nvra));
 	    if (it == _content.end())
             {
@@ -120,12 +120,9 @@ namespace zypp
               _sourceImpl->_package_data[_nvra]._delnotify = TranslatedText (mtag_r.values, _lang);
             }
           else if ( mtag_r.name == "Eul" )
-          {
-            for ( std::list<std::string>::const_iterator it = mtag_r.values.begin(); it != mtag_r.values.end(); ++it)
-              {
-                _sourceImpl->_package_data[_nvra]._license_to_confirm += *it;
-              }
-          }
+            {
+              _sourceImpl->_package_data[_nvra]._license_to_confirm = TranslatedText (mtag_r.values, _lang);
+            }
         }
       };
 

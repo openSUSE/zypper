@@ -77,15 +77,6 @@ namespace zypp
       ByteCount RPMPackageImpl::size() const
       { return _size; }
 
-      bool RPMPackageImpl::providesSources() const
-      { return ResObjectImplIf::providesSources(); }
-
-      Label RPMPackageImpl::instSrcLabel() const
-      { return ResObjectImplIf::instSrcLabel(); }
-
-      Vendor RPMPackageImpl::instSrcVendor() const
-      { return ResObjectImplIf::instSrcVendor(); }
-
       /** */
       Date RPMPackageImpl::buildtime() const
       { return _buildtime; }
@@ -174,9 +165,6 @@ namespace zypp
       std::list<std::string> RPMPackageImpl::filenames() const
       { return _filenames; }
 
-      License RPMPackageImpl::licenseToConfirm() const
-      { return _license_to_confirm; }
-
       /** */
       std::string RPMPackageImpl::type() const
       { return _type; }
@@ -192,139 +180,6 @@ namespace zypp
       /** */
       Source_Ref RPMPackageImpl::source() const
       { return _source; }
-#if 0
-      /** */
-      unsigned RPMPackageImpl::packageSize() const
-      { return _size_package; }
-      /** */
-      unsigned RPMPackageImpl::archiveSize() const
-      { return _size_archive; }
-      /** */
-      unsigned RPMPackageImpl::installedSize() const
-      { return _size_installed; }
-// FIXME do not understand items below
-      /** */
-      bool RPMPackageImpl::providesSources() const
-      {
-	return false;
-      }
-      /** */
-      std::string RPMPackageImpl::instSrcLabel() const
-      {
-	return "";
-      }
-      /** */
-      std::string RPMPackageImpl::instSrcVendor() const
-      {
-	return "";
-      }
-      /** */
-      unsigned RPMPackageImpl::instSrcRank() const
-      {
-	return 0;
-      }
-      /** */
-      std::string RPMPackageImpl::buildhost() const
-      {
-	return _buildhost;
-      }
-      /** */
-      std::string RPMPackageImpl::distribution() const
-      {
-	return "";
-      }
-      /** */
-      std::string RPMPackageImpl::vendor() const
-      {
-	return _vendor;
-      }
-      /** */
-      std::string RPMPackageImpl::license() const
-      {
-	return _license;
-      }
-      /** */
-      std::list<std::string> RPMPackageImpl::licenseToConfirm() const
-      {
-	return std::list<std::string>();
-      }
-      /** */
-      std::string RPMPackageImpl::packager() const
-      {
-	return _packager;
-      }
-      /** */
-      std::string RPMPackageImpl::group() const
-      {
-	return _group;
-      }
-      /** */
-      std::list<std::string> RPMPackageImpl::changelog() const
-      {}
-      /** */
-      std::string RPMPackageImpl::url() const
-      {
-	return _url;
-      }
-      /** */
-      std::string RPMPackageImpl::os() const
-      {}
-      /** */
-      std::list<std::string> RPMPackageImpl::prein() const
-      {}
-      /** */
-      std::list<std::string> RPMPackageImpl::postin() const
-      {}
-      /** */
-      std::list<std::string> RPMPackageImpl::preun() const
-      {}
-      /** */
-      std::list<std::string> RPMPackageImpl::postun() const
-      {}
-      /** */
-      std::string RPMPackageImpl::sourcepkg() const
-      { return _sourcepkg; }
-      /** */
-      std::list<std::string> RPMPackageImpl::authors() const
-      { return _authors; }
-      /** */
-      std::list<std::string> RPMPackageImpl::filenames() const
-      {}
-      /** */
-      std::list<std::string> RPMPackageImpl::recommends() const
-      {}
-      /** */
-      std::list<std::string> RPMPackageImpl::suggests() const
-      {}
-      /** */
-      std::string RPMPackageImpl::location() const
-      {}
-      /** */
-      std::string RPMPackageImpl::md5sum() const
-      {}
-      /** */
-      std::string RPMPackageImpl::externalUrl() const
-      {}
-      /** */
-      std::list<Edition> RPMPackageImpl::patchRpmBaseVersions() const
-      {}
-      /** */
-      unsigned RPMPackageImpl::patchRpmSize() const
-      {}
-      /** */
-      bool RPMPackageImpl::forceInstall() const
-      {}
-      /** */
-      std::string RPMPackageImpl::patchRpmMD5() const
-      {}
-      /** */
-      bool RPMPackageImpl::isRemote() const
-      {}
-      /** */
-      bool RPMPackageImpl::prefererCandidate() const
-      {}
-
-#endif
 
     } // namespace rpm
     /////////////////////////////////////////////////////////////////

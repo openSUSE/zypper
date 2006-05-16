@@ -20,7 +20,7 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   IMPL_PTR_TYPE(SrcPackage);
-    
+
   ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : SrcPackage::SrcPackage
@@ -49,9 +49,6 @@ namespace zypp
 
   DiskUsage SrcPackage::diskusage() const
   { return pimpl().diskusage(); }
-
-  unsigned SrcPackage::mediaId() const
-  { return pimpl().mediaId(); }
 
   Pathname SrcPackage::location() const
   { return pimpl().location(); }

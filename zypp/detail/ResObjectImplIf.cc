@@ -37,23 +37,35 @@ namespace zypp
       TranslatedText ResObjectImplIf::delnotify() const
       { return TranslatedText::notext; }
 
-      ByteCount ResObjectImplIf::size() const
-      { return 0; }
+      TranslatedText ResObjectImplIf::licenseToConfirm() const
+      { return TranslatedText::notext; }
 
-      bool ResObjectImplIf::providesSources() const
-      { return false; }
+      Vendor ResObjectImplIf::vendor() const
+      { return Vendor(); }
+
+      ByteCount ResObjectImplIf::size() const
+      { return ByteCount(); }
+
+      ByteCount ResObjectImplIf::archivesize() const
+      { return ByteCount(); }
 
       Source_Ref ResObjectImplIf::source() const
       { return Source_Ref::noSource; }
 
-      ZmdId ResObjectImplIf::zmdid() const
+      unsigned ResObjectImplIf::sourceMediaNr() const
       { return 0; }
 
-      Label ResObjectImplIf::instSrcLabel() const
-      { return Label(); }
+      bool ResObjectImplIf::installOnly() const
+      { return false; }
 
-      Vendor ResObjectImplIf::instSrcVendor() const
-      { return Vendor(); }
+      Date ResObjectImplIf::buildtime() const
+      { return Date(); }
+
+      Date ResObjectImplIf::installtime() const
+      { return Date(); }
+
+      ZmdId ResObjectImplIf::zmdid() const
+      { return 0; }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

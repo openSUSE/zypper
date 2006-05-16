@@ -46,14 +46,14 @@ public:
 	/** */
 	virtual bool installOnly() const;
 	/** */
-	virtual unsigned mediaId() const;
+	virtual unsigned sourceMediaNr() const;
 	/** */
 	virtual Source_Ref source() const;
 
         /** */
         virtual Vendor vendor() const
 	{ return "SuSE";}
-    
+
 
 protected:
 	Source_Ref _source;

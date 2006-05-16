@@ -59,29 +59,29 @@ namespace zypp {
         {
           connect();
         }
-        
+
         ~KeyRingSignalReceiver()
         {
           disconnect();
         }
-        
+
         virtual void trustedKeyAdded( const KeyRing &keyring, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
         {
           MIL << "trusted key added to zypp Keyring. Syncronizing keys with rpm keyring" << std::endl;
           _rpmdb.importZyppKeyRingTrustedKeys();
           _rpmdb.exportTrustedKeysInZyppKeyRing();
         }
-        
+
         virtual void trustedKeyRemoved( const KeyRing &keyring, const std::string &keyid, const std::string &keyname, const std::string &fingerprint )
         {
-        
+
         }
-        
+
         RpmDb &_rpmdb;
       };
-                  
+
       static shared_ptr<KeyRingSignalReceiver> sKeyRingReceiver;
-      
+
 unsigned diffFiles(const std::string file1, const std::string file2, std::string& out, int maxlines)
 {
     const char* argv[] =
@@ -106,7 +106,7 @@ unsigned diffFiles(const std::string file1, const std::string file2, std::string
 	if(maxlines<0?true:count<maxlines)
 	    out+=line;
     }
-    
+
     return prog.close();
 }
 
@@ -477,11 +477,11 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
   // by librpm. On demand it will be reopened readonly and should
   // not hold any lock.
   librpmDb::dbRelease( true );
-  
+
   MIL << "Syncronizing keys with zypp keyring" << std::endl;
   importZyppKeyRingTrustedKeys();
   exportTrustedKeysInZyppKeyRing();
-  
+
   MIL << "InitDatabase: " << *this << endl;
 }
 
@@ -858,12 +858,12 @@ void RpmDb::doRebuildDatabase(callback::SendReport<RebuildDBReport> & report)
 void RpmDb::exportTrustedKeysInZyppKeyRing()
 {
   MIL << "Exporting rpm keyring into zypp trusted keyring" <<std::endl;
-  
+
   std::set<Edition> rpm_keys = pubkeyEditions();
-  
+
   std::list<PublicKey> zypp_keys;
   zypp_keys = getZYpp()->keyRing()->trustedPublicKeys();
-  
+
   for ( std::set<Edition>::const_iterator it = rpm_keys.begin(); it != rpm_keys.end(); ++it)
   {
     // search the zypp key into the rpm keys
@@ -896,7 +896,7 @@ void RpmDb::exportTrustedKeysInZyppKeyRing()
         ERR << "Could not dump key " << (*it) << " in tmp file " << file.path() << std::endl;
         // just ignore the key
       }
-      
+
       // now import the key in zypp
       try
       {
@@ -908,21 +908,21 @@ void RpmDb::exportTrustedKeysInZyppKeyRing()
         ERR << "Could not import key " << (*it) << " in zypp keyring" << std::endl;
       }
     }
-  }  
+  }
 }
 
 void RpmDb::importZyppKeyRingTrustedKeys()
 {
   MIL << "Importing zypp trusted keyring" << std::endl;
-  
+
   std::list<PublicKey> rpm_keys = pubkeys();
-  
+
   std::list<PublicKey> zypp_keys;
-  
+
   zypp_keys = getZYpp()->keyRing()->trustedPublicKeys();
-  
+
   for ( std::list<PublicKey>::const_iterator it = zypp_keys.begin(); it != zypp_keys.end(); ++it)
-  { 
+  {
     // we find only the left part of the long gpg key, as rpm does not support long ids
     std::list<PublicKey>::iterator ik = find( rpm_keys.begin(), rpm_keys.end(), (*it));
     if ( ik != rpm_keys.end() )
@@ -948,7 +948,7 @@ void RpmDb::importZyppKeyRingTrustedKeys()
         ERR << "Could not dump key " << (*it).id << " (" << (*it).name << ") in tmp file " << file.path() << std::endl;
         // just ignore the key
       }
-      
+
       // now import the key in rpm
       try
       {
@@ -1242,17 +1242,6 @@ const std::list<Package::Ptr> & RpmDb::doGetPackages(callback::SendReport<ScanDB
       continue;
     }
     Date installtime = iter->tag_installtime();
-#if 0
-This prevented from having packages multiple times
-    Package::Ptr & nptr = _packages._index[name]; // be sure to get a reference!
-
-    if ( nptr ) {
-      WAR << "Multiple entries for package '" << name << "' in rpmdb" << endl;
-      if ( nptr->installtime() > installtime )
-	continue;
-      // else overwrite previous entry
-    }
-#endif
 
     Package::Ptr pptr = makePackageFromHeader( *iter, &_filerequires, location, Source_Ref() );
 
@@ -1282,47 +1271,6 @@ This prevented from having packages multiple times
   ///////////////////////////////////////////////////////////////////
   return _packages._list;
 }
-
-#warning Uncomment this function if it is needed
-#if 0
-///////////////////////////////////////////////////////////////////
-//
-//
-//	METHOD NAME : RpmDb::traceFileRel
-//	METHOD TYPE : void
-//
-//	DESCRIPTION :
-//
-void RpmDb::traceFileRel( const PkgRelation & rel_r )
-{
-  if ( ! rel_r.isFileRel() )
-    return;
-
-  if ( ! _filerequires.insert( rel_r.name() ).second )
-    return; // already got it in _filerequires
-
-  if ( ! _packages._valid )
-    return; // collect only. Evaluated in first call to getPackages()
-
-  //
-  // packages already initialized. Must check and insert here
-  //
-  librpmDb::db_const_iterator iter;
-  if ( iter.dbError() ) {
-    ERR << "No database access: " << iter.dbError() << endl;
-    return;
-  }
-
-  for ( iter.findByFile( rel_r.name() ); *iter; ++iter ) {
-    Package::Ptr pptr = _packages.lookup( iter->tag_name() );
-    if ( !pptr ) {
-      WAR << "rpmdb.findByFile returned unpknown package " << *iter << endl;
-      continue;
-    }
-    pptr->addProvides( rel_r.name() );
-  }
-}
-#endif
 
 ///////////////////////////////////////////////////////////////////
 //

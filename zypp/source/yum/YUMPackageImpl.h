@@ -55,6 +55,9 @@ namespace zypp
 	virtual TranslatedText summary() const;
 	/** Package description */
 	virtual TranslatedText description() const;
+        /** */
+        virtual TranslatedText licenseToConfirm() const;
+	/** */
 	virtual ByteCount size() const;
 	/** */
 	virtual Date buildtime() const;
@@ -98,15 +101,13 @@ namespace zypp
 	/** */
 	virtual std::list<std::string> filenames() const;
         /** */
-        virtual License licenseToConfirm() const;
-        /** */
         virtual std::string type() const;
         /** */
         virtual std::list<std::string> keywords() const;
         /** */
 	virtual bool installOnly() const;
         /** */
-	virtual unsigned mediaId() const;
+	virtual unsigned sourceMediaNr() const;
         /** */
 	virtual CheckSum checksum() const;
         /** */
@@ -114,77 +115,10 @@ namespace zypp
         /** */
 	virtual std::list<PatchRpm> patchRpms() const;
 
-#if 0
-        /** */
-        virtual unsigned packageSize() const;
-        /** */
-        virtual unsigned installedSize() const;
-        /** */
-        virtual unsigned archiveSize() const;
-        /** */
-        virtual bool providesSources() const;
-        /** */
-        virtual std::string instSrcLabel() const;
-        /** */
-        virtual std::string instSrcVendor() const;
-        /** */
-        virtual unsigned instSrcRank() const;
-        /** */
-        virtual std::string buildhost() const;
-        /** */
-        virtual std::string distribution() const;
-        /** */
-        virtual std::string vendor() const;
-        /** */
-        virtual std::string license() const;
-        /** */
-        virtual std::list<std::string> licenseToConfirm() const;
-        /** */
-        virtual std::string packager() const;
-        /** */
-        virtual std::string group() const;
-        /** */
-        virtual std::list<std::string> changelog() const;
-        /** */
-        virtual std::string url() const;
-        /** */
-        virtual std::string os() const;
-        /** */
-        virtual std::list<std::string> prein() const;
-        /** */
-        virtual std::list<std::string> postin() const;
-        /** */
-        virtual std::list<std::string> preun() const;
-        /** */
-        virtual std::list<std::string> postun() const;
-        /** */
-        virtual std::string sourcepkg() const;
-        /** */
-        virtual std::list<std::string> authors() const;
-        /** */
-        virtual std::list<std::string> filenames() const;
-        /** */
-        virtual unsigned int medianr() const;
-        /** */
-        virtual std::string md5sum() const;
-        /** */
-        virtual std::string externalUrl() const;
-        /** */
-        virtual std::list<Edition> patchRpmBaseVersions() const;
-        /** */
-        virtual unsigned patchRpmSize() const;
-        /** */
-        virtual bool forceInstall() const;
-        /** */
-        virtual std::string patchRpmMD5() const;
-        /** */
-        virtual bool isRemote() const;
-        /** */
-        virtual bool prefererCandidate() const;
-#endif
       protected:
 	TranslatedText _summary;
 	TranslatedText _description;
+	TranslatedText _license_to_confirm;
 	Date _buildtime;
 	std::string _buildhost;
 	std::string _url;
@@ -194,10 +128,9 @@ namespace zypp
 	PackageGroup _group;
 	Changelog _changelog;
 	std::string _type;
-	License _license_to_confirm;
 	std::list<std::string> _authors;
 	std::list<std::string> _keywords;
-	unsigned _mediaid;
+	unsigned _mediaNumber;
 	CheckSum _checksum;
 	std::list<std::string> _filenames;
 	Pathname _location;

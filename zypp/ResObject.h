@@ -12,6 +12,8 @@
 #ifndef ZYPP_RESOBJECT_H
 #define ZYPP_RESOBJECT_H
 
+#include "zypp/base/Deprecated.h"
+
 #include "zypp/detail/ResObjectImplIf.h"
 #include "zypp/Resolvable.h"
 #include "zypp/TranslatedText.h"
@@ -56,10 +58,34 @@ namespace zypp
     Text delnotify() const;
 
     /** */
+    Text licenseToConfirm() const;
+
+    /** */
+    Vendor vendor() const;
+
+    /** */
     ByteCount size() const;
 
     /** */
+    ByteCount archivesize() const;
+
+    /** Backlink to the source providing this. */
     Source_Ref source() const;
+
+    /** Number of the source media that provides the data
+     *  required for installation. Zero, if no media access
+     *  is required.
+    */
+    unsigned sourceMediaNr() const;
+
+    /** */
+    bool installOnly() const;
+
+    /** */
+    Date buildtime() const;
+
+    /** Time of installation, or \c 0 */
+    Date installtime() const;
 
     /** */
     ZmdId zmdid () const;

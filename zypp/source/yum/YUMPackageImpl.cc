@@ -41,7 +41,8 @@ namespace zypp
 	const zypp::parser::yum::YUMOtherData & other
       )
       : _summary(parsed.summary),
-	_description(),
+	_description(parsed.description),
+	_license_to_confirm(parsed.license_to_confirm), // TODO add to metadata
 	_buildtime(strtol(parsed.timeBuild.c_str(), 0, 10)),
 	_buildhost(parsed.buildhost),
 	_url(parsed.url),
@@ -51,10 +52,9 @@ namespace zypp
 	_group(parsed.group),
 	_changelog(), // TODO
 	_type(parsed.type),
-	_license_to_confirm(), // TODO add to metadata
 	_authors(parsed.authors),
 	_keywords( parsed.keywords),
-	_mediaid(strtol(parsed.media.c_str(), 0, 10)),
+	_mediaNumber(strtol(parsed.media.c_str(), 0, 10)),
 	_checksum(parsed.checksumType,
 		  parsed.checksum),
 	_filenames(),
@@ -72,8 +72,6 @@ namespace zypp
 	_dir_sizes(parsed.dirSizes),
 #endif
       {
-	_description.setText(parsed.description);
-	_license_to_confirm = parsed.license_to_confirm.asString();
 	for (std::list<FileData>::const_iterator it = filelist.files.begin();
 	     it != filelist.files.end();
 	     it++)
@@ -96,7 +94,8 @@ namespace zypp
 	const zypp::parser::yum::YUMPatchPackage & parsed
       )
       : _summary(parsed.summary),
-	_description(),
+	_description(parsed.description),
+	_license_to_confirm(parsed.license_to_confirm),
 	_buildtime(strtol(parsed.timeBuild.c_str(), 0, 10)),
 	_buildhost(parsed.buildhost),
 	_url(parsed.url),
@@ -106,10 +105,9 @@ namespace zypp
 	_group(parsed.group),
 	_changelog(), // TODO
 	_type(parsed.type),
-	_license_to_confirm(),
 	_authors(parsed.authors),
 	_keywords( parsed.keywords),
-	_mediaid(strtol(parsed.media.c_str(), 0, 10)),
+	_mediaNumber(strtol(parsed.media.c_str(), 0, 10)),
 	_checksum(parsed.checksumType,
 		  parsed.checksum),
 	_filenames(),
@@ -127,8 +125,6 @@ namespace zypp
 	_dir_sizes(parsed.dirSizes),
 #endif
       {
-	_description.setText(parsed.description);
-	_license_to_confirm = parsed.license_to_confirm.asString();
 	for (std::list<FileData>::const_iterator it = parsed.files.begin();
 	     it != parsed.files.end();
 	     it++)
@@ -203,6 +199,11 @@ namespace zypp
       TranslatedText YUMPackageImpl::description() const
       { return _description; }
 
+      /** */
+      TranslatedText YUMPackageImpl::licenseToConfirm() const
+      { return _license_to_confirm; }
+
+      /** */
       ByteCount YUMPackageImpl::size() const
 #warning fixme
       { return 0; }
@@ -296,9 +297,6 @@ namespace zypp
       std::list<std::string> YUMPackageImpl::filenames() const
       { return _filenames; }
 
-      License YUMPackageImpl::licenseToConfirm() const
-      { return _license_to_confirm; }
-
       /** */
       std::string YUMPackageImpl::type() const
       { return _type; }
@@ -310,8 +308,8 @@ namespace zypp
       bool YUMPackageImpl::installOnly() const
       { return _install_only; }
 
-      unsigned YUMPackageImpl::mediaId() const
-      { return _mediaid; }
+      unsigned YUMPackageImpl::sourceMediaNr() const
+      { return _mediaNumber; }
 
       CheckSum YUMPackageImpl::checksum() const
       { return _checksum; }
@@ -324,134 +322,6 @@ namespace zypp
 
       Source_Ref YUMPackageImpl::source() const
       { return _source; }
-
-#if 0
-      /** */
-      unsigned YUMPackageImpl::packageSize() const
-      { return _size_package; }
-      /** */
-      unsigned YUMPackageImpl::archiveSize() const
-      { return _size_archive; }
-      /** */
-      unsigned YUMPackageImpl::installedSize() const
-      { return _size_installed; }
-// FIXME do not understand items below
-      /** */
-      bool YUMPackageImpl::providesSources() const
-      {
-	return false;
-      }
-      /** */
-      std::string YUMPackageImpl::instSrcLabel() const
-      {
-	return "";
-      }
-      /** */
-      std::string YUMPackageImpl::instSrcVendor() const
-      {
-	return "";
-      }
-      /** */
-      unsigned YUMPackageImpl::instSrcRank() const
-      {
-	return 0;
-      }
-      /** */
-      std::string YUMPackageImpl::buildhost() const
-      {
-	return _buildhost;
-      }
-      /** */
-      std::string YUMPackageImpl::distribution() const
-      {
-	return "";
-      }
-      /** */
-      std::string YUMPackageImpl::vendor() const
-      {
-	return _vendor;
-      }
-      /** */
-      std::string YUMPackageImpl::license() const
-      {
-	return _license;
-      }
-      /** */
-      std::list<std::string> YUMPackageImpl::licenseToConfirm() const
-      {
-	return std::list<std::string>();
-      }
-      /** */
-      std::string YUMPackageImpl::packager() const
-      {
-	return _packager;
-      }
-      /** */
-      std::string YUMPackageImpl::group() const
-      {
-	return _group;
-      }
-      /** */
-      std::list<std::string> YUMPackageImpl::changelog() const
-      {}
-      /** */
-      std::string YUMPackageImpl::url() const
-      {
-	return _url;
-      }
-      /** */
-      std::string YUMPackageImpl::os() const
-      {}
-      /** */
-      std::list<std::string> YUMPackageImpl::prein() const
-      {}
-      /** */
-      std::list<std::string> YUMPackageImpl::postin() const
-      {}
-      /** */
-      std::list<std::string> YUMPackageImpl::preun() const
-      {}
-      /** */
-      std::list<std::string> YUMPackageImpl::postun() const
-      {}
-      /** */
-      std::string YUMPackageImpl::sourcepkg() const
-      { return _sourcepkg; }
-      /** */
-      std::list<std::string> YUMPackageImpl::authors() const
-      { return _authors; }
-      /** */
-      std::list<std::string> YUMPackageImpl::filenames() const
-      {}
-      /** */
-      std::string YUMPackageImpl::location() const
-      {}
-      /** */
-      std::string YUMPackageImpl::md5sum() const
-      {}
-      /** */
-      std::string YUMPackageImpl::externalUrl() const
-      {}
-      /** */
-      std::list<Edition> YUMPackageImpl::patchRpmBaseVersions() const
-      {}
-      /** */
-      unsigned YUMPackageImpl::patchRpmSize() const
-      {}
-      /** */
-      bool YUMPackageImpl::forceInstall() const
-      {}
-      /** */
-      std::string YUMPackageImpl::patchRpmMD5() const
-      {}
-      /** */
-      bool YUMPackageImpl::isRemote() const
-      {}
-      /** */
-      bool YUMPackageImpl::prefererCandidate() const
-      {}
-
-#endif
 
     } // namespace yum
     /////////////////////////////////////////////////////////////////

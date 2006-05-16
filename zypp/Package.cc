@@ -47,14 +47,6 @@ namespace zypp
   Changelog Package::changelog() const
   { return pimpl().changelog(); }
 
-  /** Time of package installation */
-  Date Package::installtime() const
-  { return pimpl().installtime(); }
-
-  /** */
-  Date Package::buildtime() const
-  { return pimpl().buildtime(); }
-
   /** */
   std::string Package::buildhost() const
   { return pimpl().buildhost(); }
@@ -65,10 +57,6 @@ namespace zypp
   /** */
   std::string Package::distribution() const
   { return pimpl().distribution(); }
-
-    /** */
-  Vendor Package::vendor() const
-  { return pimpl().vendor(); }
 
   /** */
   Label Package::license() const
@@ -112,10 +100,6 @@ namespace zypp
   ByteCount Package::sourcesize() const
   { return pimpl().sourcesize(); }
 
-  /** */
-  ByteCount Package::archivesize() const
-  { return pimpl().archivesize(); }
-
   DiskUsage Package::diskusage() const
   { return pimpl().diskusage(); }
 
@@ -126,16 +110,6 @@ namespace zypp
   /** */
   std::list<std::string> Package::filenames() const
   { return pimpl().filenames(); }
-
-  /** */
-  License Package::licenseToConfirm() const
-  { return pimpl().licenseToConfirm(); }
-
-  bool Package::installOnly() const
-  { return pimpl().installOnly(); }
-
-  unsigned Package::mediaId() const
-  { return pimpl().mediaId(); }
 
   Pathname Package::location() const
   { return pimpl().location(); }

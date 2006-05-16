@@ -29,7 +29,7 @@ namespace zypp
   */
   class SrcPackage : public ResObject
   {
-    
+
   public:
     typedef detail::SrcPackageImplIf    Impl;
     typedef SrcPackage                  Self;
@@ -42,8 +42,6 @@ namespace zypp
     ByteCount archivesize() const;
     /** Disk usage per directory */
     DiskUsage diskusage() const;
-    /** ID of the media */
-    unsigned mediaId() const;
     /** location in source */
     Pathname location() const;
 

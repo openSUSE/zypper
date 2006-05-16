@@ -47,11 +47,11 @@ namespace zypp
 	: _report (report_r)
 	, _resolvable (resolvable_r)
 	{}
-	
-	virtual ~DownloadProgressPackageReceiver () {} 
-	
+
+	virtual ~DownloadProgressPackageReceiver () {}
+
 	virtual void reportbegin() {}
-	
+
 	virtual void reportend() {}
 
         /**
@@ -77,11 +77,11 @@ namespace zypp
 	)
 	: _report (report_r)
 	{}
-	
-	virtual ~DownloadProgressFileReceiver () {} 
-	
+
+	virtual ~DownloadProgressFileReceiver () {}
+
 	virtual void reportbegin() {}
-	
+
 	virtual void reportend() {}
 
         /**
@@ -200,23 +200,23 @@ namespace zypp
       Pathname file;
       callback::SendReport<source::DownloadResolvableReport> report;
       DownloadProgressPackageReceiver download_report( report, package );
-      
+
       while (retry)
       {
         report->start( package, package->source().url() );
-	
+
 	callback::TempConnect<media::DownloadProgressReport> tmp_download( download_report );
-	
-        file = provideJustFile( package->location(), package->mediaId());
+
+        file = provideJustFile( package->location(), package->sourceMediaNr());
 
         report->finish( package, source::DownloadResolvableReport::NO_ERROR, "" );
-        
+
         CheckSum checksum = package->checksum();
         std::string calculated_digest;
-        
-        // check digest  
+
+        // check digest
         try
-        { 
+        {
           std::ifstream is(file.asString().c_str(), std::ifstream::binary);
           calculated_digest = Digest::digest(checksum.type(), is);
           is.close();
@@ -225,19 +225,19 @@ namespace zypp
         {
           ERR << "Can't open " << file << " for integrity check." << std::endl;
         }
-      
+
         if ( checksum.checksum() == calculated_digest )
         {
           MIL << package->location() << " ok. [" << calculated_digest << "]" << std::endl;
-          digest_ok = true;  
+          digest_ok = true;
           retry = false;
         }
-        
+
         if (!digest_ok)
         {
           std::string  package_str = package->name() + "-" + package->edition().asString();
           source::DownloadResolvableReport::Action useraction = report->problem(package, source::DownloadResolvableReport::INVALID, "Package " + package_str + " fails integrity check. Do you want to retry downloading it, or abort installation?");
-        
+
           if( useraction == source::DownloadResolvableReport::ABORT )
           {
             ZYPP_THROW(Exception("Package " + package->location().asString() + " fails integrity check. Expected: [" + checksum.checksum() + "] Read: [" + calculated_digest + "] (" + checksum.type() + ")"));
@@ -250,37 +250,37 @@ namespace zypp
       }
       return file;
     }
-    
+
     const Pathname SourceImpl::provideFile(const Pathname & file_r,
 					   const unsigned media_nr,
 					   bool cached,
 					   bool checkonly )
-    {    
+    {
       callback::SendReport<source::DownloadFileReport> report;
       DownloadProgressFileReceiver download_report( report );
-      
+
       SourceFactory source_factory;
-      
+
       Url file_url( url().asString() + file_r.asString() );
 
       report->start( source_factory.createFrom(this), file_url );
-	
+
       callback::TempConnect<media::DownloadProgressReport> tmp_download( download_report );
-	
+
       Pathname file = provideJustFile( file_r, media_nr, cached, checkonly );
 
       report->finish( file_url, source::DownloadFileReport::NO_ERROR, "" );
-      
+
       return file;
     }
 
     const Pathname SourceImpl::tryToProvideFile( const Pathname & file, const unsigned media_nr )
     {
       media::MediaAccessId _media = _media_set->getMediaAccessId( media_nr);
-      media_mgr.provideFile (_media, file, false, false);  
+      media_mgr.provideFile (_media, file, false, false);
       return media_mgr.localPath( _media, file );
     }
-    
+
 
     const Pathname SourceImpl::provideJustFile(const Pathname & file_r,
 					   const unsigned media_nr,
@@ -327,9 +327,9 @@ namespace zypp
 		ZYPP_CAUGHT(excpt_r);
 		ERR << "Failed to release all sources" << endl;
 	    }
-	    
+
 	    // set up the reason
-	    media::MediaChangeReport::Error reason 
+	    media::MediaChangeReport::Error reason
 		= media::MediaChangeReport::INVALID;
 
 	    if( typeid(excp) == typeid( media::MediaFileNotFoundException )  ||
@@ -346,7 +346,7 @@ namespace zypp
 	      report->requestMedia (
 		source_factory.createFrom( this ),
 		media_nr,
-		reason, 
+		reason,
 		excp.asUserString()
 	      );
 
@@ -446,7 +446,7 @@ namespace zypp
             }
             // set up the reason
             media::MediaChangeReport::Error reason = media::MediaChangeReport::INVALID;
-  
+
             if( typeid(excp) == typeid( media::MediaFileNotFoundException )  || typeid(excp) == typeid( media::MediaNotAFileException ) )
             {
               reason = media::MediaChangeReport::NOT_FOUND;
@@ -456,9 +456,9 @@ namespace zypp
               reason = media::MediaChangeReport::WRONG;
             }
             user  = report->requestMedia ( source_factory.createFrom( this ), media_nr, reason, excp.asUserString() );
-  
+
             DBG << "ProvideFile exception caught, callback answer: " << user << endl;
-  
+
             if( user == media::MediaChangeReport::ABORT )
             {
               DBG << "Aborting" << endl;
@@ -483,16 +483,16 @@ namespace zypp
             {
               // retry
               DBG << "Going to try again" << endl;
-  
+
               // not attaching, media set will do that for us
               // this could generate uncaught exception (#158620)
-  
+
               break;
             }
             else
             {
               DBG << "Don't know, let's ABORT" << endl;
-  
+
               ZYPP_RETHROW ( excp );
             }
           } while( user == media::MediaChangeReport::EJECT );
@@ -554,7 +554,7 @@ namespace zypp
     {
 	// TODO: will this work in chroot?
 	// TODO: better download somewhere else and then copy over
-	try{ 
+	try{
   	  storeMetadata( _cache_dir );
 	}
 	catch( const zypp::Exception & excpt )

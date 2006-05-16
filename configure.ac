@@ -1,7 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl ==================================================
 
-AC_INIT(zypp,0.0.0)
+AC_INIT(zypp,1.0.0)
 AC_CONFIG_SRCDIR(zypp/Makefile.am)
 
 AC_PREFIX_DEFAULT(/usr)
@@ -43,12 +43,9 @@ dnl 6) If any interfaces have been removed since the last public release, then
 dnl    set age to 0.
 dnl
 
-LIBZYPP_CURRENT=0
+LIBZYPP_CURRENT=1
 LIBZYPP_REVISION=0
 LIBZYPP_AGE=0
-
-LIBZYPP_VERSION=$LIBZYPP_CURRENT.$LIBZYPP_REVISION.$LIBZYPP_AGE
-AC_SUBST(LIBZYPP_VERSION)
 
 LIBZYPP_VERSION_INFO="-version-info $LIBZYPP_CURRENT:$LIBZYPP_REVISION:$LIBZYPP_AGE"
 AC_SUBST(LIBZYPP_VERSION_INFO)
@@ -298,7 +295,7 @@ Configuration:
 
   PACKAGE:              ${PACKAGE}
   VERSION:              ${VERSION}
-  LIBVERSION:           lib${PACKAGE}.so.${LIBZYPP_VERSION}
+  LIBVERSION:           lib${PACKAGE}.so.$LIBZYPP_CURRENT.$LIBZYPP_AGE.$LIBZYPP_REVISION
 
   FEATURES:             ${ZYPP_FEATURES}
 

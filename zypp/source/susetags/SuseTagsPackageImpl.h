@@ -25,9 +25,9 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
     namespace susetags
     { /////////////////////////////////////////////////////////////////
-      
+
       DEFINE_PTR_TYPE(SuseTagsImpl);
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : PackageImpl
@@ -39,12 +39,16 @@ namespace zypp
         SuseTagsPackageImpl(Source_Ref source_r);
         virtual ~SuseTagsPackageImpl();
 
-        /** \name Rpm Package Attributes. */
+        /** \name ResObject attributes. */
         //@{
 	virtual TranslatedText summary() const;
 	virtual TranslatedText description() const;
         virtual TranslatedText insnotify() const;
         virtual TranslatedText delnotify() const;
+        virtual TranslatedText licenseToConfirm() const;
+        virtual Source_Ref source() const;
+	virtual unsigned sourceMediaNr() const;
+        //@}
 
         virtual CheckSum checksum() const;
         /** */
@@ -99,44 +103,27 @@ namespace zypp
         /** */
         virtual bool installOnly() const;
 
-        virtual License licenseToConfirm() const;
-
-	virtual unsigned mediaId() const;
-
         // which entry in sourceImpl::_package_data has
         // the shared data for this package
         NVRA _data_index;
         NVRA _nvra;
-        
+
 	PackageGroup _group;
         std::list<std::string> _authors;
         std::list<std::string> _keywords;
 	ByteCount _size;
         ByteCount _archivesize;
         Label _license;
-        Label _license_to_confirm;
         Date _buildtime;
-        unsigned int _media_number;
+        unsigned _media_number;
         Pathname _location;
         DiskUsage _diskusage;
         CheckSum _checksum;
-        
+
         SuseTagsImpl_Ptr _sourceImpl;
-        
+
       private:
         Source_Ref _source;
-      public:
-        Source_Ref source() const;
-
-/*
-=Grp: System/Base
-=Lic: GPL
-=Src: 3ddiag 0.724 3 src
-=Tim: 1111489970
-=Loc: 1 3ddiag-0.724-3.i586.rpm
-
-*/
-
       };
       ///////////////////////////////////////////////////////////////////
       /////////////////////////////////////////////////////////////////

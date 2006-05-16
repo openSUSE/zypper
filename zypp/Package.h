@@ -42,18 +42,12 @@ namespace zypp
      * Checksum the source says this package should have
      */
     CheckSum checksum() const;
-    /** Time of package installation */
-    Date installtime() const;
     /** Get the package change log */
     Changelog changelog() const;
-    /** */
-    Date buildtime() const;
     /** */
     std::string buildhost() const;
     /** */
     std::string distribution() const;
-    /** */
-    Vendor vendor() const;
     /** */
     Label license() const;
     /** */
@@ -76,8 +70,6 @@ namespace zypp
     /** */
     ByteCount sourcesize() const;
     /** */
-    ByteCount archivesize() const;
-    /** */
     std::list<std::string> authors() const;
     /** */
     std::list<std::string> filenames() const;
@@ -85,18 +77,8 @@ namespace zypp
     /** Disk usage per directory */
     DiskUsage diskusage() const;
 
-    /** */
-    License licenseToConfirm() const;
-
-    /** */
-    bool installOnly() const;
-    /** ID of the media */
-    unsigned mediaId() const;
     /** location in source */
     Pathname location() const;
-
-    // data here:
-
 
   protected:
     Package( const NVRAD & nvrad_r );

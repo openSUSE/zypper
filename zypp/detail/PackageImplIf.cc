@@ -26,23 +26,14 @@ namespace zypp
     // as far as resonable.
     /////////////////////////////////////////////////////////////////
 
-      Date PackageImplIf::buildtime() const
-      { return Date(); }
-
       CheckSum PackageImplIf::checksum() const
       { return CheckSum(); }
 
       std::string PackageImplIf::buildhost() const
       { return std::string(); }
 
-      Date PackageImplIf::installtime() const
-      { return Date(); }
-
       std::string PackageImplIf::distribution() const
       { return std::string(); }
-
-      Vendor PackageImplIf::vendor() const
-      { return Vendor(); }
 
       Label PackageImplIf::license() const
       { return Label(); }
@@ -80,11 +71,8 @@ namespace zypp
       ByteCount PackageImplIf::sourcesize() const
       { return ByteCount(); }
 
-      ByteCount PackageImplIf::archivesize() const
-      { return ByteCount(); }
-
       DiskUsage PackageImplIf::diskusage() const
-      { return DiskUsage(); }      
+      { return DiskUsage(); }
 
       std::list<std::string> PackageImplIf::authors() const
       { return std::list<std::string>(); }
@@ -92,20 +80,11 @@ namespace zypp
       std::list<std::string> PackageImplIf::filenames() const
       { return std::list<std::string>(); }
 
-      License PackageImplIf::licenseToConfirm() const
-      { return License(); }
-
       std::list<DeltaRpm> PackageImplIf::deltaRpms() const
       { return std::list<DeltaRpm>(); }
 
       std::list<PatchRpm> PackageImplIf::patchRpms() const
       { return std::list<PatchRpm>(); }
-
-      bool PackageImplIf::installOnly() const
-      { return false; }
-
-      unsigned PackageImplIf::mediaId() const
-      { return 1; }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail

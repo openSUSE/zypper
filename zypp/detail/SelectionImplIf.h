@@ -47,24 +47,8 @@ namespace zypp
         /** */
 	virtual Label order() const PURE_VIRTUAL;
 
+        /** */
         virtual const std::set<std::string> install_packages( const Locale & lang = Locale("") ) const;
-
-#if 0
-        // NOTE LangCode id zypp:Locale
-      virtual ByteCount size() const;
-      virtual bool providesSources() const;
-      virtual std::string instSrcLabel() const;
-      virtual Vendor instSrcVendor() const;
-      virtual unsigned instSrcRank() const;
-      virtual std::list<std::string> inspacks( const LangCode & lang = LangCode("") ) const;
-      virtual std::list<std::string> delpacks( const LangCode & lang = LangCode("") ) const;
-      virtual PM::LocaleSet supportedLocales() const;
-      virtual std::set<PMSelectablePtr> pureInspacks_ptrs( const LangCode & lang ) const;
-      virtual std::set<PMSelectablePtr> inspacks_ptrs( const LangCode & lang ) const;
-      virtual std::set<PMSelectablePtr> delpacks_ptrs( const LangCode & lang ) const;
-      virtual bool isBase() const;
-      virtual PMError provideSelToInstall( Pathname & path_r ) const;
-#endif
     };
     ///////////////////////////////////////////////////////////////////
 

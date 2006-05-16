@@ -25,14 +25,15 @@ namespace zypp
     { /////////////////////////////////////////////////////////////////
 
       IMPL_PTR_TYPE(SuseTagsImpl);
-      
+
       ///////////////////////////////////////////////////////////////////
       //
       //	METHOD NAME : PackageImpl::PackageImpl
       //	METHOD TYPE : Ctor
       //
-      SuseTagsPackageImpl::SuseTagsPackageImpl(Source_Ref source_r) :
-        _source( source_r )
+      SuseTagsPackageImpl::SuseTagsPackageImpl(Source_Ref source_r)
+      : _media_number( 1 )
+      , _source( source_r )
       {}
 
       ///////////////////////////////////////////////////////////////////
@@ -43,21 +44,18 @@ namespace zypp
       SuseTagsPackageImpl::~SuseTagsPackageImpl()
       {}
 
-      CheckSum SuseTagsPackageImpl::checksum() const
-      { return _checksum; }
-
       TranslatedText SuseTagsPackageImpl::summary() const
       {
         return _sourceImpl->_package_data[_data_index]._summary;
       }
 
       TranslatedText SuseTagsPackageImpl::description() const
-      {         
+      {
         return _sourceImpl->_package_data[_data_index]._description;
       }
 
       TranslatedText SuseTagsPackageImpl::insnotify() const
-      { 
+      {
         return _sourceImpl->_package_data[_data_index]._insnotify;
       }
 
@@ -65,6 +63,20 @@ namespace zypp
       {
         return _sourceImpl->_package_data[_data_index]._delnotify;
       }
+
+      TranslatedText SuseTagsPackageImpl::licenseToConfirm() const
+      {
+        return _sourceImpl->_package_data[_data_index]._license_to_confirm;
+      }
+
+      Source_Ref SuseTagsPackageImpl::source() const
+      { return _source; }
+
+      unsigned SuseTagsPackageImpl::sourceMediaNr() const
+      { return _media_number; }
+
+      CheckSum SuseTagsPackageImpl::checksum() const
+      { return _checksum; }
 
       Date SuseTagsPackageImpl::buildtime() const
       { return _buildtime; }
@@ -135,11 +147,6 @@ namespace zypp
       std::list<std::string> SuseTagsPackageImpl::filenames() const
       { return std::list<std::string>(); }
 
-      License SuseTagsPackageImpl::licenseToConfirm() const
-      { 
-        return _sourceImpl->_package_data[_data_index]._license_to_confirm;
-      }
-
       std::list<DeltaRpm> SuseTagsPackageImpl::deltaRpms() const
       { return std::list<DeltaRpm>(); }
 
@@ -148,12 +155,6 @@ namespace zypp
 
       bool SuseTagsPackageImpl::installOnly() const
       { return false; }
-
-      Source_Ref SuseTagsPackageImpl::source() const
-      { return _source; }
-
-      unsigned SuseTagsPackageImpl::mediaId() const
-      { return _media_number; }
 
       /////////////////////////////////////////////////////////////////
     } // namespace susetags

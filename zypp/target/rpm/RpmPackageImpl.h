@@ -45,10 +45,8 @@ namespace zypp
 	virtual TranslatedText summary() const;
 	/** Package description */
 	virtual TranslatedText description() const;
+        /** */
 	virtual ByteCount size() const;
-	virtual bool providesSources() const;
-	virtual Label instSrcLabel() const;
-	virtual Vendor instSrcVendor() const;
 	/** */
 	virtual Date buildtime() const;
 	/** */
@@ -91,8 +89,6 @@ namespace zypp
 	/** */
 	virtual std::list<std::string> filenames() const;
         /** */
-        virtual License licenseToConfirm() const;
-        /** */
         virtual std::string type() const;
         /** */
         virtual std::list<std::string> keywords() const;
@@ -118,7 +114,6 @@ namespace zypp
 	Changelog _changelog;
 	Pathname _location;			// for 'local' rpms
 	std::string _type;
-	License _license_to_confirm;
 	std::list<std::string> _authors;
 	std::list<std::string>_keywords;
 	std::list<std::string> _filenames;

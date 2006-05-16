@@ -77,12 +77,12 @@ namespace zypp
       void YUMSourceImpl::factoryInit()
       {
         bool cache = cacheExists();
-        
+
         try
         {
           media::MediaManager media_mgr;
           MIL << "Adding no media verifier" << endl;
-        
+
           // don't try to attach media
           media::MediaAccessId _media = _media_set->getMediaAccessId(1, true);
           media_mgr.delVerifier(_media);
@@ -94,46 +94,46 @@ namespace zypp
           ZYPP_CAUGHT(excpt_r);
           WAR << "Verifier not found" << endl;
         }
-        
+
         if ( cache )
         {
           DBG << "Cached metadata found in [" << _cache_dir << "]." << endl;
           _repomd_file = _cache_dir + "/repodata/repomd.xml";
-          
+
           if (PathInfo(_cache_dir + "/repodata/repomd.xml.asc").isExist())
             _repomd_signature = _cache_dir + "/repodata/repomd.xml.asc";
-        
+
           if (PathInfo(_cache_dir + "/repodata/repomd.xml.key").isExist())
             _repomd_key = _cache_dir + "/repodata/repomd.xml.key";
         }
         else
         {
           DBG << "Cached metadata not found in [" << _cache_dir << "]. Reading from " << _path << endl;
-          _repomd_file = provideFile(_path + "/repodata/repomd.xml");          
- 
+          _repomd_file = provideFile(_path + "/repodata/repomd.xml");
+
           // key and signature are optional
-          
+
           try {
             _repomd_key = tryToProvideFile( _path + "/repodata/repomd.xml.key");
           }
           catch( const Exception &e ) {
             WAR << "Repository does not contain repomd signing key" << std::endl;
           }
-                
+
           try {
             _repomd_signature = tryToProvideFile( _path + "/repodata/repomd.xml.asc");
           }
           catch( const Exception &e ) {
             WAR << "Repository does not contain repomd signature" << std::endl;
-          }  
+          }
           // if they not exists both will be Pathname()
         }
-        
+
         if ( ! PathInfo(_repomd_file).isExist() )
           ZYPP_THROW(Exception("repodata/repomd.xml not found"));
         else
           MIL << "repomd file is [" << _repomd_file << "]" << std::endl;
-          
+
 	MIL << "Trying to get the key" << endl;
         if ( ! _repomd_key.empty() )
         {
@@ -152,23 +152,23 @@ namespace zypp
         {
           WAR << "Source provides no key" << std::endl;
         }
-            
+
         checkMetadataChecksums(cache);
       }
 
       void YUMSourceImpl::checkMetadataChecksums(bool from_cache)
       {
         bool cache = from_cache;
-      
+
         MIL << "Checking [" << _repomd_file << "] integrity"  << endl;
-        
+
         if (! getZYpp()->keyRing()->verifyFileSignatureWorkflow(_repomd_file, (_path + "/repodata/repomd.xml").asString()+ " (" + url().asString() + ")", _repomd_signature))
           ZYPP_THROW(Exception(N_("Signed repomd.xml file fails signature check")));
-         
+
         DBG << "Reading file " << _repomd_file << " to check integrity of metadata." << endl;
         ifstream repo_st(_repomd_file.asString().c_str());
         YUMRepomdParser repomd(repo_st, "");
-        
+
         for(; ! repomd.atEnd(); ++repomd)
         {
           if ((*repomd)->type == "other")
@@ -182,9 +182,9 @@ namespace zypp
             {
               ZYPP_THROW(Exception( (*repomd)->location + " " + N_("fails checksum verification.") ));
             }
-            
+
             // now parse patches mentioned if we are in patches.xml
-            
+
             if ((*repomd)->type == "patches")
             {
               Pathname patch_index = file_to_check;
@@ -199,11 +199,11 @@ namespace zypp
                   ZYPP_THROW(Exception( (*patch)->location + " " + N_("fails checksum verification.") ));
                 }
               }
-            }  
+            }
           }
         }
       }
-      
+
       void YUMSourceImpl::storeMetadata(const Pathname & cache_dir_r)
       {
 	_cache_dir = cache_dir_r;
@@ -229,7 +229,7 @@ namespace zypp
         // before really download all the data and init the cache, check
         // if the source has really changed, otherwise, make it quick
         Pathname cached_repomd = cache_dir_r + "/repodata/repomd.xml";
-        
+
         // we can only assume repomd intact means the source changed if the source is signed.
         if ( cacheExists() && PathInfo( _cache_dir + "/repodata/repomd.xml.asc").isExist() )
         {
@@ -242,8 +242,8 @@ namespace zypp
           }
         }
         MIL << "YUM source " << alias() << "has changed. Re-reading metadata into " << cache_dir_r << endl;
-        
-        
+
+
         MIL << "Cleaning up cache dir" << std::endl;
         filesystem::clean_dir(cache_dir_r);
 
@@ -257,7 +257,7 @@ namespace zypp
 	// re-read all data
 
 	_repomd_file = remote_repomd;
-        	
+
         // provide optional files
         Pathname remote_repomd_key;
         Pathname remote_repomd_signature;
@@ -278,18 +278,18 @@ namespace zypp
 
         // check again all file integrity, on the just downloaded files
         checkMetadataChecksums(false);
- 
+
         filesystem::copy( remote_repomd, dst + "repomd.xml");
-        
+
         if (PathInfo(remote_repomd_key).isExist())
           filesystem::copy( remote_repomd_key, dst + "repomd.xml.key");
         if (PathInfo(remote_repomd_signature).isExist())
           filesystem::copy( remote_repomd_signature, dst + "repomd.xml.asc");
-        
+
 	DBG << "Reading file " << remote_repomd << endl;
 	ifstream repo_st(remote_repomd.asString().c_str());
 	YUMRepomdParser repomd(repo_st, "");
-	
+
 	for(;
 	      ! repomd.atEnd();
 	      ++repomd)
@@ -298,7 +298,7 @@ namespace zypp
 		continue;
 
 	    Pathname src = provideFile(_path + (*repomd)->location);
-	    
+
             dst = cache_dir_r + (*repomd)->location;
 	    filesystem::copy(src, dst);
 	    if ((*repomd)->type == "patches")
@@ -345,7 +345,7 @@ namespace zypp
           ? _cache_dir + "/repodata/repomd.xml"
           : provideFile(_path + "/repodata/repomd.xml");
 	  _metadata_files.push_back("/repodata/repomd.xml");
-          
+
 	  DBG << "Reading ifgz file " << filename << endl;
 	  ifgzstream repo_st(filename.asString().c_str());
 	  YUMRepomdParser repomd(repo_st, "");
@@ -354,7 +354,7 @@ namespace zypp
 	      ++repomd)
 	  {
             // note that we skip adding other.xml to the list of files to provide
-            
+
 	    if ((*repomd)->type == "primary")
 	      repo_primary.push_back(*repomd);
 	    else if ((*repomd)->type == "filelists")
@@ -464,7 +464,7 @@ namespace zypp
           Pathname filename = cacheExists()
               ? _cache_dir + (*it)->location
             : provideFile(_path + (*it)->location);
-          
+
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
@@ -525,7 +525,7 @@ namespace zypp
           Pathname filename = cacheExists()
               ? _cache_dir + (*it)->location
             : provideFile(_path + (*it)->location);
-	    
+
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
@@ -559,7 +559,7 @@ namespace zypp
           Pathname filename = cacheExists()
               ? _cache_dir + (*it)->location
             : provideFile(_path + (*it)->location);
-	    
+
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
@@ -593,7 +593,7 @@ namespace zypp
           Pathname filename = cacheExists()
               ? _cache_dir + (*it)->location
             : provideFile(_path + (*it)->location);
-	    
+
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
@@ -627,7 +627,7 @@ namespace zypp
             Pathname filename = cacheExists()
                 ? _cache_dir + (*it)->location
               : provideFile(_path + (*it)->location);
-	    
+
 	    _metadata_files.push_back((*it)->location);
 	    DBG << "Reading file " << filename << endl;
 	    ifgzstream st ( filename.asString().c_str() );
@@ -774,23 +774,10 @@ namespace zypp
         else
         {
           ResImplTraits<YUMPackageImpl>::Ptr impl = it->second.impl;
-          Package::Ptr package = it->second.package;
-	  //DBG << "found " << *package << ", impl " << impl << endl;
-
-          _store.erase( package );
-          impl->unmanage();
-
-          // Atoms are inserted in the store after patch creation
-	  //DBG << "Inserting atom " << *atom << endl;
-          //DBG << "with deps " << deps << endl;
-          //_store.insert( atom );
-
-          // Collect augmented package data
-          NVRAD packagedata( nvra, package->deps() );
 
           if (!parsed.location.empty()) {
               impl->_location = parsed.location;
-              impl->_mediaid = str::strtonum<unsigned>( parsed.media );
+              impl->_mediaNumber = str::strtonum<unsigned>( parsed.media );
 	      impl->_checksum = CheckSum(parsed.checksumType, parsed.checksum);
           }
 	  impl->_install_only = parsed.installOnly;
@@ -842,14 +829,6 @@ namespace zypp
 	    );
 	    impl->_delta_rpms.push_back(delta_rpm);
 	  }
-	
-          Package::Ptr new_package = detail::makeResolvableFromImpl(
-              packagedata, impl
-          );
-
-	  //DBG << "new_package " << *new_package << endl;
-
-          _store.insert( new_package );
         }
 	return atom;
     }

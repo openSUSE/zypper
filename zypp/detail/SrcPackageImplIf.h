@@ -46,9 +46,6 @@ namespace zypp
       virtual DiskUsage diskusage() const PURE_VIRTUAL;
       /** */
       virtual Pathname location() const PURE_VIRTUAL;
-      /** */
-      virtual unsigned mediaId() const PURE_VIRTUAL;
-
     };
     ///////////////////////////////////////////////////////////////////
 

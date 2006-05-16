@@ -12,12 +12,12 @@
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License,
  * version 2, as published by the Free Software Foundation.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
@@ -123,7 +123,7 @@ printRes ( std::ostream & str, ResObject::constPtr r )
     if (show_mediaid) {
 	Resolvable::constPtr res = r;
 	Package::constPtr pkg = asKind<Package>(res);
-	if (pkg) str << "[" << pkg->mediaId() << "]";
+	if (pkg) str << "[" << pkg->sourceMediaNr() << "]";
     }
     if (r->kind() != ResTraits<zypp::Package>::kind)
 	str << r->kind() << ':';
@@ -152,7 +152,7 @@ string2kind (const std::string & str)
     Resolvable::Kind kind = ResTraits<zypp::Package>::kind;
     if (!str.empty()) {
 	if (str == "package") {
-	    // empty 
+	    // empty
 	}
 	else if (str == "patch") {
 	    kind = ResTraits<zypp::Patch>::kind;
@@ -329,7 +329,7 @@ struct KNEAOrder : public std::binary_function<PoolItem_Ref,PoolItem_Ref,bool>
 	    return lhs.resolvable() < rhs.resolvable();
 	}
 };
-	
+
 typedef std::set<PoolItem_Ref, KNEAOrder> PoolItemOrderSet;
 
 static void
@@ -422,7 +422,7 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 	    RESULT << endl;
 	    RESULT << counter << ". set with " << items.size() << " resolvables" << endl;
 	    PoolItemOrderSet orderedset;
-	    
+
 	    for ( solver::detail::PoolItemList::iterator iter = items.begin(); iter != items.end(); ++iter )
 	    {
 		orderedset.insert( *iter );
@@ -434,7 +434,7 @@ print_solution (ResolverContext_Ptr context, int *count, ChecksumList & checksum
 	    order.setInstalled( items );
 	}
 #endif
-	
+
 	cout << "- - - - - - - - - -" << endl;
     }
 
@@ -786,7 +786,7 @@ parse_xml_setup (XmlNode_Ptr node)
 	    continue;
 	}
 	if (node->equals ("forceResolve")) {
-	    
+
 	    forceResolve = true;
 	} else if (node->equals ("system")) {
 
@@ -795,12 +795,12 @@ parse_xml_setup (XmlNode_Ptr node)
 		cerr << "Can't setup 'system'" << endl;
 		exit( 1 );
 	    }
-	    
+
 	} else if (node->equals ("hardwareInfo")) {
 
 	    Pathname pathname = globalPath + node->getProp ("path");
 	    setenv ("ZYPP_MODALIAS_SYSFS", pathname.asString().c_str(), 1);
-	    RESULT << "setting HardwareInfo to: " << pathname.asString() << endl;            
+	    RESULT << "setting HardwareInfo to: " << pathname.asString() << endl;
 	} else if (node->equals ("channel")) {
 
 	    string name = node->getProp ("name");
@@ -859,7 +859,7 @@ parse_xml_setup (XmlNode_Ptr node)
 	    PoolItem_Ref poolItem;
 
 	    poolItem = get_poolItem ("@system", package_name, kind_name);
-	    
+
 	    if (! poolItem) {
 		cerr << "Can't force-uninstall installed package '" << package_name << "'" << endl;
 	    } else {
@@ -940,7 +940,7 @@ report_solutions ( solver::detail::Resolver_Ptr resolver, bool instorder, bool m
     if (resolver->invalidQueues().empty()) {
 	cout << "Invalid solutions: " << (long) resolver->invalidQueues().size() << endl;
     }
-    
+
     if (resolver->bestContext()) {
 	cout << endl << "Best Solution:" << endl;
 	print_solution (resolver->bestContext(), &count, checksum_list, instorder, mediaorder);
@@ -952,7 +952,7 @@ report_solutions ( solver::detail::Resolver_Ptr resolver, bool instorder, bool m
 	if (complete.size() < 20) {
 	    for (ResolverQueueList::const_iterator iter = complete.begin(); iter != complete.end(); iter++) {
 		ResolverQueue_Ptr queue = (*iter);
-		if (queue->context() != resolver->bestContext()) 
+		if (queue->context() != resolver->bestContext())
 		    print_solution (queue->context(), &count, checksum_list, instorder, mediaorder);
 	    }
 	}
@@ -1103,7 +1103,7 @@ freshen_marked_cb (PoolItem_Ref poolItem, const ResStatus & status, void *data)
 {
     solver::detail::Resolver_Ptr resolver = *((solver::detail::Resolver_Ptr *)data);
     if (status.isNeeded()) {
-	poolItem.status().setToBeInstalled(ResStatus::USER);        
+	poolItem.status().setToBeInstalled(ResStatus::USER);
 //	resolver->addPoolItemToInstall (poolItem);
     }
 
@@ -1250,7 +1250,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    RESULT << "Checking for upgrades..." << endl;
 
 	    int count = foreach_system_upgrade (resolver);
-	    
+
 	    if (count == 0)
 		RESULT << "System is up-to-date, no upgrades required" << endl;
 	    else
@@ -1404,7 +1404,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 		    RESULT << "Problem:" << endl;
 		    RESULT << problem.description() << endl;
 		    RESULT << problem.details() << endl;
-		    
+
 		    ProblemSolutionList solutions = problem.solutions();
 		    for (ProblemSolutionList::const_iterator iter = solutions.begin();
 			 iter != solutions.end(); ++iter) {
@@ -1425,7 +1425,7 @@ parse_xml_trial (XmlNode_Ptr node, const ResPool & pool)
 	    RESULT << "Taking solution: " << solutionNr << endl;
 	    RESULT << "For problem:     " << problemNr << endl;
 	    ResolverProblemList problems = resolver->problems ();
-	    
+
 	    int problemCounter = -1;
 	    int solutionCounter = -1;
 	    // find problem
@@ -1618,9 +1618,9 @@ process_xml_test_file (const string & filename, const ResPool & pool)
     root = new XmlNode (xmlDocGetRootElement (xml_doc));
 
     DBG << "Parsing file '" << filename << "'" << endl;
-    
+
     parse_xml_test (root, pool);
-    
+
     xmlFreeDoc (xml_doc);
 }
 
@@ -1631,7 +1631,7 @@ int
 main (int argc, char *argv[])
 {
 //    setenv("ZYPP_NOLOG","1",1); // no logging
-    
+
     if (argc != 2) {
 	cerr << "Usage: deptestomatic testfile.xml" << endl;
 	exit (0);

@@ -24,7 +24,7 @@ namespace zypp
   { /////////////////////////////////////////////////////////////////
     namespace susetags
     { /////////////////////////////////////////////////////////////////
-  
+
       ///////////////////////////////////////////////////////////////////
       //
       //	CLASS NAME : SrcPackageImpl
@@ -36,8 +36,6 @@ namespace zypp
         SuseTagsSrcPackageImpl(Source_Ref source_r);
         virtual ~SuseTagsSrcPackageImpl();
 
-        /** \name Rpm Package Attributes. */
-        //@{
         /** */
         virtual Pathname location() const;
         /** */
@@ -45,26 +43,16 @@ namespace zypp
         /** */
         virtual DiskUsage diskusage() const;
         /** */
-	virtual unsigned mediaId() const;
+	virtual unsigned sourceMediaNr() const;
 
       private:
         Source_Ref _source;
         ByteCount _archivesize;
-        unsigned int _media_number;
+        unsigned _media_number;
         Pathname _location;
         DiskUsage _diskusage;
       public:
         Source_Ref source() const;
-
-/*
-=Grp: System/Base
-=Lic: GPL
-=Src: 3ddiag 0.724 3 src
-=Tim: 1111489970
-=Loc: 1 3ddiag-0.724-3.i586.rpm
-
-*/
-
       };
       ///////////////////////////////////////////////////////////////////
       /////////////////////////////////////////////////////////////////

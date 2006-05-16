@@ -30,13 +30,10 @@ namespace zypp
       { return ByteCount(); }
 
       DiskUsage SrcPackageImplIf::diskusage() const
-      { return DiskUsage(); }      
+      { return DiskUsage(); }
 
       Pathname SrcPackageImplIf::location() const
       { return Pathname(); }
-
-      unsigned SrcPackageImplIf::mediaId() const
-      { return 1; }
 
     /////////////////////////////////////////////////////////////////
   } // namespace detail
