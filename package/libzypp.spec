@@ -1,5 +1,5 @@
 #
-# spec file for package libzypp (Version 0.0.8)
+# spec file for package libzypp 
 #
 # Copyright (c) 2006 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -17,9 +17,9 @@ Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Autoreqprov:    on
 Summary:        Package, Patch, Pattern, and Product Management
-Version:        0.0.8
+Version:        1.0.0
 Release:        65
-Source:         zypp-0.0.0.tar.bz2
+Source:         zypp-1.0.0.tar.bz2
 Prefix:         /usr
 Provides:       yast2-packagemanager
 Obsoletes:      yast2-packagemanager
@@ -62,7 +62,7 @@ Authors:
     Ladislav Slezak <lslezak@suse.cz>
 
 %prep
-%setup -q -n zypp-0.0.0
+%setup -q -n zypp-1.0.0
 
 %build
 mv configure.ac x
