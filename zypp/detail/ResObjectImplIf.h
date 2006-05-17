@@ -91,6 +91,8 @@ namespace zypp
       */
       virtual unsigned sourceMediaNr() const PURE_VIRTUAL;
 
+      virtual unsigned mediaId() const PURE_VIRTUAL;
+
       /** */
       virtual bool installOnly() const PURE_VIRTUAL;
 

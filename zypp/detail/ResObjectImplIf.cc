@@ -40,6 +40,9 @@ namespace zypp
       TranslatedText ResObjectImplIf::licenseToConfirm() const
       { return TranslatedText::notext; }
 
+      unsigned ResObjectImplIf::mediaId() const
+      { return 1; }
+
       Vendor ResObjectImplIf::vendor() const
       { return Vendor(); }
 

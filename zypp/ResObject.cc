@@ -73,6 +73,9 @@ namespace zypp
   unsigned ResObject::sourceMediaNr() const
   { return pimpl().sourceMediaNr(); }
 
+  unsigned ResObject::mediaId() const
+  { return pimpl().mediaId(); }
+
   bool ResObject::installOnly() const
   { return pimpl().installOnly(); }
 

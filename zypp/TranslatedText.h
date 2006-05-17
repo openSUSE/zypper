@@ -42,17 +42,19 @@ namespace zypp
   public:
     /** Default ctor */
     TranslatedText();
-    /** Ctor \todo Make ctor it explicit */
-    bool empty() const ;
+    /** Ctor */
     explicit
     TranslatedText(const std::string &text, const Locale &lang = Locale());
-    /** Ctor. \todo Make ctor it explicit */
+    /** Ctor. */
     explicit
     TranslatedText(const std::list<std::string> &text, const Locale &lang = Locale());
     /** Dtor */
     ~TranslatedText();
 
-    /**  */
+    /** true if the text have no translations for any language */
+    bool empty() const ;
+    
+    /** static default empty translated text  */
     static const TranslatedText notext;
 
   public:

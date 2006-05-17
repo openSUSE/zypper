@@ -78,6 +78,8 @@ namespace zypp
     */
     unsigned sourceMediaNr() const;
 
+    unsigned mediaId() const;
+
     /** */
     bool installOnly() const;
 
