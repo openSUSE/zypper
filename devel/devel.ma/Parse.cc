@@ -83,15 +83,8 @@ struct PrintPoolItem
   void operator()( const PoolItem & pi ) const
   {
     USR << "S" << pi->source().numericId()
-        << "/M" << mediaId(pi)
+        << "/M" << pi->sourceMediaNr()
         << " " << pi << endl;
-  }
-  unsigned mediaId( const PoolItem & pi ) const
-  {
-    Package::constPtr pkg( asKind<Package>(pi.resolvable()) );
-    if ( pkg )
-      return pkg->mediaId();
-    return 0;
   }
 };
 
@@ -211,6 +204,7 @@ namespace zypp
     PoolItemSet _skipToDelete;
   };
 #endif
+
   std::ostream & operator<<( std::ostream & str, const CollectTransacting & obj )
   {
     str << "CollectTransacting:" << endl;
@@ -266,10 +260,20 @@ int main( int argc, char * argv[] )
   //           pool.begin(), pool.end()
   //           ) << endl;
 
-  selectForTransact( nameKindProxy<Pattern>( pool, "default" ) );
-  selectForTransact( nameKindProxy<Pattern>( pool, "x11" ) );
-  selectForTransact( nameKindProxy<Pattern>( pool, "kde" ) );
-  selectForTransact( nameKindProxy<Pattern>( pool, "OOo" ) );
+  if ( 0 )
+    {
+      selectForTransact( nameKindProxy<Pattern>( pool, "default" ) );
+      selectForTransact( nameKindProxy<Pattern>( pool, "x11" ) );
+      selectForTransact( nameKindProxy<Pattern>( pool, "kde" ) );
+      selectForTransact( nameKindProxy<Pattern>( pool, "OOo" ) );
+    }
+  else
+    {
+      selectForTransact( nameKindProxy<Selection>( pool, "default" ) );
+      selectForTransact( nameKindProxy<Selection>( pool, "X11" ) );
+      selectForTransact( nameKindProxy<Selection>( pool, "Kde" ) );
+      selectForTransact( nameKindProxy<Selection>( pool, "Office" ) );
+    }
 
   vdumpPoolStats( USR << "Transacting:"<< endl,
                   make_filter_begin<resfilter::ByTransact>(pool),
@@ -287,6 +291,8 @@ int main( int argc, char * argv[] )
   vdumpPoolStats( USR << "Transacting:"<< endl,
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
+
+
 
 
   INT << "===[END]============================================" << endl << endl;

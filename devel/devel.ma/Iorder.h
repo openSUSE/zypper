@@ -224,9 +224,9 @@ getResolvablesToInsDel ( const ResPool pool_r,
 	    other_list.push_back( *cit );
 	    continue;
           }
-          XXX << "Package " << *cpkg << ", media " << cpkg->mediaId() << " last_medianum " << last_medianum << " best_medianum " << best_medianum << endl;
+          XXX << "Package " << *cpkg << ", media " << cpkg->sourceMediaNr() << " last_medianum " << last_medianum << " best_medianum " << best_medianum << endl;
           if ( cpkg->source().numericId() == last_prio &&
-               cpkg->mediaId() == last_medianum ) {
+               cpkg->sourceMediaNr() == last_medianum ) {
             // prefer packages on current media.
             last_list.push_back( *cit );
             continue;
@@ -240,9 +240,9 @@ getResolvablesToInsDel ( const ResPool pool_r,
               if ( cpkg->source().numericId() < best_prio ) {
                 best_list.clear(); // new best
               } else if ( cpkg->source().numericId() == best_prio ) {
-                if ( cpkg->mediaId() < best_medianum ) {
+                if ( cpkg->sourceMediaNr() < best_medianum ) {
                   best_list.clear(); // new best
-                } else if ( cpkg->mediaId() == best_medianum ) {
+                } else if ( cpkg->sourceMediaNr() == best_medianum ) {
                   best_list.push_back( *cit ); // same as best -> add
                   continue;
                 } else {
@@ -258,7 +258,7 @@ getResolvablesToInsDel ( const ResPool pool_r,
                 // first package or new best
                 best_list.push_back( *cit );
                 best_prio     = cpkg->source().numericId();
-                best_medianum = cpkg->mediaId();
+                best_medianum = cpkg->sourceMediaNr();
                 continue;
               }
           }
@@ -305,11 +305,11 @@ getResolvablesToInsDel ( const ResPool pool_r,
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
- inline  unsigned mediaId( const PoolItem & pi )
+ inline  unsigned sourceMediaNr( const PoolItem & pi )
   {
     Package::constPtr pkg( asKind<Package>(pi.resolvable()) );
     if ( pkg )
-      return pkg->mediaId();
+      return pkg->sourceMediaNr();
     return 0;
   }
 PoolItemList commit( const PoolItemList & items_r, bool cont )
@@ -330,7 +330,7 @@ PoolItemList commit( const PoolItemList & items_r, bool cont )
   for ( PoolItemList::const_iterator it = items_r.begin(); it != items_r.end(); ++it )
     {
       ++itm;
-      unsigned cmid = mediaId( *it );
+      unsigned cmid = sourceMediaNr( *it );
       unsigned csid = (*it)->source().numericId();
 
       if ( cmid && ( cmid != mid || csid != sid ) )
@@ -389,9 +389,9 @@ int commit( ResPool pool_r, unsigned int medianr,
         {
           Resolvable::constPtr res( it->resolvable() );
           Package::constPtr pkg( asKind<Package>(res) );
-          if (pkg && medianr != pkg->mediaId())								// check medianr for packages only
+          if (pkg && medianr != pkg->sourceMediaNr())								// check medianr for packages only
             {
-              XXX << "Package " << *pkg << ", wrong media " << pkg->mediaId() << endl;
+              XXX << "Package " << *pkg << ", wrong media " << pkg->sourceMediaNr() << endl;
               remaining_r.push_back( *it );
             }
           else
@@ -406,9 +406,9 @@ int commit( ResPool pool_r, unsigned int medianr,
         {
           Resolvable::constPtr res( it->resolvable() );
           Package::constPtr pkg( asKind<Package>(res) );
-          if (pkg && medianr != pkg->mediaId()) // check medianr for packages only
+          if (pkg && medianr != pkg->sourceMediaNr()) // check medianr for packages only
             {
-              XXX << "Package " << *pkg << ", wrong media " << pkg->mediaId() << endl;
+              XXX << "Package " << *pkg << ", wrong media " << pkg->sourceMediaNr() << endl;
               srcremaining_r.push_back( *it );
             }
           else {
