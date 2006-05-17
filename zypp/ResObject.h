@@ -78,7 +78,9 @@ namespace zypp
     */
     unsigned sourceMediaNr() const;
 
-    unsigned mediaId() const;
+    /** Use sourceMediaNr */
+    ZYPP_DEPRECATED unsigned mediaId() const
+    { return sourceMediaNr(); }
 
     /** */
     bool installOnly() const;
