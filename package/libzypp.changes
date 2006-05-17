@@ -5,6 +5,13 @@ Tue May 16 21:35:27 CEST 2006 - ma@suse.de
 - Let ResObjects which do not require media access during
   commit return ZERO sourceMediaNr (required for #173690)
 - Version 1.0.0
+- rev 3390
+
+-------------------------------------------------------------------
+Tue May 16 15:11:35 CEST 2006 - kkaempf@suse.de
+
+- reduce logging verbosity (#163186)
+- rev 3381
 
 -------------------------------------------------------------------
 Tue May 16 14:00:57 CEST 2006 - schubi@suse.de
