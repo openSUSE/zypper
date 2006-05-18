@@ -112,7 +112,7 @@ iterate_devices(const char *dir, const char *file, void *arg)
 	}
 	entry->next = *list;
 	*list = entry;
-	DBG << "system modalias: " << entry->modalias << endl;
+	XXX << "system modalias: " << entry->modalias << endl;
 	
 out:
 	(void) close(fd);
