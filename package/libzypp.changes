@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu May 18 10:43:47 CEST 2006 - ma@suse.de
+
+- Stay backward comapatible.
+
+-------------------------------------------------------------------
 Tue May 16 21:35:27 CEST 2006 - ma@suse.de
 
 - Make basic attributes available through ResObject.
