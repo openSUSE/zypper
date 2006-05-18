@@ -242,6 +242,11 @@ namespace zypp
             XXX << "package " << _nvrad << " shares data with " << shared_desc << std::endl;
             _isShared = true;
             _pkgImpl->_data_index = shared_desc;
+            // mark the refering package as a package providing data to others
+            // because we cant filter those by architecture to save memory
+            // or we run in missing package descriptions for x86_64 packages
+            // which depends on a ppc package for its data.
+            _sourceImpl->_provides_shared_data[ _pkgImpl->_data_index] = true;
           }
 	  if ( stag_r.name == "Grp" )
 	  {

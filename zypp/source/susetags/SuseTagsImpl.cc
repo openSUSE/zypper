@@ -581,7 +581,7 @@ namespace zypp
         MIL << content.size() << " packages parsed" << std::endl;
         
         int counter =0;
-        for ( std::map<NVRA,bool>::const_iterator it = _is_shared.begin(); it != _is_shared.end(); ++it)
+        for ( std::map<NVRA, DefaultFalseBool>::const_iterator it = _is_shared.begin(); it != _is_shared.end(); ++it)
         {
           if( it->second)
             counter++;

@@ -73,39 +73,26 @@ namespace zypp
             _nvra = NVRA( words[0], Edition(words[1],words[2]), arch );
             // only discard the package if it is not compatible AND it does not provide data
             // to other packages
-	    if (!arch.compatibleWith( _system_arch ) && !_sourceImpl->_is_shared[_nvra])
+               
+            if (!arch.compatibleWith( _system_arch ) && !_sourceImpl->_provides_shared_data[_nvra])
             {
 		_current = NULL;
 		return;
 	    }
-
-            PkgContent::const_iterator it = _content.find(NVRAD(_nvra));
-	    if (it == _content.end())
-            {
-              // package not found in the master package list
-		_current = NULL;
-                _notfound.insert(_nvra);
-	    }
-	    else
-            {
-              //WAR << "Data for package " << words[0] << " " << words[1] << " " << words[2] << "  " << Arch(words[3]) << " coming..." << endl;
-		_count++;
-		_current = it->second;
-	    }
-
+            
+            _count++;
           }
 	  else if ( stag_r.name == "Sum" )
           {
-	    if (_current != NULL)
-	      _sourceImpl->_package_data[_nvra]._summary = TranslatedText( stag_r.value, _lang);
+	     _sourceImpl->_package_data[_nvra]._summary = TranslatedText( stag_r.value, _lang);
           }
         }
 
         /* Consume MulitTag data. */
         virtual void consume( const MultiTag & mtag_r )
         {
-          if ( _current == NULL )
-            return;
+          //if ( _current == NULL )
+          //  return;
 
           if ( mtag_r.name == "Des" )
             {
@@ -143,13 +130,8 @@ namespace zypp
           return;
         }
 
-        MIL << "Ending after " << p._count << " langs with " << content_r.size() << " packages and " << p._notfound.size() << " not founds." <<endl;
-        WAR << "Not found packages:" << std::endl;
-        for ( std::set<NVRA>::const_iterator it = p._notfound.begin(); it != p._notfound.end(); ++it)
-        {
-          NVRA nvra = *it;
-          WAR << "-> " << nvra.name << " " << nvra.edition << " " << nvra.arch << std::endl;
-        }
+        MIL << "packages.LANG parser done. [ Total packages: " << content_r.size() << " ] [ Package data: " << sourceimpl->_package_data.size() << " ]" << std::endl;
+        
         return;
       }
 

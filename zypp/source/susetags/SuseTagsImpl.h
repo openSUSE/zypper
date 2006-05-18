@@ -17,6 +17,7 @@
 
 #include "zypp/Pathname.h"
 #include "zypp/source/SourceImpl.h"
+#include "zypp/base/DefaultFalseBool.h"
 #include "zypp/Product.h"
 #include "zypp/CheckSum.h"
 #include "zypp/source/susetags/SuseTagsProductImpl.h"
@@ -156,7 +157,9 @@ namespace zypp
         // shared data between packages with same NVRA
         std::map<NVRA, SuseTagsPackageImplData> _package_data;
         // list of packages which depend on another package for its data
-        std::map<NVRA, bool> _is_shared;
+        std::map<NVRA, DefaultFalseBool> _is_shared;
+        // list of packages which provide data to another package
+        std::map<NVRA, DefaultFalseBool> _provides_shared_data;
 
         // list of translation files
         std::list<std::string> _pkg_translations;
