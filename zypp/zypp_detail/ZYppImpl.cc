@@ -126,11 +126,21 @@ namespace zypp
       }
     
 
-      std::string fakearch(getenv("ZYPP_TESTSUITE_FAKE_ARCH"));
-      if ( fakearch.size() > 0 ) 
+      
+      if ( getenv("ZYPP_TESTSUITE_FAKE_ARCH") ) 
       {
-        _architecture = Arch( fakearch );
-        MIL << "ZYPP_TESTSUITE_FAKE_ARCH: Setting fake system architecture for test purpuses (warning! commit will be disabled!) to: '" << _architecture << "'" << endl;
+        Arch already_set = _architecture;
+        
+        std::string fakearch(getenv("ZYPP_TESTSUITE_FAKE_ARCH"));
+        try
+        { 
+          _architecture = Arch( fakearch );
+          MIL << "ZYPP_TESTSUITE_FAKE_ARCH: Setting fake system architecture for test purpuses (warning! commit will be disabled!) to: '" << _architecture << "'" << endl;
+        }
+        catch(...)
+        {
+          ERR << "ZYPP_TESTSUITE_FAKE_ARCH: Wrong architecture specified on env variable, using: '" << _architecture << "'" << endl;
+        }
       }
     }
 

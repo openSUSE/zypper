@@ -172,11 +172,12 @@ namespace zypp
 
     pid_t lockerPid()
     {
+      pid_t curr_pid = getpid();
       pid_t locked_pid = 0;
       long readpid = 0;
 
       fscanf(_zypp_lockfile, "%ld", &readpid);
-      MIL << "read: Lockfile " << ZYPP_LOCK_FILE << " has pid " << readpid << std::endl;
+      MIL << "read: Lockfile " << ZYPP_LOCK_FILE << " has pid " << readpid << " (our pid: " << curr_pid << ") "<< std::endl;
       locked_pid = (pid_t) readpid;
       return locked_pid;
     }
@@ -190,6 +191,7 @@ namespace zypp
 
       if ( lockFileExists() )
       {
+        MIL << "found lockfile " << lock_file << std::endl;
         openLockFile("r");
         shLockFile();
 
@@ -245,12 +247,18 @@ namespace zypp
       }
       else
       {
+        MIL << "no lockfile " << lock_file << " found" << std::endl;
         if ( geteuid() == 0 )
         {
+          MIL << "running as root. Will attempt to create " << lock_file << std::endl;
           createLockFile();
         // now open it for reading
           openLockFile("r");
           shLockFile();
+        }
+        else
+        {
+          MIL << "running as user. Skipping creating " << lock_file << std::endl;
         }
         return false;
       }
