@@ -1,8 +1,8 @@
 -------------------------------------------------------------------
 Thu May 18 16:08:42 CEST 2006 - kkaempf@suse.de
 
-- decrease logging in DiskUsageCounter (#163186)
-- rev 3403
+- decrease logging in DiskUsageCounter and Modalias (#163186)
+- rev 3406
 
 -------------------------------------------------------------------
 Thu May 18 10:43:47 CEST 2006 - ma@suse.de
