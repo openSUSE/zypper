@@ -98,7 +98,7 @@ namespace zypp
 			    if (nameit->status().isInstalled())
 			    {
 				found_installed = true;
-				DBG << name << '-' << (*it)->edition() << ": found already installed package (" << (*nameit)->edition() << ")" << std::endl;
+				XXX << name << '-' << (*it)->edition() << ": found already installed package (" << (*nameit)->edition() << ")" << std::endl;
 			    }
 			}
 			else
@@ -107,7 +107,7 @@ namespace zypp
 			    du = pkg_from_source->diskusage();
 			    if (du.size() > 0)
 			    {
-				DBG << name << '-' << (*it)->edition() << ": using DiskUsage from another Package object (" << (*nameit)->edition() << ")" << std::endl;
+				XXX << name << '-' << (*it)->edition() << ": using DiskUsage from another Package object (" << (*nameit)->edition() << ")" << std::endl;
 				break;
 			    }
 			}
@@ -118,7 +118,7 @@ namespace zypp
 			{
 			    // just freshen the package, don't change du statistics
 			    found_installed = true;
-			    DBG << name << '-' << (*it)->edition() << ": found already installed package (" << (*nameit)->edition() << ")" << std::endl;
+			    XXX << name << '-' << (*it)->edition() << ": found already installed package (" << (*nameit)->edition() << ")" << std::endl;
 			}
 			else if (pkg_from_source->diskusage().size() > 0)
 			{
@@ -134,7 +134,7 @@ namespace zypp
 	    // don't subtract the disk usage for updated package
 	    if (du.size() == 0 && du_another_package.size() > 0 && !(rem && found_to_install))
 	    {
-		DBG << name << '-' << (*it)->edition() << ": using DU info from version " << edition_another_package << std::endl;
+		XXX << name << '-' << (*it)->edition() << ": using DU info from version " << edition_another_package << std::endl;
 		du = du_another_package;
 	    }
 	}
