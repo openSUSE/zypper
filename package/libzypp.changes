@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu May 18 16:51:41 CEST 2006 - jsrain@suse.cz
+
+- fixed media number of package retrieved as a part of a patch
+  (#174841)
+- rev 3409
+
+-------------------------------------------------------------------
 Thu May 18 16:16:21 CEST 2006 - dmacvicar@suse.de
 
 - fix missing package descriptions due to filtered packages

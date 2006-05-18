@@ -196,6 +196,7 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
       {
 	xml_assert(formatNode);
 	dataPtr->installOnly = false;
+	dataPtr->media = "1";
       
 	// FIXME move the respective method to a common class, inherit it  
 	YUMPrimaryParser prim;
@@ -452,6 +453,7 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	shared_ptr<YUMPatchPackage> package(new YUMPatchPackage);
 	package->type = _helper.attribute(formatNode,"type");
 	package->installOnly = false;
+	package->media = "1";
       
 	// FIXME move the respective method to a common class, inherit it  
 	YUMPrimaryParser prim;
