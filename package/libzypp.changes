@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu May 18 16:16:21 CEST 2006 - dmacvicar@suse.de
+
+- fix missing package descriptions due to filtered packages
+  by incompatible architectures. (#159109)
+- rev 3404
+
+-------------------------------------------------------------------
 Thu May 18 16:08:42 CEST 2006 - kkaempf@suse.de
 
 - decrease logging in DiskUsageCounter and Modalias (#163186)
