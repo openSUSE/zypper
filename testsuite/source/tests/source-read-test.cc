@@ -38,22 +38,18 @@ bool CustomSort(const std::string &a, const std::string &b)
   return a < b; //example comparison.
 }
 
+static void help()
+{
+  cerr << "Usage: dumpstore [--arch x] [--descr] [--deps]" << endl;
+}
 
-/******************************************************************
-**
-**
-**	FUNCTION NAME : main
-**	FUNCTION TYPE : int
-**
-**	DESCRIPTION :
-*/
 int main( int argc, char * argv[] )
 {
     bool descr = false;
     bool deps = false;
     
     if (argc < 2) {
-	cerr << "Usage: source-read-test [--arch x] <susedir>" << endl;
+      help();
 	exit (1);
     }
     //zypp::base::LogControl::instance().logfile( "-" );
@@ -75,7 +71,7 @@ int main( int argc, char * argv[] )
     while ( argpos  < argc - 1 )
     {
       if ((strcmp( argv[argpos], "-h") == 0) || (strcmp( argv[argpos], "--help") == 0)) {
-        cerr << "Usage: dumpstore [--descr] [--deps]" << endl;
+        help();
         exit (1);
       }
       if (strcmp( argv[argpos], "--arch") == 0) {
