@@ -910,7 +910,7 @@ show_pool( ResPool pool )
 	    || it->status().transacts()				// or transacts
 	    || !it->status().isUndetermined())			// or established status
 	{
-	    _XDEBUG( count << ": " << *it );
+	    _DEBUG( count << ": " << *it );
 	}
     }
     _XDEBUG( "---------------------------------------" );
