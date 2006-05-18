@@ -1,140 +1,100 @@
 #include <ctime>
+#include <cerrno>
 #include <iostream>
 #include <fstream>
-#include "Tools.h"
 
+#include "Printing.h"
 #include <zypp/base/IOStream.h>
-#include <zypp/base/PtrTypes.h>
-#include <zypp/base/Exception.h>
-#include <zypp/base/ProvideNumericId.h>
-
-#include "zypp/ZYppFactory.h"
-#include "zypp/ResPoolProxy.h"
-#include <zypp/SourceManager.h>
-#include <zypp/SourceFactory.h>
-
-#include "zypp/NVRAD.h"
-#include "zypp/ResPool.h"
-#include "zypp/ResFilters.h"
-#include "zypp/CapFilters.h"
-#include "zypp/Package.h"
-#include "zypp/Language.h"
-#include "zypp/NameKindProxy.h"
+#include <zypp/ExternalProgram.h>
 
 
 using namespace std;
 using namespace zypp;
-using namespace zypp::ui;
-using namespace zypp::functor;
 
 ///////////////////////////////////////////////////////////////////
 
-static const Pathname sysRoot( "/Local/ROOT" );
-
-///////////////////////////////////////////////////////////////////
-
-struct DebugStats : public std::unary_function<ResObject::constPtr, bool>
+bool systemReadLine( ExternalProgram & processx, string & line )
 {
-  bool operator()( const ResObject::constPtr & ptr )
-  {
-    Source_Ref::NumericId srcid = ptr->source().numericId();
-    unsigned mediaid = mediaId( ptr );
-    USR << "S"  << srcid
-        << "/M" << mediaid
-        << " "  << ptr
-        << endl;
-    return true;
-  }
+  ExternalProgram * process = &processx;
+    line.erase();
 
-  unsigned mediaId( const ResObject::constPtr & ptr ) const
-  {
-    Package::constPtr pkg( asKind<Package>(ptr) );
-    return pkg ? pkg->mediaId() : 0;
-  }
+    if ( process == NULL )
+	return false;
 
+    if ( process->inputFile() )
+      {
+        process->setBlocking( false );
+        FILE * inputfile = process->inputFile();
+        int    inputfileFd = ::fileno( inputfile );
+        do
+        {
+          /* Watch inputFile to see when it has input. */
+          fd_set rfds;
+          FD_ZERO( &rfds );
+          FD_SET( inputfileFd, &rfds );
 
-  public:
-    typedef std::map<ResolvableTraits::KindType,Counter<unsigned> > KindMap;
-    Counter<unsigned> _total;
-    KindMap           _perKind;
-};
+          /* Wait up to 5 seconds. */
+          struct timeval tv;
+          tv.tv_sec = 5;
+          tv.tv_usec = 0;
 
-inline std::ostream & operator<<( std::ostream & str, const DebugStats & obj )
-{ return str; }
+          int retval = select( inputfileFd+1, &rfds, NULL, NULL, &tv );
 
-template <class _Iterator>
-  std::ostream & vdumpPoolStats( std::ostream & str,
-                                 _Iterator begin_r, _Iterator end_r )
-  {
-    DebugStats stats;
-    std::for_each( begin_r, end_r,
-                   functor::functorRef<bool,ResObject::constPtr>(stats) );
-    return str << stats;
-  }
+          if ( retval == -1 )
+            {
+              ERR << "select error: " << strerror(errno) << endl;
+              if ( errno != EINTR )
+                return false;
+            }
+          else if ( retval )
+            {
+              // Data is available now.
+              size_t linebuffer_size = 0;
+              char * linebuffer = 0;
+              ssize_t nread = getline( &linebuffer, &linebuffer_size, inputfile );
+              DBG << "getline " << nread << " " << ::feof( inputfile ) << " " << ::ferror( inputfile ) << endl;
 
-///////////////////////////////////////////////////////////////////
+              if ( nread == -1 )
+                {
+                  if ( ::feof( inputfile ) )
+                    return line.size(); // in case of pending output
+                }
+              else
+                {
+                  if ( nread > 0 )
+                    {
+                      if ( linebuffer[nread-1] == '\n' )
+                        --nread;
+                      line += string( linebuffer, nread );
+                    }
 
-inline bool selectForTransact( const NameKindProxy & nkp )
-{
-  if ( nkp.availableEmpty() )
+                  if ( ! ::ferror( inputfile ) || ::feof( inputfile ) )
+                    return true;
+                }
+              clearerr( inputfile );
+            }
+          else
+            {
+              // No data within time.
+              if ( ! process->running() )
+                return false;
+            }
+
+        } while ( true );
+        DBG << "----------------------------------------" << endl;
+      }
+
     return false;
-
-  return nkp.availableBegin()->status().setTransact( true, ResStatus::USER );
 }
-///////////////////////////////////////////////////////////////////
-namespace zypp
-{ /////////////////////////////////////////////////////////////////
-#if 0
-  ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : EnumerationClass<_Derived>
-  //
-  /** EnumerationClass.
-  */
-  template<class _Derived>
-    class EnumerationClass
-    {
-    public:
-      /** The enum */
-      typedef _Derived::for_use_in_switch for_use_in_switch;
 
-      /** String representation of enumarator. */
-      const std::string & asString() const;
+int systemStatus( ExternalProgram & process )
+{
+  int exit_code = process.close();
+  process.kill();
 
-      /** Enumarator provided for use in \c switch statement. */
-      for_use_in_switch inSwitch() const
-      { return _op };
-
-    protected:
-      /** Ctor */
-      EnumerationClass( for_use_in_switch op_r )
-      : _op( op_r )
-      {}
-    private:
-      /** The enum value. */
-      for_use_in_switch _op;
-    };
-  ///////////////////////////////////////////////////////////////////
-
-  /** \relates EnumerationClass Stream output. */
-  template<class _Derived>
-    inline std::ostream & operator<<( std::ostream & str, const EnumerationClass<_Derived> & obj )
-    { return str << obj.asString(); }
-
-  /** \relates EnumerationClass Stream output. */
-  template<class _Derived>
-    inline bool operator==( const EnumerationClass<_Derived> & lhs, const EnumerationClass<_Derived> & rhs )
-    { return lhs.inSwitch() == rhs.inSwitch(); }
-
-  /** \relates PatchCategory */
-  template<class _Derived>
-    inline bool operator!=( const EnumerationClass<_Derived> & lhs, const EnumerationClass<_Derived> & rhs )
-    { return ! ( lhs == rhs ); }
-#endif
-  /////////////////////////////////////////////////////////////////
-} // namespace zypp
-///////////////////////////////////////////////////////////////////
-
+  MIL << "EXIT CODE " << exit_code << endl;
+  return exit_code;
+}
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -145,33 +105,20 @@ int main( int argc, char * argv[] )
   //zypp::base::LogControl::instance().logfile( "xxx" );
   INT << "===[START]==========================================" << endl;
 
-  ResPool pool( getZYpp()->pool() );
-  Source_Ref src1( createSource( "dir:/mounts/machcd2/CDs/SLES-10-CD-i386-Beta10/CD1" ) );
-  getZYpp()->addResolvables( src1.resolvables() );
-  INT << "Pool: " << pool << endl;
-  getZYpp()->removeResolvables( src1.resolvables() );
-  INT << "Pool: " << pool << endl;
+  const char* args[] = {
+    "./xx",
+    NULL
+  };
 
-  vdumpPoolStats( INT << "Kind: ",
-                  pool.byKindBegin<Package>(),
-                  pool.byKindEnd<Package>() ) << endl;
-
-  vdumpPoolStats( INT << "Name: ",
-                  pool.byNameBegin( "rpm" ),
-                  pool.byNameEnd( "rpm" ) ) << endl;
-
-  for_each( pool.byCapabilityIndexBegin( "rpm", Dep::PROVIDES ),
-            pool.byCapabilityIndexEnd( "rpm", Dep::PROVIDES ),
-            PrintOn<CapAndItem>(SEC) );
-
-#if 0
-
-  vdumpPoolStats( INT << "Transacting: ",
-                  make_filter_begin<resfilter::ByTransact>(pool),
-                  make_filter_end<resfilter::ByTransact>(pool) ) << endl;
-
-#endif
-
+  // Launch the program with default locale
+  ExternalProgram process( args, ExternalProgram::Discard_Stderr, false, -1, true );
+  sleep( 5 );
+  string line;
+  while ( systemReadLine( process, line ) )
+    {
+      INT << '{' << line << '}' << endl;
+    }
+  systemStatus( process );
 
   INT << "===[END]============================================" << endl << endl;
   return 0;
