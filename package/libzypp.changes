@@ -3,7 +3,7 @@ Thu May 18 19:08:52 CEST 2006 - ma@suse.de
 
 - Prevent against daemons launched in rpm %post, that do not close
   their filedescriptors. (#174548)
-- Version 1.0.1
+- Version 1.0.1; rev 3413
 
 -------------------------------------------------------------------
 Thu May 18 16:51:41 CEST 2006 - jsrain@suse.cz
