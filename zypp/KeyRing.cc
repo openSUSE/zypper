@@ -330,10 +330,14 @@ namespace zypp
 
   PublicKey KeyRing::Impl::readPublicKey( const Pathname &keyfile )
   {
+    TmpDir dir;
+    
     const char* argv[] =
     {
       "gpg",
       "--no-default-keyring",
+      "--homedir",
+      dir.path().asString().c_str(),
       "--with-fingerprint",
       "--with-colons",
       "--quiet",
