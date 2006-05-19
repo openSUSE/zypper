@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May 19 12:53:44 CEST 2006 - dmacvicar@suse.de
+
+- fix missing homedir option for gpg (#171055)
+- rev 3415 
+
+-------------------------------------------------------------------
 Thu May 18 19:08:52 CEST 2006 - ma@suse.de
 
 - Prevent against daemons launched in rpm %post, that do not close
