@@ -1,13 +1,19 @@
 -------------------------------------------------------------------
+Mon May 22 17:19:25 CEST 2006 - ma@suse.de
+
+- Order all objects according to prerequirements, not just packages.
+  (#173690)
+
+-------------------------------------------------------------------
 Mon May 22 15:57:43 CEST 2006 - schubi@suse.de
 
-- Added new translation 
+- Added new translation
 
 -------------------------------------------------------------------
 Fri May 19 12:53:44 CEST 2006 - dmacvicar@suse.de
 
 - fix missing homedir option for gpg (#171055)
-- rev 3415 
+- rev 3415
 
 -------------------------------------------------------------------
 Thu May 18 19:08:52 CEST 2006 - ma@suse.de

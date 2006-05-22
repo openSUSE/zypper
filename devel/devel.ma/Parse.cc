@@ -18,6 +18,7 @@
 #include "zypp/Package.h"
 #include "zypp/Language.h"
 #include "zypp/NameKindProxy.h"
+#include "zypp/pool/GetResolvablesToInsDel.h"
 
 
 using namespace std;
@@ -81,11 +82,7 @@ template <class _Iterator, class _Filter, class _Function>
 struct PrintPoolItem
 {
   void operator()( const PoolItem & pi ) const
-  {
-    USR << "S" << pi->source().numericId()
-        << "/M" << pi->sourceMediaNr()
-        << " " << pi << endl;
-  }
+  { USR << pi << " (" << pi.resolvable().get() << ")" <<endl; }
 };
 
 template <class _Iterator>
@@ -160,65 +157,6 @@ inline bool selectForTransact( const NameKindProxy & nkp )
 
 ///////////////////////////////////////////////////////////////////
 
-namespace zypp
-{
-  namespace pool
-  {
-    struct CollectTransacting
-    {
-      CollectTransacting( const ResPool & pool )
-      {
-        dumpPoolStats( SEC,
-                       make_filter_begin<resfilter::ByTransact>(pool),
-                       make_filter_end<resfilter::ByTransact>(pool) );
-      }
-
-      typedef std::list<PoolItem> PoolItemList;
-      PoolItemSet _toInstall;
-      PoolItemSet _toDelete;
-      PoolItemSet _skipToDelete;
-    };
-#if 0
-  struct CollectTransacting
-  {
-    typedef std::list<PoolItem> PoolItemList;
-
-    void operator()( const PoolItem & pi )
-    {
-      if ( pi.status().isToBeInstalled() )
-        {
-          _toInstall.insert( pi );
-        }
-      else if ( pi.status().isToBeUninstalled() )
-        {
-          if ( pi.status().isToBeUninstalledDueToObsolete()
-               || pi.status().isToBeUninstalledDueToUpgrade() )
-            _skipToDelete.insert( pi );
-          else
-            _toDelete.insert( pi );
-        }
-    }
-
-    PoolItemSet _toInstall;
-    PoolItemSet _toDelete;
-    PoolItemSet _skipToDelete;
-  };
-#endif
-
-  std::ostream & operator<<( std::ostream & str, const CollectTransacting & obj )
-  {
-    str << "CollectTransacting:" << endl;
-    dumpPoolStats( str << " toInstall: ",
-                   obj._toInstall.begin(), obj._toInstall.end() ) << endl;
-    dumpPoolStats( str << " toDelete: ",
-                   obj._toDelete.begin(), obj._toDelete.end() ) << endl;
-    dumpPoolStats( str << " skipToDelete: ",
-                   obj._skipToDelete.begin(), obj._skipToDelete.end() ) << endl;
-    return str;
-  }
-  }
-}
-
 /******************************************************************
 **
 **      FUNCTION NAME : main
@@ -233,17 +171,19 @@ int main( int argc, char * argv[] )
 
   if ( 1 )
     {
+      zypp::base::LogControl::TmpLineWriter shutUp;
       getZYpp()->initTarget( sysRoot );
-      getZYpp()->addResolvables( getZYpp()->target()->resolvables(), true );
+      //getZYpp()->addResolvables( getZYpp()->target()->resolvables(), true );
       USR << "Added target: " << pool << endl;
     }
 
   if ( 1 ) {
+    zypp::base::LogControl::TmpLineWriter shutUp;
     SourceManager::sourceManager()->restore( sysRoot );
     if ( SourceManager::sourceManager()->allSources().empty() )
       {
-        Source_Ref src1( createSource( "dir:/mounts/machcd2/CDs/SLES-10-CD-i386-Beta10/CD1" ) );
-        Source_Ref src2( createSource( "dir:/mounts/machcd2/kukuk/sles10-sp-i386/CD1" ) );
+        Source_Ref src1( createSource( "dir:///Local/SUSE-Linux-10.1-Build_830-i386/CD1" ) );
+        Source_Ref src2( createSource( "dir:///Local/SUSE-Linux-10.1-Build_830-Addon-BiArch/CD1" ) );
         SourceManager::sourceManager()->addSource( src1 );
         SourceManager::sourceManager()->addSource( src2 );
         SourceManager::sourceManager()->store( sysRoot, true );
@@ -255,7 +195,8 @@ int main( int argc, char * argv[] )
                ) << endl;
   }
 
-  USR << pool << endl;
+  MIL << *SourceManager::sourceManager() << endl;
+  MIL << pool << endl;
   //dumpRange( USR << "Pool: " << pool,
   //           pool.begin(), pool.end()
   //           ) << endl;
@@ -275,24 +216,33 @@ int main( int argc, char * argv[] )
       selectForTransact( nameKindProxy<Selection>( pool, "Office" ) );
     }
 
+  //getZYpp()->commit( ZYppCommitPolicy() ),
+
   vdumpPoolStats( USR << "Transacting:"<< endl,
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
-
   bool eres, rres;
   {
     zypp::base::LogControl::TmpLineWriter shutUp;
+    zypp::base::LogControl::instance().logfile( "SOLVER" );
     eres = getZYpp()->resolver()->establishPool();
     rres = getZYpp()->resolver()->resolvePool();
   }
   MIL << "est " << eres << " slv " << rres << endl;
 
-  vdumpPoolStats( USR << "Transacting:"<< endl,
+  dumpPoolStats( USR << "Transacting:"<< endl,
                   make_filter_begin<resfilter::ByTransact>(pool),
                   make_filter_end<resfilter::ByTransact>(pool) ) << endl;
 
 
+  pool::GetResolvablesToInsDel collect( pool );
+  MIL << "GetResolvablesToInsDel:" << endl << collect << endl;
+
+  dumpRange( WAR << "toInstall: " << endl,
+             collect._toInstall.begin(), collect._toInstall.end() ) << endl;
+  dumpRange( ERR << "toDelete: " << endl,
+             collect._toDelete.begin(), collect._toDelete.end() ) << endl;
 
 
   INT << "===[END]============================================" << endl << endl;

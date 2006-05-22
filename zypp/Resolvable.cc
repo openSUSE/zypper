@@ -14,6 +14,9 @@
 #include "zypp/Resolvable.h"
 #include "zypp/detail/ResolvableImpl.h"
 
+#include "zypp/ResObject.h"
+#include "zypp/Source.h"
+
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////
@@ -45,7 +48,14 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   std::ostream & Resolvable::dumpOn( std::ostream & str ) const
-  { return _pimpl->dumpOn( str ); }
+  {
+    const ResObject * obj = dynamic_cast<const ResObject *>(this);
+    if ( obj )
+      {
+        str << "[S" << obj->source().numericId() << ":" << obj->sourceMediaNr() << "]";
+      }
+    return _pimpl->dumpOn( str );
+  }
 
   const Resolvable::Kind & Resolvable::kind() const
   { return _pimpl->kind(); }
