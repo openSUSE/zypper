@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon May 22 19:03:20 CEST 2006 - mvidner@suse.cz
+
+- Added SourceManager::findSourceByUrl to overcome alias mismatches
+  (#177543).
+- rev 3420
+
+-------------------------------------------------------------------
 Mon May 22 17:19:25 CEST 2006 - ma@suse.de
 
 - Order all objects according to prerequirements, not just packages.

@@ -463,11 +463,23 @@ namespace zypp
     {
 	if (it->second.alias() == alias_r) {
 	    return it->second;
-	    break;
 	}
-
     }
     ZYPP_THROW(Exception("Unknown source name '"+alias_r+"'"));
+    /*NOTREACHED*/
+    return it->second; // just to keep gcc happy
+  }
+
+  Source_Ref SourceManager::findSourceByUrl(const Url & url_r)
+  {
+    SourceMap::iterator it;
+    for (it = _sources.begin(); it != _sources.end(); ++it)
+    {
+	if (it->second.url().asCompleteString() == url_r.asCompleteString()) {
+	    return it->second;
+	}
+    }
+    ZYPP_THROW(Exception("Unknown source URL '"+url_r.asString()+"'"));
     /*NOTREACHED*/
     return it->second; // just to keep gcc happy
   }

@@ -178,6 +178,16 @@ namespace zypp
     Source_Ref findSource(const std::string & alias_r);
 
     /**
+     * Find a source with a specified URL.
+     * URLs are unique in zenworks but NOT in zypp.
+     * A bug in SL 10.1 causes alias mismatches so we have to resort to URLs.
+     * #177543
+     *
+     * \throws Exception
+     */
+    Source_Ref findSourceByUrl(const Url & url_r);
+
+    /**
      * Return the list of the currently enabled sources
      *
      */
