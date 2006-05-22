@@ -3,6 +3,7 @@ Mon May 22 17:19:25 CEST 2006 - ma@suse.de
 
 - Order all objects according to prerequirements, not just packages.
   (#173690)
+- rev 3419
 
 -------------------------------------------------------------------
 Mon May 22 15:57:43 CEST 2006 - schubi@suse.de
