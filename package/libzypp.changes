@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon May 22 15:57:43 CEST 2006 - schubi@suse.de
+
+- Added new translation 
+
+-------------------------------------------------------------------
 Fri May 19 12:53:44 CEST 2006 - dmacvicar@suse.de
 
 - fix missing homedir option for gpg (#171055)
