@@ -3,7 +3,7 @@ Mon May 22 20:51:59 CEST 2006 - ma@suse.de
 
 - Do not violate install order when restricting commit to a certain
   mediaNumber. (#170079)
-- Version 1.1.0
+- Version 1.1.0; rev 3423
 
 -------------------------------------------------------------------
 Mon May 22 19:03:20 CEST 2006 - mvidner@suse.cz
