@@ -48,14 +48,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   std::ostream & Resolvable::dumpOn( std::ostream & str ) const
-  {
-    const ResObject * obj = dynamic_cast<const ResObject *>(this);
-    if ( obj )
-      {
-        str << "[S" << obj->source().numericId() << ":" << obj->sourceMediaNr() << "]";
-      }
-    return _pimpl->dumpOn( str );
-  }
+  { return _pimpl->dumpOn( str ); }
 
   const Resolvable::Kind & Resolvable::kind() const
   { return _pimpl->kind(); }

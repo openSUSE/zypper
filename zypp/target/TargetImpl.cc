@@ -145,8 +145,16 @@ namespace zypp
 
 
 
-    ZYppCommitResult TargetImpl::commit( ResPool pool_r, const ZYppCommitPolicy & policy_r )
+    ZYppCommitResult TargetImpl::commit( ResPool pool_r, const ZYppCommitPolicy & policy_rX )
     {
+      // ----------------------------------------------------------------- //
+      // Fake outstanding YCP fix: Honour restriction to media 1
+      // at installation, but install all remaining packages if post-boot.
+      ZYppCommitPolicy policy_r( policy_rX );
+      if ( policy_r.restrictToMedia() > 1 )
+        policy_r.allMedia();
+      // ----------------------------------------------------------------- //
+
       MIL << "TargetImpl::commit(<pool>, " << policy_r << ")" << endl;
       ZYppCommitResult result;
 #warning Commit does not provide ZYppCommitResult::_errors
@@ -171,20 +179,25 @@ namespace zypp
         TargetImpl::PoolItemList current_install;
         TargetImpl::PoolItemList current_srcinstall;
 
+        // Collect until the 1st package from an unwanted media occurs.
+        // Further collection could violate install order.
+        bool hitUnwantedMedia = false;
         for (TargetImpl::PoolItemList::iterator it = to_install.begin(); it != to_install.end(); ++it)
         {
-          Resolvable::constPtr res( it->resolvable() );
-          Package::constPtr pkg( asKind<Package>(res) );
-          if (pkg && policy_r.restrictToMedia() != pkg->sourceMediaNr())								// check medianr for packages only
-          {
-            XXX << "Package " << *pkg << ", wrong media " << pkg->sourceMediaNr() << endl;
-            result._remaining.push_back( *it );
-          }
+          ResObject::constPtr res( it->resolvable() );
+
+          if ( hitUnwantedMedia
+               || ( res->sourceMediaNr() && res->sourceMediaNr() != policy_r.restrictToMedia() ) )
+            {
+              hitUnwantedMedia = true;
+              result._remaining.push_back( *it );
+            }
           else
-          {
-            current_install.push_back( *it );
-          }
+            {
+              current_install.push_back( *it );
+            }
         }
+
         TargetImpl::PoolItemList bad = commit( current_install, policy_r, pool_r );
         result._remaining.insert(result._remaining.end(), bad.begin(), bad.end());
 

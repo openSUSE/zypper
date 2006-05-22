@@ -101,6 +101,9 @@ namespace zypp
     /** Dtor */
     virtual ~ResObject();
 
+    /** Helper for stream output */
+    virtual std::ostream & dumpOn( std::ostream & str ) const;
+
   private:
     friend class detail::ImplConnect;
     /** Access implementation */

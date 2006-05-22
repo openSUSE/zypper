@@ -39,6 +39,17 @@ namespace zypp
 
   ///////////////////////////////////////////////////////////////////
   //
+  //	METHOD NAME : ResObject::dumpOn
+  //	METHOD TYPE : std::ostream &
+  //
+  std::ostream & ResObject::dumpOn( std::ostream & str ) const
+  {
+    str << "[S" << source().numericId() << ":" << sourceMediaNr() << "]";
+    return Resolvable::dumpOn( str );
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  //
   //	ResObject interface forwarded to implementation
   //
   ///////////////////////////////////////////////////////////////////
