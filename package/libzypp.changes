@@ -3,6 +3,7 @@ Tue May 23 17:26:41 CEST 2006 - ma@suse.de
 
 - Added PoolItem_Ref::statusReset. Resets the PoolItem status without
   loosing autoprotection (eg. for foreign vendor). (assists #177469)
+- rev 3431
 
 -------------------------------------------------------------------
 Tue May 23 17:04:04 CEST 2006 - jsrain@suse.cz
