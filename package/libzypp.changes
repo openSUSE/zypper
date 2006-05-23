@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue May 23 20:53:27 CEST 2006 - dmacvicar@suse.de
+
+- dont accept corrupt sources, improve logs 
+
+-------------------------------------------------------------------
 Tue May 23 17:26:41 CEST 2006 - ma@suse.de
 
 - Added PoolItem_Ref::statusReset. Resets the PoolItem status without
