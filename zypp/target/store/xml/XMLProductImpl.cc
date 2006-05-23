@@ -41,14 +41,8 @@ namespace zypp
     Label XMLProductImpl::vendor() const 
     { return _vendor; } 
 
-    TranslatedText XMLProductImpl::summary() const 
-    { return _summary; }
-
     TranslatedText XMLProductImpl::shortName() const
     { return _short_name; }
-    
-    TranslatedText XMLProductImpl::description() const 
-    { return _description; }
     
     Url XMLProductImpl::releaseNotesUrl() const
     { return _release_notes_url; }

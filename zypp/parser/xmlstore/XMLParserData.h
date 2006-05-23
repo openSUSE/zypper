@@ -13,6 +13,8 @@
 #include "zypp/base/ReferenceCounted.h"
 #include "zypp/base/NonCopyable.h"
 #include "zypp/Pathname.h"
+#include "zypp/ByteCount.h"
+#include "zypp/Date.h"
 #include "zypp/TranslatedText.h"
 #include <string>
 #include <list>
@@ -65,6 +67,21 @@ namespace zypp {
         std::list<XMLDependency> suggests;
         std::list<XMLDependency> supplements;
         std::list<XMLDependency> enhances;
+        
+        // in the future move above to XMLResolvableData
+        TranslatedText summary;
+        TranslatedText description;
+        
+        TranslatedText install_notify;
+        TranslatedText delete_notify;
+        TranslatedText license_to_confirm;
+        std::string vendor;
+        ByteCount size;
+        ByteCount archive_size;
+        bool install_only;
+        Date build_time;
+        Date install_time;
+        
       };
 
       /**
@@ -74,8 +91,6 @@ namespace zypp {
       {
       public:
         XMLPatternData();
-        TranslatedText summary;
-        TranslatedText description;
         
         std::string default_;
         std::string userVisible;
@@ -89,9 +104,6 @@ namespace zypp {
         public:
           XMLLanguageData() {};
           ~XMLLanguageData() {};
-
-          TranslatedText summary;
-          TranslatedText description;
       };
       
       class XMLProductData : public XMLResObjectData
@@ -101,9 +113,6 @@ namespace zypp {
         ~XMLProductData() {};
 
         std::string type;
-        std::string vendor;
-        TranslatedText summary;
-        TranslatedText description;
 	TranslatedText short_name;
         // those are suse specific tags
         std::string releasenotesurl;
@@ -146,8 +155,6 @@ namespace zypp {
           std::string patchId;
           std::string timestamp;
           std::string engine;
-          TranslatedText summary;
-          TranslatedText description;
           std::string category;
           bool rebootNeeded;
           bool packageManager;

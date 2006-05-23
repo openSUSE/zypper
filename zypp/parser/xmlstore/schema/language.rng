@@ -11,11 +11,5 @@
   </define>
   <define name="language">
     <ref name="resolvable-data"/>
-    <oneOrMore>
-      <ref name="element-summary"/>
-    </oneOrMore>
-    <oneOrMore>
-      <ref name="element-description"/>
-    </oneOrMore>
   </define>
 </grammar>

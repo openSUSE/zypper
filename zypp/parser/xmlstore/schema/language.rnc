@@ -8,6 +8,4 @@ element-language =
   element language { language }
   
 language =
-   resolvable-data,
-   element-summary+,
-   element-description+
+   resolvable-data

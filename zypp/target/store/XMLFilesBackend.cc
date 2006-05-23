@@ -724,6 +724,15 @@ XMLFilesBackend::createPatch( const zypp::parser::xmlstore::XMLPatchData & parse
     impl->_summary = parsed.summary;
     impl->_description = parsed.summary;
 
+    impl->_install_notify = parsed.install_notify;
+    impl->_delete_notify = parsed.delete_notify;
+    impl->_license_to_confirm = parsed.license_to_confirm;
+    impl->_size = parsed.size;
+    impl->_archive_size = parsed.archive_size;
+    impl->_install_only = parsed.install_only;
+    impl->_build_time = parsed.build_time;
+    impl->_install_time = parsed.install_time;
+    
     Arch arch;
     if (!parsed.arch.empty())
       arch = Arch(parsed.arch);
@@ -801,6 +810,19 @@ XMLFilesBackend::createAtom( const zypp::parser::xmlstore::XMLPatchAtomData & pa
     
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies(parsed, ResTraits<Atom>::kind) );
+    
+    impl->_summary = parsed.summary;
+    impl->_description = parsed.summary;
+
+    impl->_install_notify = parsed.install_notify;
+    impl->_delete_notify = parsed.delete_notify;
+    impl->_license_to_confirm = parsed.license_to_confirm;
+    impl->_size = parsed.size;
+    impl->_archive_size = parsed.archive_size;
+    impl->_install_only = parsed.install_only;
+    impl->_build_time = parsed.build_time;
+    impl->_install_time = parsed.install_time;
+    
     Atom::Ptr atom = detail::makeResolvableFromImpl( dataCollect, impl);
     return atom;
   }
@@ -823,6 +845,18 @@ XMLFilesBackend::createMessage( const zypp::parser::xmlstore::XMLPatchMessageDat
     Arch arch;
     if (!parsed.arch.empty())
       arch = Arch(parsed.arch);
+    
+    impl->_summary = parsed.summary;
+    impl->_description = parsed.summary;
+
+    impl->_install_notify = parsed.install_notify;
+    impl->_delete_notify = parsed.delete_notify;
+    impl->_license_to_confirm = parsed.license_to_confirm;
+    impl->_size = parsed.size;
+    impl->_archive_size = parsed.archive_size;
+    impl->_install_only = parsed.install_only;
+    impl->_build_time = parsed.build_time;
+    impl->_install_time = parsed.install_time;
     
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies(parsed, ResTraits<Message>::kind) );
@@ -856,6 +890,18 @@ XMLFilesBackend::createScript(const zypp::parser::xmlstore::XMLPatchScriptData &
     Arch arch;
     if (!parsed.arch.empty())
       arch = Arch(parsed.arch);
+    
+    impl->_summary = parsed.summary;
+    impl->_description = parsed.summary;
+
+    impl->_install_notify = parsed.install_notify;
+    impl->_delete_notify = parsed.delete_notify;
+    impl->_license_to_confirm = parsed.license_to_confirm;
+    impl->_size = parsed.size;
+    impl->_archive_size = parsed.archive_size;
+    impl->_install_only = parsed.install_only;
+    impl->_build_time = parsed.build_time;
+    impl->_install_time = parsed.install_time;
     
     // Collect basic Resolvable data
     NVRAD dataCollect( parsed.name, Edition( parsed.ver, parsed.rel, parsed.epoch ), arch, createDependencies(parsed, ResTraits<Script>::kind));
@@ -898,10 +944,19 @@ XMLFilesBackend::createProduct( const zypp::parser::xmlstore::XMLProductData & p
   {
     detail::ResImplTraits<XMLProductImpl>::Ptr impl(new XMLProductImpl());
 
-    impl->_category = parsed.type;
-    impl->_vendor = parsed.vendor;
     impl->_summary = parsed.summary;
-    impl->_description = parsed.description;
+    impl->_description = parsed.summary;
+
+    impl->_install_notify = parsed.install_notify;
+    impl->_delete_notify = parsed.delete_notify;
+    impl->_license_to_confirm = parsed.license_to_confirm;
+    impl->_size = parsed.size;
+    impl->_archive_size = parsed.archive_size;
+    impl->_install_only = parsed.install_only;
+    impl->_build_time = parsed.build_time;
+    impl->_install_time = parsed.install_time;
+    
+    impl->_category = parsed.type;
     impl->_short_name = parsed.short_name;
 
     if ( parsed.releasenotesurl.size() > 0 )
@@ -950,9 +1005,19 @@ XMLFilesBackend::createPattern( const zypp::parser::xmlstore::XMLPatternData & p
   {
     detail::ResImplTraits<XMLPatternImpl>::Ptr impl(new XMLPatternImpl());
 
-    impl->_user_visible = ((parsed.userVisible == "false" ) ? false : true );
     impl->_summary = parsed.summary;
-    impl->_description = parsed.description;
+    impl->_description = parsed.summary;
+
+    impl->_install_notify = parsed.install_notify;
+    impl->_delete_notify = parsed.delete_notify;
+    impl->_license_to_confirm = parsed.license_to_confirm;
+    impl->_size = parsed.size;
+    impl->_archive_size = parsed.archive_size;
+    impl->_install_only = parsed.install_only;
+    impl->_build_time = parsed.build_time;
+    impl->_install_time = parsed.install_time;
+    
+    impl->_user_visible = ((parsed.userVisible == "false" ) ? false : true );
     impl->_default = ((parsed.default_ == "false" ) ? false : true );
     impl->_category = parsed.category;
     impl->_icon = parsed.icon;
@@ -982,10 +1047,20 @@ XMLFilesBackend::createSelection( const zypp::parser::xmlstore::XMLPatternData &
   {
     detail::ResImplTraits<XMLSelectionImpl>::Ptr impl(new XMLSelectionImpl());
 
-    impl->_visible = ((parsed.userVisible == "false" ) ? false : true );
     impl->_summary = parsed.summary;
+    impl->_description = parsed.summary;
+
+    impl->_install_notify = parsed.install_notify;
+    impl->_delete_notify = parsed.delete_notify;
+    impl->_license_to_confirm = parsed.license_to_confirm;
+    impl->_size = parsed.size;
+    impl->_archive_size = parsed.archive_size;
+    impl->_install_only = parsed.install_only;
+    impl->_build_time = parsed.build_time;
+    impl->_install_time = parsed.install_time;
+    
+    impl->_visible = ((parsed.userVisible == "false" ) ? false : true );
     impl->_name = parsed.name;
-    impl->_description = parsed.description;
     //impl->_default = ((parsed.default_ == "false" ) ? false : true );
     impl->_category = parsed.category.text();
 

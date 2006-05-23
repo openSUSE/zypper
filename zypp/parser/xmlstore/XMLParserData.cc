@@ -26,7 +26,7 @@ namespace zypp {
       { };
 
 
-      XMLResObjectData::XMLResObjectData()
+      XMLResObjectData::XMLResObjectData() : install_only(false)
       { }
       
       XMLPatternData::XMLPatternData()

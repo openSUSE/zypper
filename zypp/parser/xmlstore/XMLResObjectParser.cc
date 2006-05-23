@@ -19,6 +19,7 @@
 #include <libxml/tree.h>
 #include <zypp/parser/LibXMLHelper.h>
 #include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
 #include <zypp/parser/yum/schemanames.h>
 
 using namespace std;
@@ -59,7 +60,40 @@ XMLResObjectParser::parseResObjectCommonData( XMLResObjectData_Ptr dataPtr, xmlN
         dataPtr->epoch = _helper.attribute(child,"epoch");
         dataPtr->ver = _helper.attribute(child,"ver");
         dataPtr->rel = _helper.attribute(child,"rel");
+      } // FIXME move the following to a ResolvableParser?
+      else if (name == "summary") {
+        dataPtr->summary.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
       }
+      else if (name == "description") {
+        dataPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
+      }
+      else if (name == "install-notify") {
+        dataPtr->install_notify.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
+      }
+      else if (name == "delete-notify") {
+        dataPtr->delete_notify.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
+      }
+      else if (name == "license-to-confirm") {
+        dataPtr->license_to_confirm.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
+      }
+      else if (name == "vendor") {
+        dataPtr->vendor = _helper.content(child);
+      }
+      else if (name == "size") {
+        dataPtr->size = str::strtonum<int>(_helper.content(child));
+      }
+      else if (name == "archive-size") {
+        dataPtr->archive_size = str::strtonum<int>(_helper.content(child));
+      }
+      else if (name == "install-only") {
+        dataPtr->install_only = (_helper.content(child) == "true") ? true : false;
+      }
+      else if (name == "build-time") {
+        dataPtr->build_time = str::strtonum<int>(_helper.content(child));
+      }
+      else if (name == "install-time") {
+        dataPtr->install_time = str::strtonum<int>(_helper.content(child));
+      }      
     }
   }
 } 

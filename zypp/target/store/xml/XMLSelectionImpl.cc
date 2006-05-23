@@ -36,12 +36,6 @@ namespace zypp
     XMLSelectionImpl::~XMLSelectionImpl()
     {}
 
-    TranslatedText XMLSelectionImpl::summary() const
-    { return _summary; }
-
-    TranslatedText XMLSelectionImpl::description() const
-    { return _description; }
-
     Label XMLSelectionImpl::category() const
     { return _category; }
 

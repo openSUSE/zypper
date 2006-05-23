@@ -33,8 +33,6 @@ atoms =
    
 patch =
    resolvable-data,
-   element-summary+,
-   element-description+,
    element id { text },
    element timestamp { text },
    element category { text },

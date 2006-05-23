@@ -11,12 +11,6 @@
   </define>
   <define name="pattern">
     <ref name="resolvable-data"/>
-    <oneOrMore>
-      <ref name="element-summary"/>
-    </oneOrMore>
-    <oneOrMore>
-      <ref name="element-description"/>
-    </oneOrMore>
     <optional>
       <element name="default">
         <ref name="boolean"/>

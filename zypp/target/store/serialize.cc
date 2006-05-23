@@ -162,12 +162,38 @@ std::string toXML( const Resolvable::constPtr &obj )
 }
 
 template<> 
+std::string toXML( const ResObject::constPtr &obj )
+{
+  stringstream out;
+
+  // access implementation
+  detail::ResImplTraits<ResObject::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
+  out << translatedTextToXML(pipp->summary(), "summary");
+  out << translatedTextToXML(pipp->description(), "description");
+  
+  out << translatedTextToXML(pipp->insnotify(), "install-notify");
+  out << translatedTextToXML(pipp->delnotify(), "delete-notify");
+  //out << "  <license-to-confirm>" << xml_escape(obj->licenseToConfirm()) << "</license-to-confirm>" << std::endl;
+  out << translatedTextToXML(pipp->licenseToConfirm(), "license-to-confirm");
+  out << "  <vendor>" << xml_escape(obj->vendor()) << "</vendor>" << std::endl;
+  out << "  <size>" << obj->size() << "<size>" << std::endl;
+  out << "  <archive-size>" << obj->archivesize() << "</archive-size>" << std::endl;
+  out << "  <install-only>" << ( obj->installOnly() ? "true" : "false" ) << "</install-only>" << std::endl;
+  out << "  <build-time>" << obj->buildtime().asSeconds() << "</build-time>" << std::endl;
+  // we assume we serialize on storeObject, set install time to NOW
+  out << "  <install-time>" << Date::now() << "</install-time>" << std::endl;
+  
+  return out.str();
+}
+
+template<> 
 std::string toXML( const Package::constPtr &obj )
 {
   stringstream out;
   out << "<package>" << std::endl;
   // reuse Resolvable information serialize function
-  toXML(static_cast<Resolvable::constPtr>(obj));
+  out << toXML(static_cast<Resolvable::constPtr>(obj));
+  out << toXML(static_cast<ResObject::constPtr>(obj));
   //out << "  <do>" << std::endl;
   //out << "      " << obj->do_script() << std::endl;
   //out << "  </do>" << std::endl;
@@ -182,6 +208,7 @@ std::string toXML( const Script::constPtr &obj )
   out << "<script>" << std::endl;
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
+  out << toXML(static_cast<ResObject::constPtr>(obj));
   out << "  <do>" << std::endl;
   out << "  <![CDATA[" << std::endl;
   
@@ -229,6 +256,7 @@ std::string toXML( const Message::constPtr &obj )
   out << "<message>" << std::endl;
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
+  out << toXML(static_cast<ResObject::constPtr>(obj));
   out << "  <text>" << xml_escape(obj->text().text()) << "</text>" << std::endl;
   out << "</message>" << std::endl;
   return out.str();
@@ -241,6 +269,7 @@ std::string toXML( const Language::constPtr &obj )
   out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
   out << "<language xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
+  out << toXML(static_cast<ResObject::constPtr>(obj));
   out << "</language>" << std::endl;
   return out.str();
 }
@@ -254,11 +283,8 @@ std::string toXML( const Selection::constPtr &obj )
   out << "<pattern xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
   
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
-
-  // access implementation
-  detail::ResImplTraits<Selection::Impl>::constPtr sipp( detail::ImplConnect::resimpl( obj ) );
-  out << translatedTextToXML(sipp->summary(), "summary");
-  out << translatedTextToXML(sipp->description(), "description");
+  out << toXML(static_cast<ResObject::constPtr>(obj));
+  
   //out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << std::endl;
   out << "  <uservisible>" << (obj->visible() ? "true" : "false" ) << "</uservisible>" << std::endl;
   out << "  <category>" << xml_escape(obj->category()) << "</category>" << std::endl;
@@ -273,6 +299,7 @@ std::string toXML( const Atom::constPtr &obj )
   stringstream out;
   out << "<atom>" << std::endl;
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
+  out << toXML(static_cast<ResObject::constPtr>(obj));
   out << "</atom>" << std::endl;
   return out.str();
 }
@@ -285,11 +312,7 @@ std::string toXML( const Pattern::constPtr &obj )
   out << "<pattern xmlns=\"http://www.novell.com/metadata/zypp/xml-store\">" << std::endl;
 
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
-
-  // access implementation
-  detail::ResImplTraits<Pattern::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
-  out << translatedTextToXML(pipp->summary(), "summary");
-  out << translatedTextToXML(pipp->description(), "description");
+  out << toXML(static_cast<ResObject::constPtr>(obj));
   
   out << "  <default>" << (obj->isDefault() ? "true" : "false" ) << "</default>" << std::endl;
   out << "  <uservisible>" << (obj->userVisible() ? "true" : "false" ) << "</uservisible>" << std::endl;
@@ -309,13 +332,12 @@ std::string toXML( const Product::constPtr &obj )
   out << toXML(static_cast<Resolvable::constPtr>(obj)) << std::endl;
   #warning "FIXME description and displayname of products"
   
+  out << toXML(static_cast<ResObject::constPtr>(obj));
+  
   // access implementation
   detail::ResImplTraits<Product::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
-  out << translatedTextToXML(pipp->summary(), "summary");
-  out << translatedTextToXML(pipp->description(), "description");
   out << translatedTextToXML(pipp->shortName(), "shortname");
   
-  out << "  <vendor>" << xml_escape(obj->vendor()) << "</vendor>" << std::endl;
   out << "  <source>" << xml_escape(obj->source().alias()) << "</source>" << std::endl;  
   out << "  <release-notes-url>" << xml_escape(obj->releaseNotesUrl().asString()) << "</release-notes-url>" << std::endl;
   out << "  <update-urls>" << std::endl;
@@ -386,11 +408,7 @@ std::string toXML( const Patch::constPtr &obj )
   
   // reuse Resolvable information serialize function
   out << toXML(static_cast<Resolvable::constPtr>(obj));
-  
-  // access implementation
-  detail::ResImplTraits<Patch::Impl>::constPtr pipp( detail::ImplConnect::resimpl( obj ) );
-  out << translatedTextToXML(pipp->summary(), "summary");
-  out << translatedTextToXML(pipp->description(), "description");
+  out << toXML(static_cast<ResObject::constPtr>(obj));
   
   out << "<id>" << xml_escape(obj->id()) << "</id>" << std::endl;
   out << "<timestamp>" << obj->timestamp().asSeconds() << "</timestamp>" << std::endl;

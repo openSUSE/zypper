@@ -160,6 +160,51 @@
       <ref name="suggests"/>
     </optional>
   </define>
+  <define name="element-install-notify">
+    <element name="install-notify">
+      <ref name="translated-text"/>
+    </element>
+  </define>
+  <define name="element-delete-notify">
+    <element name="delete-notify">
+      <ref name="translated-text"/>
+    </element>
+  </define>
+  <define name="element-license-to-confirm">
+    <element name="license-to-confirm">
+      <ref name="translated-text"/>
+    </element>
+  </define>
+  <define name="element-vendor">
+    <element name="vendor">
+      <text/>
+    </element>
+  </define>
+  <define name="element-size">
+    <element name="size">
+      <data type="nonNegativeInteger"/>
+    </element>
+  </define>
+  <define name="element-archive-size">
+    <element name="archive-size">
+      <data type="nonNegativeInteger"/>
+    </element>
+  </define>
+  <define name="element-install-only">
+    <element name="install-only">
+      <ref name="boolean"/>
+    </element>
+  </define>
+  <define name="element-build-time">
+    <element name="build-time">
+      <data type="nonNegativeInteger"/>
+    </element>
+  </define>
+  <define name="element-install-time">
+    <element name="install-time">
+      <data type="nonNegativeInteger"/>
+    </element>
+  </define>
   <define name="resolvable-data">
     <element name="name">
       <text/>
@@ -169,5 +214,38 @@
       <ref name="arch"/>
     </element>
     <ref name="dependencies"/>
+    <oneOrMore>
+      <ref name="element-summary"/>
+    </oneOrMore>
+    <oneOrMore>
+      <ref name="element-description"/>
+    </oneOrMore>
+    <zeroOrMore>
+      <ref name="element-install-notify"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="element-delete-notify"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="element-license-to-confirm"/>
+    </zeroOrMore>
+    <optional>
+      <ref name="element-vendor"/>
+    </optional>
+    <optional>
+      <ref name="element-size"/>
+    </optional>
+    <optional>
+      <ref name="element-archive-size"/>
+    </optional>
+    <optional>
+      <ref name="element-install-only"/>
+    </optional>
+    <optional>
+      <ref name="element-build-time"/>
+    </optional>
+    <optional>
+      <ref name="element-install-time"/>
+    </optional>
   </define>
 </grammar>

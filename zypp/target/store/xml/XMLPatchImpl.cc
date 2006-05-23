@@ -47,16 +47,6 @@ namespace zypp
       return _timestamp;
     }
 
-    TranslatedText XMLPatchImpl::summary() const
-    {
-      return _summary;
-    }
-
-    TranslatedText XMLPatchImpl::description() const
-    {
-      return _description;
-    }
-
     std::string XMLPatchImpl::category() const
     {
       return _category;

@@ -69,6 +69,12 @@ template<>
 std::string toXML( const Resolvable::constPtr &obj );
 
 /**
+ * Serialize ResObject properties
+ */
+template<> 
+std::string toXML( const ResObject::constPtr &obj );
+
+/**
  * Serialize properties based in the specific kind of the Resolvable
  */
 std::string castedToXML( const Resolvable::constPtr &ret );

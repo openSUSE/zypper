@@ -86,16 +86,16 @@ namespace zypp {
               patchPtr->timestamp = _helper.content(child);
             }
             else if (name == "category") {
-            patchPtr->category = _helper.content(child);
+              patchPtr->category = _helper.content(child);
             }
             else if (name == "reboot-needed") {
-            patchPtr->rebootNeeded = true;
+              patchPtr->rebootNeeded = (_helper.content(child) == "true") ? true : false;
             }
             else if (name == "affects-package-manager") {
-              patchPtr->packageManager = true;
+              patchPtr->packageManager = (_helper.content(child) == "true") ? true : false;
             }
             else if (name == "interactive") {
-              patchPtr->interactive = true;
+              patchPtr->interactive = (_helper.content(child) == "true") ? true : false;
             }
             else if (name == "atoms") {
               parseAtomsNode(patchPtr, child);

@@ -79,8 +79,47 @@ dependencies =
   supplements?,
   suggests?
 
+element-install-notify =
+    element install-notify { translated-text }
+
+element-delete-notify =
+    element delete-notify { translated-text }
+
+element-license-to-confirm =
+    element license-to-confirm { translated-text }
+
+element-vendor =
+    element vendor { text }
+
+element-size =
+    element size { xsd:nonNegativeInteger }
+
+element-archive-size =
+    element archive-size { xsd:nonNegativeInteger }
+
+element-install-only =
+    element install-only { boolean }
+
+element-build-time =
+    element build-time { xsd:nonNegativeInteger }
+
+element-install-time =
+    element install-time { xsd:nonNegativeInteger }
+
 resolvable-data = 
   element name { text },
   element-version,
   element arch { arch },
-  dependencies
+  dependencies,
+  element-summary+,
+  element-description+,
+  element-install-notify*,
+  element-delete-notify*,
+  element-license-to-confirm*,
+  element-vendor?,
+  element-size?,
+  element-archive-size?,
+  element-install-only?,
+  element-build-time?,
+  element-install-time?
+  

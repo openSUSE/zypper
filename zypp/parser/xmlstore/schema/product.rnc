@@ -9,10 +9,9 @@ element-product =
   
 product =
    resolvable-data,
-   element-summary+,
-   element-description+,
    element shortname { translated-text }*,
-   element vendor { text },
+   element vendor { text }?,
+# (vendor moved to resolvable)   
    element source { text },
    element release-notes-url { text },
    element update-urls { element update-url { text }* },

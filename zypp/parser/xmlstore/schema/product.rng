@@ -12,20 +12,17 @@
   </define>
   <define name="product">
     <ref name="resolvable-data"/>
-    <oneOrMore>
-      <ref name="element-summary"/>
-    </oneOrMore>
-    <oneOrMore>
-      <ref name="element-description"/>
-    </oneOrMore>
     <zeroOrMore>
       <element name="shortname">
         <ref name="translated-text"/>
       </element>
     </zeroOrMore>
-    <element name="vendor">
-      <text/>
-    </element>
+    <optional>
+      <element name="vendor">
+        <text/>
+      </element>
+    </optional>
+    <!-- (vendor moved to resolvable)   -->
     <element name="source">
       <text/>
     </element>

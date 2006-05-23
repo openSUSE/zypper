@@ -9,8 +9,6 @@ element-pattern =
   
 pattern =
    resolvable-data,
-   element-summary+,
-   element-description+,
    element default { boolean }?,
    element uservisible { boolean },
    element category { text },

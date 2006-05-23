@@ -40,12 +40,6 @@ namespace zypp
         return _user_visible;
       }
 
-      TranslatedText XMLPatternImpl::summary() const
-      { return _summary; }
-
-      TranslatedText XMLPatternImpl::description() const
-      { return _description; }
-
       /** */
       bool XMLPatternImpl::isDefault() const
       { return _default; }
