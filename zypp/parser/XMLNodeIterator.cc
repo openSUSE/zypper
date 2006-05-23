@@ -20,7 +20,7 @@ namespace zypp {
   namespace parser {
 
     using namespace std;
-    
+
     namespace{
       /**
        * Internal function to read from the input stream.
@@ -40,7 +40,7 @@ namespace zypp {
         streamPtr->read(buffer,bufferLen);
         return streamPtr->gcount();
       }
-    
+
       /**
        * Internal function to finish reading.
        * This is required by the xmlTextReader API, but
@@ -55,7 +55,7 @@ namespace zypp {
         return 0;
       }
     }
-    
+
     XMLParserError::XMLParserError(const char *msg,
                                        int severity,
                                        xmlTextReaderLocatorPtr locator,
@@ -65,35 +65,35 @@ namespace zypp {
     : _msg(msg), _severity(severity), _locator(locator),
     _docLine(docLine), _docColumn(docColumn)
     { }
-    
+
     XMLParserError::~XMLParserError() throw()
     { }
-    
+
     std::string XMLParserError::msg() const throw()
     {
       return _msg;
     }
-    
+
     int XMLParserError::severity() const throw()
     {
       return _severity;
     }
-    
+
     xmlTextReaderLocatorPtr XMLParserError::locator() const throw()
     {
       return _locator;
     }
-    
+
     int XMLParserError::docLine() const throw()
     {
       return _docLine;
     }
-    
+
     int XMLParserError::docColumn() const throw()
     {
       return _docColumn;
     }
-    
+
     std::string XMLParserError::position() const throw()
     {
       if (_docLine!=-1 && _docLine!=-1) {
@@ -105,7 +105,7 @@ namespace zypp {
       else
         return "";
     }
-    
+
     std::ostream& operator<<(std::ostream &out, const XMLParserError& error)
     {
       const char *errOrWarn = (error.severity() & XML_PARSER_SEVERITY_ERROR) ? "error" : "warning";
@@ -117,8 +117,8 @@ namespace zypp {
       out << std::endl;
       return out;
     }
-    
-    
+
+
     XMLNodeIteratorBase::XMLNodeIteratorBase(std::istream &input,
                                              const std::string &baseUrl,
                                              const char *validationPath)
@@ -143,52 +143,52 @@ namespace zypp {
            XMLNodeIterator has no access to their virtual functions during
            construction */
     }
-    
+
     XMLNodeIteratorBase::XMLNodeIteratorBase()
     : _error(0), _input(0), _reader(0)
     { }
-    
-    
-    
+
+
+
     XMLNodeIteratorBase::~XMLNodeIteratorBase()
     {
       if (_reader != 0)
         xmlFreeTextReader(_reader);
     }
-    
-    
+
+
     bool
     XMLNodeIteratorBase::atEnd() const
     {
       return (_error.get() != 0
               || getCurrent() == 0);
     }
-    
-    
+
+
     bool
     XMLNodeIteratorBase::operator==(const XMLNodeIteratorBase &other) const
     {
       if (atEnd())
         return other.atEnd();
       else
-        return this != & other;
+        return this == & other;
     }
-    
-    
+
+
     const XMLParserError *
     XMLNodeIteratorBase::errorStatus() const
     {
       return _error.get();
     }
-    
-    
+
+
     void XMLNodeIteratorBase::fetchNext()
     {
       xml_assert(_reader);
       int status;
       /* throw away the old entry */
       setCurrent(0);
-      
+
       if (_reader == 0) {
           /* this is a trivial iterator over (max) only one element,
              and we reach the end now. */
@@ -215,8 +215,8 @@ namespace zypp {
         }
       }
     }
-    
-    
+
+
     void
     XMLNodeIteratorBase::errorHandler(void * arg,
                                       const char * msg,
@@ -236,10 +236,10 @@ namespace zypp {
         severity = XML_PARSER_SEVERITY_WARNING;
       }
       const char *errOrWarn = (severity & XML_PARSER_SEVERITY_ERROR) ? "error" : "warning";
-      
+
 #if 0
       std::ostream& out = (severity & XML_PARSER_SEVERITY_ERROR) ? ERR : WAR;
-    
+
         /* Log it */
     out << "XML syntax " << errOrWarn << ": " << msg;
       if (obj->_error.get()) {
