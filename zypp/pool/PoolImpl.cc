@@ -244,19 +244,10 @@ namespace zypp
        * ------------------------------------------------------------------------------- */
       PoolImpl::Item item( ptr_r, ResStatus (_installed) );
 
-
       /* -------------------------------------------------------------------------------
        * 3.) Status adjustments
        * ------------------------------------------------------------------------------- */
-      if ( _installed )
-        {
-          Package::constPtr pkgptr( asKind<Package>( ptr_r ) );
-          if ( pkgptr && VendorAttr::instance().autoProtect( pkgptr->vendor() ) )
-            {
-              item.status().setTransactValue( ResStatus::LOCKED, ResStatus::USER );
-              MIL << "Protect vendor '" << pkgptr->vendor() << "' " << *pkgptr << endl;
-            }
-        }
+      // Foreign vendor protection handled in PoolItem ctor.
 
       /* -------------------------------------------------------------------------------
        * 3.) Feed

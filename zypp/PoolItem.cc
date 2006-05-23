@@ -10,9 +10,11 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+#include "zypp/base/Logger.h"
 
 #include "zypp/PoolItem.h"
+#include "zypp/Package.h"
+#include "zypp/VendorAttr.h"
 
 using std::endl;
 
@@ -34,13 +36,27 @@ namespace zypp
           const ResStatus & status_r = ResStatus() )
     : _status( status_r )
     , _resolvable( res_r )
-    {}
+    {
+      autoprotect();
+    }
 
     ResStatus & status() const
     { return _status; }
 
+    ResStatus & statusReset() const
+    {
+      if ( ! autoprotect() )
+        {
+          _status.setLock( false, zypp::ResStatus::USER );
+          _status.resetTransact( zypp::ResStatus::USER );
+        }
+      return _status;
+    }
+
     ResObject::constPtr resolvable() const
     { return _resolvable; }
+
+    bool autoprotect() const;
 
   private:
     mutable ResStatus   _status;
@@ -87,6 +103,19 @@ namespace zypp
     else
 	str << "(NULL)";
     return str;
+  }
+
+  inline bool PoolItem_Ref::Impl::autoprotect() const
+  {
+    if ( _status.isInstalled()
+         && isKind<Package>( _resolvable )
+         && VendorAttr::instance().autoProtect( _resolvable->vendor() ) )
+      {
+        _status.setLock( true, zypp::ResStatus::USER );
+        MIL << "Protect vendor '" << _resolvable->vendor() << "' " << *this << endl;
+        return true;
+      }
+    return false;
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -138,6 +167,9 @@ namespace zypp
 
   ResStatus & PoolItem_Ref::status() const
   { return _pimpl->status(); }
+
+  ResStatus & PoolItem_Ref::statusReset() const
+  { return _pimpl->statusReset(); }
 
   ResObject::constPtr PoolItem_Ref::resolvable() const
   { return _pimpl->resolvable(); }

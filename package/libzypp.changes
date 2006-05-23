@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May 23 17:26:41 CEST 2006 - ma@suse.de
+
+- Added PoolItem_Ref::statusReset. Resets the PoolItem status without
+  loosing autoprotection (eg. for foreign vendor). (assists #177469)
+
+-------------------------------------------------------------------
 Tue May 23 17:04:04 CEST 2006 - jsrain@suse.cz
 
 - added mediaNr() to PatchRpm and DeltaRpm classes
@@ -8,7 +14,7 @@ Tue May 23 17:04:04 CEST 2006 - jsrain@suse.cz
 Tue May 23 15:58:04 CEST 2006 - dmacvicar@suse.de
 
 - enable YUM license to confirm.
-  needed for #174476 
+  needed for #174476
 - adapt store to serialize and read all new resobject fields
 - use install-time to now() when serializing (#174653)
 - rev 3427

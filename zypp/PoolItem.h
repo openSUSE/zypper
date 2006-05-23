@@ -63,8 +63,11 @@ namespace zypp
     ~PoolItem_Ref();
 
   public:
-    /** Returns */
+    /** Returns the current status. */
     ResStatus & status() const;
+
+    /** Reset status (applies autoprotection). */
+    ResStatus & statusReset() const;
 
     /** Returns the ResObject::constPtr.
      * \see \ref operator->
