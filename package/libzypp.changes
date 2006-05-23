@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue May 23 15:58:04 CEST 2006 - dmacvicar@suse.de
+
+- enable YUM license to confirm.
+  needed for #174476 
+- adapt store to serialize and read all new resobject fields
+- use install-time to now() when serializing (#174653)
+- rev 3427
+
+-------------------------------------------------------------------
 Mon May 22 20:51:59 CEST 2006 - ma@suse.de
 
 - Do not violate install order when restricting commit to a certain
