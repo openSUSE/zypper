@@ -102,6 +102,10 @@ namespace zypp {
 	    else if (name == "description") {
 	      patchPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
 	    }
+	    else if (name == "license-to-confirm")
+	    {
+	      patchPtr->license_to_confirm.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
+	    }
 	    else if (name == "version") {
 	      patchPtr->epoch = _helper.attribute(child,"epoch");
 	      patchPtr->ver = _helper.attribute(child,"ver");

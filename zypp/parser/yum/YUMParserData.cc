@@ -383,6 +383,8 @@ namespace zypp {
           << "  name: " << data.name << endl
           << "  summary: " << data.summary << endl
           << "  description: " << data.description << endl
+	  << "  license to confirm:" << endl
+	  << data.license_to_confirm << endl
           << "  epoch: " << data.epoch << endl
           << "  version: " << data.ver << endl
           << "  release: " << data.rel << endl

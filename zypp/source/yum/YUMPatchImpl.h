@@ -62,27 +62,22 @@ namespace zypp
 	virtual TranslatedText summary() const;
 	/** Patch description */
 	virtual TranslatedText description() const;
+        
+        virtual TranslatedText licenseToConfirm() const;
 
 // TODO check necessarity of functions below
 	bool any_atom_selected() const;
 	void mark_atoms_to_freshen(bool freshen);
       protected:
-	/** Patch ID */
 	std::string _patch_id;
-	/** Patch time stamp */
 	Date _timestamp;
-	/** Patch summary */
 	TranslatedText _summary;
-	/** Patch description */
 	TranslatedText _description;
-	/** Patch category (recommended, security,...) */
 	std::string _category;
-	/** Does the system need to reboot to finish the update process? */
 	bool _reboot_needed;
-	/** Does the patch affect the package manager itself? */
 	bool _affects_pkg_manager;
-	/** The list of all atoms building the patch */
 	AtomList _atoms;
+        TranslatedText _license_to_confirm;
       private:
 	Source_Ref _source;
       public:

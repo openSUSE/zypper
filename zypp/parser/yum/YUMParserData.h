@@ -427,6 +427,7 @@ namespace zypp {
         std::string engine;
         TranslatedText summary;
         TranslatedText description;
+        TranslatedText license_to_confirm;
         std::string category;
         bool rebootNeeded;
         bool packageManager;

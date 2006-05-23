@@ -123,6 +123,8 @@ namespace zypp
       TranslatedText YUMPatchImpl::description() const
       { return _description; }
 
+      TranslatedText YUMPatchImpl::licenseToConfirm() const
+      { return _license_to_confirm; }
 
       std::string YUMPatchImpl::category() const
       {
