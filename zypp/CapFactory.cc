@@ -234,7 +234,7 @@ namespace zypp
 	( new capability::FileCap( refers_r, name_r ) );
 
       //split:   name:/absolute/path
-      str::regex  rx( "([^/]*):(/.*)" );
+      static const str::regex  rx( "([^/]*):(/.*)" );
       str::smatch what;
       if( str::regex_match( name_r.begin(), name_r.end(), what, rx ) )
 	{
@@ -293,7 +293,7 @@ namespace zypp
 	}
 
       //split:   hal(name) [op string]
-      str::regex  rx( "hal\\(([^)]*)\\)" );
+      static const str::regex  rx( "hal\\(([^)]*)\\)" );
       str::smatch what;
       if( str::regex_match( name_r.begin(), name_r.end(), what, rx ) )
 	{
@@ -327,7 +327,7 @@ namespace zypp
 	}
 
       //split:   modalias(name) [op string]
-      str::regex  rx( "modalias\\(([^)]*)\\)" );
+      static const str::regex  rx( "modalias\\(([^)]*)\\)" );
       str::smatch what;
       if( str::regex_match( name_r.begin(), name_r.end(), what, rx ) )
 	{
@@ -392,7 +392,7 @@ namespace zypp
 
       // strval_r has at least two words which could make 'op edition'?
       // improve regex!
-      str::regex  rx( "(.*[^ \t])([ \t]+)([^ \t]+)([ \t]+)([^ \t]+)" );
+      static const str::regex  rx( "(.*[^ \t])([ \t]+)([^ \t]+)([ \t]+)([^ \t]+)" );
       str::smatch what;
       if( str::regex_match( strval_r.begin(), strval_r.end(),what, rx ) )
         {
