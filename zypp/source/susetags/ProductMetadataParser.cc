@@ -178,7 +178,8 @@ namespace zypp
 	      volatile_content = true;
             else
             {
-              ZYPP_THROW (Exception("Corrupt source ["+ source_r.alias() +"] at URL:[" + source_r.url().asString() + "]. Unknown key: [" + key + "] with value [" + value + "]"));
+              WAR << "In source ["+ source_r.alias() +"] at URL:[" + source_r.url().asString() + "]. Unknown key: [" + key + "] with value [" + value + "]" << std::endl;
+              //ZYPP_THROW (Exception("Corrupt source ["+ source_r.alias() +"] at URL:[" + source_r.url().asString() + "]. Unknown key: [" + key + "] with value [" + value + "]"));
             }
           }
           else if (!buffer.empty())
@@ -318,7 +319,7 @@ namespace zypp
 	    }
 	  }
       }
-      
+
       void ProductMetadataParser::parseFileCheckSum( const std::string &key, const std::string &value, std::map<std::string, CheckSum> &container)
       {
         std::list<std::string> splitted;
