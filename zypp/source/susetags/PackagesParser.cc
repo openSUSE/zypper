@@ -59,7 +59,7 @@ namespace zypp
 	  {
 	    std::vector<std::string> words;
 	    if ( str::split( stag_r.value, std::back_inserter(words) ) != 4 )
-	      ZYPP_THROW( ParseException( "Expected [name version release arch], got [" + stag_r.value +"]") );
+              ZYPP_THROW( ParseException( "packages.DU - Expected [name version release arch], got [" + stag_r.value +"]") );
 
 	    _pkg_pending = true;
 	    _current_nvrad = NVRAD( words[0], Edition(words[1],words[2]), Arch(words[3]) );
@@ -71,8 +71,8 @@ namespace zypp
 	  }
 	  else
 	  {
-	    //ZYPP_THROW( ParseException( "Loc" ) );
-	    ERR << "warning found unexpected tag " << stag_r.name << std::endl;
+	    //ZYPP_THROW( ParseException( "Unknown tag" ) );
+            ERR << "packages.DU - ERROR! found unexpected tag " << stag_r.name << std::endl;
 	  }
 	}
 
@@ -96,8 +96,7 @@ namespace zypp
 	      }
 	      else
 	      {
-		ERR << "Error parsing package size entry" << "[" << *it << "]" << std::endl;
-		ZYPP_THROW( ParseException( "Dir" ) );
+                ZYPP_THROW( ParseException( std::string("Error parsing package size entry") + "[" + *it + "]" ) );
 	      }
 	    }
 	    result[_current_nvrad] = usage;
@@ -175,7 +174,7 @@ namespace zypp
 	      capset.insert( CapFactory().parse( ResTraits<Package>::kind, *it ) );
 	    }
 	    catch (Exception & excpt_r) {
-	      ZYPP_CAUGHT(excpt_r);
+              ZYPP_THROW( ParseException("Bad source ["+ _source.alias() +"] at URL:[" + _source.url().asString() + "]. Can't parse capability: [" + *it + "]" ) );
 	    }
 	  }
 	}
@@ -195,7 +194,7 @@ namespace zypp
 	    str::split( stag_r.value, std::back_inserter(words) );
 
 	    if ( str::split( stag_r.value, std::back_inserter(words) ) != 4 )
-              ZYPP_THROW( ParseException( "Pkg error, we expected NVRA here, got: " + stag_r.value ) );
+              ZYPP_THROW( ParseException("Bad source ["+ _source.alias() +"] at URL:[" + _source.url().asString() + "]. error, we expected NVRA here, got: " + stag_r.value ) );
 
 	    std::string arch = words[3];
 #warning read comment in file
@@ -224,7 +223,7 @@ namespace zypp
           {
             std::vector<std::string> words;
             if ( str::split( stag_r.value, std::back_inserter(words) ) != 2 )
-              ZYPP_THROW( ParseException( stag_r.name + " - Expected [type checksum], got [" + stag_r.value +"]") );
+              ZYPP_THROW( ParseException("Bad source ["+ _source.alias() +"] at URL:[" + _source.url().asString() + "]. Key: [" + stag_r.name + "] - Expected [type checksum], got [" + stag_r.value +"]"));
 
             _pkgImpl->_checksum = CheckSum(words[0], words[1]);
           }
@@ -235,7 +234,7 @@ namespace zypp
             str::split( stag_r.value, std::back_inserter(words) );
 
             if ( str::split( stag_r.value, std::back_inserter(words) ) != 4 )
-              ZYPP_THROW( ParseException( "Shr tag is wrong, expected NVRA, got: " + stag_r.value ) );
+              ZYPP_THROW( ParseException("Bad source ["+ _source.alias() +"] at URL:[" + _source.url().asString() + "]. Shr tag is wrong, expected NVRA, got: " + stag_r.value ) );
 
             std::string arch = words[3];
             NVRA shared_desc( words[0], Edition( words[1], words[2] ), Arch(arch));
@@ -264,7 +263,7 @@ namespace zypp
 	  {
 	    std::vector<std::string> words;
 	    if ( str::split( stag_r.value, std::back_inserter(words) ) != 2 )
-	      ZYPP_THROW( ParseException( "Siz" ) );
+              ZYPP_THROW( ParseException("Bad source ["+ _source.alias() +"] at URL:[" + _source.url().asString() + "]. Siz tag wrong. Got [" + stag_r.value + "]" ) );
 
 	    _pkgImpl->_archivesize = str::strtonum<unsigned long>(words[0]);
 	    _pkgImpl->_size = str::strtonum<unsigned long>(words[1]);
@@ -282,7 +281,7 @@ namespace zypp
 	    }
 	    else
 	    {
-		ZYPP_THROW( ParseException( "Loc" ) );
+		ZYPP_THROW( ParseException("Bad source ["+ _source.alias() +"] at URL:[" + _source.url().asString() + "]. Bad [Loc] tag. Got: [" + stag_r.value + "]"));
 	    }
 	    // ignore path
 	  }
@@ -365,8 +364,8 @@ namespace zypp
         catch(zypp::parser::tagfile::ParseException &e)
         {
           ZYPP_CAUGHT(e);
-          ERR << "Package file " << file_r << " is broken." << std::endl;
-          return PkgContent();
+          ERR <<  "Source [" << source_r.alias() << "] at URL:[" << source_r.url().asString() << "] has a broken packages file." << std::endl;
+          ZYPP_RETHROW(e);
         }
 	return p.result();
       }
@@ -382,8 +381,8 @@ namespace zypp
         catch(zypp::parser::tagfile::ParseException &e)
         {
           ZYPP_CAUGHT(e);
-          ERR << "Disk usage " << file_r << " is broken." << std::endl;
-          return PkgDiskUsage();
+          ERR <<  "Broken disk usage file " << file_r << ". Ignoring." << std::endl;
+          ZYPP_RETHROW(e);
         }
 	return duParser.result;
       }

@@ -59,8 +59,9 @@ namespace zypp
       {
         std::ifstream file(file_r.asString().c_str());
 
-        if (!file) {
-            ZYPP_THROW (Exception("Can't read product file :" + file_r.asString()));
+        if (!file)
+        {
+            ZYPP_THROW (Exception("Bad source ["+ source_r.alias() +"] at URL:[" + source_r.url().asString() + "]. Can't open product file: [" + file_r.asString() + "]"));
         }
 
         std::string buffer;
@@ -73,7 +74,9 @@ namespace zypp
           if(boost::regex_match(buffer, what, e, boost::match_extra))
           {
             if ( what.size() < 5 )
-              std::cout << "ups!!!!" << std::endl;
+            {
+              ZYPP_THROW (Exception("Corrupt source? ["+ source_r.alias() +"] at URL:[" + source_r.url().asString() + "]. Can't parse line: [" + buffer + "]"));
+            }
 
             std::string key = what[2];
             std::string value = what[5];
@@ -127,7 +130,7 @@ namespace zypp
 		    }
 		    catch( ... )
 		    {
-			// do not add
+                      ZYPP_THROW (Exception("Bad source ["+ source_r.alias() +"] at URL:[" + source_r.url().asString() + "]. Ilegal update Url: [" + *i + "]"));
 		    }
 		}
 	    }
@@ -174,11 +177,13 @@ namespace zypp
 	    else if(key == "VOLATILE_CONTENT")
 	      volatile_content = true;
             else
-              DBG << "Unknown key [" << key << "] with value [" << value << "]" << std::endl;
+            {
+              ZYPP_THROW (Exception("Corrupt source ["+ source_r.alias() +"] at URL:[" + source_r.url().asString() + "]. Unknown key: [" + key + "] with value [" + value + "]"));
+            }
           }
           else if (!buffer.empty())
           {
-            DBG << "** No Match found:  " << buffer << std::endl;
+            WAR << "Ignoring line [" << buffer << "] in source ["<< source_r.alias() << "] at URL:[" + source_r.url().asString() << "]." << std::endl;
           }
         } // end while
         // finished parsing, store result
@@ -320,7 +325,7 @@ namespace zypp
         str::split( value, std::back_inserter(splitted), " ");
         if (splitted.size() != 3)
         {
-          ERR << "Parse error in checksum. Expected [type checksum file], got [" << value << "]" << std::endl;
+          ZYPP_THROW (Exception("Parse error in checksum entry. Expected [algorithm checksum filename], got [" + value + "]"));
         }
         else
         {

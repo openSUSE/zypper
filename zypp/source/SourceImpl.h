@@ -227,10 +227,11 @@ namespace zypp
        */
       virtual media::MediaVerifierRef verifier(unsigned media_nr);
 
-    protected:
       /** Provide Source_Ref back to \c this. */
       Source_Ref selfSourceRef()
       { return Source_Ref( this ); }
+    protected:
+      
 
       /**
        * Provide a file to local filesystem on the given path,

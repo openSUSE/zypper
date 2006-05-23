@@ -118,7 +118,7 @@ namespace zypp
       void parsePackagesLang( SuseTagsImpl::Ptr sourceimpl, const Pathname & file_r, const Locale & lang_r, const PkgContent & content_r )
       {
         PackagesLangParser p ( sourceimpl, content_r, lang_r);
-	MIL << "Starting with " << content_r.size() << " packages" << endl;
+        MIL <<  "Package descriptions/translations parser: [" << file_r << "]. Source [" << sourceimpl->selfSourceRef().alias() << "] at URL:[" << sourceimpl->selfSourceRef().url().asString() << "]. Starting with " << content_r.size() << " packages" << std::endl;
         try
         {
           p.parse( file_r );
@@ -126,11 +126,11 @@ namespace zypp
         catch(zypp::parser::tagfile::ParseException &e)
         {
           ZYPP_CAUGHT(e);
-          ERR << "Packages Lang " << file_r << " is broken." << std::endl;
+          ERR <<  "Bad Source [" << sourceimpl->selfSourceRef().alias() << "] at URL:[" << sourceimpl->selfSourceRef().url().asString() << "]. Packages descriptions/translations " << file_r << " is broken. You will not see translations." << std::endl;
           return;
         }
 
-        MIL << "packages.LANG parser done. [ Total packages: " << content_r.size() << " ] [ Package data: " << sourceimpl->_package_data.size() << " ]" << std::endl;
+        MIL <<  "Source [" << sourceimpl->selfSourceRef().alias() << "] at URL:[" << sourceimpl->selfSourceRef().url().asString() << "]. packages.LANG parser done. [ Total packages: " << content_r.size() << " ] [ Package data: " << sourceimpl->_package_data.size() << " ]" << std::endl;
         
         return;
       }

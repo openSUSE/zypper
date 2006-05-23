@@ -45,7 +45,7 @@ namespace zypp
       {
         Selection::Ptr result;
         detail::ResImplTraits<SuseTagsSelectionImpl>::Ptr selImpl;
-
+            
         SelectionTagFileParser();
         virtual ~SelectionTagFileParser()
         {}

@@ -43,7 +43,8 @@ namespace zypp
 
       Selection::Ptr parseSelection( Source_Ref source_r, const Pathname & file_r )
       {
-        MIL << "Starting to parse selection " << file_r << std::endl;
+        MIL <<  "Parsing selection " << file_r << " on source [" << source_r.alias() << "] at URL:[" << source_r.url().asString() << "]." << std::endl;
+        
         SelectionTagFileParser p;
         try
         {
@@ -52,7 +53,8 @@ namespace zypp
         catch(zypp::parser::tagfile::ParseException &e)
         {
           ZYPP_CAUGHT(e);
-          ERR << "Selection " << file_r << " is broken." << std::endl;
+          ERR <<  "Selection " << file_r << " on source [" << source_r.alias() << "] at URL:[" << source_r.url().asString() << "] is broken. Ignoring selection." << std::endl;
+
           return 0L;
         }
         // attach the source
@@ -105,7 +107,7 @@ namespace zypp
               selImpl->_name    = words[0];
               break;
             default:
-              ZYPP_THROW( parser::tagfile::ParseException( "Expected [name [version] [release] [arch] ], got [" + tag.value +"]") );
+              ZYPP_THROW( parser::tagfile::ParseException( "Selection " + _file_r.asString() + ". Expected [name [version] [release] [arch] ], got [" + tag.value +"]"));
               break;
             }
         }
