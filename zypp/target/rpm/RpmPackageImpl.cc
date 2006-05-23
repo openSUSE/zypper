@@ -41,6 +41,7 @@ namespace zypp
         : _summary(data->tag_summary(), Locale("en")),
 	_description(),
 	_buildtime(data->tag_buildtime()),
+	_installtime(data->tag_installtime()),
 	_buildhost(data->tag_buildhost()),
 	_url(data->tag_url()),
 	_vendor(data->tag_vendor()),
@@ -87,7 +88,7 @@ namespace zypp
 
       /** */
       Date RPMPackageImpl::installtime() const
-      { return PackageImplIf::installtime(); }
+      { return _installtime; }
 
       /** */
       std::string RPMPackageImpl::distribution() const

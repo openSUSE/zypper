@@ -105,6 +105,7 @@ namespace zypp
 	TranslatedText _summary;
 	TranslatedText _description;
 	Date _buildtime;
+	Date _installtime;
 	std::string _buildhost;
 	std::string _url;
 	Vendor _vendor;
