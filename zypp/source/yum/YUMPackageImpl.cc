@@ -153,7 +153,8 @@ namespace zypp
 			 strtol(it->downloadsize.c_str(), 0, 10),
 			 CheckSum("md5", it->md5sum),
 			 strtol(it->buildtime.c_str(), 0, 10),
-			 base_versions
+			 base_versions,
+			 strtol(it->media.c_str(), 0, 10)
 	  );
 	  _patch_rpms.push_back(patch);
 
@@ -175,7 +176,8 @@ namespace zypp
 			 strtol(it->downloadsize.c_str(), 0, 10),
 			 CheckSum("md5", it->md5sum),
 			 strtol(it->buildtime.c_str(), 0, 10),
-			 base_version
+			 base_version,
+			 strtol(it->media.c_str(), 0, 10)
 	  );
 	  _delta_rpms.push_back(delta);
 	}

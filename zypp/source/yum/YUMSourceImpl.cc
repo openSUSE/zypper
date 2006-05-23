@@ -804,7 +804,8 @@ namespace zypp
 	      strtol(it->downloadsize.c_str(), 0, 10),
 	      CheckSum (it->checksumType, it->checksum),
 	      strtol(it->buildtime.c_str(), 0, 10),
-	      bv_list
+	      bv_list,
+	      strtol(it->media.c_str(), 0, 10)
 	    );
 	    impl->_patch_rpms.push_back(patch_rpm);
 	  }
@@ -825,7 +826,8 @@ namespace zypp
 		Edition (it->baseVersion.ver, it->baseVersion.rel, it->baseVersion.epoch),
                 CheckSum("md5", it->baseVersion.md5sum),
 		strtol(it->baseVersion.buildtime.c_str(), 0, 10)
-	      )
+	      ),
+	      strtol(it->media.c_str(), 0, 10)
 	    );
 	    impl->_delta_rpms.push_back(delta_rpm);
 	  }

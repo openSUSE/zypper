@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May 23 17:04:04 CEST 2006 - jsrain@suse.cz
+
+- added mediaNr() to PatchRpm and DeltaRpm classes
+- rev 3430
+
+-------------------------------------------------------------------
 Tue May 23 15:58:04 CEST 2006 - dmacvicar@suse.de
 
 - enable YUM license to confirm.

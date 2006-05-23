@@ -29,13 +29,15 @@ namespace zypp
              const ByteCount & downloadsize,
              const CheckSum & checksum,
              const Date & buildtime,
-             const std::list<BaseVersion> & base_versions)
+             const std::list<BaseVersion> & base_versions,
+	     const unsigned media_nr)
     : _arch(arch)
     , _filename(filename)
     , _downloadsize(downloadsize)
     , _checksum(checksum)
     , _buildtime(buildtime)
     , _base_versions(base_versions)
+    , _media_nr(media_nr)
     {}
     Arch arch() const { return _arch; }
     Pathname filename() const { return _filename; }
@@ -43,6 +45,7 @@ namespace zypp
     CheckSum checksum() const { return _checksum; }
     Date buildtime() const { return _buildtime; }
     std::list<BaseVersion> baseVersions() const { return _base_versions; }
+    unsigned mediaNr() const { return _media_nr; }
   private:
     Arch _arch;
     Pathname _filename;
@@ -50,6 +53,7 @@ namespace zypp
     CheckSum _checksum;
     Date _buildtime;
     std::list<BaseVersion> _base_versions;
+    unsigned _media_nr;
   };
 
 

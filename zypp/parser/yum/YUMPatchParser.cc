@@ -319,6 +319,7 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	patchRpm.downloadsize = _helper.attribute( formatNode, "downloadsize" );
 	patchRpm.md5sum = _helper.attribute( formatNode, "md5sum" );
 	patchRpm.buildtime = _helper.attribute( formatNode, "buildtime" );
+	patchRpm.media = "1";
 	for (xmlNodePtr child = formatNode->children; 
 	     child != 0;
 	     child = child ->next) {
@@ -368,6 +369,7 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	deltaRpm.downloadsize = _helper.attribute( formatNode, "downloadsize" );
 	deltaRpm.md5sum = _helper.attribute( formatNode, "md5sum" );
 	deltaRpm.buildtime = _helper.attribute( formatNode, "buildtime" );
+	deltaRpm.media = "1";
 	for (xmlNodePtr child = formatNode->children; 
 	     child != 0;
 	     child = child ->next) {
