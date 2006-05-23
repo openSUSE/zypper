@@ -38,9 +38,6 @@ namespace zypp
     std::string XMLProductImpl::category() const 
     { return _category; } 
 
-    Label XMLProductImpl::vendor() const 
-    { return _vendor; } 
-
     TranslatedText XMLProductImpl::shortName() const
     { return _short_name; }
     
