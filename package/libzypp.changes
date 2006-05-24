@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Wed May 24 15:30:32 CEST 2006 - dmacvicar@suse.de
+
+- dont pass root on init but before.
+- implement rpm db modification timestamp
+  not used yet
+- move Helix source to testsuite out of the solver 
+  so we can use it for target, storage tests 
+- add Source_Ref::timestamp(), default to now()
+  in order to implement smart sync of sources by zmd
+- don't parse desc and summary twice
+- fix a segfault with tranlated text
+- fix broken size tag introduced in rev 3427
+- rev 3446
+
+-------------------------------------------------------------------
 Tue May 23 20:53:27 CEST 2006 - dmacvicar@suse.de
 
 - dont accept corrupt sources, improve logs 
