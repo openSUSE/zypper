@@ -64,18 +64,11 @@ namespace zypp {
           {
             string name = _helper.name(child);
             
-            if (name == "summary")
-            {
-              dataPtr->summary.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
-            }
-            else if (name == "default") {
+            if (name == "default") {
               dataPtr->default_ = _helper.content(child);
             }
             else if (name == "uservisible") {
-              dataPtr->userVisible = _helper.content(child);
-            }
-            else if (name == "description") {
-              dataPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
+              dataPtr->userVisible = (_helper.content(child) == "false") ? false : true;
             }
             else if (name == "category") {
               dataPtr->category.setText(_helper.content(child));

@@ -1017,7 +1017,7 @@ XMLFilesBackend::createPattern( const zypp::parser::xmlstore::XMLPatternData & p
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
     
-    impl->_user_visible = ((parsed.userVisible == "false" ) ? false : true );
+    impl->_user_visible = parsed.userVisible;
     impl->_default = ((parsed.default_ == "false" ) ? false : true );
     impl->_category = parsed.category;
     impl->_icon = parsed.icon;
@@ -1059,10 +1059,10 @@ XMLFilesBackend::createSelection( const zypp::parser::xmlstore::XMLPatternData &
     impl->_build_time = parsed.build_time;
     impl->_install_time = parsed.install_time;
     
-    impl->_visible = ((parsed.userVisible == "false" ) ? false : true );
+    impl->_visible = parsed.userVisible;
     impl->_name = parsed.name;
     //impl->_default = ((parsed.default_ == "false" ) ? false : true );
-    impl->_category = parsed.category.text();
+    impl->_category = parsed.category;
 
     Arch arch;
     if (!parsed.arch.empty())

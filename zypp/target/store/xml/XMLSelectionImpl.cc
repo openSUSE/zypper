@@ -25,7 +25,7 @@ namespace zypp
     //	METHOD NAME : XMLSelectionImpl::XMLSelectionImpl
     //	METHOD TYPE : Ctor
     //
-    XMLSelectionImpl::XMLSelectionImpl()
+    XMLSelectionImpl::XMLSelectionImpl() : _visible(true)
     {}
 
     ///////////////////////////////////////////////////////////////////
@@ -37,7 +37,7 @@ namespace zypp
     {}
 
     Label XMLSelectionImpl::category() const
-    { return _category; }
+    { return _category.text(); }
 
     bool XMLSelectionImpl::visible() const
     { return _visible; }

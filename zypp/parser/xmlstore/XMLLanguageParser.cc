@@ -58,21 +58,15 @@ namespace zypp {
         parseResObjectCommonData( dataPtr, dataNode);
         parseDependencies( dataPtr, dataNode);
         
-        for (xmlNodePtr child = dataNode->children; child && child != dataNode; child = child->next)
-        {
-          if (_helper.isElement(child))
-          {
-            string name = _helper.name(child);
-            
-            if (name == "summary")
-            {
-              dataPtr->summary.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
-            }
-            else if (name == "description") {
-              dataPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
-            }
-          }
-        }
+//         for (xmlNodePtr child = dataNode->children; child && child != dataNode; child = child->next)
+//         {
+//           if (_helper.isElement(child))
+//           {
+//             string name = _helper.name(child);
+//             
+//             
+//           }
+//         }
         return dataPtr;
       } /* end process */
       

@@ -93,7 +93,7 @@ namespace zypp {
         XMLPatternData();
         
         std::string default_;
-        std::string userVisible;
+        bool userVisible;
         TranslatedText category;
         std::string icon;
         std::string script;

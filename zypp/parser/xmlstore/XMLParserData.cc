@@ -29,7 +29,7 @@ namespace zypp {
       XMLResObjectData::XMLResObjectData() : install_only(false)
       { }
       
-      XMLPatternData::XMLPatternData()
+      XMLPatternData::XMLPatternData() : userVisible(true)
       { }
 
       /*

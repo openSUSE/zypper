@@ -73,13 +73,7 @@ namespace zypp {
           {
             string name = _helper.name(child);
             
-            if (name == "summary") {
-              patchPtr->summary.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
-            }
-            else if (name == "description") {
-              patchPtr->description.setText(_helper.content(child), Locale(_helper.attribute(child,"lang")));
-            }
-            else if (name == "id") {
+            if (name == "id") {
               patchPtr->patchId = _helper.content(child);
             }
             else if (name == "timestamp") {

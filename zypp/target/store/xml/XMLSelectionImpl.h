@@ -89,7 +89,7 @@ namespace zypp
       std::string _release;
       std::string _arch;
       std::string _order;
-      std::string _category;
+      TranslatedText _category;
       bool _visible;
 
       std::set<std::string> _suggests;
