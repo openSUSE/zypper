@@ -176,7 +176,7 @@ std::string toXML( const ResObject::constPtr &obj )
   //out << "  <license-to-confirm>" << xml_escape(obj->licenseToConfirm()) << "</license-to-confirm>" << std::endl;
   out << translatedTextToXML(pipp->licenseToConfirm(), "license-to-confirm");
   out << "  <vendor>" << xml_escape(obj->vendor()) << "</vendor>" << std::endl;
-  out << "  <size>" << obj->size() << "<size>" << std::endl;
+  out << "  <size>" << obj->size() << "</size>" << std::endl;
   out << "  <archive-size>" << obj->archivesize() << "</archive-size>" << std::endl;
   out << "  <install-only>" << ( obj->installOnly() ? "true" : "false" ) << "</install-only>" << std::endl;
   out << "  <build-time>" << obj->buildtime().asSeconds() << "</build-time>" << std::endl;
