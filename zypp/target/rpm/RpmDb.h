@@ -164,7 +164,7 @@ namespace zypp {
 	  /**
 	   * @return Whether we are initialized.
 	   **/
-	  bool initialized() const { return( ! _root.empty() ); }
+	  bool initialized() const { return( ! _o_root.empty() ); }
       
 	  /**
 	   * Prepare access to the rpm database. Optional arguments may denote the
