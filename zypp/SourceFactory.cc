@@ -27,8 +27,7 @@ using namespace zypp::source;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-
-media::MediaManager media_mgr;
+  media::MediaManager media_mgr;
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -109,18 +108,18 @@ media::MediaManager media_mgr;
     media::MediaId id = media_mgr.open(url_r);
     media_mgr.attach(id);
     Pathname products_file = Pathname("media.1/products");
-    
+
     try  {
 	media_mgr.provideFile (id, products_file);
 	products_file = media_mgr.localPath (id, products_file);
 	scanProductsFile (products_file, products_r);
-    } 
+    }
     catch ( const Exception & excpt ) {
 	ZYPP_CAUGHT(excpt);
-	
+
 	MIL << "No products description found on the Url" << endl;
     }
-    
+
     media_mgr.release(id);
   }
 
@@ -132,7 +131,7 @@ media::MediaManager media_mgr;
     callback::SendReport<CreateSourceReport> report;
 
     report->startProbe (url_r);
-    
+
 #warning if cache_dir is provided, no need to open the original url
     // open the media
     media::MediaId id = media_mgr.open(url_r);
@@ -156,9 +155,9 @@ media::MediaManager media_mgr;
 	? Impl::createBaseSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r)
 	: Impl::createSourceImpl<yum::YUMSourceImpl>(id, path_r, alias_r, cache_dir_r) );
       MIL << "Found the YUM source" << endl;
-      
+
       report->endProbe (url_r);
-      
+
       return Source_Ref(impl);
     }
     catch (const Exception & excpt_r)
@@ -173,7 +172,7 @@ media::MediaManager media_mgr;
 	? Impl::createBaseSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r)
 	: Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r) );
       MIL << "Found the SUSE tags source" << endl;
-      
+
       report->endProbe (url_r);
 
       return Source_Ref(impl);
@@ -183,7 +182,28 @@ media::MediaManager media_mgr;
       ZYPP_CAUGHT(excpt_r);
       MIL << "Not SUSE tags source, trying next type" << endl;
     }
-    
+
+#warning Plaindir disabled in autoprobing
+#if 0
+    try
+      {
+        MIL << "Trying the Plaindir source" << endl;
+        Source_Ref::Impl_Ptr impl( base_source
+                                   ? Impl::createBaseSourceImpl<PlaindirImpl>(id, path_r, alias_r, cache_dir_r)
+                                   : Impl::createSourceImpl<PlaindirImpl>(id, path_r, alias_r, cache_dir_r) );
+        MIL << "Found the Plaindir source" << endl;
+
+        report->endProbe (url_r);
+
+        return Source_Ref(impl);
+      }
+    catch (const Exception & excpt_r)
+      {
+            ZYPP_CAUGHT(excpt_r);
+            MIL << "Not Plaindir source, trying next type" << endl;
+      }
+#endif
+
     report->endProbe (url_r);
 
     ERR << "No next type of source" << endl;
@@ -199,7 +219,7 @@ media::MediaManager media_mgr;
     callback::SendReport<CreateSourceReport> report;
 
     report->startProbe (url_r);
-    
+
 #warning if cache_dir is provided, no need to open the original url
     // open the media
     media::MediaId id = media_mgr.open(url_r);
@@ -229,17 +249,22 @@ media::MediaManager media_mgr;
         MIL << "Found the YUM source" << endl;
       } else if ( type == susetags::SuseTagsImpl::typeString() ) {
         MIL << "Trying the SUSE tags source" << endl;
-#warning TODO pass cache_dir_r once constructor adapted
         impl = Source_Ref::Impl_Ptr( base_source
 	  ? Impl::createBaseSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r)
 	  : Impl::createSourceImpl<susetags::SuseTagsImpl>(id, path_r, alias_r, cache_dir_r) );
         MIL << "Found the SUSE tags source" << endl;
+      } else if ( type == PlaindirImpl::typeString() ) {
+        MIL << "Trying the Plaindir source" << endl;
+        impl = Source_Ref::Impl_Ptr( base_source
+	  ? Impl::createBaseSourceImpl<PlaindirImpl>(id, path_r, alias_r, cache_dir_r)
+	  : Impl::createSourceImpl<PlaindirImpl>(id, path_r, alias_r, cache_dir_r) );
+        MIL << "Found the Plaindir source" << endl;
       } else {
 	ZYPP_THROW( Exception ("Cannot create source of unknown type '" + type + "'"));
       }
 
       report->endProbe (url_r);
-      
+
       return Source_Ref(impl);
     }
     catch (const Exception & excpt_r)
@@ -247,7 +272,7 @@ media::MediaManager media_mgr;
       ZYPP_CAUGHT(excpt_r);
       MIL << "Creating a source of type " << type << " failed " << endl;
     }
-    
+
     report->endProbe (url_r);
 
     ERR << "No next type of source" << endl;

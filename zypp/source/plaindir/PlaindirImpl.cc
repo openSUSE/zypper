@@ -6,19 +6,15 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/source/Builtin.h
+/** \file	zypp/source/plaindir/PlaindirImpl.cc
  *
- * Include all builtin Source implementations.
 */
-#ifndef ZYPP_SOURCE_BUILTIN_H
-#define ZYPP_SOURCE_BUILTIN_H
+#include <iostream>
+#include "zypp/base/Logger.h"
 
-#include <iosfwd>
-
-#include "zypp/source/SourceImpl.h"
 #include "zypp/source/plaindir/PlaindirImpl.h"
-#include "zypp/source/susetags/SuseTagsImpl.h"
-#include "zypp/source/yum/YUMSourceImpl.h"
+
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -26,11 +22,42 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace source
   { /////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////
+    namespace plaindir
+    { /////////////////////////////////////////////////////////////////
 
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	METHOD NAME : PlaindirImpl::PlaindirImpl
+      //	METHOD TYPE : Ctor
+      //
+      PlaindirImpl::PlaindirImpl()
+      {}
+
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	METHOD NAME : PlaindirImpl::~PlaindirImpl
+      //	METHOD TYPE : Dtor
+      //
+      PlaindirImpl::~PlaindirImpl()
+      {}
+
+      ///////////////////////////////////////////////////////////////////
+      //
+      //	METHOD NAME : PlaindirImpl::~PlaindirImpl
+      //	METHOD TYPE : Dtor
+      //
+      void PlaindirImpl::factoryInit()
+      {
+        ZYPP_THROW( Exception( "Plaindir not implemented!" ) );
+      }
+
+      /////////////////////////////////////////////////////////////////
+    } // namespace plaindir
+    ///////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////
   } // namespace source
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_SOURCE_BUILTIN_H

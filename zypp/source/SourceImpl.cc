@@ -150,7 +150,9 @@ namespace zypp
     //	METHOD TYPE : void
     //
     void SourceImpl::factoryInit()
-    {}
+    {
+      ZYPP_THROW( Exception( "FactoryInit not implemented!" ) );
+    }
 
     ///////////////////////////////////////////////////////////////////
     //

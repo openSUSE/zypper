@@ -242,6 +242,7 @@ AC_OUTPUT(	 po/Makefile.in\
 	zypp/solver/Makefile		\
 	zypp/solver/detail/Makefile	\
 	zypp/source/Makefile		\
+	zypp/source/plaindir/Makefile	\
 	zypp/source/susetags/Makefile	\
 	zypp/source/yum/Makefile	\
 	zypp/media/Makefile		\
