@@ -92,6 +92,13 @@ namespace zypp
 
   public:
 
+    /**
+     * aproximate age of the source, can be used to determine if 
+     * the source needs to be read again or not.
+     * (read as parse its metadata, not about downloading)
+     */
+    Date timestamp() const;
+    
     /** Whether the ResStore is initialized.
      * If we know that noone has seen the resolvables yet, we can skip
      * them too, eg. when deleting a source. (#174840)

@@ -159,6 +159,12 @@ namespace zypp
       void refresh();
 
       virtual void storeMetadata(const Pathname & cache_dir_r);
+      
+      /**
+        * default implementation returns now()
+        * so the source is always reread when in doubt
+        */
+      virtual Date timestamp() const;
 
       std::string alias (void) const
       { return _alias; }

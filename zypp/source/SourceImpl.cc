@@ -185,6 +185,11 @@ namespace zypp
       return const_cast<SourceImpl*>(this)->provideResolvables(self, kind);
     }
 
+    Date SourceImpl::timestamp() const
+    {
+      return Date::now();
+    }
+    
     void SourceImpl::dirInfo(const unsigned media_nr,
                              std::list<std::string> &retlist,
                              const Pathname         &path_r,

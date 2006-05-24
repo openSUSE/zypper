@@ -92,6 +92,9 @@ namespace zypp
   void Source_Ref::disable()
   { _pimpl->disable(); }
 
+  Date Source_Ref::timestamp() const
+  { return _pimpl->timestamp(); }
+  
   const bool Source_Ref::autorefresh() const
   { return _pimpl->autorefresh(); }
 
