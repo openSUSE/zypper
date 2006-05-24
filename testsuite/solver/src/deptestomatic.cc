@@ -36,7 +36,7 @@
 #include <unistd.h>
 #include <libxml/parser.h>
 #include <libxml/xmlmemory.h>
-#include "helix/XmlNode.h"
+#include "testsuite/src/helix/XmlNode.h"
 
 #include "zypp/Resolvable.h"
 #include "zypp/ResTraits.h"
@@ -66,7 +66,7 @@
 
 #include "zypp/media/MediaManager.h"
 
-#include "helix/HelixSourceImpl.h"
+#include "testsuite/src/helix/HelixSourceImpl.h"
 
 #include "zypp/ZYpp.h"
 #include "zypp/ZYppFactory.h"

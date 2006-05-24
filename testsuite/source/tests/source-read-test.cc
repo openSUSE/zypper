@@ -26,7 +26,7 @@
 #include "zypp/media/MediaManager.h"
 #include "zypp/Dependencies.h"
 
-#include "testsuite/utils/TestUtils.h"
+#include "testsuite/src/utils/TestUtils.h"
 
 using namespace std;
 using namespace zypp;

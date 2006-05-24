@@ -2,13 +2,13 @@
 # Makefile.am for zypp/solver/testsuite/src
 #
 
-SUBDIRS = helix
+SUBDIRS = 
 
 INCLUDES = -I/usr/include/libxml2	\
 	-Ihelix				\
 	-DZYPP_BASE_LOGGER_LOGGROUP=\"testsuite\"
 
-LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la helix/lib@PACKAGE@_helix.la
+LDADD =	$(top_srcdir)/zypp/lib@PACKAGE@.la $(top_srcdir)/testsuite/src/helix/lib@PACKAGE@_helix.la
 
 # We're not ready for this yet.
 #check_PROGRAMS = deptestomatic.multi

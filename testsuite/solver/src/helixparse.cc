@@ -11,7 +11,7 @@
 #include "zypp/source/SourceImpl.h"
 #include "zypp/media/MediaManager.h"
 
-#include "helix/HelixSourceImpl.h"
+#include "testsuite/src/helix/HelixSourceImpl.h"
 
 using namespace std;
 using namespace zypp;

@@ -212,12 +212,13 @@ AC_OUTPUT(	 po/Makefile.in\
 	doc/autodoc/Makefile		\
 	doc/autodoc/Doxyfile		\
 	testsuite/Makefile		\
-	testsuite/utils/Makefile	\
+  testsuite/src/Makefile \
+	testsuite/src/utils/Makefile	\
 	testsuite/zypp/Makefile		\
 	testsuite/zypp/tests/Makefile	\
 	testsuite/solver/Makefile	\
 	testsuite/solver/src/Makefile	\
-	testsuite/solver/src/helix/Makefile	\
+	testsuite/src/helix/Makefile	\
 	testsuite/solver/single.out/Makefile	\
 	testsuite/source/Makefile	\
 	testsuite/source/tests/Makefile	\

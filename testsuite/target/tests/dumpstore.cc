@@ -16,7 +16,7 @@
 
 #include "zypp/target/store/PersistentStorage.h"
 #include "zypp/base/Logger.h"
-#include "testsuite/utils/TestUtils.h"
+#include "testsuite/src/utils/TestUtils.h"
 
 #include "Benchmark.h"
 
