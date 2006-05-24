@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed May 24 16:57:54 CEST 2006 - dmacvicar@suse.de
+
+- implement timestamp for YUM and SuseTags
+- actually use the license to confirm in yum patches
+- add prerequires tag in yum optonally to the bad designed
+  and nonintuitive pre=1
+- rev 3448 
+
+-------------------------------------------------------------------
 Wed May 24 15:30:32 CEST 2006 - dmacvicar@suse.de
 
 - dont pass root on init but before.
