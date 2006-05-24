@@ -358,6 +358,11 @@ namespace zypp
       std::string SuseTagsImpl::unique_id (void) const
       { return _media_id; }
 
+      Date SuseTagsImpl::timestamp() const
+      {
+        return PathInfo(_content_file).mtime();
+      }
+      
       void SuseTagsImpl::readContentFile()
       {
         Pathname p;

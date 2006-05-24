@@ -82,7 +82,7 @@ namespace zypp
          */
 	static std::string typeString(void)
 	{ return "YaST"; }
-
+        virtual Date timestamp() const;
         virtual unsigned numberOfMedia(void) const;
         virtual std::string vendor (void) const;
         virtual const std::list<Pathname> publicKeys();

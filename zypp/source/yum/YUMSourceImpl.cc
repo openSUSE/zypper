@@ -63,6 +63,11 @@ namespace zypp
       YUMSourceImpl::YUMSourceImpl()
       {}
 
+      Date YUMSourceImpl::timestamp() const
+      {
+        return PathInfo(_repomd_file).mtime();
+      }
+      
       bool YUMSourceImpl::cacheExists()
       {
         bool exists = PathInfo(_cache_dir + "/repodata/repomd.xml").isExist();
@@ -1176,6 +1181,13 @@ namespace zypp
       _deps[Dep::ENHANCES].insert(createCapability(*it, my_kind));
     }
 
+    for (std::list<YUMDependency>::const_iterator it = parsed.prerequires.begin();
+         it != parsed.prerequires.end();
+         it++)
+    {
+        _deps[Dep::PREREQUIRES].insert(createCapability(*it, my_kind));
+    }
+    
     for (std::list<YUMDependency>::const_iterator it = parsed.requires.begin();
 	it != parsed.requires.end();
 	it++)

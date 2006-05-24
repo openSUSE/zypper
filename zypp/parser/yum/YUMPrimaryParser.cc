@@ -195,6 +195,9 @@ namespace zypp {
             else if (name == "obsoletes") {
               parseDependencyEntries(& dataPtr->obsoletes, child);
             }
+            else if (name == "prerequires") {
+              parseDependencyEntries(& dataPtr->prerequires, child);
+            }
             else if (name == "requires") {
               parseDependencyEntries(& dataPtr->requires, child);
             }

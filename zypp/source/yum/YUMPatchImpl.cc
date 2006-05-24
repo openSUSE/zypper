@@ -57,6 +57,7 @@ namespace zypp
 	std::string updateScript;
         _summary = parsed.summary;
         _description = parsed.description;
+        _license_to_confirm = parsed.license_to_confirm;
 #if 0						// not active any more, see YUMSourceImpl::createPatch()
 	// now process the atoms
 	CapFactory _f;

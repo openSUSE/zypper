@@ -100,6 +100,9 @@ namespace zypp {
             else if (name == "obsoletes") {
               prim.parseDependencyEntries(& productPtr->obsoletes, child);
             }
+            else if (name == "prerequires") {
+              prim.parseDependencyEntries(& productPtr->prerequires, child);
+            }
             else if (name == "requires") {
               prim.parseDependencyEntries(& productPtr->requires, child);
             }

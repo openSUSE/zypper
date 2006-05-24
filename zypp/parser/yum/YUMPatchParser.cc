@@ -120,6 +120,9 @@ namespace zypp {
 	    else if (name == "obsoletes") {
 	      prim.parseDependencyEntries(& patchPtr->obsoletes, child);
 	    }
+            else if (name == "prerequires") {
+              prim.parseDependencyEntries(& patchPtr->prerequires, child);
+            }
 	    else if (name == "requires") {
 	      prim.parseDependencyEntries(& patchPtr->requires, child);
 	    }
@@ -238,6 +241,9 @@ XXX << "parseAtomsNode(" << name << ")" << endl;
 	    else if (name == "obsoletes") {
 	      prim.parseDependencyEntries(& dataPtr->obsoletes, child);
 	    }
+            else if (name == "prerequires") {
+              prim.parseDependencyEntries(& dataPtr->prerequires, child);
+            }
 	    else if (name == "requires") {
 	      prim.parseDependencyEntries(& dataPtr->requires, child);
 	    }
@@ -593,6 +599,9 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	    else if (name == "requires") {
 	      prim.parseDependencyEntries(& script->requires, child);
 	    }
+            else if (name == "prerequires") {
+              prim.parseDependencyEntries(& script->prerequires, child);
+            }
 	    else if (name == "recommends") {
 	      prim.parseDependencyEntries(& script->recommends, child);
 	    }
@@ -652,6 +661,9 @@ XXX << "parsePackageNode(" << name << ")" << endl;
 	    else if (name == "obsoletes") {
 	      prim.parseDependencyEntries(& message->obsoletes, child);
 	    }
+            else if (name == "prerequires") {
+              prim.parseDependencyEntries(& message->prerequires, child);
+            }
 	    else if (name == "requires") {
 	      prim.parseDependencyEntries(& message->requires, child);
 	    }

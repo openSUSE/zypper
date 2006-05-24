@@ -53,6 +53,7 @@ namespace zypp
 
       public:
 
+        virtual Date timestamp() const;
         virtual void storeMetadata(const Pathname & cache_dir_r);
 	
 	virtual std::string type(void) const
