@@ -3,8 +3,8 @@
 >!> Installing barold2 from channel test
 >!> 1 problems found:
 >!> Problem:
->!> bar2 is locked and cannot be uninstalled.
->!> barold2 obsoletes bar2. But bar2 cannot be deleted because it is locked.
+>!> bar2-1.0-1.noarch is locked and cannot be uninstalled.
+>!> barold2 obsoletes bar2-1.0-1.noarch. But bar2-1.0-1.noarch cannot be deleted because it is locked.
 >!>    Solution:
 >!>       unlock bar2
 >!>       

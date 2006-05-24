@@ -2,8 +2,8 @@
 >!> Installing foo2 from channel test
 >!> 1 problems found:
 >!> Problem:
->!> foo is locked and cannot be uninstalled.
->!> foo2 obsoletes foo. But foo cannot be deleted because it is locked.
+>!> foo-1.0-1.noarch is locked and cannot be uninstalled.
+>!> foo2 obsoletes foo-1.0-1.noarch. But foo-1.0-1.noarch cannot be deleted because it is locked.
 >!>    Solution:
 >!>       unlock foo
 >!>       
