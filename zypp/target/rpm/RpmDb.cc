@@ -393,32 +393,32 @@ std::ostream & RpmDb::dumpOn( std::ostream & str ) const
 //	METHOD NAME : RpmDb::initDatabase
 //	METHOD TYPE : PMError
 //
-void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
+void RpmDb::initDatabase()
 {
   ///////////////////////////////////////////////////////////////////
   // Check arguments
   ///////////////////////////////////////////////////////////////////
-  if ( root_r.empty() )
-    root_r = "/";
+  if ( _root.empty() )
+    _root = "/";
 
-  if ( dbPath_r.empty() )
-    dbPath_r = "/var/lib/rpm";
+  if ( _dbPath.empty() )
+    _dbPath = "/var/lib/rpm";
 
-  if ( ! (root_r.absolute() && dbPath_r.absolute()) ) {
-    ERR << "Illegal root or dbPath: " << stringPath( root_r, dbPath_r ) << endl;
-    ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
+  if ( ! (_root.absolute() && _dbPath.absolute()) ) {
+    ERR << "Illegal root or dbPath: " << stringPath( _root, _dbPath ) << endl;
+    ZYPP_THROW(RpmInvalidRootException(_root, _dbPath));
   }
 
-  MIL << "Calling initDatabase: " << stringPath( root_r, dbPath_r ) << endl;
+  MIL << "Calling initDatabase: " << stringPath( _root, _dbPath ) << endl;
 
   ///////////////////////////////////////////////////////////////////
   // Check whether already initialized
   ///////////////////////////////////////////////////////////////////
   if ( initialized() ) {
-    if ( root_r == _root && dbPath_r == _dbPath ) {
+    if ( _root == _o_root && _dbPath == _o_dbPath ) {
       return;
     } else {
-      ZYPP_THROW(RpmDbAlreadyOpenException(_root, _dbPath, root_r, dbPath_r));
+      ZYPP_THROW(RpmDbAlreadyOpenException(_root, _dbPath, _o_root, _o_dbPath));
     }
   }
 
@@ -428,7 +428,7 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
   librpmDb::unblockAccess();
   DbStateInfoBits info = DbSI_NO_INIT;
   try {
-    internal_initDatabase( root_r, dbPath_r, info );
+    internal_initDatabase( _root, _dbPath, info );
   }
   catch (const RpmException & excpt_r)
   {
@@ -439,15 +439,15 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
     if ( dbsi_has( info, DbSI_MADE_V4 ) ) {
       // remove the newly created rpm4 database and
       // any backup created on conversion.
-      removeV4( root_r + dbPath_r, dbsi_has( info, DbSI_MADE_V3TOV4 ) );
+      removeV4( _root + _dbPath, dbsi_has( info, DbSI_MADE_V3TOV4 ) );
     }
     ZYPP_RETHROW(excpt_r);
   }
   if ( dbsi_has( info, DbSI_HAVE_V3 ) ) {
-    if ( root_r == "/" || dbsi_has( info, DbSI_MODIFIED_V4 ) ) {
+    if ( _root == "/" || dbsi_has( info, DbSI_MODIFIED_V4 ) ) {
       // Move obsolete rpm3 database beside.
       MIL << "Cleanup: state " << info << endl;
-      removeV3( root_r + dbPath_r, dbsi_has( info, DbSI_MADE_V3TOV4 ) );
+      removeV3( _root + _dbPath, dbsi_has( info, DbSI_MADE_V3TOV4 ) );
       dbsi_clr( info, DbSI_HAVE_V3 );
     } else {
 	// Performing an update: Keep the original rpm3 database
@@ -458,8 +458,6 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
   }
 #warning CHECK: notify root about conversion backup.
 
-  _root   = root_r;
-  _dbPath = dbPath_r;
   _dbStateInfo = info;
 
 #warning Add rebuild database once have the info about context
@@ -483,6 +481,19 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r )
   exportTrustedKeysInZyppKeyRing();
 
   MIL << "InitDatabase: " << *this << endl;
+  _o_root = _root;
+  _o_dbPath = _dbPath;
+}
+
+Date RpmDb::lastModification() const
+{
+  return Date(PathInfo(Pathname(_root + _dbPath)).mtime());
+}
+
+void RpmDb::setPaths(Pathname root_r, Pathname dbPath_r)
+{
+  _root = root_r;
+  _dbPath = dbPath_r;
 }
 
 ///////////////////////////////////////////////////////////////////

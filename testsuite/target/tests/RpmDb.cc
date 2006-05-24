@@ -14,7 +14,8 @@ int main(int argc, char *argv[])
 {
   RpmDb rpm;
   MIL << "Initializing rpm database.." << std::endl;
-  rpm.initDatabase(Pathname("/"));
+  rpm.setPaths(Pathname("/"));
+  rpm.initDatabase();
   MIL << "done.." << std::endl;
   
   EditionSet keys = rpm.pubkeyEditions();

@@ -94,6 +94,12 @@ namespace zypp {
 	   **/
 	  Pathname _dbPath;
       
+          /**
+           * same as above but when already opened
+           */
+          Pathname _o_root;
+          Pathname _o_dbPath;
+          
 	  /**
 	   * Internal helper for @ref initDatabase.
 	   *
@@ -128,6 +134,17 @@ namespace zypp {
 	   * was called.
 	   **/
 	  RpmDb();
+          
+          /**
+           * Set the root path and the db path
+           */
+          void setPaths(Pathname root_r = Pathname(), Pathname dbPath_r = Pathname() );
+          
+          /**
+           * date of last modification of the rpm database. For now the mtime
+           * of the Names file in the db
+           */
+          Date lastModification() const;
       
 	  /**
 	   * Destructor.
@@ -171,8 +188,7 @@ namespace zypp {
 	   * \throws RpmException
 	   *
 	   **/
-	  void initDatabase( Pathname root_r = Pathname(),
-      			  Pathname dbPath_r = Pathname() );
+	  void initDatabase();
       
 	  /**
 	   * Block further access to the rpm database and go back to uninitialized
