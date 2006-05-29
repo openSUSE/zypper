@@ -1,18 +1,17 @@
 ## Process this file with automake to produce Makefile.in
 ## ##################################################
 
-noinst_PROGRAMS = test lock testbed aj
+noinst_PROGRAMS = test lock testbed aj yumparser
 
 ## ##################################################
 
-INCLUDES =
-
+INCLUDES = -I$(oldincludedir)/libxml2
 AM_LDFLAGS =
 
 AM_CXXFLAGS =
 # gperf:	-pg
 
-LDADD =		-L$(top_srcdir)/zypp/.libs -lzypp -lboost_regex
+LDADD =		-L$(top_srcdir)/zypp/.libs -lzypp -lboost_regex -lxml2 -lz
 
 ## ##################################################
 
@@ -27,6 +26,10 @@ testbed_LDFLAGS = -static
 
 aj_SOURCES = 	aj.cc
 aj_LDFLAGS =	-static
+
+yumparser_SOURCES = 	yum-parser.cc
+yumparser_LDFLAGS =	-static
+#yumparser_LDADD = 
 
 .PHONY:        always
 
