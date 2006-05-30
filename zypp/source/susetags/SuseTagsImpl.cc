@@ -99,70 +99,98 @@ namespace zypp
         
         Pathname local_dir = tmpdir.path();
         
-        
-        
+
         // (#163196)
         // before we used _descr_dir, which is is wrong if we 
         // store metadata already running from cache
         // because it points to a local file and not
         // to the media. So use the original media descr_dir.
-        Pathname media_src = provideDirTree("media.1");
-        Pathname descr_src = provideDirTree(_orig_descr_dir);        
-        Pathname content_src = provideFile( _path + "content"); 
+        Pathname media_src;
+        Pathname descr_src;
+        Pathname content_src;    
+            
+        try {
+          media_src = provideDirTree("media.1");
+        }
+        catch(Exception &e) {
+          ZYPP_THROW(Exception("Can't provide " + _path.asString() + "/media.1 from " + url().asString() ));
+        }
         
-        initCacheDir(local_dir);
+        try {
+          descr_src = provideDirTree(_orig_descr_dir);        
+        }
+        catch(Exception &e) {
+          ZYPP_THROW(Exception("Can't provide " + _path.asString() + "  " + _orig_descr_dir.asString() + " from " + url().asString() ));
+        }
+        
+        try {
+          content_src = provideFile( _path + "content");
+        }
+        catch(Exception &e) {
+          ZYPP_THROW(Exception("Can't provide " + _path.asString() + "/content from " + url().asString() ));
+        }
+        
+        if (0 != assert_dir(local_dir + "DATA", 0755))
+          ZYPP_THROW(Exception("Cannot create /DATA directory in download dir." + local_dir.asString()));
+        if (0 != assert_dir(local_dir + "MEDIA", 0755))
+          ZYPP_THROW(Exception("Cannot create /MEDIA directory in download dir." + local_dir.asString()));
+        if (0 != assert_dir(local_dir + "PUBLICKEYS", 0755))
+          ZYPP_THROW(Exception("Cannot create /PUBLICKEYS directory in download dir." + local_dir.asString()));
         
         // get the list of cache keys
         std::list<std::string> files;
         dirInfo( 1, files, _path);
                 
-        if (0 != assert_dir((local_dir + "DATA"), 0755))
-        {
-          ZYPP_THROW(Exception("Cannot create cache DATA directory: " + (local_dir + "DATA").asString()));
-        }
-        else
-        {
-          filesystem::copy_dir(descr_src, local_dir + "DATA");
-          MIL << "cached descr directory" << std::endl;
-          filesystem::copy(content_src, local_dir + "DATA/content");
-          MIL << "cached content file" << std::endl;
-        }
+        if ( filesystem::copy_dir(descr_src, local_dir + "DATA") != 0 )
+          ZYPP_THROW(Exception("Unable to copy the descr dir to " + (local_dir + "DATA").asString()));
         
-        if (0 != assert_dir((local_dir + "PUBLICKEYS"), 0755))
+        if ( filesystem::copy(content_src, local_dir + "DATA/content") != 0)
+          ZYPP_THROW(Exception("Unable to copy the content file to " + (local_dir + "DATA/content").asString()));
+        
+        // cache all the public keys
+        for( std::list<std::string>::const_iterator it = files.begin(); it != files.end(); ++it)
         {
-          ZYPP_THROW(Exception("Cannot create cache PUBLICKEYS directory: " + (local_dir + "PUBLICKEYS").asString()));
-        }
-        else
-        {
-          // cache all the public keys
-          for( std::list<std::string>::const_iterator it = files.begin(); it != files.end(); ++it)
+          std::string filename = *it;
+          if ( filename.substr(0, 10) == "gpg-pubkey" )
           {
-            std::string filename = *it;
-            if ( filename.substr(0, 10) == "gpg-pubkey" )
-            {
-              Pathname key_src = provideFile(_path + filename);
-              MIL << "Trying to cache " << key_src << std::endl;
-              filesystem::copy(key_src, local_dir + "PUBLICKEYS/" + filename);
-              MIL << "cached " << filename << std::endl;
+            Pathname key_src;
+            try {
+              key_src = provideFile(_path + filename);
             }
-            else if( (filename == "content.asc") || (filename == "content.key"))
-            {
-              Pathname src_data = provideFile(_path + filename);
-              filesystem::copy( src_data, local_dir + "DATA/" + filename);
-              MIL << "cached " << filename << std::endl;
+            catch(Exception &e) {
+              ZYPP_THROW(Exception("Can't provide " + (_path + filename).asString() + " from " + url().asString() ));
             }
+            
+            MIL << "Trying to cache " << key_src << std::endl;
+            
+            if ( filesystem::copy(key_src, local_dir + "PUBLICKEYS/" + filename) != 0 )
+              ZYPP_THROW(Exception("Unable to copy key " + key_src.asString() + " to " + (local_dir + "PUBLICKEYS").asString()));
+           
+            MIL << "cached " << filename << std::endl;
+          }
+          else if( (filename == "content.asc") || (filename == "content.key"))
+          {
+            Pathname src_data;
+            try {
+              src_data = provideFile(_path + filename);
+            }
+            catch(Exception &e) {
+              ZYPP_THROW(Exception("Can't provide " + filename + " from " + url().asString() + ". File was listed as available."));
+            }
+            
+            if ( filesystem::copy( src_data, local_dir + "DATA/" + filename) != 0 )
+              ZYPP_THROW(Exception("Unable to copy " + filename + " to " + (local_dir + "/DATA").asString()));
+                
+            MIL << "cached " << filename << std::endl;
           }
         }
 
-        if (0 != assert_dir((local_dir + "MEDIA"), 0755))
-        {
-          ZYPP_THROW(Exception("Cannot create cache MEDIA directory: " + (local_dir + "MEDIA").asString()));
-        }
-        else
-        {
-          filesystem::copy_dir(media_src, local_dir + "MEDIA");
-          MIL << "cached media directory" << std::endl;
-        }
+        if ( filesystem::copy_dir(media_src, local_dir + "MEDIA") != 0 )
+          ZYPP_THROW(Exception("Unable to copy media directory to " + (local_dir + "/MEDIA").asString()));
+    
+        MIL << "cached media directory" << std::endl;
+  
+        //FIXME add signature and checksum verification here
         
         return tmpdir;
       }
