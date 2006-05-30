@@ -114,7 +114,23 @@ namespace zypp
         const Pathname contentFile() const;
         const Pathname contentFileKey() const;
         const Pathname contentFileSignature() const;
+        const Pathname descrDir() const;
         const Pathname mediaFile() const;
+        
+        /**
+         * description dir in original media
+         * it is not always the same so it
+         * requires the content file to be parsed
+         */
+        const Pathname mediaDescrDir() const;
+        
+        /**
+         * data dir in original media
+         * it is not always the same so it
+         * requires the content file to be parsed
+         */
+        const Pathname dataDir() const;
+        
         
         void readContentFile();
         
@@ -155,7 +171,7 @@ namespace zypp
         // descr dir on media.
         // we need it if we refresh
         // already running from cache
-        Pathname _orig_descr_dir;
+        Pathname _media_descr_dir;
 
         Pathname _content_file;
         Pathname _content_file_sig;

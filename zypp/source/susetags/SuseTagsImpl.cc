@@ -52,22 +52,37 @@ namespace zypp
 
       const Pathname SuseTagsImpl::contentFile() const
       {
-        return _cache_dir + "DATA/content";
+        return descrDir() + "content";
       }
       
       const Pathname SuseTagsImpl::contentFileSignature() const
       {
-        return _cache_dir + "DATA/content.asc";
+        return descrDir() + "content.asc";
       }
       
       const Pathname SuseTagsImpl::contentFileKey() const
       {
-        return _cache_dir + "DATA/content.key";
+        return descrDir() + "/content.key";
       }
       
       const Pathname SuseTagsImpl::mediaFile() const
       {
         return _cache_dir + "MEDIA/media.1/media";
+      }
+      
+      const Pathname SuseTagsImpl::descrDir() const
+      {
+        return _cache_dir + "DATA";
+      }
+      
+      const Pathname SuseTagsImpl::dataDir() const
+      {
+        return _data_dir;
+      }
+      
+      const Pathname SuseTagsImpl::mediaDescrDir() const
+      {
+        return _media_descr_dir;
       }
       
       bool SuseTagsImpl::downloadNeeded()
@@ -161,10 +176,10 @@ namespace zypp
         readMediaFile();
         
         try {
-          descr_src = provideDirTree(_orig_descr_dir);        
+          descr_src = provideDirTree(mediaDescrDir());        
         }
         catch(Exception &e) {
-          ZYPP_THROW(Exception("Can't provide " + _path.asString() + "  " + _orig_descr_dir.asString() + " from " + url().asString() ));
+          ZYPP_THROW(Exception("Can't provide " + _path.asString() + "  " + mediaDescrDir().asString() + " from " + url().asString() ));
         }
         
         try {
@@ -293,7 +308,7 @@ namespace zypp
         // because it points to a local file and not
         // to the media. So use the original media descr_dir.
         Pathname media_src = provideDirTree("media.1");
-        Pathname descr_src = provideDirTree(_orig_descr_dir);        
+        Pathname descr_src = provideDirTree(mediaDescrDir());        
         Pathname content_src = provideFile( _path + "content"); 
         
         initCacheDir(cache_dir_r);
@@ -636,12 +651,12 @@ namespace zypp
           _data_dir = _path + p.prodImpl->_data_dir;
           
           // description dir also changes when using cache  
-          _orig_descr_dir = _path + p.prodImpl->_description_dir;        
+          _media_descr_dir = _path + p.prodImpl->_description_dir;        
           
           if (cache)
             _descr_dir  = _cache_dir + "DATA/descr";
           else
-            _descr_dir = _orig_descr_dir;
+            _descr_dir = _media_descr_dir;
           
           MIL << "Read product: " << _product->summary() << endl;
           
